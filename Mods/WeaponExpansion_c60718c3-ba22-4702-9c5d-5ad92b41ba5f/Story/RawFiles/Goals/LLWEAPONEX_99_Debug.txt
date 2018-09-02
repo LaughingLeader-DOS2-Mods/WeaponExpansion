@@ -1,0 +1,18 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+RegionStarted("TestLevel_LL_WeaponExpansion")
+THEN
+GoalCompleted;
+
+IF
+GameStarted("TestLevel_LL_WeaponExpansion", _)
+THEN
+GoalCompleted;
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "_GLOBAL_Children"

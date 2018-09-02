@@ -1,0 +1,6 @@
+new itemgroup "LLWEAPONEX_Fist"
+
+add levelgroup 0,0,"All"
+add rootgroup "e1bda904-93c2-4f6f-8136-1a547279fd1f",""
+add namegroup "LLWEAPONEX_Fist","",""
+

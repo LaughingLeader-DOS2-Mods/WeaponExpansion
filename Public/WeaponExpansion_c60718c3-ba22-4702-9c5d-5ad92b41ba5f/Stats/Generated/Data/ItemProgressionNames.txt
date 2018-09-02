@@ -1,0 +1,2 @@
+new namegroup "LLWEAPONEX_Fist"
+add name "Brawler's Fist","The iron-hard fist of a Brawler. Strikes true."

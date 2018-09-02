@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1535863871" />
+    <version major="3" minor="6" revision="0" build="4" />
+    <region id="MetaData">
+        <node id="root">
+            <attribute id="Module" value="c60718c3-ba22-4702-9c5d-5ad92b41ba5f" type="23" />
+            <attribute id="Name" value="WeaponExpansion" type="23" />
+            <attribute id="Type" value="Add-on" type="23" />
+            <attribute id="UUID" value="c9d44f30-2821-409b-b2e8-2bdd49bc8c33" type="23" />
+        </node>
+    </region>
+</save>

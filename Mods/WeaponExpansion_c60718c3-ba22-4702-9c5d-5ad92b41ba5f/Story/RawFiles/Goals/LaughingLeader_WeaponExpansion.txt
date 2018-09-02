@@ -1,0 +1,36 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Internal_CompleteIfStarted(); // Existing saves
+
+KBSECTION
+PROC
+LLWEAPONEX_Internal_Start()
+THEN
+DebugBreak("[LLWEAPONEX] Starting Weapon Expansion.");
+GoalCompleted;
+
+IF
+GameEventSet("GAMEEVENT_GameStarted")
+THEN
+LLWEAPONEX_Internal_Start();
+
+PROC
+LLWEAPONEX_Internal_CompleteIfStarted()
+AND
+DB_StoryStarted(_)
+THEN
+DebugBreak("[LLWEAPONEX:CompleteIfStarted] Weapon Expansion was added to an existing save.");
+LLWEAPONEX_Internal_Start();
+
+// For saves where this goal is active, but wasn't completed
+IF
+SavegameLoaded(_,_,_,_)
+AND
+DB_StoryStarted(_)
+THEN
+DebugBreak("[LLWEAPONEX:SavegameLoaded] Weapon Expansion was added to an existing save.");
+LLWEAPONEX_Internal_Start();
+EXITSECTION
+
+ENDEXITSECTION
