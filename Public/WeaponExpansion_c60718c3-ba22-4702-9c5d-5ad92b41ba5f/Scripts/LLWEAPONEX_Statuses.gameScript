@@ -1,0 +1,23 @@
+INIT
+
+EVENTS
+
+EVENT LLWEAPONEX_FumbleRoll
+VARS
+	CHARACTER:_Attacker
+	CHARACTER:_Source
+	INT:_Ran
+ON
+	OnCharacterStartAttackObject(_, _, _, _Attacker)
+ACTIONS
+IF "c1&c2"
+	CharacterHasStatus(_Attacker, LLWEAPONEX_CONCUSSION)
+	CharacterGetStatusSourceCharacter(_Attacker, LLWEAPONEX_CONCUSSION, _Source)
+THEN
+	GetRandomBetween(_Ran, 0, 100)
+	IF "c1"
+		IsLessThen(_Ran, 10)
+	THEN
+		CharacterApplyStatus(_Attacker, LLWEAPONEX_FUMBLE, 0, 1, _Source)
+	ENDIF
+ENDIF

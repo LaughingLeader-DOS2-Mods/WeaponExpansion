@@ -15,4 +15,4 @@ GoalCompleted;
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "_GLOBAL_Children"
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

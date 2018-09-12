@@ -1,2 +1,81 @@
 new namegroup "LLWEAPONEX_Fist"
 add name "Brawler's Fist","The iron-hard fist of a Brawler. Strikes true."
+
+new namegroup "LLWEAPONEX_Quarterstaff_Wooden"
+add name "Wooden Quarterstaff",""
+
+new namegroup "LLWEAPONEX_Beginner_Rod"
+add name "Weak Rod",""
+
+new namegroup "LLWEAPONEX_Improv_Rod"
+add name "Improv Rod",""
+
+new namegroup "LLWEAPONEX_Rod_Of_Nature"
+add name "Rod Of Nature",""
+add namecool "Magical Rod Of Nature",""
+
+new namegroup "LLWEAPONEX_Wooden_Rod"
+add name "Wooden Rod",""
+add namecool "Magical Wooden Rod",""
+
+new namegroup "LLWEAPONEX_Rod_Of_The_Lizard"
+add name "Rod Of The Lizard",""
+add namecool "Magical Rod Of The Lizard",""
+
+new namegroup "LLWEAPONEX_Rod_Of_The_Dwarf"
+add name "Rod Of The Dwarf",""
+add namecool "Magical Rod Of The Dwarf",""
+
+new namegroup "LLWEAPONEX_Stone_Rod"
+add name "Stone Rod",""
+add namecool "Magical Stone Rod",""
+
+new namegroup "Rod Of The Wolf"
+add name "Rod Of The Wolf",""
+add namecool "Magical Rod Of The Wolf",""
+
+new namegroup "LLWEAPONEX_Rods_1H_Rare"
+add name "Nightbane",""
+add name "Grand Scepter",""
+add name "Obliterator",""
+add name "War Cane",""
+add name "The Dag",""
+add name "Blackfinger",""
+add name "The Wyre",""
+add name "Woe Tine",""
+
+new namegroup "LLWEAPONEX_Rods_1H_Epic"
+add name "Ashwood Branch",""
+add name "Death's Last Stand",""
+add name "Roundwind",""
+add name "Bearwindle",""
+add name "Spinewinder",""
+add name "Kiss Of Death",""
+
+new namegroup "WPN_LLWEAPONEX_Rod_Human_01"
+add name "Wooden Rod",""
+
+new namegroup "WPN_LLWEAPONEX_Rod_Human_02"
+add name "Stone Rod",""
+
+new namegroup "LLWEAPONEX_Runeblades_1H"
+add name "Runeblade",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H"
+add name "Blazing Runeblade","A magical blade imbued with the power of fire. The runes can be invoked to bathe the blade in intense flame."
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Ice_1H"
+add name "Freezing Runeblade","A magical blade imbued with the power of ice. The runes can be invoked to bathe the blade in a freezing chill."
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H"
+add name "Earthen Runeblade","A magical blade imbued with the power of the earth. The runes can be invoked to bathe the blade in a impenetrable hardened surface."
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H"
+add name "Toxic Runeblade","A magical blade imbued with a necromantic poison. The runes can be invoked to bathe the blade in a deadly sludge."
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H"
+add name "Lightning Runeblade","A magical blade imbued with the power of lightning. The runes can be invoked to bathe the blade in dangerous electrical energy."
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H"
+add name "Chaos Runeblade","A fierce magical blade with no clear element defined. The runes can be invoked to absorb elemental power from the environment."
+

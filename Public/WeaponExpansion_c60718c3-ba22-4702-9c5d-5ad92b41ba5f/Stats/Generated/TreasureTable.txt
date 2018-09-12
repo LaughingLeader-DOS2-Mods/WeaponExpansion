@@ -7,6 +7,8 @@ object category "I_WPN_LLWEAPONEX_Throwing_Axe2H",1,0,0,0,0,0,0,0
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Bow",1,0,0,0,0,0,0,0
 new subtable "-99"
+object category "I_WPN_LLWEAPONEX_Throwing_Chair_01",1,0,0,0,0,0,0,0
+new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Crossbow",1,0,0,0,0,0,0,0
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Dagger",1,0,0,0,0,0,0,0
@@ -14,6 +16,8 @@ new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Mace1H",1,0,0,0,0,0,0,0
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Mace2H",1,0,0,0,0,0,0,0
+new subtable "-99"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock",1,0,0,0,0,0,0,0
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Scythe",1,0,0,0,0,0,0,0
 new subtable "-99"
@@ -30,3 +34,41 @@ new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Sword2H",1,0,0,0,0,0,0,0
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Wand",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatRods"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Rod_Fire",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Rod_Air",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Rod_Water",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Rod_Poison",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatRuneblades"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Poison_1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Air_1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Chaos_1H",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatQuarterstaffs"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Quarterstaff",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatAllWeapons"
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0,
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRods",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatThrowingWeapons",1,0,0,0,0,0,0,0

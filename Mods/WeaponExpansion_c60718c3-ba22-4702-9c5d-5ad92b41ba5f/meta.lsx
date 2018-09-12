@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
-    <header version="2" time="1535864204" />
+    <header version="2" time="1536587164" />
     <version major="3" minor="6" revision="0" build="4" />
     <region id="Config">
         <node id="root">
@@ -12,7 +12,7 @@
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="LeaderLib - Definitive Edition" type="22" />
                             <attribute id="UUID" value="7e737d2f-31d2-4751-963f-be6ccc59cd0c" type="22" />
-                            <attribute id="Version" value="268435463" type="4" />
+                            <attribute id="Version" value="268500995" type="4" />
                         </node>
                     </children>
                 </node>
@@ -37,7 +37,24 @@
                         <node id="PublishVersion">
                             <attribute id="Version" value="907814608" type="4" />
                         </node>
-                        <node id="Scripts" />
+                        <node id="Scripts">
+                            <children>
+                                <node id="Script">
+                                    <attribute id="UUID" value="6f66e1a5-6bb9-40eb-8bce-7765a406a26a" type="22" />
+                                    <children>
+                                        <node id="Parameters">
+                                            <children>
+                                                <node id="Parameter">
+                                                    <attribute id="MapKey" value="HardcoreOnly" type="22" />
+                                                    <attribute id="Type" value="1" type="4" />
+                                                    <attribute id="Value" value="0" type="23" />
+                                                </node>
+                                            </children>
+                                        </node>
+                                    </children>
+                                </node>
+                            </children>
+                        </node>
                         <node id="TargetModes">
                             <children>
                                 <node id="Target">

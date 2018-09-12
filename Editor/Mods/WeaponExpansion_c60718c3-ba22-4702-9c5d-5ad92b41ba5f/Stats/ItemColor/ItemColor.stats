@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="d4bbd7d3-eef6-4a97-a253-7fe5d06f83ef">
+  <stat_objects>
+    <stat_object is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="LLWEAPONEX_RunebladeHuman" />
+        <field name="Primary Color" type="ColorStatObjectFieldDefinition" value="#FFFFD700" />
+        <field name="Secondary Color" type="ColorStatObjectFieldDefinition" value="#FFA9A9A9" />
+        <field name="Tertiary Color" type="ColorStatObjectFieldDefinition" value="#FF40E0D0" />
+      </fields>
+    </stat_object>
+    <stat_object is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="LLWEAPONEX_RunebladeDwarf" />
+        <field name="Primary Color" type="ColorStatObjectFieldDefinition" value="#ac6d4e" />
+        <field name="Secondary Color" type="ColorStatObjectFieldDefinition" value="#f99246" />
+        <field name="Tertiary Color" type="ColorStatObjectFieldDefinition" value="#FF40E0D0" />
+      </fields>
+    </stat_object>
+    <stat_object is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="LLWEAPONEX_RunebladeLizard" />
+        <field name="Primary Color" type="ColorStatObjectFieldDefinition" value="#289c04" />
+        <field name="Secondary Color" type="ColorStatObjectFieldDefinition" value="#7d573d" />
+        <field name="Tertiary Color" type="ColorStatObjectFieldDefinition" value="#FF40E0D0" />
+      </fields>
+    </stat_object>
+    <stat_object is_substat="false">
+      <fields>
+        <field name="Name" type="NameStatObjectFieldDefinition" value="LLWEAPONEX_RunebladeElf" />
+        <field name="Primary Color" type="ColorStatObjectFieldDefinition" value="#564333" />
+        <field name="Secondary Color" type="ColorStatObjectFieldDefinition" value="#18692d" />
+        <field name="Tertiary Color" type="ColorStatObjectFieldDefinition" value="#FF40E0D0" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>
