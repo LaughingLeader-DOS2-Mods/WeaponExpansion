@@ -21,3 +21,17 @@ THEN
 		CharacterApplyStatus(_Attacker, LLWEAPONEX_FUMBLE, 0, 1, _Source)
 	ENDIF
 ENDIF
+
+EVENT LLWEAPONEX_TrippingKnockdown
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+ON
+	OnCharacterStatusAttempt(_Target, LLWEAPONEX_TRIPPING)
+ACTIONS
+IF "c1&c2"
+	CharacterHasStatus(_Target, LLWEAPONEX_TRIPPING)
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_TRIPPING, _Source)
+THEN
+	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 0, _Source)
+ENDIF
