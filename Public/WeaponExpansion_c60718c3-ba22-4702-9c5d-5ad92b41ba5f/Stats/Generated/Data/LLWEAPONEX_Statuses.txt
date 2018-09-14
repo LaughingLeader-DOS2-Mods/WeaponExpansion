@@ -91,6 +91,12 @@ using "LLWEAPONEX_THROWNWEAPON_IMPALE_FX"
 data "Icon" "Item_WPN_Tool_Scythe_2H_A"
 data "ApplyEffect" "LLWEAPONEX_FX_Projectiles_Scythe_Status_Hit_01:Dummy_NeckFX"
 
+new entry "LLWEAPONEX_WEAPON_THROW_SHURIKEN"
+type "StatusData"
+using "LLWEAPONEX_THROWNWEAPON_IMPALE_FX"
+data "Icon" "LLWEAPONEX_Items_Shuriken_A"
+data "ApplyEffect" "LLWEAPONEX_FX_Projectiles_Shuriken_Status_Hit_01:Dummy_BodyFX"
+
 new entry "LLWEAPONEX_THROWNWEAPON_DAZED"
 type "StatusData"
 data "StatusType" "DAMAGE"

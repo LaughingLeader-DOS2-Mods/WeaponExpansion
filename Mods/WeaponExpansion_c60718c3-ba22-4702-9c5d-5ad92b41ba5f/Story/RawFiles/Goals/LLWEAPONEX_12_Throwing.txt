@@ -7,6 +7,8 @@ KBSECTION
 IF
 CharacterUsedSkillOnTarget(_Character, (CHARACTERGUID)_Target, _Skill, "Projectile", _)
 AND
+NOT Query_IsPlayerHiding(_Character)
+AND
 StringContains(_Skill, "Projectile_LLWEAPONEX_ThrowWeapon_", 1)
 THEN
 CharacterLookAt(_Target, _Character, 0);
