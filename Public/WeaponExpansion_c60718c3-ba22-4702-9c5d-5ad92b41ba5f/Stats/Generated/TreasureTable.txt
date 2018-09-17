@@ -75,6 +75,74 @@ object category "I_WPN_LLWEAPONEX_Runeblade_Air_1H",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Chaos_1H",1,0,0,0,0,0,0,0
 
+new treasuretable "LLWEAPONEX_CheatRunebladesNormal"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,1,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,1,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,1,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Poison_1H",1,1,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Air_1H",1,1,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Chaos_1H",1,1,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatRunebladesUncommon"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,1,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,1,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,1,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Poison_1H",1,0,1,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Air_1H",1,0,1,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Chaos_1H",1,0,1,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatRunebladesRare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,0,1,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,0,1,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,0,1,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Poison_1H",1,0,0,1,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Air_1H",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Chaos_1H",1,0,0,1,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatRunebladesEpic"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Poison_1H",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Air_1H",1,0,0,0,0,1,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Runeblade_Chaos_1H",1,0,0,0,1,0,0,0
+
+new treasuretable "LLWEAPONEX_RunebladesTest"
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRunebladesNormal",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRunebladesUncommon",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRunebladesRare",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRunebladesEpic",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,1
+
 new treasuretable "LLWEAPONEX_CheatQuarterstaffs"
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Quarterstaff",1,0,0,0,0,0,0,0
@@ -116,7 +184,7 @@ object category "LLWEAPONEX_Runeblades",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_ThrowingWeapons"
 new subtable "1,1"
-object category "LLWEAPONEX_ThrowingWeapons",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_ThrowingWeapons",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_BuyableThrowingWeapons"
 new subtable "4,1"
@@ -145,7 +213,7 @@ object category "I_WPN_LLWEAPONEX_Throwing_Rock",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendorStock"
 new subtable "1,1"
-object category "T_ST_LLWEAPONEX_Quarterstaffs",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,0,0,0,0,0,0
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatRuneblades",1,1,0,0,0,0,0,0
 new subtable "-1"

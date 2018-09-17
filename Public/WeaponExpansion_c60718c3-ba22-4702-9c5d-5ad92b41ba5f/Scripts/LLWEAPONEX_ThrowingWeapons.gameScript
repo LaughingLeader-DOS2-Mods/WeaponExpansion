@@ -1,0 +1,102 @@
+INIT
+	INT:%LLWEAPONEX_KevinRechargeTime = 1
+
+EVENTS
+
+EVENT LLWEAPONEX_ReduceKevinEnergy
+VARS
+	CHARACTER:_Player
+	ITEM:_Kevin
+	INT:_Current
+	INT:_Max
+ON
+	OnCharacterStatusAttempt(_Player, LLWEAPONEX_KEVIN_RETURNED)
+ACTIONS
+IF "c1&c2&c3"
+	ItemGetFromInventory(_Kevin, _Player, "", "LLWEAPONEX_KevinThePetRock", 0)
+	GetVar(_Current, _Kevin, "LLWEAPONEX_Kevin_CurrentEnergy")
+	GetVar(_Max, _Kevin, "LLWEAPONEX_Kevin_MaxEnergy")
+THEN
+	IF "c1"
+		IsGreaterThen(_Current, 0)
+	THEN
+		Subtract(_Current, 1)
+		SetVar(_Kevin, "LLWEAPONEX_Kevin_CurrentEnergy", _Current)
+	ENDIF
+	IF "c1|c2"
+		IsLessThen(_Current, 0)
+		IsEqual(_Current, 0)
+	THEN
+		Set(_Current, INT:0)
+		SetVar(_Kevin, "LLWEAPONEX_Kevin_CurrentEnergy", _Current)
+		Multiply(_Max, %LLWEAPONEX_KevinRechargeTime)
+		//CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO, _Max, 1)
+		CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO, 1, 1)
+		CharacterRemoveStatus(_Player, LLWEAPONEX_KEVIN_RECHARGE)
+		CharacterItemEvent(_Player, _Kevin, "LLWEAPONEX_KevinIsExausted")
+	ELIF "!c1"
+		CharacterHasStatus(_Player, LLWEAPONEX_KEVIN_RECHARGE)
+	THEN
+		CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_RECHARGE, %LLWEAPONEX_KevinRechargeTime)
+	ENDIF
+	CharacterItemEvent(_Player, _Kevin, "LLWEAPONEX_ReducedKevinEnergy")
+ENDIF
+
+EVENT LLWEAPONEX_Kevin_Recharge
+VARS
+	CHARACTER:_Player
+	ITEM:_Kevin
+	INT:_Current
+	INT:_Max
+ON
+	OnCharacterStatusRemoved(_Player, LLWEAPONEX_KEVIN_RECHARGE)
+ACTIONS
+IF "!c1&!c2&c3"
+	HasFlag(_Player, "LLWEAPONEX_KevinIsMoving")
+	CharacterHasStatus(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO)
+	ItemGetFromInventory(_Kevin, _Player, "", "LLWEAPONEX_KevinThePetRock", 0)
+THEN
+	IF "c1&c2"
+		GetVar(_Current, _Kevin, "LLWEAPONEX_Kevin_CurrentEnergy")
+		GetVar(_Max, _Kevin, "LLWEAPONEX_Kevin_MaxEnergy")
+	THEN
+		Add(_Current, 1)
+		SetVar(_Kevin, "LLWEAPONEX_Kevin_CurrentEnergy", _Current)
+		IF "c1&c2"
+			IsGreaterThen(_Current, _Max)
+			IsEqual(_Current, _Max)
+		THEN
+			Set(_Current, _Max)
+			SetVar(_Kevin, "LLWEAPONEX_Kevin_CurrentEnergy", _Current)
+		ENDIF
+		IF "c1"
+			IsLessThen(_Current, _Max)
+		THEN
+			CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_RECHARGE, %LLWEAPONEX_KevinRechargeTime)
+		ENDIF
+	ENDIF
+	CharacterItemEvent(_Player, _Kevin, "LLWEAPONEX_RechargeComplete")
+ENDIF
+
+EVENT LLWEAPONEX_Kevin_Exausted_Recharged
+VARS
+	CHARACTER:_Player
+	ITEM:_Kevin
+	INT:_Current
+	INT:_Max
+ON
+	OnCharacterStatusRemoved(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO)
+ACTIONS
+IF "!c1&c2"
+	HasFlag(_Player, "LLWEAPONEX_KevinIsMoving")
+	ItemGetFromInventory(_Kevin, _Player, "", "LLWEAPONEX_KevinThePetRock", 0)
+THEN
+	IF "c1&c2"
+		GetVar(_Current, _Kevin, "LLWEAPONEX_Kevin_CurrentEnergy")
+		GetVar(_Max, _Kevin, "LLWEAPONEX_Kevin_MaxEnergy")
+	THEN
+		Set(_Current, _Max)
+		SetVar(_Kevin, "LLWEAPONEX_Kevin_CurrentEnergy", _Current)
+	ENDIF
+	CharacterItemEvent(_Player, _Kevin, "LLWEAPONEX_KevinIsRestored")
+ENDIF

@@ -34,4 +34,24 @@ IF "c1&c2"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_TRIPPING, _Source)
 THEN
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 0, _Source)
+	
+ENDIF
+
+EVENT LLWEAPONEX_ReturnKevin
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Player
+	FLOAT3:_Pos
+	FLOAT3:_AddPos
+	FLOAT:_PosY
+ON
+	OnCharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Events_ReturnKevin")
+ACTIONS
+IF "c1&c2"
+	GetPosition(_Target, _Pos)
+	GetY(_Pos, _PosY)
+THEN
+	Add(_PosY, 10.0)
+	SetY(_Pos, _PosY)
+	ShootWorldProjectileAt(Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin_Effect, _Target, _Pos, _Player, 1)
 ENDIF

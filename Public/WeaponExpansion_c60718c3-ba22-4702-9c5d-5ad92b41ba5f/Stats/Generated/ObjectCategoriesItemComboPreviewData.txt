@@ -1,0 +1,6 @@
+new CraftingPreviewData "LLWEAPONEX_Kevin_Normal"
+type "ObjectCategories"
+data "Category" "LLWEAPONEX_Kevin_Normal"
+data "Icon" "LLWEAPONEX_Items_Unique_Kevin_A"
+data "Tooltip" "Kevin"
+

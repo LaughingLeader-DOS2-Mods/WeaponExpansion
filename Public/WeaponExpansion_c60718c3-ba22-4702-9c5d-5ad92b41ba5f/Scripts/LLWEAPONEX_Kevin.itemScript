@@ -1,0 +1,12 @@
+INIT
+	ITEM:__ME
+	INT:%LLWEAPONEX_Kevin_MaxEnergy = 4
+	INT:%LLWEAPONEX_Kevin_CurrentEnergy = %LLWEAPONEX_Kevin_MaxEnergy
+	
+EVENTS
+
+EVENT LLWEAPONEX_Kevin_Init
+ON
+	OnInit()
+ACTIONS
+	Set(%LLWEAPONEX_Kevin_CurrentEnergy, %LLWEAPONEX_Kevin_MaxEnergy)
