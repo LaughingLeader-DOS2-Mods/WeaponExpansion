@@ -53,6 +53,13 @@ CharacterApplyPreset(_Host, "Inquisitor_Act2");
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")
+THEN
+ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_000_e026f14d-6290-44c2-989d-984d03a42274, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
+ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_001_270b72cd-90e5-480e-9677-69040d566818, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
+ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_003_04f86498-9349-4f8b-88c8-f52a246fc12e, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
+
+IF
+StoryEvent(_, "LeaderLib_Initialized")
 AND
 CharacterGetHostCharacter(_Host)
 AND
@@ -81,6 +88,13 @@ CharacterLevelUpTo(_Host, 5);
 CharacterAddAttribute(_Host, "Intelligence", 5);
 CharacterAddAttribute(_Host, "Strength", 5);
 CharacterAddAttribute(_Host, "Finesse", 5);
+
+IF
+TextEventSet("llweap_die")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+CharacterDieImmediate(_Host, 0, "", _Host);
 EXITSECTION
 
 ENDEXITSECTION

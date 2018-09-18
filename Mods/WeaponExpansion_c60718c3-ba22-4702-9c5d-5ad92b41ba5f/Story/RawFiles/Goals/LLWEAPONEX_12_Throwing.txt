@@ -6,20 +6,20 @@ KBSECTION
 PROC
 LLWEAPONEX_Throwing_InitSettings()
 THEN
-DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin");
-DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin_Poison");
-DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin_Oil");
-DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin_Nails");
+DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_Throw_Rock_Kevin");
+DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Poison");
+DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil");
+DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails");
 
 //Make the impale effect look more believable
 IF
-CharacterUsedSkillOnTarget(_Character, (CHARACTERGUID)_Target, _Skill, "Projectile", _)
+CharacterUsedSkillOnTarget(_Character, (CHARACTERGUID)_Target, _Skill, "projectile", _)
 AND
-_Skill != "Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin"
+_Skill != "Projectile_LLWEAPONEX_Throw_Rock_Kevin"
 AND
 NOT Query_IsPlayerHiding(_Character)
 AND
-StringContains(_Skill, "Projectile_LLWEAPONEX_ThrowWeapon_", 1)
+StringContains(_Skill, "Projectile_LLWEAPONEX_Throw_", 1)
 THEN
 CharacterLookAt(_Target, _Character, 0);
 
@@ -55,7 +55,7 @@ NOT DB_LLWEAPONEX_Throwing_Temp_KevinIterator(_Character, _InitialTarget, _Itera
 DB_LLWEAPONEX_Throwing_Temp_KevinIterator(_Character, _InitialTarget, _IteratorEvent, _NextCount);
 
 IF
-SkillCast(_Player, "Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin", _, _)
+SkillCast(_Player, "Projectile_LLWEAPONEX_Throw_Rock_Kevin", _, _)
 THEN
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_ShootKevinReturnEffect", 1000);
 
@@ -64,7 +64,6 @@ CharacterStatusApplied(_Target, "LLWEAPONEX_HIT_BY_KEVIN", (CHARACTERGUID)_Playe
 AND
 _Player != NULL_00000000-0000-0000-0000-000000000000
 THEN
-ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_ShootKevinReturnEffect");
 LLWEAPONEX_Throwing_SetKevinReturnTarget(_Player, _Target);
 
 PROC
@@ -96,7 +95,8 @@ DB_LLWEAPONEX_Throwing_Temp_KevinIterator(_Character, _InitialTarget, _IteratorE
 AND
 _Count < _TotalTargets
 THEN
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_ShootKevinReturnEffect", 250);
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_ShootKevinReturnEffect");
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_ShootKevinReturnEffect", 300);
 
 PROC
 LLWEAPONEX_Throwing_Internal_SetKevinReturnTarget((CHARACTERGUID)_Player, (CHARACTERGUID)_Target, (INTEGER)_Count)
@@ -115,7 +115,7 @@ AND
 DB_LLWEAPONEX_Throwing_Temp_KevinReturnTarget(_Player, _Target, _Count)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_KevinReturnTarget(_Player, _Target, _Count);
-//CharacterUseSkill(_Target, "Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin_Effect", _Player, 1, 1, 1);
+//CharacterUseSkill(_Target, "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect", _Player, 1, 1, 1);
 CharacterCharacterSetEvent(_Player, _Target, "LLWEAPONEX_Events_ReturnKevin");
 
 /*

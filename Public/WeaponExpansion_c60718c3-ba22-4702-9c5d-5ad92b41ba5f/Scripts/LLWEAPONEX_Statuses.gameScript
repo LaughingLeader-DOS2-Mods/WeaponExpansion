@@ -53,5 +53,24 @@ IF "c1&c2"
 THEN
 	Add(_PosY, 10.0)
 	SetY(_Pos, _PosY)
-	ShootWorldProjectileAt(Projectile_LLWEAPONEX_ThrowWeapon_Rock_Kevin_Effect, _Target, _Pos, _Player, 1)
+	ShootWorldProjectileAt(Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect, _Target, _Pos, _Player, 1)
 ENDIF
+
+/*
+EVENT LLWEAPONEX_Kevin_MiniExplosion
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Player
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_KEVIN_MINIEXPLOSION)
+ACTIONS
+IF "c1&c2"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_KEVIN_MINIEXPLOSION, _Player)
+	CharacterGetStat(_LevelF, _Player, Level)
+THEN
+	Cast(_Level, _LevelF)
+	ExplodeAt(_Target, Projectile_LLWEAPONEX_Kevin_MiniExplosion, _Level, _Player)
+ENDIF
+*/

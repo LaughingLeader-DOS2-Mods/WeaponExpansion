@@ -12,6 +12,31 @@ IF
 GameStarted("TestLevel_LL_WeaponExpansion", _)
 THEN
 GoalCompleted;
+
+IF
+GameStarted(_Level, _)
+AND
+IsGameLevel(_Level, 1)
+AND
+CharacterGetHostCharacter(_Host)
+AND
+CharacterGetReservedUserID(_Host, _ID)
+AND
+GetUserName(_ID, _UserName)
+AND
+_UserName == "LaughingLeader"
+THEN
+GlobalSetFlag("LLWEAPONEX_Debug_LeaderModeEngaged");
+
+IF
+StoryEvent((CHARACTERGUID)_Trader, "LeaderLib_Events_OnLeaderTradeSpawned")
+AND
+GlobalGetFlag("LLWEAPONEX_Debug_LeaderModeEngaged", 1)
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+CharacterSetCustomTradeTreasure(_Trader, "LLWEAPONEX_CheatAllWeapons");
+GenerateItems(_Host, _Trader);
 EXITSECTION
 
 ENDEXITSECTION

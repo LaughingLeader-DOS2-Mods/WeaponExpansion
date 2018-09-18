@@ -30,8 +30,8 @@ THEN
 		Set(_Current, INT:0)
 		SetVar(_Kevin, "LLWEAPONEX_Kevin_CurrentEnergy", _Current)
 		Multiply(_Max, %LLWEAPONEX_KevinRechargeTime)
-		//CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO, _Max, 1)
-		CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO, 1, 1)
+		CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO, _Max, 1)
+		//CharacterApplyStatus(_Player, LLWEAPONEX_KEVIN_EXAUSTED_INFO, 1, 1)
 		CharacterRemoveStatus(_Player, LLWEAPONEX_KEVIN_RECHARGE)
 		CharacterItemEvent(_Player, _Kevin, "LLWEAPONEX_KevinIsExausted")
 	ELIF "!c1"

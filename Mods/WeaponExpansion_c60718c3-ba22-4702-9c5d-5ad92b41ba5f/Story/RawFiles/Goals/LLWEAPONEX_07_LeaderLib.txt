@@ -1,0 +1,30 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+AND
+NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
+THEN
+DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
+
+IF
+DB_LLWEAPONEX_RegisteredLeaderLibSettings(1)
+THEN
+LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion] Settings", "LLWEAPONEX_SettingsMenu", "WeaponExpansion", "LaughingLeader");
+
+LeaderLib_Trader_Register_Position("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 12.0, 0.0, 8.0);
+LeaderLib_Trader_Register_StartingGold("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 9999);
+
+LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.LeaderTrader.TestWeapons", "LeaderLib.LeaderTrader");
+LeaderLib_Requirements_Add_RegionRequirement("LLWEAPONEX.Debug.IsTestLevel", "TestLevel_LL_WeaponExpansion");
+LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "LLWEAPONEX_Debug_PriceCheck", "LLWEAPONEX.Debug.IsTestLevel", 1);
+LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "LLWEAPONEX_CheatQuarterstaffs", "LLWEAPONEX.Debug.IsTestLevel", 1);
+LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "ST_Grenades", "LLWEAPONEX.Debug.IsTestLevel", 1);
+LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "ST_WeaponNormal", "LLWEAPONEX.Debug.IsTestLevel", 1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

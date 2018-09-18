@@ -6,9 +6,27 @@ add namegroup "LLWEAPONEX_Fist","",""
 
 new itemgroup "LLWEAPONEX_Quarterstaff_2H"
 
+add levelgroup 1,30,"Common"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add namegroup "LLWEAPONEX_Quarterstaff_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add namegroup "LLWEAPONEX_Quarterstaff_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add namegroup "LLWEAPONEX_Quarterstaff_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add namegroup "LLWEAPONEX_Quarterstaff_Epic","",""
+
+new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff"
+
 add levelgroup 0,0,"All"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
-add namegroup "LLWEAPONEX_Quarterstaff_Wooden","",""
+add namegroup "LLWEAPONEX_Quarterstaff_Crafted","",""
 
 new itemgroup "LLWEAPONEX_Rods_1H"
 
@@ -211,3 +229,26 @@ add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare","","Item_WPN_Human_Normal
 add levelgroup 1,30,"Epic"
 add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
+
+new itemgroup "LLWEAPONEX_Greatbows"
+
+add levelgroup 1,10,"Common"
+add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590","HumansCommon"
+add namegroup "LLWEAPONEX_Greatbow_Weak","",""
+
+add levelgroup 11,30,"Common"
+add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590","HumansCommon"
+add namegroup "LLWEAPONEX_Greatbow_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "ca5fd6eb-7219-4b12-8568-e6a5a09a5706","DwarvesUncommon"
+add namegroup "LLWEAPONEX_Greatbow_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "d3bf725c-da48-48d6-bc7a-0cff26eae174","DwarvesRare"
+add namegroup "RG_Bows_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
+add namegroup "RG_Bows_Epic","",""
+

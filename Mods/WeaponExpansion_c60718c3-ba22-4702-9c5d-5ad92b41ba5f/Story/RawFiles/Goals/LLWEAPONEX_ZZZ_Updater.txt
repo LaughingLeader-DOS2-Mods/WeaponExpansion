@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "1.0.0.0");
+LeaderUpdater_Register_ActiveGoal("WeaponExpansion", "LaughingLeader", "LLWEAPONEX_ZZZ_Updater");
+KBSECTION
+IF
+GameStarted(_,_)
+AND
+LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "1.0.0.0")
+THEN
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "1.0.0.0");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
