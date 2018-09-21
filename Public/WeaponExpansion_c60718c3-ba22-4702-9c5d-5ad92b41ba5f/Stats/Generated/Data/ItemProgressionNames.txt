@@ -26,7 +26,7 @@ add name "Monk's Resolution",""
 add name "Headcracker",""
 
 new namegroup "LLWEAPONEX_Quarterstaff_Crafted"
-add name "Sturdy Walking Stick",""
+add name "Walking Stick",""
 
 new namegroup "LLWEAPONEX_Beginner_Rod"
 add name "Weak Rod",""
@@ -209,3 +209,12 @@ add namecool "Dragonslayer's Greatbow",""
 add namecool "Slayer's Greatbow",""
 add namecool "Mighty Greatbow ",""
 add namecool "Tough Greatbow ",""
+
+new namegroup "LLWEAPONEX_Greatbow_Crafted_1"
+add name "Trusty Old Greatbow","An old greatbow passed down as a family heirloom. Not the strongest, but it'll do."
+
+new namegroup "LLWEAPONEX_Greatbow_Crafted_2"
+add name "Greatbow",""
+
+new namegroup "LLWEAPONEX_Greatbow_Crafted_3"
+add name "Artisan Greatbow",""

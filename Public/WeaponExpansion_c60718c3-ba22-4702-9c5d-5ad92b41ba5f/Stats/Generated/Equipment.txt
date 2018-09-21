@@ -1,0 +1,55 @@
+new equipment "Class_LLWEAPONEX_DragonSlayer_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedGreatbow"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "WPN_Arrow_Fire_A"
+add equipmentgroup
+add equipment entry "WPN_Arrow_KO_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_DragonSlayer_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedGreatbow"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "WPN_Arrow_Fire_A"
+add equipmentgroup
+add equipment entry "WPN_Arrow_KO_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_DragonSlayer_Preview"
+add equipmentgroup
+add equipment entry "ARM_Ranger_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Metamorph_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Metamorph_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Metamorph_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Metamorph_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_GreatbowPreview"

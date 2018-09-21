@@ -7,19 +7,19 @@ add namegroup "LLWEAPONEX_Fist","",""
 new itemgroup "LLWEAPONEX_Quarterstaff_2H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "LLWEAPONEX_Quarterstaff_Normal","",""
 
 add levelgroup 1,30,"Uncommon"
-add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "LLWEAPONEX_Quarterstaff_Normal","Cool",""
 
 add levelgroup 1,30,"Rare"
-add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "LLWEAPONEX_Quarterstaff_Rare","",""
 
 add levelgroup 1,30,"Epic"
-add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "LLWEAPONEX_Quarterstaff_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff"
@@ -252,3 +252,22 @@ add levelgroup 1,30,"Epic"
 add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
 add namegroup "RG_Bows_Epic","",""
 
+new itemgroup "WPN_LLWEAPONEX_CraftedGreatbow"
+
+add levelgroup 1,8,"All"
+add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
+add namegroup "LLWEAPONEX_Greatbow_Crafted_1","",""
+
+add levelgroup 9,15,"All"
+add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
+add namegroup "LLWEAPONEX_Greatbow_Crafted_2","",""
+
+add levelgroup 16,0,"All"
+add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
+add namegroup "LLWEAPONEX_Greatbow_Crafted_3","",""
+
+new itemgroup "WPN_LLWEAPONEX_GreatbowPreview"
+
+add levelgroup 0,0,"All"
+add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
+add namegroup "LLWEAPONEX_Greatbow_Normal","",""

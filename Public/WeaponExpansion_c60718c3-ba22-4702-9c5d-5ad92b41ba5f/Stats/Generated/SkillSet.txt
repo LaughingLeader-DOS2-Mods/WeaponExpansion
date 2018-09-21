@@ -1,0 +1,4 @@
+new skillset "Class_LLWEAPONEX_DragonSlayer"
+add skill "Projectile_Ricochet"
+add skill "Projectile_PinDown"
+add skill "Shout_Adrenaline"
