@@ -5,7 +5,7 @@
     <region id="CharacterCreationClass">
         <node id="root">
             <attribute id="ClassDescription" value="A former marksman from a long-forgotten regiment, tasked with destroying dragonkind." handle="hf4441e4cgfd32g49bfga758gb0f711be47e8" type="28" />
-			<attribute id="ClassLongDescription" value="A former marksman from a long-forgotten regiment, tasked with destroying dragonkind." handle="h6707c781gad82g4884g882bgf27e1cef07de" type="28" />
+			<attribute id="ClassLongDescription" value="Dragon Slayers were an elite military unit in Rivellon. Training to become a dragon slayer started at a very young age, and not many endured long enough to become a slayer.<br>The Order of the Dragon Slayers were created by vengeful knights that wanted justice for the death of the Divine at the hands of a dragon knight. In the past, the dragon slayers quickly went from a small band of knights to a mighty army of elites. Today, it is presumed the order was dissolved by Lucian after he was saved by the last Dragon Knight." handle="h6707c781gad82g4884g882bgf27e1cef07de" type="28" />
             <attribute id="ClassName" value="Dragon Slayer" handle="ha1f92690g2af6g4515g9ad4gecd66178217e" type="28" />
             <attribute id="ClassType" value="LLWEAPONEX_DragonSlayer" type="22" />
             <attribute id="SkillSet" value="Class_LLWEAPONEX_DragonSlayer" type="22" />

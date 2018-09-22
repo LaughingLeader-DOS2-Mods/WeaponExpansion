@@ -37,6 +37,20 @@ THEN
 	
 ENDIF
 
+EVENT LLWEAPONEX_DragonsBane_GuaranteedKnockdown
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_DRAGONS_BANE)
+ACTIONS
+IF "!c1&c2"
+	CharacterHasStatus(_Target, KNOCKED_DOWN)
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_DRAGONS_BANE, _Source)
+THEN
+	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 1, _Source)
+ENDIF
+
 /*
 EVENT LLWEAPONEX_Kevin_MiniExplosion
 VARS

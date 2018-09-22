@@ -16,7 +16,7 @@ add equipment entry "SCROLL_Resurrect"
 add equipmentgroup
 add equipment entry "CONT_Backpack_A_SourceHunter"
 
-new equipment "Class_LLWEAPONEX_DragonSlayer_Start"
+new equipment "Class_LLWEAPONEX_DragonSlayer_Start_Undead"
 add equipmentgroup
 add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup

@@ -1,248 +1,270 @@
-new itemgroup "LLWEAPONEX_Fist"
+new itemgroup "WPN_LLWEAPONEX_Fist"
 
 add levelgroup 0,0,"All"
 add rootgroup "e1bda904-93c2-4f6f-8136-1a547279fd1f",""
-add namegroup "LLWEAPONEX_Fist","",""
+add namegroup "WPN_LLWEAPONEX_Fist","",""
 
-new itemgroup "LLWEAPONEX_Quarterstaff_2H"
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_2H"
 
-add levelgroup 1,30,"Common"
+add levelgroup 1,8,"Common"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
-add namegroup "LLWEAPONEX_Quarterstaff_Normal","",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood","",""
 
-add levelgroup 1,30,"Uncommon"
+add levelgroup 1,8,"Uncommon"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
-add namegroup "LLWEAPONEX_Quarterstaff_Normal","Cool",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood","Cool",""
 
-add levelgroup 1,30,"Rare"
+add levelgroup 1,8,"Rare"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
-add namegroup "LLWEAPONEX_Quarterstaff_Rare","",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Rare","",""
 
-add levelgroup 1,30,"Epic"
+add levelgroup 1,8,"Epic"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
-add namegroup "LLWEAPONEX_Quarterstaff_Epic","",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
+
+add levelgroup 9,13,"Common"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Metal","",""
+
+add levelgroup 9,13,"Uncommon"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Metal","Cool",""
+
+add levelgroup 9,13,"Rare"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Rare","",""
+
+add levelgroup 9,13,"Epic"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff"
 
 add levelgroup 0,0,"All"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
-add namegroup "LLWEAPONEX_Quarterstaff_Crafted","",""
+add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood","",""
 
-new itemgroup "LLWEAPONEX_Rods_1H"
+new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal"
+
+add levelgroup 0,0,"All"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
+
+new itemgroup "WPN_LLWEAPONEX_Rods_1H"
 
 add levelgroup 1,3,"Common"
 add rootgroup "0edf88b5-f09f-473c-bae1-a992af4dba69",""
-add namegroup "LLWEAPONEX_Improv_Rod","",""
+add namegroup "WPN_LLWEAPONEX_Improv_Rod","",""
 
 add levelgroup 4,7,"Common"
 add rootgroup "5d128228-a710-4236-8a7e-83be127e3c1d","ElvesCommon"
-add namegroup "LLWEAPONEX_Rod_Of_Nature","",""
+add namegroup "WPN_LLWEAPONEX_Rod_Of_Nature","",""
 
 add levelgroup 8,11,"Common"
 add rootgroup "42f67e5c-6713-45ba-8449-47ced729cdf9","HumansStaffBCommon"
-add namegroup "LLWEAPONEX_Stone_Rod","",""
+add namegroup "WPN_LLWEAPONEX_Stone_Rod","",""
 
 add levelgroup 12,15,"Common"
 add rootgroup "296367bb-7e26-4966-a23d-cd77550ed501","DwarvesCommon"
-add namegroup "LLWEAPONEX_Rod_Of_The_Dwarf","",""
+add namegroup "WPN_LLWEAPONEX_Rod_Of_The_Dwarf","",""
 
 add levelgroup 16,0,"Common"
 add rootgroup "6b6b8887-c68f-4784-9e3f-5458f049f8f6","LizardsStaffBCommon"
-add namegroup "LLWEAPONEX_Rod_Of_The_Lizard","",""
+add namegroup "WPN_LLWEAPONEX_Rod_Of_The_Lizard","",""
 
 add levelgroup 1,3,"Uncommon"
 add rootgroup "5d128228-a710-4236-8a7e-83be127e3c1d","ElvesUncommon"
-add namegroup "LLWEAPONEX_Rod_Of_Nature","Cool",""
+add namegroup "WPN_LLWEAPONEX_Rod_Of_Nature","Cool",""
 
 add levelgroup 4,7,"Uncommon"
 add rootgroup "42f67e5c-6713-45ba-8449-47ced729cdf9","HumansStaffBUncommon"
-add namegroup "LLWEAPONEX_Stone_Rod","Cool",""
+add namegroup "WPN_LLWEAPONEX_Stone_Rod","Cool",""
 
 add levelgroup 8,11,"Uncommon"
 add rootgroup "6b6b8887-c68f-4784-9e3f-5458f049f8f6","LizardsStaffBUncommon"
-add namegroup "LLWEAPONEX_Rod_Of_The_Lizard","Cool",""
+add namegroup "WPN_LLWEAPONEX_Rod_Of_The_Lizard","Cool",""
 
 add levelgroup 12,15,"Uncommon"
 add rootgroup "296367bb-7e26-4966-a23d-cd77550ed501","DwarvesUncommon"
-add namegroup "LLWEAPONEX_Rod_Of_The_Dwarf","Cool",""
+add namegroup "WPN_LLWEAPONEX_Rod_Of_The_Dwarf","Cool",""
 
 add levelgroup 16,18,"Uncommon"
 add rootgroup "e8b829e7-a27c-45a5-b8e6-cd00d4d0e8a5","HumansStaffBUncommon"
-add namegroup "LLWEAPONEX_Wooden_Rod","Cool",""
+add namegroup "WPN_LLWEAPONEX_Wooden_Rod","Cool",""
 
 add levelgroup 19,0,"Uncommon"
 add rootgroup "21699330-a7dd-44c0-8cb4-2808fe910abc","ElvesStaffBUncommon"
-add namegroup "LLWEAPONEX_Rod_Of_Nature","Cool",""
+add namegroup "WPN_LLWEAPONEX_Rod_Of_Nature","Cool",""
 
 add levelgroup 1,3,"Rare"
 add rootgroup "296367bb-7e26-4966-a23d-cd77550ed501","DwarvesRare"
-add namegroup "LLWEAPONEX_Rods_1H_Rare","",""
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Rare","",""
 
 add levelgroup 4,7,"Rare"
 add rootgroup "e8b829e7-a27c-45a5-b8e6-cd00d4d0e8a5","HumansStaffBRare"
-add namegroup "LLWEAPONEX_Rods_1H_Rare","",""
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Rare","",""
 
 add levelgroup 8,11,"Rare"
 add rootgroup "21699330-a7dd-44c0-8cb4-2808fe910abc","ElvesStaffBRare"
-add namegroup "LLWEAPONEX_Rods_1H_Rare","",""
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Rare","",""
 
 add levelgroup 12,15,"Rare"
 add rootgroup "e8b829e7-a27c-45a5-b8e6-cd00d4d0e8a5","HumansStaffBRare"
-add namegroup "LLWEAPONEX_Rods_1H_Rare","",""
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Rare","",""
 
 add levelgroup 16,18,"Rare"
 add rootgroup "21699330-a7dd-44c0-8cb4-2808fe910abc","ElvesStaffBRare"
-add namegroup "LLWEAPONEX_Rods_1H_Rare","",""
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Rare","",""
 
 add levelgroup 19,0,"Rare"
 add rootgroup "93eac0a1-bc12-40d8-a6ed-8c392895b513","DwarvesRare"
-add namegroup "LLWEAPONEX_Rods_1H_Rare","",""
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Rare","",""
 
 add levelgroup 1,3,"Epic"
 add rootgroup "93eac0a1-bc12-40d8-a6ed-8c392895b513","DwarvesEpic"
-add namegroup "LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Dwarves_Rod_1H_A_VAR"
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Dwarves_Rod_1H_A_VAR"
 
 add levelgroup 4,7,"Epic"
 add rootgroup "325e72cc-2846-49a7-9c2a-cfea0d9103f5","LizardsStaffAEpic"
-add namegroup "LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Lizards_Rod_1H_A_VAR"
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Lizards_Rod_1H_A_VAR"
 
 add levelgroup 8,11,"Epic"
 add rootgroup "e8b829e7-a27c-45a5-b8e6-cd00d4d0e8a5","HumansStaffBEpic"
-add namegroup "LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Humans_Rod_1H_A_VAR"
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Humans_Rod_1H_A_VAR"
 
 add levelgroup 12,15,"Epic"
 add rootgroup "21699330-a7dd-44c0-8cb4-2808fe910abc","ElvesStaffBEpic"
-add namegroup "LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Elves_Rod_1H_B_VAR"
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Elves_Rod_1H_B_VAR"
 
 add levelgroup 16,18,"Epic"
 add rootgroup "93eac0a1-bc12-40d8-a6ed-8c392895b513","DwarvesEpic"
-add namegroup "LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Dwarves_Rod_1H_A_VAR"
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Dwarves_Rod_1H_A_VAR"
 
 add levelgroup 19,0,"Epic"
 add rootgroup "325e72cc-2846-49a7-9c2a-cfea0d9103f5","LizardsStaffAEpic"
-add namegroup "LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Lizards_Rod_1H_A_VAR"
+add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Lizards_Rod_1H_A_VAR"
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Fire_1H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","WPN_LLWEAPONEX_RunebladeLizard"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H","",""
 
 add levelgroup 1,30,"Uncommon"
-add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","WPN_LLWEAPONEX_RunebladeLizard"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H","Cool",""
 
 add levelgroup 1,30,"Rare"
-add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","WPN_LLWEAPONEX_RunebladeLizard"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Rare","",""
 
 add levelgroup 1,30,"Epic"
-add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeLizard"
+add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","WPN_LLWEAPONEX_RunebladeLizard"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Ice_1H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Ice_1H","",""
 
 add levelgroup 1,30,"Uncommon"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Ice_1H","Cool",""
 
 add levelgroup 1,30,"Rare"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Ice_1H_Rare","",""
 
 add levelgroup 1,30,"Epic"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Ice_1H_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Earth_1H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","LLWEAPONEX_RunebladeHuman"
+add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H","",""
 
 add levelgroup 1,30,"Uncommon"
-add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","LLWEAPONEX_RunebladeHuman"
+add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H","Cool",""
 
 add levelgroup 1,30,"Rare"
-add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","LLWEAPONEX_RunebladeHuman"
+add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Rare","",""
 
 add levelgroup 1,30,"Epic"
-add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","LLWEAPONEX_RunebladeHuman"
+add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Poison_1H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "30102727-1802-4aad-b464-02b9816c07db","WPN_LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H","",""
 
 add levelgroup 1,30,"Uncommon"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "30102727-1802-4aad-b464-02b9816c07db","WPN_LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H","Cool",""
 
 add levelgroup 1,30,"Rare"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "30102727-1802-4aad-b464-02b9816c07db","WPN_LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Rare","",""
 
 add levelgroup 1,30,"Epic"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "30102727-1802-4aad-b464-02b9816c07db","WPN_LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Air_1H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","LLWEAPONEX_RunebladeDwarf"
+add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","WPN_LLWEAPONEX_RunebladeDwarf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H","",""
 
 add levelgroup 1,30,"Uncommon"
-add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","LLWEAPONEX_RunebladeDwarf"
+add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","WPN_LLWEAPONEX_RunebladeDwarf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H","Cool",""
 
 add levelgroup 1,30,"Rare"
-add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
+add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","WPN_LLWEAPONEX_RunebladeDwarf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Rare","","
 
 add levelgroup 1,30,"Epic"
-add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
+add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","WPN_LLWEAPONEX_RunebladeDwarf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic","","
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H","",""
 
 add levelgroup 1,30,"Uncommon"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H","Cool",""
 
 add levelgroup 1,30,"Rare"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare","","Item_WPN_Human_Normal_BastardSword_A_C"
 
 add levelgroup 1,30,"Epic"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","WPN_LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
 
-new itemgroup "LLWEAPONEX_Greatbows"
+new itemgroup "WPN_LLWEAPONEX_Greatbows"
 
 add levelgroup 1,10,"Common"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590","HumansCommon"
-add namegroup "LLWEAPONEX_Greatbow_Weak","",""
+add namegroup "WPN_LLWEAPONEX_Greatbow_Weak","",""
 
 add levelgroup 11,30,"Common"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590","HumansCommon"
-add namegroup "LLWEAPONEX_Greatbow_Normal","",""
+add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","",""
 
 add levelgroup 1,30,"Uncommon"
 add rootgroup "ca5fd6eb-7219-4b12-8568-e6a5a09a5706","DwarvesUncommon"
-add namegroup "LLWEAPONEX_Greatbow_Normal","Cool",""
+add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","Cool",""
 
 add levelgroup 1,30,"Rare"
 add rootgroup "d3bf725c-da48-48d6-bc7a-0cff26eae174","DwarvesRare"
@@ -256,18 +278,18 @@ new itemgroup "WPN_LLWEAPONEX_CraftedGreatbow"
 
 add levelgroup 1,8,"All"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
-add namegroup "LLWEAPONEX_Greatbow_Crafted_1","",""
+add namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_1","",""
 
 add levelgroup 9,15,"All"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
-add namegroup "LLWEAPONEX_Greatbow_Crafted_2","",""
+add namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_2","",""
 
 add levelgroup 16,0,"All"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
-add namegroup "LLWEAPONEX_Greatbow_Crafted_3","",""
+add namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3","",""
 
 new itemgroup "WPN_LLWEAPONEX_GreatbowPreview"
 
 add levelgroup 0,0,"All"
 add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
-add namegroup "LLWEAPONEX_Greatbow_Normal","",""
+add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","",""
