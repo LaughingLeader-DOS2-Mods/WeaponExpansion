@@ -145,11 +145,13 @@ object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,1
 
 new treasuretable "LLWEAPONEX_CheatQuarterstaffs"
 new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Quarterstaff",1,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Quarterstaff_Wood",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Quarterstaff_Metal",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_CheatAllWeapons"
 new subtable "-1"
-object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0,
+object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
 new subtable "-1"
@@ -241,7 +243,7 @@ object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
 new treasuretable "LLWEAPONEX_Debug_PriceCheck"
 IgnoreLevelDiff 1
 new subtable "-1"
-object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0,
+object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
 new subtable "-1"
@@ -292,3 +294,14 @@ new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_Debug_GenerationTest"
+new subtable "10,10"
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,1,1,1,0,0
+new subtable "10,10"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,1,1,0,0
+new subtable "10,10"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,1,1,1,1,1,0,0
+new subtable "10,10"
+object category "LLWEAPONEX_Greatbow",1,1,1,1,1,1,0,0
+

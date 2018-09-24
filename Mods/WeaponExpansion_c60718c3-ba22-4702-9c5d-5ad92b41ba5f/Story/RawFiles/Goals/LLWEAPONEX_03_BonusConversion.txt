@@ -1,0 +1,374 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+LLWEAPONEX_BonusConversion_InitSettings();
+
+KBSECTION
+
+PROC
+LLWEAPONEX_BonusConversion_InitSettings()
+THEN
+DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_STRENGTH_TO_INTELLIGENCE", "Strength", "Intelligence", "LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_BONUS");
+DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_FINESSE_TO_STRENGTH", "Finesse", "Strength", "LLWEAPONEX_FINESSE_TO_STRENGTH_BONUS");
+DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_INTELLIGENCE_TO_FINESSE", "Intelligence", "Finesse", "LLWEAPONEX_INTELLIGENCE_TO_FINESSE_BONUS");
+
+PROC
+LLWEAPONEX_BonusConversion_SetBonus((CHARACTERGUID)_Player, (STRING)_StatToCheck, (INTEGER)_BonusValue, (INTEGER)_FullValue)
+AND
+DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _OtherBonusValue, _OriginalValue)
+THEN
+NOT DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _OtherBonusValue, _OriginalValue);
+
+PROC
+LLWEAPONEX_BonusConversion_SetBonus((CHARACTERGUID)_Player, (STRING)_StatToCheck, (INTEGER)_BonusValue, (INTEGER)_FullValue)
+THEN
+DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _BonusValue, _FullValue);
+
+IF
+CharacterStatusRemoved(_Player, _BonusConversionStatus, _)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _BonusValue, _OriginalValue)
+THEN
+NOT DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _BonusValue, _OriginalValue);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, _TimerName)
+AND
+DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _TimerName)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+THEN
+LLWEAPONEX_BonusConversion_Internal_CalculateBonus(_Player, _Type, _StatToCheck, _BonusConversionStatus);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, _TimerName)
+AND
+DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _TimerName)
+THEN
+NOT DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _TimerName);
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_CalculateBonus((CHARACTERGUID)_Player, "Attribute", (STRING)_StatToCheck, (STRING)_BonusConversionStatus)
+AND
+CharacterGetBaseAttribute(_Player, _StatToCheck, _Base)
+AND
+CharacterGetAttribute(_Player, _StatToCheck, _Current)
+AND
+IntegerSubtract(_Current, _Base, _Bonus)
+AND
+_Bonus > 0
+THEN
+LLWEAPONEX_BonusConversion_SetBonus(_Player, _StatToCheck, _Bonus, _Current);
+LLWEAPONEX_BonusConversion_Internal_ApplyBonus(_Player, _BonusConversionStatus, _Bonus);
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_CalculateBonus((CHARACTERGUID)_Player, "Ability", (STRING)_StatToCheck, (STRING)_BonusConversionStatus)
+AND
+CharacterGetBaseAbility(_Player, _StatToCheck, _Base)
+AND
+CharacterGetAbility(_Player, _StatToCheck, _Current)
+AND
+IntegerSubtract(_Current, _Base, _Bonus)
+AND
+_Bonus > 0
+THEN
+LLWEAPONEX_BonusConversion_Internal_ApplyBonus(_Player, _BonusConversionStatus, _Bonus);
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_ApplyBonus((CHARACTERGUID)_Player, (STRING)_BonusConversionStatus, (INTEGER)_Bonus)
+AND
+_Bonus > 0
+AND
+IntegerSubtract(_Bonus, 1, _NextStack)
+THEN
+ApplyStatus(_Player, _BonusConversionStatus, -1.0);
+LLWEAPONEX_BonusConversion_Internal_ApplyBonus(_Player, _BonusConversionStatus, _NextStack);
+
+/*
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, _TimerName)
+AND
+DB_LLWEAPONEX_BonusConversion_Temp_CheckForBonusConversion(_Player, _ConversionStatus, _TimerName)
+THEN
+NOT DB_LLWEAPONEX_BonusConversion_Temp_CheckForBonusConversion(_Player, _ConversionStatus, _TimerName);
+LLWEAPONEX_BonusConversion_Internal_CheckForBonusRecalculation(_Player, _ConversionStatus);
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_CheckForBonusRecalculation((CHARACTERGUID)_Player, (STRING)_ConversionStatus)
+AND
+HasActiveStatus(_Player, _ConversionStatus, 1)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+AND
+IsTagged(_Weapon, _Tag, 1)
+AND
+StringConcatenate("LLWEAPONEX_Commands_CalculateBonusConversion_", _ConversionStatus, _TimerName)
+THEN
+DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _TimerName);
+ProcObjectTimerCancel(_Player, _TimerName);
+ProcObjectTimer(_Player, _TimerName, 250);
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_CheckForBonusRecalculation((CHARACTERGUID)_Player, (STRING)_ConversionStatus)
+AND
+HasActiveStatus(_Player, _ConversionStatus, 1)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+AND
+IsTagged(_Weapon, _Tag, 1)
+AND
+StringConcatenate("LLWEAPONEX_Commands_CalculateBonusConversion_", _ConversionStatus, _TimerName)
+THEN
+DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _TimerName);
+ProcObjectTimerCancel(_Player, _TimerName);
+ProcObjectTimer(_Player, _TimerName, 250);
+*/
+//REGION BONUS_REFRESHING
+QRY
+LLWEAPONEX_BonusConversion_QRY_CanConvertBonuses((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+HasActiveStatus(_Player, _ConversionStatus, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BonusConversion_QRY_IsConvertingBonuses((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+HasActiveStatus(_Player, _BonusConversionStatus, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BonusConversion_QRY_IsConversionStatus((STRING)_ConversionStatus)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BonusConversion_QRY_IsConversionStatus((STRING)_BonusConversionStatus)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+THEN
+DB_NOOP(1);
+
+IF
+CharacterStatusApplied(_Player, _ConversionStatus, _)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 0)
+THEN
+ObjectSetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled");
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+
+//Other gear with the same conversion
+IF
+CharacterStatusAttempt(_Player, _ConversionStatus, _)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+THEN
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+
+IF
+CharacterStatusRemoved(_Player, _ConversionStatus, _)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+AND
+NOT LLWEAPONEX_BonusConversion_QRY_CanConvertBonuses(_Player)
+THEN
+RemoveStatus(_Player, _BonusConversionStatus);
+ObjectClearFlag(_Player, "LLWEAPONEX_BonusConversionEnabled");
+
+IF
+ItemEquipped(_Item, _Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+THEN
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+
+IF
+ItemUnEquipped(_Item, _Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+THEN
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+
+IF
+CharacterStatusApplied(_Player, _Status, _)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+AND
+NOT LLWEAPONEX_BonusConversion_QRY_IsConversionStatus(_Status)
+AND
+GetStatusType(_Status, "CONSUME")
+THEN
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+
+IF
+CharacterStatusRemoved(_Player, _Status, _)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+AND
+NOT LLWEAPONEX_BonusConversion_QRY_IsConversionStatus(_Status)
+AND
+GetStatusType(_Status, "CONSUME")
+THEN
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+
+QRY
+LLWEAPONEX_BonusConversion_Internal_QRY_BonusChanged((CHARACTERGUID)_Player, (STRING)_StatToCheck, "Attribute", (STRING)_BonusConversionStatus)
+AND
+HasActiveStatus(_Player, _BonusConversionStatus, 0)
+AND
+CharacterGetBaseAttribute(_Player, _StatToCheck, _Base)
+AND
+CharacterGetAttribute(_Player, _StatToCheck, _Current)
+AND
+IntegerSubtract(_Current, _Base, _Bonus)
+AND
+_Bonus > 0
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BonusConversion_Internal_QRY_BonusChanged((CHARACTERGUID)_Player, (STRING)_StatToCheck, "Attribute", (STRING)_BonusConversionStatus)
+AND
+HasActiveStatus(_Player, _BonusConversionStatus, 1)
+AND
+//LLWEAPONEX_BonusConversion_Internal_QRY_BonusDetected_DebugStats(_Player, _StatToCheck)
+AND
+DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _BonusValue, _OriginalValue)
+AND
+CharacterGetAttribute(_Player, _StatToCheck, _Current)
+AND
+IntegerSubtract(_OriginalValue, _Current, _Difference)
+AND
+_Difference != _BonusValue
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BonusConversion_Internal_QRY_BonusChanged((CHARACTERGUID)_Player, (STRING)_StatToCheck, "Ability", (STRING)_BonusConversionStatus)
+AND
+HasActiveStatus(_Player, _BonusConversionStatus, 0)
+AND
+CharacterGetBaseAbility(_Player, _StatToCheck, _Base)
+AND
+CharacterGetAbility(_Player, _StatToCheck, _Current)
+AND
+IntegerSubtract(_Current, _Base, _Bonus)
+AND
+_Bonus > 0
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BonusConversion_Internal_QRY_BonusChanged((CHARACTERGUID)_Player, (STRING)_StatToCheck, "Ability", (STRING)_BonusConversionStatus)
+AND
+HasActiveStatus(_Player, _BonusConversionStatus, 1)
+AND
+DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _BonusValue, _OriginalValue)
+AND
+CharacterGetAbility(_Player, _StatToCheck, _Current)
+AND
+IntegerSubtract(_OriginalValue, _Current, _Difference)
+AND
+_Difference != _BonusValue
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BonusConversion_Internal_QRY_BonusDetected_DebugStats((CHARACTERGUID)_Player, (STRING)_StatToCheck)
+AND
+CharacterGetAttribute(_Player, _StatToCheck, _Current)
+AND
+DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _BonusValue, _OriginalValue)
+AND
+IntegertoString(_Current, _CurrentStr)
+AND
+IntegertoString(_BonusValue, _BonusStr)
+AND
+IntegertoString(_OriginalValue, _OriginalStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:DebugStats] Attribute [",_StatToCheck,"] Current[",_CurrentStr,"] Original[",_OriginalStr,"] Bonus[",_BonusStr,"]");
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _TimerName)
+THEN
+ProcObjectTimerCancel(_Player, _TimerName);
+ProcObjectTimer(_Player, _TimerName, 250);
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+HasActiveStatus(_Player, _ConversionStatus, 1)
+AND
+NOT DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _)
+AND
+LLWEAPONEX_BonusConversion_Internal_QRY_BonusChanged(_Player, _StatToCheck, _Type, _BonusConversionStatus)
+AND
+StringConcatenate("LLWEAPONEX_Commands_CheckForBonusConversion_", _ConversionStatus, _TimerName)
+THEN
+DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _ConversionStatus, _TimerName);
+RemoveStatus(_Player, _BonusConversionStatus);
+ProcObjectTimerCancel(_Player, _TimerName);
+ProcObjectTimer(_Player, _TimerName, 250);
+//END_REGION
+
+//REGION DEBUG
+IF
+CharacterStatusAttempt(_Character, _Status, _Causee)
+AND
+String(_Causee, _Cause)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
+
+IF
+CharacterStatusApplied(_Character, _Status, _Causee)
+AND
+String(_Causee, _Cause)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
+
+IF
+CharacterStatusRemoved(_Character, _Status, _Causee)
+AND
+String(_Causee, _Cause)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

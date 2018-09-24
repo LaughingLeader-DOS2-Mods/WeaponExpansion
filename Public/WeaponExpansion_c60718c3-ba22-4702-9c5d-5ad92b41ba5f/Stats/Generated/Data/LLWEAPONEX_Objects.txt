@@ -103,6 +103,13 @@ data "ObjectCategory" "LLWEAPONEX_Kevin_Transformed"
 data "RootTemplate" "91e93327-df56-4727-9763-6572f72c5fcb"
 data "Value" "412"
 
+new entry "WPN_LLWEAPONEX_Test"
+type "Object"
+using "WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin"
+data "ObjectCategory" "LLWEAPONEX_Kevin_Transformed"
+data "RootTemplate" "91e93327-df56-4727-9763-6572f72c5fcb"
+data "Value" "412"
+
 new entry "WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil"
 type "Object"
 using "WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin"

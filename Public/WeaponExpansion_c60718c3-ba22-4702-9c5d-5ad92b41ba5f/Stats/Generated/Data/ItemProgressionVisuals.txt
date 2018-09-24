@@ -4,7 +4,7 @@ add levelgroup 0,0,"All"
 add rootgroup "e1bda904-93c2-4f6f-8136-1a547279fd1f",""
 add namegroup "WPN_LLWEAPONEX_Fist","",""
 
-new itemgroup "WPN_LLWEAPONEX_Quarterstaff_2H"
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Wood_2H"
 
 add levelgroup 1,8,"Common"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
@@ -23,6 +23,60 @@ add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
 
 add levelgroup 9,13,"Common"
+add rootgroup "9fd67817-bea6-4bc2-8ecf-6fab75d65c7f",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood2","",""
+
+add levelgroup 9,13,"Uncommon"
+add rootgroup "9fd67817-bea6-4bc2-8ecf-6fab75d65c7f",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood2","Cool",""
+
+add levelgroup 9,13,"Rare"
+add rootgroup "9fd67817-bea6-4bc2-8ecf-6fab75d65c7f",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Rare","",""
+
+add levelgroup 9,13,"Epic"
+add rootgroup "9fd67817-bea6-4bc2-8ecf-6fab75d65c7f",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
+
+add levelgroup 14,30,"Common"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood","",""
+
+add levelgroup 14,30,"Uncommon"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood","Cool",""
+
+add levelgroup 14,30,"Rare"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Rare","",""
+
+add levelgroup 14,30,"Epic"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
+
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Metal_2H"
+
+add levelgroup 0,3,"All"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
+
+add levelgroup 4,8,"Common"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Metal","",""
+
+add levelgroup 4,8,"Uncommon"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Metal","Cool",""
+
+add levelgroup 4,8,"Rare"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Rare","",""
+
+add levelgroup 4,8,"Epic"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
+
+add levelgroup 9,13,"Common"
 add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Metal","",""
 
@@ -38,7 +92,7 @@ add levelgroup 9,13,"Epic"
 add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
 
-new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff"
+new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood"
 
 add levelgroup 0,0,"All"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
