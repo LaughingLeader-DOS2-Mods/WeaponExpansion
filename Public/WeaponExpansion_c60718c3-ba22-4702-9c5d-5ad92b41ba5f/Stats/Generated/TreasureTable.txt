@@ -297,11 +297,12 @@ object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails",1,0,0,0,0,0,
 
 new treasuretable "LLWEAPONEX_Debug_GenerationTest"
 new subtable "10,10"
-object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,1,1,1,0,0
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,1,1,1,1,0,0
 new subtable "10,10"
 object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,1,1,0,0
 new subtable "10,10"
 object category "T_ST_LLWEAPONEX_RodsNormal",1,1,1,1,1,1,0,0
 new subtable "10,10"
 object category "LLWEAPONEX_Greatbow",1,1,1,1,1,1,0,0
-
+new subtable "-5"
+object category "I_WPN_Staff_Fire",1,1,1,1,1,1,0,0

@@ -254,7 +254,7 @@ QRY
 LLWEAPONEX_BonusConversion_Internal_QRY_BonusChanged((CHARACTERGUID)_Player, (STRING)_StatToCheck, "Attribute", (STRING)_BonusConversionStatus)
 AND
 HasActiveStatus(_Player, _BonusConversionStatus, 1)
-AND
+//AND
 //LLWEAPONEX_BonusConversion_Internal_QRY_BonusDetected_DebugStats(_Player, _StatToCheck)
 AND
 DB_LLWEAPONEX_BonusConversion_Bonus(_Player, _StatToCheck, _BonusValue, _OriginalValue)
