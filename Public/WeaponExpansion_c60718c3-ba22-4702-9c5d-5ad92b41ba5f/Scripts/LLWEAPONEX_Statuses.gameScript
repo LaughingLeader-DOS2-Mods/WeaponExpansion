@@ -79,7 +79,7 @@ IF "c1&c2&c3"
 	GetStatusTurns(_Character, BURNING, _BurningTurns)
 	CharacterGetStatusSourceCharacter(_Character, BURNING, _Source)
 THEN
-	CharacterApplyStatus(_Target, BURNING, _BurningTurns, 1, _Source)
+	CharacterApplyStatus(_Character, BURNING, _BurningTurns, 1, _Source)
 ENDIF
 
 /*

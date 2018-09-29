@@ -1,0 +1,85 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Runeblades_InitSettings();
+KBSECTION
+PROC
+LLWEAPONEX_Runeblades_InitSettings()
+THEN
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING");
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR");
+
+PROC
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus)
+THEN
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus, 2);
+
+PROC
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus, (INTEGER)_RegisterSecond)
+AND
+StringConcatenate(_BaseStatus, "_DAMAGE1", _BonusDamageStatus)
+THEN
+DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_BaseStatus, _BonusDamageStatus, "");
+
+PROC
+LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus, 2)
+AND
+DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_BaseStatus, _BonusDamageStatus1, _EmptyStatus)
+AND
+StringConcatenate(_BaseStatus, "_DAMAGE2", _BonusDamageStatus2)
+THEN
+NOT DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_BaseStatus, _BonusDamageStatus1, _EmptyStatus);
+DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_BaseStatus, _BonusDamageStatus1, _BonusDamageStatus2);
+
+IF
+CharacterStatusApplied(_Character, _Status, _)
+AND
+DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_Status, _BonusDamage1, _BonusDamage2)
+AND
+GetStatusTurns(_Character, _Status, _TurnsInt)
+AND
+Real(_TurnsInt, _TurnsReal)
+AND
+RealProduct(_TurnsReal, 6.0, _Duration)
+THEN
+LLWEAPONEX_Runeblades_ApplyBonusDamageStatus(_Character, _BonusDamage1, _Duration);
+LLWEAPONEX_Runeblades_ApplyBonusDamageStatus(_Character, _BonusDamage2, _Duration);
+
+PROC
+LLWEAPONEX_Runeblades_ApplyBonusDamageStatus((CHARACTERGUID)_Character, (STRING)_Status, (REAL)_Duration)
+AND
+_Status != ""
+THEN
+ApplyStatus(_Character, _Status, _Duration, 0);
+
+IF
+CharacterStatusRemoved(_Character, _Status, _)
+AND
+DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_Status, _BonusDamage1, _BonusDamage2)
+THEN
+LLWEAPONEX_Runeblades_RemoveBonusDamageStatus(_Character, _BonusDamage1);
+LLWEAPONEX_Runeblades_RemoveBonusDamageStatus(_Character, _BonusDamage2);
+
+PROC
+LLWEAPONEX_Runeblades_RemoveBonusDamageStatus((CHARACTERGUID)_Character, (STRING)_Status)
+AND
+_Status != ""
+THEN
+RemoveStatus(_Character, _Status);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

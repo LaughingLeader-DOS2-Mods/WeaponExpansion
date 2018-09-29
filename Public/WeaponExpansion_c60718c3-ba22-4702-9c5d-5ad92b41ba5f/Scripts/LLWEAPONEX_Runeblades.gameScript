@@ -168,31 +168,38 @@ THEN
 		ENDIF
 	ENDIF	
 	
-	IF "c1&c2"
+	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS)
 	THEN
-		IF "c1"
-			GetVar(_Attacks, _Character, "LLWEAPONEX_BloodPlusAttacks")
+		StatusText(_Source, "Increasing combo")
+		
+		IF "!c1"
+			GetVar(_IntVar, _Source, "LLWEAPONEX_BloodPlusAttacks")
 		THEN
-			Add(_Attacks, 1)
-			IF "c1|c2"
-				IsEqual(_Attacks, 2)
-				IsGreaterThen(_Attacks, 2)
-			THEN
-				Set(_Attacks, 0)
-				CharacterAddToInventory(_Source, "WPN_LLWEAPONEX_Throwing_BloodBall", 1)
-			ENDIF
+			Set(_IntVar, 0)
+		ENDIF
+		
+		Add(_IntVar, 1)
+		IF "c1|c2"
+			IsEqual(_IntVar, 2)
+			IsGreaterThen(_IntVar, 2)
+		THEN
+			SetVar(_Source, "LLWEAPONEX_BloodPlusAttacks", INT:0)
+			CharacterAddToInventory(_Source, "WPN_LLWEAPONEX_Throwing_BloodBall", 1)
+			StatusText(_Source, "Added Blood Ball?")
+		ELSE
+			SetVar(_Source, "LLWEAPONEX_BloodPlusAttacks", _IntVar)
 		ENDIF
 	ENDIF
 	
-	IF "c1&c2"
+	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
 	THEN
 		GetRandomBetween(_Ran, 0, 99)
 		IF "c1|c2|c3"
 			IsTagged(_Target, "UNDEAD")
 			IsTagged(_Target, "UNDEAD_BEAST")
-			CharacterHasTalent(_Target, ZOMBIE)
+			CharacterHasTalent(_Target, Zombie)
 		THEN
 			CharacterApplyStatus(_Target, LLWEAPONEX_UNDEAD_BONUS_DAMAGE, 0, 0, _Source)
 			IF "c1"
@@ -207,7 +214,7 @@ THEN
 		ENDIF
 	ENDIF
 	
-	IF "c1&c2"
+	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR)
 	THEN
 		CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA, 1, 0, _Source)
@@ -230,7 +237,7 @@ VARS
 ON
 	OnCharacterEvent(_Character, "LLWEAPONEX_Events_RemoveBloodAirRegenAura")
 ACTIONS
-	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA, null, 0)
+	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA, null, 0)
 
 EVENT LLWEAPONEX_Runeblade_Contamination_Removal
 VARS
@@ -272,7 +279,7 @@ ENDIF
 	ELIF "!c1"
 		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
 	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, 1, 0, _ContaminationSource
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, 1, 0, _ContaminationSource)
 	ENDIF
 ENDIF
 
