@@ -330,6 +330,7 @@ data "Damage Multiplier" "65"
 data "Damage Range" "10"
 data "AreaRadius" "2"
 data "SkillProperties" "Ignite"
+data "TargetConditions" "Character;!Ally"
 
 new entry "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails"
 type "SkillData"

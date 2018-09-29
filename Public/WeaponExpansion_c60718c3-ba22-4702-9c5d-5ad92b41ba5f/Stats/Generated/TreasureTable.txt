@@ -65,7 +65,7 @@ new treasuretable "LLWEAPONEX_CheatRuneblades"
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,0,0,0,0,0,0
 new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Runeblade_Water_1H",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,0,0,0,0,0,0
 new subtable "-1"
@@ -79,7 +79,7 @@ new treasuretable "LLWEAPONEX_CheatRunebladesNormal"
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,1,0,0,0,0,0,0
 new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Runeblade_Water_1H",1,1,0,0,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,1,0,0,0,0,0,0
 new subtable "-1"
@@ -93,7 +93,7 @@ new treasuretable "LLWEAPONEX_CheatRunebladesUncommon"
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,1,0,0,0,0,0
 new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,1,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Runeblade_Water_1H",1,0,1,0,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,1,0,0,0,0,0
 new subtable "-1"
@@ -107,7 +107,7 @@ new treasuretable "LLWEAPONEX_CheatRunebladesRare"
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,0,1,0,0,0,0
 new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,0,1,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Runeblade_Water_1H",1,0,0,1,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,0,1,0,0,0,0
 new subtable "-1"
@@ -121,7 +121,7 @@ new treasuretable "LLWEAPONEX_CheatRunebladesEpic"
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Fire_1H",1,0,0,0,1,0,0,0
 new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Runeblade_Ice_1H",1,0,0,0,1,0,0,0
+object category "I_WPN_LLWEAPONEX_Runeblade_Water_1H",1,0,0,0,1,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Runeblade_Earth_1H",1,0,0,0,1,0,0,0
 new subtable "-1"
@@ -193,7 +193,7 @@ object category "LLWEAPONEX_Rods_Poison",1,0,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_RunebladesNormal"
 new subtable "1,1"
 object category "LLWEAPONEX_Runeblade_Fire",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Runeblade_Ice",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Runeblade_Water",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Runeblade_Earth",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Runeblade_Poison",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Runeblade_Air",1,1,0,0,0,0,0,0

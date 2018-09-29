@@ -12,7 +12,8 @@ VARS
 ON
 	OnCharacterStatusAttempt(_Player, LLWEAPONEX_KEVIN_RETURNED)
 ACTIONS
-IF "c1&c2&c3"
+IF "!c1&c2&c3&c4"
+	HasFlag(_Player, "LLWEAPONEX_Kevin_IgnoreEnergy")
 	ItemGetFromInventory(_Kevin, _Player, "", "LLWEAPONEX_KevinThePetRock", 0)
 	GetVar(_Current, _Kevin, "LLWEAPONEX_Kevin_CurrentEnergy")
 	GetVar(_Max, _Kevin, "LLWEAPONEX_Kevin_MaxEnergy")

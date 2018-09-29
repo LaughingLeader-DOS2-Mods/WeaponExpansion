@@ -30,6 +30,7 @@ THEN
 CharacterStatusText(_Attacker, "Played Sound?");
 CharacterPlayHUDSoundResource(_Attacker, e090d876-ca0c-47ab-b3a9-b246e35fbf93);
 
+/*
 PROC
 LLWEAPONEX_OnBasicAttack((CHARACTERGUID)_Attacker, (GUIDSTRING)_Defender)
 AND
@@ -47,6 +48,7 @@ AND
 IsTagged(_Weapon, "LLWEAPONEX_Metal", 0)
 THEN
 CharacterStatusText(_Attacker, "Not tagged with [LLWEAPONEX_Metal]");
+*/
 EXITSECTION
 
 ENDEXITSECTION
