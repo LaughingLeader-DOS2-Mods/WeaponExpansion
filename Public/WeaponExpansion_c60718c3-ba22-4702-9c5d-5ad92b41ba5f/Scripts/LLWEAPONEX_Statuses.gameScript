@@ -66,6 +66,22 @@ THEN
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 1, _Source)
 ENDIF
 
+EVENT LLWEAPONEX_Tar_BurningBypass
+VARS
+	CHARACTER:_Character
+	CHARACTER:_Source
+	INT:_BurningTurns
+ON
+	OnCharacterStatusAttempt(_Character, BURNING)
+ACTIONS
+IF "c1&c2&c3"
+	CharacterHasStatus(_Character, LLWEAPONEX_RUNEBLADE_TARRED)
+	GetStatusTurns(_Character, BURNING, _BurningTurns)
+	CharacterGetStatusSourceCharacter(_Character, BURNING, _Source)
+THEN
+	CharacterApplyStatus(_Target, BURNING, _BurningTurns, 1, _Source)
+ENDIF
+
 /*
 EVENT LLWEAPONEX_Kevin_MiniExplosion
 VARS

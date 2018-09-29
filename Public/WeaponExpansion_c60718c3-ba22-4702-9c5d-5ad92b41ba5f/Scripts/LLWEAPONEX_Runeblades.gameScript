@@ -1,11 +1,17 @@
 INIT
-	INT:%LLWEAPONEX_Runeblade_Earth_Chance = 21
-	INT:%LLWEAPONEX_Runeblade_Air_Chance = 11
-	INT:%LLWEAPONEX_Runeblade_Air_Chance_Wet = 51
-	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 41
-	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet = 81
-	INT:%LLWEAPONEX_Runeblade_Water_Chance = 51
-	INT:%LLWEAPONEX_Runeblade_Explosion_Chance = 81
+	INT:%LLWEAPONEX_Runeblade_Earth_Chance = 19
+	INT:%LLWEAPONEX_Runeblade_Air_Chance = 9
+	INT:%LLWEAPONEX_Runeblade_Air_Chance_Wet = 49
+	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 39
+	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet = 79
+	INT:%LLWEAPONEX_Runeblade_Water_Chance = 49
+	INT:%LLWEAPONEX_Runeblade_Explosion_Chance = 79
+	INT:%LLWEAPONEX_Runeblade_Lava_Chance = 59
+	INT:%LLWEAPONEX_Runeblade_Tar_Chance = 39
+	INT:%LLWEAPONEX_Runeblade_BloodDisease_Chance = 39
+	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance = 9
+	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead = 49
+	
 	INT:%LLWEAPONEX_Runeblade_ComboRune_Turns = 2
 EVENTS
 
@@ -14,6 +20,7 @@ VARS
 	CHARACTER:_Target
 	CHARACTER:_Source
 	INT:_Ran
+	INT:_IntVar
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_RUNEBLADE_APPLY_STATUS)
 ACTIONS
@@ -33,7 +40,12 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
 	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_LAVA_EXPLODE, 0, 0, _Source)
+		GetRandomBetween(_Ran, 0, 99)
+		IF "c1"
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Lava_Chance)
+		THEN
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_LAVA_EXPLODE, 0, 0, _Source)
+		ENDIF
 	ENDIF
 	
 	IF "c1"
@@ -125,14 +137,100 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
 	THEN
+		GetRandomBetween(_Ran, 0, 99)
 		IF "c1"
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Explosion_Chance)
 		THEN
 			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_EXPLODE, 0, 0, _Source)
 		ENDIF
+	ENDIF	
+	
+	IF "c1"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR)
+	THEN
+		GetRandomBetween(_Ran, 0, 99)
+		IF "c1"
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Tar_Chance)
+		THEN
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_TARRED, 2, 0, _Source)
+		ENDIF
+	ENDIF
+	
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
+		CharacterIsEnemy(_Target, _Source)
+	THEN
+		GetRandomBetween(_Ran, 0, 99)
+		IF "c1"
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodDisease_Chance)
+		THEN
+			CharacterApplyStatus(_Target, INFECTIOUS_DISEASED, 0, 0, _Source)
+		ENDIF
+	ENDIF	
+	
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS)
+	THEN
+		IF "c1"
+			GetVar(_Attacks, _Character, "LLWEAPONEX_BloodPlusAttacks")
+		THEN
+			Add(_Attacks, 1)
+			IF "c1|c2"
+				IsEqual(_Attacks, 2)
+				IsGreaterThen(_Attacks, 2)
+			THEN
+				Set(_Attacks, 0)
+				CharacterAddToInventory(_Source, "WPN_LLWEAPONEX_Throwing_BloodBall", 1)
+			ENDIF
+		ENDIF
+	ENDIF
+	
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
+	THEN
+		GetRandomBetween(_Ran, 0, 99)
+		IF "c1|c2|c3"
+			IsTagged(_Target, "UNDEAD")
+			IsTagged(_Target, "UNDEAD_BEAST")
+			CharacterHasTalent(_Target, ZOMBIE)
+		THEN
+			CharacterApplyStatus(_Target, LLWEAPONEX_UNDEAD_BONUS_DAMAGE, 0, 0, _Source)
+			IF "c1"
+				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead)
+			THEN
+				CharacterApplyStatus(_Target, ENTANGLED, 1, 0, _Source)
+			ENDIF
+		ELIF "c1"
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodEarth_Chance)
+		THEN
+			CharacterApplyStatus(_Target, ENTANGLED, 1, 0, _Source)
+		ENDIF
+	ENDIF
+	
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR)
+	THEN
+		CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA, 1, 0, _Source)
 	ENDIF
 ENDIF
 
+EVENT LLWEAPONEX_Runeblade_BloodStorm_RemoveAura_Start
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStatusApplied(_Character, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA)
+ACTIONS
+	SetVar(_Character, "LeaderLib_Timer_CompleteEvent", STRING:"LLWEAPONEX_Events_RemoveBloodAirRegenAura")
+	SetVar(_Character, "LeaderLib_Timer_Delay", INT:500)
+	CharacterEvent(_Character, "LeaderLib_Commands_StartObjectTimer")
+	
+EVENT LLWEAPONEX_Runeblade_BloodStorm_RemoveAura_End
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_Events_RemoveBloodAirRegenAura")
+ACTIONS
+	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA, null, 0)
 
 EVENT LLWEAPONEX_Runeblade_Contamination_Removal
 VARS
@@ -143,7 +241,7 @@ ACTIONS
 IF "c1"
 	CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
 THEN
-	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
+	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, null, 0)
 ENDIF
 
 EVENT LLWEAPONEX_Runeblade_Contamination_Spread
@@ -174,7 +272,7 @@ ENDIF
 	ELIF "!c1"
 		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
 	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, 1, 0, _ContaminationSource)
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, 1, 0, _ContaminationSource
 	ENDIF
 ENDIF
 
@@ -256,7 +354,7 @@ THEN
 		IsTagged(_Runeblade, "LLWEAPONEX_Runeblade_Chaos")
 	THEN
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_INFUSION)
+		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE)
@@ -604,7 +702,8 @@ ACTIONS
 IF "c1"
 	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 THEN
-	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_INFUSION)
+	SetVar(_Character, "LLWEAPONEX_BloodPlusAttacks", INT:0)
+	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
