@@ -155,7 +155,7 @@ add name "Old Runeblade of Earth",""
 add name "Worn Runeblade of Earth",""
 add namecool "Runeblade of Earth",""
 
-new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Rare_Normal"
+new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Rare"
 add name "Boulderblade",""
 add name "Earthenblade",""
 add name "Mountain Cleaver",""
