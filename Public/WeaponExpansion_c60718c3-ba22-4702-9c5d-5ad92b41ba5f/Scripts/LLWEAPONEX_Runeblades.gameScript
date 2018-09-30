@@ -7,6 +7,8 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Dust_Chance = 30
 	INT:%LLWEAPONEX_Runeblade_Earth_Chance = 20
 	INT:%LLWEAPONEX_Runeblade_Explosion_Chance = 80
+	INT:%LLWEAPONEX_Runeblade_Gas_Chance = 50
+	INT:%LLWEAPONEX_Runeblade_Gas_MaxSurfaceTurns = 4
 	INT:%LLWEAPONEX_Runeblade_Lava_Chance = 60
 	INT:%LLWEAPONEX_Runeblade_Tar_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 40
@@ -38,6 +40,12 @@ VARS
 	INT:_IntVar
 	STRING:_Msg
 	FIXEDSTRING:_MsgF
+	SURFACE:_Surface
+	INT:_SurfaceTurns
+	INT:_CellMin
+	INT:_CellMax
+	INT:_GrowMin
+	INT:_GrowMax
 ON
 	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_RandomSet")
 ACTIONS
@@ -129,6 +137,35 @@ THEN
 		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
 	THEN
 		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, 1, 0, _Source)
+	ENDIF
+	
+	IF "c1&!c2&c3"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS)
+		CharacterHasStatus(_Source, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Gas_Chance)
+	THEN
+		IF "c1&c2"
+			GetSurfaceCloudAt(_Target, _Surface)
+			IsEqual(_Surface, SurfacePoisonCloud)
+		THEN
+			StatusText(_Target, "<font color='#f7ba14'>Gas Expansion</font>")
+			Set(_IntVar, 2)
+		ELSE
+			StatusText(_Target, "<font color='#65c900'>Gas Creation</font>")
+			Set(_IntVar, 1)
+		ENDIF
+		
+		Set(_CellMin, 20)
+		Set(_CellMax, 35)
+		Set(_GrowMin, 2)
+		Set(_GrowMax, 5)
+		Multiply(_CellMax, _IntVar)
+		Multiply(_GrowMax, _IntVar)
+
+		CreatePuddleAt(_Target, SurfacePoisonCloud, _CellMin, _CellMax, _GrowMin, _GrowMax, 0.01, 3)
+		CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN, 1, 0, _Source)
+		CharacterPlayEffect(_Target, "RS3_FX_Skills_Earth_Cast_Target_Air_Hand_01", "Dummy_BodyFX")
+		//PlaySound(_Target, "Skill_Earth_Cast_Target_Air_Poison")
 	ENDIF
 	
 	IF "c1"
@@ -288,6 +325,20 @@ IF "c1"
 	CharacterHasStatus(_Character, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN)
 THEN
 	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN)
+ENDIF
+
+EVENT LLWEAPONEX_Runeblade_Gas_Cooldown
+VARS
+	CHARACTER:_Character
+ON
+	OnTurnEnded(_Character, _)
+	OnCharacterStatusRemoved(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS)
+	OnDie(_Character, _, _, _)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Character, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN)
+THEN
+	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN)
 ENDIF
 
 EVENT LLWEAPONEX_Runeblade_Contamination_Removal
