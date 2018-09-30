@@ -76,6 +76,14 @@ THEN
 		ENDIF
 	ENDIF
 	
+	IF "c1&c2&!c3"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
+		CharacterHasStatus(_Target, BURNING)
+		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD, 1, 0, _Source)
+	ENDIF
+	
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	THEN
@@ -134,9 +142,9 @@ THEN
 	IF "c1&c2&!c3"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION)
 		CharacterHasStatus(_Target, POISONED)
-		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
+		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD)
 	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, 1, 0, _Source)
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD, 1, 0, _Source)
 	ENDIF
 	
 	IF "c1&!c2&c3"
@@ -348,40 +356,84 @@ ON
 	OnCharacterStatusRemoved(_Target, POISONED)
 ACTIONS
 IF "c1"
-	CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
+	CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD)
 THEN
-	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
+	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD)
 ENDIF
 
 EVENT LLWEAPONEX_Runeblade_Contamination_Spread
 VARS
 	CHARACTER:_Target
 	CHARACTER:_CheckSource
-	CHARACTER:_ContaminationSource
-	INT:_PoisonedTurns
+	CHARACTER:_RuneSource
+	INT:_Turns
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK)
 ACTIONS
 IF "c1&c2&c3"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK, _CheckSource)
-	CharacterGetStatusSourceCharacter(_CheckSource, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, _ContaminationSource)
-	CharacterIsEnemy(_Target, _ContaminationSource)
+	CharacterGetStatusSourceCharacter(_CheckSource, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD, _RuneSource)
+	CharacterIsEnemy(_Target, _RuneSource)
 THEN
 IF "c1&c2"
-	GetStatusTurns(_CheckSource, POISONED, _PoisonedTurns)
-	IsGreaterThen(_PoisonedTurns, 1)
+	GetStatusTurns(_CheckSource, POISONED, _Turns)
+	IsGreaterThen(_Turns, 1)
 THEN
 ELSE
-	Set(_PoisonedTurns, 1)
+	Set(_Turns, 1)
 ENDIF
 	IF "!c1"
 		CharacterHasStatus(_Target, POISONED)
 	THEN
-		CharacterApplyStatus(_Target, POISONED, _PoisonedTurns, 0, _ContaminationSource)
+		CharacterApplyStatus(_Target, POISONED, _Turns, 0, _RuneSource)
 	ELIF "!c1"
-		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
+		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD)
 	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, 1, 0, _ContaminationSource)
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD, 1, 0, _RuneSource)
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_Runeblade_Heatburst_Removal
+VARS
+	CHARACTER:_Target
+ON
+	OnCharacterStatusRemoved(_Target, BURNING)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)
+THEN
+	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)
+ENDIF
+
+EVENT LLWEAPONEX_Runeblade_Heatburst_Spread
+VARS
+	CHARACTER:_Target
+	CHARACTER:_CheckSource
+	CHARACTER:_RuneSource
+	INT:_Turns
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_CHECK)
+ACTIONS
+IF "c1&c2&c3"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_CHECK, _CheckSource)
+	CharacterGetStatusSourceCharacter(_CheckSource, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD, _RuneSource)
+	CharacterIsEnemy(_Target, _RuneSource)
+THEN
+IF "c1&c2"
+	GetStatusTurns(_CheckSource, BURNING, _Turns)
+	IsGreaterThen(_Turns, 1)
+THEN
+ELSE
+	Set(_Turns, 1)
+ENDIF
+	IF "!c1"
+		CharacterHasStatus(_Target, BURNING)
+	THEN
+		CharacterApplyStatus(_Target, BURNING, _Turns, 0, _RuneSource)
+	ELIF "!c1"
+		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD, 1, 0, _RuneSource)
 	ENDIF
 ENDIF
 
@@ -407,7 +459,7 @@ THEN
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS)
-		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE)
+		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR)
 	ENDIF
 	
@@ -430,7 +482,7 @@ THEN
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_INFERNO)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
-		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE)
+		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING)
 		ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE)
 	ENDIF
@@ -537,7 +589,7 @@ THEN
 ELIF "c1"
 	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 THEN
-	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE)
+	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
@@ -659,7 +711,7 @@ THEN
 ELIF "c1"
 	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 THEN
-	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE)
+	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
