@@ -63,7 +63,7 @@ LLWEAPONEX_Runeblades_ApplyBonusDamageStatus((CHARACTERGUID)_Character, (STRING)
 AND
 _Status != ""
 THEN
-ApplyStatus(_Character, _Status, _Duration, 0);
+ApplyStatus(_Character, _Status, _Duration, 0, _Character);
 
 IF
 CharacterStatusRemoved(_Character, _Status, _)
@@ -79,6 +79,18 @@ AND
 _Status != ""
 THEN
 RemoveStatus(_Character, _Status);
+
+IF
+CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Commands_Runeblade_StartRandom")
+AND
+LeaderLib_Random_QRY(99)
+AND
+DB_LeaderLib_Random(_Ran)
+THEN
+NOT DB_LeaderLib_Random(_Ran);
+SetVarInteger(_Source, "LLWEAPONEX_Runeblade_Roll", _Ran);
+CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_RandomSet");
+
 EXITSECTION
 
 ENDEXITSECTION

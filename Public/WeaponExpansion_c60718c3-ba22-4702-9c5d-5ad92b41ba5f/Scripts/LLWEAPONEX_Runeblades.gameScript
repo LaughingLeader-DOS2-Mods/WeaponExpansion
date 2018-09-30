@@ -1,32 +1,53 @@
 INIT
-	INT:%LLWEAPONEX_Runeblade_Earth_Chance = 19
-	INT:%LLWEAPONEX_Runeblade_Air_Chance = 9
-	INT:%LLWEAPONEX_Runeblade_Air_Chance_Wet = 49
-	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 39
-	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet = 79
-	INT:%LLWEAPONEX_Runeblade_Water_Chance = 49
-	INT:%LLWEAPONEX_Runeblade_Explosion_Chance = 79
-	INT:%LLWEAPONEX_Runeblade_Lava_Chance = 59
-	INT:%LLWEAPONEX_Runeblade_Tar_Chance = 39
-	INT:%LLWEAPONEX_Runeblade_BloodDisease_Chance = 39
-	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance = 9
-	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead = 49
+	INT:%LLWEAPONEX_Runeblade_Air_Chance = 10
+	INT:%LLWEAPONEX_Runeblade_Air_Chance_Wet = 50
+	INT:%LLWEAPONEX_Runeblade_BloodDisease_Chance = 40
+	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance = 10
+	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead = 50
+	INT:%LLWEAPONEX_Runeblade_Dust_Chance = 30
+	INT:%LLWEAPONEX_Runeblade_Earth_Chance = 20
+	INT:%LLWEAPONEX_Runeblade_Explosion_Chance = 80
+	INT:%LLWEAPONEX_Runeblade_Lava_Chance = 60
+	INT:%LLWEAPONEX_Runeblade_Tar_Chance = 40
+	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 40
+	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet = 80
+	INT:%LLWEAPONEX_Runeblade_Water_Chance = 50
 	
 	INT:%LLWEAPONEX_Runeblade_ComboRune_Turns = 2
 EVENTS
 
-EVENT LLWEAPONEX_Runeblade_Activated_ApplyStatus
+EVENT LLWEAPONEX_Runeblade_OnHit_StartRolling
 VARS
 	CHARACTER:_Target
 	CHARACTER:_Source
-	INT:_Ran
-	INT:_IntVar
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_RUNEBLADE_APPLY_STATUS)
 ACTIONS
 IF "c1"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_RUNEBLADE_APPLY_STATUS, _Source)
 THEN
+	//Use LeaderLib's Random, since low range randoms aren't so random
+	CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Commands_Runeblade_StartRandom")
+ENDIF
+
+EVENT LLWEAPONEX_Runeblade_OnHit_RollingDone
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+	INT:_Ran
+	INT:_IntVar
+	STRING:_Msg
+	FIXEDSTRING:_MsgF
+ON
+	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_RandomSet")
+ACTIONS
+IF "c1"
+	GetVar(_Ran, _Source, "LLWEAPONEX_Runeblade_Roll")
+THEN
+	Print(_Msg, "Roll: [1]", _Ran)
+	Cast(_MsgF, _Msg)
+	DisplayCombatInfoText(_Source, _MsgF, 2)
+	
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	THEN
@@ -40,7 +61,6 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1"
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Lava_Chance)
 		THEN
@@ -60,7 +80,6 @@ THEN
 		IF "c1"
 			CharacterHasStatus(_Target, CHILLED)
 		THEN
-			GetRandomBetween(_Ran, 0, 99)
 			IF "c1"
 				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Water_Chance)
 			THEN
@@ -74,11 +93,23 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1"
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Earth_Chance)
 		THEN
 			CharacterApplyStatus(_Target, SLOWED, 1, 0, _Source)
+		ENDIF
+	ENDIF
+	
+	IF "c1&!c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
+		CharacterHasStatus(_Source, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN)
+	THEN
+		IF "c1"
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Dust_Chance)
+		THEN
+			ShootLocalConeAt(Cone_LLWEAPONEX_Runeblade_DustBlast, _Source, null, _Target, -1, _Source)
+			CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN, 1, 0, _Source)
+			CharacterPlayEffect(_Source, "LLWEAPONEX_FX_Skills_Runeblade_DustBlast_Cast_01", "")
 		ENDIF
 	ENDIF
 	
@@ -103,7 +134,6 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1&c2"
 			CharacterHasStatus(_Target, WET)
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Air_Chance_Wet)
@@ -118,9 +148,20 @@ THEN
 	ENDIF
 	
 	IF "c1"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION)
+	THEN
+		IF "c1"
+			CharacterHasStatus(_Target, WET)
+		THEN
+			CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
+		ELSE
+			CharacterApplyStatus(_Target, WET, 1, 0, _Source)
+		ENDIF
+	ENDIF
+	
+	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1&c2"
 			CharacterHasStatus(_Target, WET)
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet)
@@ -137,7 +178,6 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1"
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Explosion_Chance)
 		THEN
@@ -148,7 +188,6 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1"
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Tar_Chance)
 		THEN
@@ -160,7 +199,6 @@ THEN
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
 		CharacterIsEnemy(_Target, _Source)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1"
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodDisease_Chance)
 		THEN
@@ -195,7 +233,6 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
 	THEN
-		GetRandomBetween(_Ran, 0, 99)
 		IF "c1|c2|c3"
 			IsTagged(_Target, "UNDEAD")
 			IsTagged(_Target, "UNDEAD_BEAST")
@@ -237,7 +274,21 @@ VARS
 ON
 	OnCharacterEvent(_Character, "LLWEAPONEX_Events_RemoveBloodAirRegenAura")
 ACTIONS
-	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA, null, 0)
+	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA)	
+	
+EVENT LLWEAPONEX_Runeblade_Dust_Cooldown
+VARS
+	CHARACTER:_Character
+ON
+	OnTurnEnded(_Character, _)
+	OnCharacterStatusRemoved(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
+	OnDie(_Character, _, _, _)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Character, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN)
+THEN
+	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN)
+ENDIF
 
 EVENT LLWEAPONEX_Runeblade_Contamination_Removal
 VARS
@@ -248,7 +299,7 @@ ACTIONS
 IF "c1"
 	CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
 THEN
-	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON, null, 0)
+	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_POISON)
 ENDIF
 
 EVENT LLWEAPONEX_Runeblade_Contamination_Spread
@@ -380,7 +431,7 @@ THEN
 				ListGet(_RemoveList, _Index, _RemoveStatus)
 				CharacterHasStatus(_Player, _RemoveStatus)
 			THEN
-				CharacterRemoveStatus(_Player, _RemoveStatus, null, 0)
+				CharacterRemoveStatus(_Player, _RemoveStatus)
 			ENDIF
 		Add(_Index, 1)
 		ENDWHILE
