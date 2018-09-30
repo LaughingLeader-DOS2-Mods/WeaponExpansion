@@ -517,7 +517,7 @@ VARS
 	INT:_Turns
 	INT:_TurnsLeft
 ON
-	OnCharacterStatusRemoved(_Target, "LLWEAPONEX_SOUL_BURN_TICK")
+	OnCharacterStatusRemoved(_Target, LLWEAPONEX_SOUL_BURN_TICK)
 ACTIONS
 IF "!c1"
 	HasFlag(_Target, "LLWEAPONEX_SkipSoulBurnTick")
@@ -563,6 +563,19 @@ THEN
 	ENDIF
 ELSE
 	//StatusText(_Target, "LLWEAPONEX_SkipSoulBurnTick = true")
+ENDIF
+
+EVENT LLWEAPONEX_Runeblade_SoulBurn_Reset
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStatusRemoved(_Character, LLWEAPONEX_SOUL_BURN1)
+	OnDie(_Character, _, _, _)
+ACTIONS
+IF "c1"
+	HasFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick")
+THEN
+	ClearFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick")
 ENDIF
 
 EVENT LLWEAPONEX_Runeblade_Unequipped
@@ -676,58 +689,65 @@ VARS
 	LIST<STATUS>:_RemoveList
 	STATUS:_Result
 	INT:_Turns
+	INT:_TurnsLeft
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 ACTIONS
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	Set(_Turns, null)
 IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 	
@@ -737,58 +757,64 @@ VARS
 	LIST<STATUS>:_RemoveList
 	STATUS:_Result
 	INT:_Turns
+	INT:_TurnsLeft
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 ACTIONS
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 	Set(_Turns, null)
 IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 
@@ -798,58 +824,65 @@ VARS
 	LIST<STATUS>:_RemoveList
 	STATUS:_Result
 	INT:_Turns
+	INT:_TurnsLeft
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 ACTIONS
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	Set(_Turns, null)
 IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_INFERNO)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 	
@@ -859,58 +892,65 @@ VARS
 	LIST<STATUS>:_RemoveList
 	STATUS:_Result
 	INT:_Turns
+	INT:_TurnsLeft
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 ACTIONS
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 	Set(_Turns, null)
 IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 	
@@ -920,58 +960,65 @@ VARS
 	LIST<STATUS>:_RemoveList
 	STATUS:_Result
 	INT:_Turns
+	INT:_TurnsLeft
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 ACTIONS
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	Set(_Turns, null)
 IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 
@@ -981,58 +1028,65 @@ VARS
 	LIST<STATUS>:_RemoveList
 	STATUS:_Result
 	INT:_Turns
+	INT:_TurnsLeft
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 ACTIONS
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 	Set(_Turns, null)
 IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD, _TurnsLeft)
 THEN
 	SetVar(_Character, "LLWEAPONEX_BloodPlusAttacks", INT:0)
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ELIF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
+	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER, _TurnsLeft)
 THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
-	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
+	Set(_Turns, _TurnsLeft)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
