@@ -52,10 +52,11 @@ ACTIONS
 IF "c1"
 	GetVar(_Ran, _Source, "LLWEAPONEX_Runeblade_Roll")
 THEN
+	/*
 	Print(_Msg, "Roll: [1]", _Ran)
 	Cast(_MsgF, _Msg)
 	DisplayCombatInfoText(_Source, _MsgF, 2)
-	
+	*/
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	THEN
@@ -301,6 +302,14 @@ THEN
 	THEN
 		CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_BLOOD_AIR_REGEN_AURA, 1, 0, _Source)
 	ENDIF
+	
+	IF "c1&!c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE)
+		CharacterHasStatus(_Source, LLWEAPONEX_PREVENT_DOUBLE_HITS)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_BLOOD_FIRE_PROC, 0, 0, _Source)
+		CharacterApplyStatus(_Source, LLWEAPONEX_PREVENT_DOUBLE_HITS, 1, 0, _Source)
+	ENDIF
 ENDIF
 
 EVENT LLWEAPONEX_Runeblade_BloodStorm_RemoveAura_Start
@@ -437,6 +446,125 @@ ENDIF
 	ENDIF
 ENDIF
 
+EVENT LLWEAPONEX_Runeblade_SoulBurn_Proc
+VARS
+	CHARACTER:_Target
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Turns
+	INT:_TurnsLeft
+ON
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_RUNEBLADE_BLOOD_FIRE_PROC)
+ACTIONS
+	Set(_Result, null)
+	Set(_Turns, 1)
+	CharacterEvent(_Target, "LLWEAPONEX_Commands_StopSoulBurnTick")
+IF "c1&c2"
+	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN1)
+	GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN1, _TurnsLeft)
+THEN
+	Add(_Turns, _TurnsLeft)
+	Set(_Result, LLWEAPONEX_SOUL_BURN2)
+	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN1)
+ELIF "c1&c2"
+	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN2)
+	GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN2, _TurnsLeft)
+THEN
+	Add(_Turns, _TurnsLeft)
+	Set(_Result, LLWEAPONEX_SOUL_BURN3)
+	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN2)
+ELIF "c1&c2"
+	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN3)
+	GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN3, _TurnsLeft)
+THEN
+	Add(_Turns, _TurnsLeft)
+	Set(_Result, LLWEAPONEX_SOUL_BURN4)
+	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN3)
+ELIF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN4)
+THEN
+	IF "c1"
+		GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN4, _TurnsLeft)
+	THEN
+		Add(_Turns, _TurnsLeft)
+		Clamp(_Turns, 1, 5)
+	ELSE
+		Set(_Turns, 1)
+	ENDIF
+	
+	Set(_Result, LLWEAPONEX_SOUL_BURN5)
+	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN4)
+ELIF "!c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN5)
+THEN
+	Set(_Result, LLWEAPONEX_SOUL_BURN1)
+	Set(_Turns, 1)
+ENDIF
+IF "!c1"
+	IsEqual(_Result, null)
+THEN
+	CharacterEvent(_Target, "LLWEAPONEX_Commands_StartSoulBurnTick")
+ENDIF
+
+RETURN(_RemoveList, _Result, _Turns)
+	
+//Regress the status
+EVENT LLWEAPONEX_Runeblade_SoulBurn_Tick
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+	STATUS:_Result
+	INT:_Turns
+	INT:_TurnsLeft
+ON
+	OnCharacterStatusRemoved(_Target, "LLWEAPONEX_SOUL_BURN_TICK")
+ACTIONS
+IF "!c1"
+	HasFlag(_Target, "LLWEAPONEX_SkipSoulBurnTick")
+THEN
+	Set(_Result, null)
+	Set(_Turns, null)
+	IF "c1&c2&c3"
+		CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN2)
+		GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN2, _TurnsLeft)
+		CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_SOUL_BURN2, _Source)
+	THEN
+		Set(_Turns, _TurnsLeft)
+		Set(_Result, LLWEAPONEX_SOUL_BURN1)
+	ELIF "c1&c2&c3"
+		CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN3)
+		GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN3, _TurnsLeft)
+		CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_SOUL_BURN3, _Source)
+	THEN
+		Set(_Turns, _TurnsLeft)
+		Set(_Result, LLWEAPONEX_SOUL_BURN2)
+	ELIF "c1&c2&c3"
+		CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN4)
+		GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN4, _TurnsLeft)
+		CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_SOUL_BURN4, _Source)
+	THEN
+		Set(_Turns, _TurnsLeft)
+		Set(_Result, LLWEAPONEX_SOUL_BURN3)
+	ELIF "c1&c2&c3"
+		CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN5)
+		GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN5, _TurnsLeft)
+		CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_SOUL_BURN5, _Source)
+	THEN
+		Set(_Turns, _TurnsLeft)
+		Set(_Result, LLWEAPONEX_SOUL_BURN4)
+	ENDIF
+	IF "!c1&!c2&!c3"
+		IsEqual(_Result, null)
+		IsEqual(_Turns, null)
+		IsEqual(_Source, null)
+	THEN
+		CharacterApplyStatus(_Target, _Result, _Turns, 1, _Source)
+		CharacterEvent(_Target, "LLWEAPONEX_Commands_StartSoulBurnTick")
+	ENDIF
+ELSE
+	//StatusText(_Target, "LLWEAPONEX_SkipSoulBurnTick = true")
+ENDIF
+
 EVENT LLWEAPONEX_Runeblade_Unequipped
 VARS
 	CHARACTER:_Player
@@ -541,8 +669,6 @@ THEN
 	ENDIF
 	
 ENDIF
-
-//REGION RUNE_COMBOS
 
 EVENT LLWEAPONEX_Runeblade_Combo_Air
 VARS
@@ -910,4 +1036,3 @@ THEN
 	Set(_Turns, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
-//END_REGION

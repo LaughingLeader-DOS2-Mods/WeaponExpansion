@@ -91,6 +91,42 @@ NOT DB_LeaderLib_Random(_Ran);
 SetVarInteger(_Source, "LLWEAPONEX_Runeblade_Roll", _Ran);
 CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_RandomSet");
 
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_PREVENT_DOUBLE_HITS", _)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_PreventDoubleHits", 500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_PreventDoubleHits")
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_PREVENT_DOUBLE_HITS");
+
+IF
+StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Commands_StartSoulBurnTick")
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_SOUL_BURN1", 0) // Skip since it's at the bottom of the stack
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick");
+ApplyStatus(_Character, "LLWEAPONEX_SOUL_BURN_TICK", 6.0, 1, _Character);
+
+IF
+StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Commands_StopSoulBurnTick")
+THEN
+ObjectSetFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick");
+RemoveStatus(_Character, "LLWEAPONEX_SOUL_BURN_TICK");
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_SOUL_BURN_TICK", _)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick", 1)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_ResetSkipSoulBurnTickTimerFlag", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_ResetSkipSoulBurnTickTimerFlag")
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick");
+
 EXITSECTION
 
 ENDEXITSECTION
