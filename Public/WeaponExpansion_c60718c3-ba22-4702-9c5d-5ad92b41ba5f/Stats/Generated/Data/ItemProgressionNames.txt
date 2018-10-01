@@ -224,6 +224,9 @@ add name "Lucian's Chaos",""
 add name "Abyssal Gaze",""
 add name "Chaos Incarnate",""
 
+new namegroup "WPN_LLWEAPONEX_Runeblade_Unique_2H"
+add name "The Voidbender",""
+
 new namegroup "WPN_LLWEAPONEX_Greatbow_Weak"
 add name "Worn Greatbow",""
 add name "Old Greatbow",""
