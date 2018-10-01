@@ -1,6 +1,7 @@
 INIT
 	INT:%LLWEAPONEX_Runeblade_Air_Chance = 10
 	INT:%LLWEAPONEX_Runeblade_Air_Chance_Wet = 50
+	INT:%LLWEAPONEX_Runeblade_Avalanche_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_BloodDisease_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance = 10
 	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead = 50
@@ -10,6 +11,8 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Gas_Chance = 50
 	INT:%LLWEAPONEX_Runeblade_Gas_MaxSurfaceTurns = 4
 	INT:%LLWEAPONEX_Runeblade_Lava_Chance = 60
+	INT:%LLWEAPONEX_Runeblade_Quake_Chance = 20
+	INT:%LLWEAPONEX_Runeblade_Searing_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_Tar_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet = 80
@@ -67,14 +70,11 @@ THEN
 		CharacterApplyStatus(_Target, BURNING, 2, 0, _Source)
 	ENDIF
 	
-	IF "c1"
+	IF "c1&c2"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Lava_Chance)
 	THEN
-		IF "c1"
-			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Lava_Chance)
-		THEN
-			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_LAVA_EXPLODE, 0, 0, _Source)
-		ENDIF
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_LAVA_EXPLODE, 0, 0, _Source)
 	ENDIF
 	
 	IF "c1&c2&!c3"
@@ -108,13 +108,41 @@ THEN
 	ENDIF
 	
 	IF "c1"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING)
 	THEN
 		IF "c1"
-			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Earth_Chance)
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Searing_Chance)
 		THEN
-			CharacterApplyStatus(_Target, SLOWED, 1, 0, _Source)
+			CharacterApplyStatus(_Target, LLWEAPONEX_WATER_BURN, 2, 0, _Source)
 		ENDIF
+		IF "c1"
+			CharacterHasStatus(_Target, WET)
+		THEN
+			CharacterRemoveStatus(_Target, WET, LLWEAPONEX_EVAPORATE_WATER, 1)
+			CharacterApplyStatus(_Target, LLWEAPONEX_EVAPORATE_WATER, 0, 0, _Source)
+			CharacterApplyStatus(_Target, LLWEAPONEX_EVAPORATE_FIRE, 0, 0, _Source)
+		ENDIF
+	ENDIF
+	
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Avalanche_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOW, 1, 0, _Source)
+	ENDIF
+	
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Earth_Chance)
+	THEN
+		CharacterApplyStatus(_Target, SLOWED, 1, 0, _Source)
+	ENDIF
+	
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Quake_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, 0, 0, _Source)
 	ENDIF
 	
 	IF "c1&!c2"
@@ -769,6 +797,7 @@ THEN
 	Set(_Result, LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE)
 	ListClear(_RemoveList)
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 	Set(_Turns, _TurnsLeft)
 ELIF "c1"
 	GetStatusTurns(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON, _TurnsLeft)
