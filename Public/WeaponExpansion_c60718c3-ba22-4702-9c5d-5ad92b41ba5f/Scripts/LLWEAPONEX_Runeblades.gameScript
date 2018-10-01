@@ -79,9 +79,16 @@ THEN
 	
 	IF "c1&c2&!c3"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
-		CharacterHasStatus(_Target, BURNING)
+		//CharacterHasStatus(_Source, BURNING)
+		GetStatusTurns(_Target, BURNING, _IntVar)
 		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)
 	THEN
+		IF "c1"
+			IsLessThen(_IntVar, 4)
+		THEN
+			Add(_IntVar, 1)
+			CharacterApplyStatus(_Target, BURNING, _IntVar, 1, _Source)
+		ENDIF
 		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD, 1, 0, _Source)
 	ENDIF
 	
@@ -142,7 +149,7 @@ THEN
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE)
 		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Quake_Chance)
 	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, 0, 0, _Source)
+		CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, 1, 0, _Source)
 	ENDIF
 	
 	IF "c1&!c2"
@@ -430,6 +437,7 @@ ENDIF
 	ENDIF
 ENDIF
 
+/*
 EVENT LLWEAPONEX_Runeblade_Heatburst_Removal
 VARS
 	CHARACTER:_Target
@@ -441,7 +449,7 @@ IF "c1"
 THEN
 	CharacterRemoveStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)
 ENDIF
-
+*/
 EVENT LLWEAPONEX_Runeblade_Heatburst_Spread
 VARS
 	CHARACTER:_Target
@@ -460,12 +468,16 @@ IF "c1&c2"
 	GetStatusTurns(_CheckSource, BURNING, _Turns)
 	IsGreaterThen(_Turns, 1)
 THEN
+	//Add(_Turns, 1)
+	//CharacterApplyStatus(_CheckSource, BURNING, _Turns, 1, _RuneSource)
 ELSE
 	Set(_Turns, 1)
 ENDIF
 	IF "!c1"
 		CharacterHasStatus(_Target, BURNING)
 	THEN
+		CharacterPlayEffect(_Target, "LLWEAPONEX_FX_Status_Heatburst_Check_01", "Dummy_BodyFX")
+		SetFlag(_Target, "LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound")
 		CharacterApplyStatus(_Target, BURNING, _Turns, 0, _RuneSource)
 	ELIF "!c1"
 		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)

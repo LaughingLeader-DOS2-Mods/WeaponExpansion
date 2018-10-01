@@ -29,6 +29,9 @@ DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Poison", "Shout_LLWEAP
 DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Water", "Shout_LLWEAPONEX_ActivateRuneblade_Water_DualWield");
 DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Chaos", "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_DualWield");
 
+DB_LLWEAPONEX_Runeblades_StatusSound("LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", "Skill_Fire_Cast_AoE_Air_Fire", 800);
+DB_LLWEAPONEX_Runeblades_FlagSound("LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", "Skill_Fire_Cast_Target_Totem_Fire", 800);
+
 PROC
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus)
 THEN
@@ -196,6 +199,48 @@ IsTagged(_OtherRuneblade, _Tag, 1)
 THEN
 CharacterAddSkill(_Character, _Skill);
 DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingSkill(_Character, _Skill);
+//END_REGION
+
+//REGION SOUNDS
+IF
+CharacterStatusApplied(_Character, _Status, _)
+AND
+DB_LLWEAPONEX_Runeblades_StatusSound(_Status, _Sound, _Delay)
+AND
+NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Status, _)
+AND
+StringConcatenate("LLWEAPONEX_Timers_ResetStatusSound_", _Status, _TimerName)
+THEN
+DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Status, _TimerName);
+PlaySound(_Character, _Sound);
+TimerLaunch(_TimerName, _Delay);
+
+IF
+ObjectFlagSet(_Flag, _Object, _)
+AND
+DB_LLWEAPONEX_Runeblades_FlagSound(_Flag, _Sound, _Delay)
+AND
+NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Flag, _)
+AND
+StringConcatenate("LLWEAPONEX_Timers_ResetStatusSound_", _Flag, _TimerName)
+THEN
+DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Flag, _TimerName);
+PlaySound(_Object, _Sound);
+TimerLaunch(_TimerName, _Delay);
+
+IF
+ObjectFlagSet(_Flag, _Object, _)
+AND
+DB_LLWEAPONEX_Runeblades_FlagSound(_Flag, _Sound, _Delay)
+THEN
+ObjectClearFlag(_Object, _Flag);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_String, _TimerName)
+THEN
+NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_String, _TimerName);
 //END_REGION
 
 EXITSECTION

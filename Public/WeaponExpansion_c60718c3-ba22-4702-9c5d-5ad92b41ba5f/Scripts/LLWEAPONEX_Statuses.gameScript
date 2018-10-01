@@ -56,15 +56,18 @@ EVENT LLWEAPONEX_MagicKnockdownCheck
 VARS
 	CHARACTER:_Target
 	CHARACTER:_Source
+	INT:_Turns
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
 ACTIONS
-IF "c1"
+IF "!c1&c2&c3"
+	CharacterHasStatus(_Target, KNOCKED_DOWN) // Don't force if they're already knocked down
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Source)
+	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Turns)
 THEN
-	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, null, 0)
-	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 1, _Source)
+	CharacterApplyStatus(_Target, KNOCKED_DOWN, _Turns, 1, _Source)
 ENDIF
+	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
 
 EVENT LLWEAPONEX_Tar_BurningBypass
 VARS
