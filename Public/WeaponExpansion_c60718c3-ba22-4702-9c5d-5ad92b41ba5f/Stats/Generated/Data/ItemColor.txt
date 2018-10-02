@@ -1,8 +1,6 @@
+new itemcolor "LLWEAPONEX_RunebladeDefault","b6b6b6","6a5e3e","FF40E0D0"
 new itemcolor "LLWEAPONEX_RunebladeHuman","FFFFD700","FFA9A9A9","FF40E0D0"
-
 new itemcolor "LLWEAPONEX_RunebladeDwarf","ac6d4e","f99246","FF40E0D0"
-
 new itemcolor "LLWEAPONEX_RunebladeLizard","289c04","7d573d","FF40E0D0"
-
 new itemcolor "LLWEAPONEX_RunebladeElf","564333","18692d","FF40E0D0"
-
+new itemcolor "LLWEAPONEX_Runeblade_ChaosEdge","030207","030207","190525"

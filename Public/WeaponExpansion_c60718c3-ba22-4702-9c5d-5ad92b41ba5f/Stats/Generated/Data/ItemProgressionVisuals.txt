@@ -384,11 +384,11 @@ add levelgroup 0,0,"Divine"
 add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
 
-new itemgroup "WPN_LLWEAPONEX_Runeblade_Unique_2H"
+new itemgroup "WPN_LLWEAPONEX_UNIQUE_Runeblade_ChaosEdge_2H"
 
 add levelgroup 0,0,"All"
-add rootgroup "428c023d-a614-49cc-911d-499a6af4cbf5","LLWEAPONEX_RunebladeDwarf"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Unique_2H","",""
+add rootgroup "428c023d-a614-49cc-911d-499a6af4cbf5",""
+add namegroup "WPN_LLWEAPONEX_UNIQUE_Runeblade_ChaosEdge_2H","",""
 
 new itemgroup "WPN_LLWEAPONEX_Greatbows"
 

@@ -243,6 +243,35 @@ THEN
 NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_String, _TimerName);
 //END_REGION
 
+//REGION RUNE_BLOCKING
+IF
+RuneInserted(_Character, _Item, _RuneTemplate, _Slot)
+AND
+StringContains(_RuneTemplate, "LLWEAPONEX_Runeblade_Rune_", 1)
+AND
+IsTagged(_Item, "LLWEAPONEX_Runeblade", 0)
+AND
+GetTemplate(_Item, _ItemTemplate)
+AND
+StringContains(_ItemTemplate, "WPN_", 1)
+THEN
+DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
+LeaderLib_StartCharacterItemTimer(_Character, _Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_Events_RemoveBlockedRune");
+
+IF
+CharacterItemEvent(_Character, _Item, "LLWEAPONEX_Events_RemoveBlockedRune")
+AND
+DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate)
+AND
+LeaderLog_QRY_SetNextOneshotStatus(_Character, "#FF0000", "22")
+AND
+LeaderLog_QRY_Log("STATUS", "*A Runeblade is required to activate the rune*")
+AND
+ItemRemoveRune(_Character, _Item, _Slot, _Rune)
+THEN
+NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION
