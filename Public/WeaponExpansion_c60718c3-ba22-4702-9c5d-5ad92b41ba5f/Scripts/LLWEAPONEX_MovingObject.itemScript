@@ -1,0 +1,76 @@
+INIT
+	ITEM:__Me
+	EXTERN STRING:%LLWEAPONEX_InitEvent = null
+	EXTERN STRING:%LLWEAPONEX_LandEvent = null
+	EXTERN FLOAT:%LLWEAPONEX_Radius = 1.0
+	EXTERN FLOAT:%LLWEAPONEX_Lifetime = 6.0
+	EXTERN FLOAT:%LLWEAPONEX_InitEventDelay = 0.025
+	EXTERN STRING:%LLWEAPONEX_Effect = null
+	EXTERN INT:%LLWEAPONEX_EffectTimerSpeed = 1
+	SKILL:%LLWEAPONEX_ProjectileSkill=null
+	//CHARACTER:%LLWEAPONEX_Caster = null
+EVENTS
+EVENT LLWEAPONEX_InitMovingObject
+ON
+	OnInit()
+ACTIONS
+IF "!c1&!c2"
+	IsEqual(%LLWEAPONEX_InitEvent, null)
+	IsEqual(%LLWEAPONEX_InitEvent, "")
+THEN
+	IF "c1"
+		IsEqual(%LLWEAPONEX_InitEventDelay, 0)
+	THEN
+		ItemEvent(__Me, %LLWEAPONEX_InitEvent)
+	ELSE
+		StartTimer("LLWEAPONEX_Timers_MovingObject_InitEvent", %LLWEAPONEX_InitEventDelay, 0)
+	ENDIF
+ENDIF
+IF "c1"
+	ItemGetSkillId(__Me,%LLWEAPONEX_ProjectileSkill)
+THEN
+ENDIF
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Effect, null)
+THEN
+	SetVar(__Me, "LeaderLib_Timer_CompleteEvent", STRING:"LLWEAPONEX_Events_PlayMovingObjectEffect")
+	SetVar(__Me, "LeaderLib_Timer_Delay", %LLWEAPONEX_EffectTimerSpeed)
+	ItemEvent(__Me, "LeaderLib_Commands_StartObjectTimer")
+ENDIF
+
+EVENT LLWEAPONEX_MovingObject_DelayedInit
+ON
+	OnTimer("LLWEAPONEX_Timers_MovingObject_InitEvent")
+ACTIONS
+	ItemEvent(__Me, %LLWEAPONEX_InitEvent)
+
+EVENT LLWEAPONEX_MovingObject_EffectTick
+ON
+	OnItemEvent(__Me, "LLWEAPONEX_Events_PlayMovingObjectEffect")
+ACTIONS
+IF "!c1"
+	ItemIsDestroyed(__Me)
+THEN
+	PlayEffectAt(__Me, %LLWEAPONEX_Effect)
+	ItemEvent(__Me, "LeaderLib_Commands_StartObjectTimer")
+ENDIF
+
+EVENT LLWEAPONEX_MovingObject_Land
+VARS 
+	INT:_HitObstacle
+	CHARACTER:_Caster	
+ON
+	OnGrenadeLand(_HitObstacle, _Caster)
+ACTIONS
+	ItemEvent(__Me, "LeaderLib_Commands_CancelObjectTimer")
+IF "!c1"
+	IsEqual(%LLWEAPONEX_ProjectileSkill, null)
+THEN
+	ExplodeAt(__Me, %LLWEAPONEX_ProjectileSkill, -1, _Caster)
+ENDIF
+IF "!c1&!c2"
+	IsEqual(%LLWEAPONEX_LandEvent, null)
+	IsEqual(%LLWEAPONEX_LandEvent, "")
+THEN
+	CharacterItemEvent(_Caster, __Me, %LLWEAPONEX_LandEvent)
+ENDIF

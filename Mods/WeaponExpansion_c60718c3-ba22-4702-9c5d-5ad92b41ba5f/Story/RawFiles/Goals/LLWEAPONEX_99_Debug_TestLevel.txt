@@ -8,18 +8,23 @@ StoryEvent(_, "LeaderLib_Initialized")
 AND
 CharacterGetHostCharacter(_Host)
 AND
+NOT CharacterGetEquippedItem(_Host, "Breast", _)
+AND
 CharacterGetEquippedWeapon(_Host, _Weapon)
 AND
 GetTemplate(_Weapon, _Template)
 AND
 StringContains(_Template, "Quarterstaff", 1)
 THEN
-CharacterApplyPreset(_Host, "Rogue_Act2");
+//CharacterApplyPreset(_Host, "Rogue_Act2");
+CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_Rogue_Act2", 0);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")
 AND
 CharacterGetHostCharacter(_Host)
+AND
+NOT CharacterGetEquippedItem(_Host, "Breast", _)
 AND
 CharacterGetEquippedWeapon(_Host, _Weapon)
 AND
@@ -27,12 +32,15 @@ GetTemplate(_Weapon, _Template)
 AND
 StringContains(_Template, "Runeblade", 1)
 THEN
-CharacterApplyPreset(_Host, "Battlemage_Act2");
+//CharacterApplyPreset(_Host, "Battlemage_Act2");
+CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_Battlemage_Act2", 0);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")
 AND
 CharacterGetHostCharacter(_Host)
+AND
+NOT CharacterGetEquippedItem(_Host, "Breast", _)
 AND
 CharacterGetEquippedWeapon(_Host, _Weapon)
 AND
@@ -40,7 +48,8 @@ GetTemplate(_Weapon, _Template)
 AND
 StringContains(_Template, "Rod", 1)
 THEN
-CharacterApplyPreset(_Host, "Wizard_Act2");
+//CharacterApplyPreset(_Host, "Wizard_Act2");
+CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_Wizard_Act2", 0);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")
@@ -49,7 +58,8 @@ CharacterGetHostCharacter(_Host)
 AND
 NOT CharacterGetEquippedWeapon(_Host, _)
 THEN
-CharacterApplyPreset(_Host, "Inquisitor_Act2");
+//CharacterApplyPreset(_Host, "Inquisitor_Act2");
+CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_Inquisitor_Act2", 0);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")
@@ -67,7 +77,7 @@ GetPosition(_Host, _x, _y, _z)
 //AND
 //CreateItemTemplateAtPosition("LOOT_BackPack_A_6c70c298-aa29-418f-a659-f8e0b5f5fa60", _x, _y, _z, _Backpack)
 THEN
-CharacterTransform(_Host, "Humans_Hero_Male_Undead_5ab5d036-4606-4265-962e-c2e4d2d2408b", 0, 1, 0, 0, 0, 1, 0);
+//CharacterTransform(_Host, "Humans_Hero_Male_Undead_5ab5d036-4606-4265-962e-c2e4d2d2408b", 0, 1, 0, 0, 0, 1, 0);
 //MoveAllItemsTo(_Host, _Backpack, 0, 1, 1);
 //ItemRemove(_Backpack);
 CharacterLevelUpTo(_Host, 5);
@@ -95,6 +105,163 @@ AND
 CharacterGetHostCharacter(_Host)
 THEN
 CharacterDieImmediate(_Host, 0, "", _Host);
+
+//REGION STATUSES
+/*
+IF
+CharacterStatusAttempt(_Character, _Status, _Causee)
+AND
+String(_Causee, _Cause)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
+
+IF
+CharacterStatusApplied(_Character, _Status, _Causee)
+AND
+String(_Causee, _Cause)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
+
+IF
+CharacterStatusRemoved(_Character, _Status, _Causee)
+AND
+String(_Causee, _Cause)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
+*/
+//END_REGION
+
+//REGION SKILL_DEBUG
+IF
+CharacterUsedSkill(_Caster, _Skill, _SkillType, _SkillElement)
+AND
+CharacterGetDisplayName(_Caster, _, _Name)
+AND
+LeaderLog_QRY_Log("COMBINE","[",_Name,"] cast skill [",_Skill,"(",_SkillType,",",_SkillElement,")].")
+AND
+DB_LeaderLog_Temp_CombinedString(_LogDetails)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkill] ", _LogDetails);
+
+IF
+CharacterUsedSkillOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+CharacterGetDisplayName(_Caster, _, _Name)
+AND
+GetUUID(_Target, _TargetID)
+AND
+LeaderLog_QRY_Log("COMBINE","[",_Name,"] cast skill [",_Skill,"(",_SkillType,",",_SkillElement,")] on target [", _TargetID, "].")
+AND
+DB_LeaderLog_Temp_CombinedString(_LogDetails)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillOnTarget] ", _LogDetails);
+
+IF
+CharacterUsedSkillAtPosition(_Caster, _XReal, _YReal, _ZReal, _Skill, _SkillType, _SkillElement)
+AND
+Integer(_XReal, _TargetX)
+AND
+Integer(_YReal, _TargetY)
+AND
+Integer(_ZReal, _TargetZ)
+AND
+GetPosition(_Caster, _XCastReal, _YCastReal, _ZCastReal)
+AND
+Integer(_XCastReal, _CastX)
+AND
+Integer(_YCastReal, _CastY)
+AND
+Integer(_ZCastReal, _CastZ)
+AND
+IntegertoString(_TargetX, _TargetXStr)
+AND
+IntegertoString(_TargetY, _TargetYStr)
+AND
+IntegertoString(_TargetZ, _TargetZStr)
+AND
+IntegertoString(_CastX, _CastXStr)
+AND
+IntegertoString(_CastY, _CastYStr)
+AND
+IntegertoString(_CastZ, _CastZStr)
+AND
+CharacterGetDisplayName(_Caster, _, _Name)
+AND
+LeaderLog_QRY_Log("COMBINE","[",_Name,"] cast skill [",_Skill,"(",_SkillType,",",_SkillElement,")] from position [")
+AND
+DB_LeaderLog_Temp_CombinedString(_SkillPrefix)
+AND
+LeaderLog_QRY_ClearCombinedString(_SkillPrefix)
+AND
+LeaderLog_QRY_Log("COMBINE",_CastXStr,",",_CastYStr,",",_CastZStr,"] to target position [")
+AND
+DB_LeaderLog_Temp_CombinedString(_CasterPosition)
+AND
+LeaderLog_QRY_ClearCombinedString(_CasterPosition)
+AND
+LeaderLog_QRY_Log("COMBINE",_TargetXStr,",",_TargetYStr,",",_TargetZStr,"].")
+AND
+DB_LeaderLog_Temp_CombinedString(_TargetPosition)
+AND
+LeaderLog_QRY_ClearCombinedString(_TargetPosition)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillAtPosition] ", _SkillPrefix, _CasterPosition, _TargetPosition);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Caster, (CHARACTERGUID)_Target, _Skill, _SkillType, _SkillElement)
+AND
+CharacterGetDisplayName(_Caster, _, _Name)
+AND
+CharacterGetDisplayName(_Target, _, _TargetName)
+AND
+GetUUID(_Caster, _CasterID)
+AND
+GetUUID(_Target, _TargetID)
+AND
+LeaderLog_QRY_Log("COMBINE"," cast skill [",_Skill,"(",_SkillType,",",_SkillElement,")] on target [",_TargetName,"](",_TargetID,").")
+AND
+DB_LeaderLog_Temp_CombinedString(_LogDetails)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillOnZoneWithTarget] [",_Name,"](",_CasterID,")",_LogDetails);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Caster, (ITEMGUID)_Target, _Skill, _SkillType, _SkillElement)
+AND
+CharacterGetDisplayName(_Caster, _, _Name)
+AND
+GetUUID(_Caster, _CasterID)
+AND
+GetUUID(_Target, _TargetID)
+AND
+LeaderLog_QRY_Log("COMBINE"," cast skill [",_Skill,"(",_SkillType,",",_SkillElement,")] on target [Item](",_TargetID,").")
+AND
+DB_LeaderLog_Temp_CombinedString(_LogDetails)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillOnZoneWithTarget] [",_Name,"](",_CasterID,")",_LogDetails);
+
+IF
+SkillCast(_Caster, _Skill, _SkillType, _SkillElement)
+AND
+CharacterGetDisplayName(_Caster, _, _Name)
+AND
+LeaderLog_QRY_Log("COMBINE","[",_Name,"] cast skill [",_Skill,"(",_SkillType,",",_SkillElement,")]")
+AND
+DB_LeaderLog_Temp_CombinedString(_LogDetails)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:SkillCast] ", _LogDetails);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

@@ -339,35 +339,6 @@ ProcObjectTimerCancel(_Player, _TimerName);
 ProcObjectTimer(_Player, _TimerName, 250);
 //END_REGION
 
-//REGION DEBUG
-IF
-CharacterStatusAttempt(_Character, _Status, _Causee)
-AND
-String(_Causee, _Cause)
-AND
-CharacterGetDisplayName(_Character, _, _Name)
-THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
-
-IF
-CharacterStatusApplied(_Character, _Status, _Causee)
-AND
-String(_Causee, _Cause)
-AND
-CharacterGetDisplayName(_Character, _, _Name)
-THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
-
-IF
-CharacterStatusRemoved(_Character, _Status, _Causee)
-AND
-String(_Causee, _Cause)
-AND
-CharacterGetDisplayName(_Character, _, _Name)
-THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
-//END_REGION
-
 EXITSECTION
 
 ENDEXITSECTION
