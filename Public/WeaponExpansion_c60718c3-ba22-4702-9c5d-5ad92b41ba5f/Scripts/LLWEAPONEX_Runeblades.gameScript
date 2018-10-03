@@ -15,7 +15,7 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Quake_Chance = 20
 	INT:%LLWEAPONEX_Runeblade_Searing_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_Tar_Chance = 40
-	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 40
+	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 20
 	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet = 80
 	INT:%LLWEAPONEX_Runeblade_Water_Chance = 50
 	
@@ -160,19 +160,22 @@ THEN
 		CharacterApplyStatus(_Target, POISONED, 2, 0, _Source)
 	ENDIF
 	
-	IF "c1"
+	IF "c1&!c2"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT)
+		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN)
 	THEN
 		IF "c1&c2"
 			CharacterHasStatus(_Target, WET)
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet)
 		THEN
 			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE, 0, 0, _Source)
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN, 1, 0, _Source)
 		ELIF "!c1&c2"
 			CharacterHasStatus(_Target, WET)
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Thunderbolt_Chance)
 		THEN
 			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE, 0, 0, _Source)
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN, 1, 0, _Source)
 		ENDIF
 	ENDIF
 	

@@ -107,7 +107,6 @@ THEN
 CharacterDieImmediate(_Host, 0, "", _Host);
 
 //REGION STATUSES
-/*
 IF
 CharacterStatusAttempt(_Character, _Status, _Causee)
 AND
@@ -134,7 +133,6 @@ AND
 CharacterGetDisplayName(_Character, _, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
-*/
 //END_REGION
 
 //REGION SKILL_DEBUG

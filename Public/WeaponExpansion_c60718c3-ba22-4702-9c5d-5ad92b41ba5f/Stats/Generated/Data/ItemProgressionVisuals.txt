@@ -390,6 +390,12 @@ add levelgroup 0,0,"All"
 add rootgroup "428c023d-a614-49cc-911d-499a6af4cbf5",""
 add namegroup "WPN_LLWEAPONEX_UNIQUE_Runeblade_ChaosEdge_2H","",""
 
+new itemgroup "LLWEAPONEX_NPC_Goblins_Chaos_1H_01"
+
+add levelgroup 0,0,"All"
+add rootgroup "428c023d-a614-49cc-911d-499a6af4cbf5",""
+add namegroup "WPN_LLWEAPONEX_UNIQUE_Runeblade_ChaosEdge_2H","",""
+
 new itemgroup "WPN_LLWEAPONEX_Greatbows"
 
 add levelgroup 0,10,"Common"

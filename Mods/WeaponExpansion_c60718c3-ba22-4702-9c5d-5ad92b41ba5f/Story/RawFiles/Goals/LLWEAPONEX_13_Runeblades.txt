@@ -145,6 +145,17 @@ THEN
 ObjectClearFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick");
 //END_REGION
 
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE", (CHARACTERGUID)_Cause)
+THEN
+LeaderLib_Skills_UseSkillOnTarget(_Cause, _Character, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", 1, 1);
+/*
+AND
+CharacterGetLevel(_Cause, _Level)
+THEN
+CreateProjectileStrikeAt(_Character, "ProjectileStrike_Stormbolt_Lightning", _Level);
+*/
+
 //REGION DOUBLE_RUNEBLADE_SKILLS
 IF
 ItemUnEquipped(_Runeblade, _Character)

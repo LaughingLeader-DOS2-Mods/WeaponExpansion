@@ -65,12 +65,17 @@ THEN
 IF
 CharacterUsedSkill(_Character, "Projectile_LLWEAPONEX_ChaosSlash", _, _)
 THEN
-DB_LLWEAPONEX_Runeblades_Temp_NextChaosOwner(_Character);
+DB_LLWEAPONEX_Skills_Temp_ChaosSlashCaster(_Character);
+
+IF
+CharacterUsedSkill(_Character, "Projectile_LLWEAPONEX_EnemyChaosSlash", _, _)
+THEN
+DB_LLWEAPONEX_Skills_Temp_ChaosSlashCaster(_Character);
 
 IF
 StoryEvent((ITEMGUID)_MovingObject, "LLWEAPONEX_Commands_StartDrawingChaosSurface")
 AND
-DB_LLWEAPONEX_Runeblades_Temp_NextChaosOwner(_Character)
+DB_LLWEAPONEX_Skills_Temp_ChaosSlashCaster(_Character)
 AND
 GetVarFloat(_MovingObject, "LLWEAPONEX_Radius", _Radius)
 AND
@@ -83,20 +88,46 @@ AND
 DrawSurfaceOnPath(_Character, _MovingObject, _Surface, _Radius, _Lifetime, _SurfaceActionHandle)
 THEN
 NOT DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface);
-NOT DB_LLWEAPONEX_Runeblades_Temp_NextChaosOwner(_Character);
-DB_LLWEAPONEX_Runeblades_Temp_MovingPath(_Character, _MovingObject, _SurfaceActionHandle, _Surface);
+NOT DB_LLWEAPONEX_Skills_Temp_ChaosSlashCaster(_Character);
+DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath(_Character, _MovingObject, _SurfaceActionHandle, _Surface);
 
 IF
 CharacterItemEvent(_Character, _MovingObject, "LLWEAPONEX_Commands_StopDrawingChaosSurface")
 AND
-DB_LLWEAPONEX_Runeblades_Temp_MovingPath(_Character, _MovingObject, _SurfaceActionHandle, _Surface)
+DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath(_Character, _MovingObject, _SurfaceActionHandle, _Surface)
 AND
 GetPosition(_MovingObject, _x, _y, _z)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_MovingPath(_Character, _MovingObject, _SurfaceActionHandle,_Surface);
+NOT DB_LLWEAPONEX_Skills_Temp_ChaosSlicePath(_Character, _MovingObject, _SurfaceActionHandle,_Surface);
 StopDrawSurfaceOnPath(_SurfaceActionHandle);
 ItemDestroy(_MovingObject);
-CreateSurfaceAtPosition(_x, _y, _z, _Surface, 1.0, 6.0);
+CreateSurfaceAtPosition(_x, _y, _z, _Surface, 1.0, 12.0);
+
+IF
+CharacterUsedSkill(_Character, "Rush_LLWEAPONEX_EnemyChaosCharge", _, _)
+AND
+LeaderLib_Array_QRY_Random("LLWEAPONEX_ChaosSurfaces")
+AND
+DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface)
+AND
+DrawSurfaceOnPath(_Character, _Character, _Surface, 0.5, 12.0, _SurfaceActionHandle)
+THEN
+NOT DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface);
+DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing(_Character, _Surface, _SurfaceActionHandle);
+
+IF
+SkillCast(_Character, "Rush_LLWEAPONEX_EnemyChaosCharge", _, _)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StopChaosChargeDrawing", 800);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_StopChaosChargeDrawing")
+AND
+DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing(_Character, _Surface, _SurfaceActionHandle)
+THEN
+NOT DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing(_Character, _Surface, _SurfaceActionHandle);
+StopDrawSurfaceOnPath(_SurfaceActionHandle);
+CreateSurface(_Character, _Surface, 1.0, 12.0);
 EXITSECTION
 
 ENDEXITSECTION

@@ -53,3 +53,11 @@ add equipmentgroup
 add equipment entry "ARM_Metamorph_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_GreatbowPreview"
+
+new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
+add equipmentgroup
+add equipment entry "LLWEAPONEX_NPC_Goblins_Chaos_Grunt_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Terror_A"

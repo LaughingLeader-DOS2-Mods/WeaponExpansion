@@ -55,7 +55,7 @@ data "Icon" "LLWEAPONEX_Status_Rune_Air"
 data "FormatColor" "Air"
 data "StatsId" "Stats_LLWEAPONEX_Activate_Runeblade_Air"
 data "StackId" "Stack_LLWEAPONEX_Activate_Runeblade_Air"
-data "StatusEffectOverrideForItems" "RS3_FX_Items_Weapons_DamageType_Air_Overlay_01_Lvl05"
+data "ApplyEffect" "LLWEAPONEX_FX_Rune_Air_01:Dummy_OverheadFX"
 
 new entry "Stats_LLWEAPONEX_Activate_Runeblade_Air"
 type "Potion"
