@@ -1,0 +1,33 @@
+LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.
+LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power
+LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.
+LLWEAPONEX_DEATH_SENTENCE_BLOCKED_DisplayName	Marked for Death
+LLWEAPONEX_DEATH_SENTENCE_Description	Character has been marked for death.<br>If killed, the character will return as a friendly <font color='#73f6ff'>Revenant<font> for 2 turns.
+LLWEAPONEX_DEATH_SENTENCE_DisplayName	Death Sentence
+LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Damage [1]<br>Projectile_Fireball:Damage [2]		
+LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status		
+LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taking [1] per turn.		
+LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane		
+LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!
+LLWEAPONEX_EVAPORATE_DisplayName	Evaporated
+LLWEAPONEX_FINESSE_TO_STRENGTH_DisplayName	Finesse Conversion - Finesse bonuses are turned into Strength		
+LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target		
+LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.		
+LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging		
+LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!		
+LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed		
+LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.		
+LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound		
+LLWEAPONEX_SOUL_BURN_1_DisplayName	Soul Burn		
+LLWEAPONEX_SOUL_BURN_2_DisplayName	Soul Burn II		
+LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III		
+LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV		
+LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V		
+LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.		
+LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_DisplayName	Strength Conversion - Strength bonuses are turned into Intelligence		
+LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.
+LLWEAPONEX_TARRED_DisplayName	Tarred
+LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.
+LLWEAPONEX_TRIPPING_DisplayName	Tripping		
+LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
+LLWEAPONEX_WATER_BURN_DisplayName	Water Burn

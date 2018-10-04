@@ -1,0 +1,79 @@
+LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR_Description	Character has activated the <font color='#7d71d9'>Air Rune</font> within their <font color='#40E0D0'>Runeblade</font>.<br>Enemies hit have a 10% chance to become <font color='#7d71d9'>Shocked</font> for 1 turn.<br><font color='#4197e2'>Wet increases this chance to 50%.</font>
+LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR_DisplayName	Air Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE_Description	 <font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#7f3d00'>Earth Rune</font></font><br>Enemies hit with a <font color='#40E0D0' size='20'>Runeblade</font> have a <font color='#cfecff'>40% chance to be encased in Snow</font>, lowering <font color='#FF0000'>AP Recovery/Start by [4]</font>, <font color='#FF0000'>Movement Speed by [3]%</font>, and dealing <font color='#4197e2'>Water Damage</font> with a chance to fall down when moving.<br>Adds <font color='#4197e2'>[1]% Water Damage</font> + <font color='#7f3d00'>[2]% Earth Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE_DisplayName	Avalanche Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR_Description	 <font size='18'><font color='#8B0000'>Blood Rune</font> + <font color='#7d71d9'>Air Rune</font></font><br>Melee attacks restore [1] to allies within [2].<br>Adds <font color='#8B0000'>[3]% Piercing Damage</font> + <font color='#7d71d9'>[4]% Air Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR_DisplayName	Bloodstorm Rune
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_Description	Character has absorbed <font color='#8B0000'>Blood</font> after activating the <font color='#b823cb'>Chaos Rune</font> within their <font color='#40E0D0'>Runeblade</font>.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_DisplayName	Blood Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH_Description	 <font size='18'><font color='#8B0000'>Blood Rune</font> + <font color='#7f3d00'>Earth Rune</font></font><br>Deals [1]% additional damage when attacking Undead, with a 10% chance to <font color='#b823cb'>Entangle</font> enemies hit for 1 turn.<br>Entangle's chance is increased to 50% when attacking the Undead.<br>Adds <font color='#8B0000'>[2]% Piercing Damage</font> + <font color='#7d71d9'>[3]% Earth Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH_DisplayName	Grave Rune
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE_Description	 <font size='18'><font color='#8B0000'>Blood Rune</font> + <font color='#fe6e27'>Fire Rune</font></font><br>Applies Death Resist for 1 turn.<br>Enemies attacked with a <font color='#40E0D0'>Runeblade</font> are inflicted with <font color='#73f6ff'>Soul Burn</font>, taking damage on apply and turn, and lowering <font color='#f7ba14'>Elemental Resistance</font> by 5% per stack (5 max).<br>Adds <font color='#8B0000'>[2]% Piercing Damage</font> + <font color='#fe6e27'>[3]% Fire Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE_DisplayName	Soul Rune
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS_Description	<font size='18'><font color='#8B0000'>Blood Rune</font> x 2</font><br>Every third basic attack grants a <font color='#8B0000'>Congealed Blood Ball</font>, which can be thrown to create a blood surface.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS_DisplayName	Necromantic Rune
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON_Description	 <font size='18'><font color='#8B0000'>Blood Rune</font> + <font color='#65c900'>Poison Rune</font></font><br>40% chance to apply <font color='#00aa00'>Infectious Disease</font> when attacking an enemy.<br>Adds <font color='#8B0000'>[1]% Piercing Damage</font> + <font color='#65c900'>[2]% Poison Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON_DisplayName	Disease Rune
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER_Description	 <font size='18'><font color='#8B0000'>Blood Rune</font> + <font color='#4197e2'>Water Rune</font></font><br>Regenerates [1] <font color='#8B0000'>Vitality</font> on application and turn.<br>Adds <font color='#8B0000'>[2]% Piercing Damage</font> + <font color='#4197e2'>[3]% Water Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER_DisplayName	Lifeblood Rune
+LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS_Description	Character has activated the <font color='#b823cb'>Chaos Rune</font> within their <font color='#40E0D0'>Runeblade</font>, and is absorbing an element in the environment.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS_DisplayName	Absorb Surface Element		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION_Description	<font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#7d71d9'>Air Rune</font></font><br>Applies <font color='#7d71d9'>Shocked</font> to <font color='#4197e2'>Wet</font> enemies for 1 turn, otherwise <font color='#4197e2'>Wet</font> is applied for 1 turn.<br>Adds  <font color='#4197e2'>[1]% Water Damage</font> + <font color='#7d71d9'>[2]% Air Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION_DisplayName	Conduction Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION_Description	 <font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#65c900'>Poison Rune</font></font><br>If an attacked target is <font color='#00aa00'>Poisoned</font>, the poison spreads to nearby enemies within [1]m.<br>If the enemies the poison spreads to are already <font color='#00aa00'>Poisoned</font>, the contamination continues.<br>Adds <font color='#4197e2'>[2]% Water Damage</font>  <font color='#8B0000'>[3]% Poison Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION_DisplayName	Contamination Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_DEATH_Description	Character has activated the <font color='#b823cb'>Death Rune</font> from absorbing <font color='#2EFE9A'>Deathfog</font>.<br>Enemies hit with a <font color='#40E0D0'>Runeblade</font> are marked with <font color='#2EFE9A'>Death Sentence</font> for 1 turn, and cannot be marked again for 4 turns.<br>When an enemy with <font color='#2EFE9A'>Death Sentence</font> dies, they return as a friendly <font color='#73f6ff'>Revenant<font> for 2 turns.<br><font color='#73f6ff'>Revenants<font> do 50% less damage, and cannot be created from bosses.</font>
+LLWEAPONEX_ACTIVATE_RUNEBLADE_DEATH_DisplayName	Water Rune	
+LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST_Description	<font size='18'><font color='#7f3d00'>Earth Rune</font> + <font color='#7d71d9'>Air Rune</font></font><br>30% chance on hit to shoot out a cone of dust in a 7m range, applying <font color='#d040d0'>Blinded</font> to enemies for 1 turn and dealing minor <font color='#7f3d00'>Earth Damage</font>.<br><font color='#fcd203'>Dust Blast can only occur once per turn.</font><br>Adds <font color='#7f3d00'>[1]% Earth Damage</font> + <font color='#7d71d9'>[2]% Air Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST_DisplayName	Dust Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH_Description	Character has activated the <font color='#7f3d00'>Earth Rune</font> within their <font color='#40E0D0'>Runeblade</font>.<br>Enemies hit have a 20% chance to be <font color='#a8a8a8'>Slowed</font> for 1 turn.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH_DisplayName	Earth Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE_Description	 <font size='18'><font color='#fe6e27'>Fire Rune</font> + <font color='#65c900'>Poison Rune</font></font><br>40% chance to cause a <font color='#fe6e27'>Mini-Explosion</font> on attack, dealing <font color='#fe6e27'>[2]% Fire Damage</font> in a 2m range.<br>Adds <font color='#fe6e27'>[1]% Fire Damage</font> + <font color='#65c900'>[2]% Poison Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE_DisplayName	Explosion Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE_Description	Character has activated the <font color='#fe6e27'>Fire Rune</font> within their <font color='#40E0D0'>Runeblade</font>.<br>Applies <font color='#fe6e27'>Burning</font> to enemies hit for 1 turn.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE_DisplayName	Fire Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS_Description	<font size='18'><font color='#65c900'>Poison Rune</font> + <font color='#7d71d9'>Air Rune</font></font><br>On attack, 50% chance to spawn or <font color='#f7ba14'>expand</font> a <font color='#65c900'>Gas Cloud</font> on the target (once per turn).<br>Adds <font color='#65c900'>[1]% Poison Damage</font> + <font color='#7d71d9'>[2]% Air Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS_DisplayName	Gas Rune
+LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST_Description	 <font size='18'><font color='#fe6e27'>Fire Rune</font> + <font color='#7d71d9'>Air Rune</font></font><br>If an attacked target is <font color='#fe6e27'>Burning</font>, the a heatburst burns enemies within [1]m.<br>If a heatburst target is already <font color='#fe6e27'>Burning</font>, the heatburst continues.<br>Adds <font color='#fe6e27'>[2]% Fire Damage</font> + <font color='#7d71d9'>[3]% Air Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST_DisplayName	Heatburst Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE_Description	<font size='18'><font color='#4197e2'>Water Rune</font> x 2</font><br>Applies <font color='#4197e2'>Chilled</font> to enemies hit for 1 turn. Enemies already <font color='#4197e2'>Chilled</font> have a 20% chance to become <font color='#73f6ff'>Frozen</font>.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE_DisplayName	Ice Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_INFERNO_Description	<font size='18'><font color='#fe6e27'>Fire Rune</font> x 2</font><br>Applies <font color='#fe6e27'>Burning</font> to enemies hit for 2 turns.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_INFERNO_DisplayName	Inferno Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA_Description	 <font size='18'><font color='#fe6e27'>Fire Rune</font> + <font color='#7f3d00'>Earth Rune</font></font><br>Enemies hit have a 60% chance to be bombarded with <font color='#FF4000'>Lava</font>, dealing <font color='#fe6e27'>Fire Damage</font>, forking up to [1] times, and creating fire surfaces.<br>Adds <font color='#fe6e27'>[2]% Fire Damage</font> + <font color='#7f3d00'>[3]% Earth Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA_DisplayName	Lava Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON_Description	Character has activated the <font color='#65c900'>Poison Rune</font> within their <font color='#40E0D0'>Runeblade</font>.<br>Applies <font color='#00aa00'>Poisoned</font> to enemies hit for 1 turn.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON_DisplayName	Poison Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE_Description	<font size='18'><font color='#7f3d00'>Earth Rune</font> x 2</font><br>Enemies hit have a 20% chance to be <font color='#c80030'>Slammed</font> for 1 turn.<br><font color='#FFD700'>Slammed is a magic-based knockdown.</font>
+LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE_DisplayName	Quake Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING_Description	 <font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#fe6e27'>Fire Rune</font></font><br>Enemies hit with a <font color='#40E0D0' size='20'>Runeblade</font> have a 40% chance to get a <font color='#4197e2'>Water</font> <font color='#fe6e27'>Burn</font> for 2 turns, dealing <font color='#4197e2'>Water</font> + <font color='#fe6e27'>Fire</font> Damage per turn.<br><font color='#4197e2'>Wet</font> enemies have their moisture <font color='#f7ba14'>Evaporated</font>, dealing damage and removing <font color='#4197e2'>Wet</font>.<br>Adds <font color='#4197e2'>[1]% Water Damage</font> + <font color='#fe6e27'>[2]% Fire Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING_DisplayName	Searing Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR_Description	 <font size='18'><font color='#7f3d00'>Earth Rune</font> + <font color='#65c900'>Poison Rune</font></font><br>Enemies hit have a 40% chance to be encased in <font color='#9a6a46>Tar</font> for 2 turns, lowering Movement Speed by [1] and Fire Resistance by [2].<br><font color='#9a6a46>Tar</font> makes <font color='#fe6e27'>Burning</font> bypass armor checks.<br>Adds <font color='#7f3d00'>[3]% Earth Damage</font> + <font color='#65c900'>[4]% Poison Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR_DisplayName	Tar Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT_Description	<font size='18'><font color='#7d71d9'>Air Rune</font> x 2</font><br>Enemies hit have a 20% chance to be struck by a <font color='#7d71d9'>Thunderbolt</font>, dealing <font color='#7d71d9'>Air Damage</font> and chaining <font color='#7d71d9'>Lightning</font> to enemies within 8m.<br><font color='#4197e2'>Wet increases this chance to 80%.</font><font color='#f7ba14' size='20'>Enemies can only be struck once per turn.</font>
+LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT_DisplayName	Thunderbolt Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM_Description	<font size='18'><font color='#65c900'>Poison Rune</font> x 2</font><br>Applies <font color='#00aa00'>Poisoned</font> to enemies hit for 2 turns.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM_DisplayName	Venom Rune		
+LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER_Description	Character has activated the <font color='#4197e2'>Water Rune</font> within their <font color='#40E0D0'>Runeblade</font>.<br>Applies <font color='#4197e2'>Wet</font> to enemies hit for 1 turn.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER_DisplayName	Water Rune		
+LLWEAPONEX_RUNEBLADE_APPLY_STATUS_DisplayName	Runic Blade - Activated runes apply effects on attack
+LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOWED_Description	Character is encased in snow, and takes [1] when moving, with a chance to fall down.
+LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOWED_DisplayName	Snowed
+LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK_Description	Character is being contaminated!
+LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK_DisplayName	Contaminating
+LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_Description	Character is spreading <font color='#00aa00'>Poisoned</font> to nearby allies!
+LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD_DisplayName	Contaminated
+LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN_Description	The <font color='#F7BE81'>Dust Rune</font> is cooling down, and is unable to trigger another <font color='#8A4B08'>Dust Blast</font>.
+LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN_DisplayName	Dust Blast Cooldown
+LLWEAPONEX_RUNEBLADE_EXPLODE_Description	Boom!
+LLWEAPONEX_RUNEBLADE_EXPLODE_DisplayName	Mini-Explosion			
+LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN_Description	The <font color='#81ab00'>Gas Rune</font> is cooling down, and is unable to trigger another <font color='#65c900'>Gas Creation</font> or <font color='#f7ba14'>Gas Expansion</font>.
+LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN_DisplayName	Gas Cooldown
+LLWEAPONEX_RUNEBLADE_HEATBURST_CHECK_Description	Character is <font color='#fe6e27'>Burning</font> from a hot wind!
+LLWEAPONEX_RUNEBLADE_HEATBURST_CHECK_DisplayName	Heated
+LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD_Description	Character is spreading <font color='#fe6e27'>Burning</font> to nearby allies!
+LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD_DisplayName	Heatburst
+LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN_Description	The <font color='#7d71d9'>Thunderbolt Rune</font> is unable to trigger another <font color='#7d71d9'>Thunderbolt Strike</font> on this character. 
+LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN_DisplayName	Can't Strike Twice
+LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE_Description	Character has been... Thunderstruck!
+LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE_DisplayName	Thunderbolt Strike

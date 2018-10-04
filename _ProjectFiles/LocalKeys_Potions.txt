@@ -1,0 +1,13 @@
+Stats_LLWEAPONEX_ChaosPower	Chaotic Power
+Stats_LLWEAPONEX_DragonGrounded	Dragon's Bane
+Stats_LLWEAPONEX_FinesseStrengthBonus	Finesse Conversion
+Stats_LLWEAPONEX_IntelligenceFinesseBonus	Intelligence Conversion
+Stats_LLWEAPONEX_Revenant	Revenant
+Stats_LLWEAPONEX_SoulBurn1	Soul Burn
+Stats_LLWEAPONEX_SoulBurn2	Soul Burn II
+Stats_LLWEAPONEX_SoulBurn3	Soul Burn III
+Stats_LLWEAPONEX_SoulBurn4	Soul Burn IV
+Stats_LLWEAPONEX_SoulBurn5	Soul Burn V
+Stats_LLWEAPONEX_StrengthIntelligenceBonus	Strength Conversion
+Stats_LLWEAPONEX_Tarred	Tarred
+Stats_LLWEAPONEX_WaterBurn	Water Burn
