@@ -393,6 +393,7 @@ data "Icon" ""
 data "StackId" "Stack_LLWEAPONEX_ContaminationCheck"
 data "StatusEffect" "RS3_FX_GP_Status_Poisoned_DoT_01:Dummy_BodyFX"
 data "ForceOverhead" "No"
+data "ApplyEffect" "RS3_FX_GP_Impacts_Totem_Poison_01:Dummy_BodyFX"
 
 new entry "LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD"
 type "StatusData"

@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+//REGION TARRED_BURNING_BYPASS
 IF
 CharacterStatusAttempt(_Character, "BURNING", _Source)
 AND
@@ -41,7 +42,9 @@ AND
 DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character)
 THEN
 NOT DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character);
+//END_REGION
 
+//REGION CHAOS_SURFACE_STATUSES
 IF
 CharacterStatusAttempt(_Character, "LLWEAPONEX_RANDOM_SURFACE_SMALL", _)
 AND
@@ -89,7 +92,9 @@ DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surfac
 THEN
 NOT DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface);
 CreateSurface(_Character, _Surface, 2.0, 12.0);
+//END_REGION
 
+//REGION DEATH_SENTENCE
 IF
 CharacterStatusApplied(_Enemy, "LLWEAPONEX_DEATH_SENTENCE", (CHARACTERGUID)_Source)
 THEN
@@ -224,6 +229,29 @@ GetPosition(_Revenant, _x, _y, _z)
 THEN
 NOT  DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source);
 TransformSurfaceAtPosition(_x, _y, _z, "Vaporize", "Ground", 1.0, 12.0, _Source);
+//END_REGION
+
+//REGION BEAMS
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK", (CHARACTERGUID)_AuraCharacter)
+THEN
+PlayBeamEffect(_AuraCharacter, _Character, "RS3_FX_GP_Beams_AcidBeam_01", "Dummy_BodyFX", "Dummy_BodyFX");
+
+/*
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK", (CHARACTERGUID)_AuraCharacter)
+THEN
+DB_LLWEAPONEX_Statuses_Temp_AuraBeamEffects(_Character, _AuraCharacter, "POISONED", "RS3_FX_GP_Beams_AcidBeam_01");
+
+IF
+CharacterStatusApplied(_Character, _Status, _)
+AND
+DB_LLWEAPONEX_Statuses_Temp_AuraBeamEffects(_Character, _AuraCharacter, _Status, _BeamEffect)
+THEN
+PlayBeamEffect(_AuraCharacter, _Target, _BeamEffect, "Dummy_BodyFX", "Dummy_BodyFX");
+NOT DB_LLWEAPONEX_Statuses_Temp_AuraBeamEffects(_Character, _AuraCharacter, _Status, _BeamEffect);
+*/
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
