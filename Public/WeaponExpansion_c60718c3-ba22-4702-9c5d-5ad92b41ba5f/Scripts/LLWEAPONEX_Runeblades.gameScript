@@ -7,7 +7,7 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead = 50
 	INT:%LLWEAPONEX_Runeblade_Dust_Chance = 30
 	INT:%LLWEAPONEX_Runeblade_Earth_Chance = 20
-	INT:%LLWEAPONEX_Runeblade_Explosion_Chance = 35
+	INT:%LLWEAPONEX_Runeblade_Explosion_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_Gas_Chance = 50
 	INT:%LLWEAPONEX_Runeblade_Gas_MaxSurfaceTurns = 4
 	INT:%LLWEAPONEX_Runeblade_Ice_Chance = 20
@@ -171,7 +171,7 @@ THEN
 	IF "!c1"
 		HasFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface")
 	THEN
-		CreateSurfaceAt(_Character, SurfaceNone, 1.0, 0, _Character)
+		CreateSurfaceAt(_Character, SurfaceNone, _Radius, 0, _Character)
 	ENDIF
 ELSE
 	StatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune")
@@ -354,7 +354,7 @@ THEN
 			IF "c1"
 				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Tar_Chance)
 			THEN
-				CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_TARRED, 2, 0, _Source)
+				CharacterApplyStatus(_Target, LLWEAPONEX_TARRED, 2, 0, _Source)
 			ENDIF
 		ENDIF
 	

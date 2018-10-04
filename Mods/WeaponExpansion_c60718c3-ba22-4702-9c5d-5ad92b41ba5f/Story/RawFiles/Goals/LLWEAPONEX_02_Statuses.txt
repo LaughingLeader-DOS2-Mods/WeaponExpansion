@@ -4,6 +4,45 @@ INITSECTION
 
 KBSECTION
 IF
+CharacterStatusAttempt(_Character, "BURNING", _Source)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_TARRED", 1)
+AND
+HasActiveStatus(_Character, "BURNING", 0)
+AND
+NOT DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character)
+AND
+GetStatusTurns(_Character, "BURNING", _Turns)
+AND
+Real(_Turns, _TurnsR)
+AND
+RealProduct(_TurnsR, 6.0, _Duration)
+THEN
+ApplyStatus(_Character, "BURNING", _Duration, 1, _Source);
+DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character);
+
+IF
+CharacterStatusAttempt(_Character, "BURNING", _Source)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_TARRED", 1)
+AND
+HasActiveStatus(_Character, "BURNING", 0)
+AND
+NOT DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character)
+AND
+NOT GetStatusTurns(_Character, "BURNING", _)
+THEN
+ApplyStatus(_Character, "BURNING", 12.0, 1, _Source);
+DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character);
+
+IF
+CharacterStatusApplied(_Character, "BURNING", _Source)
+AND
+DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character)
+THEN
+NOT DB_LLWEAPONEX_Statuses_Temp_BurningBypassedArmor(_Character);
+
+IF
 CharacterStatusAttempt(_Character, "LLWEAPONEX_RANDOM_SURFACE_SMALL", _)
 AND
 GetStatusTurns(_Character, "LLWEAPONEX_RANDOM_SURFACE_SMALL", _Turns)

@@ -69,21 +69,31 @@ THEN
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
 
+/*
 EVENT LLWEAPONEX_Tar_BurningBypass
 VARS
 	CHARACTER:_Character
 	CHARACTER:_Source
 	INT:_BurningTurns
 ON
-	OnCharacterStatusAttempt(_Character, BURNING)
+	OnCharacterCharacterEvent(_Character, "LLWEAPONEX_Burning_ArmorBypass")
 ACTIONS
-IF "c1&c2&c3"
-	CharacterHasStatus(_Character, LLWEAPONEX_RUNEBLADE_TARRED)
-	GetStatusTurns(_Character, BURNING, _BurningTurns)
-	CharacterGetStatusSourceCharacter(_Character, BURNING, _Source)
+IF "c1&c2"
+	GetStatusTurns(_Character, LLWEAPONEX_TARRED, _BurningTurns)
 THEN
+	IF "c1"
+		CharacterGetStatusSourceCharacter(_Character, BURNING, _Source)
+	THEN
+	
+	ENDIF
+	IF "c1"
+		IsLessThen(_BurningTurns, 1)
+	THEN
+		Set(_BurningTurns, 1)
+	ENDIF
 	CharacterApplyStatus(_Character, BURNING, _BurningTurns, 1, _Source)
 ENDIF
+*/
 
 EVENT LLWEAPONEX_DeathSentence_Block
 VARS
