@@ -224,6 +224,9 @@ add name "Lucian's Chaos",""
 add name "Abyssal Gaze",""
 add name "Chaos Incarnate",""
 
+new namegroup "WPN_LLWEAPONEX_Runeblade_Debug_1H"
+add name "Debug Runeblade",""
+
 new namegroup "WPN_LLWEAPONEX_UNIQUE_Runeblade_ChaosEdge_2H"
 add name "Chaos Edge",""
 

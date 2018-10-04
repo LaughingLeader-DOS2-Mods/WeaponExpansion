@@ -6,3 +6,16 @@ INIT
 	USING LLWEAPONEX_ThrowingWeapons
 	USING LLWEAPONEX_Runeblades
 EVENTS
+
+EVENT LLWEAPONEX_Debug_ReviveRevenantTest
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterItemEvent(_Character, _, "LLWEAPONEX_Debug_ReviveRevenantTest")
+ACTIONS
+IF "c1"
+	CharacterIsDead(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, 1)
+THEN
+	CharacterResurrect(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, 50)
+ENDIF
+	CharacterApplyStatus(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, LLWEAPONEX_DEATH_SENTENCE, -1, 1, _Character)

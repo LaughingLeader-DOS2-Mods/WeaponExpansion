@@ -44,6 +44,76 @@ StringConcatenate(_BaseStatus, "_DAMAGE1", _BonusDamageStatus)
 THEN
 DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_BaseStatus, _BonusDamageStatus, "");
 
+//REGION CHAOS_RUNE_SURFACE_ABSORB
+QRY
+LLWEAPONEX_Runeblades_QRY_IsInSurface((CHARACTERGUID)_Character, (STRING)_Surface)
+AND
+GetSurfaceGroundAt(_Character, _Surface)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Runeblades_QRY_IsInSurface((CHARACTERGUID)_Character, (STRING)_Surface)
+AND
+GetSurfaceCloudAt(_Character, _Surface)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval((CHARACTERGUID)_Character, (STRING)_Surface)
+AND
+StringContains(_Surface, "Blessed", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval((STRING)_Surface)
+AND
+StringContains(_Surface, "Cursed", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval((STRING)_Surface)
+AND
+StringContains(_Surface, "Purified", 1)
+THEN
+DB_NOOP(1);
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
+AND
+DB_LeaderLib_Surfaces(_Index, _Surface)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 0)
+AND
+LLWEAPONEX_Runeblades_QRY_IsInSurface(_Character, _Surface)
+AND
+LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval(_Surface)
+THEN
+ObjectSetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface");
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 1)
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface");
+//CharacterStatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune");
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
+AND
+DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Character)
+AND
+GetPosition(_Character, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Character);
+//RemoveStatus(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS");
+PlayEffect(_Character, "RS3_FX_Skills_Void_Cast_Weapon_Hand_01", "Dummy_CastFX");
+CreateSurfaceAtPosition(_x, _y, _z, "SurfaceNone", 1.0, -1.0); // Absorb the surface
+//END_REGION
+
 //REGION BONUS_DAMAGE_STATUS
 PROC
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus, 2)

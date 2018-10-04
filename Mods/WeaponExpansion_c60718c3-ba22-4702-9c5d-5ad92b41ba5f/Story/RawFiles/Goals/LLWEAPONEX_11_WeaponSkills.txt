@@ -25,35 +25,6 @@ IntegertoString(_Index, _IndexStr)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponSkills:Settings] Added surface [",_Surface,"] to array [LLWEAPONEX_ChaosSurfaces] at index [",_IndexStr,"]");
 
-IF
-CharacterUsedSkill(_Character, "Shout_LLWEAPONEX_ActivateRuneblade_Chaos", _, _)
-THEN
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CheckForChaosRuneFailure", 3000);
-
-IF
-CharacterStatusApplied(_Character, _Status, _)
-AND
-DB_ObjectTimer(_Character, _, "LLWEAPONEX_Timers_CheckForChaosRuneFailure")
-AND
-_Status != "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS"
-AND
-StringContains(_Status, "LLWEAPONEX_ACTIVATE_RUNEBLADE_", 1)
-AND
-GetPosition(_Character, _x, _y, _z)
-THEN
-ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_CheckForChaosRuneFailure");
-RemoveStatus(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS");
-PlayEffect(_Character, "RS3_FX_Skills_Void_Cast_Weapon_Hand_01", "Dummy_CastFX");
-CreateSurfaceAtPosition(_x, _y, _z, "SurfaceNone", 1.0, -1.0); // Absorb the surface
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_CheckForChaosRuneFailure")
-AND
-LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS")
-THEN
-CharacterStatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune");
-RemoveStatus(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS");
-
 /*
 IF
 CharacterUsedSkillAtPosition(_Character, _tx, _ty, _tz, "Cone_LLWEAPONEX_DebugConeSkill", _, _)

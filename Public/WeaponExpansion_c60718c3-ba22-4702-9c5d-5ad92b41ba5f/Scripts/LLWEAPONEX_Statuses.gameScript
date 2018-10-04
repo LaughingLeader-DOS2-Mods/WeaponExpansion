@@ -85,6 +85,18 @@ THEN
 	CharacterApplyStatus(_Character, BURNING, _BurningTurns, 1, _Source)
 ENDIF
 
+EVENT LLWEAPONEX_DeathSentence_Block
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStatusRemoved(_Character, LLWEAPONEX_DEATH_SENTENCE)
+ACTIONS
+IF "!c1"
+	CharacterIsDead(_Character, 1)
+THEN
+	CharacterApplyStatus(_Character, LLWEAPONEX_DEATH_SENTENCE_BLOCKED, 4, 0)
+ENDIF
+
 /*
 EVENT LLWEAPONEX_Kevin_MiniExplosion
 VARS
