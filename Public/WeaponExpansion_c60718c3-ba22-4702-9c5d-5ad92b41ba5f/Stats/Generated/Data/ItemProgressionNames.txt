@@ -224,6 +224,12 @@ add name "Lucian's Chaos",""
 add name "Abyssal Gaze",""
 add name "Chaos Incarnate",""
 
+new namegroup "WPN_LLWEAPONEX_Runeblade_Inert_1H"
+add name "Inert Runeblade",""
+add namecool "Ancient Inert Runeblade",""
+add namecool "Old Inert Runeblade",""
+add namecool "Inert Runeblade, Family Heirloom",""
+
 new namegroup "WPN_LLWEAPONEX_Runeblade_Debug_1H"
 add name "Debug Runeblade",""
 

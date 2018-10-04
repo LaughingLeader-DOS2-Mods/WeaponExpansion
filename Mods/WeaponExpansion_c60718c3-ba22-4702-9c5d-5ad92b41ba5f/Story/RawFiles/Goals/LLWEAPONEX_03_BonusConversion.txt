@@ -13,6 +13,10 @@ DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_STRENGTH_TO_INTELLIG
 DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_FINESSE_TO_STRENGTH", "Finesse", "Strength", "LLWEAPONEX_FINESSE_TO_STRENGTH_BONUS");
 DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_INTELLIGENCE_TO_FINESSE", "Intelligence", "Finesse", "LLWEAPONEX_INTELLIGENCE_TO_FINESSE_BONUS");
 
+DB_LLWEAPONEX_BonusConversion_SoftCap("Attribute", 40);
+DB_LLWEAPONEX_BonusConversion_SoftCap("CombatAbility", 10);
+DB_LLWEAPONEX_BonusConversion_SoftCap("CivilAbility", 5);
+
 PROC
 LLWEAPONEX_BonusConversion_SetBonus((CHARACTERGUID)_Player, (STRING)_StatToCheck, (INTEGER)_BonusValue, (INTEGER)_FullValue)
 AND
@@ -75,7 +79,21 @@ IntegerSubtract(_Current, _Base, _Bonus)
 AND
 _Bonus > 0
 THEN
+LLWEAPONEX_BonusConversion_SetBonus(_Player, _StatToCheck, _Bonus, _Current);
 LLWEAPONEX_BonusConversion_Internal_ApplyBonus(_Player, _BonusConversionStatus, _Bonus);
+
+QRY
+LLWEAPONEX_BonusConversion_QRY_BonusCapReached((CHARACTERGUID)_Player, (STRING)_StatType, (INTEGER)_Base, (INTEGER)_Bonus)
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_BonusConversionCapDisabled")
+AND
+DB_LLWEAPONEX_BonusConversion_SoftCap(_StatType, _SoftCap)
+AND
+IntegerSum(_Base, _Bonus, _NextAmount)
+AND
+_NextAmount > _SoftCap
+THEN
+DB_NOOP(1);
 
 PROC
 LLWEAPONEX_BonusConversion_Internal_ApplyBonus((CHARACTERGUID)_Player, (STRING)_BonusConversionStatus, (INTEGER)_Bonus)

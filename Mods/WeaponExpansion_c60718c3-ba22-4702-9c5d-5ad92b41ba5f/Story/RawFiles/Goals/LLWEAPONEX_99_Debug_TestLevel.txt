@@ -66,7 +66,7 @@ StoryEvent(_, "LeaderLib_Initialized")
 THEN
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_000_e026f14d-6290-44c2-989d-984d03a42274, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_001_270b72cd-90e5-480e-9677-69040d566818, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
-ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_003_04f86498-9349-4f8b-88c8-f52a246fc12e, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
+ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_Undead_000_84f397e8-fdea-427a-a0ba-2e367a7eae45, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")

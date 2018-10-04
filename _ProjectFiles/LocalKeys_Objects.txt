@@ -1,0 +1,6 @@
+LOOT_Rune_LLWEAPONEX_Runeblade_Air	Air Rune (Runeblade)
+LOOT_Rune_LLWEAPONEX_Runeblade_Chaos	Chaos Rune (Runeblade)
+LOOT_Rune_LLWEAPONEX_Runeblade_Earth	Earth Rune (Runeblade)
+LOOT_Rune_LLWEAPONEX_Runeblade_Fire	Fire Rune (Runeblade)
+LOOT_Rune_LLWEAPONEX_Runeblade_Poison	Poison Rune (Runeblade)
+LOOT_Rune_LLWEAPONEX_Runeblade_Water	Water Rune (Runeblade)

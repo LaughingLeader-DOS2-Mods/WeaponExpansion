@@ -211,11 +211,11 @@ ACTIONS
 IF "c1"
 	GetVar(_Ran, _Source, "LLWEAPONEX_Runeblade_Roll")
 THEN
-	
+	/*
 	Print(_Msg, "Roll: [1]", _Ran)
 	Cast(_MsgF, _Msg)
 	DisplayCombatInfoText(_Source, _MsgF, 2)
-	
+	*/
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	THEN
@@ -673,32 +673,29 @@ ACTIONS
 	Set(_Result, null)
 	Set(_Turns, 1)
 	CharacterEvent(_Target, "LLWEAPONEX_Commands_StopSoulBurnTick")
-IF "c1&c2"
-	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN1)
+IF "c1"
 	GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN1, _TurnsLeft)
 THEN
 	Add(_Turns, _TurnsLeft)
 	Set(_Result, LLWEAPONEX_SOUL_BURN2)
 	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN1)
-ELIF "c1&c2"
-	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN2)
+ELIF "c1"
 	GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN2, _TurnsLeft)
 THEN
 	Add(_Turns, _TurnsLeft)
 	Set(_Result, LLWEAPONEX_SOUL_BURN3)
 	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN2)
-ELIF "c1&c2"
-	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN3)
+ELIF "c1"
 	GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN3, _TurnsLeft)
 THEN
 	Add(_Turns, _TurnsLeft)
 	Set(_Result, LLWEAPONEX_SOUL_BURN4)
 	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN3)
 ELIF "c1"
-	CharacterHasStatus(_Target, LLWEAPONEX_SOUL_BURN4)
+	GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN4, _TurnsLeft)
 THEN
 	IF "c1"
-		GetStatusTurns(_Target, LLWEAPONEX_SOUL_BURN4, _TurnsLeft)
+		IsGreaterThen(_TurnsLeft, 0)
 	THEN
 		Add(_Turns, _TurnsLeft)
 		Clamp(_Turns, 1, 5)
@@ -806,8 +803,9 @@ VARS
 ON
 	OnItemUnequipped(_Player, _Runeblade)
 ACTIONS
-IF "c1"
+IF "c1&!c2"
 	IsTagged(_Runeblade, "LLWEAPONEX_Runeblade")
+	IsTagged(_Runeblade, "LLWEAPONEX_Runeblade_Inert")
 THEN
 	//No Runeblades Equipped
 	IF "(!c1|c1&!c2)&(!c3|c3|!c4)"
