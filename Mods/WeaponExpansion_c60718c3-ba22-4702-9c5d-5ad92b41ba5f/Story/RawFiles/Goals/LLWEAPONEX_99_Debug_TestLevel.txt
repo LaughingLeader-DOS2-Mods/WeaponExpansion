@@ -4,6 +4,26 @@ INITSECTION
 
 KBSECTION
 IF
+TextEventSet("llweap_runepreview")
+AND
+GetTextEventParamString(1, _Preset)
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_LLWEAPONEX_RunicKnight_Debug", 0);
+
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+NOT CharacterGetEquippedItem(_Host, "Breast", _)
+THEN
+//CharacterApplyPreset(_Host, "Rogue_Act2");
+CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_LLWEAPONEX_RunicKnight_Debug", 0);
+
+/*
+IF
 StoryEvent(_, "LeaderLib_Initialized")
 AND
 CharacterGetHostCharacter(_Host)
@@ -60,6 +80,7 @@ NOT CharacterGetEquippedWeapon(_Host, _)
 THEN
 //CharacterApplyPreset(_Host, "Inquisitor_Act2");
 CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_Inquisitor_Act2", 0);
+*/
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")

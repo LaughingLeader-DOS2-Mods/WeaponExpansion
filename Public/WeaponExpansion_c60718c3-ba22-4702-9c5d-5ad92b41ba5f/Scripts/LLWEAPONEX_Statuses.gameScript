@@ -107,6 +107,22 @@ THEN
 	CharacterApplyStatus(_Character, LLWEAPONEX_DEATH_SENTENCE_BLOCKED, 4, 0)
 ENDIF
 
+EVENT LLWEAPONEX_Shocked_Block
+VARS
+	CHARACTER:_Character
+	CHARACTER:_Source
+	INT:_Turns
+ON
+	OnCharacterStatusApplied(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED)
+ACTIONS
+IF "!c1&c2&c3"
+	CharacterHasStatus(_Character, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
+	GetStatusTurns(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Turns)
+	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Source)
+THEN
+	CharacterApplyStatus(_Character, SHOCKED, _Turns, 0, _Source)
+ENDIF
+	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, null, 0)
 /*
 EVENT LLWEAPONEX_Kevin_MiniExplosion
 VARS

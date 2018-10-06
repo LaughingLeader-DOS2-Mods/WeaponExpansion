@@ -31,3 +31,5 @@ LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall 
 LLWEAPONEX_TRIPPING_DisplayName	Tripping		
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
+LLWEAPONEX_SHOCKED_RESISTANCE_DisplayName	Shock Resistance
+LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.

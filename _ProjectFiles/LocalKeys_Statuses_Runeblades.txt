@@ -18,7 +18,7 @@ LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER_Description	 <font size='18'><font col
 LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER_DisplayName	Lifeblood Rune
 LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS_Description	Character has activated the <font color='#b823cb'>Chaos Rune</font> within their <font color='#40E0D0'>Runeblade</font>, and is absorbing an element in the environment.
 LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS_DisplayName	Absorb Surface Element		
-LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION_Description	<font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#7d71d9'>Air Rune</font></font><br>Applies <font color='#7d71d9'>Shocked</font> to <font color='#4197e2'>Wet</font> enemies for 1 turn, otherwise <font color='#4197e2'>Wet</font> is applied for 1 turn.<br>Adds  <font color='#4197e2'>[1]% Water Damage</font> + <font color='#7d71d9'>[2]% Air Damage</font> to weapon attacks and skills.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION_Description	<font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#7d71d9'>Air Rune</font></font><br>Applies <font color='#7d71d9'>Shocked</font> to <font color='#4197e2'>Wet</font> enemies for 1 turn, otherwise <font color='#4197e2'>Wet</font> is applied for 1 turn.<br><font color='#7d71d9'>Attacking a Shocked or Stunned enemy sends out a jolt of electricity to other enemies within 8m.</font><br><font color='#f7ba14'>When Shocked is applied, that enemy gets Shock Resistance, preventing Shocked from being applied by Runeblades for 3 turns.</font><br>Adds <font color='#4197e2'>[1]% Water Damage</font> + <font color='#7d71d9'>[2]% Air Damage</font> to weapon attacks and skills.
 LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION_DisplayName	Conduction Rune		
 LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION_Description	 <font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#65c900'>Poison Rune</font></font><br>If an attacked target is <font color='#00aa00'>Poisoned</font>, the poison spreads to nearby enemies within [1]m.<br>If the enemies the poison spreads to are already <font color='#00aa00'>Poisoned</font>, the contamination continues.<br>Adds <font color='#4197e2'>[2]% Water Damage</font>  <font color='#8B0000'>[3]% Poison Damage</font> to weapon attacks and skills.
 LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION_DisplayName	Contamination Rune		
@@ -77,3 +77,5 @@ LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN_Description	The <font color='#7d71d9'>
 LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN_DisplayName	Can't Strike Twice
 LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE_Description	Character has been... Thunderstruck!
 LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE_DisplayName	Thunderbolt Strike
+LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_DisplayName	Shock Resistance (<font color='#40E0D0'>Runeblade</font>)
+LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_Description	Character is immune to being directly Shocked by a <font color='#40E0D0'>Runeblade</font>.

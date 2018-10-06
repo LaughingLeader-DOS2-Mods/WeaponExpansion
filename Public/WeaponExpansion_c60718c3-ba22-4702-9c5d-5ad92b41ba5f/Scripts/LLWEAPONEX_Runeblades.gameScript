@@ -402,29 +402,44 @@ THEN
 	IF "!c1"
 		CharacterHasStatus(_Target, LLWEAPONEX_PREVENT_DOUBLE_HITS)
 	THEN
-		IF "c1"
+		IF "c1&!c2"
 			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+			CharacterHasStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
 		THEN
 			IF "c1&c2"
 				CharacterHasStatus(_Target, WET)
 				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Air_Chance_Wet)
 			THEN
 				CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
+				CharacterApplyStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE, 3, 0, _Target)
 			ELIF "!c1&c2"
 				CharacterHasStatus(_Target, WET)
 				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Air_Chance)
 			THEN
 				CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
+				CharacterApplyStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE, 3, 0, _Target)
 			ENDIF
 		ENDIF
 	
 		IF "c1"
 			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION)
 		THEN
+			IF "c1|c2"
+				CharacterHasStatus(_Target, STUNNED)
+				CharacterHasStatus(_Target, SHOCKED)
+			THEN
+				CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_CONDUCTION_CHAINLIGHTNING, 0, 0, _Source)
+				//ExplodeAt(_Target, Projectile_LLWEAPONEX_Runeblade_Conduction_ChainLightning, -1, _Source)
+			ENDIF
 			IF "c1"
 				CharacterHasStatus(_Target, WET)
 			THEN
-				CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
+				IF "!c1"
+					CharacterHasStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
+				THEN
+					CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
+					CharacterApplyStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE, 3, 0, _Target)
+				ENDIF
 			ELSE
 				CharacterApplyStatus(_Target, WET, 1, 0, _Source)
 			ENDIF

@@ -252,6 +252,33 @@ PlayBeamEffect(_AuraCharacter, _Target, _BeamEffect, "Dummy_BodyFX", "Dummy_Body
 NOT DB_LLWEAPONEX_Statuses_Temp_AuraBeamEffects(_Character, _AuraCharacter, _Status, _BeamEffect);
 */
 //END_REGION
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK", _)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_ShockedResistanceCheck", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_ShockedResistanceCheck")
+AND
+NOT LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE")
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "STUNNED")
+AND
+GetStatusTurns(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK", _Turns)
+AND
+Real(_Turns, _TurnsR)
+AND
+RealProduct(_TurnsR, 6.0, _Duration)
+THEN
+ApplyStatus(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE", _Duration, 0, _Character);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_ShockedResistanceCheck")
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK")
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK");
 EXITSECTION
 
 ENDEXITSECTION

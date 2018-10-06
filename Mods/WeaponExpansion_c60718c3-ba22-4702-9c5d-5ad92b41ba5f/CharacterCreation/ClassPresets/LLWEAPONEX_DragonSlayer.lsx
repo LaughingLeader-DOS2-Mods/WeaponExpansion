@@ -1,104 +1,104 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
-    <header version="2" time="1387205254" />
-    <version major="1" minor="0" revision="0" build="0" />
-    <region id="CharacterCreationClass">
-        <node id="root">
-            <attribute id="ClassDescription" value="A former marksman from a long-forgotten regiment, tasked with destroying dragonkind." handle="hf4441e4cgfd32g49bfga758gb0f711be47e8" type="28" />
+	<header version="2" time="1387205254" />
+	<version major="1" minor="0" revision="0" build="0" />
+	<region id="CharacterCreationClass">
+		<node id="root">
+			<attribute id="ClassName" value="Dragon Slayer" handle="ha1f92690g2af6g4515g9ad4gecd66178217e" type="28" />
+			<attribute id="ClassDescription" value="A former marksman from a long-forgotten regiment, tasked with destroying dragonkind. With their unyielding strength, Dragon Slayers utilize Greatbows to pierce their enemies with arrows the size of spears." handle="hf4441e4cgfd32g49bfga758gb0f711be47e8" type="28" />
 			<attribute id="ClassLongDescription" value="Dragon Slayers were an elite military unit in Rivellon. Training to become a dragon slayer started at a very young age, and not many endured long enough to become a slayer.<br>The Order of the Dragon Slayers were created by vengeful knights that wanted justice for the death of the Divine at the hands of a dragon knight. In the past, the dragon slayers quickly went from a small band of knights to a mighty army of elites. Today, it is presumed the order was dissolved by Lucian after he was saved by the last Dragon Knight." handle="h6707c781gad82g4884g882bgf27e1cef07de" type="28" />
-            <attribute id="ClassName" value="Dragon Slayer" handle="ha1f92690g2af6g4515g9ad4gecd66178217e" type="28" />
-            <attribute id="ClassType" value="LLWEAPONEX_DragonSlayer" type="22" />
-            <attribute id="SkillSet" value="Class_LLWEAPONEX_DragonSlayer" type="22" />
-            <attribute id="Voice" value="0" type="5" />
+			<attribute id="ClassType" value="LLWEAPONEX_DragonSlayer" type="22" />
+			<attribute id="SkillSet" value="Class_LLWEAPONEX_DragonSlayer" type="22" />
+			<attribute id="Voice" value="0" type="5" />
 			<attribute id="Icon" value="6" type="5" />
 
-            <attribute id="NumStartingCombatAbilityPoints" value="2" type="4" />
-            <attribute id="NumStartingCivilAbilityPoints" value="1" type="4" />
-            <attribute id="NumStartingAttributePoints" value="3" type="4" />
-            <attribute id="NumStartingTalentPoints" value="1" type="4" />
-            
+			<attribute id="NumStartingCombatAbilityPoints" value="2" type="4" />
+			<attribute id="NumStartingCivilAbilityPoints" value="1" type="4" />
+			<attribute id="NumStartingAttributePoints" value="3" type="4" />
+			<attribute id="NumStartingTalentPoints" value="1" type="4" />
+			
 			<attribute id="AreStatsWeighted" value="1" type="19" />
-            <children>
+			<children>
 				<node id="EquipmentProperties">
-                    <children>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Human" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
-                        </node>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Dwarf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Dwarves" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
-                        </node>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Elf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
-                        </node>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Lizard" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
-                        </node>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Undead_Human" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
-                        </node>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Undead_Dwarf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
-                        </node>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Undead_Elf" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
-                        </node>
-                        <node id="EquipmentProperty">
-                            <attribute id="RaceName" value="Undead_Lizard" type="22" />
-                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
-                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
-                        </node>
-                    </children>
-                </node>
-                <node id="AbilityChanges">
-                    <children>
-                        <node id="AbilityChange">
-                            <attribute id="Ability" value="RangerLore" type="23" />
-                            <attribute id="AmountIncreased" value="1" type="4" />
-                        </node>
-                        <node id="AbilityChange">
-                            <attribute id="Ability" value="RogueLore" type="23" />
-                            <attribute id="AmountIncreased" value="1" type="4" />
-                        </node>
-                        <node id="AbilityChange">
-                            <attribute id="Ability" value="Luck" type="23" />
-                            <attribute id="AmountIncreased" value="1" type="4" />
-                        </node>
-                    </children>
-                </node>
-                <node id="AttributeChanges">
-                    <children>
-                        <node id="AttributeChange">
-                            <attribute id="AmountIncreased" value="2" type="4" />
-                            <attribute id="Attribute" value="STR" type="23" />
-                        </node>
-                        <node id="AttributeChange">
-                            <attribute id="AmountIncreased" value="1" type="4" />
-                            <attribute id="Attribute" value="WIT" type="23" />
-                        </node>
-                    </children>
-                </node>
-                <node id="TalentsAdded">
-                    <children>
-                        <node id="TalentAdded">
-                            <attribute id="Talent" value="QuickStep" type="23" />
-                        </node>
-                    </children>
-                </node>
-            </children>
-        </node>
-    </region>
+					<children>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_DragonSlayer_Start_Undead" type="22" />
+						</node>
+					</children>
+				</node>
+				<node id="AbilityChanges">
+					<children>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="RangerLore" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="RogueLore" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="Luck" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+					</children>
+				</node>
+				<node id="AttributeChanges">
+					<children>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="2" type="4" />
+							<attribute id="Attribute" value="STR" type="23" />
+						</node>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="1" type="4" />
+							<attribute id="Attribute" value="WIT" type="23" />
+						</node>
+					</children>
+				</node>
+				<node id="TalentsAdded">
+					<children>
+						<node id="TalentAdded">
+							<attribute id="Talent" value="QuickStep" type="23" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
 </save>

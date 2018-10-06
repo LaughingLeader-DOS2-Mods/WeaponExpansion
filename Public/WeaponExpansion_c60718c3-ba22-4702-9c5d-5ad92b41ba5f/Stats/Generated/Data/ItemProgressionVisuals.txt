@@ -228,6 +228,82 @@ add levelgroup 0,0,"Divine"
 add rootgroup "325e72cc-2846-49a7-9c2a-cfea0d9103f5","LizardsStaffAEpic"
 add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Lizards_Wand_1H_A_VAR"
 
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Air_1H"
+
+add levelgroup 0,0,"Common"
+add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Normal","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Normal","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic","",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic","",""
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H"
+
+add levelgroup 0,0,"Common"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Normal","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Normal","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare","","Item_WPN_Human_Normal_BastardSword_A_C"
+
+add levelgroup 0,0,"Epic"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
+
+add levelgroup 0,0,"Divine"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Crafted","",""
+
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Fire_1H"
 
 add levelgroup 0,0,"Common"
@@ -254,31 +330,23 @@ add levelgroup 0,0,"Divine"
 add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeLizard"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Epic","",""
 
-new itemgroup "WPN_LLWEAPONEX_Runeblade_Water_1H"
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Crafted"
 
-add levelgroup 0,0,"Common"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Normal","",""
+add levelgroup 0,0,"All"
+add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeLizard"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Crafted","",""
 
-add levelgroup 0,0,"Uncommon"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Normal","Cool",""
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Crafted"
 
-add levelgroup 0,0,"Rare"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Rare","",""
+add levelgroup 0,0,"All"
+add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeLizard"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Crafted","",""
 
-add levelgroup 0,0,"Epic"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Epic","",""
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Preview"
 
-add levelgroup 0,0,"Legendary"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Epic","",""
-
-add levelgroup 0,0,"Divine"
-add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Epic","",""
+add levelgroup 0,0,"All"
+add rootgroup "c88035e5-b9b2-4a7e-b6a2-056e8d9fcb87","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Earth_1H"
 
@@ -306,6 +374,18 @@ add levelgroup 0,0,"Divine"
 add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Epic","",""
 
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "5ce60293-2a51-41d0-a95b-ac78072cd674","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Crafted","",""
+
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Poison_1H"
 
 add levelgroup 0,0,"Common"
@@ -332,57 +412,55 @@ add levelgroup 0,0,"Divine"
 add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Epic","",""
 
-new itemgroup "WPN_LLWEAPONEX_Runeblade_Air_1H"
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Water_1H"
 
 add levelgroup 0,0,"Common"
-add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","LLWEAPONEX_RunebladeDwarf"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Normal","",""
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Normal","",""
 
 add levelgroup 0,0,"Uncommon"
-add rootgroup "05851c66-5da0-49de-a3c6-dbdf2f146e6f","LLWEAPONEX_RunebladeDwarf"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Normal","Cool",""
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Normal","Cool",""
 
 add levelgroup 0,0,"Rare"
-add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Rare","",""
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Rare","",""
 
 add levelgroup 0,0,"Epic"
-add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic","",""
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Epic","",""
 
 add levelgroup 0,0,"Legendary"
-add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic","",""
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Epic","",""
 
 add levelgroup 0,0,"Divine"
-add rootgroup "f1a64c57-13cc-448f-8d6a-bdce0fd1c3c2","LLWEAPONEX_RunebladeDwarf"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic","",""
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Epic","",""
 
-new itemgroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H"
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted"
 
-add levelgroup 0,0,"Common"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Normal","",""
+add levelgroup 0,0,"All"
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted","",""
 
-add levelgroup 0,0,"Uncommon"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Normal","Cool",""
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Preview"
 
-add levelgroup 0,0,"Rare"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare","","Item_WPN_Human_Normal_BastardSword_A_C"
-
-add levelgroup 0,0,"Epic"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
-
-add levelgroup 0,0,"Legendary"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
-
-add levelgroup 0,0,"Divine"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_RunebladeHuman"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic","","Item_WPN_Human_Normal_BastardSword_A_C"
+add levelgroup 0,0,"All"
+add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Inert_1H"
 
@@ -457,3 +535,63 @@ new itemgroup "WPN_LLWEAPONEX_GreatbowPreview"
 add levelgroup 0,0,"All"
 add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
 add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_UpperBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "6c87a50e-f238-43ef-b0a0-45fd64850219",""
+add namegroup "LLWEAPONEX_DragonSlayer_Armour","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_LowerBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "c7d42c37-1401-4df0-9a38-e053c35e67c2",""
+add namegroup "LLWEAPONEX_DragonSlayer_Pants","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Gloves"
+
+add levelgroup 0,0,"All"
+add rootgroup "6100deb9-451b-4f7c-89ab-b1dd39a4ebec",""
+add namegroup "LLWEAPONEX_DragonSlayer_Gloves","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Boots"
+
+add levelgroup 0,0,"All"
+add rootgroup "f91a2518-7f51-4c92-96a9-17ef41c0928f",""
+add namegroup "LLWEAPONEX_DragonSlayer_Shoes","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Helmet"
+
+add levelgroup 0,0,"All"
+add rootgroup "b33cfc65-c121-4804-b60b-6aa82517a46e",""
+add namegroup "LLWEAPONEX_DragonSlayer_Helmet","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_UpperBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "942180e8-da0c-4e49-b6bb-0afdb18c13d7",""
+add namegroup "LLWEAPONEX_RunicKnight_Armour","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_LowerBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "c7d42c37-1401-4df0-9a38-e053c35e67c2",""
+add namegroup "LLWEAPONEX_RunicKnight_Pants","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_Gloves"
+
+add levelgroup 0,0,"All"
+add rootgroup "6100deb9-451b-4f7c-89ab-b1dd39a4ebec",""
+add namegroup "LLWEAPONEX_RunicKnight_Gloves","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_Boots"
+
+add levelgroup 0,0,"All"
+add rootgroup "f91a2518-7f51-4c92-96a9-17ef41c0928f",""
+add namegroup "LLWEAPONEX_RunicKnight_Boots","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_Helmet"
+
+add levelgroup 0,0,"All"
+add rootgroup "324f999d-c764-44df-9ccf-261a71971eb1",""
+add namegroup "LLWEAPONEX_RunicKnight_Helmet","",""
