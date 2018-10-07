@@ -137,3 +137,10 @@ add equipmentgroup
 add equipment entry "GRN_Grenade_Terror_A"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_Debug_ForceBoots"
+
+new equipment "LLWEAPONEX_VendingMachine_A"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H"
+

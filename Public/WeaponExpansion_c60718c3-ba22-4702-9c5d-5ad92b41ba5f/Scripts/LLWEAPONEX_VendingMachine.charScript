@@ -1,0 +1,22 @@
+INIT
+	CHARACTER:__Me
+	INT64:%LLWEAPONEX_Vendo_SmokeFX = null
+	
+EVENTS
+
+EVENT LLWEAPONEX_Vendo_StartFX
+ON
+	OnInit()
+ACTIONS
+	CharacterPlayLoopEffect(%LLWEAPONEX_Vendo_SmokeFX, __Me, "LLWEAPONEX_VendingMachine_A_PipeSmoke_01", "Dummy_SmokeFX")
+
+EVENT LLWEAPONEX_Vendo_StopFX
+ON
+	OnDeactivate()
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Vendo_SmokeFX, null)
+THEN
+	StopLoopEffect(%LLWEAPONEX_Vendo_SmokeFX)
+	Set(%LLWEAPONEX_Vendo_SmokeFX, null)
+ENDIF

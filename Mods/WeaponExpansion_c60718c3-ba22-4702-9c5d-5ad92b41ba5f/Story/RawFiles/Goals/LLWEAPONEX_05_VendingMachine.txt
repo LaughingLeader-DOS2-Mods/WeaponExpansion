@@ -1,0 +1,20 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_DoNotFace((CHARACTERGUID)CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+DB_Dialogs(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A");
+DB_IsStoryNpc(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+SetStoryNpc(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1);
+KBSECTION
+IF
+CharacterLeveledUp(_Player)
+AND
+CharacterIsControlled(_Player, 1)
+AND
+CharacterGetLevel(_Player, _Level)
+THEN
+CharacterLevelUpTo(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Level);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
