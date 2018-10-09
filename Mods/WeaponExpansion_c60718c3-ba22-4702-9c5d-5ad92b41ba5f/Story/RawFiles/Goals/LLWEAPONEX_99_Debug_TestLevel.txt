@@ -6,10 +6,10 @@ SysClear("DB_GameHour", 1);
 DB_GameHour(120000);
 
 SysClear("DB_Time", 3);
-DB_Time(1,5,5);
+DB_Time(1,11,11);
 
 SysClear("DB_HalfHour", 3);
-DB_HalfHour(10,10);
+DB_HalfHour(22,22);
 
 TimerCancel("TimeOfDay");
 StartTimeOfDayTimerLoop();

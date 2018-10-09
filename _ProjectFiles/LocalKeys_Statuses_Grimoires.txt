@@ -1,0 +1,2 @@
+LLWEAPONEX_GRIMOIRE_WIND_DisplayName	Wind Magic - Gain the ability to channel wind with your main hand
+LLWEAPONEX_GRIMOIRE_WIND_Description	Character is channeling the power of Wind.

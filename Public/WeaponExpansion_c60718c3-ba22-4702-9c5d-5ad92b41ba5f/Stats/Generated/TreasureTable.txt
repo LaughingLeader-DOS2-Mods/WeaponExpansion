@@ -305,4 +305,10 @@ object category "T_ST_LLWEAPONEX_RodsNormal",1,1,1,1,1,1,0,0
 new subtable "10,10"
 object category "LLWEAPONEX_Greatbow",1,1,1,1,1,1,0,0
 new subtable "-5"
-object category "I_WPN_Staff_Fire",1,1,1,1,1,1,0,0
+object category "LLWEAPONEX_CombatShield",1,1,1,1,1,1,0,0
+new subtable "-2"
+object category "Shield",1,1,1,1,1,1,0,0
+
+new treasuretable "LLWEAPONEX_Debug_GrimoireTest"
+new subtable "-10"
+object category "I_WPN_LLWEAPONEX_Grimoire_Wind",1,1,1,1,1,1,0,0

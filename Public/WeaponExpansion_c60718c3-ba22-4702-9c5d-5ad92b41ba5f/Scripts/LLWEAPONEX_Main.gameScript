@@ -31,3 +31,17 @@ ON
 	OnItemEvent(_, "LLWEAPONEX_Debug_SetAtmosphereToNight")
 ACTIONS
 	SetAtmosphere("85e62279-a4fd-4573-a287-062f46c96fe1", "f2e42e22-7126-47cc-9ded-5770cc83507c")
+	
+EVENT LLWEAPONEX_Debug_MagicEffect
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStartAttackObject(_,_,_,_Character)
+	OnCharacterStartAttackPosition(_,_,_Character)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_WIND)
+THEN
+	CharacterPlayEffect(_Character, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Hand_01", "Dummy_R_HandFX")
+	//RS3_FX_Skills_Totem_Cast_Target_Totem_Air_Hand_01
+ENDIF

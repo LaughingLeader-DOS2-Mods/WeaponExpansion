@@ -1,5 +1,7 @@
 LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.
 LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power
+LLWEAPONEX_COMBAT_SHIELD_ARMOR_Description	Character has increased armor from a combat shield.
+LLWEAPONEX_COMBAT_SHIELD_ARMOR_DisplayName	Combat Shield Armor - Increases physical and magic armor
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_DisplayName	Marked for Death
 LLWEAPONEX_DEATH_SENTENCE_Description	Character has been marked for death.<br>If killed, the character will return as a friendly <font color='#73f6ff'>Revenant<font> for 2 turns.
@@ -18,6 +20,8 @@ LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed		
 LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.		
 LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound		
+LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.
+LLWEAPONEX_SHOCKED_RESISTANCE_DisplayName	Shock Resistance
 LLWEAPONEX_SOUL_BURN_1_DisplayName	Soul Burn		
 LLWEAPONEX_SOUL_BURN_2_DisplayName	Soul Burn II		
 LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III		
@@ -31,5 +35,3 @@ LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall 
 LLWEAPONEX_TRIPPING_DisplayName	Tripping		
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
-LLWEAPONEX_SHOCKED_RESISTANCE_DisplayName	Shock Resistance
-LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.

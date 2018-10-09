@@ -542,6 +542,30 @@ add levelgroup 0,0,"All"
 add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
 add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","",""
 
+new itemgroup "WPN_LLWEAPONEX_CombatShield"
+
+add levelgroup 0,0,"All"
+add rootgroup "4192940d-c4bb-4893-aaf3-15641b30d04e","HumansBowEpic"
+add namegroup "WPN_LLWEAPONEX_CombatShield_Normal","","Item_WPN_Lizards_Shield_C_VAR"
+
+new itemgroup "WPN_LLWEAPONEX_Grimoire_Wind"
+
+add levelgroup 0,0,"All"
+add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
+add namegroup "WPN_LLWEAPONEX_Grimoire_Wind","",""
+
+new itemgroup "WPN_LLWEAPONEX_Grimoire_Magic_Wind"
+
+add levelgroup 0,0,"All"
+add rootgroup "fb2893c5-fd7e-4491-a14e-a417c6d4b0f0",""
+add namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Wind","",""
+
+new itemgroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_MimicTome"
+
+add levelgroup 0,0,"All"
+add rootgroup "c9fcc947-4423-40b9-9629-ae2d1e156dfc",""
+add namegroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_MimicTome","",""
+
 new itemgroup "ARM_LLWEAPONEX_DragonSlayer_UpperBody"
 
 add levelgroup 0,0,"All"
@@ -575,25 +599,25 @@ add namegroup "LLWEAPONEX_DragonSlayer_Helmet","",""
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_UpperBody"
 
 add levelgroup 0,0,"All"
-add rootgroup "98029e71-6604-41d2-bc83-b70e35b9209c",""
+add rootgroup "c7df8487-00dd-4a75-aead-001e73449a57",""
 add namegroup "LLWEAPONEX_RunicKnight_Armour","",""
 
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_LowerBody"
 
 add levelgroup 0,0,"All"
-add rootgroup "c7d42c37-1401-4df0-9a38-e053c35e67c2",""
+add rootgroup "7248f1f1-dd7a-496c-838a-9389a1b6e3e2",""
 add namegroup "LLWEAPONEX_RunicKnight_Pants","",""
 
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_Gloves"
 
 add levelgroup 0,0,"All"
-add rootgroup "6100deb9-451b-4f7c-89ab-b1dd39a4ebec",""
+add rootgroup "1e0f089b-cd0a-487c-a93f-6ad72905de73",""
 add namegroup "LLWEAPONEX_RunicKnight_Gloves","",""
 
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_Boots"
 
 add levelgroup 0,0,"All"
-add rootgroup "f91a2518-7f51-4c92-96a9-17ef41c0928f",""
+add rootgroup "6754e121-0c39-4b53-b578-f95e675e27b7",""
 add namegroup "LLWEAPONEX_RunicKnight_Boots","",""
 
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_Helmet"

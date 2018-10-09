@@ -280,6 +280,18 @@ add name "Greatbow",""
 new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3"
 add name "Artisan Greatbow",""
 
+new namegroup "WPN_LLWEAPONEX_CombatShield_Normal"
+add name "Combat Shield",""
+
+new namegroup "WPN_LLWEAPONEX_Grimoire_Wind"
+add name "Grimoire of Wind",""
+
+new namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Wind"
+add name "Wind Magic",""
+
+new namegroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_MimicTome"
+add name "Tome of Mimicry",""
+
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""
 add namecool "Mighty Dragonslayer Mail",""

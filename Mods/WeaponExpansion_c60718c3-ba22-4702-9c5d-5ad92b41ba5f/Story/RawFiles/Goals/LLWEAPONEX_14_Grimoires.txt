@@ -1,0 +1,105 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION MAGIC_REMOVAL
+IF
+ItemUnEquipped(_Item, _Character)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire_Magic", 1)
+AND
+CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_Magic)
+AND
+IsTagged(_Magic, "LLWEAPONEX_Grimoire_Magic", 1)
+THEN
+ItemDestroy(_Magic);
+
+IF
+ItemDropped(_Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire_Magic", 1)
+THEN
+ItemDestroy(_Item);
+
+IF
+ItemMovedFromTo(_Item, _From, _To, _IsTrade)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire_Magic", 1)
+AND
+ObjectIsCharacter((CHARACTERGUID)_To, 1)
+AND
+ObjectIsCharacter((CHARACTERGUID)_From, 1)
+AND
+ItemGetOriginalOwner(_Item, _From)
+AND
+_To != _From
+THEN
+ItemDestroy(_Item);
+
+PROC
+ProcBlockUseOfItem((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire_Magic", 1)
+AND
+NOT ItemGetOriginalOwner(_Item, _Character)
+THEN
+DB_CustomUseItemResponse(_Character, _Item, 0);
+CharacterStatusText(_Character, "LLWEAPONEX_Error_GrimoireMagicOwnerMismatch");
+
+//END_REGION
+
+//Auto-Leveling
+IF
+ItemEquipped(_Magic, _Character)
+AND
+IsTagged(_Magic, "LLWEAPONEX_Grimoire_Magic", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoires_MagicLink(_, _Magic)
+AND
+CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_Grimoire)
+THEN
+SetStoryEvent(_Grimoire, "LeaderLib_Commands_GetItemLevel");
+DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic);
+
+IF
+StoryEvent((ITEMGUID)_Grimoire, "LeaderLib_Events_ItemLevelStored")
+AND
+IsTagged(_Grimoire, "LLWEAPONEX_Grimoire", 1)
+AND
+GetVarInteger(_Grimoire, "LeaderLib_ItemLevel", _Level)
+AND
+ItemGetOwner(_Grimoire, _Owner)
+AND
+CharacterGetEquippedItem(_Owner, "Weapon", (ITEMGUID)_Magic)
+THEN
+ItemLevelUpTo(_Magic, _Level);
+SetVarInteger(_Magic, "LeaderLib_ItemLevel", _Level);
+
+IF
+ItemUnEquipped(_Grimoire, _Character)
+AND
+DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic);
+ItemRemove(_Magic);
+
+IF
+ItemDestroyed(_Magic)
+AND
+DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic);
+
+/*
+IF
+CharacterStartAttackObject(_, _, _Character)
+AND
+CharacterGetEquippedItem(_Owner, "Weapon", (ITEMGUID)_Magic)
+THEN
+PlayEffect(_Character, "RS3_FX_Skills_Air_Wind_Cast_Hand_Horizontal_01", "Dummy_R_HandFX");
+*/
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
