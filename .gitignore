@@ -49,6 +49,8 @@ Recovered/*
 *.lsefx
 #*.lsx
 *.lsmg
+*.fbx
+*.lsm
 
 # Logs               #
 ######################

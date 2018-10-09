@@ -462,6 +462,12 @@ add levelgroup 0,0,"All"
 add rootgroup "910a1ca8-cf56-429d-87c0-425b001cfc62","LLWEAPONEX_RunebladeHuman"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted","",""
 
+new itemgroup "WPN_LLWEAPONEX_Runeblade_Display_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "d3b714a4-98d0-4016-85d5-d1b3ce919461","LLWEAPONEX_RunebladeHuman"
+add namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted","",""
+
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Inert_1H"
 
 add levelgroup 0,0,"All"
@@ -569,7 +575,7 @@ add namegroup "LLWEAPONEX_DragonSlayer_Helmet","",""
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_UpperBody"
 
 add levelgroup 0,0,"All"
-add rootgroup "942180e8-da0c-4e49-b6bb-0afdb18c13d7",""
+add rootgroup "98029e71-6604-41d2-bc83-b70e35b9209c",""
 add namegroup "LLWEAPONEX_RunicKnight_Armour","",""
 
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_LowerBody"
@@ -593,5 +599,5 @@ add namegroup "LLWEAPONEX_RunicKnight_Boots","",""
 new itemgroup "ARM_LLWEAPONEX_RunicKnight_Helmet"
 
 add levelgroup 0,0,"All"
-add rootgroup "324f999d-c764-44df-9ccf-261a71971eb1",""
+add rootgroup "b2d19374-d0ea-463a-a359-d3674842e21e",""
 add namegroup "LLWEAPONEX_RunicKnight_Helmet","",""

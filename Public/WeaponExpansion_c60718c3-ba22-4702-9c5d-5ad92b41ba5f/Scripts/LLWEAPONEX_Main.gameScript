@@ -19,3 +19,15 @@ THEN
 	CharacterResurrect(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, 50)
 ENDIF
 	CharacterApplyStatus(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, LLWEAPONEX_DEATH_SENTENCE, -1, 1, _Character)
+	
+EVENT LLWEAPONEX_Debug_AtmoTest_Day
+ON
+	OnItemEvent(_, "LLWEAPONEX_Debug_SetAtmosphereToDay")
+ACTIONS
+	SetAtmosphere("85e62279-a4fd-4573-a287-062f46c96fe1", "57690f2e-466a-4d38-a071-74b109cedef4")
+	
+EVENT LLWEAPONEX_Debug_AtmoTest_Night
+ON
+	OnItemEvent(_, "LLWEAPONEX_Debug_SetAtmosphereToNight")
+ACTIONS
+	SetAtmosphere("85e62279-a4fd-4573-a287-062f46c96fe1", "f2e42e22-7126-47cc-9ded-5770cc83507c")

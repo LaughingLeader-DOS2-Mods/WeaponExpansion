@@ -140,7 +140,7 @@ add equipment entry "ARM_LLWEAPONEX_Debug_ForceBoots"
 
 new equipment "LLWEAPONEX_VendingMachine_A"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H"
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Display_A"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H"
+add equipment entry "WPN_LLWEAPONEX_Rod_Poison"
 
