@@ -310,5 +310,9 @@ new subtable "-2"
 object category "Shield",1,1,1,1,1,1,0,0
 
 new treasuretable "LLWEAPONEX_Debug_GrimoireTest"
-new subtable "-10"
+new subtable "-3"
 object category "I_WPN_LLWEAPONEX_Grimoire_Wind",1,1,1,1,1,1,0,0
+new subtable "-3"
+object category "I_WPN_LLWEAPONEX_Grimoire_Swap",1,1,1,1,1,1,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_UNIQUE_Grimoire_Mimicry",1,1,0,0,0,0,0,0

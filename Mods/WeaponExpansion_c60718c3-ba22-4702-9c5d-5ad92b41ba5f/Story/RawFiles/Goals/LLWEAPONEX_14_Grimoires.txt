@@ -1,8 +1,164 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
+LLWEAPONEX_Grimoires_InitSettings();
 
 KBSECTION
+PROC
+LLWEAPONEX_Grimoires_InitSettings()
+THEN
+DB_LLWEAPONEX_Grimoires_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
+
+/*
+ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc
+ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040
+ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216
+*/
+//REGION LOOP_FX
+IF
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Grimoires_StartItemEffect")
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
+AND
+GetTemplate(_Item, _Template)
+AND
+DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+AND
+PlayLoopEffect(_Item, _ItemFX, "", _Handle)
+THEN
+DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+
+IF
+ItemDropped(_Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
+AND
+GetTemplate(_Item, _Template)
+AND
+DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+AND
+PlayLoopEffect(_Item, _ItemFX, "", _Handle)
+THEN
+DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+
+IF
+ItemDestroyed(_Item)
+AND
+DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle)
+THEN
+StopLoopEffect(_Handle);
+NOT DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+
+IF
+ItemAddedToCharacter(_Item, _Character)
+AND
+DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle)
+THEN
+StopLoopEffect(_Handle);
+NOT DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+
+IF
+ItemEquipped(_Item, _Character)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
+AND
+GetTemplate(_Item, _Template)
+AND
+DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+
+//Sheathed
+PROC
+LLWEAPONEX_Grimoires_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
+AND
+NOT LeaderLib_Helper_QRY_HasStatus(_Character, "UNSHEATHED")
+THEN
+SetVarString(_Character, "LLWEAPONEX_Grimoire_NextLoopFX", _SheathedFX);
+SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextBone", "Dummy_BackFX_L");
+SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_PlaySheathedFX");
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _SheathedFX);
+
+//Unsheathed
+PROC
+LLWEAPONEX_Grimoires_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "UNSHEATHED")
+THEN
+SetVarString(_Character, "LLWEAPONEX_Grimoire_NextLoopFX", _UnsheathedFX);
+SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextBone", "Dummy_FrontFX_L");
+SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_PlayUnsheathedFX");
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _UnsheathedFX);
+LeaderLib_StartObjectTimer(_Character, 30, "LLWEAPONEX_Timers_StopGrimoireSheathedFX", "LLWEAPONEX_Grimoire_StopSheathedFX");
+
+IF
+CharacterStatusApplied(_Character, "UNSHEATHED", _)
+AND
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+AND
+DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+
+IF
+CharacterStatusRemoved(_Character, "UNSHEATHED", _)
+AND
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+AND
+DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+PlayEffect(_Character, _TransitionFX, "Dummy_FrontFX_L");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoires_PlaySheathedFX", 1700);
+//PlayBeamEffect(_Character, _Character, _TransitionFX, "Dummy_FrontFX_L", "Dummy_BackFX_L");
+//So the book doesn't blink as the next effect starts
+LeaderLib_StartObjectTimer(_Character, 30, "LLWEAPONEX_Timers_StopGrimoireUnsheathedFX", "LLWEAPONEX_Grimoire_StopUnsheathedFX");
+//SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopUnsheathedFX");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoires_PlaySheathedFX")
+AND
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+AND
+DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+
+IF
+ItemUnEquipped(_Item, _Character)
+AND
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopEquippedFX");
+
+IF
+RegionEnded(_)
+AND
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopEquippedFX");
+
+IF
+RegionEnded(_)
+AND
+DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle)
+THEN
+StopLoopEffect(_Handle);
+NOT DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+
+PROC
+LLWEAPONEX_Grimoires_StopLoopFX((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+AND
+DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopEquippedFX");
+//END_REGION
+
+
 //REGION MAGIC_REMOVAL
 IF
 ItemUnEquipped(_Item, _Character)

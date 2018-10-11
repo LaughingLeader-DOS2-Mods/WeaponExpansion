@@ -289,8 +289,14 @@ add name "Grimoire of Wind",""
 new namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Wind"
 add name "Wind Magic",""
 
-new namegroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_MimicTome"
-add name "Tome of Mimicry",""
+new namegroup "WPN_LLWEAPONEX_Grimoire_Swap"
+add name "Grimoire of Translocation",""
+
+new namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Swap"
+add name "Translocation Magic",""
+
+new namegroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_Mimicry"
+add name "Grimoire of Mimicry",""
 
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""

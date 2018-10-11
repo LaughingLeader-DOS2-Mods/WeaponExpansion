@@ -1,0 +1,13 @@
+INIT
+	ITEM:__Me
+EVENTS
+
+EVENT LLWEAPONEX_Grimoire_Init
+ON
+	OnInit()
+ACTIONS
+IF "!c1"
+	ItemIsInInventory(__Me)
+THEN
+	ItemEvent(__Me, "LLWEAPONEX_Grimoires_StartItemEffect")
+ENDIF

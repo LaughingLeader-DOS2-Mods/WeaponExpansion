@@ -1,2 +1,5 @@
-LLWEAPONEX_GRIMOIRE_WIND_DisplayName	Wind Magic - Gain the ability to channel wind with your main hand
-LLWEAPONEX_GRIMOIRE_WIND_Description	Character is channeling the power of Wind.
+LLWEAPONEX_GRIMOIRE_MAGIC_SWAP_ACTIVE_Description	Character is channeling the power of Translocation.
+LLWEAPONEX_GRIMOIRE_MAGIC_SWAP_ACTIVE_DisplayName	Translocation Magic
+LLWEAPONEX_GRIMOIRE_MAGIC_SWAP_EQUIPPED_DisplayName	Arcane Shift - Swap places with targets hit. Resisted by Grounded and Magic Armor
+LLWEAPONEX_GRIMOIRE_MAGIC_WIND_ACTIVE_Description	Character is channeling the power of Wind.
+LLWEAPONEX_GRIMOIRE_MAGIC_WIND_ACTIVE_DisplayName	Wind Magic

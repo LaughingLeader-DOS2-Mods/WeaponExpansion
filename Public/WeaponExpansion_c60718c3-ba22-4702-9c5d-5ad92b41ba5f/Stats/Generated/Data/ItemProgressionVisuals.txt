@@ -558,13 +558,31 @@ new itemgroup "WPN_LLWEAPONEX_Grimoire_Magic_Wind"
 
 add levelgroup 0,0,"All"
 add rootgroup "fb2893c5-fd7e-4491-a14e-a417c6d4b0f0",""
-add namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Wind","",""
+add namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Wind","","Item_LOOT_Essence_Air_Step2_A"
 
-new itemgroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_MimicTome"
+new itemgroup "WPN_LLWEAPONEX_Grimoire_Swap"
+
+add levelgroup 0,0,"All"
+add rootgroup "f4227e7f-86df-498f-817c-fc00896eb040",""
+add namegroup "WPN_LLWEAPONEX_Grimoire_Swap","",""
+
+new itemgroup "WPN_LLWEAPONEX_Grimoire_Magic_Swap"
+
+add levelgroup 0,0,"All"
+add rootgroup "fb2893c5-fd7e-4491-a14e-a417c6d4b0f0",""
+add namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Swap","","Item_Quest_Orb_A_Silver"
+
+new itemgroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_Mimicry"
 
 add levelgroup 0,0,"All"
 add rootgroup "c9fcc947-4423-40b9-9629-ae2d1e156dfc",""
-add namegroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_MimicTome","",""
+add namegroup "WPN_LLWEAPONEX_UNIQUE_Grimoire_Mimicry","",""
+
+new itemgroup "WPN_LLWEAPONEX_Grimoire_Magic_Mimic"
+
+add levelgroup 0,0,"All"
+add rootgroup "fb2893c5-fd7e-4491-a14e-a417c6d4b0f0",""
+add namegroup "WPN_LLWEAPONEX_Grimoire_Magic_Mimic","","Item_Quest_Orb_A_Black"
 
 new itemgroup "ARM_LLWEAPONEX_DragonSlayer_UpperBody"
 
