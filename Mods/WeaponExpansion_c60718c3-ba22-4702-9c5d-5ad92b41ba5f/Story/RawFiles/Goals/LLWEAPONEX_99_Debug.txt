@@ -14,6 +14,13 @@ THEN
 GoalCompleted;
 
 IF
+TextEventSet("llweap_beamtest")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+PlayBeamEffect(_Host, _Host, "RS3_FX_GP_Beams_Telekinesis_01", "Dummy_BackFX_L", "Dummy_FrontFX_L");
+
+IF
 GameStarted(_Level, _)
 AND
 IsGameLevel(_Level, 1)

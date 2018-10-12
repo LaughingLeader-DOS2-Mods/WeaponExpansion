@@ -26,10 +26,46 @@ ObjectIsOnStage(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b
 AND
 GetVarInteger(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized", 0)
 THEN
-PROC_LoopEffect("LLWEAPONEX_VendingMachine_A_PipeSmoke_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_Smoke", _Region, "Dummy_SmokeFX");
+//PROC_LoopEffect("LLWEAPONEX_VendingMachine_A_PipeSmoke_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_Smoke", _Region, "Dummy_SmokeFX");
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:StartLoopEffects] Starting looped effects on vending machine.");
+
+IF
+TextEventSet("llweap_vendtop")
+THEN
+CharacterUseSkill(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "Shout_LLWEAPONEX_VendingMachine_Move_Top", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a,0,1,1);
+
+IF
+CharacterUsedSkill(_VendingMachine, "Shout_LLWEAPONEX_VendingMachine_Move_Top", _, _)
+AND
+DB_CurrentLevel(_Level)
+THEN
+//PROC_LoopBeamEffect((STRING)_effect, (GUIDSTRING)_Source,(GUIDSTRING)_Target,(STRING)_SrcBone,(STRING)_TargetBone,(STRING)_ID,(STRING)_Region)
+PROC_LoopBeamEffect("RS3_FX_GP_Beams_Telekinesis_01", _VendingMachine, _VendingMachine, "Dummy_BeamFX", "Dummy_WeaponDisplay_Top", "LLWEAPONEX_VendingMachine_TopItemMovement", _Level);
+
+IF
+SkillCast(_VendingMachine, "Shout_LLWEAPONEX_VendingMachine_Move_Top", _, _)
+THEN
+PROC_StopLoopBeamEffect(_VendingMachine, "LLWEAPONEX_VendingMachine_TopItemMovement");
+
+IF
+TextEventSet("llweap_vendmiddle")
+THEN
+CharacterUseSkill(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "Shout_LLWEAPONEX_VendingMachine_Move_Middle", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a,0,1,1);
+
+IF
+CharacterUsedSkill(_VendingMachine, "Shout_LLWEAPONEX_VendingMachine_Move_Middle", _, _)
+AND
+DB_CurrentLevel(_Level)
+THEN
+//PROC_LoopBeamEffect((STRING)_effect, (GUIDSTRING)_Source,(GUIDSTRING)_Target,(STRING)_SrcBone,(STRING)_TargetBone,(STRING)_ID,(STRING)_Region)
+PROC_LoopBeamEffect("RS3_FX_GP_Beams_Telekinesis_01", _VendingMachine, _VendingMachine, "Dummy_BeamFX", "Dummy_WeaponDisplay_Top", "LLWEAPONEX_VendingMachine_TopItemMovement", _Level);
+
+IF
+SkillCast(_VendingMachine, "Shout_LLWEAPONEX_VendingMachine_Move_Top", _, _)
+THEN
+PROC_StopLoopBeamEffect(_VendingMachine, "LLWEAPONEX_VendingMachine_TopItemMovement");
 
 /*
 IF
