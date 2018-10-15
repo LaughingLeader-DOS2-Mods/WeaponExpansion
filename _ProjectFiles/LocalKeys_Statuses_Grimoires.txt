@@ -1,5 +1,7 @@
-LLWEAPONEX_GRIMOIRE_MAGIC_SWAP_ACTIVE_Description	Character is channeling the power of Translocation.
-LLWEAPONEX_GRIMOIRE_MAGIC_SWAP_ACTIVE_DisplayName	Translocation Magic
-LLWEAPONEX_GRIMOIRE_MAGIC_SWAP_EQUIPPED_DisplayName	Arcane Shift - Swap places with targets hit. Resisted by Grounded and Magic Armor
-LLWEAPONEX_GRIMOIRE_MAGIC_WIND_ACTIVE_Description	Character is channeling the power of Wind.
-LLWEAPONEX_GRIMOIRE_MAGIC_WIND_ACTIVE_DisplayName	Wind Magic
+LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE_Description	Character is enhancing the power of Translocation.<br>When teleporting a target, deals bonus damage to enemies, or applies a positive bonus to allies.
+LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE_DisplayName	Translocation Grimoire
+LLWEAPONEX_GRIMOIRE_WIND_ACTIVE_Description	Character is enhancing the power of Air.<br>Deals bonus damage when hitting enemies with Air spells.
+LLWEAPONEX_GRIMOIRE_WIND_ACTIVE_DisplayName	Wind Grimoire
+LLWEAPONEX_GRIMOIRE_SWAP_DAMAGE_DisplayName	Translocation Damage
+LLWEAPONEX_GRIMOIRE_SWAP_SURGE_Description	Character received a positive bonus from a Translocation Grimoire after being teleported.
+LLWEAPONEX_GRIMOIRE_SWAP_SURGE_DisplayName	Translocation Surge

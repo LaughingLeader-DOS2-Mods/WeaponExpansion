@@ -1,4 +1,7 @@
-Shout_LLWEAPONEX_Grimoire_Wind_Toggle_DisplayName	Toggle Wind Magic
-Shout_LLWEAPONEX_Grimoire_Wind_Toggle_Description	Activate the Wind Magic within your Grimoire, granting you the ability to shoot magic with your right hand.<br>The magic scales to the level of the Grimoire.
-Shout_LLWEAPONEX_Grimoire_Swap_Toggle_DisplayName	Toggle Translocation Magic
-Shout_LLWEAPONEX_Grimoire_Swap_Toggle_Description	Activate the Translocation Magic within your Grimoire, granting you the ability to shoot magic with your right hand.<br>The magic scales to the level of the Grimoire.
+Cone_LLWEAPONEX_Grimoire_Gust_Description	Summon a large burst of wind from your Grimoire, dealing [1], clearing non-cursed surfaces, and pushing enemies back [2]m.
+Cone_LLWEAPONEX_Grimoire_Gust_DisplayName	Gale Force
+Shout_LLWEAPONEX_Grimoire_Swap_Toggle_Description	Activate the Translocation Magic within your Grimoire. Upon teleporting an enemy, deal [1]. When teleporting an ally or yourself, grant the target <font color='#7d71d9'>Translocation Surge</font>.
+Shout_LLWEAPONEX_Grimoire_Swap_Toggle_DisplayName	Activate Grimoire
+Shout_LLWEAPONEX_Grimoire_Wind_Toggle_Description	Activate the Wind Magic within your Grimoire. Upon casting an Air spell on an enemy or position, the Grimoire shoots Wind-based magic at the target for [1].
+Shout_LLWEAPONEX_Grimoire_Wind_Toggle_DisplayName	Activate Grimoire
+Projectile_LLWEAPONEX_Grimoire_ShootWind_DisplayName	Gust (Grimoire)

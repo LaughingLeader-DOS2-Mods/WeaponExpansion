@@ -80,6 +80,7 @@ StringContains(_Surface, "Purified", 1)
 THEN
 DB_NOOP(1);
 
+/* Handled in LLWEAPONEX_RuneBlades.gameScript
 IF
 CharacterStatusAttempt(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
 AND
@@ -96,14 +97,6 @@ ObjectSetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface");
 IF
 CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
 AND
-ObjectGetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 1)
-THEN
-ObjectClearFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface");
-//CharacterStatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune");
-
-IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
-AND
 DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Character)
 AND
 GetPosition(_Character, _x, _y, _z)
@@ -112,6 +105,15 @@ NOT DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Character);
 //RemoveStatus(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS");
 PlayEffect(_Character, "RS3_FX_Skills_Void_Cast_Weapon_Hand_01", "Dummy_CastFX");
 CreateSurfaceAtPosition(_x, _y, _z, "SurfaceNone", 1.0, -1.0); // Absorb the surface
+*/
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 1)
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface");
+//CharacterStatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune");
 //END_REGION
 
 //REGION BONUS_DAMAGE_STATUS

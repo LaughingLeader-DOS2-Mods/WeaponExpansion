@@ -97,6 +97,13 @@ THEN
 //CharacterApplyPreset(_Host, "Rogue_Act2");
 CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_LLWEAPONEX_RunicKnight_Debug", 0);
 
+IF
+TextEventSet("llweap_tptrigger")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+TeleportTo(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1, _Host);
+
 /*
 IF
 StoryEvent(_, "LeaderLib_Initialized")

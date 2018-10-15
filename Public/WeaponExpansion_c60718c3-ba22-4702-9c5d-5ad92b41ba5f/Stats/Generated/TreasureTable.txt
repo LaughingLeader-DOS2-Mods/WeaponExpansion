@@ -228,17 +228,28 @@ object category "I_WPN_LLWEAPONEX_Throwing_Sword1H",1,0,0,0,0,0,0,0
 new subtable "6,1"
 object category "I_WPN_LLWEAPONEX_Throwing_Rock",1,0,0,0,0,0,0,0
 
-new treasuretable "ST_LLWEAPONEX_VendorStock"
+new treasuretable "ST_LLWEAPONEX_VendingMachine"
+IgnoreLevelDiff 1
+new subtable "3,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
+new subtable "3,1"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
-object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,0,0,0,0,0,0
-new subtable "-1"
-object category "T_LLWEAPONEX_CheatRuneblades",1,1,0,0,0,0,0,0
-new subtable "-1"
-object category "T_LLWEAPONEX_CheatRods",1,1,0,0,0,0,0,0
-new subtable "-1"
-object category "T_ST_LLWEAPONEX_CheatNormalThrowingWeapons",1,1,0,0,0,0,0,0
-new subtable "-1"
+object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
+new subtable "1,1"
 object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_CombatShield",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "Trader Gold",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_Debug_PriceCheck"
 IgnoreLevelDiff 1
@@ -310,9 +321,11 @@ new subtable "-2"
 object category "Shield",1,1,1,1,1,1,0,0
 
 new treasuretable "LLWEAPONEX_Debug_GrimoireTest"
-new subtable "-3"
-object category "I_WPN_LLWEAPONEX_Grimoire_Wind",1,1,1,1,1,1,0,0
-new subtable "-3"
-object category "I_WPN_LLWEAPONEX_Grimoire_Swap",1,1,1,1,1,1,0,0
 new subtable "-1"
-object category "I_WPN_LLWEAPONEX_UNIQUE_Grimoire_Mimicry",1,1,0,0,0,0,0,0
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,1
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,1
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,1
+new subtable "-1"
+object category "I_WPN_UNIQUE_WithermooreShield",1,0,0,0,0,0,0,0

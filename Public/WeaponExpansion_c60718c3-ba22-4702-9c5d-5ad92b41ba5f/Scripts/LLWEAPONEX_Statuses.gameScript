@@ -68,6 +68,23 @@ THEN
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, _Turns, 1, _Source)
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
+	
+EVENT LLWEAPONEX_MagicBleedingCheck
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+	INT:_Turns
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
+ACTIONS
+IF "!c1&c2&c3"
+	CharacterHasStatus(_Target, BLEEDING) // Don't force if they're already bleeding
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Source)
+	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Turns)
+THEN
+	CharacterApplyStatus(_Target, BLEEDING, _Turns, 1, _Source)
+ENDIF
+	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
 
 /*
 EVENT LLWEAPONEX_Tar_BurningBypass

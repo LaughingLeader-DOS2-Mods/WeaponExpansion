@@ -1,0 +1,78 @@
+INIT
+
+EVENTS
+
+EVENT LLWEAPONEX_Grimoire_OpenBook
+VARS
+	CHARACTER:_Caster
+ON
+	OnCharacterEvent(_Caster, "LLWEAPONEX_Events_GrimoirePreparingToFire")
+ACTIONS
+IF "!c1&!c2"
+	CharacterHasStatus(_Caster, UNSHEATHED)
+	HasFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+THEN
+	SetFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_CloseBook
+VARS
+	CHARACTER:_Caster
+ON
+	OnCharacterEvent(_Caster, "LLWEAPONEX_Events_GrimoireFired")
+ACTIONS
+IF "!c1&c2"
+	CharacterHasStatus(_Caster, UNSHEATHED)
+	HasFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+THEN
+	ClearFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+ENDIF
+	
+EVENT LLWEAPONEX_Grimoire_WindAttack_Target
+VARS
+	CHARACTER:_Caster
+	CHARACTER:_CharacterTarget
+	ITEM:_ItemTarget
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterCharacterEvent(_Caster, _CharacterTarget, "LLWEAPONEX_Grimoire_ShootWindMagic")
+	OnCharacterItemEvent(_Caster, _ItemTarget, "LLWEAPONEX_Grimoire_ShootWindMagic")
+ACTIONS
+IF "c1"
+	CharacterGetStat(_LevelF, _Caster, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+IF "!c1"
+	IsEqual(_CharacterTarget, null)
+THEN
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _CharacterTarget, _Level, _Caster)
+	//ShootLocalConeAt(Cone_LLWEAPONEX_Grimoire_ProjectileGust, _Caster, FLOAT3:{0.0;0.0;0.0}, _CharacterTarget, _Level, _Caster)
+ENDIF
+IF "!c1"
+	IsEqual(_ItemTarget, null)
+THEN
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _ItemTarget, _Level, _Caster)
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_WindAttack_Position
+VARS
+	CHARACTER:_Caster
+	FLOAT3:_Target
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterEvent(_Caster, "LLWEAPONEX_Grimoire_ShootWindMagic")
+ACTIONS
+IF "c1"
+	CharacterGetStat(_LevelF, _Caster, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+IF "c1&!c2"
+	GetVar(_Target, _Caster, "LLWEAPOENX_GrimoireTargetPosition")
+	IsEqual(_Target, null)
+THEN
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _Target, _Level, _Caster)
+ENDIF

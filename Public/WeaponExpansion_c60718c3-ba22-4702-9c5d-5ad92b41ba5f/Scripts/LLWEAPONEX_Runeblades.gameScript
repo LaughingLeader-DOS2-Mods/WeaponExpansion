@@ -2,6 +2,7 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Air_Chance = 10
 	INT:%LLWEAPONEX_Runeblade_Air_Chance_Wet = 50
 	INT:%LLWEAPONEX_Runeblade_Avalanche_Chance = 40
+	INT:%LLWEAPONEX_Runeblade_Blood_Chance = 20
 	INT:%LLWEAPONEX_Runeblade_BloodDisease_Chance = 40
 	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance = 10
 	INT:%LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead = 50
@@ -11,6 +12,7 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Gas_Chance = 50
 	INT:%LLWEAPONEX_Runeblade_Gas_MaxSurfaceTurns = 4
 	INT:%LLWEAPONEX_Runeblade_Ice_Chance = 20
+	INT:%LLWEAPONEX_Runeblade_Inferno_MaxStacks = 4
 	INT:%LLWEAPONEX_Runeblade_Lava_Chance = 60
 	INT:%LLWEAPONEX_Runeblade_Quake_Chance = 20
 	INT:%LLWEAPONEX_Runeblade_Searing_Chance = 40
@@ -18,6 +20,7 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance = 20
 	INT:%LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet = 80
 	INT:%LLWEAPONEX_Runeblade_Water_Chance = 50
+	INT:%LLWEAPONEX_Runeblade_Venom_MaxStacks = 4
 	
 	INT:%LLWEAPONEX_Runeblade_ComboRune_Turns = 2
 EVENTS
@@ -216,14 +219,17 @@ THEN
 	Cast(_MsgF, _Msg)
 	DisplayCombatInfoText(_Source, _MsgF, 2)
 	*/
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Blood_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, 1, 0, _Source)
+	ENDIF
+	
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
 	THEN
 		CharacterApplyStatus(_Target, BURNING, 1, 0, _Source)
-	ELIF "c1"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_INFERNO)
-	THEN
-		CharacterApplyStatus(_Target, BURNING, 2, 0, _Source)
 	ENDIF
 	
 	IF "c1&c2"
@@ -235,16 +241,9 @@ THEN
 	
 	IF "c1&c2&!c3"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATBURST)
-		//CharacterHasStatus(_Source, BURNING)
-		GetStatusTurns(_Target, BURNING, _IntVar)
+		CharacterHasStatus(_Source, BURNING)
 		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD)
 	THEN
-		IF "c1"
-			IsLessThen(_IntVar, 4)
-		THEN
-			Add(_IntVar, 1)
-			CharacterApplyStatus(_Target, BURNING, _IntVar, 1, _Source)
-		ENDIF
 		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD, 1, 0, _Source)
 	ENDIF
 	
@@ -309,10 +308,6 @@ THEN
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
 	THEN
 		CharacterApplyStatus(_Target, POISONED, 1, 0, _Source)
-	ELIF "c1"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM)
-	THEN
-		CharacterApplyStatus(_Target, POISONED, 2, 0, _Source)
 	ENDIF
 	
 	IF "c1&!c2"
@@ -362,7 +357,7 @@ THEN
 			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
 			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodDisease_Chance)
 		THEN
-			CharacterApplyStatus(_Target, INFECTIOUS_DISEASED, 0, 0, _Source)
+			CharacterApplyStatus(_Target, INFECTIOUS_DISEASED, 1, 0, _Source)
 		ENDIF
 		
 		IF "c1&!c2&!c3&!c4&!c5"
@@ -495,6 +490,34 @@ THEN
 				ENDIF
 			ELSE
 				CharacterApplyStatus(_Target, CHILLED, 1, 0, _Source)
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_INFERNO)
+		THEN
+			IF "c1"
+				GetStatusTurns(_Target, BURNING, _IntVar)
+			THEN
+				Add(_IntVar, 1)
+				Clamp(_IntVar, 1, %LLWEAPONEX_Runeblade_Inferno_MaxStacks)
+				CharacterApplyStatus(_Target, BURNING, _IntVar, 0, _Source)
+			ELSE
+				CharacterApplyStatus(_Target, BURNING, 1, 0, _Source)
+			ENDIF
+		ENDIF
+		
+		IF "c1"
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM)
+		THEN
+			IF "c1"
+				GetStatusTurns(_Target, POISONED, _IntVar)
+			THEN
+				Add(_IntVar, 1)
+				Clamp(_IntVar, 1, %LLWEAPONEX_Runeblade_Venom_MaxStacks)
+				CharacterApplyStatus(_Target, POISONED, _IntVar, 0, _Source)
+			ELSE
+				CharacterApplyStatus(_Target, POISONED, 1, 0, _Source)
 			ENDIF
 		ENDIF
 		

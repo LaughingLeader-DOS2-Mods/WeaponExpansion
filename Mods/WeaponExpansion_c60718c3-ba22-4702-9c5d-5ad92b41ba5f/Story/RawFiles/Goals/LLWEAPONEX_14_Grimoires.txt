@@ -7,8 +7,21 @@ KBSECTION
 PROC
 LLWEAPONEX_Grimoires_InitSettings()
 THEN
-DB_LLWEAPONEX_Grimoires_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
 
+IF
+ItemUnEquipped(_Item, _Character)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
+
+IF
+ItemEquipped(_Item, _Character)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
+THEN
+ObjectSetFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
 /*
 ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc
 ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040
@@ -22,11 +35,11 @@ IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 AND
 GetTemplate(_Item, _Template)
 AND
-DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 AND
 PlayLoopEffect(_Item, _ItemFX, "", _Handle)
 THEN
-DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle);
 
 IF
 ItemDropped(_Item)
@@ -35,27 +48,27 @@ IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 AND
 GetTemplate(_Item, _Template)
 AND
-DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 AND
 PlayLoopEffect(_Item, _ItemFX, "", _Handle)
 THEN
-DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle);
 
 IF
 ItemDestroyed(_Item)
 AND
-DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle)
+DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle)
 THEN
 StopLoopEffect(_Handle);
-NOT DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+NOT DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle);
 
 IF
 ItemAddedToCharacter(_Item, _Character)
 AND
-DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle)
+DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle)
 THEN
 StopLoopEffect(_Handle);
-NOT DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+NOT DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle);
 
 IF
 ItemEquipped(_Item, _Character)
@@ -64,7 +77,7 @@ IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 AND
 GetTemplate(_Item, _Template)
 AND
-DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
 LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
 
@@ -72,41 +85,55 @@ LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _
 PROC
 LLWEAPONEX_Grimoires_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
 AND
-NOT LeaderLib_Helper_QRY_HasStatus(_Character, "UNSHEATHED")
+ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0)
 THEN
 SetVarString(_Character, "LLWEAPONEX_Grimoire_NextLoopFX", _SheathedFX);
 SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextBone", "Dummy_BackFX_L");
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_PlaySheathedFX");
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _SheathedFX);
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _SheathedFX);
 
 //Unsheathed
 PROC
 LLWEAPONEX_Grimoires_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
 AND
-LeaderLib_Helper_QRY_HasStatus(_Character, "UNSHEATHED")
+ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 1)
 THEN
 SetVarString(_Character, "LLWEAPONEX_Grimoire_NextLoopFX", _UnsheathedFX);
 SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextBone", "Dummy_FrontFX_L");
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_PlayUnsheathedFX");
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _UnsheathedFX);
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _UnsheathedFX);
 LeaderLib_StartObjectTimer(_Character, 30, "LLWEAPONEX_Timers_StopGrimoireSheathedFX", "LLWEAPONEX_Grimoire_StopSheathedFX");
 
 IF
 CharacterStatusApplied(_Character, "UNSHEATHED", _)
 AND
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
-AND
-DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0)
 THEN
-NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
-LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+ObjectSetFlag(_Character, "LLWEAPONEX_GrimoireOpened");
 
 IF
 CharacterStatusRemoved(_Character, "UNSHEATHED", _)
 AND
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 1)
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireOpened");
+
+IF
+ObjectFlagSet("LLWEAPONEX_GrimoireOpened", (CHARACTERGUID)_Character, _)
 AND
-DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+AND
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+
+IF
+ObjectFlagCleared("LLWEAPONEX_GrimoireOpened", (CHARACTERGUID)_Character, _)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+AND
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
 PlayEffect(_Character, _TransitionFX, "Dummy_FrontFX_L");
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoires_PlaySheathedFX", 1700);
@@ -118,46 +145,45 @@ LeaderLib_StartObjectTimer(_Character, 30, "LLWEAPONEX_Timers_StopGrimoireUnshea
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoires_PlaySheathedFX")
 AND
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX)
 AND
-DB_LLWEAPONEX_Grimoires_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
-NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX);
 LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
 
 IF
 ItemUnEquipped(_Item, _Character)
 AND
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX)
 THEN
-NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX);
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopEquippedFX");
 
 IF
 RegionEnded(_)
 AND
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX)
 THEN
-NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX);
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopEquippedFX");
 
 IF
 RegionEnded(_)
 AND
-DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle)
+DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle)
 THEN
 StopLoopEffect(_Handle);
-NOT DB_LLWEAPONEX_Grimoires_ItemLoopFX(_Item, _Handle);
+NOT DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle);
 
 PROC
 LLWEAPONEX_Grimoires_StopLoopFX((CHARACTERGUID)_Character, (ITEMGUID)_Item)
 AND
-DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX)
 THEN
-NOT DB_LLWEAPONEX_Grimoires_Temp_ActiveFX(_Character, _Item, _Template, _FX);
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX);
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopEquippedFX");
 //END_REGION
-
 
 //REGION MAGIC_REMOVAL
 IF
@@ -203,20 +229,315 @@ THEN
 DB_CustomUseItemResponse(_Character, _Item, 0);
 CharacterStatusText(_Character, "LLWEAPONEX_Error_GrimoireMagicOwnerMismatch");
 
+IF
+ItemUnEquipped(_Grimoire, _Character)
+AND
+IsTagged(_Grimoire, "LLWEAPONEX_Grimoire", 1)
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE");
+RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE");
 //END_REGION
 
+//REGION SKILL_TYPE_EVENTS
+IF
+CharacterUsedSkillOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement);
+
+IF
+CharacterUsedSkill(_Caster, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _, _Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement);
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_Grimoire_SkillSelfDelay", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_Grimoire_SkillSelfDelay")
+AND
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement)
+AND
+DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_Grimoire_SkillSelfDelay")
+AND
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_Grimoire_SkillSelfDelay")
+AND
+DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement);
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Caster, _Skill, _SkillType, _SkillElement);
+
+IF
+CharacterUsedSkillAtPosition(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _, _Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement);
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_Grimoire_SkillPositionDelay", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_Grimoire_SkillPositionDelay")
+AND
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_Grimoire_SkillPositionDelay")
+AND
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoires:SkillEvent] Character used skill on position. Skill[",_Skill,"] Type[",_SkillType,"] Element[",_SkillElement,"]");
+LLWEAPONEX_Grimoire_OnUsedSkillAtPosition(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement);
+
+IF
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+NOT LeaderLib_QRY_ObjectObjectTimerStarted(_Caster, _Target, "LLWEAPONEX_Timers_ResetSkillEventEntry_")
+AND
+LeaderLog_QRY_Log("COMBINE", "LLWEAPONEX_ResetSkillEvent_", _Skill, _SkillType, _SkillElement)
+AND
+DB_LeaderLog_Temp_CombinedString(_Event)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_Event);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoires:SkillEvent] Character used skill on target. Skill[",_Skill,"] Type[",_SkillType,"] Element[",_SkillElement,"]");
+LLWEAPONEX_Grimoire_OnUsedSkillOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement);
+DB_LLWEAPONEX_Grimoire_ResetSkillEvent(_Event, _Caster, _Target, _Skill, _SkillType, _SkillElement);
+LeaderLib_StartObjectObjectTimer(_Caster, _Target, 250, "LLWEAPONEX_Timers_ResetSkillEventEntry_", _Event);
+
+PROC
+LeaderLib_ObjectObjectTimerFinished((CHARACTERGUID)_Caster, _Target, _Event)
+AND
+DB_LLWEAPONEX_Grimoire_ResetSkillEvent(_Event, _Caster, _Target, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_ResetSkillEvent(_Event, _Caster, _Target, _Skill, _SkillType, _SkillElement);
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement);
+
+/*
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_Type)
+AND
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement);
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_Type)
+AND
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _tx, _ty, _tz, _Skill, _SkillType, _SkillElement)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _tx, _ty, _tz, _Skill, _SkillType, _SkillElement);
+*/
+//END_REGION
+
+//REGION GRIMOIRE_ACTIVATE_BASE
+PROC
+LLWEAPONEX_Grimoire_OnUsedSkillOnTarget((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_Grimoire_OnUsedSkillAtPosition((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+THEN
+DB_NOOP(1);
+
+IF
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _Type)
+AND
+NOT LeaderLib_QRY_ObjectTimerStarted(_Caster, "LLWEAPONEX_Timers_GrimoireSkillCastFailsafe_")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoires:ActivateMagic] Character activated grimoire magic on target, and is preparing to fire. Skill[",_Skill,"] Magic Type[",_Type,"]");
+SetStoryEvent(_Caster, "LLWEAPONEX_Events_GrimoirePreparingToFire");
+LeaderLib_StartObjectTimer(_Caster, 1500, "LLWEAPONEX_Timers_GrimoireSkillCastFailsafe_", _Skill);
+
+IF
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _Type)
+AND
+NOT LeaderLib_QRY_ObjectTimerStarted(_Caster, "LLWEAPONEX_Timers_GrimoireSkillCastFailsafe_")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoires:ActivateMagic] Character activated grimoire magic at position, and is preparing to fire. Skill[",_Skill,"] Magic Type[",_Type,"]");
+SetStoryEvent(_Caster, "LLWEAPONEX_Events_GrimoirePreparingToFire");
+LeaderLib_StartObjectTimer(_Caster, 1500, "LLWEAPONEX_Timers_GrimoireSkillCastFailsafe_", _Skill);
+
+IF
+SkillCast(_Caster, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _Type)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _Type);
+LeaderLib_CancelObjectTimerByEvent(_Caster, _Skill);
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Target, _Skill, _Type);
+
+IF
+SkillCast(_Caster, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _Type)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _Type);
+LeaderLib_CancelObjectTimerByEvent(_Caster, _Skill);
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _x, _y, _z, _Skill, _Type);
+
+IF
+StoryEvent((CHARACTERGUID)_Caster, _Skill)
+AND
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _Type)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _Type);
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Target, _Skill, _Type);
+
+IF
+StoryEvent((CHARACTERGUID)_Caster, _Skill)
+AND
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _Type)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _Type);
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _x, _y, _z, _Skill, _Type);
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_Type)
+AND
+NOT LeaderLib_QRY_ObjectTimerStarted(_Caster, "LLWEAPONEX_Timers_Grimoire_ResetOpenFlag_")
+THEN
+LeaderLib_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Grimoire_ResetOpenFlag_", "LLWEAPONEX_Events_GrimoireFired");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_Type)
+AND
+NOT LeaderLib_QRY_ObjectTimerStarted(_Caster, "LLWEAPONEX_Timers_Grimoire_ResetOpenFlag_")
+THEN
+LeaderLib_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Grimoire_ResetOpenFlag", "LLWEAPONEX_Events_GrimoireFired");
+
+IF
+CharacterStatusApplied(_Caster, "UNSHEATHED", _)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireOpened", 1)
+THEN
+LeaderLib_CancelObjectTimerByEvent(_Caster, "LLWEAPONEX_Events_GrimoireFired");
+//END_REGION
+
+//REGION GRIMOIRE_ACTIVATE_ELEMENTS
+PROC
+LLWEAPONEX_Grimoire_OnUsedSkillOnTarget((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, "Air")
+AND
+HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", 1)
+THEN
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, "Wind");
+
+PROC
+LLWEAPONEX_Grimoire_OnUsedSkillAtPosition((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, "Air")
+AND
+HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", 1)
+THEN
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, "Wind");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "Wind")
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+AND
+CharacterIsEnemy(_Caster, _Target, 1)
+THEN
+CharacterCharacterSetEvent(_Caster, _Target, "LLWEAPONEX_Grimoire_ShootWindMagic");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "Wind")
+AND
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, "Wind")
+AND
+ObjectIsItem((ITEMGUID)_Target, 1)
+THEN
+CharacterItemSetEvent(_Caster, _Target, "LLWEAPONEX_Grimoire_ShootWindMagic");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, "Wind")
+THEN
+SetVarFloat3(_Caster, "LLWEAPOENX_GrimoireTargetPosition", _x, _y, _z);
+SetStoryEvent(_Caster, "LLWEAPONEX_Grimoire_ShootWindMagic");
+
+PROC
+LLWEAPONEX_Grimoire_OnUsedSkillOnTarget((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "teleportation", (STRING)_SkillElement)
+AND
+HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", 1)
+THEN
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, "Swap");
+
+PROC
+LLWEAPONEX_Grimoire_OnUsedSkillOnTarget((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "jump", (STRING)_SkillElement)
+AND
+HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", 1)
+THEN
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, "Swap");
+
+PROC
+LLWEAPONEX_Grimoire_OnUsedSkillAtPosition((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, "jump", (STRING)_SkillElement)
+AND
+HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", 1)
+THEN
+DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Caster, _Skill, "Swap");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "Swap")
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+AND
+CharacterIsEnemy(_Caster, _Target, 1)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_GRIMOIRE_SWAP_DAMAGE", 0.0, 0, _Caster);
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "Swap")
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+AND
+CharacterIsAlly(_Caster, _Target, 1)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_GRIMOIRE_SWAP_SURGE", 6.0, 0, _Caster);
+//END_REGION
+
+//REGION MAGIC_AUTO_LEVELING
 //Auto-Leveling
 IF
 ItemEquipped(_Magic, _Character)
 AND
 IsTagged(_Magic, "LLWEAPONEX_Grimoire_Magic", 1)
 AND
-NOT DB_LLWEAPONEX_Grimoires_MagicLink(_, _Magic)
+NOT DB_LLWEAPONEX_Grimoire_MagicLink(_, _Magic)
 AND
 CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_Grimoire)
 THEN
 SetStoryEvent(_Grimoire, "LeaderLib_Commands_GetItemLevel");
-DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic);
+DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic);
 
 IF
 StoryEvent((ITEMGUID)_Grimoire, "LeaderLib_Events_ItemLevelStored")
@@ -235,17 +556,17 @@ SetVarInteger(_Magic, "LeaderLib_ItemLevel", _Level);
 IF
 ItemUnEquipped(_Grimoire, _Character)
 AND
-DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic)
+DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic)
 THEN
-NOT DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic);
+NOT DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic);
 ItemRemove(_Magic);
 
 IF
 ItemDestroyed(_Magic)
 AND
-DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic)
+DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic)
 THEN
-NOT DB_LLWEAPONEX_Grimoires_MagicLink(_Grimoire, _Magic);
+NOT DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic);
 
 /*
 IF
@@ -255,6 +576,32 @@ CharacterGetEquippedItem(_Owner, "Weapon", (ITEMGUID)_Magic)
 THEN
 PlayEffect(_Character, "RS3_FX_Skills_Air_Wind_Cast_Hand_Horizontal_01", "Dummy_R_HandFX");
 */
+//END_REGION
+
+//REGION LAST_SKILL
+IF
+CharacterUsedSkill(_Character, _Skill, _, _)
+THEN
+SetVarString(_Character, "LLWEAPONEX_LastUsedSkill", _Skill);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_COPYLASTSKILL", (CHARACTERGUID)_Caster)
+AND
+GetVarString(_Target, "LLWEAPONEX_LastUsedSkill", _Skill)
+AND
+CharacterHasSkill(_Caster, _Skill, 0)
+THEN
+CharacterAddSkill(_Caster, _Skill);
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Caster, _Skill);
+
+IF
+CharacterUsedSkill(_Caster, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Caster, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Caster, _Skill);
+CharacterRemoveSkill(_Caster, _Skill);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

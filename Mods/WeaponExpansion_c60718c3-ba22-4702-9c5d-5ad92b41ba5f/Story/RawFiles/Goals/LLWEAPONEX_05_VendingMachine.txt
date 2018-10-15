@@ -67,6 +67,13 @@ SkillCast(_VendingMachine, "Shout_LLWEAPONEX_VendingMachine_Move_Top", _, _)
 THEN
 PROC_StopLoopBeamEffect(_VendingMachine, "LLWEAPONEX_VendingMachine_TopItemMovement");
 
+IF
+TextEventSet("llweap_vendtest")
+AND
+GetTextEventParamString(1, _Anim)
+THEN
+PlayAnimation(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Anim, "");
+
 /*
 IF
 StoryEvent(_VendingMachine, "LLWEAPONEX_VendingMachine_StartLoopEffects")

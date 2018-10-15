@@ -1,10 +1,12 @@
 #INCLUDE LLWEAPONEX_Statuses
 #INCLUDE LLWEAPONEX_ThrowingWeapons
 #INCLUDE LLWEAPONEX_Runeblades
+#INCLUDE LLWEAPONEX_Grimoires
 INIT
 	USING LLWEAPONEX_Statuses
 	USING LLWEAPONEX_ThrowingWeapons
 	USING LLWEAPONEX_Runeblades
+	USING LLWEAPONEX_Grimoires
 EVENTS
 
 EVENT LLWEAPONEX_Debug_ReviveRevenantTest
@@ -40,7 +42,7 @@ ON
 	OnCharacterStartAttackPosition(_,_,_Character)
 ACTIONS
 IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MAGIC_WIND_ACTIVE)
+	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_WIND_ACTIVE)
 THEN
 	CharacterPlayEffect(_Character, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Hand_01", "Dummy_R_HandFX")
 	//RS3_FX_Skills_Totem_Cast_Target_Totem_Air_Hand_01
