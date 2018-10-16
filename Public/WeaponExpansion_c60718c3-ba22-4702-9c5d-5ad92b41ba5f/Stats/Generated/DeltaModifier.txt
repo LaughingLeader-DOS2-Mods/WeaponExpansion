@@ -1,0 +1,139 @@
+new deltamod "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Shield_EmptyRuneSlot",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Teleportation",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Netherswap"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Netherswap",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Transit"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Transit",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Air_Small",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Primary_Intelligence",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Primary_Intelligence_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Primary_Intelligence_Large",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_All_Small"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_All",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_All_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_All_Large"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_All_Large",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_Magical",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_Magical_Large",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Large"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_Magical_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Flags_StunContact"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Flags_StunContact",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Flags_ShockedImmunity"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Flags_ShockedImmunity",1

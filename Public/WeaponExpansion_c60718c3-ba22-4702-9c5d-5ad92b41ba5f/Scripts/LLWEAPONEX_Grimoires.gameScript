@@ -76,3 +76,50 @@ IF "c1&!c2"
 THEN
 	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _Target, _Level, _Caster)
 ENDIF
+
+EVENT LLWEAPONEX_Grimoire_Swap_OnTeleport
+VARS
+	CHARACTER:_Caster
+	CHARACTER:_Target
+ON
+	OnCharacterTeleported(_Target, _Caster, _, _, _)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Caster, LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE)
+THEN
+	IF "c1"
+		CharacterIsEnemy(_Caster, _Target)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_GRIMOIRE_SWAP_DAMAGE, 0, 0, _Caster)
+	ELSE
+		CharacterApplyStatus(_Target, LLWEAPONEX_GRIMOIRE_SWAP_SURGE, 1, 0, _Caster)
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_Swap_OnTeleported
+VARS
+	CHARACTER:_Caster
+	CHARACTER:_Target
+ON
+	OnCharacterTeleported(_Caster, _Target, _, _, _)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Caster, LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE)
+THEN
+	CharacterApplyStatus(_Caster, LLWEAPONEX_GRIMOIRE_SWAP_SURGE, 1, 0, _Caster)
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_Swap_StatusCheck
+VARS
+	CHARACTER:_Caster
+	CHARACTER:_Target
+ON
+	OnCharacterCharacterEvent(_Caster, _Target, "LLWEAPONEX_Grimoire_ApplySwapMagic")
+ACTIONS
+IF "c1"
+	CharacterIsEnemy(_Caster, _Target)
+THEN
+	CharacterApplyStatus(_Target, LLWEAPONEX_GRIMOIRE_SWAP_DAMAGE, 0, 0, _Caster)
+ELSE
+	CharacterApplyStatus(_Target, LLWEAPONEX_GRIMOIRE_SWAP_SURGE, 1, 0, _Caster)
+ENDIF

@@ -65,6 +65,7 @@ IF "!c1&c2&c3"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Source)
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Turns)
 THEN
+	Clamp(_Turns, 0, _Turns) // Permanent knockdown prevention
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, _Turns, 1, _Source)
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
@@ -82,6 +83,7 @@ IF "!c1&c2&c3"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Source)
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Turns)
 THEN
+	Clamp(_Turns, 0, _Turns)
 	CharacterApplyStatus(_Target, BLEEDING, _Turns, 1, _Source)
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
@@ -137,6 +139,7 @@ IF "!c1&c2&c3"
 	GetStatusTurns(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Turns)
 	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Source)
 THEN
+	Clamp(_Turns, 0, _Turns)
 	CharacterApplyStatus(_Character, SHOCKED, _Turns, 0, _Source)
 ENDIF
 	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, null, 0)
@@ -158,3 +161,47 @@ THEN
 	ExplodeAt(_Target, Projectile_LLWEAPONEX_Kevin_MiniExplosion, _Level, _Player)
 ENDIF
 */
+
+EVENT LLWEAPONEX_DeflectProjectiles_CountdownStart
+VARS
+	CHARACTER:_Character
+ON
+	OnEnteredCombat(_Character, _)
+ACTIONS
+IF "c1&!c2"
+	CharacterHasStatus(_Character, LLWEAPONEX_DEFLECT_PROJECTILES_INNATE)
+	CharacterHasStatus(_Character, LLWEAPONEX_DEFLECT_PROJECTILES_COUNTDOWN)
+THEN
+	CharacterApplyStatus(_Character, LLWEAPONEX_DEFLECT_PROJECTILES_COUNTDOWN, 4, 0, _Character)
+ENDIF
+
+EVENT LLWEAPONEX_DeflectProjectiles_CountdownCancel_LeftCombat
+VARS
+	CHARACTER:_Character
+ON
+	OnLeftCombat(_Character, _)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Character, LLWEAPONEX_DEFLECT_PROJECTILES_COUNTDOWN)
+THEN
+	CharacterRemoveStatus(_Character, LLWEAPONEX_DEFLECT_PROJECTILES_COUNTDOWN)
+ENDIF
+
+EVENT LLWEAPONEX_DeflectProjectiles_CountdownCancel_NotInCombat
+VARS
+	CHARACTER:_Character
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
+ON
+	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_DEFLECT_PROJECTILES_COUNTDOWN)
+ACTIONS
+	Set(_Result, LLWEAPONEX_DEFLECT_PROJECTILES_COUNTDOWN)
+IF "!c1|!c2"
+	IsInCombat(_Character)
+	CharacterHasStatus(_Character, LLWEAPONEX_DEFLECT_PROJECTILES_INNATE)
+THEN
+	Set(_Result, null)
+	ListAdd(_RemoveList, LLWEAPONEX_DEFLECT_PROJECTILES)
+	CombatLogText(_Character, "LLWEAPONEX_CombatLog_DeflectProjectilesCountdownFailed", 1, 1)
+ENDIF
+	RETURN(_RemoveList, _Result, null)
