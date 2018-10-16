@@ -104,6 +104,13 @@ CharacterGetHostCharacter(_Host)
 THEN
 TeleportTo(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1, _Host);
 
+IF
+CharacterUsedSkill(_Character, _, _, _)
+AND
+CharacterGetHostCharacter(_Character)
+THEN
+CharacterResetCooldowns(_Character);
+
 /*
 IF
 StoryEvent(_, "LeaderLib_Initialized")

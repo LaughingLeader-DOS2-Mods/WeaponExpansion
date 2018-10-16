@@ -124,6 +124,27 @@ param "ModifierType" "Shield"
 param "SlotType" "Shield"
 new boost "_Boost_Shield_Armour_Magical_Medium",1
 
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_Physical",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_Physical_Large",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Large"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_Shield_Armour_Physical_Medium",1
+
 new deltamod "Boost_LLWEAPONEX_Grimoire_Flags_StunContact"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"

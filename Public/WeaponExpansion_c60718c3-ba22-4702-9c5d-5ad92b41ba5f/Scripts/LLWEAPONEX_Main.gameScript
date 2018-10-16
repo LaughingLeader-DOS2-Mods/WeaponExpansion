@@ -161,3 +161,12 @@ THEN
 	StopLoopEffect(_Handle, 1)
 	SetVar(_Character, "LLWEAPONEX_Grimoire_SheathedFXHandle", INT64:null)
 ENDIF
+
+EVENT LLWEAPONEX_Transit_CastEffect
+VARS
+	CHARACTER:_Character
+	INT64:_Handle
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_UsedTransitSkill")
+ACTIONS
+	CharacterPlayEffect(_Character, "LLWEAPONEX_FX_Skills_Cast_Transit_Portal_01", "Dummy_FrontFX")

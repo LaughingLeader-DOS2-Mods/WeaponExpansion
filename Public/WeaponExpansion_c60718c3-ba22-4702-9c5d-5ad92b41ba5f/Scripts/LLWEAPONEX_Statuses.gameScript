@@ -34,7 +34,6 @@ IF "c1&c2"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_TRIPPING, _Source)
 THEN
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 0, _Source)
-	
 ENDIF
 
 EVENT LLWEAPONEX_DragonsBane_GuaranteedKnockdown

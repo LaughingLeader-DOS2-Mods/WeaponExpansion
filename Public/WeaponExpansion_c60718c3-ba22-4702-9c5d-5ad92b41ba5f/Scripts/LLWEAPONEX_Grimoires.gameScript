@@ -123,3 +123,72 @@ THEN
 ELSE
 	CharacterApplyStatus(_Target, LLWEAPONEX_GRIMOIRE_SWAP_SURGE, 1, 0, _Caster)
 ENDIF
+
+EVENT LLWEAPONEX_Grimoire_TransitDamageCheck
+VARS
+	CHARACTER:_Source
+	CHARACTER:_Target
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_GRIMOIRE_TRANSIT_DAMAGE_CHECK)
+ACTIONS
+IF "c1&c2"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_GRIMOIRE_TRANSIT_DAMAGE_CHECK, _Source)
+	CharacterHasStatus(_Source, LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE)
+THEN
+	CharacterApplyStatus(_Target, LLWEAPONEX_GRIMOIRE_TRANSIT_DAMAGE, 0, 0, _Source)
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_Mimic_Ready
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStatusRemoved(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
+ACTIONS
+IF "c1&c2"
+	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+THEN
+	IF "c1"
+		IsInCombat(_Character)
+	THEN
+		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY, 1, 0, _Character)
+	ELSE
+		SetFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_Mimic_Ready_Apply
+VARS
+	CHARACTER:_Character
+ON
+	OnEnteredCombat(_Character, _)
+ACTIONS
+IF "c1"
+	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
+THEN
+	ClearFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
+	IF "c1"
+		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+	THEN
+		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY, 1, 0, _Character)
+	ENDIF
+ELSE
+	IF "c1"
+		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+	THEN
+		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_Mimic_StartCountdown
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStatusRemoved(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY)
+	OnLeftCombat(_Character, _)
+ACTIONS
+IF "c1&!c2"
+	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
+THEN
+	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
+ENDIF

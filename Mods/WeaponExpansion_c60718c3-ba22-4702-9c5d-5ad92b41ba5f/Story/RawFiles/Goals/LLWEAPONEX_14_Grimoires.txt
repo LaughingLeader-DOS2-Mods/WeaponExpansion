@@ -1,12 +1,12 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LLWEAPONEX_Grimoires_InitSettings();
+LLWEAPONEX_Grimoire_InitSettings();
 
 KBSECTION
 //REGION SETTINGS
 PROC
-LLWEAPONEX_Grimoires_InitSettings()
+LLWEAPONEX_Grimoire_InitSettings()
 THEN
 DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
 DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_FX_Items_Grimoire_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Swap_A");
@@ -37,13 +37,34 @@ LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 11, "B
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
 
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 3, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 5, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 6, "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 11, "", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+
 //END_REGION
+
+IF
+CharacterUsedSkillAtPosition(_Character, _x, _y, _z, "Target_LLWEAPONEX_Grimoire_StartTransit", _, _)
+THEN
+CharacterUseSkillAtPosition(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _x, _y, _z, 0, 1);
+
+IF
+CharacterUsedSkillOnTarget(_Character, _Target, "Target_LLWEAPONEX_Grimoire_StartTransit", _, _)
+THEN
+CharacterUseSkill(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _Target, 0, 1, 1);
 
 IF
 CharacterUsedSkill(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _, _)
 AND
 DB_CurrentLevel(_Region)
 THEN
+SetStoryEvent(_Character, "LLWEAPONEX_UsedTransitSkill");
 PROC_LoopEffect("LLWEAPONEX_FX_Projectiles_Skills_Transit_01", _Character, "LLWEAPONEX_TransitLoopEffect_A", _Region, "Dummy_FrontFX");
 ApplyStatus(_Character, "LLWEAPONEX_GRIMOIRE_TRANSIT", 6.0, 0, _Character);
 
@@ -86,7 +107,7 @@ ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3
 
 //REGION LOOP_FX
 IF
-StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Grimoires_StartItemEffect")
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Grimoire_StartItemEffect")
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 AND
@@ -136,11 +157,11 @@ GetTemplate(_Item, _Template)
 AND
 DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
-LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+LLWEAPONEX_Grimoire_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
 
 //Sheathed
 PROC
-LLWEAPONEX_Grimoires_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
+LLWEAPONEX_Grimoire_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
 AND
 ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0)
 THEN
@@ -151,7 +172,7 @@ DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _SheathedFX);
 
 //Unsheathed
 PROC
-LLWEAPONEX_Grimoires_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
+LLWEAPONEX_Grimoire_PlayEquippedFX((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_SheathedFX, (STRING)_UnsheathedFX)
 AND
 ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 1)
 THEN
@@ -183,7 +204,7 @@ AND
 DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX);
-LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+LLWEAPONEX_Grimoire_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
 
 IF
 ObjectFlagCleared("LLWEAPONEX_GrimoireOpened", (CHARACTERGUID)_Character, _)
@@ -207,7 +228,7 @@ AND
 DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX);
-LLWEAPONEX_Grimoires_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+LLWEAPONEX_Grimoire_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
 
 IF
 ItemUnEquipped(_Item, _Character)
@@ -234,7 +255,7 @@ StopLoopEffect(_Handle);
 NOT DB_LLWEAPONEX_Grimoire_ItemLoopFX(_Item, _Handle);
 
 PROC
-LLWEAPONEX_Grimoires_StopLoopFX((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+LLWEAPONEX_Grimoire_StopLoopFX((CHARACTERGUID)_Character, (ITEMGUID)_Item)
 AND
 DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX)
 THEN
@@ -743,6 +764,13 @@ AND
 HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", 1)
 THEN
 LeaderLib_StartCharacterCharacterTimer(_Caster, _Target, 500, "LLWEAPONEX_Timers_Grimoire_ApplySwapMagic_", "LLWEAPONEX_Grimoire_ApplySwapMagic");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_SWAP_CHECK_INSTANT", (CHARACTERGUID)_Caster)
+AND
+HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", 1)
+THEN
+CharacterCharacterSetEvent(_Caster, _Target, "LLWEAPONEX_Grimoire_ApplySwapMagic");
 //END_REGION
 
 //REGION MAGIC_AUTO_LEVELING
@@ -805,22 +833,81 @@ THEN
 SetVarString(_Character, "LLWEAPONEX_LastUsedSkill", _Skill);
 
 IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_COPYLASTSKILL", (CHARACTERGUID)_Caster)
+ItemUnEquipped(_Grimoire, _Character)
+AND
+GetTemplate(_Grimoire, "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc")
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
+CharacterRemoveSkill(_Character, _Skill);
+
+PROC
+LLWEAPONEX_Grimoire_RemoveCopiedSkill((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
+CharacterRemoveSkill(_Character, _Skill);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_COPYLASTSKILL", (CHARACTERGUID)_Character)
 AND
 GetVarString(_Target, "LLWEAPONEX_LastUsedSkill", _Skill)
 AND
-CharacterHasSkill(_Caster, _Skill, 0)
+CharacterHasSkill(_Character, _Skill, 0)
 THEN
-CharacterAddSkill(_Caster, _Skill);
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Caster, _Skill);
+LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
+CharacterAddSkill(_Character, _Skill);
+DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
+
+//In case a copied skill is learned
+IF
+SkillAdded(_Character, _Skill, 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
 
 IF
-CharacterUsedSkill(_Caster, _Skill, _, _)
+SkillAdded(_Character, _Skill, _)
 AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Caster, _Skill)
+DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Caster, _Skill);
-CharacterRemoveSkill(_Caster, _Skill);
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
+NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
+
+//Invalid skill safety check
+IF
+DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
+AND
+CharacterHasSkill(_Character, _Skill, 0)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
+
+IF
+CharacterUsedSkill(_Character, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
+
+IF
+SkillCast(_Character, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+AND
+DB_ObjectTimer(_Character, _ObjectTimerName, "LLWEAPONEX_Timers_RemoveCopiedSkill")
+THEN
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill")
+THEN
+LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
 //END_REGION
 EXITSECTION
 
