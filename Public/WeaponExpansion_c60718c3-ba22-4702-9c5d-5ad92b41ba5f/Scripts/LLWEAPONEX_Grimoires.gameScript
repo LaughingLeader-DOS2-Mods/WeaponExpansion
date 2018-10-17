@@ -1,5 +1,5 @@
 INIT
-
+	
 EVENTS
 
 EVENT LLWEAPONEX_Grimoire_OpenBook
@@ -124,6 +124,23 @@ ELSE
 	CharacterApplyStatus(_Target, LLWEAPONEX_GRIMOIRE_SWAP_SURGE, 1, 0, _Caster)
 ENDIF
 
+EVENT LLWEAPONEX_Grimoire_Swap_SetIsMovable
+VARS
+	ITEM:_Object
+ON
+	OnItemStatusAttempt(_Object, LLWEAPONEX_GRIMOIRE_SCRAMBLE_CHECK)
+ACTIONS
+IF "c1&!c2"
+	ItemIsMovable(_Object)
+	IsStoryItem(_Object)
+THEN
+	SetFlag(_Object, "LLWEAPONEX_IsMovable")
+ELIF "c1"
+	HasFlag(_Object, "LLWEAPONEX_IsMovable")
+THEN
+	ClearFlag(_Object, "LLWEAPONEX_IsMovable")
+ENDIF
+
 EVENT LLWEAPONEX_Grimoire_TransitDamageCheck
 VARS
 	CHARACTER:_Source
@@ -144,7 +161,7 @@ VARS
 ON
 	OnCharacterStatusRemoved(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 ACTIONS
-IF "c1&c2"
+IF "c1"
 	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
 THEN
 	IF "c1"

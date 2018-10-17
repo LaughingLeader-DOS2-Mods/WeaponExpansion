@@ -908,7 +908,187 @@ PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill")
 THEN
 LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Character, _Target, _Skill, _, _)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+AND
+IsSourceSkill(_Skill, 0)
+AND
+NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
+
+IF
+CharacterUsedSkillOnTarget(_Character, _Target, _Skill, _, _)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+AND
+IsSourceSkill(_Skill, 0)
+AND
+NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
+
+IF
+ObjectTurnEnded(_Character)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill")
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+LeaderLib_Skills_UseSkillOnTarget(_Character, _Target, _Skill, 1, 0);
+RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
+
 //END_REGION
+
+//REGION CUSTOM_SWAP_PLACES
+IF
+SkillCast(_Character, "Target_LLWEAPONEX_Scramble", _, _)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_ResolveScrambledPositions", 250);
+
+IF
+CharacterStatusAttempt(_Object, "LLWEAPONEX_GRIMOIRE_SCRAMBLE_CHECK", _Cause)
+AND
+GetPosition(_Object, _x, _y, _z)
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharactersList(_Cause, _Object);
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _Object, _x, _y, _z);
+PlayEffectAtPosition("RS3_FX_Skills_Void_Netherswap_Reappear_01", _x, _y, _z);
+PlayEffect(_Object, "LLWEAPONEX_FX_Skills_Cast_Scramble_Overlay_01");
+
+IF
+ItemStatusChange(_Object, "LLWEAPONEX_GRIMOIRE_SCRAMBLE_CHECK", _Cause)
+AND
+ObjectGetFlag(_Object, "LLWEAPONEX_IsMovable", 1)
+AND
+GetPosition(_Object, _x, _y, _z)
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Object, _x, _y, _z);
+PlayEffectAtPosition("RS3_FX_Skills_Void_Netherswap_Reappear_01", _x, _y, _z);
+PlayEffect(_Object, "LLWEAPONEX_FX_Skills_Cast_Scramble_Overlay_01");
+
+PROC
+ProcObjectTimerFinished(_Cause, "LLWEAPONEX_Timers_ResolveScrambledPositions")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharactersList(_Cause, _Character)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _OtherCharacter, _cx, _cy, _cz)
+AND
+_Character != _OtherCharacter
+AND
+GetDistanceToPosition(_Character, _cx, _cy, _cz, _Dist)
+AND
+_Dist < 1.0
+THEN
+LLWEAPONEX_Grimoire_Internal_RemoveFromPreviousScrambleSpot(_Cause, _Character);
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _OtherCharacter, _cx, _cy, _cz);
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _Character, _cx, _cy, _cz);
+
+PROC
+ProcObjectTimerFinished(_Cause, "LLWEAPONEX_Timers_ResolveScrambledPositions")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharactersList(_Cause, _Character)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Item, _cx, _cy, _cz)
+AND
+GetDistanceToPosition(_Character, _cx, _cy, _cz, _Dist)
+AND
+_Dist < 1.0
+THEN
+LLWEAPONEX_Grimoire_Internal_RemoveFromPreviousScrambleSpot(_Cause, _Character);
+
+PROC
+LLWEAPONEX_Grimoire_Internal_RemoveFromPreviousScrambleSpot((GUIDSTRING)_Cause, (CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _Character, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _Character, _tx, _ty, _tz);
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, NULL_00000000-0000-0000-0000-000000000000, _tx, _ty, _tz);
+
+PROC
+ProcObjectTimerFinished(_Cause, "LLWEAPONEX_Timers_ResolveScrambledPositions")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Item, _ix, _iy, _iz)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, NULL_00000000-0000-0000-0000-000000000000, _x, _y, _z)
+AND
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapResolved(_Cause, _Item)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:Scramble] Teleporting item to unoccupied position.");
+TeleportToPosition(_Item, _x, _y, _z, "LLWEAPONEX_Scramble_Reappear", 0);
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Item, _ix, _iy, _iz);
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, NULL_00000000-0000-0000-0000-000000000000, _x, _y, _z);
+DB_LLWEAPONEX_Grimoire_Temp_SwapResolved(_Cause, _Item);
+
+PROC
+ProcObjectTimerFinished(_Cause, "LLWEAPONEX_Timers_ResolveScrambledPositions")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapResolved(_Cause, _Item)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapResolved(_Cause, _Item);
+
+PROC
+ProcObjectTimerFinished(_Cause, "LLWEAPONEX_Timers_ResolveScrambledPositions")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharactersList(_Cause, _Object)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapCharactersList(_Cause, _Object);
+
+PROC
+ProcObjectTimerFinished(_Cause, "LLWEAPONEX_Timers_ResolveScrambledPositions")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _Object, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapCharacters(_Cause, _Object, _x, _y, _z);
+
+PROC
+ProcObjectTimerFinished(_Cause, "LLWEAPONEX_Timers_ResolveScrambledPositions")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Item, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Item, _x, _y, _z);
+/*RealSubtract(_tx, _x, _xVar)
+AND
+LeaderLib_Math_QRY_AbsoluteValue(_xVar)
+AND
+DB_LeaderLib_Math_AbsoluteValue(_xVar, _xDist)
+AND
+RealSubtract(_tz, _z, _zVar)
+AND
+LeaderLib_Math_QRY_AbsoluteValue(_zVar)
+AND
+DB_LeaderLib_Math_AbsoluteValue(_zVar, _zDist)
+AND
+RealSubtract(_xDist, _zDist, _DistVar)
+AND
+LeaderLib_Math_QRY_AbsoluteValue(_DistVar)
+AND
+DB_LeaderLib_Math_AbsoluteValue(_DistVar, _TotalDist)
+
+PROC
+ProcObjectTimerFinished((ITEMGUID)_Item, "LLWEAPONEX_Timers_CheckSwapPosition")
+THEN
+LeaderLib_Math_ClearAbsoluteValues();
+*/
+
+IF
+StoryEvent(_Object, "LLWEAPONEX_Scramble_Reappear")
+THEN
+//PlayEffect(_Object, "RS3_FX_Skills_Void_Netherswap_Reappear_01");
+DB_NOOP(1);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION
