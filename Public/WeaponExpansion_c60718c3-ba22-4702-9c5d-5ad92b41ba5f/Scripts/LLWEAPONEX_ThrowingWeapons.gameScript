@@ -120,3 +120,51 @@ THEN
 	SetY(_Pos, _PosY)
 	ShootWorldProjectileAt(Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect, _Target, _Pos, _Player, 1)
 ENDIF
+
+EVENT LLWEAPONEX_ReturnProjectile
+VARS
+	CHARACTER:_Caster
+	ITEM:_OriginItem
+	CHARACTER:_OriginCharacter
+	FLOAT3:_Pos
+	STRING:_SkillStr
+	SKILL:_Skill
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterItemEvent(_Caster, _OriginItem, "LLWEAPONEX_Events_ShootReturnSkill")
+	OnCharacterCharacterEvent(_Caster, _OriginCharacter, "LLWEAPONEX_Events_ShootReturnSkill")
+ACTIONS
+IF "c1&c2"
+	GetVar(_SkillStr, _Caster, "LLWEAPONEX_ReturnSkill")
+	CharacterGetStat(_LevelF, _Caster, Level)
+THEN
+	Cast(_Level, _LevelF)
+	//Workaround for lack of a STRING->SKILL Cast
+	IF "c1"
+		IsEqual(_SkillStr, "Projectile_LLWEAPONEX_ShieldToss_Returned")
+	THEN
+		Set(_Skill, Projectile_LLWEAPONEX_ShieldToss_Returned)
+	ENDIF
+	IF "!c1"
+		IsEqual(_OriginCharacter, null)
+	THEN
+		IF "c1&c2&!c3"
+			IsEqual(_OriginCharacter, _Caster)
+			GetVar(_Pos, _Caster, "LLWEAPONEX_ReturnSkillFallbackPosition")
+			IsEqual(_Pos, null)
+		THEN
+			SetVar(_Caster, "LLWEAPONEX_ReturnSkillFallbackPosition", FLOAT3:null)
+			Add(_Pos, FLOAT3:{0.0;0.20;0.0})
+			ShootWorldProjectileAt(_Skill, CHARACTER:null, _Pos, _Caster, _Level)
+		ELIF "!c1"
+			IsEqual(_OriginCharacter, _Caster)
+		THEN
+			ShootLocalProjectileAt(_Skill, _OriginCharacter, FLOAT3:{0.0;1.0;0.0}, _Caster, _Level, _Caster)
+		ENDIF
+	ELIF "!c1"
+		IsEqual(_OriginItem, null)
+	THEN
+		ShootLocalProjectileAt(_Skill, _OriginItem, FLOAT3:{0.0;1.0;0.0}, _Caster, _Level, _Caster)
+	ENDIF
+ENDIF
