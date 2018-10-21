@@ -314,6 +314,7 @@ THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_ReturnTarget(_Character, _OtherTarget, _ShootSkill, _Count);
 LLWEAPONEX_Throwing_Internal_SetReturnTarget(_Character, _Target, _ShootSkill, _NextCount);
 
+/*
 PROC
 LLWEAPONEX_Throwing_Internal_OnTargetHit((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ShootSkill)
 AND
@@ -323,30 +324,54 @@ DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTa
 THEN
 ProcObjectTimerCancel(_Character, _TimerName);
 ProcObjectTimer(_Character, _TimerName, _Timeout);
+*/
 
 PROC
 LLWEAPONEX_Throwing_Internal_SetReturnTarget((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ShootSkill, (INTEGER)_Count)
 THEN
 DB_LLWEAPONEX_Throwing_Temp_ReturnTarget(_Character, _Target, _ShootSkill, _Count);
 
-PROC
-LLWEAPONEX_Throwing_Internal_SetReturnTarget((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ShootSkill, (INTEGER)_Count)
+QRY
+LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets((CHARACTERGUID)_Character, (STRING)_ShootSkill, (INTEGER)_Count)
 AND
 DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _InitialTarget, _IteratorEvent, _TotalTargets)
 AND
 _Count < _TotalTargets
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets((CHARACTERGUID)_Character, (STRING)_ShootSkill, (INTEGER)_Count)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _, _, _)
 AND
 DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+AND
+_Count < _MaxTargets
 THEN
-ProcObjectTimerCancel(_Character, _TimerName);
-ProcObjectTimer(_Character, _TimerName, 300);
+DB_NOOP(1);
 
 PROC
 LLWEAPONEX_Throwing_Internal_SetReturnTarget((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ShootSkill, (INTEGER)_Count)
 AND
-DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _InitialTarget, _IteratorEvent, _TotalTargets)
+LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets(_Character, _ShootSkill, _Count)
 AND
-_Count >= _TotalTargets
+DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+AND
+IntegerDivide(_Timeout, 2, _FastTimeout)
+AND
+IntegertoString(_Count, _CountStr)
+AND
+IntegertoString(_MaxTargets, _TotalStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:Internal:SetReturnTarget(",_ShootSkill,")] [",_CountStr,"/",_TotalStr,"] hit targets.");
+ProcObjectTimerCancel(_Character, _TimerName);
+ProcObjectTimer(_Character, _TimerName, _FastTimeout);
+
+PROC
+LLWEAPONEX_Throwing_Internal_SetReturnTarget((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ShootSkill, (INTEGER)_Count)
+AND
+NOT LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets(_Character, _ShootSkill, _Count)
 AND
 DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 AND
@@ -354,9 +379,20 @@ DB_LLWEAPONEX_Throwing_Temp_ReturnTarget(_Character, _Target, _ShootSkill, _Curr
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_ReturnTarget(_Character, _Target, _ShootSkill, _CurrentCount);
 ProcObjectTimerCancel(_Character, _TimerName);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:Internal:SetReturnTarget(",_ShootSkill,")] Shooting return skill [",_ShootSkill,"] back to caster.");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:Internal:SetReturnTarget(",_ShootSkill,")] All targets hit. Shooting return skill [",_ShootSkill,"] back to caster.");
 LLWEAPONEX_Throwing_Internal_ClearIterator(_Character, _ShootSkill);
 LLWEAPONEX_Throwing_ShootReturnSkill(_Character, _Target, _ReturnSkill);
+LLWEAPONEX_Throwing_OnFullCombo(_Character, _ShootSkill);
+
+PROC
+LLWEAPONEX_Throwing_OnFullCombo((CHARACTERGUID)_Character, "Projectile_LLWEAPONEX_ShieldToss")
+AND
+CharacterHasSkill(_Character, "Shout_RecoverArmour", 1)
+THEN
+PlayEffect(_Character, "RS3_FX_GP_Status_Harmony_Impact_01");
+CharacterRemoveSkill(_Character, "Shout_RecoverArmour");
+CharacterAddSkill(_Character, "Shout_RecoverArmour", 0);
+CharacterStatusText(_Character, "LLWEAPONEX_Skills_ShieldTossAllHit");
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, _TimerName)

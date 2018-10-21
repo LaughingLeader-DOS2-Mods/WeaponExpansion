@@ -11,4 +11,4 @@ Stats_LLWEAPONEX_SoulBurn5	Soul Burn V
 Stats_LLWEAPONEX_StrengthIntelligenceBonus	Strength Conversion
 Stats_LLWEAPONEX_Tarred	Tarred
 Stats_LLWEAPONEX_WaterBurn	Water Burn
-Stats_LLWEAPONEX_CombatShieldArmor	Combat Shield Armor
+Stats_LLWEAPONEX_CombatShieldArmor	Combat Shield
