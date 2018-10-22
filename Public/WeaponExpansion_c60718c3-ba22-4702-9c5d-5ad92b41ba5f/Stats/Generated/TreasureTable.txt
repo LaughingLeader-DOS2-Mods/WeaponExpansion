@@ -61,6 +61,8 @@ new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Rod_Water",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Rod_Poison",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Rod_Chaos",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_CheatRuneblades"
 new subtable "-1"
@@ -157,10 +159,11 @@ object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_RodsNormal"
 new subtable "1,1"
-object category "LLWEAPONEX_Rods_Fire",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Rods_Air",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Rods_Water",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Rods_Poison",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Air",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Fire",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Poison",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Water",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Chaos",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_RunebladesNormal"
 new subtable "1,1"

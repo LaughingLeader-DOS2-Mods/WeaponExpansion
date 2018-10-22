@@ -86,6 +86,24 @@ THEN
 	CharacterApplyStatus(_Target, BLEEDING, _Turns, 1, _Source)
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
+	
+EVENT LLWEAPONEX_MagicCrippledCheck
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+	INT:_Turns
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK)
+ACTIONS
+IF "!c1&c2&c3"
+	CharacterHasStatus(_Target, CRIPPLED)
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Source)
+	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Turns)
+THEN
+	Clamp(_Turns, 0, _Turns)
+	CharacterApplyStatus(_Target, CRIPPLED, _Turns, 1, _Source)
+ENDIF
+	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK)
 
 /*
 EVENT LLWEAPONEX_Tar_BurningBypass

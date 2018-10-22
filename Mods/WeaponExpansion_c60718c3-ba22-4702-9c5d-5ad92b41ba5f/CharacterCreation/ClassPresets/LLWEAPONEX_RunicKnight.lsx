@@ -5,7 +5,7 @@
 	<region id="CharacterCreationClass">
 		<node id="root">
 			<attribute id="ClassName" value="Runic Knight" handle="h5006a424g3d59g4356-baa7g26110b276aab" type="28" />
-			<attribute id="ClassDescription" value="Adept mages who train in the ways of the sword, using special 'Runeblades' as a conduit to enhance their magic." handle="h71d19b56gda1eg434aga7f0g58ffec6c6a0a" type="28" />
+			<attribute id="ClassDescription" value="Adept mages who train in the ways of the sword, using special 'Runeblades' as a conduit to enhance their magic" handle="h71d19b56gda1eg434aga7f0g58ffec6c6a0a" type="28" />
 			<attribute id="ClassLongDescription" value="Runic Knights are mages who train in both the ways of the sword and spell, utilizing special 'Runeblades' as a conduit to enhance their magic. Crafty use of the runes etched upon their blades allow Runic Knights to weave their attacks and spells together, devastating the battlefield." handle="hcb07f0fbg0890g42ecg912eg022f0ace33e6" type="28" />
 			<attribute id="ClassType" value="LLWEAPONEX_RunicKnight" type="22" />
 			<attribute id="SkillSet" value="Class_LLWEAPONEX_RunicKnight" type="22" />
@@ -66,10 +66,6 @@
 				<node id="AbilityChanges">
 					<children>
 						<node id="AbilityChange">
-							<attribute id="Ability" value="WarriorLore" type="23" />
-							<attribute id="AmountIncreased" value="1" type="4" />
-						</node>
-						<node id="AbilityChange">
 							<attribute id="Ability" value="AirSpecialist" type="23" />
 							<attribute id="AmountIncreased" value="1" type="4" />
 						</node>
@@ -79,7 +75,7 @@
 						</node>
 						<node id="AbilityChange">
 							<attribute id="Persuasion" value="Luck" type="23" />
-							<attribute id="AmountIncreased" value="2" type="4" />
+							<attribute id="AmountIncreased" value="1" type="4" />
 						</node>
 					</children>
 				</node>
@@ -98,7 +94,7 @@
 				<node id="TalentsAdded">
 					<children>
 						<node id="TalentAdded">
-							<attribute id="Talent" value="ExtraSkillPoints" type="23" />
+							<attribute id="Talent" value="ElementalAffinity" type="23" />
 						</node>
 					</children>
 				</node>

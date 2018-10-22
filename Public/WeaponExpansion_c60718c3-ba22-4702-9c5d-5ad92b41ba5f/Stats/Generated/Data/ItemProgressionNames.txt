@@ -60,7 +60,7 @@ new namegroup "WPN_LLWEAPONEX_Beginner_Rod"
 add name "Weak Rod",""
 
 new namegroup "WPN_LLWEAPONEX_Improv_Rod"
-add name "Improv Rod",""
+add name "Makeshift Rod",""
 
 new namegroup "WPN_LLWEAPONEX_Rod_Of_Nature"
 add name "Rod Of Nature",""
@@ -109,6 +109,9 @@ add name "Wooden Rod",""
 
 new namegroup "WPN_LLWEAPONEX_Rod_Human_02"
 add name "Stone Rod",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedRod_Chaos"
+add name "Makeshift Chaotic Rod",""
 
 new namegroup "WPN_LLWEAPONEX_Runeblades_1H"
 add name "Runeblade",""

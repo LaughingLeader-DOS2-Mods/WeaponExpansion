@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+	<header version="2" time="1389735651" />
+	<version major="1" minor="3" revision="0" build="0" />
+	<region id="CharacterCreationClass">
+		<node id="root">
+			<attribute id="ClassName" value="Monk (Quarterstaff)" handle="h9045efcdg0e97g4884g95a2g9bfc844868f2" type="28" />
+			<attribute id="ClassDescription" value="Disciplined warriors who wield quarterstaffs, overwhelming enemies with finesse and sheer force of will" handle="h060a6bb2g4db6g48bag9602g2a9d7c28a85a" type="28" />
+			<attribute id="ClassLongDescription" value="Disciplined warriors who wield quarterstaffs, overwhelming enemies with finesse and sheer force of will." handle="hc3e23e57gd92dg4aa8ga314gb5a16d81235d" type="28" />
+			<attribute id="ClassType" value="LLWEAPONEX_MonkQuarterstaff" type="22" />
+			<attribute id="SkillSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+			<attribute id="Voice" value="2" type="5" />
+			<attribute id="Icon" value="4" type="5" />
+
+			<attribute id="NumStartingCombatAbilityPoints" value="2" type="4" />
+			<attribute id="NumStartingCivilAbilityPoints" value="1" type="4" />
+			<attribute id="NumStartingAttributePoints" value="3" type="4" />
+			<attribute id="NumStartingTalentPoints" value="1" type="4" />
+			
+			<attribute id="AreStatsWeighted" value="1" type="19" />
+			<children>
+				<node id="EquipmentProperties">
+					<children>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+						</node>
+					</children>
+				</node>
+				<node id="AbilityChanges">
+					<children>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="WarriorLore" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="Polymorph" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="Barter" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+					</children>
+				</node>
+				<node id="AttributeChanges">
+					<children>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="2" type="4" />
+							<attribute id="Attribute" value="FIN" type="23" />
+						</node>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="1" type="4" />
+							<attribute id="Attribute" value="WIT" type="23" />
+						</node>
+					</children>
+				</node>
+				<node id="TalentsAdded">
+					<children>
+						<node id="TalentAdded">
+							<attribute id="Talent" value="AttackOfOpportunity" type="23" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

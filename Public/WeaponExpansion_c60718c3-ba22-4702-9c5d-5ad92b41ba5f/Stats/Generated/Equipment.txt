@@ -112,6 +112,64 @@ add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H_Preview"
 
+new equipment "Class_LLWEAPONEX_ChaosWeaver_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Crafted"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRod_Chaos"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "SCROLL_Rain"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_ChaosWeaver_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Crafted"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRod_Chaos"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "SCROLL_Rain"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_ChaosWeaver_Preview"
+add equipmentgroup
+add equipment entry "ARM_Battlemage_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Battlemage_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Battlemage_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Battlemage_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Battlemage_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rod_Chaos_Preview"
+
 new equipment "Class_LLWEAPONEX_RunicKnight_Debug"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_RunicKnight_Helmet"
@@ -127,6 +185,58 @@ add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H"
+
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Preview"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Fighter_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Preview"
 
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup

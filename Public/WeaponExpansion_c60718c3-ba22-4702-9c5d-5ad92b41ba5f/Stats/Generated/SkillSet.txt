@@ -4,9 +4,19 @@ add skill "Projectile_PinDown"
 add skill "Shout_Adrenaline"
 
 new skillset "Class_LLWEAPONEX_RunicKnight"
-add skill "Rush_BatteringRam"
 add skill "Cone_LLWEAPONEX_WaterSpout"
+add skill "Target_ShockingTouch"
 add skill "Shout_BlindingRadiance"
+
+new skillset "Class_LLWEAPONEX_ChaosWeaver"
+add skill "Projectile_LLWEAPONEX_ChaosBolt"
+add skill "Target_LLWEAPONEX_MagicCripplingBlow"
+add skill "Rush_LLWEAPONEX_MagicBatteringRam"
+
+new skillset "Class_LLWEAPONEX_MonkQuarterstaff"
+add skill "Rush_BatteringRam"
+add skill "Target_TentacleLash"
+add skill "Cone_GroundSmash"
 
 new skillset "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add skill "Projectile_LLWEAPONEX_EnemyChaosSlash"

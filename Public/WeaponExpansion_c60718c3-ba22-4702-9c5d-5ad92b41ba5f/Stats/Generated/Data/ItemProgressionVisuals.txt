@@ -126,6 +126,12 @@ add levelgroup 0,0,"All"
 add rootgroup "0067f3f6-1dab-49e6-a5af-addc10071730",""
 add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal_Pipe","",""
 
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
+add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
+
 new itemgroup "WPN_LLWEAPONEX_Rods_1H"
 
 add levelgroup 0,3,"Common"
@@ -227,6 +233,42 @@ add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Lizards_Wand_1H_A_VAR"
 add levelgroup 0,0,"Divine"
 add rootgroup "325e72cc-2846-49a7-9c2a-cfea0d9103f5","LizardsStaffAEpic"
 add namegroup "WPN_LLWEAPONEX_Rods_1H_Epic","","Item_WPN_Lizards_Wand_1H_A_VAR"
+
+new itemgroup "WPN_LLWEAPONEX_CraftedRod_Air"
+
+add levelgroup 0,0,"All"
+add rootgroup "0edf88b5-f09f-473c-bae1-a992af4dba69",""
+add namegroup "WPN_LLWEAPONEX_Improv_Rod","",""
+
+new itemgroup "WPN_LLWEAPONEX_CraftedRod_Chaos"
+
+add levelgroup 0,0,"All"
+add rootgroup "0edf88b5-f09f-473c-bae1-a992af4dba69",""
+add namegroup "WPN_LLWEAPONEX_CraftedRod_Chaos","",""
+
+new itemgroup "WPN_LLWEAPONEX_CraftedRod_Fire"
+
+add levelgroup 0,0,"All"
+add rootgroup "0edf88b5-f09f-473c-bae1-a992af4dba69",""
+add namegroup "WPN_LLWEAPONEX_Improv_Rod","",""
+
+new itemgroup "WPN_LLWEAPONEX_CraftedRod_Poison"
+
+add levelgroup 0,0,"All"
+add rootgroup "0edf88b5-f09f-473c-bae1-a992af4dba69",""
+add namegroup "WPN_LLWEAPONEX_Improv_Rod","",""
+
+new itemgroup "WPN_LLWEAPONEX_CraftedRod_Water"
+
+add levelgroup 0,0,"All"
+add rootgroup "0edf88b5-f09f-473c-bae1-a992af4dba69",""
+add namegroup "WPN_LLWEAPONEX_Improv_Rod","",""
+
+new itemgroup "WPN_LLWEAPONEX_Rod_Chaos_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "325e72cc-2846-49a7-9c2a-cfea0d9103f5",""
+add namegroup "WPN_LLWEAPONEX_CraftedRod_Chaos","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Air_1H"
 
