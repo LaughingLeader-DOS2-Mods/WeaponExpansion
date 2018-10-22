@@ -1,165 +1,4 @@
 treasure itemtypes "Common","Uncommon","Rare","Epic","Legendary","Divine","Unique"
-new treasuretable "ST_LLWEAPONEX_QuarterstaffsNormal"
-new subtable "1,1"
-object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_RodsNormal"
-new subtable "1,1"
-object category "LLWEAPONEX_Rods_Fire",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Rods_Air",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Rods_Water",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Rods_Poison",1,1,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_RunebladesNormal"
-new subtable "1,1"
-object category "LLWEAPONEX_Runeblade_Fire",3,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Runeblade_Water",3,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Runeblade_Earth",3,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Runeblade_Poison",3,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Runeblade_Air",3,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Runeblade_Chaos",1,1,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_GreatbowsNormal"
-new subtable "1,1"
-object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_CombatShieldsNormal"
-new subtable "1,1"
-object category "LLWEAPONEX_CombatShield",1,1,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsNormal"
-new subtable "4,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock",10,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",3,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Dagger",4,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",6,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Shuriken_Poison",2,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_BuyableThrowingWeapons"
-new subtable "4,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0
-new subtable "5,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Dagger",1,0,0,0,0,0,0,0
-new subtable "6,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",1,0,0,0,0,0,0,0
-new subtable "12,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock",1,0,0,0,0,0,0,0
-new subtable "2,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
-new subtable "3,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Sword1H",1,0,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_FTJ_ThrowingWeapons"
-new subtable "4,1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock",20,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",6,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Dagger",7,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",10,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Shuriken_Poison",4,0,0,0,0,0,0,0
-object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_VendingMachine"
-IgnoreLevelDiff 1
-new subtable "3,1"
-object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
-new subtable "3,1"
-object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
-new subtable "1,1"
-object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
-new subtable "1,1"
-object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
-new subtable "1,1"
-object category "LLWEAPONEX_CombatShield",1,1,0,0,0,0,0,0
-new subtable "1,1"
-object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,1,0,0,0,0,0,0
-new subtable "1,1"
-object category "Trader Gold",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,0
-
-new treasuretable "LLWEAPONEX_Debug_PriceCheck"
-IgnoreLevelDiff 1
-new subtable "-1"
-object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0
-new subtable "-1"
-object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "T_LLWEAPONEX_CheatRods",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Axe2H",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Bow",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Chair_01",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Crossbow",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Dagger",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Mace1H",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Mace2H",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Scythe",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Shield",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Sickle",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Staff",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Sword1H",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Sword2H",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Wand",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Poison",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails",1,0,0,0,0,0,0,0
-
-new treasuretable "LLWEAPONEX_Debug_GenerationTest"
-new subtable "10,10"
-object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,1,1,1,1,0,0
-new subtable "10,10"
-object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,1,1,0,0
-new subtable "10,10"
-object category "T_ST_LLWEAPONEX_RodsNormal",1,1,1,1,1,1,0,0
-new subtable "10,10"
-object category "LLWEAPONEX_Greatbow",1,1,1,1,1,1,0,0
-new subtable "-5"
-object category "LLWEAPONEX_CombatShield",1,1,1,1,1,1,0,0
-new subtable "-2"
-object category "Shield",1,1,1,1,1,1,0,0
-
-new treasuretable "LLWEAPONEX_Debug_GrimoireTest"
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,1
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,1
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,1
-new subtable "-1"
-object category "I_WPN_UNIQUE_WithermooreShield",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_CheatThrowingWeapons"
 new subtable "-99"
@@ -310,6 +149,200 @@ new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Quarterstaff_Wood",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Quarterstaff_Metal",1,0,0,0,0,0,0,0
+
+
+new treasuretable "ST_LLWEAPONEX_QuarterstaffsNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_RodsNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Rods_Fire",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Air",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Water",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Rods_Poison",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_RunebladesNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Runeblade_Fire",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Runeblade_Water",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Runeblade_Earth",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Runeblade_Poison",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Runeblade_Air",9,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Runeblade_Chaos",5,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_Runes"
+new subtable "1,1"
+object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Air",9,1,0,0,0,0,0,0
+object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Chaos",1,1,0,0,0,0,0,0
+object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Earth",9,1,0,0,0,0,0,0
+object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Fire",9,1,0,0,0,0,0,0
+object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Poison",9,1,0,0,0,0,0,0
+object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Water",9,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_GreatbowsNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_CombatShieldsNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_CombatShield",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsNormal"
+new subtable "4,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock",10,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",3,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Dagger",4,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",6,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Shuriken_Poison",2,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_BuyableThrowingWeapons"
+new subtable "4,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0
+new subtable "5,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Dagger",1,0,0,0,0,0,0,0
+new subtable "6,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",1,0,0,0,0,0,0,0
+new subtable "12,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock",1,0,0,0,0,0,0,0
+new subtable "2,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
+new subtable "3,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Sword1H",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_FTJ_ThrowingWeapons"
+new subtable "4,1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock",20,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",6,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Dagger",7,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",10,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Shuriken_Poison",4,0,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_VendingMachine"
+IgnoreLevelDiff 1
+new subtable "3,1"
+StartLevel "1"
+EndLevel "8"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
+new subtable "3,1"
+StartLevel "9"
+EndLevel "13"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,0,0,0,0,0
+new subtable "3,1"
+StartLevel "14"
+EndLevel "16"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,0,0,0,0
+new subtable "3,1"
+StartLevel "17"
+EndLevel "30"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,1,0,0,0
+new subtable "1,1"
+StartLevel "8"
+EndLevel "30"
+object category "LLWEAPONEX_Runeblade_Inert",1,1,1,0,0,0,0,0
+new subtable "3,1"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_CombatShield",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,0,0,0,0,0,0,0
+new subtable "2,2"
+object category "T_ST_LLWEAPONEX_Runes",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_TOOL_Hammer_LLWEAPONEX_Runesmith_A",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "Trader Gold",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_Debug_PriceCheck"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "T_LLWEAPONEX_CheatRods",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Axe2H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Bow",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Chair_01",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Crossbow",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Dagger",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Mace1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Mace2H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Scythe",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Shield",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Sickle",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Staff",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Sword1H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Sword2H",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Wand",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Poison",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_Debug_GenerationTest"
+new subtable "10,10"
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,1,1,1,1,0,0
+new subtable "10,10"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,1,1,0,0
+new subtable "10,10"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,1,1,1,1,1,0,0
+new subtable "10,10"
+object category "LLWEAPONEX_Greatbow",1,1,1,1,1,1,0,0
+new subtable "-5"
+object category "LLWEAPONEX_CombatShield",1,1,1,1,1,1,0,0
+new subtable "-2"
+object category "Shield",1,1,1,1,1,1,0,0
+
+new treasuretable "LLWEAPONEX_Debug_GrimoireTest"
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,1
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,1
+new subtable "-1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,1
+new subtable "-1"
+object category "I_WPN_UNIQUE_WithermooreShield",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_CheatAllWeapons"
 new subtable "-1"
