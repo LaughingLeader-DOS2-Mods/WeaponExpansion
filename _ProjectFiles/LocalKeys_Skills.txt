@@ -4,8 +4,9 @@ Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide
 Projectile_LLWEAPONEX_EnemyDimensionalBolt	Chaos Bolt
 Projectile_LLWEAPONEX_Greatbow_PiercingShot_Description	<font color='#FFD700' size='18'>Dragon Slayer Technique</font><br>Fire an arrow that pierces up to [1] enemies, dealing [2] and applying <font color='#fcd203'>Knocked Down</font>.<br>When hitting a dragon, apply <font color='#FF4500'>Dragon's Bane</font>, dealing [3] and reducing the dragon's <font color='#00FF7F'>Movement Speed</font> by <font color='#FF0000'>[4]%</font> and <font color='#9370DB'>Dodge</font> by <font color='#FF0000'>[5]%</font>.
 Projectile_LLWEAPONEX_Greatbow_PiercingShot_DisplayName	<font color='#FFD700'>Dragon's Bane</font>
-Projectile_LLWEAPONEX_Rod_Shoot_Description	Launch a magical missile from your rod that deals [1].
-Projectile_LLWEAPONEX_Rod_Shoot_DisplayName	Shoot Rod
+Projectile_LLWEAPONEX_ShootRod_Description	Launch a magical missile from your rod that deals [1], and creates a surface of the related element.
+Projectile_LLWEAPONEX_ShootRod_DisplayName	Shoot Rod
+Projectile_LLWEAPONEX_ShootRod_Chaos_Description	Launch a magical missile from your rod that deals <font color='#b823cb'>[1] Chaos Damage</font>, and creates a random surface.
 Shout_LLWEAPONEX_LegSweep_Description	<font color='#FFD700' size='18'>Monk Technique</font><br>Sweep the ground around you within a [1] radius, hitting enemies for [1] and applying <font color='#c80030'>Tripping</font> for 2 turns.<br><font color='#FF69B4'>Tripping bypasses armor.</font><br>When enemies that are <font color='#c80030'>Tripping</font> move, they have a 15% chance to be <font color='#fcd203'>Knocked Down</font>.<br>Enemies that are already <font color='#c80030'>Tripping</font> are <font color='#fcd203'>Knocked Down</font> instantly.
 Shout_LLWEAPONEX_LegSweep_DisplayName	<font color='#FFD700'>Leg Sweep</font>
 Projectile_LLWEAPONEX_ShieldToss_DisplayName	Shield Toss

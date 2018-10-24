@@ -1113,3 +1113,6 @@ data "Act part" "0"
 data "Flags" "DeflectProjectiles"
 data "ExtraProperties" "LLWEAPONEX_DEFLECT_PROJECTILES_COUNTDOWN,100,5"
 
+new entry "LLWEAPONEX_ROD_EQUIPPED"
+type "StatusData"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
