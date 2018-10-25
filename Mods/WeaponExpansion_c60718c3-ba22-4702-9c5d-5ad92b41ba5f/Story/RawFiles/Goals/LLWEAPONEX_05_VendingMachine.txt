@@ -24,12 +24,235 @@ ObjectExists(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083
 AND
 ObjectIsOnStage(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
 AND
-GetVarInteger(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized", 0)
+ObjectGetFlag(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized", 0)
 THEN
+ProcObjectTimer(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Timers_LevelUpVendingMachine", 1000);
 //PROC_LoopEffect("LLWEAPONEX_VendingMachine_A_PipeSmoke_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_Smoke", _Region, "Dummy_SmokeFX");
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
-PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
+//PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:StartLoopEffects] Starting looped effects on vending machine.");
+ObjectSetFlag(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized");
+//CharacterTransformAppearanceToWithEquipmentSet(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A", 0);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_VendingMachine, "LLWEAPONEX_Timers_LevelUpVendingMachine")
+AND
+CharacterGetHostCharacter(_Player)
+AND
+CharacterGetLevel(_Player, _Level)
+THEN
+CharacterLevelUpTo(_VendingMachine, _Level);
+
+//REGION SALES
+IF
+TradeGenerationEnded(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a)
+THEN
+LLWEAPONEX_VendingMachine_OnTradeGenerationEnded(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+
+PROC
+LLWEAPONEX_VendingMachine_OnTradeGenerationEnded((CHARACTERGUID)_VendingMachine)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(_)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_SaleCooldown(_,_)
+AND
+LeaderLib_Roll_QRY(60)
+AND
+LeaderLib_Random_QRY(5)
+AND
+DB_LeaderLib_Random(_CooldownTimeRan)
+AND
+IntegerSum(_CooldownTimeRan, 1, _CooldownTime)
+AND
+LeaderLib_Random_QRY(1)
+AND
+DB_LeaderLib_Random(_ActiveTimeRan)
+AND
+IntegerSum(1, _ActiveTimeRan, _ActiveTime)
+AND
+IntegertoString(_ActiveTime, _ActiveTimeStr)
+AND
+IntegertoString(_CooldownTime, _CooldownTimeStr)
+THEN
+NOT DB_LeaderLib_Random(_ActiveTimeRan);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:TradeGenerationEnded] The vending machine started a sale for [",_ActiveTimeStr,"] generation events. Cooldown: [",_CooldownTimeStr,"]");
+DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", " You see a sign that reads: 'Limited time sale now active!'");
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(_ActiveTime, _CooldownTime);
+DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1);
+ProcObjectTimer(_VendingMachine, "LLWEAPONEX_Timers_VendingMachine_SaleStarted", 1000);
+DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(1);
+
+IF
+DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1)
+AND
+DB_IsPlayer(_Player)
+THEN
+CharacterAddAttitudeTowardsPlayer(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Player, 100);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_VendingMachine, "LLWEAPONEX_Timers_VendingMachine_SaleStarted")
+AND
+DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1);
+
+//Sale countdown
+PROC
+LLWEAPONEX_VendingMachine_OnTradeGenerationEnded((CHARACTERGUID)_VendingMachine)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(_)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleJustDecreased(_)
+AND
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(_ActiveTime, _CooldownTime)
+AND
+_ActiveTime > 0
+AND
+IntegerSubtract(_ActiveTime, 1, _NextActiveTime)
+AND
+IntegertoString(_NextActiveTime, _NextActiveTimeStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:TradeGenerationEnded] Sale time decreased. Remaining events: [",_NextActiveTimeStr,"]");
+NOT DB_LLWEAPONEX_VendingMachine_SaleCooldown(_ActiveTime, _CooldownTime);
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(_NextActiveTime, _CooldownTime);
+DB_LLWEAPONEX_VendingMachine_Temp_SaleJustDecreased(1);
+DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(1);
+ProcObjectTimer(_VendingMachine, "LLWEAPONEX_Timers_VendingMachine_ResetSaleDecreased", 10000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_VendingMachine, "LLWEAPONEX_Timers_VendingMachine_ResetSaleDecreased")
+AND
+DB_LLWEAPONEX_VendingMachine_Temp_SaleJustDecreased(1)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleJustDecreased(1);
+
+//Sale Over
+PROC
+LLWEAPONEX_VendingMachine_OnTradeGenerationEnded((CHARACTERGUID)_VendingMachine)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(_)
+AND
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(_ActiveTime, _CooldownTime)
+AND
+_ActiveTime == 0
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_SaleCooldown(_ActiveTime, _CooldownTime);
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime);
+LLWEAPONEX_VendingMachine_ResetSaleAttitude();
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:TradeGenerationEnded] Sale ended.");
+DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(1);
+
+PROC
+LLWEAPONEX_VendingMachine_OnTradeGenerationEnded((CHARACTERGUID)_VendingMachine)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(_)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1)
+AND
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime)
+AND
+_CooldownTime > 0
+THEN
+LLWEAPONEX_VendingMachine_DecrementSaleCooldown();
+DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(1);
+
+PROC
+LLWEAPONEX_VendingMachine_OnTradeGenerationEnded((CHARACTERGUID)_VendingMachine)
+AND
+DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(_Var)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(_Var);
+
+PROC
+LLWEAPONEX_VendingMachine_DecrementSaleCooldown()
+AND
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime)
+AND
+IntegerSubtract(_CooldownTime, 1, _NextCooldownTime)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime);
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _NextCooldownTime);
+
+IF
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime)
+AND
+_CooldownTime <= 0
+THEN
+LLWEAPONEX_VendingMachine_ClearSaleCooldown();
+
+PROC
+LLWEAPONEX_VendingMachine_ClearSaleCooldown()
+AND
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(_Active, _CooldownTime)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_SaleCooldown(_Active, _CooldownTime);
+
+PROC
+LLWEAPONEX_VendingMachine_ClearSaleCooldown()
+AND
+DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1);
+
+PROC
+LLWEAPONEX_VendingMachine_ClearSaleCooldown()
+AND
+DB_LLWEAPONEX_VendingMachine_Temp_SaleJustDecreased(1)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleJustDecreased(1);
+
+PROC
+LLWEAPONEX_VendingMachine_ResetSaleAttitude()
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterGetAttitudeTowardsPlayer(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Player, _Attitude)
+AND
+_Attitude > 0
+AND
+IntegerProduct(_Attitude, -1, _RemoveAmount)
+THEN
+CharacterAddAttitudeTowardsPlayer(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Player, _RemoveAmount);
+
+IF
+CharacterAttitudeTowardsPlayerChanged(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Player, _NewAttitude)
+AND
+_NewAttitude < 0
+AND
+IntegerProduct(_NewAttitude, -1, _AddAmount)
+THEN
+CharacterAddAttitudeTowardsPlayer(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Player, _AddAmount);
+
+//Prevent "bribing" a machine
+IF
+DB_AttitudeAdjustMent(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Att)
+AND
+_Att != 0
+THEN
+NOT DB_AttitudeAdjustMent(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Att);
+DB_AttitudeAdjustMent(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0);
+
+//Prevent "insulting" a machine
+IF
+DB_InsultCounter(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _InsultCount)
+AND
+_InsultCount > 0
+THEN
+NOT DB_InsultCounter(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _InsultCount);
+DB_InsultCounter(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0);
+//END_REGION
+
+IF
+RegionEnded(_)
+AND
+ObjectExists(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
+THEN
+ObjectClearFlag(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized");
+
+IF
+ObjectFlagCleared("LLWEAPONEX_Vending_Initialized", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _)
+THEN
+LLWEAPONEX_VendingMachine_ClearSaleCooldown();
 
 IF
 TextEventSet("llweap_vendtop")
@@ -85,6 +308,25 @@ PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", _Vend
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", _VendingMachine, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:StartLoopEffects] Starting looped effects on vending machine.");
 */
+
+//Temporary workaround
+IF
+GameStarted(_Region, _)
+AND
+ObjectExists(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
+AND
+HasActiveStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", 0)
+THEN
+ApplyStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", -1.0);
+
+IF
+CharacterStatusApplied(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", _)
+AND
+DB_CurrentLevel(_Region)
+THEN
+PROC_StopLoopEffect(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay");
+PROC_LoopEffect("LLWEAPONEX_FX_VendingMachine_MachineDisplay_Debug_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay", _Region, "");
+
 EXITSECTION
 
 ENDEXITSECTION

@@ -258,15 +258,7 @@ object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,0,0,0,0,0,0,0
 new subtable "2,2"
 object category "T_ST_LLWEAPONEX_Runes",1,0,0,0,0,0,0,0
 new subtable "1,1"
-object category "I_TOOL_Hammer_LLWEAPONEX_Runesmith_A",1,0,0,0,0,0,0,0
-new subtable "1,1"
 object category "Trader Gold",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_Debug_PriceCheck"
 IgnoreLevelDiff 1

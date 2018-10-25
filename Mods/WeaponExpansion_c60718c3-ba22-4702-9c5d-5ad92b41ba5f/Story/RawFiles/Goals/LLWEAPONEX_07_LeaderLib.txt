@@ -18,12 +18,40 @@ LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion]
 LeaderLib_Trader_Register_Position("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 12.0, 0.0, 8.0);
 LeaderLib_Trader_Register_StartingGold("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 9999);
 
+/*
 LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.LeaderTrader.TestWeapons", "LeaderLib.LeaderTrader");
 LeaderLib_Requirements_Add_RegionRequirement("LLWEAPONEX.Debug.IsTestLevel", "TestLevel_LL_WeaponExpansion");
 LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "LLWEAPONEX_Debug_PriceCheck", "LLWEAPONEX.Debug.IsTestLevel", 1);
 LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "LLWEAPONEX_CheatQuarterstaffs", "LLWEAPONEX.Debug.IsTestLevel", 1);
 LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "ST_Grenades", "LLWEAPONEX.Debug.IsTestLevel", 1);
 LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "ST_WeaponNormal", "LLWEAPONEX.Debug.IsTestLevel", 1);
+*/
+
+LeaderLib_Trader_Register_GlobalTrader("LLWEAPONEX.VendingMachine", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Uniques", "LLWEAPONEX.VendingMachine");
+
+LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_Requirement_MinLevel_4", 4);
+
+//Technically unique, but allow more than one to generate
+LeaderLib_Treasure_Register_ItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "TOOL_Hammer_LLWEAPONEX_Runesmith_A_5a5e78fb-59ac-42b8-8e2f-d4d02f9217ec", 1, "LLWEAPONEX_Requirement_MinLevel_4");
+LeaderLib_Treasure_Configure_AddMaxAmount("LLWEAPONEX.VendingMachine.Uniques", "TOOL_Hammer_LLWEAPONEX_Runesmith_A_5a5e78fb-59ac-42b8-8e2f-d4d02f9217ec", 1);
+
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_b3fc8995-8c7c-4de5-b465-e2573334cff7");
+//Grimoires
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_Requirement_MinLevel_4");
+
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TestLevel_LL_WeaponExpansion", 40.56, 0.0, 29.63);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 40.56, 0.0, 29.63);
+//LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TUT_Tutorial_A", 31.19, 4.0, -252.77);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 196.21, -3.98, 647.16);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 204.38, -4.57, 649.32);
+
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "LV_HoE_Main", 341.49, 7.81, 581.80);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "RC_Main", 746.05, 8.11, -37.73);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "CoS_Main", -19.44, 7.46, 674.49);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "Arx_Main", 426.14, 40.12, 24.94);
 EXITSECTION
 
 ENDEXITSECTION

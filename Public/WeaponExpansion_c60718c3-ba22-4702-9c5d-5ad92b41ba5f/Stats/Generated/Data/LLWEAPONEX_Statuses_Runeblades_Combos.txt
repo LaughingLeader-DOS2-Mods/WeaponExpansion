@@ -868,10 +868,6 @@ data "Icon" "LLWEAPONEX_Status_Cooldown_Thunderbolt"
 data "FormatColor" "Air"
 data "StackId" "Stack_LLWEAPONEX_Runeblade_Thunderbolt_Cooldown"
 
-new entry "Stats_LLWEAPONEX_Runeblade_Thunderbolt_Cooldown"
-type "Potion"
-data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_Runeblade_ChainLightning"
-
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM"
 type "StatusData"
 using "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON"

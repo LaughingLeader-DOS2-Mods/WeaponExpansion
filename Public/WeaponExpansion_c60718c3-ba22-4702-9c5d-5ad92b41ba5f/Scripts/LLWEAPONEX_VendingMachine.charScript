@@ -1,6 +1,5 @@
 INIT
 	CHARACTER:__Me
-	LIST<INT64>:%LLWEAPONEX_Vending_FX
 	INT:%LLWEAPONEX_Vending_Initialized = 0
 EVENTS
 
