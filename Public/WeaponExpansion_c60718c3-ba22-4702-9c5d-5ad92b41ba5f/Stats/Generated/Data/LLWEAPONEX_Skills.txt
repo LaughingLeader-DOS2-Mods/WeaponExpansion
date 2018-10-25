@@ -189,7 +189,7 @@ data "PrepareEffect" "RS3_FX_Skills_Void_Prepare_Divine_Root_01,KeepRot;RS3_FX_S
 data "CastAnimation" "skill_cast_beam_air_01_cast"
 data "CastTextEvent" "cast"
 data "CastEffect" "RS3_FX_Skills_Void_Divine_Cast_Hand_01:Dummy_CastFX"
-data "MemorizationRequirements" "Death 1"
+data "MemorizationRequirements" "Necromancy 1"
 data "Memory Cost" "1"
 data "Magic Cost" "0"
 data "ProjectileTerrainOffset" "Yes"
