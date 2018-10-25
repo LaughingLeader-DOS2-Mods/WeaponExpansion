@@ -26,45 +26,6 @@ LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons",
 LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "ST_Grenades", "LLWEAPONEX.Debug.IsTestLevel", 1);
 LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.LeaderTrader.TestWeapons", "ST_WeaponNormal", "LLWEAPONEX.Debug.IsTestLevel", 1);
 */
-
-LeaderLib_Trader_Register_GlobalTrader("LLWEAPONEX.VendingMachine", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
-LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Uniques", "LLWEAPONEX.VendingMachine");
-
-LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_Requirement_MinLevel_4", 4);
-
-//Technically unique, but allow more than one to generate
-LeaderLib_Treasure_Register_ItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "TOOL_Hammer_LLWEAPONEX_Runesmith_A_5a5e78fb-59ac-42b8-8e2f-d4d02f9217ec", 1, "LLWEAPONEX_Requirement_MinLevel_4");
-LeaderLib_Treasure_Configure_AddMaxAmount("LLWEAPONEX.VendingMachine.Uniques", "TOOL_Hammer_LLWEAPONEX_Runesmith_A_5a5e78fb-59ac-42b8-8e2f-d4d02f9217ec", 1);
-
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_b3fc8995-8c7c-4de5-b465-e2573334cff7");
-//Grimoires
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_Requirement_MinLevel_4");
-
-LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TestLevel_LL_WeaponExpansion", 40.56, 0.0, 29.63);
-LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 40.56, 0.0, 29.63);
-//LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TUT_Tutorial_A", 31.19, 4.0, -252.77);
-
-//Dungeon Shrine in Fort Joy
-LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 196.21, -3.98, 647.16);
-LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 204.38, -4.57, 649.32);
-
-//Lady Vengeance 1st floor
-LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "LV_HoE_Main", 336.39, 7.8, 577.70);
-LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "LV_HoE_Main", 336.39, 7.8, 579.0);
-
-//Lady Vengeance 1st floor
-LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "RC_Main", 740.56, 8.11, -41.46);
-LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "RC_Main", 740.56, 8.11, -40.22);
-
-//Lady Vengeance 1st floor
-LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "CoS_Main", 228.84, 16.09, 284.24);
-LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "CoS_Main", 226.68, 16.09, 284.24);
-
-//Outside
-LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "Arx_Main", 407.41, 39.19, 14.01);
-LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "Arx_Main", 409.22, 39.19, 13.19);
 EXITSECTION
 
 ENDEXITSECTION

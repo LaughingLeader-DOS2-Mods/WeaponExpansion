@@ -5,7 +5,169 @@ DB_DoNotFace((CHARACTERGUID)CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702
 DB_Dialogs(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A");
 //DB_IsStoryNpc(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 //SetStoryNpc(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1);
+SetTag(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LeaderLib_DisableTreasureTableLimit");
+LLWEAPONEX_VendingMachine_RegisterTraderSettings();
+LLWEAPONEX_VendingMachine_RegisterOrderMenu();
+
 KBSECTION
+//REGION SETTINGS
+PROC
+LLWEAPONEX_VendingMachine_RegisterTraderSettings()
+THEN
+LeaderLib_Trader_Register_GlobalTrader("LLWEAPONEX.VendingMachine", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Orders", "LLWEAPONEX.VendingMachine");
+LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Uniques", "LLWEAPONEX.VendingMachine");
+
+LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_Requirement_MinLevel_4", 4);
+
+//Technically unique, but allow more than one to generate
+LeaderLib_Treasure_Register_ItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "TOOL_Hammer_LLWEAPONEX_Runesmith_A_5a5e78fb-59ac-42b8-8e2f-d4d02f9217ec", 1, "LLWEAPONEX_Requirement_MinLevel_4");
+LeaderLib_Treasure_Configure_AddMaxAmount("LLWEAPONEX.VendingMachine.Uniques", "TOOL_Hammer_LLWEAPONEX_Runesmith_A_5a5e78fb-59ac-42b8-8e2f-d4d02f9217ec", 1);
+
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_b3fc8995-8c7c-4de5-b465-e2573334cff7");
+//Grimoires
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_Requirement_MinLevel_4");
+
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TestLevel_LL_WeaponExpansion", 40.56, 0.0, 29.63);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 40.56, 0.0, 29.63);
+//LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TUT_Tutorial_A", 31.19, 4.0, -252.77);
+
+//Dungeon Shrine in Fort Joy
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 196.21, -3.98, 647.16);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 204.38, -4.57, 649.32);
+
+//Lady Vengeance 1st floor
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "LV_HoE_Main", 336.39, 7.8, 577.70);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "LV_HoE_Main", 336.39, 7.8, 579.0);
+
+//Lady Vengeance 1st floor
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "RC_Main", 740.56, 8.11, -41.46);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "RC_Main", 740.56, 8.11, -40.22);
+
+//Lady Vengeance 1st floor
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "CoS_Main", 228.84, 16.09, 284.24);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "CoS_Main", 226.68, 16.09, 284.24);
+
+//Outside
+LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "Arx_Main", 407.41, 39.19, 14.01);
+LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "Arx_Main", 409.22, 39.19, 13.19);
+
+PROC
+LLWEAPONEX_VendingMachine_RegisterOrderMenu()
+THEN
+//Vending Machine Order Menu
+LeaderLib_Dialog_Menu_Register_Menu("LLWEAPONEX.VendingMachine.OrderMenu", 8);
+LeaderLib_Dialog_Menu_Register_PageFlags("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_HasMultiplePages", "LLWEAPONEX_VendingMachine_NextPage", "LLWEAPONEX_VendingMachine_PreviousPage", "LLWEAPONEX_VendingMachine_FirstPage", "LLWEAPONEX_VendingMachine_LastPage");
+
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption1_01202c05-bdbb-42c2-9cda-8346962041d5", "LLWEAPONEX_VendingMachine_Option1Available", "LLWEAPONEX_VendingMachine_OrderOption1"); 
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption2_1af35687-3367-4206-8aa4-debee4b81d92", "LLWEAPONEX_VendingMachine_Option2Available", "LLWEAPONEX_VendingMachine_OrderOption2"); 
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption3_048eaa1b-d937-48bb-ac2c-5759cd64540f", "LLWEAPONEX_VendingMachine_Option3Available", "LLWEAPONEX_VendingMachine_OrderOption3"); 
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption4_33af56c3-1b27-4867-9f71-ec84fc3a2fb4", "LLWEAPONEX_VendingMachine_Option4Available", "LLWEAPONEX_VendingMachine_OrderOption4"); 
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption5_6304637d-2828-45ec-b01d-d4769787a29b", "LLWEAPONEX_VendingMachine_Option5Available", "LLWEAPONEX_VendingMachine_OrderOption5"); 
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption6_d70c702c-a0c1-49a7-8772-1479725e2a39", "LLWEAPONEX_VendingMachine_Option6Available", "LLWEAPONEX_VendingMachine_OrderOption6"); 
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption7_5027bce6-f787-4977-a23c-a09175f02508", "LLWEAPONEX_VendingMachine_Option7Available", "LLWEAPONEX_VendingMachine_OrderOption7"); 
+LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee", "LLWEAPONEX_VendingMachine_Option8Available", "LLWEAPONEX_VendingMachine_OrderOption8");
+
+//Vanilla
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderAccessory", "*[ACCESSORY] Click on the button labeled 'Accessory'.*");
+
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderArmor", "*[ANY ARMOR] Click on the button labeled 'Any Armor'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderClothArmor", "*[CLOTH ARMOR] Click on the button labeled 'Cloth Armor'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderHeavyArmor", "*[HEAVY ARMOR] Click on the button labeled 'Heavy Armor'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderLightArmor", "*[LIGHT ARMOR] Click on the button labeled 'Light Armor'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderMageArmor", "*[MAGE ARMOR] Click on the button labeled 'Mage Armor'.*");
+
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWeapon", "*[ANY WEAPON] Click on the button labeled 'Any Weapon'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderOneHandedWeapon", "*[ONE-HANDED] Click on the button labeled 'One-Handed'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderTwoHandedWeapon", "*[TWO-HANDED] Click on the button labeled 'Two-Handed'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderRangedWeapon", "*[RANGED] Click on the button labeled 'Ranged'.*");
+
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderStaff", "*[STAFFS] Click on the button labeled 'Staffs'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWand", "*[WANDS] Click on the button labeled 'Wands'.*");
+
+//LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Trader_WeaponArcher", "*[ARCHER WEAPON] Click on the button labeled 'Archer Weapons'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderRogueWeapon", "*[ROGUE WEAPONS] Click on the button labeled 'Rogue Weapons'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWarriorWeapon", "*[WARRIOR WEAPONS] Click on the button labeled 'Warrior Weapons'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWizardWeapon", "*[WIZARD WEAPONS] Click on the button labeled 'Wizard Weapons'.*");
+
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_AllPotions", "*[POTIONS] Click on the button labeled 'Potions'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_AllPotionsSpecial", "*[S. POTIONS] Click on the button labeled 'Special Potions'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Ingredients", "*[INGREDIENTS] Click on the button labeled 'Ingredients'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Grenades", "*[GRENADES] Click on the button labeled 'Grenades'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Arrows", "*[ARROWS] Click on the button labeled 'Arrows'.*");
+
+PROC
+LLWEAPONEX_VendingMachine_AddOrderToMenu((STRING)_TreasureTable, (STRING)_EntryText)
+THEN
+LeaderLib_Dialog_Menu_Add_Entry("LLWEAPONEX.VendingMachine.OrderMenu", _TreasureTable, _EntryText);
+//END_REGION
+
+IF
+DialogStarted("LLWEAPONEX_VendingMachine_OrderMenu", _Instance)
+THEN
+LeaderLib_Dialog_Menu_InitMenu("LLWEAPONEX.VendingMachine.OrderMenu", _Instance);
+
+PROC
+LeaderLib_Dialog_Menu_OnEntryValueSet((GUIDSTRING)_Player, "LLWEAPONEX.VendingMachine.OrderMenu", (STRING)_DialogVar, (STRING)_AvailableFlag, (INTEGER)_Instance, (STRING)_TreasureTable, (STRING)_DisplayText)
+AND
+DB_LLWEAPONEX_VendingMachine_LastOrdered(_TreasureTable, _LastInstance)
+THEN
+ObjectClearFlag(_Player, _AvailableFlag, _Instance);
+
+PROC
+LeaderLib_Dialog_Menu_OnEntrySelected((STRING)_ID, (GUIDSTRING)_Player, (INTEGER)_Instance, (STRING)_TreasureTable)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnEntrySelected] Entry [",_TreasureTable,"] was selected.");
+LLWEAPONEX_VendingMachine_OrderTreasure(_Player, _TreasureTable, _Instance);
+
+PROC
+LLWEAPONEX_VendingMachine_OrderTreasure((GUIDSTRING)_Player, (STRING)_TreasureTable, (INTEGER)_Instance)
+AND
+NOT DB_LLWEAPONEX_VendingMachine_LastOrdered(_TreasureTable, _)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OrderTreasure] Setting next order to [",_TreasureTable,"].");
+DB_LLWEAPONEX_VendingMachine_NextOrder(_TreasureTable, _Instance);
+ObjectSetFlag(_Player, "LLWEAPONEX_VendingMachine_OrderChosen", _Instance);
+
+IF
+ObjectFlagSet("LLWEAPONEX_VendingMachine_CompleteOrder", _Player, _Instance)
+AND
+DB_LLWEAPONEX_VendingMachine_LastOrdered(_LastTreasureTable, _LastInstance)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_LastOrdered(_LastTreasureTable, _LastInstance);
+
+IF
+ObjectFlagSet("LLWEAPONEX_VendingMachine_CompleteOrder", _Player, _Instance)
+AND
+LeaderLib_Helper_QRY_ClearObjectFlag(_Player, "LLWEAPONEX_VendingMachine_CompleteOrder")
+AND
+DB_LLWEAPONEX_VendingMachine_NextOrder(_TreasureTable, _Instance)
+AND
+DialogGetInvolvedNPC(_Instance, 1, _VendingMachine)
+THEN
+DB_LLWEAPONEX_VendingMachine_LastOrdered(_TreasureTable, _Instance);
+NOT DB_LLWEAPONEX_VendingMachine_NextOrder(_TreasureTable, _Instance);
+LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.VendingMachine.Orders", _TreasureTable);
+LeaderLib_Treasure_Configure_GenerateOnce("LLWEAPONEX.VendingMachine.Orders", _TreasureTable, "LLWEAPONEX_VendingMachine_OnOrderGenerated");
+ObjectSetFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:CompleteOrder] Added [",_TreasureTable,"] as the next treasure order.");
+
+IF
+DialogEnded("LLWEAPONEX_VendingMachine_OrderMenu", _Instance)
+AND
+DialogGetInvolvedPlayer(_Instance, 1, _Player)
+THEN
+ObjectClearFlag(_Player, "LLWEAPONEX_VendingMachine_OrderChosen", _Instance);
+ObjectClearFlag(_Player, "LLWEAPONEX_VendingMachine_CompleteOrder", _Instance);
+
+IF
+StoryEvent(_VendingMachine, "LLWEAPONEX_VendingMachine_OnOrderGenerated")
+THEN
+ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnOrderGenerated] Treasure order complete. Cleared flag 'LLWEAPONEX_VendingMachine_OrderMenuDisabled'.");
+
 IF
 CharacterLeveledUp(_Player)
 AND
