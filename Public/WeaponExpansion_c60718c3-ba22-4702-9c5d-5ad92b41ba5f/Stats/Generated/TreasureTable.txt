@@ -443,19 +443,19 @@ new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderStaff"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_WandNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_StaffNormal",1,1,0,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_WandNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_StaffNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_WandNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_StaffNormal",1,1,1,1,0,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_WandNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_StaffNormal",1,1,1,1,1,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderWand"
 new subtable "2,1"

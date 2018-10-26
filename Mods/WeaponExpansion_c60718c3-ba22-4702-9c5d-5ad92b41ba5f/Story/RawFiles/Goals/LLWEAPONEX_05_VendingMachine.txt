@@ -104,6 +104,7 @@ THEN
 LeaderLib_Dialog_Menu_Add_Entry("LLWEAPONEX.VendingMachine.OrderMenu", _TreasureTable, _EntryText);
 //END_REGION
 
+//REGION ORDER_MENU
 IF
 DialogStarted("LLWEAPONEX_VendingMachine_OrderMenu", _Instance)
 THEN
@@ -167,7 +168,10 @@ StoryEvent(_VendingMachine, "LLWEAPONEX_VendingMachine_OnOrderGenerated")
 THEN
 ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnOrderGenerated] Treasure order complete. Cleared flag 'LLWEAPONEX_VendingMachine_OrderMenuDisabled'.");
+PlayEffect(_VendingMachine, "LLWEAPONEX_FX_VendingMachine_Words_OrderArrived_01", "Dummy_OverheadFX");
+//END_REGION
 
+//REGION INIT
 IF
 CharacterLeveledUp(_Player)
 AND
@@ -240,6 +244,17 @@ CharacterGetLevel(_Player, _Level)
 THEN
 CharacterLevelUpTo(_VendingMachine, _Level);
 
+//Temporary workaround
+IF
+GameStarted(_Region, _)
+AND
+ObjectExists(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
+AND
+HasActiveStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", 0)
+THEN
+ApplyStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", -1.0);
+//END_REGION
+
 //REGION SALES
 IF
 TradeGenerationEnded(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a)
@@ -292,6 +307,7 @@ AND
 DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1)
 THEN
 NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1);
+PlayEffect(_VendingMachine, "LLWEAPONEX_FX_VendingMachine_Words_Sale_01", "Dummy_OverheadFX");
 
 //Sale countdown
 PROC
@@ -439,6 +455,8 @@ NOT DB_InsultCounter(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d27
 DB_InsultCounter(_Player, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0);
 //END_REGION
 
+//REGION RESET
+
 IF
 RegionEnded(_)
 AND
@@ -451,6 +469,21 @@ ObjectFlagCleared("LLWEAPONEX_Vending_Initialized", CHARACTERGUID_S_LLWEAPONEX_V
 THEN
 LLWEAPONEX_VendingMachine_ClearSaleCooldown();
 
+/*
+IF
+StoryEvent(_VendingMachine, "LLWEAPONEX_VendingMachine_StartLoopEffects")
+AND
+DB_CurrentLevel(_Region)
+THEN
+PROC_LoopEffect("LLWEAPONEX_VendingMachine_A_PipeSmoke_01", _VendingMachine, "LLWEAPONEX_FX_VendingMachine_Smoke", _Region, "Dummy_SmokeFX");
+PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", _VendingMachine, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
+PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", _VendingMachine, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:StartLoopEffects] Starting looped effects on vending machine.");
+*/
+
+//END_REGION
+
+//REGION ANIMATIONS
 IF
 TextEventSet("llweap_vendtop")
 THEN
@@ -493,28 +526,7 @@ AND
 GetTextEventParamString(1, _Anim)
 THEN
 PlayAnimation(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Anim, "");
-
-/*
-IF
-StoryEvent(_VendingMachine, "LLWEAPONEX_VendingMachine_StartLoopEffects")
-AND
-DB_CurrentLevel(_Region)
-THEN
-PROC_LoopEffect("LLWEAPONEX_VendingMachine_A_PipeSmoke_01", _VendingMachine, "LLWEAPONEX_FX_VendingMachine_Smoke", _Region, "Dummy_SmokeFX");
-PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", _VendingMachine, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
-PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", _VendingMachine, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:StartLoopEffects] Starting looped effects on vending machine.");
-*/
-
-//Temporary workaround
-IF
-GameStarted(_Region, _)
-AND
-ObjectExists(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
-AND
-HasActiveStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", 0)
-THEN
-ApplyStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", -1.0);
+//END_REGION
 
 EXITSECTION
 

@@ -136,7 +136,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "[Complete] *Hit the button labeled \"COMPLETE ORDER\".*"
+                                                   "value" : "[COMPLETE] *Hit the button labeled \"COMPLETE ORDER\".*"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -277,7 +277,25 @@
                         "Tags" : [ {} ],
                         "UUID" : {"type" : 22, "value" : "146e7db2-7923-4416-b285-d29e9e37aa8c"},
                         "addressedspeaker" : {"type" : 4, "value" : -1},
-                        "checkflags" : [ {} ],
+                        "checkflags" : [
+                           {
+                              "flaggroup" : [
+                                 {
+                                    "flag" : [
+                                       {
+                                          "name" : {"type" : 22, "value" : "LLWEAPONEX_VendingMachine_HasMultiplePages"},
+                                          "paramval" : {"type" : 4, "value" : 1},
+                                          "value" : {"type" : 19, "value" : 1}
+                                       },
+                                       {
+                                          "name" : {"type" : 22, "value" : "LeaderLib_DialogMenu_IsFirstPage"},
+                                          "paramval" : {"type" : 4, "value" : 1},
+                                          "value" : {"type" : 19, "value" : 0}
+                                       }
+                                    ],"type" : {"type" : 22, "value" : "Character"}}
+                              ]
+                           }
+                        ],
                         "children" : [
                            {
                               "child" : [
@@ -309,7 +327,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "335;2643"}
+                                    "val" : {"type" : 23, "value" : "335;2424"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
@@ -887,7 +905,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "[Info] *Hit a button to order a treasure type.*"
+                                                   "value" : "[Info] *You read the panel: \"Hit a button to order a treasure type.\"*"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }
@@ -915,7 +933,15 @@
                               ]
                            }
                         ],
-                        "children" : [ {} ],
+                        "children" : [
+                           {
+                              "child" : [
+                                 {
+                                    "UUID" : {"type" : 22, "value" : "1c2ae5ea-6780-4b58-b7c6-698186f9d88d"}
+                                 }
+                              ]
+                           }
+                        ],
                         "constructor" : {"type" : 22, "value" : "TagQuestion"},
                         "editorData" : [
                            {
@@ -1297,10 +1323,10 @@
                                     "UUID" : {"type" : 22, "value" : "b3c91d24-cf1e-49b5-be0d-cecbd148ab6b"}
                                  },
                                  {
-                                    "UUID" : {"type" : 22, "value" : "98867710-81ae-4b12-a92c-3a60f4e31bc7"}
+                                    "UUID" : {"type" : 22, "value" : "146e7db2-7923-4416-b285-d29e9e37aa8c"}
                                  },
                                  {
-                                    "UUID" : {"type" : 22, "value" : "146e7db2-7923-4416-b285-d29e9e37aa8c"}
+                                    "UUID" : {"type" : 22, "value" : "98867710-81ae-4b12-a92c-3a60f4e31bc7"}
                                  },
                                  {
                                     "UUID" : {"type" : 22, "value" : "a1865f6a-04bd-410e-b8d1-ac71617fdaef"}
@@ -1394,7 +1420,25 @@
                         "Tags" : [ {} ],
                         "UUID" : {"type" : 22, "value" : "98867710-81ae-4b12-a92c-3a60f4e31bc7"},
                         "addressedspeaker" : {"type" : 4, "value" : -1},
-                        "checkflags" : [ {} ],
+                        "checkflags" : [
+                           {
+                              "flaggroup" : [
+                                 {
+                                    "flag" : [
+                                       {
+                                          "name" : {"type" : 22, "value" : "LLWEAPONEX_VendingMachine_HasMultiplePages"},
+                                          "paramval" : {"type" : 4, "value" : 1},
+                                          "value" : {"type" : 19, "value" : 1}
+                                       },
+                                       {
+                                          "name" : {"type" : 22, "value" : "LeaderLib_DialogMenu_IsLastPage"},
+                                          "paramval" : {"type" : 4, "value" : 1},
+                                          "value" : {"type" : 19, "value" : 0}
+                                       }
+                                    ],"type" : {"type" : 22, "value" : "Character"}}
+                              ]
+                           }
+                        ],
                         "children" : [
                            {
                               "child" : [
@@ -1426,7 +1470,7 @@
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "position"},
-                                    "val" : {"type" : 23, "value" : "335;2424"}
+                                    "val" : {"type" : 23, "value" : "335;2643"}
                                  },
                                  {
                                     "key" : {"type" : 22, "value" : "sourcetemplate"},
