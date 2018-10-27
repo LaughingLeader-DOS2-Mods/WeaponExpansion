@@ -8,6 +8,7 @@ EVENT LLWEAPONEX_Editor_Reload_StartCleanup
 ON
 	OnInit()
 ACTIONS
+	SetMaterial(__Me, "6148f9f3-a2d8-4aa9-add3-368c411b1080", -1, 1, 1, 1, 1, 1, 1, 1, 0, 0)
 	StartTimer("LLWEAPONEX_Timers_Grimoire_CheckForCleanup", 0.5, 0)
 
 EVENT LLWEAPONEX_Editor_Reload_Cleanup
@@ -18,4 +19,6 @@ IF "c1"
 	IsEqual(%LLWEAPONEX_Grimoire_Owner, null)
 THEN
 	CharacterEvent(__Me, "LLWEAPONEX_Commands_CleanupGrimoire")
+ELSE
+	CharacterCharacterEvent(%LLWEAPONEX_Grimoire_Owner, __Me, "LLWEAPONEX_Commands_RelinkGrimoire")
 ENDIF

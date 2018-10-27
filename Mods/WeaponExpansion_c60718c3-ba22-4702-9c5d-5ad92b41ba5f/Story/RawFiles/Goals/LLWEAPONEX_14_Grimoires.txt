@@ -8,44 +8,55 @@ KBSECTION
 PROC
 LLWEAPONEX_Grimoire_InitSettings()
 THEN
-DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
-DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_FX_Items_Grimoire_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Swap_A");
-DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_FX_Items_Grimoire_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Mimicry_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_FX_Items_Grimoire_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Swap_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_FX_Items_Grimoire_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Mimicry_A");
 
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Wind", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", "", "Air");
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "teleportation", "");
 //DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "jump", "");
 
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 3, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 5, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 6, "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 7, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 11, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+//DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.493618, -0.701302);
+//DB_LLWEAPONEX_Grimoire_PositionOffset(1, 0.493618, 0.701302);
 
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 3, "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 6, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 11, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.5, -1.5);
+DB_LLWEAPONEX_Grimoire_PositionOffset(1, 0.5, 1.5);
 
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 3, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 5, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 6, "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 11, "", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+//DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.8, -0.6);
+//DB_LLWEAPONEX_Grimoire_PositionOffset(1, 0.8, 1.6);
+
+//Deltamods
+
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 3, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 5, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 6, "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 7, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 11, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 3, "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 6, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 11, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
+
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 3, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 5, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 6, "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 11, "", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
 
 //END_REGION
 
@@ -99,9 +110,9 @@ IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 THEN
 ObjectSetFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
 /*
-ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc
-ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040
-ITEMGUID_WPN_Shield_LLWEAPONEX_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216
+ITEMGUID_WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc
+ITEMGUID_WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040
+ITEMGUID_WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216
 */
 //END_REGION
 
@@ -826,256 +837,6 @@ PlayEffect(_Character, "RS3_FX_Skills_Air_Wind_Cast_Hand_Horizontal_01", "Dummy_
 */
 //END_REGION
 
-//REGION LAST_SKILL
-IF
-CharacterUsedSkill(_Character, _Skill, _, _)
-THEN
-SetVarString(_Character, "LLWEAPONEX_LastUsedSkill", _Skill);
-
-IF
-ItemUnEquipped(_Grimoire, _Character)
-AND
-GetTemplate(_Grimoire, "WPN_Shield_LLWEAPONEX_Grimoire_Mimicry_Unique_c9fcc947-4423-40b9-9629-ae2d1e156dfc")
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
-CharacterRemoveSkill(_Character, _Skill);
-
-PROC
-LLWEAPONEX_Grimoire_RemoveCopiedSkill((CHARACTERGUID)_Character)
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
-CharacterRemoveSkill(_Character, _Skill);
-
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_COPYLASTSKILL", (CHARACTERGUID)_Character)
-AND
-GetVarString(_Target, "LLWEAPONEX_LastUsedSkill", _Skill)
-AND
-CharacterHasSkill(_Character, _Skill, 0)
-THEN
-LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
-CharacterAddSkill(_Character, _Skill);
-DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
-
-//In case a copied skill is learned
-IF
-SkillAdded(_Character, _Skill, 1)
-AND
-NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
-
-IF
-SkillAdded(_Character, _Skill, _)
-AND
-DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
-THEN
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
-NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
-
-//Invalid skill safety check
-IF
-DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
-AND
-CharacterHasSkill(_Character, _Skill, 0)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
-
-IF
-CharacterUsedSkill(_Character, _Skill, _, _)
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-THEN
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
-
-IF
-SkillCast(_Character, _Skill, _, _)
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-AND
-DB_ObjectTimer(_Character, _ObjectTimerName, "LLWEAPONEX_Timers_RemoveCopiedSkill")
-THEN
-ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill");
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill")
-THEN
-LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
-//END_REGION
-
-//REGION GRIMOIRE_MIMIC
-QRY
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
-AND
-IsSourceSkill(_Skill, 0)
-AND
-LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
-AND
-LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed(_Skill, _SkillType, _SkillElement)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
-AND
-IsSourceSkill(_Skill, 0)
-AND
-NOT LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
-AND
-DB_LLMIME_Mimicking_Whitelist_Skills(_Skill)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
-AND
-NOT DB_LLMIME_Mimicking_Blacklist_Skills(_Skill)
-AND
-NOT DB_LLMIME_Mimicking_Blacklist_SkillElements(_SkillType, _SkillElement)
-THEN
-DB_NOOP(1);
-
-IF
-CharacterUsedSkillOnZoneWithTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-AND
-NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
-THEN
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
-
-IF
-CharacterUsedSkill(_Character, _Skill, "shout", _SkillElement)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-AND
-NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, "shout", _SkillElement)
-THEN
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Character);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
-
-IF
-CharacterUsedSkillOnTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-AND
-NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
-THEN
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
-
-IF
-ObjectTurnEnded(_Character)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-THEN
-RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
-
-IF
-TextEventSet("llweap_rotationtest")
-AND
-CharacterGetHostCharacter(_Player)
-THEN
-LeaderLog_TracePosition(_Player, "[LLWEAPONEX:Debug:RotationTest] Player position: ", ".");
-ProcObjectTimer(_Player, "LLWEAPONEX_Debug_GetRotatedPosition", 50);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_GetRotatedPosition")
-AND
-LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player, 0.493618, 0.701302)
-THEN
-ProcObjectTimer(_Player, "LLWEAPONEX_Debug_TraceRotatedPosition", 50);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_TraceRotatedPosition")
-AND
-DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz);
-PlayEffectAtPosition("RS3_FX_GP_ScriptedEvent_DarkOrb_01", _tx, _ty, _tz);
-LeaderLog_TracePosition(_Player, _tx, _ty, _tz, "[LLWEAPONEX:Debug:RotationTest] Rotated position: ", ".");
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_CastGrimoireMimicSkill")
-AND
-LLWEAPONEX_Grimoire_GetGrimoirePosition(_Caster, -0.493618, -0.701302)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z)
-AND
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Caster, _Skill, _Target)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Caster, _Skill, _Target);
-NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z);
-//LeaderLib_Skills_UseSkillOnTarget(_Character, _Target, _Skill, 1, 0);
-LeaderLib_Skills_UseSkillOnTargetFromPosition(_Caster, _Target, _Skill, _x, _y, _z, 1, 0);
-RemoveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
-
-QRY
-LLWEAPONEX_Grimoire_GetGrimoirePosition((CHARACTERGUID)_Caster, (REAL)_BoneX, (REAL)_BoneZ)
-AND
-GetPosition(_Caster, _cx, _y, _cz)
-//AND
-//RealSum(_cy, 1.46313, _y)
-AND
-//GetAngleTo(_cx, _cz, _x, _z, _Angle)
-GetRotation(_Caster, _, _ry, _)
-AND
-Integer(_ry, _AngleInt)
-AND
-LeaderLib_Math_QRY_RotatePoint(_BoneX, _BoneZ, _ry, 0)
-AND
-DB_LeaderLib_Math_RotatedPoint(_BoneX, _BoneZ, _ry, _x2, _z2)
-AND
-RealSum(_cx, _x2, _x)
-AND
-RealSubtract(_cz, _z2, _z)
-THEN
-NOT DB_LeaderLib_Math_RotatedPoint(_BoneX, _BoneZ, _ry, _x2, _z2);
-DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z);
-//LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Debug:RotationTest] Player rotation: [",_AngleInt, "].");
-/*
-DB_LLWEAPONEX_Debug_Temp_PrintValues(_Caster, _sine, "[LLWEAPONEX:Debug:RotationTest] Sine: [", "]");
-DB_LLWEAPONEX_Debug_Temp_PrintValues(_Caster, _cos, "[LLWEAPONEX:Debug:RotationTest] Cosine: [", "]");
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_TraceRotatedPosition")
-AND
-NOT DB_ObjectTimer(_Player, _, "LLWEAPONEX_Timers_Debug_TraceMath")
-THEN
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Debug_TraceMath", 100);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Debug_TraceMath")
-AND
-DB_LLWEAPONEX_Debug_Temp_PrintValues(_Player, _Val, _Prefix, _Suffix)
-AND
-NOT DB_ObjectTimer(_Player, _, "LLWEAPONEX_Timers_Debug_TraceMath")
-THEN
-NOT DB_LLWEAPONEX_Debug_Temp_PrintValues(_Player, _Val, _Prefix, _Suffix);
-LeaderLog_RealToString(_Player, _Val, _Prefix, _Suffix);
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Debug_TraceMath", 10);
-*/
-//END_REGION
-
 //REGION CUSTOM_SWAP_PLACES
 IF
 SkillCast(_Character, "Target_LLWEAPONEX_Scramble", _, _)
@@ -1183,29 +944,6 @@ AND
 DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Item, _x, _y, _z)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_SwapItems(_Cause, _Item, _x, _y, _z);
-/*RealSubtract(_tx, _x, _xVar)
-AND
-LeaderLib_Math_QRY_AbsoluteValue(_xVar)
-AND
-DB_LeaderLib_Math_AbsoluteValue(_xVar, _xDist)
-AND
-RealSubtract(_tz, _z, _zVar)
-AND
-LeaderLib_Math_QRY_AbsoluteValue(_zVar)
-AND
-DB_LeaderLib_Math_AbsoluteValue(_zVar, _zDist)
-AND
-RealSubtract(_xDist, _zDist, _DistVar)
-AND
-LeaderLib_Math_QRY_AbsoluteValue(_DistVar)
-AND
-DB_LeaderLib_Math_AbsoluteValue(_DistVar, _TotalDist)
-
-PROC
-ProcObjectTimerFinished((ITEMGUID)_Item, "LLWEAPONEX_Timers_CheckSwapPosition")
-THEN
-LeaderLib_Math_ClearAbsoluteValues();
-*/
 
 IF
 StoryEvent(_Object, "LLWEAPONEX_Scramble_Reappear")
@@ -1214,7 +952,392 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
-//REGION GRIMOIRE_FOLLOW
+//REGION LAST_SKILL
+IF
+CharacterUsedSkill(_Character, _Skill, _, _)
+THEN
+SetVarString(_Character, "LLWEAPONEX_LastUsedSkill", _Skill);
+
+IF
+ItemUnEquipped(_Grimoire, _Character)
+AND
+GetTemplate(_Grimoire, "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc")
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
+CharacterRemoveSkill(_Character, _Skill);
+
+PROC
+LLWEAPONEX_Grimoire_RemoveCopiedSkill((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
+CharacterRemoveSkill(_Character, _Skill);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_COPYLASTSKILL", (CHARACTERGUID)_Character)
+AND
+GetVarString(_Target, "LLWEAPONEX_LastUsedSkill", _Skill)
+AND
+CharacterHasSkill(_Character, _Skill, 0)
+THEN
+LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
+CharacterAddSkill(_Character, _Skill);
+DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
+
+//In case a copied skill is learned
+IF
+SkillAdded(_Character, _Skill, 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
+
+IF
+SkillAdded(_Character, _Skill, _)
+AND
+DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
+THEN
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
+NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
+
+//Invalid skill safety check
+IF
+DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
+AND
+CharacterHasSkill(_Character, _Skill, 0)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
+
+IF
+CharacterUsedSkill(_Character, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
+
+IF
+SkillCast(_Character, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
+AND
+DB_ObjectTimer(_Character, _ObjectTimerName, "LLWEAPONEX_Timers_RemoveCopiedSkill")
+THEN
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill")
+THEN
+LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
+//END_REGION
+
+//REGION GRIMOIRE_MIMIC
+/*
+IF
+ObjectTurnEnded(_Character)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
+*/
+
+QRY
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+IsSourceSkill(_Skill, 0)
+AND
+LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
+AND
+LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed(_Skill, _SkillType, _SkillElement)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+IsSourceSkill(_Skill, 0)
+AND
+NOT LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+DB_LLMIME_Mimicking_Whitelist_Skills(_Skill)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_Skills(_Skill)
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_SkillElements(_SkillType, _SkillElement)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_MimicSkillQueued((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_MimicSkillQueued((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Grimoire, _Skill, _Target)
+THEN
+DB_NOOP(1);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+AND
+NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+
+IF
+CharacterUsedSkill(_Character, _Skill, "shout", _SkillElement)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+AND
+NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, "shout", _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Character);
+
+IF
+CharacterUsedSkillOnTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+AND
+NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+
+IF
+CharacterUsedSkillAtPosition(_Character, _x, _y, _z, _Skill, _SkillType, _SkillElement)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+AND
+NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
+AND
+NOT DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoire_MimicSkillPosition", 50);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Grimoire_MimicSkillPosition")
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z)
+AND
+LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Grimoire_MimicSkillPosition")
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z)
+AND
+NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
+AND
+GetUUID(_Character, _ID)
+AND
+LeaderLib_Skills_QRY_CreateTargetDummy(_ID, _x, _y, _z, "", 5000, 1, 0)
+AND
+DB_LeaderLib_Skills_TargetDummies(_ID, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z);
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+
+IF
+TextEventSet("llweap_grimoiredebug_castskill")
+AND
+CharacterGetHostCharacter(_Character)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, "Shout_Whirlwind", _Character);
+
+IF
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target)
+AND
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Character)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Character, _x, _y, _z)
+AND
+TemporaryCharacterCreateAtPosition(_x, _y, _z, "LLWEAPONEX_Grimoire_Dummy_9e0450df-20bf-419d-86b6-18e5ba8a8944", 0, _Grimoire)
+AND
+GetUUID(_Grimoire, _UUID)
+AND
+LeaderLIb_Platforms_QRY_SpawnPlatform(_UUID, "Small", 0, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Character, _x, _y, _z);
+NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Grimoire, _Skill, _Target);
+SetTag(_Grimoire, "LeaderLib_Dummy");
+CharacterTransformFromCharacter(_Grimoire, _Character, 0, 0, 1, 1, 0, 0, 0);
+LeaderLib_Helper_CopyStats(_Grimoire, _Character, 1, 1, 1, 1);
+LeaderLib_Helper_CopyFaction(_Grimoire, _Character);
+CharacterTransform(_Grimoire, "LLWEAPONEX_Grimoire_CharacterTest_9e0450df-20bf-419d-86b6-18e5ba8a8944", 0, 0, 0, 0, 0, 0, 0);
+SetVarObject(_Grimoire, "LLWEAPONEX_Grimoire_Owner", _Character);
+CharacterMoveToPosition(_Grimoire, _x, _y, _z, 1, "");
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 500);
+
+//Prevent grimoire mimics from equipping Grimoires
+PROC
+ProcBlockUseOfItem(_Dummy, _Grimoire)
+AND
+IsTagged(_Dummy, "LeaderLib_Dummy", 1)
+AND
+IsTagged(_Grimoire, "LLWEAPONEX_Grimoire", 1)
+THEN
+DB_CustomUseItemResponse(_Dummy, _Grimoire, 0);
+ItemRemove(_Grimoire);
+
+//Prevent grimoire mimics from equipping Grimoires
+IF
+ItemEquipped(_Grimoire, _Dummy)
+AND
+IsTagged(_Dummy, "LeaderLib_Dummy", 1)
+AND
+IsTagged(_Grimoire, "LLWEAPONEX_Grimoire", 1)
+THEN
+ItemRemove(_Grimoire);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_CastGrimoireMimicSkill")
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Grimoire, _Skill, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Grimoire, _Skill, _Target);
+//LeaderLib_Skills_UseSkillOnTarget(_Character, _Target, _Skill, 1, 0);
+//LeaderLib_Skills_UseSkillOnTargetFromPosition(_Caster, _Target, _Skill, _x, _y, _z, 1, 0);
+DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Character, _Grimoire);
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire", 4000);
+CharacterUseSkill(_Grimoire, _Skill, _Target, 1, 1, 1);
+RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
+
+IF
+SkillCast(_Grimoire, _, _, _)
+AND
+DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Character, _Grimoire)
+THEN
+ProcObjectTimerCancel(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire");
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire", 1500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire")
+AND
+GetUUID(_Grimoire, _UUID)
+AND
+DB_LeaderLib_Platforms(_ID, _Platform)
+THEN
+RemoveTemporaryCharacter(_Grimoire);
+LeaderLib_Platforms_RemovePlatform(_Platform);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire")
+AND
+DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Caster, _Grimoire)
+THEN
+NOT DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Caster, _Grimoire);
+
+QRY
+LLWEAPONEX_Grimoire_GetGrimoirePosition((CHARACTERGUID)_Caster)
+AND
+HasActiveStatus(_Caster, "UNSHEATHED", _Unsheathed)
+AND
+DB_LLWEAPONEX_Grimoire_PositionOffset(_Unsheathed, _BoneX, _BoneZ)
+AND
+GetPosition(_Caster, _cx, _y, _cz)
+AND
+GetRotation(_Caster, _, _ry, _)
+AND
+Integer(_ry, _AngleInt)
+AND
+LeaderLib_Math_QRY_RotatePoint(_BoneX, _BoneZ, _ry, 0)
+AND
+DB_LeaderLib_Math_RotatedPoint(_BoneX, _BoneZ, _ry, _x2, _z2)
+AND
+RealSum(_cx, _x2, _x)
+AND
+RealSubtract(_cz, _z2, _z)
+THEN
+NOT DB_LeaderLib_Math_RotatedPoint(_BoneX, _BoneZ, _ry, _x2, _z2);
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z);
+
+IF
+TextEventSet("llweap_grimoiredebug_setoffset")
+AND
+DB_LLWEAPONEX_Grimoire_PositionOffset(_Unsheathed, _BoneX, _BoneZ)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_PositionOffset(_Unsheathed, _BoneX, _BoneZ);
+
+IF
+TextEventSet("llweap_grimoiredebug_setoffset")
+AND
+GetTextEventParamReal(1, _BoneBackX)
+AND
+GetTextEventParamReal(2, _BoneBackZ)
+AND
+GetTextEventParamReal(3, _BoneFrontX)
+AND
+GetTextEventParamReal(4, _BoneFrontZ)
+THEN
+DB_LLWEAPONEX_Grimoire_PositionOffset(0, _BoneBackX, _BoneBackZ);
+DB_LLWEAPONEX_Grimoire_PositionOffset(1, _BoneFrontX, _BoneFrontZ);
+//END_REGION
+
+//REGION GRIMOIRE_FOLLOW_TEST
+/*
+IF
+TextEventSet("llweap_grimoiredebug_setoffset")
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+LLWEAPONEX_Grimoire_UpdatePosition(_Player, _Grimoire);
+
+IF
+TextEventSet("llweap_rotationtest")
+AND
+CharacterGetHostCharacter(_Player)
+THEN
+LeaderLog_TracePosition(_Player, "[LLWEAPONEX:Debug:RotationTest] Player position: ", ".");
+ProcObjectTimer(_Player, "LLWEAPONEX_Debug_GetRotatedPosition", 50);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_GetRotatedPosition")
+AND
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player)
+THEN
+ProcObjectTimer(_Player, "LLWEAPONEX_Debug_TraceRotatedPosition", 50);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_TraceRotatedPosition")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz);
+PlayEffectAtPosition("LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", _tx, 1.5, _tz);
+LeaderLog_TracePosition(_Player, _tx, _ty, _tz, "[LLWEAPONEX:Debug:RotationTest] Rotated position: ", ".");
+
 IF
 TextEventSet("llweap_grimoirecharteststop")
 AND
@@ -1276,7 +1399,7 @@ DB_CurrentLevel(_Region)
 AND
 CharacterGetHostCharacter(_Player)
 AND
-LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player, 0.493618, 0.701302)
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player)
 AND
 DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _x, _y, _z)
 AND
@@ -1287,6 +1410,18 @@ SetVarObject(_Grimoire, "LLWEAPONEX_Grimoire_Owner", _Player);
 PROC_LoopEffect("LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", _Grimoire, "LLWEAPONEX_FX_GrimoireLoopTest", _Region, "Dummy_BodyFX");
 DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval);
 ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Interval);
+
+IF
+CharacterCharacterEvent(_Player, _Grimoire, "LLWEAPONEX_Commands_RelinkGrimoire")
+AND
+NOT DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _)
+AND
+DB_CurrentLevel(_Region)
+THEN
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, 500);
+PROC_StopLoopEffect(_Grimoire, "LLWEAPONEX_FX_GrimoireLoopTest");
+PROC_LoopEffect("LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", _Grimoire, "LLWEAPONEX_FX_GrimoireLoopTest", _Region, "Dummy_BodyFX");
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", 500);
 
 QRY
 LLWEPAONEX_Grimoire_QRY_PositionMismatch((CHARACTERGUID)_Player, (REAL)_x, (REAL)_y, (REAL)_z, (REAL)_tx, (REAL)_ty, (REAL)_tz)
@@ -1363,8 +1498,27 @@ AND
 DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
 AND
 LLWEPAONEX_Grimoire_QRY_PlayerMoved(_Player)
+THEN
+LLWEAPONEX_Grimoire_UpdatePosition(_Player, _Grimoire);
+
+IF
+CharacterStatusApplied(_Player, "UNSHEATHED", _)
 AND
-LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player, 0.493618, 0.701302)
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+LLWEAPONEX_Grimoire_UpdatePosition(_Player, _Grimoire);
+
+IF
+CharacterStatusRemoved(_Player, "UNSHEATHED", _)
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+LLWEAPONEX_Grimoire_UpdatePosition(_Player, _Grimoire);
+
+PROC
+LLWEAPONEX_Grimoire_UpdatePosition((CHARACTERGUID)_Player, (CHARACTERGUID)_Grimoire)
+AND
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player)
 AND
 DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz)
 AND
@@ -1386,6 +1540,39 @@ NOT DB_LeaderLog_Temp_CombinedString(_QueueID);
 NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz);
 LeaderLib_Array_AddToArray(_GrimoireID, _QueueID);
 DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _QueueID, _tx, _ty, _tz);
+*/
+
+/* Commented out
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoirePositionChecker")
+AND
+DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire)
+AND
+GetUUID(_Grimoire, _ArrayID)
+AND
+DB_LeaderLib_Array_Length(_ArrayID, _Length)
+AND
+_Length > 1
+AND
+DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz)
+AND
+GetDistanceToPosition(_Grimoire, _tx, _ty, _tz, _Dist)
+AND
+LeaderLog_QRY_RealToString(_Dist, "[LLWEAPONEX:Debug:GrimoireTest] Grimoire's distance to target position: ", "")
+AND
+_Dist <= 1.0
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:GrimoireTest] Grimoire close to position, with a new position queued. Purging queue.");
+CharacterPurgeQueue(_Grimoire);
+SetStoryEvent(_Grimoire, _QueueID);
+*/
+
+/*
+IF
+DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _NewQueueID, _x, _y, _z)
+AND
+NOT DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire)
+THEN
+LLWEAPONED_Grimoire_MoveToNextPosition(_Grimoire);
 
 IF
 DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _NewQueueID, _x, _y, _z)
@@ -1395,20 +1582,11 @@ AND
 DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz)
 AND
 _NewQueueID != _QueueID
-AND
-GetDistanceToPosition(_Grimoire, _tx, _ty, _tz, _Dist)
-AND
-_Dist <= 2.0
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:GrimoireTest] Grimoire close to position, with a new position queued. Purging queue.");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:GrimoireTest] New position queued while already moving. Purging queue.");
+NOT DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz);
 CharacterPurgeQueue(_Grimoire);
-SetStoryEvent(_Grimoire, _QueueID);
-
-IF
-DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _NewQueueID, _x, _y, _z)
-AND
-NOT DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire)
-THEN
+NOT DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire);
 LLWEAPONED_Grimoire_MoveToNextPosition(_Grimoire);
 
 IF
@@ -1443,6 +1621,16 @@ LeaderLib_Array_RemoveFromArrayAtIndex(_ArrayID, _Index);
 DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire);
 DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz);
 CharacterMoveToPosition(_Grimoire, _tx, _ty, _tz, 1, _QueueID);
+//ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoirePositionChecker", 100);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoirePositionChecker")
+AND
+GetUUID(_Grimoire, _ArrayID)
+AND
+LeaderLib_Array_QRY_ArrayIsPopulated(_ArrayID)
+THEN
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoirePositionChecker", 100);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer")
@@ -1459,6 +1647,7 @@ AND
 DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
 THEN
 ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Interval);
+*/
 //END_REGION
 
 EXITSECTION
