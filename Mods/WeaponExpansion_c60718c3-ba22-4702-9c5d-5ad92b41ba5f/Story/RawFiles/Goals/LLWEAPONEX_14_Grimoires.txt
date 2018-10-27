@@ -908,27 +908,77 @@ PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill")
 THEN
 LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
+//END_REGION
 
-IF
-CharacterUsedSkillOnZoneWithTarget(_Character, _Target, _Skill, _, _)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+//REGION GRIMOIRE_MIMIC
+QRY
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
 AND
 IsSourceSkill(_Skill, 0)
 AND
+LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
+AND
+LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed(_Skill, _SkillType, _SkillElement)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+IsSourceSkill(_Skill, 0)
+AND
+NOT LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+DB_LLMIME_Mimicking_Whitelist_Skills(_Skill)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_Skills(_Skill)
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_SkillElements(_SkillType, _SkillElement)
+THEN
+DB_NOOP(1);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
+AND
 NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
 THEN
 DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
 
 IF
-CharacterUsedSkillOnTarget(_Character, _Target, _Skill, _, _)
+CharacterUsedSkill(_Character, _Skill, "shout", _SkillElement)
 AND
 HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
 AND
-IsSourceSkill(_Skill, 0)
+NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, "shout", _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Character);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
+
+IF
+CharacterUsedSkillOnTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
 AND
 NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
 THEN
 DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 1500);
@@ -940,15 +990,90 @@ HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
 
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_CastGrimoireMimicSkill")
+IF
+TextEventSet("llweap_rotationtest")
 AND
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target)
+CharacterGetHostCharacter(_Player)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
-LeaderLib_Skills_UseSkillOnTarget(_Character, _Target, _Skill, 1, 0);
-RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
+LeaderLog_TracePosition(_Player, "[LLWEAPONEX:Debug:RotationTest] Player position: ", ".");
+ProcObjectTimer(_Player, "LLWEAPONEX_Debug_GetRotatedPosition", 50);
 
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_GetRotatedPosition")
+AND
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player, 0.493618, 0.701302)
+THEN
+ProcObjectTimer(_Player, "LLWEAPONEX_Debug_TraceRotatedPosition", 50);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_TraceRotatedPosition")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz);
+PlayEffectAtPosition("RS3_FX_GP_ScriptedEvent_DarkOrb_01", _tx, _ty, _tz);
+LeaderLog_TracePosition(_Player, _tx, _ty, _tz, "[LLWEAPONEX:Debug:RotationTest] Rotated position: ", ".");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_CastGrimoireMimicSkill")
+AND
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Caster, -0.493618, -0.701302)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z)
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Caster, _Skill, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Caster, _Skill, _Target);
+NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z);
+//LeaderLib_Skills_UseSkillOnTarget(_Character, _Target, _Skill, 1, 0);
+LeaderLib_Skills_UseSkillOnTargetFromPosition(_Caster, _Target, _Skill, _x, _y, _z, 1, 0);
+RemoveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
+
+QRY
+LLWEAPONEX_Grimoire_GetGrimoirePosition((CHARACTERGUID)_Caster, (REAL)_BoneX, (REAL)_BoneZ)
+AND
+GetPosition(_Caster, _cx, _y, _cz)
+//AND
+//RealSum(_cy, 1.46313, _y)
+AND
+//GetAngleTo(_cx, _cz, _x, _z, _Angle)
+GetRotation(_Caster, _, _ry, _)
+AND
+Integer(_ry, _AngleInt)
+AND
+LeaderLib_Math_QRY_RotatePoint(_BoneX, _BoneZ, _ry, 0)
+AND
+DB_LeaderLib_Math_RotatedPoint(_BoneX, _BoneZ, _ry, _x2, _z2)
+AND
+RealSum(_cx, _x2, _x)
+AND
+RealSubtract(_cz, _z2, _z)
+THEN
+NOT DB_LeaderLib_Math_RotatedPoint(_BoneX, _BoneZ, _ry, _x2, _z2);
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z);
+//LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Debug:RotationTest] Player rotation: [",_AngleInt, "].");
+/*
+DB_LLWEAPONEX_Debug_Temp_PrintValues(_Caster, _sine, "[LLWEAPONEX:Debug:RotationTest] Sine: [", "]");
+DB_LLWEAPONEX_Debug_Temp_PrintValues(_Caster, _cos, "[LLWEAPONEX:Debug:RotationTest] Cosine: [", "]");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Debug_TraceRotatedPosition")
+AND
+NOT DB_ObjectTimer(_Player, _, "LLWEAPONEX_Timers_Debug_TraceMath")
+THEN
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Debug_TraceMath", 100);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Debug_TraceMath")
+AND
+DB_LLWEAPONEX_Debug_Temp_PrintValues(_Player, _Val, _Prefix, _Suffix)
+AND
+NOT DB_ObjectTimer(_Player, _, "LLWEAPONEX_Timers_Debug_TraceMath")
+THEN
+NOT DB_LLWEAPONEX_Debug_Temp_PrintValues(_Player, _Val, _Prefix, _Suffix);
+LeaderLog_RealToString(_Player, _Val, _Prefix, _Suffix);
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Debug_TraceMath", 10);
+*/
 //END_REGION
 
 //REGION CUSTOM_SWAP_PLACES
@@ -1087,6 +1212,253 @@ StoryEvent(_Object, "LLWEAPONEX_Scramble_Reappear")
 THEN
 //PlayEffect(_Object, "RS3_FX_Skills_Void_Netherswap_Reappear_01");
 DB_NOOP(1);
+//END_REGION
+
+//REGION GRIMOIRE_FOLLOW
+IF
+TextEventSet("llweap_grimoirecharteststop")
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+LLWEAPONED_Grimoire_RemoveGrimoire(_Player, _Grimoire);
+
+IF
+TextEventSet("llweap_grimoirechartest")
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+LLWEAPONED_Grimoire_RemoveGrimoire(_Player, _Grimoire);
+
+PROC
+LLWEAPONED_Grimoire_RemoveGrimoire((CHARACTERGUID)_Player, (CHARACTERGUID)_Grimoire)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _x, _y, _z, _Rotation)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _x, _y, _z, _Rotation);
+NOT DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player);
+
+PROC
+LLWEAPONED_Grimoire_RemoveGrimoire((CHARACTERGUID)_Player, (CHARACTERGUID)_Grimoire)
+AND
+DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _QueueID, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _QueueID, _tx, _ty, _tz);
+
+PROC
+LLWEAPONED_Grimoire_RemoveGrimoire((CHARACTERGUID)_Player, (CHARACTERGUID)_Grimoire)
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+RemoveTemporaryCharacter(_Grimoire);
+NOT DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval);
+PROC_StopLoopEffect(_Grimoire, "LLWEAPONEX_FX_GrimoireLoopTest");
+
+IF
+StoryEvent((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Commands_CleanupGrimoire")
+AND
+NOT DB_LLWEAPONEX_Debug_ActiveGrimoires(_, _Grimoire, _)
+THEN
+RemoveTemporaryCharacter(_Grimoire);
+
+IF
+StoryEvent((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Commands_CleanupGrimoire")
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+LLWEAPONED_Grimoire_RemoveGrimoire(_Player, _Grimoire);
+
+IF
+TextEventSet("llweap_grimoirechartest")
+AND
+GetTextEventParamInteger(1, _Interval)
+AND
+DB_CurrentLevel(_Region)
+AND
+CharacterGetHostCharacter(_Player)
+AND
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player, 0.493618, 0.701302)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _x, _y, _z)
+AND
+TemporaryCharacterCreateAtPosition(_x, _y, _z, "LLWEAPONEX_Grimoire_CharacterTest_9e0450df-20bf-419d-86b6-18e5ba8a8944", 0, _Grimoire)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _x, _y, _z);
+SetVarObject(_Grimoire, "LLWEAPONEX_Grimoire_Owner", _Player);
+PROC_LoopEffect("LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", _Grimoire, "LLWEAPONEX_FX_GrimoireLoopTest", _Region, "Dummy_BodyFX");
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval);
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Interval);
+
+QRY
+LLWEPAONEX_Grimoire_QRY_PositionMismatch((CHARACTERGUID)_Player, (REAL)_x, (REAL)_y, (REAL)_z, (REAL)_tx, (REAL)_ty, (REAL)_tz)
+AND
+_x != _tx
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEPAONEX_Grimoire_QRY_PositionMismatch((CHARACTERGUID)_Player, (REAL)_x, (REAL)_y, (REAL)_z, (REAL)_tx, (REAL)_ty, (REAL)_tz)
+AND
+_y != _ty
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEPAONEX_Grimoire_QRY_PositionMismatch((CHARACTERGUID)_Player, (REAL)_x, (REAL)_y, (REAL)_z, (REAL)_tx, (REAL)_ty, (REAL)_tz)
+AND
+_z != _tz
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEPAONEX_Grimoire_QRY_PlayerMoved((CHARACTERGUID)_Player)
+AND
+NOT DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player)
+AND
+NOT DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _, _, _, _)
+AND
+GetPosition(_Player, _x, _y, _z)
+AND
+GetRotation(_Player, _, _Rotation, _)
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _x, _y, _z, _Rotation);
+DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player);
+
+QRY
+LLWEPAONEX_Grimoire_QRY_PlayerMoved((CHARACTERGUID)_Player)
+AND
+NOT DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _tx, _ty, _tz, _LastRotation)
+AND
+GetPosition(_Player, _x, _y, _z)
+AND
+LLWEPAONEX_Grimoire_QRY_PositionMismatch(_Player, _x, _y, _z, _tx, _ty, _tz)
+AND
+GetRotation(_Player, _, _Rotation, _)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _tx, _ty, _tz, _LastRotation);
+DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _x, _y, _z, _Rotation);
+DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player);
+
+QRY
+LLWEPAONEX_Grimoire_QRY_PlayerMoved((CHARACTERGUID)_Player)
+AND
+NOT DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _tx, _ty, _tz, _LastRotation)
+AND
+GetPosition(_Player, _x, _y, _z)
+AND
+GetRotation(_Player, _, _Rotation, _)
+AND
+_LastRotation != _Rotation
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _tx, _ty, _tz, _LastRotation);
+DB_LLWEAPONEX_Grimoire_Temp_LastPlayerPosition(_Player, _x, _y, _z, _Rotation);
+DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer")
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+AND
+LLWEPAONEX_Grimoire_QRY_PlayerMoved(_Player)
+AND
+LLWEAPONEX_Grimoire_GetGrimoirePosition(_Player, 0.493618, 0.701302)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz)
+AND
+SysCount("DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions", 5, _ID)
+AND
+IntegertoString(_ID, _IDStr)
+AND
+Random(500, _Ran)
+AND
+IntegertoString(_Ran, _RanStr)
+AND
+GetUUID(_Grimoire, _GrimoireID)
+AND
+LeaderLog_QRY_Log("COMBINE", "LLWEAPONEX_GrimoireMovingToPosition_", _GrimoireID, "_",_IDStr, "_", _RanStr)
+AND
+DB_LeaderLog_Temp_CombinedString(_QueueID)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_QueueID);
+NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Player, _tx, _ty, _tz);
+LeaderLib_Array_AddToArray(_GrimoireID, _QueueID);
+DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _QueueID, _tx, _ty, _tz);
+
+IF
+DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _NewQueueID, _x, _y, _z)
+AND
+DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire)
+AND
+DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz)
+AND
+_NewQueueID != _QueueID
+AND
+GetDistanceToPosition(_Grimoire, _tx, _ty, _tz, _Dist)
+AND
+_Dist <= 2.0
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:GrimoireTest] Grimoire close to position, with a new position queued. Purging queue.");
+CharacterPurgeQueue(_Grimoire);
+SetStoryEvent(_Grimoire, _QueueID);
+
+IF
+DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _NewQueueID, _x, _y, _z)
+AND
+NOT DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire)
+THEN
+LLWEAPONED_Grimoire_MoveToNextPosition(_Grimoire);
+
+IF
+StoryEvent((CHARACTERGUID)_Grimoire, _QueueID)
+AND
+DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz)
+AND
+GetUUID(_Grimoire, _ArrayID)
+THEN
+NOT DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz);
+NOT DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire);
+LLWEAPONED_Grimoire_MoveToNextPosition(_Grimoire);
+
+PROC
+LLWEAPONED_Grimoire_MoveToNextPosition((CHARACTERGUID)_Grimoire)
+AND
+NOT DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire)
+AND
+GetUUID(_Grimoire, _ArrayID)
+AND
+LeaderLib_Array_QRY_ArrayIsPopulated(_ArrayID)
+AND
+LeaderLib_Array_QRY_GetFirstEntry(_ArrayID)
+AND
+DB_LeaderLib_Array_Temp_FirstEntry(_ID, _Index, _QueueID)
+AND
+DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _QueueID, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Debug_Grimoire_QueuedPositions(_Grimoire, _QueueID, _tx, _ty, _tz);
+NOT DB_LeaderLib_Array_Temp_FirstEntry(_ID, _Index, _QueueID);
+LeaderLib_Array_RemoveFromArrayAtIndex(_ArrayID, _Index);
+DB_LLWEAPONED_Grimoire_Temp_GrimoireMoving(_Grimoire);
+DB_LLWEAPONEX_Debug_Grimoire_NextPosition(_Grimoire, _QueueID, _tx, _ty, _tz);
+CharacterMoveToPosition(_Grimoire, _tx, _ty, _tz, 1, _QueueID);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer")
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_PositionUpdated(_Player);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer")
+AND
+DB_LLWEAPONEX_Debug_ActiveGrimoires(_Player, _Grimoire, _Interval)
+THEN
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Interval);
 //END_REGION
 
 EXITSECTION

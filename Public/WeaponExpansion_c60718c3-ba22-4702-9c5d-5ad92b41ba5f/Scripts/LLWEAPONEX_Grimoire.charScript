@@ -1,0 +1,21 @@
+INIT
+	CHARACTER:__Me
+	CHARACTER:%LLWEAPONEX_Grimoire_Owner = null
+
+EVENTS
+
+EVENT LLWEAPONEX_Editor_Reload_StartCleanup
+ON
+	OnInit()
+ACTIONS
+	StartTimer("LLWEAPONEX_Timers_Grimoire_CheckForCleanup", 0.5, 0)
+
+EVENT LLWEAPONEX_Editor_Reload_Cleanup
+ON
+	OnTimer("LLWEAPONEX_Timers_Grimoire_CheckForCleanup")
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Grimoire_Owner, null)
+THEN
+	CharacterEvent(__Me, "LLWEAPONEX_Commands_CleanupGrimoire")
+ENDIF
