@@ -92,10 +92,29 @@ StoryEvent(_, "LeaderLib_Initialized")
 AND
 CharacterGetHostCharacter(_Host)
 AND
+GetPosition(_Host, _x, _y, _z)
+AND
+CharacterGetLevel(_Host, _Level)
+AND
+_Level < 5
+THEN
+CharacterLevelUpTo(_Host, 5);
+CharacterAddAttributePoint(_Host, 10);
+CharacterAddCivilAbilityPoint(_Host, 10);
+CharacterAddAbilityPoint(_Host, 10);
+CharacterAddTalentPoint(_Host, 2);
+
+/*
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+AND
+CharacterGetHostCharacter(_Host)
+AND
 NOT CharacterGetEquippedItem(_Host, "Breast", _)
 THEN
 //CharacterApplyPreset(_Host, "Rogue_Act2");
-CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_LLWEAPONEX_RunicKnight_Debug", 0);
+CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_LLWEAPONEX_RunicKnight_Debug_Humans", 0);
+*/
 
 IF
 TextEventSet("llweap_tptrigger")
@@ -177,23 +196,6 @@ THEN
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_000_e026f14d-6290-44c2-989d-984d03a42274, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_001_270b72cd-90e5-480e-9677-69040d566818, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_Undead_000_84f397e8-fdea-427a-a0ba-2e367a7eae45, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
-
-IF
-StoryEvent(_, "LeaderLib_Initialized")
-AND
-CharacterGetHostCharacter(_Host)
-AND
-GetPosition(_Host, _x, _y, _z)
-//AND
-//CreateItemTemplateAtPosition("LOOT_BackPack_A_6c70c298-aa29-418f-a659-f8e0b5f5fa60", _x, _y, _z, _Backpack)
-THEN
-//CharacterTransform(_Host, "Humans_Hero_Male_Undead_5ab5d036-4606-4265-962e-c2e4d2d2408b", 0, 1, 0, 0, 0, 1, 0);
-//MoveAllItemsTo(_Host, _Backpack, 0, 1, 1);
-//ItemRemove(_Backpack);
-CharacterLevelUpTo(_Host, 5);
-CharacterAddAttribute(_Host, "Intelligence", 5);
-CharacterAddAttribute(_Host, "Strength", 5);
-CharacterAddAttribute(_Host, "Finesse", 5);
 
 IF
 TextEventSet("llweap_preset")

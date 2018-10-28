@@ -357,7 +357,7 @@ data "DamageStats" "Damage_LLWEAPONEX_Runeblade_ConductionChainLightning"
 new entry "Damage_LLWEAPONEX_Runeblade_ConductionChainLightning"
 type "Weapon"
 data "ModifierType" "Skill"
-data "Damage Type" "Air"
+data "Damage Type" "Piercing"
 data "Damage" "-1"
 data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_Runeblade_Conduction_ChainLightning"
 

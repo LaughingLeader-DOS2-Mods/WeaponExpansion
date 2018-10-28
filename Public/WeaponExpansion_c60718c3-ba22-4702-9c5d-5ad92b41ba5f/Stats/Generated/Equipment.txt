@@ -112,6 +112,54 @@ add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H_Preview"
 
+new equipment "Class_LLWEAPONEX_RunicKnight_Preview_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Helmet_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_UpperBody_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_LowerBody_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Gloves_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Boots_Humans"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H_Preview"
+
+new equipment "Class_LLWEAPONEX_RunicKnight_Debug"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H"
+
+new equipment "Class_LLWEAPONEX_RunicKnight_Debug_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Helmet_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_UpperBody_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_LowerBody_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Gloves_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_RunicKnight_Boots_Humans"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H"
+
 new equipment "Class_LLWEAPONEX_ChaosWeaver_Start"
 add equipmentgroup
 add equipment entry "ARM_Purge_UpperBody"
@@ -169,22 +217,6 @@ add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Rod_Chaos_Preview"
-
-new equipment "Class_LLWEAPONEX_RunicKnight_Debug"
-add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_RunicKnight_Helmet"
-add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_RunicKnight_UpperBody"
-add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_RunicKnight_LowerBody"
-add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_RunicKnight_Gloves"
-add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_RunicKnight_Boots"
-add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H"
-add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H"
 
 new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Start"
 add equipmentgroup

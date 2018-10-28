@@ -69,6 +69,31 @@ data "ItemGroup" "ARM_LLWEAPONEX_RunicKnight_Helmet"
 data "Act part" "0"
 data "ItemColor" "LLWEAPONEX_RunicKnight"
 
+new entry "ARM_LLWEAPONEX_RunicKnight_UpperBody_Humans"
+type "Armor"
+using "ARM_LLWEAPONEX_RunicKnight_UpperBody"
+data "ItemColor" "LLWEAPONEX_RunicKnight_Humans"
+
+new entry "ARM_LLWEAPONEX_RunicKnight_LowerBody_Humans"
+type "Armor"
+using "ARM_LLWEAPONEX_RunicKnight_LowerBody"
+data "ItemColor" "LLWEAPONEX_RunicKnight_Humans"
+
+new entry "ARM_LLWEAPONEX_RunicKnight_Gloves_Humans"
+type "Armor"
+using "ARM_LLWEAPONEX_RunicKnight_Gloves"
+data "ItemColor" "LLWEAPONEX_RunicKnight_Humans"
+
+new entry "ARM_LLWEAPONEX_RunicKnight_Boots_Humans"
+type "Armor"
+using "ARM_LLWEAPONEX_RunicKnight_Boots"
+data "ItemColor" "LLWEAPONEX_RunicKnight_Humans"
+
+new entry "ARM_LLWEAPONEX_RunicKnight_Helmet_Humans"
+type "Armor"
+using "ARM_LLWEAPONEX_RunicKnight_Helmet"
+data "ItemColor" "LLWEAPONEX_RunicKnight_Humans"
+
 new entry "ARM_LLWEAPONEX_Debug_ForceBoots"
 type "Armor"
 using "_HeavyBoots"

@@ -1,0 +1,4 @@
+LLWEAPONEX_GREATBOW_CUSHION_FORCE_DisplayName	Launched (Greatbow)
+LLWEAPONEX_GREATBOW_CUSHION_FORCE_Description	Character is flying through the air!
+LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_DisplayName	Cushion Force
+LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_Description	Character is taking [1] from a flying body.

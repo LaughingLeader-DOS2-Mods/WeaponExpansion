@@ -23,7 +23,7 @@
 					<children>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Human" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_RunicKnight_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_RunicKnight_Preview_Humans" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_RunicKnight_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
@@ -43,7 +43,7 @@
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Human" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_RunicKnight_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_RunicKnight_Preview_Humans" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_RunicKnight_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">

@@ -1,0 +1,124 @@
+INIT
+
+EVENTS
+
+EVENT LLWEAPONEX_Greatbows_CushionForce_Start
+VARS
+	CHARACTER:_Target
+	CHARACTER:_GreatbowCaster
+	FLOAT:_Dist
+	FLOAT:_ForceDist
+	INT:_ForceDistInt
+	SKILL:_ForceSkill
+	STRING:_DebugMessage
+	FIXEDSTRING:_DebugMessageF
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE)
+ACTIONS
+IF "c1&c2"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE, _GreatbowCaster)
+	GetDistance(_Dist, _GreatbowCaster, _Target)
+THEN
+	Set(_ForceDist, FLOAT:14.0)
+	Subtract(_ForceDist, _Dist)
+	Cast(_ForceDistInt, _ForceDist)
+	IF "c1"
+		IsLessThen(_ForceDistInt, 5)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback4)
+	ELIF "c1"
+		IsEqual(_ForceDistInt, 5)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback5)
+	ELIF "c1"
+		IsEqual(_ForceDistInt, 6)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback6)
+	ELIF "c1"
+		IsEqual(_ForceDistInt, 7)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback7)
+	ELIF "c1"
+		IsEqual(_ForceDistInt, 8)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback8)
+	ELIF "c1"
+		IsEqual(_ForceDistInt, 9)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback9)
+	ELIF "c1"
+		IsEqual(_ForceDistInt, 10)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback10)
+	ELIF "c1"
+		IsEqual(_ForceDistInt, 11)
+	THEN
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback11)
+	ELSE
+		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback12)
+	ENDIF
+	ShootLocalProjectileAt(_ForceSkill, _GreatbowCaster, FLOAT3:{0;1.0;0}, _Target, -1, _GreatbowCaster)
+	/*
+	Print(_DebugMessage, "[LLWEAPONEX:Greatbows:CushionForce] Distance(14 - [1] = [2] | Int([3])) = Skill [4]", _Dist, _ForceDist, _ForceDistInt, _ForceSkill)
+	SetVar(_GreatbowCaster, "LeaderLog_Type", STRING:"Debug")
+	SetVar(_GreatbowCaster, "LeaderLog_Message", _DebugMessage)
+	CharacterEvent(_GreatbowCaster, "LeaderLog_Commands_Log")
+	*/
+ENDIF
+	
+EVENT LLWEAPONEX_Greatbows_CushionForce_End
+VARS
+	CHARACTER:_Target
+	CHARACTER:_GreatbowCaster
+ON
+	OnCharacterStatusRemoved(_Target, SHOCKWAVE)
+ACTIONS
+IF "c1&c2"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE, _GreatbowCaster)
+	CharacterIsEnemy(_Target, _GreatbowCaster)
+THEN
+	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE, 0, 0, _GreatbowCaster)
+ENDIF
+	CharacterRemoveStatus(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE, null, 0)
+
+EVENT LLWEAPONEX_Greatbows_CushionForce_DamageCheck_Characters
+VARS
+	CHARACTER:_Target
+	CHARACTER:_AuraHost
+	CHARACTER:_GreatbowCaster
+	INT:_Turns
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_CHECK)
+ACTIONS
+IF "c1&c2&c3"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_CHECK, _AuraHost)
+	CharacterGetStatusSourceCharacter(_AuraHost, LLWEAPONEX_GREATBOW_CUSHION_FORCE, _GreatbowCaster)
+	CharacterIsEnemy(_Target, _GreatbowCaster)
+THEN
+	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE, 0, 0, _GreatbowCaster)
+	//Purely for the animation
+	IF "!c1"
+		CharacterHasStatus(_Target, KNOCKED_DOWN)
+	THEN
+		CharacterApplyStatus(_Target, KNOCKED_DOWN, 0, 1, _GreatbowCaster)
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_Greatbows_CushionForce_DamageCheck_Items
+VARS
+	ITEM:_Target
+	CHARACTER:_AuraHost
+	CHARACTER:_GreatbowCaster
+	INT:_Turns
+ON
+	OnItemStatus(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_CHECK)
+ACTIONS
+IF "!c1&c2&c3"
+	IsStoryItem(_Target)
+	ItemGetStatusSourceCharacter(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_CHECK, _AuraHost)
+	CharacterGetStatusSourceCharacter(_AuraHost, LLWEAPONEX_GREATBOW_CUSHION_FORCE, _GreatbowCaster)
+THEN
+	ItemApplyStatus(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_ITEM, 0, 0, _GreatbowCaster)
+	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_CushionDamage, -1, _GreatbowCaster)
+ENDIF
+
