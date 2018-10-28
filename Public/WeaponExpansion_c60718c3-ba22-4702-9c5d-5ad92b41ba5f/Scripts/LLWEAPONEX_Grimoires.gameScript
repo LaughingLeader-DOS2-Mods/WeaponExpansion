@@ -127,18 +127,16 @@ ENDIF
 EVENT LLWEAPONEX_Grimoire_Swap_SetIsMovable
 VARS
 	ITEM:_Object
+	CHARACTER:_Cause
 ON
-	OnItemStatusAttempt(_Object, LLWEAPONEX_GRIMOIRE_SCRAMBLE_CHECK)
+	//OnItemStatusAttempt(_Object, LLWEAPONEX_GRIMOIRE_SCRAMBLE_CHECK)
+	OnCharacterItemEvent(_Cause, _Object, "LLWEAPONEX_Grimoire_Scramble_CheckMovable")
 ACTIONS
 IF "c1&!c2"
 	ItemIsMovable(_Object)
 	IsStoryItem(_Object)
 THEN
-	SetFlag(_Object, "LLWEAPONEX_IsMovable")
-ELIF "c1"
-	HasFlag(_Object, "LLWEAPONEX_IsMovable")
-THEN
-	ClearFlag(_Object, "LLWEAPONEX_IsMovable")
+	CharacterItemEvent(_Cause, _Object, "LLWEAPONEX_Grimoire_Scramble_ItemIsMovable")
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_TransitDamageCheck

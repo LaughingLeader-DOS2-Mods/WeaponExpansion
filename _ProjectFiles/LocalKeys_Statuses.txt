@@ -39,3 +39,4 @@ LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles
 LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.
 LLWEAPONEX_COMBAT_SHIELD_RESTORE_DisplayName	Armor Rejuvenation
+LLWEAPONEX_COPYLASTSKILL_DisplayName	Copy Last Skill
