@@ -21,6 +21,12 @@ DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE", "L
 
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Wind", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", "", "Air");
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "teleportation", "");
+
+//Mimicry Skill Blacklist
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Wind_Toggle");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Swap_Toggle");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Mimicry_Toggle");
+DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_ShieldToss_Returned");
 //DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "jump", "");
 
 //DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.493618, -0.701302);
@@ -1010,9 +1016,15 @@ DB_NOOP(1);
 
 //REGION LAST_SKILL
 IF
-CharacterUsedSkill(_Character, _Skill, _, _)
+CharacterUsedSkill(_Character, _Skill, _SkillType, _SkillElement)
+AND
+IsTagged(_Character, "LeaderLib_Dummy", 0)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
 THEN
 SetVarString(_Character, "LLWEAPONEX_LastUsedSkill", _Skill);
+SetVarString(_Character, "LLWEAPONEX_LastUsedSkill_Type", _SkillType);
+SetVarString(_Character, "LLWEAPONEX_LastUsedSkill_Element", _SkillElement);
 
 IF
 ItemUnEquipped(_Grimoire, _Character)
@@ -1036,6 +1048,12 @@ IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_COPYLASTSKILL", (CHARACTERGUID)_Character)
 AND
 GetVarString(_Target, "LLWEAPONEX_LastUsedSkill", _Skill)
+AND
+GetVarString(_Target, "LLWEAPONEX_LastUsedSkill_Type", _SkillType)
+AND
+GetVarString(_Target, "LLWEAPONEX_LastUsedSkill_Element", _SkillElement)
+AND
+LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
 AND
 CharacterHasSkill(_Character, _Skill, 0)
 THEN
@@ -1109,28 +1127,40 @@ IsSourceSkill(_Skill, 0)
 AND
 LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
 AND
-LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed(_Skill, _SkillType, _SkillElement)
+LLMIME_Mimicking_QRY_SkillIsAllowed(_Skill, _SkillType, _SkillElement)
+THEN
+DB_NOOP(1);
+
+//Never true, but needed so we can use Mimicry's query.
+QRY
+LLMIME_Mimicking_QRY_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+AND
+DB_GlobalFlag("LLWEAPONEX_Grimoire_MimicBlacklistDisabled")
 THEN
 DB_NOOP(1);
 
 QRY
 LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
 AND
+NOT LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
+AND
 IsSourceSkill(_Skill, 0)
 AND
-NOT LeaderUpdater_QRY_ModIsActive("Mimicry", "LaughingLeader")
+StringContains(_Skill, "_Quest_", 0)
+AND
+LLWEAPONEX_Grimoire_QRY_MimicryDisabled_SkillIsAllowed(_Skill, _SkillType, _SkillElement)
 THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+LLWEAPONEX_Grimoire_QRY_MimicryDisabled_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
 AND
 DB_LLMIME_Mimicking_Whitelist_Skills(_Skill)
 THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_Grimoire_QRY_Mimicry_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
+LLWEAPONEX_Grimoire_QRY_MimicryDisabled_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
 AND
 NOT DB_LLMIME_Mimicking_Blacklist_Skills(_Skill)
 AND
