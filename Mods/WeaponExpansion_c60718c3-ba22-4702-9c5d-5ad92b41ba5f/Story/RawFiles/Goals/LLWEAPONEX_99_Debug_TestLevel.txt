@@ -81,8 +81,6 @@ NOT DB_LLWEAPONEX_Debug_TimeChanged(_Val);
 IF
 TextEventSet("llweap_runepreview")
 AND
-GetTextEventParamString(1, _Preset)
-AND
 CharacterGetHostCharacter(_Host)
 THEN
 CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_LLWEAPONEX_RunicKnight_Debug", 0);

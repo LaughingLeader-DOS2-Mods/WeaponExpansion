@@ -25,37 +25,37 @@ THEN
 	IF "c1"
 		IsLessThen(_ForceDistInt, 5)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback4)
+		Set(_ForceSkill, Projectile_LeaderLib_Force4)
 	ELIF "c1"
 		IsEqual(_ForceDistInt, 5)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback5)
+		Set(_ForceSkill, Projectile_LeaderLib_Force5)
 	ELIF "c1"
 		IsEqual(_ForceDistInt, 6)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback6)
+		Set(_ForceSkill, Projectile_LeaderLib_Force6)
 	ELIF "c1"
 		IsEqual(_ForceDistInt, 7)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback7)
+		Set(_ForceSkill, Projectile_LeaderLib_Force7)
 	ELIF "c1"
 		IsEqual(_ForceDistInt, 8)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback8)
+		Set(_ForceSkill, Projectile_LeaderLib_Force8)
 	ELIF "c1"
 		IsEqual(_ForceDistInt, 9)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback9)
+		Set(_ForceSkill, Projectile_LeaderLib_Force9)
 	ELIF "c1"
 		IsEqual(_ForceDistInt, 10)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback10)
+		Set(_ForceSkill, Projectile_LeaderLib_Force10)
 	ELIF "c1"
 		IsEqual(_ForceDistInt, 11)
 	THEN
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback11)
+		Set(_ForceSkill, Projectile_LeaderLib_Force11)
 	ELSE
-		Set(_ForceSkill, Projectile_LeaderLib_ForceKnockback12)
+		Set(_ForceSkill, Projectile_LeaderLib_Force12)
 	ENDIF
 	ShootLocalProjectileAt(_ForceSkill, _GreatbowCaster, FLOAT3:{0;1.0;0}, _Target, -1, _GreatbowCaster)
 	/*
