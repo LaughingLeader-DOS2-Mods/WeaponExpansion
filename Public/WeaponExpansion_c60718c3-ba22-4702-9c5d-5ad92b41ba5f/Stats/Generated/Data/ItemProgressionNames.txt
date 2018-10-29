@@ -286,14 +286,17 @@ add name "Artisan Greatbow",""
 new namegroup "WPN_LLWEAPONEX_CombatShield_Normal"
 add name "Combat Shield",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
-add name "Grimoire of Wind",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap"
-add name "Grimoire of Translocation",""
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death"
+add name "Torment, Grimoire of Death",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry"
-add name "Grimoire of Mimicry",""
+add name "Imitation, Book of Mimicry",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap"
+add name "Gatekeeper's Codex",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
+add name "Whispersong",""
 
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""

@@ -610,11 +610,17 @@ add levelgroup 0,0,"All"
 add rootgroup "4192940d-c4bb-4893-aaf3-15641b30d04e","HumansBowEpic"
 add namegroup "WPN_LLWEAPONEX_CombatShield_Normal","","Item_WPN_Lizards_Shield_C_VAR"
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death"
 
 add levelgroup 0,0,"All"
-add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind","",""
+add rootgroup "3ef2d9c5-13e3-48a2-ab11-36f118ec7e67",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry"
+
+add levelgroup 0,0,"All"
+add rootgroup "c9fcc947-4423-40b9-9629-ae2d1e156dfc",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap"
 
@@ -622,11 +628,11 @@ add levelgroup 0,0,"All"
 add rootgroup "f4227e7f-86df-498f-817c-fc00896eb040",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap","",""
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry"
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
 
 add levelgroup 0,0,"All"
-add rootgroup "c9fcc947-4423-40b9-9629-ae2d1e156dfc",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry","",""
+add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind","",""
 
 new itemgroup "ARM_LLWEAPONEX_DragonSlayer_UpperBody"
 
