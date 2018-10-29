@@ -1,4 +1,5 @@
 INIT
+	FLOAT:%LLWEAPONEX_Greatbow_KnockbackMaxStart = 12.0 // Should round down to ~10 max
 
 EVENTS
 
@@ -19,7 +20,7 @@ IF "c1&c2"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE, _GreatbowCaster)
 	GetDistance(_Dist, _GreatbowCaster, _Target)
 THEN
-	Set(_ForceDist, FLOAT:14.0)
+	Set(_ForceDist, %LLWEAPONEX_Greatbow_KnockbackMaxStart)
 	Subtract(_ForceDist, _Dist)
 	Cast(_ForceDistInt, _ForceDist)
 	IF "c1"
@@ -58,12 +59,12 @@ THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force12)
 	ENDIF
 	ShootLocalProjectileAt(_ForceSkill, _GreatbowCaster, FLOAT3:{0;1.0;0}, _Target, -1, _GreatbowCaster)
-	/*
-	Print(_DebugMessage, "[LLWEAPONEX:Greatbows:CushionForce] Distance(14 - [1] = [2] | Int([3])) = Skill [4]", _Dist, _ForceDist, _ForceDistInt, _ForceSkill)
+	
+	Print(_DebugMessage, "[LLWEAPONEX:Greatbows:CushionForce] Distance([1] - [2] = [3] | Int([4])) = Skill [5]", %LLWEAPONEX_Greatbow_KnockbackMaxStart, _Dist, _ForceDist, _ForceDistInt, _ForceSkill)
 	SetVar(_GreatbowCaster, "LeaderLog_Type", STRING:"Debug")
 	SetVar(_GreatbowCaster, "LeaderLog_Message", _DebugMessage)
 	CharacterEvent(_GreatbowCaster, "LeaderLog_Commands_Log")
-	*/
+	
 ENDIF
 	
 EVENT LLWEAPONEX_Greatbows_CushionForce_End
@@ -122,3 +123,69 @@ THEN
 	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_CushionDamage, -1, _GreatbowCaster)
 ENDIF
 
+EVENT LLWEAPONEX_Greatbows_PlayAttackFX
+VARS
+	CHARACTER:_Character
+	INT64:_FXHandle
+	STRING:_Effect
+	FIXEDSTRING:_Bone
+	STRING:_Race
+	INT:_EffectDuration
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_Greatbow_PlayAttackFX")
+ACTIONS
+/*
+IF "c1&!c2"
+	GetVar(_FXHandle, _Character, "LLWEAPONEX_Greatbow_AttackFXHandle")
+	IsEqual(_FXHandle, null)
+THEN
+	StopLoopEffect(_FXHandle, 1)
+ENDIF
+*/
+IF "c1&c2&c3"
+	GetVar(_Effect, _Character, "LLWEAPONEX_Greatbow_AttackEffectName")
+	GetVar(_Bone, _Character, "LLWEAPONEX_Greatbow_AttackEffectBone")
+	GetVar(_Race, _Character, "LLWEAPONEX_Greatbow_RaceTag")
+THEN
+	//We set the duration here because it's 100% faster to test than rebuilding + reloading the story every time
+	IF "c1"
+		IsEqual(_Race, "REALLY_DWARF")
+	THEN
+		Set(_EffectDuration, INT:500)
+	ELIF "c1"
+		IsEqual(_Race, "REALLY_ELF")
+	THEN
+		Set(_EffectDuration, INT:500)
+	ELIF "c1"
+		IsEqual(_Race, "REALLY_HUMAN")
+	THEN
+		Set(_EffectDuration, INT:925)
+	ELIF "c1"
+		IsEqual(_Race, "REALLY_LIZARD")
+	THEN
+		Set(_EffectDuration, INT:500)
+	ENDIF
+	SetVar(_Character, "LeaderLib_Timer_CompleteEvent", STRING:"LLWEAPONEX_Greatbow_StopAttackFX")
+	SetVar(_Character, "LeaderLib_Timer_Delay", _EffectDuration)
+	CharacterEvent(_Character, "LeaderLib_Commands_StartObjectTimer")
+	
+	CharacterPlayLoopEffect(_FXHandle, _Character, _Effect, _Bone)
+	SetVar(_Character, "LLWEAPONEX_Greatbow_AttackFXHandle", _FXHandle)
+ENDIF
+
+EVENT LLWEAPONEX_Greatbows_StopAttackFX
+VARS
+	CHARACTER:_Character
+	INT64:_FXHandle
+	STRING:_Effect
+	FIXEDSTRING:_Bone
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_Greatbow_StopAttackFX")
+ACTIONS
+IF "c1&!c2"
+	GetVar(_FXHandle, _Character, "LLWEAPONEX_Greatbow_AttackFXHandle")
+	IsEqual(_FXHandle, null)
+THEN
+	StopLoopEffect(_FXHandle, 1)
+	SetVar(_Character, "LLWEAPONEX_Greatbow_AttackFXHandle", INT64:null)
+ENDIF

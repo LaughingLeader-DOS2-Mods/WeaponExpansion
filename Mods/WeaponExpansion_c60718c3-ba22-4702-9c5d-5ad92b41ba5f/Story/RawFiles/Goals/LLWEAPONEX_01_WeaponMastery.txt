@@ -1,0 +1,335 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_WeaponMastery_InitSettings();
+KBSECTION
+
+//REGION SETTINGS
+
+PROC
+LLWEAPONEX_WeaponMastery_InitSettings()
+THEN
+/*
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarves_01", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarves_01", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_ELF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elves_01", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_ELF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elves_01", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_HUMAN", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Humans_01", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Humans_01", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizards_01", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizards_01", "Dummy_R_Hand", 900);
+*/
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_ELF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_ELF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Male", "Dummy_R_Hand", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_HUMAN", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 900);
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 500);
+
+DB_LLWEAPONEX_WeaponMastery_SkillBank("LLWEAPONEX_Greatbow", "Knockback");
+
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_DWARF",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_DWARF",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_ELF",     1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_ELF",     0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_HUMAN",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male");
+
+//END_REGION
+
+
+//REGION QUERIES
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasLearnedSkills((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+DB_NOOP(1);
+//END_REGION
+
+//REGION SKILL_UNLOCKING
+IF
+TextEventSet("llweap_unlockallskills")
+AND
+DB_IsPlayer(_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillBank(_WeaponType, _SkillID)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID);
+
+IF
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
+
+PROC
+LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+CharacterIsFemale(_Player, _IsFemale)
+AND
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RacialTag, _IsFemale, _Skill)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID)
+AND
+IsTagged(_Player, _RacialTag, 1)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
+CharacterAddSkill(_Player, _Skill);
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
+
+PROC
+LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
+
+PROC
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_Race)
+AND
+CharacterIsFemale(_Player, _IsFemale)
+AND
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _Race, _IsFemale, _Skill)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
+CharacterAddSkill(_Player, _Skill);
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
+
+PROC
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_Race)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
+//END_REGION
+
+//REGION SKILL_REMOVAL
+PROC
+LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+THEN
+CharacterRemoveSkill(_Player, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
+
+//Delay removal in case the same weapon type is being equipped
+IF
+ItemUnEquipped(_Weapon, _Player)
+AND
+IsTagged(_Weapon, "LLWEAPONEX_Greatbow", 1)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills(_Player, "LLWEAPONEX_Greatbow")
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, "LLWEAPONEX_Greatbow");
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills");
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills", 500);
+
+IF
+ItemEquipped(_Weapon, _Player)
+AND
+IsTagged(_Weapon, "LLWEAPONEX_Greatbow", 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, "LLWEAPONEX_Greatbow")
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, "LLWEAPONEX_Greatbow");
+
+IF
+ItemEquipped(_Weapon, _Player)
+AND
+IsTagged(_Weapon, "LLWEAPONEX_Greatbow", 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Greatbow", _SkillID);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills")
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
+LLWEAPONEX_WeaponMastery_RemoveSkills(_Player, _WeaponType);
+//END_REGION
+
+//REGION RACE_CHANGED
+IF
+CharacterPolymorphedInto(_Player, _Race)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+THEN
+CharacterRemoveSkill(_Player, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
+
+IF
+CharacterPolymorphedInto(_Player, _Race)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+AND
+DB_Shapeshifting_OriginalRaces(_Race, _RaceTag)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
+
+IF
+CharacterStoppedPolymorph(_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+THEN
+CharacterRemoveSkill(_Player, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
+
+IF
+CharacterStoppedPolymorph(_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
+//END_REGION
+
+//REGION GREATBOW_START_ATTACK
+IF
+CharacterStartAttackObject(_, _, _Character)
+AND
+CharacterGetEquippedWeapon(_Character, _Greatbow)
+AND
+IsTagged(_Greatbow, "LLWEAPONEX_Greatbow", 1)
+THEN
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
+
+IF
+CharacterStartAttackPosition(_, _, _, _, _Character)
+AND
+CharacterGetEquippedWeapon(_Character, _Greatbow)
+AND
+IsTagged(_Greatbow, "LLWEAPONEX_Greatbow", 1)
+THEN
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
+
+PROC
+LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+AND
+IsTagged(_Character, "FEMALE", _Female)
+AND
+DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _Female, _EffectName, _BoneName, _Duration)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+AND
+IsTagged(_Character, _RaceTag, 1)
+THEN
+//Play the loop FX with behavior scripting so we can destroy the effect immediately
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:PlayPreparationEffect] Playing arrow FX on attacking character. [",_EffectName,":",_BoneName,"]");
+SetVarString(_Character, "LLWEAPONEX_Greatbow_RaceTag", _RaceTag);
+SetVarString(_Character, "LLWEAPONEX_Greatbow_AttackEffectName", _EffectName);
+SetVarFixedString(_Character, "LLWEAPONEX_Greatbow_AttackEffectBone", _BoneName);
+SetStoryEvent(_Character, "LLWEAPONEX_Greatbow_PlayAttackFX");
+//ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:StopGreatbowPrepareFX] Destroying looped arrow effect.");
+SetStoryEvent(_Character, "LLWEAPONEX_Greatbow_StopAttackFX");
+
+IF
+StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Greatbow_StopAttackFX")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:StopGreatbowPrepareFX] Destroying looped arrow effect.");
+//SetStoryEvent(_Character, "LLWEAPONEX_Greatbow_StopAttackFX");
+
+IF
+TextEventSet("llweap_greatbowfxanim")
+AND
+CharacterGetHostCharacter(_Character)
+THEN
+DB_LLWEAPONEX_Debug_LoopingAnim(_Character);
+PlayAnimation(_Character, "attack1", "LLWEAPONEX_Debug_KeepPlayingAtttackAnim");
+
+IF
+StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Debug_KeepPlayingAtttackAnim")
+AND
+DB_LLWEAPONEX_Debug_LoopingAnim(_Character)
+THEN
+PlayAnimation(_Character, "attack1", "LLWEAPONEX_Debug_KeepPlayingAtttackAnim");
+
+IF
+TextEventSet("llweap_greatbowfxanimtest")
+AND
+CharacterGetHostCharacter(_Character)
+THEN
+DB_LLWEAPONEX_Debug_LoopingAnim(_Character);
+PlayAnimation(_Character, "attack1", "LLWEAPONEX_Debug_KeepPlayingAtttackAnim");
+
+IF
+TextEventSet("llweap_greatbowfxanimtest")
+AND
+CharacterGetHostCharacter(_Character)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+AND
+IsTagged(_Character, "FEMALE", _Female)
+AND
+DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _Female, _EffectName, _BoneName, _Duration)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+AND
+IsTagged(_Character, _RaceTag, 1)
+AND
+PlayLoopEffect(_Character, _EffectName, _BoneName, _FxHandle)
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle);
+
+IF
+TextEventSet("llweap_greatbowfxteststop")
+AND
+CharacterGetHostCharacter(_Character)
+THEN
+NOT DB_LLWEAPONEX_Debug_LoopingAnim(_Character);
+
+IF
+TextEventSet("llweap_greatbowfxtest")
+AND
+CharacterGetHostCharacter(_Character)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+AND
+IsTagged(_Character, "FEMALE", _Female)
+AND
+DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _Female, _EffectName, _BoneName, _Duration)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+AND
+IsTagged(_Character, _RaceTag, 1)
+AND
+PlayLoopEffect(_Character, _EffectName, _BoneName, _FxHandle)
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle);
+
+IF
+TextEventSet("llweap_greatbowfxteststop")
+AND
+DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle)
+THEN
+StopLoopEffect(_FxHandle);
+NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle);
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
