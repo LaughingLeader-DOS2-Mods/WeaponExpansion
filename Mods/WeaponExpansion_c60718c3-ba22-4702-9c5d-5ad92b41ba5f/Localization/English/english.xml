@@ -11,4 +11,8 @@
 	<content contentuid="h9045efcdg0e97g4884g95a2g9bfc844868f2">Monk (Quarterstaff)</content>
 	<content contentuid="h060a6bb2g4db6g48bag9602g2a9d7c28a85a">Disciplined warriors who wield quarterstaffs, overwhelming enemies with finesse and sheer force of will</content>
 	<content contentuid="hc3e23e57gd92dg4aa8ga314gb5a16d81235d">Disciplined warriors who wield quarterstaffs, overwhelming enemies with finesse and sheer force of will.</content>
+	<!-- Charges UI text
+	<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee">Mastery</content>
+	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a">Mastery 0/100</content>
+	!-->
 </contentList>

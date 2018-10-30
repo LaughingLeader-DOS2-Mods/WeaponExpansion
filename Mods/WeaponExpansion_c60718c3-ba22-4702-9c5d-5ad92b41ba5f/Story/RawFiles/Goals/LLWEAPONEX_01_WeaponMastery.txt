@@ -28,16 +28,32 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_HUMAN", 0,  "LLWEAPONEX_FX_Projectiles
 DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 500);
 DB_LLWEAPONEX_Greatbows_PrepareFX("REALLY_LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 500);
 
-DB_LLWEAPONEX_WeaponMastery_SkillBank("LLWEAPONEX_Greatbow", "Knockback");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Greatbow", "Greatbow Mastery");
 
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_DWARF",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Female");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_DWARF",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Male");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_ELF",     1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Female");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_ELF",     0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Male");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_HUMAN",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Female");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Male");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Female");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "Knockback", "REALLY_LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male");
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Greatbow", "LLWEAPONEX_WeaponMastery_Greatbow_Experience", "LLWEAPONEX_WeaponMastery_Greatbow_ExperienceMax", "LLWEAPONEX_WeaponMastery_Greatbow_Level");
+//DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 1, "KnockbackShot");
+
+DB_LLWEAPONEX_WeaponMastery_SkillBank("LLWEAPONEX_Greatbow", "PiercingShot");
+DB_LLWEAPONEX_WeaponMastery_SkillBank("LLWEAPONEX_Greatbow", "KnockbackShot");
+
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_DWARF",   1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Dwarf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_DWARF",   0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Dwarf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_ELF",     1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Elf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_ELF",     0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Elf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_HUMAN",   1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Human_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Human_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Lizard_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "REALLY_LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Lizard_Male");
+
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_DWARF",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_DWARF",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_ELF",     1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_ELF",     0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_HUMAN",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "REALLY_LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male");
 
 //END_REGION
 
@@ -139,23 +155,19 @@ DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, "LLWEAPONEX_Greatbo
 ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills");
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills", 500);
 
-IF
-ItemEquipped(_Weapon, _Player)
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
 AND
-IsTagged(_Weapon, "LLWEAPONEX_Greatbow", 1)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, "LLWEAPONEX_Greatbow")
+DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, "LLWEAPONEX_Greatbow");
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
 
-IF
-ItemEquipped(_Weapon, _Player)
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
 AND
-IsTagged(_Weapon, "LLWEAPONEX_Greatbow", 1)
-AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", _SkillID)
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
 THEN
-LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Greatbow", _SkillID);
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills")
@@ -327,6 +339,229 @@ DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle)
 THEN
 StopLoopEffect(_FxHandle);
 NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle);
+//END_REGION
+
+//Mastery weapon equipped
+IF
+ItemEquipped(_Item, _Player)
+AND
+CharacterIsPlayer(_Player, 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
+
+//REGION DEFAULT_WEAPON_SKILLS
+//Default weapon skill
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow")
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", "PiercingShot")
+THEN
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", "PiercingShot");
+//END_REGION
+
+//REGION WEAPON_MASTERY_INITIAL_LEVEL
+QRY
+LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet((CHARACTERGUID)_Player, (STRING)_MasteryLevelVariable)
+AND
+GetVarInteger(_Player, _MasteryLevelVariable, _MasteryLevel)
+AND
+_MasteryLevel >= 0
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet(_Player, _LevelVar)
+THEN
+SetVarInteger(_Player, _CurrentXPVar, 0);
+SetVarInteger(_Player, _MaxXPVar, 100);
+SetVarInteger(_Player, _LevelVar, 0);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] was set to level 0 for character.");
+//END_REGION
+
+//REGION WEAPON_MASTERY_EXPERIENCE
+
+//Basic attack & weapon skill gains
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
+AND
+CharacterIsPlayer(_Player, 1)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+THEN
+LLWEAPONEX_WeaponMastery_GainExperience(_Player, 100);
+DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", (CHARACTERGUID)_Player)
+AND
+CharacterIsPlayer(_Player, 1)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+THEN
+LLWEAPONEX_WeaponMastery_GainExperience(_Player, 100);
+DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+
+IF
+CharacterStatusRemoved(_Target, "HIT", _)
+AND
+DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+
+PROC
+LLWEAPONEX_WeaponMastery_GainExperience((CHARACTERGUID)_Player, (INTEGER)_BaseExperience)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Item)
+AND
+IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
+
+PROC
+LLWEAPONEX_WeaponMastery_GainExperience((CHARACTERGUID)_Player, (INTEGER)_BaseExperience)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
+
+//Skill-based gains
+IF
+SkillCast(_Player, _Skill, _, _)
+AND
+CharacterIsPlayer(_Player, 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+
+//Cancel gaining experience from skillcasts if it's a weapon-based skill
+IF
+CharacterStatusApplied(_Target, "HIT", (CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+
+IF
+CharacterStatusApplied(_Target, "HIT", (CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+LLWEAPONEX_WeaponMastery_GainExperienceWithType(_Player, _WeaponType, 175);
+
+PROC
+LLWEAPONEX_WeaponMastery_GainExperienceWithType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Item)
+AND
+IsTagged(_Item, _WeaponType, 1)
+AND
+IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+AND
+IsTagged(_Item, "LLWEAPONEX_WeaponMasteryComplete", 0)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
+
+PROC
+LLWEAPONEX_WeaponMastery_GainExperienceWithType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+IsTagged(_Item, _WeaponType, 1)
+AND
+IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+AND
+IsTagged(_Item, "LLWEAPONEX_WeaponMasteryComplete", 0)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
+
+PROC
+LLWEAPONEX_WeaponMastery_AddExperience((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_BaseExperience)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+GetVarInteger(_Player, _CurrentXPVar, _Current)
+AND
+GetVarInteger(_Player, _MaxXPVar, _Max)
+AND
+IntegerDivide(_BaseExperience, 25, _ExpAmount)
+AND
+IntegerSum(_Current, _ExpAmount, _NextCurrent)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_Internal_LeveledUp(_Player, _WeaponType, _CurrentXPVar, _LevelVar, _NextCurrent, _Max)
+THEN
+SetVarInteger(_Player, _CurrentXPVar, _NextCurrent);
+LLWEAPONEX_WeaponMastery_OnExperienceAdded(_Player, _WeaponType, _NextCurrent, _Max);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnExperienceAdded((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Current, (INTEGER)_Max)
+AND
+IntegertoString(_Current, _CurrentStr)
+AND
+IntegertoString(_Max, _MaxStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnExperienceAdded] Weapon Mastery [",_WeaponType,"] experience: [", _CurrentStr, "/",_MaxStr,"].");
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_Internal_LeveledUp((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_CurrentXPVar, (STRING)_LevelVar, (INTEGER)_NextCurrent, (INTEGER)_Max)
+AND
+_NextCurrent >= _Max
+AND
+GetVarInteger(_Player, _LevelVar, _MasteryLevel)
+AND
+IntegerSum(_MasteryLevel, 1, _NextMasteryLevel)
+AND
+IntegertoString(_NextMasteryLevel, _NextMasteryLevelStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:MasteryLevelUp] Weapon Mastery [",_WeaponType,"] leveled up to [",_NextMasteryLevelStr,"].");
+SetVarInteger(_Player, _CurrentXPVar, 0);
+SetVarInteger(_Player, _LevelVar, _NextMasteryLevel);
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _WeaponType, _NextMasteryLevel);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_MasteryLevel)
+AND
+IntegertoString(_MasteryLevel, _LevelStr)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryNames(_WeaponType, _MasteryName)
+THEN
+//LeaderLog_LogTarget("NOTIFICATION", _Player, "<font color='#f7ba14'>Weapon Mastery <font color='#00FF7F'>",_WeaponType,"</font> leveled up to <font color='#FFFF00'>",_LevelStr,"</font>!</font>");
+LeaderLog_LogTarget("STATUS", _Player, "<font color='#00FF7F'>",_MasteryName,"</font> <font color='#f7ba14'>increased to level</font> <font color='#FFFF00'>",_LevelStr,"</font>");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_MasteryLevel)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _MinLevel, _SkillID)
+AND
+_MasteryLevel >= _MinLevel
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnMasteryLeveledUp] Weapon Mastery [",_WeaponType,"] leveled up. Unlocking skill [",_SkillID,"].");
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID);
 //END_REGION
 
 EXITSECTION

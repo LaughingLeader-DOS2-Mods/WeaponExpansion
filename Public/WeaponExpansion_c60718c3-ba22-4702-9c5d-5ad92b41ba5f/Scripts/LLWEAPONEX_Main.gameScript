@@ -131,3 +131,12 @@ THEN
 	ENDIF
 ENDIF
 */
+
+EVENT LLWEAPONEX_WeaponMastery_ResetCharges
+VARS
+	CHARACTER:_Character
+	ITEM:_Item
+ON
+	OnCharacterItemEvent(_Character, _Item, "LLWEAPONEX_WeaponMastery_MasteryLevelUp")
+ACTIONS
+	//ItemResetChargesToInitial(_Item)

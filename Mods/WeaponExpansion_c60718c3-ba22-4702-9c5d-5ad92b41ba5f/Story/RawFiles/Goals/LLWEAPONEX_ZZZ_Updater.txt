@@ -1,15 +1,25 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "1.0.0.0");
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "1.0.1.0");
 LeaderUpdater_Register_ActiveGoal("WeaponExpansion", "LaughingLeader", "LLWEAPONEX_ZZZ_Updater");
+LeaderUpdater_Register_Dependency("WeaponExpansion", "LaughingLeader", "AnimationsPlus", "LaughingLeader", 1);
 KBSECTION
 IF
-GameStarted(_,_)
+GameStarted(_Level, _)
 AND
-LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "1.0.0.0")
+IsGameLevel(_Level, 1)
+AND
+LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "1.0.1.0")
 THEN
-LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "1.0.0.0");
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "1.0.1.0");
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, "1.0.1.0")
+AND
+NOT DB_LeaderUpdater_Dependency("WeaponExpansion", "LaughingLeader", "AnimationsPlus", "LaughingLeader", _)
+THEN
+LeaderUpdater_Register_Dependency("WeaponExpansion", "LaughingLeader", "AnimationsPlus", "LaughingLeader", 1);
 EXITSECTION
 
 ENDEXITSECTION
