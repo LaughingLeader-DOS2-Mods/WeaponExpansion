@@ -33,6 +33,7 @@ DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Greatbow", "Greatbow Master
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Greatbow", "LLWEAPONEX_WeaponMastery_Greatbow_Experience", "LLWEAPONEX_WeaponMastery_Greatbow_ExperienceMax", "LLWEAPONEX_WeaponMastery_Greatbow_Level");
 //DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 1, "KnockbackShot");
+//DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID)
 
 DB_LLWEAPONEX_WeaponMastery_SkillBank("LLWEAPONEX_Greatbow", "PiercingShot");
 DB_LLWEAPONEX_WeaponMastery_SkillBank("LLWEAPONEX_Greatbow", "KnockbackShot");
@@ -57,7 +58,6 @@ DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot",
 
 //END_REGION
 
-
 //REGION QUERIES
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -70,6 +70,30 @@ QRY
 LLWEAPONEX_WeaponMastery_QRY_HasLearnedSkills((CHARACTERGUID)_Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+GetVarInteger(_Player, _LevelVar, _CurrentLevel)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID)
+AND
+_CurrentLevel < _Level
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_LevelVar)
+AND
+GetVarInteger(_Player, _LevelVar, _CurrentLevel)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID)
+AND
+_CurrentLevel < _Level
 THEN
 DB_NOOP(1);
 //END_REGION
@@ -426,6 +450,8 @@ AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
 AND
 IsTagged(_Item, _WeaponType, 1)
+AND
+LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType, _LevelVar)
 THEN
 LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
 
@@ -439,6 +465,8 @@ AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
 AND
 IsTagged(_Item, _WeaponType, 1)
+AND
+LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType, _LevelVar)
 THEN
 LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
 
@@ -451,6 +479,8 @@ AND
 DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+AND
+LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType)
 THEN
 DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 

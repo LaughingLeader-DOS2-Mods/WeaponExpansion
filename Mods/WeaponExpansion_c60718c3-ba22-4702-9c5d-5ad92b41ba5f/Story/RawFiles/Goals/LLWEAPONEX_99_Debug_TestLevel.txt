@@ -103,7 +103,7 @@ CharacterGetLevel(_Host, _Level)
 AND
 _Level < 5
 THEN
-CharacterLevelUpTo(_Host, 5);
+//CharacterLevelUpTo(_Host, 5);
 CharacterAddAttributePoint(_Host, 10);
 CharacterAddCivilAbilityPoint(_Host, 10);
 CharacterAddAbilityPoint(_Host, 10);

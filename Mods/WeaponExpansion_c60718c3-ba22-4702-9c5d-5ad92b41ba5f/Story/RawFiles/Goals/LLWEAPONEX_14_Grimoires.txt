@@ -27,17 +27,6 @@ DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE",
 //DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "jump", "");
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Wind", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", "", "Air");
 
-//Mimicry Skill Blacklist
-DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("Shout_LLWEAPONEX_Grimoire_Toggle_");
-/*
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Death");
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Mimicry");
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Swap");
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Wind");
-*/
-DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_ShieldToss_Returned");
-DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect");
-
 //DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.493618, -0.701302);
 //DB_LLWEAPONEX_Grimoire_PositionOffset(1, 0.493618, 0.701302);
 

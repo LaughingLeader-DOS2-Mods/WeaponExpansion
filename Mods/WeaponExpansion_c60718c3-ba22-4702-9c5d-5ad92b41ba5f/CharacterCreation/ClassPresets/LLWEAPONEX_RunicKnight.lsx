@@ -74,9 +74,9 @@
 							<attribute id="AmountIncreased" value="1" type="4" />
 						</node>
 						<node id="AbilityChange">
-							<attribute id="Persuasion" value="Luck" type="23" />
-							<attribute id="AmountIncreased" value="1" type="4" />
-						</node>
+                            <attribute id="Ability" value="Loremaster" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
 					</children>
 				</node>
 				<node id="AttributeChanges">
@@ -94,7 +94,7 @@
 				<node id="TalentsAdded">
 					<children>
 						<node id="TalentAdded">
-							<attribute id="Talent" value="ElementalAffinity" type="23" />
+							<attribute id="Talent" value="ViolentMagic" type="23" />
 						</node>
 					</children>
 				</node>

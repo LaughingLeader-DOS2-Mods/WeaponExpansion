@@ -1,0 +1,46 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_ModCompatibility_InitSettings();
+KBSECTION
+//REGION EQUIPMENT_SETS
+PROC
+LLWEAPONEX_ModCompatibility_InitSettings()
+THEN
+//Bartering Tweaks
+//DB_LLBARTER_DialogBlacklist("WeaponExpansion", "LLWEAPONEX_VendingMachine_A");
+DB_LLBARTER_DialogBlacklist("WeaponExpansion", "LLWEAPONEX_VendingMachine_OrderMenu");
+//DB_LLBARTER_DialogBlacklist("WeaponExpansion", "LLWEAPONEX_WeaponMaster");
+
+//Mimicry Skill Blacklist
+DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("Shout_LLWEAPONEX_Grimoire_Toggle_");
+//Rune statuses are auto-removed when a runeblade is unequipped, so mimicking these is pointless
+DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("Shout_LLWEAPONEX_ActivateRuneblade_");
+/*
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Death");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Mimicry");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Swap");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Wind");
+*/
+DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_ShieldToss_Returned");
+DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect");
+//END_REGION
+
+//REGION UPDATING
+QRY
+LLWEAPONEX_ModCompatibility_Internal_QRY_VersionNeedsUpdating((STRING)_PastVersion, "0.9.0.0")
+THEN
+DB_NOOP(1);
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LLWEAPONEX_ModCompatibility_Internal_QRY_VersionNeedsUpdating(_PastVersion, _NewVersion)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:ModCompatibility] Updating settings from version [",_PastVersion,"] to [",_NewVersion,"]");
+LLWEAPONEX_ModCompatibility_InitSettings();
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
