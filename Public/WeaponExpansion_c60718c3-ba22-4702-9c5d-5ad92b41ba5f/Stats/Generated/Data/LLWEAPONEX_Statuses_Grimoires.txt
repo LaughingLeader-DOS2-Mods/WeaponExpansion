@@ -24,7 +24,7 @@ data "AuraAllies" "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_BONUS"
 new entry "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_BONUS"
 type "StatusData"
 using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
-data "Skills" "Shout_LLWEAPONEX_Grimoire_ZombifySelf"
+data "Skills" "Shout_LLWEAPONEX_ZombifySelf"
 data "StackId" "Stack_LLWEAPONEX_Grimoire_DeathActiveBonus"
 
 new entry "LLWEAPONEX_GRIMOIRE_DEATH_AURA"

@@ -8,26 +8,35 @@ KBSECTION
 PROC
 LLWEAPONEX_Grimoire_InitSettings()
 THEN
-DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
-DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_FX_Items_Grimoire_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Swap_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67", "LLWEAPONEX_FX_Items_Grimoire_Death_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Death_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Death_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Death_A");
 DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_FX_Items_Grimoire_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Mimicry_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_FX_Items_Grimoire_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Swap_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
 
-DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE");
-DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE");
+DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67", "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE");
 DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE");
+DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE");
+DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE");
 
+//Statuses to remove when the "active" status is removed
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE", "LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN");
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE", "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
 
-DB_LLWEAPONEX_Grimoire_MagicWhitelist("Wind", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", "", "Air");
+DB_LLWEAPONEX_Grimoire_MagicWhitelist("Death", "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE", "", "Death");
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "teleportation", "");
+//DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "jump", "");
+DB_LLWEAPONEX_Grimoire_MagicWhitelist("Wind", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE", "", "Air");
 
 //Mimicry Skill Blacklist
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Wind_Toggle");
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Swap_Toggle");
-DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Mimicry_Toggle");
+DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("Shout_LLWEAPONEX_Grimoire_Toggle_");
+/*
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Death");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Mimicry");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Swap");
+DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Wind");
+*/
 DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_ShieldToss_Returned");
-//DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "jump", "");
+DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect");
 
 //DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.493618, -0.701302);
 //DB_LLWEAPONEX_Grimoire_PositionOffset(1, 0.493618, 0.701302);
@@ -35,21 +44,37 @@ DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_ShieldToss_Returned"
 DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.5, -1.5);
 DB_LLWEAPONEX_Grimoire_PositionOffset(1, 0.5, 1.5);
 
+DB_LLWEAPONEX_Grimoire_TormentDebuff(1, 5, "LLWEAPONEX_MAGIC_CRIPPLED_CHECK", 1.0);
+DB_LLWEAPONEX_Grimoire_TormentDebuff(6, 19, "CURSED", 1.0);
+DB_LLWEAPONEX_Grimoire_TormentDebuff(20, 39, "ENTANGLED", 1.0);
+DB_LLWEAPONEX_Grimoire_TormentDebuff(40, 48, "LLWEAPONEX_UNDEAD_BONUS_DAMAGE", 0.0);
+DB_LLWEAPONEX_Grimoire_TormentDebuff(49, 59, "LLWEAPONEX_RUPTURE", 0.0);
+DB_LLWEAPONEX_Grimoire_TormentDebuff(60, 65, "LLWEAPONEX_SOUL_BURN_TICK", 0.0);
+DB_LLWEAPONEX_Grimoire_TormentDebuff(66, 95, "LLWEAPONEX_MAGIC_BLEEDING_CHECK", 1.0);
+DB_LLWEAPONEX_Grimoire_TormentDebuff(96, 100, "LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK", 1.0);
 //DB_LLWEAPONEX_Grimoire_PositionOffset(0, 0.8, -0.6);
 //DB_LLWEAPONEX_Grimoire_PositionOffset(1, 0.8, 1.6);
 
 //Deltamods
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 3, "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 6, "Boost_LLWEAPONEX_Grimoire_Skill_BonePile", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 8, "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 11, "Boost_LLWEAPONEX_Grimoire_Skill_GraspOfTheStarved", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
 
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 3, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 5, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 6, "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 7, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 11, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 3, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 5, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 6, "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 11, "", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
 
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 3, "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
@@ -61,15 +86,16 @@ LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 11, "B
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Swap_A_f4227e7f-86df-498f-817c-fc00896eb040");
 
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 3, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 5, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 6, "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 11, "", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 3, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 5, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 6, "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 7, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 11, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "Template", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Wind_A_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
 
 //END_REGION
 
@@ -572,8 +598,7 @@ THEN
 LeaderLib_CancelObjectTimerByEvent(_Caster, "LLWEAPONEX_Events_GrimoireFired");
 //END_REGION
 
-//REGION GRIMOIRE_ACTIVATE_ELEMENTS
-
+//REGION GRIMOIRE_SKILL_MAGIC_MATCH
 QRY
 LLWEAPONEX_Grimoire_Internal_QRY_SkillPropertyMatch((STRING)_CheckSkillType, (STRING)_SkillType, (STRING)_CheckSkillElement, (STRING)_SkillElement)
 AND
@@ -651,7 +676,9 @@ DB_LLWEAPONEX_Grimoire_Temp_MagicMatch(_Skill, _Type)
 THEN
 DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _Type);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnUsedSkillOnTarget] Matched Skill [",_Skill,"] to Magic Type [",_Type,"]");
+//END_REGION
 
+//REGION WIND_GRIMOIRE_BONUS
 PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "Wind")
 AND
@@ -675,6 +702,10 @@ LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REA
 THEN
 SetVarFloat3(_Caster, "LLWEAPOENX_GrimoireTargetPosition", _x, _y, _z);
 SetStoryEvent(_Caster, "LLWEAPONEX_Grimoire_ShootWindMagic");
+//END_REGION
+
+//REGION SWAP_GRIMOIRE_BONUS
+//Swap status applying is handled in LLWEAPONEX_Grimoires.gameScript, using the CharacterTeleported event.
 
 /*
 PROC
@@ -686,7 +717,6 @@ HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", 1)
 THEN
 DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Caster, _Skill, "Swap");
 */
-
 PROC
 LLWEAPONEX_Grimoire_OnUsedSkillOnTarget((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "jump", (STRING)_SkillElement)
 AND
@@ -772,6 +802,48 @@ AND
 HasActiveStatus(_Caster, "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", 1)
 THEN
 CharacterCharacterSetEvent(_Caster, _Target, "LLWEAPONEX_Grimoire_ApplySwapMagic");
+//END_REGION
+
+//REGION DEATH_GRIMOIRE_BONUS
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "Death")
+AND
+ObjectIsCharacter(_Target, 1)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_TORMENT", 0.0, 0, _Caster);
+//PlayBeamEffect(_Caster, _Target, "RS3_FX_Skills_Soul_ShacklesOfPain_LinkBeam_01", "Dummy_FrontFX_L", "Dummy_BodyFX");
+PlayBeamEffect(_Target, _Caster, "RS3_FX_Skills_Soul_Cast_Beam_MassPurgingDevice_02", "Dummy_BodyFX", "Dummy_FrontFX_L");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, "Death")
+AND
+ObjectIsItem(_Target, 1)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_TORMENT", 0.0, 0, _Caster);
+PlayBeamEffect(_Target, _Caster, "RS3_FX_Skills_Soul_Cast_Beam_MassPurgingDevice_02", "Dummy_Root", "Dummy_FrontFX_L");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, "Death")
+THEN
+SetVarFloat3(_Caster, "LLWEAPOENX_GrimoireTargetPosition", _x, _y, _z);
+SetStoryEvent(_Caster, "LLWEAPONEX_Grimoire_TormentExplode");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_TORMENT", (CHARACTERGUID)_Caster)
+AND
+LeaderLib_Random_QRY(0, 100)
+AND
+DB_LeaderLib_Random(_Roll)
+AND
+_Roll > 0
+AND
+DB_LLWEAPONEX_Grimoire_TormentDebuff(_MinRoll, _MaxRoll, _Status, _Duration)
+AND
+_Roll >= _MinRoll
+AND
+_Roll <= _MaxRoll
+THEN
+ApplyStatus(_Target, _Status, _Duration, 0, _Caster);
 //END_REGION
 
 //REGION MAGIC_AUTO_LEVELING

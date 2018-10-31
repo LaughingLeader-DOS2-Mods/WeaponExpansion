@@ -12,6 +12,20 @@ param "ModifierType" "Shield"
 param "SlotType" "Shield"
 new boost "_Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles",1
 
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_BonePile"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_BonePile",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_GraspOfTheStarved"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_GraspOfTheStarved",1
+
 new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
@@ -60,6 +74,20 @@ param "Frequency" "1"
 param "ModifierType" "Shield"
 param "SlotType" "Shield"
 new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Small"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Small",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Medium",1
 
 new deltamod "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small"
 param "BoostType" "ItemCombo"

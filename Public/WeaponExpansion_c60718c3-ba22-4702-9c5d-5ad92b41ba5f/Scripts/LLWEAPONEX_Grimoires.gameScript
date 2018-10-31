@@ -77,6 +77,28 @@ THEN
 	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _Target, _Level, _Caster)
 ENDIF
 
+EVENT LLWEAPONEX_Grimoire_Death_Position_ExplodeTorment
+VARS
+	CHARACTER:_Caster
+	FLOAT3:_Target
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterEvent(_Caster, "LLWEAPONEX_Grimoire_TormentExplode")
+ACTIONS
+IF "c1"
+	CharacterGetStat(_LevelF, _Caster, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+IF "c1&!c2"
+	GetVar(_Target, _Caster, "LLWEAPOENX_GrimoireTargetPosition")
+	IsEqual(_Target, null)
+THEN
+	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_ApplyTorment, _Level, _Caster)
+	//ShootLocalProjectileAt(Projectile_LLWEAPONEX_Status_ApplyTorment, _Caster, FLOAT3:{0.0;1.0;0.0}, _Target, _Level, _Caster)
+ENDIF
+
 EVENT LLWEAPONEX_Grimoire_Swap_OnTeleport
 VARS
 	CHARACTER:_Caster
