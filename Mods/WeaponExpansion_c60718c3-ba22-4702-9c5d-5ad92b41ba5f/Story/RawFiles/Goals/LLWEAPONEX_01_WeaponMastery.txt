@@ -255,6 +255,11 @@ IsTagged(_Greatbow, "LLWEAPONEX_Greatbow", 1)
 THEN
 LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
 
+IF
+CharacterUsedSkill(_Character, "Projectile_LLMIME_MimicGreatBowAttack", _, _)
+THEN
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
+
 PROC
 LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character)
 AND

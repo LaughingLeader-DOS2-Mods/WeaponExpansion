@@ -1009,7 +1009,7 @@ data "DisplayName" "LLWEAPONEX_COMBAT_SHIELD_RESTORE_DisplayName"
 data "DisplayNameRef" "Armor Rejuvenation"
 data "HealStat" "AllArmor"
 data "HealType" "Qualifier"
-data "HealValue" "10"
+data "HealValue" "15"
 
 new entry "LLWEAPONEX_COMBAT_SHIELD_HIT"
 type "StatusData"

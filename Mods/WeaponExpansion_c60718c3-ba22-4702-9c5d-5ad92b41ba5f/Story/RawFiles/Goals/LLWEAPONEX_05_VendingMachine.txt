@@ -15,6 +15,9 @@ PROC
 LLWEAPONEX_VendingMachine_RegisterTraderSettings()
 THEN
 LeaderLib_Trader_Register_GlobalTrader("LLWEAPONEX.VendingMachine", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+
+LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine", "REQUIREMENT_UNLOCKED");
+
 LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Orders", "LLWEAPONEX.VendingMachine");
 LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Uniques", "LLWEAPONEX.VendingMachine");
 
