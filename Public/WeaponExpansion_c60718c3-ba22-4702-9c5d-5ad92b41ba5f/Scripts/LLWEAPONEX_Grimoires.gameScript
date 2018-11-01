@@ -46,13 +46,13 @@ ENDIF
 IF "!c1"
 	IsEqual(_CharacterTarget, null)
 THEN
-	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _CharacterTarget, _Level, _Caster)
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, {0.0;2.0;0.0}, _CharacterTarget, _Level, _Caster)
 	//ShootLocalConeAt(Cone_LLWEAPONEX_Grimoire_ProjectileGust, _Caster, FLOAT3:{0.0;0.0;0.0}, _CharacterTarget, _Level, _Caster)
 ENDIF
 IF "!c1"
 	IsEqual(_ItemTarget, null)
 THEN
-	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _ItemTarget, _Level, _Caster)
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, {0.0;2.0;0.0}, _ItemTarget, _Level, _Caster)
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_WindAttack_Position
@@ -73,7 +73,7 @@ IF "c1&!c2"
 	GetVar(_Target, _Caster, "LLWEAPOENX_GrimoireTargetPosition")
 	IsEqual(_Target, null)
 THEN
-	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, FLOAT3:{0.0;1.0;0.0}, _Target, _Level, _Caster)
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Grimoire_ShootWind, _Caster, {0.0;2.0;0.0}, _Target, _Level, _Caster)
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_Death_Position_ExplodeTorment
