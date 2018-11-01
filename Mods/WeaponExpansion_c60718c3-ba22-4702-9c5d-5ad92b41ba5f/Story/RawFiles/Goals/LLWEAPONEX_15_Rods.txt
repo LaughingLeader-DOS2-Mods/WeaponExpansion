@@ -12,6 +12,7 @@ DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Fire", "Projectile_LLW
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Poison", "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand");
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Water", "Projectile_LLWEAPONEX_ShootRod_Water_Offhand");
 
+/*
 IF
 CanUseItem(_Character, _Item, _)
 AND
@@ -26,19 +27,22 @@ CharacterGetEquippedItem(_Character, "Shield", _Item)
 AND
 GetTemplate(_Item, _Template)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemEquipped] Character equipped item (",_Template,").");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemEquipped] Character equipped shield slot item (",_Template,").");
 
 IF
 SkillAdded(_Character, _Skill, 0)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:SkillAdded] Skill (",_Skill,") added to character.");
+*/
 
 IF
-CanUseItem(_Character, _Rod, _)
+CanUseItem(_Character, _Item, _)
 AND
-IsTagged(_Rod, "LLWEAPONEX_Rod", 1)
+IsTagged(_Item, "LLWEAPONEX_Rod", 1)
+AND
+IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
 THEN
-DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod);
+DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Item);
 
 QRY
 LLWEAPONEX_Rods_QRY_SkillVarsSet((ITEMGUID)_Rod)
@@ -101,6 +105,8 @@ LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
 IF
 ItemEquipped(_Item, _Character)
 AND
+IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+AND
 CharacterGetEquippedItem(_Character, "Weapon", _Item)
 AND
 DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _MainhandSkill)
@@ -114,6 +120,8 @@ LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
 
 IF
 ItemEquipped(_Rod, _Character)
+AND
+IsTagged(_Rod, "LLMIME_MIMICKED_WEAPON", 0)
 AND
 IsTagged(_Rod, "LLWEAPONEX_Rod", 1)
 THEN

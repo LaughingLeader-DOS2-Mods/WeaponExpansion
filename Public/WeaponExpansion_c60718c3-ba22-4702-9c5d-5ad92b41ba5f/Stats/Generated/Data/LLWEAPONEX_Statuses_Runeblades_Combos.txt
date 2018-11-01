@@ -191,7 +191,6 @@ new entry "Stats_LLWEAPONEX_Activate_Runeblade_BloodFire"
 type "Potion"
 using "Stats_LLWEAPONEX_Runeblade_Resistance_Base"
 data "ExtraProperties" "DEATH_RESIST,100,1"
-data "Reflection" "20::Fire:melee"
 
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE_DAMAGE1"
 type "StatusData"

@@ -376,6 +376,8 @@ ItemEquipped(_Item, _Player)
 AND
 CharacterIsPlayer(_Player, 1)
 AND
+IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
 AND
 IsTagged(_Item, _WeaponType, 1)

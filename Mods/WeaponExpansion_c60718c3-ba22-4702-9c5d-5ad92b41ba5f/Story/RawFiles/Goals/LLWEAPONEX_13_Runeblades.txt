@@ -244,6 +244,8 @@ ItemEquipped(_Runeblade, _Character)
 AND
 IsTagged(_Runeblade, "LLWEAPONEX_Runeblade", 1)
 AND
+IsTagged(_Runeblade, "LLMIME_MIMICKED_WEAPON", 0)
+AND
 CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_Runeblade)
 AND
 CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_OtherRuneblade)
@@ -265,6 +267,8 @@ IF
 ItemEquipped(_Runeblade, _Character)
 AND
 IsTagged(_Runeblade, "LLWEAPONEX_Runeblade", 1)
+AND
+IsTagged(_Runeblade, "LLMIME_MIMICKED_WEAPON", 0)
 AND
 CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_Runeblade)
 AND

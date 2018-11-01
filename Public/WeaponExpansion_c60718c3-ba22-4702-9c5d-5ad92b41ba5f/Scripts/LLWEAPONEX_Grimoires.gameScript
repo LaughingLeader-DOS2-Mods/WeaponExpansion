@@ -10,9 +10,9 @@ ON
 ACTIONS
 IF "!c1&!c2"
 	CharacterHasStatus(_Caster, UNSHEATHED)
-	HasFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+	HasFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
 THEN
-	SetFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+	SetFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_CloseBook
@@ -21,11 +21,10 @@ VARS
 ON
 	OnCharacterEvent(_Caster, "LLWEAPONEX_Events_GrimoireFired")
 ACTIONS
-IF "!c1&c2"
-	CharacterHasStatus(_Caster, UNSHEATHED)
-	HasFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+IF "c1"
+	HasFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
 THEN
-	ClearFlag(_Caster, "LLWEAPONEX_GrimoireOpened")
+	ClearFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
 ENDIF
 	
 EVENT LLWEAPONEX_Grimoire_WindAttack_Target
@@ -198,6 +197,7 @@ VARS
 	CHARACTER:_Character
 ON
 	OnEnteredCombat(_Character, _)
+	OnTurn(_Character, _)
 ACTIONS
 IF "c1"
 	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
@@ -209,11 +209,25 @@ THEN
 		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY, 1, 0, _Character)
 	ENDIF
 ELSE
-	IF "c1"
+	IF "c1&!c2"
 		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 	THEN
 		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
 	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_Mimic_StartCountdown_Initial
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterStatusApplied(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+ACTIONS
+IF "!c1&!c2"
+	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
+	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
+THEN
+	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_Mimic_StartCountdown
@@ -223,13 +237,13 @@ ON
 	OnCharacterStatusRemoved(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY)
 	OnLeftCombat(_Character, _)
 ACTIONS
-IF "c1&!c2"
+IF "c1&!c2&!c3"
 	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
 	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
+	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 THEN
 	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
 ENDIF
-
 
 EVENT LLWEAPONEX_Grimoire_PlaySheathedFX
 VARS

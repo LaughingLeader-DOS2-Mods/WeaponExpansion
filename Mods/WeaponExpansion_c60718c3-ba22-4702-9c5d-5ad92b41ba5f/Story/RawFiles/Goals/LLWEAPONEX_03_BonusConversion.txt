@@ -190,6 +190,8 @@ CharacterStatusApplied(_Player, _ConversionStatus, _)
 AND
 DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
 AND
+ObjectGetFlag(_Player, "Mimicry_IsMimicking", 0)
+AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 0)
 THEN
 ObjectSetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled");
@@ -200,6 +202,8 @@ IF
 CharacterStatusAttempt(_Player, _ConversionStatus, _)
 AND
 DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
+AND
+ObjectGetFlag(_Player, "Mimicry_IsMimicking", 0)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
 THEN
@@ -220,6 +224,8 @@ ObjectClearFlag(_Player, "LLWEAPONEX_BonusConversionEnabled");
 IF
 ItemEquipped(_Item, _Player)
 AND
+IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
 THEN
 LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
@@ -227,12 +233,57 @@ LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
 IF
 ItemUnEquipped(_Item, _Player)
 AND
+IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
 THEN
 LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
 
 IF
+ObjectFlagSet("LLWEAPONEX_BonusConversionEnabled", _, _)
+AND
+NOT DB_LLWEAPONEX_BonusConversion_CheckTimerEnabled(_)
+THEN
+DB_LLWEAPONEX_BonusConversion_CheckTimerEnabled(1);
+
+IF
+DB_LLWEAPONEX_BonusConversion_CheckTimerEnabled(1)
+THEN
+TimerLaunch("LLWEAPONEX_Timers_BonusConversion_CheckBonuses", 5000);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_BonusConversion_CheckBonuses")
+THEN
+NOT DB_LLWEAPONEX_BonusConversion_CheckTimerEnabled(1);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_BonusConversion_CheckBonuses")
+AND
+DB_IsPlayer(_Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+THEN
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+
+QRY
+LLWEAPONEX_BonusConversion_QRY_BonusConversionEnabled()
+AND
+DB_IsPlayer(_Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation((CHARACTERGUID)_Player)
+THEN
+DB_LLWEAPONEX_BonusConversion_CheckTimerEnabled(1);
+
+/*Possibly triggers to much, especially in combat
+IF
 CharacterStatusApplied(_Player, _Status, _)
+AND
+CharacterIsPlayer(_Player, 1)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
 AND
@@ -245,6 +296,8 @@ LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
 IF
 CharacterStatusRemoved(_Player, _Status, _)
 AND
+CharacterIsPlayer(_Player, 1)
+AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
 AND
 NOT LLWEAPONEX_BonusConversion_QRY_IsConversionStatus(_Status)
@@ -252,6 +305,7 @@ AND
 GetStatusType(_Status, "CONSUME")
 THEN
 LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
+*/
 
 QRY
 LLWEAPONEX_BonusConversion_Internal_QRY_BonusChanged((CHARACTERGUID)_Player, (STRING)_StatToCheck, "Attribute", (STRING)_BonusConversionStatus)

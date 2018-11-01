@@ -37,7 +37,7 @@ VARS
 ON
 	OnCharacterStatusApplied(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS)
 ACTIONS
-	Set(_Radius, 2.0)
+	Set(_Radius, 1.8)
 IF "c1|c2|c3|c4|c5|c6|c7|c8"
 	ContainsSurface(_Character, _Radius, SurfaceFire)
 	ContainsSurface(_Character, _Radius, SurfaceFireCloud)
