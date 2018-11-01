@@ -203,14 +203,16 @@ IF "c1"
 	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
 THEN
 	ClearFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
-	IF "c1"
+	IF "c1&!c2"
 		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY)
 	THEN
 		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY, 1, 0, _Character)
 	ENDIF
 ELSE
-	IF "c1&!c2"
+	IF "c1&!c2&!c3"
 		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
+		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY)
 		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 	THEN
 		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
@@ -223,8 +225,9 @@ VARS
 ON
 	OnCharacterStatusApplied(_Character, LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE)
 ACTIONS
-IF "!c1&!c2"
+IF "!c1&!c2&!c3"
 	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
+	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY)
 	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 THEN
 	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
