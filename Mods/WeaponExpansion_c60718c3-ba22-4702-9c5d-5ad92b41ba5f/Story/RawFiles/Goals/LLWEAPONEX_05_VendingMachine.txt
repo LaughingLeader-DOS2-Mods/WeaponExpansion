@@ -62,17 +62,18 @@ PROC
 LLWEAPONEX_VendingMachine_RegisterOrderMenu()
 THEN
 //Vending Machine Order Menu
-LeaderLib_Dialog_Menu_Register_Menu("LLWEAPONEX.VendingMachine.OrderMenu", 8);
-LeaderLib_Dialog_Menu_Register_PageFlags("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_HasMultiplePages", "LLWEAPONEX_VendingMachine_NextPage", "LLWEAPONEX_VendingMachine_PreviousPage", "LLWEAPONEX_VendingMachine_FirstPage", "LLWEAPONEX_VendingMachine_LastPage");
+LeaderLib_DynamicMenu_Register_Menu("LLWEAPONEX.VendingMachine.OrderMenu", 8);
+LeaderLib_DynamicMenu_Register_Dialog("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderMenu");
+LeaderLib_DynamicMenu_Register_PageFlags("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_HasMultiplePages", "LLWEAPONEX_VendingMachine_NextPage", "LLWEAPONEX_VendingMachine_PreviousPage", "LLWEAPONEX_VendingMachine_FirstPage", "LLWEAPONEX_VendingMachine_LastPage");
 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption1_01202c05-bdbb-42c2-9cda-8346962041d5", "LLWEAPONEX_VendingMachine_Option1Available", "LLWEAPONEX_VendingMachine_OrderOption1"); 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption2_1af35687-3367-4206-8aa4-debee4b81d92", "LLWEAPONEX_VendingMachine_Option2Available", "LLWEAPONEX_VendingMachine_OrderOption2"); 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption3_048eaa1b-d937-48bb-ac2c-5759cd64540f", "LLWEAPONEX_VendingMachine_Option3Available", "LLWEAPONEX_VendingMachine_OrderOption3"); 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption4_33af56c3-1b27-4867-9f71-ec84fc3a2fb4", "LLWEAPONEX_VendingMachine_Option4Available", "LLWEAPONEX_VendingMachine_OrderOption4"); 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption5_6304637d-2828-45ec-b01d-d4769787a29b", "LLWEAPONEX_VendingMachine_Option5Available", "LLWEAPONEX_VendingMachine_OrderOption5"); 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption6_d70c702c-a0c1-49a7-8772-1479725e2a39", "LLWEAPONEX_VendingMachine_Option6Available", "LLWEAPONEX_VendingMachine_OrderOption6"); 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption7_5027bce6-f787-4977-a23c-a09175f02508", "LLWEAPONEX_VendingMachine_Option7Available", "LLWEAPONEX_VendingMachine_OrderOption7"); 
-LeaderLib_Dialog_Menu_Add_VariableEntry("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee", "LLWEAPONEX_VendingMachine_Option8Available", "LLWEAPONEX_VendingMachine_OrderOption8");
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption1_01202c05-bdbb-42c2-9cda-8346962041d5", "LLWEAPONEX_VendingMachine_Option1Available", "LLWEAPONEX_VendingMachine_OrderOption1"); 
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption2_1af35687-3367-4206-8aa4-debee4b81d92", "LLWEAPONEX_VendingMachine_Option2Available", "LLWEAPONEX_VendingMachine_OrderOption2"); 
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption3_048eaa1b-d937-48bb-ac2c-5759cd64540f", "LLWEAPONEX_VendingMachine_Option3Available", "LLWEAPONEX_VendingMachine_OrderOption3"); 
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption4_33af56c3-1b27-4867-9f71-ec84fc3a2fb4", "LLWEAPONEX_VendingMachine_Option4Available", "LLWEAPONEX_VendingMachine_OrderOption4"); 
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption5_6304637d-2828-45ec-b01d-d4769787a29b", "LLWEAPONEX_VendingMachine_Option5Available", "LLWEAPONEX_VendingMachine_OrderOption5"); 
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption6_d70c702c-a0c1-49a7-8772-1479725e2a39", "LLWEAPONEX_VendingMachine_Option6Available", "LLWEAPONEX_VendingMachine_OrderOption6"); 
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption7_5027bce6-f787-4977-a23c-a09175f02508", "LLWEAPONEX_VendingMachine_Option7Available", "LLWEAPONEX_VendingMachine_OrderOption7"); 
+LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee", "LLWEAPONEX_VendingMachine_Option8Available", "LLWEAPONEX_VendingMachine_OrderOption8");
 
 //Vanilla
 LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderAccessory", "*[ACCESSORY] Click on the button labeled 'Accessory'.*");
@@ -105,24 +106,31 @@ LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Arrows", "*[ARROWS] Click on the bu
 PROC
 LLWEAPONEX_VendingMachine_AddOrderToMenu((STRING)_TreasureTable, (STRING)_EntryText)
 THEN
-LeaderLib_Dialog_Menu_Add_Entry("LLWEAPONEX.VendingMachine.OrderMenu", _TreasureTable, _EntryText);
+LeaderLib_DynamicMenu_Register_Entry("LLWEAPONEX.VendingMachine.OrderMenu", _TreasureTable, _EntryText);
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.0.3")
+THEN
+LLWEAPONEX_VendingMachine_RegisterOrderMenu();
 //END_REGION
 
 //REGION ORDER_MENU
+/*
 IF
 DialogStarted("LLWEAPONEX_VendingMachine_OrderMenu", _Instance)
 THEN
-LeaderLib_Dialog_Menu_InitMenu("LLWEAPONEX.VendingMachine.OrderMenu", _Instance);
+LeaderLib_DynamicMenu_InitMenu("LLWEAPONEX.VendingMachine.OrderMenu", _Instance);
+*/
 
 PROC
-LeaderLib_Dialog_Menu_OnEntryValueSet((GUIDSTRING)_Player, "LLWEAPONEX.VendingMachine.OrderMenu", (STRING)_DialogVar, (STRING)_AvailableFlag, (INTEGER)_Instance, (STRING)_TreasureTable, (STRING)_DisplayText)
+LeaderLib_DynamicMenu_OnEntryValueSet((GUIDSTRING)_Player, "LLWEAPONEX.VendingMachine.OrderMenu", (STRING)_DialogVar, (STRING)_AvailableFlag, (INTEGER)_Instance, (STRING)_TreasureTable, (STRING)_DisplayText)
 AND
 DB_LLWEAPONEX_VendingMachine_LastOrdered(_TreasureTable, _LastInstance)
 THEN
 ObjectClearFlag(_Player, _AvailableFlag, _Instance);
 
 PROC
-LeaderLib_Dialog_Menu_OnEntrySelected((STRING)_ID, (GUIDSTRING)_Player, (INTEGER)_Instance, (STRING)_TreasureTable)
+LeaderLib_DynamicMenu_OnEntrySelected((STRING)_ID, (GUIDSTRING)_Player, (INTEGER)_Instance, (STRING)_TreasureTable)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnEntrySelected] Entry [",_TreasureTable,"] was selected.");
 LLWEAPONEX_VendingMachine_OrderTreasure(_Player, _TreasureTable, _Instance);
