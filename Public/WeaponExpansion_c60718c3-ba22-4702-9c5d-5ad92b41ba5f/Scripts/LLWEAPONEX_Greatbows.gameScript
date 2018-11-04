@@ -101,7 +101,8 @@ THEN
 	IF "!c1"
 		CharacterHasStatus(_Target, KNOCKED_DOWN)
 	THEN
-		CharacterApplyStatus(_Target, KNOCKED_DOWN, 0, 1, _GreatbowCaster)
+		//Play the knocked down animation
+		CharacterEvent(_Target, "GEN_FallAndGetUp")
 	ENDIF
 ENDIF
 

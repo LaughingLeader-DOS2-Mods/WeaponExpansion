@@ -22,12 +22,12 @@ LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING");
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR");
 
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Air", "Shout_LLWEAPONEX_ActivateRuneblade_Air_DualWield");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Earth", "Shout_LLWEAPONEX_ActivateRuneblade_Earth_DualWield");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Fire", "Shout_LLWEAPONEX_ActivateRuneblade_Fire_DualWield");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Poison", "Shout_LLWEAPONEX_ActivateRuneblade_Poison_DualWield");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Water", "Shout_LLWEAPONEX_ActivateRuneblade_Water_DualWield");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Chaos", "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_DualWield");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Air", "Shout_LLWEAPONEX_ActivateRuneblade_Air_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_AIR");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Chaos", "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_CHAOS");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Earth", "Shout_LLWEAPONEX_ActivateRuneblade_Earth_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_EARTH");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Fire", "Shout_LLWEAPONEX_ActivateRuneblade_Fire_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_FIRE");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Poison", "Shout_LLWEAPONEX_ActivateRuneblade_Poison_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_POISON");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Water", "Shout_LLWEAPONEX_ActivateRuneblade_Water_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_WATER");
 
 DB_LLWEAPONEX_Runeblades_StatusSound("LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", "Skill_Fire_Cast_AoE_Air_Fire", 800);
 DB_LLWEAPONEX_Runeblades_FlagSound("LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", "Skill_Fire_Cast_Target_Totem_Fire", 800);
@@ -234,10 +234,10 @@ ItemUnEquipped(_Runeblade, _Character)
 AND
 IsTagged(_Runeblade, "LLWEAPONEX_Runeblade", 1)
 AND
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingSkill(_Character, _Skill)
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _StoredRuneblade, _Status)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingSkill(_Character, _Skill);
-CharacterRemoveSkill(_Character, _Skill);
+NOT DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _StoredRuneblade, _Status);
+RemoveStatus(_Character, _Status);
 
 IF
 ItemEquipped(_Runeblade, _Character)
@@ -252,7 +252,7 @@ CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_OtherRuneblade)
 AND
 IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade", 1)
 AND
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill)
+DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill, _Status)
 AND
 CharacterHasSkill(_Character, _Skill, 0)
 AND
@@ -260,8 +260,8 @@ IsTagged(_Runeblade, _Tag, 1)
 AND
 IsTagged(_OtherRuneblade, _Tag, 1)
 THEN
-CharacterAddSkill(_Character, _Skill);
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingSkill(_Character, _Skill);
+ApplyStatus(_Character, _Status, -1.0, 1, _Character);
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _Runeblade, _Status);
 
 IF
 ItemEquipped(_Runeblade, _Character)
@@ -276,7 +276,7 @@ CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_OtherRuneblade)
 AND
 IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade", 1)
 AND
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill)
+DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill, _Status)
 AND
 CharacterHasSkill(_Character, _Skill, 0)
 AND
@@ -284,8 +284,15 @@ IsTagged(_Runeblade, _Tag, 1)
 AND
 IsTagged(_OtherRuneblade, _Tag, 1)
 THEN
-CharacterAddSkill(_Character, _Skill);
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingSkill(_Character, _Skill);
+ApplyStatus(_Character, _Status, -1.0, 1, _Character);
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _Runeblade, _Status);
+
+IF
+CharacterStatusRemoved(_Character, "RESURRECT", _)
+AND
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _Runeblade, _Status)
+THEN
+ApplyStatus(_Character, _Status, -1.0, 0, _Character);
 //END_REGION
 
 //REGION SOUNDS

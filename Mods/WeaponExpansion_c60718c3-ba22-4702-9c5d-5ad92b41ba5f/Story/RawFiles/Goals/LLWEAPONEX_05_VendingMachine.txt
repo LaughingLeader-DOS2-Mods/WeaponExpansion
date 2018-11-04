@@ -109,7 +109,7 @@ THEN
 LeaderLib_DynamicMenu_Register_Entry("LLWEAPONEX.VendingMachine.OrderMenu", _TreasureTable, _EntryText);
 
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.0.3")
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.0.5")
 THEN
 LLWEAPONEX_VendingMachine_RegisterOrderMenu();
 //END_REGION
