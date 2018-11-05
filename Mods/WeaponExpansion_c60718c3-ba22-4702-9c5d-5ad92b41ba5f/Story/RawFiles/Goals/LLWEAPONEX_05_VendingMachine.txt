@@ -3,6 +3,10 @@ SubGoalCombiner SGC_AND
 INITSECTION
 DB_DoNotFace((CHARACTERGUID)CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 DB_Dialogs(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A");
+DB_BlockThreatenedDialog(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+DB_NoLowAttitudeDialog(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+CharacterDisableAllCrimes(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+SetCanJoinCombat(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0);
 //DB_IsStoryNpc(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 //SetStoryNpc(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1);
 SetTag(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LeaderLib_DisableTreasureTableLimit");
@@ -15,11 +19,13 @@ PROC
 LLWEAPONEX_VendingMachine_RegisterTraderSettings()
 THEN
 LeaderLib_Trader_Register_GlobalTrader("LLWEAPONEX.VendingMachine", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
-
-LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine", "REQUIREMENT_UNLOCKED");
+//LeaderLib_Trader_Register_Dialog("LLWEAPONEX.VendingMachine", "LLWEAPONEX_VendingMachine_A");
 
 LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Orders", "LLWEAPONEX.VendingMachine");
 LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Uniques", "LLWEAPONEX.VendingMachine");
+
+LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine.Uniques", "REQUIREMENT_UNLOCKED");
+LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine.Uniques", "TRADE_GENERATION_END");
 
 LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_Requirement_MinLevel_4", 4);
 LeaderLib_Requirements_Add_ModRequirement("LLWEAPONEX_Requirement_MimicryModActive", "Mimicry", "LaughingLeader");

@@ -226,7 +226,7 @@ ItemEquipped(_Item, _Player)
 AND
 IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
 AND
-ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 0)
 THEN
 LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
 
@@ -262,6 +262,8 @@ AND
 DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
+AND
+CharacterIsInCombat(_Player, 0)
 THEN
 LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation(_Player);
 
@@ -273,6 +275,16 @@ AND
 ObjectGetFlag(_Player, "LLWEAPONEX_BonusConversionEnabled", 1)
 THEN
 DB_NOOP(1);
+
+IF
+CombatEnded(_)
+AND
+NOT DB_LLWEAPONEX_BonusConversion_CheckTimerEnabled(_)
+AND
+LLWEAPONEX_BonusConversion_QRY_BonusConversionEnabled()
+THEN
+DB_LLWEAPONEX_BonusConversion_CheckTimerEnabled(1);
+
 
 PROC
 LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation((CHARACTERGUID)_Player)
@@ -394,6 +406,8 @@ ProcObjectTimer(_Player, _TimerName, 250);
 
 PROC
 LLWEAPONEX_BonusConversion_Internal_CheckStatsForBonusRecalculation((CHARACTERGUID)_Player)
+AND
+NOT DB_LLWEAPONEX_BonusConversion_Temp_ConvertBonus(_Player, _, _)
 AND
 DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _StatToIncrease, _BonusConversionStatus)
 AND
