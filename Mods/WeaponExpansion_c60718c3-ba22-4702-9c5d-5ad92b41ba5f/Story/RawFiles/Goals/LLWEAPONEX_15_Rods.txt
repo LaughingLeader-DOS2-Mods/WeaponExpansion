@@ -6,12 +6,19 @@ KBSECTION
 PROC
 LLWEAPONEX_Rods_InitSettings()
 THEN
+DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_AIR", "LLWEAPONEX_ROD_SKILL_AIR", "LLWEAPONEX_ROD_SKILL_AIR_OFFHAND");
+DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_CHAOS", "LLWEAPONEX_ROD_SKILL_CHAOS", "LLWEAPONEX_ROD_SKILL_CHAOS_OFFHAND");
+DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_FIRE", "LLWEAPONEX_ROD_SKILL_FIRE", "LLWEAPONEX_ROD_SKILL_FIRE_OFFHAND");
+DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_POISON", "LLWEAPONEX_ROD_SKILL_POISON", "LLWEAPONEX_ROD_SKILL_POISON_OFFHAND");
+DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_WATER", "LLWEAPONEX_ROD_SKILL_WATER", "LLWEAPONEX_ROD_SKILL_WATER_OFFHAND");
+
+/*
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Air", "Projectile_LLWEAPONEX_ShootRod_Air_Offhand");
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Chaos", "Projectile_LLWEAPONEX_ShootRod_Chaos_Offhand");
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Fire", "Projectile_LLWEAPONEX_ShootRod_Fire_Offhand");
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Poison", "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand");
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Water", "Projectile_LLWEAPONEX_ShootRod_Water_Offhand");
-
+*/
 /*
 IF
 CanUseItem(_Character, _Item, _)
@@ -41,26 +48,30 @@ AND
 IsTagged(_Item, "LLWEAPONEX_Rod", 1)
 AND
 IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+AND
+NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
 THEN
 DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Item);
 
 QRY
 LLWEAPONEX_Rods_QRY_SkillVarsSet((ITEMGUID)_Rod)
 AND
-GetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkill)
+GetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkillStatus)
 AND
-GetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill)
+GetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkillStatus)
 AND
-_MainhandSkill != ""
+_MainhandSkillStatus != ""
 AND
-_OffhandSkill != ""
+_OffhandSkillStatus != ""
 THEN
 DB_NOOP(1);
 
 IF
-SkillAdded(_Character, _MainhandSkill, 0)
+CharacterStatusAttempt(_Character, _TypeStatus, _)
 AND
-DB_LLWEAPONEX_Rods_Skills(_MainhandSkill, _OffhandSkill)
+DB_LLWEAPONEX_Rods_SkillStatuses(_TypeStatus, _MainhandSkillStatusStatus, _OffhandSkillStatus)
+AND
+LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX:Rods:CharacterStatusAttempt] Status attempt (",_TypeStatus,").")
 AND
 DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod)
 AND
@@ -68,25 +79,16 @@ NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Rod)
 AND
 GetTemplate(_Rod, _Template)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:SkillAdded(",_MainhandSkill,")] Setting rod [",_Template,"] mainhand skill and offhand skill (",_OffhandSkill,").");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:CharacterStatusAttempt(",_MainhandSkillStatusStatus,")] Setting rod [",_Template,"] mainhand skill status and offhand skill status (",_OffhandSkillStatus,").");
 NOT DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod);
-SetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
-SetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
-
-IF
-SkillAdded(_Character, _MainhandSkill, 0)
-AND
-DB_LLWEAPONEX_Rods_Skills(_MainhandSkill, _OffhandSkill)
-AND
-DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod)
-THEN
-NOT DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod);
+SetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkillStatusStatus);
+SetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkillStatus);
 
 //Switch back to the mainhand skill when the main hand is empty with an offhand rod
 IF
 ItemUnEquipped(_Item, _Character)
 AND
-DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _OffhandSkill)
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _OffhandSkillStatus)
 AND
 _Item != _Rod
 AND
@@ -97,8 +99,13 @@ AND
 StringContains(_Template, "WPN_", 1)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemUnEquipped(Weapon)] Reverting rod offhand skill to mainhand.");
-NOT DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _OffhandSkill);
-CharacterRemoveSkill(_Character, _OffhandSkill);
+NOT DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _OffhandSkillStatus);
+RemoveStatus(_Character, _OffhandSkillStatus);
+LeaderLib_StartCharacterItemTimer(_Character, _Rod, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
+
+IF
+CharacterItemEvent(_Character, _Rod, "LLWEAPONEX_Rods_AdjustSkills")
+THEN
 LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
 
 //Revert to offhand skill
@@ -107,16 +114,34 @@ ItemEquipped(_Item, _Character)
 AND
 IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
 AND
-CharacterGetEquippedItem(_Character, "Weapon", _Item)
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _MainhandSkillStatus)
 AND
-DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _MainhandSkill)
+CharacterGetEquippedItem(_Character, "Weapon", _Item)
 AND
 CharacterGetEquippedItem(_Character, "Shield", _Rod)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemEquipped(Weapon)] Reverting rod mainhand skill to offhand.");
-NOT DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _MainhandSkill);
-CharacterRemoveSkill(_Character, _MainhandSkill);
-LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
+NOT DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _MainhandSkillStatus);
+RemoveStatus(_Character, _MainhandSkillStatus);
+LeaderLib_StartCharacterItemTimer(_Character, _Rod, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
+
+IF
+ItemEquipped(_Rod, _Character)
+AND
+DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod)
+AND
+NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Rod) // Assume it's the same type as one equipped
+AND
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _OtherRod, _Status)
+AND
+GetVarString(_OtherRod, "LLWEAPONEX_Rod_Skill", _MainhandSkillStatus)
+AND
+GetVarString(_OtherRod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkillStatus)
+THEN
+NOT DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemEquipped] Rod status was never applied. Assuming it shares the same type as the rod equipped.");
+SetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkillStatus);
+SetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkillStatus);
 
 IF
 ItemEquipped(_Rod, _Character)
@@ -125,65 +150,93 @@ IsTagged(_Rod, "LLMIME_MIMICKED_WEAPON", 0)
 AND
 IsTagged(_Rod, "LLWEAPONEX_Rod", 1)
 THEN
-LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
+LeaderLib_StartCharacterItemTimer(_Character, _Rod, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
 
 PROC
 LLWEAPONEX_Rods_AdjustRodSkill((CHARACTERGUID)_Character, (ITEMGUID)_Rod)
 AND
 CharacterGetEquippedItem(_Character, "Shield", _Rod)
 AND
-CharacterGetEquippedItem(_Character, "Weapon", _MainhandWeapon) // Only proceed if we're using a dual-wield animation set
+CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_MainhandWeapon) // Only proceed if we're using a dual-wield animation set
 AND
-GetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkill)
+_MainhandWeapon != NULL_00000000-0000-0000-0000-000000000000
 AND
-GetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill)
+GetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkillStatus)
+AND
+GetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkillStatus)
 THEN
-LLWEAPONEX_Rods_RemoveMainhandSkill(_Character, _Rod, _MainhandSkill);
-CharacterAddSkill(_Character, _OffhandSkill, 0);
-DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _OffhandSkill);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:AdjustRodSkill] Swapped mainhand rod skill (",_MainhandSkill,") for offhand version (",_OffhandSkill,").");
+LLWEAPONEX_Rods_RemoveMainhandSkill(_Character, _Rod, _MainhandSkillStatus, _MainhandWeapon);
+ApplyStatus(_Character, _OffhandSkillStatus, -1.0, 1, _Character);
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _OffhandSkillStatus);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:AdjustRodSkill] Adding offhand rod skill status (",_OffhandSkillStatus,").");
 
 //Revert back to the mainhand skill
 PROC
 LLWEAPONEX_Rods_AdjustRodSkill((CHARACTERGUID)_Character, (ITEMGUID)_Rod)
 AND
-NOT DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _)
+NOT DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _)
 AND
-GetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkill)
+GetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkillStatus)
 AND
-CharacterHasSkill(_Character, _MainhandSkill, 0)
+NOT LeaderLib_Helper_QRY_HasStatus(_Character, _MainhandSkillStatus)
 THEN
-CharacterAddSkill(_Character, _MainhandSkill, 0);
-DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _MainhandSkill);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:AdjustRodSkill] Adding back mainhand rod skill (",_MainhandSkill,").");
+ApplyStatus(_Character, _MainhandSkillStatus, -1.0, 1, _Character);
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _MainhandSkillStatus);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:AdjustRodSkill] Adding mainhand rod skill status (",_MainhandSkillStatus,").");
 
 QRY
-LLWEAPONEX_Rods_QRY_SkipSkillRemoval((CHARACTERGUID)_Character, (ITEMGUID)_Rod, (STRING)_MainhandSkill)
+LLWEAPONEX_Rods_QRY_SkipSkillRemoval((CHARACTERGUID)_Character, (ITEMGUID)_Rod, (STRING)_MainhandSkillStatus, (ITEMGUID)_MainhandWeapon)
 AND
-CharacterGetEquippedItem(_Character, "Weapon", _OtherRod)
+GetVarString(_MainhandWeapon, "LLWEAPONEX_Rod_Skill", _OtherMainhandSkillStatus)
 AND
-GetVarString(_OtherRod, "LLWEAPONEX_Rod_Skill", _OtherMainhandSkill)
-AND
-_OtherMainhandSkill == _MainhandSkill
+_OtherMainhandSkillStatus == _MainhandSkillStatus
 THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_Rods_RemoveMainhandSkill((CHARACTERGUID)_Character, (ITEMGUID)_Rod, (STRING)_MainhandSkill)
+LLWEAPONEX_Rods_RemoveMainhandSkill((CHARACTERGUID)_Character, (ITEMGUID)_Rod, (STRING)_MainhandSkillStatus, (ITEMGUID)_MainhandWeapon)
 AND
-NOT LLWEAPONEX_Rods_QRY_SkipSkillRemoval(_Character, _Rod, _MainhandSkill)
+NOT LLWEAPONEX_Rods_QRY_SkipSkillRemoval(_Character, _Rod, _MainhandSkillStatus, _MainhandWeapon)
 THEN
-CharacterRemoveSkill(_Character, _MainhandSkill);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:RemoveMainhandSkill] Removed mainhand rod skill (",_MainhandSkill,").");
+RemoveStatus(_Character, _MainhandSkillStatus);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:RemoveMainhandSkill] Removed mainhand rod skill status (",_MainhandSkillStatus,").");
+
+//Resurrection - Reapply Status
+IF
+CharacterStatusRemoved(_Character, "RESURRECT", _)
+AND
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _Status)
+THEN
+LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
 
 IF
 ItemUnEquipped(_Rod, _Character)
 AND
-DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _Skill)
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _Status)
 THEN
-NOT DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _Skill);
-CharacterRemoveSkill(_Character, _Skill);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemUnEquipped] Removed rod skill (",_Skill,").");
+NOT DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _Status);
+RemoveStatus(_Character, _Status);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemUnEquipped] Removed rod skill status (",_Status,").");
+
+IF
+ItemUnEquipped(_Rod, _Character)
+AND
+DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod)
+THEN
+NOT DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod);
+
+//Failsafe
+IF
+CharacterStatusRemoved(_Character, _TypeStatus, _)
+AND
+DB_LLWEAPONEX_Rods_SkillStatuses(_TypeStatus, _MainhandSkillStatusStatus, _OffhandSkillStatus)
+AND
+NOT DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _, _)
+AND
+NOT LeaderLib_Helper_QRY_HasStatus(_Character, _TypeStatus)
+THEN
+RemoveStatus(_Character, _MainhandSkillStatusStatus);
+RemoveStatus(_Character, _OffhandSkillStatus);
 EXITSECTION
 
 ENDEXITSECTION

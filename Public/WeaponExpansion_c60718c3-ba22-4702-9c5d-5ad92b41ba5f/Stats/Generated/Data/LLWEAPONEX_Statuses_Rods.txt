@@ -1,0 +1,75 @@
+new entry "LLWEAPONEX_ROD_SKILL_BASE"
+type "StatusData"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "DisplayName" "LLWEAPONEX_ROD_SKILL_BASE_DisplayName"
+data "DisplayNameRef" "Rod Skill - On command, rods can launch projectiles like wands"
+
+new entry "LLWEAPONEX_ROD_AIR"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_BASE"
+
+new entry "LLWEAPONEX_ROD_CHAOS"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_BASE"
+
+new entry "LLWEAPONEX_ROD_FIRE"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_BASE"
+
+new entry "LLWEAPONEX_ROD_POISON"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_BASE"
+
+new entry "LLWEAPONEX_ROD_WATER"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_BASE"
+
+new entry "LLWEAPONEX_ROD_SKILL_AIR"
+type "StatusData"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Air"
+
+new entry "LLWEAPONEX_ROD_SKILL_CHAOS"
+type "StatusData"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Chaos"
+
+new entry "LLWEAPONEX_ROD_SKILL_FIRE"
+type "StatusData"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Fire"
+
+new entry "LLWEAPONEX_ROD_SKILL_POISON"
+type "StatusData"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Poison"
+
+new entry "LLWEAPONEX_ROD_SKILL_WATER"
+type "StatusData"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Water"
+
+new entry "LLWEAPONEX_ROD_SKILL_AIR_OFFHAND"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_AIR"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Air_Offhand"
+
+new entry "LLWEAPONEX_ROD_SKILL_CHAOS_OFFHAND"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_CHAOS"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Chaos_Offhand"
+
+new entry "LLWEAPONEX_ROD_SKILL_FIRE_OFFHAND"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_FIRE"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Fire_Offhand"
+
+new entry "LLWEAPONEX_ROD_SKILL_POISON_OFFHAND"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_POISON"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand"
+
+new entry "LLWEAPONEX_ROD_SKILL_WATER_OFFHAND"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_WATER"
+data "Skills" "Projectile_LLWEAPONEX_ShootRod_Water_Offhand"

@@ -60,6 +60,13 @@ DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot",
 
 //REGION QUERIES
 QRY
+LLWEAPONEX_IgnoreWeapon((ITEMGUID)_Weapon)
+AND
+IsTagged(_Weapon, "LLMIME_MIMICKED_WEAPON", 1)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
@@ -376,7 +383,7 @@ ItemEquipped(_Item, _Player)
 AND
 CharacterIsPlayer(_Player, 1)
 AND
-IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+NOT LLWEAPONEX_IgnoreWeapon(_Item)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
 AND

@@ -248,82 +248,62 @@ THEN
 	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
 ENDIF
 
-EVENT LLWEAPONEX_Grimoire_PlaySheathedFX
+EVENT LLWEAPONEX_Grimoire_PlayFX
 VARS
 	CHARACTER:_Character
 	STRING:_FX
 	FIXEDSTRING:_Bone
+	FIXEDSTRING:_HandleName
 	INT64:_Handle
 ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_PlaySheathedFX")
+	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_PlayLoopFX")
 ACTIONS
-IF "c1&c2"
-	GetVar(_FX, _Character, "LLWEAPONEX_Grimoire_NextLoopFX")
-	GetVar(_Bone, _Character, "LLWEAPONEX_Grimoire_NextBone")
+IF "c1"
+	GetVar(_HandleName, _Character, "LLWEAPONEX_Grimoire_NextHandleID")
 THEN
-	CharacterPlayLoopEffect(_Handle, _Character, _FX, _Bone)
-	SetVar(_Character, "LLWEAPONEX_Grimoire_SheathedFXHandle", _Handle)
 	IF "c1"
-		GetVar(_Handle, _Character, "LLWEAPONEX_Grimoire_UnsheathedFXHandle")
+		GetVar(_Handle, _Character, _HandleName)
 	THEN
 		StopLoopEffect(_Handle, 1)
-		SetVar(_Character, "LLWEAPONEX_Grimoire_UnsheathedFXHandle", INT64:null)
+		SetVar(_Character, _HandleName, INT64:null)
 	ENDIF
+	IF "c1&c2"
+		GetVar(_FX, _Character, "LLWEAPONEX_Grimoire_NextLoopFX")
+		GetVar(_Bone, _Character, "LLWEAPONEX_Grimoire_NextBone")
+	THEN
+		CharacterPlayLoopEffect(_Handle, _Character, _FX, _Bone)
+		SetVar(_Character, _HandleName, _Handle)
+	ENDIF
+	CharacterEvent(_Character, "LLWEAPONEX_Grimoire_FX_PlayEventComplete")
 ENDIF
 
-EVENT LLWEAPONEX_Grimoire_PlayUnsheathedFX
+EVENT LLWEAPONEX_Grimoire_StopFX
 VARS
 	CHARACTER:_Character
 	STRING:_FX
+	STRING:_CompletionEvent
 	FIXEDSTRING:_Bone
+	FIXEDSTRING:_HandleName
 	INT64:_Handle
 ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_PlayUnsheathedFX")
+	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_StopLoopFX")
 ACTIONS
 IF "c1&c2"
-	GetVar(_FX, _Character, "LLWEAPONEX_Grimoire_NextLoopFX")
-	GetVar(_Bone, _Character, "LLWEAPONEX_Grimoire_NextBone")
-THEN
-	CharacterPlayLoopEffect(_Handle, _Character, _FX, _Bone)
-	SetVar(_Character, "LLWEAPONEX_Grimoire_UnsheathedFXHandle", _Handle)
-	/*
-	IF "c1"
-		GetVar(_Handle, _Character, "LLWEAPONEX_Grimoire_SheathedFXHandle")
-	THEN
-		StopLoopEffect(_Handle, 1)
-		SetVar(_Character, "LLWEAPONEX_Grimoire_SheathedFXHandle", INT64:null)
-	ENDIF
-	*/
-ENDIF
-
-EVENT LLWEAPONEX_Grimoire_StopUnsheathedFX
-VARS
-	CHARACTER:_Character
-	STRING:_FX
-	INT64:_Handle
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_StopUnsheathedFX")
-ACTIONS
-IF "c1"
-	GetVar(_Handle, _Character, "LLWEAPONEX_Grimoire_UnsheathedFXHandle")
+	GetVar(_HandleName, _Character, "LLWEAPONEX_Grimoire_NextHandleID")
+	GetVar(_Handle, _Character, _HandleName)
 THEN
 	StopLoopEffect(_Handle, 1)
-	SetVar(_Character, "LLWEAPONEX_Grimoire_UnsheathedFXHandle", INT64:null)
+	SetVar(_Character, _HandleName, INT64:null)
 ENDIF
-
-EVENT LLWEAPONEX_Grimoire_StopSheathedFX
-VARS
-	CHARACTER:_Character
-	STRING:_FX
-	INT64:_Handle
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_StopSheathedFX")
-ACTIONS
-IF "c1"
-	GetVar(_Handle, _Character, "LLWEAPONEX_Grimoire_SheathedFXHandle")
+IF "c1&(!c2&!c3)"
+	GetVar(_CompletionEvent, _Character, "LLWEAPONEX_Grimoire_StopCompletionEvent")
+	IsEqual(_CompletionEvent, null)
+	IsEqual(_CompletionEvent, "")
 THEN
-	StopLoopEffect(_Handle, 1)
-	SetVar(_Character, "LLWEAPONEX_Grimoire_SheathedFXHandle", INT64:null)
+	CharacterEvent(_Character, _CompletionEvent)
+	SetVar(_Character, "LLWEAPONEX_Grimoire_StopCompletionEvent", STRING:null)
+ELSE
+	CharacterEvent(_Character, "LLWEAPONEX_Grimoire_FX_StopEventComplete")
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_StopEquippedFX

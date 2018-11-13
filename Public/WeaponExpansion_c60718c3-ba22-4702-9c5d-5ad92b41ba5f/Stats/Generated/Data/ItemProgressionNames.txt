@@ -1,4 +1,4 @@
-new namegroup "WPN_LLWEAPONEX_Fist"
+new namegroup "WPN_LLWEAPONEX_Unarmed_Fist"
 add name "Brawler's Fist","The iron-hard fist of a Brawler. Strikes true."
 
 new namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood"

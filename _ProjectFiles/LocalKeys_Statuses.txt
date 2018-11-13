@@ -17,12 +17,14 @@ LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taki
 LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane		
 LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!
 LLWEAPONEX_EVAPORATE_DisplayName	Evaporated
-LLWEAPONEX_FINESSE_TO_STRENGTH_DisplayName	Finesse Conversion - Finesse bonuses are turned into Strength		
+LLWEAPONEX_FINESSE_TO_STRENGTH_DisplayName	Finesse Conversion - Finesse bonuses from this weapon Strength		
 LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target		
+LLWEAPONEX_INTELLIGENCE_TO_FINESSE_DisplayName	Intelligence Conversion - Intelligence bonuses from this weapon grant Finesse	
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.		
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging		
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!		
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed		
+LLWEAPONEX_ROD_SKILL_BASE_DisplayName	Rod Skill - On command, rods can launch projectiles like wands
 LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.		
 LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound		
 LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.
@@ -33,7 +35,7 @@ LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III
 LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV		
 LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V		
 LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.		
-LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_DisplayName	Strength Conversion - Strength bonuses are turned into Intelligence		
+LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_DisplayName	Strength Conversion - Strength bonuses from this weapon grant Intelligence	
 LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.
 LLWEAPONEX_TARRED_DisplayName	Tarred
 LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.

@@ -23,6 +23,8 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Venom_MaxStacks = 4
 	
 	INT:%LLWEAPONEX_Runeblade_ComboRune_Turns = 2
+	
+	FLOAT:%LLWEAPONEX_Runeblade_AbsorbRadius = 1.6
 EVENTS
 
 EVENT LLWEAPONEX_Runeblade_ChaosAbsorbSurface
@@ -37,7 +39,7 @@ VARS
 ON
 	OnCharacterStatusApplied(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS)
 ACTIONS
-	Set(_Radius, 1.8)
+	Set(_Radius, %LLWEAPONEX_Runeblade_AbsorbRadius)
 IF "c1|c2|c3|c4|c5|c6|c7|c8"
 	ContainsSurface(_Character, _Radius, SurfaceFire)
 	ContainsSurface(_Character, _Radius, SurfaceFireCloud)
