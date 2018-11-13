@@ -186,3 +186,65 @@ param "Frequency" "1"
 param "ModifierType" "Shield"
 param "SlotType" "Shield"
 new boost "_Boost_LLWEAPONEX_Grimoire_Flags_ShockedImmunity",1
+
+new deltamod "Boost_Weapon_Damage_Air_Medium_Bow"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Damage_Air_Medium",1
+
+new deltamod "Boost_Weapon_Damage_Earth_Medium_Bow"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Damage_Earth_Medium",1
+
+new deltamod "Boost_Weapon_Damage_Poison_Medium_Bow"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Damage_Poison_Medium",1
+
+new deltamod "Boost_Weapon_Damage_Fire_Medium_Bow"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Damage_Fire_Medium",1
+
+new deltamod "Boost_Weapon_Damage_Water_Medium_Bow"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Damage_Water_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Small_Bow"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Bow"
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Small",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Normal_Bow"
+param "BoostType" "BaseUncommon"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Bow"
+new boost "_Boost_Weapon_Damage_ArmourPiercing",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Medium_Bow"
+param "BoostType" "BaseRare"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Bow"
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Large_Bow"
+param "BoostType" "BaseEpic"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Bow"
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Large",1

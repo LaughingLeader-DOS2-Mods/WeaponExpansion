@@ -37,10 +37,16 @@ DB_LLWEAPONEX_BonusConversion_SoftCap("Attribute", 40);
 DB_LLWEAPONEX_BonusConversion_SoftCap("CombatAbility", 10);
 DB_LLWEAPONEX_BonusConversion_SoftCap("CivilAbility", 5);
 */
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.1.0")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion] Updating settings from version [",_PastVersion,"] to [0.9.1.0]");
+LLWEAPONEX_BonusConversion_InitSettings();
+
 //END_REGION
 
 //REGION EQUIP_EVENTS
-
+/*
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Weapon)
 AND
@@ -61,6 +67,7 @@ AND
 GetTemplate(_Weapon, _Template)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ItemEquipped] [",_Template,"]");
+*/
 
 QRY
 LLWEAPONEX_BonusConversion_QRY_BonusVariableSet((ITEMGUID)_Weapon, (STRING)_ConversionStatus)

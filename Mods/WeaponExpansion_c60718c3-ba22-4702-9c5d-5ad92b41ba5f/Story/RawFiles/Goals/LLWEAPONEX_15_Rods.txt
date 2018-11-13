@@ -12,6 +12,13 @@ DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_FIRE", "LLWEAPONEX_ROD_SKILL_FI
 DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_POISON", "LLWEAPONEX_ROD_SKILL_POISON", "LLWEAPONEX_ROD_SKILL_POISON_OFFHAND");
 DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_WATER", "LLWEAPONEX_ROD_SKILL_WATER", "LLWEAPONEX_ROD_SKILL_WATER_OFFHAND");
 
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.1.0")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods] Updating settings from version [",_PastVersion,"] to [0.9.1.0]");
+SysClear("DB_LLWEAPONEX_Rods_Skills", 2);
+LLWEAPONEX_Rods_InitSettings();
+
 /*
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Air", "Projectile_LLWEAPONEX_ShootRod_Air_Offhand");
 DB_LLWEAPONEX_Rods_Skills("Projectile_LLWEAPONEX_ShootRod_Chaos", "Projectile_LLWEAPONEX_ShootRod_Chaos_Offhand");
