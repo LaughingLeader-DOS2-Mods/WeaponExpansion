@@ -223,6 +223,12 @@ object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",10,0,0,0,0,0,0,0
 object category "I_WPN_LLWEAPONEX_Throwing_Shuriken_Poison",4,0,0,0,0,0,0,0
 object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_Accessories"
+new subtable "1,1"
+object category "T_ST_RingAmuletBelt",1,0,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_Quiver",1,0,0,0,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_VendingMachine"
 new subtable "3,1"
 StartLevel "1"
@@ -256,6 +262,8 @@ new subtable "1,1"
 object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,0,0,0,0,0,0,0
 new subtable "2,2"
 object category "T_ST_LLWEAPONEX_Runes",1,0,0,0,0,0,0,0
+new subtable "0,3;1,2"
+object category "T_ST_LLWEAPONEX_Accessories",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "Trader Gold",1,0,0,0,0,0,0,0
 
@@ -263,19 +271,23 @@ new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderAccessory"
 new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_RingAmuletBeltNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_RingAmuletBeltNormal",7,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,1,0,0,0,0,0,0
 new subtable "1,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_RingAmuletBeltNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_RingAmuletBeltNormal",7,1,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,1,1,0,0,0,0,0
 new subtable "1,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_RingAmuletBeltNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_RingAmuletBeltNormal",7,1,1,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,1,1,1,0,0,0,0
 new subtable "1,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_RingAmuletBeltNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_RingAmuletBeltNormal",7,1,1,1,1,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,1,1,1,1,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderArmor"
 new subtable "1,1"
@@ -425,19 +437,23 @@ new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderRangedWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_RangedNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_RangedNormal",10,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Quiver",1,1,0,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_RangedNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_RangedNormal",10,1,1,0,0,0,0,0
+object category "LLWEAPONEX_Quiver",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_RangedNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_RangedNormal",10,1,1,1,0,0,0,0
+object category "LLWEAPONEX_Quiver",1,1,1,1,0,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_RangedNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_RangedNormal",10,1,1,1,1,0,0,0
+object category "LLWEAPONEX_Quiver",1,1,1,1,1,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderStaff"
 new subtable "2,1"
