@@ -693,3 +693,21 @@ new itemgroup "ARM_LLWEAPONEX_RunicKnight_Helmet"
 add levelgroup 0,0,"All"
 add rootgroup "b2d19374-d0ea-463a-a359-d3674842e21e",""
 add namegroup "LLWEAPONEX_RunicKnight_Helmet","",""
+
+new itemgroup "ARM_LLWEAPONEX_Quiver_A"
+
+add levelgroup 0,0,"Common"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Common","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Common","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Epic","",""

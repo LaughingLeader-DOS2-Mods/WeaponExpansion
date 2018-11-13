@@ -42,6 +42,7 @@ LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersi
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion] Updating settings from version [",_PastVersion,"] to [0.9.1.0]");
 LLWEAPONEX_BonusConversion_InitSettings();
+SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
 
 //END_REGION
 

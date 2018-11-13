@@ -337,3 +337,27 @@ add namecool "Empowered Runic Boots",""
 new namegroup "LLWEAPONEX_RunicKnight_Helmet"
 add name "Runeweave Hood",""
 add namecool "Empowered Runeweave Hood",""
+
+new namegroup "LLWEAPONEX_Quivers_Common"
+add name "Quiver",""
+add namecool "Archer's Quiver",""
+add namecool "Bandit's Quiver",""
+add namecool "Highwayman's Quiver",""
+add namecool "Trusty Quiver",""
+
+new namegroup "LLWEAPONEX_Quivers_Rare"
+add name "Exquisite Quiver",""
+add name "Mighty Quiver",""
+add name "Ancient Elven Quiver",""
+
+new namegroup "LLWEAPONEX_Quivers_Epic"
+add name "Legendary Quiver",""
+add name "Eagle Eye Quiver",""
+add name "Quiver of the Hooded Hero",""
+
+
+
+
+
+
+
