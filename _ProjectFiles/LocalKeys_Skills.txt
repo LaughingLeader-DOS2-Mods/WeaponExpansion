@@ -15,3 +15,5 @@ Shout_LLWEAPONEX_LegSweep_Description	<font color='#FFD700' size='18'>Monk Techn
 Shout_LLWEAPONEX_LegSweep_DisplayName	<font color='#FFD700'>Leg Sweep</font>
 Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].
 Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
+Shout_LLWEAPONEX_Quiver_DrawArrow_DisplayName	Draw Arrow
+Shout_LLWEAPONEX_Quiver_DrawArrow_Description	Draw a random, temporary arrow from your quiver.<br><font color='#FF0000'>Arrows retrieved this way disappear after combat ends.</font>

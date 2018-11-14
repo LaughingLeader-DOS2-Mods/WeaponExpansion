@@ -16,8 +16,7 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_HUMAN", 0,  "LLWEAPONEX_FX_Projectiles
 DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Humans_01", "Dummy_R_Hand", 900);
 DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizards_01", "Dummy_R_Hand", 900);
 DB_LLWEAPONEX_Greatbows_PrepareFX("UNDEAD_LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizards_01", "Dummy_R_Hand", 900);
-*/
-SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 6);
+
 DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", "Undead_Dwarf", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
 DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", "Undead_Dwarf", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
 DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", "Undead_Elf", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 600);
@@ -26,12 +25,39 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", "Undead_Human", 1,  "LLWEAPONEX_FX_Pr
 DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", "Undead_Human", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 800);
 DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", "Undead_Lizard", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 600);
 DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", "Undead_Lizard", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
+*/
 
-SysClear("DB_LLWEAPONEX_Greatbows_QuiverFX", 4);
-DB_LLWEAPONEX_Greatbows_QuiverFX("DWARF", "Undead_Dwarf", "LLWEAPONEX_FX_Quiver_A_Dwarf", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Greatbows_QuiverFX("ELF", "Undead_Elf", "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Greatbows_QuiverFX("HUMAN", "Undead_Human", "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Greatbows_QuiverFX("LIZARD", "Undead_Lizard", "LLWEAPONEX_FX_Quiver_A", "HorseLink_R_Bone");
+DB_LLWEAPONEX_RaceTags("Dwarf", "DWARF");
+DB_LLWEAPONEX_RaceTags("Human", "HUMAN");
+DB_LLWEAPONEX_RaceTags("Elf", "ELF");
+DB_LLWEAPONEX_RaceTags("Lizard", "LIZARD");
+DB_LLWEAPONEX_RaceTags("Undead_Dwarf", "DWARF");
+DB_LLWEAPONEX_RaceTags("Undead_Human", "HUMAN");
+DB_LLWEAPONEX_RaceTags("Undead_Elf", "ELF");
+DB_LLWEAPONEX_RaceTags("Undead_Lizard", "LIZARD");
+
+SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Male", "Dummy_R_Hand", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 800);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 800);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
+
+SysClear("DB_LLWEAPONEX_Quivers_LoopFX", 4);
+DB_LLWEAPONEX_Quivers_LoopFX("DWARF", 1,  "LLWEAPONEX_FX_Quiver_A_Dwarf", "Thigh_R_Twist_Bone");
+DB_LLWEAPONEX_Quivers_LoopFX("DWARF", 0,  "LLWEAPONEX_FX_Quiver_A_Dwarf", "Thigh_R_Twist_Bone");
+DB_LLWEAPONEX_Quivers_LoopFX("ELF", 1,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
+DB_LLWEAPONEX_Quivers_LoopFX("ELF", 0,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
+DB_LLWEAPONEX_Quivers_LoopFX("HUMAN", 1,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Bone");
+DB_LLWEAPONEX_Quivers_LoopFX("HUMAN", 0,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
+DB_LLWEAPONEX_Quivers_LoopFX("LIZARD", 1,  "LLWEAPONEX_FX_Quiver_A", "HorseLink_R_Bone");
+DB_LLWEAPONEX_Quivers_LoopFX("LIZARD", 0,  "LLWEAPONEX_FX_Quiver_A", "HorseLink_R_Bone");
+
+DB_LLWEAPONEX_Quivers_ArrowTreasure(0, "ST_LLWEAPONEX_Quiver_Arrows");
+DB_LLWEAPONEX_Quivers_ArrowTreasure(1, "ST_LLWEAPONEX_Quiver_GreatbowArrows");
 
 //REGION GREATBOW_START_ATTACK
 IF
@@ -57,152 +83,62 @@ CharacterUsedSkill(_Character, "Projectile_LLMIME_MimicGreatBowAttack", _, _)
 THEN
 LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
 
-QRY
-LLWEAPONEX_QRY_RaceMatch((CHARACTERGUID)_Character, (STRING)_Race, (STRING)_UndeadRace)
-AND
-DB_IsPlayer(_Character)
-AND
-CharacterGetRace(_Character, 1, _Race)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_QRY_RaceMatch((CHARACTERGUID)_Character, (STRING)_Race, (STRING)_UndeadRace)
-AND
-DB_IsPlayer(_Character)
-AND
-CharacterGetRace(_Character, 1, _UndeadRace)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_QRY_RaceMatch((CHARACTERGUID)_Character, (STRING)_Race)
-AND
-NOT DB_IsPlayer(_Character)
-AND
-IsTagged(_Character, _Race, 1)
-THEN
-DB_NOOP(1);
-
 PROC
 LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character)
 AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 AND
-IsTagged(_Character, "FEMALE", _Female)
+IsTagged(_Character, "FEMALE", _IsFemale)
 AND
-DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _UndeadRace, _Female, _EffectName, _BoneName, _Duration)
+CharacterGetRace(_Character, 1, _Race)
 AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
+DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
 AND
-LLWEAPONEX_QRY_RaceMatch(_Character, _RaceTag, _UndeadRace)
+DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _IsFemale, _EffectName, _BoneName, _Duration)
 THEN
 //Play the loop FX with behavior scripting so we can destroy the effect immediately
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:PlayPreparationEffect] Playing arrow FX on attacking character. [",_EffectName,":",_BoneName,"]");
+//LeaderLog_Log("TRACE", "[LLWEAPONEX:Greatbows:PlayPreparationEffect] Playing arrow FX on attacking character. [",_EffectName,":",_BoneName,"]");
+PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
 PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__", _BoneName);
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration);
-/*
-SetVarString(_Character, "LLWEAPONEX_Greatbow_RaceTag", _RaceTag);
-SetVarString(_Character, "LLWEAPONEX_Greatbow_AttackEffectName", _EffectName);
-SetVarFixedString(_Character, "LLWEAPONEX_Greatbow_AttackEffectBone", _BoneName);
-SetStoryEvent(_Character, "LLWEAPONEX_Greatbow_PlayAttackFX");
-*/
+
+//NPCs
+PROC
+LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character)
+AND
+NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
+AND
+IsTagged(_Character, "FEMALE", _IsFemale)
+AND
+NOT CharacterGetRace(_Character, 1, _)
+AND
+DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+AND
+IsTagged(_Character, _RaceTag, 1)
+AND
+DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _IsFemale, _EffectName, _BoneName, _Duration)
+AND
+NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
+THEN
+//Play the loop FX with behavior scripting so we can destroy the effect immediately
+//LeaderLog_Log("TRACE", "[LLWEAPONEX:Greatbows:PlayPreparationEffect] Playing arrow FX on attacking character. [",_EffectName,":",_BoneName,"]");
+PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
+PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__", _BoneName);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX")
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:StopGreatbowPrepareFX] Destroying looped arrow effect.");
+//LeaderLog_Log("TRACE", "[LLWEAPONEX:Greatbows:StopGreatbowPrepareFX] Destroying looped arrow effect.");
 PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
-//SetStoryEvent(_Character, "LLWEAPONEX_Greatbow_StopAttackFX");
-
-IF
-StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Greatbow_StopAttackFX")
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:StopGreatbowPrepareFX] Destroying looped arrow effect.");
-//SetStoryEvent(_Character, "LLWEAPONEX_Greatbow_StopAttackFX");
-
-IF
-TextEventSet("llweap_greatbowfxanim")
-AND
-CharacterGetHostCharacter(_Character)
-THEN
-DB_LLWEAPONEX_Debug_LoopingAnim(_Character);
-PlayAnimation(_Character, "attack1", "LLWEAPONEX_Debug_KeepPlayingAtttackAnim");
-
-IF
-StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Debug_KeepPlayingAtttackAnim")
-AND
-DB_LLWEAPONEX_Debug_LoopingAnim(_Character)
-THEN
-PlayAnimation(_Character, "attack1", "LLWEAPONEX_Debug_KeepPlayingAtttackAnim");
-
-IF
-TextEventSet("llweap_greatbowfxanimtest")
-AND
-CharacterGetHostCharacter(_Character)
-THEN
-DB_LLWEAPONEX_Debug_LoopingAnim(_Character);
-PlayAnimation(_Character, "attack1", "LLWEAPONEX_Debug_KeepPlayingAtttackAnim");
-
-IF
-TextEventSet("llweap_greatbowfxanimtest")
-AND
-CharacterGetHostCharacter(_Character)
-AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
-AND
-IsTagged(_Character, "FEMALE", _Female)
-AND
-DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _UndeadRace, _Female, _EffectName, _BoneName, _Duration)
-AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
-AND
-LLWEAPONEX_QRY_RaceMatch(_Character, _RaceTag, _UndeadRace)
-AND
-PlayLoopEffect(_Character, _EffectName, _BoneName, _FxHandle)
-THEN
-DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle);
-
-IF
-TextEventSet("llweap_greatbowfxteststop")
-AND
-CharacterGetHostCharacter(_Character)
-THEN
-NOT DB_LLWEAPONEX_Debug_LoopingAnim(_Character);
-
-IF
-TextEventSet("llweap_greatbowfxtest")
-AND
-CharacterGetHostCharacter(_Character)
-AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
-AND
-IsTagged(_Character, "FEMALE", _Female)
-AND
-DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _UndeadRace, _Female, _EffectName, _BoneName, _Duration)
-AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _)
-AND
-LLWEAPONEX_QRY_RaceMatch(_Character, _RaceTag, _UndeadRace)
-AND
-PlayLoopEffect(_Character, _EffectName, _BoneName, _FxHandle)
-THEN
-DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle);
-
-IF
-TextEventSet("llweap_greatbowfxteststop")
-AND
-DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle)
-THEN
-StopLoopEffect(_FxHandle);
-NOT DB_LLWEAPONEX_Greatbows_Temp_ActivePrepareFX(_Character, _FxHandle);
 //END_REGION
 
 //REGION QUIVER_FX
 IF
 ItemEquipped(_Quiver, _Player)
 AND
-IsTagged(_Quiver, "LLWEAPONEX_Quiver", 1)
+//IsTagged(_Quiver, "LLWEAPONEX_Quiver", 1)
+IsTagged(_Quiver, "LLWEAPONEX_Quiver_FX_Enabled", 1)
 THEN
 LLWEAPONEX_Greatbows_PlayQuiverEffect(_Player);
 
@@ -214,20 +150,47 @@ PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.Quiver");
 PROC
 LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Player)
 AND
-DB_LLWEAPONEX_Greatbows_QuiverFX(_Race, _UndeadRace, _EffectName, _BoneName)
-AND
 NOT DB_LoopEffect(_Player, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 AND
-LLWEAPONEX_QRY_RaceMatch(_Player, _Race, _UndeadRace)
+IsTagged(_Player, "FEMALE", _IsFemale)
+AND
+CharacterGetRace(_Player, 1, _Race)
+AND
+DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+AND
+DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 THEN
 PROC_LoopEffect(_EffectName, _Player, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
 
-IF
-CharacterPolymorphedInto(_Player, _Race)
+//NPCs
+PROC
+LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Character)
 AND
-DB_LoopEffect(_Source, _Handle, "LLWEAPONEX.FX.Quiver", _Region, _Effect, _BoneName)
+NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+AND
+NOT CharacterGetRace(_Character, 1, _)
+AND
+IsTagged(_Character, "FEMALE", _IsFemale)
+AND
+DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+AND
+IsTagged(_Character, _Race, 1)
+AND
+DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
+AND
+NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 THEN
-LLWEAPONEX_Greatbows_PlayQuiverEffect(_Player);
+PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
+
+//New Races
+PROC
+LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Character)
+AND
+NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+AND
+DB_LLWEAPONEX_Quivers_LoopFX("HUMAN", 1, _EffectName, _BoneName)
+THEN
+PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
 
 IF
 ItemUnEquipped(_Quiver, _Player)
@@ -235,6 +198,82 @@ AND
 IsTagged(_Quiver, "LLWEAPONEX_Quiver", 1)
 THEN
 PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.Quiver");
+
+IF
+CharacterPolymorphedInto(_Character, _Race)
+AND
+DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+AND
+NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
+AND
+CharacterIsFemale(_Character, _IsFemale)
+AND
+DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+AND
+DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
+THEN
+PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.Quiver");
+PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
+DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character);
+
+//Non-standard racial polymorphs
+IF
+CharacterPolymorphedInto(_Character, _Race)
+AND
+DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+AND
+NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
+THEN
+PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.Quiver");
+
+IF
+CharacterPolymorphedInto(_Character, _Race)
+AND
+DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character);
+//END_REGION
+
+//REGION QUIVER_DRAW_ARROW
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_DRAW_ARROW", _)
+AND
+CharacterGetEquippedItem(_Character, "Weapon", _Weapon)
+AND
+IsTagged(_Weapon, "LLWEAPONEX_Greatbow", _IsGreatbow)
+AND
+DB_LLWEAPONEX_Quivers_ArrowTreasure(_IsGreatbow, _TreasureTable)
+AND
+GetPosition(_Character, _x, _y, _z)
+AND
+CharacterGetLevel(_Character, _Level)
+AND
+CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", _x, _y, _z, _Backpack)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_DRAW_ARROW] Generating a random arrow for character.");
+ObjectSetFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow");
+GenerateTreasure(_Backpack, _TreasureTable, _Level, _Character);
+MoveAllItemsTo(_Backpack, _Character, 1, 1, 1);
+ProcObjectTimer(_Backpack, "LLWEAPONEX_Timers_RemoveArrowTreasureBackpack", 250);
+
+PROC
+ProcObjectTimerFinished((ITEMGUID)_Backpack, "LLWEAPONEX_Timers_RemoveArrowTreasureBackpack")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_Timers_RemoveArrowTreasureBackpack] Removing backpack.");
+ItemRemove(_Backpack);
+
+IF
+ObjectLeftCombat((CHARACTERGUID)_Character, _)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow", 1)
+THEN
+InventoryLaunchTagIterator(_Character, "LLWEAPONEX_Quiver_TemporaryArrow", "", "LLWEAPONEX_FoundQuiverArrow", "");
+ObjectClearFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow");
+
+IF
+StoryEvent((ITEMGUID)_Arrow, "LLWEAPONEX_FoundQuiverArrow")
+THEN
+ItemDestroy(_Arrow);
 //END_REGION
 
 EXITSECTION

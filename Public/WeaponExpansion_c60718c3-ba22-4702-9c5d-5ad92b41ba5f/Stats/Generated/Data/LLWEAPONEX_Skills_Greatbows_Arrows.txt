@@ -1,0 +1,89 @@
+new entry "Projectile_LLWEAPONEX_Greatbow_FireArrow"
+type "SkillData"
+using "Projectile_FireArrow"
+data "Template" "2d7011ed-df5a-440e-aa1a-17ad63e9509d"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_ExplosionArrow"
+type "SkillData"
+using "Projectile_ExplosionArrow"
+data "Template" "51a714de-aa34-4473-b6ca-f5d3928df40b"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_FreezingArrow"
+type "SkillData"
+using "Projectile_FreezingArrow"
+data "Template" "8b095da0-9782-415d-9384-fa25ece89b37"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_WaterArrow"
+type "SkillData"
+using "Projectile_WaterArrow"
+data "Template" "b83364c9-6e4a-4bf2-9738-25c3875e91b9"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_CursedFireArrow"
+type "SkillData"
+using "Projectile_CursedFireArrow"
+data "Template" "2d7011ed-df5a-440e-aa1a-17ad63e9509d"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_BlessedWaterArrow"
+type "SkillData"
+using "Projectile_BlessedWaterArrow"
+data "Template" "b83364c9-6e4a-4bf2-9738-25c3875e91b9"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_SlowDownArrow"
+type "SkillData"
+using "Projectile_SlowDownArrow"
+data "Template" "58a49f3c-7f71-4696-90a6-8e3910ab5e3c"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_StunningArrow"
+type "SkillData"
+using "Projectile_StunningArrow"
+data "Template" "87c29a48-a230-4dbd-81a1-4e715ddf118e"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_SteamCloudArrow"
+type "SkillData"
+using "Projectile_SteamCloudArrow"
+data "Template" "6c637193-634f-445f-a5b8-2462f3602bbd"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_SmokescreenArrow"
+type "SkillData"
+using "Projectile_SmokescreenArrow"
+data "Template" "8eaddff2-b5b7-41c3-bfa2-721e8ee4c8bb"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_StaticCloudArrow"
+type "SkillData"
+using "Projectile_StaticCloudArrow"
+data "Template" "ac7539d8-8fe6-40ad-810e-fe8e8b4f397f"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_SilverArrow"
+type "SkillData"
+using "Projectile_SilverArrow"
+data "Template" "60c93ae1-ce32-4e82-90a6-628ed7ff7b8f"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_BleedingArrow"
+type "SkillData"
+using "Projectile_BleedingArrow"
+data "Template" "d51366e3-7093-405f-994a-2ce30cd8abbe"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_KnockedOutArrow"
+type "SkillData"
+using "Projectile_KnockedOutArrow"
+data "Template" "64bf0c63-be4c-45d1-9be5-1eda70a313de"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_PoisonedCloudArrow"
+type "SkillData"
+using "Projectile_PoisonedCloudArrow"
+data "Template" "bcdf4eed-ba3e-4358-a3b9-9222fbf94b95"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_CharmingArrow"
+type "SkillData"
+using "Projectile_CharmingArrow"
+data "Template" "fe8adee0-7c73-439c-a0cf-84c1fd6c5111"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_PoisonArrow"
+type "SkillData"
+using "Projectile_PoisonArrow"
+data "Template" "9ca71ea6-0775-48e9-88fb-d8776f524809"
+
+new entry "Projectile_LLWEAPONEX_Greatbow_DebuffAllArrow"
+type "SkillData"
+using "Projectile_DebuffAllArrow"
+data "Template" "a1975cf7-3503-45ab-b23e-39815b767214"

@@ -223,11 +223,18 @@ object category "I_WPN_LLWEAPONEX_Throwing_Shuriken",10,0,0,0,0,0,0,0
 object category "I_WPN_LLWEAPONEX_Throwing_Shuriken_Poison",4,0,0,0,0,0,0,0
 object category "I_WPN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_QuiversNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Quiver_DrawArrow",3,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Quiver_ElementalArrowHeads",3,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Quiver_NoSkill",5,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Quiver_AbilityBoost",1,1,0,0,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_Accessories"
 new subtable "1,1"
 object category "T_ST_RingAmuletBelt",1,0,0,0,0,0,0,0
 new subtable "0,4;1,1"
-object category "LLWEAPONEX_Quiver",1,0,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine"
 new subtable "3,1"
@@ -438,22 +445,22 @@ new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
 object category "T_ST_Trader_RangedNormal",10,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Quiver",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
 object category "T_ST_Trader_RangedNormal",10,1,1,0,0,0,0,0
-object category "LLWEAPONEX_Quiver",1,1,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
 object category "T_ST_Trader_RangedNormal",10,1,1,1,0,0,0,0
-object category "LLWEAPONEX_Quiver",1,1,1,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,1,1,0,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
 object category "T_ST_Trader_RangedNormal",10,1,1,1,1,0,0,0
-object category "LLWEAPONEX_Quiver",1,1,1,1,1,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,1,1,1,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderStaff"
 new subtable "2,1"
@@ -544,6 +551,38 @@ new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
 object category "T_ST_Trader_WeaponWizard",1,1,1,1,1,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_Quiver_Arrows"
+new subtable "1,1"
+StartLevel "1"
+EndLevel "12"
+object category "LLQWEAPONEX_Quiver_ArrowStarter",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "13"
+EndLevel "15"
+object category "LLQWEAPONEX_Quiver_ArrowMid",2,0,0,0,0,0,0,0
+object category "LLQWEAPONEX_Quiver_ArrowStarter",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "16"
+object category "LLQWEAPONEX_Quiver_ArrowLate",2,0,0,0,0,0,0,0
+object category "LLQWEAPONEX_Quiver_ArrowMid",1,0,0,0,0,0,0,0
+object category "LLQWEAPONEX_Quiver_ArrowStarter",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_Quiver_GreatbowArrows"
+new subtable "1,1"
+StartLevel "1"
+EndLevel "12"
+object category "LLQWEAPONEX_Quiver_GreatbowArrowStarter",1,0,0,0,0,0,0,1
+new subtable "1,1"
+StartLevel "13"
+EndLevel "15"
+object category "LLQWEAPONEX_Quiver_GreatbowArrowMid",2,0,0,0,0,0,0,1
+object category "LLQWEAPONEX_Quiver_GreatbowArrowStarter",1,0,0,0,0,0,0,1
+new subtable "1,1"
+StartLevel "16"
+object category "LLQWEAPONEX_Quiver_GreatbowArrowLate",2,0,0,0,0,0,0,1
+object category "LLQWEAPONEX_Quiver_GreatbowArrowMid",1,0,0,0,0,0,0,1
+object category "LLQWEAPONEX_Quiver_GreatbowArrowStarter",1,0,0,0,0,0,0,1
 
 new treasuretable "LLWEAPONEX_Debug_PriceCheck"
 IgnoreLevelDiff 1
@@ -643,3 +682,13 @@ new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_CheatQuivers"
+new subtable "-1"
+object category "LLWEAPONEX_Quiver_DrawArrow",3,1,0,0,0,0,0,0
+new subtable "-1"
+object category "LLWEAPONEX_Quiver_ElementalArrowHeads",3,1,0,0,0,0,0,0
+new subtable "-1"
+object category "LLWEAPONEX_Quiver_NoSkill",5,1,0,0,0,0,0,0
+new subtable "-1"
+object category "LLWEAPONEX_Quiver_AbilityBoost",1,1,0,0,0,0,0,0
