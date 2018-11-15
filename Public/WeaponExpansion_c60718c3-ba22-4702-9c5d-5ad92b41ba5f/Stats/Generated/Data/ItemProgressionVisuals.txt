@@ -711,3 +711,27 @@ add namegroup "LLWEAPONEX_Quivers_Rare","",""
 add levelgroup 0,0,"Epic"
 add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
 add namegroup "LLWEAPONEX_Quivers_Epic","",""
+
+new itemgroup "ARM_LLWEAPONEX_Quiver_DrawArrow"
+
+add levelgroup 0,0,"Common"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Common","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Common","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Epic","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
+
+add levelgroup 0,0,"All"
+add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper","",""

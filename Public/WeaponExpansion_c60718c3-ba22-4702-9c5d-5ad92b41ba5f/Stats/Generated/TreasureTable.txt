@@ -555,15 +555,15 @@ object category "T_ST_Trader_WeaponWizard",1,1,1,1,1,0,0,0
 new treasuretable "ST_LLWEAPONEX_Quiver_Arrows"
 new subtable "1,1"
 StartLevel "1"
-EndLevel "12"
+EndLevel "4"
 object category "LLQWEAPONEX_Quiver_ArrowStarter",1,0,0,0,0,0,0,0
 new subtable "1,1"
-StartLevel "13"
-EndLevel "15"
+StartLevel "5"
+EndLevel "10"
 object category "LLQWEAPONEX_Quiver_ArrowMid",2,0,0,0,0,0,0,0
 object category "LLQWEAPONEX_Quiver_ArrowStarter",1,0,0,0,0,0,0,0
 new subtable "1,1"
-StartLevel "16"
+StartLevel "11"
 object category "LLQWEAPONEX_Quiver_ArrowLate",2,0,0,0,0,0,0,0
 object category "LLQWEAPONEX_Quiver_ArrowMid",1,0,0,0,0,0,0,0
 object category "LLQWEAPONEX_Quiver_ArrowStarter",1,0,0,0,0,0,0,0
@@ -571,18 +571,18 @@ object category "LLQWEAPONEX_Quiver_ArrowStarter",1,0,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_Quiver_GreatbowArrows"
 new subtable "1,1"
 StartLevel "1"
-EndLevel "12"
-object category "LLQWEAPONEX_Quiver_GreatbowArrowStarter",1,0,0,0,0,0,0,1
+EndLevel "4"
+object category "LLQWEAPONEX_Quiver_Greatbow_ArrowStarter",1,0,0,0,0,0,0,1
 new subtable "1,1"
-StartLevel "13"
-EndLevel "15"
-object category "LLQWEAPONEX_Quiver_GreatbowArrowMid",2,0,0,0,0,0,0,1
-object category "LLQWEAPONEX_Quiver_GreatbowArrowStarter",1,0,0,0,0,0,0,1
+StartLevel "5"
+EndLevel "10"
+object category "LLQWEAPONEX_Quiver_Greatbow_ArrowMid",2,0,0,0,0,0,0,1
+object category "LLQWEAPONEX_Quiver_Greatbow_ArrowStarter",1,0,0,0,0,0,0,1
 new subtable "1,1"
-StartLevel "16"
-object category "LLQWEAPONEX_Quiver_GreatbowArrowLate",2,0,0,0,0,0,0,1
-object category "LLQWEAPONEX_Quiver_GreatbowArrowMid",1,0,0,0,0,0,0,1
-object category "LLQWEAPONEX_Quiver_GreatbowArrowStarter",1,0,0,0,0,0,0,1
+StartLevel "11"
+object category "LLQWEAPONEX_Quiver_Greatbow_ArrowLate",2,0,0,0,0,0,0,1
+object category "LLQWEAPONEX_Quiver_Greatbow_ArrowMid",1,0,0,0,0,0,0,1
+object category "LLQWEAPONEX_Quiver_Greatbow_ArrowStarter",1,0,0,0,0,0,0,1
 
 new treasuretable "LLWEAPONEX_Debug_PriceCheck"
 IgnoreLevelDiff 1

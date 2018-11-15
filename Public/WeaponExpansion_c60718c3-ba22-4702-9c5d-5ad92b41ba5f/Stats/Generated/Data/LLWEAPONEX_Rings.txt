@@ -1,0 +1,12 @@
+
+new entry "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
+type "Armor"
+using "_Rings"
+data "ItemGroup" "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
+data "Act part" "7"
+data "MagicArmorBoost" "20"
+data "Value" "100"
+data "Persuasion" "1"
+data "Skills" "Shout_LLWEAPONEX_SwapGender"
+data "ComboCategory" "ArmorRing"
+data "Unique" "1"

@@ -27,23 +27,16 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", "Undead_Lizard", 1,  "LLWEAPONEX_FX_
 DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", "Undead_Lizard", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
 */
 
-DB_LLWEAPONEX_RaceTags("Dwarf", "DWARF");
-DB_LLWEAPONEX_RaceTags("Human", "HUMAN");
-DB_LLWEAPONEX_RaceTags("Elf", "ELF");
-DB_LLWEAPONEX_RaceTags("Lizard", "LIZARD");
-DB_LLWEAPONEX_RaceTags("Undead_Dwarf", "DWARF");
-DB_LLWEAPONEX_RaceTags("Undead_Human", "HUMAN");
-DB_LLWEAPONEX_RaceTags("Undead_Elf", "ELF");
-DB_LLWEAPONEX_RaceTags("Undead_Lizard", "LIZARD");
-
 SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Bone", 400);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Bone", 400);
+//DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 500);
+//DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 400);
 DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 600);
 DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Male", "Dummy_R_Hand", 600);
-DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 800);
-DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 800);
-DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 580);
 DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
 
 SysClear("DB_LLWEAPONEX_Quivers_LoopFX", 4);
@@ -58,6 +51,8 @@ DB_LLWEAPONEX_Quivers_LoopFX("LIZARD", 0,  "LLWEAPONEX_FX_Quiver_A", "HorseLink_
 
 DB_LLWEAPONEX_Quivers_ArrowTreasure(0, "ST_LLWEAPONEX_Quiver_Arrows");
 DB_LLWEAPONEX_Quivers_ArrowTreasure(1, "ST_LLWEAPONEX_Quiver_GreatbowArrows");
+
+DB_LLWEAPONEX_Quivers_RechargeStatus("Shout_LLWEAPONEX_Quiver_DrawArrow", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", 60.0);
 
 //REGION GREATBOW_START_ATTACK
 IF
@@ -92,7 +87,7 @@ IsTagged(_Character, "FEMALE", _IsFemale)
 AND
 CharacterGetRace(_Character, 1, _Race)
 AND
-DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag)
 AND
 DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _IsFemale, _EffectName, _BoneName, _Duration)
 THEN
@@ -112,7 +107,7 @@ IsTagged(_Character, "FEMALE", _IsFemale)
 AND
 NOT CharacterGetRace(_Character, 1, _)
 AND
-DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag)
 AND
 IsTagged(_Character, _RaceTag, 1)
 AND
@@ -156,7 +151,7 @@ IsTagged(_Player, "FEMALE", _IsFemale)
 AND
 CharacterGetRace(_Player, 1, _Race)
 AND
-DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 THEN
@@ -172,7 +167,7 @@ NOT CharacterGetRace(_Character, 1, _)
 AND
 IsTagged(_Character, "FEMALE", _IsFemale)
 AND
-DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag)
 AND
 IsTagged(_Character, _Race, 1)
 AND
@@ -208,7 +203,7 @@ NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
 AND
 CharacterIsFemale(_Character, _IsFemale)
 AND
-DB_LLWEAPONEX_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 THEN
@@ -250,7 +245,7 @@ CharacterGetLevel(_Character, _Level)
 AND
 CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", _x, _y, _z, _Backpack)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_DRAW_ARROW] Generating a random arrow for character.");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_DRAW_ARROW] Generating a random arrow for character via treasure table [",_TreasureTable,"].");
 ObjectSetFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow");
 GenerateTreasure(_Backpack, _TreasureTable, _Level, _Character);
 MoveAllItemsTo(_Backpack, _Character, 1, 1, 1);
@@ -274,6 +269,123 @@ IF
 StoryEvent((ITEMGUID)_Arrow, "LLWEAPONEX_FoundQuiverArrow")
 THEN
 ItemDestroy(_Arrow);
+//END_REGION
+
+//REGION QUIVER_RECHARGING
+IF
+CharacterUsedSkill(_Player, "Shout_LLWEAPONEX_Quiver_DrawArrow", _, _)
+AND
+CharacterIsPlayer(_Player, 1)
+AND
+NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _, "Shout_LLWEAPONEX_Quiver_DrawArrow")
+AND
+CharacterGetEquippedItem(_Player, "Belt", (ITEMGUID)_Quiver)
+AND
+IsTagged(_Quiver, "LLWEAPONEX_Quiver", 1)
+AND
+ObjectGetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging", 0)
+AND
+NOT ItemGetMaxCharges(_Quiver, 0)
+THEN
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, "Shout_LLWEAPONEX_Quiver_DrawArrow");
+ObjectSetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging");
+
+IF
+ObjectLeftCombat((CHARACTERGUID)_Player, _)
+AND
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill)
+AND
+DB_LLWEAPONEX_Quivers_RechargeStatus(_Skill, _Status, _RechargeSpeed)
+THEN
+ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
+NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill);
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
+
+IF
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill)
+AND
+CharacterIsInCombat(_Player, 0)
+AND
+DB_LLWEAPONEX_Quivers_RechargeStatus(_Skill, _Status, _RechargeSpeed)
+THEN
+ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
+NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill);
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
+
+IF
+CharacterStatusRemoved(_Player, _Status, _)
+AND
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed)
+AND
+ObjectExists(_Quiver, 1)
+THEN
+ItemAddCharges(_Quiver, 1);
+LLWEAPONEX_Quivers_ResetRechargeStatus(_Player, _Quiver, _Status, _RechargeSpeed);
+
+PROC
+LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
+AND
+NOT LLWEAPONEX_QRY_ChargesAreMaxed(_Quiver)
+AND
+ItemIsInCharacterInventory(_Quiver, _Player, 1)
+THEN
+ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
+
+PROC
+LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
+AND
+LLWEAPONEX_QRY_ChargesAreMaxed(_Quiver)
+AND
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed)
+THEN
+RemoveStatus(_Player, _Status);
+NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
+ObjectClearFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging");
+
+IF
+ItemEquipped(_Quiver, _Player)
+AND
+ObjectGetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging", 1)
+AND
+CharacterIsInCombat(_Player, 0)
+AND
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_OtherPlayer, _Quiver, _Skill, _Status, _RechargeSpeed)
+THEN
+NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_OtherPlayer, _Quiver, _Skill, _Status, _RechargeSpeed);
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
+LLWEAPONEX_Quivers_ResetRechargeStatus(_Player, _Quiver, _Status, _RechargeSpeed);
+
+IF
+ItemEquipped(_Quiver, _Player)
+AND
+ObjectGetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging", 1)
+AND
+CharacterIsInCombat(_Player, 1)
+AND
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_OtherPlayer, _Quiver, _Skill, _Status, _RechargeSpeed)
+THEN
+NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_OtherPlayer, _Quiver, _Skill, _Status, _RechargeSpeed);
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill);
+
+QRY
+LLWEAPONEX_QRY_ChargesAreMaxed((ITEMGUID)_Item)
+AND
+ItemGetCharges(_Item, _Current)
+AND
+ItemGetMaxCharges(_Item, _Max)
+AND
+_Current >= _Max
+THEN
+DB_NOOP(1);
+
+IF
+ObjectEnteredCombat((CHARACTERGUID)_Player, _)
+AND
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed)
+THEN
+NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
+RemoveStatus(_Player, _Status);
+DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill);
 //END_REGION
 
 EXITSECTION

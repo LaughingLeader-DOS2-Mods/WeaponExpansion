@@ -4,3 +4,38 @@ LOOT_Rune_LLWEAPONEX_Runeblade_Earth	Earth Rune (Runeblade)
 LOOT_Rune_LLWEAPONEX_Runeblade_Fire	Fire Rune (Runeblade)
 LOOT_Rune_LLWEAPONEX_Runeblade_Poison	Poison Rune (Runeblade)
 LOOT_Rune_LLWEAPONEX_Runeblade_Water	Water Rune (Runeblade)
+TOOL_Hammer_LLWEAPONEX_Runesmith_A	<font color='#40E0D0'>Runesmith's Hammer</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Bleeding_A	<font color='#c80030'>Sharpened Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_BlessedWater_A	<font color='#97fbff'>Blessed Water Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Charming_A	<font color='#d040d0'>Charming Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Cloud_Static_A	<font color='#7d71d9'>Static Cloud Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Cloud_Steam_A	<font color='#639594'>Steamcloud Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_CursedFire_A	<font color='#fe6e27'>Cursed Fire Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Debuff_All_A	<font color='#b823cb'>Cursing Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Explosive_A	<font color='#fe6e27'>Explosive Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Fire_A	<font color='#fe6e27'>Fire Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Freezing_A	<font color='#4197e2'>Freezing Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_KO_A	<font color='#f7ba14'>Knockdown Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Poison_A	<font color='#00aa00'>Poison Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Poison_Cloud_A	<font color='#00aa00'>Poisoncloud Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Silver_A	<font color='#40b606'>Corrosive Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_SlowDown_A	<font color='#7f00ff'>Slowing Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_SmokeScreen_A	<font color='#797980'>Smokescreen Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Stunning_A	<font color='#fcd203'>Stunning Great Arrow</font>
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Water_A	<font color='#4197e2'>Water Great Arrow</font>
+WPN_LLWEAPONEX_QuiverArrow_BlessedWater_A	Blessed Water Arrow
+WPN_LLWEAPONEX_QuiverArrow_Charming_A	Charming Arrow
+WPN_LLWEAPONEX_QuiverArrow_Cloud_Static_A	Static Cloud Arrow
+WPN_LLWEAPONEX_QuiverArrow_Cloud_Steam_A	Steamcloud Arrow
+WPN_LLWEAPONEX_QuiverArrow_CursedFire_A	Cursed Fire Arrow
+WPN_LLWEAPONEX_QuiverArrow_Debuff_All_A	Cursing Arrow
+WPN_LLWEAPONEX_QuiverArrow_Explosive_A	Explosive Arrow
+WPN_LLWEAPONEX_QuiverArrow_Fire_A	Fire Arrow
+WPN_LLWEAPONEX_QuiverArrow_Freezing_A	Freezing Arrow
+WPN_LLWEAPONEX_QuiverArrow_KO_A	Knockdown Arrow
+WPN_LLWEAPONEX_QuiverArrow_Poison_A	Poison Arrow
+WPN_LLWEAPONEX_QuiverArrow_Poison_Cloud_A	Poisoncloud Arrow
+WPN_LLWEAPONEX_QuiverArrow_SlowDown_A	Slowdown Arrow
+WPN_LLWEAPONEX_QuiverArrow_SmokeScreen_A	Smokescreen Arrow
+WPN_LLWEAPONEX_QuiverArrow_Stunning_A	Stunning Arrow
+WPN_LLWEAPONEX_QuiverArrow_Water_A	Water Arrow
