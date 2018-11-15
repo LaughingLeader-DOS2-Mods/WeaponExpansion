@@ -28,8 +28,8 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", "Undead_Lizard", 0,  "LLWEAPONEX_FX_
 */
 
 SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Bone", 400);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Bone", 400);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
 //DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 500);
 //DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 400);
 DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 600);
@@ -201,7 +201,7 @@ DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 AND
 NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
 AND
-CharacterIsFemale(_Character, _IsFemale)
+IsTagged(_Character, "FEMALE", _IsFemale)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag)
 AND
