@@ -210,15 +210,15 @@ NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillI
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
 
 IF
-ObjectTransformed((CHARACTERGUID)_Player, _Template)
+ObjectTransformed(_Player, _Template)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Player, 1)
 AND
 LLWEAPONEX_QRY_HasRacialSkills(_Player)
 AND
 GetTemplate(_Player, _RaceTemplate)
 AND
 DB_LeaderLib_RaceTemplates(_RaceTag, _IsUndead, _IsFemale, _RaceTemplate)
-AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
 AND
 DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
