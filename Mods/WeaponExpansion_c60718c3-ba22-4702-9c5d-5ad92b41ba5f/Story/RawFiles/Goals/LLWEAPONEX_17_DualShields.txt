@@ -19,7 +19,7 @@ KBSECTION
 QRY
 LLWEAPONEX_DualShields_QRY_ItemLevelSet((ITEMGUID)_Item)
 AND
-GetVarInteger(_Item, "LeaderLib_ItemLevel", _Level)
+GetVarInteger(_Item, "LeaderLib_Level", _Level)
 AND
 _Level > 0
 THEN
@@ -41,16 +41,22 @@ IsTagged(_Shield, "LLWEAPONEX_DualShields", 1)
 AND
 NOT LLWEAPONEX_DualShields_QRY_ItemLevelSet(_Shield)
 THEN
-SetStoryEvent(_Shield, "LLWEAPONEX_Commands_SetDualShieldLevel");
+SetVarString(_Shield, "LeaderLib_ItemVariablesSetEvent", "LLWEAPONEX_DualShields_VariablesSet");
+SetStoryEvent(_Shield, "LeaderLib_Commands_SetItemVariables");
 
 IF
-StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_DualShields_RaritySet")
+StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_DualShields_VariablesSet")
+THEN
+LLWEAPONEX_DUalShieldS_Internal_GenerateCombatShield(_Shield);
+
+PROC
+LLWEAPONEX_DUalShieldS_Internal_GenerateCombatShield((ITEMGUID)_Shield)
 AND
 NOT LLWEAPONEX_DualShields_QRY_HasCombatShield(_Shield)
 AND
-GetVarInteger(_Shield, "LeaderLib_ItemLevel", _Level)
+GetVarInteger(_Shield, "LeaderLib_Level", _Level)
 AND
-GetVarFixedString(_Shield, "LLWEAPONEX_Rarity", _Rarity)
+GetVarFixedString(_Shield, "LeaderLib_Rarity", _Rarity)
 AND
 GetStatString(_Shield, _Stat)
 AND
@@ -74,6 +80,7 @@ SetTag(_CombatShield, "LLWEAPONEX_Debug_StorableCombatShield");
 SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
 SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
 ItemSetOwner(_CombatShield, _Owner);
+LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.CombatShields");
 //ItemSetOnlyOwnerCanUse(_CombatShield, 1);
 
 IF
@@ -128,7 +135,7 @@ DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag)
 THEN
 NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:",_GlobalFlag,"] Combat shield not found. Regenerating.");
-SetStoryEvent(_Shield, "LLWEAPONEX_DualShields_RaritySet");
+LLWEAPONEX_DUalShieldS_Internal_GenerateCombatShield(_Shield);
 
 /*
 IF
@@ -145,7 +152,7 @@ CharacterGetEquippedShield(_Player, (ITEMGUID)_Shield)
 AND
 LLWEAPONEX_DualShields_QRY_ItemLevelSet(_Shield)
 AND
-GetVarInteger(_Shield, "LeaderLib_ItemLevel", _Level)
+GetVarInteger(_Shield, "LeaderLib_Level", _Level)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:DualShields:OnCombatShieldEquipped] Shield is level [", _Level, "]. Leveling up Combat Shield.");
 ItemLevelUpTo(_CombatShield, _Level);
@@ -155,7 +162,7 @@ StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_Commands_LevelUpCombatShield")
 AND
 GetVarObject(_Shield, "LLWEAPONEX_CombatShield", (ITEMGUID)_CombatShield)
 AND
-GetVarInteger(_Shield, "LeaderLib_ItemLevel", _Level)
+GetVarInteger(_Shield, "LeaderLib_Level", _Level)
 THEN
 ItemLevelUpTo(_CombatShield, _Level);
 */

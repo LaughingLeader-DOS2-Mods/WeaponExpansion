@@ -1,0 +1,29 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+LeaderLib_Deltamods_Register_Group("WeaponExpansion.CombatShields", 0);
+//LeaderLib_Deltamods_Register_Template("WeaponExpansion.CombatShields", "WPN_LLWEAPONEX_CombatShield_Blackring_A_ec353f1e-c1ca-46d1-83ef-e9f4fea14475", 0);
+//LeaderLib_Deltamods_Register_Template("WeaponExpansion.CombatShields", "WPN_LLWEAPONEX_CombatShield_Lizards_C_067f48be-857d-43a8-bd0a-add59f025843", 0);
+
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Primary", "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield", 600, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Primary", "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Medium", 600, 10);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Primary", "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Large", 600, 16);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Normal", "Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow_CombatShield", 450, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Normal", "Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier_CombatShield", 100, 10);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Rare", "Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel_CombatShield", 450, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Legendary", "Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight_CombatShield", 550, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Rare", "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Rare", 100, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Epic", "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Rare", 299, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Legendary", "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Rare", 499, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Normal", "Boost_LLWEAPONEX_Weapon_Ability_OneHanded_CombatShield", 100, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Normal", "Boost_LLWEAPONEX_Weapon_Ability_Perserverance_CombatShield", 100, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Normal", "Boost_LLWEAPONEX_Weapon_Ability_PainReflection_CombatShield", 100, 1);
+LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Rare", "Boost_LLWEAPONEX_Weapon_Ability_WarriorLore_CombatShield", 100, 1);
+
+KBSECTION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

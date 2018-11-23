@@ -961,6 +961,7 @@ ApplyStatus(_Target, _Status, _Duration, 0, _Caster);
 //END_REGION
 
 //REGION MAGIC_AUTO_LEVELING
+/*
 //Auto-Leveling
 IF
 ItemEquipped(_Magic, _Character)
@@ -971,22 +972,23 @@ NOT DB_LLWEAPONEX_Grimoire_MagicLink(_, _Magic)
 AND
 CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_Grimoire)
 THEN
-SetStoryEvent(_Grimoire, "LeaderLib_Commands_GetItemLevel");
 DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic);
+SetVarString(_Grimoire, "LeaderLib_ItemVariablesSetEvent", "LLWEAPONEX_Grimoires_VariablesSet");
+SetStoryEvent(_Grimoire, "LeaderLib_Commands_SetItemVariables");
 
 IF
-StoryEvent((ITEMGUID)_Grimoire, "LeaderLib_Events_ItemLevelStored")
+StoryEvent((ITEMGUID)_Grimoire, "LLWEAPONEX_Grimoires_VariablesSet")
 AND
 IsTagged(_Grimoire, "LLWEAPONEX_Grimoire", 1)
 AND
-GetVarInteger(_Grimoire, "LeaderLib_ItemLevel", _Level)
+GetVarInteger(_Grimoire, "LeaderLib_Level", _Level)
 AND
 ItemGetOwner(_Grimoire, _Owner)
 AND
 CharacterGetEquippedItem(_Owner, "Weapon", (ITEMGUID)_Magic)
 THEN
 ItemLevelUpTo(_Magic, _Level);
-SetVarInteger(_Magic, "LeaderLib_ItemLevel", _Level);
+SetVarInteger(_Magic, "LeaderLib_Level", _Level);
 
 IF
 ItemUnEquipped(_Grimoire, _Character)
@@ -1002,7 +1004,7 @@ AND
 DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_MagicLink(_Grimoire, _Magic);
-
+*/
 /*
 IF
 CharacterStartAttackObject(_, _, _Character)

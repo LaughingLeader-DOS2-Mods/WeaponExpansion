@@ -5,7 +5,6 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Knife"
 param "Handedness" "1"
-param "Comment" "Overriding this so it doesn't appear for 'None' types"
 new boost "_Boost_Weapon_Ability_DualWielding",1
 
 new deltamod "Boost_Weapon_Ability_DualWielding_Sword"
@@ -42,7 +41,6 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Knife"
 param "Handedness" "1"
-param "Comment" "Overriding this so it doesn't appear for 'None' types"
 new boost "_Boost_Weapon_Status_Set_Bleeding",1
 
 new deltamod "Boost_Weapon_Status_Set_Bleeding_TwoHanded"
@@ -52,7 +50,6 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Sword"
 param "Handedness" "2"
-param "Comment" "Overriding this so it doesn't appear for 'None' types"
 new boost "_Boost_Weapon_Status_Set_Bleeding_TwoHanded",1
 
 new deltamod "Boost_Weapon_Status_Set_Acid"
@@ -60,6 +57,8 @@ param "BoostType" "Normal"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "1"
 new boost "_Boost_Weapon_Status_Set_Acid",1
 
 new deltamod "Boost_Weapon_Status_Set_Acid_TwoHanded"
@@ -68,6 +67,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Spear"
+param "Handedness" "2"
 new boost "_Boost_Weapon_Status_Set_Acid_TwoHanded",1
 
 new deltamod "Boost_Weapon_Status_Set_Suffocating"
@@ -569,125 +569,100 @@ param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
 new boost "_Boost_Weapon_Damage_ArmourPiercing_Large",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Constitition_CombatShield_Normal"
-param "BoostType" "Normal"
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
-param "Handedness" "1"
 new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitition_CombatShield"
-param "BoostType" "Primary"
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Medium"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
-param "MaxLevel" "9"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
-param "Handedness" "1"
-new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution",1
-
-new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitition_CombatShield_Medium"
-param "BoostType" "Primary"
-param "MinLevel" "10"
-param "MaxLevel" "15"
-param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Medium",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitition_CombatShield_Large"
-param "BoostType" "Primary"
-param "MinLevel" "16"
-param "MaxLevel" "30"
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Large"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Large",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow_CombatShield"
-param "BoostType" "Normal"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier_CombatShield"
-param "BoostType" "Normal"
-param "MinLevel" "10"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel_CombatShield"
-param "BoostType" "BaseRare"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight_CombatShield"
-param "BoostType" "Legendary"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Rare"
-param "BoostType" "BaseRare"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Epic"
-param "BoostType" "BaseEpic"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Legendary"
-param "BoostType" "Legendary"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Ability_OneHanded_CombatShield"
-param "BoostType" "Normal"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_Weapon_Ability_OneHanded",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Ability_Perserverance_CombatShield"
-param "BoostType" "Normal"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Ability_Perseverance",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Ability_PainReflection_CombatShield"
-param "BoostType" "Normal"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_LLWEAPONEX_Weapon_Ability_PainReflection",1
 
 new deltamod "Boost_LLWEAPONEX_Weapon_Ability_WarriorLore_CombatShield"
-param "BoostType" "BaseRare"
+param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-param "WeaponType" "CombatShield"
 new boost "_Boost_Weapon_Ability_WarriorLore",1
