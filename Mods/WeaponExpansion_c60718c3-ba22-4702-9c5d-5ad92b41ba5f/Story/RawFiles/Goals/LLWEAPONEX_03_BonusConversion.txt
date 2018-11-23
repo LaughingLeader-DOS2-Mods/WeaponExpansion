@@ -47,7 +47,7 @@ SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
 //END_REGION
 
 //REGION EQUIP_EVENTS
-/*
+
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Weapon)
 AND
@@ -68,7 +68,6 @@ AND
 GetTemplate(_Weapon, _Template)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ItemEquipped] [",_Template,"]");
-*/
 
 QRY
 LLWEAPONEX_BonusConversion_QRY_BonusVariableSet((ITEMGUID)_Weapon, (STRING)_ConversionStatus)
@@ -88,6 +87,19 @@ _ConversionStatus != ""
 THEN
 DB_NOOP(1);
 
+QRY
+LLWEAPONEX_BonusConversion_QRY_BothWeaponSlotsFilled((CHARACTERGUID)_Player)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+AND
+CharacterGetEquippedItem(_Player, "Shield", _OtherWeapon)
+AND
+_OtherWeapon != NULL_00000000-0000-0000-0000-000000000000
+THEN
+DB_NOOP(1);
+
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Weapon)
 AND
@@ -99,13 +111,31 @@ NOT LLWEAPONEX_IgnoreWeapon(_Weapon)
 AND
 NOT GetVarInteger(_Weapon, "LLWEAPONEX_BonusConversion_Calculated", 1)
 AND
+LLWEAPONEX_BonusConversion_QRY_BothWeaponSlotsFilled(_Player)
+THEN
+DB_LLWEAPONEX_BonusConversion_Temp_CalculateAfterUnequip(_Player, _Weapon);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ProcBlockUseOfItem] Both weapon slots are full. Calculating bonuses after another weapon is unequipped.");
+
+PROC
+ProcBlockUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Weapon)
+AND
+DB_IsPlayer(_Player)
+AND
+IsTagged(_Weapon, "LLWEAPONEX_BonusConversion_Enabled", 1)
+AND
+NOT LLWEAPONEX_IgnoreWeapon(_Weapon)
+AND
+NOT GetVarInteger(_Weapon, "LLWEAPONEX_BonusConversion_Calculated", 1)
+AND
+NOT DB_LLWEAPONEX_BonusConversion_Temp_CalculateAfterUnequip(_Player, _Weapon)
+AND
 DB_LLWEAPONEX_BonusConversion_WeaponTags(_Tag, _ConversionStatus)
 AND
 IsTagged(_Weapon, _Tag, 1)
 AND
 NOT LLWEAPONEX_BonusConversion_QRY_BonusVariableSet(_Weapon, _ConversionStatus)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ProcBlockUseOfItem] Player is equipping item with conversion status [",_ConversionStatus,"].");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ProcBlockUseOfItem] Player is equipping item with conversion status [",_ConversionStatus,"]. Precalculating bonuses.");
 DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Weapon, _ConversionStatus);
 LLWEAPONEX_BonusConversion_PreCalculateWeaponBonus(_Player, _Weapon, _ConversionStatus);
 
@@ -148,7 +178,7 @@ AND
 DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Weapon, _ConversionStatus)
 THEN
 //Delay slightly so the Unequip event can run if needed.
-LeaderLib_StartCharacterItemTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_BonusConversion_CalculateBonusDifference_", "LLWEAPONEX_BonusConversion_CalculateBonusDifference");
+LeaderLib_StartCharacterItemTimer(_Player, _Weapon, 150, "LLWEAPONEX_Timers_BonusConversion_CalculateBonusDifference_", "LLWEAPONEX_BonusConversion_CalculateBonusDifference");
 
 IF
 CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_BonusConversion_CalculateBonusDifference")
@@ -200,6 +230,24 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ItemUnEquipped] Bonus conver
 NOT DB_LLWEAPONEX_BonusConversion_Temp_WeaponBonus(_Player, _Weapon, _ConversionStatus, _WeaponBonus);
 LLWEAPONEX_BonusConversion_RemoveBonus(_Player, _Type, _StatToCheck, _StatToConvertTo, _WeaponBonus);
 //LeaderLib_StartCharacterItemTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_BonusConversion_RemoveBonuses_", "LLWEAPONEX_BonusConversion_RemoveBonusesFromWeapon");
+
+IF
+ItemUnEquipped(_OtherWeapon, _Player)
+AND
+DB_LLWEAPONEX_BonusConversion_Temp_CalculateAfterUnequip(_Player, _Weapon)
+AND
+_Weapon != _OtherWeapon
+AND
+DB_LLWEAPONEX_BonusConversion_WeaponTags(_Tag, _ConversionStatus)
+AND
+IsTagged(_Weapon, _Tag, 1)
+AND
+NOT LLWEAPONEX_BonusConversion_QRY_BonusVariableSet(_Weapon, _ConversionStatus)
+THEN
+NOT DB_LLWEAPONEX_BonusConversion_Temp_CalculateAfterUnequip(_Player, _Weapon);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ItemUnEquipped] Precalculating bonuses now that the previous weapon was unequipped.");
+DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Weapon, _ConversionStatus);
+LLWEAPONEX_BonusConversion_PreCalculateWeaponBonus(_Player, _Weapon, _ConversionStatus);
 
 IF
 CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_BonusConversion_RemoveBonusesFromWeapon")
@@ -286,13 +334,11 @@ CharacterGetAttribute(_Player, _StatToCheck, _Current)
 AND
 IntegerSubtract(_Current, _Base, _Bonus)
 AND
-LeaderLog_QRY_LogInt("DEBUG", "[LLWEAPONEX:BonusConversion:CalculateWeaponBonusDifference] Base [", _Base, "] Bonus [",_Bonus,"].")
+LeaderLog_QRY_LogInt("DEBUG", "[LLWEAPONEX:BonusConversion:CalculateWeaponBonusDifference] Current [",_Current,"] Adjusted Base [", _Base, "]")
 AND
-_Bonus > 0
+IntegerSubtract(_Current, _Base, _WeaponBonus)
 AND
-IntegerSubtract(_Bonus, _PreBonus, _WeaponBonus)
-AND
-LeaderLog_QRY_LogInt("DEBUG", "[LLWEAPONEX:BonusConversion:CalculateWeaponBonusDifference] _PreBonus [", _PreBonus, "] _WeaponBonus [",_WeaponBonus,"].")
+LeaderLog_QRY_LogInt("DEBUG", "[LLWEAPONEX:BonusConversion:CalculateWeaponBonusDifference] Pre-equipped Bonus [", _PreBonus, "] Weapon Bonus [",_WeaponBonus,"].")
 AND
 _WeaponBonus > 0
 AND

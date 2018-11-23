@@ -983,3 +983,9 @@ new itemgroup "WPN_LLWEAPONEX_BattleBook"
 add levelgroup 0,0,"All"
 add rootgroup "5577d7f7-697f-4d1b-904e-550827d29e4a",""
 add namegroup "WPN_LLWEAPONEX_BattleBook","",""
+
+new itemgroup "WPN_LLWEAPONEX_HandCrossbow"
+
+add levelgroup 0,0,"All"
+add rootgroup "692a4576-661e-466b-909e-7a4bccb28ed8",""
+add namegroup "Crossbow","",""

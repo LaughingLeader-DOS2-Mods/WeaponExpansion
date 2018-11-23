@@ -6,6 +6,7 @@ LeaderLib_Deltamods_Register_Group("WeaponExpansion.CombatShields", 0);
 //LeaderLib_Deltamods_Register_Template("WeaponExpansion.CombatShields", "WPN_LLWEAPONEX_CombatShield_Blackring_A_ec353f1e-c1ca-46d1-83ef-e9f4fea14475", 0);
 //LeaderLib_Deltamods_Register_Template("WeaponExpansion.CombatShields", "WPN_LLWEAPONEX_CombatShield_Lizards_C_067f48be-857d-43a8-bd0a-add59f025843", 0);
 
+//Group, Rarity, Deltamod, Chance/999, MinLevel, MaxLevel
 LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Primary", "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield", 600, 1);
 LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Primary", "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Medium", 600, 10);
 LeaderLib_Deltamods_Add("WeaponExpansion.CombatShields", "Primary", "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Large", 600, 16);
