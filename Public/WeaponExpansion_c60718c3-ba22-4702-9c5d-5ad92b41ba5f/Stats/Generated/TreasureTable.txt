@@ -187,9 +187,9 @@ new treasuretable "ST_LLWEAPONEX_GreatbowsNormal"
 new subtable "1,1"
 object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
 
-new treasuretable "ST_LLWEAPONEX_CombatShieldsNormal"
+new treasuretable "ST_LLWEAPONEX_DualShieldsNormal"
 new subtable "1,1"
-object category "LLWEAPONEX_CombatShield",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsNormal"
 new subtable "4,1"
@@ -264,7 +264,7 @@ object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
 new subtable "1,1"
-object category "LLWEAPONEX_CombatShield",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,0,0,0,0,0,0,0
 new subtable "2,2"
@@ -649,11 +649,12 @@ object category "T_ST_LLWEAPONEX_RodsNormal",1,1,1,1,1,1,0,0
 new subtable "10,10"
 object category "LLWEAPONEX_Greatbow",1,1,1,1,1,1,0,0
 new subtable "-5"
-object category "LLWEAPONEX_CombatShield",1,1,1,1,1,1,0,0
+object category "LLWEAPONEX_DualShields",1,1,1,1,1,1,0,0
 new subtable "-2"
 object category "Shield",1,1,1,1,1,1,0,0
 
 new treasuretable "LLWEAPONEX_Debug_GrimoireTest"
+IgnoreLevelDiff 1
 new subtable "-1"
 object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,1
 new subtable "-1"
@@ -663,7 +664,17 @@ object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,1
 new subtable "-1"
 object category "I_WPN_UNIQUE_WithermooreShield",1,0,0,0,0,0,0,0
 
+new treasuretable "LLWEAPONEX_Debug_TestDeltamods"
+IgnoreLevelDiff 1
+new subtable "-10"
+object category "LLWEAPONEX_Battlebooks",1,1,1,1,1,1,1,0
+new subtable "-5"
+object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,1,1,1,1,1,1,0
+new subtable "-5"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,1,1,1,1,1,1,0
+
 new treasuretable "LLWEAPONEX_CheatAllWeapons"
+IgnoreLevelDiff 1
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0
 new subtable "-1"
@@ -692,3 +703,66 @@ new subtable "-1"
 object category "LLWEAPONEX_Quiver_NoSkill",5,1,0,0,0,0,0,0
 new subtable "-1"
 object category "LLWEAPONEX_Quiver_AbilityBoost",1,1,0,0,0,0,0,0
+
+new treasuretable "LLWEAPONEX_Debug_DualShieldsTest"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,1,0,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,1,0,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,1,0,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,0,0,1,0,0
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,0,0,0,1,0
+
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Common"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,1,0,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Uncommon"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,1,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Rare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,1,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Epic"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,1,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Legendary"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,1,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Divine"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,0,1,0
+
+new treasuretable "S_LLWEAPONEX_CombatShield_Blackring_A_Common"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,1,0,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Blackring_A_Uncommon"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,0,1,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Blackring_A_Rare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,0,0,1,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Blackring_A_Epic"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,0,0,0,1,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Blackring_A_Legendary"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,0,0,0,0,1,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Blackring_A_Divine"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,0,0,0,0,0,1,0
+

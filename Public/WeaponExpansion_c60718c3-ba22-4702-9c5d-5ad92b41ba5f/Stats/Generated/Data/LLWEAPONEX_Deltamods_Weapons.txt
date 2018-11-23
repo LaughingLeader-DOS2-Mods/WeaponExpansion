@@ -1,0 +1,88 @@
+new entry "_Boost_LLWEAPONEX_Weapon_Primary_Constitution"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Value" "12"
+data "ConstitutionBoost" "1"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Medium"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Value" "14"
+data "ConstitutionBoost" "2"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Large"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Value" "16"
+data "ConstitutionBoost" "3"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Rune_Air"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_LLWEAPONEX_ActivateRuneblade_Air_RuneBoost"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Rune_Earth"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_LLWEAPONEX_ActivateRuneblade_Earth_RuneBoost"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Rune_Fire"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_LLWEAPONEX_ActivateRuneblade_Fire_RuneBoost"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Rune_Poison"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_LLWEAPONEX_ActivateRuneblade_Poison_RuneBoost"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Rune_Water"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_LLWEAPONEX_ActivateRuneblade_Water_RuneBoost"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Rune_Chaos"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_RuneBoost"
+
+new entry "_Enemy_Boost_LLWEAPONEX_ChaosDamage_Large"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Damage Type" "Chaos"
+data "DamageFromBase" "100"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Skill_Fortify"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Target_Fortify"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_DeflectiveBarrier"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Target_CripplingBlow"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_GuardianAngel"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "Shout_ThickOfTheFight"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Ability_Perseverance"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Perseverance" "1"
+
+new entry "_Boost_LLWEAPONEX_Weapon_Ability_PainReflection"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "PainReflection" "1"

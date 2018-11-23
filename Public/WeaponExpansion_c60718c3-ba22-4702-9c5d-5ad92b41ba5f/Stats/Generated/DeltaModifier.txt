@@ -1,3 +1,323 @@
+new deltamod "Boost_Weapon_Ability_DualWielding"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Knife"
+param "Handedness" "1"
+param "Comment" "Overriding this so it doesn't appear for 'None' types"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Sword"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Club"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Ability_DualWielding_Axe"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Ability_DualWielding",1
+
+new deltamod "Boost_Weapon_Status_Set_Bleeding"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Knife"
+param "Handedness" "1"
+param "Comment" "Overriding this so it doesn't appear for 'None' types"
+new boost "_Boost_Weapon_Status_Set_Bleeding",1
+
+new deltamod "Boost_Weapon_Status_Set_Bleeding_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "2"
+param "Comment" "Overriding this so it doesn't appear for 'None' types"
+new boost "_Boost_Weapon_Status_Set_Bleeding_TwoHanded",1
+
+new deltamod "Boost_Weapon_Status_Set_Acid"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Status_Set_Acid",1
+
+new deltamod "Boost_Weapon_Status_Set_Acid_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Spear"
+new boost "_Boost_Weapon_Status_Set_Acid_TwoHanded",1
+
+new deltamod "Boost_Weapon_Status_Set_Suffocating"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Wand"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Status_Set_Suffocating",1
+
+new deltamod "Boost_Weapon_Status_Set_Suffocating_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Staff"
+param "Handedness" "2"
+new boost "_Boost_Weapon_Status_Set_Suffocating_TwoHanded",1
+
+new deltamod "Boost_Weapon_Status_Set_Crippled"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Status_Set_Crippled",1
+
+new deltamod "Boost_Weapon_Status_Set_Crippled_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "2"
+new boost "_Boost_Weapon_Status_Set_Crippled_TwoHanded",1
+
+new deltamod "Boost_Weapon_Status_Set_Disarmed"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Status_Set_Disarmed",1
+
+new deltamod "Boost_Weapon_Status_Set_Disarmed_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "2"
+new boost "_Boost_Weapon_Status_Set_Disarmed_TwoHanded",1
+
+new deltamod "Boost_Weapon_Status_Set_Muted"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Wand"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Status_Set_Muted",1
+
+new deltamod "Boost_Weapon_Status_Set_Muted_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Staff"
+param "Handedness" "2"
+new boost "_Boost_Weapon_Status_Set_Muted_TwoHanded",1
+
+new deltamod "Boost_Weapon_Status_Set_Blind"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Wand"
+param "Handedness" "1"
+new boost "_Boost_Weapon_Status_Set_Blind",1
+
+new deltamod "Boost_Weapon_Status_Set_Blind_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Staff"
+param "Handedness" "2"
+new boost "_Boost_Weapon_Status_Set_Blind_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Knife"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal",1
+
+new deltamod "Boost_Weapon_LifeSteal_Sword"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal",1
+
+new deltamod "Boost_Weapon_LifeSteal_Club"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal",1
+
+new deltamod "Boost_Weapon_LifeSteal_Axe"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Knife"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal_Large",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_Sword"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal_Large",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_Club"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal_Large",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_Axe"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "1"
+new boost "_Boost_Weapon_LifeSteal_Large",1
+
+new deltamod "Boost_Weapon_LifeSteal_TwoHanded"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "2"
+new boost "_Boost_Weapon_LifeSteal_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_TwoHanded_Club"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "2"
+new boost "_Boost_Weapon_LifeSteal_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_TwoHanded_Axe"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "2"
+new boost "_Boost_Weapon_LifeSteal_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_TwoHanded_Bow"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Bow"
+new boost "_Boost_Weapon_LifeSteal_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_TwoHanded_Crossbow"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Crossbow"
+new boost "_Boost_Weapon_LifeSteal_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_TwoHanded"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Sword"
+param "Handedness" "2"
+new boost "_Boost_Weapon_LifeSteal_Large_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_TwoHanded_Club"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Club"
+param "Handedness" "2"
+new boost "_Boost_Weapon_LifeSteal_Large_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_TwoHanded_Axe"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Axe"
+param "Handedness" "2"
+new boost "_Boost_Weapon_LifeSteal_Large_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_TwoHanded_Bow"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Bow"
+new boost "_Boost_Weapon_LifeSteal_Large_TwoHanded",1
+
+new deltamod "Boost_Weapon_LifeSteal_Large_TwoHanded_Crossbow"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Crossbow"
+new boost "_Boost_Weapon_LifeSteal_Large_TwoHanded",1
+
 new deltamod "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
@@ -248,3 +568,126 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
 new boost "_Boost_Weapon_Damage_ArmourPiercing_Large",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Constitition_CombatShield_Normal"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+param "Handedness" "1"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitition_CombatShield"
+param "BoostType" "Primary"
+param "MinLevel" "1"
+param "MaxLevel" "9"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+param "Handedness" "1"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitition_CombatShield_Medium"
+param "BoostType" "Primary"
+param "MinLevel" "10"
+param "MaxLevel" "15"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitition_CombatShield_Large"
+param "BoostType" "Primary"
+param "MinLevel" "16"
+param "MaxLevel" "30"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Large",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow_CombatShield"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier_CombatShield"
+param "BoostType" "Normal"
+param "MinLevel" "10"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel_CombatShield"
+param "BoostType" "BaseRare"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight_CombatShield"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Rare"
+param "BoostType" "BaseRare"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Epic"
+param "BoostType" "BaseEpic"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Legendary"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Ability_OneHanded_CombatShield"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_Weapon_Ability_OneHanded",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Ability_Perserverance_CombatShield"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Ability_Perseverance",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Ability_PainReflection_CombatShield"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_LLWEAPONEX_Weapon_Ability_PainReflection",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Ability_WarriorLore_CombatShield"
+param "BoostType" "BaseRare"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "CombatShield"
+new boost "_Boost_Weapon_Ability_WarriorLore",1

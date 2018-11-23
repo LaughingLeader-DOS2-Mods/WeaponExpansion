@@ -283,7 +283,85 @@ add name "Greatbow",""
 new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3"
 add name "Artisan Greatbow",""
 
-new namegroup "WPN_LLWEAPONEX_CombatShield_Normal"
+new namegroup "WPN_LLWEAPONEX_DualShields_Normal"
+add name "Twin Shields",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Normal_1"
+add name "Ancient Twin Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Normal_2"
+add name "Battle-Hardened Twin Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Normal_3"
+add name "Reinforced Twin Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Normal_4"
+add name "Exquisite Twin Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Normal_5"
+add name "Exceptional Twin Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Normal_6"
+add name "Artisan Twin Shields",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Normal"
+add name "Dual Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Normal_1"
+add name "Exquisite Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Normal_2"
+add name "Sacrificial Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Normal_3"
+add name "Reinforced Chaotic Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Normal_4"
+add name "Wicked Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Normal_5"
+add name "Bloody Shields of Chaos",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_1"
+add name "Chaos Unbound",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_2"
+add name "Chaotic Walls of the Black Ring",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_3"
+add name "Hope's End, Evil's Foothold",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_1"
+add name "Twin Faces of Evil",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_2"
+add name "Undying Chaos, Lord's Spire",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_3"
+add name "Wall of Chaos, Evil's Reign",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Legendary"
+add name "Malice & Destruction",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine"
+add name "Chaos & Sin, Dark Lord's Calling",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Rare_1"
+add name "The Emperor's Wall",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Rare_2"
+add name "Barricade of the Ancient Empire",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Rare_3"
+add name "Unyielding Walls of the Empire",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Epic_1"
+add name "Divine Gates of the Sun",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Epic_2"
+add name "Iron Will, Lion's Courage",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Epic_3"
+add name "Silver Moon, Golden Sun",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Legendary"
+add name "Lunaris & Solaris",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Divine"
+add name "Selene & Helios, Defenders of the Divine",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor"
+add name "Giant Door Greatshields",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_OrmaReeve"
+add name "Orma and Reeve's Twin Greatshields",""
+
+new namegroup "WPN_LLWEAPONEX_CombatShield_Lizards_C"
+add name "Combat Shield",""
+
+new namegroup "WPN_LLWEAPONEX_CombatShield_Lizards_D"
 add name "Combat Shield",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death"
@@ -297,6 +375,11 @@ add name "Gatekeeper's Codex",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
 add name "Whispersong",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook"
+add name "Heavy Book",""
+add name "Weighty Book",""
+add name "Dictionary",""
 
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""

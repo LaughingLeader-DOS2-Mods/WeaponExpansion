@@ -3,7 +3,7 @@ Cone_LLWEAPONEX_WaterSpout_DisplayName	Water Spout
 Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide
 Projectile_LLWEAPONEX_ChaosBolt_Description	Shoot a bolt of pure Chaos that deals [1] damage of random type and creates a corresponding surface.
 Projectile_LLWEAPONEX_ChaosBolt_DisplayName	Chaos Bolt
-Projectile_LLWEAPONEX_ShieldToss_Description	Throw your combat shield at an enemy. The shield bounces to up to 3 targets within [1], dealing [2] damage and restoring <font color='#a3a3a3'>Physical Armor</font> & <font color='#1b769a'>Magic Armor</font> for each enemy hit.<br>The shield then returns, restoring an additional amount of armor.<br><font color='#FFD700' size='18'>Shield Mastery</font><br><font color='#4197e2'>If 3 targets are hit with Shield Toss, the cooldown on <font color='#f7ba14'>Shield's Up</font> is refreshed.</font>
+Projectile_LLWEAPONEX_ShieldToss_Description	Throw your combat shield at an enemy. The shield can ricochet up to 3 times within [1], dealing [2] damage and restoring [3] and [4] for each enemy hit.<br>The shield then returns, restoring an additional amount of armor.<br><font color='#FFD700' size='18'>Shield Mastery I</font><br><font color='#4197e2'>If 3 targets are hit with Shield Toss, restore [5] and [6] to allies within 8m.</font>
 Projectile_LLWEAPONEX_ShieldToss_DisplayName	Shield Toss
 Projectile_LLWEAPONEX_ShootRod_Chaos_Description	Launch a magical missile from your rod that deals <font color='#b823cb'>[1] Chaos Damage</font>, and creates a random surface.
 Projectile_LLWEAPONEX_ShootRod_Description	Launch a magical missile from your rod that deals [1], and creates a surface of the related element.
@@ -11,7 +11,7 @@ Projectile_LLWEAPONEX_ShootRod_DisplayName	Shoot Rod
 Projectile_LLWEAPONEX_ShootRod_Offhand_DisplayName	Shoot Rod (Offhand)
 Rush_LLWEAPONEX_MagicBatteringRam_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Rush forward in a straight line, to a designated point, hitting all enemies in your path for [1] and setting Knockdown.
 Rush_LLWEAPONEX_MagicBatteringRam_DisplayName	Magic Rush
-Shout_LLWEAPONEX_LegSweep_Description	<font color='#FFD700' size='18'>Monk Technique</font><br>Sweep the ground around you within a [1] radius, hitting enemies for [1] and applying <font color='#c80030'>Tripping</font> for 2 turns.<br><font color='#FF69B4'>Tripping bypasses armor.</font><br>When enemies that are <font color='#c80030'>Tripping</font> move, they have a 15% chance to be <font color='#fcd203'>Knocked Down</font>.<br>Enemies that are already <font color='#c80030'>Tripping</font> are <font color='#fcd203'>Knocked Down</font> instantly.
+Shout_LLWEAPONEX_LegSweep_Description	<font color='#FFD700' size='18'>Monk Technique</font><br>Sweep the ground around you within a [1] radius, hitting enemies for [1] and applying <font color='#c80030'>Tripping</font> for 2 turns.<br><font color='#FF69B4'>Tripping bypasses armor.</font><br>When enemies that are <font color='#c80030'>Tripping</font> move, they have a 15% chance to be <font color='#fcd203'>Knocked Down</font>.<br>Enemies that are already <font color='#c80030'>Tripping</font> are <font color='#fcd203'>Knocked Down</font> instantly.<br><font color='#c80030'>Tripping</font> is removed by <font color='#fcd203'>Knocked Down</font>, First Aid, Fortified, and Soul Mate.
 Shout_LLWEAPONEX_LegSweep_DisplayName	<font color='#FFD700'>Leg Sweep</font>
 Shout_LLWEAPONEX_Quiver_DrawArrow_Description	Draw a random, temporary arrow from your quiver.<br><font color='#FF0000'>Arrows retrieved this way disappear after combat ends.</font>
 Shout_LLWEAPONEX_Quiver_DrawArrow_DisplayName	Draw Arrow
@@ -19,3 +19,5 @@ Shout_LLWEAPONEX_SwapGender_Description	Change to the opposite gender.<br><font 
 Shout_LLWEAPONEX_SwapGender_DisplayName	Swap Gender
 Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].
 Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
+Target_LLWEAPONEX_ShieldBash_DisplayName	Shield Bash
+Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and knocks the target down.

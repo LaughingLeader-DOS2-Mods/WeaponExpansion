@@ -1,0 +1,47 @@
+INIT
+
+EVENTS
+
+EVENT LLWEAPONEX_DualShields_SetLevel
+VARS
+	ITEM:_Shield
+	FLOAT:_LevelF
+	INT:_Level
+	FIXEDSTRING:_Rarity
+	STRING:_Str
+ON
+	OnItemEvent(_Shield, "LLWEAPONEX_Commands_SetDualShieldLevel")
+ACTIONS
+IF "c1"
+	ItemGetStat(_LevelF, _Shield, Level)
+THEN
+	Cast(_Level, _LevelF)
+	SetVar(_Shield, "LeaderLib_ItemLevel", _Level)
+	ItemEvent(_Shield, "LLWEAPONEX_Commands_LevelUpCombatShield")
+ENDIF
+IF "!c1&c2"
+	GetVar(_Rarity, _Shield, "LLWEAPONEX_Rarity")
+	ItemGetItemType(_Shield, _Rarity)
+THEN
+	SetVar(_Shield, "LLWEAPONEX_Rarity", _Rarity)
+	Print(_Str, "[LLWEAPONEX:DualShields:ItemGetItemType] Dual Shields rarity is [1]", _Rarity)
+	SetVar(_Shield, "LeaderLog_Message", _Str)
+	ItemEvent(_Shield, "LeaderLog_Commands_Log")
+	ItemEvent(_Shield, "LLWEAPONEX_DualShields_RaritySet")
+ENDIF
+
+EVENT LLWEAPONEX_DualShields_GetCombatShield
+VARS
+	ITEM:_Shield
+	ITEM:_CombatShield
+ON
+	OnItemEvent(_Shield, "LLWEAPONEX_DualShields_FindCombatShield")
+ACTIONS
+IF "c1"
+	ItemGetFromInventory(_CombatShield, _Shield, "", "LLWEAPONEX_CombatShield")
+THEN
+	SetVar(_Shield, "LLWEAPONEX_CombatShield", _CombatShield)
+	ItemEvent(_Shield, "LLWEAPONEX_DualShields_CombatShieldFound")
+ELSE
+	ItemEvent(_Shield, "LLWEAPONEX_DualShields_CombatShieldNotFound")
+ENDIF

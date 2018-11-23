@@ -361,29 +361,42 @@ THEN
 DB_LLWEAPONEX_Throwing_Temp_ReturnTarget(_Character, _Target, _ShootSkill, _Count);
 
 QRY
-LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets((CHARACTERGUID)_Character, (STRING)_ShootSkill, (INTEGER)_Count)
+LLWEAPONEX_Throwing_QRY_MaxTargetsHit((CHARACTERGUID)_Character, (STRING)_ShootSkill, (INTEGER)_Count)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_CountResolved(_Character, _ShootSkill)
 AND
 DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _InitialTarget, _IteratorEvent, _TotalTargets)
 AND
-_Count < _TotalTargets
+DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+AND
+_TotalTargets < _MaxTargets
+AND
+_Count >= _TotalTargets
 THEN
-DB_NOOP(1);
+DB_LLWEAPONEX_Throwing_Temp_CountResolved(_Character, _ShootSkill);
 
 QRY
-LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets((CHARACTERGUID)_Character, (STRING)_ShootSkill, (INTEGER)_Count)
+LLWEAPONEX_Throwing_QRY_MaxTargetsHit((CHARACTERGUID)_Character, (STRING)_ShootSkill, (INTEGER)_Count)
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_CountResolved(_Character, _ShootSkill)
 AND
 DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 AND
-_Count < _MaxTargets
+_Count >= _MaxTargets
 THEN
-DB_NOOP(1);
+DB_LLWEAPONEX_Throwing_Temp_CountResolved(_Character, _ShootSkill);
+
+QRY
+LLWEAPONEX_Throwing_QRY_MaxTargetsHit((CHARACTERGUID)_Character, (STRING)_ShootSkill, (INTEGER)_Count)
+AND
+DB_LLWEAPONEX_Throwing_Temp_CountResolved(_Character, _ShootSkill)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_CountResolved(_Character, _ShootSkill);
 
 PROC
 LLWEAPONEX_Throwing_Internal_SetReturnTarget((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ShootSkill, (INTEGER)_Count)
 AND
-LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets(_Character, _ShootSkill, _Count)
+NOT LLWEAPONEX_Throwing_QRY_MaxTargetsHit(_Character, _ShootSkill, _Count)
 AND
 DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 AND
@@ -400,7 +413,7 @@ ProcObjectTimer(_Character, _TimerName, _FastTimeout);
 PROC
 LLWEAPONEX_Throwing_Internal_SetReturnTarget((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ShootSkill, (INTEGER)_Count)
 AND
-NOT LLWEAPONEX_Throwing_QRY_CountLessThanTotalTargets(_Character, _ShootSkill, _Count)
+LLWEAPONEX_Throwing_QRY_MaxTargetsHit(_Character, _ShootSkill, _Count)
 AND
 DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 AND
@@ -415,13 +428,10 @@ LLWEAPONEX_Throwing_OnFullCombo(_Character, _ShootSkill);
 
 PROC
 LLWEAPONEX_Throwing_OnFullCombo((CHARACTERGUID)_Character, "Projectile_LLWEAPONEX_ShieldToss")
-AND
-CharacterHasSkill(_Character, "Shout_RecoverArmour", 1)
 THEN
+//CharacterStatusText(_Character, "LLWEAPONEX_Skills_ShieldTossAllHit");
+SetStoryEvent(_Character, "LLWEAPONEX_ShieldToss_ApplyAuraBonus");
 PlayEffect(_Character, "RS3_FX_GP_Status_Harmony_Impact_01");
-CharacterRemoveSkill(_Character, "Shout_RecoverArmour");
-CharacterAddSkill(_Character, "Shout_RecoverArmour", 0);
-CharacterStatusText(_Character, "LLWEAPONEX_Skills_ShieldTossAllHit");
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, _TimerName)

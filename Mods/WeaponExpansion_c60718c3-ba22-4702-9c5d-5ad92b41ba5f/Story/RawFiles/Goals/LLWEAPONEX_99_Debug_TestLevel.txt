@@ -195,6 +195,18 @@ THEN
 CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_Inquisitor_Act2", 0);
 */
 
+/*
+IF
+ItemTemplateEquipped("WPN_LLWEAPONEX_Shield_DualShields_A_3150a9b9-49a7-4345-aacb-d1670b6fa7a6", _Player)
+THEN
+PROC_LoopEffect("LLWEAPONEX_FX_EQ_Lizards_CombatShield_C", _Player, "LLWEAPONEX.CombatShield", "__ANY__", "LowerArm_R_Twist_Bone");
+
+IF
+ItemTemplateUnEquipped("WPN_LLWEAPONEX_Shield_DualShields_A_3150a9b9-49a7-4345-aacb-d1670b6fa7a6", _Player)
+THEN
+PROC_StopLoopEffect(_Player, "LLWEAPONEX.CombatShield");
+*/
+
 IF
 StoryEvent(_, "LeaderLib_Initialized")
 THEN
@@ -444,6 +456,35 @@ THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:SkillCast] ", _LogDetails);
 */
+
+//REGION DEBUG_FIND_COMBAT_SHIELD
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+AND
+DB_IsPlayer(_Player)
+AND
+GetUUID(_Player, _ID)
+AND
+StringConcatenate("LLWEAPONEX_Debug_DualShieldsIteratorDone_", _ID, _GlobalFlag)
+THEN
+DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag);
+InventoryLaunchTagIterator(_Player, "LLWEAPONEX_DualShields", "", "LLWEAPONEX_Iterators_FoundDualShield", _GlobalFlag);
+
+IF
+StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_Iterators_FoundDualShield")
+AND
+DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag)
+THEN
+LLWEAPONEX_DualShields_FindCombatShield(_Player, _Shield);
+
+IF
+GlobalFlagSet(_GlobalFlag)
+AND
+DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag)
+THEN
+NOT DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag);
+//END_REGION
+
 //END_REGION
 
 EXITSECTION

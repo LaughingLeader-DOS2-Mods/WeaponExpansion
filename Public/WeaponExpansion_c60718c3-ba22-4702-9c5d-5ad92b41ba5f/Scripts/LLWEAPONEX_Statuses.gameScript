@@ -34,6 +34,23 @@ IF "c1&c2"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_TRIPPING, _Source)
 THEN
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 0, _Source)
+	CharacterRemoveStatus(_Target, LLWEAPONEX_TRIPPING)
+ENDIF
+
+EVENT LLWEAPONEX_Tripping_Cleanse
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+ON
+	OnCharacterStatusApplied(_Target, KNOCKED_DOWN)
+	OnCharacterStatusApplied(_Target, FIRST_AID)
+	OnCharacterStatusApplied(_Target, HEAL_SHARING)
+	OnCharacterStatusApplied(_Target, FORTIFIED)
+ACTIONS
+IF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_TRIPPING)
+THEN
+	CharacterRemoveStatus(_Target, LLWEAPONEX_TRIPPING)
 ENDIF
 
 EVENT LLWEAPONEX_DragonsBane_GuaranteedKnockdown
@@ -178,6 +195,14 @@ THEN
 	ExplodeAt(_Target, Projectile_LLWEAPONEX_Kevin_MiniExplosion, _Level, _Player)
 ENDIF
 */
+
+EVENT LLWEAPONEX_ShieldToss_Bonus
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_ShieldToss_ApplyAuraBonus")
+ACTIONS
+	ExplodeAt(_Character, Projectile_LLWEAPONEX_ApplyShieldTossBonus, -1, _Character)
 
 EVENT LLWEAPONEX_DeflectProjectiles_CountdownStart
 VARS
