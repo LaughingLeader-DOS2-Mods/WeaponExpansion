@@ -136,7 +136,7 @@ THEN
 ObjectClearFlag(_Player, _AvailableFlag, _Instance);
 
 PROC
-LeaderLib_DynamicMenu_OnEntrySelected((STRING)_ID, (GUIDSTRING)_Player, (INTEGER)_Instance, (STRING)_TreasureTable)
+LeaderLib_DynamicMenu_OnEntrySelected("LLWEAPONEX.VendingMachine.OrderMenu", (GUIDSTRING)_Player, (INTEGER)_Instance, (STRING)_TreasureTable)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnEntrySelected] Entry [",_TreasureTable,"] was selected.");
 LLWEAPONEX_VendingMachine_OrderTreasure(_Player, _TreasureTable, _Instance);

@@ -167,7 +167,7 @@ data "Icon" "LLWEAPONEX_Items_Shuriken_01"
 data "SkillProperties" "CanBackstab;POISONED,100,2;Contaminate;TARGET:IF(HasStatus:BURNING):TargetCreateSurface,1,,ExplosionCloud,100"
 data "PrepareEffect" "LLWEAPONEX_FX_Projectiles_Shuriken_Prepare_01:Dummy_L_HandFX;RS3_FX_Skills_Earth_Prepare_Voodoo_Hand_01:Dummy_L_HandFX"
 data "CastEffect" "RS3_FX_Skills_Earth_Cast_Aoe_Voodoo_Hand_01:Dummy_L_HandFX"
-data "Template" "71686046-6833-4e60-9cfe-62e2337f7950"
+data "Template" "1ce30217-9ab4-4778-a662-2d4c58a1d0c0"
 
 new entry "Projectile_LLWEAPONEX_Throw_Shuriken_Explosive"
 type "SkillData"
