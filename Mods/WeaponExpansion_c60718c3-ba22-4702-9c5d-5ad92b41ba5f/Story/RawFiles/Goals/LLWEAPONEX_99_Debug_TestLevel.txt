@@ -475,7 +475,7 @@ StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_Iterators_FoundDualShield")
 AND
 DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag)
 THEN
-LLWEAPONEX_DualShields_FindCombatShield(_Player, _Shield);
+LLWEAPONEX_DualShields_FindCombatShield(_Player, _Shield, 0);
 
 IF
 GlobalFlagSet(_GlobalFlag)

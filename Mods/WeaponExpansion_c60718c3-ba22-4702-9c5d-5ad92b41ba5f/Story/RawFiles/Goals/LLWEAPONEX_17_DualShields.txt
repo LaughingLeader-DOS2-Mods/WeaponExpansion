@@ -1,19 +1,47 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Common", "S_LLWEAPONEX_CombatShield_Lizards_C_Common");
-DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Uncommon", "S_LLWEAPONEX_CombatShield_Lizards_C_Uncommon");
-DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Rare", "S_LLWEAPONEX_CombatShield_Lizards_C_Rare");
-DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Epic", "S_LLWEAPONEX_CombatShield_Lizards_C_Epic");
-DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Legendary", "S_LLWEAPONEX_CombatShield_Lizards_C_Legendary");
-DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Divine", "S_LLWEAPONEX_CombatShield_Lizards_C_Divine");
-
 DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Blackring_A", "Common", "S_LLWEAPONEX_CombatShield_Blackring_A_Common");
 DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Blackring_A", "Uncommon", "S_LLWEAPONEX_CombatShield_Blackring_A_Uncommon");
 DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Blackring_A", "Rare", "S_LLWEAPONEX_CombatShield_Blackring_A_Rare");
 DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Blackring_A", "Epic", "S_LLWEAPONEX_CombatShield_Blackring_A_Epic");
 DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Blackring_A", "Legendary", "S_LLWEAPONEX_CombatShield_Blackring_A_Legendary");
 DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Blackring_A", "Divine", "S_LLWEAPONEX_CombatShield_Blackring_A_Divine");
+
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Common_A", "Common", "S_LLWEAPONEX_CombatShield_Common_A_Common");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Common_A", "Uncommon", "S_LLWEAPONEX_CombatShield_Common_A_Uncommon");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Common_A", "Rare", "S_LLWEAPONEX_CombatShield_Common_A_Rare");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Common_A", "Epic", "S_LLWEAPONEX_CombatShield_Common_A_Epic");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Common_A", "Legendary", "S_LLWEAPONEX_CombatShield_Common_A_Legendary");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Common_A", "Divine", "S_LLWEAPONEX_CombatShield_Common_A_Divine");
+
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Dwarves_A", "Common", "S_LLWEAPONEX_CombatShield_Dwarves_A_Common");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Dwarves_A", "Uncommon", "S_LLWEAPONEX_CombatShield_Dwarves_A_Uncommon");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Dwarves_A", "Rare", "S_LLWEAPONEX_CombatShield_Dwarves_A_Rare");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Dwarves_A", "Epic", "S_LLWEAPONEX_CombatShield_Dwarves_A_Epic");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Dwarves_A", "Legendary", "S_LLWEAPONEX_CombatShield_Dwarves_A_Legendary");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Dwarves_A", "Divine", "S_LLWEAPONEX_CombatShield_Dwarves_A_Divine");
+
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Elves_B", "Common", "S_LLWEAPONEX_CombatShield_Elves_B_Common");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Elves_B", "Uncommon", "S_LLWEAPONEX_CombatShield_Elves_B_Uncommon");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Elves_B", "Rare", "S_LLWEAPONEX_CombatShield_Elves_B_Rare");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Elves_B", "Epic", "S_LLWEAPONEX_CombatShield_Elves_B_Epic");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Elves_B", "Legendary", "S_LLWEAPONEX_CombatShield_Elves_B_Legendary");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Elves_B", "Divine", "S_LLWEAPONEX_CombatShield_Elves_B_Divine");
+
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Humans_A", "Common", "S_LLWEAPONEX_CombatShield_Humans_A_Common");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Humans_A", "Uncommon", "S_LLWEAPONEX_CombatShield_Humans_A_Uncommon");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Humans_A", "Rare", "S_LLWEAPONEX_CombatShield_Humans_A_Rare");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Humans_A", "Epic", "S_LLWEAPONEX_CombatShield_Humans_A_Epic");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Humans_A", "Legendary", "S_LLWEAPONEX_CombatShield_Humans_A_Legendary");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Humans_A", "Divine", "S_LLWEAPONEX_CombatShield_Humans_A_Divine");
+
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Common", "S_LLWEAPONEX_CombatShield_Lizards_C_Common");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Uncommon", "S_LLWEAPONEX_CombatShield_Lizards_C_Uncommon");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Rare", "S_LLWEAPONEX_CombatShield_Lizards_C_Rare");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Epic", "S_LLWEAPONEX_CombatShield_Lizards_C_Epic");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Legendary", "S_LLWEAPONEX_CombatShield_Lizards_C_Legendary");
+DB_LLWEAPONEX_DualShields_CombatShieldGenerator("WPN_LLWEAPONEX_DualShields_Lizards_C", "Divine", "S_LLWEAPONEX_CombatShield_Lizards_C_Divine");
 
 KBSECTION
 QRY
@@ -106,10 +134,30 @@ PROC
 LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 0)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:OnDualShieldsEquipped] [ERROR] Item for variable [LLWEAPONEX_CombatShield] does not exist. Checking inventory.");
-LLWEAPONEX_DualShields_FindCombatShield(_Player, _Shield);
+LLWEAPONEX_DualShields_FindCombatShield(_Player, _Shield, 1);
 
 PROC
-LLWEAPONEX_DualShields_FindCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield)
+LLWEAPONEX_DualShields_FindCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 1)
+AND
+GetUUID(_Shield, _ID)
+AND
+StringConcatenate("LLWEAPONEX_FindCombatShield_IteratorDone_", _ID, _GlobalFlag)
+THEN
+DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
+InventoryLaunchTagIterator(_Shield, "LLWEAPONEX_CombatShield", "", "LLWEAPONEX_Iterators_FoundDualShield_Equip", _GlobalFlag);
+
+IF
+StoryEvent((ITEMGUID)_CombatShield, "LLWEAPONEX_Iterators_FoundDualShield_Equip")
+AND
+DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_Iterators_FoundDualShield] Found combat shield in dual shield inventory. Setting variable & equipping.");
+SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
+LLWEAPONEX_DualShields_EquipCombatShield(_Player, _Shield, _CombatShield, 1);
+
+PROC
+LLWEAPONEX_DualShields_FindCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 0)
 AND
 GetUUID(_Shield, _ID)
 AND
@@ -119,14 +167,13 @@ DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
 InventoryLaunchTagIterator(_Shield, "LLWEAPONEX_CombatShield", "", "LLWEAPONEX_Iterators_FoundCombatShield", _GlobalFlag);
 
 IF
-StoryEvent((ITEMGUID)_CombatShield, "LLWEAPONEX_Iterators_FoundDualShield")
+StoryEvent((ITEMGUID)_CombatShield, "LLWEAPONEX_Iterators_FoundDualShield_Equip")
 AND
 DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag)
 THEN
 NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_Iterators_FoundDualShield] Found combat shield in dual shield inventory. Setting variable.");
 SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
-LLWEAPONEX_DualShields_EquipCombatShield(_Player, _Shield, _CombatShield, 1);
 
 IF
 GlobalFlagSet(_GlobalFlag)

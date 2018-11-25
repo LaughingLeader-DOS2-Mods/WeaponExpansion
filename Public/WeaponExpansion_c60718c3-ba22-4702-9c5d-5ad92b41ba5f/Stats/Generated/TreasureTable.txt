@@ -704,43 +704,33 @@ object category "LLWEAPONEX_Quiver_NoSkill",5,1,0,0,0,0,0,0
 new subtable "-1"
 object category "LLWEAPONEX_Quiver_AbilityBoost",1,1,0,0,0,0,0,0
 
-new treasuretable "LLWEAPONEX_Debug_DualShieldsTest"
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,1,0,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,1,0,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,1,0,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,0,1,0,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,0,0,1,0,0
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_DualShields_Debug_StorageTest",1,0,0,0,0,0,1,0
+new treasuretable "LLWEAPONEX_Debug_DualShieldsRarityTest"
+new subtable "-4"
+object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
+new subtable "-4"
+object category "LLWEAPONEX_DualShields",1,0,1,0,0,0,0,0
+new subtable "-4"
+object category "LLWEAPONEX_DualShields",1,0,0,1,0,0,0,0
+new subtable "-4"
+object category "LLWEAPONEX_DualShields",1,0,0,0,1,0,0,0
+new subtable "-4"
+object category "LLWEAPONEX_DualShields",1,0,0,0,0,1,0,0
+new subtable "-4"
+object category "LLWEAPONEX_DualShields",1,0,0,0,0,0,1,0
 
-new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Common"
-IgnoreLevelDiff 1
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,1,0,0,0,0,0,0
-new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Uncommon"
-IgnoreLevelDiff 1
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,1,0,0,0,0,0
-new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Rare"
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,1,0,0,0,0
-new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Epic"
-IgnoreLevelDiff 1
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,1,0,0,0
-new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Legendary"
-IgnoreLevelDiff 1
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,1,0,0
-new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Divine"
-IgnoreLevelDiff 1
-new subtable "-1"
-object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,0,1,0
+new treasuretable "LLWEAPONEX_Debug_DualShieldsTest"
+new subtable "-4"
+object category "I_WPN_LLWEAPONEX_DualShields_Blackring_A",1,0,1,0,0,0,0,0
+new subtable "-4"
+object category "I_WPN_LLWEAPONEX_DualShields_Common_A",1,0,1,0,0,0,0,0
+new subtable "-4"
+object category "I_WPN_LLWEAPONEX_DualShields_Dwarves_A",1,0,1,0,0,0,0,0
+new subtable "-4"
+object category "I_WPN_LLWEAPONEX_DualShields_Elves_B",1,0,1,0,0,0,0,0
+new subtable "-4"
+object category "I_WPN_LLWEAPONEX_DualShields_Humans_A",1,0,1,0,0,0,0,0
+new subtable "-4"
+object category "I_WPN_LLWEAPONEX_DualShields_Lizards_C",1,0,1,0,0,0,0,0
 
 new treasuretable "S_LLWEAPONEX_CombatShield_Blackring_A_Common"
 IgnoreLevelDiff 1
@@ -766,3 +756,122 @@ IgnoreLevelDiff 1
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,0,0,0,0,0,1,0
 
+new treasuretable "S_LLWEAPONEX_CombatShield_Common_A_Common"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Common_A",1,1,0,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Common_A_Uncommon"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Common_A",1,0,1,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Common_A_Rare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Common_A",1,0,0,1,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Common_A_Epic"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Common_A",1,0,0,0,1,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Common_A_Legendary"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Common_A",1,0,0,0,0,1,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Common_A_Divine"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Common_A",1,0,0,0,0,0,1,0
+
+new treasuretable "S_LLWEAPONEX_CombatShield_Dwarves_A_Common"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Dwarves_A",1,1,0,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Dwarves_A_Uncommon"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Dwarves_A",1,0,1,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Dwarves_A_Rare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Dwarves_A",1,0,0,1,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Dwarves_A_Epic"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Dwarves_A",1,0,0,0,1,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Dwarves_A_Legendary"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Dwarves_A",1,0,0,0,0,1,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Dwarves_A_Divine"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Dwarves_A",1,0,0,0,0,0,1,0
+
+new treasuretable "S_LLWEAPONEX_CombatShield_Elves_B_Common"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Elves_B",1,1,0,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Elves_B_Uncommon"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Elves_B",1,0,1,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Elves_B_Rare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Elves_B",1,0,0,1,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Elves_B_Epic"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Elves_B",1,0,0,0,1,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Elves_B_Legendary"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Elves_B",1,0,0,0,0,1,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Elves_B_Divine"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Elves_B",1,0,0,0,0,0,1,0
+
+new treasuretable "S_LLWEAPONEX_CombatShield_Humans_A_Common"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Humans_A",1,1,0,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Humans_A_Uncommon"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Humans_A",1,0,1,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Humans_A_Rare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Humans_A",1,0,0,1,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Humans_A_Epic"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Humans_A",1,0,0,0,1,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Humans_A_Legendary"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Humans_A",1,0,0,0,0,1,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Humans_A_Divine"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Humans_A",1,0,0,0,0,0,1,0
+
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Common"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,1,0,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Uncommon"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,1,0,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Rare"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,1,0,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Epic"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,1,0,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Legendary"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,1,0,0
+new treasuretable "S_LLWEAPONEX_CombatShield_Lizards_C_Divine"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,0,1,0
