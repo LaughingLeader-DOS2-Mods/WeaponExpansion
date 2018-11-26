@@ -68,6 +68,13 @@
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_SaleStatus" type="22" />
                     <attribute id="type" value="String" type="23" />
                 </node>
+                <node id="DialogVariable">
+                    <attribute id="DefaultValue" value="" type="23" />
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="UUID" value="f4dda1ff-ab17-4141-be2f-763c6c22a7cc" type="31" />
+                    <attribute id="name" value="LLWEAPONEX_WeaponMastery_Current" type="22" />
+                    <attribute id="type" value="String" type="23" />
+                </node>
             </children>
         </node>
     </region>

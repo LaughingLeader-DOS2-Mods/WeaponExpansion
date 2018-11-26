@@ -1,0 +1,11 @@
+
+new entry "LLWEAPONEX_RUNEBLADE_MASTERY_POISON"
+type "StatusData"
+data "StatusType" "CONSUME"
+data "DisplayName" "LLWEAPONEX_RUNEBLADE_MASTERY_POISON_DisplayName"
+data "Description" "LLWEAPONEX_RUNEBLADE_MASTERY_POISON_Description"
+data "DisplayNameRef" "Runeblade Mastery"
+data "DescriptionRef" "Character's <font color='#2DF9FF'>Runeblade Mastery</font> level allows them to control poison with finer precision."
+data "Icon" "LLWEAPONEX_Status_WeaponMastery_Runeblade_A"
+data "FormatColor" "Void"
+data "StackId" "Stack_LLWEAPONEX_RunebladeMastery_Poison"

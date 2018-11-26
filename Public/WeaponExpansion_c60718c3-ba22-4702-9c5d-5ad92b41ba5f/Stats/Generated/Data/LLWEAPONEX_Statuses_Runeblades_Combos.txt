@@ -221,6 +221,7 @@ data "StackId" "Stack_LLWEAPONEX_Activate_Runeblade_BloodFire_BonusDamage2"
 
 new entry "LLWEAPONEX_RUNEBLADE_BLOOD_FIRE_PROC"
 type "StatusData"
+data "StatusType" "CONSUME"
 using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "StackId" "Stack_LLWEAPONEX_Runeblade_BloodFireProc"
 
