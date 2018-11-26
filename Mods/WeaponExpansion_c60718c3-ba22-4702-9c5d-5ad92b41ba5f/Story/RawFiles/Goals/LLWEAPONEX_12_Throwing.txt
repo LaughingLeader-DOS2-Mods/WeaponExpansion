@@ -429,7 +429,7 @@ LLWEAPONEX_Throwing_OnFullCombo(_Character, _ShootSkill);
 PROC
 LLWEAPONEX_Throwing_OnFullCombo((CHARACTERGUID)_Character, "Projectile_LLWEAPONEX_ShieldToss")
 THEN
-//CharacterStatusText(_Character, "LLWEAPONEX_Skills_ShieldTossAllHit");
+//CharacterStatusText(_Character, "LLWEAPONEX_Skills_ShieldToss_AllHit");
 SetStoryEvent(_Character, "LLWEAPONEX_ShieldToss_ApplyAuraBonus");
 PlayEffect(_Character, "RS3_FX_GP_Status_Harmony_Impact_01");
 

@@ -14,3 +14,7 @@ Shout_LLWEAPONEX_ActivateRuneblade_Poison_Description	Activate the <font color='
 Shout_LLWEAPONEX_ActivateRuneblade_Poison_DisplayName	Activate <font color='#65c900'>Poison Rune</font>
 Shout_LLWEAPONEX_ActivateRuneblade_Water_Description	Activate the <font color='#4197e2'>Water Rune</font> in your <font color='#40E0D0'>Runeblade</font>, adding [1] to melee attacks.<br>Applies <font color='#4197e2'>Wet</font> to enemies hit for 1 turn.
 Shout_LLWEAPONEX_ActivateRuneblade_Water_DisplayName	Activate <font color='#4197e2'>Water Rune</font>
+Target_LLWEAPONEX_Runeblade_PoisonBurst_DisplayName	Poison Burst
+Target_LLWEAPONEX_Runeblade_PoisonBurst_Description	Explode a <font color='#00aa00'>Poisoned</font> target, dealing [1] and an additional explosion of <font color='#00aa00'>Poison Damage</font> to enemies in a 3m-6m range.<br>The explosion damage scales with the target's <font color='#00aa00'>Poisoned</font> duration:<br>1 Turn: [2]<br>2 Turns: [3]<br>3 Turns: [4]<br>4 Turns: [5]<br> 5 Turns: [6]<br> 6 Turns: [7]
+Shout_LLWEAPONEX_Runeblade_RunicReverb_DisplayName	Runic Reverb
+Shout_LLWEAPONEX_Runeblade_RunicReverb_Description	<font color='#40E0D0' size='18'>Runeblade Mastery</font><br>Reverberate the last active rune or rune combination, applying it for 2 turns.

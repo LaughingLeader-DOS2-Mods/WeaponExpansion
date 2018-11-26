@@ -110,6 +110,13 @@ using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "StackId" "Stack_LLWEAPONEX_WeaponSkill_Knockback"
 data "Skills" "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male"
 
+new entry "LLWEAPONEX_WS_RUNEBLADE_RUNICREVERB"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "StackId" "Stack_LLWEAPONEX_WeaponSkill_RunicReverb"
+data "Skills" "Shout_LLWEAPONEX_Runeblade_RunicReverb"
+
 new entry "LLWEAPONEX_WS_RUNEBLADE_POISONBURST"
 type "StatusData"
 data "StatusType" "CONSUME"

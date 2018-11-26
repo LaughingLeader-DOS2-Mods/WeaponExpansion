@@ -79,3 +79,6 @@ LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE_Description	Character has been... Thund
 LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE_DisplayName	Thunderbolt Strike
 LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_DisplayName	Shock Resistance (<font color='#40E0D0'>Runeblade</font>)
 LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_Description	Character is immune to being directly Shocked by a <font color='#40E0D0'>Runeblade</font>.
+LLWEAPONEX_ACTIVATE_RUNEBLADE_REVERB_DisplayName	Runic Reverb
+LLWEAPONEX_POISONBURST_CHECK_DisplayName	Explode Poison
+LLWEAPONEX_POISONBURST_EXPLODE_DisplayName	Poison Explosion

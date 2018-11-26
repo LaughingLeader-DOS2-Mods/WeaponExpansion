@@ -247,3 +247,41 @@ THEN
 	CombatLogText(_Character, "LLWEAPONEX_CombatLog_DeflectProjectilesCountdownFailed", 1, 1)
 ENDIF
 	RETURN(_RemoveList, _Result, null)
+	
+EVENT LLWEAPONEX_PoisonBurst_ApplyExplosion
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+	INT:_Turns
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_POISONBURST_CHECK)
+ACTIONS
+IF "c1&c2"
+	GetStatusTurns(_Target, POISONED, _Turns)
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_POISONBURST_CHECK, _Source)
+THEN
+	IF "c1|c2"
+		IsGreaterThen(_Turns, 6)
+		IsEqual(_Turns, 6)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_POISONBURST_EXPLODE_6, 0, 1, _Source)
+	ELIF "c1"
+		IsEqual(_Turns, 5)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_POISONBURST_EXPLODE_5, 0, 1, _Source)
+	ELIF "c1"
+		IsEqual(_Turns, 4)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_POISONBURST_EXPLODE_4, 0, 1, _Source)
+	ELIF "c1"
+		IsEqual(_Turns, 3)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_POISONBURST_EXPLODE_3, 0, 1, _Source)
+	ELIF "c1"
+		IsEqual(_Turns, 2)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_POISONBURST_EXPLODE_2, 0, 1, _Source)
+	ELSE
+		CharacterApplyStatus(_Target, LLWEAPONEX_POISONBURST_EXPLODE_1, 0, 1, _Source)
+	ENDIF
+ENDIF

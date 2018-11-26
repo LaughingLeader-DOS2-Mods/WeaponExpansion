@@ -1025,6 +1025,7 @@ THEN
 	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 	Set(_Turns, _TurnsLeft)
 ENDIF
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
 	RETURN(_RemoveList, _Result, _Turns)
 	
 EVENT LLWEAPONEX_Runeblade_Combo_Earth
@@ -1093,6 +1094,7 @@ THEN
 	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 	Set(_Turns, _TurnsLeft)
 ENDIF
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
 	RETURN(_RemoveList, _Result, _Turns)
 
 EVENT LLWEAPONEX_Runeblade_Combo_Fire
@@ -1161,6 +1163,7 @@ THEN
 	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 	Set(_Turns, _TurnsLeft)
 ENDIF
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
 	RETURN(_RemoveList, _Result, _Turns)
 	
 EVENT LLWEAPONEX_Runeblade_Combo_Poison
@@ -1229,6 +1232,7 @@ THEN
 	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 	Set(_Turns, _TurnsLeft)
 ENDIF
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
 	RETURN(_RemoveList, _Result, _Turns)
 	
 EVENT LLWEAPONEX_Runeblade_Combo_Water
@@ -1297,6 +1301,7 @@ THEN
 	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 	Set(_Turns, _TurnsLeft)
 ENDIF
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
 	RETURN(_RemoveList, _Result, _Turns)
 
 EVENT LLWEAPONEX_Runeblade_Combo_Blood
@@ -1365,5 +1370,33 @@ THEN
 	ListAdd(_RemoveList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
 	Add(_TurnsLeft, %LLWEAPONEX_Runeblade_ComboRune_Turns)
 	Set(_Turns, _TurnsLeft)
+ENDIF
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
+	RETURN(_RemoveList, _Result, _Turns)
+	
+EVENT LLWEAPONEX_Runeblade_Reverb
+VARS
+	CHARACTER:_Character
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Turns
+	INT:_TurnsLeft
+	STATUS:_LastRuneStatus
+ON
+	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_REVERB)
+ACTIONS
+	Set(_Result, null)
+	Set(_Turns, null)
+IF "c1&!c2"
+	GetVar(_LastRuneStatus, _Character, "LLWEAPONEX_Runeblade_LastRuneStatus")
+	IsEqual(_LastRuneStatus, null)
+THEN
+	Set(_Result, _LastRuneStatus)
+	Set(_Turns, 2)
+	StatusText(_Character, "LLWEAPONEX_Skills_RunicReverb_Success")
+	PlaySound(_Character, "Skill_Summon_SwapPlaces_Impact")
+ELSE
+	StatusText(_Character, "LLWEAPONEX_Skills_RunicReverb_Failed")
+	PlaySound(_Character, "UI_Game_Persuasion_Failure")
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)

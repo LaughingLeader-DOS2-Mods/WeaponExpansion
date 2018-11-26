@@ -1,0 +1,7 @@
+LLWEAPONEX_NoElementFoundForChaosRune	<font color='#FF0000'>*The chaos rune fails - No surface to absorb!*</font>
+LLWEAPONEX_CaughtKevin	<font color='#00FF00' size='12'>Kevin Returned</font>
+LLWEAPONEX_Error_GrimoireMagicOwnerMismatch	<font color='#FF0000'>*Only the grimoire user can equip that!*</font>
+LLWEAPONEX_CombatLog_DeflectProjectilesCountdownFailed	<font color='#FF0000'>Deflect Projectiles Coundown Cancelled - Not in Combat!</font>
+LLWEAPONEX_Skills_ShieldToss_AllHit	<font color='#fcd203'>Shield Mastery</font>
+LLWEAPONEX_Skills_RunicReverb_Failed	<font color='#FF0000'>No Rune Combination Exists in Memory</font>
+LLWEAPONEX_Skills_RunicReverb_Success	<font color='#40E0D0'>Runic Reverb</font>
