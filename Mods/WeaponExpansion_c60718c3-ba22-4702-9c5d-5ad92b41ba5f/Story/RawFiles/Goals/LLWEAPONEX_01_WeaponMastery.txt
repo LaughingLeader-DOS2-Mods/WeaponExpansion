@@ -54,6 +54,9 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Runeblade", "LLWEAPONEX
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Runeblade", 1, "PoisonBurst", "STATUS");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_WS_RUNEBLADE_POISONBURST");
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 //END_REGION
 
 //REGION QUERIES
@@ -61,6 +64,22 @@ QRY
 LLWEAPONEX_IgnoreWeapon((ITEMGUID)_Weapon)
 AND
 IsTagged(_Weapon, "LLMIME_MIMICKED_WEAPON", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_WeaponType, (ITEMGUID)_IgnoreItem)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+AND
+_Item != _IgnoreItem
 THEN
 DB_NOOP(1);
 
@@ -179,8 +198,109 @@ THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
 //END_REGION
 
+//REGION WEAPON_MASTERY_INITIAL_LEVEL
+QRY
+LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet((CHARACTERGUID)_Player, (STRING)_MasteryLevelVariable)
+AND
+GetVarInteger(_Player, _MasteryLevelVariable, _MasteryLevel)
+AND
+_MasteryLevel >= 0
+THEN
+DB_NOOP(1);
 
-//REGION EQUIPPING_SKILL_UNLOCK
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet(_Player, _LevelVar)
+THEN
+SetVarInteger(_Player, _CurrentXPVar, 0);
+SetVarInteger(_Player, _MaxXPVar, 100);
+SetVarInteger(_Player, _LevelVar, 0);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] was set to level 0 for character.");
+//END_REGION
+
+//REGION EQUIPPING
+//Mastery weapon equipped
+IF
+ItemEquipped(_Item, _Player)
+AND
+DB_IsPlayer(_Player)
+AND
+NOT LLWEAPONEX_IgnoreWeapon(_Item)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType);
+LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+THEN
+DB_NOOP(1);
+//END_REGION
+
+//REGION UNEQUIP_REMOVAL_EVENT
+//Delay removal in case the same weapon type is being equipped
+IF
+ItemUnEquipped(_Item, _Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType, _Item)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills(_Player, _WeaponType)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills");
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills", 500);
+
+IF
+ItemUnEquipped(_Item, _Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType);
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _WeaponType);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills")
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
+LLWEAPONEX_WeaponMastery_RemoveSkills(_Player, _WeaponType);
+//END_REGION
+
+//REGION RESURRECTION_REAPPLY
 IF
 CharacterStatusRemoved(_Player, "RESURRECT", _)
 AND
@@ -194,20 +314,6 @@ AND
 DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
 THEN
 ApplyStatus(_Player, _Status, -1.0, 1, _Player);
-
-//Mastery weapon equipped
-IF
-ItemEquipped(_Item, _Player)
-AND
-CharacterIsPlayer(_Player, 1)
-AND
-NOT LLWEAPONEX_IgnoreWeapon(_Item)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
-AND
-IsTagged(_Item, _WeaponType, 1)
-THEN
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
 //END_REGION
 
 //REGION RACE_CHANGED_EVENTS
@@ -293,40 +399,6 @@ THEN
 //CharacterRemoveSkill(_Player, _Skill);
 RemoveStatus(_Player, _Status);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
-
-//Delay removal in case the same weapon type is being equipped
-IF
-ItemUnEquipped(_Weapon, _Player)
-AND
-IsTagged(_Weapon, "LLWEAPONEX_Greatbow", 1)
-AND
-LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills(_Player, "LLWEAPONEX_Greatbow")
-THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, "LLWEAPONEX_Greatbow");
-ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills");
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills", 500);
-
-PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
-
-PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
-AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
-THEN
-LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills")
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
-LLWEAPONEX_WeaponMastery_RemoveSkills(_Player, _WeaponType);
 //END_REGION
 
 //REGION DEFAULT_WEAPON_SKILLS
@@ -337,29 +409,6 @@ AND
 NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", "PiercingShot")
 THEN
 DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", "PiercingShot");
-//END_REGION
-
-//REGION WEAPON_MASTERY_INITIAL_LEVEL
-QRY
-LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet((CHARACTERGUID)_Player, (STRING)_MasteryLevelVariable)
-AND
-GetVarInteger(_Player, _MasteryLevelVariable, _MasteryLevel)
-AND
-_MasteryLevel >= 0
-THEN
-DB_NOOP(1);
-
-PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
-AND
-NOT LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet(_Player, _LevelVar)
-THEN
-SetVarInteger(_Player, _CurrentXPVar, 0);
-SetVarInteger(_Player, _MaxXPVar, 100);
-SetVarInteger(_Player, _LevelVar, 0);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] was set to level 0 for character.");
 //END_REGION
 
 //REGION WEAPON_MASTERY_EXPERIENCE
@@ -375,6 +424,10 @@ THEN
 LLWEAPONEX_WeaponMastery_GainExperience(_Player, 100);
 DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
+/*
+To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
+Additionally, Runeblades gain less experience since it's standard to dual-wield them.
+*/
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", (CHARACTERGUID)_Player)
 AND
@@ -382,7 +435,7 @@ CharacterIsPlayer(_Player, 1)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_GainExperience(_Player, 100);
+LLWEAPONEX_WeaponMastery_GainExperience(_Player, 50);
 DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 IF
@@ -548,19 +601,76 @@ LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
 //END_REGION
 
 //REGION STATUS_UNLOCKING
+/*
 IF
-CharacterStatusApplied(_Player, "LLWEAPONEX_RUNEBLADE_MASTERY_POISON", _)
+CharacterStatusApplied(_Player, _Status, _)
 AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Runeblade", "PoisonBurst")
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking(_WeaponType, _SkillID, _Status, _InfoStatus)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
 THEN
-LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Runeblade", "PoisonBurst");
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
 
 IF
-CharacterStatusApplied(_Player, "LLWEAPONEX_RUNEBLADE_MASTERY_POISON", _)
+CharacterStatusRemoved(_Player, _Status, _)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, "LLWEAPONEX_Runeblade", "PoisonBurst", _Status)
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking(_WeaponType, _SkillID, _Status, _InfoStatus)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
 THEN
-LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, "LLWEAPONEX_Runeblade", "PoisonBurst");
+LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, _WeaponType, _SkillID);
+*/
+
+PROC
+LLWEAPONEX_WeaponMastery_ApplyInfoStatus((CHARACTERGUID)_Player, (STRING)_Status, (STRING)_InfoStatus, 0)
+AND
+_InfoStatus != ""
+AND
+HasActiveStatus(_Player, _InfoStatus, 0)
+AND
+GetStatusTurns(_Player, _Status, _Turns)
+AND
+Real(_Turns, _TurnsR)
+AND
+RealProduct(_TurnsR, 6.0, _Duration)
+THEN
+ApplyStatus(_Player, _InfoStatus, _Duration, 1, _Player);
+
+PROC
+LLWEAPONEX_WeaponMastery_ApplyInfoStatus((CHARACTERGUID)_Player, (STRING)_Status, (STRING)_InfoStatus, 1)
+AND
+_InfoStatus != ""
+AND
+GetStatusTurns(_Player, _Status, _Turns)
+AND
+Real(_Turns, _TurnsR)
+AND
+RealProduct(_TurnsR, 6.0, _Duration)
+THEN
+ApplyStatus(_Player, _InfoStatus, _Duration, 1, _Player);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasAnySkillUnlockStatus((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking(_WeaponType, _SkillID, _Status, _InfoStatus)
+AND
+HasActiveStatus(_Player, _Status, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_RemoveInfoStatus((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_InfoStatus)
+THEN
+LLWEAPONEX_WeaponMastery_RemoveInfoStatus(_Player, _WeaponType, _SkillID, _InfoStatus);
+
+PROC
+LLWEAPONEX_WeaponMastery_RemoveInfoStatus((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_InfoStatus)
+AND
+_InfoStatus != ""
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_HasAnySkillUnlockStatus(_Player, _WeaponType, _SkillID)
+THEN
+RemoveStatus(_Player, _InfoStatus);
 //END_REGION
 
 //REGION MENU_TEXT

@@ -45,3 +45,5 @@ LLWEAPONEX_TRIPPING_DisplayName	Tripping
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Weapon Mastery - Gain experience with this weapon type as you use it in battle
+LLWEAPONEX_RUNEBLADE_MASTERY_POISON_DisplayName	Runeblade Mastery
+LLWEAPONEX_RUNEBLADE_MASTERY_POISON_Description	Character's <font color='#2DF9FF'>Runeblade Mastery</font> level allows them to control poison with finer precision.

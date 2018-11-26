@@ -11,11 +11,23 @@ THEN
 //DB_LLBARTER_DialogBlacklist("WeaponExpansion", "LLWEAPONEX_VendingMachine_A");
 DB_LLBARTER_DialogBlacklist("WeaponExpansion", "LLWEAPONEX_VendingMachine_OrderMenu");
 //DB_LLBARTER_DialogBlacklist("WeaponExpansion", "LLWEAPONEX_WeaponMaster");
+LLWEAPONEX_ModCompatibility_InitMimicrySettings();
 
+PROC
+LLWEAPONEX_ModCompatibility_InitMimicrySettings()
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("Shout_LLWEAPONEX_ActivateRuneblade_")
+THEN
 //Mimicry Skill Blacklist
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("Shout_LLWEAPONEX_Grimoire_Toggle_");
 //Rune statuses are auto-removed when a runeblade is unequipped, so mimicking these is pointless
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("Shout_LLWEAPONEX_ActivateRuneblade_");
+
+PROC
+LLWEAPONEX_ModCompatibility_InitMimicrySettings()
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_ShieldToss_Returned")
+THEN
 /*
 DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Death");
 DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Mimicry");

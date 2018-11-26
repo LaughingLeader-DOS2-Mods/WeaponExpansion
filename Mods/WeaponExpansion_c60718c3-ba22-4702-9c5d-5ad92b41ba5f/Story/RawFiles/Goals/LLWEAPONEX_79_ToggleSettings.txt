@@ -1,0 +1,114 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+LLWEAPONEX_ToggleSettings_InitSettings();
+
+KBSECTION
+
+//REGION SETTINGS
+PROC
+LLWEAPONEX_ToggleSettings_InitSettings()
+THEN
+SysClear("DB_LLWEAPONEX_ToggleSettings_MasteryFlags", 3);
+
+PROC
+LLWEAPONEX_ToggleSettings_InitSettings()
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar) // Enabled masteries
+THEN
+LLWEAPONEX_ToggleSettings_AddMasteryFlag(_WeaponType);
+LLWEAPONEX_ToggleSettings_AddMasteryFlag(_WeaponType);
+
+PROC
+LLWEAPONEX_ToggleSettings_AddMasteryFlag((STRING)_WeaponType)
+AND
+StringConcatenate(_WeaponType, "_ScriptEnabled", _Flag)
+AND
+StringConcatenate("LLWEAPONEX_Timers_DisableScript_", _WeaponType, _TimerName)
+THEN
+DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName);
+//END_REGION
+
+//REGION REGISTERING
+PROC
+LLWEAPONEX_ToggleSettings_Register((STRING)_GoalName, (STRING)_Flag)
+THEN
+DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
+
+QRY
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce((STRING)_GoalName, (STRING)_WeaponType)
+AND
+NOT DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _)
+AND
+DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+THEN
+DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
+//END_REGION
+
+//REGION TOGGLING
+PROC
+LLWEAPONEX_ToggleSettings_ActivateScript((STRING)_Flag)
+AND
+DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag)
+AND
+NOT SysIsActive(_GoalName)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:ActivateScript] Activating script [",_GoalName,"] for flag [",_Flag,"].");
+SysActivateGoal(_GoalName);
+
+PROC
+LLWEAPONEX_ToggleSettings_DeactivateScript((STRING)_Flag)
+AND
+DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag)
+AND
+SysIsActive(_GoalName)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:DeactivateScript] Deactivating script [",_GoalName,"] for flag [",_Flag,"].");
+SysCompleteGoal(_GoalName);
+//END_REGION
+
+//REGION TOGGLE_EVENTS
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+THEN
+TimerCancel(_TimerName);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+AND
+GlobalGetFlag(_Flag, 0)
+THEN
+GlobalSetFlag(_Flag);
+LLWEAPONEX_ToggleSettings_ActivateScript(_Flag);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_, _, _WeaponType)
+AND
+DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+AND
+GlobalGetFlag(_Flag, 1)
+THEN
+TimerLaunch(_TimerName, 1500);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_, _, _WeaponType)
+THEN
+GlobalClearFlag(_Flag);
+LLWEAPONEX_ToggleSettings_DeactivateScript(_Flag);
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

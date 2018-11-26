@@ -1,0 +1,16 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_ToggledScripts_RegisterOnce();
+KBSECTION
+PROC
+LLWEAPONEX_ToggledScripts_RegisterOnce()
+AND
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce("LLWEAPONEX_80_01_WM_Greatbow", "LLWEAPONEX_Greatbow")
+THEN
+GoalCompleted;
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

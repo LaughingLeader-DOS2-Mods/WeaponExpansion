@@ -179,7 +179,7 @@ new entry "Stats_LLWEAPONEX_Activate_Runeblade_Poison"
 type "Potion"
 using "Stats_LLWEAPONEX_Activate_Runeblade_Base"
 data "BonusWeapon" "Status_LLWEAPONEX_Runeblade_Poison"
-data "ExtraProperties" "SELF:LLWEAPONEX_RUNEBLADE_MASTERY_POISON,100,4"
+data "ExtraProperties" "LLWEAPONEX_RUNEBLADE_MASTERY_POISON,100,4"
 
 new entry "Status_LLWEAPONEX_Runeblade_Poison"
 type "Weapon"

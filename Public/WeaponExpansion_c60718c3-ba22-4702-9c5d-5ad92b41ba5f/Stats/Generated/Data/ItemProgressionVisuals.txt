@@ -1176,39 +1176,39 @@ add namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Crafted","",""
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Poison_1H"
 
 add levelgroup 1,30,"Common"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Normal","",""
 
 add levelgroup 0,0,"Uncommon"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Normal","Cool",""
 
 add levelgroup 0,0,"Rare"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Rare","",""
 
 add levelgroup 0,0,"Epic"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Epic","",""
 
 add levelgroup 1,30,"Legendary"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Epic","",""
 
 add levelgroup 1,30,"Divine"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Crafted"
 
 add levelgroup 0,0,"All"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Preview"
 
 add levelgroup 0,0,"All"
-add rootgroup "30102727-1802-4aad-b464-02b9816c07db","LLWEAPONEX_RunebladeElf"
+add rootgroup "d0a50865-1248-4d64-8562-2bb88abcb586","LLWEAPONEX_RunebladeElf"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Water_1H"

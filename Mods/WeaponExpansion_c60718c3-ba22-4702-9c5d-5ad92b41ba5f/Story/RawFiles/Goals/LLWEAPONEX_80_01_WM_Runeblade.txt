@@ -1,0 +1,39 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_ToggledScripts_RegisterOnce();
+KBSECTION
+PROC
+LLWEAPONEX_ToggledScripts_RegisterOnce()
+AND
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce("LLWEAPONEX_80_01_WM_Runeblade", "LLWEAPONEX_Runeblade")
+THEN
+GoalCompleted;
+
+//REGION STATUS_UNLOCKING
+IF
+CharacterStatusApplied(_Player, _Status, _)
+AND
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", _SkillID, _Status, _InfoStatus)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Runeblade", _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Runeblade", _SkillID);
+LLWEAPONEX_WeaponMastery_ApplyInfoStatus(_Player, _Status, _InfoStatus, 0);
+
+IF
+CharacterStatusRemoved(_Player, _Status, _)
+AND
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", _SkillID, _Status, _InfoStatus)
+AND
+LLWEAPONEX_WeaponMastery_QRY_RemoveInfoStatus(_Player, "LLWEAPONEX_Runeblade", _SkillID, _InfoStatus)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, "LLWEAPONEX_Runeblade", _SkillID, _SkillStatus)
+THEN
+LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, "LLWEAPONEX_Runeblade", _SkillID);
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

@@ -675,7 +675,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Sword"
 param "Handedness" "1"
-new boost "_Boost_Weapon_Secondary_Accuracy_Small",1
+new boost "_Boost_Weapon_Secondary_Accuracy",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_Club"
 param "BoostType" "Normal"
@@ -684,7 +684,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Club"
 param "Handedness" "1"
-new boost "_Boost_Weapon_Secondary_Accuracy_Small",1
+new boost "_Boost_Weapon_Secondary_Accuracy",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_Axe"
 param "BoostType" "Normal"
@@ -693,7 +693,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Axe"
 param "Handedness" "1"
-new boost "_Boost_Weapon_Secondary_Accuracy_Small",1
+new boost "_Boost_Weapon_Secondary_Accuracy",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_Wand"
 param "BoostType" "Normal"
@@ -702,14 +702,14 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Wand"
 param "Handedness" "1"
-new boost "_Boost_Weapon_Secondary_Accuracy_Small",1
+new boost "_Boost_Weapon_Secondary_Accuracy",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Knife"
 param "BoostType" "Normal"
@@ -718,7 +718,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Knife"
 param "Handedness" "2"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Sword"
 param "BoostType" "Normal"
@@ -727,7 +727,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Sword"
 param "Handedness" "2"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Club"
 param "BoostType" "Normal"
@@ -736,7 +736,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Club"
 param "Handedness" "2"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Axe"
 param "BoostType" "Normal"
@@ -745,7 +745,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Axe"
 param "Handedness" "2"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Spear"
 param "BoostType" "Normal"
@@ -753,7 +753,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Spear"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Staff"
 param "BoostType" "Normal"
@@ -761,7 +761,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Staff"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Bow"
 param "BoostType" "Normal"
@@ -769,7 +769,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Secondary_Accuracy_TwoHanded_Crossbow"
 param "BoostType" "Normal"
@@ -777,7 +777,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Crossbow"
-new boost "_Boost_Weapon_Secondary_Accuracy_Normal",1
+new boost "_Boost_Weapon_Secondary_Accuracy_Large",1
 
 new deltamod "Boost_Weapon_Status_Set_Bleeding"
 param "BoostType" "ItemCombo"
@@ -1320,7 +1320,7 @@ param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Secondary_Vitality",1
+new boost "_Boost_Weapon_Secondary_Vitality_Small",1
 
 new deltamod "Boost_Weapon_Secondary_Vitality_Knife"
 param "BoostType" "Normal"
@@ -1329,7 +1329,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Knife"
 param "Handedness" "1"
-new boost "_Boost_Weapon_Secondary_Vitality",1
+new boost "_Boost_Weapon_Secondary_Vitality_Small",1
 
 new deltamod "Boost_Weapon_Secondary_Vitality_Sword"
 param "BoostType" "Normal"
