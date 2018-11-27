@@ -233,31 +233,13 @@ object category "LLWEAPONEX_Quiver_AbilityBoost",1,1,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_Accessories"
 new subtable "1,1"
 object category "T_ST_RingAmuletBelt",1,0,0,0,0,0,0,0
-new subtable "0,4;1,1"
+new subtable "0,3;1,1"
 object category "T_ST_LLWEAPONEX_QuiversNormal",1,0,0,0,0,0,0,0
 
-new treasuretable "ST_LLWEAPONEX_VendingMachine"
-new subtable "3,1"
-StartLevel "1"
-EndLevel "8"
+new treasuretable "ST_LLWEAPONEX_VendingMachine_WeaponsNormal"
+new subtable "2,1"
 object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
-new subtable "3,1"
-StartLevel "9"
-EndLevel "13"
-object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,0,0,0,0,0
-new subtable "3,1"
-StartLevel "14"
-EndLevel "16"
-object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,0,0,0,0
-new subtable "3,1"
-StartLevel "17"
-EndLevel "30"
-object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,1,0,0,0
-new subtable "1,1"
-StartLevel "8"
-EndLevel "30"
-object category "LLWEAPONEX_Runeblade_Inert",1,1,1,0,0,0,0,0
-new subtable "3,1"
+new subtable "2,1"
 object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
@@ -266,11 +248,71 @@ object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 new subtable "1,1"
+object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
+new subtable "0,3;1,2"
+StartLevel "1"
+EndLevel "8"
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",9,0,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,1,0,0,0,0
+new subtable "1,1"
+StartLevel "9"
+EndLevel "15"
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",5,0,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",4,0,0,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,0,1,0,0,0
+new subtable "1,1"
+StartLevel "16"
+EndLevel "30"
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",5,0,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",9,0,0,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",5,0,0,0,1,0,0,0
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,0,0,1,0,0
+
+new treasuretable "ST_LLWEAPONEX_VendingMachine_RareAccessories"
+new subtable "0,3;1,2"
+StartLevel "1"
+EndLevel "8"
+object category "T_ST_LLWEAPONEX_Accessories",9,0,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,0,0,1,0,0,0,0
+new subtable "1,1"
+StartLevel "9"
+EndLevel "15"
+object category "T_ST_LLWEAPONEX_Accessories",5,0,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",4,0,0,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,0,0,0,1,0,0,0
+new subtable "1,1"
+StartLevel "16"
+EndLevel "30"
+object category "T_ST_LLWEAPONEX_Accessories",5,0,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",9,0,0,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",5,0,0,0,1,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,0,0,0,0,1,0,0
+
+new treasuretable "ST_LLWEAPONEX_VendingMachine"
+new subtable "1,1"
+StartLevel "1"
+EndLevel "15"
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,1,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "16"
+EndLevel "30"
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,1,1,0,0,0,0,0
+new subtable "0,2;1,3"
+object category "T_ST_LLWEAPONEX_VendingMachine_RareWeapons",1,0,0,0,0,0,0,0
+new subtable "0,3;1,2"
+StartLevel "5"
+EndLevel "30"
+object category "LLWEAPONEX_Runeblade_Inert",1,1,1,0,0,0,0,0
+new subtable "1,1"
 object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,0,0,0,0,0,0,0
 new subtable "2,2"
 object category "T_ST_LLWEAPONEX_Runes",1,0,0,0,0,0,0,0
 new subtable "0,3;1,2"
 object category "T_ST_LLWEAPONEX_Accessories",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "T_ST_LLWEAPONEX_VendingMachine_RareAccessories",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "Trader Gold",1,0,0,0,0,0,0,0
 
@@ -693,6 +735,8 @@ new subtable "-1"
 object category "I_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_CheatQuivers"
 new subtable "-1"

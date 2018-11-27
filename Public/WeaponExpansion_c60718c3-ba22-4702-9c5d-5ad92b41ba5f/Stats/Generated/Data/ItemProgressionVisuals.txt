@@ -877,6 +877,18 @@ add levelgroup 0,0,"All"
 add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
 add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
 
+new itemgroup "WPN_LLWEAPONEX_Rapier_1H_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "703a1bfe-5f3b-48d2-85ea-ea92e831c196",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H","",""
+
+new itemgroup "WPN_LLWEAPONEX_Rapier_1H_B"
+
+add levelgroup 0,0,"All"
+add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H","",""
+
 new itemgroup "WPN_LLWEAPONEX_Rods_1H"
 
 add levelgroup 0,3,"Common"

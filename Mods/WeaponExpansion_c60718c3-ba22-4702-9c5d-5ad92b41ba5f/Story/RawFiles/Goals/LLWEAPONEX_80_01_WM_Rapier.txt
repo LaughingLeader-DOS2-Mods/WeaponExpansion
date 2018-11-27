@@ -1,0 +1,49 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_ToggledScripts_RegisterOnce();
+KBSECTION
+PROC
+LLWEAPONEX_ToggledScripts_RegisterOnce()
+AND
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce("LLWEAPONEX_80_01_WM_Rapier", "LLWEAPONEX_Rapier")
+THEN
+GoalCompleted;
+
+//REGION OFFHAND_EVENTS
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Rapier", "DuelistStance")
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+NOT LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
+
+IF
+ItemEquipped(_Item, _Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, "LLWEAPONEX_Rapier", "DuelistStance", _)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+THEN
+LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
+
+IF
+ItemUnEquipped(_Item, _Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Rapier", "DuelistStance")
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

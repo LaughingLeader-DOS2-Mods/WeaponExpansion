@@ -56,6 +56,10 @@ add name "Metal Quarterstaff",""
 new namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal_Pipe"
 add name "Metal Pipe",""
 
+new namegroup "WPN_LLWEAPONEX_Rapier_1H"
+add name "Rapier",""
+add name "Estoc",""
+
 new namegroup "WPN_LLWEAPONEX_Beginner_Rod"
 add name "Weak Rod",""
 

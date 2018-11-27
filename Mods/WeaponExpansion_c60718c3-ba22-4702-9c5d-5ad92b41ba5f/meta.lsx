@@ -12,7 +12,7 @@
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="LeaderLib - Definitive Edition" type="22" />
                             <attribute id="UUID" value="7e737d2f-31d2-4751-963f-be6ccc59cd0c" type="22" />
-                            <attribute id="Version" value="285605888" type="4" />
+                            <attribute id="Version" value="285671424" type="4" />
                         </node>
                         <node id="ModuleShortDesc">
                             <attribute id="Folder" value="AnimationsPlus_326b8784-edd7-4950-86d8-fcae9f5c457c" type="30" />

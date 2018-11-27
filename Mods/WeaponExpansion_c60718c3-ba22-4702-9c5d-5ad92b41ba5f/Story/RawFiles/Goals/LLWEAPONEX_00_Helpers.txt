@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+QRY
+LLWEAPONEX_QRY_ItemIsWeapon((ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+GetTemplate(_Item, _Template)
+AND
+StringContains(_Template, "Shield", 0)
+AND
+StringContains(_Template, "WPN_", 1)
+THEN
+DB_NOOP(1);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

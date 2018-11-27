@@ -10,6 +10,7 @@ PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
 THEN
 
+//Greatbow
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Greatbow", "<font color='#00FF7F'>Greatbow Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 1, "<font color='#DDFFB3'>Novice</font>");
@@ -24,25 +25,38 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Greatbow", "LLWEAPONEX_
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 0, "PiercingShot", "Any");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 1, "KnockbackShot", "Any");
 
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   1, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_DWARF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   0, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_DWARF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     1, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_ELF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     0, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_ELF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   1, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_HUMAN_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   0, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_HUMAN_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  1, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_LIZARD_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  0, "LLWEAPONEX_WS_GREATBOWS_PIERCINGSHOT_LIZARD_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_DWARF_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_DWARF_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_ELF_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_ELF_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_HUMAN_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_HUMAN_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_LIZARD_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_LIZARD_MALE");
 
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   1, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_DWARF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   0, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_DWARF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     1, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_ELF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     0, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_ELF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   1, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_HUMAN_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   0, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_HUMAN_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  1, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_LIZARD_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  0, "LLWEAPONEX_WS_GREATBOWS_KNOCKBACK_LIZARD_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_DWARF_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_DWARF_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_ELF_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_ELF_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_HUMAN_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_HUMAN_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_LIZARD_FEMALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_LIZARD_MALE");
 
-//Runeblades
+//Rapier
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Rapier", "<font color='#2DF9FF'>Rapier Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 0, "<font color='#FDFFEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 1, "<font color='#9DFCFF'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 2, "<font color='#6CE3F5'>Journeyman Runekeeper</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 3, "<font color='#6CF5E9'>Expert Runekeeper</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 4, "<font color='#33FFB8'>Master of Runes</font>");
+
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_Exp", "LLWEAPONEX_WM_Rapier_ExpMax", "LLWEAPONEX_WM_Rapier_Level");
+
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Custom"); // Added when the offhand is empty
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST");
+
+//Runeblade
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Runeblade", "<font color='#2DF9FF'>Runeblade Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 1, "<font color='#9DFCFF'>Novice</font>");
