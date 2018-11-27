@@ -56,6 +56,9 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Rapier", "LLWEAPONEX_WM
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Custom"); // Added when the offhand is empty
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST");
 
+//Statuses applied by mastery skills that should be removed when the mastery is inactive
+DB_LLWEAPONEX_WeaponMastery_MasteryRelatedStatuses("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
+
 //Runeblade
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Runeblade", "<font color='#2DF9FF'>Runeblade Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 0, "<font color='#FDFFEA'>Beginner</font>");
@@ -75,6 +78,8 @@ DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEA
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON",          "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION",   "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM",           "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+
+DB_LLWEAPONEX_WeaponMastery_MasteryRelatedStatuses("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 //END_REGION
 
 //REGION QUERIES
@@ -398,6 +403,7 @@ AND
 DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
 THEN
 RemoveStatus(_Player, _Status);
+LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses(_Player, _WeaponType, _SkillID);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status);
 
 PROC
@@ -405,8 +411,8 @@ LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponTyp
 AND
 DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
 THEN
-//CharacterRemoveSkill(_Player, _Skill);
 RemoveStatus(_Player, _Status);
+LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses(_Player, _WeaponType, _SkillID);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status);
 
 PROC
@@ -414,9 +420,17 @@ LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponTyp
 AND
 DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
 THEN
-//CharacterRemoveSkill(_Player, _Skill);
 RemoveStatus(_Player, _Status);
+LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses(_Player, _WeaponType, _SkillID);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
+
+//Statuses applied by mastery skills
+PROC
+LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryRelatedStatuses(_WeaponType, _SkillID, _Status)
+THEN
+RemoveStatus(_Player, _Status);
 //END_REGION
 
 //REGION DEFAULT_WEAPON_SKILLS

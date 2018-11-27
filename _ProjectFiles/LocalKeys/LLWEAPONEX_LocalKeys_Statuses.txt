@@ -47,3 +47,7 @@ LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Weapon Mastery - Gain experience with this weapon type as you use it in battle
 LLWEAPONEX_RUNEBLADE_MASTERY_POISON_DisplayName	Runeblade Mastery
 LLWEAPONEX_RUNEBLADE_MASTERY_POISON_Description	Character's <font color='#2DF9FF'>Runeblade Mastery</font> level allows them to control poison with finer precision.
+LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
+LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is using the stance of a duelist.
+LLWEAPONEX_DUELIST_BONUS_COOLDOWN_DisplayName	Duelist Bonus Cooldown
+LLWEAPONEX_DUELIST_BONUS_COOLDOWN_Description	Backstabs won't grant extra AP while the character recovers.
