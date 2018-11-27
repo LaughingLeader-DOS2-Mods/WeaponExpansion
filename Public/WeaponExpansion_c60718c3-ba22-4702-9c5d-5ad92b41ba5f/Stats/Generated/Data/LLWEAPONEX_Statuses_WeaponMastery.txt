@@ -18,6 +18,7 @@ data "Act" "1"
 data "Act part" "0"
 data "DodgeBoost" "20"
 data "MovementSpeedBoost" "10"
+data "DamageBoost" "10"
 
 new entry "LLWEAPONEX_DUELIST_BONUS_COOLDOWN"
 type "StatusData"
