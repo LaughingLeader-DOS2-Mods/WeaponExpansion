@@ -3,54 +3,59 @@ LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit
 LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power
 LLWEAPONEX_COMBAT_SHIELD_ARMOR_Description	Character has increased armor from a combat shield.
 LLWEAPONEX_COMBAT_SHIELD_ARMOR_DisplayName	Combat Shield Armor - Increases physical and magic armor
-LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand
 LLWEAPONEX_COMBAT_SHIELD_RESTORE_DisplayName	Armor Rejuvenation
 LLWEAPONEX_COPYLASTSKILL_DisplayName	Copy Last Skill
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_DisplayName	Marked for Death
 LLWEAPONEX_DEATH_SENTENCE_Description	Character has been marked for death.<br>If killed, the character will return as a friendly <font color='#73f6ff'>Revenant<font> for 2 turns.
 LLWEAPONEX_DEATH_SENTENCE_DisplayName	Death Sentence
-LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Damage [1]<br>Projectile_Fireball:Damage [2]		
-LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status		
+LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Damage [1]<br>Projectile_Fireball:Damage [2]
+LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status
 LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.
 LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles
-LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taking [1] per turn.		
-LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane		
+LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taking [1] per turn.
+LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane
 LLWEAPONEX_DRAW_ARROW_DisplayName	Draw Arrow
+LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand
+LLWEAPONEX_DUELIST_BONUS_COOLDOWN_Description	Backstabs won't grant extra AP while the character recovers.
+LLWEAPONEX_DUELIST_BONUS_COOLDOWN_DisplayName	Duelist Bonus Cooldown
 LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!
 LLWEAPONEX_EVAPORATE_DisplayName	Evaporated
-LLWEAPONEX_FINESSE_TO_STRENGTH_DisplayName	Finesse Conversion - Finesse bonuses from this weapon Strength		
-LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target		
-LLWEAPONEX_INTELLIGENCE_TO_FINESSE_DisplayName	Intelligence Conversion - Intelligence bonuses from this weapon grant Finesse	
-LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.		
-LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging		
-LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!		
-LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed		
+LLWEAPONEX_FINESSE_TO_INTELLIGENCE_DisplayName	Finesse Conversion - Finesse bonuses from this weapon grant Intelligence
+LLWEAPONEX_FINESSE_TO_STRENGTH_DisplayName	Finesse Conversion - Finesse bonuses from this weapon grant Strength
+LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target
+LLWEAPONEX_INTELLIGENCE_TO_FINESSE_DisplayName	Intelligence Conversion - Intelligence bonuses from this weapon grant Finesse
+LLWEAPONEX_INTELLIGENCE_TO_STRENGTH_DisplayName	Intelligence Conversion - Intelligence bonuses from this weapon grant Strength
+LLWEAPONEX_KATANA_FINISHER_APPLY_DisplayName	Finisher - Temporarily apply a piercing vulnerability to dying targets
+LLWEAPONEX_KATANA_FINISHER_DisplayName	Finisher
+LLWEAPONEX_KATANA_FINISHER_Description	Character's <font color='#c80030'>Piercing Resistance</font> lowers as <font color='#DC143C'>Vitality</font> drops. Removed after Attacker's turn ends.
+LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.
+LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging
+LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
+LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed
+LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a cursed, foreign blade.<br><font color='#8A2BE2'>As health drops, Critical Chance rises, but Resistances faulter.</font>
+LLWEAPONEX_MURAMASA_CURSE_DisplayName	Curse of the Muramasa
+LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is using the stance of a duelist.
+LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
 LLWEAPONEX_ROD_SKILL_BASE_DisplayName	Rod Skill - On command, rods can launch projectiles like wands
-LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.		
-LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound		
+LLWEAPONEX_RUNEBLADE_MASTERY_POISON_Description	Character's <font color='#2DF9FF'>Runeblade Mastery</font> level allows them to control poison with finer precision.
+LLWEAPONEX_RUNEBLADE_MASTERY_POISON_DisplayName	Runeblade Mastery
+LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.
+LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound
 LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.
 LLWEAPONEX_SHOCKED_RESISTANCE_DisplayName	Shock Resistance
-LLWEAPONEX_SOUL_BURN_1_DisplayName	Soul Burn		
-LLWEAPONEX_SOUL_BURN_2_DisplayName	Soul Burn II		
-LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III		
-LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV		
-LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V		
-LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.		
-LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_DisplayName	Strength Conversion - Strength bonuses from this weapon grant Intelligence	
+LLWEAPONEX_SOUL_BURN_1_DisplayName	Soul Burn
+LLWEAPONEX_SOUL_BURN_2_DisplayName	Soul Burn II
+LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III
+LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV
+LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V
+LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.
+LLWEAPONEX_STRENGTH_TO_FINESSE_DisplayName	Strength Conversion - Strength bonuses from this weapon grant Finesse
+LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_DisplayName	Strength Conversion - Strength bonuses from this weapon grant Intelligence
 LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.
 LLWEAPONEX_TARRED_DisplayName	Tarred
 LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.
-LLWEAPONEX_TRIPPING_DisplayName	Tripping		
+LLWEAPONEX_TRIPPING_DisplayName	Tripping
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Weapon Mastery - Gain experience with this weapon type as you use it in battle
-LLWEAPONEX_RUNEBLADE_MASTERY_POISON_DisplayName	Runeblade Mastery
-LLWEAPONEX_RUNEBLADE_MASTERY_POISON_Description	Character's <font color='#2DF9FF'>Runeblade Mastery</font> level allows them to control poison with finer precision.
-LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
-LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is using the stance of a duelist.
-LLWEAPONEX_DUELIST_BONUS_COOLDOWN_DisplayName	Duelist Bonus Cooldown
-LLWEAPONEX_DUELIST_BONUS_COOLDOWN_Description	Backstabs won't grant extra AP while the character recovers.
-LLWEAPONEX_MURAMASA_CURSE_DisplayName	Curse of the Muramasa
-LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a cursed, foreign blade.<br><font color='#8A2BE2'>As health drops, Critical Chance rises, but Resistances faulter.</font>
-LLWEAPONEX_KATANA_FINISHER_DisplayName	Finisher - Deal bonus damage that scales with the target's missing vitality

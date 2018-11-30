@@ -29,8 +29,11 @@ DB_LLWEAPONEX_BonusConversion_WeaponTags("LLWEAPONEX_Runeblade", "LLWEAPONEX_STR
 DB_LLWEAPONEX_BonusConversion_WeaponTags("LLWEAPONEX_Rod", "LLWEAPONEX_STRENGTH_TO_INTELLIGENCE");
 
 DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_STRENGTH_TO_INTELLIGENCE", "Strength", "Intelligence");
+DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_STRENGTH_TO_FINESSE", "Strength", "Finesse");
 DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_FINESSE_TO_STRENGTH", "Finesse", "Strength");
+DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_FINESSE_TO_INTELLIGENCE", "Finesse", "Intelligence");
 DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_INTELLIGENCE_TO_FINESSE", "Intelligence", "Finesse");
+DB_LLWEAPONEX_BonusConversion_Vars("Attribute", "LLWEAPONEX_INTELLIGENCE_TO_STRENGTH", "Intelligence", "Strength");
 
 /*
 DB_LLWEAPONEX_BonusConversion_SoftCap("Attribute", 40);

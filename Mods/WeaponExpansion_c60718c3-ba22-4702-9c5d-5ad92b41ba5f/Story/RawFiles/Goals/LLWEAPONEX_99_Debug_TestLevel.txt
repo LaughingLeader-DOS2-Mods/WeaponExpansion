@@ -2,6 +2,7 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 //DB_GameHour(300000); //5 minutes
+/*
 SysClear("DB_GameHour", 1);
 DB_GameHour(120000);
 
@@ -15,6 +16,7 @@ TimerCancel("TimeOfDay");
 StartTimeOfDayTimerLoop();
 
 TriggerResetAtmosphere(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1);
+*/
 //TRIGGERGUID_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1
 //ATMOSPHERERESOURCEGUID_LLWEAPONEX_ATM_Desert_01_CameraEdit_57690f2e-466a-4d38-a071-74b109cedef4
 //ATMOSPHERERESOURCEGUID_LLWEAPONEX_ATM_PBR_DOS2_Night_Blue_CameraEdit_f2e42e22-7126-47cc-9ded-5770cc83507c
@@ -32,6 +34,7 @@ DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b6
 //DB_LLWEAPONEX_Debug_Atmospheres("Storm", "09edc0f3-c27e-414a-a053-a4c1d2d1271a");
 //DB_LLWEAPONEX_Debug_Atmospheres("BloodForest", "4b41cfe5-35bc-4473-b50c-59301e38ef9f");
 KBSECTION
+/*
 IF
 GameStarted(_,_)
 AND
@@ -77,6 +80,7 @@ AND
 DB_LLWEAPONEX_Debug_TimeChanged(_Val)
 THEN
 NOT DB_LLWEAPONEX_Debug_TimeChanged(_Val);
+*/
 
 IF
 TextEventSet("llweap_runepreview")
@@ -121,12 +125,14 @@ THEN
 CharacterTransformAppearanceToWithEquipmentSet(_Host, _Host, "Class_LLWEAPONEX_RunicKnight_Debug_Humans", 0);
 */
 
+/*
 IF
 TextEventSet("llweap_tptrigger")
 AND
 CharacterGetHostCharacter(_Host)
 THEN
 TeleportTo(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1, _Host);
+*/
 
 IF
 CharacterUsedSkill(_Character, _, _, _)
