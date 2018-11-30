@@ -100,6 +100,15 @@ THEN
 NOT DB_LLWEAPONEX_Skills_Temp_ChaosChargeDrawing(_Character, _Surface, _SurfaceActionHandle);
 StopDrawSurfaceOnPath(_SurfaceActionHandle);
 CreateSurface(_Character, _Surface, 1.0, 12.0);
+
+IF
+CharacterStartAttackObject((CHARACTERGUID)_Defender, _, _Attacker)
+AND
+CharacterGetEquippedWeapon(_Attacker, (ITEMGUID)_Weapon)
+AND
+IsTagged(_Weapon, "LLWEAPONEX_Katana", 1)
+THEN
+CharacterCharacterSetEvent(_Attacker, _Defender, "LLWEAPONEX_Katana_OnAttack");
 //END_REGION
 
 

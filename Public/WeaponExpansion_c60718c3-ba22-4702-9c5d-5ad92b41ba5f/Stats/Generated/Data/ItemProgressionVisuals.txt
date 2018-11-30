@@ -877,6 +877,24 @@ add levelgroup 0,0,"All"
 add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
 add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
 
+new itemgroup "WPN_LLWEAPONEX_Katana_1H"
+
+add levelgroup 0,0,"All"
+add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
+add namegroup "WPN_LLWEAPONEX_Katana_1H","",""
+
+new itemgroup "WPN_LLWEAPONEX_Katana_2H"
+
+add levelgroup 0,0,"All"
+add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+
+add levelgroup 0,0,"All"
+add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa","",""
+
 new itemgroup "WPN_LLWEAPONEX_Rapier_1H_A"
 
 add levelgroup 0,0,"All"

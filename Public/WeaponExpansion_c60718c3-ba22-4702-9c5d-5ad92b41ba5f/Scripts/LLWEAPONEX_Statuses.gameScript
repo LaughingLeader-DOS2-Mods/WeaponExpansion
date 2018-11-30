@@ -2,6 +2,18 @@ INIT
 
 EVENTS
 
+EVENT LLWEAPONEX_Katana_Finisher_Apply
+VARS
+	CHARACTER:_Attacker
+	CHARACTER:_Defender
+	ITEM:_Weapon
+ON
+	//OnCharacterStartAttackObject(_Defender, _, _, _Attacker)
+	OnCharacterCharacterEvent(_Attacker, _Defender, "LLWEAPONEX_Katana_OnAttack")
+ACTIONS
+	CharacterApplyStatus(_Defender, LLWEAPONEX_KATANA_FINISHER, 1, 0, _Attacker)
+	CharacterApplyStatus(_Attacker, DOUBLE_DAMAGE, 1, 0, _Attacker)
+
 EVENT LLWEAPONEX_FumbleRoll
 VARS
 	CHARACTER:_Attacker

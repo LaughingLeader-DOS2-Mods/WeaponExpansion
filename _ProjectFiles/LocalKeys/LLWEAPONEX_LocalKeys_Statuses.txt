@@ -51,3 +51,6 @@ LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
 LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is using the stance of a duelist.
 LLWEAPONEX_DUELIST_BONUS_COOLDOWN_DisplayName	Duelist Bonus Cooldown
 LLWEAPONEX_DUELIST_BONUS_COOLDOWN_Description	Backstabs won't grant extra AP while the character recovers.
+LLWEAPONEX_MURAMASA_CURSE_DisplayName	Curse of the Muramasa
+LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a cursed, foreign blade.<br><font color='#8A2BE2'>As health drops, Critical Chance rises, but Resistances faulter.</font>
+LLWEAPONEX_KATANA_FINISHER_DisplayName	Finisher - Deal bonus damage that scales with the target's missing vitality

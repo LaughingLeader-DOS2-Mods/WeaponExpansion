@@ -56,6 +56,15 @@ add name "Metal Quarterstaff",""
 new namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal_Pipe"
 add name "Metal Pipe",""
 
+new namegroup "WPN_LLWEAPONEX_Katana_1H"
+add name "Katana",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H"
+add name "Odachi",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+add name "Muramasa, The Cursed Blade",""
+
 new namegroup "WPN_LLWEAPONEX_Rapier_1H"
 add name "Rapier",""
 add name "Estoc",""
