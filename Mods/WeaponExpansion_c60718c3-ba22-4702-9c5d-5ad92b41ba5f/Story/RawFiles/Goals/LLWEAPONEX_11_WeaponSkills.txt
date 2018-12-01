@@ -111,6 +111,15 @@ THEN
 CharacterCharacterSetEvent(_Attacker, _Defender, "LLWEAPONEX_Katana_OnAttack");
 //END_REGION
 
+IF
+CharacterUsedSkill(_Character, "Teleportation_LLWEAPONEX_InstantTransmission", _, _)
+THEN
+ObjectSetFlag(_Character, "LLWEAPONEX_BlockTeleportFalling");
+
+IF
+SkillCast(_Character, "Teleportation_LLWEAPONEX_InstantTransmission", _, _)
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_BlockTeleportFalling");
 
 EXITSECTION
 

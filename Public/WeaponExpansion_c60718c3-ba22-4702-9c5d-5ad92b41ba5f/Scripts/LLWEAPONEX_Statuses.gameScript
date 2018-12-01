@@ -13,7 +13,23 @@ IF "c1"
 	HasFlag(_Source, "LLWEAPONEX_Katana_FinisherEnabled")
 THEN
 	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY, 0, 0, _Source)
+ENDIF	
+
+EVENT LLWEAPONEX_BlockTeleportFalling
+VARS
+	CHARACTER:_Character
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
+ON
+	FetchCharacterApplyStatusData(_Character, TELEPORT_FALLING)
+ACTIONS
+	Set(_Result, TELEPORT_FALLING)
+IF "c1"
+	HasFlag(_Character, "LLWEAPONEX_BlockTeleportFalling")
+THEN
+	//Set(_Result, null)
 ENDIF
+	RETURN(_RemoveList, _Result, null)
 
 EVENT LLWEAPONEX_FumbleRoll
 VARS

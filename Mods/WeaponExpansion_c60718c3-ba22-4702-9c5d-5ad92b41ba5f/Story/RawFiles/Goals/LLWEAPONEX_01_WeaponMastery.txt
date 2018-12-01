@@ -53,22 +53,19 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 4, "<font color='#FF3
 
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Katana", "LLWEAPONEX_WM_Katana_Exp", "LLWEAPONEX_WM_Katana_ExpMax", "LLWEAPONEX_WM_Katana_Level");
 
- // Applied as a flag, which is then read from LLWEAPONEX_Statuses.gameScript when LLWEAPONEX_KATANA_FINISHER_APPLY is applying
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Finisher", "Tag");
 DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Finisher", "LLWEAPONEX_Katana_FinisherEnabled", "Tag");
 
 //Quarterstaff
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Quarterstaff", "<font color='#FF2D2D'>Quarterstaff Mastery</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 0, "<font color='#FFEAEA'>Beginner</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 1, "<font color='#FF9D9D'>Novice</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 2, "<font color='#F56C6C'>Journeyman Staff Monk</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 3, "<font color='#F44E4E'>Expert Staff Monk</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 4, "<font color='#FF3333'>Quarterstaff Master</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Quarterstaff", "<font color='#FD8826'>Quarterstaff Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 0, "<font color='#FDC89B'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 1, "<font color='#FBBC7F'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 2, "<font color='#F5A36C'>Journeyman Staff Monk</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 3, "<font color='#F49C4E'>Expert Staff Monk</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 4, "<font color='#FF9D33'>Master Monk of Staves</font>");
 
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Quarterstaff", "LLWEAPONEX_WM_Quarterstaff_Exp", "LLWEAPONEX_WM_Quarterstaff_ExpMax", "LLWEAPONEX_WM_Quarterstaff_Level");
 
- // Applied as a flag, which is then read from LLWEAPONEX_Statuses.gameScript when LLWEAPONEX_KATANA_FINISHER_APPLY is applying
- //
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Quarterstaff", 1, "LegSweep", "Any");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Quarterstaff", "LegSweep", "LLWEAPONEX_WS_QUARTERSTAFF_LEGSWEEP");
 

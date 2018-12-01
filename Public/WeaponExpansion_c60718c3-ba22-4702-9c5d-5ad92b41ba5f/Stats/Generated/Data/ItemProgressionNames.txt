@@ -56,6 +56,9 @@ add name "Metal Quarterstaff",""
 new namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal_Pipe"
 add name "Metal Pipe",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+add name "Power Pole",""
+
 new namegroup "WPN_LLWEAPONEX_Katana_1H"
 add name "Katana",""
 
