@@ -1,20 +1,19 @@
 INIT
 
 EVENTS
-
-/*
-EVENT LLWEAPONEX_Katana_Finisher_Apply
+	
+EVENT LLWEAPONEX_Katana_OnHit
 VARS
-	CHARACTER:_Attacker
-	CHARACTER:_Defender
-	ITEM:_Weapon
+	CHARACTER:_Target
+	CHARACTER:_Source
 ON
-	//OnCharacterStartAttackObject(_Defender, _, _, _Attacker)
-	OnCharacterCharacterEvent(_Attacker, _Defender, "LLWEAPONEX_Katana_OnAttack")
+	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit")
 ACTIONS
-	CharacterApplyStatus(_Defender, LLWEAPONEX_KATANA_FINISHER, 1, 0, _Attacker)
-	CharacterApplyStatus(_Attacker, DOUBLE_DAMAGE, 1, 0, _Attacker)
-*/
+IF "c1"
+	HasFlag(_Source, "LLWEAPONEX_Katana_FinisherEnabled")
+THEN
+	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY, 0, 0, _Source)
+ENDIF
 
 EVENT LLWEAPONEX_FumbleRoll
 VARS

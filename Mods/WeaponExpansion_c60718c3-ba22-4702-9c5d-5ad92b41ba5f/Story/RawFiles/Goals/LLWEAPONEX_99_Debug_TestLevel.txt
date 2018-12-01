@@ -273,8 +273,8 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status ["
 
 IF
 CharacterStatusAttempt(_Character, _Status, (CHARACTERGUID)_Causee)
-AND
-CharacterGetHostCharacter(_Causee)
+//AND
+//CharacterGetHostCharacter(_Causee)
 AND
 CharacterGetDisplayName(_Causee, _, _Cause)
 AND
@@ -284,8 +284,8 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status ["
 
 IF
 CharacterStatusApplied(_Character, _Status, (CHARACTERGUID)_Causee)
-AND
-CharacterGetHostCharacter(_Causee)
+//AND
+//haracterGetHostCharacter(_Causee)
 AND
 CharacterGetDisplayName(_Causee, _, _Cause)
 AND
@@ -302,8 +302,8 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status ["
 
 IF
 ItemStatusAttempt(_Item, _Status, (CHARACTERGUID)_Causee)
-AND
-CharacterGetHostCharacter(_Causee)
+//AND
+//CharacterGetHostCharacter(_Causee)
 AND
 CharacterGetDisplayName(_Causee, _, _Cause)
 AND
@@ -313,8 +313,8 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [",_Sta
 
 IF
 ItemStatusChange(_Item, _Status, (CHARACTERGUID)_Causee)
-AND
-CharacterGetHostCharacter(_Causee)
+//AND
+//CharacterGetHostCharacter(_Causee)
 AND
 CharacterGetDisplayName(_Causee, _, _Cause)
 AND

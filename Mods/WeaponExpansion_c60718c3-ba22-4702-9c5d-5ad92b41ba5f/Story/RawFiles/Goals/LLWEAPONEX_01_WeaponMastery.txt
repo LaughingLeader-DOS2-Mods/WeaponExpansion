@@ -43,13 +43,42 @@ DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot",
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_LIZARD_FEMALE");
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_LIZARD_MALE");
 
+//Katana
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Katana", "<font color='#FF2D2D'>Katana Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 0, "<font color='#FFEAEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 1, "<font color='#FF9D9D'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 2, "<font color='#F56C6C'>Journeyman Blademaster</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 3, "<font color='#F44E4E'>Expert Blademaster</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 4, "<font color='#FF3333'>Master of Blades</font>");
+
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Katana", "LLWEAPONEX_WM_Katana_Exp", "LLWEAPONEX_WM_Katana_ExpMax", "LLWEAPONEX_WM_Katana_Level");
+
+ // Applied as a flag, which is then read from LLWEAPONEX_Statuses.gameScript when LLWEAPONEX_KATANA_FINISHER_APPLY is applying
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Finisher", "Tag");
+DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Finisher", "LLWEAPONEX_Katana_FinisherEnabled", "Tag");
+
+//Quarterstaff
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Quarterstaff", "<font color='#FF2D2D'>Quarterstaff Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 0, "<font color='#FFEAEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 1, "<font color='#FF9D9D'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 2, "<font color='#F56C6C'>Journeyman Staff Monk</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 3, "<font color='#F44E4E'>Expert Staff Monk</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 4, "<font color='#FF3333'>Quarterstaff Master</font>");
+
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Quarterstaff", "LLWEAPONEX_WM_Quarterstaff_Exp", "LLWEAPONEX_WM_Quarterstaff_ExpMax", "LLWEAPONEX_WM_Quarterstaff_Level");
+
+ // Applied as a flag, which is then read from LLWEAPONEX_Statuses.gameScript when LLWEAPONEX_KATANA_FINISHER_APPLY is applying
+ //
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Quarterstaff", 1, "LegSweep", "Any");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Quarterstaff", "LegSweep", "LLWEAPONEX_WS_QUARTERSTAFF_LEGSWEEP");
+
 //Rapier
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Rapier", "<font color='#2DF9FF'>Rapier Mastery</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 0, "<font color='#FDFFEA'>Beginner</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 1, "<font color='#9DFCFF'>Novice</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 2, "<font color='#6CE3F5'>Journeyman Runekeeper</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 3, "<font color='#6CF5E9'>Expert Runekeeper</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 4, "<font color='#33FFB8'>Master of Runes</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Rapier", "<font color='#F8FF2D'>Rapier Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 0, "<font color='#FEFFEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 1, "<font color='#FFF59D'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 2, "<font color='#F5F06C'>Journeyman Fencer</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 3, "<font color='#F5E06C'>Expert Fencer</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 4, "<font color='#FFE933'>Master Fencer</font>");
 
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_Exp", "LLWEAPONEX_WM_Rapier_ExpMax", "LLWEAPONEX_WM_Rapier_Level");
 
@@ -57,11 +86,11 @@ DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistSta
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST");
 
 //Statuses applied by mastery skills that should be removed when the mastery is inactive
-DB_LLWEAPONEX_WeaponMastery_MasteryRelatedStatuses("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
+DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
 
 //Runeblade
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Runeblade", "<font color='#2DF9FF'>Runeblade Mastery</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 0, "<font color='#FDFFEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Runeblade", "<font color='#40E0D0'>Runeblade Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 0, "<font color='#eafffe'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 1, "<font color='#9DFCFF'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 2, "<font color='#6CE3F5'>Journeyman Runekeeper</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 3, "<font color='#6CF5E9'>Expert Runekeeper</font>");
@@ -79,7 +108,7 @@ DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION",   "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM",           "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryRelatedStatuses("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 //END_REGION
 
 //REGION QUERIES
@@ -168,16 +197,19 @@ LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
 PROC
 LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
 AND
-DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, "Any")
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
+THEN
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType(_Player, _WeaponType, _SkillID, _Type);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Any")
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill(_WeaponType, _SkillID)
 THEN
 LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
-AND
-DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, "Any")
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Any")
 AND
 LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill(_WeaponType, _SkillID)
 AND
@@ -186,6 +218,20 @@ AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag)
 THEN
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Tag")
+AND
+DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Tag, "Tag")
+THEN
+SetTag(_Player, _Tag);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Flag")
+AND
+DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Flag, "Flag")
+THEN
+ObjectSetFlag(_Player, _Flag);
 
 PROC
 LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
@@ -424,11 +470,25 @@ RemoveStatus(_Player, _Status);
 LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses(_Player, _WeaponType, _SkillID);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
 
+PROC
+LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Tag, "Tag")
+THEN
+ClearTag(_Player, _Tag);
+
+PROC
+LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Flag, "Flag")
+THEN
+ObjectClearFlag(_Player, _Flag);
+
 //Statuses applied by mastery skills
 PROC
 LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryRelatedStatuses(_WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses(_WeaponType, _SkillID, _Status)
 THEN
 RemoveStatus(_Player, _Status);
 //END_REGION
@@ -615,8 +675,23 @@ IntegertoString(_MasteryLevel, _LevelStr)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryNames(_WeaponType, _MasteryName)
 THEN
-//LeaderLog_LogTarget("NOTIFICATION", _Player, "<font color='#f7ba14'>Weapon Mastery <font color='#00FF7F'>",_WeaponType,"</font> leveled up to <font color='#FFFF00'>",_LevelStr,"</font>!</font>");
 LeaderLog_LogTarget("STATUS", _Player, "",_MasteryName," <font color='#f7ba14'>increased to level</font> <font color='#FFFF00'>",_LevelStr,"</font>");
+
+/*
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_MasteryLevel)
+AND
+IntegertoString(_MasteryLevel, _LevelStr)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryNames(_WeaponType, _MasteryName)
+AND
+LeaderLog_QRY_Log("COMBINE", _MasteryName," <font color='#f7ba14'>increased to level</font> <font color='#FFFF00'>",_LevelStr,"</font>")
+AND
+DB_LeaderLog_Temp_CombinedString(_Str)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_Str);
+ShowNotification(_Player, _Str);
+*/
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_MasteryLevel)

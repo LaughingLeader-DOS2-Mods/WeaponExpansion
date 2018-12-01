@@ -249,6 +249,8 @@ new subtable "1,1"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
 new subtable "0,3;1,2"
@@ -737,6 +739,8 @@ new subtable "-1"
 object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
 new subtable "-2"
 object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_CheatQuivers"
 new subtable "-1"

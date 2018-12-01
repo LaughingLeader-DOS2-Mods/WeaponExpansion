@@ -1,4 +1,20 @@
 
+new entry "LLWEAPONEX_KATANA_MASTERY_FINISHER"
+type "StatusData"
+data "StatusType" "CONSUME"
+data "DisplayName" " "
+data "Description" ""
+data "Icon" "unknown"
+data "StatsId" "Stats_LLWEAPONEX_KatanaMastery_Finisher"
+data "StackId" "Stack_LLWEAPONEX_KatanaMastery_Finisher"
+
+new entry "Stats_LLWEAPONEX_KatanaMastery_Finisher"
+type "Potion"
+data "Act" "1"
+data "Act part" "0"
+data "BoostConditions" "OnWeaponKnife"
+data "BonusWeapon" "LLWEAPONEX_Boost_Katana_OnHit"
+
 new entry "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST"
 type "StatusData"
 data "StatusType" "CONSUME"

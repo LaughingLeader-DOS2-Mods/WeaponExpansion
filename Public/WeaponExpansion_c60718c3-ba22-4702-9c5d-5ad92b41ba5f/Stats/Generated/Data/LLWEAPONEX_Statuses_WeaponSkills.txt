@@ -110,6 +110,13 @@ using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "StackId" "Stack_LLWEAPONEX_WS_Greatbow_Knockback"
 data "Skills" "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male"
 
+new entry "LLWEAPONEX_WS_QUARTERSTAFF_LEGSWEEP"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "StackId" "Stack_LLWEAPONEX_WS_Quarterstaff_LegSweep"
+data "Skills" "Shout_LLWEAPONEX_LegSweep"
+
 new entry "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST"
 type "StatusData"
 data "StatusType" "CONSUME"

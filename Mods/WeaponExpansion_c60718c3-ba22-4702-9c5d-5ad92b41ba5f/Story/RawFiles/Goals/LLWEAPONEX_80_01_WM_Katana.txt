@@ -1,9 +1,19 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
+LLWEAPONEX_ToggledScripts_RegisterOnce();
 KBSECTION
+PROC
+LLWEAPONEX_ToggledScripts_RegisterOnce()
+AND
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce("LLWEAPONEX_80_01_WM_Katana", "LLWEAPONEX_Katana")
+THEN
+GoalCompleted;
 
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
+THEN
+CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit");
 EXITSECTION
 
 ENDEXITSECTION
