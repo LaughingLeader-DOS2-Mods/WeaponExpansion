@@ -10,7 +10,7 @@ ON
 	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit")
 ACTIONS
 IF "c1"
-	HasFlag(_Source, "LLWEAPONEX_Katana_FinisherEnabled")
+	IsTagged(_Source, "LLWEAPONEX_Katana_FinisherEnabled")
 THEN
 	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY, 0, 0, _Source)
 ENDIF	

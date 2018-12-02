@@ -256,19 +256,33 @@ add equipment entry "SCROLL_Resurrect"
 add equipmentgroup
 add equipment entry "CONT_Backpack_A_SourceHunter"
 
-new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Preview"
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview"
 add equipmentgroup
-add equipment entry "ARM_Fighter_Helmet"
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_Blindfold"
 add equipmentgroup
-add equipment entry "ARM_Fighter_UpperBody"
+add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
-add equipment entry "ARM_Fighter_LowerBody"
+add equipment entry "ARM_Civilian_LowerBody"
 add equipmentgroup
-add equipment entry "ARM_Fighter_Gloves"
+add equipment entry "ARM_Civilian_Gloves"
 add equipmentgroup
-add equipment entry "ARM_Fighter_Boots"
+add equipment entry "ARM_Civilian_Boots"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Preview"
+add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Wood_Preview"
+
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Metal_Preview"
+add equipmentgroup
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_Blindfold"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Civilian_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Civilian_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Civilian_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Metal_Preview"
 
 new equipment "Class_LLWEAPONEX_Blademaster_Start"
 add equipmentgroup
@@ -435,6 +449,112 @@ add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Katana_1H_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Katana_1H_Preview"
+
+new equipment "Class_LLWEAPONEX_DualShields_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_DualShields_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_DualShields_Preview_Dwarves"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Fighter_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_DualShields_Dwarves_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Dwarves_A"
+
+new equipment "Class_LLWEAPONEX_DualShields_Preview_Elves"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Fighter_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_DualShields_Elves_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Elves_B"
+
+new equipment "Class_LLWEAPONEX_DualShields_Preview_Humans"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Fighter_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_DualShields_Humans_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Humans_A"
+
+new equipment "Class_LLWEAPONEX_DualShields_Preview_Lizards"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Fighter_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Fighter_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_DualShields_Lizards_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Lizards_C"
 
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup

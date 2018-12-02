@@ -1931,4 +1931,4 @@ ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Inte
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

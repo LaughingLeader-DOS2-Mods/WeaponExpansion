@@ -369,4 +369,4 @@ NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemp
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

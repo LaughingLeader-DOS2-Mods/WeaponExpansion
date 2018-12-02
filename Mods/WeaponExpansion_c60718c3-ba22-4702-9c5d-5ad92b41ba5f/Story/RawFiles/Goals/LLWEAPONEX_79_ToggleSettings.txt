@@ -111,4 +111,4 @@ LLWEAPONEX_ToggleSettings_DeactivateScript(_Flag);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

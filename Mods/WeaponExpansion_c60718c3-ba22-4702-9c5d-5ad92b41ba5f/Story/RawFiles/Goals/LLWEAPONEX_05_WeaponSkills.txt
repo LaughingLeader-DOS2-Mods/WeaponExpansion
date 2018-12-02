@@ -124,4 +124,4 @@ ObjectClearFlag(_Character, "LLWEAPONEX_BlockTeleportFalling");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

@@ -853,11 +853,11 @@ add levelgroup 1,30,"Divine"
 add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
 
-new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood"
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted"
 
 add levelgroup 0,0,"All"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
-add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood","",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal"
 
@@ -865,11 +865,11 @@ add levelgroup 0,0,"All"
 add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
 add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
 
-new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal_Pipe"
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted"
 
 add levelgroup 0,0,"All"
 add rootgroup "0067f3f6-1dab-49e6-a5af-addc10071730",""
-add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal_Pipe","",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Preview"
 
@@ -1516,6 +1516,12 @@ new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
 add levelgroup 0,0,"All"
 add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
+
+add levelgroup 0,0,"All"
+add rootgroup "60884e3d-45cb-4849-b35e-d24064386b9f",""
+add namegroup "ARM_UNIQUE_Blindfolds","",""
 
 new itemgroup "WPN_LLWEAPONEX_BattleBook"
 

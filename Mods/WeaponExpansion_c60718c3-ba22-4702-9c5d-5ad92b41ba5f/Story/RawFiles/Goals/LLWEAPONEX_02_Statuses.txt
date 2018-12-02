@@ -282,4 +282,4 @@ RemoveStatus(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK");
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

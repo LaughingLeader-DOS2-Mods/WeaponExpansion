@@ -33,8 +33,8 @@ LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet R
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed
-LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a cursed, foreign blade.<br><font color='#8A2BE2'>As health drops, Critical Chance rises, but Resistances faulter.</font>
-LLWEAPONEX_MURAMASA_CURSE_DisplayName	Curse of the Muramasa
+LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Accuracy rise, but Resistances faulter.</font>
+LLWEAPONEX_MURAMASA_CURSE_DisplayName	<font color='#8A2BE2'>Curse of the Muramasa</font>
 LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is using the stance of a duelist.
 LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
 LLWEAPONEX_ROD_SKILL_BASE_DisplayName	Rod Skill - On command, rods can launch projectiles like wands
@@ -59,3 +59,5 @@ LLWEAPONEX_TRIPPING_DisplayName	Tripping
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Weapon Mastery - Gain experience with this weapon type as you use it in battle
+LLWEAPONEX_HELMSPLITTER_DisplayName	Physical Armor Reduction
+LLWEAPONEX_HELMSPLITTER_Description	Character's Physical Armor is being lowered.

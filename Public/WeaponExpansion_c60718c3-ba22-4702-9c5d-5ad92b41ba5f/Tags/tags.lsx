@@ -357,7 +357,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Katana Mastery Passive" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Katana_FinisherEnabled" type="23" />
                     <children>
                         <node id="Categories">
@@ -366,7 +366,7 @@
                                     <attribute id="Name" value="Code" type="23" />
                                 </node>
                                 <node id="Category">
-                                    <attribute id="Name" value="Profession" type="23" />
+                                    <attribute id="Name" value="Story" type="23" />
                                 </node>
                             </children>
                         </node>

@@ -21,3 +21,5 @@ Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'
 Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
 Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and knocks the target down.
 Target_LLWEAPONEX_ShieldBash_DisplayName	Shield Bash
+Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter
+Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] and destroying [2].

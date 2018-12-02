@@ -47,13 +47,10 @@ add name "Gravity Falls",""
 add name "Monk's Resolution",""
 add name "Headcracker",""
 
-new namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood"
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted"
 add name "Wooden Quarterstaff",""
 
-new namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal"
-add name "Metal Quarterstaff",""
-
-new namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal_Pipe"
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted"
 add name "Metal Pipe",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"

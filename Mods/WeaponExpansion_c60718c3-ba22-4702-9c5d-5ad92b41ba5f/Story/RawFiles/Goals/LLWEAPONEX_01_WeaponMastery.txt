@@ -828,4 +828,4 @@ DialogSetVariableStringForInstance(_Instance, "LLWEAPONEX_WeaponMastery_Current_
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

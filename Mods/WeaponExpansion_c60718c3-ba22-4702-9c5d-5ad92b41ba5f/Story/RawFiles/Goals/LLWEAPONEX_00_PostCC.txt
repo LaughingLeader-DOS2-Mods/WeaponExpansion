@@ -5,7 +5,7 @@ INITSECTION
 KBSECTION
 
 IF
-GameStarted(_Level, _)
+RegionStarted(_Level)
 AND
 IsGameLevel(_Level, 1)
 THEN
@@ -14,4 +14,4 @@ GoalCompleted;
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LLWEAPONEX_00_PostCC"
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

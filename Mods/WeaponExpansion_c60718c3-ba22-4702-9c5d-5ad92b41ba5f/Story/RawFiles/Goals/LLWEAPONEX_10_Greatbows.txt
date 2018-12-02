@@ -391,4 +391,4 @@ DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

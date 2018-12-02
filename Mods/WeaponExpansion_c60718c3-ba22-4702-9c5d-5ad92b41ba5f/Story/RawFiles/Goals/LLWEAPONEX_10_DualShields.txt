@@ -257,4 +257,4 @@ NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

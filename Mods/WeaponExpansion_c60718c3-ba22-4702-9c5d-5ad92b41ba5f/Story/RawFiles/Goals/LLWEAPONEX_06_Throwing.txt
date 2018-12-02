@@ -519,4 +519,4 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:ReturnTarget(",_ShootSkill,")] [",_
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LaughingLeader_WeaponExpansion"
+ParentTargetEdge "LLWEAPONEX_00_PostCC"
