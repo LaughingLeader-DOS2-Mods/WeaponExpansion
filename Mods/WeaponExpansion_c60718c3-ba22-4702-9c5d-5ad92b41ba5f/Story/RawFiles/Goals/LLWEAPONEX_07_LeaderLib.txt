@@ -21,7 +21,9 @@ LeaderLib_Trader_Register_StartingGold("LeaderLib.LeaderTrader", "TestLevel_LL_W
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_ChaosWeaver", "Chaos Weaver [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_DragonSlayer", "Dragon Slayer [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkQuarterstaff", "Monk (Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Assassin", "Assassin [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Blademaster", "Blademaster [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Fencer", "Fencer [Weapon Expansion]", "WeaponExpansion_IsActive");
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.0.9")

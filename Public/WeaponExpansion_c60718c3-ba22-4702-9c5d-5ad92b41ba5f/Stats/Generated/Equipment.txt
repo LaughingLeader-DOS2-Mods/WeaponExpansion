@@ -270,6 +270,172 @@ add equipment entry "ARM_Fighter_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Preview"
 
+new equipment "Class_LLWEAPONEX_Blademaster_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_2H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Blademaster_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_2H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Blademaster_Preview"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Blademaster_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Blademaster_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Blademaster_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Blademaster_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Blademaster_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_2H_Preview"
+
+new equipment "Class_LLWEAPONEX_Fencer_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_OilFlask_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_PoisonFlask_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Fencer_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_OilFlask_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_PoisonFlask_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Fencer_Preview"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_A_Preview"
+
+new equipment "Class_LLWEAPONEX_Assassin_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Assassin_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Assassin_Preview"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Katana_1H_Preview"
+
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
 add equipment entry "LLWEAPONEX_NPC_Goblins_Chaos_Grunt_A"
