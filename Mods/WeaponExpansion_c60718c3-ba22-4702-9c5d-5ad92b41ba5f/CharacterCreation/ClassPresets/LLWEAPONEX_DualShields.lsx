@@ -82,7 +82,7 @@
 				<node id="AttributeChanges">
 					<children>
 						<node id="AttributeChange">
-							<attribute id="AmountIncreased" value="4" type="4" />
+							<attribute id="AmountIncreased" value="3" type="4" />
 							<attribute id="Attribute" value="CON" type="23" />
 						</node>
 					</children>
@@ -90,7 +90,7 @@
 				<node id="TalentsAdded">
 					<children>
 						<node id="TalentAdded">
-							<attribute id="Talent" value="SurpriseAttack" type="23" />
+							<attribute id="Talent" value="WarriorLoreNaturalHealth" type="23" />
 						</node>
 					</children>
 				</node>

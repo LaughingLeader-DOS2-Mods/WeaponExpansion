@@ -218,13 +218,13 @@ add equipment entry "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Rod_Chaos_Preview"
 
-new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Start"
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start"
 add equipmentgroup
 add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood"
+add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -234,7 +234,7 @@ add equipment entry "SCROLL_Resurrect"
 add equipmentgroup
 add equipment entry "CONT_Backpack_A_SourceHunter"
 
-new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead"
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start_Undead"
 add equipmentgroup
 add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
@@ -246,7 +246,7 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_CraftedQuarterstaff_Wood"
+add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -269,6 +269,44 @@ add equipmentgroup
 add equipment entry "ARM_Civilian_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Wood_Preview"
+
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Metal_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Metal_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
 
 new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Metal_Preview"
 add equipmentgroup
@@ -456,9 +494,7 @@ add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
-add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_DualShields_Start"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -480,9 +516,7 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
-add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_DualShields_Start"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup

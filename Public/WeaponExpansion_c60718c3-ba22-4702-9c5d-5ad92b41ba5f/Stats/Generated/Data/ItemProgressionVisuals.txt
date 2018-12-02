@@ -859,23 +859,23 @@ add levelgroup 0,0,"All"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted","",""
 
-new itemgroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal"
-
-add levelgroup 0,0,"All"
-add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
-add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
-
 new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted"
 
 add levelgroup 0,0,"All"
 add rootgroup "0067f3f6-1dab-49e6-a5af-addc10071730",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted","",""
 
-new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Preview"
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Wood_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Preview"
 
 add levelgroup 0,0,"All"
 add rootgroup "3c61d6d8-9aff-4442-87cf-35f621554cd5",""
-add namegroup "WPN_LLWEAPONEX_CraftedQuarterstaff_Metal","",""
+add namegroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
 
@@ -898,7 +898,7 @@ add namegroup "WPN_LLWEAPONEX_Katana_2H","",""
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
 
 add levelgroup 0,0,"All"
-add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
+add rootgroup "4be8ec78-17ed-4f61-b3d8-96c260d1c80a",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa","",""
 
 new itemgroup "WPN_LLWEAPONEX_Rapier_1H_A"

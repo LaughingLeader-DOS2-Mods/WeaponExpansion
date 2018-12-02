@@ -17,9 +17,9 @@ Shout_LLWEAPONEX_Quiver_DrawArrow_Description	Draw a random, temporary arrow fro
 Shout_LLWEAPONEX_Quiver_DrawArrow_DisplayName	Draw Arrow
 Shout_LLWEAPONEX_SwapGender_Description	Change to the opposite gender.<br><font color='#188ede'>Warning: Replaces custom appearance settings!</font>
 Shout_LLWEAPONEX_SwapGender_DisplayName	Swap Gender
+Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] and destroying [2].
+Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter
 Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].
 Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
-Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and knocks the target down.
+Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and has a chance to daze the target.
 Target_LLWEAPONEX_ShieldBash_DisplayName	Shield Bash
-Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter
-Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] and destroying [2].

@@ -4,7 +4,7 @@
 	<version major="1" minor="3" revision="0" build="0" />
 	<region id="CharacterCreationClass">
 		<node id="root">
-			<attribute id="ClassName" value="Monk (Wooden Quarterstaff)" handle="h9045efcdg0e97g4884g95a2g9bfc844868f2" type="28" />
+			<attribute id="ClassName" value="Monk (Finesse)" handle="h9045efcdg0e97g4884g95a2g9bfc844868f2" type="28" />
 			<attribute id="ClassDescription" value="Disciplined warriors who wield wooden quarterstaffs, overwhelming enemies with finesse and sheer force of will" handle="h060a6bb2g4db6g48bag9602g2a9d7c28a85a" type="28" />
 			<attribute id="ClassLongDescription" value="" handle="h060a6bb2g4db6g48bag9602g2a9d7c28a85a" type="28" />
 			<attribute id="ClassType" value="LLWEAPONEX_MonkWoodenQuarterstaff" type="22" />
@@ -23,43 +23,43 @@
 					<children>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Human" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Dwarf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Elf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Lizard" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Human" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Dwarf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Elf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Lizard" type="22" />
-							<attribute id="PreviewEquipmentSet" value="WPN_LLWEAPONEX_Quarterstaff_Wood_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_MonkQuarterstaff_Wood_Start_Undead" type="22" />
 						</node>
 					</children>
 				</node>
