@@ -208,16 +208,16 @@ LeaderLib_Traders_OnSpawned(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702
 AND
 ObjectGetFlag(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized", 0)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:StartLoopEffects] Starting looped effects on vending machine.");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnSpawned] Initializing Vending Machine.");
 ProcObjectTimer(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Timers_LevelUpVendingMachine", 1000);
-//PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
-//PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
+PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
+PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
 ObjectSetFlag(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized");
-//CharacterTransformAppearanceToWithEquipmentSet(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A", 0);
+CharacterTransformAppearanceToWithEquipmentSet(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A", 0);
 
 //Flipped bones workaround for now
 //PROC_StopLoopEffect(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay");
-PROC_LoopEffect("LLWEAPONEX_FX_VendingMachine_MachineDisplay_Debug_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay", _Region, "");
+//PROC_LoopEffect("LLWEAPONEX_FX_VendingMachine_MachineDisplay_Debug_01", CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay", _Region, "");
 
 QRY
 LLWEAPONEX_VendingMachine_QRY_IsInside("LV_HoE_Main")
@@ -267,6 +267,7 @@ THEN
 CharacterLevelUpTo(_VendingMachine, _Level);
 
 //Temporary workaround
+/*
 IF
 GameStarted(_Region, _)
 AND
@@ -275,6 +276,7 @@ AND
 HasActiveStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", 0)
 THEN
 ApplyStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LEADERLIB_NO_VISUAL", -1.0);
+*/
 //END_REGION
 
 //REGION SALES

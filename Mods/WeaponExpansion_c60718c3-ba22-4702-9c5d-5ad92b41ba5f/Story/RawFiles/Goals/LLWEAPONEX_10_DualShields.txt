@@ -96,6 +96,7 @@ SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
 ItemSetOwner(_CombatShield, _Owner);
 LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.CombatShields");
 //ItemSetOnlyOwnerCanUse(_CombatShield, 1);
+LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
 
 IF
 ItemEquipped(_Shield, _Player)
@@ -127,13 +128,25 @@ LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Player, (ITEMGUID)_S
 AND
 NOT LLWEAPONEX_DualShields_QRY_ItemLevelSet(_Shield)
 THEN
+ItemSetOwner(_Shield, _Player);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_OnDualShieldEquipped] Level/Rarity variables not set on Dual Shield. Running [LeaderLib_Commands_SetItemVariables].");
 SetVarString(_Shield, "LeaderLib_ItemVariablesSetEvent", "LLWEAPONEX_DualShields_VariablesSet");
 SetStoryEvent(_Shield, "LeaderLib_Commands_SetItemVariables");
 
 IF
 StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_DualShields_VariablesSet")
 THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_VariablesSet] Generating combat shield.");
+ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_EquipAfterGenerating");
 LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield(_Shield);
+
+PROC
+LLWEAPONEX_DualShields_CombatShieldGenerated((CHARACTERGUID)_Owner, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield)
+AND
+ObjectGetFlag(_Shield, "LLWEAPONEX_DualShields_EquipAfterGenerating", 1)
+THEN
+ObjectClearFlag(_Shield, "LLWEAPONEX_DualShields_EquipAfterGenerating");
+LLWEAPONEX_DualShields_EquipCombatShield(_Owner, _Shield, _CombatShield, 1);
 
 PROC
 LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 1)
