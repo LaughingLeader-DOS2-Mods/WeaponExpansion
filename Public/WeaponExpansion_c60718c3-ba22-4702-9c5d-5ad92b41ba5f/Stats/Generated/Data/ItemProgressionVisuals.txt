@@ -290,23 +290,23 @@ add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","DwarvesRare"
 add namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Rare_3","",""
 
 add levelgroup 1,7,"Epic"
-add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","DwarvesEpic"
+add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","LLWEAPONEX_DualShields_DwarvesA_Epic"
 add namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Epic_1","",""
 
 add levelgroup 8,14,"Epic"
-add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","DwarvesEpic"
+add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","LLWEAPONEX_DualShields_DwarvesA_Epic"
 add namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Epic_2","",""
 
 add levelgroup 15,30,"Epic"
-add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","DwarvesEpic"
+add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","LLWEAPONEX_DualShields_DwarvesA_Epic"
 add namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Epic_3","",""
 
 add levelgroup 1,30,"Legendary"
-add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","DwarvesEpic"
+add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","LLWEAPONEX_DualShields_DwarvesA_Epic"
 add namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Legendary","",""
 
 add levelgroup 1,30,"Divine"
-add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","DwarvesEpic"
+add rootgroup "91fd35cb-93dd-4489-9cf5-2dcc9b0ac168","LLWEAPONEX_DualShields_DwarvesA_Epic"
 add namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Divine","",""
 
 new itemgroup "WPN_LLWEAPONEX_CombatShield_Dwarves_A"

@@ -468,10 +468,10 @@ new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_OrmaReeve"
 add name "Orma and Reeve's Twin Greatshields",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death"
-add name "Torment, Grimoire of Death",""
+add name "Torment, Book of the Dead",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry"
-add name "Imitation, Book of Mimicry",""
+add name "Imitation, Guide to Mimicry",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap"
 add name "Gatekeeper's Codex",""

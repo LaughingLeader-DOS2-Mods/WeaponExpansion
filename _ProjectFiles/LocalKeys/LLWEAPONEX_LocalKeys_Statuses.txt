@@ -58,6 +58,8 @@ LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall 
 LLWEAPONEX_TRIPPING_DisplayName	Tripping
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
-LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Weapon Mastery - Gain experience with this weapon type as you use it in battle
+LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Weapon Mastery - Gain mastery experience in battle
 LLWEAPONEX_HELMSPLITTER_DisplayName	Physical Armor Reduction
 LLWEAPONEX_HELMSPLITTER_Description	Character's Physical Armor is being lowered.
+LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer
+LLWEAPONEX_BEER_CHAMPION_Description	Character never gets sleepy while drinking alcohol.

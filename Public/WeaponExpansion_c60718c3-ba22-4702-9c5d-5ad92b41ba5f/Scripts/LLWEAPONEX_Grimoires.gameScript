@@ -326,7 +326,7 @@ THEN
 	SetVar(_Character, "LLWEAPONEX_Grimoire_SheathedFXHandle", INT64:null)
 ENDIF
 
-EVENT LLWEAPONEX_Transit_CastEffect
+EVENT LLWEAPONEX_Grimoire_Transit_CastEffect
 VARS
 	CHARACTER:_Character
 	INT64:_Handle

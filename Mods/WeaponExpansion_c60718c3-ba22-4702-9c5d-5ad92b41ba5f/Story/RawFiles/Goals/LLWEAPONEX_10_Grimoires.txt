@@ -958,6 +958,93 @@ AND
 _Roll <= _MaxRoll
 THEN
 ApplyStatus(_Target, _Status, _Duration, 0, _Caster);
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS", (CHARACTERGUID)_Source)
+THEN
+SetTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+SetVarObject(_Character, "LLWEAPONEX_DeathAura_Source", _Source);
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB", (CHARACTERGUID)_Source)
+THEN
+SetTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+SetVarObject(_Character, "LLWEAPONEX_DeathAura_Source", _Source);
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS", _)
+THEN
+ClearTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+ClearVarObject(_Character, "LLWEAPONEX_DeathAura_Source");
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB", _)
+THEN
+ClearTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+ClearVarObject(_Character, "LLWEAPONEX_DeathAura_Source");
+
+IF
+CharacterPrecogDying(_Character)
+AND
+IsTagged(_Character, "LLWEAPONEX_DeathAura_ListenForDeath", 1)
+AND
+GetVarObject(_Character, "LLWEAPONEX_DeathAura_Source", (CHARACTERGUID)_Source)
+THEN
+LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying(_Character, _Source);
+
+PROC
+LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB")
+THEN
+DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB");
+
+PROC
+LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS")
+THEN
+DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS");
+
+IF
+DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, _Status)
+THEN
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_Grimoire_DeathAuraDyingTimeout");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoire_DeathAuraDyingTimeout", 2500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoire_DeathAuraDyingTimeout")
+AND
+DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, _Status)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, _Status);
+
+IF
+CharacterDied(_Character)
+AND
+DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB")
+AND
+CharacterGetEquippedItem(_Source, "Shield", (ITEMGUID)_Grimoire)
+AND
+_Grimoire != NULL_00000000-0000-0000-0000-000000000000
+THEN
+ItemAddCharges(_Grimoire, 1);
+NOT DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB");
+
+IF
+CharacterDied(_Character)
+AND
+DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS")
+THEN
+NOT DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS");
+LLWEAPONEX_Grimoire_DeathAura_SpawnGhost(_Source, _Character);
+
+PROC
+LLWEAPONEX_Grimoire_DeathAura_SpawnGhost((CHARACTERGUID)_Source, (CHARACTERGUID)_Character)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS")
+THEN
+DB_LLWEAPONEX_Grimoire_DeathAura_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS");
 //END_REGION
 
 //REGION MAGIC_AUTO_LEVELING

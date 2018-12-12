@@ -56,7 +56,7 @@ LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM_Description	<font size='18'><font color='#65
 LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM_DisplayName	Venom Rune		
 LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER_Description	Character has activated the <font color='#4197e2'>Water Rune</font> within their <font color='#40E0D0'>Runeblade</font>.<br>Applies <font color='#4197e2'>Wet</font> to enemies hit for 1 turn.
 LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER_DisplayName	Water Rune		
-LLWEAPONEX_RUNEBLADE_APPLY_STATUS_DisplayName	Runic Blade - Activated runes apply effects on attack
+LLWEAPONEX_RUNEBLADE_APPLY_STATUS_DisplayName	Runic Blade - Gain mastery and apply rune effects on attack
 LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOWED_Description	Character is encased in snow and takes [1] when moving, with a chance to fall down.
 LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOWED_DisplayName	Snowed
 LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK_Description	Character is being contaminated!
