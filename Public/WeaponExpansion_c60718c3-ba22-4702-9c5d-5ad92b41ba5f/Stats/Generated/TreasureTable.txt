@@ -260,14 +260,14 @@ StartLevel "1"
 EndLevel "8"
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",9,0,1,0,0,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,1,0,0,0,0
-new subtable "1,1"
+new subtable "0,3;1,2"
 StartLevel "9"
-EndLevel "15"
-object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",5,0,1,0,0,0,0,0
-object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",4,0,0,1,0,0,0,0
+EndLevel "14"
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",9,0,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",3,0,0,1,0,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,0,1,0,0,0
-new subtable "1,1"
-StartLevel "16"
+new subtable "0,3;1,2"
+StartLevel "15"
 EndLevel "30"
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",5,0,1,0,0,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",9,0,0,1,0,0,0,0

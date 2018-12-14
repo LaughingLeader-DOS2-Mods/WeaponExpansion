@@ -18,8 +18,8 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 2, "<font color='#9
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 3, "<font color='#52D43A'>Expert Slayer</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 4, "<font color='#28FF00'>Master Dragon Slayer</font>");
 
-//DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Greatbow", "LLWEAPONEX_WM_Greatbow_Exp", "LLWEAPONEX_WM_Greatbow_ExpMax", "LLWEAPONEX_WM_Greatbow_Level");
+//DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Greatbow", "LLWEAPONEX_WM_Greatbow_Exp", "LLWEAPONEX_WM_Greatbow_ExpMax", "LLWEAPONEX_WM_Greatbow_Level");
 //Which skill are unlocked at specific mastery levels
 //DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _UnlockEvent)
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 0, "PiercingShot", "Any");
@@ -51,7 +51,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 2, "<font color='#F56
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 3, "<font color='#F44E4E'>Expert Blademaster</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 4, "<font color='#FF3333'>Master of Blades</font>");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Katana", "LLWEAPONEX_WM_Katana_Exp", "LLWEAPONEX_WM_Katana_ExpMax", "LLWEAPONEX_WM_Katana_Level");
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Katana", "LLWEAPONEX_WM_Katana_Exp", "LLWEAPONEX_WM_Katana_ExpMax", "LLWEAPONEX_WM_Katana_Level");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Finisher", "Tag");
 DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Finisher", "LLWEAPONEX_Katana_FinisherEnabled", "Tag");
@@ -64,7 +64,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 2, "<font color
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 3, "<font color='#F49C4E'>Expert Staff Monk</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 4, "<font color='#FF9D33'>Master Monk of Staves</font>");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Quarterstaff", "LLWEAPONEX_WM_Quarterstaff_Exp", "LLWEAPONEX_WM_Quarterstaff_ExpMax", "LLWEAPONEX_WM_Quarterstaff_Level");
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Quarterstaff", "LLWEAPONEX_WM_Quarterstaff_Exp", "LLWEAPONEX_WM_Quarterstaff_ExpMax", "LLWEAPONEX_WM_Quarterstaff_Level");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Quarterstaff", 1, "LegSweep", "Any");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Quarterstaff", "LegSweep", "LLWEAPONEX_WS_QUARTERSTAFF_LEGSWEEP");
@@ -77,7 +77,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 2, "<font color='#F5F
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 3, "<font color='#F5E06C'>Expert Fencer</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 4, "<font color='#FFE933'>Master Fencer</font>");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_Exp", "LLWEAPONEX_WM_Rapier_ExpMax", "LLWEAPONEX_WM_Rapier_Level");
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_Exp", "LLWEAPONEX_WM_Rapier_ExpMax", "LLWEAPONEX_WM_Rapier_Level");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Custom"); // Added when the offhand is empty
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST");
@@ -93,7 +93,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 2, "<font color='#
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 3, "<font color='#6CF5E9'>Expert Runekeeper</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 4, "<font color='#33FFB8'>Master of Runes</font>");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_Runeblade", "LLWEAPONEX_WM_Runeblade_Exp", "LLWEAPONEX_WM_Runeblade_ExpMax", "LLWEAPONEX_WM_Runeblade_Level");
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Runeblade", "LLWEAPONEX_WM_Runeblade_Exp", "LLWEAPONEX_WM_Runeblade_ExpMax", "LLWEAPONEX_WM_Runeblade_Level");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Runeblade", 1, "RunicReverb", "Any");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Runeblade", 1, "PoisonBurst", "Status");
@@ -106,6 +106,18 @@ DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM",           "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 
 DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+
+PROC
+LLWEAPONEX_WeaponMastery_AddMastery((STRING)_WeaponType, (STRING)_CurrentXPVar, (STRING)_MaxXPVar, (STRING)_LevelVar)
+AND
+StringConcatenate(_WeaponType, "_Enabled", _EnabledFlag)
+THEN
+LLWEAPONEX_WeaponMastery_AddMastery(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag);
+
+PROC
+LLWEAPONEX_WeaponMastery_AddMastery((STRING)_WeaponType, (STRING)_CurrentXPVar, (STRING)_MaxXPVar, (STRING)_LevelVar, (STRING)_EnabledFlag)
+THEN
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag);
 //END_REGION
 
 //REGION QUERIES
@@ -119,14 +131,14 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 THEN
 DB_NOOP(1);
 
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_WeaponType, (ITEMGUID)_IgnoreItem)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 AND
 _Item != _IgnoreItem
 THEN
@@ -149,7 +161,7 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
 GetVarInteger(_Player, _LevelVar, _CurrentLevel)
 AND
@@ -180,6 +192,16 @@ DB_NOOP(1);
 
 //REGION SKILL_UNLOCKING
 IF
+TextEventSet("llweap_masterall")
+AND
+DB_IsPlayer(_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
+THEN
+SetVarInteger(_Player, _LevelVar, 5);
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _WeaponType, 5);
+
+IF
 TextEventSet("llweap_unlockallskills")
 AND
 DB_IsPlayer(_Player)
@@ -193,6 +215,8 @@ LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 AND
 DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
 THEN
@@ -277,7 +301,7 @@ DB_NOOP(1);
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet(_Player, _LevelVar)
 THEN
@@ -296,17 +320,19 @@ DB_IsPlayer(_Player)
 AND
 NOT LLWEAPONEX_IgnoreWeapon(_Item)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
 IsTagged(_Item, _WeaponType, 1)
 THEN
+ObjectSetFlag(_Player, _EnabledFlag);
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
+LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType);
-LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
+DB_NOOP(1);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -324,7 +350,7 @@ DB_NOOP(1);
 IF
 ItemUnEquipped(_Item, _Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType, _Item)
 AND
@@ -337,9 +363,10 @@ ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills", 500);
 IF
 ItemUnEquipped(_Item, _Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
+ObjectClearFlag(_Player, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _WeaponType);
 
 PROC
@@ -541,7 +568,7 @@ CharacterGetEquippedItem(_Player, "Weapon", _Item)
 AND
 IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
 IsTagged(_Item, _WeaponType, 1)
 AND
@@ -556,7 +583,7 @@ CharacterGetEquippedItem(_Player, "Shield", _Item)
 AND
 IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
 IsTagged(_Item, _WeaponType, 1)
 AND
@@ -625,7 +652,7 @@ LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperie
 PROC
 LLWEAPONEX_WeaponMastery_AddExperience((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_BaseExperience)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
 GetVarInteger(_Player, _CurrentXPVar, _Current)
 AND
@@ -789,7 +816,7 @@ LLWEAPONEX_WeaponMastery_SetExperienceString(_Player, _Instance);
 PROC
 LLWEAPONEX_WeaponMastery_SetExperienceString((CHARACTERGUID)_Player, (INTEGER)_Instance)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar)
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryNames(_WeaponType, _MasteryName)
 AND

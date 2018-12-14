@@ -16,3 +16,5 @@ Stats_LLWEAPONEX_RapierMastery_DuelistStance	Duelist Stance
 Stats_LLWEAPONEX_MuramasaCurse	Curse of the Muramasa
 Stats_LLWEAPONEX_Katana_Finisher	Finisher
 Stats_LLWEAPONEX_BeerChampion	Champion of Beer
+Stats_LLWEAPONEX_RapierMastery_DuelistBonus	Flourish (Duelist Stance)
+Stats_LLWEAPONEX_RapierMastery_CritDamageBoost	Flourish (Duelist Stance)

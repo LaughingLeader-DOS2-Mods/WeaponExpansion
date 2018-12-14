@@ -17,8 +17,6 @@ LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taki
 LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane
 LLWEAPONEX_DRAW_ARROW_DisplayName	Draw Arrow
 LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand
-LLWEAPONEX_DUELIST_BONUS_COOLDOWN_Description	Backstabs won't grant extra AP while the character recovers.
-LLWEAPONEX_DUELIST_BONUS_COOLDOWN_DisplayName	Duelist Bonus Cooldown
 LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!
 LLWEAPONEX_EVAPORATE_DisplayName	Evaporated
 LLWEAPONEX_FINESSE_TO_INTELLIGENCE_DisplayName	Finesse Conversion - Finesse bonuses from this weapon grant Intelligence
@@ -33,9 +31,9 @@ LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet R
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed
-LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Accuracy rise, but Resistances faulter.</font>
+LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Life Steal rise, but Resistances faulter.</font>
 LLWEAPONEX_MURAMASA_CURSE_DisplayName	<font color='#8A2BE2'>Curse of the Muramasa</font>
-LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is using the stance of a duelist.
+LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is taking the stance of a duelist.<br><font color='#ff9600' size='20'>Requires an empty hand.</font>
 LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
 LLWEAPONEX_ROD_SKILL_BASE_DisplayName	Rod Skill - On command, rods can launch projectiles like wands
 LLWEAPONEX_RUNEBLADE_MASTERY_POISON_Description	Character's <font color='#2DF9FF'>Runeblade Mastery</font> level allows them to control poison with finer precision.
