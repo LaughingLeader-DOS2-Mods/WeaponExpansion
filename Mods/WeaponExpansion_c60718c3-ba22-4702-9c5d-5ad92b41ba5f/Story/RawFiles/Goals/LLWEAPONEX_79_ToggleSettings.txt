@@ -17,17 +17,23 @@ LLWEAPONEX_ToggleSettings_InitSettings()
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag) // Enabled masteries
 THEN
-LLWEAPONEX_ToggleSettings_AddMasteryFlag(_WeaponType);
-LLWEAPONEX_ToggleSettings_AddMasteryFlag(_WeaponType);
+LLWEAPONEX_ToggleSettings_AddTag(_WeaponType);
 
 PROC
-LLWEAPONEX_ToggleSettings_AddMasteryFlag((STRING)_WeaponType)
+LLWEAPONEX_ToggleSettings_InitSettings()
 AND
-StringConcatenate(_WeaponType, "_ScriptEnabled", _Flag)
-AND
-StringConcatenate("LLWEAPONEX_Timers_DisableScript_", _WeaponType, _TimerName)
+DB_LLWEAPONEX_Grimoire_Tags(_Template, _Tag)
 THEN
-DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName);
+LLWEAPONEX_ToggleSettings_AddTag(_Tag);
+
+PROC
+LLWEAPONEX_ToggleSettings_AddTag((STRING)_Tag)
+AND
+StringConcatenate(_Tag, "_ScriptEnabled", _Flag)
+AND
+StringConcatenate("LLWEAPONEX_Timers_DisableScript_", _Tag, _TimerName)
+THEN
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName);
 //END_REGION
 
 //REGION REGISTERING
@@ -37,11 +43,11 @@ THEN
 DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
 
 QRY
-LLWEAPONEX_ToggleSettings_QRY_RegisterOnce((STRING)_GoalName, (STRING)_WeaponType)
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce_Tag((STRING)_GoalName, (STRING)_Tag)
 AND
 NOT DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _)
 AND
-DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 THEN
 DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
 //END_REGION
@@ -68,18 +74,33 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:DeactivateScript] Deactivatin
 SysCompleteGoal(_GoalName);
 //END_REGION
 
-//REGION TOGGLE_EVENTS
+//REGION TOGGLE_EVENTS_MASTERY
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
-AND
-DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
 THEN
-TimerCancel(_TimerName);
+LLWEAPONEX_ToggleSettings_OnTagAdded(_Player, _WeaponType);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType)
+THEN
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, _WeaponType);
+//END_REGION
+
+//REGION TOGGLE_EVENTS_TAGS
+PROC
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
+AND
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
+THEN
+TimerCancel(_TimerName);
+DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Tag);
+
+PROC
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
+AND
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
 GlobalGetFlag(_Flag, 0)
 THEN
@@ -87,22 +108,22 @@ GlobalSetFlag(_Flag);
 LLWEAPONEX_ToggleSettings_ActivateScript(_Flag);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Player, (STRING)_Tag)
 AND
-NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType)
-AND
-DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
 GlobalGetFlag(_Flag, 1)
 THEN
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Tag);
+TimerCancel(_TimerName);
 TimerLaunch(_TimerName, 1500);
 
 IF
 TimerFinished(_TimerName)
 AND
-DB_LLWEAPONEX_ToggleSettings_MasteryFlags(_WeaponType, _Flag, _TimerName)
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_, _, _WeaponType, _)
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_, _Tag)
 THEN
 GlobalClearFlag(_Flag);
 LLWEAPONEX_ToggleSettings_DeactivateScript(_Flag);

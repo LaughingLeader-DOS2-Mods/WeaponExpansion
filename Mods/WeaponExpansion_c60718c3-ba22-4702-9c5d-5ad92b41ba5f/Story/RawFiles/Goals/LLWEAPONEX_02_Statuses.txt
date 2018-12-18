@@ -123,53 +123,76 @@ IF
 CharacterDied(_Enemy)
 AND
 DB_LLWEAPONEX_Statuses_Temp_DeathSentence(_Enemy, _Source)
+THEN
+LLWEAPONEX_Statuses_CreateRevenant(_Enemy, _Source, "LLWEAPONEX_Revenant_Base_bb15f97e-b6bf-4648-9190-71b42a7744c4", " (Revenant)", "LLWEAPONEX_REVENANT", 12.0);
+NOT DB_LLWEAPONEX_Statuses_Temp_DeathSentence(_Enemy, _Source);
+
+PROC
+LLWEAPONEX_Statuses_CreateRevenant((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Template, (STRING)_NameSuffix, (STRING)_Status, (REAL)_Duration)
 AND
-GetPosition(_Enemy, _x, _y, _z)
+GetPosition(_Target, _x, _y, _z)
 AND
-TemporaryCharacterCreateAtPosition(_x, _y, _z, "LLWEAPONEX_Revenant_Base_bb15f97e-b6bf-4648-9190-71b42a7744c4", 0, _Revenant)
+TemporaryCharacterCreateAtPosition(_x, _y, _z, _Template, 0, _Revenant)
 AND
-CharacterGetLevel(_Enemy, _Level)
+CharacterGetLevel(_Target, _Level)
 AND
-CharacterGetDisplayName(_Enemy, _, _Name)
+CharacterGetDisplayName(_Target, _, _Name)
 AND
-StringConcatenate(_Name, " (Revenant)", _RevenantName)
+StringConcatenate(_Name, _NameSuffix, _RevenantName)
 AND
 FindValidPosition(_x, _y, _z, 6.0, _Revenant, _tx, _ty, _tz)
 THEN
-NOT DB_LLWEAPONEX_Statuses_Temp_DeathSentence(_Enemy, _Source);
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source);
-CharacterSetDetached(_Revenant, 1);
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_Target, _Revenant, _Source, _Status);
 SetOnStage(_Revenant, 0);
+CharacterSetDetached(_Revenant, 1);
 
-//CharacterTransformAppearanceTo(_Revenant, _Enemy, 1, 1);
-CharacterTransformFromCharacter(_Revenant, _Enemy, 0, 1, 0, 1, 1, 0, 0);
+//CharacterTransformAppearanceTo(_Revenant, _Target, 1, 1);
+//CharacterTransformFromCharacter(_Revenant, _Target, 0, 1, 0, 1, 1, 0, 0);
+/*
+CharacterTransformFromCharacter((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_ReplaceScripts, (INTEGER)_ReplaceScale, (INTEGER)_ReplaceStats, (INTEGER)_ReplaceEquipment, (INTEGER)_ReplaceSkills, (INTEGER)_UseCustomLooks, (INTEGER)_ReleasePlayerData)
+*/
+//CharacterTransformFromCharacter(_Revenant, _Target, 0, 1, 0, 0, _ReplaceSkills, 0, 0);
+CharacterTransformAppearanceTo(_Revenant, _Target, 0, 1);
 
-//CharacterCloneSkillsTo(_Enemy, _Revenant, 0);
+//CharacterCloneSkillsTo(_Target, _Revenant, 0);
 CharacterLevelUpTo(_Revenant, _Level);
-CharacterSetCustomName(_Revenant, _RevenantName);
 
 SetCanJoinCombat(_Revenant, 0);
 SetCanFight(_Revenant, 0);
 SetFaction(_Revenant, "Good NPC");
 SetRelationIndivFactionToPlayers(_Revenant, 100);
 
-ApplyStatus(_Revenant, "LLWEAPONEX_REVENANT", 12.0, 1, _Source);
+ApplyStatus(_Revenant, _Status, _Duration, 1, _Source);
 
 CharacterSetHitpointsPercentage(_Revenant, 100.0);
 TeleportToPosition(_Revenant, _tx, _ty, _tz, "LLWEAPONEX_Events_Revenant_SetAttached", 0, 1);
 
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName);
+
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
+AND
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName)
 THEN
+CharacterSetCustomName(_Revenant, _RevenantName);
+LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
 SetOnStage(_Revenant, 1);
 CharacterSetDetached(_Revenant, 0);
 PlayEffect(_Revenant, "RS3_FX_Char_Ghosts_Teleport_in_01", "");
-SetCanJoinCombat(_Revenant, 1);
-SetCanFight(_Revenant, 1);
 LeaderLib_StartObjectTimer(_Revenant, 500, "LLWEAPONEX_Timers_RevenantReadyTimer", "LLWEAPONEX_Events_RevenantReady");
 
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_RevenantReady")
+AND
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName)
+THEN
+NOT DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName);
+SetCanJoinCombat(_Revenant, 1);
+SetCanFight(_Revenant, 1);
+LLWEAPONEX_Statuses_OnRevenantCreated(_Revenant, _Target, _Source, _Status);
+
+PROC
+LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_REVENANT")
 AND
 CharacterIsInCombat(_Revenant, 0)
 AND
@@ -190,29 +213,30 @@ TeleportTo(_Revenant, _Host, "", 0, 1, 1);
 */
 
 IF
-CharacterStatusRemoved(_Enemy, "LLWEAPONEX_DEATH_SENTENCE", _)
+CharacterStatusRemoved(_Character, "LLWEAPONEX_DEATH_SENTENCE", _)
 AND
-CharacterIsDead(_Enemy, 0)
+CharacterIsDead(_Character, 0)
 AND
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source)
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_Character, _Revenant, _Source, "LLWEAPONEX_REVENANT")
 THEN
-NOT DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source);
-SetOnStage(_Revenant, 0);
-CharacterDieImmediate(_Revenant, 0, "LifeTime", _Revenant);
+LLWEAPONEX_Statuses_KillRevenant(_Revenant);
 
 IF
-CharacterStatusApplied(_Enemy, "RESURRECT", _)
+CharacterStatusApplied(_Character, "RESURRECT", _)
 AND
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source)
-AND
-GetPosition(_Revenant, _x, _y, _z)
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_Character, _Revenant, _Source, _Status)
 THEN
-PlayEffectAtPosition("RS3_FX_GP_ScriptedEvent_GhostDissipate_01", _x, _y, _z);
+LLWEAPONEX_Statuses_KillRevenant(_Revenant);
 
 IF
-CharacterStatusRemoved(_Revenant, "LLWEAPONEX_REVENANT", _)
+CharacterStatusRemoved(_Revenant, _Status, _)
 AND
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source)
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source, _Status)
+THEN
+LLWEAPONEX_Statuses_KillRevenant(_Revenant);
+
+PROC
+LLWEAPONEX_Statuses_KillRevenant((CHARACTERGUID)_Revenant)
 AND
 GetPosition(_Revenant, _x, _y, _z)
 THEN
@@ -223,12 +247,25 @@ CharacterDieImmediate(_Revenant, 0, "LifeTime", _Revenant);
 IF
 CharacterDied(_Revenant)
 AND
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source)
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_Target, _Revenant, _Source, _Status)
+THEN
+LLWEAPONEX_Statuses_OnRevenantDied(_Revenant, _Target, _Source, _Status);
+
+PROC
+LLWEAPONEX_Statuses_OnRevenantDied((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_REVENANT")
 AND
 GetPosition(_Revenant, _x, _y, _z)
 THEN
-NOT  DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source);
 TransformSurfaceAtPosition(_x, _y, _z, "Vaporize", "Ground", 1.0, 12.0, _Source);
+LLWEAPONEX_Statuses_RemoveRevenant(_Revenant);
+
+PROC
+LLWEAPONEX_Statuses_RemoveRevenant((CHARACTERGUID)_Revenant)
+AND
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source, _Status)
+THEN
+NOT DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source, _Status);
+RemoveTemporaryCharacter(_Revenant);
 //END_REGION
 
 //REGION BEAMS

@@ -61,3 +61,11 @@ LLWEAPONEX_HELMSPLITTER_DisplayName	Physical Armor Reduction
 LLWEAPONEX_HELMSPLITTER_Description	Character's Physical Armor is being lowered.
 LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer
 LLWEAPONEX_BEER_CHAMPION_Description	Character never gets sleepy while drinking alcohol.
+LLWEAPONEX_BLINDFOLD_EQUIPPED_DisplayName	Blindfolded
+LLWEAPONEX_BLINDFOLD_EQUIPPED_Description	Character is wearing a blindfold.<br></font color='#FF0000'>-4m Range</font>
+LLWEAPONEX_TORMENTED_GHOST_DisplayName	Tormented Ghost
+LLWEAPONEX_TORMENTED_GHOST_Description	Character is haunting the battlefield as a tormented ghost.
+LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage
+LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!
+LLWEAPONEX_TORMENT_CLAIMSOUL_DisplayName	Claimed Soul
+LLWEAPONEX_TORMENT_CLAIMSOUL_Description	Character's soul has been claimed, and will restore life to the Tormented Ghost's corpse if they die.

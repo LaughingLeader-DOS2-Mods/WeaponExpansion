@@ -258,9 +258,9 @@ add equipment entry "CONT_Backpack_A_SourceHunter"
 
 new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Wood_Preview"
 add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_Blindfold"
+add equipment entry "ARM_LLWEAPONEX_Blindfold_Preview"
 add equipmentgroup
-add equipment entry "ARM_Purge_UpperBody"
+add equipment entry "ARM_Civilian_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Civilian_LowerBody"
 add equipmentgroup
@@ -310,9 +310,9 @@ add equipment entry "CONT_Backpack_A_SourceHunter"
 
 new equipment "Class_LLWEAPONEX_MonkQuarterstaff_Metal_Preview"
 add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_Blindfold"
+add equipment entry "ARM_LLWEAPONEX_Blindfold_Preview"
 add equipmentgroup
-add equipment entry "ARM_Purge_UpperBody"
+add equipment entry "ARM_Civilian_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Civilian_LowerBody"
 add equipmentgroup

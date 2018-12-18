@@ -95,6 +95,7 @@ AND
 CharacterGetHostCharacter(_Host)
 THEN
 CharacterSetCustomName(_Host, "Morghul");
+CharacterAddGold(_Host, 9999);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")

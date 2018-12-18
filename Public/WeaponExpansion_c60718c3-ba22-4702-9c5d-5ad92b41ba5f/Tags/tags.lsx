@@ -372,6 +372,19 @@
                         </node>
                     </children>
                 </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Character is a ghost/temp character created by a script." type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Revenant" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
             </children>
         </node>
     </region>

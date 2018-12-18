@@ -25,16 +25,16 @@ PlayEffectAtPosition("RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01", _x, _y,
 CharacterTransform(_Player, _Template, 0, 1, 0, 0, 0, 1, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Misc:SwapGender] Transforming character into root template [",_Template,"].");
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Misc:SwapGender] Gender Result [",_Female,"] Previous [",_IsFemale,"].");
-//LLWEAPONED_Misc_GenderSwap_UpdateTags(_Player, _Female);
+//LLWEAPONEX_Misc_GenderSwap_UpdateTags(_Player, _Female);
 
 PROC
-LLWEAPONED_Misc_GenderSwap_UpdateTags((CHARACTERGUID)_Character, 0)
+LLWEAPONEX_Misc_GenderSwap_UpdateTags((CHARACTERGUID)_Character, 0)
 THEN
 ClearTag(_Character, "FEMALE");
 SetTag(_Character, "MALE");
 
 PROC
-LLWEAPONED_Misc_GenderSwap_UpdateTags((CHARACTERGUID)_Character, 1)
+LLWEAPONEX_Misc_GenderSwap_UpdateTags((CHARACTERGUID)_Character, 1)
 THEN
 SetTag(_Character, "FEMALE");
 ClearTag(_Character, "MALE");

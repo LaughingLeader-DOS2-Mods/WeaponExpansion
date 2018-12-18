@@ -16,6 +16,47 @@ StringContains(_Template, "WPN_", 1)
 THEN
 DB_NOOP(1);
 
+QRY
+LLWEAPONEX_QRY_WeaponTypeEquipped((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Item)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_WeaponTypeEquipped((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+DB_NOOP(1);
+
+//IsTagged(_Item, "LLWEAPONEX_WeaponMasteryComplete", 0)
+QRY
+LLWEAPONEX_QRY_WeaponTypeMasteryEnabled((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Item)
+AND
+IsTagged(_Item, _WeaponType, 1)
+AND
+IsTagged(_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_WeaponTypeMasteryEnabled((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+IsTagged(_Item, _WeaponType, 1)
+AND
+IsTagged(_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+THEN
+DB_NOOP(1);
+
 EXITSECTION
 
 ENDEXITSECTION

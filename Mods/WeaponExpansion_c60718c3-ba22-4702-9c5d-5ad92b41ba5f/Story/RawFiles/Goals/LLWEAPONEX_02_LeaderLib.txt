@@ -26,6 +26,7 @@ LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_DualShields", "Shieldmaster [Wea
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Fencer", "Fencer [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkWoodenQuarterstaff", "Monk (Wooden Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkMetalQuarterstaff", "Monk (Metal Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
 
 //Deltamods
 LeaderLib_Deltamods_Register_Group("WeaponExpansion.CombatShields", 0);
@@ -59,6 +60,9 @@ LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Bo
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Damage_ArmourPiercing", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_Secondary_CriticalModifier", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LifeSteal_Large", 1);
+
+LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_Grimoire");
+LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_CombatShield");
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.0.9")

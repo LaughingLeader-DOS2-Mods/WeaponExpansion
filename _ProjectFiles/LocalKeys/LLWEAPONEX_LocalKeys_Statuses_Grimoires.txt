@@ -13,3 +13,5 @@ LLWEAPONEX_GRIMOIRE_SWAP_SURGE_DisplayName	Translocation Surge
 LLWEAPONEX_GRIMOIRE_WIND_ACTIVE_Description	Character is enhancing the power of <font color='#7d71d9'>Air</font>.<br>Upon casting an <font color='#7d71d9'>Air</font> skill on an enemy or position, the Grimoire shoots <font color='#00FF7F'>Wind Magic</font> at the target.
 LLWEAPONEX_GRIMOIRE_WIND_ACTIVE_DisplayName	Wind Grimoire
 LLWEAPONEX_GRIMOIRE_DEATH_ACTIVATESKILL_DisplayName	Gain Activate Skill (Chargeless)
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_DisplayName	Aura of Torment
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_Description	Character is exuding an aura of death.

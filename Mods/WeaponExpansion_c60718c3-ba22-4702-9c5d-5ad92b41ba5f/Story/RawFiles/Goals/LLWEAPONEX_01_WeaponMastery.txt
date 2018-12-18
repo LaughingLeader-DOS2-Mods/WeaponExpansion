@@ -537,7 +537,7 @@ CharacterIsPlayer(_Player, 1)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_GainExperience(_Player, 100);
+LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
 DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 /*
@@ -551,7 +551,7 @@ CharacterIsPlayer(_Player, 1)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_GainExperience(_Player, 50);
+LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
 DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 IF
@@ -564,32 +564,13 @@ NOT DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _T
 PROC
 LLWEAPONEX_WeaponMastery_GainExperience((CHARACTERGUID)_Player, (INTEGER)_BaseExperience)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _Item)
-AND
-IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
-AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
-IsTagged(_Item, _WeaponType, 1)
+LLWEAPONEX_QRY_WeaponTypeMasteryEnabled(_Player, _WeaponType)
 AND
 LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType, _LevelVar)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
-
-PROC
-LLWEAPONEX_WeaponMastery_GainExperience((CHARACTERGUID)_Player, (INTEGER)_BaseExperience)
-AND
-CharacterGetEquippedItem(_Player, "Shield", _Item)
-AND
-IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
-AND
-IsTagged(_Item, _WeaponType, 1)
-AND
-LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType, _LevelVar)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
+LLWEAPONEX_WeaponMastery_AddExperience(_Player, _WeaponType, _BaseExperience);
 
 //Skill-based gains
 IF
@@ -626,31 +607,12 @@ LLWEAPONEX_WeaponMastery_GainExperienceWithType(_Player, _WeaponType, 175);
 PROC
 LLWEAPONEX_WeaponMastery_GainExperienceWithType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _Item)
-AND
-IsTagged(_Item, _WeaponType, 1)
-AND
-IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
-AND
-IsTagged(_Item, "LLWEAPONEX_WeaponMasteryComplete", 0)
+LLWEAPONEX_QRY_WeaponTypeMasteryEnabled(_Player, _WeaponType)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
+LLWEAPONEX_WeaponMastery_AddExperience(_Player, _WeaponType, _BaseExperience);
 
 PROC
-LLWEAPONEX_WeaponMastery_GainExperienceWithType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)
-AND
-CharacterGetEquippedItem(_Player, "Shield", _Item)
-AND
-IsTagged(_Item, _WeaponType, 1)
-AND
-IsTagged((ITEMGUID)_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
-AND
-IsTagged(_Item, "LLWEAPONEX_WeaponMasteryComplete", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperience(_Player, _Item, _WeaponType, _BaseExperience);
-
-PROC
-LLWEAPONEX_WeaponMastery_AddExperience((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_BaseExperience)
+LLWEAPONEX_WeaponMastery_AddExperience((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
@@ -676,6 +638,54 @@ IntegertoString(_Max, _MaxStr)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnExperienceAdded] Weapon Mastery [",_WeaponType,"] experience: [", _CurrentStr, "/",_MaxStr,"].");
 
+//REGION PARTY_WIDE_EXPERIENCE
+IF
+CharacterDying(_Enemy)
+AND
+DB_CombatCharacters(_Enemy, _CombatID)
+AND
+DB_IsPlayer(_Player)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_)
+AND
+CombatGetIDForCharacter(_Player, _CombatID)
+AND
+CharacterIsEnemy(_Enemy, _Player, 1)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_Player);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:CharacterDying] Enemy died. Adding mastery experience to all party members.");
+IterateParty(_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB", 50);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB")
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_Player)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_Player);
+
+/*
+PROC
+Proc_ObjectLeftCombat(_Enemy, _CombatID)
+AND
+CharacterIsDead((CHARACTERGUID)_Enemy, 1)
+AND
+CombatGetInvolvedPlayer(_CombatID, 1, _Player)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:Proc_ObjectLeftCombat] Enemy died. Adding mastery experience to all party members.");
+IterateParty(_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
+*/
+
+IF
+StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience")
+AND
+DB_IsPlayer(_Player) // Ignore summons
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:StoryEvent('LLWEAPONEX_WeaponMastery_AddPartyExperience')] Adding party mastery experience to player.");
+LLWEAPONEX_WeaponMastery_GainExperience(_Player, 100);
+//END_REGION
+
+//REGION LEVEL_UP
 QRY
 LLWEAPONEX_WeaponMastery_QRY_Internal_LeveledUp((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_CurrentXPVar, (STRING)_LevelVar, (INTEGER)_NextCurrent, (INTEGER)_Max)
 AND

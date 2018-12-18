@@ -6,7 +6,7 @@ KBSECTION
 PROC
 LLWEAPONEX_ToggledScripts_RegisterOnce()
 AND
-LLWEAPONEX_ToggleSettings_QRY_RegisterOnce("LLWEAPONEX_80_01_WM_Runeblade", "LLWEAPONEX_Runeblade")
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce_Tag("LLWEAPONEX_80_01_WM_Runeblade", "LLWEAPONEX_Runeblade")
 THEN
 GoalCompleted;
 

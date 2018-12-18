@@ -1,31 +1,6 @@
 INIT
 	
 EVENTS
-
-EVENT LLWEAPONEX_Grimoire_OpenBook
-VARS
-	CHARACTER:_Caster
-ON
-	OnCharacterEvent(_Caster, "LLWEAPONEX_Events_GrimoirePreparingToFire")
-ACTIONS
-IF "!c1&!c2"
-	CharacterHasStatus(_Caster, UNSHEATHED)
-	HasFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
-THEN
-	SetFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
-ENDIF
-
-EVENT LLWEAPONEX_Grimoire_CloseBook
-VARS
-	CHARACTER:_Caster
-ON
-	OnCharacterEvent(_Caster, "LLWEAPONEX_Events_GrimoireFired")
-ACTIONS
-IF "c1"
-	HasFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
-THEN
-	ClearFlag(_Caster, "LLWEAPONEX_OpenGrimoire")
-ENDIF
 	
 EVENT LLWEAPONEX_Grimoire_WindAttack_Target
 VARS

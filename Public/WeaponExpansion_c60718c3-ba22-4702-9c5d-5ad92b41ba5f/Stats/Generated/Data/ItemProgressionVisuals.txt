@@ -1526,8 +1526,8 @@ add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper","",""
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
 
 add levelgroup 0,0,"All"
-add rootgroup "60884e3d-45cb-4849-b35e-d24064386b9f",""
-add namegroup "ARM_UNIQUE_Blindfolds","",""
+add rootgroup "78b08f39-3d9d-47b5-b251-f1b8dcebe65b",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold","",""
 
 new itemgroup "WPN_LLWEAPONEX_BattleBook"
 

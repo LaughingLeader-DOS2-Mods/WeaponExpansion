@@ -18,3 +18,5 @@ Stats_LLWEAPONEX_Katana_Finisher	Finisher
 Stats_LLWEAPONEX_BeerChampion	Champion of Beer
 Stats_LLWEAPONEX_RapierMastery_DuelistBonus	Flourish (Duelist Stance)
 Stats_LLWEAPONEX_RapierMastery_CritDamageBoost	Flourish (Duelist Stance)
+Stats_LLWEAPONEX_BlindfoldEquipped	Blindfolded
+Stats_LLWEAPONEX_TormentedGhost	Tormented Ghost

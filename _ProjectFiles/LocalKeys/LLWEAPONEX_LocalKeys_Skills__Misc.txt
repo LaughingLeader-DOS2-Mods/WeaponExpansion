@@ -15,3 +15,7 @@ Shout_LLWEAPONEX_SwapGender_Description	Change to the opposite gender.<br><font 
 Shout_LLWEAPONEX_SwapGender_DisplayName	Swap Gender
 Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].
 Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
+MultiStrike_LLWEAPONEX_Torment_Haunt_DisplayName	Haunt
+MultiStrike_LLWEAPONEX_Torment_Haunt_Description	Haunt the target enemy, dealing [1] and apply Cursed.
+Target_LLWEAPONEX_Torment_ClaimSoul_DisplayName	Claim Soul
+Target_LLWEAPONEX_Torment_ClaimSoul_Description	Claim the soul of the target character. If they die, fully resurrect your body.

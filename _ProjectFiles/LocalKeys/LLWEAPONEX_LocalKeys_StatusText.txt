@@ -8,3 +8,4 @@ LLWEAPONEX_Skills_RunicReverb_Success	<font color='#40E0D0'>Runic Reverb</font>
 LLWEAPONEX_Status_DuelistStance_Failed	<font color='#FF0000'>An empty hand is required!</font>
 LLWEAPONEX_Status_DuelistStance_Warning	<font color='#fcd203'>Duelist Stance disabled while other hand is occupied.</font>
 LLWEAPONEX_Skills_DuelistStance_Bonus	<font color='#24ff24'>Flourish (+1 AP)</font>
+LLWEAPONEX_Status_Torment_Applied	<font color='#9A5085'>Torment</font>

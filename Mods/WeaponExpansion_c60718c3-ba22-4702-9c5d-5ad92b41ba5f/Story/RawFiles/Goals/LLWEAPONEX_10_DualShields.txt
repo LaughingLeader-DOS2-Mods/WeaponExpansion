@@ -85,6 +85,10 @@ ItemAddedToContainer(_CombatShield, _Shield)
 AND
 DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield)
 AND
+GetVarFixedString(_Shield, "LeaderLib_Rarity", _Rarity)
+AND
+GetVarInteger(_Shield, "LeaderLib_Level", _Level)
+AND
 ItemGetOwner(_Shield, _Owner)
 THEN
 NOT DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield);
@@ -93,6 +97,8 @@ ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield");
 SetTag(_CombatShield, "LLWEAPONEX_Debug_StorableCombatShield");
 SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
 SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
+SetVarFixedString(_CombatShield, "LeaderLib_Rarity", _Rarity);
+SetVarInteger(_CombatShield, "LeaderLib_Level", _Level);
 ItemSetOwner(_CombatShield, _Owner);
 LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.CombatShields");
 //ItemSetOnlyOwnerCanUse(_CombatShield, 1);
