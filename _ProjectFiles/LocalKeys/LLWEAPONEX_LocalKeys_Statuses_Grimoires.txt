@@ -15,3 +15,5 @@ LLWEAPONEX_GRIMOIRE_WIND_ACTIVE_DisplayName	Wind Grimoire
 LLWEAPONEX_GRIMOIRE_DEATH_ACTIVATESKILL_DisplayName	Gain Activate Skill (Chargeless)
 LLWEAPONEX_GRIMOIRE_DEATH_AURA_DisplayName	Aura of Torment
 LLWEAPONEX_GRIMOIRE_DEATH_AURA_Description	Character is exuding an aura of death.
+LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_DisplayName	Death Grimoire
+LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_Description	Character is channeling the power of Death.

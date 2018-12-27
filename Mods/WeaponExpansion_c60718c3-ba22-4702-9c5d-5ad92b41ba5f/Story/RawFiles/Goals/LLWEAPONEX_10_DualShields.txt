@@ -273,6 +273,24 @@ THEN
 LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);
 //END_REGION
 
+//REGION CC_PRESET_FIX
+/*
+//Post-CC Preset Fix
+PROC
+LLWEAPONEX_OnCharacterCreationFinished((CHARACTERGUID)_Player)
+AND
+CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Shield)
+AND
+_Shield != NULL_00000000-0000-0000-0000-000000000000
+AND
+IsTagged(_Shield, "LLWEAPONEX_DualShields", 1)
+AND
+ObjectGetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", _GeneratedShield)
+THEN
+LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);
+*/
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

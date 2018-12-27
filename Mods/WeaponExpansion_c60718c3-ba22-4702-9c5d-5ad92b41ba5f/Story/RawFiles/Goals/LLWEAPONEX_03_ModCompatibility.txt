@@ -36,6 +36,11 @@ DB_LLMIME_Mimicking_Blacklist_Skills("Shout_LLWEAPONEX_Grimoire_Toggle_Wind");
 */
 DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_ShieldToss_Returned");
 DB_LLMIME_Mimicking_Blacklist_Skills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect");
+
+PROC
+LLWEAPONEX_ModCompatibility_Internal_CompileErrorFix_VSCode()
+THEN
+DB_LLMIME_Mimicking_Blacklist_SkillElements("Shout", "");
 //END_REGION
 
 //REGION UPDATING

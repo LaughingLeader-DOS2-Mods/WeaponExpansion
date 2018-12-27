@@ -122,13 +122,6 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPV
 
 //REGION QUERIES
 QRY
-LLWEAPONEX_IgnoreWeapon((ITEMGUID)_Weapon)
-AND
-IsTagged(_Weapon, "LLMIME_MIMICKED_WEAPON", 1)
-THEN
-DB_NOOP(1);
-
-QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
@@ -318,7 +311,7 @@ ItemEquipped(_Item, _Player)
 AND
 DB_IsPlayer(_Player)
 AND
-NOT LLWEAPONEX_IgnoreWeapon(_Item)
+NOT LLWEAPONEX_QRY_IgnoreWeapon(_Item)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND

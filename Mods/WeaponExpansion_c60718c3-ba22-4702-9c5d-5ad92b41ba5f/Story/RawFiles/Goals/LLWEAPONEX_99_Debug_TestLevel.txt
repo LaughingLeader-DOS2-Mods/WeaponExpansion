@@ -20,12 +20,13 @@ TriggerResetAtmosphere(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e622
 //TRIGGERGUID_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1
 //ATMOSPHERERESOURCEGUID_LLWEAPONEX_ATM_Desert_01_CameraEdit_57690f2e-466a-4d38-a071-74b109cedef4
 //ATMOSPHERERESOURCEGUID_LLWEAPONEX_ATM_PBR_DOS2_Night_Blue_CameraEdit_f2e42e22-7126-47cc-9ded-5770cc83507c
-
+/*
 DB_LLWEAPONEX_Debug_TimeAtmospheres("Midnight", "9d066ac1-715d-4a9c-810c-f7d380a1d4bd", 0, 3);
 DB_LLWEAPONEX_Debug_TimeAtmospheres("Morning", "54db744e-8227-451a-9540-94877f0598f1", 4, 10);
 DB_LLWEAPONEX_Debug_TimeAtmospheres("Afternoon", "57690f2e-466a-4d38-a071-74b109cedef4", 11, 16);
 DB_LLWEAPONEX_Debug_TimeAtmospheres("Evening", "36eae440-f603-4bdd-9343-2d6ba7d87eb1", 17, 19);
 DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b650", 20, 24);
+*/
 //DB_LLWEAPONEX_Debug_TimeAtmospheres("Midnight", "9d066ac1-715d-4a9c-810c-f7d380a1d4bd", 0, 4);
 //DB_LLWEAPONEX_Debug_TimeAtmospheres("Morning", "54db744e-8227-451a-9540-94877f0598f1", 5, 11);
 //DB_LLWEAPONEX_Debug_TimeAtmospheres("Afternoon", "57690f2e-466a-4d38-a071-74b109cedef4", 12, 17);

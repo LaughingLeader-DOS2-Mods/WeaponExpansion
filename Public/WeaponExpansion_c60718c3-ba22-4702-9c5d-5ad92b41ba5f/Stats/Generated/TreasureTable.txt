@@ -191,6 +191,30 @@ new treasuretable "ST_LLWEAPONEX_DualShieldsNormal"
 new subtable "1,1"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_KatanasNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_CheatKatanas"
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_1H",1,0,1,0,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_2H",1,0,1,0,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_1H",1,0,0,1,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_2H",1,0,0,1,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_1H",1,0,0,0,1,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_2H",1,0,0,0,1,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsNormal"
 new subtable "4,1"
 object category "I_WPN_LLWEAPONEX_Throwing_Rock",10,0,0,0,0,0,0,0
@@ -742,7 +766,9 @@ object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
 new subtable "-2"
 object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
 new subtable "-2"
-object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
+new subtable "-2"
+object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
 
 new treasuretable "LLWEAPONEX_CheatQuivers"
 new subtable "-1"

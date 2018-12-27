@@ -3,6 +3,14 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+//REGION QUERIES
+QRY
+LLWEAPONEX_QRY_IgnoreWeapon((ITEMGUID)_Weapon)
+AND
+IsTagged(_Weapon, "LLMIME_MIMICKED_WEAPON", 1)
+THEN
+DB_NOOP(1);
+
 QRY
 LLWEAPONEX_QRY_ItemIsWeapon((ITEMGUID)_Item)
 AND
@@ -57,6 +65,71 @@ IsTagged(_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
 THEN
 DB_NOOP(1);
 
+QRY
+LLWEAPONEX_QRY_HasWeaponExpansionWeapon((CHARACTERGUID)_Character)
+AND
+CharacterGetEquippedItem(_Character, "Weapon", _Weapon)
+AND
+CharacterGetEquippedItem(_Character, "Shield", _Shield)
+AND
+GetTemplate(_Weapon, _WeaponTemplate)
+AND
+StringContains(_WeaponTemplate, "LLWEAPONEX", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_HasWeaponExpansionWeapon((CHARACTERGUID)_Character)
+AND
+CharacterGetEquippedItem(_Character, "Shield", _Weapon)
+AND
+GetTemplate(_Weapon, _WeaponTemplate)
+AND
+StringContains(_WeaponTemplate, "LLWEAPONEX", 1)
+THEN
+DB_NOOP(1);
+//END_REGION
+
+//REGION CHARACTER_CREATION
+IF
+RegionStarted(_Level)
+AND
+IsCharacterCreationLevel(_Level, 1)
+THEN
+DB_LLWEAPONEX_PostCCEnabled(1);
+
+IF
+GameStarted(_Level, _)
+AND
+DB_LLWEAPONEX_PostCCEnabled(1)
+AND
+IsGameLevel(_Level, 1)
+THEN
+TimerCancel("LLWEAPONEX_Timers_PostCCTimer_ResetDB");
+TimerLaunch("LLWEAPONEX_Timers_PostCCTimer_ResetDB", 250);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_PostCCTimer_ResetDB")
+AND
+DB_IsPlayer(_Player)
+THEN
+LLWEAPONEX_OnCharacterCreationFinished(_Player);
+
+//Some PostCC scripts have rules for when an item is equipped, so re-equip WEAPONEX weapons after CC
+PROC
+LLWEAPONEX_OnCharacterCreationFinished((CHARACTERGUID)_Player)
+AND
+LLWEAPONEX_QRY_HasWeaponExpansionWeapon(_Player)
+THEN
+LeaderLib_Helper_RefreshWeapons(_Player, 50);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_PostCCTimer_ResetDB")
+AND
+DB_LLWEAPONEX_PostCCEnabled(1)
+THEN
+NOT DB_LLWEAPONEX_PostCCEnabled(1);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
