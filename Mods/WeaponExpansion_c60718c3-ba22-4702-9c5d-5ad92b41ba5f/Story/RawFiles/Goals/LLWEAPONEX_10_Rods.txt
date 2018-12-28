@@ -49,17 +49,6 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:SkillAdded] Skill (",_Skill,") added to character.");
 */
 
-IF
-CanUseItem(_Character, _Item, _)
-AND
-IsTagged(_Item, "LLWEAPONEX_Rod", 1)
-AND
-IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
-AND
-NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
-THEN
-DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Item);
-
 QRY
 LLWEAPONEX_Rods_QRY_SkillVarsSet((ITEMGUID)_Rod)
 AND
@@ -73,12 +62,33 @@ _OffhandSkillStatus != ""
 THEN
 DB_NOOP(1);
 
+//PostCC refresh
+PROC
+LeaderLib_Helper_CanRefreshItem((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_Rod", 1)
+AND
+NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
+THEN
+DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Item);
+
+IF
+CanUseItem(_Character, _Item, _)
+AND
+IsTagged(_Item, "LLWEAPONEX_Rod", 1)
+AND
+IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+AND
+NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
+THEN
+DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Item);
+
 IF
 CharacterStatusAttempt(_Character, _TypeStatus, _)
 AND
 DB_LLWEAPONEX_Rods_SkillStatuses(_TypeStatus, _MainhandSkillStatusStatus, _OffhandSkillStatus)
-AND
-LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX:Rods:CharacterStatusAttempt] Status attempt (",_TypeStatus,").")
+//AND
+//LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX:Rods:CharacterStatusAttempt] Status attempt (",_TypeStatus,").")
 AND
 DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Rod)
 AND

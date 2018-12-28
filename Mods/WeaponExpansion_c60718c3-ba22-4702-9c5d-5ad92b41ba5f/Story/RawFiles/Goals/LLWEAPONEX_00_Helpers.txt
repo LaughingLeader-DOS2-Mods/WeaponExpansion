@@ -106,7 +106,7 @@ AND
 IsGameLevel(_Level, 1)
 THEN
 TimerCancel("LLWEAPONEX_Timers_PostCCTimer_ResetDB");
-TimerLaunch("LLWEAPONEX_Timers_PostCCTimer_ResetDB", 250);
+TimerLaunch("LLWEAPONEX_Timers_PostCCTimer_ResetDB", 500);
 
 IF
 TimerFinished("LLWEAPONEX_Timers_PostCCTimer_ResetDB")
@@ -121,7 +121,7 @@ LLWEAPONEX_OnCharacterCreationFinished((CHARACTERGUID)_Player)
 AND
 LLWEAPONEX_QRY_HasWeaponExpansionWeapon(_Player)
 THEN
-LeaderLib_Helper_RefreshWeapons(_Player, 50);
+LeaderLib_Helper_RefreshWeapons(_Player, 250, 500);
 
 IF
 TimerFinished("LLWEAPONEX_Timers_PostCCTimer_ResetDB")
