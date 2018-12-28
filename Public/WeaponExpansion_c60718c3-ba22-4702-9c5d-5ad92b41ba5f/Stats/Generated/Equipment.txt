@@ -540,7 +540,7 @@ add equipment entry "ARM_Fighter_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_DualShields_Dwarves_Preview"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_CombatShield_Dwarves_A"
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Dwarves_A_Preview"
 
 new equipment "Class_LLWEAPONEX_DualShields_Preview_Elves"
 add equipmentgroup
@@ -556,7 +556,7 @@ add equipment entry "ARM_Fighter_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_DualShields_Elves_Preview"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_CombatShield_Elves_B"
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Elves_B_Preview"
 
 new equipment "Class_LLWEAPONEX_DualShields_Preview_Humans"
 add equipmentgroup
@@ -572,7 +572,7 @@ add equipment entry "ARM_Fighter_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_DualShields_Humans_Preview"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_CombatShield_Humans_A"
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Humans_A_Preview"
 
 new equipment "Class_LLWEAPONEX_DualShields_Preview_Lizards"
 add equipmentgroup
@@ -588,7 +588,7 @@ add equipment entry "ARM_Fighter_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_DualShields_Lizards_Preview"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_CombatShield_Lizards_C"
+add equipment entry "WPN_LLWEAPONEX_CombatShield_Lizards_C_Preview"
 
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup

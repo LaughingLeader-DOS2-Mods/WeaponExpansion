@@ -67,11 +67,7 @@
 					<children>
 						<node id="AbilityChange">
 							<attribute id="Ability" value="WarriorLore" type="23" />
-							<attribute id="AmountIncreased" value="1" type="4" />
-						</node>
-						<node id="AbilityChange">
-							<attribute id="Ability" value="EarthSpecialist" type="23" />
-							<attribute id="AmountIncreased" value="1" type="4" />
+							<attribute id="AmountIncreased" value="2" type="4" />
 						</node>
 						<node id="AbilityChange">
                             <attribute id="Ability" value="Persuasion" type="23" />
