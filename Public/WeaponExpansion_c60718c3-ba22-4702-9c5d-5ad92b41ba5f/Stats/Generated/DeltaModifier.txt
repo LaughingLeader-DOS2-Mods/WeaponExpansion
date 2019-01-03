@@ -347,11 +347,26 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_Ability_WarriorLore",1
 
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling",1
 
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_Shatter"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Weapon_Skill_Shatter",1
 
-
-
-
+new deltamod "Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A",1
 
 new deltamod "Boost_Weapon_Ability_DualWielding"
 param "BoostType" "ItemCombo"

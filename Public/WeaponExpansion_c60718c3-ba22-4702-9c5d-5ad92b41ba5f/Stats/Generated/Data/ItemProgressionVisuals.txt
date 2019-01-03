@@ -901,6 +901,12 @@ add levelgroup 0,0,"All"
 add rootgroup "4be8ec78-17ed-4f61-b3d8-96c260d1c80a",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+
+add levelgroup 0,0,"All"
+add rootgroup "25726991-6bc1-45fb-a00b-d3bf855cd0d1","LLWEAPONEX_Katana_1H_Runeblade_Fire"
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H","",""
+
 new itemgroup "WPN_LLWEAPONEX_Rapier_1H_A"
 
 add levelgroup 0,0,"All"
@@ -912,6 +918,12 @@ new itemgroup "WPN_LLWEAPONEX_Rapier_1H_B"
 add levelgroup 0,0,"All"
 add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
 add namegroup "WPN_LLWEAPONEX_Rapier_1H","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+
+add levelgroup 0,0,"All"
+add rootgroup "d82bc239-4782-484c-88ab-e1fa571c9f6a",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H","",""
 
 new itemgroup "WPN_LLWEAPONEX_Rods_1H"
 
@@ -1328,12 +1340,6 @@ new itemgroup "WPN_LLWEAPONEX_Runeblade_Debug_1H"
 add levelgroup 0,0,"All"
 add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_Runeblade_Human_A"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Debug_1H","","Item_WPN_Human_Normal_BastardSword_A_C"
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_Fire_1H_Katana"
-
-add levelgroup 0,0,"All"
-add rootgroup "25726991-6bc1-45fb-a00b-d3bf855cd0d1","LLWEAPONEX_Katana_1H_Runeblade_Fire"
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_Fire_1H_Katana","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
 

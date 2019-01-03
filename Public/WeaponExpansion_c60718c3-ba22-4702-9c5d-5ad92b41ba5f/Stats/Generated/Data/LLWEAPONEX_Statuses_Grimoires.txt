@@ -20,6 +20,7 @@ data "ApplyEffect" "RS3_FX_Skills_Voodoo_Cast_Aoe_Voodoo_Bone_Root_01:Dummy_Root
 data "Skills" ""
 data "AuraSelf" "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_BONUS"
 data "AuraAllies" "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_BONUS"
+data "AuraRadius" "12"
 
 new entry "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_BONUS"
 type "StatusData"

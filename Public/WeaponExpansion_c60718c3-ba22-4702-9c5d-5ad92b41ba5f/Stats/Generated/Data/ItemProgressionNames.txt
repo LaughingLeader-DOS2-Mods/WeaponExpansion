@@ -65,9 +65,15 @@ add name "Odachi",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
 add name "Muramasa, The Cursed Blade",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+add name "Kagutsuchi",""
+
 new namegroup "WPN_LLWEAPONEX_Rapier_1H"
 add name "Rapier",""
 add name "Estoc",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+add name "Frostdyne",""
 
 new namegroup "WPN_LLWEAPONEX_Beginner_Rod"
 add name "Weak Rod",""
@@ -272,9 +278,6 @@ add name "Debug Runeblade",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
 add name "Chaos Edge",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_Fire_1H_Katana"
-add name "Kagutsuchi",""
 
 new namegroup "WPN_LLWEAPONEX_Greatbow_Weak"
 add name "Worn Greatbow",""
