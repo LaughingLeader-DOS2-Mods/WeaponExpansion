@@ -310,6 +310,11 @@ IF
 ItemEquipped(_Item, _Player)
 AND
 DB_IsPlayer(_Player)
+THEN
+LLWEAPONEX_WeaponMastery_Internal_OnItemEquipped(_Player, _Item);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
 NOT LLWEAPONEX_QRY_IgnoreWeapon(_Item)
 AND
@@ -336,6 +341,26 @@ PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
 THEN
 DB_NOOP(1);
+//END_REGION
+
+//REGION PRESET_APPLIED
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
+AND
+CharacterGetEquippedItem(_Player, "Weapon",  (ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+THEN
+LLWEAPONEX_WeaponMastery_Internal_OnItemEquipped(_Player, _Item);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
+AND
+CharacterGetEquippedItem(_Player, "Shield",  (ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+THEN
+LLWEAPONEX_WeaponMastery_Internal_OnItemEquipped(_Player, _Item);
 //END_REGION
 
 //REGION UNEQUIP_REMOVAL_EVENT

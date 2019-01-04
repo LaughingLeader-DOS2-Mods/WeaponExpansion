@@ -93,16 +93,10 @@ using "_BOOSTS_Weapon"
 data "Value" "10"
 data "Skills" "Shout_GlobalCooling"
 
-new entry "_Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling"
-type "Weapon"
-using "_BOOSTS_Weapon"
-data "Value" "10"
-data "Skills" "Shout_GlobalCooling"
-
 new entry "_Boost_LLWEAPONEX_Weapon_Skill_Shatter"
 type "Weapon"
 using "_BOOSTS_Weapon"
-data "Value" "10"
+data "Value" "16"
 data "Skills" "Cone_Shatter"
 
 new entry "_Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A"

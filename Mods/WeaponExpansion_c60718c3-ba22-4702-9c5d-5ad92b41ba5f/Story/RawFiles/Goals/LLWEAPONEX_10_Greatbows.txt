@@ -4,6 +4,7 @@ INITSECTION
 LLWEAPONEX_Greatbows_InitSettings();
 
 KBSECTION
+//REGION SETTINGS
 PROC
 LLWEAPONEX_Greatbows_InitSettings()
 THEN
@@ -53,6 +54,7 @@ DB_LLWEAPONEX_Quivers_ArrowTreasure(0, "ST_LLWEAPONEX_Quiver_Arrows");
 DB_LLWEAPONEX_Quivers_ArrowTreasure(1, "ST_LLWEAPONEX_Quiver_GreatbowArrows");
 
 DB_LLWEAPONEX_Quivers_RechargeStatus("Shout_LLWEAPONEX_Quiver_DrawArrow", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", 60.0);
+//END_REGION
 
 //REGION GREATBOW_START_ATTACK
 IF

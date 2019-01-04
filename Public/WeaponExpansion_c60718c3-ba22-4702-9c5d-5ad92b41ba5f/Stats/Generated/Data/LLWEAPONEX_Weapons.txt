@@ -1106,6 +1106,7 @@ data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_AUTOLEVEL_INFO"
 data "Skills" "Shout_LLWEAPONEX_ActivateRuneblade_Ice"
 data "Unique" "1"
 data "Boosts" "LLWEAPONEX_Boost_Unique_Rapier_Runeblade_Water_OnHit"
+data "Value" "198"
 
 new entry "LLWEAPONEX_Boost_Unique_Rapier_Runeblade_Water_OnHit"
 type "Weapon"

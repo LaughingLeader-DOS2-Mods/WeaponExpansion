@@ -66,12 +66,13 @@ LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLW
 
 //Unique Weapon Deltamods
 //Rapiers
-LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_B_d82bc239-4782-484c-88ab-e1fa571c9f6a");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_d82bc239-4782-484c-88ab-e1fa571c9f6a");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 2, "Boost_Weapon_Ability_WaterSpecialist_Wand", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Skill_Shatter", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 6, "Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 8, "Boost_LLWEAPONEX_Weapon_Skill_Shatter", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 10, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 12, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 15, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
 
 //Grimoires
