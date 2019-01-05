@@ -19,3 +19,5 @@ MultiStrike_LLWEAPONEX_Torment_Haunt_DisplayName	Haunt
 MultiStrike_LLWEAPONEX_Torment_Haunt_Description	Haunt the target enemy, dealing [1] and apply Cursed.
 Target_LLWEAPONEX_Torment_ClaimSoul_DisplayName	Claim Soul
 Target_LLWEAPONEX_Torment_ClaimSoul_Description	Claim the soul of the target character. If they die, fully resurrect your body.
+Shout_LLWEAPONEX_ZombifySelf_DisplayName	Zombify
+Shout_LLWEAPONEX_ZombifySelf_Description	Temporarily gain a few Zombie-like traits, gaining <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.

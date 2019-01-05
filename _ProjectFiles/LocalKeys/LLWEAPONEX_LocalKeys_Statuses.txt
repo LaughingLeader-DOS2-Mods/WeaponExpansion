@@ -69,3 +69,5 @@ LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage
 LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!
 LLWEAPONEX_TORMENT_CLAIMSOUL_DisplayName	Claimed Soul
 LLWEAPONEX_TORMENT_CLAIMSOUL_Description	Character's soul has been claimed, and will restore life to the Tormented Ghost's corpse if they die.
+LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
+LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.

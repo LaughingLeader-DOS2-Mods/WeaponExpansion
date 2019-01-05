@@ -20,3 +20,4 @@ Stats_LLWEAPONEX_RapierMastery_DuelistBonus	Flourish (Duelist Stance)
 Stats_LLWEAPONEX_RapierMastery_CritDamageBoost	Flourish (Duelist Stance)
 Stats_LLWEAPONEX_BlindfoldEquipped	Blindfolded
 Stats_LLWEAPONEX_TormentedGhost	Tormented Ghost
+Stats_LLWEAPONEX_Zombified	Zombified
