@@ -17,3 +17,7 @@ LLWEAPONEX_GRIMOIRE_DEATH_AURA_DisplayName	Aura of Torment
 LLWEAPONEX_GRIMOIRE_DEATH_AURA_Description	Character is exuding an aura of death.
 LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_DisplayName	Death Grimoire
 LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_Description	Character is channeling the power of Death.
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS_DisplayName	Tormented
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS_Description	Upon death, character will return as a Tormented Ghost.
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB_DisplayName	Tormented
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB_Description	Upon death, character will explode.

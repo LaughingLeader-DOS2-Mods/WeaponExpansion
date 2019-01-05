@@ -235,7 +235,7 @@ NOT LeaderLib_Helper_QRY_HasStatus(_Character, "UNSHEATHED")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:PlayEquippedFX] Playing sheathed FX.");
 DB_LLWEAPONEX_Grimoire_Temp_IsSettingFX(_Character);
-LLWEAPONEX_Grimoire_SendNextEffect(_Character, _Item, _Template, _SheathedFX, "Dummy_BackFX_L");
+LLWEAPONEX_Grimoire_SendNextEffect(_Character, _Item, _Template, _SheathedFX, "Dummy_BackFX_L", 0);
 
 //Unsheathed
 PROC
@@ -249,7 +249,7 @@ LeaderLib_Helper_QRY_HasStatus(_Character, "UNSHEATHED")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:PlayEquippedFX] Playing unsheathed FX.");
 DB_LLWEAPONEX_Grimoire_Temp_IsSettingFX(_Character);
-LLWEAPONEX_Grimoire_SendNextEffect(_Character, _Item, _Template, _UnsheathedFX, "Dummy_FrontFX_L");
+LLWEAPONEX_Grimoire_SendNextEffect(_Character, _Item, _Template, _UnsheathedFX, "Dummy_FrontFX_L", 1);
 //LeaderLib_StartObjectTimer(_Character, 30, "LLWEAPONEX_Timers_StopGrimoireSheathedFX", "LLWEAPONEX_Grimoire_StopSheathedFX");
 
 PROC
@@ -261,20 +261,20 @@ NOT DB_LLWEAPONEX_Grimoire_Temp_IsSettingFX(_Character)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:PlayEquippedFX] Playing unsheathed FX (forced).");
 DB_LLWEAPONEX_Grimoire_Temp_IsSettingFX(_Character);
-LLWEAPONEX_Grimoire_SendNextEffect(_Character, _Item, _Template, _UnsheathedFX, "Dummy_FrontFX_L");
+LLWEAPONEX_Grimoire_SendNextEffect(_Character, _Item, _Template, _UnsheathedFX, "Dummy_FrontFX_L", 1);
 
 PROC
-LLWEAPONEX_Grimoire_SendNextEffect((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_Effect, (STRING)_Bone)
+LLWEAPONEX_Grimoire_SendNextEffect((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_Effect, (STRING)_Bone, (INTEGER)_Unsheathed)
 AND
 GetUUID(_Character, _UUID)
 AND
 StringConcatenate(_UUID, _Effect, _EffectID)
 THEN
-SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextHandleID", _EffectID);
-SetVarString(_Character, "LLWEAPONEX_Grimoire_NextLoopFX", _Effect);
-SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextBone", _Bone);
+SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_PlayHandleID", _EffectID);
+SetVarString(_Character, "LLWEAPONEX_Grimoire_PlayFX", _Effect);
+SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_PlayBone", _Bone);
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_PlayLoopFX");
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID);
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed);
 
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_FX_PlayEventComplete")
@@ -293,58 +293,57 @@ LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template);
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 THEN
-LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template, "LLWEAPONEX_Grimoire_StartUnsheathedFX");
+LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template, 0);
 
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (STRING)_CompletionEvent)
+LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, 0)
 AND
-NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnGrimoireUnsheathed] Stopping current looped grimoire FX and sending [",_CompletionEvent,"] afterwards.");
-DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
-SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextHandleID", _EffectID);
-SetVarString(_Character, "LLWEAPONEX_Grimoire_StopCompletionEvent", _CompletionEvent);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnGrimoireUnsheathed] Playing next unsheathed effect.");
+LLWEAPONEX_Grimoire_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+
+PROC
+LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, 1)
+AND
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnGrimoireUnsheathed] Starting unsheathed FX (forced).");
+LLWEAPONEX_Grimoire_PlayEquippedFX_Force(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+
+PROC
+LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (INTEGER)_ForceUnsheathed)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoire_StopSheathedFXAfterDelay", 33);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoire_StopSheathedFXAfterDelay")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, 0)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnGrimoireUnsheathed] Stopping current looped sheathed grimoire FX.");
+SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_StopHandleID", _EffectID);
+SetVarString(_Character, "LLWEAPONEX_Grimoire_StopCompletionEvent", "LLWEAPONEX_Grimoire_ClearSheathedFX");
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopLoopFX");
 
 IF
-StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StartUnsheathedFX")
+StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_ClearSheathedFX")
 AND
-DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
-AND
-DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, 0)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:LLWEAPONEX_Grimoire_StartUnsheathedFX] Starting unsheathed FX.");
-NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
-NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID);
-LLWEAPONEX_Grimoire_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
-
-IF
-StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StartUnsheathedFX_Force")
-AND
-DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
-AND
-DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:LLWEAPONEX_Grimoire_StartUnsheathedFX] Starting unsheathed FX (forced).");
-NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
-NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID);
-LLWEAPONEX_Grimoire_PlayEquippedFX_Force(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, 0);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:LLWEAPONEX_Grimoire_ClearSheathedFX] Cleared sheathed FX from database.");
 
 PROC
 LLWEAPONEX_Grimoire_StopAllEffects((CHARACTERGUID)_Character)
 AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed)
 AND
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _)
 THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed);
 DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
-SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextHandleID", _EffectID);
+SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_StopHandleID", _EffectID);
 SetVarString(_Character, "LLWEAPONEX_Grimoire_StopCompletionEvent", "LLWEAPONEX_Grimoire_StopOtherFX");
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopLoopFX");
 
@@ -352,11 +351,8 @@ IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StopOtherFX")
 AND
 DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
-NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID);
 
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StopOtherFX")
@@ -373,46 +369,36 @@ LLWEAPONEX_Grimoire_OnGrimoireSheathed(_Character, _Item, _Template);
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireSheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
-NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
-AND
 DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
-DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
 PlayEffect(_Character, _TransitionFX, "Dummy_FrontFX_L");
 LeaderLib_StartObjectTimer(_Character, 30, "LLWEAPONEX_Timers_StopGrimoireUnsheathedFX", "LLWEAPONEX_Grimoire_StopUnsheathedFX");
 
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StopUnsheathedFX")
 AND
-DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, 1)
 AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
+NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _)
 THEN
-SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_NextHandleID", _EffectID);
+DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
+SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_StopHandleID", _EffectID);
 SetVarString(_Character, "LLWEAPONEX_Grimoire_StopCompletionEvent", "LLWEAPONEX_Grimoire_StartSheathedFXTimer");
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopLoopFX");
 
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StartSheathedFXTimer")
 AND
-DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID)
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, 1)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _FX, _EffectID);
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, 1);
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX", 1670);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX")
 AND
-NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _)
-AND
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsSettingFX(_Character)
-AND
-NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _, _, _, _)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 AND
@@ -428,7 +414,7 @@ NOT LeaderLib_Helper_QRY_HasStatus(_Character, "UNSHEATHED")
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 THEN
-LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template, "LLWEAPONEX_Grimoire_StartUnsheathedFX_Force");
+LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template, 1);
 
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Events_GrimoireFired")

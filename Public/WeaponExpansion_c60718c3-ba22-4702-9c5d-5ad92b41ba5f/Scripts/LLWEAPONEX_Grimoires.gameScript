@@ -234,7 +234,7 @@ ON
 	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_PlayLoopFX")
 ACTIONS
 IF "c1"
-	GetVar(_HandleName, _Character, "LLWEAPONEX_Grimoire_NextHandleID")
+	GetVar(_HandleName, _Character, "LLWEAPONEX_Grimoire_PlayHandleID")
 THEN
 	IF "c1"
 		GetVar(_Handle, _Character, _HandleName)
@@ -243,8 +243,8 @@ THEN
 		SetVar(_Character, _HandleName, INT64:null)
 	ENDIF
 	IF "c1&c2"
-		GetVar(_FX, _Character, "LLWEAPONEX_Grimoire_NextLoopFX")
-		GetVar(_Bone, _Character, "LLWEAPONEX_Grimoire_NextBone")
+		GetVar(_FX, _Character, "LLWEAPONEX_Grimoire_PlayFX")
+		GetVar(_Bone, _Character, "LLWEAPONEX_Grimoire_PlayBone")
 	THEN
 		CharacterPlayLoopEffect(_Handle, _Character, _FX, _Bone)
 		SetVar(_Character, _HandleName, _Handle)
@@ -264,7 +264,7 @@ ON
 	OnCharacterEvent(_Character, "LLWEAPONEX_Grimoire_StopLoopFX")
 ACTIONS
 IF "c1&c2"
-	GetVar(_HandleName, _Character, "LLWEAPONEX_Grimoire_NextHandleID")
+	GetVar(_HandleName, _Character, "LLWEAPONEX_Grimoire_StopHandleID")
 	GetVar(_Handle, _Character, _HandleName)
 THEN
 	StopLoopEffect(_Handle, 1)

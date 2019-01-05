@@ -14,6 +14,6 @@ Target_LLWEAPONEX_CopyLastSkill_DisplayName	Copy Last Skill
 Teleportation_LLWEAPONEX_Scramble_Description	Randomly swap the positions of objects caught within [1].<br><font color='#73f6ff'>Translocation Magic</font><br>If the <font color='#c9aa58'>Translocation Grimoire</font> is active, apply <font color='#FF0000'>Translocation Damage</font> to enemies, and <font color='#97fbff'>Translocation Surge</font> to allies.
 Teleportation_LLWEAPONEX_Scramble_DisplayName	Scramble
 Shout_LLWEAPONEX_Grimoire_Death_Toggle_DisplayName	Activate Grimoire
-Shout_LLWEAPONEX_Grimoire_Death_Toggle_Description	Activate the <font color='#7f00ff'>Death Magic</font> within your Grimoire.<br>Necromancy-based skills have a chance to inflict a random status ailment on enemies.<br>Allies within [1]m can Zombify for 2 turns, bleeding poison when hit, and gaining [2]% increased lifesteal.
+Shout_LLWEAPONEX_Grimoire_Death_Toggle_Description	Activate the <font color='#7f00ff'>Death Magic</font> within your Grimoire.<br>Necromancy-based skills have a chance to inflict a random status ailment on enemies.<br>Gain the ability to Zombify allies for 2 turns.
 Shout_LLWEAPONEX_Grimoire_DeathAura_DisplayName	Aura of Torment
 Shout_LLWEAPONEX_Grimoire_DeathAura_Description	Exude an aura of death for 4 turns. When an enemy dies, their soul erupts for [1] and sets a stack of Soul Burn on surrounding enemies within [2] range.<br>Allies (and you) create a Tormented Ghost upon death, haunting the battlefield for 3 turns.<br>If the Tormented Ghost slays an enemy, their body is resurrected.

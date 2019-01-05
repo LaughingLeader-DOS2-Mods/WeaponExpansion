@@ -14,7 +14,9 @@ GoalCompleted;
 PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
 AND
-ObjectIsCharacter(_Target, 1)
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+AND
+CharacterIsEnemy(_Caster, _Target, 1)
 AND
 HasActiveStatus(_Caster, "UNSHEATHED", _Unsheathed)
 THEN
