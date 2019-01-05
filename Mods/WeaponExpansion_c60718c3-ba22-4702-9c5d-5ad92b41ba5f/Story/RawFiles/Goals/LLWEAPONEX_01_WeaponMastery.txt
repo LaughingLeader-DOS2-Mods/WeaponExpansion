@@ -655,6 +655,7 @@ AND
 IntegertoString(_Max, _MaxStr)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnExperienceAdded] Weapon Mastery [",_WeaponType,"] experience: [", _CurrentStr, "/",_MaxStr,"].");
+//END_REGION
 
 //REGION PARTY_WIDE_EXPERIENCE
 IF

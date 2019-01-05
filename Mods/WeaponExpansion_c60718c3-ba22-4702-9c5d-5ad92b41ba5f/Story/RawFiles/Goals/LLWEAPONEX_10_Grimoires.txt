@@ -1346,7 +1346,7 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_Grimoire_QRY_MimicryDisabled_SkillIsAllowed((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
 AND
-NOT DB_LLMIME_Mimicking_Blacklist_Skills(_Skill)
+NOT DB_LLMIME_Mimicking_Blacklist_Skills(_, _Skill)
 AND
 NOT DB_LLMIME_Mimicking_Blacklist_SkillElements(_SkillType, _SkillElement)
 THEN
