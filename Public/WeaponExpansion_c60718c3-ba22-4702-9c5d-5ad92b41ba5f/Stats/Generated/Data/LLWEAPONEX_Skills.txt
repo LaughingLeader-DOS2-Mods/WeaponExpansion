@@ -299,7 +299,7 @@ data "LandingEffect" "RS3_FX_Skills_Void_Cast_VoidGlide_Root_01,KeepRot:root:cas
 new entry "Rush_LLWEAPONEX_EnemyChaosCharge"
 type "SkillData"
 using "Rush_LLWEAPONEX_MagicBatteringRam"
-data "DisplayName" "Rush_LLWEAPONEX_EnemyChaosCharge"
+data "DisplayName" "Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName"
 data "DisplayNameRef" "Chaos Charge"
 data "PrepareAnimationInit" "skill_rushattack_start"
 data "PrepareAnimationLoop" "skill_rushattack_loop"

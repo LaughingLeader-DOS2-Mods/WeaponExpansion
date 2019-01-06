@@ -35,6 +35,13 @@ PROC
 LLWEAPONEX_ModCompatibility_Internal_CompileErrorFix_VSCode()
 THEN
 DB_LLMIME_Mimicking_Blacklist_SkillElements("Shout", "");
+
+PROC
+LLWEAPONEX_ModCompatibility_Internal_CompileErrorFix_VSCode()
+AND
+DB_Mimicry_BlockWeaponMimicking(NULL_00000000-0000-0000-0000-000000000000)
+THEN
+NOT DB_Mimicry_BlockWeaponMimicking(NULL_00000000-0000-0000-0000-000000000000);
 //END_REGION
 
 //REGION UPDATING
@@ -46,6 +53,16 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:ModCompatibility] Updating settings from version [",_PastVersion,"] to [",_NewVersion,"]");
 LLWEAPONEX_ModCompatibility_InitMimicrySettings();
 //END_REGION
+
+//REGION MIMICRY_MIMICKED_WEAPONS
+PROC
+Mimicry_BlockMimickedWeapon((ITEMGUID)_Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
+THEN
+DB_Mimicry_BlockWeaponMimicking(_Item);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

@@ -23,3 +23,4 @@ Shout_LLWEAPONEX_ZombifySelf_DisplayName	Zombify Self
 Shout_LLWEAPONEX_ZombifySelf_Description	Temporarily gain a few Zombie-like traits, gaining <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
 Target_LLWEAPONEX_Zombify_DisplayName	Zombify
 Target_LLWEAPONEX_Zombify_Description	Temporarily zombify an ally, granting them <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
+Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge

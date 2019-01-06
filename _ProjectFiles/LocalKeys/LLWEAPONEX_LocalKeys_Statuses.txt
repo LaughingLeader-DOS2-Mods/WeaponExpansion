@@ -1,4 +1,4 @@
-LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item levels up automatically
+LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item automatically levels up
 LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.
 LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power
 LLWEAPONEX_COMBAT_SHIELD_ARMOR_Description	Character has increased armor from a combat shield.

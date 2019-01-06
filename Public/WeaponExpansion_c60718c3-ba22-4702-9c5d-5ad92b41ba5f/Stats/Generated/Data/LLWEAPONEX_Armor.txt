@@ -218,7 +218,7 @@ data "APMaximum" "1"
 data "Weight" "1"
 data "Unique" "1"
 data "Value" "291"
-data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_BLINDFOLD_EQUIPPED"
+data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_BLINDFOLD_EQUIPPED;SELF:OnEquip:LLWEAPONEX_AUTOLEVEL_INFO"
 
 new entry "ARM_LLWEAPONEX_Blindfold_Preview"
 type "Armor"
