@@ -138,6 +138,13 @@ THEN
 DB_NOOP(1);
 
 QRY
+LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
@@ -323,6 +330,7 @@ AND
 IsTagged(_Item, _WeaponType, 1)
 THEN
 ObjectSetFlag(_Player, _EnabledFlag);
+SetTag(_Player, "LLWEAPONEX_MasteryActive");
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
@@ -339,8 +347,10 @@ DB_NOOP(1);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _, _)
 THEN
-DB_NOOP(1);
+ClearTag(_Player, "LLWEAPONEX_MasteryActive");
 //END_REGION
 
 //REGION PRESET_APPLIED
@@ -551,12 +561,12 @@ DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", "PiercingSho
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
 AND
-CharacterIsPlayer(_Player, 1)
+DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
 LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
-DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 /*
 To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
@@ -565,19 +575,17 @@ Additionally, Runeblades gain less experience since it's standard to dual-wield 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", (CHARACTERGUID)_Player)
 AND
-CharacterIsPlayer(_Player, 1)
+DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
 LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
-DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
-IF
-CharacterStatusRemoved(_Target, "HIT", _)
-AND
-DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target)
+PROC
+LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+DB_NOOP(1);
 
 PROC
 LLWEAPONEX_WeaponMastery_GainExperience((CHARACTERGUID)_Player, (INTEGER)_BaseExperience)
@@ -589,38 +597,6 @@ AND
 LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType, _LevelVar)
 THEN
 LLWEAPONEX_WeaponMastery_AddExperience(_Player, _WeaponType, _BaseExperience);
-
-//Skill-based gains
-IF
-SkillCast(_Player, _Skill, _, _)
-AND
-CharacterIsPlayer(_Player, 1)
-AND
-DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Status)
-AND
-ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-AND
-LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType)
-THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
-
-//Cancel gaining experience from skillcasts if it's a weapon-based skill
-IF
-CharacterStatusApplied(_Target, "HIT", (CHARACTERGUID)_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
-
-IF
-CharacterStatusApplied(_Target, "HIT", (CHARACTERGUID)_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
-LLWEAPONEX_WeaponMastery_GainExperienceWithType(_Player, _WeaponType, 175);
 
 PROC
 LLWEAPONEX_WeaponMastery_GainExperienceWithType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)

@@ -51,6 +51,7 @@ SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
 
 //REGION EQUIP_EVENTS
 
+/*
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Weapon)
 AND
@@ -71,6 +72,7 @@ AND
 GetTemplate(_Weapon, _Template)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ItemEquipped] [",_Template,"]");
+*/
 
 QRY
 LLWEAPONEX_BonusConversion_QRY_BonusVariableSet((ITEMGUID)_Weapon, (STRING)_ConversionStatus)

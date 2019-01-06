@@ -1,0 +1,56 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_ToggledScripts_RegisterOnce();
+KBSECTION
+PROC
+LLWEAPONEX_ToggledScripts_RegisterOnce()
+AND
+LLWEAPONEX_ToggleSettings_QRY_RegisterOnce_Tag("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive")
+THEN
+GoalCompleted;
+
+//Skill-based gains
+IF
+CharacterUsedSkill(_Player, _Skill, _, _)
+AND
+DB_IsPlayer(_Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+AND
+IsTagged(_Player, "LLWEAPONEX_MasteryActive", 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
+AND
+ObjectGetFlag(_Player, _EnabledFlag, 1)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+
+PROC
+LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+
+IF
+//AttackedByObject(_Target, _, (CHARACTERGUID)_Player, _, _)
+CharacterStatusApplied(_Target, "HIT", (CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+LLWEAPONEX_WeaponMastery_GainExperienceWithType(_Player, _WeaponType, 175);
+
+PROC
+LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries()
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+
+EXITSECTION
+LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries();
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"
