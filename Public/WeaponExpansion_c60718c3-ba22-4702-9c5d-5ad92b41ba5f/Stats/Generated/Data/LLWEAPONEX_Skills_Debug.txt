@@ -22,8 +22,6 @@ data "CastAnimation" "skill_attack_projectile_02_cast"
 data "CastSelfAnimation" "skill_attack_projectile_02_cast"
 data "CastTextEvent" "cast"
 data "PrepareEffect" "RS3_FX_Skills_Voodoo_Prepare_Weapon_Decay_Hand_01:Dummy_FX_01"
-data "CastAnimation" "skill_attack_round_01_cast"
-data "CastTextEvent" "cast"
 data "CastEffect" "RS3_FX_Skills_Voodoo_Attack_Precision_Decay_Hand_01:Dummy_FX_01"
 
 new entry "Target_LLWEAPONEX_DebugTargetSkill-1"
