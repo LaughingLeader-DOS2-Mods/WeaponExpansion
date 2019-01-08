@@ -130,7 +130,7 @@ THEN
 LLWEAPONEX_VendingMachine_RegisterOrderMenu();
 
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.1.22")
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.2.0")
 THEN
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_Spear_2H_PowerPole_3a40634d-b4c3-482a-9f24-c5e93b336d6a");
 //END_REGION

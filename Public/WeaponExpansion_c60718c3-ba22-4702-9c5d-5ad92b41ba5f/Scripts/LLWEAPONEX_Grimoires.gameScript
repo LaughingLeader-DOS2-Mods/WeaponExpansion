@@ -161,7 +161,7 @@ THEN
 	IF "c1"
 		IsInCombat(_Character)
 	THEN
-		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY, 1, 0, _Character)
+		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY, -1, 0, _Character)
 	ELSE
 		SetFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
 	ENDIF
@@ -190,7 +190,7 @@ ELSE
 		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY)
 		CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 	THEN
-		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
+		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 2, 0, _Character)
 	ENDIF
 ENDIF
 
@@ -205,7 +205,13 @@ IF "!c1&!c2&!c3"
 	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_READY)
 	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 THEN
-	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
+	IF "c1"
+		IsInCombat(_Character)
+	THEN
+		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 2, 0, _Character)
+	ELSE
+		CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 1, 0, _Character)
+	ENDIF
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_Mimic_StartCountdown
@@ -220,7 +226,7 @@ IF "c1&!c2&!c3"
 	HasFlag(_Character, "LLWEAPONEX_Grimoire_MimicReady")
 	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN)
 THEN
-	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 3, 0, _Character)
+	CharacterApplyStatus(_Character, LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN, 2, 0, _Character)
 ENDIF
 
 EVENT LLWEAPONEX_Grimoire_PlayFX

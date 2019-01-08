@@ -1374,18 +1374,16 @@ ENDIF
 	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
 	RETURN(_RemoveList, _Result, _Turns)
 
-EVENT LLWEAPONEX_Runeblade_LastRuneStatus_Special
+/*
+// May be preferencial to ignore special combo rune activations like this, so real combos are saved in the echo
+EVENT LLWEAPONEX_Runeblade_LastRuneStatus_Special_Ice
 VARS
 	CHARACTER:_Character
-	LIST<STATUS>:_RemoveList
-	STATUS:_Result
-	INT:_Turns
-	INT:_TurnsLeft
-	STATUS:_LastRuneStatus
 ON
 	OnSkillCast(_Character, Shout_LLWEAPONEX_ActivateRuneblade_Ice)
 ACTIONS
-	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE)
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", STATUS:LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE)
+*/
 
 EVENT LLWEAPONEX_Runeblade_Reverb
 VARS
