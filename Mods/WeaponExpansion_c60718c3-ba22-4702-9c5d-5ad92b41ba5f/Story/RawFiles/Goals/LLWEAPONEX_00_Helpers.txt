@@ -25,6 +25,15 @@ THEN
 DB_NOOP(1);
 
 QRY
+LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Player)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", NULL_00000000-0000-0000-0000-000000000000)
+AND
+CharacterGetEquippedItem(_Player, "Shield", NULL_00000000-0000-0000-0000-000000000000)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_QRY_WeaponTypeEquipped((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
 CharacterGetEquippedItem(_Player, "Weapon", _Item)
@@ -86,6 +95,20 @@ AND
 GetTemplate(_Weapon, _WeaponTemplate)
 AND
 StringContains(_WeaponTemplate, "LLWEAPONEX", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_IsEquippedWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Item)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_IsEquippedWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
 THEN
 DB_NOOP(1);
 //END_REGION

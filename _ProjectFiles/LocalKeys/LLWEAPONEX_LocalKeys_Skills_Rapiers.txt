@@ -1,2 +1,2 @@
-Shout_LLWEAPONEX_Rapier_DuelistStance_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Take a stance that enhances guile and speed.<br>While your offhand is empty, gain [1] Damage, [2] Dodge, and [3] additional Movement Speed.<br>Critical hits grant a bonus of +1 AP every 2 turns.
+Shout_LLWEAPONEX_Rapier_DuelistStance_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Take a stance that enhances guile and speed.<br>While your offhand is empty, gain +[1]% Damage, +[2]% Dodge, and +%[3] additional Movement Speed.<br>Critical hits grant a bonus of +1 AP every 2 turns.
 Shout_LLWEAPONEX_Rapier_DuelistStance_DisplayName	Duelist Stance

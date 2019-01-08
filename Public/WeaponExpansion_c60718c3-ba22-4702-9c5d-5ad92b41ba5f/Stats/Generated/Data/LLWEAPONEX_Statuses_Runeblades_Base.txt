@@ -45,7 +45,7 @@ type "Weapon"
 data "ModifierType" "Item"
 data "Damage" "1"
 data "Damage Range" "10"
-data "DamageFromBase" "50"
+data "DamageFromBase" "35"
 
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR"
 type "StatusData"

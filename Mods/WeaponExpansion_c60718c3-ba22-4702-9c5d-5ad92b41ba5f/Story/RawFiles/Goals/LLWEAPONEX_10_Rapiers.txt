@@ -1,0 +1,92 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
+
+KBSECTION
+
+
+//REGION OFFHAND_QRY
+QRY
+LLWEAPONEX_Rapiers_QRY_HasFullHands((CHARACTERGUID)_Player)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Shield)
+AND
+_Shield != NULL_00000000-0000-0000-0000-000000000000
+THEN
+DB_NOOP(1);
+//END_REGION
+
+//REGION DUELIST_EMPTY_HAND
+PROC
+LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, "LLWEAPONEX_Rapier", "DuelistStance")
+AND
+NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+THEN
+LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandGained(_Player);
+
+PROC
+LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandGained((CHARACTERGUID)_Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DuelistStanceWasEnabled", 1)
+AND
+NOT LeaderLib_Helper_QRY_HasPermanentStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", -1.0, 0, _Player);
+
+IF
+CharacterStatusApplied(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", _)
+THEN
+ObjectSetFlag(_Player, "LLWEAPONEX_DuelistStanceWasEnabled");
+
+PROC
+LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandLost((CHARACTERGUID)_Player)
+THEN
+//CharacterStatusText(_Player, "LLWEAPONEX_Status_DuelistStance_Warning");
+ShowNotification(_Player, "LLWEAPONEX_Status_DuelistStance_Warning");
+RemoveStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
+
+PROC
+LeaderLib_Skills_BlockStatusToggle((CHARACTERGUID)_Player, "Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
+AND
+LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+THEN
+ShowNotification(_Player, "LLWEAPONEX_Status_DuelistStance_Failed");
+DB_LeaderLib_Skills_BlockStatusToggle(_Player, "Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
+
+PROC
+LeaderLib_Skills_OnStatusToggleRemoved((CHARACTERGUID)_Player, "Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DuelistStanceWasEnabled", 1)
+THEN
+ObjectClearFlag(_Player, "LLWEAPONEX_DuelistStanceWasEnabled");
+//END_REGION
+
+/*
+//REGION EMPTY_HAND_EVENTS
+PROC
+LLWEAPONEX_WeaponMastery_BlockUnlockingSkill((CHARACTERGUID)_Player, "LLWEAPONEX_Rapier", "DuelistStance")
+AND
+NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+THEN
+DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Rapier", "DuelistStance")
+AND
+NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
+//END_REGION
+*/
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

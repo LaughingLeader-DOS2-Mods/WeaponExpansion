@@ -79,7 +79,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 4, "<font color='#FFE
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_Exp", "LLWEAPONEX_WM_Rapier_ExpMax", "LLWEAPONEX_WM_Rapier_Level");
 
-DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Custom"); // Added when the offhand is empty
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Any"); // Added when the offhand is empty
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST");
 
 //Statuses applied by mastery skills that should be removed when the mastery is inactive
@@ -120,6 +120,14 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag);
 //END_REGION
 
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.1.22")
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Custom");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Any");
+//END_REGION
+
 //REGION QUERIES
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -134,6 +142,8 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 AND
 _Item != _IgnoreItem
+AND
+LeaderLib_Helper_QRY_WeaponIsEquipped(_Player, _Item)
 THEN
 DB_NOOP(1);
 
@@ -141,6 +151,13 @@ QRY
 LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery((CHARACTERGUID)_Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
 THEN
 DB_NOOP(1);
 
@@ -227,6 +244,7 @@ LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill(_WeaponType, _SkillID)
 THEN
+LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
 LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
 
 PROC
@@ -238,6 +256,7 @@ CharacterGetRace(_Player, 1, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag)
 THEN
+LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
 
 PROC
@@ -255,7 +274,14 @@ THEN
 ObjectSetFlag(_Player, _Flag);
 
 PROC
+LLWEAPONEX_WeaponMastery_BlockUnlockingSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+THEN
+DB_NOOP(1);
+
+PROC
 LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _)
 AND
@@ -266,7 +292,16 @@ ApplyStatus(_Player, _Status, -1.0, 1, _Player);
 DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status);
 
 PROC
+LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
+
+PROC
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_RaceTag)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
 AND
 IsTagged(_Player, "FEMALE", _IsFemale)
 AND
@@ -286,6 +321,13 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
+
+PROC
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_RaceTag)
+AND
+DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
 //END_REGION
 
 //REGION WEAPON_MASTERY_INITIAL_LEVEL
@@ -384,26 +426,17 @@ NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType, _Item)
 AND
 LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills(_Player, _WeaponType)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
-ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills");
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills", 500);
-
-IF
-ItemUnEquipped(_Item, _Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
-ObjectClearFlag(_Player, _EnabledFlag);
-LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _WeaponType);
+DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_MasteryDeactivated");
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_MasteryDeactivated", 250);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
-ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills");
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] was activated. Removing from [DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries].");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
@@ -413,11 +446,24 @@ THEN
 LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_RemoveWeaponMasterySkills")
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_MasteryDeactivated")
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_RemoveWeaponSkills(_Player, _WeaponType);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:LLWEAPONEX_Timers_MasteryDeactivated] Weapon Mastery [",_WeaponType,"] was deactivated.");
+ObjectClearFlag(_Player, _EnabledFlag);
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _WeaponType);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_MasteryDeactivated")
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:LLWEAPONEX_Timers_MasteryDeactivated] Removing skills for Weapon Mastery [",_WeaponType,"].");
 LLWEAPONEX_WeaponMastery_RemoveSkills(_Player, _WeaponType);
 //END_REGION
 

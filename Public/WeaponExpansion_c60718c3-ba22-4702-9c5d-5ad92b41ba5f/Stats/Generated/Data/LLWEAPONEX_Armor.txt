@@ -219,6 +219,7 @@ data "Weight" "1"
 data "Unique" "1"
 data "Value" "291"
 data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_BLINDFOLD_EQUIPPED;SELF:OnEquip:LLWEAPONEX_AUTOLEVEL_INFO"
+data "Flags" "BlindImmunity"
 
 new entry "ARM_LLWEAPONEX_Blindfold_Preview"
 type "Armor"

@@ -1373,7 +1373,20 @@ THEN
 ENDIF
 	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", _Result)
 	RETURN(_RemoveList, _Result, _Turns)
-	
+
+EVENT LLWEAPONEX_Runeblade_LastRuneStatus_Special
+VARS
+	CHARACTER:_Character
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Turns
+	INT:_TurnsLeft
+	STATUS:_LastRuneStatus
+ON
+	OnSkillCast(_Character, Shout_LLWEAPONEX_ActivateRuneblade_Ice)
+ACTIONS
+	SetVar(_Character, "LLWEAPONEX_Runeblade_LastRuneStatus", LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE)
+
 EVENT LLWEAPONEX_Runeblade_Reverb
 VARS
 	CHARACTER:_Character
