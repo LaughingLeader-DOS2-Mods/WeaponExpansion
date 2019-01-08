@@ -1,0 +1,27 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
+THEN
+CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_FINISHER", (CHARACTER)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Source, "LLWEAPONEX_Katana")
+AND
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

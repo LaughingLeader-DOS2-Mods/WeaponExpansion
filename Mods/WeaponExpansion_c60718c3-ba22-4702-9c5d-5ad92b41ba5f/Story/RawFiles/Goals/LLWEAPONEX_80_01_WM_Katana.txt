@@ -11,9 +11,20 @@ THEN
 GoalCompleted;
 
 IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
+ObjectTurnEnded((CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target)
 THEN
-CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit");
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
+RemoveStatus(_Target, "LLWEAPONEX_KATANA_FINISHER");
+
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_KATANA_FINISHER", _)
+AND
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
+
 EXITSECTION
 
 ENDEXITSECTION

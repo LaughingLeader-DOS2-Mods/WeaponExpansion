@@ -421,10 +421,6 @@ IF
 ItemUnEquipped(_Item, _Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
-AND
-NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType, _Item)
-AND
-LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills(_Player, _WeaponType)
 THEN
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
 ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_MasteryDeactivated");
@@ -451,11 +447,23 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType, _Item)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:LLWEAPONEX_Timers_MasteryDeactivated] Weapon Mastery [",_WeaponType,"] was deactivated.");
 ObjectClearFlag(_Player, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _WeaponType);
+LLWEAPONEX_WeaponMastery_RemoveSkills(_Player, _WeaponType);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_MasteryDeactivated")
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_MasteryDeactivated")
@@ -463,8 +471,6 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:LLWEAPONEX_Timers_MasteryDeactivated] Removing skills for Weapon Mastery [",_WeaponType,"].");
-LLWEAPONEX_WeaponMastery_RemoveSkills(_Player, _WeaponType);
 //END_REGION
 
 //REGION RESURRECTION_REAPPLY
