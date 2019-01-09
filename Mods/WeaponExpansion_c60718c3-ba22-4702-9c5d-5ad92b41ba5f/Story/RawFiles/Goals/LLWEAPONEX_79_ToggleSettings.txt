@@ -3,10 +3,24 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 LLWEAPONEX_ToggleSettings_InitSettings();
+LLWEAPONEX_ToggleSettings_RegisterScripts();
 
 KBSECTION
 
 //REGION SETTINGS
+PROC
+LLWEAPONEX_ToggleSettings_RegisterScripts()
+THEN
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Greatbow", "LLWEAPONEX_Greatbow");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Katana", "LLWEAPONEX_Katana");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Rapier", "LLWEAPONEX_Rapier");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Runeblade", "LLWEAPONEX_Runeblade");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Death", "LLWEAPONEX_Grimoire_Death");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Death", "LLWEAPONEX_Grimoire_Mimicry");
+
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_08_Quivers", "LLWEAPONEX_QuiverEquipped");
+
 PROC
 LLWEAPONEX_ToggleSettings_InitSettings()
 THEN
@@ -36,9 +50,26 @@ THEN
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName);
 //END_REGION
 
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 2, 1)
+THEN
+SysActivateGoal("LLWEAPONEX_80_ToggledScripts");
+LLWEAPONEX_ToggleSettings_RegisterScripts();
+//END_REGION
+
 //REGION REGISTERING
 PROC
-LLWEAPONEX_ToggleSettings_Register((STRING)_GoalName, (STRING)_Flag)
+LLWEAPONEX_ToggleSettings_Register_Flag((STRING)_GoalName, (STRING)_Flag)
+THEN
+DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
+
+PROC
+LLWEAPONEX_ToggleSettings_Register_GoalForTag((STRING)_GoalName, (STRING)_Tag)
+AND
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 THEN
 DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
 

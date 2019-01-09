@@ -71,3 +71,5 @@ LLWEAPONEX_TORMENT_CLAIMSOUL_DisplayName	Claimed Soul
 LLWEAPONEX_TORMENT_CLAIMSOUL_Description	Character's soul has been claimed, and will restore life to the Tormented Ghost's corpse if they die.
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
 LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.
+LLWEAPONEX_DIZZY_DisplayName	Dizzy
+LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.

@@ -13,6 +13,14 @@ INIT
 	USING LLWEAPONEX_Items
 EVENTS
 
+EVENT LLWEAPONEX_Debug_KeepAliveTest
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_Debug_KeepAliveTest")
+ACTIONS
+	CharacterApplyStatus(_Character, HASTED, -2, 1, _Character)
+
 EVENT LLWEAPONEX_Debug_ReviveRevenantTest
 VARS
 	CHARACTER:_Character

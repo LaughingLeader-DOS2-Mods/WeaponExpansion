@@ -66,6 +66,43 @@ THEN
 ObjectClearFlag(_Player, "LLWEAPONEX_DuelistStanceWasEnabled");
 //END_REGION
 
+//REGION DUELIST_STANCE_WEAPON_BUFF
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", _)
+THEN
+ApplyStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON", -1.0, 1, _Character);
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", _)
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON");
+//END_REGION
+
+//REGION SUCKER_PUNCH_COMBO
+IF
+CharacterUsedSkillOnTarget(_Character, _Target, "Target_LLWEAPONEX_ScriptStart_Rapier_SuckerCombo1", _, _)
+THEN
+DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target);
+CharacterPurgeQueue(_Character);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastSuckerCombo1", 50);
+
+/*
+IF
+SkillCast(_Character, "Target_LLWEAPONEX_Rapier_SuckerCombo1_Start", _, _)
+THEN
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastSuckerCombo1", 200);
+*/
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_CastSuckerCombo1")
+AND
+DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target);
+RemoveStatus(_Character, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
+CharacterUseSkill(_Character, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _Target, 0, 1, 1);
+
+//END_REGION
 /*
 //REGION EMPTY_HAND_EVENTS
 PROC

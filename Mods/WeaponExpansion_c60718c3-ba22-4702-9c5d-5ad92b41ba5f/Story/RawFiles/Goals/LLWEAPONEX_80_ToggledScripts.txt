@@ -1,15 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
 KBSECTION
-
-IF
-GameStarted(_Level, _)
-AND
-IsGameLevel(_Level, 1)
-THEN
-GoalCompleted;
 
 EXITSECTION
 

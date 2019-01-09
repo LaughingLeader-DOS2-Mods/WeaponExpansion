@@ -22,6 +22,7 @@ THEN
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","Shout_LLWEAPONEX_Grimoire_Toggle_");
 //Rune statuses are auto-removed when a runeblade is unequipped, so mimicking these is pointless
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","Shout_LLWEAPONEX_ActivateRuneblade_");
+DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","LLWEAPONEX_ScriptStart_");
 
 PROC
 LLWEAPONEX_ModCompatibility_InitMimicrySettings()

@@ -97,6 +97,7 @@ CharacterGetHostCharacter(_Host)
 THEN
 CharacterSetCustomName(_Host, "Morghul");
 CharacterAddGold(_Host, 9999);
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Host);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")
@@ -214,6 +215,12 @@ ItemTemplateUnEquipped("WPN_LLWEAPONEX_Shield_DualShields_A_3150a9b9-49a7-4345-a
 THEN
 PROC_StopLoopEffect(_Player, "LLWEAPONEX.CombatShield");
 */
+
+IF
+CharacterUsedItem(_Character, ITEMGUID_PUZ_Lever_Floor_A_000_457bdc0e-ed46-4e46-a49f-51f65fac7c2c)
+THEN
+ApplyStatus(_Character, "RESTED", -12.0, 1, _Character);
+SetStoryEvent(_Character, "LLWEAPONEX_Debug_KeepAliveTest");
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")

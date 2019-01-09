@@ -1,0 +1,3 @@
+LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1_DisplayName	Delayed Dizzy
+LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED_DisplayName	Delayed Dizzy
+LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED_Description	Character will be Dizzy upon standing up.

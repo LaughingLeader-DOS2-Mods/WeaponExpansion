@@ -1,0 +1,2 @@
+LLWEAPONEX_Katana_FinisherEnabled	Finisher		
+LLWEAPONEX_Rapier_SuckerCombo1Enabled	Dirty Fighting I		

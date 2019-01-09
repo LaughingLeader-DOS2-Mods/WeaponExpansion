@@ -21,7 +21,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 4, "<font color='#2
 //DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Greatbow", "LLWEAPONEX_WM_Greatbow_Exp", "LLWEAPONEX_WM_Greatbow_ExpMax", "LLWEAPONEX_WM_Greatbow_Level");
 //Which skill are unlocked at specific mastery levels
-//DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _UnlockEvent)
+//DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 0, "PiercingShot", "Any");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 1, "KnockbackShot", "Any");
 
@@ -80,10 +80,14 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 4, "<font color='#FFE
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_Exp", "LLWEAPONEX_WM_Rapier_ExpMax", "LLWEAPONEX_WM_Rapier_Level");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Any"); // Added when the offhand is empty
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 2, "SuckerCombo1", "Tag");
+
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST");
+DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Rapier", "SuckerCombo1", "LLWEAPONEX_Rapier_SuckerCombo1Enabled", "Tag");
 
 //Statuses applied by mastery skills that should be removed when the mastery is inactive
 DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
+DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "SuckerCombo1", "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
 
 //Runeblade
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Runeblade", "<font color='#40E0D0'>Runeblade Mastery</font>");
@@ -126,6 +130,40 @@ LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersi
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Custom");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Any");
+//END_REGION
+
+//REGION TEXT_EVENTS
+IF
+TextEventSet("llweap_masterall")
+THEN
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery();
+
+PROC
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery()
+AND
+DB_IsPlayer(_Player)
+THEN
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Player);
+
+PROC
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
+THEN
+SetVarInteger(_Player, _LevelVar, 5);
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _WeaponType, 5);
+
+IF
+TextEventSet("llweap_unlockallskills")
+AND
+DB_IsPlayer(_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID);
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
 //END_REGION
 
 //REGION QUERIES
@@ -182,7 +220,7 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPV
 AND
 GetVarInteger(_Player, _LevelVar, _CurrentLevel)
 AND
-DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _UnlockEvent)
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
 AND
 _CurrentLevel < _Level
 THEN
@@ -193,7 +231,7 @@ LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel((CHARACTERGUID)_Player, (STRING)_Weap
 AND
 GetVarInteger(_Player, _LevelVar, _CurrentLevel)
 AND
-DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _UnlockEvent)
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
 AND
 _CurrentLevel < _Level
 THEN
@@ -208,70 +246,29 @@ DB_NOOP(1);
 //END_REGION
 
 //REGION SKILL_UNLOCKING
-IF
-TextEventSet("llweap_masterall")
-AND
-DB_IsPlayer(_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
-THEN
-SetVarInteger(_Player, _LevelVar, 5);
-LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _WeaponType, 5);
-
-IF
-TextEventSet("llweap_unlockallskills")
-AND
-DB_IsPlayer(_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _UnlockEvent)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
-THEN
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID);
-LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
-
 PROC
 LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
-AND
 DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
 THEN
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID, _Type);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_Type)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType)
+THEN
+LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
 LLWEAPONEX_WeaponMastery_Internal_AddSkillType(_Player, _WeaponType, _SkillID, _Type);
 
+/*
 PROC
-LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Any")
+LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_Type)
 AND
-NOT LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill(_WeaponType, _SkillID)
+NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType)
 THEN
-LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
-LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
-
-PROC
-LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Any")
-AND
-LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill(_WeaponType, _SkillID)
-AND
-CharacterGetRace(_Player, 1, _Race)
-AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
-THEN
-LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
-
-PROC
-LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Tag")
-AND
-DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Tag, "Tag")
-THEN
-SetTag(_Player, _Tag);
-
-PROC
-LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Flag")
-AND
-DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Flag, "Flag")
-THEN
-ObjectSetFlag(_Player, _Flag);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnSkillLearned] Weapon Mastery [",_WeaponType,"] is not active. SkillID [",_SkillID,"] Type [",_Type,"].");
+*/
 
 PROC
 LLWEAPONEX_WeaponMastery_BlockUnlockingSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
@@ -279,9 +276,56 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Any")
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill(_WeaponType, _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, _WeaponType, _SkillID);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Any")
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
+AND
+LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill(_WeaponType, _SkillID)
+AND
+CharacterGetRace(_Player, 1, _Race)
+AND
+DB_LeaderLib_RaceTags(_Race, _RaceTag)
+THEN
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Tag")
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Tag, "Tag")
+THEN
+SetTag(_Player, _Tag);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:Internal:AddSkillType] Adding tag [",_Tag,"] for Weapon Mastery [",_WeaponType,"] and SkillID [",_SkillID,"].");
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Flag")
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Flag, "Flag")
+THEN
+ObjectSetFlag(_Player, _Flag);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:Internal:AddSkillType] Adding flag [",_Flag,"] for Weapon Mastery [",_WeaponType,"] and SkillID [",_SkillID,"].");
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_Type)
+AND
+DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
+
+PROC
+LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _)
 AND
@@ -292,16 +336,7 @@ ApplyStatus(_Player, _Status, -1.0, 1, _Player);
 DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status);
 
 PROC
-LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
-AND
-DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
-
-PROC
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_RaceTag)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
 AND
 IsTagged(_Player, "FEMALE", _IsFemale)
 AND
@@ -321,13 +356,6 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
-
-PROC
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_RaceTag)
-AND
-DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
 //END_REGION
 
 //REGION WEAPON_MASTERY_INITIAL_LEVEL
@@ -777,7 +805,7 @@ ShowNotification(_Player, _Str);
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_MasteryLevel)
 AND
-DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _UnlockEvent)
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
 AND
 _MasteryLevel >= _Level
 AND
@@ -785,7 +813,7 @@ NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnMasteryLeveledUp] Weapon Mastery [",_WeaponType,"] leveled up. Unlocking skill [",_SkillID,"].");
 DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID);
-LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID, _Type);
 //END_REGION
 
 //REGION STATUS_UNLOCKING

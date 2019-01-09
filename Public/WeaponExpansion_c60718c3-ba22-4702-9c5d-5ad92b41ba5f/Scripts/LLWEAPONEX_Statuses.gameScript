@@ -33,21 +33,64 @@ THEN
 	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor, _Level, _Source)
 ENDIF	
 
-EVENT LLWEAPONEX_BlockTeleportFalling
+EVENT LLWEAPONEX_Rapier_SuckerPunch_Knockdown
+VARS
+	CHARACTER:_Character
+	INT:_Turns
+	CHARACTER:_Source
+ON
+	OnCharacterStatusApplied(_Character, LLWEAPONEX_SUCKER_PUNCH)
+ACTIONS
+IF "c1&c2"
+	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_SUCKER_PUNCH, _Source)
+	GetStatusTurns(_Character, LLWEAPONEX_SUCKER_PUNCH, _Turns)
+THEN
+	IF "c1"
+		IsTagged(_Source, "LLWEAPONEX_Rapier_SuckerCombo1Enabled")
+	THEN
+		Add(_Turns, 1)
+	ENDIF
+	CharacterApplyStatus(_Character, KNOCKED_DOWN, _Turns, 0, _Source)
+	CharacterRemoveStatus(_Character, LLWEAPONEX_SUCKER_PUNCH, null, 0)
+ENDIF
+
+EVENT LLWEAPONEX_Rapier_SuckerCombo1
 VARS
 	CHARACTER:_Character
 	STATUS:_Result
 	LIST<STATUS>:_RemoveList
+	INT:_Turns
+	CHARACTER:_Source
 ON
-	FetchCharacterApplyStatusData(_Character, TELEPORT_FALLING)
+	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1)
 ACTIONS
-	Set(_Result, TELEPORT_FALLING)
-IF "c1"
-	HasFlag(_Character, "LLWEAPONEX_BlockTeleportFalling")
+	Set(_Result, null)
+IF "c1&c2"
+	GetStatusTurns(_Character, KNOCKED_DOWN, _Turns)
+	CharacterGetStatusSourceCharacter(_Character, KNOCKED_DOWN, _Source)
 THEN
-	//Set(_Result, null)
+	Clamp(_Turns, 1, _Turns)
+	Add(_Turns, 1)
+	Set(_Result, LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED)
 ENDIF
-	RETURN(_RemoveList, _Result, null)
+	RETURN(_RemoveList, _Result, _Turns)
+
+
+EVENT LLWEAPONEX_Rapier_DelayedDaze_ApplyDazed
+VARS
+	CHARACTER:_Character
+	CHARACTER:_Source
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_Events_DelayDazedReady")
+ACTIONS
+IF "c1"
+	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED, _Source)
+THEN
+ELSE
+	Set(_Source, _Character)
+ENDIF
+	CharacterRemoveStatus(_Character, LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED, null, 0)
+	CharacterApplyStatus(_Character, LLWEAPONEX_DIZZY, 2, 1, _Source)
 
 EVENT LLWEAPONEX_FumbleRoll
 VARS

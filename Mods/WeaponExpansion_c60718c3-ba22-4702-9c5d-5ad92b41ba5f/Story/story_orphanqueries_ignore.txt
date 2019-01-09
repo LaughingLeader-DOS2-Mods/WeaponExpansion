@@ -338,4 +338,3 @@ DB_LLMIME_Mimicking_Blacklist_SkillElements 2
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes 1
 DB_LLBARTER_DialogBlacklist 2
 DB_LLWEAPONEX_Debug_TimeAtmospheres 4
-DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill	3

@@ -1180,18 +1180,7 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
-//REGION LAST_SKILL
-IF
-CharacterUsedSkill(_Character, _Skill, _SkillType, _SkillElement)
-AND
-IsTagged(_Character, "LeaderLib_Dummy", 0)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
-THEN
-SetVarString(_Character, "LLWEAPONEX_LastUsedSkill", _Skill);
-SetVarString(_Character, "LLWEAPONEX_LastUsedSkill_Type", _SkillType);
-SetVarString(_Character, "LLWEAPONEX_LastUsedSkill_Element", _SkillElement);
-
+//REGION MIMICRY_GRIMOIRE_LAST_SKILL
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
 AND
@@ -1227,49 +1216,6 @@ LLWEAPONEX_Grimoire_RemoveCopiedSkill(_Character);
 CharacterAddSkill(_Character, _Skill);
 DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
 
-//In case a copied skill is learned
-IF
-SkillAdded(_Character, _Skill, 1)
-AND
-NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
-
-IF
-SkillAdded(_Character, _Skill, _)
-AND
-DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
-THEN
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill);
-NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
-
-//Invalid skill safety check
-IF
-DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill)
-AND
-CharacterHasSkill(_Character, _Skill, 0)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_SkillJustCopied(_Character, _Skill);
-
-IF
-CharacterUsedSkill(_Character, _Skill, _, _)
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-THEN
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
-
-IF
-SkillCast(_Character, _Skill, _, _)
-AND
-DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
-AND
-DB_ObjectTimer(_Character, _ObjectTimerName, "LLWEAPONEX_Timers_RemoveCopiedSkill")
-THEN
-ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill");
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill", 2000);
-
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoveCopiedSkill")
 THEN
@@ -1285,6 +1231,11 @@ HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
 */
+PROC
+LLWEAPONEX_Grimoire_Internal_AddMimicSkill((CHARACTERGUID)_Character, (STRING)_Skill, (GUIDSTRING)_Target)
+THEN
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+LLWEAPONEX_Grimoire_StartMimicking(_Character, _Skill, _Target);
 
 QRY
 LLWEAPONEX_Grimoire_QRY_CanMimicSkill((STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
@@ -1352,53 +1303,6 @@ DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Grimoire, _Skill, _Target)
 THEN
 DB_NOOP(1);
 
-IF
-CharacterUsedSkillOnZoneWithTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-AND
-NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
-THEN
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
-
-IF
-CharacterUsedSkill(_Character, _Skill, "shout", _SkillElement)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-AND
-NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, "shout", _SkillElement)
-THEN
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Character);
-
-IF
-CharacterUsedSkillOnTarget(_Character, _Target, _Skill, _SkillType, _SkillElement)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-AND
-NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
-THEN
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
-
-IF
-CharacterUsedSkillAtPosition(_Character, _x, _y, _z, _Skill, _SkillType, _SkillElement)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY", 1)
-AND
-NOT LLWEAPONEX_Grimoire_QRY_MimicSkillQueued(_Character)
-AND
-NOT DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z)
-AND
-LLWEAPONEX_Grimoire_QRY_CanMimicSkill(_Skill, _SkillType, _SkillElement)
-THEN
-DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoire_MimicSkillPosition", 50);
-
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_Grimoire_MimicSkillPosition")
 AND
@@ -1422,16 +1326,18 @@ AND
 DB_LeaderLib_Skills_TargetDummies(_ID, _Target)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z);
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
+LLWEAPONEX_Grimoire_Internal_AddMimicSkill(_Character, _Skill, _Target);
 
 IF
 TextEventSet("llweap_grimoiredebug_castskill")
 AND
 CharacterGetHostCharacter(_Character)
 THEN
-DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, "Shout_Whirlwind", _Character);
+LLWEAPONEX_Grimoire_Internal_AddMimicSkill(_Character, "Shout_Whirlwind", _Character);
 
-IF
+PROC
+LLWEAPONEX_Grimoire_StartMimicking((CHARACTERGUID)_Character, (STRING)_Skill, (GUIDSTRING)_Target)
+AND
 DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target)
 AND
 LLWEAPONEX_Grimoire_GetGrimoirePosition(_Character)
@@ -1448,10 +1354,11 @@ NOT DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Character, _x, _y, _z);
 NOT DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
 DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Grimoire, _Skill, _Target);
 SetTag(_Grimoire, "LeaderLib_Dummy");
+SetTag(_Grimoire, "ANIMAL");
 CharacterTransformFromCharacter(_Grimoire, _Character, 0, 0, 1, 1, 0, 0, 0);
 LeaderLib_Helper_CopyStats(_Grimoire, _Character, 1, 1, 1, 1);
 LeaderLib_Helper_CopyFaction(_Grimoire, _Character);
-CharacterTransform(_Grimoire, "LLWEAPONEX_Grimoire_CharacterTest_9e0450df-20bf-419d-86b6-18e5ba8a8944", 0, 0, 0, 0, 0, 0, 0);
+//CharacterTransform(_Grimoire, "LLWEAPONEX_Grimoire_CharacterTest_9e0450df-20bf-419d-86b6-18e5ba8a8944", 0, 0, 0, 0, 0, 0, 0);
 SetVarObject(_Grimoire, "LLWEAPONEX_Grimoire_Owner", _Character);
 CharacterMoveToPosition(_Grimoire, _x, _y, _z, 1, "");
 ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 500);
@@ -1468,14 +1375,6 @@ DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Character, _Grimoire);
 ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire", 4000);
 CharacterUseSkill(_Grimoire, _Skill, _Target, 1, 1, 1);
 RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
-
-IF
-SkillCast(_Grimoire, _, _, _)
-AND
-DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Character, _Grimoire)
-THEN
-ProcObjectTimerCancel(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire");
-ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire", 1500);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire")
@@ -1570,7 +1469,7 @@ CreateItemTemplateAtPosition("LLWEAPONEX_Shield_HiddenScriptShield_d027e8a5-f51b
 THEN
 DB_CustomUseItemResponse(_Character, _Grimoire, 0);
 //ItemRemove(_Grimoire);
-CharacterUnequipItem(_Character, _Grimoire);
+ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_DeleteMimickedItem", 250);
 CharacterEquipItem(_Character, _Shield);
 
 //Prevent grimoire mimics from equipping Grimoires
@@ -1583,16 +1482,12 @@ GetPosition(_Character, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition("LLWEAPONEX_Shield_HiddenScriptShield_d027e8a5-f51b-4a0b-b5dc-f39ef6ba79b1", _x, _y, _z, _Shield)
 THEN
-DB_LLWEAPONEX_Grimoire_Temp_DeleteAfterUnequip(_Character, _Item);
-CharacterUnequipItem(_Character, _Item);
+ProcObjectTimer(_Item, "LLWEAPONEX_Timers_DeleteMimickedItem", 250);
 CharacterEquipItem(_Character, _Shield);
 
-IF
-ItemUnEquipped(_Item, _Character)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_DeleteAfterUnequip(_Character, _Item)
+PROC
+ProcObjectTimerFinished((ITEMGUID)_Item, "LLWEAPONEX_Timers_DeleteMimickedItem")
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Temp_DeleteAfterUnequip(_Character, _Item);
 ItemRemove(_Item);
 
 //END_REGION
