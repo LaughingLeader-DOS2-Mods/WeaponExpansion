@@ -67,13 +67,19 @@ LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLW
 //Unique Weapon Deltamods
 //Rapiers
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_d82bc239-4782-484c-88ab-e1fa571c9f6a");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678");
+LeaderLib_Growth_Items_Register_Transformation("WeaponExpansion.Rapier.Runeblade.Water", 5, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa", "LLWEAPONEX_FrostDyne_Form2");
+LeaderLib_Growth_Items_Register_Transformation("WeaponExpansion.Rapier.Runeblade.Water2", 12, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678", "LLWEAPONEX_FrostDyne_Form3");
+
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 2, "Boost_Weapon_Ability_WaterSpecialist_Wand", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Skill_Shatter", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 6, "Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 10, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 12, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 15, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Unique_FrostDyne_Skills_Stage2", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 6, "Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water2", 9, "Boost_LLWEAPONEX_Weapon_Skill_IceBreaker", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 10, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 12, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 15, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
 
 //Grimoires
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Grimoire.Death", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
@@ -121,12 +127,23 @@ LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 14, "B
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Wind");
 
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, "0.9.0.9")
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 0)
 THEN
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_ChaosWeaver", "Chaos Weaver [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_DragonSlayer", "Dragon Slayer [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkQuarterstaff", "Monk (Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_Growth_Items_Clear_ByEntriesID("WeaponExpansion.Rapier.Runeblade.Water");
+
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_d82bc239-4782-484c-88ab-e1fa571c9f6a");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678");
+
+LeaderLib_Growth_Items_Register_Transformation("WeaponExpansion.Rapier.Runeblade.Water", 5, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa", "LLWEAPONEX_FrostDyne_Form2");
+LeaderLib_Growth_Items_Register_Transformation("WeaponExpansion.Rapier.Runeblade.Water2", 12, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678", "LLWEAPONEX_FrostDyne_Form3");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 2, "Boost_Weapon_Ability_WaterSpecialist_Wand", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water2", 9, "Boost_LLWEAPONEX_Weapon_Skill_IceBreaker", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+
+LeaderLib_Growth_Items_ResetItemsByID("WeaponExpansion.Rapier.Runeblade.Water");
 
 /*
 LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.LeaderTrader.TestWeapons", "LeaderLib.LeaderTrader");

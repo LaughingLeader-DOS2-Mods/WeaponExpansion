@@ -925,6 +925,18 @@ add levelgroup 0,0,"All"
 add rootgroup "d82bc239-4782-484c-88ab-e1fa571c9f6a",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+
+add levelgroup 0,0,"All"
+add rootgroup "6a811339-a28f-44a6-980b-0289cc45cffa",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+
+add levelgroup 0,0,"All"
+add rootgroup "c715d004-5d66-4301-8360-2c6c2e25f678",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3","",""
+
 new itemgroup "WPN_LLWEAPONEX_Rods_1H"
 
 add levelgroup 0,3,"Common"

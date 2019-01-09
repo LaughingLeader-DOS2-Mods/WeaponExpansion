@@ -99,6 +99,12 @@ using "_BOOSTS_Weapon"
 data "Value" "16"
 data "Skills" "Cone_Shatter"
 
+new entry "_Boost_LLWEAPONEX_Weapon_Skill_IceBreaker"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Value" "28"
+data "Skills" "Shout_IceBreaker"
+
 new entry "_Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A"
 type "Weapon"
 using "_BOOSTS_Weapon"

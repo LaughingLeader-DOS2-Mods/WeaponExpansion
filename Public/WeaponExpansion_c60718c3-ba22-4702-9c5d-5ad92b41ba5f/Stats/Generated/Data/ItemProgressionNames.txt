@@ -75,6 +75,12 @@ add name "Estoc",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
 add name "Frostdyne",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+add name "Frostdyne (Empowered)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+add name "Frostdyne (Unleashed)",""
+
 new namegroup "WPN_LLWEAPONEX_Beginner_Rod"
 add name "Weak Rod",""
 

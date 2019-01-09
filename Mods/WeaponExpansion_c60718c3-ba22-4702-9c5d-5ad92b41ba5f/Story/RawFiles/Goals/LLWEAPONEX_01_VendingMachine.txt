@@ -208,11 +208,22 @@ PlayEffect(_VendingMachine, "LLWEAPONEX_FX_VendingMachine_Words_OrderArrived_01"
 IF
 CharacterLeveledUp(_Player)
 AND
-CharacterIsControlled(_Player, 1)
+DB_IsPlayer(_Player)
 AND
 CharacterGetLevel(_Player, _Level)
 THEN
 CharacterLevelUpTo(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Level);
+
+IF
+CharacterLeveledUp(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a)
+THEN
+TimerCancel("LLWEAPONEX_Timers_VendingMachine_LevelUpItems");
+TimerLaunch("LLWEAPONEX_Timers_VendingMachine_LevelUpItems", 500);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_VendingMachine_LevelUpItems")
+THEN
+LeaderLib_Growth_Items_LevelUpItems(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 
 PROC
 LeaderLib_Traders_OnSpawned(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, (STRING)_TraderID, (STRING)_Region)

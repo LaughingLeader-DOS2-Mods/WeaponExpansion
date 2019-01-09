@@ -1,0 +1,88 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+//REGION FROSTDYNE_SKILLS
+/*
+IF
+CharacterStatusApplied(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_INFO", _)
+AND
+CharacterGetLevel(_Player, _Level)
+THEN
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, _Level);
+
+PROC
+LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Player, (INTEGER)_Level)
+AND
+_Level < 6
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_A", -1.0, 1, _Player);
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_A");
+
+PROC
+LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Player, (INTEGER)_Level)
+AND
+_Level >= 6
+AND
+_Level < 14
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_B", -1.0, 1, _Player);
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_B");
+
+PROC
+LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Player, (INTEGER)_Level)
+AND
+_Level >= 14
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_C", -1.0, 1, _Player);
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_C");
+
+IF
+CharacterStatusRemoved(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_INFO", _)
+THEN
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
+
+PROC
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, _Status)
+THEN
+RemoveStatus(_Player, _Status);
+NOT DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, _Status);
+
+IF
+CharacterLeveledUp(_Player)
+AND
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, _Status)
+AND
+CharacterGetLevel(_Player, _Level)
+THEN
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp(_Player, _Level);
+
+PROC
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Player, 4)
+THEN
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 4);
+
+PROC
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Player, 6)
+THEN
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 6);
+
+PROC
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Player, 14)
+THEN
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 14);
+*/
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"
