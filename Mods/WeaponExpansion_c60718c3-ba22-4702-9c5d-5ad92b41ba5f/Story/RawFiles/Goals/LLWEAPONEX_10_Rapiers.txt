@@ -83,7 +83,7 @@ IF
 CharacterUsedSkillOnTarget(_Character, _Target, "Target_LLWEAPONEX_ScriptStart_Rapier_SuckerCombo1", _, _)
 THEN
 DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target);
-CharacterPurgeQueue(_Character);
+//CharacterPurgeQueue(_Character);
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastSuckerCombo1", 50);
 
 /*
