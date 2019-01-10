@@ -1,8 +1,7 @@
-LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item automatically levels up
+LLWEAPONEX_BEER_CHAMPION_Description	Character never gets sleepy while drinking alcohol.
+LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer
 LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.
 LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power
-LLWEAPONEX_COMBAT_SHIELD_ARMOR_Description	Character has increased armor from a combat shield.
-LLWEAPONEX_COMBAT_SHIELD_ARMOR_DisplayName	Combat Shield Armor - Increases physical and magic armor
 LLWEAPONEX_COMBAT_SHIELD_RESTORE_DisplayName	Armor Rejuvenation
 LLWEAPONEX_COPYLASTSKILL_DisplayName	Copy Last Skill
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.
@@ -13,31 +12,25 @@ LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Dam
 LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status
 LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.
 LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles
+LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.
+LLWEAPONEX_DIZZY_DisplayName	Dizzy
 LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taking [1] per turn.
 LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane
 LLWEAPONEX_DRAW_ARROW_DisplayName	Draw Arrow
-LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand
 LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!
 LLWEAPONEX_EVAPORATE_DisplayName	Evaporated
-LLWEAPONEX_FINESSE_TO_INTELLIGENCE_DisplayName	Finesse Conversion - Finesse bonuses from this weapon grant Intelligence
-LLWEAPONEX_FINESSE_TO_STRENGTH_DisplayName	Finesse Conversion - Finesse bonuses from this weapon grant Strength
+LLWEAPONEX_HELMSPLITTER_Description	Character's Armor is being destroyed.
+LLWEAPONEX_HELMSPLITTER_DisplayName	Destroy Armor
 LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target
-LLWEAPONEX_INTELLIGENCE_TO_FINESSE_DisplayName	Intelligence Conversion - Intelligence bonuses from this weapon grant Finesse
-LLWEAPONEX_INTELLIGENCE_TO_STRENGTH_DisplayName	Intelligence Conversion - Intelligence bonuses from this weapon grant Strength
 LLWEAPONEX_KATANA_FINISHER_APPLY_DisplayName	Finisher - Temporarily apply a piercing vulnerability to dying targets
-LLWEAPONEX_KATANA_FINISHER_DisplayName	Finisher
 LLWEAPONEX_KATANA_FINISHER_Description	Character's <font color='#c80030'>Piercing Resistance</font> lowers as <font color='#DC143C'>Vitality</font> drops. Removed after Attacker's turn ends.
+LLWEAPONEX_KATANA_FINISHER_DisplayName	Finisher
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed
-LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Life Steal rise, but Resistances faulter.</font>
-LLWEAPONEX_MURAMASA_CURSE_DisplayName	<font color='#8A2BE2'>Curse of the Muramasa</font>
 LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is taking the stance of a duelist.<br><font color='#ff9600' size='20'>Requires an empty hand.</font>
 LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
-LLWEAPONEX_ROD_SKILL_BASE_DisplayName	Rod Skill - On command, rods can launch projectiles like wands
-LLWEAPONEX_RUNEBLADE_MASTERY_POISON_Description	Character's <font color='#2DF9FF'>Runeblade Mastery</font> level allows them to control poison with finer precision.
-LLWEAPONEX_RUNEBLADE_MASTERY_POISON_DisplayName	Runeblade Mastery
 LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.
 LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound
 LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.
@@ -48,28 +41,17 @@ LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III
 LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV
 LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V
 LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.
-LLWEAPONEX_STRENGTH_TO_FINESSE_DisplayName	Strength Conversion - Strength bonuses from this weapon grant Finesse
-LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_DisplayName	Strength Conversion - Strength bonuses from this weapon grant Intelligence
 LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.
 LLWEAPONEX_TARRED_DisplayName	Tarred
+LLWEAPONEX_TORMENTED_GHOST_Description	Character is haunting the battlefield as a tormented ghost.
+LLWEAPONEX_TORMENTED_GHOST_DisplayName	Tormented Ghost
+LLWEAPONEX_TORMENT_CLAIMSOUL_Description	Character's soul has been claimed, and will restore life to the Tormented Ghost's corpse if they die.
+LLWEAPONEX_TORMENT_CLAIMSOUL_DisplayName	Claimed Soul
 LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.
 LLWEAPONEX_TRIPPING_DisplayName	Tripping
+LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!
+LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
-LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Weapon Mastery - Gain mastery experience in battle
-LLWEAPONEX_HELMSPLITTER_DisplayName	Destroy Armor
-LLWEAPONEX_HELMSPLITTER_Description	Character's Armor is being destroyed.
-LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer
-LLWEAPONEX_BEER_CHAMPION_Description	Character never gets sleepy while drinking alcohol.
-LLWEAPONEX_BLINDFOLD_EQUIPPED_DisplayName	Blindfolded
-LLWEAPONEX_BLINDFOLD_EQUIPPED_Description	Character is wearing a blindfold.<br></font color='#FF0000'>-4m Range</font>
-LLWEAPONEX_TORMENTED_GHOST_DisplayName	Tormented Ghost
-LLWEAPONEX_TORMENTED_GHOST_Description	Character is haunting the battlefield as a tormented ghost.
-LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage
-LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!
-LLWEAPONEX_TORMENT_CLAIMSOUL_DisplayName	Claimed Soul
-LLWEAPONEX_TORMENT_CLAIMSOUL_Description	Character's soul has been claimed, and will restore life to the Tormented Ghost's corpse if they die.
-LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
 LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.
-LLWEAPONEX_DIZZY_DisplayName	Dizzy
-LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.
+LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified

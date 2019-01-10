@@ -1,0 +1,16 @@
+LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item automatically levels up
+LLWEAPONEX_BLINDFOLD_EQUIPPED_Description	Character is wearing a blindfold.<br></font color='#FF0000'>-4m Range</font>
+LLWEAPONEX_BLINDFOLD_EQUIPPED_DisplayName	Blindfolded
+LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand
+LLWEAPONEX_FINESSE_TO_INTELLIGENCE_DisplayName	Converts Finesse Bonuses to Intelligence
+LLWEAPONEX_FINESSE_TO_STRENGTH_DisplayName	Converts Finesse Bonuses to Strength
+LLWEAPONEX_INTELLIGENCE_TO_FINESSE_DisplayName	Converts Intelligence Bonuses to Finesse
+LLWEAPONEX_INTELLIGENCE_TO_STRENGTH_DisplayName	Converts Intelligence Bonuses to Strength
+LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Life Steal rise, but Resistances faulter.</font>
+LLWEAPONEX_MURAMASA_CURSE_DisplayName	<font color='#8A2BE2'>Curse of the Muramasa</font>
+LLWEAPONEX_ROD_SKILL_BASE_DisplayName	Rod Skill - On command, rods can launch projectiles like wands
+LLWEAPONEX_RUNEBLADE_APPLY_STATUS_DisplayName	Runic Blade - Apply rune effects on attack
+LLWEAPONEX_RUNEBLADE_WEAPON_ICE_DAMAGE_DisplayName	Bonus Ice Damage
+LLWEAPONEX_STRENGTH_TO_FINESSE_DisplayName	Converts Strength Bonuses to Finesse
+LLWEAPONEX_STRENGTH_TO_INTELLIGENCE_DisplayName	Converts Strength Bonuses to Intelligence 
+LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Enables Weapon Mastery
