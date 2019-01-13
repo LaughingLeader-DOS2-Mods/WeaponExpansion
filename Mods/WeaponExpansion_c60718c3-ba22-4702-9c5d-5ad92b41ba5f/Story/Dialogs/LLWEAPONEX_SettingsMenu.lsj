@@ -293,7 +293,20 @@
                         "endnode" : {"type" : 19, "value" : 0},
                         "exclusive" : {"type" : 19, "value" : 0},
                         "optional" : {"type" : 19, "value" : 0},
-                        "setflags" : [ {} ],
+                        "setflags" : [
+                           {
+                              "flaggroup" : [
+                                 {
+                                    "flag" : [
+                                       {
+                                          "name" : {"type" : 22, "value" : "LLWEAPONEX_WeaponMasteryMenu_SetExperienceVariable"},
+                                          "paramval" : {"type" : 4, "value" : 1},
+                                          "value" : {"type" : 19, "value" : 1}
+                                       }
+                                    ],"type" : {"type" : 22, "value" : "Character"}}
+                              ]
+                           }
+                        ],
                         "speaker" : {"type" : 4, "value" : 1},
                         "stub" : {"type" : 19, "value" : 0},
                         "transitionmode" : {"type" : 1, "value" : 0},
@@ -341,7 +354,7 @@
                      },
                      {
                         "DualDialog" : {"type" : 30, "value" : "LLWEAPONEX_WeaponMasteryMenu"},
-                        "Party" : {"type" : 19, "value" : 0},
+                        "Party" : {"type" : 19, "value" : 1},
                         "ShowOnce" : {"type" : 19, "value" : 0},
                         "Tags" : [ {} ],
                         "UUID" : {"type" : 22, "value" : "af986dc2-1254-4aaf-a3ad-39ff94004f22"},
@@ -407,7 +420,7 @@
          },
          "editorData" : {
             "needLayout" : {"type" : 19, "value" : 0},
-            "nextNodeId" : {"type" : 5, "value" : 14}
+            "nextNodeId" : {"type" : 5, "value" : 16}
          }
       }
    }

@@ -84,6 +84,43 @@ NOT DB_LLWEAPONEX_Debug_TimeChanged(_Val);
 */
 
 IF
+DialogStarted(_Dialog, _InstanceID)
+AND
+IntegertoString(_InstanceID, _InstanceIDStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DialogStarted] Dialog [",_Dialog,"] started. Instance [",_InstanceIDStr,"]");
+
+
+IF
+DualDialogRequested(_Dialog, _InstanceID, _TargetInstanceID)
+AND
+DB_DialogName(_ParentDialog, _InstanceID)
+AND
+IntegertoString(_InstanceID, _InstanceIDStr)
+AND
+IntegertoString(_TargetInstanceID, _TargetInstanceIDStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DualDialogRequested] Dual dialog [",_Dialog,"] of parent [",_ParentDialog,"] requested. Instance [",_InstanceIDStr,"] and TargetInstance [",_TargetInstanceIDStr,"]");
+
+IF
+DualDialogStart(_Dialog, _InstanceID)
+AND
+IntegertoString(_InstanceID, _InstanceIDStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DualDialogStart] Dual dialog [",_Dialog,"] started. Instance [",_InstanceIDStr,"]");
+
+IF
+ChildDialogRequested(_Dialog, _InstanceID, _TargetInstanceID)
+AND
+DB_DialogName(_ParentDialog, _InstanceID)
+AND
+IntegertoString(_InstanceID, _InstanceIDStr)
+AND
+IntegertoString(_TargetInstanceID, _TargetInstanceIDStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:ChildDialogRequested] Child dialog [",_Dialog,"] of parent [",_ParentDialog,"] requested. Instance [",_InstanceIDStr,"] and TargetInstance [",_TargetInstanceIDStr,"]");
+
+IF
 TextEventSet("llweap_runepreview")
 AND
 CharacterGetHostCharacter(_Host)

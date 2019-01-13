@@ -89,7 +89,7 @@ IsTagged(_Character, "FEMALE", _IsFemale)
 AND
 CharacterGetRace(_Character, 1, _Race)
 AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _IsFemale, _EffectName, _BoneName, _Duration)
 THEN
@@ -109,7 +109,7 @@ IsTagged(_Character, "FEMALE", _IsFemale)
 AND
 NOT CharacterGetRace(_Character, 1, _)
 AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 IsTagged(_Character, _RaceTag, 1)
 AND

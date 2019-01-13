@@ -61,7 +61,7 @@ IsTagged(_Player, "FEMALE", _IsFemale)
 AND
 CharacterGetRace(_Player, 1, _Race)
 AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 THEN
@@ -77,7 +77,7 @@ NOT CharacterGetRace(_Character, 1, _)
 AND
 IsTagged(_Character, "FEMALE", _IsFemale)
 AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 IsTagged(_Character, _Race, 1)
 AND
@@ -106,7 +106,7 @@ NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
 AND
 IsTagged(_Character, "FEMALE", _IsFemale)
 AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 THEN

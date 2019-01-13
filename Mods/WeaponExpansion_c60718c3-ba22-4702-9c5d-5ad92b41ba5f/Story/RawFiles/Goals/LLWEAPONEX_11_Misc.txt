@@ -13,7 +13,7 @@ IntegerSubtract(1, _IsFemale, _Female)
 AND
 CharacterGetRace(_Player, 1, _Race)
 AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag)
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 IsTagged(_Player, "UNDEAD", _Undead)
 AND

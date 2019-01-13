@@ -12,6 +12,8 @@ Editor/Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Levels/*
 ######################
 *.div
 *.raw
+**/Autosave
+**/Recovered
 
 # Asset Folders      #
 ######################
@@ -34,8 +36,6 @@ EffectEditorConfig.xml
 DockPanel.config
 EditorBrowserMetadata_*
 EditorBrowserMetadata.xml
-Autosave/*
-Recovered/*
 
 # Assets             #
 ######################
