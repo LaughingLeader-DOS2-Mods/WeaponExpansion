@@ -84,12 +84,20 @@ NOT DB_LLWEAPONEX_Debug_TimeChanged(_Val);
 */
 
 IF
+DialogStartRequested(_Target, _Player)
+AND
+String(_Target, _TargetName)
+AND
+String(_Player, _PlayerName)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DialogStartRequested] Dialog requesting start between [",_TargetName,"] and [",_PlayerName,"]");
+
+IF
 DialogStarted(_Dialog, _InstanceID)
 AND
 IntegertoString(_InstanceID, _InstanceIDStr)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DialogStarted] Dialog [",_Dialog,"] started. Instance [",_InstanceIDStr,"]");
-
 
 IF
 DualDialogRequested(_Dialog, _InstanceID, _TargetInstanceID)
@@ -318,31 +326,57 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status ["
 */
 
 IF
-CharacterStatusAttempt(_Character, _Status, (CHARACTERGUID)_Causee)
+CharacterPrecogDying(_Character)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterPrecogDying] [",_Name,"] is about to die.");
+
+IF
+CharacterDying(_Character)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterDying] [",_Name,"] is dying.");
+
+IF
+CharacterDied(_Character)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterDied] [",_Name,"] died.");
+
+IF
+CharacterStatusAttempt(_Character, _Status, _Causee)
 //AND
 //CharacterGetHostCharacter(_Causee)
 AND
-CharacterGetDisplayName(_Causee, _, _Cause)
+//CharacterGetDisplayName(_Causee, _, _Cause)
+String(_Causee, _Cause)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
 
 IF
-CharacterStatusApplied(_Character, _Status, (CHARACTERGUID)_Causee)
+CharacterStatusApplied(_Character, _Status, _Causee)
 //AND
 //haracterGetHostCharacter(_Causee)
 AND
-CharacterGetDisplayName(_Causee, _, _Cause)
+//CharacterGetDisplayName(_Causee, _, _Cause)
+String(_Causee, _Cause)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
 
 IF
 CharacterStatusRemoved(_Character, _Status, _)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"].");
 

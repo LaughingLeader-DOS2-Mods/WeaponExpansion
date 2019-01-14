@@ -459,6 +459,20 @@ AND
 _Item != NULL_00000000-0000-0000-0000-000000000000
 THEN
 LLWEAPONEX_WeaponMastery_Internal_OnItemEquipped(_Player, _Item);
+
+PROC
+LeaderLib_PresetMenu_BlockSkillCopying((CHARACTERGUID)_Player, (STRING)_Preset, (STRING)_Skill, (INTEGER)_ChangingRace)
+AND
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
+THEN
+DB_LeaderLib_PresetMenu_Temp_BlockSkill(_Player, _Skill);
+
+PROC
+LeaderLib_PresetMenu_BlockSkillCopying((CHARACTERGUID)_Player, (STRING)_Preset, (STRING)_Skill, (INTEGER)_ChangingRace)
+AND
+DB_LLWEAPONEX_WeaponMastery_Skills(_WeaponType, _SkillID, _Skill)
+THEN
+DB_LeaderLib_PresetMenu_Temp_BlockSkill(_Player, _Skill);
 //END_REGION
 
 //REGION UNEQUIP_REMOVAL_EVENT
