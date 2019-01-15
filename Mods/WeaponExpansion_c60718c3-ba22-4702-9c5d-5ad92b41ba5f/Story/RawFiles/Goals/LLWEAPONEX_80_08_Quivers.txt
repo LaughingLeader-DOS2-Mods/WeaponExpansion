@@ -2,27 +2,36 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 
+
 KBSECTION
 
+/*
 IF
 DB_CombatCharacters((CHARACTERGUID)_Player, _)
 AND
 DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed)
+AND
+GetStatusTurns(_Player, _Status, _Turns)
+AND
+Real(_Turns, _TurnsR)
+AND
+RealProduct(_TurnsR, 6.0, _Duration)
 THEN
 NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
+DB_LLWEAPONEX_Quivers_Temp_ContinueCharging(_Player, _Quiver, _Skill, _Duration);
 RemoveStatus(_Player, _Status);
-DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill);
 
 PROC
 Proc_ObjectLeftCombat((CHARACTERGUID)_Player, _Combat)
 AND
-DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill)
+DB_LLWEAPONEX_Quivers_Temp_ContinueCharging(_Player, _Quiver, _Skill, _Duration)
 AND
 DB_LLWEAPONEX_Quivers_RechargeStatus(_Skill, _Status, _RechargeSpeed)
 THEN
-ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
-NOT DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill);
+ApplyStatus(_Player, _Status, _Duration, 0, _Player);
+NOT DB_LLWEAPONEX_Quivers_Temp_ContinueCharging(_Player, _Quiver, _Skill, _Duration);
 DB_LLWEAPONEX_Quivers_Temp_RechargeAfterCombat(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
+*/
 
 PROC
 Proc_ObjectLeftCombat((CHARACTERGUID)_Player, _Combat)
@@ -30,8 +39,9 @@ AND
 ObjectGetFlag(_Player, "LLWEAPONEX_Quiver_DrewArrow", 1)
 THEN
 ObjectClearFlag(_Player, "LLWEAPONEX_Quiver_DrewArrow");
-InventoryLaunchTagIterator(_Player, "LLWEAPONEX_Quiver_TemporaryArrow", "", "LLWEAPONEX_FoundQuiverArrow", "");
+LLWEAPONEX_Quivers_RemoveTemporaryArrows(_Player);
 
+/*
 IF
 CharacterStatusRemoved(_Player, _Status, _)
 AND
@@ -41,6 +51,7 @@ ObjectExists(_Quiver, 1)
 THEN
 ItemAddCharges(_Quiver, 1);
 LLWEAPONEX_Quivers_ResetRechargeStatus(_Player, _Quiver, _Status, _RechargeSpeed);
+*/
 
 EXITSECTION
 

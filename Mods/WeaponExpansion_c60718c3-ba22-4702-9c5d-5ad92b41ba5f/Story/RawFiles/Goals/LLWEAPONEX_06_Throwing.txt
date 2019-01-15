@@ -12,9 +12,13 @@ DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil")
 DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails");
 
 DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", "Projectile_LLWEAPONEX_ShieldToss_Returned", "LLWEAPONEX_COMBAT_SHIELD_HIT", 3, "LLWEAPONEX_Timers_ShieldTossTimeout", 1000);
+
+//Globally block
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
 //DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 
 //Make the impale effect look more believable
+/*
 IF
 CharacterUsedSkillOnTarget(_Character, (CHARACTERGUID)_Target, _Skill, "projectile", _)
 AND
@@ -25,6 +29,7 @@ AND
 StringContains(_Skill, "Projectile_LLWEAPONEX_Throw_", 1)
 THEN
 CharacterLookAt(_Target, _Character, 0);
+*/
 
 //REGION KEVIN_THROWN
 IF
@@ -514,7 +519,170 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:ReturnTarget(",_ShootSkill,")] [",_
 
 //END_REGION
 
+//REGION UNIQUE_THROWING_AXE
+IF
+CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", _, _)
+AND
+LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_UniqueThrowingAxeA")
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target);
+CharacterSetAnimationOverride(_Player, "skill_prepare_weapon_01_loop");
 
+IF
+CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", _, _)
+AND
+NOT LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_UniqueThrowingAxeA")
+THEN
+ShowNotification(_Player, "LLWEAPONEX_Nofitications_BalrinAxeMissing");
+
+IF
+SkillCast(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", _, _)
+AND
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target);
+//CharacterCharacterSetEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe");
+LeaderLib_StartCharacterCharacterTimer(_Player, _Target, 24, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe");
+
+IF
+CharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe")
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_UniqueThrowingAxeA", 1)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player);
+CharacterSetAnimationOverride(_Player, "");
+CharacterUseSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", _Target, 0, 1, 1);
+
+IF
+CharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe")
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_UniqueThrowingAxeA", 1)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player);
+CharacterSetAnimationOverride(_Player, "");
+CharacterUseSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", _Target, 0, 1, 1);
+
+IF
+SkillCast(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", _, _)
+THEN
+LLWEAPONEX_Throwing_OnSkillCast(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
+
+IF
+SkillCast(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", _, _)
+THEN
+LLWEAPONEX_Throwing_OnSkillCast(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
+
+PROC
+LLWEAPONEX_Throwing_OnSkillCast((CHARACTERGUID)_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A")
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player);
+
+PROC
+LLWEAPONEX_Throwing_OnSkillCast((CHARACTERGUID)_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A")
+AND
+CharacterFindTaggedItem(_Player, "LLWEAPONEX_UniqueThrowingAxeA", _ThrowingAxe)
+THEN
+CharacterUnequipItem(_Player, _ThrowingAxe);
+SetOnStage(_ThrowingAxe, 0);
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, NULL_00000000-0000-0000-0000-000000000000, _ThrowingAxe);
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed")
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, NULL_00000000-0000-0000-0000-000000000000, _ThrowingAxe)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, NULL_00000000-0000-0000-0000-000000000000, _ThrowingAxe);
+SetOnStage(_ThrowingAxe, 1);
+CharacterEquipItem(_Player, _ThrowingAxe);
+CharacterStatusText(_Player, "LLWEAPONEX_StatusText_BalrinAxeTimedOut");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A", (CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, NULL_00000000-0000-0000-0000-000000000000, _ThrowingAxe)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, NULL_00000000-0000-0000-0000-000000000000, _ThrowingAxe);
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe);
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed");
+
+IF
+CharacterStatusApplied(_Player, "LLWEAPONEX_BALRINAXE_RECOVER_START", (CHARACTERGUID)_Target)
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe);
+RemoveStatus(_Target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A");
+ApplyStatus(_Target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, _Player);
+CharacterLookAt(_Player, _Target);
+//PlayAnimation(_Player, "use_loot");
+LLWEAPONEX_Throwing_ReturnBalrinAxe(_Player, _ThrowingAxe);
+CharacterStatusText(_Player, "LLWEAPONEX_StatusText_BalrinAxeRetrieved");
+
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A", _)
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe);
+LLWEAPONEX_Throwing_ReturnBalrinAxe(_Player, _ThrowingAxe);
+CharacterStatusText(_Player, "LLWEAPONEX_StatusText_BalrinAxeTimedOut");
+
+PROC
+LLWEAPONEX_Throwing_ReturnBalrinAxe((CHARACTERGUID)_Player, (ITEMGUID)_ThrowingAxe)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe);
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Throwing_CheckForBalrinEquipFail", 250);
+RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_DISARMED_INFO");
+SetOnStage(_ThrowingAxe, 1);
+CharacterEquipItem(_Player, _ThrowingAxe);
+
+IF
+ItemTemplateEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+THEN
+CharacterAddSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", 1);
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _)
+THEN
+CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Throwing_CheckForBalrinEquipFail")
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _ThrowingAxe)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Throwing_CheckForBalrinEquipFail")
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _ThrowingAxe)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe);
+
+//Not equipped
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Throwing_CheckForBalrinEquipFail")
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe)
+THEN
+CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
+//END_REGION
 
 EXITSECTION
 

@@ -20,16 +20,22 @@
 	<content contentuid="h2bc57a65g2b75g457ag9b7agb148ad4e60cb">A former gladiator whose repertoire of blade skills once amazed crowds and foes alike</content>
 	<content contentuid="hf565f84eg8cedg40eeg8acdg2548f8bbf566">Shieldmaster</content>
 	<content contentuid="h451677d2ga792g4f99g8f77gccafa357861c">A warrior who strives to defend the innocent through a unique style that utilizes dual shields</content>
-	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1">Polearm</content>
-	<content contentuid="hd6d18316gbc8bg400bga46eg18cd9f4185ee">Blade</content>
-	<content contentuid="h6e21af89g96d5g4826ga11ag8688bee4a5f7">Blade</content>
-	<content contentuid="h17a906aeg8f00g4f9dga784g93b8e4ad26b2">One-Handed Blunt</content>
-	<content contentuid="h71eeb1baga7ddg4719gb91cg1a500c7dbe74">Can Backstab</content>
-	<content contentuid="ha0eca831g2e16g463fgb80fg09f33092c2ee"></content>
-	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43">[1][2][3]</content>
-	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Set [1] for [4] turn(s) [2][3]</content>
-	<content contentuid="h54e0b91cg48a7g4d5agaedcgbde756a109ea">([1]% Chance)</content>
-	<content contentuid="h61ef19d0g09f0g490bg9b37gae0ddaead259">[1] turn(s)</content>
-	<content contentuid="h192a08b3gd474g4dacg85bagc0ce5e0e27e4">Empty Slot</content>
-	<content contentuid="h03b9013dg183cg4543gbcd5gf9e832e74fae">Unbreakable</content>
+	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1" OT="Spear">Polearm</content>
+	<content contentuid="hd6d18316gbc8bg400bga46eg18cd9f4185ee" OT="Dagger">Blade</content>
+	<content contentuid="h6e21af89g96d5g4826ga11ag8688bee4a5f7" OT="Dagger">Blade</content>
+	<content contentuid="h17a906aeg8f00g4f9dga784g93b8e4ad26b2" OT="One-Handed Mace">One-Handed Blunt</content>
+	<content contentuid="h71eeb1baga7ddg4719gb91cg1a500c7dbe74" OT="Can Backstab. Backstabbing deals critical damage when you attack from behind your target.">Can Backstab</content>
+	<content contentuid="ha0eca831g2e16g463fgb80fg09f33092c2ee" OT="[1] on applying [2]"></content>
+	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43" OT="Set [1].[2][3]">[1][2][3]</content>
+	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f" OT="Set [1] for [4] turn(s).[2][3]">Set [1] for [4] turn(s) [2][3]</content>
+	<content contentuid="h54e0b91cg48a7g4d5agaedcgbde756a109ea" OT="[1]% chance to succeed.">([1]% Chance)</content>
+	<content contentuid="h61ef19d0g09f0g490bg9b37gae0ddaead259" OT="[1] turn(s)">[1] turn(s)</content>
+	<content contentuid="h192a08b3gd474g4dacg85bagc0ce5e0e27e4" OT="Empty slot">Empty Slot</content>
+	<content contentuid="h03b9013dg183cg4543gbcd5gf9e832e74fae" OT="Unbreakable">Unbreakable</content>
+	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a" OT="Item is out of charges&lt;br&gt;">Power Depleted&lt;br&gt;</content>
+	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69" OT="Item is out of charges&lt;br&gt;">Power Depleted&lt;br&gt;</content>
+	<content contentuid="h89dbdaf9g61bdg4246g82fag8e432a286751" OT="Wand is out of charges">Power Depleted</content>
+	<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee" OT="Number of uses">Power</content>
+	<content contentuid="h2feb0bc1g47aag41degb94eg7982094ec7e1" OT="Grants skill: [1]">Grants Skill: [1]</content>
+	<content contentuid="h96db82f9g82ddg45ddgafe7g220fb513f61d" OT="Grants skill">Grants Skill</content>
 </contentList>

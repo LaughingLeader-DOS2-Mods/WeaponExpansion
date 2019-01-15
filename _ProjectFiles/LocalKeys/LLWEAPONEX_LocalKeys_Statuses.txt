@@ -55,3 +55,9 @@ LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is ta
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
+LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)
+LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is gathering power.
+LLWEAPONEX_CONCUSSION_Description	Character has a serious concussion. Small chance on each basic attack to <font color='#FF8C00'>Fumble</font>.
+LLWEAPONEX_CONCUSSION_DisplayName	Concussion
+LLWEAPONEX_FUMBLE_Description	Character has fumbled their basic attack!
+LLWEAPONEX_FUMBLE_DisplayName	Fumbled!

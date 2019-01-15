@@ -493,6 +493,9 @@ add name "Heavy Book",""
 add name "Weighty Book",""
 add name "Dictionary",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
+add name "Balrin's Throwing Axe",""
+
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""
 add namecool "Mighty Dragonslayer Mail",""

@@ -1558,3 +1558,9 @@ new itemgroup "WPN_LLWEAPONEX_HandCrossbow"
 add levelgroup 0,0,"All"
 add rootgroup "692a4576-661e-466b-909e-7a4bccb28ed8",""
 add namegroup "Crossbow","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "8ff641b7-920a-4bbc-b1c1-d17a73312e53",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A","",""

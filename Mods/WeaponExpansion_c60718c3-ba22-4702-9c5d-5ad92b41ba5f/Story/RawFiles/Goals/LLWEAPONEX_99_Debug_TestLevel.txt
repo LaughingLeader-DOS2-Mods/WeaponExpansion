@@ -295,6 +295,14 @@ CharacterGetHostCharacter(_Host)
 THEN
 CharacterDieImmediate(_Host, 0, "", _Host);
 
+IF
+TextEventSet("llweap_removestatuses")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+RemoveHarmfulStatuses(_Host);
+
+
 //REGION STATUSES
 /*
 IF

@@ -126,6 +126,22 @@ LLWEAPONEX_WeaponMastery_AddMastery((STRING)_WeaponType, (STRING)_CurrentXPVar, 
 THEN
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag);
 
+/*
+//Globally block mastery skills from being copied by the preset process
+PROC
+LLWEAPONEX_WeaponMastery_InitSettings()
+AND
+DB_LLWEAPONEX_WeaponMastery_Skills(_WeaponType, _SkillID, _Skill)
+THEN
+DB_LeaderLib_BlockedSkill(_Skill);
+
+PROC
+LLWEAPONEX_WeaponMastery_InitSettings()
+AND
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
+THEN
+DB_LeaderLib_BlockedSkill(_Skill);
+*/
 //END_REGION
 
 //REGION UPDATES

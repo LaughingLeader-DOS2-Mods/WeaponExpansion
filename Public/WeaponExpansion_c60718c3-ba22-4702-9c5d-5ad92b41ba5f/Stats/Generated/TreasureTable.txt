@@ -149,6 +149,8 @@ object category "T_ST_LLWEAPONEX_Accessories",1,0,0,0,0,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine"
 new subtable "1,1"
+object category "I_WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A",1,0,0,0,0,0,0,0
+new subtable "1,1"
 StartLevel "1"
 EndLevel "15"
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,1,0,0,0,0,0,0

@@ -39,21 +39,6 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatb
 DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 825);
 DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 580);
 DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
-
-SysClear("DB_LLWEAPONEX_Quivers_LoopFX", 4);
-DB_LLWEAPONEX_Quivers_LoopFX("DWARF", 1,  "LLWEAPONEX_FX_Quiver_A_Dwarf", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Quivers_LoopFX("DWARF", 0,  "LLWEAPONEX_FX_Quiver_A_Dwarf", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Quivers_LoopFX("ELF", 1,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Quivers_LoopFX("ELF", 0,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Quivers_LoopFX("HUMAN", 1,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Bone");
-DB_LLWEAPONEX_Quivers_LoopFX("HUMAN", 0,  "LLWEAPONEX_FX_Quiver_A", "Thigh_R_Twist_Bone");
-DB_LLWEAPONEX_Quivers_LoopFX("LIZARD", 1,  "LLWEAPONEX_FX_Quiver_A", "HorseLink_R_Bone");
-DB_LLWEAPONEX_Quivers_LoopFX("LIZARD", 0,  "LLWEAPONEX_FX_Quiver_A", "HorseLink_R_Bone");
-
-DB_LLWEAPONEX_Quivers_ArrowTreasure(0, "ST_LLWEAPONEX_Quiver_Arrows");
-DB_LLWEAPONEX_Quivers_ArrowTreasure(1, "ST_LLWEAPONEX_Quiver_GreatbowArrows");
-
-DB_LLWEAPONEX_Quivers_RechargeStatus("Shout_LLWEAPONEX_Quiver_DrawArrow", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", 60.0);
 //END_REGION
 
 //REGION GREATBOW_START_ATTACK
