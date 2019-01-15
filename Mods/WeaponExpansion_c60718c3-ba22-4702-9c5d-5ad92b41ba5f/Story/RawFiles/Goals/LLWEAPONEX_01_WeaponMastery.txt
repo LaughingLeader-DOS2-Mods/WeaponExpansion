@@ -28,23 +28,23 @@ LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Greatbow", "LLWEAPONEX_WM_Greatb
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 0, "PiercingShot", "Any");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 1, "KnockbackShot", "Any");
 
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_DWARF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_DWARF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_ELF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_ELF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_HUMAN_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_HUMAN_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  1, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_LIZARD_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  0, "LLWEAPONEX_WS_GREATBOW_PIERCINGSHOT_LIZARD_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Dwarf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Dwarf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Elf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "ELF",     0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Elf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Human_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Human_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Lizard_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Lizard_Male");
 
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_DWARF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_DWARF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_ELF_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_ELF_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_HUMAN_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_HUMAN_MALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  1, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_LIZARD_FEMALE");
-DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  0, "LLWEAPONEX_WS_GREATBOW_KNOCKBACK_LIZARD_MALE");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "DWARF",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Dwarf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "ELF",     0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Elf_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Male");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Female");
+DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male");
 
 //Katana
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Katana", "<font color='#FF2D2D'>Katana Mastery</font>");
@@ -70,7 +70,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Quarterstaff", 4, "<font color
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Quarterstaff", "LLWEAPONEX_WM_Quarterstaff_Exp", "LLWEAPONEX_WM_Quarterstaff_ExpMax", "LLWEAPONEX_WM_Quarterstaff_Level");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Quarterstaff", 1, "LegSweep", "Any");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Quarterstaff", "LegSweep", "LLWEAPONEX_WS_QUARTERSTAFF_LEGSWEEP");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Quarterstaff", "LegSweep", "Shout_LLWEAPONEX_LegSweep");
 
 //Rapier
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Rapier", "<font color='#F8FF2D'>Rapier Mastery</font>");
@@ -85,7 +85,7 @@ LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_E
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Any"); // Added when the offhand is empty
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 2, "SuckerCombo1", "Tag");
 
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_WS_RAPIER_STANCE_DUELIST");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "Shout_LLWEAPONEX_Rapier_DuelistStance");
 DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Rapier", "SuckerCombo1", "LLWEAPONEX_Rapier_SuckerCombo1Enabled", "Tag");
 
 //Statuses applied by mastery skills that should be removed when the mastery is inactive
@@ -105,8 +105,8 @@ LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Runeblade", "LLWEAPONEX_WM_Runeb
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Runeblade", 1, "RunicReverb", "Any");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Runeblade", 1, "PoisonBurst", "Status");
 
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "RunicReverb", "LLWEAPONEX_WS_RUNEBLADE_RUNICREVERB");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_WS_RUNEBLADE_POISONBURST");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "RunicReverb", "Shout_LLWEAPONEX_Runeblade_RunicReverb");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "PoisonBurst", "Target_LLWEAPONEX_Runeblade_PoisonBurst");
 
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON",          "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION",   "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
@@ -201,14 +201,14 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
 DB_NOOP(1);
 
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
 DB_NOOP(1);
 
@@ -246,7 +246,7 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_WeaponMastery_QRY_IsRacialSkill((STRING)_WeaponType, (STRING)_SkillID)
 AND
-DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Status)
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
 THEN
 DB_NOOP(1);
 //END_REGION
@@ -335,26 +335,25 @@ LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, (STRING)_WeaponType
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _)
 AND
-DB_LLWEAPONEX_WeaponMastery_Skills(_WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_Skills(_WeaponType, _SkillID, _Skill)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:UnlockSkill] Unlocking skill [",_SkillID,"](",_Status,") for weapon type [",_WeaponType,"].");
-ApplyStatus(_Player, _Status, -1.0, 1, _Player);
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:UnlockSkill] Unlocking skill [",_SkillID,"](",_Skill,") for weapon type [",_WeaponType,"].");
+CharacterAddSkill(_Player, _Skill, 0);
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
 
 PROC
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_RaceTag)
 AND
 IsTagged(_Player, "FEMALE", _IsFemale)
 AND
-DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Status)
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:UnlockSkillForRace] Unlocking skill [",_SkillID,"](",_Status,") for weapon type [",_WeaponType,"].");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:UnlockSkillForRace] Unlocking skill [",_SkillID,"](",_Skill,") for weapon type [",_WeaponType,"].");
 DB_LLWEAPONEX_WeaponMastery_Temp_SkillResolved(_Player, _WeaponType, _SkillID);
-//CharacterAddSkill(_Player, _Skill);
-ApplyStatus(_Player, _Status, -1.0, 1, _Player);
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
+CharacterAddSkill(_Player, _Skill, 0);
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
 
 PROC
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_RaceTag)
@@ -534,6 +533,7 @@ NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _Weapo
 //END_REGION
 
 //REGION RESURRECTION_REAPPLY
+/*
 IF
 CharacterStatusRemoved(_Player, "RESURRECT", _)
 AND
@@ -544,9 +544,10 @@ ApplyStatus(_Player, _Status, -1.0, 1, _Player);
 IF
 CharacterStatusRemoved(_Player, "RESURRECT", _)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
 ApplyStatus(_Player, _Status, -1.0, 1, _Player);
+*/
 //END_REGION
 
 //REGION RACE_CHANGED_EVENTS
@@ -557,11 +558,10 @@ LLWEAPONEX_QRY_HasRacialSkills(_Player)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
-//CharacterRemoveSkill(_Player, _Skill);
-RemoveStatus(_Player, _Status);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
+CharacterRemoveSkill(_Player, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
 
 IF
@@ -575,11 +575,10 @@ GetTemplate(_Player, _RaceTemplate)
 AND
 DB_LeaderLib_RaceTemplates(_RaceTag, _IsUndead, _IsFemale, _RaceTemplate)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
-//CharacterRemoveSkill(_Player, _Skill);
-RemoveStatus(_Player, _Status);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
+CharacterRemoveSkill(_Player, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
 
 IF
@@ -591,17 +590,16 @@ CharacterGetRace(_Player, 0, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
-//CharacterRemoveSkill(_Player, _Skill);
-RemoveStatus(_Player, _Status);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
+CharacterRemoveSkill(_Player, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
 LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
 
 QRY
 LLWEAPONEX_QRY_HasRacialSkills((CHARACTERGUID)_Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
 DB_NOOP(1);
 //END_REGION
@@ -610,29 +608,29 @@ DB_NOOP(1);
 PROC
 LLWEAPONEX_WeaponMastery_RemoveSkill((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
-RemoveStatus(_Player, _Status);
+CharacterRemoveSkill(_Player, _Skill);
 LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses(_Player, _WeaponType, _SkillID);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
 
 PROC
 LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
-RemoveStatus(_Player, _Status);
+CharacterRemoveSkill(_Player, _Skill);
 LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses(_Player, _WeaponType, _SkillID);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill);
 
 PROC
 LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
-RemoveStatus(_Player, _Status);
+CharacterRemoveSkill(_Player, _Skill);
 LLWEAPONEX_WeaponMastery_RemoveAppliedSkillStatuses(_Player, _WeaponType, _SkillID);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Status);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
 
 PROC
 LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -938,7 +936,7 @@ CharacterStatusRemoved(_Player, _Status, _)
 AND
 DB_LLWEAPONEX_WeaponMastery_StatusUnlocking(_WeaponType, _SkillID, _Status, _InfoStatus)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Status)
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
 LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, _WeaponType, _SkillID);
 */
