@@ -61,3 +61,6 @@ LLWEAPONEX_CONCUSSION_Description	Character has a serious concussion. Small chan
 LLWEAPONEX_CONCUSSION_DisplayName	Concussion
 LLWEAPONEX_FUMBLE_Description	Character has fumbled their basic attack!
 LLWEAPONEX_FUMBLE_DisplayName	Fumbled!
+LLWEAPONEX_DOUSED_DisplayName	Doused
+LLWEAPONEX_MENDING_DisplayName	Mending
+LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] Vitality per turn.

@@ -147,6 +147,14 @@ object category "T_ST_LLWEAPONEX_Accessories",9,0,0,1,0,0,0,0
 object category "T_ST_LLWEAPONEX_Accessories",5,0,0,0,1,0,0,0
 object category "T_ST_LLWEAPONEX_Accessories",1,0,0,0,0,1,0,0
 
+new treasuretable "ST_LLWEAPONEX_VendingMachine_Skillbooks"
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_VendingMachine"
 new subtable "1,1"
 object category "I_WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A",1,0,0,0,0,0,0,0
@@ -174,6 +182,8 @@ new subtable "0,4;1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_RareAccessories",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "Trader Gold",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_VendingMachine_Skillbooks",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderAccessory"
 new subtable "1,1"

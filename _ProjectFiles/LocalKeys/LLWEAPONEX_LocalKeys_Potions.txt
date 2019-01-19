@@ -23,3 +23,4 @@ Stats_LLWEAPONEX_BlindfoldEquipped	Blindfolded
 Stats_LLWEAPONEX_TormentedGhost	Tormented Ghost
 Stats_LLWEAPONEX_Zombified	Zombified
 Stats_LLWEAPONEX_Dizzy	Dizzy
+Stats_LLWEAPONEX_Doused	Doused
