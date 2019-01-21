@@ -1,13 +1,56 @@
 INIT
 	ITEM:__Me
+	EXTERN STRING:%LLWEAPONEX_Grimoire_LoopFX = ""
+	INT64:%LLWEAPONEX_Grimoire_LoopHandle = null
 EVENTS
 
 EVENT LLWEAPONEX_Grimoire_Init
 ON
 	OnInit()
+	OnActivate()
+	OnItemDropped(__Me, _)
 ACTIONS
-IF "!c1"
+IF "!c1&!c2"
 	ItemIsInInventory(__Me)
+	IsTagged(__Me, "LLMIME_MIMICKED_WEAPON")
 THEN
-	ItemEvent(__Me, "LLWEAPONEX_Grimoires_StartItemEffect")
+	//ItemEvent(__Me, "LLWEAPONEX_Grimoires_StartItemEffect")
+	IF "!c1"
+		IsEqual(%LLWEAPONEX_Grimoire_LoopHandle, null)
+	THEN
+		StopLoopEffect(%LLWEAPONEX_Grimoire_LoopHandle, 1)
+	ENDIF
+	ItemPlayLoopEffect(%LLWEAPONEX_Grimoire_LoopHandle, __Me, %LLWEAPONEX_Grimoire_LoopFX)
+ENDIF
+
+EVENT LLWEAPONEX_Grimoire_StopLoopFX
+ON
+	OnPickupItem(_, __Me)
+	OnItemDestroying(__Me)
+	OnShutdown()
+	OnDeactivate()
+ACTIONS
+	//ItemEvent(__Me, "LLWEAPONEX_Grimoire_StopItemFX")
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Grimoire_LoopHandle, null)
+THEN
+	StopLoopEffect(%LLWEAPONEX_Grimoire_LoopHandle, 1)
+ENDIF
+
+BEHAVIOUR
+
+REACTION LLWEAPONEX_Grimoire_PlayLoopFX,99999
+USAGE ALL
+CHECK "!c1&!c2&!c3&c4"
+	ItemIsInInventory(__Me)
+	ItemIsDestroyed(__Me)
+	IsTagged(__Me, "LLMIME_MIMICKED_WEAPON")
+	IsEqual(%LLWEAPONEX_Grimoire_LoopHandle, null)
+ACTIONS
+IF "!c1&c2&!c3"
+	IsEqual(%LLWEAPONEX_Grimoire_LoopFX, "")
+	IsActive(__Me)
+	GameIsLoading()
+THEN
+	ItemPlayLoopEffect(%LLWEAPONEX_Grimoire_LoopHandle, __Me, %LLWEAPONEX_Grimoire_LoopFX)
 ENDIF

@@ -1,0 +1,60 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+/*
+IF
+CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, _RodTargetSkill, _, _)
+AND
+DB_LLWEAPONEX_Rods_Skills(_RodType, _RodTargetSkill, _MainhandSkill, _OffhandSkill)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target);
+CharacterSetAnimationOverride(_Player, "skill_prepare_weapon_01_loop");
+
+IF
+CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", _, _)
+AND
+NOT LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_UniqueThrowingAxeA")
+THEN
+ShowNotification(_Player, "LLWEAPONEX_Nofitications_BalrinAxeMissing");
+
+IF
+SkillCast(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", _, _)
+AND
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target);
+//CharacterCharacterSetEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe");
+LeaderLib_StartCharacterCharacterTimer(_Player, _Target, 24, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe");
+
+IF
+CharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe")
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_UniqueThrowingAxeA", 1)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player);
+CharacterSetAnimationOverride(_Player, "");
+CharacterUseSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", _Target, 0, 1, 1);
+
+IF
+CharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe")
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _Item)
+AND
+IsTagged(_Item, "LLWEAPONEX_UniqueThrowingAxeA", 1)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player);
+CharacterSetAnimationOverride(_Player, "");
+CharacterUseSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", _Target, 0, 1, 1);
+*/
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

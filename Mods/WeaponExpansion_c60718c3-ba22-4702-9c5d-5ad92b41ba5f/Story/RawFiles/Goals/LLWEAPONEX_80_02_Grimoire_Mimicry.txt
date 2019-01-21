@@ -115,6 +115,15 @@ DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Character, _Grimoire)
 THEN
 ProcObjectTimerCancel(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire");
 ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_RemoveSkillGrimoire", 1500);
+LLWEAPONEX_Grimoire_Internal_RemoveSkillPlatform(_Character, _Grimoire);
+
+IF
+CharacterUsedSkill(_Grimoire, _, _, _)
+AND
+DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Caster, _Grimoire)
+THEN
+PROC_StopLoopEffect(_Caster, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop");
+LLWEAPONEX_Grimoire_Internal_RemoveSkillPlatform(_Caster, _Grimoire);
 //END_REGION
 
 EXITSECTION

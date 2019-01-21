@@ -46,7 +46,7 @@ CharacterIsInCombat(_Character, 1)
 AND
 NOT LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_DUELIST_BONUS")
 THEN
-CharacterAddActionPoints(_Character, 1);
+//CharacterAddActionPoints(_Character, 1); +AP is handled by the status
 ApplyStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_DUELIST_BONUS", 12.0, 0, _Character);
 CharacterStatusText(_Character, "LLWEAPONEX_Skills_DuelistStance_Bonus");
 //END_REGION
