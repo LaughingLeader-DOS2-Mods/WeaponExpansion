@@ -563,7 +563,7 @@ add name "Speedy Quickdraw Quiver","A handmade quiver, designed for quickly draw
 add name "Ancient Elven Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
 
 new namegroup "LLWEAPONEX_Quivers_DrawArrow_Epic"
-add "Trusy Nick's Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
+add name "Trusy Nick's Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
 add name "Ring of the Two Faces",""

@@ -156,7 +156,7 @@ data "Damage Multiplier" "120"
 data "Damage Range" "45"
 data "DamageType" "Piercing"
 data "UseWeaponDamage" "Yes"
-data "UseWeaponProperties" "No
+data "UseWeaponProperties" "No"
 
 new entry "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Dwarf_Female"
 type "SkillData"

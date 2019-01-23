@@ -14,6 +14,7 @@ IF
 DB_LLWEAPONEX_RegisteredLeaderLibSettings(1)
 THEN
 LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion] Settings", "LLWEAPONEX_SettingsMenu", "WeaponExpansion", "LaughingLeader");
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "WeaponExpansion");
 
 LeaderLib_Trader_Register_Position("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 12.0, 0.0, 8.0);
 LeaderLib_Trader_Register_StartingGold("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 9999);

@@ -59,7 +59,7 @@ add namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Legendary","",""
 
 add levelgroup 1,30,"Divine"
 add rootgroup "9d98560d-916a-4ea0-8064-8a5ac8c13b45",""
-add namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine","","
+add namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine","",""
 
 new itemgroup "WPN_LLWEAPONEX_CombatShield_Blackring_A"
 
