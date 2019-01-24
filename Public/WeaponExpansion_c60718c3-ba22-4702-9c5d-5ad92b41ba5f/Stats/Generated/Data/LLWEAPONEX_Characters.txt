@@ -27,7 +27,6 @@ data "Memory" "0.5"
 data "Wits" "2"
 data "Armor" "0"
 data "Gain" "None"
-data "BloodSurfaceType" "SurfaceNone"
 
 new entry "LLWEAPONEX_VendingMachine_A"
 type "Character"

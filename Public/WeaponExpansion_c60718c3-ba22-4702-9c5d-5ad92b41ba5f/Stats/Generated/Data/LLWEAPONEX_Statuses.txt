@@ -706,7 +706,6 @@ type "Potion"
 data "Act" "1"
 data "Act part" "0"
 data "DamageBoost" "-50"
-data "Gain" "None"
 data "BloodSurfaceType" "SurfaceNone"
 
 new entry "LLWEAPONEX_TORMENTED_GHOST"
