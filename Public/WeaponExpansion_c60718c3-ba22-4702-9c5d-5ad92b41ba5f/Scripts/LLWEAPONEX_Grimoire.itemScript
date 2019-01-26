@@ -28,13 +28,15 @@ ON
 	OnPickupItem(_, __Me)
 	OnItemDestroying(__Me)
 	OnShutdown()
-	OnDeactivate()
+	//OnDeactivate()
+	OnItemEvent(_, "LeaderLib_RegionEnded")
 ACTIONS
 	//ItemEvent(__Me, "LLWEAPONEX_Grimoire_StopItemFX")
 IF "!c1"
 	IsEqual(%LLWEAPONEX_Grimoire_LoopHandle, null)
 THEN
 	StopLoopEffect(%LLWEAPONEX_Grimoire_LoopHandle, 1)
+	Set(%LLWEAPONEX_Grimoire_LoopHandle, null)
 ENDIF
 
 BEHAVIOUR

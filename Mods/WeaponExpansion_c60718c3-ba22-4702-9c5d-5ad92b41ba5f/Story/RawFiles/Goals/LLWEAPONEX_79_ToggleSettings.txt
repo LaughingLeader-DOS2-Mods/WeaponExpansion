@@ -55,7 +55,7 @@ DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName);
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 3, 7)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 3, 8)
 THEN
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire__Main", "LLWEAPONEX_Grimoire");
 
@@ -73,6 +73,13 @@ PROC
 LLWEAPONEX_ToggleSettings_Register_Flag((STRING)_GoalName, (STRING)_Flag)
 THEN
 DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
+
+PROC
+LLWEAPONEX_ToggleSettings_Register_GoalForTag((STRING)_GoalName, (STRING)_Tag)
+AND
+NOT DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _, _)
+THEN
+LLWEAPONEX_ToggleSettings_AddTag(_Tag);
 
 PROC
 LLWEAPONEX_ToggleSettings_Register_GoalForTag((STRING)_GoalName, (STRING)_Tag)
@@ -128,6 +135,14 @@ LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, _WeaponType);
 //END_REGION
 
 //REGION TOGGLE_EVENTS_TAGS
+PROC
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
+AND
+NOT DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _, _)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:DeactivateScript] Script for tag [",_Tag,"] not registered!");
+
+
 PROC
 LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
 AND

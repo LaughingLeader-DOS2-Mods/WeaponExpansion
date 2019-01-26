@@ -103,6 +103,7 @@ ItemUnEquipped(_Item, _Character)
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 THEN
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Character, "LLWEAPONEX_Grimoire");
 LLWEAPONEX_Grimoire_OnGrimoireUnEquipped(_Character, _Item);
 
 PROC
@@ -130,6 +131,7 @@ IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
 THEN
 ObjectSetFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
 LLWEAPONEX_Grimoire_OnGrimoireEquipped(_Character, _Item);
+LLWEAPONEX_ToggleSettings_OnTagAdded(_Character, "LLWEAPONEX_Grimoire");
 
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
@@ -347,6 +349,31 @@ DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
 SetVarFixedString(_Character, "LLWEAPONEX_Grimoire_StopHandleID", _EffectID);
 SetVarString(_Character, "LLWEAPONEX_Grimoire_StopCompletionEvent", "LLWEAPONEX_Grimoire_StopOtherFX");
 SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_StopLoopFX");
+
+PROC
+LLWEAPONEX_Grimoire_DestroyAllEffects((CHARACTERGUID)_Character)
+AND
+GetUUID(_Character, _UUID)
+THEN
+SetVarString(_Character, "LLWEAPONEX_UUID", _UUID);
+SetStoryEvent(_Character, "LLWEAPONEX_Grimoire_DestroyAllFX");
+
+PROC
+LLWEAPONEX_Grimoire_DestroyAllEffects((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed);
+//CharacterStopAllEffectsWithName(_Character, _Effect);
+
+PROC
+LLWEAPONEX_Grimoire_StopAllEffects_Debug((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+CharacterStopAllEffectsWithName(_Character, _SheathedFX);
+CharacterStopAllEffectsWithName(_Character, _UnsheathedFX);
+CharacterStopAllEffectsWithName(_Character, _SheathedFX);
 
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StopOtherFX")

@@ -22,6 +22,22 @@ DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 THEN
 LLWEAPONEX_Grimoire_OnGrimoireSheathed(_Character, _Item, _Template);
 
+//Respec started, delete effects
+IF
+DB_Illusionist(_Player,_Mirror)
+AND
+DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+THEN
+LLWEAPONEX_Grimoire_StopAllEffects(_Character);
+
+
+//Respec finished, play effects again
+PROC
+Proc_HomesteadTeleportAfterMirror((CHARACTERGUID)_Player,(ITEMGUID)_Mirror,(TRIGGERGUID)_Trigger)
+AND
+DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+THEN
+LLWEAPONEX_Grimoire_OnGrimoireSheathed(_Character, _Item, _Template);
 EXITSECTION
 
 ENDEXITSECTION

@@ -62,7 +62,7 @@ add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted_A"
 add equipmentgroup
 add equipment entry "POTION_Minor_Healing_Potion"
 add equipmentgroup
@@ -86,7 +86,7 @@ add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted_A"
 add equipmentgroup
 add equipment entry "CON_Potion_Poison_A"
 add equipmentgroup
