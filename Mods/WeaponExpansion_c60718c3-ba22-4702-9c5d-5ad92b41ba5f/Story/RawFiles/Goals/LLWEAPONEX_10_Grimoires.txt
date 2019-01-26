@@ -291,13 +291,6 @@ DB_LLWEAPONEX_Grimoire_Temp_IsSettingFX(_Character)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsSettingFX(_Character);
 
-IF
-CharacterStatusApplied(_Character, "UNSHEATHED", _)
-AND
-DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
-THEN
-LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template);
-
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 THEN
@@ -366,13 +359,6 @@ IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StopOtherFX")
 THEN
 LLWEAPONEX_Grimoire_StopAllEffects(_Character);
-
-IF
-CharacterStatusRemoved(_Character, "UNSHEATHED", _)
-AND
-DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
-THEN
-LLWEAPONEX_Grimoire_OnGrimoireSheathed(_Character, _Item, _Template);
 
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireSheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)

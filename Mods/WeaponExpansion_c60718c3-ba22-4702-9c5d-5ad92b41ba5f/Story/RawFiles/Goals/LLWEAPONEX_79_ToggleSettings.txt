@@ -16,6 +16,7 @@ LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Greatbow", "L
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Katana", "LLWEAPONEX_Katana");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Rapier", "LLWEAPONEX_Rapier");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Runeblade", "LLWEAPONEX_Runeblade");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire__Main", "LLWEAPONEX_Grimoire");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Death", "LLWEAPONEX_Grimoire_Death");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Mimicry", "LLWEAPONEX_Grimoire_Mimicry");
 
@@ -51,6 +52,13 @@ DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName);
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 3, 7)
+THEN
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire__Main", "LLWEAPONEX_Grimoire");
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
 AND

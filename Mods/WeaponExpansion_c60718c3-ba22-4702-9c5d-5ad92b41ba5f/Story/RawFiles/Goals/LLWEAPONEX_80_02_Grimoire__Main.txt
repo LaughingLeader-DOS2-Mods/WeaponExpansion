@@ -1,0 +1,28 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+CharacterStatusApplied(_Character, "UNSHEATHED", _)
+AND
+NOT DB_Illusionist(_Character, _)
+AND
+DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+THEN
+LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template);
+
+IF
+CharacterStatusRemoved(_Character, "UNSHEATHED", _)
+AND
+NOT DB_Illusionist(_Character, _)
+AND
+DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+THEN
+LLWEAPONEX_Grimoire_OnGrimoireSheathed(_Character, _Item, _Template);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

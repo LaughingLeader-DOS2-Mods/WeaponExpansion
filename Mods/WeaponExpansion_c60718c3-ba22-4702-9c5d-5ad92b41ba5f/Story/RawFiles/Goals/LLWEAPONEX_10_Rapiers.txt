@@ -17,6 +17,8 @@ AND
 CharacterGetEquippedItem(_Player, "Shield", _Shield)
 AND
 _Shield != NULL_00000000-0000-0000-0000-000000000000
+AND
+IsTagged(_Shield, "LLWEAPONEX_Grimoire", 0)
 THEN
 DB_NOOP(1);
 //END_REGION

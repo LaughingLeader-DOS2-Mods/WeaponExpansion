@@ -69,7 +69,6 @@ type "Weapon"
 using "Status_LLWEAPONEX_Runeblade_Base"
 data "Damage Type" "Air"
 data "ExtraProperties" "Electrify"
-data "DeathType" "Electrocution"
 
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD"
 type "StatusData"
@@ -95,7 +94,6 @@ using "Status_LLWEAPONEX_Runeblade_Base"
 data "Damage Type" "Piercing"
 data "Damage Range" "10"
 data "DamageFromBase" "10"
-data "DeathType" "Piercing"
 
 new entry "Status_LLWEAPONEX_Runeblade_BloodCombo"
 type "Weapon"
@@ -137,7 +135,6 @@ new entry "Status_LLWEAPONEX_Runeblade_Earth"
 type "Weapon"
 using "Status_LLWEAPONEX_Runeblade_Base"
 data "Damage Type" "Earth"
-data "DeathType" "PetrifiedShatter"
 
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE"
 type "StatusData"
@@ -160,7 +157,6 @@ new entry "Status_LLWEAPONEX_Runeblade_Fire"
 type "Weapon"
 using "Status_LLWEAPONEX_Runeblade_Base"
 data "Damage Type" "Fire"
-data "DeathType" "Incinerate"
 data "ExtraProperties" "Ignite"
 
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON"
@@ -186,7 +182,6 @@ type "Weapon"
 using "Status_LLWEAPONEX_Runeblade_Base"
 data "Damage Type" "Poison"
 data "ExtraProperties" "Contaminate"
-data "DeathType" "Acid"
 
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER"
 type "StatusData"
@@ -304,7 +299,7 @@ data "DisplayNameRef" "Explode Poison"
 
 new entry "LLWEAPONEX_POISONBURST_EXPLODE_1"
 type "StatusData"
-data "StatusType" "CONSUME"
+data "StatusType" "DAMAGE"
 using "LLWEAPONEX_HIDDEN_DAMAGE_BASE"
 data "DamageStats" "Damage_LLWEAPONEX_PoisonBurst_Explode1"
 data "DisplayName" "LLWEAPONEX_POISONBURST_EXPLODE_DisplayName"
@@ -318,7 +313,7 @@ data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_PoisonBurst_Explosio
 
 new entry "LLWEAPONEX_POISONBURST_EXPLODE_2"
 type "StatusData"
-data "StatusType" "CONSUME"
+data "StatusType" "DAMAGE"
 using "LLWEAPONEX_POISONBURST_EXPLODE_1"
 data "DamageStats" "Damage_LLWEAPONEX_PoisonBurst_Explode2"
 
@@ -331,7 +326,7 @@ data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_PoisonBurst_Explosio
 
 new entry "LLWEAPONEX_POISONBURST_EXPLODE_3"
 type "StatusData"
-data "StatusType" "CONSUME"
+data "StatusType" "DAMAGE"
 using "LLWEAPONEX_POISONBURST_EXPLODE_1"
 data "DamageStats" "Damage_LLWEAPONEX_PoisonBurst_Explode3"
 
@@ -344,7 +339,7 @@ data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_PoisonBurst_Explosio
 
 new entry "LLWEAPONEX_POISONBURST_EXPLODE_4"
 type "StatusData"
-data "StatusType" "CONSUME"
+data "StatusType" "DAMAGE"
 using "LLWEAPONEX_POISONBURST_EXPLODE_1"
 data "DamageStats" "Damage_LLWEAPONEX_PoisonBurst_Explode4"
 
@@ -357,7 +352,7 @@ data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_PoisonBurst_Explosio
 
 new entry "LLWEAPONEX_POISONBURST_EXPLODE_5"
 type "StatusData"
-data "StatusType" "CONSUME"
+data "StatusType" "DAMAGE"
 using "LLWEAPONEX_POISONBURST_EXPLODE_1"
 data "DamageStats" "Damage_LLWEAPONEX_PoisonBurst_Explode5"
 
@@ -370,7 +365,7 @@ data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_PoisonBurst_Explosio
 
 new entry "LLWEAPONEX_POISONBURST_EXPLODE_6"
 type "StatusData"
-data "StatusType" "CONSUME"
+data "StatusType" "DAMAGE"
 using "LLWEAPONEX_POISONBURST_EXPLODE_1"
 data "DamageStats" "Damage_LLWEAPONEX_PoisonBurst_Explode6"
 

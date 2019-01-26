@@ -117,7 +117,7 @@ param "ModifierType" "Shield"
 param "SlotType" "Shield"
 new boost "_Boost_Shield_Armour_All",1
 
-new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium"
+new deltamod "Boost_LLWEAPONEX_Grimoire_Armor_All_Medium"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Shield"
