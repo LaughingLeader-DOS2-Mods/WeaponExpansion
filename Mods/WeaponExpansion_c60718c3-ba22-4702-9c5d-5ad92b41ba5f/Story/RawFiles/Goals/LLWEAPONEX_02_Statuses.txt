@@ -290,6 +290,7 @@ NOT DB_LLWEAPONEX_Statuses_Temp_AuraBeamEffects(_Character, _AuraCharacter, _Sta
 */
 //END_REGION
 
+//REGION RUNEBLADE_SHOCKED
 IF
 CharacterStatusApplied(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK", _)
 THEN
@@ -316,6 +317,31 @@ AND
 LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK")
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK");
+//END_REGION
+
+//REGION TORMENT
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_TORMENT", (CHARACTERGUID)_Caster)
+AND
+LeaderLib_Random_QRY(999)
+AND
+DB_LeaderLib_Random(_Roll)
+AND
+_Roll > 0
+AND
+DB_LLWEAPONEX_Grimoire_TormentDebuff(_MinRoll, _MaxRoll, _Status, _Duration)
+AND
+_Roll >= _MinRoll
+AND
+_Roll <= _MaxRoll
+THEN
+ApplyStatus(_Target, _Status, _Duration, 0, _Caster);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_TORMENT", (CHARACTERGUID)_Caster)
+THEN
+CharacterStatusText(_Target, "LLWEAPONEX_Status_Torment_Applied");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

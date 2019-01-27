@@ -302,6 +302,15 @@ CharacterGetHostCharacter(_Host)
 THEN
 RemoveHarmfulStatuses(_Host);
 
+IF
+CharacterUsedItem(_Player, ITEMGUID_PUZ_Lever_Floor_A_001_f1ca3f98-a0ba-413e-a3ad-aba8469f91d9)
+THEN
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_000_a566d10b-0408-4ed6-8077-939d80d24326);
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_001_2e67c698-6cfc-44f7-b001-49d45570eb19);
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_002_86209bd5-f8c7-4ab9-936e-89cbf44139f1);
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_003_9e6e10fd-89cb-48a0-8d04-256885f5aa15);
+CharacterResurrect(CHARACTERGUID_DW_Voidling_A_004_4d7beedc-1c20-4307-9515-ab099d656f53);
+
 
 //REGION STATUSES
 /*

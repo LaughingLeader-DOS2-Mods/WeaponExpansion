@@ -852,7 +852,7 @@ object category "I_WPN_LLWEAPONEX_DualShields_Lizards_C",1,0,1,0,0,0,0,0
 new treasuretable "LLWEAPONEX_Debug_PriceCheck"
 IgnoreLevelDiff 1
 new subtable "-1"
-object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0
+object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
 new subtable "-1"

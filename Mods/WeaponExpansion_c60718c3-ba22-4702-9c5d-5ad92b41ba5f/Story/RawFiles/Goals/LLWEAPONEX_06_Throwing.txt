@@ -646,14 +646,20 @@ SetOnStage(_ThrowingAxe, 1);
 CharacterEquipItem(_Player, _ThrowingAxe);
 
 IF
-ItemTemplateEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+//ItemTemplateEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+CharacterStatusApplied(_Player, "LLWEAPONEX_BALRINAXE_INFO", _)
+AND
+CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", 0)
 THEN
 CharacterAddSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", 1);
 
 IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+//ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+CharacterStatusRemoved(_Player, "LLWEAPONEX_BALRINAXE_INFO", _)
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _)
+AND
+NOT LeaderLib_Helper_QRY_HasStatus(_Player, "LLWEAPONEX_BALRINAXE_INFO")
 THEN
 CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
 

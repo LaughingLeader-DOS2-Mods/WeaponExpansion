@@ -1564,3 +1564,15 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
 add levelgroup 0,0,"All"
 add rootgroup "8ff641b7-920a-4bbc-b1c1-d17a73312e53",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air"
+
+add levelgroup 0,0,"All"
+add rootgroup "f4db8570-4a0b-4292-bb36-f66fb2d8b0c3",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire"
+
+add levelgroup 0,0,"All"
+add rootgroup "1f3bc0cd-6c5f-4291-812b-50a92bba3adb",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire","",""

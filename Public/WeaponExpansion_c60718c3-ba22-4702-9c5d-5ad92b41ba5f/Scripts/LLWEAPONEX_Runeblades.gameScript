@@ -559,7 +559,7 @@ THEN
 	IF "c1"
 		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE)
 	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_BLOOD_FIRE_PROC, 0, 0, _Source)
+		CharacterApplyStatus(_Target, LLWEAPONEX_SOUL_BURN_PROC, 0, 0, _Source)
 	ENDIF
 
 	//Removed after 500ms
@@ -713,7 +713,7 @@ VARS
 	INT:_Turns
 	INT:_TurnsLeft
 ON
-	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_RUNEBLADE_BLOOD_FIRE_PROC)
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_SOUL_BURN_PROC)
 ACTIONS
 	Set(_Result, null)
 	Set(_Turns, 1)

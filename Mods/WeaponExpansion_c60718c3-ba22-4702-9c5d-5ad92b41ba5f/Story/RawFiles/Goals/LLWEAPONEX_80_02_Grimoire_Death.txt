@@ -31,66 +31,53 @@ LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REA
 THEN
 SetVarFloat3(_Caster, "LLWEAPOENX_GrimoireTargetPosition", _x, _y, _z);
 SetStoryEvent(_Caster, "LLWEAPONEX_Grimoire_TormentExplode");
-
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_TORMENT", (CHARACTERGUID)_Caster)
-AND
-LeaderLib_Random_QRY(999)
-AND
-DB_LeaderLib_Random(_Roll)
-AND
-_Roll > 0
-AND
-DB_LLWEAPONEX_Grimoire_TormentDebuff(_MinRoll, _MaxRoll, _Status, _Duration)
-AND
-_Roll >= _MinRoll
-AND
-_Roll <= _MaxRoll
-THEN
-ApplyStatus(_Target, _Status, _Duration, 0, _Caster);
-
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_TORMENT", (CHARACTERGUID)_Caster)
-THEN
-CharacterStatusText(_Target, "LLWEAPONEX_Status_Torment_Applied");
 //END_REGION
 
 //REGION DEATH_AURA
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS", (CHARACTERGUID)_Source)
+CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS", (CHARACTERGUID)_Source)
 THEN
 SetTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
 SetVarObject(_Character, "LLWEAPONEX_DeathAura_Source", _Source);
 
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB", (CHARACTERGUID)_Source)
+CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB", (CHARACTERGUID)_Source)
 THEN
 SetTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
 SetVarObject(_Character, "LLWEAPONEX_DeathAura_Source", _Source);
 
 IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS", _)
+CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS", _)
 THEN
 ClearTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
 ClearVarObject(_Character, "LLWEAPONEX_DeathAura_Source");
 
 IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB", _)
+CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB", _)
 THEN
 ClearTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
 ClearVarObject(_Character, "LLWEAPONEX_DeathAura_Source");
-
-IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_TORMENT_CLAIMSOUL", (CHARACTERGUID)_Source)
-THEN
-SetTag(_Character, "LLWEAPONEX_Torment_SoulClaimed");
-SetVarObject(_Character, "LLWEAPONEX_Torment_Claimer", _Source);
 
 IF
 CharacterStatusRemoved(_Character, "LLWEAPONEX_TORMENT_CLAIMSOUL", _)
+AND
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character)
 THEN
-ClearTag(_Character, "LLWEAPONEX_Torment_SoulClaimed");
-ClearVarObject(_Character, "LLWEAPONEX_Torment_Claimer");
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
+
+IF
+CharacterDied(_Source)
+AND
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_TORMENT_CLAIMSOUL", (CHARACTERGUID)_Source)
+AND
+DB_IsPlayer(_Source)
+THEN
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
 //END_REGION
 
 //REGION DEATH_EVENTS
@@ -106,31 +93,30 @@ LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying(_Character, _Source);
 PROC
 LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
 AND
-LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB")
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB")
 THEN
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB");
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB");
 
 PROC
 LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
 AND
-LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS")
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS")
 THEN
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS");
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
 
 PROC
 LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
 AND
-LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS")
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS")
 THEN
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS");
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
 
 IF
 CharacterPrecogDying(_Character)
 AND
-IsTagged(_Character, "LLWEAPONEX_Torment_SoulClaimed", 1)
-AND
-GetVarObject(_Character, "LLWEAPONEX_Torment_Claimer", (CHARACTERGUID)_Source)
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character)
 THEN
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
 
 IF
@@ -146,10 +132,11 @@ DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status);
 
+/*
 IF
 CharacterDied(_Character)
 AND
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB")
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB")
 AND
 CharacterGetEquippedItem(_Source, "Shield", (ITEMGUID)_Grimoire)
 AND
@@ -158,15 +145,46 @@ AND
 GetTemplate(_Grimoire, "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67")
 THEN
 ItemAddCharges(_Grimoire, 1);
-NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_SOUL_BOMB");
+NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB");
+*/
 
 IF
 CharacterDied(_Character)
 AND
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS")
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS")
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_AURA_BONUS");
+NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
 LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_HAUNT", (CHARACTERGUID)_Source)
+AND
+CharacterIsDead(_Target, 1)
+THEN
+LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+
+IF
+CharacterUsedSkillOnTarget(_Source, (CHARACTERGUID)_Target, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
+AND
+CharacterIsDead(_Target, 1)
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target);
+
+IF
+SkillCast(_Source, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target)
+AND
+CharacterIsDead(_Target, 1)
+THEN
+LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+
+IF
+SkillCast(_Source, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target);
 
 IF
 CharacterDied(_Character)
