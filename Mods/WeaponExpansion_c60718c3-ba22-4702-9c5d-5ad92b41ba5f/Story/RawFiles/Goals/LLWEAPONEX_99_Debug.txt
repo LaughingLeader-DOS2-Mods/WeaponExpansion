@@ -14,6 +14,28 @@ THEN
 GoalCompleted;
 
 IF
+RegionStarted("FJ_FortJoy_Main")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+CharacterGetReservedUserID(_Host, _UserID)
+AND
+GetUserName(_UserID, _Name)
+AND
+StringContains(_Name, "Debug", 1)
+THEN
+LLWEAPONEX_Debug_SetupDebugProfile(_Host);
+
+PROC
+LLWEAPONEX_Debug_SetupDebugProfile((CHARACTERGUID)_Host)
+THEN
+CharacterAddGold(_Host, 696969);
+//DB_WaypointInfo(ITEMGUID_S_FTJ_UnderGroundShrine_fceee19d-145c-8a40-28fb-536fab281adc,TRIGGERGUID_S_FTJ_UndergroundShrine_Point_6985ff34-4bc6-4525-9611-afbe99b99557,"WAYP_FTJ_UndergroundShrine");
+//Vending Machine Waypoint
+PROC_UnlockWaypointForAll("WAYP_FTJ_UndergroundShrine");
+CharacterAddTalentPoint(_Host, 2);
+
+IF
 TextEventSet("llweap_beamtest")
 AND
 CharacterGetHostCharacter(_Host)
