@@ -7,6 +7,14 @@ KBSECTION
 IF
 CharacterStatusApplied(_Character, "UNSHEATHED", _)
 AND
+ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 1)
+THEN
+LeaderLib_CancelObjectTimerByEvent(_Character, "LLWEAPONEX_Events_GrimoireFired");
+ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0);
+
+IF
+CharacterStatusApplied(_Character, "UNSHEATHED", _)
+AND
 NOT DB_Illusionist(_Character, _)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)

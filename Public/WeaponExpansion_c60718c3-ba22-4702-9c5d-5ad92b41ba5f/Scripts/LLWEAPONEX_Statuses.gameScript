@@ -203,9 +203,13 @@ VARS
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK)
 ACTIONS
-IF "!c1&c2&c3"
-	CharacterHasStatus(_Target, CRIPPLED)
+IF "!c1"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Source)
+THEN
+	Set(_Source, _Target)
+ENDIF
+IF "!c1&c2"
+	CharacterHasStatus(_Target, CRIPPLED)
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Turns)
 THEN
 	Clamp(_Turns, 0, _Turns)

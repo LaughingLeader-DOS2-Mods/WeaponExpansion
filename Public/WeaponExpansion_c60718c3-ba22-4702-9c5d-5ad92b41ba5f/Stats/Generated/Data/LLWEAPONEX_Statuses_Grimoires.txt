@@ -17,7 +17,7 @@ data "DisplayNameRef" "Death Grimoire"
 data "DescriptionRef" "Character is channeling the power of Death."
 data "Icon" "LLWEAPONEX_Items_Grimoire_Death_A"
 data "ApplyEffect" "LLWEAPONEX_FX_Status_Grimoire_Death_Apply_01:Dummy_Root"
-data "Skills" "Target_LLWEAPONEX_Zombify"
+data "Skills" "Target_LLWEAPONEX_Grimoire_Torment"
 
 new entry "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_BONUS"
 type "StatusData"

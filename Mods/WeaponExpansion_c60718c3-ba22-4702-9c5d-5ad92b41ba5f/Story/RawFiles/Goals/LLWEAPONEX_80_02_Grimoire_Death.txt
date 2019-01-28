@@ -5,32 +5,53 @@ KBSECTION
 
 //REGION TORMENT_BONUS
 PROC
-LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
-AND
-ObjectIsCharacter((CHARACTERGUID)_Target, 1)
-AND
-CharacterIsEnemy(_Caster, _Target, 1)
-AND
-HasActiveStatus(_Caster, "UNSHEATHED", _Unsheathed)
-THEN
-LLWEAPONEX_Grimoire_ReceiveBeamFX(_Caster, _Target, "LLWEAPONEX_FX_Status_Torment_Beam_01", "Dummy_BodyFX", _Unsheathed);
-ApplyStatus(_Target, "LLWEAPONEX_TORMENT", 0.0, 0, _Caster);
-
-PROC
-LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
-AND
-ObjectIsItem(_Target, 1)
-AND
-HasActiveStatus(_Caster, "UNSHEATHED", _Unsheathed)
-THEN
-LLWEAPONEX_Grimoire_ReceiveBeamFX(_Caster, _Target, "LLWEAPONEX_FX_Status_Torment_Beam_01", "Dummy_Root", _Unsheathed);
-ApplyStatus(_Target, "LLWEAPONEX_TORMENT", 0.0, 0, _Caster);
-
-PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
 THEN
 SetVarFloat3(_Caster, "LLWEAPOENX_GrimoireTargetPosition", _x, _y, _z);
-SetStoryEvent(_Caster, "LLWEAPONEX_Grimoire_TormentExplode");
+LeaderLib_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Grimoire_ApplyTormentExplosion", "LLWEAPONEX_Grimoire_TormentExplode");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_TormentObjects(_Caster, _Target);
+ProcObjectTimerCancel(_Caster, "LLWEAPONEX_Timers_Grimoire_ApplyTorment");
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_Grimoire_ApplyTorment", 1000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_Grimoire_ApplyTorment")
+AND
+HasActiveStatus(_Caster, "UNSHEATHED", _Unsheathed)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireOpened", _ForcedOpen)
+AND
+IntegerMax(_Unsheathed, _ForcedOpen, _IsUnsheathed)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_TormentObjects(_Caster, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_TormentObjects(_Caster, _Target);
+LLWEAPONEX_Grimoire_Death_ApplyTormentStatus(_Caster, _Target, _IsUnsheathed);
+
+PROC
+LLWEAPONEX_Grimoire_Death_ApplyTormentStatus((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (INTEGER)_IsUnsheathed)
+AND
+LeaderLib_Helper_QRY_ObjectIsAlive(_Target)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_TORMENT", 0.0, 0, _Caster);
+LLWEAPONEX_Grimoire_Death_ApplyTormentBeam(_Caster, _Target, _IsUnsheathed);
+
+PROC
+LLWEAPONEX_Grimoire_Death_ApplyTormentBeam((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (INTEGER)_IsUnsheathed)
+AND
+ObjectIsCharacter(_Target, 1)
+THEN
+LLWEAPONEX_Grimoire_ReceiveBeamFX(_Caster, _Target, "LLWEAPONEX_FX_Status_Torment_Beam_01", "Dummy_BodyFX", _IsUnsheathed);
+
+PROC
+LLWEAPONEX_Grimoire_Death_ApplyTormentBeam((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (INTEGER)_IsUnsheathed)
+AND
+ObjectIsItem(_Target, 1)
+THEN
+LLWEAPONEX_Grimoire_ReceiveBeamFX(_Caster, _Target, "LLWEAPONEX_FX_Status_Torment_Beam_01", "Dummy_Root", _IsUnsheathed);
 //END_REGION
 
 //REGION DEATH_AURA
@@ -66,18 +87,18 @@ THEN
 NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
 
 IF
-CharacterDied(_Source)
+CharacterDied(_Ghost)
 AND
-DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character)
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character);
 
 IF
-CharacterStatusAttempt(_Character, "LLWEAPONEX_TORMENT_CLAIMSOUL", (CHARACTERGUID)_Source)
+CharacterStatusAttempt(_Character, "LLWEAPONEX_TORMENT_CLAIMSOUL", (CHARACTERGUID)_Ghost)
 AND
-DB_IsPlayer(_Source)
+CharacterIsPlayer(_Ghost, 1)
 THEN
-DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character);
 //END_REGION
 
 //REGION DEATH_EVENTS
@@ -114,10 +135,10 @@ DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE
 IF
 CharacterPrecogDying(_Character)
 AND
-DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character)
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character);
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Ghost, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
 
 IF
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status)
@@ -132,21 +153,13 @@ DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status);
 
-/*
 IF
 CharacterDied(_Character)
 AND
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB")
-AND
-CharacterGetEquippedItem(_Source, "Shield", (ITEMGUID)_Grimoire)
-AND
-_Grimoire != NULL_00000000-0000-0000-0000-000000000000
-AND
-GetTemplate(_Grimoire, "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67")
 THEN
-ItemAddCharges(_Grimoire, 1);
 NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB");
-*/
+LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 12.0);
 
 IF
 CharacterDied(_Character)
@@ -154,14 +167,7 @@ AND
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS")
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
-LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
-
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_HAUNT", (CHARACTERGUID)_Source)
-AND
-CharacterIsDead(_Target, 1)
-THEN
-LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 12.0);
 
 IF
 CharacterUsedSkillOnTarget(_Source, (CHARACTERGUID)_Target, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
@@ -177,7 +183,7 @@ DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target)
 AND
 CharacterIsDead(_Target, 1)
 THEN
-LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 12.0);
 
 IF
 SkillCast(_Source, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
@@ -189,11 +195,11 @@ NOT DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target);
 IF
 CharacterDied(_Character)
 AND
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Revenant, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL")
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Ghost, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL")
 AND
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_DeadCharacter, _Revenant, _AuraSource, "LLWEAPONEX_TORMENTED_GHOST")
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_DeadCharacter, _Ghost, _Source, "LLWEAPONEX_TORMENTED_GHOST")
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Revenant, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
+NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Ghost, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
 CharacterResurrect(_DeadCharacter);
 
 IF
@@ -202,28 +208,10 @@ AND
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status);
-
-PROC
-LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
-THEN
-CharacterAddToPlayerCharacter(_Revenant, _Target);
-
-PROC
-LLWEAPONEX_Statuses_OnRevenantDied((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
-THEN
-LLWEAPONEX_Statuses_RemoveRevenant(_Revenant);
-
-IF
-CharacterKilledBy(_Enemy, _, _Revenant)
-AND
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_Character, _Revenant, _Source, "LLWEAPONEX_TORMENTED_GHOST")
-AND
-_Revenant != _Enemy
-THEN
-CharacterResurrect(_Character);
 //END_REGION
 
 EXITSECTION
+LLWEAPONEX_Grimoire_Death_ClearData();
 
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

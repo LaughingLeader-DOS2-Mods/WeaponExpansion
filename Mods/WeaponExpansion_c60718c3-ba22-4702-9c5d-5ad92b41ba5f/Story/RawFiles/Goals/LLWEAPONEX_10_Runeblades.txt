@@ -190,6 +190,9 @@ RemoveStatus(_Character, "LLWEAPONEX_PREVENT_DOUBLE_HITS");
 //END_REGION
 
 //REGION SOUL_BURN_TICK
+//LLWEAPONEX_SOUL_BURN_PROC - Increase the stack
+//LLWEAPONEX_SOUL_BURN_TICK - Lower the stack
+
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Commands_StartSoulBurnTick")
 AND
