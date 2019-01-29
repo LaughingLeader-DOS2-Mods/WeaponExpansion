@@ -15,6 +15,7 @@ LLWEAPONEX_QRY_IsEquippedWeapon(_Player, _Item)
 AND
 LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
 THEN
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance");
 LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandLost(_Player);
 //LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
 
@@ -30,6 +31,12 @@ AND
 StringContains(_Template, "WPN", 1)
 AND
 LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_Rapier")
+THEN
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance");
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance", 500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance")
 AND
 NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
 THEN

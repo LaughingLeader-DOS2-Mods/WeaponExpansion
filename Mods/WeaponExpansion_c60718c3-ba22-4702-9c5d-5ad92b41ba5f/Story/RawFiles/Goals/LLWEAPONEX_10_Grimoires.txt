@@ -59,6 +59,19 @@ LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 9)
 THEN
 SysClear("DB_LLWEAPONEX_Grimoire_MagicWhitelist", 3);
 LLWEAPONEX_Grimoire_InitSettings();
+
+//Clear magic matches if no grimoires are active, and the DB is decently large.
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+NOT SysIsActive("LLWEAPONEX_80_02_Grimoire__Main")
+AND
+SysCount("DB_LLWEAPONEX_Grimoire_Temp_MagicMatch", 2, _Count)
+AND
+_Count > 40
+THEN
+SysClear("DB_LLWEAPONEX_Grimoire_Temp_MagicMatch", 2);
+LeaderLog_LogInt("DEBUG", "[WeaponExpansion:Grimoire:LeaderUpdater_ModUpdated] [DB_LLWEAPONEX_Grimoire_Temp_MagicMatch] size too large. Clearing. Count: [",_Count,"]/[40]");
 //END_REGION
 
 //REGION BEAM_FX
@@ -200,6 +213,20 @@ StopLoopEffect(_Handle);
 //END_REGION
 
 //REGION LOOP_FX
+QRY
+LLWEAPONEX_Grimoire_QRY_StateChangeLocked((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_StateChangeLocked((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_IsTransitioningFX(_Character)
+THEN
+DB_NOOP(1);
+
 //Grimoire swapping
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
@@ -318,6 +345,7 @@ LLWEAPONEX_Grimoire_PlayEquippedFX_Force(_Character, _Item, _Template, _Sheathed
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template, (INTEGER)_ForceUnsheathed)
 THEN
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_Grimoire_StopSheathedFXAfterDelay");
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoire_StopSheathedFXAfterDelay", 33);
 
 PROC
@@ -339,7 +367,7 @@ NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, 
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:LLWEAPONEX_Grimoire_ClearSheathedFX] Cleared sheathed FX from database.");
 
 PROC
-LLWEAPONEX_Grimoire_StopAllEffects((CHARACTERGUID)_Character)
+LLWEAPONEX_Grimoire_StopAllEffects_WithDestroy((CHARACTERGUID)_Character)
 AND
 DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed)
 AND
@@ -368,13 +396,50 @@ NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, 
 //CharacterStopAllEffectsWithName(_Character, _Effect);
 
 PROC
-LLWEAPONEX_Grimoire_StopAllEffects_Debug((CHARACTERGUID)_Character)
+LLWEAPONEX_Grimoire_StopAllEffects_ForTemplate((CHARACTERGUID)_Character, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
 CharacterStopAllEffectsWithName(_Character, _SheathedFX);
 CharacterStopAllEffectsWithName(_Character, _UnsheathedFX);
 CharacterStopAllEffectsWithName(_Character, _SheathedFX);
+
+PROC
+LLWEAPONEX_Grimoire_StopAllEffects_All((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
+THEN
+CharacterStopAllEffectsWithName(_Character, _SheathedFX);
+CharacterStopAllEffectsWithName(_Character, _UnsheathedFX);
+CharacterStopAllEffectsWithName(_Character, _SheathedFX);
+
+PROC
+LLWEAPONEX_Grimoire_ClearEffectData((CHARACTERGUID)_Character, (STRING)_Template)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed)
+AND
+NOT DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, _Unsheathed);
+//CharacterStopAllEffectsWithName(_Character, _Effect);
+
+PROC
+LLWEAPONEX_Grimoire_ClearEffectData((CHARACTERGUID)_Character, (STRING)_Template)
+AND
+NOT DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _, _Template)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
+
+PROC
+LLWEAPONEX_Grimoire_ClearEffectData((CHARACTERGUID)_Character, (STRING)_Template)
+AND
+NOT DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _, _Template)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_IsTransitioningFX(_Character)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_IsTransitioningFX(_Character);
 
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StopOtherFX")
@@ -386,7 +451,7 @@ NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Grimoire_StopOtherFX")
 THEN
-LLWEAPONEX_Grimoire_StopAllEffects(_Character);
+LLWEAPONEX_Grimoire_StopAllEffects_WithDestroy(_Character);
 
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireSheathed((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
@@ -394,6 +459,7 @@ AND
 DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
 PlayEffect(_Character, _TransitionFX, "Dummy_FrontFX_L");
+LeaderLib_CancelObjectTimer(_Character, "LLWEAPONEX_Timers_StopGrimoireUnsheathedFX");
 LeaderLib_StartObjectTimer(_Character, 30, "LLWEAPONEX_Timers_StopGrimoireUnsheathedFX", "LLWEAPONEX_Grimoire_StopUnsheathedFX");
 
 IF
@@ -415,7 +481,16 @@ DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _Eff
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Character, _Item, _Template, _Effect, _EffectID, 1);
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID);
+DB_LLWEAPONEX_Grimoire_Temp_IsTransitioningFX(_Character);
+//ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX");
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX", 1670);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_IsTransitioningFX(_Character)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_IsTransitioningFX(_Character);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX")
@@ -454,9 +529,21 @@ LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_I
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 THEN
-ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0);
-LLWEAPONEX_Grimoire_StopAllEffects(_Character);
 NOT DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template);
+LLWEAPONEX_Grimoire_StopAllEffects_WithDestroy(_Character);
+ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0);
+//Failsafe
+DB_LLWEAPONEX_Grimoire_Temp_Unequipped(_Character, _Template);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoire_ClearFXData", 150);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoire_ClearFXData")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_Unequipped(_Character, _Template)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_Unequipped(_Character, _Template);
+LLWEAPONEX_Grimoire_StopAllEffects_ForTemplate(_Character, _Template);
+LLWEAPONEX_Grimoire_ClearEffectData(_Character, _Template);
 //END_REGION
 
 //REGION LOOP_FX_LEVEL_CHANGE
@@ -465,7 +552,8 @@ RegionEnded(_)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 THEN
-LLWEAPONEX_Grimoire_StopAllEffects(_Character);
+//LLWEAPONEX_Grimoire_StopAllEffects_WithDestroy(_Character);
+LLWEAPONEX_Grimoire_StopAllEffects_All(_Character);
 
 //Starting effects back up
 IF
@@ -477,7 +565,7 @@ DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _T
 THEN
 LLWEAPONEX_Grimoire_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
 /*
-LLWEAPONEX_Grimoire_StopAllEffects(_Character);
+LLWEAPONEX_Grimoire_StopAllEffects_WithDestroy(_Character);
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StartGrimoireFX_PostLoad", 25);
 */
 

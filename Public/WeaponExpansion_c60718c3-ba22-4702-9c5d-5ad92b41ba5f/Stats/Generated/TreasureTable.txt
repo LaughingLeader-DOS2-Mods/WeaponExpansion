@@ -155,6 +155,18 @@ object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_VendingMachine_CraftingItems"
+new subtable "2,1;1,1"
+object category "I_CON_Drink_Cup_A_Oil",1,0,0,0,0,0,0,0
+object category "I_CON_Drink_Bottle_Water_A",1,0,0,0,0,0,0,0
+object category "I_CON_Drink_Cup_A_Water",1,0,0,0,0,0,0,0
+object category "I_CON_Potion_Poison_A",1,0,0,0,0,0,0,0
+object category "I_POTION_Healing_Poisoned_Masked_Minor_A",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "I_ITEM_Nails",1,0,0,0,0,0,0,0
+object category "I_LOOT_Scraps_Cloth_A",1,0,0,0,0,0,0,0
+object category "I_LOOT_LLWEAPONEX_Pipe",1,0,0,0,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_VendingMachine"
 new subtable "1,1"
 object category "I_WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A",1,0,0,0,0,0,0,0

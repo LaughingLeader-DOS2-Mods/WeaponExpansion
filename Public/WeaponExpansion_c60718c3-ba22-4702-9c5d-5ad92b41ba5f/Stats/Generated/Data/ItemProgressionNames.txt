@@ -502,6 +502,9 @@ add name "Balrin's Shocking Throwing Axe",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire"
 add name "Balrin's Flaming Throwing Axe",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil"
+add name "Balrin's Oiled Throwing Axe",""
+
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""
 add namecool "Mighty Dragonslayer Mail",""

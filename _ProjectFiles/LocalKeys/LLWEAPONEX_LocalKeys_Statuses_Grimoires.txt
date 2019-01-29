@@ -21,3 +21,4 @@ LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS_DisplayName	Tormented
 LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS_Description	Upon death, character will return as a Tormented Ghost.
 LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB_DisplayName	Tormented
 LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB_Description	Upon death, character will explode in a burst of necrotic energy.
+LLWEAPONEX_GRIMOIRE_SCRAMBLE_DisplayName	Swap the Positions of Targets Within Range

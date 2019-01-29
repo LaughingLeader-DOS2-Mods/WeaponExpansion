@@ -1576,3 +1576,9 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire"
 add levelgroup 0,0,"All"
 add rootgroup "1f3bc0cd-6c5f-4291-812b-50a92bba3adb",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil"
+
+add levelgroup 0,0,"All"
+add rootgroup "6e245aba-3bf5-45cd-a95f-7ec29635b8fb",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil","",""

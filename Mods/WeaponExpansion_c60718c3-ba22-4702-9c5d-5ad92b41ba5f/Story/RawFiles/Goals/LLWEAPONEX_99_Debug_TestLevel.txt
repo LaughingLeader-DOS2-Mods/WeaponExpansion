@@ -296,6 +296,31 @@ THEN
 CharacterDieImmediate(_Host, 0, "", _Host);
 
 IF
+TextEventSet("llweap_stopgrimfx")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+LLWEAPONEX_Grimoire_StopAllEffects_All(_Host);
+
+IF
+TextEventSet("llweap_unsheathetest")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+ProcObjectTimer(_Host, "LLWEAPONEX_Timers_Debug_Unsheathe", 50);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Debug_Unsheathe")
+THEN
+CharacterSetFightMode(_Player, 1, 1);
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Debug_Sheath", 50);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Debug_Sheath")
+THEN
+CharacterSetFightMode(_Player, 0, 1);
+
+IF
 TextEventSet("llweap_removestatuses")
 AND
 CharacterGetHostCharacter(_Host)

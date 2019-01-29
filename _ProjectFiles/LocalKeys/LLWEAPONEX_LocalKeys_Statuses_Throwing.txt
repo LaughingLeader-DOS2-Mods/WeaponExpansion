@@ -14,6 +14,6 @@ LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A_Description	Character has been impaled by
 LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A_DisplayName	Impaled (Balrin's Throwing Axe)
 LLWEAPONEX_WEAPON_THROW_WAND_Description	Character has been hit by a thrown wand!
 LLWEAPONEX_WEAPON_THROW_WAND_DisplayName	Surface Tension
-LLWEAPONEX_BALRINAXE_DISARMED_INFO_DisplayName	Lose Balrin's Throwing Axe (Temporarily)
+LLWEAPONEX_BALRINAXE_DISARMED_INFO_DisplayName	Threw Axe
 LLWEAPONEX_BALRINAXE_DISARMED_INFO_Description	Character has thrown <font color='#C7A758'>Balrin's Throwing Axe</font> at a target.<br><font color='#ED9D07'>Get near the target to retrieve the axe, otherwise it will return when this status ends.</font>
 LLWEAPONEX_BALRINAXE_INFO_DisplayName	Throwable
