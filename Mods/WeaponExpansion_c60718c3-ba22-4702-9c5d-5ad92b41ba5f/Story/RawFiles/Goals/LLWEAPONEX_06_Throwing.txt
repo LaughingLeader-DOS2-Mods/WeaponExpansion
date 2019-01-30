@@ -13,6 +13,8 @@ DB_LLWEAPONEX_Throwing_KevinSkills("Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails
 
 DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", "Projectile_LLWEAPONEX_ShieldToss_Returned", "LLWEAPONEX_COMBAT_SHIELD_HIT", 3, "LLWEAPONEX_Timers_ShieldTossTimeout", 1000);
 
+DB_LLWEAPONEX_Throwing_ReturnSkillTags("Projectile_LLWEAPONEX_ShieldToss_Returned", "LLWEAPONEX_ShieldToss_Caster");
+
 //Globally block
 DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
 //DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
@@ -229,27 +231,27 @@ SetTag(_Item, "LLWEAPONEX_KevinThePetRock");
 
 //REGION COMBAT_SHIELD_TOSS
 IF
-CharacterUsedSkillOnTarget(_Character, _Target, _ShootSkill, _, _)
+CharacterUsedSkillOnTarget(_Character, _Target, "Projectile_LLWEAPONEX_ShieldToss", _, _)
 AND
-DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 AND
 _MaxTargets > 1
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator("Projectile_LLWEAPONEX_ShieldToss", _Character, _, _, _)
 AND
 GetUUID(_Character, _UUID)
 AND
-StringConcatenate("LLWEAPONEX_Throwing_", _ShootSkill, _Str1)
+StringConcatenate("LLWEAPONEX_Throwing_", "Projectile_LLWEAPONEX_ShieldToss", _Str1)
 AND
 StringConcatenate(_Str1, _UUID, _Event)
 THEN
-DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _Target, _Event, 1);
+DB_LLWEAPONEX_Throwing_Temp_ForkIterator("Projectile_LLWEAPONEX_ShieldToss", _Character, _Target, _Event, 1);
 CharacterLaunchIteratorAroundObject(_Target, 6.0, _Event);
 
 IF
-CharacterUsedSkillAtPosition(_Character, _x, _y, _z, _ShootSkill, _, _)
+CharacterUsedSkillAtPosition(_Character, _x, _y, _z, "Projectile_LLWEAPONEX_ShieldToss", _, _)
 AND
-DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 THEN
 SetVarFloat3(_Character, "LLWEAPONEX_ReturnSkillFallbackPosition", _x, _y, _z);
 
@@ -272,28 +274,35 @@ NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _InitialTa
 DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _InitialTarget, _IteratorEvent, _NextCount);
 
 IF
-SkillCast(_Character, _ShootSkill, _, _)
+SkillCast(_Character, "Projectile_LLWEAPONEX_ShieldToss", _, _)
 AND
-DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 THEN
-DB_LLWEAPONEX_Throwing_Temp_SkillNotReturned(_Character, _ShootSkill, _ReturnSkill);
+DB_LLWEAPONEX_Throwing_Temp_SkillNotReturned(_Character, "Projectile_LLWEAPONEX_ShieldToss", _ReturnSkill);
 
 IF
-SkillCast(_Character, _ShootSkill, _, _)
+DB_LLWEAPONEX_Throwing_Temp_SkillNotReturned(_Character, _ShootSkill, _ReturnSkill)
 AND
-DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+DB_LLWEAPONEX_Throwing_ReturnSkillTags(_ReturnSkill, _Tag)
+THEN
+SetTag(_Character, _Tag);
+
+IF
+SkillCast(_Character, "Projectile_LLWEAPONEX_ShieldToss", _, _)
 AND
-DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _InitialTarget, _IteratorEvent, _TotalTargets)
+DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+AND
+DB_LLWEAPONEX_Throwing_Temp_ForkIterator("Projectile_LLWEAPONEX_ShieldToss", _Character, _InitialTarget, _IteratorEvent, _TotalTargets)
 THEN
 ProcObjectTimerCancel(_Character, _TimerName);
 ProcObjectTimer(_Character, _TimerName, _Timeout);
 
 IF
-SkillCast(_Character, _ShootSkill, _, _)
+SkillCast(_Character, "Projectile_LLWEAPONEX_ShieldToss", _, _)
 AND
-DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
+DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator("Projectile_LLWEAPONEX_ShieldToss", _Character, _, _, _)
 AND
 IntegerDivide(_Timeout, 2, _NewTimeout)
 THEN
@@ -464,7 +473,7 @@ AND
 DB_LLWEAPONEX_Throwing_Temp_ReturnTarget(_Character, _Target, _ShootSkill, _CurrentCount)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_ReturnTarget(_Character, _Target, _ShootSkill, _CurrentCount);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:",_TimerName,"] Shooting return skill [",_ShootSkill,"] back to caster.");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:",_TimerName,"] Shooting return skill [",_ReturnSkill,"] back to caster.");
 LLWEAPONEX_Throwing_Internal_ClearIterator(_Character, _ShootSkill);
 LLWEAPONEX_Throwing_ShootReturnSkill(_Character, _Target, _ReturnSkill);
 
@@ -477,10 +486,25 @@ NOT DB_LLWEAPONEX_Throwing_Temp_ForkIterator(_ShootSkill, _Character, _InitialTa
 
 PROC
 LLWEAPONEX_Throwing_ShootReturnSkill((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ReturnSkill)
+THEN
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_Throwing_ClearReturnSkillTag");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Throwing_ClearReturnSkillTag", 1500);
+
+PROC
+LLWEAPONEX_Throwing_ShootReturnSkill((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ReturnSkill)
 AND
 DB_LLWEAPONEX_Throwing_Temp_SkillNotReturned(_Character, _ShootSkill, _ReturnSkill)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_SkillNotReturned(_Character, _ShootSkill, _ReturnSkill);
+
+PROC
+ProcObjectTimerFinished(_Character, "LLWEAPONEX_Timers_Throwing_ClearReturnSkillTag")
+AND
+DB_LLWEAPONEX_Throwing_ReturnSkillTags(_ReturnSkill, _Tag)
+AND
+IsTagged(_Character, _Tag, 1)
+THEN
+ClearTag(_Character, _Tag);
 
 PROC
 LLWEAPONEX_Throwing_ShootReturnSkill((CHARACTERGUID)_Character, (GUIDSTRING)_Target, (STRING)_ReturnSkill)
