@@ -26,6 +26,46 @@ THEN
 LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, "LLWEAPONEX_Runeblade", _SkillID);
 //END_REGION
 
+//REGION RUNE_ACTIVE
+IF
+CharacterStatusApplied(_Character, _Status, _)
+AND
+DB_LLWEAPONEX_Statuses_Runes(_Status)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_Runeblade_RuneActive", 0)
+THEN
+ObjectSetFlag(_Character, "LLWEAPONEX_Runeblade_RuneActive", 0);
+
+QRY
+LLWEAPONEX_Runeblades_QRY_HasRuneStatus((CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Statuses_Runes(_Status)
+AND
+HasActiveStatus(_Character, _Status, 1)
+THEN
+DB_NOOP(1);
+
+IF
+CharacterStatusRemoved(_Character, _Status, _)
+AND
+DB_LLWEAPONEX_Statuses_Runes(_Status)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_Runeblade_RuneActive", 1)
+AND
+NOT LLWEAPONEX_Runeblades_QRY_HasRuneStatus(_Character)
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_Runeblade_RuneActive", 0);
+//END_REGION
+
+/*
+IF
+CharacterStatusRemoved(_Character, "RESURRECT", _)
+AND
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _Runeblade, _Status)
+THEN
+ApplyStatus(_Character, _Status, -1.0, 0, _Character);
+*/
+
 EXITSECTION
 
 ENDEXITSECTION

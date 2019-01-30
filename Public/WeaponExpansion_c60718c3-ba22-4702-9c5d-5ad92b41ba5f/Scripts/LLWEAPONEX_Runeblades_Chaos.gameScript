@@ -1,0 +1,159 @@
+INIT
+	FLOAT:%LLWEAPONEX_Runeblade_AbsorbRadius = 1.6
+
+EVENTS
+
+EVENT LLWEAPONEX_Runeblade_ChaosAbsorbSurface
+VARS
+	CHARACTER:_Character
+	LIST<STATUS>:_ResultList
+	STATUS:_Status
+	INT:_Size
+	INT:_Index
+	INT:_RemoveSurface
+	FLOAT:_Radius
+ON
+	OnCharacterStatusApplied(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS)
+ACTIONS
+	Set(_Radius, %LLWEAPONEX_Runeblade_AbsorbRadius)
+IF "c1|c2|c3|c4|c5|c6|c7|c8"
+	ContainsSurface(_Character, _Radius, SurfaceFire)
+	ContainsSurface(_Character, _Radius, SurfaceFireCloud)
+	ContainsSurface(_Character, _Radius, SurfaceFireBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceFireCursed)
+	ContainsSurface(_Character, _Radius, SurfaceFirePurified)
+	ContainsSurface(_Character, _Radius, SurfaceFireCloudBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceFireCloudCursed)
+	ContainsSurface(_Character, _Radius, SurfaceFireCloudPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
+ENDIF
+IF "c1|c2|c3|c4|c5|c6|c7|c8"
+	ContainsSurface(_Character, _Radius, SurfaceWaterFrozen)
+	ContainsSurface(_Character, _Radius, SurfaceWaterFrozenBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterFrozenCursed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterFrozenPurified)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozen)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozenBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozenCursed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozenPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE)
+ELIF "c1|c2|c3|c4|c5|c6|c7|c8"
+	ContainsSurface(_Character, _Radius, SurfaceWater)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloud)
+	ContainsSurface(_Character, _Radius, SurfaceWaterBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCursed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterPurified)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloudBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloudCursed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloudPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER)
+ENDIF
+IF "c1|c2|c3|c4|c5|c6|c7|c8|c9|c10|c11|c12|c13|c14|c15"
+	ContainsSurface(_Character, _Radius, SurfaceWaterElectrified)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloudElectrified)
+	ContainsSurface(_Character, _Radius, SurfaceWaterElectrifiedBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterElectrifiedCursed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterElectrifiedPurified)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloudElectrifiedBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloudElectrifiedCursed)
+	ContainsSurface(_Character, _Radius, SurfaceWaterCloudElectrifiedPurified)
+	ContainsSurface(_Character, _Radius, SurfaceBloodElectrified)
+	ContainsSurface(_Character, _Radius, SurfaceBloodElectrifiedBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodElectrifiedCursed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodElectrifiedPurified)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCloudElectrifiedBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCloudElectrifiedCursed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCloudElectrifiedPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+ENDIF
+IF "c1|c2|c3|c4"
+	ContainsSurface(_Character, _Radius, SurfaceOil)
+	ContainsSurface(_Character, _Radius, SurfaceOilBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceOilCursed)
+	ContainsSurface(_Character, _Radius, SurfaceOilPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+ENDIF
+IF "c1|c2|c3|c4|c5|c6|c7|c8"
+	ContainsSurface(_Character, _Radius, SurfacePoison)
+	ContainsSurface(_Character, _Radius, SurfacePoisonCloud)
+	ContainsSurface(_Character, _Radius, SurfacePoisonBlessed)
+	ContainsSurface(_Character, _Radius, SurfacePoisonCursed)
+	ContainsSurface(_Character, _Radius, SurfacePoisonPurified)
+	ContainsSurface(_Character, _Radius, SurfacePoisonCloudBlessed)
+	ContainsSurface(_Character, _Radius, SurfacePoisonCloudCursed)
+	ContainsSurface(_Character, _Radius, SurfacePoisonCloudPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON)
+ENDIF
+IF "c1|c2|c3|c4|c5|c6|c7|c8|c9|c10|c11|c12"
+	ContainsSurface(_Character, _Radius, SurfaceBlood)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCloud)
+	ContainsSurface(_Character, _Radius, SurfaceBloodBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCursed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodPurified)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCloudBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCloudCursed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodCloudPurified)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozen)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozenBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozenCursed)
+	ContainsSurface(_Character, _Radius, SurfaceBloodFrozenPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+ENDIF
+
+IF "c1"
+	ContainsSurface(_Character, _Radius, SurfaceExplosionCloud)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
+ENDIF
+IF "c1|c2|c3|c4"
+	ContainsSurface(_Character, _Radius, SurfaceSmokeCloud)
+	ContainsSurface(_Character, _Radius, SurfaceSmokeCloudBlessed)
+	ContainsSurface(_Character, _Radius, SurfaceSmokeCloudCursed)
+	ContainsSurface(_Character, _Radius, SurfaceSmokeCloudPurified)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
+ENDIF
+
+IF "c1"
+	ContainsSurface(_Character, _Radius, SurfaceLava)
+THEN
+	ListAdd(_ResultList, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
+	SetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface")
+ENDIF
+IF "c1"
+	ContainsSurface(_Character, _Radius, SurfaceDeathfogCloud)
+THEN
+	CharacterApplyStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_DEATH, 4, 1, _Character)
+	SetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface")
+ENDIF
+
+IF "c1&c2"
+	ListGetSize(_ResultList, _Size)
+	IsGreaterThen(_Size, 0)
+THEN
+	Set(_Index, 1)
+	WHILE "!c1"
+		IsGreaterThen(_Index, _Size)
+	DO
+		IF "c1"
+			ListGet(_ResultList, _Index, _Status)
+		THEN
+			CharacterApplyStatus(_Character, _Status, 2, 0, _Character)
+		ENDIF
+	Add(_Index, 1)
+	ENDWHILE
+	IF "!c1"
+		HasFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface")
+	THEN
+		CreateSurfaceAt(_Character, SurfaceNone, _Radius, 0, _Character)
+	ENDIF
+ELSE
+	StatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune")
+ENDIF

@@ -335,6 +335,15 @@ THEN
 RemoveHarmfulStatuses(_Host);
 
 IF
+TextEventSet("llweap_allrunetest")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+DB_LLWEAPONEX_Statuses_Runes(_Status)
+THEN
+ApplyStatus(_Host, _Status, 30.0, 0, _Host);
+
+IF
 CharacterUsedItem(_Player, ITEMGUID_PUZ_Lever_Floor_A_001_f1ca3f98-a0ba-413e-a3ad-aba8469f91d9)
 THEN
 CharacterResurrect(CHARACTERGUID_DW_Voidling_A_000_a566d10b-0408-4ed6-8077-939d80d24326);
@@ -374,6 +383,7 @@ THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
 */
 
+/*
 IF
 CharacterPrecogDying(_Character)
 AND
@@ -457,6 +467,7 @@ AND
 GetTemplate(_Item, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusRemoved] Status [",_Status,"] removed from [",_Name,"].");
+*/
 
 IF
 CharacterTeleported(_Character, _, _x, _y, _z, _tx, _ty, _tz, _Skill)
