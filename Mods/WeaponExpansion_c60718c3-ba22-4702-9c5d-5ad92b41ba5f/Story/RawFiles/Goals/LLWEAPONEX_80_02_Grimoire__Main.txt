@@ -18,10 +18,8 @@ AND
 NOT DB_Illusionist(_Character, _)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
-AND
-NOT LLWEAPONEX_Grimoire_QRY_StateChangeLocked(_Character)
 THEN
-LLWEAPONEX_Grimoire_OnGrimoireUnsheathed(_Character, _Item, _Template);
+LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, 1);
 
 IF
 CharacterStatusRemoved(_Character, "UNSHEATHED", _)
@@ -29,10 +27,8 @@ AND
 NOT DB_Illusionist(_Character, _)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
-AND
-NOT LLWEAPONEX_Grimoire_QRY_StateChangeLocked(_Character)
 THEN
-LLWEAPONEX_Grimoire_OnGrimoireSheathed(_Character, _Item, _Template);
+LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, 0);
 
 //Respec started, delete effects
 IF
@@ -42,14 +38,15 @@ DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 THEN
 LLWEAPONEX_Grimoire_StopAllEffects_All(_Character);
 
-
 //Respec finished, play effects again
 PROC
 Proc_HomesteadTeleportAfterMirror((CHARACTERGUID)_Player,(ITEMGUID)_Mirror,(TRIGGERGUID)_Trigger)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+AND
+CharacterIsInFightMode(_Player, _Unsheathed)
 THEN
-LLWEAPONEX_Grimoire_OnGrimoireSheathed(_Character, _Item, _Template);
+LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, _Unsheathed);
 EXITSECTION
 
 ENDEXITSECTION
