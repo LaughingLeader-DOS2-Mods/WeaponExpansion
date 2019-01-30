@@ -24,20 +24,21 @@ LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING");
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses("LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR");
 
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Air", "Shout_LLWEAPONEX_ActivateRuneblade_Air_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_AIR");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Chaos", "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_CHAOS");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Earth", "Shout_LLWEAPONEX_ActivateRuneblade_Earth_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_EARTH");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Fire", "Shout_LLWEAPONEX_ActivateRuneblade_Fire_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_FIRE");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Poison", "Shout_LLWEAPONEX_ActivateRuneblade_Poison_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_POISON");
-DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Water", "Shout_LLWEAPONEX_ActivateRuneblade_Water_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_WATER");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Air", "Shout_LLWEAPONEX_ActivateRuneblade_Air", "Shout_LLWEAPONEX_ActivateRuneblade_Air_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_AIR");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Chaos", "Shout_LLWEAPONEX_ActivateRuneblade_Chaos", "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_CHAOS");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Earth", "Shout_LLWEAPONEX_ActivateRuneblade_Earth", "Shout_LLWEAPONEX_ActivateRuneblade_Earth_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_EARTH");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Fire", "Shout_LLWEAPONEX_ActivateRuneblade_Fire", "Shout_LLWEAPONEX_ActivateRuneblade_Fire_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_FIRE");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Poison", "Shout_LLWEAPONEX_ActivateRuneblade_Poison", "Shout_LLWEAPONEX_ActivateRuneblade_Poison_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_POISON");
+DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Water", "Shout_LLWEAPONEX_ActivateRuneblade_Water", "Shout_LLWEAPONEX_ActivateRuneblade_Water_DualWield", "LLWEAPONEX_RUNEBLADE_ADDSKILL_WATER");
 
 DB_LLWEAPONEX_Runeblades_StatusSound("LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", "Skill_Fire_Cast_AoE_Air_Fire", 800);
 DB_LLWEAPONEX_Runeblades_FlagSound("LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", "Skill_Fire_Cast_Target_Totem_Fire", 800);
 
 IF
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill, _Status)
+DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
 THEN
-DB_LeaderLib_BlockedSkill(_Skill);
+DB_LeaderLib_BlockedSkill(_MainSkill);
+DB_LeaderLib_BlockedSkill(_DualWieldSkill);
 
 PROC
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus)
@@ -58,26 +59,21 @@ LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersi
 AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 14)
 THEN
+SysClear("DB_LLWEAPONEX_Runeblades_TagToSkill", 3);
 LLWEAPONEX_Runeblades_InitSettings();
 LLWEAPONEX_Runeblades_Internal_Update_Beta14();
 
 PROC
 LLWEAPONEX_Runeblades_Internal_Update_Beta14()
 AND
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill, _Status)
-THEN
-DB_LeaderLib_BlockedSkill(_Skill);
-
-PROC
-LLWEAPONEX_Runeblades_Internal_Update_Beta14()
-AND
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill, _Status)
+DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
 AND
 DB_IsPlayer(_Player)
 AND
 LeaderLib_Helper_QRY_HasStatus(_Player, _Status)
 THEN
 RemoveStatus(_Player, _Status);
+LeaderLib_Helper_RefreshWeapons(_Player);
 //END_REGION
 
 //REGION RUNE_STATUSES_INIT
@@ -327,6 +323,16 @@ THEN
 LeaderLib_Skills_UseSkillOnTarget(_Cause, _Character, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", 1, 1);
 
 //REGION DOUBLE_RUNEBLADE_SKILLS
+QRY
+LLWEAPONEX_Runeblades_QRY_CanAddDualWieldSkill((ITEMGUID)_MainhandRuneblade, (ITEMGUID)_OffhandRuneblade, (STRING)_Tag)
+AND
+IsTagged(_MainhandRuneblade, _Tag, 1)
+AND
+IsTagged(_OffhandRuneblade, _Tag, 1)
+THEN
+DB_NOOP(1);
+
+
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Character, "LLWEAPONEX_Runeblade")
 THEN
@@ -365,28 +371,34 @@ LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Character, _Runeblade);
 PROC
 LLWEAPONEX_Runeblades_OnRunebladeEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Runeblade)
 AND
+IsTagged(_Runeblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
+AND
 CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_Runeblade)
 AND
 CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_OtherRuneblade)
 AND
 IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade", 1)
 AND
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill, _Status)
+IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
 AND
-CharacterHasSkill(_Character, _Skill, 0)
+DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
 AND
-IsTagged(_Runeblade, _Tag, 1)
+CharacterHasSkill(_Character, _MainSkill, 1)
 AND
-IsTagged(_OtherRuneblade, _Tag, 1)
+CharacterHasSkill(_Character, _DualWieldSkill, 0)
+AND
+LLWEAPONEX_Runeblades_QRY_CanAddDualWieldSkill(_Runeblade, _OtherRuneblade, _Tag)
 THEN
 //ApplyStatus(_Character, _Status, -1.0, 1, _Character);
 //DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _Runeblade, _Status);
-CharacterAddSkill(_Character, _Skill, 0);
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _Skill);
+CharacterAddSkill(_Character, _DualWieldSkill, 0);
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _DualWieldSkill);
 
 //Offhand
 PROC
 LLWEAPONEX_Runeblades_OnRunebladeEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Runeblade)
+AND
+IsTagged(_Runeblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
 AND
 CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_Runeblade)
 AND
@@ -394,16 +406,18 @@ CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_OtherRuneblade)
 AND
 IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade", 1)
 AND
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _Skill, _Status)
+IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
 AND
-CharacterHasSkill(_Character, _Skill, 0)
+DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
 AND
-IsTagged(_Runeblade, _Tag, 1)
+CharacterHasSkill(_Character, _MainSkill, 1)
 AND
-IsTagged(_OtherRuneblade, _Tag, 1)
+CharacterHasSkill(_Character, _DualWieldSkill, 0)
+AND
+LLWEAPONEX_Runeblades_QRY_CanAddDualWieldSkill(_Runeblade, _OtherRuneblade, _Tag)
 THEN
-CharacterAddSkill(_Character, _Skill, 0);
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _Skill);
+CharacterAddSkill(_Character, _DualWieldSkill, 0);
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _DualWieldSkill);
 //END_REGION
 
 //REGION SOUNDS
