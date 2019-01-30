@@ -729,6 +729,15 @@ SetOnStage(_ThrowingAxe, 1);
 CharacterEquipItem(_Player, _ThrowingAxe);
 LLWEAPONEX_Throwing_ClearBalrinAxeData(_Player);
 
+//Refresh cooldown
+PROC
+LLWEAPONEX_Throwing_BalrinAxe_RefreshSkillCooldown((CHARACTERGUID)_Player)
+AND
+CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", 1)
+THEN
+CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
+CharacterAddSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", 0);
+
 PROC
 LLWEAPONEX_Throwing_ReturnBalrinAxe((CHARACTERGUID)_Player, (ITEMGUID)_ThrowingAxe)
 AND
@@ -785,6 +794,7 @@ AND
 CharacterGetEquippedItem(_Player, "Weapon", _ThrowingAxe)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe);
+LLWEAPONEX_Throwing_BalrinAxe_RefreshSkillCooldown(_Player);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Throwing_CheckForBalrinEquipFail")
@@ -794,6 +804,7 @@ AND
 CharacterGetEquippedItem(_Player, "Shield", _ThrowingAxe)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeRequipping(_Player, _ThrowingAxe);
+LLWEAPONEX_Throwing_BalrinAxe_RefreshSkillCooldown(_Player);
 
 //Not equipped
 PROC

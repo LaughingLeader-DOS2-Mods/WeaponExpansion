@@ -186,8 +186,15 @@ IF
 CharacterUsedSkill(_Character, _, _, _)
 AND
 CharacterGetHostCharacter(_Character)
+AND
+DB_GlobalFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
 THEN
 CharacterResetCooldowns(_Character);
+
+IF
+TextEventSet("llweap_nocd")
+THEN
+GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
 
 /*
 IF
