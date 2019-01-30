@@ -7,9 +7,10 @@ LLWEAPONEX_Runeblade_Inert_1H_Fire_1	Crafted Runeblade (Fire)
 LLWEAPONEX_Runeblade_Inert_1H_Poison_1	Crafted Runeblade (Poison)		
 LLWEAPONEX_Runeblade_Inert_1H_Water_1	Crafted Runeblade (Water)		
 LLWEAPONEX_Runeblade_Inert_1H_1	Inert Runeblade		
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air_Anvil_1	Balrin's Shocking Throwing Axe
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil_1	Balrin's Oiled Throwing Axe
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Oven_1	Balrin's Flaming Throwing Axe
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Bonfire_1	Balrin's Flaming Throwing Axe
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air_Anvil_1	Balrin's Throwing Axe (Lightning)
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil_1	Balrin's Throwing Axe (Oil)
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Oven_1	Balrin's Throwing Axe (Fire)
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Bonfire_1	Balrin's Throwing Axe (Fire)
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water_Anvil_1	Balrin's Throwing Axe (Ice)
 WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Well_1	Balrin's Throwing Axe (Normal)
 WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Water_1	Balrin's Throwing Axe (Normal)

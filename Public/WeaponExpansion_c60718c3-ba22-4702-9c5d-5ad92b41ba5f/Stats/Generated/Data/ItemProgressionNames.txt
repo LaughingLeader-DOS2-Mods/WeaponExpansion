@@ -497,13 +497,16 @@ new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
 add name "Balrin's Throwing Axe",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air"
-add name "Balrin's Shocking Throwing Axe",""
+add name "Balrin's Throwing Axe (Lightning)",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire"
-add name "Balrin's Flaming Throwing Axe",""
+add name "Balrin's Throwing Axe (Fire)",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil"
-add name "Balrin's Oiled Throwing Axe",""
+add name "Balrin's Throwing Axe (Oil)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water"
+add name "Balrin's Throwing Axe (Ice)",""
 
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""

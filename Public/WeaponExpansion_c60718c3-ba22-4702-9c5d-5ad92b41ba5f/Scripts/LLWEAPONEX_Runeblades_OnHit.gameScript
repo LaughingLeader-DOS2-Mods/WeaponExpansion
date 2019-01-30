@@ -31,10 +31,12 @@ VARS
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_RUNEBLADE_APPLY_STATUS)
 ACTIONS
-IF "c1&!c2&c3"
+IF "c1&!c2&c3&!c4&!c5"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_RUNEBLADE_APPLY_STATUS, _Source)
 	IsEqual(_Source, null)
 	HasFlag(_Source, "LLWEAPONEX_Runeblade_RuneActive")
+	CharacterIsDead(_Source)
+	CharacterIsDead(_Target)
 THEN
 	//CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Commands_Runeblade_StartRandom")
 	CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_ApplyBonusOnHit")
@@ -217,6 +219,13 @@ ON
 	//OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_RandomSet")
 	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_ApplyBonusOnHit")
 ACTIONS
+IF "c1|c2"
+	CharacterIsDead(_Source)
+	CharacterIsDead(_Target)
+THEN
+	Goto("End")
+ENDIF
+
 GetRandomBetween(_Ran, 0, 999)
 
 /*

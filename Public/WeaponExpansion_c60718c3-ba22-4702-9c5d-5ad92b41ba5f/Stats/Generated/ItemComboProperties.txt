@@ -1,0 +1,57 @@
+new ItemComboProperty "LLWEAPONEX_AirRune"
+data "PreviewIcon" "Item_LOOT_Rune_Thunder_Large"
+data "PreviewTooltip" "Air Rune"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_LLWEAPONEX_Runeblade_Air"
+data "Type" "Object"
+data "Result" "LOOT_Rune_LLWEAPONEX_Runeblade_Air"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Thunder_Small"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Thunder_Small"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Thunder_Medium"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Thunder_Medium"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Thunder_Large"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Thunder_Large"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Thunder_Giant"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Thunder_Giant"
+
+new ItemComboProperty "LLWEAPONEX_WaterRune"
+data "PreviewIcon" "Item_LOOT_Rune_Frost_Large"
+data "PreviewTooltip" "Water Rune"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_LLWEAPONEX_Runeblade_Water"
+data "Type" "Object"
+data "Result" "LOOT_Rune_LLWEAPONEX_Runeblade_Water"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Frost_Small"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Frost_Small"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Frost_Medium"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Frost_Medium"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Frost_Large"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Frost_Large"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_Rune_Frost_Giant"
+data "Type" "Object"
+data "Result" "LOOT_Rune_Frost_Giant"
