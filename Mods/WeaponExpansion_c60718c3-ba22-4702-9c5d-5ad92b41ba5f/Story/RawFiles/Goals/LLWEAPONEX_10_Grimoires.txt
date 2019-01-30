@@ -1501,27 +1501,21 @@ RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
 */
 PROC
 LLWEAPONEX_Grimoire_Internal_AddMimicSkill((CHARACTERGUID)_Character, (STRING)_Skill, (GUIDSTRING)_Target)
+AND
+HasActiveStatus(_Character, "UNSHEATHED", _Unsheathed)
 THEN
 DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Skill, _Target);
 LLWEAPONEX_Grimoire_StartMimicking(_Character, _Skill, _Target);
+LLWEAPONEX_Grimoire_Internal_StartMimicEffects(_CHaracter, _Unsheathed);
 
 PROC
-LLWEAPONEX_Grimoire_Internal_AddMimicSkill((CHARACTERGUID)_Character, (STRING)_Skill, (GUIDSTRING)_Target)
-AND
-//DB_LoopEffect(_Character, _fxHandle,_ID,_Region,_EffectName,_BoneName)
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop", _, _, _)
-AND
-HasActiveStatus(_Character, "UNSHEATHED", 0)
+LLWEAPONEX_Grimoire_Internal_StartMimicEffects((CHARACTERGUID)_Character, 0)
 THEN
 PROC_StopLoopEffect(_Character, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop");
 PROC_LoopEffect("LLWEAPONEX_FX_Skills_Grimoire_MimicSkill_Prepare_Root_01", _Character, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop", "__ANY__", "Dummy_BackFX_L");
 
 PROC
-LLWEAPONEX_Grimoire_Internal_AddMimicSkill((CHARACTERGUID)_Character, (STRING)_Skill, (GUIDSTRING)_Target)
-AND
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop", _, _, _)
-AND
-HasActiveStatus(_Character, "UNSHEATHED", 1)
+LLWEAPONEX_Grimoire_Internal_StartMimicEffects((CHARACTERGUID)_Character, 1)
 THEN
 PROC_StopLoopEffect(_Character, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop");
 PROC_LoopEffect("LLWEAPONEX_FX_Skills_Grimoire_MimicSkill_Prepare_Root_01", _Character, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop", "__ANY__", "Dummy_FrontFX_L");
@@ -1628,6 +1622,7 @@ THEN
 LLWEAPONEX_Grimoire_Internal_AddMimicSkill(_Character, _Skill, _Character);
 
 //oe llweap_grimoiredebug_castskilltarget Projectile_Fireball -10 0 0
+//oe llweap_grimoiredebug_castskilltarget Projectile_PyroclasticRock -10 0 0
 IF
 TextEventSet("llweap_grimoiredebug_castskilltarget")
 AND
@@ -1670,7 +1665,7 @@ TemporaryCharacterCreateAtPosition(_x, _y, _z, "LLWEAPONEX_Grimoire_Dummy_9e0450
 AND
 GetUUID(_Grimoire, _UUID)
 AND
-LeaderLIb_Platforms_QRY_SpawnPlatform(_UUID, "Small", 0, _x, _y, _z)
+LeaderLIb_Platforms_QRY_SpawnPlatform(_UUID, "Small", 5000, _x, _y, _z)
 AND
 RealProduct(_y, 2.0, _ty)
 THEN
@@ -1705,12 +1700,13 @@ CharacterUseSkill(_Grimoire, _Skill, _Target, 1, 1, 1);
 RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
 
 PROC
-LLWEAPONEX_Grimoire_Internal_RemoveSkillPlatform((CHARACTERGUID)_Character, (CHARACTERGUID)_Grimoire)
+LLWEAPONEX_Grimoire_Internal_RemoveSkillPlatform((CHARACTERGUID)_Grimoire)
 AND
 GetUUID(_Grimoire, _UUID)
 AND
 DB_LeaderLib_Platforms(_UUID, _Platform)
 THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:RemoveSkillPlatform] Removed mimicked skill platform.");
 LeaderLib_Platforms_RemovePlatform(_Platform);
 
 PROC
@@ -1721,6 +1717,8 @@ THEN
 NOT DB_LLWEAPONEX_Grimoires_Temp_CastingSkill(_Caster, _Grimoire);
 RemoveTemporaryCharacter(_Grimoire);
 PROC_StopLoopEffect(_Caster, "LLWEAPONEX.Grimoires.FX.MimicSkill.Loop");
+LLWEAPONEX_Grimoire_Internal_RemoveSkillPlatform(_Grimoire);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:LLWEAPONEX_Timers_RemoveSkillGrimoire] Cleaning up mimic dummy and stopping effects.");
 
 QRY
 LLWEAPONEX_Grimoire_GetGrimoirePosition((CHARACTERGUID)_Caster)
