@@ -836,7 +836,7 @@ LLWEAPONEX_Grimoire_Internal_OnSkillEventAdded(_Caster, _Target, _Skill, _SkillT
 PROC
 LLWEAPONEX_Grimoire_Internal_OnSkillEventAdded((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement)
 AND
-NOT LeaderLib_QRY_ObjectObjectTimerStarted(_Caster, _Target, "LLWEAPONEX_Timers_ResetSkillEventEntry_")
+NOT LeaderLib_Timers_QRY_ObjectObjectTimerStarted(_Caster, _Target, "LLWEAPONEX_Timers_ResetSkillEventEntry_")
 AND
 GetUUID(_Target, _Str)
 AND
@@ -848,10 +848,10 @@ NOT DB_LeaderLog_Temp_CombinedString(_Event);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoires:SkillEvent] Character used skill on target [",_Str,"]. Skill[",_Skill,"] Type[",_SkillType,"] Element[",_SkillElement,"]");
 LLWEAPONEX_Grimoire_OnUsedSkillOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement);
 DB_LLWEAPONEX_Grimoire_ResetSkillEvent(_Event, _Caster, _Target, _Skill, _SkillType, _SkillElement);
-LeaderLib_StartObjectObjectTimer(_Caster, _Target, 250, "LLWEAPONEX_Timers_ResetSkillEventEntry_", _Event);
+LeaderLib_Timers_StartObjectObjectTimer(_Caster, _Target, 250, "LLWEAPONEX_Timers_ResetSkillEventEntry_", _Event);
 
 PROC
-LeaderLib_ObjectObjectTimerFinished((CHARACTERGUID)_Caster, _Target, _Event)
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Event)
 AND
 DB_LLWEAPONEX_Grimoire_ResetSkillEvent(_Event, _Caster, _Target, _Skill, _SkillType, _SkillElement)
 THEN

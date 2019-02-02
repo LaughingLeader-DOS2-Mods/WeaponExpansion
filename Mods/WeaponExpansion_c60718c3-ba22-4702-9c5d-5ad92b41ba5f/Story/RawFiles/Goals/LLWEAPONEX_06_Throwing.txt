@@ -578,7 +578,7 @@ SkillCast(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", _, _)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:SkillCast(Balrin's Targeting)] Throwing Balrin's Axe after 24ms.");
 //CharacterFlushQueue(_Player);
-LeaderLib_RestartCharacterCharacterTimer(_Player, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", 24);
+LeaderLib_Timers_RestartCharacterCharacterTimer(_Player, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", 24);
 
 IF
 CharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Throwing_ThrowBalrinAxe")
