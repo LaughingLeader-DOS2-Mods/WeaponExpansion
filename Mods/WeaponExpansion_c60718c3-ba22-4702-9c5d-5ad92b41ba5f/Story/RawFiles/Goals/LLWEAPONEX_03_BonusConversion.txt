@@ -183,7 +183,7 @@ AND
 DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Weapon, _ConversionStatus)
 THEN
 //Delay slightly so the Unequip event can run if needed.
-LeaderLib_StartCharacterItemTimer(_Player, _Weapon, 150, "LLWEAPONEX_Timers_BonusConversion_CalculateBonusDifference_", "LLWEAPONEX_BonusConversion_CalculateBonusDifference");
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 150, "LLWEAPONEX_Timers_BonusConversion_CalculateBonusDifference_", "LLWEAPONEX_BonusConversion_CalculateBonusDifference");
 
 IF
 CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_BonusConversion_CalculateBonusDifference")
@@ -234,7 +234,7 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:BonusConversion:ItemUnEquipped] Bonus conversion item was unequipped. Removing bonus [",_ConversionStatus,"].");
 NOT DB_LLWEAPONEX_BonusConversion_Temp_WeaponBonus(_Player, _Weapon, _ConversionStatus, _WeaponBonus);
 LLWEAPONEX_BonusConversion_RemoveBonus(_Player, _Type, _StatToCheck, _StatToConvertTo, _WeaponBonus);
-//LeaderLib_StartCharacterItemTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_BonusConversion_RemoveBonuses_", "LLWEAPONEX_BonusConversion_RemoveBonusesFromWeapon");
+//LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_BonusConversion_RemoveBonuses_", "LLWEAPONEX_BonusConversion_RemoveBonusesFromWeapon");
 
 IF
 ItemUnEquipped(_OtherWeapon, _Player)

@@ -562,7 +562,7 @@ AND
 LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_UniqueThrowingAxeA")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Throwing:CharacterUsedSkillOnTarget] Throwing Balrin's Axe after 250ms (failsafe).");
-LeaderLib_StartCharacterCharacterTimer(_Player, _Target, 250, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", "LLWEAPONEX_Throwing_ThrowBalrinAxe");
+LeaderLib_Timers_StartCharacterCharacterTimer(_Player, _Target, 250, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", "LLWEAPONEX_Throwing_ThrowBalrinAxe");
 
 IF
 CharacterUsedSkillOnTarget(_Player, (CHARACTERGUID)_Target, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", _, _)

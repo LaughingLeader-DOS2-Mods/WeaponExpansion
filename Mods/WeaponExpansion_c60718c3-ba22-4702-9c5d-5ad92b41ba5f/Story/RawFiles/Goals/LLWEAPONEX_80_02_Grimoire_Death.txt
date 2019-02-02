@@ -8,7 +8,7 @@ PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
 THEN
 SetVarFloat3(_Caster, "LLWEAPOENX_GrimoireTargetPosition", _x, _y, _z);
-LeaderLib_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Grimoire_ApplyTormentExplosion", "LLWEAPONEX_Grimoire_TormentExplode");
+LeaderLib_Timers_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Grimoire_ApplyTormentExplosion", "LLWEAPONEX_Grimoire_TormentExplode");
 
 PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")

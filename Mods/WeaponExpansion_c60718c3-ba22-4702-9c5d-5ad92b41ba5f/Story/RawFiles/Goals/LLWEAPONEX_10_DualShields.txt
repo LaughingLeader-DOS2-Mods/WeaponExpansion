@@ -308,7 +308,7 @@ ItemToInventory(_CombatShield, _Shield);
 IF
 DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield)
 THEN
-LeaderLib_StartCharacterItemTimer(_Player, _Shield, 150, "LLWEAPONEX_Timers_ResetDualShieldHandled", "LLWEAPONEX_DualShields_ResetHandled");
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Shield, 150, "LLWEAPONEX_Timers_ResetDualShieldHandled", "LLWEAPONEX_DualShields_ResetHandled");
 
 IF
 CharacterItemEvent(_Player, _Shield, "LLWEAPONEX_DualShields_ResetHandled")

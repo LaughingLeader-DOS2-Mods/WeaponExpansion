@@ -26,7 +26,7 @@ DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeTarget(_Player, _Target);
 //CharacterCharacterSetEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe");
-LeaderLib_StartCharacterCharacterTimer(_Player, _Target, 24, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe");
+LeaderLib_Timers_StartCharacterCharacterTimer(_Player, _Target, 24, "LLWEAPONEX_Timers_Throwing_BalrinTargetingFinished", "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe");
 
 IF
 CharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Timers_Throwing_ThrowBalrinAxe")

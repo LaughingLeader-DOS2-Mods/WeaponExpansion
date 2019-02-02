@@ -9,7 +9,7 @@ CharacterStatusApplied(_Character, "UNSHEATHED", _)
 AND
 ObjectGetFlag(_Character, "LLWEAPONEX_GrimoireOpened", 1)
 THEN
-LeaderLib_CancelObjectTimerByEvent(_Character, "LLWEAPONEX_Events_GrimoireFired");
+LeaderLib_Timers_CancelObjectTimerByEvent(_Character, "LLWEAPONEX_Events_GrimoireFired");
 ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0);
 
 IF
