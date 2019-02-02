@@ -102,7 +102,6 @@ new entry "Stats_LLWEAPONEX_BlindfoldEquipped"
 type "Potion"
 data "Act" "1"
 data "Act part" "0"
-data "Sight" "-3000"
 data "RangeBoost" "-400"
 
 new entry "LLWEAPONEX_STRENGTH_TO_INTELLIGENCE"
