@@ -190,34 +190,50 @@ SetCanFight(_Revenant, 0);
 SetFaction(_Revenant, "Good NPC");
 SetRelationIndivFactionToPlayers(_Revenant, 100);
 
-ApplyStatus(_Revenant, _Status, _Duration, 1, _Source);
-
 CharacterSetHitpointsPercentage(_Revenant, 100.0);
-TeleportToPosition(_Revenant, _tx, _ty, _tz, "LLWEAPONEX_Events_Revenant_SetAttached", 0, 1);
 
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName);
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration);
+TeleportToPosition(_Revenant, _tx, _ty, _tz, "LLWEAPONEX_Events_Revenant_SetAttached", 0, 1);
 
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
 AND
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName)
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration)
 THEN
 CharacterSetCustomName(_Revenant, _RevenantName);
 LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
-SetOnStage(_Revenant, 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
+THEN
 CharacterSetDetached(_Revenant, 0);
 PlayEffect(_Revenant, "RS3_FX_Char_Ghosts_Teleport_in_01", "");
-LeaderLib_Timers_StartObjectTimer(_Revenant, 500, "LLWEAPONEX_Timers_RevenantReadyTimer", "LLWEAPONEX_Events_RevenantReady");
+LeaderLib_Timers_StartObjectTimer(_Revenant, 250, "LLWEAPONEX_Timers_RevenantReadyTimer", "LLWEAPONEX_Events_RevenantReady");
 
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_RevenantReady")
 AND
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName)
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration)
 THEN
-NOT DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName);
+NOT DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration);
+ApplyStatus(_Revenant, _Status, _Duration, 1, _Source);
+LLWEAPONEX_Statuses_OnRevenantCreated(_Revenant, _Target, _Source, _Status);
+
+IF
+StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_RevenantReady")
+THEN
 SetCanJoinCombat(_Revenant, 1);
 SetCanFight(_Revenant, 1);
-LLWEAPONEX_Statuses_OnRevenantCreated(_Revenant, _Target, _Source, _Status);
+SetOnStage(_Revenant, 1);
+
+PROC
+LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_REVENANT")
+AND
+CharacterIsInCombat(_Revenant, 0)
+AND
+CharacterIsInCombat(_Source, 1)
+THEN
+EnterCombat(_Revenant, _Source);
 
 PROC
 LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_REVENANT")
