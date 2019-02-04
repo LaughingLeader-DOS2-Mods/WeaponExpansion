@@ -34,7 +34,7 @@ data "Talents" "Backstab;AttackOfOpportunity"
 data "FireResistance" "-50"
 data "AirResistance" "100"
 data "PoisonResistance" "100"
-data "Flags" "BleedingImmunity;DiseasedImmunity;CrippledImmunity;PoisonImmunity;InfectiousDiseasedImmunity"
+data "Flags" "BleedingImmunity;DiseasedImmunity;CrippledImmunity;PoisonImmunity;InfectiousDiseasedImmunity;Floating"
 data "PathInfluence" "Web,50;BloodCloudCursed,50;BloodCloudElectrified,100;BloodCloudElectrifiedCursed,50;BloodCursed,50;BloodElectrified,100;BloodElectrifiedCursed,50;BloodFrozen,30;BloodFrozenCursed,50;Fire,70;FireCloud,70;FireCloudCursed,70;FireCursed,70;Lava,700;Oil,30;OilCursed,50;PoisonCloudCursed,70;PoisonCursed,70;SmokeCloudCursed,50;WaterCloudCursed,50;WaterCloudElectrified,100;WaterCloudElectrifiedCursed,100;WaterCursed,50;WaterElectrified,100;WaterElectrifiedCursed,100;WaterFrozen,30;WaterFrozenCursed,50;"
 
 new entry "LLWEAPONEX_VendingMachine_A"

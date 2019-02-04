@@ -13,6 +13,18 @@ THEN
 //Max possible level attainable by players
 //DB_LLWEAPONEX_WeaponMastery_Softcap(2);
 
+//Dual Shields
+//Greatbow
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_DualShields", "<font color='#D9D9D9'>Dual Shields Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 1, "<font color='#FFDA9E'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 2, "<font color='#FFC973'>Journeyman Shieldmaster</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 3, "<font color='#FFB94A'>Expert Shieldmaster</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 4, "<font color='#FF9E03'>Master of Shields</font>");
+
+//DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_DualShields", "LLWEAPONEX_WM_DualShields_Exp", "LLWEAPONEX_WM_DualShields_ExpMax", "LLWEAPONEX_WM_DualShields_Level");
+
 //Greatbow
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Greatbow", "<font color='#00FF7F'>Greatbow Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 0, "<font color='#FDFFEA'>Beginner</font>");

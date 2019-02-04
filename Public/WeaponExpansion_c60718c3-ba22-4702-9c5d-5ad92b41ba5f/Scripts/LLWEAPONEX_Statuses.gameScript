@@ -167,10 +167,20 @@ VARS
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
 ACTIONS
-IF "!c1&c2&c3"
-	CharacterHasStatus(_Target, KNOCKED_DOWN) // Don't force if they're already knocked down
+IF "(c1&c2)|!c1"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Source)
+	IsEqual(_Source, null)
+THEN
+	Set(_Source, _Target)
+ENDIF
+IF "!c1"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Turns)
+THEN
+	Set(_Turns, 1)
+ENDIF
+IF "!c1&!c2"
+	CharacterIsDead(_Target)
+	CharacterHasStatus(_Target, KNOCKED_DOWN) // Don't force if they're already knocked down
 THEN
 	Clamp(_Turns, 0, _Turns) // Permanent knockdown prevention
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, _Turns, 1, _Source)
@@ -185,10 +195,20 @@ VARS
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
 ACTIONS
-IF "!c1&c2&c3"
-	CharacterHasStatus(_Target, BLEEDING) // Don't force if they're already bleeding
+IF "(c1&c2)|!c1"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Source)
+	IsEqual(_Source, null)
+THEN
+	Set(_Source, _Target)
+ENDIF
+IF "!c1"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Turns)
+THEN
+	Set(_Turns, 1)
+ENDIF
+IF "!c1&!c2"
+	CharacterIsDead(_Target)
+	CharacterHasStatus(_Target, BLEEDING) // Don't force if they're already bleeding
 THEN
 	Clamp(_Turns, 0, _Turns)
 	CharacterApplyStatus(_Target, BLEEDING, _Turns, 1, _Source)
@@ -203,14 +223,20 @@ VARS
 ON
 	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK)
 ACTIONS
-IF "!c1"
+IF "(c1&c2)|!c1"
 	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Source)
+	IsEqual(_Source, null)
 THEN
 	Set(_Source, _Target)
 ENDIF
-IF "!c1&c2"
-	CharacterHasStatus(_Target, CRIPPLED)
+IF "!c1"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Turns)
+THEN
+	Set(_Turns, 1)
+ENDIF
+IF "!c1&!c2"
+	CharacterIsDead(_Target)
+	CharacterHasStatus(_Target, CRIPPLED)
 THEN
 	Clamp(_Turns, 0, _Turns)
 	CharacterApplyStatus(_Target, CRIPPLED, _Turns, 1, _Source)

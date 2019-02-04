@@ -28,9 +28,11 @@ NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 
 IF
 //AttackedByObject(_Target, _, (CHARACTERGUID)_Player, _, _)
-CharacterStatusApplied(_Target, "HIT", (CHARACTERGUID)_Player)
+CharacterStatusApplied(_Target, "HIT", _Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+_Player != NULL_00000000-0000-0000-0000-000000000000
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage((CHARACTERGUID)_Player, _WeaponType)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 LLWEAPONEX_WeaponMastery_GainExperienceWithType(_Player, _WeaponType, 175);

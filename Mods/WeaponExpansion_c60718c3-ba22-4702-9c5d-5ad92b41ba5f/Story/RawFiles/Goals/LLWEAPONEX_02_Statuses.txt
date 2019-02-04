@@ -97,18 +97,6 @@ THEN
 NOT DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface);
 CreateSurfaceAtPosition(_x, _y, _z, _Surface, 1.0, 12.0);
 RemoveStatus(_Character, "LLWEAPONEX_RANDOM_SURFACE_SMALL");
-
-IF
-CharacterStatusRemoved(_Character, "HIT", _)
-AND
-HasActiveStatus(_Character, "LLWEAPONEX_CHAOS_POWER", 1)
-AND
-LeaderLib_Array_QRY_Random("LLWEAPONEX_ChaosSurfaces")
-AND
-DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface)
-THEN
-NOT DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface);
-CreateSurface(_Character, _Surface, 2.0, 12.0);
 //END_REGION
 
 //REGION DEATH_SENTENCE
@@ -193,8 +181,14 @@ DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status
 THEN
 CharacterSetCustomName(_Revenant, _RevenantName);
 LeaderLib_Helper_CopyAbilities(_Revenant, _Target);
-LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
+LeaderLib_Helper_CopyAttributes(_Revenant, _Target);
 CharacterCloneSkillsTo(_Target, _Revenant, 1);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Revenant, _Target, 50, "LLWEAPONEX_Timers_Revenant_CopyEquipment", "LLWEAPONEX_Revenant_CopyEquipment");
+
+IF
+CharacterCharacterEvent(_Revenant, _Target, "LLWEAPONEX_Revenant_CopyEquipment")
+THEN
+LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
 
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
