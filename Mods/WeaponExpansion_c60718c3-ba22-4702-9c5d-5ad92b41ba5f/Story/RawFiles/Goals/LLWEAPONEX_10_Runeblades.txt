@@ -34,12 +34,6 @@ DB_LLWEAPONEX_Runeblades_TagToSkill("LLWEAPONEX_Runeblade_Water", "Shout_LLWEAPO
 DB_LLWEAPONEX_Runeblades_StatusSound("LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", "Skill_Fire_Cast_AoE_Air_Fire", 800);
 DB_LLWEAPONEX_Runeblades_FlagSound("LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", "Skill_Fire_Cast_Target_Totem_Fire", 800);
 
-IF
-DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
-THEN
-DB_LeaderLib_BlockedSkill(_MainSkill);
-DB_LeaderLib_BlockedSkill(_DualWieldSkill);
-
 PROC
 LLWEAPONEX_Runeblades_RegisterBonusDamageStatuses((STRING)_BaseStatus)
 THEN

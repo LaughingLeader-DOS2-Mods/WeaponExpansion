@@ -221,6 +221,7 @@ data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_BLINDFOLD_EQUIPPED"
 data "Flags" "BlindImmunity;Unbreakable"
 data "Durability" "0"
 data "DurabilityDegradeSpeed" "0"
+data "AddToBottomBar" "No"
 
 new entry "ARM_LLWEAPONEX_Blindfold_Preview"
 type "Armor"

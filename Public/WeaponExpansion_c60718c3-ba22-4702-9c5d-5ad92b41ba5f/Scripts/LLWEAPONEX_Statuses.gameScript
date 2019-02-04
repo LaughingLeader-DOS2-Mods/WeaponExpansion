@@ -177,12 +177,13 @@ IF "!c1"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Turns)
 THEN
 	Set(_Turns, 1)
+ELSE
+	Clamp(_Turns, 1, _Turns)
 ENDIF
 IF "!c1&!c2"
 	CharacterIsDead(_Target)
 	CharacterHasStatus(_Target, KNOCKED_DOWN) // Don't force if they're already knocked down
 THEN
-	Clamp(_Turns, 0, _Turns) // Permanent knockdown prevention
 	CharacterApplyStatus(_Target, KNOCKED_DOWN, _Turns, 1, _Source)
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
@@ -205,12 +206,13 @@ IF "!c1"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Turns)
 THEN
 	Set(_Turns, 1)
+ELSE
+	Clamp(_Turns, 1, _Turns)
 ENDIF
 IF "!c1&!c2"
 	CharacterIsDead(_Target)
 	CharacterHasStatus(_Target, BLEEDING) // Don't force if they're already bleeding
 THEN
-	Clamp(_Turns, 0, _Turns)
 	CharacterApplyStatus(_Target, BLEEDING, _Turns, 1, _Source)
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
@@ -233,12 +235,13 @@ IF "!c1"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Turns)
 THEN
 	Set(_Turns, 1)
+ELSE
+	Clamp(_Turns, 1, _Turns)
 ENDIF
 IF "!c1&!c2"
 	CharacterIsDead(_Target)
 	CharacterHasStatus(_Target, CRIPPLED)
 THEN
-	Clamp(_Turns, 0, _Turns)
 	CharacterApplyStatus(_Target, CRIPPLED, _Turns, 1, _Source)
 ENDIF
 	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK)
@@ -289,12 +292,22 @@ VARS
 ON
 	OnCharacterStatusApplied(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED)
 ACTIONS
-IF "!c1&c2&c3"
+IF "!c1"
 	CharacterHasStatus(_Character, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
-	GetStatusTurns(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Turns)
-	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Source)
 THEN
-	Clamp(_Turns, 0, _Turns)
+	IF "(c1&c2)|!c1"
+		CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Source)
+		IsEqual(_Source, null)
+	THEN
+		Set(_Source, _Character)
+	ENDIF
+	IF "!c1"
+		GetStatusTurns(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Turns)
+	THEN
+		Set(_Turns, 1)
+	ELSE
+		Clamp(_Turns, 1, _Turns)
+	ENDIF
 	CharacterApplyStatus(_Character, SHOCKED, _Turns, 0, _Source)
 ENDIF
 	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, null, 0)

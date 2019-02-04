@@ -9,15 +9,17 @@ AND
 NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
 THEN
 DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
+LLWEAPONEX_LeaderLib_InitSettings();
+LLWEAPONEX_LeaderLib_InitTraderSettings();
+LLWEAPONEX_LeaderLib_InitDeltamods();
+LLWEAPONEX_LeaderLib_AddBlockedSkills();
 
-IF
-DB_LLWEAPONEX_RegisteredLeaderLibSettings(1)
+//REGION PRESETS_MISC
+PROC
+LLWEAPONEX_LeaderLib_InitSettings()
 THEN
 LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion] Settings", "LLWEAPONEX_SettingsMenu", "WeaponExpansion", "LaughingLeader");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "WeaponExpansion");
-
-LeaderLib_Trader_Register_Position("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 12.0, 0.0, 8.0);
-LeaderLib_Trader_Register_StartingGold("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 9999);
 
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Assassin", "Assassin [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Blademaster", "Blademaster [Weapon Expansion]", "WeaponExpansion_IsActive");
@@ -28,10 +30,22 @@ LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Fencer", "Fencer [Weapon Expansi
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkWoodenQuarterstaff", "Monk (Wooden Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkMetalQuarterstaff", "Monk (Metal Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
+//END_REGION
 
+//REGION TRADER
+PROC
+LLWEAPONEX_LeaderLib_InitTraderSettings()
+THEN
+LeaderLib_Trader_Register_Position("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 12.0, 0.0, 8.0);
+LeaderLib_Trader_Register_StartingGold("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 9999);
+//END_REGION
 //Copy Blacklist
 //DB_LeaderLib_Helper_EquipmentCopyBlacklist_Tags("WeaponeExpansion.CopyBlacklist", "LLWEAPONEX_Grimoire");
 
+//REGION DELTAMODS
+PROC
+LLWEAPONEX_LeaderLib_InitDeltamods()
+THEN
 //Random Deltamods
 LeaderLib_Deltamods_Register_Group("WeaponExpansion.CombatShields", 0);
 //LeaderLib_Deltamods_Register_Template("WeaponExpansion.CombatShields", "WPN_LLWEAPONEX_CombatShield_Blackring_A_ec353f1e-c1ca-46d1-83ef-e9f4fea14475", 0);
@@ -129,6 +143,57 @@ LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 11, "B
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium", "ID", "WeaponExpansion.Grimoire.Wind");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium", "ID", "WeaponExpansion.Grimoire.Wind");
 LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Wind");
+//END_REGION
+
+//REGION BLOCKED_SKILLS
+PROC
+LLWEAPONEX_LeaderLib_AddBlockedSkills()
+THEN
+DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_Prepare_BalrinsAxe");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
+
+PROC
+LLWEAPONEX_LeaderLib_AddBlockedSkills()
+AND
+DB_LLWEAPONEX_Rods_Skills(_Status, _MainhandSkill, _OffhandSkill)
+THEN
+DB_LeaderLib_BlockedSkill(_MainhandSkill);
+DB_LeaderLib_BlockedSkill(_OffhandSkill);
+
+PROC
+LLWEAPONEX_LeaderLib_AddBlockedSkills()
+AND
+DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
+THEN
+DB_LeaderLib_BlockedSkill(_MainSkill);
+DB_LeaderLib_BlockedSkill(_DualWieldSkill);
+
+
+//Globally block mastery skills from being copied by the preset process
+PROC
+LLWEAPONEX_LeaderLib_AddBlockedSkills()
+AND
+DB_LLWEAPONEX_WeaponMastery_Skills(_WeaponType, _SkillID, _Skill)
+THEN
+DB_LeaderLib_BlockedSkill(_Skill);
+
+PROC
+LLWEAPONEX_LeaderLib_AddBlockedSkills()
+AND
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
+THEN
+DB_LeaderLib_BlockedSkill(_Skill);
+//END_REGION
+
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 25)
+THEN
+LLWEAPONEX_LeaderLib_AddBlockedSkills();
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
@@ -148,6 +213,7 @@ LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water
 LeaderLib_Growth_Items_Register_Transformation("WeaponExpansion.Rapier.Runeblade.Water2", 12, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678", "LLWEAPONEX_FrostDyne_Form3");
 
 LeaderLib_Growth_Items_ResetItemsByID("WeaponExpansion.Rapier.Runeblade.Water");
+//END_REGION
 
 /*
 LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.LeaderTrader.TestWeapons", "LeaderLib.LeaderTrader");

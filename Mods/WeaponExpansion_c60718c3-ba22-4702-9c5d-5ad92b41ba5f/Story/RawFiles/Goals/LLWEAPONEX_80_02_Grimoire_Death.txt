@@ -159,7 +159,7 @@ AND
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB")
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB");
-LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0, 0);
 
 IF
 CharacterDied(_Character)
@@ -167,7 +167,7 @@ AND
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS")
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
-LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+LLWEAPONEX_Statuses_CreateRevenant(_Character, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0, 0);
 
 IF
 CharacterUsedSkillOnTarget(_Source, (CHARACTERGUID)_Target, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
@@ -183,7 +183,7 @@ DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target)
 AND
 CharacterIsDead(_Target, 1)
 THEN
-LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0);
+LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0, 0);
 
 IF
 SkillCast(_Source, "Target_LLWEAPONEX_Grimoire_Torment", _, _)

@@ -15,9 +15,6 @@ DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", "Projecti
 
 DB_LLWEAPONEX_Throwing_ReturnSkillTags("Projectile_LLWEAPONEX_ShieldToss_Returned", "LLWEAPONEX_ShieldToss_Caster");
 
-//Globally block
-DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
-DB_LeaderLib_BlockedSkill("Shout_LLWEAPONEX_Prepare_BalrinsAxe");
 //DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 
 //Make the impale effect look more believable

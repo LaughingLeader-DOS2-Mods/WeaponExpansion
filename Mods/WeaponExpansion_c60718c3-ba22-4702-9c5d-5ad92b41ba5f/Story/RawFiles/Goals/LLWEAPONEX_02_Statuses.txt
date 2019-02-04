@@ -129,7 +129,7 @@ CharacterDied(_Enemy)
 AND
 DB_LLWEAPONEX_Statuses_Temp_DeathSentence(_Enemy, _Source)
 THEN
-LLWEAPONEX_Statuses_CreateRevenant(_Enemy, _Source, "LLWEAPONEX_Revenant_Base_bb15f97e-b6bf-4648-9190-71b42a7744c4", " (Revenant)", "LLWEAPONEX_REVENANT", 12.0);
+LLWEAPONEX_Statuses_CreateRevenant(_Enemy, _Source, "LLWEAPONEX_Revenant_Base_bb15f97e-b6bf-4648-9190-71b42a7744c4", " (Revenant)", "LLWEAPONEX_REVENANT", 12.0, 1);
 NOT DB_LLWEAPONEX_Statuses_Temp_DeathSentence(_Enemy, _Source);
 
 IF
@@ -144,7 +144,7 @@ LLWEAPONEX_Statuses_KillRevenant(_Revenant);
 
 //REGION REVENANTS_CREATE
 PROC
-LLWEAPONEX_Statuses_CreateRevenant((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Template, (STRING)_NameSuffix, (STRING)_Status, (REAL)_Duration)
+LLWEAPONEX_Statuses_CreateRevenant((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Template, (STRING)_NameSuffix, (STRING)_Status, (REAL)_Duration, (INTEGER)_CopyEquipment)
 AND
 GetPosition(_Target, _x, _y, _z)
 AND
@@ -170,19 +170,25 @@ SetFaction(_Revenant, "Good NPC");
 SetRelationIndivFactionToPlayers(_Revenant, 100);
 
 CharacterSetHitpointsPercentage(_Revenant, 100.0);
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration);
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration, _CopyEquipment);
 
 LeaderLib_Helper_SafeTeleport(_Revenant, _Target, "LLWEAPONEX_Events_Revenant_SetAttached", 8.0);
 
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
 AND
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration)
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration, _CopyEquipment)
 THEN
 CharacterSetCustomName(_Revenant, _RevenantName);
 LeaderLib_Helper_CopyAbilities(_Revenant, _Target);
 LeaderLib_Helper_CopyAttributes(_Revenant, _Target);
 CharacterCloneSkillsTo(_Target, _Revenant, 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
+AND
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration, 1)
+THEN
 LeaderLib_Timers_StartCharacterCharacterTimer(_Revenant, _Target, 50, "LLWEAPONEX_Timers_Revenant_CopyEquipment", "LLWEAPONEX_Revenant_CopyEquipment");
 
 IF
@@ -200,9 +206,9 @@ LeaderLib_Timers_StartObjectTimer(_Revenant, 250, "LLWEAPONEX_Timers_RevenantRea
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_RevenantReady")
 AND
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration)
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration, _CopyEquipment)
 THEN
-NOT DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration);
+NOT DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration, _CopyEquipment);
 ApplyStatus(_Revenant, _Status, _Duration, 1, _Source);
 LLWEAPONEX_Statuses_OnRevenantCreated(_Revenant, _Target, _Source, _Status);
 
@@ -371,8 +377,11 @@ CharacterStatusText(_Target, "LLWEAPONEX_Status_Torment_Applied");
 //REGION REVENANTS_TORMENT
 PROC
 LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
+AND
+DB_IsPlayer(_Target)
 THEN
 CharacterAddToPlayerCharacter(_Revenant, _Target);
+LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
 
 PROC
 LLWEAPONEX_Statuses_OnRevenantDied((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")

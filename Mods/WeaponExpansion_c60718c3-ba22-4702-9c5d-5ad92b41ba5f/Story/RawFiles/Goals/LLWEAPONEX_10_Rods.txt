@@ -20,12 +20,6 @@ DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_FIRE", "Projectile_LLWEAPONEX_ShootRod
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_POISON", "Projectile_LLWEAPONEX_ShootRod_Poison", "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand");
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_WATER", "Projectile_LLWEAPONEX_ShootRod_Water", "Projectile_LLWEAPONEX_ShootRod_Water_Offhand");
 
-IF
-DB_LLWEAPONEX_Rods_Skills(_Status, _MainhandSkill, _OffhandSkill)
-THEN
-DB_LeaderLib_BlockedSkill(_MainhandSkill);
-DB_LeaderLib_BlockedSkill(_OffhandSkill);
-
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
