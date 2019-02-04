@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "0.9.3.18");
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "0.9.3.21");
 LeaderUpdater_Register_ActiveGoal("WeaponExpansion", "LaughingLeader", "LLWEAPONEX_ZZZ_Updater");
 LeaderUpdater_Register_Dependency("WeaponExpansion", "LaughingLeader", "AnimationsPlus", "LaughingLeader", 1);
 KBSECTION
@@ -10,18 +10,23 @@ GameStarted(_Level, _)
 AND
 IsGameLevel(_Level, 1)
 AND
-LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "0.9.3.18")
+LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "0.9.3.21")
 THEN
-LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "0.9.3.18");
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "0.9.3.21");
 
-/*
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 14)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 21)
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting", 1)
 THEN
-DB_NOOP(1);
-*/
+CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
+LeaderLib_Helper_RefreshWeapons(_Player, 250, 250);
+
 EXITSECTION
 
 ENDEXITSECTION

@@ -693,17 +693,67 @@ CharacterAddSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", 1)
 
 IF
 CharacterStatusRemoved(_Player, "LLWEAPONEX_BALRINAXE_PREPARED", _)
+THEN
+LLWEAPONEX_Throwing_RemoveBalrinAxeSkills(_Player);
+
+PROC
+LLWEAPONEX_Throwing_RemoveBalrinAxeSkills((CHARACTERGUID)_Player)
 AND
 CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", 1)
 THEN
 CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
 
-IF
-CharacterStatusRemoved(_Player, "LLWEAPONEX_BALRINAXE_PREPARED", _)
+PROC
+LLWEAPONEX_Throwing_RemoveBalrinAxeSkills((CHARACTERGUID)_Player)
 AND
 CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", 1)
 THEN
 CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
+//END_REGION
+
+//REGION BALRIN_AXE_TEMPLATE_UNEQUIPPED
+//Remove the prepared status when Balrin's Axe is swapped between hands
+/*
+WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53
+WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Air_f4db8570-4a0b-4292-bb36-f66fb2d8b0c3
+WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Fire_1f3bc0cd-6c5f-4291-812b-50a92bba3adb
+WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb
+WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435
+*/
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+THEN
+RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Air_f4db8570-4a0b-4292-bb36-f66fb2d8b0c3", _Player)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+THEN
+RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Fire_1f3bc0cd-6c5f-4291-812b-50a92bba3adb", _Player)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+THEN
+RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb", _Player)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+THEN
+RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435", _Player)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+THEN
+RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
 //END_REGION
 
 //REGION BALRIN_AXE_MAIN
@@ -867,20 +917,7 @@ RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
 CharacterRemoveSkill(_Player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe");
 ObjectClearFlag(_Player, "LLWEAPONEX_HasBalrinThrowingAxe", 0);
 LLWEAPONEX_Throwing_ClearBalrinAxeData(_Player);
-
-PROC
-LLWEAPONEX_Throwing_OnBalrinAxeRemoved((CHARACTERGUID)_Player)
-AND
-CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", 1)
-THEN
-CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
-
-PROC
-LLWEAPONEX_Throwing_OnBalrinAxeRemoved((CHARACTERGUID)_Player)
-AND
-CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", 1)
-THEN
-CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
+LLWEAPONEX_Throwing_RemoveBalrinAxeSkills(_Player);
 
 IF
 //ItemTemplateEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)

@@ -4,6 +4,7 @@ INITSECTION
 
 KBSECTION
 
+//REGION UNSHEATHED_EVENT
 IF
 CharacterStatusApplied(_Character, "UNSHEATHED", _)
 AND
@@ -29,7 +30,9 @@ AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 THEN
 LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, 0);
+//END_REGION
 
+//REGION RESPEC_MIRROR
 //Respec started, delete effects
 IF
 DB_Illusionist(_Player,_Mirror)
@@ -47,6 +50,62 @@ AND
 CharacterIsInFightMode(_Player, _Unsheathed)
 THEN
 LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, _Unsheathed);
+//END_REGION
+
+//REGION SKILL_EVENTS
+IF
+CharacterUsedSkillOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+THEN
+LLWEAPONEX_Grimoire_OnSkillUsedOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+THEN
+LLWEAPONEX_Grimoire_OnSkillUsedOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement);
+
+IF
+CharacterUsedSkillAtPosition(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _, _Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement);
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_Grimoire_SkillPositionDelay", 250);
+
+IF
+CharacterUsedSkill(_Caster, _Skill, _SkillType, _SkillElement)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireEquipped", 1)
+AND
+NOT DB_LLWEAPONEX_Grimoire_SkillEvent(_Caster, _, _Skill, _SkillType, _SkillElement)
+THEN
+DB_LLWEAPONEX_Grimoire_SkillSelfEvent(_Caster, _Skill, _SkillType, _SkillElement);
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_Grimoire_SkillSelfDelay", 50);
+
+IF
+SkillCast(_Caster, _Skill, _, _)
+AND
+LLWEAPONEX_Grimoire_QRY_ActivationQueued(_Caster, _Skill)
+AND
+GetUUID(_Caster, _UUID)
+AND
+LeaderLog_QRY_Log("COMBINE", "LLWEAPONEX_Timers_ActivateGrimoire_", _UUID, "_", _Skill)
+AND
+DB_LeaderLog_Temp_CombinedString(_TimerName)
+THEN
+NOT DB_LeaderLog_Temp_CombinedString(_TimerName);
+DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill, _TimerName);
+TimerLaunch(_TimerName, 1000);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
