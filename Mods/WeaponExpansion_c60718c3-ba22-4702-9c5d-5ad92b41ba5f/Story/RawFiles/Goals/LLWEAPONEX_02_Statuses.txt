@@ -167,19 +167,10 @@ AND
 CharacterGetDisplayName(_Target, _, _Name)
 AND
 StringConcatenate(_Name, _NameSuffix, _RevenantName)
-AND
-FindValidPosition(_x, _y, _z, 6.0, _Revenant, _tx, _ty, _tz)
 THEN
 DB_LLWEAPONEX_Statuses_Temp_Revenants(_Target, _Revenant, _Source, _Status);
 SetOnStage(_Revenant, 0);
 CharacterSetDetached(_Revenant, 1);
-
-//CharacterTransformAppearanceTo(_Revenant, _Target, 1, 1);
-//CharacterTransformFromCharacter(_Revenant, _Target, 0, 1, 0, 1, 1, 0, 0);
-/*
-CharacterTransformFromCharacter((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_ReplaceScripts, (INTEGER)_ReplaceScale, (INTEGER)_ReplaceStats, (INTEGER)_ReplaceEquipment, (INTEGER)_ReplaceSkills, (INTEGER)_UseCustomLooks, (INTEGER)_ReleasePlayerData)
-*/
-//CharacterTransformFromCharacter(_Revenant, _Target, 0, 1, 0, 0, _ReplaceSkills, 0, 0);
 CharacterTransformAppearanceTo(_Revenant, _Target, 0, 1);
 
 //CharacterCloneSkillsTo(_Target, _Revenant, 0);
@@ -191,9 +182,9 @@ SetFaction(_Revenant, "Good NPC");
 SetRelationIndivFactionToPlayers(_Revenant, 100);
 
 CharacterSetHitpointsPercentage(_Revenant, 100.0);
-
 DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration);
-TeleportToPosition(_Revenant, _tx, _ty, _tz, "LLWEAPONEX_Events_Revenant_SetAttached", 0, 1);
+
+LeaderLib_Helper_SafeTeleport(_Revenant, _Target, "LLWEAPONEX_Events_Revenant_SetAttached", 8.0);
 
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
@@ -201,7 +192,9 @@ AND
 DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration)
 THEN
 CharacterSetCustomName(_Revenant, _RevenantName);
+LeaderLib_Helper_CopyAbilities(_Revenant, _Target);
 LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
+CharacterCloneSkillsTo(_Target, _Revenant, 1);
 
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")

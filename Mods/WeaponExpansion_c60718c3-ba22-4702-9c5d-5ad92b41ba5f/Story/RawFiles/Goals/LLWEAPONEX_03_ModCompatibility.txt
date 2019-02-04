@@ -32,6 +32,7 @@ DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_T
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_CopyLastSkill");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Grimoire_DeathAura");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Prepare_BalrinsAxe");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
 

@@ -1678,12 +1678,15 @@ LeaderLib_Helper_CopyEquipment(_Grimoire, _Character, 1);
 LeaderLib_Helper_CopyStats(_Grimoire, _Character, 1, 1, 1, 1);
 LeaderLib_Helper_CopyFaction(_Grimoire, _Character);
 SetVarObject(_Grimoire, "LLWEAPONEX_Grimoire_Owner", _Character);
-TeleportToPosition(_Grimoire, _x, _ty, _z, "", 0, 1);
+TeleportToPosition(_Grimoire, _x, _ty, _z, "", 0, 0);
 CharacterMoveToPosition(_Grimoire, _x, _ty, _z, 1, "");
 
 PROC
 LeaderLib_Helper_OnCopyEquipmentFinished((CHARACTERGUID)_Grimoire, (CHARACTERGUID)_Character)
+AND
+DB_LLWEAPONEX_Grimoire_MimicSkill(_Character, _Grimoire, _Skill, _Target)
 THEN
+ProcObjectTimerCancel(_Grimoire, "LLWEAPONEX_Timers_CastGrimoireMimicSkill");
 ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_CastGrimoireMimicSkill", 50);
 
 PROC
