@@ -415,13 +415,13 @@ IF
 ItemEquipped(_Item, _Player)
 AND
 DB_IsPlayer(_Player)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 THEN
 LLWEAPONEX_WeaponMastery_Internal_OnItemEquipped(_Player, _Item);
 
 PROC
 LLWEAPONEX_WeaponMastery_Internal_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
-AND
-NOT LLWEAPONEX_QRY_IgnoreWeapon(_Item)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND

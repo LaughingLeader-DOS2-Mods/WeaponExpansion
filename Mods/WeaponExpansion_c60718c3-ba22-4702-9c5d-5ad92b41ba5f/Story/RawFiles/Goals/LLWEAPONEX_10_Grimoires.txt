@@ -151,7 +151,9 @@ ItemEquipped(_Item, _Character)
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 AND
-IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Character)
 THEN
 ObjectSetFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
 LLWEAPONEX_Grimoire_OnGrimoireEquipped(_Character, _Item);

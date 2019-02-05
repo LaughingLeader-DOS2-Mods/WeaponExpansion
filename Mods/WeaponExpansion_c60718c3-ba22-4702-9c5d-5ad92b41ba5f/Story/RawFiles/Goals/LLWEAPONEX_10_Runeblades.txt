@@ -353,13 +353,15 @@ RemoveStatus(_Character, _Status);
 */
 
 IF
-ItemEquipped(_Runeblade, _Character)
+ItemEquipped(_Item, _Character)
 AND
-IsTagged(_Runeblade, "LLWEAPONEX_Runeblade", 1)
+IsTagged(_Item, "LLWEAPONEX_Runeblade", 1)
 AND
-IsTagged(_Runeblade, "LLMIME_MIMICKED_WEAPON", 0)
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Character)
 THEN
-LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Character, _Runeblade);
+LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Character, _Item);
 
 //Mainhand
 PROC

@@ -66,11 +66,15 @@ InventoryLaunchTagIterator(_Player, "LLWEAPONEX_Quiver_TemporaryArrow", "", "LLW
 
 //REGION EQUIPPED_EVENT
 IF
-ItemEquipped(_Quiver, _Player)
+ItemEquipped(_Item, _Character)
 AND
-IsTagged(_Quiver, "LLWEAPONEX_Quiver", 1)
+IsTagged(_Item, "LLWEAPONEX_Quiver", 1)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Character)
 THEN
-LLWEAPONEX_Quivers_OnQuiverEquipped(_Player, _Quiver);
+LLWEAPONEX_Quivers_OnQuiverEquipped(_Character, _Item);
 
 PROC
 LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Quiver)

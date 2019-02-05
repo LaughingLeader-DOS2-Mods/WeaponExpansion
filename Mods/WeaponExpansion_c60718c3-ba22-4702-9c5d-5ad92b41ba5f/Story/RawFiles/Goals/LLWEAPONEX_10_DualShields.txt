@@ -124,6 +124,8 @@ ItemEquipped(_Shield, _Player)
 AND
 IsTagged(_Shield, "LLWEAPONEX_DualShields", 1)
 AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Shield)
+AND
 ObjectGetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", _GeneratedShield)
 THEN
 LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);

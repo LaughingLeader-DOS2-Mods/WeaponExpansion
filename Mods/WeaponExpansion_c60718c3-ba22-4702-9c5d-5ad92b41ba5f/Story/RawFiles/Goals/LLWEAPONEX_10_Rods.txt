@@ -141,7 +141,9 @@ CanUseItem(_Character, _Item, _)
 AND
 IsTagged(_Item, "LLWEAPONEX_Rod", 1)
 AND
-IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Character)
 AND
 NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
 THEN
@@ -207,8 +209,6 @@ LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
 IF
 ItemEquipped(_Item, _Character)
 AND
-IsTagged(_Item, "LLMIME_MIMICKED_WEAPON", 0)
-AND
 DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Character, _Rod, _MainhandSkill)
 AND
 CharacterGetEquippedItem(_Character, "Weapon", _Item)
@@ -240,13 +240,15 @@ SetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
 SetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
 
 IF
-ItemEquipped(_Rod, _Character)
+ItemEquipped(_Item, _Character)
 AND
-IsTagged(_Rod, "LLMIME_MIMICKED_WEAPON", 0)
+IsTagged(_Item, "LLWEAPONEX_Rod", 1)
 AND
-IsTagged(_Rod, "LLWEAPONEX_Rod", 1)
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Character)
 THEN
-LeaderLib_Timers_StartCharacterItemTimer(_Character, _Rod, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
+LeaderLib_Timers_StartCharacterItemTimer(_Character, _Item, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
 
 PROC
 LLWEAPONEX_Rods_AdjustRodSkill((CHARACTERGUID)_Character, (ITEMGUID)_Rod)

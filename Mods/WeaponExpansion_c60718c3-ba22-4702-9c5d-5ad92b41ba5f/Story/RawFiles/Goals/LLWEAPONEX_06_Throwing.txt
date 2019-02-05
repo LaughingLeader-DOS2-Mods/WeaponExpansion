@@ -920,6 +920,8 @@ IF
 //ItemTemplateEquipped("WPN_UNIQUE_LLWEAPON_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
 CharacterStatusAttempt(_Player, "LLWEAPONEX_BALRINAXE_INFO", _)
 AND
+ObjectGetFlag(_Player, "Mimicry_IsMimicking", 0)
+AND
 CharacterHasSkill(_Player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe", 0)
 THEN
 CharacterAddSkill(_Player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe", 1);
