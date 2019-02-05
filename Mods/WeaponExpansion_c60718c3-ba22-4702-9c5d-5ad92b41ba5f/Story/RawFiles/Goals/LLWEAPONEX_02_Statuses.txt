@@ -149,6 +149,25 @@ AND
 GetPosition(_Target, _x, _y, _z)
 AND
 TemporaryCharacterCreateAtPosition(_x, _y, _z, _Template, 0, _Revenant)
+THEN
+LLWEAPONEX_Statuses_Internal_SetupRevenant(_Revenant, _Target, _Source, _NameSuffix, _Status, _Duration, _CopyEquipment);
+
+PROC
+LLWEAPONEX_Statuses_CreateRevenantSummon((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_NameSuffix, (STRING)_Status, (REAL)_Duration, (INTEGER)_CopyEquipment)
+THEN
+DB_LLWEAPONEX_Statuses_Temp_SetupRevenantSummon(_Target, _Source, _NameSuffix, _Status, _Duration, _CopyEquipment);
+ApplyStatus(_Target, "LLWEAPONEX_SUMMON_REVENANT_EXPLODE", 0.0, 1, _Target);
+
+IF
+CharacterStatusApplied(_Revenant, "SUMMONING", (CHARACTERGUID)_Target)
+AND
+DB_LLWEAPONEX_Statuses_Temp_SetupRevenantSummon(_Target, _Source, _NameSuffix, _Status, _Duration, _CopyEquipment)
+THEN
+NOT DB_LLWEAPONEX_Statuses_Temp_SetupRevenantSummon(_Target, _Source, _NameSuffix, _Status, _Duration, _CopyEquipment);
+LLWEAPONEX_Statuses_Internal_SetupRevenant(_Revenant, _Target, _Source, _NameSuffix, _Status, _Duration, _CopyEquipment);
+
+PROC
+LLWEAPONEX_Statuses_Internal_SetupRevenant((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_NameSuffix, (STRING)_Status, (REAL)_Duration, (INTEGER)_CopyEquipment)
 AND
 CharacterGetLevel(_Target, _Level)
 AND
@@ -296,6 +315,62 @@ NOT DB_LLWEAPONEX_Statuses_Temp_Revenants(_Enemy, _Revenant, _Source, _Status);
 RemoveTemporaryCharacter(_Revenant);
 //END_REGION
 
+//REGION REVENANTS_TORMENT
+PROC
+LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
+AND
+DB_IsPlayer(_Target)
+THEN
+DB_LLWEAPONEX_Skills_Temp_AttachedRevanents(_Revenant, _Target);
+CharacterAddToPlayerCharacter(_Revenant, _Target);
+LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
+
+PROC
+LLWEAPONEX_Statuses_OnRevenantDied((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
+THEN
+LLWEAPONEX_Statuses_RemoveRevenant(_Revenant);
+
+PROC
+LLWEAPONEX_Statuses_RemoveRevenant((CHARACTERGUID)_Revenant)
+AND
+DB_LLWEAPONEX_Skills_Temp_AttachedRevanents(_Revenant, _Target)
+THEN
+NOT DB_LLWEAPONEX_Skills_Temp_AttachedRevanents(_Revenant, _Target);
+//END_REGION
+
+//REGION REVENANTS_SAVE_WORKAROUND
+/* Revenant Save Bug 2/4/2019
+When a save with an attached revenant is loaded, that revenant no longer remains attached, despite still being a "player".
+Not sure why this is happeneing, but unattaching them and re-attaching after the game is started works.
+*/
+
+//Old saves
+IF
+SavegameLoading(_,_,_,_)
+AND
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_Target, _Revenant, _Source, "LLWEAPONEX_TORMENTED_GHOST")
+AND
+NOT DB_LLWEAPONEX_Skills_Temp_AttachedRevanents(_Revenant, _Target)
+THEN
+DB_LLWEAPONEX_Skills_Temp_AttachedRevanents(_Revenant, _Target);
+
+IF
+SavegameLoading(_,_,_,_)
+AND
+DB_LLWEAPONEX_Skills_Temp_AttachedRevanents(_Revenant, _Target)
+THEN
+DB_LLWEAPONEX_Statuses_Temp_ReattachRevenant(_Revenant, _Target);
+CharacterRemoveFromPlayerCharacter(_Revenant, _Target);
+
+IF
+GameStarted(_,_)
+AND
+DB_LLWEAPONEX_Statuses_Temp_ReattachRevenant(_Revenant, _Target)
+THEN
+NOT DB_LLWEAPONEX_Statuses_Temp_ReattachRevenant(_Revenant, _Target);
+CharacterAddToPlayerCharacter(_Revenant, _Target);
+//END_REGION
+
 //REGION BEAMS
 IF
 CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_CONTAMINATION_CHECK", (CHARACTERGUID)_AuraCharacter)
@@ -374,20 +449,6 @@ CharacterStatusText(_Target, "LLWEAPONEX_Status_Torment_Applied");
 
 //END_REGION
 
-//REGION REVENANTS_TORMENT
-PROC
-LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
-AND
-DB_IsPlayer(_Target)
-THEN
-CharacterAddToPlayerCharacter(_Revenant, _Target);
-LeaderLib_Helper_CopyEquipment(_Revenant, _Target);
-
-PROC
-LLWEAPONEX_Statuses_OnRevenantDied((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
-THEN
-LLWEAPONEX_Statuses_RemoveRevenant(_Revenant);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
