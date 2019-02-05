@@ -312,7 +312,7 @@ CharacterGetRace(_Player, 1, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 THEN
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _BaseRaceTag);
 
 PROC
 LLWEAPONEX_WeaponMastery_Internal_AddSkillType((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, "Tag")
@@ -573,7 +573,7 @@ DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _
 THEN
 CharacterRemoveSkill(_Player, _Skill);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _BaseRaceTag);
 
 IF
 ObjectTransformed(_Player, _Template)
@@ -586,11 +586,13 @@ GetTemplate(_Player, _RaceTemplate)
 AND
 DB_LeaderLib_RaceTemplates(_RaceTag, _IsUndead, _IsFemale, _RaceTemplate)
 AND
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
+AND
 DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
 THEN
 CharacterRemoveSkill(_Player, _Skill);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _BaseRaceTag);
 
 IF
 CharacterStoppedPolymorph(_Player)
@@ -605,7 +607,7 @@ DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _
 THEN
 CharacterRemoveSkill(_Player, _Skill);
 NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _RaceTag);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _BaseRaceTag);
 
 QRY
 LLWEAPONEX_QRY_HasRacialSkills((CHARACTERGUID)_Player)

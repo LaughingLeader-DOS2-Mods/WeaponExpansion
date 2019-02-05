@@ -308,8 +308,23 @@ add name "Greatbow",""
 new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3"
 add name "Artisan Greatbow",""
 
-new namegroup "WPN_LLWEAPONEX_DualShields_Common"
-add name "Dual Shields",""
+new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3"
+add name "Artisan Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Dwarves_A"
+add name "Dwarven Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Dwarves_B"
+add name "Exquisite Dwarven Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Elves_B"
+add name "Elven Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Humans_B"
+add name "Common Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Lizards_B"
+add name "Greatbow of the Empire",""
 
 new namegroup "WPN_LLWEAPONEX_DualShields_Uncommon_1"
 add name "Ancient Dual Shields",""
