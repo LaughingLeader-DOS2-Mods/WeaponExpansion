@@ -80,25 +80,25 @@ ClearTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
 ClearVarObject(_Character, "LLWEAPONEX_DeathAura_Source");
 
 IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_TORMENT_CLAIMSOUL", _)
+CharacterStatusRemoved(_Target, "LLWEAPONEX_TORMENT_CLAIMSOUL", _)
 AND
-DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character)
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Source, _Character);
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target);
 
 IF
-CharacterDied(_Ghost)
+CharacterStatusRemoved(_DeadCharacter, "RESURRECTED", _)
 AND
-DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character)
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character);
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target);
 
 IF
-CharacterStatusAttempt(_Character, "LLWEAPONEX_TORMENT_CLAIMSOUL", (CHARACTERGUID)_Ghost)
+CharacterStatusAttempt(_Target, "LLWEAPONEX_TORMENT_CLAIMSOUL", (CHARACTERGUID)_Ghost)
 AND
-CharacterIsPlayer(_Ghost, 1)
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_DeadCharacter, _Ghost, _Source, "LLWEAPONEX_TORMENTED_GHOST")
 THEN
-DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character);
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target);
 //END_REGION
 
 //REGION DEATH_EVENTS
@@ -133,12 +133,12 @@ THEN
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
 
 IF
-CharacterPrecogDying(_Character)
+CharacterPrecogDying(_Target)
 AND
-DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character)
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _Character);
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Ghost, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target);
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_DeadCharacter, _Target, "LLWEAPONEX_TORMENT_CLAIMSOUL");
 
 IF
 DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status)
@@ -195,11 +195,11 @@ NOT DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target);
 IF
 CharacterDied(_Character)
 AND
-DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Ghost, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL")
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_DeadCharacter, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL")
 AND
-DB_LLWEAPONEX_Statuses_Temp_Revenants(_DeadCharacter, _Ghost, _Source, "LLWEAPONEX_TORMENTED_GHOST")
+CharacterIsDead(_DeadCharacter, 1)
 THEN
-NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Ghost, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
+NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_DeadCharacter, _Character, "LLWEAPONEX_TORMENT_CLAIMSOUL");
 CharacterResurrect(_DeadCharacter);
 
 IF

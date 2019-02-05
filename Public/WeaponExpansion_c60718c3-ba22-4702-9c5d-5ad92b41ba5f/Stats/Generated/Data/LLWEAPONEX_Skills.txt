@@ -799,6 +799,7 @@ data "CastEffect" "RS3_FX_Skills_Soul_Cast_Beam_Soul_Hand_02:Dummy_CastFX:cast;R
 data "TargetEffect" "RS3_FX_Skills_Soul_Cast_Beam_Soul_Hand_02,FaceSource:Dummy_BodyFX:cast;RS3_FX_Skills_Soul_Cast_Beam_Soul_Root_02,FaceSource"
 data "TargetGroundEffect" "RS3_FX_Skills_Soul_Cast_Beam_Soul_Hand_02,FaceSource:Dummy_BodyFX:cast;RS3_FX_Skills_Soul_Cast_Beam_Soul_Root_02,FaceSource"
 data "CycleConditions" "Character;!Dead"
+data "IgnoreSilence" "Yes"
 
 new entry "MultiStrike_LLWEAPONEX_Torment_Haunt"
 type "SkillData"
@@ -843,3 +844,4 @@ data "Magic Cost" "0"
 data "OverrideMinAP" "Yes"
 data "CycleConditions" "Enemy"
 data "IgnoreVisionBlock" "Yes"
+data "IgnoreSilence" "Yes"
