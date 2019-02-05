@@ -301,6 +301,36 @@ ApplyStatus(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-
 */
 //END_REGION
 
+//REGION SALE_EFFECT
+IF
+DialogStarted("LLWEAPONEX_VendingMachine_A", _)
+AND
+ObjectGetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_SaleActive", 1)
+AND
+ObjectGetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0)
+THEN
+PlayEffect(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_Words_Sale_01", "Dummy_OverheadFX");
+ObjectSetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0);
+
+PROC
+LLWEAPONEX_VendingMachine_OnSaleEnded((CHARACTERGUID)_VendingMachine)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:TradeGenerationEnded] Sale ended.");
+LLWEAPONEX_VendingMachine_ResetSaleAttitude();
+DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "");
+ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0);
+ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0);
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 32)
+AND
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime)
+THEN
+DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "");
+//END_REGION
+
 //REGION SALES
 IF
 TradeGenerationEnded(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a)
@@ -335,10 +365,11 @@ THEN
 NOT DB_LeaderLib_Random(_ActiveTimeRan);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:TradeGenerationEnded] The vending machine started a sale for [",_ActiveTimeStr,"] generation events. Cooldown: [",_CooldownTimeStr,"]");
 DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", " You see a sign that reads: 'Limited time sale now active!'");
+ObjectSetFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0);
 DB_LLWEAPONEX_VendingMachine_SaleCooldown(_ActiveTime, _CooldownTime);
 DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1);
-ProcObjectTimer(_VendingMachine, "LLWEAPONEX_Timers_VendingMachine_SaleStarted", 1000);
 DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(1);
+ProcObjectTimer(_VendingMachine, "LLWEAPONEX_Timers_VendingMachine_SaleStarted", 1000);
 
 IF
 DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1)
@@ -353,7 +384,6 @@ AND
 DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1)
 THEN
 NOT DB_LLWEAPONEX_VendingMachine_Temp_SaleStarted(1);
-PlayEffect(_VendingMachine, "LLWEAPONEX_FX_VendingMachine_Words_Sale_01", "Dummy_OverheadFX");
 
 //Sale countdown
 PROC
@@ -397,9 +427,8 @@ _ActiveTime == 0
 THEN
 NOT DB_LLWEAPONEX_VendingMachine_SaleCooldown(_ActiveTime, _CooldownTime);
 DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime);
-LLWEAPONEX_VendingMachine_ResetSaleAttitude();
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:TradeGenerationEnded] Sale ended.");
 DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(1);
+LLWEAPONEX_VendingMachine_OnSaleEnded(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 
 PROC
 LLWEAPONEX_VendingMachine_OnTradeGenerationEnded((CHARACTERGUID)_VendingMachine)
