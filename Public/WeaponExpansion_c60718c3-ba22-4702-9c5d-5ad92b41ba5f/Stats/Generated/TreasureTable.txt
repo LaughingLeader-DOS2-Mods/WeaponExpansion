@@ -45,7 +45,7 @@ new subtable "1,1"
 object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsNormal"
-new subtable "4,1"
+new subtable "1,1"
 object category "I_WPN_LLWEAPONEX_Throwing_Rock",10,0,0,0,0,0,0,0
 object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",3,0,0,0,0,0,0,0
 object category "I_WPN_LLWEAPONEX_Throwing_Dagger",4,0,0,0,0,0,0,0

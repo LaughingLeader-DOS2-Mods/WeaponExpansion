@@ -495,6 +495,12 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
 ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_MasteryDeactivated");
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_MasteryDeactivated", 250);
+LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped(_Player, _Item, _WeaponType);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_WeaponType)
+THEN
+DB_NOOP(1);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)

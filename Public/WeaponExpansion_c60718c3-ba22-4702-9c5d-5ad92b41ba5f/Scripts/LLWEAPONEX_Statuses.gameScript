@@ -173,8 +173,9 @@ IF "(c1&c2)|!c1"
 THEN
 	Set(_Source, _Target)
 ENDIF
-IF "!c1"
+IF "!c1|c2"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Turns)
+	IsEqual(_Turns, null)
 THEN
 	Set(_Turns, 1)
 ELSE
@@ -202,8 +203,9 @@ IF "(c1&c2)|!c1"
 THEN
 	Set(_Source, _Target)
 ENDIF
-IF "!c1"
+IF "!c1|c2"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Turns)
+	IsEqual(_Turns, null)
 THEN
 	Set(_Turns, 1)
 ELSE
@@ -231,8 +233,9 @@ IF "(c1&c2)|!c1"
 THEN
 	Set(_Source, _Target)
 ENDIF
-IF "!c1"
+IF "!c1|c2"
 	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Turns)
+	IsEqual(_Turns, null)
 THEN
 	Set(_Turns, 1)
 ELSE

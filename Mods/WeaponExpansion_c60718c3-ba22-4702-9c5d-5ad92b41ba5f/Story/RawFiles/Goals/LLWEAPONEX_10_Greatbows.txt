@@ -29,44 +29,102 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", "Undead_Lizard", 0,  "LLWEAPONEX_FX_
 */
 
 SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
-//DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 500);
-//DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 400);
-DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 600);
-DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Male", "Dummy_R_Hand", 600);
-DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 825);
-DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 825);
-DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 580);
-DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0,  "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
+//DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 500);
+//DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 400);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Male", "Dummy_R_Hand", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 580);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
+
+//Omnibolt Greatbow
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_LightningPrepare_Elf_Female", "Dummy_R_Hand", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Elf_Male", "Dummy_R_Hand", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Human_Female", "Dummy_R_Hand", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Human_Male", "Dummy_R_Hand", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Lizard_Female", "LowerArm_R_Twist_Bone", 580);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
+
+/*
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 825);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 580);
+DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Hand_01", "Dummy_R_HandFX", 600);
+*/
+
+//Omnibolt
+DB_LLWEAPONEX_Greatbows_TemplateToID("WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", "Lightning");
+//END_REGION
+
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 33)
+THEN
+LLWEAPONEX_Greatbows_InitSettings();
+//END_REGION
+
+//REGION EQUIPPED_DB
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow")
+AND
+GetTemplate(_Item, _Template)
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
 //END_REGION
 
 //REGION GREATBOW_START_ATTACK
 IF
-CharacterStartAttackObject(_, _, _Character)
-AND
-CharacterGetEquippedWeapon(_Character, _Greatbow)
-AND
-IsTagged(_Greatbow, "LLWEAPONEX_Greatbow", 1)
-THEN
-LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
-
-IF
-CharacterStartAttackPosition(_, _, _, _, _Character)
-AND
-CharacterGetEquippedWeapon(_Character, _Greatbow)
-AND
-IsTagged(_Greatbow, "LLWEAPONEX_Greatbow", 1)
-THEN
-LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
-
-IF
 CharacterUsedSkill(_Character, "Projectile_LLMIME_MimicGreatBowAttack", _, _)
 THEN
-LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character);
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, "Default");
+
+/*
+PROC
+LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Character, (STRING)_Template)
+AND
+DB_LLWEAPONEX_Greatbows_TemplateToID(_Template, "Lightning")
+THEN
+//LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, _ID);
+PROC_StopLoopBeamEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
+PROC_LoopBeamEffect("LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Beam_01", _Character, _Character, "Dummy_R_Hand", "Dummy_ProjectileFX", "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__");
+*/
 
 PROC
-LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character)
+LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Character, (STRING)_Template)
+AND
+DB_LLWEAPONEX_Greatbows_TemplateToID(_Template, _ID)
+THEN
+//LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Greatbows:StartPlayingPreparationEffect] Playing prepare effect with ID [",_ID,"] from template [",_Template,"].");
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, _ID);
+
+PROC
+LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Character, (STRING)_Template)
+AND
+NOT DB_LLWEAPONEX_Greatbows_TemplateToID(_Template, _)
+THEN
+//LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Greatbows:StartPlayingPreparationEffect] No ID found for template [",_Template,"]. Using default.");
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, "Default");
+
+PROC
+LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character, (STRING)_ID)
 AND
 NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 AND
@@ -76,7 +134,7 @@ CharacterGetRace(_Character, 1, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _IsFemale, _EffectName, _BoneName, _Duration)
+DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _BoneName, _Duration)
 THEN
 //Play the loop FX with behavior scripting so we can destroy the effect immediately
 //LeaderLog_Log("TRACE", "[LLWEAPONEX:Greatbows:PlayPreparationEffect] Playing arrow FX on attacking character. [",_EffectName,":",_BoneName,"]");
@@ -86,7 +144,7 @@ ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration
 
 //NPCs
 PROC
-LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character)
+LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character, (STRING)_ID)
 AND
 NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 AND
@@ -98,7 +156,7 @@ DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 IsTagged(_Character, _RaceTag, 1)
 AND
-DB_LLWEAPONEX_Greatbows_PrepareFX(_RaceTag, _IsFemale, _EffectName, _BoneName, _Duration)
+DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _BoneName, _Duration)
 AND
 NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 THEN
@@ -115,7 +173,87 @@ THEN
 PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
 //END_REGION
 
+//REGION BONUS_EFFECTS
+PROC
+LLWEAPONEX_Greatbows_OnAttack((CHARACTERGUID)_Character, (STRING)_Template, (GUIDSTRING)_Target)
+THEN
+DB_NOOP(1);
 
+/*
+PROC
+LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Character, (STRING)_Template, (REAL)_x, (REAL)_y, (REAL)_z)
+THEN
+DB_NOOP(1);
+*/
+
+/*
+PROC
+LLWEAPONEX_Greatbows_OnAttack((CHARACTERGUID)_Character, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (GUIDSTRING)_Target)
+AND
+LeaderLib_Roll_QRY(450, 999)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE", 0.0, 0, _Character);
+*/
+
+
+QRY
+LLWEAPONEX_Greatbows_QRY_GetAttackDelay((CHARACTERGUID)_Character, (STRING)_ID)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _)
+AND
+IsTagged(_Character, "FEMALE", _IsFemale)
+AND
+CharacterGetRace(_Character, 1, _Race)
+AND
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
+AND
+DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _BoneName, _AttackDelay)
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay);
+
+QRY
+LLWEAPONEX_Greatbows_QRY_GetAttackDelay((CHARACTERGUID)_Character, (STRING)_ID)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _)
+AND
+IsTagged(_Character, "FEMALE", _IsFemale)
+AND
+NOT CharacterGetRace(_Character, 1, _)
+AND
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
+AND
+IsTagged(_Character, _RaceTag, 1)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _)
+AND
+DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _BoneName, _AttackDelay)
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay);
+
+PROC
+LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Character, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+LeaderLib_Roll_QRY(300, 999)
+AND
+GetDistanceToPosition(_Character, _x, _y, _z, _Dist)
+AND
+RealProduct(_Dist, 85.0, _DelayR)
+AND
+Integer(_DelayR, _DelayInt)
+AND
+LLWEAPONEX_Greatbows_QRY_GetAttackDelay(_Character, "Lightning")
+AND
+DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay)
+AND
+IntegerSum(_DelayInt, _AttackDelay, _Delay)
+AND
+IntegerMax(_Delay, 1300, _DelayClamped)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay);
+//LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_10_Greatbows:OnAttackAtPosition] Shooting lightning bolt at position after [", _DelayClamped, "] ms.");
+SetVarFloat3(_Character, "LLWEAPONEX_Greatbow_LightningStrikePosition", _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Character, _DelayClamped, "LLWEAPONEX_Timers_Greatbow_Greatbow_ExplodeLightningStrikeAtPosition", "LLWEAPONEX_Greatbow_ExplodeLightningStrikeAtPosition");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

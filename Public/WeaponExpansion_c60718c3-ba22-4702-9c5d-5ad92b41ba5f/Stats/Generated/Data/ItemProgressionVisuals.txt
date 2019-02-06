@@ -1437,11 +1437,23 @@ add levelgroup 0,0,"All"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
 add namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Humans_B","",""
 
+new itemgroup "WPN_LLWEAPONEX_CraftedGreatbow_Lizards_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23",""
+add namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Lizards_A","",""
+
 new itemgroup "WPN_LLWEAPONEX_CraftedGreatbow_Lizards_B"
 
 add levelgroup 0,0,"All"
 add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23",""
 add namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Lizards_B","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A","",""
 
 new itemgroup "WPN_LLWEAPONEX_GreatbowPreview"
 
