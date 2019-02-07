@@ -29,8 +29,8 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", "Undead_Lizard", 0,  "LLWEAPONEX_FX_
 */
 
 SysClear("DB_LLWEAPONEX_Greatbows_PrepareFX", 5);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 425);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 425);
 //DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Female", "Dummy_R_Hand", 500);
 //DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Human_Male", "Dummy_R_Hand", 400);
 DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Elf_Female", "Dummy_R_Hand", 600);
@@ -41,9 +41,9 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 1, "Default", "LLWEAPONEX_FX_Project
 DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0, "Default", "LLWEAPONEX_FX_Projectiles_Greatbow_Arrow_Prepare_Lizard_Male", "LowerArm_R_Twist_Bone", 600);
 
 //Omnibolt Greatbow
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 500);
-DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 500);
-DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_LightningPrepare_Elf_Female", "Dummy_R_Hand", 600);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Dwarf_Female", "LowerArm_R_Twist_Bone", 425);
+DB_LLWEAPONEX_Greatbows_PrepareFX("DWARF", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Dwarf_Male", "LowerArm_R_Twist_Bone", 425);
+DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Elf_Female", "Dummy_R_Hand", 600);
 DB_LLWEAPONEX_Greatbows_PrepareFX("ELF", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Elf_Male", "Dummy_R_Hand", 600);
 DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 1, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Human_Female", "Dummy_R_Hand", 825);
 DB_LLWEAPONEX_Greatbows_PrepareFX("HUMAN", 0, "Lightning", "LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Prepare_Human_Male", "Dummy_R_Hand", 825);

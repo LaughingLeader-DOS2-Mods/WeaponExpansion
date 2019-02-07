@@ -396,11 +396,13 @@ data "Projectile" "55e693ba-58ab-4f6a-b023-766228655c85"
 data "ItemColor" ""
 data "Unique" "1"
 data "ExtraProperties" "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE,30,0"
+data "StrengthBoost" "1"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_B"
 type "Weapon"
 using "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
 data "Requirements" "Intelligence 12"
+data "IntelligenceBoost" "1"
 
 new entry "WPN_LLWEAPONEX_GreatbowPreview"
 type "Weapon"

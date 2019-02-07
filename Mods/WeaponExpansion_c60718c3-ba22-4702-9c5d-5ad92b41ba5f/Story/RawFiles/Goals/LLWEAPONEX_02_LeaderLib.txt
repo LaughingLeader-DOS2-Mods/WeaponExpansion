@@ -83,6 +83,15 @@ LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLW
 LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_CombatShield");
 
 //Unique Weapon Deltamods
+//Greatbows
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Greatbow.Lightning", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 2, "Boost_Weapon_Ability_AirSpecialist_Wand", "ID", "WeaponExpansion.Greatbow.Lightning");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 4, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge", "ID", "WeaponExpansion.Greatbow.Lightning");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 6, "Boost_Weapon_Secondary_Dodge_TwoHanded", "ID", "WeaponExpansion.Greatbow.Lightning");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 10, "Boost_Weapon_Damage_Air_Medium_Bow", "ID", "WeaponExpansion.Greatbow.Lightning");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 12, "Boost_Weapon_Secondary_CriticalChance_TwoHanded", "ID", "WeaponExpansion.Greatbow.Lightning");
+LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 14, "Boost_Weapon_Status_Set_Muted", "ID", "WeaponExpansion.Greatbow.Lightning");
+
 //Rapiers
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_d82bc239-4782-484c-88ab-e1fa571c9f6a");
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa");
