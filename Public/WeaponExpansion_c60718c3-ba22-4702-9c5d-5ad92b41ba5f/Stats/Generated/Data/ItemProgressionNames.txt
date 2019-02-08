@@ -532,6 +532,9 @@ add name "Balrin's Throwing Axe (Oil)",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water"
 add name "Balrin's Throwing Axe (Ice)",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A"
+add name "Beholder",""
+
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""
 add namecool "Mighty Dragonslayer Mail",""
