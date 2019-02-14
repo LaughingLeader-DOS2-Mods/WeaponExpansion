@@ -352,16 +352,12 @@ NOT DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _StoredRun
 RemoveStatus(_Character, _Status);
 */
 
-IF
-ItemEquipped(_Item, _Character)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
 IsTagged(_Item, "LLWEAPONEX_Runeblade", 1)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Character)
 THEN
-LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Character, _Item);
+LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Player, _Item);
 
 //Mainhand
 PROC

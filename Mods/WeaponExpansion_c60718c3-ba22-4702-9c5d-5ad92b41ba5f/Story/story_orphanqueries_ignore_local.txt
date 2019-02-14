@@ -6,3 +6,4 @@ DB_LLBARTER_DialogBlacklist 2
 DB_LLWEAPONEX_Debug_TimeAtmospheres 4
 DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill 3
 DB_LeaderLib_BlockedSkill 1
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables 5

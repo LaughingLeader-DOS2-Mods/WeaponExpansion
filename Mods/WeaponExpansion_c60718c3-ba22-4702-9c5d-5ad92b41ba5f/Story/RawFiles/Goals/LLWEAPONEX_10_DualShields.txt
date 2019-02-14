@@ -119,16 +119,14 @@ LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.Combat
 //ItemSetOnlyOwnerCanUse(_CombatShield, 1);
 LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
 
-IF
-ItemEquipped(_Shield, _Player)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
-IsTagged(_Shield, "LLWEAPONEX_DualShields", 1)
+IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Shield)
-AND
-ObjectGetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", _GeneratedShield)
+ObjectGetFlag(_Item, "LLWEAPONEX_DualShields_GeneratedCombatShield", _GeneratedShield)
 THEN
-LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);
+LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Item, _GeneratedShield);
 
 PROC
 LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 1)
@@ -278,34 +276,34 @@ LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield(_Shield);
 //END_REGION
 
 //REGION UNEQUIPPED
-IF
-ItemUnEquipped(_Shield, _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
-IsTagged(_Shield, "LLWEAPONEX_DualShields", 1)
+IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
-NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _)
+NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Item, _)
 AND
-GetVarObject(_Shield, "LLWEAPONEX_CombatShield", (ITEMGUID)_CombatShield)
+CharacterGetEquippedItem(_Player, "Weapon", _CombatShield)
 AND
-CharacterGetEquippedWeapon(_Player, _CombatShield)
+GetVarObject(_Item, "LLWEAPONEX_CombatShield", (ITEMGUID)_CombatShield)
 THEN
-DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield);
-ItemToInventory(_CombatShield, _Shield);
+DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Item, _CombatShield);
+ItemToInventory(_CombatShield, _Item);
 
-IF
-ItemUnEquipped(_CombatShield, _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
-IsTagged(_CombatShield, "LLWEAPONEX_CombatShield", 1)
+IsTagged(_Item, "LLWEAPONEX_CombatShield", 1)
 AND
-NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _, _CombatShield)
+NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _, _Item)
 AND
 CharacterGetEquippedShield(_Player, (ITEMGUID)_Shield)
 AND
 _Shield != NULL_00000000-0000-0000-0000-000000000000
 THEN 
-DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield);
+DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _Item);
 CharacterUnequipItem(_Player, _Shield);
-ItemToInventory(_CombatShield, _Shield);
+ItemToInventory(_Item, _Shield);
 
 IF
 DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield)

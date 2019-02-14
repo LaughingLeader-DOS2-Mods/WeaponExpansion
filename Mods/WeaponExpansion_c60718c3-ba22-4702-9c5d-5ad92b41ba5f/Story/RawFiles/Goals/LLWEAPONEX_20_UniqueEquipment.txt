@@ -4,6 +4,37 @@ INITSECTION
 
 KBSECTION
 
+//REGION BEHOLDER
+IF
+ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616", _Player)
+THEN
+DB_LLWEAPONEX_Unique_BeholderEquipped(_Player);
+
+IF
+CharacterStatusApplied(_Player, "UNSHEATHED", _)
+AND
+DB_LLWEAPONEX_Unique_BeholderEquipped(_Player)
+THEN
+PROC_LoopEffect("LLWEAPONEX_FX_Overlay_Weapon_DarkEnergy_01", _Player, "LLWEAPONEX.FX.BeholderUnsheathed", "__ANY__", "Dummy_Root");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Unsheathed] Playing Beholder unsheathed loop effect on character.");
+
+IF
+CharacterStatusRemoved(_Player, "UNSHEATHED", _)
+AND
+DB_LLWEAPONEX_Unique_BeholderEquipped(_Player)
+THEN
+PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.BeholderUnsheathed");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Sheathed] Stopping Beholder unsheathed loop effect on character.");
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616", _Player)
+AND
+DB_LLWEAPONEX_Unique_BeholderEquipped(_Player)
+THEN
+PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.BeholderUnsheathed");
+NOT DB_LLWEAPONEX_Unique_BeholderEquipped(_Player);
+//END_REGION
+
 //REGION FROSTDYNE_SKILLS
 /*
 IF

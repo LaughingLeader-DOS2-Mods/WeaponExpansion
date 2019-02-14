@@ -4,8 +4,8 @@ INITSECTION
 KBSECTION
 
 //REGION EMPTY_HAND_EVENTS
-IF
-ItemEquipped(_Item, _Player)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
 DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, "LLWEAPONEX_Rapier", "DuelistStance", _)
 AND
@@ -26,9 +26,7 @@ DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Rapier", "DuelistStance
 AND
 HasActiveStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", 0)
 AND
-GetTemplate(_Item, _Template)
-AND
-StringContains(_Template, "WPN", 1)
+LeaderLib_Helper_QRY_HasEmptyWeaponSlot(_Player)
 AND
 LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_Rapier")
 THEN

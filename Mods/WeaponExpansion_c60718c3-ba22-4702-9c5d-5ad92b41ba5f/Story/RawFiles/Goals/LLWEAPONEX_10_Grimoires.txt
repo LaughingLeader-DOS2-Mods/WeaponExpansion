@@ -122,13 +122,13 @@ IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 THEN
 DB_NOOP(1);
 
-IF
-ItemUnEquipped(_Item, _Character)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 THEN
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Character, "LLWEAPONEX_Grimoire");
-LLWEAPONEX_Grimoire_OnGrimoireUnEquipped(_Character, _Item);
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, "LLWEAPONEX_Grimoire");
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped(_Player, _Item);
 
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
@@ -146,18 +146,14 @@ NOT LLWEAPONEX_Grimoire_QRY_GrimoireIsEquipped(_Character)
 THEN
 ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
 
-IF
-ItemEquipped(_Item, _Character)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Character)
 THEN
-ObjectSetFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
-LLWEAPONEX_Grimoire_OnGrimoireEquipped(_Character, _Item);
-LLWEAPONEX_ToggleSettings_OnTagAdded(_Character, "LLWEAPONEX_Grimoire");
+ObjectSetFlag(_Player, "LLWEAPONEX_GrimoireEquipped");
+LLWEAPONEX_Grimoire_OnGrimoireEquipped(_Player, _Item);
+LLWEAPONEX_ToggleSettings_OnTagAdded(_Player, "LLWEAPONEX_Grimoire");
 
 PROC
 LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)

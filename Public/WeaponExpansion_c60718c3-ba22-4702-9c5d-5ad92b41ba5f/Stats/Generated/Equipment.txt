@@ -606,3 +606,7 @@ add equipment entry "WPN_LLWEAPONEX_Runeblade_Display_A"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Rod_Poison"
 
+new equipment "LLWEAPONEX_Origin_Weaponmaster"
+add equipmentgroup
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
+

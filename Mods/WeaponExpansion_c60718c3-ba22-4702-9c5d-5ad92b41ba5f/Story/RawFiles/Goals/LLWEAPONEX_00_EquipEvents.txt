@@ -1,0 +1,57 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+ItemEquipped(_Item, _PLayer)
+AND
+DB_IsPlayer(_PLayer)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+THEN
+LLWEAPONEX_OnItemEquipped(_PLayer, _Item);
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+THEN
+DB_NOOP(1);
+
+IF
+ItemUnEquipped(_Item, _Player)
+AND
+DB_IsPlayer(_PLayer)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+THEN
+LLWEAPONEX_OnItemUnEquipped(_PLayer, _Item);
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+THEN
+DB_NOOP(1);
+
+//REGION PRESET_APPLIED
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+AND
+DB_LeaderLib_EquipmentSlots(_Slot)
+AND
+CharacterGetEquippedItem(_Player, _Slot,  (ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+THEN
+LLWEAPONEX_OnItemEquipped(_Player, _Item);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

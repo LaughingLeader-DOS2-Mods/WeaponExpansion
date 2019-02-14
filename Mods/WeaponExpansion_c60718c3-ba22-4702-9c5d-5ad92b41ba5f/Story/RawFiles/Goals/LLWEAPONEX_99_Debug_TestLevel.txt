@@ -140,8 +140,9 @@ StoryEvent(_, "LeaderLib_Initialized")
 AND
 CharacterGetHostCharacter(_Host)
 THEN
-CharacterSetCustomName(_Host, "Morghul");
+//CharacterSetCustomName(_Host, "Morghul");
 CharacterAddGold(_Host, 9999);
+CharacterAddTalent(_Host, "LoneWolf");
 LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Host);
 
 IF

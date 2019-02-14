@@ -68,6 +68,15 @@ add name "Muramasa, The Cursed Blade",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
 add name "Kagutsuchi",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+add name "Raizan",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+add name "Raizan",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+add name "Raizan",""
+
 new namegroup "WPN_LLWEAPONEX_Rapier_1H"
 add name "Rapier",""
 add name "Estoc",""
@@ -606,6 +615,9 @@ add name "Trusy Nick's Quickdraw Quiver","A handmade quiver, designed for quickl
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
 add name "Ring of the Two Faces",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
+add name "Ring of the Weaponmaster","A ring made to defy the gods."
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
 add name "Demon Hunter's Oath",""

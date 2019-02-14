@@ -3,6 +3,14 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+
+PROC
+LeaderLib_Debug_RegisterDebugPlayer()
+THEN
+DebugBreak("[LLWEAPONEX_99_Debug:LeaderLib_Debug_RegisterDebugPlayer] Adding WeaponMaster to [DB_Origins].");
+SysClear("DB_Origins", 1);
+DB_Origins((CHARACTERGUID)S_Player_LLWEAPONEX_WeaponMaster_Wiegraf_2842603d-a263-4f65-a164-4a2391afe349);
+
 IF
 RegionStarted("TestLevel_LL_WeaponExpansion")
 THEN

@@ -1,2 +1,4 @@
 Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] and destroying [2] and [3].
 Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter
+LLWEAPONEX_Target_Raizan_Flurry_DisplayName	Raijin's Onslaught
+LLWEAPONEX_Target_Raizan_Flurry_Description	Unleash the magic within the Raizan, attacking 5 times with astonishing speed, each hit dealing [1].

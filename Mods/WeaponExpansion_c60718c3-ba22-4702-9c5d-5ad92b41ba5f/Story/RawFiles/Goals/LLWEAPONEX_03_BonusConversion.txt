@@ -158,32 +158,28 @@ DB_LLWEAPONEX_BonusConversion_Temp_CurrentConversionValue(_Player, _Weapon, _Con
 THEN
 NOT DB_LLWEAPONEX_BonusConversion_Temp_CurrentConversionValue(_Player, _Weapon, _ConversionStatus, _ActualBase);
 
-IF
-ItemEquipped(_Weapon, _Player)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
-DB_IsPlayer(_Player)
+IsTagged(_Item, "LLWEAPONEX_BonusConversion_Enabled", 1)
 AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Weapon)
+NOT DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Item, _)
 AND
-IsTagged(_Weapon, "LLWEAPONEX_BonusConversion_Enabled", 1)
-AND
-NOT DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Weapon, _)
-AND
-GetVarInteger(_Weapon, "LLWEAPONEX_BonusConversion_Calculated", 1)
+GetVarInteger(_Item, "LLWEAPONEX_BonusConversion_Calculated", 1)
 AND
 DB_LLWEAPONEX_BonusConversion_WeaponTags(_Tag, _ConversionStatus)
 AND
-IsTagged(_Weapon, _Tag, 1)
+IsTagged(_Item, _Tag, 1)
 THEN
-DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Weapon, _ConversionStatus);
+DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Item, _ConversionStatus);
 
-IF
-ItemEquipped(_Weapon, _Player)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
-DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Weapon, _ConversionStatus)
+DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Item, _ConversionStatus)
 THEN
 //Delay slightly so the Unequip event can run if needed.
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 150, "LLWEAPONEX_Timers_BonusConversion_CalculateBonusDifference_", "LLWEAPONEX_BonusConversion_CalculateBonusDifference");
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Item, 150, "LLWEAPONEX_Timers_BonusConversion_CalculateBonusDifference_", "LLWEAPONEX_BonusConversion_CalculateBonusDifference");
 
 IF
 CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_BonusConversion_CalculateBonusDifference")

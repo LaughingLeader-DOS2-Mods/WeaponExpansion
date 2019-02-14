@@ -1587,6 +1587,12 @@ add levelgroup 0,0,"All"
 add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper","",""
 
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
+
+add levelgroup 0,0,"All"
+add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster","",""
+
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
 
 add levelgroup 0,0,"All"
@@ -1641,4 +1647,22 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A"
 add levelgroup 0,0,"All"
 add rootgroup "1cc2baa1-cd58-40a3-8b53-89ef2e081616",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+
+add levelgroup 0,0,"All"
+add rootgroup "b1320940-1afb-479a-b510-875afdb12d41",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+
+add levelgroup 0,0,"All"
+add rootgroup "e03787b9-acac-4563-953e-a1149a6ebec1",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+
+add levelgroup 0,0,"All"
+add rootgroup "fa2345b0-68f5-443f-8665-d2a5991bbf29",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3","",""
 
