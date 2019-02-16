@@ -402,6 +402,8 @@ CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_F
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Reset", 0);
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt", 0);
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0);
+CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_A_Charge", 0);
+CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_B_Charge", 0);
 
 IF
 TextEventSet("llweap_raizan_recipes")
@@ -423,7 +425,8 @@ CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_F
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Reset", 0);
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt", 0);
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0);
-
+CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_A_Charge", 0);
+CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_B_Charge", 0);
 //REGION STATUSES
 /*
 IF

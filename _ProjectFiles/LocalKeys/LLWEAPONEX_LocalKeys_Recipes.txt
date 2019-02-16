@@ -42,3 +42,5 @@ WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_Fin_1	Raizen (Unleashed - Fines
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Reset_1	Raizen Unleashed (Reset Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt_1	Raizen Unleashed (Intelligence Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin_1	Raizen Unleashed  (Finesse Scaling)
+LOOT_LLWEAPONEX_Orb_Thunder_A_Charge_1	Shiden's Orb (Charged)
+LOOT_LLWEAPONEX_Orb_Thunder_B_Charge_1	Shiden's Orb (Super Charged)
