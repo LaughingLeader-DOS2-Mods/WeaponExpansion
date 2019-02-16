@@ -39,3 +39,7 @@ WPN_LLWEAPONEX_QuiverArrow_SlowDown_A	Slowdown Arrow
 WPN_LLWEAPONEX_QuiverArrow_SmokeScreen_A	Smokescreen Arrow
 WPN_LLWEAPONEX_QuiverArrow_Stunning_A	Stunning Arrow
 WPN_LLWEAPONEX_QuiverArrow_Water_A	Water Arrow
+LOOT_LLWEAPONEX_Token_Strength	Token of Strength
+LOOT_LLWEAPONEX_Token_Intelligence	Token of Intelligence
+LOOT_LLWEAPONEX_Token_Finesse	Token of Finesse
+LOOT_LLWEAPONEX_Token_Reset	Token of Reversal

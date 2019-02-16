@@ -18,12 +18,12 @@ ObjectCategories_LLWEAPONEX_Raizan_3_Fin_Tooltip	<font color='#C7A758'>Raizan</f
 ObjectCategories_LLWEAPONEX_Raizan_3_Int_Tooltip	<font color='#C7A758'>Raizan</font> (Unleashed- Intelligence Scaling)
 ObjectCategories_LLWEAPONEX_Raizan_3_Transformed_Tooltip	<font color='#C7A758'>Raizan</font> (Unleashed - Alternate Scaling)
 ObjectCategories_LLWEAPONEX_Runeblade_Inert_1H_Tooltip	Inert Runeblade
-ObjectCategories_LLWEAPONEX_Transform_Constitution_Tooltip	Transform Token (Constitution)
-ObjectCategories_LLWEAPONEX_Transform_Finesse_Tooltip	Transform Token (Finesse)
-ObjectCategories_LLWEAPONEX_Transform_Intelligence_Tooltip	Transform Token (Intelligence)
-ObjectCategories_LLWEAPONEX_Transform_Memory_Tooltip	Transform Token (Memory)
-ObjectCategories_LLWEAPONEX_Transform_Reset_Tooltip	Transform Token (Reset)
-ObjectCategories_LLWEAPONEX_Transform_Strength_Tooltip	Transform Token (Strength)
-ObjectCategories_LLWEAPONEX_Transform_Wits_Tooltip	Transform Token (Wits)
+ObjectCategories_LLWEAPONEX_Transform_Constitution_Tooltip	Token of Constitution
+ObjectCategories_LLWEAPONEX_Transform_Finesse_Tooltip	Token of Finesse
+ObjectCategories_LLWEAPONEX_Transform_Intelligence_Tooltip	Token of Intelligence
+ObjectCategories_LLWEAPONEX_Transform_Memory_Tooltip	Token of Memory
+ObjectCategories_LLWEAPONEX_Transform_Reset_Tooltip	Token of Reversal
+ObjectCategories_LLWEAPONEX_Transform_Strength_Tooltip	Token of Strength
+ObjectCategories_LLWEAPONEX_Transform_Wits_Tooltip	Token of Wits
 ObjectCategories_LLWEAPONEX_Greatbow_Omnibolt_Default_Tooltip	<font color='#C7A758'>Omnibolt, Heaven's Wrath</font>
 ObjectCategories_LLWEAPONEX_Greatbow_Omnibolt_Altered_Tooltip	<font color='#C7A758'>Omnibolt, Heaven's Wrath</font> (Alternate Scaling)

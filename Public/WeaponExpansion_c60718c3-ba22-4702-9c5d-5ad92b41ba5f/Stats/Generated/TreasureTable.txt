@@ -167,7 +167,7 @@ object category "I_ITEM_Nails",1,0,0,0,0,0,0,0
 object category "I_LOOT_Scraps_Cloth_A",1,0,0,0,0,0,0,0
 object category "I_LOOT_LLWEAPONEX_Pipe",1,0,0,0,0,0,0,
 0new subtable "0,1;1,3"
-object category "LLWEAPONEX_TransformToken",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Token_AttributeScaling",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine"
 new subtable "1,1"

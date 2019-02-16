@@ -396,7 +396,7 @@ data "Transform 2" "Consume"
 data "AutoLevel" "1"
 
 new ItemCombinationResult "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_ToInt_1"
-data "Result 1" "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_B"
+data "Result 1" "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Int"
 data "PreviewStatsID" "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Int"
 data "PreviewIcon" "LLWEAPONEX_Items_Greatbow_Unique_Lightning_A"
 data "PreviewTooltip" "Intelligence Transformation"
