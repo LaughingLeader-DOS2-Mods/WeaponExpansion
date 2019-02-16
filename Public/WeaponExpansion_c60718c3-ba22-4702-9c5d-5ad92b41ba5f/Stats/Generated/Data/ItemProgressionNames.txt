@@ -72,10 +72,10 @@ new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
 add name "Raizan",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
-add name "Raizan",""
+add name "Raizan (Empowered)",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
-add name "Raizan",""
+add name "Raizan (Unleashed)",""
 
 new namegroup "WPN_LLWEAPONEX_Rapier_1H"
 add name "Rapier",""

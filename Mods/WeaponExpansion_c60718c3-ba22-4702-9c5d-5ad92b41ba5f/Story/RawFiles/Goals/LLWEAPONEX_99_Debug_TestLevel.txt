@@ -353,6 +353,76 @@ CharacterResurrect(CHARACTERGUID_DW_Voidling_A_002_86209bd5-f8c7-4ab9-936e-89cbf
 CharacterResurrect(CHARACTERGUID_DW_Voidling_A_003_9e6e10fd-89cb-48a0-8d04-256885f5aa15);
 CharacterResurrect(CHARACTERGUID_DW_Voidling_A_004_4d7beedc-1c20-4307-9515-ab099d656f53);
 
+IF
+TextEventSet("llweap_recipes")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Kevin_Poisoned", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Kevin_Clear_Poison", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Kevin_Oiled", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Kevin_Clear_Oil", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Kevin_Nails", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Kevin_Clear_Nails", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Shuriken_Poisoned", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Shuriken_Clear_Poison", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Shuriken_Oiled", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Shuriken_Clear_Oil", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Quarterstaff_Crafted_Wood", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Quarterstaff_Crafted_Metal", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Runeblade_Inert_1H_Air", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Runeblade_Inert_1H_Chaos", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Runeblade_Inert_1H_Earth", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Runeblade_Inert_1H_Fire", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Runeblade_Inert_1H_Poison", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Runeblade_Inert_1H_Water", 0);
+CharacterUnlockRecipe(_Host, "LLWEAPONEX_Runeblade_Inert_1H", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Oven", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Bonfire", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air_Anvil", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water_Anvil", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Well", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Water", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_ToInt", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_ToStr", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Reset", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Reset", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToInt", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToFin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade_Int", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade_Fin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Reset", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToInt", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToFin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_Int", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_Fin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Reset", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0);
+
+IF
+TextEventSet("llweap_raizan_recipes")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Reset", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToInt", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToFin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade_Int", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade_Fin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Reset", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToInt", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToFin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_Int", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_Fin", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Reset", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt", 0);
+CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0);
 
 //REGION STATUSES
 /*

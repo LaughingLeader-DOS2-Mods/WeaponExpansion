@@ -1641,7 +1641,6 @@ add levelgroup 0,0,"All"
 add rootgroup "e15b0225-bc10-4c1d-8088-8aec094a1435",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water","",""
 
-
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A"
 
 add levelgroup 0,0,"All"
