@@ -1367,27 +1367,27 @@ add namegroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H","",""
 
 new itemgroup "WPN_LLWEAPONEX_Greatbows"
 
-add levelgroup 0,10,"Common"
+add levelgroup 1,10,"Common"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590","HumansCommon"
 add namegroup "WPN_LLWEAPONEX_Greatbow_Weak","",""
 
-add levelgroup 10,0,"Common"
+add levelgroup 10,30,"Common"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590","HumansCommon"
 add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","",""
 
-add levelgroup 0,9,"Uncommon"
+add levelgroup 1,9,"Uncommon"
 add rootgroup "2e772079-14f2-41b1-ae8c-999a1edddf28","ElvesUncommon"
 add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","Cool",""
 
-add levelgroup 10,0,"Uncommon"
+add levelgroup 10,30,"Uncommon"
 add rootgroup "ca5fd6eb-7219-4b12-8568-e6a5a09a5706","DwarvesUncommon"
 add namegroup "WPN_LLWEAPONEX_Greatbow_Normal","Cool",""
 
-add levelgroup 0,0,"Rare"
+add levelgroup 1,30,"Rare"
 add rootgroup "d3bf725c-da48-48d6-bc7a-0cff26eae174","DwarvesRare"
 add namegroup "RG_Bows_Rare","",""
 
-add levelgroup 0,0,"Epic"
+add levelgroup 1,30,"Epic"
 add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
 add namegroup "RG_Bows_Epic","",""
 
@@ -1401,7 +1401,7 @@ add namegroup "RG_Bows_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_CraftedGreatbow"
 
-add levelgroup 0,8,"All"
+add levelgroup 1,8,"All"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
 add namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_1","",""
 
@@ -1409,7 +1409,7 @@ add levelgroup 9,15,"All"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
 add namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_2","",""
 
-add levelgroup 16,0,"All"
+add levelgroup 16,30,"All"
 add rootgroup "5c944d80-75e0-42c6-88c7-6d4cd36e3590",""
 add namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3","",""
 

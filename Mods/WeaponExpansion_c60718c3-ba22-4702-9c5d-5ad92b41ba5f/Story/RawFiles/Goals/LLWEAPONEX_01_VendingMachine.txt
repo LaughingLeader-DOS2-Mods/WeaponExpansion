@@ -107,19 +107,33 @@ THEN
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");
 //END_REGION
 
-//REGION DIALOG_SAFETY_CHECK
+//REGION SAFETY_CHECK_START
 IF
 SavegameLoaded(_,_,_,_)
 AND
 DB_GlobalFlag("LeaderLib_InitialEventFlowComplete")
 AND
-NOT DB_Dialogs(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _)
-AND
 DB_CurrentLevel(_Level)
+AND
+ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Exists)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_VendingMachine:SavegameLoaded] [ERROR] VendingMachine has no dialog set in level [",_Level,"]! Setting to default.");
-LeaderLib_Traders_SetDialogToFirstAvailable(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX.VendingMachine", _Level);
-ProcObjectTimer(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Timers_CheckVendingMachineDialog", 500);
+LLWEAPONEX_VenchingMachine_Internal_RunSafetyCheck(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Level, _Exists);
+
+PROC
+LLWEAPONEX_VenchingMachine_Internal_RunSafetyCheck((CHARACTERGUID)_VendingMachine, (STRING)_Level, 0)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_VendingMachine:Internal:RunSafetyCheck] [ERROR] VendingMachine does not exist! How could this happen?!");
+//END_REGION
+
+//REGION DIALOG_SAFETY_CHECK
+PROC
+LLWEAPONEX_VenchingMachine_Internal_RunSafetyCheck((CHARACTERGUID)_VendingMachine, (STRING)_Level, (INTEGER)_Exists)
+AND
+NOT DB_Dialogs(_VendingMachine, _)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_VendingMachine:Internal:RunSafetyCheck] [ERROR] VendingMachine has no dialog set in level [",_Level,"]! Setting to default.");
+LeaderLib_Traders_SetDialogToFirstAvailable(_VendingMachine, "LLWEAPONEX.VendingMachine", _Level);
+ProcObjectTimer(_VendingMachine, "LLWEAPONEX_Timers_CheckVendingMachineDialog", 500);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_VendingMachine, "LLWEAPONEX_Timers_CheckVendingMachineDialog")
@@ -131,22 +145,20 @@ DB_Dialogs(_VendingMachine, "LLWEAPONEX_VendingMachine_A");
 //END_REGION
 
 //REGION SPAWN_SAFETY_CHECK
-IF
-SavegameLoaded(_,_,_,_)
+PROC
+LLWEAPONEX_VenchingMachine_Internal_RunSafetyCheck((CHARACTERGUID)_VendingMachine, (STRING)_Level, 1)
 AND
-DB_GlobalFlag("LeaderLib_InitialEventFlowComplete")
+DB_LeaderLib_Traders_Active(_VendingMachine, _TraderID, _OtherLevel)
 AND
-DB_LeaderLib_Traders_Active(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _TraderID, _OtherLevel)
-AND
-ObjectIsOnStage(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0)
+ObjectIsOnStage(_VendingMachine, 0)
 AND
 DB_CurrentLevel(_Level)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_VendingMachine:SavegameLoaded] Vending Machine isn't on stage, but it is an activate trader! Hopefully fixing.");
-NOT DB_LeaderLib_Traders_Active(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _TraderID, _OtherLevel);
-LeaderLib_Traders_Internal_TeleportToPosition(_TraderID, _Level, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
-SetOnStage(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1);
-ProcObjectTimer(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Timers_CheckVendingMachinePosition", 2000);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_VendingMachine:Internal:RunSafetyCheck] Vending Machine isn't on stage, but it is an activate trader! Hopefully fixing.");
+NOT DB_LeaderLib_Traders_Active(_VendingMachine, _TraderID, _OtherLevel);
+LeaderLib_Traders_Internal_TeleportToPosition(_TraderID, _Level, _VendingMachine);
+SetOnStage(_VendingMachine, 1);
+ProcObjectTimer(_VendingMachine, "LLWEAPONEX_Timers_CheckVendingMachinePosition", 2000);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_VendingMachine, "LLWEAPONEX_Timers_CheckVendingMachinePosition")
