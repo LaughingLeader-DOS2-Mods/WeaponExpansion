@@ -375,6 +375,15 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A",1
 
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_BlinkStrike"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Weapon_Skill_BlinkStrike",1
+
+//Overrides Start
+
 new deltamod "Boost_Weapon_Ability_DualWielding"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
@@ -1538,3 +1547,5 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Crossbow"
 new boost "_Boost_Weapon_Secondary_CriticalChance_TwoHanded",1
+
+//Overrides End

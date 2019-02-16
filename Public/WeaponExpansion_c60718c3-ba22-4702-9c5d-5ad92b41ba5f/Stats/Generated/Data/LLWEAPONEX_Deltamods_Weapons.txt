@@ -77,6 +77,11 @@ type "Weapon"
 using "_BOOSTS_Weapon"
 data "Skills" "Shout_ThickOfTheFight"
 
+new entry "_Boost_LLWEAPONEX_Weapon_Skill_BlinkStrike"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Skills" "MultiStrike_BlinkStrike"
+
 new entry "_Boost_LLWEAPONEX_Weapon_Ability_Perseverance"
 type "Weapon"
 using "_BOOSTS_Weapon"

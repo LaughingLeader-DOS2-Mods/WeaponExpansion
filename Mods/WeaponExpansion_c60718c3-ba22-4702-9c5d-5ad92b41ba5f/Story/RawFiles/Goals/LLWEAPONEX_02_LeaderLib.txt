@@ -12,6 +12,7 @@ DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
 LLWEAPONEX_LeaderLib_InitSettings();
 LLWEAPONEX_LeaderLib_InitTraderSettings();
 LLWEAPONEX_LeaderLib_InitDeltamods();
+LLWEAPONEX_LeaderLib_InitItemGrowth();
 LLWEAPONEX_LeaderLib_AddBlockedSkills();
 
 //REGION PRESETS_MISC
@@ -82,76 +83,116 @@ LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boos
 LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_Grimoire");
 LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_CombatShield");
 
+PROC
+LLWEAPONEX_LeaderLib_InitItemGrowth()
+THEN
 //Unique Weapon Deltamods
+//Katanas
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Fire", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Runeblade_Fire_1H_A_25726991-6bc1-45fb-a00b-d3bf855cd0d1");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Fire", 6, "Boost_Weapon_Ability_FireSpecialist_Wand");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Fire", 8, "Boost_Weapon_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Fire", 10, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Fire", 12, "Boost_Weapon_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Fire", 14, "Boost_Weapon_Damage_Fire_Small_Knife");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Fire", 15, "Boost_Weapon_EmptyRuneSlot");
+
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Muramasa", 4, "Boost_Weapon_Skill_SerratedEdge");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Muramasa", 7, "Boost_Weapon_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Muramasa", 9, "Boost_Weapon_Ability_RogueLore_Knife");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Muramasa", 11, "Boost_Weapon_Status_Set_Bleeding_Dagger");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Muramasa", 12, "Boost_Weapon_EmptyRuneSlot");
+
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Raizan", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Raizan", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_2_e03787b9-acac-4563-953e-a1149a6ebec1");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Raizan", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_3_fa2345b0-68f5-443f-8665-d2a5991bbf29");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 4, "Boost_Weapon_Ability_AirSpecialist_Wand");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 6, "Boost_Weapon_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 7, "Boost_LLWEAPONEX_Weapon_Skill_BlinkStrike");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 9, "Boost_Weapon_Ability_RogueLore_Knife");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 14, "Boost_Weapon_EmptyRuneSlot");
+
 //Greatbows
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Greatbow.Lightning", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 2, "Boost_Weapon_Ability_AirSpecialist_Wand", "ID", "WeaponExpansion.Greatbow.Lightning");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 4, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge", "ID", "WeaponExpansion.Greatbow.Lightning");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 6, "Boost_Weapon_Secondary_Dodge_TwoHanded", "ID", "WeaponExpansion.Greatbow.Lightning");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 10, "Boost_Weapon_Damage_Air_Medium_Bow", "ID", "WeaponExpansion.Greatbow.Lightning");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 12, "Boost_Weapon_Secondary_CriticalChance_TwoHanded", "ID", "WeaponExpansion.Greatbow.Lightning");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Greatbow.Lightning", 14, "Boost_Weapon_Status_Set_Muted", "ID", "WeaponExpansion.Greatbow.Lightning");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 2, "Boost_Weapon_Ability_AirSpecialist_Wand");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 4, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 6, "Boost_Weapon_Secondary_Dodge_TwoHanded");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 8, "Boost_Weapon_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 10, "Boost_Weapon_Damage_Air_Medium_Bow");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 12, "Boost_Weapon_Secondary_CriticalChance_TwoHanded");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 14, "Boost_Weapon_Status_Set_Muted");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 15, "Boost_Weapon_EmptyRuneSlot");
+
+//Beholder
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Swords.Beholder", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 4, "Boost_Weapon_Ability_WarriorLore_Sword");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 6, "Boost_Weapon_LifeSteal_Large_TwoHanded");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 7, "Boost_Weapon_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 10, "Boost_Weapon_Cleave_TwoHanded_Large");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 12, "Boost_Weapon_Secondary_CriticalChance_TwoHanded");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 14, "Boost_Weapon_Status_Set_Acid_TwoHanded");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 15, "Boost_Weapon_EmptyRuneSlot");
 
 //Rapiers
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_d82bc239-4782-484c-88ab-e1fa571c9f6a");
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa");
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Rapier.Runeblade.Water3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678");
 
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 2, "Boost_Weapon_Ability_WaterSpecialist_Wand", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 3, "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water", 2, "Boost_Weapon_Ability_WaterSpecialist_Wand");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water", 3, "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling");
 LeaderLib_Growth_Items_Register_Transformation("WeaponExpansion.Rapier.Runeblade.Water", 5, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa", "LLWEAPONEX_FrostDyne_Form2");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Unique_FrostDyne_Skills_Stage2", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 6, "Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water2", 9, "Boost_LLWEAPONEX_Weapon_Skill_IceBreaker", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water", 4, "Boost_LLWEAPONEX_Weapon_Unique_FrostDyne_Skills_Stage2");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water", 6, "Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water2", 9, "Boost_LLWEAPONEX_Weapon_Skill_IceBreaker");
 LeaderLib_Growth_Items_Register_Transformation("WeaponExpansion.Rapier.Runeblade.Water2", 12, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678", "LLWEAPONEX_FrostDyne_Form3");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 10, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 12, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
-//LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Rapier.Runeblade.Water", 15, "Boost_Weapon_EmptyRuneSlot", "ID", "WeaponExpansion.Rapier.Runeblade.Water");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water", 10, "Boost_Weapon_EmptyRuneSlot");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water", 12, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Rapier.Runeblade.Water", 15, "Boost_Weapon_EmptyRuneSlot");
 
 //Grimoires
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Grimoire.Death", "WPN_Shield_LLWEAPONEX_Unique_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 3, "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Small", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 6, "Boost_LLWEAPONEX_Grimoire_Skill_BonePile", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 8, "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Medium", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 11, "Boost_LLWEAPONEX_Grimoire_Skill_GraspOfTheStarved", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "ID", "WeaponExpansion.Grimoire.Death");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Death", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Death");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 3, "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 6, "Boost_LLWEAPONEX_Grimoire_Skill_BonePile");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 8, "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Medium");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 11, "Boost_LLWEAPONEX_Grimoire_Skill_GraspOfTheStarved");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Death", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Grimoire.Mimicry", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 3, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "ID", "WeaponExpansion.Grimoire.Mimicry");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 5, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "ID", "WeaponExpansion.Grimoire.Mimicry");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 6, "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small", "ID", "WeaponExpansion.Grimoire.Mimicry");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "ID", "WeaponExpansion.Grimoire.Mimicry");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "ID", "WeaponExpansion.Grimoire.Mimicry");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Mimicry");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "ID", "WeaponExpansion.Grimoire.Mimicry");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Mimicry");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 3, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 5, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 6, "Boost_LLWEAPONEX_Grimoire_Armor_Physical_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 8, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Grimoire.Swap", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 3, "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 6, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 11, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large", "ID", "WeaponExpansion.Grimoire.Swap");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Swap", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Swap");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 3, "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 6, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 11, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Grimoire.Wind", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 3, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 5, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 6, "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 7, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 11, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium", "ID", "WeaponExpansion.Grimoire.Wind");
-LeaderLib_Growth_Items_Register_DeltaMod("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot", "ID", "WeaponExpansion.Grimoire.Wind");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 3, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 5, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 6, "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 7, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 11, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Medium");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 //END_REGION
 
 //REGION BLOCKED_SKILLS
@@ -197,6 +238,13 @@ DB_LeaderLib_BlockedSkill(_Skill);
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 1)
+THEN
+LLWEAPONEX_LeaderLib_InitItemGrowth();
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
