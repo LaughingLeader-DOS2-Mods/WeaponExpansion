@@ -622,5 +622,11 @@ add name "Ring of the Weaponmaster","A ring made to defy the gods."
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
 add name "Demon Hunter's Oath",""
 
+new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1"
+add name "Oni Gauntlet",""
 
+new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2"
+add name "Oni Gauntlet (Empowered)",""
 
+new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
+add name "Oni Gauntlet (Unleashed)",""

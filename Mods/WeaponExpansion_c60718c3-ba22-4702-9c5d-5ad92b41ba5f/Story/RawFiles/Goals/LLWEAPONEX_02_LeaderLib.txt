@@ -107,10 +107,10 @@ LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Raizan", "WPN_
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Raizan", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_2_e03787b9-acac-4563-953e-a1149a6ebec1");
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Katanas.Raizan", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_3_fa2345b0-68f5-443f-8665-d2a5991bbf29");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 4, "Boost_Weapon_Ability_AirSpecialist_Wand");
-LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 6, "Boost_Weapon_EmptyRuneSlot");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 6, "Boost_Weapon_EmptyRuneSlot");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 7, "Boost_LLWEAPONEX_Weapon_Skill_BlinkStrike");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 9, "Boost_Weapon_Ability_RogueLore_Knife");
-LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 14, "Boost_Weapon_EmptyRuneSlot");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Katanas.Raizan", 14, "Boost_Weapon_EmptyRuneSlot");
 
 //Greatbows
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Greatbow.Lightning", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");

@@ -3,7 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
 
-//Skill-based gains
+//REGION SKILL_GAINS
 IF
 CharacterUsedSkill(_Player, _Skill, _, _)
 AND
@@ -19,13 +19,6 @@ ObjectGetFlag(_Player, _EnabledFlag, 1)
 THEN
 DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 
-PROC
-LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
-
 IF
 //AttackedByObject(_Target, _, (CHARACTERGUID)_Player, _, _)
 CharacterStatusApplied(_Target, "HIT", _Player)
@@ -36,13 +29,24 @@ DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage((CHARACTERGUID)_Player, _W
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 LLWEAPONEX_WeaponMastery_GainExperienceWithType(_Player, _WeaponType, 175);
+//END_REGION
 
-PROC
-LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries()
+//REGION PARTY_WIDE_EXPERIENCE
+IF
+CharacterDying(_Enemy)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+DB_CombatCharacters(_Enemy, _CombatID)
+AND
+DB_IsPlayer(_Player)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy)
+AND
+CombatGetIDForCharacter(_Player, _CombatID)
+AND
+CharacterIsEnemy(_Enemy, _Player, 1)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy);
+//END_REGION
 
 EXITSECTION
 LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
     <header version="2" />
-    <version major="3" minor="6" revision="1" build="0" />
+    <version major="3" minor="6" revision="4" build="0" />
     <region id="Tags">
         <node id="root">
             <children>
@@ -423,6 +423,19 @@
                 <node id="Tag">
                     <attribute id="Description" value="Weapon has a special custom rune skill, and should be ignored by the dual rune skill system." type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Runeblade_CustomRuneSkill" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_OniGauntlet" type="23" />
                     <children>
                         <node id="Categories">
                             <children>

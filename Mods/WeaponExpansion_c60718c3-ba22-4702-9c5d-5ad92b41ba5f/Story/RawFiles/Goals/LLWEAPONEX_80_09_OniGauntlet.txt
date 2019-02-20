@@ -1,0 +1,30 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION ENEMY_SOULS
+IF
+CharacterDying(_Enemy)
+AND
+DB_CombatCharacters(_Enemy, _CombatID)
+AND
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Item)
+AND
+CombatGetIDForCharacter(_Player, _CombatID)
+AND
+CharacterIsEnemy(_Enemy, _Player, 1)
+AND
+IsBoss(_Enemy, _IsBoss)
+AND
+IntegerProduct(_IsBoss, 9, _BossMult)
+AND
+IntegerSum(2, _BossMult, _AddSouls)
+THEN
+LLWEAPONEX_OniGauntlet_AddSouls(_Player, _Item, _AddSouls);
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

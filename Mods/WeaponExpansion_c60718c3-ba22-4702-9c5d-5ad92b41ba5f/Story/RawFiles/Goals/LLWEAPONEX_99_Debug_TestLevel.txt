@@ -707,6 +707,24 @@ NOT DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag);
 
 //END_REGION
 
+//REGION ONI_GAUNTLET_RELOAD
+PROC
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet)
+THEN
+InventoryLaunchIterator(_Gauntlet, "LLWEAPONEX_Debug_Iterator_OniGauntletSearch", "");
+
+IF
+StoryEvent((ITEMGUID)_Weapon, "LLWEAPONEX_Debug_Iterator_OniGauntletSearch")
+AND
+GetInventoryOwner(_Weapon, (ITEMGUID)_Gauntlet)
+AND
+GetTemplate(_Weapon, _Template)
+AND
+DB_LLWEAPONEX_OniGauntlet_Weapons(_Skill, _Template, _ID)
+THEN
+DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

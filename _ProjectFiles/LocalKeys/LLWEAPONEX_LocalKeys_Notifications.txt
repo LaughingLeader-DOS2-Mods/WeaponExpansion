@@ -1,0 +1,1 @@
+LLWEAPONEX_Notifications_OniGauntletRequiredForOrb	<font color='#FF001F'>The orb doesn't seem to fit. A special gauntlet is required.</font>

@@ -1485,120 +1485,6 @@ add levelgroup 0,0,"All"
 add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind","",""
 
-new itemgroup "ARM_LLWEAPONEX_DragonSlayer_UpperBody"
-
-add levelgroup 0,0,"All"
-add rootgroup "6c87a50e-f238-43ef-b0a0-45fd64850219",""
-add namegroup "LLWEAPONEX_DragonSlayer_Armour","",""
-
-new itemgroup "ARM_LLWEAPONEX_DragonSlayer_LowerBody"
-
-add levelgroup 0,0,"All"
-add rootgroup "c7d42c37-1401-4df0-9a38-e053c35e67c2",""
-add namegroup "LLWEAPONEX_DragonSlayer_Pants","",""
-
-new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Gloves"
-
-add levelgroup 0,0,"All"
-add rootgroup "6100deb9-451b-4f7c-89ab-b1dd39a4ebec",""
-add namegroup "LLWEAPONEX_DragonSlayer_Gloves","",""
-
-new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Boots"
-
-add levelgroup 0,0,"All"
-add rootgroup "f91a2518-7f51-4c92-96a9-17ef41c0928f",""
-add namegroup "LLWEAPONEX_DragonSlayer_Shoes","",""
-
-new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Helmet"
-
-add levelgroup 0,0,"All"
-add rootgroup "b33cfc65-c121-4804-b60b-6aa82517a46e",""
-add namegroup "LLWEAPONEX_DragonSlayer_Helmet","",""
-
-new itemgroup "ARM_LLWEAPONEX_RunicKnight_UpperBody"
-
-add levelgroup 0,0,"All"
-add rootgroup "c7df8487-00dd-4a75-aead-001e73449a57",""
-add namegroup "LLWEAPONEX_RunicKnight_Armour","",""
-
-new itemgroup "ARM_LLWEAPONEX_RunicKnight_LowerBody"
-
-add levelgroup 0,0,"All"
-add rootgroup "7248f1f1-dd7a-496c-838a-9389a1b6e3e2",""
-add namegroup "LLWEAPONEX_RunicKnight_Pants","",""
-
-new itemgroup "ARM_LLWEAPONEX_RunicKnight_Gloves"
-
-add levelgroup 0,0,"All"
-add rootgroup "1e0f089b-cd0a-487c-a93f-6ad72905de73",""
-add namegroup "LLWEAPONEX_RunicKnight_Gloves","",""
-
-new itemgroup "ARM_LLWEAPONEX_RunicKnight_Boots"
-
-add levelgroup 0,0,"All"
-add rootgroup "6754e121-0c39-4b53-b578-f95e675e27b7",""
-add namegroup "LLWEAPONEX_RunicKnight_Boots","",""
-
-new itemgroup "ARM_LLWEAPONEX_RunicKnight_Helmet"
-
-add levelgroup 0,0,"All"
-add rootgroup "b2d19374-d0ea-463a-a359-d3674842e21e",""
-add namegroup "LLWEAPONEX_RunicKnight_Helmet","",""
-
-new itemgroup "ARM_LLWEAPONEX_Quiver_A"
-
-add levelgroup 1,30,"Common"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_Common","",""
-
-add levelgroup 0,0,"Uncommon"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_Common","Cool",""
-
-add levelgroup 0,0,"Rare"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_Rare","",""
-
-add levelgroup 0,0,"Epic"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_Epic","",""
-
-new itemgroup "ARM_LLWEAPONEX_Quiver_DrawArrow"
-
-add levelgroup 1,30,"Common"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_DrawArrow_Common","",""
-
-add levelgroup 0,0,"Uncommon"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_DrawArrow_Common","Cool",""
-
-add levelgroup 0,0,"Rare"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_DrawArrow_Rare","",""
-
-add levelgroup 0,0,"Epic"
-add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
-add namegroup "LLWEAPONEX_Quivers_DrawArrow_Epic","",""
-
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
-
-add levelgroup 0,0,"All"
-add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper","",""
-
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
-
-add levelgroup 0,0,"All"
-add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster","",""
-
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
-
-add levelgroup 0,0,"All"
-add rootgroup "78b08f39-3d9d-47b5-b251-f1b8dcebe65b",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold","",""
-
 new itemgroup "WPN_LLWEAPONEX_BattleBook"
 
 add levelgroup 0,0,"All"
@@ -1665,3 +1551,134 @@ add levelgroup 0,0,"All"
 add rootgroup "fa2345b0-68f5-443f-8665-d2a5991bbf29",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3","",""
 
+new itemgroup "ARM_LLWEAPONEX_Quiver_A"
+
+add levelgroup 1,30,"Common"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Common","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Common","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Epic","",""
+
+new itemgroup "ARM_LLWEAPONEX_Quiver_DrawArrow"
+
+add levelgroup 1,30,"Common"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Common","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Common","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_DrawArrow_Epic","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_UpperBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "6c87a50e-f238-43ef-b0a0-45fd64850219",""
+add namegroup "LLWEAPONEX_DragonSlayer_Armour","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_LowerBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "c7d42c37-1401-4df0-9a38-e053c35e67c2",""
+add namegroup "LLWEAPONEX_DragonSlayer_Pants","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Gloves"
+
+add levelgroup 0,0,"All"
+add rootgroup "6100deb9-451b-4f7c-89ab-b1dd39a4ebec",""
+add namegroup "LLWEAPONEX_DragonSlayer_Gloves","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Boots"
+
+add levelgroup 0,0,"All"
+add rootgroup "f91a2518-7f51-4c92-96a9-17ef41c0928f",""
+add namegroup "LLWEAPONEX_DragonSlayer_Shoes","",""
+
+new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Helmet"
+
+add levelgroup 0,0,"All"
+add rootgroup "b33cfc65-c121-4804-b60b-6aa82517a46e",""
+add namegroup "LLWEAPONEX_DragonSlayer_Helmet","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_UpperBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "c7df8487-00dd-4a75-aead-001e73449a57",""
+add namegroup "LLWEAPONEX_RunicKnight_Armour","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_LowerBody"
+
+add levelgroup 0,0,"All"
+add rootgroup "7248f1f1-dd7a-496c-838a-9389a1b6e3e2",""
+add namegroup "LLWEAPONEX_RunicKnight_Pants","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_Gloves"
+
+add levelgroup 0,0,"All"
+add rootgroup "1e0f089b-cd0a-487c-a93f-6ad72905de73",""
+add namegroup "LLWEAPONEX_RunicKnight_Gloves","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_Boots"
+
+add levelgroup 0,0,"All"
+add rootgroup "6754e121-0c39-4b53-b578-f95e675e27b7",""
+add namegroup "LLWEAPONEX_RunicKnight_Boots","",""
+
+new itemgroup "ARM_LLWEAPONEX_RunicKnight_Helmet"
+
+add levelgroup 0,0,"All"
+add rootgroup "b2d19374-d0ea-463a-a359-d3674842e21e",""
+add namegroup "LLWEAPONEX_RunicKnight_Helmet","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
+
+add levelgroup 0,0,"All"
+add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
+
+add levelgroup 0,0,"All"
+add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
+
+add levelgroup 0,0,"All"
+add rootgroup "78b08f39-3d9d-47b5-b251-f1b8dcebe65b",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1"
+
+add levelgroup 0,0,"All"
+add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2"
+
+add levelgroup 0,0,"All"
+add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
+
+add levelgroup 0,0,"All"
+add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3","",""

@@ -751,7 +751,7 @@ AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
 LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
-LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 /*
 To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
@@ -765,10 +765,10 @@ AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
 LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
-LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack(_Player, _Target);
+LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 PROC
-LLWEAPONEX_WeaponMastery_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
+LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
 THEN
 DB_NOOP(1);
 
@@ -877,30 +877,30 @@ DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _LevelCl
 //END_REGION
 
 //REGION PARTY_WIDE_EXPERIENCE
-IF
-CharacterDying(_Enemy)
+PROC
+LLWEAPONEX_WeaponMastery_AddPartyExperience((CHARACTERGUID)_PartyMember, (CHARACTERGUID)_Enemy)
 AND
-DB_CombatCharacters(_Enemy, _CombatID)
-AND
-DB_IsPlayer(_Player)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_)
-AND
-CombatGetIDForCharacter(_Player, _CombatID)
-AND
-CharacterIsEnemy(_Enemy, _Player, 1)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_Player);
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:CharacterDying] Enemy died. Adding mastery experience to all party members.");
-IterateParty(_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB", 50);
+IterateParty(_PartyMember, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
+ProcObjectTimerCancel(_Enemy, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB");
+ProcObjectTimer(_Enemy, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB", 50);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB")
+ProcObjectTimerFinished((CHARACTERGUID)_Enemy, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB")
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_Player)
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_Player);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 
 /*
 PROC
@@ -918,9 +918,28 @@ IF
 StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience")
 AND
 DB_IsPlayer(_Player) // Ignore summons
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy)
+AND
+CharacterIsInPartyWith(_Player, _PartyMember, 1)
+AND
+IsBoss(_Enemy, _IsBoss)
+AND
+IntegerSum(_IsBoss, 1, _BossMult) // 2x exp for bosses
+AND
+IntegerProduct(100, _BossMult, _AddExp)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:StoryEvent('LLWEAPONEX_WeaponMastery_AddPartyExperience')] Adding party mastery experience to player.");
-LLWEAPONEX_WeaponMastery_GainExperience(_Player, 100);
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_01_WeaponMastery:LLWEAPONEX_WeaponMastery_AddPartyExperience] Adding [",_AddExp,"] party mastery experience to player.");
+LLWEAPONEX_WeaponMastery_GainExperience(_Player, _AddExp);
+//END_REGION
+
+//REGION EXPERIENCE_LISTENING_RESET
+PROC
+LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries()
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 //END_REGION
 
 //REGION LEVEL_UP
