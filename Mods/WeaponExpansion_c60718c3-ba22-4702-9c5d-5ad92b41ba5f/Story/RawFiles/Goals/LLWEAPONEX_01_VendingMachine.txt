@@ -74,7 +74,8 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Runeblade_Fire_1H_A_25726991-6bc1-45fb-a00b-d3bf855cd0d1");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_d82bc239-4782-484c-88ab-e1fa571c9f6a");
 
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41");
+//LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82");
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");
@@ -93,10 +94,8 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,4,1)
+DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,4,4)
 THEN
-ItemTemplateAddTo("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1, 0);
-ItemTemplateAddTo("LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1, 0);
 LLWEAPONEX_VendingMachine_RegisterUniqueWeapons();
 
 PROC
