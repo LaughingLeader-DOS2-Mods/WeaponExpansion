@@ -19,7 +19,7 @@ IsBoss(_Enemy, _IsBoss)
 AND
 IntegerProduct(_IsBoss, 9, _BossMult)
 AND
-IntegerSum(2, _BossMult, _AddSouls)
+IntegerSum(1, _BossMult, _AddSouls)
 THEN
 LLWEAPONEX_OniGauntlet_AddSouls(_Player, _Item, _AddSouls);
 //END_REGION

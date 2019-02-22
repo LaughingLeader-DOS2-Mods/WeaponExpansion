@@ -8,16 +8,20 @@ KBSECTION
 PROC
 LLWEAPONEX_OniGauntlet_InitSettings()
 THEN
-DB_LLWEAPONEX_OniGauntlet_Upgrades("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939", 6);
-DB_LLWEAPONEX_OniGauntlet_Upgrades("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe", 12);
+//When this template reaches the minimum level, an upgrade will be available
+//Template, MinLevel
+DB_LLWEAPONEX_OniGauntlet_Upgrades("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939", 8);
+DB_LLWEAPONEX_OniGauntlet_Upgrades("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe", 13);
 
-DB_LLWEAPONEX_OniGauntlet_Weapons("Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41", "Raizan");
-DB_LLWEAPONEX_OniGauntlet_Weapons("Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_2_e03787b9-acac-4563-953e-a1149a6ebec1", "Raizan");
-DB_LLWEAPONEX_OniGauntlet_Weapons("Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_3_fa2345b0-68f5-443f-8665-d2a5991bbf29", "Raizan");
+DB_LLWEAPONEX_OniGauntlet_StartingWeapons("Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41", "Raizan");
 
-DB_LLWEAPONEX_OniGauntlet_Orbs("LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82", "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_1");
-DB_LLWEAPONEX_OniGauntlet_Orbs("LOOT_LLWEAPONEX_Orb_Thunder_B_9fe7b80d-081d-4e5f-8125-10a452c2d105", "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_2");
-DB_LLWEAPONEX_OniGauntlet_Orbs("LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23-8fdb-45aa75962e94", "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_3");
+DB_LLWEAPONEX_OniGauntlet_Weapons("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41", "Raizan", 33);
+DB_LLWEAPONEX_OniGauntlet_Weapons("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_2_e03787b9-acac-4563-953e-a1149a6ebec1", "Raizan", 66);
+DB_LLWEAPONEX_OniGauntlet_Weapons("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_3_fa2345b0-68f5-443f-8665-d2a5991bbf29", "Raizan", 99);
+
+DB_LLWEAPONEX_OniGauntlet_Orbs("LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82", "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", "Raizan", 15);
+DB_LLWEAPONEX_OniGauntlet_Orbs("LOOT_LLWEAPONEX_Orb_Thunder_B_9fe7b80d-081d-4e5f-8125-10a452c2d105", "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", "Raizan", 30);
+DB_LLWEAPONEX_OniGauntlet_Orbs("LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23-8fdb-45aa75962e94", "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", "Raizan", 60);
 
 //END_REGION
 
@@ -93,7 +97,7 @@ NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Item, _, _, _)
 AND
 ItemGetRuneItemTemplate(_Item, 0, _Template)
 AND
-DB_LLWEAPONEX_OniGauntlet_Orbs(_Template, _Skill)
+DB_LLWEAPONEX_OniGauntlet_Orbs(_Template, _Skill, _ID, _MinSouls)
 THEN
 DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Item, _Skill, _Template, 0);
 
@@ -114,6 +118,15 @@ LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_OniGauntletEquipped"
 //END_REGION
 
 //REGION ONI_GAUNTLET_SOULS
+QRY
+LLWEAPONEX_OniGauntlet_QRY_HasMinSouls((ITEMGUID)_Gauntlet, (INTEGER)_MinSouls)
+AND
+ItemGetCharges(_Gauntlet, _Current)
+AND
+_Current >= _MinSouls
+THEN
+DB_NOOP(1);
+
 PROC
 LLWEAPONEX_OniGauntlet_AddSouls((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (INTEGER)_Souls)
 AND
@@ -152,48 +165,6 @@ AND
 _Level >= _MinLevel
 THEN
 ObjectSetFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable");
-
-PROC
-ProcBlockCombineItem((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet)
-AND
-IsTagged(_Gauntlet, "LLWEAPONEX_OniGauntlet", 1)
-AND
-GetTemplate(_Gauntlet, _Template)
-AND
-DB_LLWEAPONEX_OniGauntlet_Upgrades(_Template, _MinLevel)
-AND
-ObjectGetFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable", 0)
-THEN
-DB_CustomCombineItemResponse(_Player, _Gauntlet, 1);
-LLWEAPONEX_OniGauntlet_Internal_OniGauntletUpgradeBlocked(_Player, _Gauntlet, _Template, _MinLevel);
-
-PROC
-LLWEAPONEX_OniGauntlet_Internal_OniGauntletUpgradeBlocked((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (STRING)_Template, (INTEGER)_MinLevel)
-AND
-CharacterGetLevel(_Player, _Level)
-AND
-_Level < _MinLevel
-AND
-IntegertoString(_MinLevel, _MinLevelStr)
-THEN
-LeaderLog_LogTarget("STATUS", _Player, "<font color='#FF0000'>Unable to upgrade Oni Gauntlet. Level ",_MinLevelStr," required.</font>");
-
-PROC
-LLWEAPONEX_OniGauntlet_Internal_OniGauntletUpgradeBlocked((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (STRING)_Template, (INTEGER)_MinLevel)
-AND
-CharacterGetLevel(_Player, _Level)
-AND
-_Level >= _MinLevel
-AND
-ItemGetCharges(_Gauntlet, _Current)
-AND
-ItemGetMaxCharges(_Gauntlet, _Max)
-AND
-IntegerSubtract(_Max, _Current, _RequiredSouls)
-AND
-IntegertoString(_RequiredSouls, _RequiredSoulsStr)
-THEN
-LeaderLog_LogTarget("STATUS", _Player, "<font color='#FF0000'>Unable to upgrade Oni Gauntlet. ",_RequiredSoulsStr," Souls required.</font>");
 //END_REGION
 
 //REGION ONI_GAUNTLET_ORB_INSERTED
@@ -242,7 +213,7 @@ ShowNotification(_Player, "LLWEAPONEX_Notifications_OniGauntletRequiredForOrb");
 PROC
 LLWEAPONEX_OniGauntlet_OnOrbInserted((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template, (INTEGER)_SLot, 1)
 AND
-DB_LLWEAPONEX_OniGauntlet_Orbs(_Template, _Skill)
+DB_LLWEAPONEX_OniGauntlet_Orbs(_Template, _Skill, _ID, _MinSouls)
 THEN
 DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Item, _Skill, _Template, _Slot);
 
@@ -303,19 +274,9 @@ THEN
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
 
 IF
-SkillCast(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_1", _, _)
+SkillCast(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", _, _)
 THEN
-LLWEAPONEX_OniGauntlet_SummonWeapon(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_1");
-
-IF
-SkillCast(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_2", _, _)
-THEN
-LLWEAPONEX_OniGauntlet_SummonWeapon(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_2");
-
-IF
-SkillCast(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_3", _, _)
-THEN
-LLWEAPONEX_OniGauntlet_SummonWeapon(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan_3");
+LLWEAPONEX_OniGauntlet_SummonWeapon(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan");
 
 PROC
 LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Player, (STRING)_Skill)
@@ -346,7 +307,7 @@ LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Player, (STRING)_Skill)
 AND
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill)
 AND
-DB_LLWEAPONEX_OniGauntlet_Weapons(_Skill, _Template, _ID)
+DB_LLWEAPONEX_OniGauntlet_StartingWeapons(_Skill, _Template, _ID)
 AND
 DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Gauntlet)
 AND
@@ -386,43 +347,6 @@ THEN
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
 //END_REGION
 
-//REGION ONI_GAUNTLET_WEAPON_COMBO
-/*
-IF
-ObjectTransformed((ITEMGUID)_Weapon, _ToTemplate)
-AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan")
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ObjectTransformed] Raizan was transformed.");
-*/
-
-IF
-ItemTemplateCombinedWithItemTemplate(_T1, _T2, _T3, _T4, _T5, _Player, _NewItem)
-AND
-//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Combo: ", _T1, " | ", _T2, " | ", _T3, " | ", _T4, " | ", _T5)
-//AND
-LeaderLib_Helper_QRY_ComboTemplateMatch("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_", _T1, _T2, _T3, _T4, _T5)
-//AND
-//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Template match with [WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_]")
-AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet)
-AND
-GetTemplate(_NewItem, _NewTemplate)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Raizan was combined and changed to [",_NewTemplate,"].");
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _NewItem, "Raizan", _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _NewItem);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _NewItem, 250, "LLWEAPONEX_Timers_JustCombinedOniWeapon", "LLWEAPONEX_JustCombinedOniWeapon");
-
-IF
-CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_JustCombinedOniWeapon")
-AND
-DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _Weapon)
-THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _Weapon);
-//END_REGION
-
 //REGION ONI_GAUNTLET_ORB_WEAPONS_REMOVE
 IF
 ItemUnEquipped(_Weapon, _Player)
@@ -458,6 +382,75 @@ PROC
 LLWEAPONEX_OniGauntlet_OnOrbRemoved((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_Orb, (STRING)_Template, (STRING)_Skill)
 THEN
 LLWEAPONEX_OniGauntlet_RemoveActiveWeaponBySkill(_Player, _Skill);
+//END_REGION
+
+//REGION ONI_GAUNTLET_COMBO_UPGRADE_SOUL_TAX
+IF
+ItemTemplateCombinedWithItemTemplate(_T1, _T2, _T3, _T4, _T5, _Player, _NewItem)
+AND
+//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Combo: ", _T1, " | ", _T2, " | ", _T3, " | ", _T4, " | ", _T5)
+//AND
+LeaderLib_Helper_QRY_Combo_TemplateMatch("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_", _T1, _T2, _T3, _T4, _T5)
+//AND
+//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Template match with [WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_]")
+AND
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet)
+AND
+GetTemplate(_NewItem, _NewTemplate)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Raizan was combined and changed to [",_NewTemplate,"].");
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _NewItem, "Raizan", _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _NewItem);
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _NewItem, 250, "LLWEAPONEX_Timers_JustCombinedOniWeapon", "LLWEAPONEX_JustCombinedOniWeapon");
+//END_REGION
+
+//REGION ONI_GAUNTLET_WEAPON_COMBO
+/*
+IF
+ObjectTransformed((ITEMGUID)_Weapon, _ToTemplate)
+AND
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ObjectTransformed] Raizan was transformed.");
+*/
+
+IF
+ItemTemplateCombinedWithItemTemplate(_T1, _T2, _T3, _T4, _T5, _Player, _NewItem)
+AND
+//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Combo: ", _T1, " | ", _T2, " | ", _T3, " | ", _T4, " | ", _T5)
+//AND
+LeaderLib_Helper_QRY_Combo_TemplateMatch("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_", _T1, _T2, _T3, _T4, _T5)
+//AND
+//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Template match with [WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_]")
+AND
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet)
+AND
+GetTemplate(_NewItem, _NewTemplate)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Raizan was combined and changed to [",_NewTemplate,"].");
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _NewItem, "Raizan", _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _NewItem);
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _NewItem, 250, "LLWEAPONEX_Timers_JustCombinedOniWeapon", "LLWEAPONEX_JustCombinedOniWeapon");
+
+IF
+CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_JustCombinedOniWeapon")
+AND
+DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _Weapon)
+THEN
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _Weapon);
+//END_REGION
+
+//REGION DEBUG
+IF
+TextEventSet("llweap_onisouls")
+AND
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Item)
+AND
+ItemGetMaxCharges(_Item, _Max)
+THEN
+ItemAddCharges(_Item, _Max);
 //END_REGION
 EXITSECTION
 

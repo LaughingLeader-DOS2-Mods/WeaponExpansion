@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
     <header version="2" />
-    <version major="3" minor="6" revision="4" build="0" />
+    <version major="3" minor="6" revision="3" build="1" />
     <region id="Tags">
         <node id="root">
             <children>
@@ -436,6 +436,32 @@
                 <node id="Tag">
                     <attribute id="Description" value="" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_OniGauntlet" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Orbs that fit into the Oni Gauntlet." type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_OniGauntlet_Orb" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_OniGauntlet_Weapon" type="23" />
                     <children>
                         <node id="Categories">
                             <children>

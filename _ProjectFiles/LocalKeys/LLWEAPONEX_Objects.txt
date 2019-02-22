@@ -43,3 +43,6 @@ LOOT_LLWEAPONEX_Token_Strength	Token of Strength
 LOOT_LLWEAPONEX_Token_Intelligence	Token of Intelligence
 LOOT_LLWEAPONEX_Token_Finesse	Token of Finesse
 LOOT_LLWEAPONEX_Token_Reset	Token of Reversal
+LOOT_LLWEAPONEX_Orb_Thunder_A	Shiden, Thunder Orb
+LOOT_LLWEAPONEX_Orb_Thunder_B	Shiden, Thunder Orb (Empowered)
+LOOT_LLWEAPONEX_Orb_Thunder_C	Shiden, Thunder Orb (Unleashed)

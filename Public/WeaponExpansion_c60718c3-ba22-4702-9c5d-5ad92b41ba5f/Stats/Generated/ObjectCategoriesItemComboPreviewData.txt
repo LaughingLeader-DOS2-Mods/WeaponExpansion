@@ -82,6 +82,12 @@ data "Category" "LLWEAPONEX_Runeblade_Inert_1H"
 data "Icon" "LLWEAPONEX_Items_Runeblade_Humans_A"
 data "Tooltip" "Runeblade (Inert)"
 
+new CraftingPreviewData "LLWEAPONEX_OniGauntlet"
+type "ObjectCategories"
+data "Category" "LLWEAPONEX_OniGauntlet"
+data "Icon" "Item_EQ_Armor_Platemail_Arms_A"
+data "Tooltip" "Oni Gauntlet"
+
 new CraftingPreviewData "LLWEAPONEX_OniGauntlet_1"
 type "ObjectCategories"
 data "Category" "LLWEAPONEX_OniGauntlet_1"

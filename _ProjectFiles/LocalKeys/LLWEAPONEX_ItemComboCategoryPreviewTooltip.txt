@@ -27,3 +27,7 @@ ObjectCategories_LLWEAPONEX_Transform_Strength_Tooltip	Token of Strength
 ObjectCategories_LLWEAPONEX_Transform_Wits_Tooltip	Token of Wits
 ObjectCategories_LLWEAPONEX_Greatbow_Omnibolt_Default_Tooltip	<font color='#C7A758'>Omnibolt, Heaven's Wrath</font>
 ObjectCategories_LLWEAPONEX_Greatbow_Omnibolt_Altered_Tooltip	<font color='#C7A758'>Omnibolt, Heaven's Wrath</font> (Alternate Scaling)
+ObjectCategories_LLWEAPONEX_OniGauntlet_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
+ObjectCategories_LLWEAPONEX_OniGauntlet_1_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
+ObjectCategories_LLWEAPONEX_OniGauntlet_2_Tooltip	<font color='#C7A758'>Oni Gauntlet (Empowered)</font> Power
+ObjectCategories_LLWEAPONEX_OniGauntlet_3_Tooltip	<font color='#C7A758'>Oni Gauntlet (Unleashed)</font> Power

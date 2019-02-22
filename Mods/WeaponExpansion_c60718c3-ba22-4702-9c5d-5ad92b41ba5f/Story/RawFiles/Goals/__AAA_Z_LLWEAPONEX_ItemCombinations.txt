@@ -1,0 +1,146 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION ONI_GAUNTLET_COMBO_BLOCKING
+IF
+CanCombineItem(_Player, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+LeaderLib_Helper_QRY_Combo_FindTagged("LLWEAPONEX_OniGauntlet", _ItemA, _ItemB, _ItemC, _ItemD, _ItemE)
+AND
+DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet", _Gauntlet)
+THEN
+NOT DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet", _Gauntlet);
+LeaderLog_Log("DEBUG", "[__AAA_Z_LLWEAPONEX_ItemCombinations:CanCombineItem] Oni Gauntlet is being combined.");
+LLWEAPONEX_OniGauntlet_Internal_ItemComboStarted(_Player, _Gauntlet, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID);
+
+//Orb Upgrading
+PROC
+LLWEAPONEX_OniGauntlet_Internal_ItemComboStarted((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_ItemA, (ITEMGUID)_ItemB, (ITEMGUID)_ItemC, (ITEMGUID)_ItemD, (ITEMGUID)_ItemE, (INTEGER)_RequestID)
+AND
+NOT DB_CustomCombineItemResponse(_Player, _Gauntlet, 1)
+AND
+LeaderLib_Helper_QRY_Combo_FindTagged("LLWEAPONEX_OniGauntlet_Orb", _ItemA, _ItemB, _ItemC, _ItemD, _ItemE)
+AND
+DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet_Orb", _Orb)
+AND
+GetTemplate(_Orb, _OrbTemplate)
+AND
+DB_LLWEAPONEX_OniGauntlet_Orbs(_OrbTemplate, _Skill, _ID, _MinSouls)
+THEN
+NOT DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet_Orb", _Orb);
+LLWEAPONEX_OniGauntlet_Internal_OrbComboStarted(_Player, _Gauntlet, _Orb, _MinSouls);
+
+PROC
+LLWEAPONEX_OniGauntlet_Internal_OrbComboStarted((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_Orb, (INTEGER)_MinSouls)
+AND
+NOT LLWEAPONEX_OniGauntlet_QRY_HasMinSouls(_Gauntlet, _MinSouls)
+AND
+ItemGetCharges(_Gauntlet, _Current)
+AND
+IntegerSubtract(_MinSouls, _Current, _RequiredSouls)
+AND
+IntegertoString(_RequiredSouls, _SoulsStr)
+THEN
+DB_CustomCombineItemResponse(_Player, _Gauntlet, 1);
+LeaderLog_LogTarget("NOTIFICATION", _Player, "<font color='#c73030'>", _SoulsStr, " Power Required to Upgrade Orb</font>");
+
+PROC
+LLWEAPONEX_OniGauntlet_Internal_OrbComboStarted((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_Orb, (INTEGER)_MinSouls)
+AND
+NOT DB_CustomCombineItemResponse(_Player, _Gauntlet, 1)
+AND
+IntegerProduct(_MinSouls, -1, _ReduceSouls)
+THEN
+ItemAddCharges(_Gauntlet, _ReduceSouls);
+
+//Weapon Upgrading
+PROC
+LLWEAPONEX_OniGauntlet_Internal_ItemComboStarted((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_ItemA, (ITEMGUID)_ItemB, (ITEMGUID)_ItemC, (ITEMGUID)_ItemD, (ITEMGUID)_ItemE, (INTEGER)_RequestID)
+AND
+NOT DB_CustomCombineItemResponse(_Player, _Gauntlet, 1)
+AND
+LeaderLib_Helper_QRY_Combo_FindTagged("LLWEAPONEX_OniGauntlet_Weapon", _ItemA, _ItemB, _ItemC, _ItemD, _ItemE)
+AND
+DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet_Weapon", _Weapon)
+AND
+GetTemplate(_Weapon, _WeaponTemplate)
+AND
+DB_LLWEAPONEX_OniGauntlet_Weapons(_WeaponTemplate, _ID, _MinSouls)
+THEN
+NOT DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet_Weapon", _Weapon);
+LLWEAPONEX_OniGauntlet_Internal_WeaponComboStarted(_Player, _Gauntlet, _Weapon, _MinSouls);
+
+PROC
+LLWEAPONEX_OniGauntlet_Internal_WeaponComboStarted((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_Weapon, (INTEGER)_MinSouls)
+AND
+NOT LLWEAPONEX_OniGauntlet_QRY_HasMinSouls(_Gauntlet, _MinSouls)
+AND
+ItemGetCharges(_Gauntlet, _Current)
+AND
+IntegerSubtract(_MinSouls, _Current, _RequiredSouls)
+AND
+IntegertoString(_RequiredSouls, _SoulsStr)
+THEN
+DB_CustomCombineItemResponse(_Player, _Gauntlet, 1);
+LeaderLog_LogTarget("NOTIFICATION", _Player, "<font color='#c73030'>", _SoulsStr, " Power Required to Upgrade Weapon</font>");
+
+PROC
+LLWEAPONEX_OniGauntlet_Internal_WeaponComboStarted((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_Weapon, (INTEGER)_MinSouls)
+AND
+NOT DB_CustomCombineItemResponse(_Player, _Gauntlet, 1)
+AND
+IntegerProduct(_MinSouls, -1, _ReduceSouls)
+THEN
+ItemAddCharges(_Gauntlet, _ReduceSouls);
+
+/*
+
+PROC
+ProcBlockCombineItem((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet)
+AND
+IsTagged(_Gauntlet, "LLWEAPONEX_OniGauntlet", 1)
+AND
+GetTemplate(_Gauntlet, _Template)
+AND
+DB_LLWEAPONEX_OniGauntlet_Upgrades(_Template, _MinLevel)
+AND
+ObjectGetFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable", 0)
+THEN
+DB_CustomCombineItemResponse(_Player, _Gauntlet, 1);
+LLWEAPONEX_OniGauntlet_Internal_OniGauntletUpgradeBlocked(_Player, _Gauntlet, _Template, _MinLevel);
+
+PROC
+LLWEAPONEX_OniGauntlet_Internal_OniGauntletUpgradeBlocked((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (STRING)_Template, (INTEGER)_MinLevel)
+AND
+CharacterGetLevel(_Player, _Level)
+AND
+_Level < _MinLevel
+AND
+IntegertoString(_MinLevel, _MinLevelStr)
+THEN
+LeaderLog_LogTarget("STATUS", _Player, "<font color='#FF0000'>Unable to upgrade Oni Gauntlet. Level ",_MinLevelStr," required.</font>");
+
+PROC
+LLWEAPONEX_OniGauntlet_Internal_OniGauntletUpgradeBlocked((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (STRING)_Template, (INTEGER)_MinLevel)
+AND
+CharacterGetLevel(_Player, _Level)
+AND
+_Level >= _MinLevel
+AND
+ItemGetCharges(_Gauntlet, _Current)
+AND
+ItemGetMaxCharges(_Gauntlet, _Max)
+AND
+IntegerSubtract(_Max, _Current, _RequiredSouls)
+AND
+IntegertoString(_RequiredSouls, _RequiredSoulsStr)
+THEN
+LeaderLog_LogTarget("STATUS", _Player, "<font color='#FF0000'>Unable to upgrade Oni Gauntlet. ",_RequiredSoulsStr," Souls required.</font>");
+*/
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION

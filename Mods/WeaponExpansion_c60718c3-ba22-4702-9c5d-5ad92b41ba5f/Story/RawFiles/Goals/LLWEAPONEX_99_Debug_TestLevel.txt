@@ -720,7 +720,9 @@ GetInventoryOwner(_Weapon, (ITEMGUID)_Gauntlet)
 AND
 GetTemplate(_Weapon, _Template)
 AND
-DB_LLWEAPONEX_OniGauntlet_Weapons(_Skill, _Template, _ID)
+DB_LLWEAPONEX_OniGauntlet_Weapons(_Template, _ID, _MinSouls)
+AND
+DB_LLWEAPONEX_OniGauntlet_StartingWeapons(_Skill, _, _ID)
 THEN
 DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID);
 //END_REGION
