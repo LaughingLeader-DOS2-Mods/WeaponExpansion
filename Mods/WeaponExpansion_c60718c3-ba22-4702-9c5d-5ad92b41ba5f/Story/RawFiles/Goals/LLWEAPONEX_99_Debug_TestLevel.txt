@@ -428,7 +428,7 @@ CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_A_Charge", 0);
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_B_Charge", 0);
 //REGION STATUSES
-/*
+
 IF
 CharacterStatusAttempt(_Character, _Status, _Causee)
 AND
@@ -455,7 +455,7 @@ AND
 CharacterGetDisplayName(_Character, _, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
-*/
+
 
 /*
 IF

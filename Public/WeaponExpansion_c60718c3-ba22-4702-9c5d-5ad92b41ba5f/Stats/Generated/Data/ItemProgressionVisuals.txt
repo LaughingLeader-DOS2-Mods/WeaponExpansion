@@ -1665,6 +1665,12 @@ add levelgroup 0,0,"All"
 add rootgroup "78b08f39-3d9d-47b5-b251-f1b8dcebe65b",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold","",""
 
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A","",""
+
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1"
 
 add levelgroup 0,0,"All"
