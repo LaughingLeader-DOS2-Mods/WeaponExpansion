@@ -114,7 +114,7 @@ CharacterCharacterSetEvent(_Attacker, _Defender, "LLWEAPONEX_Katana_OnAttack");
 IF
 CharacterUsedSkill(_Character, "Teleportation_LLWEAPONEX_InstantTransmission", _, _)
 THEN
-ObjectSetFlag(_Character, "LLWEAPONEX_BlockTeleportFalling");
+ObjectSetFlag(_Character, "LLWEAPONEX_BlockTeleportFalling", 0);
 
 IF
 SkillCast(_Character, "Teleportation_LLWEAPONEX_InstantTransmission", _, _)

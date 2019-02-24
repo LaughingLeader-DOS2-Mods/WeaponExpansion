@@ -108,7 +108,7 @@ ItemGetOwner(_Shield, _Owner)
 THEN
 NOT DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:ItemAddedToContainer] Combat shield generated.");
-ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield");
+ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0);
 SetTag(_CombatShield, "LLWEAPONEX_Debug_StorableCombatShield");
 SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
 SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
@@ -162,7 +162,7 @@ IF
 StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_DualShields_VariablesSet")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_VariablesSet] Generating combat shield.");
-ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_EquipAfterGenerating");
+ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_EquipAfterGenerating", 0);
 LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield(_Shield);
 
 PROC

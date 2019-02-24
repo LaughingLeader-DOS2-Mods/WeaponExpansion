@@ -430,7 +430,7 @@ DB_LLWEAPONEX_BonusConversion_Vars(_Type, _ConversionStatus, _StatToCheck, _Stat
 THEN
 NOT DB_LLWEAPONEX_BonusConversion_Temp_WeaponBonus(_Player, _Weapon, _ConversionStatus, _WeaponBonus);
 LLWEAPONEX_BonusConversion_RemoveBonus(_Player, _Type, _StatToCheck, _StatToConvertTo, _WeaponBonus);
-ObjectSetFlag(_Player, "LLWEAPONEX_RefreshEquipmentAfterRespec");
+ObjectSetFlag(_Player, "LLWEAPONEX_RefreshEquipmentAfterRespec", 0);
 
 //Respec done
 PROC

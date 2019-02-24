@@ -143,7 +143,7 @@ THEN
 //CharacterSetCustomName(_Host, "Morghul");
 CharacterAddGold(_Host, 9999);
 CharacterAddTalent(_Host, "LoneWolf");
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Host);
+//LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Host);
 
 IF
 StoryEvent(_, "LeaderLib_Initialized")
@@ -427,8 +427,86 @@ CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt", 0
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0);
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_A_Charge", 0);
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_B_Charge", 0);
-//REGION STATUSES
 
+//REGION ITEM_USAGE
+IF
+CharacterUsedItem(_Character, _Item)
+AND
+String(_Item, _ItemStr)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItem] [",_Name,"] used item [",_ItemStr,"].");
+
+IF
+CharacterUsedItemTemplate(_Character, _Template, _Item)
+AND
+String(_Item, _ItemStr)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItemTemplate] [",_Name,"] used item [",_ItemStr,"][",_Template,"].");
+
+IF
+CharacterUsedItemFailed(_Character, _Item)
+AND
+String(_Item, _ItemStr)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItemFailed] [",_Name,"] used item failed [",_ItemStr,"].");
+
+IF
+CanUseItem(_Character, _Item, _)
+AND
+String(_Item, _ItemStr)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CanUseItem] [",_Name,"] is about to use item [",_ItemStr,"].");
+
+IF
+ItemRemovedFromCharacter(_Item, _Character)
+AND
+String(_Item, _ItemStr)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemRemovedFromCharacter] [",_Name,"] lost item [",_ItemStr,"].");
+
+IF
+CharacterStoppedUsingItem(_Character, _Item)
+AND
+String(_Item, _ItemStr)
+AND
+CharacterGetDisplayName(_Character, _, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStoppedUsingItem] [",_Name,"] stopping using item [",_ItemStr,"].");
+
+IF
+ItemDestroying(_Item)
+AND
+String(_Item, _ItemStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemDestroying] Item [",_ItemStr,"] was destroyed.");
+
+IF
+ItemDestroyed(_Item)
+AND
+String(_Item, _ItemStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemDestroyed] Item [",_ItemStr,"] was destroyed.");
+
+IF
+ItemTemplateDestroyed(_Template, _Item)
+AND
+String(_Item, _ItemStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemTemplateDestroyed] Item [",_ItemStr,"][",_Template,"] was destroyed.");
+//END_REGION
+
+//REGION STATUSES
+/*
 IF
 CharacterStatusAttempt(_Character, _Status, _Causee)
 AND
@@ -455,7 +533,7 @@ AND
 CharacterGetDisplayName(_Character, _, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
-
+*/
 
 /*
 IF

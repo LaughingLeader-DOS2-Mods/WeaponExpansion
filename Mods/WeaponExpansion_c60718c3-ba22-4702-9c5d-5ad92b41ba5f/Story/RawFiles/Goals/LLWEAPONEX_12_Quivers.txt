@@ -192,7 +192,7 @@ AND
 CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", _x, _y, _z, _Backpack)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_DRAW_ARROW] Generating a random arrow for character via treasure table [",_TreasureTable,"].");
-ObjectSetFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow");
+ObjectSetFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow", 0);
 GenerateTreasure(_Backpack, _TreasureTable, _Level, _Character);
 MoveAllItemsTo(_Backpack, _Character, 1, 1, 1);
 ProcObjectTimer(_Backpack, "LLWEAPONEX_Timers_RemoveArrowTreasureBackpack", 250);
@@ -227,7 +227,7 @@ DB_LLWEAPONEX_Quivers_RechargeStatus("Shout_LLWEAPONEX_Quiver_DrawArrow", _Statu
 THEN
 DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, "Shout_LLWEAPONEX_Quiver_DrawArrow", _Status, _RechargeSpeed);
 ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
-ObjectSetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging");
+ObjectSetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging", 0);
 
 PROC
 LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)

@@ -1,0 +1,182 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+LLWEAPONEX_ThrowingMastery_InitSettings();
+LLWEAPONEX_ThrowingMastery_RegisterSkills();
+KBSECTION
+//REGION SETTINGS
+PROC
+LLWEAPONEX_ThrowingMastery_InitSettings()
+THEN
+//Throwing
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_ThrowingAbility", "<font color='#40E0D0'>Throwing Ability</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 0, "<font color='#FFEAEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 1, "<font color='#FF9D9D'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 2, "<font color='#F56CA3'>Journeyman</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 3, "<font color='#F56C8C'>Expert</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 4, "<font color='#FF3376'>Master</font>");
+
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_ThrowingAbility", "LLWEAPONEX_WM_ThrowingAbility_Exp", "LLWEAPONEX_WM_ThrowingAbility_Level");
+
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_ThrowingAbility", 1, "ThrowWeapon", "Any");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_ThrowingAbility", "ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon");
+//END_REGION
+
+//REGION SETTINGS_SKILLS
+
+PROC
+LLWEAPONEX_ThrowingMastery_RegisterSkills()
+THEN
+DB_NOOP(1);
+/*
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_ThrowWeapon");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_BloodBall");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Impale");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Sword1H");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Sword2H");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Axe1H");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Axe2H");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Dagger");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shuriken");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shuriken_Poison");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shuriken_Explosive");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Spear");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Scythe");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Sickle");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Blunt");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Mace1H");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Mace2H");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Instant");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Poison");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shield");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Bow");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Chair_01");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Crossbow");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Staff");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_StaffExplosion");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Wand");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_WandExplosion");
+
+//Grenades
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_ArmorPiercing");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Nailbomb");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Flashbang");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Molotov");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_CursedMolotov");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Love");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_MindMaggot");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_ChemicalWarfare");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Terror");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Ice");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_BlessedIce");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Holy");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Tremor");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Taser");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_WaterBalloon");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_WaterBlessedBalloon");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_SmokeBomb");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_MustardGas");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_OilFlask");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_BlessedOilFlask");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_PoisonFlask");
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_CursedPoisonFlask");
+*/
+//END_REGION
+
+//REGION GAIN_MASTERY
+/*
+IF
+CharacterUsedSkill(_Player, _Skill, _, _)
+AND
+DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills(_Group, _Skll)
+AND
+DB_IsPlayer(_Player)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperience(_Player, "LLWEAPONEX_Throwing", 50);
+*/
+PROC
+LLWEAPONEX_WeaponMastery_MasteryInitialized((CHARACTERGUID)_Player, "LLWEAPONEX_ThrowingAbility", (INTEGER)_Level)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_ThrowingAbility", _CurrentXPVar, _LevelVar, _EnabledFlag)
+THEN
+DB_LLWEAPONEX_WeaponMastery_PlayerData_PermanentMasteries(_Player, "LLWEAPONEX_ThrowingAbility", _EnabledFlag);
+//END_REGION
+
+//REGION THROWING_SKILL_USE_LISTEN
+QRY
+LLWEAPONEX_ThrowingMastery_QRY_ItemIsThrowingItem((ITEMGUID)_Item)
+AND
+IsTagged(_Item, "GRENADES", _x1)
+AND
+IsTagged(_Item, "LLWEAPONEX_Throwing", _x2)
+AND
+IntegerSum(_x1, _x2, _IsThrowing)
+AND
+_IsThrowing > 0
+THEN
+DB_NOOP(1);
+
+PROC
+ProcProcessUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Item, (INTEGER)_RequestID)
+AND
+NOT DB_CustomUseItemResponse(_Player, _Item, 0)
+AND
+DB_IsPlayer(_Player)
+AND
+LLWEAPONEX_ThrowingMastery_QRY_ItemIsThrowingItem(_Item)
+THEN
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
+
+IF
+SkillCast(_Player, _Skill, _, _)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item)
+THEN
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
+LLWEAPONEX_ThrowingMastery_AddExperience(_Player);
+
+//Cancelled Throwing
+IF
+CharacterStoppedUsingItem(_Player, _Item)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item)
+THEN
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
+//END_REGION
+
+//REGION ADD_XP
+QRY
+LLWEAPONEX_ThrowingMastery_QRY_GetThrowingExperienceValue((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, 0, _Experience)
+THEN
+DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, 2);
+
+QRY
+LLWEAPONEX_ThrowingMastery_QRY_GetThrowingExperienceValue((CHARACTERGUID)_Player)
+AND
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _)
+THEN
+DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, 1);
+
+PROC
+LLWEAPONEX_ThrowingMastery_AddExperience((CHARACTERGUID)_Player)
+AND
+LLWEAPONEX_ThrowingMastery_QRY_GetThrowingExperienceValue(_Player)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _Val)
+THEN
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _Val);
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, "LLWEAPONEX_ThrowingAbility", _Val);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

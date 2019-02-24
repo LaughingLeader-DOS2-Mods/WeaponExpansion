@@ -4,6 +4,8 @@ INITSECTION
 KBSECTION
 
 //REGION SKILL_GAINS
+/*
+Disabled for now, since weapon-based skills should be applying LLWEAPONEX_WEAPONMASTERY_EXPERIENCE on hit
 IF
 CharacterUsedSkill(_Player, _Skill, _, _)
 AND
@@ -11,7 +13,7 @@ DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 AND
-IsTagged(_Player, "LLWEAPONEX_MasteryActive", 1)
+ObjectGetFlag(_Player, "LLWEAPONEX_MasteryActive", 1)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
@@ -28,7 +30,8 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage((CHARACTERGUID)_Player, _WeaponType)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
-LLWEAPONEX_WeaponMastery_GainExperienceWithType(_Player, _WeaponType, 175);
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, _WeaponType, 1);
+*/
 //END_REGION
 
 //REGION PARTY_WIDE_EXPERIENCE

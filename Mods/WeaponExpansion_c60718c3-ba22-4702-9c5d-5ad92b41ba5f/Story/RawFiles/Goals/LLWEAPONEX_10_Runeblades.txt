@@ -168,7 +168,7 @@ LLWEAPONEX_Runeblades_QRY_IsInSurface(_Character, _Surface)
 AND
 LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval(_Surface)
 THEN
-ObjectSetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface");
+ObjectSetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 0);
 
 IF
 CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
@@ -280,7 +280,7 @@ ApplyStatus(_Character, "LLWEAPONEX_SOUL_BURN_TICK", 6.0, 1, _Character);
 IF
 StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Commands_StopSoulBurnTick")
 THEN
-ObjectSetFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick");
+ObjectSetFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick", 0);
 RemoveStatus(_Character, "LLWEAPONEX_SOUL_BURN_TICK");
 
 IF

@@ -10,11 +10,12 @@ PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
 THEN
 
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 100);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 100);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 100);
+//Level, Total "Hits"
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 10);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 40);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 50);
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 100);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(4, 100);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(4, 125);
 
 //Max possible level attainable by players
 //DB_LLWEAPONEX_WeaponMastery_Softcap(2);
@@ -112,7 +113,7 @@ DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "SuckerComb
 
 //Runeblade
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Runeblade", "<font color='#40E0D0'>Runeblade Mastery</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 0, "<font color='#eafffe'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 0, "<font color='#EAFFFE'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 1, "<font color='#9DFCFF'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 2, "<font color='#6CE3F5'>Journeyman Runekeeper</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Runeblade", 3, "<font color='#6CF5E9'>Expert Runekeeper</font>");
@@ -146,6 +147,25 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelV
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,2)
+THEN
+LLWEAPONEX_WeaponMastery_InitSettings();
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,2)
+AND
+DB_IsPlayer(_Player)
+AND
+IsTagged(_Player, "LLWEAPONEX_MasteryActive", 1)
+THEN
+ClearTag(_Player, "LLWEAPONEX_MasteryActive");
+ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
@@ -228,9 +248,23 @@ THEN
 DB_NOOP(1);
 
 QRY
+LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_PlayerData_PermanentMasteries(_Player, _WeaponType, _EnabledFlag)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery((CHARACTERGUID)_Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_WeaponMastery_PlayerData_PermanentMasteries(_Player, _WeaponType, _EnabledFlag)
 THEN
 DB_NOOP(1);
 
@@ -354,7 +388,7 @@ NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _Skill
 AND
 DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Flag, "Flag")
 THEN
-ObjectSetFlag(_Player, _Flag);
+ObjectSetFlag(_Player, _Flag, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:Internal:AddSkillType] Adding flag [",_Flag,"] for Weapon Mastery [",_WeaponType,"] and SkillID [",_SkillID,"].");
 
 PROC
@@ -423,10 +457,15 @@ AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, _Max)
+THEN
+LLWEAPONEX_WeaponMastery_StoreExperience(_Player, _WeaponType, _Level, 0);
+LLWEAPONEX_WeaponMastery_MasteryInitialized(_Player, _WeaponType, _Level);
+
+PROC
+LLWEAPONEX_WeaponMastery_MasteryInitialized((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level)
 AND
 IntegertoString(_Level, _LevelStr)
 THEN
-LLWEAPONEX_WeaponMastery_StoreExperience(_Player, _WeaponType, _Level, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:InitMasteryVariables] Weapon Mastery [",_WeaponType,"] was set to level [",_LevelStr,"] for character.");
 //END_REGION
 
@@ -439,8 +478,8 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelV
 AND
 IsTagged(_Item, _WeaponType, 1)
 THEN
-ObjectSetFlag(_Player, _EnabledFlag);
-SetTag(_Player, "LLWEAPONEX_MasteryActive");
+ObjectSetFlag(_Player, _EnabledFlag, 0);
+ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
@@ -460,7 +499,7 @@ LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_W
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _, _)
 THEN
-ClearTag(_Player, "LLWEAPONEX_MasteryActive");
+ObjectClearFlag(_Player, "LLWEAPONEX_MasteryActive");
 //END_REGION
 
 //REGION PRESET_APPLIED
@@ -521,6 +560,7 @@ AND
 NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType, _Item)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:LLWEAPONEX_Timers_MasteryDeactivated] Weapon Mastery [",_WeaponType,"] was deactivated.");
 ObjectClearFlag(_Player, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _WeaponType);
@@ -750,7 +790,7 @@ DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1);
 LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 /*
@@ -764,7 +804,7 @@ DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_GainExperience(_Player, 25);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1);
 LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack(_Player, _Target);
 
 PROC
@@ -773,7 +813,7 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_WeaponMastery_GainExperience((CHARACTERGUID)_Player, (INTEGER)_BaseExperience)
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries((CHARACTERGUID)_Player, (INTEGER)_Gain)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND
@@ -781,17 +821,17 @@ LLWEAPONEX_QRY_WeaponTypeMasteryEnabled(_Player, _WeaponType)
 AND
 LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, _WeaponType, _LevelVar)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperience(_Player, _WeaponType, _BaseExperience);
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, _WeaponType, _Gain);
 
 PROC
-LLWEAPONEX_WeaponMastery_GainExperienceWithType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Gain)
 AND
-LLWEAPONEX_QRY_WeaponTypeMasteryEnabled(_Player, _WeaponType)
+NOT DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _, _)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperience(_Player, _WeaponType, _BaseExperience);
+LLWEAPONEX_WeaponMastery_InitMasteryVariables(_Player, _WeaponType);
 
 PROC
-LLWEAPONEX_WeaponMastery_AddExperience((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_BaseExperience)
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Gain)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND
@@ -799,9 +839,7 @@ DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, 
 AND
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(_Level, _Max)
 AND
-IntegerDivide(_BaseExperience, 25, _ExpAmount)
-AND
-IntegerSum(_Experience, _ExpAmount, _NextCurrent)
+IntegerSum(_Experience, _Gain, _NextCurrent)
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_Internal_LeveledUp(_Player, _WeaponType, _Level, _NextCurrent, _Max)
 THEN
@@ -897,10 +935,17 @@ NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy);
 
 PROC
 LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
+THEN
+DB_NOOP(1);
+
+/*
+PROC
+LLWEAPONEX_WeaponMastery_Internal_JustGainedExperienceFromWeaponAttack((CHARACTERGUID)_Player, (CHARACTERGUID)_Target)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+*/
 
 /*
 PROC
@@ -925,19 +970,19 @@ CharacterIsInPartyWith(_Player, _PartyMember, 1)
 AND
 IsBoss(_Enemy, _IsBoss)
 AND
-IntegerSum(_IsBoss, 1, _BossMult) // 2x exp for bosses
+IntegerSum(_IsBoss, 4, _BossMult) // 2x exp for bosses
 AND
-IntegerProduct(100, _BossMult, _AddExp)
+IntegerProduct(1, _BossMult, _AddExp)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_01_WeaponMastery:LLWEAPONEX_WeaponMastery_AddPartyExperience] Adding [",_AddExp,"] party mastery experience to player.");
-LLWEAPONEX_WeaponMastery_GainExperience(_Player, _AddExp);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, _AddExp);
 //END_REGION
 
 //REGION EXPERIENCE_LISTENING_RESET
 PROC
 LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries()
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage((CHARACTERGUID)_Player, (STRING)_WeaponType)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
 //END_REGION
@@ -1018,7 +1063,7 @@ StringConcatenate(_WeaponType, "_Unlocked_Level", _Str1)
 AND
 StringConcatenate(_Str1, _LevelStr, _UnlockedFlag)
 THEN
-ObjectSetFlag(_Player, _UnlockedFlag);
+ObjectSetFlag(_Player, _UnlockedFlag, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:SetProgressionFlags] Unlocked flag [",_UnlockedFlag,"].");
 
 //Unlock every previous flag
@@ -1043,7 +1088,7 @@ StringConcatenate(_Str1, _LevelStr, _UnlockedFlag)
 AND
 ObjectGetFlag(_Player, _UnlockedFlag, 0)
 THEN
-ObjectSetFlag(_Player, _UnlockedFlag);
+ObjectSetFlag(_Player, _UnlockedFlag, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:SetProgressionFlags] Unlocking flag [",_UnlockedFlag,"] and all previous flags.");
 LLWEAPONEX_WeaponMastery_Internal_UnlockPreviousProgressionFlags(_Player, _WeaponType, _PreviousLevel);
 
@@ -1064,7 +1109,7 @@ StringConcatenate(_Str1, _LevelStr, _UnlockedFlag)
 AND
 ObjectGetFlag(_Player, _UnlockedFlag, 0)
 THEN
-ObjectSetFlag(_Player, _UnlockedFlag);
+ObjectSetFlag(_Player, _UnlockedFlag, 0);
 //LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:UnlockPreviousProgressionFlags] Unlocked flag [",_UnlockedFlag,"].");
 LLWEAPONEX_WeaponMastery_Internal_UnlockPreviousProgressionFlags(_Player, _WeaponType, _PreviousLevel);
 //END_REGION
@@ -1142,59 +1187,8 @@ THEN
 RemoveStatus(_Player, _InfoStatus);
 //END_REGION
 
-//REGION MENU_TEXT
-IF
-DialogStarted("LLWEAPONEX_WeaponMasteryMenu", _Instance)
-//DualDialogStart("LLWEAPONEX_WeaponMasteryMenu", _Instance)
-//ObjectFlagSet("LLWEAPONEX_WeaponMasteryMenu_SetExperienceVariable", (CHARACTERGUID)_Player, _Instance)
-//DualDialogRequested("LLWEAPONEX_WeaponMasteryMenu", _ParentInstance, _TargetInstance)
-AND
-DialogGetInvolvedPlayer(_Instance, 1, (CHARACTERGUID)_Player)
-THEN
-ObjectClearFlag(_Player, "LLWEAPONEX_WeaponMasteryMenu_SetExperienceVariable");
-DB_LLWEAPONEX_WeaponMastery_Temp_CurrentExperienceString(_Player, _Instance, "");
-LLWEAPONEX_WeaponMastery_SetExperienceString(_Player, _Instance);
 
-PROC
-LLWEAPONEX_WeaponMastery_SetExperienceString((CHARACTERGUID)_Player, (INTEGER)_Instance)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryNames(_WeaponType, _MasteryName)
-AND
-GetVarInteger(_Player, _CurrentXPVar, _CurrentExpInt)
-//AND
-//GetVarInteger(_Player, _MaxXPVar, _MaxExpInt)
-AND
-GetVarInteger(_Player, _LevelVar, _CurrentLevelInt)
-AND
-IntegerMin(_CurrentLevelInt, 4, _ClampedLevel) // Ranks 0-4 max currently
-AND
-IntegertoString(_CurrentExpInt, _CurrentExp)
-//AND
-//IntegertoString(_MaxExpInt, _MaxExp)
-AND
-DB_LLWEAPONEX_WeaponMastery_RankNames(_WeaponType, _ClampedLevel, _RankName)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_CurrentExperienceString(_Player, _Instance, _String)
-AND
-LeaderLog_QRY_Log("COMBINE", _String, _MasteryName, " - ",_RankName, " - <font color='#F228EC'>",_CurrentExp, "</font>/100<br>")
-AND
-DB_LeaderLog_Temp_CombinedString(_NewString)
-THEN
-NOT DB_LeaderLog_Temp_CombinedString(_NewString);
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_CurrentExperienceString(_Player, _Instance, _String);
-DB_LLWEAPONEX_WeaponMastery_Temp_CurrentExperienceString(_Player, _Instance, _NewString);
 
-PROC
-LLWEAPONEX_WeaponMastery_SetExperienceString((CHARACTERGUID)_Player, (INTEGER)_Instance)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_CurrentExperienceString(_Player, _Instance, _String)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_CurrentExperienceString(_Player, _Instance, _String);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:SetExperienceString] Set current experience dialog variable to [",_String,"].");
-DialogSetVariableStringForInstance(_Instance, "LLWEAPONEX_WeaponMastery_Current_f4dda1ff-ab17-4141-be2f-763c6c22a7cc", _String);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

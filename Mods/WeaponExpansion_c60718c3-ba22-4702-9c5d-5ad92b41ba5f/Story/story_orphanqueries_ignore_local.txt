@@ -7,3 +7,4 @@ DB_LLWEAPONEX_Debug_TimeAtmospheres 4
 DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill 3
 DB_LeaderLib_BlockedSkill 1
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables 5
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage 2

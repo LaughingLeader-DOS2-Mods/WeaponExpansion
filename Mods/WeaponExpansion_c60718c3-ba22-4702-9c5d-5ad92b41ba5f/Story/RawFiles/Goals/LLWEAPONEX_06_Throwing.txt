@@ -974,6 +974,139 @@ THEN
 ItemTemplateAddTo("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player, 1, 1);
 //END_REGION
 
+//REGION MOVING_OBJECT_WEAPON
+IF
+CharacterUsedSkill(_Player, "Projectile_LLWEAPONEX_ThrowWeapon", _, _)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
+
+IF
+StoryEvent((ITEMGUID)_Object, "LLWEAPONEX_MovingObjectWeapon_Init")
+AND
+DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
+DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, _Object);
+LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals(_Player, _Object);
+ApplyStatus(_Player, "LEADERLIB_HIDE_WEAPON", 30.0, 1, _Player);
+
+PROC
+LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals((CHARACTERGUID)_Player, (ITEMGUID)_Object)
+AND
+CharacterGetEquippedWeapon(_Player, (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+AND
+GetTemplate(_Weapon, _Template)
+THEN
+Transform(_Object, _Template, 0, 1, 1);
+ItemSetCanPickUp(_Object, 0);
+LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects(_Weapon);
+
+PROC
+LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals((CHARACTERGUID)_Player, (ITEMGUID)_Object)
+AND
+CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+AND
+NOT CharacterGetEquippedShield(_Player, _Weapon) // Don't throw equipped shields
+AND
+GetPosition(_Object, _x, _y, _z)
+AND
+GetTemplate(_Weapon, _Template)
+AND
+CreateItemTemplateAtPosition(_Template, _x, _y, _z, _OffhandWeapon)
+THEN
+ItemSetCanPickUp(_OffhandWeapon, 0);
+DB_LLWEAPONEX_Throwing_Temp_ThrownOffhandProjectile(_Player, _Object, _OffhandWeapon);
+LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects(_Weapon);
+
+PROC
+LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects((ITEMGUID)_Weapon)
+AND
+IsTagged(_Weapon, "DISABLE_WEAPON_EFFECTS", 0)
+THEN
+SetTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
+ObjectSetFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0);
+
+IF
+StoryEvent((ITEMGUID)_Object, "LLWEAPONEX_MovingObjectWeapon_Tick")
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrownOffhandProjectile(_Player, _Object, _OffhandWeapon)
+AND
+GetPosition(_Object, _x, _y, _z)
+AND
+RealSum(_y, 0.25, _ty)
+AND
+GetRotation(_Object, _rx, _ry, _rz)
+THEN
+ItemToTransform(_OffhandWeapon, _x, _ty, _z, _rx, _ry, _rz, 1, _Player);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_06_Throwing:LLWEAPONEX_MovingObjectWeapon_Tick] Updating offhand projectile position.");
+
+IF
+CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObjectWeapon_Landed")
+AND
+DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, _Object)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, _Object);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_06_Throwing:LLWEAPONEX_MovingObjectWeapon_Landed] Weapon MovingObject landed. Teleporting equipped weapon to position.");
+LLWEAPONEX_Throwing_MovingObject_TeleportWeapon(_Player, _Object);
+RemoveStatus(_Player, "LEADERLIB_HIDE_WEAPON");
+SetOnStage(_Object, 0);
+ItemDestroy(_Object);
+
+IF
+CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObjectWeapon_Landed")
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrownOffhandProjectile(_Player, _Object, _OffhandWeapon)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrownOffhandProjectile(_Player, _Object, _OffhandWeapon);
+LLWEAPONEX_Throwing_MovingObject_TeleportOffhandWeapon(_Player, _OffhandWeapon);
+SetOnStage(_OffhandWeapon, 0);
+ItemDestroy(_OffhandWeapon);
+
+PROC
+LLWEAPONEX_Throwing_MovingObject_TeleportWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Object)
+AND
+GetPosition(_Object, _x, _y, _z)
+AND
+GetRotation(_Object, _rx, _ry, _rz)
+AND
+CharacterGetEquippedWeapon(_Player, (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+THEN
+CharacterUnequipItem(_Player, _Weapon);
+ItemToTransform(_Weapon, _x, _y, _z, _rx, _ry, _rz, 1, _Player);
+LLWEAPONEX_Throwing_MovingObject_ResetWeaponEffects(_Weapon);
+
+PROC
+LLWEAPONEX_Throwing_MovingObject_TeleportOffhandWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Object)
+AND
+GetPosition(_Object, _x, _y, _z)
+AND
+GetRotation(_Object, _rx, _ry, _rz)
+AND
+CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+THEN
+CharacterUnequipItem(_Player, _Weapon);
+ItemToTransform(_Weapon, _x, _y, _z, _rx, _ry, _rz, 1, _Player);
+LLWEAPONEX_Throwing_MovingObject_ResetWeaponEffects(_Weapon);
+
+PROC
+LLWEAPONEX_Throwing_MovingObject_ResetWeaponEffects((ITEMGUID)_Weapon)
+AND
+IsTagged(_Weapon, "DISABLE_WEAPON_EFFECTS", 1)
+AND
+ObjectGetFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 1)
+THEN
+ObjectClearFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0);
+ClearTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

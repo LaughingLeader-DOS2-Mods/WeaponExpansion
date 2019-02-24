@@ -151,7 +151,7 @@ LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 THEN
-ObjectSetFlag(_Player, "LLWEAPONEX_GrimoireEquipped");
+ObjectSetFlag(_Player, "LLWEAPONEX_GrimoireEquipped", 0);
 LLWEAPONEX_Grimoire_OnGrimoireEquipped(_Player, _Item);
 LLWEAPONEX_ToggleSettings_OnTagAdded(_Player, "LLWEAPONEX_Grimoire");
 

@@ -2,11 +2,16 @@ INIT
 	ITEM:__Me
 	EXTERN STRING:%LLWEAPONEX_InitEvent = null
 	EXTERN STRING:%LLWEAPONEX_LandEvent = null
+	EXTERN STRING:%LLWEAPONEX_TickEvent = null
+	EXTERN FLOAT:%LLWEAPONEX_TimerTickSpeed = 0.001
+	
 	EXTERN FLOAT:%LLWEAPONEX_Radius = 1.0
 	EXTERN FLOAT:%LLWEAPONEX_Lifetime = 6.0
 	EXTERN FLOAT:%LLWEAPONEX_InitEventDelay = 0.025
+	
 	EXTERN STRING:%LLWEAPONEX_Effect = null
-	EXTERN INT:%LLWEAPONEX_EffectTimerSpeed = 1
+	EXTERN FLOAT:%LLWEAPONEX_EffectTimerSpeed = 0.001
+	EXTERN INT:%LLWEAPONEX_EffectTimerRepeatCount = -1
 	SKILL:%LLWEAPONEX_ProjectileSkill=null
 	//CHARACTER:%LLWEAPONEX_Caster = null
 EVENTS
@@ -33,10 +38,22 @@ ENDIF
 IF "!c1"
 	IsEqual(%LLWEAPONEX_Effect, null)
 THEN
-	SetVar(__Me, "LeaderLib_Timer_CompleteEvent", STRING:"LLWEAPONEX_Events_PlayMovingObjectEffect")
-	SetVar(__Me, "LeaderLib_Timer_Delay", %LLWEAPONEX_EffectTimerSpeed)
-	ItemEvent(__Me, "LeaderLib_Commands_StartObjectTimer")
+	StartTimer("LLWEAPONEX_MovingObject_PlayEffect", %LLWEAPONEX_EffectTimerSpeed, 0)
 ENDIF
+
+IF "!c1&!c2&c3"
+	IsEqual(%LLWEAPONEX_TickEvent, null)
+	IsEqual(%LLWEAPONEX_TickEvent, "")
+	IsGreaterThen(%LLWEAPONEX_TimerTickSpeed, 0)
+THEN
+	StartTimer("LLWEAPONEX_MovingObject_Tick", %LLWEAPONEX_TimerTickSpeed, -1)
+ENDIF
+
+EVENT LLWEAPONEX_MovingObject_Tick
+ON
+	OnTimer("LLWEAPONEX_MovingObject_Tick")
+ACTIONS
+	ItemEvent(__Me, %LLWEAPONEX_TickEvent)
 
 EVENT LLWEAPONEX_MovingObject_DelayedInit
 ON
@@ -44,16 +61,23 @@ ON
 ACTIONS
 	ItemEvent(__Me, %LLWEAPONEX_InitEvent)
 
-EVENT LLWEAPONEX_MovingObject_EffectTick
+EVENT LLWEAPONEX_MovingObject_InitialEffect
 ON
-	OnItemEvent(__Me, "LLWEAPONEX_Events_PlayMovingObjectEffect")
+	OnTimer("LLWEAPONEX_MovingObject_PlayEffect")
 ACTIONS
 IF "!c1"
 	ItemIsDestroyed(__Me)
 THEN
 	PlayEffectAt(__Me, %LLWEAPONEX_Effect)
-	ItemEvent(__Me, "LeaderLib_Commands_StartObjectTimer")
 ENDIF
+
+EVENT LLWEAPONEX_MovingObject_Destroyed
+ON
+	OnItemDestroyed(__Me)
+	OnFunction("LLWEAPONED_MovingObject_Landed")
+ACTIONS
+	StopTimer("LLWEAPONEX_MovingObject_Tick")
+	StopTimer("LLWEAPONEX_MovingObject_PlayEffect")
 
 EVENT LLWEAPONEX_MovingObject_Land
 VARS 
@@ -62,7 +86,9 @@ VARS
 ON
 	OnGrenadeLand(_HitObstacle, _Caster)
 ACTIONS
+	CallFunction("LLWEAPONED_MovingObject_Landed")
 	ItemEvent(__Me, "LeaderLib_Commands_CancelObjectTimer")
+	
 IF "!c1"
 	IsEqual(%LLWEAPONEX_ProjectileSkill, null)
 THEN

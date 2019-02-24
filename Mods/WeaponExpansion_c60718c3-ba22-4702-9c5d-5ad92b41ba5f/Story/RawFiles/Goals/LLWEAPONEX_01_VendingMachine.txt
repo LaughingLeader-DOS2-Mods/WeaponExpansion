@@ -277,7 +277,7 @@ DB_LLWEAPONEX_VendingMachine_LastOrdered(_TreasureTable, _Instance);
 NOT DB_LLWEAPONEX_VendingMachine_NextOrder(_TreasureTable, _Instance);
 LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.VendingMachine.Orders", _TreasureTable);
 LeaderLib_Treasure_Configure_GenerateOnce("LLWEAPONEX.VendingMachine.Orders", _TreasureTable, "LLWEAPONEX_VendingMachine_OnOrderGenerated");
-ObjectSetFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled");
+ObjectSetFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled", 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:CompleteOrder] Added [",_TreasureTable,"] as the next treasure order.");
 
 IF
@@ -331,7 +331,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnSpawned] Initializing Vendi
 ProcObjectTimer(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Timers_LevelUpVendingMachine", 1000);
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
-ObjectSetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized");
+ObjectSetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized", 0);
 CharacterTransformAppearanceToWithEquipmentSet(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A", 0);
 
 //Flipped bones workaround for now

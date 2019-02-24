@@ -164,7 +164,7 @@ CharacterGetLevel(_Player, _Level)
 AND
 _Level >= _MinLevel
 THEN
-ObjectSetFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable");
+ObjectSetFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable", 0);
 //END_REGION
 
 //REGION ONI_GAUNTLET_ORB_INSERTED
