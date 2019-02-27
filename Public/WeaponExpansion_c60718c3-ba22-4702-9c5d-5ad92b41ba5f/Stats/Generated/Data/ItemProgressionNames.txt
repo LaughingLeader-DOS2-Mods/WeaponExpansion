@@ -341,6 +341,10 @@ add name "Exquisite Greatbow of the Empire",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
 add name "Omnibolt, Heaven's Wrath",""
 
+new namegroup "WPN_LLWEAPONEX_HandCrossbow_Crafted_Lizards_A"
+add name "Mini-Arbalest",""
+add namecool "Magical Mini-Arbalest",""
+
 new namegroup "WPN_LLWEAPONEX_DualShields_Common"
 add name "Dual Shields",""
 
