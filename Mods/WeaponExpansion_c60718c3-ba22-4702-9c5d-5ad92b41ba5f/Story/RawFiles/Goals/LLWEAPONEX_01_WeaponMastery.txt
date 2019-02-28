@@ -9,7 +9,6 @@ KBSECTION
 PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
 THEN
-
 //Level, Total "Hits"
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 10);
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 40);
@@ -64,6 +63,19 @@ DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot",
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Male");
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Female");
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male");
+
+//Hand Crossbows
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_HandCrossbow", "<font color='#D9D9D9'>Hand Crossbow Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_HandCrossbow", 0, "<font color='#FDFFEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_HandCrossbow", 1, "<font color='#FFDA9E'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_HandCrossbow", 2, "<font color='#FFC973'>Journeyman Assassin</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_HandCrossbow", 3, "<font color='#FFB94A'>Expert Assassin</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_HandCrossbow", 4, "<font color='#FF9E03'>Master Assassin</font>");
+
+//DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbow_Exp", "LLWEAPONEX_HandCrossbow_Level");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_HandCrossbow", 1, "Assassinate", "Any");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Assassinate", "Projectile_LLWEAPONEX_HandCrossbow_Assassinate");
 
 //Katana
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Katana", "<font color='#FF2D2D'>Katana Mastery</font>");
@@ -163,7 +175,6 @@ DB_IsPlayer(_Player)
 AND
 IsTagged(_Player, "LLWEAPONEX_MasteryActive", 1)
 THEN
-ClearTag(_Player, "LLWEAPONEX_MasteryActive");
 ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
 
 PROC
@@ -480,6 +491,7 @@ IsTagged(_Item, _WeaponType, 1)
 THEN
 ObjectSetFlag(_Player, _EnabledFlag, 0);
 ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
+SetTag(_Player, "LLWEAPONEX_MasteryActive");
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
@@ -500,6 +512,7 @@ AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _, _)
 THEN
 ObjectClearFlag(_Player, "LLWEAPONEX_MasteryActive");
+ClearTag(_Player, "LLWEAPONEX_MasteryActive");
 //END_REGION
 
 //REGION PRESET_APPLIED

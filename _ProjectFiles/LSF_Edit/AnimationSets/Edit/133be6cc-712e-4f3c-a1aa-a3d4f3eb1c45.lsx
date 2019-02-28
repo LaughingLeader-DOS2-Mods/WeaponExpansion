@@ -77,6 +77,42 @@
 																		</node>
 																	</children>
 																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_1h_01_start" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="4b2ebfc3-d61a-4b8c-922a-35a3225882df" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_1h_01_start" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_1h_01_loop" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="a5422dd6-95c8-4ce6-bc56-6ded4a9f3e42" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_1h_01_loop" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_handcrossbow_01_start" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="b85dd0bd-4a25-4b6d-aa89-083181073462" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_handcrossbow_01_start" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_handcrossbow_01_loop" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="4f126ed5-a51c-4ee8-bac7-c553f78c9017" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_handcrossbow_01_loop" type="22" />
+																		</node>
+																	</children>
+																</node>
 															</children>
 														</node>
 													</children>

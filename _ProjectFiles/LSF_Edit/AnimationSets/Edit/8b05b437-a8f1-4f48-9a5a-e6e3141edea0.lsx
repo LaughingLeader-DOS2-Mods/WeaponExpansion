@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <save>
 	<header version="2" time="0" />
-	<version major="54" minor="1" revision="0" build="0" />
+	<version major="54" minor="3" revision="0" build="1" />
 	<region id="AnimationSetBank">
 		<node id="AnimationSetBank">
 			<children>
@@ -24,38 +24,11 @@
 														<node id="MapValue">
 															<children>
 																<node id="Animation">
-																	<attribute id="MapKey" value="skill_prepare_ll_wd_01_start" type="22" />
+																	<attribute id="MapKey" value="skill_attack_ll_sh_02_cast" type="22" />
 																	<children>
 																		<node id="MapValue">
-																			<attribute id="ID" value="b0fcbf99-9e04-4120-92fa-e58e62b2ae4d" type="22" />
-																			<attribute id="Name" value="skill_prepare_ll_wd_01_start" type="22" />
-																		</node>
-																	</children>
-																</node>
-																<node id="Animation">
-																	<attribute id="MapKey" value="skill_prepare_ll_wd_01_loop" type="22" />
-																	<children>
-																		<node id="MapValue">
-																			<attribute id="ID" value="a41b945c-c80f-4fa6-aed2-672bc10eb7c6" type="22" />
-																			<attribute id="Name" value="skill_prepare_ll_wd_01_loop" type="22" />
-																		</node>
-																	</children>
-																</node>
-																<node id="Animation">
-																	<attribute id="MapKey" value="skill_attack_ll_wd_01_cast" type="22" />
-																	<children>
-																		<node id="MapValue">
-																			<attribute id="ID" value="c29dbd7b-d9ab-45ef-8530-b0ca525bf9c5" type="22" />
-																			<attribute id="Name" value="skill_attack_ll_wd_01_cast" type="22" />
-																		</node>
-																	</children>
-																</node>
-																<node id="Animation">
-																	<attribute id="MapKey" value="skill_attack_ll_wd_02_cast" type="22" />
-																	<children>
-																		<node id="MapValue">
-																			<attribute id="ID" value="c29dbd7b-d9ab-45ef-8530-b0ca525bf9c5" type="22" />
-																			<attribute id="Name" value="skill_attack_ll_wd_02_cast" type="22" />
+																			<attribute id="ID" value="1e734bc4-4a69-4b4b-8f58-8bff7be278e1" type="22" />
+																			<attribute id="Name" value="skill_attack_ll_sh_02_cast" type="22" />
 																		</node>
 																	</children>
 																</node>
@@ -69,11 +42,74 @@
 																	</children>
 																</node>
 																<node id="Animation">
-																	<attribute id="MapKey" value="skill_attack_ll_sh_02_cast" type="22" />
+																	<attribute id="MapKey" value="skill_attack_ll_wd_02_cast" type="22" />
 																	<children>
 																		<node id="MapValue">
-																			<attribute id="ID" value="1e734bc4-4a69-4b4b-8f58-8bff7be278e1" type="22" />
-																			<attribute id="Name" value="skill_attack_ll_sh_02_cast" type="22" />
+																			<attribute id="ID" value="c29dbd7b-d9ab-45ef-8530-b0ca525bf9c5" type="22" />
+																			<attribute id="Name" value="skill_attack_ll_wd_02_cast" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_attack_ll_wd_01_cast" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="c29dbd7b-d9ab-45ef-8530-b0ca525bf9c5" type="22" />
+																			<attribute id="Name" value="skill_attack_ll_wd_01_cast" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_wd_01_loop" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="a41b945c-c80f-4fa6-aed2-672bc10eb7c6" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_wd_01_loop" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_wd_01_start" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="b0fcbf99-9e04-4120-92fa-e58e62b2ae4d" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_wd_01_start" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_1h_01_start" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="c7614f4c-d836-40c1-8daa-88a95db28de5" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_1h_01_start" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_1h_01_loop" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="051a8bc4-3dc5-4c44-a5b5-d880fbd33913" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_1h_01_loop" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_handcrossbow_01_start" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="c7614f4c-d836-40c1-8daa-88a95db28de5" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_handcrossbow_01_start" type="22" />
+																		</node>
+																	</children>
+																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_prepare_ll_handcrossbow_01_loop" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="051a8bc4-3dc5-4c44-a5b5-d880fbd33913" type="22" />
+																			<attribute id="Name" value="skill_prepare_ll_handcrossbow_01_loop" type="22" />
 																		</node>
 																	</children>
 																</node>

@@ -345,6 +345,10 @@ new namegroup "WPN_LLWEAPONEX_HandCrossbow_Crafted_Lizards_A"
 add name "Mini-Arbalest",""
 add namecool "Magical Mini-Arbalest",""
 
+new namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A"
+add name "Mini-Arbalest",""
+add namecool "Magical Mini-Arbalest",""
+
 new namegroup "WPN_LLWEAPONEX_DualShields_Common"
 add name "Dual Shields",""
 

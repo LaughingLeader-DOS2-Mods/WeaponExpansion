@@ -46,3 +46,4 @@ LOOT_LLWEAPONEX_Token_Reset	Token of Reversal
 LOOT_LLWEAPONEX_Orb_Thunder_A	Shiden, Thunder Orb
 LOOT_LLWEAPONEX_Orb_Thunder_B	Shiden, Thunder Orb (Empowered)
 LOOT_LLWEAPONEX_Orb_Thunder_C	Shiden, Thunder Orb (Unleashed)
+LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Normal	Small Crossbow Bolt
