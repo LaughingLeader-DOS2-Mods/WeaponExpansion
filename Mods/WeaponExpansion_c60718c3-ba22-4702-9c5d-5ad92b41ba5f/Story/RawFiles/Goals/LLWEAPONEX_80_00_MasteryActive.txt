@@ -51,12 +51,14 @@ THEN
 LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy);
 //END_REGION
 
+/*
 IF
 ObjectTransformed((CHARACTERGUID)_Player, _)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_MasteryActive", 1)
 THEN
 SetTag(_Player, "LLWEAPONEX_MasteryActive");
+*/
 
 EXITSECTION
 LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries();

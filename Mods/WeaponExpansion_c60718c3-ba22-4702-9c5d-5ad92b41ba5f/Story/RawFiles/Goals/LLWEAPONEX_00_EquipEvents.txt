@@ -16,8 +16,10 @@ LLWEAPONEX_OnItemEquipped(_PLayer, _Item);
 
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+AND
+LLWEAPONEX_QRY_ItemIsWeapon(_Item)
 THEN
-DB_NOOP(1);
+LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_AnyWeaponEquipped");
 
 IF
 ItemUnEquipped(_Item, _Player)
@@ -32,8 +34,12 @@ LLWEAPONEX_OnItemUnEquipped(_PLayer, _Item);
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+AND
+LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+AND
+NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Player)
 THEN
-DB_NOOP(1);
+LeaderLib_Tags_ClearPreservedTag(_Player, "LLWEAPONEX_AnyWeaponEquipped");
 
 //REGION PRESET_APPLIED
 PROC

@@ -1,2 +1,4 @@
 LLWEAPONEX_Katana_FinisherEnabled	Finisher		
 LLWEAPONEX_Rapier_SuckerCombo1Enabled	Dirty Fighting I		
+LLWEAPONEX_HandCrossbow_Equipped	a Hand Crossbow
+LLWEAPONEX_AnyWeaponEquipped	an Equipped Weapon

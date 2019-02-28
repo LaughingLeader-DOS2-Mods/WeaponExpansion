@@ -24,11 +24,3 @@ Shout_LLWEAPONEX_ZombifySelf_Description	Temporarily gain a few Zombie-like trai
 Target_LLWEAPONEX_Zombify_DisplayName	Zombify
 Target_LLWEAPONEX_Zombify_Description	Temporarily zombify an ally, granting them <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_DisplayName	Shoot Hand Crossbow
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	Shoot your hand crossbow at a target, dealing [1].
-Shout_LLWEAPONEX_HandCrossbow_Reload_DisplayName	Reload <font color='#C7A758'>Hand Crossbow</font>
-Shout_LLWEAPONEX_HandCrossbow_Reload_Description	Reload your <font color='#C7A758'>Hand Crossbow</font> with the inserted crossbow bolt.<br><font color='#fc70cc'>Requires crossbow bolts in the rune slot.</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_DisplayName	Shoot <font color='#C7A758'>Hand Crossbow</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1] and consuming a charge.
-Projectile_LLWEAPONEX_HandCrossbow_Assassinate_DisplayName	Assassin's Requiem
-Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Description	Fire a decisive shot at a target with your <font color='#C7A758'>Hand Crossbow</font>, dealing [1].

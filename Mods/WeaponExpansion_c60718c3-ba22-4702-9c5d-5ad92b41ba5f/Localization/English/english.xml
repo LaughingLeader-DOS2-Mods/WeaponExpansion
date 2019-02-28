@@ -32,10 +32,10 @@
 	<content contentuid="h61ef19d0g09f0g490bg9b37gae0ddaead259" OT="[1] turn(s)">[1] turn(s)</content>
 	<content contentuid="h192a08b3gd474g4dacg85bagc0ce5e0e27e4" OT="Empty slot">Empty Slot</content>
 	<content contentuid="h03b9013dg183cg4543gbcd5gf9e832e74fae" OT="Unbreakable">Unbreakable</content>
-	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a" OT="Item is out of charges&lt;br&gt;">Power Depleted&lt;br&gt;</content>
-	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69" OT="Item is out of charges&lt;br&gt;">Power Depleted&lt;br&gt;</content>
-	<content contentuid="h89dbdaf9g61bdg4246g82fag8e432a286751" OT="Wand is out of charges">Power Depleted</content>
-	<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee" OT="Number of uses">Power</content>
+	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a" OT="Item is out of charges&lt;br&gt;">Charges Depleted&lt;br&gt;</content>
+	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69" OT="Item is out of charges&lt;br&gt;">Charges Depleted&lt;br&gt;</content>
+	<content contentuid="h89dbdaf9g61bdg4246g82fag8e432a286751" OT="Wand is out of charges">Charges Depleted</content>
+	<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee" OT="Number of uses">Charges</content>
 	<content contentuid="h2feb0bc1g47aag41degb94eg7982094ec7e1" OT="Grants skill: [1]">Grants Skill: [1]</content>
 	<content contentuid="h96db82f9g82ddg45ddgafe7g220fb513f61d" OT="Grants skill">Grants Skill</content>
 	<content contentuid="h77557ac7g4f6fg49bdga76cg404de43d92f5" OT="Shield">Offhand</content>
@@ -51,4 +51,8 @@
 	<content contentuid="h0fd12b32gce5fg435ag9c80g688ab9c0d9e3" S="Cone_CorrosiveSpray_Description" OT="Destroy [1] on targets in a cone, and set Acid and Atrophy.">Deal [1] to targets in a cone, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid and Atrophy.</content>
 	<content contentuid="hff341792gf705g46e1g92c3gcd39d8694013" S="Projectile_SilverArrow_Description" OT="Destroys [1].">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
 	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756" OT="tag" Comment="For replacing 'Requires tag' when using tag requirements for skills"></content>
+	<content contentuid="h7de69a95g70cag4bb3gbabcg1cf2df46f12c" OT="Requires [1]">Requires [1] Test1</content>
+	<content contentuid="h825990a2gaf64g4235g9d53gcd340042c0d0" OT="Requires [1] [2]">Requires [1] [2] Test2</content>
+	<content contentuid="ha6e36605gee35g4aaagaddbg7ab8bfaf86f6" OT="Requires [1] [2]">Requires [1] [2] Test3</content>
+	<content contentuid="hf1571b7eg8f35g4da2g8e38g87fee1c3d79f" OT="Requires [1] [2]&lt;br&gt;">Requires [1] [2]&lt;br&gt; Test4</content>
 </contentList>

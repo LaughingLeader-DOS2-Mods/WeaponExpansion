@@ -47,3 +47,44 @@ new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Normal"
 type "Armor"
 using "_Boosts_Runes_Armor_Amulet"
 data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Air"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Air"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Earth"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Earth"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Fire"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Fire"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Poison"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Poison"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Water"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Water"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Shadow"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Shadow"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Corrosive"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Corrosive"
+
+new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_WeaponProxy"
+type "Armor"
+using "_Boosts_Runes_Armor_Amulet"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_WeaponProxy"
+

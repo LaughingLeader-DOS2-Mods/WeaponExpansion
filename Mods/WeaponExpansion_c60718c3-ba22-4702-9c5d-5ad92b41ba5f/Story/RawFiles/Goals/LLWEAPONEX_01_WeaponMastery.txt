@@ -389,7 +389,7 @@ NOT DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _Skill
 AND
 DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Tag, "Tag")
 THEN
-SetTag(_Player, _Tag);
+LeaderLib_Tags_PreserveTag(_Player, _Tag);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:Internal:AddSkillType] Adding tag [",_Tag,"] for Weapon Mastery [",_WeaponType,"] and SkillID [",_SkillID,"].");
 
 PROC
@@ -491,7 +491,8 @@ IsTagged(_Item, _WeaponType, 1)
 THEN
 ObjectSetFlag(_Player, _EnabledFlag, 0);
 ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
-SetTag(_Player, "LLWEAPONEX_MasteryActive");
+LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_MasteryActive");
+LeaderLib_Tags_PreserveTag(_Player, _EnabledFlag);
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
@@ -503,8 +504,10 @@ DB_NOOP(1);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_MasterySystemActive")
 THEN
-DB_NOOP(1);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MasterySystemActive", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -513,6 +516,13 @@ NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _, _)
 THEN
 ObjectClearFlag(_Player, "LLWEAPONEX_MasteryActive");
 ClearTag(_Player, "LLWEAPONEX_MasteryActive");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_,_,_,_)
+THEN
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_MasterySystemActive", "WeaponExpansion", 500);
 //END_REGION
 
 //REGION PRESET_APPLIED

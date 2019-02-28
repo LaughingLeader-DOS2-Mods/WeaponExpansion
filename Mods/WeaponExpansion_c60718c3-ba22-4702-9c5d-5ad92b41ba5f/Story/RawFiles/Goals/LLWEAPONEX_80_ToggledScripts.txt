@@ -39,7 +39,7 @@ DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName);
 PROC
 LLWEAPONEX_ToggleSettings_RegisterScripts()
 THEN
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive");
+//LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Greatbow", "LLWEAPONEX_Greatbow");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Katana", "LLWEAPONEX_Katana");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Rapier", "LLWEAPONEX_Rapier");
@@ -48,9 +48,34 @@ LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire__Main",
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Death", "LLWEAPONEX_Grimoire_Death");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Mimicry", "LLWEAPONEX_Grimoire_Mimicry");
 
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasterySystemActive");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_08_Quivers", "LLWEAPONEX_QuiverEquipped");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_09_OniGauntlet", "LLWEAPONEX_OniGauntletEquipped");
 //END_REGION
+
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,3)
+AND
+DB_LLWEAPONEX_ToggleSettings_Tags("LLWEAPONEX_MasteryActive", "LLWEAPONEX_80_00_MasteryActive", _TimerName)
+THEN
+NOT DB_LLWEAPONEX_ToggledScripts_Script("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive");
+NOT DB_LLWEAPONEX_ToggleSettings_Tags("LLWEAPONEX_MasteryActive", "LLWEAPONEX_80_00_MasteryActive", _TimerName);
+LLWEAPONEX_ToggleSettings_RegisterScripts();
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,3)
+AND
+//DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
+SysCount("DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries", 4, _Count)
+AND
+_Count > 0
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MasterySystemActive", "WeaponExpansion");
 
 //REGION UPDATES
 PROC

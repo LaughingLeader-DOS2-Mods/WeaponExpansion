@@ -113,6 +113,15 @@
 																		</node>
 																	</children>
 																</node>
+																<node id="Animation">
+																	<attribute id="MapKey" value="skill_attack_ll_handcrossbow_01_cast" type="22" />
+																	<children>
+																		<node id="MapValue">
+																			<attribute id="ID" value="f79da245-84e9-4e8c-92b7-65728401f823" type="22" />
+																			<attribute id="Name" value="skill_attack_ll_handcrossbow_01_cast" type="22" />
+																		</node>
+																	</children>
+																</node>
 															</children>
 														</node>
 													</children>

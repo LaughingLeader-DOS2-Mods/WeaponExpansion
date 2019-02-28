@@ -10,6 +10,7 @@ NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
 THEN
 DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
 LLWEAPONEX_LeaderLib_InitSettings();
+LLWEAPONEX_LeaderLib_InitHelperSettings();
 LLWEAPONEX_LeaderLib_InitTraderSettings();
 LLWEAPONEX_LeaderLib_InitDeltamods();
 LLWEAPONEX_LeaderLib_InitItemGrowth();
@@ -31,6 +32,27 @@ LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Fencer", "Fencer [Weapon Expansi
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkWoodenQuarterstaff", "Monk (Wooden Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkMetalQuarterstaff", "Monk (Metal Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
+
+PROC
+LLWEAPONEX_LeaderLib_InitHelperSettings()
+THEN
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Air_72a7d3aa-02d7-4c9b-a565-d94c8a5664b0");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Corrosive_598b8cb5-7f76-4c50-a609-2a3cd0aa0415");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Earth_8a29169a-e73d-4878-9769-8b4555140fb0");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Fire_1fe1e11c-2e54-4104-b80a-b6fa0b4b8e99");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Poison_c3f61b7d-5183-4664-9773-0b630374b7c9");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Shadow_7dcb9e1f-b807-4321-8408-c66f833ae73c");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Water_40af98d5-3584-40cc-8c9f-e3a49564f365");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_WeaponProxy_8c1da19c-02e9-4a6c-b253-1b3e31b7740f");
+LeaderLib_Helper_Runes_Register_TagRestriction("WeaponExpansion.HandCrossbowBolt", "LLWEAPONEX_HandCrossbow");
+
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_RuneBlockingEnabled", "WeaponExpansion");
+
+PROC
+LeaderLib_Helper_Runes_RuneBlocked((CHARACTERGUID)_Player, (ITEMGUID)_Item, "WeaponExpansion.HandCrossbowBolt", (STRING)_RuneTemplate)
+THEN
+ShowNotification(_Player, "LLWEAPONEX_Notifications_BoltInsertedInNonCrossbow");
 //END_REGION
 
 //REGION TRADER
@@ -238,6 +260,13 @@ DB_LeaderLib_BlockedSkill(_Skill);
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 3)
+THEN
+LLWEAPONEX_LeaderLib_InitHelperSettings();
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
