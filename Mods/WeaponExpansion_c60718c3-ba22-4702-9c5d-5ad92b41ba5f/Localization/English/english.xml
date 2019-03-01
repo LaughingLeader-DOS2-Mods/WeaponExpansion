@@ -43,6 +43,7 @@
 	<content contentuid="hc8bc599bg3f31g4f32g8adcg299d21366cb9" OT="[[1]] [2]">[[1]] [2] Test98</content>
 	<content contentuid="ha020d932g69e4g4957g998dg9204aa232200" OT="[1]:[2]">[1]:[2] Test9191</content>
 	<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135" OT="rot damage">Shadow Damage</content>
+	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8" OT="rot">Shadow</content>
 	<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e" OT="Rot">Shadow</content>
 	<content contentuid="h4b681e66gd563g43abg892fg376ffaa37132" OT="[1] Physical Armour reduction">[1] Corrosive</content>
 	<content contentuid="hcbe11fb4g22adg4b10g938bg467f8c41107c" OT="Physical Armour reduction">Corrosive</content>
@@ -51,9 +52,10 @@
 	<content contentuid="h0fd12b32gce5fg435ag9c80g688ab9c0d9e3" S="Cone_CorrosiveSpray_Description" OT="Destroy [1] on targets in a cone, and set Acid and Atrophy.">Deal [1] to targets in a cone, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid and Atrophy.</content>
 	<content contentuid="hff341792gf705g46e1g92c3gcd39d8694013" S="Projectile_SilverArrow_Description" OT="Destroys [1].">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
 	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756" OT="tag" Comment="For replacing 'Requires tag' when using tag requirements for skills"></content>
-	<content contentuid="h7de69a95g70cag4bb3gbabcg1cf2df46f12c" OT="Requires [1]">Requires [1] Test1</content>
-	<content contentuid="h825990a2gaf64g4235g9d53gcd340042c0d0" OT="Requires [1] [2]">Requires [1] [2] Test2</content>
-	<content contentuid="ha6e36605gee35g4aaagaddbg7ab8bfaf86f6" OT="Requires [1] [2]">Requires [1] [2] Test3</content>
+	<content contentuid="h7de69a95g70cag4bb3gbabcg1cf2df46f12c" OT="Requires [1]">Requires [1]</content>
+	<content contentuid="h825990a2gaf64g4235g9d53gcd340042c0d0" OT="Requires [1] [2]">Requires [1] [2] </content>
+	<content contentuid="ha6e36605gee35g4aaagaddbg7ab8bfaf86f6" OT="Requires [1] [2]">Requires [1] [2]</content>
 	<content contentuid="hf1571b7eg8f35g4da2g8e38g87fee1c3d79f" OT="Requires [1] [2]&lt;br&gt;">Requires [2] [1]&lt;br&gt;</content>
 	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36" OT="Blows up your target">Applies additional effects on hit</content>
+	<content contentuid="h10c50c3fg3013g4daag854dg6ecf5511972f">Reflects [1]% of [2][3][4] damage[5]&lt;br&gt;</content>
 </contentList>
