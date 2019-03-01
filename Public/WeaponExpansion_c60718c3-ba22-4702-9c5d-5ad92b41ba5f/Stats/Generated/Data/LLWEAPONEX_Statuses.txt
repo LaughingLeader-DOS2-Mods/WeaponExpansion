@@ -1351,8 +1351,6 @@ data "DescriptionRef" "Approaching hostiles will get smashed by a demon fist."
 data "Icon" "Skill_Familiar_DemonicTutelage"
 data "StatsId" "Stats_LLWEAPONEX_DemonHandEquipped"
 data "StackId" "Stack_LLWEAPONEX_DemonHandEquipped"
-data "LeaveAction" "Projectile_LLWEAPONEX_Status_DemonHandDefense_Remove"
-data "DieAction" "Projectile_LLWEAPONEX_Status_DemonHandDefense_Remove"
 data "FormatColor" "Green"
 
 new entry "Stats_LLWEAPONEX_DemonHandEquipped"

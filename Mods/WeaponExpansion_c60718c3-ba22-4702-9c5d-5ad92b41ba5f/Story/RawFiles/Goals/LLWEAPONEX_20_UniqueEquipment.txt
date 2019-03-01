@@ -131,6 +131,14 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 14);
 */
 //END_REGION
 
+//REGION DEMON_GAUNTLET
+IF
+ItemTemplateUnEquipped("EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53", _Character)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_DEMON_HAND_DEFENSE")
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_DEMON_HAND_DEFENSE");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

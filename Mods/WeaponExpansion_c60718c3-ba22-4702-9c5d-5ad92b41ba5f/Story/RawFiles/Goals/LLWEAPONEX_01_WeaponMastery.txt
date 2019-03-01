@@ -74,7 +74,9 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_HandCrossbow", 4, "<font color
 
 //DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbow_Exp", "LLWEAPONEX_HandCrossbow_Level");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_HandCrossbow", 0, "Reload", "Any");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_HandCrossbow", 1, "Assassinate", "Any");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Reload", "Shout_LLWEAPONEX_HandCrossbow_Reload");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Assassinate", "Projectile_LLWEAPONEX_HandCrossbow_Assassinate");
 
 //Katana
@@ -566,6 +568,18 @@ THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] was activated. Removing from [DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries].");
 
+//Default weapon skills
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, 0, _SkillID, "Any")
+AND
+DB_LLWEAPONEX_WeaponMastery_Skills(_WeaponType, _SkillID, _Skill)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _Skill, _SkillID)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID);
+
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
 AND
@@ -791,16 +805,6 @@ AND
 DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses(_WeaponType, _SkillID, _Status)
 THEN
 RemoveStatus(_Player, _Status);
-//END_REGION
-
-//REGION DEFAULT_WEAPON_SKILLS
-//Default weapon skill
-PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow")
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", "PiercingShot")
-THEN
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Greatbow", "PiercingShot");
 //END_REGION
 
 //REGION WEAPON_MASTERY_EXPERIENCE

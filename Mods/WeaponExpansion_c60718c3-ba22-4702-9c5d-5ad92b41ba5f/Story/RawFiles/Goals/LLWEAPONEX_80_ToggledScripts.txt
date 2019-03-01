@@ -41,6 +41,7 @@ LLWEAPONEX_ToggleSettings_RegisterScripts()
 THEN
 //LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Greatbow", "LLWEAPONEX_Greatbow");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_HandCrossbow", "LLWEAPONEX_HandCrossbow");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Katana", "LLWEAPONEX_Katana");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Rapier", "LLWEAPONEX_Rapier");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Runeblade", "LLWEAPONEX_Runeblade");
@@ -168,13 +169,14 @@ LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, _WeaponType);
 //END_REGION
 
 //REGION TOGGLE_EVENTS_TAGS
+/*
 PROC
 LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
 AND
 NOT DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _, _)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:DeactivateScript] Script for tag [",_Tag,"] not registered!");
-
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:OnTagAdded] Script for tag [",_Tag,"] not registered!");
+*/
 
 PROC
 LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)

@@ -54,5 +54,5 @@
 	<content contentuid="h7de69a95g70cag4bb3gbabcg1cf2df46f12c" OT="Requires [1]">Requires [1] Test1</content>
 	<content contentuid="h825990a2gaf64g4235g9d53gcd340042c0d0" OT="Requires [1] [2]">Requires [1] [2] Test2</content>
 	<content contentuid="ha6e36605gee35g4aaagaddbg7ab8bfaf86f6" OT="Requires [1] [2]">Requires [1] [2] Test3</content>
-	<content contentuid="hf1571b7eg8f35g4da2g8e38g87fee1c3d79f" OT="Requires [1] [2]&lt;br&gt;">Requires [1] [2]&lt;br&gt; Test4</content>
+	<content contentuid="hf1571b7eg8f35g4da2g8e38g87fee1c3d79f" OT="Requires [1] [2]&lt;br&gt;">Requires [2] [1]&lt;br&gt;</content>
 </contentList>
