@@ -10,7 +10,7 @@ PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
 THEN
 //Level, Total "Hits"
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 10);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 20);
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 40);
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 50);
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 100);

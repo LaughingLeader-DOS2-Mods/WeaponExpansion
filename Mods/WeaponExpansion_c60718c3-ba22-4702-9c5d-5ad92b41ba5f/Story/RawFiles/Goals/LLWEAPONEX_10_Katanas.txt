@@ -20,6 +20,33 @@ DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target)
 THEN
 NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
 
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Katana")
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
+THEN
+CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Katana")
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
+THEN
+CharacterSetAnimationSetOverride(_Player, "");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
+THEN
+CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
+THEN
+CharacterSetAnimationSetOverride(_Player, "");
 EXITSECTION
 
 ENDEXITSECTION

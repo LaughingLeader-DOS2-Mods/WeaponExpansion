@@ -505,8 +505,54 @@ THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemTemplateDestroyed] Item [",_ItemStr,"][",_Template,"] was destroyed.");
 //END_REGION
 
+//REGION ATTACK_TRACKING
+IF
+CharacterStartAttackObject(_Target, _Owner, _Attacker)
+AND
+String(_Target, _TargetStr)
+AND
+CharacterGetDisplayName(_Attacker, _, _Name)
+AND
+CharacterGetDisplayName(_Owner, _, _OwnerName)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStartAttackObject] [",_Name,"](",_OwnerName,") is attacking [",_TargetStr,"].");
+
+IF
+CharacterMissedBy(_Target, _Owner, _Attacker)
+AND
+String(_Target, _TargetStr)
+AND
+CharacterGetDisplayName(_Attacker, _, _Name)
+AND
+CharacterGetDisplayName(_Owner, _, _OwnerName)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterMissedBy] [",_Name,"](",_OwnerName,") missed [",_TargetStr,"].");
+
+IF
+CharacterCriticalHitBy(_Target, _Owner, _Attacker)
+AND
+String(_Target, _TargetStr)
+AND
+CharacterGetDisplayName(_Attacker, _, _Name)
+AND
+CharacterGetDisplayName(_Owner, _, _OwnerName)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterCriticalHitBy] [",_Name,"](",_OwnerName,") missed [",_TargetStr,"].");
+
+IF
+AttackedByObject(_Target, _Owner, _Attacker, _DamageType, _DamageSource)
+AND
+String(_Target, _TargetStr)
+AND
+String(_Attacker, _Name)
+AND
+String(_Owner, _OwnerName)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"] with DamageType [",_DamageType,"] DamageSource [",_DamageSource,"].");
+//END_REGION
+
 //REGION STATUSES
-/*
+
 IF
 CharacterStatusAttempt(_Character, _Status, _Causee)
 AND
@@ -533,7 +579,6 @@ AND
 CharacterGetDisplayName(_Character, _, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
-*/
 
 /*
 IF

@@ -139,7 +139,7 @@ data "ExtraProperties" "SELF:OnEquip:HASTED"
 new entry "ARM_LLWEAPONEX_Debug_ShapeshifterMask"
 type "Armor"
 using "ARM_ShapeshifterMask"
-data "Skills" "Shout_PolymorphIntoHuman;Shout_PolymorphIntoLizard;Shout_PolymorphIntoElf;Shout_PolymorphIntoDwarf;Shout_Undead_PolymorphIntoDwarf;Shout_Undead_PolymorphIntoElf;Shout_Undead_PolymorphIntoHuman;Shout_Undead_PolymorphIntoLizard;Shout_CancelPolymorphism"
+data "Skills" "Shout_PolymorphIntoHuman;Shout_PolymorphIntoLizard;Shout_PolymorphIntoElf;Shout_PolymorphIntoDwarf;Shout_CancelPolymorphism"
 
 new entry "_LLWEAPONEX_Quivers"
 type "Armor"
