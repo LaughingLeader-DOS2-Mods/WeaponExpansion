@@ -10,11 +10,22 @@ NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
 THEN
 DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
 LLWEAPONEX_LeaderLib_InitSettings();
+LLWEAPONEX_LeaderLib_RegisterToggleScripts();
 LLWEAPONEX_LeaderLib_InitHelperSettings();
 LLWEAPONEX_LeaderLib_InitTraderSettings();
 LLWEAPONEX_LeaderLib_InitDeltamods();
 LLWEAPONEX_LeaderLib_InitItemGrowth();
 LLWEAPONEX_LeaderLib_AddBlockedSkills();
+
+//REGION TOGGLE_SCRIPTS
+PROC
+LLWEAPONEX_LeaderLib_RegisterToggleScripts()
+THEN
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasterySystemActive");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_DemonGauntlet", "LLWEAPONEX_DemonGauntletEquipped");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_08_Quivers", "LLWEAPONEX_QuiverEquipped");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_OniGauntlet", "LLWEAPONEX_OniGauntletEquipped");
+//END_REGION
 
 //REGION PRESETS_MISC
 PROC
@@ -266,6 +277,7 @@ AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 3)
 THEN
 LLWEAPONEX_LeaderLib_InitHelperSettings();
+LLWEAPONEX_LeaderLib_RegisterToggleScripts();
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)

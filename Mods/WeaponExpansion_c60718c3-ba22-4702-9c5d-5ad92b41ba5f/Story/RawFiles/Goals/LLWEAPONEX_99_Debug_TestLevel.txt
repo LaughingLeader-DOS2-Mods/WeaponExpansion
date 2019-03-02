@@ -549,6 +549,23 @@ AND
 String(_Owner, _OwnerName)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"] with DamageType [",_DamageType,"] DamageSource [",_DamageSource,"].");
+
+IF
+CharacterReceivedDamage(_Target, _Percentage, _Attacker)
+AND
+String(_Target, _TargetStr)
+AND
+String(_Attacker, _Name)
+AND
+StringConcatenate("]% damage was to [",_TargetStr, _Str1)
+AND
+StringConcatenate("] by [",_Name, _Str2)
+AND
+StringConcatenate(_Str1, _Str2, _Str3)
+AND
+StringConcatenate(_Str3, "].", _Suffix)
+THEN
+LeaderLog_LogInt("DEBUG", "[WeaponExpansion:Debug:CharacterReceivedDamage] [",_Percentage, _Suffix);
 //END_REGION
 
 //REGION STATUSES

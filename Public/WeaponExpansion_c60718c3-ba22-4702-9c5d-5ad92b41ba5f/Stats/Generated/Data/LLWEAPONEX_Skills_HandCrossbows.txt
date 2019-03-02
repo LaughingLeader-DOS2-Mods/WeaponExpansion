@@ -219,7 +219,7 @@ data "Ability" "Death"
 data "DamageType" "Shadow"
 data "Template" "80aecd6e-7fa1-4afc-aa5f-c5f6d578b79c"
 data "DisplayName" "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Shadow_DisplayName"
-data "SkillProperties" "Curse;CHURSED,100,1;EXPLODE,100,0,Projectile_LLWEAPONEX_HandCrossbow_Shoot_ScaledDamage_Shadow"
+data "SkillProperties" "Curse;CURSED,100,1;EXPLODE,100,0,Projectile_LLWEAPONEX_HandCrossbow_Shoot_ScaledDamage_Shadow"
 data "StatsDescriptionParams" "Damage;Skill:Projectile_LLWEAPONEX_HandCrossbow_Shoot_ScaledDamage_Shadow:Damage"
 
 new entry "Projectile_LLWEAPONEX_HandCrossbow_Shoot_ScaledDamage_Shadow"

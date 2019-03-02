@@ -133,11 +133,61 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 14);
 
 //REGION DEMON_GAUNTLET
 IF
+ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53", _Character)
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
+
+IF
 ItemTemplateUnEquipped("EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53", _Character)
+THEN
+LLWEAPONEX_Uniques_OnDemonGauntletUnequipped(_Character);
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion", 500);
+
+PROC
+LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Character)
 AND
 LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_DEMON_HAND_DEFENSE")
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_DEMON_HAND_DEFENSE");
+
+PROC
+LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_DEMON_HAND_HIT", (CHARACTERGUID)_Source)
+THEN
+LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+
+PROC
+LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+AND
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _OtherTarget)
+THEN
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _OtherTarget);
+
+PROC
+LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+THEN
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+
+PROC
+LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget((CHARACTERGUID)_Target)
+AND
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+PlayEffect(_Source, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R");
+
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_DEMON_HAND_HIT", _)
+AND
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
 //END_REGION
 EXITSECTION
 

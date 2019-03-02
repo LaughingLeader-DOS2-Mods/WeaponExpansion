@@ -789,14 +789,14 @@ LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponTyp
 AND
 DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Tag, "Tag")
 THEN
-ClearTag(_Player, _Tag);
+LeaderLib_Tags_ClearPreservedTag(_Player, _Tag);
 
 PROC
 LLWEAPONEX_WeaponMastery_RemoveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_Flags(_WeaponType, _SkillID, _Flag, "Flag")
 THEN
-ObjectClearFlag(_Player, _Flag);
+ObjectClearFlag(_Player, _Flag, 0);
 
 //Statuses applied by mastery skills
 PROC

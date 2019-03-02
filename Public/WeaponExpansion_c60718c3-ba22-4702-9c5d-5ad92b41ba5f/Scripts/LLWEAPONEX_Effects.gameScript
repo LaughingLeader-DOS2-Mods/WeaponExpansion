@@ -7,11 +7,12 @@ VARS
 	CHARACTER:_Target
 	CHARACTER:_Source
 ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_DEMON_HAND_HIT_BEAMFX)
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_DEMON_HAND_HIT)
 ACTIONS
 IF "c1&!c2"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_DEMON_HAND_HIT_BEAMFX, _Source)
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_DEMON_HAND_HIT, _Source)
 	IsEqual(_Source, null)
 THEN
 	CharacterPlayEffect(_Source, "RS3_FX_Char_Creature_Demon_Caster_Cast_Target_Cast_LastRites_Hand_01", "Dummy_R_HandFX")
+	//CharacterPlayEffect(_Source, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R")
 ENDIF

@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//This script simply "reveals" the demon when it's responsible for a death or a crit
+
+IF
+CharacterPrecogDying(_Target)
+AND
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+THEN
+LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget(_Target);
+
+IF
+CharacterCriticalHitBy(_Target, _Source, _)
+AND
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+THEN
+LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget(_Target);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"
