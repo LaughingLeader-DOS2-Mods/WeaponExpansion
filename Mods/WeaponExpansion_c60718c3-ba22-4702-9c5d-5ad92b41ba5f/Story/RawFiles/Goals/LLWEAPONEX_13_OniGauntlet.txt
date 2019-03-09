@@ -3,7 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 LLWEAPONEX_OniGauntlet_InitSettings();
 KBSECTION
-
 //REGION SETTINGS
 PROC
 LLWEAPONEX_OniGauntlet_InitSettings()
@@ -202,7 +201,7 @@ DB_LLWEAPONEX_OniGauntlet_Temp_RemoveOrb(_Player, _Item, _Template, _Slot);
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_OniGauntlet_RemoveOrb", 250);
 
 PROC
-ProcObjectTimerFinished(_Player, "LLWEAPONEX_Timers_OniGauntlet_RemoveOrb")
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_OniGauntlet_RemoveOrb")
 AND
 DB_LLWEAPONEX_OniGauntlet_Temp_RemoveOrb(_Player, _Item, _Template, _Slot)
 AND

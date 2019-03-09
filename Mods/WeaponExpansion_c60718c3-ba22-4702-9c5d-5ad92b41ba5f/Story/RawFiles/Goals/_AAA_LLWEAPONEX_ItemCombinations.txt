@@ -9,7 +9,7 @@ CanCombineItem(_Player, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
 AND
 LeaderLib_Helper_QRY_Combo_FindTagged("LLWEAPONEX_OniGauntlet", _ItemA, _ItemB, _ItemC, _ItemD, _ItemE)
 AND
-DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet", _Gauntlet)
+DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet", (ITEMGUID)_Gauntlet)
 THEN
 NOT DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet", _Gauntlet);
 LeaderLog_Log("DEBUG", "[__AAA_Z_LLWEAPONEX_ItemCombinations:CanCombineItem] Oni Gauntlet is being combined.");
@@ -23,7 +23,7 @@ NOT DB_CustomCombineItemResponse(_Player, _Gauntlet, 1)
 AND
 LeaderLib_Helper_QRY_Combo_FindTagged("LLWEAPONEX_OniGauntlet_Orb", _ItemA, _ItemB, _ItemC, _ItemD, _ItemE)
 AND
-DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet_Orb", _Orb)
+DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_OniGauntlet_Orb", (ITEMGUID)_Orb)
 AND
 GetTemplate(_Orb, _OrbTemplate)
 AND
@@ -144,3 +144,4 @@ LeaderLog_LogTarget("STATUS", _Player, "<font color='#FF0000'>Unable to upgrade 
 EXITSECTION
 
 ENDEXITSECTION
+ParentTargetEdge "__Start"

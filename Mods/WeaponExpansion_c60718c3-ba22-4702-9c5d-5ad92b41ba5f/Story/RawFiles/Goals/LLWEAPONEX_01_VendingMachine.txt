@@ -40,7 +40,6 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_Clothing_UNIQUE_LLWEAPONEX_Blindfolds_Monk_A_78b08f39-3d9d-47b5-b251-f1b8dcebe65b");
 
-
 LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TestLevel_LL_WeaponExpansion", 40.56, 0.0, 29.63);
 LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 40.56, 0.0, 29.63);
 //LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TUT_Tutorial_A", 31.19, 4.0, -252.77);
@@ -335,7 +334,7 @@ ProcObjectTimer(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b94
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
 ObjectSetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized", 0);
-CharacterTransformAppearanceToWithEquipmentSet(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A", 0);
+//CharacterTransformAppearanceToWithEquipmentSet(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A", 0);
 
 //Flipped bones workaround for now
 //PROC_StopLoopEffect(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay");
