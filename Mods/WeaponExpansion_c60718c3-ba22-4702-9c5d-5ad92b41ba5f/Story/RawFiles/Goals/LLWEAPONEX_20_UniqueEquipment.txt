@@ -131,6 +131,36 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 14);
 */
 //END_REGION
 
+//REGION MURAMASA
+IF
+ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a", _Character)
+THEN
+LLWEAPONEX_Uniques_OnMuramasaEquipped(_Character);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_Uniques_OnMuramasaEquipped((CHARACTERGUID)_Character)
+AND
+CharacterGetHitpointsPercentage(_Character, _HP)
+AND
+_HP <= 50
+THEN
+ApplyStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, 0, _Character);
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a", _Character)
+THEN
+LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Character);
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion", 500);
+
+PROC
+LLWEAPONEX_Uniques_OnMuramasaUnequipped((CHARACTERGUID)_Character)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
+//END_REGION
+
 //REGION DEMON_GAUNTLET
 IF
 ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53", _Character)

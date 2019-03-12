@@ -106,6 +106,8 @@ new subtable "1,1"
 object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Bokken_1H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
 new subtable "0,3;1,2"

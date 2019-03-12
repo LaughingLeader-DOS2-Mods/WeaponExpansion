@@ -93,6 +93,18 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 //END_REGION
 
 //REGION UPDATES
+//Hey, don't equip that!
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,4,7)
+AND
+GetItemForItemTemplateInInventory(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa", _Rapier)
+AND
+LLWEAPONEX_QRY_IsEquippedWeapon(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Rapier)
+THEN
+ItemToInventory(_Rapier, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+
 //Raizan Update
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)

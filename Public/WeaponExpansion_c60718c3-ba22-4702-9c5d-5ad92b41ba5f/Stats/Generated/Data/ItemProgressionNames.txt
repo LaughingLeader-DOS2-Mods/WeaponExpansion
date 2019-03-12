@@ -56,10 +56,50 @@ add name "Metal Pipe",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
 add name "Power Pole",""
 
-new namegroup "WPN_LLWEAPONEX_Katana_1H"
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Normal"
+add name "Old Katana",""
+add name "Worn Katana",""
+add namecool "Katana",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Rare"
+add name "Reinforced Katana",""
+add name "Razor-Sharp Katana",""
+add name "Wanderer's Katana",""
+add name "Ronin's Katana",""
+add name "Soldier's Katana",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Epic"
+add name "Yamato's Edge",""
+add name "Musashi's Victory",""
+add name "Honor's Edge",""
+add name "Blade of the Warrior",""
+add namecool "Omnislash",""
+add namecool "Demon's Blade",""
+add namecool "Roninslayer",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Crafted"
 add name "Katana",""
 
-new namegroup "WPN_LLWEAPONEX_Katana_2H"
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Normal"
+add name "Old Odachi",""
+add name "Worn Odachi",""
+add namecool "Odachi",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Rare"
+add name "Reinforced Odachi",""
+add name "Steel Odachi",""
+add name "Odachi of the Forsaken",""
+add name "Ronin's Odachi",""
+add name "Soldier's Odachi",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Epic"
+add name "Manslayer",""
+add name "Blade of the Silver Slayer",""
+add namecool "Crescent Blade",""
+add namecool "Blade of the Fallen Angel",""
+add namecool "Masamune",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted"
 add name "Odachi",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
@@ -77,7 +117,59 @@ add name "Raizan (Empowered)",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
 add name "Raizan (Unleashed)",""
 
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Normal"
+add name "Old Bokuto",""
+add name "Traineee's Bokuto",""
+add namecool "The Tutor",""
+add namecool "Ancient Bokuto",""
+add namecool "Bokuto of the Elder Tree",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Rare"
+add name "Magicwood Bokuto",""
+add name "Ancestral Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Epic"
+add name "Mercy",""
+add name "Blunt Force",""
+add namecool "Pacifist's Will",""
+add namecool "Legend",""
+add namecool "Wooden Destiny",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Crafted"
+add name "Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Preview"
+add name "Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Normal"
+add name "Old Two-handed Bokuto",""
+add name "Traineee's Two-handed Bokuto",""
+add namecool "The Tutor",""
+add namecool "Ancient Two-handed Bokuto",""
+add namecool "Elder's Two-handed Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Rare"
+add name "Magicwood Two-handed Bokuto",""
+add name "Ancestral Two-handed Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Epic"
+add name "Mercy",""
+add name "Blunt Force",""
+add namecool "Pacifist's Will",""
+add namecool "Legend",""
+add namecool "Wooden Destiny",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Crafted"
+add name "Two-handed Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Preview"
+add name "Two-handed Bokuto",""
+
 new namegroup "WPN_LLWEAPONEX_Rapier_1H"
+add name "Rapier",""
+add name "Estoc",""
+
+new namegroup "WPN_LLWEAPONEX_Rapier_1H_Crafted"
 add name "Rapier",""
 add name "Estoc",""
 
