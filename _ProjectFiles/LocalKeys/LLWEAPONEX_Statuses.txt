@@ -3,6 +3,8 @@ LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer
 LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.
 LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power
 LLWEAPONEX_COMBAT_SHIELD_RESTORE_DisplayName	Armor Rejuvenation
+LLWEAPONEX_CONCUSSION_Description	Character has a serious concussion. Small chance on each basic attack to <font color='#FF8C00'>Fumble</font>.
+LLWEAPONEX_CONCUSSION_DisplayName	Concussion
 LLWEAPONEX_COPYLASTSKILL_DisplayName	Copy Last Skill
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_DisplayName	Marked for Death
@@ -12,25 +14,30 @@ LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Dam
 LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status
 LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.
 LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles
+LLWEAPONEX_DEMON_HAND_DEFENSE_APPLY_DisplayName	<font color='#ffce58'>Devil Hand Aura (3m)</font>
+LLWEAPONEX_DEMON_HAND_EQUIPPED_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a 30% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>
+LLWEAPONEX_DEMON_HAND_EQUIPPED_DisplayName	Gain Protection from a Demon
 LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.
 LLWEAPONEX_DIZZY_DisplayName	Dizzy
+LLWEAPONEX_DOUSED_DisplayName	Doused
 LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taking [1] per turn.
 LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane
 LLWEAPONEX_DRAW_ARROW_DisplayName	Draw Arrow
 LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!
 LLWEAPONEX_EVAPORATE_DisplayName	Evaporated
+LLWEAPONEX_FUMBLE_Description	Character has fumbled their basic attack!
+LLWEAPONEX_FUMBLE_DisplayName	Fumbled!
 LLWEAPONEX_HELMSPLITTER_Description	Character's Armor is being destroyed.
 LLWEAPONEX_HELMSPLITTER_DisplayName	Destroy Armor
 LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target
-LLWEAPONEX_KATANA_FINISHER_APPLY_DisplayName	Finisher - Temporarily apply a piercing vulnerability to dying targets
-LLWEAPONEX_KATANA_FINISHER_Description	Character's <font color='#c80030'>Piercing Resistance</font> lowers as <font color='#DC143C'>Vitality</font> drops. Removed after Attacker's turn ends.
-LLWEAPONEX_KATANA_FINISHER_DisplayName	Finisher
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed
-LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_Description	<font color='#F7BA14' size='18'>Rapier Mastery</font><br>Character is taking the stance of a duelist.<br><font color='#ff9600' size='20'>Requires an empty hand.</font>
-LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_DisplayName	Duelist Stance
+LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] Vitality per turn.
+LLWEAPONEX_MENDING_DisplayName	Mending
+LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is gathering power.
+LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)
 LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.
 LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound
 LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.
@@ -55,15 +62,3 @@ LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is ta
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
-LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)
-LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is gathering power.
-LLWEAPONEX_CONCUSSION_Description	Character has a serious concussion. Small chance on each basic attack to <font color='#FF8C00'>Fumble</font>.
-LLWEAPONEX_CONCUSSION_DisplayName	Concussion
-LLWEAPONEX_FUMBLE_Description	Character has fumbled their basic attack!
-LLWEAPONEX_FUMBLE_DisplayName	Fumbled!
-LLWEAPONEX_DOUSED_DisplayName	Doused
-LLWEAPONEX_MENDING_DisplayName	Mending
-LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] Vitality per turn.
-LLWEAPONEX_DEMON_HAND_EQUIPPED_DisplayName	Gain Protection from a Demon
-LLWEAPONEX_DEMON_HAND_EQUIPPED_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a 30% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>
-LLWEAPONEX_DEMON_HAND_DEFENSE_APPLY_DisplayName	<font color='#ffce58'>Devil Hand Aura (3m)</font>

@@ -1,0 +1,192 @@
+INIT
+	LIST<STATUS>:%LLWEAPONEX_Katanas_ComboStatuses
+	INT:%LLWEAPONEX_Katanas_Initialized = 0
+EVENTS
+
+EVENT LLWEAPONEX_Katanas_InitList
+ON
+	OnFunction("LLWEAPONEX_Katanas_InitList")
+ACTIONS
+	ListClear(%LLWEAPONEX_Katanas_ComboStatuses)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO1)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO2)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO3)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO4)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO5)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO6)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO7)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO8)
+	ListAdd(%LLWEAPONEX_Katanas_ComboStatuses, LLWEAPONEX_KATANA_COMBO9)
+
+EVENT LLWEAPONEX_Katanas_InitList_Start
+VARS
+	INT:_Size
+ON
+	OnItemEvent(_, "LeaderLib_Initialized")
+	OnFunction("LLWEAPONEX_Katanas_CheckInit")
+	OnCharacterFlagSet("LLWEAPONEX_Katana_Enabled", _)
+ACTIONS
+IF "!c1|(c1&c2)"
+	ListGetSize(%LLWEAPONEX_Katanas_ComboStatuses, _Size)
+	IsEqual(_Size, 0)
+THEN
+	CallFunction("LLWEAPONEX_Katanas_InitList")
+ENDIF
+
+EVENT LLWEAPONEX_Katanas_Iaido_FX_Character
+VARS
+	CHARACTER:_Target
+	STRING:_FX
+ON
+	OnCharacterStatusAttempt(_Target, LLWEAPONEX_KATANA_IAIDO_HIT_FX)
+ACTIONS
+//GetRandom(_FX, "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_01", "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_02")
+//CharacterPlayEffect(_Target, _FX, "Dummy_BodyFX")
+PlayEffectAt(_Target, "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_Random_01")
+
+EVENT LLWEAPONEX_Katanas_Iaido_FX_Item
+VARS
+	ITEM:_Target
+	STRING:_FX
+ON
+	OnItemStatusAttempt(_Target, LLWEAPONEX_KATANA_IAIDO_HIT_FX)
+ACTIONS
+//GetRandom(_FX, "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_01", "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_02")
+//ItemPlayEffect(_Target, _FX)
+PlayEffectAt(_Target, "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_Random_01")
+
+EVENT LLWEAPONEX_Katanas_HelmSplitter
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_HELMSPLITTER)
+ACTIONS
+IF "c1&c2"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_HELMSPLITTER, _Source)
+	CharacterGetStat(_LevelF, _Source, Level)
+THEN
+	Cast(_Level, _LevelF)
+	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor, _Level, _Source)
+	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor, _Level, _Source)
+ENDIF
+
+EVENT LLWEAPONEX_Katana_OnHit
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+ON
+	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit")
+ACTIONS
+/*
+IF "c1&!c2"
+	IsTagged(_Source, "LLWEAPONEX_Katana_FinisherEnabled")
+	HasFlag(_Source, "LLWEAPONEX_Katana_FinisherDisabled")
+THEN
+	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY, 0, 0, _Source)
+ENDIF
+*/
+IF "c1&!c2"
+	IsTagged(_Source, "LLWEAPONEX_Katana_ComboEnabled")
+	HasFlag(_Source, "LLWEAPONEX_Katana_ComboDisabled")
+THEN
+	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_COMBO_PROC, 0, 0, _Source)
+ENDIF
+
+EVENT LLWEAPONEX_Katana_ComboProc
+VARS
+	CHARACTER:_Target
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Size
+	INT:_Index
+	INT:_NextIndex
+	INT:_StopLoop
+	INT:_Turns
+	STATUS:_Status
+	STRING:_Str
+	FIXEDSTRING:_StrF
+ON
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_KATANA_COMBO_PROC)
+ACTIONS
+	Set(_Result, null)
+	Set(_Status, null)
+	CallFunction("LLWEAPONEX_Katanas_InitList")
+IF "c1&!c2"
+	ListGetSize(%LLWEAPONEX_Katanas_ComboStatuses, _Size)
+	HasFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo")
+THEN
+	IF "c1"
+		ListGet(%LLWEAPONEX_Katanas_ComboStatuses, _Size, _Status)
+	THEN
+		IF "c1"
+			CharacterHasStatus(_Target, _Status)
+		THEN
+			Set(_Result, _Status)
+			//If they already have the highest combo status, skip the loop
+		ELSE
+			Set(_Index, 1)
+			Set(_NextIndex, 1)
+			Set(_StopLoop, 0)
+	
+			WHILE "!c1&!c2"
+				IsGreaterThen(_Index, _Size)
+				IsEqual(_StopLoop, 1)
+			DO
+				IF "c1&c2"
+					ListGet(%LLWEAPONEX_Katanas_ComboStatuses, _Index, _Status)
+					CharacterHasStatus(_Target, _Status)
+				THEN
+					Set(_NextIndex, _Index)
+					Add(_NextIndex, 1)
+					Set(_StopLoop, 1)
+				ENDIF
+				Add(_Index, 1)
+			ENDWHILE
+			IF "c1"
+				ListGet(%LLWEAPONEX_Katanas_ComboStatuses, _NextIndex, _Status)
+			THEN
+				Set(_Result, _Status)
+			ENDIF
+		ENDIF
+
+		IF "c1"
+			IsInCombat(_Target)
+		THEN
+			Set(_Turns, -2)
+		ELSE
+			Set(_Turns, 1)
+		ENDIF
+		
+		/*
+		Print(_Str, "Next Combo: [1] | Index: [2] | NextIndex: [3]", _Result, _Index, _NextIndex)
+		Cast(_StrF, _Str)
+		StatusText(_Target, _StrF)
+		*/
+	ELSE
+		CallFunction("LLWEAPONEX_Katanas_InitList")
+	ENDIF
+ENDIF
+	RETURN(_RemoveList, _Result, _Turns)
+
+/*
+EVENT LLWEAPONEX_Katanas_Finisher_ConsumeCombo
+VARS
+	CHARACTER:_Target
+ON
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY)
+ACTIONS
+	RETURN(%LLWEAPONEX_Katanas_ComboStatuses, null, null)
+*/
+
+EVENT LLWEAPONEX_Katanas_Finisher_OnHit
+VARS
+	CHARACTER:_Target
+	CHARACTER:_Source
+ON
+	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Katanas_OnFinisherHit")
+ACTIONS
+	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Katana_Finisher_BonusDamage, -1, _Source)
+	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_FINISHER_DAMAGE, 0, 0, _Source)

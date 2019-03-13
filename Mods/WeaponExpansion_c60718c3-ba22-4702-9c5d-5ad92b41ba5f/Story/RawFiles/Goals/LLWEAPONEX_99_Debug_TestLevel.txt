@@ -428,6 +428,20 @@ CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_A_Charge", 0);
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_B_Charge", 0);
 
+IF
+CharacterUsedSkill(_Player, _, _, _)
+AND
+CharacterGetHostCharacter(_Player)
+THEN
+CharacterAddActionPoints(_Player, 2);
+
+IF
+CharacterStartAttackObject(_, _, _Player)
+AND
+CharacterGetHostCharacter(_Player)
+THEN
+CharacterAddActionPoints(_Player, 2);
+
 //REGION ITEM_USAGE
 IF
 CharacterUsedItem(_Character, _Item)

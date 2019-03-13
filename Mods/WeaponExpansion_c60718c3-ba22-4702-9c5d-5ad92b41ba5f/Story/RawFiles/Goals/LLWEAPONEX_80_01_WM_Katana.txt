@@ -6,17 +6,17 @@ KBSECTION
 IF
 ObjectTurnEnded((CHARACTERGUID)_Source)
 AND
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target)
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
 THEN
-NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
-RemoveStatus(_Target, "LLWEAPONEX_KATANA_FINISHER");
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
+LeaderLib_Statuses_RemoveIfActive(_Target, _Status);
 
 IF
-CharacterStatusRemoved(_Target, "LLWEAPONEX_KATANA_FINISHER", _)
+CharacterStatusRemoved(_Target, _Status, _)
 AND
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target)
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
 THEN
-NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
 
 EXITSECTION
 

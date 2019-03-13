@@ -1,25 +1,153 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
+LLWEAPONEX_Katanas_InitSettings();
 KBSECTION
+PROC
+LLWEAPONEX_Katanas_InitSettings()
+THEN
+DB_LLWEAPONEX_Katanas_ComboStatus(1, "LLWEAPONEX_KATANA_COMBO1");
+DB_LLWEAPONEX_Katanas_ComboStatus(2, "LLWEAPONEX_KATANA_COMBO2");
+DB_LLWEAPONEX_Katanas_ComboStatus(3, "LLWEAPONEX_KATANA_COMBO3");
+DB_LLWEAPONEX_Katanas_ComboStatus(4, "LLWEAPONEX_KATANA_COMBO4");
+DB_LLWEAPONEX_Katanas_ComboStatus(5, "LLWEAPONEX_KATANA_COMBO5");
+DB_LLWEAPONEX_Katanas_ComboStatus(6, "LLWEAPONEX_KATANA_COMBO6");
+DB_LLWEAPONEX_Katanas_ComboStatus(7, "LLWEAPONEX_KATANA_COMBO7");
+DB_LLWEAPONEX_Katanas_ComboStatus(8, "LLWEAPONEX_KATANA_COMBO8");
+DB_LLWEAPONEX_Katanas_ComboStatus(9, "LLWEAPONEX_KATANA_COMBO9");
+
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
 THEN
 CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit");
 
+//REGION COMBO_TURN_ENDING
 IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_FINISHER", (CHARACTERGUID)_Source)
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO1", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO1");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO2", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO2");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO3", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO3");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO4", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO4");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO5", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO5");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO6", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO6");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO7", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO7");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO8", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO8");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO9", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO9");
+//END_REGION
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Source, "LLWEAPONEX_Katana")
 AND
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target)
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
 THEN
-NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target);
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
 
+//REGION FINISHER_COMBO
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_FINISHER_APPLY", (CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Katanas_ComboStatus(_Hits, _Status)
+AND
+HasActiveStatus(_Target, _Status, 1)
+THEN
+LLWEAPONEX_Katanas_SetFinisherHits(_Target, _Source, _Hits);
+RemoveStatus(_Target, _Status);
+ObjectSetFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo", 0);
+
+PROC
+LLWEAPONEX_Katanas_SetFinisherHits((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_Hits)
+AND
+DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _OtherSource, _OtherHits)
+THEN
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _OtherSource, _OtherHits);
+
+PROC
+LLWEAPONEX_Katanas_SetFinisherHits((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_Hits)
+THEN
+DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _Hits);
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_FINISHER_APPLY", (CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _Hits)
+THEN
+LeaderLib_Timers_StartCharacterCharacterTimer(_Target, _Source, 50, "LLWEAPONEX_Timers_Katanas_StartFinisher", "LLWEAPONEX_Katanas_FinisherHit");
+
+IF
+CharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Katanas_FinisherHit")
+AND
+DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _Hits)
+AND
+CharacterIsDead(_Target, _IsDead)
+THEN
+LLWEAPONEX_Katanas_Internal_OnFinisherHit(_Target, _Source, _Hits);
+
+PROC
+LLWEAPONEX_Katanas_Internal_OnFinisherHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_Hits)
+AND
+IntegerSubtract(_Hits, 1, _NextHits)
+AND
+CharacterIsDead(_Target, _IsDead)
+THEN
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _Hits);
+CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_Katanas_OnFinisherHit");
+LLWEAPONEX_Katanas_Internal_StartNextHit(_Target, _Source, _NextHits, _IsDead);
+
+PROC
+LLWEAPONEX_Katanas_Internal_StartNextHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_NextHits, 0)
+AND
+_NextHits > 0
+THEN
+DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _NextHits);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Target, _Source, 275, "LLWEAPONEX_Timers_Katanas_NextFinisher", "LLWEAPONEX_Katanas_FinisherHit");
+
+PROC
+LLWEAPONEX_Katanas_Internal_StartNextHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_NextHits, (INTEGER)_IsDead)
+AND
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _)
+THEN
+LLWEAPONEX_Katanas_FinisherDone(_Target, _Source);
+
+PROC
+LLWEAPONEX_Katanas_FinisherDone((CHARACTERGUID)_Target, (CHARACTERGUID)_Source)
+THEN
+ObjectClearFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo", 0);
+//END_REGION
+
+//REGION ANIMATION_OVERRIDE
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Katana")
 AND
@@ -47,6 +175,7 @@ AND
 IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
 THEN
 CharacterSetAnimationSetOverride(_Player, "");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

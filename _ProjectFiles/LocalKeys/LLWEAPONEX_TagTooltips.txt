@@ -1,2 +1,2 @@
-tagkey_LLWEAPONEX_Katana_FinisherEnabled	<font color='#8B0000'>Katana Mastery</font><br>Your proficiency with katanas allows you to temporarily apply a <font color='#c80030'>Piercing Damage Vulnerability</font>  to enemies on hit.
+tagkey_LLWEAPONEX_Katana_ComboEnabled	<font color='#8B0000'>Katana Mastery</font><br>Striking enemies with your blade applies Blademaster's Strike, causing different effects with katana-based skills.
 tagKey_LLWEAPONEX_Rapier_SuckerCombo1Enabled	<font color='#0e7700'>Rapier Mastery</font><br>After attacking an enemy with Sucker Punch, follow up the attack with another debilitating blow. Sucker Punch's knockdown duration is increased by 1.

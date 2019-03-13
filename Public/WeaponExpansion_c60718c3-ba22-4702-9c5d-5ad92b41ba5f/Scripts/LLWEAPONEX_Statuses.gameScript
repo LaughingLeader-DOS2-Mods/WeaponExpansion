@@ -1,38 +1,6 @@
 INIT
 
 EVENTS
-	
-EVENT LLWEAPONEX_Katana_OnHit
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-ON
-	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit")
-ACTIONS
-IF "c1&!c2"
-	IsTagged(_Source, "LLWEAPONEX_Katana_FinisherEnabled")
-	HasFlag(_Source, "LLWEAPONEX_Katana_FinisherDisabled")
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY, 0, 0, _Source)
-ENDIF
-
-EVENT LLWEAPONEX_Katana_HelmSplitter
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-	FLOAT:_LevelF
-	INT:_Level
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_HELMSPLITTER)
-ACTIONS
-IF "c1&c2"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_HELMSPLITTER, _Source)
-	CharacterGetStat(_LevelF, _Source, Level)
-THEN
-	Cast(_Level, _LevelF)
-	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor, _Level, _Source)
-	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor, _Level, _Source)
-ENDIF	
 
 EVENT LLWEAPONEX_Rapier_SuckerPunch_Knockdown
 VARS

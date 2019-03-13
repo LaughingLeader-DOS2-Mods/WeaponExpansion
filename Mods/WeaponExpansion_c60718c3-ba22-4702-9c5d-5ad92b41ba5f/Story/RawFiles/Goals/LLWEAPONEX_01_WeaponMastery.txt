@@ -13,8 +13,8 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 20);
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 40);
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 50);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 100);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(4, 125);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 125);
+//DB_LLWEAPONEX_WeaponMastery_MaxExperience(4, 125);
 
 //Max possible level attainable by players
 //DB_LLWEAPONEX_WeaponMastery_Softcap(2);
@@ -89,8 +89,12 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Katana", 4, "<font color='#FF3
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Katana", "LLWEAPONEX_WM_Katana_Exp", "LLWEAPONEX_WM_Katana_Level");
 
-DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Finisher", "Tag");
-DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Finisher", "LLWEAPONEX_Katana_FinisherEnabled", "Tag");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Iaido", "Any");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Katana", "Iaido", "Rush_LLWEAPONEX_Katana_Iaido");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Combo", "Tag");
+DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Combo", "LLWEAPONEX_Katana_ComboEnabled", "Tag");
+//DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Finisher", "Tag");
+//DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Finisher", "LLWEAPONEX_Katana_FinisherEnabled", "Tag");
 
 //Quarterstaff
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Quarterstaff", "<font color='#FD8826'>Quarterstaff Mastery</font>");
@@ -161,6 +165,38 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelV
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,9)
+THEN
+SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 20);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 40);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 50);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 125);
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,8)
+AND
+DB_IsPlayer(_Player)
+AND
+IsTagged(_Player, "LLWEAPONEX_Katana_FinisherEnabled", 1)
+THEN
+ClearTag(_Player, "LLWEAPONEX_Katana_FinisherEnabled");
+LeaderLib_Tags_ClearPreservedTag(_Player, "LLWEAPONEX_Katana_FinisherEnabled");
+
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,8)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Katana", 1, "Finisher", "Tag");
+NOT DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Finisher", "LLWEAPONEX_Katana_FinisherEnabled", "Tag");
+LLWEAPONEX_WeaponMastery_InitSettings();
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
@@ -466,12 +502,8 @@ PROC
 LLWEAPONEX_WeaponMastery_InitMasteryVariables((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level)
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_MasteryLevelSet(_Player, _WeaponType)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-AND
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, _Max)
 THEN
-LLWEAPONEX_WeaponMastery_StoreExperience(_Player, _WeaponType, _Level, 0);
+LLWEAPONEX_WeaponMastery_StoreExperienceForLevel(_Player, _WeaponType, _Level, 0);
 LLWEAPONEX_WeaponMastery_MasteryInitialized(_Player, _WeaponType, _Level);
 
 PROC
@@ -903,14 +935,14 @@ DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, 
 LLWEAPONEX_WeaponMastery_StoreExperienceInVars(_Player, _WeaponType, _Level, _Experience);
 
 PROC
-LLWEAPONEX_WeaponMastery_StoreExperience((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level, (INTEGER)_Experience)
+LLWEAPONEX_WeaponMastery_StoreExperienceForLevel((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level, (INTEGER)_Experience)
 AND
 DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _LastLevel, _Lastxperience)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _LastLevel, _Lastxperience);
 
 PROC
-LLWEAPONEX_WeaponMastery_StoreExperience((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level, (INTEGER)_Experience)
+LLWEAPONEX_WeaponMastery_StoreExperienceForLevel((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level, (INTEGER)_Experience)
 THEN
 DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience);
 LLWEAPONEX_WeaponMastery_StoreExperienceInVars(_Player, _WeaponType, _Level, _Experience);
@@ -1027,7 +1059,7 @@ AND
 CharacterIsControlled(_Player, _IsControlled)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:MasteryLevelUp] Weapon Mastery [",_WeaponType,"] leveled up to [",_NextMasteryLevelStr,"].");
-LLWEAPONEX_WeaponMastery_StoreExperience(_Player, _WeaponType, _NextMasteryLevel, 0);
+LLWEAPONEX_WeaponMastery_StoreExperienceForLevel(_Player, _WeaponType, _NextMasteryLevel, 0);
 LLWEAPONEX_WeaponMastery_ShowLevelUpText(_Player, _WeaponType, _NextMasteryLevel, _IsControlled);
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _WeaponType, _NextMasteryLevel);
 LLWEAPONEX_WeaponMastery_SetProgressionFlags(_Player, _WeaponType, _Level, _NextMasteryLevel);
