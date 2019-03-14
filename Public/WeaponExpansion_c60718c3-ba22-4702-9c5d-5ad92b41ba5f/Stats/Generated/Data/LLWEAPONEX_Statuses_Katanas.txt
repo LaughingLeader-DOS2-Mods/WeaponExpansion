@@ -279,6 +279,11 @@ type "Potion"
 using "Stats_LLWEAPONEX_Katana_Combo1"
 data "PiercingResistance" "-45"
 
+new entry "LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY"
+type "StatusData"
+data "StatusType" "DAMAGE"
+using "LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+
 new entry "LLWEAPONEX_KATANA_FINISHER_IAIDO_DAMAGE"
 type "StatusData"
 data "StatusType" "DAMAGE"

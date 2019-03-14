@@ -17,7 +17,7 @@ DB_LLWEAPONEX_Katanas_ComboStatus(8, "LLWEAPONEX_KATANA_COMBO8");
 DB_LLWEAPONEX_Katanas_ComboStatus(9, "LLWEAPONEX_KATANA_COMBO9");
 
 DB_LLWEAPONEX_Katanas_ComboFinisher("LLWEAPONEX_KATANA_FINISHER_APPLY", "Default");
-DB_LLWEAPONEX_Katanas_ComboFinisher("LLWEAPONEX_KATANA_IAIDO_HIT_FX", "Iaido");
+DB_LLWEAPONEX_Katanas_ComboFinisher("LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY", "Iaido");
 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
@@ -153,6 +153,11 @@ PROC
 LLWEAPONEX_Katanas_FinisherHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_HitNumber, (STRING)_Status, (STRING)_ComboFinisher, (INTEGER)_IsDead)
 THEN
 DB_NOOP(1);
+
+PROC
+LLWEAPONEX_Katanas_FinisherHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_HitNumber, (STRING)_Status, "Default", 0)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_KATANA_FINISHER_DAMAGE", 0.0, 0, _Source);
 
 PROC
 LLWEAPONEX_Katanas_FinisherHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_HitNumber, (STRING)_Status, "Iaido", 0)

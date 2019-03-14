@@ -991,14 +991,14 @@ DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
 DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, _Object);
-ApplyStatus(_Player, "LEADERLIB_HIDE_WEAPON", 30.0, 1, _Player);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Object, 50, "LLWEAPONEX_Timers_MovingObject_CopyVisuals", "LLWEAPONEX_MovingObject_CopyVisuals");
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Object, 125, "LLWEAPONEX_Timers_MovingObject_CopyVisuals", "LLWEAPONEX_MovingObject_CopyVisuals");
 
 IF
 CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObject_CopyVisuals")
 AND
 ObjectExists(_Object, 1)
 THEN
+ApplyStatus(_Player, "LEADERLIB_HIDE_WEAPON", 30.0, 1, _Player);
 LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals(_Player, _Object);
 
 PROC
