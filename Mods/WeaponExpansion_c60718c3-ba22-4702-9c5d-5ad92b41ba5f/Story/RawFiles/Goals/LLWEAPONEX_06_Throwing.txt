@@ -202,6 +202,8 @@ Transform(_Kevin, _Template, 0, 0, 1);
 IF
 ItemTemplateAddedToCharacter(ITEMGUID_WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_b3fc8995-8c7c-4de5-b465-e2573334cff7, _Item, _Character)
 AND
+ObjectExists(_Item, 1)
+AND
 IsTagged(_Item, "LLWEAPONEX_KevinThePetRock", 0)
 THEN
 SetTag(_Item, "LLWEAPONEX_KevinThePetRock");

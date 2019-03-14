@@ -1,0 +1,206 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_TaggedItemTracker("LLWEAPONEX_RemoteMine");
+KBSECTION
+
+//REGION ADD_MINE
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_ADD_REMOTEMINE", _)
+AND
+GetPosition(_Character, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_LLWEAPONEX_Trap_Mine_Remote_A_9723e927-785b-4fe9-91e7-a8ad1af30716", _x, _y, _z, _RemoteMine)
+THEN
+//ItemTemplateAddTo("WPN_LLWEAPONEX_Trap_Mine_Remote_A_9723e927-785b-4fe9-91e7-a8ad1af30716", _Character, 1, 1);
+SetVarObject(_RemoteMine, "LLWEAPONEX_Mine_Owner", _Character);
+ItemToInventory(_RemoteMine, _Character, 1, 1);
+
+PROC
+LLWEAPONEX_RemoteMines_SetOwner((CHARACTERGUID)_Character, (ITEMGUID)_RemoteMine)
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_RemoteMine, "LLWEAPONEX_Mine_Owner")
+THEN
+SetVarObject(_RemoteMine, "LLWEAPONEX_Mine_Owner", _Character);
+
+/*
+IF
+ItemTemplateAddedToCharacter(WPN_LLWEAPONEX_Trap_Mine_Remote_A_9723e927-785b-4fe9-91e7-a8ad1af30716, _Item,  _Character)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_ADD_REMOTEMINE")
+THEN
+SetVarObject(_Item, "LLWEAPONEX_Mine_Owner", _Character);
+*/
+//END_REGION
+
+//REGION HOLDING_TAG
+IF
+ItemAddedToCharacter(_RemoteMine, _Character)
+AND
+ObjectExists(_RemoteMine, 1) //prevent stacked items from asserting all over the place
+AND
+IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
+THEN
+LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HoldingRemoteMine");
+
+IF
+ItemRemovedFromCharacter(_RemoteMine, _Character)
+AND
+IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
+AND
+ItemTagIsInCharacterInventory(_Character, "LLWEAPONEX_RemoteMine", _Count)
+AND
+_Count <= 0
+THEN
+LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HoldingRemoteMine");
+
+IF
+ItemAddedToContainer(_RemoteMine, _Container)
+AND
+ObjectExists(_RemoteMine, 1) //prevent stacked items from asserting all over the place
+AND
+IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
+THEN
+SetTag(_Container, "LLWEAPONEX_HoldingRemoteMine");
+
+IF
+ItemRemovedFromContainer(_RemoteMine, _Container)
+AND
+IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
+THEN
+ClearTag(_Container, "LLWEAPONEX_HoldingRemoteMine");
+InventoryLaunchTagIterator(_Container, "LLWEAPONEX_RemoteMine", "", "LLWEAPONEX_Iterator_RemoteMineFound", "");
+
+IF
+StoryEvent((ITEMGUID)_RemoteMine, "LLWEAPONEX_Iterator_RemoteMineFound")
+AND
+ObjectExists(_RemoteMine, 1)
+AND
+GetInventoryOwner(_RemoteMine, (ITEMGUID)_Container)
+THEN
+SetTag(_Container, "LLWEAPONEX_HoldingRemoteMine");
+//END_REGION
+
+//REGION INVENTORY_DETONATION
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Character)
+AND
+ItemTagIsInCharacterInventory(_Target, "LLWEAPONEX_RemoteMine", _Count)
+AND
+_Count > 0
+THEN
+DB_LLWEAPONEX_RemoteMines_Temp_DetonateTarget(_Character, _Target, _Count);
+CharacterCharacterSetEvent(_Character, _Target, "LLWEAPONEX_RemoteMines_StartNextDetonation");
+
+IF
+CharacterCharacterEvent(_Character, _Target, "LLWEAPONEX_RemoteMines_StartNextDetonation")
+AND
+DB_LLWEAPONEX_RemoteMines_Temp_DetonateTarget(_Character, _Target, _Count)
+THEN
+NOT DB_LLWEAPONEX_RemoteMines_Temp_DetonateTarget(_Character, _Target, _Count);
+LLWEAPONEX_RemoteMines_DetonateMines(_Character, _Target, _Count);
+
+PROC
+LLWEAPONEX_RemoteMines_DetonateMines((CHARACTERGUID)_Character, (CHARACTERGUID)_Target, (INTEGER)_Count)
+AND
+_Count > 0
+AND
+IntegerSubtract(_Count, 1, _NextCount)
+AND
+CharacterFindTaggedItem(_Target, "LLWEAPONEX_RemoteMine", _RemoteMine)
+THEN
+LLWEAPONEX_RemoteMines_SetOwner(_Character, _RemoteMine); // Failsafe
+CharacterItemSetEvent(_Target, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Character");
+DB_LLWEAPONEX_RemoteMines_Temp_DetonateTarget(_Character, _Target, _NextCount);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Character, _Target, 250, "LLWEAPONEX_Timers_RemoteMines_NextDetonation", "LLWEAPONEX_RemoteMines_StartNextDetonation");
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Character)
+AND
+ObjectExists(_Target, 1)
+AND
+ItemIsContainer(_Target, 1)
+AND
+ItemIsDestroyed(_Target, 0)
+THEN
+DB_LLWEAPONEX_RemoteMines_Temp_Detonating(_Character, _Target);
+InventoryLaunchTagIterator(_Target, "LLWEAPONEX_RemoteMine", "", "LLWEAPONEX_Iterator_RemoteMines_Detonate", "");
+ProcObjectTimer(_Target, "LLWEAPONEX_Timers_RemoteMines_ClearDetonatingDB", 500);
+
+PROC
+ProcObjectTimerFinished((ITEMGUID)_Target, "LLWEAPONEX_Timers_RemoteMines_ClearDetonatingDB")
+AND
+DB_LLWEAPONEX_RemoteMines_Temp_Detonating(_Character, _Target)
+THEN
+NOT DB_LLWEAPONEX_RemoteMines_Temp_Detonating(_Character, _Target);
+
+IF
+StoryEvent((ITEMGUID)_RemoteMine, "LLWEAPONEX_Iterator_RemoteMines_Detonate")
+AND
+ObjectExists(_RemoteMine, 1)
+AND
+GetInventoryOwner(_RemoteMine, (ITEMGUID)_Target)
+AND
+DB_LLWEAPONEX_RemoteMines_Temp_Detonating(_Character, _Target)
+THEN
+LLWEAPONEX_RemoteMines_SetOwner(_Character, _RemoteMine); // Failsafe
+SetVarObject(_RemoteMine, "LLWEAPONEX_Mine_Inventory", _Target);
+CharacterItemSetEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Container");
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Character)
+AND
+IsTagged(_Target, "LLWEAPONEX_RemoteMine", 1)
+THEN
+CharacterItemSetEvent(_Character, _Target, "LLWEAPONEX_RemoteMine_DetonationStatus");
+//END_REGION
+
+//REGION BEHAVIOR_SCRIPT_DETONATION_EVENTS
+IF
+CharacterItemEvent(_Character, _Mine, "LLWEAPONEX_RemoteMine_DetonateInWorld_BySkillID")
+AND
+GetVarString(_Mine, "LLWEAPONEX_Mine_SkillID", _Skill)
+AND
+GetPosition(_Mine, _x, _y, _z)
+AND
+CharacterGetLevel(_Character, _Level)
+THEN
+CreateExplosionAtPosition(_x, _y, _z, _Skill, _Level);
+SetStoryEvent(_Mine, "LLWEAPONEX_RemoteMine_DetonationDone");
+
+IF
+CharacterItemEvent(_Character, _Mine, "LLWEAPONEX_RemoteMine_DetonateInWorld_BySkillID")
+AND
+GetVarString(_Mine, "LLWEAPONEX_Mine_ExplosionStatusID", _Status)
+THEN
+ApplyStatus(_Mine, _Status, 0.0, 1, _Character);
+SetStoryEvent(_Mine, "LLWEAPONEX_RemoteMine_DetonationDone");
+
+IF
+CharacterItemEvent(_Target, _Mine, "LLWEAPONEX_RemoteMine_DetonateInInventory_BySkillID")
+AND
+GetVarString(_Mine, "LLWEAPONEX_Mine_SkillID", _Skill)
+AND
+GetVarObject(_Mine, "LLWEAPONEX_Mine_Owner", (CHARACTERGUID)_Owner)
+AND
+GetPosition(_Target, _x, _y, _z)
+AND
+CharacterGetLevel(_Owner, _Level)
+THEN
+CreateExplosionAtPosition(_x, _y, _z, _Skill, _Level);
+SetStoryEvent(_Mine, "LLWEAPONEX_RemoteMine_DetonationDone");
+
+IF
+CharacterItemEvent(_Target, _Mine, "LLWEAPONEX_RemoteMine_DetonateInInventory_ByStatusID")
+AND
+GetVarString(_Mine, "LLWEAPONEX_Mine_ExplosionStatusID", _Status)
+AND
+GetVarObject(_Mine, "LLWEAPONEX_Mine_Owner", (CHARACTERGUID)_Owner)
+THEN
+ApplyStatus(_Target, _Status, 0.0, 1, _Owner);
+SetStoryEvent(_Mine, "LLWEAPONEX_RemoteMine_DetonationDone");
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

@@ -38,6 +38,10 @@ LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] 
 LLWEAPONEX_MENDING_DisplayName	Mending
 LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is gathering power.
 LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)
+LLWEAPONEX_ADD_REMOTEMINE_DisplayName	Retrieve Remote Charge
+LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_DisplayName	Recharging (Demolitionist's Backpack)
+LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_Description	Character's <font color='#C7A758'>Demolitionist's Backpack</font> is gathering power.
+LLWEAPONEX_REMOTEMINE_DETONATE_DisplayName	Detonate Remote Charge
 LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.
 LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound
 LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.

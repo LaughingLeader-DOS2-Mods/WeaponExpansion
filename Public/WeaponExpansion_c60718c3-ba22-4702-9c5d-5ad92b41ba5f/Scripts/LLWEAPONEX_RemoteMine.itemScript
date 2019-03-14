@@ -1,0 +1,188 @@
+INIT
+	ITEM:__Me
+	CHARACTER:%LLWEAPONEX_Mine_Owner = null
+	ITEM:%LLWEAPONEX_Mine_Inventory = null
+	EXTERN SKILL:%LLWEAPONEX_Mine_Skill = Projectile_LLWEAPONEX_RemoteMine_DefaultExplosion
+	EXTERN SKILL:%LLWEAPONEX_Mine_Skill_NoWeapon = Projectile_LLWEAPONEX_RemoteMine_DefaultExplosion_NoWeapon
+	EXTERN STRING:%LLWEAPONEX_Mine_SkillID = null
+	EXTERN STATUS:%LLWEAPONEX_Mine_ExplosionStatus = null
+	EXTERN STATUS:%LLWEAPONEX_Mine_ExplosionStatusID = null
+	EXTERN INT:%LLWEAPONEX_Mine_UseStatus = 0
+EVENTS
+
+EVENT LLWEAPONEX_RemoteMine_Detonate_FromSkill
+VARS
+	CHARACTER:_Character
+	INT:_Level
+	FLOAT:_LevelF
+ON
+	//OnCharacterUsedSkillOnMe(_Character, Target_LLWEAPONEX_RemoteMine_Detonate)
+	//OnItemStatus(__Me, LLWEAPONEX_REMOTEMINE_DETONATE)
+	OnCharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_DetonationStatus")
+ACTIONS
+	IF "c1"
+		IsEqual(%LLWEAPONEX_Mine_Owner, null)
+	THEN
+		Set(%LLWEAPONEX_Mine_Owner, _Character)
+	ENDIF
+	CallFunction("LLWEAPONEX_RemoteMine_Detonate")
+
+EVENT LLWEAPONEX_RemoteMine_DetonateInWorld
+VARS
+	INT:_Level
+	FLOAT:_LevelF
+	SKILL:_Skill
+ON
+	OnFunction("LLWEAPONEX_RemoteMine_Detonate")
+	OnItemEvent(__Me, "LLWEAPONEX_RemoteMine_Detonate")
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Mine_UseStatus, 0)
+THEN
+	IF "c1|c2"
+		IsEqual(%LLWEAPONEX_Mine_SkillID, null)
+		IsEqual(%LLWEAPONEX_Mine_SkillID, "")
+	THEN
+		Set(_Level, -1)
+		IF "!c1&c2"
+			IsEqual(%LLWEAPONEX_Mine_Owner, null)
+			CharacterGetStat(_LevelF, %LLWEAPONEX_Mine_Owner, Level)
+		THEN
+			Cast(_Level, _LevelF)
+		ELSE
+			Set(_Level, 1)
+		ENDIF
+		IF "!c1"
+			IsTagged(%LLWEAPONEX_Mine_Owner, "LLWEAPONEX_AnyWeaponEquipped")
+		THEN
+			Set(_Skill, %LLWEAPONEX_Mine_Skill_NoWeapon)
+		ELSE
+			Set(_Skill, %LLWEAPONEX_Mine_Skill)
+		ENDIF
+		IF "c1"
+			ItemIsInCharacterInventory(__Me, %LLWEAPONEX_Mine_Owner)
+		THEN
+			ExplodeAt(%LLWEAPONEX_Mine_Owner, _Skill, _Level, %LLWEAPONEX_Mine_Owner)
+		ELSE
+			ExplodeAt(__Me, _Skill, _Level, %LLWEAPONEX_Mine_Owner)
+		ENDIF
+		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+	ELSE
+		CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_RemoteMine_DetonateInWorld_BySkillID")
+	ENDIF
+ELSE
+	IF "!c1"
+		IsEqual(%LLWEAPONEX_Mine_ExplosionStatus, null)
+	THEN
+		ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, %LLWEAPONEX_Mine_Owner)
+	ELSE
+		CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_RemoteMine_DetonateInWorld_ByStatusID")
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_RemoteMine_DetonateInInventory_Character
+VARS
+	CHARACTER:_Target
+	INT:_Level
+	FLOAT:_LevelF
+	SKILL:_Skill
+ON
+	OnCharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_StartDetonation_Character")
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Mine_UseStatus, 0)
+THEN
+	IF "c1|c2"
+		IsEqual(%LLWEAPONEX_Mine_SkillID, null)
+		IsEqual(%LLWEAPONEX_Mine_SkillID, "")
+	THEN
+		Set(_Level, -1)
+		IF "!c1&c2"
+			IsEqual(%LLWEAPONEX_Mine_Owner, null)
+			CharacterGetStat(_LevelF, %LLWEAPONEX_Mine_Owner, Level)
+		THEN
+			Cast(_Level, _LevelF)
+		ELSE
+			Set(_Level, 1)
+		ENDIF
+		IF "!c1"
+			IsTagged(%LLWEAPONEX_Mine_Owner, "LLWEAPONEX_AnyWeaponEquipped")
+		THEN
+			Set(_Skill, %LLWEAPONEX_Mine_Skill_NoWeapon)
+		ELSE
+			Set(_Skill, %LLWEAPONEX_Mine_Skill)
+		ENDIF
+		ExplodeAt(_Target, _Skill, _Level, %LLWEAPONEX_Mine_Owner)
+		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+	ELSE
+		CharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_BySkillID")
+	ENDIF
+ELSE
+	IF "!c1"
+		IsEqual(%LLWEAPONEX_Mine_ExplosionStatus, null)
+	THEN
+		ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, %LLWEAPONEX_Mine_Owner)
+		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+	ELSE
+		CharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_ByStatusID")
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_RemoteMine_DetonateInInventory_Container
+VARS
+	CHARACTER:_Character
+	INT:_Level
+	FLOAT:_LevelF
+	SKILL:_Skill
+ON
+	OnCharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_StartDetonation_Container")
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Mine_UseStatus, 0)
+THEN
+	IF "c1|c2"
+		IsEqual(%LLWEAPONEX_Mine_SkillID, null)
+		IsEqual(%LLWEAPONEX_Mine_SkillID, "")
+	THEN
+		Set(_Level, -1)
+		IF "!c1&c2"
+			IsEqual(%LLWEAPONEX_Mine_Owner, null)
+			CharacterGetStat(_LevelF, %LLWEAPONEX_Mine_Owner, Level)
+		THEN
+			Cast(_Level, _LevelF)
+		ELSE
+			Set(_Level, 1)
+		ENDIF
+		IF "!c1"
+			IsTagged(_Character, "LLWEAPONEX_AnyWeaponEquipped")
+		THEN
+			Set(_Skill, %LLWEAPONEX_Mine_Skill_NoWeapon)
+		ELSE
+			Set(_Skill, %LLWEAPONEX_Mine_Skill)
+		ENDIF
+		ExplodeAt(%LLWEAPONEX_Mine_Inventory, _Skill, _Level, _Character)
+		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+	ELSE
+		CharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_BySkillID_Container")
+	ENDIF
+ELSE
+	IF "!c1"
+		IsEqual(%LLWEAPONEX_Mine_ExplosionStatus, null)
+	THEN
+		ItemApplyStatus(%LLWEAPONEX_Mine_Inventory, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, _Character)
+		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+	ELSE
+		CharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_ByStatusID_Container")
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_RemoteMine_OnDetonated
+ON
+	OnItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+ACTIONS
+IF "!c1"
+	ItemIsDestroyed(__Me)
+THEN
+	//ItemDie(__Me)
+	ItemDestroy(__Me)
+ENDIF

@@ -722,6 +722,9 @@ add name "Ring of the Weaponmaster","A ring made to defy the gods."
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
 add name "Demon Hunter's Oath",""
 
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A"
+add name "Demolitionist's Backpack",""
+
 new namegroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A"
 add name "Devil Hand",""
 
