@@ -1,0 +1,11 @@
+Stats_LLWEAPONEX_Katana_Combo1	Blademaster's Strike
+Stats_LLWEAPONEX_Katana_Combo2	Blademaster's Strike 2
+Stats_LLWEAPONEX_Katana_Combo3	Blademaster's Strike 3
+Stats_LLWEAPONEX_Katana_Combo4	Blademaster's Strike 4
+Stats_LLWEAPONEX_Katana_Combo5	Blademaster's Strike 5
+Stats_LLWEAPONEX_Katana_Combo6	Blademaster's Strike 6
+Stats_LLWEAPONEX_Katana_Combo7	Blademaster's Strike 7
+Stats_LLWEAPONEX_Katana_Combo8	Blademaster's Strike 8
+Stats_LLWEAPONEX_Katana_Combo9	Blademaster's Strike 9
+Stats_LLWEAPONEX_Katana_Finisher	Finisher
+Stats_LLWEAPONEX_MuramasaCurse	Curse of the Muramasa

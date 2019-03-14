@@ -3,4 +3,4 @@ Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter
 LLWEAPONEX_Target_Raizan_Flurry_DisplayName	Raijin's Onslaught
 LLWEAPONEX_Target_Raizan_Flurry_Description	(Placeholder)<br>Unleash the magic within the Raizan, attacking 5 times with astonishing speed, each hit dealing [1].
 Rush_LLWEAPONEX_Katana_Iaido_DisplayName	Flash of Steel
-Rush_LLWEAPONEX_Katana_Iaido_Description	In a swift display of speed and skill, instantly slice enemies between your start and end position, dealing [1].<br>Applies Finisher to enemies hit for the duration of your turn, increasing the piercing damage they take as their health drops.<br>Targets hit that already have Finisher explode in a pool of blood, dealing [2].
+Rush_LLWEAPONEX_Katana_Iaido_Description	In a swift display of skill, instantly rend enemies in a line, dealing [1].<br>Consumes all stacks of <font color='#C9AA58'>Blademaster's Strike</font> on targets hit, dealing [2] per stack, and rupturing their wounds for [3] every 3 stacks.

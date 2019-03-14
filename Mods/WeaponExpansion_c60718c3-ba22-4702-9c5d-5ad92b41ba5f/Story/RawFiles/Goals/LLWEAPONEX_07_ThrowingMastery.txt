@@ -169,6 +169,8 @@ DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, 1);
 PROC
 LLWEAPONEX_ThrowingMastery_AddExperience((CHARACTERGUID)_Player)
 AND
+LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, "LLWEAPONEX_ThrowingAbility")
+AND
 LLWEAPONEX_ThrowingMastery_QRY_GetThrowingExperienceValue(_Player)
 AND
 DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _Val)

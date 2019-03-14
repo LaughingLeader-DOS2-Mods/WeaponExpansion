@@ -251,6 +251,7 @@ data "DamageTorches" "No"
 data "PermanentOnTorch" "No"
 data "SpawnBlood" "Yes"
 data "ForceOverhead" "Yes"
+data "SoundStart" "Skill_Water_BloodStorm_Impact_Projectile"
 
 new entry "Damage_LLWEAPONEX_Rupture"
 type "Weapon"

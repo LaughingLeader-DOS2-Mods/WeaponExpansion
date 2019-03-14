@@ -981,25 +981,39 @@ THEN
 DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
 
 IF
-StoryEvent((ITEMGUID)_Object, "LLWEAPONEX_MovingObjectWeapon_Init")
+StoryEvent(_Object, "LLWEAPONEX_MovingObjectWeapon_Init")
+AND
+ObjectExists(_Object, 1)
+AND
+ObjectIsItem((ITEMGUID)_Object, 1)
 AND
 DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
 DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, _Object);
-LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals(_Player, _Object);
 ApplyStatus(_Player, "LEADERLIB_HIDE_WEAPON", 30.0, 1, _Player);
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Object, 50, "LLWEAPONEX_Timers_MovingObject_CopyVisuals", "LLWEAPONEX_MovingObject_CopyVisuals");
+
+IF
+CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObject_CopyVisuals")
+AND
+ObjectExists(_Object, 1)
+THEN
+LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals(_Player, _Object);
 
 PROC
 LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals((CHARACTERGUID)_Player, (ITEMGUID)_Object)
 AND
-CharacterGetEquippedWeapon(_Player, (ITEMGUID)_Weapon)
+CharacterGetEquippedItem(_Player, "Weapon", (ITEMGUID)_Weapon)
 AND
 _Weapon != NULL_00000000-0000-0000-0000-000000000000
 AND
+ObjectExists(_Weapon, 1)
+AND
 GetTemplate(_Weapon, _Template)
 THEN
-Transform(_Object, _Template, 0, 1, 1);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_06_Throwing:MovingObject_CopyWeaponVisuals] Transforming object into [",_Template,"].");
+Transform(_Object, _Template, 0, 1, 0);
 ItemSetCanPickUp(_Object, 0);
 LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects(_Weapon);
 
@@ -1009,6 +1023,10 @@ AND
 CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Weapon)
 AND
 _Weapon != NULL_00000000-0000-0000-0000-000000000000
+AND
+ObjectExists(_Weapon, 1)
+AND
+NOT CharacterGetEquippedItem(_Player, "Weapon", _Weapon) // Two-handed weapons
 AND
 NOT CharacterGetEquippedShield(_Player, _Weapon) // Don't throw equipped shields
 AND

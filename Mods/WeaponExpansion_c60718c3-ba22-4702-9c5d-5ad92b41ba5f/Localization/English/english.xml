@@ -50,9 +50,7 @@
 	<content contentuid="h161d5479g06d6g408egade2g37a203e3361f" OT="Physical Armour">corrosive damage</content>
 	<content contentuid="h7656635fg959dg4396ga8bfgfc35e70f828f" OT="[1] Magic Armour reduction">[1] Magic</content>
 	<content contentuid="hd01e5f46g36d4g48f5g8550gabdc4bef1f04" OT="Magic Armour reduction">Magic</content>
-	<content contentuid="hd82fb3dag025bg4caag856egceaf8ecad162" OT="Magic Armour">magic damage</content>
-	<content contentuid="hd9f9cf80g7affg4a45g8519gd705ed9bc3bd" OT="Magic Armour">magic damage2</content>
-	<content contentuid="hdb4307b4g1a6fg4c05g9602g6a4a6e7a29d9" OT="Magic Armour">magic damage3</content>
+	<content contentuid="hdb4307b4g1a6fg4c05g9602g6a4a6e7a29d9" OT="Magic Armour">magic damage</content>
 	<content contentuid="h49b98935gaa0dg4d2dg826eg8ed389e68e13" S="Target_CorrosiveTouch_Description" OT="Destroy [1] on target character, and set Acid status.">Deal [1] to target character, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid.</content>
 	<content contentuid="h0fd12b32gce5fg435ag9c80g688ab9c0d9e3" S="Cone_CorrosiveSpray_Description" OT="Destroy [1] on targets in a cone, and set Acid and Atrophy.">Deal [1] to targets in a cone, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid and Atrophy.</content>
 	<content contentuid="hff341792gf705g46e1g92c3gcd39d8694013" S="Projectile_SilverArrow_Description" OT="Destroys [1].">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
