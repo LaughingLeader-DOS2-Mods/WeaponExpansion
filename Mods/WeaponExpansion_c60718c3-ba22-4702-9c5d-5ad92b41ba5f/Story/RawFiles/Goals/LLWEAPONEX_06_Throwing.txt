@@ -990,6 +990,8 @@ AND
 ObjectIsItem((ITEMGUID)_Object, 1)
 AND
 DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_, _Object)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
 DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, _Object);
@@ -1017,6 +1019,7 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_06_Throwing:MovingObject_CopyWeaponVisuals] Transforming object into [",_Template,"].");
 Transform(_Object, _Template, 0, 1, 0);
 ItemSetCanPickUp(_Object, 0);
+ItemSetOwner(_Object, _Player);
 LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects(_Weapon);
 
 PROC
@@ -1089,31 +1092,23 @@ ItemDestroy(_OffhandWeapon);
 PROC
 LLWEAPONEX_Throwing_MovingObject_TeleportWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Object)
 AND
-GetPosition(_Object, _x, _y, _z)
-AND
-GetRotation(_Object, _rx, _ry, _rz)
-AND
 CharacterGetEquippedWeapon(_Player, (ITEMGUID)_Weapon)
 AND
 _Weapon != NULL_00000000-0000-0000-0000-000000000000
 THEN
 CharacterUnequipItem(_Player, _Weapon);
-ItemToTransform(_Weapon, _x, _y, _z, _rx, _ry, _rz, 1, _Player);
+LeaderLib_Helpers_CopyItemTransform(_Weapon, _Object, 1);
 LLWEAPONEX_Throwing_MovingObject_ResetWeaponEffects(_Weapon);
 
 PROC
 LLWEAPONEX_Throwing_MovingObject_TeleportOffhandWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Object)
-AND
-GetPosition(_Object, _x, _y, _z)
-AND
-GetRotation(_Object, _rx, _ry, _rz)
 AND
 CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Weapon)
 AND
 _Weapon != NULL_00000000-0000-0000-0000-000000000000
 THEN
 CharacterUnequipItem(_Player, _Weapon);
-ItemToTransform(_Weapon, _x, _y, _z, _rx, _ry, _rz, 1, _Player);
+LeaderLib_Helpers_CopyItemTransform(_Weapon, _Object, 1);
 LLWEAPONEX_Throwing_MovingObject_ResetWeaponEffects(_Weapon);
 
 PROC

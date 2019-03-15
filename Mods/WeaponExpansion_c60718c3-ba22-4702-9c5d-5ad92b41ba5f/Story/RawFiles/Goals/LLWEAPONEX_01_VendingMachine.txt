@@ -39,6 +39,7 @@ LLWEAPONEX_VendingMachine_RegisterUniqueWeapons();
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_b3fc8995-8c7c-4de5-b465-e2573334cff7");
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_Clothing_UNIQUE_LLWEAPONEX_Blindfolds_Monk_A_78b08f39-3d9d-47b5-b251-f1b8dcebe65b");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7");
 
 LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TestLevel_LL_WeaponExpansion", 40.56, 0.0, 29.63);
 LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "FJ_FortJoy_Main", 40.56, 0.0, 29.63);
@@ -93,6 +94,13 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,4,10)
+THEN
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7");
+
 //Hey, don't equip that!
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)

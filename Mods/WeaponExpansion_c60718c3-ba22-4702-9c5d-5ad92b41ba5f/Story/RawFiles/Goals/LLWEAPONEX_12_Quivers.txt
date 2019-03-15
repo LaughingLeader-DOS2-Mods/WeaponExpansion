@@ -232,7 +232,7 @@ ObjectSetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging", 0);
 PROC
 LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
 AND
-NOT LLWEAPONEX_QRY_ChargesAreMaxed(_Quiver)
+NOT LeaderLib_Helper_QRY_ChargesAreMaxed(_Quiver)
 AND
 ItemIsInCharacterInventory(_Quiver, _Player, 1)
 THEN
@@ -241,7 +241,7 @@ ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
 PROC
 LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
 AND
-LLWEAPONEX_QRY_ChargesAreMaxed(_Quiver)
+LeaderLib_Helper_QRY_ChargesAreMaxed(_Quiver)
 THEN
 ObjectClearFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging");
 
@@ -263,17 +263,6 @@ THEN
 NOT DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_OtherPlayer, _Quiver, _Skill, _Status, _RechargeSpeed);
 DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
 LLWEAPONEX_Quivers_ResetRechargeStatus(_Player, _Quiver, _Status, _RechargeSpeed);
-
-QRY
-LLWEAPONEX_QRY_ChargesAreMaxed((ITEMGUID)_Item)
-AND
-ItemGetCharges(_Item, _Current)
-AND
-ItemGetMaxCharges(_Item, _Max)
-AND
-_Current >= _Max
-THEN
-DB_NOOP(1);
 //END_REGION
 
 //REGION RECHARGING_STATUS_DONE

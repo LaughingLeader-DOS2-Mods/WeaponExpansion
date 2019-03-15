@@ -1,0 +1,46 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION THROWING
+IF
+CanUseItem(_Character, _RemoteMine, _)
+AND
+IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
+THEN
+DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Character, _RemoteMine);
+
+IF
+CharacterStoppedUsingItem(_Character, _RemoteMine)
+AND
+DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Character, _RemoteMine)
+THEN
+NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Character, _RemoteMine);
+//END_REGION
+
+//REGION CHARGES
+IF
+CharacterKilledBy(_Enemy, _, _Character)
+AND
+DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Character)
+THEN
+LLWEAPONEX_RemoteMines_AddCharge(_Character);
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated", 500);
+//END_REGION
+
+//REGION ENHANCED_DEMOLITION
+IF
+SkillCast(_Player, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Uniques_Demolition_Temp_PostSkillBonus(_Player, _Target, _Item, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Demolition_Temp_PostSkillBonus(_Player, _Target, _Item, _Skill);
+LLWEAPONEX_Uniques_Demolition_GrantBonus(_Player, _Target, _Item, _Skill);
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

@@ -183,6 +183,27 @@ ACTIONS
 IF "!c1"
 	ItemIsDestroyed(__Me)
 THEN
+	SetFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
 	//ItemDie(__Me)
 	ItemDestroy(__Me)
+ENDIF
+
+EVENT LLWEAPONEX_RemoteMine_DestroyedOther
+ON
+	OnItemDestroying(__Me)
+ACTIONS
+IF "!c1"
+	HasFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
+THEN
+	CallFunction("LLWEAPONEX_RemoteMine_Detonate")
+ENDIF
+
+EVENT LLWEAPONEX_RemoteMine_DetonateNear
+ON
+	OnItemDestroyed(__Me)
+ACTIONS
+IF "!c1"
+	ItemIsInInventory(__Me)
+THEN
+	ExplodeAt(__Me, Projectile_LLWEAPONEX_Status_RemoteMine_DetonateNear, 1, %LLWEAPONEX_Mine_Owner)
 ENDIF

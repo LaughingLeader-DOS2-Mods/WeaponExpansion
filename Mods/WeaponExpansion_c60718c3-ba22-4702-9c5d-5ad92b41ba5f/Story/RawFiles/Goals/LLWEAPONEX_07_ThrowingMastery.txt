@@ -3,7 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 LLWEAPONEX_ThrowingMastery_InitSettings();
-LLWEAPONEX_ThrowingMastery_RegisterSkills();
 KBSECTION
 //REGION SETTINGS
 PROC
@@ -21,73 +20,6 @@ LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_ThrowingAbility", "LLWEAPONEX_WM
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_ThrowingAbility", 1, "ThrowWeapon", "Any");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_ThrowingAbility", "ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon");
-//END_REGION
-
-//REGION SETTINGS_SKILLS
-
-PROC
-LLWEAPONEX_ThrowingMastery_RegisterSkills()
-THEN
-DB_NOOP(1);
-/*
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_ThrowWeapon");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_BloodBall");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Impale");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Sword1H");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Sword2H");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Axe1H");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Axe2H");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Dagger");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shuriken");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shuriken_Poison");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shuriken_Explosive");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Spear");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Scythe");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Sickle");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Blunt");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Mace1H");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Mace2H");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Instant");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Poison");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Oil");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Shield");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Bow");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Chair_01");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Crossbow");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Staff");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_StaffExplosion");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Wand");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("WeaponExpansion", "Projectile_LLWEAPONEX_WandExplosion");
-
-//Grenades
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_ArmorPiercing");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Nailbomb");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Flashbang");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Molotov");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_CursedMolotov");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Love");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_MindMaggot");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_ChemicalWarfare");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Terror");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Ice");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_BlessedIce");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Holy");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Tremor");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Taser");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_WaterBalloon");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_WaterBlessedBalloon");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_SmokeBomb");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_MustardGas");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_OilFlask");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_BlessedOilFlask");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_PoisonFlask");
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_CursedPoisonFlask");
-*/
 //END_REGION
 
 //REGION GAIN_MASTERY
@@ -135,12 +67,30 @@ THEN
 DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
 
 IF
+CharacterUsedSkillOnTarget(_Player, _Target, _Skill, _, _)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item)
+THEN
+LLWEAPONEX_ThrowingMastery_OnThrowingSkillUsedOnTarget(_Player, _Target, _Item, _Skill);
+
+PROC
+LLWEAPONEX_ThrowingMastery_OnThrowingSkillUsedOnTarget((CHARACTERGUID)_Player, (GUIDSTRING)_Tardet, (ITEMGUID)_Item, (STRING)_Skill)
+THEN
+DB_NOOP(1);
+
+IF
 SkillCast(_Player, _Skill, _, _)
 AND
 DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item)
 THEN
 NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
 LLWEAPONEX_ThrowingMastery_AddExperience(_Player);
+LLWEAPONEX_ThrowingMastery_OnThrowingItemUsed(_Player, _Item, _Skill);
+
+PROC
+LLWEAPONEX_ThrowingMastery_OnThrowingItemUsed((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill)
+THEN
+DB_NOOP(1);
 
 //Cancelled Throwing
 IF
