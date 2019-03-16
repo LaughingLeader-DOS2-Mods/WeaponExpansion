@@ -1,0 +1,245 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Demolition_RegisterBonusSkills();
+KBSECTION
+
+//REGION SETTINGS_SKILLS
+PROC
+LLWEAPONEX_Demolition_RegisterBonusSkills()
+THEN
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_ArmorPiercing", "LLWEAPONEX_DEMOLITION_BONUS_ARMORPIERCING", "Projectile_LLWEAPONEX_Status_Demolition_ArmorPiercing");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Nailbomb", "LLWEAPONEX_DEMOLITION_BONUS_NAILBOMB", "Projectile_LLWEAPONEX_Status_Demolition_NailBomb");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Flashbang", "LLWEAPONEX_DEMOLITION_BONUS_FLASHBANG", "Projectile_LLWEAPONEX_Status_Demolition_Flashbang");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Molotov", "LLWEAPONEX_DEMOLITION_BONUS_MOLOTOV", "Projectile_LLWEAPONEX_Status_Demolition_Molotov");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_CursedMolotov", "LLWEAPONEX_DEMOLITION_BONUS_CURSEDMOLOTOV", "Projectile_LLWEAPONEX_Status_Demolition_CursedMolotov");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Love", "LLWEAPONEX_DEMOLITION_BONUS_LOVE", "Projectile_LLWEAPONEX_Status_Demolition_Love");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_MindMaggot", "LLWEAPONEX_DEMOLITION_BONUS_MINDMAGGOT", "Projectile_LLWEAPONEX_Status_Demolition_MindMaggot");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_ChemicalWarfare", "LLWEAPONEX_DEMOLITION_BONUS_CHEMICALWARFARE", "Projectile_LLWEAPONEX_Status_Demolition_ChemicalWarfare");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Terror", "LLWEAPONEX_DEMOLITION_BONUS_TERROR", "Projectile_LLWEAPONEX_Status_Demolition_Terror");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Ice", "LLWEAPONEX_DEMOLITION_BONUS_ICE", "Projectile_LLWEAPONEX_Status_Demolition_Ice");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_BlessedIce", "LLWEAPONEX_DEMOLITION_BONUS_BLESSEDICE", "Projectile_LLWEAPONEX_Status_Demolition_BlessedIce");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Holy", "LLWEAPONEX_DEMOLITION_BONUS_HOLY", "Projectile_LLWEAPONEX_Status_Demolition_Holy");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Tremor", "LLWEAPONEX_DEMOLITION_BONUS_TREMOR", "Projectile_LLWEAPONEX_Status_Demolition_Tremor");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Taser", "LLWEAPONEX_DEMOLITION_BONUS_TASER", "Projectile_LLWEAPONEX_Status_Demolition_Taser");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_WaterBalloon", "LLWEAPONEX_DEMOLITION_BONUS_WATERBALLOON", "Projectile_LLWEAPONEX_Status_Demolition_WaterBalloon");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_WaterBlessedBalloon", "LLWEAPONEX_DEMOLITION_BONUS_WATERBLESSEDBALLOON", "Projectile_LLWEAPONEX_Status_Demolition_WaterBlessedBalloon");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_SmokeBomb", "LLWEAPONEX_DEMOLITION_BONUS_SMOKEBOMB", "Projectile_LLWEAPONEX_Status_Demolition_SmokeBomb");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_MustardGas", "LLWEAPONEX_DEMOLITION_BONUS_MUSTARDGAS", "Projectile_LLWEAPONEX_Status_Demolition_MustardGas");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_OilFlask", "LLWEAPONEX_DEMOLITION_BONUS_OILFLASK", "Projectile_LLWEAPONEX_Status_Demolition_OilFlask");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_BlessedOilFlask", "LLWEAPONEX_DEMOLITION_BONUS_BLESSEDOILFLASK", "Projectile_LLWEAPONEX_Status_Demolition_BlessedOilFlask");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_PoisonFlask", "LLWEAPONEX_DEMOLITION_BONUS_POISONFLASK", "Projectile_LLWEAPONEX_Status_Demolition_PoisonFlask");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_CursedPoisonFlask", "LLWEAPONEX_DEMOLITION_BONUS_CURSEDPOISONFLASK", "Projectile_LLWEAPONEX_Status_Demolition_CursedPoisonFlask");
+//LLWEAPONEX_Demolition_AddSkillBonus("None", "None", "LLWEAPONEX_DEMOLITION_BONUS_DEFAULT");
+
+//LLWEAPONEX_Demolition_AddSkillBonus("WeaponExpansion", "Projectile_Grenade_CursedPoisonFlask", "LLWEAPONEX_DEMOLITION_BONUS_MOLOTOV");
+
+PROC
+LLWEAPONEX_Demolition_RegisterBonusSkills()
+AND
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, "Shared.Grenades", "Projectile_Grenade_Molotov", _Status)
+THEN
+LLWEAPONEX_Demolition_AddSkillBonus(_Index, "Shared.Scrolls", "Projectile_Fireball", "LLWEAPONEX_DEMOLITION_BONUS_MOLOTOV");
+
+PROC
+LLWEAPONEX_Demolition_AddSkillBonus((STRING)_Group, (STRING)_Skill, (STRING)_Status, (STRING)_BonusSkill)
+AND
+SysCount("DB_LLWEAPONEX_Demolition_SkillBonuses", 5, _Index)
+THEN
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill);
+
+PROC
+LLWEAPONEX_Demolition_AddSkillBonus((INTEGER)_Index, (STRING)_Group, (STRING)_Skill, (STRING)_Status, (STRING)_BonusSkill)
+THEN
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill);
+
+IF
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill)
+THEN
+LeaderLib_Array_AddToArray("LLWEAPONEX.Demolition.AddToList", _Skill);
+//END_REGION
+
+//REGION ADD_SKILL_TO_BEHAVIOR
+IF
+GameStarted(_,_)
+AND
+ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
+AND
+//DB_LLWEAPONEX_Demolition_Temp_SkillListQueue(_Index _Skill)
+DB_LeaderLib_Array_Iterator()
+THEN
+CharacterAddSkill(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Skill);
+//END_REGION
+
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 12)
+THEN
+LLWEAPONEX_Demolition_RegisterBonusSkills();
+//END_REGION
+
+QRY
+LLWEAPONEX_Demolition_QRY_IsBonusItem((ITEMGUID)_Item)
+AND
+IsTagged(_Item, "GRENADES", _IsGrenade)
+AND
+IsTagged(_Item, "Consumable", _IsConsumable)
+AND
+IntegerMax(_IsGrenade, _IsConsumable, 1)
+THEN
+DB_NOOP(1);
+
+/*
+QRY
+LLWEAPONEX_Demolition_QRY_IsBonusItem((ITEMGUID)_Item)
+AND
+IsTagged(_Item, "GRENADES", _IsGrenade)
+AND
+IsTagged(_Item, "LLWEAPONEX_RemoteMine", _IsMine)
+AND
+IntegerMax(_IsGrenade, _IsMine, 1)
+THEN
+DB_NOOP(1);
+*/
+
+QRY
+LLWEAPONEX_Demolition_QRY_SkillHasBonuses((STRING)_Skill)
+AND
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Demolition_QRY_ListeningForSkill((CHARACTERGUID)_Player, (STRING)_Skill)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Demolition_QRY_ListeningForSkill((CHARACTERGUID)_Player, (STRING)_Skill)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_Demolition_ClearListeningEntries((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill);
+
+PROC
+LLWEAPONEX_Demolition_ClearListeningEntries((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill);
+
+PROC
+LLWEAPONEX_Demolition_ClearListeningEntries((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z);
+
+PROC
+LLWEAPONEX_Demolition_OnItemSkillCast((CHARACTERGUID)_Player, (STRING)_Skill)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill);
+
+//REGION GRENADE_SKILL_BONUS
+IF
+StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_Demolition_ApplySkillBonus")
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:ApplySkillBonus] Granting grenade bonus on target [",_Skill,"].");
+LLWEAPONEX_Demolition_ClearListeningEntries(_Player);
+LLWEAPONEX_Demolition_GrantBonus(_Player, _Target, _Item, _Skill);
+
+IF
+StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_Demolition_ApplySkillBonus")
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:ApplySkillBonus] Granting grenade bonus at position [",_Skill,"].");
+LLWEAPONEX_Demolition_ClearListeningEntries(_Player);
+LLWEAPONEX_Demolition_GrantBonusAtPosition(_Player, _Item, _Skill, _x, _y, _z);
+
+//Enhanced Demolition
+PROC
+LLWEAPONEX_Demolition_GrantBonus((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
+AND
+Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:GrantBonus] Checking if target is an enemy.")
+AND
+LeaderLib_Combat_QRY_IsEnemy(_Player, _Target, 1)
+AND
+Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:GrantBonus] Rolling")
+AND
+LeaderLib_Roll_QRY(250)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_DEMOLITION_SABOTAGE_ENEMY", 0.0, 0, _Player);
+
+PROC
+LLWEAPONEX_Demolition_GrantBonus((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
+AND
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status)
+THEN
+ApplyStatus(_Target, _Status, 0.0, 0, _Player);
+
+PROC
+LLWEAPONEX_Demolition_GrantBonus((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
+AND
+NOT DB_LLWEAPONEX_Demolition_SkillBonuses(_, _, _Skill, _)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_DEMOLITION_BONUS_DEFAULT", 0.0, 0, _Player);
+
+PROC
+LLWEAPONEX_Demolition_GrantBonusAtPosition((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill, (REAL)_x, (REAL)_y, (REAL)_z)
+THEN
+SetVarFloat3(_Player, "LLWEAPONEX_Demolition_BonusPosition", _x, _y, _z);
+
+PROC
+LLWEAPONEX_Demolition_GrantBonusAtPosition((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+LeaderLib_Roll_QRY(250)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition_GrantBonusAtPosition] Applying sabotage via [Projectile_LLWEAPONEX_Status_Demolition_Sabotage_EnemyOnly] at position.");
+SetStoryEvent(_Player, "LLWEAPONEX_DemolitionBonus_Sabotage");
+
+PROC
+LLWEAPONEX_Demolition_GrantBonusAtPosition((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill)
+//AND
+//IntegerSum(_Index, 1, _ListIndex) // Behavior scripting lists start at 1
+THEN
+//SetVarInteger(_Player, "LLWEAPONEX_Demolition_SkillIndex", _ListIndex);
+SetVarFixedString(_Player, "LLWEAPONEX_Demolition_BonusSkillName", _BonusSkill);
+SetStoryEvent(_Player, "LLWEAPONEX_DemolitionBonus_SkillBonus");
+
+PROC
+LLWEAPONEX_Demolition_GrantBonusAtPosition((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+NOT DB_LLWEAPONEX_Demolition_SkillBonuses(_, _, _Skill, _, _)
+THEN
+SetStoryEvent(_Player, "LLWEAPONEX_DemolitionBonus_DefaultGrenadeSkill");
+//END_REGION
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_DEMOLITION_SABOTAGE_FX", _)
+THEN
+CharacterStatusText(_Target, "LLWEAPONEX_Status_Sabotage_Applied");
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_TaggedItemTracker("LLWEAPONEX_RemoteMine");
+
 KBSECTION
 
 //REGION ADD_MINE
@@ -81,6 +81,23 @@ THEN
 SetTag(_Container, "LLWEAPONEX_HoldingRemoteMine");
 //END_REGION
 
+//REGION DELAYED_DETONATION
+IF
+CharacterStatusApplied(_Item, "LLWEAPONEX_REMOTEMINE_DETONATE_DELAYED", _Source)
+THEN
+LeaderLib_Timers_StartObjectObjectTimer(_Item, _Source, 1000, "LLWEAPONEX_Timers_RemoteMine_DelayedDetonation", "LLWEAPONEX_RemoteMine_ApplyDetonation");
+
+IF
+ItemStatusChange(_Item, "LLWEAPONEX_REMOTEMINE_DETONATE_DELAYED", _Source)
+THEN
+LeaderLib_Timers_StartObjectObjectTimer(_Item, _Source, 1000, "LLWEAPONEX_Timers_RemoteMine_DelayedDetonation", "LLWEAPONEX_RemoteMine_ApplyDetonation");
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished(_Item, _Source, "LLWEAPONEX_RemoteMine_ApplyDetonation")
+THEN
+ApplyStatus(_Item, "LLWEAPONEX_REMOTEMINE_DETONATE", 0.0, 0, _Source);
+//END_REGION
+
 //REGION INVENTORY_DETONATION
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Character)
@@ -108,10 +125,13 @@ AND
 IntegerSubtract(_Count, 1, _NextCount)
 AND
 CharacterFindTaggedItem(_Target, "LLWEAPONEX_RemoteMine", _RemoteMine)
+AND
+ItemGetAmount(_RemoteMine, _Amount)
 THEN
 LLWEAPONEX_RemoteMines_SetOwner(_Character, _RemoteMine); // Failsafe
-CharacterItemSetEvent(_Target, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Character");
+SetVarInteger(_RemoteMine, "LLWEAPONEX_Mine_Amount", _Amount);
 DB_LLWEAPONEX_RemoteMines_Temp_DetonateTarget(_Character, _Target, _NextCount);
+CharacterItemSetEvent(_Target, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Character");
 LeaderLib_Timers_StartCharacterCharacterTimer(_Character, _Target, 250, "LLWEAPONEX_Timers_RemoteMines_NextDetonation", "LLWEAPONEX_RemoteMines_StartNextDetonation");
 
 IF
@@ -141,10 +161,13 @@ ObjectExists(_RemoteMine, 1)
 AND
 GetInventoryOwner(_RemoteMine, (ITEMGUID)_Target)
 AND
+ItemGetAmount(_RemoteMine, _Amount)
+AND
 DB_LLWEAPONEX_RemoteMines_Temp_Detonating(_Character, _Target)
 THEN
 LLWEAPONEX_RemoteMines_SetOwner(_Character, _RemoteMine); // Failsafe
 SetVarObject(_RemoteMine, "LLWEAPONEX_Mine_Inventory", _Target);
+SetVarInteger(_RemoteMine, "LLWEAPONEX_Mine_Amount", _Amount);
 CharacterItemSetEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Container");
 
 IF
@@ -215,6 +238,11 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_RemoteMines:LLWEAPONEX_MovingObjectRemoteMine_Init] Owner [",_OwnerStr,"]");
 */
 
+PROC
+LLWEAPONEX_RemoteMines_Internal_SetThrowingActive((CHARACTERGUID)_Player, (ITEMGUID)_RemoteMine, (ITEMGUID)_MovingObject)
+THEN
+DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive(_Player, _RemoteMine, _MovingObject);
+
 IF
 StoryEvent(_Object, "LLWEAPONEX_MovingObjectRemoteMine_Init")
 AND
@@ -224,10 +252,10 @@ ObjectIsItem((ITEMGUID)_Object, 1)
 AND
 DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine)
 AND
-NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive(_, _, _Object)
+NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive((CHARACTERGUID)_, _, _Object)
 THEN
 NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine);
-DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive(_Player, _RemoteMine, _Object);
+LLWEAPONEX_RemoteMines_Internal_SetThrowingActive(_Player, _RemoteMine, _Object);
 ItemSetOwner(_Object, _Player);
 
 IF
@@ -237,65 +265,17 @@ DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive(_Player, _RemoteMine, _Object)
 THEN
 NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive(_Player, _RemoteMine, _Object);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_RemoteMines:LLWEAPONEX_MovingObjectRemoteMine_Landed] Remote Mine projectile landed.");
-LeaderLib_Helpers_CopyItemTransform(_RemoteMine, _Object, 1);
+LeaderLib_Helpers_CopyItemTransform(_RemoteMine, _Object, 0, 1, _Player);
 SetOnStage(_Object, 0);
 ItemDestroy(_Object);
-//END_REGION
-
-//REGION CHARGES
-IF
-CharacterUsedSkill(_Character, "Target_LLWEAPONEX_RemoteMine_Detonate", _, _)
-THEN
-DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Character);
-ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated");
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated", 1500);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated")
-THEN
-NOT DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Character);
-
-PROC
-LLWEAPONEX_RemoteMines_AddCharge((CHARACTERGUID)_Character)
-AND
-CharacterFindTaggedItem(_Character, "LLWEAPONEX_DemolitionBackpack", _DemoBackpack)
-AND
-ObjectExists(_DemoBackpack, 1)
-AND
-NOT LeaderLib_Helper_QRY_ChargesAreMaxed(_DemoBackpack)
-THEN
-ItemAddCharges(_DemoBackpack, 1);
-
-QRY
-LLWEAPONEX_RemoteMines_QRY_DemoBackpackNeedsRecharging((CHARACTERGUID)_Character)
-AND
-CharacterFindTaggedItem(_Character, "LLWEAPONEX_DemolitionBackpack", _DemoBackpack)
-AND
-ObjectExists(_DemoBackpack, 1)
-AND
-NOT LeaderLib_Helper_QRY_ChargesAreMaxed(_DemoBackpack)
-THEN
-DB_NOOP(1);
+//SetStoryEvent(_RemoteMine, "LLWEAPONEX_MovingObjectRemoteMine_SnapToGround");
 
 IF
-SkillCast(_Character, "Shout_LLWEAPONEX_RemoteMine_Add", _, _)
-THEN
-LLWEAPONEX_RemoteMines_StartRecharge(_Character);
-
-PROC
-LLWEAPONEX_RemoteMines_StartRecharge((CHARACTERGUID)_Character)
+StoryEvent((ITEMGUID)_RemoteMine, "LLWEAPONEX_MovingObjectRemoteMine_SnapToGround")
 AND
-HasActiveStatus(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", 0)
-AND
-LLWEAPONEX_RemoteMines_QRY_DemoBackpackNeedsRecharging(_Character)
+GetPosition(_RemoteMine, _x, _y, _z)
 THEN
-ApplyStatus(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", 24.0, 0, _Character);
-
-IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", _)
-THEN
-LLWEAPONEX_RemoteMines_AddCharge(_Character);
-LLWEAPONEX_RemoteMines_StartRecharge(_Character);
+ItemMoveToPosition(_RemoteMine, _x, _y, _z, 20.0, 0.0);
 //END_REGION
 
 EXITSECTION

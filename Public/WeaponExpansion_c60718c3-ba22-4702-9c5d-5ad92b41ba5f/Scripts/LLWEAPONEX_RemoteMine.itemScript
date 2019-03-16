@@ -8,13 +8,12 @@ INIT
 	EXTERN STATUS:%LLWEAPONEX_Mine_ExplosionStatus = null
 	EXTERN STATUS:%LLWEAPONEX_Mine_ExplosionStatusID = null
 	EXTERN INT:%LLWEAPONEX_Mine_UseStatus = 0
+	INT:%LLWEAPONEX_Mine_Amount = 1
 EVENTS
 
 EVENT LLWEAPONEX_RemoteMine_Detonate_FromSkill
 VARS
 	CHARACTER:_Character
-	INT:_Level
-	FLOAT:_LevelF
 ON
 	//OnCharacterUsedSkillOnMe(_Character, Target_LLWEAPONEX_RemoteMine_Detonate)
 	//OnItemStatus(__Me, LLWEAPONEX_REMOTEMINE_DETONATE)
@@ -183,27 +182,33 @@ ACTIONS
 IF "!c1"
 	ItemIsDestroyed(__Me)
 THEN
-	SetFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
-	//ItemDie(__Me)
-	ItemDestroy(__Me)
+	IF "c1"
+		IsGreaterThen(%LLWEAPONEX_Mine_Amount, 1)
+	THEN
+		Subtract(%LLWEAPONEX_Mine_Amount, 1)
+		ItemSetAmount(__Me, %LLWEAPONEX_Mine_Amount)
+	ELSE
+		SetFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
+		ItemDestroy(__Me)
+	ENDIF
 ENDIF
 
-EVENT LLWEAPONEX_RemoteMine_DestroyedOther
+EVENT LLWEAPONEX_RemoteMine_Destroying
+VARS
+	FLOAT3:_Pos
 ON
 	OnItemDestroying(__Me)
 ACTIONS
 IF "!c1"
-	HasFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
-THEN
-	CallFunction("LLWEAPONEX_RemoteMine_Detonate")
-ENDIF
-
-EVENT LLWEAPONEX_RemoteMine_DetonateNear
-ON
-	OnItemDestroyed(__Me)
-ACTIONS
-IF "!c1"
 	ItemIsInInventory(__Me)
 THEN
-	ExplodeAt(__Me, Projectile_LLWEAPONEX_Status_RemoteMine_DetonateNear, 1, %LLWEAPONEX_Mine_Owner)
+	IF "!c1"
+		HasFlag(__Me, "LLWEAPONEX_RemoteMine_Detonated")
+	THEN
+		CallFunction("LLWEAPONEX_RemoteMine_Detonate")
+	ELIF "c1"
+		GetPosition(__Me, _Pos)
+	THEN
+		ExplodeAt(_Pos, Projectile_LLWEAPONEX_Status_RemoteMine_DetonateNear, 1, %LLWEAPONEX_Mine_Owner)
+	ENDIF
 ENDIF

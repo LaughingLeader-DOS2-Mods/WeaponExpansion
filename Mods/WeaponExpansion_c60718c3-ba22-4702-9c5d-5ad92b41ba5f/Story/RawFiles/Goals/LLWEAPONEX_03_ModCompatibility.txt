@@ -27,16 +27,21 @@ DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","LLWEAPONEX_Script
 PROC
 LLWEAPONEX_ModCompatibility_InitMimicrySettings()
 THEN
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_ShieldToss_Returned");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_ThrowWeapon");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect");
-DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_CopyLastSkill");
-DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Grimoire_DeathAura");
-DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
-DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Prepare_BalrinsAxe");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
-DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_Torment_ClaimSoul");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Grimoire_DeathAura");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_HandCrossbow_Reload");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Prepare_BalrinsAxe");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Rapier_DuelistStance");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_RemoteMine_Add");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_CopyLastSkill");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_RemoteMine_Detonate");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_Torment_ClaimSoul");
 
 PROC
 LLWEAPONEX_ModCompatibility_Internal_CompileErrorFix_VSCode()
@@ -55,7 +60,7 @@ NOT DB_Mimicry_BlockWeaponMimicking(NULL_00000000-0000-0000-0000-000000000000);
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,3,25)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,11)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:ModCompatibility] Updating settings from version [",_PastVersion,"] to [",_NewVersion,"]");
 LLWEAPONEX_ModCompatibility_InitMimicrySettings();

@@ -1,0 +1,152 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+//ItemTemplateEquipped("LLWEAPONEX_80_TS_10_DemolitionBackpack-f5b6-4e71-ae84-a29ed4ca51d7", _Character)
+CharacterStatusApplied(_Character, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", _)
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion");
+
+IF
+//ItemTemplateUnEquipped("LLWEAPONEX_80_TS_10_DemolitionBackpack-f5b6-4e71-ae84-a29ed4ca51d7", _Character)
+CharacterStatusRemoved(_Character, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", _)
+AND
+NOT LLWEAPONEX_Demolition_QRY_BackpackIsEquipped(_Character)
+THEN
+LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion", 1250);
+
+QRY
+LLWEAPONEX_Demolition_QRY_BackpackIsEquipped((CHARACTERGUID)_Character)
+AND
+CharacterGetEquippedItem(_Character, "Belt", (ITEMGUID)_DemoBackpack)
+AND
+ObjectExists(_DemoBackpack, 1)
+AND
+IsTagged(_DemoBackpack, "LLWEAPONEX_DemolitionBackpack", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Demolition_QRY_DemoBackpackNeedsRecharging((CHARACTERGUID)_Character)
+AND
+//CharacterFindTaggedItem(_Character, "LLWEAPONEX_DemolitionBackpack", _DemoBackpack)
+CharacterGetEquippedItem(_Character, "Belt", (ITEMGUID)_DemoBackpack)
+AND
+ObjectExists(_DemoBackpack, 1)
+AND
+IsTagged(_DemoBackpack, "LLWEAPONEX_DemolitionBackpack", 1)
+AND
+NOT LeaderLib_Helper_QRY_ChargesAreMaxed(_DemoBackpack)
+THEN
+DB_NOOP(1);
+
+//REGION CHARGES
+IF
+CharacterUsedSkill(_Character, "Target_LLWEAPONEX_RemoteMine_Detonate", _, _)
+THEN
+DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Character);
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated", 1500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated")
+THEN
+NOT DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Character);
+
+PROC
+LLWEAPONEX_Demolition_AddCharge((CHARACTERGUID)_Character)
+AND
+//CharacterFindTaggedItem(_Character, "LLWEAPONEX_DemolitionBackpack", _DemoBackpack)
+CharacterGetEquippedItem(_Character, "Belt", (ITEMGUID)_DemoBackpack)
+AND
+ObjectExists(_DemoBackpack, 1)
+AND
+IsTagged(_DemoBackpack, "LLWEAPONEX_DemolitionBackpack", 1)
+AND
+NOT LeaderLib_Helper_QRY_ChargesAreMaxed(_DemoBackpack)
+THEN
+ItemAddCharges(_DemoBackpack, 1);
+
+IF
+SkillCast(_Character, "Shout_LLWEAPONEX_RemoteMine_Add", _, _)
+AND
+LLWEAPONEX_Demolition_QRY_BackpackIsEquipped(_Character)
+THEN
+LLWEAPONEX_Demolition_StartRecharge(_Character);
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", _)
+AND
+LLWEAPONEX_Demolition_QRY_BackpackIsEquipped(_Character)
+THEN
+LLWEAPONEX_Demolition_StartRecharge(_Character);
+
+PROC
+LLWEAPONEX_Demolition_StartRecharge((CHARACTERGUID)_Character)
+AND
+IsHardcoreMode(_HardMode)
+THEN
+LLWEAPONEX_Demolition_Internal_StartRecharge(_Character, _HardMode);
+
+PROC
+LLWEAPONEX_Demolition_Internal_StartRecharge((CHARACTERGUID)_Character, (INTEGER)_HardMode)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", 1)
+THEN
+//For skipping another recharge call when forcing the duration
+ObjectSetFlag(_Character, "LLWEAPONEX_DemolitionBackpack_SkipNextRecharge", 0);
+
+PROC
+LLWEAPONEX_Demolition_Internal_StartRecharge((CHARACTERGUID)_Character, 0)
+AND
+LLWEAPONEX_Demolition_QRY_DemoBackpackNeedsRecharging(_Character)
+THEN
+ApplyStatus(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", 24.0, 1, _Character);
+
+//Tactician and above gets a larger cooldown
+PROC
+LLWEAPONEX_Demolition_Internal_StartRecharge((CHARACTERGUID)_Character, 1)
+AND
+CharacterGetEquippedItem(_Character, "Belt", (ITEMGUID)_DemoBackpack)
+AND
+ObjectExists(_DemoBackpack, 1)
+AND
+IsTagged(_DemoBackpack, "LLWEAPONEX_DemolitionBackpack", 1)
+AND
+ItemGetCharges(_DemoBackpack, _Charges)
+AND
+ItemGetMaxCharges(_DemoBackpack, _MaxCharges)
+AND
+_Charges < _MaxCharges
+AND
+IntegerSubtract(_MaxCharges, _Charges, _Mult)
+AND
+IntegerProduct(24, _Mult, _IntDuration)
+AND
+Real(_IntDuration, _Duration)
+THEN
+ApplyStatus(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", _Duration, 1, _Character);
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", _)
+AND
+ObjectGetFlag(_Character, "LLWEAPONEX_DemolitionBackpack_SkipNextRecharge", 0)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", 1)
+THEN
+LLWEAPONEX_Demolition_AddCharge(_Character);
+LLWEAPONEX_Demolition_StartRecharge(_Character);
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE", _)
+THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_DemolitionBackpack_SkipNextRecharge", 0);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

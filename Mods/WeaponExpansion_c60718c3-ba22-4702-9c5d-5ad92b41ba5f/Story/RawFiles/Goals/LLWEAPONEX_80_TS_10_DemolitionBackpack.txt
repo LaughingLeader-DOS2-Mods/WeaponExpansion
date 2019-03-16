@@ -4,40 +4,96 @@ INITSECTION
 
 KBSECTION
 //REGION THROWING
-IF
-CanUseItem(_Character, _RemoteMine, _)
+PROC
+ProcProcessUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Item, (INTEGER)_RequestID)
 AND
-IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
+NOT DB_CustomUseItemResponse(_Player, _Item, 0)
+AND
+IsTagged(_Item, "LLWEAPONEX_RemoteMine", 1)
 THEN
-DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Character, _RemoteMine);
+DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _Item);
 
 IF
-CharacterStoppedUsingItem(_Character, _RemoteMine)
+CharacterStoppedUsingItem(_Player, _RemoteMine)
 AND
-DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Character, _RemoteMine)
+DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine)
 THEN
-NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Character, _RemoteMine);
+NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine);
 //END_REGION
 
 //REGION CHARGES
 IF
-CharacterKilledBy(_Enemy, _, _Character)
+CharacterKilledBy(_Enemy, _, _Player)
 AND
-DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Character)
+DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Player)
 THEN
-LLWEAPONEX_RemoteMines_AddCharge(_Character);
-ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated");
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated", 500);
+LLWEAPONEX_Demolition_AddCharge(_Player);
+ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated");
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated", 500);
 //END_REGION
 
 //REGION ENHANCED_DEMOLITION
+PROC
+ProcProcessUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Item, (INTEGER)_RequestID)
+AND
+NOT DB_CustomUseItemResponse(_Player, _Item, 0)
+AND
+DB_IsPlayer(_Player)
+AND
+LLWEAPONEX_Demolition_QRY_IsBonusItem(_Item)
+AND
+HasActiveStatus(_Player, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", 1)
+THEN
+CharacterItemSetEvent(_Player, _Item, "LLWEAPONEX_ItemCheck_FindSkill");
+
+IF
+CharacterItemEvent(_Player, _Item, "LLWEAPONEX_ItemCheck_HasSkill")
+AND
+GetVarString(_Item, "LLWEAPONEX_ItemSkill", _Skill)
+AND
+LLWEAPONEX_Demolition_QRY_SkillHasBonuses(_Skill)
+THEN
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_80_TS_10_DemolitionBackpack:LLWEAPONEX_ItemCheck_HasSkill] Listening for item skill [",_Skill,"].");
+
+//Cancelled
+IF
+CharacterStoppedUsingItem(_Player, _Item)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill);
+LLWEAPONEX_Demolition_ClearListeningEntries(_Player);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_80_TS_10_DemolitionBackpack:CharacterStoppedUsingItem] Item usage cancelled.");
+
+IF
+CharacterUsedSkillOnTarget(_Player, _Target, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill);
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_80_TS_10_DemolitionBackpack:CharacterUsedSkillOnTarget] Skill [",_Skill,"] used on target.");
+
+IF
+CharacterUsedSkillAtPosition(_Player, _x, _y, _z, _Skill, _, _)
+AND
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Item, _Skill)
+THEN
+DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z);
+
 IF
 SkillCast(_Player, _Skill, _, _)
 AND
-DB_LLWEAPONEX_Uniques_Demolition_Temp_PostSkillBonus(_Player, _Target, _Item, _Skill)
+LLWEAPONEX_Demolition_QRY_ListeningForSkill(_Player, _Skill)
+AND
+LeaderLib_Random_QRY(900, 1400)
+AND
+DB_LeaderLib_Random(_Delay)
 THEN
-NOT DB_LLWEAPONEX_Uniques_Demolition_Temp_PostSkillBonus(_Player, _Target, _Item, _Skill);
-LLWEAPONEX_Uniques_Demolition_GrantBonus(_Player, _Target, _Item, _Skill);
+NOT DB_LeaderLib_Random(_Delay);
+LLWEAPONEX_Demolition_OnItemSkillCast(_Player, _Skill);
+LeaderLib_Timers_StartObjectTimer(_Player, _Delay, "LLWEAPONEX_Timers_Demolition_ApplySkillBonus", "LLWEAPONEX_Demolition_ApplySkillBonus");
 //END_REGION
 
 EXITSECTION

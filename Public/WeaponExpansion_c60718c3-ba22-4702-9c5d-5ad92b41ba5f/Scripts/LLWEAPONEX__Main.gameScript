@@ -6,6 +6,8 @@
 #INCLUDE LLWEAPONEX_Runeblades
 #INCLUDE LLWEAPONEX_Statuses
 #INCLUDE LLWEAPONEX_ThrowingWeapons
+#INCLUDE LLWEAPONEX_Demolition
+
 INIT
 	USING LLWEAPONEX_Effects
 	USING LLWEAPONEX_Greatbows
@@ -15,6 +17,7 @@ INIT
 	USING LLWEAPONEX_Runeblades
 	USING LLWEAPONEX_Statuses
 	USING LLWEAPONEX_ThrowingWeapons
+	USING LLWEAPONEX_Demolition
 EVENTS
 
 EVENT LLWEAPONEX_Debug_KeepAliveTest
@@ -146,11 +149,22 @@ THEN
 ENDIF
 */
 
-EVENT LLWEAPONEX_WeaponMastery_ResetCharges
+EVENT LLWEAPONEX_ItemHasSkill
 VARS
 	CHARACTER:_Character
 	ITEM:_Item
+	SKILL:_Skill
+	STRING:_SkillStr
 ON
-	OnCharacterItemEvent(_Character, _Item, "LLWEAPONEX_WeaponMastery_MasteryLevelUp")
+	OnCharacterItemEvent(_Character, _Item, "LLWEAPONEX_ItemCheck_FindSkill")
 ACTIONS
-	//ItemResetChargesToInitial(_Item)
+IF "c1&!c2"
+	ItemGetSkillId(_Item, _Skill)
+	IsEqual(_Skill, null)
+THEN
+	Print(_SkillStr, "[1]", _Skill)
+	SetVar(_Item, "LLWEAPONEX_ItemSkill", _SkillStr)
+	CharacterItemEvent(_Character, _Item, "LLWEAPONEX_ItemCheck_HasSkill")
+ELSE
+	CharacterItemEvent(_Character, _Item, "LLWEAPONEX_ItemCheck_NoSkill")
+ENDIF

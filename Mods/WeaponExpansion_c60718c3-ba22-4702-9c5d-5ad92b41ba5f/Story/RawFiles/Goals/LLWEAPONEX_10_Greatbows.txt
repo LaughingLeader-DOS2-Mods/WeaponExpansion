@@ -236,7 +236,7 @@ DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay);
 PROC
 LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Character, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (REAL)_x, (REAL)_y, (REAL)_z)
 AND
-LeaderLib_Roll_QRY(300, 999)
+LeaderLib_Roll_QRY(299)
 AND
 GetDistanceToPosition(_Character, _x, _y, _z, _Dist)
 AND

@@ -2,7 +2,6 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 LLWEAPONEX_Uniques_InitSettings();
-LLWEAPONEX_Uniques_RegisterGrenadeSkills();
 KBSECTION
 
 //REGION SETTINGS
@@ -19,44 +18,6 @@ AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 10)
 THEN
 LLWEAPONEX_Uniques_InitSettings();
-//END_REGION
-
-//REGION UPDATES
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 10)
-THEN
-LLWEAPONEX_Uniques_RegisterGrenadeSkills();
-//END_REGION
-
-//REGION SETTINGS_SKILLS
-
-PROC
-LLWEAPONEX_Uniques_RegisterGrenadeSkills()
-THEN
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_ArmorPiercing", "Projectile_LLWEAPONEX_Status_Demolition_ArmorPiercing");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Nailbomb");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Flashbang");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Molotov");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_CursedMolotov");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Love");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_MindMaggot");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_ChemicalWarfare");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Terror");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Ice");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_BlessedIce");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Holy");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Tremor");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_Taser");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_WaterBalloon");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_WaterBlessedBalloon");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_SmokeBomb");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_MustardGas");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_OilFlask");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_BlessedOilFlask");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_PoisonFlask");
-DB_LLWEAPONEX_Demolition_SkillBonuses("Shared", "Projectile_Grenade_CursedPoisonFlask");
 //END_REGION
 
 //REGION BEHOLDER
@@ -257,39 +218,6 @@ THEN
 NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
 //END_REGION
 
-//REGION DEMONOLITION_BACKPACK
-IF
-ItemTemplateEquipped("LLWEAPONEX_80_TS_10_DemolitionBackpack-f5b6-4e71-ae84-a29ed4ca51d7", _Character)
-THEN
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion");
-
-IF
-ItemTemplateUnEquipped("LLWEAPONEX_80_TS_10_DemolitionBackpack-f5b6-4e71-ae84-a29ed4ca51d7", _Character)
-THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion", 500);
-
-//Enhanced Demolition
-PROC
-LLWEAPONEX_ThrowingMastery_OnThrowingSkillUsedOnTarget((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
-AND
-HasActiveStatus(_Player, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", 1)
-AND
-IsTagged(_Item, "GRENADES", 1)
-THEN
-DB_LLWEAPONEX_Uniques_Demolition_Temp_PostSkillBonus(_Player, _Target, _Item, _Skill);
-
-PROC
-LLWEAPONEX_Uniques_Demolition_GrantBonus((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
-AND
-LeaderLib_Roll_QRY(250, 999)
-THEN
-ApplyStatus(_Target, "LLWEAPONEX_BACKPACK_DEMOLITION_SABOTAGE", 0.0, 0, _Player);
-
-PROC
-LLWEAPONEX_ThrowingMastery_OnThrowingItemUsed((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill)
-THEN
-DB_NOOP(1);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

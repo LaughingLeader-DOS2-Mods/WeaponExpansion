@@ -1,0 +1,6 @@
+Shout_LLWEAPONEX_RemoteMine_Add_DisplayName	Retrieve Remote Charge
+Shout_LLWEAPONEX_RemoteMine_Add_Description	Retrieve an explosive remote charge from the <font color='#C7A758'>Demolitionist's Backpack</font>.
+Target_LLWEAPONEX_RemoteMine_Detonate_DisplayName	Detonate Remote Charge
+Target_LLWEAPONEX_RemoteMine_Detonate_Description	Detonate a remote charge. Can target mines in the world, or an object holding a mine.
+Projectile_LLWEAPONEX_RemoteMine_Throw_DisplayName	Throw Remote Charge
+Projectile_LLWEAPONEX_RemoteMine_Throw_Description	Stealthily throw the remote charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius.</font>

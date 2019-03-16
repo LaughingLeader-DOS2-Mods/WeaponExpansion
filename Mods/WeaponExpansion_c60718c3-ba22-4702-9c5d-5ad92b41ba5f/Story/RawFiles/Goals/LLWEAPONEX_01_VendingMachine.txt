@@ -463,7 +463,7 @@ NOT DB_LLWEAPONEX_VendingMachine_Temp_GenerationTickDone(_)
 AND
 NOT DB_LLWEAPONEX_VendingMachine_SaleCooldown(_,_)
 AND
-LeaderLib_Roll_QRY(60)
+LeaderLib_Roll_QRY(599)
 AND
 LeaderLib_Random_QRY(5)
 AND

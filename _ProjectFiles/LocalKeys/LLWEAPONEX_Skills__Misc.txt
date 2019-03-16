@@ -24,9 +24,3 @@ Shout_LLWEAPONEX_ZombifySelf_Description	Temporarily gain a few Zombie-like trai
 Target_LLWEAPONEX_Zombify_DisplayName	Zombify
 Target_LLWEAPONEX_Zombify_Description	Temporarily zombify an ally, granting them <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
-Shout_LLWEAPONEX_RemoteMine_Add_DisplayName	Retrieve Remote Charge
-Shout_LLWEAPONEX_RemoteMine_Add_Description	Retrieve an explosive remote charge from the <font color='#C7A758'>Demolitionist's Backpack</font>.
-Target_LLWEAPONEX_RemoteMine_Detonate_DisplayName	Detonate Remote Charge
-Target_LLWEAPONEX_RemoteMine_Detonate_Description	Detonate a remote charge. Can target mines in the world, or an object holding a mine.
-Projectile_LLWEAPONEX_RemoteMine_Throw_DisplayName	Throw Remote Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Description	Stealthily throw the remote charge at a target position.

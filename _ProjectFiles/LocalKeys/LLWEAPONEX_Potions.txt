@@ -25,3 +25,6 @@ Stats_LLWEAPONEX_Doused	Doused
 Stats_LLWEAPONEX_DemonHandEquipped	<font color='#C7A758'>Devil Hand</font>
 Stats_LLWEAPONEX_DemonHandEquipped_ApplyDefense	Auto Defense
 Stats_LLWEAPONEX_Backpack_Demolition_Equipped	Enhanced Demolition
+Stats_LLWEAPONEX_Demolition_Bonus_CharmedDebuff	Enhanced Demolition Bonus
+Stats_LLWEAPONEX_Demolition_Bonus_CharmedDebuff2	Enhanced Demolition Bonus
+Stats_LLWEAPONEX_Demolition_Bonus_TerrorDebuff	Enhanced Demolition Bonus
