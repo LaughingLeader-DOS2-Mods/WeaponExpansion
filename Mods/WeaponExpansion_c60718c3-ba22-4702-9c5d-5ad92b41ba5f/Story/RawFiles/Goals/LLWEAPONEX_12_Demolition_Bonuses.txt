@@ -32,53 +32,157 @@ LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_Poiso
 LLWEAPONEX_Demolition_AddSkillBonus("Shared.Grenades", "Projectile_Grenade_CursedPoisonFlask", "LLWEAPONEX_DEMOLITION_BONUS_CURSEDPOISONFLASK", "Projectile_LLWEAPONEX_Status_Demolition_CursedPoisonFlask");
 //LLWEAPONEX_Demolition_AddSkillBonus("None", "None", "LLWEAPONEX_DEMOLITION_BONUS_DEFAULT");
 
-//LLWEAPONEX_Demolition_AddSkillBonus("WeaponExpansion", "Projectile_Grenade_CursedPoisonFlask", "LLWEAPONEX_DEMOLITION_BONUS_MOLOTOV");
-
-PROC
-LLWEAPONEX_Demolition_RegisterBonusSkills()
-AND
-DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, "Shared.Grenades", "Projectile_Grenade_Molotov", _Status)
-THEN
-LLWEAPONEX_Demolition_AddSkillBonus(_Index, "Shared.Scrolls", "Projectile_Fireball", "LLWEAPONEX_DEMOLITION_BONUS_MOLOTOV");
+LLWEAPONEX_Demolition_AddSkillBonus("Shared.Scrolls", "Projectile_Fireball", "LLWEAPONEX_DEMOLITION_BONUS_MOLOTOV", "Projectile_LLWEAPONEX_Status_Demolition_Molotov");
 
 PROC
 LLWEAPONEX_Demolition_AddSkillBonus((STRING)_Group, (STRING)_Skill, (STRING)_Status, (STRING)_BonusSkill)
 AND
-SysCount("DB_LLWEAPONEX_Demolition_SkillBonuses", 5, _Index)
+NOT DB_LLWEAPONEX_Demolition_SkillBonuses((INTEGER)_, _Group, _Skill, _Status, _BonusSkill)
 THEN
-DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill);
-
-PROC
-LLWEAPONEX_Demolition_AddSkillBonus((INTEGER)_Index, (STRING)_Group, (STRING)_Skill, (STRING)_Status, (STRING)_BonusSkill)
-THEN
-DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill);
-
-IF
-DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill)
-THEN
-LeaderLib_Array_AddToArray("LLWEAPONEX.Demolition.AddToList", _Skill);
-//END_REGION
-
-//REGION ADD_SKILL_TO_BEHAVIOR
-IF
-GameStarted(_,_)
-AND
-ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
-AND
-//DB_LLWEAPONEX_Demolition_Temp_SkillListQueue(_Index _Skill)
-DB_LeaderLib_Array_Iterator()
-THEN
-CharacterAddSkill(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Skill);
+DB_LLWEAPONEX_Demolition_SkillBonuses(0, _Group, _Skill, _Status, _BonusSkill);
+LeaderLib_Array_AddToArray("LLWEAPONEX_Demolition_BonusSkillListQueue", _BonusSkill);
+DB_LLWEAPONEX_Demolition_Temp_AddToList(1);
 //END_REGION
 
 //REGION UPDATES
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 12)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 13)
 THEN
+SysClear("DB_LLWEAPONEX_Demolition_SkillBonuses", 4);
 LLWEAPONEX_Demolition_RegisterBonusSkills();
 //END_REGION
+
+//REGION ADD_SKILL_TO_BEHAVIOR
+IF
+//GameStarted(_,_)
+StoryEvent(_, "LeaderLib_Initialized")
+AND
+DB_LLWEAPONEX_Demolition_Temp_AddToList(1)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:GameStarted] Adding bonus skills to list after [1500]ms.");
+TimerCancel("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList");
+TimerLaunch("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList", 500);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList")
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_AddToList(1);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList")
+AND
+ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0)
+AND
+NOT DB_LLWEAPONEX_Demolition_Temp_AddToListError(1)
+THEN
+DB_LLWEAPONEX_Demolition_Temp_AddToListError(1);
+TimerLaunch("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList", 30000);
+
+IF
+TimerFinished("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList")
+AND
+ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0)
+AND
+DB_LLWEAPONEX_Demolition_Temp_AddToListError(1)
+THEN
+LeaderLog_Log("ERROR", "[LLWEAPONEX_12_Demolition_Bonuses:LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList] [ERROR] Vending Machine doesn't exist! Help!");
+
+/*
+IF
+TimerFinished("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList")
+AND
+ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList] Vending Machine does not exist!");
+
+IF
+TimerFinished("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList")
+AND
+LeaderLib_Array_QRY_EmptyLength("LLWEAPONEX_Demolition_BonusSkillListQueue")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList] Array is empty!");
+*/
+
+IF
+TimerFinished("LLWEAPONEX_Timers_Demolition_AddBonusSkillsToList")
+AND
+ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
+AND
+NOT LeaderLib_Array_QRY_EmptyLength("LLWEAPONEX_Demolition_BonusSkillListQueue")
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_AddToListError(1);
+LLWEAPONEX_Demolition_Internal_ProcessListQueue(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
+
+PROC
+LLWEAPONEX_Demolition_Internal_ProcessListQueue((CHARACTERGUID)_Middleman)
+AND
+LeaderLib_Array_QRY_Pop("LLWEAPONEX_Demolition_BonusSkillListQueue")
+AND
+DB_LeaderLib_Array_Temp_PopValue("LLWEAPONEX_Demolition_BonusSkillListQueue", _BonusSkill)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:Internal_ProcessListQueue] Adding bonus skill [",_BonusSkill,"].");
+CharacterAddSkill(_Middleman, _BonusSkill, 0);
+
+/*
+PROC
+LLWEAPONEX_Demolition_Internal_ProcessListQueue((CHARACTERGUID)_Middleman)
+AND
+NOT DB_LeaderLib_Array_Temp_PopValue("LLWEAPONEX_Demolition_BonusSkillListQueue", _)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:Internal_ProcessListQueue] Pop error?");
+
+IF
+SkillAdded(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Skill, _learned)
+THEN
+LeaderLog_LogIntWithString("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:SkillAdded] (", _Skill, ") added to vending machine. Learned [",_learned,"].");
+
+IF
+StoryEvent(_VendingMachine, "LLWEAPONEX_VendingMachine_SkillJustAdded")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:StoryEvent_LLWEAPONEX_VendingMachine_SkillJustAdded] Skill just added event ran.");
+*/
+
+IF
+StoryEvent(_Middleman, "LLWEAPONEX_Demolition_SkillAddedToList")
+AND
+GetVarInteger(_Middleman, "LLWEAPONEX_Demolition_LastListIndex", _Index)
+AND
+DB_LeaderLib_Array_Temp_PopValue("LLWEAPONEX_Demolition_BonusSkillListQueue", _BonusSkill)
+AND
+DB_LLWEAPONEX_Demolition_SkillBonuses(_UnsetIndex, _Group, _Skill, _Status, _BonusSkill)
+THEN
+NOT DB_LeaderLib_Array_Temp_PopValue("LLWEAPONEX_Demolition_BonusSkillListQueue", _BonusSkill);
+NOT DB_LLWEAPONEX_Demolition_SkillBonuses(_UnsetIndex, _Group, _Skill, _Status, _BonusSkill);
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill);
+LeaderLog_LogIntWithString("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:LLWEAPONEX_Demolition_SkillAddedToList] (", _BonusSkill, ") added to behavior list at index [",_Index,"].");
+
+IF
+StoryEvent(_Middleman, "LLWEAPONEX_Demolition_SkillAddedToList")
+AND
+LeaderLib_Array_QRY_EmptyLength("LLWEAPONEX_Demolition_BonusSkillListQueue")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:SkillAddedToList] Skill added to list. Array is empty. All done!");
+
+IF
+StoryEvent(_Middleman, "LLWEAPONEX_Demolition_SkillAddedToList")
+AND
+NOT LeaderLib_Array_QRY_EmptyLength("LLWEAPONEX_Demolition_BonusSkillListQueue")
+THEN
+//LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:SkillAddedToList] Fetching next in list after [250]ms.");
+ProcObjectTimer(_Middleman, "LLWEAPONEX_Timers_Demolition_AddNextToSkillList", 25);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Middleman, "LLWEAPONEX_Timers_Demolition_AddNextToSkillList")
+AND
+NOT LeaderLib_Array_QRY_EmptyLength("LLWEAPONEX_Demolition_BonusSkillListQueue")
+THEN
+//LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:AddNextToSkillList] Processing list queue.");
+LLWEAPONEX_Demolition_Internal_ProcessListQueue(_Middleman);
+//END_REGION
+
+
 
 QRY
 LLWEAPONEX_Demolition_QRY_IsBonusItem((ITEMGUID)_Item)
@@ -107,7 +211,7 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_Demolition_QRY_SkillHasBonuses((STRING)_Skill)
 AND
-DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status)
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill)
 THEN
 DB_NOOP(1);
 
@@ -160,7 +264,7 @@ AND
 DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill)
 THEN
 NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkill(_Player, _Target, _Item, _Skill);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:ApplySkillBonus] Granting grenade bonus on target [",_Skill,"].");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:ApplySkillBonus] Granting grenade bonus on target [",_Skill,"].");
 LLWEAPONEX_Demolition_ClearListeningEntries(_Player);
 LLWEAPONEX_Demolition_GrantBonus(_Player, _Target, _Item, _Skill);
 
@@ -170,7 +274,7 @@ AND
 DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z)
 THEN
 NOT DB_LLWEAPONEX_Demolition_Temp_ListenForSkillPosition(_Player, _Item, _Skill, _x, _y, _z);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:ApplySkillBonus] Granting grenade bonus at position [",_Skill,"].");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:ApplySkillBonus] Granting grenade bonus at position [",_Skill,"].");
 LLWEAPONEX_Demolition_ClearListeningEntries(_Player);
 LLWEAPONEX_Demolition_GrantBonusAtPosition(_Player, _Item, _Skill, _x, _y, _z);
 
@@ -178,11 +282,9 @@ LLWEAPONEX_Demolition_GrantBonusAtPosition(_Player, _Item, _Skill, _x, _y, _z);
 PROC
 LLWEAPONEX_Demolition_GrantBonus((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
 AND
-Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:GrantBonus] Checking if target is an enemy.")
+Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:GrantBonus] Checking if target is an enemy.")
 AND
 LeaderLib_Combat_QRY_IsEnemy(_Player, _Target, 1)
-AND
-Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition:GrantBonus] Rolling")
 AND
 LeaderLib_Roll_QRY(250)
 THEN
@@ -191,16 +293,18 @@ ApplyStatus(_Target, "LLWEAPONEX_DEMOLITION_SABOTAGE_ENEMY", 0.0, 0, _Player);
 PROC
 LLWEAPONEX_Demolition_GrantBonus((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
 AND
-DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status)
+DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill)
 THEN
 ApplyStatus(_Target, _Status, 0.0, 0, _Player);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:GrantBonus] Exploding skill [",_BonusSkill,"] via status [",_Status,"].");
 
 PROC
 LLWEAPONEX_Demolition_GrantBonus((CHARACTERGUID)_Player, (GUIDSTRING)_Target, (ITEMGUID)_Item, (STRING)_Skill)
 AND
-NOT DB_LLWEAPONEX_Demolition_SkillBonuses(_, _, _Skill, _)
+NOT LLWEAPONEX_Demolition_QRY_SkillHasBonuses(_Skill)
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_DEMOLITION_BONUS_DEFAULT", 0.0, 0, _Player);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:GrantBonus] Using fallback status [LLWEAPONEX_DEMOLITION_BONUS_DEFAULT].");
 
 PROC
 LLWEAPONEX_Demolition_GrantBonusAtPosition((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill, (REAL)_x, (REAL)_y, (REAL)_z)
@@ -212,18 +316,16 @@ LLWEAPONEX_Demolition_GrantBonusAtPosition((CHARACTERGUID)_Player, (ITEMGUID)_It
 AND
 LeaderLib_Roll_QRY(250)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Demolition_GrantBonusAtPosition] Applying sabotage via [Projectile_LLWEAPONEX_Status_Demolition_Sabotage_EnemyOnly] at position.");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:GrantBonusAtPosition] Applying sabotage via [Projectile_LLWEAPONEX_Status_Demolition_Sabotage_EnemyOnly] at position.");
 SetStoryEvent(_Player, "LLWEAPONEX_DemolitionBonus_Sabotage");
 
 PROC
 LLWEAPONEX_Demolition_GrantBonusAtPosition((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Skill, (REAL)_x, (REAL)_y, (REAL)_z)
 AND
 DB_LLWEAPONEX_Demolition_SkillBonuses(_Index, _Group, _Skill, _Status, _BonusSkill)
-//AND
-//IntegerSum(_Index, 1, _ListIndex) // Behavior scripting lists start at 1
 THEN
-//SetVarInteger(_Player, "LLWEAPONEX_Demolition_SkillIndex", _ListIndex);
-SetVarFixedString(_Player, "LLWEAPONEX_Demolition_BonusSkillName", _BonusSkill);
+LeaderLog_LogIntWithString("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:GrantBonusAtPosition] Exploding skill [",_BonusSkill,"] via index [",_Index,"].");
+SetVarInteger(_Player, "LLWEAPONEX_Demolition_SkillIndex", _Index);
 SetStoryEvent(_Player, "LLWEAPONEX_DemolitionBonus_SkillBonus");
 
 PROC
@@ -232,6 +334,7 @@ AND
 NOT DB_LLWEAPONEX_Demolition_SkillBonuses(_, _, _Skill, _, _)
 THEN
 SetStoryEvent(_Player, "LLWEAPONEX_DemolitionBonus_DefaultGrenadeSkill");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_Bonuses:GrantBonusAtPosition] Using fallback explosion projectile.");
 //END_REGION
 
 IF

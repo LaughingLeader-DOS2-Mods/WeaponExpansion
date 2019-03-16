@@ -3,6 +3,15 @@ INIT
 	INT:%LLWEAPONEX_Vending_Initialized = 0
 EVENTS
 
+EVENT LLWEAPONEX_VendingMachine_TriggerAddToList
+VARS
+	SKILL:_Skill
+ON
+	OnSkillAdded(__Me, _Skill, _)
+ACTIONS
+	SetVar(__Me, "LLWEAPONEX_VendingMachine_SkillAdded", _Skill)
+	CharacterEvent(__Me, "LLWEAPONEX_VendingMachine_SkillJustAdded")
+	CharacterRemoveSkill(__Me, _Skill)
 /*
 EVENT LLWEAPONEX_Vending_Init
 ON

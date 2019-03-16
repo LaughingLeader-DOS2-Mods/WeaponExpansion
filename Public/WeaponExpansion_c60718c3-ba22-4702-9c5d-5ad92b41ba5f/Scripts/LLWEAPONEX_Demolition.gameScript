@@ -1,23 +1,56 @@
 INIT
 	LIST<SKILL>:%LLWEAPONEX_Demolition_BonusSkills
-	LIST<FIXEDSTRING>:%LLWEAPONEX_Demolition_BonusSkillNames
 EVENTS
 
 EVENT LLWEAPONEX_Demolition_AddToList
 VARS
 	SKILL:_Skill
-	STRING:_SkillNameStr
-	FIXEDSTRING:_SkillName
+	SKILL:_SkillCheck
+	INT:_Index
+	INT:_Size
+	INT:_FoundSkill
+	CHARACTER:_Middleman
 ON
-	OnSkillAdded(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Skill, 0)
+	//OnSkillAdded(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Skill, _)
+	OnCharacterEvent(_Middleman, "LLWEAPONEX_VendingMachine_SkillJustAdded")
 ACTIONS
-	Print(_SkillNameStr, "[1}", _Skill)
-	Cast(_SkillName, _SkillNameStr)
-	ListAdd(%LLWEAPONEX_Demolition_BonusSkills, _Skill)
-	ListAdd(%LLWEAPONEX_Demolition_BonusSkillNames, _SkillName)
-	CharacterRemoveSkill(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Skill)
-	CharacterEvent(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Demolition_SkillAddedToList")
+	Set(_Index, 0)
+	Set(_FoundSkill, 0)
+IF "c1&!c2"
+	GetVar(_Skill, _Middleman, "LLWEAPONEX_VendingMachine_SkillAdded")
+	IsEqual(_Skill, null)
+THEN
+	IF "c1&c2"
+		ListGetSize(%LLWEAPONEX_Demolition_BonusSkills, _Size)
+		IsGreaterThen(_Size, 0)
+	THEN
+		WHILE "!c1&!c2"
+			IsGreaterThen(_Index, _Size)
+			IsEqual(_FoundSkill, 1)
+		DO
+			IF "c1&c2"
+				ListGet(%LLWEAPONEX_Demolition_BonusSkills, _Index, _SkillCheck)
+				IsEqual(_SkillCheck, _Skill)
+			THEN
+				Set(_FoundSkill, 1)
+			ELSE
+				Add(_Index, 1)
+			ENDIF
+		ENDWHILE
+	ENDIF
 
+	IF "c1"
+		IsEqual(_FoundSkill, 0)
+	THEN
+		ListAdd(%LLWEAPONEX_Demolition_BonusSkills, _Skill)
+		IF "c1"
+			ListGetSize(%LLWEAPONEX_Demolition_BonusSkills, _Index)
+		THEN
+		ENDIF
+	ENDIF
+ENDIF
+	SetVar(_Middleman, "LLWEAPONEX_Demolition_LastListIndex", _Index)
+	CharacterEvent(_Middleman, "LLWEAPONEX_Demolition_SkillAddedToList")
 /*
 EVENT LLWEAPONEX_Demolition_InitList
 ON
@@ -48,6 +81,7 @@ ACTIONS
 	ListAdd(%LLWEAPONEX_Demolition_BonusSkills, Projectile_LLWEAPONEX_Status_Demolition_CursedPoisonFlask)
 */
 
+/*
 EVENT LLWEAPONEX_Demolition_InitList_Start
 VARS
 	INT:_Size
@@ -62,6 +96,7 @@ IF "!c1|(c1&c2)"
 THEN
 	CallFunction("LLWEAPONEX_Demolition_InitList")
 ENDIF
+*/
 
 EVENT LLWEAPONEX_Demolition_Sabotage
 VARS
