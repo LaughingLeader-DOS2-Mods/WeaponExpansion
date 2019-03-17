@@ -1,7 +1,7 @@
 Projectile_LLWEAPONEX_RemoteMine_Explosion_DisplayName	Detonated Remote Charge
 Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_Description	Throw the breach charge at a target position.<br><font color='#ff5a11'>Detonating this charge breaks locks up to level 10 in a [1] radius, and knocking back objects within [2].</font>
 Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_DisplayName	Throw Breach Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_Description	Throw the displacement charge at a target position.<br><font color='#ff5a11'>Detonating this charge randomly teleports objects within [1] to another displacement charge within 12m.</font>
+Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_Description	Throw the displacement charge at a target position.<br><font color='#ff5a11'>Detonating this charge randomly teleports characters and barrels within [1] to another displacement charge within 12m.</font>
 Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_DisplayName	Throw Displacement Charge
 Projectile_LLWEAPONEX_RemoteMine_Throw_DisplayName	Throw Remote Charge
 Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive_Description	Throw the remote charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius.</font>
@@ -10,7 +10,7 @@ Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonCloud_Description	Throw the poison 
 Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonCloud_DisplayName	Throw Poison Gas Charge
 Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel_Description	Throw the shrapnel charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius and applies Bleeding for 2 turns.</font>
 Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel_DisplayName	Throw Shrapnel Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_Description	Throw the tar charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius, creates an oil surface, and applies Tarred for 2 turns.</font>
+Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_Description	Throw the tar charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius, creates an oil surface, and applies Tarred for 2 turns.</font><br><font color='#ff7031'>Tarred reduces Fire Resistance, Movement Speed, and lets Burning bypass Magic Armor.</font>
 Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_DisplayName	Throw Tar Charge
 Shout_LLWEAPONEX_RemoteMine_Add_Description	Retrieve a random remote charge from the <font color='#C7A758'>Demolitionist's Backpack</font>.
 Shout_LLWEAPONEX_RemoteMine_Add_DisplayName	Retrieve Remote Charge

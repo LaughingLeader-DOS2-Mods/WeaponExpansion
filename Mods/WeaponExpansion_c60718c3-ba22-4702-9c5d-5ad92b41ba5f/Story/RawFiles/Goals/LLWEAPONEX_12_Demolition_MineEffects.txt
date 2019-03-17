@@ -62,8 +62,8 @@ GetPosition(_Target, _cx, _cy, _cz)
 THEN
 DB_LLWEAPONEX_Demolition_Temp_Displaced(_Target, _Source, _RemoteCharge);
 PlayEffectAtPosition("RS3_FX_Skills_Void_Netherswap_Disappear_Root_01", _cx, _cy, _cz);
-LeaderLib_Timers_StartObjectObjectTimer(_Source, _RemoteCharge, 50, "LLWEAPONEX_Timers_ClearDisplacementTarget", "LLWEAPONEX_Demolition_ClearDisplacementTarget");
 PlayEffect(_Target, "RS3_FX_Skills_Void_Netherswap_Disappear_Overlay_01");
+LeaderLib_Timers_StartObjectObjectTimer(_Source, _RemoteCharge, 50, "LLWEAPONEX_Timers_ClearDisplacementTarget", "LLWEAPONEX_Demolition_ClearDisplacementTarget");
 TeleportToPosition(_Target, _x, _y, _z, "LLWEAPONEX_RemoteMines_DisplacementSuccess", _IncludeLinked, _ExcludeFollowers);
 ProcObjectTimer(_Target, "LLWEAPONEX_Timers_Demolition_ClearDisplacement", 25);
 

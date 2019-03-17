@@ -4,6 +4,13 @@ INITSECTION
 
 KBSECTION
 
+IF
+CanPickupItem(_Player, _RemoteMine, _)
+AND
+IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
+THEN
+CharacterItemSetEvent(_Player, _RemoteMine, "LLWEAPONEX_RemoteMine_OnPrePickedUp");
+
 //REGION ADD_MINE
 IF
 CharacterStatusApplied(_Character, "LLWEAPONEX_ADD_REMOTEMINE", _)
@@ -279,7 +286,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_RemoteMines:LLWEAPONEX_MovingObjectRemote
 LeaderLib_Helpers_CopyItemTransform(_RemoteMine, _Object, 0, 1, _Player);
 SetOnStage(_Object, 0);
 ItemDestroy(_Object);
-//SetStoryEvent(_RemoteMine, "LLWEAPONEX_MovingObjectRemoteMine_SnapToGround");
+SetStoryEvent(_RemoteMine, "LLWEAPONEX_RemoteMine_Thrown");
 
 IF
 StoryEvent((ITEMGUID)_RemoteMine, "LLWEAPONEX_MovingObjectRemoteMine_SnapToGround")

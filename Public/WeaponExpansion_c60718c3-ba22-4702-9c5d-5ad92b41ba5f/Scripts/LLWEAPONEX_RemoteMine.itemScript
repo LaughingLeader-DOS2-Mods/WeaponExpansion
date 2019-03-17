@@ -10,6 +10,9 @@ INIT
 	EXTERN STATUS:%LLWEAPONEX_Mine_ExplosionStatusID = null
 	EXTERN INT:%LLWEAPONEX_Mine_UseStatus = 0
 	INT:%LLWEAPONEX_Mine_Amount = 1
+	INT:%LLWEAPONEX_Mine_Exploding = 0
+	EXTERN STRING:%LLWEAPONEX_Mine_ActiveLoopEffect = null
+	INT64:%LLWEAPONEX_Mine_LoopFXHandle = null
 EVENTS
 
 EVENT LLWEAPONEX_RemoteMine_Detonate_FromSkill
@@ -27,6 +30,37 @@ ACTIONS
 	ENDIF
 	CallFunction("LLWEAPONEX_RemoteMine_Detonate")
 
+EVENT LLWEAPONEX_RemoteMine_Prepare_Displacement
+VARS
+	ITEM:_Target
+ON
+	OnFunction("LLWEAPONEX_RemoteMine_PrepareDisplacement")
+ACTIONS
+	ClearTag(__Me, "LLWEAPONEX_RemoteMine_Ready")
+	IterateItemsNear(__Me, 12.0, "LLWEAPONEX_RemoteMine_FindDisplacementTargets", "LLWEAPONEX_RemoteMine_Displacer")
+/*
+IF "c1"
+	ItemGet(_Target, __Me, 12.0, Random, Distance, "WPN_LLWEAPONEX_RemoteMine_A_Displacement_0dc36b1c-278d-4c88-9b24-8d4d5dd685fc", "LLWEAPONEX_RemoteMine_Ready")
+THEN
+	CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _Target, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+ELSE
+	CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+ENDIF
+*/
+
+EVENT LLWEAPONEX_RemoteMine_Displacement_FoundTarget
+VARS
+	ITEM:_Target
+ON
+	OnIterateItem(_Target, "LLWEAPONEX_RemoteMine_FindDisplacementTargets")
+ACTIONS
+IF "c1&!c2"
+	IsTagged(_Target, "LLWEAPONEX_RemoteMine_Ready")
+	IsEqual(_Target, __Me)
+THEN
+	CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _Target, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+ENDIF
+	
 EVENT LLWEAPONEX_RemoteMine_DetonateInWorld
 VARS
 	INT:_Level
@@ -38,6 +72,7 @@ ON
 	OnFunction("LLWEAPONEX_RemoteMine_Detonate")
 	OnItemEvent(__Me, "LLWEAPONEX_RemoteMine_Detonate")
 ACTIONS
+	Set(%LLWEAPONEX_Mine_Exploding, 1)
 IF "c1"
 	IsEqual(%LLWEAPONEX_Mine_UseStatus, 0)
 THEN
@@ -74,19 +109,7 @@ THEN
 		IF "c1"
 			IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
 		THEN
-			IF "c1&!c2"
-				ItemGet(_OtherMine, __Me, 12.0, Random, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
-				IsEqual(_OtherMine, __Me)
-			THEN
-				CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _OtherMine, "LLWEAPONEX_Demolition_DisplacementTargetFound")
-			ELIF "c1&!c2"
-				ItemGet(_OtherMine, __Me, 12.0, Highest, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
-				IsEqual(_OtherMine, __Me)
-			THEN
-				CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _OtherMine, "LLWEAPONEX_Demolition_DisplacementTargetFound")
-			ELSE
-				CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_Demolition_DisplacementTargetFound")
-			ENDIF
+			CallFunction("LLWEAPONEX_RemoteMine_PrepareDisplacement")
 		ENDIF
 		
 		IF "!c1"
@@ -132,6 +155,7 @@ VARS
 ON
 	OnCharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_StartDetonation_Character")
 ACTIONS
+	Set(%LLWEAPONEX_Mine_Exploding, 1)
 IF "c1"
 	IsEqual(%LLWEAPONEX_Mine_UseStatus, 0)
 THEN
@@ -162,6 +186,12 @@ THEN
 		ELIF "c1"
 			GetPosition(__Me, _Pos)
 		THEN
+		ENDIF
+		
+		IF "c1"
+			IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
+		THEN
+			CallFunction("LLWEAPONEX_RemoteMine_PrepareDisplacement")
 		ENDIF
 		
 		IF "!c1"
@@ -202,6 +232,7 @@ VARS
 ON
 	OnCharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_StartDetonation_Container")
 ACTIONS
+	Set(%LLWEAPONEX_Mine_Exploding, 1)
 IF "c1"
 	IsEqual(%LLWEAPONEX_Mine_UseStatus, 0)
 THEN
@@ -232,6 +263,12 @@ THEN
 		ELIF "c1"
 			GetPosition(__Me, _Pos)
 		THEN
+		ENDIF
+		
+		IF "c1"
+			IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
+		THEN
+			CallFunction("LLWEAPONEX_RemoteMine_PrepareDisplacement")
 		ENDIF
 		
 		IF "!c1"
@@ -298,4 +335,46 @@ THEN
 	THEN
 		ExplodeAt(_Pos, Projectile_LLWEAPONEX_Status_RemoteMine_DetonateNear, 1, %LLWEAPONEX_Mine_Owner)
 	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_RemoteMine_OnPickup
+ON
+	//OnPickupItem(_, __Me)
+	OnCharacterItemEvent(_, __Me, "LLWEAPONEX_RemoteMine_OnPrePickedUp")
+ACTIONS
+	//SetPriority("LLWEAPONEX_RemoteMine_InWorld", 0)
+	DelayReaction("LLWEAPONEX_RemoteMine_InWorld", 5.0)
+	ClearTag(__Me, "LLWEAPONEX_RemoteMine_Ready")
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Mine_LoopFXHandle, null)
+THEN
+	StopLoopEffect(%LLWEAPONEX_Mine_LoopFXHandle)
+	Set(%LLWEAPONEX_Mine_LoopFXHandle, INT64:null)
+ENDIF
+
+/*
+EVENT LLWEAPONEX_RemoteMine_OnDropped
+ON
+	OnItemEvent(__Me, "LLWEAPONEX_RemoteMine_Thrown")
+ACTIONS
+	SetPriority("LLWEAPONEX_RemoteMine_InWorld", 999)
+*/
+
+BEHAVIOUR
+
+REACTION LLWEAPONEX_RemoteMine_InWorld,999
+USAGE ALL
+CHECK "c1&!c2&!c3&!c4"
+	IsActive(__Me)
+	ItemIsInInventory(__Me)
+	IsTagged(__Me, "LLWEAPONEX_RemoteMine_Ready")
+	IsEqual(%LLWEAPONEX_Mine_Exploding, 1)
+ACTIONS
+	SetTag(__Me, "LLWEAPONEX_RemoteMine_Ready")
+IF "!c1&!c2&c3"
+	IsEqual(%LLWEAPONEX_Mine_ActiveLoopEffect, null)
+	IsEqual(%LLWEAPONEX_Mine_ActiveLoopEffect, "")
+	IsEqual(%LLWEAPONEX_Mine_LoopFXHandle, null)
+THEN
+	ItemPlayLoopEffect(%LLWEAPONEX_Mine_LoopFXHandle, __Me, %LLWEAPONEX_Mine_ActiveLoopEffect)
 ENDIF
