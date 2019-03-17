@@ -18,33 +18,68 @@ THEN
 CharacterItemSetEvent(_Source, _Grenade, "LLWEAPONEX_Demolition_DetonateGrenade");
 
 IF
-CharacterItemEvent(_Player, _RemoteCharge, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+CharacterItemEvent(_Source, _RemoteCharge, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+AND
+GetPosition(_RemoteCharge, _x, _y, _z)
 THEN
-DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Player, _RemoteCharge);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _RemoteCharge, 500, "LLWEAPONEX_Timers_ClearDisplacementTarget", "LLWEAPONEX_Demolition_ClearDisplacementTarget");
+DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Source, _RemoteCharge, _x, _y, _z);
+LeaderLib_Timers_StartObjectObjectTimer(_Source, _RemoteCharge, 800, "LLWEAPONEX_Timers_ClearDisplacementTarget", "LLWEAPONEX_Demolition_ClearDisplacementTarget");
 
-IF
-CharacterItemEvent(_Player, _RemoteCharge, "LLWEAPONEX_Demolition_ClearDisplacementTarget")
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished(_Source, _RemoteCharge, "LLWEAPONEX_Demolition_ClearDisplacementTarget")
+AND
+DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget((CHARACTERGUID)_Source, (ITEMGUID)_RemoteCharge, _x, _y, _z)
 THEN
-NOT DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Player, _RemoteCharge);
+NOT DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Source, _RemoteCharge, _x, _y, _z);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_MineEffects:ObjectObjectTimerFinished] Cleared displacement position.");
 
 IF
 CharacterStatusApplied(_Character, "LLWEAPONEX_REMOTEMINE_DISPLACE", (CHARACTERGUID)_Source)
 AND
 CharacterIsDead(_Character, 0)
 AND
-DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Source, _RemoteCharge)
+CharacterIsInCombat(_Character, _Combat)
 AND
-NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Character)
+IntegerSubtract(1, _Combat, _IncludeLinked)
 THEN
-CharacterItemSetEvent(_Character, _RemoteCharge, "LLWEAPONEX_RemoteMines_StartDisplacement");
-DB_LLWEAPONEX_Demolition_Temp_Displaced(_Character);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Demolition_ClearDisplacement", 25);
+LLWEAPONEX_Demolition_DisplaceTarget(_Character, _Source, _IncludeLinked, _Combat);
+
+IF
+ItemStatusChange(_Item, "LLWEAPONEX_REMOTEMINE_DISPLACE", (CHARACTERGUID)_Source)
+AND
+ItemIsDestroyed(_Item, 0)
+THEN
+LLWEAPONEX_Demolition_DisplaceTarget(_Item, _Source, 0, 1);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Demolition_ClearDisplacement")
+LLWEAPONEX_Demolition_DisplaceTarget((GUIDSTRING)_Target, (CHARACTERGUID)_Source, (INTEGER)_IncludeLinked, (INTEGER)_ExcludeFollowers)
+AND
+DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Source, _RemoteCharge, _x, _y, _z)
+AND
+NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Target, _, _)
+AND
+GetPosition(_Target, _cx, _cy, _cz)
 THEN
-NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Character);
+DB_LLWEAPONEX_Demolition_Temp_Displaced(_Target, _Source, _RemoteCharge);
+PlayEffectAtPosition("RS3_FX_Skills_Void_Netherswap_Disappear_Root_01", _cx, _cy, _cz);
+LeaderLib_Timers_StartObjectObjectTimer(_Source, _RemoteCharge, 50, "LLWEAPONEX_Timers_ClearDisplacementTarget", "LLWEAPONEX_Demolition_ClearDisplacementTarget");
+PlayEffect(_Target, "RS3_FX_Skills_Void_Netherswap_Disappear_Overlay_01");
+TeleportToPosition(_Target, _x, _y, _z, "LLWEAPONEX_RemoteMines_DisplacementSuccess", _IncludeLinked, _ExcludeFollowers);
+ProcObjectTimer(_Target, "LLWEAPONEX_Timers_Demolition_ClearDisplacement", 25);
+
+PROC
+LLWEAPONEX_Demolition_DisplaceTarget((GUIDSTRING)_Target, (CHARACTERGUID)_Source, (INTEGER)_IncludeLinked, (INTEGER)_ExcludeFollowers)
+AND
+NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Target, _, _)
+THEN
+DisplayText(_Target, "Displacement failed!");
+
+PROC
+ProcObjectTimerFinished(_Target, "LLWEAPONEX_Timers_Demolition_ClearDisplacement")
+AND
+DB_LLWEAPONEX_Demolition_Temp_Displaced(_Target, _Source, _RemoteCharge)
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Target, _Source, _RemoteCharge);
 
 IF
 CharacterItemEvent(_Player, _RemoteCharge, "LLWEAPONEX_Demolition_StartBreach")

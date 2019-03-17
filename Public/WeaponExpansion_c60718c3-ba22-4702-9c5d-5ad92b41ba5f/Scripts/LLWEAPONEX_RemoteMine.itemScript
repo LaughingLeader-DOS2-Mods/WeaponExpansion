@@ -71,11 +71,22 @@ THEN
 		THEN
 		ENDIF
 		
-		IF "c1&c2"
+		IF "c1"
 			IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
-			ItemGet(_OtherMine, __Me, 12.0, Random, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
 		THEN
-			CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _OtherMine, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+			IF "c1&!c2"
+				ItemGet(_OtherMine, __Me, 12.0, Random, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
+				IsEqual(_OtherMine, __Me)
+			THEN
+				CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _OtherMine, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+			ELIF "c1&!c2"
+				ItemGet(_OtherMine, __Me, 12.0, Highest, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
+				IsEqual(_OtherMine, __Me)
+			THEN
+				CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _OtherMine, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+			ELSE
+				CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+			ENDIF
 		ENDIF
 		
 		IF "!c1"

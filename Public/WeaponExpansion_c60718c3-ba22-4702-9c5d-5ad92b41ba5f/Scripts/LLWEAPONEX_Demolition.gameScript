@@ -235,26 +235,6 @@ IF "c1&!c2&!c3"
 THEN
 	ItemOpen(_Object)
 ENDIF
-	
-EVENT LLWEAPONEX_RemoteMines_Displace
-VARS
-	CHARACTER:_Character
-	ITEM:_RemoteMine
-	FLOAT3:_Pos
-ON
-	OnCharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_StartDisplacement")
-ACTIONS
-IF "c1"
-	GetPosition(_RemoteMine, _Pos)
-THEN
-	PlayEffectAt(_Character, "RS3_FX_Skills_Void_Netherswap_Disappear_Root_01")
-	CharacterPlayEffect(_Character, "RS3_FX_Skills_Void_Netherswap_Disappear_Overlay_01")
-	TeleportTo(_Character, _Pos, 1)
-	CharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
-ELSE
-	CharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_DisplacementFailed")
-	StatusText(_Character, "Displacement failed!")
-ENDIF
 
 EVENT LLWEAPONEX_RemoteMines_DisplacedFX
 VARS
@@ -262,5 +242,6 @@ VARS
 	ITEM:_RemoteMine
 ON
 	OnCharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
+	OnCharacterEvent(_Character, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
 ACTIONS
 	CharacterPlayEffect(_Character, "RS3_FX_Skills_Void_Netherswap_Reappear_01")
