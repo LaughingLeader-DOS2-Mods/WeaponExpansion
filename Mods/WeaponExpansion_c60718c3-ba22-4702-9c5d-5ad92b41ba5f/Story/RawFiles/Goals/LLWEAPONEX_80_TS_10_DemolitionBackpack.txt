@@ -3,23 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-//REGION THROWING
-PROC
-ProcProcessUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Item, (INTEGER)_RequestID)
-AND
-NOT DB_CustomUseItemResponse(_Player, _Item, 0)
-AND
-IsTagged(_Item, "LLWEAPONEX_RemoteMine", 1)
-THEN
-DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _Item);
-
-IF
-CharacterStoppedUsingItem(_Player, _RemoteMine)
-AND
-DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine)
-THEN
-NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine);
-//END_REGION
 
 //REGION CHARGES
 IF

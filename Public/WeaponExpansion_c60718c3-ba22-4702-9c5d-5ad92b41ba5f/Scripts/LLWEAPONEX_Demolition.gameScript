@@ -207,3 +207,43 @@ THEN
 	ENDIF
 	ExplodeAt(_Pos, _Skill, _Level, _Player)
 ENDIF
+
+EVENT LLWEAPONEX_Demolition_DetonateGrenade
+VARS
+	ITEM:_Grenade
+	CHARACTER:_Character
+ON
+	//OnItemStatus(_Grenade, LLWEAPONEX_REMOTEMINE_DETONATE)
+	OnCharacterItemEvent(_Character, _Grenade, "LLWEAPONEX_Demolition_DetonateGrenade")
+ACTIONS
+	SetVar(_Grenade, "Caster", _Character)
+	ItemDestroy(_Grenade)
+
+EVENT LLWEAPONEX_RemoteMines_Displace
+VARS
+	CHARACTER:_Character
+	CHARACTER:_Source
+	ITEM:_RemoteMine
+ON
+	OnCharacterCharacterEvent(_Character, _Source, "LLWEAPONEX_RemoteMines_StartDisplacement")
+ACTIONS
+IF "c1"
+	ItemGet(_RemoteMine, _Character, 12.0, Random, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
+THEN
+	PlayEffectAt(_Character, "RS3_FX_Skills_Void_Netherswap_Disappear_Root_01")
+	CharacterPlayEffect(_Character, "RS3_FX_Skills_Void_Netherswap_Disappear_Overlay_01")
+	TeleportTo(_Character, _RemoteMine, 1)
+	CharacterCharacterEvent(_Character, _Source, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
+	CharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_OnCharacterDisplaced")
+ELSE
+	CharacterCharacterEvent(_Character, _Source, "LLWEAPONEX_RemoteMines_DisplacementFailed")
+ENDIF
+
+EVENT LLWEAPONEX_RemoteMines_DisplacedFX
+VARS
+	CHARACTER:_Character
+	ITEM:_RemoteMine
+ON
+	OnCharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_OnCharacterDisplaced")
+ACTIONS
+	CharacterPlayEffect(_Character, "RS3_FX_Skills_Void_Netherswap_Reappear_01")

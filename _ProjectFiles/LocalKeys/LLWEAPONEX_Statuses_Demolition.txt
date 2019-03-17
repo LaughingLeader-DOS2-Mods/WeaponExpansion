@@ -1,0 +1,6 @@
+LLWEAPONEX_ADD_REMOTEMINE_DisplayName	Retrieve Remote Charge
+LLWEAPONEX_DEMOLITION_BONUS_DisplayName	Enhanced Demolition
+LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_Description	Character's <font color='#C7A758'>Demolitionist's Backpack</font> is recharging.
+LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_DisplayName	Recharging (Demolitionist's Backpack)
+LLWEAPONEX_REMOTEMINE_DETONATE_DisplayName	Detonate Remote Charge
+LLWEAPONEX_REMOTEMINE_DISPLACE_DisplayName	Displace

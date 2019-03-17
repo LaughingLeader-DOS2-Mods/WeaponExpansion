@@ -38,10 +38,6 @@ LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] 
 LLWEAPONEX_MENDING_DisplayName	Mending
 LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is recharging.
 LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)
-LLWEAPONEX_ADD_REMOTEMINE_DisplayName	Retrieve Remote Charge
-LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_DisplayName	Recharging (Demolitionist's Backpack)
-LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_Description	Character's <font color='#C7A758'>Demolitionist's Backpack</font> is recharging.
-LLWEAPONEX_REMOTEMINE_DETONATE_DisplayName	Detonate Remote Charge
 LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.
 LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound
 LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.
@@ -66,4 +62,3 @@ LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is ta
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
-LLWEAPONEX_DEMOLITION_BONUS_DisplayName	Enhanced Demolition

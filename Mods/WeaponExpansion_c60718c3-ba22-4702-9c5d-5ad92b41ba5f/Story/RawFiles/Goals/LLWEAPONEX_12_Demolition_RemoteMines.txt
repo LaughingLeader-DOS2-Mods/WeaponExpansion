@@ -239,6 +239,22 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_RemoteMines:LLWEAPONEX_MovingObjectRemote
 */
 
 PROC
+ProcProcessUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Item, (INTEGER)_RequestID)
+AND
+NOT DB_CustomUseItemResponse(_Player, _Item, 0)
+AND
+IsTagged(_Item, "LLWEAPONEX_RemoteMine", 1)
+THEN
+DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _Item);
+
+IF
+CharacterStoppedUsingItem(_Player, _RemoteMine)
+AND
+DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine)
+THEN
+NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine);
+
+PROC
 LLWEAPONEX_RemoteMines_Internal_SetThrowingActive((CHARACTERGUID)_Player, (ITEMGUID)_RemoteMine, (ITEMGUID)_MovingObject)
 THEN
 DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive(_Player, _RemoteMine, _MovingObject);
