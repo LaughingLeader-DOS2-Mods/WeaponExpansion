@@ -2,8 +2,9 @@ INIT
 	ITEM:__Me
 	CHARACTER:%LLWEAPONEX_Mine_Owner = null
 	ITEM:%LLWEAPONEX_Mine_Inventory = null
-	EXTERN SKILL:%LLWEAPONEX_Mine_Skill = Projectile_LLWEAPONEX_RemoteMine_DefaultExplosion
-	EXTERN SKILL:%LLWEAPONEX_Mine_Skill_NoWeapon = Projectile_LLWEAPONEX_RemoteMine_DefaultExplosion_NoWeapon
+	EXTERN SKILL:%LLWEAPONEX_Mine_Skill = Projectile_LLWEAPONEX_RemoteMine_Explosive
+	EXTERN SKILL:%LLWEAPONEX_Mine_Skill_NoWeapon = Projectile_LLWEAPONEX_RemoteMine_Explosive_NoWeapon
+	EXTERN INT:%LLWEAPONEX_Mine_UseSelfAsSource = 0
 	EXTERN STRING:%LLWEAPONEX_Mine_SkillID = null
 	EXTERN STATUS:%LLWEAPONEX_Mine_ExplosionStatus = null
 	EXTERN STATUS:%LLWEAPONEX_Mine_ExplosionStatusID = null
@@ -31,6 +32,8 @@ VARS
 	INT:_Level
 	FLOAT:_LevelF
 	SKILL:_Skill
+	FLOAT3:_Pos
+	ITEM:_OtherMine
 ON
 	OnFunction("LLWEAPONEX_RemoteMine_Detonate")
 	OnItemEvent(__Me, "LLWEAPONEX_RemoteMine_Detonate")
@@ -58,12 +61,35 @@ THEN
 		ELSE
 			Set(_Skill, %LLWEAPONEX_Mine_Skill)
 		ENDIF
-		IF "c1"
+		
+		IF "c1&c2"
 			ItemIsInCharacterInventory(__Me, %LLWEAPONEX_Mine_Owner)
+			GetPosition(%LLWEAPONEX_Mine_Owner, _Pos)
 		THEN
-			ExplodeAt(%LLWEAPONEX_Mine_Owner, _Skill, _Level, %LLWEAPONEX_Mine_Owner)
+		ELIF "c1"
+			GetPosition(__Me, _Pos)
+		THEN
+		ENDIF
+		
+		IF "c1&c2"
+			IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
+			ItemGet(_OtherMine, __Me, 12.0, Random, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
+		THEN
+			CharacterItemEvent(%LLWEAPONEX_Mine_Owner, _OtherMine, "LLWEAPONEX_Demolition_DisplacementTargetFound")
+		ENDIF
+		
+		IF "!c1"
+			IsEqual(%LLWEAPONEX_Mine_UseSelfAsSource, 1)
+		THEN
+			ExplodeAt(_Pos, _Skill, _Level, %LLWEAPONEX_Mine_Owner)		
 		ELSE
-			ExplodeAt(__Me, _Skill, _Level, %LLWEAPONEX_Mine_Owner)
+			ExplodeAt(__Me, _Skill, _Level, __Me)
+		ENDIF
+		IF "c1"
+			IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Breach)
+		THEN
+			SetVar(__Me, "LLWEAPONEX_Demolition_BreachPosition", _Pos)
+			CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_Demolition_StartBreach")
 		ENDIF
 		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
 	ELSE
@@ -73,7 +99,13 @@ ELSE
 	IF "!c1"
 		IsEqual(%LLWEAPONEX_Mine_ExplosionStatus, null)
 	THEN
-		ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, %LLWEAPONEX_Mine_Owner)
+		IF "!c1"
+			IsEqual(%LLWEAPONEX_Mine_UseSelfAsSource, 1)
+		THEN
+			ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, %LLWEAPONEX_Mine_Owner)	
+		ELSE
+			ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, __Me)	
+		ENDIF
 	ELSE
 		CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_RemoteMine_DetonateInWorld_ByStatusID")
 	ENDIF
@@ -85,6 +117,7 @@ VARS
 	INT:_Level
 	FLOAT:_LevelF
 	SKILL:_Skill
+	FLOAT3:_Pos
 ON
 	OnCharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_StartDetonation_Character")
 ACTIONS
@@ -111,7 +144,22 @@ THEN
 		ELSE
 			Set(_Skill, %LLWEAPONEX_Mine_Skill)
 		ENDIF
-		ExplodeAt(_Target, _Skill, _Level, %LLWEAPONEX_Mine_Owner)
+		
+		IF "c1"
+			GetPosition(_Target, _Pos)
+		THEN
+		ELIF "c1"
+			GetPosition(__Me, _Pos)
+		THEN
+		ENDIF
+		
+		IF "!c1"
+			IsEqual(%LLWEAPONEX_Mine_UseSelfAsSource, 1)
+		THEN
+			ExplodeAt(_Pos, _Skill, _Level, %LLWEAPONEX_Mine_Owner)
+		ELSE
+			ExplodeAt(_Pos, _Skill, _Level, __Me)
+		ENDIF
 		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
 	ELSE
 		CharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_BySkillID")
@@ -120,7 +168,13 @@ ELSE
 	IF "!c1"
 		IsEqual(%LLWEAPONEX_Mine_ExplosionStatus, null)
 	THEN
-		ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, %LLWEAPONEX_Mine_Owner)
+		IF "!c1"
+			IsEqual(%LLWEAPONEX_Mine_UseSelfAsSource, 1)
+		THEN
+			ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, %LLWEAPONEX_Mine_Owner)
+		ELSE
+			ItemApplyStatus(__Me, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, __Me)
+		ENDIF
 		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
 	ELSE
 		CharacterItemEvent(_Target, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_ByStatusID")
@@ -133,6 +187,7 @@ VARS
 	INT:_Level
 	FLOAT:_LevelF
 	SKILL:_Skill
+	FLOAT3:_Pos
 ON
 	OnCharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_StartDetonation_Container")
 ACTIONS
@@ -159,7 +214,22 @@ THEN
 		ELSE
 			Set(_Skill, %LLWEAPONEX_Mine_Skill)
 		ENDIF
-		ExplodeAt(%LLWEAPONEX_Mine_Inventory, _Skill, _Level, _Character)
+		
+		IF "c1"
+			GetPosition(%LLWEAPONEX_Mine_Inventory, _Pos)
+		THEN
+		ELIF "c1"
+			GetPosition(__Me, _Pos)
+		THEN
+		ENDIF
+		
+		IF "!c1"
+			IsEqual(%LLWEAPONEX_Mine_UseSelfAsSource, 1)
+		THEN
+			ExplodeAt(_Pos, _Skill, _Level, _Character)
+		ELSE
+			ExplodeAt(_Pos, _Skill, _Level, __Me)
+		ENDIF
 		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
 	ELSE
 		CharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_BySkillID_Container")
@@ -168,7 +238,13 @@ ELSE
 	IF "!c1"
 		IsEqual(%LLWEAPONEX_Mine_ExplosionStatus, null)
 	THEN
-		ItemApplyStatus(%LLWEAPONEX_Mine_Inventory, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, _Character)
+		IF "!c1"
+			IsEqual(%LLWEAPONEX_Mine_UseSelfAsSource, 1)
+		THEN
+			ItemApplyStatus(%LLWEAPONEX_Mine_Inventory, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, _Character)
+		ELSE
+			ItemApplyStatus(%LLWEAPONEX_Mine_Inventory, %LLWEAPONEX_Mine_ExplosionStatus, 0, 1, __Me)
+		ENDIF
 		ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
 	ELSE
 		CharacterItemEvent(_Character, __Me, "LLWEAPONEX_RemoteMine_DetonateInInventory_ByStatusID_Container")

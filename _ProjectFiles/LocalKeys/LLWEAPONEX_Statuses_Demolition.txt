@@ -4,3 +4,4 @@ LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_Description	Character's <font color='#C7A758'
 LLWEAPONEX_REMOTEMINE_ADD_RECHARGE_DisplayName	Recharging (Demolitionist's Backpack)
 LLWEAPONEX_REMOTEMINE_DETONATE_DisplayName	Detonate Remote Charge
 LLWEAPONEX_REMOTEMINE_DISPLACE_DisplayName	Displace
+LLWEAPONEX_REMOTEMINE_KNOCKBACK_WEAK_DisplayName	Breach

@@ -657,6 +657,26 @@ IgnoreLevelDiff 1
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,0,1,0
 
+new treasuretable "S_LLWEAPONEX_RemoteMines_AddRandom"
+new subtable "0,4;1,1"
+object category "I_WPN_LLWEAPONEX_RemoteMine_Breach_Free",1,1,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "1"
+EndLevel "4"
+object category "I_WPN_LLWEAPONEX_RemoteMine_Explosive_Free",10,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_Displacement_Free",2,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_PoisonCloud_Free",2,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_Shrapnel_Free",3,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_Tar_Free",3,1,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "5"
+EndLevel "30"
+object category "I_WPN_LLWEAPONEX_RemoteMine_Explosive_Free",7,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_Displacement_Free",3,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_PoisonCloud_Free",3,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_Shrapnel_Free",4,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_RemoteMine_Tar_Free",4,1,0,0,0,0,0,0
+
 new treasuretable "LLWEAPONEX_CheatThrowingWeapons"
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0

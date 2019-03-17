@@ -24,6 +24,7 @@ THEN
 		ListGetSize(%LLWEAPONEX_Demolition_BonusSkills, _Size)
 		IsGreaterThen(_Size, 0)
 	THEN
+		Set(_Index, 1)
 		WHILE "!c1&!c2"
 			IsGreaterThen(_Index, _Size)
 			IsEqual(_FoundSkill, 1)
@@ -47,6 +48,8 @@ THEN
 			ListGetSize(%LLWEAPONEX_Demolition_BonusSkills, _Index)
 		THEN
 		ENDIF
+	ELSE
+		Set(_Index, 0)
 	ENDIF
 ENDIF
 	SetVar(_Middleman, "LLWEAPONEX_Demolition_LastListIndex", _Index)
@@ -219,24 +222,38 @@ ACTIONS
 	SetVar(_Grenade, "Caster", _Character)
 	ItemDestroy(_Grenade)
 
+EVENT LLWEAPONEX_RemoteMines_Breached_OpenDoor
+VARS
+	ITEM:_Object
+ON
+	OnItemStatus(_Object, LLWEAPONEX_REMOTEMINE_BREACHED)
+ACTIONS
+IF "c1&!c2&!c3"
+	ItemHasStatus(_Object, UNLOCK)
+	ItemIsOpen(_Object)
+	ItemIsOpening(_Object)
+THEN
+	ItemOpen(_Object)
+ENDIF
+	
 EVENT LLWEAPONEX_RemoteMines_Displace
 VARS
 	CHARACTER:_Character
-	CHARACTER:_Source
 	ITEM:_RemoteMine
+	FLOAT3:_Pos
 ON
-	OnCharacterCharacterEvent(_Character, _Source, "LLWEAPONEX_RemoteMines_StartDisplacement")
+	OnCharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_StartDisplacement")
 ACTIONS
 IF "c1"
-	ItemGet(_RemoteMine, _Character, 12.0, Random, Distance, null, "LLWEAPONEX_RemoteMine_Displacer")
+	GetPosition(_RemoteMine, _Pos)
 THEN
 	PlayEffectAt(_Character, "RS3_FX_Skills_Void_Netherswap_Disappear_Root_01")
 	CharacterPlayEffect(_Character, "RS3_FX_Skills_Void_Netherswap_Disappear_Overlay_01")
-	TeleportTo(_Character, _RemoteMine, 1)
-	CharacterCharacterEvent(_Character, _Source, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
-	CharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_OnCharacterDisplaced")
+	TeleportTo(_Character, _Pos, 1)
+	CharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
 ELSE
-	CharacterCharacterEvent(_Character, _Source, "LLWEAPONEX_RemoteMines_DisplacementFailed")
+	CharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_DisplacementFailed")
+	StatusText(_Character, "Displacement failed!")
 ENDIF
 
 EVENT LLWEAPONEX_RemoteMines_DisplacedFX
@@ -244,6 +261,6 @@ VARS
 	CHARACTER:_Character
 	ITEM:_RemoteMine
 ON
-	OnCharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_OnCharacterDisplaced")
+	OnCharacterItemEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMines_DisplacementSuccess")
 ACTIONS
 	CharacterPlayEffect(_Character, "RS3_FX_Skills_Void_Netherswap_Reappear_01")

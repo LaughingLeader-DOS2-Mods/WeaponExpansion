@@ -18,10 +18,40 @@ THEN
 CharacterItemSetEvent(_Source, _Grenade, "LLWEAPONEX_Demolition_DetonateGrenade");
 
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_REMOTEMINE_DISPLACE", (CHARACTERGUID)_Source)
+CharacterItemEvent(_Player, _RemoteCharge, "LLWEAPONEX_Demolition_DisplacementTargetFound")
 THEN
-CharacterCharacterSetEvent(_Character, _Source, "LLWEAPONEX_RemoteMines_StartDisplacement");
+DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Player, _RemoteCharge);
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _RemoteCharge, 500, "LLWEAPONEX_Timers_ClearDisplacementTarget", "LLWEAPONEX_Demolition_ClearDisplacementTarget");
 
+IF
+CharacterItemEvent(_Player, _RemoteCharge, "LLWEAPONEX_Demolition_ClearDisplacementTarget")
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Player, _RemoteCharge);
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_REMOTEMINE_DISPLACE", (CHARACTERGUID)_Source)
+AND
+CharacterIsDead(_Character, 0)
+AND
+DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Source, _RemoteCharge)
+AND
+NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Character)
+THEN
+CharacterItemSetEvent(_Character, _RemoteCharge, "LLWEAPONEX_RemoteMines_StartDisplacement");
+DB_LLWEAPONEX_Demolition_Temp_Displaced(_Character);
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Demolition_ClearDisplacement", 25);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Demolition_ClearDisplacement")
+THEN
+NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Character);
+
+IF
+CharacterItemEvent(_Player, _RemoteCharge, "LLWEAPONEX_Demolition_StartBreach")
+AND
+GetVarFloat3(_RemoteCharge, "LLWEAPONEX_Demolition_BreachPosition", _x, _y, _z)
+THEN
+LeaderLib_Skills_UseSkillAtPosition(_Player, _x, _y, _z, "Shout_LLWEAPONEX_RemoteMine_Breach_Knockback", 0, 0);
 EXITSECTION
 
 ENDEXITSECTION

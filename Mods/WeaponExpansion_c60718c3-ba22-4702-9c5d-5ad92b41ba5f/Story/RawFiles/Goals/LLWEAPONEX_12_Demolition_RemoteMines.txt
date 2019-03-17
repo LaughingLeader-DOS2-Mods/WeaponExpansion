@@ -7,14 +7,8 @@ KBSECTION
 //REGION ADD_MINE
 IF
 CharacterStatusApplied(_Character, "LLWEAPONEX_ADD_REMOTEMINE", _)
-AND
-GetPosition(_Character, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition("WPN_LLWEAPONEX_Trap_Mine_Remote_A_9723e927-785b-4fe9-91e7-a8ad1af30716", _x, _y, _z, _RemoteMine)
 THEN
-//ItemTemplateAddTo("WPN_LLWEAPONEX_Trap_Mine_Remote_A_9723e927-785b-4fe9-91e7-a8ad1af30716", _Character, 1, 1);
-SetVarObject(_RemoteMine, "LLWEAPONEX_Mine_Owner", _Character);
-ItemToInventory(_RemoteMine, _Character, 1, 1);
+CharacterGiveReward(_Character, "S_LLWEAPONEX_RemoteMines_AddRandom", 1);
 
 PROC
 LLWEAPONEX_RemoteMines_SetOwner((CHARACTERGUID)_Character, (ITEMGUID)_RemoteMine)
@@ -171,11 +165,12 @@ SetVarInteger(_RemoteMine, "LLWEAPONEX_Mine_Amount", _Amount);
 CharacterItemSetEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Container");
 
 IF
-ItemStatusChange(_Target, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Character)
+ItemStatusChange(_RemoteMine, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Character)
 AND
-IsTagged(_Target, "LLWEAPONEX_RemoteMine", 1)
+IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
 THEN
-CharacterItemSetEvent(_Character, _Target, "LLWEAPONEX_RemoteMine_DetonationStatus");
+LLWEAPONEX_RemoteMines_SetOwner(_Character, _RemoteMine);
+CharacterItemSetEvent(_Character, _RemoteMine, "LLWEAPONEX_RemoteMine_DetonationStatus");
 //END_REGION
 
 //REGION BEHAVIOR_SCRIPT_DETONATION_EVENTS

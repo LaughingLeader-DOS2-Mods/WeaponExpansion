@@ -184,18 +184,23 @@ AND
 IsTagged(_Weapon, "LLWEAPONEX_Greatbow", _IsGreatbow)
 AND
 DB_LLWEAPONEX_Quivers_ArrowTreasure(_IsGreatbow, _TreasureTable)
+/*
 AND
 GetPosition(_Character, _x, _y, _z)
 AND
 CharacterGetLevel(_Character, _Level)
 AND
 CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", _x, _y, _z, _Backpack)
+*/
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_DRAW_ARROW] Generating a random arrow for character via treasure table [",_TreasureTable,"].");
 ObjectSetFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow", 0);
+CharacterGiveReward(_Character, _TreasureTable, 1);
+/*
 GenerateTreasure(_Backpack, _TreasureTable, _Level, _Character);
 MoveAllItemsTo(_Backpack, _Character, 1, 1, 1);
 ProcObjectTimer(_Backpack, "LLWEAPONEX_Timers_RemoveArrowTreasureBackpack", 250);
+*/
 
 PROC
 ProcObjectTimerFinished((ITEMGUID)_Backpack, "LLWEAPONEX_Timers_RemoveArrowTreasureBackpack")
