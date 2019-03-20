@@ -10,3 +10,4 @@ LLWEAPONEX_Status_DuelistStance_Warning	<font color='#fcd203'>Duelist Stance dis
 LLWEAPONEX_Skills_DuelistStance_Bonus	<font color='#24ff24'>Flourish (+1 AP)</font>
 LLWEAPONEX_Status_Torment_Applied	<font color='#9A5085'>Torment</font>
 LLWEAPONEX_Status_Sabotage_Applied	<font color='#F80F0F' size='28'>Sabotaged!</font>
+LLWEAPONEX_Status_DisplacementFailed	<font color='#FF0000' size='22'>Displacement Failed</font>

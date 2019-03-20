@@ -23,6 +23,7 @@ AND
 GetPosition(_RemoteCharge, _x, _y, _z)
 THEN
 DB_LLWEAPONEX_Demolition_Temp_DisplacementTarget(_Source, _RemoteCharge, _x, _y, _z);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_MineEffects:LLWEAPONEX_Demolition_DisplacementTargetFound] Found displacement target.");
 LeaderLib_Timers_StartObjectObjectTimer(_Source, _RemoteCharge, 800, "LLWEAPONEX_Timers_ClearDisplacementTarget", "LLWEAPONEX_Demolition_ClearDisplacementTarget");
 
 PROC
@@ -71,8 +72,10 @@ PROC
 LLWEAPONEX_Demolition_DisplaceTarget((GUIDSTRING)_Target, (CHARACTERGUID)_Source, (INTEGER)_IncludeLinked, (INTEGER)_ExcludeFollowers)
 AND
 NOT DB_LLWEAPONEX_Demolition_Temp_Displaced(_Target, _, _)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
 THEN
-DisplayText(_Target, "Displacement failed!");
+CharacterStatusText(_Target, "LLWEAPONEX_Status_DisplacementFailed");
 
 PROC
 ProcObjectTimerFinished(_Target, "LLWEAPONEX_Timers_Demolition_ClearDisplacement")

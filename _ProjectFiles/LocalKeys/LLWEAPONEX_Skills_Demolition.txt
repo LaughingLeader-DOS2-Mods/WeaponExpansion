@@ -14,5 +14,5 @@ Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_Description	Throw the tar charge at a
 Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_DisplayName	Throw Tar Charge
 Shout_LLWEAPONEX_RemoteMine_Add_Description	Retrieve a random remote charge from the <font color='#C7A758'>Demolitionist's Backpack</font>.
 Shout_LLWEAPONEX_RemoteMine_Add_DisplayName	Retrieve Remote Charge
-Target_LLWEAPONEX_RemoteMine_Detonate_Description	Detonate a remote charge. Can target mines in the world, or an object holding a mine.
+Target_LLWEAPONEX_RemoteMine_Detonate_Description	Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.<br>Only 5 mines max can be detonated in an inventory.</font>
 Target_LLWEAPONEX_RemoteMine_Detonate_DisplayName	Detonate Remote Charge

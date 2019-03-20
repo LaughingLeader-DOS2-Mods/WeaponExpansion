@@ -1,8 +1,18 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_LLWEAPONEX_RemoteMines_Templates("Todo");
+LLWEAPONEX_RemoteMines_InitSettings();
 KBSECTION
+
+PROC
+LLWEAPONEX_RemoteMines_InitSettings()
+THEN
+DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Breach_55cf7240-33d4-41a6-8d64-528d6fdc9d1d");
+DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Displacement_0dc36b1c-278d-4c88-9b24-8d4d5dd685fc");
+DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Explosive_9723e927-785b-4fe9-91e7-a8ad1af30716");
+DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_PoisonGas_c4c1b48a-678a-45b4-b8e3-13fe918b5fba");
+DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Shrapnel_2886439a-60c0-4557-8062-9c55fb103d47");
+DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Tar_c1707573-e520-4513-96dd-8bd459a9f8c1");
 
 IF
 CanPickupItem(_Player, _RemoteMine, _)
@@ -150,7 +160,7 @@ ItemGetAmount(_RemoteMine, _Amount)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_12_Demolition_RemoteMines:DetonateMines] Detonating mine with total amount [",_Amount,"].");
 LLWEAPONEX_RemoteMines_SetOwner(_Source, _RemoteMine); // Failsafe
-SetVarInteger(_RemoteMine, "LLWEAPONEX_Mine_Amount", _Amount);
+LLWEAPONEX_SetItemAmount(_RemoteMine, _Amount);
 CharacterItemSetEvent(_Target, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Character");
 LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 250, "LLWEAPONEX_Timers_RemoteMines_NextDetonation", "LLWEAPONEX_RemoteMines_StartNextDetonation");
 
@@ -163,38 +173,44 @@ _Count <= 0
 THEN
 NOT DB_LLWEAPONEX_RemoteMines_Temp_DetonationCount(_Target, _Source, _Count);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_12_Demolition_RemoteMines:DetonateMines] Detonating done.");
+//END_REGION
 
 IF
 ItemStatusChange(_RemoteMine, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Source)
 AND
 IsTagged(_RemoteMine, "LLWEAPONEX_RemoteMine", 1)
-AND
-ItemGetAmount(_RemoteMine, _Amount)
 THEN
-SetVarInteger(_RemoteMine, "LLWEAPONEX_Mine_Amount", _Amount);
+LLWEAPONEX_SetItemAmount(_RemoteMine);
 LLWEAPONEX_RemoteMines_SetOwner(_Source, _RemoteMine);
 CharacterItemSetEvent(_Source, _RemoteMine, "LLWEAPONEX_RemoteMine_DetonationStatus");
 
+//REGION CONTAINER_DETONATION
 QRY
 LLWEAPONX_RemoteMines_QRY_RemoteMineIsInContainer((ITEMGUID)_Target, (CHARACTERGUID)_Source)
 AND
 DB_LLWEAPONEX_RemoteMines_Templates(_Template)
 AND
 ItemTemplateIsInContainer(_Target, _Template, _Count)
+AND
+_Count > 0
 THEN
 LLWEAPONEX_RemoteMines_Internal_AddToContainerCount(_Target, _Source, _Count);
+LeaderLog_LogIntWithString("DEBUG", "[LLWEAPONEX_12_Demolition_RemoteMines:QRY:RemoteMineIsInContainer] Mine template [",_Template,"] has count [",_Count,"] in a container.");
 
 PROC
 LLWEAPONEX_RemoteMines_Internal_AddToContainerCount((ITEMGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_Count)
 AND
 DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _LastCount)
+AND
+IntegerSum(_LastCount, _Count, _NextCount)
 THEN
 NOT DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _LastCount);
+DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _NextCount);
 
 PROC
 LLWEAPONEX_RemoteMines_Internal_AddToContainerCount((ITEMGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_Count)
 AND
-_Count > 0
+NOT DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _)
 THEN
 DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _Count);
 
@@ -207,11 +223,12 @@ IntegerMin(_Count, 5, _ClampedCount)
 THEN
 NOT DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _Count);
 DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _ClampedCount);
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_12_Demolition_RemoteMines:Internal:ClampContainerCount] Blowing up [",_ClampedCount,"] mines in container.");
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_REMOTEMINE_DETONATE", (CHARACTERGUID)_Source)
 AND
-NOT DB_LLWEAPONEX_RemoteMines_Temp_DetonatingInventory(_, _Target)
+NOT DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _, _)
 AND
 ObjectExists(_Target, 1)
 AND
@@ -256,7 +273,7 @@ DB_LLWEAPONEX_RemoteMines_Temp_ContainerDetonationCount(_Target, _Source, _NextC
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_12_Demolition_RemoteMines:DetonationDone] Detonating mines in inventory with total amount [",_Amount,"].");
 LLWEAPONEX_RemoteMines_SetOwner(_Source, _RemoteMine); // Failsafe
 SetVarObject(_RemoteMine, "LLWEAPONEX_Mine_Inventory", _Target);
-SetVarInteger(_RemoteMine, "LLWEAPONEX_Mine_Amount", _Amount);
+LLWEAPONEX_SetItemAmount(_RemoteMine, _Amount);
 CharacterItemSetEvent(_Source, _RemoteMine, "LLWEAPONEX_RemoteMine_StartDetonation_Container");
 
 IF

@@ -9,10 +9,10 @@ INIT
 	//Dynamic/Important Vars
 	CHARACTER:%LLWEAPONEX_Mine_Owner = null
 	ITEM:%LLWEAPONEX_Mine_Inventory = null
-	INT:%LLWEAPONEX_Mine_Amount = 1
 	
 	//State Vars
 	INT:%LLWEAPONEX_Mine_Exploding = 0
+	INT:%LLWEAPONEX_Mine_Animating = 0
 	
 	//Temp Vars
 	INT64:%LLWEAPONEX_Mine_LoopFXHandle = null
@@ -116,7 +116,7 @@ ACTIONS
 	IF "c1"
 		IsEqual(_Skill, Projectile_LLWEAPONEX_RemoteMine_Displacement)
 	THEN
-		CallFunction("LLWEAPONEX_RemoteMine_PrepareDisplacement")
+		CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_RemoteMine_PrepareDisplacement")
 	ENDIF
 	
 	IF "!c1"
@@ -132,7 +132,8 @@ ACTIONS
 		SetVar(__Me, "LLWEAPONEX_Demolition_BreachPosition", %LLWEAPONEX_Mine_ExplodePos)
 		CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_Demolition_StartBreach")
 	ENDIF
-	ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+	//ItemEvent(__Me, "LLWEAPONEX_RemoteMine_DetonationDone")
+	CharacterItemEvent(%LLWEAPONEX_Mine_Owner, __Me, "LLWEAPONEX_RemoteMine_DetonationDone")
 
 EVENT LLWEAPONEX_RemoteMine_Destroying
 VARS
@@ -179,13 +180,14 @@ ACTIONS
 
 BEHAVIOUR
 
-REACTION LLWEAPONEX_RemoteMine_InWorld,999
+REACTION LLWEAPONEX_RemoteMine_InWorld,998
 USAGE ALL
-CHECK "c1&!c2&!c3&!c4"
+CHECK "c1&!c2&!c3&!c4&!c5"
 	IsActive(__Me)
 	ItemIsInInventory(__Me)
 	IsTagged(__Me, "LLWEAPONEX_RemoteMine_Ready")
 	IsEqual(%LLWEAPONEX_Mine_Exploding, 1)
+	ItemIsDestroyed(__Me)
 ACTIONS
 	SetTag(__Me, "LLWEAPONEX_RemoteMine_Ready")
 IF "!c1&!c2&c3"
@@ -193,5 +195,13 @@ IF "!c1&!c2&c3"
 	IsEqual(%LLWEAPONEX_Mine_ActiveLoopEffect, "")
 	IsEqual(%LLWEAPONEX_Mine_LoopFXHandle, null)
 THEN
-	ItemPlayLoopEffect(%LLWEAPONEX_Mine_LoopFXHandle, __Me, %LLWEAPONEX_Mine_ActiveLoopEffect)
-ENDIF
+
+REACTION LLWEAPONEX_RemoteMine_InWorld,999
+USAGE ALL
+CHECK "(c1|c2)&!c3"
+	IsEqual(%LLWEAPONEX_Mine_Exploding, 1)
+	ItemHasStatus(__Me, LLWEAPONEX_REMOTEMINE_DETONATE)
+	IsEqual(%LLWEAPONEX_Mine_Animating, 1)
+ACTIONS
+	ItemPlayAnimation("detonate")
+	Set(%LLWEAPONEX_Mine_Animating, 1)
