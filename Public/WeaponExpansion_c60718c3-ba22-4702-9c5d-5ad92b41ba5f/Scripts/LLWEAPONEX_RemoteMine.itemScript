@@ -195,8 +195,10 @@ IF "!c1&!c2&c3"
 	IsEqual(%LLWEAPONEX_Mine_ActiveLoopEffect, "")
 	IsEqual(%LLWEAPONEX_Mine_LoopFXHandle, null)
 THEN
+	ItemPlayLoopEffect(%LLWEAPONEX_Mine_LoopFXHandle, __Me, %LLWEAPONEX_Mine_ActiveLoopEffect)
+ENDIF
 
-REACTION LLWEAPONEX_RemoteMine_InWorld,999
+REACTION LLWEAPONEX_RemoteMine_PlayDetonateAnim,999
 USAGE ALL
 CHECK "(c1|c2)&!c3"
 	IsEqual(%LLWEAPONEX_Mine_Exploding, 1)
