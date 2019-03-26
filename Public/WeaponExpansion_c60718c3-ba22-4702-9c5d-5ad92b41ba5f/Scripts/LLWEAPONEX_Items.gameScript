@@ -45,3 +45,21 @@ THEN
 ELSE
 	ItemEvent(_Shield, "LLWEAPONEX_DualShields_CombatShieldNotFound")
 ENDIF
+
+EVENT LLWEAPONEX_Blunderbuss_Explode
+VARS
+	CHARACTER:_Character
+	FLOAT3:_Pos
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_Blunderbuss_ExplodeAtPosition")
+ACTIONS
+IF "c1&c2&!c3"
+	CharacterGetStat(_LevelF, _Character, Level)
+	GetVar(_Pos, _Character, "LLWEAPONEX_Blunderbuss_AttackPosition")
+	IsEqual(_Pos, null)
+THEN
+	Cast(_Level, _LevelF)
+	ExplodeAt(_Pos, Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode, _Level, _Character)
+ENDIF

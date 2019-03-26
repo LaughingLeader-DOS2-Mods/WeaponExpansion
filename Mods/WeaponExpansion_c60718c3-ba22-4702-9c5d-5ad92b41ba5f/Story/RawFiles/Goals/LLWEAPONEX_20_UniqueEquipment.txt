@@ -218,6 +218,38 @@ THEN
 NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
 //END_REGION
 
+//REGION BLUNDERBUSS
+IF
+//ItemTemplateEquipped("", _Character)
+CharacterStatusAttempt(_Character, "LLWEAPONEX_BLUNDERBUSS_EQUIPPED", _)
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
+
+IF
+//ItemTemplateUnEquipped("", _Character)
+CharacterStatusRemoved(_Character, "LLWEAPONEX_BLUNDERBUSS_EQUIPPED", _)
+AND
+NOT LLWEAPONEX_QRY_WeaponTypeEquipped(_Character, "LLWEAPONEX_Blunderbuss")
+THEN
+//LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion", 1250);
+
+PROC
+LLWEAPONEX_Blunderbuss_OnAttackAtPosition((CHARACTERGUID)_Character, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+GetDistanceToPosition(_Character, _x, _y, _z, _Dist)
+AND
+RealProduct(_Dist, 85.0, _DelayR)
+AND
+Integer(_DelayR, _DelayInt)
+AND
+IntegerSum(_DelayInt, 300, _Delay)
+AND
+IntegerMax(_Delay, 1000, _DelayClamped)
+THEN
+SetVarFloat3(_Character, "LLWEAPONEX_Blunderbuss_AttackPosition", _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Character, _DelayClamped, "LLWEAPONEX_Timers_Blunderbuss_ExplodeAtPosition", "LLWEAPONEX_Blunderbuss_ExplodeAtPosition");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

@@ -12,6 +12,21 @@ SysClear("DB_Origins", 1);
 DB_Origins((CHARACTERGUID)S_Player_LLWEAPONEX_WeaponMaster_2842603d-a263-4f65-a164-4a2391afe349);
 
 IF
+RegionStarted("FJ_FortJoy_Main")
+AND
+QueryOnlyOnce("LLWEAPONEX_Debug_LeaderGold")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+CharacterGetReservedUserID(_Host, _UserID)
+AND
+GetUserName(_UserID, _Username)
+AND
+StringContains(_Username, "Leader", 1)
+THEN
+CharacterAddGold(_Host, 9999);
+
+IF
 RegionStarted("TestLevel_LL_WeaponExpansion")
 THEN
 GoalCompleted;

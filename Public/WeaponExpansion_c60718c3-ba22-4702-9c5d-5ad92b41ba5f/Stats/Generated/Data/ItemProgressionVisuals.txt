@@ -1620,11 +1620,11 @@ add levelgroup 0,0,"All"
 add rootgroup "5577d7f7-697f-4d1b-904e-550827d29e4a",""
 add namegroup "WPN_LLWEAPONEX_BattleBook","",""
 
-new itemgroup "WPN_LLWEAPONEX_HandCrossbow"
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 
 add levelgroup 0,0,"All"
-add rootgroup "692a4576-661e-466b-909e-7a4bccb28ed8",""
-add namegroup "Crossbow","",""
+add rootgroup "507801c0-4c6b-4b39-9aed-13fcd0962dd9",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A","",""
 
 new itemgroup "WPN_LLWEAPONEX_HandCrossbow_Crafted_Lizards_A"
 
