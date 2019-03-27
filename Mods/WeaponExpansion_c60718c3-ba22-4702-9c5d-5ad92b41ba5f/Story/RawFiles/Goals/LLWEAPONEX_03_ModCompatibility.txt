@@ -27,7 +27,6 @@ DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","LLWEAPONEX_Script
 PROC
 LLWEAPONEX_ModCompatibility_InitMimicrySettings()
 THEN
-DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_ShieldToss_Returned");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_ThrowWeapon");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Effect");
@@ -42,6 +41,14 @@ DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Remote
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_CopyLastSkill");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_RemoteMine_Detonate");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Target_LLWEAPONEX_Torment_ClaimSoul");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_RemoteMine_Breach_Knockback");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Base");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Breach");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonGas");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel");
+DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Tar");
 
 PROC
 LLWEAPONEX_ModCompatibility_Internal_CompileErrorFix_VSCode()
@@ -75,6 +82,25 @@ THEN
 DB_Mimicry_BlockWeaponMimicking(_Item);
 //END_REGION
 
+//REGION MIMICRY_MIMICKING_SKILLS
+PROC
+Mimicry_SetBasicAttackMimickingSkill((CHARACTERGUID)_Mime, (CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Action)
+AND
+NOT DB_Mimicry_Mimicking_UseModAttackSkill(_Mime, _Caster, _Target, _Action, _)
+AND
+LeaderLib_Helper_QRY_HasTaggedWeapon(_Mime, "LLWEAPONEX_Greatbow")
+THEN
+DB_Mimicry_Mimicking_UseModAttackSkill(_Mime, _Caster, _Target, _Action, "Projectile_LLWEAPONEX_MimicGreatBowAttack");
+
+PROC
+Mimicry_SetBasicAttackMimickingSkill((CHARACTERGUID)_Mime, (CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Action)
+AND
+NOT DB_Mimicry_Mimicking_UseModAttackSkill(_Mime, _Caster, _Target, _Action, _)
+AND
+LeaderLib_Helper_QRY_HasTaggedWeapon(_Mime, "LLWEAPONEX_Blunderbuss")
+THEN
+DB_Mimicry_Mimicking_UseModAttackSkill(_Mime, _Caster, _Target, _Action, "Projectile_LLWEAPONEX_MimicBlunderbussAttack");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

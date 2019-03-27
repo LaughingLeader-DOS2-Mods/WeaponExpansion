@@ -10,6 +10,7 @@ CharacterKilledBy(_Enemy, _, _Player)
 AND
 DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Player)
 THEN
+CharacterGiveReward(_Player, "ST_LLWEAPONEX_FreeGrenades", 1);
 LLWEAPONEX_Demolition_AddCharge(_Player);
 ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated");
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_RemoteMines_ResetJustDetonated", 500);

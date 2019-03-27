@@ -1,0 +1,9 @@
+INIT
+	ITEM:__Me
+	
+EVENTS
+EVENT LLWEAPONEX_Cannonball_Init
+ON
+	OnInit()
+ACTIONS
+	ItemApplyStatus(__Me, LLWEAPONEX_CANNONBALL_DETECT_NEAR, -1, 0, __Me)

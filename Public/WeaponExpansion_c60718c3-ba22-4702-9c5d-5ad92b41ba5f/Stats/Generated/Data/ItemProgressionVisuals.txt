@@ -1038,15 +1038,55 @@ add namegroup "WPN_LLWEAPONEX_Bokken_2H_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Rapier_1H_A"
 
-add levelgroup 0,0,"All"
+add levelgroup 1,30,"Common"
 add rootgroup "703a1bfe-5f3b-48d2-85ea-ea92e831c196",""
-add namegroup "WPN_LLWEAPONEX_Rapier_1H","",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "703a1bfe-5f3b-48d2-85ea-ea92e831c196",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "703a1bfe-5f3b-48d2-85ea-ea92e831c196",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "703a1bfe-5f3b-48d2-85ea-ea92e831c196",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Epic","",""
+
+add levelgroup 1,30,"Legendary"
+add rootgroup "703a1bfe-5f3b-48d2-85ea-ea92e831c196",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Epic","Cool",""
+
+add levelgroup 1,30,"Divine"
+add rootgroup "703a1bfe-5f3b-48d2-85ea-ea92e831c196",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Epic","Cool",""
 
 new itemgroup "WPN_LLWEAPONEX_Rapier_1H_B"
 
-add levelgroup 0,0,"All"
+add levelgroup 1,30,"Common"
 add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
-add namegroup "WPN_LLWEAPONEX_Rapier_1H","",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Epic","",""
+
+add levelgroup 1,30,"Legendary"
+add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Epic","",""
+
+add levelgroup 1,30,"Divine"
+add rootgroup "5caddad9-a2d1-4e4e-95e6-0c0ff49705c3",""
+add namegroup "WPN_LLWEAPONEX_Rapier_1H_Epic","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
 

@@ -243,12 +243,83 @@ RealProduct(_Dist, 85.0, _DelayR)
 AND
 Integer(_DelayR, _DelayInt)
 AND
-IntegerSum(_DelayInt, 300, _Delay)
+IntegerSum(_DelayInt, 255, _Delay)
 AND
 IntegerMax(_Delay, 1000, _DelayClamped)
 THEN
 SetVarFloat3(_Character, "LLWEAPONEX_Blunderbuss_AttackPosition", _x, _y, _z);
 LeaderLib_Timers_StartObjectTimer(_Character, _DelayClamped, "LLWEAPONEX_Timers_Blunderbuss_ExplodeAtPosition", "LLWEAPONEX_Blunderbuss_ExplodeAtPosition");
+
+IF
+//CharacterUsedSkill(_Player, "Projectile_LLWEAPONEX_Blunderbuss_CannonLaunch", _, _)
+CharacterUsedSkillAtPosition(_Player, _tx, _ty, _tz, "Projectile_LLWEAPONEX_Blunderbuss_CannonLaunch", _, _)
+THEN
+DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_WaitingOnSpawn(_Player, _tx, _ty, _tz);
+
+IF
+//CharacterUsedSkill(_Player, "Projectile_LLWEAPONEX_Blunderbuss_CannonLaunch", _, _)
+CharacterUsedSkillOnTarget(_Player, _Target, "Projectile_LLWEAPONEX_Blunderbuss_CannonLaunch", _, _)
+AND
+NOT DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_WaitingOnSpawn(_Player, _, _, _)
+AND
+GetPosition(_Target, _tx, _ty, _tz)
+THEN
+DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_WaitingOnSpawn(_Player, _tx, _ty, _tz);
+
+IF
+StoryEvent(_Object, "LLWEAPONEX_Blunderbuss_CannonLaunch_Start")
+AND
+ObjectExists(_Object, 1)
+AND
+ObjectIsItem((ITEMGUID)_Object, 1)
+AND
+DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_WaitingOnSpawn(_Player, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_WaitingOnSpawn(_Player, _tx, _ty, _tz);
+LLWEAPONEX_Blunderbuss_OnCannonLaunchStarted(_Player, _Object, _tx, _ty, _tz);
+
+PROC
+LLWEAPONEX_Blunderbuss_OnCannonLaunchStarted((CHARACTERGUID)_Player, (ITEMGUID)_MovingObject, (REAL)_tx, (REAL)_ty, (REAL)_tz)
+AND
+GetPosition(_MovingObject, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("LLWEAPONEX_S_Blunderbuss_RollingCannonball_50e78a59-0ede-481a-a70f-21fedf834d6f", _x, _y, _z, _Cannonball)
+THEN
+DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_Active(_Player, _Cannonball);
+ApplyStatus(_Cannonball, "LLWEAPONEX_CANNONBALL_DETECT_NEAR", -1.0, 0, _Player);
+ItemMoveToPosition(_Cannonball, _tx, _ty, _tz, 20.0, 60.0, "LLWEAPONEX_Blunderbuss_CannonLaunch_BallDone", 0);
+LeaderLib_Timers_StartObjectTimer(_Cannonball, 1500, "LLWEAPONEX_Timers_Blunderbuss_CannonLaunch_BallDone", "LLWEAPONEX_Blunderbuss_CannonLaunch_BallDone");
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_CANNONBALL_NEAR", (ITEMGUID)_Cannonball)
+AND
+DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_Active(_Player, _Cannonball)
+AND
+LeaderLib_Combat_QRY_IsEnemy(_Target, _Player)
+THEN
+CharacterCharacterSetEvent(_Player, _Target, "LLWEAPONEX_Bluderbuss_CannonLaunch_OnHit");
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_CANNONBALL_NEAR", (ITEMGUID)_Cannonball)
+AND
+DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_Active(_Player, _Cannonball)
+AND
+ItemIsDestructible(_Target, 1)
+AND
+ItemIsDestroyed(_Target, 0)
+AND
+_Target != _Cannonball
+THEN
+CharacterItemSetEvent(_Player, _Target, "LLWEAPONEX_Bluderbuss_CannonLaunch_OnHit");
+
+IF
+StoryEvent((ITEMGUID)_Cannonball, "LLWEAPONEX_Blunderbuss_CannonLaunch_BallDone")
+AND
+DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_Active(_Player, _Cannonball)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_CannonLaunch_Temp_Active(_Player, _Cannonball);
+ItemDestroy(_Cannonball);
+LeaderLib_Timers_CancelObjectTimer(_Cannonball, "LLWEAPONEX_Timers_Blunderbuss_CannonLaunch_BallDone");
 //END_REGION
 EXITSECTION
 

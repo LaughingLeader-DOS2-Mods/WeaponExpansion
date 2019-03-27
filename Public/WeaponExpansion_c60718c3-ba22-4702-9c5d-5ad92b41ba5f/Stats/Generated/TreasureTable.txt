@@ -685,6 +685,29 @@ object category "I_WPN_LLWEAPONEX_RemoteMine_Breach_Free",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_RemoteMines_Regular",1,1,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_FreeGrenades"
+new subtable "1,1"
+StartLevel "1"
+EndLevel "3"
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "4"
+EndLevel "8"
+object category "GrenadeEarly",2,0,0,0,0,0,0,0
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "9"
+EndLevel "11"
+object category "GrenadeMid",2,0,0,0,0,0,0,0
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+object category "GrenadeEarly",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "12"
+object category "GrenadeLate",3,0,0,0,0,0,0,0
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+object category "GrenadeEarly",1,0,0,0,0,0,0,0
+object category "GrenadeMid",1,0,0,0,0,0,0,0
+
 new treasuretable "LLWEAPONEX_CheatThrowingWeapons"
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0
