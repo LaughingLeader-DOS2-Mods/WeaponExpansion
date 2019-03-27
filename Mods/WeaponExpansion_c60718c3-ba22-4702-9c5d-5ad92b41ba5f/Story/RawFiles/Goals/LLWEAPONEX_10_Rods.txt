@@ -207,26 +207,26 @@ LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
 
 //Revert to offhand skill
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
-DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Player, _Rod, _MainhandSkill)
+DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Player, _Item, _MainhandSkill)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _Item)
+CharacterGetEquippedItem(_Player, "Weapon", _Mainhand)
 AND
-CharacterGetEquippedItem(_Player, "Shield", _Rod)
+CharacterGetEquippedItem(_Player, "Shield", _Item)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemEquipped(Weapon)] Reverting rod mainhand skill to offhand.");
-NOT DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Player, _Rod, _MainhandSkill);
+NOT DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Player, _Item, _MainhandSkill);
 //RemoveStatus(_Character, _MainhandSkill);
 CharacterRemoveSkill(_Player, _MainhandSkill);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Rod, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Item, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
-DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Player, _Rod)
+DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Player, _Item)
 AND
-NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Rod) // Assume it's the same type as one equipped
+NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item) // Assume it's the same type as one equipped
 AND
 DB_LLWEAPONEX_Rods_Temp_RemoveStatusWhenUnequipped(_Player, _OtherRod, _Status)
 AND
@@ -234,13 +234,13 @@ GetVarString(_OtherRod, "LLWEAPONEX_Rod_Skill", _MainhandSkill)
 AND
 GetVarString(_OtherRod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill)
 THEN
-NOT DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Player, _Rod);
+NOT DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Player, _Item);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemEquipped] Rod status was never applied. Assuming it shares the same type as the rod equipped.");
-SetVarString(_Rod, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
-SetVarString(_Rod, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
+SetVarString(_Item, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
+SetVarString(_Item, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Rod", 1)
 THEN

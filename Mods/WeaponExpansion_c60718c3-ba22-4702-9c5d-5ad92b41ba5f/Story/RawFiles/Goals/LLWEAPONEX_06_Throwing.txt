@@ -719,40 +719,40 @@ WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Fire_1f3bc0cd-6c5f-4291-812b-50a92bba3adb
 WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb
 WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435
 */
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53")
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
-RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Air_f4db8570-4a0b-4292-bb36-f66fb2d8b0c3", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Air_f4db8570-4a0b-4292-bb36-f66fb2d8b0c3")
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
-RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Fire_1f3bc0cd-6c5f-4291-812b-50a92bba3adb", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Fire_1f3bc0cd-6c5f-4291-812b-50a92bba3adb")
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
-RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb")
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
-RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435")
 AND
-NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _, _, _)
+NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
-RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
+RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 //END_REGION
 
 //REGION BALRIN_AXE_MAIN

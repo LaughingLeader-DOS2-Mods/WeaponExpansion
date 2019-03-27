@@ -34,47 +34,35 @@ LLWEAPONEX_OniGauntlet_InitSettings();
 //END_REGION
 
 //REGION ONI_GAUNTLET_EQUIPPING
-IF
-ItemTemplateUnEquipped("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
 THEN
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Player);
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Character);
 
-IF
-ItemTemplateUnEquipped("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
 THEN
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Player);
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Character);
 
-IF
-ItemTemplateUnEquipped("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
 THEN
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Player);
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Character);
 
-IF
-ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939", _Player)
-AND
-CharacterGetEquippedItem(_Player, "Gloves", (ITEMGUID)_Item)
-AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
 THEN
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Player, _Item);
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Character, _Item);
 
-IF
-ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe", _Player)
-AND
-CharacterGetEquippedItem(_Player, "Gloves", (ITEMGUID)_Item)
-AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
 THEN
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Player, _Item);
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Character, _Item);
 
-IF
-ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a", _Player)
-AND
-CharacterGetEquippedItem(_Player, "Gloves", (ITEMGUID)_Item)
-AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
 THEN
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Player, _Item);
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Character, _Item);
 
 PROC
 LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)

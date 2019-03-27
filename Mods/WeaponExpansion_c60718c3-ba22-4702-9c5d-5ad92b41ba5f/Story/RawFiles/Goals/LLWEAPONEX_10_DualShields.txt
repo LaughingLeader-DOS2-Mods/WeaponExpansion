@@ -120,7 +120,7 @@ LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.Combat
 LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
@@ -277,7 +277,7 @@ LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield(_Shield);
 
 //REGION UNEQUIPPED
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
@@ -291,7 +291,7 @@ DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Item, _CombatShield);
 ItemToInventory(_CombatShield, _Item);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_CombatShield", 1)
 AND

@@ -26,7 +26,7 @@ DB_LLWEAPONEX_Quivers_RechargeStatus("Shout_LLWEAPONEX_Quiver_DrawArrow", "LLWEA
 
 //REGION UNEQUIPPED_EVENT
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Quiver", 1)
 THEN
@@ -66,7 +66,7 @@ InventoryLaunchTagIterator(_Player, "LLWEAPONEX_Quiver_TemporaryArrow", "", "LLW
 
 //REGION EQUIPPED_EVENT
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Quiver", 1)
 THEN

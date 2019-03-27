@@ -21,10 +21,10 @@ LLWEAPONEX_Uniques_InitSettings();
 //END_REGION
 
 //REGION BEHOLDER
-IF
-ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616", _Player)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 THEN
-DB_LLWEAPONEX_Uniques_BeholderEquipped(_Player);
+DB_LLWEAPONEX_Uniques_BeholderEquipped(_Character);
 
 IF
 CharacterStatusApplied(_Player, "UNSHEATHED", _)
@@ -42,8 +42,8 @@ THEN
 PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.BeholderUnsheathed");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Sheathed] Stopping Beholder unsheathed loop effect on character.");
 
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616", _Player)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 AND
 DB_LLWEAPONEX_Uniques_BeholderEquipped(_Player)
 THEN
@@ -130,8 +130,8 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 14);
 //END_REGION
 
 //REGION MURAMASA
-IF
-ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a", _Character)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaEquipped(_Character);
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
@@ -145,8 +145,8 @@ _HP <= 50
 THEN
 ApplyStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, 0, _Character);
 
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a", _Character)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Character);
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion", 500);
@@ -160,13 +160,13 @@ RemoveStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
 //END_REGION
 
 //REGION DEMON_GAUNTLET
-IF
-ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53", _Character)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
 
-IF
-ItemTemplateUnEquipped("EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53", _Character)
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
 LLWEAPONEX_Uniques_OnDemonGauntletUnequipped(_Character);
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion", 500);
@@ -219,17 +219,13 @@ NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
 //END_REGION
 
 //REGION BLUNDERBUSS
-IF
-//ItemTemplateEquipped("", _Character)
-CharacterStatusAttempt(_Character, "LLWEAPONEX_BLUNDERBUSS_EQUIPPED", _)
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
 
-IF
-//ItemTemplateUnEquipped("", _Character)
-CharacterStatusRemoved(_Character, "LLWEAPONEX_BLUNDERBUSS_EQUIPPED", _)
-AND
-NOT LLWEAPONEX_QRY_WeaponTypeEquipped(_Character, "LLWEAPONEX_Blunderbuss")
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
 //LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion", 1250);

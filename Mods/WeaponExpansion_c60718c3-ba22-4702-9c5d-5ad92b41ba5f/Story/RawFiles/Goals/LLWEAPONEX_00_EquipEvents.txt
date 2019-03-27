@@ -11,13 +11,15 @@ AND
 NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+AND
+GetTemplate(_Item, _Template)
 THEN
-LLWEAPONEX_OnItemEquipped(_PLayer, _Item);
+LLWEAPONEX_OnItemEquipped(_PLayer, _Item, _Template);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
 THEN
 LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_AnyWeaponEquipped");
 
@@ -29,13 +31,15 @@ AND
 NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+AND
+GetTemplate(_Item, _Template)
 THEN
-LLWEAPONEX_OnItemUnEquipped(_PLayer, _Item);
+LLWEAPONEX_OnItemUnEquipped(_PLayer, _Item, _Template);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
 AND
 NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Player)
 THEN
@@ -54,8 +58,10 @@ AND
 _Item != NULL_00000000-0000-0000-0000-000000000000
 AND
 NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+GetTemplate(_Item, _Template)
 THEN
-LLWEAPONEX_OnItemEquipped(_Player, _Item);
+LLWEAPONEX_OnItemEquipped(_Player, _Item, _Template);
 //END_REGION
 EXITSECTION
 

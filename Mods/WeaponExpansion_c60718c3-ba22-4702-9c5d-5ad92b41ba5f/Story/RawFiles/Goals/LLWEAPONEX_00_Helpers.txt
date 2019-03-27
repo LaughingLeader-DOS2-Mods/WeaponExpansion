@@ -27,6 +27,17 @@ THEN
 DB_NOOP(1);
 
 QRY
+LLWEAPONEX_QRY_ItemIsWeapon((ITEMGUID)_Item, (STRING)_Template)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+StringContains(_Template, "Shield", 0)
+AND
+StringContains(_Template, "WPN_", 1)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Player)
 AND
 CharacterGetEquippedItem(_Player, "Weapon", NULL_00000000-0000-0000-0000-000000000000)

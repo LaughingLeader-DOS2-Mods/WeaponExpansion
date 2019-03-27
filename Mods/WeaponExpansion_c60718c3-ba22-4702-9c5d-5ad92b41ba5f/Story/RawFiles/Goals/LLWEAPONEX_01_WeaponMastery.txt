@@ -523,7 +523,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:InitMasteryVariables] Weapon M
 //REGION EQUIPPING
 //Mastery weapon equipped
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND

@@ -123,42 +123,38 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 THEN
 LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, "LLWEAPONEX_Grimoire");
-LLWEAPONEX_Grimoire_OnGrimoireUnEquipped(_Player, _Item);
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped(_Player, _Item, _Template);
 
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
-AND
-GetTemplate(_Item, _Template)
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Grimoire_Tags(_Template, _Tag)
 THEN
 LLWEAPONEX_ToggleSettings_OnTagRemoved(_Character, _Tag);
 
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 NOT LLWEAPONEX_Grimoire_QRY_GrimoireIsEquipped(_Character)
 THEN
 ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireEquipped");
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
 THEN
 ObjectSetFlag(_Player, "LLWEAPONEX_GrimoireEquipped", 0);
-LLWEAPONEX_Grimoire_OnGrimoireEquipped(_Player, _Item);
+LLWEAPONEX_Grimoire_OnGrimoireEquipped(_Player, _Item, _Template);
 LLWEAPONEX_ToggleSettings_OnTagAdded(_Player, "LLWEAPONEX_Grimoire");
 
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
-AND
-GetTemplate(_Item, _Template)
+LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Grimoire_Tags(_Template, _Tag)
 THEN
@@ -167,9 +163,7 @@ LLWEAPONEX_ToggleSettings_OnTagAdded(_Character, _Tag);
 
 //REGION UNEQUIPPED_STATUS_REMOVAL
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
-AND
-GetTemplate(_Item, _Template)
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveStatus(_Template, _Status)
 THEN
@@ -641,7 +635,7 @@ LLWEAPONEX_Grimoire_OnGrimoireSheathed_TransitionStart(_Character, _Item, _Templ
 ObjectClearFlag(_Character, "LLWEAPONEX_GrimoireOpened", 0);
 
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
 THEN
@@ -1429,9 +1423,7 @@ DB_NOOP(1);
 
 //REGION MIMICRY_GRIMOIRE_LAST_SKILL
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
-AND
-GetTemplate(_Item, "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc")
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc")
 AND
 DB_LLWEAPONEX_Grimoire_CopiedSkill(_Character, _Skill)
 THEN
