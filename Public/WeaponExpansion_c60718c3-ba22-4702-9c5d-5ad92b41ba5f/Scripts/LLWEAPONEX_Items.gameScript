@@ -46,7 +46,7 @@ ELSE
 	ItemEvent(_Shield, "LLWEAPONEX_DualShields_CombatShieldNotFound")
 ENDIF
 
-EVENT LLWEAPONEX_Blunderbuss_Explode
+EVENT LLWEAPONEX_Blunderbuss_Explode_Position
 VARS
 	CHARACTER:_Character
 	FLOAT3:_Pos
@@ -63,6 +63,40 @@ THEN
 	Cast(_Level, _LevelF)
 	ExplodeAt(_Pos, Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode, _Level, _Character)
 ENDIF
+
+EVENT LLWEAPONEX_Blunderbuss_Explode_Character
+VARS
+	CHARACTER:_Character
+	CHARACTER:_Target
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterCharacterEvent(_Character, _Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile")
+ACTIONS
+	Set(_Level, -1)
+IF "c1"
+	CharacterGetStat(_LevelF, _Character, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+	ExplodeAt(_Target, Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode, _Level, _Character)
+
+EVENT LLWEAPONEX_Blunderbuss_Explode_Item
+VARS
+	CHARACTER:_Character
+	ITEM:_Target
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterItemEvent(_Character, _Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile")
+ACTIONS
+	Set(_Level, -1)
+IF "c1"
+	CharacterGetStat(_LevelF, _Character, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+	ExplodeAt(_Target, Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode, _Level, _Character)
 
 EVENT LLWEAPONEX_Blunderbuss_CannonLaunch_Damage_Character
 VARS

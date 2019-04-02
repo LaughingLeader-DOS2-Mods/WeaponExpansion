@@ -4,6 +4,7 @@ INITSECTION
 
 KBSECTION
 
+/*
 IF
 CharacterStartAttackObject(_Target, _, _Character)
 AND
@@ -12,6 +13,7 @@ AND
 GetPosition(_Target, _x, _y, _z)
 THEN
 LLWEAPONEX_Blunderbuss_OnAttackAtPosition(_Character, _x, _y, _z);
+*/
 
 IF
 CharacterStartAttackPosition(_x, _y, _z, _, _Character)

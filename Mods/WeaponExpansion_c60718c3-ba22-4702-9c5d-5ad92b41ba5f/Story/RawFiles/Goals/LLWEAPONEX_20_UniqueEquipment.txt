@@ -230,6 +230,16 @@ THEN
 //LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion", 1250);
 
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_BLUNDERBUSS_HIT", (CHARACTERGUID)_Source)
+THEN
+CharacterCharacterSetEvent(_Source, _Character, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
+
+IF
+ItemStatusAttempt(_Item, "LLWEAPONEX_BLUNDERBUSS_HIT", (CHARACTERGUID)_Source)
+THEN
+CharacterItemSetEvent(_Source, _Item, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
+
 PROC
 LLWEAPONEX_Blunderbuss_OnAttackAtPosition((CHARACTERGUID)_Character, (REAL)_x, (REAL)_y, (REAL)_z)
 AND
@@ -239,9 +249,9 @@ RealProduct(_Dist, 85.0, _DelayR)
 AND
 Integer(_DelayR, _DelayInt)
 AND
-IntegerSum(_DelayInt, 255, _Delay)
+IntegerSum(_DelayInt, 245, _Delay)
 AND
-IntegerMax(_Delay, 1000, _DelayClamped)
+IntegerMax(_Delay, 950, _DelayClamped)
 THEN
 SetVarFloat3(_Character, "LLWEAPONEX_Blunderbuss_AttackPosition", _x, _y, _z);
 LeaderLib_Timers_StartObjectTimer(_Character, _DelayClamped, "LLWEAPONEX_Timers_Blunderbuss_ExplodeAtPosition", "LLWEAPONEX_Blunderbuss_ExplodeAtPosition");

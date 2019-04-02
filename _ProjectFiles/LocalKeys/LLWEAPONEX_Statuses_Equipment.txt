@@ -1,5 +1,5 @@
 LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item automatically levels up
-LLWEAPONEX_BLINDFOLD_EQUIPPED_Description	Character is wearing a blindfold.<br></font color='#FF0000'>-4m Range</font>
+LLWEAPONEX_BLINDFOLD_EQUIPPED_Description	Character is wearing a blindfold.<br></font color='#FF0000'>-1m Range</font>
 LLWEAPONEX_BLINDFOLD_EQUIPPED_DisplayName	Blindfolded
 LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand
 LLWEAPONEX_FINESSE_TO_INTELLIGENCE_DisplayName	Converts Finesse Bonuses to Intelligence

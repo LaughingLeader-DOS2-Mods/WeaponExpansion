@@ -165,6 +165,12 @@ add name "Two-handed Bokuto",""
 new namegroup "WPN_LLWEAPONEX_Bokken_2H_Preview"
 add name "Two-handed Bokuto",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A"
+add name "Pacifist's Wrath (1H)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_2H_A"
+add name "Pacifist's Wrath (2H)",""
+
 new namegroup "WPN_LLWEAPONEX_Rapier_1H_Normal"
 add name "Old Foil",""
 add name "Worn Estoc",""
