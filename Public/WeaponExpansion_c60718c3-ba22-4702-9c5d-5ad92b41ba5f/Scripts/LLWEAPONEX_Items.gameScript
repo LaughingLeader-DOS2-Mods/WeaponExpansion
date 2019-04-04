@@ -97,39 +97,3 @@ THEN
 	Cast(_Level, _LevelF)
 ENDIF
 	ExplodeAt(_Target, Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode, _Level, _Character)
-
-EVENT LLWEAPONEX_Blunderbuss_CannonLaunch_Damage_Character
-VARS
-	CHARACTER:_Player
-	CHARACTER:_Target
-	FLOAT:_LevelF
-	INT:_Level
-ON
-	OnCharacterCharacterEvent(_Player, _Target, "LLWEAPONEX_Bluderbuss_CannonLaunch_OnHit")
-ACTIONS
-IF "c1"
-	CharacterGetStat(_LevelF, _Player, Level)
-THEN
-	Cast(_Level, _LevelF)
-ELSE
-	Set(_Level, -1)
-ENDIF
-	ExplodeAt(_Target, Projectile_LLWEAPONEX_CannonLaunch_PassThrough_Explode, _Level, _Player)
-
-EVENT LLWEAPONEX_Blunderbuss_CannonLaunch_Damage_Item
-VARS
-	CHARACTER:_Player
-	ITEM:_Target
-	FLOAT:_LevelF
-	INT:_Level
-ON
-	OnCharacterItemEvent(_Player, _Target, "LLWEAPONEX_Bluderbuss_CannonLaunch_OnHit")
-ACTIONS
-IF "c1"
-	CharacterGetStat(_LevelF, _Player, Level)
-THEN
-	Cast(_Level, _LevelF)
-ELSE
-	Set(_Level, -1)
-ENDIF
-	ExplodeAt(_Target, Projectile_LLWEAPONEX_CannonLaunch_PassThrough_Explode, _Level, _Player)

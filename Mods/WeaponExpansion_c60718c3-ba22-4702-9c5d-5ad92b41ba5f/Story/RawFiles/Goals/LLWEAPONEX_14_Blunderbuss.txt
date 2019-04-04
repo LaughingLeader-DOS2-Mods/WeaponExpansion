@@ -1,0 +1,98 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION EQUIP_EVENTS
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
+THEN
+//LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion", 1250);
+//END_REGION
+
+//REGION BASIC_ATTACK
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_HIT", (CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, (GUIDSTRING)_Target)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, _Target);
+LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Blunderbuss_ClearBasicAttackEntry");
+CharacterCharacterSetEvent(_Source, (CHARACTERGUID)_Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
+
+IF
+ItemStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_HIT", (CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, (GUIDSTRING)_Target)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, _Target);
+LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Blunderbuss_ClearBasicAttackEntry");
+CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Character, (GUIDSTRING)_Target, "LLWEAPONEX_Blunderbuss_ClearBasicAttackEntry")
+AND
+DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Character, _Target)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Character, _Target);
+
+PROC
+LLWEAPONEX_Blunderbuss_OnAttackAtPosition((CHARACTERGUID)_Character, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+GetDistanceToPosition(_Character, _x, _y, _z, _Dist)
+AND
+RealProduct(_Dist, 80.0, _DelayR)
+AND
+Integer(_DelayR, _DelayInt)
+AND
+IntegerSum(_DelayInt, 245, _Delay)
+AND
+IntegerMax(_Delay, 950, _DelayClamped)
+THEN
+SetVarFloat3(_Character, "LLWEAPONEX_Blunderbuss_AttackPosition", _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Character, _DelayClamped, "LLWEAPONEX_Timers_Blunderbuss_ExplodeAtPosition", "LLWEAPONEX_Blunderbuss_ExplodeAtPosition");
+//END_REGION
+
+//REGION SKILLS
+IF
+SkillCast(_Player, "Zone_LLWEAPONEX_Blunderbuss_Cannonball", _, _)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Player, 300, "LLWEAPONEX_Timers_Blunderbuss_Cannonball_Explode", "LLWEAPONEX_Blunderbuss_Cannonball_Explode");
+//END_REGION
+
+//REGION DUD
+IF
+CharacterItemEvent(_Caster, _Dud, "LLWEAPONEX_DelayedExplosive_Initialized")
+AND
+LeaderLib_Combat_QRY_IsActiveTurn(_Caster)
+THEN
+DB_LLWEAPONEX_Blunderbuss_Temp_Duds_SkipTurn((GUIDSTRING)_Caster);
+
+IF
+CharacterItemEvent(_Caster, _Dud, "LLWEAPONEX_DelayedExplosive_Initialized")
+AND
+CharacterIsInCombat(_Caster, 1)
+AND
+CombatGetIDForCharacter(_Caster, _CombatID)
+THEN
+SetVarInteger(_Dud, "LLWEAPONEX_CombatID", _CombatID);
+DB_LLWEAPONEX_Blunderbuss_Temp_Duds(_Caster, _Dud, _CombatID);
+
+IF
+StoryEvent((ITEMGUID)_Dud, "LLWEAPONEX_DelayedExplosive_Finished")
+AND
+DB_LLWEAPONEX_Blunderbuss_Temp_Duds(_Caster, _Dud, _CombatID)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_Duds(_Caster, _Dud, _CombatID);
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

@@ -16,11 +16,46 @@ LLWEAPONEX_Blunderbuss_OnAttackAtPosition(_Character, _x, _y, _z);
 */
 
 IF
+CharacterStartAttackObject(_Target, _, _Character)
+AND
+HasActiveStatus(_Character, "LLWEAPONEX_BLUNDERBUSS_EQUIPPED", 1)
+THEN
+DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Character, _Target);
+LeaderLib_Timers_StartObjectObjectTimer(_Character, _Target, 1500, "LLWEAPONEX_Timers_Blunderbuss_ClearBasicAttackEntry", "LLWEAPONEX_Blunderbuss_ClearBasicAttackEntry");
+
+IF
 CharacterStartAttackPosition(_x, _y, _z, _, _Character)
 AND
 HasActiveStatus(_Character, "LLWEAPONEX_BLUNDERBUSS_EQUIPPED", 1)
 THEN
 LLWEAPONEX_Blunderbuss_OnAttackAtPosition(_Character, _x, _y, _z);
+
+IF
+ObjectTurnEnded(_Object)
+AND
+DB_CombatObjects(_Object, _CombatID)
+AND
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_Duds_SkipTurn(_Object)
+AND
+DB_LLWEAPONEX_Blunderbuss_Temp_Duds(_Caster, _Dud, _CombatID)
+THEN
+SetStoryEvent(_Dud, "LLWEAPONEX_DelayedExplosive_Tick");
+
+//Don't count the player's turn after the dud is initially set.
+IF
+ObjectTurnEnded(_Object)
+AND
+DB_LLWEAPONEX_Blunderbuss_Temp_Duds_SkipTurn(_Object)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_Duds_SkipTurn(_Object);
+
+IF
+CombatEnded(_CombatID)
+AND
+DB_LLWEAPONEX_Blunderbuss_Temp_Duds(_Caster, _Dud, _CombatID)
+THEN
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_Duds(_Caster, _Dud, _CombatID);
+SetStoryEvent(_Dud, "LLWEAPONEX_DelayedExplosive_Explode");
 EXITSECTION
 
 ENDEXITSECTION

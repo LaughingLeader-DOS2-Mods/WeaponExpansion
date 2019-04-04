@@ -24,7 +24,7 @@ Shout_LLWEAPONEX_ZombifySelf_Description	Temporarily gain a few Zombie-like trai
 Target_LLWEAPONEX_Zombify_DisplayName	Zombify
 Target_LLWEAPONEX_Zombify_Description	Temporarily zombify an ally, granting them <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
-Projectile_LLWEAPONEX_Blunderbuss_Scattershot_DisplayName	Scattershot
-Projectile_LLWEAPONEX_Blunderbuss_Scattershot_Description	Fire 16 cannonballs in a [1] degree arc. Each cannonball deals [2] damage.
-Projectile_LLWEAPONEX_Blunderbuss_CannonLaunch_DisplayName	Cannon Launch
-Projectile_LLWEAPONEX_Blunderbuss_CannonLaunch_Description	Fire a massive rolling cannonball, dealing [1] to enemies it rolls through and knocking them down.
+Zone_LLWEAPONEX_Blunderbuss_Cannonball_DisplayName	<font color='#ff780b'>Lunatic's Cannonball</font>
+Zone_LLWEAPONEX_Blunderbuss_Cannonball_Description	Fire a massive, super-heated cannonball, dealing [1] to targets, knocking them down, and leaving behind a trail of <font color='#ff5b0b'>explosive fire clouds</font>.<br>At the end of the trail, the cannonball explodes for [2] in a [3] radius, applying <font color='#ff5b0b'>Necrofire</font> to targets hit for 1 turn.
+Projectile_LLWEAPONEX_Blunderbuss_LaunchDud_DisplayName	<font color='#ff780b'>Deadly Dud</font>
+Projectile_LLWEAPONEX_Blunderbuss_LaunchDud_Description	Launch a dud at a target position, dealing [1].<br><font color='#ffb526'>After any 3 turns in combat, the dud explodes for [2] in a [3] radius.</font><br><font color='#ff2626'>If the dud is destroyed before being fully armed, it deals [4] instead.</font>

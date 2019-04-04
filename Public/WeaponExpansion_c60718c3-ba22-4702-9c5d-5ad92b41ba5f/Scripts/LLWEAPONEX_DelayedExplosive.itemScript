@@ -1,0 +1,118 @@
+INIT
+	ITEM:__Me
+	
+	EXTERN SKILL:%LLWEAPONEX_Skill_Full = Projectile_EnemyFireball
+	EXTERN SKILL:%LLWEAPONEX_Skill_Destroyed = Projectile_IncarnateFireball
+	EXTERN SKILL:%LLWEAPONEX_Skill_Land = null
+	EXTERN INT:%LLWEAPONEX_DelayTurns = 1
+	EXTERN STRING:%LLWEAPONEX_InitEvent = "LLWEAPONEX_DelayedExplosive_Initialized"
+	EXTERN STRING:%LLWEAPONEX_Effect_Active = "LLWEAPONEX_FX_Skills_Blunderbuss_Dud_Overlay_Medium_01"
+	EXTERN STRING:%LLWEAPONEX_Effect_NearExploding = "LLWEAPONEX_FX_Skills_Blunderbuss_Dud_Overlay_NearExploding_01"
+	
+	CHARACTER:%LLWEAPONEX_Caster=null
+	INT:%LLWEAPONEX_Exploded=0
+	INT:%LLWEAPONEX_CombatID=0
+	INT:%LLWEAPONEX_TurnCountdown=0
+	INT64:%LLWEAPONEX_Effect_Handle=0
+EVENTS
+
+EVENT LLWEAPONEX_DelayedExplosive_Init
+ON
+	OnInit()
+ACTIONS
+	SetTag(__Me, "LLWEAPONEX_DelayedExplosive_Self")
+
+EVENT LLWEAPONEX_DelayedExplosive_Landed
+VARS 
+	INT:_HitObstacle
+	CHARACTER:_Caster
+ON
+	OnGrenadeLand(_HitObstacle, _Caster)
+ACTIONS
+	Set(%LLWEAPONEX_Caster, _Caster)
+	Set(%LLWEAPONEX_TurnCountdown, %LLWEAPONEX_DelayTurns)
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Skill_Land, null)
+THEN
+	ExplodeAt(__Me, %LLWEAPONEX_Skill_Land, -1, %LLWEAPONEX_Caster)
+ENDIF
+IF "c1"
+	IsInCombat(_Caster)
+THEN
+	CharacterItemEvent(_Caster, __Me, %LLWEAPONEX_InitEvent)
+ELSE
+	StartTimer("LLWEAPONEX_DelayedExplosive_Tick", 6.0, %LLWEAPONEX_DelayTurns)
+ENDIF
+	StartTimer("LLWEAPONEX_DelayedExplosive_ClearSelfTag", 1.0, 0)
+	
+EVENT LLWEAPONEX_DelayedExplosive_ClearSelfTag
+ON
+	OnTimer("LLWEAPONEX_DelayedExplosive_ClearSelfTag")
+ACTIONS
+	ClearTag(__Me, "LLWEAPONEX_DelayedExplosive_Self")
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Effect_Active, null)
+THEN
+	ItemPlayLoopEffect(%LLWEAPONEX_Effect_Handle, __Me, %LLWEAPONEX_Effect_Active)
+ENDIF
+
+//Prematurely exploded
+EVENT LLWEAPONEX_DelayedExplosive_Destroyed
+ON
+	OnItemDestroying(__Me)
+ACTIONS
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Exploded,1)
+THEN
+	//DisplayCombatInfoText(__Me, "Too soon!", 3.0)
+	ExplodeAt(__Me, %LLWEAPONEX_Skill_Destroyed, -1, %LLWEAPONEX_Caster)
+	Set(%LLWEAPONEX_Exploded,1)
+	ItemEvent(__Me, "LLWEAPONEX_DelayedExplosive_Finished")
+ENDIF
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Effect_Handle, null)
+THEN
+	StopLoopEffect(%LLWEAPONEX_Effect_Handle, 1)
+	Set(%LLWEAPONEX_Effect_Handle, null)
+ENDIF
+
+EVENT LLWEAPONEX_DelayedExplosive_Tick
+ON
+	OnTimer("LLWEAPONEX_DelayedExplosive_Tick")
+	OnItemEvent(__Me, "LLWEAPONEX_DelayedExplosive_Tick")
+	//OnCombatTick()
+ACTIONS
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Exploded,1)
+THEN
+	Subtract(%LLWEAPONEX_TurnCountdown, 1)
+	IF "c1&!c2"
+		IsEqual(%LLWEAPONEX_TurnCountdown, 1)
+		IsEqual(%LLWEAPONEX_Effect_NearExploding, null)
+	THEN
+		StopLoopEffect(%LLWEAPONEX_Effect_Handle)
+		ItemPlayLoopEffect(%LLWEAPONEX_Effect_Handle, __Me, %LLWEAPONEX_Effect_NearExploding)
+	ENDIF
+	IF "c1"
+		IsLessThen(%LLWEAPONEX_TurnCountdown, 1)
+	THEN
+		CallFunction("LLWEAPONEX_DelayedExplosive_Explode")
+	ENDIF
+ENDIF
+
+//When the full turns tick down, explode for the full damage
+EVENT LLWEAPONEX_DelayedExplosive_Complete
+ON
+	OnTimer("LLWEAPONEX_DelayedExplosive_Explode")
+	OnItemEvent(__Me, "LLWEAPONEX_DelayedExplosive_Explode")
+	OnFunction("LLWEAPONEX_DelayedExplosive_Explode")
+ACTIONS
+	//DisplayCombatInfoText(__Me, "Full damage!", 3.0)
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Exploded,1)
+THEN
+	ItemEvent(__Me, "LLWEAPONEX_DelayedExplosive_Finished")
+	Set(%LLWEAPONEX_Exploded,1)
+	ExplodeAt(__Me, %LLWEAPONEX_Skill_Full, -1, %LLWEAPONEX_Caster)
+	ItemDestroy(__Me)
+ENDIF

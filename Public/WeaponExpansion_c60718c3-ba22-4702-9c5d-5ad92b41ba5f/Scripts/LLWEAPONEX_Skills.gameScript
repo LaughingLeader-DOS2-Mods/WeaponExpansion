@@ -1,0 +1,36 @@
+INIT
+
+EVENTS
+
+EVENT LLWEAPONEX_Blunderbuss_Cannonball_Explode
+VARS
+	CHARACTER:_Player
+	FLOAT3:_Target
+	FLOAT3:_Pos
+	FLOAT:_LevelF
+	INT:_Level
+	STRING:_Str
+ON
+	//OnSkillCast(_Player, Zone_LLWEAPONEX_Blunderbuss_Cannonball)
+	OnCharacterEvent(_Player, "LLWEAPONEX_Blunderbuss_Cannonball_Explode")
+ACTIONS
+IF "c1"
+	CharacterGetStat(_LevelF, _Player, Level)
+THEN
+	Cast(_Level, _LevelF)
+ELSE
+	Set(_Level, -1)
+ENDIF
+IF "c1"
+	GetPosition(_Player, _Pos)
+THEN
+	GetForwardDirection(_Player, _Target)
+	Multiply(_Target, FLOAT:13.0) // 13m?
+	Add(_Target, _Pos)
+	ExplodeAt(_Target, Projectile_Blunderbuss_Cannonball_Explode, _Level, _Player)
+	//DisplayCombatInfoText(_Player, "Exploding?", 3.0)
+	//Print(_Str, "[LLWEAPONEX:Skills.gameScript:Cannonball] Exploding at position [1]. Player's pos: [2]", _Target, _Pos)
+	//SetVar(_Player, "LeaderLog_Type", STRING:"Debug")
+	//SetVar(_Player, "LeaderLog_Message", _Str)
+	//CharacterEvent(_Player, "LeaderLog_Commands_Log")
+ENDIF

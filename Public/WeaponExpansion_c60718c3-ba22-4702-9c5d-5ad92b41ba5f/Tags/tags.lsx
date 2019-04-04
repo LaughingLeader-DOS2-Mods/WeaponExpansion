@@ -576,6 +576,19 @@
                         </node>
                     </children>
                 </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Used to prevent land damage to the explosive that just landed" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_DelayedExplosive_Self" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
             </children>
         </node>
     </region>

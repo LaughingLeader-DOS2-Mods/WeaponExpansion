@@ -733,7 +733,7 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterTeleported] Character ["
 //END_REGION
 
 //REGION SKILL_DEBUG
-/*
+
 IF
 CharacterUsedSkill(_Caster, _Skill, _SkillType, _SkillElement)
 AND
@@ -812,7 +812,9 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillAtPosition] ", _SkillPrefix, _CasterPosition, _TargetPosition);
 
 IF
-CharacterUsedSkillOnZoneWithTarget(_Caster, (CHARACTERGUID)_Target, _Skill, _SkillType, _SkillElement)
+CharacterUsedSkillOnZoneWithTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
 AND
 CharacterGetDisplayName(_Caster, _, _Name)
 AND
@@ -830,7 +832,9 @@ NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillOnZoneWithTarget] [",_Name,"](",_CasterID,")",_LogDetails);
 
 IF
-CharacterUsedSkillOnZoneWithTarget(_Caster, (ITEMGUID)_Target, _Skill, _SkillType, _SkillElement)
+CharacterUsedSkillOnZoneWithTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
+AND
+ObjectIsItem((ITEMGUID)_Target, 1)
 AND
 CharacterGetDisplayName(_Caster, _, _Name)
 AND
@@ -856,7 +860,6 @@ DB_LeaderLog_Temp_CombinedString(_LogDetails)
 THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:SkillCast] ", _LogDetails);
-*/
 
 //REGION DEBUG_FIND_COMBAT_SHIELD
 IF
