@@ -25,7 +25,7 @@ IF "c1"
 	GetPosition(_Player, _Pos)
 THEN
 	GetForwardDirection(_Player, _Target)
-	Multiply(_Target, FLOAT:13.0) // 13m?
+	Multiply(_Target, FLOAT:13.5) // 13m range on skill, explosion needs to be at end
 	Add(_Target, _Pos)
 	ExplodeAt(_Target, Projectile_Blunderbuss_Cannonball_Explode, _Level, _Player)
 	//DisplayCombatInfoText(_Player, "Exploding?", 3.0)

@@ -33,7 +33,7 @@ LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
-LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed
+LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Knocked Down (Magic)
 LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] Vitality per turn.
 LLWEAPONEX_MENDING_DisplayName	Mending
 LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is recharging.
