@@ -7,11 +7,13 @@ KBSECTION
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
+ObjectSetFlag(_Character, "LLWEAPONEX_BlunderbussEquipped", 0);
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
+ObjectClearFlag(_Character, "LLWEAPONEX_BlunderbussEquipped", 0);
 //LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion", 1250);
 //END_REGION

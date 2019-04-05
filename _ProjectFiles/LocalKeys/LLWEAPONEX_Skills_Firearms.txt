@@ -1,0 +1,24 @@
+Zone_LLWEAPONEX_Blunderbuss_Cannonball_DisplayName	<font color='#ff780b'>Lunatic's Cannonball</font>
+Zone_LLWEAPONEX_Blunderbuss_Cannonball_Description	Fire a massive, super-heated cannonball, dealing [1] to targets, knocking them down, and leaving behind a trail of <font color='#ff5b0b'>explosive fire clouds</font>.<br>At the end of the trail, the cannonball explodes for [2] in a [3] radius, applying <font color='#ff5b0b'>Necrofire</font> to targets hit for 1 turn.
+Projectile_LLWEAPONEX_Blunderbuss_LaunchDud_DisplayName	<font color='#ff780b'>Deadly Dud</font>
+Projectile_LLWEAPONEX_Blunderbuss_LaunchDud_Description	Launch a dud at a target position, dealing [1].<br><font color='#ffb526'>After 3 turns in combat (any source), the dud explodes for [2] in a [3] radius.</font><br><font color='#ff2626'>If the dud is destroyed before being fully armed, it deals [4] instead.</font>
+Target_LLWEAPONEX_ElementalBullets_DisplayName	Elemental Bullets
+Target_LLWEAPONEX_ElementalBullets_Description	Attune your firearm to the element of a target surface, gaining a <font color='#b54efe'>basic attack replacement skill</font> for 2 turns.
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_DisplayName	Shoot
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Description	Fire your blunderbuss at a target for [1].
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Air_DisplayName	Shoot (<font color='#C7A758'>Air Bullets)
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Air_Description	Fire your blunderbuss at a target for [1].<br><font color='#7D71D9'>Electrified surfaces.</font>
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Blood_DisplayName	Shoot (<font color='#C80030'>Blood Bullets</font>)
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Blood_Description	Fire your blunderbuss at a target for [1].
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Earth_DisplayName	Shoot (<font color='#C7A758'>Earth Bullets</font>)
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Earth_Description	Fire your blunderbuss at a target for [1].
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Fire_DisplayName	Shoot (<font color='#FE6E27'>Fire Bullets</font>)
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Fire_Description	Fire your blunderbuss at a target for [1].<br><font color='#FE6E27'>Ignites surfaces.</font>
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Ice_DisplayName	Shoot (<font color='#97FBFF'>Ice Bullets</font>)
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Ice_Description	Fire your blunderbuss at a target for [1].<br><font color='#97FBFF'>Freezes surfaces.</font>
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Poison_DisplayName	Shoot (<font color='#65C900'>Poison Bullets</font>)
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Poison_Description	Fire your blunderbuss at a target for [1].<br><font color='#65C900'>Contaminates surfaces.</font>
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Water_DisplayName	Shoot (<font color='#4197E2'>Water Bullets</font>)
+Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Water_Description	Fire your blunderbuss at a target for [1].<br><font color='#4197E2'>Douses surfaces.</font>
+Projectile_LLWEAPONEX_Blunderbuss_AimedShot_DisplayName	<font color='#F7BA14'>Aimed Shot</font>
+Projectile_LLWEAPONEX_Blunderbuss_AimedShot_Description	Take a long-range, focused shot on a target within [1], dealing [2].

@@ -32,6 +32,25 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 4, "<font color=
 //DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_DualShields", "LLWEAPONEX_WM_DualShields_Exp", "LLWEAPONEX_WM_DualShields_Level");
 
+//Firearms
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Firearm", "<font color='#FD8826'>Firearm Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Firearm", 0, "<font color='#FDC89B'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Firearm", 1, "<font color='#FBBC7F'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Firearm", 2, "<font color='#F5A36C'>Journeyman Firearm Enthusiast</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Firearm", 3, "<font color='#F49C4E'>Expert Firearm Lunatic</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Firearm", 4, "<font color='#FF9D33'>Master of Firearms, Destruction Supreme</font>");
+
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Firearm", "LLWEAPONEX_WM_Firearm_Exp", "LLWEAPONEX_WM_Firearm_Level");
+
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Firearm", 1, "ElementalBullets", "Any");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "ElementalBullets", "Target_LLWEAPONEX_ElementalBullets");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Firearm", 2, "Blunderbuss_Cannonball", "Any");
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "LLWEAPONEX_BlunderbussEquipped", "Flag");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "Zone_LLWEAPONEX_Blunderbuss_Cannonball");
+//DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Firearm", 1, "Blunderbuss_LaunchDud", "Any");
+//DB_LLWEAPONEX_WeaponMastery_SkillRequirements("LLWEAPONEX_Firearm", "Blunderbuss_LaunchDud", "LLWEAPONEX_BlunderbussEquipped", "Flag");
+//DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "Blunderbuss_LaunchDud", "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud");
+
 //Greatbow
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Greatbow", "<font color='#00FF7F'>Greatbow Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 0, "<font color='#FDFFEA'>Beginner</font>");
@@ -368,6 +387,31 @@ DB_NOOP(1);
 //END_REGION
 
 //REGION SKILL_UNLOCKING
+QRY
+LLWEAPONEX_WeaponMastery_QRY_SkillRequirementsMet((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _, _)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_SkillRequirementsMet((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Flag, "Flag")
+AND
+ObjectGetFlag(_Player, _Flag, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_SkillRequirementsMet((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Flag, "Tag")
+AND
+IsTagged(_Player, _Flag, 1)
+THEN
+DB_NOOP(1);
+
 PROC
 LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID)
 AND
@@ -379,6 +423,8 @@ PROC
 LLWEAPONEX_WeaponMastery_OnSkillLearned((CHARACTERGUID)_Player, (STRING)_WeaponType, (STRING)_SkillID, (STRING)_Type)
 AND
 LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType)
+AND
+LLWEAPONEX_WeaponMastery_QRY_SkillRequirementsMet(_Player, _WeaponType, _SkillID)
 THEN
 LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, _WeaponType, _SkillID);
 LLWEAPONEX_WeaponMastery_Internal_AddSkillType(_Player, _WeaponType, _SkillID, _Type);

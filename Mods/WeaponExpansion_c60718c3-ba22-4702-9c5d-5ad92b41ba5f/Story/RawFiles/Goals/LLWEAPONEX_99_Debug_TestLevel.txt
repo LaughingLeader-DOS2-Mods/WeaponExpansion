@@ -638,7 +638,17 @@ String(_Item, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
 
-/*
+IF
+CharacterKilledBy(_Defender, _Owner, _Attacker)
+AND
+CharacterGetDisplayName(_Defender, _, _Name)
+AND
+String(_Owner, _Name2)
+AND
+String(_Attacker, _Name3)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterKilledBy] [",_Name,"] was killed by [",_Name2,"](",_Name3,").");
+
 IF
 CharacterPrecogDying(_Character)
 AND
@@ -660,6 +670,7 @@ CharacterGetDisplayName(_Character, _, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterDied] [",_Name,"] died.");
 
+/*
 IF
 CharacterStatusAttempt(_Character, _Status, _Causee)
 //AND

@@ -51,6 +51,46 @@ THEN
 LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy);
 //END_REGION
 
+//REGION SKILL_REQUIREMENTS_MET
+IF
+ObjectFlagSet(_Flag, (CHARACTERGUID)_Player, _)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Flag, "Flag")
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
+
+IF
+ObjectWasTagged((CHARACTERGUID)_Player, _Tag)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Tag, "Tag")
+AND
+DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+THEN
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
+//END_REGION
+
+//REGION SKILL_REQUIREMENTS_LOST
+IF
+ObjectFlagCleared(_Flag, (CHARACTERGUID)_Player, _)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Flag, "Flag")
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+THEN
+LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, _WeaponType, _SkillID);
+
+IF
+ObjectLostTag((CHARACTERGUID)_Player, _Tag)
+AND
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Tag, "Tag")
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+THEN
+LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, _WeaponType, _SkillID);
+//END_REGION
+
 /*
 IF
 ObjectTransformed((CHARACTERGUID)_Player, _)

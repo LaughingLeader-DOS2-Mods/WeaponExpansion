@@ -1,0 +1,14 @@
+LLWEAPONEX_BULLETS_AIR_DisplayName	Electric Bullets
+LLWEAPONEX_BULLETS_AIR_Description	Character's firearm is attuned to electricity/air.
+LLWEAPONEX_BULLETS_BLOOD_DisplayName	Blood Bullets
+LLWEAPONEX_BULLETS_BLOOD_Description	Character's firearm is attuned to blood.
+LLWEAPONEX_BULLETS_FIRE_DisplayName	Fire Bullets
+LLWEAPONEX_BULLETS_FIRE_Description	Character's firearm is attuned to fire.
+LLWEAPONEX_BULLETS_ICE_DisplayName	Ice Bullets
+LLWEAPONEX_BULLETS_ICE_Description	Character's firearm is attuned to ice.
+LLWEAPONEX_BULLETS_EARTH_DisplayName	Earth Bullets
+LLWEAPONEX_BULLETS_EARTH_Description	Character's firearm is attuned to earth.
+LLWEAPONEX_BULLETS_POISON_DisplayName	Poison Bullets
+LLWEAPONEX_BULLETS_POISON_Description	Character's firearm is attuned to poison.
+LLWEAPONEX_BULLETS_WATER_DisplayName	Water Bullets
+LLWEAPONEX_BULLETS_WATER_Description	Character's firearm is attuned to water.
