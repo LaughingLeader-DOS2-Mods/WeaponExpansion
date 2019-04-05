@@ -26,5 +26,5 @@ Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand_DisplayName	<font color='#C7A758
 Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Description	Throw <font color='#C7A758'>Balrin's Throwing Axe</font> at an enemy for [1], with a <font color='#F1D466'>[6]% damage bonus per 1m distance to the target</font>.<font color='#FF9600'>Lose your axe for 2 turns, or until you get within [4]m of the target and retrieve it, dealing [5].</font><br><font color='#80FFC3'>If the target dies from initial damage, refresh the cooldown of this skill.</font><br>Targets hit are <font color='#FF2121'>Impaled</font> for 2 turns, lowering <font color='#69FF75'>Movement Speed</font> by <font color='#FF2121'>[2]%</font> and <font color='#FF0000'>Piercing Resistance</font> by <font color='#FF2121'>[3]%</font>.
 Shout_LLWEAPONEX_Prepare_BalrinsAxe_DisplayName	<font color='#C7A758'>Prepare Balrin's Throwing Axe</font>
 Shout_LLWEAPONEX_Prepare_BalrinsAxe_Description	Prepare to throw <font color='#C7A758'>Balrin's Throwing Axe</font>, gaining a different skill depending on which hand wields the axe.
-Projectile_LLWEAPONEX_ThrowWeapon_DisplayName	<font color='#ef3f85'>Throw Weapon</font>
-Projectile_LLWEAPONEX_ThrowWeapon_Description	Throw your equipped weapons at a target, dealing [1].
+Projectile_LLWEAPONEX_ThrowWeapon_DisplayName	<font color='#a6ffcc'>Throw Weapon</font>
+Projectile_LLWEAPONEX_ThrowWeapon_Description	Throw your equipped weapon(s) at a target, dealing [1].
