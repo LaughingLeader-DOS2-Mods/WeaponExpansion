@@ -345,6 +345,11 @@ StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_VendingMachine_Iterator_LevelUpItem")
 THEN
 LeaderLib_Growth_Items_LevelUpItem(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Item);
 
+IF
+TextEventSet("llweap_addtokens")
+THEN
+CharacterGiveReward(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "ST_LLWEAPONEX_VendingMachine_AttributeTokens_Start");
+
 PROC
 LeaderLib_Traders_OnSpawned(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, (STRING)_TraderID, (STRING)_Region)
 AND
@@ -355,11 +360,30 @@ ProcObjectTimer(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b94
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_Quarterstaff_01", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Hook", _Region, "Dummy_WeaponDisplay_Hook");
 PROC_LoopEffect("LLWEAPONEX_VendingMachine_WeaponDisplay_ThrowingWeapons_01", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_FX_VendingMachine_WeaponDisplay_Bottom", _Region, "Dummy_WeaponDisplay_Bottom");
 ObjectSetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_Initialized", 0);
+//LLWEAPONEX_VendingMachine_Internal_SaveItems(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 //CharacterTransformAppearanceToWithEquipmentSet(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachine_A", 0);
 
 //Flipped bones workaround for now
 //PROC_StopLoopEffect(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay");
 //PROC_LoopEffect("LLWEAPONEX_FX_VendingMachine_MachineDisplay_Debug_01", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_VendingMachineWorkaroundDisplay", _Region, "");
+
+//Initial Trade Items, should happen AFTER initial treasure is generated so the items don't get deleted by the game :(
+PROC
+ProcGenerateTradeTreasure((CHARACTERGUID)_Player, (CHARACTERGUID)S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a)
+AND
+ObjectGetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_InitialItemsGenerated", 0)
+THEN
+//CharacterGiveReward(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "ST_LLWEAPONEX_VendingMachine_AttributeTokens_Start");
+ObjectSetFlag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LLWEAPONEX_Vending_InitialItemsGenerated", 0);
+ItemTemplateAddTo("LLWEAPONEX_TradeBag_AttributeTokens_Initial_39696124-ca27-4c76-860e-29aec727b5a7", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1, 0);
+
+IF
+ItemTemplateAddedToCharacter(LLWEAPONEX_TradeBag_AttributeTokens_Initial_39696124-ca27-4c76-860e-29aec727b5a7, _Pouch, _Player)
+AND
+DB_IsPlayer(_Player)
+THEN
+Transform(_Pouch, "LLWEAPONEX_TradeBag_AttributeTokens_c8b9b34d-a1a8-446e-993f-ff5c1338bc8a", 1, 1);
+GenerateTreasure(_Pouch, "ST_LLWEAPONEX_VendingMachine_AttributeTokens_Start", -1, _Player);
 
 QRY
 LLWEAPONEX_VendingMachine_QRY_IsInside("LV_HoE_Main")

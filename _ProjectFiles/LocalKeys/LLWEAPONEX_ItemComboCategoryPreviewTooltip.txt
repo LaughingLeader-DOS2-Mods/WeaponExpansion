@@ -31,3 +31,5 @@ ObjectCategories_LLWEAPONEX_OniGauntlet_Tooltip	<font color='#C7A758'>Oni Gauntl
 ObjectCategories_LLWEAPONEX_OniGauntlet_1_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
 ObjectCategories_LLWEAPONEX_OniGauntlet_2_Tooltip	<font color='#C7A758'>Oni Gauntlet (Empowered)</font> Power
 ObjectCategories_LLWEAPONEX_OniGauntlet_3_Tooltip	<font color='#C7A758'>Oni Gauntlet (Unleashed)</font> Power
+ObjectCategories_LLWEAPONEX_Blunderbuss_2H_A_Tooltip	<font color='#C7A758'>Eruption, the Portable Cannon</font>
+ObjectCategories_LLWEAPONEX_Blunderbuss_2H_A_Altered_Tooltip	<font color='#C7A758'>Eruption, the Portable Cannon</font> (Alternate Scaling)

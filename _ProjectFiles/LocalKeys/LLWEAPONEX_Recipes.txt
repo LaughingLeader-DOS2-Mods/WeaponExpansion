@@ -4,6 +4,7 @@ LLWEAPONEX_Kevin_Oiled_1	Kevin (Oiled)
 LLWEAPONEX_Kevin_Clear_Oil_1	Kevin (Normal)
 LLWEAPONEX_Kevin_Nails_1	Kevin (Nails)
 LLWEAPONEX_Kevin_Clear_Nails_1	Kevin (Normal)
+LLWEAPONEX_Shuriken_Normal_1	Shuriken (Normal)
 LLWEAPONEX_Shuriken_Poisoned_1	Shuriken (Poisoned)
 LLWEAPONEX_Shuriken_Clear_Poison_1	Shuriken
 LLWEAPONEX_Shuriken_Oiled_1	Shuriken (Oiled)
@@ -44,3 +45,7 @@ WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt_1	Raizen Unleashed (Intelligence 
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin_1	Raizen Unleashed  (Finesse Scaling)
 LOOT_LLWEAPONEX_Orb_Thunder_A_Upgrade_1	Shiden, Thunder Orb Upgrade
 LOOT_LLWEAPONEX_Orb_Thunder_B_Upgrade_1	Shiden, Thunder Orb Upgrade 2
+WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToInt_1	Eruption, the Portable Cannon (Intelligence Scaling)
+WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToStr_1	Eruption, the Portable Cannon (Strength Scaling)
+WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToFin_1	Eruption, the Portable Cannon (Finesse Scaling)
+WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Reset_1	Eruption, the Portable Cannon (Reset Scaling to Wits)

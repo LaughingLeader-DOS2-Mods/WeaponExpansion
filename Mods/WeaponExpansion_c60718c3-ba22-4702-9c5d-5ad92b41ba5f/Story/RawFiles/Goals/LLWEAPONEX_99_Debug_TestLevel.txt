@@ -940,6 +940,13 @@ THEN
 ItemCloseAndLock(ITEMGUID_DOORS_Humans_Ruins_Metal_A_000_20d4e781-3bd3-433a-8a3c-5263dd6c8a59, "NOKEY");
 ItemCloseAndLock(ITEMGUID_DOORS_Humans_Ruins_A_000_9416b0d1-f563-4f5d-8f3d-03d46e550c85, "NOKEY");
 
+PROC
+ProcClearGeneratedItems((CHARACTERGUID)_Npc)
+AND
+String(_Npc, _Str)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:ProcClearGeneratedItems] Clearing generated items for [",_Str,"]");
+
 EXITSECTION
 
 ENDEXITSECTION

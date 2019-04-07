@@ -12,38 +12,22 @@ ACTIONS
 	SetVar(__Me, "LLWEAPONEX_VendingMachine_SkillAdded", _Skill)
 	CharacterEvent(__Me, "LLWEAPONEX_VendingMachine_SkillJustAdded")
 	CharacterRemoveSkill(__Me, _Skill)
-/*
+
 EVENT LLWEAPONEX_Vending_Init
 ON
-	OnInit()
-	//OnActivate()
-	//OnRegionEntered(__Me, _, _)
-	//OnLoaded(_,_,_,_)
+	OnCharacterFlagSet("LLWEAPONEX_Vending_Initialized", __Me)
 ACTIONS
-IF "!c1"
-	IsEqual(%LLWEAPONEX_Vending_Initialized, 1)
-THEN
-	Set(%LLWEAPONEX_Vending_Initialized, 1)
-	CharacterEvent(__Me, "LLWEAPONEX_VendingMachine_StartLoopEffects")
-ENDIF
+/*
+	CharacterAddToInventory(__Me, "LOOT_LLWEAPONEX_Token_Constitution", 3, 1)
+	CharacterAddToInventory(__Me, "LOOT_LLWEAPONEX_Token_Finesse", 3, 1)
+	CharacterAddToInventory(__Me, "LOOT_LLWEAPONEX_Token_Intelligence", 3, 1)
+	CharacterAddToInventory(__Me, "LOOT_LLWEAPONEX_Token_Memory", 3, 1)
+	CharacterAddToInventory(__Me, "LOOT_LLWEAPONEX_Token_Strength", 3, 1)
+	CharacterAddToInventory(__Me, "LOOT_LLWEAPONEX_Token_Wits", 3, 1)
+	CharacterAddToInventory(__Me, "LOOT_LLWEAPONEX_Token_Reset", 5, 1)
 */
 
 /*
-EVENT LLWEAPONEX_Vending_Init
-VARS
-	INT:_IsGameLevel
-ON
-	//OnInit()
-	OnRegionEntered(__Me, _, _)
-ACTIONS
-IF "c1&c2"
-	IsLessThen(%LLWEAPONEX_Vending_Initialized, 1)
-	IsGameLevel(_IsGameLevel)
-THEN
-	Set(%LLWEAPONEX_Vending_Initialized, 1)
-	CallFunction("LLWEAPONEX_Vending_StartFX")
-ENDIF
-
 EVENT LLWEAPONEX_Vending_Deactivate
 ON
 	OnDeactivate()

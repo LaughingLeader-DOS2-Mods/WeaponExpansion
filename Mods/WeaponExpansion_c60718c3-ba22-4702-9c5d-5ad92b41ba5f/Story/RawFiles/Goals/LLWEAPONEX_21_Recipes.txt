@@ -1,0 +1,148 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Recipes_InitSettings();
+KBSECTION
+
+//REGION SETTINGS
+PROC
+LLWEAPONEX_Recipes_InitSettings()
+THEN
+DB_LLWEAPONEX_Recipes_Data("Kevin", "LLWEAPONEX_Kevin_Poisoned");
+DB_LLWEAPONEX_Recipes_Data("Kevin", "LLWEAPONEX_Kevin_Clear_Poison");
+DB_LLWEAPONEX_Recipes_Data("Kevin", "LLWEAPONEX_Kevin_Oiled");
+DB_LLWEAPONEX_Recipes_Data("Kevin", "LLWEAPONEX_Kevin_Clear_Oil");
+DB_LLWEAPONEX_Recipes_Data("Kevin", "LLWEAPONEX_Kevin_Nails");
+DB_LLWEAPONEX_Recipes_Data("Kevin", "LLWEAPONEX_Kevin_Clear_Nails");
+
+DB_LLWEAPONEX_Recipes_Data("Shuriken", "LLWEAPONEX_Shuriken_Normal");
+DB_LLWEAPONEX_Recipes_Data("Shuriken", "LLWEAPONEX_Shuriken_Poisoned");
+DB_LLWEAPONEX_Recipes_Data("Shuriken", "LLWEAPONEX_Shuriken_Clear_Poison");
+DB_LLWEAPONEX_Recipes_Data("Shuriken", "LLWEAPONEX_Shuriken_Oiled");
+DB_LLWEAPONEX_Recipes_Data("Shuriken", "LLWEAPONEX_Shuriken_Clear_Oil");
+
+DB_LLWEAPONEX_Recipes_Data("Quarterstaffs", "LLWEAPONEX_Quarterstaff_Crafted_Wood");
+DB_LLWEAPONEX_Recipes_Data("Quarterstaffs", "LLWEAPONEX_Quarterstaff_Crafted_Metal");
+
+DB_LLWEAPONEX_Recipes_Data("Runeblade_Inert", "LLWEAPONEX_Runeblade_Inert_1H_Air");
+DB_LLWEAPONEX_Recipes_Data("Runeblade_Inert", "LLWEAPONEX_Runeblade_Inert_1H_Chaos");
+DB_LLWEAPONEX_Recipes_Data("Runeblade_Inert", "LLWEAPONEX_Runeblade_Inert_1H_Earth");
+DB_LLWEAPONEX_Recipes_Data("Runeblade_Inert", "LLWEAPONEX_Runeblade_Inert_1H_Fire");
+DB_LLWEAPONEX_Recipes_Data("Runeblade_Inert", "LLWEAPONEX_Runeblade_Inert_1H_Poison");
+DB_LLWEAPONEX_Recipes_Data("Runeblade_Inert", "LLWEAPONEX_Runeblade_Inert_1H_Water");
+DB_LLWEAPONEX_Recipes_Data("Runeblade_Inert", "LLWEAPONEX_Runeblade_Inert_1H");
+
+LLWEAPONEX_Recipes_Register_Unique("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53");
+DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil");
+DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Oven");
+DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Bonfire");
+DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_Air_Anvil");
+DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water_Anvil");
+DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Well");
+DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Water");
+
+LLWEAPONEX_Recipes_Register_Unique("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");
+DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_ToInt");
+DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_ToStr");
+DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Reset");
+
+LLWEAPONEX_Recipes_Register_Unique("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41");
+DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToInt");
+DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToFin");
+DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Reset");
+DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade");
+DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade_Int");
+DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Upgrade_Fin");
+
+LLWEAPONEX_Recipes_Register_Unique("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_2_e03787b9-acac-4563-953e-a1149a6ebec1");
+DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToInt");
+DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToFin");
+DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Reset");
+DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade");
+DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_Int");
+DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Upgrade_Fin");
+
+LLWEAPONEX_Recipes_Register_Unique("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_3_fa2345b0-68f5-443f-8665-d2a5991bbf29");
+DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt");
+DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin");
+DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Reset");
+
+DB_LLWEAPONEX_Recipes_Data("Orb_Thunder", "LOOT_LLWEAPONEX_Orb_Thunder_A_Upgrade");
+DB_LLWEAPONEX_Recipes_Data("Orb_Thunder", "LOOT_LLWEAPONEX_Orb_Thunder_B_Upgrade");
+
+LLWEAPONEX_Recipes_Register_Unique("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
+DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToInt");
+DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToStr");
+DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToFin");
+DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Reset");
+
+PROC
+LLWEAPONEX_Recipes_Register_Unique((STRING)_ID, (STRING)_Template)
+AND
+StringConcatenate("LLWEAPONEX_Recipes_Unlocked_", _ID, _Flag)
+THEN
+DB_LLWEAPONEX_Recipes_Uniques(_ID, _Template, _Flag);
+//END_REGION
+
+//REGION UNLOCKING
+PROC
+LLWEAPONEX_Recipes_Unlock((CHARACTERGUID)_Player, (STRING)_ID)
+AND
+DB_LLWEAPONEX_Recipes_Data(_ID, _Recipe)
+//AND
+//CharacterHasRecipeUnlocked(_Player, _Recipe, 0)
+THEN
+CharacterUnlockRecipe(_Player, _Recipe, 1);
+//END_REGION
+
+//REGION UNIQUE_RECIPE_UNLOCKING
+IF
+//ItemTemplateAddedToCharacter(_Template, _Item, _Player)
+ItemTemplateEquipped(_Template, _Player)
+AND
+DB_LLWEAPONEX_Recipes_Uniques(_ID, _Template, _Flag)
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_AutoUnlockRecipes_Disabled")
+AND
+ObjectGetFlag(_Player, _Flag, 0)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_05_Recipes:ItemTemplateEquipped] Unlocking recipes for unique template with ID [",_ID,"](",_Template,").");
+ObjectSetFlag(_Player, _Flag, 1);
+LLWEAPONEX_Recipes_Unlock(_Player, _ID);
+//END_REGION
+
+//REGION MASTERY_RECIPE_UNLOCKING
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, "LLWEAPONEX_Runeblade", (INTEGER)_MasteryLevel)
+AND
+_MasteryLevel >= 1
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Runeblade_Inert", 1)
+THEN
+ObjectSetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Runeblade_Inert", 0);
+LLWEAPONEX_Recipes_Unlock(_Player, "Runeblade_Inert");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, "LLWEAPONEX_Quarterstaff", (INTEGER)_MasteryLevel)
+AND
+_MasteryLevel >= 0
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Quarterstaff", 1)
+THEN
+ObjectSetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Quarterstaff", 0);
+LLWEAPONEX_Recipes_Unlock(_Player, "Quarterstaffs");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, "LLWEAPONEX_ThrowingAbility", (INTEGER)_MasteryLevel)
+AND
+_MasteryLevel >= 1
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Shuriken", 1)
+THEN
+ObjectSetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Shuriken", 0);
+LLWEAPONEX_Recipes_Unlock(_Player, "Shuriken");
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"
