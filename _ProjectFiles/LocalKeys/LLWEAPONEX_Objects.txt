@@ -3,20 +3,20 @@ CONT_TradeBag_AttributeTokens_Initial	<font color='#80FFC3'>Bag of Special Token
 LOOT_LLWEAPONEX_Orb_Thunder_A	Shiden, Thunder Orb
 LOOT_LLWEAPONEX_Orb_Thunder_B	Shiden, Thunder Orb (Empowered)
 LOOT_LLWEAPONEX_Orb_Thunder_C	Shiden, Thunder Orb (Unleashed)
-LOOT_LLWEAPONEX_Token_Constitution	Token of Constitution
-LOOT_LLWEAPONEX_Token_Constitution_Free	Token of Constitution
-LOOT_LLWEAPONEX_Token_Finesse	Token of Finesse
-LOOT_LLWEAPONEX_Token_Finesse_Free	Token of Finesse
-LOOT_LLWEAPONEX_Token_Intelligence	Token of Intelligence
-LOOT_LLWEAPONEX_Token_Intelligence_Free	Token of Intelligence
-LOOT_LLWEAPONEX_Token_Memory	Token of Memory
-LOOT_LLWEAPONEX_Token_Memory_Free	Token of Memory
-LOOT_LLWEAPONEX_Token_Reset	Token of Reversal
-LOOT_LLWEAPONEX_Token_Reset_Free	Token of Reversal
-LOOT_LLWEAPONEX_Token_Strength	Token of Strength
-LOOT_LLWEAPONEX_Token_Strength_Free	Token of Strength
-LOOT_LLWEAPONEX_Token_Wit	Token of Wits
-LOOT_LLWEAPONEX_Token_Wit_Free	Token of Wits
+LOOT_LLWEAPONEX_Token_Constitution	<font color='#C80030'>Token of Constitution</font>
+LOOT_LLWEAPONEX_Token_Constitution_Free	<font color='#C80030'>Token of Constitution</font>
+LOOT_LLWEAPONEX_Token_Finesse	<font color='#81AB00'>Token of Finesse</font>
+LOOT_LLWEAPONEX_Token_Finesse_Free	<font color='#81AB00'>Token of Finesse</font>
+LOOT_LLWEAPONEX_Token_Intelligence	<font color='#73F6FF'>Token of Intelligence</font>
+LOOT_LLWEAPONEX_Token_Intelligence_Free	<font color='#73F6FF'>Token of Intelligence</font>
+LOOT_LLWEAPONEX_Token_Memory	<font color='#FCD203'>Token of Memory</font>
+LOOT_LLWEAPONEX_Token_Memory_Free	<font color='#FCD203'>Token of Memory</font>
+LOOT_LLWEAPONEX_Token_Reset	<font color='#D040D0'>Token of Reversal</font>
+LOOT_LLWEAPONEX_Token_Reset_Free	<font color='#D040D0'>Token of Reversal</font>
+LOOT_LLWEAPONEX_Token_Strength	<font color='#FF9600'>Token of Strength</font>
+LOOT_LLWEAPONEX_Token_Strength_Free	<font color='#FF9600'>Token of Strength</font>
+LOOT_LLWEAPONEX_Token_Wit	<font color='#FFC3C3'>Token of Wits</font>
+LOOT_LLWEAPONEX_Token_Wit_Free	<font color='#FFC3C3'>Token of Wits</font>
 LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Air	Electrified Crossbow Bolts
 LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Corrosive	Corrosive Crossbow Bolts
 LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Earth	Oiled Crossbow Bolts

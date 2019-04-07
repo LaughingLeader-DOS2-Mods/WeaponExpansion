@@ -947,6 +947,47 @@ String(_Npc, _Str)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:ProcClearGeneratedItems] Clearing generated items for [",_Str,"]");
 
+IF
+ItemTemplateCombinedWithItemTemplate(_,_,_,_,_,_Player, _Item)
+AND
+String(_Item, _Str)
+AND
+GetTemplate(_Item, _Template)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:ItemTemplateCombinedWithItemTemplate] Item was combined: [",_Str,"] Template (",_Template,").");
+
+IF
+ItemTemplateCombinedWithItemTemplate(_,_,_,_,_,_Player, _Item)
+AND
+GlobalGetFlag("LeaderLib_TS_GrowthEvents_Item_Enabled", _Enabled)
+AND
+SysStatus("LeaderLib_19_TS_GrowthEvents_Item", _Status)
+AND
+IntegertoString(_Status, _GoalStatusStr)
+AND
+IntegertoString(_Enabled, _EnabledStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[LeaderLib_19_TS_GrowthEvents_Item] Status[",_GoalStatusStr,"] Flag [LeaderLib_TS_GrowthEvents_Item_Enabled] Enabled [",_EnabledStr,"].");
+
+IF
+GameStarted(_,1)
+THEN
+TimerLaunch("LLWEAPONEX_Debug_CheckToggleScripts", 500);
+
+IF
+TimerFinished("LLWEAPONEX_Debug_CheckToggleScripts")
+AND
+DB_LeaderLib_ToggleScripts_Registered(_Goal, _Flag)
+AND
+GlobalGetFlag(_Flag, _Enabled)
+AND
+SysStatus(_Goal, _Status)
+AND
+IntegertoString(_Status, _GoalStatusStr)
+AND
+IntegertoString(_Enabled, _EnabledStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[",_Goal,"] Status[",_GoalStatusStr,"] Flag [",_Flag,"] Enabled [",_EnabledStr,"].");
 EXITSECTION
 
 ENDEXITSECTION
