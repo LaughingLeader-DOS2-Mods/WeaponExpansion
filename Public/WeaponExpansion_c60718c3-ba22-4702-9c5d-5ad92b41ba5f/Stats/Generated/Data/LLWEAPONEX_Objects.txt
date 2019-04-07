@@ -463,6 +463,7 @@ type "Object"
 using "LOOT_LLWEAPONEX_Token_Finesse"
 data "Value" "0"
 data "ObjectCategory" "LLWEAPONEX_Token_AttributeScaling_Free"
+data "ComboCategory" "LLWEAPONEX_Transform_Finesse"
 
 new entry "LOOT_LLWEAPONEX_Token_Intelligence_Free"
 type "Object"
