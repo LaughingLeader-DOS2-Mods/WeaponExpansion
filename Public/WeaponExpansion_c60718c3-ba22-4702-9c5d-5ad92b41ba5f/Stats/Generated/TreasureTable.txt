@@ -757,6 +757,19 @@ object category "GrenadeStarter",1,0,0,0,0,0,0,0
 object category "GrenadeEarly",1,0,0,0,0,0,0,0
 object category "GrenadeMid",1,0,0,0,0,0,0,0
 
+new treasuretable "S_LLWEAPONEX_Debug_BattlemageArmor"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_ARM_Battlemage_Helmet",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_ARM_Battlemage_UpperBody",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_ARM_Battlemage_LowerBody",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_ARM_Battlemage_Gloves",1,0,0,0,1,0,0,0
+new subtable "-1"
+object category "I_ARM_Battlemage_Boots",1,0,0,0,1,0,0,0
+
 new treasuretable "LLWEAPONEX_CheatThrowingWeapons"
 new subtable "-99"
 object category "I_WPN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0

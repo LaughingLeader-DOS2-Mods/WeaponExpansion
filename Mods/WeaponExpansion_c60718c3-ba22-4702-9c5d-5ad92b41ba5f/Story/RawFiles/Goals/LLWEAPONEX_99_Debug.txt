@@ -25,6 +25,11 @@ AND
 StringContains(_Username, "Leader", 1)
 THEN
 CharacterAddGold(_Host, 9999);
+CharacterGiveReward(_Host, "S_LLWEAPONEX_Debug_BattlemageArmor", 1);
+ItemTemplateAddTo("WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9", _Host, 1);
+ItemTemplateAddTo("EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7", _Host, 1);
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Host);
+CharacterAddSkill(_Host, "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud");
 
 IF
 RegionStarted("TestLevel_LL_WeaponExpansion")

@@ -19,12 +19,14 @@ IF "c1"
 THEN
 	Cast(_Level, _LevelF)
 ELSE
-	Set(_Level, -1)
+	Set(_Level, 1)
 ENDIF
-IF "c1"
-	GetPosition(_Player, _Pos)
-THEN
+
 	GetForwardDirection(_Player, _Target)
+IF "c1&!c2"
+	GetPosition(_Player, _Pos)
+	IsEqual(_Target, null)
+THEN
 	Multiply(_Target, FLOAT:13.5) // 13m range on skill, explosion needs to be at end
 	Add(_Target, _Pos)
 	ExplodeAt(_Target, Projectile_Blunderbuss_Cannonball_Explode, _Level, _Player)

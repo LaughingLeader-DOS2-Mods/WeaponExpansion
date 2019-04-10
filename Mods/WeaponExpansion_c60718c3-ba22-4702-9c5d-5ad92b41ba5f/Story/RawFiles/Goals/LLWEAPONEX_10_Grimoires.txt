@@ -2146,7 +2146,7 @@ ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Inte
 
 //REGION ETERNAL_SPARK_ANIM_OVERRIDE
 IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", _Player)
+CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATE", _Player)
 AND
 _Player != NULL_00000000-0000-0000-0000-000000000000
 THEN

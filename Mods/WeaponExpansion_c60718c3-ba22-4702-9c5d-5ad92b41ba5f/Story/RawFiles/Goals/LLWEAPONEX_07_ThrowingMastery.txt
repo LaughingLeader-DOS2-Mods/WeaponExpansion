@@ -13,9 +13,9 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_ThrowingAbility", "<font color='#40E0D0'>Throwing Ability</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 0, "<font color='#FFEAEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 1, "<font color='#FF9D9D'>Novice</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 2, "<font color='#F56CA3'>Journeyman</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 3, "<font color='#F56C8C'>Expert</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 4, "<font color='#FF3376'>Master</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 2, "<font color='#F56CA3'>Journeyman Marksman</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 3, "<font color='#F56C8C'>Expert Marksman</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 4, "<font color='#FF3376'>Master Marksman</font>");
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_ThrowingAbility", "LLWEAPONEX_WM_ThrowingAbility_Exp", "LLWEAPONEX_WM_ThrowingAbility_Level");
 
