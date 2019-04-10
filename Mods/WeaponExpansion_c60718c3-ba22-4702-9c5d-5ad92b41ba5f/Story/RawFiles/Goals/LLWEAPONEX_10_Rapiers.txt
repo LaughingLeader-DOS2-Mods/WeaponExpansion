@@ -106,7 +106,7 @@ DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target)
 THEN
 NOT DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target);
 RemoveStatus(_Character, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
-CharacterUseSkill(_Character, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _Target, 0, 1, 1);
+CharacterUseSkill(_Character, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _Target, 1, 1, 1);
 
 //END_REGION
 /*

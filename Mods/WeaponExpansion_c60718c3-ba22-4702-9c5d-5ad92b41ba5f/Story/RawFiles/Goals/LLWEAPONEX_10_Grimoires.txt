@@ -13,19 +13,19 @@ DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_Grimoire_Mimicry");
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_Grimoire_Swap");
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_Grimoire_Wind");
-DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_Grimoire_Fire");
+DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_3d834205-a88b-459b-8e83-f44fbb166011", "LLWEAPONEX_Grimoire_Fire");
 
 DB_LLWEAPONEX_Grimoire_LoopFX("WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67", "LLWEAPONEX_FX_Items_Grimoire_Death_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Death_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Death_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Death_A");
 DB_LLWEAPONEX_Grimoire_LoopFX("WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_FX_Items_Grimoire_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Mimicry_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Mimicry_A");
 DB_LLWEAPONEX_Grimoire_LoopFX("WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_FX_Items_Grimoire_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Swap_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Swap_A");
 DB_LLWEAPONEX_Grimoire_LoopFX("WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
-DB_LLWEAPONEX_Grimoire_LoopFX("WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
+DB_LLWEAPONEX_Grimoire_LoopFX("WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_3d834205-a88b-459b-8e83-f44fbb166011", "LLWEAPONEX_FX_Items_Grimoire_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Sheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Unsheathed_Wind_A", "LLWEAPONEX_FX_Grimoire_Equipped_Transition_Wind_A");
 
 DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67", "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE");
 DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE");
 DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE");
 DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE");
-DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216", "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE");
+DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_3d834205-a88b-459b-8e83-f44fbb166011", "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE");
 
 //Statuses to remove when the "active" status is removed
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE", "LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN");
@@ -295,7 +295,7 @@ LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, _Unsheathed);
 
 //Grimoire swapping
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _EffectID)
 THEN
@@ -313,13 +313,11 @@ DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template);
 LLWEAPONEX_Grimoire_PlayEquippedFX(_Character, _Item, _Template, _SheathedFX, _UnsheathedFX);
 
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Character, _)
 AND
 NOT DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _)
-AND
-GetTemplate(_Item, _Template)
 AND
 DB_LLWEAPONEX_Grimoire_LoopFX(_Template, _ItemFX, _SheathedFX, _UnsheathedFX, _TransitionFX)
 THEN
@@ -1246,12 +1244,12 @@ PlayEffect(_Character, "RS3_FX_Skills_Air_Wind_Cast_Hand_Horizontal_01", "Dummy_
 IF
 CharacterUsedSkillAtPosition(_Character, _x, _y, _z, "Target_LLWEAPONEX_Grimoire_StartTransit", _, _)
 THEN
-CharacterUseSkillAtPosition(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _x, _y, _z, 0, 1);
+CharacterUseSkillAtPosition(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _x, _y, _z, 1, 1);
 
 IF
 CharacterUsedSkillOnTarget(_Character, _Target, "Target_LLWEAPONEX_Grimoire_StartTransit", _, _)
 THEN
-CharacterUseSkill(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _Target, 0, 1, 1);
+CharacterUseSkill(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _Target, 1, 1, 1);
 
 IF
 CharacterUsedSkill(_Character, "Projectile_LLWEAPONEX_Grimoire_Transit", _, _)
@@ -1783,7 +1781,7 @@ CharacterEquipItem(_Character, _Shield);
 
 //Prevent grimoire mimics from equipping Grimoires
 PROC
-LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item)
+LLWEAPONEX_Grimoire_OnGrimoireEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
 AND
 LLWEAPONEX_Grimoire_QRY_PreventEquipping(_Character)
 AND
@@ -2148,14 +2146,23 @@ ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Inte
 
 //REGION ETERNAL_SPARK_ANIM_OVERRIDE
 IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", _Player)
+AND
+_Player != NULL_00000000-0000-0000-0000-000000000000
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", 0.0, 0, _Player);
+
+IF
 CharacterStatusApplied(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", _)
 THEN
 CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusApplied] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] applied. Setting animation set override to [LLWEAPONEX_Override1].");
 
 IF
 CharacterStatusRemoved(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", _)
 THEN
-CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+CharacterSetAnimationSetOverride(_Player, "");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusRemoved] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] removed. Clearing animation set override.");
 //END_REGION
 
 PROC

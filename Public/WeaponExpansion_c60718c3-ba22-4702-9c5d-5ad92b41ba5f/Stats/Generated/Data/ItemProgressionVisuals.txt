@@ -1657,14 +1657,22 @@ add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind","",""
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire"
 
 add levelgroup 0,0,"All"
-add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
+add rootgroup "3d834205-a88b-459b-8e83-f44fbb166011",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire","",""
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_EternalSpark"
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark"
 
-add levelgroup 0,0,"All"
-add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_EternalSpark","",""
+add levelgroup 1,8,"All"
+add rootgroup "0f469658-5dee-454c-a458-eff50a845970",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark","","Item_LOOT_Essence_Fire_Step1_A"
+
+add levelgroup 9,15,"All"
+add rootgroup "0f469658-5dee-454c-a458-eff50a845970",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark","","Item_LOOT_Essence_Fire_Step2_A"
+
+add levelgroup 16,30,"All"
+add rootgroup "0f469658-5dee-454c-a458-eff50a845970",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark","","Item_LOOT_Essence_Fire_Step3_A"
 
 new itemgroup "WPN_LLWEAPONEX_BattleBook"
 

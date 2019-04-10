@@ -401,3 +401,44 @@ ON
 	OnCharacterEvent(_Character, "LLWEAPONEX_UsedTransitSkill")
 ACTIONS
 	CharacterPlayEffect(_Character, "LLWEAPONEX_FX_Skills_Cast_Transit_Portal_01", "Dummy_FrontFX")
+	
+EVENT LLWEAPONEX_Grimoire_Spark_DamageStackBonus
+VARS
+	CHARACTER:_Target
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Turns
+	INT:_TurnsLeft
+ON
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY)
+ACTIONS
+	Set(_Result, null)
+	Set(_Turns, 1)
+IF "c1"
+	GetStatusTurns(_Target, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS1, _TurnsLeft)
+THEN
+	Set(_Result, LLWEAPONEX_SOUL_BURN2)
+	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN1)
+ELIF "c1"
+	GetStatusTurns(_Target, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS2, _TurnsLeft)
+THEN
+	Set(_Result, LLWEAPONEX_SOUL_BURN3)
+	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN2)
+ELIF "c1"
+	GetStatusTurns(_Target, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS3, _TurnsLeft)
+THEN
+	Add(_Turns, _TurnsLeft)
+	Set(_Result, LLWEAPONEX_SOUL_BURN4)
+	ListAdd(_RemoveList, LLWEAPONEX_SOUL_BURN3)
+ELIF "c1"
+	GetStatusTurns(_Target, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS4, _TurnsLeft)
+THEN
+	Set(_Result, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS5)
+	ListAdd(_RemoveList, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS4)
+ELIF "!c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS5)
+THEN
+	Set(_Result, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS1)
+ENDIF
+
+RETURN(_RemoveList, _Result, _Turns)

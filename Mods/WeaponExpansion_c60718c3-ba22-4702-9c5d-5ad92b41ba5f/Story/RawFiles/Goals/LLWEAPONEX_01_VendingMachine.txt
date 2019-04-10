@@ -92,6 +92,7 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_f4227e7f-86df-498f-817c-fc00896eb040");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind_c12e4d82-a6a5-4b3b-b29d-9e7810ff3216");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_3d834205-a88b-459b-8e83-f44fbb166011");
 //END_REGION
 
 //REGION UPDATES
@@ -706,7 +707,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:StartLoopEffects] Starting lo
 IF
 TextEventSet("llweap_vendtop")
 THEN
-CharacterUseSkill(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "Shout_LLWEAPONEX_VendingMachine_Move_Top", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a,0,1,1);
+CharacterUseSkill(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "Shout_LLWEAPONEX_VendingMachine_Move_Top", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a,1,1,1);
 
 IF
 CharacterUsedSkill(_VendingMachine, "Shout_LLWEAPONEX_VendingMachine_Move_Top", _, _)
@@ -724,7 +725,7 @@ PROC_StopLoopBeamEffect(_VendingMachine, "LLWEAPONEX_VendingMachine_TopItemMovem
 IF
 TextEventSet("llweap_vendmiddle")
 THEN
-CharacterUseSkill(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "Shout_LLWEAPONEX_VendingMachine_Move_Middle", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a,0,1,1);
+CharacterUseSkill(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "Shout_LLWEAPONEX_VendingMachine_Move_Middle", S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a,1,1,1);
 
 IF
 CharacterUsedSkill(_VendingMachine, "Shout_LLWEAPONEX_VendingMachine_Move_Middle", _, _)

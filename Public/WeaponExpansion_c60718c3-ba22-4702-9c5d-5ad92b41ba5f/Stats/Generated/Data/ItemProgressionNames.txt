@@ -657,7 +657,7 @@ add name "Whispersong",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire"
 add name "Witchfire",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_EternalSpark"
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark"
 add name "<font color='#FE6E27'>The Eternal Spark</font>",""
 
 new namegroup "WPN_LLWEAPONEX_BattleBook"
