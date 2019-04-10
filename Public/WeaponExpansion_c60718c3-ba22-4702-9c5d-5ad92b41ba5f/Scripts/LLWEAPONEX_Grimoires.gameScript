@@ -69,6 +69,7 @@ VARS
 ON
 	OnCharacterEvent(_Caster, "LLWEAPONEX_Grimoire_ShootWindMagic")
 ACTIONS
+	Set(_Level, -1)
 IF "c1"
 	CharacterGetStat(_LevelF, _Caster, Level)
 THEN

@@ -1654,6 +1654,18 @@ add levelgroup 0,0,"All"
 add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire"
+
+add levelgroup 0,0,"All"
+add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_EternalSpark"
+
+add levelgroup 0,0,"All"
+add rootgroup "c12e4d82-a6a5-4b3b-b29d-9e7810ff3216",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_EternalSpark","",""
+
 new itemgroup "WPN_LLWEAPONEX_BattleBook"
 
 add levelgroup 0,0,"All"
@@ -1665,6 +1677,18 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 add levelgroup 0,0,"All"
 add rootgroup "507801c0-4c6b-4b39-9aed-13fcd0962dd9",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
+
+add levelgroup 0,0,"All"
+add rootgroup "867b1acd-165d-42cb-9fed-7d165845915a",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged"
+
+add levelgroup 0,0,"All"
+add rootgroup "e1bb0780-be83-4425-850c-dce56e1706ef",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged","",""
 
 new itemgroup "WPN_LLWEAPONEX_HandCrossbow_Crafted_Lizards_A"
 

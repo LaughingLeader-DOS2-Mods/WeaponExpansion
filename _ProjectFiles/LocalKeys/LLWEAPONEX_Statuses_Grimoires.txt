@@ -22,3 +22,7 @@ LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS_Description	Upon death, character will r
 LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB_DisplayName	Tormented
 LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB_Description	Upon death, character will explode in a burst of necrotic energy.
 LLWEAPONEX_GRIMOIRE_SCRAMBLE_DisplayName	Swap the Positions of Targets Within Range
+LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE_Description	Character is channeling the power of the <font color='#FE6E27'>Eternal Spark</font>.
+LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE_DisplayName	Fire Grimoire
+LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATE_DisplayName	Immolation
+LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY_DisplayName	Immolation Bonus

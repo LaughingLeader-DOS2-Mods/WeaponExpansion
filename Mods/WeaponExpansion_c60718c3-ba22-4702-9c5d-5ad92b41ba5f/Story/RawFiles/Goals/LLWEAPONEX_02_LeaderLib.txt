@@ -107,14 +107,16 @@ LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Legendary", "Bo
 
 LeaderLib_Deltamods_Register_MaxGuaranteedForGroup("WeaponExpansion.CombatShields", 2);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_Secondary_Vitality", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_LifeSteal", 1);
+//LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_LifeSteal", 1); // LifeSteal doesn't show up currently
+LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_LLWEAPONEX_Weapon_Damage_ArmourPiercing_Small_CombatShield", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_Ability_Telekinesis_Wand", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Secondary_Vitality_Normal", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Secondary_CriticalChance", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Ability_Necromancy_Wand", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Damage_ArmourPiercing", 1);
 LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_Secondary_CriticalModifier", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LifeSteal_Large", 1);
+//LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LifeSteal_Large", 1);
+LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_Damage_ArmourPiercing_Medium", 1);
 
 LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_Grimoire");
 LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_CombatShield");
@@ -162,7 +164,7 @@ LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning
 //Beholder
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Swords.Beholder", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 4, "Boost_Weapon_Ability_WarriorLore_Sword");
-LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 6, "Boost_Weapon_LifeSteal_Large_TwoHanded");
+//LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 6, "Boost_Weapon_LifeSteal_Large_TwoHanded");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 7, "Boost_Weapon_EmptyRuneSlot");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 10, "Boost_Weapon_Cleave_TwoHanded_Large");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 12, "Boost_Weapon_Secondary_CriticalChance_TwoHanded");

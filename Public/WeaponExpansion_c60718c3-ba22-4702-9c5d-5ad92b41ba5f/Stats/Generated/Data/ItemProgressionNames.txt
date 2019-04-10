@@ -460,6 +460,12 @@ add name "Omnibolt, Heaven's Wrath",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 add name "Eruption, the Portable Cannon",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
+add name "Sanguinebane (Blade)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged"
+add name "Sanguinebane (Gun)",""
+
 new namegroup "WPN_LLWEAPONEX_HandCrossbow_Crafted_Lizards_A"
 add name "Mini-Arbalest",""
 add namecool "Magical Mini-Arbalest",""
@@ -647,6 +653,12 @@ add name "Gatekeeper's Codex",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
 add name "Whispersong",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire"
+add name "Witchfire",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_EternalSpark"
+add name "<font color='#FE6E27'>The Eternal Spark</font>",""
 
 new namegroup "WPN_LLWEAPONEX_BattleBook"
 add name "Heavy Book",""

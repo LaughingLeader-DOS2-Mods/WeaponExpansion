@@ -347,6 +347,13 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_Ability_WarriorLore",1
 
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_ArmourPiercing_Small_CombatShield"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Bow"
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Small",1
+
 new deltamod "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
