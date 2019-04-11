@@ -1,4 +1,5 @@
 Stats_LLWEAPONEX_Grimoire_SwapSurge	Translocation Surge
+Stats_LLWEAPONEX_Grimoire_Spark_Immolate	Immolation
 Stats_LLWEAPONEX_Grimoire_Spark_DamageBonus1	Immolation Bonus I
 Stats_LLWEAPONEX_Grimoire_Spark_DamageBonus2	Immolation Bonus II
 Stats_LLWEAPONEX_Grimoire_Spark_DamageBonus3	Immolation Bonus III
