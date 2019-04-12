@@ -57,7 +57,7 @@ ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireOpened", _ForcedOpen)
 AND
 IntegerMax(_Unsheathed, _ForcedOpen, _IsUnsheathed)
 THEN
-LLWEAPONEX_Grimoire_ShootBeamFX(_Caster, _Target, "RS3_FX_GP_Beams_FireBeam_01", "Dummy_BodyFX", _IsUnsheathed);
+LLWEAPONEX_Grimoire_ShootBeamFX(_Caster, _Target, "LLWEAPONEX_FX_Grimoire_Beam_Fire_01", "Dummy_BodyFX", _IsUnsheathed);
 
 PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Fire")
@@ -70,7 +70,7 @@ ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireOpened", _ForcedOpen)
 AND
 IntegerMax(_Unsheathed, _ForcedOpen, _IsUnsheathed)
 THEN
-LLWEAPONEX_Grimoire_ShootBeamFX(_Caster, _Backpack, "RS3_FX_GP_Beams_FireBeam_01", "Dummy_Root", _IsUnsheathed);
+LLWEAPONEX_Grimoire_ShootBeamFX(_Caster, _Backpack, "LLWEAPONEX_FX_Grimoire_Beam_Fire_01", "Dummy_Root", _IsUnsheathed);
 LeaderLib_Timers_StartObjectTimer(_Backpack, 1000, "LLWEAPONEX_Timers_RemoveGrimoireBeamTarget", "LeaderLib_Commands_RemoveItem");
 
 /*

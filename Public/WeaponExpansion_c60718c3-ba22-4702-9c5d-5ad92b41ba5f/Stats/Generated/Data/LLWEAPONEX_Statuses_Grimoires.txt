@@ -293,7 +293,7 @@ data "DisplayNameRef" "Fire Grimoire"
 data "DescriptionRef" "Character is channeling the power of the <font color='#FE6E27'>Eternal Spark</font>."
 data "Icon" "unknown"
 data "ApplyEffect" ""
-data "StatusEffect" "RS3_FX_Skills_Fire_Prepare_Fire_Hand_01:Dummy_R_HandFX"
+data "StatusEffect" "LLWEAPONEX_FX_Grimoire_Spark_Equipped_Hand_01:Dummy_R_HandFX"
 data "Skills" ""
 data "Items" "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark"
 
