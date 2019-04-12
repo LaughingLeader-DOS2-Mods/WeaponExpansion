@@ -1,0 +1,167 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+PROC
+LLWEAPONEX_Grimoire_Death_ClearData()
+THEN
+SysClear("DB_LLWEAPONEX_Grimoire_Temp_DeathEvent", 3);
+SysClear("DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast", 2);
+SysClear("DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul", 2);
+
+//REGION TORMENT_BONUS
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
+THEN
+SetVarFloat3(_Caster, "LLWEAPOENX_GrimoireTargetPosition", _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Grimoire_ApplyTormentExplosion", "LLWEAPONEX_Grimoire_TormentExplode");
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, "Death")
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_TormentObjects(_Caster, _Target);
+ProcObjectTimerCancel(_Caster, "LLWEAPONEX_Timers_Grimoire_ApplyTorment");
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_Grimoire_ApplyTorment", 1000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_Grimoire_ApplyTorment")
+AND
+HasActiveStatus(_Caster, "UNSHEATHED", _Unsheathed)
+AND
+ObjectGetFlag(_Caster, "LLWEAPONEX_GrimoireOpened", _ForcedOpen)
+AND
+IntegerMax(_Unsheathed, _ForcedOpen, _IsUnsheathed)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_TormentObjects(_Caster, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_TormentObjects(_Caster, _Target);
+LLWEAPONEX_Grimoire_Death_ApplyTormentStatus(_Caster, _Target, _IsUnsheathed);
+
+PROC
+LLWEAPONEX_Grimoire_Death_ApplyTormentStatus((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (INTEGER)_IsUnsheathed)
+AND
+LeaderLib_Helper_QRY_ObjectIsAlive(_Target)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_TORMENT", 0.0, 0, _Caster);
+LLWEAPONEX_Grimoire_Death_ApplyTormentBeam(_Caster, _Target, _IsUnsheathed);
+
+PROC
+LLWEAPONEX_Grimoire_Death_ApplyTormentBeam((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (INTEGER)_IsUnsheathed)
+AND
+ObjectIsCharacter(_Target, 1)
+THEN
+LLWEAPONEX_Grimoire_ReceiveBeamFX(_Caster, _Target, "LLWEAPONEX_FX_Status_Torment_Beam_01", "Dummy_BodyFX", _IsUnsheathed);
+
+PROC
+LLWEAPONEX_Grimoire_Death_ApplyTormentBeam((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (INTEGER)_IsUnsheathed)
+AND
+ObjectIsItem(_Target, 1)
+THEN
+LLWEAPONEX_Grimoire_ReceiveBeamFX(_Caster, _Target, "LLWEAPONEX_FX_Status_Torment_Beam_01", "Dummy_Root", _IsUnsheathed);
+//END_REGION
+
+//REGION DEATH_AURA
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS", (CHARACTERGUID)_Source)
+THEN
+SetTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+SetVarObject(_Character, "LLWEAPONEX_DeathAura_Source", _Source);
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB", (CHARACTERGUID)_Source)
+THEN
+SetTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+SetVarObject(_Character, "LLWEAPONEX_DeathAura_Source", _Source);
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS", _)
+THEN
+ClearTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+ClearVarObject(_Character, "LLWEAPONEX_DeathAura_Source");
+
+IF
+CharacterStatusRemoved(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB", _)
+THEN
+ClearTag(_Character, "LLWEAPONEX_DeathAura_ListenForDeath");
+ClearVarObject(_Character, "LLWEAPONEX_DeathAura_Source");
+
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_TORMENT_CLAIMSOUL", _)
+AND
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target);
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_TORMENT_CLAIMSOUL", (CHARACTERGUID)_Ghost)
+AND
+DB_LLWEAPONEX_Statuses_Temp_Revenants(_DeadCharacter, _Ghost, _Source, "LLWEAPONEX_TORMENTED_GHOST")
+THEN
+DB_LLWEAPONEX_Grimoire_Death_Temp_ClaimedSoul(_Ghost, _DeadCharacter, _Target);
+//END_REGION
+
+//REGION DEATH_EVENTS
+PROC
+LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB")
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB");
+
+PROC
+LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS")
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
+
+PROC
+LLWEAPONEX_Grimoire_DeathAura_OnCharacterDying((CHARACTERGUID)_Character, (CHARACTERGUID)_Source)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS")
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
+
+IF
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status)
+THEN
+ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_Grimoire_DeathAuraDyingTimeout");
+ProcObjectTimer(_Character, "LLWEAPONEX_Timers_Grimoire_DeathAuraDyingTimeout", 2500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_Grimoire_DeathAuraDyingTimeout")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_DeathEvent(_Source, _Character, _Status);
+
+
+IF
+CharacterUsedSkillOnTarget(_Source, (CHARACTERGUID)_Target, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
+AND
+CharacterIsDead(_Target, 1)
+THEN
+DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target);
+
+IF
+SkillCast(_Source, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target)
+AND
+CharacterIsDead(_Target, 1)
+THEN
+LLWEAPONEX_Statuses_CreateRevenant(_Target, _Source, "LLWEAPONEX_TormentedGhost_a3dba759-c3b6-4108-9b71-a7d5ccab9b1a", " (Ghost)", "LLWEAPONEX_TORMENTED_GHOST", 18.0, 0);
+
+IF
+SkillCast(_Source, "Target_LLWEAPONEX_Grimoire_Torment", _, _)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_CreateGhostAfterCast(_Source, _Target);
+
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

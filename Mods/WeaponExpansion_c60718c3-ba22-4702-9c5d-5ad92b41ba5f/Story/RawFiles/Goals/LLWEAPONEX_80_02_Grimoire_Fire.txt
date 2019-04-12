@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterStatusApplied(_Player, "BURNING", _Source)
+AND
+HasActiveStatus(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", 1)
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", 0.0, 0, _Player);
+
+IF
+CharacterStatusApplied(_Player, "NECROFIRE", _Source)
+AND
+HasActiveStatus(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", 1)
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_HEAL_ALL_SAFE_1", 0.0, 0, _Player);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

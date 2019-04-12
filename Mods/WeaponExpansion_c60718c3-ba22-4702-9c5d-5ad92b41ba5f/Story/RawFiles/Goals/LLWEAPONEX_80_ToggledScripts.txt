@@ -48,6 +48,7 @@ LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Runeblade", "
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire__Main", "LLWEAPONEX_Grimoire");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Death", "LLWEAPONEX_Grimoire_Death");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Mimicry", "LLWEAPONEX_Grimoire_Mimicry");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Fire", "LLWEAPONEX_Grimoire_Fire");
 //END_REGION
 
 //REGION UPDATES
