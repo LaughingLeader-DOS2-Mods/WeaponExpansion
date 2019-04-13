@@ -9,6 +9,13 @@ PROC
 LLWEAPONEX_Grimoire_InitSettings()
 THEN
 
+//LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Wind", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE");
+//LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE");
+//LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Death", "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE");
+//LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Mimicry", "LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE");
+//LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Fire", "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE");
+//LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Equip_Spark", "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED");
+
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67", "LLWEAPONEX_Grimoire_Death");
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_Grimoire_Mimicry");
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_f4227e7f-86df-498f-817c-fc00896eb040", "LLWEAPONEX_Grimoire_Swap");
@@ -31,11 +38,14 @@ DB_LLWEAPONEX_Grimoire_ActiveStatus("WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_3d83420
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE", "LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN");
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE", "LLWEAPONEX_GRIMOIRE_MIMIC_READY");
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE", "LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS");
+//DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED");
+/*
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_1");
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_2");
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_3");
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_4");
 DB_LLWEAPONEX_Grimoire_GrimoireStatuses("LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_5");
+*/
 
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Death", "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE", "", "Necromancy", 1);
 DB_LLWEAPONEX_Grimoire_MagicWhitelist("Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE", "teleportation", "", -1);
@@ -1796,26 +1806,7 @@ ProcObjectTimer(_Grimoire, "LLWEAPONEX_Timers_Debug_GrimoireFollowPlayer", _Inte
 */
 //END_REGION
 
-//REGION ETERNAL_SPARK_ANIM_OVERRIDE
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATE", _Player)
-AND
-_Player != NULL_00000000-0000-0000-0000-000000000000
-THEN
-ApplyStatus(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", 0.0, 0, _Player);
 
-IF
-CharacterStatusApplied(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", _)
-THEN
-CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusApplied] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] applied. Setting animation set override to [LLWEAPONEX_Override1].");
-
-IF
-CharacterStatusRemoved(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", _)
-THEN
-CharacterSetAnimationSetOverride(_Player, "");
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusRemoved] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] removed. Clearing animation set override.");
-//END_REGION
 
 EXITSECTION
 

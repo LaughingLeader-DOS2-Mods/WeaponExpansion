@@ -93,7 +93,7 @@ data "ItemGroup" "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire"
 data "Act part" "1"
 data "Fire" "10"
 data "FireSpecialist" "1"
-data "Skills" "Shout_LLWEAPONEX_Grimoire_Toggle_Fire"
+data "Skills" "Shout_LLWEAPONEX_Grimoire_Toggle_Fire;Shout_LLWEAPONEX_Grimoire_Equip_Spark"
 data "Value" "131"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark"

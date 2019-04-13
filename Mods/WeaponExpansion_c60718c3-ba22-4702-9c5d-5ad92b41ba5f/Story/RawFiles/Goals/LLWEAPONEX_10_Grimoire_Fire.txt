@@ -3,6 +3,33 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATE", _Player)
+AND
+_Player != NULL_00000000-0000-0000-0000-000000000000
+THEN
+ApplyStatus(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", 0.0, 0, _Player);
+
+PROC
+LLWEAPONEX_Grimoire_OnGrimoireUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_3d834205-a88b-459b-8e83-f44fbb166011")
+THEN
+RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED");
+
+//REGION ETERNAL_SPARK_ANIM_OVERRIDE
+IF
+CharacterStatusApplied(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
+THEN
+ShowNotification(_Player, "LLWEAPONEX_Notifications_EternalSparkEquipped");
+CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusApplied] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] applied. Setting animation set override to [LLWEAPONEX_Override1].");
+
+IF
+CharacterStatusRemoved(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
+THEN
+CharacterSetAnimationSetOverride(_Player, "");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusRemoved] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] removed. Clearing animation set override.");
+//END_REGION
+
 //REGION GRIMOIRE_BONUS
 PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, "projectile", (STRING)_SkillElement, "Fire")

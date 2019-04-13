@@ -10,9 +10,10 @@ ON
 	OnActivate()
 	OnItemDropped(__Me, _)
 ACTIONS
-IF "!c1&!c2"
+IF "!c1&!c2&c3"
 	ItemIsInInventory(__Me)
 	IsTagged(__Me, "LLMIME_MIMICKED_WEAPON")
+	IsActive(__Me)
 THEN
 	//ItemEvent(__Me, "LLWEAPONEX_Grimoires_StartItemEffect")
 	IF "!c1"

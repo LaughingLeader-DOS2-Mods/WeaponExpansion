@@ -1411,12 +1411,6 @@ data "StatusType" "HEAL"
 using "LLWEAPONEX_HEAL_ALL_SAFE_FULL"
 data "HealValue" "10"
 
-new entry "LLWEAPONEX_HEAL_ALL_SAFE_FULL"
-type "StatusData"
-data "StatusType" "HEAL"
-using "LLWEAPONEX_HEAL_ALL_SAFE_FULL"
-data "HealValue" "100"
-
 new entry "LLWEAPONEX_HEAL_ALL_SAFE_2"
 type "StatusData"
 data "StatusType" "HEAL"
