@@ -1,0 +1,32 @@
+LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE_Description	Character has activated the power of Mimicry through the <font color='#C7A758'>Imitation</font> grimoire.<br>The grimoire will mimic the first skill used every 3 turns.
+LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE_DisplayName	Activate Imitation, Guide to Mimicry
+LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN_Description	The Imitation Grimoire is recharging.
+LLWEAPONEX_GRIMOIRE_MIMIC_COUNTDOWN_DisplayName	Grimoire Recharging
+LLWEAPONEX_GRIMOIRE_MIMIC_READY_Description	The <font color='#C7A758'>Imitation</font> grimoire is ready to mimic the next non-source skill cast by this character.
+LLWEAPONEX_GRIMOIRE_MIMIC_READY_DisplayName	Mimic Ready
+LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE_Description	Character is enhancing the power of <font color='#73f6ff'>Teleportation Magic</font> with the <font color='#C7A758'>Gatekeeper's Codex</font>.<br>When teleporting a target, bonus damage is dealt to enemies, while allies receive positive bonuses.
+LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE_DisplayName	Activate the Gatekeeper's Codex
+LLWEAPONEX_GRIMOIRE_SWAP_CHECK_DisplayName	Translocation Invocation
+LLWEAPONEX_GRIMOIRE_SWAP_DAMAGE_DisplayName	Translocation Damage
+LLWEAPONEX_GRIMOIRE_SWAP_SURGE_Description	Character received a positive bonus from a Translocation Grimoire
+LLWEAPONEX_GRIMOIRE_SWAP_SURGE_DisplayName	Translocation Surge
+LLWEAPONEX_GRIMOIRE_WIND_ACTIVE_Description	Character is enhancing the power of <font color='#7d71d9'>Air</font> through the <font color='#C7A758'>Whispersong</font> grimoire.<br>Upon casting an <font color='#7d71d9'>Air</font> skill on an enemy or position, <font color='#C7A758'>Whispersong</font> shoots <font color='#00FF7F'>Wind Magic</font> at the target.
+LLWEAPONEX_GRIMOIRE_WIND_ACTIVE_DisplayName	Activate Whispersong
+LLWEAPONEX_GRIMOIRE_DEATH_ACTIVATESKILL_DisplayName	Gain Activate Skill (Chargeless)
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_DisplayName	Aura of Torment
+LLWEAPONEX_GRIMOIRE_DEATH_AURA_Description	Character is exuding an aura of death.
+LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_DisplayName	Activate Torment, Book of the Dead
+LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_Description	Character is channeling the power of Death through <font color='#C7A758'>Torment, Book of the Dead</font>.
+LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS_DisplayName	Tormented
+LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_BONUS_Description	Upon death, character will return as a Tormented Ghost.
+LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB_DisplayName	Tormented
+LLWEAPONEX_GRIMOIRE_DEATH_TORMENT_SOULBOMB_Description	Upon death, character will explode in a burst of necrotic energy.
+LLWEAPONEX_GRIMOIRE_SCRAMBLE_DisplayName	Swap the Positions of Targets Within Range
+LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE_Description	Character is channeling the power of <font color='#FE6E27'>Fire Magic</font> through the <font color='#C7A758'>Heretic's Almanac</font>.<br>Fire Clouds are created when casting certain fire spells.<br>Character receives positive benefits from Burning and Necrofire.
+LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE_DisplayName	Activate the Heretic's Almanac
+LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATE_DisplayName	Immolation
+LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY_DisplayName	Immolation Bonus
+LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATED_DisplayName	Immolated
+LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATED_Description	Character was burned by an intense explosion.
+LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED_DisplayName	Equip the Eternal Spark
+LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED_Description	Character is wielding the <font color='#FE6E27'>Eternal Spark</font>.<br><font color='#FE6E27'>Burning</font> targets hit by the spark explode.
