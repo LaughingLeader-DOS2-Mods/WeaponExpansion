@@ -528,6 +528,21 @@ IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_MAGIC_CRIPPLED_CHECK", _Source)
 THEN
 LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_MAGIC_CRIPPLED_CHECK", "CRIPPLED");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_PHYSICAL_BLIND_CHECK", _Source)
+THEN
+LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_PHYSICAL_BLIND_CHECK", "BLIND");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_PHYSICAL_WEAK_CHECK", _Source)
+THEN
+LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_PHYSICAL_WEAK_CHECK", "WEAK");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_PHYSICAL_SLEEPING_CHECK", _Source)
+THEN
+LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_PHYSICAL_SLEEPING_CHECK", "SLEEPING");
 //END_REGION
 EXITSECTION
 
