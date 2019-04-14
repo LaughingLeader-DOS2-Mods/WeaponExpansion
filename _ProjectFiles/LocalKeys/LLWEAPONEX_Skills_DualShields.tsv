@@ -1,3 +1,4 @@
+Key	Content
 Projectile_LLWEAPONEX_ShieldToss_Description	Throw your mainhand shield at an enemy. The shield can ricochet up to 3 times within [1], dealing [2] damage and restoring [3] and [4] for each enemy hit.<br>The shield then returns, restoring an additional amount of armor.<br><font color='#FFD700' size='18'>Shield Mastery I</font><br><font color='#4197e2'>If 3 targets are hit, restore [5] and [6] to allies within 8m.</font>
 Projectile_LLWEAPONEX_ShieldToss_DisplayName	Shield Toss
 Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and has a chance to daze the target.

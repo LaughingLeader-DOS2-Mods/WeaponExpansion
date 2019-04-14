@@ -1,3 +1,4 @@
+Key	Content
 Projectile_LLWEAPONEX_Throw_Base_DisplayName	Throw Weapon
 Projectile_LLWEAPONEX_Throw_Base_Description	Throw a weapon at an enemy for [1].
 Projectile_LLWEAPONEX_Throw_Impale_Description	Throw a bladed weapon at an enemy for [1]. Applies <font color='#FF0000'>Impaled</font> and <font color='#FF0000'>Internal Damage</font>.<br><font color='#FF0000'>Impaled</font> lowers Movement Speed by <font color='#FF0000'>[2]%</font> per weapon stuck inside the enemy.<br><font color='#FF0000'>Internal Damage</font> lowers AP Recovery/Start/Maximum by <font color='#FF0000'>[3]</font>, and does [4] per turn.

@@ -1,3 +1,4 @@
+Key	Content
 LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR_Description	Character has activated the <font color='#7d71d9'>Air Rune</font> within their <font color='#40E0D0'>Runeblade</font>.<br>Enemies hit have a 10% chance to become <font color='#7d71d9'>Shocked</font> for 1 turn.<br><font color='#4197e2'>Wet increases this chance to 50%.</font>
 LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR_DisplayName	Air Rune		
 LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE_Description	 <font size='18'><font color='#4197e2'>Water Rune</font> + <font color='#7f3d00'>Earth Rune</font></font><br>Enemies hit have a <font color='#cfecff'>40% chance to be encased in Snow</font>, lowering <font color='#FF0000'>AP Recovery/Start by [1]</font>, <font color='#FF0000'>Movement Speed by [2]%</font>, and dealing <font color='#4197e2'>Water Damage</font> with a chance to fall down when moving.<br>Adds <font color='#4197e2'>Water Damage</font> and <font color='#7f3d00'>Earth Damage</font> to weapon attacks and skills.

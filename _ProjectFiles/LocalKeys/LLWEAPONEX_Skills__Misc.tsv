@@ -1,3 +1,4 @@
+Key	Content
 Cone_LLWEAPONEX_WaterSpout_Description	Channel a torrent of water through your hand, setting <font color='#4197e2'>Wet</font> on targets hit for 2 turns, and dousing burning surfaces.<br>If a <font color='#fe6e27'>Burning</font> <font color='#11d87a'>Ally</font> is <font color='#4197e2'>Doused</font>, <font color='#97fbff'>Mending</font> is applied for 1 turn.<br><font color='#97fbff' size='19'>Mending restores [1] and does not damage the Undead.</font><br><font color='#188EDE' size='19'>Allies hit are cleansed of Slowed and Enwebbed.</font>
 Cone_LLWEAPONEX_WaterSpout_DisplayName	Water Spout
 Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide

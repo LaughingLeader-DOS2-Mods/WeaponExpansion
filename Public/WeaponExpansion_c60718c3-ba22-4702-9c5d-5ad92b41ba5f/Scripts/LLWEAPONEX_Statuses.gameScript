@@ -2,41 +2,18 @@ INIT
 
 EVENTS
 
-EVENT LLWEAPONEX_Rapier_SuckerPunch_Knockdown
-VARS
-	CHARACTER:_Character
-	INT:_Turns
-	CHARACTER:_Source
-ON
-	OnCharacterStatusApplied(_Character, LLWEAPONEX_SUCKER_PUNCH)
-ACTIONS
-IF "c1&c2"
-	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_SUCKER_PUNCH, _Source)
-	GetStatusTurns(_Character, LLWEAPONEX_SUCKER_PUNCH, _Turns)
-THEN
-	IF "c1"
-		IsTagged(_Source, "LLWEAPONEX_Rapier_SuckerCombo1Enabled")
-	THEN
-		Add(_Turns, 1)
-	ENDIF
-	CharacterApplyStatus(_Character, KNOCKED_DOWN, _Turns, 0, _Source)
-	CharacterRemoveStatus(_Character, LLWEAPONEX_SUCKER_PUNCH, null, 0)
-ENDIF
-
 EVENT LLWEAPONEX_Rapier_SuckerCombo1
 VARS
 	CHARACTER:_Character
 	STATUS:_Result
 	LIST<STATUS>:_RemoveList
 	INT:_Turns
-	CHARACTER:_Source
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1)
 ACTIONS
 	Set(_Result, null)
-IF "c1&c2"
+IF "c1"
 	GetStatusTurns(_Character, KNOCKED_DOWN, _Turns)
-	CharacterGetStatusSourceCharacter(_Character, KNOCKED_DOWN, _Source)
 THEN
 	Clamp(_Turns, 1, _Turns)
 	Add(_Turns, 1)
@@ -61,40 +38,24 @@ ENDIF
 	CharacterRemoveStatus(_Character, LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED, null, 0)
 	CharacterApplyStatus(_Character, LLWEAPONEX_DIZZY, 2, 1, _Source)
 
-EVENT LLWEAPONEX_FumbleRoll
+EVENT LLWEAPONEX_Tripping_GuaranteedKnockdown
 VARS
-	CHARACTER:_Attacker
-	CHARACTER:_Source
-	INT:_Ran
+	CHARACTER:_Character
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
+	INT:_Turns
 ON
-	OnCharacterStartAttackObject(_, _, _, _Attacker)
+	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_TRIPPING)
 ACTIONS
-IF "c1&c2"
-	CharacterHasStatus(_Attacker, LLWEAPONEX_CONCUSSION)
-	CharacterGetStatusSourceCharacter(_Attacker, LLWEAPONEX_CONCUSSION, _Source)
-THEN
-	GetRandomBetween(_Ran, 0, 100)
-	IF "c1"
-		IsLessThen(_Ran, 10)
-	THEN
-		CharacterApplyStatus(_Attacker, LLWEAPONEX_FUMBLE, 0, 1, _Source)
-	ENDIF
-ENDIF
-
-EVENT LLWEAPONEX_TrippingKnockdown
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-ON
-	OnCharacterStatusAttempt(_Target, LLWEAPONEX_TRIPPING)
-ACTIONS
-IF "c1&c2"
+	Set(_Result, LLWEAPONEX_TRIPPING)
+IF "c1"
 	CharacterHasStatus(_Target, LLWEAPONEX_TRIPPING)
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_TRIPPING, _Source)
 THEN
-	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 0, _Source)
-	CharacterRemoveStatus(_Target, LLWEAPONEX_TRIPPING)
+	Set(_Turns, 1)
+	Set(_Result, KNOCKED_DOWN)
+	ListAdd(_RemoveList, LLWEAPONEX_TRIPPING)
 ENDIF
+	RETURN(_RemoveList, _Result, _Turns)
 
 EVENT LLWEAPONEX_Tripping_Cleanse
 VARS
@@ -111,111 +72,6 @@ IF "c1"
 THEN
 	CharacterRemoveStatus(_Target, LLWEAPONEX_TRIPPING)
 ENDIF
-
-EVENT LLWEAPONEX_DragonsBane_GuaranteedKnockdown
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_DRAGONS_BANE)
-ACTIONS
-IF "!c1&c2"
-	CharacterHasStatus(_Target, KNOCKED_DOWN)
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_DRAGONS_BANE, _Source)
-THEN
-	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 1, _Source)
-ENDIF
-
-//If LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK is applied, that means they have 0 magic armor and aren't immune to knockdown
-EVENT LLWEAPONEX_MagicKnockdownCheck
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-	INT:_Turns
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
-ACTIONS
-IF "(c1&c2)|!c1"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Source)
-	IsEqual(_Source, null)
-THEN
-	Set(_Source, _Target)
-ENDIF
-IF "!c1|c2"
-	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, _Turns)
-	IsEqual(_Turns, null)
-THEN
-	Set(_Turns, 1)
-ELSE
-	Clamp(_Turns, 1, _Turns)
-ENDIF
-IF "!c1&!c2"
-	CharacterIsDead(_Target)
-	CharacterHasStatus(_Target, KNOCKED_DOWN) // Don't force if they're already knocked down
-THEN
-	CharacterApplyStatus(_Target, KNOCKED_DOWN, _Turns, 1, _Source)
-ENDIF
-	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK)
-	
-EVENT LLWEAPONEX_MagicBleedingCheck
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-	INT:_Turns
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
-ACTIONS
-IF "(c1&c2)|!c1"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Source)
-	IsEqual(_Source, null)
-THEN
-	Set(_Source, _Target)
-ENDIF
-IF "!c1|c2"
-	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, _Turns)
-	IsEqual(_Turns, null)
-THEN
-	Set(_Turns, 1)
-ELSE
-	Clamp(_Turns, 1, _Turns)
-ENDIF
-IF "!c1&!c2"
-	CharacterIsDead(_Target)
-	CharacterHasStatus(_Target, BLEEDING) // Don't force if they're already bleeding
-THEN
-	CharacterApplyStatus(_Target, BLEEDING, _Turns, 1, _Source)
-ENDIF
-	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK)
-	
-EVENT LLWEAPONEX_MagicCrippledCheck
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-	INT:_Turns
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK)
-ACTIONS
-IF "(c1&c2)|!c1"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Source)
-	IsEqual(_Source, null)
-THEN
-	Set(_Source, _Target)
-ENDIF
-IF "!c1|c2"
-	GetStatusTurns(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK, _Turns)
-	IsEqual(_Turns, null)
-THEN
-	Set(_Turns, 1)
-ELSE
-	Clamp(_Turns, 1, _Turns)
-ENDIF
-IF "!c1&!c2"
-	CharacterIsDead(_Target)
-	CharacterHasStatus(_Target, CRIPPLED)
-THEN
-	CharacterApplyStatus(_Target, CRIPPLED, _Turns, 1, _Source)
-ENDIF
-	CharacterRemoveStatus(_Target, LLWEAPONEX_MAGIC_CRIPPLED_CHECK)
 
 /*
 EVENT LLWEAPONEX_Tar_BurningBypass
@@ -258,30 +114,20 @@ ENDIF
 EVENT LLWEAPONEX_Shocked_Block
 VARS
 	CHARACTER:_Character
-	CHARACTER:_Source
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
 	INT:_Turns
 ON
-	OnCharacterStatusApplied(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED)
+	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED)
 ACTIONS
-IF "!c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
+	Set(_Result, SHOCKED)
+IF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
 THEN
-	IF "(c1&c2)|!c1"
-		CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Source)
-		IsEqual(_Source, null)
-	THEN
-		Set(_Source, _Character)
-	ENDIF
-	IF "!c1"
-		GetStatusTurns(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, _Turns)
-	THEN
-		Set(_Turns, 1)
-	ELSE
-		Clamp(_Turns, 1, _Turns)
-	ENDIF
-	CharacterApplyStatus(_Character, SHOCKED, _Turns, 0, _Source)
+	Set(_Result, null)
 ENDIF
-	CharacterRemoveStatus(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED, null, 0)
+	RETURN(_RemoveList, _Result, _Turns)
+
 /*
 EVENT LLWEAPONEX_Kevin_MiniExplosion
 VARS

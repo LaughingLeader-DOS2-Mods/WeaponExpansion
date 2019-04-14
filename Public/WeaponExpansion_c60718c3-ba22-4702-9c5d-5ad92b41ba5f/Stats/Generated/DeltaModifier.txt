@@ -47,19 +47,26 @@ param "ModifierType" "Shield"
 param "SlotType" "Shield"
 new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Transit",1
 
-new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept"
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier1"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Shield"
 param "SlotType" "Shield"
-new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept",1
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier1",1
 
-new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master"
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier2"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Shield"
 param "SlotType" "Shield"
-new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master",1
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier2",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier3"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier3",1
 
 new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small"
 param "BoostType" "ItemCombo"

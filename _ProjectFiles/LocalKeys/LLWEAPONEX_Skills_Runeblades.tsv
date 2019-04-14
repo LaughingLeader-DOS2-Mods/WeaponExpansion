@@ -1,3 +1,4 @@
+Key	Content
 Projectile_LLWEAPONEX_ChaosPentaSlash_Description	Unleash chaotic energy within the Chaos Edge, creating 5 random cone-shaped surfaces in a 60 degree arc infront of you.
 Projectile_LLWEAPONEX_ChaosPentaSlash_DisplayName	Chaos Pentaslash
 Projectile_LLWEAPONEX_ChaosSlash_Description	Send out an beam of pure Chaos energy, dealing <font color='#b823cb'>[1] Chaos Damage</font> and creating a <font color='#f7ba14'>random elemental surface</font> at the target.<br><font color='#sample'>The surface is also created beneath the beam as it travels.</font>

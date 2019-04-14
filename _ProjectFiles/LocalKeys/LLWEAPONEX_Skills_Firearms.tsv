@@ -1,3 +1,4 @@
+Key	Content
 Zone_LLWEAPONEX_Blunderbuss_Cannonball_DisplayName	<font color='#ff780b'>Lunatic's Cannonball</font>
 Zone_LLWEAPONEX_Blunderbuss_Cannonball_Description	Fire a massive, super-heated cannonball, dealing [1] to targets, knocking them down, and leaving behind a trail of <font color='#ff5b0b'>explosive fire clouds</font>.<br>At the end of the trail, the cannonball explodes for [2] in a [3] radius, applying <font color='#ff5b0b'>Necrofire</font> to targets hit for 1 turn.
 Projectile_LLWEAPONEX_Blunderbuss_LaunchDud_DisplayName	<font color='#ff780b'>Deadly Dud</font>

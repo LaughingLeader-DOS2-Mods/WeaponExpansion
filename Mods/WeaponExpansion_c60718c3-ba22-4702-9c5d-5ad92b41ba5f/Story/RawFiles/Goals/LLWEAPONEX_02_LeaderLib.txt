@@ -221,13 +221,13 @@ LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry",
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Mimicry", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Grimoire.Swap", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_f4227e7f-86df-498f-817c-fc00896eb040");
-LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 3, "Boost_LLWEAPONEX_Grimoire_Skill_Teleportation");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 3, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier1");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 5, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 6, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small");
-LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Adept");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 8, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier2");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 10, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
-LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 11, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Master");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 11, "Boost_LLWEAPONEX_Grimoire_Skill_Swap_Tier3");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 13, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Large");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Swap", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 

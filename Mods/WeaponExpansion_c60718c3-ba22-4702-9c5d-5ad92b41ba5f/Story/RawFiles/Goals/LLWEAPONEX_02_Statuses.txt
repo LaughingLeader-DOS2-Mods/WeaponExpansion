@@ -449,6 +449,62 @@ CharacterStatusText(_Target, "LLWEAPONEX_Status_Torment_Applied");
 
 //END_REGION
 
+//REGION FUMBLE
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_CONCUSSION", _)
+AND
+DB_LLWEAPONEX_Statuses_Temp_Concussion(_Target, _Source)
+THEN
+NOT DB_LLWEAPONEX_Statuses_Temp_Concussion(_Target, _Source);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_CONCUSSION", _Source)
+THEN
+DB_LLWEAPONEX_Statuses_Temp_Concussion(_Target, _Source);
+
+IF
+CharacterStartAttackObject(_,_,_Target)
+AND
+DB_LLWEAPONEX_Statuses_Temp_Concussion(_Target, _Source)
+AND
+LeaderLib_Roll_QRY(100,999)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_FUMBLE", 0.0, 1, _Source);
+//END_REGION
+
+//REGION BYPASS_ARMOR_STATUSES
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_DRAGONS_BANE", _Source)
+AND
+HasActiveStatus(_Target, "KNOCKED_DOWN", 0)
+THEN
+ApplyStatus(_Target, "KNOCKED_DOWN", 6.0, 1, _Source);
+
+PROC
+LLWEAPONEX_Statuses_ApplyRealStatus((CHARACTERGUID)_Target, (GUIDSTRING)_Source, (STRING)_TriggerStatus, (STRING)_RealStatus)
+AND
+GetStatusTurns(_Target, _TriggerStatus, _Turns)
+AND
+Real(_Turns, _Duration)
+THEN
+ApplyStatus(_Target, _RealStatus, _Duration, 1, _Source);
+RemoveStatus(_Target, _TriggerStatus);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK", _Source)
+THEN
+LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK", "KNOCKED_DOWN");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_MAGIC_BLEEDING_CHECK", _Source)
+THEN
+LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_MAGIC_BLEEDING_CHECK", "BLEEDING");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_MAGIC_CRIPPLED_CHECK", _Source)
+THEN
+LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_MAGIC_CRIPPLED_CHECK", "CRIPPLED");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

@@ -57,6 +57,21 @@ CharacterStatusText(_Character, "LLWEAPONEX_Skills_DuelistStance_Bonus");
 //END_REGION
 
 //REGION SUCKER_PUNCH_COMBOS
+//Rapier Mastery Sucker Punch Knockdown
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_SUCKER_PUNCH", _Source)
+AND
+GetStatusTurns(_Target, "LLWEAPONEX_SUCKER_PUNCH", _CurrentTurns)
+AND
+IsTagged(_Source, "LLWEAPONEX_Rapier_SuckerCombo1Enabled", _AddTurns)
+AND
+IntegerSum(_CurrentTurns, _AddTurns, _Turns)
+AND
+Real(_Turns, _Duration)
+THEN
+ApplyStatus(_Target, "KNOCKED_DOWN", _Duration, 0, _Source);
+RemoveStatus(_Target, "LLWEAPONEX_SUCKER_PUNCH");
+
 IF
 SkillCast(_Character, "Target_SingleHandedAttack", _, _)
 AND

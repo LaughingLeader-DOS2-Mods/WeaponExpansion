@@ -1,3 +1,4 @@
+Key	Content
 Projectile_LLWEAPONEX_Greatbow_Knockback_Description	Fire a cushioned arrow that knocks the target 8m away. <br>Targets hit deal [1] to enemy characters and [2] to items as they fly through the air.<br><font color='#B22222'>If the initial target hit is an enemy, they take [1] upon landing.</font>
 Projectile_LLWEAPONEX_Greatbow_Knockback_DisplayName	Cushion Force
 Projectile_LLWEAPONEX_Greatbow_PiercingShot_Description	<font color='#FFD700' size='18'>Dragon Slayer Technique</font><br>Fire an arrow that pierces up to [1] enemies, dealing [2] and applying <font color='#fcd203'>Knocked Down</font>.<br>When hitting a dragon, apply <font color='#FF4500'>Dragon's Bane</font>, dealing [3] and reducing the dragon's <font color='#00FF7F'>Movement Speed</font> by <font color='#FF0000'>[4]%</font> and <font color='#9370DB'>Dodge</font> by <font color='#FF0000'>[5]%</font>.
