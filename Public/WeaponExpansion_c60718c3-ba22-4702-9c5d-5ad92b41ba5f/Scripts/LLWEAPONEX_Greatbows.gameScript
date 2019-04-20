@@ -6,81 +6,72 @@ EVENTS
 EVENT LLWEAPONEX_Greatbows_CushionForce_Start
 VARS
 	CHARACTER:_Target
-	CHARACTER:_GreatbowCaster
-	FLOAT:_Dist
-	FLOAT:_ForceDist
-	INT:_ForceDistInt
+	CHARACTER:_Source
+	INT:_ForceIndex
 	SKILL:_ForceSkill
 	STRING:_DebugMessage
 	FIXEDSTRING:_DebugMessageF
+	INT:_Level
+	FLOAT:_LevelF
 ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE)
+	//OnCharacterStatusApplied(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE)
+	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbow_CushionForce_StartLaunch")
 ACTIONS
-IF "c1&c2"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE, _GreatbowCaster)
-	GetDistance(_Dist, _GreatbowCaster, _Target)
+	Set(_ForceIndex, 0)
+	Set(_ForceSkill, Projectile_LeaderLib_Force4)
+IF "c1"
+	GetVar(_ForceIndex, _Target, "LLWEAPONEX_CushionForce_ForceIndex")
 THEN
-	Set(_ForceDist, %LLWEAPONEX_Greatbow_KnockbackMaxStart)
-	Subtract(_ForceDist, _Dist)
-	Cast(_ForceDistInt, _ForceDist)
+ENDIF
 	IF "c1"
-		IsLessThen(_ForceDistInt, 5)
+		IsEqual(_ForceIndex, 0)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force4)
 	ELIF "c1"
-		IsEqual(_ForceDistInt, 5)
+		IsEqual(_ForceIndex, 1)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force5)
 	ELIF "c1"
-		IsEqual(_ForceDistInt, 6)
+		IsEqual(_ForceIndex, 2)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force6)
 	ELIF "c1"
-		IsEqual(_ForceDistInt, 7)
+		IsEqual(_ForceIndex, 3)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force7)
 	ELIF "c1"
-		IsEqual(_ForceDistInt, 8)
+		IsEqual(_ForceIndex, 4)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force8)
 	ELIF "c1"
-		IsEqual(_ForceDistInt, 9)
+		IsEqual(_ForceIndex, 5)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force9)
 	ELIF "c1"
-		IsEqual(_ForceDistInt, 10)
+		IsEqual(_ForceIndex, 6)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force10)
 	ELIF "c1"
-		IsEqual(_ForceDistInt, 11)
+		IsEqual(_ForceIndex, 7)
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force11)
-	ELSE
+	ELIF "c1"
+		IsEqual(_ForceIndex, 8)
+	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force12)
 	ENDIF
-	ShootLocalProjectileAt(_ForceSkill, _GreatbowCaster, FLOAT3:{0;3.0;0}, _Target, -1, _GreatbowCaster)
-	
+	IF "c1"
+		CharacterGetStat(_LevelF, _Source, Level)
+	THEN
+		Cast(_Level, _LevelF)
+	ENDIF
+	ShootLocalProjectileAt(_ForceSkill, _Source, FLOAT3:{0;3.0;0}, _Target, _Level, _Source)
+	/*
 	Print(_DebugMessage, "[LLWEAPONEX:Greatbows:CushionForce] Distance([1] - [2] = [3] | Int([4])) = Skill [5]", %LLWEAPONEX_Greatbow_KnockbackMaxStart, _Dist, _ForceDist, _ForceDistInt, _ForceSkill)
 	SetVar(_GreatbowCaster, "LeaderLog_Type", STRING:"Debug")
 	SetVar(_GreatbowCaster, "LeaderLog_Message", _DebugMessage)
 	CharacterEvent(_GreatbowCaster, "LeaderLog_Commands_Log")
-	
-ENDIF
-	
-EVENT LLWEAPONEX_Greatbows_CushionForce_End
-VARS
-	CHARACTER:_Target
-	CHARACTER:_GreatbowCaster
-ON
-	OnCharacterStatusRemoved(_Target, SHOCKWAVE)
-ACTIONS
-IF "c1&c2"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE, _GreatbowCaster)
-	CharacterIsEnemy(_Target, _GreatbowCaster)
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_CUSHION_DAMAGE, 0, 0, _GreatbowCaster)
-ENDIF
-	CharacterRemoveStatus(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE, null, 0)
+	*/
 
 EVENT LLWEAPONEX_Greatbows_CushionForce_DamageCheck_Characters
 VARS

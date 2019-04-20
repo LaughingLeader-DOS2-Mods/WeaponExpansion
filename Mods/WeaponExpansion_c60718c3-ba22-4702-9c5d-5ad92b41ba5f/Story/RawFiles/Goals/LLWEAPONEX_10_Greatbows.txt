@@ -63,6 +63,36 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0, "Lightning", "LLWEAPONEX_FX_Proje
 
 //Omnibolt
 DB_LLWEAPONEX_Greatbows_TemplateToID("WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", "Lightning");
+
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(0.0, 1.2, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE1");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(1.2, 2.4, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE2");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(2.4, 3.6, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE3");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(3.6, 4.8, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE4");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(4.8, 6.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE5");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(6.0, 7.2, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE6");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(7.2, 9.4, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE7");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(9.4, 11.5, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE8");
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(11.5, 999.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE9");
+
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(0.25, 2.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE1");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(2.0, 3.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE2");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(3.0, 4.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE3");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(4.0, 5.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE4");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(5.0, 9.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE5");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(9.0, 12.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE6");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(12.0, 16.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE7");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(16.0, 19.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE8");
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(19.0, 999.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE9");
+
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(0, -999.0, 5.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(1, 5.0, 6.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(2, 6.0, 7.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(3, 7.0, 8.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(4, 8.0, 9.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(5, 9.0, 10.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(6, 10.0, 11.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(7, 11.0, 12.0);
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(8, 12.0, 999.0);
 //END_REGION
 
 //REGION UPDATES
@@ -262,6 +292,154 @@ PROC
 LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Character, (GUIDSTRING)_Target, "LLWEAPONEX_Greatbows_ProcOmniBolt")
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE", 0.0, 0, _Character);
+//END_REGION
+
+//REGION CUSHION_FORCE
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_GREATBOW_CUSHION_FORCE", (CHARACTERGUID)_Source)
+AND
+_Source != NULL_00000000-0000-0000-0000-000000000000
+AND
+GetPosition(_Target, _x, _y, _z)
+AND
+GetDistanceTo(_Target, _Source, _Dist)
+AND
+RealSubtract(12.0, _Dist, _ForceDist) // Closer == Launch farther
+THEN
+LLWEAPONEX_Greatbows_Internal_CushionForce_DetermineForceIndex(_Target, _Source, _ForceDist);
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z);
+CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_Greatbow_CushionForce_StartLaunch");
+
+PROC
+LLWEAPONEX_Greatbows_Internal_CushionForce_DetermineForceIndex((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_ForceDist)
+AND
+DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(_Index, _Min, _Max)
+AND
+NOT DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved(_Target, _Source)
+AND
+_ForceDist >= _Min
+AND
+_ForceDist < _Max
+THEN
+DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved(_Target, _Source);
+SetVarInteger(_Target, "LLWEAPONEX_CushionForce_ForceIndex", _Index);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_CushionForce_DetermineForceIndex((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_ForceDist)
+AND
+DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved(_Target, _Source)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved(_Target, _Source);
+
+IF
+CharacterStatusRemoved(_Target, "SHOCKWAVE", _)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z)
+AND
+GetPosition(_Target, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z);
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz);
+ProcObjectTimer(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling", 60);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling")
+AND
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz)
+AND
+GetPosition(_Target, _cx, _cy, _cz)
+AND
+RealSubtract(_ty, _cy, _HeightDiff)
+AND
+LeaderLib_Math_QRY_AbsoluteValue(_HeightDiff)
+AND
+DB_LeaderLib_Math_AbsoluteValue(_HeightDiff, _HeightDiffAbs)
+THEN
+NOT DB_LeaderLib_Math_AbsoluteValue(_HeightDiff, _HeightDiffAbs);
+NOT DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz);
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _cx, _cy, _cz);
+LLWEAPONEX_Greatbows_Internal_CushionForce_CheckForFalling(_Target, _HeightDiffAbs);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_CushionForce_CheckForFalling((CHARACTERGUID)_Target, (REAL)_HeightDiff)
+AND
+_HeightDiff > 0.01
+THEN
+ProcObjectTimer(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling", 48);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_CushionForce_CheckForFalling((CHARACTERGUID)_Target, (REAL)_HeightDiff)
+AND
+_HeightDiff <= 0.01
+AND
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz);
+RemoveStatus(_Target, "LLWEAPONEX_GREATBOW_CUSHION_FORCE");
+LLWEAPONEX_Greatbows_Internal_DistanceDamage_Start(_Target, _Source, _x, _y, _z);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_DistanceDamage_Start((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+LeaderLib_Combat_QRY_IsEnemy(_Target, _Source) // Checks for friendly fire
+AND
+GetPosition(_Target, _tx, _ty, _tz)
+AND
+GetDistanceToPosition(_Target, _x, _y, _z, _Dist)
+AND
+RealSubtract(_ty, _y, _FallDistance)
+AND
+LeaderLib_Math_QRY_AbsoluteValue(_FallDistance)
+AND
+DB_LeaderLib_Math_AbsoluteValue(_FallDistance, _FallDistanceAbs)
+THEN
+NOT DB_LeaderLib_Math_AbsoluteValue(_FallDistance, _FallDistanceAbs);
+LLWEAPONEX_Greatbows_Internal_DistanceDamage_Apply(_Target, _Source, _Dist);
+LLWEAPONEX_Greatbows_Internal_FallDamage_Apply(_Target, _Source, _FallDistanceAbs);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_DistanceDamage_Apply((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_TotalDist)
+AND
+DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(_Min, _Max, _Status)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_DistanceDamageResolved(_Target, _Source)
+AND
+_TotalDist >= _Min
+AND
+_TotalDist <= _Max
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_DistanceDamageResolved(_Target, _Source);
+ApplyStatus(_Target, _Status, 0.0, 0, _Source);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_DistanceDamage_Apply((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_TotalDist)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_DistanceDamageResolved(_Target, _Source)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_DistanceDamageResolved(_Target, _Source);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_FallDamage_Apply((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_FallDistance)
+AND
+_FallDistance >= 0.25
+AND
+DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(_Min, _Max, _Status)
+AND
+NOT DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source)
+AND
+_FallDistance >= _Min
+AND
+_FallDistance <= _Max
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source);
+ApplyStatus(_Target, _Status, 0.0, 0, _Source);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_FallDamage_Apply((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_FallDistance)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source);
 //END_REGION
 EXITSECTION
 

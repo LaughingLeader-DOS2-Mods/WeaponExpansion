@@ -270,6 +270,25 @@ PROC_StopLoopEffect(_Player, "LLWEAPONEX.CombatShield");
 */
 
 IF
+GameStarted(_, 1)
+THEN
+CharacterLaunchOsirisOnlyIterator("LLWEAPONEX_Debug_SaveStartPosition");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_SaveStartPosition")
+AND
+GetPosition(_Char, _x, _y, _z)
+THEN
+DB_LLWEAPONEX_Debug_StartPosition(_Char, _x, _y, _z);
+
+IF
+CharacterUsedItem(_Character, ITEMGUID_S_LLWEAPONEX_Debug_Level_ResetPos_000_4599b6eb-0afc-4870-9971-54c8b5375676)
+AND
+DB_LLWEAPONEX_Debug_StartPosition(CHARACTERGUID_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f, _x, _y, _z)
+THEN
+TeleportToPosition(CHARACTERGUID_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f, _x, _y, _z, "", 1, 0);
+
+IF
 CharacterUsedItem(_Character, ITEMGUID_PUZ_Lever_Floor_A_000_457bdc0e-ed46-4e46-a49f-51f65fac7c2c)
 THEN
 ApplyStatus(_Character, "RESTED", -12.0, 1, _Character);
@@ -282,6 +301,7 @@ ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_000_e026f14d-6290-44c2-989d-984d03a4
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_001_270b72cd-90e5-480e-9677-69040d566818, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_Undead_000_84f397e8-fdea-427a-a0ba-2e367a7eae45, "LLWEAPONEX_DEBUG_IMMORTAL", -1.0, 1);
 
+//REGION RECON_COMMANDS
 IF
 TextEventSet("llweap_preset")
 AND
@@ -427,6 +447,7 @@ CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt", 0
 CharacterUnlockRecipe(_Host, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin", 0);
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_A_Charge", 0);
 CharacterUnlockRecipe(_Host, "LOOT_LLWEAPONEX_Orb_Thunder_B_Charge", 0);
+//END_REGION
 
 IF
 CharacterUsedSkill(_Player, _, _, _)
@@ -448,7 +469,8 @@ CharacterUsedItem(_Character, _Item)
 AND
 String(_Item, _ItemStr)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItem] [",_Name,"] used item [",_ItemStr,"].");
 
@@ -457,7 +479,8 @@ CharacterUsedItemTemplate(_Character, _Template, _Item)
 AND
 String(_Item, _ItemStr)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItemTemplate] [",_Name,"] used item [",_ItemStr,"][",_Template,"].");
 
@@ -466,7 +489,8 @@ CharacterUsedItemFailed(_Character, _Item)
 AND
 String(_Item, _ItemStr)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItemFailed] [",_Name,"] used item failed [",_ItemStr,"].");
 
@@ -475,7 +499,8 @@ CanUseItem(_Character, _Item, _)
 AND
 String(_Item, _ItemStr)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CanUseItem] [",_Name,"] is about to use item [",_ItemStr,"].");
 
@@ -484,7 +509,8 @@ ItemRemovedFromCharacter(_Item, _Character)
 AND
 String(_Item, _ItemStr)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemRemovedFromCharacter] [",_Name,"] lost item [",_ItemStr,"].");
 
@@ -493,7 +519,8 @@ CharacterStoppedUsingItem(_Character, _Item)
 AND
 String(_Item, _ItemStr)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStoppedUsingItem] [",_Name,"] stopping using item [",_ItemStr,"].");
 
@@ -589,7 +616,8 @@ CharacterStatusAttempt(_Character, _Status, _Causee)
 AND
 String(_Causee, _Cause)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
 
@@ -598,7 +626,8 @@ CharacterStatusApplied(_Character, _Status, _Causee)
 AND
 String(_Causee, _Cause)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
 
@@ -607,7 +636,8 @@ CharacterStatusRemoved(_Character, _Status, _Causee)
 AND
 String(_Causee, _Cause)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
 
@@ -652,21 +682,24 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterKilledBy] [",_Name,"] wa
 IF
 CharacterPrecogDying(_Character)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterPrecogDying] [",_Name,"] is about to die.");
 
 IF
 CharacterDying(_Character)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterDying] [",_Name,"] is dying.");
 
 IF
 CharacterDied(_Character)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterDied] [",_Name,"] died.");
 
@@ -679,7 +712,8 @@ AND
 //CharacterGetDisplayName(_Causee, _, _Cause)
 String(_Causee, _Cause)
 AND
-//CharacterGetDisplayName(_Character, _, _Name)
+////CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
@@ -692,7 +726,8 @@ AND
 //CharacterGetDisplayName(_Causee, _, _Cause)
 String(_Causee, _Cause)
 AND
-//CharacterGetDisplayName(_Character, _, _Name)
+////CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
@@ -700,7 +735,8 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status ["
 IF
 CharacterStatusRemoved(_Character, _Status, _)
 AND
-//CharacterGetDisplayName(_Character, _, _Name)
+////CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"].");
@@ -738,7 +774,8 @@ LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusRemoved] Status [",_Sta
 IF
 CharacterTeleported(_Character, _, _x, _y, _z, _tx, _ty, _tz, _Skill)
 AND
-CharacterGetDisplayName(_Character, _, _Name)
+//CharacterGetDisplayName(_Character, _, _Name)
+String(_Character, _Name)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterTeleported] Character [",_Name,"] teleported via [",_Skill,"].");
 //END_REGION
@@ -920,6 +957,41 @@ AND
 DB_LLWEAPONEX_OniGauntlet_StartingWeapons(_Skill, _, _ID)
 THEN
 DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID);
+//END_REGION
+
+//REGION SURFACES
+IF
+CharacterStatusApplied(_Character, "INSURFACE", _)
+AND
+GetSurfaceGroundAt(_Character, _Surface)
+AND
+String(_Character, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:INSURFACE] [",_Name,"] entered ground surface [",_Surface,"].");
+
+IF
+CharacterStatusApplied(_Character, "INSURFACE", _)
+AND
+GetSurfaceCloudAt(_Character, _Surface)
+AND
+String(_Character, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:INSURFACE] [",_Name,"] entered cloud surface [",_Surface,"].");
+//END_REGION
+
+//REGION FORCE_TRACE
+IF
+CharacterStatusRemoved(_Character, "SHOCKWAVE", _)
+AND
+GetPosition(_Character, _x, _y, _z)
+AND
+String(_Character, _Name)
+AND
+StringConcatenate("[WeaponExpansion:Debug:SHOCKWAVE] SHOCKWAVE was removed from [",_Name, _Str1)
+AND
+StringConcatenate(_Str1, "] Position: ", _Prefix)
+THEN
+LeaderLog_TracePosition(_Character, _Prefix, "");
 //END_REGION
 
 //Quicker recharging
