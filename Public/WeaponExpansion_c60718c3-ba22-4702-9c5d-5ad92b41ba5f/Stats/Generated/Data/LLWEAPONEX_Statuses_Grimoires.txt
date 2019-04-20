@@ -341,6 +341,7 @@ data "Items" "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark"
 data "StatusEffect" "LLWEAPONEX_FX_Grimoire_Spark_Equipped_Hand_01:Dummy_R_HandFX"
 data "StatsId" "Stats_LLWEAPONEX_Grimoire_Spark_Equipped"
 data "StackId" "Stack_LLWEAPONEX_Grimoire_Spark_Equipped"
+data "Toggle" "Yes"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Spark_Equipped"
 type "Potion"
