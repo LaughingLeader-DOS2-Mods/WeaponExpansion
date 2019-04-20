@@ -14,7 +14,8 @@ THEN
 //LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Death", "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE");
 //LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Mimicry", "LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE");
 //LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Fire", "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE");
-//LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Equip_Spark", "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED");
+LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Equip_Spark", "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED");
+LeaderLib_Statuses_Register_PermanentStatus("WeaponExpansion", "Grimoires", "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", "LLWEAPONEX_Grimoire_Spark_Equipped");
 
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_3ef2d9c5-13e3-48a2-ab11-36f118ec7e67", "LLWEAPONEX_Grimoire_Death");
 DB_LLWEAPONEX_Grimoire_Tags("WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_c9fcc947-4423-40b9-9629-ae2d1e156dfc", "LLWEAPONEX_Grimoire_Mimicry");

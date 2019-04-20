@@ -61,4 +61,5 @@
 	<content contentuid="hf1571b7eg8f35g4da2g8e38g87fee1c3d79f" OT="Requires [1] [2]&lt;br&gt;">Requires [2] [1]&lt;br&gt;</content>
 	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36" OT="Blows up your target">Applies additional effects on hit</content>
 	<content contentuid="h10c50c3fg3013g4daag854dg6ecf5511972f">Reflects [1]% of [2][3][4] Damage[5]&lt;br&gt;</content>
+	<content contentuid="hd93c82b0g1650g4a69gb75dg52dc7f02bca0" S="Target_DemonicStare_Description" OT="Drain [1] from target character and gain that amount for yourself.">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
 </contentList>

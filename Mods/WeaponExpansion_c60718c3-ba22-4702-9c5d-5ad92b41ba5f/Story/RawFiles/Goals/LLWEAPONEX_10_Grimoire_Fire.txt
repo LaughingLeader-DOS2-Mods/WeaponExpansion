@@ -17,9 +17,13 @@ RemoveStatus(_Character, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED");
 
 //REGION ETERNAL_SPARK_ANIM_OVERRIDE
 IF
-CharacterStatusApplied(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
+ObjectFlagSet("LLWEAPONEX_Grimoire_Spark_Equipped", (CHARACTERGUID)_Player, _)
 THEN
 ShowNotification(_Player, "LLWEAPONEX_Notifications_EternalSparkEquipped");
+
+IF
+CharacterStatusApplied(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
+THEN
 CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusApplied] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] applied. Setting animation set override to [LLWEAPONEX_Override1].");
 

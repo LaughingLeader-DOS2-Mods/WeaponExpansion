@@ -34,7 +34,7 @@ LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandGained(_Player);
 PROC
 LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandGained((CHARACTERGUID)_Player)
 AND
-ObjectGetFlag(_Player, "LLWEAPONEX_DuelistStanceWasEnabled", 1)
+ObjectGetFlag(_Player, "LLWEAPONEX_DuelistStanceWasEnabled", 1) // Set/cleared by LeaderLib when the toggle skill is used
 AND
 NOT LeaderLib_Helper_QRY_HasPermanentStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
 THEN

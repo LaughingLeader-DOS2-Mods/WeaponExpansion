@@ -129,3 +129,4 @@ Thumbs.db
 _ProjectFiles/Backup_LocalKeys_Statuses_Runeblades_WithPercentages.txt
 *settings.json
 *.session
+*.code-workspace
