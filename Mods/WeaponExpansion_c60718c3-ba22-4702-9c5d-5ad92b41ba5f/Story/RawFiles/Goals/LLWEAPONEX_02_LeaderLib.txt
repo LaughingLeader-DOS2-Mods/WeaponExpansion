@@ -162,7 +162,7 @@ LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Greatbow.Lightning", 15, "Boost_Weapon_EmptyRuneSlot");
 
 //Beholder
-LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Swords.Beholder", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Swords.Beholder", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 4, "Boost_Weapon_Ability_WarriorLore_Sword");
 //LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 6, "Boost_Weapon_LifeSteal_Large_TwoHanded");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 7, "Boost_Weapon_EmptyRuneSlot");

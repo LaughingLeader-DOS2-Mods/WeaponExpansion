@@ -22,7 +22,7 @@ LLWEAPONEX_Uniques_InitSettings();
 
 //REGION BEHOLDER
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 THEN
 DB_LLWEAPONEX_Uniques_BeholderEquipped(_Character);
 
@@ -43,7 +43,7 @@ PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.BeholderUnsheathed");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Sheathed] Stopping Beholder unsheathed loop effect on character.");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Parasite_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 AND
 DB_LLWEAPONEX_Uniques_BeholderEquipped(_Player)
 THEN
