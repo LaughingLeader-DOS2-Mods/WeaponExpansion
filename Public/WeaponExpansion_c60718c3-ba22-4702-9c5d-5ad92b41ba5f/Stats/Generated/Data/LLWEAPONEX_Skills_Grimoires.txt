@@ -513,10 +513,10 @@ data "DescriptionRef" "Activate the <font color='#FF5A00'>Fire Magic</font> with
 data "StatsDescriptionParams" "StatusData:LLWEAPONEX_HEAL_ALL_SAFE_1:HealAmount"
 data "PrepareAnimationInit" "skill_prepare_air_01_start"
 data "PrepareAnimationLoop" "skill_prepare_air_01_loop"
-data "PrepareEffect" "RS3_FX_Skills_Fire_Prepare_Fire_Root_01,KeepRot;RS3_FX_Skills_Fire_Prepare_Fire_Hand_01:Dummy_L_HandFX,Dummy_R_HandFX"
-data "CastAnimation" "skill_cast_self_air_01_cast"
+data "PrepareEffect" "LLWEAPONEX_FX_Skills_Grimoire_Prepare_Fire_Root_01,KeepRot:Dummy_Root;RS3_FX_Skills_Fire_Prepare_Fire_BodyFX_01:Dummy_Root"
+data "CastAnimation" "skill_cast_ground_fire_01_cast"
 data "CastTextEvent" "cast"
-data "CastEffect" "RS3_FX_Skills_Fire_Cast_Hand_01:Dummy_R_HandFX:cast;RS3_FX_Skills_Fire_Throw_Cast_Hand_01:Dummy_R_HandFX"
+data "CastEffect" "RS3_FX_Skills_Fire_Cast_Self_Earth_Root_01:Dummy_Root:cast"
 
 new entry "Shout_LLWEAPONEX_Grimoire_Equip_Spark"
 type "SkillData"

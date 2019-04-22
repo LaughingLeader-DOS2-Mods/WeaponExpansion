@@ -1923,3 +1923,5 @@ new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
 add levelgroup 0,0,"All"
 add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3","",""
+
+//Overrides
