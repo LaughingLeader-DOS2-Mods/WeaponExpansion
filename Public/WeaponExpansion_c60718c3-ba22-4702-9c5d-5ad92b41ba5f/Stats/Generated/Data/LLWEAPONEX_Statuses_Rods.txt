@@ -12,6 +12,10 @@ new entry "LLWEAPONEX_ROD_CHAOS"
 type "StatusData"
 using "LLWEAPONEX_ROD_SKILL_BASE"
 
+new entry "LLWEAPONEX_ROD_EARTH"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_BASE"
+
 new entry "LLWEAPONEX_ROD_FIRE"
 type "StatusData"
 using "LLWEAPONEX_ROD_SKILL_BASE"

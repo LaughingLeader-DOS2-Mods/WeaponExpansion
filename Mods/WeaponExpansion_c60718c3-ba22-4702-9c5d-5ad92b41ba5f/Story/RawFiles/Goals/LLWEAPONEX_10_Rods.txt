@@ -16,6 +16,7 @@ DB_LLWEAPONEX_Rods_SkillStatuses("LLWEAPONEX_ROD_WATER", "LLWEAPONEX_ROD_SKILL_W
 //Possibly preferred since RemoveHarmfulStatuses can clear the status version
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_AIR", "Projectile_LLWEAPONEX_ShootRod_Air", "Projectile_LLWEAPONEX_ShootRod_Air_Offhand");
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_CHAOS", "Projectile_LLWEAPONEX_ShootRod_Chaos", "Projectile_LLWEAPONEX_ShootRod_Chaos_Offhand");
+DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_EARTH", "Projectile_LLWEAPONEX_ShootRod_Earth", "Projectile_LLWEAPONEX_ShootRod_Earth_Offhand");
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_FIRE", "Projectile_LLWEAPONEX_ShootRod_Fire", "Projectile_LLWEAPONEX_ShootRod_Fire_Offhand");
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_POISON", "Projectile_LLWEAPONEX_ShootRod_Poison", "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand");
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_WATER", "Projectile_LLWEAPONEX_ShootRod_Water", "Projectile_LLWEAPONEX_ShootRod_Water_Offhand");

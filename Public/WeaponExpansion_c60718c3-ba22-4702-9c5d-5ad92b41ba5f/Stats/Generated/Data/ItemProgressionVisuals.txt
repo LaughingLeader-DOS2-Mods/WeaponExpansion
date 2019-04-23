@@ -1220,6 +1220,12 @@ add levelgroup 0,0,"All"
 add rootgroup "eaade06f-bc85-4294-8a1e-542d3b20f74f",""
 add namegroup "WPN_LLWEAPONEX_CraftedRod_Chaos","",""
 
+new itemgroup "WPN_LLWEAPONEX_CraftedRod_Earth"
+
+add levelgroup 0,0,"All"
+add rootgroup "eaade06f-bc85-4294-8a1e-542d3b20f74f",""
+add namegroup "WPN_LLWEAPONEX_Improv_Rod","",""
+
 new itemgroup "WPN_LLWEAPONEX_CraftedRod_Fire"
 
 add levelgroup 0,0,"All"

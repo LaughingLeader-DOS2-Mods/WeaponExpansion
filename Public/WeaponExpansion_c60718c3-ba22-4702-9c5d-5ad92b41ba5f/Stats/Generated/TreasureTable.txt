@@ -706,6 +706,15 @@ IgnoreLevelDiff 1
 new subtable "-1"
 object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,0,0,0,0,0,1,0
 
+new treasuretable "S_LLWEAPONEX_Npc_Rods"
+new subtable "-1"
+object category "I_WPN_LLWEAPONEX_Npc_Rods_Air",1,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Npc_Rods_Chaos",1,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Npc_Rods_Earth",1,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Npc_Rods_Fire",1,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Npc_Rods_Poison",1,1,0,0,0,0,0,0
+object category "I_WPN_LLWEAPONEX_Npc_Rods_Water",1,1,0,0,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_RemoteMines_Displacement_Free"
 new subtable "2,1"
 object category "I_WPN_LLWEAPONEX_RemoteMine_Displacement_Free",1,1,0,0,0,0,0,0
