@@ -1809,6 +1809,7 @@ data "Charges" "0"
 data "MaxCharges" "0"
 data "ItemColor" "LLWEAPONEX_Runeblade_ChaosEdge"
 data "Flags" "Unbreakable"
+data "ExtraProperties" ""
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 type "Weapon"
