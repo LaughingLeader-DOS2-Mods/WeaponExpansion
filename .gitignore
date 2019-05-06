@@ -58,6 +58,7 @@ EditorBrowserMetadata.xml
 *.lsmg
 *.fbx
 *.lsm
+*.wav
 
 # Logs               #
 ######################
