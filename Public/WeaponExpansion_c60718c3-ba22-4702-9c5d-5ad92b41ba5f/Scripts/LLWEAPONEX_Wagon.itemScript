@@ -1,0 +1,212 @@
+INIT
+	ITEM:__Me
+	CHARACTER:%Rider = null
+	CHARACTER:%Driver = null
+	FLOAT3:%Driver_LastPos = null
+	FLOAT:%UpdateSpeed = 0.01
+	INT:%Animating = 0
+	INT:%Animating_Stopping = 0
+EVENTS
+
+EVENT LLWEAPONEX_Wagon_Init
+ON
+	OnInit()
+ACTIONS
+IF "c1"
+	IsEqual(%Rider, null)
+THEN
+	ClearFlag(__Me, "LLWEAPONEX_Wagon_HasRider")
+ENDIF
+
+EVENT LLWEAPONEX_Wagon_Start
+ON
+	OnFunction("LLWEAPONEX_Wagon_Start")
+ACTIONS
+IF "!c1&!c2"
+	IsEqual(%Rider, null)
+	IsEqual(%Driver, null)
+THEN
+	StartTimer("LLWEAPONEX_Wagon_UpdatePosition", %UpdateSpeed, -1)
+ELSE
+	StopTimer("LLWEAPONEX_Wagon_UpdatePosition")
+ENDIF
+
+EVENT LLWEAPONEX_Driver_Set
+VARS
+	CHARACTER:_Character
+ON
+	OnCharacterItemEvent(_Character, __Me, "LLWEAPONEX_Wagon_UsedWhileRiding")
+ACTIONS
+IF "c1"
+	IsEqual(%Driver, _Character)
+THEN
+	Set(%Driver, null)
+	StatusText(__Me, "Driver Cleared")
+ELIF "c1"
+	IsEqual(%Driver, null)
+THEN
+	Set(%Driver, _Character)
+	StatusText(__Me, "Driver Set")
+	IF "c1"
+		GetPosition(%Driver, %Driver_LastPos)
+	THEN
+	
+	ENDIF
+ENDIF
+	CallFunction("LLWEAPONEX_Wagon_Start")
+
+EVENT LLWEAPONEX_Rider_Set
+VARS
+	CHARACTER:_Character
+ON
+	OnUseItem(_Character, __Me)
+ACTIONS
+IF "c1&!c2"
+	IsEqual(%Rider, null)
+	IsEqual(%Driver, _Character)
+THEN
+	Set(%Rider, _Character)
+	StatusText(__Me, "Rider Set")
+	PlaySound(_Character, "Items_Objects_Sitting_Cushion")
+	SetFlag(__Me, "LLWEAPONEX_Wagon_HasRider")
+	//CharacterApplyStatus(_Character, PHYSICAL_IMMUNITY, -1, 1, __Me)
+ELIF "c1"
+	IsEqual(%Driver, _Character)
+THEN
+	Set(%Driver, null)
+	StatusText(__Me, "Driver Cleared")
+ENDIF
+	CallFunction("LLWEAPONEX_Wagon_Start")
+
+EVENT LLWEAPONEX_Rider_Clear
+ON
+	OnCharacterStatusRemoved(%Rider, SITTING)
+ACTIONS
+	Set(%Rider, null)
+	StatusText(__Me, "Rider Cleared")
+	ClearFlag(__Me, "LLWEAPONEX_Wagon_HasRider")
+IF "c1|c2"
+	IsEqual(%Rider, null)
+	IsEqual(%Driver, null)
+THEN
+	StopTimer("LLWEAPONEX_Wagon_UpdatePosition")
+ENDIF
+
+EVENT LLWEAPONEX_Rider_Timer
+VARS
+	FLOAT3:_Pos
+	FLOAT3:_Forward
+	FLOAT:_Dist
+ON
+	OnTimer("LLWEAPONEX_Wagon_UpdatePosition")
+ACTIONS
+IF "!c1&!c2&c3&!c4"
+	IsEqual(%Rider, null)
+	IsEqual(%Driver, null)
+	GetPosition(%Driver, _Pos)
+	IsEqual(_Pos, %Driver_LastPos)
+THEN
+	Set(%Driver_LastPos, _Pos)
+	GetForwardDirection(%Driver, _Forward)
+	Multiply(_Forward, -1)
+	Add(_Pos, _Forward)
+	TeleportTo(__Me, _Pos)
+	CharacterItemEvent(%Driver, __Me, "LLWEAPONEX_Wagon_MatchRotation")
+	IF "c1"
+		IsEqual(%Animating, 0)
+	THEN
+		SetPriority("LLWEAPONEX_Wagon_AnimateMoving", 999)
+		SetPriority("LLWEAPONEX_Wagon_AnimateIdle", 0)
+		Set(%Animating, 1)
+	ENDIF
+	IF "c1"
+		IsEqual(%Animating_Stopping, 1)
+	THEN
+		StopTimer("LLWEAPONEX_Wagon_StopAnimating")
+		Set(%Animating_Stopping, 0)
+	ENDIF
+ELSE
+	IF "c1&c2"
+		IsEqual(%Animating, 1)
+		IsEqual(%Animating_Stopping, 0)
+	THEN
+		Set(%Animating_Stopping, 1)
+		StartTimer("LLWEAPONEX_Wagon_StopAnimating", 0.2, 0)
+	ENDIF
+ENDIF
+
+EVENT LLWEAPONEX_Wagon_StopAnimatingTimer
+ON
+	OnTimer("LLWEAPONEX_Wagon_StopAnimating")
+ACTIONS
+IF "c1"
+	IsEqual(%Animating_Stopping, 1)
+THEN
+	SetPriority("LLWEAPONEX_Wagon_AnimateMoving", 0)
+	SetPriority("LLWEAPONEX_Wagon_AnimateIdle", 999)
+	Set(%Animating, 0)
+	Set(%Animating_Stopping, 0)
+ENDIF
+/*
+EVENT LLWEAPONEX_Debug
+VARS
+	CHARACTER:_Character
+ON
+	OnUseItem(_Character, __Me)
+ACTIONS
+IF "c1"
+	IsEqual(%Driver, _Character)
+THEN
+	Set(%Driver, null)
+	StatusText(__Me, "Driver Cleared")
+ELSE
+	Set(%Driver, _Character)
+	StatusText(__Me, "Driver Set")
+ENDIF
+*/
+
+BEHAVIOUR
+
+REACTION LLWEAPONEX_Wagon_AnimateMoving,0
+USAGE ALL
+CHECK "c1"
+	IsEqual(%Animating, 1)
+ACTIONS
+	ItemPlayAnimation("moving")
+INTERRUPT
+ACTIONS
+	Reset()
+	
+REACTION LLWEAPONEX_Wagon_AnimateIdle,0
+USAGE ALL
+CHECK "c1"
+	IsEqual(%Animating, 0)
+ACTIONS
+	ItemPlayAnimation("idle")
+INTERRUPT
+ACTIONS
+	Reset()
+/*
+REACTION LLWEAPONEX_Wagon_Follow,999
+VARS
+	FLOAT:_Dist
+	FLOAT3:_Pos
+	FLOAT3:_Forward
+	FLOAT3:_Rot
+USAGE PEACE
+CHECK "!c1&!c2&c3&!c4"
+	IsEqual(%Driver, null)
+	IsEqual(%Rider, null)
+	GetPosition(%Driver, _Pos)
+	IsEqual(_Pos, %Driver_LastPos)
+	//GetDistance(_Dist, __Me, %Driver)
+	//IsGreaterThen(_Dist, 1.0)
+ACTIONS
+	Set(%Driver_LastPos, _Pos)
+	GetForwardDirection(%Driver, _Forward)
+	Multiply(_Forward, -1)
+	Add(_Pos, _Forward)
+	ItemMoveTo(_Pos, 10.0, 0.0, 1, 1)
+	//TeleportTo(__Me, _Pos)
+	//CharacterItemEvent(%Driver, __Me, "LLWEAPONEX_Wagon_MatchRotation")
+*/
