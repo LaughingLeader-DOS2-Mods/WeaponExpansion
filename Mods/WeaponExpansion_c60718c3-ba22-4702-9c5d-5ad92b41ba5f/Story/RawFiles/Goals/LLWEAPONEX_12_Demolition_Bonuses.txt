@@ -182,8 +182,6 @@ THEN
 LLWEAPONEX_Demolition_Internal_ProcessListQueue(_Middleman);
 //END_REGION
 
-
-
 QRY
 LLWEAPONEX_Demolition_QRY_IsBonusItem((ITEMGUID)_Item)
 AND
