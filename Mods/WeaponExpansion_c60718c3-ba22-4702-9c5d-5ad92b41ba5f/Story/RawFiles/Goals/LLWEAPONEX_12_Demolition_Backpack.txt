@@ -8,10 +8,12 @@ PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
 THEN
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion");
+DB_LLWEAPONEX_Demolition_PlayerData_BackpackEquipped(_Character, _Item);
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
 THEN
+NOT DB_LLWEAPONEX_Demolition_PlayerData_BackpackEquipped(_Character, _Item);
 LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion", 1250);
 
@@ -70,6 +72,8 @@ ItemAddCharges(_DemoBackpack, 1);
 IF
 SkillCast(_Character, "Shout_LLWEAPONEX_RemoteMine_Add", _, _)
 AND
+GlobalGetFlag("LLWEAPONEX_Settings_Demolition_BackpackAutoRechargeEnabled", 1)
+AND
 LLWEAPONEX_Demolition_QRY_BackpackIsEquipped(_Character)
 THEN
 LLWEAPONEX_Demolition_StartRecharge(_Character);
@@ -81,6 +85,8 @@ LLWEAPONEX_Demolition_StartRecharge(_Character);
 
 PROC
 LLWEAPONEX_Demolition_StartRecharge((CHARACTERGUID)_Character)
+AND
+GlobalGetFlag("LLWEAPONEX_Settings_Demolition_BackpackAutoRechargeEnabled", 1) // Charges are restored by enemies dying in combat, by default
 AND
 IsHardcoreMode(_HardMode)
 THEN

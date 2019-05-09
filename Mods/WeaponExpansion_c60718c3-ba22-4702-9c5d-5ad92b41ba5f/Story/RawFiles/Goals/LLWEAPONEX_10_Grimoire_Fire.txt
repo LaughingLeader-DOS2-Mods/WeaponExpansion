@@ -24,14 +24,31 @@ ShowNotification(_Player, "LLWEAPONEX_Notifications_EternalSparkEquipped");
 IF
 CharacterStatusApplied(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
 THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusApplied] [LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED] applied. Setting animation set override to [LLWEAPONEX_Override1].");
 CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusApplied] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] applied. Setting animation set override to [LLWEAPONEX_Override1].");
 
 IF
 CharacterStatusRemoved(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
 THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusRemoved] [LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED] removed. Clearing animation set override.");
 CharacterSetAnimationSetOverride(_Player, "");
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusRemoved] [LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE] removed. Clearing animation set override.");
+LLWEAPONEX_Grimoire_Fire_RemoveSparkDamageStatuses(_Player);
+
+PROC
+LLWEAPONEX_Grimoire_Fire_RemoveSparkDamageStatuses((CHARACTERGUID)_PLayer)
+THEN
+RemoveStatus(_PLayer, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_1");
+RemoveStatus(_PLayer, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_2");
+RemoveStatus(_PLayer, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_3");
+RemoveStatus(_PLayer, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_4");
+RemoveStatus(_PLayer, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_5");
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark_0f469658-5dee-454c-a458-eff50a845970", _Player)
+AND
+HasActiveStatus(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", 1)
+THEN
+RemoveStatus(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED");
 //END_REGION
 
 //REGION GRIMOIRE_BONUS

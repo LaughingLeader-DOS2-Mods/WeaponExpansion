@@ -6,6 +6,23 @@ KBSECTION
 
 //REGION CHARGES
 IF
+CharacterPrecogDying(_Enemy)
+AND
+DB_LLWEAPONEX_Demolition_PlayerData_BackpackEquipped(_Character, _Item)
+AND
+_Character != _Enemy
+AND
+NOT LeaderLib_Helper_QRY_ChargesAreMaxed(_Item)
+AND
+CharacterIsSummon(_Enemy, 0)
+AND
+CharacterIsEnemy(_Enemy, _Character, 1)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Enemy)
+THEN
+ItemAddCharges(_Item, 1);
+
+IF
 CharacterKilledBy(_Enemy, _, _Player)
 AND
 DB_LLWEAPONEX_RemoteMines_Temp_JustDetonated(_Player)

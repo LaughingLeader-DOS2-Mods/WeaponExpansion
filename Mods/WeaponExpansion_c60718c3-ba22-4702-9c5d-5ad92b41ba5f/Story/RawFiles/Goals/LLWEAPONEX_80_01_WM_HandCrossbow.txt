@@ -3,6 +3,29 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+//Auto-Insert Bolts
+IF
+ItemTemplateAddedToCharacter(_ItemTemplateGuid, _Bolts, _Character)
+AND
+IsTagged(_Character, "LLWEAPONEX_HandCrossbow_Equipped", 1)
+AND
+IsTagged(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo", 0)
+AND
+String(_ItemTemplateGuid, _RuneTemplate)
+AND
+DB_LeaderLib_Helper_Runes_Templates("WeaponExpansion.HandCrossbowBolt", _RuneTemplate)
+AND
+LLWEAPONEX_HandCrossbow_QRY_GetHandcrossbow(_Character, 0)
+AND
+DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Character, _HandCrossbow)
+THEN
+NOT DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Character, _HandCrossbow);
+ItemInsertRune(_Character, _HandCrossbow, _RuneTemplate, 0);
+ItemRemove(_Bolts);
+LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Auto-inserted crossbow bolts into empty Handcrossbow.");
+CharacterStatusText(_Character, "LLWEAPONEX_Handcrossbow_BoltAutoInserted");
+
 IF
 RuneInserted(_Character, _HandCrossbow, _RuneTemplate, _Slot)
 AND
@@ -22,6 +45,7 @@ GetTemplate(_Bolt, _RuneTemplate)
 AND
 DB_LeaderLib_Helper_Runes_Templates("WeaponExpansion.HandCrossbowBolt", _RuneTemplate)
 THEN
+ObjectSetFlag(_HandCrossbow, "LLWEAPONEX_HandCrossbow_DisableAutoInsert", 0);
 LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
 LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HandCrossbow_CanReload");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow does not have ammo. ");
