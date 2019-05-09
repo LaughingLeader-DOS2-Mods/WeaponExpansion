@@ -896,3 +896,4 @@ data "UseWeaponDamage" "No"
 data "UseWeaponProperties" "No"
 data "Template" "23a3d64c-2278-42c0-8efe-5ccc88f5abab"
 data "Icon" "unknown"
+
