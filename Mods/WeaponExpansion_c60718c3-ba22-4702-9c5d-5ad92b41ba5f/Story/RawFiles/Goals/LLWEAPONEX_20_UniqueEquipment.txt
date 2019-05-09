@@ -209,6 +209,7 @@ DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
 THEN
 NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
 PlayEffect(_Source, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R");
+ApplyStatus(_Source, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", -1.0, 0, _Source);
 
 IF
 CharacterStatusRemoved(_Target, "LLWEAPONEX_DEMON_HAND_HIT", _)
@@ -216,6 +217,13 @@ AND
 DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
 THEN
 NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_DemonGauntlet_RemoveCritBonus")
+AND
+HasActiveStatus(_Player, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
+THEN
+RemoveStatus(_Player, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
 //END_REGION
 
 EXITSECTION

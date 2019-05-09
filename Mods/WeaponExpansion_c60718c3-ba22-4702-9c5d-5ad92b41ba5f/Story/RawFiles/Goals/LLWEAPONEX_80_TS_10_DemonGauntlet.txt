@@ -15,10 +15,16 @@ LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget(_Target);
 IF
 CharacterCriticalHitBy(_Target, _Source, _)
 AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+HasActiveStatus(_Source, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
 THEN
-LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget(_Target);
+RemoveStatus(_Source, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
 
+IF
+SkillCast(_Player, _, _, _)
+AND
+HasActiveStatus(_Player, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
+THEN
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_DemonGauntlet_RemoveCritBonus", 1500);
 EXITSECTION
 
 ENDEXITSECTION
