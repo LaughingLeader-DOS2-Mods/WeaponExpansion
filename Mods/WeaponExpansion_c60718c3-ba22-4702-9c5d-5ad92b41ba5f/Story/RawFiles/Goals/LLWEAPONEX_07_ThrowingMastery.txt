@@ -143,13 +143,15 @@ DB_IsPlayer(_Player)
 AND
 LLWEAPONEX_ThrowingMastery_QRY_ItemIsThrowingItem(_Item)
 THEN
-DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, NULL_00000000-0000-0000-0000-000000000000);
 
 IF
 CharacterUsedSkillOnTarget(_Player, _Target, _Skill, _, _)
 AND
-DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item)
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _LastTarget)
 THEN
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _LastTarget);
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
 LLWEAPONEX_ThrowingMastery_OnThrowingSkillUsedOnTarget(_Player, _Target, _Item, _Skill);
 
 PROC
@@ -160,10 +162,10 @@ DB_NOOP(1);
 IF
 SkillCast(_Player, _Skill, _, _)
 AND
-DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item)
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target)
 THEN
-NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
-LLWEAPONEX_ThrowingMastery_AddExperience(_Player);
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
+LLWEAPONEX_ThrowingMastery_AddExperience(_Player, _Target);
 LLWEAPONEX_ThrowingMastery_OnThrowingItemUsed(_Player, _Item, _Skill);
 
 PROC
@@ -175,9 +177,9 @@ DB_NOOP(1);
 IF
 CharacterStoppedUsingItem(_Player, _Item)
 AND
-DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item)
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target)
 THEN
-NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item);
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
 //END_REGION
 
 //REGION ADD_XP
@@ -196,7 +198,7 @@ THEN
 DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, 1);
 
 PROC
-LLWEAPONEX_ThrowingMastery_AddExperience((CHARACTERGUID)_Player)
+LLWEAPONEX_ThrowingMastery_AddExperience((CHARACTERGUID)_Player, (GUIDSTRING)_Target)
 AND
 LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, "LLWEAPONEX_ThrowingAbility")
 AND
@@ -205,7 +207,7 @@ AND
 DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _Val)
 THEN
 NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _Val);
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, "LLWEAPONEX_ThrowingAbility", _Val);
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, "LLWEAPONEX_ThrowingAbility", _Val, _Target);
 //END_REGION
 EXITSECTION
 

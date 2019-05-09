@@ -940,7 +940,7 @@ THEN
 LLWEAPONEX_WeaponMastery_InitMasteryVariables(_Player, _WeaponType);
 
 PROC
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Gain)
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Gain, (GUIDSTRING)_Target)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND
