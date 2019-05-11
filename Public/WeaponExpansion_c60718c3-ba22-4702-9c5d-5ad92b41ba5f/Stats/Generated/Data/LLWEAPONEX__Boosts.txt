@@ -109,7 +109,7 @@ data "Damage Type" "Corrosive"
 data "DamageFromBase" "20"
 data "Value" "20"
 
-new entry "_LLWEAPONEX_Boost_Weapon_Damage_Corrosive_Parasite"
+new entry "_LLWEAPONEX_Boost_Weapon_Damage_Corrosive_Beholder"
 type "Weapon"
 using "_BOOSTS_Weapon"
 data "Damage Type" "Corrosive"
