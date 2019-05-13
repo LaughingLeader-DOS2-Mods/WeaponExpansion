@@ -1250,6 +1250,18 @@ add levelgroup 0,0,"All"
 add rootgroup "43e36db3-3988-47e5-aea3-5d998979596a",""
 add namegroup "WPN_LLWEAPONEX_CraftedRod_Chaos","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "1566e0f6-3718-40b4-a7ff-e2c07c3cbd96",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "67ef34e7-5f50-4ef9-9e40-8c7c04884812",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A","",""
+
 new itemgroup "WPN_LLWEAPONEX_Runeblade_Air_1H"
 
 add levelgroup 1,30,"Common"

@@ -20,6 +20,7 @@ DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_EARTH", "Projectile_LLWEAPONEX_ShootRo
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_FIRE", "Projectile_LLWEAPONEX_ShootRod_Fire", "Projectile_LLWEAPONEX_ShootRod_Fire_Offhand");
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_POISON", "Projectile_LLWEAPONEX_ShootRod_Poison", "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand");
 DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_WATER", "Projectile_LLWEAPONEX_ShootRod_Water", "Projectile_LLWEAPONEX_ShootRod_Water_Offhand");
+DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_MAGIC_MISSILE", "Projectile_LLWEAPONEX_ShootRod_MagicMissile", "Projectile_LLWEAPONEX_ShootRod_MagicMissile_Offhand");
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
