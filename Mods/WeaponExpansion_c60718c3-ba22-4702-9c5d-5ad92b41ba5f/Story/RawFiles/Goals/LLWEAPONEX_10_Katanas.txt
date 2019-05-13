@@ -25,6 +25,25 @@ THEN
 CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit");
 
 //REGION COMBO_TURN_ENDING
+/*
+PROC
+LLWEAPONEX_Katanas_ListenForTurnEnding((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status)
+AND
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _OtherStatus)
+THEN
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _OtherStatus);
+
+PROC
+LLWEAPONEX_Katanas_ListenForTurnEnding((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status)
+THEN
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
+*/
+
+/*
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding is cleared when the stored status is removed.
+Since combos share the same stackID and have appropriate priorities, higher combo statuses will clear the previous entry.
+*/
+
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO1", (CHARACTERGUID)_Source)
 THEN

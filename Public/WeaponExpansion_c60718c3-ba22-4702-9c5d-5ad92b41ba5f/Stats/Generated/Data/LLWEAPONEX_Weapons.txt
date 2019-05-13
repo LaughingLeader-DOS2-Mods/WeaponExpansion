@@ -1836,7 +1836,7 @@ data "Projectile" "0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"
 data "ComboCategory" "Crossbow,LLWEAPONEX_Blunderbuss_2H_A"
 data "Flags" "Unbreakable"
 data "Unique" "1"
-data "Boosts" "_Boost_Weapon_LLWEAPONEX_Blunderbuss_BonusDamage_Physical;_LLWEAPONEX_Boost_WeaponMastery_OnHit"
+data "Boosts" "_LLWEAPONEX_Boost_WeaponMastery_OnHit;_Boost_Weapon_LLWEAPONEX_Blunderbuss_BonusDamage_Physical"
 data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_BLUNDERBUSS_EQUIPPED;Ignite;LLWEAPONEX_BLUNDERBUSS_HIT,100,0"
 
 new entry "_LLWEAPONEX_Npc_Blunderbuss_2H"
