@@ -77,6 +77,34 @@ THEN
 ContainerIdentifyAll(_Shield);
 //END_REGION
 
+//REGION UNIQUE_SHIELDS
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Shield_DualShields_GiantDoor_A_5e8ca310-616d-4f18-b455-e510dade5b62")
+AND
+ObjectGetFlag(_Item, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0)
+AND
+GetPosition(_Player, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_CombatShield_GiantDoor_A_b4748a58-427c-4652-bf6c-d596ddcc134d", _x, _y, _z, _CombatShield)
+AND
+CharacterGetLevel(_Player, _Level)
+THEN
+ObjectSetFlag(_Item, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0);
+SetTag(_CombatShield, "LLWEAPONEX_Debug_StorableCombatShield");
+SetVarObject(_Item, "LLWEAPONEX_CombatShield", _CombatShield);
+
+SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Item);
+SetVarFixedString(_CombatShield, "LeaderLib_Rarity", "Unique");
+ItemSetOwner(_CombatShield, _Player);
+
+ItemLevelUpTo(_Item, _Level);
+ItemLevelUpTo(_CombatShield, _Level);
+SetVarInteger(_Item, "LeaderLib_Level", _Level);
+SetVarInteger(_CombatShield, "LeaderLib_Level", _Level);
+
+ItemToInventory(_CombatShield, _Item);
+//END_REGION
+
 //REGION EQUIPPED
 PROC
 LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield((ITEMGUID)_Shield)

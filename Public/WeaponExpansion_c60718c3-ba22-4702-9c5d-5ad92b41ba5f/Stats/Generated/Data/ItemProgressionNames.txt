@@ -642,7 +642,7 @@ add name "Lunaris & Solaris",""
 new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Divine"
 add name "Selene & Helios, Defenders of the Divine",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor"
+new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A"
 add name "Giant Door Greatshields",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_OrmaReeve"

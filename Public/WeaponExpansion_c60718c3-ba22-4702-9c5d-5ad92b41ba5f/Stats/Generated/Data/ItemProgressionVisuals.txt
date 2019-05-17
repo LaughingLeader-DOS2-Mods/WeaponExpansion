@@ -1,4 +1,3 @@
-
 new itemgroup "WPN_LLWEAPONEX_DualShields_Blackring_A"
 
 add levelgroup 1,30,"Common"
@@ -742,6 +741,16 @@ add namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Legendary","",""
 add levelgroup 1,30,"Divine"
 add rootgroup "067f48be-857d-43a8-bd0a-add59f025843",""
 add namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Divine","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_CombatShield_GiantDoor_A"
+add levelgroup 0,0,"All"
+add rootgroup "b4748a58-427c-4652-bf6c-d596ddcc134d",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A","",
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A"
+add levelgroup 0,0,"All"
+add rootgroup "5e8ca310-616d-4f18-b455-e510dade5b62",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A","",
 
 new itemgroup "WPN_LLWEAPONEX_Unarmed_Fist"
 
