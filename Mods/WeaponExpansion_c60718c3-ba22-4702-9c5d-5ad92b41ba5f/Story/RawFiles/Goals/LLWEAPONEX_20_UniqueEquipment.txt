@@ -302,6 +302,121 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Equipping Magic Missile wand/rod.");
 CharacterEquipItem(_Player, _Weapon);
 //END_REGION
+
+//REGION MAGIC_MISSILE_BONUS_HITS
+IF
+CharacterStartAttackObject(_Target, _, _Source)
+AND
+HasActiveStatus(_Source, "LLWEAPONEX_WAND_MAGIC_MISSILE", 1)
+THEN
+LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 580, "LLWEAPONEX_Timers_MagicMissile_Roll", "LLWEAPONEX_MagicMissile_RollForBonuses");
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Source, (GUIDSTRING)_Target, "LLWEAPONEX_MagicMissile_RollForBonuses")
+THEN
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles(_Source, _Target);
+
+PROC
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+AND
+LeaderLib_Roll_QRY(450)
+THEN
+SetVarInteger(_Source, "LLWEAPONEX_MagicMissile_Missile1", 1);
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
+
+PROC
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+AND
+LeaderLib_Roll_QRY(300)
+THEN
+SetVarInteger(_Source, "LLWEAPONEX_MagicMissile_Missile2", 1);
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
+
+PROC
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+AND
+LeaderLib_Roll_QRY(100)
+THEN
+SetVarInteger(_Source, "LLWEAPONEX_MagicMissile_Missile3", 1);
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
+
+PROC
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+AND
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
+LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess(_Source, _Target, "LLWEAPONEX_MagicMissile_FireBonusMissile");
+
+PROC
+LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Event)
+AND
+ObjectIsCharacter(_Target, 1)
+THEN
+CharacterCharacterSetEvent(_Source, (CHARACTERGUID)_Target, _Event);
+
+PROC
+LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Event)
+AND
+ObjectIsItem(_Target, 1)
+THEN
+CharacterItemSetEvent(_Source, (ITEMGUID)_Target, _Event);
+
+/*
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_MAGIC_MISSILE_BONUS1", (CHARACTERGUID)_Source)
+THEN
+CharacterCharacterSetEvent(_Source, _Character, "LLWEAPONEX_MagicMissile_FireBonusMissile1");
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_MAGIC_MISSILE_BONUS2", (CHARACTERGUID)_Source)
+THEN
+CharacterCharacterSetEvent(_Source, _Character, "LLWEAPONEX_MagicMissile_FireBonusMissile2");
+
+IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_MAGIC_MISSILE_BONUS3", (CHARACTERGUID)_Source)
+THEN
+CharacterCharacterSetEvent(_Source, _Character, "LLWEAPONEX_MagicMissile_FireBonusMissile3");
+*/
+//END_REGION
+
+//REGION POWER_POLE
+/* Doesn't work since a skill is needed to attach effects to weapon bones
+IF
+CharacterUsedSkill(_Player, "Cone_GroundSmash", _, _)
+AND
+CharacterHasSkill(_Player, "Zone_LLWEAPONEX_PowerPoleSmash", 1)
+THEN
+PlayEffect(_Player, "LLWEAPONEX_FX_Skills_PowerPoleSmash_Cast_Pole_01", "Dummy_FX_01");
+*/
+//END_REGION
+
+//REGION SOUL_HARVESTER
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_SOULHARVESTER_REAP", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target);
+
+IF
+CharacterDied(_Target)
+AND
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target);
+ApplyStatus(_Source, "LLWEAPONEX_SOULHARVESTER_DAMAGE_BONUS_APPLY", 0.0, 0, _Source);
+
+IF
+SkillCast(_Source, "Cone_LLWEAPONEX_SoulHarvester_Reap", _, _)
+THEN
+ProcObjectTimer(_Source, "LLWEAPONEX_TImers_SoulHarvester_ClearReaping", 1250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Source, "LLWEAPONEX_TImers_SoulHarvester_ClearReaping")
+AND
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

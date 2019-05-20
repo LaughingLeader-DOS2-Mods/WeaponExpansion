@@ -244,9 +244,8 @@ LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 14
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Wind", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Grimoire.Fire", "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_3d834205-a88b-459b-8e83-f44fbb166011");
-/*
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 3, "Boost_LLWEAPONEX_Grimoire_Attribute_Intelligence_Small");
-LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Small");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 4, "Boost_LLWEAPONEX_Grimoire_Ability_Fire_Small");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 5, "Boost_LLWEAPONEX_Grimoire_Armor_All_Small");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 6, "Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 7, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Small");
@@ -255,7 +254,8 @@ LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 11
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 12, "Boost_LLWEAPONEX_Grimoire_Armor_Magic_Medium");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
-*/
+
+//LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Misc.MagicMissileScepter", "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812");
 //END_REGION
 
 //REGION BLOCKED_SKILLS

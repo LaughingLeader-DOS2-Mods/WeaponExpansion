@@ -82,6 +82,20 @@ param "ModifierType" "Shield"
 param "SlotType" "Shield"
 new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium",1
 
+new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Fire_Small"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Fire_Small",1
+
+new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Fire_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Shield"
+param "SlotType" "Shield"
+new boost "_Boost_LLWEAPONEX_Grimoire_Ability_Fire_Medium",1
+
 new deltamod "Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Small"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"

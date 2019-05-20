@@ -745,12 +745,12 @@ add namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Divine","",""
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_CombatShield_GiantDoor_A"
 add levelgroup 0,0,"All"
 add rootgroup "b4748a58-427c-4652-bf6c-d596ddcc134d",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A","",
+add namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A"
 add levelgroup 0,0,"All"
 add rootgroup "5e8ca310-616d-4f18-b455-e510dade5b62",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A","",
+add namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A","",""
 
 new itemgroup "WPN_LLWEAPONEX_Unarmed_Fist"
 
@@ -1790,6 +1790,12 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
 add levelgroup 0,0,"All"
 add rootgroup "fa2345b0-68f5-443f-8665-d2a5991bbf29",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "c308b26a-98d1-4429-8cce-4940f6eb5f69",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A","",""
 
 new itemgroup "ARM_LLWEAPONEX_Quiver_A"
 

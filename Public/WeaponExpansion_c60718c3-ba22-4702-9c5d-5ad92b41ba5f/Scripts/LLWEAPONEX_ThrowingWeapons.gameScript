@@ -198,3 +198,115 @@ THEN
 	ENDIF
 	ExplodeAt(_Character, Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage, _Level, _Source)
 ENDIF
+
+EVENT LLWEAPONEX_Throwing_TossCharacter
+VARS
+    CHARACTER:_Source
+	CHARACTER:_TargetChar
+	
+	FLOAT:_LevelF
+	INT:_Level	
+	FLOAT:_StrengthF
+	//INT:_Strength
+	
+	FLOAT:_StrengthDistMult
+	
+    FLOAT3:_Dir
+    FLOAT3:_Forward
+    FLOAT3:_Offset
+    FLOAT3:_Pos
+	
+	FLOAT3:_DebugDir
+	FLOAT3:_DebugPos
+	STRING:_Str
+ON
+    OnCharacterCharacterEvent(_Source, _TargetChar, "LLWEAPONEX_Throwing_TossObject")
+ACTIONS
+	IF "c1&c2&c3"
+		CharacterGetStat(_LevelF, _Source, Level)
+		CharacterGetStat(_StrengthF, _Source, Strength)
+		GetPosition(_TargetChar, _Pos)
+	THEN
+		Cast(_Level, _LevelF)
+		//Cast(_Strength, _StrengthF)
+	ENDIF
+	
+	Set(_Offset, {0;1.0;0})
+	
+	GetDirection(_Source, _TargetChar, _Dir)
+	
+	Set(_StrengthDistMult, _StrengthF)
+	Divide(_StrengthDistMult, 4)
+	Clamp(_StrengthDistMult, 2.0, 10.0)
+	
+	GetForwardDirection(_Source, _Forward)
+	Multiply(_Forward, _StrengthDistMult)
+	Add(_Pos, _Forward)
+	
+	//Make sure the toss position is valid
+	IF "c1"
+		FindPosition(_Pos, _TargetChar, 0, 0, 0.0, _StrengthDistMult, -1, _TargetChar, -1, -1, -1, -1, null, 0, _Pos)
+		//FindValidPosition(_Pos, _StrengthDistMult, _TargetChar)
+	THEN
+		ShootLocalProjectileAt(Projectile_LLWEAPONEX_Tossed, _TargetChar, _Offset, _Pos, _Level, _TargetChar)
+	ELSE
+		//Outside of AI grid/etc, don't launch
+		StatusText(_TargetChar, "<font color='#FF0000'>Toss Failed!</font>")
+	ENDIF
+	
+	IF "c1"
+		GetPosition(_Source, _DebugPos)
+	THEN
+	ENDIF
+	GetForwardDirection(_Source, _DebugDir)
+	Print(_Str, "[LLWEAPONEX:Debug] Launching target to position [1] from [2]. Source Dir: [3] StrDistMult: [4] Str: [5].", _Pos, _DebugPos, _DebugDir, _StrengthDistMult, _StrengthF)
+	SetVar(_Source, "LeaderLog_Message", _Str)
+	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+	
+EVENT LLWEAPONEX_Throwing_TossItem
+VARS
+    CHARACTER:_Source
+    ITEM:_TargetItem
+	
+	FLOAT:_LevelF
+	INT:_Level
+	
+    FLOAT3:_Dir
+    FLOAT3:_Forward
+    FLOAT3:_Offset
+    FLOAT3:_Pos
+	FLOAT:_Dist
+	
+	FLOAT3:_DebugDir
+	FLOAT3:_DebugPos
+	STRING:_Str
+ON
+    OnCharacterItemEvent(_Source, _TargetItem, "LLWEAPONEX_Throwing_TossObject")
+ACTIONS
+	IF "c1"
+		CharacterGetStat(_LevelF, _Source, Level)
+	THEN
+		Cast(_Level, _LevelF)
+	ENDIF
+	IF "c1"
+		GetPosition(_TargetItem, _Pos)
+	THEN
+		GetDirection(_Source, _TargetItem, _Dir, _Dist)
+	ENDIF
+	Set(_Offset, {0;1;0})
+	Add(_Dist, 2)
+	Multiply(_Dist, 4)
+	GetForwardDirection(_Source, _Forward)
+	Multiply(_Forward, _Dist)
+	Add(_Pos, _Forward)
+	
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Tossed, _TargetItem, _Offset, _Pos, _Level, _TargetItem)
+	
+	IF "c1"
+		GetPosition(_Source, _DebugPos)
+	THEN
+	ENDIF
+	GetForwardDirection(_Source, _DebugDir)
+	Print(_Str, "[LLWEAPONEX:Debug] Launching target to position [1] from [2]. Source Dir: [3] Dist: [4].", _Pos, _DebugPos, _DebugDir, _Dist)
+	SetVar(_Source, "LeaderLog_Message", _Str)
+	CharacterEvent(_Source, "LeaderLog_Commands_Log")

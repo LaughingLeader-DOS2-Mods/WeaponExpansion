@@ -915,6 +915,16 @@ LeaderLib_Timers_CancelObjectTimerByEvent(_Caster, "LLWEAPONEX_Timers_GrimoireCa
 LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Skill, _SkillType, _SkillElement, _MagicType);
 LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType);
 
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, (STRING)_MagicType)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, (STRING)_MagicType)
+THEN
+DB_NOOP(1);
+
 IF
 TimerFinished(_TimerName)
 AND

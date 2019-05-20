@@ -1122,6 +1122,17 @@ ObjectClearFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0);
 ClearTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
 //END_REGION
 
+//REGION KICK_OBJECT
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
+THEN
+CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject");
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
+THEN
+CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

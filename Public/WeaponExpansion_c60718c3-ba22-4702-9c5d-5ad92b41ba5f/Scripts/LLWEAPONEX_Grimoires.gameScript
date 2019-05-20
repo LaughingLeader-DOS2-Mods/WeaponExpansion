@@ -446,5 +446,4 @@ ELIF "!c1"
 THEN
 	Set(_Result, LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS1)
 ENDIF
-
-RETURN(_RemoveList, _Result, _Turns)
+	RETURN(_RemoveList, _Result, _Turns)

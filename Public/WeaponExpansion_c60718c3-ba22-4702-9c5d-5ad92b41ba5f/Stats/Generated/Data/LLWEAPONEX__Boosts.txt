@@ -211,6 +211,18 @@ using "_BOOSTS_Shield"
 data "Value" "10"
 data "AirSpecialist" "2"
 
+new entry "_Boost_LLWEAPONEX_Grimoire_Ability_Fire_Small"
+type "Shield"
+using "_BOOSTS_Shield"
+data "Value" "5"
+data "FireSpecialist" "1"
+
+new entry "_Boost_LLWEAPONEX_Grimoire_Ability_Fire_Medium"
+type "Shield"
+using "_BOOSTS_Shield"
+data "Value" "10"
+data "FireSpecialist" "2"
+
 new entry "_Boost_LLWEAPONEX_Grimoire_Ability_Necromancy_Small"
 type "Shield"
 using "_BOOSTS_Shield"

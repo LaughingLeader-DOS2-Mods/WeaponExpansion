@@ -34,6 +34,12 @@ using "LLWEAPONEX_ROD_SKILL_BASE"
 data "DisplayName" "LLWEAPONEX_ROD_MAGIC_MISSILE_DisplayName"
 data "DisplayNameRef" "Rod Mode"
 
+new entry "LLWEAPONEX_WAND_MAGIC_MISSILE"
+type "StatusData"
+using "LLWEAPONEX_ROD_SKILL_BASE"
+data "DisplayName" "LLWEAPONEX_WAND_MAGIC_MISSILE_DisplayName"
+data "DisplayNameRef" "45%/30%/10% Chance for Bonus Missiles"
+
 new entry "LLWEAPONEX_ROD_SKILL_AIR"
 type "StatusData"
 using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
