@@ -544,6 +544,83 @@ CharacterStatusApplied(_Target, "LLWEAPONEX_PHYSICAL_SLEEPING_CHECK", _Source)
 THEN
 LLWEAPONEX_Statuses_ApplyRealStatus(_Target, _Source, "LLWEAPONEX_PHYSICAL_SLEEPING_CHECK", "SLEEPING");
 //END_REGION
+
+//REGION BLOCK_HEALING
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_BLOCK_HEALING", _)
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BlockHealingActive", "WeaponExpansion");
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_BLOCK_HEALING", _)
+THEN
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlockHealingActive", "WeaponExpansion", 500);
+
+PROC
+ProcObjectTimerFinished(_Char, "LLWEAPONEX_Timers_BlockHealing_ResetInvulnerable")
+THEN
+ProcSetInvulnerable(_Char, 0);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_DEBUG_BLOCK_HEALING] Reset invulnerability.");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_BlockHealing_ResetInvulnerable")
+AND
+DB_LLWEAPONEX_BlockingHealingStatus(_Char, _Status)
+THEN
+NOT DB_LLWEAPONEX_BlockingHealingStatus(_Char, _Status);
+
+/*
+IF
+CharacterStatusAttempt(_Char, "LIFESTEAL", _)
+THEN
+DB_LLWEAPONEX_BlockingHealing_Temp_AllowingStatus(_Char, "LIFESTEAL");
+
+IF
+CharacterStatusRemoved(_Char, "HEAL", _)
+AND
+DB_LLWEAPONEX_BlockingHealing_Temp_AllowingStatus(_Char, _Status)
+THEN
+NOT DB_LLWEAPONEX_BlockingHealing_Temp_AllowingStatus(_Char, _Status);
+
+QRY
+LLWEAPONEX_BlockHealing_QRY_BlockStatus((CHARACTERGUID)_Char, "HEAL")
+AND
+NOT DB_LLWEAPONEX_BlockingHealing_Temp_AllowingStatus(_Char, _)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BlockHealing_QRY_BlockStatus((CHARACTERGUID)_Char, (STRING)_Status)
+AND
+NOT DB_LLWEAPONEX_BlockingHealing_Temp_AllowingStatus(_Char, _Status)
+AND
+QRY_IsHealingStatus(_Status)
+THEN
+DB_NOOP(1);
+*/
+
+QRY
+LLWEAPONEX_BlockHealing_QRY_BlockStatus((CHARACTERGUID)_Char, "HEAL")
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_BlockHealing_QRY_BlockStatus((CHARACTERGUID)_Char, (STRING)_Status)
+AND
+QRY_IsHealingStatus(_Status)
+THEN
+DB_NOOP(1);
+
+// Skip making already invulnerable characters invulnerable
+QRY
+LLWEAPONEX_BlockHealing_QRY_OriginallyInvulnerable((CHARACTERGUID)_Char)
+AND
+DB_ObjectStoryInvulnerable((GUIDSTRING)_Char)
+AND
+NOT DB_LLWEAPONEX_BlockingHealingStatus((CHARACTERGUID)_Char, _)
+THEN
+DB_NOOP(1);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

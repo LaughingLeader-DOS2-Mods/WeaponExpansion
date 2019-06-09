@@ -393,29 +393,30 @@ PlayEffect(_Player, "LLWEAPONEX_FX_Skills_PowerPoleSmash_Cast_Pole_01", "Dummy_F
 
 //REGION SOUL_HARVESTER
 IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_SOULHARVESTER_REAP", (CHARACTERGUID)_Source)
+CharacterStatusAttempt(_Target, "LLWEAPONEX_SOULHARVEST_REAP", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target);
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
 
 IF
 CharacterDied(_Target)
 AND
-DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target)
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target);
-ApplyStatus(_Source, "LLWEAPONEX_SOULHARVESTER_DAMAGE_BONUS_APPLY", 0.0, 0, _Source);
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
+ApplyStatus(_Source, "LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY", 0.0, 0, _Source);
 
 IF
-SkillCast(_Source, "Cone_LLWEAPONEX_SoulHarvester_Reap", _, _)
+SkillCast(_Source, "Cone_LLWEAPONEX_SoulHarvest_Reap", _, _)
 THEN
-ProcObjectTimer(_Source, "LLWEAPONEX_TImers_SoulHarvester_ClearReaping", 1250);
+ProcObjectTimerCancel(_Source, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping");
+ProcObjectTimer(_Source, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping", 1250);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Source, "LLWEAPONEX_TImers_SoulHarvester_ClearReaping")
+ProcObjectTimerFinished((CHARACTERGUID)_Source, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping")
 AND
-DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target)
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvester_ListenForDeath(_Source, _Target);
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
 //END_REGION
 EXITSECTION
 

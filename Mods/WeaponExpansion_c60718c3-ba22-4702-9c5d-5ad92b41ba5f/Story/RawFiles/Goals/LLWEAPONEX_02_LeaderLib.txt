@@ -28,6 +28,7 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_OniGauntlet", "LLWE
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_Muramasa", "LLWEAPONEX_MuramasaEquipped");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_DemolitionBackpack", "LLWEAPONEX_DemolitionBackpackEquipped");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_11_Blunderbuss", "LLWEAPONEX_BlunderbussEquipped");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");
 //END_REGION
 
 //REGION PRESETS_MISC

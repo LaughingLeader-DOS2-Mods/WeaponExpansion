@@ -1060,6 +1060,7 @@ AND
 IntegertoString(_Enabled, _EnabledStr)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[",_Goal,"] Status[",_GoalStatusStr,"] Flag [",_Flag,"] Enabled [",_EnabledStr,"].");
+
 EXITSECTION
 
 ENDEXITSECTION
