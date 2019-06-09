@@ -1,0 +1,35 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_WeaponFX_InitSettings();
+KBSECTION
+PROC
+LLWEAPONEX_WeaponFX_InitSettings()
+THEN
+DB_LLWEAPONEX_WeaponFX_UnsheathedStatus("WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", "LLWEAPONEX_SOULHARVEST_UNSHEATHEDFX");
+
+PROC
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
+AND
+DB_LLWEAPONEX_WeaponFX_UnsheathedStatus(_Template, _Status)
+THEN
+DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status);
+
+IF
+DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status)
+AND
+HasActiveStatus(_Player, "UNSHEATHED", 1)
+THEN
+ApplyStatus(_Player, _Status, -1.0, 0, _Player);
+
+PROC
+LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status)
+THEN
+NOT DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status);
+LeaderLib_Statuses_RemoveIfActive(_Player, _Status);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

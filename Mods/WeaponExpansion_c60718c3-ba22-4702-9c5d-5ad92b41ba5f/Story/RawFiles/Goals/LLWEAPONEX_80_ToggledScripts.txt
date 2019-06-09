@@ -49,6 +49,7 @@ LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire__Main",
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Death", "LLWEAPONEX_Grimoire_Death");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Mimicry", "LLWEAPONEX_Grimoire_Mimicry");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Fire", "LLWEAPONEX_Grimoire_Fire");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX");
 //END_REGION
 
 //REGION UPDATES
@@ -152,6 +153,7 @@ SysCompleteGoal(_GoalName);
 //END_REGION
 
 //REGION TOGGLE_EVENTS_MASTERY
+/*
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
 THEN
@@ -163,12 +165,22 @@ AND
 NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType)
 THEN
 LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, _WeaponType);
+*/
 //END_REGION
 
 //REGION TOGGLE_EVENTS_TAGS
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+AND
+DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
+AND
+IsTagged(_Item, _Tag, 1)
+THEN
+LLWEAPONEX_ToggleSettings_OnTagAdded(_Player, _Item, _Tag, _Template);
+
 /*
 PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
 AND
 NOT DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _, _)
 THEN
@@ -176,15 +188,15 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:OnTagAdded] Script for tag ["
 */
 
 PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 THEN
 TimerCancel(_TimerName);
-DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Tag);
+DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Item, _Tag);
 
 PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (STRING)_Tag)
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
@@ -194,13 +206,22 @@ GlobalSetFlag(_Flag);
 LLWEAPONEX_ToggleSettings_ActivateScript(_Flag);
 
 PROC
-LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Player, (STRING)_Tag)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+AND
+DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Item, _Tag)
+THEN
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Item, _Tag);
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, _Tag, _Item, _Template);
+
+PROC
+LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Player, (STRING)_Tag, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _, _Tag)
+AND
 GlobalGetFlag(_Flag, 1)
 THEN
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Tag);
 TimerCancel(_TimerName);
 TimerLaunch(_TimerName, 1500);
 
@@ -209,7 +230,7 @@ TimerFinished(_TimerName)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_, _Tag)
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_, _, _Tag)
 THEN
 GlobalClearFlag(_Flag);
 LLWEAPONEX_ToggleSettings_DeactivateScript(_Flag);

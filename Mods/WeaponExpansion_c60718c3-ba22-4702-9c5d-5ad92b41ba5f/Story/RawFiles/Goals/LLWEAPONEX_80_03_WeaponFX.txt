@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterStatusApplied(_Char, "UNSHEATHED", _)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status)
+THEN
+ApplyStatus(_Char, _Status, -1.0, 0, _Char);
+
+IF
+CharacterStatusRemoved(_Char, "UNSHEATHED", _)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status)
+THEN
+RemoveStatus(_Char, _Status);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

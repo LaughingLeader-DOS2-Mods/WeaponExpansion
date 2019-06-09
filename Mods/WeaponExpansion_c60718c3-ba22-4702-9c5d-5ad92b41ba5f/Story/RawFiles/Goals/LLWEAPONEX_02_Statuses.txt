@@ -559,8 +559,8 @@ LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlockHealingActive",
 PROC
 ProcObjectTimerFinished(_Char, "LLWEAPONEX_Timers_BlockHealing_ResetInvulnerable")
 THEN
-ProcSetInvulnerable(_Char, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_DEBUG_BLOCK_HEALING] Reset invulnerability.");
+ProcSetInvulnerable(_Char, 0);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_BlockHealing_ResetInvulnerable")
@@ -607,6 +607,8 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_BlockHealing_QRY_BlockStatus((CHARACTERGUID)_Char, (STRING)_Status)
 AND
+_Status != "LIFESTEAL"
+AND
 QRY_IsHealingStatus(_Status)
 THEN
 DB_NOOP(1);
@@ -620,6 +622,15 @@ AND
 NOT DB_LLWEAPONEX_BlockingHealingStatus((CHARACTERGUID)_Char, _)
 THEN
 DB_NOOP(1);
+
+//Play only once per block
+PROC
+LLWEAPONEX_BlockHealing_PlayEffect((CHARACTERGUID)_Char)
+AND
+NOT DB_LLWEAPONEX_BlockingHealingStatus(_Char, _)
+THEN
+CharacterStatusText(_Char, "LLWEAPONEX_BlockedHealing");
+PlayEffect(_Char, "LLWEAPONEX_FX_Status_BlockHealing_Hit_01", "Dummy_FrontFX");
 //END_REGION
 EXITSECTION
 

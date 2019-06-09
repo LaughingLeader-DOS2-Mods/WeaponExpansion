@@ -13,10 +13,11 @@ AND
 LLWEAPONEX_BlockHealing_QRY_BlockStatus(_Char, _Status)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_DEBUG_BLOCK_HEALING] Blocking healing status damage for [", _Status, "].");
-DB_LLWEAPONEX_BlockingHealingStatus(_Char, _Status);
+LLWEAPONEX_BlockHealing_PlayEffect(_Char);
 ProcSetInvulnerable(_Char, 1);
 ProcObjectTimerCancel(_Char, "LLWEAPONEX_Timers_BlockHealing_ResetInvulnerable");
 ProcObjectTimer(_Char, "LLWEAPONEX_Timers_BlockHealing_ResetInvulnerable", 250);
+DB_LLWEAPONEX_BlockingHealingStatus(_Char, _Status);
 
 IF
 CharacterStatusRemoved(_Char, _Status, _)
