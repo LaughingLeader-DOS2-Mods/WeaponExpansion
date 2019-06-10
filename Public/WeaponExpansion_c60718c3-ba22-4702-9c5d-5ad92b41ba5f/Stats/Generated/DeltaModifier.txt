@@ -238,7 +238,7 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_Damage_Water_Medium",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Small_Bow"
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Small_Bow"
 param "BoostType" "Normal"
 param "MinLevel" "1"
 param "Frequency" "1"
@@ -246,7 +246,7 @@ param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
 new boost "_Boost_Weapon_Damage_ArmourPiercing_Small",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Normal_Bow"
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Normal_Bow"
 param "BoostType" "BaseUncommon"
 param "MinLevel" "1"
 param "Frequency" "1"
@@ -254,7 +254,7 @@ param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
 new boost "_Boost_Weapon_Damage_ArmourPiercing",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Medium_Bow"
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Medium_Bow"
 param "BoostType" "BaseRare"
 param "MinLevel" "1"
 param "Frequency" "1"
@@ -262,7 +262,7 @@ param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
 new boost "_Boost_Weapon_Damage_ArmourPiercing_Medium",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Piercing_Large_Bow"
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Large_Bow"
 param "BoostType" "BaseEpic"
 param "MinLevel" "1"
 param "Frequency" "1"
@@ -270,145 +270,145 @@ param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
 new boost "_Boost_Weapon_Damage_ArmourPiercing_Large",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Primary_Constitution_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution",1
+new boost "_Boost_Weapon_LLWEAPONEX_Primary_Constitution",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Medium"
+new deltamod "Boost_Weapon_LLWEAPONEX_Primary_Constitution_CombatShield_Medium"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Medium",1
+new boost "_Boost_Weapon_LLWEAPONEX_Primary_Constitution_Medium",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Constitution_CombatShield_Large"
+new deltamod "Boost_Weapon_LLWEAPONEX_Primary_Constitution_CombatShield_Large"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Primary_Constitution_Large",1
+new boost "_Boost_Weapon_LLWEAPONEX_Primary_Constitution_Large",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_CripplingBlow_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_CripplingBlow",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_DeflectiveBarrier_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_DeflectiveBarrier",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_DeflectiveBarrier",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_GuardianAngel_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_GuardianAngel",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_GuardianAngel",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_ThickOfTheFight_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_ThickOfTheFight",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_ThickOfTheFight",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Rare"
-param "BoostType" "ItemCombo"
-param "MinLevel" "1"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
-
-new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Epic"
+new deltamod "Boost_Weapon_LLWEAPONEX_Status_Set_Crippled_CombatShield_Rare"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Status_Set_Crippled_CombatShield_Legendary"
+new deltamod "Boost_Weapon_LLWEAPONEX_Status_Set_Crippled_CombatShield_Epic"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Ability_OneHanded_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Status_Set_Crippled_CombatShield_Legendary"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Status_Set_Crippled_Mace",1
+
+new deltamod "Boost_Weapon_LLWEAPONEX_Ability_OneHanded_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_Ability_OneHanded",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Ability_Perserverance_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Ability_Perserverance_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Ability_Perseverance",1
+new boost "_Boost_Weapon_LLWEAPONEX_Ability_Perseverance",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Ability_PainReflection_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Ability_PainReflection_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Ability_PainReflection",1
+new boost "_Boost_Weapon_LLWEAPONEX_Ability_PainReflection",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Ability_WarriorLore_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Ability_WarriorLore_CombatShield"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_Ability_WarriorLore",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_ArmourPiercing_Small_CombatShield"
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_ArmourPiercing_Small_CombatShield"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Bow"
 new boost "_Boost_Weapon_Damage_ArmourPiercing_Small",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_GlobalCooling"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_GlobalCooling",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_GlobalCooling",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_Shatter"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_Shatter"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_Shatter",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_Shatter",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_IceBreaker"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_IceBreaker"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_IceBreaker",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_IceBreaker",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A"
+new deltamod "Boost_Weapon_LLWEAPONEX_Rapier_Runeblade_Water_DamageBoost_A"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Rapier_Runeblade_Water_DamageBoost_A",1
+new boost "_Boost_Weapon_LLWEAPONEX_Rapier_Runeblade_Water_DamageBoost_A",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Skill_BlinkStrike"
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_BlinkStrike"
 param "BoostType" "ItemCombo"
 param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
-new boost "_Boost_LLWEAPONEX_Weapon_Skill_BlinkStrike",1
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_BlinkStrike",1
 
 new deltamod "Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier1"
 param "BoostType" "ItemCombo"

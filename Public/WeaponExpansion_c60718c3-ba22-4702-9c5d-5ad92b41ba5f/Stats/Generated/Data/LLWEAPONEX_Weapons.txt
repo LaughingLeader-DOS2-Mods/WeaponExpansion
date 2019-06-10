@@ -1007,7 +1007,7 @@ data "Flags" "Unbreakable"
 data "Durability" "0"
 data "DurabilityDegradeSpeed" "0"
 
-new entry "_Boost_LLWEAPONEX_Weapon_PowerPole"
+new entry "_Boost_Weapon_LLWEAPONEX_PowerPole"
 type "Weapon"
 using "_BOOSTS_Weapon"
 data "Damage Type" "Piercing"
