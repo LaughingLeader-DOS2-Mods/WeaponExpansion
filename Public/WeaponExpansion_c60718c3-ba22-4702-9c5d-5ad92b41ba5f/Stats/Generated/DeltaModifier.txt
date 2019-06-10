@@ -410,6 +410,13 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_LLWEAPONEX_Skill_BlinkStrike",1
 
+new deltamod "Boost_Weapon_LLWEAPONEX_Skill_BlackShroud"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_LLWEAPONEX_Skill_BlackShroud",1
+
 new deltamod "Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier1"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"

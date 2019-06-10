@@ -149,6 +149,12 @@ using "_BOOSTS_Weapon"
 data "Value" "8"
 data "ExtraProperties" "LLWEAPONEX_PHYSICAL_WEAK_CHECK,10,1"
 
+new entry "_Boost_Weapon_LLWEAPONEX_Skill_BlackShroud"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Value" "66"
+data "Skills" "Target_BlackShroud"
+
 //Grimoire Start
 
 new entry "_Boost_LLWEAPONEX_Grimoire_Innate_DeflectProjectiles"
