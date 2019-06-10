@@ -16,6 +16,14 @@ AND
 DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status)
 THEN
 RemoveStatus(_Char, _Status);
+
+IF
+ItemUnEquipped(_Item, _Player)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status)
+THEN
+NOT DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status);
+LeaderLib_Statuses_RemoveIfActive(_Player, _Status);
 EXITSECTION
 
 ENDEXITSECTION

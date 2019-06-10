@@ -2099,7 +2099,7 @@ data "TwoHanded" "1"
 data "LifeSteal" "10"
 data "Flags" "Unbreakable"
 data "Skills" "Target_HeavyAttack;Cone_LLWEAPONEX_SoulHarvest_Reap"
-data "ExtraProperties" "BLEEDING,100,30"
+data "ExtraProperties" "BLEEDING,30,2"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
 type "Weapon"
