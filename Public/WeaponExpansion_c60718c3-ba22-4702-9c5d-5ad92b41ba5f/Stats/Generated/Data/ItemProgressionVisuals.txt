@@ -1797,6 +1797,12 @@ add levelgroup 0,0,"All"
 add rootgroup "c308b26a-98d1-4429-8cce-4940f6eb5f69",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "ca61e441-9446-40ac-811d-736327d4a0f0",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A","",""
+
 new itemgroup "ARM_LLWEAPONEX_Quiver_A"
 
 add levelgroup 1,30,"Common"

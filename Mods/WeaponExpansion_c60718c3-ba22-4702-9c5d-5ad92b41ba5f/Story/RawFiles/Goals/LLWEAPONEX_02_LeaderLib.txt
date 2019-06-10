@@ -256,6 +256,13 @@ LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 12
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 14, "Boost_LLWEAPONEX_Grimoire_Ability_Air_Medium");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Grimoire.Fire", 16, "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Scythe.DeathEdge", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ca61e441-9446-40ac-811d-736327d4a0f0");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Scythe.DeathEdge", 3, "Boost_Weapon_Ability_TwoHanded_Axe_2");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Scythe.DeathEdge", 5, "Boost_LLWEAPONEX_Weapon_Skill_CripplingBlow_CombatShield");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Scythe.DeathEdge", 7, "Boost_Weapon_EmptyRuneSlot");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Scythe.DeathEdge", 9, "Boost_Weapon_Ability_Necromancy_Wand");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Scythe.DeathEdge", 11, "Boost_Weapon_LLWEAPONEX_Status_Set_PhysicalWeak");
+LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Scythe.DeathEdge", 12, "Boost_Weapon_EmptyRuneSlot");
 //LeaderLib_Growth_Items_Register_Template("WeaponExpansion.Misc.MagicMissileScepter", "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812");
 //END_REGION
 

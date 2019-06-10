@@ -692,6 +692,9 @@ add name "Beholder",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
 add name "Soul Harvest",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+add name "Death's Edge",""
+
 new namegroup "LLWEAPONEX_DragonSlayer_Armour"
 add name "Dragonslayer Mail",""
 add namecool "Mighty Dragonslayer Mail",""
