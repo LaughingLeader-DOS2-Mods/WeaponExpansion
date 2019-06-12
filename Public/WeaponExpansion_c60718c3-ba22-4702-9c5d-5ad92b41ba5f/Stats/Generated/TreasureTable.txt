@@ -146,6 +146,8 @@ object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
 new subtable "1,1"
+object category "LLWEAPONEX_Glaive_2H",1,1,0,0,0,0,0,0
+new subtable "1,1"
 object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0

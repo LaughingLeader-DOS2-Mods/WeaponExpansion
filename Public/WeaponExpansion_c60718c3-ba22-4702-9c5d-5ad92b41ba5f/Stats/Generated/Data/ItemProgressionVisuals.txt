@@ -1962,3 +1962,39 @@ new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
 add levelgroup 0,0,"All"
 add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3","",""
+
+new itemgroup "WPN_LLWEAPONEX_Glaive_2H"
+
+add levelgroup 1,5,"Common"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Weak","",""
+
+add levelgroup 6,30,"Common"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Epic","",""
+
+add levelgroup 1,30,"Legendary"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Epic","Cool",""
+
+add levelgroup 1,30,"Divine"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Glaive_2H_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
+add namegroup "WPN_LLWEAPONEX_Glaive_2H_Crafted","",""
