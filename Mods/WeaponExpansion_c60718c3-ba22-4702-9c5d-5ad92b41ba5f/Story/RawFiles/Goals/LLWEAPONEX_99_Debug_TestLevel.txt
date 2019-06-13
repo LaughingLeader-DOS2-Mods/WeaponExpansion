@@ -651,6 +651,17 @@ THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
 
 IF
+ItemStatusAttempt(_Item, "SUMMONING", _)
+AND
+ItemGetOwner(_Item, _Owner)
+AND
+String(_Owner, _Cause)
+AND
+String(_Item, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [SUMMONING] attempt on [",_Name,"] with owner [",_Cause,"].");
+
+IF
 ItemStatusChange(_Item, _Status, _Causee)
 AND
 String(_Causee, _Cause)

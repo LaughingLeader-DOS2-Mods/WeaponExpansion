@@ -694,6 +694,58 @@
                         <node id="Categories" />
                     </children>
                 </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Polearm" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type (Polearm Subtype)" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Halberd" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type (Polearm Subtype)" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Glaive" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type (Cool)" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Scythe" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
             </children>
         </node>
     </region>

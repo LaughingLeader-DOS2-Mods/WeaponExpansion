@@ -1998,3 +1998,159 @@ new itemgroup "WPN_LLWEAPONEX_Glaive_2H_Crafted"
 add levelgroup 0,0,"All"
 add rootgroup "5f61b718-c589-4767-9676-3e6a365c0df5",""
 add namegroup "WPN_LLWEAPONEX_Glaive_2H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_A"
+
+add levelgroup 1,5,"Common"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Weak","",""
+
+add levelgroup 6,12,"Common"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","",""
+
+add levelgroup 1,30,"Legendary"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+add levelgroup 1,30,"Divine"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_A_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_B"
+
+add levelgroup 1,5,"Common"
+add rootgroup "8dd5ca3b-34dd-4fbd-a6c9-8dff8f35f8b8",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Weak","",""
+
+add levelgroup 6,12,"Common"
+add rootgroup "8dd5ca3b-34dd-4fbd-a6c9-8dff8f35f8b8",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "8dd5ca3b-34dd-4fbd-a6c9-8dff8f35f8b8",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "8dd5ca3b-34dd-4fbd-a6c9-8dff8f35f8b8",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","",""
+
+add levelgroup 1,30,"Legendary"
+add rootgroup "8dd5ca3b-34dd-4fbd-a6c9-8dff8f35f8b8",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+add levelgroup 1,30,"Divine"
+add rootgroup "8dd5ca3b-34dd-4fbd-a6c9-8dff8f35f8b8",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_B_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "8dd5ca3b-34dd-4fbd-a6c9-8dff8f35f8b8",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_C"
+
+add levelgroup 1,5,"Common"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Weak","",""
+
+add levelgroup 6,12,"Common"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","",""
+
+add levelgroup 1,30,"Legendary"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+add levelgroup 1,30,"Divine"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_C_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_D"
+
+add levelgroup 1,5,"Common"
+add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Weak","",""
+
+add levelgroup 6,12,"Common"
+add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","",""
+
+add levelgroup 1,30,"Uncommon"
+add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","Cool",""
+
+add levelgroup 1,30,"Rare"
+add rootgroup "9d51e435-2124-4476-a6f6-d7c37f52fdca",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Rare","",""
+
+add levelgroup 1,30,"Epic"
+add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","",""
+
+add levelgroup 1,30,"Legendary"
+add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+add levelgroup 1,30,"Divine"
+add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Halberd_2H_D_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Crafted","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "93acdd5a-dc43-4cdc-90cf-560b310d5f08",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "76ab9d36-2f5f-4cb1-822d-2da2040a5347",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A","",""

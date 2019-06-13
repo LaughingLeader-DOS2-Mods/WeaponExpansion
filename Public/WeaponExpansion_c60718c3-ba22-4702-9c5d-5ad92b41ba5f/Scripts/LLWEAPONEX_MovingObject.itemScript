@@ -58,7 +58,9 @@ ACTIONS
 EVENT LLWEAPONEX_MovingObject_DelayedInit
 ON
 	OnTimer("LLWEAPONEX_Timers_MovingObject_InitEvent")
+	OnItemStatusAttempt(__Me, SUMMONING)
 ACTIONS
+	StopTimer("LLWEAPONEX_Timers_MovingObject_InitEvent")
 	ItemEvent(__Me, %LLWEAPONEX_InitEvent)
 
 EVENT LLWEAPONEX_MovingObject_InitialEffect

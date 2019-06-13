@@ -378,13 +378,14 @@ ObjectExists(_Object, 1)
 AND
 ObjectIsItem((ITEMGUID)_Object, 1)
 AND
+ItemGetOwner(_Object, _Player)
+AND
 DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine)
 AND
 NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingActive((CHARACTERGUID)_, _, _Object)
 THEN
 NOT DB_LLWEAPONEX_RemoteMines_Temp_ThrowingStart(_Player, _RemoteMine);
 LLWEAPONEX_RemoteMines_Internal_SetThrowingActive(_Player, _RemoteMine, _Object);
-ItemSetOwner(_Object, _Player);
 
 IF
 CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObjectRemoteMine_Landed")

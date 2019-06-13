@@ -418,6 +418,46 @@ DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target)
 THEN
 NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
 //END_REGION
+
+//REGION WARCHIEFS_HALBERD
+IF
+SkillCast(_Player, "Shout_LLWEAPONEX_Halberd_Warchief_SwitchMode", _, _)
+THEN
+ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Warchief_StartModeToggle", 900);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Warchief_StartModeToggle")
+AND
+CharacterGetEquippedItem(_Player, "Weapon", (ITEMGUID)_Halberd)
+THEN
+CharacterUnequipItem(_Player, _Halberd);
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode", "LLWEAPONEX_SwapWarchiefMode");
+
+IF
+CharacterItemEvent(_Player, _Halberd, "LLWEAPONEX_SwapWarchiefMode")
+AND
+GetTemplate(_Halberd, _Template)
+AND
+CharacterGetLevel(_Player, _Level)
+THEN
+LLWEAPONEX_Uniques_SwapWarchiefMode(_Player, _Halberd, _Level, _Template);
+
+PROC
+LLWEAPONEX_Uniques_SwapWarchiefMode((CHARACTERGUID)_Player, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347")
+THEN
+Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08", 1, 1, 1);
+
+PROC
+LLWEAPONEX_Uniques_SwapWarchiefMode((CHARACTERGUID)_Player, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08")
+THEN
+Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347", 1, 1, 1);
+
+PROC
+LLWEAPONEX_Uniques_SwapWarchiefMode((CHARACTERGUID)_Player, (ITEMGUID)_Halberd, (INTEGER)_Level, (STRING)_Template)
+THEN
+ItemLevelUpTo(_Halberd, _Level);
+LeaderLib_Timers_StartCharacterItemTimer(_Player, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode_Equip", "LeaderLib_Commands_EquipItem");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

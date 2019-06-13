@@ -989,6 +989,8 @@ ObjectExists(_Object, 1)
 AND
 ObjectIsItem((ITEMGUID)_Object, 1)
 AND
+ItemGetOwner(_Object, _Player)
+AND
 DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player)
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_, _Object)
