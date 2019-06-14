@@ -37,6 +37,7 @@ LLWEAPONEX_LeaderLib_InitSettings()
 THEN
 LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion] Settings", "LLWEAPONEX_SettingsMenu", "WeaponExpansion", "LaughingLeader");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_ExplodeFix", "WeaponExpansion");
 
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Assassin", "Assassin [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Blademaster", "Blademaster [Weapon Expansion]", "WeaponExpansion_IsActive");

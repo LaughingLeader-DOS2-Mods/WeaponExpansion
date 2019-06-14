@@ -632,6 +632,19 @@ THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
 
 IF
+CharacterStatusApplied(_Character, "EXPLODE", _Causee)
+AND
+String(_Causee, _Cause)
+AND
+String(_Character, _Name)
+AND
+GetStatusTurns(_Character, "EXPLODE", _Turns)
+AND
+IntegertoString(_Turns, _TurnsStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [EXPLODE] applied on [",_Name,"] via [",_Cause,"] for (",_TurnsStr,") turns.");
+
+IF
 CharacterStatusRemoved(_Character, _Status, _Causee)
 AND
 String(_Causee, _Cause)
