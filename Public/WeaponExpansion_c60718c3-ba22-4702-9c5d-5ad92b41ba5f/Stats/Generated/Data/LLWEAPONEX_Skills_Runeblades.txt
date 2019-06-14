@@ -28,6 +28,7 @@ data "Stealth" "Yes"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Air"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Base"
 data "Ability" "Air"
 data "SkillProperties" "LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR,100,2"
@@ -42,14 +43,17 @@ data "CastEffect" "LLWEAPONEX_FX_Skills_ActivateRuneblade_Air_Cast_Sword_01:Dumm
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Air_DualWield"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Air"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Air_RuneBoost"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Air"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Earth"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Base"
 data "Ability" "Earth"
 data "SkillProperties" "LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH,100,2"
@@ -63,14 +67,17 @@ data "CastEffect" "RS3_FX_Skills_Earth_Cast_Target_Touch_Hand_01:Dummy_FX_01;LLW
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Earth_DualWield"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Earth"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Earth_RuneBoost"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Earth"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Fire"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Base"
 data "Ability" "Fire"
 data "SkillProperties" "LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE,100,2"
@@ -84,14 +91,17 @@ data "CastEffect" "RS3_FX_Skills_Fire_Cast_Attack_Power_Hand_01:Dummy_FX_01;LLWE
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Fire_DualWield"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Fire"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Fire_RuneBoost"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Fire"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Poison"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Base"
 data "Ability" "Earth"
 data "SkillProperties" "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON,100,2"
@@ -105,14 +115,17 @@ data "CastEffect" "RS3_FX_Skills_Earth_Cast_Target_Touch_Hand_01:Dummy_FX_01;LLW
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Poison_DualWield"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Poison"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Poison_RuneBoost"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Poison"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Water"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Base"
 data "Ability" "Water"
 data "SkillProperties" "LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER,100,2"
@@ -126,10 +139,12 @@ data "CastEffect" "LLWEAPONEX_FX_Skills_ActivateRuneblade_Water_Cast_02;RS3_FX_S
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Water_DualWield"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Water"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Water_RuneBoost"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Water"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Ice"
@@ -148,6 +163,7 @@ data "CastEffect" "RS3_FX_Skills_Water_IceSpellHand_Cast_001:Dummy_BodyFX;RS3_FX
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Chaos"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Base"
 data "Cooldown" "2"
 data "Ability" "None"
@@ -164,14 +180,17 @@ data "Stealth" "No"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_DualWield"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Chaos"
 
 new entry "Shout_LLWEAPONEX_ActivateRuneblade_Chaos_RuneBoost"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Chaos"
 
 new entry "Shout_LLWEAPONEX_Runeblade_RunicReverb"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_ActivateRuneblade_Base"
 data "Ability" "None"
 data "SkillProperties" "LLWEAPONEX_ACTIVATE_RUNEBLADE_REVERB,100,2"
@@ -227,6 +246,7 @@ data "OverrideMinAP" "No"
 
 new entry "Projectile_LLWEAPONEX_Runeblade_MiniExplosion"
 type "SkillData"
+data "SkillType" "Projectile"
 using "Projectile_Fireball"
 data "Damage Multiplier" "30"
 data "Damage Range" "10"
@@ -236,6 +256,7 @@ data "TargetConditions" "Character;Enemy|(NonSelf&!Enemy&Tagged:LeaderLib_Friend
 
 new entry "Projectile_LLWEAPONEX_Runeblade_LavaRune"
 type "SkillData"
+data "SkillType" "Projectile"
 using "Projectile_LLWEAPONEX_Status_ActivatedRune_Base"
 data "Ability" "Fire"
 data "DamageType" "Fire"
@@ -245,6 +266,7 @@ data "Template" "c35a189f-c763-4957-826a-3368fa7499af"
 
 new entry "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt"
 type "SkillData"
+data "SkillType" "Projectile"
 using "ProjectileStrike_EnemyDazingBolt"
 data "SkillProperties" "Electrify;EXPLODE,100,0,Projectile_LLWEAPONEX_Runeblade_ChainLightning"
 data "TargetConditions" "NonSelf;Character;Enemy|(NonSelf&!Enemy&Tagged:LeaderLib_FriendlyFireEnabled)"
@@ -296,12 +318,14 @@ data "OverrideMinAP" "No"
 
 new entry "Projectile_LLWEAPONEX_Runeblade_Thunderbolt_ChainLightning"
 type "SkillData"
+data "SkillType" "Projectile"
 using "Projectile_LLWEAPONEX_Runeblade_ChainLightning"
 data "Damage Multiplier" "25"
 data "Damage Range" "10"
 
 new entry "Projectile_LLWEAPONEX_Runeblade_Conduction_ChainLightning"
 type "SkillData"
+data "SkillType" "Projectile"
 using "Projectile_LLWEAPONEX_Runeblade_ChainLightning"
 data "SkillProperties" "LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE_CHECK,100,3;LLWEAPONEX_RUNEBLADE_SHOCKED,100,1;Electrify"
 data "Damage Multiplier" "15"
@@ -467,6 +491,7 @@ data "Template" "5b3cc444-d7dc-4882-84fb-80f5c377e543"
 
 new entry "Projectile_LLWEAPONEX_EnemyChaosSlash"
 type "SkillData"
+data "SkillType" "Projectile"
 using "Projectile_LLWEAPONEX_ChaosSlash"
 data "ForGameMaster" "No"
 data "IsEnemySkill" "Yes"

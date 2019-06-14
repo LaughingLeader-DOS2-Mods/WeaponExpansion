@@ -25,6 +25,7 @@ data "CastTextEvent" "cast"
 
 new entry "Shout_LLWEAPONEX_VendingMachine_Move_Middle"
 type "SkillData"
+data "SkillType" "Shout"
 using "Shout_LLWEAPONEX_VendingMachine_Move_Top"
 data "SkillType" "Shout"
 data "CastAnimation" "move_middle"

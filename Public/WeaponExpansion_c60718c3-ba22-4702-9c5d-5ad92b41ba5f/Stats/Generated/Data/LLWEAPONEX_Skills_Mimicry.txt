@@ -46,6 +46,7 @@ data "CycleConditions" "!Dead"
 
 new entry "Projectile_LLWEAPONEX_MimicGreatBowAttack-1"
 type "SkillData"
+data "SkillType" "Projectile"
 using "Projectile_LLWEAPONEX_MimicGreatBowAttack"
 data "Level" "-1"
 
@@ -97,5 +98,6 @@ data "CycleConditions" "!Dead"
 
 new entry "Projectile_LLWEAPONEX_MimicBlunderbussAttack-1"
 type "SkillData"
+data "SkillType" "Projectile"
 using "Projectile_LLWEAPONEX_MimicBlunderbussAttack"
 data "Level" "-1"

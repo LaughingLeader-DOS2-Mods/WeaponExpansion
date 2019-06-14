@@ -1,5 +1,6 @@
 new entry "Target_LLWEAPONEX_DebugTargetSkill"
 type "SkillData"
+data "SkillType" "Target"
 using "Target_DummyTargetSkill"
 data "CanTargetTerrain" "No"
 data "CanTargetCharacters" "Yes"
@@ -26,6 +27,7 @@ data "SkillProperties" "IF(MagicArmourUp):EXPLODE,100,0,Projectile_LLWEAPONEX_St
 
 new entry "Target_LLWEAPONEX_DebugTargetSkill-1"
 type "SkillData"
+data "SkillType" "Target"
 using "Target_LLWEAPONEX_DebugTargetSkill"
 data "Level" "-1"
 
