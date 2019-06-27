@@ -760,19 +760,19 @@ add namegroup "WPN_LLWEAPONEX_Unarmed_Fist","",""
 
 new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Wood_2H"
 
-add levelgroup 0,8,"Common"
+add levelgroup 1,8,"Common"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood","",""
 
-add levelgroup 0,8,"Uncommon"
+add levelgroup 1,8,"Uncommon"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood","Cool",""
 
-add levelgroup 0,8,"Rare"
+add levelgroup 1,8,"Rare"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Rare","",""
 
-add levelgroup 0,8,"Epic"
+add levelgroup 1,8,"Epic"
 add rootgroup "c2173d87-095b-425f-88b8-f107f95267c9",""
 add namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic","",""
 
