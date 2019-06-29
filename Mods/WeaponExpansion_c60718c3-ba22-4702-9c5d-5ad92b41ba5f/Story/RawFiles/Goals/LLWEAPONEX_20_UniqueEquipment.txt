@@ -421,7 +421,7 @@ NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
 
 //REGION WARCHIEFS_HALBERD
 IF
-SkillCast(_Player, "Shout_LLWEAPONEX_Halberd_Warchief_SwitchMode", _, _)
+SkillCast(_Player, "Shout_LLWEAPONEX_Warchief_SwitchMode", _, _)
 THEN
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Warchief_StartModeToggle", 900);
 
