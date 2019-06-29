@@ -25,13 +25,13 @@ IF
 CharacterStatusApplied(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusApplied] [LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED] applied. Setting animation set override to [LLWEAPONEX_Override1].");
-CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+LLWEAPONEX_AnimationSetOverride_Set(_Player, "LLWEAPONEX_Override1");
 
 IF
 CharacterStatusRemoved(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", _)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Grimoires:CharacterStatusRemoved] [LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED] removed. Clearing animation set override.");
-CharacterSetAnimationSetOverride(_Player, "");
+LLWEAPONEX_AnimationSetOverride_Clear(_Player);
 LLWEAPONEX_Grimoire_Fire_RemoveSparkDamageStatuses(_Player);
 
 PROC

@@ -197,6 +197,37 @@ DB_LLWEAPONEX_PostCCEnabled(1)
 THEN
 NOT DB_LLWEAPONEX_PostCCEnabled(1);
 //END_REGION
+
+//REGION SET_OVERRIDES
+PROC
+LLWEAPONEX_AnimationSetOverride_Set((CHARACTERGUID)_Player, (STRING)_OverrideSet)
+THEN
+LLWEAPONEX_AnimationSetOverride_ClearData(_Player);
+CharacterSetAnimationSetOverride(_Player, _OverrideSet);
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet);
+
+PROC
+LLWEAPONEX_AnimationSetOverride_Clear((CHARACTERGUID)_Player)
+THEN
+LLWEAPONEX_AnimationSetOverride_ClearData(_Player);
+CharacterSetAnimationSetOverride(_Player, "");
+
+PROC
+LLWEAPONEX_AnimationSetOverride_ClearData((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet)
+THEN
+NOT DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet);
+
+// Called when exiting the respec mirror
+// Since the respec mirror uses its own set override, we need to reset this
+PROC
+Proc_HomesteadTeleportAfterMirror((CHARACTERGUID)_Player,(ITEMGUID)_Mirror,(TRIGGERGUID)_Trigger)
+AND
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet)
+THEN
+CharacterSetAnimationSetOverride(_Player, _OverrideSet);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

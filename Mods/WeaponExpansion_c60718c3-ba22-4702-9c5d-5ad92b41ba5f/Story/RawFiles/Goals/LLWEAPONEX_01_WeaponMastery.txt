@@ -9,13 +9,79 @@ KBSECTION
 PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
 THEN
-//Level, Total "Hits"
-DB_LLWEAPONEX_WeaponMastery_MasteryCap(3);
+DB_LLWEAPONEX_WeaponMastery_MasteryCap(4);
+
+DB_LLWEAPONEX_WeaponMastery_ActCaps("TUT_Tutorial_A", 1);
+DB_LLWEAPONEX_WeaponMastery_ActCaps("FJ_FortJoy_Main", 1);
+DB_LLWEAPONEX_WeaponMastery_ActCaps("LV_HoE_Main", 1);
+DB_LLWEAPONEX_WeaponMastery_ActCaps("RC_Main", 1);
+DB_LLWEAPONEX_WeaponMastery_ActCaps("CoS_Main", 2);
+DB_LLWEAPONEX_WeaponMastery_ActCaps("Arx_Main", 3);
+DB_LLWEAPONEX_WeaponMastery_ActCaps("Arx_Endgame", 3);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap((STRING)_Region)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap((STRING)_Region)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, _)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_WeaponMastery_InitSettings()
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_WeaponMastery_InitializedMaxExperience")
+AND
+DB_CurrentLevel(_Region)
+THEN
+LLWEAPONEX_WeaponMastery_InitMaxExperiance(_Region);
+GlobalSetFlag("LLWEAPONEX_WeaponMastery_InitializedMaxExperience");
+
+PROC
+LLWEAPONEX_WeaponMastery_InitMaxExperiance((STRING)_Region)
+AND
+LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region) // Either this Region is 1, or not in the DB
+THEN
+SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
+//Current Level, Total "Hits" to Next Level
 DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 20);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 40);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 50);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 125);
-//DB_LLWEAPONEX_WeaponMastery_MaxExperience(4, 125);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 80);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 320);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 600);
+
+//Act 3 start
+PROC
+LLWEAPONEX_WeaponMastery_InitMaxExperiance((STRING)_Region)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, 2)
+THEN
+SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 20);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 50);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 250);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 400);
+
+//Act 4 start
+PROC
+LLWEAPONEX_WeaponMastery_InitMaxExperiance((STRING)_Region)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, 3)
+THEN
+SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 10);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 20);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 60);
+DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 100);
 
 //Max possible level attainable by players
 //DB_LLWEAPONEX_WeaponMastery_Softcap(2);
@@ -1074,9 +1140,9 @@ CharacterIsInPartyWith(_Player, _PartyMember, 1)
 AND
 IsBoss(_Enemy, _IsBoss)
 AND
-IntegerSum(_IsBoss, 4, _BossMult) // 2x exp for bosses
+IntegerProduct(_IsBoss, 2, _BossMult) // 2x exp for bosses
 AND
-IntegerProduct(1, _BossMult, _AddExp)
+IntegerSum(2, _BossMult, _AddExp)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_01_WeaponMastery:LLWEAPONEX_WeaponMastery_AddPartyExperience] Adding [",_AddExp,"] party mastery experience to player.");
 LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, _AddExp, _Enemy);

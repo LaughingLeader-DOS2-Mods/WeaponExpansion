@@ -199,28 +199,28 @@ LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Ite
 AND
 IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
 THEN
-CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+LLWEAPONEX_AnimationSetOverride_Set(_Player, "LLWEAPONEX_Override1");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Katana")
 AND
 IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
 THEN
-CharacterSetAnimationSetOverride(_Player, "");
+LLWEAPONEX_AnimationSetOverride_Clear(_Player);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
 AND
 IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
 THEN
-CharacterSetAnimationSetOverride(_Player, "LLWEAPONEX_Override1");
+LLWEAPONEX_AnimationSetOverride_Set(_Player, "LLWEAPONEX_Override1");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
 AND
 IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
 THEN
-CharacterSetAnimationSetOverride(_Player, "");
+LLWEAPONEX_AnimationSetOverride_Clear(_Player);
 //END_REGION
 EXITSECTION
 
