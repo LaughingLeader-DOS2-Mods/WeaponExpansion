@@ -95,6 +95,9 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 2, "<font color=
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 3, "<font color='#FFB94A'>Expert Shieldmaster</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 4, "<font color='#FF9E03'>Master of Shields</font>");
 
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_DualShields", 1, "Cover", "Any");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "Cover", "Target_LLWEAPONEX_ShieldCover");
+
 //DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_DualShields", "LLWEAPONEX_WM_DualShields_Exp", "LLWEAPONEX_WM_DualShields_Level");
 
