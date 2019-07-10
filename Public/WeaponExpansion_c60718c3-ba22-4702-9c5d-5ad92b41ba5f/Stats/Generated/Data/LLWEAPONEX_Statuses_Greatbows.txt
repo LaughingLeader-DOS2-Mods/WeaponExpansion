@@ -246,3 +246,8 @@ type "StatusData"
 data "StatusType" "DAMAGE"
 using "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE1"
 data "LeaveAction" "Projectile_LLWEAPONEX_Status_CushionForce_FallDamage9"
+
+new entry "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_TURNCOUNTER"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"

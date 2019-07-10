@@ -9,7 +9,7 @@ KBSECTION
 PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
 THEN
-DB_LLWEAPONEX_WeaponMastery_MasteryCap(4);
+DB_LLWEAPONEX_WeaponMastery_MasteryCap(3);
 
 DB_LLWEAPONEX_WeaponMastery_ActCaps("TUT_Tutorial_A", 1);
 DB_LLWEAPONEX_WeaponMastery_ActCaps("FJ_FortJoy_Main", 1);
@@ -96,7 +96,9 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 3, "<font color=
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 4, "<font color='#FF9E03'>Master of Shields</font>");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_DualShields", 1, "Cover", "Any");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_DualShields", 2, "ShieldPrison", "Any");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "Cover", "Target_LLWEAPONEX_ShieldCover");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "ShieldPrison", "Target_LLWEAPONEX_ShieldPrison");
 
 //DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_DualShields", "LLWEAPONEX_WM_DualShields_Exp", "LLWEAPONEX_WM_DualShields_Level");
@@ -134,6 +136,7 @@ LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Greatbow", "LLWEAPONEX_WM_Greatb
 //DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, _Level, _SkillID, _Type)
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 0, "PiercingShot", "Any");
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 1, "KnockbackShot", "Any");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Greatbow", 2, "DelayedBarrage", "Any");
 
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   1, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Dwarf_Female");
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "PiercingShot", "DWARF",   0, "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Dwarf_Male");
@@ -152,6 +155,8 @@ DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot",
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "HUMAN",   0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Human_Male");
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  1, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Female");
 DB_LLWEAPONEX_WeaponMastery_RacialSkills("LLWEAPONEX_Greatbow", "KnockbackShot", "LIZARD",  0, "Projectile_LLWEAPONEX_Greatbow_Knockback_Lizard_Male");
+
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Greatbow", "DelayedBarrage", "Target_LLWEAPONEX_Greatbow_DelayedBarrage");
 
 //Hand Crossbows
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_HandCrossbow", "<font color='#D9D9D9'>Hand Crossbow Mastery</font>");
