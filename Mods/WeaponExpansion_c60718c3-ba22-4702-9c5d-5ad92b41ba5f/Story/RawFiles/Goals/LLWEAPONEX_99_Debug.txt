@@ -37,7 +37,7 @@ THEN
 GoalCompleted;
 
 IF
-GameStarted("TestLevel_LL_WeaponExpansion", _)
+GameStarted("TestLevel_LL_WeaponExpansion", 1)
 THEN
 GoalCompleted;
 
