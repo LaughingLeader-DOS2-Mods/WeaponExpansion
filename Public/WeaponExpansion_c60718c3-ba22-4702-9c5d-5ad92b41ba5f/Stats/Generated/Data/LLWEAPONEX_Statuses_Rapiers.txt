@@ -92,6 +92,11 @@ data "Description" "LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED_Description"
 data "DisplayNameRef" "Delayed Dazed"
 data "DescriptionRef" "Character will be dazed upon standing up."
 
+new entry "LLWEAPONEX_RAPIER_FLICKER_HIT"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+
 new entry "LLWEAPONEX_RAPIER_FRENZY_CHARGE"
 type "StatusData"
 data "StatusType" "CONSUME"
