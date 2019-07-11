@@ -214,14 +214,17 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Rapier", 4, "<font color='#FFE
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Rapier", "LLWEAPONEX_WM_Rapier_Exp", "LLWEAPONEX_WM_Rapier_Level");
 
 DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 1, "DuelistStance", "Any"); // Added when the offhand is empty
-DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 2, "SuckerCombo1", "Tag");
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 2, "SuckerCombo", "Tag"); // Added when Sucker Punch is used
+DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_Rapier", 3, "FlickerStrike", "Any");
 
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "DuelistStance", "Shout_LLWEAPONEX_Rapier_DuelistStance");
-DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Rapier", "SuckerCombo1", "LLWEAPONEX_Rapier_SuckerCombo1Enabled", "Tag");
+DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Rapier", "SuckerCombo", "LLWEAPONEX_Rapier_SuckerComboEnabled", "Tag");
+DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Rapier", "FlickerStrike", "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike");
 
 //Statuses applied by mastery skills that should be removed when the mastery is inactive
 DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
-DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "SuckerCombo1", "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
+DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "SuckerCombo", "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
+DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Rapier", "SuckerCombo", "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO2");
 
 //Runeblade
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Runeblade", "<font color='#40E0D0'>Runeblade Mastery</font>");

@@ -1,3 +1,3 @@
 Key	Content
 tagkey_LLWEAPONEX_Katana_ComboEnabled	<font color='#8B0000'>Katana Mastery</font><br>Striking enemies with your blade applies Blademaster's Strike, causing different effects with katana-based skills.
-tagKey_LLWEAPONEX_Rapier_SuckerCombo1Enabled	<font color='#0e7700'>Rapier Mastery</font><br>After attacking an enemy with Sucker Punch, follow up the attack with another debilitating blow. Sucker Punch's knockdown duration is increased by 1.
+tagKey_LLWEAPONEX_Rapier_SuckerComboEnabled	<font color='#0e7700'>Rapier Mastery</font><br>Gain temporary follow-up skills when using Sucker Punch. Sucker Punch's knockdown duration is increased by 1.

@@ -129,6 +129,99 @@ LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStanc
 //END_REGION
 */
 
+//REGION SUCKER_PUNCH_COMBOS
+//Rapier Mastery Sucker Punch Knockdown
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_SUCKER_PUNCH", _Source)
+AND
+GetStatusTurns(_Target, "LLWEAPONEX_SUCKER_PUNCH", _CurrentTurns)
+AND
+IsTagged(_Source, "LLWEAPONEX_Rapier_SuckerComboEnabled", _AddTurns)
+AND
+IntegerSum(_CurrentTurns, _AddTurns, _Turns)
+AND
+Real(_Turns, _Duration)
+THEN
+ApplyStatus(_Target, "KNOCKED_DOWN", _Duration, 0, _Source);
+RemoveStatus(_Target, "LLWEAPONEX_SUCKER_PUNCH");
+//END_REGION
+
+//REGION FLICKER_STRIKE
+/*
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", _)
+THEN
+LLWEAPONEX_Rapiers_Internal_IncreaseFrenzyCharges(_Char);
+
+PROC
+LLWEAPONEX_Rapiers_Internal_IncreaseFrenzyCharges((CHARACTERGUID)_Char)
+AND
+NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _)
+THEN
+DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, 0);
+
+PROC
+LLWEAPONEX_Rapiers_Internal_IncreaseFrenzyCharges((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
+AND
+IntegerSum(_Charges, 1, _NextCharges)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
+DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _NextCharges);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", _)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", _AnyActive)
+THEN
+LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges(_Char, _AnyActive);
+
+PROC
+LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges((CHARACTERGUID)_Char, 1)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
+AND
+IntegerSubtract(_Charges, 1, _NextCharges)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
+DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _NextCharges);
+
+PROC
+LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges((CHARACTERGUID)_Char, 1)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
+AND
+_Charges <= 0
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
+
+//No charges
+PROC
+LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges((CHARACTERGUID)_Char, 0)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
+*/
+
+//Frenzy charge consuming
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_RAPIER_FLICKER_HIT", (CHARACTERGUID)_Source)
+THEN
+LeaderLib_Timers_CancelObjectObjectTimer(_Source, "LLWEAPONEX_Timers_FlickerStrike_CheckForContinue");
+LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 800, "LLWEAPONEX_Timers_FlickerStrike_CheckForContinue", "LLWEAPONEX_FlickerStrike_CheckForContinue");
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Source, (CHARACTERGUID)_Target, "LLWEAPONEX_FlickerStrike_CheckForContinue")
+AND
+HasActiveStatus(_Source, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", 1)
+THEN
+PlayAnimation(_Source, "");
+RemoveStatus(_Source, "LLWEAPONEX_RAPIER_FRENZY_CHARGE");
+CharacterUseSkill(_Source, "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike_FrenzyBonus", _Target, 1, 1, 1);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION
