@@ -3,6 +3,10 @@ SubGoalCombiner SGC_AND
 INITSECTION
 LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
 LeaderLib_Statuses_Register_PermanentStatus("WeaponExpansion", "MasteryPassives", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", "LLWEAPONEX_DuelistStanceWasEnabled");
+DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE1");
+DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE2");
+DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE3");
+DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE4");
 
 KBSECTION
 
@@ -147,79 +151,205 @@ RemoveStatus(_Target, "LLWEAPONEX_SUCKER_PUNCH");
 //END_REGION
 
 //REGION FLICKER_STRIKE
-/*
+QRY
+LLWEAPONEX_Rapiers_QRY_HasFrenzyCharge((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Rapiers_FrenzyCharge(_Status)
+AND
+HasActiveStatus(_Char, _Status, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Rapiers_QRY_RemoveFrenzyCharge((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Rapiers_FrenzyCharge(_Status)
+AND
+NOT DB_LLWEAPONEX_Rapiers_Temp_RemovedCharge(_Char)
+AND
+HasActiveStatus(_Char, _Status, 1)
+THEN
+DB_LLWEAPONEX_Rapiers_Temp_RemovedCharge(_Char);
+RemoveStatus(_Char, _Status);
+
+QRY
+LLWEAPONEX_Rapiers_QRY_RemoveFrenzyCharge((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_RemovedCharge(_Char)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_RemovedCharge(_Char);
+
 IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", _)
+CharacterStatusApplied(_Target, "LLWEAPONEX_RAPIER_FLICKER_HIT", (CHARACTERGUID)_Source)
+AND
+LeaderLib_Roll_QRY(499)
 THEN
-LLWEAPONEX_Rapiers_Internal_IncreaseFrenzyCharges(_Char);
+ApplyStatus(_Source, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", 6.0, 1, _Source);
 
-PROC
-LLWEAPONEX_Rapiers_Internal_IncreaseFrenzyCharges((CHARACTERGUID)_Char)
-AND
-NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _)
-THEN
-DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, 0);
-
-PROC
-LLWEAPONEX_Rapiers_Internal_IncreaseFrenzyCharges((CHARACTERGUID)_Char)
-AND
-DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
-AND
-IntegerSum(_Charges, 1, _NextCharges)
-THEN
-NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
-DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _NextCharges);
-
-IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", _)
-AND
-HasActiveStatus(_Char, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", _AnyActive)
-THEN
-LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges(_Char, _AnyActive);
-
-PROC
-LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges((CHARACTERGUID)_Char, 1)
-AND
-DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
-AND
-IntegerSubtract(_Charges, 1, _NextCharges)
-THEN
-NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
-DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _NextCharges);
-
-PROC
-LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges((CHARACTERGUID)_Char, 1)
-AND
-DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
-AND
-_Charges <= 0
-THEN
-NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
-
-//No charges
-PROC
-LLWEAPONEX_Rapiers_Internal_DecreaseFrenzyCharges((CHARACTERGUID)_Char, 0)
-AND
-DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges)
-THEN
-NOT DB_LLWEAPONEX_Rapiers_Temp_FrenzyCharges(_Char, _Charges);
-*/
-
-//Frenzy charge consuming
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_RAPIER_FLICKER_HIT", (CHARACTERGUID)_Source)
 THEN
-LeaderLib_Timers_CancelObjectObjectTimer(_Source, "LLWEAPONEX_Timers_FlickerStrike_CheckForContinue");
-LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 800, "LLWEAPONEX_Timers_FlickerStrike_CheckForContinue", "LLWEAPONEX_FlickerStrike_CheckForContinue");
+LeaderLib_Timers_RestartCharacterCharacterTimer(_Source, "LLWEAPONEX_FlickerStrike_CheckForContinue", 900);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_RAPIER_FLICKER_HIT", (CHARACTERGUID)_Source)
+THEN
+LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 250, "LLWEAPONEX_Timers_FlickerStrike_CheckForContinue", "LLWEAPONEX_FlickerStrike_CheckForContinue");
+
+IF
+SkillCast(_Source, "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike", _, _)
+THEN
+LeaderLib_Timers_RestartCharacterCharacterTimer(_Source, "LLWEAPONEX_FlickerStrike_CheckForContinue", 500);
+CharacterFlushQueue(_Source);
+
+IF
+CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_FlickerStrike_CheckForContinue")
+AND
+LLWEAPONEX_Rapiers_QRY_HasFrenzyCharge(_Source)
+AND
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source)
+THEN
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source);
+LLWEAPONEX_Rapiers_FlickerStrike_FindNext(_Source, _Target);
+
+IF
+CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_FlickerStrike_CheckForContinue")
+AND
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source)
+THEN
+PlayEffect(_Source, "RS3_FX_Skills_Warrior_BlinkStrike_Reappear_01");
 
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Source, (CHARACTERGUID)_Target, "LLWEAPONEX_FlickerStrike_CheckForContinue")
+LLWEAPONEX_Rapiers_FlickerStrike_FindNext((CHARACTERGUID)_Source, (CHARACTERGUID)_LastTarget)
 AND
-HasActiveStatus(_Source, "LLWEAPONEX_RAPIER_FRENZY_CHARGE", 1)
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source)
+AND
+CharacterIsInCombat(_Source, 1)
+AND
+CombatGetIDForCharacter(_Source, _CombatID)
+AND
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_QRY_FindNextEnemy(_Source, _LastTarget, _CombatID)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _Enemy)
+AND
+LLWEAPONEX_Rapiers_QRY_RemoveFrenzyCharge(_Source)
 THEN
-PlayAnimation(_Source, "");
-RemoveStatus(_Source, "LLWEAPONEX_RAPIER_FRENZY_CHARGE");
-CharacterUseSkill(_Source, "MultiStrike_LLWEAPONEX_Rapier_FlickerStrike_FrenzyBonus", _Target, 1, 1, 1);
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source);
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _Enemy);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Enemy, 50, "LLWEAPONEX_Timers_FlickerStrike_FireBonusHit", "LLWEAPONEX_FlickerStrike_FireBonusHit");
+
+QRY
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_QRY_FindNextEnemy((CHARACTERGUID)_Source, (CHARACTERGUID)_LastTarget, (INTEGER)_CombatID)
+THEN
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_TryFindNextEnemy(_Source, _LastTarget, _CombatID);
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_TryFindNextEnemy(_Source, _LastTarget, _CombatID);
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_TryFindNextEnemy(_Source, _LastTarget, _CombatID);
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_TryFindNextEnemyFallback(_Source, _LastTarget, _CombatID);
+
+PROC
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_TryFindNextEnemy((CHARACTERGUID)_Source, (CHARACTERGUID)_LastTarget, (INTEGER)_CombatID)
+AND
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _)
+AND
+LeaderLib_Combat_QRY_GetRandomEnemy(_Source, _CombatID, 0)
+AND
+DB_LeaderLib_Combat_Temp_RandomEnemy(_CombatID, _Source, _Enemy, _Index)
+AND
+_Enemy != _LastTarget
+AND
+GetDistanceTo(_Source, _Enemy, _Dist)
+AND
+_Dist <= 8.0
+THEN
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _Enemy);
+
+PROC
+LLWEAPONEX_Rapiers_FlickerStrike_Internal_TryFindNextEnemyFallback((CHARACTERGUID)_Source, (CHARACTERGUID)_LastTarget, (INTEGER)_CombatID)
+AND
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _)
+AND
+CharacterIsDead(_LastTarget, 0)
+THEN
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _LastTarget);
+
+PROC
+LLWEAPONEX_Rapiers_FlickerStrike_FindNext((CHARACTERGUID)_Source, (CHARACTERGUID)_LastTarget)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source)
+AND
+CharacterIsInCombat(_Source, 0)
+AND
+String(_Source, _SourceID)
+AND
+StringConcatenate("LLWEAPONEX_Iterator_FlickerStrike_", _SourceID, _IteratorEvent)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Rapiers:FlickerStrike_FindNext] Searching for next target out of combat.");
+ProcObjectTimer(_Source, "LLWEAPONEX_Timers_FlickerStrike_ClearIterator", 1000);
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeIterator(_Source, _LastTarget, _IteratorEvent);
+CharacterLaunchIteratorAroundObject(_Source, 6.0, _IteratorEvent);
+
+PROC
+LLWEAPONEX_Rapiers_FlickerStrike_FindNext((CHARACTERGUID)_Source, (CHARACTERGUID)_LastTarget)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeTargetSearch(_Source);
+
+PROC
+LLWEAPONEX_Rapiers_FlickerStrike_FindNext((CHARACTERGUID)_Source, (CHARACTERGUID)_LastTarget)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _Enemy)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _Enemy);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Source, "LLWEAPONEX_Timers_FlickerStrike_ClearIterator")
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeIterator(_Source, _LastTarget, _IteratorEvent)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeIterator(_Source, _LastTarget, _IteratorEvent);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, _IteratorEvent)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeIterator(_Source, _LastTarget, _IteratorEvent)
+AND
+_Char != _LastTarget
+AND
+CharacterIsEnemy(_Char, _Source, 1)
+AND
+LLWEAPONEX_Rapiers_QRY_RemoveFrenzyCharge(_Source)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_FlickerStrikeIterator(_Source, _LastTarget, _IteratorEvent);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Char, 250, "LLWEAPONEX_Timers_FlickerStrike_FireBonusHit", "LLWEAPONEX_FlickerStrike_FireBonusHit");
+
+IF
+CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_FlickerStrike_FireBonusHit")
+AND
+String(_Source, _SourceStr)
+AND
+String(_Target, _TargetStr)
+THEN
+TeleportTo(_Source, _Target, "LLWEAPONEX_FlickerStrike_Teleported", 0, 1, 0);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Rapiers:LLWEAPONEX_FlickerStrike_FireBonusHit] Teleporting [",_SourceStr,"] to [",_TargetStr,"].");
+LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 25, "LLWEAPONEX_Timers_FlickerStrike_LookAtTarget", "LLWEAPONEX_FlickerStrike_LookAtTarget");
+LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 150, "LLWEAPONEX_Timers_FlickerStrike_CheckForContinue", "LLWEAPONEX_FlickerStrike_CheckForContinue");
+
+IF
+CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_FlickerStrike_LookAtTarget")
+THEN
+CharacterLookAt(_Source, _Target, 1);
+
+IF
+TextEventSet("llweap_flickerdamage")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+DB_CombatCharacters(_Char, _CombatID)
+AND
+_Host != _Char
+THEN
+CharacterCharacterSetEvent(_Host, _Char, "LLWEAPONEX_FlickerStrike_FireBonusHit");
 //END_REGION
 
 EXITSECTION

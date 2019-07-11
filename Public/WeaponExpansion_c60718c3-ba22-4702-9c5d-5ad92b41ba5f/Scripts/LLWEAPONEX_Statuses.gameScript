@@ -237,7 +237,6 @@ THEN
 	ENDIF
 ENDIF
 
-
 EVENT LLWEAPONEX_SoulBurn_Proc
 VARS
 	CHARACTER:_Target
@@ -294,8 +293,7 @@ IF "!c1"
 THEN
 	CharacterEvent(_Target, "LLWEAPONEX_Commands_StartSoulBurnTick")
 ENDIF
-
-RETURN(_RemoveList, _Result, _Turns)
+	RETURN(_RemoveList, _Result, _Turns)
 	
 //Regress the status
 EVENT LLWEAPONEX_SoulBurn_Tick
@@ -366,3 +364,33 @@ IF "c1"
 THEN
 	ClearFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick")
 ENDIF
+
+EVENT LLWEAPONEX_FrenzyCharge_Apply
+VARS
+	CHARACTER:_Target
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Turns
+ON
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_RAPIER_FRENZYCHARGE_APPLY)
+ACTIONS
+	Set(_Result, null)
+	Set(_Turns, 1)
+IF "!c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_RAPIER_FRENZYCHARGE1)
+THEN
+	Set(_Result, LLWEAPONEX_RAPIER_FRENZYCHARGE1)
+ELIF "!c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_RAPIER_FRENZYCHARGE2)
+THEN
+	Set(_Result, LLWEAPONEX_RAPIER_FRENZYCHARGE2)
+ELIF "!c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_RAPIER_FRENZYCHARGE3)
+THEN
+	Set(_Result, LLWEAPONEX_RAPIER_FRENZYCHARGE3)
+ELIF "!c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_RAPIER_FRENZYCHARGE4)
+THEN
+	Set(_Result, LLWEAPONEX_RAPIER_FRENZYCHARGE4)
+ENDIF
+	RETURN(_RemoveList, _Result, _Turns)

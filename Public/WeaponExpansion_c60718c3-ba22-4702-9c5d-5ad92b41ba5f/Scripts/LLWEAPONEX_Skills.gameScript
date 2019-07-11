@@ -21,7 +21,6 @@ THEN
 ELSE
 	Set(_Level, 1)
 ENDIF
-
 	GetForwardDirection(_Player, _Target)
 IF "c1&!c2"
 	GetPosition(_Player, _Pos)
@@ -36,3 +35,24 @@ THEN
 	//SetVar(_Player, "LeaderLog_Message", _Str)
 	//CharacterEvent(_Player, "LeaderLog_Commands_Log")
 ENDIF
+
+EVENT LLWEAPONEX_Rapiers_FlickerStrike_Damage
+VARS
+	CHARACTER:_Source
+	CHARACTER:_Target
+	FLOAT:_LevelF
+	INT:_Level
+	FLOAT3:_Position
+ON
+	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_FlickerStrike_FireBonusHit")
+ACTIONS
+	Set(_Level, 1)
+IF "c1"
+	CharacterGetStat(_LevelF, _Source, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+	CharacterPlayEffect(_Source, "RS3_FX_Skills_Warrior_BlinkStrike_Cast_01")
+	CharacterPlayEffect(_Target, "RS3_FX_Skills_Warrior_BlinkStrike_Impact_01")
+	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Rapier_FlickerStrike_FrenzyBonus, _Level, _Source)
+	CharacterApplyStatus(_Target, LLWEAPONEX_RAPIER_FLICKER_HIT_PROC, 0, 0, _Source)

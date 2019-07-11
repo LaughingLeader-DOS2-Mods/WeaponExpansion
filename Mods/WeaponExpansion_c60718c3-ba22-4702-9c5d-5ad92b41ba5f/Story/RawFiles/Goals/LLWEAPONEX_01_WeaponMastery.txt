@@ -18,6 +18,8 @@ DB_LLWEAPONEX_WeaponMastery_ActCaps("RC_Main", 1);
 DB_LLWEAPONEX_WeaponMastery_ActCaps("CoS_Main", 2);
 DB_LLWEAPONEX_WeaponMastery_ActCaps("Arx_Main", 3);
 DB_LLWEAPONEX_WeaponMastery_ActCaps("Arx_Endgame", 3);
+LLWEAPONEX_WeaponMastery_Internal_InitMasteries();
+
 
 QRY
 LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap((STRING)_Region)
@@ -86,6 +88,9 @@ DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 100);
 //Max possible level attainable by players
 //DB_LLWEAPONEX_WeaponMastery_Softcap(2);
 
+PROC
+LLWEAPONEX_WeaponMastery_Internal_InitMasteries()
+THEN
 //Dual Shields
 //Greatbow
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_DualShields", "<font color='#D9D9D9'>Dual Shields Mastery</font>");
@@ -357,6 +362,7 @@ LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:Debug:CheatMastery] Maxing out [",_WeaponType,"] mastery.");
 LLWEAPONEX_WeaponMastery_InitMasteryVariables(_Player, _WeaponType, 4, 1);
 LLWEAPONEX_WeaponMastery_SetProgressionFlags(_Player, _WeaponType, 0, 4);
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _WeaponType, 4);

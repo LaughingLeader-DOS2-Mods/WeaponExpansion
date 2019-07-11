@@ -208,6 +208,7 @@ data "UseWeaponDamage" "No"
 data "UseWeaponProperties" "No"
 data "SkillProperties" ""
 data "TargetConditions" "HasStatus:LLWEAPONEX_BALRINAXE_DEBUFF"
+data "ExplodeRadius" "1"
 
 new entry "Projectile_LLWEAPONEX_Throw_Axe2H"
 type "SkillData"

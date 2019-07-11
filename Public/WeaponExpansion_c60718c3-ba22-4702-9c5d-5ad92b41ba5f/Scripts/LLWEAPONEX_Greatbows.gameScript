@@ -203,3 +203,23 @@ THEN
 	ExplodeAt(_Position, Projectile_LLWEAPONEX_Greatbow_LightningStrike, _Level, _Character)
 	SetVar(_Character, "LLWEAPONEX_Greatbow_LightningStrikePosition", FLOAT3:null)
 ENDIF
+
+EVENT LLWEAPONEX_Greatbows_BarrageBonusDamage
+VARS
+	CHARACTER:_Source
+	CHARACTER:_Target
+	FLOAT:_Movement
+ON
+	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbows_DelayedBarrage_CheckMovement")
+ACTIONS
+IF "c1|c2|c3|(c4&(c5|c6))"
+	CharacterHasStatus(_Target, KNOCKED_DOWN)
+	CharacterHasStatus(_Target, STUNNED)
+	CharacterHasStatus(_Target, SLEEPING)
+	CharacterGetStat(_Movement, _Target, Movement)
+	IsLessThen(_Movement, 0)
+	IsEqual(_Movement, 0)
+THEN
+	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_DelayedBarrage_BonusDamage, -1, _Source)
+	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_BONUSDAMAGE, 0, 1, _Source)
+ENDIF
