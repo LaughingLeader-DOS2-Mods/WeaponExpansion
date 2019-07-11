@@ -18,6 +18,7 @@ DB_LLWEAPONEX_Katanas_ComboStatus(9, "LLWEAPONEX_KATANA_COMBO9");
 
 DB_LLWEAPONEX_Katanas_ComboFinisher("LLWEAPONEX_KATANA_FINISHER_APPLY", "Default");
 DB_LLWEAPONEX_Katanas_ComboFinisher("LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY", "Iaido");
+DB_LLWEAPONEX_Katanas_ComboFinisher("LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY", "Vanquisher");
 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
@@ -95,6 +96,7 @@ AND
 DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
 THEN
 NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
+LLWEAPONEX_Katanas_ComboRemoved(_Source, _Target);
 //END_REGION
 
 //REGION FINISHER_COMBO
@@ -115,6 +117,7 @@ LLWEAPONEX_Katanas_StartFinisher((CHARACTERGUID)_Target, (CHARACTERGUID)_Source)
 AND
 DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _Hits, _Status, _ComboFinisher)
 THEN
+DB_LLWEAPONEX_Katanas_Temp_FinisherActive(_Source, _Target, _Status, _ComboFinisher);
 LeaderLib_Timers_StartCharacterCharacterTimer(_Target, _Source, 50, "LLWEAPONEX_Timers_Katanas_StartFinisher", "LLWEAPONEX_Katanas_FinisherHit");
 
 IF
@@ -141,6 +144,8 @@ LLWEAPONEX_Katanas_Internal_StartNextHit(_Target, _Source, _NextHits, _IsDead, _
 PROC
 LLWEAPONEX_Katanas_Internal_StartNextHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_NextHits, 0, (STRING)_Status, (STRING)_ComboFinisher)
 AND
+DB_LLWEAPONEX_Katanas_Temp_FinisherActive(_Source, _Target, _Status, _ComboFinisher)
+AND
 _NextHits > 0
 AND
 String(_Target, _TargetStr)
@@ -153,18 +158,52 @@ DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _NextHits, _Status, _C
 LeaderLib_Timers_StartCharacterCharacterTimer(_Target, _Source, 275, "LLWEAPONEX_Timers_Katanas_NextFinisher", "LLWEAPONEX_Katanas_FinisherHit");
 //LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Katanas:Internal:StartNextHit] Starting timer again for target [",_TargetStr,"] and source [",_SourceStr,"]. Hits [",_NextHitsStr,"].");
 
+QRY
+LLWEAPONEX_Katanas_Internal_QRY_FinisherDone((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status, (STRING)_ComboFinisher)
+AND
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _, _Status, _ComboFinisher)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Katanas_Internal_QRY_FinisherDone((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status, (STRING)_ComboFinisher)
+AND
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherActive(_Source, _Target, _Status, _ComboFinisher)
+THEN
+DB_NOOP(1);
+
 PROC
 LLWEAPONEX_Katanas_Internal_StartNextHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_NextHits, (INTEGER)_IsDead, (STRING)_Status, (STRING)_ComboFinisher)
 AND
-NOT DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _, _Status, _ComboFinisher)
+LLWEAPONEX_Katanas_Internal_QRY_FinisherDone(_Target, _Source, _Status, _ComboFinisher)
 THEN
 LLWEAPONEX_Katanas_FinisherDone(_Target, _Source, _Status, _ComboFinisher);
 
 PROC
 LLWEAPONEX_Katanas_FinisherDone((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status, (STRING)_ComboFinisher)
+AND
+CharacterIsDead(_Target, 0)
+THEN
+RemoveStatus(_Target, _Status);
+
+PROC
+LLWEAPONEX_Katanas_FinisherDone((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status, (STRING)_ComboFinisher)
+AND
+DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _Hits, _Status, _ComboFinisher)
+THEN
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherHits(_Target, _Source, _Hits, _Status, _ComboFinisher);
+
+PROC
+LLWEAPONEX_Katanas_FinisherDone((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status, (STRING)_ComboFinisher)
+AND
+DB_LLWEAPONEX_Katanas_Temp_FinisherActive(_Source, _Target, _Status, _ComboFinisher)
+THEN
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherActive(_Source, _Target, _Status, _ComboFinisher);
+
+PROC
+LLWEAPONEX_Katanas_FinisherDone((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status, (STRING)_ComboFinisher)
 THEN
 ObjectClearFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo", 0);
-RemoveStatus(_Target, _Status);
 //END_REGION
 
 //REGION FINISHER_HITS
@@ -191,6 +230,40 @@ AND
 LeaderLib_Math_QRY_IsEqualToAny(_HitNumber, 3, 6, 9)
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_RUPTURE", 0.0, 0, _Source);
+
+PROC
+LLWEAPONEX_Katanas_FinisherHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_HitNumber, (STRING)_Status, "Vanquisher", 0)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_KATANA_FINISHER_VANQUISHER_DAMAGE", 0.0, 0, _Source);
+
+PROC
+LLWEAPONEX_Katanas_FinisherHit((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (INTEGER)_HitNumber, (STRING)_Status, "Vanquisher", 1)
+AND
+DB_LLWEAPONEX_Katanas_Temp_FinisherActive(_Source, _Target, _Status, _ComboFinisher)
+THEN
+NOT DB_LLWEAPONEX_Katanas_Temp_FinisherActive(_Source, _Target, _Status, _ComboFinisher);
+LLWEAPONEX_Katanas_Internal_OnVanquisherFinisher(_Source, _Target, _HitNumber);
+
+PROC
+LLWEAPONEX_Katanas_Internal_OnVanquisherFinisher((CHARACTERGUID)_Source, (CHARACTERGUID)_Target, (INTEGER)_HitNumber)
+AND
+CombatGetIDForCharacter(_Source, _CombatID)
+AND
+DB_CombatCharacters(_Char, _CombatID)
+AND
+_Char != _Source
+AND
+_Char != _Target
+AND
+CharacterIsEnemy(_Char, _Source, 1)
+AND
+GetDistanceTo(_Target, _Char, _Dist)
+AND
+_Dist <= 6.0
+AND
+DB_LLWEAPONEX_Katanas_ComboStatus(_HitNumber, _Status)
+THEN
+ApplyStatus(_Char, _Status, 6.0, 0, _Source);
 //END_REGION
 
 //REGION ANIMATION_OVERRIDE
@@ -222,6 +295,49 @@ IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
 THEN
 LLWEAPONEX_AnimationSetOverride_Clear(_Player);
 //END_REGION
+
+PROC
+LLWEAPONEX_Katanas_ComboRemoved((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+AND
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _, _)
+THEN
+ClearTag(_Source, "LLWEAPONEX_Blademaster_Target_Available");
+
+IF
+SkillCast(_Source, "Shout_LLWEAPONEX_Katana_VanquishersPath", _, _)
+THEN
+LLWEAPONEX_Katanas_Internal_VanquishNext(_Source);
+
+PROC
+LLWEAPONEX_Katanas_Internal_VanquishNext((CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
+AND
+NOT DB_LLWEAPONEX_Katanas_Temp_VanquisherTeleporting(_Source, _)
+THEN
+DB_LLWEAPONEX_Katanas_Temp_VanquisherTeleporting(_Source, _Target);
+TeleportTo(_Source, _Target, "LLWEAPONEX_Katanas_Vanquisher_Teleported", 0, 1, 0);
+
+IF
+StoryEvent((CHARACTERGUID)_Source, "LLWEAPONEX_Katanas_Vanquisher_Teleported")
+AND
+DB_LLWEAPONEX_Katanas_Temp_VanquisherTeleporting(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Katanas_Temp_VanquisherTeleporting(_Source, _Target);
+PlayAnimation(_Source, "");
+CharacterUseSkill(_Source, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", _Target, 1, 1, 1);
+ProcObjectTimer(_Source, "LLWEAPONEX_Timers_Katanas_ContinueVanquisher", 2000);
+
+IF
+SkillCast(_Source, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", _, _)
+THEN
+ProcObjectTimerCancel(_Source, "LLWEAPONEX_Timers_Katanas_ContinueVanquisher");
+ProcObjectTimer(_Source, "LLWEAPONEX_Timers_Katanas_ContinueVanquisher", 500);
+
+PROC
+ProcObjectTimerFinished(_Source, "LLWEAPONEX_Timers_Katanas_ContinueVanquisher")
+THEN
+LLWEAPONEX_Katanas_Internal_VanquishNext(_Source);
 EXITSECTION
 
 ENDEXITSECTION

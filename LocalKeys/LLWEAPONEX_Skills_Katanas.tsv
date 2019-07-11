@@ -1,7 +1,9 @@
 Key	Content
-Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] + [2] + [3].<br><font color='#ffe86a'>Corrosive damage breaks physical armor, while magic damage breaks magic armor.</font>
 Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter
+Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] + [2] + [3].<br><font color='#ffe86a'>Corrosive damage breaks physical armor, while magic damage breaks magic armor.</font>
 LLWEAPONEX_Target_Raizan_Flurry_DisplayName	Raijin's Onslaught
 LLWEAPONEX_Target_Raizan_Flurry_Description	(Placeholder)<br>Unleash the magic within the Raizan, attacking 5 times with astonishing speed, each hit dealing [1].
 Rush_LLWEAPONEX_Katana_Iaido_DisplayName	Flash of Steel
-Rush_LLWEAPONEX_Katana_Iaido_Description	In a swift display of skill, instantly rend enemies in a line, dealing [1].<br>Consumes all stacks of <font color='#C9AA58'>Blademaster's Strike</font> on targets hit, dealing [2] per stack, and rupturing their wounds for [3] every 3 stacks.
+Rush_LLWEAPONEX_Katana_Iaido_Description	<font color='#FF2D2D'>Katana Mastery I</font><br>In a swift display of skill, instantly rend enemies in a line, dealing [1].<br>Consumes all stacks of <font color='#C9AA58'>Blademaster's Strike</font> on targets hit, dealing [2] per stack, and rupturing their wounds for [3] every 3 stacks.
+Shout_LLWEAPONEX_Katana_VanquishersPath_DisplayName	Vanquisher's Path
+Shout_LLWEAPONEX_Katana_VanquishersPath_Description	<font color='#FF2D2D'>Katana Mastery II</font><br>Instantly teleport to enemies marked with <font color='#C9AA58'>Blademaster's Strike</font>, dealing [1], [2] per stack, and consuming each stack.<br><font color='#C9AA58'>If the enemy dies, <font color='#C9AA58'>Blademaster's Strike</font> is spread to enemies within 6m.</font>

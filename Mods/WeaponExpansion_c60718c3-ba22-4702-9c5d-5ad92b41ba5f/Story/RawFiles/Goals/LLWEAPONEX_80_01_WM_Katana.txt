@@ -25,6 +25,7 @@ DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
 THEN
 NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
 LeaderLib_Statuses_RemoveIfActive(_Target, _Status);
+LLWEAPONEX_Katanas_ComboRemoved(_Source, _Target);
 
 IF
 CharacterStatusRemoved(_Target, _Status, _)
@@ -32,6 +33,14 @@ AND
 DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
 THEN
 NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
+LLWEAPONEX_Katanas_ComboRemoved(_Source, _Target);
+
+IF
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _, _)
+AND
+IsTagged(_Source, "LLWEAPONEX_Blademaster_Target_Available", 0)
+THEN
+SetTag(_Source, "LLWEAPONEX_Blademaster_Target_Available");
 
 EXITSECTION
 
