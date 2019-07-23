@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <save>
     <header version="2" />
-    <version major="3" minor="6" revision="4" build="0" />
+    <version major="3" minor="6" revision="4" build="1" />
     <region id="Config">
         <node id="root">
             <children>
@@ -19,7 +19,7 @@
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="Animations Plus" type="22" />
                             <attribute id="UUID" value="326b8784-edd7-4950-86d8-fcae9f5c457c" type="22" />
-                            <attribute id="Version" value="268632065" type="4" />
+                            <attribute id="Version" value="268632066" type="4" />
                         </node>
                     </children>
                 </node>
@@ -42,7 +42,7 @@
                     <attribute id="Version" value="151388161" type="4" />
                     <children>
                         <node id="PublishVersion">
-                            <attribute id="Version" value="908338577" type="4" />
+                            <attribute id="Version" value="908857753" type="4" />
                         </node>
                         <node id="Scripts">
                             <children>
