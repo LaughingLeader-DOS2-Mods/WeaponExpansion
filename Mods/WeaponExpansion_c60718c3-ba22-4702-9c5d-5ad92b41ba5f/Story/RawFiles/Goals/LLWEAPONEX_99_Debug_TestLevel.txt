@@ -35,6 +35,50 @@ DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b6
 //DB_LLWEAPONEX_Debug_Atmospheres("Storm", "09edc0f3-c27e-414a-a053-a4c1d2d1271a");
 //DB_LLWEAPONEX_Debug_Atmospheres("BloodForest", "4b41cfe5-35bc-4473-b50c-59301e38ef9f");
 KBSECTION
+
+IF
+TextEventSet("test_deltamod_crash")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+GetPosition(_Host, _x, _y, _z)
+AND
+//CreateItemTemplateAtPosition("6f6423e7-ad9b-4b17-8934-75bdbc45bc08", _x, _y, _z, _Item)
+CreateItemTemplateAtPosition("LLWEAPONEX_Debug_Greatbow_Lightning_Bow_2H_A_a562214b-4a98-401a-bbfb-636bcf971900", _x, _y, _z, _Item)
+THEN
+ItemLevelUpTo(_Item, 11);
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Ability_AirSpecialist_Wand");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Secondary_Dodge_TwoHanded");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_EmptyRuneSlot");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Damage_Air_Medium_Bow");
+CharacterStatusText(_Host, "Ready for Reload");
+CharacterEquipItem(_Host, _Item);
+
+IF
+GameStarted(_,1)
+THEN
+TimerCancel("LLWEAPONEX_Debug_DeltamodCrashTest");
+TimerLaunch("LLWEAPONEX_Debug_DeltamodCrashTest", 1100);
+
+IF
+TimerFinished("LLWEAPONEX_Debug_DeltamodCrashTest")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+GetPosition(_Host, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("LLWEAPONEX_Debug_Greatbow_Lightning_Bow_2H_A_a562214b-4a98-401a-bbfb-636bcf971900", _x, _y, _z, _Item)
+THEN
+ItemLevelUpTo(_Item, 11);
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Ability_AirSpecialist_Wand");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Primary_Intelligence_PrimaryAsLarge");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Secondary_Dodge_TwoHanded");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_EmptyRuneSlot");
+ItemAddDeltaModifier(_Item, "Boost_Weapon_Damage_Air_Medium_Bow");
+CharacterStatusText(_Host, "Ready for Reload");
+CharacterEquipItem(_Host, _Item);
+
 /*
 IF
 GameStarted(_,_)

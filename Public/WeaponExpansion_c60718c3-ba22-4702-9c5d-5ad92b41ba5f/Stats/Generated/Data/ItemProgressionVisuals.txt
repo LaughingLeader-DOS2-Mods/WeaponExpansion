@@ -2154,3 +2154,9 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A"
 add levelgroup 0,0,"All"
 add rootgroup "76ab9d36-2f5f-4cb1-822d-2da2040a5347",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A","",""
+
+new itemgroup "Debug_LLWEAPONEX_Greatbow_Lightning_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "a562214b-4a98-401a-bbfb-636bcf971900",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A","",""
