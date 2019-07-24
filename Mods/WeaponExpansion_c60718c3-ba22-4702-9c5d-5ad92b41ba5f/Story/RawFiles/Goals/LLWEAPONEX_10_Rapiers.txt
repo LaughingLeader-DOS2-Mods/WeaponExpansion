@@ -9,7 +9,6 @@ DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE3");
 DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE4");
 
 KBSECTION
-
 //REGION OFFHAND_QRY
 QRY
 LLWEAPONEX_Rapiers_QRY_HasFullHands((CHARACTERGUID)_Player)
@@ -230,7 +229,7 @@ CombatGetIDForCharacter(_Source, _CombatID)
 AND
 LLWEAPONEX_Rapiers_FlickerStrike_Internal_QRY_FindNextEnemy(_Source, _LastTarget, _CombatID)
 AND
-DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, _Enemy)
+DB_LLWEAPONEX_Rapiers_Temp_FlickerStrike_Next(_Source, (CHARACTERGUID)_Enemy)
 AND
 LLWEAPONEX_Rapiers_QRY_RemoveFrenzyCharge(_Source)
 THEN

@@ -196,7 +196,7 @@ LeaderLib_Helper_SafeTeleport(_Revenant, _Target, "LLWEAPONEX_Events_Revenant_Se
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
 AND
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration, _CopyEquipment)
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, (CHARACTERGUID)_Target, _Source, _Status, _RevenantName, _Duration, _CopyEquipment)
 THEN
 CharacterSetCustomName(_Revenant, _RevenantName);
 LeaderLib_Helper_CopyAbilities(_Revenant, _Target);
@@ -206,7 +206,7 @@ CharacterCloneSkillsTo(_Target, _Revenant, 1);
 IF
 StoryEvent((CHARACTERGUID)_Revenant, "LLWEAPONEX_Events_Revenant_SetAttached")
 AND
-DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, _Target, _Source, _Status, _RevenantName, _Duration, 1)
+DB_LLWEAPONEX_Statuses_Temp_WaitForFinished(_Revenant, (CHARACTERGUID)_Target, _Source, _Status, _RevenantName, _Duration, 1)
 THEN
 LeaderLib_Timers_StartCharacterCharacterTimer(_Revenant, _Target, 50, "LLWEAPONEX_Timers_Revenant_CopyEquipment", "LLWEAPONEX_Revenant_CopyEquipment");
 

@@ -78,6 +78,34 @@ ItemAddDeltaModifier(_Item, "Boost_Weapon_EmptyRuneSlot");
 ItemAddDeltaModifier(_Item, "Boost_Weapon_Damage_Air_Medium_Bow");
 CharacterStatusText(_Host, "Ready for Reload");
 CharacterEquipItem(_Host, _Item);
+ObjectSetFlag(_Item, "LLWEAPONEX_AddedDeltamods", 0);
+
+QRY
+LLWEAPONEX_Debug_QRY_ItemHasDeltamods((ITEMGUID)_Item)
+AND
+LeaderLib_Growth_Items_QRY_ItemHasDeltaMods(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Debug_QRY_ItemHasDeltamods((ITEMGUID)_Item)
+AND
+ObjectGetFlag(_Item, "LLWEAPONEX_AddedDeltamods", 1)
+THEN
+DB_NOOP(1);
+
+IF
+RegionEnded(_)
+AND
+DB_IsPlayer(_Player)
+AND
+DB_LeaderLib_EquipmentSlots(_Slot)
+AND
+CharacterGetEquippedItem(_Player, _Slot, (ITEMGUID)_Item)
+AND
+LLWEAPONEX_Debug_QRY_ItemHasDeltamods(_Item)
+THEN
+ItemDrop(_Item);
 
 /*
 IF
