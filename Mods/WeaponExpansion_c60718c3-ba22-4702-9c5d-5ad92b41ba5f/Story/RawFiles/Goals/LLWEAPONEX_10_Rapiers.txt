@@ -254,7 +254,7 @@ LeaderLib_Combat_QRY_GetRandomEnemy(_Source, _CombatID, 0)
 AND
 DB_LeaderLib_Combat_Temp_RandomEnemy(_CombatID, _Source, _Enemy, _Index)
 AND
-_Enemy != _LastTarget
+(CHARACTERGUID)_Enemy != _LastTarget
 AND
 GetDistanceTo(_Source, _Enemy, _Dist)
 AND
