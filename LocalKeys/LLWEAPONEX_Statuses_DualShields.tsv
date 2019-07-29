@@ -1,0 +1,9 @@
+LLWEAPONEX_COMBAT_SHIELD_ARMOR_DisplayName	Armor Increase - Increases physical armor by [1] and magic armor by [2]
+LLWEAPONEX_COMBAT_SHIELD_ARMOR_Description	Character has increased armor from a combat shield.
+LLWEAPONEX_COMBAT_SHIELD_RESTORE_DisplayName	Armor Rejuvenation
+LLWEAPONEX_COVERING_DisplayName	Covering
+LLWEAPONEX_COVERING_Description	Character is covering by a nearby ally, redirecting [1] damage they take to themselves.
+LLLWEAPONEX_COVERED_DisplayName	Covered
+LLLWEAPONEX_COVERED_Description	Character is being covered by a nearby ally, redirecting [1] damage to them.
+LLWEAPONEX_SHIELD_PRISON_DisplayName	Shield Prison
+LLWEAPONEX_SHIELD_PRISON_Description	Character is encased in a chained shell, and cannot act or take damage.
