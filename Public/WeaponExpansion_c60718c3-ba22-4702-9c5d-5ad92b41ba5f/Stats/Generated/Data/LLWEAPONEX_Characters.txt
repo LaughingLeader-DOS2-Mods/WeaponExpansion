@@ -111,3 +111,8 @@ data "PoisonResistance" "0"
 data "Flags" ""
 data "DamageBoost" "-50"
 data "PathInfluence" ""
+
+new entry "LLWEAPONEX_Debug_FireReflection"
+type "Character"
+using "LizardMaleHero"
+data "ExtraProperties" "LLWEAPONEX_DEBUG_FIREREFLECT,100,-1"

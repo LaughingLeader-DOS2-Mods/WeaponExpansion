@@ -55,11 +55,13 @@ ItemAddDeltaModifier(_Item, "Boost_Weapon_Damage_Air_Medium_Bow");
 CharacterStatusText(_Host, "Ready for Reload");
 CharacterEquipItem(_Host, _Item);
 
+/*
 IF
 GameStarted(_,1)
 THEN
 TimerCancel("LLWEAPONEX_Debug_DeltamodCrashTest");
 TimerLaunch("LLWEAPONEX_Debug_DeltamodCrashTest", 1100);
+*/
 
 IF
 TimerFinished("LLWEAPONEX_Debug_DeltamodCrashTest")
@@ -629,6 +631,7 @@ AND
 CharacterGetDisplayName(_Owner, _, _OwnerName)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStartAttackObject] [",_Name,"](",_OwnerName,") is attacking [",_TargetStr,"].");
+SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
 
 IF
 CharacterMissedBy(_Target, _Owner, _Attacker)
@@ -662,6 +665,7 @@ AND
 String(_Owner, _OwnerName)
 THEN
 LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"] with DamageType [",_DamageType,"] DamageSource [",_DamageSource,"].");
+SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
 
 IF
 CharacterReceivedDamage(_Target, _Percentage, _Attacker)
@@ -679,6 +683,7 @@ AND
 StringConcatenate(_Str3, "].", _Suffix)
 THEN
 LeaderLog_LogInt("DEBUG", "[WeaponExpansion:Debug:CharacterReceivedDamage] [",_Percentage, _Suffix);
+SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
 //END_REGION
 
 //REGION STATUSES

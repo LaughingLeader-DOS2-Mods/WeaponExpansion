@@ -16,3 +16,81 @@ IF "c1&c2"
 THEN
 
 ENDIF
+
+EVENT LLWEAPONEX_Debug_CheckDamageType
+VARS
+	CHARACTER:_Char
+	STRING:_Str
+	STRING:_DamageType
+ON
+	//OnCharacterStatusApplied(_Char, HIT)
+	//OnCharacterStatusRemoved(_Char, HIT)
+	OnCharacterEvent(_Char, "LLWEAPONEX_Debug_CheckDamageType")
+ACTIONS
+	Set(_DamageType, "None")
+IF "c1"
+	CharacterHasBeenHitBy(_Char, Air)
+THEN
+	Set(_DamageType, "Air")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Chaos)
+THEN
+	Set(_DamageType, "Chaos")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Corrosive)
+THEN
+	Set(_DamageType, "Corrosive")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Earth)
+THEN
+	Set(_DamageType, "Earth")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Fire)
+THEN
+	Set(_DamageType, "Fire")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Magic)
+THEN
+	Set(_DamageType, "Magic")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Physical)
+THEN
+	Set(_DamageType, "Physical")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Piercing)
+THEN
+	Set(_DamageType, "Piercing")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Poison)
+THEN
+	Set(_DamageType, "Poison")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Shadow)
+THEN
+	Set(_DamageType, "Shadow")
+ELIF "c1"
+	CharacterHasBeenHitBy(_Char, Water)
+THEN
+	Set(_DamageType, "Water")
+ENDIF
+IF "!c1"
+	IsEqual(_DamageType, "None")
+THEN
+	Print(_Str, "[LLWEAPONEX_WeaponMaster.charScript] [1] was hit by damage type: ([2]).", _Char, _DamageType)
+	SetVar(_Char, "LeaderLog_Type", STRING:"Debug")
+	SetVar(_Char, "LeaderLog_Message", _Str)
+	CharacterEvent(_Char, "LeaderLog_Commands_Log")
+ENDIF
+	
+EVENT LLWEAPONEX_Debug_OnDamage
+VARS
+	CHARACTER:_Source
+	STRING:_Str
+	DAMAGE:_DamageType
+ON
+	OnDamage(_DamageType, _, _Source, _)
+ACTIONS
+	Print(_Str, "[LLWEAPONEX_WeaponMaster.charScript] WeaponMaster was hit by [1] with damage type: ([2]).", _Source, _DamageType)
+	SetVar(__Me, "LeaderLog_Type", STRING:"Debug")
+	SetVar(__Me, "LeaderLog_Message", _Str)
+	CharacterEvent(__Me, "LeaderLog_Commands_Log")
