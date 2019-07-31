@@ -7,3 +7,7 @@ LLLWEAPONEX_COVERED_DisplayName	Covered
 LLLWEAPONEX_COVERED_Description	Character is being covered by a nearby ally, redirecting [1] damage to them.
 LLWEAPONEX_SHIELD_PRISON_DisplayName	Shield Prison
 LLWEAPONEX_SHIELD_PRISON_Description	Character is encased in a chained shell, and cannot act or take damage.
+LLLWEAPONEX_COVERED_Description	Character is being covered by a nearby ally, redirecting [1] damage to them.
+LLWEAPONEX_SHIELD_PRISON_BUFF_DisplayName	Shield Prison (Ally Bonus)
+LLWEAPONEX_SHIELD_PRISON_BUFF_Description	Character is receiving an AP and initiative bonus.
+LLWEAPONEX_IRONMAIDEN_HIT_DisplayName	Spikey Evisceration

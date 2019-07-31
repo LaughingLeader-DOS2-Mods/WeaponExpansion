@@ -4,6 +4,8 @@ Projectile_LLWEAPONEX_ShieldToss_DisplayName	Shield Toss
 Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and has a chance to daze the target.
 Target_LLWEAPONEX_ShieldBash_DisplayName	Shield Bash
 Target_LLWEAPONEX_ShieldCover_DisplayName	Shield Cover
-Target_LLWEAPONEX_ShieldCover_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery II</font><br>Cover the target character remotely, redirecting [1] damage they take to you.
+Target_LLWEAPONEX_ShieldCover_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery I</font><br>Cover the target character remotely, redirecting [1] damage they take to you.
 Target_LLWEAPONEX_ShieldPrison_DisplayName	Shield Prison
-Target_LLWEAPONEX_ShieldPrison_Description  <font color='#D9D9D9' size='18'>Dual Shields Mastery III</font><br>Encase the target in a hardened shell, removing them from combat for 1 turn.<br>Allies gain +2 AP upon being freed.
+Target_LLWEAPONEX_ShieldPrison_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery II</font><br>Encase the target in a hardened shell, removing them from combat for 1 turn.<br>Allies gain +2 AP upon being freed.
+Target_LLWEAPONEX_IronMaiden_DisplayName	Iron Maiden
+Target_LLWEAPONEX_IronMaiden_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery III</font><br>Slam the target in an <font color='#CCCCCC'>Iron Maiden</font>, dealing [1].<br>If the target is in a <font color='#00AA00'>Shield Prison</font>, deal an extra [2] and apply <font color='#AAAAEE'>Dazed</font>.<br>Applies <font color='#FF0000'>Bleeding</font>, and <font color='#DC143C'>Ruptures</font> <font color='#FF0000'>Bleeding</font> targets for [3].

@@ -377,6 +377,45 @@ LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);
 */
 //END_REGION
 
+//REGION IRON_MAIDEN
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_SHIELD_PRISON", _)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_SHIELD_PRISON_FX", 1)
+THEN
+ProcObjectTimerCancel(_Char, "LLWEAPONEX_Timers_RemoveShieldPrisonFX");
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_RemoveShieldPrisonFX", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_RemoveShieldPrisonFX")
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_SHIELD_PRISON_FX", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_SHIELD_PRISON_FX");
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "LLWEAPONEX_Timers_PlayShieldPrisonEndFX", "LLWEAPONEX_PlayShieldPrisonEndFX");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_PlayShieldPrisonEndFX")
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_SHIELD_PRISON_FX_SHRINK", 0)
+THEN
+PlayEffect(_Char, "LLWEAPONEX_FX_Status_ShieldPrison_End_01", "Dummy_Root");
+
+IF
+CharacterUsedSkillOnTarget(_Char, (CHARACTERGUID)_Target, "Target_LLWEAPONEX_IronMaiden", _, _)
+AND
+HasActiveStatus(_Target, "LLWEAPONEX_SHIELD_PRISON", 1)
+THEN
+RemoveStatus(_Target, "LLWEAPONEX_SHIELD_PRISON_FX");
+RemoveStatus(_Target, "LLWEAPONEX_SHIELD_PRISON");
+//ApplyStatus(_Target, "LLWEAPONEX_SHIELD_PRISON_FX_SHRINK", 3.0, 1, _Char);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _Target, 100, "LLWEAPONEX_Timers_ShrinkShieldPrisonFX_", "LLWEAPONEX_ShrinkShieldPrisonFX");
+
+IF
+CharacterCharacterEvent(_Char, _Target, "LLWEAPONEX_ShrinkShieldPrisonFX")
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_SHIELD_PRISON_FX_SHRINK", 3.0, 1, _Char);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
