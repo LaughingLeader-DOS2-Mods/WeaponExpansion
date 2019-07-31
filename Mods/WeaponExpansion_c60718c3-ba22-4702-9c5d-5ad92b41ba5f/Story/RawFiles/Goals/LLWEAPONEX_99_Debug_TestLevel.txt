@@ -35,6 +35,15 @@ DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b6
 //DB_LLWEAPONEX_Debug_Atmospheres("Storm", "09edc0f3-c27e-414a-a053-a4c1d2d1271a");
 //DB_LLWEAPONEX_Debug_Atmospheres("BloodForest", "4b41cfe5-35bc-4473-b50c-59301e38ef9f");
 KBSECTION
+IF
+TextEventSet("llweap_iterateparty")
+THEN
+IterateParties("LLWEAPONEX_Debug_IteratorTest");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_IteratorTest")
+THEN
+CharacterStatusText(_Char, "[IterateParties] Target!");
 
 IF
 TextEventSet("test_deltamod_crash")

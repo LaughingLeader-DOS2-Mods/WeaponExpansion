@@ -152,22 +152,6 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:DeactivateScript] Deactivatin
 SysCompleteGoal(_GoalName);
 //END_REGION
 
-//REGION TOGGLE_EVENTS_MASTERY
-/*
-PROC
-LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Char, (STRING)_WeaponType)
-THEN
-LLWEAPONEX_ToggleSettings_OnTagAdded(_Char, _WeaponType);
-
-PROC
-LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Char, (STRING)_WeaponType)
-AND
-NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Char, _WeaponType)
-THEN
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _WeaponType);
-*/
-//END_REGION
-
 //REGION TOGGLE_EVENTS_TAGS
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
@@ -211,10 +195,10 @@ AND
 DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag)
 THEN
 NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Tag, _Item);
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Item, _Tag);
 
 PROC
-LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Char, (STRING)_Tag, (ITEMGUID)_Item)
+LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
@@ -245,7 +229,7 @@ AND
 ObjectIsGlobal(_Char, 0)
 THEN
 NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Tag, _Item);
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Item, _Tag);
 //END_REGION
 EXITSECTION
 
