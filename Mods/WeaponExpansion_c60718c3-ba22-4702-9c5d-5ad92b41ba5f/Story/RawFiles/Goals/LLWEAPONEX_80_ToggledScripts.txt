@@ -69,7 +69,7 @@ LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersio
 AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,3)
 AND
-//DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
+//DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Char, _Item, _WeaponType, _EnabledFlag)
 SysCount("DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries", 4, _Count)
 AND
 _Count > 0
@@ -155,32 +155,32 @@ SysCompleteGoal(_GoalName);
 //REGION TOGGLE_EVENTS_MASTERY
 /*
 PROC
-LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Char, (STRING)_WeaponType)
 THEN
-LLWEAPONEX_ToggleSettings_OnTagAdded(_Player, _WeaponType);
+LLWEAPONEX_ToggleSettings_OnTagAdded(_Char, _WeaponType);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Char, (STRING)_WeaponType)
 AND
-NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _WeaponType)
+NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Char, _WeaponType)
 THEN
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, _WeaponType);
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _WeaponType);
 */
 //END_REGION
 
 //REGION TOGGLE_EVENTS_TAGS
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
 IsTagged(_Item, _Tag, 1)
 THEN
-LLWEAPONEX_ToggleSettings_OnTagAdded(_Player, _Item, _Tag, _Template);
+LLWEAPONEX_ToggleSettings_OnTagAdded(_Char, _Item, _Tag, _Template);
 
 /*
 PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
 AND
 NOT DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _, _)
 THEN
@@ -188,15 +188,15 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:OnTagAdded] Script for tag ["
 */
 
 PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 THEN
 TimerCancel(_TimerName);
-DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Item, _Tag);
+DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
 
 PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
+LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
@@ -206,19 +206,19 @@ GlobalSetFlag(_Flag);
 LLWEAPONEX_ToggleSettings_ActivateScript(_Flag);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
-DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Item, _Tag)
+DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag)
 THEN
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _Item, _Tag);
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Player, _Tag, _Item, _Template);
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Tag, _Item);
 
 PROC
-LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Player, (STRING)_Tag, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Char, (STRING)_Tag, (ITEMGUID)_Item)
 AND
 DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
 AND
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Player, _, _Tag)
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_, _, _Tag)
 AND
 GlobalGetFlag(_Flag, 1)
 THEN
@@ -236,6 +236,17 @@ GlobalClearFlag(_Flag);
 LLWEAPONEX_ToggleSettings_DeactivateScript(_Flag);
 //END_REGION
 
+//REGION NPC_RESET
+IF
+RegionEnded(_)
+AND
+DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag)
+AND
+ObjectIsGlobal(_Char, 0)
+THEN
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
+LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Tag, _Item);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

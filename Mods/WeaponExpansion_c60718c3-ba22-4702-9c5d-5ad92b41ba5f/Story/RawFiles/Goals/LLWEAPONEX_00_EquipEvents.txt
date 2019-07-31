@@ -3,57 +3,100 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+//REGION START_EVENTS
 IF
-ItemEquipped(_Item, _PLayer)
-AND
-DB_IsPlayer(_PLayer)
+ItemEquipped(_Item, _Char)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 AND
 GetTemplate(_Item, _Template)
 THEN
-LLWEAPONEX_OnItemEquipped(_PLayer, _Item, _Template);
+LLWEAPONEX_OnItemEquipped(_Char, _Item, _Template);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
 THEN
-LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_AnyWeaponEquipped");
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 
 IF
-ItemUnEquipped(_Item, _Player)
-AND
-DB_IsPlayer(_PLayer)
+ItemUnEquipped(_Item, _Char)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 AND
 GetTemplate(_Item, _Template)
 THEN
-LLWEAPONEX_OnItemUnEquipped(_PLayer, _Item, _Template);
+LLWEAPONEX_OnItemUnEquipped(_Char, _Item, _Template);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
 AND
-NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Player)
+NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Char)
 THEN
-LeaderLib_Tags_ClearPreservedTag(_Player, "LLWEAPONEX_AnyWeaponEquipped");
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
+//END_REGION
+
+//REGION TYPE_EVENTS
+//Mastery weapon equipped
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+CharacterIsPlayer(_Char, _IsPlayer)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, _WeaponType, _IsPlayer);
+
+PROC
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
+THEN
+ObjectSetFlag(_Item, "LLWEAPONEX_HasWeaponType", 0);
+
+//Delay removal in case the same weapon type is being equipped
+IF
+ItemUnEquipped(_Item, _Char)
+AND
+ObjectGetFlag(_Item, "LLWEAPONEX_HasWeaponType", 1)
+AND
+CharacterIsPlayer(_Char, _IsPlayer)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
+AND
+IsTagged(_Item, _WeaponType, 1)
+THEN
+LLWEAPONEX_OnWeaponTypeUnEquipped(_Char, _Item, _WeaponType, _IsPlayer);
+
+PROC
+LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
+THEN
+DB_NOOP(1);
+//END_REGION
 
 //REGION PRESET_APPLIED
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
 AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_PLayer)
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 AND
 DB_LeaderLib_EquipmentSlots(_Slot)
 AND
-CharacterGetEquippedItem(_Player, _Slot,  (ITEMGUID)_Item)
+CharacterGetEquippedItem(_Char, _Slot,  (ITEMGUID)_Item)
 AND
 _Item != NULL_00000000-0000-0000-0000-000000000000
 AND
@@ -61,7 +104,37 @@ NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
 GetTemplate(_Item, _Template)
 THEN
-LLWEAPONEX_OnItemEquipped(_Player, _Item, _Template);
+LLWEAPONEX_OnItemEquipped(_Char, _Item, _Template);
+//END_REGION
+
+//REGION ANIMATION_OVERRIDE
+PROC
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Katana", (INTEGER)_IsPlayer)
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
+THEN
+LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
+
+PROC
+LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Katana", (INTEGER)_IsPlayer)
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
+THEN
+LLWEAPONEX_AnimationSetOverride_Clear(_Char);
+
+PROC
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Rapier", (INTEGER)_IsPlayer)
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
+THEN
+LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
+
+PROC
+LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Rapier", (INTEGER)_IsPlayer)
+AND
+IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
+THEN
+LLWEAPONEX_AnimationSetOverride_Clear(_Char);
 //END_REGION
 EXITSECTION
 

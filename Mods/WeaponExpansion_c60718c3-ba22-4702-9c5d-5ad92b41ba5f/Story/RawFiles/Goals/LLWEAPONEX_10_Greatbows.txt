@@ -106,16 +106,34 @@ LLWEAPONEX_Greatbows_InitSettings();
 
 //REGION EQUIPPED_DB
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow")
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow", (INTEGER)_IsPlayer)
 AND
 GetTemplate(_Item, _Template)
 THEN
 DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_WeaponType)
+LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 AND
 DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
+
+IF
+RegionEnded(_)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template)
+AND
+ObjectIsGlobal(_Character, 0)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
+
+IF
+RegionStarted(_)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template)
+AND
+ObjectExists(_Character, 0)
 THEN
 NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
 //END_REGION

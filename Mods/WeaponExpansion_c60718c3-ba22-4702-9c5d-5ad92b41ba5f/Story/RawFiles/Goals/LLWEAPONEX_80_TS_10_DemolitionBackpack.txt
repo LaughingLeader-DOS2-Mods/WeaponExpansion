@@ -39,11 +39,9 @@ ProcProcessUseOfItem((CHARACTERGUID)_Player, (ITEMGUID)_Item, (INTEGER)_RequestI
 AND
 NOT DB_CustomUseItemResponse(_Player, _Item, 0)
 AND
-DB_IsPlayer(_Player)
+HasActiveStatus(_Player, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", 1)
 AND
 LLWEAPONEX_Demolition_QRY_IsBonusItem(_Item)
-AND
-HasActiveStatus(_Player, "LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED", 1)
 THEN
 CharacterItemSetEvent(_Player, _Item, "LLWEAPONEX_ItemCheck_FindSkill");
 

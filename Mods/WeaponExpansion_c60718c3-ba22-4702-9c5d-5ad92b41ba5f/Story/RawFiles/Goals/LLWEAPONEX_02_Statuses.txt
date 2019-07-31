@@ -318,8 +318,8 @@ RemoveTemporaryCharacter(_Revenant);
 //REGION REVENANTS_TORMENT
 PROC
 LLWEAPONEX_Statuses_OnRevenantCreated((CHARACTERGUID)_Revenant, (CHARACTERGUID)_Target, (CHARACTERGUID)_Source, "LLWEAPONEX_TORMENTED_GHOST")
-AND
-DB_IsPlayer(_Target)
+//AND
+//DB_IsPlayer(_Target)
 THEN
 DB_LLWEAPONEX_Skills_Temp_AttachedRevanents(_Revenant, _Target);
 CharacterAddToPlayerCharacter(_Revenant, _Target);

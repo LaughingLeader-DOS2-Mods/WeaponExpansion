@@ -617,7 +617,7 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
 THEN
 LLWEAPONEX_WeaponMastery_InitMasteryVariables(_Player, _WeaponType, 0);
 
@@ -650,26 +650,19 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:InitMasteryVariables] Weapon M
 //END_REGION
 
 //REGION EQUIPPING
-//Mastery weapon equipped
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, 1)
+AND
+DB_IsPlayer(_Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-AND
-IsTagged(_Item, _WeaponType, 1)
 THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
 ObjectSetFlag(_Player, _EnabledFlag, 0);
 ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
 LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_MasteryActive");
 LeaderLib_Tags_PreserveTag(_Player, _EnabledFlag);
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag);
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped(_Player, _Item, _WeaponType);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
-
-PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
-THEN
-DB_NOOP(1);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -712,8 +705,8 @@ DB_LeaderLib_PresetMenu_Temp_BlockSkill(_Player, _Skill);
 
 //REGION UNEQUIP_REMOVAL_EVENT
 //Delay removal in case the same weapon type is being equipped
-IF
-ItemUnEquipped(_Item, _Player)
+PROC
+LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_WeaponType, 1)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType, _EnabledFlag)
 THEN
@@ -728,7 +721,7 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, 1)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
 THEN
@@ -737,7 +730,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnWeaponEquipped] Weapon Maste
 
 //Default weapon skills
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_SkillProgression(_WeaponType, 0, _SkillID, "Any")
 AND
@@ -748,7 +741,7 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType)
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
 THEN
