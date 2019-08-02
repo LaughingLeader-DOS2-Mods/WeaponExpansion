@@ -2160,3 +2160,28 @@ new itemgroup "Debug_LLWEAPONEX_Greatbow_Lightning_A"
 add levelgroup 0,0,"All"
 add rootgroup "a562214b-4a98-401a-bbfb-636bcf971900",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A","",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "ce535023-af7f-46a3-bd70-85c8f820dc21",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "8a02d95d-dd91-4d97-9265-c3254923f9ee",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "3b11f892-f6ae-43c8-af73-bcdf5abf64ec",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A","",""

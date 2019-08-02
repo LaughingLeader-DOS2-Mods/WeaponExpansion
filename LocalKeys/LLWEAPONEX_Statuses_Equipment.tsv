@@ -18,3 +18,5 @@ LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Enables Weapon Mastery
 LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_DisplayName	Gain Detonation Skill and Enhanced Demolition
 LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_Description	Character deals bonus damage with grenades, and has a chance to sabotage enemies with explosions.
 LLWEAPONEX_BLUNDERBUSS_EQUIPPED_DisplayName	Attacks Explode in a 1m Radius
+LLWEAPONEX_DRAGONBONECLAWS_EQUIPPED_DisplayName	Automatically Equips the Dragon Bone Claws Weapon
+LLWEAPONEX_ARMCANNON_EQUIPPED_DisplayName	Automatically Equips the Runecannon Weapon

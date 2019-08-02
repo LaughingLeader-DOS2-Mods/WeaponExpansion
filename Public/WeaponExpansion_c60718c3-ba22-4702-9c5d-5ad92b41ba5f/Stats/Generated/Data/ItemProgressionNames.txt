@@ -869,3 +869,15 @@ add name "Oni Gauntlet (Empowered)",""
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
 add name "Oni Gauntlet (Unleashed)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
+add name "Dragon Bone Claws",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
+add name "Dragon Bone Claws",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A"
+add name "The Runecannon",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+add name "The Runecannon",""

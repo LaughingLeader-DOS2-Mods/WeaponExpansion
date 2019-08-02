@@ -458,6 +458,65 @@ THEN
 ItemLevelUpTo(_Halberd, _Level);
 LeaderLib_Timers_StartCharacterItemTimer(_Player, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode_Equip", "LeaderLib_Commands_EquipItem");
 //END_REGION
+
+//REGION DRAGON_BONE_CLAWS
+//WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5
+//EQ_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_ce535023-af7f-46a3-bd70-85c8f820dc21
+IF
+ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5", _Char)
+AND
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Claws)
+THEN
+ItemLockUnEquip(_Claws, 1);
+
+IF
+ItemUnEquipFailed(_Claws, _Char)
+AND
+GetTemplate(_Claws, "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5")
+THEN
+ShowNotification(_Char, "LLWEAPONEX_Notifications_UnequipDragonBoneClawsFailed");
+
+/*
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5", _Char)
+AND
+CharacterGetEquippedItem(_Char, "Gloves", (ITEMGUID)_Claws)
+AND
+GetTemplate(_Claws, "EQ_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_ce535023-af7f-46a3-bd70-85c8f820dc21")
+THEN
+CharacterUnequipItem(_Char, _Claws);
+*/
+//END_REGION
+
+//REGION ARM_CANNON
+IF
+CharacterStartAttackObject(_, _, _Char)
+AND
+CharacterGetEquippedItem(_Char, "Weapon", _Cannon)
+AND
+GetTemplate(_Cannon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
+THEN
+PlaySound(_Char, "Skill_Fire_Cast_Ground_Hand");
+
+IF
+CharacterStartAttackPosition(_,_,_,_,_Char)
+AND
+CharacterGetEquippedItem(_Char, "Weapon", _Cannon)
+AND
+GetTemplate(_Cannon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
+THEN
+PlaySound(_Char, "Skill_Fire_Cast_Ground_Hand");
+
+IF
+ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec", _Char)
+THEN
+LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
+
+IF
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec", _Char)
+THEN
+LLWEAPONEX_AnimationSetOverride_Clear(_Char);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
