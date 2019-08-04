@@ -394,3 +394,28 @@ THEN
 	Set(_Result, LLWEAPONEX_RAPIER_FRENZYCHARGE4)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
+
+EVENT LLWEAPONEX_RandomElementalAilment
+VARS
+	CHARACTER:_Char
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
+	FLOAT:_MagicArmor
+	FLOAT:_Armor
+ON
+	FetchCharacterApplyStatusData(_Char, LLWEAPONEX_RANDOM_AILMENT)
+ACTIONS
+IF "c1&c2"
+	CharacterGetStat(_MagicArmor, _Char, MagicArmorPoints)
+	IsEqual(_MagicArmor, 0)
+THEN
+	GetRandom(_Result, POISONED, BURNING, NECROFIRE, HELLFIRE, SLOWED, CHILLED, FROZEN, SHOCKED, STUNNED, PETRIFIED, WARM, WET, ACID, SUFFOCATING, LIVING_BOMB, PERMAFROST)
+ELIF "c1&c2"
+	CharacterGetStat(_Armor, _Char, PhysicalArmorPoints)
+	IsEqual(_Armor, 0)
+THEN
+	GetRandom(_Result, BLEEDING, WARM, WET, ACID, SUFFOCATING, LIVING_BOMB, PERMAFROST)
+ELSE
+	GetRandom(_Result, WARM, WET, ACID, SUFFOCATING, LIVING_BOMB, PERMAFROST)
+ENDIF
+	RETURN(_RemoveList, _Result, null)

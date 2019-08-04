@@ -877,7 +877,7 @@ new namegroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
 add name "Dragon Bone Claws",""
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A"
-add name "The Runecannon",""
+add name "Runic Cannon",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
-add name "The Runecannon",""
+add name "Runic Cannon",""

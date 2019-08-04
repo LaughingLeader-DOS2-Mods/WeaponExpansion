@@ -34,6 +34,8 @@ DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b6
 //DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b650", 21, 23);
 //DB_LLWEAPONEX_Debug_Atmospheres("Storm", "09edc0f3-c27e-414a-a053-a4c1d2d1271a");
 //DB_LLWEAPONEX_Debug_Atmospheres("BloodForest", "4b41cfe5-35bc-4473-b50c-59301e38ef9f");
+
+
 KBSECTION
 IF
 GameStarted(_,_)
@@ -1179,6 +1181,21 @@ IntegertoString(_Enabled, _EnabledStr)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[",_Goal,"] Status[",_GoalStatusStr,"] Flag [",_Flag,"] Enabled [",_EnabledStr,"].");
 
+IF
+RegionEnded("TestLevel_LL_WeaponExpansion")
+THEN
+GoalCompleted;
+
+IF
+TextEventSet("llweap_lockfix")
+AND
+DB_IsPlayer(_Char)
+AND
+DB_LeaderLib_EquipmentSlots(_Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Item)
+THEN
+ItemLockUnEquip(_Item, 0);
 EXITSECTION
 
 ENDEXITSECTION

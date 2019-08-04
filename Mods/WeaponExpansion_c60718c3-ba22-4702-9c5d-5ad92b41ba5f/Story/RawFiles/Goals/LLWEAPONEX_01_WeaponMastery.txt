@@ -42,11 +42,11 @@ NOT DB_GlobalFlag("LLWEAPONEX_WeaponMastery_InitializedMaxExperience")
 AND
 DB_CurrentLevel(_Region)
 THEN
-LLWEAPONEX_WeaponMastery_InitMaxExperiance(_Region);
+LLWEAPONEX_WeaponMastery_InitMaxExperience(_Region);
 GlobalSetFlag("LLWEAPONEX_WeaponMastery_InitializedMaxExperience");
 
 PROC
-LLWEAPONEX_WeaponMastery_InitMaxExperiance((STRING)_Region)
+LLWEAPONEX_WeaponMastery_InitMaxExperience((STRING)_Region)
 AND
 LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region) // Either this Region is 1, or not in the DB
 THEN
@@ -59,7 +59,7 @@ DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 600);
 
 //Act 3 start
 PROC
-LLWEAPONEX_WeaponMastery_InitMaxExperiance((STRING)_Region)
+LLWEAPONEX_WeaponMastery_InitMaxExperience((STRING)_Region)
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region)
 AND
@@ -73,7 +73,7 @@ DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 400);
 
 //Act 4 start
 PROC
-LLWEAPONEX_WeaponMastery_InitMaxExperiance((STRING)_Region)
+LLWEAPONEX_WeaponMastery_InitMaxExperience((STRING)_Region)
 AND
 NOT LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region)
 AND

@@ -61,3 +61,5 @@ LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is ta
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
 LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
+LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark
+LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.
