@@ -653,7 +653,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:InitMasteryVariables] Weapon M
 
 //REGION EQUIPPING
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, 1)
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, 1)
 AND
 DB_IsPlayer(_Player)
 AND
@@ -665,6 +665,7 @@ ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
 LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_MasteryActive");
 LeaderLib_Tags_PreserveTag(_Player, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] is now active.");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -723,7 +724,7 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, 1)
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_WeaponType, 1)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType)
 THEN
