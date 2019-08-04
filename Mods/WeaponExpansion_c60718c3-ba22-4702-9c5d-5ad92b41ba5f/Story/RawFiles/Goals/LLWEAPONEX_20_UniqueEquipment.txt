@@ -649,7 +649,12 @@ THEN
 LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 1, 3);
 
 PROC
-LeaderLib_Helper_OnVariableChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 3)
+LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
+THEN
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:OnVariableChanged] LLWEAPONEX_ArmCannon_Energy set to ",_LastValue, " => ",_NextValue, "");
+
+PROC
+LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 3)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
@@ -663,7 +668,7 @@ THEN
 LeaderLib_Helper_SetVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
 
 PROC
-LeaderLib_Helper_OnVariableChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 0)
+LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 0)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN

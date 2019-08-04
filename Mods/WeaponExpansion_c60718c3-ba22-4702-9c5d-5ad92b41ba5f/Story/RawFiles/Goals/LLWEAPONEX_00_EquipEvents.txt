@@ -22,13 +22,6 @@ LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 
-PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
-THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
-
 IF
 ItemUnEquipped(_Item, _Char)
 AND
