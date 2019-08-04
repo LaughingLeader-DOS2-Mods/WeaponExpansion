@@ -122,7 +122,7 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
 
 PROC
-LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
 AND
 DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Rapier", "DuelistStance")
 AND

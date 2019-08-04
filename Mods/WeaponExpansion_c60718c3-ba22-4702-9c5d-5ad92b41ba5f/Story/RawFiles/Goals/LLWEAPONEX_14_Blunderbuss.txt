@@ -96,7 +96,7 @@ NOT DB_LLWEAPONEX_Blunderbuss_Temp_Duds(_Caster, _Dud, _CombatID);
 
 //REGION GUN_ANIM_OVERRIDE
 //PROC
-//LLWEAPONEX_WeaponMastery_OnWeaponEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Katana")
+//LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Katana")
 IF
 ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged_e1bb0780-be83-4425-850c-dce56e1706ef", _Player)
 THEN
