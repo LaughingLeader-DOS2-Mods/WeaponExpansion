@@ -419,4 +419,3 @@ data "Magic Cost" "0"
 data "ProjectileTerrainOffset" "Yes"
 data "OverrideMinAP" "Yes"
 data "CycleConditions" "Enemy;!Dead"
-

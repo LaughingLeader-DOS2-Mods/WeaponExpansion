@@ -444,4 +444,6 @@ data "Flags" "Unbreakable"
 data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_ARMCANNON_EQUIPPED"
 data "ComboCategory" "GlovesPlate,Gloves,LLWEAPONEX_ArmCannon"
 data "Unique" "1"
-data "Skills" "Target_LLWEAPONEX_ArmCannon_AbsorbSurface"
+data "Skills" "Target_LLWEAPONEX_ArmCannon_AbsorbSurface
+data "ItemColor" "LLWEAPONEX_ArmCannon_A"
+

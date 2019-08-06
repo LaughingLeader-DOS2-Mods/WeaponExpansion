@@ -33,3 +33,4 @@ new itemcolor "LLWEAPONEX_Unique_Axe_1H_Throwing_A_Fire","7F3300","4C528A","9B5E
 new itemcolor "LLWEAPONEX_Unique_Axe_1H_Throwing_A_Oil","7F3300","4C528A","000000"
 new itemcolor "LLWEAPONEX_Unique_Axe_1H_Throwing_A_Water","7F3300","4C528A","6898B9"
 new itemcolor "LLWEAPONEX_HandCrossbow_A","8a5b46","eec07b","d6d6d6"
+new itemcolor "LLWEAPONEX_ArmCannon_A","AEB3D0","303030","707083"
