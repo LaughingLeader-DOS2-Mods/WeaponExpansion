@@ -9,8 +9,9 @@ LLWEAPONEX_OniGauntlet_InitSettings()
 THEN
 //When this template reaches the minimum level, an upgrade will be available
 //Template, MinLevel
-DB_LLWEAPONEX_OniGauntlet_Upgrades("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939", 8);
-DB_LLWEAPONEX_OniGauntlet_Upgrades("EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe", 13);
+DB_LLWEAPONEX_OniGauntlet_Upgrades(1, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939");
+DB_LLWEAPONEX_OniGauntlet_Upgrades(2, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe");
+DB_LLWEAPONEX_OniGauntlet_Upgrades(3, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a");
 
 DB_LLWEAPONEX_OniGauntlet_StartingWeapons("Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41", "Raizan");
 
@@ -28,57 +29,58 @@ DB_LLWEAPONEX_OniGauntlet_Orbs("LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,2)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,7,0)
 THEN
+SysClear("DB_LLWEAPONEX_OniGauntlet_Upgrades", 2);
 LLWEAPONEX_OniGauntlet_InitSettings();
 //END_REGION
 
 //REGION ONI_GAUNTLET_EQUIPPING
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
 THEN
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Character);
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Char);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
 THEN
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Character);
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Char);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
 THEN
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Character);
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Char);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
 THEN
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Character, _Item);
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
 THEN
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Character, _Item);
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
 THEN
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Character, _Item);
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _OldItem)
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _OldItem)
 THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _OldItem);
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _OldItem);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 THEN
-DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Item);
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Item);
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_OniGauntletEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Item, _, _, _)
 AND
@@ -89,15 +91,15 @@ THEN
 DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Item, _Skill, _Template, 0);
 
 PROC
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start((CHARACTERGUID)_Player)
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Item)
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Item)
 THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Item);
-LLWEAPONEX_OniGauntlet_OnOniGauntletUnEquipped(_Player, _Item);
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Item);
+LLWEAPONEX_OniGauntlet_OnOniGauntletUnEquipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start((CHARACTERGUID)_Player)
+LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start((CHARACTERGUID)_Char)
 AND
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_,_)
 THEN
@@ -115,9 +117,7 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_OniGauntlet_AddSouls((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (INTEGER)_Souls)
-AND
-ObjectGetFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable", 0)
+LLWEAPONEX_OniGauntlet_AddSouls((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (INTEGER)_Souls)
 AND
 ItemGetCharges(_Gauntlet, _Current)
 AND
@@ -130,58 +130,69 @@ AND
 IntegerMin(_Next, _Max, _ClampedNext)
 THEN
 ItemAddCharges(_Gauntlet, _Souls);
-LLWEAPONEX_OniGauntlet_OnSoulsAdded(_Player, _Gauntlet, _ClampedNext, _Max);
+LLWEAPONEX_OniGauntlet_OnSoulsAdded(_Char, _Gauntlet, _ClampedNext, _Max);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnSoulsAdded((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (INTEGER)_CurrentSouls, (INTEGER)_MaxSouls)
+LLWEAPONEX_OniGauntlet_OnSoulsAdded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (INTEGER)_CurrentSouls, (INTEGER)_MaxSouls)
 AND
 _CurrentSouls >= _MaxSouls
 AND
+ObjectGetFlag(_Gauntlet, "LLWEAPONEX_OniGauntlet_MaxUpgrade", 0)
+AND
+NOT DB_LeaderLib_Helper_Temp_CharItemTimer(_, _, _Gauntlet, _, "LLWEAPONEX_Timers_OniGauntletUpgrade_Equip")
+AND
 GetTemplate(_Gauntlet, _Template)
 THEN
-ObjectClearFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable", 0);
-LLWEAPONEX_OniGauntlet_OnMaxSoulsReached(_Player, _Gauntlet, _Template);
+LLWEAPONEX_OniGauntlet_OnMaxSoulsReached(_Char, _Gauntlet, _Template);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnMaxSoulsReached((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (STRING)_Template)
+LLWEAPONEX_OniGauntlet_OnMaxSoulsReached((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (STRING)_Template)
 AND
-DB_LLWEAPONEX_OniGauntlet_Upgrades(_Template, _MinLevel)
+DB_LLWEAPONEX_OniGauntlet_Upgrades(_Stage, _Template)
 AND
-CharacterGetLevel(_Player, _Level)
+IntegerSum(_Stage, 1, _NextStage)
 AND
-_Level >= _MinLevel
+DB_LLWEAPONEX_OniGauntlet_Upgrades(_NextStage, _NextTemplate)
 THEN
-ObjectSetFlag(_Gauntlet, "LLWEAPONEX_OniGaunlet_UpgradeAvailable", 0);
+CharacterUnequipItem(_Char, _Gauntlet);
+Transform(_Gauntlet, _NextTemplate, 1, 1, 1);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Gauntlet, 100, "LLWEAPONEX_Timers_OniGauntletUpgrade_Equip", "LeaderLib_Commands_EquipItem");
+LLWEAPONEX_OniGauntlet_GauntletUpgraded(_Char, _Gauntlet, _NextStage);
+
+PROC
+LLWEAPONEX_OniGauntlet_GauntletUpgraded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, 3)
+THEN
+ObjectSetFlag(_Gauntlet, "LLWEAPONEX_OniGauntlet_MaxUpgrade");
 //END_REGION
 
 //REGION RUNE_BLOCKING
 IF
-RuneInserted(_Character, _Item, _RuneTemplate, _Slot)
+RuneInserted(_Char, _Item, _RuneTemplate, _Slot)
 AND
 IsTagged(_Item, "LLWEAPONEX_OniGauntlet", 1)
 AND
 NOT DB_LLWEAPONEX_OniGauntlet_Orbs(_RuneTemplate, _, _, _)
 THEN
-DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
-LeaderLib_Timers_StartCharacterItemTimer(_Character, _Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_OniGauntlet_RemoveBlockedRune");
+DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_OniGauntlet_RemoveBlockedRune");
 
 IF
-CharacterItemEvent(_Character, _Item, "LLWEAPONEX_OniGauntlet_RemoveBlockedRune")
+CharacterItemEvent(_Char, _Item, "LLWEAPONEX_OniGauntlet_RemoveBlockedRune")
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate)
+DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate)
 AND
 LeaderLog_QRY_Log("STATUS", "LLWEAPONEX_StatusText_OniGauntlet_RuneBlocked")
 AND
-ItemRemoveRune(_Character, _Item, _Slot, _Rune)
+ItemRemoveRune(_Char, _Item, _Slot, _Rune)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
+NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
 
 IF
-CharacterItemEvent(_Character, _Item, "LLWEAPONEX_OniGauntlet_RemoveBlockedRune")
+CharacterItemEvent(_Char, _Item, "LLWEAPONEX_OniGauntlet_RemoveBlockedRune")
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate)
+DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate)
 THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
 //END_REGION
 
 //REGION ONI_GAUNTLET_ORB_INSERTED
@@ -192,234 +203,213 @@ LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23-8fdb-45aa75962e94
 */
 
 IF
-RuneInserted(_Player, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82", _Slot)
+RuneInserted(_Char, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82", _Slot)
 AND
 IsTagged(_Gauntlet, "LLWEAPONEX_OniGauntlet", _IsGauntlet)
 THEN
-LLWEAPONEX_OniGauntlet_OnOrbInserted(_Player, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82", _Slot, _IsGauntlet);
+LLWEAPONEX_OniGauntlet_OnOrbInserted(_Char, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_A_dc34fbef-a647-4eea-a313-8ef1e859ce82", _Slot, _IsGauntlet);
 
 IF
-RuneInserted(_Player, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_B_9fe7b80d-081d-4e5f-8125-10a452c2d105", _Slot)
+RuneInserted(_Char, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_B_9fe7b80d-081d-4e5f-8125-10a452c2d105", _Slot)
 AND
 IsTagged(_Gauntlet, "LLWEAPONEX_OniGauntlet", _IsGauntlet)
 THEN
-LLWEAPONEX_OniGauntlet_OnOrbInserted(_Player, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_B_9fe7b80d-081d-4e5f-8125-10a452c2d105", _Slot, _IsGauntlet);
+LLWEAPONEX_OniGauntlet_OnOrbInserted(_Char, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_B_9fe7b80d-081d-4e5f-8125-10a452c2d105", _Slot, _IsGauntlet);
 
 IF
-RuneInserted(_Player, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23-8fdb-45aa75962e94", _Slot)
+RuneInserted(_Char, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23-8fdb-45aa75962e94", _Slot)
 AND
 IsTagged(_Gauntlet, "LLWEAPONEX_OniGauntlet", _IsGauntlet)
 THEN
-LLWEAPONEX_OniGauntlet_OnOrbInserted(_Player, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23-8fdb-45aa75962e94", _Slot, _IsGauntlet);
+LLWEAPONEX_OniGauntlet_OnOrbInserted(_Char, _Gauntlet, "LOOT_LLWEAPONEX_Orb_Thunder_C_5f9803c3-b8a3-4e23-8fdb-45aa75962e94", _Slot, _IsGauntlet);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOrbInserted((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template, (INTEGER)_SLot, 0)
+LLWEAPONEX_OniGauntlet_OnOrbInserted((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template, (INTEGER)_SLot, 0)
 THEN
-DB_LLWEAPONEX_OniGauntlet_Temp_RemoveOrb(_Player, _Item, _Template, _Slot);
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_OniGauntlet_RemoveOrb", 250);
+DB_LLWEAPONEX_OniGauntlet_Temp_RemoveOrb(_Char, _Item, _Template, _Slot);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_OniGauntlet_RemoveOrb", 250);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_OniGauntlet_RemoveOrb")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_OniGauntlet_RemoveOrb")
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_RemoveOrb(_Player, _Item, _Template, _Slot)
+DB_LLWEAPONEX_OniGauntlet_Temp_RemoveOrb(_Char, _Item, _Template, _Slot)
 AND
-ItemRemoveRune(_Player, _Item, _Slot, _Orb)
+ItemRemoveRune(_Char, _Item, _Slot, _Orb)
 THEN
-ShowNotification(_Player, "LLWEAPONEX_Notifications_OniGauntletRequiredForOrb");
+ShowNotification(_Char, "LLWEAPONEX_Notifications_OniGauntletRequiredForOrb");
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOrbInserted((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template, (INTEGER)_SLot, 1)
+LLWEAPONEX_OniGauntlet_OnOrbInserted((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template, (INTEGER)_SLot, 1)
 AND
 DB_LLWEAPONEX_OniGauntlet_Orbs(_Template, _Skill, _ID, _MinSouls)
 THEN
 DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Item, _Skill, _Template, _Slot);
 
 IF
-RuneRemoved(_Player, _Gauntlet, _Orb, _Slot)
+RuneRemoved(_Char, _Gauntlet, _Orb, _Slot)
 AND
 DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Gauntlet, _Skill, _Template, _Slot)
 AND
 GetTemplate(_Orb, _Template)
 THEN
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Gauntlet, _Skill, _Template, _Slot);
-LLWEAPONEX_OniGauntlet_OnOrbRemoved(_Player, _Gauntlet, _Orb, _Template, _Skill);
+LLWEAPONEX_OniGauntlet_OnOrbRemoved(_Char, _Gauntlet, _Orb, _Template, _Skill);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOrbRemoved((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_Orb, (STRING)_Template, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_OnOrbRemoved((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (ITEMGUID)_Orb, (STRING)_Template, (STRING)_Skill)
 THEN
 DB_NOOP(1);
 //END_REGION
 
 //REGION ONI_GAUNTLET_ORB_WEAPONS_SKILL
 PROC
-LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon((CHARACTERGUID)_Player, (STRING)_Skill, (ITEMGUID)_Weapon, (STRING)_ID, (ITEMGUID)_Gauntlet)
+LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon((CHARACTERGUID)_Char, (STRING)_Skill, (ITEMGUID)_Weapon, (STRING)_ID, (ITEMGUID)_Gauntlet)
 THEN
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, _ID, _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, _ID, _Gauntlet);
 
 PROC
-LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon((CHARACTERGUID)_Player, (STRING)_ID)
+LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon((CHARACTERGUID)_Char, (STRING)_ID)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, _ID, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, _ID, _Gauntlet)
 THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, _ID, _Gauntlet);
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, _ID, _Gauntlet);
 DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID);
 ItemToInventory(_Weapon, _Gauntlet);
 
 //Re-equip the last orb weapon if hands are empty
 PROC
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
 DB_LLWEAPONEX_OniGauntlet_Temp_ActiveOrb(_Item, _Skill, _Template, _Slot)
 AND
 DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID)
 AND
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _)
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _)
 AND
-LeaderLib_Helper_QRY_HasEmptyHands(_Player)
+LeaderLib_Helper_QRY_HasEmptyHands(_Char)
 THEN
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID);
-DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
-LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon(_Player, _Skill, _Weapon, _ID, _Gauntlet);
-ItemToInventory(_Weapon, _Player);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 250, "LLWEAPONEX_Timers_EquipOniGauntletWeapon", "LLWEAPONEX_EquipOniGauntletWeapon");
+DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill);
+LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon(_Char, _Skill, _Weapon, _ID, _Gauntlet);
+ItemToInventory(_Weapon, _Char);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Weapon, 250, "LLWEAPONEX_Timers_EquipOniGauntletWeapon", "LLWEAPONEX_EquipOniGauntletWeapon");
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill)
+DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill)
 THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill);
 
 IF
-SkillCast(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", _, _)
+SkillCast(_Char, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan", _, _)
 THEN
-LLWEAPONEX_OniGauntlet_SummonWeapon(_Player, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan");
+LLWEAPONEX_OniGauntlet_SummonWeapon(_Char, "Shout_LLWEAPONEX_OniGauntlet_Summon_Raizan");
 
 PROC
-LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Player, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Char, (STRING)_Skill)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Gauntlet)
 THEN
 ItemAddCharges(_Gauntlet, 1);
 
 PROC
-LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Player, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Char, (STRING)_Skill)
 AND
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill)
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Gauntlet)
 AND
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _, _, _Gauntlet)
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _, _, _Gauntlet)
 AND
 DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID)
 THEN
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_StoredWeapons(_Gauntlet, _Skill, _Weapon, _ID);
-LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon(_Player, _Skill, _Weapon, _ID, _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
-ItemToInventory(_Weapon, _Player);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 250, "LLWEAPONEX_Timers_EquipOniGauntletWeapon", "LLWEAPONEX_EquipOniGauntletWeapon");
+LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon(_Char, _Skill, _Weapon, _ID, _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill);
+ItemToInventory(_Weapon, _Char);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Weapon, 250, "LLWEAPONEX_Timers_EquipOniGauntletWeapon", "LLWEAPONEX_EquipOniGauntletWeapon");
 
 PROC
-LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Player, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Char, (STRING)_Skill)
 AND
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill)
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill)
 AND
 DB_LLWEAPONEX_OniGauntlet_StartingWeapons(_Skill, _Template, _ID)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Gauntlet)
 AND
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _, _, _Gauntlet)
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _, _, _Gauntlet)
 AND
-GetPosition(_Player, _x, _y, _z)
+GetPosition(_Char, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition(_Template, _x, _y, _z, _Weapon)
 THEN
-CharacterEquipItem(_Player, _Weapon);
-LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon(_Player, _Skill, _Weapon, _ID, _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
+CharacterEquipItem(_Char, _Weapon);
+LLWEAPONEX_OniGauntlet_Internal_AddActiveWeapon(_Char, _Skill, _Weapon, _ID, _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill);
 
 PROC
-LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Player, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Char, (STRING)_Skill)
 AND
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill)
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, _ID, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, _ID, _Gauntlet)
 AND
-NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Player, _Weapon)
+NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Char, _Weapon)
 THEN
-DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
-ItemToInventory(_Weapon, _Player);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 250, "LLWEAPONEX_Timers_EquipOniGauntletWeapon", "LLWEAPONEX_EquipOniGauntletWeapon");
+DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill);
+ItemToInventory(_Weapon, _Char);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Weapon, 250, "LLWEAPONEX_Timers_EquipOniGauntletWeapon", "LLWEAPONEX_EquipOniGauntletWeapon");
 
 IF
-CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_EquipOniGauntletWeapon")
+CharacterItemEvent(_Char, _Weapon, "LLWEAPONEX_EquipOniGauntletWeapon")
 THEN
-CharacterEquipItem(_Player, _Weapon);
+CharacterEquipItem(_Char, _Weapon);
 
 PROC
-LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Player, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_SummonWeapon((CHARACTERGUID)_Char, (STRING)_Skill)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill)
+DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill)
 THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Player, _Skill);
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_SummonResolved(_Char, _Skill);
 //END_REGION
 
 //REGION ONI_GAUNTLET_ORB_WEAPONS_REMOVE
 IF
-ItemUnEquipped(_Weapon, _Player)
+ItemUnEquipped(_Weapon, _Char)
 AND
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _Weapon)
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Char, _Weapon)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, _ID, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, _ID, _Gauntlet)
 THEN
-LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon(_Player, _ID);
+LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon(_Char, _ID);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOniGauntletUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet)
+LLWEAPONEX_OniGauntlet_OnOniGauntletUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, _ID, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, _ID, _Gauntlet)
 THEN
-LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon(_Player, _ID);
+LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon(_Char, _ID);
 
 PROC
-LLWEAPONEX_OniGauntlet_RemoveActiveWeaponBySkill((CHARACTERGUID)_Player, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_RemoveActiveWeaponBySkill((CHARACTERGUID)_Char, (STRING)_Skill)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, _ID, _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, _ID, _Gauntlet)
 THEN
-LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon(_Player, _ID);
+LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon(_Char, _ID);
 
 PROC
-LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon((CHARACTERGUID)_Player, "Raizan")
+LLWEAPONEX_OniGauntlet_Internal_StoreActiveWeapon((CHARACTERGUID)_Char, "Raizan")
 AND
-GetPosition(_Player, _x, _y, _z)
+GetPosition(_Char, _x, _y, _z)
 THEN
 PlayEffectAtPosition("RS3_FX_Skills_Air_Lightning_Cast_Ground_01", _x, _y, _z);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnOrbRemoved((CHARACTERGUID)_Player, (ITEMGUID)_Gauntlet, (ITEMGUID)_Orb, (STRING)_Template, (STRING)_Skill)
+LLWEAPONEX_OniGauntlet_OnOrbRemoved((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (ITEMGUID)_Orb, (STRING)_Template, (STRING)_Skill)
 THEN
-LLWEAPONEX_OniGauntlet_RemoveActiveWeaponBySkill(_Player, _Skill);
-//END_REGION
-
-//REGION ONI_GAUNTLET_COMBO_UPGRADE_SOUL_TAX
-IF
-ItemTemplateCombinedWithItemTemplate(_T1, _T2, _T3, _T4, _T5, _Player, _NewItem)
-AND
-//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Combo: ", _T1, " | ", _T2, " | ", _T3, " | ", _T4, " | ", _T5)
-//AND
-LeaderLib_Helper_QRY_Combo_TemplateMatch("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_", _T1, _T2, _T3, _T4, _T5)
-//AND
-//Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Template match with [WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_]")
-AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet)
-AND
-GetTemplate(_NewItem, _NewTemplate)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Raizan was combined and changed to [",_NewTemplate,"].");
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _NewItem, "Raizan", _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _NewItem);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _NewItem, 250, "LLWEAPONEX_Timers_JustCombinedOniWeapon", "LLWEAPONEX_JustCombinedOniWeapon");
+LLWEAPONEX_OniGauntlet_RemoveActiveWeaponBySkill(_Char, _Skill);
 //END_REGION
 
 //REGION ONI_GAUNTLET_WEAPON_COMBO
@@ -427,13 +417,13 @@ LeaderLib_Timers_StartCharacterItemTimer(_Player, _NewItem, 250, "LLWEAPONEX_Tim
 IF
 ObjectTransformed((ITEMGUID)_Weapon, _ToTemplate)
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan")
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, "Raizan")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ObjectTransformed] Raizan was transformed.");
 */
 
 IF
-ItemTemplateCombinedWithItemTemplate(_T1, _T2, _T3, _T4, _T5, _Player, _NewItem)
+ItemTemplateCombinedWithItemTemplate(_T1, _T2, _T3, _T4, _T5, _Char, _NewItem)
 AND
 //Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Combo: ", _T1, " | ", _T2, " | ", _T3, " | ", _T4, " | ", _T5)
 //AND
@@ -441,29 +431,29 @@ LeaderLib_Helper_QRY_Combo_TemplateMatch("WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sw
 //AND
 //Leaderlog_QRY_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Template match with [WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_]")
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet)
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, "Raizan", _Gauntlet)
 AND
 GetTemplate(_NewItem, _NewTemplate)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_13_OniGauntlet:ItemTemplateCombinedWithItemTemplate] Raizan was combined and changed to [",_NewTemplate,"].");
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _Weapon, "Raizan", _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Player, _Skill, _NewItem, "Raizan", _Gauntlet);
-DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _NewItem);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _NewItem, 250, "LLWEAPONEX_Timers_JustCombinedOniWeapon", "LLWEAPONEX_JustCombinedOniWeapon");
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _Weapon, "Raizan", _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_ActiveWeapons(_Char, _Skill, _NewItem, "Raizan", _Gauntlet);
+DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Char, _NewItem);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _NewItem, 250, "LLWEAPONEX_Timers_JustCombinedOniWeapon", "LLWEAPONEX_JustCombinedOniWeapon");
 
 IF
-CharacterItemEvent(_Player, _Weapon, "LLWEAPONEX_JustCombinedOniWeapon")
+CharacterItemEvent(_Char, _Weapon, "LLWEAPONEX_JustCombinedOniWeapon")
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _Weapon)
+DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Char, _Weapon)
 THEN
-NOT DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Player, _Weapon);
+NOT DB_LLWEAPONEX_OniGauntlet_Temp_JustCombined(_Char, _Weapon);
 //END_REGION
 
 //REGION DEBUG
 IF
 TextEventSet("llweap_onisouls")
 AND
-DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Player, _Item)
+DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Item)
 AND
 ItemGetMaxCharges(_Item, _Max)
 THEN
