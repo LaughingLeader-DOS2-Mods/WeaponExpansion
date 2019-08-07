@@ -4,18 +4,32 @@ INITSECTION
 
 KBSECTION
 IF
-CharacterStatusApplied(_Player, "BURNING", _Source)
+CharacterStatusApplied(_Char, "BURNING", _Source)
 AND
-HasActiveStatus(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", 1)
+HasActiveStatus(_Char, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", 1)
 THEN
-ApplyStatus(_Player, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", 0.0, 0, _Player);
+ApplyStatus(_Char, "LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY", 0.0, 0, _Char);
 
 IF
-CharacterStatusApplied(_Player, "NECROFIRE", _Source)
+CharacterStatusApplied(_Char, "NECROFIRE", _Source)
 AND
-HasActiveStatus(_Player, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", 1)
+HasActiveStatus(_Char, "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE", 1)
 THEN
-ApplyStatus(_Player, "LLWEAPONEX_HEAL_ALL_SAFE_1", 0.0, 0, _Player);
+ApplyStatus(_Char, "LLWEAPONEX_HEAL_ALL_SAFE_1", 0.0, 0, _Char);
+
+IF
+CharacterStartAttackObject(_,_,_Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", 1)
+THEN
+PlayEffect(_Char, "RS3_FX_Skills_Fire_Cast_Self_Touch_Hand_01", "Dummy_R_HandFX");
+
+IF
+CharacterStartAttackPosition(_,_,_,_,_Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED", 1)
+THEN
+PlayEffect(_Char, "RS3_FX_Skills_Fire_Cast_Self_Touch_Hand_01", "Dummy_R_HandFX");
 EXITSECTION
 
 ENDEXITSECTION

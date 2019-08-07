@@ -4,10 +4,6 @@ Cone_LLWEAPONEX_WaterSpout_DisplayName	Water Spout
 Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide
 Projectile_LLWEAPONEX_ChaosBolt_Description	Shoot a bolt of pure Chaos that deals [1] damage of random type and creates a corresponding surface.
 Projectile_LLWEAPONEX_ChaosBolt_DisplayName	Chaos Bolt
-Projectile_LLWEAPONEX_ShootRod_Chaos_Description	Launch a magical missile from your rod that deals <font color='#b823cb'>[1] Chaos Damage</font>, and creates a random surface.
-Projectile_LLWEAPONEX_ShootRod_Description	Launch a magical missile from your rod that deals [1], and creates a surface of the related element.
-Projectile_LLWEAPONEX_ShootRod_DisplayName	Shoot Rod
-Projectile_LLWEAPONEX_ShootRod_Offhand_DisplayName	Shoot Rod (Offhand)
 Rush_LLWEAPONEX_MagicBatteringRam_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Rush forward in a straight line, to a designated point, hitting all enemies in your path for [1] and setting Knockdown.
 Rush_LLWEAPONEX_MagicBatteringRam_DisplayName	Magic Rush
 Shout_LLWEAPONEX_Quiver_DrawArrow_Description	Draw a random, temporary arrow from your quiver.<br><font color='#FF0000'>Arrows retrieved this way disappear after combat ends.</font>
@@ -25,3 +21,5 @@ Shout_LLWEAPONEX_ZombifySelf_Description	Temporarily gain a few Zombie-like trai
 Target_LLWEAPONEX_Zombify_DisplayName	Zombify
 Target_LLWEAPONEX_Zombify_Description	Temporarily zombify an ally, granting them <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
+Shout_LLWEAPONEX_Bokken_ChangeStance_DisplayName	<font color='#00EE29'>Change Stance</font>
+Shout_LLWEAPONEX_Bokken_ChangeStance_Description	Swap between two-handed and single-handed styles with the <font color='#c5a65a'>Pacifist's Wrath</font>.<br><font color='#DDDD00'>Changing to a two-handed stance will unequip any offhand item.</font>

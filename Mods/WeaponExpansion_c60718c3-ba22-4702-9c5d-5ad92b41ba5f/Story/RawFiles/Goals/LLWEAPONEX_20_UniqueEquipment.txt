@@ -421,7 +421,7 @@ NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
 
 //REGION WARCHIEFS_HALBERD
 IF
-SkillCast(_Player, "Shout_LLWEAPONEX_Warchief_SwitchMode", _, _)
+SkillCast(_Player, "Shout_LLWEAPONEX_Bokken_SwitchMode", _, _)
 THEN
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Warchief_StartModeToggle", 900);
 
@@ -679,6 +679,75 @@ CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_ArmCannon_Abs
 THEN
 SetVarFloat3(_Char, "LLWEAPONEX_SurfaceAbsorbPosition", _x, _y, _z);
 //END_REGION
+
+//REGION BOKKEN_SWITCH
+/*
+WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c
+WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af
+*/
+QRY
+LLWEAPONEX_Uniques_QRY_BokkenMatch("WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c")
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Uniques_QRY_BokkenMatch("WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af")
+THEN
+DB_NOOP(1);
+
+IF
+SkillCast(_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance", _, _)
+THEN
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Bokken_StartModeToggle", 900);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Bokken_StartModeToggle")
+AND
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Item)
+AND
+GetTemplate(_Item, _Template)
+AND
+LLWEAPONEX_Uniques_QRY_BokkenMatch(_Template)
+THEN
+CharacterUnequipItem(_Char, _Item);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 100, "LLWEAPONEX_Timers_SwapBokkenMode", "LLWEAPONEX_SwapBokkenMode");
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Bokken_StartModeToggle")
+AND
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
+AND
+GetTemplate(_Item, _Template)
+AND
+LLWEAPONEX_Uniques_QRY_BokkenMatch(_Template)
+THEN
+CharacterUnequipItem(_Char, _Item);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 100, "LLWEAPONEX_Timers_SwapBokkenMode", "LLWEAPONEX_SwapBokkenMode");
+
+IF
+CharacterItemEvent(_Char, _Item, "LLWEAPONEX_SwapBokkenMode")
+AND
+GetTemplate(_Item, _Template)
+AND
+CharacterGetLevel(_Char, _Level)
+THEN
+LLWEAPONEX_Uniques_SwapBokkenMode(_Char, _Item, _Level, _Template);
+
+PROC
+LLWEAPONEX_Uniques_SwapBokkenMode((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c")
+THEN
+Transform(_Item, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af", 1, 1, 1);
+
+PROC
+LLWEAPONEX_Uniques_SwapBokkenMode((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af")
+THEN
+Transform(_Item, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c", 1, 1, 1);
+
+PROC
+LLWEAPONEX_Uniques_SwapBokkenMode((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_Level, (STRING)_Template)
+THEN
+ItemLevelUpTo(_Item, _Level);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 25, "LLWEAPONEX_Timers_SwapBokkenMode_Equip", "LeaderLib_Commands_EquipItem");
 EXITSECTION
 
 ENDEXITSECTION

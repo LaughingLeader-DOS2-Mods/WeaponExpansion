@@ -968,7 +968,6 @@ add levelgroup 0,0,"All"
 add rootgroup "25726991-6bc1-45fb-a00b-d3bf855cd0d1","LLWEAPONEX_Katana_1H_Runeblade_Fire"
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H","",""
 
-
 new itemgroup "WPN_LLWEAPONEX_Bokken_1H"
 
 add levelgroup 0,0,"Common"
@@ -1007,6 +1006,12 @@ add levelgroup 0,0,"All"
 add rootgroup "e5fc86f9-a4fd-43dd-8814-b6ec906c287c",""
 add namegroup "WPN_LLWEAPONEX_Bokken_1H_Crafted","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "e5fc86f9-a4fd-43dd-8814-b6ec906c287c",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A","",""
+
 new itemgroup "WPN_LLWEAPONEX_Bokken_2H"
 
 add levelgroup 0,0,"Common"
@@ -1044,6 +1049,12 @@ new itemgroup "WPN_LLWEAPONEX_Bokken_2H_Preview"
 add levelgroup 0,0,"All"
 add rootgroup "e5fc86f9-a4fd-43dd-8814-b6ec906c287c",""
 add namegroup "WPN_LLWEAPONEX_Bokken_2H_Crafted","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Bokken_2H_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "e5fc86f9-a4fd-43dd-8814-b6ec906c287c",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_2H_A","",""
 
 new itemgroup "WPN_LLWEAPONEX_Rapier_1H_A"
 
