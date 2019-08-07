@@ -137,16 +137,16 @@ LLWEAPONEX_OniGauntlet_OnSoulsAdded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (
 AND
 _CurrentSouls >= _MaxSouls
 AND
-ObjectGetFlag(_Gauntlet, "LLWEAPONEX_OniGauntlet_MaxUpgrade", 0)
+ObjectGetFlag(_Gauntlet, "LLWEAPONEX_OniGauntlet_IsMaxUpgrade", 0)
 AND
 NOT DB_LeaderLib_Helper_Temp_CharItemTimer(_, _, _Gauntlet, _, "LLWEAPONEX_Timers_OniGauntletUpgrade_Equip")
 AND
 GetTemplate(_Gauntlet, _Template)
 THEN
-LLWEAPONEX_OniGauntlet_OnMaxSoulsReached(_Char, _Gauntlet, _Template);
+LLWEAPONEX_OniGauntlet_OnMaxSoulsReached(_Char, _Gauntlet, _Template, _MaxSouls);
 
 PROC
-LLWEAPONEX_OniGauntlet_OnMaxSoulsReached((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (STRING)_Template)
+LLWEAPONEX_OniGauntlet_OnMaxSoulsReached((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (STRING)_Template, (INTEGER)_MaxSouls)
 AND
 DB_LLWEAPONEX_OniGauntlet_Upgrades(_Stage, _Template)
 AND
@@ -157,12 +157,17 @@ THEN
 CharacterUnequipItem(_Char, _Gauntlet);
 Transform(_Gauntlet, _NextTemplate, 1, 1, 1);
 LeaderLib_Timers_StartCharacterItemTimer(_Char, _Gauntlet, 100, "LLWEAPONEX_Timers_OniGauntletUpgrade_Equip", "LeaderLib_Commands_EquipItem");
-LLWEAPONEX_OniGauntlet_GauntletUpgraded(_Char, _Gauntlet, _NextStage);
+LLWEAPONEX_OniGauntlet_GauntletUpgraded(_Char, _Gauntlet, _NextStage, _MaxSouls);
 
 PROC
-LLWEAPONEX_OniGauntlet_GauntletUpgraded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, 3)
+LLWEAPONEX_OniGauntlet_GauntletUpgraded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (INTEGER)_Stag, (INTEGER)_MaxSouls)
 THEN
-ObjectSetFlag(_Gauntlet, "LLWEAPONEX_OniGauntlet_MaxUpgrade");
+ItemAddCharges(_Gauntlet, _MaxSouls);
+
+PROC
+LLWEAPONEX_OniGauntlet_GauntletUpgraded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, 3, (INTEGER)_MaxSouls)
+THEN
+ObjectSetFlag(_Gauntlet, "LLWEAPONEX_OniGauntlet_IsMaxUpgrade");
 //END_REGION
 
 //REGION RUNE_BLOCKING
