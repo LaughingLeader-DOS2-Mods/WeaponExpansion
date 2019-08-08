@@ -100,6 +100,13 @@ THEN
 SetTag(_Player, "LLWEAPONEX_MasteryActive");
 */
 
+//REGION BONUS_STATUS
+IF
+CharacterResurrected(_Char)
+THEN
+LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char);
+//END_REGION
+
 EXITSECTION
 LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries();
 

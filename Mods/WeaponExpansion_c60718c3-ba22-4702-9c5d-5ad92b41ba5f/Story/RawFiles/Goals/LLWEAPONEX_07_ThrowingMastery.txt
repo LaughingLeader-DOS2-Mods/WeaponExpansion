@@ -19,7 +19,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_ThrowingAbility", 4, "<font co
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_ThrowingAbility", "LLWEAPONEX_WM_ThrowingAbility_Exp", "LLWEAPONEX_WM_ThrowingAbility_Level");
 
-DB_LLWEAPONEX_WeaponMastery_SkillProgression("LLWEAPONEX_ThrowingAbility", 1, "ThrowWeapon", "Any");
+//DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_ThrowingAbility", 1, "ThrowWeapon", "Any");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_ThrowingAbility", "ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon");
 //END_REGION
 

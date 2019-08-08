@@ -768,6 +768,36 @@ object category "GrenadeStarter",1,0,0,0,0,0,0,0
 object category "GrenadeEarly",1,0,0,0,0,0,0,0
 object category "GrenadeMid",1,0,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_MasterySkillbooks"
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_DualShields_Cover",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_DualShields_ShieldPrison",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_DualShields_IronMaiden",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Firearm_ElementalBullets",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Greatbow_PiercingShot",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Greatbow_KnockbackShot",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Greatbow_DelayedBarrage",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Handcrossbow_Assassinate",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Katana_Iaido",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Quarterstaff_LegSweep",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon",1,0,0,0,0,0,0,0
+
 new treasuretable "S_LLWEAPONEX_Debug_BattlemageArmor"
 IgnoreLevelDiff 1
 new subtable "-1"
@@ -989,7 +1019,6 @@ new subtable "-4"
 object category "I_WPN_LLWEAPONEX_DualShields_Humans_A",1,0,1,0,0,0,0,0
 new subtable "-4"
 object category "I_WPN_LLWEAPONEX_DualShields_Lizards_C",1,0,1,0,0,0,0,0
-
 
 new treasuretable "LLWEAPONEX_Debug_PriceCheck"
 IgnoreLevelDiff 1

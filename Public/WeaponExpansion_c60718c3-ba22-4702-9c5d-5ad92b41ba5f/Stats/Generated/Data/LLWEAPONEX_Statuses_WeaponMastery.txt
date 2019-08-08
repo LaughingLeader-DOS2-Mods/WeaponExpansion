@@ -1,8 +1,4 @@
 
-
-
-
-
 new entry "LLWEAPONEX_RUNEBLADE_MASTERY_POISON"
 type "StatusData"
 data "StatusType" "CONSUME"
@@ -13,3 +9,44 @@ data "DescriptionRef" "Character's <font color='#2DF9FF'>Runeblade Mastery</font
 data "Icon" "LLWEAPONEX_Status_WeaponMastery_Runeblade_A"
 data "FormatColor" "Void"
 data "StackId" "Stack_LLWEAPONEX_RunebladeMastery_Poison"
+
+new entry "LLWEAPONEX_MASTERYBONUS1"
+type "StatusData"
+data "StatusType" "CONSUME"
+data "ForGameMaster" "No"
+data "InitiateCombat" "No"
+data "DisplayName" " "
+data "Description" ""
+data "Icon" ""
+data "StatsId" "Stats_LLWEAPONEX_MasteryBonus1"
+
+new entry "Stats_LLWEAPONEX_MasteryBonus1"
+type "Potion"
+data "Act" "1"
+data "Act part" "0"
+data "DamageBoost" "2"
+
+new entry "LLWEAPONEX_MASTERYBONUS2"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_MASTERYBONUS1"
+data "StatsId" "Stats_LLWEAPONEX_MasteryBonus2"
+
+new entry "Stats_LLWEAPONEX_MasteryBonus2"
+type "Potion"
+using "Stats_LLWEAPONEX_MasteryBonus1"
+data "DamageBoost" "5"
+data "AccuracyBoost" "5"
+
+new entry "LLWEAPONEX_MASTERYBONUS3"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_MASTERYBONUS1"
+data "StatsId" "Stats_LLWEAPONEX_MasteryBonus3"
+
+new entry "Stats_LLWEAPONEX_MasteryBonus2"
+type "Potion"
+using "Stats_LLWEAPONEX_MasteryBonus1"
+data "DamageBoost" "9"
+data "AccuracyBoost" "5"
+data "CriticalChance" "2"
