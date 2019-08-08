@@ -43,6 +43,11 @@ add skill "Rush_BatteringRam"
 add skill "Projectile_BouncingShield"
 add skill "Cone_GroundSmash"
 
+new skillset "Class_LLWEAPONEX_Halberdier"
+add skill "Rush_BatteringRam"
+add skill "Target_CripplingBlow"
+add skill "Cone_GroundSmash"
+
 new skillset "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add skill "Projectile_LLWEAPONEX_EnemyChaosSlash"
 add skill "Projectile_LLWEAPONEX_EnemyDimensionalBolt"

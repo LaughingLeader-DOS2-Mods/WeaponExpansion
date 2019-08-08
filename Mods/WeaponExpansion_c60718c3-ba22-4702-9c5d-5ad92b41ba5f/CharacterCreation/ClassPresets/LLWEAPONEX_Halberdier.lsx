@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+	<header version="2" time="1387205254" />
+	<version major="1" minor="0" revision="0" build="0" />
+	<region id="CharacterCreationClass">
+		<node id="root">
+			<attribute id="ClassName" value="Halberdier" handle="hf5e7d54eg83feg4ae1g8ec9g914b5dda9131" type="28" />
+			<attribute id="ClassDescription" value="A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers" handle="h778419bdg900eg4b6egb376g652371ca7538" type="28" />
+			<attribute id="ClassLongDescription" value="A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers" handle="h778419bdg900eg4b6egb376g652371ca7538" type="28" />
+			<attribute id="ClassType" value="LLWEAPONEX_Halberdier" type="22" />
+			<attribute id="SkillSet" value="Class_LLWEAPONEX_Halberdier" type="22" />
+			<attribute id="Voice" value="0" type="5" />
+			<attribute id="Icon" value="6" type="5" />
+
+			<attribute id="NumStartingCombatAbilityPoints" value="2" type="4" />
+			<attribute id="NumStartingCivilAbilityPoints" value="1" type="4" />
+			<attribute id="NumStartingAttributePoints" value="3" type="4" />
+			<attribute id="NumStartingTalentPoints" value="1" type="4" />
+			
+			<attribute id="AreStatsWeighted" value="1" type="19" />
+			<children>
+				<node id="EquipmentProperties">
+					<children>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Halberdier_Start_Undead" type="22" />
+						</node>
+					</children>
+				</node>
+				<node id="AbilityChanges">
+					<children>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="WarriorLore" type="23" />
+							<attribute id="AmountIncreased" value="2" type="4" />
+						</node>
+						<node id="AbilityChange">
+                            <attribute id="Ability" value="Persuasion" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+					</children>
+				</node>
+				<node id="AttributeChanges">
+					<children>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="3" type="4" />
+							<attribute id="Attribute" value="STR" type="23" />
+						</node>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="1" type="4" />
+							<attribute id="Attribute" value="WIT" type="23" />
+						</node>
+					</children>
+				</node>
+				<node id="TalentsAdded">
+					<children>
+						<node id="TalentAdded">
+							<attribute id="Talent" value="AttackOfOpportunity" type="23" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

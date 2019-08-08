@@ -608,6 +608,58 @@ add equipment entry "WPN_LLWEAPONEX_DualShields_Lizards_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_CombatShield_Lizards_C_Preview"
 
+new equipment "Class_LLWEAPONEX_Halberdier_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Halberd_2H_A_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Halberdier_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Halberd_2H_A_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Halberdier_Preview"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Halberdier_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Halberdier_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Halberdier_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Halberdier_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Halberdier_Boots"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_Preview"
+
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
 add equipment entry "LLWEAPONEX_NPC_Goblins_Chaos_Grunt_A"
