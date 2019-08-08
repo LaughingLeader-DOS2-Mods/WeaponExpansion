@@ -13,6 +13,7 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_BonusStatus(1, "LLWEAPONEX_MASTERYBONUS1");
 DB_LLWEAPONEX_WeaponMastery_BonusStatus(2, "LLWEAPONEX_MASTERYBONUS2");
 DB_LLWEAPONEX_WeaponMastery_BonusStatus(3, "LLWEAPONEX_MASTERYBONUS3");
+DB_LLWEAPONEX_WeaponMastery_BonusStatus(4, "LLWEAPONEX_MASTERYBONUS4");
 
 PROC
 LLWEAPONEX_WeaponMastery_InitSettings()
@@ -278,8 +279,13 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelV
 //Auto-generate "mastery level unlocked" tags for skillbooks and mastery skills.
 PROC
 LLWEAPONEX_WeaponMastery_AddMastery((STRING)_WeaponType, (STRING)_CurrentXPVar, (STRING)_LevelVar, (STRING)_EnabledFlag)
-AND
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(_Level, _)
+THEN
+LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag(_WeaponType, 1);
+LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag(_WeaponType, 2);
+LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag(_WeaponType, 3);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag((STRING)_WeaponType, (INTEGER)_Level)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_MasteryLevelTags(_WeaponType, _Level, _)
 AND
@@ -723,7 +729,7 @@ ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
 LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_MasteryActive");
 LeaderLib_Tags_PreserveTag(_Player, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] is now active.");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] is now active. Set tag [",_EnabledFlag,"].");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -738,7 +744,7 @@ AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _, _)
 THEN
 ObjectClearFlag(_Player, "LLWEAPONEX_MasteryActive");
-ClearTag(_Player, "LLWEAPONEX_MasteryActive");
+LeaderLib_Tags_ClearPreservedTag(_Player, "LLWEAPONEX_MasteryActive");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_WeaponType)
@@ -821,6 +827,7 @@ NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _WeaponType
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _WeaponType);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:LLWEAPONEX_Timers_MasteryDeactivated] Weapon Mastery [",_WeaponType,"] was deactivated.");
 ObjectClearFlag(_Player, _EnabledFlag);
+LeaderLib_Tags_ClearPreservedTag(_Player, _EnabledFlag);
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _WeaponType);
 
 PROC
@@ -860,94 +867,96 @@ ApplyStatus(_Player, _Status, -1.0, 1, _Player);
 
 //REGION RACE_CHANGED_EVENTS
 QRY
-LLWEAPONEX_QRY_HasRacialSkills((CHARACTERGUID)_Player)
+LLWEAPONEX_QRY_HasRacialSkills((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill)
 THEN
 DB_NOOP(1);
 
-IF
-CharacterPolymorphedInto(_Player, _Race)
+QRY
+LLWEAPONEX_QRY_HasRacialSkills((CHARACTERGUID)_Char)
 AND
-DB_IsPlayer(_Player)
+DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
 AND
-LLWEAPONEX_QRY_HasRacialSkills(_Player)
+CharacterHasSkill(_Char, _Skill, 1)
 THEN
-LLWEAPONEX_WeaponMastery_OnRaceChanged(_Player, _Race);
+DB_NOOP(1);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnRaceChanged((CHARACTERGUID)_Player, (STRING)_Race)
+LLWEAPONEX_WeaponMastery_OnRaceChanged((CHARACTERGUID)_Char, (STRING)_Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill)
 THEN
-CharacterRemoveSkill(_Player, _Skill);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _BaseRaceTag);
+CharacterRemoveSkill(_Char, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Char, _WeaponType, _SkillID, _BaseRaceTag);
 
 //What race are we now?
 PROC
-LLWEAPONEX_WeaponMastery_OnRaceChanged((CHARACTERGUID)_Player, (STRING)_Race)
+LLWEAPONEX_WeaponMastery_OnRaceChanged((CHARACTERGUID)_Char, (STRING)_Race)
 AND
 NOT DB_LeaderLib_RaceTags(_Race, _, _)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill)
 AND
 DB_LeaderLib_RaceTags(_OtherRace, _RaceTag, _BaseRaceTag)
 AND
-IsTagged(_Player, _BaseRaceTag, 1)
+IsTagged(_Char, _BaseRaceTag, 1)
 AND
-CharacterHasSkill(_Player, _Skill, 1)
+CharacterHasSkill(_Char, _Skill, 1)
 THEN
-CharacterRemoveSkill(_Player, _Skill);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _BaseRaceTag);
+CharacterRemoveSkill(_Char, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Char, _WeaponType, _SkillID, _BaseRaceTag);
 
-IF
-CharacterStoppedPolymorph(_Player)
+//Players
+PROC
+LLWEAPONEX_WeaponMastery_OnRaceReverted((CHARACTERGUID)_Char, 1)
 AND
-DB_IsPlayer(_Player)
-AND
-LLWEAPONEX_QRY_HasRacialSkills(_Player)
-AND
-CharacterGetRace(_Player, 0, _Race)
+CharacterGetRace(_Char, 0, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill)
 THEN
-CharacterRemoveSkill(_Player, _Skill);
-NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill);
-LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Player, _WeaponType, _SkillID, _BaseRaceTag);
+CharacterRemoveSkill(_Char, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Char, _WeaponType, _SkillID, _BaseRaceTag);
 
-IF
-ObjectTransformed((CHARACTERGUID)_Player, _Template)
+//NPCss
+PROC
+LLWEAPONEX_WeaponMastery_OnRaceReverted((CHARACTERGUID)_Char, 0)
 AND
-DB_IsPlayer(_Player)
+DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-LLWEAPONEX_QRY_HasRacialSkills(_Player)
+IsTagged(_Char, _BaseRaceTag, 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill)
 THEN
-LLWEAPONEX_WeaponMastery_OnTransformed(_Player, _Template);
+CharacterRemoveSkill(_Char, _Skill);
+NOT DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Char, _WeaponType, _SkillID, _Skill);
+LLWEAPONEX_WeaponMastery_UnlockSkillForRace(_Char, _WeaponType, _SkillID, _BaseRaceTag);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Player, (GUIDSTRING)_Template)
+LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Char, (GUIDSTRING)_Template)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char)
 AND
-GetTemplate(_Player, _RaceTemplate)
+GetTemplate(_Char, _RaceTemplate)
 AND
 DB_LeaderLib_RaceTemplates(_RaceTag, _IsUndead, _IsFemale, _RaceTemplate)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player);
-LLWEAPONEX_WeaponMastery_OnRaceChanged(_Player, _Race);
+DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char);
+LLWEAPONEX_WeaponMastery_OnRaceChanged(_Char, _Race);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Player, (GUIDSTRING)_Template)
+LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Char, (GUIDSTRING)_Template)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char)
 AND
 String(_Template, _CheckTemplate)
 AND
@@ -955,25 +964,25 @@ DB_LeaderLib_RaceTemplates(_RaceTag, _IsUndead, _IsFemale, _CheckTemplate)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player);
-LLWEAPONEX_WeaponMastery_OnRaceChanged(_Player, _Race);
+DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char);
+LLWEAPONEX_WeaponMastery_OnRaceChanged(_Char, _Race);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Player, (GUIDSTRING)_Template)
+LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Char, (GUIDSTRING)_Template)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char)
 AND
-CharacterGetRace(_Player, 0, _Race)
+CharacterGetRace(_Char, 0, _Race)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player);
-LLWEAPONEX_WeaponMastery_OnRaceChanged(_Player, _Race);
+DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char);
+LLWEAPONEX_WeaponMastery_OnRaceChanged(_Char, _Race);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Player, (GUIDSTRING)_Template)
+LLWEAPONEX_WeaponMastery_OnTransformed((CHARACTERGUID)_Char, (GUIDSTRING)_Template)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player)
+DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Player);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_TransformResolved(_Char);
 //END_REGION
 
 //REGION SKILL_REMOVAL
@@ -1466,7 +1475,7 @@ LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char, _WeaponType, _CurrentLevel);
 PROC
 LLWEAPONEX_WeaponMastery_ApplyBonusStatus((CHARACTERGUID)_Char, (STRING)_WeaponType, (INTEGER)_CurrentLevel)
 AND
-DB_LLWEAPONEX_WeaponMastery_BonusStatus(_Level, _Status)
+DB_LLWEAPONEX_WeaponMastery_BonusStatus(_CurrentLevel, _Status)
 AND
 HasActiveStatus(_Char, _Status, 0)
 THEN
@@ -1479,17 +1488,36 @@ LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char, _WeaponType);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Char, (STRING)_WeaponType, (INTEGER)_MasteryLevel)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Char, _WeaponType)
 THEN
 LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char, _WeaponType, _MasteryLevel);
+
+PROC
+LLWEAPONEX_WeaponMastery_ClearBonusStatus((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_WeaponMastery_BonusStatus(_Level, _Status)
+THEN
+RemoveStatus(_Char, _Status);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Char, (STRING)_WeaponType)
+THEN
+LLWEAPONEX_WeaponMastery_ClearBonusStatus(_Char);
 //END_REGION
 
 //REGION MASTERY_LEVEL_UNLOCKED_TAGS
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Char, (STRING)_WeaponType, (INTEGER)_MasteryLevel)
 AND
-DB_LLWEAPONEX_WeaponMastery_MasteryLevelTags(_WeaponType, _MasteryLevel, _UnlockedMasteryLevelTag)
+DB_LLWEAPONEX_WeaponMastery_MasteryLevelTags(_WeaponType, _Level, _UnlockedMasteryLevelTag)
+AND
+_Level <= _MasteryLevel
+AND
+IsTagged(_Char, _UnlockedMasteryLevelTag, 0)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, _UnlockedMasteryLevelTag);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:OnMasteryLeveledUp] Set tag [",_UnlockedMasteryLevelTag,"] on character for mastery [",_WeaponType,"].");
 //END_REGION
 EXITSECTION
 

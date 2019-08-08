@@ -7,30 +7,30 @@ KBSECTION
 /*
 Disabled for now, since weapon-based skills should be applying LLWEAPONEX_WEAPONMASTERY_EXPERIENCE on hit
 IF
-CharacterUsedSkill(_Player, _Skill, _, _)
+CharacterUsedSkill(_Char, _Skill, _, _)
 AND
-DB_IsPlayer(_Player)
+DB_IsPlayer(_Char)
 AND
-ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+ObjectGetFlag(_Char, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 AND
-ObjectGetFlag(_Player, "LLWEAPONEX_MasteryActive", 1)
+ObjectGetFlag(_Char, "LLWEAPONEX_MasteryActive", 1)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag)
 AND
-ObjectGetFlag(_Player, _EnabledFlag, 1)
+ObjectGetFlag(_Char, _EnabledFlag, 1)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Char, _WeaponType);
 
 IF
-//AttackedByObject(_Target, _, (CHARACTERGUID)_Player, _, _)
-CharacterStatusApplied(_Target, "HIT", _Player)
+//AttackedByObject(_Target, _, (CHARACTERGUID)_Char, _, _)
+CharacterStatusApplied(_Target, "HIT", _Char)
 AND
-_Player != NULL_00000000-0000-0000-0000-000000000000
+_Char != NULL_00000000-0000-0000-0000-000000000000
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage((CHARACTERGUID)_Player, _WeaponType)
+DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage((CHARACTERGUID)_Char, _WeaponType)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _WeaponType);
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, _WeaponType, 1);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Char, _WeaponType);
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Char, _WeaponType, 1);
 */
 //END_REGION
 
@@ -40,69 +40,100 @@ CharacterDying(_Enemy)
 AND
 DB_CombatCharacters(_Enemy, _CombatID)
 AND
-DB_IsPlayer(_Player)
+DB_IsPlayer(_Char)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy)
 AND
-CombatGetIDForCharacter(_Player, _CombatID)
+CombatGetIDForCharacter(_Char, _CombatID)
 AND
-CharacterIsEnemy(_Enemy, _Player, 1)
+CharacterIsEnemy(_Enemy, _Char, 1)
 THEN
-LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy);
+LLWEAPONEX_WeaponMastery_AddPartyExperience(_Char, _Enemy);
 //END_REGION
 
 //REGION SKILL_REQUIREMENTS_MET
 IF
-ObjectFlagSet(_Flag, (CHARACTERGUID)_Player, _)
+ObjectFlagSet(_Flag, (CHARACTERGUID)_Char, _)
 AND
 DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Flag, "Flag")
 AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+DB_LLWEAPONEX_WeaponMastery_Learned(_Char, _WeaponType, _SkillID)
 THEN
-LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Char, _WeaponType, _SkillID);
 
 IF
-ObjectWasTagged((CHARACTERGUID)_Player, _Tag)
+ObjectWasTagged((CHARACTERGUID)_Char, _Tag)
 AND
 DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Tag, "Tag")
 AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
+DB_LLWEAPONEX_WeaponMastery_Learned(_Char, _WeaponType, _SkillID)
 THEN
-LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _WeaponType, _SkillID);
+LLWEAPONEX_WeaponMastery_OnSkillLearned(_Char, _WeaponType, _SkillID);
 //END_REGION
 
 //REGION SKILL_REQUIREMENTS_LOST
 IF
-ObjectFlagCleared(_Flag, (CHARACTERGUID)_Player, _)
+ObjectFlagCleared(_Flag, (CHARACTERGUID)_Char, _)
 AND
 DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Flag, "Flag")
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Char, _WeaponType, _SkillID, _Skill)
 THEN
-LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, _WeaponType, _SkillID);
+LLWEAPONEX_WeaponMastery_RemoveSkill(_Char, _WeaponType, _SkillID);
 
 IF
-ObjectLostTag((CHARACTERGUID)_Player, _Tag)
+ObjectLostTag((CHARACTERGUID)_Char, _Tag)
 AND
 DB_LLWEAPONEX_WeaponMastery_SkillRequirements(_WeaponType, _SkillID, _Tag, "Tag")
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, _WeaponType, _SkillID, _Skill)
+DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Char, _WeaponType, _SkillID, _Skill)
 THEN
-LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, _WeaponType, _SkillID);
+LLWEAPONEX_WeaponMastery_RemoveSkill(_Char, _WeaponType, _SkillID);
 //END_REGION
+
+IF
+CharacterPolymorphedInto(_Char, _Race)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery(_Char)
+AND
+LLWEAPONEX_QRY_HasRacialSkills(_Char)
+THEN
+LLWEAPONEX_WeaponMastery_OnRaceChanged(_Char, _Race);
+
+IF
+CharacterStoppedPolymorph(_Char)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery(_Char)
+AND
+LLWEAPONEX_QRY_HasRacialSkills(_Char)
+AND
+CharacterIsPlayer(_Char, _IsPlayer)
+THEN
+LLWEAPONEX_WeaponMastery_OnRaceReverted(_Char, _IsPlayer);
+
+IF
+ObjectTransformed((CHARACTERGUID)_Char, _Template)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery(_Char)
+AND
+LLWEAPONEX_QRY_HasRacialSkills(_Char)
+THEN
+LLWEAPONEX_WeaponMastery_OnTransformed(_Char, _Template);
 
 /*
 IF
-ObjectTransformed((CHARACTERGUID)_Player, _)
+ObjectTransformed((CHARACTERGUID)_Char, _)
 AND
-ObjectGetFlag(_Player, "LLWEAPONEX_MasteryActive", 1)
+ObjectGetFlag(_Char, "LLWEAPONEX_MasteryActive", 1)
 THEN
-SetTag(_Player, "LLWEAPONEX_MasteryActive");
+SetTag(_Char, "LLWEAPONEX_MasteryActive");
 */
 
 //REGION BONUS_STATUS
 IF
 CharacterResurrected(_Char)
+AND
+LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery(_Char)
 THEN
 LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char);
 //END_REGION
