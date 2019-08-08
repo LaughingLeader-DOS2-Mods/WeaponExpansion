@@ -4,40 +4,7 @@ INITSECTION
 
 KBSECTION
 
-IF
-CharacterUsedSkill(_Player, "Shout_LLWEAPONEX_SwapGender", _, _)
-AND
-IsTagged(_Player, "FEMALE", _IsFemale)
-AND
-IntegerSubtract(1, _IsFemale, _Female)
-AND
-CharacterGetRace(_Player, 1, _Race)
-AND
-DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
-AND
-IsTagged(_Player, "UNDEAD", _Undead)
-AND
-DB_LeaderLib_RaceTemplates(_RaceTag, _Undead, _Female, _Template)
-AND
-GetPosition(_Player, _x, _y, _z)
-THEN
-PlayEffectAtPosition("RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01", _x, _y, _z);
-CharacterTransform(_Player, _Template, 0, 1, 0, 0, 0, 1, 0);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Misc:SwapGender] Transforming character into root template [",_Template,"].");
-LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Misc:SwapGender] Gender Result [",_Female,"] Previous [",_IsFemale,"].");
-//LLWEAPONEX_Misc_GenderSwap_UpdateTags(_Player, _Female);
 
-PROC
-LLWEAPONEX_Misc_GenderSwap_UpdateTags((CHARACTERGUID)_Character, 0)
-THEN
-ClearTag(_Character, "FEMALE");
-SetTag(_Character, "MALE");
-
-PROC
-LLWEAPONEX_Misc_GenderSwap_UpdateTags((CHARACTERGUID)_Character, 1)
-THEN
-SetTag(_Character, "FEMALE");
-ClearTag(_Character, "MALE");
 EXITSECTION
 
 ENDEXITSECTION

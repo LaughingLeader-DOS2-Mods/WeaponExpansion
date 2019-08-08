@@ -161,8 +161,10 @@ LLWEAPONEX_OniGauntlet_GauntletUpgraded(_Char, _Gauntlet, _NextStage, _MaxSouls)
 
 PROC
 LLWEAPONEX_OniGauntlet_GauntletUpgraded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, (INTEGER)_Stag, (INTEGER)_MaxSouls)
+AND
+IntegerSubtract(_MaxSouls, 1, _AddSouls) // So the gauntlet starts at 40 instead of 41
 THEN
-ItemAddCharges(_Gauntlet, _MaxSouls);
+ItemAddCharges(_Gauntlet, _AddSouls);
 
 PROC
 LLWEAPONEX_OniGauntlet_GauntletUpgraded((CHARACTERGUID)_Char, (ITEMGUID)_Gauntlet, 3, (INTEGER)_MaxSouls)

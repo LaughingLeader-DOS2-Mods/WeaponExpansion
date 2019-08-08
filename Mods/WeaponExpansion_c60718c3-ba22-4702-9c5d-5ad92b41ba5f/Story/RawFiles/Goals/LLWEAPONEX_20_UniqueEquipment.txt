@@ -625,6 +625,7 @@ NOT DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon);
 //END_REGION
 
 //REGION ARM_CANNON_BLOCK_SHIELD_WEAPON
+/*
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Char, (ITEMGUID)_Weapon)
 AND
@@ -638,15 +639,42 @@ LLWEAPONEX_QRY_ItemIsWeapon(_Weapon)
 THEN
 DB_CustomUseItemResponse(_Char, _Weapon, 0);
 ShowNotification(_Char, "LLWEAPONEX_Notifications_ArmCannonShieldBlocked");
+*/
 //END_REGION
 
 //REGION ARM_CANNON_MECHANICS
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Char)
 AND
+ObjectGetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0)
+AND
+CharacterIsEnemy(_Char, _Target, 1)
+AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 1, 3);
+
+//Allow only 1 energy per attack when dual wielding
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Char)
+AND
+CharacterIsEnemy(_Char, _Target, 1)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+AND
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
+AND
+LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy", 750);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
 
 PROC
 LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
@@ -659,6 +687,7 @@ AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 SetTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+ApplyStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", -1.0, 0, _Char);
 
 IF
 SkillCast(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", _, _)
@@ -673,11 +702,19 @@ AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 ClearTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+RemoveStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED");
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_ArmCannon_AbsorbSurface", _, _)
 THEN
 SetVarFloat3(_Char, "LLWEAPONEX_SurfaceAbsorbPosition", _x, _y, _z);
+
+IF
+CharacterResurrected(_Char)
+AND
+IsTagged(_Char, "LLWEAPONEX_ArmCannon_FullyCharged", 1)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", -1.0, 0, _Char);
 //END_REGION
 
 //REGION BOKKEN_SWITCH
@@ -748,6 +785,7 @@ LLWEAPONEX_Uniques_SwapBokkenMode((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGE
 THEN
 ItemLevelUpTo(_Item, _Level);
 LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 25, "LLWEAPONEX_Timers_SwapBokkenMode_Equip", "LeaderLib_Commands_EquipItem");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

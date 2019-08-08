@@ -54,6 +54,24 @@ add equipment entry "ARM_LLWEAPONEX_DragonSlayer_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_GreatbowPreview"
 
+new equipment "Class_LLWEAPONEX_DragonSlayer_Act2"
+add equipmentgroup
+add equipment entry "ARM_Light_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Light_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Light_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Light_Boots"
+add equipmentgroup
+add equipment entry "ARM_Light_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Greatbow"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Quiver_DrawArrow"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
 new equipment "Class_LLWEAPONEX_RunicKnight_Start"
 add equipmentgroup
 add equipment entry "ARM_Purge_UpperBody"

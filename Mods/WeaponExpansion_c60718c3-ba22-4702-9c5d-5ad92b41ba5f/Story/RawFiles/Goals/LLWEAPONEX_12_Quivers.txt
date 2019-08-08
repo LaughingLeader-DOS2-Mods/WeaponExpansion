@@ -23,190 +23,171 @@ DB_LLWEAPONEX_Quivers_ArrowTreasure(1, "ST_LLWEAPONEX_Quiver_GreatbowArrows");
 
 DB_LLWEAPONEX_Quivers_RechargeStatus("Shout_LLWEAPONEX_Quiver_DrawArrow", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", 60.0);
 
-
 //REGION UNEQUIPPED_EVENT
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Quiver", 1)
 THEN
-LLWEAPONEX_Quivers_OnQuiverUnequipped(_Player, _Item);
+LLWEAPONEX_Quivers_OnQuiverUnequipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Player, (ITEMGUID)_Quiver)
+LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 THEN
-PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.Quiver");
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.Quiver");
 
 PROC
-LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Player, (ITEMGUID)_Quiver)
+LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 AND
-DB_LLWEAPONEX_Quivers_Temp_Equipped(_Player, _Quiver)
+DB_LLWEAPONEX_Quivers_Temp_Equipped(_Char, _Quiver)
 THEN
-NOT DB_LLWEAPONEX_Quivers_Temp_Equipped(_Player, _Quiver);
+NOT DB_LLWEAPONEX_Quivers_Temp_Equipped(_Char, _Quiver);
 LLWEAPONEX_Quivers_Internal_CheckForEquipped();
 
 PROC
-LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Player, (ITEMGUID)_Quiver)
+LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 AND
-ObjectGetFlag(_Player, "LLWEAPONEX_Quiver_DrewArrow", 1)
+ObjectGetFlag(_Char, "LLWEAPONEX_Quiver_DrewArrow", 1)
 THEN
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Quiver_RemoveTemporaryArrows", 150);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Quiver_RemoveTemporaryArrows", 150);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Quiver_RemoveTemporaryArrows")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Quiver_RemoveTemporaryArrows")
 THEN
-ObjectClearFlag(_Player, "LLWEAPONEX_Quiver_DrewArrow");
-LLWEAPONEX_Quivers_RemoveTemporaryArrows(_Player);
+ObjectClearFlag(_Char, "LLWEAPONEX_Quiver_DrewArrow");
+LLWEAPONEX_Quivers_RemoveTemporaryArrows(_Char);
 
 PROC
-LLWEAPONEX_Quivers_RemoveTemporaryArrows((CHARACTERGUID)_Player)
+LLWEAPONEX_Quivers_RemoveTemporaryArrows((CHARACTERGUID)_Char)
 THEN
-InventoryLaunchTagIterator(_Player, "LLWEAPONEX_Quiver_TemporaryArrow", "", "LLWEAPONEX_FoundQuiverArrow", "");
+InventoryLaunchTagIterator(_Char, "LLWEAPONEX_Quiver_TemporaryArrow", "", "LLWEAPONEX_FoundQuiverArrow", "");
 //END_REGION
 
 //REGION EQUIPPED_EVENT
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Quiver", 1)
 THEN
-DB_LLWEAPONEX_Quivers_Temp_Equipped(_Player, _Item);
-LLWEAPONEX_Quivers_OnQuiverEquipped(_Player, _Item);
+DB_LLWEAPONEX_Quivers_Temp_Equipped(_Char, _Item);
+LLWEAPONEX_Quivers_OnQuiverEquipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Quiver)
+LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 AND
-ObjectGetFlag(_Player, "LLWEAPONEX_Quiver_DrewArrow", 1)
+ObjectGetFlag(_Char, "LLWEAPONEX_Quiver_DrewArrow", 1)
 AND
-CharacterHasSkill(_Player, "Shout_LLWEAPONEX_Quiver_DrawArrow", 1)
+CharacterHasSkill(_Char, "Shout_LLWEAPONEX_Quiver_DrawArrow", 1)
 THEN
-ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_Quiver_RemoveTemporaryArrows");
+ProcObjectTimerCancel(_Char, "LLWEAPONEX_Timers_Quiver_RemoveTemporaryArrows");
 //END_REGION
 
 //REGION QUIVER_FX
 PROC
-LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Quiver)
+LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 AND
 IsTagged(_Quiver, "LLWEAPONEX_Quiver_FX_Enabled", 1)
 THEN
-LLWEAPONEX_Greatbows_PlayQuiverEffect(_Player);
-PROC
-LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Player)
-THEN
-PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.Quiver");
+LLWEAPONEX_Greatbows_PlayQuiverEffect(_Char);
 
 PROC
-LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Player)
+LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Char)
+THEN
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.Quiver");
+
+PROC
+LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Char)
 AND
-NOT DB_LoopEffect(_Player, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+NOT DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 AND
-IsTagged(_Player, "FEMALE", _IsFemale)
+IsTagged(_Char, "FEMALE", _IsFemale)
 AND
-CharacterGetRace(_Player, 1, _Race)
+CharacterGetRace(_Char, 1, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 THEN
-PROC_LoopEffect(_EffectName, _Player, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
+PROC_LoopEffect(_EffectName, _Char, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
 
 //NPCs
 PROC
-LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Character)
+LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Char)
 AND
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+NOT DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 AND
-NOT CharacterGetRace(_Character, 1, _)
+NOT CharacterGetRace(_Char, 1, _)
 AND
-IsTagged(_Character, "FEMALE", _IsFemale)
+IsTagged(_Char, "FEMALE", _IsFemale)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-IsTagged(_Character, _Race, 1)
+IsTagged(_Char, _Race, 1)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 AND
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+NOT DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 THEN
-PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
+PROC_LoopEffect(_EffectName, _Char, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
 
 //New Races
 PROC
-LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Character)
+LLWEAPONEX_Greatbows_PlayQuiverEffect((CHARACTERGUID)_Char)
 AND
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+NOT DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX("HUMAN", 1, _EffectName, _BoneName)
 THEN
-PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
+PROC_LoopEffect(_EffectName, _Char, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
 
 IF
-CharacterPolymorphedInto(_Character, _Race)
+CharacterPolymorphedInto(_Char, _Race)
 AND
-DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 AND
-NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
+NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Char)
 AND
-IsTagged(_Character, "FEMALE", _IsFemale)
+IsTagged(_Char, "FEMALE", _IsFemale)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 DB_LLWEAPONEX_Quivers_LoopFX(_RaceTag, _IsFemale, _EffectName, _BoneName)
 THEN
-PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.Quiver");
-PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
-DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character);
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.Quiver");
+PROC_LoopEffect(_EffectName, _Char, "LLWEAPONEX.FX.Quiver", "__ANY__", _BoneName);
+DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Char);
 
 //Non-standard racial polymorphs
 IF
-CharacterPolymorphedInto(_Character, _Race)
+CharacterPolymorphedInto(_Char, _Race)
 AND
-DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.Quiver", _, _, _)
+DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.Quiver", _, _, _)
 AND
-NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
+NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Char)
 THEN
-PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.Quiver");
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.Quiver");
 
 IF
-CharacterPolymorphedInto(_Character, _Race)
+CharacterPolymorphedInto(_Char, _Race)
 AND
-DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character)
+DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Char)
 THEN
-NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Character);
+NOT DB_LLWEAPONEX_Greatbows_QuiverUpdated(_Char);
 //END_REGION
 
 //REGION QUIVER_DRAW_ARROW
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_DRAW_ARROW", _)
+CharacterStatusApplied(_Char, "LLWEAPONEX_DRAW_ARROW", _)
 AND
-CharacterGetEquippedItem(_Character, "Weapon", _Weapon)
+CharacterGetEquippedItem(_Char, "Weapon", _Weapon)
 AND
 IsTagged(_Weapon, "LLWEAPONEX_Greatbow", _IsGreatbow)
 AND
 DB_LLWEAPONEX_Quivers_ArrowTreasure(_IsGreatbow, _TreasureTable)
-/*
-AND
-GetPosition(_Character, _x, _y, _z)
-AND
-CharacterGetLevel(_Character, _Level)
-AND
-CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", _x, _y, _z, _Backpack)
-*/
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_DRAW_ARROW] Generating a random arrow for character via treasure table [",_TreasureTable,"].");
-ObjectSetFlag(_Character, "LLWEAPONEX_Quiver_DrewArrow", 0);
-CharacterGiveReward(_Character, _TreasureTable, 1);
-/*
-GenerateTreasure(_Backpack, _TreasureTable, _Level, _Character);
-MoveAllItemsTo(_Backpack, _Character, 1, 1, 1);
-ProcObjectTimer(_Backpack, "LLWEAPONEX_Timers_RemoveArrowTreasureBackpack", 250);
-*/
-
-PROC
-ProcObjectTimerFinished((ITEMGUID)_Backpack, "LLWEAPONEX_Timers_RemoveArrowTreasureBackpack")
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Greatbows:Quivers:LLWEAPONEX_Timers_RemoveArrowTreasureBackpack] Removing backpack.");
-ItemRemove(_Backpack);
+ObjectSetFlag(_Char, "LLWEAPONEX_Quiver_DrewArrow", 0);
+CharacterGiveReward(_Char, _TreasureTable, 1);
 
 IF
 StoryEvent((ITEMGUID)_Arrow, "LLWEAPONEX_FoundQuiverArrow")
@@ -216,11 +197,9 @@ ItemDestroy(_Arrow);
 
 //REGION QUIVER_RECHARGING
 IF
-CharacterUsedSkill(_Player, "Shout_LLWEAPONEX_Quiver_DrawArrow", _, _)
+CharacterUsedSkill(_Char, "Shout_LLWEAPONEX_Quiver_DrawArrow", _, _)
 AND
-CharacterIsPlayer(_Player, 1)
-AND
-CharacterGetEquippedItem(_Player, "Belt", (ITEMGUID)_Quiver)
+CharacterGetEquippedItem(_Char, "Belt", (ITEMGUID)_Quiver)
 AND
 IsTagged(_Quiver, "LLWEAPONEX_Quiver", 1)
 AND
@@ -230,21 +209,21 @@ NOT ItemGetMaxCharges(_Quiver, 0)
 AND
 DB_LLWEAPONEX_Quivers_RechargeStatus("Shout_LLWEAPONEX_Quiver_DrawArrow", _Status, _RechargeSpeed)
 THEN
-DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, "Shout_LLWEAPONEX_Quiver_DrawArrow", _Status, _RechargeSpeed);
-ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
+DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Char, _Quiver, "Shout_LLWEAPONEX_Quiver_DrawArrow", _Status, _RechargeSpeed);
+ApplyStatus(_Char, _Status, _RechargeSpeed, 0, _Char);
 ObjectSetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging", 0);
 
 PROC
-LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
+LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Char, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
 AND
 NOT LeaderLib_Helper_QRY_ChargesAreMaxed(_Quiver)
 AND
-ItemIsInCharacterInventory(_Quiver, _Player, 1)
+ItemIsInCharacterInventory(_Quiver, _Char, 1)
 THEN
-ApplyStatus(_Player, _Status, _RechargeSpeed, 0, _Player);
+ApplyStatus(_Char, _Status, _RechargeSpeed, 0, _Char);
 
 PROC
-LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
+LLWEAPONEX_Quivers_ResetRechargeStatus((CHARACTERGUID)_Char, (ITEMGUID)_Quiver, (STRING)_Status, (REAL)_RechargeSpeed)
 AND
 LeaderLib_Helper_QRY_ChargesAreMaxed(_Quiver)
 THEN
@@ -253,59 +232,57 @@ ObjectClearFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging");
 IF
 ObjectFlagCleared("LLWEAPONEX_ItemNeedsRecharging", (ITEMGUID)_Quiver, _)
 AND
-DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, _Skill, _Status, _RechargeSpeed)
+DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Char, _Quiver, _Skill, _Status, _RechargeSpeed)
 THEN
-NOT DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
-RemoveStatus(_Player, _Status);
+NOT DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Char, _Quiver, _Skill, _Status, _RechargeSpeed);
+RemoveStatus(_Char, _Status);
 
 PROC
-LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Quiver)
+LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 AND
 ObjectGetFlag(_Quiver, "LLWEAPONEX_ItemNeedsRecharging", 1)
 AND
-DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_OtherPlayer, _Quiver, _Skill, _Status, _RechargeSpeed)
+DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_OtherChar, _Quiver, _Skill, _Status, _RechargeSpeed)
 THEN
-NOT DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_OtherPlayer, _Quiver, _Skill, _Status, _RechargeSpeed);
-DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, _Skill, _Status, _RechargeSpeed);
-LLWEAPONEX_Quivers_ResetRechargeStatus(_Player, _Quiver, _Status, _RechargeSpeed);
+NOT DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_OtherChar, _Quiver, _Skill, _Status, _RechargeSpeed);
+DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Char, _Quiver, _Skill, _Status, _RechargeSpeed);
+LLWEAPONEX_Quivers_ResetRechargeStatus(_Char, _Quiver, _Status, _RechargeSpeed);
 //END_REGION
 
 //REGION RECHARGING_STATUS_DONE
 IF
-CharacterStatusRemoved(_Player, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _)
+CharacterStatusRemoved(_Char, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _)
 AND
-DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, _Skill, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed)
+DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Char, _Quiver, _Skill, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed)
 THEN
-NOT DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Player, _Quiver, _Skill, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed);
-LLWEAPONEX_Quivers_OnChargingDone(_Player, _Quiver, _Skill, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed);
+NOT DB_LLWEAPONEX_Quivers_Temp_ActiveRecharging(_Char, _Quiver, _Skill, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed);
+LLWEAPONEX_Quivers_OnChargingDone(_Char, _Quiver, _Skill, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed);
 
 PROC
-LLWEAPONEX_Quivers_OnChargingDone((CHARACTERGUID)_Player, (ITEMGUID)_Quiver, (STRING)_Skill, (STRING)_Status, (REAL)_RechargeSpeed)
+LLWEAPONEX_Quivers_OnChargingDone((CHARACTERGUID)_Char, (ITEMGUID)_Quiver, (STRING)_Skill, (STRING)_Status, (REAL)_RechargeSpeed)
 AND
 ObjectExists(_Quiver, 1)
 AND
 ItemIsDestroyed(_Quiver, 0)
 THEN
 ItemAddCharges(_Quiver, 1);
-LLWEAPONEX_Quivers_ResetRechargeStatus(_Player, _Quiver, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed);
+LLWEAPONEX_Quivers_ResetRechargeStatus(_Char, _Quiver, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", _RechargeSpeed);
 //END_REGION
 
 //REGION TOGGLE_SCRIPT
-IF
-DB_LLWEAPONEX_Quivers_Temp_Equipped(_Player, _Quiver)
-AND
-NOT DB_GlobalFlag("LLWEAPONEX_QuiverEquipped")
+PROC
+LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 THEN
-GlobalSetFlag("LLWEAPONEX_QuiverEquipped");
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_QuiverEquipped", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_Quivers_Internal_CheckForEquipped()
 AND
-DB_GlobalFlag("LLWEAPONEX_QuiverEquipped")
+LeaderLib_ToggleScripts_QRY_ScriptIsEnabled("LLWEAPONEX_QuiverEquipped")
 AND
 NOT DB_LLWEAPONEX_Quivers_Temp_Equipped(_, _)
 THEN
-GlobalClearFlag("LLWEAPONEX_QuiverEquipped");
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_QuiverEquipped", "WeaponExpansion", 500);
 //END_REGION
 
 EXITSECTION
