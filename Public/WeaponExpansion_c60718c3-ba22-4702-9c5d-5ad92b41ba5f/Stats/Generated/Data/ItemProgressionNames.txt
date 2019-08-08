@@ -881,3 +881,9 @@ add name "Runic Cannon",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
 add name "Runic Cannon",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+add name "Standard of Unruly Faith",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+add name "Herald of the Pack",""

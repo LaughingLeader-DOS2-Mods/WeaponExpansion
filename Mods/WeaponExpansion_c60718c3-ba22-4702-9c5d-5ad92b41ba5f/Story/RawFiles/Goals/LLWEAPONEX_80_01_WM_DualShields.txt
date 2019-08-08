@@ -9,6 +9,24 @@ AND
 IsTagged(_Char, "LLWEAPONEX_IRONMAIDEN_BONUS", 1)
 THEN
 ClearTag(_Char, "LLWEAPONEX_IRONMAIDEN_BONUS");
+
+IF
+CharacterStartAttackObject((CHARACTERGUID)_Char, _, _Attacker)
+AND
+CharacterIsEnemy(_Char, _Attacker, 1)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
+THEN
+LLWEAPONEX_DualShields_DynamicCover(_Attacker, _Blocker, _Char);
+
+IF
+CharacterUsedSkillOnTarget(_Attacker, (CHARACTERGUID)_Char, _, _, _)
+AND
+CharacterIsEnemy(_Char, _Attacker, 1)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
+THEN
+LLWEAPONEX_DualShields_DynamicCover(_Attacker, _Blocker, _Char);
 EXITSECTION
 
 ENDEXITSECTION

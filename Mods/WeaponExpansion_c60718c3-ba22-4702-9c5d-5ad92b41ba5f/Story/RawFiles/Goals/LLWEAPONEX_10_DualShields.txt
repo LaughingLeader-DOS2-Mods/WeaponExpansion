@@ -206,7 +206,7 @@ PROC
 LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 1)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:OnDualShieldsEquipped] Equipping combat shield stored in a dual shield.");
-DB_LLWEAPONEX_DualShield_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
 //CharacterEquipItem(_Player, _CombatShield);
 CharacterUseItem(_Player, _CombatShield, "LLWEAPONEX_DualShields_CombatShieldEquipped");
 
@@ -214,19 +214,19 @@ IF
 //ItemEquipped(_CombatShield, _Player)
 StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_DualShields_CombatShieldEquipped")
 AND
-DB_LLWEAPONEX_DualShield_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
 AND
 CharacterGetEquippedItem(_Player, "Weapon", _CombatShield)
 THEN
-NOT DB_LLWEAPONEX_DualShield_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
+NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_CombatShieldEquipped] Combat shield was equipped.");
 
 IF
 StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_DualShields_CombatShieldEquipped")
 AND
-DB_LLWEAPONEX_DualShield_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
 THEN
-NOT DB_LLWEAPONEX_DualShield_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
+NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_CombatShieldEquipped] Combat shield was not equipped.");
 //ItemToInventory(_CombatShield, _Player);
 ContainerIdentifyAll(_Shield);
@@ -235,9 +235,9 @@ CharacterEquipItem(_Player, _CombatShield);
 IF
 CharacterUsedItemFailed(_Player, _CombatShield)
 AND
-DB_LLWEAPONEX_DualShield_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
 THEN
-NOT DB_LLWEAPONEX_DualShield_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
+NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:CharacterUsedItemFailed] Failed to equip combat shield. Generating a new shield.");
 ItemDestroy(_CombatShield);
 LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, 0);
@@ -377,6 +377,61 @@ LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);
 */
 //END_REGION
 
+//REGION DYNAMIC_COVER
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_COVERED", (CHARACTERGUID)_Blocker)
+THEN
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_COVERED", _)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char);
+LLWEAPONEX_DualShields_OnCoveredRemoved(_Blocker, _Char);
+
+PROC
+LLWEAPONEX_DualShields_OnCoveredRemoved((CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
+AND
+NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _)
+THEN
+RemoveStatus(_Blocker, "LLWEAPONEX_COVERING");
+
+IF
+CharacterStatusRemoved(_Blocker, "LLWEAPONEX_COVERING", _)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char);
+LLWEAPONEX_DualShields_OnCoveredRemoved(_Blocker, _Char);
+
+PROC
+LLWEAPONEX_DualShields_OnCoveredRemoved((CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
+AND
+NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_, _Char)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_COVERING");
+
+PROC
+LLWEAPONEX_DualShields_DynamicCover((CHARACTERGUID)_Attacker, (CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
+AND
+GetPosition(_Blocker, _x, _y, _z)
+AND
+GetPosition(_Char, _tx, _ty, _tz)
+THEN
+CharacterSetDetached(_Blocker, 1);
+CharacterSetDetached(_Char, 1);
+ApplyStatus(_Char, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, _Blocker);
+TeleportToPosition(_Blocker, _tx, _ty, _tz, "LLWEAPONEX_AttachToGrid", 0, 1);
+TeleportToPosition(_Char, _x, _y, _z, "LLWEAPONEX_AttachToGrid", 0, 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AttachToGrid")
+THEN
+CharacterSetDetached(_Char, 0);
+//END_REGION
+
 //REGION IRON_MAIDEN
 IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_SHIELD_PRISON", _)
@@ -409,6 +464,7 @@ THEN
 RemoveStatus(_Target, "LLWEAPONEX_SHIELD_PRISON");
 ApplyStatus(_Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX", 3.0, 1, _Char);
 //END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

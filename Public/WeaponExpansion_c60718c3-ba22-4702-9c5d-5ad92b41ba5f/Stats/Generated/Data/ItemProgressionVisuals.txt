@@ -2196,3 +2196,15 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
 add levelgroup 0,0,"All"
 add rootgroup "3b11f892-f6ae-43c8-af73-bcdf5abf64ec",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "ee686596-394f-44ae-867b-4596de1feedb",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "59675259-8e78-48fd-acad-cf70c90bc909",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A","",""
