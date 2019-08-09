@@ -121,6 +121,101 @@ SkillCast(_Character, "Teleportation_LLWEAPONEX_InstantTransmission", _, _)
 THEN
 ObjectClearFlag(_Character, "LLWEAPONEX_BlockTeleportFalling");
 
+//REGION RALLY
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Banner_Rally_DivineOrder", _, _)
+THEN
+DB_LLWEAPONEX_Skills_Temp_RallyTarget(_Char, _x, _y, _z, "Target_LLWEAPONEX_Banner_Rally_DivineOrder", "LLWEAPONEX_Skill_Rally_Banner_DivineOrder_A_d5c842bf-8eb0-46cd-a928-e4f989f91010");
+
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Banner_Rally_Dwarves", _, _)
+THEN
+DB_LLWEAPONEX_Skills_Temp_RallyTarget(_Char, _x, _y, _z, "Target_LLWEAPONEX_Banner_Rally_Dwarves", "LLWEAPONEX_Skill_Rally_Banner_Dwarves_A_cfdf3976-4696-473d-8f4b-fd1461f8d708");
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Banner_Rally_DivineOrder", _, _)
+THEN
+LLWEAPONEX_Skills_Rally_CreateBanner(_Char, "Target_LLWEAPONEX_Banner_Rally_DivineOrder");
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Banner_Rally_Dwarves", _, _)
+THEN
+LLWEAPONEX_Skills_Rally_CreateBanner(_Char, "Target_LLWEAPONEX_Banner_Rally_Dwarves");
+
+PROC
+LLWEAPONEX_Skills_Rally_CreateBanner((CHARACTERGUID)_Char, (STRING)_Skill)
+AND
+DB_LLWEAPONEX_Skills_Temp_RallyTarget(_Char, _x, _y, _z, _Skill, _Template)
+AND
+CreateItemTemplateAtPosition(_Template, _x, _y, _z, _Banner)
+THEN
+NOT DB_LLWEAPONEX_Skills_Temp_RallyTarget(_Char, _x, _y, _z, _Skill, _Template);
+DB_LLWEAPONEX_Skills_Temp_RallyBanner(_Char, _Banner);
+
+PROC
+LLWEAPONEX_Skills_AddRallyTeleportToParty((CHARACTERGUID)_Char)
+AND
+CharacterIsPlayer(_Char, 1)
+AND
+DB_IsPlayer(_PartyMember)
+AND
+_Char != _PartyMember
+AND
+CharacterIsInPartyWith(_Char, _PartyMember, 1)
+THEN
+CharacterAddSkill(_PartyMember, "Shout_LLWEAPONEX_Banner_Rally_Teleport", 1);
+DB_LLWEAPONEX_Skills_Temp_RallyPartyMember(_Char, _PartyMember);
+
+IF
+SkillCast(_PartyMember, "Shout_LLWEAPONEX_Banner_Rally_Teleport", _, _)
+AND
+DB_LLWEAPONEX_Skills_Temp_RallyPartyMember(_Char, _PartyMember)
+AND
+DB_LLWEAPONEX_Skills_Temp_RallyBanner(_Char, _Banner)
+THEN
+NOT DB_LLWEAPONEX_Skills_Temp_RallyPartyMember(_Char, _PartyMember);
+CharacterRemoveSkill(_PartyMember, "Shout_LLWEAPONEX_Banner_Rally_Teleport");
+TeleportTo(_PartyMember, _Banner, "", 1, 0);
+CharacterCharacterSetEvent(_Char, _PartyMember, "LLWEAPONEX_Rally_PartyMemberTeleported");
+
+//Final member teleported.
+IF
+CharacterCharacterEvent(_Char, _PartyMember, "LLWEAPONEX_Rally_PartyMemberTeleported")
+AND
+NOT DB_LLWEAPONEX_Skills_Temp_RallyPartyMember(_Char, _)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER");
+
+IF
+CharacterCharacterEvent(_Char, _PartyMember, "LLWEAPONEX_Rally_PartyMemberTeleported")
+AND
+NOT DB_LLWEAPONEX_Skills_Temp_RallyPartyMember(_Char, _)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES");
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER", _)
+THEN
+LLWEAPONEX_Skills_OnRallyFinished(_Char);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES", _)
+THEN
+LLWEAPONEX_Skills_OnRallyFinished(_Char);
+
+PROC
+LLWEAPONEX_Skills_OnRallyFinished((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Skills_Temp_RallyBanner(_Char, _Banner)
+THEN
+NOT DB_LLWEAPONEX_Skills_Temp_RallyBanner(_Char, _Banner);
+ItemDestroy(_Banner);
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

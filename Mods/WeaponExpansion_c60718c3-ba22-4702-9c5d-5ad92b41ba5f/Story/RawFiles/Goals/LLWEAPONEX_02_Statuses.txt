@@ -639,6 +639,27 @@ CharacterStatusAttempt(_Target, "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_IMMOBILECHEC
 THEN
 CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_Greatbows_DelayedBarrage_CheckMovement");
 //END_REGION
+
+//REGION WAR_CHARGE_DAMAGE
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_WARCHARGE_BONUS", _Source)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST", 12.0, 0, _Source);
+
+IF
+AttackedByObject(_Defender, _, (CHARACTERGUID)_Char, _DamageType, "")
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST");
+
+IF
+AttackedByObject(_Defender, _, (CHARACTERGUID)_Char, _DamageType, "Attack")
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
