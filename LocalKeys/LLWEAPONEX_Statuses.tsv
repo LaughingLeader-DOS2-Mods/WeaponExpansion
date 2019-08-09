@@ -63,3 +63,12 @@ LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font col
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
 LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark
 LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.
+LLWEAPONEX_WARCHARGE_DisplayName	War Charge
+LLWEAPONEX_WARCHARGE_Description	Character is initiating a revolutionary war charge. Get'em!
+LLWEAPONEX_WARCHARGE_APPLY_DisplayName	War Charge
+LLWEAPONEX_WARCHARGE_BONUS_DisplayName	Charging (War Charge)
+LLWEAPONEX_WARCHARGE_BONUS_Description	Character is charging at their enemies. Get'em!
+LLWEAPONEX_WARCHARGE_DAMAGEBOOST_DisplayName	First Strike (War Charge)
+LLWEAPONEX_WARCHARGE_DAMAGEBOOST_Description	Character has a damage bonus for their first attack.
+LLWEAPONEX_BANNER_RALLY_DisplayName	Rallying
+LLWEAPONEX_BANNER_RALLY_Description	Character is rallying the party to battle.

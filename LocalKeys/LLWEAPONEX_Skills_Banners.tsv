@@ -1,0 +1,7 @@
+Key	Content
+Target_LLWEAPONEX_Banner_Rally_DisplayName	<font color='#FEFFB3'>Rally</font>
+Target_LLWEAPONEX_Banner_Rally_Description	Rally the party at the target location.<br><font color='#00FFDD'>Party members are granted a one-time use skill that teleports them to the raised banner.</font>
+Target_LLWEAPONEX_Banner_Rally_DivineOrder_DisplayName	<font color='#FEFFB3'>Rally of the Order</font>
+Target_LLWEAPONEX_Banner_Rally_DivineOrder_Description	Rally the party at the target location.<br><font color='#00FFDD'>Party members are granted a one-time use skill that teleports them to the raised banner.</font><br><font color='#99FFFF'>The banner inspires faith in the Divine, granting a small boost to attributes.</font>
+Target_LLWEAPONEX_Banner_Rally_Dwarves_DisplayName	<font color='#FF5522'>Rally of the Pack</font>
+Target_LLWEAPONEX_Banner_Rally_Dwarves_Description	Rally the party at the target location.<br><font color='#00FFDD'>Party members are granted a one-time use skill that teleports them to the raised banner.</font><br><font color='#FF7733'>The banner unleashes the hunger of the pack, granting [1]% lifesteal.</font>
