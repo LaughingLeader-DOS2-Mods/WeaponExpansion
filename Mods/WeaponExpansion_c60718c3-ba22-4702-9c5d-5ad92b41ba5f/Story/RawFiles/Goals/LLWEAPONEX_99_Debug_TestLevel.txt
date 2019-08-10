@@ -1196,6 +1196,30 @@ AND
 CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Item)
 THEN
 ItemLockUnEquip(_Item, 0);
+
+IF
+TextEventSet("llweap_purgetest")
+AND
+CharacterGetHostCharacter(_Char)
+THEN
+CharacterUseSkill(_Char, "Shout_InspireStart", _Char, 0, 1, 1);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Debug_PurgeQueue", 250);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Debug_PurgeQueue")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:llweap_purgetest] Purged queue");
+CharacterPurgeQueue(_Char);
+//PlayAnimation(_Char, "noprepare");
+//PlayAnimation(_Char, "");
+
+/*
+IF
+CharacterUsedSkill(_Char, _, _, _)
+THEN
+CharacterStatusText(_Char, "Set Reaction");
+CharacterSetReactionPriority(_Char, "LLWEAPONEX_Interrupt", 999999);
+*/
 EXITSECTION
 
 ENDEXITSECTION
