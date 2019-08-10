@@ -501,3 +501,8 @@ data "Unique" "1"
 data "Skills" "Target_LLWEAPONEX_ArmCannon_AbsorbSurface
 data "ItemColor" "LLWEAPONEX_ArmCannon_A"
 
+new entry "ARM_LLWEAPONEX_Katana_2H_B_Sheathe"
+type "Armor"
+using "_Overhead"
+data "Act part" "1"
+data "ItemGroup" "ARM_LLWEAPONEX_Katana_2H_B_Sheathe"

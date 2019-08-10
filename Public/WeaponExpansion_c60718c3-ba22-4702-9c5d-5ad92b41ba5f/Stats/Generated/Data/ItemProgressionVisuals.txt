@@ -956,6 +956,18 @@ add levelgroup 0,0,"All"
 add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
 add namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted","",""
 
+new itemgroup "WPN_LLWEAPONEX_Katana_2H_B"
+
+add levelgroup 0,0,"All"
+add rootgroup "a08befdd-f111-45ed-9e1d-81d0fcf64a97",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted","",""
+
+new itemgroup "ARM_LLWEAPONEX_Katana_2H_B_Sheathe"
+
+add levelgroup 0,0,"All"
+add rootgroup "a08befdd-f111-45ed-9e1d-81d0fcf64a97",""
+add namegroup "EMPTY","",""
+
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
 
 add levelgroup 0,0,"All"
