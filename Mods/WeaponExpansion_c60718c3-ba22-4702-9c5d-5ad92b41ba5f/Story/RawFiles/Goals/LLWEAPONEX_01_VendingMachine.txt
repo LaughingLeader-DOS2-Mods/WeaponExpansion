@@ -99,9 +99,18 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69");
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08");
+
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee");
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,9,0)
+THEN
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee");
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND
