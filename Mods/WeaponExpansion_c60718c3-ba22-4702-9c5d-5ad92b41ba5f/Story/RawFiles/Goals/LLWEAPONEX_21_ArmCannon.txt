@@ -194,21 +194,21 @@ NOT DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon);
 //END_REGION
 
 //REGION ARM_CANNON_BLOCK_SHIELD_WEAPON
-/*
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Char, (ITEMGUID)_Weapon)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 AND
-NOT GetTemplate(_Weapon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
-AND
 ItemIsEquipable(_Weapon, 1)
+AND
+NOT DB_GlobalFlag("WeaponExpansion_Settings_NoArmCannonRestrictions")
+AND
+NOT GetTemplate(_Weapon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
 AND
 LLWEAPONEX_QRY_ItemIsWeapon(_Weapon)
 THEN
 DB_CustomUseItemResponse(_Char, _Weapon, 0);
 ShowNotification(_Char, "LLWEAPONEX_Notifications_ArmCannonShieldBlocked");
-*/
 //END_REGION
 
 //REGION ARM_CANNON_MECHANICS
