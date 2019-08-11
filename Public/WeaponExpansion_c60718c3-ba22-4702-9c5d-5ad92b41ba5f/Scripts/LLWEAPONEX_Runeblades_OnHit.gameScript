@@ -24,24 +24,6 @@ INIT
 	INT:%LLWEAPONEX_Runeblade_Venom_MaxStacks = 4
 EVENTS
 
-EVENT LLWEAPONEX_Runeblade_OnHit_Start
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_RUNEBLADE_APPLY_STATUS)
-ACTIONS
-IF "c1&!c2&c3&!c4&!c5"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_RUNEBLADE_APPLY_STATUS, _Source)
-	IsEqual(_Source, null)
-	HasFlag(_Source, "LLWEAPONEX_Runeblade_RuneActive")
-	CharacterIsDead(_Source)
-	CharacterIsDead(_Target)
-THEN
-	//CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Commands_Runeblade_StartRandom")
-	CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_ApplyBonusOnHit")
-ENDIF
-
 //Bonuses not determined by chance
 EVENT LLWEAPONEX_Runeblade_OnHit_ApplyBonuses
 VARS
@@ -49,7 +31,7 @@ VARS
 	CHARACTER:_Source
 	INT:_IntVar
 ON
-	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_ApplyBonusOnHit")
+	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Runeblade_ApplyBonusOnHit")
 ACTIONS
 IF "c1"
 	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_FIRE)
@@ -215,216 +197,215 @@ VARS
 	INT:_CellMax
 	INT:_GrowMin
 	INT:_GrowMax
+	INT:_SkipNext
 ON
 	//OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_RandomSet")
-	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_ApplyBonusOnHit")
+	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Runeblade_ApplyBonusOnHit")
 ACTIONS
+	Set(_SkipNext, 0)
 IF "c1|c2"
 	CharacterIsDead(_Source)
 	CharacterIsDead(_Target)
 THEN
+	Set(_SkipNext, 1)
 	Goto("End")
 ENDIF
 
-GetRandomBetween(_Ran, 0, 999)
-
-/*
-Print(_Msg, "Roll: [1]", _Ran)
-Cast(_MsgF, _Msg)
-DisplayCombatInfoText(_Source, _MsgF, 2)
-*/
-
-// Skip checks
-GotoIfEqual(_Ran, 0, "End")
-
-IF "c1&c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Blood_Chance)
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, 1, 0, _Source)
-ENDIF
-
-IF "c1&c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Lava_Chance)
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_LAVA_EXPLODE, 0, 0, _Source)
-ENDIF
-
-IF "c1&c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Searing_Chance)
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_WATER_BURN, 2, 0, _Source)
-ENDIF
-
-IF "c1&c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Avalanche_Chance)
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOW, 1, 0, _Source)
-ENDIF
-
-IF "c1&c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Earth_Chance)
-THEN
-	CharacterApplyStatus(_Target, SLOWED, 1, 0, _Source)
-ENDIF
-
-IF "c1&c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Quake_Chance)
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, 1, 0, _Source)
-ENDIF
-
-IF "c1&!c2&c3"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
-	CharacterHasStatus(_Source, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Dust_Chance)
-THEN
-	ShootLocalConeAt(Cone_LLWEAPONEX_Runeblade_DustBlast, _Source, null, _Target, -1, _Source)
-	CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN, 1, 0, _Source)
-	CharacterPlayEffect(_Source, "LLWEAPONEX_FX_Skills_Runeblade_DustBlast_Cast_01", "")
-ENDIF
-
-IF "c1&!c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT)
-	CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN)
-THEN
-	IF "c1&c2"
-		CharacterHasStatus(_Target, WET)
-		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet)
-	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE, 0, 0, _Source)
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN, 1, 0, _Source)
-	ELIF "!c1&c2"
-		CharacterHasStatus(_Target, WET)
-		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Thunderbolt_Chance)
-	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE, 0, 0, _Source)
-		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN, 1, 0, _Source)
-	ENDIF
-ENDIF
-
-IF "c1&c2"
-	CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
-	IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Explosion_Chance)
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_EXPLODE, 0, 0, _Source)
-ENDIF
-
-//Enemy-only effects
-IF "c1"
-	CharacterIsEnemy(_Target, _Source)
-THEN
-	IF "c1&c2"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR)
-		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Tar_Chance)
-	THEN
-		CharacterApplyStatus(_Target, LLWEAPONEX_TARRED, 2, 0, _Source)
-	ENDIF
-
-	IF "c1&c2"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
-		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodDisease_Chance)
-	THEN
-		CharacterApplyStatus(_Target, INFECTIOUS_DISEASED, 1, 0, _Source)
-	ENDIF
-ENDIF	
-
-//Prevent double procs when dual-wielding
 IF "!c1"
-	CharacterHasStatus(_Target, LLWEAPONEX_PREVENT_DOUBLE_HITS)
+	IsEqual(_SkipNext, 1)
 THEN
-	IF "c1&!c2"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
-		CharacterHasStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
+	GetRandomBetween(_Ran, 0, 999)
+	// Skip checks
+	GotoIfEqual(_Ran, 0, "End")
+
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Blood_Chance)
 	THEN
-		IF "c1&c2"
-			CharacterHasStatus(_Target, WET)
-			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Air_Chance_Wet)
-		THEN
-			CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
-			CharacterApplyStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE, 3, 0, _Target)
-		ELIF "!c1&c2"
-			CharacterHasStatus(_Target, WET)
-			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Air_Chance)
-		THEN
-			CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
-			CharacterApplyStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE, 3, 0, _Target)
-		ENDIF
+		CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_BLEEDING_CHECK, 1, 0, _Source)
+	ENDIF
+
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Lava_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_LAVA_EXPLODE, 0, 0, _Source)
+	ENDIF
+
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Searing_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_WATER_BURN, 2, 0, _Source)
+	ENDIF
+
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Avalanche_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_AVALANCHE_SNOW, 1, 0, _Source)
+	ENDIF
+
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Earth_Chance)
+	THEN
+		CharacterApplyStatus(_Target, SLOWED, 1, 0, _Source)
+	ENDIF
+
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_QUAKE)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Quake_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK, 1, 0, _Source)
 	ENDIF
 
 	IF "c1&!c2&c3"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS)
-		CharacterHasStatus(_Source, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN)
-		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Gas_Chance)
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST)
+		CharacterHasStatus(_Source, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Dust_Chance)
+	THEN
+		ShootLocalConeAt(Cone_LLWEAPONEX_Runeblade_DustBlast, _Source, null, _Target, -1, _Source)
+		CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_DUST_COOLDOWN, 1, 0, _Source)
+		CharacterPlayEffect(_Source, "LLWEAPONEX_FX_Skills_Runeblade_DustBlast_Cast_01", "")
+	ENDIF
+
+	IF "c1&!c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT)
+		CharacterHasStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN)
 	THEN
 		IF "c1&c2"
-			GetSurfaceCloudAt(_Target, _Surface)
-			IsEqual(_Surface, SurfacePoisonCloud)
+			CharacterHasStatus(_Target, WET)
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Thunderbolt_Chance_Wet)
 		THEN
-			StatusText(_Target, "<font color='#f7ba14'>Gas Expansion</font>")
-			Set(_IntVar, 2)
-		ELSE
-			StatusText(_Target, "<font color='#65c900'>Gas Creation</font>")
-			Set(_IntVar, 1)
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE, 0, 0, _Source)
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN, 1, 0, _Source)
+		ELIF "!c1&c2"
+			CharacterHasStatus(_Target, WET)
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Thunderbolt_Chance)
+		THEN
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE, 0, 0, _Source)
+			CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN, 1, 0, _Source)
+		ENDIF
+	ENDIF
+
+	IF "c1&c2"
+		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE)
+		IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Explosion_Chance)
+	THEN
+		CharacterApplyStatus(_Target, LLWEAPONEX_RUNEBLADE_EXPLODE, 0, 0, _Source)
+	ENDIF
+
+	//Enemy-only effects
+	IF "c1"
+		CharacterIsEnemy(_Target, _Source)
+	THEN
+		IF "c1&c2"
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR)
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Tar_Chance)
+		THEN
+			CharacterApplyStatus(_Target, LLWEAPONEX_TARRED, 2, 0, _Source)
+		ENDIF
+
+		IF "c1&c2"
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON)
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodDisease_Chance)
+		THEN
+			CharacterApplyStatus(_Target, INFECTIOUS_DISEASED, 1, 0, _Source)
+		ENDIF
+	ENDIF	
+
+	//Prevent double procs when dual-wielding
+	IF "!c1"
+		CharacterHasStatus(_Target, LLWEAPONEX_PREVENT_DOUBLE_HITS)
+	THEN
+		IF "c1&!c2"
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_AIR)
+			CharacterHasStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
+		THEN
+			IF "c1&c2"
+				CharacterHasStatus(_Target, WET)
+				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Air_Chance_Wet)
+			THEN
+				CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
+				CharacterApplyStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE, 3, 0, _Target)
+			ELIF "!c1&c2"
+				CharacterHasStatus(_Target, WET)
+				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Air_Chance)
+			THEN
+				CharacterApplyStatus(_Target, SHOCKED, 1, 0, _Source)
+				CharacterApplyStatus(_Target, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE, 3, 0, _Target)
+			ENDIF
+		ENDIF
+
+		IF "c1&!c2&c3"
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS)
+			CharacterHasStatus(_Source, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN)
+			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Gas_Chance)
+		THEN
+			IF "c1&c2"
+				GetSurfaceCloudAt(_Target, _Surface)
+				IsEqual(_Surface, SurfacePoisonCloud)
+			THEN
+				StatusText(_Target, "<font color='#f7ba14'>Gas Expansion</font>")
+				Set(_IntVar, 2)
+			ELSE
+				StatusText(_Target, "<font color='#65c900'>Gas Creation</font>")
+				Set(_IntVar, 1)
+			ENDIF
+			
+			Set(_CellMin, 20)
+			Set(_CellMax, 35)
+			Set(_GrowMin, 2)
+			Set(_GrowMax, 5)
+			Multiply(_CellMax, _IntVar)
+			Multiply(_GrowMax, _IntVar)
+
+			CreatePuddleAt(_Target, SurfacePoisonCloud, _CellMin, _CellMax, _GrowMin, _GrowMax, 0.01, 3)
+			CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN, 1, 0, _Source)
+			CharacterPlayEffect(_Target, "RS3_FX_Skills_Earth_Cast_Target_Air_Hand_01", "Dummy_BodyFX")
+			//PlaySound(_Target, "Skill_Earth_Cast_Target_Air_Poison")
 		ENDIF
 		
-		Set(_CellMin, 20)
-		Set(_CellMax, 35)
-		Set(_GrowMin, 2)
-		Set(_GrowMax, 5)
-		Multiply(_CellMax, _IntVar)
-		Multiply(_GrowMax, _IntVar)
-
-		CreatePuddleAt(_Target, SurfacePoisonCloud, _CellMin, _CellMax, _GrowMin, _GrowMax, 0.01, 3)
-		CharacterApplyStatus(_Source, LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN, 1, 0, _Source)
-		CharacterPlayEffect(_Target, "RS3_FX_Skills_Earth_Cast_Target_Air_Hand_01", "Dummy_BodyFX")
-		//PlaySound(_Target, "Skill_Earth_Cast_Target_Air_Poison")
-	ENDIF
-	
-	IF "c1"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE)
-	THEN
 		IF "c1"
-			CharacterHasStatus(_Target, CHILLED)
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_ICE)
 		THEN
 			IF "c1"
-				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Ice_Chance)
+				CharacterHasStatus(_Target, CHILLED)
 			THEN
-				CharacterApplyStatus(_Target, FROZEN, 1, 0, _Source)
+				IF "c1"
+					IsLessThen(_Ran, %LLWEAPONEX_Runeblade_Ice_Chance)
+				THEN
+					CharacterApplyStatus(_Target, FROZEN, 1, 0, _Source)
+				ENDIF
+			ELSE
+				CharacterApplyStatus(_Target, CHILLED, 1, 0, _Source)
 			ENDIF
-		ELSE
-			CharacterApplyStatus(_Target, CHILLED, 1, 0, _Source)
 		ENDIF
-	ENDIF
-	
-	IF "c1"
-		CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
-	THEN
-		IF "c1|c2|c3"
-			IsTagged(_Target, "UNDEAD")
-			IsTagged(_Target, "UNDEAD_BEAST")
-			CharacterHasTalent(_Target, Zombie)
+		
+		IF "c1"
+			CharacterHasStatus(_Source, LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH)
 		THEN
-			CharacterApplyStatus(_Target, LLWEAPONEX_UNDEAD_BONUS_DAMAGE, 0, 0, _Source)
-			IF "c1"
-				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead)
+			IF "c1|c2|c3"
+				IsTagged(_Target, "UNDEAD")
+				IsTagged(_Target, "UNDEAD_BEAST")
+				CharacterHasTalent(_Target, Zombie)
+			THEN
+				CharacterApplyStatus(_Target, LLWEAPONEX_UNDEAD_BONUS_DAMAGE, 0, 0, _Source)
+				IF "c1"
+					IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodEarth_Chance_Undead)
+				THEN
+					CharacterApplyStatus(_Target, ENTANGLED, 1, 0, _Source)
+				ENDIF
+			ELIF "c1"
+				IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodEarth_Chance)
 			THEN
 				CharacterApplyStatus(_Target, ENTANGLED, 1, 0, _Source)
 			ENDIF
-		ELIF "c1"
-			IsLessThen(_Ran, %LLWEAPONEX_Runeblade_BloodEarth_Chance)
-		THEN
-			CharacterApplyStatus(_Target, ENTANGLED, 1, 0, _Source)
 		ENDIF
+
+		//Removed after 500ms
+		CharacterApplyStatus(_Target, LLWEAPONEX_PREVENT_DOUBLE_HITS, 1, 0, _Source)
 	ENDIF
-
-	//Removed after 500ms
-	CharacterApplyStatus(_Target, LLWEAPONEX_PREVENT_DOUBLE_HITS, 1, 0, _Source)
 ENDIF
-
 //Label("LLWEAPONEX_Runeblade_CriticalFailure")

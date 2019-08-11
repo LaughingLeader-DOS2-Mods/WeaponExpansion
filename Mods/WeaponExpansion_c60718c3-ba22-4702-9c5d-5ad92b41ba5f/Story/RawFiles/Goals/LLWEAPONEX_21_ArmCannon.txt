@@ -51,6 +51,15 @@ LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
 LeaderLib_Statuses_ApplyPermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", 1);
 
 PROC
+LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
+AND
+_Energy <= 0
+THEN
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
+LeaderLib_Statuses_RemovePermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED");
+
+PROC
 LLWEAPONEX_ArmCannon_OnUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 THEN
 CharacterRemoveSkill(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse");
@@ -238,25 +247,11 @@ ObjectClearFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
 
 PROC
 LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:OnVariableChanged] LLWEAPONEX_ArmCannon_Energy set to ",_LastValue, " => ",_NextValue, "");
-
-PROC
-LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
-AND
-_NextValue > 0
-AND
-DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
-THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
-
-PROC
-LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 3)
-AND
-DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
-THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
-ApplyStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", -1.0, 0, _Char);
+LLWEAPONEX_ArmCannon_SetEnergyTags(_Char, _ArmCannon, _NextValue);
 
 IF
 SkillCast(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", _, _)
@@ -264,15 +259,6 @@ AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 LeaderLib_Helper_SetVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
-
-PROC
-LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 0)
-AND
-DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
-THEN
-LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
-LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
-RemoveStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED");
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_ArmCannon_AbsorbSurface", _, _)

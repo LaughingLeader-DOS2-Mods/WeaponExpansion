@@ -1082,6 +1082,16 @@ ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
 LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target);
 
+//ArmCannon == Runic Cannon, a.k.a. rune weapon with fleeting ranged advantages
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Player)
+AND
+DB_IsPlayer(_Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target);
+
 PROC
 LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries((CHARACTERGUID)_Player, (INTEGER)_Gain)
 THEN

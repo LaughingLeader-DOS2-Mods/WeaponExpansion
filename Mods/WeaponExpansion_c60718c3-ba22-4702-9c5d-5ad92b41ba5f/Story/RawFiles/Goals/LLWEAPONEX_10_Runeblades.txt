@@ -490,6 +490,36 @@ THEN
 NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
 //END_REGION
 
+//REGION ON_HIT
+QRY
+LLWEAPONEX_Runeblades_QRY_CanApplyOnHit((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+AND
+ObjectGetFlag(_Source, "LLWEAPONEX_Runeblade_RuneActive", 1)
+AND
+CharacterIsDead(_Source, 0)
+AND
+CharacterIsDead(_Target, 0)
+THEN
+DB_NOOP(1);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", _Source)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Source, 1)
+AND
+LLWEAPONEX_Runeblades_QRY_CanApplyOnHit(_Source, _Char)
+THEN
+CharacterCharacterSetEvent(_Source, _Char, "LLWEAPONEX_Runeblade_ApplyBonusOnHit");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ARMCANNON_HIT", _Source)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Source, 1)
+AND
+LLWEAPONEX_Runeblades_QRY_CanApplyOnHit(_Source, _Char)
+THEN
+CharacterCharacterSetEvent(_Source, _Char, "LLWEAPONEX_Runeblade_ApplyBonusOnHit");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
