@@ -226,7 +226,7 @@ data "BonusWeapon" "Status_LLWEAPONEX_Runeblade_Death"
 new entry "Status_LLWEAPONEX_Runeblade_Death"
 type "Weapon"
 using "Status_LLWEAPONEX_Runeblade_Base"
-data "Damage Type" "Chaos"
+data "Damage Type" "Shadow"
 
 new entry "LLWEAPONEX_RUNEBLADE_ADDSKILL_AIR"
 type "StatusData"

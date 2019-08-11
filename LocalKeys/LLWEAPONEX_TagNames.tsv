@@ -5,7 +5,8 @@ LLWEAPONEX_HandCrossbow_Equipped	a Hand Crossbow
 LLWEAPONEX_AnyWeaponEquipped	an Equipped Weapon
 LLWEAPONEX_HandCrossbow_HasAmmo	Crossbow Bolts
 LLWEAPONEX_HandCrossbow_CanReload	Missing Charges & Inserted Bolts
-LLWEAPONEX_ArmCannon_FullyCharged	Runic Canon (Fully Charged)
+LLWEAPONEX_ArmCannon_FullyCharged	Runic Cannon (Fully Charged)
+LLWEAPONEX_ArmCannon_EnergyAvailable	Runic Cannon Energy
 LLWEAPONEX_DualShields_Mastery1	Dual Shields Mastery I
 LLWEAPONEX_DualShields_Mastery2	Dual Shields Mastery II
 LLWEAPONEX_DualShields_Mastery3	Dual Shields Mastery III

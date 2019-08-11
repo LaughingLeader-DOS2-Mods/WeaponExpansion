@@ -469,7 +469,7 @@ data "Damage Multiplier" "65"
 data "Damage Range" "10"
 data "AreaRadius" "2"
 data "SkillProperties" "Ignite"
-data "TargetConditions" "Character;Enemy|(NonSelf&!Enemy&Tagged:LeaderLib_FriendlyFireEnabled)"
+data "TargetConditions" "NonSelf;Item|(Character&(!Ally|Tagged:LeaderLib_FriendlyFireEnabled));!Dead"
 
 new entry "Projectile_LLWEAPONEX_Throw_Rock_Kevin_Nails"
 type "SkillData"

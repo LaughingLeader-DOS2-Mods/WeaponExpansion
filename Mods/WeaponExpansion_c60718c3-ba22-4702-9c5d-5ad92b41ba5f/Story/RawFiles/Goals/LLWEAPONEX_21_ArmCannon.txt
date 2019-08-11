@@ -212,6 +212,17 @@ ShowNotification(_Char, "LLWEAPONEX_Notifications_ArmCannonShieldBlocked");
 //END_REGION
 
 //REGION ARM_CANNON_MECHANICS
+PROC
+LLWEAPONEX_ArmCannon_BlockNextEnergyGain((CHARACTERGUID)_Char, (INTEGER)_Delay)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
+LeaderLib_Timers_StartObjectTimer(_Char, 750, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy", "LLWEAPONEX_ArmCannon_ClearBlockEnergy");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_ArmCannon_ClearBlockEnergy")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
+
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Char)
 AND
@@ -237,13 +248,7 @@ CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
 AND
 LLWEAPONEX_QRY_ItemIsWeapon(_Item)
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
-ProcObjectTimer(_Char, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy", 750);
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy")
-THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
+LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 
 PROC
 LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
@@ -261,13 +266,16 @@ AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", -1, 0);
+LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 
 IF
 SkillCast(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", _, _)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
+LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 LeaderLib_Helper_SetVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
+SetStoryEvent(_Char, "LLWEAPONEX_ArmCannon_Disperse_Explode");
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_ArmCannon_AbsorbSurface", _, _)

@@ -503,7 +503,7 @@ THEN
 DB_NOOP(1);
 
 IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", _Source)
+CharacterStatusAttempt(_Char, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", _Source)
 AND
 ObjectIsCharacter((CHARACTERGUID)_Source, 1)
 AND
@@ -512,7 +512,7 @@ THEN
 CharacterCharacterSetEvent(_Source, _Char, "LLWEAPONEX_Runeblade_ApplyBonusOnHit");
 
 IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_ARMCANNON_HIT", _Source)
+CharacterStatusAttempt(_Char, "LLWEAPONEX_ARMCANNON_HIT", _Source)
 AND
 ObjectIsCharacter((CHARACTERGUID)_Source, 1)
 AND

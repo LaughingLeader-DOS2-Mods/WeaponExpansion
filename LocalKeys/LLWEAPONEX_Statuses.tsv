@@ -73,3 +73,6 @@ LLWEAPONEX_WARCHARGE_DAMAGEBOOST_Description	Character has a damage bonus for th
 LLWEAPONEX_BANNER_RALLY_DisplayName	Rallying
 LLWEAPONEX_BANNER_RALLY_Description	Character is rallying the party to battle.
 LLWEAPONEX_RANDOM_AILMENT_DisplayName	Random Elemental Ailment
+LLWEAPONEX_ARMCANNON_CHARGED_DisplayName	Charged (Runic Cannon)
+LLWEAPONEX_ARMCANNON_CHARGED_Description	The <font color='#c5a65a'>Runic Cannon</font> is charged and ready to disperse stored energy."
+LLWEAPONEX_ARMCANNON_RANGED_HIT_DisplayName	Deals piercing damage to broken magic shields

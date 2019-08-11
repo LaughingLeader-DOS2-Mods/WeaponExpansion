@@ -11,6 +11,7 @@ VARS
 	INT:_Size
 	INT:_Index
 	INT:_RemoveSurface
+	INT:_Success
 	FLOAT:_Radius
 	FLOAT3:_Target
 ON
@@ -144,6 +145,7 @@ IF "c1"
 THEN
 	CharacterApplyStatus(_Character, LLWEAPONEX_ACTIVATE_RUNEBLADE_DEATH, 4, 1, _Character)
 	SetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface")
+	Set(_Success, 1)
 ENDIF
 
 IF "c1&c2"
@@ -164,8 +166,10 @@ THEN
 	IF "!c1"
 		HasFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface")
 	THEN
-		CreateSurfaceAt(_Character, SurfaceNone, _Radius, 0, _Character)
+		CreateSurfaceAt(_Target, SurfaceNone, _Radius, 0, _Character)
 	ENDIF
-ELSE
+ELIF "!c1"
+	IsEqual(_Success, 1)
+THEN
 	StatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune")
 ENDIF
