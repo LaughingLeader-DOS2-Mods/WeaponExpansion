@@ -1760,6 +1760,12 @@ add levelgroup 0,0,"All"
 add rootgroup "ad15f666-285d-4634-a832-ea643fa0a9d2",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A","",""
 
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "0b765f8b-113a-408d-afa1-81695e34a19f",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A","",""
+
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
 
 add levelgroup 0,0,"All"

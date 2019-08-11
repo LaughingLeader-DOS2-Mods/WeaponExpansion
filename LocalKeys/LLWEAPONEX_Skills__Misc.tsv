@@ -20,4 +20,10 @@ Target_LLWEAPONEX_Zombify_DisplayName	Zombify
 Target_LLWEAPONEX_Zombify_Description	Temporarily zombify an ally, granting them <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
 Shout_LLWEAPONEX_Bokken_ChangeStance_DisplayName	<font color='#00EE29'>Change Stance</font>
-Shout_LLWEAPONEX_Bokken_ChangeStance_Description	Swap between two-handed and single-handed styles with the <font color='#c5a65a'>Pacifist's Wrath</font>.<br><font color='#DDDD00'>Changing to a two-handed stance will unequip any offhand item.</font>
+Shout_LLWEAPONEX_Bokken_ChangeStance_Description	Swap between two-handed and single-handed styles with the <font color='#c5a
+Zone_LLWEAPONEX_ArmCannon_Disperse_DisplayName	<font color='#03fcdb'>Runic Dispersal</font>
+Zone_LLWEAPONEX_ArmCannon_Disperse_Description	Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.<br><font color='#00EECC">At the end of the beam, the energy explodes in a [2]m radius, dealing [3] and applying any active rune effects.</font><br>Depletes the energy in the <font color='#c5a65a'>Runic Cannon</font>.
+Target_LLWEAPONEX_ArmCannon_AbsorbSurface_DisplayName	Absorb Surface
+Target_LLWEAPONEX_ArmCannon_AbsorbSurface_Description	"Use the <font color='#c5a65a'>Runic Cannon</font> to <font color='#ffab00'>absorb the element of a target surface</font>.<br>The <font color='#c5a65a'>Runic Cannon</font> then activates an associated rune, granting various bonuses.
+Projectile_LLWEAPONEX_ArmCannon_Shoot_DisplayName	<font color='#03fcdb'>Fire Runic Energy</font>
+Projectile_LLWEAPONEX_ArmCannon_Shoot_Description	Fire a concentrated mass of energy at a target, dealing [1] in a [2]m radius.<br><font color='#00EECC">Applies any active rune effects.</font><br>Depletes the energy in the <font color='#c5a65a'>Runic Cannon</font>.

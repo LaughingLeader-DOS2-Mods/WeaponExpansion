@@ -36,6 +36,34 @@ THEN
 	//CharacterEvent(_Player, "LeaderLog_Commands_Log")
 ENDIF
 
+EVENT LLWEAPONEX_ArmCannon_Disperse_Explode
+VARS
+	CHARACTER:_Player
+	FLOAT3:_Target
+	FLOAT3:_Pos
+	FLOAT:_LevelF
+	INT:_Level
+	STRING:_Str
+ON
+	OnCharacterEvent(_Player, "LLWEAPONEX_ArmCannon_Disperse_Explode")
+ACTIONS
+IF "c1"
+	CharacterGetStat(_LevelF, _Player, Level)
+THEN
+	Cast(_Level, _LevelF)
+ELSE
+	Set(_Level, 1)
+ENDIF
+	GetForwardDirection(_Player, _Target)
+IF "c1&!c2"
+	GetPosition(_Player, _Pos)
+	IsEqual(_Target, null)
+THEN
+	Multiply(_Target, FLOAT:11.5) // 11m range on skill, explosion needs to be at end
+	Add(_Target, _Pos)
+	ExplodeAt(_Target, Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion, _Level, _Player)
+ENDIF
+
 EVENT LLWEAPONEX_Rapiers_FlickerStrike_Damage
 VARS
 	CHARACTER:_Source

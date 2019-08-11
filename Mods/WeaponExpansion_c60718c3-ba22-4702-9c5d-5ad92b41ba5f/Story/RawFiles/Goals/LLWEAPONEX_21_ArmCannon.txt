@@ -1,0 +1,292 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LeaderLib_Statuses_Register_PermanentStatus("WeaponExpansion", "ArmCannon", "LLWEAPONEX_ARMCANNON_CHARGED", "LLWEAPONEX_ArmCannon_FullyCharged");
+
+KBSECTION
+
+//REGION EQUIP_EVENTS
+IF
+ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee", _Char)
+AND
+CharacterGetEquippedItem(_Char, "Gloves", (ITEMGUID)_ArmCannon)
+THEN
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon);
+LLWEAPONEX_ArmCannon_OnEquipped(_Char, _ArmCannon);
+
+IF
+ItemTemplateUnEquipped("EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee", _Char)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+LLWEAPONEX_ArmCannon_OnUnequipped(_Char, _ArmCannon);
+NOT DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon);
+
+PROC
+LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+THEN
+CharacterAddSkill(_Char, "Projectile_LLWEAPONEX_ArmCannon_Shoot", 1);
+CharacterAddSkill(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", 1);
+
+PROC
+LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+GetVarInteger(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", _Energy)
+THEN
+LLWEAPONEX_ArmCannon_SetEnergyTags(_Char, _ArmCannon, _Energy);
+
+PROC
+LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
+AND
+_Energy > 0
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
+
+PROC
+LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
+AND
+_Energy >= 3
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+LeaderLib_Statuses_ApplyPermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", 1);
+
+PROC
+LLWEAPONEX_ArmCannon_OnUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+THEN
+CharacterRemoveSkill(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse");
+CharacterRemoveSkill(_Char, "Projectile_LLWEAPONEX_ArmCannon_Shoot");
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
+LeaderLib_Statuses_RemovePermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED");
+
+PROC
+LLWEAPONEX_ArmCannon_OnUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+GetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", (ITEMGUID)_ArmCannonWeapon)
+THEN
+ItemLockUnEquip(_ArmCannonWeapon, 0);
+CharacterUnequipItem(_Char, _ArmCannonWeapon);
+ItemToInventory(_ArmCannonWeapon, _ArmCannon, 1, 0, 0);
+//END_REGION
+
+//REGION ARM_CANNON_WEAPON
+PROC
+LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+AND
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Item)
+AND
+GetTemplate(_Item, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
+THEN
+SetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", _Item);
+
+PROC
+LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+THEN
+LLWEAPONEX_Uniques_ArmCannon_EquipWeapon(_Char, _ArmCannon);
+
+PROC
+LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon] No arm cannon weapon found. Iterating.");
+//InventoryLaunchTemplateIterator(_ArmCannon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec", "LLWEAPONEX_Iterator_ArmCannonWeaponFound", "");
+InventoryLaunchIterator(_ArmCannon, "LLWEAPONEX_Iterator_ArmCannonWeaponFound", "");
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _ArmCannon, 250, "LLWEAPONEX_Timers_ArmCannonIteratorDone", "LLWEAPONEX_ArmCannonIteratorDone");
+
+IF
+StoryEvent((ITEMGUID)_ArmCannonWeapon, "LLWEAPONEX_Iterator_ArmCannonWeaponFound")
+AND
+GetTemplate(_ArmCannonWeapon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Found the arm cannon weapon inside the arm cannon glove. Setting var and equipping.");
+SetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", _ArmCannonWeapon);
+
+IF
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Iterator_ArmCannonWeaponFound")
+AND
+String(_Item, _Str)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Found [",_Str,"] in arm cannon.");
+
+IF
+CharacterItemEvent(_Char, _ArmCannon, "LLWEAPONEX_ArmCannonIteratorDone")
+AND
+LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Var was set. Equipping.");
+LLWEAPONEX_Uniques_ArmCannon_EquipWeapon(_Char, _ArmCannon);
+
+IF
+CharacterItemEvent(_Char, _ArmCannon, "LLWEAPONEX_ArmCannonIteratorDone")
+AND
+NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+AND
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec", _x, _y, _z, _ArmCannonWeapon)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Var was not set. Created a new arm cannon weapon. Equipping.");
+SetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", _ArmCannonWeapon);
+LLWEAPONEX_Uniques_ArmCannon_EquipWeapon(_Char, _ArmCannon);
+
+QRY
+LLWEAPONEX_Uniques_ArmCannon_QRY_UnequipCurrentWeapon((CHARACTERGUID)_Char)
+AND
+NOT LeaderLib_Helper_QRY_HasItemInSlot(_Char, "Weapon")
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Uniques_ArmCannon_QRY_UnequipCurrentWeapon((CHARACTERGUID)_Char)
+AND
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+ItemIsLocked(_Item, 0)
+AND
+NOT GetTemplate(_Item, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
+THEN
+CharacterUnequipItem(_Char, _Item);
+ItemToInventory(_Item, _Char, 1, 0, 0);
+
+PROC
+LLWEAPONEX_Uniques_ArmCannon_EquipWeapon((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+LLWEAPONEX_Uniques_ArmCannon_QRY_UnequipCurrentWeapon(_Char)
+AND
+GetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", (ITEMGUID)_ArmCannonWeapon)
+THEN
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon);
+CharacterEquipItem(_Char, _ArmCannonWeapon);
+ItemLockUnEquip(_ArmCannonWeapon, 1);
+
+PROC
+LLWEAPONEX_Uniques_ArmCannon_EquipWeapon((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon)
+THEN
+//Locked weapon in mainhand?
+CharacterUnequipItem(_Char, _ArmCannon);
+
+PROC
+LLWEAPONEX_Uniques_ArmCannon_EquipWeapon((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon);
+//END_REGION
+
+//REGION ARM_CANNON_BLOCK_SHIELD_WEAPON
+/*
+PROC
+ProcBlockUseOfItem((CHARACTERGUID)_Char, (ITEMGUID)_Weapon)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+AND
+NOT GetTemplate(_Weapon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
+AND
+ItemIsEquipable(_Weapon, 1)
+AND
+LLWEAPONEX_QRY_ItemIsWeapon(_Weapon)
+THEN
+DB_CustomUseItemResponse(_Char, _Weapon, 0);
+ShowNotification(_Char, "LLWEAPONEX_Notifications_ArmCannonShieldBlocked");
+*/
+//END_REGION
+
+//REGION ARM_CANNON_MECHANICS
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Char)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0)
+AND
+CharacterIsEnemy(_Char, _Target, 1)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 1, 3);
+
+//Allow only 1 energy per attack when dual wielding
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Char)
+AND
+CharacterIsEnemy(_Char, _Target, 1)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+AND
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
+AND
+LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy", 750);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
+
+PROC
+LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
+THEN
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:OnVariableChanged] LLWEAPONEX_ArmCannon_Energy set to ",_LastValue, " => ",_NextValue, "");
+
+PROC
+LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
+AND
+_NextValue > 0
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
+
+PROC
+LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 3)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+ApplyStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", -1.0, 0, _Char);
+
+IF
+SkillCast(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", _, _)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+LeaderLib_Helper_SetVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
+
+PROC
+LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, 0)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
+RemoveStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED");
+
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_ArmCannon_AbsorbSurface", _, _)
+THEN
+SetVarFloat3(_Char, "LLWEAPONEX_SurfaceAbsorbPosition", _x, _y, _z);
+
+IF
+CharacterResurrected(_Char)
+AND
+IsTagged(_Char, "LLWEAPONEX_ArmCannon_FullyCharged", 1)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", -1.0, 0, _Char);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"
