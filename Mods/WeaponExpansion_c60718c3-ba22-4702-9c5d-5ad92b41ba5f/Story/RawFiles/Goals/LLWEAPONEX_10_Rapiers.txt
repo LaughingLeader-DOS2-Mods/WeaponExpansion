@@ -338,6 +338,7 @@ IF
 CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_FlickerStrike_LookAtTarget")
 THEN
 CharacterLookAt(_Source, _Target, 1);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Rapiers:FlickerStrike] Test!");
 
 IF
 TextEventSet("llweap_flickerdamage")

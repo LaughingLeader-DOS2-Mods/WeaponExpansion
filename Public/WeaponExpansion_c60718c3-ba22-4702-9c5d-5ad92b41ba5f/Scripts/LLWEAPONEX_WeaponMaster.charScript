@@ -1,6 +1,5 @@
 INIT
 	CHARACTER:__Me
-	
 EVENTS
 
 EVENT LLWEAPONEX_WM_ThrowingWeapon
@@ -17,6 +16,7 @@ THEN
 
 ENDIF
 
+/*
 EVENT LLWEAPONEX_Debug_CheckDamageType
 VARS
 	CHARACTER:_Char
@@ -94,17 +94,4 @@ ACTIONS
 	SetVar(__Me, "LeaderLog_Type", STRING:"Debug")
 	SetVar(__Me, "LeaderLog_Message", _Str)
 	CharacterEvent(__Me, "LeaderLog_Commands_Log")
-	
-BEHAVIOUR
-
-REACTION LLWEAPONEX_Interrupt, 0
-USAGE ALL
-CHECK "!c1"
-	CharacterIsDead(__Me, 1)
-ACTIONS
-	StatusText(__Me, "Stopped Animations")
-	CharacterStopAnimation()
-	SetPriority("LLWEAPONEX_Interrupt", 0)
-INTERRUPT
-ACTIONS
-	Reset()
+*/

@@ -1220,6 +1220,11 @@ THEN
 CharacterStatusText(_Char, "Set Reaction");
 CharacterSetReactionPriority(_Char, "LLWEAPONEX_Interrupt", 999999);
 */
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
+THEN
+CharacterUseSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", _Char, 1, 1, 1);
 EXITSECTION
 
 ENDEXITSECTION

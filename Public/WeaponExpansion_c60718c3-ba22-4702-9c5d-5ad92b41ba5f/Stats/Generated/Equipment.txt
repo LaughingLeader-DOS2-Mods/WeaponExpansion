@@ -682,8 +682,4 @@ add equipment entry "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
 
 new equipment "LLWEAPONEX_WeaponMaster_Trader"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_CraftedGreatbow_Dwarves_A"
-add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_Quiver_A"
-add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_Preview"
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_NazghulGreatsword_2H_A_Npc"

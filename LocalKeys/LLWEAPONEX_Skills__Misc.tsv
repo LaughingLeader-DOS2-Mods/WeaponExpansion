@@ -26,4 +26,6 @@ Zone_LLWEAPONEX_ArmCannon_Disperse_Description	Fire a massive wave of energy in 
 Target_LLWEAPONEX_ArmCannon_AbsorbSurface_DisplayName	Absorb Surface
 Target_LLWEAPONEX_ArmCannon_AbsorbSurface_Description	Use the <font color='#c5a65a'>Runic Cannon</font> to <font color='#ffab00'>absorb the element of a target surface</font>.<br>The <font color='#c5a65a'>Runic Cannon</font> then activates an associated rune, granting various bonuses.
 Projectile_LLWEAPONEX_ArmCannon_Shoot_DisplayName	<font color='#03fcdb'>Fire Runic Energy</font>
-Projectile_LLWEAPONEX_ArmCannon_Shoot_Description	Fire a concentrated mass of energy at a target, dealing ([1]|[3]) in a [2] radius.<br><font color='#00EECC'>Applies any active rune effects.</font><br>Depletes the energy in the <font color='#c5a65a'>Runic Cannon</font>.
+Projectile_LLWEAPONEX_ArmCannon_Shoot_Description	Fire a concentrated mass of energy at a target, dealing ([1]|[3]) in a [2] radius.<br><font color='#00EECC'>Applies any active rune effect
+Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF3311'>You're Already Dead</font>
+Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.
