@@ -80,17 +80,17 @@ WPN_LLWEAPONEX_RemoteMine_Shrapnel	Shrapnel Charge
 WPN_LLWEAPONEX_RemoteMine_Shrapnel_Free	Shrapnel Charge
 WPN_LLWEAPONEX_RemoteMine_Tar	Tar Charge
 WPN_LLWEAPONEX_RemoteMine_Tar_Free	Tar Charge
-SKILLBOOK_LLWEAPONEX_DualShields_Cover	<font color='#ffc721'>Mastery Booklet:</font> Dynamic Cover
-SKILLBOOK_LLWEAPONEX_DualShields_ShieldPrison	<font color='#ffc721'>Mastery Booklet:</font> Shield Prison
-SKILLBOOK_LLWEAPONEX_DualShields_IronMaiden	<font color='#ffc721'>Mastery Booklet:</font> Iron Maiden
-SKILLBOOK_LLWEAPONEX_Firearm_ElementalBullets	<font color='#ffc721'>Mastery Booklet:</font> Elemental Bullets
-SKILLBOOK_LLWEAPONEX_Greatbow_PiercingShot	<font color='#ffc721'>Mastery Booklet:</font> Dragon's Bane
-SKILLBOOK_LLWEAPONEX_Greatbow_KnockbackShot	<font color='#ffc721'>Mastery Booklet:</font> Cushion Force
-SKILLBOOK_LLWEAPONEX_Greatbow_DelayedBarrage	<font color='#ffc721'>Mastery Booklet:</font> Future Barrage
-SKILLBOOK_LLWEAPONEX_Handcrossbow_Assassinate	<font color='#ffc721'>Mastery Booklet:</font> Assassinate
-SKILLBOOK_LLWEAPONEX_Katana_Iaido	<font color='#ffc721'>Mastery Booklet:</font> Flash of Steel
-SKILLBOOK_LLWEAPONEX_Quarterstaff_LegSweep	<font color='#ffc721'>Mastery Booklet:</font> Leg Sweep
-SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance	<font color='#ffc721'>Mastery Booklet:</font> Duelist Stance
-SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike	<font color='#ffc721'>Mastery Booklet:</font> Flicker Strike
-SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb	<font color='#ffc721'>Mastery Booklet:</font> Runic Reverb
-SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon	<font color='#ffc721'>Mastery Booklet:</font> Throw Weapon
+SKILLBOOK_LLWEAPONEX_DualShields_Cover	<font color='#ffc721'>Mastery Scroll:</font> Dynamic Cover
+SKILLBOOK_LLWEAPONEX_DualShields_ShieldPrison	<font color='#ffc721'>Mastery Scroll:</font> Shield Prison
+SKILLBOOK_LLWEAPONEX_DualShields_IronMaiden	<font color='#ffc721'>Mastery Scroll:</font> Iron Maiden
+SKILLBOOK_LLWEAPONEX_Firearm_ElementalBullets	<font color='#ffc721'>Mastery Scroll:</font> Elemental Bullets
+SKILLBOOK_LLWEAPONEX_Greatbow_PiercingShot	<font color='#ffc721'>Mastery Scroll:</font> Dragon's Bane
+SKILLBOOK_LLWEAPONEX_Greatbow_KnockbackShot	<font color='#ffc721'>Mastery Scroll:</font> Cushion Force
+SKILLBOOK_LLWEAPONEX_Greatbow_DelayedBarrage	<font color='#ffc721'>Mastery Scroll:</font> Future Barrage
+SKILLBOOK_LLWEAPONEX_Handcrossbow_Assassinate	<font color='#ffc721'>Mastery Scroll:</font> Assassinate
+SKILLBOOK_LLWEAPONEX_Katana_Iaido	<font color='#ffc721'>Mastery Scroll:</font> Flash of Steel
+SKILLBOOK_LLWEAPONEX_Quarterstaff_LegSweep	<font color='#ffc721'>Mastery Scroll:</font> Leg Sweep
+SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance	<font color='#ffc721'>Mastery Scroll:</font> Duelist Stance
+SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike	<font color='#ffc721'>Mastery Scroll:</font> Flicker Strike
+SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb	<font color='#ffc721'>Mastery Scroll:</font> Runic Reverb
+SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon	<font color='#ffc721'>Mastery Scroll:</font> Throw Weapon
