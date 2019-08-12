@@ -1,9 +1,33 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-DB_Dialogs(S_LLWEAPONEX_WeaponMaster_Trader_3cabc61d-6385-4ae3-b38f-c4f24a8d16b5, "LLWEAPONEX_WeaponMaster_Trader");
-KBSECTION
 
+KBSECTION
+PROC
+LLWEAPONEX_WeaponMaster_InitSetting()
+THEN
+//S_LLWEAPONEX_WeaponMaster_Trader_3cabc61d-6385-4ae3-b38f-c4f24a8d16b5
+//DB_Dialogs(S_LLWEAPONEX_WeaponMaster_Trader_3cabc61d-6385-4ae3-b38f-c4f24a8d16b5, "LLWEAPONEX_WeaponMaster_Trader");
+LeaderLib_Trader_Register_Dialog("LLWEAPONEX.WeaponMaster.Trader", "LLWEAPONEX_WeaponMaster_Trader"); // Default
+
+LeaderLib_Trader_Register_GlobalTrader("LLWEAPONEX.WeaponMaster.Trader", S_LLWEAPONEX_WeaponMaster_Trader_3cabc61d-6385-4ae3-b38f-c4f24a8d16b5);
+
+LeaderLib_Trader_Register_StartingGold("LLWEAPONEX.WeaponMaster.Trader", "TUT_Tutorial_A", 250);
+LeaderLib_Trader_Register_StartingGold("LLWEAPONEX.WeaponMaster.Trader", "FJ_FortJoy_Main", 3500);
+
+LeaderLib_Trader_Register_Seat("LLWEAPONEX.WeaponMaster.Trader", "FJ_FortJoy_Main", FUR_Humans_Citz_Stool_C_006_f204c77a-6981-4362-9455-6f0f3d0ce99d);
+LeaderLib_Trader_Register_Seat("LLWEAPONEX.WeaponMaster.Trader", "LV_HoE_Main", FUR_Humans_Citz_Stool_C_011_6bf9707b-cb27-40fb-943a-a0c9772e3ed9);
+LeaderLib_Trader_Register_Seat("LLWEAPONEX.WeaponMaster.Trader", "RC_Main", FUR_Poor_Bar_Stool_B_015_a809eda1-9d42-4eb9-8233-3d0d6ffe2263);
+LeaderLib_Trader_Register_Seat("LLWEAPONEX.WeaponMaster.Trader", "CoS_Main", FUR_Poor_Bar_Stool_B_004_LV_Topdeck_A_000_1ee2031f-d46b-447e-a813-252d87a2ae29);
+LeaderLib_Trader_Register_Seat("LLWEAPONEX.WeaponMaster.Trader", "Arx_Main", FUR_Humans_Citz_Stool_D_005_ARX_Main_Rework_000_ef9141f1-531c-831f-2e8c-2e1174ff44a1);
+
+//LeaderLib_Trader_Register_PositionObject("LLWEAPONEX.WeaponMaster.Trader", "FJ_FortJoy_Main", );
+
+LeaderLib_Trader_Register_Position("LLWEAPONEX.WeaponMaster.Trader", "FJ_FortJoy_Main", 208.437, -6.144, 155.0);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.WeaponMaster.Trader", "LV_HoE_Main", 29.807, 11.044, 3.221);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.WeaponMaster.Trader", "RC_Main", 353.891, .378, 94.752);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.WeaponMaster.Trader", "CoS_Main", -4.062, 14.418, 706.99);
+LeaderLib_Trader_Register_Position("LLWEAPONEX.WeaponMaster.Trader", "Arx_Main", 366.42, 16.621, 59.39);
 EXITSECTION
 
 ENDEXITSECTION

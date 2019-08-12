@@ -2313,7 +2313,7 @@ data "Damage Range" "15"
 data "DamageFromBase" "110"
 data "CriticalDamage" "150"
 
-new entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Preview"
+new entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Preview"
 type "Weapon"
 using "_LLWEAPONEX_Halberds_2H"
 data "ItemGroup" "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A"

@@ -658,7 +658,7 @@ add equipment entry "ARM_LLWEAPONEX_Halberdier_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_Halberdier_Boots"
 add equipmentgroup
-add equipment entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_Preview"
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Preview"
 
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
