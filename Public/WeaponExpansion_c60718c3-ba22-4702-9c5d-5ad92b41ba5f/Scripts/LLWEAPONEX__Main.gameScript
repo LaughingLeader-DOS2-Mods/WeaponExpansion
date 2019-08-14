@@ -22,6 +22,58 @@ INIT
 	USING LLWEAPONEX_Skills
 EVENTS
 
+/*
+EVENT LLWEAPONEX_Debug_VarTest
+VARS
+	CHARACTER:_Character
+	STRING:_Str
+ON
+	OnCharacterEvent(_Character, "LLWEAPONEX_Debug_VarTest")
+ACTIONS
+	Set(_Str, STRING:"We got the var!")
+
+EVENT LLWEAPONEX_Debug_VarTest2
+VARS
+	CHARACTER:_Char
+	STRING:_StrVar
+	STRING:_Message
+	FIXEDSTRING:_StrF
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_Debug_VarTest")
+ACTIONS
+Set(_StrVar, "")
+IF "c1"
+	HasGlobalFlag("LLWEAPONEX__Main.LLWEAPONEX_Debug_VarTest.OnCharacterEvent.Str")
+THEN
+	Set(_StrVar, "True")
+ENDIF
+IF "c1"
+	HasGlobalFlag("LLWEAPONEX__Main.LLWEAPONEX_Debug_VarTest.Str")
+THEN
+	Set(_StrVar, "True")
+ENDIF
+IF "c1"
+	HasGlobalFlag("LLWEAPONEX_Debug_VarTest.OnCharacterEvent.Str")
+THEN
+	Set(_StrVar, "True")
+ENDIF
+IF "c1"
+	HasGlobalFlag("LLWEAPONEX_Debug_VarTest.Str")
+THEN
+	Set(_StrVar, "True")
+ENDIF
+
+IF "!c1"
+	IsEqual(_StrVar, "")
+THEN
+	Print(_Message, "<font size='30'>Var? [1]</font>", _StrVar)
+	Cast(_StrF, _Message)
+	StatusText(_Char, _StrF)
+ELSE
+	StatusText(_Char, FIXEDSTRING:"<font size='30'>Var Not found!</font>")
+ENDIF
+*/
+	
 EVENT LLWEAPONEX_Debug_KeepAliveTest
 VARS
 	CHARACTER:_Character

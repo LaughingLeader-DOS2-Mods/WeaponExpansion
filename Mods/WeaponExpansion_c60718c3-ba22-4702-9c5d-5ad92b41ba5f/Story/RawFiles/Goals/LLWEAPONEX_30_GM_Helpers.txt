@@ -1,0 +1,10 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//DB_LLWEAPONEX_Gamemaster_NpcParty(_Char, _PartyMember)
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_GM_Start"

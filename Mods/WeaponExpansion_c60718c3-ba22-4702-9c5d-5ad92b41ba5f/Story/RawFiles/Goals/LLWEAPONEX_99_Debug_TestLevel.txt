@@ -46,6 +46,127 @@ CharacterOverrideMaxSourcePoints(_Char, 20);
 CharacterAddSourcePoints(_Char, 20);
 
 IF
+TextEventSet("llweap_vartest")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+SetStoryEvent(_Host, "LLWEAPONEX_Debug_VarTest");
+
+/*
+IF
+StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
+AND
+GetVarString(_Host, "LLWEAPONEX_Debug_VarTest.Str", _Str)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_VarTest.Str] == [",_Str,"]");
+CharacterStatusText(_Host, _Str);
+
+IF
+StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
+AND
+NOT GetVarString(_Host, "LLWEAPONEX_Debug_VarTest.Str", _)
+THEN
+DebugBreak("[LLWEAPONEX_Debug_VarTest] Var [LLWEAPONEX_Debug_VarTest.Str] is not set!");
+CharacterStatusText(_Host, "[LLWEAPONEX_Debug_VarTest] Var [LLWEAPONEX_Debug_VarTest.Str] is not set!");
+*/
+/*
+IF
+StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
+AND
+GetVarFixedString(_Host, "CharacterCreationStarted.Class", _Str)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [CharacterCreationStarted.Class] == [",_Str,"]");
+CharacterStatusText(_Host, _Str);
+
+IF
+StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
+AND
+NOT GetVarFixedString(_Host, "CharacterCreationStarted.Class", _)
+THEN
+DebugBreak("[LLWEAPONEX_Debug_VarTest] Var [CharacterCreationStarted.Class] is not set!");
+CharacterStatusText(_Host, "[LLWEAPONEX_Debug_VarTest] Var [CharacterCreationStarted.Class] is not set!");
+*/
+
+IF
+CombatStarted(_CombatID)
+THEN
+DB_LLWEAPONEX_Debug_CombatTimer(_CombatID);
+TimerLaunch("LLWEAPONEX_Debug_CombatTimer", 500);
+
+IF
+TimerFinished("LLWEAPONEX_Debug_CombatTimer")
+AND
+DB_LLWEAPONEX_Debug_CombatTimer(_CombatID)
+AND
+DB_CombatCharacters(_Char, _CombatID)
+AND
+CharacterIsPlayer(_Char, 0)
+THEN
+SetStoryEvent(_Char, "LLWEAPONEX_Debug_VarTest_Check");
+
+IF
+TimerFinished("LLWEAPONEX_Debug_CombatTimer")
+AND
+DB_LLWEAPONEX_Debug_CombatTimer(_CombatID)
+THEN
+TimerLaunch("LLWEAPONEX_Debug_CombatTimer", 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
+AND
+GetVarString(_Char, "LLWEAPONEX_Debug_Damage.DamageType", _Str)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_Damage.DamageType] == [",_Str,"]");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
+AND
+GetVarString(_Char, "LLWEAPONEX_Debug_Damage._Damage", _Str)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
+AND
+GetVarObject(_Char, "LLWEAPONEX_Debug_Damage._Damage", _Damage)
+AND
+String(_Damage, _Str)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_VarTest_Check")
+AND
+GetPosition(CHARACTERGUID_DW_Voidling_A_004_4d7beedc-1c20-4307-9515-ab099d656f53, _x, _y, _z)
+AND
+FindValidPosition(_x, _y, _z, 3.0, _Char, _tx, _ty, _tz)
+THEN
+SetVarObject(_Char, "Combat_AI_Attack.TargetCharacter", CHARACTERGUID_DW_Voidling_A_004_4d7beedc-1c20-4307-9515-ab099d656f53);
+SetVarFloat3(_Char, "Combat_AI_Attack.EndPosition", _tx, _ty, _tz);
+
+/*
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_VarTest_Check")
+AND
+GetVarObject(_Char, "Combat_AI_Attack.TargetCharacter", _Obj)
+AND
+String(_Obj, _Target)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [Combat_AI_Attack.TargetCharacter] == [",_Target,"]");
+DisplayText(_Obj, "AI Target!");
+*/
+
+/*
+IF
+StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
+AND
+NOT GetVarFixedString(_Host, "Combat_AI_Attack.Class", _)
+THEN
+DebugBreak("[LLWEAPONEX_Debug_VarTest] Var [CharacterClassChanged.Class] is not set!");
+CharacterStatusText(_Host, "[LLWEAPONEX_Debug_VarTest] Var [CharacterClassChanged.Class] is not set!");
+*/
+
+IF
 TextEventSet("llweap_tprez")
 THEN
 TeleportTo(Dwarves_Male_Skeleton_A_001_589887ae-4373-4773-9747-9da8cd14ad4f, AIHintAreaTrigger_000_efffe2d1-83c9-483b-8680-942a26585699, "KF_RSCG_Resurrect", 0, 1, 1);

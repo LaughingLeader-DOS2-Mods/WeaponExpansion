@@ -16,6 +16,44 @@ THEN
 
 ENDIF
 
+EVENT LLWEAPONEX_Debug_Damage
+VARS
+	DAMAGE:_Damage
+	STRING:_DamageType
+	FLOAT:_Percentage
+	CHARACTER:_DamageCharSource
+	ITEM:_DamageItemSource
+ON
+	OnDamage(_Damage, _Percentage, _DamageCharSource, _DamageItemSource)
+ACTIONS
+	Print(_DamageType, "[1]", _Damage)
+	CharacterEvent(__Me, "LLWEAPONEX_Debug_TraceDamage")
+	
+EVENT LLWEAPONEX_Debug_VarTest2
+VARS
+	STRING:_StrVar
+	STRING:_Message
+	FIXEDSTRING:_StrF
+ON
+	OnCharacterEvent(__Me, "LLWEAPONEX_Debug_VarTest")
+ACTIONS
+	Set(_StrVar, "")
+IF "c1"
+	GetVar(_StrVar, __Me, "LLWEAPONEX_Debug_VarTest.Str")
+THEN
+ENDIF
+
+IF "!c1"
+	IsEqual(_StrVar, "")
+THEN
+	Print(_Message, "<font size='30'>(From charScript) Var? [1]</font>", _StrVar)
+	Cast(_StrF, _Message)
+	StatusText(__Me, _StrF)
+ELSE
+	StatusText(__Me, FIXEDSTRING:"<font size='30'>(From charScript) Var Not found!</font>")
+ENDIF
+	CharacterEvent(__Me, "LLWEAPONEX_Debug_VarTest_Check")
+
 /*
 EVENT LLWEAPONEX_Debug_CheckDamageType
 VARS

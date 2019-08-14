@@ -14,6 +14,20 @@ DB_NOOP(1);
 */
 
 QRY
+LLWEAPONEX_QRY_CharacterIsNpcOrGM((CHARACTERGUID)_Char)
+AND
+CharacterIsPlayer(_Char, 0)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_CharacterIsNpcOrGM((CHARACTERGUID)_Char)
+AND
+CharacterGameMaster(_Char, 1)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_QRY_ItemIsWeapon((ITEMGUID)_Item)
 AND
 _Item != NULL_00000000-0000-0000-0000-000000000000
@@ -58,27 +72,27 @@ THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Player)
+LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Char)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", NULL_00000000-0000-0000-0000-000000000000)
+CharacterGetEquippedItem(_Char, "Weapon", NULL_00000000-0000-0000-0000-000000000000)
 AND
-CharacterGetEquippedItem(_Player, "Shield", NULL_00000000-0000-0000-0000-000000000000)
+CharacterGetEquippedItem(_Char, "Shield", NULL_00000000-0000-0000-0000-000000000000)
 THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_QRY_WeaponTypeEquipped((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_QRY_WeaponTypeEquipped((CHARACTERGUID)_Char, (STRING)_WeaponType)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _Item)
+CharacterGetEquippedItem(_Char, "Weapon", _Item)
 AND
 IsTagged(_Item, _WeaponType, 1)
 THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_QRY_WeaponTypeEquipped((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_QRY_WeaponTypeEquipped((CHARACTERGUID)_Char, (STRING)_WeaponType)
 AND
-CharacterGetEquippedItem(_Player, "Shield", _Item)
+CharacterGetEquippedItem(_Char, "Shield", _Item)
 AND
 IsTagged(_Item, _WeaponType, 1)
 THEN
@@ -86,9 +100,9 @@ DB_NOOP(1);
 
 //IsTagged(_Item, "LLWEAPONEX_WeaponMasteryComplete", 0)
 QRY
-LLWEAPONEX_QRY_WeaponTypeMasteryEnabled((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_QRY_WeaponTypeMasteryEnabled((CHARACTERGUID)_Char, (STRING)_WeaponType)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _Item)
+CharacterGetEquippedItem(_Char, "Weapon", _Item)
 AND
 IsTagged(_Item, _WeaponType, 1)
 AND
@@ -97,9 +111,9 @@ THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_QRY_WeaponTypeMasteryEnabled((CHARACTERGUID)_Player, (STRING)_WeaponType)
+LLWEAPONEX_QRY_WeaponTypeMasteryEnabled((CHARACTERGUID)_Char, (STRING)_WeaponType)
 AND
-CharacterGetEquippedItem(_Player, "Shield", _Item)
+CharacterGetEquippedItem(_Char, "Shield", _Item)
 AND
 IsTagged(_Item, _WeaponType, 1)
 AND
@@ -132,16 +146,16 @@ THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_QRY_IsEquippedWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_QRY_IsEquippedWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _Item)
+CharacterGetEquippedItem(_Char, "Weapon", _Item)
 THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_QRY_IsEquippedWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Item)
+LLWEAPONEX_QRY_IsEquippedWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-CharacterGetEquippedItem(_Player, "Shield", _Item)
+CharacterGetEquippedItem(_Char, "Shield", _Item)
 THEN
 DB_NOOP(1);
 //END_REGION
@@ -198,17 +212,17 @@ TimerLaunch("LLWEAPONEX_Timers_PostCCTimer_ResetDB", 500);
 IF
 TimerFinished("LLWEAPONEX_Timers_PostCCTimer_ResetDB")
 AND
-DB_IsPlayer(_Player)
+DB_IsPlayer(_Char)
 THEN
-LLWEAPONEX_OnCharacterCreationFinished(_Player);
+LLWEAPONEX_OnCharacterCreationFinished(_Char);
 
 //Some PostCC scripts have rules for when an item is equipped, so re-equip WEAPONEX weapons after CC
 PROC
-LLWEAPONEX_OnCharacterCreationFinished((CHARACTERGUID)_Player)
+LLWEAPONEX_OnCharacterCreationFinished((CHARACTERGUID)_Char)
 AND
-LLWEAPONEX_QRY_HasWeaponExpansionWeapon(_Player)
+LLWEAPONEX_QRY_HasWeaponExpansionWeapon(_Char)
 THEN
-LeaderLib_Helper_RefreshWeapons(_Player, 250, 500);
+LeaderLib_Helper_RefreshWeapons(_Char, 250, 500);
 
 IF
 TimerFinished("LLWEAPONEX_Timers_PostCCTimer_ResetDB")
@@ -220,33 +234,33 @@ NOT DB_LLWEAPONEX_PostCCEnabled(1);
 
 //REGION SET_OVERRIDES
 PROC
-LLWEAPONEX_AnimationSetOverride_Set((CHARACTERGUID)_Player, (STRING)_OverrideSet)
+LLWEAPONEX_AnimationSetOverride_Set((CHARACTERGUID)_Char, (STRING)_OverrideSet)
 THEN
-LLWEAPONEX_AnimationSetOverride_ClearData(_Player);
-CharacterSetAnimationSetOverride(_Player, _OverrideSet);
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet);
+LLWEAPONEX_AnimationSetOverride_ClearData(_Char);
+CharacterSetAnimationSetOverride(_Char, _OverrideSet);
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet);
 
 PROC
-LLWEAPONEX_AnimationSetOverride_Clear((CHARACTERGUID)_Player)
+LLWEAPONEX_AnimationSetOverride_Clear((CHARACTERGUID)_Char)
 THEN
-LLWEAPONEX_AnimationSetOverride_ClearData(_Player);
-CharacterSetAnimationSetOverride(_Player, "");
+LLWEAPONEX_AnimationSetOverride_ClearData(_Char);
+CharacterSetAnimationSetOverride(_Char, "");
 
 PROC
-LLWEAPONEX_AnimationSetOverride_ClearData((CHARACTERGUID)_Player)
+LLWEAPONEX_AnimationSetOverride_ClearData((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet)
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet)
 THEN
-NOT DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet);
+NOT DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet);
 
 // Called when exiting the respec mirror
 // Since the respec mirror uses its own set override, we need to reset this
 PROC
-Proc_HomesteadTeleportAfterMirror((CHARACTERGUID)_Player,(ITEMGUID)_Mirror,(TRIGGERGUID)_Trigger)
+Proc_HomesteadTeleportAfterMirror((CHARACTERGUID)_Char,(ITEMGUID)_Mirror,(TRIGGERGUID)_Trigger)
 AND
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet)
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet)
 THEN
-CharacterSetAnimationSetOverride(_Player, _OverrideSet);
+CharacterSetAnimationSetOverride(_Char, _OverrideSet);
 //END_REGION
 
 EXITSECTION
