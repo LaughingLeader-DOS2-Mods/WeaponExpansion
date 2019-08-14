@@ -57,7 +57,9 @@ LLWEAPONEX_TagHelper_CheckWeaponType((CHARACTERGUID)_Char, (ITEMGUID)_Item, "Wea
 AND
 CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_OtherItem)
 AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
+_OtherItem != NULL_00000000-0000-0000-0000-000000000000
+AND
+_OtherItem != _Item
 THEN
 DB_LLWEAPONEX_CheckWeaponType_Temp_EquipItem(_Char, _OtherItem);
 LLWEAPONEX_TagHelper_PreserveLockAndUnequip(_Char, _OtherItem);
@@ -67,7 +69,9 @@ LLWEAPONEX_TagHelper_CheckWeaponType((CHARACTERGUID)_Char, (ITEMGUID)_Item, "Shi
 AND
 CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_OtherItem)
 AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
+_OtherItem != NULL_00000000-0000-0000-0000-000000000000
+AND
+_OtherItem != _Item
 THEN
 DB_LLWEAPONEX_CheckWeaponType_Temp_EquipItem(_Char, _OtherItem);
 LLWEAPONEX_TagHelper_PreserveLockAndUnequip(_Char, _OtherItem);
