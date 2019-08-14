@@ -46,6 +46,16 @@ CharacterOverrideMaxSourcePoints(_Char, 20);
 CharacterAddSourcePoints(_Char, 20);
 
 IF
+TextEventSet("llweap_tprez")
+THEN
+TeleportTo(Dwarves_Male_Skeleton_A_001_589887ae-4373-4773-9747-9da8cd14ad4f, AIHintAreaTrigger_000_efffe2d1-83c9-483b-8680-942a26585699, "KF_RSCG_Resurrect", 0, 1, 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "KF_RSCG_Resurrect")
+THEN
+CharacterResurrect(_Char);
+
+IF
 TextEventSet("llweap_iterateparty")
 THEN
 IterateParties("LLWEAPONEX_Debug_IteratorTest");

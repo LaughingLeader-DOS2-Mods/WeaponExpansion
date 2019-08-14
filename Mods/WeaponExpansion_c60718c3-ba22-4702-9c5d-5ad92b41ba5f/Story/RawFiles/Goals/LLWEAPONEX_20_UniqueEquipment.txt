@@ -557,6 +557,8 @@ THEN
 ItemLevelUpTo(_Item, _Level);
 LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 25, "LLWEAPONEX_Timers_SwapBokkenMode_Equip", "LeaderLib_Commands_EquipItem");
 //END_REGION
+
+
 EXITSECTION
 
 ENDEXITSECTION
