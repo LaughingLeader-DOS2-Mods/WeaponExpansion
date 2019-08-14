@@ -15,12 +15,38 @@ GetTemplate(_Item, _Template)
 THEN
 LLWEAPONEX_OnItemEquipped(_Char, _Item, _Template);
 
+QRY
+LLWEAPONEX_QRY_ItemIsWeaponOrShield_TagIfWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+StringContains(_Template, "WPN_", 1)
+AND
+StringContains(_Template, "Shield", _IsShield)
+THEN
+LLWEAPONEX_Internal_TagIfNotShield(_Char, _IsShield);
+
+PROC
+LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
+
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
+LLWEAPONEX_QRY_ItemIsWeaponOrShield_TagIfWeapon(_Char, _Item, _Template)
 THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
+LLWEAPONEX_OnWeaponEquipped(_Char, _Item, _Template);
+
+//Try and tag non-WeaponEx items
+PROC
+LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+IsTagged(_Item, "LLWEAPONEX_TaggedWeaponType", 0)
+AND
+NOT LLWEAPONEX_TagHelper_QRY_TagFromTemplate(_Char, _Item, _Template) // Vanilla template to tag
+AND
+LLWEAPONEX_TagHelper_QRY_CheckWeaponType(_Char, _Item) // Try and get the type via behavior
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_00_EquipEvents:OnWeaponEquipped] Tagged weapon [",_Template,"] with a new weapon type via [LLWEAPONEX_TagHelper_QRY_CheckWeaponType].");
 
 IF
 ItemUnEquipped(_Item, _Char)
@@ -46,7 +72,7 @@ LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 //REGION TYPE_EVENTS
 //Mastery weapon equipped
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 CharacterIsPlayer(_Char, _IsPlayer)
 AND

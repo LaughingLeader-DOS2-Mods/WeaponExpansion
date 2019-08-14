@@ -486,7 +486,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="Weapon Type (Sort of)" type="23" />
+                    <attribute id="Description" value="Weapon Type" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_HandCrossbow" type="23" />
                     <children>
                         <node id="Categories">
@@ -499,7 +499,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Handedness" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_TwoHanded" type="23" />
                     <children>
                         <node id="Categories">
@@ -564,7 +564,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Weapon Type" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Blunderbuss" type="23" />
                     <children>
                         <node id="Categories">
@@ -629,7 +629,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Grimoire Element" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Grimoire_Death" type="23" />
                     <children>
                         <node id="Categories">
@@ -642,7 +642,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Grimoire Element" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Grimoire_Mimicry" type="23" />
                     <children>
                         <node id="Categories">
@@ -655,7 +655,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Grimoire Element" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Grimoire_Fire" type="23" />
                     <children>
                         <node id="Categories">
@@ -668,7 +668,7 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Grimoire Element" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Grimoire_Swap" type="23" />
                     <children>
                         <node id="Categories">
@@ -681,14 +681,14 @@
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Handedness" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_OneHanded" type="23" />
                     <children>
                         <node id="Categories" />
                     </children>
                 </node>
                 <node id="Tag">
-                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Description" value="Grimoire Element" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Grimoire_Wind" type="23" />
                     <children>
                         <node id="Categories" />
@@ -749,6 +749,162 @@
                 <node id="Tag">
                     <attribute id="Description" value="Weapon Type" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Unarmed" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Signifies that this weapon doesn&apos;t need to be checked to determine its type." type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_TaggedWeaponType" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Wand" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Staff" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Sword" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Dagger" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Bow" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Crossbow" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Blunt" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Spear" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Axe" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Shield" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="Weapon Type" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_Banner" type="23" />
                     <children>
                         <node id="Categories">
                             <children>

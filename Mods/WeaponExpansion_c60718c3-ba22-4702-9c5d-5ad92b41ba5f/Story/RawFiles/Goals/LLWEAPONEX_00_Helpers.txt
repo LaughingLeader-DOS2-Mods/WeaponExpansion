@@ -38,6 +38,26 @@ THEN
 DB_NOOP(1);
 
 QRY
+LLWEAPONEX_QRY_ItemIsWeaponOrShield((ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+GetTemplate(_Item, _Template)
+AND
+StringContains(_Template, "WPN_", 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_ItemIsWeaponOrShield((ITEMGUID)_Item, (STRING)_Template)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+StringContains(_Template, "WPN_", 1)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Player)
 AND
 CharacterGetEquippedItem(_Player, "Weapon", NULL_00000000-0000-0000-0000-000000000000)
@@ -72,7 +92,7 @@ CharacterGetEquippedItem(_Player, "Weapon", _Item)
 AND
 IsTagged(_Item, _WeaponType, 1)
 AND
-IsTagged(_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+IsTagged(_Item, "LLWEAPONEX_WeaponMasteryDisabled", 0)
 THEN
 DB_NOOP(1);
 
@@ -83,7 +103,7 @@ CharacterGetEquippedItem(_Player, "Shield", _Item)
 AND
 IsTagged(_Item, _WeaponType, 1)
 AND
-IsTagged(_Item, "LLWEAPONEX_WeaponMasteryEnabled", 1)
+IsTagged(_Item, "LLWEAPONEX_WeaponMasteryDisabled", 0)
 THEN
 DB_NOOP(1);
 
@@ -228,6 +248,7 @@ DB_LLWEAPONEX_Temp_AnimationSetOverride(_Player, _OverrideSet)
 THEN
 CharacterSetAnimationSetOverride(_Player, _OverrideSet);
 //END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

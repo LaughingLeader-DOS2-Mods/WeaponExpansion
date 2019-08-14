@@ -170,3 +170,66 @@ THEN
 ELSE
 	CharacterItemEvent(_Character, _Item, "LLWEAPONEX_ItemCheck_NoSkill")
 ENDIF
+
+EVENT LLWEAPONEX_CheckWeaponTypes
+VARS
+	CHARACTER:_Char
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_CheckWeaponType")
+ACTIONS
+IF "c1"
+	CharacterHasWeaponType(_Char, Axe, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Axe")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Bow, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Bow")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Club, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Club")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Crossbow, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Crossbow")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Knife, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Knife")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Spear, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Spear")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Staff, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Staff")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Sword, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Sword")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Wand, 1)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Wand")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Arrow, 1) // ??
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Arrow")
+ENDIF
+IF "c1"
+	CharacterHasWeaponType(_Char, Sentinel, 1) // Wtf is this?
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Sentinel")
+ENDIF
+	CharacterEvent(_Char, "LLWEAPONEX_CheckWeaponType_Done")
