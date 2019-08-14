@@ -29,3 +29,5 @@ Projectile_LLWEAPONEX_ArmCannon_Shoot_DisplayName	<font color='#03fcdb'>Fire Run
 Projectile_LLWEAPONEX_ArmCannon_Shoot_Description	Fire a concentrated mass of energy at a target, dealing ([1]|[3]) in a [2] radius.<br><font color='#00EECC'>Applies any active rune effect
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF3311'>You're Already Dead</font>
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.
+Shout_LLWEAPONEX_Wraithblade_SlayHidden_DisplayName	<font color='#D5D7E3'>Slay Hidden</font>
+Shout_LLWEAPONEX_Wraithblade_SlayHidden_Description	Instantly warp to any hidden enemy and strike a grievous blow for [1].<br><font color='#C1A9FF'>Gain Invisibility if the target was Invisible.</font><br><font color='#FF8585'>Targets hit become marked, preventing Invisibility for 1 turn.</font>

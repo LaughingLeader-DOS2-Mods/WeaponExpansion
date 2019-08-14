@@ -218,7 +218,7 @@ ItemDestroy(_Banner);
 
 //REGION WRAITHBLADE_SLAY_HIDDEN
 IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_WRAITHBLADE_MARKHIDDEN", (CHARACTERGUID)_Source)
+CharacterStatusAttempt(_Target, "LLWEAPONEX_WRAITHBLADE_MARK", (CHARACTERGUID)_Source)
 THEN
 DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Source, _Target);
 ObjectSetFlag(_Source, "LLWEAPONEX_Wraithblade_TargetFound", 0);
@@ -236,14 +236,11 @@ LeaderLib_Timers_StartObjectTimer(_Source, 750, "LLWEAPONEX_Timers_SlayHidden_Ne
 IF
 StoryEvent((CHARACTERGUID)_Source, "LLWEAPONEX_SlayHidden_Next")
 AND
-DB_LLWEAPONEX_Skills_SlayHidden_AddInvisibility(_Source, _Duration)
-AND
 NOT DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Source, _)
 AND
 NOT DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Source, _)
 THEN
-NOT DB_LLWEAPONEX_Skills_SlayHidden_AddInvisibility(_Source, _Duration);
-ApplyStatus(_Source, "INVISIBLE", _Duration, 1);
+ApplyStatus(_Source, "INVISIBLE", 6.0, 1);
 
 IF
 StoryEvent((CHARACTERGUID)_Source, "LLWEAPONEX_SlayHidden_Next")
@@ -268,21 +265,6 @@ PlayEffect(_Source, "LLWEAPONEX_FX_Skills_InstantTransmission_Appear_01");
 PlayAnimation(_Source, "");
 CharacterFlushQueue(_Source);
 PlayAnimation(_Source, "");
-
-IF
-CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_SlayHidden_Hit")
-AND
-HasActiveStatus(_Target, "INVISIBLE", 1)
-AND
-GetStatusTurns(_Target, "INVISIBLE", _Turns)
-AND
-IntegerMax(_Turns, 1, _ClampedTurns)
-AND
-Real(_ClampedTurns, _TurnsR)
-AND
-RealProduct(_TurnsR, 6.0, _Duration)
-THEN
-DB_LLWEAPONEX_Skills_SlayHidden_AddInvisibility(_Source, _Duration);
 
 IF
 CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_SlayHidden_Hit")

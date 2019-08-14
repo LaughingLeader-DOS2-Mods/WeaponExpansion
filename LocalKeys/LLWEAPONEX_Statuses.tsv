@@ -76,3 +76,5 @@ LLWEAPONEX_RANDOM_AILMENT_DisplayName	Random Elemental Ailment
 LLWEAPONEX_ARMCANNON_CHARGED_DisplayName	Charged (Runic Cannon)
 LLWEAPONEX_ARMCANNON_CHARGED_Description	The <font color='#c5a65a'>Runic Cannon</font> is charged and ready to disperse stored energy."
 LLWEAPONEX_ARMCANNON_RANGED_HIT_DisplayName	Deals Pure Damage to broken Magic Armour.
+LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith
+LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.
