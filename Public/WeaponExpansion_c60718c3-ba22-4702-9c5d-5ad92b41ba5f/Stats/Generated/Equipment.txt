@@ -682,4 +682,4 @@ add equipment entry "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
 
 new equipment "LLWEAPONEX_WeaponMaster_Trader"
 add equipmentgroup
-add equipment entry "WPN_UNIQUE_LLWEAPONEX_NazghulGreatsword_2H_A_Npc"
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Npc"

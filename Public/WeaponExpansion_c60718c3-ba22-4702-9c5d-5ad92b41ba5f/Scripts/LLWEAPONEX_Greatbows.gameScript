@@ -60,12 +60,7 @@ ENDIF
 	THEN
 		Set(_ForceSkill, Projectile_LeaderLib_Force12)
 	ENDIF
-	IF "c1"
-		CharacterGetStat(_LevelF, _Source, Level)
-	THEN
-		Cast(_Level, _LevelF)
-	ENDIF
-	ShootLocalProjectileAt(_ForceSkill, _Source, FLOAT3:{0;3.0;0}, _Target, _Level, _Source)
+	ShootLocalProjectileAt(_ForceSkill, _Source, FLOAT3:{0;3.0;0}, _Target, 1, _Source)
 	/*
 	Print(_DebugMessage, "[LLWEAPONEX:Greatbows:CushionForce] Distance([1] - [2] = [3] | Int([4])) = Skill [5]", %LLWEAPONEX_Greatbow_KnockbackMaxStart, _Dist, _ForceDist, _ForceDistInt, _ForceSkill)
 	SetVar(_GreatbowCaster, "LeaderLog_Type", STRING:"Debug")

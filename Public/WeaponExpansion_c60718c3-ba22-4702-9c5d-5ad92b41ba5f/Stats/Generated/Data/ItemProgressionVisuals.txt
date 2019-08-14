@@ -1802,11 +1802,11 @@ add levelgroup 0,0,"All"
 add rootgroup "1cc2baa1-cd58-40a3-8b53-89ef2e081616",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A","",""
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_NazghulGreatsword_2H_A"
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "ca59856d-6876-4f9c-8fe5-e086df193ca6",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_NazghulGreatsword_2H_A","",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
 

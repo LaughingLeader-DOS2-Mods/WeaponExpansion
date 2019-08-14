@@ -771,7 +771,7 @@ add name "Balrin's Throwing Axe (Ice)",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
 add name "Beholder",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_NazghulGreatsword_2H_A"
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
 add name "Wraithblade",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
