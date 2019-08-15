@@ -115,7 +115,7 @@ data "Loremaster" "5"
 data "Repair" "5"
 data "Initiative" "20"
 data "Talents" "AttackOfOpportunity;Ambidextrous"
-data "Flags" "FreezeImmunity;FreezeImmunity;CharmImmunity;FearImmunity;KnockdownImmunity;CrippledImmunity;SlowedImmunity;PetrifiedImmunity;SlippingImmunity;Grounded;TauntedImmunity;DisarmedImmunity;EnragedImmunity;IgnoreClouds;MadnessImmunity;ChickenImmunity;IgnoreCursedOil;ShockedImmunity;WebImmunity;ThrownImmunity"
+data "Flags" "FreezeImmunity;FreezeImmunity;CharmImmunity;FearImmunity;KnockdownImmunity;CrippledImmunity;SlowedImmunity;PetrifiedImmunity;SlippingImmunity;Grounded;TauntedImmunity;DisarmedImmunity;EnragedImmunity;IgnoreClouds;MadnessImmunity;ChickenImmunity;IgnoreCursedOil;ShockedImmunity;WebImmunity"
 
 new entry "LLWEAPONEX_Debug_Voidwoken_Hatchling"
 type "Character"

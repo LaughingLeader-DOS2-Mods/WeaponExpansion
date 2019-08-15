@@ -180,7 +180,7 @@ using "Rush_LLWEAPONEX_Katana_Iaido"
 data "ForGameMaster" "Yes"
 data "IsEnemySkill" "Yes"
 data "Requirements" "!Immobile"
-data "MemorizationRequirements" "None"
+data "MemorizationRequirements" ""
 data "Magic Cost" "0"
 data "Memory Cost" "0"
 
