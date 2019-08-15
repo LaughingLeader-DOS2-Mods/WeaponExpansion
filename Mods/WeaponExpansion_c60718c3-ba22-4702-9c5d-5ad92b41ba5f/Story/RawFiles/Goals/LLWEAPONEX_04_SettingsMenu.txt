@@ -102,6 +102,17 @@ NOT DB_LLWEAPONEX_WeaponMastery_Temp_CurrentExperienceString(_Player, _Instance,
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:SetExperienceString] Set current experience dialog variable to [",_String,"].");
 DialogSetVariableStringForInstance(_Instance, "LLWEAPONEX_WeaponMastery_Current_f4dda1ff-ab17-4141-be2f-763c6c22a7cc", _String);
 //END_REGION
+
+//REGION CHEATS
+// Makes the vending machine spawn all the unique items locked behind level requirements
+IF
+GlobalFlagSet("LLWEAPONEX_Cheats_UnlockUniqueTiers")
+THEN
+LeaderLib_Requirements_RequirementUnlocked("LLWEAPONEX_LevelRequirement_Tier1");
+LeaderLib_Requirements_RequirementUnlocked("LLWEAPONEX_LevelRequirement_Tier2");
+LeaderLib_Requirements_RequirementUnlocked("LLWEAPONEX_LevelRequirement_Tier3");
+LeaderLib_Requirements_RequirementUnlocked("LLWEAPONEX_LevelRequirement_Tier4");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
