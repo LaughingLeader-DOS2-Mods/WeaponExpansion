@@ -466,8 +466,38 @@ NOT DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source);
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_DelayedBarrage", _, _)
 THEN
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", _x, _y, _z);
+
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_DelayedBarrage_Enemy", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", _x, _y, _z);
+
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", (REAL)_x, (REAL)_y, (REAL)_z)
+THEN
+DB_NOOP(1);
 DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z, 1);
 ApplyStatus(_Char, "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_TURNCOUNTER", 6.0, 1, _Char);
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_DelayedBarrage", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage");
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_DelayedBarrage_Enemy", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage");
+
+PROC
+LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_DelayedBarrage")
+AND
+DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z, _Remaining)
+AND
+PlayLoopEffectAtPosition("LLWEAPONEX_FX_AreaRadiusDecal_Circle_7m_01", _x, _y, _z, _Handle)
+THEN
+DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _Handle);
 
 IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_TURNCOUNTER", _)
@@ -483,12 +513,29 @@ LLWEAPONEX_Greatbows_Internal_DelayedBarrageTurnCheck(_Char, _Next);
 PROC
 LLWEAPONEX_Greatbows_Internal_DelayedBarrageTurnCheck((CHARACTERGUID)_Char, (INTEGER)_RemainingTurns)
 AND
+_RemainingTurns > 0
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_TURNCOUNTER", 6.0, 1, _Char);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_DelayedBarrageTurnCheck((CHARACTERGUID)_Char, (INTEGER)_RemainingTurns)
+AND
 _RemainingTurns < 0
 AND
 DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z, _RemainingTurns)
 THEN
 NOT DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z, _RemainingTurns);
 LeaderLib_Skills_UseSkillAtPosition(_Char, _x, _y, _z, "ProjectileStrike_Greatbow_DelayedBarrage_RainOfArrows", 1, 1);
+
+PROC
+LLWEAPONEX_Greatbows_Internal_DelayedBarrageTurnCheck((CHARACTERGUID)_Char, (INTEGER)_RemainingTurns)
+AND
+_RemainingTurns < 0
+AND
+DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _Handle)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _Handle);
+StopLoopEffect(_Handle);
 //END_REGION
 EXITSECTION
 

@@ -263,6 +263,28 @@ THEN
 CharacterSetAnimationSetOverride(_Char, _OverrideSet);
 //END_REGION
 
+//REGION SKILL_USE
+//These are helpers so alternate versions of skills (enemy variants) can still trigger the same logic
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkill((CHARACTERGUID)_Char, (STRING)_Skill)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, (STRING)_Skill, (REAL)_x, (REAL)_y, (REAL)_z)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkill(_Char, _Skill);
+
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget((CHARACTERGUID)_Char, (STRING)_Skill, (GUIDSTRING)_Target)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkill(_Char, _Skill);
+
+PROC
+LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, (STRING)_Skill)
+THEN
+DB_NOOP(1);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
