@@ -139,7 +139,6 @@ data "Act part" "0"
 data "Strength" "3"
 data "Finesse" "3"
 data "Intelligence" "3"
-data "DodgeBoost" "10"
 data "DamageBoost" "5"
 
 new entry "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS"
