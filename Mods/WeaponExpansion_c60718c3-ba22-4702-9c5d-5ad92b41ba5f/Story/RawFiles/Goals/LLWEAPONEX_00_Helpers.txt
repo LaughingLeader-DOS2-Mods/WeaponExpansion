@@ -277,8 +277,11 @@ LLWEAPONEX_Skills_CharacterUsedSkill(_Char, _Skill);
 
 PROC
 LLWEAPONEX_Skills_CharacterUsedSkillOnTarget((CHARACTERGUID)_Char, (STRING)_Skill, (GUIDSTRING)_Target)
+AND
+GetPosition(_Target, _x, _y, _z)
 THEN
 LLWEAPONEX_Skills_CharacterUsedSkill(_Char, _Skill);
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, _Skill, _x, _y, _z);
 
 PROC
 LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, (STRING)_Skill)

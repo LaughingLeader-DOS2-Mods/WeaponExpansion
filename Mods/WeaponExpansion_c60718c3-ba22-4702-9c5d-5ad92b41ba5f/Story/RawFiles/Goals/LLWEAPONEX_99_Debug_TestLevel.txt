@@ -51,6 +51,7 @@ AND
 CharacterGetHostCharacter(_Host)
 THEN
 SetStoryEvent(_Host, "LLWEAPONEX_Debug_VarTest");
+DB_LLWEAPONEX_Debug_CombatTimer(0);
 
 /*
 IF
@@ -87,11 +88,13 @@ DebugBreak("[LLWEAPONEX_Debug_VarTest] Var [CharacterCreationStarted.Class] is n
 CharacterStatusText(_Host, "[LLWEAPONEX_Debug_VarTest] Var [CharacterCreationStarted.Class] is not set!");
 */
 
+/*
 IF
 CombatStarted(_CombatID)
 THEN
 DB_LLWEAPONEX_Debug_CombatTimer(_CombatID);
 TimerLaunch("LLWEAPONEX_Debug_CombatTimer", 500);
+*/
 
 IF
 TimerFinished("LLWEAPONEX_Debug_CombatTimer")
