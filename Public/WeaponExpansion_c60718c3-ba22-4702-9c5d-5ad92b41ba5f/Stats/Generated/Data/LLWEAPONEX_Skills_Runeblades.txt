@@ -209,6 +209,17 @@ data "PrepareEffect" "LLWEAPONEX_FX_Skills_Runeblade_Reverb_Prepare_Root_01,Keep
 data "CastTextEvent" "cast"
 data "CastEffect" "LLWEAPONEX_FX_Skills_Runeblade_Reverb_Cast_Root_01,KeepRot:Dummy_Root;LLWEAPONEX_FX_Skills_Runeblade_Reverb_Cast_Weapon_01:Dummy_FX_01:cast"
 
+new entry "Shout_LLWEAPONEX_Runeblade_RunicReverb_Enemy"
+type "SkillData"
+data "SkillType" "Shout"
+using "Shout_LLWEAPONEX_Runeblade_RunicReverb"
+data "ForGameMaster" "Yes"
+data "IsEnemySkill" "Yes"
+data "Requirements" "None"
+data "MemorizationRequirements" "None"
+data "Magic Cost" "0"
+data "Memory Cost" "0"
+
 new entry "Projectile_LLWEAPONEX_Status_ActivatedRune_Base"
 type "SkillData"
 data "SkillType" "Projectile"

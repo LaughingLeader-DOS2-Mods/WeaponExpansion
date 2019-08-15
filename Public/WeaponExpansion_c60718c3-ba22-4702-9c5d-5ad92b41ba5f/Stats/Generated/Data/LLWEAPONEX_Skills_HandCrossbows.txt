@@ -284,3 +284,13 @@ data "CastEffect" "LLWEAPONEX_FX_HandCrossbow_Shoot_01:LowerArm_L_Twist_Bone:cas
 RS3_FX_Skills_Voodoo_Cast_Attack_Precision_Hand_01:Dummy_L_HandFX,Dummy_R_HandFX"
 data "TargetEffect" "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01:Dummy_BodyFX:cast"
 
+new entry "Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Enemy"
+type "SkillData"
+data "SkillType" "Projectile"
+using "Projectile_LLWEAPONEX_HandCrossbow_Assassinate"
+data "ForGameMaster" "Yes"
+data "IsEnemySkill" "Yes"
+data "Requirements" "None"
+data "MemorizationRequirements" "None"
+data "Magic Cost" "0"
+data "Memory Cost" "0"
