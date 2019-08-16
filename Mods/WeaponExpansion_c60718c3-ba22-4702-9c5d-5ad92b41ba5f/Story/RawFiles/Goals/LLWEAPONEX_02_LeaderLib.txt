@@ -38,17 +38,18 @@ THEN
 LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion] Settings", "LLWEAPONEX_SettingsMenu", "WeaponExpansion", "LaughingLeader");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "WeaponExpansion");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_ExplodeFix", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScript("LeaderLib_StatusEvents_DisableScriptEnabled", "WeaponExpansion");
 
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Assassin", "Assassin [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Blademaster", "Blademaster [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_ChaosWeaver", "Chaos Weaver [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_DragonSlayer", "Dragon Slayer [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_DualShields", "Shieldmaster [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Fencer", "Fencer [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_Halberdier", "Halberdier [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkWoodenQuarterstaff", "Monk (Wooden Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_MonkMetalQuarterstaff", "Monk (Metal Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
-LeaderLib_PresetMenu_RegisterPreset("LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Assassin", "Assassin [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Blademaster", "Blademaster [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_ChaosWeaver", "Chaos Weaver [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_DragonSlayer", "Dragon Slayer [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_DualShields", "Shieldmaster [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Fencer", "Fencer [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Halberdier", "Halberdier [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_MonkWoodenQuarterstaff", "Monk (Wooden Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_MonkMetalQuarterstaff", "Monk (Metal Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
 
 PROC
 LLWEAPONEX_LeaderLib_InitHelperSettings()
@@ -366,6 +367,24 @@ ItemToInventory(_NewItem, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 5, 0)
+THEN
+LeaderLib_PresetMenu_ClearEntriesWithFlag("WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Assassin", "Assassin [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Blademaster", "Blademaster [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_ChaosWeaver", "Chaos Weaver [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_DragonSlayer", "Dragon Slayer [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_DualShields", "Shieldmaster [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Fencer", "Fencer [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Halberdier", "Halberdier [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_MonkWoodenQuarterstaff", "Monk (Wooden Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_MonkMetalQuarterstaff", "Monk (Metal Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
+
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND

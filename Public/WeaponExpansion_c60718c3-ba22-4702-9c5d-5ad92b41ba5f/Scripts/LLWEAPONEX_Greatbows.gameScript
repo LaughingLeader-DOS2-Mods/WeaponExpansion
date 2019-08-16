@@ -204,17 +204,29 @@ VARS
 	CHARACTER:_Source
 	CHARACTER:_Target
 	FLOAT:_Movement
+	STRING:_Str
+	FIXEDSTRING:_StrF
 ON
 	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbows_DelayedBarrage_CheckMovement")
 ACTIONS
-IF "c1|c2|c3|(c4&(c5|c6))"
-	CharacterHasStatus(_Target, KNOCKED_DOWN)
-	CharacterHasStatus(_Target, STUNNED)
-	CharacterHasStatus(_Target, SLEEPING)
+IF "c1"
 	CharacterGetStat(_Movement, _Target, Movement)
-	IsLessThen(_Movement, 0)
+	
+THEN
+	Print(_Str, "Movement: [1]", _Movement)
+	Cast(_StrF, _Str)
+	StatusText(_Target, _StrF)
+ENDIF
+	
+IF "c1|!c2|c3|c4&(c5|c6)"
+	IsTagged(_Target, "LeaderLib_IsDisabled")
+	CharacterCanMove(_Target)
+	CharacterHasStatus(_Target, WEB)
+	CharacterGetStat(_Movement, _Target, Movement)
+	IsLessThen(_Movement, 0.01)
 	IsEqual(_Movement, 0)
 THEN
 	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_DelayedBarrage_BonusDamage, -1, _Source)
 	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_BONUSDAMAGE, 0, 1, _Source)
+	IterateCharactersInCombat(_Char, "AS_FindEnemies", Lowest, Distance)
 ENDIF

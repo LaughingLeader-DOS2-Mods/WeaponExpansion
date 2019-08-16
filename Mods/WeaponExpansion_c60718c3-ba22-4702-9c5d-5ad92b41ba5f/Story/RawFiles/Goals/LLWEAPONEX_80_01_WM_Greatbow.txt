@@ -47,6 +47,10 @@ THEN
 NOT DB_LLWEAPONEX_Greatbows_Temp_SkyShotProc(_Character, _Target, _Skill);
 LeaderLib_Timers_StartObjectObjectTimer(_Character, _Target, 800, "LLWEAPONEX_Timers_Greatbows_OmniboltProc", "LLWEAPONEX_Greatbows_ProcOmniBolt");
 //END_REGION
+
+//REGION FUTURE_BARRAGE_TURNS
+
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
