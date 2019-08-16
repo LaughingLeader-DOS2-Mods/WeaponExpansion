@@ -464,119 +464,105 @@ NOT DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source);
 
 //REGION DELAYED_BARRAGE
 IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_DelayedBarrage", _, _)
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_FutureBarrage", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", _x, _y, _z);
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _x, _y, _z);
 
 IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_DelayedBarrage_Enemy", _, _)
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", _x, _y, _z);
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _x, _y, _z);
 
 IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Greatbow_DelayedBarrage", _, _)
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Greatbow_FutureBarrage", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", _Target);
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _Target);
 
 IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Greatbow_DelayedBarrage_Enemy", _, _)
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", _Target);
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _Target);
 
 PROC
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", (REAL)_x, (REAL)_y, (REAL)_z)
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_FutureBarrage", (REAL)_x, (REAL)_y, (REAL)_z)
 THEN
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z);
-
-PROC
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", (REAL)_x, (REAL)_y, (REAL)_z)
-AND
-CombatGetIDForCharacter(_Char, _CombatID)
-THEN
-LeaderLib_Turns_TrackForPositionInCombat(_x, _y, _z, "LLWEAPONEX_Greatbow_DelayedBarrageFire", 3, _CombatID);
-
-PROC
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_DelayedBarrage", (REAL)_x, (REAL)_y, (REAL)_z)
-AND
-NOT CombatGetIDForCharacter(_Char, _)
-THEN
- // 3 turns not counting the character's turn
-LeaderLib_Turns_TrackForPositionInCombat(_x, _y, _z, "LLWEAPONEX_Greatbow_DelayedBarrageFire", 4, -1);
+LeaderLib_Turns_TrackPositionWithObject(_Char, _x, _y, _z, "LLWEAPONEX_Greatbow_FutureBarrageFire", 3);
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos(_Char, _x, _y, _z);
 
 IF
-SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_DelayedBarrage", _, _)
+SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_FutureBarrage", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage");
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_FutureBarrage");
 
 IF
-SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_DelayedBarrage_Enemy", _, _)
+SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_DelayedBarrage");
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_FutureBarrage");
 
 PROC
-LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_DelayedBarrage")
+LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_FutureBarrage")
 AND
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z)
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos(_Char, _x, _y, _z)
 AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _x, _y, _z, _)
+NOT DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX((GUIDSTRING)_Char, _x, _y, _z, _)
 AND
  // No clue why it scales like this
 PlayScaledLoopEffectAtPosition("LLWEAPONEX_FX_AreaRadiusDecal_Circle_1m_Green_01", 8.0, _x, _y, _z, _Handle) // == 4m
 THEN
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _x, _y, _z, _Handle);
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX((GUIDSTRING)_Char, _x, _y, _z, _Handle);
+NOT DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos((CHARACTERGUID)_Char, _x, _y, _z);
 
 PROC
-LeaderLib_Turns_OnTurnCounterChanged_Position((STRING)_ID, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_DelayedBarrageFire", (INTEGER)_LastTurns, (INTEGER)_NextTurns)
+LeaderLib_Turns_OnPositionObjectTurnChanged((STRING)_ID, (GUIDSTRING)_Char, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_FutureBarrageFire", (INTEGER)_LastTurns, (INTEGER)_NextTurns)
 AND
 _NextTurns == 1
 AND
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _x, _y, _z, _Handle)
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(_Char, _x, _y, _z, _Handle)
 AND
 PlayScaledLoopEffectAtPosition("LLWEAPONEX_FX_AreaRadiusDecal_Circle_1m_01", 8.0, _x, _y, _z, _NewHandle) // == 4m
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _x, _y, _z, _Handle);
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _x, _y, _z, _NewHandle);
+NOT DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(_Char, _x, _y, _z, _Handle);
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(_Char, _x, _y, _z, _NewHandle);
 StopLoopEffect(_Handle);
 
+
 PROC
-LeaderLib_Turns_OnTurnCounterComplete_Position((STRING)_ID, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_DelayedBarrageFire")
+LeaderLib_Turns_OnTurnCounterComplete_PositionWithObject((STRING)_ID, (GUIDSTRING)_Char, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_FutureBarrageFire")
 AND
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _x, _y, _z, _Handle)
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(_Char, _x, _y, _z, _Handle)
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage_LoopFX(_Char, _x, _y, _z, _Handle);
+NOT DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(_Char, _x, _y, _z, _Handle);
 StopLoopEffect(_Handle);
 PlayEffectAtPosition("LLWEAPONEX_FX_Skills_Greatbow_FutureBarrage_Decal_AttackImminent_01", _x, _y, _z);
 
 PROC
-LeaderLib_Turns_OnTurnCounterComplete_Position((STRING)_ID, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_DelayedBarrageFire")
-AND
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z)
+LeaderLib_Turns_OnTurnCounterComplete_PositionWithObject((STRING)_ID, (GUIDSTRING)_Char, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_FutureBarrageFire")
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrage(_Char, _x, _y, _z);
-LeaderLib_Skills_UseSkillAtPosition(_Char, _x, _y, _z, "ProjectileStrike_Greatbow_DelayedBarrage_RainOfArrows", 1, 1);
+LeaderLib_Skills_UseSkillAtPosition((CHARACTERGUID)_Char, _x, _y, _z, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows", 1, 1);
 
 //END_REGION
 
 //REGION BARRAGE_IMMOBILE_CHECK
 PROC
-LeaderLib_Skills_OnDummyCastSkillAtPosition((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_Greatbow_DelayedBarrage_RainOfArrows", (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skilltype, (STRING)_SkillElement)
+LeaderLib_Skills_OnDummyCastSkillAtPosition((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows", (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skilltype, (STRING)_SkillElement)
 THEN
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrageDummy(_Caster, _Dummy);
-LeaderLib_Timers_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_DelayedBarrage_ClearDummyDB", "LLWEAPONEX_DelayedBarrage_ClearDummyDB");
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy);
+LeaderLib_Timers_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_FutureBarrage_ClearDummyDB", "LLWEAPONEX_FutureBarrage_ClearDummyDB");
 
 IF
-StoryEvent((CHARACTERGUID)_Caster, "LLWEAPONEX_DelayedBarrage_ClearDummyDB")
+StoryEvent((CHARACTERGUID)_Caster, "LLWEAPONEX_FutureBarrage_ClearDummyDB")
 AND
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrageDummy(_Caster, _Dummy)
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy)
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrageDummy(_Caster, _Dummy);
+NOT DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy);
 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_IMMOBILECHECK", (CHARACTERGUID)_Dummy)
 AND
-DB_LLWEAPONEX_Greatbows_Temp_DelayedBarrageDummy(_Caster, _Dummy)
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy)
 THEN
-CharacterCharacterSetEvent(_Target, _Caster, "LLWEAPONEX_Greatbows_DelayedBarrage_CheckMovement");
+CharacterCharacterSetEvent(_Target, _Caster, "LLWEAPONEX_Greatbows_FutureBarrage_CheckMovement");
+LeaderLib_Timers_RestartObjectTimer(_Caster, "LLWEAPONEX_Timers_FutureBarrage_ClearDummyDB", 250);
 //END_REGION
 EXITSECTION
 

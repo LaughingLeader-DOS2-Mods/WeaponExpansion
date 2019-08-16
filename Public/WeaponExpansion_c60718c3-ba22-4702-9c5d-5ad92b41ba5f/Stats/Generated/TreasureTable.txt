@@ -782,7 +782,7 @@ object category "I_SKILLBOOK_LLWEAPONEX_Greatbow_PiercingShot",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_Greatbow_KnockbackShot",1,0,0,0,0,0,0,0
 new subtable "1,1"
-object category "I_SKILLBOOK_LLWEAPONEX_Greatbow_DelayedBarrage",1,0,0,0,0,0,0,0
+object category "I_SKILLBOOK_LLWEAPONEX_Greatbow_FutureBarrage",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_Handcrossbow_Assassinate",1,0,0,0,0,0,0,0
 new subtable "1,1"

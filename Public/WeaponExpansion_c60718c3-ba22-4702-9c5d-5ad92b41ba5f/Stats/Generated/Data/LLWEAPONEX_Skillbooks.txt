@@ -50,7 +50,7 @@ data "Act part" "1"
 data "Value" "120"
 data "Requirements" "Tag LLWEAPONEX_Greatbow_Mastery2"
 
-new entry "SKILLBOOK_LLWEAPONEX_Greatbow_DelayedBarrage"
+new entry "SKILLBOOK_LLWEAPONEX_Greatbow_FutureBarrage"
 type "Object"
 using "_Skillbooks_LLWEAPONEX_MasterySkillBase"
 data "RootTemplate" "c85c060e-90b3-4aaa-baa8-998964a3c04f"

@@ -207,7 +207,7 @@ VARS
 	STRING:_Str
 	FIXEDSTRING:_StrF
 ON
-	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbows_DelayedBarrage_CheckMovement")
+	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbows_FutureBarrage_CheckMovement")
 ACTIONS
 IF "c1"
 	CharacterGetStat(_Movement, _Target, Movement)
@@ -226,7 +226,7 @@ IF "c1|!c2|c3|c4&(c5|c6)"
 	IsLessThen(_Movement, 0.01)
 	IsEqual(_Movement, 0)
 THEN
-	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_DelayedBarrage_BonusDamage, -1, _Source)
+	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_BonusDamage, -1, _Source)
 	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_BONUSDAMAGE, 0, 1, _Source)
 	IterateCharactersInCombat(_Char, "AS_FindEnemies", Lowest, Distance)
 ENDIF
