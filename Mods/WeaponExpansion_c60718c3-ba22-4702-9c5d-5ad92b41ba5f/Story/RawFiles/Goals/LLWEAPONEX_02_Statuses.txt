@@ -633,13 +633,6 @@ CharacterStatusText(_Char, "LLWEAPONEX_BlockedHealing");
 PlayEffect(_Char, "LLWEAPONEX_FX_Status_BlockHealing_Hit_01", "Dummy_FrontFX");
 //END_REGION
 
-//REGION BARRAGE_IMMOBILE_CHECK
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_IMMOBILECHECK", (CHARACTERGUID)_Source)
-THEN
-CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_Greatbows_DelayedBarrage_CheckMovement");
-//END_REGION
-
 //REGION WAR_CHARGE_DAMAGE
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_WARCHARGE_BONUS", _Source)
