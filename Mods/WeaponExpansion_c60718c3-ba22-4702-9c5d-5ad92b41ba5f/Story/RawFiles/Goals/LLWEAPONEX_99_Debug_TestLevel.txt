@@ -1359,6 +1359,36 @@ IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
 THEN
 CharacterUseSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", _Char, 1, 1, 1);
+
+//REGION COMBINE_TRACE
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+String(_Char, _Str1)
+AND
+String(_ItemA, _Str2)
+AND
+String(_ItemB, _Str2)
+AND
+String(_ItemC, _Str3)
+AND
+String(_ItemD, _Str4)
+AND
+String(_ItemE, _Str5)
+AND
+IntegertoString(_RequestID, _Str6)
+THEN
+LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining [",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
+
+IF
+ItemTemplateCombinedWithItemTemplate(_Str1, _Str2, _Str3, _Str4, _Str5, _Char, _Item)
+AND
+String(_Char, _CharStr)
+AND
+String(_Item, _ItemStr)
+THEN
+LeaderLog_Log("DEBUG", "[ItemTemplateCombinedWithItemTemplate] Character [",_CharStr,"] Result[",_ItemStr,"] Combined [",_Str1,"][",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
