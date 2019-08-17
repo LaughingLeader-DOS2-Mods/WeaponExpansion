@@ -38,7 +38,7 @@ DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b6
 
 KBSECTION
 IF
-GameStarted(_,_)
+GameStarted(_,1)
 AND
 CharacterGetHostCharacter(_Char)
 THEN

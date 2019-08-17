@@ -208,4 +208,16 @@ type "ObjectCategories"
 data "Category" "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
 data "Icon" "LLWEAPONEX_Items_Unique_Banner_Dwarves_2H_A"
 data "Tooltip" "Banner of the Pack"
+
+new CraftingPreviewData "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A"
+type "ObjectCategories"
+data "Category" "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A"
+data "Icon" "LLWEAPONEX_Items_Halberd_2H_Unique_Warchief_A"
+data "Tooltip" "Warchief's Halberd (Spear)"
+
+new CraftingPreviewData "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A"
+type "ObjectCategories"
+data "Category" "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A"
+data "Icon" "LLWEAPONEX_Items_Halberd_2H_Unique_Warchief_B"
+data "Tooltip" "Warchief's Halberd (Axe)"
 //END_REGION

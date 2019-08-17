@@ -83,3 +83,5 @@ LLWEAPONEX_ARMCANNON_CHARGED_Description	The <font color='#c5a65a'>Runic Cannon<
 LLWEAPONEX_ARMCANNON_RANGED_HIT_DisplayName	Deals Shadow Damage to broken Magic Armour.
 LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith
 LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.
+LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName	Bounty of the Harvest
+LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls with <font color='#c5a65a'>Soul Harvest</font>, gaining a permanent damage bonus.

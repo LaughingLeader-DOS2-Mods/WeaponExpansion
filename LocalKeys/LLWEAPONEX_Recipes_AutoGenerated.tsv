@@ -5,7 +5,6 @@ WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToCon_1	Omnibolt, Heaven's Wrath (Con
 WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToMem_1	Omnibolt, Heaven's Wrath (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToWit_1	Omnibolt, Heaven's Wrath (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Reset_1	Omnibolt, Heaven's Wrath (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToStr_1	Muramasa, The Cursed Blade (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToFin_1	Muramasa, The Cursed Blade (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToInt_1	Muramasa, The Cursed Blade (Intelligence Scaling)
@@ -13,7 +12,6 @@ WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToCon_1	Muramasa, The Cursed Blade (Con
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToMem_1	Muramasa, The Cursed Blade (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToWit_1	Muramasa, The Cursed Blade (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_Reset_1	Muramasa, The Cursed Blade (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToStr_1	Raizan (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToFin_1	Raizan (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToInt_1	Raizan (Intelligence Scaling)
@@ -21,7 +19,6 @@ WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToCon_1	Raizan (Constitution Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToMem_1	Raizan (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToWit_1	Raizan (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Reset_1	Raizan (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToStr_1	Raizan (Empowered) (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToFin_1	Raizan (Empowered) (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToInt_1	Raizan (Empowered) (Intelligence Scaling)
@@ -29,7 +26,6 @@ WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToCon_1	Raizan (Empowered) (Constitutio
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToMem_1	Raizan (Empowered) (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToWit_1	Raizan (Empowered) (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Reset_1	Raizan (Empowered) (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToStr_1	Raizan (Unleashed) (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin_1	Raizan (Unleashed) (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt_1	Raizan (Unleashed) (Intelligence Scaling)
@@ -37,7 +33,6 @@ WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToCon_1	Raizan (Unleashed) (Constitutio
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToMem_1	Raizan (Unleashed) (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToWit_1	Raizan (Unleashed) (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Reset_1	Raizan (Unleashed) (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToStr_1	Power Pole (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToFin_1	Power Pole (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToInt_1	Power Pole (Intelligence Scaling)
@@ -45,7 +40,6 @@ WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToCon_1	Power Pole (Constitution Sc
 WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToMem_1	Power Pole (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToWit_1	Power Pole (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_Reset_1	Power Pole (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToStr_1	Kagutsuchi (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToFin_1	Kagutsuchi (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToInt_1	Kagutsuchi (Intelligence Scaling)
@@ -53,7 +47,6 @@ WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToCon_1	Kagutsuchi (Constitution 
 WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToMem_1	Kagutsuchi (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToWit_1	Kagutsuchi (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_Reset_1	Kagutsuchi (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToStr_1	Frostdyne (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToFin_1	Frostdyne (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToInt_1	Frostdyne (Intelligence Scaling)
@@ -61,7 +54,6 @@ WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToCon_1	Frostdyne (Constitution 
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToMem_1	Frostdyne (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToWit_1	Frostdyne (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_Reset_1	Frostdyne (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToStr_1	Frostdyne (Empowered) (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToFin_1	Frostdyne (Empowered) (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToInt_1	Frostdyne (Empowered) (Intelligence Scaling)
@@ -69,7 +61,6 @@ WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToCon_1	Frostdyne (Empowered) 
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToMem_1	Frostdyne (Empowered) (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToWit_1	Frostdyne (Empowered) (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_Reset_1	Frostdyne (Empowered) (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToStr_1	Frostdyne (Unleashed) (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToFin_1	Frostdyne (Unleashed) (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToInt_1	Frostdyne (Unleashed) (Intelligence Scaling)
@@ -77,7 +68,6 @@ WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToCon_1	Frostdyne (Unleashed) 
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToMem_1	Frostdyne (Unleashed) (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToWit_1	Frostdyne (Unleashed) (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_Reset_1	Frostdyne (Unleashed) (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToStr_1	Chaos Edge (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToFin_1	Chaos Edge (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToInt_1	Chaos Edge (Intelligence Scaling)
@@ -85,7 +75,6 @@ WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToCon_1	Chaos Edge (Constitution Sc
 WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToMem_1	Chaos Edge (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToWit_1	Chaos Edge (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_Reset_1	Chaos Edge (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToStr_1	Eruption, the Portable Cannon (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToFin_1	Eruption, the Portable Cannon (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToInt_1	Eruption, the Portable Cannon (Intelligence Scaling)
@@ -93,7 +82,6 @@ WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToCon_1	Eruption, the Portable Cannon (Co
 WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToMem_1	Eruption, the Portable Cannon (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToWit_1	Eruption, the Portable Cannon (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Reset_1	Eruption, the Portable Cannon (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToStr_1	Beholder (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToFin_1	Beholder (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToInt_1	Beholder (Intelligence Scaling)
@@ -101,7 +89,6 @@ WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToCon_1	Beholder (Constitution Scaling
 WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToMem_1	Beholder (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToWit_1	Beholder (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_Reset_1	Beholder (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToStr_1	Wraithblade (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToFin_1	Wraithblade (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToInt_1	Wraithblade (Intelligence Scaling)
@@ -109,7 +96,6 @@ WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToCon_1	Wraithblade (Constitution Scaling
 WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToMem_1	Wraithblade (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToWit_1	Wraithblade (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Reset_1	Wraithblade (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToStr_1	Soul Harvest (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToFin_1	Soul Harvest (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToInt_1	Soul Harvest (Intelligence Scaling)
@@ -117,7 +103,6 @@ WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToCon_1	Soul Harvest (Constitution
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToMem_1	Soul Harvest (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToWit_1	Soul Harvest (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Reset_1	Soul Harvest (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToStr_1	Death's Edge (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToFin_1	Death's Edge (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToInt_1	Death's Edge (Intelligence Scaling)
@@ -125,7 +110,6 @@ WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToCon_1	Death's Edge (Constitution S
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToMem_1	Death's Edge (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToWit_1	Death's Edge (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Reset_1	Death's Edge (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_ToStr_1	Runic Cannon (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_ToFin_1	Runic Cannon (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_ToInt_1	Runic Cannon (Intelligence Scaling)
@@ -133,7 +117,6 @@ WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_ToCon_1	Runic Cannon (Constitution Scaling)
 WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_ToMem_1	Runic Cannon (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_ToWit_1	Runic Cannon (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_Reset_1	Runic Cannon (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToStr_1	Banner of Unruly Faith (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToFin_1	Banner of Unruly Faith (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToInt_1	Banner of Unruly Faith (Intelligence Scaling)
@@ -141,7 +124,6 @@ WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToCon_1	Banner of Unruly Faith 
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToMem_1	Banner of Unruly Faith (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToWit_1	Banner of Unruly Faith (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_Reset_1	Banner of Unruly Faith (Reset Scaling)
-
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToStr_1	Banner of the Pack (Strength Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToFin_1	Banner of the Pack (Finesse Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToInt_1	Banner of the Pack (Intelligence Scaling)
@@ -149,4 +131,17 @@ WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToCon_1	Banner of the Pack (Constit
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToMem_1	Banner of the Pack (Memory Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToWit_1	Banner of the Pack (Wits Scaling)
 WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_Reset_1	Banner of the Pack (Reset Scaling)
-
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToStr_1	Warchief's Halberd (Spear) (Strength Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToFin_1	Warchief's Halberd (Spear) (Finesse Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToInt_1	Warchief's Halberd (Spear) (Intelligence Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToCon_1	Warchief's Halberd (Spear) (Constitution Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToMem_1	Warchief's Halberd (Spear) (Memory Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToWit_1	Warchief's Halberd (Spear) (Wits Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_Reset_1	Warchief's Halberd (Spear) (Reset Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToStr_1	Warchief's Halberd (Axe) (Strength Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToFin_1	Warchief's Halberd (Axe) (Finesse Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToInt_1	Warchief's Halberd (Axe) (Intelligence Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToCon_1	Warchief's Halberd (Axe) (Constitution Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToMem_1	Warchief's Halberd (Axe) (Memory Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToWit_1	Warchief's Halberd (Axe) (Wits Scaling)
+WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_Reset_1	Warchief's Halberd (Axe) (Reset Scaling)

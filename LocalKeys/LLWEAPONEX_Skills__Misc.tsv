@@ -31,3 +31,5 @@ Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF331
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.
 Shout_LLWEAPONEX_Wraithblade_SlayHidden_DisplayName	<font color='#D5D7E3'>Slay Hidden</font>
 Shout_LLWEAPONEX_Wraithblade_SlayHidden_Description	Instantly warp to any hidden enemy and strike a grievous blow for [1].<br><font color='#C1A9FF'>Gain Invisibility if the target was Invisible.</font><br><font color='#FF8585'>Targets hit become marked, preventing Invisibility for 1 turn.</font>
+Cone_LLWEAPONEX_SoulHarvest_Reap_DisplayName	<font color='#80FFC3'>Soul Harvest</font>
+Cone_LLWEAPONEX_SoulHarvest_Reap_Description	Reap the battlefield, dealing [1] to enemies in an arc.<br><font color='#CD39C0'>Slain enemies provide a permanent, stacking damage bonus and restore <font color='#80FFC3'>source points</font>.</font>
