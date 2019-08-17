@@ -193,6 +193,18 @@ THEN
 NOT DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon);
 //END_REGION
 
+//REGION TRANSFORMED_ITEMCOMBO
+IF
+ItemTemplateCombinedWithItemTemplate(_,_,_,_,_,_Char,_Item)
+AND
+GetTemplate(_Item, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+THEN
+SetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", _Item);
+LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
+//END_REGION
+
 //REGION ARM_CANNON_BLOCK_SHIELD_WEAPON
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Char, (ITEMGUID)_Weapon)
