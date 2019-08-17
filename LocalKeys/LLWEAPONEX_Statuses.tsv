@@ -63,6 +63,7 @@ LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font col
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
 LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark
 LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.
+LLWEAPONEX_WARCHIEF_WHIRLWIND_DAMAGE_DisplayName	Hit Enemies in a 4m Radius
 LLWEAPONEX_WARCHARGE_DisplayName	War Charge
 LLWEAPONEX_WARCHARGE_Description	Character is initiating a revolutionary war charge. Get'em!
 LLWEAPONEX_WARCHARGE_APPLY_DisplayName	War Charge
@@ -79,6 +80,6 @@ LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS_Description	Character is inspired by t
 LLWEAPONEX_RANDOM_AILMENT_DisplayName	Random Elemental Ailment
 LLWEAPONEX_ARMCANNON_CHARGED_DisplayName	Charged (Runic Cannon)
 LLWEAPONEX_ARMCANNON_CHARGED_Description	The <font color='#c5a65a'>Runic Cannon</font> is charged and ready to disperse stored energy."
-LLWEAPONEX_ARMCANNON_RANGED_HIT_DisplayName	Deals Pure Damage to broken Magic Armour.
+LLWEAPONEX_ARMCANNON_RANGED_HIT_DisplayName	Deals Shadow Damage to broken Magic Armour.
 LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith
 LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.
