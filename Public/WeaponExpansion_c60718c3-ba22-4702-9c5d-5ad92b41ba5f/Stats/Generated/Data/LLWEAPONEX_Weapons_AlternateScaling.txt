@@ -1,0 +1,456 @@
+new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+data "Requirements" "Wits 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_Str"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+data "Requirements" "Strength 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_Fin"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+data "Requirements" "Finesse 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_Int"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+data "Requirements" "Intelligence 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_Con"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+data "Requirements" "Constitution 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_Mem"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+data "Requirements" "Memory 0"
+
+new entry "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_Wit"
+using "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+data "Requirements" "Wits 0"
+
