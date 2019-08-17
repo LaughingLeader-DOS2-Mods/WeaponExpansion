@@ -684,14 +684,26 @@
                     <attribute id="Description" value="Handedness" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_OneHanded" type="23" />
                     <children>
-                        <node id="Categories" />
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
                     </children>
                 </node>
                 <node id="Tag">
                     <attribute id="Description" value="Grimoire Element" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Grimoire_Wind" type="23" />
                     <children>
-                        <node id="Categories" />
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
                     </children>
                 </node>
                 <node id="Tag">
@@ -905,6 +917,19 @@
                 <node id="Tag">
                     <attribute id="Description" value="Weapon Type" type="23" />
                     <attribute id="Name" value="LLWEAPONEX_Banner" type="23" />
+                    <children>
+                        <node id="Categories">
+                            <children>
+                                <node id="Category">
+                                    <attribute id="Name" value="Code" type="23" />
+                                </node>
+                            </children>
+                        </node>
+                    </children>
+                </node>
+                <node id="Tag">
+                    <attribute id="Description" value="" type="23" />
+                    <attribute id="Name" value="LLWEAPONEX_WarchiefHalberd" type="23" />
                     <children>
                         <node id="Categories">
                             <children>

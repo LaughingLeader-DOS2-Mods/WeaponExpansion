@@ -22,213 +22,213 @@ LLWEAPONEX_Uniques_InitSettings();
 
 //REGION BEHOLDER
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 THEN
-DB_LLWEAPONEX_Uniques_BeholderEquipped(_Character);
+DB_LLWEAPONEX_Uniques_BeholderEquipped(_Char);
 
 IF
-CharacterStatusApplied(_Player, "UNSHEATHED", _)
+CharacterStatusApplied(_Char, "UNSHEATHED", _)
 AND
-DB_LLWEAPONEX_Uniques_BeholderEquipped(_Player)
+DB_LLWEAPONEX_Uniques_BeholderEquipped(_Char)
 THEN
-PROC_LoopEffect("LLWEAPONEX_FX_Overlay_Weapon_DarkEnergy_01", _Player, "LLWEAPONEX.FX.BeholderUnsheathed", "__ANY__", "Dummy_Root");
+PROC_LoopEffect("LLWEAPONEX_FX_Overlay_Weapon_DarkEnergy_01", _Char, "LLWEAPONEX.FX.BeholderUnsheathed", "__ANY__", "Dummy_Root");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Unsheathed] Playing Beholder unsheathed loop effect on character.");
 
 IF
-CharacterStatusRemoved(_Player, "UNSHEATHED", _)
+CharacterStatusRemoved(_Char, "UNSHEATHED", _)
 AND
-DB_LLWEAPONEX_Uniques_BeholderEquipped(_Player)
+DB_LLWEAPONEX_Uniques_BeholderEquipped(_Char)
 THEN
-PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.BeholderUnsheathed");
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.BeholderUnsheathed");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Sheathed] Stopping Beholder unsheathed loop effect on character.");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 AND
-DB_LLWEAPONEX_Uniques_BeholderEquipped(_Player)
+DB_LLWEAPONEX_Uniques_BeholderEquipped(_Char)
 THEN
-PROC_StopLoopEffect(_Player, "LLWEAPONEX.FX.BeholderUnsheathed");
-NOT DB_LLWEAPONEX_Uniques_BeholderEquipped(_Player);
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.BeholderUnsheathed");
+NOT DB_LLWEAPONEX_Uniques_BeholderEquipped(_Char);
 //END_REGION
 
 //REGION FROSTDYNE_SKILLS
 /*
 IF
-CharacterStatusApplied(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_INFO", _)
+CharacterStatusApplied(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_INFO", _)
 AND
-CharacterGetLevel(_Player, _Level)
+CharacterGetLevel(_Char, _Level)
 THEN
-LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
-LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, _Level);
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Char);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, _Level);
 
 PROC
-LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Player, (INTEGER)_Level)
+LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Char, (INTEGER)_Level)
 AND
 _Level < 6
 THEN
-ApplyStatus(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_A", -1.0, 1, _Player);
-DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_A");
+ApplyStatus(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_A", -1.0, 1, _Char);
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_A");
 
 PROC
-LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Player, (INTEGER)_Level)
+LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Char, (INTEGER)_Level)
 AND
 _Level >= 6
 AND
 _Level < 14
 THEN
-ApplyStatus(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_B", -1.0, 1, _Player);
-DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_B");
+ApplyStatus(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_B", -1.0, 1, _Char);
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_B");
 
 PROC
-LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Player, (INTEGER)_Level)
+LLWEAPONEX_Uniques_FrostDyne_AddSkills((CHARACTERGUID)_Char, (INTEGER)_Level)
 AND
 _Level >= 14
 THEN
-ApplyStatus(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_C", -1.0, 1, _Player);
-DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_C");
+ApplyStatus(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_C", -1.0, 1, _Char);
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_C");
 
 IF
-CharacterStatusRemoved(_Player, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_INFO", _)
+CharacterStatusRemoved(_Char, "LLWEAPONEX_UNIQUE_FROSTDYNE_SKILLS_INFO", _)
 THEN
-LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Char);
 
 PROC
-LLWEAPONEX_Uniques_FrostDyne_RemoveSkills((CHARACTERGUID)_Player)
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, _Status)
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Char, _Status)
 THEN
-RemoveStatus(_Player, _Status);
-NOT DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, _Status);
+RemoveStatus(_Char, _Status);
+NOT DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Char, _Status);
 
 IF
-CharacterLeveledUp(_Player)
+CharacterLeveledUp(_Char)
 AND
-DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Player, _Status)
+DB_LLWEAPONEX_Uniques_Temp_FrostDyneActive(_Char, _Status)
 AND
-CharacterGetLevel(_Player, _Level)
+CharacterGetLevel(_Char, _Level)
 THEN
-LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp(_Player, _Level);
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp(_Char, _Level);
 
 PROC
-LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Player, 4)
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Char, 4)
 THEN
-LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
-LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 4);
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Char);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 4);
 
 PROC
-LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Player, 6)
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Char, 6)
 THEN
-LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
-LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 6);
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Char);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 6);
 
 PROC
-LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Player, 14)
+LLWEAPONEX_Uniques_FrostDyne_OnPlayerLeveledUp((CHARACTERGUID)_Char, 14)
 THEN
-LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Player);
-LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Player, 14);
+LLWEAPONEX_Uniques_FrostDyne_RemoveSkills(_Char);
+LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 14);
 */
 //END_REGION
 
 //REGION MURAMASA
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
-LLWEAPONEX_Uniques_OnMuramasaEquipped(_Character);
+LLWEAPONEX_Uniques_OnMuramasaEquipped(_Char);
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_Uniques_OnMuramasaEquipped((CHARACTERGUID)_Character)
+LLWEAPONEX_Uniques_OnMuramasaEquipped((CHARACTERGUID)_Char)
 AND
-CharacterGetHitpointsPercentage(_Character, _HP)
+CharacterGetHitpointsPercentage(_Char, _HP)
 AND
 _HP <= 50
 THEN
-ApplyStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, 0, _Character);
+ApplyStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, 0, _Char);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
-LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Character);
+LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Char);
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion", 500);
 
 PROC
-LLWEAPONEX_Uniques_OnMuramasaUnequipped((CHARACTERGUID)_Character)
+LLWEAPONEX_Uniques_OnMuramasaUnequipped((CHARACTERGUID)_Char)
 AND
-LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
+LeaderLib_Helper_QRY_HasStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
 THEN
-RemoveStatus(_Character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
+RemoveStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
 //END_REGION
 
 //REGION DEMON_GAUNTLET
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
-LLWEAPONEX_Uniques_OnDemonGauntletUnequipped(_Character);
+LLWEAPONEX_Uniques_OnDemonGauntletUnequipped(_Char);
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion", 500);
 
 PROC
-LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Character)
+LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Char)
 AND
-LeaderLib_Helper_QRY_HasStatus(_Character, "LLWEAPONEX_DEMON_HAND_DEFENSE")
+LeaderLib_Helper_QRY_HasStatus(_Char, "LLWEAPONEX_DEMON_HAND_DEFENSE")
 THEN
-RemoveStatus(_Character, "LLWEAPONEX_DEMON_HAND_DEFENSE");
+RemoveStatus(_Char, "LLWEAPONEX_DEMON_HAND_DEFENSE");
 
 PROC
-LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Source)
+LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 
 IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_DEMON_HAND_HIT", (CHARACTERGUID)_Source)
+CharacterStatusApplied(_Target, "LLWEAPONEX_DEMON_HAND_HIT", (CHARACTERGUID)_Char)
 THEN
-LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 
 PROC
-LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Char, (CHARACTERGUID)_Target)
 AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _OtherTarget)
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _OtherTarget)
 THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _OtherTarget);
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _OtherTarget);
 
 PROC
-LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath((CHARACTERGUID)_Char, (CHARACTERGUID)_Target)
 THEN
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 
 PROC
 LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget((CHARACTERGUID)_Target)
 AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
-PlayEffect(_Source, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R");
-ApplyStatus(_Source, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", -1.0, 0, _Source);
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
+PlayEffect(_Char, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R");
+ApplyStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", -1.0, 0, _Char);
 
 IF
 CharacterStatusRemoved(_Target, "LLWEAPONEX_DEMON_HAND_HIT", _)
 AND
-DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target)
+DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Source, _Target);
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_DemonGauntlet_RemoveCritBonus")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_DemonGauntlet_RemoveCritBonus")
 AND
-HasActiveStatus(_Player, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
+HasActiveStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
 THEN
-RemoveStatus(_Player, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
+RemoveStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
 //END_REGION
 
 //REGION MAGIC_MISSILE_WAND_MODE
 IF
-ItemTemplateAddedToCharacter(WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812, _Item, _Player)
+ItemTemplateAddedToCharacter(WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812, _Item, _Char)
 AND
 NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
 AND
@@ -238,7 +238,7 @@ SetVarString(_Item, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
 SetVarString(_Item, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
 
 IF
-ItemTemplateAddedToCharacter(WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96, _Item, _Player)
+ItemTemplateAddedToCharacter(WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96, _Item, _Char)
 AND
 NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
 AND
@@ -248,215 +248,272 @@ SetVarString(_Item, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
 SetVarString(_Item, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
 
 IF
-SkillCast(_Player, "Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode", _, _)
+SkillCast(_Char, "Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode", _, _)
 THEN
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode(_Player);
+LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode(_Char);
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Player)
+LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Char)
 AND
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Player)
+NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char)
 AND
-GetItemForItemTemplateInInventory(_Player, "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812", _Weapon)
+GetItemForItemTemplateInInventory(_Char, "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812", _Weapon)
 THEN
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Player);
-CharacterUnequipItem(_Player, _Weapon);
-LeaderLib_Timers_StartObjectObjectTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_WandToRod", "LLWEAPONEX_Uniques_TransformMagicMissile_WandToRod");
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char);
+CharacterUnequipItem(_Char, _Weapon);
+LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_WandToRod", "LLWEAPONEX_Uniques_TransformMagicMissile_WandToRod");
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Player)
+LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Char)
 AND
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Player)
+NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char)
 AND
-GetItemForItemTemplateInInventory(_Player, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", _Weapon)
+GetItemForItemTemplateInInventory(_Char, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", _Weapon)
 THEN
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Player);
-CharacterUnequipItem(_Player, _Weapon);
-LeaderLib_Timers_StartObjectObjectTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_RodToWand", "LLWEAPONEX_Uniques_TransformMagicMissile_RodToWand");
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char);
+CharacterUnequipItem(_Char, _Weapon);
+LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_RodToWand", "LLWEAPONEX_Uniques_TransformMagicMissile_RodToWand");
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Player)
+LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Player)
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char)
 THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Player);
+NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char);
 
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Player, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_WandToRod")
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_WandToRod")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Transforming Wand of Magic Missile to Rod form.");
 Transform(_Weapon, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", 1, 1, 1);
-DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Player, _Weapon); // So the rod shoot skills get added
-LeaderLib_Timers_StartObjectObjectTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_Equip", "LLWEAPONEX_Uniques_TransformMagicMissile_Equip");
+DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Char, _Weapon); // So the rod shoot skills get added
+LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_Equip", "LLWEAPONEX_Uniques_TransformMagicMissile_Equip");
 
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Player, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_RodToWand")
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_RodToWand")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Transforming Rod of Magic Missile to Wand form.");
 Transform(_Weapon, "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812", 1, 1, 1);
-LeaderLib_Timers_StartObjectObjectTimer(_Player, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_Equip", "LLWEAPONEX_Uniques_TransformMagicMissile_Equip");
+LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_Equip", "LLWEAPONEX_Uniques_TransformMagicMissile_Equip");
 
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Player, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_Equip")
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_Equip")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Equipping Magic Missile wand/rod.");
-CharacterEquipItem(_Player, _Weapon);
+CharacterEquipItem(_Char, _Weapon);
 //END_REGION
 
 //REGION MAGIC_MISSILE_BONUS_HITS
 IF
-CharacterStartAttackObject(_Target, _, _Source)
+CharacterStartAttackObject(_Target, _, _Char)
 AND
-HasActiveStatus(_Source, "LLWEAPONEX_WAND_MAGIC_MISSILE", 1)
+HasActiveStatus(_Char, "LLWEAPONEX_WAND_MAGIC_MISSILE", 1)
 THEN
-LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 580, "LLWEAPONEX_Timers_MagicMissile_Roll", "LLWEAPONEX_MagicMissile_RollForBonuses");
+LeaderLib_Timers_StartObjectObjectTimer(_Char, _Target, 580, "LLWEAPONEX_Timers_MagicMissile_Roll", "LLWEAPONEX_MagicMissile_RollForBonuses");
 
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Source, (GUIDSTRING)_Target, "LLWEAPONEX_MagicMissile_RollForBonuses")
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (GUIDSTRING)_Target, "LLWEAPONEX_MagicMissile_RollForBonuses")
 THEN
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles(_Source, _Target);
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles(_Char, _Target);
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
 AND
 LeaderLib_Roll_QRY(450)
 THEN
-SetVarInteger(_Source, "LLWEAPONEX_MagicMissile_Missile1", 1);
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
+SetVarInteger(_Char, "LLWEAPONEX_MagicMissile_Missile1", 1);
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
 AND
 LeaderLib_Roll_QRY(300)
 THEN
-SetVarInteger(_Source, "LLWEAPONEX_MagicMissile_Missile2", 1);
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
+SetVarInteger(_Char, "LLWEAPONEX_MagicMissile_Missile2", 1);
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
 AND
 LeaderLib_Roll_QRY(100)
 THEN
-SetVarInteger(_Source, "LLWEAPONEX_MagicMissile_Missile3", 1);
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
+SetVarInteger(_Char, "LLWEAPONEX_MagicMissile_Missile3", 1);
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
 AND
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target)
+DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Source, _Target);
-LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess(_Source, _Target, "LLWEAPONEX_MagicMissile_FireBonusMissile");
+NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
+LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess(_Char, _Target, "LLWEAPONEX_MagicMissile_FireBonusMissile");
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Event)
+LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (STRING)_Event)
 AND
 ObjectIsCharacter(_Target, 1)
 THEN
-CharacterCharacterSetEvent(_Source, (CHARACTERGUID)_Target, _Event);
+CharacterCharacterSetEvent(_Char, (CHARACTERGUID)_Target, _Event);
 
 PROC
-LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Event)
+LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (STRING)_Event)
 AND
 ObjectIsItem(_Target, 1)
 THEN
-CharacterItemSetEvent(_Source, (ITEMGUID)_Target, _Event);
+CharacterItemSetEvent(_Char, (ITEMGUID)_Target, _Event);
 
 /*
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_MAGIC_MISSILE_BONUS1", (CHARACTERGUID)_Source)
+CharacterStatusApplied(_Char, "LLWEAPONEX_MAGIC_MISSILE_BONUS1", (CHARACTERGUID)_Char)
 THEN
-CharacterCharacterSetEvent(_Source, _Character, "LLWEAPONEX_MagicMissile_FireBonusMissile1");
+CharacterCharacterSetEvent(_Char, _Char, "LLWEAPONEX_MagicMissile_FireBonusMissile1");
 
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_MAGIC_MISSILE_BONUS2", (CHARACTERGUID)_Source)
+CharacterStatusApplied(_Char, "LLWEAPONEX_MAGIC_MISSILE_BONUS2", (CHARACTERGUID)_Char)
 THEN
-CharacterCharacterSetEvent(_Source, _Character, "LLWEAPONEX_MagicMissile_FireBonusMissile2");
+CharacterCharacterSetEvent(_Char, _Char, "LLWEAPONEX_MagicMissile_FireBonusMissile2");
 
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_MAGIC_MISSILE_BONUS3", (CHARACTERGUID)_Source)
+CharacterStatusApplied(_Char, "LLWEAPONEX_MAGIC_MISSILE_BONUS3", (CHARACTERGUID)_Char)
 THEN
-CharacterCharacterSetEvent(_Source, _Character, "LLWEAPONEX_MagicMissile_FireBonusMissile3");
+CharacterCharacterSetEvent(_Char, _Char, "LLWEAPONEX_MagicMissile_FireBonusMissile3");
 */
 //END_REGION
 
 //REGION POWER_POLE
 /* Doesn't work since a skill is needed to attach effects to weapon bones
 IF
-CharacterUsedSkill(_Player, "Cone_GroundSmash", _, _)
+CharacterUsedSkill(_Char, "Cone_GroundSmash", _, _)
 AND
-CharacterHasSkill(_Player, "Zone_LLWEAPONEX_PowerPoleSmash", 1)
+CharacterHasSkill(_Char, "Zone_LLWEAPONEX_PowerPoleSmash", 1)
 THEN
-PlayEffect(_Player, "LLWEAPONEX_FX_Skills_PowerPoleSmash_Cast_Pole_01", "Dummy_FX_01");
+PlayEffect(_Char, "LLWEAPONEX_FX_Skills_PowerPoleSmash_Cast_Pole_01", "Dummy_FX_01");
 */
 //END_REGION
 
 //REGION SOUL_HARVESTER
 IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_SOULHARVEST_REAP", (CHARACTERGUID)_Source)
+CharacterStatusAttempt(_Target, "LLWEAPONEX_SOULHARVEST_REAP", (CHARACTERGUID)_Char)
 THEN
-DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target);
 
 IF
 CharacterDied(_Target)
 AND
-DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target)
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
-ApplyStatus(_Source, "LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY", 0.0, 0, _Source);
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target);
+ApplyStatus(_Char, "LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY", 0.0, 0, _Char);
 
 IF
-SkillCast(_Source, "Cone_LLWEAPONEX_SoulHarvest_Reap", _, _)
+SkillCast(_Char, "Cone_LLWEAPONEX_SoulHarvest_Reap", _, _)
 THEN
-ProcObjectTimerCancel(_Source, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping");
-ProcObjectTimer(_Source, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping", 1250);
+ProcObjectTimerCancel(_Char, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping");
+ProcObjectTimer(_Char, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping", 1250);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Source, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_TImers_SoulHarvest_ClearReaping")
 AND
-DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target)
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Source, _Target);
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target);
 //END_REGION
 
 //REGION WARCHIEFS_HALBERD
 IF
-SkillCast(_Player, "Shout_LLWEAPONEX_Bokken_SwitchMode", _, _)
+SkillCast(_Char, "Shout_LLWEAPONEX_Warchief_SwitchMode", _, _)
 THEN
-ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Warchief_StartModeToggle", 900);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Warchief_StartModeToggle", 900);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_Warchief_StartModeToggle")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Warchief_StartModeToggle")
 AND
-CharacterGetEquippedItem(_Player, "Weapon", (ITEMGUID)_Halberd)
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Halberd)
 THEN
-CharacterUnequipItem(_Player, _Halberd);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode", "LLWEAPONEX_SwapWarchiefMode");
+CharacterUnequipItem(_Char, _Halberd);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode", "LLWEAPONEX_SwapWarchiefMode");
 
 IF
-CharacterItemEvent(_Player, _Halberd, "LLWEAPONEX_SwapWarchiefMode")
+CharacterItemEvent(_Char, _Halberd, "LLWEAPONEX_SwapWarchiefMode")
 AND
 GetTemplate(_Halberd, _Template)
 AND
-CharacterGetLevel(_Player, _Level)
+CharacterGetLevel(_Char, _Level)
 THEN
-LLWEAPONEX_Uniques_SwapWarchiefMode(_Player, _Halberd, _Level, _Template);
+LLWEAPONEX_Uniques_WarChief_CheckVariable(_Char, _Halberd, _Level, _Template);
+LLWEAPONEX_Uniques_WarChief_Swap(_Char, _Halberd, _Level, _Template);
 
 PROC
-LLWEAPONEX_Uniques_SwapWarchiefMode((CHARACTERGUID)_Player, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347")
+LLWEAPONEX_Uniques_WarChief_CheckVariable((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347")
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
+AND
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08", _x, _y, _z, _OtherHalberd)
 THEN
-Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08", 1, 1, 1);
+SetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", _OtherHalberd);
+SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
 
 PROC
-LLWEAPONEX_Uniques_SwapWarchiefMode((CHARACTERGUID)_Player, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08")
+LLWEAPONEX_Uniques_WarChief_CheckVariable((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08")
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
+AND
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347", _x, _y, _z, _OtherHalberd)
 THEN
-Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347", 1, 1, 1);
+SetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", _OtherHalberd);
+SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
 
 PROC
-LLWEAPONEX_Uniques_SwapWarchiefMode((CHARACTERGUID)_Player, (ITEMGUID)_Halberd, (INTEGER)_Level, (STRING)_Template)
+LLWEAPONEX_Uniques_WarChief_Swap((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, (STRING)_Template)
+AND
+GetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", (ITEMGUID)_OtherHalberd)
 THEN
-ItemLevelUpTo(_Halberd, _Level);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode_Equip", "LeaderLib_Commands_EquipItem");
+//Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08", 1, 1, 1);
+//Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347", 1, 1, 1);
+//ItemLevelUpTo(_OtherHalberd, _Level);
+ItemToInventory(_OtherHalberd, _Char);
+CharacterUnequipItem(_Char, _Halberd);
+CharacterEquipItem(_Char, _OtherHalberd);
+ItemToInventory(_Halberd, _OtherHalberd);
+//LeaderLib_Timers_StartCharacterItemTimer(_Char, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode_Equip", "LeaderLib_Commands_EquipItem");
+//END_REGION
+
+//REGION WARCHIEF_TRANSFORMED
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+LeaderLib_Helper_QRY_Combo_FindTagged("LLWEAPONEX_WarchiefHalberd", _ItemA, _ItemB, _ItemC, _ItemD, _ItemE)
+AND
+DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_WarchiefHalberd", (ITEMGUID)_Item)
+AND
+GetTemplate(_Item, _Template)
+THEN
+NOT DB_LeaderLib_Helper_Temp_Combo_FoundTaggedItem("LLWEAPONEX_WarchiefHalberd", _Item);
+LLWEAPONEX_Uniques_Warchief_ItemComboHappening(_Char, _Item, _Template);
+
+PROC
+LLWEAPONEX_Uniques_Warchief_ItemComboHappening((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (STRING)_Template)
+AND
+GetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", (ITEMGUID)_OtherHalberd)
+THEN
+ItemToInventory(_OtherHalberd, _Char, 1, 0, 0);
+DB_LLWEAPONEX_Uniques_Temp_NextCombinedWarchiefHalberd(_Char, _Template, _OtherHalberd);
+
+IF
+ItemTemplateCombinedWithItemTemplate(_,_,_,_,_, _Char, _Halberd)
+AND
+GetTemplate(_Halberd, _Template)
+AND
+DB_LLWEAPONEX_Uniques_Temp_NextCombinedWarchiefHalberd(_Char, _Template, _OtherHalberd)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_NextCombinedWarchiefHalberd(_Char, _Template, _OtherHalberd);
+ItemToInventory(_OtherHalberd, _Halberd, 1, 0, 0);
+SetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", _OtherHalberd);
+SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
 //END_REGION
 
 //REGION DRAGON_BONE_CLAWS
