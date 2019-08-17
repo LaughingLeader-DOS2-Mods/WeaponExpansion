@@ -3,21 +3,6 @@ ObjectCategories_LLWEAPONEX_BalrinAxe_Elemental_Tooltip	<font color='#C7A758'>Ba
 ObjectCategories_LLWEAPONEX_BalrinAxe_Oil_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font> (Oil)
 ObjectCategories_LLWEAPONEX_BalrinAxe_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font>
 ObjectCategories_LLWEAPONEX_Kevin_Normal_Tooltip	<font color='#C7A758'>Kevin</font> (Normal)
-ObjectCategories_LLWEAPONEX_Raizan_1_Any_Tooltip	<font color='#C7A758'>Raizan</font>
-ObjectCategories_LLWEAPONEX_Raizan_1_Default_Tooltip	<font color='#C7A758'>Raizan</font>
-ObjectCategories_LLWEAPONEX_Raizan_1_Fin_Tooltip	<font color='#C7A758'>Raizan</font> (Finesse Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_1_Int_Tooltip	<font color='#C7A758'>Raizan</font> (Intelligence Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_1_Transformed_Tooltip	<font color='#C7A758'>Raizan</font> (Alternate Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_2_Any_Tooltip	<font color='#C7A758'>Raizan</font> (Empowered)
-ObjectCategories_LLWEAPONEX_Raizan_2_Default_Tooltip	<font color='#C7A758'>Raizan</font> (Empowered)
-ObjectCategories_LLWEAPONEX_Raizan_2_Fin_Tooltip	<font color='#C7A758'>Raizan</font> (Empowered - Finesse Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_2_Int_Tooltip	<font color='#C7A758'>Raizan</font> (Empowered- Intelligence Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_2_Transformed_Tooltip	<font color='#C7A758'>Raizan</font> (Empowered - Alternate Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_3_Any_Tooltip	<font color='#C7A758'>Raizan</font> (Unleashed)
-ObjectCategories_LLWEAPONEX_Raizan_3_Default_Tooltip	<font color='#C7A758'>Raizan</font> (Unleashed)
-ObjectCategories_LLWEAPONEX_Raizan_3_Fin_Tooltip	<font color='#C7A758'>Raizan</font> (Unleashed - Finesse Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_3_Int_Tooltip	<font color='#C7A758'>Raizan</font> (Unleashed- Intelligence Scaling)
-ObjectCategories_LLWEAPONEX_Raizan_3_Transformed_Tooltip	<font color='#C7A758'>Raizan</font> (Unleashed - Alternate Scaling)
 ObjectCategories_LLWEAPONEX_Runeblade_Inert_1H_Tooltip	Inert Runeblade
 ObjectCategories_LLWEAPONEX_Transform_Constitution_Tooltip	Token of Constitution
 ObjectCategories_LLWEAPONEX_Transform_Finesse_Tooltip	Token of Finesse
@@ -26,11 +11,3 @@ ObjectCategories_LLWEAPONEX_Transform_Memory_Tooltip	Token of Memory
 ObjectCategories_LLWEAPONEX_Transform_Reset_Tooltip	Token of Reversal
 ObjectCategories_LLWEAPONEX_Transform_Strength_Tooltip	Token of Strength
 ObjectCategories_LLWEAPONEX_Transform_Wits_Tooltip	Token of Wits
-ObjectCategories_LLWEAPONEX_Greatbow_Omnibolt_Default_Tooltip	<font color='#C7A758'>Omnibolt, Heaven's Wrath</font>
-ObjectCategories_LLWEAPONEX_Greatbow_Omnibolt_Altered_Tooltip	<font color='#C7A758'>Omnibolt, Heaven's Wrath</font> (Alternate Scaling)
-ObjectCategories_LLWEAPONEX_OniGauntlet_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
-ObjectCategories_LLWEAPONEX_OniGauntlet_1_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
-ObjectCategories_LLWEAPONEX_OniGauntlet_2_Tooltip	<font color='#C7A758'>Oni Gauntlet (Empowered)</font> Power
-ObjectCategories_LLWEAPONEX_OniGauntlet_3_Tooltip	<font color='#C7A758'>Oni Gauntlet (Unleashed)</font> Power
-ObjectCategories_LLWEAPONEX_Blunderbuss_2H_A_Tooltip	<font color='#C7A758'>Eruption, the Portable Cannon</font>
-ObjectCategories_LLWEAPONEX_Blunderbuss_2H_A_Altered_Tooltip	<font color='#C7A758'>Eruption, the Portable Cannon</font> (Alternate Scaling)
