@@ -268,68 +268,7 @@ THEN
 RemoveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES");
 //END_REGION
 
-//REGION WRAITHBLADE_SLAY_HIDDEN
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_WRAITHBLADE_MARK", (CHARACTERGUID)_Source)
-THEN
-DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Source, _Target);
-ObjectSetFlag(_Source, "LLWEAPONEX_Wraithblade_TargetFound", 0);
 
-IF
-SkillCast(_Source, "Shout_LLWEAPONEX_Wraithblade_SlayHidden", _, _)
-AND
-ObjectGetFlag(_Source, "LLWEAPONEX_Wraithblade_TargetFound", 1)
-THEN
-ObjectClearFlag(_Source, "LLWEAPONEX_Wraithblade_TargetFound", 0);
-PlayAnimation(_Source, "");
-CharacterFlushQueue(_Source);
-LeaderLib_Timers_StartObjectTimer(_Source, 750, "LLWEAPONEX_Timers_SlayHidden_Next", "LLWEAPONEX_SlayHidden_Next");
-
-IF
-StoryEvent((CHARACTERGUID)_Source, "LLWEAPONEX_SlayHidden_Next")
-AND
-NOT DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Source, _)
-AND
-NOT DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Source, _)
-THEN
-ApplyStatus(_Source, "INVISIBLE", 6.0, 1);
-
-IF
-StoryEvent((CHARACTERGUID)_Source, "LLWEAPONEX_SlayHidden_Next")
-AND
-DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Source, _Target)
-AND
-NOT DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Source, _)
-AND
-GetPosition(_Source, _x, _y, _z)
-THEN
-NOT DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Source, _Target);
-DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Source, _Target);
-PlayEffect(_Source, "LLWEAPONEX_FX_Skills_InstantTransmission_Dissolve_Body_01");
-PlayEffectAtPosition("LLWEAPONEX_FX_Skills_InstantTransmission_Disappear_01", _x, _y, _z);
-TeleportTo(_Source, _Target, "LLWEAPONEX_SlayHidden_Teleported", 0, 1, 0);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 25, "LLWEAPONEX_Timers_SlayHidden_Hit", "LLWEAPONEX_SlayHidden_Hit");
-
-IF
-StoryEvent((CHARACTERGUID)_Source, "LLWEAPONEX_SlayHidden_Teleported")
-THEN
-PlayEffect(_Source, "LLWEAPONEX_FX_Skills_InstantTransmission_Appear_01");
-PlayAnimation(_Source, "");
-CharacterFlushQueue(_Source);
-PlayAnimation(_Source, "");
-
-IF
-CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_SlayHidden_Hit")
-THEN
-NOT DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Source, _Target);
-NOT DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Source, _Target);
-CharacterLookAt(_Source, _Target, 1);
-PlayAnimation(_Source, "");
-//PlayAnimation(_Source, "skill_attack_precision_01_cast");
-CharacterUseSkill(_Source, "Target_LLWEAPONEX_Wraithblade_SlayHidden_Attack", _Target, 1, 1, 1);
-//ApplyStatus(_Target, "LLWEAPONEX_WRAITHBLADE_SLAYHIDDEN_HIT", 0.0, 1, _Source);
-LeaderLib_Timers_StartObjectTimer(_Source, 950, "LLWEAPONEX_Timers_SlayHidden_Next", "LLWEAPONEX_SlayHidden_Next");
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

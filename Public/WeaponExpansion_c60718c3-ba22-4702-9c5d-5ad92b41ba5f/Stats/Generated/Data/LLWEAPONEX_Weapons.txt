@@ -2080,7 +2080,6 @@ data "MaxAmount" "1"
 data "Priority" "1"
 data "MinLevel" "1"
 data "ItemColor" ""
-//data "ExtraProperties" "LLWEAPONEX_WRAITHBLADE_HIT,100,0"
 
 new entry "_LLWEAPONEX_Boost_Weapon_Damage_Shadow_Wraithblade"
 type "Weapon"
