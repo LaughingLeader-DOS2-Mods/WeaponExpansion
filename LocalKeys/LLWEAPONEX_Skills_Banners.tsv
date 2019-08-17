@@ -5,3 +5,7 @@ Dome_LLWEAPONEX_Banner_Rally_DivineOrder_DisplayName	<font color='#FEFFB3'>Rally
 Dome_LLWEAPONEX_Banner_Rally_DivineOrder_Description	Rally the party at the target location.<br><font color='#00FFDD'>Party members are granted a one-time use skill that teleports them to the raised banner.</font><br><font color='#99FFFF'>The banner inspires faith in the Divine, granting a [1] boost to attributes, [2] boost to dodge, and [3] boost to damage.</font>
 Dome_LLWEAPONEX_Banner_Rally_Dwarves_DisplayName	<font color='#FF5522'>Rally of the Pack</font>
 Dome_LLWEAPONEX_Banner_Rally_Dwarves_Description	Rally the party at the target location.<br><font color='#00FFDD'>Party members are granted a one-time use skill that teleports them to the raised banner.</font><br><font color='#FF7733'>The banner unleashes the hunger of the pack, granting [1]% lifesteal and a [2] boost to damage.</font>
+Shout_LLWEAPONEX_Banner_Rally_Teleport_DisplayName	<font color='#FEFFB3'>Heed the Call</font>
+Shout_LLWEAPONEX_Banner_Rally_Teleport_Description	Heed the rallying cry of the Standard-Bearer, teleporting to the raised banner.
+Shout_LLWEAPONEX_Banner_WarCharge_DisplayName	<font color='#FECCB3'>Chaaaarge!</font>
+Shout_LLWEAPONEX_Banner_WarCharge_Description	Lead your allies into a strategic charge, increasing <font color="#9370DB">Movement Speed by [1]%</font>, <font color="#32CD32">Initiative by [2]</font>, and the <font color="#FF31FF">damage of the first attack by [3]%</font>.<br><font color="#58FFFA">Range of the War Charge scales with Leadership.</font>

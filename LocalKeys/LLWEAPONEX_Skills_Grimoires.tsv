@@ -1,6 +1,6 @@
 Key	Content
-Cone_LLWEAPONEX_Grimoire_Gust_Description	Summon a large burst of wind from your Grimoire, dealing [1], clearing non-cursed surfaces, and pushing enemies back [2]m.
-Cone_LLWEAPONEX_Grimoire_Gust_DisplayName	Gale Force
+Cone_LLWEAPONEX_Grimoire_Gust_Description	Summon a large burst of wind from your Grimoire, dealing [1], clearing non-cursed surfaces, and pushing enemies back [2].
+Cone_LLWEAPONEX_Grimoire_Gust_DisplayName	<font color='#A2FFB1'>Gale Force</font>
 Projectile_LLWEAPONEX_Grimoire_ShootWind_DisplayName	Gust (Grimoire)
 Projectile_LLWEAPONEX_Grimoire_Transit_Description	Propel yourself to a target location.<br><font color='#73f6ff'>Translocation Magic</font><br>If the <font color='#c9aa58'>Translocation Grimoire</font> is active, enemies you pass by receive <font color='#FF0000'>Translocation Damage</font> and are knocked down (resisted by Magic Armor). Allies passed receive <font color='#97fbff'>Translocation Surge</font>. Additionally, you also receive <font color='#73f6ff'>Translocation Surge</font>.
 Projectile_LLWEAPONEX_Grimoire_Transit_DisplayName	Transit
