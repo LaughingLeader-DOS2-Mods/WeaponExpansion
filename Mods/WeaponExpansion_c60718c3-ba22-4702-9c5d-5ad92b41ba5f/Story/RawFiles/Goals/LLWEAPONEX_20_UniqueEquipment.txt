@@ -477,9 +477,23 @@ THEN
 //ItemLevelUpTo(_OtherHalberd, _Level);
 ItemToInventory(_OtherHalberd, _Char);
 CharacterUnequipItem(_Char, _Halberd);
-CharacterEquipItem(_Char, _OtherHalberd);
-ItemToInventory(_Halberd, _OtherHalberd);
-//LeaderLib_Timers_StartCharacterItemTimer(_Char, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode_Equip", "LeaderLib_Commands_EquipItem");
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _OtherHalberd, 25, "LLWEAPONEX_Timers_WarChiefSwap_Equip", "LeaderLib_Commands_EquipItem");
+LeaderLib_Timers_StartObjectObjectTimer(_Halberd, _OtherHalberd, 150, "LLWEAPONEX_Timers_WarChiefSwap_ToInventory", "LLWEAPONEX_WarChiefSwap_ToInventory");
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((ITEMGUID)_Halberd, (ITEMGUID)_OtherHalberd, "LLWEAPONEX_WarChiefSwap_ToInventory")
+AND
+NOT GetInventoryOwner(_OtherHalberd, _Halberd)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:LLWEAPONEX_WarChiefSwap_ToInventory] Moving halberd inside other halberd.");
+ItemToInventory(_Halberd, _OtherHalberd, 1, 0, 0);
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((ITEMGUID)_Halberd, (ITEMGUID)_OtherHalberd, "LLWEAPONEX_WarChiefSwap_ToInventory")
+AND
+GetInventoryOwner(_OtherHalberd, _Halberd)
+THEN
+LeaderLog_Log("ERROR", "[LLWEAPONEX_20_UniqueEquipment:LLWEAPONEX_WarChiefSwap_ToInventory] Something went wrong! Other haldberd is still within the one we're switching away from!");
 //END_REGION
 
 //REGION WARCHIEF_TRANSFORMED

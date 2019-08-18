@@ -1363,6 +1363,11 @@ CharacterUseSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", _Char, 1,
 //REGION COMBINE_TRACE
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+THEN
+LeaderLog_Log("DEBUG", "[CanCombineItem] ","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test",".");
+
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
 AND
 String(_Char, _Str1)
 AND
@@ -1379,6 +1384,61 @@ AND
 IntegertoString(_RequestID, _Str6)
 THEN
 LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining [",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
+
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+String(_Char, _Str1)
+AND
+String(_ItemA, _Str2)
+AND
+IntegertoString(_RequestID, _Str6)
+THEN
+LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemA [",_Str2,"].");
+
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+String(_Char, _Str1)
+AND
+String(_ItemB, _Str2)
+AND
+IntegertoString(_RequestID, _Str6)
+THEN
+LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemB [",_Str2,"].");
+
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+String(_Char, _Str1)
+AND
+String(_ItemC, _Str2)
+AND
+IntegertoString(_RequestID, _Str6)
+THEN
+LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemC [",_Str2,"].");
+
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+String(_Char, _Str1)
+AND
+String(_ItemD, _Str2)
+AND
+IntegertoString(_RequestID, _Str6)
+THEN
+LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemD [",_Str2,"].");
+
+IF
+CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
+AND
+String(_Char, _Str1)
+AND
+String(_ItemE, _Str2)
+AND
+IntegertoString(_RequestID, _Str6)
+THEN
+LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemE [",_Str2,"].");
 
 IF
 ItemTemplateCombinedWithItemTemplate(_Str1, _Str2, _Str3, _Str4, _Str5, _Char, _Item)

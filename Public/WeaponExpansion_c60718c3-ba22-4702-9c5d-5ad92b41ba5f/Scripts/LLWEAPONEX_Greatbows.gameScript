@@ -209,15 +209,6 @@ VARS
 ON
 	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbows_FutureBarrage_CheckMovement")
 ACTIONS
-IF "c1"
-	CharacterGetStat(_Movement, _Target, Movement)
-	
-THEN
-	Print(_Str, "Movement: [1]", _Movement)
-	Cast(_StrF, _Str)
-	StatusText(_Target, _StrF)
-ENDIF
-	
 IF "c1|!c2|c3|c4&(c5|c6)"
 	IsTagged(_Target, "LeaderLib_IsDisabled")
 	CharacterCanMove(_Target)
@@ -228,5 +219,4 @@ IF "c1|!c2|c3|c4&(c5|c6)"
 THEN
 	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_BonusDamage, -1, _Source)
 	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_BONUSDAMAGE, 0, 1, _Source)
-	IterateCharactersInCombat(_Char, "AS_FindEnemies", Lowest, Distance)
 ENDIF
