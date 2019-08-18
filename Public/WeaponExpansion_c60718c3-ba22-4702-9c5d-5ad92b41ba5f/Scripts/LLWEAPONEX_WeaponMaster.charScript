@@ -1,5 +1,7 @@
 INIT
 	CHARACTER:__Me
+	
+	LIST<FIXEDSTRING>:%DebugMessages
 EVENTS
 
 EVENT LLWEAPONEX_WM_ThrowingWeapon
@@ -15,18 +17,28 @@ IF "c1&c2"
 THEN
 
 ENDIF
-
+	
 EVENT LLWEAPONEX_Debug_Damage
 VARS
 	DAMAGE:_Damage
 	STRING:_DamageType
+	STRING:_Str
+	FIXEDSTRING:_StrF
 	FLOAT:_Percentage
 	CHARACTER:_DamageCharSource
 	ITEM:_DamageItemSource
 ON
 	OnDamage(_Damage, _Percentage, _DamageCharSource, _DamageItemSource)
 ACTIONS
-	Print(_DamageType, "[1]", _Damage)
+	//Print(_DamageType, "[1]", _Damage)
+	
+	Print(_Str, "[LLWEAPONEX_WeaponMaster.charScript:OnDamage] Type([1]) Percentage([2]) Target([3]) Source([4]).", _Damage, _Percentage, __Me, _DamageCharSource)
+	SetVar(__Me, "LeaderLog_Type", STRING:"Debug")
+	SetVar(__Me, "LeaderLog_Message", _Str)
+	//CharacterEvent(__Me, "LeaderLog_Commands_Log")
+	Cast(_StrF, _Str)
+	StatusText(__Me, _StrF)
+	ListAdd(%DebugMessages, _StrF)
 	CharacterEvent(__Me, "LLWEAPONEX_Debug_TraceDamage")
 	
 EVENT LLWEAPONEX_Debug_VarTest2

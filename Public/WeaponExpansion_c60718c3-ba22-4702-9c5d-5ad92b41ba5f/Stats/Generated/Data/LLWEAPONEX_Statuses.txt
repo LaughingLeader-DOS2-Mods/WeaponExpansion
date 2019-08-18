@@ -625,6 +625,12 @@ data "Act" "1"
 data "Act part" "0"
 data "Flags" "BurnImmunity;PoisonImmunity;ShockedImmunity;SlowedImmunity"
 
+new entry "LLWEAPONEX_CHAOS_GOBLIN_HIT"
+type "StatusData"
+data "StatusType" "DAMAGE"
+using "LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+data "LeaveAction" "Projectile_LLWEAPONEX_ChaosGoblin_BasicAttack"
+
 new entry "LLWEAPONEX_DEATH_SENTENCE"
 type "StatusData"
 data "StatusType" "CONSUME"

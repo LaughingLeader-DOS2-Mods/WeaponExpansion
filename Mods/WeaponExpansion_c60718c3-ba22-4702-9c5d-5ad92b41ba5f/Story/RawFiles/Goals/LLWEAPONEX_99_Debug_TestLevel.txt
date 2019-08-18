@@ -59,7 +59,7 @@ StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
 AND
 GetVarString(_Host, "LLWEAPONEX_Debug_VarTest.Str", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_VarTest.Str] == [",_Str,"]");
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_VarTest.Str] == [",_Str,"]");
 CharacterStatusText(_Host, _Str);
 
 IF
@@ -76,7 +76,7 @@ StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
 AND
 GetVarFixedString(_Host, "CharacterCreationStarted.Class", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [CharacterCreationStarted.Class] == [",_Str,"]");
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [CharacterCreationStarted.Class] == [",_Str,"]");
 CharacterStatusText(_Host, _Str);
 
 IF
@@ -87,7 +87,7 @@ THEN
 DebugBreak("[LLWEAPONEX_Debug_VarTest] Var [CharacterCreationStarted.Class] is not set!");
 CharacterStatusText(_Host, "[LLWEAPONEX_Debug_VarTest] Var [CharacterCreationStarted.Class] is not set!");
 */
-
+//REGION AI_MANIP_TEST
 /*
 IF
 CombatStarted(_CombatID)
@@ -101,11 +101,44 @@ TimerFinished("LLWEAPONEX_Debug_CombatTimer")
 AND
 DB_LLWEAPONEX_Debug_CombatTimer(_CombatID)
 AND
-DB_CombatCharacters(_Char, _CombatID)
+DB_LeaderLib_Combat_ActiveObject(_CombatID, _Char)
 AND
-CharacterIsPlayer(_Char, 0)
+CharacterIsPlayer((CHARACTERGUID)_Char, 0)
 THEN
-SetStoryEvent(_Char, "LLWEAPONEX_Debug_VarTest_Check");
+CharacterAddSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", 0);
+ClearVarObject(_Char, "Combat_AI_CastSkill.TargetPos1");
+SetVarObject(_Char, "Combat_AI_CastSkill.TargetCharacter1", _Char);
+SetVarFixedString(_Char, "Combat_AI_CastSkill.Skill", "Target_LLWEAPONEX_Debug_SingleHandedAttack");
+//SetStoryEvent(_Char, "LLWEAPONEX_Debug_OverrideSkill");
+
+/*
+AND
+String(_Char, _CharStr)
+AND
+GetPosition(_Char, _x, _y, _z)
+THEN
+//LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] Overwriting [Combat_AI_CastSkill_Skill] var on [",_CharStr,"].");
+
+SetVarFixedString(_Char, "Combat_AI_CastSkill.Skill", "Target_LLWEAPONEX_Debug_SingleHandedAttack");
+SetVarFloat3(_Char, "Combat_AI_CastSkill.TargetPos1", _x, _y, _z);
+SetVarFloat3(_Char, "Combat_AI_CastSkill.TargetPos2", _x, _y, _z);
+SetVarObject(_Char, "Combat_AI_CastSkill.TargetCharacter1", _Char);
+*/
+
+IF
+TimerFinished("LLWEAPONEX_Debug_CombatTimer")
+AND
+DB_LLWEAPONEX_Debug_CombatTimer(_CombatID)
+AND
+DB_LeaderLib_Combat_ActiveObject(_CombatID, _Char)
+AND
+CharacterIsPlayer((CHARACTERGUID)_Char, 0)
+AND
+GetVarFixedString(_Char, "Combat_AI_CastSkill.Skill", _Skill)
+AND
+String(_Char, _CharStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [Combat_AI_CastSkill.Skill] == [",_Skill,"] on [",_CharStr,"].");
 
 IF
 TimerFinished("LLWEAPONEX_Debug_CombatTimer")
@@ -114,19 +147,114 @@ DB_LLWEAPONEX_Debug_CombatTimer(_CombatID)
 THEN
 TimerLaunch("LLWEAPONEX_Debug_CombatTimer", 1);
 
+//END_REGION
+
+//REGION BEHAVIOR_VARIABLE_MANIP
+/*
 IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
+StoryEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
+AND
+//GetVarFixedString(_Char, "LLWEAPONEX_Debug_FetchTest.Status", _Status)
+GetVarFixedString(_Char, "LLWEAPONEX_Debug_FetchStatus", _Status)
+AND
+String(_Char, _CharStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] [",_Status,"] on [",_CharStr,"].");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
+AND
+NOT GetVarFixedString(_Char, "LLWEAPONEX_Debug_FetchStatus", _)
+AND
+String(_Char, _CharStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] Could not get STATUS var on [",_CharStr,"].");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
+AND
+GetVarFixedString(NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Debug_FetchTest.Status", _Status)
+AND
+String(_Char, _CharStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] [",_Status,"] from gameScript.");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
+AND
+NOT GetVarFixedString(NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Debug_FetchTest.Status", _)
+AND
+String(_Char, _CharStr)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] Could not get STATUS var from gameScript.");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_TraceDamage")
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "LLWEAPONEX_Timers_Debug_TraceList", "LLWEAPONEX_Debug_TraceList");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_TraceList")
+AND
+GetVarInteger(_Char, "DebugMessages_ListSize", _ListSize)
+THEN
+LLWEAPONEX_Debug_BuildListVars(0, "DebugMessages", _ListSize);
+
+PROC
+LLWEAPONEX_Debug_BuildListVars((INTEGER)_Index, (STRING)_Variable, (INTEGER)_ListSize)
+AND
+_Index < _ListSize
+AND
+IntegerSum(_Index, 1, _NextIndex)
+AND
+IntegertoString(_Index, _IndexStr)
+AND
+StringConcatenate(_Variable, "_Index_", _Str1)
+AND
+StringConcatenate(_Str1, _IndexStr, _ListEntryVar)
+THEN
+DB_LLWEAPONEX_Debug_ListVars(_Variable, _ListEntryVar);
+LLWEAPONEX_Debug_BuildListVars(_NextIndex, _Variable, _ListSize);
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_TraceList")
+AND
+DB_LLWEAPONEX_Debug_ListVars("DebugMessages", _ListEntryVar)
+AND
+GetVarFixedString(_Char, _ListEntryVar, _Str)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [",_ListEntryVar,"] == ",_Str,"");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_TraceList")
+THEN
+SysClear("DB_LLWEAPONEX_Debug_ListVars", 2);
+*/
+
+/*
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_TraceDamage")
+AND
+GetVarString(_Char, "LLWEAPONEX_Debug_LastDamageType", _Str)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_LastDamageType] == [",_Str,"]");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Debug_TraceDamage")
 AND
 GetVarString(_Char, "LLWEAPONEX_Debug_Damage.DamageType", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_Damage.DamageType] == [",_Str,"]");
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage.DamageType] == [",_Str,"]");
+SetVarInteger(_Char, "LLWEAPONEX_Debug_TraceDamage_Done", 1);
+*/
 
+/*
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
 AND
 GetVarString(_Char, "LLWEAPONEX_Debug_Damage._Damage", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
@@ -135,8 +263,8 @@ GetVarObject(_Char, "LLWEAPONEX_Debug_Damage._Damage", _Damage)
 AND
 String(_Damage, _Str)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
-
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
+*/
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_VarTest_Check")
 AND
@@ -155,7 +283,7 @@ GetVarObject(_Char, "Combat_AI_Attack.TargetCharacter", _Obj)
 AND
 String(_Obj, _Target)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:VarTest] [Combat_AI_Attack.TargetCharacter] == [",_Target,"]");
+LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [Combat_AI_Attack.TargetCharacter] == [",_Target,"]");
 DisplayText(_Obj, "AI Target!");
 */
 
@@ -168,6 +296,7 @@ THEN
 DebugBreak("[LLWEAPONEX_Debug_VarTest] Var [CharacterClassChanged.Class] is not set!");
 CharacterStatusText(_Host, "[LLWEAPONEX_Debug_VarTest] Var [CharacterClassChanged.Class] is not set!");
 */
+//END_REGION
 
 IF
 TextEventSet("llweap_tprez")
@@ -420,9 +549,20 @@ THEN
 CharacterResetCooldowns(_Character);
 
 IF
-TextEventSet("llweap_nocd")
+TextEventSet("llweap_cd")
 THEN
-GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
+LeaderLib_Helper_FlipGlobalFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
+
+IF
+TextEventSet("llweap_cd")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+GlobalGetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns", _State)
+AND
+IntegertoString(_State, _StateStr)
+THEN
+LeaderLog_LogTarget("STATUS", _Host, "[LLWEAPONEX_Debug_AutoRefreshCooldowns] = ", _StateStr);
 
 /*
 IF
@@ -817,8 +957,17 @@ String(_Attacker, _Name)
 AND
 String(_Owner, _OwnerName)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"] with DamageType [",_DamageType,"] DamageSource [",_DamageSource,"].");
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
 SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
+
+IF
+AttackedByObject(_Target, NULL_00000000-0000-0000-0000-000000000000, _Attacker, _DamageType, _DamageSource)
+AND
+String(_Target, _TargetStr)
+AND
+String(_Attacker, _Name)
+THEN
+LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](No Owner) attacked [",_TargetStr,"].");
 
 IF
 CharacterReceivedDamage(_Target, _Percentage, _Attacker)
@@ -827,7 +976,7 @@ String(_Target, _TargetStr)
 AND
 String(_Attacker, _Name)
 AND
-StringConcatenate("]% damage was to [",_TargetStr, _Str1)
+StringConcatenate("]% damage was done to [",_TargetStr, _Str1)
 AND
 StringConcatenate("] by [",_Name, _Str2)
 AND

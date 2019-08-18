@@ -22,6 +22,30 @@ INIT
 	USING LLWEAPONEX_Skills
 EVENTS
 
+EVENT LLWEAPONEX_Debug_OverrideSkill
+VARS
+	CHARACTER:_Char
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_Debug_OverrideSkill")
+ACTIONS
+	SetVar(_Char, "Combat_AI_CastSkill.Skill", SKILL:Target_LLWEAPONEX_Debug_SingleHandedAttack)
+	SetVar(_Char, "Combat_AI_CastSkill.TargetPos1", FLOAT3:null)
+	//SetVar(_Char, "Combat_AI_CastSkill.TargetPos2", FLOAT3:null)
+	SetVar(_Char, "Combat_AI_CastSkill.TargetCharacter1", CHARACTER:_Char)
+
+/*
+EVENT LLWEAPONEX_Debug_FetchTest
+VARS
+	CHARACTER:_Char
+	STATUS:_Status
+ON
+	FetchCharacterApplyStatusData(_Char, _Status)
+ACTIONS
+	SetVar(_Char, "LLWEAPONEX_Debug_FetchStatus", _Status)
+	CharacterEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
+	RETURN(null, _Status, null)
+*/
+
 /*
 EVENT LLWEAPONEX_Debug_VarTest
 VARS
