@@ -29,6 +29,7 @@ AND
 CharacterIsEnemy(_Defender, _Attacker, 1)
 THEN
 LLWEAPONEX_DualShields_DynamicCover(_Attacker, _Blocker, _Defender);
+
 EXITSECTION
 
 ENDEXITSECTION
