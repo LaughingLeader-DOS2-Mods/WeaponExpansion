@@ -653,6 +653,14 @@ HasActiveStatus(_Char, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST", 1)
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST");
 //END_REGION
+
+//REGION INTERRUPT
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_INTERRUPT", _Source)
+THEN
+ApplyStatus(_Char, "MUTED", 0.0, 1, _Source);
+ApplyStatus(_Char, "DISARMED", 0.0, 1, _Source);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

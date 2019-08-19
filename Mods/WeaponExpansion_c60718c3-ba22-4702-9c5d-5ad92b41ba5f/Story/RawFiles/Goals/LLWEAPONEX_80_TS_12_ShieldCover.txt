@@ -1,0 +1,35 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterStartAttackObject((CHARACTERGUID)_Defender, _, _Attacker)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
+AND
+CharacterIsEnemy(_Defender, _Attacker, 1)
+THEN
+LLWEAPONEX_DualShields_DynamicCover(_Attacker, _Blocker, _Defender);
+
+IF
+CharacterUsedSkillOnTarget(_Attacker, (CHARACTERGUID)_Defender, _, _, _)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
+AND
+CharacterIsEnemy(_Defender, _Attacker, 1)
+THEN
+LLWEAPONEX_DualShields_DynamicCover(_Attacker, _Blocker, _Defender);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Attacker, (CHARACTERGUID)_Defender, _, _, _)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
+AND
+CharacterIsEnemy(_Defender, _Attacker, 1)
+THEN
+LLWEAPONEX_DualShields_DynamicCover(_Attacker, _Blocker, _Defender);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

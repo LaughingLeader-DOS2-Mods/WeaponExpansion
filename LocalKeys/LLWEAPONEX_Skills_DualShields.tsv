@@ -3,8 +3,9 @@ Projectile_LLWEAPONEX_ShieldToss_Description	Throw your mainhand shield at an en
 Projectile_LLWEAPONEX_ShieldToss_DisplayName	Shield Toss
 Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and has a chance to daze the target.
 Target_LLWEAPONEX_ShieldBash_DisplayName	Shield Bash
-Target_LLWEAPONEX_ShieldCover_DisplayName	Dynamic Cover
-Target_LLWEAPONEX_ShieldCover_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery I</font><br>Cover a target character remotely for 2 turns.<br>When the target is directly attacked, your positions are swapped, and the target is guarded with a temporary shield.
+Target_LLWEAPONEX_ShieldCover_DisplayName	Shield Cover
+Target_LLWEAPONEX_ShieldCover_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery I</font><br>Cover a target character remotely for 2 turns, redirecting [1] damage they take to you.<br><font color='#FFFF22'>The first time the target gets attacked, rush to their position and counter-attack the attacker for [2], and grant the target temporary damage resistance.</font>
+Target_LLWEAPONEX_ShieldCover_CounterAttack_DisplayName	Shield Counter
 Target_LLWEAPONEX_ShieldPrison_DisplayName	Shield Prison
 Target_LLWEAPONEX_ShieldPrison_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery II</font><br>Encase the target in a hardened shell, removing them from combat for 1 turn.<br>Allies gain +2 AP upon being freed.
 Target_LLWEAPONEX_IronMaiden_DisplayName	Iron Maiden

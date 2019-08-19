@@ -13,3 +13,4 @@ LLWEAPONEX_Status_Torment_Applied	<font color='#9A5085'>Torment</font>
 LLWEAPONEX_Status_Sabotage_Applied	<font color='#F80F0F' size='28'>Sabotaged!</font>
 LLWEAPONEX_Status_DisplacementFailed	<font color='#FF0000' size='22'>Displacement Failed</font>
 LLWEAPONEX_StatusText_OniGauntlet_RuneBlocked	<font color='#FF0000' size='22'>*The rune fails to fit inside the <font color='#c5a65a'>Oni Gauntlet</font>.*</font>
+LLWEAPONEX_StatusText_Countered	<font color='#FF1155' size='22'>Countered</font>

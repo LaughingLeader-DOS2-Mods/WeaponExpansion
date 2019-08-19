@@ -17,7 +17,8 @@ IF "c1&c2"
 THEN
 
 ENDIF
-	
+
+/*
 EVENT LLWEAPONEX_Debug_Damage
 VARS
 	DAMAGE:_Damage
@@ -65,6 +66,7 @@ ELSE
 	StatusText(__Me, FIXEDSTRING:"<font size='30'>(From charScript) Var Not found!</font>")
 ENDIF
 	CharacterEvent(__Me, "LLWEAPONEX_Debug_VarTest_Check")
+*/
 
 /*
 EVENT LLWEAPONEX_Debug_CheckDamageType

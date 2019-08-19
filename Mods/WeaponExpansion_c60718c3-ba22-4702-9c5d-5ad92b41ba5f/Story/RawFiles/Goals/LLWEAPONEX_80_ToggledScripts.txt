@@ -40,6 +40,7 @@ PROC
 LLWEAPONEX_ToggleSettings_RegisterScripts()
 THEN
 //LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive");
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_DualShields", "LLWEAPONEX_DualShields");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Greatbow", "LLWEAPONEX_Greatbow");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_HandCrossbow", "LLWEAPONEX_HandCrossbow");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_Katana", "LLWEAPONEX_Katana");
@@ -52,7 +53,30 @@ LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire_Fire", 
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX");
 //END_REGION
 
+//REGION UPDATE_ACTIVATE_SCRIPT
+PROC
+LLWEAPONEX_ToggleSettings_ActivateAnyScripts()
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Char, _Item, _WeaponType, _EnabledFlag)
+AND
+DB_LLWEAPONEX_ToggleSettings_Tags(_WeaponType, _Flag, _TimerName)
+AND
+NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _WeaponType)
+AND
+GetTemplate(_Item, _Template)
+THEN
+LLWEAPONEX_ToggleSettings_OnTagAdded(_Char, _Item, _WeaponType, _Template);
+//END_REGION
+
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,10,0)
+THEN
+LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_DualShields", "LLWEAPONEX_DualShields");
+LLWEAPONEX_ToggleSettings_ActivateAnyScripts();
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
 AND
@@ -76,7 +100,6 @@ _Count > 0
 THEN
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MasterySystemActive", "WeaponExpansion");
 
-//REGION UPDATES
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
 AND

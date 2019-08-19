@@ -29,6 +29,7 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_Muramasa", "LLWEAPO
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_DemolitionBackpack", "LLWEAPONEX_DemolitionBackpackEquipped");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_11_Blunderbuss", "LLWEAPONEX_BlunderbussEquipped");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_12_ShieldCover", "LLWEAPONEX_ShieldCoverActive");
 //END_REGION
 
 //REGION PRESETS_MISC
@@ -367,6 +368,13 @@ ItemToInventory(_NewItem, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 10, 0)
+THEN
+LLWEAPONEX_LeaderLib_RegisterToggleScripts();
+
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
 AND

@@ -84,3 +84,28 @@ ENDIF
 	CharacterPlayEffect(_Target, "RS3_FX_Skills_Warrior_BlinkStrike_Impact_01")
 	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Rapier_FlickerStrike_FrenzyBonus, _Level, _Source)
 	CharacterApplyStatus(_Target, LLWEAPONEX_RAPIER_FLICKER_HIT_PROC, 0, 0, _Source)
+
+EVENT LLWEAPONEX_DualShields_ShieldCover_CounterAttack
+VARS
+	CHARACTER:_Blocker
+	CHARACTER:_Attacker
+	CHARACTER:_BlockingTarget
+	FLOAT3:_Direction
+	FLOAT:_Dist
+	FLOAT3:_TeleportSpot
+ON
+	OnCharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_Teleport")
+ACTIONS
+IF "c1&!c2"
+	GetVar(_BlockingTarget, _Blocker, "LLWEAPONEX_ShieldCover_Covering")
+	IsEqual(_BlockingTarget, null)
+THEN
+	GetDirection(_Attacker, _BlockingTarget, _Direction, _Dist)
+ELSE
+	GetForwardDirection(_Attacker, _Direction)
+ENDIF
+	GetPosition(_Attacker, _TeleportSpot)
+	Add(_TeleportSpot, _Direction)
+	Multiply(_TeleportSpot, 1.0)
+	SetVar(_Blocker, "LLWEAPONEX_ShieldCover_TeleportPos", _TeleportSpot)
+	CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill")

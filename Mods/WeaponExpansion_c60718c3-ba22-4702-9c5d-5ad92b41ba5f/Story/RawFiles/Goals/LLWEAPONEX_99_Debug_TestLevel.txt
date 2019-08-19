@@ -540,6 +540,11 @@ TeleportTo(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573
 */
 
 IF
+TextEventSet("llweap_vectortp")
+THEN
+CharacterCharacterSetEvent(S_Player_LLWEAPONEX_WeaponMaster_2842603d-a263-4f65-a164-4a2391afe349, S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LLWEAPONEX_Debug_TeleportVector");
+
+IF
 CharacterUsedSkill(_Character, _, _, _)
 AND
 CharacterGetHostCharacter(_Character)

@@ -382,6 +382,7 @@ IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_COVERED", (CHARACTERGUID)_Blocker)
 THEN
 DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_ShieldCoverActive", "WeaponExpansion");
 
 IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_COVERED", _)
@@ -414,22 +415,51 @@ THEN
 RemoveStatus(_Char, "LLWEAPONEX_COVERING");
 
 PROC
-LLWEAPONEX_DualShields_DynamicCover((CHARACTERGUID)_Attacker, (CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
+LLWEAPONEX_DualShields_OnCoveredRemoved((CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
 AND
-GetPosition(_Blocker, _x, _y, _z)
-AND
-GetPosition(_Char, _tx, _ty, _tz)
+NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_,_)
 THEN
-CharacterSetDetached(_Blocker, 1);
-CharacterSetDetached(_Char, 1);
-ApplyStatus(_Char, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, _Blocker);
-TeleportToPosition(_Blocker, _tx, _ty, _tz, "LLWEAPONEX_AttachToGrid", 0, 1);
-TeleportToPosition(_Char, _x, _y, _z, "LLWEAPONEX_AttachToGrid", 0, 1);
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_ShieldCoverActive", "WeaponExpansion", 500);
+
+PROC
+LLWEAPONEX_DualShields_DynamicCover((CHARACTERGUID)_Attacker, (CHARACTERGUID)_Blocker, (CHARACTERGUID)_Defender)
+AND
+HasActiveStatus(_Blocker, "LLWEAPONEX_COVERING", 1)
+THEN
+SetVarObject(_Blocker, "LLWEAPONEX_ShieldCover_Covering", _Defender);
+CharacterCharacterSetEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_Teleport");
+//TeleportToPosition(_Blocker, _tx, _ty, _tz, "LLWEAPONEX_AttachToGrid", 0, 1);
+//TeleportToPosition(_Char, _x, _y, _z, "LLWEAPONEX_AttachToGrid", 0, 1);
+
+PROC
+LLWEAPONEX_DualShields_DynamicCover((CHARACTERGUID)_Attacker, (CHARACTERGUID)_Blocker, (CHARACTERGUID)_Defender)
+THEN
+ApplyStatus(_Defender, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, _Blocker);
+RemoveStatus(_Defender, "LLWEAPONEX_COVERED");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AttachToGrid")
 THEN
 CharacterSetDetached(_Char, 0);
+
+IF
+CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill")
+AND
+GetPosition(_Blocker, _tx, _ty, _tz)
+AND
+GetVarFloat3(_Blocker, "LLWEAPONEX_ShieldCover_TeleportPos", _x, _y, _z)
+THEN
+PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _tx, _ty, _tz);
+PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _x, _y, _z);
+PlayEffect(_Blocker, "LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay_01");
+TeleportToPosition(_Blocker, _x, _y, _z, "", 0, 1);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Blocker, _Attacker, 50, "LLWEAPONEX_Timers_ShieldCover_UseCounterSkill", "UseCounterSkill");
+
+IF
+CharacterCharacterEvent(_Blocker, _Attacker, "UseCounterSkill")
+THEN
+DisplayText(_Attacker, "LLWEAPONEX_StatusText_Countered");
+CharacterUseSkill(_Blocker, "Target_LLWEAPONEX_ShieldCover_CounterAttack", _Attacker, 1, 1, 1);
 //END_REGION
 
 //REGION IRON_MAIDEN
