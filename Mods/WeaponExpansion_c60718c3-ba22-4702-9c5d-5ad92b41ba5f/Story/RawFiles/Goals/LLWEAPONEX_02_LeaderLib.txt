@@ -129,6 +129,8 @@ LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLW
 PROC
 LLWEAPONEX_LeaderLib_InitItemGrowth()
 THEN
+DB_LeaderLib_RuneSlotDeltaMod("WeaponExpansion", "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
+
 //Unique Weapon Deltamods
 //Katanas
 LeaderLib_Growth_Items_Register_Template("WeaponExpansion", "WeaponExpansion.Katanas.Fire", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Runeblade_Fire_1H_A_25726991-6bc1-45fb-a00b-d3bf855cd0d1");
@@ -373,6 +375,7 @@ LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersi
 AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 10, 0)
 THEN
+DB_LeaderLib_RuneSlotDeltaMod("WeaponExpansion", "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
 LLWEAPONEX_LeaderLib_RegisterToggleScripts();
 
 PROC

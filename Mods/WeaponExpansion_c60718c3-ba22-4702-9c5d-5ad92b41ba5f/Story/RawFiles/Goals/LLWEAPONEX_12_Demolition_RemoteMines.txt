@@ -115,6 +115,17 @@ LLWEAPONX_RemoteMines_QRY_ClampDetonation((GUIDSTRING)_Target, (CHARACTERGUID)_S
 AND
 NOT DB_LLWEAPONEX_RemoteMines_Temp_DetonationCount(_Target, _Source, _)
 AND
+DB_GlobalFlag("WeaponExpansion_Settings_RemoteChargeDetonationCountDisabled")
+THEN
+DB_LLWEAPONEX_RemoteMines_Temp_DetonationCount(_Target, _Source, _Count);
+
+QRY
+LLWEAPONX_RemoteMines_QRY_ClampDetonation((GUIDSTRING)_Target, (CHARACTERGUID)_Source, (INTEGER)_Count)
+AND
+NOT DB_LLWEAPONEX_RemoteMines_Temp_DetonationCount(_Target, _Source, _)
+AND
+NOT DB_GlobalFlag("WeaponExpansion_Settings_RemoteChargeDetonationCountDisabled")
+AND
 _Count > 0
 AND
 IntegerMin(_Count, 5, _ClampedCount)
