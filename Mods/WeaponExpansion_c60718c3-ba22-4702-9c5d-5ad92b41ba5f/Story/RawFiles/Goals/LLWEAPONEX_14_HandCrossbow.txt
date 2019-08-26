@@ -35,6 +35,7 @@ PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
 THEN
 LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_Equipped");
+ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
 LLWEAPONEX_HandCrossbow_OnEquipped(_Character, _Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
 
 PROC
@@ -85,6 +86,7 @@ DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Character, _Item);
 ItemInsertRune(_Character, _Item, _RuneTemplate, 0);
 ItemRemove(_Bolts);
 LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
+ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Auto-inserted crossbow bolts into empty Handcrossbow.");
 CharacterStatusText(_Character, "LLWEAPONEX_Handcrossbow_BoltAutoInserted");
 
@@ -98,6 +100,7 @@ AND
 DB_LeaderLib_Helper_Runes_Templates("WeaponExpansion.HandCrossbowBolt", _RuneTemplate)
 THEN
 LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
+ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow has ammo. ");
 
 PROC
@@ -124,6 +127,7 @@ AND
 _Charges < _MaxCharges
 THEN
 LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_CanReload");
+ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow can reload. ");
 //END_REGION
 

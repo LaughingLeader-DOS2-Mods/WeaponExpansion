@@ -30,6 +30,13 @@ THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 
 PROC
+LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
+AND
+CharacterIsPlayer(_Char, 1)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
+
+PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 LLWEAPONEX_QRY_ItemIsWeaponOrShield_TagIfWeapon(_Char, _Item, _Template)

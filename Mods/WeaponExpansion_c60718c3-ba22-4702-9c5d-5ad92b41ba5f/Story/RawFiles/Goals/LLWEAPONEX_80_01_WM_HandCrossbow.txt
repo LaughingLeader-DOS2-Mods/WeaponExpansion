@@ -23,6 +23,7 @@ NOT DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Character, _HandCrossbow);
 ItemInsertRune(_Character, _HandCrossbow, _RuneTemplate, 0);
 ItemRemove(_Bolts);
 LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
+ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Auto-inserted crossbow bolts into empty Handcrossbow.");
 CharacterStatusText(_Character, "LLWEAPONEX_Handcrossbow_BoltAutoInserted");
 
@@ -34,6 +35,7 @@ AND
 IsTagged(_HandCrossbow, "LLWEAPONEX_HandCrossbow", 1)
 THEN
 LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
+ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow now has ammo. ");
 
 IF

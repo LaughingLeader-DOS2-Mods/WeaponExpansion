@@ -41,6 +41,7 @@ AND
 _Energy > 0
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
+ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
 
 PROC
 LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
@@ -48,6 +49,7 @@ AND
 _Energy >= 3
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
+ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLib_Statuses_ApplyPermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", 1);
 
 PROC
