@@ -229,7 +229,7 @@ ItemTemplateEquipped(_Template, _Player)
 AND
 DB_LLWEAPONEX_Recipes_Uniques(_ID, _Template, _Flag)
 AND
-NOT DB_GlobalFlag("LLWEAPONEX_AutoUnlockRecipes_Disabled")
+UserGetFlag(_Player, "WeaponExpansion_Settings_AutoUnlockRecipesDisabled", 0)
 AND
 ObjectGetFlag(_Player, _Flag, 0)
 THEN
