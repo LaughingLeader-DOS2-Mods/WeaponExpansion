@@ -227,6 +227,8 @@ IF
 //ItemTemplateAddedToCharacter(_Template, _Item, _Player)
 ItemTemplateEquipped(_Template, _Player)
 AND
+DB_IsPlayer(_Player)
+AND
 DB_LLWEAPONEX_Recipes_Uniques(_ID, _Template, _Flag)
 AND
 UserGetFlag(_Player, "WeaponExpansion_Settings_AutoUnlockRecipesDisabled", 0)
@@ -234,7 +236,7 @@ AND
 ObjectGetFlag(_Player, _Flag, 0)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_05_Recipes:ItemTemplateEquipped] Unlocking recipes for unique template with ID [",_ID,"](",_Template,").");
-ObjectSetFlag(_Player, _Flag, 1);
+ObjectSetFlag(_Player, _Flag, 0);
 LLWEAPONEX_Recipes_Unlock(_Player, _ID);
 //END_REGION
 
