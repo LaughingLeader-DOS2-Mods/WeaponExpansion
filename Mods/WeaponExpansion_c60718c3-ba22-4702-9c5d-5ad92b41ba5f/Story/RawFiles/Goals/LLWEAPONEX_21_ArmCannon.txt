@@ -207,7 +207,7 @@ SetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", _Item);
 LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
 //END_REGION
 
-//REGION ARM_CANNON_BLOCK_SHIELD_WEAPON
+//REGION ARM_CANNON_BLOCK_OFFHAND_WEAPON
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Char, (ITEMGUID)_Weapon)
 AND

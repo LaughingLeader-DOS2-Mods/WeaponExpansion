@@ -34,9 +34,19 @@ _Item != NULL_00000000-0000-0000-0000-000000000000
 AND
 GetTemplate(_Item, _Template)
 AND
+GetStatString(_Item, _Stat)
+AND
 StringContains(_Template, "Shield", 0)
 AND
-StringContains(_Template, "WPN_", 1)
+StringContains(_Stat, "Shield", 0)
+AND
+StringContains(_Template, "WPN_", _a)
+AND
+StringContains(_Stat, "WPN_", _b)
+AND
+IntegerSum(_a, _b, _c)
+AND
+_c > 0
 THEN
 DB_NOOP(1);
 
