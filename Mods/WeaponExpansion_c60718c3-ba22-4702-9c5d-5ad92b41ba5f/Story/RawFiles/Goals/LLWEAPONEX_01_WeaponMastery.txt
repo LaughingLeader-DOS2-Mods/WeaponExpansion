@@ -226,7 +226,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_HandCrossbow", 4, "<font color
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbow_Exp", "LLWEAPONEX_HandCrossbow_Level");
 DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_HandCrossbow", 0, "Reload", "Any");
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_HandCrossbow", 1, "Assassinate", "Any");
-DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Reload", "Shout_LLWEAPONEX_HandCrossbow_Reload");
+//DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Reload", "Shout_LLWEAPONEX_HandCrossbow_Reload");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Assassinate", "Projectile_LLWEAPONEX_HandCrossbow_Assassinate");
 
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Katana", "<font color='#FF2D2D'>Katana Mastery</font>");
