@@ -69,7 +69,7 @@ LLWEAPONEX_OnItemUnEquipped(_Char, _Item, _Template);
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Item, _Template)
+LLWEAPONEX_QRY_ItemIsWeapon(_Char, _Item, _Template)
 AND
 NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Char)
 THEN

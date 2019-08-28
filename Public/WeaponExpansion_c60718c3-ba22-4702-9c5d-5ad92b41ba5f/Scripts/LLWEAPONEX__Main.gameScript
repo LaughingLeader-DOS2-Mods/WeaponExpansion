@@ -282,62 +282,80 @@ ENDIF
 EVENT LLWEAPONEX_CheckWeaponTypes
 VARS
 	CHARACTER:_Char
+	INT:_FoundType
 ON
 	OnCharacterEvent(_Char, "LLWEAPONEX_CheckWeaponType")
 ACTIONS
+	Set(_FoundType, 0)
 IF "c1"
 	CharacterHasWeaponType(_Char, Axe, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Axe")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Bow, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Bow")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Club, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Club")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Crossbow, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Crossbow")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Knife, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Knife")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Spear, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Spear")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Staff, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Staff")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Sword, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Sword")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Wand, 1)
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Wand")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Arrow, 1) // ??
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Arrow")
+	Set(_FoundType, 1)
 ENDIF
 IF "c1"
 	CharacterHasWeaponType(_Char, Sentinel, 1) // Wtf is this?
 THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Sentinel")
+	Set(_FoundType, 1)
+ENDIF
+IF "c1"
+	IsEqual(_FoundType, 0)
+THEN
+	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Unarmed")
 ENDIF
 	CharacterEvent(_Char, "LLWEAPONEX_CheckWeaponType_Done")

@@ -191,6 +191,60 @@ IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_WeaponTypeFound_Sentinel")
 THEN
 LLWEAPONEX_TagHelper_CheckWeapon_Internal_TypeFound(_Char, "Sentinel");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_WeaponTypeFound_Unarmed")
+AND
+GlobalGetFlag("LeaderLib_IsEditorMode", 1)
+AND
+String(_Char, _CharStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_TagHelper:TypeFound] No weapon types found for [",_CharStr,"].");
+//LLWEAPONEX_TagHelper_CheckWeapon_Internal_TypeFound(_Char, "Unarmed");
+//END_REGION
+
+//REGION DEBUG
+IF
+TextEventSet("llweap_checkweapontype")
+AND
+CharacterGetHostCharacter(_Char)
+THEN
+SetStoryEvent(_Char, "LLWEAPONEX_CheckWeaponType");
+
+IF
+TextEventSet("llweap_checkweapontype")
+AND
+CharacterGetHostCharacter(_Char)
+AND
+CharacterGetEquippedWeapon(_Char, _Item)
+AND
+String(_Char, _CharStr)
+AND
+String(_Item, _ItemStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_TagHelper:TypeFound:CharacterGetEquippedWeapon] Weapon item is [",_ItemStr,"] for [",_CharStr,"].");
+
+IF
+TextEventSet("llweap_checkweapontype")
+AND
+CharacterGetHostCharacter(_Char)
+AND
+CharacterGetEquippedShield(_Char, _Item)
+AND
+String(_Char, _CharStr)
+AND
+String(_Item, _ItemStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_TagHelper:TypeFound:CharacterGetEquippedShield] Shield item is [",_ItemStr,"] for [",_CharStr,"].");
+
+PROC
+LLWEAPONEX_TagHelper_CheckWeapon_Internal_TypeFound((CHARACTERGUID)_Char, (STRING)_WeaponType)
+AND
+GlobalGetFlag("LeaderLib_IsEditorMode", 1)
+AND
+String(_Char, _CharStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_TagHelper:TypeFound] Found weapon type [", _WeaponType, "] for [",_CharStr,"].");
 //END_REGION
 
 //REGION TEMPLATE_TO_TAG

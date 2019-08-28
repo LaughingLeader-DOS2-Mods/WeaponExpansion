@@ -219,7 +219,7 @@ NOT DB_GlobalFlag("WeaponExpansion_Settings_NoArmCannonRestrictions")
 AND
 NOT GetTemplate(_Weapon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
 AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Weapon)
+LLWEAPONEX_QRY_ItemIsWeapon(_Char, _Weapon)
 THEN
 DB_CustomUseItemResponse(_Char, _Weapon, 0);
 ShowNotification(_Char, "LLWEAPONEX_Notifications_ArmCannonShieldBlocked");
@@ -260,7 +260,7 @@ DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 AND
 CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
 AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Item)
+LLWEAPONEX_QRY_ItemIsWeapon(_Char, _Item)
 THEN
 LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 

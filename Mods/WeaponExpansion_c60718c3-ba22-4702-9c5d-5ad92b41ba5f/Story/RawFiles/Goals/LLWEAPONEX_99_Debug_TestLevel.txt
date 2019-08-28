@@ -1603,6 +1603,64 @@ String(_Item, _ItemStr)
 THEN
 LeaderLog_Log("DEBUG", "[ItemTemplateCombinedWithItemTemplate] Character [",_CharStr,"] Result[",_ItemStr,"] Combined [",_Str1,"][",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
 //END_REGION
+
+/*
+QRY
+MyMod_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
+AND
+NOT CharacterGetEquippedShield(_Char, _Item) // Not a shield
+AND
+CharacterGetEquippedItem(_Char, "Weapon", _Item)
+THEN
+DB_NOOP(1);
+
+QRY
+MyMod_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
+AND
+NOT CharacterGetEquippedShield(_Char, _Item)
+AND
+CharacterGetEquippedItem(_Char, "Shield", _Item)
+THEN
+DB_NOOP(1);
+
+IF
+ItemEquipped(_Item, _Char)
+AND
+DB_IsPlayer(_Char) // If you want this to only run for players/party members
+AND
+MyMod_QRY_ItemIsWeapon(_Char, _Item)
+THEN
+SetStoryEvent(_Char, "LLWEAPONEX_CheckWeaponType");
+DB_MyMod_EquippedWeapon(_Char, _Item);
+
+IF
+ItemUnEquipped(_Item, _Char)
+AND
+DB_MyMod_EquippedWeapon(_Char, _Item)
+THEN
+NOT DB_MyMod_EquippedWeapon(_Char, _Item);
+SetStoryEvent(_Char, "LLWEAPONEX_CheckWeaponType");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_WeaponTypeFound_Crossbow")
+THEN
+CharacterStatusText(_Char, "Ranged Weapon");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_WeaponTypeFound_Bow")
+THEN
+CharacterStatusText(_Char, "Ranged Weapon");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_WeaponTypeFound_Wand")
+THEN
+CharacterStatusText(_Char, "Ranged Weapon");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_WeaponTypeFound_Unarmed")
+THEN
+CharacterStatusText(_Char, "No Ranged Weapon");
+*/
 EXITSECTION
 
 ENDEXITSECTION
