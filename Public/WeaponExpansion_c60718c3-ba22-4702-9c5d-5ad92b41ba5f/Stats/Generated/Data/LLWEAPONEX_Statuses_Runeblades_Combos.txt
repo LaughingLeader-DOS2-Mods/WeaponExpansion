@@ -858,6 +858,23 @@ data "FormatColor" "Air"
 data "Icon" "Skill_Skillcrafting_Air_CursedElectricInfusion"
 data "ForceOverhead" "Yes"
 
+new entry "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_DUMMYHIT"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+
+new entry "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_DAMAGE"
+type "StatusData"
+data "StatusType" "DAMAGE"
+using "LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+data "LeaveAction" "Projectile_LLWEAPONEX_Status_Runeblade_Thunderbolt_Damage"
+
+new entry "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_CHAINLIGHTNING"
+type "StatusData"
+data "StatusType" "DAMAGE"
+using "LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+data "LeaveAction" "Projectile_LLWEAPONEX_Runeblade_ChainLightning"
+
 new entry "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN"
 type "StatusData"
 data "StatusType" "CONSUME"

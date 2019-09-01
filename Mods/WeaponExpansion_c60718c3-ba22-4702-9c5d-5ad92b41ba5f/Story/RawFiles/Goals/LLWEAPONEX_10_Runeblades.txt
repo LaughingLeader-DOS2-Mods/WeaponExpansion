@@ -316,6 +316,37 @@ _Cause != NULL_00000000-0000-0000-0000-000000000000
 THEN
 LeaderLib_Skills_UseSkillOnTarget(_Cause, _Character, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", 1, 1);
 
+PROC
+LeaderLib_Skills_OnDummyUsedSkillOnTarget((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", (GUIDSTRING)_Target, (STRING)_Skilltype, (STRING)_SkillElement)
+THEN
+DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_DUMMYHIT", (CHARACTERGUID)_Dummy)
+AND
+DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_DAMAGE", 0.0, 0, _Caster);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_DUMMYHIT", (CHARACTERGUID)_Dummy)
+AND
+DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_CHAINLIGHTNING", 0.0, 0, _Caster);
+
+PROC
+LeaderLib_Skills_OnDummyCastSkillOnTarget((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", (GUIDSTRING)_Target, (STRING)_Skilltype, (STRING)_SkillElement)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Runeblade_Thunderbolt_ClearDummyDB", "LLWEAPONEX_Runeblade_Thunderbolt_ClearDummyDB");
+
+IF
+StoryEvent((CHARACTERGUID)_Caster, "LLWEAPONEX_Runeblade_Thunderbolt_ClearDummyDB")
+AND
+DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target)
+THEN
+NOT DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target);
+
 //REGION DOUBLE_RUNEBLADE_SKILLS
 QRY
 LLWEAPONEX_Runeblades_QRY_CanAddDualWieldSkill((ITEMGUID)_MainhandRuneblade, (ITEMGUID)_OffhandRuneblade, (STRING)_Tag)

@@ -538,15 +538,25 @@ PlayEffectAtPosition("LLWEAPONEX_FX_Skills_Greatbow_FutureBarrage_Decal_AttackIm
 PROC
 LeaderLib_Turns_OnTurnCounterComplete_PositionWithObject((STRING)_ID, (GUIDSTRING)_Char, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_FutureBarrageFire")
 THEN
-LeaderLib_Skills_UseSkillAtPosition((CHARACTERGUID)_Char, _x, _y, _z, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows", 1, 1);
+LeaderLib_Skills_UseSkillAtPosition((CHARACTERGUID)_Char, _x, _y, _z, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", 1, 1);
 
-//END_REGION
-
-//REGION BARRAGE_IMMOBILE_CHECK
 PROC
-LeaderLib_Skills_OnDummyCastSkillAtPosition((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows", (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skilltype, (STRING)_SkillElement)
+LeaderLib_Skills_OnDummyUsedSkillAtPosition((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skilltype, (STRING)_SkillElement)
 THEN
 DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_GREATBOW_FUTUREBARRAGE_DUMMYHIT", (CHARACTERGUID)_Dummy)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_FUTUREBARRAGE_DAMAGE", 0.0, 1, _Caster);
+CharacterCharacterSetEvent(_Target, _Caster, "LLWEAPONEX_Greatbows_FutureBarrage_CheckMovement"); //Immobile bonus damage check
+LeaderLib_Timers_RestartObjectTimer(_Caster, "LLWEAPONEX_Timers_FutureBarrage_ClearDummyDB", 250);
+
+PROC
+LeaderLib_Skills_OnDummyCastSkillAtPosition((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skilltype, (STRING)_SkillElement)
+THEN
 LeaderLib_Timers_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_FutureBarrage_ClearDummyDB", "LLWEAPONEX_FutureBarrage_ClearDummyDB");
 
 IF
@@ -555,14 +565,6 @@ AND
 DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy)
 THEN
 NOT DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy);
-
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_GREATBOW_DELAYEDBARRAGE_IMMOBILECHECK", (CHARACTERGUID)_Dummy)
-AND
-DB_LLWEAPONEX_Greatbows_Temp_FutureBarrageDummy(_Caster, _Dummy)
-THEN
-CharacterCharacterSetEvent(_Target, _Caster, "LLWEAPONEX_Greatbows_FutureBarrage_CheckMovement");
-LeaderLib_Timers_RestartObjectTimer(_Caster, "LLWEAPONEX_Timers_FutureBarrage_ClearDummyDB", 250);
 //END_REGION
 EXITSECTION
 

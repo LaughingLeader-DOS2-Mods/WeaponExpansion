@@ -89,7 +89,7 @@ CharacterItemEvent(_Player, _RemoteCharge, "LLWEAPONEX_Demolition_StartBreach")
 AND
 GetVarFloat3(_RemoteCharge, "LLWEAPONEX_Demolition_BreachPosition", _x, _y, _z)
 THEN
-LeaderLib_Skills_UseSkillAtPosition(_Player, _x, _y, _z, "Shout_LLWEAPONEX_RemoteMine_Breach_Knockback", 0, 0);
+LeaderLib_Skills_UseShoutFromPosition(_Player, "Shout_LLWEAPONEX_RemoteMine_Breach_Knockback", _x, _y, _z, 0, 0);
 EXITSECTION
 
 ENDEXITSECTION
