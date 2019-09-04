@@ -159,7 +159,6 @@ data "Memory Cost" "0"
 data "Magic Cost" "0"
 data "IgnoreSilence" "Yes"
 
-
 new entry "Projectile_LLWEAPONEX_ChaosPentaSlash"
 type "SkillData"
 data "SkillType" "Projectile"

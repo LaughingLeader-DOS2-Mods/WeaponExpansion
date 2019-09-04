@@ -480,35 +480,6 @@ HasActiveStatus(_Target, "KNOCKED_DOWN", 0)
 THEN
 ApplyStatus(_Target, "KNOCKED_DOWN", 6.0, 1, _Source);
 
-QRY
-LLWEAPONEX_Statuses_QRY_ClampTurns((CHARACTERGUID)_Target, (STRING)_Status, (INTEGER)_Min)
-AND
-GetStatusTurns(_Target, _Status, _Turns)
-AND
-IntegerMax(_Min, _Turns, _Max)
-THEN
-DB_LLWEAPONEX_Statuses_Temp_ClampedTurns(_Target, _Status, _Max);
-
-QRY
-LLWEAPONEX_Statuses_QRY_ClampTurns((CHARACTERGUID)_Target, (STRING)_Status, (INTEGER)_Min)
-AND
-NOT DB_LLWEAPONEX_Statuses_Temp_ClampedTurns(_Target, _Status, _)
-THEN
-DB_LLWEAPONEX_Statuses_Temp_ClampedTurns(_Target, _Status, _Min);
-
-PROC
-LLWEAPONEX_Statuses_ApplyRealStatus((CHARACTERGUID)_Target, (GUIDSTRING)_Source, (STRING)_TriggerStatus, (STRING)_RealStatus)
-AND
-LLWEAPONEX_Statuses_QRY_ClampTurns(_Target, _TriggerStatus, 1)
-AND
-DB_LLWEAPONEX_Statuses_Temp_ClampedTurns(_Target, _Status, _Turns)
-AND
-Real(_Turns, _Duration)
-THEN
-NOT DB_LLWEAPONEX_Statuses_Temp_ClampedTurns(_Target, _Status, _Turns);
-ApplyStatus(_Target, _RealStatus, _Duration, 1, _Source);
-RemoveStatus(_Target, _TriggerStatus);
-
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK", _Source)
 THEN
