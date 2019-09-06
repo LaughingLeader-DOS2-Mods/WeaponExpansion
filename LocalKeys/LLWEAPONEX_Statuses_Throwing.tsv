@@ -19,3 +19,4 @@ LLWEAPONEX_BALRINAXE_DISARMED_INFO_DisplayName	Threw Balrin's Throwing Axe
 LLWEAPONEX_BALRINAXE_DISARMED_INFO_Description	Character has thrown <font color='#C7A758'>Balrin's Throwing Axe</font> at a target.<br><font color='#ED9D07'>Get near the target to retrieve the axe, otherwise it will return when this status ends.</font>
 LLWEAPONEX_BALRINAXE_INFO_DisplayName	Throwable
 LLWEAPONEX_BALRINAXE_PREPARED_DisplayName	Prepare Balrin's Throwing Axe
+LLWEAPONEX_TOSSED_DisplayName	Throw Target
