@@ -210,6 +210,7 @@ VARS
 	//INT:_Strength
 	
 	FLOAT:_StrengthDistMult
+	FLOAT:_Weight
 	
     FLOAT3:_Dir
     FLOAT3:_Forward
@@ -222,13 +223,25 @@ VARS
 ON
     OnCharacterCharacterEvent(_Source, _TargetChar, "LLWEAPONEX_Throwing_TossObject")
 ACTIONS
-	IF "c1&c2&c3"
+	Set(_StrengthF, 10.0)
+	Set(_LevelF, 1.0)
+	Set(_Weight, 0.0)
+	Set(_TossSkill, 0.0)
+
+	IF "c1|c2|c3"
 		CharacterGetStat(_LevelF, _Source, Level)
 		CharacterGetStat(_StrengthF, _Source, Strength)
 		GetPosition(_TargetChar, _Pos)
 	THEN
 		Cast(_Level, _LevelF)
 		//Cast(_Strength, _StrengthF)
+	ENDIF
+	IF "c1"
+		CharacterGetStat(_Weight, _Source, Weight)
+	THEN
+		IF "c1"
+			IsGreaterThen(_Weight, 500.0)
+		THEN
 	ENDIF
 	
 	Set(_Offset, {0;1.0;0})
@@ -308,5 +321,79 @@ ACTIONS
 	ENDIF
 	GetForwardDirection(_Source, _DebugDir)
 	Print(_Str, "[LLWEAPONEX:Debug] Launching target to position [1] from [2]. Source Dir: [3] Dist: [4].", _Pos, _DebugPos, _DebugDir, _Dist)
+	SetVar(_Source, "LeaderLog_Message", _Str)
+	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+
+EVENT LLWEAPONEX_Throwing_TossLanded_Char
+VARS
+    CHARACTER:_Source
+	CHARACTER:_TargetChar
+	FLOAT:_Weight
+	SKILL:_TossSkill
+	FLOAT:_LevelF
+	INT:_Level	
+ON
+    OnCharacterCharacterEvent(_Source, _TargetChar, "LLWEAPONEX_Throwing_TossObject_Landed")
+ACTIONS
+	Set(_Weight, 0.0)
+	Set(_LevelF, 1.0)
+	IF "c1|c2"
+		CharacterGetStat(_Weight, _TargetChar, Weight)
+		CharacterGetStat(_LevelF, _Source, Level)
+	THEN
+	ENDIF
+	Cast(_Level, _LevelF)
+	IF "c1"
+		IsGreaterThen(_Weight, 500.0)
+	THEN
+		Set(_TossSkill, Projectile_LLWEAPONEX_Status_Tossed_Damage_Heavy)
+	ELIF "c1"
+		IsGreaterThen(_Weight, 250.0)
+	THEN
+		Set(_TossSkill, Projectile_LLWEAPONEX_Status_Tossed_Damage_Medium)
+	ELSE
+		Set(_TossSkill, Projectile_LLWEAPONEX_Status_Tossed_Damage_Light)
+	ENDIF
+
+	ExplodeAt(_TargetChar, _TossSkill, _Level, _Source)
+
+	Print(_Str, "[LLWEAPONEX:LLWEAPONEX_Throwing_TossObject_Landed] Character weight is ([1]), exploding skill is ([2]).", _Weight, _TossSkill)
+	SetVar(_Source, "LeaderLog_Message", _Str)
+	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+
+EVENT LLWEAPONEX_Throwing_TossLanded_Item
+VARS
+    CHARACTER:_Source
+	ITEM:_TargetItem
+	FLOAT:_Weight
+	SKILL:_TossSkill
+	FLOAT:_LevelF
+	INT:_Level	
+ON
+    OnCharacterItemEvent(_Source, _TargetItem, "LLWEAPONEX_Throwing_TossObject_Landed")
+ACTIONS
+	Set(_Weight, 0.0)
+	Set(_LevelF, 1.0)
+	IF "c1|c2"
+		ItemGetStat(_Weight, _TargetItem, Weight)
+		CharacterGetStat(_LevelF, _Source, Level)
+	THEN
+	ENDIF
+	Cast(_Level, _LevelF)
+	IF "c1"
+		IsGreaterThen(_Weight, 500.0)
+	THEN
+		Set(_TossSkill, Projectile_LLWEAPONEX_Status_Tossed_Damage_Heavy)
+	ELIF "c1"
+		IsGreaterThen(_Weight, 250.0)
+	THEN
+		Set(_TossSkill, Projectile_LLWEAPONEX_Status_Tossed_Damage_Medium)
+	ELSE
+		Set(_TossSkill, Projectile_LLWEAPONEX_Status_Tossed_Damage_Light)
+	ENDIF
+
+	ExplodeAt(_TargetItem, _TossSkill, _Level, _Source)
+
+	Print(_Str, "[LLWEAPONEX:LLWEAPONEX_Throwing_TossObject_Landed] Item weight is ([1]), exploding skill is ([2]).", _Weight, _TossSkill)
 	SetVar(_Source, "LeaderLog_Message", _Str)
 	CharacterEvent(_Source, "LeaderLog_Commands_Log")

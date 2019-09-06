@@ -1124,16 +1124,34 @@ ObjectClearFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0);
 ClearTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
 //END_REGION
 
-//REGION KICK_OBJECT
+//REGION THROW_OBJECT
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN
+DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
 CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject");
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN
+DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
 CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED_LAND", _)
+AND
+DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target)
+THEN
+CharacterCharacterSetEvent(_Source, (CHARACTERGUID)_Target, "LLWEAPONEX_Throwing_TossObject_Landed");
+NOT DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_TOSSED_LAND", _)
+AND
+DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target)
+THEN
+CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Throwing_TossObject_Landed");
+NOT DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
 //END_REGION
 EXITSECTION
 
