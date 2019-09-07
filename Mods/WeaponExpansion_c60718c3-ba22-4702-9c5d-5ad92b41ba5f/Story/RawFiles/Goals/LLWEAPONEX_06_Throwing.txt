@@ -1128,40 +1128,52 @@ ClearTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
+DB_LLWEAPONEX_Throwing_Temp_TossedChar(_Source, _Target);
 CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject");
 LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 3500, "LLWEAPONEX_Timers_Tossed_ResetTargetDB", "LLWEAPONEX_Tossed_ResetTargetDB");
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished(_Source, _Target, "LLWEAPONEX_Tossed_ResetTargetDB")
-AND
-DB_LLWEAPONEX_Throwing_Temp_TossedTarget((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
-THEN
-NOT DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
-CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject");
+DB_LLWEAPONEX_Throwing_Temp_TossedItem(_Source, _Target);
+CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Throwing_TossObject");
+LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 3500, "LLWEAPONEX_Timers_Tossed_ResetTargetDB", "LLWEAPONEX_Tossed_ResetTargetDB");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED_LAND", _)
 AND
-DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target)
+DB_LLWEAPONEX_Throwing_Temp_TossedChar(_Source, _Target)
 THEN
-CharacterCharacterSetEvent(_Source, (CHARACTERGUID)_Target, "LLWEAPONEX_Throwing_TossObject_Landed");
-NOT DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
+NOT DB_LLWEAPONEX_Throwing_Temp_TossedChar(_Source, _Target);
+CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject_Landed");
 LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Tossed_ResetTargetDB");
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_TOSSED_LAND", _)
 AND
-DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target)
+DB_LLWEAPONEX_Throwing_Temp_TossedItem(_Source, _Target)
 THEN
-CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Throwing_TossObject_Landed");
-NOT DB_LLWEAPONEX_Throwing_Temp_TossedTarget(_Source, (GUIDSTRING)_Target);
+NOT DB_LLWEAPONEX_Throwing_Temp_TossedItem(_Source, _Target);
+CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject_Landed");
 LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Tossed_ResetTargetDB");
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Source, _Target, "LLWEAPONEX_Tossed_ResetTargetDB")
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+AND
+DB_LLWEAPONEX_Throwing_Temp_TossedChar(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_TossedChar(_Source, _Target);
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Source, _Target, "LLWEAPONEX_Tossed_ResetTargetDB")
+AND
+ObjectIsItem((ITEMGUID)_Target, 1)
+AND
+DB_LLWEAPONEX_Throwing_Temp_TossedItem(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_TossedItem(_Source, _Target);
 //END_REGION
 EXITSECTION
 
