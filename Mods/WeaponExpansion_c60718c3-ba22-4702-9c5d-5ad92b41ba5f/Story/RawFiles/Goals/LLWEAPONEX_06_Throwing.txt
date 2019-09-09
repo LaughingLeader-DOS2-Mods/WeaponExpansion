@@ -1162,15 +1162,15 @@ IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN
 DB_LLWEAPONEX_Throwing_Temp_TossedChar(_Source, _Target);
-CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject");
-LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 3500, "LLWEAPONEX_Timers_Tossed_ResetTargetDB", "LLWEAPONEX_Tossed_ResetTargetDB");
+ObjectSetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
+LLWEAPONEX_Throwing_TossObject_LaunchCharStart(_Source, _Target);
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN
 DB_LLWEAPONEX_Throwing_Temp_TossedItem(_Source, _Target);
-CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Throwing_TossObject");
-LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 3500, "LLWEAPONEX_Timers_Tossed_ResetTargetDB", "LLWEAPONEX_Tossed_ResetTargetDB");
+ObjectSetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
+LLWEAPONEX_Throwing_TossObject_LaunchItemStart(_Source, _Target);
 
 PROC
 LLWEAPONEX_Throwing_TossObject_LaunchCharStart((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
@@ -1226,6 +1226,14 @@ AND
 DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
+
+PROC
+LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source)
+AND
+ObjectGetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 1)
+THEN
+ObjectClearFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
+ApplyStatus(_Target, "LLWEAPONEX_TOSSED_LAND", 0.0, 0, _Source);
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED_LAND", _)
