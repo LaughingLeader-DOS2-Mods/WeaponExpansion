@@ -455,6 +455,20 @@ PlayEffect(_Blocker, "LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay
 TeleportToPosition(_Blocker, _x, _y, _z, "", 0, 1);
 LeaderLib_Timers_StartCharacterCharacterTimer(_Blocker, _Attacker, 50, "LLWEAPONEX_Timers_ShieldCover_UseCounterSkill", "UseCounterSkill");
 
+//When a valid position isn't found, teleport to the attacker
+IF
+CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill_NoPositionFound")
+AND
+GetPosition(_Blocker, _tx, _ty, _tz)
+AND
+GetPosition(_Attacker, _x, _y, _z)
+THEN
+PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _tx, _ty, _tz);
+PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _x, _y, _z);
+PlayEffect(_Blocker, "LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay_01");
+TeleportTo(_Blocker, _Attacker, "", 0, 1, 0);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Blocker, _Attacker, 50, "LLWEAPONEX_Timers_ShieldCover_UseCounterSkill", "UseCounterSkill");
+
 IF
 CharacterCharacterEvent(_Blocker, _Attacker, "UseCounterSkill")
 THEN

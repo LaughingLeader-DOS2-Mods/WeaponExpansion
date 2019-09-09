@@ -1139,6 +1139,20 @@ DB_LLWEAPONEX_Throwing_Temp_TossedItem(_Source, _Target);
 CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Throwing_TossObject");
 LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 3500, "LLWEAPONEX_Timers_Tossed_ResetTargetDB", "LLWEAPONEX_Tossed_ResetTargetDB");
 
+PROC
+LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (GUIDSTRING)_Item)
+AND
+CharacterGetAttribute(_Source, "Strength", _Strength)
+THEN
+LLWEAPONEX_Throwing_TossObject_SetForceIndex(_Source, _Strength);
+
+PROC
+LLWEAPONEX_Throwing_TossObject_SetForceIndex((CHARACTERGUID)_Source, (INTEGER)_Strength)
+AND
+_Strength <= 10
+THEN
+SetVarInteger(_Source, "LLWEAPONEX_Force_ForceIndex", 2);
+
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED_LAND", _)
 AND

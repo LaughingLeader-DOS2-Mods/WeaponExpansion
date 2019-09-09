@@ -15,12 +15,12 @@ VARS
 	FLOAT:_LevelF
 ON
 	//OnCharacterStatusApplied(_Target, LLWEAPONEX_GREATBOW_CUSHION_FORCE)
-	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbow_CushionForce_StartLaunch")
+	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Greatbow_CushionForce_StartLaunch")
 ACTIONS
 	Set(_ForceIndex, 0)
 	Set(_ForceSkill, Projectile_LeaderLib_Force4)
 IF "c1"
-	GetVar(_ForceIndex, _Target, "LLWEAPONEX_CushionForce_ForceIndex")
+	GetVar(_ForceIndex, _Source, "LLWEAPONEX_CushionForce_ForceIndex")
 THEN
 ENDIF
 	IF "c1"

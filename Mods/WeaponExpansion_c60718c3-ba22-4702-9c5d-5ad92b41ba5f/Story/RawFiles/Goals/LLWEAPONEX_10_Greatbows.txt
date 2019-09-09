@@ -326,7 +326,7 @@ RealSubtract(12.0, _Dist, _ForceDist) // Closer == Launch farther
 THEN
 LLWEAPONEX_Greatbows_Internal_CushionForce_DetermineForceIndex(_Target, _Source, _ForceDist);
 DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z);
-CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_Greatbow_CushionForce_StartLaunch");
+CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Greatbow_CushionForce_StartLaunch");
 
 PROC
 LLWEAPONEX_Greatbows_Internal_CushionForce_DetermineForceIndex((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_ForceDist)
@@ -340,7 +340,7 @@ AND
 _ForceDist < _Max
 THEN
 DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved(_Target, _Source);
-SetVarInteger(_Target, "LLWEAPONEX_CushionForce_ForceIndex", _Index);
+SetVarInteger(_Source, "LLWEAPONEX_Force_ForceIndex", _Index);
 
 PROC
 LLWEAPONEX_Greatbows_Internal_CushionForce_DetermineForceIndex((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (REAL)_ForceDist)

@@ -93,6 +93,7 @@ VARS
 	FLOAT3:_Direction
 	FLOAT:_Dist
 	FLOAT3:_TeleportSpot
+	FLOAT3:_ValidPos
 ON
 	OnCharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_Teleport")
 ACTIONS
@@ -106,9 +107,72 @@ ELSE
 ENDIF
 	GetPosition(_Attacker, _TeleportSpot)
 	Add(_TeleportSpot, _Direction)
-	Multiply(_TeleportSpot, 1.0)
-	SetVar(_Blocker, "LLWEAPONEX_ShieldCover_TeleportPos", _TeleportSpot)
-	CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill")
+	Multiply(_TeleportSpot, 1.5)
+	IF "c1&c2"
+		FindPosition(_ValidPos,_Blocker,1,0,0,12.0,0,_Blocker,-1,-1,-1,-1,null,0,_TeleportSpot)
+		FindValidPosition(_ValidPos, 12, _Blocker)
+	THEN
+		SetVar(_Blocker, "LLWEAPONEX_ShieldCover_TeleportPos", _ValidPos)
+		CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill")
+	ELSE
+		CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill_NoPositionFound")
+	ENDIF
+
+EVENT LLWEAPONEX_ForceLaunch_Start
+VARS
+	CHARACTER:_Target
+	ITEM:_TargetItem
+	CHARACTER:_Source
+	INT:_ForceIndex
+	SKILL:_ForceSkill
+ON
+	OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Force_StartLaunch")
+	OnCharacterItemEvent(_Source, _TargetItem, "LLWEAPONEX_Force_StartLaunch")
+ACTIONS
+	Set(_ForceIndex, 0)
+	Set(_ForceSkill, Projectile_LeaderLib_Force1)
+IF "c1"
+	GetVar(_ForceIndex, _Source, "LLWEAPONEX_Force_ForceIndex")
+THEN
+ENDIF
+IF "c1"
+	IsEqual(_ForceIndex, 0)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force1)
+ELIF "c1"
+	IsEqual(_ForceIndex, 2)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force2)
+ELIF "c1"
+	IsEqual(_ForceIndex, 3)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force3)
+ELIF "c1"
+	IsEqual(_ForceIndex, 3)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force7)
+ELIF "c1"
+	IsEqual(_ForceIndex, 4)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force8)
+ELIF "c1"
+	IsEqual(_ForceIndex, 5)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force9)
+ELIF "c1"
+	IsEqual(_ForceIndex, 6)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force10)
+ELIF "c1"
+	IsEqual(_ForceIndex, 7)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force11)
+ELIF "c1"
+	IsEqual(_ForceIndex, 8)
+THEN
+	Set(_ForceSkill, Projectile_LeaderLib_Force12)
+ENDIF
+	ShootLocalProjectileAt(_ForceSkill, _Source, FLOAT3:{0;3.0;0}, _Target, 1, _Source)
 	
 EVENT LLWEAPONEX_Throwing_TossCharacter
 VARS
