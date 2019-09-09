@@ -15,6 +15,39 @@ DB_LLWEAPONEX_Throwing_ReturnSkill("Projectile_LLWEAPONEX_ShieldToss", "Projecti
 
 DB_LLWEAPONEX_Throwing_ReturnSkillTags("Projectile_LLWEAPONEX_ShieldToss_Returned", "LLWEAPONEX_ShieldToss_Caster");
 
+DB_LLWEAPONEX_Throwing_StrengthDistanceConstants(10, 40);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(10, 2);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(11, 2);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(12, 2);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(13, 2);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(14, 3);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(15, 3);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(16, 3);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(17, 4);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(18, 4);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(19, 4);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(20, 4);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(21, 5);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(22, 5);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(23, 5);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(24, 5);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(25, 6);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(26, 6);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(27, 6);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(28, 7);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(29, 7);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(30, 7);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(31, 8);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(32, 8);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(33, 8);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(34, 9);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(35, 9);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(36, 10);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(37, 10);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(38, 10);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(39, 10);
+DB_LLWEAPONEX_Throwing_StrengthToDistance(40, 11);
+
 //DB_LLWEAPONEX_Throwing_ReturnSkill(_ShootSkill, _ReturnSkill, _HitStatus, _MaxTargets, _TimerName, _Timeout)
 
 //Make the impale effect look more believable
@@ -1140,18 +1173,59 @@ CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Throwing_TossObjec
 LeaderLib_Timers_StartObjectObjectTimer(_Source, _Target, 3500, "LLWEAPONEX_Timers_Tossed_ResetTargetDB", "LLWEAPONEX_Tossed_ResetTargetDB");
 
 PROC
-LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (GUIDSTRING)_Item)
+LLWEAPONEX_Throwing_TossObject_LaunchCharStart((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
 AND
 CharacterGetAttribute(_Source, "Strength", _Strength)
 THEN
-LLWEAPONEX_Throwing_TossObject_SetForceIndex(_Source, _Strength);
+LLWEAPONEX_Throwing_TossObject_Launch(_Source, _Strength, _Target);
 
 PROC
-LLWEAPONEX_Throwing_TossObject_SetForceIndex((CHARACTERGUID)_Source, (INTEGER)_Strength)
+LLWEAPONEX_Throwing_TossObject_LaunchItemStart((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
 AND
-_Strength <= 10
+CharacterGetAttribute(_Source, "Strength", _Strength)
 THEN
-SetVarInteger(_Source, "LLWEAPONEX_Force_ForceIndex", 2);
+LLWEAPONEX_Throwing_TossObject_Launch(_Source, _Strength, _Target);
+
+PROC
+LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target)
+AND
+DB_LLWEAPONEX_Throwing_StrengthDistanceConstants(_Min, _Max)
+AND
+_Strength < _Min
+THEN
+DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
+LeaderLib_Force_Apply(_Source, _Target, 1);
+
+PROC
+LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target)
+AND
+DB_LLWEAPONEX_Throwing_StrengthDistanceConstants(_Min, _Max)
+AND
+_Strength > _Max
+THEN
+DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
+LeaderLib_Force_Apply(_Source, _Target, 11);
+
+PROC
+LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
+AND
+NOT DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target)
+AND
+DB_LLWEAPONEX_Throwing_StrengthToDistance(_Strength, _Dist)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
+LeaderLib_Force_Apply(_Source, _Target, _Dist);
+
+PROC
+LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
+AND
+DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED_LAND", _)
