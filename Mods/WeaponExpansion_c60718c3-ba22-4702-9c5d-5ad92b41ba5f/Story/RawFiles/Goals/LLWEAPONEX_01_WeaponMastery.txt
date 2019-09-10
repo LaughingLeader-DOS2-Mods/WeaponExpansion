@@ -24,6 +24,7 @@ THEN
 LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag(_WeaponType, 1);
 LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag(_WeaponType, 2);
 LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag(_WeaponType, 3);
+LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag(_WeaponType, 4);
 
 PROC
 LLWEAPONEX_WeaponMastery_Internal_AddMasteryTag((STRING)_WeaponType, (INTEGER)_Level)

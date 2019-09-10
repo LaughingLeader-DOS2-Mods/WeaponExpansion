@@ -174,6 +174,112 @@ THEN
 ENDIF
 	ShootLocalProjectileAt(_ForceSkill, _Source, FLOAT3:{0;3.0;0}, _Target, 1, _Source)
 
+EVENT LLWEAPONEX_Throwing_CheckCanThrow_Char
+VARS
+    CHARACTER:_Source
+	CHARACTER:_Target
+	FLOAT:_Weight
+	FLOAT:_Strength
+	FLOAT:_MaxStrengthWeight
+ON
+    OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight")
+ACTIONS
+	Set(_Weight, 0.0)
+	Set(_Strength, 0.0)
+	IF "c1|c2"
+		CharacterGetStat(_Weight, _Target, Weight)
+		CharacterGetStat(_Strength, _Source, Strength)
+	THEN
+	ENDIF
+
+	//Base Weight is 50,000, 1,000 weight == 1 weight unit in-game
+	//20 STR = 200 max units == 200,000 max weight
+	IF "c1&c2"
+		IsGreaterThen(_Weight, 0.0)
+		IsGreaterThen(_Weight, 50000.0)
+	THEN
+		Subtract(_Weight, 50000.0)
+	ENDIF
+
+	IF "c1|!c2|c3"
+		IsGreaterThen(_Strength, 40)
+		IsGreaterThen(_Weight, 0.0)
+		IsTagged(_Source, "LLWEAPONEX_ThrowingAbility_Mastery4")
+	THEN
+		CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
+	ELSE
+		/*
+			1 Str = +10 additional carry weight, +7.5 object movement weight
+			CarryWeightBase = 0
+			CarryWeightPerStr = 10000
+			MoveToCarryWeightRatio = 0.75
+		*/
+
+		Set(_MaxStrengthWeight, _Strength)
+		Multiply(_MaxStrengthWeight, 10000)
+		
+		IF "c1|c2"
+			IsGreaterThen(_MaxStrengthWeight, _Weight)
+			IsEqual(_MaxStrengthWeight, _Weight)
+		THEN
+			CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
+		ELSE
+			StatusText(_Source, "LLWEAPONEX_StatusText_ThrowObjectFailed")
+			CharacterAddActionPoints(_Source, 1)
+		ENDIF
+	ENDIF
+	/*
+	Print(_Str, "[LLWEAPONEX:Throwing:TossObject:Landed] Character weight is ([1]), exploding skill is ([2]).", _Weight, _TossSkill)
+	SetVar(_Source, "LeaderLog_Message", _Str)
+	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+	*/
+
+EVENT LLWEAPONEX_Throwing_CheckCanThrow_Item
+VARS
+    CHARACTER:_Source
+	ITEM:_Target
+	FLOAT:_Weight
+	FLOAT:_Strength
+	FLOAT:_MaxStrengthWeight
+ON
+    OnCharacterItemEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight")
+ACTIONS
+	Set(_Weight, 0.0)
+	Set(_Strength, 0.0)
+	IF "c1|c2"
+		ItemGetStat(_Weight, _Target, Weight)
+		CharacterGetStat(_Strength, _Source, Strength)
+	THEN
+	ENDIF
+
+	IF "c1&c2"
+		IsGreaterThen(_Weight, 0.0)
+		IsGreaterThen(_Weight, 50000.0)
+	THEN
+		Subtract(_Weight, 50000.0)
+	ENDIF
+
+	IF "c1|!c2|c3"
+		IsGreaterThen(_Strength, 40)
+		IsGreaterThen(_Weight, 0.0)
+		IsTagged(_Source, "LLWEAPONEX_ThrowingAbility_Mastery4")
+	THEN
+		CharacterItemEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
+	ELSE
+		Set(_MaxStrengthWeight, _Strength)
+		Multiply(_MaxStrengthWeight, 10000)
+		
+		IF "c1|c2"
+			IsGreaterThen(_MaxStrengthWeight, _Weight)
+			IsEqual(_MaxStrengthWeight, _Weight)
+		THEN
+			CharacterItemEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
+		ELSE
+			StatusText(_Source, "LLWEAPONEX_StatusText_ThrowObjectFailed")
+			CharacterAddActionPoints(_Source, 1)
+		ENDIF
+	ENDIF
+
 EVENT LLWEAPONEX_Throwing_TossLanded_Char
 VARS
     CHARACTER:_Source

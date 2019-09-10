@@ -1159,29 +1159,29 @@ ClearTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
 
 //REGION THROW_OBJECT
 IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
+CharacterStatusAttempt(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN
-ObjectSetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
-LLWEAPONEX_Throwing_TossObject_LaunchCharStart(_Source, _Target);
+CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight");
 
 IF
-ItemStatusChange(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
+ItemStatusAttempt(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
+THEN
+CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight");
+
+IF
+CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
+AND
+CharacterGetAttribute(_Source, "Strength", _Strength)
 THEN
 ObjectSetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
-LLWEAPONEX_Throwing_TossObject_LaunchItemStart(_Source, _Target);
-
-PROC
-LLWEAPONEX_Throwing_TossObject_LaunchCharStart((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
-AND
-CharacterGetAttribute(_Source, "Strength", _Strength)
-THEN
 LLWEAPONEX_Throwing_TossObject_Launch(_Source, _Strength, _Target);
 
-PROC
-LLWEAPONEX_Throwing_TossObject_LaunchItemStart((CHARACTERGUID)_Source, (GUIDSTRING)_Target)
+IF
+CharacterItemEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
 AND
 CharacterGetAttribute(_Source, "Strength", _Strength)
 THEN
+ObjectSetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
 LLWEAPONEX_Throwing_TossObject_Launch(_Source, _Strength, _Target);
 
 PROC
