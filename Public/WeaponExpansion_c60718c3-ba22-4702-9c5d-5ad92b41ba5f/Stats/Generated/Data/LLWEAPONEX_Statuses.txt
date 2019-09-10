@@ -1130,6 +1130,7 @@ type "StatusData"
 data "StatusType" "CONSUME"
 using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "StackId" "Stack_LLWEAPONEX_TossedLand"
+data "ApplyEffect" ""
 
 new entry "LLWEAPONEX_BLOCK_HEALING"
 type "StatusData"

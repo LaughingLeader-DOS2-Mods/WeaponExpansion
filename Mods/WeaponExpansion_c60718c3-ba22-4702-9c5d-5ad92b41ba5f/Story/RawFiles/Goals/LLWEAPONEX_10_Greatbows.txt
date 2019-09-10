@@ -349,18 +349,6 @@ DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved(_Target, _Source)
 THEN
 NOT DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved(_Target, _Source);
 
-IF
-CharacterStatusRemoved(_Target, "SHOCKWAVE", _)
-AND
-DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z)
-AND
-GetPosition(_Target, _tx, _ty, _tz)
-THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z);
-DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz);
-ProcObjectTimerCancel(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling");
-ProcObjectTimer(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling", 60);
-
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling")
 AND
