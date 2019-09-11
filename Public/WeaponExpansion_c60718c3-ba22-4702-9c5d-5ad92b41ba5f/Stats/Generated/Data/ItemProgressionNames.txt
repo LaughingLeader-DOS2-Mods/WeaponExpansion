@@ -408,7 +408,7 @@ add namecool "Runeblade of Earth",""
 new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Rare"
 add name "Boulderblade",""
 add name "Earthenblade",""
-add name "Mountain Cleaver",""
+add name "Mountain's Oath",""
 add name "Groundcracker",""
 add name "Tremor",""
 

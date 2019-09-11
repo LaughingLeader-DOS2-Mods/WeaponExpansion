@@ -364,3 +364,8 @@ data "FormatColor" "Red"
 data "ForceOverhead" "Yes"
 data "StackId" "Stack_LLWEAPONEX_Throw_Seal"
 data "SavingThrow" "PhysicalArmor"
+
+new entry "LLWEAPONEX_THROWWEAPON_HIT"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"

@@ -1155,6 +1155,55 @@ ObjectGetFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 1)
 THEN
 ObjectClearFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0);
 ClearTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
+
+// Throw kill, return weapons
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_THROWWEAPON_HIT", (CHARACTERGUID)_Source)
+AND
+CharacterGetEquippedWeapon(_Source, (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+THEN
+DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon);
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_THROWWEAPON_HIT", (CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Throwing_Temp_ThrownOffhandProjectile(_Source, _, _)
+AND
+CharacterGetEquippedItem(_Source, "Shield", (ITEMGUID)_Weapon)
+AND
+_Weapon != NULL_00000000-0000-0000-0000-000000000000
+THEN
+DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon);
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_THROWWEAPON_HIT", (CHARACTERGUID)_Source)
+THEN
+LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 500, "LLWEAPONEX_Timers_Throwing_ClearDeathListenStatus", "LLWEAPONEX_ThrowingWeapons_ClearDeathListenStatus");
+
+IF
+CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowingWeapons_ClearDeathListenStatus")
+THEN
+LLWEAPONEX_Throwing_ClearThrowWeaponData(_Source, _Target);
+RemoveStatus(_Target, "LLWEAPONEX_THROWWEAPON_HIT");
+
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_THROWWEAPON_HIT", _)
+AND
+LeaderLib_Helper_QRY_CharacterIsDeadOrDying(_Target)
+AND
+DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon);
+CharacterItemSetEvent(_Source, _Weapon, "LeaderLib_Commands_EquipItem");
+
+PROC
+LLWEAPONEX_Throwing_ClearThrowWeaponData((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+AND
+DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon);
 //END_REGION
 
 //REGION THROW_OBJECT
