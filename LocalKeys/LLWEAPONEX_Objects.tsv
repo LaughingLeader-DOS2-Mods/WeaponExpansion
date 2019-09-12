@@ -120,9 +120,9 @@ GRN_LLWEAPONEX_Throwing_Sword1H
 GRN_LLWEAPONEX_Throwing_Sword2H	
 GRN_LLWEAPONEX_Throwing_Wand	
 GRN_LLWEAPONEX_Throwing_BloodBall	
-GRN_LLWEAPONEX_Throwing_Flask_AirWeakness	<font color='#7478DC'>Flask of Air Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Earth	<font color='#AA895B'>Flask of Earth Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Fire	<font color='#C76537'>Flask of Fire Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Poison	<font color='#00AA00'>Flask of Poison Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Water	<font color='#188EDE'>Flask of Water Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Weakness_Air	<font color='#7478DC'>Flask of Air Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Weakness_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Weakness_Earth	<font color='#AA895B'>Flask of Earth Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Weakness_Fire	<font color='#C76537'>Flask of Fire Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Weakness_Poison	<font color='#00AA00'>Flask of Poison Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Weakness_Water	<font color='#188EDE'>Flask of Water Weakness</font>
