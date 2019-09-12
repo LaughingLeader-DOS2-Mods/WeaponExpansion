@@ -94,3 +94,35 @@ SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance	<font color='#ffc721'>Mastery Scroll:<
 SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike	<font color='#ffc721'>Mastery Scroll:</font> Flicker Strike
 SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb	<font color='#ffc721'>Mastery Scroll:</font> Runic Reverb
 SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon	<font color='#ffc721'>Mastery Scroll:</font> Throw Weapon
+GRN_LLWEAPONEX_Throwing_Axe1H	
+GRN_LLWEAPONEX_Throwing_Axe2H	
+GRN_LLWEAPONEX_Throwing_Bow	
+GRN_LLWEAPONEX_Throwing_Chair_01	
+GRN_LLWEAPONEX_Throwing_Crossbow	
+GRN_LLWEAPONEX_Throwing_Dagger	
+GRN_LLWEAPONEX_Throwing_Mace1H	
+GRN_LLWEAPONEX_Throwing_Mace2H	
+GRN_LLWEAPONEX_Throwing_Rock	
+GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin	
+GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Disabled	
+GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Poison	
+GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil	
+GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails	
+GRN_LLWEAPONEX_Throwing_Scythe	
+GRN_LLWEAPONEX_Throwing_Shield	
+GRN_LLWEAPONEX_Throwing_Shuriken	
+GRN_LLWEAPONEX_Throwing_Shuriken_Poison	
+GRN_LLWEAPONEX_Throwing_Shuriken_Explosive	
+GRN_LLWEAPONEX_Throwing_Sickle	
+GRN_LLWEAPONEX_Throwing_Spear	
+GRN_LLWEAPONEX_Throwing_Staff	
+GRN_LLWEAPONEX_Throwing_Sword1H	
+GRN_LLWEAPONEX_Throwing_Sword2H	
+GRN_LLWEAPONEX_Throwing_Wand	
+GRN_LLWEAPONEX_Throwing_BloodBall	
+GRN_LLWEAPONEX_Throwing_Flask_AirWeakness	<font color='#7478DC'>Flask of Air Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Earth	<font color='#AA895B'>Flask of Earth Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Fire	<font color='#C76537'>Flask of Fire Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Poison	<font color='#00AA00'>Flask of Poison Weakness</font>
+GRN_LLWEAPONEX_Throwing_Flask_Water	<font color='#188EDE'>Flask of Water Weakness</font>
