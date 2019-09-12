@@ -20,3 +20,15 @@ LLWEAPONEX_BALRINAXE_DISARMED_INFO_Description	Character has thrown <font color=
 LLWEAPONEX_BALRINAXE_INFO_DisplayName	Throwable
 LLWEAPONEX_BALRINAXE_PREPARED_DisplayName	Prepare Balrin's Throwing Axe
 LLWEAPONEX_TOSSED_DisplayName	Throw Target
+LLWEAPONEX_BEAKER_DEBUFF_AIR_DisplayName	Air Weakness
+LLWEAPONEX_BEAKER_DEBUFF_AIR_Description	Character has been covered in a nasty liquid, lowering their resistance to <font color='#7478DC'>Air</font>.
+LLWEAPONEX_BEAKER_DEBUFF_CHAOS_DisplayName	Chaotic Weakness
+LLWEAPONEX_BEAKER_DEBUFF_CHAOS_Description	Character has been covered in a nasty liquid, lowering <font color='#D040D0'>all</font> resistances.
+LLWEAPONEX_BEAKER_DEBUFF_EARTH_DisplayName	Earth Weakness
+LLWEAPONEX_BEAKER_DEBUFF_EARTH_Description	Character has been covered in a nasty liquid, lowering their resistance to <font color='#AA895B'>Earth</font>.
+LLWEAPONEX_BEAKER_DEBUFF_FIRE_DisplayName	Fire Weakness
+LLWEAPONEX_BEAKER_DEBUFF_FIRE_Description	Character has been covered in a nasty liquid, lowering their resistance to <font color='#C76537'>Fire</font>.
+LLWEAPONEX_BEAKER_DEBUFF_POISON_DisplayName	Poison Weakness
+LLWEAPONEX_BEAKER_DEBUFF_POISON_Description	Character has been covered in a nasty liquid, lowering their resistance to <font color='#00AA00'>Poison</font>.
+LLWEAPONEX_BEAKER_DEBUFF_WATER_DisplayName	Water Weakness
+LLWEAPONEX_BEAKER_DEBUFF_WATER_Description	Character has been covered in a nasty liquid, lowering their resistance to <font color='#188EDE'>Water</font>.
