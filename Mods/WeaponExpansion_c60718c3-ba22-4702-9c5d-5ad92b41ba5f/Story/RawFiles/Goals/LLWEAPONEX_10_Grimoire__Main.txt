@@ -903,30 +903,6 @@ DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _SkillType, _S
 THEN
 DB_NOOP(1);
 
-IF
-TimerFinished(_TimerName)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill, _TimerName)
-AND
-DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _SkillType, _SkillElement, _MagicType)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _SkillType, _SkillElement, _MagicType);
-LeaderLib_Timers_CancelObjectTimerByEvent(_Caster, "LLWEAPONEX_Timers_GrimoireCastingFailsafe");
-LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Skill, _SkillType, _SkillElement, _MagicType);
-LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Target, _Skill, _SkillType, _SkillElement, _MagicType);
-
-IF
-TimerFinished(_TimerName)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill, _TimerName)
-AND
-DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType);
-LeaderLib_Timers_CancelObjectTimerByEvent(_Caster, "LLWEAPONEX_Timers_GrimoireCastingFailsafe");
-LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Skill, _SkillType, _SkillElement, _MagicType);
-LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType);
-
 PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, (STRING)_MagicType)
 THEN
@@ -936,13 +912,6 @@ PROC
 LLWEAPONEX_Grimoire_OnSkillCast((CHARACTERGUID)_Caster, (REAL)_x, (REAL)_y, (REAL)_z, (STRING)_Skill, (STRING)_SkillType, (STRING)_SkillElement, (STRING)_MagicType)
 THEN
 DB_NOOP(1);
-
-IF
-TimerFinished(_TimerName)
-AND
-DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill, _TimerName)
-THEN
-NOT DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill, _TimerName);
 
 IF
 StoryEvent((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_GrimoireCastingFailsafe")
@@ -1106,6 +1075,63 @@ DB_LLWEAPONEX_Grimoire_Temp_MagicMatch(_Skill, _MagicType)
 THEN
 DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnUsedSkillAtPosition] Matched Skill [",_Skill,"] to Magic Type [",_MagicType,"]");
+//END_REGION
+
+//REGION SKILLCAST_TIMER
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill)
+AND
+NOT DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill);
+DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _Skill);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _Skill)
+AND
+DB_LLWEAPONEX_Grimoire_ActivateMagic((CHARACTERGUID)_Caster, (GUIDSTRING)_Target, _Skill, _SkillType, _SkillElement, _MagicType)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _Target, _Skill, _SkillType, _SkillElement, _MagicType);
+LeaderLib_Timers_CancelObjectTimerByEvent(_Caster, "LLWEAPONEX_Timers_GrimoireCastingFailsafe");
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Skill, _SkillType, _SkillElement, _MagicType);
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Target, _Skill, _SkillType, _SkillElement, _MagicType);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _Skill)
+AND
+DB_LLWEAPONEX_Grimoire_ActivateMagic((CHARACTERGUID)_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_ActivateMagic(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType);
+LeaderLib_Timers_CancelObjectTimerByEvent(_Caster, "LLWEAPONEX_Timers_GrimoireCastingFailsafe");
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _Skill, _SkillType, _SkillElement, _MagicType);
+LLWEAPONEX_Grimoire_OnSkillCast(_Caster, _x, _y, _z, _Skill, _SkillType, _SkillElement, _MagicType);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast")
+AND
+DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _Skill)
+THEN
+NOT DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _Skill);
+
+QRY
+LLWEAPONEX_Grimoire_QRY_HasQueuedSkillCast((CHARACTERGUID)_Caster)
+AND
+DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill)
+THEN
+DB_NOOP(1);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast")
+AND
+LLWEAPONEX_Grimoire_QRY_HasQueuedSkillCast(_Caster)
+THEN
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast", 1000);
 //END_REGION
 
 //REGION SWAP_GRIMOIRE_BONUS

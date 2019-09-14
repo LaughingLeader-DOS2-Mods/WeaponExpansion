@@ -95,16 +95,10 @@ IF
 SkillCast(_Caster, _Skill, _, _)
 AND
 LLWEAPONEX_Grimoire_QRY_ActivationQueued(_Caster, _Skill)
-AND
-GetUUID(_Caster, _UUID)
-AND
-LeaderLog_QRY_Log("COMBINE", "LLWEAPONEX_Timers_ActivateGrimoire_", _UUID, "_", _Skill)
-AND
-DB_LeaderLog_Temp_CombinedString(_TimerName)
 THEN
-NOT DB_LeaderLog_Temp_CombinedString(_TimerName);
-DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill, _TimerName);
-TimerLaunch(_TimerName, 1000);
+DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill);
+ProcObjectTimerCancel(_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast");
+ProcObjectTimer(_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast", 1000);
 //END_REGION
 EXITSECTION
 
