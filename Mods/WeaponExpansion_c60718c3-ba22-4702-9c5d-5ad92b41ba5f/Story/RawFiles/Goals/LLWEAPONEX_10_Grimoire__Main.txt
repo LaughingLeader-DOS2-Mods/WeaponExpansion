@@ -1081,9 +1081,9 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnUsedSkillAtPosition] Matched Skil
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Caster, "LLWEAPONEX_Timers_ActivateGrimoire_SkillCast")
 AND
-DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill)
+DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast((CHARACTERGUID)_Caster, (STRING)_Skill)
 AND
-NOT DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _)
+NOT DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, (STRING)_)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_OnSkillCast(_Caster, _Skill);
 DB_LLWEAPONEX_Grimoire_Temp_NextSkillCast(_Caster, _Skill);
