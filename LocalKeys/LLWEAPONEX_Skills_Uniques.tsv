@@ -1,0 +1,21 @@
+Key	Content
+Shout_LLWEAPONEX_Bokken_ChangeStance_DisplayName	<font color='#00EE29'>Change Stance</font>
+Shout_LLWEAPONEX_Bokken_ChangeStance_Description	Swap between two-handed and single-handed styles with the <font color='#c5a
+Zone_LLWEAPONEX_ArmCannon_Disperse_DisplayName	<font color='#03fcdb'>Runic Dispersal</font>
+Zone_LLWEAPONEX_ArmCannon_Disperse_Description	Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.<br><font color='#00EECC'>At the end of the beam, the energy explodes in a [2] radius, dealing [3] and applying any active rune effects.</font><br>Depletes the energy in the <font color='#c5a65a'>Runic Cannon</font>.
+Target_LLWEAPONEX_ArmCannon_AbsorbSurface_DisplayName	<font color='#03FFAA'>Runic Absorption</font>
+Target_LLWEAPONEX_ArmCannon_AbsorbSurface_Description	Use the <font color='#c5a65a'>Runic Cannon</font> to <font color='#ffab00'>absorb the element of a target surface</font>.<br>The <font color='#c5a65a'>Runic Cannon</font> then activates an associated rune, granting various bonuses.
+Projectile_LLWEAPONEX_ArmCannon_Shoot_DisplayName	<font color='#03fcdb'>Fire Runic Energy</font>
+Projectile_LLWEAPONEX_ArmCannon_Shoot_Description	Fire a concentrated mass of energy at a target, dealing ([1]|[3]) in a [2] radius.<br><font color='#00EECC'>Applies any active rune effect on hit.</font>
+Shout_LLWEAPONEX_Wraithblade_SlayHidden_DisplayName	<font color='#D5D7E3'>Slay Hidden</font>
+Shout_LLWEAPONEX_Wraithblade_SlayHidden_Description	Instantly warp to any hidden enemy and strike a grievous blow for [1].<br><font color='#C1A9FF'>Gain Invisibility if the target was Invisible.</font><br><font color='#FF8585'>Targets hit become marked, preventing Invisibility for 1 turn.</font>
+Cone_LLWEAPONEX_SoulHarvest_Reap_DisplayName	<font color='#80FFC3'>Soul Harvest</font>
+Cone_LLWEAPONEX_SoulHarvest_Reap_Description	Reap the battlefield, dealing [1] to enemies in an arc.<br><font color='#CD39C0'>Slain enemies provide a permanent, stacking damage bonus and restore <font color='#80FFC3'>source points</font>.</font>
+Shout_LLWEAPONEX_Warchief_SwitchMode_DisplayName	<font color='#ff7a29'>Change Stance</font>
+Shout_LLWEAPONEX_Warchief_SwitchMode_Description	Swap your stance with the <font color='#c5a65a'>Warchief's Halberd</font>, going between spear and axe mode.<br>In <font color='#e8ff67'>Spear Mode</font>, the halberd has increased range, critical damage, and applies <font color='#ff3232'>Warchief's Mark</font> on hit.<br>In <font color='#ff67ef'>Axe Mode</font>, the halberd has reduced range, increased damage, and consumes <font color='#ff3232'>Warchief's Mark</font> to deal [1].
+Zone_LLWEAPONEX_Warchief_CripplingBlow_DisplayName	Warchief's Crippling Blow
+Zone_LLWEAPONEX_Warchief_CripplingBlow_Description	Pierce a target with the <font color='#c5a65a'>Warchief's Halberd</font>, crippling enemies and dealing [1].
+Rush_LLWEAPONEX_Warchief_Whirlwind_DisplayName	Warchief's Whirlwind
+Rush_LLWEAPONEX_Warchief_Whirlwind_Description	Swing the <font color='#c5a65a'>Warchief's Halberd</font> all around you, hitting enemies for [1].
+Zone_LLWEAPONEX_PowerPoleSmash_DisplayName	<font color='#EA2E2E'>Extend & Smash</font>
+Zone_LLWEAPONEX_PowerPoleSmash_Description	Extend the <font color='#C7A758'>Power Pole</font> to great lengths, smashing it down upon everything infront of you for [1].<br><font color='#FF3758'>Targets hit become Dizzy, causing actions to take 1 additional AP.</font>

@@ -23,3 +23,5 @@ LLWEAPONEX_ARMCANNON_EQUIPPED_DisplayName	Automatically Equips the Runic Cannon 
 LLWEAPONEX_ARMCANNON_HIT_DisplayName	Builds Energy on Hit
 LLWEAPONEX_WRAITHBLADE_HIT_DisplayName	Deals Equivalent Shadow Damage to Vitality
 LLWEAPONEX_SOULHARVEST_REAP_DisplayName	Soul Harvest
+LLWEAPONEX_ROD_MAGIC_MISSILE_DisplayName	Rod Mode
+LLWEAPONEX_WAND_MAGIC_MISSILE_DisplayName	45%/30%/10% Chance for Bonus Missiles

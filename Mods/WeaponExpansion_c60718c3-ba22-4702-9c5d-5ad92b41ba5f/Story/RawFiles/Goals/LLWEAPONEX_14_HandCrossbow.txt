@@ -94,7 +94,7 @@ ItemRemove(_Bolts);
 LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
 ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Auto-inserted crossbow bolts into empty Handcrossbow.");
-CharacterStatusText(_Character, "LLWEAPONEX_Handcrossbow_BoltAutoInserted");
+CharacterStatusText(_Character, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted");
 
 PROC
 LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)

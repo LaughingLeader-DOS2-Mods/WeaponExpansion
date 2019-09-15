@@ -11,3 +11,7 @@ ObjectCategories_LLWEAPONEX_Transform_Memory_Tooltip	Token of Memory
 ObjectCategories_LLWEAPONEX_Transform_Reset_Tooltip	Token of Reversal
 ObjectCategories_LLWEAPONEX_Transform_Strength_Tooltip	Token of Strength
 ObjectCategories_LLWEAPONEX_Transform_Wits_Tooltip	Token of Wits
+ObjectCategories_LLWEAPONEX_OniGauntlet_1_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
+ObjectCategories_LLWEAPONEX_OniGauntlet_2_Tooltip	<font color='#C7A758'>Oni Gauntlet (Empowered)</font> Power
+ObjectCategories_LLWEAPONEX_OniGauntlet_3_Tooltip	<font color='#C7A758'>Oni Gauntlet (Unleashed)</font> Power
+ObjectCategories_LLWEAPONEX_OniGauntlet_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power

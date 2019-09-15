@@ -31,3 +31,4 @@ LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATED_DisplayName	Immolated
 LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATED_Description	Character was burned by an intense explosion.
 LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED_DisplayName	Summon the <font color='#FE6E27'>Eternal Spark</font>
 LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED_Description	Character is wielding the <font color='#FE6E27'>Eternal Spark</font>.<br><font color='#FE6E27'>Burning</font> targets hit by the spark explode.
+LLWEAPONEX_GRIMOIRE_SPARK_DAMAGE_BONUS_APPLY_Description	Character receives bonus damage and Fire Resistance when ignited.
