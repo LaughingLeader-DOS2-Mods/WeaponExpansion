@@ -904,8 +904,8 @@ data "Description" "Projectile_LLWEAPONEX_Throw_Flask_Weakness_Poison_Descriptio
 data "DescriptionRef" "Throw the potion at the target position, dousing objects hit in a nasty liquid that lowers <font color='#00AA00'>Poison Resistance</font> by [1] for 2 turns."
 data "StatsDescriptionParams" "Potion:Stats_LLWEAPONEX_Flask_Weakness_Poison:PoisonResistance"
 data "SkillProperties" "LLWEAPONEX_FLASK_WEAKNESS_POISON,100,2"
-data "Template" "df4c08c7-a7fe-4b45-93c9-affdd18bf23e"
-data "MovingObject" "13f01d52-a8d2-4d4a-976f-bb07cc2cd647"
+data "Template" "104f4362-e64d-40e1-b563-0022028f4033"
+data "MovingObject" "5559095d-5956-445d-a850-0b71c20905a7"
 data "PrepareEffect" "LLWEAPONEX_FX_Skills_ThrowPotion_Poison_Prepare_Hand_01:Dummy_R_Hand"
 data "CastEffect" "LLWEAPONEX_FX_Skills_ThrowPotion_Poison_Cast_Hand_01:Dummy_R_Hand"
 

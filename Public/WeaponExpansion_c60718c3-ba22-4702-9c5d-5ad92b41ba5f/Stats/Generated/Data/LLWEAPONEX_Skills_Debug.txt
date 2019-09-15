@@ -467,6 +467,12 @@ data "SkillProperties" "TryKill,100,1,,100"
 data "TargetConditions" "Enemy"
 data "Template" "7b1eed13-fc68-4c2f-9c92-86b7101a51f7"
 
+new entry "Projectile_Fireball"
+type "SkillData"
+data "SkillType" "Target"
+using "Projectile_Fireball"
+data "DamageType" "Shadow"
+
 new entry "Target_LLWEAPONEX_Debug_SingleHandedAttack"
 type "SkillData"
 data "SkillType" "Target"

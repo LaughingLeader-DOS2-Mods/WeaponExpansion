@@ -119,7 +119,8 @@ GRN_LLWEAPONEX_Throwing_Staff
 GRN_LLWEAPONEX_Throwing_Sword1H	
 GRN_LLWEAPONEX_Throwing_Sword2H	
 GRN_LLWEAPONEX_Throwing_Wand	
-GRN_LLWEAPONEX_Throwing_BloodBall	
+GRN_LLWEAPONEX_Throwing_BloodBall	Blood Ball
+GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask
 GRN_LLWEAPONEX_Throwing_Flask_Weakness_Air	<font color='#7478DC'>Flask of Air Weakness</font>
 GRN_LLWEAPONEX_Throwing_Flask_Weakness_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
 GRN_LLWEAPONEX_Throwing_Flask_Weakness_Earth	<font color='#AA895B'>Flask of Earth Weakness</font>
