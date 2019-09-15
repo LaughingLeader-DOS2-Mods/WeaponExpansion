@@ -28,3 +28,9 @@ WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Well_1	Balrin's Throwing Axe (Nor
 WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Water_1	Balrin's Throwing Axe (Normal)
 LOOT_LLWEAPONEX_Orb_Thunder_A_Upgrade_1	Shiden, Thunder Orb Upgrade
 LOOT_LLWEAPONEX_Orb_Thunder_B_Upgrade_1	Shiden, Thunder Orb Upgrade 2
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Air_A_1	<font color='#7478DC'>Flask of Air Weakness</font>
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Chaos_A_1	<font color='#D040D0'>Flask of Chaotic Weakness</font>
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Earth_A_1	<font color='#AA895B'>Flask of Earth Weakness</font>
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Fire_A_1	<font color='#C76537'>Flask of Fire Weakness</font>
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Poison_A_1	<font color='#00AA00'>Flask of Poison Weakness</font>
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Water_A_1	<font color='#188EDE'>Flask of Water Weakness</font>
