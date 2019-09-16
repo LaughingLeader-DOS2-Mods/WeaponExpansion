@@ -98,7 +98,7 @@ THEN
 		IsGreaterThen(_IntVar, 2)
 	THEN
 		SetVar(_Source, "LLWEAPONEX_BloodPlusAttacks", INT:0)
-		CharacterAddToInventory(_Source, "WPN_LLWEAPONEX_Throwing_BloodBall", 1)
+		CharacterAddToInventory(_Source, "GRN_LLWEAPONEX_Throwing_BloodBall", 1)
 		StatusText(_Source, "Added Blood Ball?")
 	ELSE
 		SetVar(_Source, "LLWEAPONEX_BloodPlusAttacks", _IntVar)

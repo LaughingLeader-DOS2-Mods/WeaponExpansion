@@ -94,32 +94,32 @@ SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance	<font color='#ffc721'>Mastery Scroll:<
 SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike	<font color='#ffc721'>Mastery Scroll:</font> Flicker Strike
 SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb	<font color='#ffc721'>Mastery Scroll:</font> Runic Reverb
 SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon	<font color='#ffc721'>Mastery Scroll:</font> Throw Weapon
-GRN_LLWEAPONEX_Throwing_Axe1H	
-GRN_LLWEAPONEX_Throwing_Axe2H	
-GRN_LLWEAPONEX_Throwing_Bow	
-GRN_LLWEAPONEX_Throwing_Chair_01	
-GRN_LLWEAPONEX_Throwing_Crossbow	
-GRN_LLWEAPONEX_Throwing_Dagger	
-GRN_LLWEAPONEX_Throwing_Mace1H	
-GRN_LLWEAPONEX_Throwing_Mace2H	
-GRN_LLWEAPONEX_Throwing_Rock	
-GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin	
-GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Disabled	
-GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Poison	
-GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil	
-GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails	
-GRN_LLWEAPONEX_Throwing_Scythe	
-GRN_LLWEAPONEX_Throwing_Shield	
-GRN_LLWEAPONEX_Throwing_Shuriken	
-GRN_LLWEAPONEX_Throwing_Shuriken_Poison	
-GRN_LLWEAPONEX_Throwing_Shuriken_Explosive	
-GRN_LLWEAPONEX_Throwing_Sickle	
-GRN_LLWEAPONEX_Throwing_Spear	
-GRN_LLWEAPONEX_Throwing_Staff	
-GRN_LLWEAPONEX_Throwing_Sword1H	
-GRN_LLWEAPONEX_Throwing_Sword2H	
-GRN_LLWEAPONEX_Throwing_Wand	
-GRN_LLWEAPONEX_Throwing_BloodBall	Blood Ball
+THR_LLWEAPONEX_Throwing_Axe1H	Throwing Axe
+THR_LLWEAPONEX_Throwing_Axe2H	Throwing Axe (Large)
+THR_LLWEAPONEX_Throwing_Bow	Throwing Bow?
+THR_LLWEAPONEX_Throwing_Chair_01	Throwing Stool
+THR_LLWEAPONEX_Throwing_Crossbow	Throwing Crossbow?
+THR_LLWEAPONEX_Throwing_Dagger	Throwing Dagger
+THR_LLWEAPONEX_Throwing_Mace1H	Throwing Hammer
+THR_LLWEAPONEX_Throwing_Mace2H	Throwing Paddle?
+THR_LLWEAPONEX_Throwing_Rock	Stone
+THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin	Kevin the Pet Rock
+THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Disabled	Kevin the Pet Rock (Exausted)
+THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Poison	Kevin the Pet Rock (Poisoned)
+THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil	Kevin the Pet Rock (Oiled)
+THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails	Kevin the Pet Rock (Nails)
+THR_LLWEAPONEX_Throwing_Scythe	Throwing Scythe?
+THR_LLWEAPONEX_Throwing_Shield	Throwing Shield
+THR_LLWEAPONEX_Throwing_Shuriken	Shuriken
+THR_LLWEAPONEX_Throwing_Shuriken_Poison	Poison Shuriken
+THR_LLWEAPONEX_Throwing_Shuriken_Explosive	Explosive Shuriken
+THR_LLWEAPONEX_Throwing_Sickle	Throwing Sickle
+THR_LLWEAPONEX_Throwing_Spear	Throwing Spear
+THR_LLWEAPONEX_Throwing_Staff	Throwing Staff?
+THR_LLWEAPONEX_Throwing_Sword1H	Throwing Sword?
+THR_LLWEAPONEX_Throwing_Sword2H	Throwing Sword? (Large)
+THR_LLWEAPONEX_Throwing_Wand	Throwing Wand?
+GRN_LLWEAPONEX_Throwing_BloodBall	Congealed Blood Ball
 GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask
 GRN_LLWEAPONEX_Throwing_Flask_Weakness_Air	<font color='#7478DC'>Flask of Air Weakness</font>
 GRN_LLWEAPONEX_Throwing_Flask_Weakness_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
