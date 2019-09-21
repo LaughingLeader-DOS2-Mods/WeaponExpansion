@@ -97,7 +97,7 @@ data "Description" "LLWEAPONEX_GRIMOIRE_MIMICRY_ACTIVE_Description"
 data "DisplayNameRef" "Mimicry Grimoire"
 data "DescriptionRef" "Character is channeling the power of Mimicry."
 data "Icon" "LLWEAPONEX_Items_Grimoire_Mimicry_A"
-data "ApplyEffect" "RS3_FX_Skills_Totem_Cast_Target_Totem_Void_Root_02"
+data "ApplyEffect" "LLWEAPONEX_FX_Skills_Grimoire_Cast_Mimicry_FrontFX_01:Dummy_FrontFX"
 data "Skills" ""
 data "StatsId" "Stats_LLWEAPONEX_Grimoire_Mimicry_Active"
 
