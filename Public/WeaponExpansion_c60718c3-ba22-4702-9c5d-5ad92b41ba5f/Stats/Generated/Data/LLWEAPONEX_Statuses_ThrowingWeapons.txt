@@ -399,6 +399,7 @@ data "DescriptionRef" "Character has been covered in a nasty liquid, lowering th
 data "FormatColor" "Decay"
 data "StatsId" "Stats_LLWEAPONEX_Flask_Weakness_Chaos"
 data "StackId" "Stack_LLWEAPONEX_Flask_Weakness_Chaos"
+data "ApplyEffect" "RS3_FX_Skills_Air_Apportation_Item_Impact_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Chaos"
 type "Potion"

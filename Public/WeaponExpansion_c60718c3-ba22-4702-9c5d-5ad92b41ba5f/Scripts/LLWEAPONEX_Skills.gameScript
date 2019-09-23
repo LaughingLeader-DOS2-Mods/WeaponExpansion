@@ -395,3 +395,16 @@ ACTIONS
 	Print(_Str, "[LLWEAPONEX:Throwing:TossObject:Landed] Item weight is ([1]), exploding skill is ([2]).", _Weight, _TossSkill)
 	SetVar(_Source, "LeaderLog_Message", _Str)
 	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+	
+EVENT LLWEAPONEX_Skill_SlayHidden_TrailRibbon
+VARS
+	CHARACTER:_Char
+	FLOAT3:_StartPos
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_SlayHidden_Teleported")
+ACTIONS
+IF "c1"
+	GetVar(_StartPos, _Char, "LLWEAPONEX_SlayHidden_StartPosition")
+THEN
+	ShootWorldProjectileAt(Projectile_LLWEAPONEX_Effect_TrailRibbon_Red, _Char, _StartPos, _Char, 1)
+ENDIF

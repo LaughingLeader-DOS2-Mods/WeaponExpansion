@@ -649,6 +649,13 @@ THEN
 DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Char, _Target);
 
 IF
+CharacterUsedSkill(_Char, "Shout_LLWEAPONEX_Wraithblade_SlayHidden", _, _)
+AND
+GetPosition(_Char, _x, _y, _z)
+THEN
+SetVarFloat3(_Char, "LLWEAPONEX_SlayHidden_StartPosition", _x, _y, _z);
+
+IF
 SkillCast(_Char, "Shout_LLWEAPONEX_Wraithblade_SlayHidden", _, _)
 THEN
 ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Wraithblade_StartAttack", 50);
@@ -673,11 +680,16 @@ AND
 NOT DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Char, _)
 AND
 GetPosition(_Char, _x, _y, _z)
+AND
+GetPosition(_Target, _tx, _ty, _tz)
+AND
+RealSum(_y, 0.5, _cy)
 THEN
 NOT DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Char, _Target);
 DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Char, _Target);
 PlayEffect(_Char, "LLWEAPONEX_FX_Skills_InstantTransmission_Dissolve_Body_01");
 PlayEffectAtPosition("LLWEAPONEX_FX_Skills_InstantTransmission_Disappear_01", _x, _y, _z);
+SetVarFloat3(_Char, "LLWEAPONEX_SlayHidden_StartPosition", _x, _cy, _z);
 CharacterSetFightMode(_Char, 1, 1);
 CharacterLookAt(_Char, _Target, 1);
 TeleportTo(_Char, _Target, "LLWEAPONEX_SlayHidden_Teleported", 0, 1, 0);
@@ -685,8 +697,12 @@ LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _Target, 250, "LLWEAPONEX_T
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_SlayHidden_Teleported")
+AND
+DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Char, _Target)
 THEN
+//LeaderLib_Timers_StartObjectTimer(_Char, 500, "LLWEAPONEX_Timers_SlayHidden_PlayTrailEffect", "LLWEAPONEX_SlayHidden_PlayTrailEffect");
 PlayEffect(_Char, "LLWEAPONEX_FX_Skills_InstantTransmission_Appear_01");
+CharacterLookAt(_Char, _Target, 1);
 //PlayAnimation(_Char, "noprepare");
 
 IF
