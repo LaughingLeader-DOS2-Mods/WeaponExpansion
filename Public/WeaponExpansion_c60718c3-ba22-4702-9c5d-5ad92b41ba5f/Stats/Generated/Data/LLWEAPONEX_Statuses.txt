@@ -1124,6 +1124,7 @@ using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "DisplayName" "LLWEAPONEX_TOSSED_DisplayName"
 data "DisplayNameRef" "Throw Target"
 data "StackId" "Stack_LLWEAPONEX_Tossed"
+data "ApplyEffect" ""
 
 new entry "LLWEAPONEX_TOSSED_LAND"
 type "StatusData"

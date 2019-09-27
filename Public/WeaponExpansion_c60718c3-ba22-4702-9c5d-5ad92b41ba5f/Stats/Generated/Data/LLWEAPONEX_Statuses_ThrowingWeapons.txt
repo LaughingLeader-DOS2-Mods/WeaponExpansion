@@ -381,6 +381,7 @@ data "DescriptionRef" "Character has been covered in a nasty liquid, lowering th
 data "FormatColor" "Air"
 data "StatsId" "Stats_LLWEAPONEX_Flask_Weakness_Air"
 data "StackId" "Stack_LLWEAPONEX_Flask_Weakness_Air"
+data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Air_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Air"
 type "Potion"
@@ -424,6 +425,7 @@ data "DescriptionRef" "Character has been covered in a nasty liquid, lowering th
 data "FormatColor" "Earth"
 data "StatsId" "Stats_LLWEAPONEX_Flask_Weakness_Earth"
 data "StackId" "Stack_LLWEAPONEX_Flask_Weakness_Earth"
+data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Earth_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Earth"
 type "Potion"
@@ -442,6 +444,7 @@ data "DescriptionRef" "Character has been covered in a nasty liquid, lowering th
 data "FormatColor" "Fire"
 data "StatsId" "Stats_LLWEAPONEX_Flask_Weakness_Fire"
 data "StackId" "Stack_LLWEAPONEX_Flask_Weakness_Fire"
+data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Fire_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Fire"
 type "Potion"
@@ -460,6 +463,7 @@ data "DescriptionRef" "Character has been covered in a nasty liquid, lowering th
 data "FormatColor" "Poison"
 data "StatsId" "Stats_LLWEAPONEX_Flask_Weakness_Poison"
 data "StackId" "Stack_LLWEAPONEX_Flask_Weakness_Poison"
+data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Poison_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Poison"
 type "Potion"
@@ -478,6 +482,7 @@ data "DescriptionRef" "Character has been covered in a nasty liquid, lowering th
 data "FormatColor" "Water"
 data "StatsId" "Stats_LLWEAPONEX_Flask_Weakness_Water"
 data "StackId" "Stack_LLWEAPONEX_Flask_Weakness_Water"
+data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Water_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Water"
 type "Potion"

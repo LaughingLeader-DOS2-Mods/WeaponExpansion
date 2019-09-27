@@ -1236,6 +1236,13 @@ LLWEAPONEX_Throwing_TossObject_Launch(_Source, _Strength, _Target);
 PROC
 LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
 AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ThrowObject_Hit_01", _x, _y, _z);
+
+PROC
+LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
+AND
 NOT DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target)
 AND
 DB_LLWEAPONEX_Throwing_StrengthDistanceConstants(_Min, _Max)

@@ -1661,6 +1661,22 @@ StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_WeaponTypeFound_Unarmed")
 THEN
 CharacterStatusText(_Char, "No Ranged Weapon");
 */
+
+/*
+IF
+SkillCast(_Char, "Projectile_EnemyFireball", _, _)
+THEN
+//CharacterSetStill(_Char);
+//CharacterSetAnimationOverride(_Char, "still");
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Debug_SetStillTest", 500);
+CharacterUseSkill(_Char, "Shout_LeaderLib_ClearQueue", _Char, 1, 1, 1);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Debug_SetStillTest")
+THEN
+//CharacterFlushQueue(_Char);
+CharacterUseSkill(_Char, "Shout_InspireStart", _Char, 0, 1, 1);
+*/
 EXITSECTION
 
 ENDEXITSECTION
