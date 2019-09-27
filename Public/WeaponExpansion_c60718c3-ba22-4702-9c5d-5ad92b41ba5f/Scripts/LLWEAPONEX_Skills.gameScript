@@ -181,12 +181,13 @@ VARS
 	FLOAT:_Weight
 	FLOAT:_Strength
 	FLOAT:_MaxStrengthWeight
+	STRING:_Str
 ON
     OnCharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight")
 ACTIONS
 	Set(_Weight, 0.0)
 	Set(_Strength, 0.0)
-	IF "c1|c2"
+	IF "c1&c2"
 		CharacterGetStat(_Weight, _Target, Weight)
 		CharacterGetStat(_Strength, _Source, Strength)
 	THEN
@@ -226,14 +227,15 @@ ACTIONS
 			CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
 		ELSE
 			StatusText(_Source, "LLWEAPONEX_StatusText_ThrowObjectFailed")
+			CharacterPlayEffect(_Target, "LLWEAPONEX_FX_Status_ThrowObject_Failed_01")
 			CharacterAddActionPoints(_Source, 1)
 		ENDIF
 	ENDIF
-	/*
-	Print(_Str, "[LLWEAPONEX:Throwing:TossObject:Landed] Character weight is ([1]), exploding skill is ([2]).", _Weight, _TossSkill)
+	
+	Print(_Str, "[LLWEAPONEX:Throwing:TossObject:Landed] Target weight is ([1]), Strength is ([2]).", _Weight, _Strength)
 	SetVar(_Source, "LeaderLog_Message", _Str)
 	CharacterEvent(_Source, "LeaderLog_Commands_Log")
-	*/
+	
 
 EVENT LLWEAPONEX_Throwing_CheckCanThrow_Item
 VARS
@@ -247,7 +249,7 @@ ON
 ACTIONS
 	Set(_Weight, 0.0)
 	Set(_Strength, 0.0)
-	IF "c1|c2"
+	IF "c1&c2"
 		ItemGetStat(_Weight, _Target, Weight)
 		CharacterGetStat(_Strength, _Source, Strength)
 	THEN
@@ -277,6 +279,7 @@ ACTIONS
 		THEN
 			CharacterItemEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
 		ELSE
+			ItemPlayEffect(_Target, "LLWEAPONEX_FX_Status_ThrowObject_Failed_01")
 			StatusText(_Source, "LLWEAPONEX_StatusText_ThrowObjectFailed")
 			CharacterAddActionPoints(_Source, 1)
 		ENDIF
@@ -297,7 +300,7 @@ ON
 ACTIONS
 	Set(_Weight, 0.0)
 	Set(_LevelF, 1.0)
-	IF "c1|c2"
+	IF "c1&c2"
 		CharacterGetStat(_Weight, _TargetChar, Weight)
 		CharacterGetStat(_LevelF, _Source, Level)
 	THEN
@@ -358,7 +361,7 @@ ON
 ACTIONS
 	Set(_Weight, 0.0)
 	Set(_LevelF, 1.0)
-	IF "c1|c2"
+	IF "c1&c2"
 		ItemGetStat(_Weight, _TargetItem, Weight)
 		CharacterGetStat(_LevelF, _Source, Level)
 	THEN
