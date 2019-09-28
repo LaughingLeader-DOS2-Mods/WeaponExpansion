@@ -27,6 +27,11 @@ LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.Uniques"
 LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine.Uniques", "REQUIREMENT_UNLOCKED");
 LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine.Uniques", "TRADE_GENERATION_END");
 
+LeaderLib_Treasure_Register_TreasureToTrader("LLWEAPONEX.VendingMachine.NPCUniques", "LLWEAPONEX.VendingMachine");
+LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine.NPCUniques", "REQUIREMENT_UNLOCKED");
+LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine.NPCUniques", "TRADE_GENERATION_END");
+LeaderLib_Treasure_Configure_DefaultGenerationType("LLWEAPONEX.VendingMachine.NPCUniques", "REGISTERED");
+
 LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_Requirement_MinLevel_4", 4);
 LeaderLib_Requirements_Add_ModRequirement("LLWEAPONEX_Requirement_MimicryModActive", "Mimicry", "LaughingLeader");
 

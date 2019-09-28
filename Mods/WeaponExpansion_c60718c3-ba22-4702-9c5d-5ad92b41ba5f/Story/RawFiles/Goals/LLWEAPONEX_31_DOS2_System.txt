@@ -1,0 +1,21 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_DOS2_InitSettings();
+
+KBSECTION
+PROC
+LLWEAPONEX_DOS2_InitSettings()
+THEN
+DB_LLWEAPONEX_CampaignRegions("Campaign", "TUT_Tutorial_A", 0);
+DB_LLWEAPONEX_CampaignRegions("Campaign", "FJ_FortJoy_Main", 1);
+DB_LLWEAPONEX_CampaignRegions("Campaign", "LV_HoE_Main", 2);
+DB_LLWEAPONEX_CampaignRegions("Campaign", "RC_Main", 3);
+DB_LLWEAPONEX_CampaignRegions("Campaign", "CoS_Main", 4);
+DB_LLWEAPONEX_CampaignRegions("Campaign", "Arx_Main", 5);
+DB_LLWEAPONEX_CampaignRegions("Campaign", "Arx_Endgame", 6);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_01_Campaign_Start"

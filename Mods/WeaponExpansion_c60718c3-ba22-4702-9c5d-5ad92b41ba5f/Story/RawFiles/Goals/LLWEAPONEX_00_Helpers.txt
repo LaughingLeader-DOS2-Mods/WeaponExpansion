@@ -28,6 +28,39 @@ THEN
 DB_NOOP(1);
 
 QRY
+LLWEAPONEX_QRY_ObjectIsGlobalOrExists((GUIDSTRING)_Obj)
+AND
+ObjectIsGlobal(_Obj, 0)
+AND
+ObjectExists(_Obj, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_ObjectIsGlobalOrExists((GUIDSTRING)_Obj)
+AND
+ObjectIsGlobal(_Obj, 1)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Obj, 1)
+AND
+CharacterIsDead(_Obj, 0)
+AND
+HasActiveStatus(_Obj, "DYING", 0)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_ObjectIsGlobalOrExists((GUIDSTRING)_Obj)
+AND
+ObjectIsGlobal(_Obj, 1)
+AND
+ObjectIsItem((ITEMGUID)_Obj, 1)
+AND
+ItemIsDestroyed(_Obj, 0)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
 _Item != NULL_00000000-0000-0000-0000-000000000000

@@ -1,0 +1,20 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+PROC
+Proc_GameModeStarted("Campaign", (INTEGER)_IsEditorMode)
+THEN
+GoalCompleted;
+
+IF
+SavegameLoading(_,_,_,_)
+AND
+SysIsCompleted("DOS2ModWrapper")
+THEN
+GoalCompleted;
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

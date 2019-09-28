@@ -1,0 +1,101 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+PROC
+LLWEAPONEX_UniqueOwners_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueOwners_Registered(_OtherChar, _UniqueTemplate, _OtherRegion)
+THEN
+NOT DB_LLWEAPONEX_UniqueOwners_Registered(_OtherChar, _UniqueTemplate, _OtherRegion);
+
+PROC
+LLWEAPONEX_UniqueOwners_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+THEN
+DB_LLWEAPONEX_UniqueOwners_Registered(_NPC, _UniqueTemplate, _Region);
+
+PROC
+LLWEAPONEX_UniqueOwners_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+AND
+DB_CurrentLevel(_Region)
+THEN
+DB_LLWEAPONEX_UniqueOwners_Temp_Active(_NPC, _UniqueTemplate);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_NpcUniquesActive", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_UniqueOwners_MoveToVendingMachine((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+THEN
+NOT DB_LLWEAPONEX_UniqueOwners_Temp_Active(_NPC, _UniqueTemplate);
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.NPCUniques", _UniqueTemplate);
+LLWEAPONEX_UniqueOwners_OnUniqueMovedToVendingMachine(_UniqueTemplate, _Region);
+
+PROC
+LLWEAPONEX_UniqueOwners_OnUniqueMovedToVendingMachine((STRING)_UniqueTemplate, (STRING)_Region)
+AND
+NOT DB_LLWEAPONEX_UniqueOwners_Temp_Active(_,_)
+THEN
+LeaderLib_ToggleScripts_DisableScript("LLWEAPONEX_NpcUniquesActive", "WeaponExpansion");
+
+QRY
+LLWEAPONEX_UniqueOwners_QRY_RegionHasUniques((STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueOwners_Registered(_, _, _Region)
+THEN
+DB_NOOP(1);
+
+
+//REGION STARTED
+IF
+RegionStarted(_Region)
+AND
+DB_LLWEAPONEX_UniqueOwners_Registered(_NPC, _UniqueTemplate, _Region)
+THEN
+DB_LLWEAPONEX_UniqueOwners_Temp_Active(_NPC, _UniqueTemplate);
+
+IF
+RegionStarted(_Region)
+AND
+NOT LeaderLib_ToggleScripts_QRY_ScriptIsEnabled("LLWEAPONEX_NpcUniquesActive")
+AND
+LLWEAPONEX_UniqueOwners_QRY_RegionHasUniques(_Region)
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_NpcUniquesActive", "WeaponExpansion");
+//END_REGION
+
+//REGION ENDED
+IF
+RegionEnded(_Region)
+AND
+DB_LLWEAPONEX_UniqueOwners_Temp_Active(_NPC, _UniqueTemplate)
+AND
+NOT LLWEAPONEX_QRY_ObjectIsGlobalOrExists(_NPC)
+THEN
+LLWEAPONEX_UniqueOwners_MoveToVendingMachine(_NPC, _UniqueTemplate, _Region);
+//END_REGION
+
+//REGION EXISTING_SAVES
+//Existing saves past registered enemy regions
+//Move unclaimed uniques to the vending machine.
+IF
+GameStarted(_Region, _)
+AND
+DB_LLWEAPONEX_CampaignRegions(_GameMode, _Region, _CurrentRegionNumber)
+AND
+DB_LLWEAPONEX_UniqueOwners_Temp_Active(_NPC, _UniqueTemplate)
+AND
+DB_LLWEAPONEX_UniqueOwners_Registered(_NPC, _UniqueTemplate, _NPCRegion)
+AND
+NOT LLWEAPONEX_QRY_ObjectIsGlobalOrExists(_NPC)
+AND
+DB_LLWEAPONEX_CampaignRegions(_GameMode, _NPCRegion, _NPCRegionNumber)
+AND
+_CurrentRegionNumber > _NPCRegionNumber
+THEN
+LLWEAPONEX_UniqueOwners_MoveToVendingMachine(_NPC, _UniqueTemplate, _Region);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
