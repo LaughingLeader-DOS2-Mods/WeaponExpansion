@@ -645,8 +645,11 @@ DB_NOOP(1);
 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_WRAITHBLADE_MARK", (CHARACTERGUID)_Char)
+AND
+DB_CurrentLevel(_Level)
 THEN
 DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Char, _Target);
+PROC_LoopEffect("LLWEAPONEX_FX_Status_Wraithblade_Mark_Apply_01", _Target, "LLWEAPONEX_Wraithblade_MarkInvisLoopFX", _Level, "");
 
 IF
 CharacterUsedSkill(_Char, "Shout_LLWEAPONEX_Wraithblade_SlayHidden", _, _)
@@ -671,6 +674,7 @@ IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_WRAITHBLADE_STEAL_INVISIBILITY", (CHARACTERGUID)_Char)
 THEN
 LeaderLib_Statuses_ExtendStatus(_Char, "INVISIBLE", 1);
+PROC_StopLoopEffect(_Target, "LLWEAPONEX_Wraithblade_MarkInvisLoopFX");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_SlayHidden_Next")
@@ -712,17 +716,17 @@ NOT DB_LLWEAPONEX_Skills_SlayHidden_CurrentTarget(_Char, _Target);
 NOT DB_LLWEAPONEX_Skills_SlayHidden_Targets(_Char, _Target);
 CharacterUseSkill(_Char, "Shout_LeaderLib_ClearQueue", _Char, 1, 1, 1);
 CharacterUseSkill(_Char, "Target_LLWEAPONEX_Wraithblade_SlayHidden_Attack", _Target, 1, 1, 1);
-//LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _Target, 500, "LLWEAPONEX_Timers_Wraithblade_ApplyDamage", "LLWEAPONEX_Wraithblade_ApplyDamage");
+LeaderLib_Timers_StartObjectTimer(_Target, 5000, "LLWEAPONEX_Timers_SlayHidden_StopLoopFXFallback", "LLWEAPONEX_SlayHidden_StopLoopFXFallback");
+
+IF
+StoryEvent(_Target, "LLWEAPONEX_SlayHidden_StopLoopFXFallback")
+THEN
+PROC_StopLoopEffect(_Target, "LLWEAPONEX_Wraithblade_MarkInvisLoopFX");
 
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Wraithblade_SlayHidden_Attack", _, _)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 700, "LLWEAPONEX_Timers_SlayHidden_Next", "LLWEAPONEX_SlayHidden_Next");
-
-IF
-CharacterCharacterEvent(_Char, _Target, "LLWEAPONEX_Wraithblade_ApplyDamage")
-THEN
-ApplyStatus(_Target, "LLWEAPONEX_WRAITHBLADE_SLAYHIDDEN_HIT", 0.0, 1, _Char);
 //END_REGION
 
 EXITSECTION

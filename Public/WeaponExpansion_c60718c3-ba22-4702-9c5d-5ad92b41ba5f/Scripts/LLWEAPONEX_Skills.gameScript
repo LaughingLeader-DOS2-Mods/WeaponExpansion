@@ -403,11 +403,19 @@ EVENT LLWEAPONEX_Skill_SlayHidden_TrailRibbon
 VARS
 	CHARACTER:_Char
 	FLOAT3:_StartPos
+	STRING:_Str
+	FLOAT:_y
 ON
 	OnCharacterEvent(_Char, "LLWEAPONEX_SlayHidden_Teleported")
 ACTIONS
-IF "c1"
+IF "c1&c2"
 	GetVar(_StartPos, _Char, "LLWEAPONEX_SlayHidden_StartPosition")
+	GetY(_StartPos, _y)
 THEN
+	Add(_y, 3.0)
+	SetY(_StartPos, _y)
 	ShootWorldProjectileAt(Projectile_LLWEAPONEX_Effect_TrailRibbon_Red, _Char, _StartPos, _Char, 1)
 ENDIF
+	Print(_Str, "[LLWEAPONEX:SlayHidden:TrailRibbon] Shooting projectile to [1]", _StartPos)
+	SetVar(_Char, "LeaderLog_Message", _Str)
+	CharacterEvent(_Char, "LeaderLog_Commands_Log")

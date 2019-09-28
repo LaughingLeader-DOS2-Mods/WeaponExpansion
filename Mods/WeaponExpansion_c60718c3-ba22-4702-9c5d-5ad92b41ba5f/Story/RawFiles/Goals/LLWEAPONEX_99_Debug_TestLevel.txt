@@ -34,9 +34,34 @@ DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b6
 //DB_LLWEAPONEX_Debug_TimeAtmospheres("Night", "293f6672-6fa0-4895-a0e7-c1a963c6b650", 21, 23);
 //DB_LLWEAPONEX_Debug_Atmospheres("Storm", "09edc0f3-c27e-414a-a053-a4c1d2d1271a");
 //DB_LLWEAPONEX_Debug_Atmospheres("BloodForest", "4b41cfe5-35bc-4473-b50c-59301e38ef9f");
-
+DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_001_c93c704c-41cf-4da2-99d8-f5051cdbf66b, "INVISIBLE", 20000);
+DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_001_270b72cd-90e5-480e-9677-69040d566818, "INVISIBLE", 20000);
+DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_002_52da4999-c2e9-42aa-9c07-209a456e3289, "INVISIBLE", 20000);
 
 KBSECTION
+IF
+GameStarted(_,1)
+AND
+DB_LLWEAPONEX_Debug_PreserveStatus(_Object, _Status, _Delay)
+THEN
+ApplyStatus(_Object, _Status, -1.0, 0, _Object);
+
+IF
+CharacterStatusRemoved(_Object, _Status, _)
+AND
+CharacterIsDead(_Object, 0)
+AND
+DB_LLWEAPONEX_Debug_PreserveStatus((GUIDSTRING)_Object, _Status, _Delay)
+THEN
+ProcObjectTimer(_Object, "LLWEAPONEX_Timers_Debug_PreserveStatus", _Delay);
+
+PROC
+ProcObjectTimerFinished(_Object, "LLWEAPONEX_Timers_Debug_PreserveStatus")
+AND
+DB_LLWEAPONEX_Debug_PreserveStatus(_Object, _Status, _Delay)
+THEN
+ApplyStatus(_Object, _Status, -1.0, 0, _Object);
+
 IF
 GameStarted(_,1)
 AND
