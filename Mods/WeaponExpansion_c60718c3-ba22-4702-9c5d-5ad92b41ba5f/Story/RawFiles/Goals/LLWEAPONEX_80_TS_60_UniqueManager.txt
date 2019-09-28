@@ -1,0 +1,61 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+ObjectEnteredCombat((CHARACTERGUID)_NPC, _CombatID)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+AND
+LeaderLib_Helper_QRY_GetHighestPlayerLevel()
+AND
+DB_LeaderLib_Helper_Temp_HighestPlayerLevel(_Level)
+AND
+CharacterGetLevel(_NPC, _NPCLevel)
+AND
+_NPCLevel < _Level
+THEN
+NOT DB_LeaderLib_Helper_Temp_HighestPlayerLevel(_Level);
+CharacterLevelUpTo(_NPC, _Level);
+
+/*
+IF
+CharacterDied(_Char)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+ItemTemplateAddTo(_UniqueTemplate, _NPC, 1, 0);
+CharacterSetCorpseLootable(_NPC, 1);
+*/
+
+IF
+ItemRemovedFromCharacter(_Item, _NPC)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+AND
+GetTemplate(_Item, _UniqueTemplate)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+
+IF
+ItemAddedToCharacter(_Item, _Char)
+AND
+GetTemplate(_Item, _UniqueTemplate)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+
+IF
+ItemAddedToCharacter(_Item, _Char)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

@@ -18,4 +18,4 @@ DB_LLWEAPONEX_CampaignRegions("Campaign", "Arx_Endgame", 6);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LLWEAPONEX_01_Campaign_Start"
+ParentTargetEdge "LLWEAPONEX_24_Campaign_Start"

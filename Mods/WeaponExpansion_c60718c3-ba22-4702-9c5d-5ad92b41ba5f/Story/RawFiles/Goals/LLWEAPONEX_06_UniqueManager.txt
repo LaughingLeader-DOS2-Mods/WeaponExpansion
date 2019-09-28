@@ -1,0 +1,213 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+PROC
+LLWEAPONEX_UniqueManager_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_OtherChar, _UniqueTemplate, _OtherRegion)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_OtherChar, _UniqueTemplate, _OtherRegion);
+
+PROC
+LLWEAPONEX_UniqueManager_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+THEN
+DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_NPC, _UniqueTemplate, _Region);
+
+PROC
+LLWEAPONEX_UniqueManager_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+AND
+DB_CurrentLevel(_Region)
+THEN
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_UniqueManagerActive", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_UniqueManager_Register_Position((ITEMGUID)_Item, (STRING)_UniqueTemplate, (STRING)_Region, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _Region, _lx, _ly, _lz)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _Region, _lx, _ly, _lz);
+
+PROC
+LLWEAPONEX_UniqueManager_Register_Position((ITEMGUID)_Item, (STRING)_UniqueTemplate, (STRING)_Region, (REAL)_x, (REAL)_y, (REAL)_z)
+THEN
+DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _Region, _x, _y, _z);
+
+PROC
+LLWEAPONEX_UniqueManager_Register_Position((ITEMGUID)_Item, (STRING)_UniqueTemplate, (STRING)_Region, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+DB_CurrentLevel(_Region)
+THEN
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_UniqueManagerActive", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_UniqueManager_MoveTemplateToVendingMachine((STRING)_UniqueTemplate, (STRING)_Region)
+THEN
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.WorldUniques", _UniqueTemplate);
+LLWEAPONEX_UniqueManager_OnUniqueMovedToVendingMachine(_UniqueTemplate, _Region);
+
+PROC
+LLWEAPONEX_UniqueManager_MoveItemToVendingMachine((ITEMGUID)_Item, (STRING)_UniqueTemplate, (STRING)_Region)
+AND
+ObjectExists(_Item, 1)
+AND
+ItemIsDestroyed(_Item, 0)
+THEN
+ItemToInventory(_Item, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1, 0, 1);
+LLWEAPONEX_UniqueManager_OnUniqueMovedToVendingMachine(_UniqueTemplate, _Region);
+DB_LLWEAPONEX_UniqueManager_Temp_ResolvedMove(_Item, _UniqueTemplate);
+
+PROC
+LLWEAPONEX_UniqueManager_MoveItemToVendingMachine((ITEMGUID)_Item, (STRING)_UniqueTemplate, (STRING)_Region)
+AND
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ResolvedMove(_Item, _UniqueTemplate)
+THEN
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.WorldUniques", _UniqueTemplate);
+LLWEAPONEX_UniqueManager_OnUniqueMovedToVendingMachine(_UniqueTemplate, _Region);
+
+PROC
+LLWEAPONEX_UniqueManager_MoveItemToVendingMachine((ITEMGUID)_Item, (STRING)_UniqueTemplate, (STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ResolvedMove(_Item, _UniqueTemplate)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ResolvedMove(_Item, _UniqueTemplate);
+
+PROC
+LLWEAPONEX_UniqueManager_OnUniqueMovedToVendingMachine((STRING)_UniqueTemplate, (STRING)_Region)
+AND
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_,_)
+THEN
+LeaderLib_ToggleScripts_DisableScript("LLWEAPONEX_UniqueManagerActive", "WeaponExpansion");
+
+QRY
+LLWEAPONEX_UniqueManager_QRY_RegionHasUniques((STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_NPC, _UniqueTemplate, _Region)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_UniqueManager_QRY_RegionHasUniques((STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _Region, _x, _y, _z)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_UniqueManager_QRY_OwnerIsRegisteredInNextRegion((CHARACTERGUID)_NPC, (STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_NPC, _UniqueTemplate, _Region)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_UniqueManager_QRY_ItemIsRegisteredInNextRegion((ITEMGUID)_Item, (STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _Region, _x, _y, _z)
+THEN
+DB_NOOP(1);
+
+
+//REGION STARTED
+IF
+RegionStarted(_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_NPC, _UniqueTemplate, _Region)
+THEN
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+
+IF
+RegionStarted(_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _Region, _x, _y, _z)
+THEN
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
+
+IF
+RegionStarted(_Region)
+AND
+NOT LeaderLib_ToggleScripts_QRY_ScriptIsEnabled("LLWEAPONEX_UniqueManagerActive")
+AND
+LLWEAPONEX_UniqueManager_QRY_RegionHasUniques(_Region)
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_UniqueManagerActive", "WeaponExpansion");
+//END_REGION
+
+//REGION ENDED
+IF
+RegionEnded(_Region)
+AND
+DB_LLWEAPONEX_CampaignRegions(_, _Region, _RegionIndex)
+AND
+IntegerSum(_RegionIndex, 1, _NextRegionIndex)
+AND
+DB_LLWEAPONEX_CampaignRegions(_, _NextRegion, _NextRegionIndex)
+THEN
+LLWEAPONEX_UniqueManager_CheckNextRegion(_NextRegion);
+
+PROC
+LLWEAPONEX_UniqueManager_CheckNextRegion((STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+AND
+NOT LLWEAPONEX_UniqueManager_QRY_OwnerIsRegisteredInNextRegion(_NPC, _Region)
+//NOT LLWEAPONEX_QRY_ObjectIsGlobalOrExists(_NPC)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+LLWEAPONEX_UniqueManager_MoveTemplateToVendingMachine(_UniqueTemplate, _Region);
+
+PROC
+LLWEAPONEX_UniqueManager_CheckNextRegion((STRING)_Region)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate)
+AND
+NOT LLWEAPONEX_UniqueManager_QRY_ItemIsRegisteredInNextRegion(_Item, _Region)
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
+LLWEAPONEX_UniqueManager_MoveItemToVendingMachine(_Item, _UniqueTemplate, _Region);
+//END_REGION
+
+//REGION EXISTING_SAVES
+//Existing saves past registered enemy regions
+//Move unclaimed uniques to the vending machine.
+IF
+GameStarted(_Region, _)
+AND
+DB_LLWEAPONEX_CampaignRegions((STRING)_GameMode, (STRING)_Region, (INTEGER)_CurrentRegionNumber)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_NPC, _UniqueTemplate, _NPCRegion)
+AND
+NOT LLWEAPONEX_QRY_ObjectIsGlobalOrExists(_NPC)
+AND
+DB_LLWEAPONEX_CampaignRegions(_GameMode, _NPCRegion, _NPCRegionNumber)
+AND
+_CurrentRegionNumber > _NPCRegionNumber
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+LLWEAPONEX_UniqueManager_MoveTemplateToVendingMachine(_UniqueTemplate, _Region);
+
+IF
+GameStarted(_Region, _)
+AND
+DB_LLWEAPONEX_CampaignRegions((STRING)_GameMode, (STRING)_Region, (INTEGER)_CurrentRegionNumber)
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate)
+AND
+DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _ItemRegion, _x, _y, _z)
+AND
+DB_LLWEAPONEX_CampaignRegions(_GameMode, _ItemRegion, _ItemRegionNumber)
+AND
+_CurrentRegionNumber > _ItemRegionNumber
+THEN
+NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
+LLWEAPONEX_UniqueManager_MoveItemToVendingMachine(_Item, _UniqueTemplate, _Region);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

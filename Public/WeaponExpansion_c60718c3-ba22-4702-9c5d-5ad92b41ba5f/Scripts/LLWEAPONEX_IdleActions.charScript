@@ -1,0 +1,31 @@
+INIT
+	CHARACTER:__Me
+	EXTERN FIXEDSTRING:%LLWEAPONEX_Idle_Anim = ""
+	EXTERN INT:%LLWEAPONEX_Idle_FightMode = 0
+	
+EVENTS
+
+BEHAVIOUR 
+REACTION LLWEAPONEX_Idle_AnimationOverride, 100
+USAGE PEACE
+CHECK "!c1|c2"
+	IsEqual(%LLWEAPONEX_Idle_Anim, "")
+	IsEqual(%LLWEAPONEX_Idle_FightMode, 1)
+ACTIONS
+
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Idle_Anim,"")
+THEN
+	CharacterSetAnimationOverride(__Me, %LLWEAPONEX_Idle_Anim)
+ENDIF
+
+CharacterSetFightMode(__Me, %LLWEAPONEX_Idle_FightMode, 0)
+
+Sleep(5.0)
+
+EVENTS
+EVENT CombatStarted
+ON
+OnEnteredCombat(__Me, _)
+ACTIONS
+CharacterSetAnimationOverride(__Me, "")

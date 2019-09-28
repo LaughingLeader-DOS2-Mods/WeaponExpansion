@@ -220,7 +220,7 @@ data "ProjectileTerrainOffset" "Yes"
 data "OverrideMinAP" "No"
 data "CycleConditions" "Enemy;!Dead"
 
-new entry "Projectile_LLWEAPONEX_EnemyDimensionalBolt"
+new entry "Projectile_LLWEAPONEX_EnemyChaosBolt"
 type "SkillData"
 data "SkillType" "Projectile"
 using "Projectile_LLWEAPONEX_ChaosBolt"

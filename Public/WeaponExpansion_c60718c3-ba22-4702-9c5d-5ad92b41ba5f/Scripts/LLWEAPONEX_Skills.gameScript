@@ -232,9 +232,11 @@ ACTIONS
 		ENDIF
 	ENDIF
 	
+	/*
 	Print(_Str, "[LLWEAPONEX:Throwing:TossObject:Landed] Target weight is ([1]), Strength is ([2]).", _Weight, _Strength)
 	SetVar(_Source, "LeaderLog_Message", _Str)
 	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+	*/
 	
 
 EVENT LLWEAPONEX_Throwing_CheckCanThrow_Item
@@ -343,9 +345,11 @@ ACTIONS
 
 	ExplodeAt(_TargetChar, _TossSkill, _Level, _Source)
 
+	/*
 	Print(_Str, "[LLWEAPONEX:Throwing:TossObject:Landed] Character weight is ([1]), exploding skill is ([2]).", _Weight, _TossSkill)
 	SetVar(_Source, "LeaderLog_Message", _Str)
 	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+	*/
 
 EVENT LLWEAPONEX_Throwing_TossLanded_Item
 VARS
@@ -395,9 +399,11 @@ ACTIONS
 
 	ExplodeAt(_TargetItem, _TossSkill, _Level, _Source)
 
+	/*
 	Print(_Str, "[LLWEAPONEX:Throwing:TossObject:Landed] Item weight is ([1]), exploding skill is ([2]).", _Weight, _TossSkill)
 	SetVar(_Source, "LeaderLog_Message", _Str)
 	CharacterEvent(_Source, "LeaderLog_Commands_Log")
+	*/
 	
 EVENT LLWEAPONEX_Skill_SlayHidden_TrailRibbon
 VARS
@@ -416,6 +422,8 @@ THEN
 	SetY(_StartPos, _y)
 	ShootWorldProjectileAt(Projectile_LLWEAPONEX_Effect_TrailRibbon_Red, _Char, _StartPos, _Char, 1)
 ENDIF
+	/*
 	Print(_Str, "[LLWEAPONEX:SlayHidden:TrailRibbon] Shooting projectile to [1]", _StartPos)
 	SetVar(_Char, "LeaderLog_Message", _Str)
 	CharacterEvent(_Char, "LeaderLog_Commands_Log")
+	*/

@@ -683,3 +683,7 @@ add equipment entry "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
 new equipment "LLWEAPONEX_WeaponMaster_Trader"
 add equipmentgroup
 add equipment entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Npc"
+
+new equipment "LLWEAPONEX_FTJ_Harvester"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Npc"

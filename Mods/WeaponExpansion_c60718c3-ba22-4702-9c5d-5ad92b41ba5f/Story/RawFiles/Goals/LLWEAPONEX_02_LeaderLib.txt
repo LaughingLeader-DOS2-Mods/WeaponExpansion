@@ -30,7 +30,7 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_DemolitionBackpack"
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_11_Blunderbuss", "LLWEAPONEX_BlunderbussEquipped");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_12_ShieldCover", "LLWEAPONEX_ShieldCoverActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_NpcUniques", "LLWEAPONEX_NpcUniquesActive");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
 //END_REGION
 
 //REGION PRESETS_MISC

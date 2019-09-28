@@ -7,7 +7,7 @@ data "MaterialApplyBody" "No"
 data "MaterialApplyArmor" "No"
 data "MaterialApplyWeapon" "Yes"
 data "MaterialApplyNormalMap" "No"
-data "Material" "30615386-2519-4b2e-ba3f-285adfa85506"
+data "Material" "490b8cdc-38ae-42e1-b124-8345212ae066"
 
 new entry "LLWEAPONEX_DEATHEDGE_UNSHEATHED_FX"
 type "StatusData"
