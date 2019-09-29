@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" />
+    <version major="3" minor="6" revision="4" build="1" />
+    <region id="IconUVList">
+        <node id="root">
+            <children>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="2a62499e-7d21-4b2f-b366-f8004203af5a_10394599173113511936-LLWEAPONEX_Goblins_Chaos_Grunt_A_(Icon_Dwarf_Male)" type="22" />
+                    <attribute id="U1" value="0.000976563" type="6" />
+                    <attribute id="U2" value="0.155273" type="6" />
+                    <attribute id="V1" value="0.00195313" type="6" />
+                    <attribute id="V2" value="0.388672" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="3f3588a9-27f4-49d0-b7e4-ff19beb3c470_9662514921484582943-MaleHero_(Icon_Human_Male)" type="22" />
+                    <attribute id="U1" value="0.157227" type="6" />
+                    <attribute id="U2" value="0.311523" type="6" />
+                    <attribute id="V1" value="0.00195313" type="6" />
+                    <attribute id="V2" value="0.388672" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="6489ce48-e8e7-45ca-a712-a4513a17f2e6_9672818167998612649-GEN_Brutes_Melee_Sword_(Icon_Lizard_Male)" type="22" />
+                    <attribute id="U1" value="0.313477" type="6" />
+                    <attribute id="U2" value="0.467773" type="6" />
+                    <attribute id="V1" value="0.00195313" type="6" />
+                    <attribute id="V2" value="0.388672" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="811babcd-9b48-4aee-88f4-2f621f4044d1_9955385099284385792-MaleHero_(Icon_Lizard_Male)" type="22" />
+                    <attribute id="U1" value="0.469727" type="6" />
+                    <attribute id="U2" value="0.624023" type="6" />
+                    <attribute id="V1" value="0.00195313" type="6" />
+                    <attribute id="V2" value="0.388672" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="b7d4bc50-2814-4e08-bb4a-cce8da965ff9_10383154908429552719-LLWEAPONEX_FTJ_Harvester_(Icon_Human_Male)" type="22" />
+                    <attribute id="U1" value="0.625977" type="6" />
+                    <attribute id="U2" value="0.780273" type="6" />
+                    <attribute id="V1" value="0.00195313" type="6" />
+                    <attribute id="V2" value="0.388672" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="bd460bde-3c1e-4736-8952-4d270fa8ca93_14934334533614215255-LLWEAPONEX_Origin_Weaponmaster_(Icon_Human_Male)" type="22" />
+                    <attribute id="U1" value="0.782227" type="6" />
+                    <attribute id="U2" value="0.936523" type="6" />
+                    <attribute id="V1" value="0.00195313" type="6" />
+                    <attribute id="V2" value="0.388672" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="bd460bde-3c1e-4736-8952-4d270fa8ca93_14934334533614215255-LLWEAPONEX_WeaponMaster_Trader_(Icon_Human_Male)" type="22" />
+                    <attribute id="U1" value="0.000976563" type="6" />
+                    <attribute id="U2" value="0.155273" type="6" />
+                    <attribute id="V1" value="0.392578" type="6" />
+                    <attribute id="V2" value="0.779297" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="bd460bde-3c1e-4736-8952-4d270fa8ca93_14934334602333691991-LLWEAPONEX_Origin_Weaponmaster_(Icon_Human_Male)" type="22" />
+                    <attribute id="U1" value="0.157227" type="6" />
+                    <attribute id="U2" value="0.311523" type="6" />
+                    <attribute id="V1" value="0.392578" type="6" />
+                    <attribute id="V2" value="0.779297" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="ec221521-337b-4b8c-98eb-9045274cbb68_9223372038935151103-_(Icon_Human_Male)" type="22" />
+                    <attribute id="U1" value="0.313477" type="6" />
+                    <attribute id="U2" value="0.467773" type="6" />
+                    <attribute id="V1" value="0.392578" type="6" />
+                    <attribute id="V2" value="0.779297" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="ed930554-96d6-40d4-88c2-711942e0b399_9662508185163923459-MaleHero_(Icon_Human_Male)" type="22" />
+                    <attribute id="U1" value="0.469727" type="6" />
+                    <attribute id="U2" value="0.624023" type="6" />
+                    <attribute id="V1" value="0.392578" type="6" />
+                    <attribute id="V2" value="0.779297" type="6" />
+                </node>
+            </children>
+        </node>
+    </region>
+    <region id="TextureAtlasInfo">
+        <node id="root">
+            <children>
+                <node id="TextureAtlasIconSize">
+                    <attribute id="Height" value="100" type="4" />
+                    <attribute id="Width" value="80" type="4" />
+                </node>
+                <node id="TextureAtlasPath">
+                    <attribute id="Path" value="Assets/Textures/Icons/Generated_c60718c3-ba22-4702-9c5d-5ad92b41ba5f_Icons.dds" type="20" />
+                    <attribute id="UUID" value="05e69ce4-eb79-4f72-9874-49a236062fd1" type="22" />
+                </node>
+                <node id="TextureAtlasTextureSize">
+                    <attribute id="Height" value="256" type="4" />
+                    <attribute id="Width" value="512" type="4" />
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

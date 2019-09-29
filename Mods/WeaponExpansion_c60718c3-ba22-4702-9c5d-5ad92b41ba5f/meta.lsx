@@ -34,7 +34,7 @@
                     <attribute id="MenuLevelName" value="" type="22" />
                     <attribute id="Name" value="Weapon Expansion" type="22" />
                     <attribute id="NumPlayers" value="2" type="1" />
-                    <attribute id="PhotoBooth" value="" type="22" />
+                    <attribute id="PhotoBooth" value="SYS_Icon_Generation_A" type="22" />
                     <attribute id="StartupLevelName" value="" type="22" />
                     <attribute id="Tags" value="" type="30" />
                     <attribute id="Type" value="Add-on" type="22" />

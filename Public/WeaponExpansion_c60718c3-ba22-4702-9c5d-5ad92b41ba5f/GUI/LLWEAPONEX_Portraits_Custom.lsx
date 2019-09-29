@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
     <header version="2" />
-    <version major="3" minor="6" revision="1" build="0" />
+    <version major="3" minor="6" revision="4" build="1" />
     <region id="IconUVList">
         <node id="root">
             <children>
                 <node id="IconUV">
+                    <attribute id="MapKey" value="LLWEAPONEX_Portrait_Harvester_A" type="22" />
+                    <attribute id="U1" value="0.469727" type="6" />
+                    <attribute id="U2" value="0.624023" type="6" />
+                    <attribute id="V1" value="0.000976563" type="6" />
+                    <attribute id="V2" value="0.194336" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="LLWEAPONEX_Portrait_Korvash_A" type="22" />
+                    <attribute id="U1" value="0.313477" type="6" />
+                    <attribute id="U2" value="0.467773" type="6" />
+                    <attribute id="V1" value="0.000976563" type="6" />
+                    <attribute id="V2" value="0.194336" type="6" />
+                </node>
+                <node id="IconUV">
                     <attribute id="MapKey" value="LLWEAPONEX_Portrait_VendingMachine_A" type="22" />
                     <attribute id="U1" value="0.000976563" type="6" />
                     <attribute id="U2" value="0.155273" type="6" />
+                    <attribute id="V1" value="0.000976563" type="6" />
+                    <attribute id="V2" value="0.194336" type="6" />
+                </node>
+                <node id="IconUV">
+                    <attribute id="MapKey" value="LLWEAPONEX_Portrait_WeaponMaster_A" type="22" />
+                    <attribute id="U1" value="0.157227" type="6" />
+                    <attribute id="U2" value="0.311523" type="6" />
                     <attribute id="V1" value="0.000976563" type="6" />
                     <attribute id="V2" value="0.194336" type="6" />
                 </node>
