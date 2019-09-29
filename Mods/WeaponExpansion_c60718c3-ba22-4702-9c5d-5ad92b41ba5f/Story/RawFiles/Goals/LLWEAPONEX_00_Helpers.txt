@@ -347,6 +347,44 @@ LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, (STRING)_Skill)
 THEN
 DB_NOOP(1);
 //END_REGION
+
+//REGION NPC_EQUIPMENT_FIX
+IF
+StoryEvent((CHARACTERGUID)_Npc, "LLWEAPONEX_Npc_EquipInventoryContents")
+THEN
+InventoryLaunchIterator(_Npc, "LLWEAPONEX_Iterator_Npc_EquipInventory", "");
+/*
+ProcObjectTimer(_Npc, "LLWEAPONEX_Timers_Iterator_Npc_RefreshEquipment", 1000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Npc, "LLWEAPONEX_Timers_Iterator_Npc_RefreshEquipment")
+AND
+DB_LeaderLib_EquipmentSlots(_Slot)
+AND
+CharacterGetEquippedItem(_Npc, _Slot, (ITEMGUID)_Item)
+THEN
+CharacterUnequipItem(_Npc, _Item);
+CharacterEquipItem(_Npc, _Item);
+*/
+
+IF
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Iterator_Npc_EquipInventory")
+AND
+GetInventoryOwner(_Item, _Owner)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Owner, 1)
+AND
+ItemIsEquipable(_Item, 1)
+AND
+NOT LeaderLib_Helper_QRY_ItemIsEquipped(_Owner, _Item)
+AND
+String(_Item, _ItemStr)
+AND
+String(_Owner, _OwnerStr)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_00_Helpers:Iterator_Npc_EquipInventory] Equipping item [",_ItemStr,"] on NPC [",_OwnerStr,"].");
+CharacterEquipItem(_Owner, _Item);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

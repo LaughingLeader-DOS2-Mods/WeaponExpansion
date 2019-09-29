@@ -1140,3 +1140,9 @@ new subtable "-2"
 object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
 new subtable "-2"
 object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
+
+new treasuretable "LOOT_LLWEAPONEX_FTJ_Harvester"
+new subtable "1,1"
+object category "GoldBig",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_QuestReward_Easy_Choice_Extra",1,0,0,0,0,0,0,0
