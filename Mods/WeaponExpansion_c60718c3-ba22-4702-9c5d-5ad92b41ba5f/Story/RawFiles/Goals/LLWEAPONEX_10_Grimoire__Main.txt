@@ -8,7 +8,6 @@ KBSECTION
 PROC
 LLWEAPONEX_Grimoire_InitSettings()
 THEN
-
 //LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Wind", "LLWEAPONEX_GRIMOIRE_WIND_ACTIVE");
 //LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Swap", "LLWEAPONEX_GRIMOIRE_SWAP_ACTIVE");
 //LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_Grimoire_Toggle_Death", "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE");
@@ -72,6 +71,7 @@ AND
 DB_LLWEAPONEX_Grimoire_Tags(_Template, _Tag)
 THEN
 DB_LeaderLib_Helper_EquipmentCopyBlacklist_Templates("WeaponExpansion.Blacklist", _Template);
+LLWEAPONEX_ToggleSettings_AddTag(_Tag);
 //END_REGION
 
 //REGION UPDATES

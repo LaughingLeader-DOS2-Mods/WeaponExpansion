@@ -3,12 +3,17 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-PROC
-LLWEAPONEX_UniqueManager_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
+QRY
+LLWEAPONEX_UniqueManager_QRY_IsCurrentRegion((STRING)_Region)
 AND
-DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_OtherChar, _UniqueTemplate, _OtherRegion)
+DB_CurrentLevel(_Region)
 THEN
-NOT DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_OtherChar, _UniqueTemplate, _OtherRegion);
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_UniqueManager_QRY_IsCurrentRegion("__ANY__")
+THEN
+DB_NOOP(1);
 
 PROC
 LLWEAPONEX_UniqueManager_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
@@ -18,7 +23,7 @@ DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_NPC, _UniqueTemplate, _Region);
 PROC
 LLWEAPONEX_UniqueManager_Register_Owner((CHARACTERGUID)_NPC, (STRING)_UniqueTemplate, (STRING)_Region)
 AND
-DB_CurrentLevel(_Region)
+LLWEAPONEX_UniqueManager_QRY_IsCurrentRegion(_Region)
 THEN
 DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
 LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_UniqueManagerActive", "WeaponExpansion");
@@ -207,6 +212,20 @@ THEN
 NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
 LLWEAPONEX_UniqueManager_MoveItemToVendingMachine(_Item, _UniqueTemplate, _Region);
 //END_REGION
+
+IF
+StoryEvent((CHARACTERGUID)_NPC, "LLWEAPONEX_UniqueManager_OnDeath")
+AND
+DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+AND
+GetItemForItemTemplateInInventory(_NPC, _UniqueTemplate, _Item)
+AND
+CharacterGetLevel(_NPC, _Level)
+THEN
+CharacterSetCorpseLootable(_NPC, 1);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_06_UniqueManager:StoryEvent(LLWEAPONEX_UniqueManager_OnDeath)] Unique item wielder for [",_UniqueTemplate,"] died.");
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_06_UniqueManager:StoryEvent(LLWEAPONEX_UniqueManager_OnDeath)] Leveled up unique item to level [",_level,"].");
+LeaderLib_Growth_Items_Internal_LevelUpNow(_NPC, _Item);
 EXITSECTION
 
 ENDEXITSECTION

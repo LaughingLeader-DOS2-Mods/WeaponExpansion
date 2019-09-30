@@ -1132,7 +1132,7 @@ AND
 _Weapon != NULL_00000000-0000-0000-0000-000000000000
 THEN
 CharacterUnequipItem(_Player, _Weapon);
-LeaderLib_Helpers_CopyItemTransform(_Weapon, _Object);
+LeaderLib_Helper_CopyItemTransform(_Weapon, _Object);
 LLWEAPONEX_Throwing_MovingObject_ResetWeaponEffects(_Weapon);
 
 PROC
@@ -1143,7 +1143,7 @@ AND
 _Weapon != NULL_00000000-0000-0000-0000-000000000000
 THEN
 CharacterUnequipItem(_Player, _Weapon);
-LeaderLib_Helpers_CopyItemTransform(_Weapon, _Object);
+LeaderLib_Helper_CopyItemTransform(_Weapon, _Object);
 LLWEAPONEX_Throwing_MovingObject_ResetWeaponEffects(_Weapon);
 
 PROC

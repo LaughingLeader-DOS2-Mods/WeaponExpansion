@@ -13,6 +13,7 @@ LLWEAPONEX_ToggleSettings_InitSettings()
 THEN
 SysClear("DB_LLWEAPONEX_ToggleSettings_MasteryFlags", 3);
 
+/*
 PROC
 LLWEAPONEX_ToggleSettings_InitSettings()
 AND
@@ -26,6 +27,7 @@ AND
 DB_LLWEAPONEX_Grimoire_Tags(_Template, _Tag)
 THEN
 LLWEAPONEX_ToggleSettings_AddTag(_Tag);
+*/
 
 PROC
 LLWEAPONEX_ToggleSettings_AddTag((STRING)_Tag)
@@ -257,4 +259,4 @@ LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Item, _Tag);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LLWEAPONEX_00_PostCC"
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

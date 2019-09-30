@@ -133,9 +133,23 @@ DB_NOOP(1);
 QRY
 LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Char)
 AND
-CharacterGetEquippedItem(_Char, "Weapon", NULL_00000000-0000-0000-0000-000000000000)
+LLWEAPONEX_QRY_CharacterIsUnarmed(_Char, 0)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Char, 0)
 AND
-CharacterGetEquippedItem(_Char, "Shield", NULL_00000000-0000-0000-0000-000000000000)
+NOT CharacterGetEquippedWeapon(_Char, _)
+AND
+NOT CharacterGetEquippedShield(_Char, _)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Char, 1)
+AND
+NOT CharacterGetEquippedWeapon(_Char, _)
 THEN
 DB_NOOP(1);
 

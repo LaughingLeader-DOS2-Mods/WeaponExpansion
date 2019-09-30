@@ -19,16 +19,23 @@ _NPCLevel < _Level
 THEN
 NOT DB_LeaderLib_Helper_Temp_HighestPlayerLevel(_Level);
 CharacterLevelUpTo(_NPC, _Level);
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_80_TS_60_UniqueManager:ObjectEnteredCombat] Leveling up NPC to [",_Level,"].");
+LeaderLib_Helper_LevelUpEquipment(_NPC);
 
 /*
 IF
-CharacterDied(_Char)
+CharacterDied(_NPC)
 AND
 DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+AND
+ObjectGetFlag(_NPC, "LLWEAPONEX_UniqueManager_GeneratedTemplate", 0)
+AND
+GetPosition(_NPC, _x, _y, _z)
 THEN
-NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+ObjectSetFlag(_NPC, "LLWEAPONEX_UniqueManager_GeneratedTemplate", 0);
 ItemTemplateAddTo(_UniqueTemplate, _NPC, 1, 0);
 CharacterSetCorpseLootable(_NPC, 1);
+PlayEffectAtPosition("LLWEAPONEX_FX_UniqueItemSpawned_01", _x, _y, _z);
 */
 
 IF
@@ -39,6 +46,7 @@ AND
 GetTemplate(_Item, _UniqueTemplate)
 THEN
 NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_80_TS_60_UniqueManager:ItemRemovedFromCharacter] Unique item [",_UniqueTemplate,"] was removed from NPC. Clearing active owner entry.");
 
 IF
 ItemAddedToCharacter(_Item, _Char)
@@ -46,8 +54,13 @@ AND
 GetTemplate(_Item, _UniqueTemplate)
 AND
 DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate)
+AND
+_NPC != _Char
+AND
+ObjectGetFlag(_NPC, "LLWEAPONEX_UniqueManager_GeneratedTemplate", 1)
 THEN
 NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_80_TS_60_UniqueManager:ItemAddedToCharacter] Unique item from NPC [",_UniqueTemplate,"] was added to character. Clearing active owner entry.");
 
 IF
 ItemAddedToCharacter(_Item, _Char)
@@ -55,6 +68,7 @@ AND
 DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate)
 THEN
 NOT DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_80_TS_60_UniqueManager:ItemAddedToCharacter] Unique item [",_UniqueTemplate,"] was added to character. Clearing active item entry.");
 EXITSECTION
 
 ENDEXITSECTION

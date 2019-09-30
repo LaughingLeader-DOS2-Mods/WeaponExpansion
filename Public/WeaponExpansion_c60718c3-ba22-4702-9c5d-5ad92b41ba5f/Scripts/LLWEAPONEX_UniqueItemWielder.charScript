@@ -1,0 +1,30 @@
+INIT
+	CHARACTER:__Me
+	EXTERN ITEMTEMPLATE:%LLWEAPONEX_UniqueItem_Template = null
+	EXTERN FIXEDSTRING:%LLWEAPONEX_UniqueItem_Stat = ""
+	INT:%LLWEAPONEX_UniqueItem_Spawned = 0
+EVENTS
+
+EVENT LLWEAPONEX_UniqueItem_OnDeath
+VARS
+	ITEM:_Item
+ON
+	OnDie(__Me, _, _, _)
+ACTIONS
+IF "!c1"
+	HasFlag(__Me, "LLWEAPONEX_UniqueManager_GeneratedTemplate")
+THEN
+	IF "!c1"
+		IsEqual(%LLWEAPONEX_UniqueItem_Template, "")
+	THEN
+		CharacterAddToInventory(__Me, %LLWEAPONEX_UniqueItem_Stat, 1, 1)
+	ELIF "!c1"
+		IsEqual(%LLWEAPONEX_UniqueItem_Template, null)
+	THEN
+		SpawnItem(%LLWEAPONEX_UniqueItem_Template, __Me, _Item)
+		ItemToInventory(_Item, __Me)
+	ENDIF
+	SetFlag(__Me, "LLWEAPONEX_UniqueManager_GeneratedTemplate")
+	PlayEffectAt(__Me, "LLWEAPONEX_FX_UniqueItemSpawned_01")
+ENDIF
+	CharacterEvent(__Me, "LLWEAPONEX_UniqueManager_OnDeath")

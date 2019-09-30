@@ -30,6 +30,46 @@ DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status)
 THEN
 NOT DB_LLWEAPONEX_WeaponFX_Temp_UnsheathedStatus(_Player, _Item, _Status);
 LeaderLib_Statuses_RemoveIfActive(_Player, _Status);
+
+/*
+IF
+CharacterStartAttackObject(_Target, _, _Attacker)
+AND
+LLWEAPONEX_QRY_CharacterIsUnarmed(_Attacker, 1)
+THEN
+DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target);
+
+IF
+CharacterStatusApplied(_Target, "HIT", (CHARACTERGUID)_Attacker)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target)
+THEN
+NOT DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target);
+PlaySound(_Target, "LeaderLib_Unarmed_Hit");
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_UNARMED_HIT", (CHARACTERGUID)_Attacker)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target)
+THEN
+NOT DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target);
+PlaySound(_Target, "LeaderLib_Unarmed_Hit");
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_UNARMED_HIT", (CHARACTERGUID)_Attacker)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target)
+THEN
+NOT DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target);
+PlaySound(_Target, "LeaderLib_Unarmed_Hit");
+
+IF
+CharacterMissedBy(_Target, _, _Attacker)
+AND
+DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target)
+THEN
+NOT DB_LLWEAPONEX_WeaponFX_Temp_UnarmedBasicAttacking(_Attacker, _Target);
+*/
 EXITSECTION
 
 ENDEXITSECTION
