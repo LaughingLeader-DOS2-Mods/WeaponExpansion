@@ -121,6 +121,8 @@ IF
 RegionStarted(_Region)
 AND
 DB_LLWEAPONEX_UniqueManager_RegisteredOwner(_NPC, _UniqueTemplate, _Region)
+AND
+ObjectExists(_NPC, 1)
 THEN
 DB_LLWEAPONEX_UniqueManager_Temp_ActiveOwner(_NPC, _UniqueTemplate);
 
@@ -128,6 +130,8 @@ IF
 RegionStarted(_Region)
 AND
 DB_LLWEAPONEX_UniqueManager_RegisteredPosition(_Item, _UniqueTemplate, _Region, _x, _y, _z)
+AND
+ObjectExists(_Item, 1)
 THEN
 DB_LLWEAPONEX_UniqueManager_Temp_ActiveItem(_Item, _UniqueTemplate);
 

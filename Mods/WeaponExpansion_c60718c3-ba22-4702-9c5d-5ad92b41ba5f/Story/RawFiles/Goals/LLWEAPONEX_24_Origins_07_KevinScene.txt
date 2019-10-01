@@ -1,0 +1,57 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION KEVIN_SCENE
+//S_LLWEAPONEX_Kevin_Quest_FTJ_31db5d5f-0ebf-415b-9786-0198632b48d4
+//S_LLWEAPONEX_Kevin_Quest_RC_6e1e9a6d-e6e4-401a-ab99-3cf2a4e63f33
+
+IF
+GameStarted("FJ_FortJoy_Main", _)
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_Quest_Kevin_GainedKevin")
+AND
+QueryOnlyOnce("LLWEAPONEX_Kevin_AddedQuestItem_FTJ")
+AND
+CreateItemTemplateAtPosition("S_LLWEAPONEX_Kevin_Quest_caa2c7c7-fd01-4c92-a624-e440893c6a63", 163.704, -17.483, 302.749, _Item)
+THEN
+SetVarFloat3(_Item, "LLWEAPONEX_Kevin_Quest_ShootPos", 156.536, -17.483, 299.405);
+ItemToTransform(_Item, 163.704, -17.483, 302.749, 0.0, 248.849, 0.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+IF
+GameStarted("RC_Main", _)
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_Quest_Kevin_GainedKevin")
+AND
+QueryOnlyOnce("LLWEAPONEX_Kevin_AddedQuestItem_RC")
+AND
+CreateItemTemplateAtPosition("S_LLWEAPONEX_Kevin_Quest_caa2c7c7-fd01-4c92-a624-e440893c6a63", 530.292, -0.928, -20.31, _Item)
+THEN
+SetVarFloat3(_Item, "LLWEAPONEX_Kevin_Quest_ShootPos", 540.439, -0.928, -20.776);
+ItemToTransform(_Item, 530.292, -0.928, -20.31, 0.0, 100.342, 0.0, 1, NULL_00000000-0000-0000-0000-000000000000);
+
+//When the party is beyond Reaper's Coast, add Kevin to the vending machine
+IF
+GameStarted(_Region, _)
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_Quest_Kevin_GainedKevin")
+AND
+DB_LLWEAPONEX_CampaignRegions("Campaign", _Region, _RegionLevel)
+AND
+DB_LLWEAPONEX_CampaignRegions("Campaign", "RC_Main", _EndLevel)
+AND
+_RegionLevel > _EndLevel
+THEN
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Normal_b3fc8995-8c7c-4de5-b465-e2573334cff7");
+GoalCompleted;
+
+IF
+GlobalFlagSet("LLWEAPONEX_Quest_Kevin_GainedKevin")
+THEN
+GoalCompleted;
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_24_Campaign_Start"

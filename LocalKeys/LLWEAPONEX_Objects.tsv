@@ -115,10 +115,11 @@ THR_LLWEAPONEX_Staff	Throwing Staff?
 THR_LLWEAPONEX_Sword1H	Throwing Sword?
 THR_LLWEAPONEX_Sword2H	Throwing Sword? (Large)
 THR_LLWEAPONEX_Wand	Throwing Wand?
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Disabled	Kevin the Pet Rock (Exausted)
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Poison	Kevin the Pet Rock (Poisoned)
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Oil	Kevin the Pet Rock (Oiled)
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Nails	Kevin the Pet Rock (Nails)
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin	<font color='#C7A758'>Kevin the Pet Rock</font>
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Disabled	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#b823cb'>Exausted</font>)
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Poison	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#00AA00'>Poisoned</font>)
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Oil	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#AA895B'>Oiled</font>)
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Nails	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#FF2244'>Nails</font>)
 GRN_LLWEAPONEX_BloodBall	Congealed Blood Ball
 GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask
 GRN_LLWEAPONEX_Flask_Weakness_Air	<font color='#7478DC'>Flask of Air Weakness</font>

@@ -503,7 +503,7 @@
                                                 "TagText" : {
                                                    "handle" : "ls::TranslatedStringRepository::s_HandleUnknown",
                                                    "type" : 28,
-                                                   "value" : "*Suddenly, the rock immediately turns around and flies toward your hand.*"
+                                                   "value" : "*Suddenly, the rock immediately reverses direction and flies toward your hand.*"
                                                 },
                                                 "stub" : {"type" : 19, "value" : 1}
                                              }

@@ -9,6 +9,13 @@ THEN
 GoalCompleted;
 
 IF
+RegionStarted(_)
+AND
+SysIsCompleted("DOS2ModWrapper")
+THEN
+GoalCompleted;
+
+IF
 SavegameLoading(_,_,_,_)
 AND
 SysIsCompleted("DOS2ModWrapper")

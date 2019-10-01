@@ -1,8 +1,8 @@
 INIT
-	ITEM:__ME
+	ITEM:__Me
 	INT:%LLWEAPONEX_Kevin_MaxEnergy = 4
 	INT:%LLWEAPONEX_Kevin_CurrentEnergy = %LLWEAPONEX_Kevin_MaxEnergy
-	
+	EXTERN FLOAT3:%LLWEAPONEX_Kevin_Quest_ShootPos = null
 EVENTS
 
 EVENT LLWEAPONEX_Kevin_Init
@@ -10,3 +10,89 @@ ON
 	OnInit()
 ACTIONS
 	Set(%LLWEAPONEX_Kevin_CurrentEnergy, %LLWEAPONEX_Kevin_MaxEnergy)
+	
+EVENT LLWEAPONEX_Quest_Kevin_Throw_Start
+VARS
+	CHARACTER:_Char
+	FLOAT3:_TargetPos
+	FLOAT3:_Pos
+ON
+	OnCharacterFlagSet("LLWEAPONEX_Quest_ShootKevin_Start", _Char)
+ACTIONS
+IF "c1"
+	IsInDialog(__Me)
+THEN
+		ClearFlag(_Char, "LLWEAPONEX_Quest_ShootKevin_Start")
+	IF "c1"
+		IsEqual(%LLWEAPONEX_Kevin_Quest_ShootPos, null)
+	THEN
+		GetForwardDirection(_Char, _TargetPos)
+		GetPosition(_Char, _Pos)
+		Multiply(_TargetPos, FLOAT:10.0)
+		Add(_TargetPos, _Pos)
+	ELSE
+		Set(_TargetPos, %LLWEAPONEX_Kevin_Quest_ShootPos)
+	ENDIF
+		ShootLocalProjectileAt(Projectile_LLWEAPONEX_Throw_Rock_Kevin_Quest_Effect_Shoot, _Char, {0.0;2.0;0.0}, _TargetPos, 1, _Char)
+ENDIF
+
+EVENT LLWEAPONEX_Quest_Kevin_Throw_Return
+VARS
+	CHARACTER:_Char
+	FLOAT3:_TargetPos
+	FLOAT3:_Pos
+	FLOAT:_y
+ON
+	OnCharacterFlagSet("LLWEAPONEX_Quest_ShootKevin_Return", _Char)
+ACTIONS
+IF "c1"
+	IsInDialog(__Me)
+THEN
+	ClearFlag(_Char, "LLWEAPONEX_Quest_ShootKevin_Return")
+IF "c1"
+	IsEqual(%LLWEAPONEX_Kevin_Quest_ShootPos, null)
+THEN
+	GetForwardDirection(_Char, _TargetPos)
+	GetPosition(_Char, _Pos)
+	Multiply(_TargetPos, FLOAT:10.0)
+	Add(_TargetPos, _Pos)
+ELSE
+	Set(_TargetPos, %LLWEAPONEX_Kevin_Quest_ShootPos)
+ENDIF
+IF "c1"
+	GetY(_TargetPos, _y)
+THEN
+	Add(_y, 2.0)
+	SetY(_TargetPos, _y)
+ENDIF
+	ShootWorldProjectileAt(Projectile_LLWEAPONEX_Throw_Rock_Kevin_Quest_Effect_Return, _Char, _TargetPos, _Char, 1)
+ENDIF
+	
+EVENT LLWEAPONEX_Quest_Kevin_Throw_Failed
+VARS
+	CHARACTER:_Char
+	FLOAT3:_TargetPos
+	FLOAT3:_Pos
+	FLOAT3:_Direction
+ON
+	OnCharacterFlagSet("LLWEAPONEX_Quest_ShootKevin_Failed", _Char)
+ACTIONS
+IF "c1"
+	IsInDialog(__Me)
+THEN
+	ClearFlag(_Char, "LLWEAPONEX_Quest_ShootKevin_Failed")
+IF "c1"
+	IsEqual(%LLWEAPONEX_Kevin_Quest_ShootPos, null)
+THEN
+	GetForwardDirection(_Char, _TargetPos)
+	GetPosition(_Char, _Pos)
+	Multiply(_TargetPos, FLOAT:2.0)
+	Add(_TargetPos, _Pos)
+ELSE
+	GetDirection(_Char, %LLWEAPONEX_Kevin_Quest_ShootPos, _Direction, _)
+	Set(_TargetPos, %LLWEAPONEX_Kevin_Quest_ShootPos)
+	Add(_TargetPos, _Direction)
+	Multiply(_TargetPos, 0.5)
+ENDIF
+	PlayEffectAt(_TargetPos, "RS3_FX_Environment_Water_Splash_Sea_02")
+ENDIF

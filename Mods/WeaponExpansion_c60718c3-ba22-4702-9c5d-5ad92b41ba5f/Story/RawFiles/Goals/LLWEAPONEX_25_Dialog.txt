@@ -19,6 +19,7 @@ IF
 ObjectFlagSet("LLWEAPONEX_Quest_AddKevin", (CHARACTERGUID)_Char, _)
 THEN
 ItemTemplateAddTo("THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Normal_b3fc8995-8c7c-4de5-b465-e2573334cff7", _Char, 1);
+GlobalSetFlag("LLWEAPONEX_Quest_Kevin_GainedKevin");
 
 IF
 DialogEnded("LLWEAPONEX_Kevin_Beach", _Instance)
