@@ -94,36 +94,36 @@ SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance	<font color='#ffc721'>Mastery Scroll:<
 SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike	<font color='#ffc721'>Mastery Scroll:</font> Flicker Strike
 SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb	<font color='#ffc721'>Mastery Scroll:</font> Runic Reverb
 SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon	<font color='#ffc721'>Mastery Scroll:</font> Throw Weapon
-THR_LLWEAPONEX_Throwing_Axe1H	Throwing Axe
-THR_LLWEAPONEX_Throwing_Axe2H	Throwing Axe (Large)
-THR_LLWEAPONEX_Throwing_Bow	Throwing Bow?
-THR_LLWEAPONEX_Throwing_Chair_01	Throwing Stool
-THR_LLWEAPONEX_Throwing_Crossbow	Throwing Crossbow?
-THR_LLWEAPONEX_Throwing_Dagger	Throwing Dagger
-THR_LLWEAPONEX_Throwing_Mace1H	Throwing Hammer
-THR_LLWEAPONEX_Throwing_Mace2H	Throwing Paddle?
-THR_LLWEAPONEX_Throwing_Rock	Stone
-THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin	Kevin the Pet Rock
-THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Disabled	Kevin the Pet Rock (Exausted)
-THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Poison	Kevin the Pet Rock (Poisoned)
-THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil	Kevin the Pet Rock (Oiled)
-THR_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails	Kevin the Pet Rock (Nails)
-THR_LLWEAPONEX_Throwing_Scythe	Throwing Scythe?
-THR_LLWEAPONEX_Throwing_Shield	Throwing Shield
-THR_LLWEAPONEX_Throwing_Shuriken	Shuriken
-THR_LLWEAPONEX_Throwing_Shuriken_Poison	Poison Shuriken
-THR_LLWEAPONEX_Throwing_Shuriken_Explosive	Explosive Shuriken
-THR_LLWEAPONEX_Throwing_Sickle	Throwing Sickle
-THR_LLWEAPONEX_Throwing_Spear	Throwing Spear
-THR_LLWEAPONEX_Throwing_Staff	Throwing Staff?
-THR_LLWEAPONEX_Throwing_Sword1H	Throwing Sword?
-THR_LLWEAPONEX_Throwing_Sword2H	Throwing Sword? (Large)
-THR_LLWEAPONEX_Throwing_Wand	Throwing Wand?
-GRN_LLWEAPONEX_Throwing_BloodBall	Congealed Blood Ball
+THR_LLWEAPONEX_Axe1H	Throwing Axe
+THR_LLWEAPONEX_Axe2H	Throwing Axe (Large)
+THR_LLWEAPONEX_Bow	Throwing Bow?
+THR_LLWEAPONEX_Chair_01	Throwing Stool
+THR_LLWEAPONEX_Crossbow	Throwing Crossbow?
+THR_LLWEAPONEX_Dagger	Throwing Dagger
+THR_LLWEAPONEX_Mace1H	Throwing Hammer
+THR_LLWEAPONEX_Mace2H	Throwing Paddle?
+THR_LLWEAPONEX_Rock	Stone
+THR_LLWEAPONEX_Rock_Unique_Kevin	Kevin the Pet Rock
+THR_LLWEAPONEX_Scythe	Throwing Scythe?
+THR_LLWEAPONEX_Shield	Throwing Shield
+THR_LLWEAPONEX_Shuriken	Shuriken
+THR_LLWEAPONEX_Shuriken_Poison	Poison Shuriken
+THR_LLWEAPONEX_Shuriken_Explosive	Explosive Shuriken
+THR_LLWEAPONEX_Sickle	Throwing Sickle
+THR_LLWEAPONEX_Spear	Throwing Spear
+THR_LLWEAPONEX_Staff	Throwing Staff?
+THR_LLWEAPONEX_Sword1H	Throwing Sword?
+THR_LLWEAPONEX_Sword2H	Throwing Sword? (Large)
+THR_LLWEAPONEX_Wand	Throwing Wand?
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Disabled	Kevin the Pet Rock (Exausted)
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Poison	Kevin the Pet Rock (Poisoned)
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Oil	Kevin the Pet Rock (Oiled)
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Nails	Kevin the Pet Rock (Nails)
+GRN_LLWEAPONEX_BloodBall	Congealed Blood Ball
 GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask
-GRN_LLWEAPONEX_Throwing_Flask_Weakness_Air	<font color='#7478DC'>Flask of Air Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Weakness_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Weakness_Earth	<font color='#AA895B'>Flask of Earth Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Weakness_Fire	<font color='#C76537'>Flask of Fire Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Weakness_Poison	<font color='#00AA00'>Flask of Poison Weakness</font>
-GRN_LLWEAPONEX_Throwing_Flask_Weakness_Water	<font color='#188EDE'>Flask of Water Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Air	<font color='#7478DC'>Flask of Air Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Earth	<font color='#AA895B'>Flask of Earth Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Fire	<font color='#C76537'>Flask of Fire Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Poison	<font color='#00AA00'>Flask of Poison Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Water	<font color='#188EDE'>Flask of Water Weakness</font>
