@@ -22,243 +22,6 @@ INIT
 	USING LLWEAPONEX_Skills
 EVENTS
 
-EVENT LLWEAPONEX_Debug_VectorTeleport
-VARS
-	CHARACTER:_Blocker
-	CHARACTER:_Attacker
-	CHARACTER:_BlockingTarget
-	FLOAT3:_Direction
-	FLOAT:_Dist
-	FLOAT3:_Pos
-	FLOAT3:_EndPos
-	STRING:_Str
-	INT:_Between
-ON
-	OnCharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_Debug_TeleportVector")
-ACTIONS
-	Set(_Between, 1)
-IF "c1"
-	IsEqual(_Between, 1)
-THEN
-	GetDirection(_Attacker, CHARACTER:S_LLWEAPONEX_WeaponMaster_Trader_3cabc61d-6385-4ae3-b38f-c4f24a8d16b5, _Direction, _Dist)
-ELSE
-	GetForwardDirection(_Attacker, _Direction)
-ENDIF
-	GetPosition(_Attacker, _Pos)
-	Add(_Pos, _Direction)
-	Set(_EndPos, _Pos)
-	Multiply(_EndPos, 1.0)
-	TeleportTo(_Blocker, _EndPos)
-	Print(_Str, "[WeaponEx:VectorTeleport] Direction([1]) TeleporPos([2])", _Direction, _EndPos)
-	SetVar(_Blocker, "LeaderLog_Type", STRING:"Debug")
-	SetVar(_Blocker, "LeaderLog_Message", _Str)
-	CharacterEvent(_Blocker, "LeaderLog_Commands_Log")
-
-EVENT LLWEAPONEX_Debug_OverrideSkill
-VARS
-	CHARACTER:_Char
-ON
-	OnCharacterEvent(_Char, "LLWEAPONEX_Debug_OverrideSkill")
-ACTIONS
-	SetVar(_Char, "Combat_AI_CastSkill.Skill", SKILL:Target_LLWEAPONEX_Debug_SingleHandedAttack)
-	SetVar(_Char, "Combat_AI_CastSkill.TargetPos1", FLOAT3:null)
-	//SetVar(_Char, "Combat_AI_CastSkill.TargetPos2", FLOAT3:null)
-	SetVar(_Char, "Combat_AI_CastSkill.TargetCharacter1", CHARACTER:_Char)
-
-/*
-EVENT LLWEAPONEX_Debug_FetchTest
-VARS
-	CHARACTER:_Char
-	STATUS:_Status
-ON
-	FetchCharacterApplyStatusData(_Char, _Status)
-ACTIONS
-	SetVar(_Char, "LLWEAPONEX_Debug_FetchStatus", _Status)
-	CharacterEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
-	RETURN(null, _Status, null)
-*/
-
-/*
-EVENT LLWEAPONEX_Debug_VarTest
-VARS
-	CHARACTER:_Character
-	STRING:_Str
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Debug_VarTest")
-ACTIONS
-	Set(_Str, STRING:"We got the var!")
-
-EVENT LLWEAPONEX_Debug_VarTest2
-VARS
-	CHARACTER:_Char
-	STRING:_StrVar
-	STRING:_Message
-	FIXEDSTRING:_StrF
-ON
-	OnCharacterEvent(_Char, "LLWEAPONEX_Debug_VarTest")
-ACTIONS
-Set(_StrVar, "")
-IF "c1"
-	HasGlobalFlag("LLWEAPONEX__Main.LLWEAPONEX_Debug_VarTest.OnCharacterEvent.Str")
-THEN
-	Set(_StrVar, "True")
-ENDIF
-IF "c1"
-	HasGlobalFlag("LLWEAPONEX__Main.LLWEAPONEX_Debug_VarTest.Str")
-THEN
-	Set(_StrVar, "True")
-ENDIF
-IF "c1"
-	HasGlobalFlag("LLWEAPONEX_Debug_VarTest.OnCharacterEvent.Str")
-THEN
-	Set(_StrVar, "True")
-ENDIF
-IF "c1"
-	HasGlobalFlag("LLWEAPONEX_Debug_VarTest.Str")
-THEN
-	Set(_StrVar, "True")
-ENDIF
-
-IF "!c1"
-	IsEqual(_StrVar, "")
-THEN
-	Print(_Message, "<font size='30'>Var? [1]</font>", _StrVar)
-	Cast(_StrF, _Message)
-	StatusText(_Char, _StrF)
-ELSE
-	StatusText(_Char, FIXEDSTRING:"<font size='30'>Var Not found!</font>")
-ENDIF
-*/
-	
-EVENT LLWEAPONEX_Debug_KeepAliveTest
-VARS
-	CHARACTER:_Character
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Debug_KeepAliveTest")
-ACTIONS
-	CharacterApplyStatus(_Character, HASTED, -2, 1, _Character)
-
-EVENT LLWEAPONEX_Debug_ReviveRevenantTest
-VARS
-	CHARACTER:_Character
-ON
-	OnCharacterItemEvent(_Character, _, "LLWEAPONEX_Debug_ReviveRevenantTest")
-ACTIONS
-IF "c1"
-	CharacterIsDead(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, 1)
-THEN
-	CharacterResurrect(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, 50)
-ENDIF
-	CharacterApplyStatus(S_Lizards_Hero_Male_RevenantTest_c4017ac3-f894-4148-9791-7b942088123f, LLWEAPONEX_DEATH_SENTENCE, -1, 1, _Character)
-	
-EVENT LLWEAPONEX_Debug_AtmoTest_Day
-ON
-	OnItemEvent(_, "LLWEAPONEX_Debug_SetAtmosphereToDay")
-ACTIONS
-	SetAtmosphere("85e62279-a4fd-4573-a287-062f46c96fe1", "57690f2e-466a-4d38-a071-74b109cedef4")
-	
-EVENT LLWEAPONEX_Debug_AtmoTest_Night
-ON
-	OnItemEvent(_, "LLWEAPONEX_Debug_SetAtmosphereToNight")
-ACTIONS
-	SetAtmosphere("85e62279-a4fd-4573-a287-062f46c96fe1", "f2e42e22-7126-47cc-9ded-5770cc83507c")
-	
-EVENT LLWEAPONEX_Debug_MagicEffect
-VARS
-	CHARACTER:_Character
-ON
-	OnCharacterStartAttackObject(_,_,_,_Character)
-	OnCharacterStartAttackPosition(_,_,_Character)
-ACTIONS
-IF "c1"
-	CharacterHasStatus(_Character, LLWEAPONEX_GRIMOIRE_WIND_ACTIVE)
-THEN
-	CharacterPlayEffect(_Character, "RS3_FX_Skills_Voodoo_Cast_Aoe_Air_Hand_01", "Dummy_R_HandFX")
-	//RS3_FX_Skills_Totem_Cast_Target_Totem_Air_Hand_01
-ENDIF
-
-EVENT LLWEAPONEX_Debug_DestroyLoopFX
-VARS
-	CHARACTER:_Character
-	INT:_FX
-	INT64:_FXHandle
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_DestroyLoopFX")
-ACTIONS
-IF "c1"
-	GetVar(_FX, _Character, "LLWEAPONEX_FXHandleToDestroy")
-THEN
-	Cast(_FXHandle, _FX)
-	StopLoopEffect(_FXHandle, 1)
-ENDIF
-	SetVar(_Character, "LLWEAPONEX_FXHandleToDestroy", _FXHandle)	
-
-/*
-EVENT LLWEAPONEX_Rod_Equipped
-VARS
-	CHARACTER:_Character
-	ITEM:_Item
-	ITEM:_ShieldItem
-	SKILL:_Skill
-	STRING:_String
-	FIXEDSTRING:_StringF
-ON
-	OnItemEquipped(_Character, _Item)
-ACTIONS
-	StatusText(_Character, "Item equipped")
-IF "c1"
-	ItemGetSkillId(_Item, _Skill)
-THEN
-	Print(_String, "Item skill: [1]", _Skill)
-	Cast(_StringF, _String)
-	StatusText(_Character, _StringF)
-ENDIF
-
-IF "c1&(c2|c3|c4|c5|c6)"
-	ItemGetSkillId(_Item, _Skill)
-	IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Air)
-	IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Chaos)
-	IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Fire)
-	IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Poison)
-	IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Water)
-THEN
-	StatusText(_Character, "Rod equipped")
-	IF "c1&c2"
-		CharacterGetEquippedItem(_Character, "Shield", _ShieldItem)
-		IsEqual(_ShieldItem, _Item)
-	THEN
-		StatusText(_Character, "Rod in offhand")
-		IF "c1"
-			IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Air)
-		THEN
-			SetVar(_Item, "LLWEAPONEX_RodSkill", STRING:"Projectile_LLWEAPONEX_ShootRod_Air")
-			SetVar(_Item, "LLWEAPONEX_RodSkill_Offhand", STRING:"Projectile_LLWEAPONEX_ShootRod_Air_Offhand")
-		ELIF "c1"
-			IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Chaos)
-		THEN
-			SetVar(_Item, "LLWEAPONEX_RodSkill", STRING:"Projectile_LLWEAPONEX_ShootRod_Chaos")
-			SetVar(_Item, "LLWEAPONEX_RodSkill_Offhand", STRING:"Projectile_LLWEAPONEX_ShootRod_Chaos_Offhand")
-		ELIF "c1"
-			IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Fire)
-		THEN
-			SetVar(_Item, "LLWEAPONEX_RodSkill", STRING:"Projectile_LLWEAPONEX_ShootRod_Fire")
-			SetVar(_Item, "LLWEAPONEX_RodSkill_Offhand", STRING:"Projectile_LLWEAPONEX_ShootRod_Fire_Offhand")
-		ELIF "c1"
-			IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Poison)
-		THEN
-			SetVar(_Item, "LLWEAPONEX_RodSkill", STRING:"Projectile_LLWEAPONEX_ShootRod_Poison")
-			SetVar(_Item, "LLWEAPONEX_RodSkill_Offhand", STRING:"Projectile_LLWEAPONEX_ShootRod_Poison_Offhand")
-		ELIF "c1"
-			IsEqual(_Skill, Projectile_LLWEAPONEX_ShootRod_Water)
-		THEN
-			SetVar(_Item, "LLWEAPONEX_RodSkill", STRING:"Projectile_LLWEAPONEX_ShootRod_Water")
-			SetVar(_Item, "LLWEAPONEX_RodSkill_Offhand", STRING:"Projectile_LLWEAPONEX_ShootRod_Water_Offhand")
-		ENDIF
-		CharacterItemEvent(_Character, _Item, "LLWEAPONEX_Events_RodEquippedInOffhand")
-	ENDIF
-ENDIF
-*/
-
 EVENT LLWEAPONEX_ItemHasSkill
 VARS
 	CHARACTER:_Character
@@ -359,3 +122,55 @@ THEN
 	CharacterEvent(_Char, "LLWEAPONEX_WeaponTypeFound_Unarmed")
 ENDIF
 	CharacterEvent(_Char, "LLWEAPONEX_CheckWeaponType_Done")
+	
+EVENT LLWEAPONEX_Quest_Kevin_Throw_Start
+VARS
+	CHARACTER:_Char
+	FLOAT3:_TargetPos
+	FLOAT3:_Pos
+ON
+	OnCharacterFlagSet("LLWEAPONEX_Quest_ShootKevin_Start", _Char)
+ACTIONS
+	ClearFlag(_Char, "LLWEAPONEX_Quest_ShootKevin_Start")
+	GetForwardDirection(_Char, _TargetPos)
+	GetPosition(_Char, _Pos)
+	Multiply(_TargetPos, FLOAT:10.0)
+	Add(_TargetPos, _Pos)
+	ShootLocalProjectileAt(Projectile_LLWEAPONEX_Throw_Rock_Kevin_Quest_Effect_Shoot, _Char, {0.0;2.0;0.0}, _TargetPos, 1, _Char)
+
+EVENT LLWEAPONEX_Quest_Kevin_Throw_Return
+VARS
+	CHARACTER:_Char
+	FLOAT3:_TargetPos
+	FLOAT3:_Pos
+	FLOAT:_y
+ON
+	OnCharacterFlagSet("LLWEAPONEX_Quest_ShootKevin_Return", _Char)
+ACTIONS
+	ClearFlag(_Char, "LLWEAPONEX_Quest_ShootKevin_Return")
+	GetForwardDirection(_Char, _TargetPos)
+	GetPosition(_Char, _Pos)
+	Multiply(_TargetPos, FLOAT:10.0)
+	Add(_TargetPos, _Pos)
+IF "c1"
+	GetY(_TargetPos, _y)
+THEN
+	Add(_y, 2.0)
+	SetY(_TargetPos, _y)
+ENDIF
+	ShootWorldProjectileAt(Projectile_LLWEAPONEX_Throw_Rock_Kevin_Quest_Effect_Return, _Char, _TargetPos, _Char, 1)
+	
+EVENT LLWEAPONEX_Quest_Kevin_Throw_Failed
+VARS
+	CHARACTER:_Char
+	FLOAT3:_TargetPos
+	FLOAT3:_Pos
+ON
+	OnCharacterFlagSet("LLWEAPONEX_Quest_ShootKevin_Failed", _Char)
+ACTIONS
+	ClearFlag(_Char, "LLWEAPONEX_Quest_ShootKevin_Failed")
+	GetForwardDirection(_Char, _TargetPos)
+	GetPosition(_Char, _Pos)
+	Multiply(_TargetPos, FLOAT:2.0)
+	Add(_TargetPos, _Pos)
+	PlayEffectAt(_TargetPos, "RS3_FX_Environment_Water_Splash_Sea_02")

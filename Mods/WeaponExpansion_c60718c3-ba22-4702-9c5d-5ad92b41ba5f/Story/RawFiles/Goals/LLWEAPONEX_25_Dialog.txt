@@ -1,0 +1,39 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Dialog_InitSettings();
+KBSECTION
+PROC
+LLWEAPONEX_Dialog_InitSettings()
+THEN
+DB_GLO_Attribute_Check_AgainstLevel("LLWEAPONEX_Kevin_Beach",1,"Strength","Normal",2,2);
+DB_GLO_Attribute_Check_AgainstLevel("LLWEAPONEX_Kevin_Beach",2,"Finesse","Normal",2,2);
+//DB_GLO_Attribute_Check_AgainstLevel("LLWEAPONEX_Kevin_Beach",3,"Intelligence","Easy",3,1);
+
+IF
+ObjectFlagSet("LLWEAPONEX_Quest_HideKevin", _Item, _)
+THEN
+ApplyStatus(_Item, "LEADERLIB_NO_VISUAL", -1.0, 1, _Item);
+
+IF
+ObjectFlagSet("LLWEAPONEX_Quest_AddKevin", (CHARACTERGUID)_Char, _)
+THEN
+ItemTemplateAddTo("THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Normal_b3fc8995-8c7c-4de5-b465-e2573334cff7", _Char, 1);
+
+IF
+DialogEnded("LLWEAPONEX_Kevin_Beach", _Instance)
+AND
+DialogGetInvolvedPlayer(_Instance, 1, _Char)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_Quest_AddKevin", 1)
+AND
+DialogGetInvolvedNPC(_Instance, 1, _Kevin)
+AND
+ObjectIsItem((ITEMGUID)_Kevin, 1)
+THEN
+ItemRemove(_Kevin);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
