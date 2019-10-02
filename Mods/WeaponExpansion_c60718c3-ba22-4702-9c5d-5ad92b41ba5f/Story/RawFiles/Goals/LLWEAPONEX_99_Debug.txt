@@ -51,11 +51,13 @@ IF
 RegionStarted("TestLevel_LL_WeaponExpansion")
 THEN
 SysActivateGoal("LLWEAPONEX_99_Debug_TestLevel");
+SysActivateGoal("LLWEAPONEX_24_Campaign_Start");
 
 IF
 GameStarted("TestLevel_LL_WeaponExpansion", 1)
 THEN
 SysActivateGoal("LLWEAPONEX_99_Debug_TestLevel");
+SysActivateGoal("LLWEAPONEX_24_Campaign_Start");
 
 IF
 RegionStarted("FJ_FortJoy_Main")

@@ -1,0 +1,32 @@
+INIT
+	ITEM:__Me
+	EXTERN FIXEDSTRING:%LLWEAPONEX_Node_Dialog = ""
+	INT:%LLWEAPONEX_Node_AnimatingUse = 0
+EVENTS
+
+EVENT LLWEAPONEX_Node_Use
+VARS
+	CHARACTER:_Char
+ON
+	OnUseItem(_Char, __Me)
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Node_Dialog, "")
+THEN
+	CharacterItemEvent(_Char, __Me, "LLWEAPONEX_Node_OnUseItem")
+ELSE
+	SetVar(__Me, "ItemDialog", %LLWEAPONEX_Node_Dialog)
+	CharacterItemEvent(_Char,__Me,"GEN_StartItemDialog")
+ENDIF
+
+BEHAVIOUR
+
+REACTION LLWEAPONEX_Node_Animation,999
+USAGE ALL
+CHECK "c1&c2"
+	HasFlag(__Me, "LLWEAPONEX_Node_Activate")
+	IsEqual(%LLWEAPONEX_Node_AnimatingUse, 0)
+ACTIONS
+	ItemPlayAnimation("node_activate")
+	//ItemPlayAnimation("node_activate")
+	Set(%LLWEAPONEX_Node_AnimatingUse, 1)

@@ -1,0 +1,103 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION REGISTERING
+PROC
+LLWEAPONEX_Nodes_Register_EnemySpawner((STRING)_Region, (STRING)_UniqueTemplate, (CHARACTERGUID)_GlobalEnemy, (REAL)_x, (REAL)_y, (REAL)_z)
+THEN
+DB_LLWEAPONEX_Nodes_EnemySpawner(_Region, _GlobalEnemy, _UniqueTemplate, _x, _y, _z);
+//END_REGION
+
+//REGION ENEMY_NODE_SPAWNING
+IF
+GameStarted(_Region, _)
+AND
+NOT DB_LLWEAPONEX_Nodes_SpawnedRegion(_Region)
+THEN
+DB_LLWEAPONEX_Nodes_SpawnedRegion(_Region);
+LLWEAPONEX_Nodes_SpawnNodes(_Region);
+
+PROC
+LLWEAPONEX_Nodes_SpawnNodes((STRING)_Region)
+AND
+DB_LLWEAPONEX_Nodes_EnemySpawner(_Region, _Enemy, _UniqueTemplate, _x, _y, _z)
+AND
+NOT DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _, _Enemy, _UniqueTemplate)
+AND
+CreateItemTemplateAtPosition("PUZ_LLWEAPONEX_Crystal_Node_A_414de88f-2e12-4fb9-9712-7afa824d4e8e", _x, _y, _z, _Node)
+THEN
+SetVarObject(_Node, "LLWEAPONEX_Node_Target", _Enemy);
+DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate);
+
+IF
+DB_LLWEAPONEX_Nodes_EnemySpawner(_Region, _Enemy, _UniqueTemplate, _x, _y, _z)
+AND
+DB_CurrentLevel(_Region)
+AND
+DB_LLWEAPONEX_Nodes_SpawnedRegion(_Region)
+AND
+NOT DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _, _Enemy, _UniqueTemplate)
+AND
+CreateItemTemplateAtPosition("PUZ_LLWEAPONEX_Crystal_Node_A_414de88f-2e12-4fb9-9712-7afa824d4e8e", _x, _y, _z, _Node)
+THEN
+SetVarObject(_Node, "LLWEAPONEX_Node_Target", _Enemy);
+DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate);
+//END_REGION
+
+//REGION NODE_SUMMON_ENEMY
+IF
+CharacterItemEvent(_Char, _Node, "LLWEAPONEX_Node_SummonEnemy")
+AND
+DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate)
+THEN
+LLWEAPONEX_UniqueManager_Register_Owner(_Enemy, _UniqueTemplate, _Region);
+SetCanJoinCombat(_Enemy, 0);
+TeleportTo(_Enemy, _Node, "LLWEAPONEX_Node_TeleportedEnemy", 1, 0, 1);
+PlayAnimation(_Enemy, "spawn", "LLWEAPONEX_Node_EnemySpawned");
+ItemDestroy(_Node);
+
+IF
+StoryEvent((CHARACTERGUID)_Enemy, "LLWEAPONEX_Node_TeleportedEnemy")
+AND
+GetPosition(_Enemy, _x, _y, _z)
+THEN
+PlayEffectAtPosition("RS3_FX_Skills_Totem_Impact_Summon_Ancestral_01", _x, _y, _z);
+
+IF
+StoryEvent((CHARACTERGUID)_Enemy, "LLWEAPONEX_Node_EnemySpawned")
+THEN
+SetCanJoinCombat(_Enemy, 1);
+
+IF
+RegionEnded(_Region)
+AND
+DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate)
+THEN
+NOT DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate);
+//END_REGION
+
+//REGION NODE_DIALOG_START
+IF
+CharacterItemEvent(_Char, _Node, "LLWEAPONEX_Node_OnUseItem")
+AND
+QRY_SpeakerIsAvailable(_Char)
+THEN
+Proc_StartDialog(0, "LLWEAPONEX_GEN_Node_Use", _Node, _Char);
+
+IF
+DialogEnded("LLWEAPONEX_GEN_Node_Use", _Instance)
+AND
+DialogGetInvolvedPlayer(_Instance, 1, (CHARACTERGUID)_Char)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (ITEMGUID)_Node)
+AND
+ObjectGetFlag(_Node, "LLWEAPONEX_Node_Activate", 1)
+THEN
+CharacterItemSetEvent(_Char, _Node, "LLWEAPONEX_Node_SummonEnemy");
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

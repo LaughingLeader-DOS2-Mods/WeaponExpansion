@@ -1,0 +1,15 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Origins_UniqueWielders_InitSettings();
+KBSECTION
+//REGION REGISTERING
+PROC
+LLWEAPONEX_Origins_UniqueWielders_InitSettings()
+THEN
+LLWEAPONEX_Nodes_Register_EnemySpawner("FJ_FortJoy_Main", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, 38.694, 0.0, 18.444);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_24_Campaign_Start"
