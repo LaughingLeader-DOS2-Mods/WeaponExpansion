@@ -50,20 +50,17 @@ DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate);
 IF
 CharacterItemEvent(_Char, _Node, "LLWEAPONEX_Node_SummonEnemy")
 AND
+DB_LLWEAPONEX_Nodes_Temp_Activated(_Node, _Char)
+AND
 DB_LLWEAPONEX_Nodes_Temp_SpawnedNodes(_Region, _Node, _Enemy, _UniqueTemplate)
 THEN
+NOT DB_LLWEAPONEX_Nodes_Temp_Activated(_Node, _Char);
 LLWEAPONEX_UniqueManager_Register_Owner(_Enemy, _UniqueTemplate, _Region);
 SetCanJoinCombat(_Enemy, 0);
+PlayEffect(_Enemy, "RS3_FX_GP_ScriptedEvent_HannagPortal_01_Void_Summon");
 TeleportTo(_Enemy, _Node, "LLWEAPONEX_Node_TeleportedEnemy", 1, 0, 1);
 PlayAnimation(_Enemy, "spawn", "LLWEAPONEX_Node_EnemySpawned");
 ItemDestroy(_Node);
-
-IF
-StoryEvent((CHARACTERGUID)_Enemy, "LLWEAPONEX_Node_TeleportedEnemy")
-AND
-GetPosition(_Enemy, _x, _y, _z)
-THEN
-PlayEffectAtPosition("RS3_FX_Skills_Totem_Impact_Summon_Ancestral_01", _x, _y, _z);
 
 IF
 StoryEvent((CHARACTERGUID)_Enemy, "LLWEAPONEX_Node_EnemySpawned")
@@ -95,7 +92,31 @@ DialogGetInvolvedNPC(_Instance, 1, (ITEMGUID)_Node)
 AND
 ObjectGetFlag(_Node, "LLWEAPONEX_Node_Activate", 1)
 THEN
+ItemSetCanInteract(_Node, 0);
+DB_LLWEAPONEX_Nodes_Temp_Activated(_Node, _Char);
+PlayAnimation(_Node, "activate", "LLWEAPONEX_Node_PlayActivatedLoop");
+//END_REGION
+
+//REGION NODE_ANIMATIONS
+IF
+StoryEvent((ITEMGUID)_Node, "LLWEAPONEX_Node_PlayActivatedLoop")
+AND
+ObjectGetFlag(_Node, "LLWEAPONEX_Node_Activated", 0)
+AND
+DB_LLWEAPONEX_Nodes_Temp_Activated(_Node, _Char)
+THEN
+PlayAnimation(_Node, "activated_loop", "LLWEAPONEX_Node_PlayActivatedLoop");
+ObjectSetFlag(_Node, "LLWEAPONEX_Node_Activated", 0);
 CharacterItemSetEvent(_Char, _Node, "LLWEAPONEX_Node_SummonEnemy");
+//LeaderLib_Timers_StartCharacterItemTimer(_Char, _Node, 1500, "LLWEAPONEX_Timers_Node_Activated_SummonEnemy", "LLWEAPONEX_Node_SummonEnemy");
+
+//Keep spinning in dialog
+IF
+StoryEvent(_Node, "LLWEAPONEX_Node_PlayActivatedLoop")
+AND
+DB_DialogNPCs(_, _Node, _)
+THEN
+PlayAnimation(_Node, "activated_loop", "LLWEAPONEX_Node_PlayActivatedLoop");
 //END_REGION
 EXITSECTION
 

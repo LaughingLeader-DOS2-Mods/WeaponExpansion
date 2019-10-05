@@ -2,7 +2,20 @@ INIT
 	ITEM:__Me
 	EXTERN FIXEDSTRING:%LLWEAPONEX_Node_Dialog = ""
 	INT:%LLWEAPONEX_Node_AnimatingUse = 0
+	INT64:%LLWEAPONEX_Node_DecalLoopFX = null
+	//INT64:%LLWEAPONEX_Node_PortalLoopFX = null
 EVENTS
+
+EVENT LLWEAPONEX_Node_Destroying
+ON
+	OnItemDestroying(__Me)
+ACTIONS
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Node_DecalLoopFX, null)
+THEN
+	StopLoopEffect(%LLWEAPONEX_Node_DecalLoopFX)
+	Set(%LLWEAPONEX_Node_DecalLoopFX, null)
+ENDIF
 
 EVENT LLWEAPONEX_Node_Use
 VARS
@@ -18,15 +31,24 @@ ELSE
 	SetVar(__Me, "ItemDialog", %LLWEAPONEX_Node_Dialog)
 	CharacterItemEvent(_Char,__Me,"GEN_StartItemDialog")
 ENDIF
+	
+EVENT LLWEAPONEX_Node_Activate
+ON
+	OnItemFlagSet("LLWEAPONEX_Node_Activate", __Me)
+ACTIONS
+	PlayLoopEffectAt(%LLWEAPONEX_Node_DecalLoopFX, __Me, "LLWEAPONEX_FX_Crystal_Node_Summon_Root_01")
+	
+EVENT LLWEAPONEX_Node_Activate_Reset
+ON
+	OItemFlagCleared("LLWEAPONEX_Node_Activate", __Me)
+ACTIONS
+	ClearFlag(__Me, "LLWEAPONEX_Node_Activated")
 
 BEHAVIOUR
 
-REACTION LLWEAPONEX_Node_Animation,999
+REACTION LLWEAPONEX_Node_Animation2,999
 USAGE ALL
-CHECK "c1&c2"
-	HasFlag(__Me, "LLWEAPONEX_Node_Activate")
-	IsEqual(%LLWEAPONEX_Node_AnimatingUse, 0)
+CHECK "c1"
+	HasFlag(__Me, "LLWEAPONEX_Node_Activated")
 ACTIONS
-	ItemPlayAnimation("node_activate")
-	//ItemPlayAnimation("node_activate")
-	Set(%LLWEAPONEX_Node_AnimatingUse, 1)
+	ItemPlayAnimation("activated_loop")

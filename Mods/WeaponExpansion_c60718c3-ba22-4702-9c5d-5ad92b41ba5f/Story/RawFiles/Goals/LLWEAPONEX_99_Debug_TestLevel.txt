@@ -39,7 +39,7 @@ DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_001_270b72cd-90e5-480e-9677
 DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_002_52da4999-c2e9-42aa-9c07-209a456e3289, "INVISIBLE", 20000);
 //LLWEAPONEX_UniqueManager_Register_Owner(S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", "TestLevel_LL_WeaponExpansion");
 
-LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, 40.144, 0.0, 16.836);
+LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, 40.144, 0.0, 7.836);
 
 KBSECTION
 IF
