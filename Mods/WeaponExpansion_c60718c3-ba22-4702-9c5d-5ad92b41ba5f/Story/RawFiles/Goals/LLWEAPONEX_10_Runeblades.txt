@@ -445,6 +445,41 @@ DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade,
 
 //REGION SOUNDS
 IF
+CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _)
+AND
+DB_LLWEAPONEX_Runeblades_StatusSound("LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _Sound, _Delay)
+AND
+NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_, "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _)
+AND
+StringConcatenate("LLWEAPONEX_Timers_ResetStatusSound_", "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _TimerName)
+THEN
+PlaySound(_Character, _Sound);
+TimerLaunch(_TimerName, _Delay);
+DB_LLWEAPONEX_Runeblades_Temp_PreventSound((GUIDSTRING)_Character, "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _TimerName);
+
+IF
+ObjectFlagSet("LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", _Object, _)
+AND
+DB_LLWEAPONEX_Runeblades_FlagSound("LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", _Sound, _Delay)
+AND
+NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_, "LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", _)
+AND
+StringConcatenate("LLWEAPONEX_Timers_ResetStatusSound_", "LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", _TimerName)
+THEN
+ObjectClearFlag(_Object, "LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", 0);
+PlaySound(_Object, _Sound);
+TimerLaunch(_TimerName, _Delay);
+DB_LLWEAPONEX_Runeblades_Temp_PreventSound((GUIDSTRING)_Object, "LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", _TimerName);
+
+IF
+TimerFinished(_TimerName)
+AND
+DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Object, _String, _TimerName)
+THEN
+NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Object, _String, _TimerName);
+
+/*
+IF
 CharacterStatusApplied(_Character, _Status, _)
 AND
 DB_LLWEAPONEX_Runeblades_StatusSound(_Status, _Sound, _Delay)
@@ -456,7 +491,9 @@ THEN
 DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Status, _TimerName);
 PlaySound(_Character, _Sound);
 TimerLaunch(_TimerName, _Delay);
+*/
 
+/*
 IF
 ObjectFlagSet(_Flag, _Object, _)
 AND
@@ -476,13 +513,7 @@ AND
 DB_LLWEAPONEX_Runeblades_FlagSound(_Flag, _Sound, _Delay)
 THEN
 ObjectClearFlag(_Object, _Flag);
-
-IF
-TimerFinished(_TimerName)
-AND
-DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_String, _TimerName)
-THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_String, _TimerName);
+*/
 //END_REGION
 
 //REGION RUNE_BLOCKING
