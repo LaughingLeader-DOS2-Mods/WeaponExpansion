@@ -890,3 +890,6 @@ add name "Banner of Unruly Faith",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
 add name "Banner of the Pack",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A"
+add name "Anvil of the Maker",""

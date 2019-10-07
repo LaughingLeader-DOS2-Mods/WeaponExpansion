@@ -43,6 +43,13 @@ LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQ
 
 KBSECTION
 IF
+TextEventSet("llweap_gold")
+AND
+CharacterGetHostCharacter(_Obj)
+THEN
+ItemTemplateAddTo("LOOT_Gold_A_1c3c9c74-34a1-4685-989e-410dc080be6f", _Obj, 333, 1);
+
+IF
 GameStarted(_,1)
 AND
 DB_LLWEAPONEX_Debug_PreserveStatus(_Object, _Status, _Delay)

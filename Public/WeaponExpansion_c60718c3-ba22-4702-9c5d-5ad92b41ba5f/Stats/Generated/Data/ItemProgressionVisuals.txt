@@ -2238,3 +2238,9 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
 add levelgroup 0,0,"All"
 add rootgroup "59675259-8e78-48fd-acad-cf70c90bc909",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "85e2e75e-4333-425e-adc4-94474c3fc201",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A","",""

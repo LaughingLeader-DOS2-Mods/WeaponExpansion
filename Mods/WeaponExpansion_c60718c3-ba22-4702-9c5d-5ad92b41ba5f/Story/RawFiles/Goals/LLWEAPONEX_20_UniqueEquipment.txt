@@ -729,6 +729,23 @@ THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 700, "LLWEAPONEX_Timers_SlayHidden_Next", "LLWEAPONEX_SlayHidden_Next");
 //END_REGION
 
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0);
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+AND
+PartyGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0)
+THEN
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 500);
 EXITSECTION
 
 ENDEXITSECTION

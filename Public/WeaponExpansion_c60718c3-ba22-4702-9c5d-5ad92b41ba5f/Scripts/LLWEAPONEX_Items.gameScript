@@ -202,3 +202,49 @@ THEN
 	Set(_Result, LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS1)
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
+	
+EVENT LLWEAPONEX_AnvilMace_CreateTimerName
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Pos
+	STRING:_TimerName
+	FLOAT:_x
+	FLOAT:_y
+	FLOAT:_z
+	//FIXEDSTRING:_Debug
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_AnvilMace_CreateTimerName")
+ACTIONS
+IF "c1&!c2&c3&c4&c5"
+	GetVar(_Pos, _Char, "LLWEAPONEX_AnvilMace_AttackPosition")
+	IsEqual(_Pos, null)
+	GetX(_Pos, _x)
+	GetY(_Pos, _y)
+	GetZ(_Pos, _z)
+THEN
+	//Print(_TimerName, "LLWEAPONEX_Timers_AnvilMaceImpact_[1][2][3]", _x, _y, _z)
+	Print(_TimerName, "LLWEAPONEX_Timers_AnvilMaceImpact_[1]", _Pos)
+	SetVar(_Char, "LLWEAPONEX_AnvilMace_TimerName", _TimerName)
+	CharacterEvent(_Char, "LLWEAPONEX_AnvilMace_TimerNameCreated")
+	//Cast(_Debug, _TimerName)
+	//StatusText(_Char, _Debug)
+ENDIF	
+
+EVENT LLWEAPONEX_AnvilMace_Explode_Position
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Pos
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_AnvilMace_ExplodeAtPosition")
+ACTIONS
+IF "c1&c2&!c3"
+	CharacterGetStat(_LevelF, _Char, Level)
+	GetVar(_Pos, _Char, "LLWEAPONEX_AnvilMace_AttackPosition")
+	IsEqual(_Pos, null)
+THEN
+	Cast(_Level, _LevelF)
+	ExplodeAt(_Pos, Projectile_LLWEAPONEX_AnvilMace_GroundImpact, _Level, _Char)
+	//ShootWorldProjectile(Projectile_LLWEAPONEX_AnvilMace_GroundImpact, _Char, _Pos, {0;-1.0;0}, _Level)
+ENDIF

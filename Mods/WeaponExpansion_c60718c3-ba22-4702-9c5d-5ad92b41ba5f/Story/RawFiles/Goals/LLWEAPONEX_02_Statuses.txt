@@ -663,6 +663,18 @@ THEN
 ApplyStatus(_Char, "MUTED", 0.0, 1, _Source);
 ApplyStatus(_Char, "DISARMED", 0.0, 1, _Source);
 //END_REGION
+
+//REGION DIZZY
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DIZZY", _)
+THEN
+ObjectSetFlag(_Char, "PlayAnim_Loop_stilldrunk", 0);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_DIZZY", _)
+THEN
+CharacterSetAnimationOverride(_Char, "");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
