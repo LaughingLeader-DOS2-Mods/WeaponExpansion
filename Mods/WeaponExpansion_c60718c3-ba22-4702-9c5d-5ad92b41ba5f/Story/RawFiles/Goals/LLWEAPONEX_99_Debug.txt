@@ -11,20 +11,26 @@ DebugBreak("[LLWEAPONEX_99_Debug:LeaderLib_Debug_RegisterDebugPlayer] Adding Wea
 SysClear("DB_Origins", 1);
 DB_Origins((CHARACTERGUID)S_Player_LLWEAPONEX_WeaponMaster_2842603d-a263-4f65-a164-4a2391afe349);
 
-DB_OriginRecruitmentDialog((CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LLWEAPONEX_Debug_Recruitment");
-DB_OriginInPartyDialog((CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LLWEAPONEX_Debug_InParty");
-DB_OriginNPCAlignment((CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Generic_Companions_1");
-DB_GLO_PartyMembers_DefaultFaction((CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Good NPC");
-DB_OriginProfessionTags((CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,"SOLDIER");
-DB_OriginProfessionTags((CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,"OUTLAW");
-//DB_OriginRecruitmentDialog_Region("TestLevel_LL_WeaponExpansion", (CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "");
-//DB_OriginRecruitmentLocation_Region("TestLevel_LL_WeaponExpansion",(CHARACTERGUID)S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,(TRIGGERGUID)S_TUT_Origin_Sebille_Start_Point_14462739-fdbe-4704-aaf1-655e240f613c,"State_Tutorial");
+DB_OriginRecruitmentDialog((CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LLWEAPONEX_Debug_Recruitment");
+DB_OriginInPartyDialog((CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LLWEAPONEX_Debug_InParty");
+DB_OriginNPCAlignment((CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Generic_Companions_1");
+DB_GLO_PartyMembers_DefaultFaction((CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Good NPC");
+DB_OriginProfessionTags((CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,"SOLDIER");
+DB_OriginProfessionTags((CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,"OUTLAW");
+
+DB_OriginRecruitmentDialog(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_Debug_Recruitment");
+DB_OriginInPartyDialog(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_Debug_InParty");
+DB_OriginNPCAlignment(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Generic_Companions_2");
+DB_GLO_PartyMembers_DefaultFaction(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Good NPC");
+DB_OriginProfessionTags(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b,"BARBARIAN");
+//DB_OriginRecruitmentDialog_Region("TestLevel_LL_WeaponExpansion", (CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "");
+//DB_OriginRecruitmentLocation_Region("TestLevel_LL_WeaponExpansion",(CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,(TRIGGERGUID)S_TUT_Origin_Sebille_Start_Point_14462739-fdbe-4704-aaf1-655e240f613c,"State_Tutorial");
 
 /*
 PROC
 ProcSetupGenericOrigin((CHARACTERGUID)S_Player_LLWEAPONEX_WeaponMaster_2842603d-a263-4f65-a164-4a2391afe349)
 THEN
-PROC_GLO_PartyMembers_Add(S_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,S_Player_LLWEAPONEX_WeaponMaster_2842603d-a263-4f65-a164-4a2391afe349);
+PROC_GLO_PartyMembers_Add(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6,S_Player_LLWEAPONEX_WeaponMaster_2842603d-a263-4f65-a164-4a2391afe349);
 */
 
 IF
