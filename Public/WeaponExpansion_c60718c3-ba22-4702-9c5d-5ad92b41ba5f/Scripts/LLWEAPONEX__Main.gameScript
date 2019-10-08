@@ -22,6 +22,21 @@ INIT
 	USING LLWEAPONEX_Skills
 EVENTS
 
+EVENT LLWEAPONEX_Debug_ApplyStatusTest
+VARS
+	CHARACTER:_Char1
+	CHARACTER:_Char2
+	CHARACTER:_Target
+ON
+	OnCharacterCharacterEvent(_Char1, _Char2, "LLWEAPONEX_Debug_ApplyStatus")
+ACTIONS
+IF "c1"
+	GetVar(_Target, _Char1, "LLWEAPONEX_Debug_StatusTarget")
+THEN
+	CharacterApplyStatus(_Target, KNOCKED_DOWN, 1, 1, _Char1)
+ENDIF
+	CharacterApplyStatus(_Char2, KNOCKED_DOWN, 1, 1, _Char1)
+
 EVENT LLWEAPONEX_ItemHasSkill
 VARS
 	CHARACTER:_Character

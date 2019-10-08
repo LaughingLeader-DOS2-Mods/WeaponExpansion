@@ -573,6 +573,49 @@ CharacterGetHostCharacter(_Host)
 THEN
 TeleportTo(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1, _Host);
 */
+
+IF
+TextEventSet("llweap_applypresettest")
+AND
+GetTextEventParamString(1, _Preset)
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterIsControlled(_Player, 1)
+THEN
+CharacterApplyPreset(_Player, _Preset);
+
+IF
+TextEventSet("llweap_nulltest")
+AND
+CharacterGetHostCharacter(_Host)
+AND
+GetPosition(_Host, _x, _y, _z)
+//AND
+//TemporaryCharacterCreateAtPosition(_x, _y, _z, "Lizards_Hero_Male_fa12e21f-0a10-47dd-af46-ab2c9a53cf6d", 0, _Char)
+THEN
+TeleportTo(CHARACTERGUID_S_GLO_CharacterCreationDummy_002_361dacdc-4135-4d3f-a9a2-3cad46ca246a, _Host);
+SetVarObject(_Host, "LLWEAPONEX_Debug_StatusTarget", CHARACTERGUID_S_GLO_CharacterCreationDummy_002_361dacdc-4135-4d3f-a9a2-3cad46ca246a);
+CharacterFreeze(CHARACTERGUID_S_GLO_CharacterCreationDummy_002_361dacdc-4135-4d3f-a9a2-3cad46ca246a);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Host, CHARACTERGUID_S_GLO_CharacterCreationDummy_002_361dacdc-4135-4d3f-a9a2-3cad46ca246a, 580, "LLWEAPONEX_Timers_Debug_StartDialog", "LLWEAPONEX_Debug_StartDialog");
+LeaderLib_Timers_StartObjectTimer(CHARACTERGUID_S_GLO_CharacterCreationDummy_002_361dacdc-4135-4d3f-a9a2-3cad46ca246a, 600, "LLWEAPONEX_Timers_Debug_DeleteTempChar", "LLWEAPONEX_Debug_DeleteTempChar");
+
+IF
+CharacterCharacterEvent(_Host, _Char, "LLWEAPONEX_Debug_StartDialog")
+THEN
+//ItemTemplateAddTo("CONT_Humans_Backpack_Merchant_A_360e3e11-c7f8-4281-848a-596e37df884b", _Char, 1);
+//Proc_StartDialog(0, "LeaderLib_PresetMenu", _Char);
+CharacterUnfreeze(_Char);
+CharacterSetAnimationOverride(_Char,"");
+PlayAnimation(_Char,"knockdown_getup","");
+FadeToBlack(_Char,0.0,0,"Placeholder");
+StartVoiceBark("FTJ_VB_WakeUpOnBeachNoHat",_Char);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_DeleteTempChar")
+THEN
+RemoveTemporaryCharacter(_Char);
+
 IF
 TextEventSet("llweap_vectortp")
 THEN

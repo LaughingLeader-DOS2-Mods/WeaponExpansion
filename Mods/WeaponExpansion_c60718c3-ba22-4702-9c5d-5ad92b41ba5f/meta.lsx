@@ -8,6 +8,13 @@
                 <node id="Dependencies">
                     <children>
                         <node id="ModuleShortDesc">
+                            <attribute id="Folder" value="Character_Creation_Pack" type="30" />
+                            <attribute id="MD5" value="" type="23" />
+                            <attribute id="Name" value="Character_Creation_Pack" type="22" />
+                            <attribute id="UUID" value="b40e443e-badd-4727-82b3-f88a170c4db7" type="22" />
+                            <attribute id="Version" value="268435456" type="4" />
+                        </node>
+                        <node id="ModuleShortDesc">
                             <attribute id="Folder" value="LeaderLib_543d653f-446c-43d8-8916-54670ce24dd9" type="30" />
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="LeaderLib - Definitive Edition" type="22" />
@@ -34,7 +41,7 @@
                     <attribute id="MenuLevelName" value="" type="22" />
                     <attribute id="Name" value="Weapon Expansion" type="22" />
                     <attribute id="NumPlayers" value="2" type="1" />
-                    <attribute id="PhotoBooth" value="SYS_Icon_Generation_A" type="22" />
+                    <attribute id="PhotoBooth" value="SYS_NPC_Portrait_A" type="22" />
                     <attribute id="StartupLevelName" value="" type="22" />
                     <attribute id="Tags" value="" type="30" />
                     <attribute id="Type" value="Add-on" type="22" />

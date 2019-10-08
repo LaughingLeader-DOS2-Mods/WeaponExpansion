@@ -148,6 +148,7 @@ data "ForGameMaster" "No"
 data "InitiateCombat" "No"
 data "DisplayName" "Quest Debug Test"
 data "Icon" "unknown"
+data "StatusEffect" "RS3_FX_Items_Attachments_Skull_Fear_Aura_01_Loop:Dummy_FX"
 
 new entry "LLWEAPONEX_DEBUG_DAMAGE_TEST"
 type "StatusData"
