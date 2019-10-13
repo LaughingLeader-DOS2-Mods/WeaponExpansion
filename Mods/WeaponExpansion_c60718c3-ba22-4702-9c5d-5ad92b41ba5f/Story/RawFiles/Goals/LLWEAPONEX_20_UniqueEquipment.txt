@@ -392,18 +392,20 @@ PlayEffect(_Char, "LLWEAPONEX_FX_Skills_PowerPoleSmash_Cast_Pole_01", "Dummy_FX_
 //END_REGION
 
 //REGION SOUL_HARVESTER
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
+THEN
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
+THEN
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion", 500);
+
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_SOULHARVEST_REAP", (CHARACTERGUID)_Char)
 THEN
 DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target);
-
-IF
-CharacterDied(_Target)
-AND
-DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target);
-ApplyStatus(_Char, "LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY", 0.0, 0, _Char);
 
 IF
 SkillCast(_Char, "Cone_LLWEAPONEX_SoulHarvest_Reap", _, _)
@@ -417,6 +419,11 @@ AND
 DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target)
 THEN
 NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_SoulHarvest_ClearSFXDB")
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_PlayingSound(_Char);
 //END_REGION
 
 //REGION WARCHIEFS_HALBERD

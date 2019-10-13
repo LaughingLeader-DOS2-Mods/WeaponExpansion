@@ -1,0 +1,28 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterPrecogDying(_Target)
+AND
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_PlayingSound(_Char)
+THEN
+PlaySound(_Target, "LeaderLib_Madness_09");
+//Limit sound to one play
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_PlayingSound(_Char);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_SoulHarvest_ClearSFXDB", 250);
+
+IF
+CharacterDied(_Target)
+AND
+DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_SoulHarvest_ListenForDeath(_Char, _Target);
+ApplyStatus(_Char, "LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY", 0.0, 0, _Char);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

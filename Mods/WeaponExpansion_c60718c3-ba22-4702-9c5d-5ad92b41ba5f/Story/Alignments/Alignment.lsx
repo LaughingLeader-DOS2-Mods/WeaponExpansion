@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" />
+    <version major="3" minor="6" revision="4" build="1" />
+    <region id="AlignmentManager">
+        <node id="root">
+            <children>
+                <node id="Alignments">
+                    <children>
+                        <node id="Alignment">
+                            <attribute id="Object" value="LLWEAPONEX_WeaponMaster" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="Entities">
+                    <children>
+                        <node id="Entity">
+                            <attribute id="Alignment" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Name" value="LLWEAPONEX_WeaponMaster" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="Relations">
+                    <children>
+                        <node id="Relation">
+                            <attribute id="Source" value="Companion" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Evil" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Good" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Hero" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="Companion" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="Evil" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="Good" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="Hero" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="Neutral" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Neutral" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

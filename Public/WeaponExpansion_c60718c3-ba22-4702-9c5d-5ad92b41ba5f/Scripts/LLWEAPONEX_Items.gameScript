@@ -201,6 +201,11 @@ ELIF "!c1"
 THEN
 	Set(_Result, LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS1)
 ENDIF
+IF "!c1"
+	IsEqual(_Result, null)
+THEN
+	CharacterPlayEffect(_Target, "LLWEAPONEX_FX_Status_SoulHarvest_Impact_01", "Dummy_OverheadFX")
+ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 	
 EVENT LLWEAPONEX_AnvilMace_CreateTimerName

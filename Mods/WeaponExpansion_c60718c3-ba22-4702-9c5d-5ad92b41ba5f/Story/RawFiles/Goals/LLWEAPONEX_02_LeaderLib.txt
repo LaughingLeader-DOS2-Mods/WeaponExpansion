@@ -10,29 +10,11 @@ NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
 THEN
 DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
 LLWEAPONEX_LeaderLib_InitSettings();
-LLWEAPONEX_LeaderLib_RegisterToggleScripts();
 LLWEAPONEX_LeaderLib_InitHelperSettings();
 LLWEAPONEX_LeaderLib_InitTraderSettings();
 LLWEAPONEX_LeaderLib_InitDeltamods();
 LLWEAPONEX_LeaderLib_InitItemGrowth();
 LLWEAPONEX_LeaderLib_AddBlockedSkills();
-
-//REGION TOGGLE_SCRIPTS
-PROC
-LLWEAPONEX_LeaderLib_RegisterToggleScripts()
-THEN
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasterySystemActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_DemonGauntlet", "LLWEAPONEX_DemonGauntletEquipped");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_08_Quivers", "LLWEAPONEX_QuiverEquipped");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_OniGauntlet", "LLWEAPONEX_OniGauntletEquipped");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_Muramasa", "LLWEAPONEX_MuramasaEquipped");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_DemolitionBackpack", "LLWEAPONEX_DemolitionBackpackEquipped");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_11_Blunderbuss", "LLWEAPONEX_BlunderbussEquipped");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_12_ShieldCover", "LLWEAPONEX_ShieldCoverActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_AnvilMace", "LLWEAPONEX_AnvilMaceEquipped");
-//END_REGION
 
 //REGION PRESETS_MISC
 PROC
@@ -378,7 +360,6 @@ AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 10, 0)
 THEN
 DB_LeaderLib_RuneSlotDeltaMod("WeaponExpansion", "Boost_LLWEAPONEX_Grimoire_EmptyRuneSlot");
-LLWEAPONEX_LeaderLib_RegisterToggleScripts();
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
@@ -426,13 +407,6 @@ LeaderLib_Growth_Items_Clear_Template("WeaponExpansion.Rapier.Runeblade.Water2")
 LeaderLib_Growth_Items_Clear_Template("WeaponExpansion.Rapier.Runeblade.Water3");
 LLWEAPONEX_LeaderLib_InitDeltamods();
 LLWEAPONEX_System_ResetUniques();
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 16)
-THEN
-LLWEAPONEX_LeaderLib_RegisterToggleScripts();
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
