@@ -37,19 +37,19 @@ LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, 0);
 IF
 DB_Illusionist(_Player,_Mirror)
 AND
-DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Player, _Item, _Template)
 THEN
-LLWEAPONEX_Grimoire_StopAllEffects_All(_Character);
+LLWEAPONEX_Grimoire_StopAllEffects_All(_Player);
 
 //Respec finished, play effects again
 PROC
 Proc_HomesteadTeleportAfterMirror((CHARACTERGUID)_Player,(ITEMGUID)_Mirror,(TRIGGERGUID)_Trigger)
 AND
-DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Character, _Item, _Template)
+DB_LLWEAPONEX_Grimoire_ActiveGrimoire(_Player, _Item, _Template)
 AND
-CharacterIsInFightMode(_Player, _Unsheathed)
+HasActiveStatus(_Player, "UNSHEATHED", _Unsheathed)
 THEN
-LLWEAPONEX_Grimoire_QueueStateChange(_Character, _Item, _Template, _Unsheathed);
+LLWEAPONEX_Grimoire_QueueStateChange(_Player, _Item, _Template, _Unsheathed);
 //END_REGION
 
 //REGION SKILL_EVENTS

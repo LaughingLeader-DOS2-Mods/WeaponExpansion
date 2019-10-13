@@ -261,7 +261,7 @@ LLWEAPONEX_Grimoire_QRY_StateChangeLocked(_Char)
 THEN
 LLWEAPONEX_Grimoire_Internal_ClearStateQueue(_Char);
 DB_LLWEAPONEX_Grimoire_Temp_NextStateChange(_Char, _Item, _Template, _Unsheathed);
-LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Grimoire:QueueStateChange] State change is locked. Queuing up next state. Unsheathed [",_Unsheathed,"]");
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Grimoire:QueueStateChange] State change is locked. Queuing up next state. Next state LLWEAPONEX_Grimoire_Internal_ClearStateQueue [",_Unsheathed,"]");
 
 PROC
 LLWEAPONEX_Grimoire_QueueStateChange((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template, 1)
@@ -303,11 +303,11 @@ LLWEAPONEX_Grimoire_Internal_ProcessStateQueue((CHARACTERGUID)_Char)
 AND
 DB_LLWEAPONEX_Grimoire_Temp_NextStateChange(_Char, _Item, _Template, _LastUnsheathed)
 AND
-//HasActiveStatus(_Char, "UNSHEATHED", _Unsheathed)
-CharacterIsInFightMode(_Char, _Unsheathed)
+HasActiveStatus(_Char, "UNSHEATHED", _Unsheathed)
+//CharacterIsInFightMode(_Char, _Unsheathed) // Fight mode returns unsheathed if you spam Tab twice
 THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_NextStateChange(_Char, _Item, _Template, _LastUnsheathed);
-LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Grimoire:ProcessStateQueue] Queuing next grimoire state: Unsheathed [",_Unsheathed,"]");
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Grimoire:ProcessStateQueue] Queuing next grimoire state: Unsheathed [",_Unsheathed,"] Next [",_LastUnsheathed,"]");
 LLWEAPONEX_Grimoire_QueueStateChange(_Char, _Item, _Template, _Unsheathed);
 
 //Grimoire swapping
@@ -446,6 +446,7 @@ LLWEAPONEX_Grimoire_OnGrimoireUnsheathed((CHARACTERGUID)_Char, (ITEMGUID)_Item, 
 THEN
 ProcObjectTimerCancel(_Char, "LLWEAPONEX_Timers_Grimoire_StopSheathedFXAfterDelay");
 ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Grimoire_StopSheathedFXAfterDelay", 33);
+//PlaySound(_Char, "LeaderLib_Tome_Open_01");
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Grimoire_StopSheathedFXAfterDelay")
@@ -600,7 +601,7 @@ THEN
 NOT DB_LLWEAPONEX_Grimoire_Temp_ActiveFX(_Char, _Item, _Template, _Effect, _EffectID, 1);
 NOT DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Char, _EffectID);
 //ProcObjectTimerCancel(_Char, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX");
-ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX", 1670);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX", 1650);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Grimoires_StartSheathedFX")
