@@ -8,14 +8,14 @@
                 <node id="Alignments">
                     <children>
                         <node id="Alignment">
-                            <attribute id="Object" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Object" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                         </node>
                     </children>
                 </node>
                 <node id="Entities">
                     <children>
                         <node id="Entity">
-                            <attribute id="Alignment" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Alignment" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Name" value="LLWEAPONEX_WeaponMaster" type="22" />
                         </node>
                     </children>
