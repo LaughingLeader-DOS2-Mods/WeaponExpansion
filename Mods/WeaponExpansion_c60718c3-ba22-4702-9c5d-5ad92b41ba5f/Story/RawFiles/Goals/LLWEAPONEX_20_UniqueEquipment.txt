@@ -502,6 +502,15 @@ GetInventoryOwner(_OtherHalberd, _Halberd)
 THEN
 LeaderLog_Log("ERROR", "[LLWEAPONEX_20_UniqueEquipment:LLWEAPONEX_WarChiefSwap_ToInventory] Something went wrong! Other haldberd is still within the one we're switching away from!");
 
+IF
+CharacterUsedSkill(_Char, "Rush_LLWEAPONEX_Warchief_Whirlwind", _, _)
+THEN
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Uniques_WarchiefWhirlwind_ApplyDamage", 730);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Uniques_WarchiefWhirlwind_ApplyDamage")
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_WARCHIEF_WHIRLWIND_DAMAGE", 0.0, 0, _Char);
 //END_REGION
 
 //REGION WARCHIEF_TRANSFORMED
@@ -736,6 +745,7 @@ THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 700, "LLWEAPONEX_Timers_SlayHidden_Next", "LLWEAPONEX_SlayHidden_Next");
 //END_REGION
 
+//REGION ANVIL_MACE
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
 THEN
@@ -753,6 +763,54 @@ AND
 PartyGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0)
 THEN
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 500);
+
+/*
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Rush_LLWEAPONEX_AnvilMace_RushSmash", _, _)
+THEN
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Rush_LLWEAPONEX_AnvilMace_RushSmash", _, _)
+AND
+NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _, _, _)
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
+*/
+
+IF
+SkillCast(_Char, "Rush_LLWEAPONEX_AnvilMace_RushSmash", _, _)
+AND
+GetPosition(_Char, _x, _y, _z)
+THEN
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_RushSmash_CheckPos")
+AND
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z)
+AND
+GetDistanceToPosition(_Char, _x, _y, _z, _Dist)
+AND
+_Dist <= 0.5
+THEN
+NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
+SetStoryEvent(_Char, "LLWEAPONEX_AnvilMace_RushSmash_Explode");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_RushSmash_CheckPos")
+AND
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z)
+AND
+GetPosition(_Char, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _tx, _ty, _tz);
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

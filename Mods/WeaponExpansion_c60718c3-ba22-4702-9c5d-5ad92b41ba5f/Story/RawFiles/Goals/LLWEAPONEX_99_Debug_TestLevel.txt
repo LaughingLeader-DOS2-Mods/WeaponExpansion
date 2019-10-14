@@ -41,6 +41,8 @@ DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_002_52da4999-c2e9-42
 
 LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, 40.144, 0.0, 7.836);
 
+GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
+
 KBSECTION
 IF
 TextEventSet("llweap_gold")
