@@ -42,6 +42,7 @@ DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_002_52da4999-c2e9-42
 LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, 40.144, 0.0, 7.836);
 
 GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
+SysActivateGoal("LeaderLib_20_DebugLevel");
 
 KBSECTION
 IF
@@ -1756,6 +1757,60 @@ THEN
 //CharacterFlushQueue(_Char);
 CharacterUseSkill(_Char, "Shout_InspireStart", _Char, 0, 1, 1);
 */
+
+
+
+IF
+SkillCast(_Char, "Shout_InspireStart", _, _)
+AND
+NOT DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, _)
+THEN
+DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, 5);
+LeaderLib_Timers_StartObjectTimer(_Char, 200, "LLWEAPONEX_Timers_Debug_InspireCast", "LLWEAPONEX_Timers_Debug_InspireCast");
+
+IF
+CharacterUsedSkill(_Char, "Shout_InspireStart", _, _)
+AND
+DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, _Casts)
+AND
+_Casts > 0
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 200, "LLWEAPONEX_Timers_Debug_InspireCast", "LLWEAPONEX_Timers_Debug_InspireCast");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Debug_InspireCast")
+AND
+DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, _Casts)
+AND
+_Casts > 0
+AND
+IntegerSubtract(_Casts, 1, _Next)
+AND
+GetPosition(_Char, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, _Casts);
+DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, _Next);
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:InspireTest] Casts left: (", _Next, ")");
+CharacterPurgeQueue(_Char);
+CharacterMoveToPosition(_Char, _x, _y, _z, 1, "LLWEAPONEX_Debug_CastNextInspire");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_CastNextInspire")
+AND
+DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, 4)
+THEN
+CharacterUseSkill(_Char, "Shout_InspireStart", _Char, 1, 1, 1);
+
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_CastNextInspire")
+AND
+DB_LLWEAPONEX_Debug_Temp_ShoutTest(_Char, _Next)
+AND
+_Next < 4
+THEN
+//CharacterUseSkill(_Char, "Shout_InspireStart", _Char, 1, 1, 1);
+LeaderLib_Timers_StartObjectTimer(_Char, 200, "LLWEAPONEX_Timers_Debug_InspireCast", "LLWEAPONEX_Timers_Debug_InspireCast");
 EXITSECTION
 
 ENDEXITSECTION
