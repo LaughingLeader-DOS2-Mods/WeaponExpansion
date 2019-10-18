@@ -780,12 +780,12 @@ LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_AnvilMaceEquipped", 
 
 /*
 IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Rush_LLWEAPONEX_AnvilMace_RushSmash", _, _)
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
 THEN
 DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
 
 IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Rush_LLWEAPONEX_AnvilMace_RushSmash", _, _)
+CharacterUsedSkillOnTarget(_Char, _Target, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
 AND
 NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _, _, _)
 AND
@@ -795,12 +795,12 @@ DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
 */
 
 IF
-SkillCast(_Char, "Rush_LLWEAPONEX_AnvilMace_RushSmash", _, _)
+SkillCast(_Char, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
 AND
 GetPosition(_Char, _x, _y, _z)
 THEN
 DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
-LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
+LeaderLib_Timers_StartObjectTimer(_Char, 125, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_RushSmash_CheckPos")
@@ -809,7 +809,7 @@ DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z)
 AND
 GetDistanceToPosition(_Char, _x, _y, _z, _Dist)
 AND
-_Dist <= 0.5
+_Dist <= 0.1
 THEN
 NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
 SetStoryEvent(_Char, "LLWEAPONEX_AnvilMace_RushSmash_Explode");
@@ -824,6 +824,103 @@ THEN
 NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
 DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _tx, _ty, _tz);
 LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
+//END_REGION
+
+//REGION ANVILMACE_SLAM_KNOCKUP
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP", (CHARACTERGUID)_Caster)
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+LLWEAPONEX_Uniques_AnvilMace_SpawnSkillPlatform(_Target, _Caster);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP", (CHARACTERGUID)_Caster)
+THEN
+PlayAnimation(_Target, "knockdown_fall", "LLWEAPONEX_Uniques_AnvilMace_GroundSlam_PlayKnockdownLoop");
+LLWEAPONEX_Uniques_AnvilMace_SpawnSkillPlatform(_Target, _Caster);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Uniques_AnvilMace_GroundSlam_PlayKnockdownLoop")
+THEN
+CharacterSetStill(_Char);
+CharacterSetAnimationOverride(_Char, "knockdown_loop");
+
+PROC
+LLWEAPONEX_Uniques_AnvilMace_SpawnSkillPlatform((GUIDSTRING)_Target, (CHARACTERGUID)_Caster)
+AND
+NOT DB_LLWEAPONEX_Uniques_AnvilMace_Temp_GroundSlamTarget(_Target, _Caster, _)
+AND
+LeaderLib_Random_QRY(250, 800)
+AND
+DB_LeaderLib_Random(_HeightInt)
+AND
+Real(_HeightInt, _HeightR)
+AND
+RealDivide(_HeightR, 100.0, _Height)
+AND
+Integer(_Height, _FallDamageInt)
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+NOT DB_LeaderLib_Random(_HeightInt);
+PlayScaledEffectAtPosition("LLWEAPONEX_FX_Status_Launched_Apply_Root_01", 0.25, _x, _y, _z);
+//ApplyStatus(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP_DISABLED", 18.0, 1, _Caster);
+DB_LLWEAPONEX_Uniques_AnvilMace_Temp_GroundSlamTarget(_Target, _Caster, _FallDamageInt);
+LeaderLib_Platforms_Launch(_Target, "LLWEAPONEX_AnvilMace_GroundSlam_Launch", _Height);
+
+PROC
+LeaderLib_Platforms_OnLaunchFinished((GUIDSTRING)_Target, "LLWEAPONEX_AnvilMace_GroundSlam_Launch")
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+THEN
+LeaderLib_Hacks_ClearAnimationOverride(_Target, "LLWEAPONEX_AnvilMace_GroundSlam_GetupAnim");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_GroundSlam_GetupAnim")
+THEN
+PlayAnimation(_Char,"knockdown_getup", "");
+
+PROC
+LeaderLib_Platforms_OnLaunchFinished((GUIDSTRING)_Target, "LLWEAPONEX_AnvilMace_GroundSlam_Launch")
+AND
+DB_LLWEAPONEX_Uniques_AnvilMace_Temp_GroundSlamTarget(_Target, _Caster, _FallDamageInt)
+AND
+IntegerSubtract(_FallDamageInt, 1, _FallDamage)
+THEN
+NOT DB_LLWEAPONEX_Uniques_AnvilMace_Temp_GroundSlamTarget(_Target, _Caster, _FallDamageInt);
+RemoveStatus(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP_DISABLED");
+LLWEAPONEX_Uniques_AnvilMace_GroundSlam_ApplyFallDamage(_Target, _Caster, _FallDamage);
+
+PROC
+LLWEAPONEX_Uniques_AnvilMace_GroundSlam_ApplyFallDamage((GUIDSTRING)_Target, (CHARACTERGUID)_Caster, 0)
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+PlayScaledEffectAtPosition("LLWEAPONEX_FX_Skills_AnvilMace_GroundSmash_Land_Impact_01", 0.15, _x, _y, _z);
+ApplyStatus(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP_FALLDAMAGE1", 0.0, 0, _Caster);
+
+PROC
+LLWEAPONEX_Uniques_AnvilMace_GroundSlam_ApplyFallDamage((GUIDSTRING)_Target, (CHARACTERGUID)_Caster, (INTEGER)_FallDamage)
+AND
+_FallDamage > 0
+AND
+_FallDamage <= 7
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+PlayScaledEffectAtPosition("LLWEAPONEX_FX_Skills_AnvilMace_GroundSmash_Land_Impact_01", 0.5, _x, _y, _z);
+ApplyStatus(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP_FALLDAMAGE2", 0.0, 0, _Caster);
+
+PROC
+LLWEAPONEX_Uniques_AnvilMace_GroundSlam_ApplyFallDamage((GUIDSTRING)_Target, (CHARACTERGUID)_Caster, (INTEGER)_FallDamage)
+AND
+_FallDamage > 7
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+PlayScaledEffectAtPosition("LLWEAPONEX_FX_Skills_AnvilMace_GroundSmash_Land_Impact_01", 0.75, _x, _y, _z);
+ApplyStatus(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP_FALLDAMAGE3", 0.0, 0, _Caster);
 //END_REGION
 EXITSECTION
 

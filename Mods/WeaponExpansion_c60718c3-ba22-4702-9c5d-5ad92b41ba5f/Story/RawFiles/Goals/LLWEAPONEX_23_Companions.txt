@@ -2,6 +2,9 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 
+DB_Dialogs(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LeaderLib_Debug_RecruitCharacter");
+DB_Dialogs(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LeaderLib_Debug_RecruitCharacter");
+
 KBSECTION
 IF
 StoryEvent(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LeaderLib_StoryEvents_Initialize")
@@ -12,6 +15,7 @@ GetPosition(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, _x,
 AND
 CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201", _x, _y, _z, _Hammer)
 THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_Companions:LeaderLib_StoryEvents_Initialize] Spawning and equipping the anvil mace to Harken.");
 CharacterEquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, _Hammer);
 
 IF

@@ -279,7 +279,7 @@ SkillCast(_Char, "Projectile_LLWEAPONEX_ArmCannon_Shoot", _, _)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
-LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", -1, 0);
+LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", -1);
 LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 
 IF

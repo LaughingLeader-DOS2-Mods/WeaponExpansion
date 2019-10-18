@@ -19,5 +19,5 @@ Rush_LLWEAPONEX_Warchief_Whirlwind_DisplayName	Warchief's Whirlwind
 Rush_LLWEAPONEX_Warchief_Whirlwind_Description	Spin forward with the <font color='#c5a65a'>Warchief's Halberd</font>, hitting enemies in a [1] radius for [2].
 Zone_LLWEAPONEX_PowerPoleSmash_DisplayName	<font color='#EA2E2E'>Extend & Smash</font>
 Zone_LLWEAPONEX_PowerPoleSmash_Description	Extend the <font color='#C7A758'>Power Pole</font> to great lengths, smashing it down upon everything infront of you for [1].<br><font color='#FF3758'>Targets hit become Dizzy, causing actions to take 1 additional AP.</font>
-Rush_LLWEAPONEX_AnvilMace_RushSmash_DisplayName	<font color='#FFDD00'>Sunder the Mountain</font>
-Rush_LLWEAPONEX_AnvilMace_RushSmash_Description	Leap forward and slam the almighty <font color='#c5a65a'>Anvilmar</font> into the ground, cracking the earth for [1] in a [2] radius and knocking targets up.<br>Targets landing take [3] to [4] damage upon landing, depending on the launch height.
+Rush_LLWEAPONEX_AnvilMace_GroundSmash_DisplayName	<font color='#FFDD00'>Sunder the Mountain</font>
+Rush_LLWEAPONEX_AnvilMace_GroundSmash_Description	Leap forward and slam the almighty <font color='#c5a65a'>Anvilmar</font> into the ground, cracking the earth for [1] in a [2] radius and knocking targets up.<br>Targets landing take [3] to [4] damage upon landing, depending on the launch height.
