@@ -2244,3 +2244,9 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A"
 add levelgroup 0,0,"All"
 add rootgroup "85e2e75e-4333-425e-adc4-94474c3fc201",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "dda1182e-63e3-4a7a-8855-5295fa1e67cb",""
+add namegroup "EMPTY","",""

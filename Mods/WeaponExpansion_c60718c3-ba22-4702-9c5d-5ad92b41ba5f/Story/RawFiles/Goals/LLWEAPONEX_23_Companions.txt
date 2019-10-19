@@ -29,6 +29,16 @@ CharacterEquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_Companions:Initialize] Equipped Harken with the anvil hammer.");
 
 IF
+CharacterStatusApplied(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "UNSHEATHED", _)
+THEN
+ApplyStatus(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_TATTOOS_MAGIC_UPPERBODY_A", -1.0, 0, S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b);
+
+IF
+CharacterStatusRemoved(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "UNSHEATHED", _)
+THEN
+RemoveStatus(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_TATTOOS_MAGIC_UPPERBODY_A");
+
+IF
 StoryEvent(_Char, "LeaderLib_StoryEvents_OnInit")
 AND
 String(_Char, _Str)
