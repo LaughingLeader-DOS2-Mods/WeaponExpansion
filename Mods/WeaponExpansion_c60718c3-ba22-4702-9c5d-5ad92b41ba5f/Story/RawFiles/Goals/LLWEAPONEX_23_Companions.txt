@@ -6,37 +6,59 @@ DB_Dialogs(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Lea
 DB_Dialogs(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LeaderLib_Debug_RecruitCharacter");
 
 KBSECTION
-IF
-StoryEvent(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LeaderLib_StoryEvents_Initialize")
+PROC
+LLWEAPONEX_Companions_EquipItem((CHARACTERGUID)_Char, (STRING)_Template, (INTEGER)_Lock)
 AND
-CharacterGetItemTemplateCount(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201", 0)
+NOT DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template)
 AND
-GetPosition(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, _x, _y, _z)
+CharacterGetItemTemplateCount(_Char, _Template, 0)
 AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201", _x, _y, _z, _Hammer)
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition(_Template, _x, _y, _z, _Item)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_Companions:LeaderLib_StoryEvents_Initialize] Spawning and equipping the anvil mace to Harken.");
-CharacterEquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, _Hammer);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_Companions:Companions_EquipItem] Spawning and equipping (",_Template,")) to character.");
+CharacterEquipItem(_Char, _Item);
+ItemLockUnEquip(_Item, _Lock);
+DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template);
+
+PROC
+LLWEAPONEX_Companions_EquipItem((CHARACTERGUID)_Char, (STRING)_Template, (INTEGER)_Lock)
+AND
+NOT DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template)
+AND
+GetItemForItemTemplateInPartyInventory(_Char, _Template, _Item)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_Companions:Companions_EquipItem] Equipping (",_Template,")) to character.");
+CharacterEquipItem(_Char, _Item);
+ItemLockUnEquip(_Item, _Lock);
+DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template);
+
+PROC
+LLWEAPONEX_Companions_EquipItem((CHARACTERGUID)_Char, (STRING)_Template, (INTEGER)_Lock)
+AND
+DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template)
+THEN
+NOT DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template);
 
 IF
-StoryEvent(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LeaderLib_StoryEvents_Initialize")
-AND
-GetItemForItemTemplateInInventory(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201", _Hammer)
-AND
-NOT CharacterGetEquippedWeapon(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, _Hammer)
+StoryEvent(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LeaderLib_StoryEvents_OnInit")
 THEN
-CharacterEquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, _Hammer);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_Companions:Initialize] Equipped Harken with the anvil hammer.");
+LLWEAPONEX_Companions_EquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201", 0);
+//LLWEAPONEX_Companions_EquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_291f1cae-d46b-4795-aa27-23c1526bb7e1", 1);
+LLWEAPONEX_Uniques_Tattoos_Setup(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_NPC_c42fc70e-540b-4b3b-8c64-f48cead9f762", "EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_dda1182e-63e3-4a7a-8855-5295fa1e67cb", "Breast", 1);
 
 IF
 CharacterStatusApplied(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "UNSHEATHED", _)
 THEN
-ApplyStatus(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_TATTOOS_MAGIC_UPPERBODY_A", -1.0, 0, S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b);
+LLWEAPONEX_Uniques_SwapTattoos(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Breast", 1, 1);
+//ApplyStatus(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_TATTOOS_MAGIC_UPPERBODY_A", -1.0, 0, S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b);
 
 IF
 CharacterStatusRemoved(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "UNSHEATHED", _)
 THEN
-RemoveStatus(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_TATTOOS_MAGIC_UPPERBODY_A");
+//RemoveStatus(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LLWEAPONEX_TATTOOS_MAGIC_UPPERBODY_A");
+LLWEAPONEX_Uniques_SwapTattoos(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Breast", 0, 1);
 
 IF
 StoryEvent(_Char, "LeaderLib_StoryEvents_OnInit")

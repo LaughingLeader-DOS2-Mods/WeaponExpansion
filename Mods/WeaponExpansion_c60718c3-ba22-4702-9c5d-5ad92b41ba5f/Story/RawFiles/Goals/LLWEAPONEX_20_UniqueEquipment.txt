@@ -795,12 +795,43 @@ DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
 */
 
 IF
-SkillCast(_Char, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
+CharacterUsedSkill(_Char, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
 AND
 GetPosition(_Char, _x, _y, _z)
 THEN
 DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
+
+IF
+SkillCast(_Char, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
+THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 125, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
+
+//Didn't rush far enough
+IF
+SkillCast(_Char, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
+AND
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z)
+AND
+GetDistanceToPosition(_Char, _x, _y, _z, _Dist)
+AND
+_Dist <= 5.0
+AND
+LeaderLib_Math_QRY_ScaleToRange(_Dist, 5.0, 0.0, 500.0, 680.0)
+AND
+DB_LeaderLib_Math_ScaleToRange(_Dist, _Result, _MinValRange, _MaxValRange, _MinScaleRange, _MaxScaleRange)
+AND
+Integer(_Result, _Delay)
+AND
+IntegertoString(_Delay, _DelayStr)
+AND
+GetPosition(_Char, _tx, _ty, _tz)
+THEN
+NOT DB_LeaderLib_Math_ScaleToRange(_Dist, _Result, _MinValRange, _MaxValRange, _MinScaleRange, _MaxScaleRange);
+NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
+DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _tx, _ty, _tz);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:AnvilMace_GroundSmash] Delaying ground explosion for (",_DelayStr,")");
+//Long enough for anim to finish
+LeaderLib_Timers_StartObjectTimer(_Char, _Delay, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_RushSmash_CheckPos")
@@ -827,6 +858,34 @@ LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_AnvilMace_RushSm
 //END_REGION
 
 //REGION ANVILMACE_SLAM_KNOCKUP
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
+THEN
+DB_LLWEAPONEX_AnvilMace_Temp_GroundSmashTarget(_Char, _x, _y, _z);
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
+AND
+NOT DB_LLWEAPONEX_AnvilMace_Temp_GroundSmashTarget(_Char, _, _, _)
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+DB_LLWEAPONEX_AnvilMace_Temp_GroundSmashTarget(_Char, _x, _y, _z);
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
+THEN
+LeaderLib_Helper_ClearActionQueue(_Char);
+LeaderLib_Timers_StartObjectTimer(_Char, 1, "LLWEAPONEX_Timers_Skills_AnvilGroundSmash_Cast", "LLWEAPONEX_Skills_AnvilGroundSmash_Cast");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Skills_AnvilGroundSmash_Cast")
+AND
+DB_LLWEAPONEX_AnvilMace_Temp_GroundSmashTarget(_Char, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_AnvilMace_Temp_GroundSmashTarget(_Char, _x, _y, _z);
+CharacterUseSkillAtPosition(_Char, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _x, _y, _z, 0, 1);
+
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP", (CHARACTERGUID)_Caster)
 AND
@@ -921,6 +980,202 @@ GetPosition(_Target, _x, _y, _z)
 THEN
 PlayScaledEffectAtPosition("LLWEAPONEX_FX_Skills_AnvilMace_GroundSmash_Land_Impact_01", 0.75, _x, _y, _z);
 ApplyStatus(_Target, "LLWEAPONEX_ANVILMACE_KNOCKUP_FALLDAMAGE3", 0.0, 0, _Caster);
+//END_REGION
+
+//REGION TATTOOS
+//"EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_dda1182e-63e3-4a7a-8855-5295fa1e67cb"
+//"EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_291f1cae-d46b-4795-aa27-23c1526bb7e1"
+
+PROC
+LLWEAPONEX_Uniques_Tattoos_Setup((CHARACTERGUID)_Char, (STRING)_NormalTemplate, (STRING)_MagicTemplate, (STRING)_Slot, (INTEGER)_Lock)
+THEN
+DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, _Slot);
+
+PROC
+LLWEAPONEX_Uniques_Tattoos_Setup((CHARACTERGUID)_Char, (STRING)_NormalTemplate, (STRING)_MagicTemplate, (STRING)_Slot, (INTEGER)_Lock)
+AND
+CharacterGetEquippedItem(_Char, "Breast", (ITEMGUID)_Tattoos)
+AND
+GetTemplate(_Tattoos, _NormalTemplate)
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+AND
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition(_MagicTemplate, _x, _y, _z, _MagicTattoos)
+THEN
+ItemLockUnEquip(_Tattoos, _Lock);
+SetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", _MagicTattoos);
+SetVarObject(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion", _Tattoos);
+ItemToInventory(_MagicTattoos, _Tattoos, 1, 0, 0);
+
+QRY
+LLWEAPONEX_Uniques_QRY_Tattoos_FindUnlinked((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_OtherTemplate)
+THEN
+LLWEAPONEX_Uniques_Tattoos_FindUnlinked(_Char, _Item, _OtherTemplate);
+
+PROC
+LLWEAPONEX_Uniques_Tattoos_FindUnlinked((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_OtherTemplate)
+AND
+DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Item, _Template)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Item, _Template);
+
+PROC
+LLWEAPONEX_Uniques_Tattoos_FindUnlinked((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_OtherTemplate)
+AND
+NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_Item, "LLWEAPONEX_Tattoos_OtherVersion")
+THEN
+DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Item, _OtherTemplate);
+InventoryLaunchTemplateIterator(_Item, _OtherTemplate, "LLWEAPONEX_Uniques_Iterator_FoundTattooTemplate", "");
+
+IF
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Uniques_Iterator_FoundTattooTemplate")
+AND
+GetInventoryOwner(_Item, (ITEMGUID)_Owner)
+AND
+DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Owner, _OtherTemplate)
+THEN
+SetVarObject(_Item, "LLWEAPONEX_Tattoos_OtherVersion", _Owner);
+SetVarObject(_Owner, "LLWEAPONEX_Tattoos_OtherVersion", _Item);
+
+//Reset vars (story reload)
+PROC
+LLWEAPONEX_Uniques_SwapTattoos((CHARACTERGUID)_Char, (STRING)_Slot, (INTEGER)_Lock)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
+AND
+DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, _Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+AND
+GetTemplate(_Tattoos, _NormalTemplate)
+AND
+LLWEAPONEX_Uniques_QRY_Tattoos_FindUnlinked(_Char, _Tattoos, _MagicTemplate)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Tattoos, _MagicTemplate);
+
+//Reset vars (story reload)
+PROC
+LLWEAPONEX_Uniques_SwapTattoos((CHARACTERGUID)_Char, (STRING)_Slot, (INTEGER)_Lock)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
+AND
+DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, _Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+AND
+GetTemplate(_Tattoos, _MagicTemplate)
+AND
+LLWEAPONEX_Uniques_QRY_Tattoos_FindUnlinked(_Char, _Tattoos, _NormalTemplate)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Tattoos, _NormalTemplate);
+
+//Create templates if vars still not found
+PROC
+LLWEAPONEX_Uniques_SwapTattoos((CHARACTERGUID)_Char, (STRING)_Slot, (INTEGER)_Lock)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
+AND
+DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, _Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+AND
+GetTemplate(_Tattoos, _NormalTemplate)
+AND
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition(_MagicTemplate, _x, _y, _z, _MagicTattoos)
+THEN
+SetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", _MagicTattoos);
+SetVarObject(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion", _Tattoos);
+ItemToInventory(_MagicTattoos, _Tattoos, 1, 0, 0);
+
+//Create templates if vars still not found
+PROC
+LLWEAPONEX_Uniques_SwapTattoos((CHARACTERGUID)_Char, (STRING)_Slot, (INTEGER)_Lock)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
+AND
+DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, _Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_MagicTattoos)
+AND
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+AND
+GetTemplate(_MagicTattoos, _MagicTemplate)
+AND
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition(_NormalTemplate, _x, _y, _z, _Tattoos)
+THEN
+SetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", _MagicTattoos);
+SetVarObject(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion", _Tattoos);
+ItemToInventory(_Tattoos, _MagicTattoos, 1, 0, 0);
+
+//Swap Magic to Normal
+PROC
+LLWEAPONEX_Uniques_SwapTattoos((CHARACTERGUID)_Char, (STRING)_Slot, 0, (INTEGER)_Lock)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
+AND
+DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, _Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
+AND
+GetTemplate(_Tattoos, _MagicTemplate)
+AND
+LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+AND
+GetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", (ITEMGUID)_OtherTattoos)
+THEN
+ItemLockUnEquip(_Tattoos, 0);
+CharacterUnequipItem(_Char, _Tattoos);
+CharacterEquipItem(_Char, _OtherTattoos);
+ItemLockUnEquip(_OtherTattoos, _Lock);
+LeaderLib_Timers_StartObjectObjectTimer(_Tattoos, _OtherTattoos, 50, "LLWEAPONEX_Timers_MoveTattoosToOther", "LLWEAPONEX_Uniques_MoveTattoosToOther");
+DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
+
+//Swap Normal to Magic
+PROC
+LLWEAPONEX_Uniques_SwapTattoos((CHARACTERGUID)_Char, (STRING)_Slot, 1, (INTEGER)_Lock)
+AND
+NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
+AND
+DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, _Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
+AND
+GetTemplate(_Tattoos, _NormalTemplate)
+AND
+LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+AND
+GetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", (ITEMGUID)_OtherTattoos)
+THEN
+ItemLockUnEquip(_Tattoos, 0);
+CharacterUnequipItem(_Char, _Tattoos);
+CharacterEquipItem(_Char, _OtherTattoos);
+ItemLockUnEquip(_OtherTattoos, _Lock);
+LeaderLib_Timers_StartObjectObjectTimer(_Tattoos, _OtherTattoos, 50, "LLWEAPONEX_Timers_MoveTattoosToOther", "LLWEAPONEX_Uniques_MoveTattoosToOther");
+DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((ITEMGUID)_Tattoos, (ITEMGUID)_OtherTattoos, "LLWEAPONEX_Uniques_MoveTattoosToOther")
+THEN
+ItemToInventory(_Tattoos, _OtherTattoos, 1, 0, 0);
+
+PROC
+LLWEAPONEX_Uniques_SwapTattoos((CHARACTERGUID)_Char, (STRING)_Slot, (INTEGER)_ToMagicVersion, (INTEGER)_Lock)
+AND
+DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
+THEN
+NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
 //END_REGION
 EXITSECTION
 
