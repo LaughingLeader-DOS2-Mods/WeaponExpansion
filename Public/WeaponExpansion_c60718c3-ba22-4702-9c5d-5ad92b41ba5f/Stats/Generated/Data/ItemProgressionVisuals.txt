@@ -2245,8 +2245,20 @@ add levelgroup 0,0,"All"
 add rootgroup "85e2e75e-4333-425e-adc4-94474c3fc201",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A","",""
 
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "291f1cae-d46b-4795-aa27-23c1526bb7e1",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A_NPC"
+
+add levelgroup 0,0,"All"
+add rootgroup "c42fc70e-540b-4b3b-8c64-f48cead9f762",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A","",""
+
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "dda1182e-63e3-4a7a-8855-5295fa1e67cb",""
-add namegroup "EMPTY","",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A","",""

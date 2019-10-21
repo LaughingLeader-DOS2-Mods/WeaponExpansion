@@ -893,3 +893,9 @@ add name "Banner of the Pack",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A"
 add name "Anvilmar, Dwarven Negotiator",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A"
+add name "Tattoos of Godly Strength",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A"
+add name "<font color='#FF4400'>Tattoos of Godly Strength (Unleashed)</font>",""

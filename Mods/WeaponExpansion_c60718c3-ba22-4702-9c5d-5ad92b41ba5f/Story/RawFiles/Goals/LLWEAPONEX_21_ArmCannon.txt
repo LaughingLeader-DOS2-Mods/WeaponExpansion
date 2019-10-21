@@ -31,6 +31,13 @@ CharacterAddSkill(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", 1);
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
+NOT GetVarInteger(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", _)
+THEN
+SetVarInteger(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
+
+PROC
+LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
 GetVarInteger(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", _Energy)
 THEN
 LLWEAPONEX_ArmCannon_SetEnergyTags(_Char, _ArmCannon, _Energy);

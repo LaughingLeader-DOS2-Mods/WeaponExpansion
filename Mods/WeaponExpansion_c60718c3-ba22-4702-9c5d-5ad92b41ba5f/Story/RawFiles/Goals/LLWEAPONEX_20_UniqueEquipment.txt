@@ -818,7 +818,7 @@ _Dist <= 5.0
 AND
 LeaderLib_Math_QRY_ScaleToRange(_Dist, 5.0, 0.0, 500.0, 680.0)
 AND
-DB_LeaderLib_Math_ScaleToRange(_Dist, _Result, _MinValRange, _MaxValRange, _MinScaleRange, _MaxScaleRange)
+DB_LeaderLib_Math_ScaleToRange(_Dist, _Result, 5.0, 0.0, 500.0, 680.0)
 AND
 Integer(_Result, _Delay)
 AND
@@ -826,7 +826,7 @@ IntegertoString(_Delay, _DelayStr)
 AND
 GetPosition(_Char, _tx, _ty, _tz)
 THEN
-NOT DB_LeaderLib_Math_ScaleToRange(_Dist, _Result, _MinValRange, _MaxValRange, _MinScaleRange, _MaxScaleRange);
+NOT DB_LeaderLib_Math_ScaleToRange(_Dist, _Result, 5.0, 0.0, 500.0, 680.0);
 NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
 DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _tx, _ty, _tz);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:AnvilMace_GroundSmash] Delaying ground explosion for (",_DelayStr,")");

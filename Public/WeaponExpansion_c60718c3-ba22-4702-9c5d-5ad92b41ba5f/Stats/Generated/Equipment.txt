@@ -684,6 +684,10 @@ new equipment "LLWEAPONEX_WeaponMaster_Trader"
 add equipmentgroup
 add equipment entry "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Npc"
 
+new equipment "LLWEAPONEX_Origins_Harken"
+add equipmentgroup
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A_NPC"
+
 new equipment "LLWEAPONEX_FTJ_Harvester"
 add equipmentgroup
 add equipment entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Npc_Harvester"
