@@ -91,7 +91,7 @@ ItemToInventory(_ArmCannonWeapon, _ArmCannon, 1, 0, 0);
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
-NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 AND
 CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Item)
 AND
@@ -102,14 +102,14 @@ SetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", _Item);
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
-LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 THEN
 LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
 
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
-NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon] No arm cannon weapon found. Iterating.");
 //InventoryLaunchTemplateIterator(_ArmCannon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec", "LLWEAPONEX_Iterator_ArmCannonWeaponFound", "");
@@ -136,7 +136,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Foun
 IF
 CharacterItemEvent(_Char, _ArmCannon, "LLWEAPONEX_ArmCannonIteratorDone")
 AND
-LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Var was set. Equipping.");
 LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
@@ -144,7 +144,7 @@ LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
 IF
 CharacterItemEvent(_Char, _ArmCannon, "LLWEAPONEX_ArmCannonIteratorDone")
 AND
-NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 AND
 GetPosition(_Char, _x, _y, _z)
 AND

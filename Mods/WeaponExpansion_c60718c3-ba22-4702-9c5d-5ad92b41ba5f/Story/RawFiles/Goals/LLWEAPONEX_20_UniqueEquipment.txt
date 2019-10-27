@@ -1024,7 +1024,7 @@ NOT DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Item, _Template);
 PROC
 LLWEAPONEX_Uniques_Tattoos_FindUnlinked((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_OtherTemplate)
 AND
-NOT LeaderLib_Helper_QRY_VariableObjectIsSet(_Item, "LLWEAPONEX_Tattoos_OtherVersion")
+NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Item, "LLWEAPONEX_Tattoos_OtherVersion")
 THEN
 DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Item, _OtherTemplate);
 InventoryLaunchTemplateIterator(_Item, _OtherTemplate, "LLWEAPONEX_Uniques_Iterator_FoundTattooTemplate", "");
