@@ -769,7 +769,7 @@ add namecool "Philosopher's Lesson",""
 new namegroup "WPN_LLWEAPONEX_BattleBook_C"
 add name "Dusty Book",""
 add name "Weighty Book",""
-add namecool "Reader's Digest: Combat Edition",""
+add namecool "Reader's Digest: Combat Edition","Now you'll truly never miss your programs."
 
 new namegroup "WPN_LLWEAPONEX_BattleBook_D"
 add name "Dusty Manual",""
