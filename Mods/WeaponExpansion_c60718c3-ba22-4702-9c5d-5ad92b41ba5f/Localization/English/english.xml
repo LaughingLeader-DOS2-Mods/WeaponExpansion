@@ -56,7 +56,7 @@
 	<content contentuid="h49b98935gaa0dg4d2dg826eg8ed389e68e13" S="Target_CorrosiveTouch_Description" OT="Destroy [1] on target character, and set Acid status.">Deal [1] to target character, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid.</content>
 	<content contentuid="h0fd12b32gce5fg435ag9c80g688ab9c0d9e3" S="Cone_CorrosiveSpray_Description" OT="Destroy [1] on targets in a cone, and set Acid and Atrophy.">Deal [1] to targets in a cone, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid and Atrophy.</content>
 	<content contentuid="hff341792gf705g46e1g92c3gcd39d8694013" S="Projectile_SilverArrow_Description" OT="Destroys [1].">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
-	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756" OT="tag" Comment="For replacing 'Requires tag' when using tag requirements for skills"></content>
+	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756" OT="tag" Comment="For replacing 'Requires tag' when using tag requirements"></content>
 	<content contentuid="h7de69a95g70cag4bb3gbabcg1cf2df46f12c" OT="Requires [1]">Requires [1]</content>
 	<content contentuid="h825990a2gaf64g4235g9d53gcd340042c0d0" OT="Requires [1] [2]">Requires [1] [2] </content>
 	<content contentuid="ha6e36605gee35g4aaagaddbg7ab8bfaf86f6" OT="Requires [1] [2]">Requires [1] [2]</content>
