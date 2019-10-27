@@ -756,6 +756,36 @@ add namecool "Scholar's Lecture",""
 add namecool "Philosopher's Lesson",""
 add namecool "Knowledge Dispenser",""
 
+new namegroup "WPN_LLWEAPONEX_BattleBook_A"
+add name "Heavy Book",""
+add name "Dusty Book",""
+add namecool "Scholar's Lecture",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_B"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Philosopher's Lesson",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_C"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Reader's Digest: Combat Edition",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_D"
+add name "Dusty Manual",""
+add name "Action Manual",""
+add namecool "General Ford's Manual for Tactical Warfare","'Perfect for peppering your enemies with K.N.O.W.L.E.D.G.E.'"
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_E"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Combat for Dummies","If knowledge is power, a book can conquer the world."
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_F"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Book of Impartation","Imparts knowledge with a heft 'SMACK!'."
+
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
 add name "Balrin's Throwing Axe",""
 
