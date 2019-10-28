@@ -314,10 +314,6 @@ new namegroup "WPN_LLWEAPONEX_Stone_Rod"
 add name "Stone Rod",""
 add namecool "Magical Stone Rod",""
 
-new namegroup "Rod Of The Wolf"
-add name "Rod Of The Wolf",""
-add namecool "Magical Rod Of The Wolf",""
-
 new namegroup "WPN_LLWEAPONEX_Rods_1H_Rare"
 add name "Nightbane",""
 add name "Grand Scepter",""
