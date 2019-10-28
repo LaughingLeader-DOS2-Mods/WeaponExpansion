@@ -787,7 +787,7 @@ add name "Weighty Book",""
 add namecool "Book of Impartation","Imparts knowledge with a heft 'SMACK!'."
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B"
-add name "Scripture's Fury",""
+add name "Scripture of the Righteous",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A"
 add name "Talsim's Oversized Book of Spells",""
