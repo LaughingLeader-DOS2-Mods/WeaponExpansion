@@ -786,6 +786,12 @@ add name "Dusty Book",""
 add name "Weighty Book",""
 add namecool "Book of Impartation","Imparts knowledge with a heft 'SMACK!'."
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B"
+add name "Scripture's Fury",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A"
+add name "Talsim's Oversized Book of Spells",""
+
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
 add name "Balrin's Throwing Axe",""
 

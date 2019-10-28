@@ -63,6 +63,7 @@ LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font col
 LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
 LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark
 LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.
+LLWEAPONEX_WARCHIEF_MARK_CONSUME_DisplayName	Explode Warchief's Mark for bonus damage
 LLWEAPONEX_WARCHIEF_WHIRLWIND_DAMAGE_DisplayName	Hit Enemies in a 4m Radius
 LLWEAPONEX_WARCHARGE_DisplayName	War Charge
 LLWEAPONEX_WARCHARGE_Description	Character is initiating a revolutionary war charge. Get'em!
@@ -85,3 +86,5 @@ LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith
 LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.
 LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName	Bounty of the Harvest
 LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls with <font color='#c5a65a'>Soul Harvest</font>, gaining a permanent damage bonus.
+LLWEAPONEX_BATTLEBOOK_BIBLE_BONUS_DisplayName	Divine Smite - Deals bonus damage to Voidwoken and Undead
+LLWEAPONEX_BATTLEBOOK_SPELLBOOK_HIT_DisplayName	Arcane Knowledge - Chance to explode a basic spell on attack

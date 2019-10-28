@@ -1,0 +1,55 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION BIBLE
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_BibleBattleBookEquipped", 0);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_BibleBattleBookEquipped", 0);
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
+AND
+PartyGetFlag(_Char, "LLWEAPONEX_BibleBattleBookEquipped", 0)
+THEN
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion", 500);
+//END_REGION
+
+//REGION SPELLBOOK
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1")
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_SpellbookBattleBookEquipped", 0);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_SpellbookBattleBookEquipped", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_SpellbookBattleBookEquipped", 0);
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1")
+AND
+PartyGetFlag(_Char, "LLWEAPONEX_SpellbookBattleBookEquipped", 0)
+THEN
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_SpellbookBattleBookEquipped", "WeaponExpansion", 500);
+
+PROC
+LLWEAPONEX_BattleBooks_FireRandomSpell((CHARACTERGUID)_Char, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+NOT DB_LLWEAPONEX_BattleBooks_Temp_SpellbookPool(_Char, _, _)
+THEN
+DB_LLWEAPONEX_BattleBooks_Temp_SpellbookPool(_Char, "", 1, 540, 999);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

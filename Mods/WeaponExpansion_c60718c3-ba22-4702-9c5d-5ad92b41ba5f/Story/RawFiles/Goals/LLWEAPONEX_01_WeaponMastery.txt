@@ -147,12 +147,21 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Banner", 4, "<font color='#28F
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Banner", "LLWEAPONEX_WM_Banner_Exp", "LLWEAPONEX_WM_Banner_Level");
 
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_BattleBook", "<font color='#22AADD'>Battle Book Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_BattleBook", 0, "<font color='#FDFFEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_BattleBook", 1, "<font color='#DDFFB3'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_BattleBook", 2, "<font color='#94E9FF'>Journeyman Bookkeeper</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_BattleBook", 3, "<font color='#52D4FF'>Expert Bookkeeper</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_BattleBook", 4, "<font color='#28FFFF'>Pagemaster</font>");
+
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_BattleBook", "LLWEAPONEX_WM_BattleBook_Exp", "LLWEAPONEX_WM_BattleBook_Level");
+
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_DualShields", "<font color='#D9D9D9'>Dual Shields Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 1, "<font color='#FFDA9E'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 2, "<font color='#FFC973'>Journeyman Dual Shieldsman</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 3, "<font color='#FFB94A'>Expert Dual Shieldsman</font>");
-DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 4, "<font color='#FF9E03'>Shieldmaster Lord</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 4, "<font color='#FF9E03'>Shieldmaster</font>");
 
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_DualShields", 1, "Cover", "Any");
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_DualShields", 2, "ShieldPrison", "Any");

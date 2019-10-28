@@ -1177,6 +1177,7 @@ DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
 THEN
 NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
 //END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION
