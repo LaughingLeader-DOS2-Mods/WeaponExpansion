@@ -399,6 +399,39 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_00_Helpers:Iterator_Npc_EquipInventory] Equipping item [",_ItemStr,"] on NPC [",_OwnerStr,"].");
 CharacterEquipItem(_Owner, _Item);
 //END_REGION
+
+//REGION BASIC_ATTACK_TRACKING
+IF
+CharacterStartAttackObject(_Defender, _, _Char)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 0);
+LeaderLib_Timers_StartObjectTimer(_Char, 1800, "LLWEAPONEX_Timers_ClearBasicAttackFlag", "LLWEAPONEX_ClearBasicAttackFlag");
+
+IF
+CharacterStartAttackPosition(_x, _y, _z, _, _Char)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 0);
+LeaderLib_Timers_StartObjectTimer(_Char, 1800, "LLWEAPONEX_Timers_ClearBasicAttackFlag", "LLWEAPONEX_ClearBasicAttackFlag");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_ClearBasicAttackFlag")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 0);
+
+IF
+AttackedByObject(_Defender, _, (CHARACTERGUID)_Char, _, _)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "LLWEAPONEX_Timers_ClearBasicAttackFlag", "LLWEAPONEX_ClearBasicAttackFlag");
+
+IF
+CharacterMissedBy(_Defender, _, _Char)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "LLWEAPONEX_Timers_ClearBasicAttackFlag", "LLWEAPONEX_ClearBasicAttackFlag");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

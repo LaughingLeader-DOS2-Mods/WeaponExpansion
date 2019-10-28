@@ -253,3 +253,25 @@ THEN
 	ExplodeAt(_Pos, Projectile_LLWEAPONEX_AnvilMace_GroundImpact, _Level, _Char)
 	//ShootWorldProjectile(Projectile_LLWEAPONEX_AnvilMace_GroundImpact, _Char, _Pos, {0;-1.0;0}, _Level)
 ENDIF
+
+EVENT LLWEAPONEX_BattleBook_Spellbook_Explode_Position
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Pos
+	FLOAT:_LevelF
+	INT:_Level
+	FIXEDSTRING:_Projectile
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_Battlebooks_ExplodeSpellAtPosition")
+ACTIONS
+IF "c1&c2&!c3&c4&!c5"
+	CharacterGetStat(_LevelF, _Char, Level)
+	GetVar(_Pos, _Char, "LLWEAPONEX_Battlebooks_SpellbookAttackPosition")
+	IsEqual(_Pos, null)
+	GetVar(_Projectile, _Char, "LLWEAPONEX_Battlebooks_SpellbookProjectile")
+	IsEqual(_Projectile, null)
+THEN
+	Cast(_Level, _LevelF)
+	ExplodeAt(_Pos, _Projectile, _Level, _Char)
+	CharacterEvent(_Char, "LLWEAPONEX_Battlebooks_SpellExplodedAtPosition")	
+ENDIF
