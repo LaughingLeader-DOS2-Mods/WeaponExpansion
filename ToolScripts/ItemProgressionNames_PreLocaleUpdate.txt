@@ -1,0 +1,936 @@
+new namegroup "WPN_LLWEAPONEX_Unarmed_Fist"
+add name "Brawler's Fist","The iron-hard fist of a Brawler. Strikes true."
+
+new namegroup "WPN_LLWEAPONEX_Glaive_2H_Weak"
+add name "Worn Glaive",""
+add name "Chipped Glaive",""
+
+new namegroup "WPN_LLWEAPONEX_Glaive_2H_Normal"
+add name "Glaive",""
+add namecool "Honed Glaive",""
+add namecool "Magical Glaive",""
+
+new namegroup "WPN_LLWEAPONEX_Glaive_2H_Rare"
+add name "Reinforced Glaive",""
+add name "Steel Glaive",""
+add name "Battleworn Glaive",""
+add name "Soldier's Glaive",""
+
+new namegroup "WPN_LLWEAPONEX_Glaive_2H_Epic"
+add name "General's Mercy",""
+add name "Night's Edge",""
+add name "Widowmaker",""
+add name "Peacekeeper",""
+add name "Remorse",""
+add name "Extermination",""
+add name "Skirmisher",""
+add name "Neck Relief",""
+add namecool "Executioner's Promise",""
+add namecool "Execution",""
+add namecool "Etcher of Desecration",""
+add namecool "Unholy Razor",""
+add namecool "Stormrider",""
+add namecool "Nightfall",""
+add namecool "Blinder",""
+add namecool "Soulcursed Ebon Skewer",""
+
+new namegroup "WPN_LLWEAPONEX_Glaive_2H_Crafted"
+add name "Crafted Glaive",""
+add name "Artisan's Glaive",""
+add name "Glaive",""
+
+new namegroup "WPN_LLWEAPONEX_Halberd_2H_Weak"
+add name "Worn Halberd",""
+add name "Chipped Halberd",""
+
+new namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal"
+add name "Halberd",""
+add namecool "Honed Halberd",""
+add namecool "Reinforced Halberd",""
+
+new namegroup "WPN_LLWEAPONEX_Halberd_2H_Rare"
+add name "Deadly Halberd",""
+add name "Severing Halberd",""
+add name "Battleworn Halberd",""
+add name "Soldier's Halberd",""
+
+new namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic"
+add name "General's Mercy",""
+add name "Night's Edge",""
+add name "Widowmaker",""
+add name "Peacekeeper",""
+add name "Remorse",""
+add name "Extermination",""
+add name "Skirmisher",""
+add name "Neck Relief",""
+add namecool "Executioner's Promise",""
+add namecool "Execution",""
+add namecool "Etcher of Desecration",""
+add namecool "Unholy Razor",""
+add namecool "Stormrider",""
+add namecool "Nightfall",""
+add namecool "Blinder",""
+add namecool "Soulcursed Ebon Skewer",""
+
+new namegroup "WPN_LLWEAPONEX_Halberd_2H_Crafted"
+add name "Crafted Halberd",""
+add name "Artisan's Halberd",""
+add name "Halberd",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A"
+add name "Warchief's Halberd",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A"
+add name "Warchief's Halberd",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood"
+add name "Old Quarterstaff",""
+add name "Worn Quarterstaff",""
+add name "Wooden Quarterstaff",""
+add name "Walking Stick",""
+add namecool "Pilgrim's Quarterstaff",""
+add namecool "Monk's Quarterstaff",""
+add namecool "Acolyte's Quarterstaff",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Wood2"
+add name "Capped Quarterstaff",""
+add name "Spiked Quarterstaff",""
+add namecool "Pilgrim's Spiked Quarterstaff",""
+add namecool "Monk's Spiked Quarterstaff",""
+add namecool "Journeyman's Spiked Quarterstaff",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Metal_Weak"
+add name "Rusty Pipe",""
+add name "Old Metal Pipe",""
+add namecool "Dented Metal Pipe",""
+add namecool "Tough Metal Pipe",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Normal_Metal"
+add name "Metal Quarterstaff",""
+add name "Rusty Metal Quarterstaff",""
+add name "Worn Metal Quarterstaff",""
+add name "Training Quarterstaff",""
+add namecool "Pilgrim's Quarterstaff",""
+add namecool "Monk's Quarterstaff",""
+add namecool "Acolyte's Quarterstaff",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Rare"
+add name "Defender's Post",""
+add name "Tigerstrike",""
+add name "Reacher",""
+add name "Trippington",""
+add name "Sweeper",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic"
+add name "Pilgrim's Companion",""
+add name "Legbane",""
+add name "Equalizer",""
+add name "Gravity Falls",""
+add name "Monk's Resolution",""
+add name "Headcracker",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Wood_Crafted"
+add name "Wooden Quarterstaff",""
+
+new namegroup "WPN_LLWEAPONEX_Quarterstaff_Metal_Crafted"
+add name "Metal Pipe",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole"
+add name "Power Pole",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Normal"
+add name "Old Katana",""
+add name "Worn Katana",""
+add namecool "Katana",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Rare"
+add name "Reinforced Katana",""
+add name "Razor-Sharp Katana",""
+add name "Wanderer's Katana",""
+add name "Ronin's Katana",""
+add name "Soldier's Katana",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Epic"
+add name "Yamato's Edge",""
+add name "Musashi's Victory",""
+add name "Honor's Edge",""
+add name "Blade of the Warrior",""
+add namecool "Omnislash",""
+add namecool "Demon's Blade",""
+add namecool "Roninslayer",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add name "Katana",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Normal"
+add name "Old Odachi",""
+add name "Worn Odachi",""
+add namecool "Odachi",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Rare"
+add name "Reinforced Odachi",""
+add name "Steel Odachi",""
+add name "Odachi of the Forsaken",""
+add name "Ronin's Odachi",""
+add name "Soldier's Odachi",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Epic"
+add name "Manslayer",""
+add name "Blade of the Silver Slayer",""
+add namecool "Crescent Blade",""
+add namecool "Blade of the Fallen Angel",""
+add namecool "Masamune",""
+
+new namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted"
+add name "Odachi",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
+add name "Muramasa, The Cursed Blade",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
+add name "Kagutsuchi",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
+add name "Raizan",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
+add name "Raizan (Empowered)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
+add name "Raizan (Unleashed)",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Normal"
+add name "Old Bokuto",""
+add name "Traineee's Bokuto",""
+add namecool "The Tutor",""
+add namecool "Ancient Bokuto",""
+add namecool "Bokuto of the Elder Tree",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Rare"
+add name "Magicwood Bokuto",""
+add name "Ancestral Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Epic"
+add name "Mercy",""
+add name "Blunt Force",""
+add namecool "Pacifist's Will",""
+add namecool "Legend",""
+add namecool "Wooden Destiny",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Crafted"
+add name "Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_1H_Preview"
+add name "Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Normal"
+add name "Old Two-handed Bokuto",""
+add name "Traineee's Two-handed Bokuto",""
+add namecool "The Tutor",""
+add namecool "Ancient Two-handed Bokuto",""
+add namecool "Elder's Two-handed Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Rare"
+add name "Magicwood Two-handed Bokuto",""
+add name "Ancestral Two-handed Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Epic"
+add name "Mercy",""
+add name "Blunt Force",""
+add namecool "Pacifist's Will",""
+add namecool "Legend",""
+add namecool "Wooden Destiny",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Crafted"
+add name "Two-handed Bokuto",""
+
+new namegroup "WPN_LLWEAPONEX_Bokken_2H_Preview"
+add name "Two-handed Bokuto",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A"
+add name "Pacifist's Wrath (1H)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_2H_A"
+add name "Pacifist's Wrath (2H)",""
+
+new namegroup "WPN_LLWEAPONEX_Rapier_1H_Normal"
+add name "Old Foil",""
+add name "Worn Estoc",""
+add name "Worn Rapier",""
+add namecool "Gladiator's Estoc",""
+add namecool "Fencer's Rapier",""
+add namecool "Flaying Foil",""
+
+new namegroup "WPN_LLWEAPONEX_Rapier_1H_Rare"
+add name "Shredding Rapier",""
+add name "Eviscerating Estoc",""
+add name "Estoc of the Champion",""
+add name "Hero's Estoc",""
+add name "Champion's Rapier",""
+
+new namegroup "WPN_LLWEAPONEX_Rapier_1H_Epic"
+add name "Ricard's Piercing Storm",""
+add name "Heartpiercer",""
+add name "Gladiator's Victory",""
+add name "Dancing Steel",""
+add name "Blade of the Seven-finger Man",""
+
+new namegroup "WPN_LLWEAPONEX_Rapier_1H_Crafted"
+add name "Rapier",""
+add name "Estoc",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"
+add name "Frostdyne",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"
+add name "Frostdyne (Empowered)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"
+add name "Frostdyne (Unleashed)",""
+
+new namegroup "WPN_LLWEAPONEX_Beginner_Rod"
+add name "Weak Rod",""
+
+new namegroup "WPN_LLWEAPONEX_Improv_Rod"
+add name "Makeshift Rod",""
+
+new namegroup "WPN_LLWEAPONEX_Rod_Of_Nature"
+add name "Rod Of Nature",""
+add namecool "Magical Rod Of Nature",""
+
+new namegroup "WPN_LLWEAPONEX_Wooden_Rod"
+add name "Wooden Rod",""
+add namecool "Magical Wooden Rod",""
+
+new namegroup "WPN_LLWEAPONEX_Rod_Of_The_Lizard"
+add name "Rod Of The Lizard",""
+add namecool "Magical Rod Of The Lizard",""
+
+new namegroup "WPN_LLWEAPONEX_Rod_Of_The_Dwarf"
+add name "Rod Of The Dwarf",""
+add namecool "Magical Rod Of The Dwarf",""
+
+new namegroup "WPN_LLWEAPONEX_Stone_Rod"
+add name "Stone Rod",""
+add namecool "Magical Stone Rod",""
+
+new namegroup "WPN_LLWEAPONEX_Rods_1H_Rare"
+add name "Nightbane",""
+add name "Grand Scepter",""
+add name "Obliterator",""
+add name "War Cane",""
+add name "The Dag",""
+add name "Blackfinger",""
+add name "The Wyre",""
+add name "Woe Tine",""
+
+new namegroup "WPN_LLWEAPONEX_Rods_1H_Epic"
+add name "Ashwood Branch",""
+add name "Death's Last Stand",""
+add name "Roundwind",""
+add name "Bearwindle",""
+add name "Spinewinder",""
+add name "Kiss Of Death",""
+
+new namegroup "WPN_LLWEAPONEX_Rod_Human_01"
+add name "Wooden Rod",""
+
+new namegroup "WPN_LLWEAPONEX_Rod_Human_02"
+add name "Stone Rod",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedRod_Chaos"
+add name "Makeshift Chaotic Rod",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A"
+add name "Scepter of Magic Missile",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A"
+add name "Scepter of Magic Missile",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblades_1H"
+add name "Runeblade",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_1H_Start"
+add name "Rookie's Runeblade",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Normal"
+add name "Old Runeblade of Air",""
+add name "Worn Runeblade of Air",""
+add namecool "Runeblade of Air",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Rare"
+add name "Stormblade",""
+add name "Cloudstriker",""
+add name "Conductor",""
+add name "Lightningrod",""
+add name "Supercharger",""
+add name "Thunderstruck",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Epic"
+add name "Thunderfury",""
+add name "Raijin",""
+add name "Sparkstorm",""
+add name "Odinblade",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Air_1H_Crafted"
+add name "Tempered Runeblade of Air",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Normal"
+add name "Old Runeblade of Chaos",""
+add name "Worn Runeblade of Chaos",""
+add namecool "Runeblade of Chaos",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare"
+add name "Chaosblade",""
+add name "Spellsponge",""
+add name "Chaotic Runeslayer",""
+add name "Voidkin",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Epic"
+add name "Voidwoken Nightmare",""
+add name "Elementia",""
+add name "Lucian's Chaos",""
+add name "Abyssal Gaze",""
+add name "Chaos Incarnate",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Crafted"
+add name "Tempered Chaotic Runeblade",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Normal"
+add name "Old Runeblade of Earth",""
+add name "Worn Runeblade of Earth",""
+add namecool "Runeblade of Earth",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Rare"
+add name "Boulderblade",""
+add name "Earthenblade",""
+add name "Mountain's Oath",""
+add name "Groundcracker",""
+add name "Tremor",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Epic"
+add name "Erosion",""
+add name "Planetcracker",""
+add name "Earthbender",""
+add name "Toph's Pride",""
+add name "Quake",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Crafted"
+add name "Tempered Runeblade of Earth",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Normal"
+add name "Old Runeblade of Fire",""
+add name "Worn Runeblade of Fire",""
+add namecool "Runeblade of Fire",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Rare"
+add name "Incinerator",""
+add name "Ashenblade",""
+add name "Charred Edge",""
+add name "Witch's End",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Epic"
+add name "Soul Scorcher",""
+add name "Agni Ignus",""
+add name "Solardyne",""
+add name "Nuke",""
+add name "Zuko's Fury",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Fire_1H_Crafted"
+add name "Tempered Runeblade of Fire",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Normal"
+add name "Old Runeblade of Poison",""
+add name "Worn Runeblade of Poison",""
+add namecool "Runeblade of Poison",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Rare"
+add name "Venomblade",""
+add name "Virus",""
+add name "Undead Delight",""
+add name "Sludgeblade",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Epic"
+add name "Toxic Edge",""
+add name "Spider Queen's Caress",""
+add name "Delphinium",""
+add name "Gravelord's Blade",""
+add name "Deadly Essence",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Poison_1H_Crafted"
+add name "Tempered Runeblade of Poison",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Normal"
+add name "Old Runeblade of Water",""
+add name "Worn Runeblade of Water",""
+add namecool "Runeblade of Water",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Rare"
+add name "Permafrost",""
+add name "Snowflake's Revenge",""
+add name "Cold Calamity",""
+add name "Icecrash",""
+add name "Chillblade",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Epic"
+add name "Frostmourne",""
+add name "Subzero Slayer",""
+add name "Spring's Bane",""
+add name "Cryoblade",""
+add name "Katara's Hope",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Water_1H_Crafted"
+add name "Tempered Runeblade of Water",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Inert_1H"
+add name "Inert Runeblade",""
+add namecool "Ancient Inert Runeblade",""
+add namecool "Old Inert Runeblade",""
+add namecool "Inert Runeblade, Family Heirloom",""
+
+new namegroup "WPN_LLWEAPONEX_Runeblade_Debug_1H"
+add name "Debug Runeblade",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
+add name "Chaos Edge",""
+
+new namegroup "WPN_LLWEAPONEX_Greatbow_Weak"
+add name "Worn Greatbow",""
+add name "Old Greatbow",""
+add name "Shoddy Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_Greatbow_Normal"
+add name "Hunter's Greatbow",""
+add name "Strongman's Greatbow",""
+add name "Warrior's Greatbow",""
+add namecool "Dragonslayer's Greatbow",""
+add namecool "Slayer's Greatbow",""
+add namecool "Mighty Greatbow ",""
+add namecool "Tough Greatbow ",""
+
+new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_1"
+add name "Trusty Old Greatbow","An old greatbow passed down as a family heirloom. Not the strongest, but it'll do."
+
+new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_2"
+add name "Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3"
+add name "Artisan Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_Greatbow_Crafted_3"
+add name "Artisan Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Dwarves_A"
+add name "Dwarven Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Dwarves_B"
+add name "Exquisite Dwarven Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Elves_B"
+add name "Elven Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Humans_B"
+add name "Common Greatbow",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Lizards_A"
+add name "Greatbow of the Empire",""
+
+new namegroup "WPN_LLWEAPONEX_CraftedGreatbow_Lizards_B"
+add name "Exquisite Greatbow of the Empire",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
+add name "Omnibolt, Heaven's Wrath",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
+add name "Eruption, the Portable Cannon",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
+add name "Sanguinebane (Blade)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged"
+add name "Sanguinebane (Gun)",""
+
+new namegroup "WPN_LLWEAPONEX_HandCrossbow_Crafted_Lizards_A"
+add name "Mini-Arbalest",""
+add namecool "Magical Mini-Arbalest",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A"
+add name "Mini-Arbalest",""
+add namecool "Magical Mini-Arbalest",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Common"
+add name "Dual Shields",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Uncommon_1"
+add name "Ancient Dual Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Uncommon_2"
+add name "Battle-Hardened Dual Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Uncommon_3"
+add name "Reinforced Dual Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Uncommon_4"
+add name "Exquisite Dual Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Uncommon_5"
+add name "Exceptional Dual Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Uncommon_6"
+add name "Artisan Dual Shields",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Common"
+add name "Dual Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_1"
+add name "Exquisite Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_2"
+add name "Sacrificial Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_3"
+add name "Reinforced Chaotic Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_4"
+add name "Wicked Shields of Chaos",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_5"
+add name "Bloody Shields of Chaos",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_1"
+add name "Chaos Unbound",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_2"
+add name "Chaotic Walls of the Black Ring",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_3"
+add name "Hope's End, Evil's Foothold",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_1"
+add name "Twin Faces of Evil",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_2"
+add name "Undying Chaos, Lord's Spire",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_3"
+add name "Wall of Chaos, Evil's Reign",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Legendary"
+add name "Malice & Destruction",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine"
+add name "Chaos & Sin, Dark Lord's Calling",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Common"
+add name "Dual Wooden Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Uncommon_1"
+add name "Lacquered Wooden Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Uncommon_2"
+add name "Solid Wooden Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Uncommon_3"
+add name "Reinforced Wooden Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Uncommon_4"
+add name "Magic-Resistant Wooden Shields",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Rare_1"
+add name "Oaken Walls",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Rare_2"
+add name "Lightning Barrier",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Rare_3"
+add name "Lightningbreaker",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Epic_1"
+add name "Thunderguard",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Epic_2"
+add name "Lightningwall",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Epic_3"
+add name "Oakenguard, Thunder's Bane",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Legendary"
+add name "Oakenwall, Heavenbreaker",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Wooden_A_Divine"
+add name "Oaken Aegis, Shield of the Divine",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Common"
+add name "Dual Dwarven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Uncommon_1"
+add name "Ancient Dwarven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Uncommon_2"
+add name "Sturdy Dwarven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Uncommon_3"
+add name "Reinforced Dwarven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Uncommon_4"
+add name "Earthen Dwarven Shields",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Rare_1"
+add name "Exquisite Dwarven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Rare_2"
+add name "Ancestry Unbound, Dwarven Might",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Rare_3"
+add name "Honor & Duty",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Epic_1"
+add name "Alphaguard, Wolf's Bite",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Epic_2"
+add name "Ancestor's Protection, Enemy's Bane",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Epic_3"
+add name "Dwarvenguard, Wolfbane",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Legendary"
+add name "Oathkeeper, Earthcracker",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Dwarves_A_Divine"
+add name "Plates of Rivellon",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Common"
+add name "Dual Elven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Uncommon_1"
+add name "Exquisite Elven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Uncommon_2"
+add name "Finely Crafted Elven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Uncommon_3"
+add name "Reinforced Elven Shields",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Uncommon_4"
+add name "Priceless Elven Shields",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Rare_1"
+add name "Nature's Guard, Nature's Might",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Rare_2"
+add name "Guardian of the Immortal",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Rare_3"
+add name "Forest's Wall, Seeker's Spurn",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Epic_1"
+add name "Twin Guards of the Elder Tree",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Epic_2"
+add name "Poisonwall, Seeker's Bane",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Epic_3"
+add name "Forestguard, Elderwall",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Legendary"
+add name "Elderguard, Wrath",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Elves_B_Divine"
+add name "Vineguard, Cradle of the Divine",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Rare_1"
+add name "The Emperor's Wall",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Rare_2"
+add name "Barricade of the Ancient Empire",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Rare_3"
+add name "Unyielding Walls of the Empire",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Epic_1"
+add name "Divine Gates of the Sun",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Epic_2"
+add name "Iron Will, Lion's Courage",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Epic_3"
+add name "Silver Moon, Golden Sun",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Legendary"
+add name "Lunaris & Solaris",""
+
+new namegroup "WPN_LLWEAPONEX_DualShields_Lizards_C_Divine"
+add name "Selene & Helios, Defenders of the Divine",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A"
+add name "Giant Door Greatshields",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_OrmaReeve"
+add name "Orma and Reeve's Twin Greatshields",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death"
+add name "Torment, Book of the Dead",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry"
+add name "Imitation, Guide to Mimicry",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap"
+add name "Gatekeeper's Codex",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
+add name "Whispersong",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire"
+add name "Heretic's Almanac",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark"
+add name "<font color='#FE6E27'>The Eternal Spark</font>",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook"
+add name "Heavy Book",""
+add name "Weighty Book",""
+add name "Dictionary",""
+add namecool "Scholar's Lecture",""
+add namecool "Philosopher's Lesson",""
+add namecool "Knowledge Dispenser",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_A"
+add name "Heavy Book",""
+add name "Dusty Book",""
+add namecool "Scholar's Lecture",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_B"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Philosopher's Lesson",""
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_C"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Reader's Digest: Combat Edition","Now you'll truly never miss your programs."
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_D"
+add name "Dusty Manual",""
+add name "Action Manual",""
+add namecool "General Ford's Manual for Tactical Warfare","'Perfect for peppering your enemies with K.N.O.W.L.E.D.G.E.'"
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_E"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Combat for Dummies","If knowledge is power, a book can conquer the world."
+
+new namegroup "WPN_LLWEAPONEX_BattleBook_F"
+add name "Dusty Book",""
+add name "Weighty Book",""
+add namecool "Book of Impartation","Imparts knowledge with a heft 'SMACK!'."
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B"
+add name "Scripture of the Righteous",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A"
+add name "Talsim's Oversized Book of Spells",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
+add name "Balrin's Throwing Axe",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air"
+add name "Balrin's Throwing Axe (Lightning)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire"
+add name "Balrin's Throwing Axe (Fire)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil"
+add name "Balrin's Throwing Axe (Oil)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water"
+add name "Balrin's Throwing Axe (Ice)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
+add name "Beholder",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
+add name "Wraithblade",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
+add name "Soul Harvest",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
+add name "Death's Edge",""
+
+new namegroup "LLWEAPONEX_DragonSlayer_Armour"
+add name "Dragonslayer Mail",""
+add namecool "Mighty Dragonslayer Mail",""
+
+new namegroup "LLWEAPONEX_DragonSlayer_Pants"
+add name "Dragonslayer Pants",""
+add namecool "Mighty Dragonslayer Pants",""
+
+new namegroup "LLWEAPONEX_DragonSlayer_Gloves"
+add name "Dragonslayer Gloves",""
+add namecool "Mighty Dragonslayer Gloves",""
+
+new namegroup "LLWEAPONEX_DragonSlayer_Boots"
+add name "Dragonslayer Boots",""
+add namecool "Mighty Dragonslayer Boots",""
+
+new namegroup "LLWEAPONEX_DragonSlayer_Helmet"
+add name "Dragonslayer Helmet",""
+add namecool "Mighty Dragonslayer Helmet",""
+
+new namegroup "LLWEAPONEX_RunicKnight_Armour"
+add name "Runic Armour",""
+add namecool "Empowered Runic Armour",""
+
+new namegroup "LLWEAPONEX_RunicKnight_Pants"
+add name "Runic Leg Armor",""
+add namecool "Empowered Runic Leg Armor",""
+
+new namegroup "LLWEAPONEX_RunicKnight_Gloves"
+add name "Runic Gloves",""
+add namecool "Empowered Runic Gloves",""
+
+new namegroup "LLWEAPONEX_RunicKnight_Boots"
+add name "Runic Boots",""
+add namecool "Empowered Runic Boots",""
+
+new namegroup "LLWEAPONEX_RunicKnight_Helmet"
+add name "Runeweave Hood",""
+add namecool "Empowered Runeweave Hood",""
+
+new namegroup "LLWEAPONEX_Quivers_Common"
+add name "Quiver",""
+add namecool "Archer's Quiver",""
+add namecool "Bandit's Quiver",""
+add namecool "Highwayman's Quiver",""
+add namecool "Trusty Quiver",""
+
+new namegroup "LLWEAPONEX_Quivers_Rare"
+add name "Exquisite Quiver",""
+add name "Mighty Quiver",""
+add name "Ancient Elven Quiver",""
+
+new namegroup "LLWEAPONEX_Quivers_Epic"
+add name "Legendary Quiver",""
+add name "Eagle Eye Quiver",""
+add name "Quiver of the Hooded Hero",""
+
+new namegroup "LLWEAPONEX_Quivers_DrawArrow_Common"
+add name "Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
+add namecool "Flexible Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
+
+new namegroup "LLWEAPONEX_Quivers_DrawArrow_Rare"
+add name "Exquisite Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
+add name "Speedy Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
+add name "Ancient Elven Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
+
+new namegroup "LLWEAPONEX_Quivers_DrawArrow_Epic"
+add name "Trusy Nick's Quickdraw Quiver","A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named 'Trusy Nick', who was said to always carry a variety of arrows.<br><font color='#81ab00'>Quickdraw quivers recharge automatically outside of combat.</font>"
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
+add name "Ring of the Two Faces",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
+add name "Ring of the Weaponmaster","A ring made to defy the gods."
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
+add name "Demon Hunter's Oath",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A"
+add name "Demolitionist's Backpack",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A"
+add name "Devil Hand",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1"
+add name "Oni Gauntlet",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2"
+add name "Oni Gauntlet (Empowered)",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
+add name "Oni Gauntlet (Unleashed)",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
+add name "Dragon Bone Claws",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
+add name "Dragon Bone Claws",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A"
+add name "Runic Cannon",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A"
+add name "Runic Cannon",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
+add name "Banner of Unruly Faith",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A"
+add name "Banner of the Pack",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A"
+add name "Anvilmar, Dwarven Negotiator",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A"
+add name "Tattoos of Godly Strength",""
+
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A"
+add name "<font color='#FF4400'>Tattoos of Godly Strength (Unleashed)</font>",""
