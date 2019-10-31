@@ -22,6 +22,85 @@ INIT
 	USING LLWEAPONEX_Skills
 EVENTS
 
+EVENT LLWEAPONEX_Debug_SurfaceTest
+VARS
+	CHARACTER:_Char
+	SURFACE:_Surface
+	INT:_SurfaceInt
+	STRING:_Str
+	FLOAT3:_Pos
+	FLOAT:_z
+	FLOAT:_zMult
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_Debug_SurfaceIndexTest")
+ACTIONS
+IF "c1"
+	GetVar(_Surface, _Char, "LLWEAPONEX_Debug_SurfaceInt")
+THEN
+	Print(_Str, "[LLWEAPONEX:Debug:SurfaceInt] -- [1]", _Surface)
+	SetVar(_Char, "LeaderLog_Type", STRING:"Debug")
+	SetVar(_Char, "LeaderLog_Message", _Str)
+	CharacterEvent(_Char, "LeaderLog_Commands_Log")
+	GetPosition(_Char, _Pos)
+	IF "c1&c2"
+		GetZ(_Pos, _z)
+		GetVar(_SurfaceInt, _Char, "LLWEAPONEX_Debug_SurfaceInt")
+	THEN
+		Cast(_zMult, _SurfaceInt)
+		Add(_zMult, 1.5)
+		Multiply(_zMult, 1.2)
+		Add(_z, _zMult)
+		SetZ(_Pos, _z)
+		CreateSurfaceAt(_Pos, _Surface, 1.0, 20, _Char)
+	ENDIF
+	CharacterEvent(_Char, "LLWEAPONEX_Debug_SurfaceIndexTest_Next")
+ENDIF
+	
+
+EVENT LLWEAPONEX_Debug_StatusTest1
+VARS
+	CHARACTER:_Char
+	LIST<STATUS>:_RemoveList
+ON
+	FetchCharacterApplyStatusData(_Char, LLWEAPONEX_TEST)
+ACTIONS
+	SetVar(_Char, "LeaderLog_Type", STRING:"Debug")
+	SetVar(_Char, "LeaderLog_Message", STRING:"[LLWEAPONEX:Debug:StatusEventOrder(gameScript)] [FetchCharacterApplyStatusData] fired for (LLWEAPONEX_TEST).")
+	CharacterEvent(_Char, "LeaderLog_Commands_Log")
+	RETURN(_RemoveList, LLWEAPONEX_TEST, null)
+
+EVENT LLWEAPONEX_Debug_StatusTest2
+VARS
+	CHARACTER:_Char
+ON
+	OnCharacterStatusAttempt(_Char, LLWEAPONEX_TEST)
+ACTIONS
+	SetVar(_Char, "LeaderLog_Type", STRING:"Debug")
+	SetVar(_Char, "LeaderLog_Message", STRING:"[LLWEAPONEX:Debug:StatusEventOrder(gameScript)] [OnCharacterStatusAttempt] fired for (LLWEAPONEX_TEST).")
+	CharacterEvent(_Char, "LeaderLog_Commands_Log")
+
+EVENT LLWEAPONEX_Debug_StatusTest3
+VARS
+	CHARACTER:_Char
+	STRING:_Str
+ON
+	OnCharacterStatusApplied(_Char, LLWEAPONEX_TEST)
+ACTIONS
+	SetVar(_Char, "LeaderLog_Type", STRING:"Debug")
+	SetVar(_Char, "LeaderLog_Message", STRING:"[LLWEAPONEX:Debug:StatusEventOrder(gameScript)] [OnCharacterStatusApplied] fired for (LLWEAPONEX_TEST).")
+	CharacterEvent(_Char, "LeaderLog_Commands_Log")
+
+EVENT LLWEAPONEX_Debug_StatusTest4
+VARS
+	CHARACTER:_Char
+	STRING:_Str
+ON
+	OnCharacterStatusRemoved(_Char, LLWEAPONEX_TEST)
+ACTIONS
+	SetVar(_Char, "LeaderLog_Type", STRING:"Debug")
+	SetVar(_Char, "LeaderLog_Message", STRING:"[LLWEAPONEX:Debug:StatusEventOrder(gameScript)] [OnCharacterStatusRemoved] fired for (LLWEAPONEX_TEST).")
+	CharacterEvent(_Char, "LeaderLog_Commands_Log")
+
 EVENT LLWEAPONEX_Debug_ApplyStatusTest
 VARS
 	CHARACTER:_Char1

@@ -38,7 +38,7 @@ DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_001_c93c704c-41cf-4d
 DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_001_270b72cd-90e5-480e-9677-69040d566818, "INVISIBLE", 20000);
 DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_002_52da4999-c2e9-42aa-9c07-209a456e3289, "INVISIBLE", 20000);
 //LLWEAPONEX_UniqueManager_Register_Owner(S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", "TestLevel_LL_WeaponExpansion");
-
+GlobalSetFlag("LeaderLog_Trace_Enabled");
 LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, 40.144, 0.0, 7.836);
 
 GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
@@ -1083,7 +1083,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
 
 IF
 CharacterStatusApplied(_Character, _Status, _Causee)
@@ -1093,7 +1093,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
 
 IF
 CharacterStatusApplied(_Character, "EXPLODE", _Causee)
@@ -1106,7 +1106,7 @@ GetStatusTurns(_Character, "EXPLODE", _Turns)
 AND
 IntegertoString(_Turns, _TurnsStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [EXPLODE] applied on [",_Name,"] via [",_Cause,"] for (",_TurnsStr,") turns.");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [EXPLODE] applied on [",_Name,"] via [",_Cause,"] for (",_TurnsStr,") turns.");
 
 IF
 CharacterStatusRemoved(_Character, _Status, _Causee)
@@ -1116,7 +1116,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
 
 IF
 ItemStatusAttempt(_Item, _Status, _Causee)
@@ -1125,7 +1125,7 @@ String(_Causee, _Cause)
 AND
 String(_Item, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
 
 IF
 ItemStatusAttempt(_Item, "SUMMONING", _)
@@ -1136,7 +1136,7 @@ String(_Owner, _Cause)
 AND
 String(_Item, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [SUMMONING] attempt on [",_Name,"] with owner [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [SUMMONING] attempt on [",_Name,"] with owner [",_Cause,"].");
 
 IF
 ItemStatusChange(_Item, _Status, _Causee)
@@ -1145,7 +1145,7 @@ String(_Causee, _Cause)
 AND
 String(_Item, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusChange] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:ItemStatusChange] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
 
 IF
 ItemStatusRemoved(_Item, _Status, _Causee)
@@ -1154,7 +1154,7 @@ String(_Causee, _Cause)
 AND
 String(_Item, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:ItemStatusRemoved] Status [",_Status,"] removed from [",_Name,"] via [",_Cause,"].");
 
 IF
 CharacterKilledBy(_Defender, _Owner, _Attacker)
@@ -1165,7 +1165,7 @@ String(_Owner, _Name2)
 AND
 String(_Attacker, _Name3)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterKilledBy] [",_Name,"] was killed by [",_Name2,"](",_Name3,").");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterKilledBy] [",_Name,"] was killed by [",_Name2,"](",_Name3,").");
 
 IF
 CharacterPrecogDying(_Character)
@@ -1173,7 +1173,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterPrecogDying] [",_Name,"] is about to die.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterPrecogDying] [",_Name,"] is about to die.");
 
 IF
 CharacterDying(_Character)
@@ -1181,7 +1181,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterDying] [",_Name,"] is dying.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterDying] [",_Name,"] is dying.");
 
 IF
 CharacterDied(_Character)
@@ -1189,7 +1189,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterDied] [",_Name,"] died.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterDied] [",_Name,"] died.");
 
 /*
 IF
@@ -1811,6 +1811,28 @@ _Next < 4
 THEN
 //CharacterUseSkill(_Char, "Shout_InspireStart", _Char, 1, 1, 1);
 LeaderLib_Timers_StartObjectTimer(_Char, 200, "LLWEAPONEX_Timers_Debug_InspireCast", "LLWEAPONEX_Timers_Debug_InspireCast");
+
+IF
+TextEventSet("llweap_surfaceindextest")
+AND
+CharacterGetHostCharacter(_Host)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:SurfaceInt] Integer: (-1)");
+SetVarInteger(_Host, "LLWEAPONEX_Debug_SurfaceInt", -1);
+SetStoryEvent(_Host, "LLWEAPONEX_Debug_SurfaceIndexTest");
+
+IF
+StoryEvent(_Host, "LLWEAPONEX_Debug_SurfaceIndexTest_Next")
+AND
+GetVarInteger(_Host, "LLWEAPONEX_Debug_SurfaceInt", _Int)
+AND
+_Int < 83
+AND
+IntegerSum(_Int, 1, _NextInt)
+THEN
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Debug:SurfaceInt] Integer: (",_NextInt,")");
+SetVarInteger(_Host, "LLWEAPONEX_Debug_SurfaceInt", _NextInt);
+SetStoryEvent(_Host, "LLWEAPONEX_Debug_SurfaceIndexTest");
 EXITSECTION
 
 ENDEXITSECTION

@@ -4,19 +4,26 @@ INITSECTION
 
 KBSECTION
 IF
-CharacterStartAttackPosition(_x, _y, _z, _, _Char)
+CharacterStartAttackPosition(_x, _y, _z, _, _Source)
 AND
-ObjectGetFlag(_Char, "LLWEAPONEX_SpellScrollBattleBookEquipped", 1)
-AND
-LeaderLib_Roll_QRY(300)
-AND
-LeaderLib_Randomization_QRY_Tables_Roll((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells")
-AND
-DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells", _Spell)
+ObjectGetFlag(_Source, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1)
+//AND
+//LeaderLib_Roll_QRY(300, 999)
 THEN
-NOT DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells", _Spell);
-DB_LLWEAPONEX_BattleBooks_Temp_SpellScrollAttackPosition((CHARACTERGUID)_Char, _Spell, _x, _y, _z);
-LeaderLib_Timers_StartObjectTimer(_Char, 1000, "LLWEAPONEX_Timers_Battlebooks_SpellScroll_FireSpellAtPosition", "LLWEAPONEX_Battlebooks_SpellScroll_FireSpellAtPosition");
+LLWEAPONEX_BattleBooks_SpellScroll_Fire(_Source, _x, _y, _z, 1000);
+
+IF
+CharacterStatusAttempt(_Char, "SUMMONING", _)
+AND
+IsTagged(_Char, "TOTEM", 1)
+AND
+CharacterGetOwner(_Char, _Owner)
+AND
+ObjectGetFlag(_Owner, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1)
+AND
+GetVarFloat3(_Owner, "LLWEAPONEX_Battlebooks_SpellScroll_AttackPosition", _x, _y, _z)
+THEN
+TeleportToPosition(_Char, _x, _y, _z, "", 0, 1);
 EXITSECTION
 
 ENDEXITSECTION

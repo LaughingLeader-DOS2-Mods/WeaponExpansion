@@ -260,26 +260,145 @@ VARS
 	FLOAT3:_Pos
 	FLOAT:_LevelF
 	INT:_Level
+	INT:_Shoot
 	SKILL:_Projectile
-	FIXEDSTRING:_Material
+	FIXEDSTRING:_ProjectileStr
+	STRING:_Str
+	FIXEDSTRING:_Msg
 ON
 	OnCharacterEvent(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_ExplodeSpellAtPosition")
 ACTIONS
-IF "c1&c2&!c3&c4&!c5"
+	GetPosition(_Char, _Pos)
+	Set(_Shoot, 0)
+	Set(_Level, 1)
+	Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FlamingDaggers)
+IF "c1&c2&c3&c4"
 	CharacterGetStat(_LevelF, _Char, Level)
 	GetVar(_Pos, _Char, "LLWEAPONEX_Battlebooks_SpellScroll_AttackPosition")
-	IsEqual(_Pos, null)
 	GetVar(_Projectile, _Char, "LLWEAPONEX_Battlebooks_SpellScroll_Projectile")
-	IsEqual(_Projectile, null)
+	GetVar(_Shoot, _Char, "LLWEAPONEX_Battlebooks_SpellScroll_ShootProjectile")
 THEN
+ENDIF
 	Cast(_Level, _LevelF)
-	ExplodeAt(_Pos, _Projectile, _Level, _Char)
-	CharacterEvent(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_SpellExplodedAtPosition")
+IF "c1"
+	IsEqual(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface)
+THEN
+	Set(_Shoot, 1)
+	IF "c1|c2|c3|c4|c5|c6|c7|c8"
+		ContainsSurface(_Pos, 1.0, SurfaceFire)
+		ContainsSurface(_Pos, 1.0, SurfaceFireCloud)
+		ContainsSurface(_Pos, 1.0, SurfaceFireBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceFireCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceFirePurified)
+		ContainsSurface(_Pos, 1.0, SurfaceFireCloudBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceFireCloudCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceFireCloudPurified)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Fire_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Fire)
+	ELIF "c1|c2|c3|c4|c5|c6|c7|c8|c9"
+		ContainsSurface(_Pos, 1.0, SurfaceWaterFrozen)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterFrozenBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterFrozenCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterFrozenPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozen)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozenBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozenCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozenPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceFrostCloud)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Water_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Water)
+	ELIF "c1|c2|c3|c4|c5|c6|c7|c8|c9"
+		ContainsSurface(_Pos, 1.0, SurfaceWater)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloud)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloudBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloudCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloudPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceDeepwater)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Ice_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Water)
+	ELIF "c1|c2|c3|c4|c5|c6|c7|c8|c9|c10|c11|c12|c13|c14|c15"
+		ContainsSurface(_Pos, 1.0, SurfaceWaterElectrified)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloudElectrified)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterElectrifiedBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterElectrifiedCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterElectrifiedPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloudElectrifiedBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloudElectrifiedCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceWaterCloudElectrifiedPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodElectrified)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodElectrifiedBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodElectrifiedCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodElectrifiedPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCloudElectrifiedBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCloudElectrifiedCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCloudElectrifiedPurified)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Lightning_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Air)
+	ELIF "c1|c2|c3|c4"
+		ContainsSurface(_Pos, 1.0, SurfaceOil)
+		ContainsSurface(_Pos, 1.0, SurfaceOilBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceOilCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceOilPurified)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Oil_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Oil)
+	ELIF "c1|c2|c3|c4|c5|c6|c7|c8"
+		ContainsSurface(_Pos, 1.0, SurfacePoison)
+		ContainsSurface(_Pos, 1.0, SurfacePoisonCloud)
+		ContainsSurface(_Pos, 1.0, SurfacePoisonBlessed)
+		ContainsSurface(_Pos, 1.0, SurfacePoisonCursed)
+		ContainsSurface(_Pos, 1.0, SurfacePoisonPurified)
+		ContainsSurface(_Pos, 1.0, SurfacePoisonCloudBlessed)
+		ContainsSurface(_Pos, 1.0, SurfacePoisonCloudCursed)
+		ContainsSurface(_Pos, 1.0, SurfacePoisonCloudPurified)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Poison_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Poison)
+	ELIF "c1|c2|c3|c4|c5|c6|c7|c8|c9|c10|c11|c12"
+		ContainsSurface(_Pos, 1.0, SurfaceBlood)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCloud)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCloudBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCloudCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodCloudPurified)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozen)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozenBlessed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozenCursed)
+		ContainsSurface(_Pos, 1.0, SurfaceBloodFrozenPurified)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Blood_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Blood)
+	ELIF "c1"
+		ContainsSurface(_Pos, 1.0, SurfaceSource)
+	THEN
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Default_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface_Source)
+	ELSE
+		PlayEffectAt(_Pos, "RS3_FX_Skills_Totem_Impact_Summon_Default_01")
+		Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface)
+	ENDIF
 ENDIF
 /*
-IF "c1"
-	GetVar(_Material, _Char, "LLWEAPONEX_Battlebooks_SpellScroll_MaterialOverride")
+IF "!c1"
+	IsProjectileSkill(_Projectile)
 THEN
-	SetMaterial(_Char, _Material, -1, 0, 0, 0, 0, 0, 1)
+	Set(_Projectile, Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FlamingDaggers)
 ENDIF
 */
+IF "c1"
+	IsEqual(_Shoot, 0)
+THEN
+	ExplodeAt(_Pos, _Projectile, _Level, _Char)
+ELSE
+	ShootLocalProjectileAt(_Projectile, _Char, {0;4;0}, _Pos, _Level, _Char)
+ENDIF
+	CharacterEvent(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_SpellExplodedAtPosition")
