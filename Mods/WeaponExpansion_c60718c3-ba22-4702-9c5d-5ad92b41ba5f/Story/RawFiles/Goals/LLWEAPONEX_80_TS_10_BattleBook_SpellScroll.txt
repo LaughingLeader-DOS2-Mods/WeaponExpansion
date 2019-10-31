@@ -29,7 +29,13 @@ TeleportToPosition(_Char, _x, _y, _z, "LLWEAPONEX_Battlebooks_SpellScroll_TotemT
 IF
 StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported")
 THEN
-TeleportTo(_Totem, _Totem, "", 0, 1);
+//Teleport one more time so it doesn't get stuck in something.
+TeleportTo(_Totem, _Totem, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported_SnappedPosition_PlayEffect", 0, 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported_SnappedPosition_PlayEffect")
+THEN
+PlayEffect(_Totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root");
 EXITSECTION
 
 ENDEXITSECTION

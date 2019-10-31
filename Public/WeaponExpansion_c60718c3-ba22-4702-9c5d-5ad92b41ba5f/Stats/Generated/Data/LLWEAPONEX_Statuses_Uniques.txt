@@ -681,6 +681,8 @@ data "BonusWeapon" "Status_LLWEAPONEX_BattleBook_SpellScroll_Element_Summoning"
 new entry "Status_LLWEAPONEX_BattleBook_SpellScroll_Element_Summoning"
 type "Weapon"
 using "_Status_LLWEAPONEX_BattleBook_SpellScroll_Element_Base"
+data "Damage Range" "10"
+data "DamageFromBase" "15"
 data "Damage Type" "Shadow"
 
 new entry "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_WATER"
