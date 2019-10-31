@@ -254,24 +254,32 @@ THEN
 	//ShootWorldProjectile(Projectile_LLWEAPONEX_AnvilMace_GroundImpact, _Char, _Pos, {0;-1.0;0}, _Level)
 ENDIF
 
-EVENT LLWEAPONEX_BattleBook_Spellbook_Explode_Position
+EVENT LLWEAPONEX_BattleBook_SpellScroll_Explode_Position
 VARS
 	CHARACTER:_Char
 	FLOAT3:_Pos
 	FLOAT:_LevelF
 	INT:_Level
-	FIXEDSTRING:_Projectile
+	SKILL:_Projectile
+	FIXEDSTRING:_Material
 ON
-	OnCharacterEvent(_Char, "LLWEAPONEX_Battlebooks_ExplodeSpellAtPosition")
+	OnCharacterEvent(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_ExplodeSpellAtPosition")
 ACTIONS
 IF "c1&c2&!c3&c4&!c5"
 	CharacterGetStat(_LevelF, _Char, Level)
-	GetVar(_Pos, _Char, "LLWEAPONEX_Battlebooks_SpellbookAttackPosition")
+	GetVar(_Pos, _Char, "LLWEAPONEX_Battlebooks_SpellScroll_AttackPosition")
 	IsEqual(_Pos, null)
-	GetVar(_Projectile, _Char, "LLWEAPONEX_Battlebooks_SpellbookProjectile")
+	GetVar(_Projectile, _Char, "LLWEAPONEX_Battlebooks_SpellScroll_Projectile")
 	IsEqual(_Projectile, null)
 THEN
 	Cast(_Level, _LevelF)
 	ExplodeAt(_Pos, _Projectile, _Level, _Char)
-	CharacterEvent(_Char, "LLWEAPONEX_Battlebooks_SpellExplodedAtPosition")	
+	CharacterEvent(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_SpellExplodedAtPosition")
 ENDIF
+/*
+IF "c1"
+	GetVar(_Material, _Char, "LLWEAPONEX_Battlebooks_SpellScroll_MaterialOverride")
+THEN
+	SetMaterial(_Char, _Material, -1, 0, 0, 0, 0, 0, 1)
+ENDIF
+*/

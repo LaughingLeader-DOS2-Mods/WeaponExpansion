@@ -6,25 +6,150 @@ KBSECTION
 PROC
 LLWEAPONEX_BattleBooks_InitSettings()
 THEN
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_MagicShell", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_Fortify", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_Restoration", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_FavourableWind", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_BurnMyEyes", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_Haste", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_TotemFromSurface", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_ShockingTouch", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_MosquitoSwarm", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_DimensionalBolt", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_FlamingDaggers", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_PyroclasticRock", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_HailStrike", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_Contamination", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_BlindingRadiance", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_Ignition", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_TentacleLash", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_GraspOfTheStarved", 1, 2);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_Spellbook_Spells", "Projectile_LLWEAPONEX_Battlebooks_Spellbook_Earthquake", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MagicShell", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Fortify", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Restoration", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FavourableWind", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BurnMyEyes", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Haste", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MosquitoSwarm", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_DimensionalBolt", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FlamingDaggers", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_PyroclasticRock", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_HailStrike", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BlindingRadiance", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Ignition", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TentacleLash", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_GraspOfTheStarved", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Earthquake", 1, 2);
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MagicShell", "RS3_FX_Skills_Water_Cast_Self_Earth_Root_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MagicShell", "RS3_FX_Skills_Water_Cast_Self_Earth_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Fortify", "RS3_FX_Skills_Earth_Cast_Self_Earth_Root_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Restoration", "RS3_FX_Skills_Water_Cast_Self_Water_Root_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Restoration", "RS3_FX_Skills_Water_Cast_Self_Water_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FavourableWind", "RS3_FX_GP_Status_FavourableWind_Aura_Root_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FavourableWind", "RS3_FX_Skills_Air_Wind_Cast_Ground_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BurnMyEyes", "RS3_FX_Skills_Divine_Cast_Target_Touch_R_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BurnMyEyes", "RS3_FX_Skills_Divine_Cast_Target_Touch_cast_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Haste", "RS3_FX_Skills_Fire_Cast_Aoe_Divine_Hand_02", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Haste", "RS3_FX_Skills_Fire_Haste_Impact_Root_01", "Dummy_FX_02");
+//DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface", "", "Dummy_FX_02");
+/*[None]RS3_FX_Skills_Totem_Impact_Summon_Default_01
+[Blood]RS3_FX_Skills_Totem_Impact_Summon_Blood_01
+[Water]RS3_FX_Skills_Totem_Impact_Summon_Ice_01
+[WaterElectrified]RS3_FX_Skills_Totem_Impact_Summon_Lightning_01
+[BloodElectrified]RS3_FX_Skills_Totem_Impact_Summon_Lightning_01
+[Fire]RS3_FX_Skills_Totem_Impact_Summon_Fire_01
+[Oil]RS3_FX_Skills_Totem_Impact_Summon_Oil_01
+[Poison]RS3_FX_Skills_Totem_Impact_Summon_Poison_01
+*/
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "RS3_FX_Skills_Air_Cast_Target_Touch_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "RS3_FX_Skills_Air_Lightning_Cast_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "RS3_FX_Skills_Air_Lightning_Cast_Target_Touch_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "RS3_FX_Skills_Air_Cast_Target_Touch_Root_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MosquitoSwarm", "RS3_FX_Skills_Voodoo_Cast_Aoe_Voodoo_Blood_Swarm_Root_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_DimensionalBolt", "RS3_FX_Skills_Void_Divine_Cast_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FlamingDaggers", "RS3_FX_Skills_Fire_Cast_Throw_Line_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_PyroclasticRock", "RS3_FX_Skills_Earth_Cast_Target_Earth_Root_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_HailStrike", "RS3_FX_Skills_Water_Prepare_Water_Hand_01_Snow", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_HailStrike", "RS3_FX_Skills_Water_Cast_AoE_Air_Root_01_Snow", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_HailStrike", "RS3_FX_GP_Impacts_HailStrike_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "RS3_FX_Skills_Earth_Cast_Aoe_Voodoo_Root_Textkey_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "RS3_FX_Skills_Earth_Cast_Aoe_Voodoo_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BlindingRadiance", "RS3_FX_Skills_Divine_Prepare_Divine_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BlindingRadiance", "RS3_FX_Skills_Divine_Prepare_Divine_Hand_02", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Ignition", "RS3_FX_Skills_Fire_Cast_Ground_Fire_Hand_01", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Ignition", "RS3_FX_Skills_Fire_Cast_FireOverlay_01", "Dummy_FX_02");
+//DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TentacleLash", "", "Dummy_FX_02");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_GraspOfTheStarved", "RS3_FX_Skills_Voodoo_Cast_Summon_Totem_Hand_01", "Dummy_FX_02");
+//DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Earthquake", "", "Dummy_FX_02");
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MagicShell", "RS3_FX_Skills_Water_FrostyShell_Impact_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Fortify", "RS3_FX_Skills_Earth_TargetEffect_Fortify_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Restoration", "RS3_FX_Skills_Water_Restoration_Impact_01", 1.0);
+//DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FavourableWind", "RS3_FX_Skills_Air_Wind_Cast_Ground_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BurnMyEyes", "RS3_FX_Skills_Divine_Burnmyeye_Impact_Root_01", 1.0);
+//DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Haste", "RS3_FX_Skills_Fire_Haste_Impact_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface", "RS3_FX_Skills_Totem_Target_Nebula_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "RS3_FX_Skills_Air_Lightning_Target_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MosquitoSwarm", "RS3_FX_Skills_Voodoo_Blood_Swarm_Target_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_DimensionalBolt", "RS3_FX_GP_Impacts_DimensionalBolt_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FlamingDaggers", "RS3_FX_GP_Impacts_FlamingDagger_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_PyroclasticRock", "RS3_FX_GP_Impacts_PyroclasticRock_01", 1.0);
+//DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_HailStrike", "RS3_FX_GP_Impacts_HailStrike_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "RS3_FX_Skills_Earth_Cast_Aoe_Voodoo_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "RS3_FX_Skills_Earth_Contamination_Impact_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BlindingRadiance", "RS3_FX_Skills_Divine_BlindingRadiance_Cast_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Ignition", "RS3_FX_Skills_Fire_Cast_Ground_Fire_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TentacleLash", "RS3_FX_Skills_Totem_Lash_Impact_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_GraspOfTheStarved", "RS3_FX_Skills_Voodoo_Cast_Summon_Totem_Decay_GraspStarved_Root_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_GraspOfTheStarved", "RS3_FX_Skills_Voodoo_Decaying_GraspStarved_Impact_01", 1.0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Earthquake", "RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_01", 0.45);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Earthquake", "RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_02", 0.45);
+//DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects("", "", 1.0);
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MagicShell", "Target_FrostyShell_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Fortify", "Target_Fortify_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Restoration", "Target_Restoration_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FavourableWind", "Shout_FavourableWind_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BurnMyEyes", "Target_BurnMyEyes_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Haste", "Target_Haste_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface", "Summon_TotemFromSurface_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "Target_ShockingTouch_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MosquitoSwarm", "Target_MosquitoSwarm_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_DimensionalBolt", "Projectile_DimensionalBolt_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FlamingDaggers", "Projectile_FlamingDaggers_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_PyroclasticRock", "Projectile_PyroclasticRock_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_HailStrike", "ProjectileStrike_HailStrike_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "Shout_Contamination_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BlindingRadiance", "Shout_BlindingRadiance_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Ignition", "Shout_Ignition_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TentacleLash", "Target_TentacleLash_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_GraspOfTheStarved", "Target_GraspOfTheStarved_DisplayName");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Earthquake", "Quake_Earthquake_DisplayName");
+
+/*
+BOOK_Scroll_Skill_Air_A_9b7bc8be-6a75-4faa-b5a7-4e3ef3efd379
+BOOK_Scroll_Skill_Earth_A_f1f9eeff-9ae3-4c34-b4a7-b8efe7301749
+BOOK_Scroll_Skill_Fire_A_da52cdb9-cb57-4827-bb73-4de3c042ee94
+BOOK_Scroll_Skill_Necromancy_A_5c383e38-9a2b-42d7-a00f-9ace03abbc16
+BOOK_Scroll_Skill_Polymorph_A_534c2867-95df-4f50-a5b1-0eaa3517a212
+BOOK_Scroll_Skill_Ranger_A_52e06222-5b77-40c6-9a00-2c844caa54d1
+BOOK_Scroll_Skill_Rogue_A_ce864d67-6993-43a7-a645-f1b607df9fe0
+BOOK_Scroll_Skill_Source_A_76a90b89-ac79-42f6-b3bf-999cc39cc179
+BOOK_Scroll_Skill_Summoning_A_cb0d3682-685f-45a4-8ba7-a82b32c14cdd
+BOOK_Scroll_Skill_Warfare_A_d83dacf7-5f93-47c1-be7d-668c0a6f87d8
+BOOK_Scroll_Skill_Water_A_ae6e2fcd-b7af-41c5-a54d-0dfbe57f1bc0
+*/
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Ignition", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_FIRE");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BurnMyEyes", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_FIRE");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Haste", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_FIRE");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FlamingDaggers", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_FIRE");
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MagicShell", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_WATER");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Restoration", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_WATER");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_HailStrike", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_WATER");
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Fortify", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_PyroclasticRock", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Earthquake", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH");
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FavourableWind", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_AIR");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_AIR");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BlindingRadiance", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_AIR");
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TotemFromSurface", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_SUMMONING");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_DimensionalBolt", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_SUMMONING");
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_MosquitoSwarm", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_NECROMANCY");
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_GraspOfTheStarved", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_NECROMANCY");
+
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_TentacleLash", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_POLYMORPH");
 
 //REGION BIBLE
 PROC
@@ -45,78 +170,116 @@ PartyGetFlag(_Char, "LLWEAPONEX_BibleBattleBookEquipped", 0)
 THEN
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion", 500);
 //END_REGION
-
+//WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1
+//WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d
 //REGION SPELLBOOK
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_SpellbookBattleBookEquipped", 0);
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_SpellbookBattleBookEquipped", "WeaponExpansion");
+ObjectSetFlag(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 0);
+LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_SpellbookBattleBookEquipped", 0);
+ObjectClearFlag(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 0);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 AND
-PartyGetFlag(_Char, "LLWEAPONEX_SpellbookBattleBookEquipped", 0)
+PartyGetFlag(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 0)
 THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_SpellbookBattleBookEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion", 500);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 AND
-NOT LeaderLib_Randomization_Tables_QRY_TableInitialized((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_Spellbook_Spells")
+NOT LeaderLib_Randomization_Tables_QRY_TableInitialized((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells")
 THEN
-LeaderLib_Randomization_Tables_BuildTable(_Char, "LLWEAPONEX_BattleBooks_Spellbook_Spells");
+LeaderLib_Randomization_Tables_BuildTable(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells");
 //END_REGION
 
 //REGION SPELLBOOK_RANDOM_SPELL
 IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_BATTLEBOOK_SPELLBOOK_HIT", _Source)
+CharacterStatusApplied(_Char, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", _Source)
 AND
 ObjectIsCharacter((CHARACTERGUID)_Source, 1)
 AND
-NOT DB_LLWEAPONEX_BattleBooks_Temp_SpellbookAttackPosition(_Source, _, _, _, _)
+NOT DB_LLWEAPONEX_BattleBooks_Temp_SpellScrollAttackPosition(_Source, _, _, _, _)
 AND
-LeaderLib_Randomization_QRY_Tables_Roll((GUIDSTRING)_Source, "LLWEAPONEX_BattleBooks_Spellbook_Spells")
+LeaderLib_Randomization_QRY_Tables_Roll((GUIDSTRING)_Source, "LLWEAPONEX_BattleBooks_SpellScroll_Spells")
 AND
-DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Source, "LLWEAPONEX_BattleBooks_Spellbook_Spells", _Spell)
+DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Source, "LLWEAPONEX_BattleBooks_SpellScroll_Spells", _Spell)
 AND
 GetPosition(_Char, _x, _y, _z)
 THEN
-NOT DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Source, "LLWEAPONEX_BattleBooks_Spellbook_Spells", _Spell);
-DB_LLWEAPONEX_BattleBooks_Temp_SpellbookAttackPosition((CHARACTERGUID)_Source, _Spell, _x, _y, _z);
-SetStoryEvent(_Source, "LLWEAPONEX_Battlebooks_FireSpellAtPosition");
+NOT DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Source, "LLWEAPONEX_BattleBooks_SpellScroll_Spells", _Spell);
+DB_LLWEAPONEX_BattleBooks_Temp_SpellScrollAttackPosition((CHARACTERGUID)_Source, _Spell, _x, _y, _z);
+SetStoryEvent(_Source, "LLWEAPONEX_Battlebooks_SpellScroll_FireSpellAtPosition");
 
 IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Battlebooks_FireSpellAtPosition")
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Battlebooks_SpellScroll_FireSpellAtPosition")
 AND
-DB_LLWEAPONEX_BattleBooks_Temp_SpellbookAttackPosition(_Char, _Spell, _x, _y, _z)
+DB_LLWEAPONEX_BattleBooks_Temp_SpellScrollAttackPosition(_Char, _Spell, _x, _y, _z)
 AND
-NOT DB_LLWEAPONEX_BattleBooks_Temp_FiringSpell(_Char)
+NOT DB_LLWEAPONEX_BattleBooks_Temp_FiringSpell(_Char, _)
 THEN
-NOT DB_LLWEAPONEX_BattleBooks_Temp_SpellbookAttackPosition(_Char, _Spell, _x, _y, _z);
-DB_LLWEAPONEX_BattleBooks_Temp_FiringSpell(_Char);
-SetVarFixedString(_Char, "LLWEAPONEX_Battlebooks_SpellbookProjectile", _Spell);
-SetVarFloat3(_Char, "LLWEAPONEX_Battlebooks_SpellbookAttackPosition", _x, _y, _z);
-SetStoryEvent(_Char, "LLWEAPONEX_Battlebooks_ExplodeSpellAtPosition");
+NOT DB_LLWEAPONEX_BattleBooks_Temp_SpellScrollAttackPosition(_Char, _Spell, _x, _y, _z);
+DB_LLWEAPONEX_BattleBooks_Temp_FiringSpell(_Char, _Spell);
+SetVarFixedString(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_Projectile", _Spell);
+SetVarFloat3(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_AttackPosition", _x, _y, _z);
+SetStoryEvent(_Char, "LLWEAPONEX_Battlebooks_SpellScroll_ExplodeSpellAtPosition");
+LLWEAPONEX_BattleBooks_OnSpellScrollExploded(_Char, _Spell, _x, _y, _z);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Battlebooks_SpellScroll_ExplodeSpellAtPosition")
+AND
+DB_LLWEAPONEX_BattleBooks_Temp_FiringSpell(_Char, _Spell)
+THEN
+NOT DB_LLWEAPONEX_BattleBooks_Temp_FiringSpell(_Char, _Spell);
+
+PROC
+LLWEAPONEX_BattleBooks_OnSpellScrollExploded((CHARACTERGUID)_Char, (STRING)_Spell, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+DB_LLWEAPONEX_BattleBooks_SpellScroll_CasterEffects(_Spell, _Effect, _Bone)
+THEN
+PlayEffect(_Char, _Effect, _Bone);
+
+PROC
+LLWEAPONEX_BattleBooks_OnSpellScrollExploded((CHARACTERGUID)_Char, (STRING)_Spell, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ExpodeEffects(_Spell, _Effect, _Scale)
+THEN
+PlayScaledEffectAtPosition(_Effect, _Scale, _x, _y, _z);
+
+PROC
+LLWEAPONEX_BattleBooks_OnSpellScrollExploded((CHARACTERGUID)_Char, (STRING)_Spell, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+DB_LLWEAPONEX_BattleBooks_SpellScroll_SpellNames(_Spell, _DisplayName)
+THEN
+CharacterStatusText(_Char, "LLWEAPONEX_StatusText_BattleBook_SpellScroll_BonusProc");
+CharacterStatusText(_Char, _DisplayName);
+
+PROC
+LLWEAPONEX_BattleBooks_OnSpellScrollExploded((CHARACTERGUID)_Char, (STRING)_Spell, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+DB_LLWEAPONEX_BattleBooks_SpellScroll_Materials(_Spell, _MaterialStatus)
+THEN
+ApplyStatus(_Char, _MaterialStatus, -1.0, 1, _Char);
 
 QRY
 LLWEAPONEX_BattleBooks_HasSpellsQueuedUp((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_BattleBooks_Temp_SpellbookAttackPosition(_Char, _Spell, _x, _y, _z)
+DB_LLWEAPONEX_BattleBooks_Temp_SpellScrollAttackPosition(_Char, _Spell, _x, _y, _z)
 THEN
 DB_NOOP(1);
 
 IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Battlebooks_SpellExplodedAtPosition")
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Battlebooks_SpellScroll_SpellExplodedAtPosition")
 AND
 LLWEAPONEX_BattleBooks_HasSpellsQueuedUp(_Char)
 THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_Battlebooks_FireSpellAtPosition", "LLWEAPONEX_Battlebooks_FireSpellAtPosition");
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_Battlebooks_SpellScroll_FireSpellAtPosition", "LLWEAPONEX_Battlebooks_SpellScroll_FireSpellAtPosition");
 //END_REGION
 EXITSECTION
 

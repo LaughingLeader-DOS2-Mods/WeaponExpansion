@@ -71,7 +71,7 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_11_Blunderbuss", "LLWE
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_12_ShieldCover", "LLWEAPONEX_ShieldCoverActive");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_SpellbookBattleBook", "LLWEAPONEX_SpellbookBattleBookEquipped");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_10_BattleBook_SpellScroll", "LLWEAPONEX_BattleBooks_SpellScrollEquipped");
 //END_REGION
 
 //REGION UPDATE_ACTIVATE_SCRIPT

@@ -221,7 +221,6 @@ WPN_LLWEAPONEX_Greatbow_Crafted_1_DisplayName	Trusty Old Greatbow
 WPN_LLWEAPONEX_Greatbow_Crafted_1_Description	An old greatbow passed down as a family heirloom. Not the strongest, but it'll do.
 WPN_LLWEAPONEX_Greatbow_Crafted_2_DisplayName	Greatbow
 WPN_LLWEAPONEX_Greatbow_Crafted_3_DisplayName	Artisan Greatbow
-WPN_LLWEAPONEX_Greatbow_Crafted_3_DisplayName	Artisan Greatbow
 WPN_LLWEAPONEX_Greatbow_Normal_1_DisplayName	Hunter's Greatbow
 WPN_LLWEAPONEX_Greatbow_Normal_2_DisplayName	Strongman's Greatbow
 WPN_LLWEAPONEX_Greatbow_Normal_3_DisplayName	Warrior's Greatbow
@@ -472,6 +471,7 @@ WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil_DisplayName	Balrin's Throwing Axe (
 WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water_DisplayName	Balrin's Throwing Axe (Ice)
 WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_DisplayName	Scripture of the Righteous
 WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_DisplayName	Talsim's Oversized Book of Spells
+WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellscroll_A_DisplayName	Gnak's Spell Scroll
 WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_DisplayName	Eruption, the Portable Cannon
 WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A_DisplayName	Pacifist's Wrath (1H)
 WPN_UNIQUE_LLWEAPONEX_Bokken_2H_A_DisplayName	Pacifist's Wrath (2H)

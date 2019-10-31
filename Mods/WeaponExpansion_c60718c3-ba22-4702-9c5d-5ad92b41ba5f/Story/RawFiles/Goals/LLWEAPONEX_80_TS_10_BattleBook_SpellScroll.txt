@@ -1,0 +1,23 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterStartAttackPosition(_x, _y, _z, _, _Char)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_SpellScrollBattleBookEquipped", 1)
+AND
+LeaderLib_Roll_QRY(300)
+AND
+LeaderLib_Randomization_QRY_Tables_Roll((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells")
+AND
+DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells", _Spell)
+THEN
+NOT DB_LeaderLib_Randomization_Temp_RollResult((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells", _Spell);
+DB_LLWEAPONEX_BattleBooks_Temp_SpellScrollAttackPosition((CHARACTERGUID)_Char, _Spell, _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Char, 1000, "LLWEAPONEX_Timers_Battlebooks_SpellScroll_FireSpellAtPosition", "LLWEAPONEX_Battlebooks_SpellScroll_FireSpellAtPosition");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

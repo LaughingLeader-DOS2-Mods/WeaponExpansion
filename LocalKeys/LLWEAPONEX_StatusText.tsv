@@ -19,3 +19,4 @@ LLWEAPONEX_StatusText_BlockedHealing	<font color='#c51fe8' size='18'>Healing Blo
 LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted	<font color='#FFA900' size='22'>Bolts Auto-Inserted into Hand Crossbow</font>
 LLWEAPONEX_StatusText_BalrinAxeRetrieved	<font color='#ED9D07'>*You retrieve your axe with a sharp pull. Brutal!*
 LLWEAPONEX_StatusText_BalrinAxeTimedOut	<font color='#E4CE93'>*Your axe finds its way back to you.*
+LLWEAPONEX_StatusText_BattleBook_SpellScroll_BonusProc	<font color='#ED9D07'>Spell Triggered!</font>

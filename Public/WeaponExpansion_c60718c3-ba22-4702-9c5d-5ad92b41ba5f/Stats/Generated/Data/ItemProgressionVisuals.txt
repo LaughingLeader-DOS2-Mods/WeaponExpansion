@@ -1763,20 +1763,26 @@ add namegroup "WPN_LLWEAPONEX_BattleBook_E","","Item_BOOK_Book_E"
 new itemgroup "WPN_LLWEAPONEX_BattleBook_F"
 
 add levelgroup 0,0,"All"
-add rootgroup "5577d7f7-697f-4d1b-904e-550827d29e4a,""
+add rootgroup "5577d7f7-697f-4d1b-904e-550827d29e4a",""
 add namegroup "WPN_LLWEAPONEX_BattleBook_F","","Item_BOOK_Book_F"
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B"
 
 add levelgroup 0,0,"All"
-add rootgroup "d67c4ed3-4892-48e5-94fd-1cd966fe1f27,""
+add rootgroup "d67c4ed3-4892-48e5-94fd-1cd966fe1f27",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A"
 
 add levelgroup 0,0,"All"
-add rootgroup "ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1,""
+add rootgroup "ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellscroll_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "f393c9d6-d90c-483f-be94-b47e9419395d",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellscroll_A","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 
