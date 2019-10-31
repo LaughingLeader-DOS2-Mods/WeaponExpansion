@@ -117,7 +117,7 @@ DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Fortify", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH", 0);
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_PyroclasticRock", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH", 1);
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Earthquake", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH", 0);
-DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_EARTH", 0);
+DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_Contamination", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_POISON", 0);
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_FavourableWind", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_AIR", 0);
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_ShockingTouch", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_AIR", 0);
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_Battlebooks_SpellScroll_BlindingRadiance", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_AIR", 0);
@@ -152,13 +152,19 @@ LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BibleBattleBookEquip
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 0);
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
+AND
+NOT LeaderLib_Randomization_Tables_QRY_TableInitialized((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells")
+THEN
+LeaderLib_Randomization_Tables_BuildTable(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells");
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 0);
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion", 500);
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
@@ -175,20 +181,6 @@ GetTemplate(_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d
 THEN
 PlayEffect(_Item, "LLWEAPONEX_FX_Status_SpellScroll_ElementShifted_Item_01");
 */
-
-PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
-AND
-PartyGetFlag(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 0)
-THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion", 500);
-
-PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
-AND
-NOT LeaderLib_Randomization_Tables_QRY_TableInitialized((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells")
-THEN
-LeaderLib_Randomization_Tables_BuildTable(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells");
 //END_REGION
 
 //REGION SPELLBOOK_RANDOM_SPELL
@@ -229,12 +221,36 @@ THEN
 LeaderLib_Timers_StartObjectTimer(_Source, 1000, "LLWEAPONEX_Timers_Battlebooks_SpellScroll_FireSpellAtPosition", "LLWEAPONEX_Battlebooks_SpellScroll_FireSpellAtPosition");
 
 IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Battlebooks_SpellScroll_FireSpellAtPosition")
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY");
+
+IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", _Source)
 AND
 ObjectIsCharacter((CHARACTERGUID)_Source, 1)
 AND
+HasActiveStatus(_Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY", 1)
+AND
 GetPosition(_Char, _x, _y, _z)
 THEN
+CharacterStatusText(_Char, "LLWEAPONEX_StatusText_BattleBook_SpellScroll_BadaBoom");
+RemoveStatus(_Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY");
+LLWEAPONEX_BattleBooks_SpellScroll_Fire(_Source, _x, _y, _z, 0);
+
+IF
+ItemStatusChange(_Item, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", _Source)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Source, 1)
+AND
+HasActiveStatus(_Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY", 1)
+AND
+GetPosition(_Item, _x, _y, _z)
+THEN
+DisplayText(_Item, "LLWEAPONEX_StatusText_BattleBook_SpellScroll_BadaBoom");
+RemoveStatus(_Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY");
 LLWEAPONEX_BattleBooks_SpellScroll_Fire(_Source, _x, _y, _z, 0);
 
 IF

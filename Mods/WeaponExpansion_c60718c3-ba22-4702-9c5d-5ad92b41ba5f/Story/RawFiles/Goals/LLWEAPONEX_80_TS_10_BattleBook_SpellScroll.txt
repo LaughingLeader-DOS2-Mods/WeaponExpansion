@@ -4,14 +4,15 @@ INITSECTION
 
 KBSECTION
 IF
-CharacterStartAttackPosition(_x, _y, _z, _, _Source)
+CharacterStartAttackPosition(_x, _y, _z, _, _Char)
 AND
-ObjectGetFlag(_Source, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1)
-//AND
-//LeaderLib_Roll_QRY(300, 999)
+IsTagged(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY", 1)
 THEN
-LLWEAPONEX_BattleBooks_SpellScroll_Fire(_Source, _x, _y, _z, 1000);
+LLWEAPONEX_BattleBooks_SpellScroll_Fire(_Char, _x, _y, _z, 1000);
 
+//Summon by SkilLProperties workaround
 IF
 CharacterStatusAttempt(_Char, "SUMMONING", _)
 AND
@@ -19,11 +20,16 @@ IsTagged(_Char, "TOTEM", 1)
 AND
 CharacterGetOwner(_Char, _Owner)
 AND
-ObjectGetFlag(_Owner, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1)
+IsTagged(_Owner, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1)
 AND
 GetVarFloat3(_Owner, "LLWEAPONEX_Battlebooks_SpellScroll_AttackPosition", _x, _y, _z)
 THEN
-TeleportToPosition(_Char, _x, _y, _z, "", 0, 1);
+TeleportToPosition(_Char, _x, _y, _z, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported", 0, 1);
+
+IF
+StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported")
+THEN
+TeleportTo(_Totem, _Totem, "", 0, 1);
 EXITSECTION
 
 ENDEXITSECTION

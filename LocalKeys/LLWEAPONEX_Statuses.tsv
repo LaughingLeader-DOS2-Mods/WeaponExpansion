@@ -86,6 +86,6 @@ LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith
 LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.
 LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName	Bounty of the Harvest
 LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls with <font color='#c5a65a'>Soul Harvest</font>, gaining a permanent damage bonus.
-LLWEAPONEX_BATTLEBOOK_BIBLE_BONUS_DisplayName	Divine Smite - Deals bonus damage to Voidwoken and Undead
-LLWEAPONEX_BATTLEBOOK_SPELLBOOK_HIT_DisplayName	Arcane Knowledge - Chance to explode a basic spell on attack
-LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_DisplayName	Bada Boom - Chance to explode a basic spell on attack
+LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_DisplayName	Bada Bing
+LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_Description	Character's next attack with their oversized scroll will unleash a random spell and grant bonus damage.
+LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_ELEMENT_Description	Character's oversized scroll has been infused with a spell school, and has gained bonus damage.
