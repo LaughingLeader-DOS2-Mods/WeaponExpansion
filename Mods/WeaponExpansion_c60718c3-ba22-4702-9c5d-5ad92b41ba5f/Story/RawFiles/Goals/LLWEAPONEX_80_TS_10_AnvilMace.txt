@@ -10,7 +10,7 @@ ObjectGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 1)
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 1)
 THEN
-PlaySound(_Target, "LeaderLib_Anvil_Hit1");
+PlaySound(_Target, "LeaderLib_Impacts_Anvil_01");
 ApplyStatus(_Target, "LLWEAPONEX_DIZZY", 6.0, 0, _Char);
 
 IF
