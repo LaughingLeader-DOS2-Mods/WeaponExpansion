@@ -35,7 +35,7 @@ add skill "Shout_Adrenaline"
 
 new skillset "Class_LLWEAPONEX_Assassin"
 add skill "MultiStrike_Vault"
-add skill "Target_TentacleLash"
+add skill "Projectile_ThrowingKnife"
 add skill "Shout_ChameleonSkin"
 
 new skillset "Class_LLWEAPONEX_DualShields"
