@@ -478,9 +478,9 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_Wakizashi_1H_A_Crafted"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_Wakizashi_1H_B_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -502,9 +502,9 @@ add equipment entry "ARM_Shadowblade_Gloves"
 add equipmentgroup
 add equipment entry "ARM_Shadowblade_Boots"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Preview"
+add equipment entry "WPN_LLWEAPONEX_Wakizashi_1H_A_Preview"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_1H_Preview"
+add equipment entry "WPN_LLWEAPONEX_Wakizashi_1H_B_Preview"
 
 new equipment "Class_LLWEAPONEX_DualShields_Start"
 add equipmentgroup
