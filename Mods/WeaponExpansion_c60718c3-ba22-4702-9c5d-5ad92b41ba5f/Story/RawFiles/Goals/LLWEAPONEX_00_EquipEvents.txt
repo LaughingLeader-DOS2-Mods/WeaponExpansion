@@ -49,6 +49,9 @@ LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Temp
 AND
 IsTagged(_Item, "LLWEAPONEX_TaggedWeaponType", 0)
 AND
+// Is tagged, but is missing LLWEAPONEX_TaggedWeaponType
+NOT LLWEAPONEX_TagHelper_QRY_TagIsValidated(_Char, _Item)
+AND
 NOT LLWEAPONEX_TagHelper_QRY_TagFromTemplate(_Char, _Item, _Template) // Vanilla template to tag
 AND
 LLWEAPONEX_TagHelper_QRY_CheckWeaponType(_Char, _Item) // Try and get the type via behavior

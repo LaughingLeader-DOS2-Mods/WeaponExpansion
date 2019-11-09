@@ -1,0 +1,34 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION THROWING_KNIFE_BONUS
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "Projectile_ThrowingKnife", (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+IsTagged(_Char, "LLWEAPONEX_Dagger_Mastery1", 1)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
+AND
+LeaderLib_Roll_QRY(500,999)
+THEN
+SetVarFloat3(_Char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", _x, _y, _z);
+ObjectSetFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0);
+
+PROC
+LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Projectile_ThrowingKnife")
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", "LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus")
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

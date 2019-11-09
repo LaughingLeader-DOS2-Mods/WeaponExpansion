@@ -6,39 +6,33 @@ KBSECTION
 //REGION THROWING_KNIFE_BONUS
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_ThrowingKnife", _, _)
-AND
-IsTagged(_Char, "LLWEAPONEX_Dagger_Mastery1", 1)
-AND
-LeaderLib_Roll_QRY(500,999)
-AND
-GetPosition(_Target, _x, _y, _z)
 THEN
-SetVarFloat3(_Char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", _x, _y, _z);
-ObjectSetFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0);
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_CHar, "Projectile_ThrowingKnife", _Target);
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_EnemyThrowingKnife", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_CHar, "Projectile_ThrowingKnife", _Target);
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_ThrowingKnife", _, _)
-AND
-IsTagged(_Char, "LLWEAPONEX_Dagger_Mastery1", 1)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
-AND
-LeaderLib_Roll_QRY(500,999)
 THEN
-SetVarFloat3(_Char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", _x, _y, _z);
-ObjectSetFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0);
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_CHar, "Projectile_ThrowingKnife", _x, _y, _z);
+
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_EnemyThrowingKnife", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_CHar, "Projectile_ThrowingKnife", _x, _y, _z);
 
 IF
 SkillCast(_Char, "Projectile_ThrowingKnife", _, _)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 1)
 THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", "LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus");
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "Projectile_ThrowingKnife");
 
 IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus")
+SkillCast(_Char, "Projectile_EnemyThrowingKnife", _, _)
 THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0);
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "Projectile_ThrowingKnife");
 
 //May have hit a target on the way to the original one
 IF
