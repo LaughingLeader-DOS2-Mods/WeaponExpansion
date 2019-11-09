@@ -220,4 +220,22 @@ type "ObjectCategories"
 data "Category" "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A"
 data "Icon" "LLWEAPONEX_Items_Halberd_2H_Unique_Warchief_B"
 data "Tooltip" "Warchief's Halberd (Axe)"
+
+new CraftingPreviewData "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A"
+type "ObjectCategories"
+data "Category" "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A"
+data "Icon" "LLWEAPONEX_Items_Unique_AnvilMace_2H_A"
+data "Tooltip" "Anvilmar, Dwarven Negotiator"
+
+new CraftingPreviewData "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B"
+type "ObjectCategories"
+data "Category" "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B"
+data "Icon" "LLWEAPONEX_Items_Unique_Bible_2H_A"
+data "Tooltip" "Scripture of the Righteous"
+
+new CraftingPreviewData "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A"
+type "ObjectCategories"
+data "Category" "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A"
+data "Icon" "LLWEAPONEX_Items_Unique_BattleScroll_2H_A"
+data "Tooltip" "Gnak's Spell Scroll"
 //END_REGION

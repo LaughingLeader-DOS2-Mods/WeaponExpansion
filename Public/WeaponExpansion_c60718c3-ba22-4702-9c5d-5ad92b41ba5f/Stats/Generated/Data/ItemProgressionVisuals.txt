@@ -1842,11 +1842,11 @@ add levelgroup 0,0,"All"
 add rootgroup "ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A","",""
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellscroll_A"
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "f393c9d6-d90c-483f-be94-b47e9419395d",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellscroll_A","",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 
