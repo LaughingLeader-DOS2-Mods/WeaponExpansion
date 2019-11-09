@@ -924,6 +924,70 @@ add levelgroup 0,0,"All"
 add rootgroup "6650aab3-c5e3-45a8-ae4e-b4e8011cb1a6",""
 add namegroup "WPN_LLWEAPONEX_Katana_1H_Crafted","",""
 
+new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_A"
+
+add levelgroup 0,0,"Common"
+add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_A_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_B"
+
+add levelgroup 0,0,"Common"
+add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_B_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
+add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Crafted","",""
+
 new itemgroup "WPN_LLWEAPONEX_Katana_2H"
 
 add levelgroup 0,0,"Common"

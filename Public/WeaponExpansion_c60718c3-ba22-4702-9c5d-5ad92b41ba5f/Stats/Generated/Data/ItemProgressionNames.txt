@@ -470,6 +470,30 @@ add name "WPN_LLWEAPONEX_Katana_1H_Rare_3_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_1H_Rare_4_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_1H_Rare_5_DisplayName",""
 
+new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Crafted"
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Crafted_DisplayName",""
+
+new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic"
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_1_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_2_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_3_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_4_DisplayName",""
+add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Epic_5_DisplayName",""
+add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Epic_6_DisplayName",""
+add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Epic_7_DisplayName",""
+
+new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal"
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Normal_1_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Normal_2_DisplayName",""
+add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Normal_3_DisplayName",""
+
+new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Rare"
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_1_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_2_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_3_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_4_DisplayName",""
+add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_5_DisplayName",""
+
 new namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted"
 add name "WPN_LLWEAPONEX_Katana_2H_Crafted_DisplayName",""
 
