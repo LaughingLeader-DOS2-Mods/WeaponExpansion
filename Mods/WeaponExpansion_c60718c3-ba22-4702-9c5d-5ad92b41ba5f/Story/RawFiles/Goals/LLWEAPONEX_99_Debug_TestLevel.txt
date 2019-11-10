@@ -1833,6 +1833,44 @@ THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX:Debug:SurfaceInt] Integer: (",_NextInt,")");
 SetVarInteger(_Host, "LLWEAPONEX_Debug_SurfaceInt", _NextInt);
 SetStoryEvent(_Host, "LLWEAPONEX_Debug_SurfaceIndexTest");
+
+QRY
+LLWEAPONEX_Debug_QRY_HasTwoHandedWeapon((CHARACTERGUID)_Character)
+AND
+CharacterGetEquippedItem(_Character, "Weapon", _Item)
+AND
+CharacterGetEquippedItem(_Character, "Shield", _Item)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Debug_QRY_HasTwoHandedWeapon((CHARACTERGUID)_Character)
+AND
+CharacterGetEquippedItem(_Character, "Weapon", _Item)
+AND
+CharacterGetEquippedItem(_Character, "Shield", _Item)
+THEN
+DB_NOOP(1);
+
+IF
+TextEventSet("llweap_handedness")
+AND
+CharacterGetHostCharacter(_Char)
+AND
+LLWEAPONEX_Debug_QRY_HasTwoHandedWeapon(_Char)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:TextEventSet(llweap_handedness)] Weapon is two-handed");
+
+IF
+TextEventSet("llweap_handedness")
+AND
+CharacterGetHostCharacter(_Char)
+AND
+NOT LLWEAPONEX_Debug_QRY_HasTwoHandedWeapon(_Char)
+AND
+LeaderLib_Helper_QRY_WeaponIsEquipped(_Char)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:TextEventSet(llweap_handedness)] Weapon is one-handed.");
 EXITSECTION
 
 ENDEXITSECTION
