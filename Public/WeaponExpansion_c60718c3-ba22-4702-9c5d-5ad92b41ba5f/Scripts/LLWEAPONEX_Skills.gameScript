@@ -86,7 +86,7 @@ IF "c1&!c2"
 	GetPosition(_Char, _Pos)
 	IsEqual(_Target, null)
 THEN
-	Multiply(_Target, FLOAT:2.8) // Weapon range
+	Multiply(_Target, FLOAT:2.0) // Weapon range
 	Add(_Target, _Pos)
 	ExplodeAt(_Target, Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact, _Level, _Char)
 ENDIF
