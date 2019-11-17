@@ -207,7 +207,7 @@ data "DisplayName" "LLWEAPONEX_COVERED_SHELL_DisplayName"
 data "Description" "LLWEAPONEX_COVERED_SHELL_Description"
 data "DisplayNameRef" "Covered (Shell)"
 data "DescriptionRef" "Character has temporary damage resistance."
-data "Icon" "statIcons_Immune_AllElements"
+data "Icon" "LeaderLib_Placeholder"
 data "StatsId" "Stats_LLWEAPONEX_CoveredShell"
 data "StackId" "Stack_LLWEAPONEX_CoveredShell"
 

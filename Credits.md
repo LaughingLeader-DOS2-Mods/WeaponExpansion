@@ -12,6 +12,8 @@ Thanks to all the artists listed below!
     - https://www.deviantart.com/lege/art/Iaido-15628983
   - Shieldbash Link by unknown
     - http://i.imgur.com/yScJ0MW.jpg
+  - Standard Bearer by Jaan van Eeden
+    - https://www.artstation.com/artwork/JDQeR
 ## Brushes
   - Mange Speedlines by shadowsmyst
     - https://www.deviantart.com/shadowsmyst/art/Manga-Speedlines-PS-brushes-47200537
