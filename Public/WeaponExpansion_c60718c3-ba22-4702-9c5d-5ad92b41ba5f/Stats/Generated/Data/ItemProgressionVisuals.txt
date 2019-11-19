@@ -2380,3 +2380,9 @@ new itemgroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A"
 add levelgroup 0,0,"All"
 add rootgroup "dda1182e-63e3-4a7a-8855-5295fa1e67cb",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "84af126d-0e35-482b-b117-f85e7672a129",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A","",""

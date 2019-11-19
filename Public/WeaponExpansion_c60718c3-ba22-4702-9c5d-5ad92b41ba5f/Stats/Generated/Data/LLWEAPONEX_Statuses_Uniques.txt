@@ -507,6 +507,7 @@ data "PermanentOnTorch" "No"
 data "SpawnBlood" "No"
 data "DamageEvent" "OnApply"
 data "LeaveAction" "Projectile_LLWEAPONEX_Status_BattleBook_Bible_BonusDamage"
+data "DieAction" "Projectile_LLWEAPONEX_Status_BattleBook_Bible_OnDeath"
 
 new entry "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT"
 type "StatusData"

@@ -3237,3 +3237,7 @@ data "PreviewIcon" "LLWEAPONEX_Scaling_Reset"
 data "PreviewTooltip" "Reset Scaling"
 
 //END_REGION
+
+//REGION DYEING_COLOR
+
+//END_REGION

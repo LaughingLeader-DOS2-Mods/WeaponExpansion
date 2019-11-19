@@ -1,0 +1,734 @@
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_AliceBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_AliceBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_AntiqueWhite"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_AntiqueWhite"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Aqua"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Aqua"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Aquamarine"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Aquamarine"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Azure"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Azure"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Beige"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Beige"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Bisque"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Bisque"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Black"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Black"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_BlanchedAlmond"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_BlanchedAlmond"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Blue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Blue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_BlueViolet"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_BlueViolet"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Brown"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Brown"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_BurlyWood"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_BurlyWood"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_CadetBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_CadetBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Chartreuse"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Chartreuse"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Chocolate"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Chocolate"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Coral"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Coral"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_CornflowerBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_CornflowerBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Cornsilk"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Cornsilk"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Crimson"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Crimson"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Cyan"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Cyan"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkCyan"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkCyan"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGoldenRod"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkGoldenRod"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGray"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkGray"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGrey"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkGrey"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkKhaki"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkKhaki"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkMagenta"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkMagenta"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkOliveGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkOliveGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Darkorange"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Darkorange"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkOrchid"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkOrchid"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkRed"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkRed"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSalmon"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkSalmon"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSeaGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkSeaGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkSlateBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGray"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkSlateGray"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGrey"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkSlateGrey"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkTurquoise"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkTurquoise"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkViolet"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DarkViolet"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DeepPink"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DeepPink"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DeepSkyBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DeepSkyBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DimGray"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DimGray"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DimGrey"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DimGrey"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_DodgerBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_DodgerBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_FireBrick"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_FireBrick"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_FloralWhite"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_FloralWhite"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_ForestGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_ForestGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Fuchsia"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Fuchsia"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Gainsboro"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Gainsboro"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_GhostWhite"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_GhostWhite"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Gold"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Gold"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_GoldenRod"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_GoldenRod"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Gray"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Gray"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Grey"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Grey"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Green"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Green"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_GreenYellow"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_GreenYellow"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_HoneyDew"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_HoneyDew"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_HotPink"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_HotPink"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_IndianRed"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_IndianRed"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Indigo"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Indigo"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Ivory"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Ivory"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Khaki"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Khaki"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Lavender"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Lavender"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LavenderBlush"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LavenderBlush"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LawnGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LawnGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LemonChiffon"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LemonChiffon"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightCoral"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightCoral"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightCyan"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightCyan"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGoldenRodYellow"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightGoldenRodYellow"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGray"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightGray"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGrey"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightGrey"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightPink"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightPink"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSalmon"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightSalmon"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSeaGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightSeaGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSkyBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightSkyBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGray"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightSlateGray"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGrey"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightSlateGrey"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSteelBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightSteelBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LightYellow"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LightYellow"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Lime"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Lime"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_LimeGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_LimeGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Linen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Linen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Magenta"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Magenta"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Maroon"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Maroon"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumAquaMarine"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumAquaMarine"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumOrchid"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumOrchid"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumPurple"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumPurple"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumSeaGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumSeaGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumSlateBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumSlateBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumSpringGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumSpringGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumTurquoise"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumTurquoise"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumVioletRed"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MediumVioletRed"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MidnightBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MidnightBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MintCream"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MintCream"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_MistyRose"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_MistyRose"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Moccasin"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Moccasin"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_NavajoWhite"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_NavajoWhite"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Navy"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Navy"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_OldLace"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_OldLace"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Olive"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Olive"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_OliveDrab"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_OliveDrab"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Orange"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Orange"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_OrangeRed"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_OrangeRed"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Orchid"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Orchid"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleGoldenRod"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_PaleGoldenRod"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_PaleGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleTurquoise"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_PaleTurquoise"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleVioletRed"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_PaleVioletRed"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_PapayaWhip"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_PapayaWhip"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_PeachPuff"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_PeachPuff"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Peru"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Peru"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Pink"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Pink"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Plum"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Plum"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_PowderBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_PowderBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Purple"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Purple"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Red"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Red"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_RosyBrown"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_RosyBrown"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_RoyalBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_RoyalBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SaddleBrown"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SaddleBrown"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Salmon"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Salmon"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SandyBrown"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SandyBrown"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SeaGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SeaGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SeaShell"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SeaShell"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Sienna"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Sienna"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Silver"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Silver"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SkyBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SkyBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SlateBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SlateBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SlateGray"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SlateGray"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SlateGrey"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SlateGrey"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Snow"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Snow"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SpringGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SpringGreen"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_SteelBlue"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_SteelBlue"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Tan"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Tan"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Teal"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Teal"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Thistle"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Thistle"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Tomato"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Tomato"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Turquoise"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Turquoise"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Violet"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Violet"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Wheat"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Wheat"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_White"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_White"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_WhiteSmoke"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_WhiteSmoke"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_Yellow"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_Yellow"
+
+new entry "_Boost_LLWEAPONEX_Armor_Dye_Color_YellowGreen"
+type "Armor"
+using "_BOOSTS_Armor"
+data "ItemColor" "LLWEAPONEX_YellowGreen"

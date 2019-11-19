@@ -1602,3 +1602,1035 @@ param "WeaponType" "Crossbow"
 new boost "_Boost_Weapon_Secondary_CriticalChance_TwoHanded",1
 
 //Overrides End
+
+//REGION DYEING
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_AliceBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_AliceBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_AntiqueWhite"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_AntiqueWhite",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Aqua"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Aqua",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Aquamarine"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Aquamarine",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Azure"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Azure",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Beige"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Beige",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Bisque"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Bisque",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Black"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Black",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_BlanchedAlmond"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_BlanchedAlmond",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Blue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Blue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_BlueViolet"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_BlueViolet",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Brown"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Brown",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_BurlyWood"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_BurlyWood",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_CadetBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_CadetBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Chartreuse"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Chartreuse",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Chocolate"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Chocolate",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Coral"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Coral",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_CornflowerBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_CornflowerBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Cornsilk"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Cornsilk",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Crimson"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Crimson",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Cyan"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Cyan",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkCyan"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkCyan",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGoldenRod"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGoldenRod",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGray"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGray",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGrey"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGrey",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkKhaki"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkKhaki",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkMagenta"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkMagenta",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkOliveGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkOliveGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Darkorange"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Darkorange",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkOrchid"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkOrchid",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkRed"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkRed",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSalmon"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSalmon",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSeaGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSeaGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGray"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGray",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGrey"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGrey",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkTurquoise"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkTurquoise",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DarkViolet"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DarkViolet",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DeepPink"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DeepPink",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DeepSkyBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DeepSkyBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DimGray"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DimGray",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DimGrey"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DimGrey",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_DodgerBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_DodgerBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_FireBrick"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_FireBrick",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_FloralWhite"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_FloralWhite",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_ForestGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_ForestGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Fuchsia"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Fuchsia",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Gainsboro"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Gainsboro",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_GhostWhite"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_GhostWhite",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Gold"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Gold",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_GoldenRod"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_GoldenRod",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Gray"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Gray",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Grey"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Grey",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Green"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Green",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_GreenYellow"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_GreenYellow",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_HoneyDew"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_HoneyDew",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_HotPink"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_HotPink",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_IndianRed"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_IndianRed",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Indigo"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Indigo",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Ivory"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Ivory",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Khaki"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Khaki",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Lavender"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Lavender",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LavenderBlush"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LavenderBlush",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LawnGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LawnGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LemonChiffon"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LemonChiffon",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightCoral"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightCoral",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightCyan"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightCyan",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightGoldenRodYellow"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGoldenRodYellow",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightGray"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGray",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightGrey"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGrey",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightPink"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightPink",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightSalmon"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSalmon",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightSeaGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSeaGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightSkyBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSkyBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGray"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGray",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGrey"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGrey",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightSteelBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightSteelBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LightYellow"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LightYellow",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Lime"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Lime",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_LimeGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_LimeGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Linen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Linen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Magenta"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Magenta",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Maroon"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Maroon",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumAquaMarine"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumAquaMarine",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumOrchid"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumOrchid",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumPurple"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumPurple",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumSeaGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumSeaGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumSlateBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumSlateBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumSpringGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumSpringGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumTurquoise"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumTurquoise",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MediumVioletRed"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MediumVioletRed",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MidnightBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MidnightBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MintCream"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MintCream",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_MistyRose"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_MistyRose",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Moccasin"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Moccasin",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_NavajoWhite"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_NavajoWhite",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Navy"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Navy",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_OldLace"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_OldLace",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Olive"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Olive",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_OliveDrab"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_OliveDrab",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Orange"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Orange",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_OrangeRed"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_OrangeRed",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Orchid"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Orchid",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_PaleGoldenRod"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleGoldenRod",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_PaleGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_PaleTurquoise"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleTurquoise",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_PaleVioletRed"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_PaleVioletRed",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_PapayaWhip"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_PapayaWhip",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_PeachPuff"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_PeachPuff",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Peru"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Peru",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Pink"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Pink",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Plum"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Plum",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_PowderBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_PowderBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Purple"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Purple",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Red"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Red",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_RosyBrown"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_RosyBrown",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_RoyalBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_RoyalBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SaddleBrown"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SaddleBrown",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Salmon"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Salmon",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SandyBrown"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SandyBrown",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SeaGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SeaGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SeaShell"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SeaShell",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Sienna"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Sienna",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Silver"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Silver",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SkyBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SkyBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SlateBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SlateBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SlateGray"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SlateGray",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SlateGrey"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SlateGrey",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Snow"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Snow",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SpringGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SpringGreen",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_SteelBlue"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_SteelBlue",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Tan"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Tan",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Teal"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Teal",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Thistle"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Thistle",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Tomato"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Tomato",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Turquoise"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Turquoise",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Violet"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Violet",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Wheat"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Wheat",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_White"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_White",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_WhiteSmoke"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_WhiteSmoke",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_Yellow"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_Yellow",1
+
+new deltamod "Boost_LLWEAPONEX_Armor_Dye_Color_YellowGreen"
+param "BoostType" "ItemCombo"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Armor"
+new boost "_Boost_LLWEAPONEX_Armor_Dye_Color_YellowGreen",1
+//END_REGION
