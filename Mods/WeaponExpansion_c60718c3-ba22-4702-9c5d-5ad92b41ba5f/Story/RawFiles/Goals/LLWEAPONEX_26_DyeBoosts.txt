@@ -1,0 +1,190 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_DyeBoosts_InitSettings();
+KBSECTION
+PROC
+LLWEAPONEX_DyeBoosts_InitSettings()
+THEN
+LeaderLib_DynamicMenu_Register_DefaultMenu("LLWEAPONEX_DyeBoosts");
+//REGION AUTO_GENERATED_DICTIONARY_ENTRIES
+PROC
+LLWEAPONEX_DyeBoosts_InitSettings()
+THEN
+
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 0, "Boost_LLWEAPONEX_Armor_Dye_Color_AliceBlue", "<font color='#F0F8FF'>AliceBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 1, "Boost_LLWEAPONEX_Armor_Dye_Color_AntiqueWhite", "<font color='#FAEBD7'>AntiqueWhite</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 2, "Boost_LLWEAPONEX_Armor_Dye_Color_Aqua", "<font color='#00FFFF'>Aqua</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 3, "Boost_LLWEAPONEX_Armor_Dye_Color_Aquamarine", "<font color='#7FFFD4'>Aquamarine</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 4, "Boost_LLWEAPONEX_Armor_Dye_Color_Azure", "<font color='#F0FFFF'>Azure</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 5, "Boost_LLWEAPONEX_Armor_Dye_Color_Beige", "<font color='#F5F5DC'>Beige</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 6, "Boost_LLWEAPONEX_Armor_Dye_Color_Bisque", "<font color='#FFE4C4'>Bisque</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 7, "Boost_LLWEAPONEX_Armor_Dye_Color_Black", "<font color='#000000'>Black</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 8, "Boost_LLWEAPONEX_Armor_Dye_Color_BlanchedAlmond", "<font color='#FFEBCD'>BlanchedAlmond</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 9, "Boost_LLWEAPONEX_Armor_Dye_Color_Blue", "<font color='#0000FF'>Blue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 10, "Boost_LLWEAPONEX_Armor_Dye_Color_BlueViolet", "<font color='#8A2BE2'>BlueViolet</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 11, "Boost_LLWEAPONEX_Armor_Dye_Color_Brown", "<font color='#A52A2A'>Brown</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 12, "Boost_LLWEAPONEX_Armor_Dye_Color_BurlyWood", "<font color='#DEB887'>BurlyWood</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 13, "Boost_LLWEAPONEX_Armor_Dye_Color_CadetBlue", "<font color='#5F9EA0'>CadetBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 14, "Boost_LLWEAPONEX_Armor_Dye_Color_Chartreuse", "<font color='#7FFF00'>Chartreuse</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 15, "Boost_LLWEAPONEX_Armor_Dye_Color_Chocolate", "<font color='#D2691E'>Chocolate</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 16, "Boost_LLWEAPONEX_Armor_Dye_Color_Coral", "<font color='#FF7F50'>Coral</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 17, "Boost_LLWEAPONEX_Armor_Dye_Color_CornflowerBlue", "<font color='#6495ED'>CornflowerBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 18, "Boost_LLWEAPONEX_Armor_Dye_Color_Cornsilk", "<font color='#FFF8DC'>Cornsilk</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 19, "Boost_LLWEAPONEX_Armor_Dye_Color_Crimson", "<font color='#DC143C'>Crimson</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 20, "Boost_LLWEAPONEX_Armor_Dye_Color_Cyan", "<font color='#00FFFF'>Cyan</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 21, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkBlue", "<font color='#00008B'>DarkBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 22, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkCyan", "<font color='#008B8B'>DarkCyan</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 23, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGoldenRod", "<font color='#B8860B'>DarkGoldenRod</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 24, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGray", "<font color='#A9A9A9'>DarkGray</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 25, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGrey", "<font color='#A9A9A9'>DarkGrey</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 26, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkGreen", "<font color='#006400'>DarkGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 27, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkKhaki", "<font color='#BDB76B'>DarkKhaki</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 28, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkMagenta", "<font color='#8B008B'>DarkMagenta</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 29, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkOliveGreen", "<font color='#556B2F'>DarkOliveGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 30, "Boost_LLWEAPONEX_Armor_Dye_Color_Darkorange", "<font color='#FF8C00'>Darkorange</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 31, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkOrchid", "<font color='#9932CC'>DarkOrchid</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 32, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkRed", "<font color='#8B0000'>DarkRed</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 33, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSalmon", "<font color='#E9967A'>DarkSalmon</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 34, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSeaGreen", "<font color='#8FBC8F'>DarkSeaGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 35, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateBlue", "<font color='#483D8B'>DarkSlateBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 36, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGray", "<font color='#2F4F4F'>DarkSlateGray</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 37, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkSlateGrey", "<font color='#2F4F4F'>DarkSlateGrey</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 38, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkTurquoise", "<font color='#00CED1'>DarkTurquoise</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 39, "Boost_LLWEAPONEX_Armor_Dye_Color_DarkViolet", "<font color='#9400D3'>DarkViolet</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 40, "Boost_LLWEAPONEX_Armor_Dye_Color_DeepPink", "<font color='#FF1493'>DeepPink</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 41, "Boost_LLWEAPONEX_Armor_Dye_Color_DeepSkyBlue", "<font color='#00BFFF'>DeepSkyBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 42, "Boost_LLWEAPONEX_Armor_Dye_Color_DimGray", "<font color='#696969'>DimGray</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 43, "Boost_LLWEAPONEX_Armor_Dye_Color_DimGrey", "<font color='#696969'>DimGrey</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 44, "Boost_LLWEAPONEX_Armor_Dye_Color_DodgerBlue", "<font color='#1E90FF'>DodgerBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 45, "Boost_LLWEAPONEX_Armor_Dye_Color_FireBrick", "<font color='#B22222'>FireBrick</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 46, "Boost_LLWEAPONEX_Armor_Dye_Color_FloralWhite", "<font color='#FFFAF0'>FloralWhite</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 47, "Boost_LLWEAPONEX_Armor_Dye_Color_ForestGreen", "<font color='#228B22'>ForestGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 48, "Boost_LLWEAPONEX_Armor_Dye_Color_Fuchsia", "<font color='#FF00FF'>Fuchsia</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 49, "Boost_LLWEAPONEX_Armor_Dye_Color_Gainsboro", "<font color='#DCDCDC'>Gainsboro</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 50, "Boost_LLWEAPONEX_Armor_Dye_Color_GhostWhite", "<font color='#F8F8FF'>GhostWhite</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 51, "Boost_LLWEAPONEX_Armor_Dye_Color_Gold", "<font color='#FFD700'>Gold</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 52, "Boost_LLWEAPONEX_Armor_Dye_Color_GoldenRod", "<font color='#DAA520'>GoldenRod</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 53, "Boost_LLWEAPONEX_Armor_Dye_Color_Gray", "<font color='#808080'>Gray</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 54, "Boost_LLWEAPONEX_Armor_Dye_Color_Grey", "<font color='#808080'>Grey</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 55, "Boost_LLWEAPONEX_Armor_Dye_Color_Green", "<font color='#008000'>Green</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 56, "Boost_LLWEAPONEX_Armor_Dye_Color_GreenYellow", "<font color='#ADFF2F'>GreenYellow</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 57, "Boost_LLWEAPONEX_Armor_Dye_Color_HoneyDew", "<font color='#F0FFF0'>HoneyDew</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 58, "Boost_LLWEAPONEX_Armor_Dye_Color_HotPink", "<font color='#FF69B4'>HotPink</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 59, "Boost_LLWEAPONEX_Armor_Dye_Color_IndianRed", "<font color='#CD5C5C'>IndianRed</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 60, "Boost_LLWEAPONEX_Armor_Dye_Color_Indigo", "<font color='#4B0082'>Indigo</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 61, "Boost_LLWEAPONEX_Armor_Dye_Color_Ivory", "<font color='#FFFFF0'>Ivory</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 62, "Boost_LLWEAPONEX_Armor_Dye_Color_Khaki", "<font color='#F0E68C'>Khaki</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 63, "Boost_LLWEAPONEX_Armor_Dye_Color_Lavender", "<font color='#E6E6FA'>Lavender</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 64, "Boost_LLWEAPONEX_Armor_Dye_Color_LavenderBlush", "<font color='#FFF0F5'>LavenderBlush</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 65, "Boost_LLWEAPONEX_Armor_Dye_Color_LawnGreen", "<font color='#7CFC00'>LawnGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 66, "Boost_LLWEAPONEX_Armor_Dye_Color_LemonChiffon", "<font color='#FFFACD'>LemonChiffon</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 67, "Boost_LLWEAPONEX_Armor_Dye_Color_LightBlue", "<font color='#ADD8E6'>LightBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 68, "Boost_LLWEAPONEX_Armor_Dye_Color_LightCoral", "<font color='#F08080'>LightCoral</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 69, "Boost_LLWEAPONEX_Armor_Dye_Color_LightCyan", "<font color='#E0FFFF'>LightCyan</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 70, "Boost_LLWEAPONEX_Armor_Dye_Color_LightGoldenRodYellow", "<font color='#FAFAD2'>LightGoldenRodYellow</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 71, "Boost_LLWEAPONEX_Armor_Dye_Color_LightGray", "<font color='#D3D3D3'>LightGray</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 72, "Boost_LLWEAPONEX_Armor_Dye_Color_LightGrey", "<font color='#D3D3D3'>LightGrey</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 73, "Boost_LLWEAPONEX_Armor_Dye_Color_LightGreen", "<font color='#90EE90'>LightGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 74, "Boost_LLWEAPONEX_Armor_Dye_Color_LightPink", "<font color='#FFB6C1'>LightPink</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 75, "Boost_LLWEAPONEX_Armor_Dye_Color_LightSalmon", "<font color='#FFA07A'>LightSalmon</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 76, "Boost_LLWEAPONEX_Armor_Dye_Color_LightSeaGreen", "<font color='#20B2AA'>LightSeaGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 77, "Boost_LLWEAPONEX_Armor_Dye_Color_LightSkyBlue", "<font color='#87CEFA'>LightSkyBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 78, "Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGray", "<font color='#778899'>LightSlateGray</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 79, "Boost_LLWEAPONEX_Armor_Dye_Color_LightSlateGrey", "<font color='#778899'>LightSlateGrey</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 80, "Boost_LLWEAPONEX_Armor_Dye_Color_LightSteelBlue", "<font color='#B0C4DE'>LightSteelBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 81, "Boost_LLWEAPONEX_Armor_Dye_Color_LightYellow", "<font color='#FFFFE0'>LightYellow</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 82, "Boost_LLWEAPONEX_Armor_Dye_Color_Lime", "<font color='#00FF00'>Lime</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 83, "Boost_LLWEAPONEX_Armor_Dye_Color_LimeGreen", "<font color='#32CD32'>LimeGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 84, "Boost_LLWEAPONEX_Armor_Dye_Color_Linen", "<font color='#FAF0E6'>Linen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 85, "Boost_LLWEAPONEX_Armor_Dye_Color_Magenta", "<font color='#FF00FF'>Magenta</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 86, "Boost_LLWEAPONEX_Armor_Dye_Color_Maroon", "<font color='#800000'>Maroon</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 87, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumAquaMarine", "<font color='#66CDAA'>MediumAquaMarine</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 88, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumBlue", "<font color='#0000CD'>MediumBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 89, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumOrchid", "<font color='#BA55D3'>MediumOrchid</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 90, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumPurple", "<font color='#9370D8'>MediumPurple</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 91, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumSeaGreen", "<font color='#3CB371'>MediumSeaGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 92, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumSlateBlue", "<font color='#7B68EE'>MediumSlateBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 93, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumSpringGreen", "<font color='#00FA9A'>MediumSpringGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 94, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumTurquoise", "<font color='#48D1CC'>MediumTurquoise</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 95, "Boost_LLWEAPONEX_Armor_Dye_Color_MediumVioletRed", "<font color='#C71585'>MediumVioletRed</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 96, "Boost_LLWEAPONEX_Armor_Dye_Color_MidnightBlue", "<font color='#191970'>MidnightBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 97, "Boost_LLWEAPONEX_Armor_Dye_Color_MintCream", "<font color='#F5FFFA'>MintCream</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 98, "Boost_LLWEAPONEX_Armor_Dye_Color_MistyRose", "<font color='#FFE4E1'>MistyRose</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 99, "Boost_LLWEAPONEX_Armor_Dye_Color_Moccasin", "<font color='#FFE4B5'>Moccasin</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 100, "Boost_LLWEAPONEX_Armor_Dye_Color_NavajoWhite", "<font color='#FFDEAD'>NavajoWhite</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 101, "Boost_LLWEAPONEX_Armor_Dye_Color_Navy", "<font color='#000080'>Navy</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 102, "Boost_LLWEAPONEX_Armor_Dye_Color_OldLace", "<font color='#FDF5E6'>OldLace</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 103, "Boost_LLWEAPONEX_Armor_Dye_Color_Olive", "<font color='#808000'>Olive</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 104, "Boost_LLWEAPONEX_Armor_Dye_Color_OliveDrab", "<font color='#6B8E23'>OliveDrab</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 105, "Boost_LLWEAPONEX_Armor_Dye_Color_Orange", "<font color='#FFA500'>Orange</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 106, "Boost_LLWEAPONEX_Armor_Dye_Color_OrangeRed", "<font color='#FF4500'>OrangeRed</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 107, "Boost_LLWEAPONEX_Armor_Dye_Color_Orchid", "<font color='#DA70D6'>Orchid</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 108, "Boost_LLWEAPONEX_Armor_Dye_Color_PaleGoldenRod", "<font color='#EEE8AA'>PaleGoldenRod</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 109, "Boost_LLWEAPONEX_Armor_Dye_Color_PaleGreen", "<font color='#98FB98'>PaleGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 110, "Boost_LLWEAPONEX_Armor_Dye_Color_PaleTurquoise", "<font color='#AFEEEE'>PaleTurquoise</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 111, "Boost_LLWEAPONEX_Armor_Dye_Color_PaleVioletRed", "<font color='#D87093'>PaleVioletRed</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 112, "Boost_LLWEAPONEX_Armor_Dye_Color_PapayaWhip", "<font color='#FFEFD5'>PapayaWhip</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 113, "Boost_LLWEAPONEX_Armor_Dye_Color_PeachPuff", "<font color='#FFDAB9'>PeachPuff</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 114, "Boost_LLWEAPONEX_Armor_Dye_Color_Peru", "<font color='#CD853F'>Peru</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 115, "Boost_LLWEAPONEX_Armor_Dye_Color_Pink", "<font color='#FFC0CB'>Pink</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 116, "Boost_LLWEAPONEX_Armor_Dye_Color_Plum", "<font color='#DDA0DD'>Plum</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 117, "Boost_LLWEAPONEX_Armor_Dye_Color_PowderBlue", "<font color='#B0E0E6'>PowderBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 118, "Boost_LLWEAPONEX_Armor_Dye_Color_Purple", "<font color='#800080'>Purple</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 119, "Boost_LLWEAPONEX_Armor_Dye_Color_Red", "<font color='#FF0000'>Red</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 120, "Boost_LLWEAPONEX_Armor_Dye_Color_RosyBrown", "<font color='#BC8F8F'>RosyBrown</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 121, "Boost_LLWEAPONEX_Armor_Dye_Color_RoyalBlue", "<font color='#4169E1'>RoyalBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 122, "Boost_LLWEAPONEX_Armor_Dye_Color_SaddleBrown", "<font color='#8B4513'>SaddleBrown</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 123, "Boost_LLWEAPONEX_Armor_Dye_Color_Salmon", "<font color='#FA8072'>Salmon</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 124, "Boost_LLWEAPONEX_Armor_Dye_Color_SandyBrown", "<font color='#F4A460'>SandyBrown</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 125, "Boost_LLWEAPONEX_Armor_Dye_Color_SeaGreen", "<font color='#2E8B57'>SeaGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 126, "Boost_LLWEAPONEX_Armor_Dye_Color_SeaShell", "<font color='#FFF5EE'>SeaShell</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 127, "Boost_LLWEAPONEX_Armor_Dye_Color_Sienna", "<font color='#A0522D'>Sienna</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 128, "Boost_LLWEAPONEX_Armor_Dye_Color_Silver", "<font color='#C0C0C0'>Silver</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 129, "Boost_LLWEAPONEX_Armor_Dye_Color_SkyBlue", "<font color='#87CEEB'>SkyBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 130, "Boost_LLWEAPONEX_Armor_Dye_Color_SlateBlue", "<font color='#6A5ACD'>SlateBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 131, "Boost_LLWEAPONEX_Armor_Dye_Color_SlateGrey", "<font color='#708090'>SlateGrey</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 132, "Boost_LLWEAPONEX_Armor_Dye_Color_Snow", "<font color='#FFFAFA'>Snow</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 133, "Boost_LLWEAPONEX_Armor_Dye_Color_SpringGreen", "<font color='#00FF7F'>SpringGreen</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 134, "Boost_LLWEAPONEX_Armor_Dye_Color_SteelBlue", "<font color='#4682B4'>SteelBlue</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 135, "Boost_LLWEAPONEX_Armor_Dye_Color_Tan", "<font color='#D2B48C'>Tan</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 136, "Boost_LLWEAPONEX_Armor_Dye_Color_Teal", "<font color='#008080'>Teal</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 137, "Boost_LLWEAPONEX_Armor_Dye_Color_Thistle", "<font color='#D8BFD8'>Thistle</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 138, "Boost_LLWEAPONEX_Armor_Dye_Color_Tomato", "<font color='#FF6347'>Tomato</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 139, "Boost_LLWEAPONEX_Armor_Dye_Color_Turquoise", "<font color='#40E0D0'>Turquoise</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 140, "Boost_LLWEAPONEX_Armor_Dye_Color_Violet", "<font color='#EE82EE'>Violet</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 141, "Boost_LLWEAPONEX_Armor_Dye_Color_Wheat", "<font color='#F5DEB3'>Wheat</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 142, "Boost_LLWEAPONEX_Armor_Dye_Color_White", "<font color='#FFFFFF'>White</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 143, "Boost_LLWEAPONEX_Armor_Dye_Color_WhiteSmoke", "<font color='#F5F5F5'>WhiteSmoke</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 144, "Boost_LLWEAPONEX_Armor_Dye_Color_Yellow", "<font color='#FFFF00'>Yellow</font>");
+DB_LeaderLib_Dictionary_Data("LLWEAPONEX_DyeBoosts", 145, "Boost_LLWEAPONEX_Armor_Dye_Color_YellowGreen", "<font color='#9ACD32'>YellowGreen</font>");
+DB_LeaderLib_Array_Length("LLWEAPONEX_DyeBoosts", 146);
+//END_REGION
+
+IF
+DialogStarted("LLWEAPONEX_DyeBoosts_Menu", _Instance)
+AND
+DialogGetInvolvedPlayer(_Instance, 1, (CHARACTERGUID)_Player)
+AND
+DialogGetInvolvedNPC(_Instance, 1, (ITEMGUID)_Item)
+THEN
+DB_LLWEAPONEX_DyeBoosts_Temp_TargetItem(_Player, _Instance, _Item, _Instance);
+
+IF
+DialogEnded("LLWEAPONEX_DyeBoosts_Menu", _Instance)
+AND
+DB_LLWEAPONEX_DyeBoosts_Temp_TargetItem(_Player, _Instance, _Item, _Instance)
+THEN
+NOT DB_LLWEAPONEX_DyeBoosts_Temp_TargetItem(_Player, _Instance, _Item, _Instance);
+
+PROC
+LeaderLib_DynamicMenu_OnEntrySelected("LLWEAPONEX_DyeBoosts", (GUIDSTRING)_Player, (INTEGER)_Instance, (STRING)_Deltamod)
+AND
+DB_LLWEAPONEX_DyeBoosts_Temp_TargetItem((CHARACTERGUID)_Player, _Instance, (ITEMGUID)_Item, _Instance)
+THEN
+ItemAddDeltaModifier(_Item, _Deltamod);
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
