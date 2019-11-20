@@ -63,31 +63,68 @@ THEN
 DB_NOOP(1);
 
 //REGION UPDATING
+//Dual Shields eating items fix
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 14, 0)
+AND
+DB_IsPlayer(_Char)
+THEN
+InventoryLaunchTagIterator(_Char, "LLWEAPONEX_DualShields", "", "LLWEAPONEX_Iterators_FoundDualShield_RemoveItems", "");
+
 //Combat shield identify fix
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, "0.9.1.2")
 AND
-DB_IsPlayer(_Player)
+DB_IsPlayer(_Char)
 THEN
-InventoryLaunchTagIterator(_Player, "LLWEAPONEX_DualShields", "", "LLWEAPONEX_Iterators_FoundDualShield_Identify", "");
+InventoryLaunchTagIterator(_Char, "LLWEAPONEX_DualShields", "", "LLWEAPONEX_Iterators_FoundDualShield_Identify", "");
 
 IF
-StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_DualShields")
+StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_Iterators_FoundDualShield_Identify")
 THEN
 ContainerIdentifyAll(_Shield);
+
+IF
+StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_Iterators_FoundDualShield_RemoveItems")
+AND
+GetInventoryOwner(_Shield, _Owner)
+THEN
+DB_LLWEAPONEX_DualShields_Temp_RemovalIterator(_Shield, _Owner);
+InventoryLaunchIterator(_Shield, "LLWEAPONEX_Iterators_DualShields_RemoveItem", "");
+LeaderLib_Timers_StartObjectTimer(_Shield, 250, "Timers_LLWEAPONEX_DualShields_RemoveItemIteratorDone", "LLWEAPONEX_DualShields_RemoveItemIteratorDone");
+
+IF
+StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_DualShields_RemoveItemIteratorDone")
+AND
+DB_LLWEAPONEX_DualShields_Temp_RemovalIterator(_Shield, _Owner)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_RemovalIterator(_Shield, _Owner);
+
+IF
+StoryEvent((ITEMGUID)_Item, "")
+AND
+GetInventoryOwner(_Item, (ITEMGUID)_Shield)
+AND
+ItemGetAmount(_Item, _Amount)
+AND
+DB_LLWEAPONEX_DualShields_Temp_RemovalIterator(_Shield, _Owner)
+THEN
+ItemToInventory(_Item, _Owner, _Amount, 1, 0);
 //END_REGION
 
 //REGION UNIQUE_SHIELDS
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Shield_DualShields_GiantDoor_A_5e8ca310-616d-4f18-b455-e510dade5b62")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Shield_DualShields_GiantDoor_A_5e8ca310-616d-4f18-b455-e510dade5b62")
 AND
 ObjectGetFlag(_Item, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0)
 AND
-GetPosition(_Player, _x, _y, _z)
+GetPosition(_Char, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_CombatShield_GiantDoor_A_b4748a58-427c-4652-bf6c-d596ddcc134d", _x, _y, _z, _CombatShield)
 AND
-CharacterGetLevel(_Player, _Level)
+CharacterGetLevel(_Char, _Level)
 THEN
 ObjectSetFlag(_Item, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0);
 SetTag(_CombatShield, "LLWEAPONEX_Debug_StorableCombatShield");
@@ -95,7 +132,7 @@ SetVarObject(_Item, "LLWEAPONEX_CombatShield", _CombatShield);
 
 SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Item);
 SetVarFixedString(_CombatShield, "LeaderLib_Rarity", "Unique");
-ItemSetOwner(_CombatShield, _Player);
+ItemSetOwner(_CombatShield, _Char);
 
 ItemLevelUpTo(_Item, _Level);
 ItemLevelUpTo(_CombatShield, _Level);
@@ -148,16 +185,16 @@ LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.Combat
 LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
 ObjectGetFlag(_Item, "LLWEAPONEX_DualShields_GeneratedCombatShield", _GeneratedShield)
 THEN
-LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Item, _GeneratedShield);
+LLWEAPONEX_DualShields_OnDualShieldEquipped(_Char, _Item, _GeneratedShield);
 
 PROC
-LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 1)
+LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Shield, 1)
 AND
 GetVarObject(_Shield, "LLWEAPONEX_CombatShield", (ITEMGUID)_CombatShield)
 AND
@@ -167,21 +204,21 @@ ItemIsEquipable(_CombatShield, _Equipable)
 AND
 IntegerMin(_Exists, _Equipable, _GenerateNew)
 THEN
-LLWEAPONEX_DualShields_EquipCombatShield(_Player, _Shield, _CombatShield, _GenerateNew);
+LLWEAPONEX_DualShields_EquipCombatShield(_Char, _Shield, _CombatShield, _GenerateNew);
 
 PROC
-LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 0)
+LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Shield, 0)
 AND
 LLWEAPONEX_DualShields_QRY_ItemLevelSet(_Shield)
 THEN
 LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield(_Shield);
 
 PROC
-LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 0)
+LLWEAPONEX_DualShields_OnDualShieldEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Shield, 0)
 AND
 NOT LLWEAPONEX_DualShields_QRY_ItemLevelSet(_Shield)
 THEN
-ItemSetOwner(_Shield, _Player);
+ItemSetOwner(_Shield, _Char);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_OnDualShieldEquipped] Level/Rarity variables not set on Dual Shield. Running [LeaderLib_Commands_SetItemVariables].");
 SetVarString(_Shield, "LeaderLib_ItemVariablesSetEvent", "LLWEAPONEX_DualShields_VariablesSet");
 SetStoryEvent(_Shield, "LeaderLib_Commands_SetItemVariables");
@@ -203,169 +240,183 @@ ContainerIdentifyAll(_Shield);
 LLWEAPONEX_DualShields_EquipCombatShield(_Owner, _Shield, _CombatShield, 1);
 
 PROC
-LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 1)
+LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Char, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 1)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:OnDualShieldsEquipped] Equipping combat shield stored in a dual shield.");
-DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
-//CharacterEquipItem(_Player, _CombatShield);
-CharacterUseItem(_Player, _CombatShield, "LLWEAPONEX_DualShields_CombatShieldEquipped");
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield);
+//CharacterEquipItem(_Char, _CombatShield);
+ItemToInventory(_CombatShield, _Char);
+CharacterUseItem(_Char, _CombatShield, "LLWEAPONEX_DualShields_CombatShieldEquipped");
+
+PROC
+LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Char, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 1)
+THEN
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:OnDualShieldsEquipped] Equipping combat shield stored in a dual shield.");
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield);
+//CharacterEquipItem(_Char, _CombatShield);
+ItemToInventory(_CombatShield, _Char);
+CharacterUseItem(_Char, _CombatShield, "LLWEAPONEX_DualShields_CombatShieldEquipped");
 
 IF
-//ItemEquipped(_CombatShield, _Player)
-StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_DualShields_CombatShieldEquipped")
+//ItemEquipped(_CombatShield, _Char)
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_CombatShieldEquipped")
 AND
-DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _CombatShield)
+CharacterGetEquippedItem(_Char, "Weapon", _CombatShield)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
+NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_CombatShieldEquipped] Combat shield was equipped.");
 
 IF
-StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_DualShields_CombatShieldEquipped")
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_CombatShieldEquipped")
 AND
-DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
+NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_CombatShieldEquipped] Combat shield was not equipped.");
-//ItemToInventory(_CombatShield, _Player);
+ItemToInventory(_CombatShield, _Shield);
 ContainerIdentifyAll(_Shield);
-CharacterEquipItem(_Player, _CombatShield);
+CharacterUnequipItem(_Char, _Shield);
 
 IF
-CharacterUsedItemFailed(_Player, _CombatShield)
+CharacterUsedItemFailed(_Char, _CombatShield)
 AND
-DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Player, _Shield, _CombatShield);
+NOT DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield);
+ItemToInventory(_CombatShield, _Shield);
+CharacterUnequipItem(_Char, _Shield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:CharacterUsedItemFailed] Failed to equip combat shield. Generating a new shield.");
-ItemDestroy(_CombatShield);
-LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, 0);
+//ItemDestroy(_CombatShield);
+//LLWEAPONEX_DualShields_OnDualShieldEquipped(_Char, _Shield, 0);
 
 PROC
-LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 0)
+LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Char, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield, 0)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:OnDualShieldsEquipped] [ERROR] Item for variable [LLWEAPONEX_CombatShield] does not exist. Checking inventory.");
-LLWEAPONEX_DualShields_FindCombatShield(_Player, _Shield, 1);
+LLWEAPONEX_DualShields_FindCombatShield(_Char, _Shield, 1);
 //END_REGION
 
 //REGION FIND_COMBAT_SHIELD
 PROC
-LLWEAPONEX_DualShields_FindCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 1)
+LLWEAPONEX_DualShields_FindCombatShield((CHARACTERGUID)_Char, (ITEMGUID)_Shield, 1)
 AND
 GetUUID(_Shield, _ID)
 AND
 StringConcatenate("LLWEAPONEX_FindCombatShield_IteratorDone_", _ID, _GlobalFlag)
 THEN
-DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
+DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag);
 InventoryLaunchTagIterator(_Shield, "LLWEAPONEX_CombatShield", "", "LLWEAPONEX_Iterators_FoundDualShield_Equip", _GlobalFlag);
 
 IF
 StoryEvent((ITEMGUID)_CombatShield, "LLWEAPONEX_Iterators_FoundDualShield_Equip")
 AND
-DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag)
+DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
+NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_Iterators_FoundDualShield] Found combat shield in dual shield inventory. Setting variable & equipping.");
 SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
-LLWEAPONEX_DualShields_EquipCombatShield(_Player, _Shield, _CombatShield, 1);
+LLWEAPONEX_DualShields_EquipCombatShield(_Char, _Shield, _CombatShield, 1);
 
 PROC
-LLWEAPONEX_DualShields_FindCombatShield((CHARACTERGUID)_Player, (ITEMGUID)_Shield, 0)
+LLWEAPONEX_DualShields_FindCombatShield((CHARACTERGUID)_Char, (ITEMGUID)_Shield, 0)
 AND
 GetUUID(_Shield, _ID)
 AND
 StringConcatenate("LLWEAPONEX_FindCombatShield_IteratorDone_", _ID, _GlobalFlag)
 THEN
-DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
+DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag);
 InventoryLaunchTagIterator(_Shield, "LLWEAPONEX_CombatShield", "", "LLWEAPONEX_Iterators_FoundCombatShield", _GlobalFlag);
 
 IF
 StoryEvent((ITEMGUID)_CombatShield, "LLWEAPONEX_Iterators_FoundDualShield_Equip")
 AND
-ItemGetOwner(_CombatShield, _Player)
+ItemGetOwner(_CombatShield, _Char)
 AND
 GetInventoryOwner(_CombatShield, (ITEMGUID)_Shield)
 AND
-DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag)
+DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
+NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_Iterators_FoundDualShield] Found combat shield in dual shield inventory. Setting variable.");
 SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
 
 IF
 GlobalFlagSet(_GlobalFlag)
 AND
-DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag)
+DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Player, _Shield, _GlobalFlag);
+NOT DB_LLWEAPONEX_DualShields_Temp_ShieldIterator(_Char, _Shield, _GlobalFlag);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:",_GlobalFlag,"] Combat shield not found. Regenerating.");
 LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield(_Shield);
 //END_REGION
 
 //REGION UNEQUIPPED
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
-NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Item, _)
+NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Char, _Item, _)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _CombatShield)
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Mainhand)
 AND
 GetVarObject(_Item, "LLWEAPONEX_CombatShield", (ITEMGUID)_CombatShield)
+AND
+_CombatShield == _Mainhand
 THEN
-DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Item, _CombatShield);
-ItemToInventory(_CombatShield, _Item);
+DB_LLWEAPONEX_DualShields_Temp_Handled(_Char, _Item, _Mainhand);
+ItemToInventory(_Mainhand, _Item);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_CombatShield", 1)
 AND
-NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _, _Item)
+NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Char, _, _Item)
 AND
-CharacterGetEquippedShield(_Player, (ITEMGUID)_Shield)
+CharacterGetEquippedShield(_Char, (ITEMGUID)_Shield)
 AND
 _Shield != NULL_00000000-0000-0000-0000-000000000000
 THEN 
-DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _Item);
-CharacterUnequipItem(_Player, _Shield);
+DB_LLWEAPONEX_DualShields_Temp_Handled(_Char, _Shield, _Item);
+CharacterUnequipItem(_Char, _Shield);
 ItemToInventory(_Item, _Shield);
 
 IF
-DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_Handled(_Char, _Shield, _CombatShield)
 THEN
-LeaderLib_Timers_StartCharacterItemTimer(_Player, (ITEMGUID)_Shield, 150, "LLWEAPONEX_Timers_ResetDualShieldHandled", "LLWEAPONEX_DualShields_ResetHandled");
+LeaderLib_Timers_StartCharacterItemTimer(_Char, (ITEMGUID)_Shield, 150, "LLWEAPONEX_Timers_ResetDualShieldHandled", "LLWEAPONEX_DualShields_ResetHandled");
 
 IF
-CharacterItemEvent(_Player, _Shield, "LLWEAPONEX_DualShields_ResetHandled")
+CharacterItemEvent(_Char, _Shield, "LLWEAPONEX_DualShields_ResetHandled")
 AND
-DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield)
+DB_LLWEAPONEX_DualShields_Temp_Handled(_Char, _Shield, _CombatShield)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Player, _Shield, _CombatShield);
+NOT DB_LLWEAPONEX_DualShields_Temp_Handled(_Char, _Shield, _CombatShield);
 //END_REGION
 
 //REGION LEADERLIB_PRESET_APPLIED
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Player, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
 AND
-CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Shield)
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Shield)
 AND
 IsTagged(_Shield, "LLWEAPONEX_DualShields", 1)
 AND
 ObjectGetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", _GeneratedShield)
 THEN
-LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);
+LLWEAPONEX_DualShields_OnDualShieldEquipped(_Char, _Shield, _GeneratedShield);
 //END_REGION
 
 //REGION CC_PRESET_FIX
 /*
 //Post-CC Preset Fix
 PROC
-LLWEAPONEX_OnCharacterCreationFinished((CHARACTERGUID)_Player)
+LLWEAPONEX_OnCharacterCreationFinished((CHARACTERGUID)_Char)
 AND
-CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Shield)
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Shield)
 AND
 _Shield != NULL_00000000-0000-0000-0000-000000000000
 AND
@@ -373,7 +424,7 @@ IsTagged(_Shield, "LLWEAPONEX_DualShields", 1)
 AND
 ObjectGetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", _GeneratedShield)
 THEN
-LLWEAPONEX_DualShields_OnDualShieldEquipped(_Player, _Shield, _GeneratedShield);
+LLWEAPONEX_DualShields_OnDualShieldEquipped(_Char, _Shield, _GeneratedShield);
 */
 //END_REGION
 
@@ -509,6 +560,34 @@ RemoveStatus(_Target, "LLWEAPONEX_SHIELD_PRISON");
 ApplyStatus(_Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX", 3.0, 1, _Char);
 //END_REGION
 
+/*
+QRY
+LLWEAPONEX_DualShields_QRY_WatchItem((ITEMGUID)_Item, (ITEMGUID)_DualShield)
+THEN
+DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield);
+
+IF
+ItemAddedToContainer(_Item, _DualShield)
+AND
+IsTagged(_DualShield, "LLWEAPONEX_DualShields", 1)
+AND
+IsTagged(_Item, "LLWEAPONEX_CombatShield", 0)
+AND
+ItemGetOwner(_Item, _Owner)
+AND
+ItemGetAmount(_Item, _Amount)
+THEN
+ItemToInventory(_Item, _Owner, _Amount, 0, 0);
+NOT DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield);
+
+IF
+ItemAddedToContainer(_Item, _DualShield)
+AND
+DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield);
+ItemDrop(_Item);
+*/
 EXITSECTION
 
 ENDEXITSECTION

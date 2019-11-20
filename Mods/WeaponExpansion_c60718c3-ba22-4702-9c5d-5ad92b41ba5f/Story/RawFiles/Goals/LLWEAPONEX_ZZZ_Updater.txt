@@ -12,7 +12,7 @@ IsGameLevel(_Level, 1)
 AND
 LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "0.9.13.0")
 THEN
-LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", "0.9.13.0");
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", 0,9,14,0);
 
 //Remove old targeting skill
 PROC
