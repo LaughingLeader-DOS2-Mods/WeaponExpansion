@@ -195,7 +195,7 @@ DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _OffhandSkil
 AND
 _Item != _Rod
 AND
-CharacterGetEquippedItem(_Character, "Shield", _Rod)
+CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_Rod)
 AND
 GetTemplate(_Item, _Template)
 AND
@@ -204,7 +204,7 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemUnEquipped(Weapon)] Reverting rod offhand skill to mainhand.");
 NOT DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Character, _Rod, _OffhandSkill);
 CharacterRemoveSkill(_Character, _OffhandSkill);
-LeaderLib_Timers_StartCharacterItemTimer(_Character, _Rod, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
+LeaderLib_Timers_StartCharacterItemTimer(_Character, (ITEMGUID)_Rod, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
 
 IF
 CharacterItemEvent(_Character, _Rod, "LLWEAPONEX_Rods_AdjustSkills")
@@ -224,7 +224,7 @@ THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:ItemEquipped(Weapon)] Reverting rod mainhand skill to offhand.");
 NOT DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Player, _Item, _MainhandSkill);
 CharacterRemoveSkill(_Player, _MainhandSkill);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Item, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
+LeaderLib_Timers_StartCharacterItemTimer(_Player, (ITEMGUID)_Item, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
 
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)

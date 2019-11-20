@@ -317,7 +317,7 @@ AND
 DB_LLWEAPONEX_Grimoire_Temp_IsStoppingFX(_Char, _EffectID)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Grimoire:OnGrimoireEquipped] In the middle of stopping previous looped FX. Playing new FX after a delay.");
-LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 5, "LLWEAPONEX_Timers_Grimoire_StartFX", "LLWEAPONEX_Grimoire_StartEquippedFX");
+LeaderLib_Timers_StartCharacterItemTimer(_Char, (ITEMGUID)_Item, 5, "LLWEAPONEX_Timers_Grimoire_StartFX", "LLWEAPONEX_Grimoire_StartEquippedFX");
 
 IF
 CharacterItemEvent(_Char, _Item, "LLWEAPONEX_Grimoire_StartEquippedFX")

@@ -1871,6 +1871,20 @@ AND
 LeaderLib_Helper_QRY_WeaponIsEquipped(_Char)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:TextEventSet(llweap_handedness)] Weapon is one-handed.");
+
+IF
+TextEventSet("llweap_shoottest")
+AND
+CharacterGetHostCharacter(_Char)
+THEN
+CharacterSetAnimationOverride(_Char, "Fumble_01");
+LeaderLib_Timers_StartObjectTimer(_Char, 1370, "Timers_LLWEAPONEX_Debug_StopFumbleOverride", "LLWEAPONEX_Debug_StopFumbleOverride");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_StopFumbleOverride")
+THEN
+CharacterSetAnimationOverride(_Char, "");
+PlayAnimation(_Char, "still");
 EXITSECTION
 
 ENDEXITSECTION

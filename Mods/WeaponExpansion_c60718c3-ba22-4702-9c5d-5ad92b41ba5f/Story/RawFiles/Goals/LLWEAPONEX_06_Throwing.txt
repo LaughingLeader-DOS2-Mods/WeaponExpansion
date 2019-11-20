@@ -1029,8 +1029,8 @@ AND
 NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_, _Object)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
-DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, _Object);
-LeaderLib_Timers_StartCharacterItemTimer(_Player, _Object, 125, "LLWEAPONEX_Timers_MovingObject_CopyVisuals", "LLWEAPONEX_MovingObject_CopyVisuals");
+DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_Player, (ITEMGUID)_Object);
+LeaderLib_Timers_StartCharacterItemTimer(_Player, (ITEMGUID)_Object, 125, "LLWEAPONEX_Timers_MovingObject_CopyVisuals", "LLWEAPONEX_MovingObject_CopyVisuals");
 
 IF
 CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObject_CopyVisuals")

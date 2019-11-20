@@ -1,0 +1,49 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//EQ_LLWEAPONEX_Hide_Pistol_A_Ring1_728f8b1a-7f4d-4912-85e4-054f817f2592
+//EQ_LLWEAPONEX_Hide_Pistol_A_Ring2_b183308c-8348-4079-abfa-2c2eca78d2cd
+
+IF
+CharacterUsedSkill(_Char, "Projectile_LLWEAPONEX_Pistol_A_Shoot", _, _)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 350, "Timers_LLWEAPONEX_Pistols_PlayPistolFX", "LLWEAPONEX_Pistols_PlayPistolFX");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_PlayPistolFX")
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_FX_PISTOL_A_SHOOT", 6.0, 1, _Char);
+
+/*
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_PlayPistolFX")
+AND
+PlayLoopEffect(_Char, "LLWEAPONEX_FX_Skills_Pistol_A_Shoot_Hand_Pistol_Loop_01", "Dummy_L_HandFX", _Handle)
+THEN
+DB_LLWEAPONEX_Pistols_Temp_ShootFX(_Char, "Projectile_LLWEAPONEX_Pistol_A_Shoot", _Handle);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_StopAnimation")
+AND
+DB_LLWEAPONEX_Pistols_Temp_ShootFX(_Char, "Projectile_LLWEAPONEX_Pistol_A_Shoot", _Handle)
+THEN
+NOT DB_LLWEAPONEX_Pistols_Temp_ShootFX(_Char, "Projectile_LLWEAPONEX_Pistol_A_Shoot", _Handle);
+StopLoopEffect(_Handle);
+*/
+
+IF
+SkillCast(_Char, "Projectile_LLWEAPONEX_Pistol_A_Shoot", _, _)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 600, "Timers_LLWEAPONEX_Pistols_StopAnimation", "LLWEAPONEX_Pistols_StopAnimation");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_StopAnimation")
+THEN
+LeaderLib_Helper_ClearActionQueue(_Char);
+RemoveStatus(_Char, "LLWEAPONEX_FX_PISTOL_A_SHOOT");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

@@ -774,7 +774,7 @@ data "StatsDescriptionParams" "Skill:Projectile_LLWEAPONEX_Status_Tossed_Damage_
 data "FXScale" "100"
 data "PrepareAnimationInit" "skill_prepare_lash_01_start"
 data "PrepareAnimationLoop" "skill_prepare_lash_01_loop"
-data "CastAnimation" "skill_cast_ll_throw_01_cast"
+data "CastAnimation" "skill_cast_ll_throw_02_cast"
 data "CastSelfAnimation" "skill_cast_ll_throw_01_cast"
 data "CastTextEvent" "cast"
 data "PrepareEffect" "LLWEAPONEX_FX_Skills_ThrowObject_Prepare_Root_01,KeepRot:Dummy_Root"

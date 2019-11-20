@@ -1884,6 +1884,18 @@ add levelgroup 0,0,"All"
 add rootgroup "0b765f8b-113a-408d-afa1-81695e34a19f",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A","",""
 
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "6e667d23-c8a6-46d6-b6ec-2aa6aa95241d",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A","",""
+
+new itemgroup "ARM_LLWEAPONEX_FX_Pistol_A_Hand"
+
+add levelgroup 0,0,"All"
+add rootgroup "728f8b1a-7f4d-4912-85e4-054f817f2592",""
+add namegroup "EMPTY","",""
+
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
 
 add levelgroup 0,0,"All"

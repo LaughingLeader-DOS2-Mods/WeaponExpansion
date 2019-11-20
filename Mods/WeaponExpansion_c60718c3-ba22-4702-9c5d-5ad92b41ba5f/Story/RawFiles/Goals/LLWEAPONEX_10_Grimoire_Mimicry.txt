@@ -163,7 +163,7 @@ AND
 DB_LeaderLib_Skills_TargetDummies(_ID, _Target)
 THEN
 NOT DB_LLWEAPONEX_Grimoire_MimicSkillPosition(_Character, _Skill, _x, _y, _z);
-LLWEAPONEX_Grimoire_Internal_AddMimicSkill(_Character, _Skill, _Target);
+LLWEAPONEX_Grimoire_Internal_AddMimicSkill((CHARACTERGUID)_Character, _Skill, (GUIDSTRING)_Target);
 
 PROC
 LLWEAPONEX_Grimoire_StartMimicking((CHARACTERGUID)_Character, (STRING)_Skill, (GUIDSTRING)_Target)
@@ -262,7 +262,7 @@ DB_LLWEAPONEX_Grimoire_Temp_GrimoirePosition(_Caster, _x, _y, _z);
 //END_REGION
 
 //REGION DEBUG
-
+/*
 //oe llweap_grimoiredebug_castskillself Shout_Whirlwind
 IF
 TextEventSet("llweap_grimoiredebug_castskillself")
@@ -302,7 +302,7 @@ LeaderLib_Skills_QRY_CreateTargetDummy(_ID, _tx, _ty, _tz, "", 5000, 1, 0)
 AND
 DB_LeaderLib_Skills_TargetDummies(_ID, _Target)
 THEN
-LLWEAPONEX_Grimoire_Internal_AddMimicSkill(_Character, _Skill, _Target);
+LLWEAPONEX_Grimoire_Internal_AddMimicSkill((CHARACTERGUID)_Character, _Skill, (GUIDSTRING)_Target);
 
 IF
 TextEventSet("llweap_grimoiredebug_setoffset")
@@ -324,6 +324,7 @@ GetTextEventParamReal(4, _BoneFrontZ)
 THEN
 DB_LLWEAPONEX_Grimoire_PositionOffset(0, _BoneBackX, _BoneBackZ);
 DB_LLWEAPONEX_Grimoire_PositionOffset(1, _BoneFrontX, _BoneFrontZ);
+*/
 //END_REGION
 
 EXITSECTION

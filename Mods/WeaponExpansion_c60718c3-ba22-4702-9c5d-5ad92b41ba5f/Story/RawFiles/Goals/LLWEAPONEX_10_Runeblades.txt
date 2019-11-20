@@ -529,7 +529,7 @@ IsTagged(_Item, "LLWEAPONEX_Runeblade", 0)
 //StringContains(_ItemTemplate, "WPN_", 1)
 THEN
 DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
-LeaderLib_Timers_StartCharacterItemTimer(_Character, _Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_Runeblade_RemoveBlockedRune");
+LeaderLib_Timers_StartCharacterItemTimer(_Character, (ITEMGUID)_Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_Runeblade_RemoveBlockedRune");
 
 IF
 CharacterItemEvent(_Character, _Item, "LLWEAPONEX_Runeblade_RemoveBlockedRune")
