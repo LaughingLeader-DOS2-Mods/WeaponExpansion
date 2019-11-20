@@ -67,7 +67,7 @@ DB_NOOP(1);
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 14, 0)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 17, 0)
 AND
 DB_IsPlayer(_Char)
 THEN

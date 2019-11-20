@@ -1114,7 +1114,7 @@ object category "I_WPN_UNIQUE_WithermooreShield",1,0,0,0,0,0,0,0
 new treasuretable "LLWEAPONEX_Debug_TestDeltamods"
 IgnoreLevelDiff 1
 new subtable "-10"
-object category "LLWEAPONEX_BattleBooks",1,1,1,1,1,1,1,0
+object category "LLWEAPONEX_BattleBooks_1H",1,1,1,1,1,1,1,0
 new subtable "-5"
 object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,1,1,1,1,1,1,0
 new subtable "-5"
