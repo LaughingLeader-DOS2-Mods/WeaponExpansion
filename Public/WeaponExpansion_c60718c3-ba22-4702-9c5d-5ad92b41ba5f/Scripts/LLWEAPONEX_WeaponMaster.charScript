@@ -1,6 +1,6 @@
 INIT
 	CHARACTER:__Me
-	SKILL:%LLWEAPONEX_Battlebooks_SpellScroll_Projectile = null
+	SKILL:%LLWEAPONEX_BattleBooks_SpellScroll_Projectile = null
 	LIST<FIXEDSTRING>:%DebugMessages
 EVENTS
 

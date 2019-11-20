@@ -144,26 +144,30 @@ new subtable "-2"
 object category "I_LOOT_LLWEAPONEX_Token_Reset_Free",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_WeaponsNormal"
-new subtable "2,1"
+new subtable "0,1;2,4"
 object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
-new subtable "2,1"
+new subtable "0,1;2,4"
 object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,1;1,4"
 object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,1;1,4"
 object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,1;1,4"
 object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,1;1,4"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,1;1,4"
 object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,1;1,4"
 object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
-new subtable "1,1"
+new subtable "0,1;1,4"
 object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
 new subtable "0,1;1,2"
 object category "LLWEAPONEX_Bokken_1H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
 new subtable "0,3;1,2"
@@ -1110,7 +1114,7 @@ object category "I_WPN_UNIQUE_WithermooreShield",1,0,0,0,0,0,0,0
 new treasuretable "LLWEAPONEX_Debug_TestDeltamods"
 IgnoreLevelDiff 1
 new subtable "-10"
-object category "LLWEAPONEX_Battlebooks",1,1,1,1,1,1,1,0
+object category "LLWEAPONEX_BattleBooks",1,1,1,1,1,1,1,0
 new subtable "-5"
 object category "I_WPN_LLWEAPONEX_CombatShield_Blackring_A",1,1,1,1,1,1,1,0
 new subtable "-5"

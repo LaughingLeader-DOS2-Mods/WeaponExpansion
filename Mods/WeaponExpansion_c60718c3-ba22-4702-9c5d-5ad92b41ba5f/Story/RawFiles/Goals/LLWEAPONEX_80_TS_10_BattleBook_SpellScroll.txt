@@ -22,18 +22,18 @@ CharacterGetOwner(_Char, _Owner)
 AND
 IsTagged(_Owner, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1)
 AND
-GetVarFloat3(_Owner, "LLWEAPONEX_Battlebooks_SpellScroll_AttackPosition", _x, _y, _z)
+GetVarFloat3(_Owner, "LLWEAPONEX_BattleBooks_SpellScroll_AttackPosition", _x, _y, _z)
 THEN
-TeleportToPosition(_Char, _x, _y, _z, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported", 0, 1);
+TeleportToPosition(_Char, _x, _y, _z, "LLWEAPONEX_BattleBooks_SpellScroll_TotemTeleported", 0, 1);
 
 IF
-StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported")
+StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_BattleBooks_SpellScroll_TotemTeleported")
 THEN
 //Teleport one more time so it doesn't get stuck in something.
-TeleportTo(_Totem, _Totem, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported_SnappedPosition_PlayEffect", 0, 1);
+TeleportTo(_Totem, _Totem, "LLWEAPONEX_BattleBooks_SpellScroll_TotemTeleported_SnappedPosition_PlayEffect", 0, 1);
 
 IF
-StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_Battlebooks_SpellScroll_TotemTeleported_SnappedPosition_PlayEffect")
+StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_BattleBooks_SpellScroll_TotemTeleported_SnappedPosition_PlayEffect")
 THEN
 PlayEffect(_Totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root");
 EXITSECTION

@@ -1788,43 +1788,43 @@ add levelgroup 16,0,"All"
 add rootgroup "0f469658-5dee-454c-a458-eff50a845970",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark","","Item_LOOT_Essence_Fire_Step3_A"
 
-new itemgroup "WPN_LLWEAPONEX_BattleBook"
+new itemgroup "WPN_LLWEAPONEX_BattleBook_1H"
 
 add levelgroup 0,0,"All"
 add rootgroup "5577d7f7-697f-4d1b-904e-550827d29e4a",""
 add namegroup "WPN_LLWEAPONEX_BattleBook","",""
 
-new itemgroup "WPN_LLWEAPONEX_BattleBook_A"
+new itemgroup "WPN_LLWEAPONEX_BattleBook_1H_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "5d927087-6291-405a-b286-4b722b37913c",""
 add namegroup "WPN_LLWEAPONEX_BattleBook_A","","Item_BOOK_Book_A"
 
-new itemgroup "WPN_LLWEAPONEX_BattleBook_B"
+new itemgroup "WPN_LLWEAPONEX_BattleBook_1H_B"
 
 add levelgroup 0,0,"All"
 add rootgroup "0904efa3-4735-4c11-9683-86326f909f9c",""
 add namegroup "WPN_LLWEAPONEX_BattleBook_B","","Item_BOOK_Book_B"
 
-new itemgroup "WPN_LLWEAPONEX_BattleBook_C"
+new itemgroup "WPN_LLWEAPONEX_BattleBook_1H_C"
 
 add levelgroup 0,0,"All"
 add rootgroup "e8191927-b6ce-4a91-85d4-f1530151ea6f",""
 add namegroup "WPN_LLWEAPONEX_BattleBook_C","","Item_BOOK_Book_C"
 
-new itemgroup "WPN_LLWEAPONEX_BattleBook_D"
+new itemgroup "WPN_LLWEAPONEX_BattleBook_1H_D"
 
 add levelgroup 0,0,"All"
 add rootgroup "04a75db7-9779-4b4c-a06f-e8b46b4a6075",""
 add namegroup "WPN_LLWEAPONEX_BattleBook_D","","Item_BOOK_Book_D"
 
-new itemgroup "WPN_LLWEAPONEX_BattleBook_E"
+new itemgroup "WPN_LLWEAPONEX_BattleBook_1H_E"
 
 add levelgroup 0,0,"All"
 add rootgroup "df7fa72a-994e-4f75-9a4a-b4676efb0474",""
 add namegroup "WPN_LLWEAPONEX_BattleBook_E","","Item_BOOK_Book_E"
 
-new itemgroup "WPN_LLWEAPONEX_BattleBook_F"
+new itemgroup "WPN_LLWEAPONEX_BattleBook_1H_F"
 
 add levelgroup 0,0,"All"
 add rootgroup "5577d7f7-697f-4d1b-904e-550827d29e4a",""
