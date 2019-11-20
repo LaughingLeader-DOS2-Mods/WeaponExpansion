@@ -67,7 +67,7 @@ DB_NOOP(1);
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 17, 0)
+LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 17, 1)
 AND
 DB_IsPlayer(_Char)
 THEN
@@ -103,7 +103,7 @@ THEN
 NOT DB_LLWEAPONEX_DualShields_Temp_RemovalIterator(_Shield, _Owner);
 
 IF
-StoryEvent((ITEMGUID)_Item, "")
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Iterators_DualShields_RemoveItem")
 AND
 GetInventoryOwner(_Item, (ITEMGUID)_Shield)
 AND

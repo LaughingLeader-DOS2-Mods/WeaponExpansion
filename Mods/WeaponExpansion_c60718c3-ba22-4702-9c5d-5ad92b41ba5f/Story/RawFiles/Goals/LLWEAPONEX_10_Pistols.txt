@@ -33,16 +33,45 @@ NOT DB_LLWEAPONEX_Pistols_Temp_ShootFX(_Char, "Projectile_LLWEAPONEX_Pistol_A_Sh
 StopLoopEffect(_Handle);
 */
 
+//Dwarves and elves don't have a good shoot -> stow animation like humans/lizards do
+QRY
+LLWEAPONEX_Pistols_QRY_NeedsToSheathe((CHARACTERGUID)_Char)
+AND
+LeaderLib_Helper_QRY_IsRace(_Char, "DWARF")
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Pistols_QRY_NeedsToSheathe((CHARACTERGUID)_Char)
+AND
+LeaderLib_Helper_QRY_IsRace(_Char, "ELF")
+THEN
+DB_NOOP(1);
+
 IF
 SkillCast(_Char, "Projectile_LLWEAPONEX_Pistol_A_Shoot", _, _)
+AND
+LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 600, "Timers_LLWEAPONEX_Pistols_StopAnimation", "LLWEAPONEX_Pistols_StopAnimation");
+
+IF
+SkillCast(_Char, "Projectile_LLWEAPONEX_Pistol_A_Shoot", _, _)
+AND
+NOT LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 500, "Timers_LLWEAPONEX_Pistols_RemovePistolFX", "LLWEAPONEX_Pistols_RemovePistolFX");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_RemovePistolFX")
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_FX_PISTOL_A_SHOOT");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_StopAnimation")
 THEN
 LeaderLib_Helper_ClearActionQueue(_Char);
-RemoveStatus(_Char, "LLWEAPONEX_FX_PISTOL_A_SHOOT");
+PlayAnimation(_Char, "skill_cast_ll_pistol_01_sheathe", "LLWEAPONEX_Pistols_RemovePistolFX");
 EXITSECTION
 
 ENDEXITSECTION
