@@ -1178,6 +1178,27 @@ THEN
 NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
 //END_REGION
 
+//REGION FLAMETHROWER
+IF
+CharacterStartAttackObject(_Target, _, _Char)
+AND
+CharacterGetEquippedWeapon(_Char, (ITEMGUID)_Weapon)
+AND
+GetTemplate(_Weapon, "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+THEN
+LeaderLib_Helper_ClearActionQueue(_Char);
+CharacterUseSkill(_Char, "Cone_LLWEAPONEX_Flamethrower_Attack", _Target, 0, 1, 1);
+
+IF
+CharacterStartAttackPosition(_x, _y, _z, _, _Char)
+AND
+CharacterGetEquippedWeapon(_Char, (ITEMGUID)_Weapon)
+AND
+GetTemplate(_Weapon, "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+THEN
+LeaderLib_Helper_ClearActionQueue(_Char);
+CharacterUseSkillAtPosition(_Char, "Cone_LLWEAPONEX_Flamethrower_Attack", _x, _y, _z, 0, 1);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

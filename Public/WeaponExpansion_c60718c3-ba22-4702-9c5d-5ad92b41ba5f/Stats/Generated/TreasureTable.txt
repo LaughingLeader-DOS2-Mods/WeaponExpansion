@@ -168,6 +168,8 @@ new subtable "0,2;1,2"
 object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
 new subtable "0,3;1,2"
