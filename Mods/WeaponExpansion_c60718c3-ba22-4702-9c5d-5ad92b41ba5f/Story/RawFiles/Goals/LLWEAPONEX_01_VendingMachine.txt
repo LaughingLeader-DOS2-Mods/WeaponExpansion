@@ -7,6 +7,7 @@ DB_BlockThreatenedDialog(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4
 DB_NoLowAttitudeDialog(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 CharacterDisableAllCrimes(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 SetCanJoinCombat(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 0);
+CharacterSetImmortal(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1);
 //DB_IsStoryNpc(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
 //SetStoryNpc(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1);
 SetTag(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "LeaderLib_DisableTreasureTableLimit");
@@ -71,10 +72,10 @@ LeaderLib_Trader_Register_Rotation_Position("LLWEAPONEX.VendingMachine", "Arx_Ma
 PROC
 LLWEAPONEX_VendingMachine_RegisterUniqueWeapons()
 THEN
-LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier1", 4);
-LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier2", 9);
-LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier3", 12);
-LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier4", 16);
+LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier1", 3);
+LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier2", 5);
+LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier3", 9);
+LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Tier4", 11);
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
 
@@ -106,13 +107,13 @@ LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Unique
 //Misc
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ca61e441-9446-40ac-811d-736327d4a0f0", "LLWEAPONEX_LevelRequirement_Tier2");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ca61e441-9446-40ac-811d-736327d4a0f0", "LLWEAPONEX_LevelRequirement_Tier1");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee", "LLWEAPONEX_LevelRequirement_Tier3");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee", "LLWEAPONEX_LevelRequirement_Tier2");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ee686596-394f-44ae-867b-4596de1feedb");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_59675259-8e78-48fd-acad-cf70c90bc909", "LLWEAPONEX_LevelRequirement_Tier1");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_Sword_2H_A_ca59856d-6876-4f9c-8fe5-e086df193ca6", "LLWEAPONEX_LevelRequirement_Tier2");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Runeblade_Chaos_Sword_2H_428c023d-a614-49cc-911d-499a6af4cbf5", "LLWEAPONEX_LevelRequirement_Tier3");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_Sword_2H_A_ca59856d-6876-4f9c-8fe5-e086df193ca6");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Runeblade_Chaos_Sword_2H_428c023d-a614-49cc-911d-499a6af4cbf5");
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_Mask_Tengu_A_84af126d-0e35-482b-b117-f85e7672a129");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27");

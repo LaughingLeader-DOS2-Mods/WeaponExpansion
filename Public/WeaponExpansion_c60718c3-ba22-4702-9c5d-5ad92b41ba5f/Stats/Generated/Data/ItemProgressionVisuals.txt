@@ -1848,11 +1848,141 @@ add levelgroup 0,0,"All"
 add rootgroup "f393c9d6-d90c-483f-be94-b47e9419395d",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A","",""
 
+new itemgroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A"
+
+add levelgroup 0,0,"Common"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Common","",""
+
+add levelgroup 1,3,"Uncommon"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Uncommon","",""
+
+add levelgroup 4,7,"Uncommon"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Uncommon","",""
+
+add levelgroup 8,11,"Uncommon"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Uncommon","",""
+
+add levelgroup 12,15,"Uncommon"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Uncommon","",""
+
+add levelgroup 16,18,"Uncommon"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Uncommon","",""
+
+add levelgroup 19,0,"Uncommon"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Uncommon","",""
+
+add levelgroup 1,7,"Rare"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Rare","",""
+
+add levelgroup 8,14,"Rare"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Rare","",""
+
+add levelgroup 15,0,"Rare"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Rare","",""
+
+add levelgroup 1,7,"Epic"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Epic","",""
+
+add levelgroup 8,14,"Epic"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Epic","",""
+
+add levelgroup 15,0,"Epic"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Legendary","",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "0e98584a-7c57-4a5c-b7d9-57ec79aee85e",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Divine","",""
+
+new itemgroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B"
+
+add levelgroup 0,0,"Common"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Common","",""
+
+add levelgroup 1,3,"Uncommon"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
+
+add levelgroup 4,7,"Uncommon"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
+
+add levelgroup 8,11,"Uncommon"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
+
+add levelgroup 12,15,"Uncommon"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
+
+add levelgroup 16,18,"Uncommon"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
+
+add levelgroup 19,0,"Uncommon"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
+
+add levelgroup 1,7,"Rare"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Rare","",""
+
+add levelgroup 8,14,"Rare"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Rare","",""
+
+add levelgroup 15,0,"Rare"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Rare","",""
+
+add levelgroup 1,7,"Epic"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Epic","",""
+
+add levelgroup 8,14,"Epic"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Epic","",""
+
+add levelgroup 15,0,"Epic"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Legendary","",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Divine","",""
+
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "507801c0-4c6b-4b39-9aed-13fcd0962dd9",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "6b7e1caa-a610-4e40-91dc-7f2df1b86d42",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
 
