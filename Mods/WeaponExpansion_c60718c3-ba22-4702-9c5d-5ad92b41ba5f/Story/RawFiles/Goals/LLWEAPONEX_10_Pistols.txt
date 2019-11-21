@@ -6,14 +6,14 @@ KBSECTION
 PROC
 LLWEAPONEX_Pistols_InitSettings()
 THEN
-DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand");
-DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand");
-DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand");
-DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand");
-DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand");
-DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand");
-DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand");
-DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand");
+DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand", 600);
+DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 600);
+DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 250);
+DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 250);
+DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand", 400);
+DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand", 400);
+DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 800);
+DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 800);
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring1_728f8b1a-7f4d-4912-85e4-054f817f2592
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring2_b183308c-8348-4079-abfa-2c2eca78d2cd
 
@@ -85,7 +85,7 @@ SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
 AND
 IsTagged(_Char, "FEMALE", _IsFemale)
 AND
-DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill)
+DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill, _HideHandPistolDelay)
 AND
 LeaderLib_Helper_QRY_IsRace(_Char, _Race)
 THEN
@@ -107,8 +107,14 @@ IF
 SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
 AND
 NOT LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
+AND
+IsTagged(_Char, "FEMALE", _IsFemale)
+AND
+DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill, _HideHandPistolDelay)
+AND
+LeaderLib_Helper_QRY_IsRace(_Char, _Race)
 THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_Pistols_RemovePistolFX", "LLWEAPONEX_Pistols_RemovePistolFX");
+LeaderLib_Timers_StartObjectTimer(_Char, _HideHandPistolDelay, "Timers_LLWEAPONEX_Pistols_RemovePistolFX", "LLWEAPONEX_Pistols_RemovePistolFX");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_RemovePistolFX")
@@ -119,7 +125,18 @@ IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_StopAnimation")
 THEN
 LeaderLib_Helper_ClearActionQueue(_Char);
-PlayAnimation(_Char, "skill_cast_ll_pistol_01_sheathe", "LLWEAPONEX_Pistols_RemovePistolFX");
+PlayAnimation(_Char, "skill_cast_ll_pistol_01_sheathe", "");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_StopAnimation")
+AND
+IsTagged(_Char, "FEMALE", _IsFemale)
+AND
+DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill, _HideHandPistolDelay)
+AND
+LeaderLib_Helper_QRY_IsRace(_Char, _Race)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, _HideHandPistolDelay, "Timers_LLWEAPONEX_Pistols_RemovePistolFX", "LLWEAPONEX_Pistols_RemovePistolFX");
 EXITSECTION
 
 ENDEXITSECTION
