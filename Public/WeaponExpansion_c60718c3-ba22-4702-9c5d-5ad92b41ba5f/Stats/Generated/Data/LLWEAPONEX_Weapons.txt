@@ -2281,7 +2281,7 @@ data "Projectile" "0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"
 data "Flags" "Unbreakable"
 data "Unique" "1"
 data "Boosts" "_LLWEAPONEX_Boost_WeaponMastery_OnHit"
-data "ExtraProperties" "Ignite"
+data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_FLAMETHROWER_EQUIPPED;Ignite"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
 type "Weapon"
