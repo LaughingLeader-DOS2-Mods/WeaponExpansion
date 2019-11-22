@@ -170,7 +170,7 @@ LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Swords.Beholder", 15, "Boost_Weapon_EmptyRuneSlot");
 
 //Blunderbuss
-LeaderLib_Growth_Items_Register_Template("WeaponExpansion", "WeaponExpansion.Guns.Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
+LeaderLib_Growth_Items_Register_Template("WeaponExpansion", "WeaponExpansion.Guns.Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
 LeaderLib_Growth_Items_Clear_ByEntriesID("WeaponExpansion.Guns.Blunderbuss_A");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Guns.Blunderbuss_A", 2, "Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier1");
 LeaderLib_Growth_Items_Register_DeltaModByID("WeaponExpansion.Guns.Blunderbuss_A", 5, "Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier2");

@@ -5,17 +5,14 @@ INITSECTION
 KBSECTION
 //REGION EQUIP_EVENTS
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
-ObjectSetFlag(_Character, "LLWEAPONEX_BlunderbussEquipped", 0);
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
-ObjectClearFlag(_Character, "LLWEAPONEX_BlunderbussEquipped", 0);
-//LeaderLib_Statuses_RemoveIfActive(_Character, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion", 1250);
+LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion", 500);
 //END_REGION
 
 //REGION BASIC_ATTACK
@@ -38,16 +35,16 @@ LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Bl
 CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
 
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Character, (GUIDSTRING)_Target, "LLWEAPONEX_Blunderbuss_ClearBasicAttackEntry")
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (GUIDSTRING)_Target, "LLWEAPONEX_Blunderbuss_ClearBasicAttackEntry")
 AND
-DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Character, _Target)
+DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Character, _Target);
+NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Char, _Target);
 
 PROC
-LLWEAPONEX_Blunderbuss_OnAttackAtPosition((CHARACTERGUID)_Character, (REAL)_x, (REAL)_y, (REAL)_z)
+LLWEAPONEX_Blunderbuss_OnAttackAtPosition((CHARACTERGUID)_Char, (REAL)_x, (REAL)_y, (REAL)_z)
 AND
-GetDistanceToPosition(_Character, _x, _y, _z, _Dist)
+GetDistanceToPosition(_Char, _x, _y, _z, _Dist)
 AND
 RealProduct(_Dist, 80.0, _DelayR)
 AND
@@ -57,8 +54,8 @@ IntegerSum(_DelayInt, 245, _Delay)
 AND
 IntegerMax(_Delay, 950, _DelayClamped)
 THEN
-SetVarFloat3(_Character, "LLWEAPONEX_Blunderbuss_AttackPosition", _x, _y, _z);
-LeaderLib_Timers_StartObjectTimer(_Character, _DelayClamped, "LLWEAPONEX_Timers_Blunderbuss_ExplodeAtPosition", "LLWEAPONEX_Blunderbuss_ExplodeAtPosition");
+SetVarFloat3(_Char, "LLWEAPONEX_Blunderbuss_AttackPosition", _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Char, _DelayClamped, "LLWEAPONEX_Timers_Blunderbuss_ExplodeAtPosition", "LLWEAPONEX_Blunderbuss_ExplodeAtPosition");
 //END_REGION
 
 //REGION SKILLS

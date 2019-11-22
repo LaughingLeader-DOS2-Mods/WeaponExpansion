@@ -1,0 +1,26 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION BASIC_ATTACK_REPLACER
+IF
+CharacterStartAttackObject(_Target, _, _Char)
+AND
+DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Flamethrower)
+THEN
+LeaderLib_Helper_ClearActionQueue(_Char);
+CharacterUseSkill(_Char, "Cone_LLWEAPONEX_Flamethrower_Attack", _Target, 0, 1, 1);
+
+IF
+CharacterStartAttackPosition(_x, _y, _z, _, _Char)
+AND
+DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Flamethrower)
+THEN
+LeaderLib_Helper_ClearActionQueue(_Char);
+CharacterUseSkillAtPosition(_Char, "Cone_LLWEAPONEX_Flamethrower_Attack", _x, _y, _z, 0, 1);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

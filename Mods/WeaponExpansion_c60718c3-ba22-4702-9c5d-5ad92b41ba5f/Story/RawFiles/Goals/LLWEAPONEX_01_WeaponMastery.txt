@@ -184,7 +184,7 @@ LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Firearm", "LLWEAPONEX_WM_Firearm
 
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Firearm", 1, "ElementalBullets", "Any");
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Firearm", 2, "Blunderbuss_Cannonball", "Any");
-DB_LLWEAPONEX_WeaponMastery_SkillRequirements("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "LLWEAPONEX_BlunderbussEquipped", "Flag");
+DB_LLWEAPONEX_WeaponMastery_SkillRequirements("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "LLWEAPONEX_BlunderbussEquipped", "Tag");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "ElementalBullets", "Target_LLWEAPONEX_ElementalBullets");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "Zone_LLWEAPONEX_Blunderbuss_Cannonball");
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Firearm", 1, "Blunderbuss_LaunchDud", "Any");

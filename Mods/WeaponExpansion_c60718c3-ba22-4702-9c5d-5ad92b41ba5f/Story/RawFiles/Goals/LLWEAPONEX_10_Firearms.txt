@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//REGION EQUIP_EVENTS
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion", 500);
+NOT DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion");
+DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

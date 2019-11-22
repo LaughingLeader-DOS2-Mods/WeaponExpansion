@@ -43,7 +43,7 @@ DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_
 DB_LLWEAPONEX_Recipes_Data("Orb_Thunder", "LOOT_LLWEAPONEX_Orb_Thunder_A_Upgrade");
 DB_LLWEAPONEX_Recipes_Data("Orb_Thunder", "LOOT_LLWEAPONEX_Orb_Thunder_B_Upgrade");
 
-LLWEAPONEX_Recipes_Register_Unique("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
+LLWEAPONEX_Recipes_Register_Unique("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
 DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToCon");
 DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToFin");
 DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToInt");
