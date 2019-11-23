@@ -44,7 +44,92 @@ LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQ
 GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
 SysActivateGoal("LeaderLib_20_DebugLevel");
 
+DB_LLWEAPONEX_Debug_StatusClear("POISONED");
+DB_LLWEAPONEX_Debug_StatusClear("BURNING");
+DB_LLWEAPONEX_Debug_StatusClear("SLOWED");
+DB_LLWEAPONEX_Debug_StatusClear("FAVOURABLE_WIND");
+DB_LLWEAPONEX_Debug_StatusClear("DRUNK");
+
 KBSECTION
+
+IF
+GameStarted(_,1)
+AND
+DB_LLWEAPONEX_Debug_StatusClear(_Status)
+THEN
+ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_005_1cac5838-4c3f-4844-bb44-1c763a3ade16, _Status, -1.0, 1);
+ApplyStatus(CHARACTERGUID_Creatures_VampireBat_A_000_0f95ed94-cfb4-4bf3-9b9c-51cbd7c256b3, _Status, -1.0, 1);
+ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_Undead_000_84f397e8-fdea-427a-a0ba-2e367a7eae45, _Status, -1.0, 1);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
+AND
+GetUUID(_Char, _UUID)
+AND
+StringConcatenate("Dervish_StatusArray_", _UUID, _ArrayName)
+THEN
+DB_MyMod_Temp_StatusArray(_Char, _ArrayName);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
+AND
+DB_MyMod_Temp_StatusArray(_Char, _ArrayName)
+AND
+DB_LLWEAPONEX_Debug_StatusClear(_Status)
+AND
+HasActiveStatus(_Char, _Status, 1)
+THEN 
+LeaderLib_Array_AddToArray(_ArrayName, _Status);
+LeaderLog_Log("DEBUG", "LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC] (",_ArrayName,") Status: [",_Status,"] added to array [",_ArrayName,"].");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
+AND
+DB_MyMod_Temp_StatusArray(_Char, _ArrayName)
+AND
+LeaderLib_Array_QRY_Random(_ArrayName)
+AND
+DB_LeaderLib_Array_Temp_RandomResult(_ArrayName, _Index, _Status)
+THEN
+RemoveStatus(_Char, _Status);
+CharacterStatusText(_Char, _Status);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
+AND
+DB_MyMod_Temp_StatusArray(_Char, _ArrayName)
+AND
+NOT DB_LeaderLib_Array_Temp_RandomResult(_ArrayName, _, _)
+AND
+DB_LeaderLib_Random(_Index)
+AND
+IntegertoString(_Index, _IndexStr)
+AND
+DB_LeaderLib_Array_Length(_ArrayName, _Length)
+THEN
+NOT DB_LeaderLib_Random(_Index);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC](",_ArrayName,") No random result matches an index. DB_LeaderLib_Random(", _IndexStr, ")");
+LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC] --- Array length: (",_Length,")");
+LeaderLib_Array_Debug_Print(_ArrayName);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
+AND
+DB_MyMod_Temp_StatusArray(_Char, _ArrayName)
+AND
+DB_LeaderLib_Array_Temp_RandomResult(_ArrayName, _Index, _Status)
+THEN
+NOT DB_LeaderLib_Array_Temp_RandomResult(_ArrayName, _Index, _Status);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC](",_ArrayName,") Random result: ", _Status, "");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
+AND
+DB_MyMod_Temp_StatusArray(_Char, _ArrayName)
+THEN
+NOT DB_MyMod_Temp_StatusArray(_Char, _ArrayName);
+LeaderLib_Array_ClearArray(_ArrayName);
+
 IF
 TextEventSet("llweap_gold")
 AND
@@ -82,6 +167,7 @@ CharacterGetHostCharacter(_Char)
 THEN
 CharacterOverrideMaxSourcePoints(_Char, 20);
 CharacterAddSourcePoints(_Char, 20);
+CharacterAddSkill(_Char, "Target_LLWEAPONEX_DebugTargetSkill", 0);
 
 IF
 TextEventSet("llweap_vartest")
@@ -1589,10 +1675,12 @@ CharacterStatusText(_Char, "Set Reaction");
 CharacterSetReactionPriority(_Char, "LLWEAPONEX_Interrupt", 999999);
 */
 
+/*
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
 THEN
 CharacterUseSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", _Char, 1, 1, 1);
+*/
 
 //REGION COMBINE_TRACE
 IF
