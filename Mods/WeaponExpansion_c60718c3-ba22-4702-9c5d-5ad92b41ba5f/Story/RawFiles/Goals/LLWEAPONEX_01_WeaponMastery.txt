@@ -191,6 +191,17 @@ DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball
 //DB_LLWEAPONEX_WeaponMastery_SkillRequirements("LLWEAPONEX_Firearm", "Blunderbuss_LaunchDud", "LLWEAPONEX_BlunderbussEquipped", "Flag");
 //DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "Blunderbuss_LaunchDud", "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud");
 
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Pistol", "<font color='#FF337F'>Pistol Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Pistol", 0, "<font color='#FDFFEA'>Beginner</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Pistol", 1, "<font color='#DDFFB3'>Novice</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Pistol", 2, "<font color='#94E963'>Journeyman Gunslinger</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Pistol", 3, "<font color='#52D43A'>Expert Gunslinger</font>");
+DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Pistol", 4, "<font color='#4CFF00'>Master Gunslinger</font>");
+
+//DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
+LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Pistol", "LLWEAPONEX_WM_Pistol_Exp", "LLWEAPONEX_WM_Pistol_Level");
+DB_LLWEAPONEX_WeaponMastery_NoBonusStatus("LLWEAPONEX_Pistol");
+
 DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Greatbow", "<font color='#00FF7F'>Greatbow Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Greatbow", 1, "<font color='#DDFFB3'>Novice</font>");
@@ -1189,7 +1200,7 @@ DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE");
 
 /*
 To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
@@ -1202,7 +1213,7 @@ DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS");
 
 //ArmCannon == Runic Cannon, a.k.a. rune weapon with fleeting ranged advantages
 IF
@@ -1212,17 +1223,35 @@ DB_IsPlayer(_Player)
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target, "LLWEAPONEX_ARMCANNON_HIT");
+
+//Increased by using grenades/throwing items/throwing skills
+QRY
+LLWEAPONEX_WeaponMastery_QRY_IgnoreMasteryForAllExp((CHARACTERGUID)_Player, "LLWEAPONEX_ThrowingAbility", (STRING)_ExpSource)
+AND
+_ExpSource != "Death"
+THEN
+DB_NOOP(1);
+
+//Increased by shooting the pistol
+QRY
+LLWEAPONEX_WeaponMastery_QRY_IgnoreMasteryForAllExp((CHARACTERGUID)_Player, "LLWEAPONEX_Pistol", (STRING)_ExpSource)
+AND
+_ExpSource != "Death"
+THEN
+DB_NOOP(1);
 
 PROC
 LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries((CHARACTERGUID)_Player, (INTEGER)_Gain)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, _Gain, NULL_00000000-0000-0000-0000-000000000000);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, _Gain, NULL_00000000-0000-0000-0000-000000000000, "");
 
 PROC
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries((CHARACTERGUID)_Player, (INTEGER)_Gain, (GUIDSTRING)_Target)
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries((CHARACTERGUID)_Player, (INTEGER)_Gain, (GUIDSTRING)_Target, (STRING)_ExpSource)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
+AND
+NOT LLWEAPONEX_WeaponMastery_QRY_IgnoreMasteryForAllExp(_Player, _WeaponType,_ExpSource)
 AND
 LLWEAPONEX_QRY_WeaponTypeMasteryEnabled(_Player, _WeaponType)
 AND
@@ -1324,10 +1353,15 @@ DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _LevelCl
 //REGION PARTY_WIDE_EXPERIENCE
 PROC
 LLWEAPONEX_WeaponMastery_AddPartyExperience((CHARACTERGUID)_PartyMember, (CHARACTERGUID)_Enemy)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy);
+LLWEAPONEX_WeaponMastery_AddPartyExperience(_PartyMember, _Enemy, "None");
+
+PROC
+LLWEAPONEX_WeaponMastery_AddPartyExperience((CHARACTERGUID)_PartyMember, (CHARACTERGUID)_Enemy, (STRING)_ExpSource)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
+THEN
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _ExpSource);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:CharacterDying] Enemy died. Adding mastery experience to all party members.");
 IterateParty(_PartyMember, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
 ProcObjectTimerCancel(_Enemy, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB");
@@ -1336,9 +1370,9 @@ ProcObjectTimer(_Enemy, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB", 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Enemy, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB")
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy)
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _ExpSource)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _ExpSource);
 
 /*
 PROC
@@ -1366,7 +1400,7 @@ StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience"
 AND
 NOT QRY_IsSummonOrPartyFollower(_Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy)
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _ExpSource)
 AND
 CharacterIsInPartyWith(_Player, _PartyMember, 1)
 AND
@@ -1377,7 +1411,18 @@ AND
 IntegerSum(2, _BossMult, _AddExp)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_01_WeaponMastery:LLWEAPONEX_WeaponMastery_AddPartyExperience] Adding [",_AddExp,"] party mastery experience to player.");
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, _AddExp, _Enemy);
+LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, _AddExp, _Enemy, _ExpSource);
+//END_REGION
+
+//REGION PISTOL_MASTERY_EXPERIENCE
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_A_HIT", (CHARACTERGUID)_Player)
+AND
+DB_IsPlayer(_Player)
+AND
+ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, "LLWEAPONEX_Pistol", 1, _Target);
 //END_REGION
 
 //REGION EXPERIENCE_LISTENING_RESET
@@ -1606,6 +1651,8 @@ LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char, _WeaponType, _CurrentLevel);
 
 PROC
 LLWEAPONEX_WeaponMastery_ApplyBonusStatus((CHARACTERGUID)_Char, (STRING)_WeaponType, (INTEGER)_CurrentLevel)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_NoBonusStatus(_WeaponType)
 AND
 DB_LLWEAPONEX_WeaponMastery_BonusStatus(_CurrentLevel, _Status)
 AND

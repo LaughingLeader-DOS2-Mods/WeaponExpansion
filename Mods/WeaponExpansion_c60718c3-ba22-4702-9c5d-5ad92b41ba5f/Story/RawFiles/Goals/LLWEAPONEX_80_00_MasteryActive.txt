@@ -42,13 +42,13 @@ DB_CombatCharacters(_Enemy, _CombatID)
 AND
 DB_IsPlayer(_Char)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy)
+DB_CombatCharacters(_Char, _CombatID)
 AND
-CombatGetIDForCharacter(_Char, _CombatID)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
 AND
 CharacterIsEnemy(_Enemy, _Char, 1)
 THEN
-LLWEAPONEX_WeaponMastery_AddPartyExperience(_Char, _Enemy);
+LLWEAPONEX_WeaponMastery_AddPartyExperience(_Char, _Enemy, "Death");
 //END_REGION
 
 //REGION SKILL_REQUIREMENTS_MET
