@@ -1008,11 +1008,11 @@ add namegroup "WPN_LLWEAPONEX_Katana_2H_Epic","",""
 
 add levelgroup 0,0,"Legendary"
 add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_Epic","Cool",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_Epic","",""
 
 add levelgroup 0,0,"Divine"
 add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_Epic","Cool",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_Epic","",""
 
 new itemgroup "WPN_LLWEAPONEX_Katana_2H_Crafted"
 
@@ -1020,11 +1020,43 @@ add levelgroup 0,0,"All"
 add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
 add namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted","",""
 
-new itemgroup "WPN_LLWEAPONEX_Katana_2H_B"
+new itemgroup "WPN_LLWEAPONEX_Katana_2H_B_Crafted"
 
 add levelgroup 0,0,"All"
 add rootgroup "a08befdd-f111-45ed-9e1d-81d0fcf64a97",""
 add namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A","",""
+
+new itemgroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A"
+
+add levelgroup 0,0,"Common"
+add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic","",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic","",""
 
 new itemgroup "ARM_LLWEAPONEX_Katana_2H_B_Sheathe"
 
