@@ -484,10 +484,13 @@ VARS
 	SKILL:_Skill
 	FLOAT3:_Dir
 	FLOAT:_Dist
-	FLOAT3:_Pos
+	FLOAT3:_SourcePos
 	FLOAT:_LevelF
 	INT:_Level
-
+	FLOAT:_y
+	FLOAT:_SourceY
+	//STRING:_Str
+	//FIXEDSTRING:_StrF
 ON
 	OnCharacterEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile")
 ACTIONS
@@ -497,17 +500,32 @@ IF "c1&c2&c3"
 	GetVar(_Target, _Char, "LLWEAPONEX_Pistols_ShootProjectileTarget")
 	GetVar(_Skill, _Char, "LLWEAPONEX_Pistols_ShootProjectileSkill")
 THEN
+	IF "c1&c2&c3"
+		GetPosition(_Char, _SourcePos)
+		GetY(_SourcePos, _SourceY)
+		GetY(_Target, _y)
+	THEN
+		Subtract(_y, _SourceY)
+		Abs(_y)
+		//Print(_Str, "Test: [3] | [1] | [2]", _SourcePos, _Target, _y)
+		//Cast(_StrF, _Str)
+		//StatusText(_Char, _StrF)
+		IF "!c1"
+			IsGreaterThen(_y, 1.0)
+		THEN
+			GetDirection(_Char, _Target, _, _)
+			GetForwardDirection(_Char, _Dir)
+			Set(_Dist, 15.0)
+			Multiply(_Dir, _Dist)
+			Add(_Target, _Dir)
+		ELIF "c1"
+			GetY(_Target, _y)
+		THEN
+		ENDIF
+	ENDIF
 	Cast(_Level, _LevelF)
-	GetDirection(_Char, _Target, _Dir, _Dist)
-	GetForwardDirection(_Char, _Dir)
-	//Clamp(_Dist, 6.0, _Dist)
-	//Multiply(_Dist, 1.5)
-	Set(_Dist, 15.0)
-	Multiply(_Dir, _Dist)
-	Add(_Target, _Dir)
-	//GetPosition(_Char, _Pos)
-	//Add(_Pos, _Offset)
-	//ShootWorldProjectileAt(_Skill, _Char, _Pos, _Target, _Level)
-	Add(_Target, {0;0.5;0})
+
+	Add(_y, 0.5)
+	SetY(_Target, _y)
 	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
 ENDIF

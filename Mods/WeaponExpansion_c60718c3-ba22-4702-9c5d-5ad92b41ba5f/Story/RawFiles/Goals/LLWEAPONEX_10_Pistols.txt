@@ -127,8 +127,10 @@ LeaderLib_Timers_StartObjectTimer(_Char, _HideHandPistolDelay, "Timers_LLWEAPONE
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_RemovePistolFX")
+AND
+DB_LLWEAPONEX_Pistols_ShootingStatus(_Template, _Status)
 THEN
-RemoveStatus(_Char, "LLWEAPONEX_FX_PISTOL_A_SHOOT");
+RemoveStatus(_Char, _Status);
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_StopAnimation")
