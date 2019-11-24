@@ -141,6 +141,8 @@ PROC
 LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Katana", (INTEGER)_IsPlayer)
 AND
 IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
+AND
+IsTagged(_Item, "LeaderLib_AnimationOverrideEnabled", 1)
 THEN
 LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
 
@@ -148,6 +150,8 @@ PROC
 LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Katana", (INTEGER)_IsPlayer)
 AND
 IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
+AND
+IsTagged(_Item, "LeaderLib_AnimationOverrideEnabled", 1)
 THEN
 LLWEAPONEX_AnimationSetOverride_Clear(_Char);
 
