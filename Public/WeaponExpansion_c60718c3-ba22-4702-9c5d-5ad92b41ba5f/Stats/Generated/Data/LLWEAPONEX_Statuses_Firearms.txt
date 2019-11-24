@@ -102,6 +102,18 @@ data "Icon" "LLWEAPONEX_Status_Firearm_Bullet_Water"
 data "FormatColor" "Water"
 data "Skills" "Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Water"
 
+new entry "LLWEAPONEX_FX_PISTOL_A_SHOOTING"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "Items" "ARM_FX_LLWEAPONEX_Pistol_A"
+
+new entry "LLWEAPONEX_FX_UNIQUE_PISTOL_A_ISSHIN_SHOOTING"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "Items" "ARM_FX_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A"
+
 new entry "LLWEAPONEX_PISTOL_A_HIT"
 type "StatusData"
 data "StatusType" "DAMAGE"

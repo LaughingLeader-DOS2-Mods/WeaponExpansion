@@ -1,3 +1,29 @@
+new namegroup "ARM_LLWEAPONEX_Pistol_A_Common"
+add name "ARM_LLWEAPONEX_Pistol_A_Common_DisplayName",""
+
+new namegroup "ARM_LLWEAPONEX_Pistol_A_Uncommon"
+add name "ARM_LLWEAPONEX_Pistol_A_Uncommon_1_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Uncommon_2_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Uncommon_3_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Uncommon_4_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Uncommon_5_DisplayName",""
+
+new namegroup "ARM_LLWEAPONEX_Pistol_A_Rare"
+add name "ARM_LLWEAPONEX_Pistol_A_Rare_1_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Rare_2_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Rare_3_DisplayName",""
+
+new namegroup "ARM_LLWEAPONEX_Pistol_A_Epic"
+add name "ARM_LLWEAPONEX_Pistol_A_Epic_1_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Epic_2_DisplayName",""
+add name "ARM_LLWEAPONEX_Pistol_A_Epic_3_DisplayName",""
+
+new namegroup "ARM_LLWEAPONEX_Pistol_A_Legendary"
+add name "ARM_LLWEAPONEX_Pistol_A_Legendary_DisplayName",""
+
+new namegroup "ARM_LLWEAPONEX_Pistol_A_Divine"
+add name "ARM_LLWEAPONEX_Pistol_A_Divine_DisplayName",""
+
 new namegroup "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A"
 add name "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A_DisplayName",""
 
@@ -17,8 +43,8 @@ new namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A"
 add name "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_1_DisplayName",""
 add namecool "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_2_DisplayName",""
 
-new namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A"
-add name "ARM_UNIQUE_LLWEAPONEX_Pistol_A_DisplayName",""
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A"
+add name "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A_DisplayName",""
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A"
 add name "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A_DisplayName",""
@@ -233,8 +259,10 @@ add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_3_DisplayName",""
 add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_4_DisplayName",""
 add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Uncommon_5_DisplayName",""
 
-new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine"
-add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine_DisplayName",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare"
+add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_1_DisplayName",""
+add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_2_DisplayName",""
+add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_3_DisplayName",""
 
 new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic"
 add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_1_DisplayName",""
@@ -244,10 +272,8 @@ add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Epic_3_DisplayName",""
 new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Legendary"
 add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Legendary_DisplayName",""
 
-new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare"
-add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_1_DisplayName",""
-add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_2_DisplayName",""
-add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Rare_3_DisplayName",""
+new namegroup "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine"
+add name "WPN_LLWEAPONEX_DualShields_Blackring_A_Divine_DisplayName",""
 
 new namegroup "WPN_LLWEAPONEX_DualShields_Common"
 add name "WPN_LLWEAPONEX_DualShields_Common_DisplayName",""
@@ -581,7 +607,7 @@ add name "WPN_LLWEAPONEX_Katana_2H_Epic_4_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_2H_Epic_5_DisplayName",""
 
 new namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted"
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A",""
+add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted",""
 
 new namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal"
 add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal_1_DisplayName",""

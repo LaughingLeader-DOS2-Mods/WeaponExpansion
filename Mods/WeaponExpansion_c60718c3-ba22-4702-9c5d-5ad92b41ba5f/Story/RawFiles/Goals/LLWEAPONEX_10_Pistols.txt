@@ -14,6 +14,9 @@ DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_
 DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand", 400);
 DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 800);
 DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 800);
+
+DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003", "LLWEAPONEX_FX_PISTOL_A_SHOOTING");
+DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_A_Isshin_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_ISSHIN_SHOOTING");
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring1_728f8b1a-7f4d-4912-85e4-054f817f2592
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring2_b183308c-8348-4079-abfa-2c2eca78d2cd
 
@@ -48,8 +51,14 @@ LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Pistols_PlayPist
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_PlayPistolFX")
+AND
+CharacterGetEquippedItem(_Char, "Belt", _Pistol)
+AND
+GetTemplate(_Pistol, _Template)
+AND
+DB_LLWEAPONEX_Pistols_ShootingStatus(_Template, _Status)
 THEN
-ApplyStatus(_Char, "LLWEAPONEX_FX_PISTOL_A_SHOOT", 6.0, 1, _Char);
+ApplyStatus(_Char, _Status, 12.0, 1, _Char);
 
 /*
 IF

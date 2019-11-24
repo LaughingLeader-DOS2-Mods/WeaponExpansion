@@ -1014,7 +1014,7 @@ add levelgroup 0,0,"Divine"
 add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
 add namegroup "WPN_LLWEAPONEX_Katana_2H_Epic","",""
 
-new itemgroup "WPN_LLWEAPONEX_Katana_2H_Crafted"
+new itemgroup "WPN_LLWEAPONEX_Katana_2H_A_Crafted"
 
 add levelgroup 0,0,"All"
 add rootgroup "ec9b32d0-32ba-4c6f-a64c-7e9ffb06f57d",""
@@ -1030,7 +1030,7 @@ new itemgroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted"
 
 add levelgroup 0,0,"All"
 add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A","",""
+add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A"
 
@@ -2046,16 +2046,83 @@ add levelgroup 0,0,"All"
 add rootgroup "0b765f8b-113a-408d-afa1-81695e34a19f",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A","",""
 
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A"
+new itemgroup "ARM_LLWEAPONEX_Pistol_A"
+
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Common","",""
+
+add levelgroup 1,3,"Uncommon"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Uncommon","",""
+
+add levelgroup 4,7,"Uncommon"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Uncommon","",""
+
+add levelgroup 8,11,"Uncommon"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Uncommon","",""
+
+add levelgroup 12,15,"Uncommon"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Uncommon","",""
+
+add levelgroup 16,18,"Uncommon"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Uncommon","",""
+
+add levelgroup 19,0,"Uncommon"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Uncommon","",""
+
+add levelgroup 1,7,"Rare"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Rare","",""
+
+add levelgroup 8,14,"Rare"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Rare","",""
+
+add levelgroup 15,0,"Rare"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Rare","",""
+
+add levelgroup 1,7,"Epic"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Epic","",""
+
+add levelgroup 8,14,"Epic"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Epic","",""
+
+add levelgroup 15,0,"Epic"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Legendary","",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Divine","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "6e667d23-c8a6-46d6-b6ec-2aa6aa95241d",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A","",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A","",""
 
-new itemgroup "ARM_LLWEAPONEX_FX_Pistol_A_Hand"
+new itemgroup "ARM_FX_LLWEAPONEX_Pistol_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "728f8b1a-7f4d-4912-85e4-054f817f2592",""
+add namegroup "EMPTY","",""
+
+new itemgroup "ARM_FX_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "6edf5778-1838-4095-beff-cf8a95dd6699",""
 add namegroup "EMPTY","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"

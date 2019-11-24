@@ -32,7 +32,7 @@ object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Water",9,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_GreatbowsNormal"
 new subtable "1,1"
-object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Greatbows",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_DualShieldsNormal"
 new subtable "1,1"
@@ -153,7 +153,7 @@ object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
 new subtable "0,1;1,4"
 object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
 new subtable "0,1;1,4"
-object category "LLWEAPONEX_Greatbow",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Greatbows",1,1,0,0,0,0,0,0
 new subtable "0,1;1,4"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 new subtable "0,1;1,4"
@@ -170,6 +170,8 @@ new subtable "0,2;1,2"
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
 object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
 new subtable "0,3;1,2"
@@ -1042,7 +1044,7 @@ object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatRods",1,0,0,0,0,0,0,0
 new subtable "-1"
-object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_GRN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0
 new subtable "-1"
@@ -1096,7 +1098,7 @@ object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,1,1,1,1,0,0
 new subtable "-10"
 object category "T_ST_LLWEAPONEX_RodsNormal",1,1,1,1,1,1,0,0
 new subtable "-20"
-object category "LLWEAPONEX_Greatbow",1,1,1,1,1,1,0,0
+object category "LLWEAPONEX_Greatbows",1,1,1,1,1,1,0,0
 new subtable "-5"
 object category "LLWEAPONEX_DualShields",1,1,1,1,1,1,0,0
 new subtable "-2"
@@ -1141,7 +1143,7 @@ object category "I_GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Oil",1,0,0,0,0,0,0,
 new subtable "-1"
 object category "I_GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Nails",1,0,0,0,0,0,0,0
 new subtable "-1"
-object category "LLWEAPONEX_Greatbow",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
 new subtable "-2"
 object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
 new subtable "-2"
