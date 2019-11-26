@@ -1,4 +1,4 @@
-function get_handedness(weapon)
+function llweaponex_get_handedness(weapon)
     if weapon == nil then
         return nil
     end
@@ -15,7 +15,7 @@ function get_handedness(weapon)
     end
 end
 
-function tag_handedness()
+function llweaponex_tag_handedness()
     local player = CharacterGetHostCharacter()
     local slots = {"Weapon", "Shield"}
     for i, slot in ipairs(slots) do
@@ -34,7 +34,7 @@ function tag_handedness()
     DebugBreak("[LL-OsiExtender] Item check done.")
 end
 
-function tag_itemtype()
+function llweaponex_tag_itemtype()
     local player = CharacterGetHostCharacter()
     local slots = {"Weapon", "Shield"}
     local anim_to_type = {
