@@ -21,7 +21,7 @@ function llweaponex_tag_handedness()
     for i, slot in ipairs(slots) do
         local item = CharacterGetEquippedItem(player, slot)
         if item ~= nil then
-            local handedness = get_handedness(item)
+            local handedness = llweaponex_get_handedness(item)
             if handedness ~= nil then
                 if handedness == true then
                     SetTag(item, "LLWEAPONEX_IsTwoHanded")
