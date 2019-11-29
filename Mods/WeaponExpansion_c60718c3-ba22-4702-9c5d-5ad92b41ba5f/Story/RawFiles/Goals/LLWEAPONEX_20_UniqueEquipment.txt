@@ -8,7 +8,117 @@ KBSECTION
 PROC
 LLWEAPONEX_Uniques_InitSettings()
 THEN
+DB_LLWEAPONEX_Uniques_BurialBlade((ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_eef48291-e974-4899-9017-26f23da50c73, (ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_BurialBlade_Mainhand_A_3699038c-b403-4f7d-81c0-7c1fbe628f6d, (ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_BurialBlade_Offhand_A_47d716e9-ead0-45b2-9dc8-0ad841737183);
+
+//END_REGION
+
+//REGION BURIAL_BLADE_SWAP
+QRY
+LLWEAPONEX_Uniques_QRY_PrepareBurialBlade((ITEMGUID)_Mainhand)
+AND
+NOT DB_LLWEAPONEX_Uniques_BurialBlade(_, _Mainhand, _)
+AND
+GetPosition(ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c", _x, _y, _z, _Scythe)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Shield_1H_BurialBlade_Offhand_A_a7512f1c-3c94-4b91-8d20-2580343e1cac", _x, _y, _z, _Offhand)
+THEN
+ItemToInventory(_Scythe, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
+ItemToInventory(_Offhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
+DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand);
+
+QRY
+LLWEAPONEX_Uniques_QRY_PrepareBurialBlade((ITEMGUID)_Mainhand)
+AND
+DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
+THEN
 DB_NOOP(1);
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+THEN
+LLWEAPONEX_AnimationSetOverride_Clear(_Char);
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
+ObjectClearFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 0);
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
+THEN
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
+ObjectClearFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 0);
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+THEN
+LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
+ObjectSetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 0);
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
+ObjectSetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 0);
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+AND
+LLWEAPONEX_Uniques_QRY_PrepareBurialBlade(_Mainhand)
+AND
+DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
+THEN
+LeaderLib_Helper_UnequipInSlot(_Char, "Shield");
+CharacterEquipItem(_Char, _Offhand);
+ItemLockUnEquip(_Offhand, 1);
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+AND
+DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
+THEN
+ItemLockUnEquip(_Offhand, 0);
+ItemToInventory(_Offhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
+
+IF
+SkillCast(_Char, "Shout_LLWEAPONEX_BurialBlade_Transform", _, _)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 1)
+AND
+LeaderLib_Helper_QRY_GetItemByTemplate(_Char, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+AND
+DB_LeaderLib_Helper_Temp_ItemFound(_Char, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850", _Mainhand)
+AND
+LLWEAPONEX_Uniques_QRY_PrepareBurialBlade(_Mainhand)
+AND
+DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
+THEN
+NOT DB_LeaderLib_Helper_Temp_ItemFound(_Char, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850", _Mainhand);
+CharacterUnequipItem(_Char, _Mainhand);
+CharacterUnequipItem(_Char, _Offhand);
+ItemToInventory(_Mainhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
+ItemToInventory(_Offhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
+ItemToInventory(_Scythe, _Char, 1, 0, 1);
+ItemSetOwner(_Scythe, _Char);
+CharacterEquipItem(_Char, _Scythe);
+
+IF
+SkillCast(_Char, "Shout_LLWEAPONEX_BurialBlade_Transform", _, _)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 1)
+AND
+CharacterGetEquippedWeapon(_Char, (ITEMGUID)_Scythe)
+AND
+DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
+THEN
+CharacterUnequipItem(_Char, _Scythe);
+ItemToInventory(_Scythe, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
+ItemToInventory(_Mainhand, _Char, 1, 0, 0);
+ItemToInventory(_Offhand, _Char, 1, 0, 0);
+ItemSetOwner(_Mainhand, _Char);
+ItemSetOwner(_Offhand, _Char);
+CharacterEquipItem(_Char, _Mainhand);
+CharacterEquipItem(_Char, _Offhand);
 //END_REGION
 
 //REGION UPDATES

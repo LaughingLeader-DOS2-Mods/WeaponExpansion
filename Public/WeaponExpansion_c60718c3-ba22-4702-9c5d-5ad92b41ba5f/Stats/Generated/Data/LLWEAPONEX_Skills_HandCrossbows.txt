@@ -282,7 +282,6 @@ data "UseWeaponProperties" "No"
 data "CastAnimation" "skill_attack_ll_handcrossbow_power_01_cast"
 data "PrepareEffect" "RS3_FX_Skills_Voodoo_Prepare_Weapon_Hand_01:Dummy_R_HandFX,Dummy_L_HandFX;RS3_FX_Skills_Voodoo_Prepare_Weapon_Root_01"
 data "CastEffect" "LLWEAPONEX_FX_HandCrossbow_Shoot_01:LowerArm_L_Twist_Bone:cast;RS3_FX_Skills_Voodoo_Cast_Attack_Precision_Root_01:Dummy_Root;RS3_FX_Skills_Voodoo_Cast_Attack_Precision_Hand_01:Dummy_L_HandFX,Dummy_R_HandFX"
-RS3_FX_Skills_Voodoo_Cast_Attack_Precision_Hand_01:Dummy_L_HandFX,Dummy_R_HandFX"
 data "TargetEffect" "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01:Dummy_BodyFX:cast"
 
 new entry "Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Enemy"

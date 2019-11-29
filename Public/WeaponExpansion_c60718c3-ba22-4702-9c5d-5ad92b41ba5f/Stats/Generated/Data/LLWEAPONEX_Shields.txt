@@ -175,7 +175,7 @@ using "_LLWEAPONEX_Npc_DualShields"
 data "ItemGroup" "WPN_LLWEAPONEX_DualShields_Dwarves_A"
 data "Armor Defense Value" "150"
 data "Magic Armor Value" "100"
-data "Earth" "10
+data "Earth" "10"
 
 new entry "WPN_LLWEAPONEX_Npc_DualShields_Elves_A"
 type "Shield"

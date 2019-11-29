@@ -2197,6 +2197,30 @@ add levelgroup 0,0,"All"
 add rootgroup "ca61e441-9446-40ac-811d-736327d4a0f0",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "e955f532-3e2c-41e7-b834-c53a50d4708c",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand"
+
+add levelgroup 0,0,"All"
+add rootgroup "0f42e70c-5b1b-4a8f-9f3e-e462e2f70850",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand"
+
+add levelgroup 0,0,"All"
+add rootgroup "a7512f1c-3c94-4b91-8d20-2580343e1cac",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand","",""
+
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Shield_1H_BurialBlade_A_Offhand"
+
+add levelgroup 0,0,"All"
+add rootgroup "a7512f1c-3c94-4b91-8d20-2580343e1cac",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand","",""
+
 new itemgroup "ARM_LLWEAPONEX_Quiver_A"
 
 add levelgroup 0,0,"Common"

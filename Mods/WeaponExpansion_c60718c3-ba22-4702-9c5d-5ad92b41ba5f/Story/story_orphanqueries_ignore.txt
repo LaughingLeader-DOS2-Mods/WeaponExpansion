@@ -385,7 +385,9 @@ DB_LeaderLib_Growth_Items_TemplateID 3
 DB_CustomMoveItemResponse 3
 DB_CustomPickupItemResponse 3
 DB_CustomLockpickItemResponse 3
-DB_LLMIME_Mimicking_Whitelist_Skills 1
+DB_LeaderLib_Math_ScaleToRange 6DB_LeaderLib_ModApi_RegisterMod 3
+DB_LeaderLib_ModApi_RegisterActiveGoal 3DB_LLMIME_Mimicking_Whitelist_Skills 1
+DB_LLMIME_Mimicking_Blacklist_Skills 1
 DB_LLMIME_Mimicking_Blacklist_SkillElements 2
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes 1
 DB_LLBARTER_DialogBlacklist 2
@@ -395,3 +397,4 @@ DB_LeaderLib_BlockedSkill 1
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables 5
 DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage 2
 DB_LLWEAPONEX_WeaponMastery_Progression	4
+DB_Illusionist 2

@@ -160,7 +160,6 @@ data "Ability" "Air"
 data "DamageType" "Air"
 data "DeathType" "Electrocution"
 data "SkillProperties" "SHOCKED,100,1;Electrify"
-//RS3_FX_Skills_Air_Lightning_Target_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_MosquitoSwarm"
 type "SkillData"
@@ -170,7 +169,6 @@ data "Ability" "Death"
 data "DamageType" "Physical"
 data "DeathType" "Piercing"
 data "SkillProperties" "SELF:OnHit:VAMPIRIC_TOUCH,100,1;BLEEDING,100,1"
-//RS3_FX_Skills_Voodoo_Blood_Swarm_Target_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_DimensionalBolt"
 type "SkillData"
@@ -181,7 +179,6 @@ data "DamageType" "Chaos"
 data "DeathType" "Piercing"
 data "SkillProperties" "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_FX_DIMENSIONALBOLT,100,-2"
 data "Template" "db1457de-606b-4621-bd08-f9ed6584f770"
-//RS3_FX_GP_Impacts_DimensionalBolt_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_FlamingDaggers"
 type "SkillData"
@@ -222,8 +219,6 @@ data "DamageType" "Poison"
 data "ExplodeRadius" "6"
 data "SkillProperties" "POISONED,100,1;Contaminate"
 data "DeathType" "Acid"
-//RS3_FX_Skills_Earth_Cast_Aoe_Voodoo_Root_01
-//RS3_FX_Skills_Earth_Contamination_Impact_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_BlindingRadiance"
 type "SkillData"
@@ -234,7 +229,6 @@ data "DamageType" "Air"
 data "ExplodeRadius" "4"
 data "SkillProperties" "BLIND,100,1"
 data "DeathType" "Electrocution"
-//RS3_FX_Skills_Divine_BlindingRadiance_Cast_Root_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Ignition"
 type "SkillData"
@@ -245,8 +239,6 @@ data "DamageType" "Fire"
 data "ExplodeRadius" "6"
 data "SkillProperties" "BURNING,100,1;Ignite;Melt"
 data "DeathType" "Incinerate"
-//RS3_FX_Skills_Fire_Cast_Ground_Fire_Root_01
-//RS3_FX_Skills_Fire_Haste_Impact_Root_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TentacleLash"
 type "SkillData"
@@ -257,7 +249,6 @@ data "DamageType" "Physical"
 data "ExplodeRadius" "4"
 data "SkillProperties" "DISARMED,50,1;LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_FX_TENTACLE,100,-2"
 data "DeathType" "Physical"
-//RS3_FX_Skills_Totem_Lash_Impact_Root_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_GraspOfTheStarved"
 type "SkillData"
@@ -271,7 +262,6 @@ data "ExplodeRadius" "4"
 data "SkillProperties" "CRIPPLED,50,1"
 data "DeathType" "Piercing"
 data "TargetConditions" "NonSelf;(Character&(!Ally|Tagged:LeaderLib_FriendlyFireEnabled));!Dead;(InSurface:SurfaceBlood|InSurface:SurfaceBloodCloud)"
-//RS3_FX_Skills_Voodoo_Decaying_GraspStarved_Impact_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Earthquake"
 type "SkillData"
@@ -284,5 +274,3 @@ data "DamageType" "Earth"
 data "ExplodeRadius" "5"
 data "SkillProperties" "KNOCKED_DOWN,50,1"
 data "DeathType" "Physical"
-//RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_01
-//RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_02

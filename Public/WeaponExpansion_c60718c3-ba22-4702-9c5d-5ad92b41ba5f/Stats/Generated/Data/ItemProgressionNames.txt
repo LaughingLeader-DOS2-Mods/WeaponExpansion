@@ -1020,6 +1020,15 @@ add name "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_DisplayName",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A"
+add name "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_DisplayName",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand"
+add name "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand_DisplayName",""
+
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand"
+add name "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand_DisplayName",""
+
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_DisplayName",""
 
