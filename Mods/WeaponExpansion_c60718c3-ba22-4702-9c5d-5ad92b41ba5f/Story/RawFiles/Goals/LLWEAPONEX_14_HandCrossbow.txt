@@ -4,15 +4,15 @@ INITSECTION
 
 KBSECTION
 IF
-SkillCast(_Character, "Shout_LLWEAPONEX_HandCrossbow_Reload", _, _)
+SkillCast(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload", _, _)
 THEN
-LLWEAPONEX_HandCrossbow_Reload(_Character);
-ClearTag(_Character, "LLWEAPONEX_HandCrossbow_CanReload");
+LLWEAPONEX_HandCrossbow_Reload(_Char);
+ClearTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
 
 PROC
-LLWEAPONEX_HandCrossbow_Reload((CHARACTERGUID)_Character)
+LLWEAPONEX_HandCrossbow_Reload((CHARACTERGUID)_Char)
 AND
-CharacterGetEquippedItem(_Character, "Ring", (ITEMGUID)_HandCrossbow)
+CharacterGetEquippedItem(_Char, "Ring", (ITEMGUID)_HandCrossbow)
 AND
 IsTagged(_HandCrossbow, "LLWEAPONEX_HandCrossbow", 1)
 AND
@@ -21,9 +21,9 @@ THEN
 ItemAddCharges(_HandCrossbow, _Max);
 
 PROC
-LLWEAPONEX_HandCrossbow_Reload((CHARACTERGUID)_Character)
+LLWEAPONEX_HandCrossbow_Reload((CHARACTERGUID)_Char)
 AND
-CharacterGetEquippedItem(_Character, "Ring2", (ITEMGUID)_HandCrossbow)
+CharacterGetEquippedItem(_Char, "Ring2", (ITEMGUID)_HandCrossbow)
 AND
 IsTagged(_HandCrossbow, "LLWEAPONEX_HandCrossbow", 1)
 AND
@@ -32,51 +32,55 @@ THEN
 ItemAddCharges(_HandCrossbow, _Max);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
 AND
-CharacterIsPlayer(_Character, _IsPlayer)
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerMax(_a, _b, _IsPlayer)
 THEN
-LLWEAPONEX_OnWeaponTypeEquipped(_Character, _Item, "LLWEAPONEX_HandCrossbow", _IsPlayer);
+LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, "LLWEAPONEX_HandCrossbow", _IsPlayer);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
 THEN
-//LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_Equipped");
-LLWEAPONEX_HandCrossbow_OnEquipped(_Character, _Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
+//LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_Equipped");
+LLWEAPONEX_HandCrossbow_OnEquipped(_Char, _Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
 THEN
-//LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HandCrossbow_Equipped");
-LLWEAPONEX_HandCrossbow_OnUnEquipped(_Character, _Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
+//LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_HandCrossbow_Equipped");
+LLWEAPONEX_HandCrossbow_OnUnEquipped(_Char, _Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
 
 //REGION SKILL_TAGS_SET
 QRY
-LLWEAPONEX_HandCrossbow_QRY_GetHandcrossbow((CHARACTERGUID)_Character, (INTEGER)_AutoInsertCheck)
+LLWEAPONEX_HandCrossbow_QRY_GetHandcrossbow((CHARACTERGUID)_Char, (INTEGER)_AutoInsertCheck)
 AND
-CharacterGetEquippedItem(_Character, "Ring", (ITEMGUID)_HandCrossbow)
+CharacterGetEquippedItem(_Char, "Ring", (ITEMGUID)_HandCrossbow)
 AND
 IsTagged(_HandCrossbow, "LLWEAPONEX_HandCrossbow", 1)
 AND
 LeaderLib_Helper_QRY_ObjectFlagEquals(_HandCrossbow, "LLWEAPONEX_HandCrossbow_DisableAutoInsert", _AutoInsertCheck)
 THEN
-DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Character, _HandCrossbow);
+DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Char, _HandCrossbow);
 
 QRY
-LLWEAPONEX_HandCrossbow_QRY_GetHandcrossbow((CHARACTERGUID)_Character, (INTEGER)_AutoInsertCheck)
+LLWEAPONEX_HandCrossbow_QRY_GetHandcrossbow((CHARACTERGUID)_Char, (INTEGER)_AutoInsertCheck)
 AND
-NOT DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Character, _)
+NOT DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Char, _)
 AND
-CharacterGetEquippedItem(_Character, "Ring2", (ITEMGUID)_HandCrossbow)
+CharacterGetEquippedItem(_Char, "Ring2", (ITEMGUID)_HandCrossbow)
 AND
 IsTagged(_HandCrossbow, "LLWEAPONEX_HandCrossbow", 1)
 AND
 LeaderLib_Helper_QRY_ObjectFlagEquals(_HandCrossbow, "LLWEAPONEX_HandCrossbow_DisableAutoInsert", _AutoInsertCheck)
 THEN
-DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Character, _HandCrossbow);
+DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Char, _HandCrossbow);
 
 PROC
-LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 ObjectGetFlag(_Item, "LLWEAPONEX_HandCrossbow_DisableAutoInsert", 0)
 AND
@@ -84,60 +88,60 @@ NOT ItemGetRuneItemTemplate(_Item, 0, _)
 AND
 DB_LeaderLib_Helper_Runes_Templates("WeaponExpansion.HandCrossbowBolt", _RuneTemplate)
 AND
-NOT DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Character, _Item)
+NOT DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Char, _Item)
 AND
-GetItemForItemTemplateInInventory(_Character, _RuneTemplate, _Bolts)
+GetItemForItemTemplateInInventory(_Char, _RuneTemplate, _Bolts)
 THEN
-DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Character, _Item);
-ItemInsertRune(_Character, _Item, _RuneTemplate, 0);
+DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Char, _Item);
+ItemInsertRune(_Char, _Item, _RuneTemplate, 0);
 ItemRemove(_Bolts);
-LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
-ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
+ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Auto-inserted crossbow bolts into empty Handcrossbow.");
-CharacterStatusText(_Character, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted");
+CharacterStatusText(_Char, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted");
 
 PROC
-LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
-CharacterHasSkill(_Character, "Shout_LLWEAPONEX_HandCrossbow_Reload", 0)
+CharacterHasSkill(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload", 0)
 THEN
-CharacterAddSkill(_Character, "Shout_LLWEAPONEX_HandCrossbow_Reload", 1);
-LLWEAPONEX_HandCrossbow_TagForReload(_Character, _Item);
+CharacterAddSkill(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload", 1);
+LLWEAPONEX_HandCrossbow_TagForReload(_Char, _Item);
 
 PROC
-LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
-NOT DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Character, _Item)
+NOT DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Char, _Item)
 AND
 ItemGetRuneItemTemplate(_Item, 0, _RuneTemplate)
 AND
 DB_LeaderLib_Helper_Runes_Templates("WeaponExpansion.HandCrossbowBolt", _RuneTemplate)
 THEN
-LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
-ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
+ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow has ammo. ");
 
 PROC
-LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_HandCrossbow_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
-DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Character, _Item)
+DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Char, _Item)
 THEN
-NOT DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Character, _Item);
+NOT DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Char, _Item);
 
 IF
-ObjectWasTagged((CHARACTERGUID)_Character, "LLWEAPONEX_HandCrossbow_HasAmmo")
+ObjectWasTagged((CHARACTERGUID)_Char, "LLWEAPONEX_HandCrossbow_HasAmmo")
 THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
+LLWEAPONEX_HandCrossbow_TagForReload(_Char);
 
 PROC
-LLWEAPONEX_HandCrossbow_TagForReload((CHARACTERGUID)_Character)
+LLWEAPONEX_HandCrossbow_TagForReload((CHARACTERGUID)_Char)
 AND
-GetItemForItemTemplateInInventory(_Character, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2", _HandCrossbow)
+GetItemForItemTemplateInInventory(_Char, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2", _HandCrossbow)
 THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character, _HandCrossbow);
+LLWEAPONEX_HandCrossbow_TagForReload(_Char, _HandCrossbow);
 
 PROC
-LLWEAPONEX_HandCrossbow_TagForReload((CHARACTERGUID)_Character, (ITEMGUID)_HandCrossbow)
+LLWEAPONEX_HandCrossbow_TagForReload((CHARACTERGUID)_Char, (ITEMGUID)_HandCrossbow)
 AND
 ItemGetCharges(_HandCrossbow, _Charges)
 AND
@@ -145,18 +149,18 @@ ItemGetMaxCharges(_HandCrossbow, _MaxCharges)
 AND
 _Charges < _MaxCharges
 THEN
-LeaderLib_Tags_PreserveTag(_Character, "LLWEAPONEX_HandCrossbow_CanReload");
-ApplyStatus(_Character, "LLWEAPONEX_REFRESH_UI", 0.0);
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
+ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow can reload. ");
 //END_REGION
 
 //REGION SKILL_TAGS_CLEAR
 PROC
-LLWEAPONEX_HandCrossbow_OnUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_HandCrossbow_OnUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 THEN
-LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HandCrossbow_CanReload");
-LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
-CharacterRemoveSkill(_Character, "Shout_LLWEAPONEX_HandCrossbow_Reload");
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
+CharacterRemoveSkill(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload");
 //END_REGION
 EXITSECTION
 

@@ -32,7 +32,7 @@ LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 PROC
 LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
 AND
-CharacterIsPlayer(_Char, 1)
+CharacterIsControlled(_Char, 1)
 THEN
 ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
 
@@ -84,7 +84,11 @@ LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 PROC
 LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
-CharacterIsPlayer(_Char, _IsPlayer)
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerMax(_a, _b, _IsPlayer)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND
@@ -103,7 +107,11 @@ ItemUnEquipped(_Item, _Char)
 AND
 ObjectGetFlag(_Item, "LLWEAPONEX_HasWeaponType", 1)
 AND
-CharacterIsPlayer(_Char, _IsPlayer)
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerMax(_a, _b, _IsPlayer)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND

@@ -38,9 +38,13 @@ THEN
 DB_NOOP(1);
 
 IF
-AttackedByObject(S_LLWEAPONEX_WeaponMaster_Trader_3cabc61d-6385-4ae3-b38f-c4f24a8d16b5, _Player, _, _, _)
+AttackedByObject(S_LLWEAPONEX_WeaponMaster_Trader_3cabc61d-6385-4ae3-b38f-c4f24a8d16b5, (CHARACTERGUID)_Player, _, _, _)
 AND
-CharacterIsPlayer((CHARACTERGUID)_Player, 1)
+CharacterIsPlayer(_Player, _a)
+AND
+CharacterIsPartyMember(_Player, _b)
+AND
+IntegerMax(_a, _b, 1)
 AND
 CharacterIsSummon(_Player, 0)
 THEN
@@ -88,7 +92,11 @@ CombatGetIDForCharacter(_WeaponMaster, _CombatID)
 AND
 DB_CombatCharacters(_Char, _CombatID)
 AND
-CharacterIsPlayer(_Char, 1)
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerMax(_a, _b, 1)
 THEN
 LeaderLib_Timers_StartObjectTimer(_WeaponMaster, 250, "LLWEAPONEX_Timers_OmaeWaMouShindeiru_Start", "LLWEAPONEX_OmaeWaMouShindeiru_Start");
 

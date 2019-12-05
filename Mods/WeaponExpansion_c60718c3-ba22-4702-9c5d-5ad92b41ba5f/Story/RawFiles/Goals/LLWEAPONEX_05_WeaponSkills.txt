@@ -205,7 +205,11 @@ TeleportToPosition(_Banner, _x, _y, _z, "", 0, 1);
 PROC
 LLWEAPONEX_Skills_Rally_CreateBanner((CHARACTERGUID)_Char, (STRING)_Skill)
 AND
-CharacterIsPlayer(_Char, 1)
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerMax(_a, _b, 1)
 AND
 CharacterGameMaster(_Char, 0)
 AND

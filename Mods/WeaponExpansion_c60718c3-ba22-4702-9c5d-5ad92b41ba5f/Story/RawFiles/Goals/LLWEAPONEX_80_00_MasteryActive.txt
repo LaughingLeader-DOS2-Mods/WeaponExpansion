@@ -107,7 +107,11 @@ LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery(_Char)
 AND
 LLWEAPONEX_QRY_HasRacialSkills(_Char)
 AND
-CharacterIsPlayer(_Char, _IsPlayer)
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerMax(_a, _b, _IsPlayer)
 THEN
 LLWEAPONEX_WeaponMastery_OnRaceReverted(_Char, _IsPlayer);
 
