@@ -1,3 +1,0 @@
-NRD_LuaCall 2
-NRD_LuaLoad 1
-NRD_LuaReset 0
