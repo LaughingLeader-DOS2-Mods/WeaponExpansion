@@ -52,6 +52,7 @@ DB_LLWEAPONEX_Debug_StatusClear("DRUNK");
 
 KBSECTION
 
+/*
 IF
 GameStarted(_,1)
 AND
@@ -60,6 +61,7 @@ THEN
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_005_1cac5838-4c3f-4844-bb44-1c763a3ade16, _Status, -1.0, 1);
 ApplyStatus(CHARACTERGUID_Creatures_VampireBat_A_000_0f95ed94-cfb4-4bf3-9b9c-51cbd7c256b3, _Status, -1.0, 1);
 ApplyStatus(CHARACTERGUID_Lizards_Hero_Male_Undead_000_84f397e8-fdea-427a-a0ba-2e367a7eae45, _Status, -1.0, 1);
+*/
 
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)

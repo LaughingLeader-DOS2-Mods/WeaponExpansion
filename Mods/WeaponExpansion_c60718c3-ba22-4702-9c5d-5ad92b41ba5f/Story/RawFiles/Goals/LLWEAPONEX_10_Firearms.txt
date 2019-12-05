@@ -16,6 +16,77 @@ THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion");
 DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
 //END_REGION
+
+//REGION AIMED_SHOT
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Rifle_AimedShot", _x, _y, _z);
+
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Rifle_AimedShot", _x, _y, _z);
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Rifle_AimedShot", _Target);
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Rifle_AimedShot", _Target);
+
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot", (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _)
+THEN
+DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _x, _y, _z);
+
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot", (GUIDSTRING)_Target)
+AND
+DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _x, _y, _z);
+
+PROC
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot", (GUIDSTRING)_Target)
+THEN
+DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target);
+
+IF
+SkillCast(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Rifle_AimedShot");
+
+IF
+SkillCast(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
+THEN
+LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Rifle_AimedShot");
+
+PROC
+LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot")
+AND
+DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target)
+AND
+ObjectIsCharacter(_Target, 1)
+THEN
+NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target);
+CharacterCharacterSetEvent(_Char, (CHARACTERGUID)_Target, "LLWEAPONEX_Firearms_AimedShot_ShootProjectile");
+
+PROC
+LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot")
+AND
+DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target)
+AND
+ObjectIsItem(_Target, 1)
+THEN
+NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target);
+CharacterItemSetEvent(_Char, (ITEMGUID)_Target, "LLWEAPONEX_Firearms_AimedShot_ShootProjectile");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

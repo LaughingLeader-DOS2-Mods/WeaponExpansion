@@ -529,3 +529,51 @@ THEN
 	SetY(_Target, _y)
 	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
 ENDIF
+
+EVENT LLWEAPONEX_Firearms_AimedShot_ShootProjectile_Char
+VARS
+	CHARACTER:_Char
+	CHARACTER:_Target
+	SKILL:_Skill
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterCharacterEvent(_Char, _Target, "LLWEAPONEX_Firearms_AimedShot_ShootProjectile")
+ACTIONS
+	Set(_Level, 1)
+	Set(_Skill, Projectile_LLWEAPONEX_Rifle_AimedShot_DefaultDamage)
+IF "c1"
+	CharacterGetStat(_LevelF, _Char, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+IF "c1"
+	CharacterHasStatus(_Target, MARKED)
+THEN
+	Set(_Skill, Projectile_LLWEAPONEX_Rifle_AimedShot_MarkedDamage)
+ENDIF
+	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
+
+EVENT LLWEAPONEX_Firearms_AimedShot_ShootProjectile_Item
+VARS
+	CHARACTER:_Char
+	ITEM:_Target
+	SKILL:_Skill
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterItemEvent(_Char, _Target, "LLWEAPONEX_Firearms_AimedShot_ShootProjectile")
+ACTIONS
+	Set(_Level, 1)
+	Set(_Skill, Projectile_LLWEAPONEX_Rifle_AimedShot_DefaultDamage)
+IF "c1"
+	CharacterGetStat(_LevelF, _Char, Level)
+THEN
+	Cast(_Level, _LevelF)
+ENDIF
+IF "c1"
+	ItemHasStatus(_Target, MARKED)
+THEN
+	Set(_Skill, Projectile_LLWEAPONEX_Rifle_AimedShot_MarkedDamage)
+ENDIF
+	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
