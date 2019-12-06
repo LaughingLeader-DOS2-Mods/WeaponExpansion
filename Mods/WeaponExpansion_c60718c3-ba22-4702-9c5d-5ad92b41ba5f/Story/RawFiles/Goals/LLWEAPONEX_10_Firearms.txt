@@ -1,8 +1,45 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
+LLWEAPONEX_Firearms_InitSettings();
 
 KBSECTION
+//REGION SETTINGS
+PROC
+LLWEAPONEX_Firearms_InitSettings()
+THEN
+SysClear("DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage", 3);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_01", 0.0, 2.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_02", 2.0, 3.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_03", 3.0, 4.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_04", 4.0, 5.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_05", 5.0, 6.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_06", 6.0, 7.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_07", 7.0, 8.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_08", 8.0, 9.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_09", 9.0, 10.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_10", 10.0, 11.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_11", 11.0, 12.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_12", 12.0, 13.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_13", 13.0, 14.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_14", 14.0, 15.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_15", 15.0, 16.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_16", 16.0, 17.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_17", 17.0, 18.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_18", 18.0, 19.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_19", 19.0, 20.0);
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_20", 20.0, 999.0);
+//END_REGION
+
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,18,1)
+THEN
+LLWEAPONEX_Firearms_InitSettings();
+//END_REGION
+
 //REGION EQUIP_EVENTS
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
@@ -17,75 +54,71 @@ LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_FlamethrowerEqu
 DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
 //END_REGION
 
-//REGION AIMED_SHOT
+//REGION AIMED_SHOT_DISTANCE_DAMAGE
 IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
+CharacterStatusApplied(_Target, "LLWEAPONEX_FIREARM_AIMEDSHOT_HIT", (CHARACTERGUID)_Char)
+AND
+GetPosition(_Target, _x, _y, _z)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Rifle_AimedShot", _x, _y, _z);
+LLWEAPONEX_Firearms_AimedShot_ApplyDistanceDamage(_Char, (GUIDSTRING)_Target);
 
 IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
+ItemStatusChange(_Target, "LLWEAPONEX_FIREARM_AIMEDSHOT_HIT", (CHARACTERGUID)_Char)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Rifle_AimedShot", _x, _y, _z);
+LLWEAPONEX_Firearms_AimedShot_ApplyDistanceDamage(_Char, (GUIDSTRING)_Target);
 
+PROC
+LLWEAPONEX_Firearms_AimedShot_ApplyDistanceDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
+AND
+GetDistanceTo(_Char, _Target, _Dist)
+AND
+DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage(_Status, _Min, _Max)
+AND
+_Dist >= _Min
+AND
+_Dist < _Max
+THEN
+ApplyStatus(_Target, _Status, 0.0, 1, _Char);
+//END_REGION
+
+//REGION AIMED_SHOT_BONUSES
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
+AND
+HasActiveStatus(_Target, "MARKED", 1)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Rifle_AimedShot", _Target);
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 12.0, 1, _Char);
 
 IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
+CharacterUsedSkill(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Rifle_AimedShot", _Target);
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, _Char);
 
-PROC
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot", (REAL)_x, (REAL)_y, (REAL)_z)
-AND
-NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _)
+IF
+CharacterUsedSkill(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
 THEN
-DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _x, _y, _z);
-
-PROC
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot", (GUIDSTRING)_Target)
-AND
-DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _x, _y, _z)
-THEN
-NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _x, _y, _z);
-
-PROC
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot", (GUIDSTRING)_Target)
-THEN
-DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target);
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, _Char);
 
 IF
 SkillCast(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Rifle_AimedShot");
+LeaderLib_Timers_StartObjectTimer(_Char, 1500, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses");
 
 IF
 SkillCast(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Rifle_AimedShot");
+LeaderLib_Timers_StartObjectTimer(_Char, 1500, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses");
 
-PROC
-LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot")
-AND
-DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target)
-AND
-ObjectIsCharacter(_Target, 1)
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_HIT_END", _)
 THEN
-NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target);
-CharacterCharacterSetEvent(_Char, (CHARACTERGUID)_Target, "LLWEAPONEX_Firearms_AimedShot_ShootProjectile");
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses");
 
-PROC
-LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot")
-AND
-DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target)
-AND
-ObjectIsItem(_Target, 1)
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
 THEN
-NOT DB_LLWEAPONEX_Firearms_Temp_AimedShot(_Char, _Target);
-CharacterItemSetEvent(_Char, (ITEMGUID)_Target, "LLWEAPONEX_Firearms_AimedShot_ShootProjectile");
+RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL");
+RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY");
 //END_REGION
 EXITSECTION
 

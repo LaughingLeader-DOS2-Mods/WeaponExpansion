@@ -1,7 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", 0,9,17,1);
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", 0,9,18,1);
 LeaderUpdater_Register_ActiveGoal("WeaponExpansion", "LaughingLeader", "LLWEAPONEX_ZZZ_Updater");
 LeaderUpdater_Register_Dependency("WeaponExpansion", "LaughingLeader", "AnimationsPlus", "LaughingLeader", 1);
 KBSECTION
@@ -10,9 +10,9 @@ GameStarted(_Level, _)
 AND
 IsGameLevel(_Level, 1)
 AND
-LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "0.9.17.1")
+LeaderUpdater_QRY_ModUpdateNeeded("WeaponExpansion", "LaughingLeader", "0.9.18.1")
 THEN
-LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", 0,9,17,1);
+LeaderUpdater_Register_Mod("WeaponExpansion", "LaughingLeader", 0,9,18,1);
 
 //Remove old targeting skill
 PROC

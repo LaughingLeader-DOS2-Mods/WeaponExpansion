@@ -2048,6 +2048,7 @@ add namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A","",""
 
 new itemgroup "ARM_LLWEAPONEX_Pistol_A"
 
+add levelgroup 0,0,"Common"
 add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
 add namegroup "ARM_LLWEAPONEX_Pistol_A_Common","",""
 

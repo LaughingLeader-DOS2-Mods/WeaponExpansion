@@ -2,12 +2,12 @@ function llweaponex_get_handedness(weapon)
     if weapon == nil then
         return nil
     end
-	local stat = NRD_ItemGetStatsId(weapon)
+    local stat = NRD_ItemGetStatsId(weapon)
     local handedness = NRD_StatGetAttributeString(stat, "IsTwoHanded")
     if handedness == "Yes" then
         DebugBreak("[LL-OsiExtender] Item is two-handed.")
         return true
-    else if handedness == "No" then
+    elseif handedness == "No" then
         DebugBreak("[LL-OsiExtender] Item is one-handed.")
         return false
     else
@@ -56,7 +56,7 @@ function llweaponex_tag_itemtype()
         Wands = "Wand",
         DualWieldWands = "Wand",
         ShieldWands = "Wand"}
-    
+        
     for i, slot in ipairs(slots) do
         local item = CharacterGetEquippedItem(player, slot)
         if item ~= nil then

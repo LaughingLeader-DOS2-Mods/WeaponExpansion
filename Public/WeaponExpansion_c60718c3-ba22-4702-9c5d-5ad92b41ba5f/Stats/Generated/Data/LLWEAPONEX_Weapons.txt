@@ -2629,7 +2629,7 @@ data "RuneSlots" "1"
 data "RuneSlots_V1" "1"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Shield_1H_BurialBlade_A_Offhand"
-type "Weapon"
+type "Shield"
 using "_Shields"
 data "ItemGroup" "WPN_UNIQUE_LLWEAPONEX_Shield_1H_BurialBlade_A_Offhand"
 data "ComboCategory" "Shield,ShieldWood,LLWEAPONEX_BurialBlade_A_Offhand"

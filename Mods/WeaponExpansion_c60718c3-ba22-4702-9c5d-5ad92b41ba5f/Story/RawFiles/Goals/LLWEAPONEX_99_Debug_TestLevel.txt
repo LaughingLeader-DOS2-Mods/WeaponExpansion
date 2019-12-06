@@ -1975,6 +1975,19 @@ StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_StopFumbleOverride")
 THEN
 CharacterSetAnimationOverride(_Char, "");
 PlayAnimation(_Char, "still");
+
+IF
+TextEventSet("llweap_levelupitems")
+AND
+CharacterGetHostCharacter(_Char)
+AND
+CharacterGetLevel(_Char, _Level)
+AND
+DB_LeaderLib_EquipmentSlots(_Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Item)
+THEN
+ItemLevelUpTo(_Item, _Level);
 EXITSECTION
 
 ENDEXITSECTION
