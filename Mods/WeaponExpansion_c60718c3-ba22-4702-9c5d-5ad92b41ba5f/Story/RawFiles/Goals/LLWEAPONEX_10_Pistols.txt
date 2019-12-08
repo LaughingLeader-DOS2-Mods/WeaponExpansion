@@ -98,7 +98,7 @@ DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill, _HideH
 AND
 LeaderLib_Helper_QRY_IsRace(_Char, _Race)
 THEN
-ApplyStatus(_Char, _ExplosionStatusFX, 0.0, 1, _Char);
+ApplyStatus(_Char, _ExplosionStatusFX, 0.2, 1, _Char);
 SetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _ProjectileSkill);
 
 IF
