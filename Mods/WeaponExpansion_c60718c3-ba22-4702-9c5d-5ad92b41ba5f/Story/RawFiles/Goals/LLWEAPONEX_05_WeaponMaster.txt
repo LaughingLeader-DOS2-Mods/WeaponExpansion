@@ -129,7 +129,7 @@ DB_LLWEAPONEX_WeaponMaster_Temp_KillTarget(_WeaponMaster, _Target);
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_WEAPONMASTER_TARGET", _WeaponMaster)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_WeaponMaster, "LLWEAPONEX_WeaponMaster_LastHostile")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_WeaponMaster, "LLWEAPONEX_WeaponMaster_LastHostile")
 THEN
 SetVarObject(_WeaponMaster, "LLWEAPONEX_WeaponMaster_LastHostile", _Target);
 

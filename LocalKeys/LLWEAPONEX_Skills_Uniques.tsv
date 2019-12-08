@@ -26,4 +26,4 @@ Shout_LLWEAPONEX_SpellScroll_PrepareMagic_Description	<i>As is written on <font 
 Cone_LLWEAPONEX_Flamethrower_Attack_DisplayName	<font color='#FF8800'>Dragonblaze Flamethrower Sweep</font>
 Cone_LLWEAPONEX_Flamethrower_Attack_Description	Attack with your <font color='#c5a65a'>Dragonblaze Flamethrower</font>, dealing [1] to enemies in a cone.
 Shout_LLWEAPONEX_BurialBlade_Transform_DisplayName	<font color='#AA33FF'>Swap Blade Form</font>
-Shout_LLWEAPONEX_BurialBlade_Transform_Description	Combine the <font color='#c5a65a'>Burial Blade</font> into a scythe form, or switch back to a single-handed blade form.<br><font color='#FFDD00'>Each form can have independent runes, crafting enhancements, and attribute scales.</font>
+Shout_LLWEAPONEX_BurialBlade_Transform_Description	Combine the <font color='#c5a65a'>Burial Blade</font> into a scythe form, or switch back to a single-handed blade form.<br><font color='#FFDD00'>Each form may have independent runes, crafting enhancements, and attribute scales.</font>

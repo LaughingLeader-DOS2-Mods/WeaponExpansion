@@ -30,7 +30,7 @@ CharacterGiveReward(_Character, "S_LLWEAPONEX_RemoteMines_AddRandom", 1);
 PROC
 LLWEAPONEX_RemoteMines_SetOwner((CHARACTERGUID)_Character, (ITEMGUID)_RemoteMine)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_RemoteMine, "LLWEAPONEX_Mine_Owner")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_RemoteMine, "LLWEAPONEX_Mine_Owner")
 THEN
 SetVarObject(_RemoteMine, "LLWEAPONEX_Mine_Owner", _Character);
 

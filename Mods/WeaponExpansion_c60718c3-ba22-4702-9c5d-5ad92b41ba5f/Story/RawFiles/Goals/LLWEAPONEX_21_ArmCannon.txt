@@ -91,7 +91,7 @@ ItemToInventory(_ArmCannonWeapon, _ArmCannon, 1, 0, 0);
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 AND
 CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Item)
 AND
@@ -102,14 +102,14 @@ SetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", _Item);
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
-LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+LeaderLib_Variables_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 THEN
 LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
 
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon] No arm cannon weapon found. Iterating.");
 //InventoryLaunchTemplateIterator(_ArmCannon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec", "LLWEAPONEX_Iterator_ArmCannonWeaponFound", "");
@@ -136,7 +136,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Foun
 IF
 CharacterItemEvent(_Char, _ArmCannon, "LLWEAPONEX_ArmCannonIteratorDone")
 AND
-LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+LeaderLib_Variables_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ArmCannon(Iterator)] Var was set. Equipping.");
 LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
@@ -144,7 +144,7 @@ LLWEAPONEX_ArmCannon_EquipCannonWeapon(_Char, _ArmCannon);
 IF
 CharacterItemEvent(_Char, _ArmCannon, "LLWEAPONEX_ArmCannonIteratorDone")
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon")
 AND
 GetPosition(_Char, _x, _y, _z)
 AND
@@ -253,7 +253,7 @@ CharacterIsEnemy(_Char, _Target, 1)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
-LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 1, 3);
+LeaderLib_Variables_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 1, 3);
 
 //Allow only 1 energy per attack when dual wielding
 IF
@@ -272,7 +272,7 @@ THEN
 LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 
 PROC
-LeaderLib_Helper_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
+LeaderLib_Variables_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
@@ -286,7 +286,7 @@ SkillCast(_Char, "Projectile_LLWEAPONEX_ArmCannon_Shoot", _, _)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
-LeaderLib_Helper_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", -1);
+LeaderLib_Variables_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", -1);
 LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 
 IF
@@ -295,7 +295,7 @@ AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
-LeaderLib_Helper_SetVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
+LeaderLib_Variables_SetVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
 SetStoryEvent(_Char, "LLWEAPONEX_ArmCannon_Disperse_Explode");
 
 IF

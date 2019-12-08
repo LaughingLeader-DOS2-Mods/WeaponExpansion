@@ -121,30 +121,30 @@ RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL");
 RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY");
 //END_REGION
 
-//REGION BLUNDERBUSS_POINT_BLANK
+//REGION BLUNDERBUSS_SCATTERSHOT
 IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_HIT", (CHARACTERGUID)_Char)
+CharacterStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_HIT", _Source)
 THEN
-LeaderLib_Helper_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 1, 3, 0, _Char);
-LeaderLib_Timers_StartObjectTimer(_Target, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearPointBlankHits", "LLWEAPONEX_Blunderbuss_ClearPointBlankHits");
+LeaderLib_Variables_DB_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 1, 3, 0, _Source);
+LeaderLib_Timers_StartObjectObjectTimer((GUIDSTRING)_Target, _Source, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearPointBlankHits", "LLWEAPONEX_Blunderbuss_ClearPointBlankHits");
 
 IF
-ItemStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_HIT", (CHARACTERGUID)_Char)
+ItemStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_HIT", _Source)
 THEN
-LeaderLib_Helper_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 1, 3, 0, _Char);
-LeaderLib_Timers_StartObjectTimer(_Target, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearPointBlankHits", "LLWEAPONEX_Blunderbuss_ClearPointBlankHits");
-
-IF
-StoryEvent(_Target, "LLWEAPONEX_Blunderbuss_ClearPointBlankHits")
-THEN
-SetVarInteger(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 0);
+LeaderLib_Variables_DB_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 1, 3, 0, _Source);
+LeaderLib_Timers_StartObjectObjectTimer((GUIDSTRING)_Target, _Source, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearPointBlankHits", "LLWEAPONEX_Blunderbuss_ClearPointBlankHits");
 
 PROC
-LeaderLib_Helper_OnVariableIntChanged((GUIDSTRING)_Object, "LLWEAPONEX_Blunderbuss_PointBlankHits", (INTEGER)_LastValue, 3, (GUIDSTRING)_Source)
+LeaderLib_Timers_ObjectObjectTimerFinished(_Target, _Source, "LLWEAPONEX_Blunderbuss_ClearPointBlankHits")
 THEN
-SetVarInteger(_Object, "LLWEAPONEX_Blunderbuss_PointBlankHits", 0);
-ApplyStatus(_Object, "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_HIT", 0.0, 1, _Source);
-LeaderLib_Force_Apply(_Source, _Object, 4);
+LeaderLib_Variables_DB_ClearVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", _Source);
+
+PROC
+LeaderLib_Variables_OnVariableIntChanged((GUIDSTRING)_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", (INTEGER)_LastValue, 3, (GUIDSTRING)_Source)
+THEN
+LeaderLib_Variables_DB_ClearVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", _Source);
+ApplyStatus(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_BONUS", 0.0, 1, _Source);
+LeaderLib_Force_Apply(_Source, _Target, 4);
 //END_REGION
 EXITSECTION
 

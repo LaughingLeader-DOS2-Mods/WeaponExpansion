@@ -2283,7 +2283,7 @@ new entry "_Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier2"
 type "Weapon"
 using "_BOOSTS_Weapon"
 data "Value" "37"
-data "Skills" "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud;Projectile_LLWEAPONEX_Blunderbuss_PointBlank"
+data "Skills" "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud;Projectile_LLWEAPONEX_Blunderbuss_Scattershot"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A"
 type "Weapon"

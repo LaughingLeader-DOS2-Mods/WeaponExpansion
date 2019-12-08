@@ -563,7 +563,7 @@ LLWEAPONEX_Uniques_WarChief_Swap(_Char, _Halberd, _Level, _Template);
 PROC
 LLWEAPONEX_Uniques_WarChief_CheckVariable((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347")
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
 AND
 GetPosition(_Char, _x, _y, _z)
 AND
@@ -575,7 +575,7 @@ SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
 PROC
 LLWEAPONEX_Uniques_WarChief_CheckVariable((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08")
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
 AND
 GetPosition(_Char, _x, _y, _z)
 AND
@@ -1108,7 +1108,7 @@ CharacterGetEquippedItem(_Char, "Breast", (ITEMGUID)_Tattoos)
 AND
 GetTemplate(_Tattoos, _NormalTemplate)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
 AND
 GetPosition(_Char, _x, _y, _z)
 AND
@@ -1134,7 +1134,7 @@ NOT DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Item, _Template);
 PROC
 LLWEAPONEX_Uniques_Tattoos_FindUnlinked((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_OtherTemplate)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Item, "LLWEAPONEX_Tattoos_OtherVersion")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Item, "LLWEAPONEX_Tattoos_OtherVersion")
 THEN
 DB_LLWEAPONEX_Uniques_Temp_IterateInventory(_Char, _Item, _OtherTemplate);
 InventoryLaunchTemplateIterator(_Item, _OtherTemplate, "LLWEAPONEX_Uniques_Iterator_FoundTattooTemplate", "");
@@ -1159,7 +1159,7 @@ DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, 
 AND
 CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
 AND
 GetTemplate(_Tattoos, _NormalTemplate)
 AND
@@ -1177,7 +1177,7 @@ DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, 
 AND
 CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
 AND
 GetTemplate(_Tattoos, _MagicTemplate)
 AND
@@ -1195,7 +1195,7 @@ DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, 
 AND
 CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
 AND
 GetTemplate(_Tattoos, _NormalTemplate)
 AND
@@ -1217,7 +1217,7 @@ DB_LLWEAPONEX_Uniques_Tattoos_Templates(_Char, _NormalTemplate, _MagicTemplate, 
 AND
 CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_MagicTattoos)
 AND
-NOT LeaderLib_Helper_QRY_ObjectVariableSet(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion")
 AND
 GetTemplate(_MagicTattoos, _MagicTemplate)
 AND
@@ -1241,7 +1241,7 @@ CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
 AND
 GetTemplate(_Tattoos, _MagicTemplate)
 AND
-LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+LeaderLib_Variables_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
 AND
 GetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", (ITEMGUID)_OtherTattoos)
 THEN
@@ -1264,7 +1264,7 @@ CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Tattoos)
 AND
 GetTemplate(_Tattoos, _NormalTemplate)
 AND
-LeaderLib_Helper_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
+LeaderLib_Variables_QRY_ObjectVariableSet(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion")
 AND
 GetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", (ITEMGUID)_OtherTattoos)
 THEN
