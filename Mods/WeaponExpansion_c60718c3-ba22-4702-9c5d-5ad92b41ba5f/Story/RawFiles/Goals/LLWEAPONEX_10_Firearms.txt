@@ -120,6 +120,32 @@ THEN
 RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL");
 RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY");
 //END_REGION
+
+//REGION BLUNDERBUSS_POINT_BLANK
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_HIT", (CHARACTERGUID)_Char)
+THEN
+LeaderLib_Helper_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 1, 3, 0, _Char);
+LeaderLib_Timers_StartObjectTimer(_Target, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearPointBlankHits", "LLWEAPONEX_Blunderbuss_ClearPointBlankHits");
+
+IF
+ItemStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_HIT", (CHARACTERGUID)_Char)
+THEN
+LeaderLib_Helper_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 1, 3, 0, _Char);
+LeaderLib_Timers_StartObjectTimer(_Target, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearPointBlankHits", "LLWEAPONEX_Blunderbuss_ClearPointBlankHits");
+
+IF
+StoryEvent(_Target, "LLWEAPONEX_Blunderbuss_ClearPointBlankHits")
+THEN
+SetVarInteger(_Target, "LLWEAPONEX_Blunderbuss_PointBlankHits", 0);
+
+PROC
+LeaderLib_Helper_OnVariableIntChanged((GUIDSTRING)_Object, "LLWEAPONEX_Blunderbuss_PointBlankHits", (INTEGER)_LastValue, 3, (GUIDSTRING)_Source)
+THEN
+SetVarInteger(_Object, "LLWEAPONEX_Blunderbuss_PointBlankHits", 0);
+ApplyStatus(_Object, "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_HIT", 0.0, 1, _Source);
+LeaderLib_Force_Apply(_Source, _Object, 4);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

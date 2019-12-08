@@ -11,6 +11,17 @@ type "StatusData"
 data "StatusType" "EFFECT"
 using "LLWEAPONEX_HIDDEN_EFFECT_BASE"
 
+new entry "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_HIT"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+
+new entry "LLWEAPONEX_BLUNDERBUSS_POINTBLANK_BONUS"
+type "StatusData"
+data "StatusType" "DAMAGE"
+using "LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+data "LeaveAction" "Projectile_LLWEAPONEX_Blunderbuss_PointBlank_BonusDamage"
+
 new entry "_LLWEAPONEX_BULLETS_BASE"
 type "StatusData"
 data "StatusType" "CONSUME"
