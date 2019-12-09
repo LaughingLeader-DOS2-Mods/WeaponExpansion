@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<save>
+ <header version="1" time="1339579443" />
+ <region id="SoundBanks">
+     <node id="root">
+         <children>
+             <node id="Bank">
+                 <attribute id="MapKey" value="LLWEAPONEX_SFX" type="22" />
+                 <attribute id="Localized" value="0" type="19" />
+             </node>
+         </children>
+     </node>
+ </region>
+</save>

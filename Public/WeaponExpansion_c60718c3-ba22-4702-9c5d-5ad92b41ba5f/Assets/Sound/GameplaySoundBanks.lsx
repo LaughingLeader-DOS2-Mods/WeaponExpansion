@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<save>
+ <header version="1" time="1339579443" />
+ <region id="Sound">
+     <node id="root">
+         <children>
+             <node id="SoundBanks"> 
+                 <children>
+                     <node id="SoundBank">
+                         <attribute id="Bank" value="LLWEAPONEX_SFX" type="23" />
+                         <attribute id="Preload" value="0" type="27" />
+                     </node>
+                 </children>
+             </node>
+         </children>
+     </node>
+ </region>
+</save>
