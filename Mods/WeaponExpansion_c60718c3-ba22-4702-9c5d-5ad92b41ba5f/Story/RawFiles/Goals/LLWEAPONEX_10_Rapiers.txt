@@ -77,39 +77,40 @@ DB_LeaderLib_Statuses_PermanentStatusBlocked(_Player, "LLWEAPONEX_RAPIER_MASTERY
 
 //REGION DUELIST_STANCE_WEAPON_BUFF
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", _)
+CharacterStatusApplied(_Char, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", _)
 THEN
-ApplyStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON", -1.0, 1, _Character);
+ApplyStatus(_Char, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON", -1.0, 1, _Char);
 
 IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", _)
+CharacterStatusRemoved(_Char, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", _)
 THEN
-RemoveStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON");
+RemoveStatus(_Char, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON");
 //END_REGION
 
 //REGION SUCKER_PUNCH_COMBO
 IF
-CharacterUsedSkillOnTarget(_Character, _Target, "Target_LLWEAPONEX_ScriptStart_Rapier_SuckerCombo1", _, _)
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_ScriptStart_Rapier_SuckerCombo1", _, _)
 THEN
-DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target);
-//CharacterPurgeQueue(_Character);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastSuckerCombo1", 50);
+DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Char, _Target);
+//CharacterPurgeQueue(_Char);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_CastSuckerCombo1", 50);
 
 /*
 IF
-SkillCast(_Character, "Target_LLWEAPONEX_Rapier_SuckerCombo1_Start", _, _)
+SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo1_Start", _, _)
 THEN
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_CastSuckerCombo1", 200);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_CastSuckerCombo1", 200);
 */
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_CastSuckerCombo1")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_CastSuckerCombo1")
 AND
-DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target)
+DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Char, _Target)
 THEN
-NOT DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Character, _Target);
-RemoveStatus(_Character, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
-CharacterUseSkill(_Character, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _Target, 1, 1, 1);
+NOT DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Char, _Target);
+LeaderLib_Helper_ClearActionQueue(_Char);
+RemoveStatus(_Char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
+CharacterUseSkill(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _Target, 1, 1, 1);
 
 //END_REGION
 /*

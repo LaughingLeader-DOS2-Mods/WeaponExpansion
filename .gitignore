@@ -18,7 +18,8 @@ Editor/Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Levels/*
 # Asset Folders      #
 ######################
 Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Assets/*
-#Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/*
+!Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Assets/Sound/*.txt
+!Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Assets/Sound/*.xml
 _ProjectFiles/*
 
 # Editor files       #
