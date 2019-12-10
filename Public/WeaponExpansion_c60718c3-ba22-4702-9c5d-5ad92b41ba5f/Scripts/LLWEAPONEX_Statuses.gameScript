@@ -419,3 +419,39 @@ ELSE
 	GetRandom(_Result, WARM, WET, ACID, SUFFOCATING, LIVING_BOMB)
 ENDIF
 	RETURN(_RemoveList, _Result, null)
+
+EVENT LLWEAPONEX_RapierMastery_SuckerCombo2_Flying_KnockdownCheck_Characters
+VARS
+	CHARACTER:_Target
+	CHARACTER:_AuraHost
+	CHARACTER:_Source
+	INT:_Turns
+ON
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK)
+ACTIONS
+IF "c1&c2&c3"
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK, _AuraHost)
+	CharacterGetStatusSourceCharacter(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING, _Source)
+	CharacterIsEnemy(_Target, _Source)
+THEN
+	CharacterApplyStatus(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
+	CharacterApplyStatus(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
+ENDIF
+
+EVENT LLWEAPONEX_RapierMastery_SuckerCombo2_Flying_KnockdownCheck_Items
+VARS
+	ITEM:_Target
+	CHARACTER:_AuraHost
+	CHARACTER:_Source
+	INT:_Turns
+ON
+	OnItemStatus(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK)
+ACTIONS
+IF "!c1&c2&c3"
+	IsStoryItem(_Target)
+	ItemGetStatusSourceCharacter(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_CHECK, _AuraHost)
+	CharacterGetStatusSourceCharacter(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING, _Source)
+THEN
+	CharacterApplyStatus(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
+	ItemApplyStatus(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
+ENDIF

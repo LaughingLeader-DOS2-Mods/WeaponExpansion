@@ -62,7 +62,7 @@ SkillCast(_Character, "Target_SingleHandedAttack", _, _)
 AND
 IsTagged(_Character, "LLWEAPONEX_Rapier_SuckerComboEnabled", 1)
 THEN
-ApplyStatus(_Character, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1", 6.0, 0, _Character);
+ApplyStatus(_Character, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1", 12.0, 0, _Character);
 
 IF
 CharacterStatusRemoved(_Character, "KNOCKED_DOWN", _)
@@ -73,6 +73,14 @@ HasActiveStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED", 1)
 THEN
 //RemoveStatus(_Character, "LLWEAPONEX_RAPIER_MASTERY_DELAYED_DAZED");
 SetStoryEvent(_Character, "LLWEAPONEX_Events_DelayDazedReady");
+
+PROC
+LeaderLib_Force_OnLanded(_Target, _Char)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target);
+RemoveStatus(_Target, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING");
 //END_REGION
 
 EXITSECTION

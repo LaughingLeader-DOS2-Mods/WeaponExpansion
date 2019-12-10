@@ -89,51 +89,56 @@ RemoveStatus(_Char, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON");
 
 //REGION SUCKER_PUNCH_COMBO
 IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_ScriptStart_Rapier_SuckerCombo1", _, _)
+SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _, _)
 THEN
-DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Char, _Target);
-//CharacterPurgeQueue(_Char);
-ProcObjectTimer(_Char, "LLWEAPONEX_Timers_CastSuckerCombo1", 50);
+LeaderLib_Timers_StartObjectTimer(_Char, 750, "Timers_LLWEAPONEX_Rapiers_ClearSuckerComboStatus1", "LLWEAPONEX_Rapiers_ClearSuckerComboStatus1");
 
-/*
 IF
-SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo1_Start", _, _)
+StoryEvent(_Char, "LLWEAPONEX_Rapiers_ClearSuckerComboStatus1")
 THEN
-ProcObjectTimer(_Char, "LLWEAPONEX_Timers_CastSuckerCombo1", 200);
-*/
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_CastSuckerCombo1")
-AND
-DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Rapiers_Temp_CastSuckerCombo1(_Char, _Target);
-LeaderLib_Helper_ClearActionQueue(_Char);
 RemoveStatus(_Char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
-CharacterUseSkill(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _Target, 1, 1, 1);
 
-//END_REGION
-/*
-//REGION EMPTY_HAND_EVENTS
-PROC
-LLWEAPONEX_WeaponMastery_BlockUnlockingSkill((CHARACTERGUID)_Player, "LLWEAPONEX_Rapier", "DuelistStance")
-AND
-NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
 THEN
-DB_LLWEAPONEX_WeaponMastery_BlockUnlockingSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_Rapiers_ClearSuckerComboStatus2", "LLWEAPONEX_Rapiers_ClearSuckerComboStatus2");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Rapiers_ClearSuckerComboStatus2")
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO2");
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
+THEN
+DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target((GUIDSTRING)_Char, _Target);
+LeaderLib_Timers_StartObjectObjectTimer((GUIDSTRING)_Char, _Target, 2000, "Timers_LLWEAPONEX_Rapiers_SuckerCombo2Fallback", "LLWEAPONEX_Rapiers_SuckerCombo2Fallback");
 
 PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, "LLWEAPONEX_Rapier")
+LeaderLib_Timers_ObjectObjectTimerFinished(_Char, _Target, "LLWEAPONEX_Rapiers_SuckerCombo2Fallback")
 AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Rapier", "DuelistStance")
-AND
-NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target)
 THEN
-LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Rapier", "DuelistStance");
-//END_REGION
+NOT DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING", _Char)
+AND
+DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target((GUIDSTRING)_Char, _Target)
+THEN
+LeaderLib_Timers_RestartObjectObjectTimer(_Char, _Target, "Timers_LLWEAPONEX_Rapiers_SuckerCombo2Fallback", 1500);
+LeaderLib_Force_Apply(_Char, _Target, 3, 1);
+
+/* [OSITOOLS_ONLY]
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
+THEN
+//CharacterRemoveSkill(_Char, "Target_SingleHandedAttack");
+NRD_SkillSetCooldown(_Char, "Target_SingleHandedAttack", 0.0);
 */
+//END_REGION
 
-//REGION SUCKER_PUNCH_COMBOS
+//REGION SUCKER_PUNCH_COMBO_KNOCKDOWN_INCREASE
 //Rapier Mastery Sucker Punch Knockdown
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_SUCKER_PUNCH", _Source)

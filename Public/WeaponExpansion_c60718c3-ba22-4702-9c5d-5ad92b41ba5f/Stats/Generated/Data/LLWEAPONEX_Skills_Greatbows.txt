@@ -213,7 +213,6 @@ data "DeathType" "Physical"
 data "ExplodeRadius" "0"
 data "UseWeaponDamage" "Yes"
 data "UseWeaponProperties" "No"
-data "Distance Damage Multiplier" "5"
 
 new entry "Projectile_LLWEAPONEX_Status_CushionForce_DistDamageBase"
 type "SkillData"

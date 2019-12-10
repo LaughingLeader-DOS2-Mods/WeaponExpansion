@@ -135,6 +135,8 @@ new entry "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO2"
 type "StatusData"
 data "StatusType" "CONSUME"
 using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "DisplayName" "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO2_DisplayName"
+data "DisplayNameRef" "Gain Sweep Kick Skill"
 data "StackId" "Stack_LLWEAPONEX_WS_Rapier_SuckerCombo2"
 data "Skills" "Target_LLWEAPONEX_Rapier_SuckerCombo2"
 
