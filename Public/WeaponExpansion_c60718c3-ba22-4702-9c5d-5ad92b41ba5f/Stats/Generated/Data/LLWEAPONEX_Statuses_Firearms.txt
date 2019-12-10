@@ -5,9 +5,20 @@ using "LLWEAPONEX_HIDDEN_EFFECT_BASE"
 
 new entry "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX"
 type "StatusData"
-data "StatusType" "CONSUME"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "StatusType" "EFFECT"
+using "LLWEAPONEX_HIDDEN_EFFECT_BASE"
+
+new entry "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_BLUNDERBUSS"
+type "StatusData"
+data "StatusType" "EFFECT"
+using "LLWEAPONEX_HIDDEN_EFFECT_BASE"
 data "StatusEffect" "LLWEAPONEX_FX_Blunderbuss_Attack_Explosion_01,Detach:Dummy_ProjectileFX"
+
+new entry "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_RIFLE"
+type "StatusData"
+data "StatusType" "EFFECT"
+using "LLWEAPONEX_HIDDEN_EFFECT_BASE"
+data "StatusEffect" "LLWEAPONEX_FX_Rifle_A_Attack_Explosion_01,Detach:Dummy_ProjectileFX"
 
 new entry "LLWEAPONEX_BLUNDERBUSS_EQUIPPED"
 type "StatusData"

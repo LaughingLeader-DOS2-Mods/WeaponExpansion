@@ -30,22 +30,22 @@ DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DA
 DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_19", 19.0, 20.0);
 DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_20", 20.0, 999.0);
 
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Multishot", "Projectile_LLWEAPONEX_Firearm_Multishot");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyMultishot", "Projectile_LLWEAPONEX_Firearm_Multishot_Enemy");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_SkyShot", "Projectile_LLWEAPONEX_Firearm_SkyShot");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemySkyShot", "Projectile_LLWEAPONEX_Firearm_SkyShot_Enemy");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_ArrowSpray", "Projectile_LLWEAPONEX_Firearm_ArrowSpray");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyArrowSpray", "Projectile_LLWEAPONEX_Firearm_ArrowSpray_Enemy");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_PiercingShot", "Projectile_LLWEAPONEX_Firearm_PiercingShot");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyPiercingShot", "Projectile_LLWEAPONEX_Firearm_PiercingShot_Enemy");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Snipe", "Projectile_LLWEAPONEX_Firearm_Snipe");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemySnipe", "Projectile_LLWEAPONEX_Firearm_Snipe_Enemy");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Ricochet", "Projectile_LLWEAPONEX_Firearm_Ricochet");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyRicochet", "Projectile_LLWEAPONEX_Firearm_Ricochet_Enemy");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_BallisticShot", "Projectile_LLWEAPONEX_Firearm_BallisticShot");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyBallisticShot", "Projectile_LLWEAPONEX_Firearm_BallisticShot_Enemy");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_PinDown", "Projectile_LLWEAPONEX_Firearm_PinDown");
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyPinDown", "Projectile_LLWEAPONEX_Firearm_PinDown_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Multishot", "Projectile_LLWEAPONEX_Firearm_Multishot", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyMultishot", "Projectile_LLWEAPONEX_Firearm_Multishot_Enemy", 0);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_SkyShot", "Projectile_LLWEAPONEX_Firearm_SkyShot", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemySkyShot", "Projectile_LLWEAPONEX_Firearm_SkyShot_Enemy", 0);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_ArrowSpray", "Projectile_LLWEAPONEX_Firearm_ArrowSpray", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyArrowSpray", "Projectile_LLWEAPONEX_Firearm_ArrowSpray_Enemy", 0);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_PiercingShot", "Projectile_LLWEAPONEX_Firearm_PiercingShot", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyPiercingShot", "Projectile_LLWEAPONEX_Firearm_PiercingShot_Enemy", 0);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Snipe", "Projectile_LLWEAPONEX_Firearm_Snipe", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemySnipe", "Projectile_LLWEAPONEX_Firearm_Snipe_Enemy", 0);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Ricochet", "Projectile_LLWEAPONEX_Firearm_Ricochet", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyRicochet", "Projectile_LLWEAPONEX_Firearm_Ricochet_Enemy", 0);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_BallisticShot", "Projectile_LLWEAPONEX_Firearm_BallisticShot", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyBallisticShot", "Projectile_LLWEAPONEX_Firearm_BallisticShot_Enemy", 0);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_PinDown", "Projectile_LLWEAPONEX_Firearm_PinDown", 1);
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyPinDown", "Projectile_LLWEAPONEX_Firearm_PinDown_Enemy", 0);
 //END_REGION
 
 //REGION UPDATES
@@ -69,6 +69,26 @@ LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLW
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion");
 DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
+
+IF
+ItemTemplateUnEquipped("WPN_LLWEAPONEX_Firearm_2H_Rifle_A_0e98584a-7c57-4a5c-b7d9-57ec79aee85e", _Char)
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 0);
+
+IF
+ItemTemplateUnEquipped("WPN_LLWEAPONEX_Firearm_2H_Rifle_B_068246d7-b4cc-4b6d-9ac8-716fdfd1822d", _Char)
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 0);
+
+IF
+ItemTemplateEquipped("WPN_LLWEAPONEX_Firearm_2H_Rifle_A_0e98584a-7c57-4a5c-b7d9-57ec79aee85e", _Char)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 0);
+
+IF
+ItemTemplateEquipped("WPN_LLWEAPONEX_Firearm_2H_Rifle_B_068246d7-b4cc-4b6d-9ac8-716fdfd1822d", _Char)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 0);
 //END_REGION
 
 //REGION AIMED_SHOT_DISTANCE_DAMAGE
@@ -165,6 +185,67 @@ LeaderLib_Force_Apply(_Source, _Target, 4);
 //END_REGION
 
 //REGION BULLET_IMPACT_SOUNDS
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", _)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_BlunderbussEquipped", 1)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_BLUNDERBUSS", 1.0, 1, _Char);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", _)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 1)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_RIFLE", 1.0, 1, _Char);
+
+IF
+SkillCast(_Char, "Projectile_LLWEAPONEX_Firearm_Multishot", _, _)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 150, "Timers_LLWEAPONEX_Firearms_PlayBarrageExplosions", "LLWEAPONEX_Firearms_PlayBarrageExplosions");
+LeaderLib_Timers_StartObjectTimer(_Char, 225, "Timers_LLWEAPONEX_Firearms_PlayBarrageExplosions2", "LLWEAPONEX_Firearms_PlayBarrageExplosions");
+
+IF
+SkillCast(_Char, "Projectile_LLWEAPONEX_Firearm_Multishot_Enemy", _, _)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 150, "Timers_LLWEAPONEX_Firearms_PlayBarrageExplosions", "LLWEAPONEX_Firearms_PlayBarrageExplosions");
+LeaderLib_Timers_StartObjectTimer(_Char, 225, "Timers_LLWEAPONEX_Firearms_PlayBarrageExplosions2", "LLWEAPONEX_Firearms_PlayBarrageExplosions");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Firearms_PlayBarrageExplosions")
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_BlunderbussEquipped", 1)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_BLUNDERBUSS", 12.0, 1, _Char);
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Firearms_PlayBarrageExplosions")
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 1)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_RIFLE", 12.0, 1, _Char);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", _)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_BLUNDERBUSS", _)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_Firearms_RemoveFXStatus", "LLWEAPONEX_Firearms_RemoveFXStatus");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_RIFLE", _)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_Firearms_RemoveFXStatus", "LLWEAPONEX_Firearms_RemoveFXStatus");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Firearms_RemoveFXStatus")
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_BLUNDERBUSS");
+RemoveStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_RIFLE");
+
 /* [OSITOOLS_ONLY]
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_BULLET_HIT", _)
@@ -183,42 +264,115 @@ NRD_LuaCall("LLWEAPONEX_PlayBulletImpact", _TargetStr);
 //END_REGION
 
 //REGION RANGER_SKILL_SWAP
+/* [OSITOOLS_ONLY]
+IF
+TextEventSet("llweap_rangerskills")
+AND
+CharacterGetHostCharacter(_Char)
+THEN
+LLWEAPONEX_DEBUG_ClearSkillSlots(_Char, 20);
+
+PROC
+LLWEAPONEX_DEBUG_ClearSkillSlots((CHARACTERGUID)_Char, (INTEGER)_Slot)
+THEN
+NRD_SkillBarClear(_Char, _Slot);
+
+PROC
+LLWEAPONEX_DEBUG_ClearSkillSlots((CHARACTERGUID)_Char, (INTEGER)_Slot)
+AND
+IntegerSubtract(_Slot, 1, _Next)
+AND
+_Next >= 0
+THEN
+LLWEAPONEX_DEBUG_ClearSkillSlots(_Char, _Next);
+*/
+
+IF
+TextEventSet("llweap_rangerskills")
+AND
+CharacterGetHostCharacter(_Char)
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPlayer)
+THEN
+CharacterRemoveSkill(_Char, _FindSkill);
+
+IF
+TextEventSet("llweap_rangerskills")
+AND
+CharacterGetHostCharacter(_Char)
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, 1)
+THEN
+CharacterAddSkill(_Char, _FindSkill, 0);
+/* [OSITOOLS_ONLY]
 PROC
 LLWEAPONEX_Firearms_SwapRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, 1)
 AND
 NRD_SkillBarFindSkill(_Char, _FindSkill, _Slot)
 THEN
-DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
 NRD_SkillBarSetSkill(_Char, _Slot, _ReplaceSkill);
-
-PROC
-LLWEAPONEX_Firearms_SwapRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, (INTEGER)_IsPlayer)
-THEN
-CharacterAddSkill(_Char, _ReplaceSkill, 0);
 CharacterRemoveSkill(_Char, _FindSkill);
+CharacterAddSkill(_Char, _ReplaceSkill, 0);
 
 PROC
 LLWEAPONEX_Firearms_RestoreRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, 1)
 AND
 NRD_SkillBarFindSkill(_Char, _ReplaceSkill, _Slot)
 THEN
-NRD_SkillBarSetSkill(_Char, _Slot, _ReplaceSkill);
+NRD_SkillBarSetSkill(_Char, _Slot, _FindSkill);
+CharacterRemoveSkill(_Char, _ReplaceSkill);
+CharacterAddSkill(_Char, _FindSkill, 0);
+
+PROC
+LLWEAPONEX_Firearms_RestoreAllRangerSkills((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, 1)
+AND
+NRD_SkillBarFindSkill(_Char, _ReplaceSkill, _Slot)
+THEN
+NRD_SkillBarSetSkill(_Char, _Slot, _FindSkill);
+CharacterRemoveSkill(_Char, _ReplaceSkill);
+CharacterAddSkill(_Char, _FindSkill, 0);
+*/
+
+// [BEGIN_NO_OSITOOLS]
+PROC
+LLWEAPONEX_Firearms_SwapRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, (INTEGER)_IsPlayer)
+AND
+CharacterHasSkill(_Char, _FindSkill, 1)
+THEN
+CharacterRemoveSkill(_Char, _FindSkill);
+CharacterAddSkill(_Char, _ReplaceSkill, 0);
 
 PROC
 LLWEAPONEX_Firearms_RestoreRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, (INTEGER)_IsPlayer)
 AND
-CharacterHasSkill(_Char, _FindSkill, 0)
+CharacterHasSkill(_Char, _ReplaceSkill, 1)
 THEN
-CharacterAddSkill(_Char, _FindSkill, 0);
 CharacterRemoveSkill(_Char, _ReplaceSkill);
+CharacterAddSkill(_Char, _FindSkill, 0);
+
+PROC
+LLWEAPONEX_Firearms_RestoreAllRangerSkills((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, 1)
+AND
+CharacterHasSkill(_Char, _FindSkill, 0)
+AND
+CharacterHasSkill(_Char, _ReplaceSkill, 1)
+THEN
+CharacterRemoveSkill(_Char, _ReplaceSkill);
+CharacterAddSkill(_Char, _FindSkill, 0);
+// [END_NO_OSITOOLS]
 
 PROC
 LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)
 AND
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill)
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPlayer)
 AND
 CharacterHasSkill(_Char, _FindSkill, 1)
 THEN
+DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
 LLWEAPONEX_Firearms_SwapRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
 
 PROC
@@ -228,6 +382,11 @@ DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill)
 THEN
 NOT DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
 LLWEAPONEX_Firearms_RestoreRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
+
+PROC
+LLWEAPONEX_OnWeaponTypeUnEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)
+THEN
+LLWEAPONEX_Firearms_RestoreAllRangerSkills(_Char);
 //END_REGION
 EXITSECTION
 

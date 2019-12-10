@@ -53,3 +53,17 @@ THEN
 		StatusText(_Target, _SoundF)
 		PlaySound(_Target, _Sound)
 ENDIF
+
+EVENT LLWEAPONEX_Blocked_Sound
+VARS
+	CHARACTER:_Target
+	STRING:_Sound
+ON
+	OnBlock(_, _, _Target, _)
+ACTIONS
+IF "c1"
+	IsTagged(_Target, "LLWEAPONEX_DualShields_Enabled")
+THEN
+	GetWeightedRandom(_Sound, "LLWEAPONEX_FFT_Shield_Block_Light", INT:1, "LLWEAPONEX_FFT_Shield_Block_Heavy_All_01", INT:3)
+	PlaySound(_Target, _Sound)
+ENDIF

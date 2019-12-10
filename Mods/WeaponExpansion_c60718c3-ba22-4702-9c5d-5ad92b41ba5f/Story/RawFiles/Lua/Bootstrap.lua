@@ -89,12 +89,12 @@ end
 
 local function PlayBulletImpact(target)
     local sound = "LLWEAPONEX_Bullet_Impact_Body_Thump_All"
-    if (HasActiveStatus(target, "PETRIFIED") == 1 or HasActiveStatus(target, "FORTIFIED")) then
+    if (HasActiveStatus(target, "PETRIFIED") == 1 or HasActiveStatus(target, "FORTIFIED") == 1) then
         sound = "LLWEAPONEX_Bullet_Impact_Rock_All"
     elseif HasActiveStatus(target, "FROZEN") == 1 then
         sound = "LLWEAPONEX_Bullet_Impact_Ice_All"
-    elseif ObjectIsCharacter(target) then
-        if CharacterGetArmorPercentage(target) <= 0 then
+    elseif ObjectIsCharacter(target) == 1 then
+        if CharacterGetArmorPercentage(target) <= 0.05 then
             if IsTagged(target, "UNDEAD") == 0 or IsTagged(target, "ZOMBIE") == 1 then
                 sound = "LLWEAPONEX_Bullet_Impact_Body_Flesh_All"
             else
@@ -104,24 +104,18 @@ local function PlayBulletImpact(target)
             local chest_armor = CharacterGetEquippedItem(target, "Breast")
             if chest_armor ~= nil then
                 local item_stat = NRD_ItemGetStatsId(chest_armor)
-                DebugBreak("Chest Armor Stat: " .. item_stat)
-                if NRD_StatAttributeExists(item_stat, "ArmorType") then
+                if item_stat ~= nil then
                     local armor_type = NRD_StatGetString(item_stat, "ArmorType")
-                    print("Armor type: " .. armor_type)
-                    DebugBreak("Armor type: " .. armor_type)
                     if armor_type == "Plate" then
                         sound = "LLWEAPONEX_Bullet_Impact_Metal_Heavy_All"
                     end
-                else
-                    DebugBreak("Chest Armor Stat: " .. item_stat .. " does not have ArmorType!")
                 end
             end
         end
-        CharacterStatusText(target, sound)
     else 
         sound = "LLWEAPONEX_Bullet_Impact_Dirt_All"
     end
-    DebugBreak(sound)
+    DebugBreak("Final sound: " .. sound)
     PlaySound(target, sound)
 end
 
