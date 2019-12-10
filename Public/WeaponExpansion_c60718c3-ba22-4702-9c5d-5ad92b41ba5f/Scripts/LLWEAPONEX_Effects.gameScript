@@ -16,3 +16,39 @@ THEN
 	CharacterPlayEffect(_Source, "RS3_FX_Char_Creature_Demon_Caster_Cast_Target_Cast_LastRites_Hand_01", "Dummy_R_HandFX")
 	//CharacterPlayEffect(_Source, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R")
 ENDIF
+
+EVENT LLWEAPONEX_Bullet_HitSound
+VARS
+	CHARACTER:_Target
+	FLOAT:_Armor
+	STRING:_Sound
+	FIXEDSTRING:_SoundF
+ON
+	OnCharacterStatusAttempt(_Target, LLWEAPONEX_PISTOL_SHOOT_HIT)
+ACTIONS
+IF "!c1"
+	HasGlobalFlag("LeaderLib_ExtenderIsActive")
+THEN
+	IF "c1"
+		CharacterHasStatus(_Target, PETRIFIED)
+	THEN
+		Set(_Sound, "LLWEAPONEX_Bullet_Impact_Rock_All")
+	ELIF "c1"
+		CharacterHasStatus(_Target, FROZEN)
+	THEN
+		Set(_Sound, "LLWEAPONEX_Bullet_Impact_Ice_All")
+	ELIF "c1&c2&(!c3|c4)"
+		CharacterGetStat(_Armor, _Target, PhysicalArmorPoints)
+		IsEqual(_Armor, 0.0)
+		IsTagged(_Target, "UNDEAD")
+		IsTagged(_Target, "ZOMBIE")
+	THEN
+		Set(_Sound, "LLWEAPONEX_Bullet_Impact_Body_Flesh_All")
+	ELSE
+		//Set(_Sound, "LLWEAPONEX_Bullet_Impact_Metal_Heavy_All")
+		Set(_Sound, "LLWEAPONEX_Bullet_Impact_Body_Thump_All")
+	ENDIF
+		Cast(_SoundF, _Sound)
+		StatusText(_Target, _SoundF)
+		PlaySound(_Target, _Sound)
+ENDIF
