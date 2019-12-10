@@ -402,6 +402,9 @@ add name "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Legendary_DisplayName",""
 new namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Divine"
 add name "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Divine_DisplayName",""
 
+new namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Crafted"
+add name "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Crafted_DisplayName",""
+
 new namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Common"
 add name "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Common_DisplayName",""
 
@@ -426,6 +429,9 @@ add name "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Legendary_DisplayName",""
 
 new namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Divine"
 add name "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Divine_DisplayName",""
+
+new namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Crafted"
+add name "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Crafted_DisplayName",""
 
 new namegroup "WPN_LLWEAPONEX_Glaive_2H_Crafted"
 add name "WPN_LLWEAPONEX_Glaive_2H_Crafted_1_DisplayName",""

@@ -660,6 +660,58 @@ add equipment entry "ARM_LLWEAPONEX_Halberdier_Boots"
 add equipmentgroup
 add equipment entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Preview"
 
+new equipment "Class_LLWEAPONEX_Rifleman_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Rifleman_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Rifleman_Preview"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Rifleman_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Rifleman_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Rifleman_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Rifleman_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Rifleman_Boots"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Preview"
+
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
 add equipment entry "LLWEAPONEX_NPC_Goblins_Chaos_Grunt_A"
