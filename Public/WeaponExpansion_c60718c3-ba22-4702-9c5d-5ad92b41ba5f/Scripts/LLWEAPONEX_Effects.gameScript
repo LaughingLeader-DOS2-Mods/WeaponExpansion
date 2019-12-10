@@ -25,6 +25,7 @@ VARS
 	FIXEDSTRING:_SoundF
 ON
 	OnCharacterStatusAttempt(_Target, LLWEAPONEX_PISTOL_SHOOT_HIT)
+	OnCharacterStatusAttempt(_Target, LLWEAPONEX_BULLET_HIT)
 ACTIONS
 IF "!c1"
 	HasGlobalFlag("LeaderLib_ExtenderIsActive")

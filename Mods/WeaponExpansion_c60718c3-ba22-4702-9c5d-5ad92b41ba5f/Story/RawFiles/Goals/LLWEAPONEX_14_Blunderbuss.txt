@@ -17,7 +17,7 @@ LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BlunderbussEquipped"
 
 //REGION BASIC_ATTACK
 IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_HIT", (CHARACTERGUID)_Source)
+CharacterStatusAttempt(_Target, "LLWEAPONEX_BULLET_HIT", (CHARACTERGUID)_Source)
 AND
 DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, (GUIDSTRING)_Target)
 THEN
@@ -26,7 +26,7 @@ LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Bl
 CharacterCharacterSetEvent(_Source, (CHARACTERGUID)_Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
 
 IF
-ItemStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_HIT", (CHARACTERGUID)_Source)
+ItemStatusAttempt(_Target, "LLWEAPONEX_BULLET_HIT", (CHARACTERGUID)_Source)
 AND
 DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, (GUIDSTRING)_Target)
 THEN
