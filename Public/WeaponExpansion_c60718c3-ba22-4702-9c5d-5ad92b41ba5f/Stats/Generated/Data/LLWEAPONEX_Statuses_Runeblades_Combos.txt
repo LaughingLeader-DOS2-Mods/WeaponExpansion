@@ -380,7 +380,6 @@ data "Icon" "LLWEAPONEX_Status_Rune_Contamination"
 data "FormatColor" "Poison"
 data "StatsId" "Stats_LLWEAPONEX_Activate_Runeblade_Contamination"
 data "StackId" "Stack_LLWEAPONEX_Activate_Runeblade_Contamination"
-data "DescriptionParams" "Stats:LLWEAPONEX_RUNEBLADE_CONTAMINATION_SPREAD:AuraRadius"
 data "ApplyEffect" "LLWEAPONEX_FX_Rune_Contamination_01:Dummy_OverheadFX"
 
 new entry "Stats_LLWEAPONEX_Activate_Runeblade_Contamination"
