@@ -34,7 +34,7 @@ LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
 AND
 CharacterIsControlled(_Char, 1)
 THEN
-ApplyStatus(_Char, "LLWEAPONEX_REFRESH_UI", 0.0);
+LeaderLib_Helper_RefreshUI(_Char);
 
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)

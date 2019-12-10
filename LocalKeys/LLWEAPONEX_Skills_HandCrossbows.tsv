@@ -4,7 +4,7 @@ Shout_LLWEAPONEX_HandCrossbow_Reload_Description	Reload your <font color='#C7A75
 Projectile_LLWEAPONEX_HandCrossbow_Assassinate_DisplayName	<font color='#C80030'>Assassin's Requiem</font>
 Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Description	Fire a decisive shot at a target with your <font color='#C7A758'>Hand Crossbow</font>, dealing [1].<br><font color='#8652f0'>Deals double damage from stealth.</font>
 Projectile_LLWEAPONEX_HandCrossbow_Shoot_DisplayName	Shoot <font color='#CCCCCC'>(Normal Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1]([2]) and consuming a charge.<br><font color='#FFBB22">Damage scales with your equipped weapon. If no weapon is equipped, the second damage value is used.</font>
+Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1](or [2]) and consuming a charge.<br><font color='#FFBB22'>Damage scales with your equipped weapon. If no weapon is equipped, the second damage value is used.</font>
 Projectile_LLWEAPONEX_HandCrossbow_Shoot_Air_DisplayName	Shoot <font color='#7D71D9'>(Electrified Bolts)</font>
 Projectile_LLWEAPONEX_HandCrossbow_Shoot_Corrosive_DisplayName	Shoot <font color='#55FF55'>(Corrosive Bolts)</font>
 Projectile_LLWEAPONEX_HandCrossbow_Shoot_Earth_DisplayName	Shoot <font color='#AA895B'>(Oiled Bolts)</font>

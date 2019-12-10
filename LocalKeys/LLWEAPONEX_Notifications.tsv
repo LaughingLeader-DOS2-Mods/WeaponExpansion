@@ -5,3 +5,4 @@ LLWEAPONEX_Notifications_OniGauntletRequiredForOrb	<font color='#FF001F'>The orb
 LLWEAPONEX_Notifications_EternalSparkEquipped	<font color='#ff4800'>Your right hand surges with the power of the Eternal Spark.</font>
 LLWEAPONEX_Notifications_UnequipDragonBoneClawsFailed	<font color='#CD1F1F'>To unequip the Dragon Bone Claws, unequip your glove armor instead of the weapon.</font>
 LLWEAPONEX_Notifications_ArmCannonShieldBlocked	<font color='#CD1F1F'>The focus required to wield the Runic Cannon requires it to be the only weapon used.</font>
+LLWEAPONEX_Notifications_HandCrossbow_InsertBolts_NotEquipped	<font color='#FF1155' size='22'>Insert Failed - No Hand Crossbow Equipped</font>

@@ -115,7 +115,17 @@ AND
 LeaderLib_Helper_QRY_IsRace(_Char, _Race)
 THEN
 ApplyStatus(_Char, _ExplosionStatusFX, 0.2, 1, _Char);
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Pistols_RemoveExplosionStatusFX", "LLWEAPONEX_Pistols_RemoveExplosionStatusFX");
 SetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _ProjectileSkill);
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_Pistols_RemoveExplosionStatusFX")
+AND
+DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill, _HideHandPistolDelay, _ExplosionStatusFX)
+AND
+LeaderLib_Helper_QRY_HasStatus(_Char, _ExplosionStatusFX)
+THEN
+RemoveStatus(_Char, _ExplosionStatusFX);
 //END_REGION
 
 //REGION PISTOL_SHOOT_PROJECTILE
