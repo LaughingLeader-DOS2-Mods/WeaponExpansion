@@ -146,6 +146,17 @@ LeaderLib_Variables_DB_ClearVariableInt(_Target, "LLWEAPONEX_Blunderbuss_Scatter
 ApplyStatus(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_BONUS", 0.0, 1, _Source);
 LeaderLib_Force_Apply(_Source, _Target, 4);
 //END_REGION
+
+//REGION BULLET_IMPACT_SOUNDS
+/* [OSITOOLS_ONLY]
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", _)
+AND
+String(_Target, _TargetStr)
+THEN
+NRD_LuaCall("LLWEAPONEX_PlayBulletImpact", _TargetStr);
+*/
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

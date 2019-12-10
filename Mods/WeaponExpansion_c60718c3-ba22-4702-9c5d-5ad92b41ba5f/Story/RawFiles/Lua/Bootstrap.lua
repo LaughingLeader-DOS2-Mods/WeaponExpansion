@@ -1,4 +1,4 @@
-function llweaponex_get_handedness(weapon)
+local function GetHandedness(weapon)
     if weapon == nil then
         return nil
     end
@@ -15,13 +15,12 @@ function llweaponex_get_handedness(weapon)
     end
 end
 
-function llweaponex_tag_handedness()
-    local player = CharacterGetHostCharacter()
+local function TagHandedness(player)
     local slots = {"Weapon", "Shield"}
     for i, slot in ipairs(slots) do
         local item = CharacterGetEquippedItem(player, slot)
         if item ~= nil then
-            local handedness = llweaponex_get_handedness(item)
+            local handedness = GetHandedness(item)
             if handedness ~= nil then
                 if handedness == true then
                     SetTag(item, "LLWEAPONEX_IsTwoHanded")
@@ -34,8 +33,7 @@ function llweaponex_tag_handedness()
     DebugBreak("[LL-OsiExtender] Item check done.")
 end
 
-function llweaponex_tag_itemtype()
-    local player = CharacterGetHostCharacter()
+local function TagItemType(player)
     local slots = {"Weapon", "Shield"}
     local anim_to_type = {
         --None = "",
@@ -87,4 +85,54 @@ function llweaponex_tag_itemtype()
             end
         end
     end
+end
+
+local function PlayBulletImpact(target)
+    local sound = "LLWEAPONEX_Bullet_Impact_Body_Thump_All"
+    if (HasActiveStatus(target, "PETRIFIED") == 1 or HasActiveStatus(target, "FORTIFIED")) then
+        sound = "LLWEAPONEX_Bullet_Impact_Rock_All"
+    elseif HasActiveStatus(target, "FROZEN") == 1 then
+        sound = "LLWEAPONEX_Bullet_Impact_Ice_All"
+    elseif ObjectIsCharacter(target) then
+        if CharacterGetArmorPercentage(target) <= 0 then
+            if IsTagged(target, "UNDEAD") == 0 or IsTagged(target, "ZOMBIE") == 1 then
+                sound = "LLWEAPONEX_Bullet_Impact_Body_Flesh_All"
+            else
+                sound = "LLWEAPONEX_Bullet_Impact_Body_Thump_All"
+            end
+        else
+            local chest_armor = CharacterGetEquippedItem(target, "Breast")
+            if chest_armor ~= nil then
+                local item_stat = NRD_ItemGetStatsId(chest_armor)
+                DebugBreak("Chest Armor Stat: " .. item_stat)
+                if NRD_StatAttributeExists(item_stat, "ArmorType") then
+                    local armor_type = NRD_StatGetString(item_stat, "ArmorType")
+                    print("Armor type: " .. armor_type)
+                    DebugBreak("Armor type: " .. armor_type)
+                    if armor_type == "Plate" then
+                        sound = "LLWEAPONEX_Bullet_Impact_Metal_Heavy_All"
+                    end
+                else
+                    DebugBreak("Chest Armor Stat: " .. item_stat .. " does not have ArmorType!")
+                end
+            end
+        end
+        CharacterStatusText(target, sound)
+    else 
+        sound = "LLWEAPONEX_Bullet_Impact_Dirt_All"
+    end
+    DebugBreak(sound)
+    PlaySound(target, sound)
+end
+
+WeaponExpansion = {
+    GetHandedness = GetHandedness,
+    TagHandedness = TagHandedness,
+    TagItemType = TagItemType,
+    PlayBulletImpact = PlayBulletImpact
+}
+
+--Export local functions to global for now
+for name,func in pairs(WeaponExpansion) do
+    _G["LLWEAPONEX_" .. name] = func
 end
