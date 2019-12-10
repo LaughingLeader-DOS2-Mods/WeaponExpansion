@@ -115,7 +115,7 @@ local function PlayBulletImpact(target)
     else 
         sound = "LLWEAPONEX_Bullet_Impact_Dirt_All"
     end
-    DebugBreak("Final sound: " .. sound)
+    --DebugBreak("Final sound: " .. sound)
     PlaySound(target, sound)
 end
 
