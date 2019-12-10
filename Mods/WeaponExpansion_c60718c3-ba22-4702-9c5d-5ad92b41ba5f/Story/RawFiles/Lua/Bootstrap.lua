@@ -125,6 +125,10 @@ local function PlayBulletImpact(target)
     PlaySound(target, sound)
 end
 
+-- local function SwapRangerSkillProjectileTemplate(char, skill)
+--     local template = NRD_StatGetString(skill, "Template")
+-- end
+
 WeaponExpansion = {
     GetHandedness = GetHandedness,
     TagHandedness = TagHandedness,

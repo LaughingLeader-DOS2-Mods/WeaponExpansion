@@ -29,6 +29,23 @@ DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DA
 DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_18", 18.0, 19.0);
 DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_19", 19.0, 20.0);
 DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_20", 20.0, 999.0);
+
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Multishot", "Projectile_LLWEAPONEX_Firearm_Multishot");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyMultishot", "Projectile_LLWEAPONEX_Firearm_Multishot_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_SkyShot", "Projectile_LLWEAPONEX_Firearm_SkyShot");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemySkyShot", "Projectile_LLWEAPONEX_Firearm_SkyShot_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_ArrowSpray", "Projectile_LLWEAPONEX_Firearm_ArrowSpray");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyArrowSpray", "Projectile_LLWEAPONEX_Firearm_ArrowSpray_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_PiercingShot", "Projectile_LLWEAPONEX_Firearm_PiercingShot");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyPiercingShot", "Projectile_LLWEAPONEX_Firearm_PiercingShot_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Snipe", "Projectile_LLWEAPONEX_Firearm_Snipe");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemySnipe", "Projectile_LLWEAPONEX_Firearm_Snipe_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Ricochet", "Projectile_LLWEAPONEX_Firearm_Ricochet");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyRicochet", "Projectile_LLWEAPONEX_Firearm_Ricochet_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_BallisticShot", "Projectile_LLWEAPONEX_Firearm_BallisticShot");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyBallisticShot", "Projectile_LLWEAPONEX_Firearm_BallisticShot_Enemy");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_PinDown", "Projectile_LLWEAPONEX_Firearm_PinDown");
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyPinDown", "Projectile_LLWEAPONEX_Firearm_PinDown_Enemy");
 //END_REGION
 
 //REGION UPDATES
@@ -156,6 +173,54 @@ String(_Target, _TargetStr)
 THEN
 NRD_LuaCall("LLWEAPONEX_PlayBulletImpact", _TargetStr);
 */
+//END_REGION
+
+//REGION RANGER_SKILL_SWAP
+PROC
+LLWEAPONEX_Firearms_SwapRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, 1)
+AND
+NRD_SkillBarFindSkill(_Char, _FindSkill, _Slot)
+THEN
+DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
+NRD_SkillBarSetSkill(_Char, _Slot, _ReplaceSkill);
+
+PROC
+LLWEAPONEX_Firearms_SwapRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, (INTEGER)_IsPlayer)
+THEN
+CharacterAddSkill(_Char, _ReplaceSkill, 0);
+CharacterRemoveSkill(_Char, _FindSkill);
+
+PROC
+LLWEAPONEX_Firearms_RestoreRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, 1)
+AND
+NRD_SkillBarFindSkill(_Char, _ReplaceSkill, _Slot)
+THEN
+NRD_SkillBarSetSkill(_Char, _Slot, _ReplaceSkill);
+
+PROC
+LLWEAPONEX_Firearms_RestoreRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, (INTEGER)_IsPlayer)
+AND
+CharacterHasSkill(_Char, _FindSkill, 0)
+THEN
+CharacterAddSkill(_Char, _FindSkill, 0);
+CharacterRemoveSkill(_Char, _ReplaceSkill);
+
+PROC
+LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill)
+AND
+CharacterHasSkill(_Char, _FindSkill, 1)
+THEN
+LLWEAPONEX_Firearms_SwapRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
+
+PROC
+LLWEAPONEX_OnWeaponTypeUnEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)
+AND
+DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill)
+THEN
+NOT DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
+LLWEAPONEX_Firearms_RestoreRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
 //END_REGION
 EXITSECTION
 

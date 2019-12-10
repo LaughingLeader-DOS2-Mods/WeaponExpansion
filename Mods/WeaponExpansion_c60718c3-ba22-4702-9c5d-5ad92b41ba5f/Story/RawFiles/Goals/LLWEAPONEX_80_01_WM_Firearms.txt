@@ -1,0 +1,15 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+SkillCast(_Char, _ReplaceSkill, _, _)
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, 0, _Char);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

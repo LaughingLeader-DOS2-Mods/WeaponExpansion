@@ -1,3 +1,14 @@
+new entry "LLWEAPONEX_BULLET_HIT"
+type "StatusData"
+data "StatusType" "DAMAGE"
+using "LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+
+new entry "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "StatusEffect" "LLWEAPONEX_FX_Blunderbuss_Attack_Explosion_01,Detach:Dummy_ProjectileFX"
+
 new entry "LLWEAPONEX_BLUNDERBUSS_EQUIPPED"
 type "StatusData"
 data "StatusType" "CONSUME"
