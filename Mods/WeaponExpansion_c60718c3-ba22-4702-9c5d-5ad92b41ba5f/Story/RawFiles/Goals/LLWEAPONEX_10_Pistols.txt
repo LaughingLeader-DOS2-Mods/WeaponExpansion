@@ -20,6 +20,7 @@ DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_A_Isshin_
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring1_728f8b1a-7f4d-4912-85e4-054f817f2592
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring2_b183308c-8348-4079-abfa-2c2eca78d2cd
 
+//REGION PISTOL_SHOOT_FX
 //Dwarves and elves don't have a good shoot -> stow animation like humans/lizards do
 QRY
 LLWEAPONEX_Pistols_QRY_NeedsToSheathe((CHARACTERGUID)_Char)
@@ -59,61 +60,6 @@ AND
 DB_LLWEAPONEX_Pistols_ShootingStatus(_Template, _Status)
 THEN
 ApplyStatus(_Char, _Status, 12.0, 1, _Char);
-
-/*
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_PlayPistolFX")
-AND
-PlayLoopEffect(_Char, "LLWEAPONEX_FX_Skills_Pistol_A_Shoot_Hand_Pistol_Loop_01", "Dummy_L_HandFX", _Handle)
-THEN
-DB_LLWEAPONEX_Pistols_Temp_ShootFX(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _Handle);
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_StopAnimation")
-AND
-DB_LLWEAPONEX_Pistols_Temp_ShootFX(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _Handle)
-THEN
-NOT DB_LLWEAPONEX_Pistols_Temp_ShootFX(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _Handle);
-StopLoopEffect(_Handle);
-*/
-
-IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
-THEN
-SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
-
-IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
-AND
-GetPosition(_Target, _x, _y, _z)
-THEN
-SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
-
-IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
-AND
-IsTagged(_Char, "FEMALE", _IsFemale)
-AND
-DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill, _HideHandPistolDelay, _ExplosionStatusFX)
-AND
-LeaderLib_Helper_QRY_IsRace(_Char, _Race)
-THEN
-ApplyStatus(_Char, _ExplosionStatusFX, 0.2, 1, _Char);
-SetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _ProjectileSkill);
-
-IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
-THEN
-SetStoryEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile");
-
-/*
-IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
-AND
-LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 600, "Timers_LLWEAPONEX_Pistols_StopAnimation", "LLWEAPONEX_Pistols_StopAnimation");
-*/
 
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
@@ -158,6 +104,54 @@ AND
 LeaderLib_Helper_QRY_IsRace(_Char, _Race)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, _HideHandPistolDelay, "Timers_LLWEAPONEX_Pistols_RemovePistolFX", "LLWEAPONEX_Pistols_RemovePistolFX");
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+AND
+IsTagged(_Char, "FEMALE", _IsFemale)
+AND
+DB_LLWEAPONEX_Pistols_HandProjectiles(_Race, _IsFemale, _ProjectileSkill, _HideHandPistolDelay, _ExplosionStatusFX)
+AND
+LeaderLib_Helper_QRY_IsRace(_Char, _Race)
+THEN
+ApplyStatus(_Char, _ExplosionStatusFX, 0.2, 1, _Char);
+SetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _ProjectileSkill);
+//END_REGION
+
+//REGION PISTOL_SHOOT_PROJECTILE
+IF
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+THEN
+SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+THEN
+SetStoryEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile");
+//END_REGION
+
+//REGION PISTOL_DAMAGE
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+AND
+LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", 0.0, 1, _Cause);
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+AND
+NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
