@@ -18,7 +18,7 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag);
 LLWEAPONEX_ToggleSettings_AddTag(_WeaponType);
 
-//Auto-generate "mastery level unlocked" tags for skillbooks and mastery skills.
+//Auto-generated "mastery level unlocked" tags for skillbooks and mastery skills.
 PROC
 LLWEAPONEX_WeaponMastery_AddMastery((STRING)_WeaponType, (STRING)_CurrentXPVar, (STRING)_LevelVar, (STRING)_EnabledFlag)
 THEN

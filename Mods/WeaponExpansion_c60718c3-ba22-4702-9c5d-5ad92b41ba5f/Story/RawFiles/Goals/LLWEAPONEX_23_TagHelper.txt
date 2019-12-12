@@ -23,6 +23,7 @@ DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Grimoire");
 DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Halberd");
 DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_HandCrossbow");
 DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Katana");
+DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Pistol");
 DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Polearm");
 DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Quarterstaff");
 DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Rapier");
@@ -51,6 +52,17 @@ DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Sword", "LLWEAPONEX_Sword");
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Wand", "LLWEAPONEX_Wand");
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Arrow", "LLWEAPONEX_Arrow");
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Sentinel", "LLWEAPONEX_Sentinel");
+
+//Auto-generated "Weapon type equipped" tags
+IF
+DB_LLWEAPONEX_TagHelper_AllTags("Type", _WeaponType)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_EquippedTags(_WeaponType, _)
+AND
+StringConcatenate(_WeaponType, "_Equipped", _Tag)
+THEN
+DB_LLWEAPONEX_WeaponMastery_EquippedTags(_WeaponType, _Tag);
+LeaderLog_Log("DEBUG", "[Tag] ", _Tag);
 
 //REGION CHECK_WEAPON_TYPE
 PROC

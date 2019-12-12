@@ -1,7 +1,6 @@
 Key	Content
 LLWEAPONEX_Katana_ComboEnabled	Blademaster's Strike
 LLWEAPONEX_Rapier_SuckerCombo1Enabled	Dirty Fighting I
-LLWEAPONEX_HandCrossbow_Equipped	a Hand Crossbow
 LLWEAPONEX_AnyWeaponEquipped	an Equipped Weapon
 LLWEAPONEX_HandCrossbow_HasAmmo	Crossbow Bolts
 LLWEAPONEX_HandCrossbow_CanReload	Missing Charges & Inserted Bolts
@@ -34,12 +33,35 @@ LLWEAPONEX_Runeblade_Mastery3	Runeblade Mastery III
 LLWEAPONEX_ThrowingAbility_Mastery1	Throwing Mastery I
 LLWEAPONEX_ThrowingAbility_Mastery2	Throwing Mastery II
 LLWEAPONEX_ThrowingAbility_Mastery3	Throwing Mastery III
-LLWEAPONEX_DualShields_Enabled	Dual Shields
-LLWEAPONEX_Firearm_Enabled	a Firearm
-LLWEAPONEX_Greatbow_Enabled	a Greatbow
-LLWEAPONEX_HandCrossbow_Enabled	a Hand Crossbow
-LLWEAPONEX_Katana_Enabled	a Katana
-LLWEAPONEX_Quarterstaff_Enabled	a Quarterstaff
-LLWEAPONEX_Rapier_Enabled	a Rapier
-LLWEAPONEX_Runeblade_Enabled	a Runeblade
 LLWEAPONEX_BattleBooks_SpellScrollEquipped	Gnak's Spell Scroll
+LLWEAPONEX_Axe_Equipped	an Axe
+LLWEAPONEX_Banner_Equipped	a Banner
+LLWEAPONEX_BattleBook_Equipped	a Battle Book
+LLWEAPONEX_Blunderbuss_Equipped	a Blunderbuss
+LLWEAPONEX_Blunt_Equipped	a Blunt Weapon
+LLWEAPONEX_Bow_Equipped	a Bow
+LLWEAPONEX_CombatShield_Equipped	a Combat Shield
+LLWEAPONEX_Crossbow_Equipped	a Crossbow
+LLWEAPONEX_Dagger_Equipped	a Dagger
+LLWEAPONEX_Firearm_Equipped	a Firearm
+LLWEAPONEX_Glaive_Equipped	a Glaive
+LLWEAPONEX_Greatbow_Equipped	a Greatbow
+LLWEAPONEX_Grimoire_Equipped	a Grimoire
+LLWEAPONEX_Halberd_Equipped	a Halberd
+LLWEAPONEX_HandCrossbow_Equipped	a Hand Crossbow
+LLWEAPONEX_Katana_Equipped	a Katana
+LLWEAPONEX_Pistol_Equipped	a Pistol
+LLWEAPONEX_Polearm_Equipped	a Polearm
+LLWEAPONEX_Quarterstaff_Equipped	a Quarterstaff
+LLWEAPONEX_Rapier_Equipped	a Rapier
+LLWEAPONEX_Rod_Equipped	a Rod
+LLWEAPONEX_Runeblade_Equipped	a Runeblade
+LLWEAPONEX_Runeblade_Inert_Equipped	an Inert Runeblade
+LLWEAPONEX_Scythe_Equipped	a Scythe
+LLWEAPONEX_Shield_Equipped	a Shield
+LLWEAPONEX_Spear_Equipped	a Spear
+LLWEAPONEX_Staff_Equipped	a Staff
+LLWEAPONEX_Sword_Equipped	a Sword
+LLWEAPONEX_Throwing_Equipped	a Throwing Weapon
+LLWEAPONEX_Unarmed_Equipped	Empty Hands
+LLWEAPONEX_Wand_Equipped	a Wand

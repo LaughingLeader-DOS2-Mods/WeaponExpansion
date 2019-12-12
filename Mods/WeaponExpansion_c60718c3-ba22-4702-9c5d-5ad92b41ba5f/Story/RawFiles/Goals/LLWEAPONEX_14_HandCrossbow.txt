@@ -307,7 +307,7 @@ LLWEAPONEX_HandCrossbow_TryInsertBolt((CHARACTERGUID)_Char, (ITEMGUID)_Bolt, (ST
 AND
 LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:TryInsertBolt] Trying to insert bolt (",_Template,")")
 AND
-IsTagged(_Char, "LLWEAPONEX_HandCrossbow_Equipped", 1)
+IsTagged(_Char, "LLWEAPONEX_HandCrossbow_Enabled", 1)
 AND
 LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:TryInsertBolt] Checking LLWEAPONEX_HandCrossbow_HasAmmo tag")
 AND
