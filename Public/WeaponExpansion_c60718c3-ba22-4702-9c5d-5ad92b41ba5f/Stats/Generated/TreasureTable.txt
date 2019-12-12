@@ -803,6 +803,8 @@ object category "I_SKILLBOOK_LLWEAPONEX_Handcrossbow_Assassinate",1,0,0,0,0,0,0,
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_Katana_Iaido",1,0,0,0,0,0,0,0
 new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_Katana_VanquishersPath",1,0,0,0,0,0,0,0
+new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_Quarterstaff_LegSweep",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance",1,0,0,0,0,0,0,0
@@ -812,6 +814,8 @@ new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_ThrowingAbility_HardyToss",1,0,0,0,0,0,0,0
 
 new treasuretable "S_LLWEAPONEX_Debug_BattlemageArmor"
 IgnoreLevelDiff 1
