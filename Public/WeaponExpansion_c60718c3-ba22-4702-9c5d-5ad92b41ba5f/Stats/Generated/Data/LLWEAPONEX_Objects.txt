@@ -318,6 +318,7 @@ data "Value" "0"
 data "Weight" "3000"
 data "Flags" "BleedingImmunity;SleepingImmunity;PoisonImmunity;KnockdownImmunity"
 data "Constitution" "1"
+data "Vitality" "50"
 
 new entry "LLWEAPONEX_Wagon_A"
 type "Object"

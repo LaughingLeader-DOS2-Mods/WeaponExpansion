@@ -33,7 +33,7 @@ AND
 DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, _Tag);
-LeaderLib_Helper_RefreshUI(_Char, 1);
+LeaderLib_Helper_RefreshUI(_Char);
 //END_REGION
 
 //REGION START_EVENTS

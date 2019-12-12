@@ -1250,7 +1250,7 @@ AND
 _Strength < _Min
 THEN
 DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
-LeaderLib_Force_Apply(_Source, _Target, 1);
+LeaderLib_Force_Apply(_Source, _Target, 1, "LLWEAPONEX_TossObject_Landed");
 
 PROC
 LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
@@ -1262,7 +1262,7 @@ AND
 _Strength > _Max
 THEN
 DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
-LeaderLib_Force_Apply(_Source, _Target, 11);
+LeaderLib_Force_Apply(_Source, _Target, 11, "LLWEAPONEX_TossObject_Landed");
 
 PROC
 LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
@@ -1272,7 +1272,7 @@ AND
 DB_LLWEAPONEX_Throwing_StrengthToDistance(_Strength, _Dist)
 THEN
 DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
-LeaderLib_Force_Apply(_Source, _Target, _Dist);
+LeaderLib_Force_Apply(_Source, _Target, _Dist, "LLWEAPONEX_TossObject_Landed");
 
 PROC
 LLWEAPONEX_Throwing_TossObject_Launch((CHARACTERGUID)_Source, (INTEGER)_Strength, (GUIDSTRING)_Target)
@@ -1282,7 +1282,7 @@ THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_TossResolved(_Source, _Target);
 
 PROC
-LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source)
+LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source, "LLWEAPONEX_TossObject_Landed")
 AND
 ObjectGetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 1)
 AND
@@ -1298,7 +1298,7 @@ ObjectClearFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
 CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject_Landed");
 
 PROC
-LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source)
+LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source, "LLWEAPONEX_TossObject_Landed")
 AND
 ObjectGetFlag(_Target, "LLWEAPONEX_IsBeingThrown", 1)
 AND
@@ -1314,7 +1314,7 @@ ObjectClearFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);
 CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_Throwing_TossObject_Landed");
 
 PROC
-LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source)
+LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source, "LLWEAPONEX_TossObject_Landed")
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_TOSSED_LAND", 0.0, 0, _Source);
 ObjectClearFlag(_Target, "LLWEAPONEX_IsBeingThrown", 0);

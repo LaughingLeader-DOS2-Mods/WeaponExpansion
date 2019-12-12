@@ -111,7 +111,7 @@ RemoveStatus(_Char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO2");
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
 THEN
-DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target((GUIDSTRING)_Char, _Target);
+DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target((GUIDSTRING)_Char, (GUIDSTRING)_Target);
 LeaderLib_Timers_StartObjectObjectTimer((GUIDSTRING)_Char, _Target, 2000, "Timers_LLWEAPONEX_Rapiers_SuckerCombo2Fallback", "LLWEAPONEX_Rapiers_SuckerCombo2Fallback");
 
 PROC
@@ -124,10 +124,18 @@ NOT DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target);
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING", _Char)
 AND
-DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target((GUIDSTRING)_Char, _Target)
+DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target((GUIDSTRING)_Char, (GUIDSTRING)_Target)
 THEN
 LeaderLib_Timers_RestartObjectObjectTimer(_Char, _Target, "Timers_LLWEAPONEX_Rapiers_SuckerCombo2Fallback", 1500);
-LeaderLib_Force_Apply(_Char, _Target, 3, 1);
+LeaderLib_Force_Apply(_Char, _Target, 3, "LLWEAPONEX_Rapier_SuckerCombo2_Landed");
+
+PROC
+LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Char, "LLWEAPONEX_Rapier_SuckerCombo2_Landed")
+AND
+DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target)
+THEN
+NOT DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target);
+RemoveStatus(_Target, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING");
 
 /* [OSITOOLS_ONLY]
 IF
