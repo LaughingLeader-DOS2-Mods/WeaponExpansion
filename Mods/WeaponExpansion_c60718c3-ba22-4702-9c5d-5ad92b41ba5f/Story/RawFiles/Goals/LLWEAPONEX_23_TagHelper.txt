@@ -57,12 +57,11 @@ DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Sentinel", "LLWEAPONEX_Sentinel");
 IF
 DB_LLWEAPONEX_TagHelper_AllTags("Type", _WeaponType)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_EquippedTags(_WeaponType, _)
+NOT DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _)
 AND
 StringConcatenate(_WeaponType, "_Equipped", _Tag)
 THEN
-DB_LLWEAPONEX_WeaponMastery_EquippedTags(_WeaponType, _Tag);
-LeaderLog_Log("DEBUG", "[Tag] ", _Tag);
+DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag);
 
 //REGION CHECK_WEAPON_TYPE
 PROC

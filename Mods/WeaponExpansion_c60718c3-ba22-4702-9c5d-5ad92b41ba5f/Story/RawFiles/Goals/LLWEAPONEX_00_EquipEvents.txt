@@ -30,9 +30,10 @@ LLWEAPONEX_OnWeaponTypeUnEquipped(_Char, _Item, _WeaponType, _IsPlayer);
 PROC
 LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 AND
-DB_LLWEAPONEX_WeaponMastery_EquippedTags(_WeaponType, _Tag)
+DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, _Tag);
+LeaderLib_Helper_RefreshUI(_Char, 1);
 //END_REGION
 
 //REGION START_EVENTS
@@ -142,9 +143,10 @@ ObjectSetFlag(_Item, "LLWEAPONEX_HasWeaponType", 0);
 PROC
 LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 AND
-DB_LLWEAPONEX_WeaponMastery_EquippedTags(_WeaponType, _Tag)
+DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, _Tag);
+LeaderLib_Helper_RefreshUI(_Char, 1);
 //END_REGION
 
 //REGION PRESET_APPLIED
