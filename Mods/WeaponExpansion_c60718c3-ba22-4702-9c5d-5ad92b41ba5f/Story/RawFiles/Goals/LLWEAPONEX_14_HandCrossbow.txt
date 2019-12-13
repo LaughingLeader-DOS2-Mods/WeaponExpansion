@@ -35,7 +35,7 @@ ItemAddCharges(_HandCrossbow, _Max);
 
 //REGION EQUIPPED
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
 AND
 CharacterIsPlayer(_Char, _a)
 AND
@@ -46,16 +46,16 @@ THEN
 LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, "LLWEAPONEX_HandCrossbow", _IsPlayer);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
 THEN
 //LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_Equipped");
-LLWEAPONEX_HandCrossbow_OnEquipped(_Char, _Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
+LLWEAPONEX_HandCrossbow_OnEquipped(_Char, _Item, "EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2")
 THEN
 //LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_HandCrossbow_Equipped");
-LLWEAPONEX_HandCrossbow_OnUnEquipped(_Char, _Item, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
+LLWEAPONEX_HandCrossbow_OnUnEquipped(_Char, _Item, "EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
 //END_REGION
 
 //REGION SKILL_TAGS_SET
@@ -160,7 +160,7 @@ LLWEAPONEX_HandCrossbow_TagForReload(_Char);
 PROC
 LLWEAPONEX_HandCrossbow_TagForReload((CHARACTERGUID)_Char)
 AND
-GetItemForItemTemplateInInventory(_Char, "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2", _HandCrossbow)
+GetItemForItemTemplateInInventory(_Char, "EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2", _HandCrossbow)
 THEN
 LLWEAPONEX_HandCrossbow_TagForReload(_Char, _HandCrossbow);
 
