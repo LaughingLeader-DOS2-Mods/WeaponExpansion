@@ -1988,6 +1988,15 @@ AND
 CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Item)
 THEN
 ItemLevelUpTo(_Item, _Level);
+
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+THEN
+DB_NOOP(1);
+/* [OSITOOLS_ONLY]
+NRD_LuaReset(1);
+NRD_LuaCall("LLWEAPONEX_Debug_Init");
+*/
 EXITSECTION
 
 ENDEXITSECTION
