@@ -294,7 +294,7 @@ AND
 DB_LLWEAPONEX_Katanas_Temp_VanquisherTeleporting(_Source, _Target)
 THEN
 NOT DB_LLWEAPONEX_Katanas_Temp_VanquisherTeleporting(_Source, _Target);
-PlayAnimation(_Source, "");
+LeaderLib_Helper_ClearActionQueue(_Source);
 CharacterUseSkill(_Source, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", _Target, 1, 1, 1);
 ProcObjectTimer(_Source, "LLWEAPONEX_Timers_Katanas_ContinueVanquisher", 2000);
 

@@ -1,0 +1,97 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Extender_InitSettings();
+KBSECTION
+PROC
+LLWEAPONEX_Extender_InitSettings()
+THEN
+DB_LLWEAPONEX_Skills_TagRequirements("MultiStrike_LLWEAPONEX_Rapier_FlickerStrike", "LLWEAPONEX_Rapier_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("MultiStrike_LLWEAPONEX_Rapier_FlickerStrike", "LLWEAPONEX_Rapier_Mastery3", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_ArmCannon_Shoot", "LLWEAPONEX_ArmCannon_EnergyAvailable", 1);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_Greatbow_Knockback_Base", "LLWEAPONEX_Greatbow_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_Greatbow_Knockback_Base", "LLWEAPONEX_Greatbow_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_Greatbow_PiercingShot_Base", "LLWEAPONEX_Greatbow_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_Greatbow_PiercingShot_Base", "LLWEAPONEX_Greatbow_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_HandCrossbow_Assassinate", "LLWEAPONEX_HandCrossbow_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_HandCrossbow_Assassinate", "LLWEAPONEX_HandCrossbow_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_ThrowWeapon", "LLWEAPONEX_AnyWeaponEquipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Projectile_LLWEAPONEX_ThrowWeapon", "LLWEAPONEX_ThrowingAbility_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Rush_LLWEAPONEX_Katana_Iaido", "LLWEAPONEX_Katana_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Rush_LLWEAPONEX_Katana_Iaido", "LLWEAPONEX_Katana_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_HandCrossbow_Reload", "LLWEAPONEX_HandCrossbow_CanReload", 1);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_Katana_VanquishersPath", "LLWEAPONEX_Blademaster_Target_Available", 1);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_Katana_VanquishersPath", "LLWEAPONEX_Katana_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_Katana_VanquishersPath", "LLWEAPONEX_Katana_Mastery2", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_LegSweep", "LLWEAPONEX_Quarterstaff_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_LegSweep", "LLWEAPONEX_Quarterstaff_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_Rapier_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_Rapier_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_Runeblade_RunicReverb", "LLWEAPONEX_Runeblade_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_Runeblade_RunicReverb", "LLWEAPONEX_Runeblade_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Shout_LLWEAPONEX_SpellScroll_PrepareMagic", "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ElementalBullets", "LLWEAPONEX_Firearm_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ElementalBullets", "LLWEAPONEX_Firearm_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_Greatbow_FutureBarrage", "LLWEAPONEX_Greatbow_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_Greatbow_FutureBarrage", "LLWEAPONEX_Greatbow_Mastery2", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_HelmSplitter", "LLWEAPONEX_Katana_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_IronMaiden", "LLWEAPONEX_DualShields_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_IronMaiden", "LLWEAPONEX_DualShields_Mastery3", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ShieldCover", "LLWEAPONEX_DualShields_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ShieldCover", "LLWEAPONEX_DualShields_Mastery1", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ShieldPrison", "LLWEAPONEX_DualShields_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ShieldPrison", "LLWEAPONEX_DualShields_Mastery2", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ThrowObject", "LLWEAPONEX_ThrowingAbility_Mastery2", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Zone_LLWEAPONEX_ArmCannon_Disperse", "LLWEAPONEX_ArmCannon_FullyCharged", 1);
+DB_LLWEAPONEX_Skills_TagRequirements("Zone_LLWEAPONEX_Blunderbuss_Cannonball", "LLWEAPONEX_Firearm_Equipped", 0);
+DB_LLWEAPONEX_Skills_TagRequirements("Zone_LLWEAPONEX_Blunderbuss_Cannonball", "LLWEAPONEX_Firearm_Mastery1", 0);
+
+IF
+ObjectWasTagged((CHARACTERGUID)_Char, _Tag)
+AND
+LeaderLib_Helper_QRY_CharacterIsPlayer(_Char)
+AND
+DB_LLWEAPONEX_Skills_TagRequirements(_Skill, _Tag, _RefreshOnLost)
+AND
+CharacterHasSkill(_Char, _Skill, 1)
+THEN
+DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag);
+LeaderLib_Timers_StartObjectTimer(_Char, 100, "Timers_LLWEAPONEX_Extender_RefreshTagSkills", "LLWEAPONEX_Extender_RefreshTagSkills");
+
+IF
+ObjectLostTag((CHARACTERGUID)_Char, _Tag)
+AND
+LeaderLib_Helper_QRY_CharacterIsPlayer(_Char)
+AND
+DB_LLWEAPONEX_Skills_TagRequirements(_Skill, _Tag, 1)
+AND
+CharacterHasSkill(_Char, _Skill, 1)
+THEN
+DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag);
+LeaderLib_Timers_StartObjectTimer(_Char, 100, "Timers_LLWEAPONEX_Extender_RefreshTagSkills", "LLWEAPONEX_Extender_RefreshTagSkills");
+
+/* [OSITOOLS_ONLY]
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Extender_RefreshTagSkills")
+AND
+String(_Char, _CharStr)
+AND
+DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag)
+AND
+CharacterHasSkill(_Char, _Skill, 1)
+THEN
+NOT DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag);
+NRD_LuaCall("LeaderLib_RefreshSkill", _CharStr, _Skill);
+*/
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Extender_RefreshTagSkills")
+AND
+DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag)
+THEN
+NOT DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag);
+
+EXITSECTION
+SysClear("DB_LLWEAPONEX_Skills_TagRequirements", 3);
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

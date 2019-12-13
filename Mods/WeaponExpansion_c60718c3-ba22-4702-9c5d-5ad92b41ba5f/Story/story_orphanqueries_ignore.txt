@@ -235,3 +235,4 @@ DB_LLWEAPONEX_WeaponMastery_MasteryVariables 5
 DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage 2
 DB_LLWEAPONEX_WeaponMastery_Progression	4
 DB_Illusionist 2
+DB_LLWEAPONEX_Extender_Temp_RefreshSkill 3

@@ -146,7 +146,7 @@ AND
 DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, _Tag);
-LeaderLib_Helper_RefreshUI(_Char, 1);
+//LeaderLib_Helper_RefreshUI(_Char, 1);
 //END_REGION
 
 //REGION PRESET_APPLIED

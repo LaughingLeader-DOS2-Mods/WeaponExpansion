@@ -528,10 +528,15 @@ LLWEAPONEX_WeaponMastery_Debug_CheatMastery()
 AND
 DB_IsPlayer(_Player)
 THEN
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Player);
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Player, 0);
 
 PROC
 LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player)
+THEN
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Player, 0);
+
+PROC
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player, (INTEGER)_ShowText)
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 THEN
@@ -539,6 +544,12 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:Debug:CheatMastery] Maxing 
 LLWEAPONEX_WeaponMastery_InitMasteryVariables(_Player, _WeaponType, 4, 1);
 LLWEAPONEX_WeaponMastery_SetProgressionFlags(_Player, _WeaponType, 0, 4);
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _WeaponType, 4);
+
+PROC
+LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player, 1)
+AND
+DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
+THEN
 LLWEAPONEX_WeaponMastery_ShowLevelUpText(_Player, _WeaponType, 4, 0);
 
 IF
