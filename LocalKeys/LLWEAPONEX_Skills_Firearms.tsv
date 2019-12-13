@@ -22,11 +22,11 @@ Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Poison_Description	Fire your blun
 Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Water_DisplayName	<font color='#4197E2'>Attuned Shot (Water)</font>
 Projectile_LLWEAPONEX_Blunderbuss_Shoot_Bullet_Water_Description	Fire your blunderbuss at a target for [1].<br><font color='#4197E2'>Douses surfaces.</font>
 Projectile_LLWEAPONEX_Blunderbuss_Scattershot_DisplayName	<font color='#11D77A'>Scattershot</font>
-Projectile_LLWEAPONEX_Blunderbuss_Scattershot_Description	Fire a spread of 3 bullets at a target, dealing [1] per bullet.<br><font color='#44DD22">If all 3 bullets hit the same target, knock them back 4m and deal an additional [2].</font>
+Projectile_LLWEAPONEX_Blunderbuss_Scattershot_Description	Fire a spread of 3 bullets at a target, dealing [1] per bullet.<br><font color='#44DD22'>If all 3 bullets hit the same target, knock them back 4m and deal an additional [2].</font>
 Projectile_LLWEAPONEX_Rifle_AimedShot_DisplayName	<font color='#11D77A'>Aimed Shot</font>
 Projectile_LLWEAPONEX_Rifle_AimedShot_Description	Take a focused shot on a target within [1], dealing an average of [2] (10m), depending on distance to the target (20m max).<br><font color='#33FF11'>If the target is <font color='#DD3300'>Marked</font>, deal a critical hit.</font><br><font color='#FFBB22'>Aimed Shot provides an immense accuracy boost to ensure it always hits.</font>
 Target_LLWEAPONEX_Pistol_A_Shoot_DisplayName	<font color='#CCFF22'>Shoot Pistol</font>
-Target_LLWEAPONEX_Pistol_A_Shoot_Description	Shoot your equipped pistol in a straight line at a target, dealing [1]([2]).<br><font color='#FF9922">Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.</font><br><font color='#77BB22">When firing from a different height than your target, the bullet will travel at an angle.</font><br><font color='#FFBB22">Damage scales with your equipped weapon. If no weapon is equipped, the second damage value is used.</font>
+Target_LLWEAPONEX_Pistol_A_Shoot_Description	Shoot your equipped pistol in a straight line at a target, dealing [1]([2]).<br><font color='#FF9922'>Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.</font><br><font color='#77BB22'>When firing from a different height than your target, the bullet will travel at an angle.</font><br><font color='#FFBB22'>Damage scales with your equipped weapon. If no weapon is equipped, the second damage value is used.</font>
 Projectile_LLWEAPONEX_Firearm_Multishot_DisplayName	Barrage
 Projectile_LLWEAPONEX_Firearm_Multishot_Description	Fire three bullets at three targets of your choice, each dealing [1].
 Projectile_LLWEAPONEX_Firearm_SkyShot_DisplayName	Sky Shot
