@@ -90,7 +90,7 @@ data "CastSelfAnimation" "skill_cast_ground_fire_01_cast"
 data "CastTextEvent" "cast"
 data "PrepareEffect" "LLWEAPONEX_FX_Skills_ArmCannon_AbsorbSurface_Prepare_Hand_01:Dummy_R_Hand"
 data "CastEffect" "LLWEAPONEX_FX_Skills_ArmCannon_AbsorbSurface_Cast_Hand_01:Dummy_R_Hand:cast"
-data "TargetGroundEffect" "LLWEAPONEX_FX_Skills_ArmCannon_AbsorbSurface_Cast_Target_01:cast"
+data "TargetGroundEffect" "LLWEAPONEX_FX_Skills_ArmCannon_AbsorbSurface_Cast_Target_01:root:cast"
 data "PreviewEffect" "LLWEAPONEX_FX_Skills_ArmCannon_AbsorbSurface_Preview_01"
 data "OverrideMinAP" "Yes"
 
