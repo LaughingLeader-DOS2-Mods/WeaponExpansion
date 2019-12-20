@@ -160,6 +160,61 @@ DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:LLWEAPONEX_DualShields_RaritySet] [",_Stat,"] Generating combat shield with rarity [",_Rarity,"] from treasure table [",_TreasureTable,"].");
 GenerateTreasure(_Shield, _TreasureTable, _Level, NULL_00000000-0000-0000-0000-000000000000);
 
+PROC
+LLWEAPONEX_DualShields_CombatShield_StartCloning((ITEMGUID)_Shield, (ITEMGUID)_CombatShield)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_DualShields_CombatShield_OnCloned((ITEMGUID)_Shield, (CHARACTERGUID)_Owner, (STRING)_Rarity, (INTEGER)_Level)
+THEN
+DB_NOOP(1);
+
+/* [OSITOOLS_ONLY]
+IF
+ItemAddedToContainer(_CombatShield, _Shield)
+AND
+DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield);
+LLWEAPONEX_DualShields_CombatShield_StartCloning(_Shield, _CombatShield);
+
+PROC
+LLWEAPONEX_DualShields_CombatShield_StartCloning((ITEMGUID)_Shield, (ITEMGUID)_CombatShield)
+AND
+GetVarFixedString(_Shield, "LeaderLib_Rarity", _Rarity)
+AND
+GetVarInteger(_Shield, "LeaderLib_Level", _Level)
+AND
+ItemGetOwner(_Shield, _Owner)
+THEN
+NRD_ItemCloneBegin(_CombatShield);
+NRD_ItemCloneSetString("ItemType", _Rarity);
+NRD_ItemCloneSetString("GenerationItemType", _Rarity);
+NRD_ItemCloneSetInt("GenerationLevel", _Level);
+LLWEAPONEX_DualShields_CombatShield_OnCloned(_Shield, _Owner, _Rarity, _Level);
+ItemRemove(_CombatShield);
+
+PROC
+LLWEAPONEX_DualShields_CombatShield_OnCloned((ITEMGUID)_Shield, (CHARACTERGUID)_Owner, (STRING)_Rarity, (INTEGER)_Level)
+AND
+NRD_ItemClone((ITEMGUID)_CombatShield)
+THEN
+ItemToInventory(_CombatShield, _Shield);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:ItemAddedToContainer] Combat shield generated.");
+ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0);
+SetTag(_CombatShield, "LLWEAPONEX_Debug_StorableCombatShield");
+SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
+SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
+SetVarFixedString(_CombatShield, "LeaderLib_Rarity", _Rarity);
+SetVarInteger(_CombatShield, "LeaderLib_Level", _Level);
+ItemSetOwner(_CombatShield, _Owner);
+LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.CombatShields");
+//ItemSetOnlyOwnerCanUse(_CombatShield, 1);
+LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
+*/
+
+// [BEGIN_NO_OSITOOLS]
 IF
 ItemAddedToContainer(_CombatShield, _Shield)
 AND
@@ -183,6 +238,7 @@ ItemSetOwner(_CombatShield, _Owner);
 LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.CombatShields");
 //ItemSetOnlyOwnerCanUse(_CombatShield, 1);
 LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
+// [END_NO_OSITOOLS]
 
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
