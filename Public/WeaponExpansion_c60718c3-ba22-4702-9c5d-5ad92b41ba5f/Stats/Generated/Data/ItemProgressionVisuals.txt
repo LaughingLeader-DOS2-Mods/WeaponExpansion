@@ -918,6 +918,10 @@ add levelgroup 0,0,"Divine"
 add rootgroup "6650aab3-c5e3-45a8-ae4e-b4e8011cb1a6",""
 add namegroup "WPN_LLWEAPONEX_Katana_1H_Epic","Cool",""
 
+add levelgroup 0,0,"Unique"
+add rootgroup "6650aab3-c5e3-45a8-ae4e-b4e8011cb1a6",""
+add namegroup "WPN_LLWEAPONEX_Katana_1H_Epic","Cool",""
+
 new itemgroup "WPN_LLWEAPONEX_Katana_1H_Crafted"
 
 add levelgroup 0,0,"All"

@@ -1164,3 +1164,7 @@ object category "T_ST_QuestReward_Easy_Choice_Extra",1,0,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_Crystal_Node_A"
 new subtable "1,1"
 object category "I_LOOT_LLWEAPONEX_Crystal_Shard_Small_A",1,0,0,1,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_Debug_RarityTest"
+new subtable "-1"
+object category "I_ARM_Ring",1,0,1,0,0,0,0,0
