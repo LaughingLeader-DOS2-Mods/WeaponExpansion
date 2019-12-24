@@ -305,6 +305,8 @@ ApplyStatus(_Target, "LLWEAPONEX_HANDCROSSBOW_SHOOT_DAMAGE_WEAPON_WATER", 0.0, 1
 PROC
 LLWEAPONEX_HandCrossbow_TryInsertBolt((CHARACTERGUID)_Char, (ITEMGUID)_Bolt, (STRING)_Template, 0)
 AND
+LeaderLib_Helper_QRY_CharacterIsPlayer(_Char)
+AND
 LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:TryInsertBolt] Trying to insert bolt (",_Template,")")
 AND
 IsTagged(_Char, "LLWEAPONEX_HandCrossbow_Enabled", 1)
@@ -332,6 +334,8 @@ CharacterStatusText(_Char, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted"
 PROC
 LLWEAPONEX_HandCrossbow_TryInsertBolt((CHARACTERGUID)_Char, (ITEMGUID)_Bolt, (STRING)_Template, 1)
 AND
+LeaderLib_Helper_QRY_CharacterIsPlayer(_Char)
+AND
 LLWEAPONEX_HandCrossbow_QRY_GetHandcrossbow(_Char)
 AND
 DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Char, _HandCrossbow)
@@ -348,6 +352,8 @@ CharacterStatusText(_Char, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted"
 
 PROC
 LLWEAPONEX_HandCrossbow_TryInsertBolt((CHARACTERGUID)_Char, (ITEMGUID)_Bolt, (STRING)_Template, 1)
+AND
+LeaderLib_Helper_QRY_CharacterIsPlayer(_Char)
 AND
 NOT DB_LLWEAPONEX_Handcrossbow_Temp_Equipped(_Char, _)
 THEN
