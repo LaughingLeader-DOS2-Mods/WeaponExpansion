@@ -614,6 +614,11 @@ data "MaxAmount" "1"
 data "Priority" "1"
 data "MinLevel" "1"
 
+new entry "_ARM_LLWEAPONEX_Pistol_A_NPC"
+type "Armor"
+using "_LLWEAPONEX_Pistols"
+data "ItemGroup" "ARM_LLWEAPONEX_Pistol_A"
+
 new entry "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A"
 type "Armor"
 using "_LLWEAPONEX_Pistols"
