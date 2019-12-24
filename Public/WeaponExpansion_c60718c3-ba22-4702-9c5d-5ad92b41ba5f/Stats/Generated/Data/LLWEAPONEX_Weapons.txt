@@ -632,13 +632,6 @@ data "ExtraProperties" ""
 data "ObjectCategory" ""
 data "Boosts" ""
 
-new entry "_WPN_LLWEAPONEX_Npc_Katanas_1H_ForcedOffhand"
-type "Weapon"
-using "_WPN_LLWEAPONEX_Katana_1H_NPC"
-data "Act" "1"
-data "Act part" "0"
-data "Slot" "Shield"
-
 new entry "_LLWEAPONEX_Wakizashi_1H"
 type "Weapon"
 using "_Daggers"

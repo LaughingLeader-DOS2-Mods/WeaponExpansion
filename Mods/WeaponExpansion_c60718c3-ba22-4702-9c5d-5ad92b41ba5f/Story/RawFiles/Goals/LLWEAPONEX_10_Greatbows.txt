@@ -171,6 +171,7 @@ THEN
 //LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Greatbows:StartPlayingPreparationEffect] No ID found for template [",_Template,"]. Using default.");
 LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, "Default");
 
+//Players only. CharacterGetRace doesn't work with NPCs.
 PROC
 LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character, (STRING)_ID)
 AND
@@ -197,8 +198,6 @@ AND
 NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 AND
 IsTagged(_Character, "FEMALE", _IsFemale)
-AND
-NOT CharacterGetRace(_Character, 1, _)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND

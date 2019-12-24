@@ -19,7 +19,7 @@ CharacterGameMaster(_Char, _d)
 AND
 IntegerSum(_c, _d, _Final)
 AND
-IntegerMin(_Final, 1, _IsPlayer)
+IntegerMin(_Final, 1, _IsPlayer) // If any of the above is greater or equal to 1, this is a player
 AND
 DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
 AND
