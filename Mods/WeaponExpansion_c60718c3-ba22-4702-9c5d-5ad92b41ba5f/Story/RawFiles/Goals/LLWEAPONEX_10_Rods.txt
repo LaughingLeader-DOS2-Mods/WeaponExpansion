@@ -157,7 +157,19 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:CanUseItem] Listening for rod skill.");
 DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Item);
 ProcObjectTimerCancel(_Character, "LLWEAPONEX_Timers_RodListeningTimedOut");
 ProcObjectTimer(_Character, "LLWEAPONEX_Timers_RodListeningTimedOut", 500);
+//END_REGION
 
+//REGION STATUS_ATTEMPTS
+/*
+"LLWEAPONEX_ROD_AIR"
+"LLWEAPONEX_ROD_CHAOS"
+"LLWEAPONEX_ROD_EARTH"
+"LLWEAPONEX_ROD_FIRE"
+"LLWEAPONEX_ROD_POISON"
+"LLWEAPONEX_ROD_WATER"
+"LLWEAPONEX_ROD_MAGIC_MISSILE"
+*/
+/*
 IF
 CharacterStatusAttempt(_Character, _TypeStatus, _)
 AND
@@ -167,14 +179,47 @@ AND
 NOT DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods:CharacterStatusAttempt(",_TypeStatus,")] No rods waiting for a status.");
+*/
 
 IF
-CharacterStatusAttempt(_Character, _TypeStatus, _)
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ROD_AIR", _)
+THEN
+LLWEAPONEX_Rods_OnStatusAttempt(_Character, "LLWEAPONEX_ROD_AIR");
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ROD_CHAOS", _)
+THEN
+LLWEAPONEX_Rods_OnStatusAttempt(_Character, "LLWEAPONEX_ROD_CHAOS");
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ROD_EARTH", _)
+THEN
+LLWEAPONEX_Rods_OnStatusAttempt(_Character, "LLWEAPONEX_ROD_EARTH");
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ROD_FIRE", _)
+THEN
+LLWEAPONEX_Rods_OnStatusAttempt(_Character, "LLWEAPONEX_ROD_FIRE");
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ROD_POISON", _)
+THEN
+LLWEAPONEX_Rods_OnStatusAttempt(_Character, "LLWEAPONEX_ROD_POISON");
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ROD_WATER", _)
+THEN
+LLWEAPONEX_Rods_OnStatusAttempt(_Character, "LLWEAPONEX_ROD_WATER");
+
+IF
+CharacterStatusAttempt(_Character, "LLWEAPONEX_ROD_MAGIC_MISSILE", _)
+THEN
+LLWEAPONEX_Rods_OnStatusAttempt(_Character, "LLWEAPONEX_ROD_MAGIC_MISSILE");
+
+PROC
+LLWEAPONEX_Rods_OnStatusAttempt((CHARACTERGUID)_Char, (STRING)_TypeStatus)
 AND
-//DB_LLWEAPONEX_Rods_SkillStatuses(_TypeStatus, _MainhandSkillStatus, _OffhandSkill)
 DB_LLWEAPONEX_Rods_Skills(_TypeStatus, _MainhandSkill, _OffhandSkill)
-AND
-LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX:Rods:CharacterStatusAttempt] Status attempt (",_TypeStatus,").")
 AND
 DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Character, _Item)
 AND
