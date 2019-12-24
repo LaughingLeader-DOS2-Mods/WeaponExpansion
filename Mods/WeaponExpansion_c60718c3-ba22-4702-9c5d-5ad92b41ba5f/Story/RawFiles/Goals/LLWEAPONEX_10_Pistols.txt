@@ -38,13 +38,23 @@ DB_NOOP(1);
 
 IF
 CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+THEN
+LeaderLib_Skills_CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+
+IF
+CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+THEN
+LeaderLib_Skills_CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+
+PROC
+LeaderLib_Skills_CharacterUsedSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 AND
 LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 350, "Timers_LLWEAPONEX_Pistols_PlayPistolFX", "LLWEAPONEX_Pistols_PlayPistolFX");
 
-IF
-CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+PROC
+LeaderLib_Skills_CharacterUsedSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 AND
 NOT LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
 THEN
@@ -63,6 +73,16 @@ ApplyStatus(_Char, _Status, 12.0, 1, _Char);
 
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+THEN
+LeaderLib_Skills_CharacterCastSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+THEN
+LeaderLib_Skills_CharacterCastSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+
+PROC
+LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 AND
 //NOT LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
 //AND
@@ -105,8 +125,8 @@ LeaderLib_Helper_QRY_IsRace(_Char, _Race)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, _HideHandPistolDelay, "Timers_LLWEAPONEX_Pistols_RemovePistolFX", "LLWEAPONEX_Pistols_RemovePistolFX");
 
-IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+PROC
+LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 AND
 IsTagged(_Char, "FEMALE", _IsFemale)
 AND
@@ -142,7 +162,19 @@ THEN
 SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
 
 IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+THEN
+SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+
+IF
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+AND
+GetPosition(_Target, _x, _y, _z)
+THEN
+SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+
+PROC
+LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 THEN
 SetStoryEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile");
 //END_REGION
