@@ -72,7 +72,7 @@ local function GetHandedness(weapon)
         return nil
     end
     local stat = NRD_ItemGetStatsId(weapon)
-    local handedness = NRD_StatGetAttributeString(stat, "IsTwoHanded")
+    local handedness = NRD_StatGetString(stat, "IsTwoHanded")
     if handedness == "Yes" then
         DebugBreak("[LL-OsiExtender] Item is two-handed.")
         return true
@@ -131,13 +131,13 @@ local function TagItemType(player)
             local itemtype = NRD_StatGetType(stat)
             if itemtype ~= nil then
                 if itemtype == "Weapon" then
-                    local weapon_type = NRD_StatGetAttributeString(stat, "WeaponType")
+                    local weapon_type = NRD_StatGetString(stat, "WeaponType")
                     if weapon_type ~= nil then
                         if weapon_type ~= "None" then
                             local tag = "LLWEAPONEX_" .. weapon_type
                             SetTag(item, tag)
                         else
-                            local anim_type = NRD_StatGetAttributeString(stat, "AnimType")
+                            local anim_type = NRD_StatGetString(stat, "AnimType")
                             if anim_type ~= nil then
                                 local type_from_anim = anim_to_type[anim_type]
                                 if type_from_anim ~= nil then
