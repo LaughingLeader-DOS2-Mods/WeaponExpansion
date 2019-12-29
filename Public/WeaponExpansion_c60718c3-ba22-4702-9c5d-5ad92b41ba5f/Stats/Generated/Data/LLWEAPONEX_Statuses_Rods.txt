@@ -1,6 +1,6 @@
 new entry "_LLWEAPONEX_ROD_SKILL_BASE"
 type "StatusData"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "DisplayName" "_LLWEAPONEX_ROD_SKILL_BASE_DisplayName"
 data "DisplayNameRef" "Rod Skill - On command, rods can launch projectiles like wands"
 
@@ -42,27 +42,27 @@ data "DisplayNameRef" "45%/30%/10% Chance for Bonus Missiles"
 
 new entry "LLWEAPONEX_ROD_SKILL_AIR"
 type "StatusData"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "Skills" "Projectile_LLWEAPONEX_ShootRod_Air"
 
 new entry "LLWEAPONEX_ROD_SKILL_CHAOS"
 type "StatusData"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "Skills" "Projectile_LLWEAPONEX_ShootRod_Chaos"
 
 new entry "LLWEAPONEX_ROD_SKILL_FIRE"
 type "StatusData"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "Skills" "Projectile_LLWEAPONEX_ShootRod_Fire"
 
 new entry "LLWEAPONEX_ROD_SKILL_POISON"
 type "StatusData"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "Skills" "Projectile_LLWEAPONEX_ShootRod_Poison"
 
 new entry "LLWEAPONEX_ROD_SKILL_WATER"
 type "StatusData"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "Skills" "Projectile_LLWEAPONEX_ShootRod_Water"
 
 new entry "LLWEAPONEX_ROD_SKILL_AIR_OFFHAND"

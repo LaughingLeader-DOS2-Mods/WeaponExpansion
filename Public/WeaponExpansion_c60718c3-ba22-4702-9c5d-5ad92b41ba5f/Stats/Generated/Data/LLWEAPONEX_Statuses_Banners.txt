@@ -2,7 +2,7 @@
 new entry "LLWEAPONEX_WARCHARGE_APPLY"
 type "StatusData"
 data "StatusType" "CONSUME"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "DisplayName" "LLWEAPONEX_WARCHARGE_APPLY_DisplayName"
 data "DisplayNameRef" "War Charge"
 
@@ -116,7 +116,7 @@ data "Icon" "LLWEAPONEX_Status_Rally_Dwarves"
 new entry "LLWEAPONEX_BANNER_RALLY_ITEM_LIFETIME"
 type "StatusData"
 data "StatusType" "CONSUME"
-using "LLWEAPONEX_HIDDEN_CONSUME_BASE"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 
 new entry "LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS"
 type "StatusData"
