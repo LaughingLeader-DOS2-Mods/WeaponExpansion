@@ -122,20 +122,6 @@ DB_LLWEAPONEX_Statuses_Runes("LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER");
 
 //REGION CHAOS_RUNE_SURFACE_ABSORB
 QRY
-LLWEAPONEX_Runeblades_QRY_IsInSurface((CHARACTERGUID)_Character, (STRING)_Surface)
-AND
-GetSurfaceGroundAt(_Character, _Surface)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Runeblades_QRY_IsInSurface((CHARACTERGUID)_Character, (STRING)_Surface)
-AND
-GetSurfaceCloudAt(_Character, _Surface)
-THEN
-DB_NOOP(1);
-
-QRY
 LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval((CHARACTERGUID)_Character, (STRING)_Surface)
 AND
 StringContains(_Surface, "Blessed", 1)
@@ -164,7 +150,7 @@ DB_LeaderLib_Surfaces(_Index, _Surface)
 AND
 ObjectGetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 0)
 AND
-LLWEAPONEX_Runeblades_QRY_IsInSurface(_Character, _Surface)
+LeaderLib_Helper_QRY_IsInSurface(_Character, _Surface)
 AND
 LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval(_Surface)
 THEN
