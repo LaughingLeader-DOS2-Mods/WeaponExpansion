@@ -1,0 +1,30 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_System_InitSettings();
+KBSECTION
+PROC
+LLWEAPONEX_System_InitSettings()
+THEN
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFire", "Ground", "Standard");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFireBlessed", "Ground", "Blessed");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFireCursed", "Ground", "Cursed");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFirePurified", "Ground", "Purified");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFireCloud", "Standard", "Cloud");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFireCloudBlessed", "Cloud", "Blessed");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFireCloudCursed", "Cloud", "Cursed");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFireCloudPurified", "Cloud", "Purified");
+DB_LLWEAPONEX_Surfaces("Fire", "SurfaceLava", "Ground", "Special");
+
+QRY
+LeaderLib_Helper_QRY_IsInSurfaceGroup((GUIDSTRING)_Obj, (STRING)_Group)
+AND
+DB_LLWEAPONEX_Surfaces("Fire", _Surface, _, _)
+AND
+LeaderLib_Helper_QRY_IsInSurface(_Obj, _Surface)
+THEN
+DB_NOOP(1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
