@@ -30,6 +30,12 @@ object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Fire",9,1,0,0,0,0,0,0
 object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Poison",9,1,0,0,0,0,0,0
 object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Water",9,1,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_FirearmsNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_GreatbowsNormal"
 new subtable "1,1"
 object category "LLWEAPONEX_Greatbows",1,1,0,0,0,0,0,0
