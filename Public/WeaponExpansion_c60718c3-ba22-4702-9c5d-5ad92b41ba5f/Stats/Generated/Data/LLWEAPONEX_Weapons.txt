@@ -2145,6 +2145,7 @@ data "Flags" "Unbreakable"
 data "Unique" "1"
 data "Boosts" "_LLWEAPONEX_Boost_WeaponMastery_OnHit"
 data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_FLAMETHROWER_EQUIPPED;Ignite"
+data "Skills" "Shout_LLWEAPONEX_Flamethrower_PyroDance"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
 type "Weapon"

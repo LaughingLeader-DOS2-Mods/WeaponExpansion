@@ -89,3 +89,7 @@ LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls
 LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_DisplayName	Bada Bing
 LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_Description	Character's next attack with their oversized scroll will unleash a random spell and grant bonus damage.
 LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_ELEMENT_Description	Character's oversized scroll has been infused with a spell school, and has gained bonus damage.
+LLWEAPONEX_FLAMETHROWER_PYRODANCE_DisplayName	Pyromaniac's Dance
+LLWEAPONEX_FLAMETHROWER_PYRODANCE_Description	Character gains bonuses from Burning things.<br><font color='#DD9911'>Character moves faster on fire surfaces.</font><br><font color='#3399FF'>Removed by Wet, Chilled, or Frozen.</font>
+LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED_DisplayName	Hot Feet (Pyromaniac's Dance)
+LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED_Description	Character gained a speed boost from standing on fire.<br><font color='#FF4411'>Removed when no longer standing on fire.</font>
