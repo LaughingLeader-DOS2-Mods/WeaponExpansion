@@ -24,7 +24,7 @@ RemoveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_FLAMETHROWER_HIT", (CHARACTERGUID)_Char)
 AND
-LeaderLib_Helper_QRY_HasAnyStatus(_Target, "BURNING", "NECROFIRE")
+LeaderLib_Helper_QRY_HasAnyStatus((GUIDSTRING)_Target, "BURNING", "NECROFIRE")
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", 1)
 THEN
@@ -33,7 +33,7 @@ ApplyStatus(_Target, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_EXPLODE", 0.0, 0, _Char)
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_FLAMETHROWER_HIT", (CHARACTERGUID)_Char)
 AND
-LeaderLib_Helper_QRY_HasAnyStatus(_Target, "BURNING", "NECROFIRE")
+LeaderLib_Helper_QRY_HasAnyStatus((GUIDSTRING)_Target, "BURNING", "NECROFIRE")
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", 1)
 THEN
