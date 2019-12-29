@@ -22,6 +22,20 @@ INIT
 	USING LLWEAPONEX_Skills
 EVENTS
 
+EVENT LLWEAPONEX_Debug_ItemIterator
+ON
+	OnItemEvent(_, "LLWEAPONEX_Debug_StartItemIterator")
+ACTIONS
+	IterateItems("LLWEAPONEX_Iterator_Debug_CheckItem")
+	
+EVENT LLWEAPONEX_Debug_ItemIterator_OnInit
+VARS
+	ITEM:_Item
+ON
+	OnIterateItem(_Item, "LLWEAPONEX_Iterator_Debug_CheckItem")
+ACTIONS
+	ItemEvent(_Item, "LLWEAPONEX_Debug_Iterator_CheckTemplate")
+
 EVENT LLWEAPONEX_Debug_SurfaceTest
 VARS
 	CHARACTER:_Char

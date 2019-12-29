@@ -1805,6 +1805,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[",
 IF
 RegionEnded("TestLevel_LL_WeaponExpansion")
 THEN
+NRD_LuaCall("LLWEAPONEX_Ext_CleanupWeapons");
 GoalCompleted;
 
 IF
@@ -2154,13 +2155,29 @@ CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Item)
 THEN
 ItemLevelUpTo(_Item, _Level);
 
+/* [OSITOOLS_ONLY]
 IF
 StoryEvent(_, "LeaderLib_Initialized")
 THEN
-DB_NOOP(1);
-/* [OSITOOLS_ONLY]
-NRD_LuaReset(1);
-NRD_LuaCall("LLWEAPONEX_Debug_Init");
+//ItemLaunchIterator("LLWEAPONEX_Debug_Iterator_CheckTemplate");
+LeaderLib_SendEvent("LLWEAPONEX_Debug_StartItemIterator");
+TimerLaunch("Timers_LLWEAPONEX_Debug_InitLevelItems", 250);
+
+IF
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_Debug_Iterator_CheckTemplate")
+AND
+NOT ItemIsInInventory(_Item, 1)
+AND
+ObjectIsGlobal(_Item, 0)
+AND
+String(_Item, _ItemStr)
+THEN
+NRD_LuaCall("LLWEAPONEX_Ext_Debug_CleanLevelItem", _ItemStr);
+
+IF
+TimerFinished("Timers_LLWEAPONEX_Debug_InitLevelItems")
+THEN
+NRD_LuaCall("LLWEAPONEX_Ext_Debug_Init");
 */
 EXITSECTION
 
