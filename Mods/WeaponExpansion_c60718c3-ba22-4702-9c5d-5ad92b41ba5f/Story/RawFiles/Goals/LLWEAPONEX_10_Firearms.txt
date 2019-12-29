@@ -255,6 +255,20 @@ AND
 String(_Target, _TargetStr)
 THEN
 NRD_LuaCall("LLWEAPONEX_Ext_PlayBulletImpact", _TargetStr);
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_BULLET_HIT", _)
+AND
+String(_Target, _TargetStr)
+THEN
+NRD_LuaCall("LLWEAPONEX_Ext_PlayBulletImpact", _TargetStr);
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", _)
+AND
+String(_Target, _TargetStr)
+THEN
+NRD_LuaCall("LLWEAPONEX_Ext_PlayBulletImpact", _TargetStr);
 */
 //END_REGION
 

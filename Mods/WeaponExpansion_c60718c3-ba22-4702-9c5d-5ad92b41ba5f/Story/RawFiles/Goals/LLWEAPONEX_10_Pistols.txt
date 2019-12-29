@@ -193,6 +193,20 @@ AND
 NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+AND
+LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", 0.0, 1, _Cause);
+
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+AND
+NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
 //END_REGION
 EXITSECTION
 
