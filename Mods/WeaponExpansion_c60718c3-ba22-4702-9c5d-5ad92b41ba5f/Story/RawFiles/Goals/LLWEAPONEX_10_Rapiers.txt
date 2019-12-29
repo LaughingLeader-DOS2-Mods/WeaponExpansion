@@ -157,7 +157,9 @@ IsTagged(_Source, "LLWEAPONEX_Rapier_SuckerComboEnabled", _AddTurns)
 AND
 IntegerSum(_CurrentTurns, _AddTurns, _Turns)
 AND
-Real(_Turns, _Duration)
+IntegerProduct(_Turns, 6, _DurationInt)
+AND
+Real(_DurationInt, _Duration)
 THEN
 ApplyStatus(_Target, "KNOCKED_DOWN", _Duration, 0, _Source);
 RemoveStatus(_Target, "LLWEAPONEX_SUCKER_PUNCH");
