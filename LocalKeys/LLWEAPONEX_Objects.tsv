@@ -122,9 +122,9 @@ THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Oil	<font color='#C7A758'>Kevin the Pet Rock</f
 THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Nails	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#FF2244'>Nails</font>)
 GRN_LLWEAPONEX_BloodBall	Congealed Blood Ball
 GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask
-GRN_LLWEAPONEX_Flask_Weakness_Air	<font color='#7478DC'>Flask of Air Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Chaos	<font color='#D040D0'>Flask of Chaotic Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Earth	<font color='#AA895B'>Flask of Earth Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Fire	<font color='#C76537'>Flask of Fire Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Poison	<font color='#00AA00'>Flask of Poison Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Water	<font color='#188EDE'>Flask of Water Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Air_A	<font color='#7478DC'>Flask of Air Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Chaos_A	<font color='#D040D0'>Flask of Chaotic Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Earth_A	<font color='#AA895B'>Flask of Earth Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Fire_A	<font color='#C76537'>Flask of Fire Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Poison_A	<font color='#00AA00'>Flask of Poison Weakness</font>
+GRN_LLWEAPONEX_Flask_Weakness_Water_A	<font color='#188EDE'>Flask of Water Weakness</font>
