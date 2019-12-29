@@ -1288,6 +1288,43 @@ THEN
 NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
 //END_REGION
 
+//REGION FLAMETHROWER_PYRO_DANCE
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion", 500);
+NOT DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
+LeaderLib_Statuses_RemoveIfActive(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE");
+LeaderLib_Statuses_RemoveIfActive(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion");
+DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_PyroDanceIsActive", "WeaponExpansion");
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_PyroDanceIsActive", "WeaponExpansion");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
+AND
+LeaderLib_Helper_QRY_IsInSurfaceGroup(_Char, "Fire")
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED", 12.0, 0, _Char);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

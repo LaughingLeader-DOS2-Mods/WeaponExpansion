@@ -2,6 +2,6 @@
     "FeatureFlags": [
         "OsirisExtensions",
         "Lua",
-        "PreprocessStory"
+        "Preprocessor"
     ]
 }

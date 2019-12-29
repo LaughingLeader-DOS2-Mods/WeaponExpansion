@@ -76,6 +76,7 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_00_ExtenderSkillRefres
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_Flamethrower", "LLWEAPONEX_FlamethrowerEquipped", 1);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_11_Blunderbuss", "LLWEAPONEX_BlunderbussEquipped", 1);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_BattleBook_SpellScroll", "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_PyroDance", "LLWEAPONEX_PyroDanceIsActive", 0);
 //END_REGION
 
 //REGION UPDATE_ACTIVATE_SCRIPT
