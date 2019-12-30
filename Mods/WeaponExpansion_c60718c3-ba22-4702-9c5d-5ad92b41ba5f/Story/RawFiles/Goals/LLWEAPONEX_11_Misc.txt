@@ -3,8 +3,37 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-
-
+/*
+IF
+ItemStatusChange(_Item, _Status, _Source)
+AND
+NRD_StatGetString(_Status, "LeaveAction", _Projectile)
+AND
+_Projectile != ""
+AND
+NRD_StatGetInt(_Projectile, "ExplodeRadius", _Radius)
+AND
+_Radius > 0
+AND
+GetPosition(_Item, _x, _y, _z)
+AND
+GetPosition(_Source, _sx, _sy, _sz)
+THEN
+//CreateExplosion(_Item, "Projectile_Fireball", 1);
+//CreateExplosion(_Item, _Projectile, 1);
+DisplayText(_Item, _Projectile);
+NRD_ProjectilePrepareLaunch();
+//NRD_ProjectileSetString("SkillId", _Projectile);
+NRD_ProjectileSetString("SkillId", "Projectile_Fireball");
+NRD_ProjectileSetInt("CasterLevel", 1);
+//NRD_ProjectileSetGuidString("SourcePosition", _Item);
+//NRD_ProjectileSetGuidString("TargetPosition", _Item);
+NRD_ProjectileSetVector3("SourcePosition", _sx, _sy, _sz);
+NRD_ProjectileSetVector3("TargetPosition", _x, _y, _z);
+NRD_ProjectileSetGuidString("Source", _Source);
+NRD_ProjectileSetGuidString("Target", _Item);
+NRD_ProjectileLaunch();
+*/
 EXITSECTION
 
 ENDEXITSECTION
