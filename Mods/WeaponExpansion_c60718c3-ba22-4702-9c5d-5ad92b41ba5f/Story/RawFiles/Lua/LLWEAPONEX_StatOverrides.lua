@@ -28,7 +28,7 @@ local anim_overrides = {
 }
 
 local function property_ignored(property)
-	if property ~= "ExtraProperties" or property ~= "SkillProperties" then
+	if property == "ExtraProperties" or property == "SkillProperties" then
 		return true
 	end
 	return false
@@ -48,6 +48,8 @@ local function apply_overrides(stats)
 end
 
 local ModuleLoad = function ()
+	Ext.Print("[WeaponExpansion:Bootstrap.lua] Module is loading.")
+
 	apply_overrides(skill_overrides)
 	apply_overrides(weapon_overrides)
 
