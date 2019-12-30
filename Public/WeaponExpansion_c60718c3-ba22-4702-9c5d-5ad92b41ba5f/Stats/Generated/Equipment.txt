@@ -454,6 +454,20 @@ add equipment entry "ARM_Shadowblade_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Rapier_1H_A_Preview"
 
+new equipment "Class_LLWEAPONEX_Fencer_Preview_HumanFemale"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Shadowblade_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_A_Preview_HumanFemale"
+
 new equipment "Class_LLWEAPONEX_Assassin_Start"
 add equipmentgroup
 add equipment entry "ARM_Purge_UpperBody"

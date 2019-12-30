@@ -1237,6 +1237,17 @@ data "ExtraProperties" ""
 data "Boosts" ""
 data "Skills" ""
 
+//Human females hold rapiers weird for some reason (handle floats above their hand)
+new entry "WPN_LLWEAPONEX_Rapier_1H_A_Preview_HumanFemale"
+type "Weapon"
+using "_LLWEAPONEX_Rapiers_1H"
+data "ItemGroup" "WPN_LLWEAPONEX_Rapier_1H_A"
+data "AnimType" "TwoHanded_Sword"
+data "ObjectCategory" ""
+data "ExtraProperties" ""
+data "Boosts" ""
+data "Skills" ""
+
 new entry "WPN_LLWEAPONEX_Rapier_1H_B_Preview"
 type "Weapon"
 using "_LLWEAPONEX_Rapiers_1H"
