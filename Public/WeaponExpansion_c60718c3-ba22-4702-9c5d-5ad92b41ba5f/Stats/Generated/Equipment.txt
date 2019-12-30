@@ -4,6 +4,8 @@ add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Quiver_A"
+add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_CraftedGreatbow"
 add equipmentgroup
 add equipment entry "POTION_Minor_Healing_Potion"
@@ -28,6 +30,8 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Quiver_A"
+add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_CraftedGreatbow"
 add equipmentgroup
 add equipment entry "CON_Potion_Poison_A"
@@ -51,6 +55,8 @@ add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_DragonSlayer_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_DragonSlayer_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Quiver_A_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_GreatbowPreview"
 
@@ -666,7 +672,7 @@ add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A"
+add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -688,7 +694,7 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A"
+add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -710,7 +716,9 @@ add equipment entry "ARM_LLWEAPONEX_Rifleman_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_Rifleman_Boots"
 add equipmentgroup
-add equipment entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Preview"
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_Preview"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Preview"
 
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
