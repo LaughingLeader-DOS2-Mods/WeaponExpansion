@@ -6,23 +6,23 @@ KBSECTION
 PROC
 LLWEAPONEX_BattleBooks_InitSettings()
 THEN
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_MagicShell", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Fortify", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Restoration", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_FavourableWind", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_BurnMyEyes", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Haste", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_MagicShell", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Fortify", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Restoration", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_FavourableWind", 1, 1);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_BurnMyEyes", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Haste", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface", 1, 3);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_ShockingTouch", 1, 4);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_MosquitoSwarm", 1, 4);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_DimensionalBolt", 1, 4);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_FlamingDaggers", 1, 4);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_PyroclasticRock", 1, 4);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_HailStrike", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Contamination", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_BlindingRadiance", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Ignition", 1, 4);
-LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TentacleLash", 1, 4);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Contamination", 1, 3);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_BlindingRadiance", 1, 2);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Ignition", 1, 3);
+LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TentacleLash", 1, 3);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_GraspOfTheStarved", 1, 2);
 LeaderLib_Randomization_Register_Entry("LLWEAPONEX_BattleBooks_SpellScroll_Spells", "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Earthquake", 1, 2);
 
