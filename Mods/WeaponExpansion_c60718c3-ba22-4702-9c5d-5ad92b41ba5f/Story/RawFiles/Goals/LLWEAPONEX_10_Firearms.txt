@@ -57,6 +57,31 @@ THEN
 LLWEAPONEX_Firearms_InitSettings();
 //END_REGION
 
+//REGION RIFLEMAN_RICOCHET_SWAP
+// The firearm versions are in the presets, so assigning this DB allows them to swap correctly when unequipping a firearm
+PROC
+LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLWEAPONEX_Rifleman")
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPlayer)
+AND
+CharacterHasSkill(_Player, _FindSkill, 1)
+THEN
+DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Player, _FindSkill, _ReplaceSkill);
+LLWEAPONEX_Firearms_SwapRangerSkill(_Player, _FindSkill, _ReplaceSkill, _IsPlayer);
+
+// If a firearm skill was selected in CC
+PROC
+LeaderLib_CC_PresetSaved((CHARACTERGUID)_Player, "LLWEAPONEX_Rifleman")
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPlayer)
+AND
+CharacterHasSkill(_Player, _ReplaceSkill, 1)
+AND
+NOT DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Player, _, _ReplaceSkill)
+THEN
+DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Player, _FindSkill, _ReplaceSkill);
+//END_REGION
+
 //REGION EQUIP_EVENTS
 IF
 ItemTemplateUnEquipped("WPN_LLWEAPONEX_Firearm_2H_Rifle_A_0e98584a-7c57-4a5c-b7d9-57ec79aee85e", _Char)
