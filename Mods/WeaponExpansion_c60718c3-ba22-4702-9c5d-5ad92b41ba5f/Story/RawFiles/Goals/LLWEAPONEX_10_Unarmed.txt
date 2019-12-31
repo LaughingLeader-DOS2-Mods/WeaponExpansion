@@ -1,0 +1,126 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_01");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_02");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_03");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(4, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_04");
+
+DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_01");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_02");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_03");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(4, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_04");
+
+DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_01");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_02");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_03");
+DB_LLWEAPONEX_Unarmed_DamageStatuses(4, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_04");
+KBSECTION
+//REGION NO_WEAPON_DAMAGE
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_UNARMED_NOWEAPON_HIT", (CHARACTERGUID)_Source)
+AND
+IsTagged(_Source, "LIZARD", _IsLizard)
+THEN
+LLWEAPONEX_Unarmed_OnNoWeaponHit(_Source, (GUIDSTRING)_Target, _IsLizard);
+
+PROC
+LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_IsLizard)
+AND
+DB_IsPlayer(_Char)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Char, "LLWEAPONEX_Unarmed", 1, _Target);
+
+PROC
+LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_IsLizard)
+AND
+DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Char, "LLWEAPONEX_Unarmed", _MasteryLevel, _Experience)
+AND
+_MasteryLevel > 0
+AND
+IntegerMin(_MasteryLevel, 4, _CappedMastery)
+AND
+CharacterGetAttribute(_Char, "Strength", _Str)
+AND
+CharacterGetAttribute(_Char, "Finesse", _Fin)
+AND
+CharacterGetAttribute(_Char, "Constitution", _Con)
+THEN
+LLWEAPONEX_Unarmed_CalculateUnarmedDamage(_Char, _Target, _CappedMastery, _Str, _Fin, _Con);
+
+PROC
+LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, 1)
+AND
+NOT LeaderLib_Helper_QRY_HasStatus((GUIDSTRING)_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Unarmed_ApplyLizardDebuff", "LLWEAPONEX_Unarmed_ApplyLizardDebuff");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Unarmed_ApplyLizardDebuff")
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF", 6.0, 0, _Char);
+
+PROC
+LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, 1)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF", 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Unarmed_RemoveLizardDebuff", "LLWEAPONEX_Unarmed_RemoveLizardDebuff");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Unarmed_RemoveLizardDebuff")
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF");
+
+PROC
+LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
+AND
+NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
+AND
+_Constitution > _Strength
+AND
+_Constitution > _Finesse
+AND
+DB_LLWEAPONEX_Unarmed_DamageStatuses(_MasteryLevel, "Constitution", _Status)
+THEN
+DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
+ApplyStatus(_Target, _Status, 0.0, 0, _Char);
+
+PROC
+LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
+AND
+NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
+AND
+_Finesse > _Strength
+AND
+_Finesse > _Constitution
+AND
+DB_LLWEAPONEX_Unarmed_DamageStatuses(_MasteryLevel, "Finesse", _Status)
+THEN
+DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
+ApplyStatus(_Target, _Status, 0.0, 0, _Char);
+
+//Default to Strength
+PROC
+LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
+AND
+NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
+AND
+DB_LLWEAPONEX_Unarmed_DamageStatuses(_MasteryLevel, "Strength", _Status)
+THEN
+DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
+ApplyStatus(_Target, _Status, 0.0, 0, _Char);
+
+PROC
+LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
+AND
+DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
+THEN
+NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
+//END_REGION
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_00_PostCC"

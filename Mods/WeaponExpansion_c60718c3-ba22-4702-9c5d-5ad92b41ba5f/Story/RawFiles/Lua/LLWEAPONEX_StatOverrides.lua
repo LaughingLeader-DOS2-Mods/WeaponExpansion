@@ -27,38 +27,51 @@ local anim_overrides = {
 	}
 }
 
-local function property_ignored(property)
-	return false
-	-- if property == "ExtraProperties" or property == "SkillProperties" then
-	-- 	return true
-	-- end
-	-- return false
+local FORBIDDEN = {
+	"ComboCategories",
+	"ExtraProperties",
+	"SkillProperties",
+	"TargetConditions",
+	"AoEConditions",
+	"CycleConditions",
+	"Requirements",
+}
+
+local function CanSetProperty(property)
+	local i = 1
+	while i < #FORBIDDEN do
+		if property == FORBIDDEN[i] then return false end
+		i = i + 1
+	end
+	return true
 end
 
 local function apply_overrides(stats)
     for statname,overrides in pairs(stats) do
 		for property,value in pairs(overrides) do
-			if property_ignored(property) then
-				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Stat property (".. property ..") is not yet supported!")
-			else
-				local next_value = value
-				if property == "ExtraProperties" or property == "SkillProperties" then
-					local propertiesOriginal = Ext.StatGetAttribute(statname, property)
-					if propertiesOriginal ~= nil and propertiesOriginal ~= "" then
-						local combined_value = tostring(propertiesOriginal..value)
-						Ext.StatSetAttribute(statname, property, combined_value)
-						next_value = combined_value
-					else
-						Ext.StatSetAttribute(statname, property, next_value)
-					end
-				else
-					Ext.StatSetAttribute(statname, property, next_value)
-				end
+			local next_value = value
+			if CanSetProperty(property) then
+				Ext.StatSetAttribute(statname, property, next_value)
 				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Overriding stat: " .. statname .. " (".. property ..") = \"".. next_value .."\"")
+			else
+				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Cannot set property: " .. statname .. " (".. property .."). IT IS FORBIDDEN.")
 			end
         end
     end
 end
+
+--[[ if property == "ExtraProperties" or property == "SkillProperties" then
+	local status, err, propertiesOriginal = xpcall(Ext.StatGetAttribute, function(err) return err; end, statname, property)
+	if propertiesOriginal ~= nil and propertiesOriginal ~= "" then
+		local combined_value = tostring(propertiesOriginal..value)
+		Ext.StatSetAttribute(statname, property, combined_value)
+		next_value = combined_value
+	else
+		Ext.StatSetAttribute(statname, property, next_value)
+	end
+else
+	Ext.StatSetAttribute(statname, property, next_value)
+end ]]
 
 local ModuleLoad = function ()
 	Ext.Print("[WeaponExpansion:Bootstrap.lua] Module is loading.")

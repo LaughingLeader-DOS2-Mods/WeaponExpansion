@@ -134,7 +134,9 @@ DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 100);
 
 //Max possible level attainable by players
 //DB_LLWEAPONEX_WeaponMastery_Softcap(2);
+//END_REGION
 
+//REGION INIT_MASTERIES
 PROC
 LLWEAPONEX_WeaponMastery_Internal_InitMasteries()
 THEN

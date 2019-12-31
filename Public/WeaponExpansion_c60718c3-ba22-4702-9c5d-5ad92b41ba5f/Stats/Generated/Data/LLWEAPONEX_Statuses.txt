@@ -34,11 +34,6 @@ data "Description" ""
 data "Icon" ""
 data "PeaceOnly" "No"
 
-new entry "LLWEAPONEX_UNARMED_HIT"
-type "StatusData"
-data "StatusType" "DAMAGE"
-using "_LLWEAPONEX_HIDDEN_DAMAGE_BASE"
-
 new entry "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE"
 type "StatusData"
 data "StatusType" "CONSUME"
