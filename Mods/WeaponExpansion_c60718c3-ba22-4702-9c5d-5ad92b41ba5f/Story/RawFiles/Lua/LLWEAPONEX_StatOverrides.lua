@@ -7,7 +7,7 @@ local skill_overrides = {
 	},
 	Target_TentacleLash = {
 		UseWeaponDamage = "Yes",
-		["Damage Multiplier"] = "90"
+		["Damage Multiplier"] = 90
 	}
 }
 
@@ -28,10 +28,11 @@ local anim_overrides = {
 }
 
 local function property_ignored(property)
-	if property == "ExtraProperties" or property == "SkillProperties" then
-		return true
-	end
 	return false
+	-- if property == "ExtraProperties" or property == "SkillProperties" then
+	-- 	return true
+	-- end
+	-- return false
 end
 
 local function apply_overrides(stats)
@@ -40,8 +41,20 @@ local function apply_overrides(stats)
 			if property_ignored(property) then
 				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Stat property (".. property ..") is not yet supported!")
 			else
-				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Overriding stat: " .. statname .. " (".. property ..") = \"".. value .."\"")
-				Ext.StatSetAttribute(statname, property, value)
+				local next_value = value
+				if property == "ExtraProperties" or property == "SkillProperties" then
+					local propertiesOriginal = Ext.StatGetAttribute(statname, property)
+					if propertiesOriginal ~= nil and propertiesOriginal ~= "" then
+						local combined_value = tostring(propertiesOriginal..value)
+						Ext.StatSetAttribute(statname, property, combined_value)
+						next_value = combined_value
+					else
+						Ext.StatSetAttribute(statname, property, next_value)
+					end
+				else
+					Ext.StatSetAttribute(statname, property, next_value)
+				end
+				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Overriding stat: " .. statname .. " (".. property ..") = \"".. next_value .."\"")
 			end
         end
     end
