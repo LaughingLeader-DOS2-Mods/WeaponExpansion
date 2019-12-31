@@ -50,6 +50,7 @@ using "_Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Explode_Base"
 data "Ability" "Water"
 data "ExplodeRadius" "3"
 data "SkillProperties" "MAGIC_SHELL,100,1"
+data "TargetConditions" "Ally;!Dead"
 //RS3_FX_Skills_Water_FrostyShell_Impact_Root_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Fortify"
@@ -59,6 +60,7 @@ using "_Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Explode_Base"
 data "Ability" "Earth"
 data "ExplodeRadius" "3"
 data "SkillProperties" "FORTIFIED,100,1"
+data "TargetConditions" "Ally;!Dead"
 //RS3_FX_Skills_Earth_TargetEffect_Fortify_Root_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Restoration"
@@ -68,6 +70,7 @@ using "_Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Explode_Base"
 data "Ability" "Water"
 data "ExplodeRadius" "3"
 data "SkillProperties" "REGENERATION,100,1"
+data "TargetConditions" "((Ally&!DamagedOnHeal)|(Enemy&DamagedOnHeal));!Dead"
 data "TargetConditions" "Item|(Character&(Ally|Tagged:LeaderLib_EnemyTargetingEnabled|DamagedOnHeal));!Dead"
 //RS3_FX_Skills_Water_Restoration_Impact_01
 
@@ -78,6 +81,7 @@ using "_Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Explode_Base"
 data "Ability" "Air"
 data "ExplodeRadius" "10"
 data "SkillProperties" "FAVOURABLE_WIND,100,1"
+data "TargetConditions" "Ally;!Dead"
 //RS3_FX_Skills_Air_Wind_Cast_Ground_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_BurnMyEyes"
@@ -87,6 +91,7 @@ using "_Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Explode_Base"
 data "Ability" "Fire"
 data "ExplodeRadius" "3"
 data "SkillProperties" "CLEAR_MINDED,100,1"
+data "TargetConditions" "Ally;!Dead"
 //RS3_FX_Skills_Divine_Burnmyeye_Impact_Root_01
 //RS3_FX_Skills_Divine_Burnmyeye_Impact_NeckFX_01
 
@@ -97,6 +102,7 @@ using "_Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Explode_Base"
 data "Ability" "Fire"
 data "ExplodeRadius" "3"
 data "SkillProperties" "HASTED,100,1"
+data "TargetConditions" "Ally;!Dead"
 //RS3_FX_Skills_Fire_Haste_Impact_Root_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TotemFromSurface"
