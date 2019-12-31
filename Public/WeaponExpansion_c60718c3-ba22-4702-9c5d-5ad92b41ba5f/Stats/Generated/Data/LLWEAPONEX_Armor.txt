@@ -173,7 +173,7 @@ data "ItemColor" "LLWEAPONEX_Rifleman"
 new entry "ARM_LLWEAPONEX_Rifleman_UpperBody"
 type "Armor"
 using "_HeavyUpperBody"
-data "ItemGroup" "ARM_Inquisitor_UpperBody"
+data "ItemGroup" "ARM_Rogue_UpperBody"
 data "Act part" "0"
 data "ItemColor" "LLWEAPONEX_Rifleman"
 

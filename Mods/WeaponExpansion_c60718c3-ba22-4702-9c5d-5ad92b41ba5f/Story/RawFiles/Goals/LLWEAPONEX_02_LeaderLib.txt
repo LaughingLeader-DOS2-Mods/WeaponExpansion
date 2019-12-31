@@ -366,14 +366,29 @@ IF
 StoryEvent(_, "LeaderLib_Initialized")
 AND
 LeaderLib_QRY_ExtenderIsActive()
+AND
+DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(1)
 THEN
 LeaderLib_Statuses_Clear_LeaveActionStatuses("WeaponExpansion_LeaveActionStatuses");
+NOT DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(1);
+
+IF
+StoryEvent(_, "LeaderLib_Initialized")
+AND
+NOT LeaderLib_QRY_ExtenderIsActive()
+AND
+NOT DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(_)
+THEN
+LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround();
 
 PROC
 LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround()
 AND
 NOT LeaderLib_QRY_ExtenderIsActive()
+AND
+NOT DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(_)
 THEN
+DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(1);
 LeaderLib_Statuses_Clear_LeaveActionStatuses("WeaponExpansion_LeaveActionStatuses");
 LeaderLib_Statuses_Register_LeaveActionStatus("WeaponExpansion_LeaveActionStatuses", "LLWEAPONEX_RUPTURE_INSTANT", "Projectile_LLWEAPONEX_Status_RuptureInstant_Damage", 0);
 LeaderLib_Statuses_Register_LeaveActionStatus("WeaponExpansion_LeaveActionStatuses", "LLWEAPONEX_CHAOS_GOBLIN_HIT", "Projectile_LLWEAPONEX_ChaosGoblin_BasicAttack", 1);

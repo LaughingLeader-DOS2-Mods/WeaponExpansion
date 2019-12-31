@@ -1044,8 +1044,6 @@ HasActiveStatus(_Caster, _Status, 1)
 AND
 LLWEAPONEX_Grimoire_QRY_TargetPriorityMatch(_Caster, _Target, _TargetType, _TargetPriority)
 AND
-LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX:Grimoire] Checking for skill match: ",_CheckSkillType," | ",_SkillType," | ",_CheckSkillElement," | ",_SkillElement)
-AND
 LLWEAPONEX_Grimoire_Internal_QRY_SkillPropertyMatch(_CheckSkillType, _SkillType, _CheckSkillElement, _SkillElement)
 THEN
 DB_LLWEAPONEX_Grimoire_Temp_MagicMatch(_Skill, _MagicType);
