@@ -73,7 +73,9 @@ IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Unarmed_RemoveLizardDebuff")
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF");
+//END_REGION
 
+//REGION CALCULATE_UNARMED
 PROC
 LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
 AND
