@@ -74,7 +74,7 @@ CharacterGetReservedUserID(_Host, _UserID)
 AND
 GetUserName(_UserID, _Name)
 AND
-StringContains(_Name, "Debug", 1)
+StringContains(_Name, "LLDebug", 1)
 THEN
 LLWEAPONEX_Debug_SetupDebugProfile(_Host);
 
