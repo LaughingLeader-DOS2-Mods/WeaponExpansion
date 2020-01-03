@@ -82,7 +82,7 @@
 				<node id="AttributeChanges">
 					<children>
 						<node id="AttributeChange">
-							<attribute id="AmountIncreased" value="4" type="4" />
+							<attribute id="AmountIncreased" value="3" type="4" />
 							<attribute id="Attribute" value="WIT" type="23" />
 						</node>
 					</children>
