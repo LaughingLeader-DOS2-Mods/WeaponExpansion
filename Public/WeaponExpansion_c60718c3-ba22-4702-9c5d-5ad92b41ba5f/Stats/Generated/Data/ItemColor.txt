@@ -1,4 +1,4 @@
-new itemcolor "LLWEAPONEX_Blademaster","877067","9c1616","c0c0c0"
+new itemcolor "LLWEAPONEX_Blademaster","2f2825","5a0808","b34747"
 new itemcolor "LLWEAPONEX_DragonSlayer","2e2e2e","1a0b0b","bababa"
 new itemcolor "LLWEAPONEX_Halberdier","85c370","3d4550","84ac80"
 new itemcolor "LLWEAPONEX_Rifleman","43322f","2b2727","394236"
