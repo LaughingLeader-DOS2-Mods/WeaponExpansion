@@ -352,7 +352,7 @@ add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_2H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_Katana_2H_A_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -374,7 +374,7 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_2H_Crafted"
+add equipment entry "WPN_LLWEAPONEX_Katana_2H_A_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -396,7 +396,7 @@ add equipment entry "ARM_LLWEAPONEX_Blademaster_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_Blademaster_Boots"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Katana_2H_Preview"
+add equipment entry "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Preview"
 
 new equipment "Class_LLWEAPONEX_Fencer_Start"
 add equipmentgroup
