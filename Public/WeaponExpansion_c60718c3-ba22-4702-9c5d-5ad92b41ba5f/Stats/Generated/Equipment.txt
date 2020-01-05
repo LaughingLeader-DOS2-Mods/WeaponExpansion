@@ -680,6 +680,10 @@ add equipment entry "ARM_LLWEAPONEX_Halberdier_Boots"
 add equipmentgroup
 add equipment entry "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Preview"
 
+new equipment "Class_LLWEAPONEX_Halberdier_NPC"
+add equipmentgroup
+add equipment entry "_WPN_LLWEAPONEX_Halberd_2H_A_NPC"
+
 new equipment "Class_LLWEAPONEX_Rifleman_Start"
 add equipmentgroup
 add equipment entry "ARM_Purge_UpperBody"
