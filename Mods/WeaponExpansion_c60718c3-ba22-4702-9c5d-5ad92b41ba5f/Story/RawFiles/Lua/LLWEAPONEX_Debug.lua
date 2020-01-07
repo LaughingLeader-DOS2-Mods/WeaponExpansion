@@ -73,13 +73,13 @@ end
 
 local function Debug_CleanLevelItem(item)
     local template = GetTemplate(item)
-    Ext.Print("[LLWEAPONEX:Bootstrap.lua] Checking item ("..item..")["..template.."] for cleaning.")
+    --Ext.Print("[LLWEAPONEX_Debug.lua] Checking item ("..item..")["..template.."] for cleaning.")
     local i = 1
     local count = #debug_templates
     while i < count do
         local t = debug_templates[i]
         if t == template then
-            Ext.Print("[LLWEAPONEX:Bootstrap.lua] Removing item ("..item..").")
+            --Ext.Print("[LLWEAPONEX_Debug.lua] Removing item ("..item..").")
             ItemRemove(item)
             break
         end
