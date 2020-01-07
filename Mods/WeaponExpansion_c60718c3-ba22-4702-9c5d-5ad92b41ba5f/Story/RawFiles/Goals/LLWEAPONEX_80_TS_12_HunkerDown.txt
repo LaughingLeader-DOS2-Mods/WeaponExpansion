@@ -1,0 +1,23 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+NRD_OnHit((CHARACTERGUID)_Target, (GUIDSTRING)_Attacker, _Damage, _Handle)
+AND
+HasActiveStatus(_Target, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
+AND
+NRD_StatusGetInt(_Target, _Handle, "Dodged", 0)
+AND
+NRD_StatusGetInt(_Target, _Handle, "Missed", 0)
+AND
+NRD_StatusGetInt(_Target, _Handle, "Blocked", 0)
+AND
+NRD_StatusGetInt(_Target, _Handle, "CriticalHit", 1)
+THEN
+NRD_LuaCall("LLWEAPONEX_Ext_ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.75");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

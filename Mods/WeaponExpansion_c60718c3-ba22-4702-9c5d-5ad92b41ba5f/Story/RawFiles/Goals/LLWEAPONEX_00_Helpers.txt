@@ -432,6 +432,62 @@ ObjectGetFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 1)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 250, "LLWEAPONEX_Timers_ClearBasicAttackFlag", "LLWEAPONEX_ClearBasicAttackFlag");
 //END_REGION
+
+//REGION HIT_TYPE_FILTERING
+QRY
+LLWEAPONEX_Helper_IntMatch((INTEGER)_HitType, (INTEGER)_Match1, (INTEGER)_Match2)
+AND
+_HitType == _Match1
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Helper_IntMatch((INTEGER)_HitType, (INTEGER)_Match1, (INTEGER)_Match2)
+AND
+_HitType == _Match2
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Helper_IntMatch((INTEGER)_HitType, (INTEGER)_Match1, (INTEGER)_Match2, (INTEGER)_Match3)
+AND
+LLWEAPONEX_Helper_IntMatch(_HitType, _Match1, _Match2)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Helper_IntMatch((INTEGER)_HitType, (INTEGER)_Match1, (INTEGER)_Match2, (INTEGER)_Match3)
+AND
+_HitType == _Match3
+THEN
+DB_NOOP(1);
+//END_REGION
+
+//REGION NRD_HELPERS
+/* [OSITOOLS_ONLY]
+QRY
+LLWEAPONEX_NRD_ClearAllDamage((INTEGER64)_Handle)
+THEN
+NRD_HitClearAllDamage(_Handle);
+
+QRY
+LLWEAPONEX_NRD_StoreHandle((CHARACTERGUID)_Target, (CHARACTERGUID)_Attacker, (INTEGER64)_Handle)
+THEN
+DB_LLWEAPONEX_Temp_HitHandle(_Target, _Attacker, _Handle);
+*/
+
+// [BEGIN_NO_OSITOOLS]
+QRY
+LLWEAPONEX_NRD_ClearAllDamage((INTEGER64)_Handle)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_NRD_StoreHandle((CHARACTERGUID)_Target, (CHARACTERGUID)_Attacker, (INTEGER64)_Handle)
+THEN
+DB_NOOP(1);
+// [END_NO_OSITOOLS]
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
