@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+/* [OSITOOLS_ONLY]
 IF
 NRD_OnHit((CHARACTERGUID)_Target, (GUIDSTRING)_Attacker, _Damage, _Handle)
 AND
@@ -19,6 +20,23 @@ THEN
 NRD_LuaCall("LeaderLib_Ext_ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.50");
 
 IF
+NRD_OnActionStateEnter(_Char, "PrepareSkill")
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
+CharacterSetAnimationOverride(_Char, "");
+*/
+
+IF
+CharacterStatusRemoved(_Char, "UNSHEATHED", _)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
+CharacterSetAnimationOverride(_Char, "");
+
+IF
 ObjectTurnStarted(_Char)
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
@@ -30,7 +48,7 @@ ObjectTurnEnded((CHARACTERGUID)_Char)
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
 THEN
-PlayAnimation(_Char, "skill_prepare_weapon_01_start", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimOverride");
+LeaderLib_Timers_StartObjectTimer(_Char, 500, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
 EXITSECTION
 
 ENDEXITSECTION
