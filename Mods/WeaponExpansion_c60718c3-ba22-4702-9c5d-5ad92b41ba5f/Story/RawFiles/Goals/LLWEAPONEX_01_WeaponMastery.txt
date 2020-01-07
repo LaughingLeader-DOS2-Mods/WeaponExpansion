@@ -873,7 +873,7 @@ ObjectSetFlag(_Player, _EnabledFlag, 0);
 ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
 LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_MasteryActive");
 LeaderLib_Tags_PreserveTag(_Player, _EnabledFlag);
-ApplyStatus(_Player, "LLWEAPONEX_REFRESH_UI", 0.0); // Refresh skill requirements
+LeaderLib_Helper_RefreshUI(_Player, 1);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] is now active. Set tag [",_EnabledFlag,"].");
 
