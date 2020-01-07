@@ -38,11 +38,16 @@ DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_001_c93c704c-41cf-4d
 DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_001_270b72cd-90e5-480e-9677-69040d566818, "INVISIBLE", 20000);
 DB_LLWEAPONEX_Debug_PreserveStatus(Lizards_Hero_Male_Undead_002_52da4999-c2e9-42aa-9c07-209a456e3289, "INVISIBLE", 20000);
 //LLWEAPONEX_UniqueManager_Register_Owner(S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", "TestLevel_LL_WeaponExpansion");
-GlobalSetFlag("LeaderLog_Trace_Enabled");
+//GlobalSetFlag("LeaderLog_Trace_Enabled");
 LLWEAPONEX_Nodes_Register_EnemySpawner("TestLevel_LL_WeaponExpansion", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69", S_LLWEAPONEX_Humans_Male_Skeleton_Harvester_A_666f5fd9-945d-4f3a-819e-cabb9510be23, 40.144, 0.0, 7.836);
 
 GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns");
 SysActivateGoal("LeaderLib_20_DebugLevel");
+GlobalClearFlag("LeaderLog_DebugStatus_Enabled");
+GlobalClearFlag("LeaderLog_DebugEvents_Enabled");
+GlobalClearFlag("LeaderLog_DebugDialog_Enabled");
+GlobalClearFlag("LeaderLog_Trace_Enabled");
+GlobalSetFlag("LeaderLog_Debug_Enabled");
 
 DB_LLWEAPONEX_Debug_StatusClear("POISONED");
 DB_LLWEAPONEX_Debug_StatusClear("BURNING");
@@ -82,7 +87,7 @@ AND
 HasActiveStatus(_Char, _Status, 1)
 THEN 
 LeaderLib_Array_AddToArray(_ArrayName, _Status);
-LeaderLog_Log("DEBUG", "LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC] (",_ArrayName,") Status: [",_Status,"] added to array [",_ArrayName,"].");
+LeaderLog_Log("DEBUG_EVENTS", "LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC] (",_ArrayName,") Status: [",_Status,"] added to array [",_ArrayName,"].");
 
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
@@ -110,7 +115,7 @@ AND
 DB_LeaderLib_Array_Length(_ArrayName, _Length)
 THEN
 NOT DB_LeaderLib_Random(_Index);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC](",_ArrayName,") No random result matches an index. DB_LeaderLib_Random(", _IndexStr, ")");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC](",_ArrayName,") No random result matches an index. DB_LeaderLib_Random(", _IndexStr, ")");
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC] --- Array length: (",_Length,")");
 LeaderLib_Array_Debug_Print(_ArrayName);
 
@@ -122,7 +127,7 @@ AND
 DB_LeaderLib_Array_Temp_RandomResult(_ArrayName, _Index, _Status)
 THEN
 NOT DB_LeaderLib_Array_Temp_RandomResult(_ArrayName, _Index, _Status);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC](",_ArrayName,") Random result: ", _Status, "");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:LLWEAPONEX_DEBUG_TESTMISC](",_ArrayName,") Random result: ", _Status, "");
 
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_DEBUG_TESTMISC", _)
@@ -186,7 +191,7 @@ StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
 AND
 GetVarString(_Host, "LLWEAPONEX_Debug_VarTest.Str", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_VarTest.Str] == [",_Str,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_VarTest.Str] == [",_Str,"]");
 CharacterStatusText(_Host, _Str);
 
 IF
@@ -203,7 +208,7 @@ StoryEvent((CHARACTERGUID)_Host, "LLWEAPONEX_Debug_VarTest_Check")
 AND
 GetVarFixedString(_Host, "CharacterCreationStarted.Class", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [CharacterCreationStarted.Class] == [",_Str,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [CharacterCreationStarted.Class] == [",_Str,"]");
 CharacterStatusText(_Host, _Str);
 
 IF
@@ -244,7 +249,7 @@ String(_Char, _CharStr)
 AND
 GetPosition(_Char, _x, _y, _z)
 THEN
-//LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] Overwriting [Combat_AI_CastSkill_Skill] var on [",_CharStr,"].");
+//LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] Overwriting [Combat_AI_CastSkill_Skill] var on [",_CharStr,"].");
 
 SetVarFixedString(_Char, "Combat_AI_CastSkill.Skill", "Target_LLWEAPONEX_Debug_SingleHandedAttack");
 SetVarFloat3(_Char, "Combat_AI_CastSkill.TargetPos1", _x, _y, _z);
@@ -265,7 +270,7 @@ GetVarFixedString(_Char, "Combat_AI_CastSkill.Skill", _Skill)
 AND
 String(_Char, _CharStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [Combat_AI_CastSkill.Skill] == [",_Skill,"] on [",_CharStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [Combat_AI_CastSkill.Skill] == [",_Skill,"] on [",_CharStr,"].");
 
 IF
 TimerFinished("LLWEAPONEX_Debug_CombatTimer")
@@ -286,7 +291,7 @@ GetVarFixedString(_Char, "LLWEAPONEX_Debug_FetchStatus", _Status)
 AND
 String(_Char, _CharStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] [",_Status,"] on [",_CharStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] [",_Status,"] on [",_CharStr,"].");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
@@ -295,7 +300,7 @@ NOT GetVarFixedString(_Char, "LLWEAPONEX_Debug_FetchStatus", _)
 AND
 String(_Char, _CharStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] Could not get STATUS var on [",_CharStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] Could not get STATUS var on [",_CharStr,"].");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
@@ -304,7 +309,7 @@ GetVarFixedString(NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Debug_F
 AND
 String(_Char, _CharStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] [",_Status,"] from gameScript.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] [",_Status,"] from gameScript.");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Debug_OnFetchCharacterApplyStatusData")
@@ -313,7 +318,7 @@ NOT GetVarFixedString(NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Deb
 AND
 String(_Char, _CharStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] Could not get STATUS var from gameScript.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest:OnFetchCharacterApplyStatusData] Could not get STATUS var from gameScript.");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Debug_TraceDamage")
@@ -350,7 +355,7 @@ DB_LLWEAPONEX_Debug_ListVars("DebugMessages", _ListEntryVar)
 AND
 GetVarFixedString(_Char, _ListEntryVar, _Str)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [",_ListEntryVar,"] == ",_Str,"");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [",_ListEntryVar,"] == ",_Str,"");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Debug_TraceList")
@@ -364,14 +369,14 @@ StoryEvent(_Char, "LLWEAPONEX_Debug_TraceDamage")
 AND
 GetVarString(_Char, "LLWEAPONEX_Debug_LastDamageType", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_LastDamageType] == [",_Str,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_LastDamageType] == [",_Str,"]");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Debug_TraceDamage")
 AND
 GetVarString(_Char, "LLWEAPONEX_Debug_Damage.DamageType", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage.DamageType] == [",_Str,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage.DamageType] == [",_Str,"]");
 SetVarInteger(_Char, "LLWEAPONEX_Debug_TraceDamage_Done", 1);
 */
 
@@ -381,7 +386,7 @@ StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
 AND
 GetVarString(_Char, "LLWEAPONEX_Debug_Damage._Damage", _Str)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_TraceDamage")
@@ -390,7 +395,7 @@ GetVarObject(_Char, "LLWEAPONEX_Debug_Damage._Damage", _Damage)
 AND
 String(_Damage, _Str)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [LLWEAPONEX_Debug_Damage._Damage] == [",_Str,"]");
 */
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_VarTest_Check")
@@ -410,7 +415,7 @@ GetVarObject(_Char, "Combat_AI_Attack.TargetCharacter", _Obj)
 AND
 String(_Obj, _Target)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponEx:VarTest] [Combat_AI_Attack.TargetCharacter] == [",_Target,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponEx:VarTest] [Combat_AI_Attack.TargetCharacter] == [",_Target,"]");
 DisplayText(_Obj, "AI Target!");
 */
 
@@ -531,7 +536,7 @@ NewHour((INTEGER)_Hour)
 AND
 IntegertoString(_Hour, _HourStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:NewHour] The hour is now [",_HourStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:NewHour] The hour is now [",_HourStr,"].");
 
 PROC
 NewHour((INTEGER)_Hour)
@@ -554,7 +559,7 @@ THEN
 DB_LLWEAPONEX_Debug_TimeChanged(1);
 //LeaderLib_SendEvent("LLWEAPONEX_Debug_SetAtmosphereToNight");
 TriggerSetAtmosphere(TRIGGERGUID_S_LLWEAPONEX_Debug_DayNightAtmoTrigger_85e62279-a4fd-4573-a287-062f46c96fe1, _Atmosphere);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:NewHour] Transitioning atmosphere to [",_TimeOfDay,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:NewHour] Transitioning atmosphere to [",_TimeOfDay,"].");
 SysClear("DB_LLWEAPONEX_Debug_TimeOfDay", 1);
 DB_LLWEAPONEX_Debug_TimeOfDay(_TimeOfDay);
 
@@ -573,14 +578,14 @@ String(_Target, _TargetName)
 AND
 String(_Player, _PlayerName)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DialogStartRequested] Dialog requesting start between [",_TargetName,"] and [",_PlayerName,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:DialogStartRequested] Dialog requesting start between [",_TargetName,"] and [",_PlayerName,"]");
 
 IF
 DialogStarted(_Dialog, _InstanceID)
 AND
 IntegertoString(_InstanceID, _InstanceIDStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DialogStarted] Dialog [",_Dialog,"] started. Instance [",_InstanceIDStr,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:DialogStarted] Dialog [",_Dialog,"] started. Instance [",_InstanceIDStr,"]");
 
 IF
 DualDialogRequested(_Dialog, _InstanceID, _TargetInstanceID)
@@ -591,14 +596,14 @@ IntegertoString(_InstanceID, _InstanceIDStr)
 AND
 IntegertoString(_TargetInstanceID, _TargetInstanceIDStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DualDialogRequested] Dual dialog [",_Dialog,"] of parent [",_ParentDialog,"] requested. Instance [",_InstanceIDStr,"] and TargetInstance [",_TargetInstanceIDStr,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:DualDialogRequested] Dual dialog [",_Dialog,"] of parent [",_ParentDialog,"] requested. Instance [",_InstanceIDStr,"] and TargetInstance [",_TargetInstanceIDStr,"]");
 
 IF
 DualDialogStart(_Dialog, _InstanceID)
 AND
 IntegertoString(_InstanceID, _InstanceIDStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:DualDialogStart] Dual dialog [",_Dialog,"] started. Instance [",_InstanceIDStr,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:DualDialogStart] Dual dialog [",_Dialog,"] started. Instance [",_InstanceIDStr,"]");
 
 IF
 ChildDialogRequested(_Dialog, _InstanceID, _TargetInstanceID)
@@ -609,7 +614,7 @@ IntegertoString(_InstanceID, _InstanceIDStr)
 AND
 IntegertoString(_TargetInstanceID, _TargetInstanceIDStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:ChildDialogRequested] Child dialog [",_Dialog,"] of parent [",_ParentDialog,"] requested. Instance [",_InstanceIDStr,"] and TargetInstance [",_TargetInstanceIDStr,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:ChildDialogRequested] Child dialog [",_Dialog,"] of parent [",_ParentDialog,"] requested. Instance [",_InstanceIDStr,"] and TargetInstance [",_TargetInstanceIDStr,"]");
 
 IF
 TextEventSet("llweap_runepreview")
@@ -919,7 +924,7 @@ TextEventSet("llweap_recipes")
 AND
 CharacterGetHostCharacter(_Char)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:llweap_recipes] Adding all WeaponEx recipes to host.");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:llweap_recipes] Adding all WeaponEx recipes to host.");
 CharacterUnlockRecipe(_Char, "GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Air_A", 1);
 CharacterUnlockRecipe(_Char, "GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Chaos_A", 1);
 CharacterUnlockRecipe(_Char, "GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Earth_A", 1);
@@ -1177,7 +1182,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItem] [",_Name,"] used item [",_ItemStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterUsedItem] [",_Name,"] used item [",_ItemStr,"].");
 
 IF
 CharacterUsedItemTemplate(_Character, _Template, _Item)
@@ -1187,7 +1192,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItemTemplate] [",_Name,"] used item [",_ItemStr,"][",_Template,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterUsedItemTemplate] [",_Name,"] used item [",_ItemStr,"][",_Template,"].");
 
 IF
 CharacterUsedItemFailed(_Character, _Item)
@@ -1197,7 +1202,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterUsedItemFailed] [",_Name,"] used item failed [",_ItemStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterUsedItemFailed] [",_Name,"] used item failed [",_ItemStr,"].");
 
 IF
 CanUseItem(_Character, _Item, _)
@@ -1207,7 +1212,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CanUseItem] [",_Name,"] is about to use item [",_ItemStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CanUseItem] [",_Name,"] is about to use item [",_ItemStr,"].");
 
 IF
 ItemRemovedFromCharacter(_Item, _Character)
@@ -1217,7 +1222,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemRemovedFromCharacter] [",_Name,"] lost item [",_ItemStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:ItemRemovedFromCharacter] [",_Name,"] lost item [",_ItemStr,"].");
 
 IF
 CharacterStoppedUsingItem(_Character, _Item)
@@ -1227,28 +1232,28 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStoppedUsingItem] [",_Name,"] stopping using item [",_ItemStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterStoppedUsingItem] [",_Name,"] stopping using item [",_ItemStr,"].");
 
 IF
 ItemDestroying(_Item)
 AND
 String(_Item, _ItemStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemDestroying] Item [",_ItemStr,"] was destroyed.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:ItemDestroying] Item [",_ItemStr,"] was destroyed.");
 
 IF
 ItemDestroyed(_Item)
 AND
 String(_Item, _ItemStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemDestroyed] Item [",_ItemStr,"] was destroyed.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:ItemDestroyed] Item [",_ItemStr,"] was destroyed.");
 
 IF
 ItemTemplateDestroyed(_Template, _Item)
 AND
 String(_Item, _ItemStr)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemTemplateDestroyed] Item [",_ItemStr,"][",_Template,"] was destroyed.");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:ItemTemplateDestroyed] Item [",_ItemStr,"][",_Template,"] was destroyed.");
 //END_REGION
 
 //REGION ATTACK_TRACKING
@@ -1261,7 +1266,7 @@ CharacterGetDisplayName(_Attacker, _, _Name)
 AND
 CharacterGetDisplayName(_Owner, _, _OwnerName)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStartAttackObject] [",_Name,"](",_OwnerName,") is attacking [",_TargetStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterStartAttackObject] [",_Name,"](",_OwnerName,") is attacking [",_TargetStr,"].");
 SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
 
 IF
@@ -1273,7 +1278,7 @@ CharacterGetDisplayName(_Attacker, _, _Name)
 AND
 CharacterGetDisplayName(_Owner, _, _OwnerName)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterMissedBy] [",_Name,"](",_OwnerName,") missed [",_TargetStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterMissedBy] [",_Name,"](",_OwnerName,") missed [",_TargetStr,"].");
 
 IF
 CharacterCriticalHitBy(_Target, _Owner, _Attacker)
@@ -1284,7 +1289,7 @@ CharacterGetDisplayName(_Attacker, _, _Name)
 AND
 CharacterGetDisplayName(_Owner, _, _OwnerName)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterCriticalHitBy] [",_Name,"](",_OwnerName,") missed [",_TargetStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterCriticalHitBy] [",_Name,"](",_OwnerName,") missed [",_TargetStr,"].");
 
 IF
 AttackedByObject(_Target, _Owner, _Attacker, _DamageType, _DamageSource)
@@ -1295,7 +1300,7 @@ String(_Attacker, _Name)
 AND
 String(_Owner, _OwnerName)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
 SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
 
 IF
@@ -1305,7 +1310,7 @@ String(_Target, _TargetStr)
 AND
 String(_Attacker, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](No Owner) attacked [",_TargetStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](No Owner) attacked [",_TargetStr,"].");
 
 IF
 CharacterReceivedDamage(_Target, _Percentage, _Attacker)
@@ -1322,32 +1327,11 @@ StringConcatenate(_Str1, _Str2, _Str3)
 AND
 StringConcatenate(_Str3, "].", _Suffix)
 THEN
-LeaderLog_LogInt("DEBUG", "[WeaponExpansion:Debug:CharacterReceivedDamage] [",_Percentage, _Suffix);
+LeaderLog_LogInt("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterReceivedDamage] [",_Percentage, _Suffix);
 SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
 //END_REGION
 
 //REGION STATUSES
-
-IF
-CharacterStatusAttempt(_Character, _Status, _Causee)
-AND
-String(_Causee, _Cause)
-AND
-//CharacterGetDisplayName(_Character, _, _Name)
-String(_Character, _Name)
-THEN
-LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
-
-IF
-CharacterStatusApplied(_Character, _Status, _Causee)
-AND
-String(_Causee, _Cause)
-AND
-//CharacterGetDisplayName(_Character, _, _Name)
-String(_Character, _Name)
-THEN
-LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
-
 IF
 CharacterStatusApplied(_Character, "EXPLODE", _Causee)
 AND
@@ -1455,7 +1439,7 @@ AND
 ////CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
 
 IF
 CharacterStatusApplied(_Character, _Status, _Causee)
@@ -1468,7 +1452,7 @@ AND
 ////CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusApplied] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
 
 IF
 CharacterStatusRemoved(_Character, _Status, _)
@@ -1476,7 +1460,7 @@ AND
 ////CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:CharacterStatusRemoved] Status [",_Status,"] removed from [",_Name,"].");
 
 IF
 ItemStatusAttempt(_Item, _Status, (CHARACTERGUID)_Causee)
@@ -1487,7 +1471,7 @@ CharacterGetDisplayName(_Causee, _, _Cause)
 AND
 GetTemplate(_Item, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:ItemStatusAttempt] Status [",_Status,"] attempt on [",_Name,"] via [",_Cause,"].");
 
 IF
 ItemStatusChange(_Item, _Status, (CHARACTERGUID)_Causee)
@@ -1498,14 +1482,14 @@ CharacterGetDisplayName(_Causee, _, _Cause)
 AND
 GetTemplate(_Item, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusChange] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:ItemStatusChange] Status [",_Status,"] applied on [",_Name,"] via [",_Cause,"].");
 
 IF
 ItemStatusRemoved(_Item, _Status, _)
 AND
 GetTemplate(_Item, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:ItemStatusRemoved] Status [",_Status,"] removed from [",_Name,"].");
+LeaderLog_Log("DEBUG_STATUS", "[WeaponExpansion:Debug:ItemStatusRemoved] Status [",_Status,"] removed from [",_Name,"].");
 
 IF
 CharacterTeleported(_Character, _, _x, _y, _z, _tx, _ty, _tz, _Skill)
@@ -1513,7 +1497,7 @@ AND
 //CharacterGetDisplayName(_Character, _, _Name)
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:CharacterTeleported] Character [",_Name,"] teleported via [",_Skill,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterTeleported] Character [",_Name,"] teleported via [",_Skill,"].");
 //END_REGION
 
 //REGION SKILL_DEBUG
@@ -1528,7 +1512,7 @@ AND
 DB_LeaderLog_Temp_CombinedString(_LogDetails)
 THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkill] ", _LogDetails);
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:CharacterUsedSkill] ", _LogDetails);
 
 IF
 CharacterUsedSkillOnTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
@@ -1542,7 +1526,7 @@ AND
 DB_LeaderLog_Temp_CombinedString(_LogDetails)
 THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillOnTarget] ", _LogDetails);
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:CharacterUsedSkillOnTarget] ", _LogDetails);
 
 IF
 CharacterUsedSkillAtPosition(_Caster, _XReal, _YReal, _ZReal, _Skill, _SkillType, _SkillElement)
@@ -1593,7 +1577,7 @@ DB_LeaderLog_Temp_CombinedString(_TargetPosition)
 AND
 LeaderLog_QRY_ClearCombinedString(_TargetPosition)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillAtPosition] ", _SkillPrefix, _CasterPosition, _TargetPosition);
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:CharacterUsedSkillAtPosition] ", _SkillPrefix, _CasterPosition, _TargetPosition);
 
 IF
 CharacterUsedSkillOnZoneWithTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
@@ -1613,7 +1597,7 @@ AND
 DB_LeaderLog_Temp_CombinedString(_LogDetails)
 THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillOnZoneWithTarget] [",_Name,"](",_CasterID,")",_LogDetails);
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:CharacterUsedSkillOnZoneWithTarget] [",_Name,"](",_CasterID,")",_LogDetails);
 
 IF
 CharacterUsedSkillOnZoneWithTarget(_Caster, _Target, _Skill, _SkillType, _SkillElement)
@@ -1631,7 +1615,7 @@ AND
 DB_LeaderLog_Temp_CombinedString(_LogDetails)
 THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:CharacterUsedSkillOnZoneWithTarget] [",_Name,"](",_CasterID,")",_LogDetails);
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:CharacterUsedSkillOnZoneWithTarget] [",_Name,"](",_CasterID,")",_LogDetails);
 
 IF
 SkillCast(_Caster, _Skill, _SkillType, _SkillElement)
@@ -1643,7 +1627,7 @@ AND
 DB_LeaderLog_Temp_CombinedString(_LogDetails)
 THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:SkillCast] ", _LogDetails);
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:SkillCast] ", _LogDetails);
 
 //REGION DEBUG_FIND_COMBAT_SHIELD
 IF
@@ -1703,7 +1687,7 @@ GetSurfaceGroundAt(_Character, _Surface)
 AND
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:INSURFACE] [",_Name,"] entered ground surface [",_Surface,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:INSURFACE] [",_Name,"] entered ground surface [",_Surface,"].");
 
 IF
 CharacterStatusApplied(_Character, "INSURFACE", _)
@@ -1712,7 +1696,7 @@ GetSurfaceCloudAt(_Character, _Surface)
 AND
 String(_Character, _Name)
 THEN
-LeaderLog_Log("DEBUG", "[WeaponExpansion:Debug:INSURFACE] [",_Name,"] entered cloud surface [",_Surface,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:INSURFACE] [",_Name,"] entered cloud surface [",_Surface,"].");
 //END_REGION
 
 //REGION FORCE_TRACE
@@ -1753,7 +1737,7 @@ ProcClearGeneratedItems((CHARACTERGUID)_Npc)
 AND
 String(_Npc, _Str)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:ProcClearGeneratedItems] Clearing generated items for [",_Str,"]");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:ProcClearGeneratedItems] Clearing generated items for [",_Str,"]");
 
 IF
 ItemTemplateCombinedWithItemTemplate(_,_,_,_,_,_Player, _Item)
@@ -1762,7 +1746,7 @@ String(_Item, _Str)
 AND
 GetTemplate(_Item, _Template)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:ItemTemplateCombinedWithItemTemplate] Item was combined: [",_Str,"] Template (",_Template,").");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:ItemTemplateCombinedWithItemTemplate] Item was combined: [",_Str,"] Template (",_Template,").");
 
 IF
 ItemTemplateCombinedWithItemTemplate(_,_,_,_,_,_Player, _Item)
@@ -1775,7 +1759,7 @@ IntegertoString(_Status, _GoalStatusStr)
 AND
 IntegertoString(_Enabled, _EnabledStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[LeaderLib_19_TS_GrowthEvents_Item] Status[",_GoalStatusStr,"] Flag [LeaderLib_TS_GrowthEvents_Item_Enabled] Enabled [",_EnabledStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[LeaderLib_19_TS_GrowthEvents_Item] Status[",_GoalStatusStr,"] Flag [LeaderLib_TS_GrowthEvents_Item_Enabled] Enabled [",_EnabledStr,"].");
 
 IF
 GameStarted(_,1)
@@ -1795,7 +1779,7 @@ IntegertoString(_Status, _GoalStatusStr)
 AND
 IntegertoString(_Enabled, _EnabledStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[",_Goal,"] Status[",_GoalStatusStr,"] Flag [",_Flag,"] Enabled [",_EnabledStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[",_Goal,"] Status[",_GoalStatusStr,"] Flag [",_Flag,"] Enabled [",_EnabledStr,"].");
 
 /* [OSITOOLS_ONLY]
 IF
@@ -1827,7 +1811,7 @@ ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Debug_PurgeQueue", 250);
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Debug_PurgeQueue")
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:llweap_purgetest] Purged queue");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:llweap_purgetest] Purged queue");
 CharacterPurgeQueue(_Char);
 //PlayAnimation(_Char, "noprepare");
 //PlayAnimation(_Char, "");
@@ -1851,7 +1835,7 @@ CharacterUseSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", _Char, 1,
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
 THEN
-LeaderLog_Log("DEBUG", "[CanCombineItem] ","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test",".");
+LeaderLog_Log("DEBUG_EVENTS", "[CanCombineItem] ","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test","Test",".");
 
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
@@ -1870,7 +1854,7 @@ String(_ItemE, _Str5)
 AND
 IntegertoString(_RequestID, _Str6)
 THEN
-LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining [",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining [",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
 
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
@@ -1881,7 +1865,7 @@ String(_ItemA, _Str2)
 AND
 IntegertoString(_RequestID, _Str6)
 THEN
-LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemA [",_Str2,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemA [",_Str2,"].");
 
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
@@ -1892,7 +1876,7 @@ String(_ItemB, _Str2)
 AND
 IntegertoString(_RequestID, _Str6)
 THEN
-LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemB [",_Str2,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemB [",_Str2,"].");
 
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
@@ -1903,7 +1887,7 @@ String(_ItemC, _Str2)
 AND
 IntegertoString(_RequestID, _Str6)
 THEN
-LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemC [",_Str2,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemC [",_Str2,"].");
 
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
@@ -1914,7 +1898,7 @@ String(_ItemD, _Str2)
 AND
 IntegertoString(_RequestID, _Str6)
 THEN
-LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemD [",_Str2,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemD [",_Str2,"].");
 
 IF
 CanCombineItem(_Char, _ItemA, _ItemB, _ItemC, _ItemD, _ItemE, _RequestID)
@@ -1925,7 +1909,7 @@ String(_ItemE, _Str2)
 AND
 IntegertoString(_RequestID, _Str6)
 THEN
-LeaderLog_Log("DEBUG", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemE [",_Str2,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[CanCombineItem] Request[",_Str6,"] Character [",_Str1,"] is combining _ItemE [",_Str2,"].");
 
 IF
 ItemTemplateCombinedWithItemTemplate(_Str1, _Str2, _Str3, _Str4, _Str5, _Char, _Item)
@@ -1934,7 +1918,7 @@ String(_Char, _CharStr)
 AND
 String(_Item, _ItemStr)
 THEN
-LeaderLog_Log("DEBUG", "[ItemTemplateCombinedWithItemTemplate] Character [",_CharStr,"] Result[",_ItemStr,"] Combined [",_Str1,"][",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[ItemTemplateCombinedWithItemTemplate] Character [",_CharStr,"] Result[",_ItemStr,"] Combined [",_Str1,"][",_Str2,"][",_Str3,"][",_Str4,"][",_Str5,"].");
 //END_REGION
 
 /*
@@ -2070,7 +2054,7 @@ TextEventSet("llweap_surfaceindextest")
 AND
 CharacterGetHostCharacter(_Host)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:Debug:SurfaceInt] Integer: (-1)");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:SurfaceInt] Integer: (-1)");
 SetVarInteger(_Host, "LLWEAPONEX_Debug_SurfaceInt", -1);
 SetStoryEvent(_Host, "LLWEAPONEX_Debug_SurfaceIndexTest");
 
@@ -2112,7 +2096,7 @@ CharacterGetHostCharacter(_Char)
 AND
 LLWEAPONEX_Debug_QRY_HasTwoHandedWeapon(_Char)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:TextEventSet(llweap_handedness)] Weapon is two-handed");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:TextEventSet(llweap_handedness)] Weapon is two-handed");
 
 IF
 TextEventSet("llweap_handedness")
@@ -2123,7 +2107,7 @@ NOT LLWEAPONEX_Debug_QRY_HasTwoHandedWeapon(_Char)
 AND
 LeaderLib_Helper_QRY_WeaponIsEquipped(_Char)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_99_Debug_TestLevel:TextEventSet(llweap_handedness)] Weapon is one-handed.");
+LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX_99_Debug_TestLevel:TextEventSet(llweap_handedness)] Weapon is one-handed.");
 
 IF
 TextEventSet("llweap_shoottest")
