@@ -16,7 +16,21 @@ NRD_StatusGetInt(_Target, _Handle, "Blocked", 0)
 AND
 NRD_StatusGetInt(_Target, _Handle, "CriticalHit", 1)
 THEN
-NRD_LuaCall("LLWEAPONEX_Ext_ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.75");
+NRD_LuaCall("LeaderLib_Ext_ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.75");
+
+IF
+ObjectTurnStarted(_Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN");
+
+IF
+ObjectTurnEnded((CHARACTERGUID)_Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
+THEN
+PlayAnimation(_Char, "skill_prepare_weapon_01_start", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimOverride");
 EXITSECTION
 
 ENDEXITSECTION

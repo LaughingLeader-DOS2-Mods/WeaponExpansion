@@ -489,9 +489,38 @@ THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion");
 
 IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+AND
+CharacterIsInCombat(_Char, 0)
+THEN
+CharacterSetFightMode(_Char, 1, 1);
+PlayAnimation(_Char, "skill_prepare_weapon_01_start", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimOverride");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_HunkerDown_PlayAnimOverride")
+THEN
+CharacterSetAnimationOverride(_Char, "skill_prepare_weapon_01_loop");
+ObjectSetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
+
+IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion", 500);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
+CharacterSetAnimationOverride(_Char, "");
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+AND
+CharacterIsInCombat(_Char, 0)
+THEN
+CharacterSetFightMode(_Char, 0, 0);
 //END_REGION
 
 //REGION SHIELD_COVER_WITHOUT_EXTENDER
