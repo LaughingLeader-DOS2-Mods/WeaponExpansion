@@ -12,3 +12,5 @@ LLWEAPONEX_SHIELD_PRISON_Description	Character is encased in a chained shell, an
 LLWEAPONEX_SHIELD_PRISON_BUFF_DisplayName	Shield Prison Bonus
 LLWEAPONEX_SHIELD_PRISON_BUFF_Description	Character will receive an AP and initiative bonus when released.
 LLWEAPONEX_IRONMAIDEN_HIT_DisplayName	Spikey Evisceration
+LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN_DisplayName	Hunkering Down
+LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN_Description	Character is taking a defensive position until their next turn.<br><font color='#11FF99'>Reduces critical hit damage by 25%.</font>
