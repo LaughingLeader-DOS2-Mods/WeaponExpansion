@@ -33,7 +33,6 @@ AND
 DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, _Tag);
-LeaderLib_Helper_RefreshUI(_Char);
 //END_REGION
 
 //REGION START_EVENTS
@@ -62,12 +61,14 @@ LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 
+/*
 PROC
 LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
 AND
 CharacterIsControlled(_Char, 1)
 THEN
 LeaderLib_Helper_RefreshUI(_Char);
+*/
 
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)

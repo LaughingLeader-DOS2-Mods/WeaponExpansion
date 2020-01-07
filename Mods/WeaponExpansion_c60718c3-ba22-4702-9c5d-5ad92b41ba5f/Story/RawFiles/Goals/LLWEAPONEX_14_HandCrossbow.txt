@@ -120,7 +120,6 @@ DB_LLWEAPONEX_Handcrossbow_Temp_AutoInsertedBolts(_Char, _Item);
 ItemInsertRune(_Char, _Item, _RuneTemplate, 0);
 ItemRemove(_Bolts);
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
-LeaderLib_Helper_RefreshUI(_Char);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Auto-inserted crossbow bolts into empty Handcrossbow.");
 CharacterStatusText(_Char, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted");
 
@@ -142,7 +141,6 @@ AND
 DB_LeaderLib_Helper_Runes_Templates("WeaponExpansion.HandCrossbowBolt", _RuneTemplate)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
-LeaderLib_Helper_RefreshUI(_Char);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow has ammo. ");
 
 PROC
@@ -174,7 +172,6 @@ AND
 _Charges < _MaxCharges
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
-LeaderLib_Helper_RefreshUI(_Char);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow can reload. ");
 //END_REGION
 
@@ -327,7 +324,6 @@ LeaderLib_Helper_QRY_InsertRuneInSlot(_Char, _HandCrossbow, _Template, 0)
 THEN
 ItemRemove(_Bolt);
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
-LeaderLib_Helper_RefreshUI(_Char);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:TryInsertBolt] Auto-inserted crossbow bolts into empty Handcrossbow.");
 CharacterStatusText(_Char, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted");
 
@@ -346,7 +342,6 @@ LeaderLib_Helper_QRY_InsertRuneInSlot(_Char, _HandCrossbow, _Template, 0)
 THEN
 ItemRemove(_Bolt);
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
-LeaderLib_Helper_RefreshUI(_Char);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:TryInsertBolt] Quick-inserted crossbow bolts into HandCrossbow.");
 CharacterStatusText(_Char, "LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted");
 
@@ -372,7 +367,6 @@ AND
 IsTagged(_HandCrossbow, "LLWEAPONEX_HandCrossbow", 1)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_HandCrossbow_HasAmmo");
-LeaderLib_Helper_RefreshUI(_Char);
 //END_REGION
 
 //REGION BOLT_PICKUP_AUTO_LOAD

@@ -873,7 +873,6 @@ ObjectSetFlag(_Player, _EnabledFlag, 0);
 ObjectSetFlag(_Player, "LLWEAPONEX_MasteryActive", 0);
 LeaderLib_Tags_PreserveTag(_Player, "LLWEAPONEX_MasteryActive");
 LeaderLib_Tags_PreserveTag(_Player, _EnabledFlag);
-LeaderLib_Helper_RefreshUI(_Player, 1);
 LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _WeaponType);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_WeaponType,"] is now active. Set tag [",_EnabledFlag,"].");
 
@@ -1710,7 +1709,6 @@ AND
 IsTagged(_Char, _UnlockedMasteryLevelTag, 0)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, _UnlockedMasteryLevelTag);
-LeaderLib_Helper_RefreshUI(_Char);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:OnMasteryLeveledUp] Set tag [",_UnlockedMasteryLevelTag,"] on character for mastery [",_WeaponType,"].");
 //END_REGION
 EXITSECTION
