@@ -1,0 +1,69 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+//Blocking the first hit
+/* [OSITOOLS_ONLY]
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Attacker,_, _Handle)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
+AND
+NRD_HitGetInt(_Handle, "HitType", _Val)
+AND
+_Val <=3 // Everything but Surface,DoT,Reflected
+THEN
+NRD_HitClearAllDamage(_Handle);
+DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker);
+
+IF
+NRD_OnHit((CHARACTERGUID)_Char, _, _Damage, _Handle)
+AND
+DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker);
+NRD_StatusSetInt(_Char,_Handle,"RollForDamage",0);
+NRD_StatusSetInt(_Char,_Handle,"Hit",0);
+NRD_StatusSetInt(_Char,_Handle,"Dodged",0);
+NRD_StatusSetInt(_Char,_Handle,"Missed",0);
+NRD_StatusSetInt(_Char,_Handle,"Blocked",1);
+NRD_StatusSetInt(_Char,_Handle,"AllowInterruptAction",0);
+NRD_StatusSetInt(_Char,_Handle,"ForceInterrupt",0);
+NRD_StatusSetInt(_Char,_Handle,"Interruption",0);
+NRD_StatusSetInt(_Char,_Handle,"DontCreateBloodSurface",1);
+LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Char);
+*/
+
+// [BEGIN_NO_OSITOOLS]
+IF
+CharacterStartAttackObject((CHARACTERGUID)_Defender, _, _Attacker)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
+AND
+CharacterIsEnemy(_Defender, _Attacker, 1)
+THEN
+LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Defender);
+
+IF
+CharacterUsedSkillOnTarget(_Attacker, (CHARACTERGUID)_Defender, _, _, _)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
+AND
+CharacterIsEnemy(_Defender, _Attacker, 1)
+THEN
+LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Defender);
+
+IF
+CharacterUsedSkillOnZoneWithTarget(_Attacker, (CHARACTERGUID)_Defender, _, _, _)
+AND
+DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
+AND
+CharacterIsEnemy(_Defender, _Attacker, 1)
+THEN
+LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Defender);
+// [END_NO_OSITOOLS]
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"
