@@ -54,8 +54,17 @@ DB_LLWEAPONEX_Debug_StatusClear("BURNING");
 DB_LLWEAPONEX_Debug_StatusClear("SLOWED");
 DB_LLWEAPONEX_Debug_StatusClear("FAVOURABLE_WIND");
 DB_LLWEAPONEX_Debug_StatusClear("DRUNK");
-
 KBSECTION
+
+IF
+CharacterStatusRemoved(CHARACTERGUID_Humans_Male_RedFaction_Brute_001_f2e09090-0eb8-4d24-bf8c-32ca42cb42f3, "ENRAGED", _)
+THEN
+LeaderLib_Timers_StartObjectTimer(CHARACTERGUID_Humans_Male_RedFaction_Brute_001_f2e09090-0eb8-4d24-bf8c-32ca42cb42f3, 1500, "Timers_LLWEAPONEX_Debug_ApplyEnraged", "LLWEAPONEX_Debug_ApplyEnraged");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_ApplyEnraged")
+THEN
+ApplyStatus(_Char, "ENRAGED", 18.0, 0, _Char);
 
 /*
 IF
@@ -819,6 +828,9 @@ IF
 GameStarted(_, 1)
 THEN
 CharacterLaunchOsirisOnlyIterator("LLWEAPONEX_Debug_SaveStartPosition");
+ApplyStatus(CHARACTERGUID_Creatures_Troll_A_000_6a9cc5d0-827c-4d21-89a0-6c89e93e318d, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", -1.0, 1, CHARACTERGUID_Creatures_Troll_A_000_6a9cc5d0-827c-4d21-89a0-6c89e93e318d);
+ApplyStatus(CHARACTERGUID_Humans_Male_RedFaction_Brute_001_f2e09090-0eb8-4d24-bf8c-32ca42cb42f3, "ENRAGED", 18.0, 1, CHARACTERGUID_Humans_Male_RedFaction_Brute_001_f2e09090-0eb8-4d24-bf8c-32ca42cb42f3);
+CharacterSetFightMode(CHARACTERGUID_Humans_Male_RedFaction_Brute_001_f2e09090-0eb8-4d24-bf8c-32ca42cb42f3, 1, 1);
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Debug_SaveStartPosition")
