@@ -4,42 +4,45 @@ INITSECTION
 LLWEAPONEX_TagHelper_InitSettings();
 KBSECTION
 
+//REGION SETTINGS
 PROC
 LLWEAPONEX_TagHelper_InitSettings()
 THEN
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Axe");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Banner");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_BattleBook");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Blunderbuss");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Blunt");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Bow");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_CombatShield");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Crossbow");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Dagger");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Firearm");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Glaive");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Greatbow");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Grimoire");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Halberd");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_HandCrossbow");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Katana");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Pistol");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Polearm");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Quarterstaff");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Rapier");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Rod");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Runeblade");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Runeblade_Inert");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Scythe");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Shield");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Spear");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Staff");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Sword");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Throwing");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Unarmed");
-DB_LLWEAPONEX_TagHelper_AllTags("Type", "LLWEAPONEX_Wand");
-DB_LLWEAPONEX_TagHelper_AllTags("Handedness", "LLWEAPONEX_OneHanded");
-DB_LLWEAPONEX_TagHelper_AllTags("Handedness", "LLWEAPONEX_TwoHanded");
+SysClear("DB_LLWEAPONEX_TagHelper_AllTags", 3);
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Axe");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Banner");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_BattleBook");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Blunderbuss");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Blunt");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Bow");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_CombatShield");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_DualShields");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Crossbow");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Dagger");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Firearm");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Glaive");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Greatbow");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Grimoire");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Halberd");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_HandCrossbow");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Katana");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Pistol");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Polearm");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Quarterstaff");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Rapier");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Rod");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Runeblade");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Runeblade_Inert");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Scythe");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Shield");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Spear");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Staff");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Sword");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Throwing");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Unarmed");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Wand");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Handedness", "LLWEAPONEX_OneHanded");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Handedness", "LLWEAPONEX_TwoHanded");
 
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Axe", "LLWEAPONEX_Axe");
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Bow", "LLWEAPONEX_Bow");
@@ -55,13 +58,25 @@ DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Sentinel", "LLWEAPONEX_Sentinel");
 
 //Auto-generated "Weapon type equipped" tags
 IF
-DB_LLWEAPONEX_TagHelper_AllTags("Type", _WeaponType)
+DB_LLWEAPONEX_TagHelper_AllTags(_Group, "Type", _WeaponType)
 AND
 NOT DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _)
 AND
 StringConcatenate(_WeaponType, "_Equipped", _Tag)
 THEN
 DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag);
+//END_REGION
+
+//REGION UPDATES
+PROC
+LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+AND
+LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 20, 0)
+THEN
+SysClear("DB_LLWEAPONEX_TagHelper_AllTags", 2);
+SysClear("DB_LLWEAPONEX_TagHelper_EquippedTags", 2);
+LLWEAPONEX_TagHelper_InitSettings();
+//END_REGION
 
 //REGION CHECK_WEAPON_TYPE
 PROC
@@ -295,7 +310,7 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX_23_TagHelper:TypeFound] Found weapon type ["
 QRY
 LLWEAPONEX_TagHelper_QRY_TagIsValidated((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-DB_LLWEAPONEX_TagHelper_AllTags("Type", _Tag)
+DB_LLWEAPONEX_TagHelper_AllTags(_Group, "Type", _Tag)
 AND
 IsTagged(_Item, _Tag, 1)
 THEN
