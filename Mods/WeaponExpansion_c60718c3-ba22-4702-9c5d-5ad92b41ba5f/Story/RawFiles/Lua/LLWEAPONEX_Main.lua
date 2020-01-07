@@ -120,21 +120,6 @@ local function PlayBulletImpact(target)
     PlaySound(target, sound)
 end
 
-local damage_types = {
-    "None",
-    "Physical",
-    "Piercing",
-    "Corrosive",
-    "Magic",
-    "Chaos",
-    "Fire",
-    "Air",
-    "Water",
-    "Earth",
-    "Poison",
-    "Shadow"
-}
-
 local function CanRedirectHit(target, handle, hit_type)
     if hit_type ~= 4 and hit_type ~= 6 and hit_type ~= 5 then
         local missed = NRD_HitGetInt(handle, "Missed")
@@ -148,21 +133,6 @@ local function CanRedirectHit(target, handle, hit_type)
     return false
 end
 
-local function ReduceDamage(target, attacker, handlestr, reduction_str)
-    local handle = tonumber(handlestr)
-    local reduction = tonumber(reduction_str)
-    Ext.Print("[LLWEAPONEX_Main.lua:RedirectDamage] Reducing damage by ("..reduction_str.."). Handle("..handlestr.."). Target(",target,") Attacker(",attacker,")")
-    for k,v in pairs(damage_types) do
-        local damage = NRD_HitStatusGetDamage(target, handle, v)
-        if damage ~= nil and damage > 0 then
-            local reduced_damage = math.max(math.ceil(damage * reduction), 1)
-            NRD_HitStatusClearDamage(target, handle, v)
-            NRD_HitStatusAddDamage(target, handle, v, reduced_damage)
-            Ext.Print("Reduced damage: "..tostring(damage).." => "..tostring(reduced_damage).." for type: "..v)
-        end
-    end
-end
-
 local function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
     local handle = tonumber(handlestr)
     local reduction = tonumber(reduction_str)
@@ -173,7 +143,7 @@ local function RedirectDamage(blocker, target, attacker, handlestr, reduction_st
     local redirected_hit = NRD_HitPrepare(blocker, attacker)
     local damageRedirected = false
 
-    for k,v in pairs(damage_types) do
+    for k,v in pairs(_G["LeaderLib"].Data["DamageTypes"]) do
         local damage = NRD_HitStatusGetDamage(target, handle, v)
         if damage ~= nil and damage > 0 then
             local reduced_damage = math.max(math.ceil(damage * reduction), 1)
@@ -208,7 +178,6 @@ WeaponExpansion.Main = {
     TagHandedness = TagHandedness,
     TagItemType = TagItemType,
     PlayBulletImpact = PlayBulletImpact,
-    ReduceDamage = ReduceDamage,
     RedirectDamage = RedirectDamage
 }
 
