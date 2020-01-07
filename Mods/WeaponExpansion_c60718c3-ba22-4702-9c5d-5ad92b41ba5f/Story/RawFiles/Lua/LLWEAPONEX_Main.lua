@@ -134,42 +134,50 @@ local function CanRedirectHit(target, handle, hit_type)
 end
 
 local function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
-    local handle = tonumber(handlestr)
-    local reduction = tonumber(reduction_str)
-    --if CanRedirectHit(target, handle, hit_type) then -- Ignore surface, DoT, and reflected damage
-    local hit_type_name = NRD_StatusGetString(target, handle, "DamageSourceType")
-    --local hit_type = NRD_StatusGetInt(target, handle, "HitType")
-    Ext.Print("[LLWEAPONEX_Main.lua:RedirectDamage] Redirecting damage Handle("..handlestr.."). Blocker(",blocker,") Target(",target,") Attacker(",attacker,")")
-    local redirected_hit = NRD_HitPrepare(blocker, attacker)
-    local damageRedirected = false
-
-    for k,v in pairs(_G["LeaderLib"].Data["DamageTypes"]) do
-        local damage = NRD_HitStatusGetDamage(target, handle, v)
-        if damage ~= nil and damage > 0 then
-            local reduced_damage = math.max(math.ceil(damage * reduction), 1)
-            NRD_HitStatusClearDamage(target, handle, v)
-            NRD_HitStatusAddDamage(target, handle, v, reduced_damage)
-            NRD_HitAddDamage(redirected_hit, v, reduced_damage)
-            Ext.Print("Redirected damage: "..tostring(damage).." => "..tostring(reduced_damage).." for type: "..v)
-            damageRedirected = true
+    local redirect_damage_func = _G["LeaderLib_Ext_RedirectDamage"]
+    if redirect_damage_func ~= nil then
+        local run_success,redirected = pcall(redirect_damage_func, blocker, target, attacker, handlestr, reduction_str)
+        if run_success and redirected then
+            Osi.LLWEAPONEX_DualShields_ShieldCover(attacker, blocker, target);
         end
-    end
+    else
+        local handle = tonumber(handlestr)
+        local reduction = tonumber(reduction_str)
+        --if CanRedirectHit(target, handle, hit_type) then -- Ignore surface, DoT, and reflected damage
+        local hit_type_name = NRD_StatusGetString(target, handle, "DamageSourceType")
+        --local hit_type = NRD_StatusGetInt(target, handle, "HitType")
+        Ext.Print("[LLWEAPONEX_Main.lua:RedirectDamage] Redirecting damage Handle("..handlestr.."). Blocker(",blocker,") Target(",target,") Attacker(",attacker,")")
+        local redirected_hit = NRD_HitPrepare(blocker, attacker)
+        local damageRedirected = false
 
-    if damageRedirected then
-        local is_crit = NRD_StatusGetInt(target, handle, "CriticalHit") == 1
-        if is_crit then
-            NRD_HitSetInt(redirected_hit, "CriticalRoll", 1);
-        else
-            NRD_HitSetInt(redirected_hit, "CriticalRoll", 2);
+        for k,v in pairs(_G["LeaderLib"].Data["DamageTypes"]) do
+            local damage = NRD_HitStatusGetDamage(target, handle, v)
+            if damage ~= nil and damage > 0 then
+                local reduced_damage = math.max(math.ceil(damage * reduction), 1)
+                NRD_HitStatusClearDamage(target, handle, v)
+                NRD_HitStatusAddDamage(target, handle, v, reduced_damage)
+                NRD_HitAddDamage(redirected_hit, v, reduced_damage)
+                Ext.Print("Redirected damage: "..tostring(damage).." => "..tostring(reduced_damage).." for type: "..v)
+                damageRedirected = true
+            end
         end
-        NRD_HitSetInt(redirected_hit, "SimulateHit", 1);
-        NRD_HitSetInt(redirected_hit, "HitType", 6);
-        NRD_HitSetInt(redirected_hit, "Hit", 1);
-        NRD_HitSetInt(redirected_hit, "RollForDamage", 1);
-            
-        --Osi.LLWEAPONEX_DualShields_ShieldCover_StoreHit(blocker, target, attacker, redirected_hit)
-        NRD_HitExecute(redirected_hit);
-        Osi.LLWEAPONEX_DualShields_ShieldCover(attacker, blocker, target);
+
+        if damageRedirected then
+            local is_crit = NRD_StatusGetInt(target, handle, "CriticalHit") == 1
+            if is_crit then
+                NRD_HitSetInt(redirected_hit, "CriticalRoll", 1);
+            else
+                NRD_HitSetInt(redirected_hit, "CriticalRoll", 2);
+            end
+            NRD_HitSetInt(redirected_hit, "SimulateHit", 1);
+            NRD_HitSetInt(redirected_hit, "HitType", 6);
+            NRD_HitSetInt(redirected_hit, "Hit", 1);
+            NRD_HitSetInt(redirected_hit, "RollForDamage", 1);
+                
+            --Osi.LLWEAPONEX_DualShields_ShieldCover_StoreHit(blocker, target, attacker, redirected_hit)
+            NRD_HitExecute(redirected_hit);
+            Osi.LLWEAPONEX_DualShields_ShieldCover(attacker, blocker, target);
+        end
     end
 end
 
