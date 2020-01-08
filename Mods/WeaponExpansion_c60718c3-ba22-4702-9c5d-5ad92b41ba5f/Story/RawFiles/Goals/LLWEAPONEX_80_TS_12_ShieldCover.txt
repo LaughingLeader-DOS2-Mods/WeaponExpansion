@@ -23,63 +23,6 @@ LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/status
 THEN
 NRD_LuaCall("LLWEAPONEX_Ext_RedirectDamage", (STRING)_Blocker, (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.5");
 */
-
-/*
-PROC
-LLWEAPONEX_DualShields_ShieldCover_StoreHit((CHARACTERGUID)_Blocker, (CHARACTERGUID)_Target, (CHARACTERGUID)_Attacker, (INTEGER64)_RedirectedHit)
-THEN
-DB_LLWEAPONEX_DualShields_Temp_RedirectedHit(_Blocker, _Target, _Attacker, _RedirectedHit);
-*/
-/*
-IF
-NRD_OnHit((CHARACTERGUID)_Target, _, _Damage, _Handle)
-AND
-DB_LLWEAPONEX_DualShields_Temp_RedirectedHit(_Blocker, _Target, _Attacker, _RedirectedHit)
-THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_RedirectedHit(_Blocker, _Target, _Attacker, _RedirectedHit);
-NRD_HitExecute(_RedirectedHit);
-*/
-
-/*
-IF
-NRD_OnPrepareHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Attacker,_, _Handle)
-AND
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
-AND
-NOT DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Char)
-AND
-NRD_HitGetInt(_Handle, "HitType", _Val)
-AND
-NOT LLWEAPONEX_Helper_IgnoreHitType(_Val, 4, 6) // Ignore surfaces and reflected damage
-AND
-NRD_HitPrepare(_Blocker, _Attacker, _CoveredHitHandle)
-AND
-LLWEAPONEX_NRD_StoreHandle(_Blocker, _Attacker, _Handle)
-AND
-DB_LeaderLib_DamageTypes(_DamageType)
-AND
-NRD_HitGetDamage(_Handle, _DamageType, _Damage)
-AND
-IntegerDivide(_Damage, 2, _ReducedDamage)
-THEN
-NRD_HitClearDamage(_Handle, _DamageType);
-NRD_HitAddDamage(_Handle, _DamageType, _ReducedDamage);
-NRD_HitAddDamage(_CoveredHitHandle, _DamageType, _ReducedDamage);
-
-IF
-NRD_OnPrepareHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Attacker,_, _Handle)
-AND
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
-AND
-DB_LLWEAPONEX_Temp_HitHandle(_Blocker, _Attacker, _Handle)
-THEN
-NOT DB_LLWEAPONEX_Temp_HitHandle(_Blocker, _Attacker, _Handle);
-NRD_HitSetInt(_Handle, "SimulateHit", 1);
-NRD_HitSetInt(_Handle, "HitType", 6);
-//NRD_HitSetInt(_Handle, "RollForDamage", 1);
-NRD_HitExecute(_Handle);
-LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Char);
-*/
 EXITSECTION
 
 ENDEXITSECTION
