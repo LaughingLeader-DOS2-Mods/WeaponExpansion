@@ -141,7 +141,6 @@ RemoveStatus(_Target, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING");
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
 THEN
-//CharacterRemoveSkill(_Char, "Target_SingleHandedAttack");
 NRD_SkillSetCooldown(_Char, "Target_SingleHandedAttack", 0.0);
 */
 //END_REGION
