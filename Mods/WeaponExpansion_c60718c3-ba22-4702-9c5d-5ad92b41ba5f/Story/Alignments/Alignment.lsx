@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
     <header version="2" />
-    <version major="3" minor="6" revision="4" build="1" />
+    <version major="3" minor="6" revision="6" build="0" />
     <region id="AlignmentManager">
         <node id="root">
             <children>
@@ -23,53 +23,113 @@
                 <node id="Relations">
                     <children>
                         <node id="Relation">
+                            <attribute id="Source" value="AnimalBase" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
                             <attribute id="Source" value="Companion" type="22" />
-                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
                             <attribute id="Source" value="Evil" type="22" />
-                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Evil NPC" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
                             <attribute id="Source" value="Good" type="22" />
-                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Good NPC" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
                             <attribute id="Source" value="Hero" type="22" />
-                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
-                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Target" value="AnimalBase" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Target" value="Companion" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
-                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Target" value="Evil" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
-                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Target" value="Evil NPC" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Target" value="Good" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
-                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Target" value="Good NPC" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Target" value="Hero" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
-                            <attribute id="Source" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Target" value="Neutral" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                         <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Target" value="NeutralGoodNPC" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Target" value="Story" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Target" value="Story NPC" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
                             <attribute id="Source" value="Neutral" type="22" />
-                            <attribute id="Target" value="LLWEAPONEX_WeaponMaster" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="NeutralGoodNPC" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Story" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
+                            <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="Story NPC" type="22" />
+                            <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Value" value="50" type="4" />
                         </node>
                     </children>
