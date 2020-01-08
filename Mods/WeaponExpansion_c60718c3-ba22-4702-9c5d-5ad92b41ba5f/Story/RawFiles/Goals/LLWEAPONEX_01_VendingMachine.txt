@@ -261,38 +261,32 @@ LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "
 LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption7_5027bce6-f787-4977-a23c-a09175f02508", "LLWEAPONEX_VendingMachine_Option7Available", "LLWEAPONEX_VendingMachine_OrderOption7"); 
 LeaderLib_DynamicMenu_Register_Variable("LLWEAPONEX.VendingMachine.OrderMenu", "LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee", "LLWEAPONEX_VendingMachine_Option8Available", "LLWEAPONEX_VendingMachine_OrderOption8");
 
-//Vanilla
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderAccessory", "*[ACCESSORY] Click on the button labeled 'Accessory'.*");
-
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderArmor", "*[ANY ARMOR] Click on the button labeled 'Any Armor'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderClothArmor", "*[CLOTH ARMOR] Click on the button labeled 'Cloth Armor'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderHeavyArmor", "*[HEAVY ARMOR] Click on the button labeled 'Heavy Armor'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderLightArmor", "*[LIGHT ARMOR] Click on the button labeled 'Light Armor'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderMageArmor", "*[MAGE ARMOR] Click on the button labeled 'Mage Armor'.*");
-
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWeapon", "*[ANY WEAPON] Click on the button labeled 'Any Weapon'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderOneHandedWeapon", "*[ONE-HANDED] Click on the button labeled 'One-Handed'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderTwoHandedWeapon", "*[TWO-HANDED] Click on the button labeled 'Two-Handed'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderRangedWeapon", "*[RANGED] Click on the button labeled 'Ranged'.*");
-
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderStaff", "*[STAFFS] Click on the button labeled 'Staffs'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWand", "*[WANDS] Click on the button labeled 'Wands'.*");
-
-//LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Trader_WeaponArcher", "*[ARCHER WEAPON] Click on the button labeled 'Archer Weapons'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderRogueWeapon", "*[ROGUE WEAPONS] Click on the button labeled 'Rogue Weapons'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWarriorWeapon", "*[WARRIOR WEAPONS] Click on the button labeled 'Warrior Weapons'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWizardWeapon", "*[WIZARD WEAPONS] Click on the button labeled 'Wizard Weapons'.*");
-
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_AllPotions", "*[POTIONS] Click on the button labeled 'Potions'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_AllPotionsSpecial", "*[S. POTIONS] Click on the button labeled 'Special Potions'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Ingredients", "*[INGREDIENTS] Click on the button labeled 'Ingredients'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Grenades", "*[GRENADES] Click on the button labeled 'Grenades'.*");
-LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Arrows", "*[ARROWS] Click on the button labeled 'Arrows'.*");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderAccessory", "*[ACCESSORY] Click on the button labeled 'Accessory'.*", "h9c7f3144g17d0g40b0gab03g29ca403e0291");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderArmor", "*[ANY ARMOR] Click on the button labeled 'Any Armor'.*", "hf2f3f5dfg801eg4b17ga5d6g59c975b1c065");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderClothArmor", "*[CLOTH ARMOR] Click on the button labeled 'Cloth Armor'.*", "hfb6a8f97g3ff7g4546gb956gfebacf97fef3");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderHeavyArmor", "*[HEAVY ARMOR] Click on the button labeled 'Heavy Armor'.*", "h30ecfbc9gae81g4f70g84d6ge44e9e14e9a6");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderLightArmor", "*[LIGHT ARMOR] Click on the button labeled 'Light Armor'.*", "hdd97747cgef6cg42b9gaa6age60edc02d4d5");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderMageArmor", "*[MAGE ARMOR] Click on the button labeled 'Mage Armor'.*", "hfcd7afbagcf8bg49cdg90ffg27193e3bf9ca");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWeapon", "*[ANY WEAPON] Click on the button labeled 'Any Weapon'.*", "hdcbe8f3eg3960g49b2g8f63ged3336519e25");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderOneHandedWeapon", "*[ONE-HANDED] Click on the button labeled 'One-Handed'.*", "h41ff62e4g3ae2g4f24ga725g0442f8e936a2");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderTwoHandedWeapon", "*[TWO-HANDED] Click on the button labeled 'Two-Handed'.*", "h4746d357ge878g462eg86ccg30f7a8115f17");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderRangedWeapon", "*[RANGED] Click on the button labeled 'Ranged'.*", "h0991fa6cgdc68g410dgbc3cg0c6a36fe8d8b");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderStaff", "*[STAFFS] Click on the button labeled 'Staffs'.*", "h1599bddcg8b04g4ed6gbb4dg88f0196afca4");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWand", "*[WANDS] Click on the button labeled 'Wands'.*", "h673b26f0g9e0ag45d3g857fg353aa68f1086");
+//LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Trader_WeaponArcher", "*[ARCHER WEAPON] Click on the button labeled 'Archer Weapons'.*", "h78010912gec24g495ega080gedc162aa057a");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderRogueWeapon", "*[ROGUE WEAPONS] Click on the button labeled 'Rogue Weapons'.*", "hd27567f7g04adg40a3gb780g1fd98acbbc57");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWarriorWeapon", "*[WARRIOR WEAPONS] Click on the button labeled 'Warrior Weapons'.*", "hdcacc003g3fa3g4e51g934cg7fc60b3ba861");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_LLWEAPONEX_VendingMachine_OrderWizardWeapon", "*[WIZARD WEAPONS] Click on the button labeled 'Wizard Weapons'.*", "h03451e09g2f0bg410eg89cdg1d80b656605c");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_AllPotions", "*[POTIONS] Click on the button labeled 'Potions'.*", "h9b0a4bf7gbdb6g4c86g8f40ga7f59d86e44f");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_AllPotionsSpecial", "*[S. POTIONS] Click on the button labeled 'Special Potions'.*", "h19f981b6ga410g4989g81eeg51addefc629f");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Ingredients", "*[INGREDIENTS] Click on the button labeled 'Ingredients'.*", "h57a85f45gfe1cg4b47ga0f9g51dcaeb29d0a");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Grenades", "*[GRENADES] Click on the button labeled 'Grenades'.*", "h72c0eff2g75e3g43f6gbd70g395c6d2d1e95");
+LLWEAPONEX_VendingMachine_AddOrderToMenu("ST_Arrows", "*[ARROWS] Click on the button labeled 'Arrows'.*", "h70dc0b03g8391g4151gaccfg8146c87b203e");
 
 PROC
-LLWEAPONEX_VendingMachine_AddOrderToMenu((STRING)_TreasureTable, (STRING)_EntryText)
+LLWEAPONEX_VendingMachine_AddOrderToMenu((STRING)_TreasureTable, (STRING)_EntryText, (STRING)_Handle)
 THEN
-LeaderLib_DynamicMenu_Register_Entry("LLWEAPONEX.VendingMachine.OrderMenu", _TreasureTable, _EntryText);
+LeaderLib_DynamicMenu_Register_TranslatedStringEntry("LLWEAPONEX.VendingMachine.OrderMenu", _TreasureTable, _Handle, _EntryText);
 //END_REGION
 
 //REGION ORDER_MENU
