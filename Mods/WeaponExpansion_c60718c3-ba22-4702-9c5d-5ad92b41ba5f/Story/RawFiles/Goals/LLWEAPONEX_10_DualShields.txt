@@ -521,6 +521,7 @@ IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion", 500);
+LeaderLib_Timers_CancelObjectTimer(_Char, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
 
 IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
