@@ -29,6 +29,15 @@ CharacterSetAnimationOverride(_Char, "");
 */
 
 IF
+CharacterStartAttackObject(_, _, (CHARACTERGUID)_cHAR)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
+CharacterSetAnimationOverride(_Char, "");
+LeaderLib_Timers_StartObjectTimer(_Char, 1500, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
+
+IF
 CharacterStatusRemoved(_Char, "UNSHEATHED", _)
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
@@ -42,6 +51,7 @@ AND
 HasActiveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN");
+LeaderLib_Timers_CancelObjectTimer(_Char, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
 
 IF
 ObjectTurnEnded((CHARACTERGUID)_Char)
