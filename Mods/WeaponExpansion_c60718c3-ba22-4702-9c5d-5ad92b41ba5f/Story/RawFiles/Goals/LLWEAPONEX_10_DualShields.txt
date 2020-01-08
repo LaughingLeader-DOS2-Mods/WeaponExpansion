@@ -489,6 +489,13 @@ THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion");
 
 IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion", 500);
+SetStoryEvent(_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride");
+
+/*
+IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
 AND
 CharacterIsInCombat(_Char, 0)
@@ -518,35 +525,33 @@ CharacterSetAnimationOverride(_Char, "skill_prepare_weapon_01_loop");
 ObjectSetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
 
 IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
-THEN
-LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion", 500);
-LeaderLib_Timers_CancelObjectTimer(_Char, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
-
-IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride")
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
 THEN
 ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
 CharacterSetAnimationOverride(_Char, "");
+LeaderLib_Timers_CancelObjectTimer(_Char, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
 
 IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride")
 AND
 CharacterIsInCombat(_Char, 0)
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 1)
+AND
+CharacterIsInFightMode(_Char, 1)
 THEN
 CharacterSetFightMode(_Char, 0, 0);
 ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 0);
 
 IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride")
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 1)
 THEN
 ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 0);
+*/
 //END_REGION
 
 //REGION SHIELD_COVER_WITHOUT_EXTENDER
