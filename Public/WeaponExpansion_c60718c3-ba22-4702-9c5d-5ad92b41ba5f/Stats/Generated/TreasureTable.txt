@@ -1174,3 +1174,327 @@ object category "I_LOOT_LLWEAPONEX_Crystal_Shard_Small_A",1,0,0,1,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_Debug_RarityTest"
 new subtable "-1"
 object category "I_ARM_Ring",1,0,1,0,0,0,0,0
+
+//REGION MAIN_TABLES_MERGE
+//Adding items to Shared/Origins tables
+
+new treasuretable "ST_OneHandedNormal"
+CanMerge 1
+new subtable "0,1;1,4"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
+new subtable "0,3;1,2"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
+new subtable "0,2;1,1"
+object category "T_ST_LLWEAPONEX_DualShieldsNormal",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_OneHandedNormal"
+CanMerge 1
+new subtable "0,1;1,4"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
+new subtable "0,2;1,3"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
+new subtable "0,3;1,2"
+object category "T_ST_LLWEAPONEX_DualShieldsNormal",1,1,0,0,0,0,0,0
+new subtable "0,3;1,2"
+object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_TwoHandedNormal"
+CanMerge 1
+new subtable "0,1;1,4"
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,0,0,0,0,0,0
+new subtable "0,1;1,4"
+object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
+new subtable "0,1;1,4"
+object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_TwoHandedNormal"
+CanMerge 1
+new subtable "0,1;1,4"
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,1,0,0,0,0,0,0
+new subtable "0,1;1,4"
+object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_RangedNormal"
+CanMerge 1
+new subtable "0,1;1,4"
+object category "T_ST_LLWEAPONEX_GreatbowsNormal",1,1,0,0,0,0,0,0
+new subtable "0,1;1,4"
+object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
+new subtable "0,6;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_RangedNormal"
+CanMerge 1
+new subtable "0,1;1,4"
+object category "T_ST_LLWEAPONEX_GreatbowsNormal",1,1,0,0,0,0,0,0
+new subtable "0,1;1,4"
+object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_RingAmuletBeltNormal"
+CanMerge 1
+new subtable "0,4;1,1"
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_WeaponRogue"
+CanMerge 1
+new subtable "1,1"
+object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
+new subtable "0,3;1,1"
+object category "LLWEAPONEX_Shuriken",1,1,0,0,0,0,0,0
+object category "I_GRN_LLWEAPONEX_Throwing_Dagger",2,1,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_WeaponWizard"
+CanMerge 1
+new subtable "0,2;1,2"
+object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_WeaponArcher"
+CanMerge 1
+new subtable "0,1;1,4"
+object category "T_ST_LLWEAPONEX_GreatbowsNormal",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
+new subtable "0,2;1,3"
+object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_Trader_WeaponWarrior"
+CanMerge 1
+new subtable "0,10;1,1"
+object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_FTJ_Grenade"
+CanMerge 1
+new subtable "0,2;1,3"
+object category "T_ST_LLWEAPONEX_FTJ_ThrowingWeapons",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Grenades_Only"
+new subtable "1,1"
+StartLevel "1"
+EndLevel "4"
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "5"
+EndLevel "12"
+object category "GrenadeEarly",2,0,0,0,0,0,0,0
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "13"
+EndLevel "15"
+object category "GrenadeMid",2,0,0,0,0,0,0,0
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+object category "GrenadeEarly",1,0,0,0,0,0,0,0
+new subtable "1,1"
+StartLevel "16"
+object category "GrenadeLate",3,0,0,0,0,0,0,0
+object category "GrenadeStarter",1,0,0,0,0,0,0,0
+object category "GrenadeEarly",1,0,0,0,0,0,0,0
+object category "GrenadeMid",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Grenades"
+CanMerge 1
+new subtable "0,9;1,1"
+object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
+new subtable "0,2;4,1"
+object category "LLWEAPONEX_Flask_Weakness",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_RG_4"
+CanMerge 1
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Firearms_2H",1,0,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Tiny_Choice_1"
+CanMerge 1
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Tiny_Choice_2"
+CanMerge 1
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Tiny_Choice_3"
+CanMerge 1
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Tiny_Choice_4"
+CanMerge 1
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Tiny_Choice_5"
+CanMerge 1
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Tiny_Choice_6"
+CanMerge 1
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Tiny_Choice_7"
+CanMerge 1
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
+new subtable "0,1;1,2"
+object category "LLWEAPONEX_Wakizashi_1H",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Easy_Choice_1"
+CanMerge 1
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Legendary_3_Group_5"
+CanMerge 1
+new subtable "0,4;1,1"
+object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Legendary_3_Group_16"
+CanMerge 1
+new subtable "0,4;1,1"
+object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Legendary_3_Group_17"
+CanMerge 1
+new subtable "0,4;1,1"
+object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Legendary_3_Group_17"
+CanMerge 1
+new subtable "0,4;1,1"
+object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Skillbook_WaterTrainer"
+CanMerge 1
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_SkillbookWater"
+CanMerge 1
+new subtable "0,3;1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
+
+new treasuretable "CheatBooksWater"
+CanMerge 1
+MinLevel "-19"
+MaxLevel "19"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_Skillbook_WarriorTrainer"
+CanMerge 1
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_SkillbookWarrior"
+CanMerge 1
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
+
+new treasuretable "CheatBooksWarrior"
+CanMerge 1
+MinLevel "-19"
+MaxLevel "19"
+IgnoreLevelDiff 1
+new subtable "-1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
+new subtable "-1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
+
+new treasuretable "FTJ_SkillbookWarrior"
+CanMerge 1
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
+
+new treasuretable "FTJ_SkillbookWater"
+CanMerge 1
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
+
+new treasuretable "IngredientTrader"
+CanMerge 1
+new subtable "0,1;3,1"
+object category "LLWEAPONEX_Flask_Empty",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_GrenadeIngredients"
+CanMerge 1
+new subtable "0,1;3,1"
+object category "LLWEAPONEX_Flask_Empty",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_Easy_Choice_Extra"
+CanMerge 1
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_QuestReward_High_Choice_Extra"
+CanMerge 1
+new subtable "0,1;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_RingAmuletBelt"
+CanMerge 1
+new subtable "0,6;1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+//END_REGION
