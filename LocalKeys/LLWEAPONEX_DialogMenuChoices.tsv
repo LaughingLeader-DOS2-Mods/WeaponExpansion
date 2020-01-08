@@ -1,0 +1,22 @@
+Key	Content
+LLWEAPONEX_VendingMachine_OrderAccessory	*[ACCESSORY] Click on the button labeled 'Accessory'.*
+LLWEAPONEX_VendingMachine_OrderArmor	*[ANY ARMOR] Click on the button labeled 'Any Armor'.*
+LLWEAPONEX_VendingMachine_OrderClothArmor	*[CLOTH ARMOR] Click on the button labeled 'Cloth Armor'.*
+LLWEAPONEX_VendingMachine_OrderHeavyArmor	*[HEAVY ARMOR] Click on the button labeled 'Heavy Armor'.*
+LLWEAPONEX_VendingMachine_OrderLightArmor	*[LIGHT ARMOR] Click on the button labeled 'Light Armor'.*
+LLWEAPONEX_VendingMachine_OrderMageArmor	*[MAGE ARMOR] Click on the button labeled 'Mage Armor'.*
+LLWEAPONEX_VendingMachine_OrderWeapon	*[ANY WEAPON] Click on the button labeled 'Any Weapon'.*
+LLWEAPONEX_VendingMachine_OrderOneHandedWeapon	*[ONE-HANDED] Click on the button labeled 'One-Handed'.*
+LLWEAPONEX_VendingMachine_OrderTwoHandedWeapon	*[TWO-HANDED] Click on the button labeled 'Two-Handed'.*
+LLWEAPONEX_VendingMachine_OrderRangedWeapon	*[RANGED] Click on the button labeled 'Ranged'.*
+LLWEAPONEX_VendingMachine_OrderStaff	*[STAFFS] Click on the button labeled 'Staffs'.*
+LLWEAPONEX_VendingMachine_OrderWand	*[WANDS] Click on the button labeled 'Wands'.*
+LLWEAPONEX_VendingMachine_OrderRangerWeapon	*[ARCHER WEAPON] Click on the button labeled 'Ranger Weapons'.*
+LLWEAPONEX_VendingMachine_OrderRogueWeapon	*[ROGUE WEAPONS] Click on the button labeled 'Rogue Weapons'.*
+LLWEAPONEX_VendingMachine_OrderWarriorWeapon	*[WARRIOR WEAPONS] Click on the button labeled 'Warrior Weapons'.*
+LLWEAPONEX_VendingMachine_OrderWizardWeapon	*[WIZARD WEAPONS] Click on the button labeled 'Wizard Weapons'.*
+LLWEAPONEX_VendingMachine_OrderAllPotions	*[POTIONS] Click on the button labeled 'Potions'.*
+LLWEAPONEX_VendingMachine_OrderAllPotionsSpecial	*[S. POTIONS] Click on the button labeled 'Special Potions'.*
+LLWEAPONEX_VendingMachine_OrderIngredients	*[INGREDIENTS] Click on the button labeled 'Ingredients'.*
+LLWEAPONEX_VendingMachine_OrderGrenades	*[GRENADES] Click on the button labeled 'Grenades'.*
+LLWEAPONEX_VendingMachine_OrderArrows	*[ARROWS] Click on the button labeled 'Arrows'.*
