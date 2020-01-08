@@ -1,65 +1,72 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <save>
     <header version="2" />
-    <version major="3" minor="6" revision="1" build="0" />
+    <version major="3" minor="6" revision="6" build="0" />
     <region id="DialogVariables">
         <node id="root">
             <children>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
+                    <attribute id="UUID" value="62390b55-662f-457f-ac36-256374cc1e51" type="31" />
+                    <attribute id="name" value="LLWEAPONEX_Debug_TString" type="22" />
+                    <attribute id="type" value="TranslatedString" type="23" />
+                </node>
+                <node id="DialogVariable">
+                    <attribute id="DefaultValue" value="" type="23" />
+                    <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="01202c05-bdbb-42c2-9cda-8346962041d5" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption1" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="1af35687-3367-4206-8aa4-debee4b81d92" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption2" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="048eaa1b-d937-48bb-ac2c-5759cd64540f" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption3" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="33af56c3-1b27-4867-9f71-ec84fc3a2fb4" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption4" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="6304637d-2828-45ec-b01d-d4769787a29b" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption5" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="d70c702c-a0c1-49a7-8772-1479725e2a39" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption6" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="5027bce6-f787-4977-a23c-a09175f02508" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption7" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
                     <attribute id="Description" value="" type="23" />
                     <attribute id="UUID" value="643f5348-d324-4508-ace3-71505bb30dee" type="31" />
                     <attribute id="name" value="LLWEAPONEX_VendingMachine_OrderOption8" type="22" />
-                    <attribute id="type" value="String" type="23" />
+                    <attribute id="type" value="TranslatedString" type="23" />
                 </node>
                 <node id="DialogVariable">
                     <attribute id="DefaultValue" value="" type="23" />
