@@ -70,8 +70,7 @@ using "_Projectile_LLWEAPONEX_BattleBooks_SpellScroll_Explode_Base"
 data "Ability" "Water"
 data "ExplodeRadius" "3"
 data "SkillProperties" "REGENERATION,100,1"
-data "TargetConditions" "((Ally&!DamagedOnHeal)|(Enemy&DamagedOnHeal));!Dead"
-data "TargetConditions" "Item|(Character&(Ally|Tagged:LeaderLib_EnemyTargetingEnabled|DamagedOnHeal));!Dead"
+data "TargetConditions" "((Ally&!DamagedOnHeal)|((Tagged:LeaderLib_FriendlyFireEnabled|Enemy)&DamagedOnHeal));!Dead"
 //RS3_FX_Skills_Water_Restoration_Impact_01
 
 new entry "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_FavourableWind"
