@@ -47,9 +47,21 @@ local GameSessionLoad = function ()
 	Ext.Print("[WeaponExpansion:Bootstrap.lua] Session is loading.")
 end
 
+local GetDescriptionParam = function (skill, character, param)
+    if skill.Name == "Projectile_LLWEAPONEX_ChaosSlash" then
+        Ext.Print("==GetDescriptionParam==")
+        Ext.Print("** Param: " .. LeaderLib.Common.Dump(param))
+        Ext.Print("** Character: " .. LeaderLib.Common.Dump(character))
+        Ext.Print("** Skill: " .. LeaderLib.Common.Dump(skill))
+    end
+end
+
 --v36 and higher
 if Ext.RegisterListener ~= nil then
     Ext.RegisterListener("SessionLoading", GameSessionLoad)
+    if Ext.Version >= 39 then
+        Ext.RegisterListener("SkillGetDescriptionParam", GetDescriptionParam)
+    end
 end
 
 Ext.Print("[WeaponExpansion:Bootstrap.lua] Finished running.")
