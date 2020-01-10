@@ -42,6 +42,26 @@ ObjectClearFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 0);
 SetVarFloat3(_Char, "LLWEAPONEX_AnvilMace_AttackPosition", _x, _y, _z);
 SetStoryEvent(_Char, "LLWEAPONEX_AnvilMace_ExplodeAtPosition");
 
+/*
+IF
+CharacterStatusApplied(_Char, "UNSHEATHED", _)
+AND
+IsTagged(_Char, "DWARF", 1)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 500, "Timers_LLWEAPONEX_AnvilMace_PlayUnsheathedImpact", "LLWEAPONEX_AnvilMace_PlayUnsheathedImpact");
+
+IF
+CharacterStatusRemoved(_Char, "UNSHEATHED", _)
+AND
+IsTagged(_Char, "DWARF", 1)
+AND
+ObjectGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 1)
+THEN
+LeaderLib_Timers_CancelObjectTimer(_Char, "Timers_LLWEAPONEX_AnvilMace_PlayUnsheathedImpact");
+*/
+
 EXITSECTION
 SysClear("DB_LLWEAPONEX_AnvilMace_ImpactPosition", 4);
 ENDEXITSECTION

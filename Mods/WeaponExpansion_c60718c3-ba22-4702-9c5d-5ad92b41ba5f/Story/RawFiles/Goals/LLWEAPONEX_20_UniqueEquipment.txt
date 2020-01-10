@@ -888,6 +888,11 @@ PartyGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0)
 THEN
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 500);
 
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_PlayUnsheathedImpact")
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_ANVIL_UNSHEATHED_FX", 0.0, 0, _Char);
+
 /*
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Rush_LLWEAPONEX_AnvilMace_GroundSmash", _, _)

@@ -8,7 +8,7 @@ PROC
 LeaderLib_Debug_RegisterDebugPlayer()
 THEN
 DebugBreak("[LLWEAPONEX_99_Debug:LeaderLib_Debug_RegisterDebugPlayer] Adding WeaponMaster to [DB_Origins].");
-SysClear("DB_Origins", 1);
+//SysClear("DB_Origins", 1);
 DB_Origins((CHARACTERGUID)S_Player_LLWEAPONEX_WeaponMaster_2842603d-a263-4f65-a164-4a2391afe349);
 
 DB_OriginRecruitmentDialog((CHARACTERGUID)S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "LLWEAPONEX_Debug_Recruitment");
@@ -34,7 +34,24 @@ PROC_GLO_PartyMembers_Add(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24
 */
 
 IF
-RegionStarted("FJ_FortJoy_Main")
+GameStarted(_Level, _)
+AND
+IsGameLevel(_Level, 1)
+AND
+GlobalGetFlag("LeaderLib_DebugModeEnabled", 1)
+AND
+CharacterGetHostCharacter(_Host)
+AND
+CharacterGetReservedUserID(_Host, _ID)
+AND
+GetUserName(_ID, "LaughingLeader")
+THEN
+GlobalSetFlag("LLWEAPONEX_Debug_LeaderModeEngaged");
+
+IF
+GameStarted("FJ_FortJoy_Main", _)
+AND
+GlobalGetFlag("LeaderLib_DebugModeEnabled", 1)
 AND
 QueryOnlyOnce("LLWEAPONEX_Debug_LeaderGold")
 AND
@@ -66,7 +83,9 @@ SysActivateGoal("LLWEAPONEX_99_Debug_TestLevel");
 SysActivateGoal("LLWEAPONEX_24_Campaign_Start");
 
 IF
-RegionStarted("FJ_FortJoy_Main")
+GameStarted("FJ_FortJoy_Main", _)
+AND
+GlobalGetFlag("LeaderLib_DebugModeEnabled", 1)
 AND
 CharacterGetHostCharacter(_Host)
 AND
@@ -93,21 +112,6 @@ AND
 CharacterGetHostCharacter(_Host)
 THEN
 PlayBeamEffect(_Host, _Host, "RS3_FX_GP_Beams_Telekinesis_01", "Dummy_BackFX_L", "Dummy_FrontFX_L");
-
-IF
-GameStarted(_Level, _)
-AND
-IsGameLevel(_Level, 1)
-AND
-CharacterGetHostCharacter(_Host)
-AND
-CharacterGetReservedUserID(_Host, _ID)
-AND
-GetUserName(_ID, _UserName)
-AND
-_UserName == "LaughingLeader"
-THEN
-GlobalSetFlag("LLWEAPONEX_Debug_LeaderModeEngaged");
 
 IF
 StoryEvent((CHARACTERGUID)_Trader, "LeaderLib_Events_OnLeaderTradeSpawned")
