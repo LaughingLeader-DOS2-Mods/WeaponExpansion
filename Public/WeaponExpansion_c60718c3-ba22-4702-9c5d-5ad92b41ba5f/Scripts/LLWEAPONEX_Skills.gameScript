@@ -513,7 +513,7 @@ THEN
 		IF "!c1"
 			IsGreaterThen(_y, 1.0)
 		THEN
-			GetDirection(_Char, _Target, _, _)
+			//etDirection(_Char, _Target, _, _)
 			GetForwardDirection(_Char, _Dir)
 			Set(_Dist, 15.0)
 			Multiply(_Dir, _Dist)

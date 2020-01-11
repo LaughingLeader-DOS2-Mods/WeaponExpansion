@@ -17,6 +17,8 @@ DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol
 
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003", "LLWEAPONEX_FX_PISTOL_A_SHOOTING");
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_A_Isshin_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_ISSHIN_SHOOTING");
+
+DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED");
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring1_728f8b1a-7f4d-4912-85e4-054f817f2592
 //EQ_LLWEAPONEX_Hide_Pistol_A_Ring2_b183308c-8348-4079-abfa-2c2eca78d2cd
 
@@ -183,30 +185,188 @@ SetStoryEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile");
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
 AND
-LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+CharacterIsPlayer(_Cause, _IsPlayer)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", 0.0, 1, _Cause);
+LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
 
 IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+AND
+CharacterIsPlayer(_Cause, _IsPlayer)
+THEN
+LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
+AND
+NOT LeaderLib_Variables_QRY_StringVariableSet(_Cause, "LLWEAPONEX_Pistol_BulletType", 0)
+THEN
+LLWEAPONEX_PIstols_Internal_OnHit_Default(_Target, _Cause, _IsPlayer);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
+AND
+LeaderLib_Variables_QRY_StringVariableSet(_Cause, "LLWEAPONEX_Pistol_BulletType", 0)
+AND
+GetVarString(_Cause, "LLWEAPONEX_Pistol_BulletType", _BulletType)
+THEN
+LLWEAPONEX_PIstols_Internal_OnHit_WithBulletType(_Target, _Cause, _IsPlayer, _BulletType);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
+AND
+GetVarString(_Cause, "LLWEAPONEX_Pistol_BulletType", _BulletType)
+THEN
+LLWEAPONEX_PIstols_Internal_OnHit_WithBulletType(_Target, _Cause, _IsPlayer, _BulletType);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_WithBulletType((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1, (STRING)_BulletType)
+AND
+DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _Template, _WeaponStatus, _ScaledStatus)
+AND
+NOT DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _)
+AND
+LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+THEN
+DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _WeaponStatus);
+ApplyStatus(_Target, _WeaponStatus, 0.0, 1, _Cause);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_WithBulletType((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1, (STRING)_BulletType)
+AND
+DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _Template, _WeaponStatus, _ScaledStatus)
+AND
+NOT DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _)
+AND
+NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+THEN
+DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _ScaledStatus);
+ApplyStatus(_Target, _ScaledStatus, 0.0, 1, _Cause);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_WithBulletType((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 0, (STRING)_BulletType)
+AND
+DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _Template, _WeaponStatus, _ScaledStatus)
+AND
+NOT DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _)
+THEN
+DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _ScaledStatus);
+ApplyStatus(_Target, _ScaledStatus, 0.0, 1, _Cause);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_WithBulletType((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer, (STRING)_BulletType)
+AND
+DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _Status)
+THEN
+NOT DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _Status);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 0)
+THEN
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
 AND
 NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
 
-IF
-ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
 AND
 LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", 0.0, 1, _Cause);
+//END_REGION
+
+//REGION PISTOL_AMMO
+PROC
+LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Pistol", 1)
+THEN
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_Pistol_HasAmmo");
+
+PROC
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Pistol", 1)
+AND
+ObjectGetFlag(_Item, "LLWEAPONEX_Pistol_HasAmmo", _HasAmmo)
+THEN
+LLWEAPONEX_Pistols_Internal_CheckLastBulletType(_Char);
+LLWEAPONEX_Pistols_OnPistolEquipped(_Char, _Item, _HasAmmo);
+
+PROC
+LLWEAPONEX_Pistols_Internal_CheckLastBulletType((CHARACTERGUID)_Char)
+AND
+GetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _BulletType)
+AND
+NOT DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _, _, _)
+THEN
+SetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", "");
+
+PROC
+LLWEAPONEX_Pistols_Internal_CheckLastBulletType((CHARACTERGUID)_Char)
+AND
+NOT GetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _)
+THEN
+SetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", "");
+
+PROC
+LLWEAPONEX_Pistols_OnPistolEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1)
+THEN
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_Pistol_HasAmmo");
+
+PROC
+LLWEAPONEX_Pistols_OnPistolEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0)
+AND
+GetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _LastBulletType)
+THEN
+LLWEAPONEX_Pistols_Internal_LoadPistolAmmo(_Char, _Item, _LastBulletType);
+
+PROC
+LLWEAPONEX_Pistols_Internal_LoadPistolAmmo((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_LastBulletType)
+AND
+DB_LLWEAPONEX_Pistols_BulletTemplates(_LastBulletType, _Template, _WeaponStatus, _ScaledStatus)
+AND
+NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _)
+THEN
+LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate(_Char, _Item, _Template, _LastBulletType);
+
+PROC
+LLWEAPONEX_Pistols_Internal_LoadPistolAmmo((CHARACTERGUID)_Char, (ITEMGUID)_Item, "")
+AND
+NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _)
+AND
+DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _Template, _WeaponStatus, _ScaledStatus)
+AND
+NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _)
+THEN
+LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate(_Char, _Item, _Template, _BulletType);
+
+PROC
+LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template, (STRING)_BulletType)
+AND
+GetItemForItemTemplateInInventory(_Char, _Template, _Bullets)
+AND
+ObjectExists(_Bullets, 1)
+THEN
+DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets);
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_Pistol_HasAmmo");
+SetVarString(_Char, "LLWEAPONEX_Pistol_BulletType", _BulletType);
+SetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _BulletType);
 
 IF
-ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
+DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets)
 AND
-NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
+IsTagged(_Bullets, "LLWEAPONEX_Infinite", 0)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
+LeaderLib_Helper_ModifyItemAmount(_Bullets, -1);
+
+PROC
+LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template, (STRING)_BulletType)
+AND
+DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets)
+THEN
+NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets);
 //END_REGION
 EXITSECTION
 
