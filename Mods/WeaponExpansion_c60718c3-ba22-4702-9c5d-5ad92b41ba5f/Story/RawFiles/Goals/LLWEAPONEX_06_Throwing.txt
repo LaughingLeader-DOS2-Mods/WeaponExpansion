@@ -1207,6 +1207,30 @@ NOT DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Targe
 //END_REGION
 
 //REGION THROW_OBJECT
+/* [OSITOOLS_ONLY]
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
+AND
+GetStatString(_Target, _Stat)
+AND
+NRD_StatGetInt(_Stat, "Weight", _BaseWeight)
+THEN
+SetVarInteger(_Target, "LLWEAPONEX_BaseWeight", _BaseWeight);
+CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight");
+*/
+
+/*
+IF
+ItemStatusAttempt(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
+AND
+GetStatString(_Target, _Stat)
+AND
+NRD_StatGetInt(_Stat, "Weight", _BaseWeight)
+THEN
+SetVarInteger(_Target, "LLWEAPONEX_BaseWeight", _BaseWeight);
+CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight");
+*/
+
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 THEN

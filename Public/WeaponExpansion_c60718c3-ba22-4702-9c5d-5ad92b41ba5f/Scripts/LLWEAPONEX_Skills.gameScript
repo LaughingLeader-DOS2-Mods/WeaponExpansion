@@ -208,6 +208,8 @@ VARS
     CHARACTER:_Source
 	CHARACTER:_Target
 	FLOAT:_Weight
+	INT:_BaseWeightInt
+	FLOAT:_BaseWeight
 	FLOAT:_Strength
 	FLOAT:_MaxStrengthWeight
 	STRING:_Str
@@ -222,13 +224,23 @@ ACTIONS
 	THEN
 	ENDIF
 
-	//Base Weight is 50,000, 1,000 weight == 1 weight unit in-game
-	//20 STR = 200 max units == 200,000 max weight
 	IF "c1&c2"
-		IsGreaterThen(_Weight, 0.0)
-		IsGreaterThen(_Weight, 50000.0)
+		HasGlobalFlag("LeaderLib_ExtenderIsActive")
+		GetVar(_BaseWeightInt, _Target, "LLWEAPONEX_BaseWeight")
 	THEN
-		Subtract(_Weight, 50000.0)
+		Cast(_BaseWeight, _BaseWeightInt)
+	ELSE
+		Set(_BaseWeight, 50000.0)
+	ENDIF
+
+	//Base Weight is 50,000, 1,000 weight == 1 weight unit in-game
+	//20 STR == 200 max units == 200,000 max weight
+	IF "c1&(c2|c3)"
+		IsGreaterThen(_Weight, 0.0)
+		IsGreaterThen(_Weight, _BaseWeight)
+		IsEqual(_Weight, _BaseWeight)
+	THEN
+		Subtract(_Weight, _BaseWeight)
 	ENDIF
 
 	IF "c1|!c2|c3|c4"
@@ -273,6 +285,8 @@ VARS
     CHARACTER:_Source
 	ITEM:_Target
 	FLOAT:_Weight
+	INT:_BaseWeightInt
+	FLOAT:_BaseWeight
 	FLOAT:_Strength
 	FLOAT:_MaxStrengthWeight
 ON
@@ -284,13 +298,6 @@ ACTIONS
 		ItemGetStat(_Weight, _Target, Weight)
 		CharacterGetStat(_Strength, _Source, Strength)
 	THEN
-	ENDIF
-
-	IF "c1&c2"
-		IsGreaterThen(_Weight, 0.0)
-		IsGreaterThen(_Weight, 50000.0)
-	THEN
-		Subtract(_Weight, 50000.0)
 	ENDIF
 
 	IF "c1|!c2|c3|c4"
