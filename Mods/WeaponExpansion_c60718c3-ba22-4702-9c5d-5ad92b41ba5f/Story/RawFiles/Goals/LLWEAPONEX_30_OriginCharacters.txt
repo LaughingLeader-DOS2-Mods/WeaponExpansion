@@ -1,0 +1,15 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Origins_InitCharacters();
+KBSECTION
+
+//REGION ORIGIN_SETUP
+PROC
+LLWEAPONEX_Origins_InitCharacters()
+THEN
+LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Generic_Companions_1", "Hero Henchman Knight");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

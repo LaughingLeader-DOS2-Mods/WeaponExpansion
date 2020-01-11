@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1387205254" />
+    <version major="1" minor="3" revision="0" build="0" />
+    <region id="CharacterCreationManager">
+        <node id="root">
+            <children>
+                <node id="OriginDesc">
+                	<attribute id="OriginDisplayName" value="Harken" handle="h72266d41ge248g44a3g93eeg48bfe62fb97d" type="28" />
+                    <attribute id="OriginName" value="LLWEAPONEX_Harken" type="22" />
+                	<attribute id="OriginDescription" value="After a illustrious career as a mercenary, brutally smashing enemies with the legendary Anvilmar, you find yourself adrift for once in your life. " handle="hcc37794bgb628g4228ga931gcd5528f018c6" type="28" />
+                	<attribute id="OriginLongDescription" value="| Beast Origin Long Description |" handle="hc4dfbad8g48c0g4236gba3eg5fb875e12c39" type="28" />
+                    <attribute id="CharacterUUID" value="e446752a-13cc-4a88-a32e-5df244c90d8b" type="22" />
+                    <attribute id="UserCanAlterTags" value="0" type="19" />
+                    <attribute id="SkillSet" value="Avatar_LLWEAPONEX_Harkin" type="22" />
+					<attribute id="RootTemplateOverride" value="ca2b78c8-85f3-45f1-b8de-9e8363f1aa51" type="22" />
+
+                    <children>
+                        <node id="TalentsAdded">
+                        </node>
+                    </children>
+
+                	<children>
+                		<node id="SupportedGenders">
+                			<children>
+                                <node id="Gender">
+                                    <attribute id="Gender" value="Male" type="23" />
+                                </node>
+                			</children>
+                		</node>
+
+                		<node id="SupportedRaces">
+                			<children>
+                				<node id="SupportedRaces">
+                                    <attribute id="Object" value="Dwarf" type="22" />
+                                </node>
+                			</children>
+                		</node>
+                	</children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>
