@@ -187,14 +187,16 @@ CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_C
 AND
 CharacterIsPlayer(_Cause, _IsPlayer)
 THEN
-LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
+//LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
+LLWEAPONEX_PIstols_Internal_OnHit_Default(_Target, _Cause, _IsPlayer);
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
 AND
 CharacterIsPlayer(_Cause, _IsPlayer)
 THEN
-LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
+//LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
+LLWEAPONEX_PIstols_Internal_OnHit_Default(_Target, _Cause, _IsPlayer);
 
 PROC
 LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
@@ -273,7 +275,7 @@ THEN
 ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
 
 PROC
-LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
+LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
 AND
 LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN

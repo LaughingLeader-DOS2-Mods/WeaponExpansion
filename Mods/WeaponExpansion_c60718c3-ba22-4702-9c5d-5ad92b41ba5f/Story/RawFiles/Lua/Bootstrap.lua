@@ -59,9 +59,9 @@ end
 --v36 and higher
 if Ext.RegisterListener ~= nil then
     Ext.RegisterListener("SessionLoading", GameSessionLoad)
-    if Ext.Version() >= 39 then
-        Ext.RegisterListener("SkillGetDescriptionParam", GetDescriptionParam)
-    end
+    -- if Ext.Version() >= 39 then
+    --     Ext.RegisterListener("SkillGetDescriptionParam", GetDescriptionParam)
+    -- end
 end
 
 Ext.Print("[WeaponExpansion:Bootstrap.lua] Finished running.")
