@@ -141,6 +141,13 @@ using "_LLWEAPONEX_WARCHARGE_BASE"
 data "AuraRadius" "18"
 data "StackPriority" "9"
 
+new entry "LLWEAPONEX_WARCHARGE_REMOVE"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "StackPriority" "10"
+data "ForceStackOverWrite" "Yes"
+
 new entry "LLWEAPONEX_BANNER_RALLY_DIVINEORDER"
 type "StatusData"
 data "StatusType" "CONSUME"

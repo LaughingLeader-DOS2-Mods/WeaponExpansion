@@ -1330,6 +1330,31 @@ CharacterStatusRemoved(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
 //END_REGION
+
+//REGION BANNER_STATUSES_REMOVE
+/*
+IF
+SkillDeactivated(_Char, "Shout_LLWEAPONEX_Banner_WarCharge")
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_WARCHARGE_REMOVE", 0.0, 0, _Char);
+*/
+
+IF
+//SkillDeactivated(_Char, "Dome_LLWEAPONEX_Banner_Rally_DivineOrder")
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ee686596-394f-44ae-867b-4596de1feedb", _Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER");
+
+IF
+//SkillDeactivated(_Char, "Dome_LLWEAPONEX_Banner_Rally_Dwarves")
+ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_59675259-8e78-48fd-acad-cf70c90bc909", _Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
