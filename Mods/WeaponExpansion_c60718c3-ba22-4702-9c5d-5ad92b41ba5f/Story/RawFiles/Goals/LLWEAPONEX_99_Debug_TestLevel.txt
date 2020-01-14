@@ -48,7 +48,7 @@ GlobalClearFlag("LeaderLog_DebugEvents_Enabled");
 GlobalClearFlag("LeaderLog_DebugDialog_Enabled");
 GlobalClearFlag("LeaderLog_Trace_Enabled");
 GlobalSetFlag("LeaderLog_Debug_Enabled");
-
+GlobalSetFlag("LeaderLog_DebugStatus_Enabled");
 DB_LLWEAPONEX_Debug_StatusClear("POISONED");
 DB_LLWEAPONEX_Debug_StatusClear("BURNING");
 DB_LLWEAPONEX_Debug_StatusClear("SLOWED");
