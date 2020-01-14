@@ -122,7 +122,7 @@ DB_LLWEAPONEX_Statuses_Runes("LLWEAPONEX_ACTIVATE_RUNEBLADE_WATER");
 
 //REGION CHAOS_RUNE_SURFACE_ABSORB
 QRY
-LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval((CHARACTERGUID)_Character, (STRING)_Surface)
+LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval((CHARACTERGUID)_Char, (STRING)_Surface)
 AND
 StringContains(_Surface, "Blessed", 1)
 THEN
@@ -144,38 +144,38 @@ DB_NOOP(1);
 
 /* Handled in LLWEAPONEX_RuneBlades.gameScript
 IF
-CharacterStatusAttempt(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
+CharacterStatusAttempt(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
 AND
 DB_LeaderLib_Surfaces(_Index, _Surface)
 AND
-ObjectGetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 0)
+ObjectGetFlag(_Char, "LLWEAPONEX_ChaosRune_PreserveSurface", 0)
 AND
-LeaderLib_Helper_QRY_IsInSurface(_Character, _Surface)
+LeaderLib_Helper_QRY_IsInSurface(_Char, _Surface)
 AND
 LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval(_Surface)
 THEN
-ObjectSetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 0);
+ObjectSetFlag(_Char, "LLWEAPONEX_ChaosRune_PreserveSurface", 0);
 
 IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
+CharacterStatusRemoved(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
 AND
-DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Character)
+DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Char)
 AND
-GetPosition(_Character, _x, _y, _z)
+GetPosition(_Char, _x, _y, _z)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Character);
-//RemoveStatus(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS");
-PlayEffect(_Character, "RS3_FX_Skills_Void_Cast_Weapon_Hand_01", "Dummy_CastFX");
+NOT DB_LLWEAPONEX_Runeblades_AbsorbedSurface(_Char);
+//RemoveStatus(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS");
+PlayEffect(_Char, "RS3_FX_Skills_Void_Cast_Weapon_Hand_01", "Dummy_CastFX");
 CreateSurfaceAtPosition(_x, _y, _z, "SurfaceNone", 1.0, -1.0); // Absorb the surface
 */
 
 IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
+CharacterStatusRemoved(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS", _)
 AND
-ObjectGetFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface", 1)
+ObjectGetFlag(_Char, "LLWEAPONEX_ChaosRune_PreserveSurface", 1)
 THEN
-ObjectClearFlag(_Character, "LLWEAPONEX_ChaosRune_PreserveSurface");
-//CharacterStatusText(_Character, "LLWEAPONEX_NoElementFoundForChaosRune");
+ObjectClearFlag(_Char, "LLWEAPONEX_ChaosRune_PreserveSurface");
+//CharacterStatusText(_Char, "LLWEAPONEX_NoElementFoundForChaosRune");
 //END_REGION
 
 //REGION BONUS_DAMAGE_STATUS
@@ -189,41 +189,43 @@ THEN
 NOT DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_BaseStatus, _BonusDamageStatus1, _EmptyStatus);
 DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_BaseStatus, _BonusDamageStatus1, _BonusDamageStatus2);
 
-IF
-CharacterStatusApplied(_Character, _Status, _)
+PROC
+LLWEAPONEX_Runeblades_OnActivateStatusApplied((CHARACTERGUID)_Char, (STRING)_Status)
 AND
 DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_Status, _BonusDamage1, _BonusDamage2)
 AND
-GetStatusTurns(_Character, _Status, _TurnsInt)
+GetStatusTurns(_Char, _Status, _TurnsInt)
+AND
+_TurnsInt > 0
 AND
 Real(_TurnsInt, _TurnsReal)
 AND
 RealProduct(_TurnsReal, 6.0, _Duration)
 THEN
-LLWEAPONEX_Runeblades_ApplyBonusDamageStatus(_Character, _BonusDamage1, _Duration);
-LLWEAPONEX_Runeblades_ApplyBonusDamageStatus(_Character, _BonusDamage2, _Duration);
+LLWEAPONEX_Runeblades_ApplyBonusDamageStatus(_Char, _BonusDamage1, _Duration);
+LLWEAPONEX_Runeblades_ApplyBonusDamageStatus(_Char, _BonusDamage2, _Duration);
 
 PROC
-LLWEAPONEX_Runeblades_ApplyBonusDamageStatus((CHARACTERGUID)_Character, (STRING)_Status, (REAL)_Duration)
+LLWEAPONEX_Runeblades_ApplyBonusDamageStatus((CHARACTERGUID)_Char, (STRING)_Status, (REAL)_Duration)
 AND
 _Status != ""
 THEN
-ApplyStatus(_Character, _Status, _Duration, 0, _Character);
+ApplyStatus(_Char, _Status, _Duration, 0, _Char);
 
 IF
-CharacterStatusRemoved(_Character, _Status, _)
+CharacterStatusRemoved(_Char, _Status, _)
 AND
 DB_LLWEAPONEX_Runeblades_BonusDamageStatuses(_Status, _BonusDamage1, _BonusDamage2)
 THEN
-LLWEAPONEX_Runeblades_RemoveBonusDamageStatus(_Character, _BonusDamage1);
-LLWEAPONEX_Runeblades_RemoveBonusDamageStatus(_Character, _BonusDamage2);
+LLWEAPONEX_Runeblades_RemoveBonusDamageStatus(_Char, _BonusDamage1);
+LLWEAPONEX_Runeblades_RemoveBonusDamageStatus(_Char, _BonusDamage2);
 
 PROC
-LLWEAPONEX_Runeblades_RemoveBonusDamageStatus((CHARACTERGUID)_Character, (STRING)_Status)
+LLWEAPONEX_Runeblades_RemoveBonusDamageStatus((CHARACTERGUID)_Char, (STRING)_Status)
 AND
 _Status != ""
 THEN
-RemoveStatus(_Character, _Status);
+RemoveStatus(_Char, _Status);
 //END_REGION
 
 //REGION RANDOM_ROLL
@@ -241,14 +243,14 @@ CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_Random
 
 //REGION DOUBLE_HITS
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_PREVENT_DOUBLE_HITS", _)
+CharacterStatusApplied(_Char, "LLWEAPONEX_PREVENT_DOUBLE_HITS", _)
 THEN
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_PreventDoubleHits", 500);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_PreventDoubleHits", 500);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_PreventDoubleHits")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_PreventDoubleHits")
 THEN
-RemoveStatus(_Character, "LLWEAPONEX_PREVENT_DOUBLE_HITS");
+RemoveStatus(_Char, "LLWEAPONEX_PREVENT_DOUBLE_HITS");
 //END_REGION
 
 //REGION SOUL_BURN_TICK
@@ -256,51 +258,52 @@ RemoveStatus(_Character, "LLWEAPONEX_PREVENT_DOUBLE_HITS");
 //LLWEAPONEX_SOUL_BURN_TICK - Lower the stack
 
 IF
-StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Commands_StartSoulBurnTick")
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Commands_StartSoulBurnTick")
 AND
-HasActiveStatus(_Character, "LLWEAPONEX_SOUL_BURN1", 0) // Skip since it's at the bottom of the stack
+HasActiveStatus(_Char, "LLWEAPONEX_SOUL_BURN1", 0) // Skip since it's at the bottom of the stack
 THEN
-ObjectClearFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick");
-ApplyStatus(_Character, "LLWEAPONEX_SOUL_BURN_TICK", 6.0, 1, _Character);
+ObjectClearFlag(_Char, "LLWEAPONEX_SkipSoulBurnTick");
+ApplyStatus(_Char, "LLWEAPONEX_SOUL_BURN_TICK", 6.0, 1, _Char);
 
 IF
-StoryEvent((CHARACTERGUID)_Character, "LLWEAPONEX_Commands_StopSoulBurnTick")
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Commands_StopSoulBurnTick")
 THEN
-ObjectSetFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick", 0);
-RemoveStatus(_Character, "LLWEAPONEX_SOUL_BURN_TICK");
+ObjectSetFlag(_Char, "LLWEAPONEX_SkipSoulBurnTick", 0);
+RemoveStatus(_Char, "LLWEAPONEX_SOUL_BURN_TICK");
 
 IF
-CharacterStatusRemoved(_Character, "LLWEAPONEX_SOUL_BURN_TICK", _)
+CharacterStatusRemoved(_Char, "LLWEAPONEX_SOUL_BURN_TICK", _)
 AND
-ObjectGetFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick", 1)
+ObjectGetFlag(_Char, "LLWEAPONEX_SkipSoulBurnTick", 1)
 THEN
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_ResetSkipSoulBurnTickTimerFlag", 250);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_ResetSkipSoulBurnTickTimerFlag", 250);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_ResetSkipSoulBurnTickTimerFlag")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_ResetSkipSoulBurnTickTimerFlag")
 THEN
-ObjectClearFlag(_Character, "LLWEAPONEX_SkipSoulBurnTick");
+ObjectClearFlag(_Char, "LLWEAPONEX_SkipSoulBurnTick");
 //END_REGION
 
+//REGION THUNDERBOLT
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE", NULL_00000000-0000-0000-0000-000000000000)
+CharacterStatusApplied(_Char, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE", NULL_00000000-0000-0000-0000-000000000000)
 AND
 CharacterGetHostCharacter(_Host)
 AND
 CharacterGetLevel(_Host, _Level)
 AND
-GetPosition(_Character, _x, _y, _z)
+GetPosition(_Char, _x, _y, _z)
 THEN
 CreateProjectileStrikeAtPosition(_x, _y, _z, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", _Level);
 
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE", (CHARACTERGUID)_Cause)
+CharacterStatusApplied(_Char, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE", (CHARACTERGUID)_Cause)
 AND
-CharacterIsDead(_Character, 0)
+CharacterIsDead(_Char, 0)
 AND
 _Cause != NULL_00000000-0000-0000-0000-000000000000
 THEN
-LeaderLib_Skills_UseSkillOnTarget(_Cause, _Character, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", 1, 1);
+LeaderLib_Skills_UseSkillOnTarget(_Cause, _Char, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", 1, 1);
 
 PROC
 LeaderLib_Skills_OnDummyUsedSkillOnTarget((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", (GUIDSTRING)_Target, (STRING)_Skilltype, (STRING)_SkillElement)
@@ -326,6 +329,7 @@ AND
 DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target)
 THEN
 NOT DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target);
+//END_REGION
 
 //REGION DOUBLE_RUNEBLADE_SKILLS
 QRY
@@ -339,28 +343,28 @@ DB_NOOP(1);
 
 
 PROC
-LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Character, "LLWEAPONEX_Runeblade")
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Char, "LLWEAPONEX_Runeblade")
 THEN
-ObjectClearFlag(_Character, "LLWEAPONEX_Runeblade_RuneActive", 0);
+ObjectClearFlag(_Char, "LLWEAPONEX_Runeblade_RuneActive", 0);
 
 IF
-ItemUnEquipped(_Runeblade, _Character)
+ItemUnEquipped(_Runeblade, _Char)
 AND
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _Skill)
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Char, _Runeblade, _Skill)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _Skill);
-CharacterRemoveSkill(_Character, _Skill);
+NOT DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Char, _Runeblade, _Skill);
+CharacterRemoveSkill(_Char, _Skill);
 
 /*
 IF
-ItemUnEquipped(_Runeblade, _Character)
+ItemUnEquipped(_Runeblade, _Char)
 AND
 IsTagged(_Runeblade, "LLWEAPONEX_Runeblade", 1)
 AND
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _StoredRuneblade, _Status)
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Char, _StoredRuneblade, _Status)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _StoredRuneblade, _Status);
-RemoveStatus(_Character, _Status);
+NOT DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Char, _StoredRuneblade, _Status);
+RemoveStatus(_Char, _Status);
 */
 
 PROC
@@ -372,13 +376,13 @@ LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Player, _Item);
 
 //Mainhand
 PROC
-LLWEAPONEX_Runeblades_OnRunebladeEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Runeblade)
+LLWEAPONEX_Runeblades_OnRunebladeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Runeblade)
 AND
 IsTagged(_Runeblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
 AND
-CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_Runeblade)
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Runeblade)
 AND
-CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_OtherRuneblade)
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_OtherRuneblade)
 AND
 IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade", 1)
 AND
@@ -386,26 +390,26 @@ IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
 AND
 DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
 AND
-CharacterHasSkill(_Character, _MainSkill, 1)
+CharacterHasSkill(_Char, _MainSkill, 1)
 AND
-CharacterHasSkill(_Character, _DualWieldSkill, 0)
+CharacterHasSkill(_Char, _DualWieldSkill, 0)
 AND
 LLWEAPONEX_Runeblades_QRY_CanAddDualWieldSkill(_Runeblade, _OtherRuneblade, _Tag)
 THEN
-//ApplyStatus(_Character, _Status, -1.0, 1, _Character);
-//DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Character, _Runeblade, _Status);
-CharacterAddSkill(_Character, _DualWieldSkill, 0);
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _DualWieldSkill);
+//ApplyStatus(_Char, _Status, -1.0, 1, _Char);
+//DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingStatus(_Char, _Runeblade, _Status);
+CharacterAddSkill(_Char, _DualWieldSkill, 0);
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Char, _Runeblade, _DualWieldSkill);
 
 //Offhand
 PROC
-LLWEAPONEX_Runeblades_OnRunebladeEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Runeblade)
+LLWEAPONEX_Runeblades_OnRunebladeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Runeblade)
 AND
 IsTagged(_Runeblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
 AND
-CharacterGetEquippedItem(_Character, "Shield", (ITEMGUID)_Runeblade)
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Runeblade)
 AND
-CharacterGetEquippedItem(_Character, "Weapon", (ITEMGUID)_OtherRuneblade)
+CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_OtherRuneblade)
 AND
 IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade", 1)
 AND
@@ -413,19 +417,19 @@ IsTagged(_OtherRuneblade, "LLWEAPONEX_Runeblade_CustomRuneSkill", 0)
 AND
 DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
 AND
-CharacterHasSkill(_Character, _MainSkill, 1)
+CharacterHasSkill(_Char, _MainSkill, 1)
 AND
-CharacterHasSkill(_Character, _DualWieldSkill, 0)
+CharacterHasSkill(_Char, _DualWieldSkill, 0)
 AND
 LLWEAPONEX_Runeblades_QRY_CanAddDualWieldSkill(_Runeblade, _OtherRuneblade, _Tag)
 THEN
-CharacterAddSkill(_Character, _DualWieldSkill, 0);
-DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Character, _Runeblade, _DualWieldSkill);
+CharacterAddSkill(_Char, _DualWieldSkill, 0);
+DB_LLWEAPONEX_Runeblades_Temp_AddedDualWieldingRuneSkill(_Char, _Runeblade, _DualWieldSkill);
 //END_REGION
 
 //REGION SOUNDS
 IF
-CharacterStatusApplied(_Character, "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _)
+CharacterStatusApplied(_Char, "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _)
 AND
 DB_LLWEAPONEX_Runeblades_StatusSound("LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _Sound, _Delay)
 AND
@@ -433,9 +437,9 @@ NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_, "LLWEAPONEX_RUNEBLADE_HEATBURS
 AND
 StringConcatenate("LLWEAPONEX_Timers_ResetStatusSound_", "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _TimerName)
 THEN
-PlaySound(_Character, _Sound);
+PlaySound(_Char, _Sound);
 TimerLaunch(_TimerName, _Delay);
-DB_LLWEAPONEX_Runeblades_Temp_PreventSound((GUIDSTRING)_Character, "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _TimerName);
+DB_LLWEAPONEX_Runeblades_Temp_PreventSound((GUIDSTRING)_Char, "LLWEAPONEX_RUNEBLADE_HEATBURST_SPREAD", _TimerName);
 
 IF
 ObjectFlagSet("LLWEAPONEX_Runeblade_PlayHeatBurstCheckSound", _Object, _)
@@ -460,7 +464,7 @@ NOT DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Object, _String, _TimerName);
 
 /*
 IF
-CharacterStatusApplied(_Character, _Status, _)
+CharacterStatusApplied(_Char, _Status, _)
 AND
 DB_LLWEAPONEX_Runeblades_StatusSound(_Status, _Sound, _Delay)
 AND
@@ -469,7 +473,7 @@ AND
 StringConcatenate("LLWEAPONEX_Timers_ResetStatusSound_", _Status, _TimerName)
 THEN
 DB_LLWEAPONEX_Runeblades_Temp_PreventSound(_Status, _TimerName);
-PlaySound(_Character, _Sound);
+PlaySound(_Char, _Sound);
 TimerLaunch(_TimerName, _Delay);
 */
 
@@ -498,7 +502,7 @@ ObjectClearFlag(_Object, _Flag);
 
 //REGION RUNE_BLOCKING
 IF
-RuneInserted(_Character, _Item, _RuneTemplate, _Slot)
+RuneInserted(_Char, _Item, _RuneTemplate, _Slot)
 AND
 StringContains(_RuneTemplate, "LOOT_Rune_LLWEAPONEX_Runeblade_", 1)
 AND
@@ -508,28 +512,28 @@ IsTagged(_Item, "LLWEAPONEX_Runeblade", 0)
 //AND
 //StringContains(_ItemTemplate, "WPN_", 1)
 THEN
-DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
-LeaderLib_Timers_StartCharacterItemTimer(_Character, (ITEMGUID)_Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_Runeblade_RemoveBlockedRune");
+DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, (ITEMGUID)_Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_Runeblade_RemoveBlockedRune");
 
 IF
-CharacterItemEvent(_Character, _Item, "LLWEAPONEX_Runeblade_RemoveBlockedRune")
+CharacterItemEvent(_Char, _Item, "LLWEAPONEX_Runeblade_RemoveBlockedRune")
 AND
-DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate)
+DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate)
 AND
-LeaderLog_QRY_SetNextOneshotStatus(_Character, "#FF0000", "22")
+LeaderLog_QRY_SetNextOneshotStatus(_Char, "#FF0000", "22")
 AND
 LeaderLog_QRY_Log("STATUS", "*This rune can only be inserted into a <font color='#40E0D0'>Runeblade</font>.*")
 AND
-ItemRemoveRune(_Character, _Item, _Slot, _Rune)
+ItemRemoveRune(_Char, _Item, _Slot, _Rune)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
+NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
 
 IF
-CharacterItemEvent(_Character, _Item, "LLWEAPONEX_Runeblade_RemoveBlockedRune")
+CharacterItemEvent(_Char, _Item, "LLWEAPONEX_Runeblade_RemoveBlockedRune")
 AND
-DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate)
+DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate)
 THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Character, _Item, _Slot, _RuneTemplate);
+NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
 //END_REGION
 
 //REGION ON_HIT
@@ -561,6 +565,83 @@ AND
 LLWEAPONEX_Runeblades_QRY_CanApplyOnHit(_Source, _Char)
 THEN
 CharacterCharacterSetEvent(_Source, _Char, "LLWEAPONEX_Runeblade_ApplyBonusOnHit");
+//END_REGION
+
+//REGION ACTIVATE_STATUS_APPLIED
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_AIR");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_EARTH");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_FIRE");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_WATER");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONDUCTION");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_DUST");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_EXPLOSIVE");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_HEATWAVE");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_LAVA");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_SEARING");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR", _)
+THEN
+LLWEAPONEX_Runeblades_OnActivateStatusApplied(_Char, "LLWEAPONEX_ACTIVATE_RUNEBLADE_TAR");
 //END_REGION
 EXITSECTION
 
