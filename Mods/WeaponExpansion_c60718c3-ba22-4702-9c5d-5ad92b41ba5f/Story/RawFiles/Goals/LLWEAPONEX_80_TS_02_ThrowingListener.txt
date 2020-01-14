@@ -1,0 +1,42 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+IF
+CharacterUsedSkill(_Player, _Skill, _, _)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _LastTarget)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Player, 3000, "Timers_LLWEAPONEX_Throwing_SkillListenFallback", "LLWEAPONEX_Throwing_SkillListenFallback");
+
+IF
+CharacterUsedSkillOnTarget(_Player, _Target, _Skill, _, _)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _LastTarget)
+THEN
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _LastTarget);
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
+LLWEAPONEX_ThrowingMastery_OnThrowingSkillUsedOnTarget(_Player, _Target, _Item, _Skill);
+
+IF
+SkillCast(_Player, _Skill, _, _)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target)
+THEN
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
+LLWEAPONEX_ThrowingMastery_AddExperience(_Player, _Target);
+LLWEAPONEX_ThrowingMastery_OnThrowingItemUsed(_Player, _Item, _Skill);
+
+//Cancelled Throwing
+IF
+CharacterStoppedUsingItem(_Player, _Item)
+AND
+DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target)
+THEN
+NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
+LLWEAPONEX_ThrowingMastery_OnFinishedListening(_Player);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"
