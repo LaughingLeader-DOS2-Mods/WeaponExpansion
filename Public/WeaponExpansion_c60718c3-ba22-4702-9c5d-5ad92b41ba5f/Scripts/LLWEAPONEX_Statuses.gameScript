@@ -455,3 +455,58 @@ THEN
 	CharacterApplyStatus(_AuraHost, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
 	ItemApplyStatus(_Target, LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE, 0, 0, _Source)
 ENDIF
+
+EVENT LLWEAPONEX_WarCharge_LeadershipScaling
+VARS
+	CHARACTER:_Char
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
+	INT:_Leadership
+ON
+	FetchCharacterApplyStatusData(_Char, LLWEAPONEX_WARCHARGE_APPLY)
+ACTIONS
+	Set(_Result, null)
+IF "c1"
+	CharacterGetAbility(_Leadership, _Char, Leadership)
+THEN
+	IF "c1"
+		IsGreaterThen(_Leadership, 9)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE10)
+	ELIF "c1"
+		IsEqual(_Leadership, 9)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE09)
+	ELIF "c1"
+		IsEqual(_Leadership, 8)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE08)
+	ELIF "c1"
+		IsEqual(_Leadership, 7)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE07)
+	ELIF "c1"
+		IsEqual(_Leadership, 6)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE06)
+	ELIF "c1"
+		IsEqual(_Leadership, 5)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE05)
+	ELIF "c1"
+		IsEqual(_Leadership, 4)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE04)
+	ELIF "c1"
+		IsEqual(_Leadership, 3)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE03)
+	ELIF "c1"
+		IsEqual(_Leadership, 2)
+	THEN
+		Set(_Result, LLWEAPONEX_WARCHARGE02)
+	ELSE
+		Set(_Result, LLWEAPONEX_WARCHARGE01)
+	ENDIF
+ENDIF
+	RETURN(_RemoveList, _Result, null)
