@@ -376,7 +376,7 @@ data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Air_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Air"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LLWEAPONEX_Flasks_Base"
 data "AirResistance" "-25"
 
 new entry "LLWEAPONEX_FLASK_WEAKNESS_CHAOS"
@@ -394,7 +394,7 @@ data "ApplyEffect" "RS3_FX_Skills_Air_Apportation_Item_Impact_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Chaos"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LLWEAPONEX_Flasks_Base"
 data "FireResistance" "-10"
 data "EarthResistance" "-10"
 data "WaterResistance" "-10"
@@ -418,7 +418,7 @@ data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Earth_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Earth"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LLWEAPONEX_Flasks_Base"
 data "EarthResistance" "-25"
 
 new entry "LLWEAPONEX_FLASK_WEAKNESS_FIRE"
@@ -436,7 +436,7 @@ data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Fire_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Fire"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LLWEAPONEX_Flasks_Base"
 data "FireResistance" "-25"
 
 new entry "LLWEAPONEX_FLASK_WEAKNESS_POISON"
@@ -454,7 +454,7 @@ data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Poison_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Poison"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LLWEAPONEX_Flasks_Base"
 data "PoisonResistance" "-25"
 
 new entry "LLWEAPONEX_FLASK_WEAKNESS_WATER"
@@ -472,5 +472,5 @@ data "ApplyEffect" "LLWEAPONEX_FX_Status_Weakness_Water_Apply_01"
 
 new entry "Stats_LLWEAPONEX_Flask_Weakness_Water"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LLWEAPONEX_Flasks_Base"
 data "WaterResistance" "-25"

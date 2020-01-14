@@ -2,3 +2,8 @@ new entry "_Stats_LLWEAPONEX_Potions_Base"
 type "Potion"
 using "_Stats_LLWEAPONEX_Potions_Base"
 data "Duration" "1"
+
+new entry "_Stats_LLWEAPONEX_Flasks_Base"
+type "Potion"
+using "_Stats_LLWEAPONEX_Potions_Base"
+data "Duration" "2"
