@@ -14,8 +14,7 @@ data "ApplyEffect" "LLWEAPONEX_FX_Status_DuelistStance_Applied_01:Dummy_Overhead
 
 new entry "Stats_LLWEAPONEX_RapierMastery_DuelistStance"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "MovementSpeedBoost" "10"
 data "DamageBoost" "10"
 data "Armor" "44"
@@ -30,8 +29,7 @@ data "StackId" "Stack_LLWEAPONEX_RapierMastery_DuelistStance_Weapon"
 
 new entry "Stats_LLWEAPONEX_RapierMastery_DuelistStance_Weapon"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "BoostConditions" "OnWeaponKnife"
 data "BonusWeapon" "Status_LLWEAPONEX_RapierMastery_DuelistStance"
 
@@ -56,15 +54,13 @@ data "ApplyEffect" "LLWEAPONEX_FX_Status_DuelistBonus_Applied_01:Dummy_OverheadF
 
 new entry "Stats_LLWEAPONEX_RapierMastery_DuelistBonus"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "ActionPoints" "1"
 data "ExtraProperties" "CONSUME,100,1,Stats_LLWEAPONEX_RapierMastery_CritDamageBoost"
 
 new entry "Stats_LLWEAPONEX_RapierMastery_CritDamageBoost"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "RogueLore" "2"
 data "StatusIcon" ""
 
@@ -106,8 +102,7 @@ data "StackId" "Stack_LLWEAPONEX_RapierMastery_SuckerCombo2_FlyingCheck"
 
 new entry "Stats_LLWEAPONEX_RapierMastery_SuckerCombo2_FlyingCheck"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "Duration" "1"
 
 new entry "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING_DAMAGE"
@@ -161,8 +156,7 @@ data "StackId" "Stats_LLWEAPONEX_Rapier_FrenzyCharge1"
 
 new entry "Stats_LLWEAPONEX_Rapier_FrenzyCharge"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "DamageBoost" "4"
 data "MovementSpeedBoost" "4"
 

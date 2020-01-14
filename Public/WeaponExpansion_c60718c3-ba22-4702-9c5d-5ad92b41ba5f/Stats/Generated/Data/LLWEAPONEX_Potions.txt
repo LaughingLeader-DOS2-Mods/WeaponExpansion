@@ -1,5 +1,4 @@
 new entry "_Stats_LLWEAPONEX_Potions_Base"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "Duration" "1"

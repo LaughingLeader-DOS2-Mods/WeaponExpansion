@@ -22,8 +22,7 @@ data "StatsId" "Stats_LLWEAPONEX_Grimoire_Death_Active"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Death_Active"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 
 new entry "LLWEAPONEX_GRIMOIRE_DEATH_ACTIVE_BONUS"
 type "StatusData"
@@ -103,8 +102,7 @@ data "StatsId" "Stats_LLWEAPONEX_Grimoire_Mimicry_Active"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Mimicry_Active"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 
 new entry "LLWEAPONEX_GRIMOIRE_MIMIC_READY"
 type "StatusData"
@@ -150,8 +148,7 @@ data "StatsId" "Stats_LLWEAPONEX_Grimoire_Swap_Active"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Swap_Active"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 
 new entry "LLWEAPONEX_GRIMOIRE_SWAP_SURGE"
 type "StatusData"
@@ -251,8 +248,7 @@ data "DisplayNameRef" "Scrambles the Positions of Targets Within Range"
 
 new entry "Stats_LLWEAPONEX_GrimoireScramble"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_Grimoire_Scramble"
 
 new entry "LLWEAPONEX_GRIMOIRE_SCRAMBLE_CHECK"
@@ -304,8 +300,7 @@ data "StatsId" "Stats_LLWEAPONEX_Grimoire_Wind_Active"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Fire_Active"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 
 new entry "LLWEAPONEX_GRIMOIRE_FIRE_ACTIVE"
 type "StatusData"
@@ -324,8 +319,7 @@ data "StatsId" "Stats_LLWEAPONEX_Grimoire_Fire_Active"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Fire_Active"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 
 new entry "LLWEAPONEX_GRIMOIRE_SPARK_EQUIPPED"
 type "StatusData"
@@ -346,8 +340,7 @@ data "Toggle" "Yes"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Spark_Equipped"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 
 new entry "LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATE"
 type "StatusData"
@@ -372,8 +365,7 @@ data "LeaveAction" "Projectile_LLWEAPONEX_Status_Spark_Immolate_Damage"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Spark_Immolate"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "ExtraProperties" "CLEANSE:BURNING;LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATED,100,1"
 
 new entry "LLWEAPONEX_GRIMOIRE_SPARK_IMMOLATED"
@@ -399,8 +391,7 @@ data "SpawnBlood" "No"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Spark_Immolated"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "FireResistance" "-10"
 data "EarthResistance" "-10"
 
@@ -428,8 +419,7 @@ data "StatusEffect" "LLWEAPONEX_FX_Status_SparkBonusDamage_LV1"
 
 new entry "Stats_LLWEAPONEX_Grimoire_Spark_DamageBonus1"
 type "Potion"
-data "Act" "1"
-data "Act part" "0"
+using "_Stats_LLWEAPONEX_Potions_Base"
 data "DamageBoost" "2"
 data "FireResistance" "10"
 
