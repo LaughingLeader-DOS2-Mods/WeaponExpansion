@@ -33,6 +33,17 @@ AND
 DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, _Tag);
+
+IF
+ItemUnEquipped(_Item, _Char)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
+AND
+GetTemplate(_Item, _Template)
+THEN
+LLWEAPONEX_OnItemUnEquipped(_Char, _Item, _Template);
 //END_REGION
 
 //REGION START_EVENTS
@@ -54,20 +65,22 @@ StringContains(_Template, "WPN_", 1)
 AND
 StringContains(_Template, "Shield", _IsShield)
 THEN
-LLWEAPONEX_Internal_TagIfNotShield(_Char, _IsShield);
+LLWEAPONEX_Internal_TagIfNotShield(_Char, _Item, _IsShield);
 
 PROC
-LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
+LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 
-/*
+/* [OSITOOLS_ONLY]
 PROC
-LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, 0)
+LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1)
 AND
-CharacterIsControlled(_Char, 1)
+NRD_ItemGetStatsId(_Item, _Stats)
+AND
+NRD_StatGetType(_Stats, "Weapon")
 THEN
-LeaderLib_Helper_RefreshUI(_Char);
+LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 */
 
 PROC
@@ -91,17 +104,6 @@ AND
 LLWEAPONEX_TagHelper_QRY_CheckWeaponType(_Char, _Item) // Try and get the type via behavior
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_00_EquipEvents:OnWeaponEquipped] Tagged weapon [",_Template,"] with a new weapon type via [LLWEAPONEX_TagHelper_QRY_CheckWeaponType].");
-
-IF
-ItemUnEquipped(_Item, _Char)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
-AND
-GetTemplate(_Item, _Template)
-THEN
-LLWEAPONEX_OnItemUnEquipped(_Char, _Item, _Template);
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
