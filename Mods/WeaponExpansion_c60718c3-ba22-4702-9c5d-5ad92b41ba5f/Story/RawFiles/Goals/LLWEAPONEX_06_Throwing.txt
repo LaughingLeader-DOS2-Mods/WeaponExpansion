@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 LLWEAPONEX_Throwing_InitSettings();
 KBSECTION
+//REGION SETTINGS
 PROC
 LLWEAPONEX_Throwing_InitSettings()
 THEN
@@ -63,6 +64,7 @@ StringContains(_Skill, "Projectile_LLWEAPONEX_Throw_", 1)
 THEN
 CharacterLookAt(_Target, _Character, 0);
 */
+//END_REGION
 
 //REGION KEVIN_THROWN
 IF
