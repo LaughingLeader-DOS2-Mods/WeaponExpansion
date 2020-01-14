@@ -25,6 +25,11 @@ CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
 THEN
 CharacterCharacterSetEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit");
 
+IF
+ItemStatusChange(_Target, "LLWEAPONEX_KATANA_HIT", (CHARACTERGUID)_Source)
+THEN
+CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_OnKatanaHit");
+
 //REGION COMBO_TURN_ENDING
 /*
 PROC

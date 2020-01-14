@@ -111,12 +111,11 @@ THEN
 	CharacterApplyStatus(_Character, LLWEAPONEX_DEATH_SENTENCE_BLOCKED, 4, 0)
 ENDIF
 
-EVENT LLWEAPONEX_Shocked_Block
+EVENT LLWEAPONEX_Shocked_Block_Char
 VARS
 	CHARACTER:_Character
 	STATUS:_Result
 	LIST<STATUS>:_RemoveList
-	INT:_Turns
 ON
 	FetchCharacterApplyStatusData(_Character, LLWEAPONEX_RUNEBLADE_SHOCKED)
 ACTIONS
@@ -126,7 +125,23 @@ IF "c1"
 THEN
 	Set(_Result, null)
 ENDIF
-	RETURN(_RemoveList, _Result, _Turns)
+	RETURN(_RemoveList, _Result, null)
+
+EVENT LLWEAPONEX_Shocked_Block_Item
+VARS
+	ITEM:_Item
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
+ON
+	FetchItemApplyStatusData(_Item, LLWEAPONEX_RUNEBLADE_SHOCKED)
+ACTIONS
+	Set(_Result, SHOCKED)
+IF "c1"
+	ItemHasStatus(_Item, LLWEAPONEX_SHOCKED_RESISTANCE_RUNEBLADE)
+THEN
+	Set(_Result, null)
+ENDIF
+	RETURN(_RemoveList, _Result, null)
 
 /*
 EVENT LLWEAPONEX_Kevin_MiniExplosion
@@ -395,29 +410,40 @@ THEN
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 
-EVENT LLWEAPONEX_RandomElementalAilment
+EVENT LLWEAPONEX_RandomElementalAilment_Char
 VARS
-	CHARACTER:_Char
+	CHARACTER:_Target
 	STATUS:_Result
 	LIST<STATUS>:_RemoveList
 	FLOAT:_MagicArmor
 	FLOAT:_Armor
 ON
-	FetchCharacterApplyStatusData(_Char, LLWEAPONEX_RANDOM_AILMENT)
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_RANDOM_AILMENT)
 ACTIONS
 IF "c1&c2"
-	CharacterGetStat(_MagicArmor, _Char, MagicArmorPoints)
+	CharacterGetStat(_MagicArmor, _Target, MagicArmorPoints)
 	IsEqual(_MagicArmor, 0)
 THEN
 	GetRandom(_Result, POISONED, BURNING, NECROFIRE, HELLFIRE, SLOWED, CHILLED, FROZEN, SHOCKED, STUNNED, PETRIFIED, WARM, WET, ACID, SUFFOCATING, LIVING_BOMB)
 ELIF "c1&c2"
-	CharacterGetStat(_Armor, _Char, PhysicalArmorPoints)
+	CharacterGetStat(_Armor, _Target, PhysicalArmorPoints)
 	IsEqual(_Armor, 0)
 THEN
 	GetRandom(_Result, BLEEDING, WARM, WET, ACID, SUFFOCATING, LIVING_BOMB)
 ELSE
 	GetRandom(_Result, WARM, WET, ACID, SUFFOCATING, LIVING_BOMB)
 ENDIF
+	RETURN(_RemoveList, _Result, null)
+
+EVENT LLWEAPONEX_RandomElementalAilment_Item
+VARS
+	ITEM:_Target
+	STATUS:_Result
+	LIST<STATUS>:_RemoveList
+ON
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_RANDOM_AILMENT)
+ACTIONS
+	GetRandom(_Result, POISONED, BURNING, NECROFIRE, HELLFIRE, SLOWED, CHILLED, FROZEN, SHOCKED, STUNNED, PETRIFIED, WARM, WET, ACID, LIVING_BOMB)
 	RETURN(_RemoveList, _Result, null)
 
 EVENT LLWEAPONEX_RapierMastery_SuckerCombo2_Flying_KnockdownCheck_Characters

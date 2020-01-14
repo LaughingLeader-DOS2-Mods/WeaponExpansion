@@ -73,21 +73,13 @@ THEN
 	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor, _Level, _Source)
 ENDIF
 
-EVENT LLWEAPONEX_Katana_OnHit
+EVENT LLWEAPONEX_Katana_OnHit_Char
 VARS
 	CHARACTER:_Target
 	CHARACTER:_Source
 ON
 	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_OnKatanaHit")
 ACTIONS
-/*
-IF "c1&!c2"
-	IsTagged(_Source, "LLWEAPONEX_Katana_FinisherEnabled")
-	HasFlag(_Source, "LLWEAPONEX_Katana_FinisherDisabled")
-THEN
-	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY, 0, 0, _Source)
-ENDIF
-*/
 IF "c1&!c2"
 	IsTagged(_Source, "LLWEAPONEX_Katana_ComboEnabled")
 	HasFlag(_Source, "LLWEAPONEX_Katana_ComboDisabled")
@@ -95,7 +87,21 @@ THEN
 	CharacterApplyStatus(_Target, LLWEAPONEX_KATANA_COMBO_PROC, 0, 0, _Source)
 ENDIF
 
-EVENT LLWEAPONEX_Katana_ComboProc
+EVENT LLWEAPONEX_Katana_OnHit_Item
+VARS
+	ITEM:_Target
+	CHARACTER:_Source
+ON
+	OnCharacterItemEvent(_Source, _Target, "LLWEAPONEX_OnKatanaHit")
+ACTIONS
+IF "c1&!c2"
+	IsTagged(_Source, "LLWEAPONEX_Katana_ComboEnabled")
+	HasFlag(_Source, "LLWEAPONEX_Katana_ComboDisabled")
+THEN
+	ItemApplyStatus(_Target, LLWEAPONEX_KATANA_COMBO_PROC, 0, 0, _Source)
+ENDIF
+
+EVENT LLWEAPONEX_Katana_ComboProc_Char
 VARS
 	CHARACTER:_Target
 	LIST<STATUS>:_RemoveList
@@ -106,14 +112,12 @@ VARS
 	INT:_StopLoop
 	INT:_Turns
 	STATUS:_Status
-	STRING:_Str
-	FIXEDSTRING:_StrF
 ON
 	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_KATANA_COMBO_PROC)
 ACTIONS
 	Set(_Result, null)
 	Set(_Status, null)
-	CallFunction("LLWEAPONEX_Katanas_InitList")
+	CallFunction("LLWEAPONEX_Katanas_CheckInit")
 IF "c1&!c2"
 	ListGetSize(%LLWEAPONEX_Katanas_ComboStatuses, _Size)
 	HasFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo")
@@ -165,21 +169,66 @@ THEN
 		Cast(_StrF, _Str)
 		StatusText(_Target, _StrF)
 		*/
-	ELSE
-		CallFunction("LLWEAPONEX_Katanas_InitList")
 	ENDIF
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 
-/*
-EVENT LLWEAPONEX_Katanas_Finisher_ConsumeCombo
+EVENT LLWEAPONEX_Katana_ComboProc_Item
 VARS
-	CHARACTER:_Target
+	ITEM:_Target
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Size
+	INT:_Index
+	INT:_NextIndex
+	INT:_StopLoop
+	STATUS:_Status
 ON
-	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_KATANA_FINISHER_APPLY)
+	FetchItemApplyStatusData(_Target, LLWEAPONEX_KATANA_COMBO_PROC)
 ACTIONS
-	RETURN(%LLWEAPONEX_Katanas_ComboStatuses, null, null)
-*/
+	Set(_Result, null)
+	Set(_Status, null)
+	CallFunction("LLWEAPONEX_Katanas_CheckInit")
+IF "c1&!c2"
+	ListGetSize(%LLWEAPONEX_Katanas_ComboStatuses, _Size)
+	HasFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo")
+THEN
+	IF "c1"
+		ListGet(%LLWEAPONEX_Katanas_ComboStatuses, _Size, _Status)
+	THEN
+		IF "c1"
+			ItemHasStatus(_Target, _Status)
+		THEN
+			Set(_Result, _Status)
+			//If they already have the highest combo status, skip the loop
+		ELSE
+			Set(_Index, 1)
+			Set(_NextIndex, 1)
+			Set(_StopLoop, 0)
+	
+			WHILE "!c1&!c2"
+				IsGreaterThen(_Index, _Size)
+				IsEqual(_StopLoop, 1)
+			DO
+				IF "c1&c2"
+					ListGet(%LLWEAPONEX_Katanas_ComboStatuses, _Index, _Status)
+					ItemHasStatus(_Target, _Status)
+				THEN
+					Set(_NextIndex, _Index)
+					Add(_NextIndex, 1)
+					Set(_StopLoop, 1)
+				ENDIF
+				Add(_Index, 1)
+			ENDWHILE
+			IF "c1"
+				ListGet(%LLWEAPONEX_Katanas_ComboStatuses, _NextIndex, _Status)
+			THEN
+				Set(_Result, _Status)
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+	RETURN(_RemoveList, _Result, 1)
 
 EVENT LLWEAPONEX_Katanas_Finisher_OnHit
 VARS
