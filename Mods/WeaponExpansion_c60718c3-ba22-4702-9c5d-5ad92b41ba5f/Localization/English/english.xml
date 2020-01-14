@@ -891,6 +891,9 @@ By choosing to cloak the perceived world in darkness, the monk found her inner s
 	<content contentuid="h652d73fcg18b6g469cg8849g710028f8ec91" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_StrengthIntelligenceBonus">Strength Conversion</content>
 	<content contentuid="hfc3aff25gc784g4108gb393g5a346f5b212a" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_Tarred">Tarred</content>
 	<content contentuid="h1de560d6g01bag42ddga992ge8721d537e8c" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_TormentedGhost">Tormented Ghost</content>
+	<content contentuid="h2bda3229g17f3g4b04gb1c7g34464eceeb0e" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WarCharge">War Charge</content>
+	<content contentuid="h1cc9cd1dga69eg4618g8763g0ad2373c3d11" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WarCharge_DamageBoost">First Strike (War Charge)</content>
+	<content contentuid="h9cd677b5g6c02g4a12gb671g70df0a3e47d0" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WarChargeBonus">Charging (War Charge)</content>
 	<content contentuid="hd8da42fdge304g4572gbac6gd43fb7bde09b" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WarchiefMark">Warchief&apos;s Mark</content>
 	<content contentuid="hc6198b34gfc48g4fd8gab35gb29a4c957eb3" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WaterBurn">Water Burn</content>
 	<content contentuid="h23cacf78g143fg45d1gb348g84fd913e573e" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WraithbladeMark">Mark of the Wraith</content>
@@ -1886,6 +1889,7 @@ By choosing to cloak the perceived world in darkness, the monk found her inner s
 	<content contentuid="h5c802916gc9fdg4a9agba10gcc60a259bf1b" Source="LLWEAPONEX_TagNames.lsb" Key="LLWEAPONEX_Katana_Mastery2">Katana Mastery II</content>
 	<content contentuid="hb91edaf2gdca9g40acg9850g2c66e68c8082" Source="LLWEAPONEX_TagNames.lsb" Key="LLWEAPONEX_Katana_Mastery3">Katana Mastery III</content>
 	<content contentuid="h072e5274gc4f6g488bga973gd4786e177b30" Source="LLWEAPONEX_TagNames.lsb" Key="LLWEAPONEX_Pistol_Equipped">a Pistol</content>
+	<content contentuid="hb4b872dbga410g4ce7ga78eg8457eed6481e" Source="LLWEAPONEX_TagNames.lsb" Key="LLWEAPONEX_Pistol_HasAmmo">Pistol Ammo</content>
 	<content contentuid="hc40bcffdgbee2g461aga707gbb5f95b26729" Source="LLWEAPONEX_TagNames.lsb" Key="LLWEAPONEX_Polearm_Equipped">a Polearm</content>
 	<content contentuid="h76b6a790gff80g48ddg86e9gb64ca8ee22b7" Source="LLWEAPONEX_TagNames.lsb" Key="LLWEAPONEX_Quarterstaff_Equipped">a Quarterstaff</content>
 	<content contentuid="hf19826f9ga54eg441ag9ffcg5f4ec66f0ed6" Source="LLWEAPONEX_TagNames.lsb" Key="LLWEAPONEX_Quarterstaff_Mastery1">Quarterstaff Mastery I</content>
