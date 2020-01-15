@@ -534,27 +534,48 @@ THEN
 			GetY(_SourcePos, _SourceY)
 			GetY(_Target, _y)
 		THEN
-
-				Subtract(_y, _SourceY)
-				Abs(_y)
-				IF "!c1"
-					IsGreaterThen(_y, 1.0)
-				THEN
-					GetForwardDirection(_Char, _Dir)
-					Set(_Dist, 15.0)
-					Multiply(_Dir, _Dist)
-					Add(_Target, _Dir)
-				ELIF "c1"
-					GetY(_Target, _y)
-				THEN
-				ENDIF
+			Output("Pistol Target 1: [1] | SourcePos: [2]", _Target, _SourcePos)
+			Subtract(_y, _SourceY)
+			Abs(_y)
+			Output("Pistol HeightDiff: [1]", _y)
+			IF "!c1&c2"
+				IsGreaterThen(_y, 1.0)
+				GetY(_Target, _y)
+			THEN
+				GetForwardDirection(_Char, _Dir)
+				Set(_Dist, 15.0)
+				Multiply(_Dir, _Dist)
+				Add(_Target, _Dir)
+			ELIF "c1"
+				GetY(_Target, _y)
+			THEN
+			ENDIF
+			Add(_y, 0.5)
+			SetY(_Target, _y)
+			Output("Pistol Target Final: [1] | SourcePos: [2]", _Target, _SourcePos)
 		ENDIF
+	ELIF "c1"
+		GetY(_Target, _y)
+	THEN
 		Add(_y, 0.5)
 		SetY(_Target, _y)
-	ELSE
 		// Use the projectile's saved position since the target could be a short frog.
-		ClearFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget")
 	ENDIF
+	ClearFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget")
 	Cast(_Level, _LevelF)
-	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
+	IF "!c1"
+		HasGlobalFlag("LeaderLib_ExtenderIsActive")
+	THEN
+		ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
+	ELSE
+		StatusText(_Char, "Using Extender")
+		SetVar(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _Target)
+		CharacterEvent(_Char, "LLWEAPONEX_Pistols_Ext_Shoot")
+	ENDIF
+	
+	//ShootLocalProjectileAt(Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand, CHARACTER:S_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f, {0;1.0;0}, _Target, _Level)
+	//ShootLocalProjectileAt(Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand, _Char, {0;1.0;0}, _Target, _Level, CHARACTER:S_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f)
+	//ShootWorldProjectileAt(_Skill, CHARACTER:S_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f, _SourcePos, _Target, _Level)
+	//ShootLocalProjectile(_Skill, _Char, {0;1.0;0}, _Dir, _Level, _Char)
+	//ShootLocalProjectileAt(Projectile_SkyShot, _Char, {0;1.0;0}, _Target, _Level, _Char)
 ENDIF

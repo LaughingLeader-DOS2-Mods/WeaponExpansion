@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 LLWEAPONEX_Pistols_InitSettings();
 KBSECTION
+//REGION SETTINGS
 PROC
 LLWEAPONEX_Pistols_InitSettings()
 THEN
@@ -19,6 +20,7 @@ DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_A_Isshin_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_ISSHIN_SHOOTING");
 
 DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED");
+//END_REGION
 
 //REGION PISTOL_SHOOT_FX
 //Dwarves and elves don't have a good shoot -> stow animation like humans/lizards do
@@ -159,7 +161,7 @@ CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot", _
 AND
 GetPosition(_Target, _x, _y, _z)
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
+LLWEAPONEX_Pistols_Internal_FlagManualTarget(_Char, _Target);
 SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
 
 IF
@@ -172,13 +174,50 @@ CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot_Ene
 AND
 GetPosition(_Target, _x, _y, _z)
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
+LLWEAPONEX_Pistols_Internal_FlagManualTarget(_Char, _Target);
 SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+
+PROC
+LLWEAPONEX_Pistols_Internal_FlagManualTarget((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
+
+PROC
+LLWEAPONEX_Pistols_Internal_FlagManualTarget((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
+AND
+ObjectIsItem((ITEMGUID)_Target, 1)
+AND
+ItemIsDestructible(_Target, 1)
+THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
 
 PROC
 LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 THEN
 SetStoryEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Pistols_Ext_Shoot")
+AND
+GetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z)
+AND
+GetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _Skill)
+AND
+CharacterGetLevel(_Char, _Level)
+THEN
+NRD_ProjectilePrepareLaunch();
+NRD_ProjectileSetString("SkillId", _Skill);
+NRD_ProjectileSetInt("CasterLevel", _Level);
+NRD_ProjectileSetInt("IsFromItem", 1);
+NRD_ProjectileSetInt("UnknownFlag1", 1);
+NRD_ProjectileSetInt("IgnoreObjects", 0);
+NRD_ProjectileSetGuidString("SourcePosition", _Char);
+NRD_ProjectileSetGuidString("Caster", _Char);
+NRD_ProjectileSetGuidString("Source", _Char);
+NRD_ProjectileSetVector3("TargetPosition", _x, _y, _z);
+NRD_ProjectileLaunch();
 //END_REGION
 
 //REGION PISTOL_DAMAGE

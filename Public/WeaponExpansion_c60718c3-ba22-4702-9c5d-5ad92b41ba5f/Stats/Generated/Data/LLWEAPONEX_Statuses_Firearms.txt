@@ -154,14 +154,14 @@ using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 
 new entry "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON"
 type "StatusData"
-data "StatusType" "DAMAGE"
-using "_LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+data "StatusType" "CONSUME"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "LeaveAction" "Projectile_LLWEAPONEX_Pistol_Shoot_WeaponDamage"
 
 new entry "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED"
 type "StatusData"
-data "StatusType" "DAMAGE"
-using "_LLWEAPONEX_HIDDEN_DAMAGE_BASE"
+data "StatusType" "CONSUME"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "LeaveAction" "Projectile_LLWEAPONEX_Pistol_Shoot_ScaledDamage"
 
 new entry "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT"
