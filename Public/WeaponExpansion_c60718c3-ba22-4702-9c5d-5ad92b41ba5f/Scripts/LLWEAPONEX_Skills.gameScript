@@ -484,6 +484,27 @@ THEN
 	ExplodeAt(_Target, _Skill, _Level, _Char)
 ENDIF
 
+EVENT LLWEAPONEX_Pistols_ShootProjectile_Debug
+VARS
+	CHARACTER:_Char
+	CHARACTER:_Target
+	FLOAT:_CharBounda
+	FLOAT:_TargetBounda
+	STRING:_Str
+	FIXEDSTRING:_StrF
+ON
+	OnCharacterCharacterEvent(_Char, _Target, "LLWEAPONEX_Pistols_TraceBounds")
+ACTIONS
+IF "c1&c2"
+	GetAIBounds(_Char, _CharBounda)
+	GetAIBounds(_Target, _TargetBounda)
+THEN
+	Print(_Str, "Bounds: Me:([1]) Target:([2])", _CharBounda, _TargetBounda)
+	Output("Bounds: Me:([1]) Target:([2])", _CharBounda, _TargetBounda)
+	Cast(_StrF, _Str)
+	StatusText(_Char, _StrF)
+ENDIF
+
 EVENT LLWEAPONEX_Pistols_ShootProjectile
 VARS
 	CHARACTER:_Char
@@ -496,8 +517,6 @@ VARS
 	INT:_Level
 	FLOAT:_y
 	FLOAT:_SourceY
-	//STRING:_Str
-	//FIXEDSTRING:_StrF
 ON
 	OnCharacterEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile")
 ACTIONS
@@ -507,32 +526,35 @@ IF "c1&c2&c3"
 	GetVar(_Target, _Char, "LLWEAPONEX_Pistols_ShootProjectileTarget")
 	GetVar(_Skill, _Char, "LLWEAPONEX_Pistols_ShootProjectileSkill")
 THEN
-	IF "c1&c2&c3"
-		GetPosition(_Char, _SourcePos)
-		GetY(_SourcePos, _SourceY)
-		GetY(_Target, _y)
+	IF "!c1"
+		HasFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget")
 	THEN
-		Subtract(_y, _SourceY)
-		Abs(_y)
-		//Print(_Str, "Test: [3] | [1] | [2]", _SourcePos, _Target, _y)
-		//Cast(_StrF, _Str)
-		//StatusText(_Char, _StrF)
-		IF "!c1"
-			IsGreaterThen(_y, 1.0)
-		THEN
-			//etDirection(_Char, _Target, _, _)
-			GetForwardDirection(_Char, _Dir)
-			Set(_Dist, 15.0)
-			Multiply(_Dir, _Dist)
-			Add(_Target, _Dir)
-		ELIF "c1"
+		IF "c1&c2&c3"
+			GetPosition(_Char, _SourcePos)
+			GetY(_SourcePos, _SourceY)
 			GetY(_Target, _y)
 		THEN
+
+				Subtract(_y, _SourceY)
+				Abs(_y)
+				IF "!c1"
+					IsGreaterThen(_y, 1.0)
+				THEN
+					GetForwardDirection(_Char, _Dir)
+					Set(_Dist, 15.0)
+					Multiply(_Dir, _Dist)
+					Add(_Target, _Dir)
+				ELIF "c1"
+					GetY(_Target, _y)
+				THEN
+				ENDIF
 		ENDIF
+		Add(_y, 0.5)
+		SetY(_Target, _y)
+	ELSE
+		// Use the projectile's saved position since the target could be a short frog.
+		ClearFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget")
 	ENDIF
 	Cast(_Level, _LevelF)
-
-	Add(_y, 0.5)
-	SetY(_Target, _y)
 	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
 ENDIF

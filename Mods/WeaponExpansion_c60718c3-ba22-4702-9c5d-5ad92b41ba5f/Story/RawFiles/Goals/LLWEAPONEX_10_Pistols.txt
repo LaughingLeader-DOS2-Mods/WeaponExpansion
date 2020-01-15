@@ -19,8 +19,6 @@ DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_A_Isshin_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_ISSHIN_SHOOTING");
 
 DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED");
-//EQ_LLWEAPONEX_Hide_Pistol_A_Ring1_728f8b1a-7f4d-4912-85e4-054f817f2592
-//EQ_LLWEAPONEX_Hide_Pistol_A_Ring2_b183308c-8348-4079-abfa-2c2eca78d2cd
 
 //REGION PISTOL_SHOOT_FX
 //Dwarves and elves don't have a good shoot -> stow animation like humans/lizards do
@@ -161,6 +159,7 @@ CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot", _
 AND
 GetPosition(_Target, _x, _y, _z)
 THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
 SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
 
 IF
@@ -173,6 +172,7 @@ CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot_Ene
 AND
 GetPosition(_Target, _x, _y, _z)
 THEN
+ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
 SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
 
 PROC
