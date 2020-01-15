@@ -563,6 +563,8 @@ THEN
 	ENDIF
 	ClearFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget")
 	Cast(_Level, _LevelF)
+	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
+	/*
 	IF "!c1"
 		HasGlobalFlag("LeaderLib_ExtenderIsActive")
 	THEN
@@ -572,7 +574,7 @@ THEN
 		SetVar(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _Target)
 		CharacterEvent(_Char, "LLWEAPONEX_Pistols_Ext_Shoot")
 	ENDIF
-	
+	*/
 	//ShootLocalProjectileAt(Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand, CHARACTER:S_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f, {0;1.0;0}, _Target, _Level)
 	//ShootLocalProjectileAt(Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand, _Char, {0;1.0;0}, _Target, _Level, CHARACTER:S_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f)
 	//ShootWorldProjectileAt(_Skill, CHARACTER:S_Lizards_Hero_Male_004_3c81d65a-fc10-4785-aa2c-dc215fa7313f, _SourcePos, _Target, _Level)

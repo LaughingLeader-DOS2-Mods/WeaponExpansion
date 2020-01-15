@@ -1,0 +1,111 @@
+INIT
+	ITEM:__Me
+	CHARACTER:%LLWEAPONEX_Bullet_Owner = null
+	INT:%LLWEAPONEX_Bullet_Hit = 0
+	INT:%LLWEAPONEX_Bullet_TimerActive = 0
+	INT:%LLWEAPONEX_Bullet_Stopped = 0
+	FLOAT3:%LLWEAPONEX_Bullet_LastPosition = null
+EVENTS
+
+EVENT LLWEAPONEX_Bullet_SetOwner
+ON
+	OnItemStatusAttempt(__Me, SUMMONING)
+	//OnInit()
+ACTIONS
+	StatusText(__Me, "SUMMONING")
+	ItemEvent(__Me, "LLWEAPONEX_Bullet_SetOwner")
+	GetPosition(__Me, %LLWEAPONEX_Bullet_LastPosition)
+IF "!c1"
+	IsEqual(%LLWEAPONEX_Bullet_TimerActive, 1)
+THEN
+	//StartTimer("LLWEAPONEX_Bullet_CheckPosition", 0.2, -1)
+	Set(%LLWEAPONEX_Bullet_TimerActive, 1)
+ENDIF
+	
+EVENT LLWEAPONEX_Bullet_CheckPosition
+VARS
+	FLOAT:_Dist
+ON
+	OnTimer("LLWEAPONEX_Bullet_CheckPosition")
+	OnFunction("LLWEAPONEX_Bullet_CheckPosition")
+ACTIONS
+	StatusText(__Me, "CHECKING")
+IF "c1"
+	IsEqual(%LLWEAPONEX_Bullet_Stopped, 0)
+THEN
+	IF "c1&c2"
+		GetDistance(_Dist, %LLWEAPONEX_Bullet_LastPosition, __Me)
+		IsLessThen(_Dist, 0.1)
+	THEN
+		CallFunction("BulletStopped")
+	ELSE
+		GetPosition(__Me, %LLWEAPONEX_Bullet_LastPosition)
+	ENDIF
+ELSE
+	ItemEvent(__Me, "LeaderLib_Commands_RemoveItem")
+	StatusText(__Me, "DESTROYING")
+ENDIF
+
+EVENT LLWEAPONEX_Bullet_CheckTargets
+ON
+	//OnItemEvent(__Me, "LLWEAPONEX_Bullet_CheckTargets")
+	//OnGrenadeLand(_,_)
+	//OnItemStatusRemoved(__Me, SUMMONING)
+	OnFunction("BulletStopped")
+ACTIONS
+IF "c1&c2"
+	IsEqual(%LLWEAPONEX_Bullet_Hit, 0)
+	IsEqual(%LLWEAPONEX_Bullet_Stopped, 0)
+THEN
+	IterateCharactersNear(__Me, 1.5, "LLWEAPONEX_Bullet_OnIterate", Lowest, Distance)
+	IterateItemsNear(__Me, 1.0, "LLWEAPONEX_Bullet_OnIterate")
+ENDIF
+	Set(%LLWEAPONEX_Bullet_Stopped, 1)
+
+EVENT LLWEAPONEX_Bullet_Iterate_Char
+VARS
+	CHARACTER:_Target
+	FLOAT:_Dist
+ON
+	OnIterateCharacter(_Target, "LLWEAPONEX_Bullet_OnIterate")
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Bullet_Hit, 0)
+THEN
+	StatusText(_Target, "BULLET TARGET")
+	CharacterCharacterEvent(%LLWEAPONEX_Bullet_Owner, _Target, "LLWEAPONEX_Bullet_OnHit")
+	Set(%LLWEAPONEX_Bullet_Hit, 1)
+ENDIF
+
+EVENT LLWEAPONEX_Bullet_Iterate_Item
+VARS
+	ITEM:_Target
+	FLOAT:_Dist
+ON
+	OnIterateItem(_Target, "LLWEAPONEX_Bullet_OnIterate")
+ACTIONS
+IF "c1&c2&c3&!c4"
+	IsEqual(%LLWEAPONEX_Bullet_Hit, 0)
+	GetDistance2D(_Dist, __Me, _Target)
+	IsLessThen(_Dist, 0.2)
+	IsEqual(_Target, __Me)
+THEN
+	StatusText(_Target, "BULLET TARGET")
+	CharacterItemEvent(%LLWEAPONEX_Bullet_Owner, _Target, "LLWEAPONEX_Bullet_OnHit")
+	Set(%LLWEAPONEX_Bullet_Hit, 1)
+ENDIF
+
+BEHAVIOUR
+
+REACTION LLWEAPONEX_Bullet_CheckPosition,999
+USAGE ALL
+CHECK "c1&c2"
+	IsEqual(%LLWEAPONEX_Bullet_Hit, 0)
+	IsEqual(%LLWEAPONEX_Bullet_Stopped, 0)
+ACTIONS
+	CallFunction("LLWEAPONEX_Bullet_CheckPosition")
+	Reset()
+INTERRUPT
+ACTIONS
+	ItemEvent(__Me, "LeaderLib_Commands_RemoveItem")
+	StatusText(__Me, "DESTROYING")

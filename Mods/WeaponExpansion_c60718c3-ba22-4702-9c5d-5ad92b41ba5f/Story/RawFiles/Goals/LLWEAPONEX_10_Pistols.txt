@@ -210,8 +210,9 @@ THEN
 NRD_ProjectilePrepareLaunch();
 NRD_ProjectileSetString("SkillId", _Skill);
 NRD_ProjectileSetInt("CasterLevel", _Level);
-NRD_ProjectileSetInt("IsFromItem", 1);
-NRD_ProjectileSetInt("UnknownFlag1", 1);
+NRD_ProjectileSetInt("IsFromItem", 0);
+NRD_ProjectileSetInt("IsTrap", 1);
+NRD_ProjectileSetInt("UnknownFlag1", 0);
 NRD_ProjectileSetInt("IgnoreObjects", 0);
 NRD_ProjectileSetGuidString("SourcePosition", _Char);
 NRD_ProjectileSetGuidString("Caster", _Char);
@@ -221,6 +222,57 @@ NRD_ProjectileLaunch();
 //END_REGION
 
 //REGION PISTOL_DAMAGE
+IF
+StoryEvent((ITEMGUID)_Bullet, "LLWEAPONEX_Bullet_SetOwner")
+AND
+ItemGetOwner(_Bullet, _Owner)
+THEN
+SetVarObject(_Bullet, "LLWEAPONEX_Bullet_Owner", _Owner);
+SetStoryEvent(_Bullet, "LLWEAPONEX_Bullet_CheckTargets");
+
+IF
+CharacterCharacterEvent(_Char, _Target, "LLWEAPONEX_Bullet_OnHit")
+AND
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerSum(_a, _b, _c)
+AND
+CharacterGameMaster(_Char, _d)
+AND
+IntegerSum(_c, _d, _Final)
+AND
+IntegerMin(_Final, 1, _IsPlayer) // If any of the above is greater or equal to 1, this is a player
+THEN
+//LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
+LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
+//ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", 0.0, 0, _Char);
+
+IF
+CharacterItemEvent(_Char, _Target, "LLWEAPONEX_Bullet_OnHit")
+AND
+CharacterIsPlayer(_Char, _a)
+AND
+CharacterIsPartyMember(_Char, _b)
+AND
+IntegerSum(_a, _b, _c)
+AND
+CharacterGameMaster(_Char, _d)
+AND
+IntegerSum(_c, _d, _Final)
+AND
+IntegerMin(_Final, 1, _IsPlayer)
+THEN
+LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
+
+PROC
+LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
+AND
+ObjectGetFlag(_Cause, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
+THEN
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Cause, "LLWEAPONEX_Pistol", 1, _Target);
+
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
 AND
