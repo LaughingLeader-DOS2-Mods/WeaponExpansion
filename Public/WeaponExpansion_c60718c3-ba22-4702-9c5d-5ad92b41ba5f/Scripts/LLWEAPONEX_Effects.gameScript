@@ -50,7 +50,6 @@ THEN
 		Set(_Sound, "LLWEAPONEX_Bullet_Impact_Body_Thump_All")
 	ENDIF
 		Cast(_SoundF, _Sound)
-		StatusText(_Target, _SoundF)
 		PlaySound(_Target, _Sound)
 ENDIF
 
