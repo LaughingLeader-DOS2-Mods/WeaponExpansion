@@ -5,7 +5,7 @@ INITSECTION
 KBSECTION
 /* [OSITOOLS_ONLY]
 IF
-NRD_OnHit((CHARACTERGUID)_Target, (GUIDSTRING)_Attacker, _Damage, _Handle)
+NRD_OnHit((CHARACTERGUID)_Target, _Attacker, _Damage, _Handle)
 AND
 DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Target)
 AND
