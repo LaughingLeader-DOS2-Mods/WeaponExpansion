@@ -794,9 +794,9 @@ add equipment entry "ARM_LLWEAPONEX_Pirate_Gloves"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_Pirate_Boots"
 add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_Pistol_Preview_A"
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Preview"
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_A_Preview"
 
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
