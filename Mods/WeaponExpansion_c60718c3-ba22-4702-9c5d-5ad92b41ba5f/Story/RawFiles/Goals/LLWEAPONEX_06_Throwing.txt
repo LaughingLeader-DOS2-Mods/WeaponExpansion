@@ -749,16 +749,20 @@ IF
 SkillAdded(_Char, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", _)
 AND
 CharacterIsControlled(_Char, 1)
+AND
+String(_Char, _CharStr)
 THEN
-NRD_LuaCall("LeaderLib_Ext_StoreSkillData", (STRING)_Char, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
+NRD_LuaCall("LeaderLib_Ext_StoreSkillData", _CharStr, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
 SetStoryEvent(_Char, "LeaderLib_RefreshUI_RevertSkillCooldowns");
 
 IF
 SkillAdded(_Char, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", _)
 AND
 CharacterIsControlled(_Char, 1)
+AND
+String(_Char, _CharStr)
 THEN
-NRD_LuaCall("LeaderLib_Ext_StoreSkillData", (STRING)_Char, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
+NRD_LuaCall("LeaderLib_Ext_StoreSkillData", _CharStr, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
 SetStoryEvent(_Char, "LeaderLib_RefreshUI_RevertSkillCooldowns");
 */
 //END_REGION
