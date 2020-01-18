@@ -48,7 +48,7 @@
                     <attribute id="Tags" value="" type="30" />
                     <attribute id="Type" value="Add-on" type="22" />
                     <attribute id="UUID" value="c60718c3-ba22-4702-9c5d-5ad92b41ba5f" type="22" />
-                    <attribute id="Version" value="152371200" type="4" />
+                    <attribute id="Version" value="152371201" type="4" />
                     <children>
                         <node id="PublishVersion">
                             <attribute id="Version" value="909321303" type="4" />
