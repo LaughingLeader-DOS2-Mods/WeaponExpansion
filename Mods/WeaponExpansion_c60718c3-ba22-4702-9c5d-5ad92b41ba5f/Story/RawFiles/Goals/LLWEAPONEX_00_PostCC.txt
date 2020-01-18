@@ -35,6 +35,27 @@ THEN
 NOT DB_LLWEAPONEX_CC_Temp_LoopEffects(_Player, _Template, _Handle);
 StopLoopEffect(_Handle);
 
+PROC
+LeaderLib_CC_OnPresetChanged((CHARACTERGUID)_Player, (STRING)_LastPreset, "LLWEAPONEX_Pirate")
+AND
+IsTagged(_Player, "FEMALE", 1)
+AND
+IsTagged(_Player, "DWARF", 1)
+AND
+CharacterGetEquippedWeapon(_Player, (ITEMGUID)_Weapon)
+AND
+NOT GetTemplate(_Weapon, "WPN_LLWEAPONEX_Placeholder_NoVisual_eb18b205-78a5-4e0c-8c4a-63ac748b07cf")
+AND
+GetPosition(_Player, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_LLWEAPONEX_Placeholder_NoVisual_eb18b205-78a5-4e0c-8c4a-63ac748b07cf", _x, _y, _z, _Placeholder)
+THEN
+CharacterUnequipItem(_Player, _Weapon);
+CharacterEquipItem(_Player, _Placeholder);
+CharacterEquipItem(_Player, _Weapon);
+//LeaderLib_Timers_StartCharacterItemTimer(_Player, _Placeholder, 25, "Timers_LeaderLib_Commands_EquipItem", "LeaderLib_Commands_EquipItem");
+//LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 50, "Timers_LeaderLib_Commands_EquipItem", "LeaderLib_Commands_EquipItem");
+
 IF
 RegionEnded(_Level)
 AND
