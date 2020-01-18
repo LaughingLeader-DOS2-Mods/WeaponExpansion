@@ -8,6 +8,9 @@
                 <node id="Alignments">
                     <children>
                         <node id="Alignment">
+                            <attribute id="Object" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                        </node>
+                        <node id="Alignment">
                             <attribute id="Object" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                         </node>
                     </children>
@@ -56,6 +59,61 @@
                             <attribute id="Source" value="Hero" type="22" />
                             <attribute id="Target" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Value" value="50" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="AnimalBase" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Arena" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Companion" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Evil" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Generic_Companions" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="GLO_NoxiousBulbs" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Good" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Hero" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Neutral" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="PVP" type="22" />
+                            <attribute id="Value" value="0" type="4" />
+                        </node>
+                        <node id="Relation">
+                            <attribute id="Source" value="LLWEAPONEX_Dummy_TargetHelper" type="22" />
+                            <attribute id="Target" value="Story" type="22" />
+                            <attribute id="Value" value="0" type="4" />
                         </node>
                         <node id="Relation">
                             <attribute id="Source" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
