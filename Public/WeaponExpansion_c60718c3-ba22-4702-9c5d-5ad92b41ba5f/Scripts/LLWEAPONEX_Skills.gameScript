@@ -508,6 +508,7 @@ ENDIF
 EVENT LLWEAPONEX_Pistols_ShootProjectile
 VARS
 	CHARACTER:_Char
+	CHARACTER:_Dummy
 	FLOAT3:_Target
 	SKILL:_Skill
 	FLOAT3:_Dir
@@ -518,7 +519,8 @@ VARS
 	FLOAT:_y
 	FLOAT:_SourceY
 ON
-	OnCharacterEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile")
+	//OnCharacterEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile")
+	OnCharacterCharacterEvent(_Char, _Dummy, "LLWEAPONEX_Pistols_ShootProjectile")
 ACTIONS
 	Set(_Level, 1)
 IF "c1&c2&c3"
@@ -563,7 +565,7 @@ THEN
 	ENDIF
 	ClearFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget")
 	Cast(_Level, _LevelF)
-	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Char)
+	ShootLocalProjectileAt(_Skill, _Char, {0;1.0;0}, _Target, _Level, _Dummy)
 	/*
 	IF "!c1"
 		HasGlobalFlag("LeaderLib_ExtenderIsActive")
