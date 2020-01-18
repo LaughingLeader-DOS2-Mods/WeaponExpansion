@@ -769,3 +769,11 @@ add equipment entry "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A_NPC"
 new equipment "LLWEAPONEX_FTJ_Harvester"
 add equipmentgroup
 add equipment entry "_WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Npc_Harvester"
+
+new equipment "LLWEAPONEX_Pirate_NPC_A"
+add equipmentgroup
+add equipment entry "_ARM_LLWEAPONEX_Pistol_A_Isshin_A_NPC"
+add equipmentgroup
+add equipment entry "_WPN_LLWEAPONEX_Rapier_1H_B_NPC"
+add equipmentgroup
+add equipment entry "_ARM_LLWEAPONEX_Hat_Bicorne_A_NPC"
