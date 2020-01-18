@@ -1,9 +1,11 @@
 new entry "_Stats_LLWEAPONEX_Potions_Base"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+data "Act" "1"
+data "Act part" "0"
 data "Duration" "1"
 
 new entry "_Stats_LLWEAPONEX_Flasks_Base"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+data "Act" "1"
+data "Act part" "0"
 data "Duration" "2"
