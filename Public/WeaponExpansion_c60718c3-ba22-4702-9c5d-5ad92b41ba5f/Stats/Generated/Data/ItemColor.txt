@@ -1,7 +1,7 @@
 new itemcolor "LLWEAPONEX_Blademaster","2f2825","5a0808","b34747"
 new itemcolor "LLWEAPONEX_DragonSlayer","2e2e2e","1a0b0b","bababa"
 new itemcolor "LLWEAPONEX_Halberdier","85c370","3d4550","84ac80"
-new itemcolor "LLWEAPONEX_Pirate","030207","ffffff","aaabb8"
+new itemcolor "LLWEAPONEX_Pirate","030207","be0000","aaabb8"
 new itemcolor "LLWEAPONEX_Rifleman","43322f","2b2727","394236"
 new itemcolor "LLWEAPONEX_RunicKnight","1a2e34","224b57","40E0D0"
 new itemcolor "LLWEAPONEX_RunicKnight_Humans","1a2e34","224b57","40E0D0"
