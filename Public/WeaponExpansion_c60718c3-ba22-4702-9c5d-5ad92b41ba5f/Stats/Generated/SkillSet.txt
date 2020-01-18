@@ -80,6 +80,9 @@ add skill "Shout_EnemyChameleonSkin"
 add skill "Jump_EnemyPhoenixDive"
 add skill "Jump_EnemyTacticalRetreat"
 
+new skillset "Avatar_LLWEAPONEX_Harkin"
+add skill "Target_LLWEAPONEX_Overpower_Harkin"
+
 new skillset "LLWEAPONEX_FTJ_Harvester"
 add skill "MultiStrike_LLWEAPONEX_EnemyMeleeVault"
 add skill "Target_LLWEAPONEX_EnemyMagicCripplingBlow"
