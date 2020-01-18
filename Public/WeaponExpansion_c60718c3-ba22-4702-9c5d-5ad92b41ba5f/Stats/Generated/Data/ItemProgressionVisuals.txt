@@ -2306,6 +2306,12 @@ add levelgroup 0,0,"All"
 add rootgroup "8995798f-f5b6-4e71-ae84-a29ed4ca51d7",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A","",""
 
+new itemgroup "ARM_LLWEAPONEX_Hat_Bicorne_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "9495f55d-6495-4c96-a587-e7a66f9e4d4f",""
+add namegroup "ARM_LLWEAPONEX_Hat_Bicorne_A","",""
+
 new itemgroup "ARM_LLWEAPONEX_DragonSlayer_UpperBody"
 
 add levelgroup 0,0,"All"
