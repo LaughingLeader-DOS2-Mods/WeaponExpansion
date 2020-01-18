@@ -28,17 +28,17 @@
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Dwarf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview_Dwarf" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Elf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview_Elf" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Lizard" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview_Lizard" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
@@ -48,17 +48,17 @@
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Dwarf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview_Dwarf" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Elf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview_Elf" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Lizard" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview_Lizards" type="22" />
 							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start_Undead" type="22" />
 						</node>
 					</children>

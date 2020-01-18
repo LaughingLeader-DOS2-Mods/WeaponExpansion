@@ -798,6 +798,58 @@ add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview"
 
+new equipment "Class_LLWEAPONEX_Pirate_Preview_Dwarf"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview"
+
+new equipment "Class_LLWEAPONEX_Pirate_Preview_Elf"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Mainhand"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Offhand"
+
+new equipment "Class_LLWEAPONEX_Pirate_Preview_Lizard"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Mainhand"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Offhand"
+
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
 add equipment entry "_LLWEAPONEX_NPC_Goblins_Chaos_Grunt_A"
