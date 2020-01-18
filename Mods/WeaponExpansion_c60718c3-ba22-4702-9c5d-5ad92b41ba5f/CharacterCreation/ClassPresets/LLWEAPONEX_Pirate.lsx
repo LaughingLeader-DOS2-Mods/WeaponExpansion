@@ -5,8 +5,8 @@
 	<region id="CharacterCreationClass">
 		<node id="root">
 			<attribute id="ClassName" value="Pirate" handle="ha8ed1a1cg53b6g4820g9b4eg4f0662bfdcaa" type="28" />
-			<attribute id="ClassDescription" value="Adventurers who saii the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it" handle="h25b104a6g160bg466egb60fg91f44323c005" type="28" />
-			<attribute id="ClassLongDescription" value="Adventurers who saii the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it" handle="h25b104a6g160bg466egb60fg91f44323c005" type="28" />
+			<attribute id="ClassDescription" value="Adventurers who sail the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it" handle="h25b104a6g160bg466egb60fg91f44323c005" type="28" />
+			<attribute id="ClassLongDescription" value="Adventurers who sail the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it" handle="h25b104a6g160bg466egb60fg91f44323c005" type="28" />
 			<attribute id="ClassType" value="LLWEAPONEX_Pirate" type="22" />
 			<attribute id="SkillSet" value="Class_LLWEAPONEX_Pirate" type="22" />
 			<attribute id="Voice" value="0" type="5" />
