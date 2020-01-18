@@ -18,33 +18,49 @@ ACTIONS
 IF "!c1"
 	IsEqual(%LLWEAPONEX_Bullet_TimerActive, 1)
 THEN
-	//StartTimer("LLWEAPONEX_Bullet_CheckPosition", 0.2, -1)
+	StartTimer("LLWEAPONEX_Bullet_CheckPosition", 0.001, -1)
 	Set(%LLWEAPONEX_Bullet_TimerActive, 1)
+ENDIF
+
+EVENT LLWEAPONEX_Bullet_CheckPositionTimer
+ON
+	OnTimer("LLWEAPONEX_Bullet_CheckPosition")
+ACTIONS
+IF "c1"
+	IsEqual(%LLWEAPONEX_Bullet_Stopped, 0)
+THEN
+	CallFunction("LLWEAPONEX_Bullet_CheckPosition")
 ENDIF
 	
 EVENT LLWEAPONEX_Bullet_CheckPosition
 VARS
 	FLOAT:_Dist
+	FLOAT3:_Pos
+	FLOAT:_x1
+	FLOAT:_x2
+	FLOAT:_z1
+	FLOAT:_z2
+	FLOAT:_y1
+	FLOAT:_y2
 ON
-	OnTimer("LLWEAPONEX_Bullet_CheckPosition")
 	OnFunction("LLWEAPONEX_Bullet_CheckPosition")
 ACTIONS
-	StatusText(__Me, "CHECKING")
-IF "c1"
-	IsEqual(%LLWEAPONEX_Bullet_Stopped, 0)
-THEN
+	GetPosition(__Me, _Pos)
 	IF "c1&c2"
-		GetDistance(_Dist, %LLWEAPONEX_Bullet_LastPosition, __Me)
-		IsLessThen(_Dist, 0.1)
+		GetDistance(_Dist, %LLWEAPONEX_Bullet_LastPosition, _Pos)
+		IsLessThen(_Dist, 0.01)
 	THEN
+		StopTimer("LLWEAPONEX_Bullet_CheckPosition")
 		CallFunction("BulletStopped")
-	ELSE
-		GetPosition(__Me, %LLWEAPONEX_Bullet_LastPosition)
+	ELIF "c1&c2"
+		GetDistance2D(_Dist, _Pos, %LLWEAPONEX_Bullet_LastPosition)
+		IsLessThen(_Dist, 0.01)
+	THEN
+		Output("Bullet is falling. Destroying [1] | Dist [2]", __Me, _Dist)
+		ItemEvent(__Me, "LeaderLib_Commands_RemoveItem")
 	ENDIF
-ELSE
-	ItemEvent(__Me, "LeaderLib_Commands_RemoveItem")
-	StatusText(__Me, "DESTROYING")
-ENDIF
+	Output("CHECKING Dist: [1] | Stopped: [2] | Last[3] Current[4]", _Dist, %LLWEAPONEX_Bullet_Stopped, %LLWEAPONEX_Bullet_LastPosition, _Pos)
+	Set(%LLWEAPONEX_Bullet_LastPosition, _Pos)
 
 EVENT LLWEAPONEX_Bullet_CheckTargets
 ON
@@ -57,10 +73,24 @@ IF "c1&c2"
 	IsEqual(%LLWEAPONEX_Bullet_Hit, 0)
 	IsEqual(%LLWEAPONEX_Bullet_Stopped, 0)
 THEN
+	Output("ITERATING [1]", __Me)
 	IterateCharactersNear(__Me, 1.5, "LLWEAPONEX_Bullet_OnIterate", Lowest, Distance)
 	IterateItemsNear(__Me, 1.0, "LLWEAPONEX_Bullet_OnIterate")
-ENDIF
 	Set(%LLWEAPONEX_Bullet_Stopped, 1)
+	StartTimer("LLWEAPONEX_Bullet_IteratorFailed", 0.5, 0)
+ENDIF
+
+EVENT LLWEAPONEX_Bullet_End
+ON
+	OnTimer("LLWEAPONEX_Bullet_IteratorFailed")
+	OnFunction("LLWEAPONEX_Bullet_OnHit")
+ACTIONS
+	Output("LLWEAPONEX_Bullet_End|DESTROYING [1]", __Me)
+	Set(%LLWEAPONEX_Bullet_Hit, 1)
+	StopTimer("LLWEAPONEX_Bullet_IteratorFailed")
+	StopTimer("LLWEAPONEX_Bullet_CheckPosition")
+	ItemEvent(__Me, "LeaderLib_Commands_RemoveItem")
+	//Set(%LLWEAPONEX_Bullet_Hit, 1)
 
 EVENT LLWEAPONEX_Bullet_Iterate_Char
 VARS
@@ -72,9 +102,9 @@ ACTIONS
 IF "c1"
 	IsEqual(%LLWEAPONEX_Bullet_Hit, 0)
 THEN
-	StatusText(_Target, "BULLET TARGET")
+	Output("HIT [1] - [2]", __Me, _Target)
 	CharacterCharacterEvent(%LLWEAPONEX_Bullet_Owner, _Target, "LLWEAPONEX_Bullet_OnHit")
-	Set(%LLWEAPONEX_Bullet_Hit, 1)
+	CallFunction("LLWEAPONEX_Bullet_OnHit")
 ENDIF
 
 EVENT LLWEAPONEX_Bullet_Iterate_Item
@@ -90,13 +120,14 @@ IF "c1&c2&c3&!c4"
 	IsLessThen(_Dist, 0.2)
 	IsEqual(_Target, __Me)
 THEN
-	StatusText(_Target, "BULLET TARGET")
+	Output("HIT [1] - [2]", __Me, _Target)
 	CharacterItemEvent(%LLWEAPONEX_Bullet_Owner, _Target, "LLWEAPONEX_Bullet_OnHit")
-	Set(%LLWEAPONEX_Bullet_Hit, 1)
+	CallFunction("LLWEAPONEX_Bullet_OnHit")
 ENDIF
 
 BEHAVIOUR
 
+/*
 REACTION LLWEAPONEX_Bullet_CheckPosition,999
 USAGE ALL
 CHECK "c1&c2"
@@ -104,8 +135,10 @@ CHECK "c1&c2"
 	IsEqual(%LLWEAPONEX_Bullet_Stopped, 0)
 ACTIONS
 	CallFunction("LLWEAPONEX_Bullet_CheckPosition")
+	Sleep(0.1)
 	Reset()
 INTERRUPT
 ACTIONS
 	ItemEvent(__Me, "LeaderLib_Commands_RemoveItem")
 	StatusText(__Me, "DESTROYING")
+*/
