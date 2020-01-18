@@ -19,7 +19,12 @@ DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003", "LLWEAPONEX_FX_PISTOL_A_SHOOTING");
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_A_Isshin_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_ISSHIN_SHOOTING");
 
-DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED");
+//DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED");
+
+PROC
+LLWEAPONEX_Pisolts_RegisterBulletTemplate((STRING)_BulletType, (STRING)_Template, (STRING)_WeaponDamageStatus, (STRING)_ScaledDamageStatus)
+THEN
+DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _Template, _WeaponDamageStatus, _ScaledDamageStatus);
 //END_REGION
 
 //REGION PISTOL_SHOOT_FX
@@ -245,9 +250,8 @@ IntegerSum(_c, _d, _Final)
 AND
 IntegerMin(_Final, 1, _IsPlayer) // If any of the above is greater or equal to 1, this is a player
 THEN
-//LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
+//LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Char, _IsPlayer);
 LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
-//ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", 0.0, 0, _Char);
 
 IF
 CharacterItemEvent(_Char, _Target, "LLWEAPONEX_Bullet_OnHit")
@@ -264,6 +268,7 @@ IntegerSum(_c, _d, _Final)
 AND
 IntegerMin(_Final, 1, _IsPlayer)
 THEN
+//LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Char, _IsPlayer);
 LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
 
 PROC
@@ -273,6 +278,7 @@ ObjectGetFlag(_Cause, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
 LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Cause, "LLWEAPONEX_Pistol", 1, _Target);
 
+/*
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Cause)
 AND
@@ -288,6 +294,7 @@ CharacterIsPlayer(_Cause, _IsPlayer)
 THEN
 //LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, _Cause, _IsPlayer);
 LLWEAPONEX_PIstols_Internal_OnHit_Default(_Target, _Cause, _IsPlayer);
+*/
 
 PROC
 LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
@@ -300,13 +307,6 @@ PROC
 LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
 AND
 LeaderLib_Variables_QRY_StringVariableSet(_Cause, "LLWEAPONEX_Pistol_BulletType", 0)
-AND
-GetVarString(_Cause, "LLWEAPONEX_Pistol_BulletType", _BulletType)
-THEN
-LLWEAPONEX_PIstols_Internal_OnHit_WithBulletType(_Target, _Cause, _IsPlayer, _BulletType);
-
-PROC
-LLWEAPONEX_PIstols_Internal_OnHit_Start((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, (INTEGER)_IsPlayer)
 AND
 GetVarString(_Cause, "LLWEAPONEX_Pistol_BulletType", _BulletType)
 THEN
