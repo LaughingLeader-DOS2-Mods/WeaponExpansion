@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+	<header version="2" time="1387205254" />
+	<version major="1" minor="0" revision="0" build="0" />
+	<region id="CharacterCreationClass">
+		<node id="root">
+			<attribute id="ClassName" value="Pirate" handle="ha8ed1a1cg53b6g4820g9b4eg4f0662bfdcaa" type="28" />
+			<attribute id="ClassDescription" value="Adventurers who saii the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it" handle="h25b104a6g160bg466egb60fg91f44323c005" type="28" />
+			<attribute id="ClassLongDescription" value="Adventurers who saii the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it" handle="h25b104a6g160bg466egb60fg91f44323c005" type="28" />
+			<attribute id="ClassType" value="LLWEAPONEX_Pirate" type="22" />
+			<attribute id="SkillSet" value="Class_LLWEAPONEX_Pirate" type="22" />
+			<attribute id="Voice" value="0" type="5" />
+			<attribute id="Icon" value="6" type="5" />
+
+			<attribute id="NumStartingCombatAbilityPoints" value="2" type="4" />
+			<attribute id="NumStartingCivilAbilityPoints" value="1" type="4" />
+			<attribute id="NumStartingAttributePoints" value="3" type="4" />
+			<attribute id="NumStartingTalentPoints" value="1" type="4" />
+			
+			<attribute id="AreStatsWeighted" value="1" type="19" />
+			<children>
+				<node id="EquipmentProperties">
+					<children>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Human" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Dwarf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Elf" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start_Undead" type="22" />
+						</node>
+						<node id="EquipmentProperty">
+							<attribute id="RaceName" value="Undead_Lizard" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Pirate_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Pirate_Start_Undead" type="22" />
+						</node>
+					</children>
+				</node>
+				<node id="AbilityChanges">
+					<children>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="RogueLore" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+						<node id="AbilityChange">
+							<attribute id="Ability" value="WarriorLore" type="23" />
+							<attribute id="AmountIncreased" value="1" type="4" />
+						</node>
+						<node id="AbilityChange">
+                            <attribute id="Ability" value="Thievery" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+					</children>
+				</node>
+				<node id="AttributeChanges">
+					<children>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="1" type="4" />
+							<attribute id="Attribute" value="FIN" type="23" />
+						</node>
+						<node id="AttributeChange">
+							<attribute id="AmountIncreased" value="3" type="4" />
+							<attribute id="Attribute" value="WIT" type="23" />
+						</node>
+					</children>
+				</node>
+				<node id="TalentsAdded">
+					<children>
+						<node id="TalentAdded">
+							<attribute id="Talent" value="SurpriseAttack" type="23" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

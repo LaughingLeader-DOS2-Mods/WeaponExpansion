@@ -2128,6 +2128,12 @@ add levelgroup 0,0,"Divine"
 add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
 add namegroup "ARM_LLWEAPONEX_Pistol_A_Divine","",""
 
+new itemgroup "ARM_LLWEAPONEX_Pistol_A_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
+add namegroup "ARM_LLWEAPONEX_Pistol_A_Crafted","",""
+
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A"
 
 add levelgroup 0,0,"All"

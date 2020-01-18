@@ -738,6 +738,66 @@ add equipment entry "ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_Preview"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Preview"
 
+new equipment "Class_LLWEAPONEX_Pirate_Start"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Hat_Bicorne_A"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_A_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Pirate_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Hat_Bicorne_A"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_A_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Pirate_Preview"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Boots"
+add equipmentgroup
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_Pistol_Preview_A"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Preview"
+
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
 add equipment entry "_LLWEAPONEX_NPC_Goblins_Chaos_Grunt_A"

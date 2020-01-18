@@ -36,6 +36,7 @@ LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_MonkWoodenQua
 LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_MonkMetalQuarterstaff", "Monk (Metal Quarterstaff) [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_RunicKnight", "Runic Knight [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Rifleman", "Rifleman [Weapon Expansion]", "WeaponExpansion_IsActive");
+LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Pirate", "Pirate [Weapon Expansion]", "WeaponExpansion_IsActive");
 
 PROC
 LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround()

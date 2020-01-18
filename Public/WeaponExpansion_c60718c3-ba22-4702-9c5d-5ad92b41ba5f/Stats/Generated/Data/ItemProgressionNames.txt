@@ -4,6 +4,9 @@ add name "ARM_LLWEAPONEX_Hat_Bicorne_A_2_DisplayName",""
 add name "ARM_LLWEAPONEX_Hat_Bicorne_A_3_DisplayName",""
 add name "ARM_LLWEAPONEX_Hat_Bicorne_A_4_DisplayName",""
 
+new namegroup "ARM_LLWEAPONEX_Pistol_A_Crafted"
+add name "ARM_LLWEAPONEX_Pistol_A_Crafted_DisplayName",""
+
 new namegroup "ARM_LLWEAPONEX_Pistol_A_Common"
 add name "ARM_LLWEAPONEX_Pistol_A_Common_DisplayName",""
 
