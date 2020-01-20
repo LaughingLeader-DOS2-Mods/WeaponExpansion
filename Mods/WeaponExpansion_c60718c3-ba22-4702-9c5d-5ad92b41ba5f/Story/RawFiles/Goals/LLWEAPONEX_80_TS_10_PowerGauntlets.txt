@@ -1,0 +1,23 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+PROC
+ProcBlockUseOfItem((CHARACTERGUID)_Char,(ITEMGUID)_Item)
+AND
+NOT DB_CustomUseItemResponse(_Char, _Item, 0)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_POWERGAUNTLETS_ACTIVE", 1)
+AND
+NOT LLWEAPONEX_QRY_ItemIsRangedWeapon(_Item)
+AND
+NRD_ItemGetStatsId(_Item, _Stat)
+AND
+NRD_StatGetString(_Stat, "IsTwoHanded", "Yes")
+THEN
+NRD_LuaCall("LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item, _Stat)
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

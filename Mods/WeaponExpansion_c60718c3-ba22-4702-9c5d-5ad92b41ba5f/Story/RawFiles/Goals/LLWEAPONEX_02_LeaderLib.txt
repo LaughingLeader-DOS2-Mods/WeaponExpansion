@@ -25,6 +25,9 @@ LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion]
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "WeaponExpansion");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_StatusEvents_DisableScriptEnabled", "WeaponExpansion");
 
+PROC
+LLWEAPONEX_LeaderLib_InitSettings()
+THEN
 LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Assassin", "Assassin [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_Blademaster", "Blademaster [Weapon Expansion]", "WeaponExpansion_IsActive");
 LeaderLib_PresetMenu_RegisterPreset("WeaponExpansion", "LLWEAPONEX_ChaosWeaver", "Chaos Weaver [Weapon Expansion]", "WeaponExpansion_IsActive");
@@ -515,6 +518,13 @@ LeaderLib_Statuses_Register_LeaveActionStatus("WeaponExpansion_LeaveActionStatus
 LeaderLib_Statuses_Register_LeaveActionStatus("WeaponExpansion_LeaveActionStatuses", "LLWEAPONEX_BATTLEBOOK_BIBLE_BONUS", "Projectile_LLWEAPONEX_Status_BattleBook_Bible_BonusDamage", 0);
 LeaderLib_Statuses_Register_LeaveActionStatus("WeaponExpansion_LeaveActionStatuses", "LLWEAPONEX_FLAMETHROWER_PYRODANCE_EXPLODE", "Projectile_LLWEAPONEX_Flamethrower_PyroDance_Explode", 2);
 
+//END_REGION
+
+//REGION TOGGLE_SKILLS
+PROC
+LLWEAPONEX_LeaderLib_InitSettings()
+THEN
+LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_PowerGauntlets_ToggleGiantStrength", "LLWEAPONEX_POWERGAUNTLETS_ACTIVE", -1.0, 1, 1);
 //END_REGION
 
 //REGION UPDATES
