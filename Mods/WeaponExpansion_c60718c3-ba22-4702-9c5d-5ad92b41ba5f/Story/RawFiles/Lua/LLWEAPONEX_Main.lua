@@ -181,12 +181,43 @@ local function RedirectDamage(blocker, target, attacker, handlestr, reduction_st
     end
 end
 
+---Change a two-handed weapon to a one-handed weapon.
+---@param char string
+---@param item string
+---@param stat string
+---@return string Weapon
+local function TwoHandedToOnehanded(char, item, stat)
+    local level = NRD_ItemGetInt(item, "LevelOverride")
+    local template = GetTemplate(item)
+	local x,y,z = GetPosition(char)
+	local new_weapon = CreateItemTemplateAtPosition(template,x,y,z)
+	local last_underscore = string.find(template, "_[^_]*$")
+	local stripped_template = string.sub(template, last_underscore+1)
+	-- We clone the item so we can change its stats.
+	NRD_ItemCloneBegin(new_weapon)
+	--LLWEAPONEX_SWAP.Log("DEBUG", "[LLWEAPONEX_SWAP:DEBUG] Stripped ("..template..") into ("..stripped_template..").")
+	NRD_ItemCloneSetString("RootTemplate", stripped_template)
+	NRD_ItemCloneSetString("OriginalRootTemplate", stripped_template)
+	if stat ~= nil and stat ~= "" then
+		NRD_ItemCloneSetString("GenerationStatsId", stat)
+		NRD_ItemCloneSetString("StatsEntryName", stat)
+	end
+	local cloned = NRD_ItemClone()
+	ItemRemove(new_weapon)
+    ItemLevelUpTo(cloned,level)
+    NRD_ItemSetPermanentBoostString(new_weapon, "IsTwoHanded", "Yes")
+    NRD_ItemSetPermanentBoostInt(new_weapon, "IsTwoHanded", 1)
+    CharacterEquipItem(char, new_weapon)
+	return cloned,stat
+end
+
 WeaponExpansion.Main = {
 	GetHandedness = GetHandedness,
     TagHandedness = TagHandedness,
     TagItemType = TagItemType,
     PlayBulletImpact = PlayBulletImpact,
-    RedirectDamage = RedirectDamage
+    RedirectDamage = RedirectDamage,
+    TwoHandedToOnehanded = TwoHandedToOnehanded
 }
 
 WeaponExpansion.Register.Table(WeaponExpansion.Main)
