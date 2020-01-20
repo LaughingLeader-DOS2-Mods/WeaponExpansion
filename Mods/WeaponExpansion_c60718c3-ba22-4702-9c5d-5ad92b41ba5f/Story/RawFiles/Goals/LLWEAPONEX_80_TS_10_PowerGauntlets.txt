@@ -18,7 +18,12 @@ AND
 NRD_StatGetString(_Stat, "IsTwoHanded", "Yes")
 THEN
 DB_CustomUseItemResponse(_Char, _Item, 0);
-NRD_LuaCall("LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item, _Stat);
+LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 50, "Timers_LLWEAPONEX_PowerGauntlets_TransformTwoHandedWeapon", "LLWEAPONEX_PowerGauntlets_TransformTwoHandedWeapon");
+
+IF
+CharacterItemEvent(_Char, _Item, "LLWEAPONEX_PowerGauntlets_TransformTwoHandedWeapon")
+THEN
+NRD_LuaCall("LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item);
 */
 EXITSECTION
 

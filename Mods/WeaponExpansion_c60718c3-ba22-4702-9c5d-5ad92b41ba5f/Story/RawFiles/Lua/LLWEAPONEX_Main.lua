@@ -186,15 +186,17 @@ end
 ---@param item string
 ---@param stat string
 ---@return string Weapon
-local function TwoHandedToOnehanded(char, item, stat)
+local function TwoHandedToOnehanded(char, item)
+    local stat = NRD_ItemGetStatsId(item)
     local level = NRD_ItemGetInt(item, "LevelOverride")
+    if level == nil then
+        level = CharacterGetLevel(char)
+    end
     local template = GetTemplate(item)
-	local x,y,z = GetPosition(char)
-	local new_weapon = CreateItemTemplateAtPosition(template,x,y,z)
 	local last_underscore = string.find(template, "_[^_]*$")
 	local stripped_template = string.sub(template, last_underscore+1)
-	-- We clone the item so we can change its stats.
-	NRD_ItemCloneBegin(new_weapon)
+
+	NRD_ItemCloneBegin(item)
 	--LLWEAPONEX_SWAP.Log("DEBUG", "[LLWEAPONEX_SWAP:DEBUG] Stripped ("..template..") into ("..stripped_template..").")
 	NRD_ItemCloneSetString("RootTemplate", stripped_template)
 	NRD_ItemCloneSetString("OriginalRootTemplate", stripped_template)
@@ -203,12 +205,11 @@ local function TwoHandedToOnehanded(char, item, stat)
 		NRD_ItemCloneSetString("StatsEntryName", stat)
 	end
 	local cloned = NRD_ItemClone()
-	ItemRemove(new_weapon)
+	ItemRemove(item)
     ItemLevelUpTo(cloned,level)
-    NRD_ItemSetPermanentBoostString(new_weapon, "IsTwoHanded", "Yes")
-    NRD_ItemSetPermanentBoostInt(new_weapon, "IsTwoHanded", 1)
-    CharacterEquipItem(char, new_weapon)
-	return cloned,stat
+    NRD_ItemSetPermanentBoostString(cloned, "IsTwoHanded", "Yes")
+    --NRD_ItemSetPermanentBoostInt(cloned, "IsTwoHanded", 1)
+    CharacterEquipItem(char, cloned)
 end
 
 WeaponExpansion.Main = {
