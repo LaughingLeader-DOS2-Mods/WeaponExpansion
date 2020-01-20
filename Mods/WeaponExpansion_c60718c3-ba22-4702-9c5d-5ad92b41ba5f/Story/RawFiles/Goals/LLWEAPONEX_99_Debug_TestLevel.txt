@@ -1793,14 +1793,6 @@ IntegertoString(_Enabled, _EnabledStr)
 THEN
 LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:LLWEAPONEX_Debug_CheckToggleScripts] Goal[",_Goal,"] Status[",_GoalStatusStr,"] Flag [",_Flag,"] Enabled [",_EnabledStr,"].");
 
-/* [OSITOOLS_ONLY]
-IF
-RegionEnded("TestLevel_LL_WeaponExpansion")
-THEN
-NRD_LuaCall("LLWEAPONEX_Ext_CleanupWeapons");
-GoalCompleted;
-*/
-
 IF
 TextEventSet("llweap_lockfix")
 AND
