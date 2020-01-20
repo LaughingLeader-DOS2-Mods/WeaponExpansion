@@ -197,7 +197,8 @@ local function TwoHandedToOnehanded(char, item)
 	local stripped_template = string.sub(template, last_underscore+1)
 
 	NRD_ItemCloneBegin(item)
-	--LLWEAPONEX_SWAP.Log("DEBUG", "[LLWEAPONEX_SWAP:DEBUG] Stripped ("..template..") into ("..stripped_template..").")
+	Osi.LeaderLog_Log("DEBUG", "[LLWEAPONEX_Main.lua:TwoHandedToOnehanded] Changing IsTwoHanded for ("..stat..")("..stripped_template..").")
+	Ext.Print("[LLWEAPONEX_Main.lua:TwoHandedToOnehanded] Changing IsTwoHanded for ("..stat..")("..stripped_template..").")
 	NRD_ItemCloneSetString("RootTemplate", stripped_template)
 	NRD_ItemCloneSetString("OriginalRootTemplate", stripped_template)
 	if stat ~= nil and stat ~= "" then
@@ -207,8 +208,8 @@ local function TwoHandedToOnehanded(char, item)
 	local cloned = NRD_ItemClone()
 	ItemRemove(item)
     ItemLevelUpTo(cloned,level)
-    NRD_ItemSetPermanentBoostString(cloned, "IsTwoHanded", "Yes")
-    --NRD_ItemSetPermanentBoostInt(cloned, "IsTwoHanded", 1)
+    --NRD_ItemSetPermanentBoostString(cloned, "IsTwoHanded", "Yes")
+    NRD_ItemSetPermanentBoostInt(cloned, "IsTwoHanded", 0)
     CharacterEquipItem(char, cloned)
 end
 

@@ -38,9 +38,9 @@ local anim_overrides = {
 }
 ---These are stats that gain new features if the extender is active.
 local llweaponex_extender_additions = {
-	ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A = {
-		Skills = "Shout_LLWEAPONEX_PowerGauntlets_ToggleGiantStrength"
-	}
+	-- ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A = {
+	-- 	Skills = "Shout_LLWEAPONEX_PowerGauntlets_ToggleGiantStrength"
+	-- }
 }
 
 local function CanSetProperty(property)
