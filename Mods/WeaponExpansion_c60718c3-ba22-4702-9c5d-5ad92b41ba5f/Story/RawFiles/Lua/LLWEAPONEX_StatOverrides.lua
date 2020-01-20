@@ -1,3 +1,13 @@
+local FORBIDDEN = {
+	"ComboCategories",
+	"ExtraProperties",
+	"SkillProperties",
+	"TargetConditions",
+	"AoEConditions",
+	"CycleConditions",
+	"Requirements",
+}
+
 local skill_overrides = {
 	Target_SingleHandedAttack = {
 		IgnoreSilence = "Yes",
@@ -26,15 +36,11 @@ local anim_overrides = {
 		CastSelfAnimation = "skill_cast_ll_suckerpunch_01_cast"
 	}
 }
-
-local FORBIDDEN = {
-	"ComboCategories",
-	"ExtraProperties",
-	"SkillProperties",
-	"TargetConditions",
-	"AoEConditions",
-	"CycleConditions",
-	"Requirements",
+---These are stats that gain new features if the extender is active.
+local llweaponex_extender_additions = {
+	ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A = {
+		Skills = "Shout_LLWEAPONEX_PowerGauntlets_ToggleGiantStrength"
+	}
 }
 
 local function CanSetProperty(property)
@@ -78,6 +84,7 @@ local ModuleLoad = function ()
 
 	apply_overrides(skill_overrides)
 	apply_overrides(weapon_overrides)
+	apply_overrides(llweaponex_extender_additions)
 
 	if Ext.IsModLoaded("AnimationsPlus_326b8784-edd7-4950-86d8-fcae9f5c457c") then
 		apply_overrides(anim_overrides)
