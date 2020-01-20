@@ -44,6 +44,11 @@ DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Wand");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Handedness", "LLWEAPONEX_OneHanded");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Handedness", "LLWEAPONEX_TwoHanded");
 
+DB_LLWEAPONEX_TagHelper_RangedWeaponTags("WeaponExpansion", "LLWEAPONEX_Bow");
+DB_LLWEAPONEX_TagHelper_RangedWeaponTags("WeaponExpansion", "LLWEAPONEX_Crossbow");
+DB_LLWEAPONEX_TagHelper_RangedWeaponTags("WeaponExpansion", "LLWEAPONEX_Wand");
+DB_LLWEAPONEX_TagHelper_RangedWeaponTags("WeaponExpansion", "LLWEAPONEX_Firearm");
+
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Axe", "LLWEAPONEX_Axe");
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Bow", "LLWEAPONEX_Bow");
 DB_LLWEAPONEX_TagHelper_WeaponTypeToTag("Club", "LLWEAPONEX_Blunt");
