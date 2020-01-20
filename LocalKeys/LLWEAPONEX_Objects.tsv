@@ -128,3 +128,10 @@ GRN_LLWEAPONEX_Flask_Weakness_Earth_A	<font color='#AA895B'>Flask of Earth Weakn
 GRN_LLWEAPONEX_Flask_Weakness_Fire_A	<font color='#C76537'>Flask of Fire Weakness</font>
 GRN_LLWEAPONEX_Flask_Weakness_Poison_A	<font color='#00AA00'>Flask of Poison Weakness</font>
 GRN_LLWEAPONEX_Flask_Weakness_Water_A	<font color='#188EDE'>Flask of Water Weakness</font>
+AMMO_LLWEAPONEX_Bullets_Normal	Lead Bullets
+AMMO_LLWEAPONEX_Bullets_ArmorPiercing	Armor Piercing Bullets
+AMMO_LLWEAPONEX_Bullets_Air	<font color='#7478DC'>Shock Bullets</font>
+AMMO_LLWEAPONEX_Bullets_Earth	<font color='#FF23cb'>Sapper Bullets</font>
+AMMO_LLWEAPONEX_Bullets_Fire	<font color='#ff961a'>Explosive Bullets</font>
+AMMO_LLWEAPONEX_Bullets_Poison	<font color='#00AA00'>Poison-tipped Bullets</font>
+AMMO_LLWEAPONEX_Bullets_Water	<font color='#79c1ff'>Cryogenic Bullets</font>

@@ -19,7 +19,8 @@ DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003", "LLWEAPONEX_FX_PISTOL_A_SHOOTING");
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_A_Isshin_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_ISSHIN_SHOOTING");
 
-//DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED");
+DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_WEAPON", "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED");
+DB_LLWEAPONEX_Pistols_BulletTemplates("Default", "Template", "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_WEAPON", "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED");
 
 PROC
 LLWEAPONEX_Pisolts_RegisterBulletTemplate((STRING)_BulletType, (STRING)_Template, (STRING)_WeaponDamageStatus, (STRING)_ScaledDamageStatus)
@@ -391,21 +392,21 @@ NOT DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _Status);
 PROC
 LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 0)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
 
 PROC
 LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
 AND
 NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_SCALED", 0.0, 1, _Cause);
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
 
 PROC
 LLWEAPONEX_PIstols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
 AND
 LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT_DAMAGE_WEAPON", 0.0, 1, _Cause);
+ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_WEAPON", 0.0, 1, _Cause);
 //END_REGION
 
 //REGION PISTOL_AMMO
