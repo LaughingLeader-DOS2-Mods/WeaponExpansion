@@ -67,6 +67,9 @@ add name "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2_DisplayName",""
 new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
 add name "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3_DisplayName",""
 
+new namegroup "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A"
+add name "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A_DisplayName",""
+
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
 add name "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper_DisplayName",""
 

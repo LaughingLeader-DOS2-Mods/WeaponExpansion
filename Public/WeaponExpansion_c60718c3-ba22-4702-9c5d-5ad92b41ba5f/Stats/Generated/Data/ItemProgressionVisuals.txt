@@ -2684,3 +2684,9 @@ new itemgroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A"
 add levelgroup 0,0,"All"
 add rootgroup "84af126d-0e35-482b-b117-f85e7672a129",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A","",""
+
+new itemgroup "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "7cf30de3-1b42-4510-b279-9a4c697b3b11",""
+add namegroup "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A","",""
