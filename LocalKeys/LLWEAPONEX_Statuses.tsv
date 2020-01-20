@@ -93,3 +93,5 @@ LLWEAPONEX_FLAMETHROWER_PYRODANCE_DisplayName	Pyromaniac's Dance
 LLWEAPONEX_FLAMETHROWER_PYRODANCE_Description	Character gains bonuses from Burning things.<br><font color='#DD9911'>Character moves faster on fire surfaces.</font><br><font color='#3399FF'>Removed by Wet, Chilled, or Frozen.</font>
 LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED_DisplayName	Hot Feet (Pyromaniac's Dance)
 LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED_Description	Character gained a speed boost from standing on fire.<br><font color='#FF4411'>Removed when no longer standing on fire.</font>
+LLWEAPONEX_POWERGAUNTLETS_ACTIVE_DisplayName	Giant's Strength
+LLWEAPONEX_POWERGAUNTLETS_ACTIVE_Description	Through the power of the <font color='#c5a65a'>Power Gauntlets</font>, this character can wield two-handed melee weapons with one hand.
