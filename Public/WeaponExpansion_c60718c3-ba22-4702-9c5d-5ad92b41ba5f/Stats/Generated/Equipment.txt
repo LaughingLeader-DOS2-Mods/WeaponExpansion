@@ -876,7 +876,9 @@ add equipment entry "_WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Npc"
 
 new equipment "LLWEAPONEX_Origins_Harken"
 add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A_NPC"
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A"
+add equipmentgroup
+add equipment entry "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A"
 
 new equipment "LLWEAPONEX_FTJ_Harvester"
 add equipmentgroup
