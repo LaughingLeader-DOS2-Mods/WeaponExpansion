@@ -1355,6 +1355,18 @@ HasActiveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES", 1)
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES");
 //END_REGION
+
+//REGION POWER_GAUNTLETS
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_POWERGAUNTLETS_ACTIVE", _)
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_PowerGauntletsActive", "WeaponExpansion");
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_POWERGAUNTLETS_ACTIVE", _)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_PowerGauntletsActive", "WeaponExpansion", 500);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
