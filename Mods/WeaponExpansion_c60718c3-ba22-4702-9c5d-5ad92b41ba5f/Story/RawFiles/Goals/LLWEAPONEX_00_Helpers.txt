@@ -60,14 +60,9 @@ ItemIsDestroyed(_Obj, 0)
 THEN
 DB_NOOP(1);
 
+// [BEGIN_NO_OSITOOLS]
 QRY
-LLWEAPONEX_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
-AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
-AND
-NOT CharacterGetEquippedShield(_Char, _Item)
-AND
-GetTemplate(_Item, _Template)
+LLWEAPONEX_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 GetStatString(_Item, _Stat)
 AND
@@ -82,22 +77,43 @@ THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
+GetTemplate(_Item, _Template)
 AND
-NOT CharacterGetEquippedShield(_Char, _Item)
+LLWEAPONEX_QRY_ItemIsWeapon(_Char, _Item, _Template)
+THEN
+DB_NOOP(1);
+// [END_NO_OSITOOLS]
+/* [OSITOOLS_ONLY]
+QRY
+LLWEAPONEX_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-StringContains(_Template, "WPN_", 1)
+NRD_ItemGetStatsId(_Item, _Stat)
+AND
+NRD_StatGetType(_Stat, "Weapon")
 THEN
 DB_NOOP(1);
 
+QRY
+LLWEAPONEX_QRY_ItemIsWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+NRD_ItemGetStatsId(_Item, _Stat)
+AND
+NRD_StatGetType(_Stat, "Weapon")
+THEN
+DB_NOOP(1);
+*/
+
+// [BEGIN_NO_OSITOOLS]
 QRY
 LLWEAPONEX_QRY_ItemIsWeaponOrShield((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
 _Item != NULL_00000000-0000-0000-0000-000000000000
 AND
-CharacterGetEquippedShield(_Char, _Item)
+NOT DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Char, _Item)
+AND
+LeaderLib_Helper_QRY_ItemIsEquipped(_Char, _Item)
 THEN
 DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Char, _Item);
 
@@ -110,7 +126,32 @@ _Item != NULL_00000000-0000-0000-0000-000000000000
 AND
 GetTemplate(_Item, _Template)
 AND
-StringContains(_Template, "WPN_", 1)
+GetStatString(_Item, _Stat)
+AND
+StringContains(_Template, "WPN_", _a)
+AND
+StringContains(_Stat, "WPN_", _b)
+AND
+IntegerMax(_a, _b, 1)
+THEN
+DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Char, _Item);
+
+QRY
+LLWEAPONEX_QRY_ItemIsWeaponOrShield((CHARACTERGUID)_Char, (ITEMGUID)_Item)
+AND
+NOT DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Char, _Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+GetTemplate(_Item, _Template)
+AND
+GetStatString(_Item, _Stat)
+AND
+StringContains(_Template, "Shield", _a)
+AND
+StringContains(_Stat, "Shield", _b)
+AND
+IntegerMax(_a, _b, 1)
 THEN
 DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Char, _Item);
 
@@ -120,15 +161,80 @@ AND
 DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Char, _Item)
 THEN
 NOT DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Char, _Item);
+// [END_NO_OSITOOLS]
 
+/* [OSITOOLS_ONLY]
 QRY
-LLWEAPONEX_QRY_ItemIsWeaponOrShield((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_QRY_ItemIsWeaponOrShield((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
+NRD_ItemGetStatsId(_Item, _Stat)
 AND
-StringContains(_Template, "WPN_", 1)
+NRD_StatGetType(_Stat, _StatType)
+AND
+LeaderLib_String_QRY_EqualsAny(_StatType, "Weapon", "Shield")
 THEN
 DB_NOOP(1);
+*/
+
+// [BEGIN_NO_OSITOOLS]
+QRY
+LLWEAPONEX_QRY_ItemIsRangedWeapon((ITEMGUID)_Item)
+AND
+NOT DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item)
+AND
+DB_LLWEAPONEX_TagHelper_RangedWeaponTags(_Group, _Tag)
+AND
+IsTagged(_Item, _Tag, 1)
+THEN
+DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item);
+
+QRY
+LLWEAPONEX_QRY_ItemIsRangedWeapon((ITEMGUID)_Item)
+AND
+NOT DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item)
+AND
+GetTemplate(_Item, _Template)
+AND
+LeaderLib_String_QRY_ContainsAny(_Template, "Bow", "Crossbow", "Wand")
+THEN
+DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item);
+
+QRY
+LLWEAPONEX_QRY_ItemIsRangedWeapon((ITEMGUID)_Item)
+AND
+NOT DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item)
+AND
+GetStatString(_Item, _Stat)
+AND
+LeaderLib_String_QRY_ContainsAny(_Stat, "Bow", "Crossbow", "Wand")
+THEN
+DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item);
+
+QRY
+LLWEAPONEX_QRY_ItemIsRangedWeapon((ITEMGUID)_Item)
+AND
+DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item)
+THEN
+NOT DB_LLWEAPONEX_Helper_Temp_CheckedWeapon(_Item);
+// [END_NO_OSITOOLS]
+
+/* [OSITOOLS_ONLY]
+QRY
+LLWEAPONEX_QRY_ItemIsRangedWeapon((ITEMGUID)_Item)
+AND
+NRD_ItemGetStatsId(_Item, _Stat)
+AND
+NRD_StatGetType(_Stat, "Weapon")
+AND
+NRD_StatGetString(_Stat, "WeaponType", _WeaponType)
+AND
+LeaderLib_String_QRY_EqualsAny(_WeaponType, "Bow", "Crossbow", "Wand", "Rifle")
+//NRD_StatGetString(_Stat, "Projectile", _ProjectileString)
+THEN
+DB_NOOP(1);
+*/
+
+
 
 QRY
 LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Char)
