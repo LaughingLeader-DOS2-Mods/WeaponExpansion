@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+/* [OSITOOLS_ONLY]
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Char,(ITEMGUID)_Item)
 AND
@@ -16,7 +17,9 @@ NRD_ItemGetStatsId(_Item, _Stat)
 AND
 NRD_StatGetString(_Stat, "IsTwoHanded", "Yes")
 THEN
-NRD_LuaCall("LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item, _Stat)
+DB_CustomUseItemResponse(_Char, _Item, 0);
+NRD_LuaCall("LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item, _Stat);
+*/
 EXITSECTION
 
 ENDEXITSECTION
