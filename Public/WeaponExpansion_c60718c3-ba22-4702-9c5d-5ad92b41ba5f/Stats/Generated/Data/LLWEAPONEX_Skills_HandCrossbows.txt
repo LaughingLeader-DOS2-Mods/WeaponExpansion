@@ -35,7 +35,7 @@ data "CastEffect" "LLWEAPONEX_FX_HandCrossbow_Reload_01:LowerArm_L_Twist_Bone:ca
 new entry "Projectile_LLWEAPONEX_HandCrossbow_Assassinate"
 type "SkillData"
 data "SkillType" "Projectile"
-data "ForGameMaster" "No"
+data "ForGameMaster" "Yes"
 data "IsEnemySkill" "No"
 data "Requirements" "Tag LLWEAPONEX_HandCrossbow_Equipped"
 data "MemorizationRequirements" "Tag LLWEAPONEX_HandCrossbow_Mastery1"

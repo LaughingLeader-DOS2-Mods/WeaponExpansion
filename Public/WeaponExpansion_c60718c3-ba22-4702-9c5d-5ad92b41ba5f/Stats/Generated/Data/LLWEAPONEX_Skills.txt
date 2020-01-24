@@ -142,7 +142,7 @@ data "CastEffect" "LLWEAPONEX_FX_Skills_MagicStrike_Attack_Precision_Root_01:Dum
 data "TargetEffect" "LLWEAPONEX_FX_Skills_MagicStrike_Impact_01:Dummy_BodyFX:cast"
 data "MemorizationRequirements" "WarriorLore 1"
 
-new entry "Target_LLWEAPONEX_EnemyMagicCripplingBlow"
+new entry "Target_LLWEAPONEX_MagicCripplingBlow_Enemy"
 type "SkillData"
 data "SkillType" "Target"
 using "Target_LLWEAPONEX_MagicCripplingBlow"
