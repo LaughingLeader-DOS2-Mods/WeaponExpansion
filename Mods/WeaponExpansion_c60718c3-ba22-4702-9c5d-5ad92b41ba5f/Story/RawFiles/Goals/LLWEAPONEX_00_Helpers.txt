@@ -234,8 +234,6 @@ THEN
 DB_NOOP(1);
 */
 
-
-
 QRY
 LLWEAPONEX_QRY_CharacterIsUnarmed((CHARACTERGUID)_Char)
 AND
