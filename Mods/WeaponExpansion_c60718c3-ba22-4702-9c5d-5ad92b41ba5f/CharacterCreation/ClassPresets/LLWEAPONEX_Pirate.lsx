@@ -86,7 +86,7 @@
 							<attribute id="Attribute" value="FIN" type="23" />
 						</node>
 						<node id="AttributeChange">
-							<attribute id="AmountIncreased" value="3" type="4" />
+							<attribute id="AmountIncreased" value="2" type="4" />
 							<attribute id="Attribute" value="WIT" type="23" />
 						</node>
 					</children>
