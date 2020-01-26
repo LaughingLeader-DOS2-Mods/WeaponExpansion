@@ -49,18 +49,12 @@ LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V
 LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.
 LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.
 LLWEAPONEX_TARRED_DisplayName	Tarred
-LLWEAPONEX_TORMENTED_GHOST_Description	Character is haunting the battlefield as a tormented ghost.
-LLWEAPONEX_TORMENTED_GHOST_DisplayName	Tormented Ghost
-LLWEAPONEX_TORMENT_CLAIMSOUL_Description	Character's soul has been claimed, and will restore life to the Tormented Ghost's corpse if they die.
-LLWEAPONEX_TORMENT_CLAIMSOUL_DisplayName	Claimed Soul
 LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.
 LLWEAPONEX_TRIPPING_DisplayName	Tripping
 LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!
 LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage
 LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
 LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
-LLWEAPONEX_ZOMBIFIED_Description	Character is temporarily zombified by <font color='#7f00ff'>Death Magic</font>.<br>Bleeds <font color='#65C900'>Poison</font> when hit.
-LLWEAPONEX_ZOMBIFIED_DisplayName	Zombified
 LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark
 LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.
 LLWEAPONEX_WARCHIEF_MARK_CONSUME_DisplayName	Explode Warchief's Mark for bonus damage

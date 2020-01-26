@@ -64,10 +64,6 @@ add skill "Projectile_LLWEAPONEX_EnemyChaosBolt"
 add skill "Jump_LLWEAPONEX_EnemyChaosDive"
 add skill "Rush_LLWEAPONEX_EnemyChaosCharge"
 
-new skillset "LLWEAPONEX_TormentedGhost"
-add skill "Target_LLWEAPONEX_Torment_ClaimSoul"
-add skill "MultiStrike_LLWEAPONEX_Torment_Haunt"
-
 new skillset "LLWEAPONEX_Origin_WeaponMaster"
 add skill "MultiStrike_EnemyVault"
 add skill "Rush_LLWEAPONEX_EnemyMagicBatteringRam"

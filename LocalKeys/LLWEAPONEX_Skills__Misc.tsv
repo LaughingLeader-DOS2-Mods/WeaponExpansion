@@ -10,14 +10,6 @@ Shout_LLWEAPONEX_Quiver_DrawArrow_Description	Draw a random, temporary arrow fro
 Shout_LLWEAPONEX_Quiver_DrawArrow_DisplayName	Draw Arrow
 Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].
 Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
-MultiStrike_LLWEAPONEX_Torment_Haunt_DisplayName	Haunt
-MultiStrike_LLWEAPONEX_Torment_Haunt_Description	Haunt the target enemy, dealing [1] and apply Cursed.
-Target_LLWEAPONEX_Torment_ClaimSoul_DisplayName	Claim Soul
-Target_LLWEAPONEX_Torment_ClaimSoul_Description	Claim the soul of the target character. If they die, fully resurrect your body.
-Shout_LLWEAPONEX_ZombifySelf_DisplayName	Zombify Self
-Shout_LLWEAPONEX_ZombifySelf_Description	Temporarily gain a few Zombie-like traits, gaining <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
-Target_LLWEAPONEX_Zombify_DisplayName	Zombify
-Target_LLWEAPONEX_Zombify_Description	Temporarily zombify an ally, granting them <font color='#9A5085'>[1]% Lifesteal</font>, <font color='#00AA00'>[2]% Poison Resistance</font>, and bleeding <font color='#65C900'>Poison</font> when hit for 2 turns.
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF3311'>You're Already Dead</font>
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.
