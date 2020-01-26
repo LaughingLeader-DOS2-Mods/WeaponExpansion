@@ -184,7 +184,6 @@ end
 ---Change a two-handed weapon to a one-handed weapon.
 ---@param char string
 ---@param item string
----@param stat string
 ---@return string Weapon
 local function TwoHandedToOnehanded(char, item)
     local stat = NRD_ItemGetStatsId(item)

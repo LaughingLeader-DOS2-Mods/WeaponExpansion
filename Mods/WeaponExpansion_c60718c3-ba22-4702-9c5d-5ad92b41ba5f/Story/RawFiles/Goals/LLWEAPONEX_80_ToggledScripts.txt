@@ -13,22 +13,6 @@ LLWEAPONEX_ToggleSettings_InitSettings()
 THEN
 SysClear("DB_LLWEAPONEX_ToggleSettings_MasteryFlags", 3);
 
-/*
-PROC
-LLWEAPONEX_ToggleSettings_InitSettings()
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _MaxXPVar, _LevelVar, _EnabledFlag) // Enabled masteries
-THEN
-LLWEAPONEX_ToggleSettings_AddTag(_WeaponType);
-
-PROC
-LLWEAPONEX_ToggleSettings_InitSettings()
-AND
-DB_LLWEAPONEX_Grimoire_Tags(_Template, _Tag)
-THEN
-LLWEAPONEX_ToggleSettings_AddTag(_Tag);
-*/
-
 PROC
 LLWEAPONEX_ToggleSettings_AddTag((STRING)_Tag)
 AND
@@ -50,10 +34,6 @@ LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Dagger", "
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Runeblade", "LLWEAPONEX_Runeblade");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Firearms", "LLWEAPONEX_Firearm");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Throwing", "LLWEAPONEX_ThrowingAbility");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_02_Grimoire__Main", "LLWEAPONEX_Grimoire");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_02_Grimoire_Death", "LLWEAPONEX_Grimoire_Death");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_02_Grimoire_Mimicry", "LLWEAPONEX_Grimoire_Mimicry");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_02_Grimoire_Fire", "LLWEAPONEX_Grimoire_Fire");
 LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX");
 //END_REGION
 
@@ -151,13 +131,6 @@ AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,2)
 THEN
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_09_OniGauntlet", "LLWEAPONEX_OniGauntletEquipped");
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 3, 8)
-THEN
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_02_Grimoire__Main", "LLWEAPONEX_Grimoire");
 
 PROC
 LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)

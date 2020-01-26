@@ -882,13 +882,6 @@ THEN
 CharacterDieImmediate(_Host, 0, "", _Host);
 
 IF
-TextEventSet("llweap_stopgrimfx")
-AND
-CharacterGetHostCharacter(_Host)
-THEN
-LLWEAPONEX_Grimoire_StopAllEffects_All(_Host);
-
-IF
 TextEventSet("llweap_unsheathetest")
 AND
 CharacterGetHostCharacter(_Host)

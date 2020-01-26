@@ -15,11 +15,8 @@ LLWEAPONEX_ModCompatibility_InitMimicrySettings();
 
 PROC
 LLWEAPONEX_ModCompatibility_InitMimicrySettings()
-AND
-NOT DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion", "Shout_LLWEAPONEX_Grimoire_Toggle_")
 THEN
 //Mimicry Skill Blacklist
-DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","Shout_LLWEAPONEX_Grimoire_Toggle_");
 //Rune statuses are auto-removed when a runeblade is unequipped, so mimicking these is pointless
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","Shout_LLWEAPONEX_ActivateRuneblade_");
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes("WeaponExpansion","LLWEAPONEX_ScriptStart_");
@@ -33,7 +30,6 @@ DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_T
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Targeting");
-DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Grimoire_DeathAura");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_HandCrossbow_Reload");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Prepare_BalrinsAxe");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Shout_LLWEAPONEX_Rapier_DuelistStance");
@@ -49,18 +45,6 @@ DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_R
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonGas");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel");
 DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_RemoteMine_Throw_Tar");
-
-PROC
-LLWEAPONEX_ModCompatibility_Internal_CompileErrorFix_VSCode()
-THEN
-DB_LLMIME_Mimicking_Blacklist_SkillElements("Shout", "");
-
-PROC
-LLWEAPONEX_ModCompatibility_Internal_CompileErrorFix_VSCode()
-AND
-DB_Mimicry_BlockWeaponMimicking(NULL_00000000-0000-0000-0000-000000000000)
-THEN
-NOT DB_Mimicry_BlockWeaponMimicking(NULL_00000000-0000-0000-0000-000000000000);
 //END_REGION
 
 //REGION UPDATING
@@ -71,15 +55,6 @@ LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,11)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:ModCompatibility] Updating settings from version [",_PastVersion,"] to [",_NewVersion,"]");
 LLWEAPONEX_ModCompatibility_InitMimicrySettings();
-//END_REGION
-
-//REGION MIMICRY_MIMICKED_WEAPONS
-PROC
-Mimicry_BlockMimickedWeapon((ITEMGUID)_Item)
-AND
-IsTagged(_Item, "LLWEAPONEX_Grimoire", 1)
-THEN
-DB_Mimicry_BlockWeaponMimicking(_Item);
 //END_REGION
 
 //REGION MIMICRY_MIMICKING_SKILLS

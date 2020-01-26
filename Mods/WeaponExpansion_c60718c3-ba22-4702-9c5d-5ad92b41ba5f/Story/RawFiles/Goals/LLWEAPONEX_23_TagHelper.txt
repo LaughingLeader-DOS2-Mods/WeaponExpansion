@@ -22,7 +22,7 @@ DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Dagger");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Firearm");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Glaive");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Greatbow");
-DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Grimoire");
+DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLGRIMOIRE_Grimoire");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Halberd");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_HandCrossbow");
 DB_LLWEAPONEX_TagHelper_AllTags("WeaponExpansion", "Type", "LLWEAPONEX_Katana");

@@ -7,21 +7,36 @@ DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE1");
 DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE2");
 DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE3");
 DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE4");
+DB_LLWEAPONEX_Rapiers_IgnoreWithTag("Grimoires", "LLGRIMOIRE_Grimoire");
 
 KBSECTION
 //REGION OFFHAND_QRY
 QRY
+LLWEAPONEX_Rapiers_QRY_IgnoreItem((ITEMGUID)_Item)
+AND
+LeaderLib_Helper_QRY_IgnoreItem(_Item)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Rapiers_QRY_IgnoreItem((ITEMGUID)_Item)
+AND
+DB_LLWEAPONEX_Rapiers_IgnoreWithTag(_Grimoire, _Tag)
+AND
+IsTagged(_Item, _Tag, 1)
+THEN
+DB_NOOP(1);
+
+QRY
 LLWEAPONEX_Rapiers_QRY_HasFullHands((CHARACTERGUID)_Player)
 AND
-CharacterGetEquippedItem(_Player, "Weapon", _Weapon)
+CharacterGetEquippedItem(_Player, "Weapon", (ITEMGUID)_Weapon)
 AND
-_Weapon != NULL_00000000-0000-0000-0000-000000000000
+NOT LLWEAPONEX_Rapiers_QRY_IgnoreItem(_Weapon)
 AND
-CharacterGetEquippedItem(_Player, "Shield", _Shield)
+CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Shield)
 AND
-_Shield != NULL_00000000-0000-0000-0000-000000000000
-AND
-IsTagged(_Shield, "LLWEAPONEX_Grimoire", 0)
+NOT LLWEAPONEX_Rapiers_QRY_IgnoreItem(_Shield)
 THEN
 DB_NOOP(1);
 //END_REGION

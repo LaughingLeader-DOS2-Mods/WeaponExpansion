@@ -1,5 +1,6 @@
 DB_LLMIME_Mimicking_Whitelist_Skills 1
 DB_LLMIME_Mimicking_Blacklist_Skills 1
+DB_LLMIME_Mimicking_Blacklist_Skills 2
 DB_LLMIME_Mimicking_Blacklist_SkillElements 2
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes 1
 DB_LLBARTER_DialogBlacklist 2
@@ -14,3 +15,4 @@ DB_LLWEAPONEX_Extender_Temp_RefreshSkill 3
 DB_LLWEAPONEX_Temp_HitHandle 3
 DB_LLWEAPONEX_Pistols_BulletTemplates 4
 DB_LLWEAPONEX_TagHelper_RangedWeaponTags 2
+DB_LLMIME_Mimicking_Blacklist_SkillPrefixes 2
