@@ -969,24 +969,6 @@ add name "WPN_UNIQUE_LLWEAPONEX_DualShields_OrmaReeve_DisplayName",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_DisplayName",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death"
-add name "WPN_UNIQUE_LLWEAPONEX_Grimoire_Death_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire"
-add name "WPN_UNIQUE_LLWEAPONEX_Grimoire_Fire_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark"
-add name "WPN_UNIQUE_LLWEAPONEX_Grimoire_Magic_EternalSpark_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry"
-add name "WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap"
-add name "WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind"
-add name "WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind_DisplayName",""
-
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
 add name "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee_DisplayName",""
 

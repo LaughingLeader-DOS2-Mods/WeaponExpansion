@@ -1114,17 +1114,6 @@ object category "LLWEAPONEX_DualShields",1,1,1,1,1,1,0,0
 new subtable "-2"
 object category "Shield",1,1,1,1,1,1,0,0
 
-new treasuretable "LLWEAPONEX_Debug_GrimoireTest"
-IgnoreLevelDiff 1
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Wind",1,0,0,0,0,0,0,1
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Swap",1,0,0,0,0,0,0,1
-new subtable "-1"
-object category "I_WPN_UNIQUE_LLWEAPONEX_Grimoire_Mimicry",1,0,0,0,0,0,0,1
-new subtable "-1"
-object category "I_WPN_UNIQUE_WithermooreShield",1,0,0,0,0,0,0,0
-
 new treasuretable "LLWEAPONEX_Debug_TestDeltamods"
 IgnoreLevelDiff 1
 new subtable "-10"
