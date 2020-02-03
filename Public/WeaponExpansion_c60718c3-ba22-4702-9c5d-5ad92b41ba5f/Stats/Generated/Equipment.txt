@@ -752,6 +752,8 @@ add equipment entry "ARM_LLWEAPONEX_Pistol_A_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
+add equipment entry "GRN_LLWEAPONEX_Flask_Weakness_Fire_A"
+add equipmentgroup
 add equipment entry "POTION_Minor_Healing_Potion"
 add equipmentgroup
 add equipment entry "SCROLL_Resurrect"
@@ -775,6 +777,8 @@ add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_Pistol_A_Crafted"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
+add equipmentgroup
+add equipment entry "GRN_LLWEAPONEX_Flask_Weakness_Fire_A"
 add equipmentgroup
 add equipment entry "CON_Potion_Poison_A"
 add equipmentgroup
