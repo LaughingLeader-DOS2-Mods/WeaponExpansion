@@ -6,19 +6,20 @@ local function GetHandedness(weapon)
     local stat = NRD_ItemGetStatsId(weapon)
     local handedness = NRD_StatGetString(stat, "IsTwoHanded")
     if handedness == "Yes" then
-        DebugBreak("[LL-OsiExtender] Item is two-handed.")
+        Ext.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item is two-handed.")
         return true
     elseif handedness == "No" then
-        DebugBreak("[LL-OsiExtender] Item is one-handed.")
+        Ext.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item is one-handed.")
         return false
     else
         return nil
     end
 end
 
+local weapon_slots = {"Weapon", "Shield"}
+
 local function TagHandedness(player)
-    local slots = {"Weapon", "Shield"}
-    for i, slot in ipairs(slots) do
+    for _,slot in pairs(weapon_slots) do
         local item = CharacterGetEquippedItem(player, slot)
         if item ~= nil then
             local handedness = GetHandedness(item)
@@ -31,7 +32,7 @@ local function TagHandedness(player)
             end
         end
     end
-    DebugBreak("[LL-OsiExtender] Item check done.")
+    Ext.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item check done.")
 end
 
 local function TagItemType(player)
