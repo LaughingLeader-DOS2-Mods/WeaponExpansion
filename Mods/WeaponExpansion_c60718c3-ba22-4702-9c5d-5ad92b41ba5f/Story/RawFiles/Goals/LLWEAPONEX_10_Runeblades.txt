@@ -150,7 +150,7 @@ DB_LeaderLib_Surfaces(_Index, _Surface)
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_ChaosRune_PreserveSurface", 0)
 AND
-LeaderLib_Helper_QRY_IsInSurface(_Char, _Surface)
+LeaderLib_Helper_QRY_IsInSurface((GUIDSTRING)_Char, _Surface)
 AND
 LLWEAPONEX_Runeblades_QRY_IgnoreSurfaceRemoval(_Surface)
 THEN

@@ -8,7 +8,7 @@ CharacterStatusApplied(_Char, "INSURFACE", _)
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", 1)
 AND
-LeaderLib_Helper_QRY_IsInSurfaceGroup(_Char, "Fire")
+LLWEAPONEX_QRY_IsInSurfaceGroup(_Char, "Fire")
 THEN
 ApplyStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED", 12.0, 0, _Char);
 
@@ -17,7 +17,7 @@ CharacterStatusRemoved(_Char, "INSURFACE", _)
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED", 1)
 AND
-NOT LeaderLib_Helper_QRY_IsInSurfaceGroup(_Char, "Fire")
+NOT LLWEAPONEX_QRY_IsInSurfaceGroup(_Char, "Fire")
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
 

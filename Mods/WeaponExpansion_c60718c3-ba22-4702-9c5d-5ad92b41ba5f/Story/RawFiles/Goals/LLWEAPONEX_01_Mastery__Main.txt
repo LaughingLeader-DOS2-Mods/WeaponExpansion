@@ -1203,40 +1203,6 @@ RemoveStatus(_Player, _Status);
 //END_REGION
 
 //REGION WEAPON_MASTERY_EXPERIENCE
-
-//Basic attack & weapon skill gains
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
-AND
-DB_IsPlayer(_Player)
-AND
-ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE");
-
-/*
-To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
-Additionally, Runeblades gain less experience since it's standard to dual-wield them.
-*/
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", (CHARACTERGUID)_Player)
-AND
-DB_IsPlayer(_Player)
-AND
-ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS");
-
-//ArmCannon == Runic Cannon, a.k.a. rune weapon with fleeting ranged advantages
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Player)
-AND
-DB_IsPlayer(_Player)
-AND
-ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target, "LLWEAPONEX_ARMCANNON_HIT");
-
 //Increased by using grenades/throwing items/throwing skills
 QRY
 LLWEAPONEX_WeaponMastery_QRY_IgnoreMasteryForAllExp((CHARACTERGUID)_Player, "LLWEAPONEX_ThrowingAbility", (STRING)_ExpSource)
@@ -1424,18 +1390,6 @@ IntegerSum(2, _BossMult, _AddExp)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_01_WeaponMastery:LLWEAPONEX_WeaponMastery_AddPartyExperience] Adding [",_AddExp,"] party mastery experience to player.");
 LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, _AddExp, _Enemy, _ExpSource);
-//END_REGION
-
-//REGION PISTOL_MASTERY_EXPERIENCE
-//Applied by the pistol shoot skills, Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand / Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_MASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
-AND
-DB_IsPlayer(_Player)
-AND
-ObjectGetFlag(_Player, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, "LLWEAPONEX_Pistol", 1, _Target);
 //END_REGION
 
 //REGION EXPERIENCE_LISTENING_RESET

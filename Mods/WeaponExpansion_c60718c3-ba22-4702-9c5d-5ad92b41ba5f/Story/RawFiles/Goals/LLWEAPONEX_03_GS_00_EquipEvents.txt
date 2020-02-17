@@ -206,7 +206,7 @@ DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, "LLWEAPONEX_Override1")
 THEN
 LLWEAPONEX_AnimationSetOverride_Clear(_Char);
 //END_REGION
-EXITSECTION
 
+EXITSECTION
 ENDEXITSECTION
-ParentTargetEdge "LLWEAPONEX_00_PostCC"
+ParentTargetEdge "LLWEAPONEX_03_GameScripts"

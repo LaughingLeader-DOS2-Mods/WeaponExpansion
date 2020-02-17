@@ -1321,7 +1321,7 @@ LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_PyroDanceIsAct
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
 AND
-LeaderLib_Helper_QRY_IsInSurfaceGroup(_Char, "Fire")
+LLWEAPONEX_QRY_IsInSurfaceGroup(_Char, "Fire")
 THEN
 ApplyStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED", 12.0, 0, _Char);
 

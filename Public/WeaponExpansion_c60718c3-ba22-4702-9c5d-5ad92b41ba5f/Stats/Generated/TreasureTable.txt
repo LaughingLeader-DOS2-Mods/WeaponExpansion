@@ -1303,7 +1303,7 @@ new treasuretable "ST_Grenades"
 CanMerge 1
 new subtable "0,9;1,1"
 object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
-new subtable "0,2;4,1"
+new subtable "0,2;1,4"
 object category "LLWEAPONEX_Flask_Weakness",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_QuestReward_RG_4"
@@ -1407,14 +1407,19 @@ CanMerge 1
 new subtable "0,4;1,1"
 object category "T_ST_LLWEAPONEX_ThrowingWeaponsNormal",1,0,0,0,0,0,0,0
 
+new treasuretable "ST_SkillbookWater"
+CanMerge 1
+new subtable "0,3;1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
+
 new treasuretable "ST_Skillbook_WaterTrainer"
 CanMerge 1
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
 
-new treasuretable "ST_SkillbookWater"
+new treasuretable "FTJ_SkillbookWater"
 CanMerge 1
-new subtable "0,3;1,1"
+new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
 
 new treasuretable "CheatBooksWater"
@@ -1439,6 +1444,13 @@ object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
 
+new treasuretable "FTJ_SkillbookWarrior"
+CanMerge 1
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
+
 new treasuretable "CheatBooksWarrior"
 CanMerge 1
 MinLevel "-19"
@@ -1449,17 +1461,6 @@ object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
 
-new treasuretable "FTJ_SkillbookWarrior"
-CanMerge 1
-new subtable "1,1"
-object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
-new subtable "1,1"
-object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
-
-new treasuretable "FTJ_SkillbookWater"
-CanMerge 1
-new subtable "1,1"
-object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
 
 new treasuretable "IngredientTrader"
 CanMerge 1

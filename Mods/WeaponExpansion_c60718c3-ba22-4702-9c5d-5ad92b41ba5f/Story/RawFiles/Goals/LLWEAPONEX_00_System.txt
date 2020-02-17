@@ -17,7 +17,7 @@ DB_LLWEAPONEX_Surfaces("Fire", "SurfaceFireCloudPurified", "Cloud", "Purified");
 DB_LLWEAPONEX_Surfaces("Fire", "SurfaceLava", "Ground", "Special");
 
 QRY
-LeaderLib_Helper_QRY_IsInSurfaceGroup((GUIDSTRING)_Obj, (STRING)_Group)
+LLWEAPONEX_QRY_IsInSurfaceGroup((GUIDSTRING)_Obj, (STRING)_Group)
 AND
 DB_LLWEAPONEX_Surfaces("Fire", _Surface, _, _)
 AND
@@ -33,6 +33,13 @@ CharacterMakeStoryNpc(S_LLWEAPONEX_Dummy_ProjectileConditions_01_60eaec5c-4319-4
 SetVisible(S_LLWEAPONEX_Dummy_ProjectileConditions_01_60eaec5c-4319-44a9-adfd-c31188f34f6a, 0);
 CharacterSetDetached(S_LLWEAPONEX_Dummy_ProjectileConditions_01_60eaec5c-4319-44a9-adfd-c31188f34f6a, 1);
 CharacterDisableAllCrimes(S_LLWEAPONEX_Dummy_ProjectileConditions_01_60eaec5c-4319-44a9-adfd-c31188f34f6a);
+
+IF
+RegionEnded(_Region)
+AND
+IsGameLevel(_Region, 1)
+THEN
+SysActivateGoal("LLWEAPONEX_10_GameReady");
 EXITSECTION
 
 ENDEXITSECTION

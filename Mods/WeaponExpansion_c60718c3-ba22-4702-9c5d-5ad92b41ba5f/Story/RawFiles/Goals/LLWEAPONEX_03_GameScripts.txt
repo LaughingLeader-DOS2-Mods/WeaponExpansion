@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_GameScripts_InitSettings();
+KBSECTION
+PROC
+LLWEAPONEX_GameScripts_InitSettings()
+THEN
+LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_00_EquipEvents");
+LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_01_MasteryEvents");
+LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_02_BonusConversionEvents");
+
+/*
+This script should only complete when the loading is done.
+Child scripts are meant to be scripts with events that only need to be listened for when we're done loading.
+Status apply/removal events may spam if applying/removing statuses while loading happens.
+*/
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"

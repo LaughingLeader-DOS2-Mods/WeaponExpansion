@@ -204,6 +204,7 @@ LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pis
 THEN
 CharacterCharacterSetEvent(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, "LLWEAPONEX_Pistols_ShootProjectile");
 DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
 
 /*
 //Use a global dummy if it's available
