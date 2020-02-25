@@ -46,6 +46,7 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_00_ExtenderSkillRefres
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_02_ThrowingListener", "LLWEAPONEX_ListenForThrowingSkill", 0);
 
+
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_08_Quivers", "LLWEAPONEX_QuiverEquipped", 0);
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_Flamethrower", "LLWEAPONEX_FlamethrowerEquipped", 1);
@@ -65,6 +66,8 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_11_Blunderbuss",
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_HunkerDown", "LLWEAPONEX_DualShields_HunkeringDown", 1);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_ShieldCover", "LLWEAPONEX_DualShields_Cover_Active", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_ShieldCover_CounterAttack", "LLWEAPONEX_DualShields_CanCounterAttack", 0);
+
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_UnrelentingRage", "LLWEAPONEX_UnrelentingRage_Active", 0);
 
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");

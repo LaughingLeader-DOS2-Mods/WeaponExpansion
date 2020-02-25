@@ -539,3 +539,47 @@ THEN
 	ENDIF
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
+
+EVENT LLWEAPONEX_SoulHarvester_DamageBonus
+VARS
+	CHARACTER:_Target
+	LIST<STATUS>:_RemoveList
+	STATUS:_Result
+	INT:_Turns
+	INT:_TurnsLeft
+ON
+	FetchCharacterApplyStatusData(_Target, LLWEAPONEX_UNRELENTING_RAGE_BONUS_APPLY)
+ACTIONS
+	Set(_Result, null)
+	Set(_Turns, -1)
+IF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_UNRELENTING_RAGE_BONUS)
+THEN
+	Set(_Result, LLWEAPONEX_UNRELENTING_RAGE_BONUS2)
+	ListAdd(_RemoveList, LLWEAPONEX_UNRELENTING_RAGE_BONUS1)
+ELIF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_UNRELENTING_RAGE_BONUS2)
+THEN
+	Set(_Result, LLWEAPONEX_UNRELENTING_RAGE_BONUS3)
+	ListAdd(_RemoveList, LLWEAPONEX_UNRELENTING_RAGE_BONUS2)
+ELIF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_UNRELENTING_RAGE_BONUS3)
+THEN
+	Set(_Result, LLWEAPONEX_UNRELENTING_RAGE_BONUS4)
+	ListAdd(_RemoveList, LLWEAPONEX_UNRELENTING_RAGE_BONUS3)
+ELIF "c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_UNRELENTING_RAGE_BONUS4)
+THEN
+	Set(_Result, LLWEAPONEX_UNRELENTING_RAGE_BONUS5)
+	ListAdd(_RemoveList, LLWEAPONEX_UNRELENTING_RAGE_BONUS4)
+ELIF "!c1"
+	CharacterHasStatus(_Target, LLWEAPONEX_UNRELENTING_RAGE_BONUS5)
+THEN
+	Set(_Result, LLWEAPONEX_UNRELENTING_RAGE_BONUS1)
+ENDIF
+IF "!c1"
+	IsEqual(_Result, null)
+THEN
+	CharacterPlayEffect(_Target, "RS3_FX_GP_Status_Enraged_01", "Dummy_OverheadFX")
+ENDIF
+	RETURN(_RemoveList, _Result, _Turns)

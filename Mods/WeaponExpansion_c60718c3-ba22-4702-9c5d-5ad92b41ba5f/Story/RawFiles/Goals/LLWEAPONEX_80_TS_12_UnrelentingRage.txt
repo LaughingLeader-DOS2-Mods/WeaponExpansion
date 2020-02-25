@@ -1,0 +1,43 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+/* [OSITOOLS_ONLY]
+IF
+NRD_OnPrepareHit(_Target, (CHARACTERGUID)_Char, _Damage, _Handle)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE", 1)
+AND
+NRD_HitGetInt(_Handle, "CriticalHit", 1)
+AND
+NRD_HitGetInt(_Handle, "Dodged", 0)
+AND
+NRD_HitGetInt(_Handle, "Missed", 0)
+AND
+NRD_HitGetInt(_Handle, "Blocked", 0)
+AND
+NRD_HitGetInt(_Handle, "DamageSourceType", _DamageSourceType)
+AND
+LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/statuses/GM
+THEN
+NRD_LuaCall("LeaderLib_Ext_IncreaseDamage", (STRING)_Target, (STRING)_Char, (STRING)_Handle, "1.5");
+*/
+
+IF
+CharacterKilledBy(_Target, _, _Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE", 1)
+AND
+CharacterIsAlly(_Target, _Char, 0)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE_BONUS_APPLY", 0.0, 0, _Char);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_UNRELENTING_RAGE", _)
+THEN
+ApplyStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE_BONUS_REMOVE", 0.0, 0, _Char);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"
