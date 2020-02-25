@@ -1563,7 +1563,7 @@
 	<content contentuid="hb1e7d05ag15e5g4b62gbf4eg837bf4b2fd4c" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName">Undead Bonus Damage</content>
 	<content contentuid="hf043482ege1efg49a5gbaf2gbac0ecb56e43" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_BONUS_Description">Character is empowered from slaying enemies.</content>
 	<content contentuid="h6f9c6b3fgfbddg4682gbdebgf5c3f04903d6" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_BONUS_DisplayName">Fury&apos;s Reward</content>
-	<content contentuid="h4c2dc36bg924eg4a71gb211gc8d70743fdc9" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_Description">Character is unleashing an unrelenting fury.&lt;br&gt;&lt;font color=&apos;#FF22DD&apos; size=&apos;16&apos;&gt;Critical Damage +50%&lt;/font&gt;</content>
+	<content contentuid="h4c2dc36bg924eg4a71gb211gc8d70743fdc9" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_Description">Character is unleashing an unrelenting fury.&lt;br&gt;&lt;font color=&apos;#65C900&apos;&gt;Critical Damage +50%&lt;/font&gt;</content>
 	<content contentuid="h82443abeg98f3g4977gba22ga9a785091dbe" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_DisplayName">Raging</content>
 	<content contentuid="ha0bc2e7ag52eeg4e97g87c8g406b40f75514" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_WARCHARGE_APPLY_DisplayName">War Charge</content>
 	<content contentuid="hed432810g1e5bg4cccgb869g0ed453f6f6ed" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_WARCHARGE_BONUS_Description">Character is charging at their enemies. Get&apos;em!</content>

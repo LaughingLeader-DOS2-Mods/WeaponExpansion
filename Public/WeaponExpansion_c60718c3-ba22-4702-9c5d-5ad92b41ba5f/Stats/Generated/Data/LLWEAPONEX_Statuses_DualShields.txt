@@ -99,7 +99,7 @@ data "DisplayName" "LLWEAPONEX_COMBAT_SHIELD_ARMOR_DisplayName"
 data "Description" "LLWEAPONEX_COMBAT_SHIELD_ARMOR_Description"
 data "DisplayNameRef" "Armor Increase - Increases physical armor by [1] and magic armor by [2]"
 data "DescriptionRef" "Character has increased armor from a combat shield."
-data "DescriptionParams" "Stats:Stats_LLWEAPONEX_CombatShieldArmor:Armor;Stats:Stats_LLWEAPONEX_CombatShieldArmor:MagicArmor"
+data "DescriptionParams" "Potion:Stats_LLWEAPONEX_CombatShieldArmor:Armor;Potion:Stats_LLWEAPONEX_CombatShieldArmor:MagicArmor"
 data "Icon" ""
 data "StatsId" "Stats_LLWEAPONEX_CombatShieldArmor"
 
