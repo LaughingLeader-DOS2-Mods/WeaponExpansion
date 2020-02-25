@@ -17,6 +17,19 @@ IsGameLevel(_Level, 1)
 THEN
 GoalCompleted;
 
+//REGION VISUAL_FIX
+/*
+IF
+SkillAdded(_Char, _Skill, 0)
+AND
+CharacterGetOrigin(_Char, 1, "LLWEAPONEX_Harken")
+THEN
+CharacterSetVisualElement(_Char, 0, "Hair");
+CharacterSetVisualElement(_Char, 0, "HairColor");
+CharacterSetVisualElement(_Char, 0, "Color");
+*/
+//END_REGION
+
 //REGION CC_EFFECTS
 IF
 ItemTemplateEquipped(_Template, _Player)
