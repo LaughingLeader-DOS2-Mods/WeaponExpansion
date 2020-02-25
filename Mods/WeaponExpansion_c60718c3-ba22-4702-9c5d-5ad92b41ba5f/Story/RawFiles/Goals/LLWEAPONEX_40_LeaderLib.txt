@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+// [BEGIN_NO_OSITOOLS]
 IF
 StoryEvent(_, "LeaderLib_Initialized")
 AND
@@ -10,19 +11,28 @@ NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
 THEN
 DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
 LLWEAPONEX_LeaderLib_InitSettings();
-LLWEAPONEX_LeaderLib_InitHelperSettings();
-LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround();
-LLWEAPONEX_LeaderLib_InitTraderSettings();
-LLWEAPONEX_LeaderLib_InitDeltamods();
-LLWEAPONEX_LeaderLib_AddBlockedSkills();
+// [END_NO_OSITOOLS]
+
+PROC
+LeaderLib_Mods_OnVersionChanged((GUIDSTRING)_UUID, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
+THEN
+DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
+LLWEAPONEX_LeaderLib_InitSettings();
 
 //REGION PRESETS_MISC
 PROC
 LLWEAPONEX_LeaderLib_InitSettings()
 THEN
-LeaderLib_Register_ModMenu("LaughingLeader.WeaponExpansion", "[Weapon Expansion] Settings", "LLWEAPONEX_SettingsMenu", "WeaponExpansion", "LaughingLeader");
+LeaderLib_Register_ModMenuByUUID("c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "LLWEAPONEX_SettingsMenu", "[Weapon Expansion] Settings", "WeaponExpansion", "LaughingLeader");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "WeaponExpansion");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_StatusEvents_DisableScriptEnabled", "WeaponExpansion");
+LLWEAPONEX_LeaderLib_InitHelperSettings();
+LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround();
+LLWEAPONEX_LeaderLib_InitTraderSettings();
+LLWEAPONEX_LeaderLib_InitDeltamods();
+LLWEAPONEX_LeaderLib_AddBlockedSkills();
 
 PROC
 LLWEAPONEX_LeaderLib_InitSettings()
