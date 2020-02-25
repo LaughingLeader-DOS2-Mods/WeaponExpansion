@@ -14,8 +14,6 @@
                     <attribute id="UserCanAlterTags" value="0" type="19" />
                     <attribute id="SkillSet" value="Avatar_LLWEAPONEX_Harkin" type="22" />
 					<attribute id="RootTemplateOverride" value="99cb19a5-55d9-4af2-a793-17f7ff0cf3f9" type="22" />
-                    <attribute id="MaleDefaultHairColor" value="1" type="5" />
-                    <attribute id="MaleDefaultSkinColor" value="1" type="5" />
 
                     <children>
                         <node id="TalentsAdded">
