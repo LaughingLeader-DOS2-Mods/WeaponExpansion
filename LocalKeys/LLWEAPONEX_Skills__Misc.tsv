@@ -13,3 +13,5 @@ Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF3311'>You're Already Dead</font>
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.
+Shout_LLWEAPONEX_UnrelentingRage_DisplayName	<font color='#FF5533'>Unrelenting Rage</font>
+Shout_LLWEAPONEX_UnrelentingRage_Description	Fly into an unstoppable fury, increasing your Critical Chance by [1], Critical Damage by 50%, and gaining [2] Physical/Piercing Resistance.<br><font color='#FF5533'>Slaying an enemy extends Unrelenting Rage by an additional turn, up to the maximum (3), and provides a <font color='#00FF00'>+[4] Damage Boost</font>.</font><br><font color='#FF3333'>Ending your turn without attacking, or getting disabled ends Unrelenting Rage.</font>

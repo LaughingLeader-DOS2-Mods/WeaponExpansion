@@ -897,6 +897,12 @@
 	<content contentuid="h600e653cg58bfg43b6gb546g116aef9ba9c9" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_SoulHarvest_DamageBonus5">Soul Harvest V</content>
 	<content contentuid="h652d73fcg18b6g469cg8849g710028f8ec91" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_StrengthIntelligenceBonus">Strength Conversion</content>
 	<content contentuid="hfc3aff25gc784g4108gb393g5a346f5b212a" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_Tarred">Tarred</content>
+	<content contentuid="h37c7be81g701bg4c19ga8ebg2c9db9da0c0c" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_UnrelentingRage">Raging</content>
+	<content contentuid="h3e843c3ag22aeg400egb959gca152d6e8818" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_UnrelentingRageBonus">Fury&apos;s Reward</content>
+	<content contentuid="he791882dg4ce9g48dcgb4ccg67c95e1416ba" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_UnrelentingRageBonus2">Fury&apos;s Reward II</content>
+	<content contentuid="hf57d9f94g473dg4552g8edagc58d2aebf2c6" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_UnrelentingRageBonus3">Fury&apos;s Reward III</content>
+	<content contentuid="hd0416ac7gc514g4631ga674g7cde3cf40ef7" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_UnrelentingRageBonus4">Fury&apos;s Reward IV</content>
+	<content contentuid="h348a2785g5750g4d3ag9ae4ge434051a48c2" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_UnrelentingRageBonus5">Fury&apos;s Reward V</content>
 	<content contentuid="h2bda3229g17f3g4b04gb1c7g34464eceeb0e" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WarCharge">War Charge</content>
 	<content contentuid="h1cc9cd1dga69eg4618g8763g0ad2373c3d11" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WarCharge_DamageBoost">First Strike (War Charge)</content>
 	<content contentuid="h9cd677b5g6c02g4a12gb671g70df0a3e47d0" Source="LLWEAPONEX_Potions.lsb" Key="Stats_LLWEAPONEX_WarChargeBonus">Charging (War Charge)</content>
@@ -1224,6 +1230,8 @@
 	<content contentuid="h030a7775gcb43g42a7gacd3g70796e45351a" Source="LLWEAPONEX_Skills.lsb" Key="Rush_LLWEAPONEX_MagicBatteringRam_DisplayName">Magic Rush</content>
 	<content contentuid="hb5394fdbg81e3g4b92g8ccbgfc1d9314b422" Source="LLWEAPONEX_Skills.lsb" Key="Shout_LLWEAPONEX_Quiver_DrawArrow_Description">Draw a random, temporary arrow from your quiver.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Arrows retrieved this way disappear after combat ends.&lt;/font&gt;</content>
 	<content contentuid="h33c1a581gf442g4a60g9851gffe17d4151f4" Source="LLWEAPONEX_Skills.lsb" Key="Shout_LLWEAPONEX_Quiver_DrawArrow_DisplayName">Draw Arrow</content>
+	<content contentuid="h5e68b4a3gdb7fg48f5g803ag90f21fd89496" Source="LLWEAPONEX_Skills.lsb" Key="Shout_LLWEAPONEX_UnrelentingRage_Description">Fly into an unstoppable fury, increasing your Critical Chance by [1], Critical Damage by 50%, and gaining [2] Physical/Piercing Resistance.&lt;br&gt;&lt;font color=&apos;#FF5533&apos;&gt;Slaying an enemy extends Unrelenting Rage by an additional turn, up to the maximum (3), and provides a &lt;font color=&apos;#00FF00&apos;&gt;+[4] Damage Boost&lt;/font&gt;.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF3333&apos;&gt;Ending your turn without attacking, or getting disabled ends Unrelenting Rage.&lt;/font&gt;</content>
+	<content contentuid="hd3793103gb3e4g4444gb422g0bf1511522a0" Source="LLWEAPONEX_Skills.lsb" Key="Shout_LLWEAPONEX_UnrelentingRage_DisplayName">&lt;font color=&apos;#FF5533&apos;&gt;Unrelenting Rage&lt;/font&gt;</content>
 	<content contentuid="ha7bb24e6gbfb5g4bfcgae42gf706d1338fc7" Source="LLWEAPONEX_Skills.lsb" Key="Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description">The sure-fire, instant death wombo combo, done live.</content>
 	<content contentuid="h6c893108gee88g48f4gbdd5g3c6ee6dabb65" Source="LLWEAPONEX_Skills.lsb" Key="Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName">&lt;font color=&apos;#FF3311&apos;&gt;You&apos;re Already Dead&lt;/font&gt;</content>
 	<content contentuid="h004f820eg3b47g4400ga26dgc77fb1d9292e" Source="LLWEAPONEX_Skills.lsb" Key="Target_LLWEAPONEX_MagicCripplingBlow_Description">&lt;font color=&apos;#00BFFF&apos; size=&apos;18&apos;&gt;Magic Warfare&lt;/font&gt;&lt;br&gt;Cripple all enemies within [1] of the target. Deals [2].</content>
@@ -1553,6 +1561,10 @@
 	<content contentuid="h55c9b359gad6fg45f5gb8edg2a98774cd5f5" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_TRIPPING_DisplayName">Tripping</content>
 	<content contentuid="h183de597ga842g42c5gac3bgd61680d21c0b" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description">Undead character is taking bonus damage!</content>
 	<content contentuid="hb1e7d05ag15e5g4b62gbf4eg837bf4b2fd4c" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName">Undead Bonus Damage</content>
+	<content contentuid="hf043482ege1efg49a5gbaf2gbac0ecb56e43" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_BONUS_Description">Character is empowered from slaying enemies.</content>
+	<content contentuid="h6f9c6b3fgfbddg4682gbdebgf5c3f04903d6" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_BONUS_DisplayName">Fury&apos;s Reward</content>
+	<content contentuid="h4c2dc36bg924eg4a71gb211gc8d70743fdc9" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_Description">Character is unleashing an unrelenting fury.&lt;br&gt;&lt;font color=&apos;#FF22DD&apos; size=&apos;16&apos;&gt;Critical Damage +50%&lt;/font&gt;</content>
+	<content contentuid="h82443abeg98f3g4977gba22ga9a785091dbe" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_UNRELENTING_RAGE_DisplayName">Raging</content>
 	<content contentuid="ha0bc2e7ag52eeg4e97g87c8g406b40f75514" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_WARCHARGE_APPLY_DisplayName">War Charge</content>
 	<content contentuid="hed432810g1e5bg4cccgb869g0ed453f6f6ed" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_WARCHARGE_BONUS_Description">Character is charging at their enemies. Get&apos;em!</content>
 	<content contentuid="h31f9ea18g7adbg4b23g93a1g7be268564b95" Source="LLWEAPONEX_Statuses.lsb" Key="LLWEAPONEX_WARCHARGE_BONUS_DisplayName">Charging (War Charge)</content>
