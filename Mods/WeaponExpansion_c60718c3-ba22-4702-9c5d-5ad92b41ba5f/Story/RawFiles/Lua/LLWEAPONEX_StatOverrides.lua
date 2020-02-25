@@ -8,7 +8,8 @@ local FORBIDDEN = {
 	"Requirements",
 }
 
-local skill_overrides = {
+local overrides = {
+	-- Skills
 	Target_SingleHandedAttack = {
 		IgnoreSilence = "Yes",
 		AIFlags = "StatusIsSecondary",
@@ -18,10 +19,12 @@ local skill_overrides = {
 	Target_TentacleLash = {
 		UseWeaponDamage = "Yes",
 		["Damage Multiplier"] = 90
-	}
-}
-
-local weapon_overrides = {
+	},
+	-- Potions
+	Stats_LLWEAPONEX_UnrelentingRage = {
+		RogueLore = "0" -- Crit mult is handled by the extender
+	},
+	-- Weapons
 	NoWeapon = {
 		ExtraProperties = "LLWEAPONEX_UNARMED_HIT,100,0"
 	},
@@ -53,8 +56,8 @@ local function CanSetProperty(property)
 end
 
 local function apply_overrides(stats)
-    for statname,overrides in pairs(stats) do
-		for property,value in pairs(overrides) do
+    for statname,props in pairs(stats) do
+		for property,value in pairs(props) do
 			local next_value = value
 			if CanSetProperty(property) then
 				Ext.StatSetAttribute(statname, property, next_value)
@@ -82,8 +85,7 @@ end ]]
 local ModuleLoad = function ()
 	Ext.Print("[WeaponExpansion:Bootstrap.lua] Module is loading.")
 
-	apply_overrides(skill_overrides)
-	apply_overrides(weapon_overrides)
+	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 
 	if Ext.IsModLoaded("AnimationsPlus_326b8784-edd7-4950-86d8-fcae9f5c457c") then

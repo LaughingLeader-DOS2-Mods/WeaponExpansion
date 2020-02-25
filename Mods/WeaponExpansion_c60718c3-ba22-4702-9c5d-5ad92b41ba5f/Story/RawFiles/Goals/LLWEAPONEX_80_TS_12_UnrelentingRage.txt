@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+//REGION CRIT_DAMAGE
 /* [OSITOOLS_ONLY]
 IF
 NRD_OnPrepareHit(_Target, (CHARACTERGUID)_Char, _Damage, _Handle)
@@ -23,7 +24,9 @@ LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/status
 THEN
 NRD_LuaCall("LeaderLib_Ext_IncreaseDamage", (STRING)_Target, (STRING)_Char, (STRING)_Handle, "1.5");
 */
+//END_REGION
 
+//REGION DAMAGE_BONUS
 IF
 CharacterKilledBy(_Target, _, _Char)
 AND
@@ -37,7 +40,42 @@ IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_UNRELENTING_RAGE", _)
 THEN
 ApplyStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE_BONUS_REMOVE", 0.0, 0, _Char);
-EXITSECTION
+//END_REGION
 
+//REGION DISABLING_STATUS
+PROC
+LeaderLib_StatusEvents_OnDisablingStatusApplied((CHARACTERGUID)_Char, (GUIDSTRING)_Cause, (STRING)_Status, (STRING)_Type)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE", 1)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE");
+//END_REGION
+
+//REGION MUST_ATTACK
+IF
+ObjectTurnStarted((CHARACTERGUID)_Char)
+AND
+HasActiveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE", 1)
+THEN
+DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char);
+
+IF
+AttackedByObject(_, _, (CHARACTERGUID)_Char, _, _)
+AND
+DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char)
+THEN
+NOT DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char);
+
+IF
+ObjectTurnEnded((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char)
+THEN
+NOT DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char);
+RemoveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE");
+//END_REGION
+
+EXITSECTION
+SysClear("DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked", 1);
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

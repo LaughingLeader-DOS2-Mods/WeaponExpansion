@@ -1079,6 +1079,7 @@ using "_Stats_LLWEAPONEX_Potions_Base"
 data "CriticalChance" "25"
 data "PhysicalResistance" "20"
 data "PiercingResistance" "20"
+data "RogueLore" "5"
 
 new entry "LLWEAPONEX_UNRELENTING_RAGE_BONUS_APPLY"
 type "StatusData"
