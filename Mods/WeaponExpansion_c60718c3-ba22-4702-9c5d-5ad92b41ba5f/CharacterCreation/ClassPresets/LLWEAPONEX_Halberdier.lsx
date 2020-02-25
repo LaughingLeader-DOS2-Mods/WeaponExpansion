@@ -78,7 +78,7 @@
 				<node id="AttributeChanges">
 					<children>
 						<node id="AttributeChange">
-							<attribute id="AmountIncreased" value="3" type="4" />
+							<attribute id="AmountIncreased" value="2" type="4" />
 							<attribute id="Attribute" value="STR" type="23" />
 						</node>
 						<node id="AttributeChange">
