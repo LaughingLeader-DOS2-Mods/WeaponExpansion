@@ -22,7 +22,7 @@ local overrides = {
 	},
 	-- Potions
 	Stats_LLWEAPONEX_UnrelentingRage = {
-		RogueLore = "0" -- Crit mult is handled by the extender
+		RogueLore = 0 -- Crit mult is handled by the extender
 	},
 	-- Weapons
 	NoWeapon = {
