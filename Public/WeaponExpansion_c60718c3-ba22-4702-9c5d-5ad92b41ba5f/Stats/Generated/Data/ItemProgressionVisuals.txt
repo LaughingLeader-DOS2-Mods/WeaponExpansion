@@ -2418,7 +2418,7 @@ add levelgroup 1,5,"Common"
 add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
 add namegroup "WPN_LLWEAPONEX_Halberd_2H_Weak","",""
 
-add levelgroup 6,12,"Common"
+add levelgroup 6,0,"Common"
 add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
 add namegroup "WPN_LLWEAPONEX_Halberd_2H_Normal","",""
 
@@ -2441,6 +2441,10 @@ add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
 add levelgroup 0,0,"Divine"
 add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
 add namegroup "WPN_LLWEAPONEX_Halberd_2H_Epic","Cool",""
+
+add levelgroup 0,0,"Unique"
+add rootgroup "ff7f23df-5bcb-4627-83aa-edd259420640",""
+add namegroup "WPN_LLWEAPONEX_Halberd_2H_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Halberd_2H_A_Crafted"
 
