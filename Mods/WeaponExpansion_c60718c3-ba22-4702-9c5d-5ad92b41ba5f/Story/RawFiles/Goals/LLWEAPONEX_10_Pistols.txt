@@ -188,7 +188,7 @@ LLWEAPONEX_Pistols_Internal_FlagManualTarget((CHARACTERGUID)_Char, (GUIDSTRING)_
 AND
 ObjectIsCharacter((CHARACTERGUID)_Target, 1)
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
+SetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target);
 
 PROC
 LLWEAPONEX_Pistols_Internal_FlagManualTarget((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
@@ -197,14 +197,84 @@ ObjectIsItem((ITEMGUID)_Target, 1)
 AND
 ItemIsDestructible(_Target, 1)
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
+SetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target);
 
 PROC
 LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 THEN
-CharacterCharacterSetEvent(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, "LLWEAPONEX_Pistols_ShootProjectile");
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
+LLWEAPONEX_Pistols_Internal_ShootBullet_Start(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15);
+
+PROC
+LLWEAPONEX_Pistols_Internal_ShootBullet_Start((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy)
+AND
+NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
+AND
+GetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target)
+AND
+ObjectIsItem(_Target, _IsItem)
+THEN
+CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile");
+DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _TargetHelperDummy);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _TargetHelperDummy, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
+
+PROC
+LLWEAPONEX_Pistols_Internal_ShootBullet_Start((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy)
+AND
+LeaderLib_Variables_QRY_ObjectVariableSet(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
+AND
+GetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target)
+AND
+ObjectIsItem(_Target, _IsItem)
+THEN
+DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _TargetHelperDummy);
+LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _TargetHelperDummy, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
+LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget(_Char, _TargetHelperDummy, _Target, _IsItem);
+
+PROC
+LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 1)
+THEN
+CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile_AtItem");
+
+// [BEGIN_NO_OSITOOLS]
+PROC
+LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 0)
+THEN
+CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile_AtCharacter");
+// [END_NO_OSITOOLS]
+
+// For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
+QRY
+LLWEAPONEX_Pistols_QRY_HitDirectly((GUIDSTRING)_Target)
+AND
+HasActiveStatus(_Target, "UNCONSCIOUS", _a)
+AND
+HasActiveStatus(_Target, "KNOCKED_DOWN", _b)
+AND
+HasActiveStatus(_Target, "InstantKnockdown", _c)
+AND
+HasActiveStatus(_Target, "SHOCKWAVE", _d)
+AND
+LeaderLib_Math_QRY_IsEqualToAny(1, _a, _b, _c, _d)
+THEN
+DB_NOOP(1);
+
+/* [OSITOOLS_ONLY]
+PROC
+LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 0)
+AND
+NOT LLWEAPONEX_Pistols_QRY_HitDirectly(_Target)
+THEN
+CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile_AtCharacter");
+
+PROC
+LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 0)
+AND
+LLWEAPONEX_Pistols_QRY_HitDirectly(_Target)
+AND
+GetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _Skill)
+THEN
+LeaderLib_Skills_ExplodeProjectile(_Char, _Target, _Skill);
+*/
 
 /*
 PROC
@@ -284,6 +354,7 @@ AND
 DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _Dummy)
 THEN
 NOT DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _Dummy);
+ClearVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject");
 
 /*
 IF
@@ -309,15 +380,9 @@ CharacterCharacterEvent(_Char, _Target, "LLWEAPONEX_Bullet_OnHit")
 AND
 CharacterIsPlayer(_Char, _a)
 AND
-CharacterIsPartyMember(_Char, _b)
+CharacterGameMaster(_Char, _b)
 AND
-IntegerSum(_a, _b, _c)
-AND
-CharacterGameMaster(_Char, _d)
-AND
-IntegerSum(_c, _d, _Final)
-AND
-IntegerMin(_Final, 1, _IsPlayer) // If any of the above is greater or equal to 1, this is a player
+IntegerMax(_a, _b, _IsPlayer) // If any of the above is greater or equal to 1, this is a player
 THEN
 //LLWEAPONEX_Pistols_Internal_OnHit_Start((GUIDSTRING)_Target, _Char, _IsPlayer);
 LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
@@ -327,15 +392,9 @@ CharacterItemEvent(_Char, _Target, "LLWEAPONEX_Bullet_OnHit")
 AND
 CharacterIsPlayer(_Char, _a)
 AND
-CharacterIsPartyMember(_Char, _b)
+CharacterGameMaster(_Char, _b)
 AND
-IntegerSum(_a, _b, _c)
-AND
-CharacterGameMaster(_Char, _d)
-AND
-IntegerSum(_c, _d, _Final)
-AND
-IntegerMin(_Final, 1, _IsPlayer)
+IntegerMax(_a, _b, _IsPlayer)
 THEN
 //LLWEAPONEX_Pistols_Internal_OnHit_Start((GUIDSTRING)_Target, _Char, _IsPlayer);
 LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
@@ -407,21 +466,30 @@ NOT DB_LLWEAPONEX_Pistols_Temp_HitResolved(_Cause, _Target, _Status);
 PROC
 LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 0)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
+//ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
+//LeaderLib_Ext_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled");
+LeaderLib_Skills_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Pistols:OnHit_Default] Exploding (Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled) (Not a Player) ");
 
 PROC
 LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
 AND
 NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
+//ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
+//LeaderLib_Ext_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled");
+LeaderLib_Skills_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Pistols:OnHit_Default] Exploding (Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled) (No Weapon)");
 
 PROC
 LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
 AND
 LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_WEAPON", 0.0, 1, _Cause);
+//ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_WEAPON", 0.0, 1, _Cause);
+//LeaderLib_Ext_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Weapon");
+LeaderLib_Skills_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Weapon");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Pistols:OnHit_Default] Exploding (Projectile_LLWEAPONEX_Pistol_Damage_Default_Weapon) (Weapon)");
 //END_REGION
 
 //REGION HIT_EVENTS
@@ -438,18 +506,20 @@ LLWEAPONEX_Pistols_Internal_OnBulletHit(_Target, _Source, 1);
 QRY
 LLWEAPONEX_Pistols_QRY_GetHitSource((CHARACTERGUID)_HitSource)
 AND
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_HitSource, _Dummy)
+DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _HitSource)
 THEN
-LeaderLib_Timers_RestartCharacterCharacterTimer(_HitSource, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", 50);
-DB_LLWEAPONEX_Pistols_Temp_DamageSource(_HitSource, _HitSource);
+LeaderLib_Timers_RestartCharacterCharacterTimer(_Char, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", 50);
+DB_LLWEAPONEX_Pistols_Temp_DamageSource(_HitSource, _Char);
 
 QRY
 LLWEAPONEX_Pistols_QRY_GetHitSource((CHARACTERGUID)_HitSource)
 AND
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _HitSource)
+NOT DB_LLWEAPONEX_Pistols_Temp_DamageSource(_HitSource, _)
+AND
+DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_HitSource, _Dummy)
 THEN
-LeaderLib_Timers_RestartCharacterCharacterTimer(_Char, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", 50);
-DB_LLWEAPONEX_Pistols_Temp_DamageSource(_Char, _HitSource);
+DB_LLWEAPONEX_Pistols_Temp_DamageSource(_HitSource, _HitSource);
+LeaderLib_Timers_RestartCharacterCharacterTimer(_HitSource, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", 50);
 
 QRY
 LLWEAPONEX_Pistols_QRY_GetHitSource((CHARACTERGUID)_HitSource)
