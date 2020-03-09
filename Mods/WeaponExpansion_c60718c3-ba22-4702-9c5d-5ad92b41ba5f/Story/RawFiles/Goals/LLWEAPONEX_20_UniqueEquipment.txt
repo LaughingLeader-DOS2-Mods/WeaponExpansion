@@ -983,6 +983,7 @@ DB_LLWEAPONEX_AnvilMace_ImpactPosition(_Char, _TimerName, _x, _y, _z);
 TimerLaunch(_TimerName, 1000);
 // [END_NO_OSITOOLS]
 
+/* [OSITOOLS_ONLY]
 PROC
 LLWEAPONEX_Uniques_AnvilMace_OnAttackAtPosition((CHARACTERGUID)_Char, (REAL)_x, (REAL)_y, (REAL)_z)
 AND
@@ -1006,6 +1007,7 @@ NRD_Substring(_TimerName, 0, 255, _ClampedTimerName)
 THEN
 DB_LLWEAPONEX_AnvilMace_ImpactPosition(_Char, _ClampedTimerName, _x, _y, _z);
 TimerLaunch(_TimerName, 1000);
+*/
 //END_REGION
 
 //REGION ANVILMACE_SLAM_KNOCKUP
