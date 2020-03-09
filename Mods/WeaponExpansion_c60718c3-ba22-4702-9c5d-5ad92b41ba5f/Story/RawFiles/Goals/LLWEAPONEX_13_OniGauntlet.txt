@@ -77,7 +77,7 @@ PROC
 LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 THEN
 DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_Char, _Item);
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_OniGauntletEquipped", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_OniGauntletEquipped", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
@@ -103,7 +103,7 @@ LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start((CHARACTERGUID)_Ch
 AND
 NOT DB_LLWEAPONEX_OniGauntlet_Temp_Equipped(_,_)
 THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_OniGauntletEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_OniGauntletEquipped", "WeaponExpansion");
 //END_REGION
 
 //REGION ONI_GAUNTLET_SOULS

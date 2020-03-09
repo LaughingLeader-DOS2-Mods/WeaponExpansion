@@ -42,7 +42,6 @@ AND
 DB_LLWEAPONEX_Quivers_Temp_Equipped(_Char, _Quiver)
 THEN
 NOT DB_LLWEAPONEX_Quivers_Temp_Equipped(_Char, _Quiver);
-LLWEAPONEX_Quivers_Internal_CheckForEquipped();
 
 PROC
 LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
@@ -273,16 +272,12 @@ LLWEAPONEX_Quivers_ResetRechargeStatus(_Char, _Quiver, "LLWEAPONEX_QUIVER_DRAW_R
 PROC
 LLWEAPONEX_Quivers_OnQuiverEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 THEN
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_QuiverEquipped", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_QuiverEquipped", "WeaponExpansion", 1);
 
 PROC
-LLWEAPONEX_Quivers_Internal_CheckForEquipped()
-AND
-LeaderLib_ToggleScripts_QRY_ScriptIsEnabled("LLWEAPONEX_QuiverEquipped")
-AND
-NOT DB_LLWEAPONEX_Quivers_Temp_Equipped(_, _)
+LLWEAPONEX_Quivers_OnQuiverUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_Quiver)
 THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_QuiverEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_QuiverEquipped", "WeaponExpansion", 1);
 //END_REGION
 
 EXITSECTION

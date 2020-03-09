@@ -129,23 +129,17 @@ DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_BattleBooks_SpellScroll_TentacleLash", "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_MATERIAL_POLYMORPH", 0);
 
 //REGION BIBLE
+/*
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_BibleBattleBookEquipped", 0);
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion", 1);
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
 THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_BibleBattleBookEquipped", 0);
-
-PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
-AND
-PartyGetFlag(_Char, "LLWEAPONEX_BibleBattleBookEquipped", 0)
-THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion", 1);
+*/
 //END_REGION
 //WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_ecb56a2b-0bfa-40d7-ba92-525c2aab0ae1
 //WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d
