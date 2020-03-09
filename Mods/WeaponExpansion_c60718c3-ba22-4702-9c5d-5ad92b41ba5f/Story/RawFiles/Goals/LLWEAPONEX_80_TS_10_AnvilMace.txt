@@ -18,19 +18,7 @@ CharacterStartAttackPosition(_x, _y, _z, _, _Char)
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 1)
 THEN
-PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", _x, _y, _z);
-SetVarFloat3(_Char, "LLWEAPONEX_AnvilMace_AttackPosition", _x, _y, _z);
-SetStoryEvent(_Char, "LLWEAPONEX_AnvilMace_CreateTimerName");
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_TimerNameCreated")
-AND
-GetVarString(_Char, "LLWEAPONEX_AnvilMace_TimerName", _TimerName)
-AND
-GetVarFloat3(_Char, "LLWEAPONEX_AnvilMace_AttackPosition", _x, _y, _z)
-THEN
-DB_LLWEAPONEX_AnvilMace_ImpactPosition(_Char, _TimerName, _x, _y, _z);
-TimerLaunch(_TimerName, 1000);
+LLWEAPONEX_Uniques_AnvilMace_OnAttackAtPosition(_Char, _x, _y, _z);
 
 IF
 TimerFinished(_TimerName)

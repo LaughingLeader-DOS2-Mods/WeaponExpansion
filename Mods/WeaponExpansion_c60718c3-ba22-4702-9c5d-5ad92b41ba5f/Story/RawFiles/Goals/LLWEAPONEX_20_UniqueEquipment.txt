@@ -244,7 +244,7 @@ PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaEquipped(_Char);
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_Uniques_OnMuramasaEquipped((CHARACTERGUID)_Char)
@@ -259,7 +259,7 @@ PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Char);
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_MuramasaEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_Uniques_OnMuramasaUnequipped((CHARACTERGUID)_Char)
@@ -273,13 +273,13 @@ RemoveStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
 LLWEAPONEX_Uniques_OnDemonGauntletUnequipped(_Char);
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Char)
@@ -503,14 +503,15 @@ PlayEffect(_Char, "LLWEAPONEX_FX_Skills_PowerPoleSmash_Cast_Pole_01", "Dummy_FX_
 
 //REGION SOUL_HARVESTER
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
-THEN
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion");
-
-PROC
 LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
 THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion", 1);
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion", 1);
+
 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_SOULHARVEST_REAP", (CHARACTERGUID)_Char)
@@ -871,22 +872,14 @@ LeaderLib_Timers_StartObjectTimer(_Char, 700, "LLWEAPONEX_Timers_SlayHidden_Next
 
 //REGION ANVIL_MACE
 PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 1);
+
+PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
 THEN
-ObjectSetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0);
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion");
-
-PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
-THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0);
-
-PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
-AND
-PartyGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 0)
-THEN
-LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 500);
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 1);
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_PlayUnsheathedImpact")
@@ -970,6 +963,49 @@ THEN
 NOT DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _x, _y, _z);
 DB_LLWEAPONEX_AnvilMace_Temp_SmashPosition(_Char, _tx, _ty, _tz);
 LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_AnvilMace_RushSmash_CheckPos", "LLWEAPONEX_AnvilMace_RushSmash_CheckPos");
+
+PROC
+LLWEAPONEX_Uniques_AnvilMace_OnAttackAtPosition((CHARACTERGUID)_Char, (REAL)_x, (REAL)_y, (REAL)_z)
+THEN
+PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", _x, _y, _z);
+// [BEGIN_NO_OSITOOLS]
+SetVarFloat3(_Char, "LLWEAPONEX_AnvilMace_AttackPosition", _x, _y, _z);
+SetStoryEvent(_Char, "LLWEAPONEX_AnvilMace_CreateTimerName");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_TimerNameCreated")
+AND
+GetVarString(_Char, "LLWEAPONEX_AnvilMace_TimerName", _TimerName)
+AND
+GetVarFloat3(_Char, "LLWEAPONEX_AnvilMace_AttackPosition", _x, _y, _z)
+THEN
+DB_LLWEAPONEX_AnvilMace_ImpactPosition(_Char, _TimerName, _x, _y, _z);
+TimerLaunch(_TimerName, 1000);
+// [END_NO_OSITOOLS]
+
+PROC
+LLWEAPONEX_Uniques_AnvilMace_OnAttackAtPosition((CHARACTERGUID)_Char, (REAL)_x, (REAL)_y, (REAL)_z)
+AND
+GetUUID(_Char, _UUID)
+AND
+NRD_RealToString(_x, _xs)
+AND
+NRD_RealToString(_y, _ys)
+AND
+NRD_RealToString(_z, _zs)
+AND
+StringConcatenate("LLWEAPONEX_Timers_AnvilMaceImpact_", _xs, _Msg1)
+AND
+StringConcatenate(_Msg1, _ys, _Msg2)
+AND
+StringConcatenate(_Msg2, _zs, _Msg3)
+AND
+StringConcatenate(_Msg3, _UUID, _TimerName)
+AND
+NRD_Substring(_TimerName, 0, 255, _ClampedTimerName)
+THEN
+DB_LLWEAPONEX_AnvilMace_ImpactPosition(_Char, _ClampedTimerName, _x, _y, _z);
+TimerLaunch(_TimerName, 1000);
 //END_REGION
 
 //REGION ANVILMACE_SLAM_KNOCKUP
