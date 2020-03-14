@@ -42,13 +42,6 @@ THEN
 NOT DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template);
 
 IF
-StoryEvent(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LeaderLib_StoryEvents_OnInit")
-THEN
-LLWEAPONEX_Companions_EquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201", 0);
-//LLWEAPONEX_Companions_EquipItem(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_291f1cae-d46b-4795-aa27-23c1526bb7e1", 1);
-LLWEAPONEX_Uniques_Tattoos_Setup(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_NPC_c42fc70e-540b-4b3b-8c64-f48cead9f762", "EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_dda1182e-63e3-4a7a-8855-5295fa1e67cb", "Breast", 1);
-
-IF
 CharacterStatusApplied(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "UNSHEATHED", _)
 THEN
 LLWEAPONEX_Uniques_SwapTattoos(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Breast", 1, 1);
