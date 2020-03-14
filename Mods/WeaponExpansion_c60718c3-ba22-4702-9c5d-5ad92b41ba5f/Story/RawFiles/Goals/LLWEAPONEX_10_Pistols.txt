@@ -468,7 +468,7 @@ LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_C
 THEN
 //ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
 //LeaderLib_Ext_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled");
-LeaderLib_Explode_ExplodeProjectile(_Cause,"Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled", _Target, 0);
+LeaderLib_Explode_ExplodeProjectile(_Target,"Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled", _Cause, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Pistols:OnHit_Default] Exploding (Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled) (Not a Player) ");
 
 PROC
@@ -478,7 +478,7 @@ NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
 //ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_SCALED", 0.0, 1, _Cause);
 //LeaderLib_Ext_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled");
-LeaderLib_Explode_ExplodeProjectile(_Cause, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled", _Target, 0);
+LeaderLib_Explode_ExplodeProjectile(_Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled", _Cause, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Pistols:OnHit_Default] Exploding (Projectile_LLWEAPONEX_Pistol_Damage_Default_Scaled) (No Weapon)");
 
 PROC
@@ -488,7 +488,7 @@ LeaderLib_Helper_QRY_WeaponIsEquipped(_Cause)
 THEN
 //ApplyStatus(_Target, "LLWEAPONEX_PISTOL_DAMAGE_DEFAULT_WEAPON", 0.0, 1, _Cause);
 //LeaderLib_Ext_ExplodeProjectile(_Cause, _Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Weapon");
-LeaderLib_Explode_ExplodeProjectile(_Cause, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Weapon", _Target, 0);
+LeaderLib_Explode_ExplodeProjectile(_Target, "Projectile_LLWEAPONEX_Pistol_Damage_Default_Weapon", _Cause, 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Pistols:OnHit_Default] Exploding (Projectile_LLWEAPONEX_Pistol_Damage_Default_Weapon) (Weapon)");
 //END_REGION
 
