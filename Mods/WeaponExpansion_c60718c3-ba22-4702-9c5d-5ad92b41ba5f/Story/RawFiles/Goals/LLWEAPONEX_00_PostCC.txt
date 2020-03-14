@@ -64,10 +64,8 @@ AND
 CreateItemTemplateAtPosition("WPN_LLWEAPONEX_Placeholder_NoVisual_eb18b205-78a5-4e0c-8c4a-63ac748b07cf", _x, _y, _z, _Placeholder)
 THEN
 CharacterUnequipItem(_Player, _Weapon);
-CharacterEquipItem(_Player, _Placeholder);
-CharacterEquipItem(_Player, _Weapon);
-//LeaderLib_Timers_StartCharacterItemTimer(_Player, _Placeholder, 25, "Timers_LeaderLib_Commands_EquipItem", "LeaderLib_Commands_EquipItem");
-//LeaderLib_Timers_StartCharacterItemTimer(_Player, _Weapon, 50, "Timers_LeaderLib_Commands_EquipItem", "LeaderLib_Commands_EquipItem");
+LeaderLib_Helper_EquipInSlot(_Player, _Placeholder, "Weapon");
+LeaderLib_Helper_EquipInSlot(_Player, _Weapon, "Shield");
 
 IF
 RegionEnded(_Level)
