@@ -851,6 +851,28 @@ THEN
 RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_PREPARED");
 
 PROC
+LLWEAPONEX_Throwing_BalrinAxe_SaveSlot((CHARACTERGUID)_Player, (ITEMGUID)_ThrowingAxe)
+AND
+CharacterGetEquippedItem(_Player, "Weapon", _ThrowingAxe)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeSlot(_Player, _ThrowingAxe, "Weapon");
+
+PROC
+LLWEAPONEX_Throwing_BalrinAxe_SaveSlot((CHARACTERGUID)_Player, (ITEMGUID)_ThrowingAxe)
+AND
+CharacterGetEquippedItem(_Player, "Shield", _ThrowingAxe)
+THEN
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeSlot(_Player, _ThrowingAxe, "Shield");
+
+PROC
+LLWEAPONEX_Throwing_BalrinAxe_Equip((CHARACTERGUID)_Player, (ITEMGUID)_ThrowingAxe)
+AND
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeSlot(_Player, _ThrowingAxe, _Slot)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeSlot(_Player, _ThrowingAxe, _Slot);
+LeaderLib_Helper_EquipInSlot(_Player, _ThrowingAxe, _Slot);
+
+PROC
 LLWEAPONEX_Throwing_OnSkillCast((CHARACTERGUID)_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A")
 AND
 DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player, _Target, _ThrowingAxe)
@@ -858,6 +880,7 @@ THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeThrown(_Player, _Target, _ThrowingAxe);
 DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe, 0);
 LeaderLib_Timers_StartObjectObjectTimer(_Player, _Target, 800, "LLWEAPONEX_Timers_Throwing_CheckForBalrinAxeKill", "LLWEAPONEX_CheckForBalrinAxeKill");
+LLWEAPONEX_Throwing_BalrinAxe_SaveSlot(_Player, _ThrowingAxe);
 CharacterUnequipItem(_Player, _ThrowingAxe);
 SetOnStage(_ThrowingAxe, 0);
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200);
@@ -870,7 +893,7 @@ DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe, 0)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe, 0);
 SetOnStage(_ThrowingAxe, 1);
-CharacterEquipItem(_Player, _ThrowingAxe);
+LLWEAPONEX_Throwing_BalrinAxe_Equip(_Player, _ThrowingAxe);
 CharacterStatusText(_Player, "LLWEAPONEX_StatusText_BalrinAxeTimedOut");
 
 IF
@@ -925,7 +948,7 @@ ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_Throwing_CheckForBalrinEquipFa
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_Throwing_CheckForBalrinEquipFail", 250);
 RemoveStatus(_Player, "LLWEAPONEX_BALRINAXE_DISARMED_INFO");
 SetOnStage(_ThrowingAxe, 1);
-CharacterEquipItem(_Player, _ThrowingAxe);
+LLWEAPONEX_Throwing_BalrinAxe_Equip(_Player, _ThrowingAxe);
 LLWEAPONEX_Throwing_ClearBalrinAxeData(_Player);
 
 //Refresh cooldown
@@ -955,6 +978,13 @@ AND
 DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe, _Success)
 THEN
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe, _Success);
+
+PROC
+LLWEAPONEX_Throwing_ClearBalrinAxeData((CHARACTERGUID)_Player)
+AND
+DB_LLWEAPONEX_Throwing_Temp_BalrinAxeSlot(_Player, _ThrowingAxe, _Slot)
+THEN
+NOT DB_LLWEAPONEX_Throwing_Temp_BalrinAxeSlot(_Player, _ThrowingAxe, _Slot);
 
 IF
 //ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53", _Player)
