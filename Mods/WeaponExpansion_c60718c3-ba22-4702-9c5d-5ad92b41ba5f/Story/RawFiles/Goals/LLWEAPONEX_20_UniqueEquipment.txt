@@ -69,7 +69,7 @@ AND
 DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
 THEN
 LeaderLib_Helper_UnequipInSlot(_Char, "Shield");
-CharacterEquipItem(_Char, _Offhand);
+LeaderLib_Helper_EquipInSlot(_Char, _Offhand, "Shield");
 ItemLockUnEquip(_Offhand, 1);
 
 PROC
@@ -100,7 +100,7 @@ ItemToInventory(_Mainhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a
 ItemToInventory(_Offhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
 ItemToInventory(_Scythe, _Char, 1, 0, 1);
 ItemSetOwner(_Scythe, _Char);
-CharacterEquipItem(_Char, _Scythe);
+LeaderLib_Helper_EquipInSlot(_Char, _Scythe, "Weapon");
 
 IF
 SkillCast(_Char, "Shout_LLWEAPONEX_BurialBlade_Transform", _, _)
@@ -117,8 +117,8 @@ ItemToInventory(_Mainhand, _Char, 1, 0, 0);
 ItemToInventory(_Offhand, _Char, 1, 0, 0);
 ItemSetOwner(_Mainhand, _Char);
 ItemSetOwner(_Offhand, _Char);
-CharacterEquipItem(_Char, _Mainhand);
-CharacterEquipItem(_Char, _Offhand);
+LeaderLib_Helper_EquipInSlot(_Char, _Mainhand, "Weapon");
+LeaderLib_Helper_EquipInSlot(_Char, _Offhand, "Shield");
 //END_REGION
 
 //REGION UPDATES
@@ -1157,6 +1157,24 @@ GetPosition(_Char, _x, _y, _z)
 AND
 CreateItemTemplateAtPosition(_MagicTemplate, _x, _y, _z, _MagicTattoos)
 THEN
+CharacterEquipItem(_Char, _Tattoos);
+ItemLockUnEquip(_Tattoos, _Lock);
+SetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", _MagicTattoos);
+SetVarObject(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion", _Tattoos);
+ItemToInventory(_MagicTattoos, _Tattoos, 1, 0, 0);
+
+PROC
+LLWEAPONEX_Uniques_Tattoos_Setup((CHARACTERGUID)_Char, (STRING)_NormalTemplate, (STRING)_MagicTemplate, (STRING)_Slot, (INTEGER)_Lock)
+AND
+NOT CharacterGetEquippedItem(_Char, "Breast", _)
+AND
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition(_NormalTemplate, _x, _y, _z, _Tattoos)
+AND
+CreateItemTemplateAtPosition(_MagicTemplate, _x, _y, _z, _MagicTattoos)
+THEN
+CharacterEquipItem(_Char, _Tattoos);
 ItemLockUnEquip(_Tattoos, _Lock);
 SetVarObject(_Tattoos, "LLWEAPONEX_Tattoos_OtherVersion", _MagicTattoos);
 SetVarObject(_MagicTattoos, "LLWEAPONEX_Tattoos_OtherVersion", _Tattoos);
