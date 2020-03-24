@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+
 //REGION THROWING_KNIFE_BONUS
 PROC
 LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "Projectile_ThrowingKnife", (REAL)_x, (REAL)_y, (REAL)_z)
