@@ -313,17 +313,17 @@ LeaderLib_QRY_ExtenderIsActive()
 AND
 DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(1)
 THEN
-LeaderLib_Explode_Clear_StatusesWithID("WeaponExpansion_LeaveActionStatuses");
 NOT DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(1);
+LeaderLib_Explode_Clear_StatusesWithID("WeaponExpansion_LeaveActionStatuses");
 
+/*
 IF
 StoryEvent(_, "LeaderLib_Initialized")
 AND
 NOT LeaderLib_QRY_ExtenderIsActive()
-AND
-NOT DB_LLWEAPONEX_LeaderLib_LeaveActionRegistered(_)
 THEN
 LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround();
+*/
 
 PROC
 LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround()
