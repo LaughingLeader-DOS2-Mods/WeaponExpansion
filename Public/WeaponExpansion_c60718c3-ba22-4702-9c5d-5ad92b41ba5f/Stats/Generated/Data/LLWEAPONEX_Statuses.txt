@@ -1126,7 +1126,7 @@ data "StackPriority" "2"
 
 new entry "Stats_LLWEAPONEX_UnrelentingRageBonus2"
 type "Potion"
-using "_Stats_LLWEAPONEX_UnrelentingRageBonus"
+using "Stats_LLWEAPONEX_UnrelentingRageBonus"
 data "DamageBoost" "10"
 
 new entry "LLWEAPONEX_UNRELENTING_RAGE_BONUS3"
@@ -1138,7 +1138,7 @@ data "StackPriority" "3"
 
 new entry "Stats_LLWEAPONEX_UnrelentingRageBonus3"
 type "Potion"
-using "_Stats_LLWEAPONEX_UnrelentingRageBonus"
+using "Stats_LLWEAPONEX_UnrelentingRageBonus"
 data "DamageBoost" "15"
 
 new entry "LLWEAPONEX_UNRELENTING_RAGE_BONUS4"
@@ -1150,7 +1150,7 @@ data "StackPriority" "4"
 
 new entry "Stats_LLWEAPONEX_UnrelentingRageBonus4"
 type "Potion"
-using "_Stats_LLWEAPONEX_UnrelentingRageBonus"
+using "Stats_LLWEAPONEX_UnrelentingRageBonus"
 data "DamageBoost" "20"
 
 new entry "LLWEAPONEX_UNRELENTING_RAGE_BONUS5"
@@ -1162,5 +1162,5 @@ data "StackPriority" "5"
 
 new entry "Stats_LLWEAPONEX_UnrelentingRageBonus5"
 type "Potion"
-using "_Stats_LLWEAPONEX_UnrelentingRageBonus"
+using "Stats_LLWEAPONEX_UnrelentingRageBonus"
 data "DamageBoost" "25"

@@ -7,22 +7,22 @@ KBSECTION
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_ThrowingKnife", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_CHar, "Projectile_ThrowingKnife", _Target);
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "Projectile_ThrowingKnife", _Target);
 
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_EnemyThrowingKnife", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_CHar, "Projectile_ThrowingKnife", _Target);
+LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "Projectile_ThrowingKnife", _Target);
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_ThrowingKnife", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_CHar, "Projectile_ThrowingKnife", _x, _y, _z);
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "Projectile_ThrowingKnife", _x, _y, _z);
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Projectile_EnemyThrowingKnife", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_CHar, "Projectile_ThrowingKnife", _x, _y, _z);
+LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "Projectile_ThrowingKnife", _x, _y, _z);
 
 IF
 SkillCast(_Char, "Projectile_ThrowingKnife", _, _)
