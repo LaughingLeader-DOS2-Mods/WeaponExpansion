@@ -52,7 +52,7 @@ local debug_templates = {
     --"WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850",
 };
 
-local function Debug_Init()
+function LLWEAPONEX_Ext_Debug_Init()
     local target = "S_LLWEAPONEX_PointTrigger_UniqueItemTest_8d4e1ba9-6b1b-4ce3-bdbc-268dc7b56a9b"
     local x,y,z = GetPosition(target)
 
@@ -66,7 +66,7 @@ local function Debug_Init()
     end
 end
 
-local function Debug_CleanLevelItem(item)
+local function LLWEAPONEX_Ext_Debug_CleanLevelItem(item)
     local template = GetTemplate(item)
     --Ext.Print("[LLWEAPONEX_Debug.lua] Checking item ("..item..")["..template.."] for cleaning.")
     local i = 1
@@ -81,10 +81,3 @@ local function Debug_CleanLevelItem(item)
         i = i + 1
     end
 end
-
-WeaponExpansion.Debug = {
-	Debug_Init = Debug_Init,
-	Debug_CleanLevelItem = Debug_CleanLevelItem
-}
-
-WeaponExpansion.Register.Table(WeaponExpansion.Debug)

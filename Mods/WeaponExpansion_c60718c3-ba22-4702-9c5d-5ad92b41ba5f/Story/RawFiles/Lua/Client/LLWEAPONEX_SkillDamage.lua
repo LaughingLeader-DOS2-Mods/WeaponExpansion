@@ -51,6 +51,8 @@ local function LLWEAPONEX_GetSkillDamage(skill, attackerStats, isFromItem, steal
 	return damageList, 1
 end
 
+Ext.RegisterListener("GetSkillDamage", LLWEAPONEX_GetSkillDamage)
+
 
 local skill_params = {
 	Target_LLWEAPONEX_Pistol_A_Shoot = {
@@ -74,5 +76,4 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, param)
 	return result
 end
 
---Ext.RegisterListener("GetSkillDamage", LLWEAPONEX_GetSkillDamage)
---Ext.RegisterListener("SkillGetDescriptionParam", LLWEAPONEX_SkillGetDescriptionParam)
+Ext.RegisterListener("SkillGetDescriptionParam", LLWEAPONEX_SkillGetDescriptionParam)

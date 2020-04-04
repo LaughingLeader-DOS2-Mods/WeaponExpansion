@@ -82,8 +82,8 @@ else
 	Ext.StatSetAttribute(statname, property, next_value)
 end ]]
 
-local ModuleLoad = function ()
-	Ext.Print("[WeaponExpansion:Bootstrap.lua] Module is loading.")
+local function LLWEAPONEX_StatOverrides_Init()
+	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
@@ -95,9 +95,4 @@ local ModuleLoad = function ()
 	end
 end
 
---v36 and higher
-if Ext.RegisterListener ~= nil then
-    Ext.RegisterListener("ModuleLoading", ModuleLoad)
-else
-    Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] Extender version is less than v36! Stat overrides ain't happenin', chief.")
-end
+Ext.RegisterListener("ModuleLoading", LLWEAPONEX_StatOverrides_Init)
