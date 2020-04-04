@@ -3,16 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-// [BEGIN_NO_OSITOOLS]
-IF
-StoryEvent(_, "LeaderLib_Initialized")
-AND
-NOT DB_LLWEAPONEX_RegisteredLeaderLibSettings(_)
-THEN
-DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
-LLWEAPONEX_LeaderLib_InitSettings();
-// [END_NO_OSITOOLS]
-
 PROC
 LeaderLib_Mods_OnVersionChanged((GUIDSTRING)_UUID, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND

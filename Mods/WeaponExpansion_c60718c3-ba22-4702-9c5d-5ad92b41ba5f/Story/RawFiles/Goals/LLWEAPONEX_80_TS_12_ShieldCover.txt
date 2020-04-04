@@ -3,7 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-/* [OSITOOLS_ONLY]
 IF
 NRD_OnHit((CHARACTERGUID)_Target, _Attacker, _Damage, _Handle)
 AND
@@ -22,7 +21,6 @@ AND
 LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/statuses/GM
 THEN
 NRD_LuaCall("LLWEAPONEX_Ext_RedirectDamage", (STRING)_Blocker, (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.5");
-*/
 EXITSECTION
 
 ENDEXITSECTION

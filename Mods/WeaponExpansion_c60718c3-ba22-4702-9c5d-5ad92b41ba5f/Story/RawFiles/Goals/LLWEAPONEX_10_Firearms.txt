@@ -266,7 +266,6 @@ THEN
 RemoveStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_BLUNDERBUSS");
 RemoveStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_RIFLE");
 
-/* [OSITOOLS_ONLY]
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_BULLET_HIT", _)
 AND
@@ -294,11 +293,9 @@ AND
 String(_Target, _TargetStr)
 THEN
 NRD_LuaCall("LLWEAPONEX_Ext_PlayBulletImpact", _TargetStr);
-*/
 //END_REGION
 
 //REGION RANGER_SKILL_SWAP
-/* [OSITOOLS_ONLY]
 IF
 TextEventSet("llweap_rangerskills")
 AND
@@ -319,7 +316,6 @@ AND
 _Next >= 0
 THEN
 LLWEAPONEX_DEBUG_ClearSkillSlots(_Char, _Next);
-*/
 
 IF
 TextEventSet("llweap_rangerskills")
@@ -338,7 +334,7 @@ AND
 DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, 1)
 THEN
 CharacterAddSkill(_Char, _FindSkill, 0);
-/* [OSITOOLS_ONLY]
+
 PROC
 LLWEAPONEX_Firearms_SwapRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, 1)
 AND
@@ -367,37 +363,6 @@ THEN
 NRD_SkillBarSetSkill(_Char, _Slot, _FindSkill);
 CharacterRemoveSkill(_Char, _ReplaceSkill);
 CharacterAddSkill(_Char, _FindSkill, 0);
-*/
-
-// [BEGIN_NO_OSITOOLS]
-PROC
-LLWEAPONEX_Firearms_SwapRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, (INTEGER)_IsPlayer)
-AND
-CharacterHasSkill(_Char, _FindSkill, 1)
-THEN
-CharacterRemoveSkill(_Char, _FindSkill);
-CharacterAddSkill(_Char, _ReplaceSkill, 0);
-
-PROC
-LLWEAPONEX_Firearms_RestoreRangerSkill((CHARACTERGUID)_Char, (STRING)_FindSkill, (STRING)_ReplaceSkill, (INTEGER)_IsPlayer)
-AND
-CharacterHasSkill(_Char, _ReplaceSkill, 1)
-THEN
-CharacterRemoveSkill(_Char, _ReplaceSkill);
-CharacterAddSkill(_Char, _FindSkill, 0);
-
-PROC
-LLWEAPONEX_Firearms_RestoreAllRangerSkills((CHARACTERGUID)_Char)
-AND
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, 1)
-AND
-CharacterHasSkill(_Char, _FindSkill, 0)
-AND
-CharacterHasSkill(_Char, _ReplaceSkill, 1)
-THEN
-CharacterRemoveSkill(_Char, _ReplaceSkill);
-CharacterAddSkill(_Char, _FindSkill, 0);
-// [END_NO_OSITOOLS]
 
 PROC
 LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)

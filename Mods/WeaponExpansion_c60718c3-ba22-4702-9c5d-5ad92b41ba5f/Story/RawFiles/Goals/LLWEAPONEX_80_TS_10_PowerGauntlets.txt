@@ -3,7 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-/* [OSITOOLS_ONLY]
 PROC
 ProcBlockUseOfItem((CHARACTERGUID)_Char,(ITEMGUID)_Item)
 AND
@@ -24,7 +23,6 @@ IF
 CharacterItemEvent(_Char, _Item, "LLWEAPONEX_PowerGauntlets_TransformTwoHandedWeapon")
 THEN
 NRD_LuaCall("LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item);
-*/
 EXITSECTION
 
 ENDEXITSECTION

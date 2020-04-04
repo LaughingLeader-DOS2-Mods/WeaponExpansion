@@ -55,7 +55,7 @@ AND
 CharacterHasSkill(_Char, _Skill, 1)
 THEN
 DB_NOOP(1);
-/* [OSITOOLS_ONLY]
+
 IF
 ObjectWasTagged((CHARACTERGUID)_Char, _Tag)
 AND
@@ -92,7 +92,6 @@ CharacterHasSkill(_Char, _Skill, 1)
 THEN
 NOT DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag);
 NRD_LuaCall("LeaderLib_Ext_StoreSkillData", _CharStr, _Skill);
-*/
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Extender_RefreshTagSkills")

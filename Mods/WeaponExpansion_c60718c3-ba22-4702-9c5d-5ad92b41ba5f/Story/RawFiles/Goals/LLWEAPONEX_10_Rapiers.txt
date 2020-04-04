@@ -152,12 +152,10 @@ THEN
 NOT DB_LLWEAPONEX_Rapiers_Temp_SuckerCombo2Target(_Char, _Target);
 RemoveStatus(_Target, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2_FLYING");
 
-/* [OSITOOLS_ONLY]
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
 THEN
 NRD_SkillSetCooldown(_Char, "Target_SingleHandedAttack", 0.0);
-*/
 //END_REGION
 
 //REGION SUCKER_PUNCH_COMBO_KNOCKDOWN_INCREASE

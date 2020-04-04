@@ -4,7 +4,6 @@ INITSECTION
 
 KBSECTION
 //Blocking the first hit
-/* [OSITOOLS_ONLY]
 IF
 NRD_OnPrepareHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Attacker,_, _Handle)
 AND
@@ -33,36 +32,6 @@ NRD_StatusSetInt(_Char,_Handle,"ForceInterrupt",0);
 NRD_StatusSetInt(_Char,_Handle,"Interruption",0);
 NRD_StatusSetInt(_Char,_Handle,"DontCreateBloodSurface",1);
 LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Char);
-*/
-
-// [BEGIN_NO_OSITOOLS]
-IF
-CharacterStartAttackObject((CHARACTERGUID)_Defender, _, _Attacker)
-AND
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
-AND
-CharacterIsEnemy(_Defender, _Attacker, 1)
-THEN
-LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Defender);
-
-IF
-CharacterUsedSkillOnTarget(_Attacker, (CHARACTERGUID)_Defender, _, _, _)
-AND
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
-AND
-CharacterIsEnemy(_Defender, _Attacker, 1)
-THEN
-LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Defender);
-
-IF
-CharacterUsedSkillOnZoneWithTarget(_Attacker, (CHARACTERGUID)_Defender, _, _, _)
-AND
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Defender)
-AND
-CharacterIsEnemy(_Defender, _Attacker, 1)
-THEN
-LLWEAPONEX_DualShields_ShieldCover(_Attacker, _Blocker, _Defender);
-// [END_NO_OSITOOLS]
 EXITSECTION
 
 ENDEXITSECTION

@@ -3,7 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-/* [OSITOOLS_ONLY]
 IF
 NRD_OnHit(_Target, _Attacker, _Damage, _Handle)
 AND
@@ -18,7 +17,6 @@ AND
 NRD_StatusGetInt(_Target, _Handle, "CriticalHit", 1)
 THEN
 NRD_LuaCall("LeaderLib_Ext_ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.50");
-*/
 
 /*
 IF

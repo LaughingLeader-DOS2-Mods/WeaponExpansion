@@ -235,13 +235,6 @@ LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTE
 THEN
 CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile_AtItem");
 
-// [BEGIN_NO_OSITOOLS]
-PROC
-LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 0)
-THEN
-CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile_AtCharacter");
-// [END_NO_OSITOOLS]
-
 // For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
 QRY
 LLWEAPONEX_Pistols_QRY_HitDirectly((GUIDSTRING)_Target)
@@ -258,7 +251,6 @@ LeaderLib_Math_QRY_IsEqualToAny(1, _a, _b, _c, _d)
 THEN
 DB_NOOP(1);
 
-/* [OSITOOLS_ONLY]
 PROC
 LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 0)
 AND
@@ -274,7 +266,6 @@ AND
 GetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _Skill)
 THEN
 LeaderLib_Explode_ExplodeProjectile(_Char, _Skill, _Target, 0);
-*/
 
 /*
 PROC
