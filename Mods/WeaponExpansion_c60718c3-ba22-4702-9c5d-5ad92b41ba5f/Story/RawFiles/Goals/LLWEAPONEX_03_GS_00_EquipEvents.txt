@@ -72,7 +72,6 @@ LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 
-/* [OSITOOLS_ONLY]
 PROC
 LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1)
 AND
@@ -81,7 +80,6 @@ AND
 NRD_StatGetType(_Stats, "Weapon")
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
-*/
 
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)

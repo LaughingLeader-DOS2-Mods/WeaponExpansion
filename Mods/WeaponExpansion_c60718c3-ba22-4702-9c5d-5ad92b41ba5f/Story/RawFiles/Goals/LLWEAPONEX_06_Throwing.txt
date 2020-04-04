@@ -744,7 +744,6 @@ CharacterHasSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", 1)
 THEN
 CharacterRemoveSkill(_Player, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
 
-/* [OSITOOLS_ONLY]
 IF
 SkillAdded(_Char, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", _)
 AND
@@ -764,7 +763,6 @@ String(_Char, _CharStr)
 THEN
 NRD_LuaCall("LeaderLib_Ext_StoreSkillData", _CharStr, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
 SetStoryEvent(_Char, "LeaderLib_RefreshUI_RevertSkillCooldowns");
-*/
 //END_REGION
 
 //REGION BALRIN_AXE_TEMPLATE_UNEQUIPPED
@@ -1261,7 +1259,6 @@ NOT DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Targe
 //END_REGION
 
 //REGION THROW_OBJECT
-/* [OSITOOLS_ONLY]
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_TOSSED", (CHARACTERGUID)_Source)
 AND
@@ -1271,7 +1268,6 @@ NRD_StatGetInt(_Stat, "Weight", _BaseWeight)
 THEN
 SetVarInteger(_Target, "LLWEAPONEX_BaseWeight", _BaseWeight);
 CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CheckStrengthWeight");
-*/
 
 /*
 IF

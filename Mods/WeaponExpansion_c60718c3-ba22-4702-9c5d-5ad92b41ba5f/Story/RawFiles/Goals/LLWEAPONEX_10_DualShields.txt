@@ -177,7 +177,6 @@ LLWEAPONEX_DualShields_CombatShield_OnCloned((ITEMGUID)_Shield, (CHARACTERGUID)_
 THEN
 DB_NOOP(1);
 
-/* [OSITOOLS_ONLY]
 IF
 ItemAddedToContainer(_CombatShield, _Shield)
 AND
@@ -219,34 +218,6 @@ ItemSetOwner(_CombatShield, _Owner);
 LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.CombatShields");
 //ItemSetOnlyOwnerCanUse(_CombatShield, 1);
 LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
-*/
-
-// [BEGIN_NO_OSITOOLS]
-IF
-ItemAddedToContainer(_CombatShield, _Shield)
-AND
-DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield)
-AND
-GetVarFixedString(_Shield, "LeaderLib_Rarity", _Rarity)
-AND
-GetVarInteger(_Shield, "LeaderLib_Level", _Level)
-AND
-ItemGetOwner(_Shield, _Owner)
-THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_ListenForCombatShield(_Shield);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:ItemAddedToContainer] Combat shield generated.");
-ObjectSetFlag(_Shield, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0);
-SetTag(_CombatShield, "LLWEAPONEX_Debug_StorableCombatShield");
-SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
-SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
-SetVarFixedString(_CombatShield, "LeaderLib_Rarity", _Rarity);
-SetVarInteger(_CombatShield, "LeaderLib_Level", _Level);
-ItemSetOwner(_CombatShield, _Owner);
-LeaderLib_Deltamods_ApplyDeltamodsByGroup(_CombatShield, "WeaponExpansion.CombatShields");
-//ItemSetOnlyOwnerCanUse(_CombatShield, 1);
-LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
-// [END_NO_OSITOOLS]
-
 //END_REGION
 
 //REGION EQUIPPED
@@ -556,26 +527,6 @@ ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 1
 THEN
 ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 0);
 */
-//END_REGION
-
-//REGION SHIELD_COVER_WITHOUT_EXTENDER
-// [BEGIN_NO_OSITOOLS]
-IF
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
-THEN
-ApplyStatus(_Char, "GUARDIAN_ANGEL", 12.0, 1, _Blocker);
-
-PROC
-LLWEAPONEX_DualShields_OnCoveredRemoved((CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
-AND
-NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _)
-AND
-GetStatusTurns(_Char, "GUARDIAN_ANGEL", _Turns)
-AND
-_Turns > 0
-THEN
-RemoveStatus(_Blocker, "GUARDIAN_ANGEL");
-// [END_NO_OSITOOLS]
 //END_REGION
 
 //REGION SHIELD_COVER
