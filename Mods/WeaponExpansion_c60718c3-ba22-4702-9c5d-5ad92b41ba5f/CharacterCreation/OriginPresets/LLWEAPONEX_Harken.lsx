@@ -14,12 +14,6 @@
                     <attribute id="UserCanAlterTags" value="0" type="19" />
                     <attribute id="SkillSet" value="Avatar_LLWEAPONEX_Harkin" type="22" />
 					<attribute id="RootTemplateOverride" value="99cb19a5-55d9-4af2-a793-17f7ff0cf3f9" type="22" />
-
-                    <children>
-                        <node id="TalentsAdded">
-                        </node>
-                    </children>
-
                 	<children>
                 		<node id="SupportedGenders">
                 			<children>
