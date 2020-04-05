@@ -1,6 +1,6 @@
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Shared/LLWEAPONEX_SharedMain.lua");
 
-local function GetHandedness(weapon)
+function LLWEAPONEX_Ext_GetHandedness(weapon)
     if weapon == nil then
         return nil
     end
@@ -19,7 +19,7 @@ end
 
 local weapon_slots = {"Weapon", "Shield"}
 
-local function TagHandedness(player)
+function LLWEAPONEX_Ext_TagHandedness(player)
     for _,slot in pairs(weapon_slots) do
         local item = CharacterGetEquippedItem(player, slot)
         if item ~= nil then
@@ -36,7 +36,7 @@ local function TagHandedness(player)
     Ext.Print("[LLWEAPONEX_Main.lua:GetHandedness] Item check done.")
 end
 
-local function TagItemType(player)
+function LLWEAPONEX_Ext_TagItemType(player)
     local slots = {"Weapon", "Shield"}
     local anim_to_type = {
         --None = "",
@@ -90,7 +90,7 @@ local function TagItemType(player)
     end
 end
 
-local function PlayBulletImpact(target)
+function LLWEAPONEX_Ext_PlayBulletImpact(target)
     local sound = "LLWEAPONEX_Bullet_Impact_Body_Thump_All"
     if (HasActiveStatus(target, "PETRIFIED") == 1 or HasActiveStatus(target, "FORTIFIED") == 1) then
         sound = "LLWEAPONEX_Bullet_Impact_Rock_All"
@@ -122,7 +122,7 @@ local function PlayBulletImpact(target)
     PlaySound(target, sound)
 end
 
-local function CanRedirectHit(target, handle, hit_type)
+function LLWEAPONEX_Ext_CanRedirectHit(target, handle, hit_type)
     if hit_type ~= 4 and hit_type ~= 6 and hit_type ~= 5 then
         local missed = NRD_HitGetInt(handle, "Missed")
         local dodged = NRD_HitGetInt(handle, "Dodged")
@@ -135,7 +135,7 @@ local function CanRedirectHit(target, handle, hit_type)
     return false
 end
 
-local function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
+function LLWEAPONEX_Ext_RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
     local redirect_damage_func = _G["LeaderLib_Ext_RedirectDamage"]
     if redirect_damage_func ~= nil then
         local run_success,redirected = pcall(redirect_damage_func, blocker, target, attacker, handlestr, reduction_str)
@@ -187,7 +187,7 @@ end
 ---@param char string
 ---@param item string
 ---@return string Weapon
-local function TwoHandedToOnehanded(char, item)
+function LLWEAPONEX_Ext_TwoHandedToOnehanded(char, item)
     local stat = NRD_ItemGetStatsId(item)
     local level = NRD_ItemGetInt(item, "LevelOverride")
     if level == nil then
