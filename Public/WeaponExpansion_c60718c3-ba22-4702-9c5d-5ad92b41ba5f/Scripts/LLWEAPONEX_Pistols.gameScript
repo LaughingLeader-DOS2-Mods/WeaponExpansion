@@ -47,6 +47,7 @@ IF "c1&c2&c3"
 	GetVar(_Target, _Char, "LLWEAPONEX_Pistols_ShootProjectileTarget")
 	GetVar(_Skill, _Char, "LLWEAPONEX_Pistols_ShootProjectileSkill")
 THEN
+	Cast(_Level, _LevelF)
 	IF "c1&c2&c3"
 		GetPosition(_Char, _SourcePos)
 		GetY(_SourcePos, _SourceY)
@@ -72,10 +73,7 @@ THEN
 		SetY(_Target, _y)
 		Output("Pistol Target Final: [1] | SourcePos: [2]", _Target, _SourcePos)
 	ENDIF
-	Cast(_Level, _LevelF)
 	ShootLocalProjectileAt(_Skill, _Char, {0;2.0;0}, _Target, 1, _Dummy)
-	//GetForwardDirection(_Char, _Dir)
-	//ShootLocalProjectile(_Skill, _Char, {0;1.0;0}, _Dir, _Level, _Char)
 ENDIF
 
 EVENT LLWEAPONEX_Pistols_ShootProjectileAtObject_Char
@@ -98,51 +96,57 @@ IF "c1&c2&c3"
 	GetVar(_TargetObject, _Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
 	GetVar(_Skill, _Char, "LLWEAPONEX_Pistols_ShootProjectileSkill")
 THEN
-	GetPosition(_TargetObject, _Target)
-	IF "c1"
-		GetY(_Target, _y)
-	THEN
-		IF "c1|c2|c3|c4"
-			CharacterHasStatus(_TargetObject, KNOCKED_DOWN)
-			CharacterHasStatus(_TargetObject, UNCONSCIOUS)
-			CharacterHasStatus(_TargetObject, InstantKnockdown)
-			CharacterHasStatus(_TargetObject, PLAY_DEAD)
-		THEN
-			//Subtract(_y, 0.5)
-		ELSE
-			IF "c1"
-				IsTagged(_TargetObject, "DWARF")
-			THEN
-				Add(_y, 1.0)
-			ELIF "c1"
-				IsTagged(_TargetObject, "HUMAN")
-			THEN
-				Add(_y, 1.0)
-			ELIF "c1"
-				IsTagged(_TargetObject, "ELF")
-			THEN
-				Add(_y, 1.5)
-			ELIF "c1"
-				IsTagged(_TargetObject, "LIZARD")
-			THEN
-				Add(_y, 1.5)
-			ELIF "c1"
-				IsTagged(_TargetObject, "FROG")
-			THEN
-				//Add(_y, 3.5)
-			ELSE
-				Add(_y, 0.5)
-			ENDIF
-		ENDIF
-		SetY(_Target, _y)
-		GetForwardDirection(_Char, _Dir)
-		Multiply(_Dir, 0.25)
-		Add(_Target, _Dir)
-		// Use the projectile's saved position since the target could be a short frog.
-	ENDIF
 	Cast(_Level, _LevelF)
 	SetVar(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", CHARACTER:null)
-	ShootLocalProjectileAt(_Skill, _Char, {0;2.0;0}, _Target, 1, _Dummy)
+	IF "c1"
+		CharacterIsPlayer(_Char)
+	THEN
+		GetPosition(_TargetObject, _Target)
+		IF "c1"
+			GetY(_Target, _y)
+		THEN
+			IF "c1|c2|c3|c4"
+				CharacterHasStatus(_TargetObject, KNOCKED_DOWN)
+				CharacterHasStatus(_TargetObject, UNCONSCIOUS)
+				CharacterHasStatus(_TargetObject, InstantKnockdown)
+				CharacterHasStatus(_TargetObject, PLAY_DEAD)
+			THEN
+				//Subtract(_y, 0.5)
+			ELSE
+				IF "c1"
+					IsTagged(_TargetObject, "DWARF")
+				THEN
+					Add(_y, 1.0)
+				ELIF "c1"
+					IsTagged(_TargetObject, "HUMAN")
+				THEN
+					Add(_y, 1.0)
+				ELIF "c1"
+					IsTagged(_TargetObject, "ELF")
+				THEN
+					Add(_y, 1.5)
+				ELIF "c1"
+					IsTagged(_TargetObject, "LIZARD")
+				THEN
+					Add(_y, 1.5)
+				ELIF "c1"
+					IsTagged(_TargetObject, "FROG")
+				THEN
+					//Add(_y, 3.5)
+				ELSE
+					Add(_y, 0.5)
+				ENDIF
+			ENDIF
+			SetY(_Target, _y)
+			GetForwardDirection(_Char, _Dir)
+			Multiply(_Dir, 0.25)
+			Add(_Target, _Dir)
+			// Use the projectile's saved position since the target could be a short frog.
+		ENDIF
+		ShootLocalProjectileAt(_Skill, _Char, {0;2.0;0}, _Target, 1, _Dummy)
+	ELSE
+		ShootLocalProjectileAt(_Skill, _Char, {0;2.0;0}, _TargetObject, 1, _Char)
+	ENDIF
 ENDIF
 
 EVENT LLWEAPONEX_Pistols_ShootProjectileAtObject_Item
@@ -165,17 +169,23 @@ IF "c1&c2&c3"
 	GetVar(_TargetObject, _Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
 	GetVar(_Skill, _Char, "LLWEAPONEX_Pistols_ShootProjectileSkill")
 THEN
-	GetPosition(_TargetObject, _Target)
-	IF "c1"
-		GetY(_Target, _y)
-	THEN
-		SetY(_Target, _y)
-		GetForwardDirection(_Char, _Dir)
-		Multiply(_Dir, 0.25)
-		Add(_Target, _Dir)
-		// Use the projectile's saved position since the target could be a short frog.
-	ENDIF
 	Cast(_Level, _LevelF)
 	SetVar(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", ITEM:null)
-	ShootLocalProjectileAt(_Skill, _Char, {0;2.0;0}, _Target, 1, _Dummy)
+	IF "c1"
+		CharacterIsPlayer(_Char)
+	THEN
+		GetPosition(_TargetObject, _Target)
+		IF "c1"
+			GetY(_Target, _y)
+		THEN
+			SetY(_Target, _y)
+			GetForwardDirection(_Char, _Dir)
+			Multiply(_Dir, 0.25)
+			Add(_Target, _Dir)
+			// Use the projectile's saved position since the target could be a short frog.
+		ENDIF
+		ShootLocalProjectileAt(_Skill, _Char, {0;2.0;0}, _Target, 1, _Char)
+	ELSE
+		ShootLocalProjectileAt(_Skill, _Char, {0;2.0;0}, _TargetObject, 1, _Char)
+	ENDIF
 ENDIF
