@@ -890,7 +890,7 @@ add equipment entry "_WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Npc_Harveste
 
 new equipment "LLWEAPONEX_Pirate_NPC_A"
 add equipmentgroup
-add equipment entry "_ARM_LLWEAPONEX_Pistol_A_Isshin_A_NPC"
+add equipment entry "_ARM_LLWEAPONEX_Pistol_A_NPC"
 add equipmentgroup
 add equipment entry "_WPN_LLWEAPONEX_Rapier_1H_B_NPC"
 add equipmentgroup
