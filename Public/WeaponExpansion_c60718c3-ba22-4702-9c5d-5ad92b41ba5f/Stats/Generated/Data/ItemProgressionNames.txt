@@ -52,8 +52,8 @@ new namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A"
 add name "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_1_DisplayName",""
 add namecool "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_2_DisplayName",""
 
-new namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A"
-add name "ARM_UNIQUE_LLWEAPONEX_Pistol_A_Isshin_A_DisplayName",""
+new namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_Captain_A"
+add name "ARM_UNIQUE_LLWEAPONEX_Pistol_Captain_A_DisplayName",""
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A"
 add name "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A_DisplayName",""
