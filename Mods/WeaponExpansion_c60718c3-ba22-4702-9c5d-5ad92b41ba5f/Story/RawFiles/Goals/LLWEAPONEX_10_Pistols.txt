@@ -204,14 +204,11 @@ LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pis
 THEN
 LLWEAPONEX_Pistols_Internal_ShootBullet_Start(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15);
 
+// Shooting at a position
 PROC
 LLWEAPONEX_Pistols_Internal_ShootBullet_Start((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy)
 AND
 NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
-AND
-GetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target)
-AND
-ObjectIsItem(_Target, _IsItem)
 THEN
 CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile");
 DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _TargetHelperDummy);
@@ -219,6 +216,8 @@ LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _TargetHelperDummy, 1250, "
 
 PROC
 LLWEAPONEX_Pistols_Internal_ShootBullet_Start((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy)
+AND
+NOT DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _TargetHelperDummy)
 AND
 LeaderLib_Variables_QRY_ObjectVariableSet(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
 AND
