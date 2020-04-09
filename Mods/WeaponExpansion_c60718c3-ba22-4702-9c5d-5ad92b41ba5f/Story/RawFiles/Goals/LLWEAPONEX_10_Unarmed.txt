@@ -1,6 +1,7 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
+/*
 DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_01");
 DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_02");
 DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_03");
@@ -15,7 +16,51 @@ DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Constitution", "LLWEAPONEX_UNARMED_DAMA
 DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_02");
 DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_03");
 DB_LLWEAPONEX_Unarmed_DamageStatuses(4, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_04");
+*/
 KBSECTION
+
+// [BEGIN_NO_OSITOOLS]
+IF
+TextEventSet("leaderlib_luareset")
+THEN
+NRD_DebugLog("BEGIN_NO_OSITOOLS compiled!");
+// [END_NO_OSITOOLS]
+
+/* [OSITOOLS_ONLY]
+IF
+TextEventSet("leaderlib_luareset")
+THEN
+NRD_DebugLog("OSITOOLS_ONLY compiled!");
+*/
+
+//REGION HIT_SCALING
+/*
+IF
+CharacterStartAttackObject(_Target, _, _Attacker)
+AND
+NOT CharacterGetEquippedWeapon(_Attacker, _)
+THEN
+DB_LLWEAPONEX_Unarmed_Temp_BasicAttacking(_Attacker, _Target);
+LeaderLib_Timers_StartObjectObjectTimer(_Attacker, _Target, 2000, "Timers_LLWEAPONEX_Unarmed_ClearBasicAttackDB", "LLWEAPONEX_Unarmed_ClearBasicAttackDB");
+
+PROC
+LeaderLib_Timers_ObjectObjectTimerFinished((GUIDSTRING)_Attacker, (GUIDSTRING)_Target, "LLWEAPONEX_Unarmed_ClearBasicAttackDB")
+AND
+DB_LLWEAPONEX_Unarmed_Temp_BasicAttacking((CHARACTERGUID)_Attacker, _Target)
+THEN
+NOT DB_LLWEAPONEX_Unarmed_Temp_BasicAttacking(_Attacker, _Target);
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Unarmed:ClearBasicAttackDB] Cleared DB entry");
+*/
+
+IF
+NRD_OnPrepareHit(_Target, (CHARACTERGUID)_Attacker, _Damage, _Handle)
+//NRD_OnHit(_Target, (CHARACTERGUID)_Attacker, _Damage, _Handle)
+AND
+NOT CharacterGetEquippedWeapon(_Attacker, _)
+THEN
+LLWEAPONEX_Ext_ScaleUnarmedDamage(_Attacker, _Target, _Damage, _Handle);
+//END_REGION
+
 //REGION NO_WEAPON_DAMAGE
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_UNARMED_NOWEAPON_HIT", (CHARACTERGUID)_Source)
@@ -32,23 +77,6 @@ AND
 ObjectGetFlag(_Char, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
 LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Char, "LLWEAPONEX_Unarmed", 1, _Target);
-
-PROC
-LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_IsLizard)
-AND
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Char, "LLWEAPONEX_Unarmed", _MasteryLevel, _Experience)
-AND
-_MasteryLevel > 0
-AND
-IntegerMin(_MasteryLevel, 4, _CappedMastery)
-AND
-CharacterGetAttribute(_Char, "Strength", _Str)
-AND
-CharacterGetAttribute(_Char, "Finesse", _Fin)
-AND
-CharacterGetAttribute(_Char, "Constitution", _Con)
-THEN
-LLWEAPONEX_Unarmed_CalculateUnarmedDamage(_Char, _Target, _CappedMastery, _Str, _Fin, _Con);
 
 PROC
 LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, 1)
@@ -73,54 +101,6 @@ IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Unarmed_RemoveLizardDebuff")
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF");
-//END_REGION
-
-//REGION CALCULATE_UNARMED
-PROC
-LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
-AND
-NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
-AND
-_Constitution > _Strength
-AND
-_Constitution > _Finesse
-AND
-DB_LLWEAPONEX_Unarmed_DamageStatuses(_MasteryLevel, "Constitution", _Status)
-THEN
-DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
-ApplyStatus(_Target, _Status, 0.0, 0, _Char);
-
-PROC
-LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
-AND
-NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
-AND
-_Finesse > _Strength
-AND
-_Finesse > _Constitution
-AND
-DB_LLWEAPONEX_Unarmed_DamageStatuses(_MasteryLevel, "Finesse", _Status)
-THEN
-DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
-ApplyStatus(_Target, _Status, 0.0, 0, _Char);
-
-//Default to Strength
-PROC
-LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
-AND
-NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
-AND
-DB_LLWEAPONEX_Unarmed_DamageStatuses(_MasteryLevel, "Strength", _Status)
-THEN
-DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
-ApplyStatus(_Target, _Status, 0.0, 0, _Char);
-
-PROC
-LLWEAPONEX_Unarmed_CalculateUnarmedDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_MasteryLevel, (INTEGER)_Strength, (INTEGER)_Finesse, (INTEGER)_Constitution)
-AND
-DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Unarmed_Temp_DamageResolved(_Char, _Target);
 //END_REGION
 EXITSECTION
 
