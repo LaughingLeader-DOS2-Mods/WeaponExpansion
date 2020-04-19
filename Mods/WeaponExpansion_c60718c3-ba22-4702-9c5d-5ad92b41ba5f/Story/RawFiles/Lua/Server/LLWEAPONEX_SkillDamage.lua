@@ -1,26 +1,12 @@
 local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
-	Ext.Print("Looking for skill damage func for: " .. skill.Name)
-	local skill_func = WeaponExpansion.Skills.Damage[skill.Name]
+	local skill_func = WeaponExpansion.Skills.Damage.Skills[skill.Name]
 	if skill_func ~= nil then
-		local skillDamageDebug = {
-			skill = tostring(skill.Name),
-			attacker = attacker,
-			isFromItem = isFromItem,
-			stealthed = stealthed,
-			attackerPos = attackerPos,
-			targetPos = targetPos,
-			level = level,
-			noRandomization = noRandomization
-		}
-		Ext.Print("Getting skill damage:\n" .. LeaderLib.Common.Dump(skillDamageDebug))
-		local status,val1,val2 = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
-		if status then
-			if val1 ~= nil then
-				Ext.Print("damageList("..tostring(LeaderLib.Common.Dump(val1:ToTable()))..")")
-				return val1,val2
-			end
+		local status,damageList,deathType = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+		if status and damageList ~= nil then
+			Ext.Print("GetSkillDamage damageList("..tostring(LeaderLib.Common.Dump(damageList:ToTable()))..")")
+			return damageList,deathType
 		else
-			Ext.PrintError("Error getting damage for skill:\n",val1)
+			Ext.PrintError("Error getting damage for skill:\n",damageList)
 		end
 	end
 end
