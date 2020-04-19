@@ -1,7 +1,7 @@
 new entry "_LLWEAPONEX_ROD_SKILL_BASE"
 type "StatusData"
 using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
-data "DisplayName" "_LLWEAPONEX_ROD_SKILL_BASE_DisplayName"
+data "DisplayName" "LLWEAPONEX_ROD_SKILL_BASE_DisplayName"
 data "DisplayNameRef" "Rod Skill - On command, rods can launch projectiles like wands"
 
 new entry "LLWEAPONEX_ROD_AIR"
