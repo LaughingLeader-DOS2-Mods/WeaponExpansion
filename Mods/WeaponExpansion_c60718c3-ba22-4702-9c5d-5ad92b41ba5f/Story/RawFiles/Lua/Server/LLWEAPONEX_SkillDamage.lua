@@ -1,6 +1,6 @@
 local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 	Ext.Print("Looking for skill damage func for: " .. skill.Name)
-	local skill_func = WeaponExpansion.SkillDamage.Skills[skill.Name]
+	local skill_func = WeaponExpansion.Skills.Damage[skill.Name]
 	if skill_func ~= nil then
 		local skillDamageDebug = {
 			skill = tostring(skill.Name),

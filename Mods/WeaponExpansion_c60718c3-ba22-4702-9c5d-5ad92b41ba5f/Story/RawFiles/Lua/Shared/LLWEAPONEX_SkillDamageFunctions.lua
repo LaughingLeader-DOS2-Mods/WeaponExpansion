@@ -110,7 +110,7 @@ function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed, attac
 
 	Ext.Print("Getting hand crossbow damage")
 
-	local crossbowDamageSkill = "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Default_ScaledDamage"
+	local crossbowDamageSkill = "Projectile_LLWEAPONEX_HandCrossbow_Shoot"
 	local skill = PrepareSkillProperties(crossbowDamageSkill)
 	if skill == nil then skill = baseSkill end
 
@@ -180,18 +180,21 @@ function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed, attac
     return damageList, Game.Math.DamageTypeToDeathType(skillDamageType)
 end
 
-WeaponExpansion.SkillDamage = {
+WeaponExpansion.Skills = {
 	GetHighestAttribute = GetHighestAttribute,
 	GetHandCrossbow = GetHandCrossbow,
+	GetHandCrossbowBolt = GetHandCrossbowBolt,
 	PrepareSkillProperties = PrepareSkillProperties,
-	Params = {
-		LLWEAPONEX_PistolDamage = GetPistolDamage,
-		LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowDamage
-	},
-	Skills = {
-		Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand = GetPistolDamage,
-		Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand = GetPistolDamage,
-		Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowDamage,
+	Params = {},
+	Damage = {
+		Params = {
+			LLWEAPONEX_PistolDamage = GetPistolDamage,
+			LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowDamage
+		},
+		Skills = {
+			Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand = GetPistolDamage,
+			Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand = GetPistolDamage,
+			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowDamage,
+		}
 	}
 }
-
