@@ -17,6 +17,7 @@ local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 			return string.format("<font color='#FFBB22'>%s</font>", boostEffects.Transform)
 		end
 	end
+	return ""
 end
 
 WeaponExpansion.Skills.Params["LLWEAPONEX_HandCrossbow_BoltEffects"] = GetHandCrossbowBoltEffects
@@ -38,7 +39,7 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
 	--Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
 	--Ext.Print("skill("..tostring(skill)..") character("..tostring(character)..") isFromItem("..tostring(isFromItem)..")")
-	local param_func = WeaponExpansion.Skills.Params[param]
+	local param_func = WeaponExpansion.Skills.Damage.Params[param]
 	if param_func ~= nil then
 		local status,val1,val2 = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0)
 		if status then

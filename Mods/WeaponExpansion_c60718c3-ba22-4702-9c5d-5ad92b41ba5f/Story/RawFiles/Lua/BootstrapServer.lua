@@ -26,6 +26,7 @@ local function DebugInit()
         end
     end
     CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
+    CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
 end
 
 local function LLWEAPONEX_GameSessionLoad()

@@ -1,45 +1,46 @@
-<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1" OT="Spear">Polearm</content>
-<content contentuid="hd6d18316gbc8bg400bga46eg18cd9f4185ee" OT="Dagger">Blade</content>
-<content contentuid="h6e21af89g96d5g4826ga11ag8688bee4a5f7" OT="Dagger">Blade</content>
-<content contentuid="h17a906aeg8f00g4f9dga784g93b8e4ad26b2" OT="One-Handed Mace">One-Handed Blunt</content>
-<content contentuid="ha3f71157ga32dg4745g8732g945f4256e48f" OT="Crossbows">Firearms</content>
-<content contentuid="h52ee27b1g46a7g4a0dg95b3gf519d1072d3b" OT="Crossbow">Firearm</content>
-<content contentuid="h71eeb1baga7ddg4719gb91cg1a500c7dbe74" OT="Can Backstab. Backstabbing deals critical damage when you attack from behind your target.">Can Backstab</content>
-<content contentuid="ha0eca831g2e16g463fgb80fg09f33092c2ee" OT="[1] on applying [2]"></content>
-<content contentuid="h54e0b91cg48a7g4d5agaedcgbde756a109ea" OT="[1]% chance to succeed.">([1]% Chance)</content>
-<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43" OT="Set [1].[2][3]">[1][2][3]</content>
-<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f" OT="Set [1] for [4] turn(s).[2][3]">Set [1] for [4] turn(s) [2][3]</content>
-<content contentuid="h61ef19d0g09f0g490bg9b37gae0ddaead259" OT="[1] turn(s)">[1] turn(s)</content>
-<content contentuid="h192a08b3gd474g4dacg85bagc0ce5e0e27e4" OT="Empty slot">Empty Slot</content>
-<content contentuid="h03b9013dg183cg4543gbcd5gf9e832e74fae" OT="Unbreakable">Unbreakable</content>
-<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a" OT="Item is out of charges&lt;br&gt;">Charges Depleted&lt;br&gt;</content>
-<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69" OT="Item is out of charges&lt;br&gt;">Charges Depleted&lt;br&gt;</content>
-<content contentuid="h89dbdaf9g61bdg4246g82fag8e432a286751" OT="Wand is out of charges">Charges Depleted</content>
-<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee" OT="Number of uses">Charges</content>
-<content contentuid="h2feb0bc1g47aag41degb94eg7982094ec7e1" OT="Grants skill: [1]">Grants Skill: [1]</content>
-<content contentuid="h96db82f9g82ddg45ddgafe7g220fb513f61d" OT="Grants skill">Grants Skill</content>
-<content contentuid="h77557ac7g4f6fg49bdga76cg404de43d92f5" OT="Shield">Offhand</content>
-<content contentuid="hf57cf9d1g0722g43adga71cg461cb1a54cdd" OT="failed">Failed</content>
-<content contentuid="hc8bc599bg3f31g4f32g8adcg299d21366cb9" OT="[[1]] [2]">[[1]] [2]</content>
-<content contentuid="ha020d932g69e4g4957g998dg9204aa232200" OT="[1]:[2]">[1]:[2]</content>
-<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135" OT="rot damage">shadow damage</content>
-<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8" OT="rot">shadow</content>
-<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e" OT="Rot">Shadow</content>
-<content contentuid="h4b681e66gd563g43abg892fg376ffaa37132" OT="[1] Physical Armour reduction">[1] Corrosive</content>
-<content contentuid="hcbe11fb4g22adg4b10g938bg467f8c41107c" OT="Physical Armour reduction">Corrosive</content>
-<content contentuid="h161d5479g06d6g408egade2g37a203e3361f" OT="Physical Armour">corrosive damage</content>
-<content contentuid="h7656635fg959dg4396ga8bfgfc35e70f828f" OT="[1] Magic Armour reduction">[1] Magic</content>
-<content contentuid="hd01e5f46g36d4g48f5g8550gabdc4bef1f04" OT="Magic Armour reduction">Magic</content>
-<content contentuid="hdb4307b4g1a6fg4c05g9602g6a4a6e7a29d9" OT="Magic Armour">magic damage</content>
-<content contentuid="h49b98935gaa0dg4d2dg826eg8ed389e68e13" S="Target_CorrosiveTouch_Description" OT="Destroy [1] on target character, and set Acid status.">Deal [1] to target character, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid.</content>
-<content contentuid="h0fd12b32gce5fg435ag9c80g688ab9c0d9e3" S="Cone_CorrosiveSpray_Description" OT="Destroy [1] on targets in a cone, and set Acid and Atrophy.">Deal [1] to targets in a cone, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid and Atrophy.</content>
-<content contentuid="hff341792gf705g46e1g92c3gcd39d8694013" S="Projectile_SilverArrow_Description" OT="Destroys [1].">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
-<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756" OT="tag" Comment="For replacing 'Requires tag' when using tag requirements"></content>
-<content contentuid="h7de69a95g70cag4bb3gbabcg1cf2df46f12c" OT="Requires [1]">Requires [1]</content>
-<content contentuid="h825990a2gaf64g4235g9d53gcd340042c0d0" OT="Requires [1] [2]">Requires [1] [2] </content>
-<content contentuid="ha6e36605gee35g4aaagaddbg7ab8bfaf86f6" OT="Requires [1] [2]">Requires [1] [2]</content>
-<content contentuid="hf1571b7eg8f35g4da2g8e38g87fee1c3d79f" OT="Requires [1] [2]&lt;br&gt;">Requires [2] [1]&lt;br&gt;</content>
-<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36" OT="Blows up your target">Applies additional effects on hit</content>
-<content contentuid="h10c50c3fg3013g4daag854dg6ecf5511972f">Reflects [1]% of [2][3][4] Damage[5]&lt;br&gt;</content>
-<content contentuid="hd93c82b0g1650g4a69gb75dg52dc7f02bca0" S="Target_DemonicStare_Description" OT="Drain [1] from target character and gain that amount for yourself.">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
-<content contentuid="h9f929a3ag7197g4aa0gbdbbg61ee2c883d47" S="Projectile_ThrowingKnife_Description" OT="Throw a knife at your opponent, dealing [1]. Can backstab!">Throw a knife at your opponent, dealing [1]. Can backstab!&lt;br&gt;&lt;font color=&apos;#8F7CFF&apos;&gt;Dagger Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a small chance to be coated in poison or explosive oil, dealing additional damage on hit.&lt;/font&gt;</content>
+	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1" OT="Spear">Polearm</content>
+	<content contentuid="hd6d18316gbc8bg400bga46eg18cd9f4185ee" OT="Dagger">Blade</content>
+	<content contentuid="h6e21af89g96d5g4826ga11ag8688bee4a5f7" OT="Dagger">Blade</content>
+	<content contentuid="h17a906aeg8f00g4f9dga784g93b8e4ad26b2" OT="One-Handed Mace">One-Handed Blunt</content>
+	<content contentuid="ha3f71157ga32dg4745g8732g945f4256e48f" OT="Crossbows">Firearms</content>
+	<content contentuid="h52ee27b1g46a7g4a0dg95b3gf519d1072d3b" OT="Crossbow">Firearm</content>
+	<content contentuid="h71eeb1baga7ddg4719gb91cg1a500c7dbe74" OT="Can Backstab. Backstabbing deals critical damage when you attack from behind your target.">Can Backstab</content>
+	<content contentuid="ha0eca831g2e16g463fgb80fg09f33092c2ee" OT="[1] on applying [2]"></content>
+	<content contentuid="h54e0b91cg48a7g4d5agaedcgbde756a109ea" OT="[1]% chance to succeed.">([1]% Chance)</content>
+	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43" OT="Set [1].[2][3]">[1][2][3]</content>
+	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f" OT="Set [1] for [4] turn(s).[2][3]">Set [1] for [4] turn(s) [2][3]</content>
+	<content contentuid="h61ef19d0g09f0g490bg9b37gae0ddaead259" OT="[1] turn(s)">[1] turn(s)</content>
+	<content contentuid="h192a08b3gd474g4dacg85bagc0ce5e0e27e4" OT="Empty slot">Empty Slot</content>
+	<content contentuid="h03b9013dg183cg4543gbcd5gf9e832e74fae" OT="Unbreakable">Unbreakable</content>
+	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a" OT="Item is out of charges&lt;br&gt;">Charges Depleted&lt;br&gt;</content>
+	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69" OT="Item is out of charges&lt;br&gt;">Charges Depleted&lt;br&gt;</content>
+	<content contentuid="h89dbdaf9g61bdg4246g82fag8e432a286751" OT="Wand is out of charges">Charges Depleted</content>
+	<content contentuid="h7da39b62gdaedg4565gbe58gc2e702a725ee" OT="Number of uses">Charges</content>
+	<content contentuid="h2feb0bc1g47aag41degb94eg7982094ec7e1" OT="Grants skill: [1]">Grants Skill: [1]</content>
+	<content contentuid="h96db82f9g82ddg45ddgafe7g220fb513f61d" OT="Grants skill">Grants Skill</content>
+	<content contentuid="h77557ac7g4f6fg49bdga76cg404de43d92f5" OT="Shield">Offhand</content>
+	<content contentuid="hf57cf9d1g0722g43adga71cg461cb1a54cdd" OT="failed">Failed</content>
+	<content contentuid="hc8bc599bg3f31g4f32g8adcg299d21366cb9" OT="[[1]] [2]">[[1]] [2]</content>
+	<content contentuid="ha020d932g69e4g4957g998dg9204aa232200" OT="[1]:[2]">[1]:[2]</content>
+	<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135" OT="rot damage">shadow damage</content>
+	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8" OT="rot">shadow</content>
+	<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e" OT="Rot">Shadow</content>
+	<content contentuid="h4b681e66gd563g43abg892fg376ffaa37132" OT="[1] Physical Armour reduction">[1] Corrosive</content>
+	<content contentuid="hcbe11fb4g22adg4b10g938bg467f8c41107c" OT="Physical Armour reduction">Corrosive</content>
+	<content contentuid="h161d5479g06d6g408egade2g37a203e3361f" OT="Physical Armour">corrosive damage</content>
+	<content contentuid="h7656635fg959dg4396ga8bfgfc35e70f828f" OT="[1] Magic Armour reduction">[1] Magic</content>
+	<content contentuid="hd01e5f46g36d4g48f5g8550gabdc4bef1f04" OT="Magic Armour reduction">Magic</content>
+	<content contentuid="hdb4307b4g1a6fg4c05g9602g6a4a6e7a29d9" OT="Magic Armour">magic damage</content>
+	<content contentuid="h49b98935gaa0dg4d2dg826eg8ed389e68e13" S="Target_CorrosiveTouch_Description" OT="Destroy [1] on target character, and set Acid status.">Deal [1] to target character, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid.</content>
+	<content contentuid="h0fd12b32gce5fg435ag9c80g688ab9c0d9e3" S="Cone_CorrosiveSpray_Description" OT="Destroy [1] on targets in a cone, and set Acid and Atrophy.">Deal [1] to targets in a cone, destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt; and setting Acid and Atrophy.</content>
+	<content contentuid="hff341792gf705g46e1g92c3gcd39d8694013" S="Projectile_SilverArrow_Description" OT="Destroys [1].">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
+	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756" OT="tag" Comment="For replacing 'Requires tag' when using tag requirements"></content>
+	<content contentuid="h7de69a95g70cag4bb3gbabcg1cf2df46f12c" OT="Requires [1]">Requires [1]</content>
+	<content contentuid="h825990a2gaf64g4235g9d53gcd340042c0d0" OT="Requires [1] [2]">Requires [1] [2] </content>
+	<content contentuid="ha6e36605gee35g4aaagaddbg7ab8bfaf86f6" OT="Requires [1] [2]">Requires [1] [2]</content>
+	<content contentuid="hf1571b7eg8f35g4da2g8e38g87fee1c3d79f" OT="Requires [1] [2]&lt;br&gt;">Requires [2] [1]&lt;br&gt;</content>
+	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36" OT="Blows up your target">Applies additional effects on hit</content>
+	<content contentuid="h10c50c3fg3013g4daag854dg6ecf5511972f">Reflects [1]% of [2][3][4] Damage[5]&lt;br&gt;</content>
+	<content contentuid="hd93c82b0g1650g4a69gb75dg52dc7f02bca0" S="Target_DemonicStare_Description" OT="Drain [1] from target character and gain that amount for yourself.">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
+	<content contentuid="h9f929a3ag7197g4aa0gbdbbg61ee2c883d47" S="Projectile_ThrowingKnife_Description" OT="Throw a knife at your opponent, dealing [1]. Can backstab!">Throw a knife at your opponent, dealing [1]. Can backstab!&lt;br&gt;&lt;font color=&apos;#8F7CFF&apos;&gt;Dagger Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a small chance to be coated in poison or explosive oil, dealing additional damage on hit.&lt;/font&gt;</content>
+	<content contentuid="h71b09f9fg285fg4532gab16g1c7640864141" OT="Damage is based on your level and receives bonus from [1].">Damage is based on your level and scales with [1].</content>
