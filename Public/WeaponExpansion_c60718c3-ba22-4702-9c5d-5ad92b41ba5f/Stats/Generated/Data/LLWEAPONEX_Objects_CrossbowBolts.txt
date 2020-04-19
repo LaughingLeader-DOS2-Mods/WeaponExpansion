@@ -35,6 +35,7 @@ new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Shadow"
 type "Weapon"
 using "_Boost_LLWEAPONEX_Crossbow_Bolt_Normal"
 data "Damage Type" "Shadow"
+data "DamageFromBase" "40"
 
 new entry "_Boost_LLWEAPONEX_Crossbow_Bolt_Corrosive"
 type "Weapon"

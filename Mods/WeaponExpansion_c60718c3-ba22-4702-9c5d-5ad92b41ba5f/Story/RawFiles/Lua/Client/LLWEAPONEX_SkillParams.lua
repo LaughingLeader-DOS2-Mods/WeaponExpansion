@@ -1,12 +1,12 @@
 local boltRuneBoosts = {
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Normal",
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Air",
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Earth",
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Fire",
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Poison",
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Water",
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Shadow",
-	"_Boost_LLWEAPONEX_Crossbow_Bolt_Corrosive",
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Normal"] = {},
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Air"] = {Transform="Electrify"},
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Earth"] = {Apply="SLOWED", Transform="Oilify"},
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Fire"] = {Apply="BURNING", Transform="Ignite"},
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Poison"] = {Apply="POISONED", Transform="Contaminate"},
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Water"] = {Apply="CHILLED", Transform="Freeze"},
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Shadow"] = {Apply="CURSED", Transform="Curse"},
+	["_Boost_LLWEAPONEX_Crossbow_Bolt_Corrosive"] = {Apply="ACID",Transform="Melt"},
 }
 
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
