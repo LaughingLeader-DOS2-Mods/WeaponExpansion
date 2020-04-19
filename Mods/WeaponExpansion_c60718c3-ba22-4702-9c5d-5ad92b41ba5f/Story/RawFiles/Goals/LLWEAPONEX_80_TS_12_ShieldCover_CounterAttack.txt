@@ -22,7 +22,7 @@ AND
 DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker)
 THEN
 NOT DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker);
-NRD_StatusSetInt(_Char,_Handle,"RollForDamage",0);
+NRD_StatusSetInt(_Char,_Handle,"NoHitRoll",0);
 NRD_StatusSetInt(_Char,_Handle,"Hit",0);
 NRD_StatusSetInt(_Char,_Handle,"Dodged",0);
 NRD_StatusSetInt(_Char,_Handle,"Missed",0);
