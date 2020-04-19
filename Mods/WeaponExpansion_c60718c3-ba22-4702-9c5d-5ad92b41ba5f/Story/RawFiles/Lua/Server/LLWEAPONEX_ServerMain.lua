@@ -174,7 +174,7 @@ function LLWEAPONEX_Ext_RedirectDamage(blocker, target, attacker, handlestr, red
             NRD_HitSetInt(redirected_hit, "SimulateHit", 1);
             NRD_HitSetInt(redirected_hit, "HitType", 6);
             NRD_HitSetInt(redirected_hit, "Hit", 1);
-            NRD_HitSetInt(redirected_hit, "RollForDamage", 1);
+            NRD_HitSetInt(redirected_hit, "NoHitRoll", 1);
                 
             --Osi.LLWEAPONEX_DualShields_ShieldCover_StoreHit(blocker, target, attacker, redirected_hit)
             NRD_HitExecute(redirected_hit);

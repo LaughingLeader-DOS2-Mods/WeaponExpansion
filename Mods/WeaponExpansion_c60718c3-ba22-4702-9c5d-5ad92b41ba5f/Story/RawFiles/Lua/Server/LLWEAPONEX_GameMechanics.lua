@@ -169,7 +169,7 @@ function LLWEAPONEX_Ext_ScaleUnarmedDamage(attacker, target, damage, handle)
 	if damage > 0 and IsUnarmedDamage(handle) then
 		local unarmedMastery = 0
 		local masteryEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(attacker, "LLWEAPONEX_Unarmed", nil, nil)
-		if masteryEntry ~= nil and masteryEntry[1][3] ~= nil then
+		if masteryEntry ~= nil and #masteryEntry > 0 and masteryEntry[1][3] ~= nil then
 			unarmedMastery = masteryEntry[1][3]
 		end
 

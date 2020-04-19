@@ -1,6 +1,7 @@
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_ServerMain.lua");
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_GameMechanics.lua");
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_Debug.lua");
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_ServerMain.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_GameMechanics.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_SkillDamage.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_Debug.lua")
 
 --Export local functions to global for now
 -- for name,func in pairs(WeaponExpansion.Export) do
@@ -9,8 +10,22 @@ Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWE
 --     Ext.Print("[WeaponExpansion:Bootstrap.lua] Registered function ("..func_name..").")
 -- end
 
+local boltTemplates = {
+    "baf9826a-abe8-4bc8-8c56-b68b5611c223",
+    "72a7d3aa-02d7-4c9b-a565-d94c8a5664b0",
+    "598b8cb5-7f76-4c50-a609-2a3cd0aa0415",
+}
+
 local function DebugInit()
-    Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
+    --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
+    local host = CharacterGetHostCharacter()
+    if ItemTemplateIsInPartyInventory(host, "ad15f666-285d-4634-a832-ea643fa0a9d2", 0) <= 0 then
+        ItemTemplateAddTo("ad15f666-285d-4634-a832-ea643fa0a9d2", host, 1, 0)
+        for i,template in pairs(boltTemplates) do
+            ItemTemplateAddTo(template, host, 1, 0)
+        end
+    end
+    CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
 end
 
 local function LLWEAPONEX_GameSessionLoad()
