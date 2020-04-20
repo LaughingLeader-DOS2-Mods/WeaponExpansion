@@ -57,6 +57,8 @@ Thanks to all the artists listed below!
       - https://sketchfab.com/3d-models/old-book-73db31780eef4940af7ad8af8868d684
     - Full Rejuvernation Potion - [ Diablo II ] by Ole Gunnar Isager
       - https://sketchfab.com/3d-models/full-rejuvernation-potion-diablo-ii-c29531095aa24d7399fcc777e821e90b
+    - Flintlock Pistol by Silas6
+      - https://sketchfab.com/3d-models/flintlock-pistol-45a50995fb134aef878fe432486ac9e9
 ### [CC Attribution-ShareAlike ](https://creativecommons.org/licenses/by-sa/3.0/us/) 
     - Old Glaive by patguilbo
       - https://sketchfab.com/3d-models/old-glaive-0d9de1c00d6c4a3fa1a50e87492102c9
