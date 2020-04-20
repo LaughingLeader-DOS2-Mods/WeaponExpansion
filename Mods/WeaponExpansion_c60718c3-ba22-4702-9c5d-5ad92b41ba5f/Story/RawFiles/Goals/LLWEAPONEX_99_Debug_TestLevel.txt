@@ -54,7 +54,7 @@ DB_LLWEAPONEX_Debug_StatusClear("BURNING");
 DB_LLWEAPONEX_Debug_StatusClear("SLOWED");
 DB_LLWEAPONEX_Debug_StatusClear("FAVOURABLE_WIND");
 DB_LLWEAPONEX_Debug_StatusClear("DRUNK");
-LeaderLib_ToggleScripts_EnableScript("LeaderLib_Debug_Tracing_Hit", "WeaponExpansion");
+//LeaderLib_ToggleScripts_EnableScript("LeaderLib_Debug_Tracing_Hit", "WeaponExpansion");
 
 KBSECTION
 

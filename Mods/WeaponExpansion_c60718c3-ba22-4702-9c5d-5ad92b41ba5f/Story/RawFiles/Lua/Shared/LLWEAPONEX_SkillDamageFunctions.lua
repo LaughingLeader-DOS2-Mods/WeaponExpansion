@@ -108,39 +108,6 @@ local function PrepareWeaponStat(stat,level,attribute)
 	return weapon
 end
 
-local function GetHandCrossbow(character)
-	local item = character:GetItemBySlot("Ring")
-	if item == nil then
-		item = character:GetItemBySlot("Ring2")
-	end
-	if item ~= nil then
-		local parent = Ext.StatGetAttribute(item.Name, "Using")
-		Ext.Print("Parent Stat: "..tostring(Ext.StatGetAttribute(item.Name, "Using")))
-		if parent == "_LLWEAPONEX_HandCrossbows" then
-			print(tostring(item))
-			return item
-		end
-	end
-	return nil
-end
-
-local function GetHandCrossbowBolt(character)
-	local item = GetHandCrossbow(character)
-	if item ~= nil then
-		for i=3,5,1 do
-			local boost = item.DynamicStats[i]
-			if boost ~= nil and boost.BoostName ~= "" and string.find(boost.BoostName, "Crossbow_Bolt") > -1 then
-				Ext.Print("Hand Crossbow Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
-				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
-				if boostStat ~= nil then
-					return boost,boostStat
-				end
-			end
-		end
-	end
-	return item,nil
-end
-
 local function CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization, attribute)
     local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
 
@@ -212,18 +179,54 @@ local function CalculateWeaponDamageRange(character, weapon, highestAttribute)
     return ranges
 end
 
-function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+local function GetHandCrossbow(character)
+	local item = character:GetItemBySlot("Ring")
+	if item == nil then
+		item = character:GetItemBySlot("Ring2")
+	end
+	if item ~= nil then
+		local parent = Ext.StatGetAttribute(item.Name, "Using")
+		Ext.Print("Parent Stat: "..tostring(Ext.StatGetAttribute(item.Name, "Using")))
+		if parent == "_LLWEAPONEX_HandCrossbows" then
+			print(tostring(item))
+			return item
+		end
+	end
+	return nil
+end
+
+local function GetHandCrossbowBolt(character)
+	local item = GetHandCrossbow(character)
+	if item ~= nil then
+		for i=3,5,1 do
+			local boost = item.DynamicStats[i]
+			if boost ~= nil and boost.BoostName ~= "" and string.find(boost.BoostName, "Crossbow_Bolt") > -1 then
+				Ext.Print("Hand Crossbow Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
+				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
+				if boostStat ~= nil then
+					return boost,boostStat
+				end
+			end
+		end
+	end
+	return item,nil
+end
+
+local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
 	end
+    if level == 0 then
+        level = baseSkill.OverrideSkillLevel
+        if level == 0 then
+            level = baseSkill.Level
+        end
+    end
 
-	Ext.Print("Getting hand crossbow damage")
-
-	local crossbowDamageSkill = "Projectile_LLWEAPONEX_HandCrossbow_Shoot"
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties(crossbowDamageSkill)
+	local skill = PrepareSkillProperties(baseSkill)
 	if skill == nil then skill = baseSkill end
 
 	local bolt,boltRuneStat = GetHandCrossbowBolt(attacker)
@@ -273,16 +276,105 @@ function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	end
 end
 
-local function GetPistolDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
-	local damageList = Ext.NewDamageList()
-	damageList:Add("Physical", 10)
-	return damageList,1
+local function GetPistol(character)
+	local item = character:GetItemBySlot("Belt")
+	if item ~= nil then
+		local parent = Ext.StatGetAttribute(item.Name, "Using")
+		Ext.Print("Parent Stat: "..tostring(Ext.StatGetAttribute(item.Name, "Using")))
+		if parent == "_LLWEAPONEX_Pistols" then
+			return item
+		end
+	end
+	return nil
+end
+
+local function GetPistolBullets(character)
+	local item = GetPistol(character)
+	if item ~= nil then
+		for i=3,5,1 do
+			local boost = item.DynamicStats[i]
+			if boost ~= nil and boost.BoostName ~= "" and string.find(boost.BoostName, "Pistol_Bullet") > -1 then
+				Ext.Print("Pistol Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
+				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
+				if boostStat ~= nil then
+					return boost,boostStat
+				end
+			end
+		end
+	end
+	return item,nil
+end
+
+local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+    if attacker ~= nil and level < 0 then
+        level = attacker.Level
+	end
+    if level == 0 then
+        level = baseSkill.OverrideSkillLevel
+        if level == 0 then
+            level = baseSkill.Level
+        end
+    end
+
+	local highestAttribute = GetHighestAttribute(attacker)
+
+	local weapon = nil
+	local skill = PrepareSkillProperties(baseSkill)
+	if skill == nil then skill = baseSkill end
+
+	local bullet,bulletRuneStat = GetPistolBullets(attacker)
+	if bulletRuneStat == nil then bulletRuneStat = "_Boost_LLWEAPONEX_Bullet_Pistol_Normal" end
+	if bulletRuneStat ~= nil then
+		weapon = PrepareWeaponStat(bulletRuneStat, attacker.Level, highestAttribute)
+		Ext.Print("Bullet Stats ("..bulletRuneStat..")")
+		Ext.Print(LeaderLib.Common.Dump(weapon))
+		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
+		skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
+		skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
+	end
+
+    local damageMultiplier = skill['Damage Multiplier'] * 0.01
+    local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
+	local skillDamageType = skill["DamageType"]
+
+	if isTooltip ~= true then
+		local damageList = Ext.NewDamageList()
+		local mainDmgs = CalculateWeaponDamage(attacker, weapon, noRandomization, highestAttribute)
+		mainDmgs:Multiply(damageMultipliers)
+		if skillDamageType ~= nil then
+			mainDmgs:ConvertDamageType(skillDamageType)
+		end
+		damageList:Merge(mainDmgs)
+		damageList:AggregateSameTypeDamages()
+
+		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
+	else
+		local mainDamageRange = CalculateWeaponDamageRange(attacker, weapon, highestAttribute)
+        for damageType, range in pairs(mainDamageRange) do
+            local min = Ext.Round(range[1] * damageMultiplier)
+            local max = Ext.Round(range[2] * damageMultiplier)
+            range[1] = min + math.ceil(min * Game.Math.GetDamageBoostByType(attacker, damageType))
+            range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(attacker, damageType))
+        end
+
+        local damageType = skill.DamageType
+        local min, max = 0, 0
+		for _, range in pairs(mainDamageRange) do
+			min = min + range[1]
+			max = max + range[2]
+		end
+		mainDamageRange = {}
+		mainDamageRange[damageType] = {Min=math.tointeger(min), Max=math.tointeger(max)}
+        return mainDamageRange
+	end
 end
 
 WeaponExpansion.Skills = {
 	GetHighestAttribute = GetHighestAttribute,
 	GetHandCrossbow = GetHandCrossbow,
 	GetHandCrossbowBolt = GetHandCrossbowBolt,
+	GetPistol = GetPistol,
+	GetPistolBullets = GetPistolBullets,
 	PrepareSkillProperties = PrepareSkillProperties,
 	Params = {},
 	Damage = {

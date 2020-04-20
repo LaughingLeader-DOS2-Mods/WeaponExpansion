@@ -24,17 +24,32 @@ end
 
 WeaponExpansion.Skills.Params["LLWEAPONEX_HandCrossbow_BoltEffects"] = GetHandCrossbowBoltEffects
 
+local function GetPistolBulletEffects(skill, character, isFromItem, param)
+	local bullet,bulletRuneStat = WeaponExpansion.Skills.GetPistolBullets(character)
+	-- Ext.Print(bullet,bulletRuneStat)
+	-- if bulletRuneStat ~= nil then
+	-- 	local boostEffects = bulletRuneBoosts[bulletRuneStat]
+	-- 	Ext.Print(boostEffects.Apply)
+	-- 	if boostEffects ~= nil and (boostEffects.Apply ~= nil or boostEffects.Transform ~= nil) then
+	-- 		return string.format("<br><font color='#FFBB22'>%s%s</font>", boostEffects.Apply, boostEffects.Transform)
+	-- 	end
+	-- end
+	return ""
+end
+WeaponExpansion.Skills.Params["LLWEAPONEX_PistolBulletEffects"] = GetHandCrossbowBoltEffects
+
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
 local damageScaleWeaponText = TranslatedString:Create("ha4cfd852g52f1g4079g8919gd392ac8ade1a", "Damage is based on your basic attack and receives a bonus from [1].")
 local damageScaleLevelText = TranslatedString:Create("h71b09f9fg285fg4532gab16g1c7640864141", "Damage is based on your level and receives bonus from [1].")
 
-local function GetHandCrossbowScaling(skill, character, isFromItem, param)
+local function GetScaling(skill, character, isFromItem, param)
 	local att = WeaponExpansion.Skills.GetHighestAttribute(character)
 	local text = string.gsub(damageScaleLevelText.Value, "%[1%]", att)
 	return "<br><font color='#078FC8'>"..text.."</font>"
 end
-WeaponExpansion.Skills.Params["LLWEAPONEX_HandCrossbow_Scaling"] = GetHandCrossbowScaling
+
+WeaponExpansion.Skills.Params["LLWEAPONEX_HighestAttributeScale"] = GetScaling
 
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
