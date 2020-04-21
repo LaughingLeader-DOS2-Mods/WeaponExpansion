@@ -186,7 +186,7 @@ local function GetHandCrossbow(character)
 	end
 	if item ~= nil then
 		local parent = Ext.StatGetAttribute(item.Name, "Using")
-		Ext.Print("Parent Stat: "..tostring(Ext.StatGetAttribute(item.Name, "Using")))
+		--Ext.Print("Parent Stat: "..tostring(Ext.StatGetAttribute(item.Name, "Using")))
 		if parent == "_LLWEAPONEX_HandCrossbows" then
 			print(tostring(item))
 			return item
@@ -280,7 +280,7 @@ local function GetPistol(character)
 	local item = character:GetItemBySlot("Belt")
 	if item ~= nil then
 		local parent = Ext.StatGetAttribute(item.Name, "Using")
-		Ext.Print("Parent Stat: "..tostring(Ext.StatGetAttribute(item.Name, "Using")))
+		--Ext.Print("Parent Stat: "..tostring(Ext.StatGetAttribute(item.Name, "Using")))
 		if parent == "_LLWEAPONEX_Pistols" then
 			return item
 		end
@@ -314,7 +314,24 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
         if level == 0 then
             level = baseSkill.Level
         end
-    end
+	end
+	
+	local rot = attacker.Rotation
+	Ext.Print("Rotation:",Ext.JsonStringify(rot))
+	local forwardVector = {
+		-rot[7] * 15.0,
+		-rot[8] * 15.0,
+		-rot[9] * 15.0,
+	}
+	Ext.Print("forwardVector:",Ext.JsonStringify(forwardVector))
+	local pos = attacker.Position
+	Ext.Print("attacker.Position:",Ext.JsonStringify(pos))
+	local targetPos = {
+		pos[1] + forwardVector[1],
+		pos[2] + forwardVector[2],
+		pos[3] + forwardVector[3],
+	}
+	Ext.Print("targetPos:",Ext.JsonStringify(targetPos))
 
 	local highestAttribute = GetHighestAttribute(attacker)
 
@@ -326,8 +343,8 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	if bulletRuneStat == nil then bulletRuneStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
 	if bulletRuneStat ~= nil then
 		weapon = PrepareWeaponStat(bulletRuneStat, attacker.Level, highestAttribute)
-		Ext.Print("Bullet Stats ("..bulletRuneStat..")")
-		Ext.Print(LeaderLib.Common.Dump(weapon))
+		--Ext.Print("Bullet Stats ("..bulletRuneStat..")")
+		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
 		skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
 		skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]

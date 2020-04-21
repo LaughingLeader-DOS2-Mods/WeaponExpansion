@@ -143,7 +143,6 @@ LeaderLib_Helper_QRY_IsRace(_Char, _Race)
 THEN
 ApplyStatus(_Char, _ExplosionStatusFX, 0.2, 1, _Char);
 LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Pistols_RemoveExplosionStatusFX", "LLWEAPONEX_Pistols_RemoveExplosionStatusFX");
-SetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _ProjectileSkill);
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Pistols_RemoveExplosionStatusFX")
@@ -156,82 +155,62 @@ RemoveStatus(_Char, _ExplosionStatusFX);
 //END_REGION
 
 //REGION PISTOL_SHOOT_PROJECTILE
+PROC
+LLWEAPONEX_Pistols_Internal_ClearTargetData((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z)
+THEN
+NOT DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
+
+PROC
+LLWEAPONEX_Pistols_Internal_ClearTargetData((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target)
+THEN
+NOT DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target);
+
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
 THEN
-SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
 
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
-AND
-GetPosition(_Target, _x, _y, _z)
 THEN
-LLWEAPONEX_Pistols_Internal_FlagManualTarget(_Char, _Target);
-SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target);
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
 THEN
-SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
 
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
-AND
-GetPosition(_Target, _x, _y, _z)
 THEN
-LLWEAPONEX_Pistols_Internal_FlagManualTarget(_Char, _Target);
-SetVarFloat3(_Char, "LLWEAPONEX_Pistols_ShootProjectileTarget", _x, _y, _z);
-
-PROC
-LLWEAPONEX_Pistols_Internal_FlagManualTarget((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-AND
-ObjectIsCharacter((CHARACTERGUID)_Target, 1)
-THEN
-SetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target);
-
-PROC
-LLWEAPONEX_Pistols_Internal_FlagManualTarget((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-AND
-ObjectIsItem((ITEMGUID)_Target, 1)
-AND
-ItemIsDestructible(_Target, 1)
-THEN
-SetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target);
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target););
 
 PROC
 LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
 THEN
-LLWEAPONEX_Pistols_Internal_ShootBullet_Start(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15);
-
-// Shooting at a position
-PROC
-LLWEAPONEX_Pistols_Internal_ShootBullet_Start((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy)
-AND
-NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
-THEN
-CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile");
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _TargetHelperDummy);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _TargetHelperDummy, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
+LLWEAPONEX_Pistols_Shoot(_Char);
 
 PROC
-LLWEAPONEX_Pistols_Internal_ShootBullet_Start((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy)
+LLWEAPONEX_Pistols_Shoot((CHARACTERGUID)_Char)
 AND
-NOT DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _TargetHelperDummy)
-AND
-LeaderLib_Variables_QRY_ObjectVariableSet(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject")
-AND
-GetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject", _Target)
-AND
-ObjectIsItem(_Target, _IsItem)
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target)
 THEN
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _TargetHelperDummy);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _TargetHelperDummy, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
-LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget(_Char, _TargetHelperDummy, _Target, _IsItem);
+NOT DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target);
+LLWEAPONEX_Pistols_Internal_ClearTargetData(_Char);
+LLWEAPONEX_ShootPistolAtObject(_Char, _Target);
 
 PROC
-LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 1)
+LLWEAPONEX_Pistols_Shoot((CHARACTERGUID)_Char)
+AND
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z)
 THEN
-CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile_AtItem");
+NOT DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
+LLWEAPONEX_Pistols_Internal_ClearTargetData(_Char);
+LLWEAPONEX_ShootPistolAtTarget(_Char, _x, _y, _z);
 
 // For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
 QRY
@@ -248,152 +227,26 @@ AND
 LeaderLib_Math_QRY_IsEqualToAny(1, _a, _b, _c, _d)
 THEN
 DB_NOOP(1);
-
-PROC
-LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 0)
-AND
-NOT LLWEAPONEX_Pistols_QRY_HitDirectly(_Target)
-THEN
-CharacterCharacterSetEvent(_Char, _TargetHelperDummy, "LLWEAPONEX_Pistols_ShootProjectile_AtCharacter");
-
-PROC
-LLWEAPONEX_Pistols_Internal_ShootBullet_AtTarget((CHARACTERGUID)_Char, (CHARACTERGUID)_TargetHelperDummy, (GUIDSTRING)_Target, 0)
-AND
-LLWEAPONEX_Pistols_QRY_HitDirectly(_Target)
-AND
-GetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _Skill)
-THEN
-LeaderLib_Explode_ExplodeProjectile(_Char, _Skill, _Target, 0);
-
-/*
-PROC
-LLWEAPONEX_Pistols_Internal_FlagManualTarget((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-THEN
-SetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileObject", _Target);
-
-PROC
-LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0)
-THEN
-CharacterCharacterSetEvent(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, "LLWEAPONEX_Pistols_ShootProjectile");
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
-
-PROC
-LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 1)
-AND
-GetVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileObject", _Target)
-AND
-GetVarFixedString(_Char, "LLWEAPONEX_Pistols_ShootProjectileSkill", _Skill)
-AND
-CharacterGetLevel(_Char, _Level)
-AND
-GetPosition(_Char, _x, _y, _z)
-AND
-RealSum(_y, 2.0, _ty)
-THEN
-NRD_ProjectilePrepareLaunch();
-NRD_ProjectileSetString("SkillId", _Skill);
-NRD_ProjectileSetInt("CasterLevel", _Level);
-//NRD_ProjectileSetGuidString("SourcePosition", _Char);
-NRD_ProjectileSetVector3("SourcePosition", _x, _ty, _z);
-NRD_ProjectileSetGuidString("Caster", _Char);
-NRD_ProjectileSetGuidString("Source", _Char);
-NRD_ProjectileSetGuidString("HitObject", _Target);
-//NRD_ProjectileSetGuidString("HitObjectPosition", _Target);
-NRD_ProjectileSetGuidString("TargetPosition", _Target);
-NRD_ProjectileLaunch();
-ClearVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileObject");
-ObjectClearFlag(_Char, "LLWEAPONEX_Pistols_ManualTarget", 0);
-*/
-
-/*
-//Use a global dummy if it's available
-PROC
-LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
-AND
-NOT DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15)
-THEN
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, (CHARACTERGUID)S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
-CharacterCharacterSetEvent(_Char, S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15, "LLWEAPONEX_Pistols_ShootProjectile");
-//SetStoryEvent(_Char, "LLWEAPONEX_Pistols_ShootProjectile");
-
-//Use a temp dummy if the global one is in use
-PROC
-LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
-AND
-NOT DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char,_)
-AND
-TemporaryCharacterCreateAtPosition(0.0, 0.0, 0.0, "LeaderLib_SkillDummy_94668062-11ea-4ecf-807c-4cc225cbb236", 0, _Dummy)
-THEN
-LeaderLib_Skills_Internal_PrepareTargetDummy(_Dummy, 1, 0, 1);
-SetFaction(_Dummy, "LLWEAPONEX_Dummy_TargetHelper");
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _Dummy);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _Dummy, 1250, "Timers_LLWEAPONEX_Pistols_ResetTargetHelperDummy", "LLWEAPONEX_Pistols_ResetTargetHelperDummy");
-CharacterCharacterSetEvent(_Char, _Dummy, "LLWEAPONEX_Pistols_ShootProjectile");
-*/
-
-IF
-CharacterCharacterEvent(_Char, _Dummy, "LLWEAPONEX_Pistols_ResetTargetHelperDummy")
-AND
-DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _Dummy)
-THEN
-NOT DB_LLWEAPONEX_Pistols_Temp_ConditionDummy(_Char, _Dummy);
-ClearVarObject(_Char, "LLWEAPONEX_Pistols_ShootProjectileTargetObject");
-
-/*
-IF
-CharacterCharacterEvent(_Char, _Dummy, "LLWEAPONEX_Pistols_ResetTargetHelperDummy")
-AND
-ObjectIsGlobal(_Dummy, 0)
-THEN
-RemoveTemporaryCharacter(_Dummy);
-*/
 //END_REGION
 
-//REGION PISTOL_DAMAGE
+//REGION PISTOL_MASTERY_XP
 IF
-StoryEvent((ITEMGUID)_Bullet, "LLWEAPONEX_Bullet_SetOwner")
+CharacterStatusApplied(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Source)
 AND
-ItemGetOwner(_Bullet, _Owner)
+CharacterIsPlayer(_Source, 1)
+AND
+ObjectGetFlag(_Source, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-SetVarObject(_Bullet, "LLWEAPONEX_Bullet_Owner", _Owner);
-SetStoryEvent(_Bullet, "LLWEAPONEX_Bullet_CheckTargets");
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Source, "LLWEAPONEX_Pistol", 1, _Target);
 
 IF
-CharacterCharacterEvent(_Char, _Target, "LLWEAPONEX_Bullet_OnHit")
+ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Source)
 AND
-CharacterIsPlayer(_Char, _a)
+CharacterIsPlayer(_Source, 1)
 AND
-CharacterGameMaster(_Char, _b)
-AND
-IntegerMax(_a, _b, _IsPlayer) // If any of the above is greater or equal to 1, this is a player
+ObjectGetFlag(_Source, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-//LLWEAPONEX_Pistols_Internal_OnHit_Start((GUIDSTRING)_Target, _Char, _IsPlayer);
-LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
-
-IF
-CharacterItemEvent(_Char, _Target, "LLWEAPONEX_Bullet_OnHit")
-AND
-CharacterIsPlayer(_Char, _a)
-AND
-CharacterGameMaster(_Char, _b)
-AND
-IntegerMax(_a, _b, _IsPlayer)
-THEN
-//LLWEAPONEX_Pistols_Internal_OnHit_Start((GUIDSTRING)_Target, _Char, _IsPlayer);
-LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, _Char, _IsPlayer);
-
-PROC
-LLWEAPONEX_Pistols_Internal_OnHit_Default((GUIDSTRING)_Target, (CHARACTERGUID)_Cause, 1)
-AND
-ObjectGetFlag(_Cause, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Cause, "LLWEAPONEX_Pistol", 1, _Target);
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Source, "LLWEAPONEX_Pistol", 1, _Target);
 //END_REGION
 
 //REGION PISTOL_AMMO
