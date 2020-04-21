@@ -553,6 +553,7 @@ type "Armor"
 using "_Overhead"
 data "Act part" "1"
 data "ItemGroup" "ARM_LLWEAPONEX_Katana_2H_B_Sheathe"
+data "ObjectCategory" ""
 
 new entry "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A"
 type "Armor"
