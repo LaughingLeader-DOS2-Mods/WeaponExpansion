@@ -17,6 +17,18 @@ local boltTemplates = {
     "598b8cb5-7f76-4c50-a609-2a3cd0aa0415",
 }
 
+local bulletTemplates = {
+    "6c14edba-cc11-4e9f-be04-685f09c0aadd",
+    "58638ac8-d0d2-4a60-a6a6-76e0be07d58a",
+    "056a48f4-2b5f-4882-aefa-05162ad4c427",
+    "009eecab-d9bc-454d-afca-5c512f10b182",
+    "2e6c0fd4-3d9e-4492-aa21-6047eca15b1a",
+    "0377162e-51fa-499a-ab58-4cad5104d888",
+    "fc05e69b-bb8b-4d0d-a94c-e1ecafa1c9a9",
+    "fc05e69b-bb8b-4d0d-a94c-e1ecafa1c9a9",
+    "071b6f55-64a5-4efe-af02-1910d400e6b5",
+}
+
 local function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     local host = CharacterGetHostCharacter()
@@ -26,8 +38,14 @@ local function DebugInit()
             ItemTemplateAddTo(template, host, 1, 0)
         end
     end
-    CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
-    CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
+    for i,template in pairs(bulletTemplates) do
+        if ItemTemplateIsInPartyInventory(host, template, 0) <= 0 then
+            ItemTemplateAddTo(template, host, 1, 0)
+        end
+    end
+    --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
+   -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
+    NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_A_Shoot")
 end
 
 local function LLWEAPONEX_GameSessionLoad()

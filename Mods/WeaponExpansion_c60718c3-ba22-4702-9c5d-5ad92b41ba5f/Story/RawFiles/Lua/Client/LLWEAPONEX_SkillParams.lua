@@ -23,6 +23,19 @@ end
 
 WeaponExpansion.Skills.Params["LLWEAPONEX_HandCrossbow_BoltEffects"] = GetHandCrossbowBoltEffects
 
+local PistolRuneBoosts = {
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Normal"] = {Transform="", Apply=""},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Air"] = {Transform="Electrify", Apply=""},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Earth"] = {Transform="", Apply="SLOWED", Chance=25, Turns=1},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Fire"] = {Transform="Ignite", Apply="BURNING", Chance=100, Turns=1},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Poison"] = {Transform="", Apply="POISONED", Chance=100, Turns=1},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Piercing"] = {Transform="", Apply="BLEEDING", Chance=100, Turns=1},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Water"] = {Transform="Freeze", Apply="CHILLED", Chance=100, Turns=1},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Shadow"] = {Apply="CURSED", Transform="Curse"},
+	["_Boost_LLWEAPONEX_Pistol_Bullets_Corrosive"] = {Apply="ACID",Transform="Melt"},
+}
+
+
 local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	local bullet,bulletRuneStat = WeaponExpansion.Skills.GetPistolBullets(character)
 	-- Ext.Print(bullet,bulletRuneStat)
@@ -35,7 +48,7 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	-- end
 	return ""
 end
-WeaponExpansion.Skills.Params["LLWEAPONEX_PistolBulletEffects"] = GetHandCrossbowBoltEffects
+WeaponExpansion.Skills.Params["LLWEAPONEX_PistolBulletEffects"] = GetPistolBulletEffects
 
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
@@ -62,7 +75,7 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 			local resultString = ""
 			--Ext.Print("Skill damage param: " .. LeaderLib.Common.Dump(mainDamageRange))
 			for damageType,damage in pairs(mainDamageRange) do
-				resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%s-%s", damage.Min, damage.Max))
+				resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%s-%s", math.tointeger(damage[1]), math.tointeger(damage[2])))
 			end
 			return resultString
 		else
