@@ -1,5 +1,6 @@
 {
-    "RequiredExtensionVersion": 42,
+    "RequiredExtensionVersion": 44,
+    "ModTable": "WeaponExpansion",
     "FeatureFlags": [
         "OsirisExtensions",
         "Lua"

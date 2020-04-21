@@ -20,6 +20,18 @@ local overrides = {
 		UseWeaponDamage = "Yes",
 		["Damage Multiplier"] = 90
 	},
+	Target_CorrosiveTouch = {
+		Description = "LLWEAPONEX_Target_CorrosiveTouch_Description",
+	},
+	Cone_CorrosiveSpray = {
+		Description = "LLWEAPONEX_Cone_CorrosiveSpray_Description",
+	},
+	Projectile_SilverArrow = {
+		Description = "LLWEAPONEX_Projectile_SilverArrow_Description",
+	},
+	Target_DemonicStare = {
+		Description = "LLWEAPONEX_Target_DemonicStare_Description",
+	},
 	-- Potions
 	Stats_LLWEAPONEX_UnrelentingRage = {
 		RogueLore = 0 -- Crit mult is handled by the extender
@@ -82,6 +94,8 @@ else
 	Ext.StatSetAttribute(statname, property, next_value)
 end ]]
 
+local skillCustomText = Ext.Require("Client/LLWEAPONEX_SkillCustomText.lua")
+
 local function LLWEAPONEX_StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
@@ -98,7 +112,7 @@ local function LLWEAPONEX_StatOverrides_Init()
 	--Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "RuneEffectUpperbody", "This is a test description")
 	--Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "RuneEffectAmulet", "This is a test description 2")
 
-	Ext.StatAddCustomDescription("_Boost_LLWEAPONEX_Pistol_Bullets_Air", "ExtraProperties", "This is a test description for Weapon")
+	skillCustomText.AddCustomText()
 end
 
 Ext.RegisterListener("ModuleLoading", LLWEAPONEX_StatOverrides_Init)

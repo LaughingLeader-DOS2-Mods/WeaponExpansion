@@ -355,36 +355,11 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 		end
 		damageList:Merge(mainDmgs)
 		damageList:AggregateSameTypeDamages()
-		Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
+		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = Game.Math.GetSkillDamageRange(attacker, skill)
-		-- local mainDamageRange = CalculateWeaponDamageRange(attacker, weapon, highestAttribute)
-		-- Ext.Print("mainDamageRange:",Ext.JsonStringify(mainDamageRange))
-        -- for damageType, range in pairs(mainDamageRange) do
-        --     local min = Ext.Round(range[1] * damageMultiplier)
-        --     local max = Ext.Round(range[2] * damageMultiplier)
-		-- 	Ext.Print("range:",Ext.JsonStringify(range))
-		-- 	Ext.Print(min,max,damageMultiplier)
-        --     range[1] = min + math.ceil(min * Game.Math.GetDamageBoostByType(attacker, damageType))
-		-- 	range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(attacker, damageType))
-		-- 	Ext.Print("rangeFinal:",Ext.JsonStringify(range))
-		-- 	--local boost = Game.Math.GetDamageBoostByType(attacker, damageType)
-		-- 	--Ext.Print("damage boost:",boost)
-        -- end
-
-        -- local damageType = skill.DamageType
-        -- if damageType ~= "None" and damageType ~= "Sentinel" then
-        --     local min, max = 0, 0
-        --     for _, range in pairs(mainDamageRange) do
-        --         min = min + range[1]
-        --         max = max + range[2]
-        --     end
-
-        --     mainDamageRange = {}
-        --     mainDamageRange[damageType] = {math.tointeger(min), math.tointeger(max)}
-		-- end
-		Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
+		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end
