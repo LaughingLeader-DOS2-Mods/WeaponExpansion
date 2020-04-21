@@ -93,6 +93,12 @@ local function LLWEAPONEX_StatOverrides_Init()
 	else
 		Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] AnimationsPlus is missing! Skipping animation stat overrides.")
 	end
+
+	Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "ExtraProperties", "This is a test description for Weapon")
+	--Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "RuneEffectUpperbody", "This is a test description")
+	--Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "RuneEffectAmulet", "This is a test description 2")
+
+	Ext.StatAddCustomDescription("_Boost_LLWEAPONEX_Pistol_Bullets_Air", "ExtraProperties", "This is a test description for Weapon")
 end
 
 Ext.RegisterListener("ModuleLoading", LLWEAPONEX_StatOverrides_Init)

@@ -293,7 +293,7 @@ local function GetPistolBullets(character)
 	if item ~= nil then
 		for i=3,5,1 do
 			local boost = item.DynamicStats[i]
-			if boost ~= nil and boost.BoostName ~= "" and string.find(boost.BoostName, "Pistol_Bullet") > -1 then
+			if boost ~= nil and boost.BoostName ~= "" and string.find(boost.BoostName, "Pistol_Bullets") > -1 then
 				Ext.Print("Pistol Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
 				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
 				if boostStat ~= nil then
@@ -323,7 +323,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	if skill == nil then skill = baseSkill end
 
 	local bullet,bulletRuneStat = GetPistolBullets(attacker)
-	if bulletRuneStat == nil then bulletRuneStat = "_Boost_LLWEAPONEX_Bullets_Pistol_Normal" end
+	if bulletRuneStat == nil then bulletRuneStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
 	if bulletRuneStat ~= nil then
 		weapon = PrepareWeaponStat(bulletRuneStat, attacker.Level, highestAttribute)
 		Ext.Print("Bullet Stats ("..bulletRuneStat..")")
