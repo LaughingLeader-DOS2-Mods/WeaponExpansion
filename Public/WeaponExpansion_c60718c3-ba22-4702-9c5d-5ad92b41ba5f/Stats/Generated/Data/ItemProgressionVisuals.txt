@@ -1027,7 +1027,7 @@ add namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted","",""
 new itemgroup "WPN_LLWEAPONEX_Katana_2H_B_Crafted"
 
 add levelgroup 0,0,"All"
-add rootgroup "a08befdd-f111-45ed-9e1d-81d0fcf64a97",""
+add rootgroup "bd2a1c81-5aba-4c16-b878-00cc23f84d88",""
 add namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted","",""
 
 new itemgroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted"
