@@ -187,7 +187,7 @@ DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
 THEN
-DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target););
+DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target);
 
 PROC
 LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
@@ -210,7 +210,7 @@ DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z)
 THEN
 NOT DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
 LLWEAPONEX_Pistols_Internal_ClearTargetData(_Char);
-LLWEAPONEX_ShootPistolAtTarget(_Char, _x, _y, _z);
+LLWEAPONEX_ShootPistolAtPosition(_Char, _x, _y, _z);
 
 // For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
 QRY

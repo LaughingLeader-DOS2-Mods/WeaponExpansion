@@ -18,7 +18,7 @@ local function GetHighestAttribute(character, validAttributes)
 			last = val
 		end
 	end
-	Ext.Print("Scaling damage by ("..attribute..")")
+	--Ext.Print("Scaling damage by ("..attribute..")")
 	return attribute
 end
 
@@ -316,22 +316,22 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
         end
 	end
 	
-	local rot = attacker.Rotation
-	Ext.Print("Rotation:",Ext.JsonStringify(rot))
-	local forwardVector = {
-		-rot[7] * 15.0,
-		-rot[8] * 15.0,
-		-rot[9] * 15.0,
-	}
-	Ext.Print("forwardVector:",Ext.JsonStringify(forwardVector))
-	local pos = attacker.Position
-	Ext.Print("attacker.Position:",Ext.JsonStringify(pos))
-	local targetPos = {
-		pos[1] + forwardVector[1],
-		pos[2] + forwardVector[2],
-		pos[3] + forwardVector[3],
-	}
-	Ext.Print("targetPos:",Ext.JsonStringify(targetPos))
+	-- local rot = attacker.Rotation
+	-- Ext.Print("Rotation:",Ext.JsonStringify(rot))
+	-- local forwardVector = {
+	-- 	-rot[7] * 15.0,
+	-- 	-rot[8] * 15.0,
+	-- 	-rot[9] * 15.0,
+	-- }
+	-- Ext.Print("forwardVector:",Ext.JsonStringify(forwardVector))
+	-- local pos = attacker.Position
+	-- Ext.Print("attacker.Position:",Ext.JsonStringify(pos))
+	-- local targetPos = {
+	-- 	pos[1] + forwardVector[1],
+	-- 	pos[2] + forwardVector[2],
+	-- 	pos[3] + forwardVector[3],
+	-- }
+	-- Ext.Print("targetPos:",Ext.JsonStringify(targetPos))
 
 	local highestAttribute = GetHighestAttribute(attacker)
 

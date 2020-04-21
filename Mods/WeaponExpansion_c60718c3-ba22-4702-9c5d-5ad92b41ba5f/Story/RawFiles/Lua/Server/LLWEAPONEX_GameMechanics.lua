@@ -197,7 +197,7 @@ function LLWEAPONEX_Ext_ScaleUnarmedDamage(attacker, target, damage, handle)
 			NRD_HitAddDamage(handle, damage.DamageType, damage.Amount)
 			--NRD_HitStatusAddDamage(target, handle, damage.DamageType, damage.Amount)
 		end
-		Ext.Print("Unarmed damage: ("..LeaderLib.Common.Dump(damages)..")")
+		--Ext.Print("Unarmed damage: ("..LeaderLib.Common.Dump(damages)..")")
 	end
 end
 
