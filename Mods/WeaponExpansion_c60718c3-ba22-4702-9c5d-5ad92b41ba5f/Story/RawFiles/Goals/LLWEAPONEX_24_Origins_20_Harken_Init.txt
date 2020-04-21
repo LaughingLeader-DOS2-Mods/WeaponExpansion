@@ -3,8 +3,22 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
+
 IF
-StoryEvent(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "LeaderLib_StoryEvents_OnInit")
+RegionEnded(_Region)
+AND
+IsCharacterCreationLevel(_Region, 1)
+THEN
+LLWEAPONEX_Origins_InitHarken(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b);
+
+IF
+GameStarted(_Region, _IsEditorMode)
+AND
+ObjectExists(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, 1)
+AND
+IsGameLevel(_Region, _IsGameLevel)
+AND
+IntegerMax(_IsEditorMode, _IsGameLevel, 1)
 THEN
 LLWEAPONEX_Origins_InitHarken(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b);
 
