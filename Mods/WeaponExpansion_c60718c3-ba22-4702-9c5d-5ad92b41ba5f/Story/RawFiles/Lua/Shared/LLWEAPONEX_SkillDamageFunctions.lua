@@ -226,7 +226,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties(baseSkill)
+	local skill = PrepareSkillProperties(baseSkill.Name)
 	if skill == nil then skill = baseSkill end
 
 	local bolt,boltRuneStat = GetHandCrossbowBolt(attacker)
@@ -319,11 +319,11 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties(baseSkill)
+	local skill = PrepareSkillProperties(baseSkill.Name)
 	if skill == nil then skill = baseSkill end
 
 	local bullet,bulletRuneStat = GetPistolBullets(attacker)
-	if bulletRuneStat == nil then bulletRuneStat = "_Boost_LLWEAPONEX_Bullet_Pistol_Normal" end
+	if bulletRuneStat == nil then bulletRuneStat = "_Boost_LLWEAPONEX_Bullets_Pistol_Normal" end
 	if bulletRuneStat ~= nil then
 		weapon = PrepareWeaponStat(bulletRuneStat, attacker.Level, highestAttribute)
 		Ext.Print("Bullet Stats ("..bulletRuneStat..")")
