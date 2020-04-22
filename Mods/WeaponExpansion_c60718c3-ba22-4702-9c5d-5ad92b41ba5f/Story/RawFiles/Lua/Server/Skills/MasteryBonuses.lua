@@ -4,19 +4,19 @@ local throwingKnifeBonuses = {
 }
 
 local function ThrowingKnife(char, state, funcParams)
-	Ext.Print("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
+	--Ext.Print("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
 	local hasMastery = true--IsTagged(char, "LLWEAPONEX_Dagger_Mastery1") == 1
 	local procSet = ObjectGetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus") == 1
 
 	if state == WeaponExpansion.Skills.SKILL_STATE.USED then
-		if hasMastery and not procSet then
+		if hasMastery and not procSet and Ext.Random(1,100) <= Ext.ExtraData["LLWEAPONEX_ThrowingKnife_MasteryBonusChance"] then
 			-- Position
 			if #funcParams == 3 then
 				local x = funcParams[1]
 				local y = funcParams[2]
 				local z = funcParams[3]
 				SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
-			else
+			elseif funcParams[1] ~= nil then
 				local x,y,z = GetPosition(funcParams[1])
 				SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
 			end
@@ -49,6 +49,8 @@ local function ThrowingKnife(char, state, funcParams)
 	end
 end
 
+WeaponExpansion.Skills.Listeners["Projectile_ThrowingKnife"] = ThrowingKnife
+
 local function ThrowingKnifeDelayedProc(funcParams)
 	local char = funcParams[1]
 	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus") == 1 then
@@ -71,4 +73,3 @@ local function ThrowingKnifeDelayedProc(funcParams)
 end
 
 WeaponExpansion.TimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
-WeaponExpansion.Skills.Listeners["Projectile_ThrowingKnife"] = ThrowingKnife

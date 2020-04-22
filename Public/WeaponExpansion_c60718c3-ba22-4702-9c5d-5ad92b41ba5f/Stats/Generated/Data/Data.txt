@@ -1,0 +1,1 @@
+key "LLWEAPONEX_ThrowingKnife_MasteryBonusChance","25.0"
