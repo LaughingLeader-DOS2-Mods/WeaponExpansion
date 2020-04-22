@@ -22,7 +22,7 @@ LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 50, "Timers_LLWEAPONEX_Po
 IF
 CharacterItemEvent(_Char, _Item, "LLWEAPONEX_PowerGauntlets_TransformTwoHandedWeapon")
 THEN
-NRD_LuaCall("LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item);
+NRD_ModCall("WeaponExpansion", "LLWEAPONEX_Ext_TwoHandedToOnehanded", (STRING)_Char, (STRING)_Item);
 EXITSECTION
 
 ENDEXITSECTION

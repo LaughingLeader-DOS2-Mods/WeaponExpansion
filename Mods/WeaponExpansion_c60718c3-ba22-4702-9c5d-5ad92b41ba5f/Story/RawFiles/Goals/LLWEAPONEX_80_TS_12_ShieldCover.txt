@@ -20,7 +20,7 @@ NRD_StatusGetInt(_Target, _Handle, "DamageSourceType", _DamageSourceType)
 AND
 LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/statuses/GM
 THEN
-NRD_LuaCall("LLWEAPONEX_Ext_RedirectDamage", (STRING)_Blocker, (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.5");
+NRD_ModCall("WeaponExpansion", "LLWEAPONEX_Ext_RedirectDamage", (STRING)_Blocker, (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.5");
 EXITSECTION
 
 ENDEXITSECTION

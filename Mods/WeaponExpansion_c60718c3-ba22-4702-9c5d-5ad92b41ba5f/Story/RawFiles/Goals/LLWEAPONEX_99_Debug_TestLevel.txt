@@ -2151,12 +2151,12 @@ ObjectIsGlobal(_Item, 0)
 AND
 String(_Item, _ItemStr)
 THEN
-NRD_LuaCall("LLWEAPONEX_Ext_Debug_CleanLevelItem", _ItemStr);
+NRD_ModCall("WeaponExpansion", "LLWEAPONEX_Ext_Debug_CleanLevelItem", _ItemStr);
 
 IF
 TimerFinished("Timers_LLWEAPONEX_Debug_InitLevelItems")
 THEN
-NRD_LuaCall("LLWEAPONEX_Ext_Debug_Init");
+NRD_ModCall("WeaponExpansion", "LLWEAPONEX_Ext_Debug_Init");
 
 /*
 Harcoded colors:
