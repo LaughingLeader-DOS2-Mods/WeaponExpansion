@@ -124,7 +124,7 @@ local function LLWEAPONEX_StatOverrides_Init()
 		end
 	end
 
-	if Ext.IsModLoaded("AnimationsPlus_326b8784-edd7-4950-86d8-fcae9f5c457c") then
+	if Ext.IsModLoaded("326b8784-edd7-4950-86d8-fcae9f5c457c") then
 		apply_overrides(anim_overrides)
 	else
 		Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] AnimationsPlus is missing! Skipping animation stat overrides.")

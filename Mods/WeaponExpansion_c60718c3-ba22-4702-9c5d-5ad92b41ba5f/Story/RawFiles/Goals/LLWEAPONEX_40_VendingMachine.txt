@@ -42,7 +42,7 @@ LeaderLib_Treasure_Configure_AddMaxAmount("LLWEAPONEX.VendingMachine.Uniques", "
 
 LLWEAPONEX_VendingMachine_RegisterUniqueWeapons();
 
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_Clothing_UNIQUE_LLWEAPONEX_Blindfolds_Monk_A_78b08f39-3d9d-47b5-b251-f1b8dcebe65b");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_Blindfold_Monk_A_78b08f39-3d9d-47b5-b251-f1b8dcebe65b");
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7");
 
 LeaderLib_Trader_Register_Position("LLWEAPONEX.VendingMachine", "TestLevel_LL_WeaponExpansion", 40.56, 0.0, 29.63);
@@ -80,7 +80,7 @@ LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Ti
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_ad15f666-285d-4634-a832-ea643fa0a9d2");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223");
+LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223");
 
 LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_Spear_2H_PowerPole_3a40634d-b4c3-482a-9f24-c5e93b336d6a");
 

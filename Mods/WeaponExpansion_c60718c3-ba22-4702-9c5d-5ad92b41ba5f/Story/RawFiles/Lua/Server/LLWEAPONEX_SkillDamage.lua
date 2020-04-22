@@ -1,3 +1,11 @@
+--- @param skill StatEntrySkillData
+--- @param attacker StatCharacter
+--- @param isFromItem boolean
+--- @param stealthed boolean
+--- @param attackerPos number[]
+--- @param targetPos number[]
+--- @param level integer
+--- @param noRandomization boolean
 local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 	--Mods.LeaderLib.Debug_TraceCharacter(attacker)
 	local skill_func = WeaponExpansion.Skills.Damage.Skills[skill.Name]
@@ -9,6 +17,18 @@ local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed,
 		else
 			Ext.PrintError("Error getting damage for skill:\n",damageList)
 		end
+	end
+	if string.find(skill.Name, "Trap") then
+		local dump = {
+			isFromItem = isFromItem,
+			stealthed = stealthed,
+			attackerPos = attackerPos,
+			targetPos = targetPos,
+			level = level,
+			noRandomization = noRandomization,
+		}
+		Ext.Print("[GetSkillDamage("..skill.Name..")] skill(",skill,") attacker(",attacker,")",Ext.JsonStringify(dump))
+		Mods.LeaderLib.Debug_TraceCharacter(attacker)
 	end
 end
 

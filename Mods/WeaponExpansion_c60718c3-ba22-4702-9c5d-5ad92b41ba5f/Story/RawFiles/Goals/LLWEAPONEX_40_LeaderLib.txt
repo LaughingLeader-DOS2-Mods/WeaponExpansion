@@ -11,7 +11,6 @@ THEN
 DB_LLWEAPONEX_RegisteredLeaderLibSettings(1);
 LLWEAPONEX_LeaderLib_InitSettings();
 
-
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
@@ -59,16 +58,26 @@ LeaderLib_ToggleScripts_EnableScript("LeaderLib_LeaveActionItemFixEnabled", "Wea
 PROC
 LLWEAPONEX_LeaderLib_InitHelperSettings()
 THEN
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Air_72a7d3aa-02d7-4c9b-a565-d94c8a5664b0");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Corrosive_598b8cb5-7f76-4c50-a609-2a3cd0aa0415");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Earth_8a29169a-e73d-4878-9769-8b4555140fb0");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Fire_1fe1e11c-2e54-4104-b80a-b6fa0b4b8e99");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Poison_c3f61b7d-5183-4664-9773-0b630374b7c9");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Shadow_7dcb9e1f-b807-4321-8408-c66f833ae73c");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Water_40af98d5-3584-40cc-8c9f-e3a49564f365");
-LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolt", "LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_WeaponProxy_8c1da19c-02e9-4a6c-b253-1b3e31b7740f");
-LeaderLib_Helper_Runes_Register_TagRestriction("WeaponExpansion.HandCrossbowBolt", "LLWEAPONEX_HandCrossbow");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Air_72a7d3aa-02d7-4c9b-a565-d94c8a5664b0");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Corrosive_598b8cb5-7f76-4c50-a609-2a3cd0aa0415");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Earth_8a29169a-e73d-4878-9769-8b4555140fb0");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Fire_1fe1e11c-2e54-4104-b80a-b6fa0b4b8e99");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Piercing_f3a0dc07-8fb2-4522-a6d4-05f57705c81a");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Poison_c3f61b7d-5183-4664-9773-0b630374b7c9");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Shadow_7dcb9e1f-b807-4321-8408-c66f833ae73c");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.HandCrossbowBolts", "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Water_40af98d5-3584-40cc-8c9f-e3a49564f365");
+LeaderLib_Helper_Runes_Register_TagRestriction("WeaponExpansion.HandCrossbowBolts", "LLWEAPONEX_HandCrossbow");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air_58638ac8-d0d2-4a60-a6a6-76e0be07d58a");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Corrosive_056a48f4-2b5f-4882-aefa-05162ad4c427");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Earth_009eecab-d9bc-454d-afca-5c512f10b182");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Fire_2e6c0fd4-3d9e-4492-aa21-6047eca15b1a");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Normal_6c14edba-cc11-4e9f-be04-685f09c0aadd");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Piercing_fc05e69b-bb8b-4d0d-a94c-e1ecafa1c9a9");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Poison_0377162e-51fa-499a-ab58-4cad5104d888");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow_fc05e69b-bb8b-4d0d-a94c-e1ecafa1c9a9");
+LeaderLib_Helper_Runes_Register_RuneTemplate("WeaponExpansion.PistolBullets", "LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Water_071b6f55-64a5-4efe-af02-1910d400e6b5");
+LeaderLib_Helper_Runes_Register_TagRestriction("WeaponExpansion.PistolBullets", "LLWEAPONEX_Pistol");
 
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_RuneBlockingEnabled", "WeaponExpansion");
 

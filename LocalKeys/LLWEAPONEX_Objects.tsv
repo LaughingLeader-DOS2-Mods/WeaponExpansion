@@ -18,21 +18,6 @@ LOOT_LLWEAPONEX_Token_Strength	<font color='#FF9600'>Token of Strength</font>
 LOOT_LLWEAPONEX_Token_Strength_Free	<font color='#FF9600'>Token of Strength</font>
 LOOT_LLWEAPONEX_Token_Wits	<font color='#A150FF'>Token of Wits</font>
 LOOT_LLWEAPONEX_Token_Wits_Free	<font color='#A150FF'>Token of Wits</font>
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Air	Electrified Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Corrosive	Corrosive Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Earth	Oiled Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Fire	Flaming Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Normal	Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Poison	Poison-tipped Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Shadow	Cursed Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_Water	Chilling Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Crossbow_Bolt_WeaponProxy	Heavy Crossbow Bolts
-LOOT_Rune_LLWEAPONEX_Runeblade_Air	Air Rune (Runeblade)
-LOOT_Rune_LLWEAPONEX_Runeblade_Chaos	Chaos Rune (Runeblade)
-LOOT_Rune_LLWEAPONEX_Runeblade_Earth	Earth Rune (Runeblade)
-LOOT_Rune_LLWEAPONEX_Runeblade_Fire	Fire Rune (Runeblade)
-LOOT_Rune_LLWEAPONEX_Runeblade_Poison	Poison Rune (Runeblade)
-LOOT_Rune_LLWEAPONEX_Runeblade_Water	Water Rune (Runeblade)
 TOOL_Hammer_LLWEAPONEX_Runesmith_A	<font color='#40E0D0'>Runesmith's Hammer</font>
 WPN_LLWEAPONEX_Greatbow_QuiverArrow_Bleeding_A	<font color='#c80030'>Sharpened Great Arrow</font>
 WPN_LLWEAPONEX_Greatbow_QuiverArrow_BlessedWater_A	<font color='#97fbff'>Blessed Water Great Arrow</font>
@@ -128,12 +113,3 @@ GRN_LLWEAPONEX_Flask_Weakness_Earth_A	<font color='#AA895B'>Flask of Earth Weakn
 GRN_LLWEAPONEX_Flask_Weakness_Fire_A	<font color='#C76537'>Flask of Fire Weakness</font>
 GRN_LLWEAPONEX_Flask_Weakness_Poison_A	<font color='#00AA00'>Flask of Poison Weakness</font>
 GRN_LLWEAPONEX_Flask_Weakness_Water_A	<font color='#188EDE'>Flask of Water Weakness</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Normal	Lead Bullets
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Piercing	<font color='#d10000'>Armor-Piercing Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air	<font color='#7478DC'>Shock Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Earth	<font color='#FF23cb'>Sapper Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Fire	<font color='#ff961a'>Explosive Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Poison	<font color='#00AA00'>Poison-tipped Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Corrosive	<font color='#88A25B'>Acid Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Water	<font color='#79c1ff'>Cryogenic Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow	<font color='#797980'>Void-touched Bullets</font>

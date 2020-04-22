@@ -3,7 +3,6 @@ Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWE
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_GameMechanics.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_PistolMechanics.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_SkillDamage.lua")
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_SkillListeners.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/Skills/MasteryBonuses.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_Debug.lua")
 
@@ -49,12 +48,13 @@ local function DebugInit()
     --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
    -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
-    NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_A_Shoot")
+    NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
+    Osi.LLWEAPONEX_WeaponMastery_Debug_CheatMastery(host, 0)
 end
 
 local function LLWEAPONEX_GameSessionLoad()
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
-    LeaderLib_DebugInitCalls[#LeaderLib_DebugInitCalls+1] = DebugInit
+    Mods.LeaderLib.AddDebugInitCall(DebugInit)
 end
 Ext.RegisterListener("SessionLoading", LLWEAPONEX_GameSessionLoad)
 

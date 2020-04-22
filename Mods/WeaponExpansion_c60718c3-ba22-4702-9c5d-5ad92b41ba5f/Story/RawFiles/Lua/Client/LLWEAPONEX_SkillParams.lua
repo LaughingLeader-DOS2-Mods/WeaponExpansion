@@ -1,12 +1,12 @@
 local boltRuneBoosts = {
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Normal"] = {Transform="", Apply=""},
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Air"] = {Transform="Electrify", Apply=""},
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Earth"] = {Apply="SLOWED", Transform="Oilify"},
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Fire"] = {Apply="BURNING", Transform="Ignite"},
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Poison"] = {Apply="POISONED", Transform="Contaminate"},
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Water"] = {Apply="CHILLED", Transform="Freeze"},
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Shadow"] = {Apply="CURSED", Transform="Curse"},
-	["_Boost_LLWEAPONEX_Crossbow_Bolt_Corrosive"] = {Apply="ACID",Transform="Melt"},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal"] = {Transform="", Apply=""},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Air"] = {Transform="Electrify", Apply=""},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Earth"] = {Apply="SLOWED", Transform="Oilify"},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Fire"] = {Apply="BURNING", Transform="Ignite"},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Poison"] = {Apply="POISONED", Transform="Contaminate"},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Water"] = {Apply="CHILLED", Transform="Freeze"},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Shadow"] = {Apply="CURSED", Transform="Curse"},
+	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Corrosive"] = {Apply="ACID",Transform="Melt"},
 }
 
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
@@ -21,7 +21,7 @@ local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 	return ""
 end
 
-WeaponExpansion.Skills.Params["LLWEAPONEX_HandCrossbow_BoltEffects"] = GetHandCrossbowBoltEffects
+WeaponExpansion.Skills.Params["LLWEAPONEX_HandHandCrossbow_BoltsEffects"] = GetHandCrossbowBoltEffects
 
 local PistolRuneBoosts = {
 	["_Boost_LLWEAPONEX_Pistol_Bullets_Normal"] = {Transform="", Apply=""},

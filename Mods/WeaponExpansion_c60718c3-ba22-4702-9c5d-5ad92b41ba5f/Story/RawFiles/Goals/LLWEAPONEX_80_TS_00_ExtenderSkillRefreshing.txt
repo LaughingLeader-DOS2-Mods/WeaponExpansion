@@ -45,7 +45,6 @@ DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_ThrowObject", "LLWEAPONE
 DB_LLWEAPONEX_Skills_TagRequirements("Zone_LLWEAPONEX_ArmCannon_Disperse", "LLWEAPONEX_ArmCannon_FullyCharged", 1);
 DB_LLWEAPONEX_Skills_TagRequirements("Zone_LLWEAPONEX_Blunderbuss_Cannonball", "LLWEAPONEX_Firearm_Equipped", 0);
 DB_LLWEAPONEX_Skills_TagRequirements("Zone_LLWEAPONEX_Blunderbuss_Cannonball", "LLWEAPONEX_Firearm_Mastery1", 0);
-DB_LLWEAPONEX_Skills_TagRequirements("Target_LLWEAPONEX_Pistol_A_Shoot", "LLWEAPONEX_Pistol_HasAmmo", 0);
 
 QRY
 LLWEAPONEX_Skills_HasTagRequirementSkill((CHARACTERGUID)_Char, (STRING)_Tag)

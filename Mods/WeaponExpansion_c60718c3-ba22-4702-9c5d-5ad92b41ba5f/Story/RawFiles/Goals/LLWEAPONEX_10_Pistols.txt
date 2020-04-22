@@ -44,24 +44,24 @@ THEN
 DB_NOOP(1);
 
 IF
-CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_Shoot", _, _)
 THEN
-LeaderLib_Skills_CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+LeaderLib_Skills_CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_Shoot");
 
 IF
-CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_Shoot_Enemy", _, _)
 THEN
-LeaderLib_Skills_CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+LeaderLib_Skills_CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Pistol_Shoot");
 
 PROC
-LeaderLib_Skills_CharacterUsedSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
+LeaderLib_Skills_CharacterUsedSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_Shoot")
 AND
 LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 350, "Timers_LLWEAPONEX_Pistols_PlayPistolFX", "LLWEAPONEX_Pistols_PlayPistolFX");
 
 PROC
-LeaderLib_Skills_CharacterUsedSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
+LeaderLib_Skills_CharacterUsedSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_Shoot")
 AND
 NOT LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
 THEN
@@ -79,17 +79,17 @@ THEN
 ApplyStatus(_Char, _Status, 12.0, 1, _Char);
 
 IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+SkillCast(_Char, "Target_LLWEAPONEX_Pistol_Shoot", _, _)
 THEN
-LeaderLib_Skills_CharacterCastSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+LeaderLib_Skills_CharacterCastSkill(_Char, "Target_LLWEAPONEX_Pistol_Shoot");
 
 IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+SkillCast(_Char, "Target_LLWEAPONEX_Pistol_Shoot_Enemy", _, _)
 THEN
-LeaderLib_Skills_CharacterCastSkill(_Char, "Target_LLWEAPONEX_Pistol_A_Shoot");
+LeaderLib_Skills_CharacterCastSkill(_Char, "Target_LLWEAPONEX_Pistol_Shoot");
 
 PROC
-LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
+LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_Shoot")
 AND
 //NOT LLWEAPONEX_Pistols_QRY_NeedsToSheathe(_Char)
 //AND
@@ -133,7 +133,7 @@ THEN
 LeaderLib_Timers_StartObjectTimer(_Char, _HideHandPistolDelay, "Timers_LLWEAPONEX_Pistols_RemovePistolFX", "LLWEAPONEX_Pistols_RemovePistolFX");
 
 PROC
-LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
+LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_Shoot")
 AND
 IsTagged(_Char, "FEMALE", _IsFemale)
 AND
@@ -170,27 +170,27 @@ THEN
 NOT DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target);
 
 IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_Shoot", _, _)
 THEN
 DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
 
 IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot", _, _)
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_Shoot", _, _)
 THEN
 DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target);
 
 IF
-CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Pistol_Shoot_Enemy", _, _)
 THEN
 DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _x, _y, _z);
 
 IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_A_Shoot_Enemy", _, _)
+CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Pistol_Shoot_Enemy", _, _)
 THEN
 DB_LLWEAPONEX_Pistols_Temp_ShootTarget(_Char, _Target);
 
 PROC
-LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_A_Shoot")
+LeaderLib_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "Target_LLWEAPONEX_Pistol_Shoot")
 THEN
 LLWEAPONEX_Pistols_Shoot(_Char);
 
