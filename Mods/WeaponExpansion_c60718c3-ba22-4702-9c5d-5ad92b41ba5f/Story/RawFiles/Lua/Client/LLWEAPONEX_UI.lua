@@ -11,8 +11,8 @@ local function LLWEAPONEX_Client_ModuleSetup()
 	end
 end
 
-Ext.RegisterListener("ModuleLoading", LLWEAPONEX_Client_ModuleSetup)
-Ext.RegisterListener("ModuleResume", LLWEAPONEX_Client_ModuleSetup)
+--Ext.RegisterListener("ModuleLoading", LLWEAPONEX_Client_ModuleSetup)
+--Ext.RegisterListener("ModuleResume", LLWEAPONEX_Client_ModuleSetup)
 
 local function OnMouseIconEvent(ui, call, ...)
 	local params = LeaderLib.Common.FlattenTable({...})
@@ -48,7 +48,7 @@ local function LLWEAPONEX_Client_SessionLoaded()
 	end
 end
 
-Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
+--Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
 
 local function LLWEAPONEX_OnClientMessage(call,param)
 	if param == "HookUI" then
@@ -56,4 +56,4 @@ local function LLWEAPONEX_OnClientMessage(call,param)
 	end
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_OnClientMessage", LLWEAPONEX_OnClientMessage)
+--Ext.RegisterNetListener("LLWEAPONEX_OnClientMessage", LLWEAPONEX_OnClientMessage)

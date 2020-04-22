@@ -79,8 +79,7 @@ local function ShootPistolAtPosition(source,x,y,z)
 		--y = pos[2] + forwardVector[2]
 		z = pos[3] + forwardVector[3]
 	end
-	Ext.Print("heightDiff:",heightDiff)
-
+	--Ext.Print("heightDiff:",heightDiff)
 	--Ext.Print("targetPos:",Ext.JsonStringify({x,y,z}))
 
 	NRD_ProjectileSetVector3("HitObjectPosition", x,y,z)

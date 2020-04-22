@@ -63,7 +63,7 @@ local function ComputeBaseUnarmedWeaponDamage(weapon, unarmedMastery)
                 damage.Max = damage.Max + maxDamage
 			end
 			
-			Ext.Print("Weapon Damage ("..tostring(stat)..") DamageFromBase("..tostring(stat.DamageFromBase)..") MinDamage("..tostring(stat.MinDamage)..") MaxDamage("..tostring(stat.MaxDamage)..") DamageBoost("..tostring(damageBoost)..") stat.DamageBoost("..tostring(stat.DamageBoost)..")")
+			--Ext.Print("Weapon Damage ("..tostring(stat)..") DamageFromBase("..tostring(stat.DamageFromBase)..") MinDamage("..tostring(stat.MinDamage)..") MaxDamage("..tostring(stat.MaxDamage)..") DamageBoost("..tostring(damageBoost)..") stat.DamageBoost("..tostring(stat.DamageBoost)..")")
         end
     end
 
@@ -80,7 +80,7 @@ local function GetPrimaryUnarmedAttribute(character)
 			last = val
 		end
 	end
-	Ext.Print("Scaling unarmed damage by ("..attribute..")")
+	--Ext.Print("Scaling unarmed damage by ("..attribute..")")
 	return attribute
 end
 
@@ -186,7 +186,7 @@ function LLWEAPONEX_Ext_ScaleUnarmedDamage(attacker, target, damage, handle)
 			itemLevel = weapon.Stats.Level
 		end
 		
-		Ext.Print("Unarmed hit: damage("..tostring(damage)..") unarmedMastery("..tostring(unarmedMastery)..") attacker("..tostring(attacker)..") target("..tostring(target)..") attackerLevel("..tostring(level)..") itemLevel("..tostring(itemLevel)..")")
+		--Ext.Print("Unarmed hit: damage("..tostring(damage)..") unarmedMastery("..tostring(unarmedMastery)..") attacker("..tostring(attacker)..") target("..tostring(target)..") attackerLevel("..tostring(level)..") itemLevel("..tostring(itemLevel)..")")
 
 		local damageList = GetScaledUnarmedWeaponDamage(character.Stats, weapon.Stats, false, unarmedMastery)
 		local damages = damageList:ToTable()

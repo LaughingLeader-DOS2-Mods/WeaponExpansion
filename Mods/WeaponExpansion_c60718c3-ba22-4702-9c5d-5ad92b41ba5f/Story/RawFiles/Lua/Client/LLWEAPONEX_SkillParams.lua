@@ -11,7 +11,7 @@ local boltRuneBoosts = {
 
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 	local bolt,boltRuneStat = WeaponExpansion.Skills.GetHandCrossbowBolt(character)
-	Ext.Print("Hand Crossbow Bolt/RuneStat: ", bolt,boltRuneStat)
+	--Ext.Print("Hand Crossbow Bolt/RuneStat: ", bolt,boltRuneStat)
 	if boltRuneStat ~= nil then
 		local boostEffects = boltRuneBoosts[boltRuneStat]
 		if boostEffects ~= nil and (boostEffects.Apply ~= nil or boostEffects.Transform ~= nil) then
@@ -80,6 +80,7 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 			return resultString
 		else
 			Ext.PrintError("Error getting param ("..param..") for skill:\n",mainDamageRange)
+			return ""
 		end
 	end
 	param_func = WeaponExpansion.Skills.Params[param]
@@ -91,6 +92,7 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 			end
 		else
 			Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
+			return ""
 		end
 	end
 end

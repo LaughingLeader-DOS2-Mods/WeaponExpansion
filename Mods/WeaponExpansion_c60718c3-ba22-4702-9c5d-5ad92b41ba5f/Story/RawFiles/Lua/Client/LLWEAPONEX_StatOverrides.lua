@@ -118,7 +118,7 @@ local function LLWEAPONEX_StatOverrides_Init()
 			Ext.StatSetAttribute(stat, statParamsAttribute, nextParams)
 			LeaderLib.Print("[LLWEAPONEX_StatOverrides.lua] Set params for ("..stat..") from ("..statParams..") to ("..nextParams..").")
 			if data.Description ~= nil then
-				Ext.StatSetAttribute(stat, "Description", data.Description)
+				Ext.StatSetAttribute(stat, "Description", data.Description.Value)
 			end
 		end
 	end

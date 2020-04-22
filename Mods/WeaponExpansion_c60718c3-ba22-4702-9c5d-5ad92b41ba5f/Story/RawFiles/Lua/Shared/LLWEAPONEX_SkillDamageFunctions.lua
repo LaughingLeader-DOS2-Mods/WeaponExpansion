@@ -54,7 +54,7 @@ local function PrepareSkillProperties(skillName)
 		for i,v in pairs(skillAttributes) do
 			skill[v] = Ext.StatGetAttribute(skillName, v)
 		end
-		Ext.Print(Ext.JsonStringify(skill))
+		--Ext.Print(Ext.JsonStringify(skill))
 		return skill
 	end
 	return nil
@@ -199,7 +199,7 @@ local function GetHandCrossbowBolt(character)
 		for i=3,5,1 do
 			local boost = item.DynamicStats[i]
 			if boost ~= nil and boost.BoostName ~= "" and string.find(boost.BoostName, "Crossbow_Bolt") > -1 then
-				Ext.Print("Hand Crossbow Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
+				--Ext.Print("Hand Crossbow Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
 				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
 				if boostStat ~= nil then
 					return boost,boostStat
@@ -231,11 +231,11 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 	if boltRuneStat == nil then boltRuneStat = "_Boost_LLWEAPONEX_Crossbow_Bolt_Normal" end
 	if boltRuneStat ~= nil then
 		weapon = PrepareWeaponStat(boltRuneStat, attacker.Level, highestAttribute, "Crossbow")
-		Ext.Print("Applied Hand Crossbow Bolt Stats ("..boltRuneStat..")")
-		Ext.Print(LeaderLib.Common.Dump(weapon))
+		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..boltRuneStat..")")
+		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
-		skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
-		skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
+		--skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
+		--skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
 	end
 
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
@@ -251,33 +251,11 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 		end
 		damageList:Merge(mainDmgs)
 		damageList:AggregateSameTypeDamages()
-		Game.Math.ApplyDamageBoosts(attacker, damageList)
+		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
-		--local mainDamageRange = Game.Math.GetSkillDamageRange(attacker, skill)
-		local mainDamageRange = CalculateWeaponDamageRange(attacker, weapon, highestAttribute)
-		Ext.Print(Ext.JsonStringify(mainDamageRange))
-        for damageType, range in pairs(mainDamageRange) do
-            local min = Ext.Round(range[1] * damageMultiplier)
-            local max = Ext.Round(range[2] * damageMultiplier)
-            range[1] = min + math.ceil(min * Game.Math.GetDamageBoostByType(attacker, damageType))
-			range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(attacker, damageType))
-			local boost = Game.Math.GetDamageBoostByType(attacker, damageType)
-			Ext.Print("damage boost:",boost)
-			if boost > 0.0 then
-				range[1] = range[1] + Ext.Round(range[1] * boost)
-				range[2] = range[2] + Ext.Round(range[2] * boost)
-			end
-        end
-
-        local damageType = skill.DamageType
-        local min, max = 0, 0
-		for _, range in pairs(mainDamageRange) do
-			min = min + range[1]
-			max = max + range[2]
-		end
-		mainDamageRange = {}
-		mainDamageRange[damageType] = {math.floor(min), math.ceil(max)}
+		local mainDamageRange = Game.Math.GetSkillDamageRange(attacker, skill)
+		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end
@@ -300,7 +278,7 @@ local function GetPistolBullets(character)
 		for i=3,5,1 do
 			local boost = item.DynamicStats[i]
 			if boost ~= nil and boost.BoostName ~= "" and string.find(boost.BoostName, "Pistol_Bullets") > -1 then
-				Ext.Print("Pistol Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
+				--Ext.Print("Pistol Rune["..tostring(i).."]: ".. tostring(boost.BoostName))
 				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
 				if boostStat ~= nil then
 					return boost,boostStat
@@ -312,8 +290,6 @@ local function GetPistolBullets(character)
 end
 
 local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	Ext.Print("baseSkill:",baseSkill)
-	Ext.Print("isTooltip:",isTooltip)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
 	end
@@ -345,7 +321,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
     local damageMultiplier = skill["Damage Multiplier"] * 0.01
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
-	
+
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
 		local mainDmgs = CalculateWeaponDamage(attacker, weapon, noRandomization, highestAttribute)
