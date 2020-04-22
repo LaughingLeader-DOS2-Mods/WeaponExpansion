@@ -94,7 +94,8 @@ else
 	Ext.StatSetAttribute(statname, property, next_value)
 end ]]
 
-local TranslatedString = LeaderLib.Classes["TranslatedString"]
+local masteryParamOverrides = Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Client/LLWEAPONEX_MasteryBonusParams.lua")
+local customSkillText = Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Client/LLWEAPONEX_SkillCustomText.lua")
 
 local function LLWEAPONEX_StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
@@ -102,7 +103,7 @@ local function LLWEAPONEX_StatOverrides_Init()
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 
-	for statType,entries in pairs(WeaponExpansion.MasteryParamOverrides) do
+	for statType,entries in pairs(masteryParamOverrides) do
 		local statParamsAttribute = "StatsDescriptionParams"
 		if statType == "StatusData" then
 			statParamsAttribute = "DescriptionParams"
@@ -129,7 +130,7 @@ local function LLWEAPONEX_StatOverrides_Init()
 		Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] AnimationsPlus is missing! Skipping animation stat overrides.")
 	end
 
-	Mods.WeaponExpansion.InitSkillCustomText()
+	customSkillText.InitSkillCustomText()
 end
 
 Ext.RegisterListener("ModuleLoading", LLWEAPONEX_StatOverrides_Init)

@@ -1,7 +1,10 @@
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_ServerMain.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX__Main.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_TimerListener.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_GameMechanics.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_PistolMechanics.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_SkillDamage.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_SkillListeners.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/Skills/MasteryBonuses.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_Debug.lua")
 
 --Export local functions to global for now

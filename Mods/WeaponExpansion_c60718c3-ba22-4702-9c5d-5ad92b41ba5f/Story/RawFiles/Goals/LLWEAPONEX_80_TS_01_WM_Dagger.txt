@@ -4,6 +4,7 @@ INITSECTION
 
 KBSECTION
 //REGION THROWING_KNIFE_BONUS
+/*
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_ThrowingKnife", _, _)
 THEN
@@ -44,6 +45,7 @@ GetPosition(_Target, _x, _y, _z)
 THEN
 SetVarFloat3(_Char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", _x, _y, _z);
 LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", "LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus");
+*/
 //END_REGION
 EXITSECTION
 
