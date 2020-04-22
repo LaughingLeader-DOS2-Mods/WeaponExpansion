@@ -94,7 +94,7 @@ else
 	Ext.StatSetAttribute(statname, property, next_value)
 end ]]
 
-local skillCustomText = Ext.Require("Client/LLWEAPONEX_SkillCustomText.lua")
+local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
 local function LLWEAPONEX_StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
@@ -102,17 +102,34 @@ local function LLWEAPONEX_StatOverrides_Init()
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 
+	for statType,entries in pairs(WeaponExpansion.MasteryParamOverrides) do
+		local statParamsAttribute = "StatsDescriptionParams"
+		if statType == "StatusData" then
+			statParamsAttribute = "DescriptionParams"
+		end
+		for stat,data in pairs(entries) do
+			local statParams = Ext.StatGetAttribute(stat, statParamsAttribute)
+			if statParams == nil then
+				statParams = ""
+			else
+				statParams = statParams .. ";"
+			end
+			local nextParams = statParams .. "LLWEAPONEX_MasteryBonuses"
+			Ext.StatSetAttribute(stat, statParamsAttribute, nextParams)
+			LeaderLib.Print("[LLWEAPONEX_StatOverrides.lua] Set params for ("..stat..") from ("..statParams..") to ("..nextParams..").")
+			if data.Description ~= nil then
+				Ext.StatSetAttribute(stat, "Description", data.Description)
+			end
+		end
+	end
+
 	if Ext.IsModLoaded("AnimationsPlus_326b8784-edd7-4950-86d8-fcae9f5c457c") then
 		apply_overrides(anim_overrides)
 	else
 		Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] AnimationsPlus is missing! Skipping animation stat overrides.")
 	end
 
-	Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "ExtraProperties", "This is a test description for Weapon")
-	--Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "RuneEffectUpperbody", "This is a test description")
-	--Ext.StatAddCustomDescription("LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air", "RuneEffectAmulet", "This is a test description 2")
-
-	skillCustomText.AddCustomText()
+	Mods.WeaponExpansion.InitSkillCustomText()
 end
 
 Ext.RegisterListener("ModuleLoading", LLWEAPONEX_StatOverrides_Init)
