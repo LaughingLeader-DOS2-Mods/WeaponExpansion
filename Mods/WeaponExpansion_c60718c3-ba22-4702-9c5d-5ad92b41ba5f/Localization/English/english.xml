@@ -2028,7 +2028,7 @@
 	<content contentuid="hea7b370fg93b8g4c74g9ebbgfc757898ff2c">Pacifist&apos;s Wrath (1H)</content>
 	<content contentuid="hea81e505gc83fg4ac1gbed5g7b03511ff083">&lt;font color=&apos;#4197E2&apos;&gt;Attuned Shot (Water)&lt;/font&gt;</content>
 	<content contentuid="hea8585b2gae30g46efga47egf7afed684cc8">Param Test&lt;br&gt;Status_Arrowhead_Fire:Damage [1]&lt;br&gt;Projectile_Fireball:Damage [2]</content>
-	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#8F7CFF&apos;&gt;Dagger Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a small chance to be coated in poison or explosive oil, dealing additional damage on hit.&lt;/font&gt;</content>
+	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#8F7CFF&apos; size=&apos;16&apos;&gt;Dagger Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[1]%&lt;/font&gt; to be coated in poison or explosive oil, dealing &lt;font color=&apos;#00FFAA&apos;&gt;[2] bonus damage&lt;/font&gt; on hit.&lt;/font&gt;</content>
 	<content contentuid="hea8fbd35g2e22g4409gbd12g02488d4a64d7">Power Pole (Intelligence Scaling)</content>
 	<content contentuid="headd90e1g4e62g45b3gb69ag0f25a7bd491e">Oni Edge</content>
 	<content contentuid="heae6a50fg68ceg4889g83b5gac0ef4eeaf67">Conduction Rune</content>

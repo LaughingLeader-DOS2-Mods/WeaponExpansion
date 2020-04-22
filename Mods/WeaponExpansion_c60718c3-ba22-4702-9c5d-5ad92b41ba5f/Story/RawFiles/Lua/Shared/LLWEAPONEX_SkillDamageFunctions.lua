@@ -347,6 +347,7 @@ WeaponExpansion.Skills = {
 	GetPistol = GetPistol,
 	GetPistolBullets = GetPistolBullets,
 	PrepareSkillProperties = PrepareSkillProperties,
+	PrepareWeaponStat = PrepareWeaponStat,
 	Params = {},
 	Damage = {
 		Params = {
