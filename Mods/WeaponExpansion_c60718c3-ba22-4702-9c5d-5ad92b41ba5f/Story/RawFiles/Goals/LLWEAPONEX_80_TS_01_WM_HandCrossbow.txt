@@ -16,53 +16,6 @@ ObjectSetFlag(_HandCrossbow, "LLWEAPONEX_HandCrossbow_DisableAutoInsert", 0);
 LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HandCrossbow_HasAmmo");
 LeaderLib_Tags_ClearPreservedTag(_Character, "LLWEAPONEX_HandCrossbow_CanReload");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_14_HandCrossbow:OnEquipped] Crossbow does not have ammo. ");
-
-//REGION TAG_FOR_RELOAD
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Air", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Earth", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Fire", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Poison", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Water", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Shadow", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Corrosive", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-
-IF
-SkillCast(_Character, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_WeaponProxy", _, _)
-THEN
-LLWEAPONEX_HandCrossbow_TagForReload(_Character);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
