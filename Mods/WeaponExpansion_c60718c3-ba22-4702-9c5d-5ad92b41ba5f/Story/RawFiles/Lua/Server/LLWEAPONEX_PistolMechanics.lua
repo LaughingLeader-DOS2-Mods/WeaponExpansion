@@ -37,7 +37,7 @@ local function ShootPistolAtObject(source,target)
 	NRD_ProjectileSetGuidString("SourcePosition", source)
 	NRD_ProjectileSetGuidString("Source", source)
 	-- For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
-	if (ObjectIsCharacter(target) and CharacterIsEnemy(source,target) == 0) or LeaderLib_Ext_HasStatusType(target, "KNOCKED_DOWN") then
+	if (ObjectIsCharacter(target) and CharacterIsEnemy(source,target) == 0) or Mods.LeaderLib.HasStatusType(target, "KNOCKED_DOWN") then
 		NRD_ProjectileSetGuidString("HitObject", target)
 		NRD_ProjectileSetGuidString("HitObjectPosition", target)
 	end

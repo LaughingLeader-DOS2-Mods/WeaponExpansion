@@ -24,13 +24,13 @@ local function ThrowingKnife(char, state, funcParams)
 		end
 	elseif state == WeaponExpansion.Skills.SKILL_STATE.CAST then
 		if procSet then
-			LeaderLib_Ext_StartTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", 250, char)
+			Mods.LeaderLib.StartTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", 250, char)
 		end
 	elseif state == WeaponExpansion.Skills.SKILL_STATE.HIT then
 		if procSet then
 			local target = funcParams[1]
 			if target ~= nil then
-				LeaderLib_Ext_CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
+				Mods.LeaderLib.CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
 				local explodeSkill = throwingKnifeBonuses[Ext.Random(1,2)]
 				local level = CharacterGetLevel(char)
 				NRD_ProjectilePrepareLaunch()
@@ -49,7 +49,7 @@ local function ThrowingKnife(char, state, funcParams)
 	end
 end
 
-WeaponExpansion.Skills.Listeners["Projectile_ThrowingKnife"] = ThrowingKnife
+LeaderLib.Listeners.Skills["Projectile_ThrowingKnife"] = ThrowingKnife
 
 local function ThrowingKnifeDelayedProc(funcParams)
 	local char = funcParams[1]

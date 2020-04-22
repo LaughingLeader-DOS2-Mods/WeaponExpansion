@@ -360,6 +360,5 @@ WeaponExpansion.Skills = {
 			Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand = GetPistolDamage,
 			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowDamage,
 		}
-	},
-	Listeners = {}
+	}
 }

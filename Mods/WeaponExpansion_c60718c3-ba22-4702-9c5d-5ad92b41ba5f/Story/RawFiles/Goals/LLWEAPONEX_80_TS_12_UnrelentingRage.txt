@@ -21,7 +21,7 @@ NRD_HitGetInt(_Handle, "DamageSourceType", _DamageSourceType)
 AND
 LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/statuses/GM
 THEN
-NRD_LuaCall("LeaderLib_Ext_IncreaseDamage", (STRING)_Target, (STRING)_Char, (STRING)_Handle, "1.5");
+NRD_ModCall("LeaderLib", "IncreaseDamage", (STRING)_Target, (STRING)_Char, (STRING)_Handle, "1.5");
 //END_REGION
 
 //REGION DAMAGE_BONUS

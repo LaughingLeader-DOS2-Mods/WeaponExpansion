@@ -16,7 +16,7 @@ NRD_StatusGetInt(_Target, _Handle, "Blocked", 0)
 AND
 NRD_StatusGetInt(_Target, _Handle, "CriticalHit", 1)
 THEN
-NRD_LuaCall("LeaderLib_Ext_ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.50");
+NRD_ModCall("LeaderLib", "ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.50");
 
 /*
 IF

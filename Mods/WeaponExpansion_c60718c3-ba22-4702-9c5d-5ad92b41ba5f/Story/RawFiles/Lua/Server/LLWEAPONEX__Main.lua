@@ -136,7 +136,7 @@ function CanRedirectHit(target, handle, hit_type)
 end
 
 function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
-    local redirect_damage_func = _G["LeaderLib_Ext_RedirectDamage"]
+    local redirect_damage_func = Mods.LeaderLib.RedirectDamage
     if redirect_damage_func ~= nil then
         local run_success,redirected = pcall(redirect_damage_func, blocker, target, attacker, handlestr, reduction_str)
         if run_success and redirected then

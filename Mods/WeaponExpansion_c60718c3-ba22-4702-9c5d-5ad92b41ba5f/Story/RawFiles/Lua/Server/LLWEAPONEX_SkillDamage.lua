@@ -1,5 +1,5 @@
 local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
-	--LeaderLib_Ext_Debug_TraceCharacter(attacker)
+	--Mods.LeaderLib.Debug_TraceCharacter(attacker)
 	local skill_func = WeaponExpansion.Skills.Damage.Skills[skill.Name]
 	if skill_func ~= nil then
 		local status,damageList,deathType = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
