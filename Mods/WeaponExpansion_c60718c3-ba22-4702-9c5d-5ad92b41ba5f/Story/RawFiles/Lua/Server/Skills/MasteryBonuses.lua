@@ -49,7 +49,7 @@ local function ThrowingKnife(char, state, funcParams)
 	end
 end
 
-LeaderLib.Listeners.Skills["Projectile_ThrowingKnife"] = ThrowingKnife
+LeaderLib.RegisterSkillListener("Projectile_ThrowingKnife", ThrowingKnife)
 
 local function ThrowingKnifeDelayedProc(funcParams)
 	local char = funcParams[1]
