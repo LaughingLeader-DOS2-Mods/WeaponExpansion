@@ -10,15 +10,15 @@ LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Poison	<font color='#00AA00'>Poison-tipp
 LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Shadow	<font color='#FF23CB'>Cursed Mini-Bolts</font>	hf0348094g4ff3g447fg829cg980f497e24c2
 LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver	<font color='#C0C0C0'>Silver Mini-Bolts</font>	h979060b5g1deeg4066g982dgdc9a8ac14e9b
 LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Normal	Lead Bullets	h9c79b908gd579g47b8ga9d8gdc553f63c215
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Piercing	<font color='#D10000'>Armor-Piercing Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air	<font color='#7478DC'>Shock Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Earth	<font color='#999999'>Sapper Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Fire	<font color='#FF961A'>Explosive Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Poison	<font color='#00AA00'>Poison-tipped Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Corrosive	<font color='#88A25B'>Acid Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Ice	<font color='#79C1FF'>Cryogenic Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow	<font color='#797980'>Void-touched Bullets</font>
-LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Silver	<font color='#C0C0C0'>Silver Bullets</font>
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Piercing	<font color='#D10000'>Armor-Piercing Bullets</font>	hae33fe97g3b51g43a0g9964gb54206463e67
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Air	<font color='#7478DC'>Shock Bullets</font>	h997b0affg5551g4018gb064g2615c15dd50a
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Earth	<font color='#999999'>Sapper Bullets</font>	h5a467f3cg1c23g482eg97a6gfac2a4729c03
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Fire	<font color='#FF961A'>Explosive Bullets</font>	h36fb9f8agcc45g4627g863bg1994aaace86e
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Poison	<font color='#00AA00'>Poison-tipped Bullets</font>	hf52a728bg6c38g4327gb400g78fde0da21ae
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Corrosive	<font color='#88A25B'>Acid Bullets</font>	h01a090cdg2ba7g48fcga098g7897b19d6d4b
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Ice	<font color='#79C1FF'>Cryogenic Bullets</font>	hfced8b62g3d44g41e8g832fgb585046c2b55
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow	<font color='#797980'>Void-touched Bullets</font>	h07354a00ga0f1g4bf5gbaddg2e466a5be964
+LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Silver	<font color='#C0C0C0'>Silver Bullets</font>	h0a0ec3d0g79bcg4deegbcb2g46129e9603cd
 LOOT_Rune_LLWEAPONEX_Runeblade_Air	<font color='#7478DC'>Air Rune</font> <font color='#40E0D0'>(Runeblade)</font>	hc99f135fg8284g44a6g8073g29367864839d
 LOOT_Rune_LLWEAPONEX_Runeblade_Chaos	<font color='#FF23CB'>Chaos Rune</font> <font color='#40E0D0'>(Runeblade)</font>	h43214f8cge37cg4950g9388gaaddd43d5590
 LOOT_Rune_LLWEAPONEX_Runeblade_Earth	<font color='#F7BA14'>Earth Rune</font> <font color='#40E0D0'>(Runeblade)</font>	h133cf4degf968g4ebfg9354gec021e928aa2
