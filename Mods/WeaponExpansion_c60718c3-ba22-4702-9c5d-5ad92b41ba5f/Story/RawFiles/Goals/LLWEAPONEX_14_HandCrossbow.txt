@@ -320,19 +320,19 @@ THEN
 LLWEAPONEX_HandCrossbow_OnBoltInserted(_Char, _HandCrossbow, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Fire_1fe1e11c-2e54-4104-b80a-b6fa0b4b8e99", _Slot);
 
 IF
-ItemTemplateAddedToCharacter(LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223, _Item, _Char)
+ItemTemplateAddedToCharacter(LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver_baf9826a-abe8-4bc8-8c56-b68b5611c223, _Item, _Char)
 THEN
-LLWEAPONEX_HandCrossbow_TryInsertBolt(_Char, _Item, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223", 0);
+LLWEAPONEX_HandCrossbow_TryInsertBolt(_Char, _Item, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver_baf9826a-abe8-4bc8-8c56-b68b5611c223", 0);
 
 IF
-CharacterUsedItemTemplate(_Char, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223", _Item)
+CharacterUsedItemTemplate(_Char, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver_baf9826a-abe8-4bc8-8c56-b68b5611c223", _Item)
 THEN
-LLWEAPONEX_HandCrossbow_TryInsertBolt(_Char, _Item, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223", 1);
+LLWEAPONEX_HandCrossbow_TryInsertBolt(_Char, _Item, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver_baf9826a-abe8-4bc8-8c56-b68b5611c223", 1);
 
 IF
-RuneInserted(_Char, _HandCrossbow, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223", _Slot)
+RuneInserted(_Char, _HandCrossbow, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver_baf9826a-abe8-4bc8-8c56-b68b5611c223", _Slot)
 THEN
-LLWEAPONEX_HandCrossbow_OnBoltInserted(_Char, _HandCrossbow, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal_baf9826a-abe8-4bc8-8c56-b68b5611c223", _Slot);
+LLWEAPONEX_HandCrossbow_OnBoltInserted(_Char, _HandCrossbow, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Silver_baf9826a-abe8-4bc8-8c56-b68b5611c223", _Slot);
 
 IF
 ItemTemplateAddedToCharacter(LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Poison_c3f61b7d-5183-4664-9773-0b630374b7c9, _Item, _Char)
