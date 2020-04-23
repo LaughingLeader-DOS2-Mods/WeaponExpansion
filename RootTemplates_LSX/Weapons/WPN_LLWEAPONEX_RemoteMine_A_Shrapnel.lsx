@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="4" revision="0" build="1" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="2886439a-60c0-4557-8062-9c55fb103d47" type="22" />
+					<attribute id="Name" value="WPN_LLWEAPONEX_RemoteMine_A_Shrapnel" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="item" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="a974f3dd-9840-4fff-8b2e-25b760e30752" type="22" />
+					<attribute id="PhysicsTemplate" value="8f57fd0c-6064-4116-85a3-b59d94f9be36" type="22" />
+					<attribute id="CastShadow" value="False" type="19" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="Icon" value="LLWEAPONEX_Items_RemoteMine_Shrapnel_A" type="22" />
+					<attribute id="Stats" value="WPN_LLWEAPONEX_RemoteMine_Shrapnel_Free" type="22" />
+					<attribute id="LevelOverride" value="-1" type="4" />
+					<attribute id="CanBePickedUp" value="True" type="19" />
+					<attribute id="CanBeMoved" value="True" type="19" />
+					<attribute id="CoverAmount" value="0" type="1" />
+					<attribute id="CanShootThrough" value="True" type="19" />
+					<attribute id="WalkThrough" value="True" type="19" />
+					<attribute id="OnUseDescription" value="Throw" type="28" handle="h01908419g9fcdg4d1dg9497ga384494ad72a" />
+					<attribute id="maxStackAmount" value="50" type="4" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="Description" value="An explosive mine modified for remote detonation.&lt;br.Handle with care!" type="28" handle="hab7c8cc3gb00ag4557g9b87g030eb15798bd" />
+					<attribute id="MeshProxy" value="" type="22" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_RemoteMine" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_Throwing" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="1" type="1" />
+							<attribute id="Min" value="-0.349486 -0.214584 -0.218609" type="12" />
+							<attribute id="Max" value="0.356675 0.247597 0.226422" type="12" />
+							<attribute id="Radius" value="0.234606" type="6" />
+							<attribute id="Height" value="0.0900337" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="6" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="Weapon Expansion - Explosives" type="28" handle="hc64e0870g94d2g40e1ga01cg8372542fcf25" />
+						</node>
+						<node id="OnUsePeaceActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" value="12" type="4" />
+									<children>
+										<node id="Attributes">
+											<attribute id="SkillID" value="Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel" type="22" />
+											<attribute id="Consume" value="False" type="19" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="OnDestroyActions">
+							<children>
+								<node id="Action">
+									<attribute id="ActionType" value="5" type="4" />
+									<children>
+										<node id="Attributes">
+											<attribute id="visualDestruction" value="453fd5eb-7ce3-4844-a72e-9937cec935e5" type="22" />
+											<attribute id="ExplodeFX" value="" type="22" />
+											<attribute id="templateAfterDestruction" value="" type="22" />
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Equipment">
+							<attribute id="VisualSetSlot" value="0" type="5" />
+							<attribute id="EquipmentSlots" value="0" type="5" />
+							<children>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="Inventorys">
+									<attribute id="InventoryItem" value="Empty" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" value="b5a94e80-b8d7-483f-b040-53c7a7222ff6" type="22" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" value="HardcoreOnly" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Mine_ExplosionStatus" type="22" />
+													<attribute id="Type" value="27" type="4" />
+													<attribute id="Value" value="0xbaadf00d" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Mine_ExplosionStatusID" type="22" />
+													<attribute id="Type" value="27" type="4" />
+													<attribute id="Value" value="0xbaadf00d" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Mine_Skill" type="22" />
+													<attribute id="Type" value="9" type="4" />
+													<attribute id="Value" value="Projectile_LLWEAPONEX_RemoteMine_Shrapnel" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Mine_SkillID" type="22" />
+													<attribute id="Type" value="3" type="4" />
+													<attribute id="Value" value="0xbaadf00d" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Mine_Skill_NoWeapon" type="22" />
+													<attribute id="Type" value="9" type="4" />
+													<attribute id="Value" value="Projectile_LLWEAPONEX_RemoteMine_Shrapnel_NoWeapon" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Mine_UseStatus" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

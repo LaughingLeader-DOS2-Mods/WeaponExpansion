@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="4" revision="0" build="1" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="ca61e441-9446-40ac-811d-736327d4a0f0" type="22" />
+					<attribute id="Name" value="WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="item" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="dcece7f7-88f4-4093-b725-85a7530d7be1" type="22" />
+					<attribute id="PhysicsTemplate" value="7abfc026-299d-4e55-86b9-1354f88fa227" type="22" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="Icon" value="LLWEAPONEX_Items_Scythe_2H_Unique_DeathEdge_A" type="22" />
+					<attribute id="Stats" value="WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A" type="22" />
+					<attribute id="LevelOverride" value="-1" type="4" />
+					<attribute id="CanBePickedUp" value="True" type="19" />
+					<attribute id="CanBeMoved" value="True" type="19" />
+					<attribute id="CoverAmount" value="0" type="1" />
+					<attribute id="CanShootThrough" value="True" type="19" />
+					<attribute id="WalkThrough" value="True" type="19" />
+					<attribute id="Tooltip" value="2" type="1" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="Description" value="A wicked scythe once wielded by an infamous reaper. At night, you swear you can hear the skull quietly chattering...&lt;br&gt;&lt;font color='#80FFC3'&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;" type="28" handle="hb4aa5153gc6bbg4ad7g9cc4ge28d6555ee66" />
+					<attribute id="MeshProxy" value="a354e505-add3-4729-a6e5-c75e6ffd448c" type="22" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" value="LeaderLib_AutoLevel" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_Scythe" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_CustomUnsheathedFX" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_TaggedWeaponType" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_TwoHanded" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="1" type="1" />
+							<attribute id="Min" value="-1.138439 -0.09951499 -1.514209" type="12" />
+							<attribute id="Max" value="0.1441736 0.02346518 0.4446902" type="12" />
+							<attribute id="Radius" value="0.283448" type="6" />
+							<attribute id="Height" value="0.0765833" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="9" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="Weapon Expansion - Unique Weapons" type="28" handle="h6e3a04cbgb9a1g4f1dga2b3g71f181ec93d3" />
+						</node>
+						<node id="OnUsePeaceActions" />
+						<node id="OnDestroyActions" />
+						<node id="Equipment">
+							<attribute id="VisualSetSlot" value="0" type="5" />
+							<attribute id="EquipmentSlots" value="0" type="5" />
+							<children>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="Inventorys">
+									<attribute id="InventoryItem" value="Empty" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts" />
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

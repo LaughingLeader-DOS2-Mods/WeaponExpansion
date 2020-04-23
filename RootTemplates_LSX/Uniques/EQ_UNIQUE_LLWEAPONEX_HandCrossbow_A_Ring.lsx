@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="6" revision="0" build="0" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="ad15f666-285d-4634-a832-ea643fa0a9d2" type="22" />
+					<attribute id="Name" value="EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="item" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="68dc2eea-676f-4a50-a9fb-1eec7c3aa1c3" type="22" />
+					<attribute id="PhysicsTemplate" value="3951308a-dac7-4082-b7dd-f73beffc54b7" type="22" />
+					<attribute id="CastShadow" value="False" type="19" />
+					<attribute id="RecieveDecal" value="False" type="19" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="Opacity" value="0.225" type="6" />
+					<attribute id="Icon" value="Item_WPN_Lizards_Crossbow_2H_A" type="22" />
+					<attribute id="Stats" value="ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A" type="22" />
+					<attribute id="CanBePickedUp" value="True" type="19" />
+					<attribute id="CanBeMoved" value="True" type="19" />
+					<attribute id="CoverAmount" value="0" type="1" />
+					<attribute id="CanShootThrough" value="True" type="19" />
+					<attribute id="WalkThrough" value="True" type="19" />
+					<attribute id="Tooltip" value="2" type="1" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="Description" value="An small crossbow with a wrist strap and easy-to-reach trigger. Fits comfortably on your arm.&lt;br&gt;&lt;font color='#80FFC3'&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;" type="28" handle="hd42c9807gb777g430fgb232g5214f14eaae5" />
+					<attribute id="MeshProxy" value="" type="22" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_HandCrossbow" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="LeaderLib_AutoLevel" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="1" type="1" />
+							<attribute id="Min" value="-0.0209539 -0.000509165 -0.0255615" type="12" />
+							<attribute id="Max" value="0.020861 0.0232128 0.0224574" type="12" />
+							<attribute id="Radius" value="0.0169872" type="6" />
+							<attribute id="Height" value="0.023722" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="10" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="Weapon Expansion - Equipment" type="28" handle="h38a97819g0b16g4ba9ga62eg3cedb395668b" />
+						</node>
+						<node id="OnUsePeaceActions" />
+						<node id="OnDestroyActions" />
+						<node id="PinnedContainerTags" />
+						<node id="Equipment">
+							<attribute id="VisualSetSlot" value="0" type="5" />
+							<attribute id="EquipmentSlots" value="0" type="5" />
+							<children>
+								<node id="VisualResources">
+									<attribute id="Object" value="60d78380-3286-4216-afa2-2029f9a52092" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="1fb313a9-087c-4219-836b-6d8e21462248" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="9fe688d8-eadb-4b7f-b447-cedcebe90834" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="dab5218a-387e-42d7-be4f-0a50d97d1e36" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="4a2b3a63-a902-40f1-8d5a-9a0710bae546" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="cd5ee294-995c-4b70-895c-f2e91f2c8245" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="6b132d43-fea2-49a8-8311-6a3bb3ffbaf8" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="eb00e890-bd07-43a0-a887-d77edb327d61" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="60d78380-3286-4216-afa2-2029f9a52092" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="1fb313a9-087c-4219-836b-6d8e21462248" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="9fe688d8-eadb-4b7f-b447-cedcebe90834" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="dab5218a-387e-42d7-be4f-0a50d97d1e36" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="4a2b3a63-a902-40f1-8d5a-9a0710bae546" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="cd5ee294-995c-4b70-895c-f2e91f2c8245" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="6b132d43-fea2-49a8-8311-6a3bb3ffbaf8" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="eb00e890-bd07-43a0-a887-d77edb327d61" type="22" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="Inventorys">
+									<attribute id="InventoryItem" value="Empty" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts" />
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

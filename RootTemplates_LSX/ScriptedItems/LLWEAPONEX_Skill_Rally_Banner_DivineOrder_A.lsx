@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="4" revision="0" build="1" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="d5c842bf-8eb0-46cd-a928-e4f989f91010" type="22" />
+					<attribute id="Name" value="LLWEAPONEX_Skill_Rally_Banner_DivineOrder_A" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="item" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="84429b12-e885-410b-9669-70d00199c15a" type="22" />
+					<attribute id="PhysicsTemplate" value="aa3acd34-bb27-4843-b372-be47134f636d" type="22" />
+					<attribute id="Scale" value="0.5" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="DisplayName" value="Rallying Banner" type="28" handle="h9830eac8g629eg4a9egac51g0e839dd67d54" />
+					<attribute id="Icon" value="Portrait_Goblins_Totem_Spitfire_A" type="22" />
+					<attribute id="Stats" value="Gen_Container_Indestructible" type="22" />
+					<attribute id="LevelOverride" value="-1" type="4" />
+					<attribute id="TreasureOnDestroy" value="False" type="19" />
+					<attribute id="CoverAmount" value="0" type="1" />
+					<attribute id="CanShootThrough" value="True" type="19" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="Description" value="The holiest of banners. Huzzah!" type="28" handle="h347bb958g6498g4419g93a5g981542de87e6" />
+					<attribute id="MeshProxy" value="" type="22" />
+					<children>
+						<node id="Tags" />
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="1" type="1" />
+							<attribute id="Min" value="-0.535455 0.0631301 -0.671" type="12" />
+							<attribute id="Max" value="0.535455 1.15202 -0.000168991" type="12" />
+							<attribute id="Radius" value="0.407639" type="6" />
+							<attribute id="Height" value="1.08889" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="-1" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="" type="28" handle="hfeccb8bbgf99fg4028gb187g607c18c2cbaa" />
+						</node>
+						<node id="OnUsePeaceActions" />
+						<node id="OnDestroyActions" />
+						<node id="Equipment">
+							<attribute id="VisualSetSlot" value="0" type="5" />
+							<attribute id="EquipmentSlots" value="0" type="5" />
+							<children>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="Inventorys">
+									<attribute id="InventoryItem" value="Empty" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" value="9a9b0ef4-1aff-462a-bec0-36af930a7e26" type="22" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" value="HardcoreOnly" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_BoneName" type="22" />
+													<attribute id="Type" value="4" type="4" />
+													<attribute id="Value" value="" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_EffectName" type="22" />
+													<attribute id="Type" value="3" type="4" />
+													<attribute id="Value" value="0xbaadf00d" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_ApplyOnArmor" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_ApplyOnBody" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_ApplyOnHorns" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_ApplyOnNM" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_ApplyOnOverhead" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_ApplyOnWeapon" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_ApplyOnWings" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_Duration" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="10" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_IsFading" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_IsOverlay" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLFX_Material_UUID" type="22" />
+													<attribute id="Type" value="4" type="4" />
+													<attribute id="Value" value="ae93d8fe-363b-4349-9560-bb49b7b76f62" type="23" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

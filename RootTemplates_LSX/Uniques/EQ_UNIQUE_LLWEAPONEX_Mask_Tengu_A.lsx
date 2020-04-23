@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="4" revision="0" build="1" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="84af126d-0e35-482b-b117-f85e7672a129" type="22" />
+					<attribute id="Name" value="EQ_UNIQUE_LLWEAPONEX_Mask_Tengu_A" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="item" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="1354c7a6-7652-4716-83dd-0419d02c54e6" type="22" />
+					<attribute id="PhysicsTemplate" value="7d9a43e9-b5fb-4422-82b7-c510f458ae8a" type="22" />
+					<attribute id="CastShadow" value="False" type="19" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="Icon" value="Item_EQ_Shapeshifter_Mask_A" type="22" />
+					<attribute id="Stats" value="ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A" type="22" />
+					<attribute id="TreasureOnDestroy" value="False" type="19" />
+					<attribute id="CanBePickedUp" value="True" type="19" />
+					<attribute id="CanBeMoved" value="True" type="19" />
+					<attribute id="CoverAmount" value="0" type="1" />
+					<attribute id="CanShootThrough" value="True" type="19" />
+					<attribute id="WalkThrough" value="True" type="19" />
+					<attribute id="Tooltip" value="2" type="1" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="MeshProxy" value="" type="22" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" value="ORGANIZE_HELMET" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="1" type="1" />
+							<attribute id="Min" value="-0.1012905 0 -0.133015" type="12" />
+							<attribute id="Max" value="0.1012905 0.2024004 0.1330149" type="12" />
+							<attribute id="Radius" value="0.154051" type="6" />
+							<attribute id="Height" value="0.215596" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="-1" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="" type="28" handle="heee99d71g1f41g4ba2g8adbg98fad94256ca" />
+						</node>
+						<node id="OnUsePeaceActions" />
+						<node id="OnDestroyActions" />
+						<node id="Equipment">
+							<attribute id="VisualSetSlot" value="64" type="5" />
+							<attribute id="EquipmentSlots" value="0" type="5" />
+							<children>
+								<node id="VisualResources">
+									<attribute id="Object" value="5058128d-69ed-4b22-96f7-069c7cc214be" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="c625fd26-8fd1-4cc7-b7b9-8ea50290f60b" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="f2954a37-3ba4-44f8-b956-87ddfcddbc07" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="4e0de004-6d59-48c3-856f-9b658db492ab" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="6208cf44-8927-459c-81d4-eea41d7be854" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="26e70b19-2bd2-49bf-91bf-1828f8a044bf" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="83a85d86-e30c-4dc4-8845-9041975aaae9" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="a9943803-1901-4c54-b264-a02b262a3064" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="5058128d-69ed-4b22-96f7-069c7cc214be" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="c625fd26-8fd1-4cc7-b7b9-8ea50290f60b" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="f2954a37-3ba4-44f8-b956-87ddfcddbc07" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="4e0de004-6d59-48c3-856f-9b658db492ab" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="6208cf44-8927-459c-81d4-eea41d7be854" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="26e70b19-2bd2-49bf-91bf-1828f8a044bf" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="83a85d86-e30c-4dc4-8845-9041975aaae9" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="a9943803-1901-4c54-b264-a02b262a3064" type="22" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="Inventorys">
+									<attribute id="InventoryItem" value="Empty" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts" />
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="4" revision="0" build="1" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="e0678101-f898-490e-8df5-387d975a071a" type="22" />
+					<attribute id="Name" value="LLWEAPONEX_Skills_Blunderbuss_Dud_A" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="item" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="382ed179-c710-4ef9-8a75-719197c5bc93" type="22" />
+					<attribute id="PhysicsTemplate" value="e65c01d6-f913-422f-a8ec-b53f0d0c1578" type="22" />
+					<attribute id="RecieveDecal" value="False" type="19" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="Opacity" value="0.225" type="6" />
+					<attribute id="DisplayName" value="Dud?" type="28" handle="h49625e23gdd8fg4e7dgb02eg691bfeb4387f" />
+					<attribute id="Icon" value="Item_Unknown" type="22" />
+					<attribute id="Stats" value="LLWEAPONEX_Skill_Blunderbuss_Dud_A" type="22" />
+					<attribute id="LevelOverride" value="1" type="4" />
+					<attribute id="TreasureOnDestroy" value="False" type="19" />
+					<attribute id="CoverAmount" value="0" type="1" />
+					<attribute id="Tooltip" value="2" type="1" />
+					<attribute id="Unimportant" value="True" type="19" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="MeshProxy" value="" type="22" />
+					<children>
+						<node id="Tags" />
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="1" type="1" />
+							<attribute id="Min" value="-0.066492 -0.00167482 -0.0632513" type="12" />
+							<attribute id="Max" value="0.0663199 0.416509 0.0630603" type="12" />
+							<attribute id="Radius" value="0.114147" type="6" />
+							<attribute id="Height" value="0.418184" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="-1" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="" type="28" handle="hfeccb8bbgf99fg4028gb187g607c18c2cbaa" />
+						</node>
+						<node id="OnUsePeaceActions" />
+						<node id="OnDestroyActions" />
+						<node id="Equipment">
+							<attribute id="VisualSetSlot" value="0" type="5" />
+							<attribute id="EquipmentSlots" value="0" type="5" />
+							<children>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="Inventorys">
+									<attribute id="InventoryItem" value="Empty" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" value="6ab0ec01-41f7-4f6e-b6fa-d458a108f0fe" type="22" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" value="HardcoreOnly" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_DelayTurns" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="3" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Effect_Active" type="22" />
+													<attribute id="Type" value="3" type="4" />
+													<attribute id="Value" value="LLWEAPONEX_FX_Skills_Blunderbuss_Dud_Overlay_Medium_01" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Effect_NearExploding" type="22" />
+													<attribute id="Type" value="3" type="4" />
+													<attribute id="Value" value="LLWEAPONEX_FX_Skills_Blunderbuss_Dud_Overlay_NearExploding_01" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_InitEvent" type="22" />
+													<attribute id="Type" value="3" type="4" />
+													<attribute id="Value" value="LLWEAPONEX_DelayedExplosive_Initialized" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Skill_Destroyed" type="22" />
+													<attribute id="Type" value="9" type="4" />
+													<attribute id="Value" value="Projectile_LLWEAPONEX_Blunderbuss_Dud_Explode_Weak" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Skill_Full" type="22" />
+													<attribute id="Type" value="9" type="4" />
+													<attribute id="Value" value="Projectile_LLWEAPONEX_Blunderbuss_Dud_Explode_Full" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Skill_Land" type="22" />
+													<attribute id="Type" value="9" type="4" />
+													<attribute id="Value" value="Projectile_LLWEAPONEX_Blunderbuss_Dud_Explode_LandDamage" type="23" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

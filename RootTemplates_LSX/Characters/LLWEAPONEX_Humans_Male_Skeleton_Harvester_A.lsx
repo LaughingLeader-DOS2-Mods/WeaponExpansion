@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="4" revision="0" build="1" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="b979a0c7-d13c-4670-9043-80856c9bc984" type="22" />
+					<attribute id="Name" value="LLWEAPONEX_Humans_Male_Skeleton_Harvester_A" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="character" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="ab01c22a-cce0-483b-84e6-2d331b6c2982" type="22" />
+					<attribute id="PhysicsTemplate" value="3c394355-3031-45e1-b239-4348b616099e" type="22" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="DisplayName" value="The Harvester" type="28" handle="h4050b715g9ab5g438bga014g6a28a9f217c4" />
+					<attribute id="Icon" value="b7d4bc50-2814-4e08-bb4a-cce8da965ff9_10383154908429552719-LLWEAPONEX_FTJ_Harvester_(Icon_Human_Male)" type="22" />
+					<attribute id="Stats" value="LLWEAPONEX_FTJ_Harvester" type="22" />
+					<attribute id="SkillSet" value="LLWEAPONEX_FTJ_Harvester" type="22" />
+					<attribute id="Equipment" value="LLWEAPONEX_FTJ_Harvester" type="22" />
+					<attribute id="WalkSpeed" value="2" type="6" />
+					<attribute id="ClimbAttachSpeed" value="4" type="6" />
+					<attribute id="ClimbLoopSpeed" value="4" type="6" />
+					<attribute id="ClimbDetachSpeed" value="2.44" type="6" />
+					<attribute id="RunSpeed" value="3.75" type="6" />
+					<attribute id="HitFX" value="RS3_FX_GP_Combat_Hit_Bone_01_Medium" type="22" />
+					<attribute id="EquipmentClass" value="9" type="1" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="ExplodedResourceID" value="5724128d-d417-4665-83c9-222c1b7e6cc1" type="22" />
+					<attribute id="ExplosionFX" value="RS3_FX_GP_Combat_CorpseExplosion_Bone_01_Medium" type="22" />
+					<attribute id="LevelOverride" value="-1" type="4" />
+					<attribute id="LightID" value="3faa1c66-5d35-4e87-868e-d124168b660f" type="22" />
+					<attribute id="IsLootable" value="True" type="19" />
+					<attribute id="SpeakerGroup" value="b8a3417f-8f4d-4787-89ef-8882f9a383e1" type="23" />
+					<attribute id="GeneratePortrait" value="Icon_Human_Male" type="23" />
+					<attribute id="VisualSetResourceID" value="b7d4bc50-2814-4e08-bb4a-cce8da965ff9" type="22" />
+					<attribute id="Random" value="10383154908429552719" type="24" />
+					<attribute id="SoftBodyCollisionTemplate" value="3f0c8247-a68a-44cd-a33e-f8ee9741d2b6" type="22" />
+					<attribute id="RagdollTemplate" value="74ab694a-f489-455e-b361-f47564fd7385" type="22" />
+					<attribute id="Alignment" value="Evil NPC" type="22" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" value="MALE" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="HUMAN" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="UNDEAD" type="22" />
+								</node>
+								<node id="Tag">
+									<attribute id="Object" value="NOT_MESSING_AROUND" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="2" type="1" />
+							<attribute id="Radius" value="0.29" type="6" />
+							<attribute id="Height" value="1.8" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="4" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="Weapon Expansion - NPCs" type="28" handle="h52d9f66agcee3g414aga882g730634320422" />
+						</node>
+						<node id="OnDeathActions" />
+						<node id="SkillList" />
+						<node id="ItemList" />
+						<node id="Scripts">
+							<children>
+								<node id="Script">
+									<attribute id="UUID" value="5bc80992-a7f6-4da6-83e2-3d276384d8f7" type="22" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" value="AiHint" type="22" />
+													<attribute id="Type" value="4" type="4" />
+													<attribute id="Value" value="0xbaadf00d" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="Archetype" type="22" />
+													<attribute id="Type" value="30" type="4" />
+													<attribute id="Value" value="berserker" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="FleeFromDangerousSurface" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="HardcoreOnly" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="StayInAiHints" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="bool_CanChickenFlee" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="bool_CanCower" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="bool_CanFleeWhileCowering" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="bool_CombatFallbackAD" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" value="ee79f994-96f0-4300-9034-b21cdfa57fcc" type="22" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" value="HardcoreOnly" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Idle_Anim" type="22" />
+													<attribute id="Type" value="4" type="4" />
+													<attribute id="Value" value="" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Idle_FightMode" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="1" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_Idle_ForceEquipInventory" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+								<node id="Script">
+									<attribute id="UUID" value="367341a4-ee2c-4fb4-8eb4-2ba6ccb756cc" type="22" />
+									<children>
+										<node id="Parameters">
+											<children>
+												<node id="Parameter">
+													<attribute id="MapKey" value="HardcoreOnly" type="22" />
+													<attribute id="Type" value="1" type="4" />
+													<attribute id="Value" value="0" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_UniqueItem_Stat" type="22" />
+													<attribute id="Type" value="4" type="4" />
+													<attribute id="Value" value="WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A" type="23" />
+												</node>
+												<node id="Parameter">
+													<attribute id="MapKey" value="LLWEAPONEX_UniqueItem_Template" type="22" />
+													<attribute id="Type" value="22" type="4" />
+													<attribute id="Value" value="0xbaadf00d" type="23" />
+												</node>
+											</children>
+										</node>
+									</children>
+								</node>
+							</children>
+						</node>
+						<node id="Treasures">
+							<attribute id="TreasureItem" value="LOOT_LLWEAPONEX_FTJ_Harvester" type="22" />
+						</node>
+						<node id="TradeTreasures">
+							<attribute id="TreasureItem" value="Empty" type="22" />
+						</node>
+						<node id="PickingPhysicsTemplates">
+							<attribute id="MapKey" value="CharacterLyingPicking" type="22" />
+							<attribute id="MapValue" value="00e5160f-6883-4c67-8f6d-28e27167e145" type="22" />
+						</node>
+						<node id="PickingPhysicsTemplates">
+							<attribute id="MapKey" value="CharacterSittingPicking" type="22" />
+							<attribute id="MapValue" value="63754b23-0837-43c1-9041-c5c7096db34d" type="22" />
+						</node>
+						<node id="PickingPhysicsTemplates">
+							<attribute id="MapKey" value="CharacterDeadPicking" type="22" />
+							<attribute id="MapValue" value="b38cc07c-b4da-4473-b0fe-0a27d3671fa1" type="22" />
+						</node>
+						<node id="FootStepInfos">
+							<children>
+								<node id="FootStepInfo">
+									<attribute id="Name" value="Footstep_Left" type="23" />
+									<attribute id="FootPrintEffectName" value="RS3_FX_GP_Footsteps_Human_L" type="23" />
+									<attribute id="FootSmearEffectName" value="RS3_FX_GP_Footsmear_Human_L" type="23" />
+									<attribute id="FootSlideEffectName" value="" type="23" />
+									<attribute id="FootHearingEffectName" value="" type="23" />
+									<attribute id="FootBoneName" value="Dummy_L_Foot_01" type="22" />
+									<attribute id="FootSoundEventName" value="Movement" type="22" />
+								</node>
+								<node id="FootStepInfo">
+									<attribute id="Name" value="Footstep_Right" type="23" />
+									<attribute id="FootPrintEffectName" value="RS3_FX_GP_Footsteps_Human_R" type="23" />
+									<attribute id="FootSmearEffectName" value="RS3_FX_GP_Footsmear_Human_R" type="23" />
+									<attribute id="FootSlideEffectName" value="" type="23" />
+									<attribute id="FootHearingEffectName" value="" type="23" />
+									<attribute id="FootBoneName" value="Dummy_R_Foot_01" type="22" />
+									<attribute id="FootSoundEventName" value="Movement" type="22" />
+								</node>
+							</children>
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

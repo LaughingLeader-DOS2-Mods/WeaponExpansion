@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="3" revision="0" build="1" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="d022f585-942c-498d-8211-9b97a3eeaadd" type="22" />
+					<attribute id="Name" value="LLWEAPONEX_Arrow_HandCrossbow_DamageType_Corrosive" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="projectile" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="" type="22" />
+					<attribute id="PhysicsTemplate" value="a465845b-908e-4c19-9ee9-643c5f2fbfa1" type="22" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="LifeTime" value="10" type="6" />
+					<attribute id="Speed" value="30" type="6" />
+					<attribute id="Acceleration" value="0" type="6" />
+					<attribute id="CastBone" value="Dummy_L_HandFX" type="22" />
+					<attribute id="ImpactFX" value="RS3_FX_GP_Impacts_Weapon_Corrosive_01" type="22" />
+					<attribute id="TrailFX" value="LLWEAPONEX_FX_Projectiles_DamageType_HandCrossbow_Corrosive_01" type="22" />
+					<attribute id="BeamFX" value="" type="22" />
+					<attribute id="DestroyTrailFXOnImpact" value="False" type="19" />
+					<attribute id="PreviewPathMaterial" value="5869ee64-f8af-494e-9be3-61025d012a7c" type="22" />
+					<attribute id="PreviewPathImpactFX" value="RS3_FX_UI_Target_Projectile_Poison_01" type="22" />
+					<attribute id="PreviewPathRadius" value="0.05" type="6" />
+					<attribute id="RotateImpact" value="True" type="19" />
+					<attribute id="IgnoreRoof" value="False" type="19" />
+					<attribute id="DetachBeam" value="True" type="19" />
+					<attribute id="NeedsArrowImpactSFX" value="False" type="19" />
+					<attribute id="ImpactFXSize" value="0" type="6" />
+					<attribute id="ProjectilePath" value="0" type="1" />
+					<attribute id="PathRadius" value="3" type="6" />
+					<attribute id="PathShift" value="0.5" type="6" />
+					<attribute id="PathRepeat" value="1" type="5" />
+					<attribute id="PathMinArcDist" value="-1" type="6" />
+					<attribute id="PathMaxArcDist" value="-1" type="6" />
+					<children>
+						<node id="Tags" />
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds" />
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="-1" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="" type="28" handle="ls::TranslatedStringRepository::s_HandleUnknown" />
+						</node>
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>

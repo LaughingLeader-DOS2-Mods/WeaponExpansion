@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<header version="2" time="0" />
+	<version major="54" minor="6" revision="0" build="0" />
+	<region id="Templates">
+		<node id="Templates">
+			<children>
+				<node id="GameObjects">
+					<attribute id="MapKey" value="94838d55-d5e6-4115-b736-b8b26f321003" type="22" />
+					<attribute id="Name" value="EQ_LLWEAPONEX_Belt_Pistol_A" type="23" />
+					<attribute id="LevelName" value="" type="22" />
+					<attribute id="Type" value="item" type="22" />
+					<attribute id="Flag" value="0" type="4" />
+					<attribute id="GroupID" value="0" type="5" />
+					<attribute id="VisualTemplate" value="5a8e80d9-e764-4dd8-ae8b-517db1b0872a" type="22" />
+					<attribute id="PhysicsTemplate" value="12b9e701-e0e1-46de-9243-aa58f9ba2555" type="22" />
+					<attribute id="CastShadow" value="False" type="19" />
+					<attribute id="RecieveDecal" value="False" type="19" />
+					<attribute id="Scale" value="1" type="6" />
+					<attribute id="HasGameplayValue" value="False" type="19" />
+					<attribute id="CameraOffset" value="0 0 0" type="12" />
+					<attribute id="Opacity" value="0.225" type="6" />
+					<attribute id="Icon" value="LLWEAPONEX_Items_Pistol_1H_A" type="22" />
+					<attribute id="Stats" value="ARM_LLWEAPONEX_Pistol_A" type="22" />
+					<attribute id="CanBePickedUp" value="True" type="19" />
+					<attribute id="CanBeMoved" value="True" type="19" />
+					<attribute id="Race" value="0" type="27" />
+					<attribute id="CoverAmount" value="0" type="1" />
+					<attribute id="CanShootThrough" value="True" type="19" />
+					<attribute id="WalkThrough" value="True" type="19" />
+					<attribute id="Tooltip" value="2" type="1" />
+					<attribute id="BloodSurfaceType" value="SurfaceNone" type="22" />
+					<attribute id="Description" value="A prototype weapon capable of firing dense lead pellets at dangerous velocities.&lt;br&gt;Fits onto your belt." type="28" handle="h83554f66gd91ag4ff4g8075g7339f022ab78" />
+					<attribute id="MeshProxy" value="" type="22" />
+					<children>
+						<node id="Tags">
+							<children>
+								<node id="Tag">
+									<attribute id="Object" value="LLWEAPONEX_Pistol" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="LayerList">
+							<children>
+								<node id="Layers" />
+							</children>
+						</node>
+						<node id="AIBounds">
+							<attribute id="AIType" value="1" type="1" />
+							<attribute id="Min" value="-0.0813005 -0.003958225 -0.2735985" type="12" />
+							<attribute id="Max" value="0.08130048 0.07517766 0.2735985" type="12" />
+							<attribute id="Radius" value="0.0169872" type="6" />
+							<attribute id="Height" value="0.023722" type="6" />
+						</node>
+						<node id="GameMaster">
+							<attribute id="GameMasterSpawnSection" value="10" type="4" />
+							<attribute id="GameMasterSpawnSubSection" value="Weapon Expansion - Equipment" type="28" handle="h38a97819g0b16g4ba9ga62eg3cedb395668b" />
+						</node>
+						<node id="OnUsePeaceActions" />
+						<node id="OnDestroyActions" />
+						<node id="PinnedContainerTags" />
+						<node id="Equipment">
+							<attribute id="VisualSetSlot" value="0" type="5" />
+							<attribute id="EquipmentSlots" value="0" type="5" />
+							<children>
+								<node id="VisualResources">
+									<attribute id="Object" value="6718a97f-6ba2-42a5-8eaf-d4abfb693fc3" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="0d57e0da-e54b-46f1-a50f-f8f231c87cd5" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="3a8e7923-683f-44e8-a63d-25acd75bd2f0" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="90c49667-82fc-45ae-9378-035b99851c5f" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="3c583a6b-f90f-4ea1-967e-63d8382c8fb9" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="5cfac38c-d6bd-4ec0-b817-daf90f76632a" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="a1e3e137-3e6f-47e1-978a-8fd18060f5ad" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="8e88386e-8334-44ce-a93f-7bef69478c53" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="6718a97f-6ba2-42a5-8eaf-d4abfb693fc3" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="0d57e0da-e54b-46f1-a50f-f8f231c87cd5" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="3a8e7923-683f-44e8-a63d-25acd75bd2f0" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="90c49667-82fc-45ae-9378-035b99851c5f" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="3c583a6b-f90f-4ea1-967e-63d8382c8fb9" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="5cfac38c-d6bd-4ec0-b817-daf90f76632a" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="a1e3e137-3e6f-47e1-978a-8fd18060f5ad" type="22" />
+								</node>
+								<node id="VisualResources">
+									<attribute id="Object" value="8e88386e-8334-44ce-a93f-7bef69478c53" type="22" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+								<node id="SyncAnimationWithParent">
+									<attribute id="Object" value="False" type="19" />
+								</node>
+							</children>
+						</node>
+						<node id="InventoryList">
+							<children>
+								<node id="Inventorys">
+									<attribute id="InventoryItem" value="Empty" type="22" />
+								</node>
+							</children>
+						</node>
+						<node id="Scripts" />
+						<node id="ItemList" />
+					</children>
+				</node>
+			</children>
+		</node>
+	</region>
+</save>
