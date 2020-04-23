@@ -344,7 +344,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties("Projectile_LLWEAPONEX_Pistol_A_Shoot_Base")
+	local skill = PrepareSkillProperties("Projectile_LLWEAPONEX_Pistol_Shoot_Base")
 	
 	if skill == nil then skill = baseSkill end
 
@@ -394,9 +394,9 @@ WeaponExpansion.Skills = {
 			LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowDamage
 		},
 		Skills = {
-			Projectile_LLWEAPONEX_Pistol_A_Shoot_Base = GetPistolDamage,
-			Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand = GetPistolDamage,
-			Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand = GetPistolDamage,
+			Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolDamage,
+			Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolDamage,
+			Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolDamage,
 			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowDamage,
 		}
 	}

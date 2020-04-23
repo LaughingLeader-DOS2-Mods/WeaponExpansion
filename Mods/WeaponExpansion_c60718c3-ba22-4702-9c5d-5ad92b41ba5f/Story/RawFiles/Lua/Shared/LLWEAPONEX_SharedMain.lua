@@ -3,6 +3,13 @@ if WeaponExpansion == nil then WeaponExpansion = {} end
 WeaponExpansion.Main = {}
 WeaponExpansion.Debug = {}
 
+WeaponExpansion.Text = {}
+
+---@type table<string,TranslatedString>
+local RuneNames = Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Shared/LLWEAPONEX_RuneNameHandles.lua")
+WeaponExpansion.Text.RuneNames = RuneNames
+
+
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Shared/LLWEAPONEX_SkillDamageFunctions.lua")
 
 --Ext.AddPathOverride("Public/Game/GUI/tooltip.swf", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/LLWEAPONEX_ToolTip.swf")

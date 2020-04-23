@@ -581,7 +581,6 @@
 	<content contentuid="h3f55cf81gc40eg4539gae43g5ae634267e64">Through the power of the &lt;font color=&apos;#c5a65a&apos;&gt;Power Gauntlets&lt;/font&gt;, this character can wield two-handed melee weapons with one hand.</content>
 	<content contentuid="h3f7473f6g127dg41ffg87b5gdd4429296e7b">Translocation Invocation</content>
 	<content contentuid="h3f7f9468gbc7fg4982g81dbgdb856d1d452c">Toxic Edge</content>
-	<content contentuid="h3fb317e3g2364g47c3g944fg01824559e895">&lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt;</content>
 	<content contentuid="h3fbb0e48g9ca6g4372g86e6gd35d9e3bec56">Glaive</content>
 	<content contentuid="h3fda20edg9786g47deg9aecgab17738b1ded">The Emperor&apos;s Wall</content>
 	<content contentuid="h4034995fg479cg46a0ga583g7709a973e538">Blademaster&apos;s Strike 9</content>
@@ -1137,6 +1136,7 @@
 	<content contentuid="h7ea00032g103eg4ea1gbf1cg2b4da69e7621">Fumbled!</content>
 	<content contentuid="h7eaf259ag243dg48ecgad5eg21a5e0a8266e">Eruption, the Portable Cannon (Strength Scaling)</content>
 	<content contentuid="h7ebefc17g8de3g451bg8ca5gcd0a58d1f986">Peasant&apos;s Equalizer</content>
+	<content contentuid="h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad">Ammo Type: [1]</content>
 	<content contentuid="h7ef35923g2e83g410bgb1ecg1aa1acc31bba">Finely Crafted Elven Shields</content>
 	<content contentuid="h7f146334gc5d1g45a7ga8a2g3d23e5cda564">Wraithblade</content>
 	<content contentuid="h7f153177ge4deg49b9ga990g6c3c8a6b5ae0">&lt;font color=&apos;#C7A758&apos;&gt;Oni Gauntlet&lt;/font&gt; Power</content>
@@ -1336,7 +1336,6 @@
 	<content contentuid="h96a503b9g1759g4e0ag89d1g377eb1f59ca8">Spikey Evisceration</content>
 	<content contentuid="h96d9d2fcge7eeg4c11g923cgc6f721840db6">Shuriken</content>
 	<content contentuid="h96e55571g2a2fg4946g962dg559ef4f5a7ac">Rapier</content>
-	<content contentuid="h96e58114ge175g438bg9e93gbd60c14f2acd">Shoot your equipped pistol in a straight line at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[2][3]</content>
 	<content contentuid="h970fe36cg6aedg4719g83b7g9edc091d2c2e">Soul Harvest (Strength Scaling)</content>
 	<content contentuid="h97393307gf796g492agbf67gc5697357efb2">Apply Bolt Effects on Hit</content>
 	<content contentuid="h979060b5g1deeg4066g982dgdc9a8ac14e9b">&lt;font color=&apos;#C0C0C0&apos;&gt;Silver Mini-Bolts&lt;/font&gt;</content>
@@ -1552,6 +1551,7 @@
 	<content contentuid="haf0de280g47e7g41e3g9401g03e636e870d3">Venom Rune</content>
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
 	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
+	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">[2]Shoot your equipped pistol in a straight line at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[3]</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
 	<content contentuid="haf9adad9gaf1fg4404g93e6gd6f5ad276b50">Character is exuding an aura of death.</content>
 	<content contentuid="hafacd835g8b2dg4f62gb52eg18fa77bd7adc">Tar Rune</content>
@@ -1727,7 +1727,7 @@
 	<content contentuid="hc40bcffdgbee2g461aga707gbb5f95b26729">a Polearm</content>
 	<content contentuid="hc40e13abge322g44d1g9fc4gf13b7ea652d2">Throw the breach charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge breaks locks up to level 10 in a [1] radius, and knocking back objects within [2].&lt;/font&gt;</content>
 	<content contentuid="hc432ad71g4a44g47c4gb514gecbc5236ee4c">Hunkering Down</content>
-	<content contentuid="hc4557351g0123g43adga970gafe2a3715d1b">Shoot your &lt;font color=&apos;#C7A758&apos;&gt;Hand Crossbow&lt;/font&gt; at a target, dealing [1] and consuming a charge.[2][3]</content>
+	<content contentuid="hc4557351g0123g43adga970gafe2a3715d1b">[2]Shoot your &lt;font color=&apos;#C7A758&apos;&gt;Hand Crossbow&lt;/font&gt; at a target, dealing [1] and consuming a charge.[3]</content>
 	<content contentuid="hc4c344a3g5aa5g40edg8f0fg0733352de3bd">Raizan (Empowered) (Finesse Scaling)</content>
 	<content contentuid="hc4cbb3efg9cd3g4193g861bg8f086795ea16">Automatically Equips the Dragon Bone Claws Weapon</content>
 	<content contentuid="hc4cc8189gf306g47afga73bgad4370572c85">Banner of the Pack</content>
@@ -1740,6 +1740,7 @@
 	<content contentuid="hc56fb80eg797fg46b5g89c3gd8bf0c458a4d">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Future Barrage</content>
 	<content contentuid="hc57ffc92gbbbag4f6eg9f17gee8b992ba15a">Throwing Bow?</content>
 	<content contentuid="hc585475cge8fdg48c0g8dc0gea94afe8f24e">Bokuto</content>
+	<content contentuid="hc5b0dad7g7c99g4afbga957g927f7db6c3de">&lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt;</content>
 	<content contentuid="hc5d41814g352cg4bd8g8146g1e56d3bd676b">An orb of great power. An active current of electrical energy courses around the outer shell.</content>
 	<content contentuid="hc5dae707g6037g4b6agb1faga069a8617542">Kagutsuchi (Finesse Scaling)</content>
 	<content contentuid="hc5e2c7e3g672eg41ecgba33gec78d98f5a49">An orb of great power. A faint trace of electrical energy courses around the outer shell.</content>
@@ -2197,6 +2198,7 @@
 	<content contentuid="hfc34de68gbdadg49acga2d8g7b2e8a2ace9d">Throwing Axe</content>
 	<content contentuid="hfc3aff25gc784g4108gb393g5a346f5b212a">Tarred</content>
 	<content contentuid="hfc5bd7d3g7aa4g4bc4g8992gbe28f32ff443">Oakenguard, Thunder&apos;s Bane</content>
+	<content contentuid="hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e">Ammo Type: [1]</content>
 	<content contentuid="hfc83703fg0120g40e9gb08ag1185eb332c94">Agni Ignus</content>
 	<content contentuid="hfc86af03g5ae6g4acdg8146g7e5415774ce1">Blinder</content>
 	<content contentuid="hfc9f88f3g834fg4688g9990g79aab4db15c6">Runic Cannon (Reset Scaling)</content>

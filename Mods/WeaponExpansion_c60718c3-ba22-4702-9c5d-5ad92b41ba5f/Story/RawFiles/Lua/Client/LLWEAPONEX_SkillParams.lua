@@ -18,13 +18,14 @@ local boltRuneBoosts = {
 	["_Boost_LLWEAPONEX_HandCrossbow_Bolts_Silver"] = {Transform="", Apply=""},
 }
 
+local boltAmmoTypeText = TranslatedString:Create("hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e", "Ammo Type: [1]")
+
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
-	local bolt,boltRuneStat = WeaponExpansion.Skills.GetHandCrossbowBolt(character)
-	--Ext.Print("Hand Crossbow Bolt/RuneStat: ", bolt,boltRuneStat)
-	if boltRuneStat ~= nil then
-		local boostEffects = boltRuneBoosts[boltRuneStat]
-		if boostEffects ~= nil and (boostEffects.Apply ~= nil or boostEffects.Transform ~= nil) then
-			return string.format("<br><font color='#FFBB22'>%s%s</font>", boostEffects.Apply, boostEffects.Transform)
+	local rune,weaponBoostStat = WeaponExpansion.Skills.GetRuneBoost(character, "_LLWEAPONEX_HandHandCrossbow_Boltss", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	if rune ~= nil then
+		local runeNameText = WeaponExpansion.Text.RuneNames[rune.BoostName]
+		if runeNameText ~= nil then
+			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value) .. "<br>"
 		end
 	end
 	return ""
@@ -46,8 +47,20 @@ local PistolRuneBoosts = {
 }
 
 
+local bulletAmmoTypeText = TranslatedString:Create("h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad", "Ammo Type: [1]")
+
 local function GetPistolBulletEffects(skill, character, isFromItem, param)
-	local bullet,bulletRuneStat = WeaponExpansion.Skills.GetPistolBullets(character)
+	local rune,weaponBoostStat = WeaponExpansion.Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	if rune ~= nil then
+		local runeNameText = WeaponExpansion.Text.RuneNames[rune.BoostName]
+		if runeNameText ~= nil then
+			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value) .. "<br>"
+		else
+			Ext.PrintError("No text for rune: ", rune.BoostName)
+		end
+	else
+		Ext.PrintError("No equipped rune in pistol?")
+	end
 	-- Ext.Print(bullet,bulletRuneStat)
 	-- if bulletRuneStat ~= nil then
 	-- 	local boostEffects = bulletRuneBoosts[bulletRuneStat]
