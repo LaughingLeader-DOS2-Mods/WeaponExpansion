@@ -32,8 +32,6 @@ local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 		else
 			Ext.PrintError("No text for rune: ", rune.BoostName)
 		end
-	else
-		Ext.PrintError("No equipped rune in pistol?")
 	end
 	return ""
 end
@@ -65,8 +63,6 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 		else
 			Ext.PrintError("No text for rune: ", rune.BoostName)
 		end
-	else
-		Ext.PrintError("No equipped rune in pistol?")
 	end
 	-- Ext.Print(bullet,bulletRuneStat)
 	-- if bulletRuneStat ~= nil then

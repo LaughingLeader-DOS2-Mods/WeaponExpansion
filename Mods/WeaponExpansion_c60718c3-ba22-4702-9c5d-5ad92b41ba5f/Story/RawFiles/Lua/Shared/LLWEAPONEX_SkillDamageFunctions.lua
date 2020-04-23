@@ -262,7 +262,7 @@ local function GetRuneBoost(character, runeParentStat, itemParentStat, slots)
 			end
 		end
 	end
-	return item,nil
+	return nil
 end
 
 --- @param baseSkill StatEntrySkillData
@@ -290,11 +290,11 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 	local skill = PrepareSkillProperties(baseSkill.Name, true)
 	if skill == nil then skill = baseSkill end
 
-	local bolt,boltRuneStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
-	if boltRuneStat == nil then boltRuneStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
-	if boltRuneStat ~= nil then
-		weapon = PrepareWeaponStat(boltRuneStat, attacker.Level, highestAttribute, "Crossbow")
-		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..boltRuneStat..")")
+	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
+	if weaponBoostStat ~= nil then
+		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow")
+		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
 		--skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
@@ -346,14 +346,17 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 
 	local weapon = nil
 	local skill = PrepareSkillProperties("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
-	
-	if skill == nil then skill = baseSkill end
 
-	local bullet,bulletRuneStat = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
-	if bulletRuneStat == nil then bulletRuneStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
-	if bulletRuneStat ~= nil then
-		weapon = PrepareWeaponStat(bulletRuneStat, attacker.Level, highestAttribute, "Rifle")
-		--Ext.Print("Bullet Stats ("..bulletRuneStat..")")
+	if skill == nil then 
+		skill = baseSkill
+		skill["UseWeaponDamage"] = "Yes"
+	end
+
+	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
+	if weaponBoostStat ~= nil then
+		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Rifle")
+		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
 		--skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
@@ -363,6 +366,9 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
     local damageMultiplier = skill["Damage Multiplier"] * 0.01
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
+
+	LeaderLib.Common.Dump(skill)
+	LeaderLib.Common.Dump(weapon)
 
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
