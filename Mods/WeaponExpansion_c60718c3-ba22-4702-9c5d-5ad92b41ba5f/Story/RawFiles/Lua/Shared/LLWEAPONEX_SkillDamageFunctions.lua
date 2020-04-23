@@ -52,12 +52,13 @@ local skillAttributes = {
 
 ---@param skillName string
 ---@return StatEntrySkillData
-local function PrepareSkillProperties(skillName)
+local function PrepareSkillProperties(skillName, useWeaponDamage)
 	if skillName ~= nil and skillName ~= "" then
 		local skill = {Name = skillName}
 		for i,v in pairs(skillAttributes) do
 			skill[v] = Ext.StatGetAttribute(skillName, v)
 		end
+		if useWeaponDamage == true then skill["UseWeaponDamage"] = "Yes" end
 		--Ext.Print(Ext.JsonStringify(skill))
 		return skill
 	end
@@ -286,11 +287,11 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties(baseSkill.Name)
+	local skill = PrepareSkillProperties(baseSkill.Name, true)
 	if skill == nil then skill = baseSkill end
 
-	local bolt,boltRuneStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandHandCrossbow_Boltss", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
-	if boltRuneStat == nil then boltRuneStat = "_Boost_LLWEAPONEX_HandHandCrossbow_Boltss_Normal" end
+	local bolt,boltRuneStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	if boltRuneStat == nil then boltRuneStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
 	if boltRuneStat ~= nil then
 		weapon = PrepareWeaponStat(boltRuneStat, attacker.Level, highestAttribute, "Crossbow")
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..boltRuneStat..")")
@@ -344,7 +345,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties("Projectile_LLWEAPONEX_Pistol_Shoot_Base")
+	local skill = PrepareSkillProperties("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
 	
 	if skill == nil then skill = baseSkill end
 

@@ -1,16 +1,7 @@
 Key	Content
+Projectile_LLWEAPONEX_HandCrossbow_Shoot_DisplayName	<font color='#C7A758'>Shoot Hand Crossbow</font>
+Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1].[2][3]
 Shout_LLWEAPONEX_HandCrossbow_Reload_DisplayName	<font color='#C7A758'>Reload</font>
-Shout_LLWEAPONEX_HandCrossbow_Reload_Description	Reload your <font color='#C7A758'>Hand Crossbow</font> with the inserted crossbow bolt.<br><font color='#fc70cc'>Requires crossbow bolts in the rune slot.</font>
+Shout_LLWEAPONEX_HandCrossbow_Reload_Description	Reload your <font color='#C7A758'>Hand Crossbow</font>, instantly refreshing the <font color='#C7A758'>Shoot Hand Crossbow</font> skill.
 Projectile_LLWEAPONEX_HandCrossbow_Assassinate_DisplayName	<font color='#C80030'>Assassin's Requiem</font>
 Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Description	Fire a decisive shot at a target with your <font color='#C7A758'>Hand Crossbow</font>, dealing [1].<br><font color='#8652f0'>Deals double damage from stealth.</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_DisplayName	<font color='#C7A758'>Shoot Hand Crossbow</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	[2]Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1] and consuming a charge.[3]
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Air_DisplayName	Shoot <font color='#7D71D9'>(Electrified Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Corrosive_DisplayName	Shoot <font color='#55FF55'>(Corrosive Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Earth_DisplayName	Shoot <font color='#AA895B'>(Oiled Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Fire_DisplayName	Shoot <font color='#C76537'>(Flaming Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Poison_DisplayName	Shoot <font color='#65C900'>(Poison-tipped Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Water_DisplayName	Shoot <font color='#579CFF'>(Chilling Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Shadow_DisplayName	Shoot <font color='#DD40FF'>(Cursed Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_WeaponProxy_DisplayName	Shoot <font color='#FFAB00'>(Heavy Bolts)</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_WeaponProxy_Descripton	Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1] and consuming a charge.<br><font color='#55e8a4'>Applies equipped weapon properties on hit.</font>

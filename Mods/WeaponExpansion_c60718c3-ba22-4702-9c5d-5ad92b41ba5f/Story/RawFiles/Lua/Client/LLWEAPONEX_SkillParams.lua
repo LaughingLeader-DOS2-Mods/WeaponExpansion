@@ -1,3 +1,6 @@
+
+local TranslatedString = LeaderLib.Classes["TranslatedString"]
+
 local RuneTags = {
 	DamageType = {
 		"LLWEAPONEX_Rune_HandCrossbow_DamageType",
@@ -21,17 +24,21 @@ local boltRuneBoosts = {
 local boltAmmoTypeText = TranslatedString:Create("hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e", "Ammo Type: [1]")
 
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
-	local rune,weaponBoostStat = WeaponExpansion.Skills.GetRuneBoost(character, "_LLWEAPONEX_HandHandCrossbow_Boltss", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	local rune,weaponBoostStat = WeaponExpansion.Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
 	if rune ~= nil then
 		local runeNameText = WeaponExpansion.Text.RuneNames[rune.BoostName]
 		if runeNameText ~= nil then
-			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value) .. "<br>"
+			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
+		else
+			Ext.PrintError("No text for rune: ", rune.BoostName)
 		end
+	else
+		Ext.PrintError("No equipped rune in pistol?")
 	end
 	return ""
 end
 
-WeaponExpansion.Skills.Params["LLWEAPONEX_HandHandCrossbow_BoltsEffects"] = GetHandCrossbowBoltEffects
+WeaponExpansion.Skills.Params["LLWEAPONEX_HandCrossbowRuneEffects"] = GetHandCrossbowBoltEffects
 
 local PistolRuneBoosts = {
 	["_Boost_LLWEAPONEX_Pistol_Bullets_Normal"] = {Transform="", Apply=""},
@@ -54,7 +61,7 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	if rune ~= nil then
 		local runeNameText = WeaponExpansion.Text.RuneNames[rune.BoostName]
 		if runeNameText ~= nil then
-			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value) .. "<br>"
+			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
 		else
 			Ext.PrintError("No text for rune: ", rune.BoostName)
 		end
@@ -71,9 +78,7 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	-- end
 	return ""
 end
-WeaponExpansion.Skills.Params["LLWEAPONEX_PistolBulletEffects"] = GetPistolBulletEffects
-
-local TranslatedString = LeaderLib.Classes["TranslatedString"]
+WeaponExpansion.Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletEffects
 
 local damageScaleWeaponText = TranslatedString:Create("ha4cfd852g52f1g4079g8919gd392ac8ade1a", "Damage is based on your basic attack and receives a bonus from [1].")
 local damageScaleLevelText = TranslatedString:Create("h71b09f9fg285fg4532gab16g1c7640864141", "Damage is based on your level and receives bonus from [1].")

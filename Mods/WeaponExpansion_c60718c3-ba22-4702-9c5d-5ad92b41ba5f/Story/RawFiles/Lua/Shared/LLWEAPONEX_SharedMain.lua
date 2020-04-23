@@ -5,6 +5,9 @@ WeaponExpansion.Debug = {}
 
 WeaponExpansion.Text = {}
 
+---@class TranslatedString
+local TranslatedString = LeaderLib.Classes["TranslatedString"]
+
 ---@type table<string,TranslatedString>
 local RuneNames = Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Shared/LLWEAPONEX_RuneNameHandles.lua")
 WeaponExpansion.Text.RuneNames = RuneNames

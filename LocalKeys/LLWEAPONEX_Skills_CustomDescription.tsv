@@ -3,5 +3,3 @@ LLWEAPONEX_Projectile_ThrowingKnife_Description	Throw a knife at your opponent, 
 LLWEAPONEX_MasteryParam_ThrowingKnife	<font color='#8F7CFF' size='16'>Dagger Mastery I</font><br><font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[1]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[2] bonus damage</font> on hit.</font>	hea8e7051gfc68g4d9dgaba8g7c871bbd4056
 LLWEAPONEX_MasteryParam_ThrowingKnifeLocked	<font color='#AE9F95' size='18'>Bonus: Dagger Mastery I Required</font>	h50295d19g3065g4099g9e78g7c6e7b45c579
 LLWEAPONEX_MasteryParam_CripplingBlow	Placeholder	h41e991cbgbe00g4469g924bge4d4c73cffa2
-LLWEAPONEX_Pistol_AmmoType	Ammo Type: [1]	h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad
-LLWEAPONEX_HandCrossbow_AmmoType	Ammo Type: [1]	hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e

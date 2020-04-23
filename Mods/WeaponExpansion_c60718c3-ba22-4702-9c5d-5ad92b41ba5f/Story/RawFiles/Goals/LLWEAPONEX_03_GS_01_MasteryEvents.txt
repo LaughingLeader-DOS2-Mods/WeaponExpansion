@@ -39,7 +39,7 @@ LLWEAPONEX_WeaponMastery_AddExperienceToActiveMasteries(_Player, 1, _Target, "LL
 //END_REGION
 
 //REGION PISTOL_MASTERY_EXPERIENCE
-//Applied by the pistol shoot skills, Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand / Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand
+//Applied by the pistol shoot skills, Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand / Projectile_LLWEAPONEX_Pistol_Shoot_RightHand
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_PISTOL_MASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
 AND

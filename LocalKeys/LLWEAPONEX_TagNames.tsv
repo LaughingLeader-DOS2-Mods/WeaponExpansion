@@ -28,7 +28,7 @@ LLWEAPONEX_Greatbow_Mastery2	Greatbow Mastery II
 LLWEAPONEX_Greatbow_Mastery3	Greatbow Mastery III
 LLWEAPONEX_Grimoire_Equipped	a Grimoire
 LLWEAPONEX_Halberd_Equipped	a Halberd
-LLWEAPONEX_HandCrossbow_CanReload	Missing Charges & Inserted Bolts
+LLWEAPONEX_HandCrossbow_CanReload	Shoot Cooldown
 LLWEAPONEX_HandCrossbow_Equipped	a Hand Crossbow
 LLWEAPONEX_HandCrossbow_HasAmmo	Crossbow Bolts
 LLWEAPONEX_HandCrossbow_Mastery1	Hand Crossbow Mastery I
@@ -41,6 +41,7 @@ LLWEAPONEX_Katana_Mastery2	Katana Mastery II
 LLWEAPONEX_Katana_Mastery3	Katana Mastery III
 LLWEAPONEX_Pistol_Equipped	a Pistol
 LLWEAPONEX_Pistol_HasAmmo	Pistol Ammo
+LLWEAPONEX_Pistol_CanReload	Shoot Cooldown
 LLWEAPONEX_Polearm_Equipped	a Polearm
 LLWEAPONEX_Quarterstaff_Equipped	a Quarterstaff
 LLWEAPONEX_Quarterstaff_Mastery1	Quarterstaff Mastery I

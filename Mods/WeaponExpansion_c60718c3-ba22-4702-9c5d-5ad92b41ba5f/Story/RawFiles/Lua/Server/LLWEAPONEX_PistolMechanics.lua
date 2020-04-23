@@ -23,7 +23,7 @@ local function GetPistolProjectileSkill(source)
 	if skillEntry ~= nil then
 		return skillEntry[1][3]
 	else
-		return "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand"
+		return "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"
 	end
 end
 

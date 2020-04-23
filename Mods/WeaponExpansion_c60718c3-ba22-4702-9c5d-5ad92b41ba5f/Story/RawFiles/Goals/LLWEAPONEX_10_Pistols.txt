@@ -7,24 +7,30 @@ KBSECTION
 PROC
 LLWEAPONEX_Pistols_InitSettings()
 THEN
-DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_A_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+SysClear("DB_LLWEAPONEX_Pistols_HandProjectiles", 5);
+DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
 
+SysClear("DB_LLWEAPONEX_Pistols_ShootingStatus", 2);
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003", "LLWEAPONEX_FX_PISTOL_A_SHOOTING");
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_Captain_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_CAPTAIN_SHOOTING");
 
-LLWEAPONEX_Pisolts_RegisterBulletTemplate("Default", "Template");
+SysClear("DB_LLWEAPONEX_Pistols_ShootingSkills", 1);
+DB_LLWEAPONEX_Pistols_ShootingSkills("Target_LLWEAPONEX_Pistol_Shoot");
+DB_LLWEAPONEX_Pistols_ShootingSkills("Target_LLWEAPONEX_Pistol_Shoot_Enemy");
 
 PROC
-LLWEAPONEX_Pisolts_RegisterBulletTemplate((STRING)_BulletType, (STRING)_Template)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+_LastVersion < 152436742
 THEN
-DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _Template);
+LLWEAPONEX_Pistols_InitSettings();
 //END_REGION
 
 //REGION PISTOL_SHOOT_FX
@@ -249,94 +255,52 @@ THEN
 LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Source, "LLWEAPONEX_Pistol", 1, _Target);
 //END_REGION
 
-//REGION PISTOL_AMMO
-PROC
-LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Pistol", 1)
-THEN
-LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_Pistol_HasAmmo");
-
 PROC
 LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Pistol", 1)
-AND
-ObjectGetFlag(_Item, "LLWEAPONEX_Pistol_HasAmmo", _HasAmmo)
 THEN
-LLWEAPONEX_Pistols_Internal_CheckLastBulletType(_Char);
-LLWEAPONEX_Pistols_OnPistolEquipped(_Char, _Item, _HasAmmo);
+DB_NOOP(1);
 
-PROC
-LLWEAPONEX_Pistols_Internal_CheckLastBulletType((CHARACTERGUID)_Char)
-AND
-GetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _BulletType)
-AND
-NOT DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _)
+//REGION RELOADING
+IF
+SkillCast(_Char, "Target_LLWEAPONEX_Pistol_Shoot", _, _)
 THEN
-SetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", "");
-
-PROC
-LLWEAPONEX_Pistols_Internal_CheckLastBulletType((CHARACTERGUID)_Char)
-AND
-NOT GetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _)
-THEN
-SetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", "");
-
-PROC
-LLWEAPONEX_Pistols_OnPistolEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1)
-THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_Pistol_HasAmmo");
-
-PROC
-LLWEAPONEX_Pistols_OnPistolEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0)
-AND
-GetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _LastBulletType)
-THEN
-LLWEAPONEX_Pistols_Internal_LoadPistolAmmo(_Char, _Item, _LastBulletType);
-
-PROC
-LLWEAPONEX_Pistols_Internal_LoadPistolAmmo((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_LastBulletType)
-AND
-DB_LLWEAPONEX_Pistols_BulletTemplates(_LastBulletType, _Template)
-AND
-NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _)
-THEN
-LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate(_Char, _Item, _Template, _LastBulletType);
-
-PROC
-LLWEAPONEX_Pistols_Internal_LoadPistolAmmo((CHARACTERGUID)_Char, (ITEMGUID)_Item, "")
-AND
-NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _)
-AND
-DB_LLWEAPONEX_Pistols_BulletTemplates(_BulletType, _Template)
-AND
-NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _)
-THEN
-LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate(_Char, _Item, _Template, _BulletType);
-
-PROC
-LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template, (STRING)_BulletType)
-AND
-GetItemForItemTemplateInInventory(_Char, _Template, _Bullets)
-AND
-ObjectExists(_Bullets, 1)
-THEN
-DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets);
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_Pistol_HasAmmo");
-SetVarString(_Char, "LLWEAPONEX_Pistol_BulletType", _BulletType);
-SetVarString(_Char, "LLWEAPONEX_Pistol_LastBulletType", _BulletType);
+NRD_SkillSetCooldown(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload", 0.0);
+SetTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
 
 IF
-DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets)
-AND
-IsTagged(_Bullets, "LLWEAPONEX_Infinite", 0)
+SkillCast(_Char, "Target_LLWEAPONEX_Pistol_Shoot_Enemy", _, _)
 THEN
-LeaderLib_Helper_ModifyItemAmount(_Bullets, -1);
+NRD_SkillSetCooldown(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload", 0.0);
+SetTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
 
-PROC
-LLWEAPONEX_Pistols_Internal_LoadPistolAmmoTemplate((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template, (STRING)_BulletType)
-AND
-DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets)
+IF
+SkillCast(_Char, "Shout_LLWEAPONEX_Pistol_Reload", _, _)
 THEN
-NOT DB_LLWEAPONEX_Pistols_Temp_AutoLoadedBullets(_Char, _Item, _Bullets);
-//END_REGION
+NRD_SkillSetCooldown(_Char, "Target_LLWEAPONEX_Pistol_Shoot", 0.0);
+NRD_SkillSetCooldown(_Char, "Target_LLWEAPONEX_Pistol_Shoot_Enemy", 0.0);
+ClearTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_PISTOL_EMPTY", _)
+AND
+DB_LLWEAPONEX_Pistols_ShootingSkills(_Skill)
+AND
+NRD_SkillGetCooldown(_Char, _Skill, _CD)
+AND
+_CD > 0.0
+THEN
+SetTag(_Char, "LLWEAPONEX_Pistol_CanReload");
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_PISTOL_EMPTY", _)
+AND
+DB_LLWEAPONEX_Pistols_ShootingSkills(_Skill)
+AND
+NRD_SkillGetCooldown(_Char, _Skill, _CD)
+AND
+_CD <= 0.0
+THEN
+ClearTag(_Char, "LLWEAPONEX_Pistol_CanReload");
 EXITSECTION
 
 ENDEXITSECTION

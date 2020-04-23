@@ -1,0 +1,10 @@
+Key	Content	Handle
+LLWEAPONEX_Tooltip_Pistol_AmmoType	<br><img src='Icon_Line' width='350%'><br><font color='#00FFAA' size='16'>Ammo Type: [1]</font>	h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad
+LLWEAPONEX_Tooltip_HandCrossbow_AmmoType	<br><img src='Icon_Line' width='350%'><br><font color='#00FFAA' size='16'>Ammo Type: [1]</font>	hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e
+LLWEAPONEX_Tooltip_ElementalBullet_Air	<font color='#7D71D9'>Attuned Shot (Air)</font><br><font color='#7D71D9'>Electrifies surfaces.</font>	h73da4328gbc8ag4d8dga3c4g2d4ce915cb49
+LLWEAPONEX_Tooltip_ElementalBullet_Blood	<font color='#C80030'>Attuned to Blood</font>	hf4abf7c3g1100g4950gada5g414d376d477e
+LLWEAPONEX_Tooltip_ElementalBullet_Earth	<font color='#C7A758'>Attuned to Earth</font>	he191cfc5g46d4g4344ga01cgccb438cefd04
+LLWEAPONEX_Tooltip_ElementalBullet_Fire	<font color='#FE6E27'>Attuned to Fire</font><br><font color='#FE6E27'>Ignites surfaces.</font>	h84d844ccg0681g4c2agb055gc1b1d8735cf9
+LLWEAPONEX_Tooltip_ElementalBullet_Ice	<font color='#97FBFF'>Attuned to Ice</font><br><font color='#97FBFF'>Freezes surfaces.</font>	h6284479bgde6fg412cgb278g965cac95e214
+LLWEAPONEX_Tooltip_ElementalBullet_Poison	<font color='#65C900'>Attuned to Poison</font><br><font color='#65C900'>Contaminates surfaces.</font>	h416e348bgb3ddg4b02g9f8cg228d9883f50f
+LLWEAPONEX_Tooltip_ElementalBullet_Water	<font color='#4197E2'>Attuned to Water</font><br><font color='#4197E2'>Douses surfaces.</font>	hea81e505gc83fg4ac1gbed5g7b03511ff083
