@@ -25,7 +25,7 @@ data "Act" "1"
 data "Act part" "1"
 data "Damage" "0"
 data "Charges" "0"
-data "DamageFromBase" "47"
+data "DamageFromBase" "42"
 data "Damage Range" "20"
 data "Damage Type" "Physical"
 

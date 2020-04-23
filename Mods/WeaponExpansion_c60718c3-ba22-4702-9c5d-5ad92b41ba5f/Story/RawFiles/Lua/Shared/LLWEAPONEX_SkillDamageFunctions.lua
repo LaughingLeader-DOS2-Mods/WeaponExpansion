@@ -1,3 +1,82 @@
+--- @param character StatCharacter
+--- @param skill StatEntrySkillData
+--- @param mainWeapon table
+--- @param offHandWeapon table
+function GetSkillDamageRangeWithFakeWeapon(character, skill, mainWeapon, offHandWeapon)
+    local damageMultiplier = skill['Damage Multiplier'] * 0.01
+
+    if skill.UseWeaponDamage == "Yes" then
+        local mainDamageRange = Game.Math.CalculateWeaponDamageRange(character, mainWeapon)
+        if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
+            local offHandDamageRange = Game.Math.CalculateWeaponDamageRange(character, offHandWeapon)
+
+            local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
+            for damageType, range in pairs(offHandDamageRange) do
+                local min = range[1] * dualWieldPenalty
+                local max = range[2] * dualWieldPenalty
+                if mainDamageRange[damageType] ~= nil then
+                    mainDamageRange[damageType][1] = mainDamageRange[damageType][1] + min
+                    mainDamageRange[damageType][2] = mainDamageRange[damageType][2] + max
+                else
+                    mainDamageRange[damageType] = {min, max}
+                end
+            end
+        end
+
+        for damageType, range in pairs(mainDamageRange) do
+            local min = Ext.Round(range[1] * damageMultiplier)
+            local max = Ext.Round(range[2] * damageMultiplier)
+            range[1] = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
+            range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
+        end
+
+        local damageType = skill.DamageType
+        if damageType ~= "None" and damageType ~= "Sentinel" then
+            local min, max = 0, 0
+            for _, range in pairs(mainDamageRange) do
+                min = min + range[1]
+                max = max + range[2]
+            end
+    
+            mainDamageRange = {}
+            mainDamageRange[damageType] = {min, max}
+        end
+
+        return mainDamageRange
+    else
+        local damageType = skill.DamageType
+        if damageMultiplier <= 0 then
+            return {}
+        end
+
+        local level = character.Level
+        if (level < 0 or skill.OverrideSkillLevel == "Yes") and skill.Level > 0 then
+            level = skill.Level
+        end
+
+        local skillDamageType = skill.Damage
+        local attrDamageScale
+        if skillDamageType == "BaseLevelDamage" or skillDamageType == "AverageLevelDamge" then
+            attrDamageScale = Game.Math.GetSkillAttributeDamageScale(skill, character)
+        else
+            attrDamageScale = 1.0
+        end
+
+        local baseDamage = Game.Math.CalculateBaseDamage(skill.Damage, character, 0, level) * attrDamageScale * damageMultiplier
+        local damageRange = skill['Damage Range'] * baseDamage * 0.005
+
+        local damageType = skill.DamageType
+        local damageTypeBoost = 1.0 + Game.Math.GetDamageBoostByType(character, damageType)
+        local damageBoost = 1.0 + (character.DamageBoost / 100.0)
+        local damageRanges = {}
+        damageRanges[damageType] = {
+            math.ceil(math.ceil(Ext.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost),
+            math.ceil(math.ceil(Ext.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
+        }
+        return damageRanges
+    end
+end
+
 local attributes = {
 	"Strength",
 	"Finesse",
@@ -317,7 +396,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
-		local mainDamageRange = Game.Math.GetSkillDamageRange(attacker, skill)
+		local mainDamageRange = GetSkillDamageRangeWithFakeWeapon(attacker, skill, weapon)
 		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
@@ -347,9 +426,12 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	local weapon = nil
 	local skill = PrepareSkillProperties("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
 
-	if skill == nil then 
+	if skill == nil then
+		Ext.PrintError("Failed to prepare skill data for Projectile_LLWEAPONEX_Pistol_Shoot_Base?")
 		skill = baseSkill
 		skill["UseWeaponDamage"] = "Yes"
+	else
+	
 	end
 
 	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
@@ -367,8 +449,8 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
 
-	LeaderLib.Common.Dump(skill)
-	LeaderLib.Common.Dump(weapon)
+	--Ext.Print(LeaderLib.Common.Dump(skill))
+	--Ext.Print(LeaderLib.Common.Dump(weapon))
 
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
@@ -382,8 +464,8 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
-		local mainDamageRange = Game.Math.GetSkillDamageRange(attacker, skill)
-		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
+		local mainDamageRange = GetSkillDamageRangeWithFakeWeapon(attacker, skill, weapon)
+		Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end

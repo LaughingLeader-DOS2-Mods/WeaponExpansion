@@ -90,14 +90,14 @@ WeaponExpansion.Skills.Params["LLWEAPONEX_HighestAttributeScale"] = GetScaling
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
 local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
-	--Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
+	Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
 	--Ext.Print("skill("..tostring(skill)..") character("..tostring(character)..") isFromItem("..tostring(isFromItem)..")")
 	local param_func = WeaponExpansion.Skills.Damage.Params[param]
 	if param_func ~= nil then
 		local status,mainDamageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
 		if status and mainDamageRange ~= nil then
 			local resultString = ""
-			--Ext.Print("Skill damage param: " .. LeaderLib.Common.Dump(mainDamageRange))
+			Ext.Print("Skill damage param: " .. LeaderLib.Common.Dump(mainDamageRange))
 			for damageType,damage in pairs(mainDamageRange) do
 				resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%s-%s", math.tointeger(damage[1]), math.tointeger(damage[2])))
 			end
