@@ -188,12 +188,15 @@ local function PrepareWeaponStat(stat,level,attribute,weaponType)
 		weaponStat[v] = Ext.StatGetAttribute(stat, v)
 	end
 	local damage = Game.Math.GetLevelScaledWeaponDamage(level)
-	local baseDamage = damage / (weaponStat.DamageFromBase * 0.01)
+	local baseDamage = damage * (weaponStat.DamageFromBase * 0.01)
 	local range = baseDamage * (weaponStat["Damage Range"] * 0.01)
+	Ext.Print("damage:",damage,"baseDamage:",baseDamage,"range:",range)
 	weaponStat.MinDamage = Ext.Round(baseDamage - (range/2))
 	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))
 	weaponStat.DamageType = weaponStat["Damage Type"]
 	weaponStat.StatsType = "Weapon"
+	weaponStat.WeaponType = weaponType
+	weaponStat.Requirements = weapon.Requirements
 	weapon.DynamicStats = {weaponStat}
 	return weapon
 end
@@ -430,8 +433,6 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 		Ext.PrintError("Failed to prepare skill data for Projectile_LLWEAPONEX_Pistol_Shoot_Base?")
 		skill = baseSkill
 		skill["UseWeaponDamage"] = "Yes"
-	else
-	
 	end
 
 	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
@@ -449,8 +450,21 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
 
-	--Ext.Print(LeaderLib.Common.Dump(skill))
-	--Ext.Print(LeaderLib.Common.Dump(weapon))
+	Ext.Print("Skill Stats:")
+	Ext.Print("================================")
+	Ext.Print(LeaderLib.Common.Dump(skill))
+	Ext.Print("================================")
+	Ext.Print("Fake Weapon Stats:")
+	Ext.Print("================================")
+	Ext.Print(LeaderLib.Common.Dump(weapon))
+	Ext.Print("================================")
+	-- Ext.Print("Real Weapon Stats:")
+	-- Ext.Print("================================")
+	-- for k,v in pairs(weapon) do
+	-- 	Ext.Print(k..":"..tostring(attacker.MainWeapon[k]))
+	-- end
+	-- PrintDynamicStats(attacker.MainWeapon.DynamicStats)
+	-- Ext.Print("================================")
 
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
