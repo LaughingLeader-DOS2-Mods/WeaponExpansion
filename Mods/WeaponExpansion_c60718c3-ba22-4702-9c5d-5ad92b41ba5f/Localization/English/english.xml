@@ -90,7 +90,7 @@
 	<content contentuid="h0a0ec3d0g79bcg4deegbcb2g46129e9603cd">&lt;font color=&apos;#C0C0C0&apos;&gt;Silver Bullets&lt;/font&gt;</content>
 	<content contentuid="h0a15f175g57deg40adga88bg24e763b03e72">Reinforced Wakizashi</content>
 	<content contentuid="h0a2ec845g3935g49dbgba4agf40ff07a092f">Extend the &lt;font color=&apos;#C7A758&apos;&gt;Power Pole&lt;/font&gt; to great lengths, smashing it down upon everything infront of you for [1].&lt;br&gt;&lt;font color=&apos;#FF3758&apos;&gt;Targets hit become Dizzy, causing actions to take 1 additional AP.&lt;/font&gt;</content>
-	<content contentuid="h0a35399fg4cd3g4806gb670g9383253562cd">Ride/Pull</content>
+	<content contentuid="h0a35399fg4cd3g4806gb670g9383253562cd">Insert into Pistol</content>
 	<content contentuid="h0a3be573g6d67g4953gb4fcgcf4a5db30a27">Blademaster&apos;s Strike 4</content>
 	<content contentuid="h0a40fa06gcb2cg400eg96ebgd9e51694706e">Subzero Slayer</content>
 	<content contentuid="h0a4b302dgf862g4af4g98cfg322085c2d454">Legend</content>
@@ -2010,6 +2010,7 @@
 	<content contentuid="he9b6a6beg7f37g482fga96fgfb7a411819cd">Eruption, the Portable Cannon (Intelligence Scaling)</content>
 	<content contentuid="he9dce9e3g8d75g4525g956cg4df89e335bf8">Lightningwall</content>
 	<content contentuid="hea27f350gec54g4206g8591g2e093df8ed55">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#65c900&apos;&gt;Poison Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;On attack, 50% chance to spawn or &lt;font color=&apos;#f7ba14&apos;&gt;expand&lt;/font&gt; a &lt;font color=&apos;#65c900&apos;&gt;Gas Cloud&lt;/font&gt; on the target (once per turn).&lt;br&gt;Adds &lt;font color=&apos;#65c900&apos;&gt;Poison Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
+	<content contentuid="hea49302fg4946g4f46gb718g890b51a96113">Ride/Pull</content>
 	<content contentuid="hea4a1ce9g41dfg4834gb5ddg1063490bdbdd">Battleworn Great Odachi</content>
 	<content contentuid="hea54efacg8d46g4620ga6aeg664431202299">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery I&lt;/font&gt;&lt;br&gt;Take a stance that enhances guile and speed.&lt;br&gt;While your offhand is empty, gain &lt;font color=&apos;#FE6E27&apos;&gt;[1]% Damage&lt;/font&gt;, [2], [3], and &lt;font color=&apos;#80FFC3&apos;&gt;[4]% additional Movement Speed&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#D040D0&apos;&gt;Critical/Backstab attacks grant +[5] AP once every 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FE6E27&apos;&gt;Weapon attacks and skill will do an additional [6].&lt;/font&gt;</content>
 	<content contentuid="hea65adb5g3567g4b08gb788gca45e36dea33">Rifleman</content>
