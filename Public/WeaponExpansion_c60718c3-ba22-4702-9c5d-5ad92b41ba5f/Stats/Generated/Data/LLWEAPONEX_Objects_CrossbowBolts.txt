@@ -76,6 +76,13 @@ using "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Base"
 data "Damage Type" "Shadow"
 data "DamageFromBase" "30"
 
+new entry "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Silver"
+type "Weapon"
+using "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Base"
+data "Damage Type" "Physical"
+data "DamageFromBase" "39"
+data "Damage Range" "10"
+
 new entry "_LLWEAPONEX_HandCrossbow_Bolts"
 type "Object"
 data "ModifierType" "Item"
