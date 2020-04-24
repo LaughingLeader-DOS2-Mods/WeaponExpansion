@@ -2,6 +2,7 @@
 --- @param skill StatEntrySkillData
 --- @param mainWeapon table
 --- @param offHandWeapon table
+--- @return number[]
 function GetSkillDamageRangeWithFakeWeapon(character, skill, mainWeapon, offHandWeapon)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 

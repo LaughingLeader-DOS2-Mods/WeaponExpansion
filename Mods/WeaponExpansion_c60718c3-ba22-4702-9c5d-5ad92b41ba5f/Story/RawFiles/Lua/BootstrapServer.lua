@@ -45,6 +45,9 @@ local function DebugInit()
             ItemTemplateAddTo(template, host, 1, 0)
         end
     end
+    if ItemTemplateIsInPartyInventory(host, "94838d55-d5e6-4115-b736-b8b26f321003", 0) <= 0 then
+        ItemTemplateAddTo("94838d55-d5e6-4115-b736-b8b26f321003", host, 1, 0)
+    end
     --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
    -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
