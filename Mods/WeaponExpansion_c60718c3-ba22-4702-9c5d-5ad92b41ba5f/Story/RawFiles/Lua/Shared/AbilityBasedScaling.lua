@@ -1,6 +1,7 @@
 --- @param ability integer
 local function ScaledDamageFromPrimaryAttribute(ability)
-    return (ability - Ext.ExtraData.AbilityBaseValue) * Ext.ExtraData.ExpectedDamageBoostFromWeaponAbilityPerLevel
+	local attributeMax = Ext.ExtraData.AttributeSoftCap - Ext.ExtraData.AttributeBaseValue
+    return (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * (attributeMax/Ext.ExtraData.CombatAbilityCap))
 end
 
 --- @param skill StatEntrySkillData
@@ -16,7 +17,7 @@ end
 --- @param character StatCharacter
 --- @param weapon StatItem
 local function ComputeWeaponRequirementScaledDamage(character, weapon, ability)
-	Ext.Print("Character ability: ", ability, character[ability], "Character("..tostring(character)..")")
+	--Ext.Print("Character ability: ", ability, character, "Character("..tostring(character)..")")
     if ability ~= nil then
         return ScaledDamageFromPrimaryAttribute(character[ability]) * 100.0
     else
@@ -53,7 +54,7 @@ local function CalculateWeaponScaledDamage(character, weapon, damageList, noRand
     abilityBoosts = math.max(abilityBoosts + 100.0, 0.0) / 100.0
 
     local boost = 1.0 + damageBoost * 0.01
-    if character.IsSneaking then
+    if character.NotSneaking then
         boost = boost + Ext.ExtraData['Sneak Damage Multiplier']
     end
 
@@ -81,12 +82,11 @@ end
 --- @param weapon StatItem
 --- @param noRandomization boolean
 --- @param ability string
-local function CalculateWeaponDamage(attacker, weapon, noRandomization, ability)
+local function CalculateWeaponDamage(attacker, weapon, offHand, noRandomization, ability)
     local damageList = Ext.NewDamageList()
 
     CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization, ability)
 
-    local offHand = attacker.OffHandWeapon
     if offHand ~= nil and weapon.InstanceId ~= offHand.InstanceId and false then -- Temporarily off
         local bonusWeapons = attacker.BonusWeapons -- FIXME - enumerate BonusWeapons /multiple/ from character stats!
         for i, bonusWeapon in pairs(bonusWeapons) do
