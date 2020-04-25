@@ -3,13 +3,13 @@
 --- @param mainWeapon table
 --- @param offHandWeapon table
 --- @return number[]
-function GetSkillDamageRangeWithFakeWeapon(character, skill, mainWeapon, offHandWeapon)
+function GetSkillDamageRangeWithFakeWeapon(character, skill, mainWeapon, offHandWeapon, ability)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
     if skill.UseWeaponDamage == "Yes" then
-        local mainDamageRange = Game.Math.CalculateWeaponDamageRange(character, mainWeapon)
+        local mainDamageRange = WeaponExpansion.Skills.CalculateWeaponAbilityDamageRange(character, mainWeapon, ability)
         if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
-            local offHandDamageRange = Game.Math.CalculateWeaponDamageRange(character, offHandWeapon)
+            local offHandDamageRange = WeaponExpansion.Skills.CalculateWeaponAbilityDamageRange(character, offHandWeapon)
 
             local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
             for damageType, range in pairs(offHandDamageRange) do
@@ -58,7 +58,7 @@ function GetSkillDamageRangeWithFakeWeapon(character, skill, mainWeapon, offHand
         local skillDamageType = skill.Damage
         local attrDamageScale
         if skillDamageType == "BaseLevelDamage" or skillDamageType == "AverageLevelDamge" then
-            attrDamageScale = Game.Math.GetSkillAttributeDamageScale(skill, character)
+            attrDamageScale = WeaponExpansion.Skills.GetSkillAbilityDamageScale(skill, character, ability)
         else
             attrDamageScale = 1.0
         end
@@ -390,7 +390,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
-		local mainDmgs = CalculateWeaponDamage(attacker, weapon, noRandomization, highestAttribute)
+		local mainDmgs = WeaponExpansion.Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, noRandomization, "RogueLore")
 		mainDmgs:Multiply(damageMultipliers)
 		if skillDamageType ~= nil then
 			mainDmgs:ConvertDamageType(skillDamageType)
@@ -400,7 +400,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
-		local mainDamageRange = GetSkillDamageRangeWithFakeWeapon(attacker, skill, weapon)
+		local mainDamageRange = WeaponExpansion.Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, "RogueLore")
 		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
@@ -469,7 +469,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
-		local mainDmgs = CalculateWeaponDamage(attacker, weapon, noRandomization, highestAttribute)
+		local mainDmgs = WeaponExpansion.Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, noRandomization, "RogueLore")
 		mainDmgs:Multiply(damageMultipliers)
 		if skillDamageType ~= nil then
 			mainDmgs:ConvertDamageType(skillDamageType)
@@ -479,7 +479,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
-		local mainDamageRange = GetSkillDamageRangeWithFakeWeapon(attacker, skill, weapon)
+		local mainDamageRange = WeaponExpansion.Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, "RogueLore")
 		Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
