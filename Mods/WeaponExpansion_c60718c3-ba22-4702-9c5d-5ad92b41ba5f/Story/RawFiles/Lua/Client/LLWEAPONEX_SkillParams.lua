@@ -79,13 +79,33 @@ WeaponExpansion.Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletE
 local damageScaleWeaponText = TranslatedString:Create("ha4cfd852g52f1g4079g8919gd392ac8ade1a", "Damage is based on your basic attack and receives a bonus from [1].")
 local damageScaleLevelText = TranslatedString:Create("h71b09f9fg285fg4532gab16g1c7640864141", "Damage is based on your level and receives bonus from [1].")
 
-local function GetScaling(skill, character, isFromItem, param)
+local skillAbility = {
+	Target_LLWEAPONEX_Pistol_Shoot = "RogueLore",
+	Target_LLWEAPONEX_Pistol_Shoot_Enemy = "RogueLore",
+	Projectile_LLWEAPONEX_HandCrossbow_Shoot = "RogueLore",
+	Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = "RogueLore",
+}
+
+local function GetSkillAbility(skill, character, isFromItem, param)
+	local ability = skillAbility[skill.Name]
+	if ability ~= nil then
+		local text = string.gsub(damageScaleLevelText.Value, "%[1%]", LeaderLib.Game.GetAbilityName(ability))
+		if text ~= nil then
+			return "<br><font color='#078FC8'>"..text.."</font>"
+		end
+	end
+	return ""
+end
+
+WeaponExpansion.Skills.Params["LLWEAPONEX_ScalingStat"] = GetSkillAbility
+
+local function GetHighestAttribute(skill, character, isFromItem, param)
 	local att = WeaponExpansion.Skills.GetHighestAttribute(character)
 	local text = string.gsub(damageScaleLevelText.Value, "%[1%]", att)
 	return "<br><font color='#078FC8'>"..text.."</font>"
 end
 
-WeaponExpansion.Skills.Params["LLWEAPONEX_HighestAttributeScale"] = GetScaling
+WeaponExpansion.Skills.Params["GetHighestAttribute"] = GetScaling
 
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 

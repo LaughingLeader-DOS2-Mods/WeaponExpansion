@@ -16,6 +16,7 @@ end
 --- @param character StatCharacter
 --- @param weapon StatItem
 local function ComputeWeaponRequirementScaledDamage(character, weapon, ability)
+	Ext.Print("Character ability: ", ability, character[ability], "Character("..tostring(character)..")")
     if ability ~= nil then
         return ScaledDamageFromPrimaryAttribute(character[ability]) * 100.0
     else
@@ -26,7 +27,7 @@ end
 --- @param character StatCharacter
 --- @param weapon StatItem
 local function ComputeWeaponCombatAbilityBoost(character, weapon)
-    local abilityType = GetWeaponAbility(character, weapon)
+    local abilityType = Game.Math.GetWeaponAbility(character, weapon)
 
     if abilityType == "SingleHanded" or abilityType == "TwoHanded" or abilityType == "Ranged" or abilityType == "DualWielding" then
         local abilityLevel = character[abilityType]
@@ -118,7 +119,7 @@ local function CalculateWeaponDamageRange(character, weapon, ability)
     abilityBoosts = math.max(abilityBoosts + 100.0, 0.0) / 100.0
 
     local boost = 1.0 + damageBoost * 0.01
-    if character.IsSneaking then
+    if character.NotSneaking then
         boost = boost + Ext.ExtraData['Sneak Damage Multiplier']
     end
 
@@ -140,13 +141,11 @@ end
 --- @param character StatCharacter
 --- @param skill StatEntrySkillData
 --- @param ability string
-local function GetSkillDamageRange(character, skill, ability)
+local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, ability)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
     if skill.UseWeaponDamage == "Yes" then
-        local mainWeapon = character.MainWeapon
         local mainDamageRange = CalculateWeaponDamageRange(character, mainWeapon, ability)
-        local offHandWeapon = character.OffHandWeapon
 
         if offHandWeapon ~= nil and IsRangedWeapon(mainWeapon) == IsRangedWeapon(offHandWeapon) then
             local offHandDamageRange = CalculateWeaponDamageRange(character, offHandWeapon, ability)
@@ -167,8 +166,8 @@ local function GetSkillDamageRange(character, skill, ability)
         for damageType, range in pairs(mainDamageRange) do
             local min = Ext.Round(range[1] * damageMultiplier)
             local max = Ext.Round(range[2] * damageMultiplier)
-            range[1] = min + math.ceil(min * GetDamageBoostByType(character, damageType))
-            range[2] = max + math.ceil(max * GetDamageBoostByType(character, damageType))
+            range[1] = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
+            range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
         end
 
         local damageType = skill.DamageType
@@ -207,7 +206,7 @@ local function GetSkillDamageRange(character, skill, ability)
         local damageRange = skill['Damage Range'] * baseDamage * 0.005
 
         local damageType = skill.DamageType
-        local damageTypeBoost = 1.0 + GetDamageBoostByType(character, damageType)
+        local damageTypeBoost = 1.0 + Game.Math.GetDamageBoostByType(character, damageType)
         local damageBoost = 1.0 + (character.DamageBoost / 100.0)
         local damageRanges = {}
         damageRanges[damageType] = {

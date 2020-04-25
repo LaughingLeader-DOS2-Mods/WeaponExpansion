@@ -451,14 +451,14 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
 
-	Ext.Print("Skill Stats:")
-	Ext.Print("================================")
-	Ext.Print(LeaderLib.Common.Dump(skill))
-	Ext.Print("================================")
-	Ext.Print("Fake Weapon Stats:")
-	Ext.Print("================================")
-	Ext.Print(LeaderLib.Common.Dump(weapon))
-	Ext.Print("================================")
+	-- Ext.Print("Skill Stats:")
+	-- Ext.Print("================================")
+	-- Ext.Print(LeaderLib.Common.Dump(skill))
+	-- Ext.Print("================================")
+	-- Ext.Print("Fake Weapon Stats:")
+	-- Ext.Print("================================")
+	-- Ext.Print(LeaderLib.Common.Dump(weapon))
+	-- Ext.Print("================================")
 	-- Ext.Print("Real Weapon Stats:")
 	-- Ext.Print("================================")
 	-- for k,v in pairs(weapon) do
@@ -469,7 +469,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
-		local mainDmgs = WeaponExpansion.Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, noRandomization, "RogueLore")
+		local mainDmgs = WeaponExpansion.Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, nil, noRandomization, "RogueLore")
 		mainDmgs:Multiply(damageMultipliers)
 		if skillDamageType ~= nil then
 			mainDmgs:ConvertDamageType(skillDamageType)
@@ -479,7 +479,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
-		local mainDamageRange = WeaponExpansion.Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, "RogueLore")
+		local mainDamageRange = WeaponExpansion.Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
 		Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
