@@ -3,7 +3,7 @@
 --- @param isFromItem boolean
 --- @param param string
 local function GetMasteryBonuses(skill, character, isFromItem, param)
-	local data = MasteryParams.SkillData[skill.Name]
+	local data = WeaponExpansion.MasteryParams.SkillData[skill.Name]
 	--Ext.Print(LeaderLib.Common.Dump(data))
 	if data ~= nil then
 		local paramText = ""
@@ -27,4 +27,3 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 end
 
 WeaponExpansion.Skills.Params["LLWEAPONEX_MasteryBonuses"] = GetMasteryBonuses
-WeaponExpansion.Skills.MasteryParams = MasteryParams

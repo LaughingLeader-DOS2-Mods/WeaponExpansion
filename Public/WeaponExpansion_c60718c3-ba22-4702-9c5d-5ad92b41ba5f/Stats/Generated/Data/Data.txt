@@ -1,3 +1,2 @@
 key "LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance","25.0"
 key "LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration","6.0"
-key "LLWEAPONEX_MasteryBonus_CripplingBlow_PiercingDamagePercentage","25.0"

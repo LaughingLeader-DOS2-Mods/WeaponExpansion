@@ -94,28 +94,40 @@ end
 WeaponExpansion.TimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
 
 local function CripplingBlowBonus(char, state, funcParams)
-	--Ext.Print("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
-	local hasMastery = false
-	local data = MasteryParams.SkillData["Target_CripplingBlow"]
-	if data ~= nil and data.Tags ~= nil then
-		local character = Ext.GetCharacter(char)
-		for tagName,tagData in pairs(data.Tags) do
-			if WeaponExpansion.HasMasteryRequirement(character, tagName) then
-				hasMastery = true
-				break
+	Ext.Print("[MasteryBonuses:CripplingBlow] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
+	if state == SKILL_STATE.HIT then
+		local hasMasteries = {}
+		local data = MasteryParams.SkillData["Target_CripplingBlow"]
+		if data ~= nil and data.Tags ~= nil then
+			local character = Ext.GetCharacter(char)
+			for tagName,tagData in pairs(data.Tags) do
+				if WeaponExpansion.HasMasteryRequirement(character, tagName) then
+					hasMasteries[tagData.ID] = true
+				end
 			end
 		end
-	end
-	if hasMastery and state == SKILL_STATE.HIT then
 		local target = funcParams[1]
 		if target ~= nil then
-			local duration = Ext.ExtraData["LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration"]
-			if duration == nil then duration = 6.0 end
-			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
-				local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
-				NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
-			else
-				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
+			if hasMasteries["SUNDER"] == true then
+				local duration = Ext.ExtraData["LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration"]
+				if duration == nil then duration = 6.0 end
+				if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
+					local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
+					NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
+				else
+					ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
+				end
+			end
+			if hasMasteries["BONUSDAMAGE"] == true then
+				local character = Ext.GetCharacter(char)
+				local x,y,z = GetPosition(target)
+				local targetPos = {[1] = x, [2] = y, [3] = z}
+				local skill = WeaponExpansion.Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+				local damageList = Game.Math.GetSkillDamage(skill, character, false, false, character.Position, targetPos, character.Level, 0)
+				damageList:ConvertDamageType("Piercing")
+				for i,damage in pairs(damageList:ToTable()) do
+					ApplyDamage(target, damage, "Piercing", char)
+				end
 			end
 		end
 	end

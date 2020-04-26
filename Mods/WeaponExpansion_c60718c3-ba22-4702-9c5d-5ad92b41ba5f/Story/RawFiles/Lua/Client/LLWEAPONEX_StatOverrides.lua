@@ -94,7 +94,6 @@ else
 	Ext.StatSetAttribute(statname, property, next_value)
 end ]]
 
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Client/LLWEAPONEX_MasteryBonusParams.lua")
 local customSkillText = Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Client/LLWEAPONEX_SkillCustomText.lua")
 
 local function LLWEAPONEX_StatOverrides_Init()
@@ -103,7 +102,9 @@ local function LLWEAPONEX_StatOverrides_Init()
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 
-	for statType,entries in pairs(WeaponExpansion.Skills.MasteryParams) do
+	
+
+	for statType,entries in pairs(WeaponExpansion.MasteryParams) do
 		local statParamsAttribute = "StatsDescriptionParams"
 		if statType == "StatusData" then
 			statParamsAttribute = "DescriptionParams"

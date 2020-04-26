@@ -3,4 +3,4 @@ LLWEAPONEX_Projectile_ThrowingKnife_Description	Throw a knife at your opponent, 
 LLWEAPONEX_MasteryParam_ThrowingKnife	[1]<br><font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[2]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[3] bonus damage</font> on hit.</font>	hea8e7051gfc68g4d9dgaba8g7c871bbd4056
 LLWEAPONEX_Target_CripplingBlow_Description	Cripple the target with a sweeping blow, and all characters around it. Deals [1].[2]	h41e991cbgbe00g4469g924bge4d4c73cffa2
 LLWEAPONEX_MasteryParam_CripplingBlow_SunderBonus	[1]<br><font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [2]%</font> for [3] turn(s).</font>	h1eb09384g6bfeg4cdaga83fgc408d86cfee4
-LLWEAPONEX_MasteryParam_CripplingBlow_PiercingBonus	[1]<br><font color='#F19824'>Your axe deal an additional [2]% of the original damage as [3].</font>	h46875020ge016g4eccg94ecgc9f5233c07fd
+LLWEAPONEX_MasteryParam_CripplingBlow_PiercingBonus	[1]<br><font color='#F19824'>If the target is disabled, deal an additional [2].</font>	h46875020ge016g4eccg94ecgc9f5233c07fd

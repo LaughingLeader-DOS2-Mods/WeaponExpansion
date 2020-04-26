@@ -54,7 +54,8 @@ local function DebugInit()
     --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
    -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
-    NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
+    CharacterAddSkill(host, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", 0)
+    --NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
     Osi.LLWEAPONEX_WeaponMastery_Debug_CheatMastery(host, 0)
 end
 
