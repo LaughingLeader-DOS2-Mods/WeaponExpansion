@@ -11,18 +11,24 @@ local function ThrowingKnifeBonus(char, state, funcParams)
 	if hasMastery then
 		local procSet = ObjectGetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus") == 1
 		if state == SKILL_STATE.USED then
-			if hasMastery and not procSet and Ext.Random(1,100) <= Ext.ExtraData["LLWEAPONEX_ThrowingKnife_MasteryBonusChance"] then
-				-- Position
-				if #funcParams == 3 then
-					local x = funcParams[1]
-					local y = funcParams[2]
-					local z = funcParams[3]
-					SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
-				elseif funcParams[1] ~= nil then
-					local x,y,z = GetPosition(funcParams[1])
-					SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
+			if hasMastery and not procSet then 
+				local roll = Ext.Random(1,100)
+				local chance = Ext.ExtraData["LLWEAPONEX_ThrowingKnife_MasteryBonusChance"]
+				if chance == nil or chance < 0 then chance = 25 end
+				Ext.Print(roll, "/", chance)
+				if roll <= chance then
+					-- Position
+					if #funcParams == 3 then
+						local x = funcParams[1]
+						local y = funcParams[2]
+						local z = funcParams[3]
+						SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
+					elseif funcParams[1] ~= nil then
+						local x,y,z = GetPosition(funcParams[1])
+						SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
+					end
+					ObjectSetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 				end
-				ObjectSetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 			end
 		elseif state == SKILL_STATE.CAST then
 			if procSet then
@@ -76,3 +82,21 @@ local function ThrowingKnifeDelayedProc(funcParams)
 end
 
 WeaponExpansion.TimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
+
+local function CripplingBlowBonus(char, state, funcParams)
+	--Ext.Print("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
+	local hasMastery = IsTagged(char, "LLWEAPONEX_Blunt_Mastery1") == 1
+	if hasMastery and state == SKILL_STATE.HIT then
+		local target = funcParams[1]
+		if target ~= nil then
+			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER") == 1 then
+				local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER")
+				NRD_StatusSetReal(target, handle, "CurrentLifeTime", 6.0)
+			else
+				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER", 6.0, 0, char)
+			end
+		end
+	end
+end
+
+LeaderLib.RegisterSkillListener("Target_CripplingBlow", CripplingBlowBonus)

@@ -31,7 +31,7 @@ local function SetupUIListeners(ui)
 	end
 end
 
-local function LLWEAPONEX_Client_SessionLoaded()
+local function Client_UIDebugTest()
 	local ui = Ext.GetBuiltinUI("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf")
 	if ui == nil then
 		Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf).")
@@ -48,7 +48,11 @@ local function LLWEAPONEX_Client_SessionLoaded()
 	end
 end
 
---Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
+local function LLWEAPONEX_Client_SessionLoaded()
+	WeaponExpansion.Skills.MasteryParams.UpdateText()
+end
+
+Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
 
 local function LLWEAPONEX_OnClientMessage(call,param)
 	if param == "HookUI" then
