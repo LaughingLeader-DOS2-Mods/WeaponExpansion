@@ -121,7 +121,7 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 		local status,mainDamageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
 		if status and mainDamageRange ~= nil then
 			local resultString = ""
-			Ext.Print("Skill damage param: " .. LeaderLib.Common.Dump(mainDamageRange))
+			--Ext.Print("Skill damage param: " .. LeaderLib.Common.Dump(mainDamageRange))
 			for damageType,damage in pairs(mainDamageRange) do
 				resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%s-%s", math.tointeger(damage[1]), math.tointeger(damage[2])))
 			end

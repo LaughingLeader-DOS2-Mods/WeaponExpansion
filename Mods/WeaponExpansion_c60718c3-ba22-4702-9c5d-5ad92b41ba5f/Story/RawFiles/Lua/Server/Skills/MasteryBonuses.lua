@@ -13,7 +13,7 @@ local function ThrowingKnifeBonus(char, state, funcParams)
 		if state == SKILL_STATE.USED then
 			if hasMastery and not procSet then 
 				local roll = Ext.Random(1,100)
-				local chance = Ext.ExtraData["LLWEAPONEX_ThrowingKnife_MasteryBonusChance"]
+				local chance = Ext.ExtraData["LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance"]
 				if chance == nil or chance < 0 then chance = 25 end
 				Ext.Print(roll, "/", chance)
 				if roll <= chance then
@@ -89,11 +89,13 @@ local function CripplingBlowBonus(char, state, funcParams)
 	if hasMastery and state == SKILL_STATE.HIT then
 		local target = funcParams[1]
 		if target ~= nil then
+			local duration = Ext.ExtraData["LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration"]
+			if duration == nil then duration = 6.0 end
 			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER") == 1 then
 				local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER")
-				NRD_StatusSetReal(target, handle, "CurrentLifeTime", 6.0)
+				NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
 			else
-				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER", 6.0, 0, char)
+				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER", duration, 0, char)
 			end
 		end
 	end

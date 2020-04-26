@@ -289,6 +289,7 @@
 	<content contentuid="h1de3fa06g9f91g4efdg82f4gac1f3c75d6a7">Mighty Greatbow </content>
 	<content contentuid="h1e5c8bd9ge124g4d2ag833fgc8b47edc5e47">Action Manual</content>
 	<content contentuid="h1e7673d0g6739g4be5gb84agf1d3fc43b003">Revenant</content>
+	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#FFE7AA&apos; size=&apos;16&apos;&gt;Blunt Weapons Mastery 1&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [1]%&lt;/font&gt; for [2] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h1ec134feg2358g4666g91c3gb0808e20fd0a">[ORDER] *Hit the button labeled &apos;Place Order&apos;.*</content>
 	<content contentuid="h1ec7c569g945fg47a9g9efbg52852b310b6c">Wanderer&apos;s Blade</content>
 	<content contentuid="h1ed46838g214eg4110g92e7g03381bcdfe7e">Banner of the Pack (Finesse Scaling)</content>
@@ -627,7 +628,7 @@
 	<content contentuid="h415f025egf93cg4ee8gafe0gec2c25669edb">Fire 15 bullets in a [1] degree arc. Each bullet deals [2].</content>
 	<content contentuid="h416e348bgb3ddg4b02g9f8cg228d9883f50f">&lt;font color=&apos;#65C900&apos;&gt;Attuned to Poison&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#65C900&apos;&gt;Contaminates surfaces.&lt;/font&gt;</content>
 	<content contentuid="h419f8270gb3eag4f2dga74cgffc0a15a7317">Randomly swap the positions of objects caught within [1].&lt;br&gt;&lt;font color=&apos;#73f6ff&apos;&gt;Translocation Magic&lt;/font&gt;&lt;br&gt;If the &lt;font color=&apos;#c9aa58&apos;&gt;Translocation Grimoire&lt;/font&gt; is active, apply &lt;font color=&apos;#FF0000&apos;&gt;Translocation Damage&lt;/font&gt; to enemies, and &lt;font color=&apos;#97fbff&apos;&gt;Translocation Surge&lt;/font&gt; to allies.</content>
-	<content contentuid="h41e991cbgbe00g4469g924bge4d4c73cffa2">Placeholder</content>
+	<content contentuid="h41e991cbgbe00g4469g924bge4d4c73cffa2">Cripple the target with a sweeping blow, and all characters around it. Deals [1].[2]</content>
 	<content contentuid="h41f9a490ge372g43c7g989ag81b444fb98c8">&lt;font color=&apos;#FF0000&apos;&gt;*Only the grimoire user can equip that!*&lt;/font&gt;</content>
 	<content contentuid="h41ff62e4g3ae2g4f24ga725g0442f8e936a2">*[ONE-HANDED] Click on the button labeled &apos;One-Handed&apos;.*</content>
 	<content contentuid="h4230520dgdd57g4384g98cdg326bebd1bbe2">Dagger Mastery II</content>
