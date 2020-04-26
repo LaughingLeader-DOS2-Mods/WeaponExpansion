@@ -289,7 +289,7 @@
 	<content contentuid="h1de3fa06g9f91g4efdg82f4gac1f3c75d6a7">Mighty Greatbow </content>
 	<content contentuid="h1e5c8bd9ge124g4d2ag833fgc8b47edc5e47">Action Manual</content>
 	<content contentuid="h1e7673d0g6739g4be5gb84agf1d3fc43b003">Revenant</content>
-	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#FFE7AA&apos; size=&apos;16&apos;&gt;Blunt Weapons Mastery 1&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [1]%&lt;/font&gt; for [2] turn(s).&lt;/font&gt;</content>
+	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">[1]&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [2]%&lt;/font&gt; for [3] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h1ec134feg2358g4666g91c3gb0808e20fd0a">[ORDER] *Hit the button labeled &apos;Place Order&apos;.*</content>
 	<content contentuid="h1ec7c569g945fg47a9g9efbg52852b310b6c">Wanderer&apos;s Blade</content>
 	<content contentuid="h1ed46838g214eg4110g92e7g03381bcdfe7e">Banner of the Pack (Finesse Scaling)</content>
@@ -658,6 +658,7 @@
 	<content contentuid="h45c35594ga4efg4923g87b2g351240d83b96">Slayer&apos;s Greatbow</content>
 	<content contentuid="h4646c6f4gacc8g48a0ga93fgae6e879488c2">Character is enhancing the power of &lt;font color=&apos;#73f6ff&apos;&gt;Teleportation Magic&lt;/font&gt; with the &lt;font color=&apos;#C7A758&apos;&gt;Gatekeeper&apos;s Codex&lt;/font&gt;.&lt;br&gt;When teleporting a target, bonus damage is dealt to enemies, while allies receive positive bonuses.</content>
 	<content contentuid="h46549881g092ag4c08ga301g9e043ee34d80">Character is unsteady, and has a chance to fall when moving.</content>
+	<content contentuid="h46875020ge016g4eccg94ecgc9f5233c07fd">[1]&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;Your axe deal an additional [2]% of the original damage as [3].&lt;/font&gt;</content>
 	<content contentuid="h4746d357ge878g462eg86ccg30f7a8115f17">*[TWO-HANDED] Click on the button labeled &apos;Two-Handed&apos;.*</content>
 	<content contentuid="h4752734dg8d97g4a1eg9ef2g6c089c8a27fc">Character&apos;s firearm is attuned to ice.</content>
 	<content contentuid="h477c0babg3628g4207g922ega0f054a32cb6">&lt;font color=&apos;#9A5085&apos;&gt;Torment&lt;/font&gt;</content>
@@ -734,7 +735,6 @@
 	<content contentuid="h5006a424g3d59g4356-baa7g26110b276aab">Runic Knight</content>
 	<content contentuid="h501a08ddg508bg4542g9008geddce73365d8">Runic Blade - Apply rune effects on attack</content>
 	<content contentuid="h5022b186gbe5eg47a3gb925g414b46a98a08">Cushion Force</content>
-	<content contentuid="h50295d19g3065g4099g9e78g7c6e7b45c579">&lt;font color=&apos;#AE9F95&apos; size=&apos;18&apos;&gt;Bonus: Dagger Mastery I Required&lt;/font&gt;</content>
 	<content contentuid="h504347e6gbf4eg4996g8090g3556c3a10e35">Earthsplitter - Attack the ground for 80% damage in a 2m radius</content>
 	<content contentuid="h5047443fg5e5dg4a8bg82e0gafc574d222f4">Tuned Flintlock Pistol</content>
 	<content contentuid="h507a3c21g7f2cg4232gab75g554c515f18d5">Hand Crossbow Mastery II</content>
@@ -806,6 +806,7 @@
 	<content contentuid="h575a6a47gc079g452ag9a59g9b02b66308fd">Blademaster&apos;s Strike 8</content>
 	<content contentuid="h5774357cg520bg4294g9859gdf1c67866438">A special pet rock, dipped in poison. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
 	<content contentuid="h578789e0g51d1g4191g888cg100014c1f5b1">Debug Runeblade</content>
+	<content contentuid="h57a0af07geaa7g421egab54gb706c645de98">Sundered</content>
 	<content contentuid="h57a85f45gfe1cg4b47ga0f9g51dcaeb29d0a">*[INGREDIENTS] Click on the button labeled &apos;Ingredients&apos;.*</content>
 	<content contentuid="h57a8a558gdd74g48bcg9149g09d77d721c0f">Quiver</content>
 	<content contentuid="h57aecc43g2c52g41aeg891bg385e1b160e35">Spinewinder</content>
@@ -1185,6 +1186,7 @@
 	<content contentuid="h7ebefc17g8de3g451bg8ca5gcd0a58d1f986">Peasant&apos;s Equalizer</content>
 	<content contentuid="h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad">&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#00FFAA&apos; size=&apos;16&apos;&gt;Ammo Type: [1]&lt;/font&gt;</content>
 	<content contentuid="h7ef35923g2e83g410bgb1ecg1aa1acc31bba">Finely Crafted Elven Shields</content>
+	<content contentuid="h7f0ed2c6g0912g4e04g9212g0d8d8e9633d6">Character&apos;s max armor is temporarily decreased.</content>
 	<content contentuid="h7f146334gc5d1g45a7ga8a2g3d23e5cda564">Wraithblade</content>
 	<content contentuid="h7f153177ge4deg49b9ga990g6c3c8a6b5ae0">&lt;font color=&apos;#C7A758&apos;&gt;Oni Gauntlet&lt;/font&gt; Power</content>
 	<content contentuid="h7f16273eg43f2g4309g9b53g03cc4c2588f6">Axe Mastery V</content>
@@ -2113,7 +2115,7 @@
 	<content contentuid="hea7b370fg93b8g4c74g9ebbgfc757898ff2c">Pacifist&apos;s Wrath (1H)</content>
 	<content contentuid="hea81e505gc83fg4ac1gbed5g7b03511ff083">&lt;font color=&apos;#4197E2&apos;&gt;Attuned to Water&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#4197E2&apos;&gt;Douses surfaces.&lt;/font&gt;</content>
 	<content contentuid="hea8585b2gae30g46efga47egf7afed684cc8">Param Test&lt;br&gt;Status_Arrowhead_Fire:Damage [1]&lt;br&gt;Projectile_Fireball:Damage [2]</content>
-	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#8F7CFF&apos; size=&apos;16&apos;&gt;Dagger Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[1]%&lt;/font&gt; to be coated in poison or explosive oil, dealing &lt;font color=&apos;#00FFAA&apos;&gt;[2] bonus damage&lt;/font&gt; on hit.&lt;/font&gt;</content>
+	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">[1]&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[2]%&lt;/font&gt; to be coated in poison or explosive oil, dealing &lt;font color=&apos;#00FFAA&apos;&gt;[3] bonus damage&lt;/font&gt; on hit.&lt;/font&gt;</content>
 	<content contentuid="hea8fbd35g2e22g4409gbd12g02488d4a64d7">Power Pole (Intelligence Scaling)</content>
 	<content contentuid="head276c0gfecag4897gbc5cg4b74c26bb4d9">a Crossbow</content>
 	<content contentuid="headd90e1g4e62g45b3gb69ag0f25a7bd491e">Oni Edge</content>

@@ -7,7 +7,17 @@ local throwingKnifeBonuses = {
 
 local function ThrowingKnifeBonus(char, state, funcParams)
 	--Ext.Print("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
-	local hasMastery = IsTagged(char, "LLWEAPONEX_Dagger_Mastery1") == 1
+	local hasMastery = false
+	local data = MasteryParams.SkillData["Projectile_ThrowingKnife"]
+	if data ~= nil and data.Tags ~= nil then
+		local character = Ext.GetCharacter(char)
+		for tagName,tagData in pairs(data.Tags) do
+			if WeaponExpansion.HasMasteryRequirement(character, tagName) then
+				hasMastery = true
+				break
+			end
+		end
+	end
 	if hasMastery then
 		local procSet = ObjectGetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus") == 1
 		if state == SKILL_STATE.USED then
@@ -85,17 +95,27 @@ WeaponExpansion.TimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = Th
 
 local function CripplingBlowBonus(char, state, funcParams)
 	--Ext.Print("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
-	local hasMastery = IsTagged(char, "LLWEAPONEX_Blunt_Mastery1") == 1
+	local hasMastery = false
+	local data = MasteryParams.SkillData["Target_CripplingBlow"]
+	if data ~= nil and data.Tags ~= nil then
+		local character = Ext.GetCharacter(char)
+		for tagName,tagData in pairs(data.Tags) do
+			if WeaponExpansion.HasMasteryRequirement(character, tagName) then
+				hasMastery = true
+				break
+			end
+		end
+	end
 	if hasMastery and state == SKILL_STATE.HIT then
 		local target = funcParams[1]
 		if target ~= nil then
 			local duration = Ext.ExtraData["LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration"]
 			if duration == nil then duration = 6.0 end
-			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER") == 1 then
-				local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER")
+			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
+				local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
 				NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
 			else
-				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_BLUNT_SUNDER", duration, 0, char)
+				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
 			end
 		end
 	end

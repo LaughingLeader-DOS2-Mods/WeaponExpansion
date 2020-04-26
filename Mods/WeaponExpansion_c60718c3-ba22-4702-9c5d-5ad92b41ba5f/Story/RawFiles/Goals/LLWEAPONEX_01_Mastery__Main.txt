@@ -336,7 +336,7 @@ LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_ThrowingAbility", "LLWEAPONEX_WM
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_ThrowingAbility", 1, "ThrowWeapon", "Any");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_ThrowingAbility", "ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Unarmed", "<font color='#40E0D0'>Unarmed Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Unarmed", "<font color='#FF44FF'>Unarmed Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Unarmed", 0, "<font color='#EAFFFE'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Unarmed", 1, "<font color='#9DFCFF'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Unarmed", 2, "<font color='#6CE3F5'>Scrapper</font>");
@@ -387,7 +387,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Crossbow", 4, "<font color='#8
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Crossbow", "LLWEAPONEX_WM_Crossbow_Exp", "LLWEAPONEX_WM_Crossbow_Level");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Dagger", "<font color='#5b40ff'>Dagger Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Dagger", "<font color='#5B40FF'>Dagger Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Dagger", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Dagger", 1, "<font color='#cdbcf0'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Dagger", 2, "<font color='#a17ee8'>Journeyman Thief</font>");
@@ -396,7 +396,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Dagger", 4, "<font color='#682
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Dagger", "LLWEAPONEX_WM_Dagger_Exp", "LLWEAPONEX_WM_Dagger_Level");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Spear", "<font color='#ffcf29'>Spear Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Spear", "<font color='#FFCF29'>Spear Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Spear", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Spear", 1, "<font color='#fff2c6'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Spear", 2, "<font color='#ffe899'>Journeyman Spearman</font>");
@@ -405,7 +405,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Spear", 4, "<font color='#ffc1
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Spear", "LLWEAPONEX_WM_Spear_Exp", "LLWEAPONEX_WM_Spear_Level");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Staff", "<font color='#2effe9'>Arcane Staff Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Staff", "<font color='#2EFFE9'>Arcane Staff Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Staff", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Staff", 1, "<font color='#d1f8ff'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Staff", 2, "<font color='#9bf0ff'>Journeyman Staff Acolyte</font>");
@@ -414,7 +414,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Staff", 4, "<font color='#5edb
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Staff", "LLWEAPONEX_WM_Staff_Exp", "LLWEAPONEX_WM_Staff_Level");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Sword", "<font color='#ff3e2a'>Sword Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Sword", "<font color='#FF3E2A'>Sword Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Sword", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Sword", 1, "<font color='#ffac99'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Sword", 2, "<font color='#ff9178'>Journeyman Swordsman</font>");
@@ -423,7 +423,7 @@ DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Sword", 4, "<font color='#ff66
 
 LLWEAPONEX_WeaponMastery_AddMastery("LLWEAPONEX_Sword", "LLWEAPONEX_WM_Sword_Exp", "LLWEAPONEX_WM_Sword_Level");
 
-DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Wand", "<font color='#b658ff'>Wand Mastery</font>");
+DB_LLWEAPONEX_WeaponMastery_MasteryNames("LLWEAPONEX_Wand", "<font color='#B658FF'>Wand Mastery</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Wand", 0, "<font color='#FDFFEA'>Beginner</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Wand", 1, "<font color='#d8bafd'>Novice</font>");
 DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_Wand", 2, "<font color='#c596fe'>Journeyman of Wands</font>");
