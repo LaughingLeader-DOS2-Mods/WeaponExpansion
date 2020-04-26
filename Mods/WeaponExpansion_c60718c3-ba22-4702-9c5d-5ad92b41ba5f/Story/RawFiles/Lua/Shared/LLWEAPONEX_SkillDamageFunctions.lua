@@ -191,7 +191,7 @@ local function PrepareWeaponStat(stat,level,attribute,weaponType)
 	local damage = Game.Math.GetLevelScaledWeaponDamage(level)
 	local baseDamage = damage * (weaponStat.DamageFromBase * 0.01)
 	local range = baseDamage * (weaponStat["Damage Range"] * 0.01)
-	Ext.Print("damage:",damage,"baseDamage:",baseDamage,"range:",range)
+	--Ext.Print("damage:",damage,"baseDamage:",baseDamage,"range:",range)
 	weaponStat.MinDamage = Ext.Round(baseDamage - (range/2))
 	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))
 	weaponStat.DamageType = weaponStat["Damage Type"]
@@ -480,7 +480,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = WeaponExpansion.Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
-		Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
+		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end
