@@ -6,14 +6,16 @@ WeaponExpansion.Math = { AbilityScaling = {}}
 WeaponExpansion.Text = {}
 WeaponExpansion.MasteryParams = {}
 
---- @param character StatCharacter
+--- @param character EsvCharacter|StatCharacter
 --- @param tag string
-local function HasMasteryRequirement(character, tag)
-	if character.Character:HasTag(tag) == true then
+--- @return boolean
+local function TryCheckMasteryRequirement(character, tag)
+	print("TryCheckMasteryRequirement character", character, "tag", tag)
+	if character:HasTag(tag) == true then
 		---@type StatItem
-		local weapon = character:GetItemBySlot("Weapon")
+		local weapon = character.Stats:GetItemBySlot("Weapon")
 		---@type StatItem
-		local offhand = character:GetItemBySlot("Shield")
+		local offhand = character.Stats:GetItemBySlot("Shield")
 		if weapon ~= nil then
 			Ext.Print(string.format("HasMasteryRequirement[%s] MainWeapon[%s]", tag, weapon.Name))
 		end
@@ -21,6 +23,19 @@ local function HasMasteryRequirement(character, tag)
 			Ext.Print(string.format("HasMasteryRequirement[%s] OffHandWeapon[%s]", tag, offhand.Name))
 		end
 		return true
+	end
+	return false
+end
+
+--- @param character EsvCharacter|StatCharacter
+--- @param tag string
+--- @return boolean
+local function HasMasteryRequirement(character, tag)
+	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
+	if not status then
+		Ext.PrintError("Error checking mastery requirements:\n", result)
+	else
+		return result
 	end
 	return false
 end
