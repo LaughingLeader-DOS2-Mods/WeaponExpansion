@@ -110,7 +110,7 @@ WeaponExpansion.Skills.Params["GetHighestAttribute"] = GetScaling
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
 local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
-	Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
+	--Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
 	--Ext.Print("skill("..tostring(skill)..") character("..tostring(character)..") isFromItem("..tostring(isFromItem)..")")
 	local param_func = WeaponExpansion.Skills.Damage.Params[param]
 	if param_func ~= nil then

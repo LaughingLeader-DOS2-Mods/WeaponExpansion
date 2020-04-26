@@ -55,10 +55,14 @@ local function DebugInit()
     Osi.LLWEAPONEX_WeaponMastery_Debug_CheatMastery(host, 0)
 end
 
-local function LLWEAPONEX_GameSessionLoad()
+local function SessionLoading()
+    if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
+        EnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
+        EnemyUpgradeOverhaul.IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
+    end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
     Mods.LeaderLib.AddDebugInitCall(DebugInit)
 end
-Ext.RegisterListener("SessionLoading", LLWEAPONEX_GameSessionLoad)
+Ext.RegisterListener("SessionLoading", SessionLoading)
 
 Ext.Print("[WeaponExpansion:BootstrapServer.lua] Finished running.")
