@@ -36,7 +36,40 @@ IF
 StoryEvent((CHARACTERGUID)_Totem, "LLWEAPONEX_BattleBooks_SpellScroll_TotemTeleported_SnappedPosition_PlayEffect")
 THEN
 PlayEffect(_Totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root");
-EXITSECTION
 
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT");
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", (CHARACTERGUID)_Source)
+THEN
+DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Target, _Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT");
+
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", _)
+AND
+DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Target, _Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT")
+THEN
+LeaderLib_Timers_StartCharacterCharacterTimer(_Target, _Source, 750, "Timers_LLWEAPONEX_ClearSpellScrollDeathListener", "LLWEAPONEX_ClearSpellScrollDeathListener");
+
+IF
+CharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_ClearSpellScrollDeathListener")
+AND
+DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Target, _Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT")
+THEN
+NOT DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Target, _Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT");
+
+IF
+CharacterDied(_Target)
+AND
+DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Target, _Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT")
+THEN
+NOT DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Target, _Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT");
+LeaderLib_Ext_RefreshSkill(_Source, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic");
+
+EXITSECTION
+SysClear("DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath", 2);
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"
