@@ -43,6 +43,7 @@ end
 
 WeaponExpansion.HasMasteryRequirement = HasMasteryRequirement
 
+Ext.Require("Shared/Data/MasteryData_Masteries.lua")
 Ext.Require("Shared/Data/MasteryBonusParams.lua")
 
 ---@class TranslatedString

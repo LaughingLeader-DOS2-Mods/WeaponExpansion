@@ -21,3 +21,5 @@ function MasteryData:Create(id,name)
 	WeaponExpansion.Masteries[id] = this
     return this
 end
+
+return MasteryData

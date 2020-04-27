@@ -3,6 +3,7 @@ Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWE
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_GameMechanics.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_PistolMechanics.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_SkillDamage.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/MasteryHelpers.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/Skills/MasteryBonuses.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_Debug.lua")
 
@@ -51,6 +52,9 @@ local function DebugInit()
     if ItemTemplateIsInPartyInventory(host, "LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d", 0) <= 0 then
         ItemTemplateAddTo("LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d", host, 1, 0)
     end
+    if ItemTemplateIsInPartyInventory(host, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27", 0) <= 0 then
+        ItemTemplateAddTo("WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27", host, 1, 0)
+    end
     --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
    -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
@@ -58,6 +62,23 @@ local function DebugInit()
     --NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
     Osi.LLWEAPONEX_WeaponMastery_Debug_CheatMastery(host, 0)
 end
+
+local function dumpRanks(...)
+    --DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>")
+    local rankNamesDB = Osi.DB_LLWEAPONEX_WeaponMastery_RankNames:Get(nil, nil, nil)
+    local output = ""
+    for i,entry in ipairs(rankNamesDB) do
+        --AddRank(masteryID, level, color, name)
+        local masteryID = entry[1]
+        local level = entry[2]
+        local text = entry[3]
+        local _,_,color = string.find(text, "color='(.+)'")
+        local _,_,rankName = string.find(text, ">(.+)<")
+        output = output .. string.format("AddRank(\"%s\", %s, \"%s\", \"%s\")\n", masteryID, level, color, rankName)
+    end
+    print(output)
+end
+Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 
 local function SessionLoading()
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
