@@ -366,6 +366,20 @@ THEN
 NOT DB_LeaderLib_Array_Temp_RandomResult("LLWEAPONEX_ChaosSurfaces", _Index, _Surface);
 LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(_Char, _x, _y, _z, _Surface, 1.0, 2);
 //END_REGION
+
+//REGION BOOK_XP
+IF
+CharacterUsedItemTemplate(_Char, _BookTemplate, _Book)
+AND
+NOT DB_LLWEAPONEX_BattleBooks_ReadBooks(_Char, _BookTemplate)
+AND
+IsTagged(_Book, "BOOK", 1)
+AND
+LLWEAPONEX_Ext_QRY_HasMinimumMasteryLevel(_Char, "LLWEAPONEX_BattleBook", 1, _Level)
+THEN
+DB_LLWEAPONEX_BattleBooks_ReadBooks(_Char, _BookTemplate);
+LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Char, "LLWEAPONEX_BattleBook", 1, _Char);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
