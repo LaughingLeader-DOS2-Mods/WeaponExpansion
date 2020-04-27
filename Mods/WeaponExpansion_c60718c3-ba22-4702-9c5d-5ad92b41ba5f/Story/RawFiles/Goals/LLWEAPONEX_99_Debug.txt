@@ -34,43 +34,6 @@ PROC_GLO_PartyMembers_Add(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24
 */
 
 IF
-GameStarted(_Level, _)
-AND
-IsGameLevel(_Level, 1)
-AND
-GlobalGetFlag("LeaderLib_DebugModeEnabled", 1)
-AND
-CharacterGetHostCharacter(_Host)
-AND
-CharacterGetReservedUserID(_Host, _ID)
-AND
-GetUserName(_ID, "LaughingLeader")
-THEN
-GlobalSetFlag("LLWEAPONEX_Debug_LeaderModeEngaged");
-
-IF
-GameStarted("FJ_FortJoy_Main", _)
-AND
-GlobalGetFlag("LeaderLib_DebugModeEnabled", 1)
-AND
-QueryOnlyOnce("LLWEAPONEX_Debug_LeaderGold")
-AND
-CharacterGetHostCharacter(_Host)
-AND
-CharacterGetReservedUserID(_Host, _UserID)
-AND
-GetUserName(_UserID, _Username)
-AND
-StringContains(_Username, "Leader", 1)
-THEN
-CharacterAddGold(_Host, 9999);
-CharacterGiveReward(_Host, "S_LLWEAPONEX_Debug_BattlemageArmor", 1);
-ItemTemplateAddTo("WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9", _Host, 1);
-ItemTemplateAddTo("EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7", _Host, 1);
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Host, 1);
-CharacterAddSkill(_Host, "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud");
-
-IF
 RegionStarted("TestLevel_LL_WeaponExpansion")
 THEN
 SysActivateGoal("LLWEAPONEX_99_Debug_TestLevel");
@@ -81,37 +44,6 @@ GameStarted("TestLevel_LL_WeaponExpansion", 1)
 THEN
 SysActivateGoal("LLWEAPONEX_99_Debug_TestLevel");
 SysActivateGoal("LLWEAPONEX_24_Campaign_Start");
-
-IF
-GameStarted("FJ_FortJoy_Main", _)
-AND
-GlobalGetFlag("LeaderLib_DebugModeEnabled", 1)
-AND
-CharacterGetHostCharacter(_Host)
-AND
-CharacterGetReservedUserID(_Host, _UserID)
-AND
-GetUserName(_UserID, _Name)
-AND
-StringContains(_Name, "LLDebug", 1)
-THEN
-LLWEAPONEX_Debug_SetupDebugProfile(_Host);
-
-PROC
-LLWEAPONEX_Debug_SetupDebugProfile((CHARACTERGUID)_Host)
-THEN
-CharacterAddGold(_Host, 696969);
-//DB_WaypointInfo(ITEMGUID_S_FTJ_UnderGroundShrine_fceee19d-145c-8a40-28fb-536fab281adc,TRIGGERGUID_S_FTJ_UndergroundShrine_Point_6985ff34-4bc6-4525-9611-afbe99b99557,"WAYP_FTJ_UndergroundShrine");
-//Vending Machine Waypoint
-PROC_UnlockWaypointForAll("WAYP_FTJ_UndergroundShrine");
-CharacterAddTalentPoint(_Host, 2);
-
-IF
-TextEventSet("llweap_beamtest")
-AND
-CharacterGetHostCharacter(_Host)
-THEN
-PlayBeamEffect(_Host, _Host, "RS3_FX_GP_Beams_Telekinesis_01", "Dummy_BackFX_L", "Dummy_FrontFX_L");
 
 IF
 StoryEvent((CHARACTERGUID)_Trader, "LeaderLib_Events_OnLeaderTradeSpawned")

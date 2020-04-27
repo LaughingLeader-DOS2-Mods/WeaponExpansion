@@ -369,13 +369,15 @@ LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(_Char, _x, _y, _z, _Surface, 1
 
 //REGION BOOK_XP
 IF
-CharacterUsedItemTemplate(_Char, _BookTemplate, _Book)
+CharacterUsedItemTemplate(_Player, _BookTemplate, _Book)
 AND
-NOT DB_LLWEAPONEX_BattleBooks_ReadBooks(_Char, _BookTemplate)
+NOT DB_LLWEAPONEX_BattleBooks_ReadBooks(_Player, _BookTemplate)
+AND
+DB_IsPlayer(_Player)
 AND
 IsTagged(_Book, "BOOK", 1)
 THEN
-DB_LLWEAPONEX_BattleBooks_ReadBooks(_Char, _BookTemplate);
+DB_LLWEAPONEX_BattleBooks_ReadBooks(_Player, _BookTemplate);
 LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_BattleBook", 0.25);
 //END_REGION
 EXITSECTION

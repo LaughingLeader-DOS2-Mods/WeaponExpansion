@@ -15,90 +15,21 @@ DB_LLWEAPONEX_WeaponMastery_BonusStatus(2, "LLWEAPONEX_MASTERYBONUS2");
 DB_LLWEAPONEX_WeaponMastery_BonusStatus(3, "LLWEAPONEX_MASTERYBONUS3");
 DB_LLWEAPONEX_WeaponMastery_BonusStatus(4, "LLWEAPONEX_MASTERYBONUS4");
 
-PROC
-LLWEAPONEX_WeaponMastery_InitSettings()
-THEN
-DB_LLWEAPONEX_WeaponMastery_MasteryCap(3);
-
-DB_LLWEAPONEX_WeaponMastery_ActCaps("TUT_Tutorial_A", 1);
-DB_LLWEAPONEX_WeaponMastery_ActCaps("FJ_FortJoy_Main", 1);
-DB_LLWEAPONEX_WeaponMastery_ActCaps("LV_HoE_Main", 1);
-DB_LLWEAPONEX_WeaponMastery_ActCaps("RC_Main", 1);
-DB_LLWEAPONEX_WeaponMastery_ActCaps("CoS_Main", 2);
-DB_LLWEAPONEX_WeaponMastery_ActCaps("Arx_Main", 3);
-DB_LLWEAPONEX_WeaponMastery_ActCaps("Arx_Endgame", 3);
-LLWEAPONEX_WeaponMastery_Internal_InitMasteries();
-
-
-QRY
-LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap((STRING)_Region)
-AND
-DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, 1)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap((STRING)_Region)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, _)
-THEN
-DB_NOOP(1);
-
-PROC
-LLWEAPONEX_WeaponMastery_InitSettings()
-AND
-NOT DB_GlobalFlag("LLWEAPONEX_WeaponMastery_InitializedMaxExperience")
-AND
-DB_CurrentLevel(_Region)
-THEN
-LLWEAPONEX_WeaponMastery_InitMaxExperience(_Region);
-GlobalSetFlag("LLWEAPONEX_WeaponMastery_InitializedMaxExperience");
-
-PROC
-LLWEAPONEX_WeaponMastery_InitMaxExperience((STRING)_Region)
-AND
-LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region) // Either this Region is 1, or not in the DB
-THEN
-SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
-//Current Level, Total "Hits" to Next Level
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 20);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 80);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 320);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 600);
-
-//Act 3 start
-PROC
-LLWEAPONEX_WeaponMastery_InitMaxExperience((STRING)_Region)
-AND
-NOT LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region)
-AND
-DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, 2)
-THEN
-SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 20);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 50);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 250);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 400);
-
-//Act 4 start
-PROC
-LLWEAPONEX_WeaponMastery_InitMaxExperience((STRING)_Region)
-AND
-NOT LLWEAPONEX_WeaponMastery_QRY_Internal_UseDefaultActCap(_Region)
-AND
-DB_LLWEAPONEX_WeaponMastery_ActCaps(_Region, 3)
-THEN
-SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(0, 10);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(1, 20);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(2, 60);
-DB_LLWEAPONEX_WeaponMastery_MaxExperience(3, 100);
-
-//Max possible level attainable by players
-//DB_LLWEAPONEX_WeaponMastery_Softcap(2);
+DB_LLWEAPONEX_WeaponMastery_NoBonusStatus("LLWEAPONEX_Pistol");
 //END_REGION
 
 //REGION INIT_MASTERIES
+PROC
+LLWEAPONEX_WeaponMastery_InitSettings()
+THEN
+DB_NOOP(1);
+
+/*
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON",          "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION",   "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM",           "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
+*/
+/*
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "Cover", "Target_LLWEAPONEX_ShieldCover");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "ShieldPrison", "Target_LLWEAPONEX_ShieldPrison");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_DualShields", "IronMaiden", "Target_LLWEAPONEX_IronMaiden");
@@ -108,8 +39,6 @@ DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "ElementalBullets", "Ta
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Firearm", "Blunderbuss_Cannonball", "Zone_LLWEAPONEX_Blunderbuss_Cannonball");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Greatbow", "FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_HandCrossbow", "Assassinate", "Projectile_LLWEAPONEX_HandCrossbow_Assassinate");
-
-DB_LLWEAPONEX_WeaponMastery_NoBonusStatus("LLWEAPONEX_Pistol");
 
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Katana", "Iaido", "Rush_LLWEAPONEX_Katana_Iaido");
 DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Katana", 1, "Combo", "Tag");
@@ -136,14 +65,11 @@ DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_Runeblade", 1, "PoisonBurst"
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "RunicReverb", "Shout_LLWEAPONEX_Runeblade_RunicReverb");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_Runeblade", "PoisonBurst", "Target_LLWEAPONEX_Runeblade_PoisonBurst");
 
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_POISON",          "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_CONTAMINATION",   "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_ACTIVATE_RUNEBLADE_VENOM",           "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
-
 DB_LLWEAPONEX_WeaponMastery_MasteryOnlyStatuses("LLWEAPONEX_Runeblade", "PoisonBurst", "LLWEAPONEX_RUNEBLADE_MASTERY_POISON");
 
 //DB_LLWEAPONEX_WeaponMastery_Progression("LLWEAPONEX_ThrowingAbility", 1, "ThrowWeapon", "Any");
 DB_LLWEAPONEX_WeaponMastery_Skills("LLWEAPONEX_ThrowingAbility", "ThrowWeapon", "Projectile_LLWEAPONEX_ThrowWeapon");
+*/
 //END_REGION
 
 //REGION UPDATES
@@ -163,54 +89,7 @@ SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
 //DB_LLWEAPONEX_WeaponMastery_Flags("LLWEAPONEX_Katana", "Finisher", "LLWEAPONEX_Katana_FinisherEnabled", "Tag");
 SysClear("DB_LLWEAPONEX_WeaponMastery_Progression", 4);
 SysClear("DB_LLWEAPONEX_WeaponMastery_Flags", 4);
-//END_REGION
-
-//REGION TEXT_EVENTS
-IF
-TextEventSet("llweap_masterall")
-THEN
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery();
-
-PROC
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery()
-AND
-DB_IsPlayer(_Player)
-THEN
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Player, 0);
-
-PROC
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player)
-THEN
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Player, 0);
-
-PROC
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player, (INTEGER)_ShowText)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_Mastery, _CurrentXPVar, _LevelVar, _EnabledFlag)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_WeaponMastery:Debug:CheatMastery] Maxing out [",_Mastery,"] mastery.");
-LLWEAPONEX_WeaponMastery_InitMasteryVariables(_Player, _Mastery, 4, 1);
-LLWEAPONEX_WeaponMastery_SetProgressionFlags(_Player, _Mastery, 0, 4);
-LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp(_Player, _Mastery, 4);
-
-PROC
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery((CHARACTERGUID)_Player, 1)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_Mastery, _CurrentXPVar, _LevelVar, _EnabledFlag)
-THEN
-LLWEAPONEX_WeaponMastery_ShowLevelUpText(_Player, _Mastery, 4, 0);
-
-IF
-TextEventSet("llweap_unlockallskills")
-AND
-DB_IsPlayer(_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_Progression(_Mastery, _Level, _SkillID, _Type)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _Mastery, _SkillID)
-THEN
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _Mastery, _SkillID);
-LLWEAPONEX_WeaponMastery_OnSkillLearned(_Player, _Mastery, _SkillID);
+LLWEAPONEX_WeaponMastery_InitSettings();
 //END_REGION
 
 //REGION QUERIES
@@ -225,6 +104,13 @@ DB_NOOP(1);
 
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery((CHARACTERGUID)_Player, (STRING)_Mastery)
+AND
+DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery((CHARACTERGUID)_Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
 THEN
@@ -344,11 +230,11 @@ DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Level, _To
 
 //REGION PARTY_WIDE_EXPERIENCE
 PROC
-LLWEAPONEX_WeaponMastery_AddPartyExperience((CHARACTERGUID)_PartyMember, (CHARACTERGUID)_Enemy)
+LLWEAPONEX_WeaponMastery_AddPartyExperience((CHARACTERGUID)_PartyMember, (CHARACTERGUID)_Enemy, (REAL)_Gain)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
 THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy);
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:CharacterDying] Enemy died. Adding mastery experience to all party members.");
 LeaderLib_Timers_StartObjectTimer(_Enemy, 250, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB", "LLWEAPONEX_WeaponMastery_ClearPartyIteratorDB");
 IterateParty(_PartyMember, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
@@ -356,16 +242,16 @@ IterateParty(_PartyMember, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
 IF
 StoryEvent((CHARACTERGUID)_Enemy, "LLWEAPONEX_WeaponMastery_ClearPartyIteratorDB")
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy)
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain);
 
 IF
 StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience")
 AND
 NOT QRY_IsSummonOrPartyFollower(_Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy)
+DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain)
 AND
 CharacterIsInPartyWith(_Player, _PartyMember, 1)
 AND
@@ -375,7 +261,7 @@ Real(_IsBoss, _IsBossReal)
 AND
 RealProduct(_IsBossReal, 2.0, _BossMult) // 2x exp for bosses
 AND
-RealSum(1.0, _BossMult, _ExpGain)
+RealSum(_Gain, _BossMult, _ExpGain)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, _ExpGain);
 //END_REGION
@@ -418,6 +304,7 @@ RealProduct(_TurnsR, 6.0, _Duration)
 THEN
 ApplyStatus(_Player, _InfoStatus, _Duration, 1, _Player);
 
+/*
 QRY
 LLWEAPONEX_WeaponMastery_QRY_HasAnySkillUnlockStatus((CHARACTERGUID)_Player, (STRING)_Mastery, (STRING)_SkillID)
 AND
@@ -426,6 +313,7 @@ AND
 HasActiveStatus(_Player, _Status, 1)
 THEN
 DB_NOOP(1);
+*/
 
 QRY
 LLWEAPONEX_WeaponMastery_QRY_RemoveInfoStatus((CHARACTERGUID)_Player, (STRING)_Mastery, (STRING)_SkillID, (STRING)_InfoStatus)
@@ -436,8 +324,8 @@ PROC
 LLWEAPONEX_WeaponMastery_RemoveInfoStatus((CHARACTERGUID)_Player, (STRING)_Mastery, (STRING)_SkillID, (STRING)_InfoStatus)
 AND
 _InfoStatus != ""
-AND
-NOT LLWEAPONEX_WeaponMastery_QRY_HasAnySkillUnlockStatus(_Player, _Mastery, _SkillID)
+//AND
+//NOT LLWEAPONEX_WeaponMastery_QRY_HasAnySkillUnlockStatus(_Player, _Mastery, _SkillID)
 THEN
 RemoveStatus(_Player, _InfoStatus);
 //END_REGION

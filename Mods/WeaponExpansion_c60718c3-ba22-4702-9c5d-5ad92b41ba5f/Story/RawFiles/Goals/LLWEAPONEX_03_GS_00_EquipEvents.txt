@@ -7,25 +7,14 @@ KBSECTION
 IF
 ItemUnEquipped(_Item, _Char)
 AND
-ObjectGetFlag(_Item, "LLWEAPONEX_HasWeaponType", 1)
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
-CharacterIsPlayer(_Char, _a)
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 AND
-CharacterIsPartyMember(_Char, _b)
-AND
-IntegerSum(_a, _b, _c)
-AND
-CharacterGameMaster(_Char, _d)
-AND
-IntegerSum(_c, _d, _Final)
-AND
-IntegerMin(_Final, 1, _IsPlayer) // If any of the above is greater or equal to 1, this is a player
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-AND
-IsTagged(_Item, _WeaponType, 1)
+GetTemplate(_Item, _Template)
 THEN
-LLWEAPONEX_OnWeaponTypeUnEquipped(_Char, _Item, _WeaponType, _IsPlayer);
+NRD_ModCall("WeaponExpansion", "OnItemUnequipped", (STRING)_Char, (STRING)_Item, _Template);
+LLWEAPONEX_OnItemUnEquipped(_Char, _Item, _Template);
 
 PROC
 LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
@@ -33,17 +22,6 @@ AND
 DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, _Tag);
-
-IF
-ItemUnEquipped(_Item, _Char)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
-AND
-GetTemplate(_Item, _Template)
-THEN
-LLWEAPONEX_OnItemUnEquipped(_Char, _Item, _Template);
 //END_REGION
 
 //REGION START_EVENTS
@@ -57,36 +35,7 @@ AND
 GetTemplate(_Item, _Template)
 THEN
 LLWEAPONEX_OnItemEquipped(_Char, _Item, _Template);
-
-QRY
-LLWEAPONEX_QRY_ItemIsWeaponOrShield_TagIfWeapon((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-StringContains(_Template, "WPN_", 1)
-AND
-StringContains(_Template, "Shield", _IsShield)
-THEN
-LLWEAPONEX_Internal_TagIfNotShield(_Char, _Item, _IsShield);
-
-PROC
-LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0)
-THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
-
-PROC
-LLWEAPONEX_Internal_TagIfNotShield((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1)
-AND
-NRD_ItemGetStatsId(_Item, _Stats)
-AND
-NRD_StatGetType(_Stats, "Weapon")
-THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
-
-PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-LLWEAPONEX_QRY_ItemIsWeaponOrShield_TagIfWeapon(_Char, _Item, _Template)
-THEN
-LLWEAPONEX_OnWeaponEquipped(_Char, _Item, _Template);
+NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item, _Template);
 
 //Try and tag non-WeaponEx items
 PROC
@@ -115,27 +64,6 @@ LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 
 //REGION TYPE_EVENTS
 //Mastery weapon equipped
-PROC
-LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-CharacterIsPlayer(_Char, _a)
-AND
-CharacterIsPartyMember(_Char, _b)
-AND
-IntegerSum(_a, _b, _c)
-AND
-CharacterGameMaster(_Char, _d)
-AND
-IntegerSum(_c, _d, _Final)
-AND
-IntegerMin(_Final, 1, _IsPlayer)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-AND
-IsTagged(_Item, _WeaponType, 1)
-THEN
-LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, _WeaponType, _IsPlayer);
-
 PROC
 LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 THEN

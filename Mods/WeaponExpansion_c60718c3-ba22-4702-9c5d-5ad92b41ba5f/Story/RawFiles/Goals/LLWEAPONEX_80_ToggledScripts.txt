@@ -1,40 +1,46 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
-LLWEAPONEX_ToggleSettings_InitSettings();
 LLWEAPONEX_ToggleSettings_RegisterScripts();
-
 KBSECTION
 
 //REGION SETTINGS
 PROC
-LLWEAPONEX_ToggleSettings_InitSettings()
-THEN
-SysClear("DB_LLWEAPONEX_ToggleSettings_MasteryFlags", 3);
-
-PROC
-LLWEAPONEX_ToggleSettings_AddTag((STRING)_Tag)
-AND
-StringConcatenate(_Tag, "_ScriptEnabled", _Flag)
-AND
-StringConcatenate("LLWEAPONEX_Timers_DisableScript_", _Tag, _TimerName)
-THEN
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName);
-
-PROC
 LLWEAPONEX_ToggleSettings_RegisterScripts()
 THEN
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_DualShields", "LLWEAPONEX_DualShields");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Greatbow", "LLWEAPONEX_Greatbow");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_HandCrossbow", "LLWEAPONEX_HandCrossbow");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Katana", "LLWEAPONEX_Katana");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Rapier", "LLWEAPONEX_Rapier");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Dagger", "LLWEAPONEX_Dagger");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Runeblade", "LLWEAPONEX_Runeblade");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Firearms", "LLWEAPONEX_Firearm");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_01_WM_Throwing", "LLWEAPONEX_ThrowingAbility");
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_TS_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX");
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_DualShields", "LLWEAPONEX_DualShields", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Greatbow", "LLWEAPONEX_Greatbow", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_HandCrossbow", "LLWEAPONEX_HandCrossbow", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Katana", "LLWEAPONEX_Katana", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Rapier", "LLWEAPONEX_Rapier", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Dagger", "LLWEAPONEX_Dagger", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Runeblade", "LLWEAPONEX_Runeblade", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Firearms", "LLWEAPONEX_Firearm", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Throwing", "LLWEAPONEX_ThrowingAbility", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX", 0);
+
+PROC
+LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+IsTagged(_Item, "LLWEAPONEX_CustomUnsheathedFX", 1)
+THEN
+DB_LLWEAPONEX_TS_Temp_CustomUnsheathed(_Char, _Item);
+LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_CustomUnsheathedFX", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+DB_LLWEAPONEX_TS_Temp_CustomUnsheathed(_Char, _Item)
+THEN
+NOT DB_LLWEAPONEX_TS_Temp_CustomUnsheathed(_Char, _Item);
+LLWEAPONEX_ToggleSettings_Internal_DisableUnsheathedFX(_Char);
+
+PROC
+LLWEAPONEX_ToggleSettings_Internal_DisableUnsheathedFX((CHARACTERGUID)_Char)
+AND
+NOT DB_LLWEAPONEX_TS_Temp_CustomUnsheathed(_Char, _)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_CustomUnsheathedFX", "WeaponExpansion", 250);
 //END_REGION
 
 //REGION UNIQUE_SCRIPTS
@@ -70,232 +76,15 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_UnrelentingRa
 
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");
-
-//END_REGION
-
-//REGION UPDATE_ACTIVATE_SCRIPT
-PROC
-LLWEAPONEX_ToggleSettings_ActivateAnyScripts()
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Char, _Item, _WeaponType, _EnabledFlag)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_WeaponType, _Flag, _TimerName)
-AND
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _WeaponType)
-AND
-GetTemplate(_Item, _Template)
-THEN
-LLWEAPONEX_ToggleSettings_OnTagAdded(_Char, _Item, _WeaponType, _Template);
 //END_REGION
 
 //REGION UPDATES
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,13,0)
+_LastVersion < 152502272
 THEN
 LLWEAPONEX_ToggleSettings_RegisterScripts();
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,10,0)
-THEN
-LLWEAPONEX_ToggleSettings_Register_GoalForTag("LLWEAPONEX_80_01_WM_DualShields", "LLWEAPONEX_DualShields");
-LLWEAPONEX_ToggleSettings_ActivateAnyScripts();
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,3)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags("LLWEAPONEX_MasteryActive", "LLWEAPONEX_80_00_MasteryActive", _TimerName)
-THEN
-NOT DB_LLWEAPONEX_ToggledScripts_Script("LLWEAPONEX_80_00_MasteryActive", "LLWEAPONEX_MasteryActive");
-NOT DB_LLWEAPONEX_ToggleSettings_Tags("LLWEAPONEX_MasteryActive", "LLWEAPONEX_80_00_MasteryActive", _TimerName);
-LLWEAPONEX_ToggleSettings_RegisterScripts();
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,3)
-AND
-//DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Char, _Item, _WeaponType, _EnabledFlag)
-SysCount("DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries", 4, _Count)
-AND
-_Count > 0
-THEN
-LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MasterySystemActive", "WeaponExpansion");
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0,9,4,2)
-THEN
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_09_OniGauntlet", "LLWEAPONEX_OniGauntletEquipped");
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 2, 1)
-THEN
-SysActivateGoal("LLWEAPONEX_80_ToggledScripts");
-LLWEAPONEX_ToggleSettings_RegisterScripts();
-
-//The great _80_01_WM rename.
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 22, 0)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-AND
-DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag)
-AND
-StringContains(_GoalName, "LLWEAPONEX_80_", 1)
-AND
-StringContains(_GoalName, "80_TS_", 0)
-THEN
-NOT DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 22, 0)
-THEN
-LLWEAPONEX_ToggleSettings_RegisterScripts();
-//END_REGION
-
-//REGION REGISTERING
-PROC
-LLWEAPONEX_ToggleSettings_Register_Flag((STRING)_GoalName, (STRING)_Flag)
-THEN
-DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
-
-PROC
-LLWEAPONEX_ToggleSettings_Register_GoalForTag((STRING)_GoalName, (STRING)_Tag)
-AND
-NOT DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _, _)
-THEN
-LLWEAPONEX_ToggleSettings_AddTag(_Tag);
-
-PROC
-LLWEAPONEX_ToggleSettings_Register_GoalForTag((STRING)_GoalName, (STRING)_Tag)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-THEN
-DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
-
-QRY
-LLWEAPONEX_ToggleSettings_QRY_RegisterOnce_Tag((STRING)_GoalName, (STRING)_Tag)
-AND
-NOT DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-THEN
-DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag);
-//END_REGION
-
-//REGION TOGGLING
-PROC
-LLWEAPONEX_ToggleSettings_ActivateScript((STRING)_Flag)
-AND
-DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag)
-AND
-NOT SysIsActive(_GoalName)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:ActivateScript] Activating script [",_GoalName,"] for flag [",_Flag,"].");
-SysActivateGoal(_GoalName);
-
-PROC
-LLWEAPONEX_ToggleSettings_DeactivateScript((STRING)_Flag)
-AND
-DB_LLWEAPONEX_ToggledScripts_Script(_GoalName, _Flag)
-AND
-SysIsActive(_GoalName)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:DeactivateScript] Deactivating script [",_GoalName,"] for flag [",_Flag,"].");
-SysCompleteGoal(_GoalName);
-//END_REGION
-
-//REGION TOGGLE_EVENTS_TAGS
-PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-AND
-IsTagged(_Item, _Tag, 1)
-THEN
-LLWEAPONEX_ToggleSettings_OnTagAdded(_Char, _Item, _Tag, _Template);
-
-/*
-PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
-AND
-NOT DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _, _)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:ToggleSettings:OnTagAdded] Script for tag [",_Tag,"] not registered!");
-*/
-
-PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-THEN
-TimerCancel(_TimerName);
-DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
-
-PROC
-LLWEAPONEX_ToggleSettings_OnTagAdded((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (STRING)_Template)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-AND
-GlobalGetFlag(_Flag, 0)
-THEN
-GlobalSetFlag(_Flag);
-LLWEAPONEX_ToggleSettings_ActivateScript(_Flag);
-
-PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag)
-THEN
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Item, _Tag);
-
-PROC
-LLWEAPONEX_ToggleSettings_OnTagRemoved((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-AND
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_, _, _Tag)
-AND
-GlobalGetFlag(_Flag, 1)
-THEN
-TimerCancel(_TimerName);
-TimerLaunch(_TimerName, 1500);
-
-IF
-TimerFinished(_TimerName)
-AND
-DB_LLWEAPONEX_ToggleSettings_Tags(_Tag, _Flag, _TimerName)
-AND
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_, _, _Tag)
-THEN
-GlobalClearFlag(_Flag);
-LLWEAPONEX_ToggleSettings_DeactivateScript(_Flag);
-//END_REGION
-
-//REGION NPC_RESET
-IF
-RegionEnded(_)
-AND
-DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag)
-AND
-ObjectIsGlobal(_Char, 0)
-THEN
-NOT DB_LLWEAPONEX_ToggleSettings_Temp_ActiveTags(_Char, _Item, _Tag);
-LLWEAPONEX_ToggleSettings_OnTagRemoved(_Char, _Item, _Tag);
 //END_REGION
 EXITSECTION
 

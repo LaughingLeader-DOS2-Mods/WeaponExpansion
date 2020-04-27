@@ -73,10 +73,8 @@ PROC
 LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_IsLizard)
 AND
 DB_IsPlayer(_Char)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
 THEN
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Char, "LLWEAPONEX_Unarmed", 1, _Target);
+LLWEAPONEX_Ext_AddMasteryExperience(_Char, "LLWEAPONEX_Unarmed", 1.0);
 
 PROC
 LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, 1)

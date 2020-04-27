@@ -267,22 +267,6 @@ DB_LLWEAPONEX_Runeblades_TagToSkill(_Tag, _MainSkill, _DualWieldSkill, _Status)
 THEN
 DB_LeaderLib_BlockedSkill(_MainSkill);
 DB_LeaderLib_BlockedSkill(_DualWieldSkill);
-
-
-//Globally block mastery skills from being copied by the preset process
-PROC
-LLWEAPONEX_LeaderLib_AddBlockedSkills()
-AND
-DB_LLWEAPONEX_WeaponMastery_Skills(_WeaponType, _SkillID, _Skill)
-THEN
-DB_LeaderLib_BlockedSkill(_Skill);
-
-PROC
-LLWEAPONEX_LeaderLib_AddBlockedSkills()
-AND
-DB_LLWEAPONEX_WeaponMastery_RacialSkills(_WeaponType, _SkillID, _RaceTag, _IsFemale, _Skill)
-THEN
-DB_LeaderLib_BlockedSkill(_Skill);
 //END_REGION
 
 //REGION RESET_UNIQUES

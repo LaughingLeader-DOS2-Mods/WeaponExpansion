@@ -6,6 +6,9 @@ WeaponExpansion.Math = { AbilityScaling = {}}
 WeaponExpansion.Text = {}
 WeaponExpansion.MasteryParams = {}
 WeaponExpansion.MasteryVariables = {}
+WeaponExpansion.PermanentMasteries = {
+	LLWEAPONEX_ThrowingAbility = true
+}
 
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string
@@ -13,8 +16,12 @@ WeaponExpansion.MasteryVariables = {}
 local function TryCheckMasteryRequirement(character, tag)
 	print("TryCheckMasteryRequirement character", character, "tag", tag)
 	if character:HasTag(tag) == true then
-		local masteryTag = string.sub(tag,0,-2)
-		return character:HasTag(masteryTag)
+		local mastery = string.sub(tag,0,-2)
+		if WeaponExpansion.PermanentMasteries(mastery) == true then
+			return true
+		else
+			return character:HasTag(mastery)
+		end
 		-- local hasTaggedWeapons = false
 		-- ---@type StatItem
 		-- local weapon = character.Stats:GetItemBySlot("Weapon")

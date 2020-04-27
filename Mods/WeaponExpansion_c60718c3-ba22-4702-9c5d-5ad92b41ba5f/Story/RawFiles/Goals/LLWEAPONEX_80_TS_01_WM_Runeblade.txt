@@ -3,29 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
 
-//REGION STATUS_UNLOCKING
-IF
-CharacterStatusApplied(_Player, _Status, _)
-AND
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", _SkillID, _Status, _InfoStatus)
-AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Runeblade", _SkillID)
-THEN
-LLWEAPONEX_WeaponMastery_UnlockSkill(_Player, "LLWEAPONEX_Runeblade", _SkillID);
-LLWEAPONEX_WeaponMastery_ApplyInfoStatus(_Player, _Status, _InfoStatus, 0);
-
-IF
-CharacterStatusRemoved(_Player, _Status, _)
-AND
-DB_LLWEAPONEX_WeaponMastery_StatusUnlocking("LLWEAPONEX_Runeblade", _SkillID, _Status, _InfoStatus)
-AND
-LLWEAPONEX_WeaponMastery_QRY_RemoveInfoStatus(_Player, "LLWEAPONEX_Runeblade", _SkillID, _InfoStatus)
-AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, "LLWEAPONEX_Runeblade", _SkillID, _SkillStatus)
-THEN
-LLWEAPONEX_WeaponMastery_RemoveSkill(_Player, "LLWEAPONEX_Runeblade", _SkillID);
-//END_REGION
-
 //REGION RUNE_ACTIVE
 IF
 CharacterStatusApplied(_Character, _Status, _)

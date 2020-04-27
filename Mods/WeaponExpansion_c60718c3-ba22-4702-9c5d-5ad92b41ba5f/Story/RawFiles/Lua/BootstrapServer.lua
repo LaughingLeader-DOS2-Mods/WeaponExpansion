@@ -35,6 +35,12 @@ local bulletTemplates = {
 local function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     local host = CharacterGetHostCharacter()
+
+	for mastery,masterData in pairs(WeaponExpansion.Masteries) do
+        TagMasteryRanks(host, mastery, 4)
+        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,4,WeaponExpansion.MasteryVariables.RankVariables[3].NextLevel + 1)
+	end
+
     if ItemTemplateIsInPartyInventory(host, "ad15f666-285d-4634-a832-ea643fa0a9d2", 0) <= 0 then
         ItemTemplateAddTo("ad15f666-285d-4634-a832-ea643fa0a9d2", host, 1, 0)
         for i,template in pairs(boltTemplates) do
@@ -61,6 +67,12 @@ local function DebugInit()
     CharacterAddSkill(host, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", 0)
     --NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
     Osi.LLWEAPONEX_WeaponMastery_Debug_CheatMastery(host, 0)
+
+    local userID = CharacterGetReservedUserID(host)
+    local username = GetUserName(userID)
+    if string.find(username, "LaughingLeader") then
+        GlobalSetFlag("LLWEAPONEX_Debug_LeaderModeEngaged")
+    end
 end
 
 local function dumpRanks(...)

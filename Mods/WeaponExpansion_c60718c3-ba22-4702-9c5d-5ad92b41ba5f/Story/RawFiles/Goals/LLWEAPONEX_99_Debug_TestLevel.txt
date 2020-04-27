@@ -179,16 +179,6 @@ THEN
 ApplyStatus(_Object, _Status, -1.0, 0, _Object);
 
 IF
-StoryEvent(_, "LeaderLib_Initialized")
-AND
-CharacterGetHostCharacter(_Char)
-THEN
-CharacterOverrideMaxSourcePoints(_Char, 20);
-CharacterAddSourcePoints(_Char, 20);
-//CharacterAddSkill(_Char, "Target_LLWEAPONEX_DebugTargetSkill", 0);
-LLWEAPONEX_WeaponMastery_Debug_CheatMastery(_Char, 0);
-
-IF
 TextEventSet("llweap_vartest")
 AND
 CharacterGetHostCharacter(_Host)

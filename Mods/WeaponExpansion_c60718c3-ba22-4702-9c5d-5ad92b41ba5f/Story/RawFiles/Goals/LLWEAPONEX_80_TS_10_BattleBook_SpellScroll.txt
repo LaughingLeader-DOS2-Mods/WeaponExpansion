@@ -40,7 +40,7 @@ PlayEffect(_Totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root");
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT");
+DB_LLWEAPONEX_BattleBooks_Temp_ListenForDeath(_Target, _Source, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT");
 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT", (CHARACTERGUID)_Source)

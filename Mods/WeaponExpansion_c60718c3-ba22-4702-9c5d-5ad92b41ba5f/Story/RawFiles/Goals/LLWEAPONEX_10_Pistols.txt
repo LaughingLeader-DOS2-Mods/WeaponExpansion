@@ -235,26 +235,6 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
-//REGION PISTOL_MASTERY_XP
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Source)
-AND
-CharacterIsPlayer(_Source, 1)
-AND
-ObjectGetFlag(_Source, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Source, "LLWEAPONEX_Pistol", 1, _Target);
-
-IF
-ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Source)
-AND
-CharacterIsPlayer(_Source, 1)
-AND
-ObjectGetFlag(_Source, "LLWEAPONEX_DisableWeaponMasteryExperience", 0)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Source, "LLWEAPONEX_Pistol", 1, _Target);
-//END_REGION
-
 PROC
 LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Pistol", 1)
 THEN

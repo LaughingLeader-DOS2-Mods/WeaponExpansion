@@ -90,25 +90,6 @@ DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills("Shared", "Projectile_Grenade_Curse
 */
 //END_REGION
 
-//REGION GAIN_MASTERY
-/*
-IF
-CharacterUsedSkill(_Player, _Skill, _, _)
-AND
-DB_LLWEAPONEX_ThrowingMastery_ThrowingSkills(_Group, _Skll)
-AND
-DB_IsPlayer(_Player)
-THEN
-LLWEAPONEX_WeaponMastery_AddExperience(_Player, "LLWEAPONEX_Throwing", 50);
-*/
-PROC
-LLWEAPONEX_WeaponMastery_MasteryInitialized((CHARACTERGUID)_Player, "LLWEAPONEX_ThrowingAbility", (INTEGER)_Level)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables("LLWEAPONEX_ThrowingAbility", _CurrentXPVar, _LevelVar, _EnabledFlag)
-THEN
-DB_LLWEAPONEX_WeaponMastery_PlayerData_PermanentMasteries(_Player, "LLWEAPONEX_ThrowingAbility", _EnabledFlag);
-//END_REGION
-
 //REGION THROWING_SKILL_USE_LISTEN
 QRY
 LLWEAPONEX_ThrowingMastery_QRY_ItemIsThrowingItem((ITEMGUID)_Item)
