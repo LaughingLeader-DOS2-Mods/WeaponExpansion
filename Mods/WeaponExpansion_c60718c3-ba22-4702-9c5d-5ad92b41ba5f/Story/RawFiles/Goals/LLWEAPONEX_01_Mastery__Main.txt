@@ -366,13 +366,6 @@ THEN
 DB_NOOP(1);
 
 QRY
-LLWEAPONEX_WeaponMastery_QRY_HasActiveSkills((CHARACTERGUID)_Player, (STRING)_WeaponType)
-AND
-DB_LLWEAPONEX_WeaponMastery_ActiveRacialSkills(_Player, _WeaponType, _SkillID, _Skill)
-THEN
-DB_NOOP(1);
-
-QRY
 LLWEAPONEX_WeaponMastery_QRY_HasLearnedSkills((CHARACTERGUID)_Player)
 AND
 DB_LLWEAPONEX_WeaponMastery_Learned(_Player, _WeaponType, _SkillID)
@@ -1009,74 +1002,20 @@ AND
 NOT LLWEAPONEX_WeaponMastery_QRY_Internal_LeveledUp(_Player, _WeaponType, _Level, _NextCurrent, _Max)
 THEN
 LLWEAPONEX_WeaponMastery_StoreExperience(_Player, _WeaponType, _NextCurrent);
-LLWEAPONEX_WeaponMastery_OnExperienceAdded(_Player, _WeaponType, _NextCurrent, _Max);
+//END_REGION
+
+//REGION STORE_XP
+PROC
+LLWEAPONEX_WeaponMastery_Internal_StoreExperience((CHARACTERGUID)_Player, (STRING)_Mastery, (INTEGER)_Level, (INTEGER)_TotalExperience)
+AND
+DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _LastLevel, _LastExperience)
+THEN
+NOT DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _LastLevel, _LastExperience);
 
 PROC
-LLWEAPONEX_WeaponMastery_OnExperienceAdded((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Current, (INTEGER)_Max)
-AND
-IntegertoString(_Current, _CurrentStr)
-AND
-IntegertoString(_Max, _MaxStr)
+LLWEAPONEX_WeaponMastery_Internal_StoreExperience((CHARACTERGUID)_Player, (STRING)_Mastery, (INTEGER)_Level, (INTEGER)_TotalExperience)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnExperienceAdded] Weapon Mastery [",_WeaponType,"] experience: [", _CurrentStr, "/",_MaxStr,"].");
-
-PROC
-LLWEAPONEX_WeaponMastery_StoreExperience((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Experience)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _, _)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-AND
-GetVarInteger(_Player, _LevelVar, _Level)
-THEN
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience);
-
-PROC
-LLWEAPONEX_WeaponMastery_StoreExperience((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Experience)
-AND
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Lastxperience)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Lastxperience);
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience);
-LLWEAPONEX_WeaponMastery_StoreExperienceInVars(_Player, _WeaponType, _Level, _Experience);
-
-PROC
-LLWEAPONEX_WeaponMastery_StoreExperienceForLevel((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level, (INTEGER)_Experience)
-AND
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _LastLevel, _Lastxperience)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _LastLevel, _Lastxperience);
-
-PROC
-LLWEAPONEX_WeaponMastery_StoreExperienceForLevel((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level, (INTEGER)_Experience)
-THEN
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience);
-LLWEAPONEX_WeaponMastery_StoreExperienceInVars(_Player, _WeaponType, _Level, _Experience);
-
-PROC
-LLWEAPONEX_WeaponMastery_StoreExperienceInVars((CHARACTERGUID)_Player, (STRING)_WeaponType, (INTEGER)_Level, (INTEGER)_Experience)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-THEN
-SetVarInteger(_Player, _CurrentXPVar, _Experience);
-SetVarInteger(_Player, _LevelVar, _Level);
-
-PROC
-LLWEAPONEX_WeaponMastery_Internal_StoreMasteryProgression((CHARACTERGUID)_Player)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _, _, _)
-AND
-DB_LLWEAPONEX_WeaponMastery_MasteryVariables(_WeaponType, _CurrentXPVar, _LevelVar, _EnabledFlag)
-AND
-GetVarInteger(_Player, _LevelVar, _Level)
-AND
-GetVarInteger(_Player, _CurrentXPVar, _Experience)
-AND
-IntegerMax(0, _Level, _LevelClamped)
-AND
-IntegerMax(0, _Experience, _ExperienceClamped)
-THEN
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _LevelClamped, _ExperienceClamped);
+DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Level, _TotalExperience);
 //END_REGION
 
 //REGION PARTY_WIDE_EXPERIENCE
