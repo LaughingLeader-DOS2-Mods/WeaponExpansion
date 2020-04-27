@@ -1,0 +1,31 @@
+Mastery	Rank	Skill	Bonus	Implemented
+Axe	1	Crippling Blow	If a target hit is disabled, deal additional piercing damage.	√
+Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	❌
+Banner	1	Placeholder	Placeholder	❌
+BattleBook	1	Placeholder	Placeholder	❌
+Bludgeon	1	Battering Ram	25% to apply Dizzy for 1 turn.	❌
+Bludgeon	2	Crippling Blow	Apply Sundered, reducing max physical/magic armor by 25%.	√
+Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts the ground, dealing damage to enemies in a 3m radius.	❌
+Bow	1	Pin Down	When Crippled wears off, the target has a chance to trip for 1 turn.	❌
+Bow	2	Assassinate	If the target is marked, this skill deals a critical hit.	❌
+Crossbow	1	Sky Shot	If the target is Knocked Down, deal a critical hit.	❌
+Crossbow	2	Marksman's Fang	Each hit reduces the target's maximum physical/magic armor by 25%.	❌
+Dagger	1	Placeholder	Placeholder	❌
+DualShields	1	Placeholder	Placeholder	❌
+Firearm	1	Placeholder	Placeholder	❌
+Greatbow	1	Placeholder	Placeholder	❌
+Hand Crossbow	1	Placeholder	Placeholder	❌
+Katana	1	Placeholder	Placeholder	❌
+Pistol	1	Placeholder	Placeholder	❌
+Polearm	1	Placeholder	Placeholder	❌
+Quarterstaff	1	Placeholder	Placeholder	❌
+Rapier	1	Placeholder	Placeholder	❌
+Runeblade	1	Placeholder	Placeholder	❌
+Scythe	1	Placeholder	Placeholder	❌
+Shield	1	Placeholder	Placeholder	❌
+Spear	1	Placeholder	Placeholder	❌
+Staff	1	Placeholder	Placeholder	❌
+Sword	1	Placeholder	Placeholder	❌
+Throwing Ability	1	Placeholder	Placeholder	❌
+Unarmed	1	Placeholder	Placeholder	❌
+Wand	1	Placeholder	Placeholder	❌
