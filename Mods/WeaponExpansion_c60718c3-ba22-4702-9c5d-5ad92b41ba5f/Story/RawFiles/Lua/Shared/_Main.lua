@@ -12,6 +12,7 @@ WeaponExpansion.MasteryParams = {}
 local function TryCheckMasteryRequirement(character, tag)
 	print("TryCheckMasteryRequirement character", character, "tag", tag)
 	if character:HasTag(tag) == true then
+		local hasTaggedWeapons = false
 		---@type StatItem
 		local weapon = character.Stats:GetItemBySlot("Weapon")
 		---@type StatItem
@@ -22,7 +23,7 @@ local function TryCheckMasteryRequirement(character, tag)
 		if offhand ~= nil then
 			Ext.Print(string.format("HasMasteryRequirement[%s] OffHandWeapon[%s]", tag, offhand.Name))
 		end
-		return true
+		return hasTaggedWeapons
 	end
 	return false
 end
