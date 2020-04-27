@@ -13,18 +13,20 @@ WeaponExpansion.MasteryVariables = {}
 local function TryCheckMasteryRequirement(character, tag)
 	print("TryCheckMasteryRequirement character", character, "tag", tag)
 	if character:HasTag(tag) == true then
-		local hasTaggedWeapons = false
-		---@type StatItem
-		local weapon = character.Stats:GetItemBySlot("Weapon")
-		---@type StatItem
-		local offhand = character.Stats:GetItemBySlot("Shield")
-		if weapon ~= nil then
-			Ext.Print(string.format("HasMasteryRequirement[%s] MainWeapon[%s]", tag, weapon.Name))
-		end
-		if offhand ~= nil then
-			Ext.Print(string.format("HasMasteryRequirement[%s] OffHandWeapon[%s]", tag, offhand.Name))
-		end
-		return hasTaggedWeapons
+		local masteryTag = string.sub(tag,0,-2)
+		return character:HasTag(masteryTag)
+		-- local hasTaggedWeapons = false
+		-- ---@type StatItem
+		-- local weapon = character.Stats:GetItemBySlot("Weapon")
+		-- ---@type StatItem
+		-- local offhand = character.Stats:GetItemBySlot("Shield")
+		-- if weapon ~= nil then
+		-- 	Ext.Print(string.format("HasMasteryRequirement[%s] MainWeapon[%s]", tag, weapon.Name))
+		-- end
+		-- if offhand ~= nil then
+		-- 	Ext.Print(string.format("HasMasteryRequirement[%s] OffHandWeapon[%s]", tag, offhand.Name))
+		-- end
+		-- return hasTaggedWeapons
 	end
 	return false
 end
@@ -106,6 +108,7 @@ local function LoadExperienceVariables()
 	LeaderLib.Print(LeaderLib.Common.Dump(RankVariables))
 	LeaderLib.Print("==========================")
 
+	WeaponExpansion.MasteryVariables.MaxRank = maxRank
 	WeaponExpansion.MasteryVariables.RankVariables = RankVariables
 end
 

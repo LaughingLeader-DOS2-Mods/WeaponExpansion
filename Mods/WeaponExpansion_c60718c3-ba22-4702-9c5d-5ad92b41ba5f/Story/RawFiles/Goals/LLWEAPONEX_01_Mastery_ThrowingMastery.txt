@@ -155,34 +155,6 @@ LLWEAPONEX_ThrowingMastery_OnFinishedListening((CHARACTERGUID)_PLayer)
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Player, "LLWEAPONEX_ListenForThrowingSkill", "WeaponExpansion", 500);
 //END_REGION
-
-//REGION ADD_XP
-QRY
-LLWEAPONEX_ThrowingMastery_QRY_GetThrowingExperienceValue((CHARACTERGUID)_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, 0, _Experience)
-THEN
-DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, 2);
-
-QRY
-LLWEAPONEX_ThrowingMastery_QRY_GetThrowingExperienceValue((CHARACTERGUID)_Player)
-AND
-NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _)
-THEN
-DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, 1);
-
-PROC
-LLWEAPONEX_ThrowingMastery_AddExperience((CHARACTERGUID)_Player, (GUIDSTRING)_Target)
-AND
-LLWEAPONEX_WeaponMastery_QRY_BelowMaxLevel(_Player, "LLWEAPONEX_ThrowingAbility")
-AND
-LLWEAPONEX_ThrowingMastery_QRY_GetThrowingExperienceValue(_Player)
-AND
-DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _Val)
-THEN
-NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ExperienceValue(_Player, _Val);
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Player, "LLWEAPONEX_ThrowingAbility", _Val, _Target);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

@@ -25,7 +25,7 @@ AND
 DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target)
 THEN
 NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
-LLWEAPONEX_ThrowingMastery_AddExperience(_Player, _Target);
+LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_ThrowingAbility", 1.0);
 LLWEAPONEX_ThrowingMastery_OnThrowingItemUsed(_Player, _Item, _Skill);
 
 //Cancelled Throwing

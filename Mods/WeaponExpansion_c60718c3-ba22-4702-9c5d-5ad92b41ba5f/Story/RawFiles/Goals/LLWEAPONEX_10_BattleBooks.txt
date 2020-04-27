@@ -374,11 +374,9 @@ AND
 NOT DB_LLWEAPONEX_BattleBooks_ReadBooks(_Char, _BookTemplate)
 AND
 IsTagged(_Book, "BOOK", 1)
-AND
-LLWEAPONEX_Ext_QRY_HasMinimumMasteryLevel(_Char, "LLWEAPONEX_BattleBook", 1, _Level)
 THEN
 DB_LLWEAPONEX_BattleBooks_ReadBooks(_Char, _BookTemplate);
-LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Char, "LLWEAPONEX_BattleBook", 1, _Char);
+LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_BattleBook", 0.25);
 //END_REGION
 EXITSECTION
 
