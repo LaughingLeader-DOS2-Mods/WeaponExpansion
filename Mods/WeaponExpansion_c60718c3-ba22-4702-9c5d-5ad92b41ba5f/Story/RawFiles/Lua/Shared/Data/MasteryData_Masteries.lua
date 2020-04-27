@@ -4,7 +4,7 @@ local MasteryData = Ext.Require("Shared/Data/MasteryData_Classes.lua")
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
 WeaponExpansion.Masteries = {
-["LLWEAPONEX_Axe"] = MasteryData:Create("LLWEAPONEX_Axe", TranslatedString:Create("h51c56129ga598g4577g8432gce50fc4e525f", "<font color='#F5785A'>Axe Mastery</font>"), {
+["LLWEAPONEX_Axe"] = MasteryData:Create("LLWEAPONEX_Axe", TranslatedString:Create("h99253a1dgaaf7g49bbga37fgf2c25b70073f", "<font color='#F5785A'>Axe Mastery</font>"), {
 	[0] = TranslatedString:Create("h4b6dfd40g1a10g4ba5ga77cg19caee1b9fdb", "<font color='#FDFFEA'>Beginner</font>"),
 	[1] = TranslatedString:Create("he67981aegee37g4467g8f82g1009a1a9c2be", "<font color='#FFAAAA'>Novice</font>"),
 	[2] = TranslatedString:Create("h1c713c7ag8952g44d1g8703g6609b75b29a7", "<font color='#D46A6A'>Journeyman Axefighter</font>"),
