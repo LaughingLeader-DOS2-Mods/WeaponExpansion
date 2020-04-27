@@ -18,7 +18,6 @@ function MasteryData:Create(id,name)
 		Name = name
 	}
 	setmetatable(this, self)
-	WeaponExpansion.Masteries[id] = this
     return this
 end
 

@@ -12,7 +12,7 @@ local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed,
 	if skill_func ~= nil then
 		local status,damageList,deathType = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 		if status and damageList ~= nil then
-			--LeaderLib.Print("GetSkillDamage damageList("..tostring(LeaderLib.Common.Dump(damageList:ToTable()))..")")
+			--LeaderLib.PrintDebug("GetSkillDamage damageList("..tostring(LeaderLib.Common.Dump(damageList:ToTable()))..")")
 			return damageList,deathType
 		else
 			Ext.PrintError("Error getting damage for skill:\n",damageList)

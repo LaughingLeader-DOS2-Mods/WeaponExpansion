@@ -1,5 +1,7 @@
 if WeaponExpansion == nil then WeaponExpansion = {} end
 
+LeaderLib = Mods["LeaderLib"]
+
 WeaponExpansion.Main = {}
 WeaponExpansion.Debug = {}
 WeaponExpansion.Math = { AbilityScaling = {}}
@@ -110,10 +112,10 @@ local function LoadExperienceVariables()
 		lastRankExpGain = rankGain
 		lastRequiredNextLevelExperience = requiredNextLevelExperience
 	end
-	LeaderLib.Print("[WeaponExpansion] Loaded mastery experience variables:")
-	LeaderLib.Print("==========================")
-	LeaderLib.Print(LeaderLib.Common.Dump(RankVariables))
-	LeaderLib.Print("==========================")
+	LeaderLib.PrintDebug("[WeaponExpansion] Loaded mastery experience variables:")
+	LeaderLib.PrintDebug("==========================")
+	LeaderLib.PrintDebug(LeaderLib.Common.Dump(RankVariables))
+	LeaderLib.PrintDebug("==========================")
 
 	WeaponExpansion.MasteryVariables.MaxRank = maxRank
 	WeaponExpansion.MasteryVariables.RankVariables = RankVariables

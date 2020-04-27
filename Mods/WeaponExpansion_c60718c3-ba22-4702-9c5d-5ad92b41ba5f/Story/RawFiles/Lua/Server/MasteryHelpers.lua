@@ -18,7 +18,7 @@ function TagMasteryRanks(uuid,mastery,level)
 		for i=1,level,1 do
 			local tag = mastery.."_Mastery"..tostring(i)
 			SetTag(uuid, tag)
-			LeaderLib.Print("[WeaponExpansion] Setting tag ["..tag.."] on ["..uuid.."]")
+			LeaderLib.PrintDebug("[WeaponExpansion] Setting tag ["..tag.."] on ["..uuid.."]")
 		end
 	end
 end
@@ -38,7 +38,7 @@ local function MasteryLeveledUp(uuid,mastery,last,next)
 	end
 	TagMasteryRanks(uuid,mastery,next)
 
-	LeaderLib.Print("[WeaponExpansion] Mastery ["..mastery.."] leveled up ("..tostring(last).." => "..tostring(last)..") on ["..uuid.."]")
+	LeaderLib.PrintDebug("[WeaponExpansion] Mastery ["..mastery.."] leveled up ("..tostring(last).." => "..tostring(last)..") on ["..uuid.."]")
 end
 
 --- Adds mastery experience a specific masteries.

@@ -6,7 +6,7 @@ local skillText = {
 
 local function InitSkillCustomText()
 	-- for skill,translatedString in pairs(skillText) do
-	-- 	LeaderLib.Print("[LLWEAPONEX_SkillCustomText.lua:AddCustomText] Adding custom desc to ("..skill.."): ("..translatedString.Value..")")
+	-- 	LeaderLib.PrintDebug("[LLWEAPONEX_SkillCustomText.lua:AddCustomText] Adding custom desc to ("..skill.."): ("..translatedString.Value..")")
 	-- 	Ext.StatAddCustomDescription(skill, "SkillProperties", translatedString.Value)
 	-- end
 end
