@@ -337,6 +337,7 @@ RemoveStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
 //END_REGION
 
 //REGION MAGIC_MISSILE_WAND_MODE
+/*
 IF
 ItemTemplateAddedToCharacter(WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812, _Item, _Char)
 AND
@@ -356,6 +357,7 @@ DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_MAGIC_MISSILE", _MainhandSkill, _Offha
 THEN
 SetVarString(_Item, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
 SetVarString(_Item, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
+*/
 
 IF
 SkillCast(_Char, "Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode", _, _)
@@ -396,7 +398,6 @@ LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (ITEMGUID)_Weap
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Transforming Wand of Magic Missile to Rod form.");
 Transform(_Weapon, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", 1, 1, 1);
-DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Char, _Weapon); // So the rod shoot skills get added
 LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_Equip", "LLWEAPONEX_Uniques_TransformMagicMissile_Equip");
 
 PROC
