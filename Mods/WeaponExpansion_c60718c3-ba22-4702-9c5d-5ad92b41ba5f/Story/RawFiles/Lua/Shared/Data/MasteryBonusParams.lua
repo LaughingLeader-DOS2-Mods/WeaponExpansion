@@ -4,7 +4,7 @@ local function GetThrowingKnifeBonusParam(character, tagName, param)
 	local chance = Ext.ExtraData["LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance"]
 	if chance == nil or chance < 0 then chance = 25 end
 	local paramText = param:gsub("%[1%]", tagName):gsub("%[2%]", math.tointeger(math.min(chance, 100)))
-	local damageSkillProps = WeaponExpansion.Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive")
+	local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive")
 	local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
 	if damageRange ~= nil then
 		local damageText = ""
@@ -107,7 +107,7 @@ end
 local function GetCripplingBlowBonusDamage(character, tagName, param)
 	--Ext.Print("Character:",character, "tagName:",tagName, "param:",param)
 	local damageText = ""
-	local damageSkillProps = WeaponExpansion.Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+	local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 	local damageRange = GetSkillDamageRange(character, damageSkillProps)
 	if damageRange ~= nil then
 		--Ext.Print(LeaderLib.Common.Dump(damageRange))
@@ -122,7 +122,7 @@ local function GetCripplingBlowBonusDamage(character, tagName, param)
 	return param:gsub("%[1%]", tagName):gsub("%[2%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
 end
 
-WeaponExpansion.MasteryParams = {
+Mastery.Params = {
 	SkillData = {
 		Projectile_ThrowingKnife = {
 			Description = TranslatedString:Create("h5fdfca1dg8dd4g4cc3g9939g7433a38d4658","Throw a knife at your opponent, dealing [1].[2]"),
@@ -136,7 +136,7 @@ WeaponExpansion.MasteryParams = {
 		Target_CripplingBlow = {
 			Description = TranslatedString:Create("h5fdfca1dg8dd4g4cc3g9939g7433a38d4658","Throw a knife at your opponent, dealing [1].[2]"),
 			Tags = {
-				LLWEAPONEX_Blunt_Mastery2 = {
+				LLWEAPONEX_Bludgeon_Mastery2 = {
 					ID = "SUNDER",
 					Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","[1]<br><font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [2]%</font> for [3] turn(s).</font>"),
 					GetParam = function(character, tagName, param)

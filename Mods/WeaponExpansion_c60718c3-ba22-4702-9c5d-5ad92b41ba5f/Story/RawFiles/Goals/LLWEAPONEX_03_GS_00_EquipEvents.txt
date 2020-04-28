@@ -3,23 +3,27 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-//REGION UNEQUIP_EVENT
+//REGION MAIN_EVENTS
 IF
 ItemUnEquipped(_Item, _Char)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
+THEN
+LLWEAPONEX_Ext_OnItemUnEquipped(_Char, _Item);
+
+IF
+ItemEquipped(_Item, _Char)
 AND
-GetTemplate(_Item, _Template)
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 THEN
-LLWEAPONEX_OnItemUnEquipped(_Char, _Item, _Template);
+LLWEAPONEX_Ext_OnItemEquipped(_Char, _Item);
+//END_REGION
 
-PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-THEN
-NRD_ModCall("WeaponExpansion", "OnItemUnequipped", (STRING)_Char, (STRING)_Item, _Template);
-
+//REGION UNEQUIP_EVENT
 PROC
 LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 AND
@@ -29,18 +33,6 @@ LeaderLib_Tags_ClearPreservedTag(_Char, _Tag);
 //END_REGION
 
 //REGION START_EVENTS
-IF
-ItemEquipped(_Item, _Char)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
-AND
-GetTemplate(_Item, _Template)
-THEN
-LLWEAPONEX_OnItemEquipped(_Char, _Item, _Template);
-NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item, _Template);
-
 //Try and tag non-WeaponEx items
 PROC
 LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
@@ -67,12 +59,6 @@ LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
 //END_REGION
 
 //REGION TYPE_EVENTS
-//Mastery weapon equipped
-PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
-THEN
-ObjectSetFlag(_Item, "LLWEAPONEX_HasWeaponType", 0);
-
 PROC
 LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 AND

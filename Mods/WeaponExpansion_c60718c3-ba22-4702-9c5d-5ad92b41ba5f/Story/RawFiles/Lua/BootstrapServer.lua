@@ -1,14 +1,18 @@
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX__Main.lua")
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_TimerListener.lua")
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_GameMechanics.lua")
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_PistolMechanics.lua")
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_SkillDamage.lua")
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/MasteryHelpers.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/_ServerMain.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/TimerListener.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/GameMechanics.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/PistolMechanics.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/Skills/DamageHandler.lua")
 Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/Skills/MasteryBonuses.lua")
-Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/LLWEAPONEX_Debug.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/Skills/ElementalFirearms.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/Skills/PrepareEffects.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/EquipmentEvents.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/MasteryHelpers.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/TagHelpers.lua")
+Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Server/ServerDebug.lua")
 
 --Export local functions to global for now
--- for name,func in pairs(WeaponExpansion.Export) do
+-- for name,func in pairs(Export) do
 --     local func_name = "LLWEAPONEX_Ext_" .. name
 --     _G[func_name] = func
 --     Ext.Print("[WeaponExpansion:Bootstrap.lua] Registered function ("..func_name..").")
@@ -32,13 +36,21 @@ local bulletTemplates = {
     "071b6f55-64a5-4efe-af02-1910d400e6b5",
 }
 
+local gameTestTemplates = {
+    "LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d",
+    "94838d55-d5e6-4115-b736-b8b26f321003",
+    "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27",
+    "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53",
+    "WPN_Lizards_Dagger_1H_A_028e9d6a-92b7-494b-a7fa-62218cf63914",
+}
+
 local function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     local host = CharacterGetHostCharacter()
 
-	for mastery,masterData in pairs(WeaponExpansion.Masteries) do
+	for mastery,masterData in pairs(Masteries) do
         TagMasteryRanks(host, mastery, 4)
-        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,4,WeaponExpansion.MasteryVariables.RankVariables[3].NextLevel + 1)
+        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,4,Mastery.Variables.RankVariables[3].NextLevel + 1)
 	end
 
     if ItemTemplateIsInPartyInventory(host, "ad15f666-285d-4634-a832-ea643fa0a9d2", 0) <= 0 then
@@ -52,14 +64,10 @@ local function DebugInit()
             ItemTemplateAddTo(template, host, 1, 0)
         end
     end
-    if ItemTemplateIsInPartyInventory(host, "94838d55-d5e6-4115-b736-b8b26f321003", 0) <= 0 then
-        ItemTemplateAddTo("94838d55-d5e6-4115-b736-b8b26f321003", host, 1, 0)
-    end
-    if ItemTemplateIsInPartyInventory(host, "LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d", 0) <= 0 then
-        ItemTemplateAddTo("LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d", host, 1, 0)
-    end
-    if ItemTemplateIsInPartyInventory(host, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27", 0) <= 0 then
-        ItemTemplateAddTo("WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27", host, 1, 0)
+    for i,template in pairs(gameTestTemplates) do
+        if ItemTemplateIsInPartyInventory(host, template, 0) <= 0 then
+            ItemTemplateAddTo(template, host, 1, 0)
+        end
     end
     --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
    -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)

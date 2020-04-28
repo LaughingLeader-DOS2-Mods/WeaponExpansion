@@ -1,7 +1,7 @@
-WeaponExpansion.TimerFinished = {}
+TimerFinished = {}
 
 local function OnTimerFinished(event, ...)
-	local callback = WeaponExpansion.TimerFinished[event]
+	local callback = TimerFinished[event]
 	if callback ~= nil then
 		local status,err = xpcall(callback, debug.traceback, {...})
 		if not status then

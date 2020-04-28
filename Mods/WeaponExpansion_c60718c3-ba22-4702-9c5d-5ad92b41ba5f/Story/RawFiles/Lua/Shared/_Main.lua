@@ -2,24 +2,29 @@ if WeaponExpansion == nil then WeaponExpansion = {} end
 
 LeaderLib = Mods["LeaderLib"]
 
-WeaponExpansion.Main = {}
-WeaponExpansion.Debug = {}
-WeaponExpansion.Math = { AbilityScaling = {}}
-WeaponExpansion.Text = {}
-WeaponExpansion.MasteryParams = {}
-WeaponExpansion.MasteryVariables = {}
-WeaponExpansion.PermanentMasteries = {
-	LLWEAPONEX_ThrowingAbility = true
+Main = {}
+Debug = {}
+Math = { AbilityScaling = {}}
+Text = {}
+Mastery = {
+	Params = {},
+	Variables = {},
+	PermanentMasteries = {
+		LLWEAPONEX_ThrowingAbility = true
+	}
 }
+
+--- @type table<string,string>
+Tags = {}
 
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
-	print("TryCheckMasteryRequirement character", character, "tag", tag)
 	if character:HasTag(tag) == true then
-		local mastery = string.sub(tag,0,-2)
-		if WeaponExpansion.PermanentMasteries(mastery) == true then
+		local a,b,mastery = string.find(tag,"(.+)_Mastery")
+		print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery)
+		if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 			return true
 		else
 			return character:HasTag(mastery)
@@ -53,7 +58,7 @@ local function HasMasteryRequirement(character, tag)
 	return false
 end
 
-WeaponExpansion.HasMasteryRequirement = HasMasteryRequirement
+HasMasteryRequirement = HasMasteryRequirement
 
 Ext.Require("Shared/Data/MasteryData_Masteries.lua")
 Ext.Require("Shared/Data/MasteryBonusParams.lua")
@@ -63,11 +68,11 @@ local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
 ---@type table<string,TranslatedString>
 local RuneNames = Ext.Require("Shared/Data/RuneNameHandles.lua")
-WeaponExpansion.Text.RuneNames = RuneNames
+Text.RuneNames = RuneNames
 
 ---@type table<string,TranslatedString>
 local MasteryRankTagText = Ext.Require("Shared/Data/MasteryRankTagText.lua")
-WeaponExpansion.Text.MasteryRankTagText = MasteryRankTagText
+Text.MasteryRankTagText = MasteryRankTagText
 
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
@@ -117,8 +122,8 @@ local function LoadExperienceVariables()
 	LeaderLib.PrintDebug(LeaderLib.Common.Dump(RankVariables))
 	LeaderLib.PrintDebug("==========================")
 
-	WeaponExpansion.MasteryVariables.MaxRank = maxRank
-	WeaponExpansion.MasteryVariables.RankVariables = RankVariables
+	Mastery.Variables.MaxRank = maxRank
+	Mastery.Variables.RankVariables = RankVariables
 end
 
 local function SessionLoading()

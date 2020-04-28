@@ -131,13 +131,6 @@ NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery);
 
 //REGION EQUIPPING
 PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Mastery, 1)
-AND
-DB_IsPlayer(_Player)
-THEN
-NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Player, (STRING)_Item);
-
-PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND
 NOT DB_GlobalFlag("LLWEAPONEX_MasterySystemActive")
@@ -147,7 +140,7 @@ LeaderLib_ToggleScripts_EnableScript("LLWEAPONEX_MasterySystemActive", "WeaponEx
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _Mastery)
 THEN
 NRD_ModCall("WeaponExpansion", "OnMasteryDeactivated", (STRING)_Player, _Mastery);
 

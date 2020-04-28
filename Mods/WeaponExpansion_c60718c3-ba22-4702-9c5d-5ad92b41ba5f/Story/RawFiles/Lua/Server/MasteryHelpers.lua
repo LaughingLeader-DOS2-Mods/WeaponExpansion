@@ -1,3 +1,5 @@
+
+
 local function HasMinimumMasteryLevel(uuid,mastery,minLevel)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
 	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
@@ -29,7 +31,7 @@ end
 --- @param last integer
 --- @param next integer
 local function MasteryLeveledUp(uuid,mastery,last,next)
-	local masteryName = WeaponExpansion.Masteries[mastery].Name.Value
+	local masteryName = Masteries[mastery].Name.Value
 	local text = string.gsub(leveledUpText.Value, "%[1%]", masteryName):gsub("%[2%]", next)
 	if CharacterIsPlayer(uuid) == 1 and CharacterIsControlled(uuid) then
 		ShowNotification(uuid, text)
@@ -58,7 +60,7 @@ local function AddMasteryExperience(uuid,mastery,expGain)
 		end
 
 		if currentLevel < 4 then
-			local expAmountData = WeaponExpansion.MasteryVariables.RankVariables[currentLevel]
+			local expAmountData = Mastery.Variables.RankVariables[currentLevel]
 			local maxAddExp = expAmountData.Amount
 			local nextLevelExp = expAmountData.NextLevel
 			local nextLevel = currentLevel
@@ -93,7 +95,7 @@ local function AddMasteryExperienceForAllActive(uuid,expGain)
 	if ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 		--local offhand = CharacterGetEquippedItem(uuid, "Shield")
-		for mastery,masterData in pairs(WeaponExpansion.Masteries) do
+		for mastery,masterData in pairs(Masteries) do
 			-- if ItemIsTagged(mainhand) or ItemIsTagged(offhand) then
 			-- 	AddMasteryExperience(uuid,mastery,expGain)
 			-- end
@@ -107,48 +109,8 @@ end
 Ext.NewCall(AddMasteryExperienceForAllActive, "LLWEAPONEX_Ext_AddMasteryExperienceForAllActive", "(CHARACTERGUID)_Character, (REAL)_ExperienceGain")
 
 --- @param uuid string
---- @param item string
-function OnItemEquipped(uuid,item,template)
-	--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
-	--local offhand = CharacterGetEquippedItem(uuid, "Shield")
-	
-	local stat = NRD_ItemGetStatsId(item)
-	local statType = NRD_StatGetType(stat)
-	if NRD_StatGetType(stat) == "Weapon" then
-		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
-		Osi.LLWEAPONEX_OnWeaponEquipped(uuid,item,template)
-	end
-
-	local isPlayer = CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1
-
-	for mastery,masterData in pairs(WeaponExpansion.Masteries) do
-		-- if ItemIsTagged(mainhand) or ItemIsTagged(offhand) then
-		-- 	AddMasteryExperience(uuid,mastery,expGain)
-		-- end
-		if IsTagged(item,mastery) == 1 then
-			Osi.LLWEAPONEX_WeaponMastery_TrackItem(uuid, item)
-			if IsTagged(uuid, mastery) == 0 then
-				SetTag(uuid,mastery)
-				Osi.LLWEAPONEX_WeaponMastery_OnMasteryActivated(uuid,mastery)
-				Osi.LLWEAPONEX_OnWeaponTypeEquipped(uuid, item, mastery, isPlayer)
-			end
-		end
-	end
-end
-
-function OnItemUnequipped(uuid,item,template)
-	if ObjectGetFlag(item, "LLWEAPONEX_HasWeaponType") == 1 then
-		local isPlayer = CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1
-		for mastery,masterData in pairs(WeaponExpansion.Masteries) do
-			if IsTagged(item,mastery) == 1 then
-				Osi.LLWEAPONEX_OnWeaponTypeUnEquipped(uuid, item, mastery, isPlayer)
-			end
-		end
-	end
-end
-
---- @param uuid string
 --- @param mastery string
 function OnMasteryDeactivated(uuid,mastery)
 	ClearTag(uuid,mastery)
+	LeaderLib.PrintDebug("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
 end

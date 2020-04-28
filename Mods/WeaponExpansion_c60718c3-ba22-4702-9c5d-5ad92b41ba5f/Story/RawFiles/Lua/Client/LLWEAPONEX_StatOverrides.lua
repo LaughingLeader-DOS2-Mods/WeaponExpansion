@@ -102,9 +102,7 @@ local function LLWEAPONEX_StatOverrides_Init()
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 
-	
-
-	for statType,entries in pairs(WeaponExpansion.MasteryParams) do
+	for statType,entries in pairs(Mastery.Params) do
 		local statParamsAttribute = "StatsDescriptionParams"
 		if statType == "StatusData" then
 			statParamsAttribute = "DescriptionParams"

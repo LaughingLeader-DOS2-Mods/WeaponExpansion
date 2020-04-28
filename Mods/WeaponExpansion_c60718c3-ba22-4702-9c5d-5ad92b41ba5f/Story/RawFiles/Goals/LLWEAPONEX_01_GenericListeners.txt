@@ -3,10 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
 
-//REGION SKILLS
-
-//END_REGION
-
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LaughingLeader_WeaponExpansion"

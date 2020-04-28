@@ -217,7 +217,7 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, 
     end
 end
 
-WeaponExpansion.Math.AbilityScaling = {
+Math.AbilityScaling = {
 	GetSkillDamageRange = GetSkillDamageRange,
 	CalculateWeaponDamage = CalculateWeaponDamage,
 	CalculateWeaponDamageRange = CalculateWeaponDamageRange,

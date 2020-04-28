@@ -8,7 +8,7 @@
 --- @param noRandomization boolean
 local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 	--Mods.LeaderLib.Debug_TraceCharacter(attacker)
-	local skill_func = WeaponExpansion.Skills.Damage.Skills[skill.Name]
+	local skill_func = Skills.Damage.Skills[skill.Name]
 	if skill_func ~= nil then
 		local status,damageList,deathType = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 		if status and damageList ~= nil then

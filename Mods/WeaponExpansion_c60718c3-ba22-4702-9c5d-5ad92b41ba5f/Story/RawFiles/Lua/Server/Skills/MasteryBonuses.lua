@@ -8,11 +8,11 @@ local throwingKnifeBonuses = {
 local function ThrowingKnifeBonus(char, state, funcParams)
 	--Ext.Print("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
 	local hasMastery = false
-	local data = WeaponExpansion.MasteryParams.SkillData["Projectile_ThrowingKnife"]
+	local data = Mastery.Params.SkillData["Projectile_ThrowingKnife"]
 	if data ~= nil and data.Tags ~= nil then
 		local character = Ext.GetCharacter(char)
 		for tagName,tagData in pairs(data.Tags) do
-			if WeaponExpansion.HasMasteryRequirement(character, tagName) then
+			if HasMasteryRequirement(character, tagName) then
 				hasMastery = true
 				break
 			end
@@ -91,17 +91,17 @@ local function ThrowingKnifeDelayedProc(funcParams)
 	end
 end
 
-WeaponExpansion.TimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
+TimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
 
 local function CripplingBlowBonus(char, state, funcParams)
 	Ext.Print("[MasteryBonuses:CripplingBlow] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
 	if state == SKILL_STATE.HIT then
 		local character = Ext.GetCharacter(char)
 		local hasMasteries = {}
-		local data = WeaponExpansion.MasteryParams.SkillData["Target_CripplingBlow"]
+		local data = Mastery.Params.SkillData["Target_CripplingBlow"]
 		if data ~= nil and data.Tags ~= nil then
 			for tagName,tagData in pairs(data.Tags) do
-				if WeaponExpansion.HasMasteryRequirement(character, tagName) then
+				if HasMasteryRequirement(character, tagName) then
 					hasMasteries[tagData.ID] = true
 				end
 			end
@@ -122,7 +122,7 @@ local function CripplingBlowBonus(char, state, funcParams)
 			if hasMasteries["BONUSDAMAGE"] == true then
 				local x,y,z = GetPosition(target)
 				local targetPos = {[1] = x, [2] = y, [3] = z}
-				local skill = WeaponExpansion.Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+				local skill = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 				local damageList = Game.Math.GetSkillDamage(skill, character.Stats, false, false, character.Stats.Position, targetPos, character.Stats.Level, 0)
 				damageList:ConvertDamageType("Piercing")
 				for i,damage in pairs(damageList:ToTable()) do

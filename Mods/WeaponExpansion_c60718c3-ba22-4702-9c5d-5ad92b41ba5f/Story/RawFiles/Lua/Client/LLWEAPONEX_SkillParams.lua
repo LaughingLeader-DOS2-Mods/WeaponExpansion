@@ -24,9 +24,9 @@ local boltRuneBoosts = {
 local boltAmmoTypeText = TranslatedString:Create("hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e", "Ammo Type: [1]")
 
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
-	local rune,weaponBoostStat = WeaponExpansion.Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
 	if rune ~= nil then
-		local runeNameText = WeaponExpansion.Text.RuneNames[rune.BoostName]
+		local runeNameText = Text.RuneNames[rune.BoostName]
 		if runeNameText ~= nil then
 			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
 		else
@@ -36,7 +36,7 @@ local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 	return ""
 end
 
-WeaponExpansion.Skills.Params["LLWEAPONEX_HandCrossbowRuneEffects"] = GetHandCrossbowBoltEffects
+Skills.Params["LLWEAPONEX_HandCrossbowRuneEffects"] = GetHandCrossbowBoltEffects
 
 local PistolRuneBoosts = {
 	["_Boost_LLWEAPONEX_Pistol_Bullets_Normal"] = {Transform="", Apply=""},
@@ -55,9 +55,9 @@ local PistolRuneBoosts = {
 local bulletAmmoTypeText = TranslatedString:Create("h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad", "Ammo Type: [1]")
 
 local function GetPistolBulletEffects(skill, character, isFromItem, param)
-	local rune,weaponBoostStat = WeaponExpansion.Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
 	if rune ~= nil then
-		local runeNameText = WeaponExpansion.Text.RuneNames[rune.BoostName]
+		local runeNameText = Text.RuneNames[rune.BoostName]
 		if runeNameText ~= nil then
 			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
 		else
@@ -74,7 +74,7 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	-- end
 	return ""
 end
-WeaponExpansion.Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletEffects
+Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletEffects
 
 local damageScaleWeaponText = TranslatedString:Create("ha4cfd852g52f1g4079g8919gd392ac8ade1a", "Damage is based on your basic attack and receives a bonus from [1].")
 local damageScaleLevelText = TranslatedString:Create("h71b09f9fg285fg4532gab16g1c7640864141", "Damage is based on your level and receives bonus from [1].")
@@ -97,15 +97,15 @@ local function GetSkillAbility(skill, character, isFromItem, param)
 	return ""
 end
 
-WeaponExpansion.Skills.Params["LLWEAPONEX_ScalingStat"] = GetSkillAbility
+Skills.Params["LLWEAPONEX_ScalingStat"] = GetSkillAbility
 
 local function GetHighestAttribute(skill, character, isFromItem, param)
-	local att = WeaponExpansion.Skills.GetHighestAttribute(character)
+	local att = Skills.GetHighestAttribute(character)
 	local text = string.gsub(damageScaleLevelText.Value, "%[1%]", att)
 	return "<br><font color='#078FC8'>"..text.."</font>"
 end
 
-WeaponExpansion.Skills.Params["GetHighestAttribute"] = GetScaling
+Skills.Params["GetHighestAttribute"] = GetScaling
 
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
@@ -116,7 +116,7 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
 	--Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
 	--Ext.Print("skill("..tostring(skill)..") character("..tostring(character)..") isFromItem("..tostring(isFromItem)..")")
-	local param_func = WeaponExpansion.Skills.Damage.Params[param]
+	local param_func = Skills.Damage.Params[param]
 	if param_func ~= nil then
 		local status,mainDamageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
 		if status and mainDamageRange ~= nil then
@@ -131,7 +131,7 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 			return ""
 		end
 	end
-	param_func = WeaponExpansion.Skills.Params[param]
+	param_func = Skills.Params[param]
 	if param_func ~= nil then
 		local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0)
 		if status then

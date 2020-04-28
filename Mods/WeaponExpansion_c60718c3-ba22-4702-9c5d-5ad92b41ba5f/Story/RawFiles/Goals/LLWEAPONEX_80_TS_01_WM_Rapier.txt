@@ -7,8 +7,6 @@ KBSECTION
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
-DB_LLWEAPONEX_WeaponMastery_ActiveSkills(_Player, "LLWEAPONEX_Rapier", "DuelistStance", _)
-AND
 HasActiveStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", 1)
 AND
 LLWEAPONEX_QRY_IsEquippedWeapon(_Player, _Item)
@@ -22,13 +20,11 @@ LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandLost(_Player);
 IF
 ItemUnEquipped(_Item, _Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_Learned(_Player, "LLWEAPONEX_Rapier", "DuelistStance")
+LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_Rapier")
 AND
 HasActiveStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", 0)
 AND
 LeaderLib_Helper_QRY_HasEmptyWeaponSlot(_Player)
-AND
-LLWEAPONEX_QRY_WeaponTypeEquipped(_Player, "LLWEAPONEX_Rapier")
 THEN
 ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance");
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance", 500);
