@@ -1,6 +1,5 @@
-if WeaponExpansion == nil then WeaponExpansion = {} end
-
 LeaderLib = Mods["LeaderLib"]
+WeaponExpansion = Mods["WeaponExpansion"]
 
 Main = {}
 Debug = {}
@@ -17,13 +16,19 @@ Mastery = {
 --- @type table<string,string>
 Tags = {}
 
+Ext.Require("Shared/Data/MasteryData_Masteries.lua")
+Ext.Require("Shared/Data/MasteryBonusParams.lua")
+Ext.Require("Shared/Data/WeaponTypesTags.lua")
+Ext.Require("Shared/AbilityBasedScaling.lua")
+Ext.Require("Shared/SkillDamageFunctions.lua")
+
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
 	if character:HasTag(tag) == true then
 		local a,b,mastery = string.find(tag,"(.+)_Mastery")
-		print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery)
+		print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
 		if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 			return true
 		else
@@ -48,7 +53,7 @@ end
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string
 --- @return boolean
-local function HasMasteryRequirement(character, tag)
+function HasMasteryRequirement(character, tag)
 	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
 	if not status then
 		Ext.PrintError("Error checking mastery requirements:\n", result)
@@ -57,11 +62,6 @@ local function HasMasteryRequirement(character, tag)
 	end
 	return false
 end
-
-HasMasteryRequirement = HasMasteryRequirement
-
-Ext.Require("Shared/Data/MasteryData_Masteries.lua")
-Ext.Require("Shared/Data/MasteryBonusParams.lua")
 
 ---@class TranslatedString
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
@@ -73,9 +73,6 @@ Text.RuneNames = RuneNames
 ---@type table<string,TranslatedString>
 local MasteryRankTagText = Ext.Require("Shared/Data/MasteryRankTagText.lua")
 Text.MasteryRankTagText = MasteryRankTagText
-
-Ext.Require("Shared/AbilityBasedScaling.lua")
-Ext.Require("Shared/SkillDamageFunctions.lua")
 
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, NextLevel = 1000},

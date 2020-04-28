@@ -20,7 +20,7 @@ function TagMasteryRanks(uuid,mastery,level)
 		for i=1,level,1 do
 			local tag = mastery.."_Mastery"..tostring(i)
 			SetTag(uuid, tag)
-			LeaderLib.PrintDebug("[WeaponExpansion] Setting tag ["..tag.."] on ["..uuid.."]")
+			LeaderLib.PrintDebug("[WeaponExpansion:TagMasteryRanks] Setting tag ["..tag.."] on ["..uuid.."]")
 		end
 	end
 end
@@ -48,7 +48,7 @@ end
 --- @param mastery string
 --- @param expGain number
 --- @param skipFlagCheck boolean
-local function AddMasteryExperience(uuid,mastery,expGain)
+function AddMasteryExperience(uuid,mastery,expGain)
 	if skipFlagCheck == true or ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		local currentLevel = 0
 		local currentExp = 0
@@ -91,7 +91,7 @@ end
 --- Adds mastery experience for all active masteries on equipped weapons.
 --- @param uuid string
 --- @param expGain number
-local function AddMasteryExperienceForAllActive(uuid,expGain)
+function AddMasteryExperienceForAllActive(uuid,expGain)
 	if ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 		--local offhand = CharacterGetEquippedItem(uuid, "Shield")

@@ -60,7 +60,7 @@ local function ThrowingKnifeBonus(char, state, funcParams)
 					NRD_ProjectileSetGuidString("HitObject", target)
 					NRD_ProjectileSetGuidString("HitObjectPosition", target)
 					NRD_ProjectileSetGuidString("TargetPosition", target)
-					NRD_ProjectileLaunch();
+					NRD_ProjectileLaunch()
 				end
 				ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 			end
@@ -84,14 +84,14 @@ local function ThrowingKnifeDelayedProc(funcParams)
 		NRD_ProjectileSetVector3("SourcePosition", x,y,z)
 		NRD_ProjectileSetVector3("HitObjectPosition", x,y,z)
 		NRD_ProjectileSetVector3("TargetPosition", x,y,z)
-		NRD_ProjectileLaunch();
+		NRD_ProjectileLaunch()
 		ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 	else
 		Ext.Print("ThrowingKnifeDelayedProc params: "..LeaderLib.Common.Dump(funcParams))
 	end
 end
 
-TimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
+OnTimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
 
 local function CripplingBlowBonus(char, state, funcParams)
 	Ext.Print("[MasteryBonuses:CripplingBlow] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
@@ -120,13 +120,29 @@ local function CripplingBlowBonus(char, state, funcParams)
 				end
 			end
 			if hasMasteries["BONUSDAMAGE"] == true then
-				local x,y,z = GetPosition(target)
-				local targetPos = {[1] = x, [2] = y, [3] = z}
-				local skill = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
-				local damageList = Game.Math.GetSkillDamage(skill, character.Stats, false, false, character.Stats.Position, targetPos, character.Stats.Level, 0)
-				damageList:ConvertDamageType("Piercing")
-				for i,damage in pairs(damageList:ToTable()) do
-					ApplyDamage(target, damage.Amount, "Piercing", char)
+				if LeaderLib.HasStatusType(target, {"INCAPACITATED", "KNOCKED_DOWN"}) then
+					local level = CharacterGetLevel(char)
+					local x,y,z = GetPosition(target)
+					NRD_ProjectilePrepareLaunch()
+					NRD_ProjectileSetString("SkillId", "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+					NRD_ProjectileSetInt("CasterLevel", level)
+					NRD_ProjectileSetGuidString("Caster", char)
+					NRD_ProjectileSetGuidString("Source", char)
+					NRD_ProjectileSetGuidString("SourcePosition", target)
+					NRD_ProjectileSetGuidString("HitObject", target)
+					NRD_ProjectileSetGuidString("HitObjectPosition", target)
+					NRD_ProjectileSetGuidString("TargetPosition", target)
+					NRD_ProjectileLaunch()
+
+					-- local targetPos = {[1] = x, [2] = y, [3] = z}
+					-- local skill = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+					-- local damageList = Game.Math.GetSkillDamage(skill, character.Stats, false, false, character.Stats.Position, targetPos, character.Stats.Level, 0)
+					-- damageList:ConvertDamageType("Piercing")
+					-- for i,damage in pairs(damageList:ToTable()) do
+					-- 	ApplyDamage(target, damage.Amount, "Piercing", char)
+					-- end
+				else
+					LeaderLib.PrintDebug("[WeaponExpansion:MasteryBonuses:CripplingBlowBonus] Target is not disabled.")
 				end
 			end
 		end

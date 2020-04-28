@@ -11,8 +11,11 @@ AND
 DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
 AND
 LLWEAPONEX_Ext_QRY_IsPlayer(_Char, _IsPlayer)
+AND
+GetTemplate(_Item, _Template)
 THEN
 NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
+LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
 LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
 LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(_Char, _Item);
 
@@ -48,11 +51,8 @@ PROC
 LLWEAPONEX_Equipment_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_IsPlayer)
 AND
 DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
-AND
-GetTemplate(_Item, _Template)
 THEN
 NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
-LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
 
 PROC
 LLWEAPONEX_Equipment_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_IsPlayer)
@@ -129,8 +129,18 @@ AND
 ObjectExists(_Item, _b)
 AND
 LeaderLib_Math_QRY_IsEqualToAny(0, _a, _b)
+AND
+GetTemplate(_Item, _Template)
 THEN
+NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
 LLWEAPONEX_Equipment_Internal_CleanupEntry(_Char, _Item, _a, _b);
+
+PROC
+LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1, 1)
+AND
+GetTemplate(_Item, _Template)
+THEN
+LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
 
 PROC
 LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1, (INTEGER)_ItemExists)
@@ -141,10 +151,8 @@ LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
 
 PROC
 LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0, (INTEGER)_ItemExists)
-AND
-LLWEAPONEX_Ext_QRY_IsPlayer(_Char, _IsPlayer)
 THEN
-LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
+LLWEAPONEX_Equipment_ClearItem(_Char, _Item, 1);
 
 PROC
 LLWEAPONEX_Equipment_Internal_ClearEntries((CHARACTERGUID)_Char, (ITEMGUID)_Item)

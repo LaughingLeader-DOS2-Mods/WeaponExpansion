@@ -120,6 +120,13 @@ DB_NOOP(1);
 //REGION ACTIVE_MASTERY_TRACKING
 PROC
 LLWEAPONEX_WeaponMastery_TrackMastery((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Mastery)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _Mastery)
+THEN
+LLWEAPONEX_WeaponMastery_OnMasteryActivated(_Player, _Mastery);
+
+PROC
+LLWEAPONEX_WeaponMastery_TrackMastery((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Mastery)
 THEN
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery);
 
@@ -129,6 +136,15 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery);
+LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(_Player, _Mastery);
+
+PROC
+LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries((CHARACTERGUID)_Player, (STRING)_Mastery)
+AND
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _Mastery)
+THEN
+ClearTag(_Player, _Mastery);
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _Mastery);
 //END_REGION
 
 //REGION EQUIPPING
@@ -170,7 +186,7 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _Tag)
 THEN
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _Tag);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:OnWeaponEquipped] Weapon Mastery [",_Tag,"] was reactivated. Removing from [DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries].");
+LeaderLog_Log("DEBUG", "[LLWEAPONEX_01_Mastery__Main:LLWEAPONEX_Equipment_OnTaggedItemEquipped] Weapon Mastery [",_Tag,"] was reactivated. Removing from [DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries].");
 
 IF
 StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_MasteryDeactivated")

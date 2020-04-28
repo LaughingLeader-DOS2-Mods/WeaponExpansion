@@ -6,15 +6,14 @@ KBSECTION
 PROC
 LLWEAPONEX_GameScripts_InitSettings()
 THEN
-LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_00_EquipEvents");
+LeaderLib_GameScripts_ClearScriptsForGroup("WeaponExpansion");
+LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_01_GS_00_EquipEvents");
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_01_MasteryEvents");
 
-/*
-This script should only complete when the loading is done.
-Child scripts are meant to be scripts with events that only need to be listened for when we're done loading.
-Status apply/removal events may spam if applying/removing statuses while loading happens.
-*/
-
+PROC
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+THEN
+LLWEAPONEX_GameScripts_InitSettings();
 EXITSECTION
 
 ENDEXITSECTION

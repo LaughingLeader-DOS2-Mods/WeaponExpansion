@@ -1,15 +1,15 @@
 Ext.Require("Server/_ServerMain.lua")
-Ext.Require("Server/TimerListener.lua")
-Ext.Require("Server/GameMechanics.lua")
-Ext.Require("Server/PistolMechanics.lua")
-Ext.Require("Server/Skills/DamageHandler.lua")
-Ext.Require("Server/Skills/MasteryBonuses.lua")
-Ext.Require("Server/Skills/ElementalFirearms.lua")
-Ext.Require("Server/Skills/PrepareEffects.lua")
+Ext.Require("Server/TimerListeners.lua")
 Ext.Require("Server/EquipmentEvents.lua")
+Ext.Require("Server/GameMechanics.lua")
 Ext.Require("Server/MasteryHelpers.lua")
-Ext.Require("Server/TagHelpers.lua")
+Ext.Require("Server/PistolMechanics.lua")
 Ext.Require("Server/ServerDebug.lua")
+Ext.Require("Server/Skills/DamageHandler.lua")
+Ext.Require("Server/Skills/ElementalFirearms.lua")
+Ext.Require("Server/Skills/MasteryBonuses.lua")
+Ext.Require("Server/Skills/PrepareEffects.lua")
+Ext.Require("Server/TagHelpers.lua")
 
 local function dumpRanks(...)
     --DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>")
@@ -30,11 +30,11 @@ Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 
 local function SessionLoading()
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
-        EnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
-        EnemyUpgradeOverhaul.IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
+        Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
+        Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
-    Mods.LeaderLib.AddDebugInitCall(DebugInit)
+    Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
 end
 Ext.RegisterListener("SessionLoading", SessionLoading)
 

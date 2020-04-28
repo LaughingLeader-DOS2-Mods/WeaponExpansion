@@ -1,7 +1,7 @@
-TimerFinished = {}
+OnTimerFinished = {}
 
-local function OnTimerFinished(event, ...)
-	local callback = TimerFinished[event]
+local function OnTimerFinished_RunCallbacks(event, ...)
+	local callback = OnTimerFinished[event]
 	if callback ~= nil then
 		local status,err = xpcall(callback, debug.traceback, {...})
 		if not status then
@@ -14,4 +14,4 @@ local function OnTimerFinished(event, ...)
 	end
 end
 
-LeaderLib.RegisterListener("TimerFinished", OnTimerFinished)
+LeaderLib.RegisterListener("TimerFinished", OnTimerFinished_RunCallbacks)

@@ -115,6 +115,7 @@ local gameTestTemplates = {
 
 function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
+    LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
     local host = CharacterGetHostCharacter()
 
 	for mastery,masterData in pairs(Masteries) do
@@ -153,7 +154,10 @@ function DebugInit()
 
     local x,y,z = GetPosition(host)
     -- GameMaster_RewardChest_Small
-    local chest = CreateItemTemplateAtPosition("d0463c7f-b117-4614-963e-4d35706a4e16", x, y, z)
+    local chest = CreateItemTemplateAtPosition("dca4ff7a-c916-4e3a-968c-54adef3b10e2", x, y, z)
     GenerateTreasure(chest, "TEST_Generation", 16, nil)
     InventoryLaunchIterator(chest, "LLWEAPONEX_BoostConversion_SwapDeltaMods", "")
+    local tx,ty,tz = FindValidPosition(x,y,z,12.0,chest)
+    TeleportToPosition(chest, tx,ty,tz)
+    LeaderLib.PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
 end

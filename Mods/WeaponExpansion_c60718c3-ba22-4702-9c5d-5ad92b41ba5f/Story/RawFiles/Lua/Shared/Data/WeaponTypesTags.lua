@@ -6,7 +6,7 @@ Tags.WeaponTypeToTag = {
 	Club = "LLWEAPONEX_Blunt",
 	Crossbow = "LLWEAPONEX_Crossbow",
 	Rifle = "LLWEAPONEX_Firearm",
-	Knife = "LLWEAPONEX_Knife",
+	Knife = "LLWEAPONEX_Dagger",
 	Spear = "LLWEAPONEX_Spear",
 	Staff = "LLWEAPONEX_Staff",
 	Sword = "LLWEAPONEX_Sword",
@@ -21,6 +21,8 @@ Tags.RangedWeaponTags = {
 	"LLWEAPONEX_Firearm",
 	"LLWEAPONEX_Wand",
 }
+
+Tags.WeaponTypes = {}
 
 function AddWeaponTypeTag(tag)
 	Tags.WeaponTypes[tag] = tag.."_Equipped"

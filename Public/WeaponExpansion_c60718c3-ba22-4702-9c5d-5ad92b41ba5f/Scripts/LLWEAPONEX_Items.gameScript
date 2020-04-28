@@ -254,22 +254,6 @@ THEN
 	//ShootWorldProjectile(Projectile_LLWEAPONEX_AnvilMace_GroundImpact, _Char, _Pos, {0;-1.0;0}, _Level)
 ENDIF
 
-EVENT LLWEAPONEX_AnvilMace_Unsheathe_Dwarves
-VARS
-	CHARACTER:_Char
-	FLOAT3:_Pos
-	FLOAT:_LevelF
-	INT:_Level
-ON
-	OnCharacterStatusApplied(_Char, UNSHEATHED)
-ACTIONS
-IF "c1&c2"
-	HasFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped")
-	IsTagged(_Char, "DWARF")
-THEN
-	CharacterApplyStatus(_Char, LLWEAPONEX_ANVIL_UNSHEATHED_FX)
-ENDIF
-
 EVENT LLWEAPONEX_BattleBook_SpellScroll_Explode_Position
 VARS
 	CHARACTER:_Char

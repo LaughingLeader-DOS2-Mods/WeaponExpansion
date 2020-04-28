@@ -117,7 +117,11 @@ local function GetCripplingBlowBonusDamage(character, tagName, param)
 			totalMin = totalMin + damage[1]
 			totalMax = totalMax + damage[2]
 		end
-		damageText = string.format("%s-%s", math.tointeger(totalMin), math.tointeger(totalMax))
+		if totalMin ~= totalMax then
+			damageText = string.format("%s-%s", math.tointeger(totalMin), math.tointeger(totalMax))
+		else
+			damageText = tostring(math.tointeger(totalMin))
+		end
 	end
 	return param:gsub("%[1%]", tagName):gsub("%[2%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
 end

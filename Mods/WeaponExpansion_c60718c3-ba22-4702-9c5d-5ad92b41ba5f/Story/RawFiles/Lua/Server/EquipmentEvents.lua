@@ -1,3 +1,12 @@
+local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType, isPlayer)
+	if weapontype == "Rapier" or weapontype == "Katana" then
+		local twohanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
+		if (twohanded and weapontype == "Katana") or (not twohanded and weapontype == "Rapier") then
+			Osi.LLWEAPONEX_AnimationSetOverride_Set(uuid, "LLWEAPONEX_Override1", weapontype)
+		end
+	end
+end
+
 --- @param uuid string
 --- @param item string
 local function OnItemEquipped(uuid,item)
@@ -6,12 +15,8 @@ local function OnItemEquipped(uuid,item)
 	
 	local stat = NRD_ItemGetStatsId(item)
 	local statType = NRD_StatGetType(stat)
-	if statType == "Weapon" then
-		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
-		Osi.LLWEAPONEX_OnWeaponEquipped(uuid,item,GetTemplate(item))
-	end
 
-	if statType == "Weapon" or statType == "Shield" and ObjectGetFlag(item, "LLWEAPONEX_TaggedWeaponType") == 0 then
+	if ObjectGetFlag(item, "LLWEAPONEX_TaggedWeaponType") == 0 and statType == "Weapon" or statType == "Shield" then
 		TagWeapon(item, statType, stat)
 	end
 
@@ -21,35 +26,24 @@ local function OnItemEquipped(uuid,item)
 	end
 
 	for tag,data in pairs(Masteries) do
-		--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
+		LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
 		if IsTagged(item,tag) == 1 then
 			local equippedTag = Tags.WeaponTypes[tag]
 			if equippedTag ~= nil then
-				LeaderLib.PrintDebug("[WeaponExpansion] Setting tag ["..equippedTag.."] on ["..uuid.."]")
-				Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,equippedTag)
+				LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
+				Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,equippedTag,isPlayer)
 			end
 			Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, item, tag)
 			ObjectSetFlag(item, "LLWEAPONEX_HasWeaponType", 0)
 			if IsTagged(uuid, tag) == 0 then
 				SetTag(uuid, tag)
-				LeaderLib.PrintDebug("[WeaponExpansion] Setting tag ["..tag.."] on ["..uuid.."]")
-				Osi.LLWEAPONEX_WeaponMastery_OnMasteryActivated(uuid, tag)
-				print(uuid, item, tag, isPlayer)
+				LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
 				OnWeaponTypeEquipped(uuid, item, tag, stat, statType, isPlayer == 1)
 			end
 		end
 	end
 end
 Ext.NewCall(OnItemEquipped, "LLWEAPONEX_Ext_OnItemEquipped", "(CHARACTERGUID)_Character, (ITEMGUID)_Item")
-
-local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType, isPlayer)
-	if weapontype == "Rapier" or weapontype == "Katana" then
-		local twohanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
-		if (twohanded and weapontype == "Katana") or (not twohanded and weapontype == "Rapier") then
-			Osi.LLWEAPONEX_AnimationSetOverride_Set(uuid, "LLWEAPONEX_Override1", weapontype)
-		end
-	end
-end
 
 local rodSkills = {
 	Air = {"Projectile_LLWEAPONEX_ShootRod_Air", "Projectile_LLWEAPONEX_ShootRod_Air_Offhand"},
