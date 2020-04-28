@@ -51,7 +51,7 @@ ObjectClearFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 0);
 PROC
 LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
 THEN
-LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
+LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1", "BurialBlade");
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
 ObjectSetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 0);
 

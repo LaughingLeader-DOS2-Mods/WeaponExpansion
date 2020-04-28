@@ -95,7 +95,7 @@ ItemMoveToPosition(ITEMGUID_S_LLWEAPONEX_Wagon_A_Test_cbc6d819-b5ba-4800-b60c-78
 IF
 ObjectFlagSet("LLWEAPONEX_Mounted", (CHARACTERGUID)_Char, _)
 THEN
-LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLANIM_Mounted1");
+LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLANIM_Mounted1", "Wagon");
 
 IF
 ObjectFlagCleared("LLWEAPONEX_Mounted", (CHARACTERGUID)_Char, _)
