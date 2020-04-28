@@ -775,35 +775,35 @@ WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb
 WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435
 */
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53")
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Air_f4db8570-4a0b-4292-bb36-f66fb2d8b0c3")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Air_f4db8570-4a0b-4292-bb36-f66fb2d8b0c3")
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Fire_1f3bc0cd-6c5f-4291-812b-50a92bba3adb")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Fire_1f3bc0cd-6c5f-4291-812b-50a92bba3adb")
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Oil_6e245aba-3bf5-45cd-a95f-7ec29635b8fb")
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN
 RemoveStatus(_Character, "LLWEAPONEX_BALRINAXE_PREPARED");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_Water_e15b0225-bc10-4c1d-8088-8aec094a1435")
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Character, _, _, _)
 THEN

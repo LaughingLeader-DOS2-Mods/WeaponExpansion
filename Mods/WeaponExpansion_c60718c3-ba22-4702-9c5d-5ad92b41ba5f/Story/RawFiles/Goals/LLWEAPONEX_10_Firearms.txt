@@ -365,7 +365,7 @@ CharacterRemoveSkill(_Char, _ReplaceSkill);
 CharacterAddSkill(_Char, _FindSkill, 0);
 
 PROC
-LLWEAPONEX_OnWeaponTypeEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)
+LLWEAPONEX_Equipment_OnTaggedItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Firearm", (INTEGER)_IsPlayer)
 AND
 DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPlayer)
 AND
@@ -375,7 +375,7 @@ DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
 LLWEAPONEX_Firearms_SwapRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
 
 PROC
-LLWEAPONEX_OnWeaponTypeUnEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)
+LLWEAPONEX_Equipment_OnTaggedItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Firearm", (INTEGER)_IsPlayer)
 AND
 DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill)
 THEN
@@ -383,7 +383,7 @@ NOT DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
 LLWEAPONEX_Firearms_RestoreRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
 
 PROC
-LLWEAPONEX_OnWeaponTypeUnEquipped(_Char, _Item, "LLWEAPONEX_Firearm", _IsPlayer)
+LLWEAPONEX_Equipment_OnTaggedItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Firearm", (INTEGER)_IsPlayer)
 THEN
 LLWEAPONEX_Firearms_RestoreAllRangerSkills(_Char);
 //END_REGION

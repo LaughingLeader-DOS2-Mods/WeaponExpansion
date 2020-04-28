@@ -131,12 +131,12 @@ DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings("Projectile_LLWEAPONEX_
 //REGION BIBLE
 /*
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion", 1);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27")
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_BibleBattleBookEquipped", "WeaponExpansion", 1);
 */
@@ -145,24 +145,24 @@ LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_BibleBattleBoo
 //WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d
 //REGION SPELLBOOK
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 AND
 NOT LeaderLib_Randomization_Tables_QRY_TableInitialized((GUIDSTRING)_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells")
 THEN
 LeaderLib_Randomization_Tables_BuildTable(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Spells");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_BattleBooks_SpellScrollEquipped", "WeaponExpansion", 500);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d")
 AND
 DB_LLWEAPONEX_BattleBooks_SpellScroll_ProjectileSettings(_ProjectileSpell, _MaterialStatus, _ShootProjectile)
 THEN

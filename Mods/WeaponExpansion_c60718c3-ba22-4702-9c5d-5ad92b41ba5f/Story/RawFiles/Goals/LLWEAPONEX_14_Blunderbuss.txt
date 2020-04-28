@@ -5,12 +5,12 @@ INITSECTION
 KBSECTION
 //REGION EQUIP_EVENTS
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9")
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
 //END_REGION

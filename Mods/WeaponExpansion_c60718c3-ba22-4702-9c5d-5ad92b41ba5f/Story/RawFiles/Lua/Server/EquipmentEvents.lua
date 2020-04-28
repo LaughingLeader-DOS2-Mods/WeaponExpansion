@@ -20,26 +20,22 @@ local function OnItemEquipped(uuid,item)
 		isPlayer = 1
 	end
 
-	for mastery,masterData in pairs(Masteries) do
-		-- if ItemIsTagged(mainhand) or ItemIsTagged(offhand) then
-		-- 	AddMasteryExperience(uuid,mastery,expGain)
-		-- end
-		LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..mastery.."] on ["..uuid.."]")
-		if IsTagged(item,mastery) == 1 then
-			local equippedTag = Tags.WeaponTypes[mastery]
+	for tag,data in pairs(Masteries) do
+		--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
+		if IsTagged(item,tag) == 1 then
+			local equippedTag = Tags.WeaponTypes[tag]
 			if equippedTag ~= nil then
-				SetTag(uuid, equippedTag)
 				LeaderLib.PrintDebug("[WeaponExpansion] Setting tag ["..equippedTag.."] on ["..uuid.."]")
+				Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,equippedTag)
 			end
-			Osi.LLWEAPONEX_WeaponMastery_TrackItem(uuid, item, mastery)
+			Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, item, tag)
 			ObjectSetFlag(item, "LLWEAPONEX_HasWeaponType", 0)
-			if IsTagged(uuid, mastery) == 0 then
-				SetTag(uuid, mastery)
-				LeaderLib.PrintDebug("[WeaponExpansion] Setting tag ["..mastery.."] on ["..uuid.."]")
-				Osi.LLWEAPONEX_WeaponMastery_OnMasteryActivated(uuid, mastery)
-				print(uuid, item, mastery, isPlayer, Osi.LLWEAPONEX_OnWeaponTypeEquipped)
-				Osi.LLWEAPONEX_OnWeaponTypeEquipped(uuid, item, mastery, isPlayer)
-				OnWeaponTypeEquipped(uuid, item, mastery, stat, statType, isPlayer == 1)
+			if IsTagged(uuid, tag) == 0 then
+				SetTag(uuid, tag)
+				LeaderLib.PrintDebug("[WeaponExpansion] Setting tag ["..tag.."] on ["..uuid.."]")
+				Osi.LLWEAPONEX_WeaponMastery_OnMasteryActivated(uuid, tag)
+				print(uuid, item, tag, isPlayer)
+				OnWeaponTypeEquipped(uuid, item, tag, stat, statType, isPlayer == 1)
 			end
 		end
 	end
@@ -54,27 +50,3 @@ local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType, isPl
 		end
 	end
 end
-
-local function OnItemUnequipped(uuid,item)
-	local template = GetTemplate(item)
-	if ObjectGetFlag(item, "LLWEAPONEX_HasWeaponType") == 1 then
-		local isPlayer = 0
-		if CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1 then
-			isPlayer = 1
-		end
-		for mastery,masterData in pairs(Masteries) do
-			if IsTagged(item,mastery) == 1 then
-				local equippedTag = Tags.WeaponTypes[mastery]
-				if equippedTag ~= nil then
-					ClearTag(uuid, equippedTag)
-					LeaderLib.PrintDebug("[WeaponExpansion] Clearing tag ["..equippedTag.."] on ["..uuid.."]")
-				end
-				Osi.LLWEAPONEX_OnWeaponTypeUnEquipped(uuid, item, mastery, isPlayer)
-				ClearTag(uuid,mastery)
-				LeaderLib.PrintDebug("[WeaponExpansion] Weapon with mastery tag ["..mastery.."] on ["..uuid.."] was removed.")
-			end
-		end
-	end
-	Osi.LLWEAPONEX_OnItemUnEquipped(uuid,item,template)
-end
-Ext.NewCall(OnItemUnequipped, "LLWEAPONEX_Ext_OnItemUnequipped", "(CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template")

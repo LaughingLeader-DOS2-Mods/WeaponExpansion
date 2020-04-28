@@ -56,7 +56,7 @@ THEN
 NOT DB_LLWEAPONEX_BonusConversion_Temp_CurrentConversionValue(_Player, _Weapon, _ConversionStatus, _ActualBase);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_BonusConversion_Enabled", 1)
 AND
@@ -71,7 +71,7 @@ THEN
 DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Item, _ConversionStatus);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_BonusConversion_Temp_WeaponStatus(_Player, _Item, _ConversionStatus)
 THEN

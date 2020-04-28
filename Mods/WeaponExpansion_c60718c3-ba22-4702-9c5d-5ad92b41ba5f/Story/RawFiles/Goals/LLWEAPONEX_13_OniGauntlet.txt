@@ -37,32 +37,32 @@ LLWEAPONEX_OniGauntlet_InitSettings();
 
 //REGION ONI_GAUNTLET_EQUIPPING
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
 THEN
 LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Char);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
 THEN
 LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Char);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
 THEN
 LLWEAPONEX_OniGauntlet_Internal_OnOniGauntletUnEquipped_Start(_Char);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_1_27ac5dab-00a7-4013-9568-2d669b581939")
 THEN
 LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_2_32ca983f-3c37-4531-9e7a-597f6733cefe")
 THEN
 LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Char, _Item);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_OniGauntlet_Arms_A_3_79899ff9-6bc8-41cf-8a85-839167e2150a")
 THEN
 LLWEAPONEX_OniGauntlet_OnOniGauntletEquipped(_Char, _Item);
 

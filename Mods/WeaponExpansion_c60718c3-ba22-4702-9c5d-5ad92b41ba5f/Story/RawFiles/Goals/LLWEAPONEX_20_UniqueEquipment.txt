@@ -36,33 +36,33 @@ THEN
 DB_NOOP(1);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
 THEN
 LLWEAPONEX_AnimationSetOverride_Clear(_Char);
 LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
 ObjectClearFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 0);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
 ObjectClearFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 0);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
 THEN
 LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1", "BurialBlade");
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
 ObjectSetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 0);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
 ObjectSetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 0);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
 AND
 LLWEAPONEX_Uniques_QRY_PrepareBurialBlade(_Mainhand)
 AND
@@ -73,7 +73,7 @@ LeaderLib_Helper_EquipInSlot(_Char, _Offhand, "Shield");
 ItemLockUnEquip(_Offhand, 1);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
 AND
 DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
 THEN
@@ -132,7 +132,7 @@ LLWEAPONEX_Uniques_InitSettings();
 
 //REGION BEHOLDER
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 THEN
 DB_LLWEAPONEX_Uniques_BeholderEquipped(_Char);
 
@@ -153,7 +153,7 @@ PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.BeholderUnsheathed");
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:Sheathed] Stopping Beholder unsheathed loop effect on character.");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
 AND
 DB_LLWEAPONEX_Uniques_BeholderEquipped(_Char)
 THEN
@@ -241,7 +241,7 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 14);
 
 //REGION MURAMASA
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaEquipped(_Char);
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
@@ -256,7 +256,7 @@ THEN
 ApplyStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, 0, _Char);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Char);
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
@@ -271,12 +271,12 @@ RemoveStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
 
 //REGION DEMON_GAUNTLET
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
 THEN
 LLWEAPONEX_Uniques_OnDemonGauntletUnequipped(_Char);
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_DemonGauntletEquipped", "WeaponExpansion");
@@ -503,12 +503,12 @@ PlayEffect(_Char, "LLWEAPONEX_FX_Skills_PowerPoleSmash_Cast_Pole_01", "Dummy_FX_
 
 //REGION SOUL_HARVESTER
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion", 1);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_SoulHarvestEquipped", "WeaponExpansion", 1);
 
@@ -872,12 +872,12 @@ LeaderLib_Timers_StartObjectTimer(_Char, 700, "LLWEAPONEX_Timers_SlayHidden_Next
 
 //REGION ANVIL_MACE
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 1);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 1);
 
@@ -1335,7 +1335,7 @@ NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
 
 //REGION FLAMETHROWER_PYRO_DANCE
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion", 500);
 NOT DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
@@ -1343,7 +1343,7 @@ LeaderLib_Statuses_RemoveIfActive(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE");
 LeaderLib_Statuses_RemoveIfActive(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion");
 DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);

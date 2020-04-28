@@ -20,7 +20,7 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Throwing",
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX", 0);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_CustomUnsheathedFX", 1)
 THEN
@@ -28,7 +28,7 @@ DB_LLWEAPONEX_TS_Temp_CustomUnsheathed(_Char, _Item);
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_CustomUnsheathedFX", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_TS_Temp_CustomUnsheathed(_Char, _Item)
 THEN

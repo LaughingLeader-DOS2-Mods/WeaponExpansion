@@ -213,3 +213,16 @@ function TwoHandedToOnehanded(char, item)
     NRD_ItemSetPermanentBoostInt(cloned, "IsTwoHanded", 0)
     CharacterEquipItem(char, cloned)
 end
+
+function IsPlayer(uuid)
+	return CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1
+end
+
+local function IsPlayerQRY(uuid)
+    if CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) then
+        return 1
+    end
+    return 0
+end
+
+Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Character, [out](INTEGER)_IsPlayer")

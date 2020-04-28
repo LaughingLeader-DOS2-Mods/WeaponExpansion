@@ -258,7 +258,7 @@ LLWEAPONEX_Rods_AdjustRodSkill(_Character, _Rod);
 
 //Revert to offhand skill
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Rods_Temp_RemoveSkillWhenUnequipped(_Player, _Item, _MainhandSkill)
 AND
@@ -272,7 +272,7 @@ CharacterRemoveSkill(_Player, _MainhandSkill);
 LeaderLib_Timers_StartCharacterItemTimer(_Player, (ITEMGUID)_Item, 50, "LLWEAPONEX_Timers_AdjustRodSkill", "LLWEAPONEX_Rods_AdjustSkills");
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Rods_Temp_ListenForRodSkill(_Player, _Item)
 AND
@@ -290,7 +290,7 @@ SetVarString(_Item, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
 SetVarString(_Item, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_Rod", 1)
 AND

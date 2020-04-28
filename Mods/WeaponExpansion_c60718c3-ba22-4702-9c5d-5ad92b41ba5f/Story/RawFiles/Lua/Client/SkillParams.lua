@@ -76,6 +76,36 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 end
 Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletEffects
 
+--- @param skill StatEntrySkillData
+--- @param character StatCharacter
+--- @param isFromItem boolean
+--- @param param string
+local function GetMasteryBonuses(skill, character, isFromItem, param)
+	local data = Mastery.Params.SkillData[skill.Name]
+	--Ext.Print(LeaderLib.Common.Dump(data))
+	if data ~= nil then
+		local paramText = ""
+		if data.Tags ~= nil then
+			for tagName,tagData in pairs(data.Tags) do
+				if tagData.GetParam ~= nil and HasMasteryRequirement(character.Character, tagName) then
+					local tagLocalizedName = Text.MasteryRankTagText[tagName]
+					if tagLocalizedName == nil then 
+						tagLocalizedName = ""
+					else
+						tagLocalizedName = tagLocalizedName.Value
+					end
+					local nextText = tagData.GetParam(character, tagLocalizedName, tagData.Param.Value)
+					paramText = paramText.."<br>"..nextText
+				end
+			end
+		end
+		return paramText
+	end
+	return ""
+end
+
+Skills.Params["LLWEAPONEX_MasteryBonuses"] = GetMasteryBonuses
+
 local damageScaleWeaponText = TranslatedString:Create("ha4cfd852g52f1g4079g8919gd392ac8ade1a", "Damage is based on your basic attack and receives a bonus from [1].")
 local damageScaleLevelText = TranslatedString:Create("h71b09f9fg285fg4532gab16g1c7640864141", "Damage is based on your level and receives bonus from [1].")
 

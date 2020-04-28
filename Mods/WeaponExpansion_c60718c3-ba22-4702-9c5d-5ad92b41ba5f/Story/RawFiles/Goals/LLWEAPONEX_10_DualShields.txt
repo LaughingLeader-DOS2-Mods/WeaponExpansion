@@ -123,7 +123,7 @@ ItemToInventory(_Item, _Owner, _Amount, 1, 0);
 
 //REGION UNIQUE_SHIELDS
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Shield_DualShields_GiantDoor_A_5e8ca310-616d-4f18-b455-e510dade5b62")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Shield_DualShields_GiantDoor_A_5e8ca310-616d-4f18-b455-e510dade5b62")
 AND
 ObjectGetFlag(_Item, "LLWEAPONEX_DualShields_GeneratedCombatShield", 0)
 AND
@@ -222,7 +222,7 @@ LLWEAPONEX_DualShields_CombatShieldGenerated(_Owner, _Shield, _CombatShield);
 
 //REGION EQUIPPED
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
@@ -381,7 +381,7 @@ LLWEAPONEX_DualShieldS_Internal_GenerateCombatShield(_Shield);
 
 //REGION UNEQUIPPED
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_DualShields", 1)
 AND
@@ -398,7 +398,7 @@ LeaderLib_Timers_StartObjectTimer(_Char, 500, "LLWEAPONEX_Timers_ResetDualShield
 ItemToInventory(_Mainhand, _Item, 1, 0, 0);
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_CombatShield", 1)
 AND
@@ -678,7 +678,7 @@ ApplyStatus(_Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX", 3.0, 1, _Char);
 //REGION RELOAD_STATS_FIND_COMBAT_SHIELD
 /*
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 LeaderLog_QRY_Log("DEBUG", "[LLWEAPONEX_10_DualShields:OnItemEquipped] Item equipped: ", _Template)
 AND
@@ -692,7 +692,7 @@ DB_NOOP(1);
 */
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
 IsTagged(_Item, "LLWEAPONEX_CombatShield", 1)
 THEN

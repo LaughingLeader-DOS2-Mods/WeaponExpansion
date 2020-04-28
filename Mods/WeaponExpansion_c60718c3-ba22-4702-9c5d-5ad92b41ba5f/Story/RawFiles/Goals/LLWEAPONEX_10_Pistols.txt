@@ -235,11 +235,6 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
-PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Pistol", 1)
-THEN
-DB_NOOP(1);
-
 //REGION RELOADING
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Pistol_Shoot", _, _)

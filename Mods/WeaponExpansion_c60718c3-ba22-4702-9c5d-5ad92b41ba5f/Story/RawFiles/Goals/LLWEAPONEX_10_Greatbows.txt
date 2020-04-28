@@ -106,80 +106,80 @@ LLWEAPONEX_Greatbows_InitSettings();
 
 //REGION EQUIPPED_DB
 PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow", (INTEGER)_IsPlayer)
+LLWEAPONEX_Equipment_OnTaggedItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow", (INTEGER)_IsPlayer)
 AND
 GetTemplate(_Item, _Template)
 THEN
-DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Char, _Item, _Template);
 
 PROC
-LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
+LLWEAPONEX_Equipment_OnTaggedItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Greatbow", (INTEGER)_IsPlayer)
 AND
-DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template)
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Char, _Item, _Template)
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
+NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Char, _Item, _Template);
 
 IF
 RegionEnded(_)
 AND
-DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template)
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Char, _Item, _Template)
 AND
-ObjectIsGlobal(_Character, 0)
+ObjectIsGlobal(_Char, 0)
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
+NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Char, _Item, _Template);
 
 IF
 RegionStarted(_)
 AND
-DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template)
+DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Char, _Item, _Template)
 AND
-ObjectExists(_Character, 0)
+ObjectExists(_Char, 0)
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Character, _Item, _Template);
+NOT DB_LLWEAPONEX_Greatbows_Temp_Equipped(_Char, _Item, _Template);
 //END_REGION
 
 //REGION GREATBOW_START_ATTACK
 IF
-CharacterUsedSkill(_Character, "Projectile_LLMIME_MimicGreatBowAttack", _, _)
+CharacterUsedSkill(_Char, "Projectile_LLMIME_MimicGreatBowAttack", _, _)
 THEN
-LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, "Default");
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Char, "Default");
 
 /*
 PROC
-LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Character, (STRING)_Template)
+LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Char, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Greatbows_TemplateToID(_Template, "Lightning")
 THEN
-//LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, _ID);
-PROC_StopLoopBeamEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
-PROC_LoopBeamEffect("LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Beam_01", _Character, _Character, "Dummy_R_Hand", "Dummy_ProjectileFX", "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__");
+//LLWEAPONEX_Greatbows_PlayPreparationEffect(_Char, _ID);
+PROC_StopLoopBeamEffect(_Char, "LLWEAPONEX.FX.GreatbowAttackFX");
+PROC_LoopBeamEffect("LLWEAPONEX_FX_Projectiles_Greatbow_Lightning_Beam_01", _Char, _Char, "Dummy_R_Hand", "Dummy_ProjectileFX", "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__");
 */
 
 PROC
-LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Character, (STRING)_Template)
+LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Char, (STRING)_Template)
 AND
 DB_LLWEAPONEX_Greatbows_TemplateToID(_Template, _ID)
 THEN
 //LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Greatbows:StartPlayingPreparationEffect] Playing prepare effect with ID [",_ID,"] from template [",_Template,"].");
-LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, _ID);
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Char, _ID);
 
 PROC
-LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Character, (STRING)_Template)
+LLWEAPONEX_Greatbows_StartPlayingPreparationEffect((CHARACTERGUID)_Char, (STRING)_Template)
 AND
 NOT DB_LLWEAPONEX_Greatbows_TemplateToID(_Template, _)
 THEN
 //LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Greatbows:StartPlayingPreparationEffect] No ID found for template [",_Template,"]. Using default.");
-LLWEAPONEX_Greatbows_PlayPreparationEffect(_Character, "Default");
+LLWEAPONEX_Greatbows_PlayPreparationEffect(_Char, "Default");
 
 //Players only. CharacterGetRace doesn't work with NPCs.
 PROC
-LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character, (STRING)_ID)
+LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Char, (STRING)_ID)
 AND
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
+NOT DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 AND
-IsTagged(_Character, "FEMALE", _IsFemale)
+IsTagged(_Char, "FEMALE", _IsFemale)
 AND
-CharacterGetRace(_Character, 1, _Race)
+CharacterGetRace(_Char, 1, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
@@ -187,128 +187,128 @@ DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _Bo
 THEN
 //Play the loop FX with behavior scripting so we can destroy the effect immediately
 //LeaderLog_Log("TRACE", "[LLWEAPONEX:Greatbows:PlayPreparationEffect] Playing arrow FX on attacking character. [",_EffectName,":",_BoneName,"]");
-PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
-PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__", _BoneName);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration);
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.GreatbowAttackFX");
+PROC_LoopEffect(_EffectName, _Char, "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__", _BoneName);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration);
 
 //NPCs
 PROC
-LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Character, (STRING)_ID)
+LLWEAPONEX_Greatbows_PlayPreparationEffect((CHARACTERGUID)_Char, (STRING)_ID)
 AND
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
+NOT DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 AND
-IsTagged(_Character, "FEMALE", _IsFemale)
+IsTagged(_Char, "FEMALE", _IsFemale)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-IsTagged(_Character, _RaceTag, 1)
+IsTagged(_Char, _RaceTag, 1)
 AND
 DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _BoneName, _Duration)
 AND
-NOT DB_LoopEffect(_Character, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
+NOT DB_LoopEffect(_Char, _, "LLWEAPONEX.FX.GreatbowAttackFX", _, _, _)
 THEN
 //Play the loop FX with behavior scripting so we can destroy the effect immediately
 //LeaderLog_Log("TRACE", "[LLWEAPONEX:Greatbows:PlayPreparationEffect] Playing arrow FX on attacking character. [",_EffectName,":",_BoneName,"]");
-PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
-PROC_LoopEffect(_EffectName, _Character, "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__", _BoneName);
-ProcObjectTimer(_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration);
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.GreatbowAttackFX");
+PROC_LoopEffect(_EffectName, _Char, "LLWEAPONEX.FX.GreatbowAttackFX", "__ANY__", _BoneName);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_StopGreatbowPrepareFX", _Duration);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Character, "LLWEAPONEX_Timers_StopGreatbowPrepareFX")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_StopGreatbowPrepareFX")
 THEN
 //LeaderLog_Log("TRACE", "[LLWEAPONEX:Greatbows:StopGreatbowPrepareFX] Destroying looped arrow effect.");
-PROC_StopLoopEffect(_Character, "LLWEAPONEX.FX.GreatbowAttackFX");
+PROC_StopLoopEffect(_Char, "LLWEAPONEX.FX.GreatbowAttackFX");
 //END_REGION
 
 //REGION BONUS_EFFECTS
 PROC
-LLWEAPONEX_Greatbows_OnAttack((CHARACTERGUID)_Character, (STRING)_Template, (GUIDSTRING)_Target)
+LLWEAPONEX_Greatbows_OnAttack((CHARACTERGUID)_Char, (STRING)_Template, (GUIDSTRING)_Target)
 THEN
 DB_NOOP(1);
 
 /*
 PROC
-LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Character, (STRING)_Template, (REAL)_x, (REAL)_y, (REAL)_z)
+LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Char, (STRING)_Template, (REAL)_x, (REAL)_y, (REAL)_z)
 THEN
 DB_NOOP(1);
 */
 
 /*
 PROC
-LLWEAPONEX_Greatbows_OnAttack((CHARACTERGUID)_Character, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (GUIDSTRING)_Target)
+LLWEAPONEX_Greatbows_OnAttack((CHARACTERGUID)_Char, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (GUIDSTRING)_Target)
 AND
 LeaderLib_Roll_QRY(450, 999)
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE", 0.0, 0, _Character);
+ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE", 0.0, 0, _Char);
 */
 
 
 QRY
-LLWEAPONEX_Greatbows_QRY_GetAttackDelay((CHARACTERGUID)_Character, (STRING)_ID)
+LLWEAPONEX_Greatbows_QRY_GetAttackDelay((CHARACTERGUID)_Char, (STRING)_ID)
 AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _)
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _)
 AND
-IsTagged(_Character, "FEMALE", _IsFemale)
+IsTagged(_Char, "FEMALE", _IsFemale)
 AND
-CharacterGetRace(_Character, 1, _Race)
+CharacterGetRace(_Char, 1, _Race)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
 DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _BoneName, _AttackDelay)
 THEN
-DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay);
+DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay);
 
 QRY
-LLWEAPONEX_Greatbows_QRY_GetAttackDelay((CHARACTERGUID)_Character, (STRING)_ID)
+LLWEAPONEX_Greatbows_QRY_GetAttackDelay((CHARACTERGUID)_Char, (STRING)_ID)
 AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _)
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _)
 AND
-IsTagged(_Character, "FEMALE", _IsFemale)
+IsTagged(_Char, "FEMALE", _IsFemale)
 AND
-NOT CharacterGetRace(_Character, 1, _)
+NOT CharacterGetRace(_Char, 1, _)
 AND
 DB_LeaderLib_RaceTags(_Race, _RaceTag, _BaseRaceTag)
 AND
-IsTagged(_Character, _RaceTag, 1)
+IsTagged(_Char, _RaceTag, 1)
 AND
-NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _)
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _)
 AND
 DB_LLWEAPONEX_Greatbows_PrepareFX(_BaseRaceTag, _IsFemale, _ID, _EffectName, _BoneName, _AttackDelay)
 THEN
-DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay);
+DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay);
 //END_REGION
 
 //REGION OMNIBOLT
 //Basic attack position summon lightning
 PROC
-LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Character, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (REAL)_x, (REAL)_y, (REAL)_z)
+LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Char, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (REAL)_x, (REAL)_y, (REAL)_z)
 AND
 LeaderLib_Roll_QRY(299)
 AND
-GetDistanceToPosition(_Character, _x, _y, _z, _Dist)
+GetDistanceToPosition(_Char, _x, _y, _z, _Dist)
 AND
 RealProduct(_Dist, 85.0, _DelayR)
 AND
 Integer(_DelayR, _DelayInt)
 AND
-LLWEAPONEX_Greatbows_QRY_GetAttackDelay(_Character, "Lightning")
+LLWEAPONEX_Greatbows_QRY_GetAttackDelay(_Char, "Lightning")
 AND
-DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay)
+DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay)
 AND
 IntegerSum(_DelayInt, _AttackDelay, _Delay)
 AND
 IntegerMax(_Delay, 1300, _DelayClamped)
 THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Character, _AttackDelay);
+NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay);
 //LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_10_Greatbows:OnAttackAtPosition] Shooting lightning bolt at position after [", _DelayClamped, "] ms.");
-SetVarFloat3(_Character, "LLWEAPONEX_Greatbow_LightningStrikePosition", _x, _y, _z);
-LeaderLib_Timers_StartObjectTimer(_Character, _DelayClamped, "LLWEAPONEX_Timers_Greatbow_Greatbow_ExplodeLightningStrikeAtPosition", "LLWEAPONEX_Greatbow_ExplodeLightningStrikeAtPosition");
+SetVarFloat3(_Char, "LLWEAPONEX_Greatbow_LightningStrikePosition", _x, _y, _z);
+LeaderLib_Timers_StartObjectTimer(_Char, _DelayClamped, "LLWEAPONEX_Timers_Greatbow_Greatbow_ExplodeLightningStrikeAtPosition", "LLWEAPONEX_Greatbow_ExplodeLightningStrikeAtPosition");
 
 //Fired when specific skills like Sky Shot are used.
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Character, (GUIDSTRING)_Target, "LLWEAPONEX_Greatbows_ProcOmniBolt")
+LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (GUIDSTRING)_Target, "LLWEAPONEX_Greatbows_ProcOmniBolt")
 THEN
-ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE", 0.0, 0, _Character);
+ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE", 0.0, 0, _Char);
 //END_REGION
 
 //REGION CUSHION_FORCE
@@ -453,25 +453,25 @@ NOT DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source);
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_FutureBarrage", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _x, _y, _z);
+LLWEAPONEX_Skills_CharUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _x, _y, _z);
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _x, _y, _z);
+LLWEAPONEX_Skills_CharUsedSkillAtPosition(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _x, _y, _z);
 
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Greatbow_FutureBarrage", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _Target);
+LLWEAPONEX_Skills_CharUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _Target);
 
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _Target);
+LLWEAPONEX_Skills_CharUsedSkillOnTarget(_Char, "LLWEAPONEX_Greatbow_FutureBarrage", _Target);
 
 PROC
-LLWEAPONEX_Skills_CharacterUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_FutureBarrage", (REAL)_x, (REAL)_y, (REAL)_z)
+LLWEAPONEX_Skills_CharUsedSkillAtPosition((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_FutureBarrage", (REAL)_x, (REAL)_y, (REAL)_z)
 THEN
 LeaderLib_Turns_TrackPositionWithObject(_Char, _x, _y, _z, "LLWEAPONEX_Greatbow_FutureBarrageFire", 3);
 DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos(_Char, _x, _y, _z);
@@ -479,15 +479,15 @@ DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos(_Char, _x, _y, _z);
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_FutureBarrage", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_FutureBarrage");
+LLWEAPONEX_Skills_CharCastSkill(_Char, "LLWEAPONEX_Greatbow_FutureBarrage");
 
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy", _, _)
 THEN
-LLWEAPONEX_Skills_CharacterCastSkill(_Char, "LLWEAPONEX_Greatbow_FutureBarrage");
+LLWEAPONEX_Skills_CharCastSkill(_Char, "LLWEAPONEX_Greatbow_FutureBarrage");
 
 PROC
-LLWEAPONEX_Skills_CharacterCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_FutureBarrage")
+LLWEAPONEX_Skills_CharCastSkill((CHARACTERGUID)_Char, "LLWEAPONEX_Greatbow_FutureBarrage")
 AND
 DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos(_Char, _x, _y, _z)
 AND

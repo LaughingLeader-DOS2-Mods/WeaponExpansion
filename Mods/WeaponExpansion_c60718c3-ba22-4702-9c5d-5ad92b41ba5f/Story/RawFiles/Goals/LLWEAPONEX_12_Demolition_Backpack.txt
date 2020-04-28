@@ -5,14 +5,14 @@ INITSECTION
 KBSECTION
 
 PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
 THEN
 NOT DB_LLWEAPONEX_Demolition_PlayerData_BackpackEquipped(_Char, _Item);
 LeaderLib_Statuses_RemoveIfActive(_Char, "LLWEAPONEX_REMOTEMINE_ADD_RECHARGE");
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion", 1);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_DemolitionBackpackEquipped", "WeaponExpansion", 1);
 DB_LLWEAPONEX_Demolition_PlayerData_BackpackEquipped(_Char, _Item);
@@ -79,7 +79,7 @@ THEN
 LLWEAPONEX_Demolition_StartRecharge(_Char);
 
 PROC
-LLWEAPONEX_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7")
 THEN
 LLWEAPONEX_Demolition_StartRecharge(_Char);
 
