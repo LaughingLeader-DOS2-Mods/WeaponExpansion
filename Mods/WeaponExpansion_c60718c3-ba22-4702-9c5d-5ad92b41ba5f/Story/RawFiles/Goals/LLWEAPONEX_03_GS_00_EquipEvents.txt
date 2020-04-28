@@ -23,49 +23,30 @@ THEN
 LLWEAPONEX_Ext_OnItemEquipped(_Char, _Item);
 //END_REGION
 
-//REGION UNEQUIP_EVENT
+//REGION WEAPON_EVENTS
+PROC
+LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+THEN
+DB_NOOP(1);
+
+PROC
+LLWEAPONEX_OnWeaponUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Char)
+THEN
+LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
+
+PROC
+LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
+THEN
+DB_NOOP(1);
+
 PROC
 LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 AND
 DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, _Tag);
-//END_REGION
-
-//REGION START_EVENTS
-//Try and tag non-WeaponEx items
-PROC
-LLWEAPONEX_OnWeaponEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-IsTagged(_Item, "LLWEAPONEX_TaggedWeaponType", 0)
-AND
-// Is tagged, but is missing LLWEAPONEX_TaggedWeaponType
-NOT LLWEAPONEX_TagHelper_QRY_TagIsValidated(_Char, _Item)
-AND
-NOT LLWEAPONEX_TagHelper_QRY_TagFromTemplate(_Char, _Item, _Template) // Vanilla template to tag
-AND
-LLWEAPONEX_TagHelper_QRY_CheckWeaponType(_Char, _Item) // Try and get the type via behavior
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_00_EquipEvents:OnWeaponEquipped] Tagged weapon [",_Template,"] with a new weapon type via [LLWEAPONEX_TagHelper_QRY_CheckWeaponType].");
-
-PROC
-LLWEAPONEX_OnItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Char, _Item, _Template)
-AND
-NOT LeaderLib_Helper_QRY_WeaponIsEquipped(_Char)
-THEN
-LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_AnyWeaponEquipped");
-//END_REGION
-
-//REGION TYPE_EVENTS
-PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
-AND
-DB_LLWEAPONEX_TagHelper_EquippedTags(_WeaponType, _Tag)
-THEN
-LeaderLib_Tags_PreserveTag(_Char, _Tag);
-//LeaderLib_Helper_RefreshUI(_Char, 1);
 //END_REGION
 
 //REGION PRESET_APPLIED
@@ -89,36 +70,9 @@ LLWEAPONEX_OnItemEquipped(_Char, _Item, _Template);
 
 //REGION ANIMATION_OVERRIDE
 PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Katana", (INTEGER)_IsPlayer)
+LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (INTEGER)_IsPlayer)
 AND
-IsTagged(_Item, "LLWEAPONEX_TwoHanded", 1)
-AND
-IsTagged(_Item, "LeaderLib_AnimationOverrideEnabled", 1)
-AND
-LeaderLib_Helper_QRY_CharacterIsHumanoid(_Char)
-THEN
-LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
-
-PROC
-LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Katana", (INTEGER)_IsPlayer)
-AND
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, "LLWEAPONEX_Override1")
-THEN
-LLWEAPONEX_AnimationSetOverride_Clear(_Char);
-
-PROC
-LLWEAPONEX_OnWeaponTypeEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Rapier", (INTEGER)_IsPlayer)
-AND
-IsTagged(_Item, "LLWEAPONEX_TwoHanded", 0)
-AND
-LeaderLib_Helper_QRY_CharacterIsHumanoid(_Char)
-THEN
-LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1");
-
-PROC
-LLWEAPONEX_OnWeaponTypeUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Rapier", (INTEGER)_IsPlayer)
-AND
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, "LLWEAPONEX_Override1")
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, "LLWEAPONEX_Override1", _WeaponType)
 THEN
 LLWEAPONEX_AnimationSetOverride_Clear(_Char);
 //END_REGION

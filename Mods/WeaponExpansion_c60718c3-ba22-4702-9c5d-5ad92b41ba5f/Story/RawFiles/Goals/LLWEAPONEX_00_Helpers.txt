@@ -280,11 +280,11 @@ NOT DB_LLWEAPONEX_PostCCEnabled(1);
 
 //REGION SET_OVERRIDES
 PROC
-LLWEAPONEX_AnimationSetOverride_Set((CHARACTERGUID)_Char, (STRING)_OverrideSet)
+LLWEAPONEX_AnimationSetOverride_Set((CHARACTERGUID)_Char, (STRING)_OverrideSet, (STRING)_ID)
 THEN
 LLWEAPONEX_AnimationSetOverride_ClearData(_Char);
 CharacterSetAnimationSetOverride(_Char, _OverrideSet);
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet);
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet, _ID);
 
 PROC
 LLWEAPONEX_AnimationSetOverride_Clear((CHARACTERGUID)_Char)
@@ -295,16 +295,16 @@ CharacterSetAnimationSetOverride(_Char, "");
 PROC
 LLWEAPONEX_AnimationSetOverride_ClearData((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet)
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet, _ID)
 THEN
-NOT DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet);
+NOT DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet, _ID);
 
 // Called when exiting the respec mirror
 // Since the respec mirror uses its own set override, we need to reset this
 PROC
 Proc_HomesteadTeleportAfterMirror((CHARACTERGUID)_Char,(ITEMGUID)_Mirror,(TRIGGERGUID)_Trigger)
 AND
-DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet)
+DB_LLWEAPONEX_Temp_AnimationSetOverride(_Char, _OverrideSet, _ID)
 THEN
 CharacterSetAnimationSetOverride(_Char, _OverrideSet);
 //END_REGION

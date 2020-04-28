@@ -6,9 +6,13 @@ local function OnItemEquipped(uuid,item)
 	
 	local stat = NRD_ItemGetStatsId(item)
 	local statType = NRD_StatGetType(stat)
-	if NRD_StatGetType(stat) == "Weapon" then
+	if statType == "Weapon" then
 		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		Osi.LLWEAPONEX_OnWeaponEquipped(uuid,item,GetTemplate(item))
+	end
+
+	if statType == "Weapon" or statType == "Shield" and ObjectGetFlag(item, "LLWEAPONEX_TaggedWeaponType") == 0 then
+		TagWeapon(item, statType, stat)
 	end
 
 	local isPlayer = 0
@@ -35,11 +39,21 @@ local function OnItemEquipped(uuid,item)
 				Osi.LLWEAPONEX_WeaponMastery_OnMasteryActivated(uuid, mastery)
 				print(uuid, item, mastery, isPlayer, Osi.LLWEAPONEX_OnWeaponTypeEquipped)
 				Osi.LLWEAPONEX_OnWeaponTypeEquipped(uuid, item, mastery, isPlayer)
+				OnWeaponTypeEquipped(uuid, item, mastery, stat, statType, isPlayer == 1)
 			end
 		end
 	end
 end
 Ext.NewCall(OnItemEquipped, "LLWEAPONEX_Ext_OnItemEquipped", "(CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template")
+
+local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType, isPlayer)
+	if weapontype == "Rapier" or weapontype == "Katana" then
+		local twohanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
+		if (twohanded and weapontype == "Katana") or (not twohanded and weapontype == "Rapier") then
+			Osi.LLWEAPONEX_AnimationSetOverride_Set(uuid, "LLWEAPONEX_Override1", weapontype)
+		end
+	end
+end
 
 local function OnItemUnequipped(uuid,item)
 	local template = GetTemplate(item)
