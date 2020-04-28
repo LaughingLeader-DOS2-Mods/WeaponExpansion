@@ -3,37 +3,16 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-/*
 IF
-ItemStatusChange(_Item, _Status, _Source)
+StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_BoostConversion_SwapDeltaMods")
 AND
-NRD_StatGetString(_Status, "LeaveAction", _Projectile)
+ObjectGetFlag(_Item, "LLWEAPONEX_BoostConversionApplied", 0)
 AND
-_Projectile != ""
+GetInventoryOwner(_Item, _Owner)
 AND
-NRD_StatGetInt(_Projectile, "ExplodeRadius", _Radius)
-AND
-_Radius > 0
-AND
-GetPosition(_Item, _x, _y, _z)
-AND
-GetPosition(_Source, _sx, _sy, _sz)
+LLWEAPONEX_Ext_QRY_SwapDeltaMods(_Item, _New)
 THEN
-//CreateExplosion(_Item, "Projectile_Fireball", 1);
-//CreateExplosion(_Item, _Projectile, 1);
-DisplayText(_Item, _Projectile);
-NRD_ProjectilePrepareLaunch();
-//NRD_ProjectileSetString("SkillId", _Projectile);
-NRD_ProjectileSetString("SkillId", "Projectile_Fireball");
-NRD_ProjectileSetInt("CasterLevel", 1);
-//NRD_ProjectileSetGuidString("SourcePosition", _Item);
-//NRD_ProjectileSetGuidString("TargetPosition", _Item);
-NRD_ProjectileSetVector3("SourcePosition", _sx, _sy, _sz);
-NRD_ProjectileSetVector3("TargetPosition", _x, _y, _z);
-NRD_ProjectileSetGuidString("Source", _Source);
-NRD_ProjectileSetGuidString("Target", _Item);
-NRD_ProjectileLaunch();
-*/
+ItemToInventory(_New, _Owner);
 EXITSECTION
 
 ENDEXITSECTION

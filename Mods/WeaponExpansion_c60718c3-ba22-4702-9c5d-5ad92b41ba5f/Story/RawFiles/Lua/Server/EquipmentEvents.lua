@@ -40,7 +40,7 @@ local function OnItemEquipped(uuid,item)
 		end
 	end
 end
-Ext.NewCall(OnItemEquipped, "LLWEAPONEX_Ext_OnItemEquipped", "(CHARACTERGUID)_Character, (ITEMGUID)_Item, (STRING)_Template")
+Ext.NewCall(OnItemEquipped, "LLWEAPONEX_Ext_OnItemEquipped", "(CHARACTERGUID)_Character, (ITEMGUID)_Item")
 
 local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType, isPlayer)
 	if weapontype == "Rapier" or weapontype == "Katana" then
@@ -81,9 +81,38 @@ end
 Ext.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_Rod, [out](STRING)_MainhandSkill, [out](STRING)_OffhandSkill")
 
 local deltamodSwap = {
-	LLWEAPONEX_Greatbow = {Find="FinesseBoost", Replace="StrengthBoost"},
-	LLWEAPONEX_Quarterstaff = {Find="FinesseBoost", Replace="StrengthBoost"},
-	LLWEAPONEX_Rod = {Find="StrengthBoost", Replace="IntelligenceBoost"},
-	LLWEAPONEX_Runeblade = {Find="FinesseBoost", Replace="IntelligenceBoost"},
-	LLWEAPONEX_Runeblade = {Find="StrengthBoost", Replace="IntelligenceBoost"},
+	{Tag=LLWEAPONEX_Greatbow, Find="FinesseBoost", Replace="StrengthBoost"},
+	{Tag=LLWEAPONEX_Quarterstaff, Find="FinesseBoost", Replace="StrengthBoost"},
+	{Tag=LLWEAPONEX_Rod, Find="StrengthBoost", Replace="IntelligenceBoost"},
+	{Tag=LLWEAPONEX_Runeblade, Find="FinesseBoost", Replace="IntelligenceBoost"},
+	{Tag=LLWEAPONEX_Runeblade, Find="StrengthBoost", Replace="IntelligenceBoost"},
 }
+
+function SwapDeltaMods(item)
+	local swapBoosts = {}
+	local hasSwapBoosts = false
+	for i,entry in pairs(deltamodSwap) do
+		if IsTagged(item, entry.Tag) == 1  then
+			swapBoosts[entry.Find] = entry.Replace
+			hasSwapBoosts = true
+		end
+	end
+
+	if hasSwapBoosts then
+		NRD_ItemCloneBegin(item)
+		local cloned = NRD_ItemClone()
+		for boostName,addBoost in pairs(swapBoosts) do
+			local boostValue = NRD_ItemGetPermanentBoostInt(item, boostName)
+			if boostValue > 0 then
+				LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltaMods] Swapping item boost ["..boostName.."]("..tostring(boostValue)..") for ["..addBoost.."]")
+				NRD_ItemSetPermanentBoostInt(cloned, boostName, 0)
+				NRD_ItemSetPermanentBoostInt(cloned, addBoost, boostValue)
+			end
+		end
+		ItemRemove(item)
+		ObjectSetFlag(cloned, "LLWEAPONEX_BoostConversionApplied", 0)
+		return cloned
+	end
+end
+
+Ext.NewQuery(SwapDeltaMods, "LLWEAPONEX_Ext_QRY_SwapDeltaMods", "[in](ITEMGUID)_Item, [out](ITEMGUID)_NewItem")
