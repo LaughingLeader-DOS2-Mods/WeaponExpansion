@@ -50,3 +50,40 @@ local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType, isPl
 		end
 	end
 end
+
+local rodSkills = {
+	Air = {"Projectile_LLWEAPONEX_ShootRod_Air", "Projectile_LLWEAPONEX_ShootRod_Air_Offhand"},
+	Chaos = {"Projectile_LLWEAPONEX_ShootRod_Chaos", "Projectile_LLWEAPONEX_ShootRod_Chaos_Offhand"},
+	Earth = {"Projectile_LLWEAPONEX_ShootRod_Earth", "Projectile_LLWEAPONEX_ShootRod_Earth_Offhand"},
+	Fire = {"Projectile_LLWEAPONEX_ShootRod_Fire", "Projectile_LLWEAPONEX_ShootRod_Fire_Offhand"},
+	Poison = {"Projectile_LLWEAPONEX_ShootRod_Poison", "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand"},
+	Water = {"Projectile_LLWEAPONEX_ShootRod_Water", "Projectile_LLWEAPONEX_ShootRod_Water_Offhand"},
+}
+
+local uniqueRodSkills = {
+	WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A = { "Projectile_LLWEAPONEX_ShootRod_MagicMissile", "Projectile_LLWEAPONEX_ShootRod_MagicMissile_Offhand" },
+}
+local function GetRodTypeQRY(item)
+	local stat = NRD_ItemGetStatsId(item)
+	local skills = uniqueRodSkills[stat]
+	if skills == nil then
+		local damageType = Ext.StatGetAttribute(stat, "Damage Type")
+		skills = rodSkills[damageType]
+		if skills == nil then
+			skills = rodSkills["Chaos"]
+		end
+		return skills[1], skills[2]
+	else
+		return skills[1], skills[2]
+	end
+end
+
+Ext.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_Rod, [out](STRING)_MainhandSkill, [out](STRING)_OffhandSkill")
+
+local deltamodSwap = {
+	LLWEAPONEX_Greatbow = {Find="FinesseBoost", Replace="StrengthBoost"},
+	LLWEAPONEX_Quarterstaff = {Find="FinesseBoost", Replace="StrengthBoost"},
+	LLWEAPONEX_Rod = {Find="StrengthBoost", Replace="IntelligenceBoost"},
+	LLWEAPONEX_Runeblade = {Find="FinesseBoost", Replace="IntelligenceBoost"},
+	LLWEAPONEX_Runeblade = {Find="StrengthBoost", Replace="IntelligenceBoost"},
+}
