@@ -94,7 +94,7 @@ else
 	Ext.StatSetAttribute(statname, property, next_value)
 end ]]
 
-local customSkillText = Ext.Require("WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "Client/LLWEAPONEX_SkillCustomText.lua")
+local customSkillText = Ext.Require("Client/SkillCustomText.lua")
 
 local function LLWEAPONEX_StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
