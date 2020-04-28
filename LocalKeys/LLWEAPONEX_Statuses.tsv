@@ -93,3 +93,21 @@ LLWEAPONEX_UNRELENTING_RAGE_DisplayName	Raging
 LLWEAPONEX_UNRELENTING_RAGE_Description	Character is unleashing an unrelenting fury.<br><font color='#65C900'>Critical Damage +50%</font>
 LLWEAPONEX_UNRELENTING_RAGE_BONUS_DisplayName	Fury's Reward
 LLWEAPONEX_UNRELENTING_RAGE_BONUS_Description	Character is empowered from slaying enemies.
+LLWEAPONEX_WEAKNESS_AIR_DisplayName	Air Weakness
+LLWEAPONEX_WEAKNESS_AIR_Description	Character has lowered resistance to <font color='#7D71D9'>air damage</font>.
+LLWEAPONEX_WEAKNESS_CHAOS_DisplayName	Chaotic Weakness
+LLWEAPONEX_WEAKNESS_CHAOS_Description	Character has lowered resistances to <font color='#9A00FF'>every element</font>.
+LLWEAPONEX_WEAKNESS_EARTH_DisplayName	Earth Weakness
+LLWEAPONEX_WEAKNESS_EARTH_Description	Character has lowered resistance to <font color='#F7BA14'>earth damage</font>.
+LLWEAPONEX_WEAKNESS_FIRE_DisplayName	Fire Weakness
+LLWEAPONEX_WEAKNESS_FIRE_Description	Character has lowered resistance to <font color='#FE6E27'>fire damage</font>.
+LLWEAPONEX_WEAKNESS_POISON_DisplayName	Poison Weakness
+LLWEAPONEX_WEAKNESS_POISON_Description	Character has lowered resistance to <font color='#65C900'>poison damage</font>.
+LLWEAPONEX_WEAKNESS_WATER_DisplayName	Water Weakness
+LLWEAPONEX_WEAKNESS_WATER_Description	Character has lowered resistance to <font color='#4197E2'>water damage</font>.
+LLWEAPONEX_WEAKNESS_PIERCING_DisplayName	Piercing Weakness
+LLWEAPONEX_WEAKNESS_PIERCING_Description	Character has lowered resistance to <font color='#CD1F1F'>piercing damage</font>.
+LLWEAPONEX_WEAKNESS_PHYSICAL_DisplayName	Physical Weakness
+LLWEAPONEX_WEAKNESS_PHYSICAL_Description	Character has lowered resistance to <font color='#AE9F95'>physical damage</font>.
+LLWEAPONEX_WEAKNESS_SHADOW_DisplayName	Shadow Weakness
+LLWEAPONEX_WEAKNESS_SHADOW_Description	Character has lowered resistance to <font color='#797980'>shadow damage</font>.
