@@ -1,5 +1,5 @@
 Mastery	Rank	Skill	Bonus	Implemented
-Axe	1	Crippling Blow	If a target hit is disabled, deal additional piercing damage.	√
+Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√
 Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	❌
 Banner	1	Placeholder	Placeholder	❌
 Banner	3	Encourage	Fear, Madness, and Sleep are purged from encouraged allies.	❌
@@ -20,9 +20,9 @@ Katana	1	Placeholder	Placeholder	❌
 Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.	❌
 Polearm	1	Placeholder	Placeholder	❌
 Quarterstaff	1	Placeholder	Placeholder	❌
-Rapier	1	Sucker Punch	Gain follow-up combo skills after punching a target. 25% chance to increase Sucker Punch's Knockdown by 1 turn.	❌
+Rapier	1	Sucker Punch	Gain follow-up combo skills after punching a target. 25% chance to increase Sucker Punch's Knockdown by 1 turn.	√
 Runeblade	1	Placeholder	Placeholder	❌
-Scythe	1	Placeholder	Placeholder	❌
+Scythe	1	Whirlwind	Consumes bleeding on targets hit to deal a burst of piercing damage. Damage increases for each turn of Bleeding.	❌
 Shield	1	Shields Up	Damage from the next hit taken is reduced by 25%.	❌
 Shield	2	Taunt	Taunted enemies gain a 25% movement speed debuff.	❌
 Staff	1	Whirlwind	Targets hit have their resistance to your staff's element reduced by 25%.	❌

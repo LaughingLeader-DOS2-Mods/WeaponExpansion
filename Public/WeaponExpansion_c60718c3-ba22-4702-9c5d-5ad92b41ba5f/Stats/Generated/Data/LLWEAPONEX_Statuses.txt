@@ -1151,8 +1151,6 @@ data "EarthResistance" "-10"
 data "WaterResistance" "-10"
 data "AirResistance" "-10"
 data "PoisonResistance" "-10"
-data "PhysicalResistance" "-10"
-data "PiercingResistance" "-10"
 
 new entry "LLWEAPONEX_WEAKNESS_EARTH"
 type "StatusData"

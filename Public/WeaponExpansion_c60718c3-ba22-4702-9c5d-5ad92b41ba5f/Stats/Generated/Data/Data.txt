@@ -1,5 +1,6 @@
 key "LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance","25.0"
 key "LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration","12.0"
+key "LLWEAPONEX_MasteryBonus_Whirlwind_ElementalWeaknessDuration","6.0"
 key "LLWEAPONEX_Mastery_MaxRank","4"
 key "LLWEAPONEX_Mastery_ExperienceGain0","45.0"
 key "LLWEAPONEX_Mastery_ExperienceGain1","30.0"

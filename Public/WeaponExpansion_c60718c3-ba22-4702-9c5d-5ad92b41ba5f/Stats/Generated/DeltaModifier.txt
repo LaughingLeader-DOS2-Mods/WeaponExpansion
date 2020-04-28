@@ -225,6 +225,12 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_LLWEAPONEX_Status_Set_PhysicalWeak",1
 
+new deltamod "Boost_Weapon_LLWEAPONEX_DamageType_Chill"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_Weapon_Damage_Chill",1
+
 //Overrides Start
 
 new deltamod "Boost_Weapon_Ability_DualWielding"

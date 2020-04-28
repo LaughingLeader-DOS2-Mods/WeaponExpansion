@@ -111,13 +111,14 @@ local gameTestTemplates = {
     "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27",
     "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53",
     "WPN_Lizards_Dagger_1H_A_028e9d6a-92b7-494b-a7fa-62218cf63914",
+    --"WPN_Dwarves_Staff_2H_A_545f2dc2-1da9-4387-af90-9e866f6288a8",
 }
 
 function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
     local host = CharacterGetHostCharacter()
-
+    local x,y,z = GetPosition(host)
 	for mastery,masterData in pairs(Masteries) do
         TagMasteryRanks(host, mastery, 4)
         Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,4,Mastery.Variables.RankVariables[3].NextLevel + 1)
@@ -128,6 +129,11 @@ function DebugInit()
         for i,template in pairs(boltTemplates) do
             ItemTemplateAddTo(template, host, 1, 0)
         end
+    end
+    if ItemTemplateIsInPartyInventory(host, "WPN_Dwarves_Staff_2H_A_545f2dc2-1da9-4387-af90-9e866f6288a8", 0) <= 0 then
+       local item = CreateItemTemplateAtPosition("WPN_Dwarves_Staff_2H_A_545f2dc2-1da9-4387-af90-9e866f6288a8", x, y, z)
+       ItemAddDeltaModifier(item, "Boost_Weapon_LLWEAPONEX_DamageType_Chill")
+       ItemToInventory(item, host)
     end
     for i,template in pairs(bulletTemplates) do
         if ItemTemplateIsInPartyInventory(host, template, 0) <= 0 then
@@ -152,7 +158,6 @@ function DebugInit()
         GlobalSetFlag("LLWEAPONEX_Debug_LeaderModeEngaged")
     end
 
-    local x,y,z = GetPosition(host)
     -- GameMaster_RewardChest_Small
     local chest = CreateItemTemplateAtPosition("dca4ff7a-c916-4e3a-968c-54adef3b10e2", x, y, z)
     GenerateTreasure(chest, "TEST_Generation", 16, nil)
