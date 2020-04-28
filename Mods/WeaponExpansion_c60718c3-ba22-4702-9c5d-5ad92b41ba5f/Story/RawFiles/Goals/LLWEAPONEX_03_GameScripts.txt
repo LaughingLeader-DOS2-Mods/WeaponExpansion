@@ -8,7 +8,6 @@ LLWEAPONEX_GameScripts_InitSettings()
 THEN
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_00_EquipEvents");
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_01_MasteryEvents");
-LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_02_BonusConversionEvents");
 
 /*
 This script should only complete when the loading is done.
