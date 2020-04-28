@@ -254,11 +254,19 @@ DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
 
 PROC
 LLWEAPONEX_LeaderLib_AddBlockedSkills()
-AND
-DB_LLWEAPONEX_Rods_Skills(_Status, _MainhandSkill, _OffhandSkill)
 THEN
-DB_LeaderLib_BlockedSkill(_MainhandSkill);
-DB_LeaderLib_BlockedSkill(_OffhandSkill);
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Air");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Chaos");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Earth");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Fire");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Poison");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Water");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Air_Offhand");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Chaos_Offhand");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Earth_Offhand");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Fire_Offhand");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Poison_Offhand");
+DB_LeaderLib_BlockedSkill("Projectile_LLWEAPONEX_ShootRod_Water_Offhand");
 
 PROC
 LLWEAPONEX_LeaderLib_AddBlockedSkills()
