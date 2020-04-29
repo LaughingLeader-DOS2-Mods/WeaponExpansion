@@ -46,6 +46,11 @@ SysActivateGoal("LLWEAPONEX_99_Debug_TestLevel");
 SysActivateGoal("LLWEAPONEX_24_Campaign_Start");
 
 IF
+GlobalFlagSet("LLWEAPONEX_Debug_EnableDebugScripts")
+THEN
+SysActivateGoal("LLWEAPONEX_99_Debug_TestLevel");
+
+IF
 StoryEvent((CHARACTERGUID)_Trader, "LeaderLib_Events_OnLeaderTradeSpawned")
 AND
 GlobalGetFlag("LLWEAPONEX_Debug_LeaderModeEngaged", 1)
@@ -54,14 +59,6 @@ CharacterGetHostCharacter(_Host)
 THEN
 CharacterSetCustomTradeTreasure(_Trader, "LLWEAPONEX_CheatAllWeapons");
 GenerateItems(_Host, _Trader);
-
-IF
-SkillCast(_Player, _, _, _)
-AND
-CharacterIsPlayer(_Player, 1)
-THEN
-CharacterResetCooldowns(_Player);
-
 EXITSECTION
 
 ENDEXITSECTION

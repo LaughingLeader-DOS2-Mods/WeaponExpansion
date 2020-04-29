@@ -118,6 +118,8 @@ local gameTestTemplates = {
 function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
+    GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
+    GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
     local host = CharacterGetHostCharacter()
     CharacterAddAttribute(host, "Memory", 20)
     CharacterAddAbility(host, "WarriorLore", 4)
