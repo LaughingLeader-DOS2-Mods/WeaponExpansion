@@ -56,12 +56,12 @@ package LS_Classes
 			this.text_txt.filters = textEffect.createStrokeFilter(1050888,this.strokeW,1,1,9);
 		}
 		
-		public function setBtnHintState(param1:Boolean) : *
+		public function setBtnHintState(enabled:Boolean) : *
 		{
-			this.btnEnabled = param1;
-			var _loc2_:TextFormat = this.text_txt.getTextFormat();
-			_loc2_.color = !!this.btnEnabled?16777215:11444117;
-			this.text_txt.setTextFormat(_loc2_);
+			this.btnEnabled = enabled;
+			var textFormatter:TextFormat = this.text_txt.getTextFormat();
+			textFormatter.color = !!this.btnEnabled?16777215:11444117;
+			this.text_txt.setTextFormat(textFormatter);
 			alpha = !!this.btnEnabled?Number(1):Number(0.7);
 		}
 		

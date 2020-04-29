@@ -42,56 +42,58 @@ package masteryMenu
 		
 		public function onEventUp(param1:Number) : *
 		{
-			var _loc2_:Boolean = false;
+			var eventHandled:Boolean = false;
 			switch(this.events[param1])
 			{
 				case "IE UICancel":
-					_loc2_ = true;
+					eventHandled = true;
 					if(this.isContentView)
 					{
 						this.isContentView = false;
 					}
-					ExternalInterface.call("buttonPressed",2,0);
+					ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
+					ExternalInterface.call("requestCloseUI");
+					//ExternalInterface.call("buttonPressed",2,0);
 					break;
 				case "IE UIUp":
 				case "IE UIDown":
-					_loc2_ = true;
+					eventHandled = true;
 					break;
 				case "IE UIDialogTextUp":
 				case "IE UIDialogTextDown":
 					this.masteryMenuMC.stopScrollText();
-					_loc2_ = true;
+					eventHandled = true;
 			}
-			return _loc2_;
+			return eventHandled;
 		}
 		
 		public function onEventDown(param1:Number, param2:Number, param3:Number) : *
 		{
-			var _loc4_:Boolean = false;
+			var eventHandled:Boolean = false;
 			switch(this.events[param1])
 			{
 				case "IE UICancel":
-					_loc4_ = true;
+					eventHandled = true;
 					break;
 				case "IE UIUp":
 					this.masteryMenuMC.previous();
 					this.masteryMenuMC.adjustMainScroll();
-					_loc4_ = true;
+					eventHandled = true;
 					break;
 				case "IE UIDown":
 					this.masteryMenuMC.next();
 					this.masteryMenuMC.adjustMainScroll();
-					_loc4_ = true;
+					eventHandled = true;
 					break;
 				case "IE UIDialogTextUp":
 					this.masteryMenuMC.startScrollText(true,param3);
-					_loc4_ = true;
+					eventHandled = true;
 					break;
 				case "IE UIDialogTextDown":
 					this.masteryMenuMC.startScrollText(false,param3);
-					_loc4_ = true;
+					eventHandled = true;
 			}
-			return _loc4_;
+			return eventHandled;
 		}
 		
 		public function setTitle(title:String) : *
@@ -109,14 +111,14 @@ package masteryMenu
 			this.masteryMenuMC.showControllerHints(enabled);
 		}
 		
-		public function addBtnHint(param1:Number, param2:Number, param3:String) : *
+		public function addBtnHint(id:Number, iconId:Number, hintText:String) : *
 		{
-			this.masteryMenuMC.buttonHintBar_mc.addBtnHint(param1,param3,param2);
+			this.masteryMenuMC.buttonHintBar_mc.addBtnHint(id,hintText,iconId);
 		}
 		
-		public function addMastery(param1:Number, param2:String, param3:String, param4:Boolean) : *
+		public function addMastery(masteryId:Number, title:String, description:String, showIcon:Boolean) : *
 		{
-			this.masteryMenuMC.addMastery(param1,param2,param3,param4);
+			this.masteryMenuMC.addMastery(masteryId,title,description,showIcon);
 		}
 		
 		public function showMasteryMenu() : *
