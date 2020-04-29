@@ -16,6 +16,7 @@ Mastery = {
 --- @type table<string,string>
 Tags = {}
 
+Ext.Require("Shared/Data/LocalizedText.lua")
 Ext.Require("Shared/Data/MasteryData_Masteries.lua")
 Ext.Require("Shared/Data/MasteryBonusParams.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
@@ -62,17 +63,6 @@ function HasMasteryRequirement(character, tag)
 	end
 	return false
 end
-
----@class TranslatedString
-local TranslatedString = LeaderLib.Classes["TranslatedString"]
-
----@type table<string,TranslatedString>
-local RuneNames = Ext.Require("Shared/Data/RuneNameHandles.lua")
-Text.RuneNames = RuneNames
-
----@type table<string,TranslatedString>
-local MasteryRankTagText = Ext.Require("Shared/Data/MasteryRankTagText.lua")
-Text.MasteryRankTagText = MasteryRankTagText
 
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, NextLevel = 1000},

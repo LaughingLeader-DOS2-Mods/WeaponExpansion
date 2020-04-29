@@ -54,6 +54,14 @@ CharacterGetHostCharacter(_Host)
 THEN
 CharacterSetCustomTradeTreasure(_Trader, "LLWEAPONEX_CheatAllWeapons");
 GenerateItems(_Host, _Trader);
+
+IF
+SkillCast(_Player, _, _, _)
+AND
+CharacterIsPlayer(_Player, 1)
+THEN
+CharacterResetCooldowns(_Player);
+
 EXITSECTION
 
 ENDEXITSECTION

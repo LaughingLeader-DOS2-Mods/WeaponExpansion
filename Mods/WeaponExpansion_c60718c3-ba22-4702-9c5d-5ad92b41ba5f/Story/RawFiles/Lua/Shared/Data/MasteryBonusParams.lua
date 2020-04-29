@@ -146,6 +146,21 @@ local elementalWeakness = {
 	--Physical = "LLWEAPONEX_WEAKNESS_Physical",
 }
 
+
+local checkResistanceStats = {
+	--"PhysicalResistance",
+	"PiercingResistance",
+	--"CorrosiveResistance",
+	--"MagicResistance",
+	--"ChaosResistance",-- Special LeaderLib Addition
+	"AirResistance",
+	"EarthResistance",
+	"FireResistance",
+	"PoisonResistance",
+	--"ShadowResistance", -- Technically Tenebrium
+	"WaterResistance",
+}
+
 --- @param character StatCharacter
 --- @param tagName string
 --- @param param string
@@ -156,23 +171,23 @@ local function GetElementalWeakness(character, tagName, param)
 	local resistanceCount = 0
 	local weapon = character.MainWeapon
 	if weapon ~= nil then
-		local stats = weapon.Stats.DynamicStats
+		local stats = weapon.DynamicStats
 		for i,stat in pairs(stats) do
 			if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
 				local status = elementalWeakness[stat.DamageType]
 				if status ~= nil then
 					local potion = Ext.StatGetAttribute(status, "StatsId")
 					if potion ~= nil and potion ~= "" then
-						for resistanceStat,v in pairs(LeaderLib.LocalizedText.ResistanceNames) do
+						for i,resistanceStat in pairs(checkResistanceStats) do
 							local resistanceValue = Ext.StatGetAttribute(potion, resistanceStat)
-							if resistanceValue ~= nil and resistanceValue > 0 then
+							if resistanceValue ~= 0 then
 								local resEntry = resistanceReductions[resistanceStat]
 								if resEntry == nil then
 									resEntry = 0
-									resistanceReductions[resistanceStat] = resEntry
 									resistanceCount = resistanceCount + 1
 								end
 								resEntry = resEntry + resistanceValue
+								resistanceReductions[resistanceStat] = resEntry
 							end
 						end
 					end
@@ -182,22 +197,22 @@ local function GetElementalWeakness(character, tagName, param)
 	end
 
 	local resistanceText = ""
-	local i = 0
-	for stat,value in pairs(resistanceReductions) do
-		resistanceText = resistanceText .. Game.GetResistanceText(stat, value)
-		i = i + 1
-		if i < resistanceCount then
-			resistanceText = resistanceText .. "/"
-		end
-	end
 	local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_ElementalWeaknessDuration", 6.0)
 	if duration > 0 then
 		duration = math.tointeger(duration / 6.0)
-		paramText = paramText:gsub("%[3%]", duration)
+		paramText = paramText:gsub("%[2%]", duration)
 	else
-		paramText = paramText:gsub("%[3%]", "0")
+		paramText = paramText:gsub("%[2%]", "0")
 	end
-	paramText = paramText:gsub("%[2%]", resistanceText)
+	local i = 0
+	for stat,value in pairs(resistanceReductions) do
+		resistanceText = resistanceText.."<img src='Icon_BulletPoint'>"..LeaderLib.Game.GetResistanceText(stat, value)
+		i = i + 1
+		if i < resistanceCount then
+			resistanceText = resistanceText .. "<br>"
+		end
+	end
+	paramText = paramText:gsub("%[3%]", resistanceText)
 	return paramText
 end
 
@@ -205,6 +220,7 @@ Mastery.Params = {
 	SkillData = {
 		Projectile_ThrowingKnife = {
 			Description = TranslatedString:Create("h5fdfca1dg8dd4g4cc3g9939g7433a38d4658","Throw a knife at your opponent, dealing [1].[2]"),
+			DescriptionKey = "LLWEAPONEX_Projectile_ThrowingKnife_Description",
 			Tags = {
 				LLWEAPONEX_Dagger_Mastery1 = {
 					Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","[1]<br><font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[2]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[3] bonus damage</font> on hit.</font>"),
@@ -214,6 +230,7 @@ Mastery.Params = {
 		},
 		Target_CripplingBlow = {
 			Description = TranslatedString:Create("h5fdfca1dg8dd4g4cc3g9939g7433a38d4658","Throw a knife at your opponent, dealing [1].[2]"),
+			DescriptionKey = "LLWEAPONEX_Target_CripplingBlow_Description",
 			Tags = {
 				LLWEAPONEX_Bludgeon_Mastery1 = {
 					ID = "SUNDER",
@@ -241,7 +258,8 @@ Mastery.Params = {
 			}
 		},
 		Shout_Whirlwind = {
-			Description = TranslatedString:Create("h5fdfca1dg8dd4g4cc3g9939g7433a38d4658","Throw a knife at your opponent, dealing [1].[2]"),
+			Description = TranslatedString:Create("h83e82e86g9f8cg47bdgb7cdgeae280223625","Perform a whirlwind attack, hitting enemies around you for [1].[2]"),
+			DescriptionKey = "LLWEAPONEX_Shout_Whirlwind_Description",
 			Tags = {
 				LLWEAPONEX_Scythe_Mastery1 = {
 					ID = "RUPTURE",
@@ -263,14 +281,14 @@ Mastery.Params = {
 							else
 								damageText = tostring(math.tointeger(totalMin))
 							end
-							paramText = string.gsub(paramText, "%[2%]", damageText)
+							paramText = string.gsub(paramText, "%[2%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
 						end
 						return paramText
 					end,
 				},
 				LLWEAPONEX_Staff_Mastery1 = {
 					ID = "ELEMENTAL_DEBUFF",
-					Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","[1]<br><font color='#2EFFE9'>Targets hit become weak to your weapon's element, lowering [2] by [3]%.</font>"),
+					Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","[1]<br><font color='#9BF0FF'>Targets hit become weak to your weapon's element(s) for [2] turn(s).</font><br><font color='#D258FF'>Elemental Weaknesses:</font><br>[3]"),
 					GetParam = GetElementalWeakness,
 				},
 			}
@@ -278,6 +296,6 @@ Mastery.Params = {
 	}
 }
 
-Mastery.Params.SkillData.Target_EnemyThrowingKnife = Mastery.Params.SkillData.Projectile_ThrowingKnife
+Mastery.Params.SkillData.Projectile_EnemyThrowingKnife = Mastery.Params.SkillData.Projectile_ThrowingKnife
 Mastery.Params.SkillData.Target_EnemyCripplingBlow = Mastery.Params.SkillData.Target_CripplingBlow
 Mastery.Params.SkillData.Shout_EnemyWhirlwind = Mastery.Params.SkillData.Shout_Whirlwind

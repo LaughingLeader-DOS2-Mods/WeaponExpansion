@@ -20,7 +20,7 @@ function TagMasteryRanks(uuid,mastery,level)
 		for i=1,level,1 do
 			local tag = mastery.."_Mastery"..tostring(i)
 			SetTag(uuid, tag)
-			LeaderLib.PrintDebug("[WeaponExpansion:TagMasteryRanks] Setting tag ["..tag.."] on ["..uuid.."]")
+			--LeaderLib.PrintDebug("[WeaponExpansion:TagMasteryRanks] Setting tag ["..tag.."] on ["..uuid.."]")
 		end
 	end
 end

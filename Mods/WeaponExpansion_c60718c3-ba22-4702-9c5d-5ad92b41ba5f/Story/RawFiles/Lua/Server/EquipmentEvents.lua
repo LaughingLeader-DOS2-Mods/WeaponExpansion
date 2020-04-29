@@ -16,7 +16,7 @@ local function OnItemEquipped(uuid,item)
 	local stat = NRD_ItemGetStatsId(item)
 	local statType = NRD_StatGetType(stat)
 
-	if ObjectGetFlag(item, "LLWEAPONEX_TaggedWeaponType") == 0 and statType == "Weapon" or statType == "Shield" then
+	if IsTagged(item, "LLWEAPONEX_TaggedWeaponType") == 0 and statType == "Weapon" or statType == "Shield" then
 		TagWeapon(item, statType, stat)
 	end
 
@@ -26,7 +26,7 @@ local function OnItemEquipped(uuid,item)
 	end
 
 	for tag,data in pairs(Masteries) do
-		LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
+		--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
 		if IsTagged(item,tag) == 1 then
 			local equippedTag = Tags.WeaponTypes[tag]
 			if equippedTag ~= nil then

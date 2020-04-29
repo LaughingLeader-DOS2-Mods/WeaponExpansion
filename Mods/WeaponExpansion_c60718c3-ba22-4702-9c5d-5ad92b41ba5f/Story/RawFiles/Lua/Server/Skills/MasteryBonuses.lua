@@ -73,6 +73,7 @@ local function ThrowingKnifeBonus(char, state, funcParams)
 end
 
 LeaderLib.RegisterSkillListener("Projectile_ThrowingKnife", ThrowingKnifeBonus)
+LeaderLib.RegisterSkillListener("Projectile_EnemyThrowingKnife", ThrowingKnifeBonus)
 
 local function ThrowingKnifeDelayedProc(funcParams)
 	local char = funcParams[1]
@@ -153,7 +154,7 @@ local elementalWeakness = {
 	Poison = "LLWEAPONEX_WEAKNESS_POISON",
 	Water = "LLWEAPONEX_WEAKNESS_WATER",
 	Piercing = "LLWEAPONEX_WEAKNESS_PIERCING",
-	Shadow = "LLWEAPONEX_WEAKNESS_SHADOW",
+	--Shadow = "LLWEAPONEX_WEAKNESS_SHADOW",
 	--Physical = "LLWEAPONEX_WEAKNESS_Physical",
 }
 
@@ -179,6 +180,15 @@ local function WhirlwindBonus(char, state, funcParams)
 					for i=bleedingTurns,1,-1 do
 						ExplodeProjectile(char, target, level, "Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
 					end
+					if ObjectIsCharacter(target) then
+						local text = Text.RupteredWound.Value
+						if bleedingTurns > 1 then
+							text = text:gsub("%[1%]", "x"..tostring(bleedingTurns))
+						else
+							text = text:gsub("%[1%]", "")
+						end
+						CharacterStatusText(target, text)
+					end
 					LeaderLib.PrintDebug("[MasteryBonuses:WhirlwindBonus] Exploded (",bleedingTurns,") rupture projectiles on ("..target..").")
 				end
 			end
@@ -187,7 +197,7 @@ local function WhirlwindBonus(char, state, funcParams)
 				local weaponuuid = CharacterGetEquippedWeapon(char)
 				--local damageType = Ext.StatGetAttribute(NRD_ItemGetStatsId(weapon), "Damage Type")
 				local weapon = Ext.GetItem(weaponuuid)
-				local stats = weapon.Stats.DynamicStats
+				local stats = weapon.DynamicStats
 				for i, stat in pairs(stats) do
 					if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
 						local status = elementalWeakness[stat.DamageType]

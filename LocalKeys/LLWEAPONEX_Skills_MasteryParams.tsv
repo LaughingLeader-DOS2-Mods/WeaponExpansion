@@ -1,8 +1,9 @@
 Key	Content	Handle
 LLWEAPONEX_Projectile_ThrowingKnife_Description	Throw a knife at your opponent, dealing [1].[2]	h5fdfca1dg8dd4g4cc3g9939g7433a38d4658
-LLWEAPONEX_MasteryParam_ThrowingKnife	[1]<br><font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[2]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[3] bonus damage</font> on hit.</font>	hea8e7051gfc68g4d9dgaba8g7c871bbd4056
 LLWEAPONEX_Target_CripplingBlow_Description	Cripple the target with a sweeping blow, and all characters around it. Deals [1].[2]	h41e991cbgbe00g4469g924bge4d4c73cffa2
+LLWEAPONEX_Shout_Whirlwind_Description	Perform a whirlwind attack, hitting enemies around you for [1].[2]	h83e82e86g9f8cg47bdgb7cdgeae280223625
+LLWEAPONEX_MasteryParam_ThrowingKnife	[1]<br><font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[2]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[3] bonus damage</font> on hit.</font>	hea8e7051gfc68g4d9dgaba8g7c871bbd4056
 LLWEAPONEX_MasteryParam_CripplingBlow_SunderBonus	[1]<br><font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [2]%</font> for [3] turn(s).</font>	h1eb09384g6bfeg4cdaga83fgc408d86cfee4
 LLWEAPONEX_MasteryParam_CripplingBlow_PiercingBonus	[1]<br><font color='#F19824'>If the target is disabled, deal an additional [2].</font>	h46875020ge016g4eccg94ecgc9f5233c07fd
 LLWEAPONEX_MasteryParam_Whirldwind_RuptureBonus	[1]<br><font color='#803BFF'><font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [2] for each turn of <font color='#FF0000'>Bleeding</font> remaining.</font>	h5ca24bfeg14f5g437fg92fag4708f87547de
-LLWEAPONEX_MasteryParam_Whirldwind_ElementalWeakness	[1]<br><font color='#2EFFE9'>Targets hit become weak to your weapon's element, gaining [2] for [3] turn(s).</font>	h0ee72b7cg5a84g4efcgb8e2g8a02113196e6
+LLWEAPONEX_MasteryParam_Whirldwind_ElementalWeakness	[1]<br><font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [2] for [3] turn(s).</font>	h0ee72b7cg5a84g4efcgb8e2g8a02113196e6
