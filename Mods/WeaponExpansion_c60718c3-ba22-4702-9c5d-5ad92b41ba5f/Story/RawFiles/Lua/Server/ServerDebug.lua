@@ -162,7 +162,6 @@ function DebugInit()
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
     CharacterAddSkill(host, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", 0)
     --NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
-    Osi.LLWEAPONEX_WeaponMastery_Debug_CheatMastery(host, 0)
 
     local userID = CharacterGetReservedUserID(host)
     local username = GetUserName(userID)
@@ -172,9 +171,16 @@ function DebugInit()
 
     -- GameMaster_RewardChest_Small
     local chest = CreateItemTemplateAtPosition("dca4ff7a-c916-4e3a-968c-54adef3b10e2", x, y, z)
-    GenerateTreasure(chest, "TEST_Generation", 16, nil)
+    GenerateTreasure(chest, "TEST_Generation", 16, host)
     InventoryLaunchIterator(chest, "LLWEAPONEX_BoostConversion_SwapDeltaMods", "")
     local tx,ty,tz = FindValidPosition(x,y,z,12.0,chest)
     TeleportToPosition(chest, tx,ty,tz)
     LeaderLib.PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
+
+    TeleportToRandomPosition(chest, 8.0, "")
 end
+
+local function OpenMasteryMenu(...)
+    Ext.BroadcastMessage("LLWEAPONEX_OpenMasteryMenu", host, nil)
+end
+Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu);
