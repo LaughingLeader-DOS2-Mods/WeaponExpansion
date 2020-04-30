@@ -86,7 +86,6 @@ function SwapDeltaMods(item)
 	local swapBoosts = {}
 	local hasSwapBoosts = false
 	for i,entry in pairs(deltamodSwap) do
-		print(LeaderLib.Common.Dump(entry))
 		if IsTagged(item, entry.Tag) == 1  then
 			swapBoosts[entry.Find] = entry.Replace
 			hasSwapBoosts = true
@@ -94,6 +93,7 @@ function SwapDeltaMods(item)
 	end
 
 	if hasSwapBoosts then
+		LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltaMods] Checking for boosts on item ("..item..")")
 		NRD_ItemCloneBegin(item)
 		local cloned = NRD_ItemClone()
 		for boostName,addBoost in pairs(swapBoosts) do
@@ -102,6 +102,8 @@ function SwapDeltaMods(item)
 				LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltaMods] Swapping item boost ["..boostName.."]("..tostring(boostValue)..") for ["..addBoost.."]")
 				NRD_ItemSetPermanentBoostInt(cloned, boostName, 0)
 				NRD_ItemSetPermanentBoostInt(cloned, addBoost, boostValue)
+			else
+				LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltaMods] NRD_ItemGetPermanentBoostInt["..boostName.."]("..tostring(boostValue)..")")
 			end
 		end
 		ItemRemove(item)

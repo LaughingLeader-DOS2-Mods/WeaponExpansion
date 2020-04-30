@@ -36,6 +36,7 @@ package masteryMenu
 		
 		public const scrollPaneW:Number = 845;
 		
+		 // Default frame height is 296, element spacing is EL_SPACING (4)
 		public const scrollPaneH:Number = 773;
 		
 		public const ELH:Number = 300;
@@ -105,9 +106,9 @@ package masteryMenu
 			this._scrollbar.adjustScrollHandle(0);
 		}
 		
-		public function startScrollText(param1:Boolean, param2:Number) : *
+		public function startScrollText(up:Boolean, increment:Number) : *
 		{
-			if(param1)
+			if(up)
 			{
 				this._scrollbar.scrollUp();
 			}
@@ -154,6 +155,8 @@ package masteryMenu
 				masteryMC.id = masteryId;
 				this.masteryList.addElement(masteryMC);
 				this.masteryList.checkScrollBar();
+
+				this.masteryCount = this.masteryCount + 1;
 			}
 			masteryMC.setId(masteryId);
 			masteryMC.setTitle(title);
@@ -210,7 +213,7 @@ package masteryMenu
 		
 		function frame1() : *
 		{
-			this.masteryCount = 2;
+			this.masteryCount = 0;
 			this.m_isController = false;
 			this.time = new Timer(1,1);
 			this.time.addEventListener(TimerEvent.TIMER_COMPLETE,this.onLoaded);

@@ -40,66 +40,86 @@ package masteryMenu
 			this.masteryMenuMC.masteryListInit();
 		}
 
+		public function openMenu() : *
+		{
+			ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Open");
+			ExternalInterface.call("focus");
+			ExternalInterface.call("inputfocus");
+			ExternalInterface.call("GainFocus");
+			this.masteryMenuMC.visible = true;
+		}
+
 		public function closeMenu() : *
 		{
+			if(this.isContentView)
+			{
+				this.isContentView = false;
+			}
 			ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
+			//ExternalInterface.call("PlaySound","UI_Game_Inventory_Close");
 			ExternalInterface.call("requestCloseUI");
+			ExternalInterface.call("inputFocusLost");
+			ExternalInterface.call("LoseFocus");
 		}
 		
-		public function onEventUp(eventIndex:Number) : *
+		public function onEventUp(eventIndex:Number, param2:Number, param3:Number) : *
 		{
-			var eventHandled:Boolean = false;
+			var handled:Boolean = false;
+			ExternalInterface.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
 			switch(this.events[eventIndex])
 			{
+				case "IE ContextMenu":
+					break;
+				case "IE UIAccept":
+					break;
 				case "IE UICancel":
-					eventHandled = true;
-					if(this.isContentView)
-					{
-						this.isContentView = false;
-					}
+				case "IE ToggleInGameMenu":
+					handled = true;
 					closeMenu();
-					//ExternalInterface.call("buttonPressed",2,0);
 					break;
 				case "IE UIUp":
 				case "IE UIDown":
-					eventHandled = true;
+					handled = true;
 					break;
 				case "IE UIDialogTextUp":
 				case "IE UIDialogTextDown":
 					this.masteryMenuMC.stopScrollText();
-					eventHandled = true;
+					handled = true;
+					break;
 			}
-			return eventHandled;
+			return handled;
 		}
 		
 		public function onEventDown(eventIndex:Number, param2:Number, param3:Number) : *
 		{
-			var eventHandled:Boolean = false;
+			var handled:Boolean = false;
+			ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
+
 			switch(this.events[eventIndex])
 			{
 				case "IE UICancel":
 					closeMenu();
-					eventHandled = true;
+					handled = true;
 					break;
 				case "IE UIUp":
 					this.masteryMenuMC.previous();
 					this.masteryMenuMC.adjustMainScroll();
-					eventHandled = true;
+					handled = true;
 					break;
 				case "IE UIDown":
 					this.masteryMenuMC.next();
 					this.masteryMenuMC.adjustMainScroll();
-					eventHandled = true;
+					handled = true;
 					break;
 				case "IE UIDialogTextUp":
 					this.masteryMenuMC.startScrollText(true,param3);
-					eventHandled = true;
+					handled = true;
 					break;
 				case "IE UIDialogTextDown":
 					this.masteryMenuMC.startScrollText(false,param3);
-					eventHandled = true;
+					handled = true;
 			}
-			return eventHandled;
+			return handled;
 		}
 		
 		public function setTitle(title:String) : *
@@ -127,11 +147,6 @@ package masteryMenu
 			this.masteryMenuMC.addMastery(masteryId,title,description,showIcon);
 		}
 		
-		public function showMasteryMenu() : *
-		{
-			this.masteryMenuMC.visible = true;
-		}
-		
 		public function selectMastery(id:Number) : *
 		{
 			this.masteryMenuMC.select(id);
@@ -141,7 +156,7 @@ package masteryMenu
 		{
 			this.layout = "fixed";
 			this.alignment = "none";
-			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown");
+			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ContextMenu", "IE ToggleInGameMenu", "IE UISelectChar1","IE UISelectChar2","IE UISelectChar3","IE UISelectChar4");
 			this.items_array = new Array();
 			this.isContentView = false;
 		}

@@ -389,31 +389,31 @@ package LS_Classes
 			{
 				this.INTSort();
 			}
-			var _loc1_:Number = this.m_topSpacing;
+			var lastY:Number = this.m_topSpacing;
 			this.m_visibleLength = 0;
-			var _loc2_:uint = 0;
-			while(_loc2_ < this.content_array.length)
+			var index:uint = 0;
+			while(index < this.content_array.length)
 			{
-				if(this.content_array[_loc2_].visible || this.canPositionInvisibleElements)
+				if(this.content_array[index].visible || this.canPositionInvisibleElements)
 				{
-					this.content_array[_loc2_].list_pos = _loc2_;
-					this.content_array[_loc2_].y = _loc1_;
-					this.content_array[_loc2_].tweenToY = _loc1_;
-					if(this.content_array[_loc2_].INTUpd4PosEl != null)
+					this.content_array[index].list_pos = index;
+					this.content_array[index].y = lastY;
+					this.content_array[index].tweenToY = lastY;
+					if(this.content_array[index].INTUpd4PosEl != null)
 					{
-						this.content_array[_loc2_].INTUpd4PosEl();
+						this.content_array[index].INTUpd4PosEl();
 					}
-					_loc1_ = _loc1_ + (this.getElementHeight(this.content_array[_loc2_]) + this.EL_SPACING);
+					lastY = lastY + (this.getElementHeight(this.content_array[index]) + this.EL_SPACING);
 					if(this.m_sideSpacing != 0)
 					{
-						this.content_array[_loc2_].x = this.SIDE_SPACING;
+						this.content_array[index].x = this.SIDE_SPACING;
 					}
-					if(this.content_array[_loc2_].visible)
+					if(this.content_array[index].visible)
 					{
 						this.m_visibleLength++;
 					}
 				}
-				_loc2_++;
+				index++;
 			}
 			if(this.m_NeedsSorting)
 			{
@@ -436,18 +436,18 @@ package LS_Classes
 			return _loc2_;
 		}
 		
-		public function getElementHeight(param1:MovieClip) : Number
+		public function getElementHeight(obj:MovieClip) : Number
 		{
-			var _loc2_:Number = param1.height;
-			if(param1.heightOverride != undefined && !isNaN(param1.heightOverride))
+			var height:Number = obj.height;
+			if(obj.heightOverride != undefined && !isNaN(obj.heightOverride))
 			{
-				_loc2_ = param1.heightOverride;
+				height = obj.heightOverride;
 			}
 			else if(this.m_customElementHeight != -1)
 			{
-				_loc2_ = this.m_customElementHeight;
+				height = this.m_customElementHeight;
 			}
-			return _loc2_;
+			return height;
 		}
 		
 		public function getContentHeight() : Number
@@ -560,24 +560,24 @@ package LS_Classes
 			}
 		}
 		
-		public function addElement(param1:DisplayObject, param2:Boolean = true, param3:Boolean = true) : *
+		public function addElement(displayObj:DisplayObject, repositionElements:Boolean = true, selectable:Boolean = true) : *
 		{
-			var _loc4_:MovieClip = param1 as MovieClip;
-			this.containerContent_mc.addChild(param1);
-			_loc4_.list_pos = this.content_array.length;
-			this.content_array.push(_loc4_);
-			param1.addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
-			_loc4_.list_id = this.idInc++;
-			if(_loc4_.deselectElement)
+			var elementMC:MovieClip = displayObj as MovieClip;
+			this.containerContent_mc.addChild(displayObj);
+			elementMC.list_pos = this.content_array.length;
+			this.content_array.push(elementMC);
+			displayObj.addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
+			elementMC.list_id = this.idInc++;
+			if(elementMC.deselectElement)
 			{
-				_loc4_.deselectElement();
+				elementMC.deselectElement();
 			}
-			_loc4_.selectable = param3;
-			_loc4_.m_filteredObject = false;
+			elementMC.selectable = selectable;
+			elementMC.m_filteredObject = false;
 			this.m_NeedsSorting = true;
 			this.reOrderDepths();
-			_loc4_.ownerList = this;
-			if(param2)
+			elementMC.ownerList = this;
+			if(repositionElements)
 			{
 				this.positionElements();
 			}

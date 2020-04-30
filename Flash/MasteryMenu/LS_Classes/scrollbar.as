@@ -144,15 +144,10 @@ package LS_Classes
 			this.m_scrollWheelTimer = new Timer(100);
 			super();
 			this.m_tweenY = 0;
-			trace("[LLWEAPONEX] (scrollbar) Trying to get classes");
-			ExternalInterface.call("UIAssert","[LLWEAPONEX] (scrollbar) Trying to get classes. downClassId("+downClassId+") upClassId("+upClassId+") handleClassId("+handleClassId+") bgClassId("+bgClassId+") ffDownClassId("+ffDownClassId+") ffUpClassId("+ffUpClassId+")");
 			var downClass:Class = downClassId == ""?MovieClip:getDefinitionByName(downClassId) as Class;
 			var upClass:Class = upClassId == ""?MovieClip:getDefinitionByName(upClassId) as Class;
 			var handleClass:Class = getDefinitionByName(handleClassId) as Class;
 			var bgClass:Class = getDefinitionByName(bgClassId) as Class;
-
-			trace("UIAssert","[LLWEAPONEX] (scrollbar) Trying to get classes. downClass(",downClass,") upClass(",upClass,") handleClass(",handleClass,") bgClass(",bgClass,")");
-			
 			this.m_down_mc = new downClass();
 			this.m_up_mc = new upClass();
 			this.m_handle_mc = new handleClass();

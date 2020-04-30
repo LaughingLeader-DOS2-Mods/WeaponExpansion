@@ -239,13 +239,13 @@ package LS_Classes
 			this.mouseWheelEnabled = true;
 		}
 		
-		public function addContent(param1:TextField) : void
+		public function addContent(txt:TextField) : void
 		{
-			if(param1 == null)
+			if(txt == null)
 			{
 				return;
 			}
-			this.m_content_txt = param1;
+			this.m_content_txt = txt;
 			this.m_content_txt.mouseWheelEnabled = false;
 			this.addRemoveMouseWheelListener(this.m_mouseWheelEnabled);
 			this.scrollbarVisible();
