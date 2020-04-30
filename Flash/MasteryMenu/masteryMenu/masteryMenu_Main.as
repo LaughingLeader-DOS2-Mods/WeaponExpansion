@@ -186,21 +186,21 @@ package masteryMenu
 		
 		public function onSelectionChanged() : *
 		{
-			var _loc1_:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			this.name_txt.htmlText = _loc1_.getTitle();
-			this.desc_txt.htmlText = _loc1_.getDescription();
+			var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
+			this.name_txt.htmlText = entry.getTitle();
+			this.desc_txt.htmlText = entry.getDescription();
 			this.resetTextScrollbar();
 		}
 		
-		public function select(param1:Number) : *
+		public function select(id:Number) : *
 		{
-			var _loc2_:MovieClip = this.masteryList.getCurrentMovieClip();
-			var _loc3_:MovieClip = this.masteryList.getElement(param1);
-			if(_loc2_ != _loc3_)
+			var currentMC:MovieClip = this.masteryList.getCurrentMovieClip();
+			var nextMC:MovieClip = this.masteryList.getElement(id);
+			if(currentMC != nextMC)
 			{
-				_loc2_.deselectElement();
+				currentMC.deselectElement();
 			}
-			this.masteryList.selectMC(_loc3_);
+			this.masteryList.selectMC(nextMC);
 		}
 		
 		public function getCurrentSelection() : int

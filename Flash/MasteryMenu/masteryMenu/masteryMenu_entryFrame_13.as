@@ -31,29 +31,35 @@ package masteryMenu
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function setId(param1:Number) : *
+		public function setId(id:Number) : *
 		{
-			this.m_Id = param1;
+			this.m_Id = id;
 		}
 		
-		public function onOut(param1:MouseEvent) : *
+		public function onOut(e:MouseEvent) : *
 		{
 			this.bg_mc.gotoAndStop(1);
 			this.masteryOverlay.gotoAndStop(1);
 		}
 		
-		public function onOver(param1:MouseEvent) : *
+		public function onOver(e:MouseEvent) : *
 		{
 			this.bg_mc.gotoAndStop(2);
 			this.masteryOverlay.gotoAndStop(2);
 			ExternalInterface.call("PlaySound","UI_Generic_Over");
 			ExternalInterface.call("overMastery",this.m_Id);
 		}
+
+		public function onDown(e:MouseEvent) : *
+		{
+			ExternalInterface.call("selectedMastery",this.m_Id);
+		}
 		
 		function frame1() : *
 		{
 			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			addEventListener(MouseEvent.ROLL_OVER,this.onOver);
+			addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
 			this.masteryEntry = MovieClip(this.parent);
 			this.buttonType = 1;
 		}

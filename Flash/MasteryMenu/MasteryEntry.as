@@ -48,9 +48,9 @@ package
 			this.masteryFrame.bottom_decor.y = this.masteryFrame.title_txt.y + this.masteryFrame.title_txt.height + this.DECOR_MARGIN * 2;
 		}
 		
-		public function setDescription(param1:String) : *
+		public function setDescription(text:String) : *
 		{
-			this.m_MasteryDesc = param1;
+			this.m_MasteryDesc = text;
 		}
 		
 		public function getTitle() : *

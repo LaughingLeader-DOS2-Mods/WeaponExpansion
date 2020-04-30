@@ -7,7 +7,13 @@ local function OnMenuEvent(ui, call, ...)
 		ui:Hide()
 		Ext.DestroyUI("MasteryMenu")
 		panelOpen = false
+	elseif call == "selectedMastery" then
+		ui:Invoke("selectMastery", params[1])
 	end
+end
+
+local function sortMasteries(a,b)
+	return a:upper() < b:upper()
 end
 
 local function OpenMasteryMenu(call,uuid)
@@ -21,11 +27,25 @@ local function OpenMasteryMenu(call,uuid)
 		Ext.RegisterUICall(ui, "switchMenu", OnMenuEvent)
 		Ext.RegisterUICall(ui, "requestCloseUI", OnMenuEvent)
 		Ext.RegisterUICall(ui, "UIAssert", OnMenuEvent)
+		Ext.RegisterUICall(ui, "overMastery", OnMenuEvent)
+		Ext.RegisterUICall(ui, "selectedMastery", OnMenuEvent)
+		Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
 		--ui:Invoke("updateAddBaseTopTitleText", "Mods")
 		ui:Invoke("setTitle", "Weapon Masteries")
 		ui:Invoke("setButtonText", "Confirm")
-		ui:Invoke("addMastery", 0, "Axe", "Test description", 0)
-		ui:Invoke("selectMastery", 0)
+		local masteryKeys = {}
+		for tag,data in pairs(Masteries) do
+			table.insert(masteryKeys, tag)
+		end
+		table.sort(masteryKeys, sortMasteries)
+		
+		local i = 0
+		for _,tag in ipairs(masteryKeys) do
+			local data = Masteries[tag]
+			ui:Invoke("addMastery", i, data.Name.Value, tag, 1)
+			i = i + 1
+		end
+		ui:Invoke("selectMastery", 2)
 		ui:Show()
 		ui:ExternalInterfaceCall("requestOpenUI")
 		ui:ExternalInterfaceCall("inputFocus")

@@ -182,6 +182,8 @@ function DebugInit()
 end
 
 local function OpenMasteryMenu(...)
-    Ext.BroadcastMessage("LLWEAPONEX_OpenMasteryMenu", host, nil)
+    local host = CharacterGetHostCharacter()
+    --Ext.BroadcastMessage("LLWEAPONEX_OpenMasteryMenu", host, nil)
+    Ext.PostMessageToClient(host, "LLWEAPONEX_OpenMasteryMenu", host)
 end
 Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu);
