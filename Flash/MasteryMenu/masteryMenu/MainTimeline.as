@@ -39,11 +39,17 @@ package masteryMenu
 			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
 			this.masteryMenuMC.masteryListInit();
 		}
+
+		public function closeMenu() : *
+		{
+			ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
+			ExternalInterface.call("requestCloseUI");
+		}
 		
-		public function onEventUp(param1:Number) : *
+		public function onEventUp(eventIndex:Number) : *
 		{
 			var eventHandled:Boolean = false;
-			switch(this.events[param1])
+			switch(this.events[eventIndex])
 			{
 				case "IE UICancel":
 					eventHandled = true;
@@ -51,8 +57,7 @@ package masteryMenu
 					{
 						this.isContentView = false;
 					}
-					ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
-					ExternalInterface.call("requestCloseUI");
+					closeMenu();
 					//ExternalInterface.call("buttonPressed",2,0);
 					break;
 				case "IE UIUp":
@@ -67,12 +72,13 @@ package masteryMenu
 			return eventHandled;
 		}
 		
-		public function onEventDown(param1:Number, param2:Number, param3:Number) : *
+		public function onEventDown(eventIndex:Number, param2:Number, param3:Number) : *
 		{
 			var eventHandled:Boolean = false;
-			switch(this.events[param1])
+			switch(this.events[eventIndex])
 			{
 				case "IE UICancel":
+					closeMenu();
 					eventHandled = true;
 					break;
 				case "IE UIUp":

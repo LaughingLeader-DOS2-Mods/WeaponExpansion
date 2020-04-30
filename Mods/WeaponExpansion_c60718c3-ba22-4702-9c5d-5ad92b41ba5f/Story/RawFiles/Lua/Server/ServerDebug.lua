@@ -118,9 +118,14 @@ local gameTestTemplates = {
 function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
+
+    local host = CharacterGetHostCharacter()
+    --Ext.PostMessageToClient(host, "LLWEAPONEX_OpenMasteryMenu", host)
+    LeaderLib.PrintDebug("[WeaponExpansion:ServerDebug] Sending [LLWEAPONEX_OpenMasteryMenu] net message.")
+    Ext.BroadcastMessage("LLWEAPONEX_OpenMasteryMenu", host, nil)
+
     GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
     GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
-    local host = CharacterGetHostCharacter()
     CharacterAddAttribute(host, "Memory", 20)
     CharacterAddAbility(host, "WarriorLore", 4)
     CharacterAddAbility(host, "RogueLore", 4)
@@ -172,6 +177,4 @@ function DebugInit()
     local tx,ty,tz = FindValidPosition(x,y,z,12.0,chest)
     TeleportToPosition(chest, tx,ty,tz)
     LeaderLib.PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
-
-    Ext.PostMessageToClient(host, "LLWEAPONEX_OpenMasteryMenu", host)
 end
