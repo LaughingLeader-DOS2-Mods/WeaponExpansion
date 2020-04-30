@@ -35,7 +35,8 @@ package masteryMenu
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(2);
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
-			ExternalInterface.call("buttonPressed",2,0);
+			//ExternalInterface.call("buttonPressed",2,0);
+			ExternalInterface.call("requestCloseUI");
 		}
 		
 		public function onDown(param1:MouseEvent) : *

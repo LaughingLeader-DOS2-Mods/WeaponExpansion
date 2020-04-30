@@ -132,9 +132,9 @@ package masteryMenu
 			this.masteryMenuMC.visible = true;
 		}
 		
-		public function selectMastery(param1:Number) : *
+		public function selectMastery(id:Number) : *
 		{
-			this.masteryMenuMC.select(param1);
+			this.masteryMenuMC.select(id);
 		}
 		
 		function frame1() : *
