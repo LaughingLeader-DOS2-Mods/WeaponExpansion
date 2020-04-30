@@ -75,17 +75,18 @@ end
 Ext.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_Rod, [out](STRING)_MainhandSkill, [out](STRING)_OffhandSkill")
 
 local deltamodSwap = {
-	{Tag=LLWEAPONEX_Greatbow, Find="FinesseBoost", Replace="StrengthBoost"},
-	{Tag=LLWEAPONEX_Quarterstaff, Find="FinesseBoost", Replace="StrengthBoost"},
-	{Tag=LLWEAPONEX_Rod, Find="StrengthBoost", Replace="IntelligenceBoost"},
-	{Tag=LLWEAPONEX_Runeblade, Find="FinesseBoost", Replace="IntelligenceBoost"},
-	{Tag=LLWEAPONEX_Runeblade, Find="StrengthBoost", Replace="IntelligenceBoost"},
+	{Tag="LLWEAPONEX_Greatbow", Find="FinesseBoost", Replace="StrengthBoost"},
+	{Tag="LLWEAPONEX_Quarterstaff", Find="FinesseBoost", Replace="StrengthBoost"},
+	{Tag="LLWEAPONEX_Rod", Find="StrengthBoost", Replace="IntelligenceBoost"},
+	{Tag="LLWEAPONEX_Runeblade", Find="FinesseBoost", Replace="IntelligenceBoost"},
+	{Tag="LLWEAPONEX_Runeblade", Find="StrengthBoost", Replace="IntelligenceBoost"},
 }
 
 function SwapDeltaMods(item)
 	local swapBoosts = {}
 	local hasSwapBoosts = false
 	for i,entry in pairs(deltamodSwap) do
+		print(LeaderLib.Common.Dump(entry))
 		if IsTagged(item, entry.Tag) == 1  then
 			swapBoosts[entry.Find] = entry.Replace
 			hasSwapBoosts = true
