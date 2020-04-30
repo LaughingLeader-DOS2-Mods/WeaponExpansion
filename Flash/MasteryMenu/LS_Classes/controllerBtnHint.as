@@ -28,6 +28,7 @@ package LS_Classes
 			var hlcIconClass:Class = null;
 			var hlcIconName:String = controllerHelper.getIconHLClassName(buttonId,showBig);
 			var iconName:String = controllerHelper.getIconClassName(buttonId,showBig);
+			trace("[LLWEAPONEX] Trying to get icons " + iconName + " | " + hlcIconName);
 			if(!iconMC && iconName != "")
 			{
 				iconClass = getDefinitionByName(iconName) as Class;

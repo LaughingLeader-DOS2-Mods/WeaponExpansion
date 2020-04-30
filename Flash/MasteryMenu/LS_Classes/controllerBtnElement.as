@@ -42,6 +42,7 @@ package LS_Classes
 			addChild(this.icon_mc);
 			this.text_txt = new TextField();
 			addChild(this.text_txt);
+			trace("[LLWEAPONEX] Trying to get $Title");
 			var _loc1_:Class = getDefinitionByName("$Title") as Class;
 			var _loc2_:Font = new _loc1_();
 			var _loc3_:TextFormat = this.text_txt.getTextFormat();

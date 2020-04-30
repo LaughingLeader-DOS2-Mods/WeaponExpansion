@@ -94,6 +94,11 @@ package LS_Classes
 			var _loc13_:Class = null;
 			this.m_scrollFunc = Sine.easeOut;
 			super();
+			trace("[LLWEAPONEX] (scrollbar_text) Trying to get classes");
+			trace(param1);
+			trace(param2);
+			trace(param3);
+			trace(param4);
 			var _loc7_:Class = getDefinitionByName(param1) as Class;
 			var _loc8_:Class = getDefinitionByName(param2) as Class;
 			var _loc9_:Class = getDefinitionByName(param3) as Class;

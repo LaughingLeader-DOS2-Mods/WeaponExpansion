@@ -155,6 +155,9 @@ package LS_Classes
 		
 		public static function setFormattedText(param1:TextField, param2:String, param3:String = "$Title_Bold", param4:String = "$Title_Italic") : void
 		{
+			trace("[LLWEAPONEX] (setFormattedText) Trying to get classes");
+			trace(param3);
+			trace(param4);
 			var _loc16_:Number = NaN;
 			var _loc17_:Number = NaN;
 			var _loc18_:uint = 0;

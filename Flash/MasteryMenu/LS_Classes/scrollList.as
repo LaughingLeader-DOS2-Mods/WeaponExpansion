@@ -112,6 +112,8 @@ package LS_Classes
 		
 		public function set setTileableBG(param1:String) : *
 		{
+			trace("[LLWEAPONEX] (setTileableBG) Trying to get class");
+			trace(param1);
 			var _loc2_:Class = getDefinitionByName(param1) as Class;
 			this.m_bgTile1_mc = new _loc2_();
 			this.m_bgTile2_mc = new _loc2_();
