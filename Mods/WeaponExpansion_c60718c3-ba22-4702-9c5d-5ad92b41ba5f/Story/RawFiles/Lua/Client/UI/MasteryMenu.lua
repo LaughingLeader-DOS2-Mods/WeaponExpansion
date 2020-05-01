@@ -19,7 +19,7 @@ end
 local testDescription = "This is some test description text.<br>Rank 1<br>Crippling Blow<br>If the target is disabled, deal additional piercing damage.<br><br>Rank 2<br>Blitz Attack<br>Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.<br>Rank 3<br>Some Skill<br>Some other description here.<br><br>Rank 4<br>Super Cool Skill<br>Does all the cool things whenever you need it to. Not broken at all.<br><br><br><br><br>The End"
 
 local function getMasteryDescriptionTitle(text)
-	return text:gsub("</font>", Text.Mastery.Value .. "</font>")
+	return text:gsub("</font>", " " .. Text.Mastery.Value .. "</font>")
 end
 
 local function OpenMasteryMenu(call,uuid)
@@ -37,8 +37,8 @@ local function OpenMasteryMenu(call,uuid)
 		Ext.RegisterUICall(ui, "selectedMastery", OnMenuEvent)
 		Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
 		--ui:Invoke("updateAddBaseTopTitleText", "Mods")
-		ui:Invoke("setTitle", "Weapon Mastery")
-		ui:Invoke("setButtonText", "Close")
+		ui:Invoke("setTitle", Text.MasteryMenu.Title.Value)
+		ui:Invoke("setButtonText", Text.MasteryMenu.CloseButton.Value)
 		local masteryKeys = {}
 		for tag,data in pairs(Masteries) do
 			table.insert(masteryKeys, tag)

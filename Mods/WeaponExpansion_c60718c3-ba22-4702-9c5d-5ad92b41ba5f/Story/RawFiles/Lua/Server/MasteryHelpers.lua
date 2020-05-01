@@ -29,8 +29,8 @@ end
 --- @param last integer
 --- @param next integer
 local function MasteryLeveledUp(uuid,mastery,last,next)
-	local masteryName = Masteries[mastery].Name.Value
-	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName .. " " .. Text.Mastery.Value):gsub("%[2%]", next)
+	local masteryName = Masteries[mastery].Name.Value:gsub("</font>", Text.Mastery.Value .. " </font>")
+	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName):gsub("%[2%]", next)
 	if CharacterIsPlayer(uuid) == 1 and CharacterIsControlled(uuid) then
 		ShowNotification(uuid, text)
 	else
