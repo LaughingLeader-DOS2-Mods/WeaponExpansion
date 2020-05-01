@@ -153,181 +153,181 @@ package LS_Classes
 			}
 		}
 		
-		public static function setFormattedText(param1:TextField, param2:String, param3:String = "$Title_Bold", param4:String = "$Title_Italic") : void
+		public static function setFormattedText(targetTextField:TextField, setText:String, boldClassId:String = "$Title_Bold", italicClassId:String = "$Title_Italic") : void
 		{
 			trace("[LLWEAPONEX] (setFormattedText) Trying to get classes");
-			trace(param3);
-			trace(param4);
-			var _loc16_:Number = NaN;
-			var _loc17_:Number = NaN;
-			var _loc18_:uint = 0;
-			var _loc19_:TextLineMetrics = null;
-			var _loc20_:int = 0;
-			var _loc21_:int = 0;
-			var _loc22_:Rectangle = null;
-			var _loc23_:Rectangle = null;
-			var _loc24_:Number = NaN;
-			var _loc25_:Number = NaN;
-			var _loc26_:int = 0;
-			var _loc27_:TextFormat = null;
-			var _loc28_:uint = 0;
-			var _loc29_:Number = NaN;
-			var _loc5_:Class = getDefinitionByName(param3) as Class;
-			var _loc6_:Class = getDefinitionByName(param4) as Class;
-			var _loc7_:Font = new _loc5_();
-			var _loc8_:Font = new _loc6_();
-			var _loc9_:TextFormat = param1.getTextFormat();
-			var _loc10_:MovieClip = param1.parent as MovieClip;
-			_loc9_.font = _loc8_.fontName;
-			var _loc11_:TextFormat = param1.getTextFormat();
-			_loc11_.font = _loc7_.fontName;
-			param1.htmlText = param2;
-			var _loc12_:MovieClip = null;
-			if(_loc10_[param1.name + "Deco"] != null)
+			trace(boldClassId);
+			trace(italicClassId);
+			var tagLineIndex:Number = NaN;
+			var nextTagLineIndex:Number = NaN;
+			var tagLineIndexIter:uint = 0;
+			var lineMetrics:TextLineMetrics = null;
+			var lineOffset:int = 0;
+			var lineLength:int = 0;
+			var charBoundsStart:Rectangle = null;
+			var charBoundsEnd:Rectangle = null;
+			var charBoundsRight:Number = NaN;
+			var charBoundsLeft:Number = NaN;
+			var charBoundsTop:int = 0;
+			var charBoundsTextFormat:TextFormat = null;
+			var charBoundsColor:uint = 0;
+			var charBoundsSize:Number = NaN;
+			var boldClass:Class = getDefinitionByName(boldClassId) as Class;
+			var italicClass:Class = getDefinitionByName(italicClassId) as Class;
+			var boldFont:Font = new boldClass();
+			var italicFont:Font = new italicClass();
+			var italicFormat:TextFormat = targetTextField.getTextFormat();
+			var parentMC:MovieClip = targetTextField.parent as MovieClip;
+			italicFormat.font = italicFont.fontName;
+			var boldFormat:TextFormat = targetTextField.getTextFormat();
+			boldFormat.font = boldFont.fontName;
+			targetTextField.htmlText = setText;
+			var decoMC:MovieClip = null;
+			if(parentMC[targetTextField.name + "Deco"] != null)
 			{
-				_loc12_ = _loc10_[param1.name + "Deco"];
-				if(_loc12_)
+				decoMC = parentMC[targetTextField.name + "Deco"];
+				if(decoMC)
 				{
-					_loc12_.graphics.clear();
+					decoMC.graphics.clear();
 				}
-				param1.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+				targetTextField.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 			}
-			var _loc13_:Array = getTags(param2);
-			var _loc14_:int = 0;
-			var _loc15_:uint = 0;
-			while(_loc15_ < _loc13_.length)
+			var fontTags:Array = getTags(setText);
+			var nextTagIndex:int = 0;
+			var tagIndex:uint = 0;
+			while(tagIndex < fontTags.length)
 			{
-				switch(_loc13_[_loc15_].tagStr)
+				switch(fontTags[tagIndex].tagStr)
 				{
 					case "<s>":
-						_loc14_ = findNextTag("</s>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						nextTagIndex = findNextTag("</s>",tagIndex,fontTags);
+						if(nextTagIndex > 0 && nextTagIndex < fontTags.length)
 						{
-							_loc16_ = param1.getLineIndexOfChar(_loc13_[_loc15_].charPos);
-							_loc17_ = param1.getLineIndexOfChar(_loc13_[_loc14_].charPos);
-							if(_loc17_ < 0)
+							tagLineIndex = targetTextField.getLineIndexOfChar(fontTags[tagIndex].charPos);
+							nextTagLineIndex = targetTextField.getLineIndexOfChar(fontTags[nextTagIndex].charPos);
+							if(nextTagLineIndex < 0)
 							{
-								_loc17_ = param1.numLines - 1;
+								nextTagLineIndex = targetTextField.numLines - 1;
 							}
-							if(_loc16_ >= 0 && _loc17_ >= 0)
+							if(tagLineIndex >= 0 && nextTagLineIndex >= 0)
 							{
-								_loc18_ = _loc16_;
-								while(_loc18_ <= _loc17_)
+								tagLineIndexIter = tagLineIndex;
+								while(tagLineIndexIter <= nextTagLineIndex)
 								{
-									if(_loc12_ == null)
+									if(decoMC == null)
 									{
-										_loc12_ = _loc10_[param1.name + "Deco"] = new MovieClip();
-										_loc10_.addChild(_loc12_);
-										_loc12_.x = param1.x;
-										_loc12_.y = param1.y;
-										param1.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+										decoMC = parentMC[targetTextField.name + "Deco"] = new MovieClip();
+										parentMC.addChild(decoMC);
+										decoMC.x = targetTextField.x;
+										decoMC.y = targetTextField.y;
+										targetTextField.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 									}
-									_loc19_ = param1.getLineMetrics(_loc18_);
-									_loc20_ = param1.getLineOffset(_loc18_);
-									_loc21_ = _loc20_ + param1.getLineLength(_loc18_);
-									if(_loc20_ < _loc13_[_loc15_].charPos)
+									lineMetrics = targetTextField.getLineMetrics(tagLineIndexIter);
+									lineOffset = targetTextField.getLineOffset(tagLineIndexIter);
+									lineLength = lineOffset + targetTextField.getLineLength(tagLineIndexIter);
+									if(lineOffset < fontTags[tagIndex].charPos)
 									{
-										_loc20_ = _loc13_[_loc15_].charPos;
+										lineOffset = fontTags[tagIndex].charPos;
 									}
-									if(_loc21_ > _loc13_[_loc14_].charPos)
+									if(lineLength > fontTags[nextTagIndex].charPos)
 									{
-										_loc21_ = _loc13_[_loc14_].charPos;
+										lineLength = fontTags[nextTagIndex].charPos;
 									}
-									_loc22_ = param1.getCharBoundaries(_loc20_);
-									_loc23_ = param1.getCharBoundaries(_loc21_ - 1);
-									if(_loc22_)
+									charBoundsStart = targetTextField.getCharBoundaries(lineOffset);
+									charBoundsEnd = targetTextField.getCharBoundaries(lineLength - 1);
+									if(charBoundsStart)
 									{
-										_loc24_ = !!_loc23_?Number(_loc23_.right):Number(_loc22_.right);
-										_loc25_ = _loc22_.left;
-										_loc26_ = _loc19_.ascent * 0.8 + _loc22_.top;
-										_loc27_ = param1.getTextFormat(_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
-										if(_loc27_.color == null)
+										charBoundsRight = !!charBoundsEnd?Number(charBoundsEnd.right):Number(charBoundsStart.right);
+										charBoundsLeft = charBoundsStart.left;
+										charBoundsTop = lineMetrics.ascent * 0.8 + charBoundsStart.top;
+										charBoundsTextFormat = targetTextField.getTextFormat(fontTags[tagIndex].charPos,fontTags[nextTagIndex].charPos);
+										if(charBoundsTextFormat.color == null)
 										{
-											_loc27_ = param1.getTextFormat(_loc13_[_loc15_].charPos,_loc13_[_loc15_].charPos + 1);
+											charBoundsTextFormat = targetTextField.getTextFormat(fontTags[tagIndex].charPos,fontTags[tagIndex].charPos + 1);
 										}
-										_loc28_ = new uint(_loc27_.color);
-										_loc29_ = new Number(_loc27_.size);
-										_loc12_.graphics.lineStyle(Math.ceil(_loc29_ * 0.08),_loc28_);
-										_loc12_.graphics.moveTo(_loc25_,_loc26_);
-										_loc12_.graphics.lineTo(_loc24_,_loc26_);
+										charBoundsColor = new uint(charBoundsTextFormat.color);
+										charBoundsSize = new Number(charBoundsTextFormat.size);
+										decoMC.graphics.lineStyle(Math.ceil(charBoundsSize * 0.08),charBoundsColor);
+										decoMC.graphics.moveTo(charBoundsLeft,charBoundsTop);
+										decoMC.graphics.lineTo(charBoundsRight,charBoundsTop);
 									}
-									_loc18_++;
+									tagLineIndexIter++;
 								}
 							}
 						}
 						break;
 					case "<u>":
-						_loc14_ = findNextTag("</u>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						nextTagIndex = findNextTag("</u>",tagIndex,fontTags);
+						if(nextTagIndex > 0 && nextTagIndex < fontTags.length)
 						{
-							_loc16_ = param1.getLineIndexOfChar(_loc13_[_loc15_].charPos);
-							_loc17_ = param1.getLineIndexOfChar(_loc13_[_loc14_].charPos);
-							if(_loc17_ < 0)
+							tagLineIndex = targetTextField.getLineIndexOfChar(fontTags[tagIndex].charPos);
+							nextTagLineIndex = targetTextField.getLineIndexOfChar(fontTags[nextTagIndex].charPos);
+							if(nextTagLineIndex < 0)
 							{
-								_loc17_ = param1.numLines - 1;
+								nextTagLineIndex = targetTextField.numLines - 1;
 							}
-							if(_loc16_ >= 0 && _loc17_ >= 0)
+							if(tagLineIndex >= 0 && nextTagLineIndex >= 0)
 							{
-								_loc18_ = _loc16_;
-								while(_loc18_ <= _loc17_)
+								tagLineIndexIter = tagLineIndex;
+								while(tagLineIndexIter <= nextTagLineIndex)
 								{
-									if(_loc12_ == null)
+									if(decoMC == null)
 									{
-										_loc12_ = _loc10_[param1.name + "Deco"] = new MovieClip();
-										_loc10_.addChild(_loc12_);
-										_loc12_.x = param1.x;
-										_loc12_.y = param1.y;
-										param1.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+										decoMC = parentMC[targetTextField.name + "Deco"] = new MovieClip();
+										parentMC.addChild(decoMC);
+										decoMC.x = targetTextField.x;
+										decoMC.y = targetTextField.y;
+										targetTextField.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 									}
-									_loc19_ = param1.getLineMetrics(_loc18_);
-									_loc20_ = param1.getLineOffset(_loc18_);
-									_loc21_ = _loc20_ + param1.getLineLength(_loc18_);
-									if(_loc20_ < _loc13_[_loc15_].charPos)
+									lineMetrics = targetTextField.getLineMetrics(tagLineIndexIter);
+									lineOffset = targetTextField.getLineOffset(tagLineIndexIter);
+									lineLength = lineOffset + targetTextField.getLineLength(tagLineIndexIter);
+									if(lineOffset < fontTags[tagIndex].charPos)
 									{
-										_loc20_ = _loc13_[_loc15_].charPos;
+										lineOffset = fontTags[tagIndex].charPos;
 									}
-									if(_loc21_ > _loc13_[_loc14_].charPos)
+									if(lineLength > fontTags[nextTagIndex].charPos)
 									{
-										_loc21_ = _loc13_[_loc14_].charPos;
+										lineLength = fontTags[nextTagIndex].charPos;
 									}
-									_loc22_ = param1.getCharBoundaries(_loc20_);
-									if(_loc22_)
+									charBoundsStart = targetTextField.getCharBoundaries(lineOffset);
+									if(charBoundsStart)
 									{
-										_loc23_ = param1.getCharBoundaries(_loc21_ - 1);
-										if(_loc23_)
+										charBoundsEnd = targetTextField.getCharBoundaries(lineLength - 1);
+										if(charBoundsEnd)
 										{
-											_loc23_ = param1.getCharBoundaries(_loc21_ - 2);
+											charBoundsEnd = targetTextField.getCharBoundaries(lineLength - 2);
 										}
-										_loc24_ = !!_loc23_?Number(_loc23_.right):Number(_loc22_.right);
-										_loc25_ = _loc22_.left;
-										_loc27_ = param1.getTextFormat(_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
-										_loc28_ = new uint(_loc27_.color);
-										_loc29_ = new Number(_loc27_.size);
-										_loc26_ = _loc19_.ascent + _loc19_.descent * 0.04 * _loc29_ + _loc22_.top;
-										_loc12_.graphics.lineStyle(Math.ceil(_loc29_ * 0.08),_loc28_);
-										_loc12_.graphics.moveTo(_loc25_,_loc26_);
-										_loc12_.graphics.lineTo(_loc24_,_loc26_);
+										charBoundsRight = !!charBoundsEnd?Number(charBoundsEnd.right):Number(charBoundsStart.right);
+										charBoundsLeft = charBoundsStart.left;
+										charBoundsTextFormat = targetTextField.getTextFormat(fontTags[tagIndex].charPos,fontTags[nextTagIndex].charPos);
+										charBoundsColor = new uint(charBoundsTextFormat.color);
+										charBoundsSize = new Number(charBoundsTextFormat.size);
+										charBoundsTop = lineMetrics.ascent + lineMetrics.descent * 0.04 * charBoundsSize + charBoundsStart.top;
+										decoMC.graphics.lineStyle(Math.ceil(charBoundsSize * 0.08),charBoundsColor);
+										decoMC.graphics.moveTo(charBoundsLeft,charBoundsTop);
+										decoMC.graphics.lineTo(charBoundsRight,charBoundsTop);
 									}
-									_loc18_++;
+									tagLineIndexIter++;
 								}
 							}
 						}
 						break;
 					case "<b>":
-						_loc14_ = findNextTag("</b>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						nextTagIndex = findNextTag("</b>",tagIndex,fontTags);
+						if(nextTagIndex > 0 && nextTagIndex < fontTags.length)
 						{
-							param1.setTextFormat(_loc11_,_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
+							targetTextField.setTextFormat(boldFormat,fontTags[tagIndex].charPos,fontTags[nextTagIndex].charPos);
 						}
 						break;
 					case "<i>":
-						_loc14_ = findNextTag("</i>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						nextTagIndex = findNextTag("</i>",tagIndex,fontTags);
+						if(nextTagIndex > 0 && nextTagIndex < fontTags.length)
 						{
-							param1.setTextFormat(_loc9_,_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
+							targetTextField.setTextFormat(italicFormat,fontTags[tagIndex].charPos,fontTags[nextTagIndex].charPos);
 						}
 				}
-				_loc15_++;
+				tagIndex++;
 			}
 		}
 		
