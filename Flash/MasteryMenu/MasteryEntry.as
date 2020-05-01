@@ -15,10 +15,12 @@ package
 		public var m_Id:Number;
 		
 		public var m_MasteryTitle:String;
-		
+		public var m_MasteryDescriptionTitle:String;
 		public var m_MasteryDesc:String;
 		
 		public const DECOR_MARGIN:uint = 8;
+
+		public var xpBar:MasteryBar;
 		
 		public function MasteryEntry()
 		{
@@ -31,12 +33,18 @@ package
 			this.m_Id = id;
 			this.masteryArt.gotoAndStop(id + 2);
 			this.masteryArt.visible = true;
+			this.masteryArt.visible = false;
 			this.masteryFrame.setId(id);
 		}
 		
-		public function setTitle(title:String) : *
+		public function setTitle(title:String, descriptionTitle:String = "") : *
 		{
 			this.m_MasteryTitle = title;
+			if (descriptionTitle == "")
+			{
+				descriptionTitle = title;
+			}
+			this.m_MasteryDescriptionTitle = descriptionTitle;
 			this.masteryFrame.title_txt.htmlText = this.m_MasteryTitle;
 			this.positioningText();
 		}
@@ -53,9 +61,24 @@ package
 			this.m_MasteryDesc = text;
 		}
 		
+		public function setBar(barPercentage:Number, animate:Boolean) : *
+		{
+			this.xpBar.setBar(barPercentage, animate);
+		}
+
+		public function setBarColor(color:uint) : *
+		{
+			this.xpBar.setBarColour(color);
+		}
+		
 		public function getTitle() : *
 		{
 			return this.m_MasteryTitle;
+		}
+
+		public function getDescriptionTitle() : *
+		{
+			return this.m_MasteryDescriptionTitle;
 		}
 		
 		public function getDescription() : *
@@ -82,6 +105,8 @@ package
 		
 		function frame1() : *
 		{
+			this.xpBar.mouseChildren = false;
+			this.xpBar.mouseEnabled = false;
 		}
 	}
 }

@@ -36,10 +36,10 @@ package masteryMenu
 		
 		public const scrollPaneW:Number = 845;
 		
-		 // Default frame height is 296, element spacing is EL_SPACING (4)
+		// Default frame height is 296, element spacing is EL_SPACING (20)
 		public const scrollPaneH:Number = 773;
 		
-		public const ELH:Number = 300;
+		public const ELH:Number = 110;//300;
 		
 		public var masteryList:scrollList;
 		
@@ -60,7 +60,7 @@ package masteryMenu
 			this.masteryList.SB_SPACING = 10;
 			this.masteryList.TOP_SPACING = 15;
 			this.masteryList.SIDE_SPACING = 20;
-			this.masteryList.EL_SPACING = 20;
+			this.masteryList.EL_SPACING = 1;
 			this.masteryList.mouseWheelWhenOverEnabled = true;
 			this.masteryList.m_scrollbar_mc.m_hideWhenDisabled = true;
 			this.masteryList.m_customElementHeight = this.ELH;
@@ -145,7 +145,7 @@ package masteryMenu
 			this.masteryList.m_allowKeepIntoView = param1;
 		}
 		
-		public function addMastery(masteryId:Number, title:String, description:String, showIcon:Boolean) : *
+		public function addMastery(masteryId:Number, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
 		{
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",masteryId);
 			if(masteryMC == null)
@@ -159,9 +159,10 @@ package masteryMenu
 				this.masteryCount = this.masteryCount + 1;
 			}
 			masteryMC.setId(masteryId);
-			masteryMC.setTitle(title);
+			masteryMC.setTitle(title, descriptionTitle);
 			masteryMC.setDescription(description);
 			masteryMC.alpha = 1;
+			masteryMC.setBar(xpAmount, animateBar);
 			if(showIcon)
 			{
 				masteryMC.newIcon.gotoAndStop(2);
@@ -190,7 +191,7 @@ package masteryMenu
 		public function onSelectionChanged() : *
 		{
 			var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			this.name_txt.htmlText = entry.getTitle();
+			this.name_txt.htmlText = entry.getDescriptionTitle();
 			this.desc_txt.htmlText = entry.getDescription();
 			this.resetTextScrollbar();
 		}

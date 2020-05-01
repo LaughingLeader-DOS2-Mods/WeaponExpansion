@@ -18,6 +18,10 @@ end
 
 local testDescription = "This is some test description text.<br>Rank 1<br>Crippling Blow<br>If the target is disabled, deal additional piercing damage.<br><br>Rank 2<br>Blitz Attack<br>Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.<br>Rank 3<br>Some Skill<br>Some other description here.<br><br>Rank 4<br>Super Cool Skill<br>Does all the cool things whenever you need it to. Not broken at all.<br><br><br><br><br>The End"
 
+local function getMasteryDescriptionTitle(text)
+	return text:gsub("</font>", Text.Mastery.Value .. "</font>")
+end
+
 local function OpenMasteryMenu(call,uuid)
 	LeaderLib.PrintDebug("[WeaponExpansion_MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..uuid..")")
 	local ui = Ext.GetUI("MasteryMenu")
@@ -44,7 +48,7 @@ local function OpenMasteryMenu(call,uuid)
 		local i = 0
 		for _,tag in ipairs(masteryKeys) do
 			local data = Masteries[tag]
-			ui:Invoke("addMastery", i, data.Name.Value, testDescription, 1)
+			ui:Invoke("addMastery", i, data.Name.Value, getMasteryDescriptionTitle(data.Name.Value), testDescription, 0, (Ext.Random(1,100) / 100), true)
 			i = i + 1
 		end
 		ui:Invoke("selectMastery", 2)

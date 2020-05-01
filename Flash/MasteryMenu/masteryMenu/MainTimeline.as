@@ -68,8 +68,6 @@ package masteryMenu
 			ExternalInterface.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
 			switch(this.events[eventIndex])
 			{
-				case "IE ContextMenu":
-					break;
 				case "IE UIAccept":
 					break;
 				case "IE UICancel":
@@ -97,10 +95,6 @@ package masteryMenu
 
 			switch(this.events[eventIndex])
 			{
-				case "IE UICancel":
-					closeMenu();
-					handled = true;
-					break;
 				case "IE UIUp":
 					this.masteryMenuMC.previous();
 					this.masteryMenuMC.adjustMainScroll();
@@ -142,9 +136,9 @@ package masteryMenu
 			this.masteryMenuMC.buttonHintBar_mc.addBtnHint(id,hintText,iconId);
 		}
 		
-		public function addMastery(masteryId:Number, title:String, description:String, showIcon:Boolean) : *
+		public function addMastery(masteryId:Number, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
 		{
-			this.masteryMenuMC.addMastery(masteryId,title,description,showIcon);
+			this.masteryMenuMC.addMastery(masteryId,title,descriptionTitle,description,showIcon,xpAmount,animateBar);
 		}
 		
 		public function selectMastery(id:Number) : *
@@ -156,7 +150,7 @@ package masteryMenu
 		{
 			this.layout = "fixed";
 			this.alignment = "none";
-			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ContextMenu", "IE ToggleInGameMenu", "IE UISelectChar1","IE UISelectChar2","IE UISelectChar3","IE UISelectChar4");
+			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu");
 			this.items_array = new Array();
 			this.isContentView = false;
 		}
