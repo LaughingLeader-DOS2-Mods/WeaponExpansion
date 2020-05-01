@@ -38,11 +38,13 @@ LLWEAPONEX_WeaponMastery_AddExperienceForWeaponType(_Char, _WeaponType, 1);
 IF
 CharacterDying(_Enemy)
 AND
+NRD_CharacterGetInt(_Enemy, "Resurrected", 0) // Never resurrected
+AND
 DB_CombatCharacters(_Enemy, _CombatID)
 AND
 DB_IsPlayer(_Player)
 AND
-LLWEAPONEX_QRY_CanAddExperience(_Enemy, _Player, _CombatID)
+LLWEAPONEX_QRY_CanGrantExperience(_Enemy, _Player, _CombatID)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
 THEN

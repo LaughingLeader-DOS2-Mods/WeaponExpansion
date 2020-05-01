@@ -8,9 +8,7 @@ KBSECTION
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
 AND
-DB_IsPlayer(_Player)
-AND
-CharacterIsEnemy(_Player, _Target, 1)
+LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 0.50);
 
@@ -21,7 +19,7 @@ Additionally, Runeblades gain less experience since it's standard to dual-wield 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", (CHARACTERGUID)_Player)
 AND
-DB_IsPlayer(_Player)
+LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 0.50);
 
@@ -29,7 +27,7 @@ LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 0.50);
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Player)
 AND
-DB_IsPlayer(_Player)
+LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Runeblade", 0.50);
 //END_REGION
@@ -38,14 +36,7 @@ LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Runeblade", 0.50);
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Player)
 AND
-DB_IsPlayer(_Player)
-THEN
-LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Pistol", 0.50);
-
-IF
-ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Player)
-AND
-DB_IsPlayer(_Player)
+LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Pistol", 0.50);
 //END_REGION
