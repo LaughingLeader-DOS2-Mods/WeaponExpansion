@@ -115,6 +115,46 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
 THEN
 DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_CanAddExperience((CHARACTERGUID)_Target)
+AND
+CharacterIsSummon(_Target, 0)
+AND
+LeaderLib_Party_QRY_IsEnemyOfParty(_Target)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_CanAddExperience((CHARACTERGUID)_Target, (CHARACTERGUID)_Player)
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterIsEnemy(_Player, _Target, 1)
+AND
+CharacterIsSummon(_Target, 0)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_CanAddExperience((CHARACTERGUID)_Target, (CHARACTERGUID)_Player)
+AND
+CharacterIsSummon(_Target, 0)
+AND
+CharacterIsEnemy(_Player, _Target, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_QRY_CanAddExperience((CHARACTERGUID)_Target, (CHARACTERGUID)_Player, (INTEGER)_CombatID)
+AND
+CharacterIsSummon(_Target, 0)
+AND
+CharacterIsEnemy(_Player, _Target, 1)
+AND
+CombatGetIDForCharacter(_Player, _CombatID)
+THEN
+DB_NOOP(1);
 //END_REGION
 
 //REGION ACTIVE_MASTERY_TRACKING

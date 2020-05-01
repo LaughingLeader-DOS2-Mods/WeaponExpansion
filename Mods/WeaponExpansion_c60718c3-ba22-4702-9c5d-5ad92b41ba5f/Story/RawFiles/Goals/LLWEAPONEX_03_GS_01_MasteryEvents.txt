@@ -9,8 +9,10 @@ IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
 AND
 DB_IsPlayer(_Player)
+AND
+CharacterIsEnemy(_Player, _Target, 1)
 THEN
-LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 1.0);
+LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 0.50);
 
 /*
 To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
@@ -21,7 +23,7 @@ CharacterStatusAttempt(_Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", (CHARACTERG
 AND
 DB_IsPlayer(_Player)
 THEN
-LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 1.0);
+LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 0.50);
 
 //ArmCannon == Runic Cannon, a.k.a. rune weapon with fleeting ranged advantages
 IF
@@ -29,7 +31,7 @@ CharacterStatusAttempt(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Play
 AND
 DB_IsPlayer(_Player)
 THEN
-LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Runeblade", 1.0);
+LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Runeblade", 0.50);
 //END_REGION
 
 //REGION PISTOL_MASTERY_XP
@@ -38,14 +40,14 @@ CharacterStatusApplied(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_P
 AND
 DB_IsPlayer(_Player)
 THEN
-LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Pistol", 1.0);
+LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Pistol", 0.50);
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Player)
 AND
 DB_IsPlayer(_Player)
 THEN
-LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Pistol", 1.0);
+LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Pistol", 0.50);
 //END_REGION
 
 EXITSECTION

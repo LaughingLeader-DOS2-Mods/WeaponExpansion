@@ -40,17 +40,16 @@ CharacterDying(_Enemy)
 AND
 DB_CombatCharacters(_Enemy, _CombatID)
 AND
-DB_IsPlayer(_Char)
+DB_IsPlayer(_Player)
 AND
-DB_CombatCharacters(_Char, _CombatID)
+LLWEAPONEX_QRY_CanAddExperience(_Enemy, _Player, _CombatID)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
-AND
-CharacterIsEnemy(_Enemy, _Char, 1)
 THEN
-LLWEAPONEX_WeaponMastery_AddPartyExperience(_Char, _Enemy, 0.5);
+LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy, 1.0);
 //END_REGION
 
+/*
 IF
 CharacterPolymorphedInto(_Char, _Race)
 THEN
@@ -65,6 +64,7 @@ IF
 ObjectTransformed((CHARACTERGUID)_Char, _Template)
 THEN
 DB_NOOP(1);
+*/
 
 //REGION BONUS_STATUS
 IF
