@@ -1,5 +1,3 @@
-local MasteryData = Ext.Require("Shared/Data/MasteryData_Classes.lua")
-
 ---@class TranslatedString
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 

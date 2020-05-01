@@ -226,3 +226,9 @@ local function IsPlayerQRY(uuid)
 end
 
 Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Character, [out](INTEGER)_IsPlayer")
+
+function OnGameStarted(region, editorMode)
+    if IsGameLevel(region) or editorMode == "1" then
+        InitClientID()
+    end
+end

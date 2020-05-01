@@ -5,16 +5,12 @@ package
 	
 	public dynamic class MasteryEntry extends MovieClip
 	{
-		 
-		
 		public var masteryArt:MovieClip;
-		
 		public var masteryFrame:MovieClip;
-		
 		public var newIcon:MovieClip;
-		
 		public var m_Id:Number;
 		
+		public var m_MasteryId:String;
 		public var m_MasteryTitle:String;
 		public var m_MasteryDescriptionTitle:String;
 		public var m_MasteryDesc:String;
@@ -29,12 +25,13 @@ package
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function setId(id:Number) : *
+		public function setId(id:Number, mastery:String) : *
 		{
 			this.m_Id = id;
 			this.masteryArt.gotoAndStop(id + 2);
 			this.masteryArt.visible = true;
 			this.masteryArt.visible = false;
+			this.m_MasteryId = mastery;
 			this.masteryFrame.setId(id);
 		}
 		

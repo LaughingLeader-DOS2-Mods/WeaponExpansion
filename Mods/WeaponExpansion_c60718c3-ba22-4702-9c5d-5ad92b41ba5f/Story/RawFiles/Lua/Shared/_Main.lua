@@ -17,6 +17,7 @@ Mastery = {
 Tags = {}
 
 Ext.Require("Shared/Data/LocalizedText.lua")
+Ext.Require("Shared/Data/MasteryData_Classes.lua")
 Ext.Require("Shared/Data/MasteryData_Masteries.lua")
 Ext.Require("Shared/Data/MasteryBonusParams.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")

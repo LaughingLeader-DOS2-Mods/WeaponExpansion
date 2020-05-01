@@ -133,6 +133,7 @@ package masteryMenu
 		{
 			this.accept_mc.text_txt.htmlText = param1;
 			this.accept_mc.setButtonType(2);
+			this.accept_mc.setButtonEvent("requestCloseUI");
 		}
 		
 		public function showControllerHints(param1:Boolean) : *
@@ -146,20 +147,20 @@ package masteryMenu
 			this.masteryList.m_allowKeepIntoView = param1;
 		}
 		
-		public function addMastery(masteryId:Number, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
 		{
-			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",masteryId);
+			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
 			if(masteryMC == null)
 			{
 				masteryMC = new MasteryEntry();
-				masteryMC.name = "mod" + masteryId;
-				masteryMC.id = masteryId;
+				masteryMC.name = "mastery" + listId;
+				masteryMC.id = listId;
 				this.masteryList.addElement(masteryMC);
 				this.masteryList.checkScrollBar();
 
 				this.masteryCount = this.masteryCount + 1;
 			}
-			masteryMC.setId(masteryId);
+			masteryMC.setId(listId,mastery);
 			masteryMC.setTitle(title, descriptionTitle);
 			masteryMC.setDescription(description);
 			masteryMC.alpha = 1;
@@ -169,6 +170,11 @@ package masteryMenu
 				masteryMC.newIcon.gotoAndStop(2);
 			}
 			this.masteryList.selectByListID(0);
+		}
+
+		public function resetList() : *
+		{
+			this.masteryList.clearElements();
 		}
 		
 		public function adjustMainScroll() : void

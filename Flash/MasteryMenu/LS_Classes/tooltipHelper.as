@@ -47,40 +47,40 @@ package LS_Classes
 			_loc10_.hasTooltip = true;
 		}
 		
-		public static function ShowTooltipForMC(param1:MovieClip, param2:DisplayObject, param3:String = "right", param4:Boolean = true) : void
+		public static function ShowTooltipForMC(targetMC:MovieClip, displayObj:DisplayObject, tooltipPos:String = "right", stayOpen:Boolean = true) : void
 		{
-			var _loc5_:Number = NaN;
-			var _loc6_:Number = NaN;
-			var _loc7_:Number = NaN;
-			var _loc8_:Number = NaN;
-			var _loc9_:Point = null;
-			var _loc10_:MovieClip = null;
-			if(param1.tooltip && param1.tooltip != "")
+			var xOffset:Number = NaN;
+			var yOffset:Number = NaN;
+			var width:Number = NaN;
+			var height:Number = NaN;
+			var globalPos:Point = null;
+			var displayMC:MovieClip = null;
+			if(targetMC.tooltip && targetMC.tooltip != "")
 			{
-				_loc5_ = 0;
-				_loc6_ = 0;
-				_loc7_ = param1.width;
-				_loc8_ = param1.height;
-				if(param1.tooltipOverrideW)
+				xOffset = 0;
+				yOffset = 0;
+				width = targetMC.width;
+				height = targetMC.height;
+				if(targetMC.tooltipOverrideW)
 				{
-					_loc7_ = param1.tooltipOverrideW;
+					width = targetMC.tooltipOverrideW;
 				}
-				if(param1.tooltipOverrideH)
+				if(targetMC.tooltipOverrideH)
 				{
-					_loc8_ = param1.tooltipOverrideH;
+					height = targetMC.tooltipOverrideH;
 				}
-				if(param1.tooltipXOffset)
+				if(targetMC.tooltipXOffset)
 				{
-					_loc5_ = param1.tooltipXOffset;
+					xOffset = targetMC.tooltipXOffset;
 				}
-				if(param1.tooltipYOffset)
+				if(targetMC.tooltipYOffset)
 				{
-					_loc6_ = param1.tooltipYOffset;
+					yOffset = targetMC.tooltipYOffset;
 				}
-				_loc9_ = getGlobalPositionOfMC(param1,param2);
-				ExternalInterface.call("showTooltip",param1.tooltip,_loc9_.x + _loc5_,_loc9_.y + _loc6_,_loc7_,_loc8_,param3,param4);
-				_loc10_ = param2 as MovieClip;
-				_loc10_.hasTooltip = true;
+				globalPos = getGlobalPositionOfMC(targetMC,displayObj);
+				ExternalInterface.call("showTooltip",targetMC.tooltip,globalPos.x + xOffset,globalPos.y + yOffset,width,height,tooltipPos,stayOpen);
+				displayMC = displayObj as MovieClip;
+				displayMC.hasTooltip = true;
 			}
 		}
 		

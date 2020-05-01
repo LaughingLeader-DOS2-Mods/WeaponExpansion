@@ -22,6 +22,7 @@ package masteryMenu
 		public var buttonType:Number;
 		
 		public var m_Id:Number;
+		public var m_Mastery:Number;
 		
 		public function masteryMenu_entryFrame_13()
 		{
@@ -29,9 +30,10 @@ package masteryMenu
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function setId(id:Number) : *
+		public function setId(id:Number, mastery:String) : *
 		{
 			this.m_Id = id;
+			this.m_Mastery = mastery;
 		}
 		
 		public function onOut(e:MouseEvent) : *
@@ -45,12 +47,12 @@ package masteryMenu
 			this.bg_mc.gotoAndStop(2);
 			this.masteryOverlay.gotoAndStop(2);
 			ExternalInterface.call("PlaySound","UI_Generic_Over");
-			ExternalInterface.call("overMastery",this.m_Id);
+			ExternalInterface.call("overMastery", this.m_Id, this.m_Mastery);
 		}
 
 		public function onDown(e:MouseEvent) : *
 		{
-			ExternalInterface.call("selectedMastery",this.m_Id);
+			ExternalInterface.call("selectedMastery", this.m_Id, this.m_Mastery);
 		}
 		
 		function frame1() : *

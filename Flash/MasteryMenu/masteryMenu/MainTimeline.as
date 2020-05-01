@@ -8,6 +8,8 @@ package masteryMenu
 		 
 		
 		public var masteryMenuMC:MovieClip;
+
+		public var menu_btn:MovieClip;
 		
 		public var layout:String;
 		
@@ -24,8 +26,8 @@ package masteryMenu
 		public var events:Array;
 		
 		public var items_array:Array;
-		
-		public var isContentView:Boolean;
+
+		private var lastFocus:MovieClip;
 		
 		public function MainTimeline()
 		{
@@ -38,28 +40,34 @@ package masteryMenu
 			ExternalInterface.call("registerAnchorId",this.anchorId);
 			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
 			this.masteryMenuMC.masteryListInit();
+			this.masteryMenuMC.visible = false;
 		}
 
 		public function openMenu() : *
 		{
-			ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Open");
-			ExternalInterface.call("focus");
-			ExternalInterface.call("inputfocus");
-			ExternalInterface.call("GainFocus");
-			this.masteryMenuMC.visible = true;
+			if (!this.masteryMenuMC.visible)
+			{
+				ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Open");
+				ExternalInterface.call("focus");
+				ExternalInterface.call("inputfocus");
+				this.masteryMenuMC.visible = true;
+				stage.focus = lastFocus;
+			}
 		}
 
 		public function closeMenu() : *
 		{
-			if(this.isContentView)
+			if (this.masteryMenuMC.visible)
 			{
-				this.isContentView = false;
+				ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
+				//ExternalInterface.call("PlaySound","UI_Game_Inventory_Close");
+				ExternalInterface.call("requestCloseUI");
+				ExternalInterface.call("inputFocusLost");
+				ExternalInterface.call("focusLost");
+				this.masteryMenuMC.visible = false;
+				lastFocus = stage.focus;
+				stage.focus = null;
 			}
-			ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
-			//ExternalInterface.call("PlaySound","UI_Game_Inventory_Close");
-			ExternalInterface.call("requestCloseUI");
-			ExternalInterface.call("inputFocusLost");
-			ExternalInterface.call("LoseFocus");
 		}
 		
 		public function onEventUp(eventIndex:Number, param2:Number, param3:Number) : *
@@ -115,6 +123,11 @@ package masteryMenu
 			}
 			return handled;
 		}
+
+		public function onEventTerminate(eventIndex:Number) : *
+		{
+			return true;
+		}
 		
 		public function setTitle(title:String) : *
 		{
@@ -126,6 +139,11 @@ package masteryMenu
 			this.masteryMenuMC.setButtonText(text);
 		}
 		
+		public function setToggleButtonTooltip(text:String) : *
+		{
+			this.menu_btn.setTooltip(text);
+		}
+		
 		public function showControllerHints(enabled:Boolean) : *
 		{
 			this.masteryMenuMC.showControllerHints(enabled);
@@ -135,10 +153,15 @@ package masteryMenu
 		{
 			this.masteryMenuMC.buttonHintBar_mc.addBtnHint(id,hintText,iconId);
 		}
-		
-		public function addMastery(masteryId:Number, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
+
+		public function resetList() : *
 		{
-			this.masteryMenuMC.addMastery(masteryId,title,descriptionTitle,description,showIcon,xpAmount,animateBar);
+			this.masteryMenuMC.resetList();
+		}
+		
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
+		{
+			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,description,showIcon,xpAmount,animateBar);
 		}
 		
 		public function selectMastery(id:Number) : *
@@ -152,7 +175,6 @@ package masteryMenu
 			this.alignment = "none";
 			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu");
 			this.items_array = new Array();
-			this.isContentView = false;
 		}
 	}
 }

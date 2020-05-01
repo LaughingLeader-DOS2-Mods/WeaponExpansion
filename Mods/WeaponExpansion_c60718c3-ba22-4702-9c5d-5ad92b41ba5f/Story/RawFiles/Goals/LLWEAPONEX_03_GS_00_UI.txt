@@ -1,0 +1,30 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+
+//REGION CLIENT_ID
+IF
+GameStarted(_Region, _IsEditorMode)
+THEN
+NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode);
+
+IF
+UserConnected(_ID, _, _)
+AND
+DB_CurrentLevel(_Region)
+AND
+IsGameLevel(_Region, 1)
+AND
+DB_IsPlayer(_Player)
+AND
+CharacterGetReservedUserID(_Player, _ID)
+AND
+CharacterIsControlled(_Player, 1)
+THEN
+NRD_ModCall("WeaponExpansion", "SendClientID", (STRING)_Player, (STRING)_ID);
+//END_REGION
+
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_03_GameScripts"

@@ -7,8 +7,6 @@ package masteryMenu
 	
 	public dynamic class redBtn_6 extends MovieClip
 	{
-		 
-		
 		public var bg_mc:MovieClip;
 		
 		public var text_txt:TextField;
@@ -16,6 +14,7 @@ package masteryMenu
 		public var base:MovieClip;
 		
 		public var buttonType:Number;
+		public var buttonCallback:String = "buttonPressed";
 		
 		public var buttonState:Boolean;
 		
@@ -35,6 +34,11 @@ package masteryMenu
 		{
 			this.buttonType = param1;
 			this.text_txt.y = this.textY;
+		}
+
+		public function setButtonEvent(eventName:String) : *
+		{
+			this.buttonCallback = eventName;
 		}
 		
 		public function setToggleText(param1:String, param2:String) : *
@@ -67,7 +71,7 @@ package masteryMenu
 				this.buttonState = !this.buttonState;
 				this.text_txt.htmlText = !!this.buttonState?this.enableTxt:this.disableTxt;
 			}
-			ExternalInterface.call("buttonPressed",this.buttonType,this.buttonState);
+			ExternalInterface.call(this.buttonCallback,this.buttonType,this.buttonState);
 		}
 		
 		public function onDown(param1:MouseEvent) : *

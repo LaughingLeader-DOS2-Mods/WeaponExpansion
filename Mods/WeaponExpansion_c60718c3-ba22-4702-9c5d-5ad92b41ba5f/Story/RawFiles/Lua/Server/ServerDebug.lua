@@ -120,10 +120,6 @@ function DebugInit()
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
 
     local host = CharacterGetHostCharacter()
-    --Ext.PostMessageToClient(host, "LLWEAPONEX_OpenMasteryMenu", host)
-    LeaderLib.PrintDebug("[WeaponExpansion:ServerDebug] Sending [LLWEAPONEX_OpenMasteryMenu] net message.")
-    Ext.BroadcastMessage("LLWEAPONEX_OpenMasteryMenu", host, nil)
-
     GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
     GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
     CharacterAddAttribute(host, "Memory", 20)
@@ -179,11 +175,11 @@ function DebugInit()
     LeaderLib.PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
 
     TeleportToRandomPosition(chest, 8.0, "")
+
+    --OpenMasteryMenu_Start(host)
 end
 
 local function OpenMasteryMenu(...)
-    local host = CharacterGetHostCharacter()
-    --Ext.BroadcastMessage("LLWEAPONEX_OpenMasteryMenu", host, nil)
-    Ext.PostMessageToClient(host, "LLWEAPONEX_OpenMasteryMenu", host)
+    OpenMasteryMenu_Start(CharacterGetHostCharacter())
 end
 Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu);
