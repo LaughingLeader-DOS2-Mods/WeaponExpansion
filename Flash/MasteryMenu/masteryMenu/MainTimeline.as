@@ -13,7 +13,7 @@ package masteryMenu
 		
 		public var alignment:String;
 		
-		public const anchorId:String = "giftMenu";
+		public const anchorId:String = "masteryMenu";
 		
 		public const anchorPos:String = "center";
 		

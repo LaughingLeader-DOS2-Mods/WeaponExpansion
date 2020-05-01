@@ -2,6 +2,7 @@ package masteryMenu
 {
 	import LS_Classes.scrollList;
 	import LS_Classes.scrollbar_text;
+	import LS_Classes.textHelpers;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -191,8 +192,8 @@ package masteryMenu
 		public function onSelectionChanged() : *
 		{
 			var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			this.name_txt.htmlText = entry.getDescriptionTitle();
-			this.desc_txt.htmlText = entry.getDescription();
+			textHelpers.setFormattedText(this.name_txt, entry.getDescriptionTitle());
+			textHelpers.setFormattedText(this.desc_txt, entry.getDescription());
 			this.resetTextScrollbar();
 		}
 		

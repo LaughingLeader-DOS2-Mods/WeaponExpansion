@@ -7,8 +7,6 @@ package masteryMenu
 	
 	public dynamic class masteryMenu_entryFrame_13 extends MovieClip
 	{
-		 
-		
 		public var bg_mc:MovieClip;
 		
 		public var bottom_decor:MovieClip;

@@ -24,6 +24,10 @@ Text = {
 		LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow = TranslatedString:Create("h07354a00ga0f1g4bf5gbaddg2e466a5be964", "<font color='#797980'>Void-touched Bullets</font>"),
 		LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Silver = TranslatedString:Create("h0a0ec3d0g79bcg4deegbcb2g46129e9603cd", "<font color='#C0C0C0'>Silver Bullets</font>"),
 	},
+	MasteryMenu = {
+		Title = TranslatedString:Create("h2ead0b87gb4b0g410ag8334ge82de5c8fea0","Weapon Masteries"),
+		CloseButton = TranslatedString:Create("h688b0700g55a2g46cdgb02cg6269d72d7dad","Close"),
+	},
 	Mastery = TranslatedString:Create("hd84bd8c4gb25fg46bagbbf9ga3d43b8bfacc","Mastery"),
 	MasteryLeveledUp = TranslatedString:Create("hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c", "<font color='#F7BA14'>[1] increased to rank <font color='#00FF00'>[2]</font></font>"),
 	MasteryRankTagText = {

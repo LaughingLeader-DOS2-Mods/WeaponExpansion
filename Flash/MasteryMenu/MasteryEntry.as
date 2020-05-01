@@ -1,6 +1,7 @@
 package
 {
 	import flash.display.MovieClip;
+	import LS_Classes.textHelpers;
 	
 	public dynamic class MasteryEntry extends MovieClip
 	{
@@ -45,7 +46,8 @@ package
 				descriptionTitle = title;
 			}
 			this.m_MasteryDescriptionTitle = descriptionTitle;
-			this.masteryFrame.title_txt.htmlText = this.m_MasteryTitle;
+			textHelpers.setFormattedText(this.masteryFrame.title_txt, this.m_MasteryTitle);
+			//this.masteryFrame.title_txt.htmlText = this.m_MasteryTitle;
 			this.positioningText();
 		}
 		
