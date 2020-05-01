@@ -13,8 +13,6 @@ end
 
 Ext.NewQuery(HasMinimumMasteryLevel, "LLWEAPONEX_Ext_QRY_HasMinimumMasteryLevel", "[in](CHARACTERGUID)_Character, [in](STRING)_Mastery, [in](INTEGER)_MinLevel, [out](INTEGER)_Level")
 
-local leveledUpText = LeaderLib.Classes.TranslatedString:Create("hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c", "<font color='#F7BA14'>[1] increased to rank <font color='#00FF00'>[2]</font></font>")
-
 function TagMasteryRanks(uuid,mastery,level)
 	if level > 0 then
 		for i=1,level,1 do
@@ -32,7 +30,7 @@ end
 --- @param next integer
 local function MasteryLeveledUp(uuid,mastery,last,next)
 	local masteryName = Masteries[mastery].Name.Value
-	local text = string.gsub(leveledUpText.Value, "%[1%]", masteryName):gsub("%[2%]", next)
+	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName .. " " .. Text.Mastery.Value):gsub("%[2%]", next)
 	if CharacterIsPlayer(uuid) == 1 and CharacterIsControlled(uuid) then
 		ShowNotification(uuid, text)
 	else
