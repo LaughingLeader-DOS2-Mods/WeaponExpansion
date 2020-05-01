@@ -1,6 +1,7 @@
 package masteryMenu
 {
 	import flash.display.MovieClip;
+	import flash.display.InteractiveObject;
 	import flash.external.ExternalInterface;
 	
 	public dynamic class MainTimeline extends MovieClip
@@ -27,7 +28,7 @@ package masteryMenu
 		
 		public var items_array:Array;
 
-		private var lastFocus:MovieClip;
+		private var lastFocus:InteractiveObject;
 		
 		public function MainTimeline()
 		{

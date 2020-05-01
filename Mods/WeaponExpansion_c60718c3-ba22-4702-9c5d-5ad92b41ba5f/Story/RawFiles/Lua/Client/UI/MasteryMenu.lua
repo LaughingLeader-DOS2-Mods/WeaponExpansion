@@ -4,10 +4,10 @@ local initialized = false
 local masteryMenu = nil
 
 local function OnSheetEvent(ui, call, ...)
-	local params = Common.FlattenTable({...})
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
+	local params = {...}
+	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
-	if call == "hotbarBtnPressed" or call == "selectedTab" then
+	if call == "hotbarBtnPressed" or call == "selectedTab" or call == "showUI" then
 		if panelOpen and masteryMenu ~= nil then
 			masteryMenu:Invoke("closeMenu")
 			panelOpen = false
@@ -16,10 +16,22 @@ local function OnSheetEvent(ui, call, ...)
 end
 
 local function OnSidebarEvent(ui, call, ...)
-	local params = Common.FlattenTable({...})
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
+	local params = {...}
+	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "charSel" then
+		if panelOpen and masteryMenu ~= nil then
+			masteryMenu:Invoke("closeMenu")
+			panelOpen = false
+		end
+	end
+end
+
+local function OnHotbarEvent(ui, call, ...)
+	local params = {...}
+	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+
+	if call == "hotbarBtnPressed" then
 		if panelOpen and masteryMenu ~= nil then
 			masteryMenu:Invoke("closeMenu")
 			panelOpen = false
@@ -32,6 +44,7 @@ local function SetupListeners()
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "selectedTab", OnSheetEvent)
 		Ext.RegisterUICall(ui, "hotbarBtnPressed", OnSheetEvent)
+		Ext.RegisterUICall(ui, "showUI", OnSheetEvent)
 		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (characterSheet.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/characterSheet.swf")
@@ -42,6 +55,13 @@ local function SetupListeners()
 		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (playerInfo.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/playerInfo.swf")
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "hotbarBtnPressed", OnHotbarEvent)
+		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (hotBar.swf). Registered listeners.")
+	else
+		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/hotBar.swf")
 	end
 end
 
