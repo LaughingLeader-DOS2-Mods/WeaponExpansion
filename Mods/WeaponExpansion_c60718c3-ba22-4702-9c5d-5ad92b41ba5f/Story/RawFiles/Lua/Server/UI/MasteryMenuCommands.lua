@@ -17,7 +17,7 @@ end
 function OpenMasteryMenu_Start(uuid)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
 	local masteries = {}
-	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(player, nil, nil, nil)
+	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, nil, nil, nil)
 	print(LeaderLib.Common.Dump(dbEntry))
 	if dbEntry ~= nil then
 		for i,entry in pairs(dbEntry) do
@@ -36,8 +36,21 @@ end
 local function RequestOpenMasteryMenu(call,id)
 	local clientID = tonumber(id)
 	if clientID ~= nil then
-		for i,player in ipairs(Osi.DB_IsPlayer:Get(nil)) do
-			local uuid = player[1]
+		local character = GetCurrentCharacter(clientID)
+		if character ~= nil then
+			if CharacterIsSummon(character) then
+				if CharacterIsControlled(character) then
+					ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+				else
+					CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+				end
+			else
+				OpenMasteryMenu_Start(character)
+				return true
+			end
+		end
+		for i,entry in ipairs(Osi.DB_IsPlayer:Get(nil)) do
+			local uuid = entry[1]
 			local id = CharacterGetReservedUserID(uuid)
 			print(id,clientID, id==clientID)
 			if id == clientID and CharacterIsControlled(uuid) then
