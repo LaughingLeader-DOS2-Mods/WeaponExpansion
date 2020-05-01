@@ -52,9 +52,14 @@ function AddMasteryExperience(uuid,mastery,expGain)
 		local currentExp = 0
 		--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
 		local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
+		LeaderLib.PrintDebug("[MasteryHelpers:AddMasteryExperience] dbEntry")
+		LeaderLib.PrintDebug(LeaderLib.Common.Dump(dbEntry))
 		if dbEntry ~= nil then
-			currentLevel = dbEntry[1][3]
-			currentExp = dbEntry[1][4]
+			local playerEntry = dbEntry[1]
+			if playerEntry ~= nil then
+				currentLevel = playerEntry[3]
+				currentExp = playerEntry[4]
+			end
 		end
 
 		if currentLevel < 4 then

@@ -13,8 +13,6 @@ package masteryMenu
 	
 	public dynamic class masteryMenu_Main extends MovieClip
 	{
-		 
-		
 		public var accept_mc:MovieClip;
 		
 		public var btn_bg:MovieClip;
@@ -30,6 +28,8 @@ package masteryMenu
 		public var name_txt:TextField;
 		
 		public var title_txt:TextField;
+
+		public var noMasteries_mc:MovieClip;
 		
 		public var masteryCount;
 		
@@ -47,6 +47,9 @@ package masteryMenu
 		public var _scrollbar:scrollbar_text;
 		
 		public var time:Timer;
+
+		public var emptyListTitle:String = "";
+		public var emptyListDescription:String = "";
 		
 		public function masteryMenu_Main()
 		{
@@ -129,6 +132,18 @@ package masteryMenu
 			this.title_txt.htmlText = param1.toUpperCase();
 		}
 		
+		public function setEmptyListText(title:String, description:String) : *
+		{
+			emptyListTitle = title;
+			emptyListDescription = description;
+
+			if (this.masteryCount <= 0)
+			{
+				this.name_txt.htmlText = this.emptyListTitle;
+				this.desc_txt.htmlText = this.emptyListDescription;
+			}
+		}
+		
 		public function setButtonText(param1:String) : *
 		{
 			this.accept_mc.text_txt.htmlText = param1;
@@ -149,6 +164,8 @@ package masteryMenu
 		
 		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
 		{
+			noMasteries_mc.visible = false;
+
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
 			if(masteryMC == null)
 			{
@@ -175,6 +192,13 @@ package masteryMenu
 		public function resetList() : *
 		{
 			this.masteryList.clearElements();
+			this.name_txt.htmlText = this.emptyListTitle;
+			this.desc_txt.htmlText = this.emptyListDescription;
+			this.resetTextScrollbar();
+			this.masteryCount = 0;
+			noMasteries_mc.visible = true;
+			//textHelpers.setFormattedText(this.name_txt, this.emptyListTitle);
+			//textHelpers.setFormattedText(this.desc_txt, this.emptyListDescription);
 		}
 		
 		public function adjustMainScroll() : void

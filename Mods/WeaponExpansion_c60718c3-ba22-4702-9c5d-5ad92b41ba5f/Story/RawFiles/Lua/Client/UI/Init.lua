@@ -49,7 +49,7 @@ local function Client_UIDebugTest()
 end
 
 local function LLWEAPONEX_Client_SessionLoaded()
-	
+	InitMasteryMenu()
 end
 
 Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)

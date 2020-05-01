@@ -3,15 +3,19 @@ local registeredListeners = false
 local initialized = false
 local masteryMenu = nil
 
+local function CloseMenu()
+	if panelOpen and masteryMenu ~= nil then
+		masteryMenu:Invoke("closeMenu")
+		panelOpen = false
+	end
+end
+
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "hotbarBtnPressed" or call == "selectedTab" or call == "showUI" then
-		if panelOpen and masteryMenu ~= nil then
-			masteryMenu:Invoke("closeMenu")
-			panelOpen = false
-		end
+		CloseMenu()
 	end
 end
 
@@ -20,10 +24,7 @@ local function OnSidebarEvent(ui, call, ...)
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "charSel" then
-		if panelOpen and masteryMenu ~= nil then
-			masteryMenu:Invoke("closeMenu")
-			panelOpen = false
-		end
+		CloseMenu()
 	end
 end
 
@@ -32,10 +33,7 @@ local function OnHotbarEvent(ui, call, ...)
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "hotbarBtnPressed" then
-		if panelOpen and masteryMenu ~= nil then
-			masteryMenu:Invoke("closeMenu")
-			panelOpen = false
-		end
+		CloseMenu()
 	end
 end
 
@@ -70,6 +68,7 @@ local function TryOpenMasteryMenu()
 	if CLIENT_ID ~= nil then
 		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(CLIENT_ID))
 	else
+		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", "-1")
 		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_ID not set.")
 	end
 end
@@ -102,7 +101,7 @@ local function getMasteryDescriptionTitle(text)
 	return text:gsub("</font>", " " .. Text.Mastery.Value .. "</font>")
 end
 
-local function InitMasteryMenu()
+local function initializeMasteryMenu()
 	local newlyCreated = false
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui == nil then
@@ -113,6 +112,7 @@ local function InitMasteryMenu()
 	end
 	if ui ~= nil and panelOpen == false then
 		masteryMenu = ui
+		ui:Invoke("setEmptyListText", Text.MasteryMenu.NoMasteriesTitle.Value, Text.MasteryMenu.NoMasteriesDescription.Value)
 		if not registeredListeners then
 			Ext.RegisterUICall(ui, "requestCloseUI", OnMenuEvent)
 			Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
@@ -142,6 +142,12 @@ local function InitMasteryMenu()
 	end
 end
 
+function InitMasteryMenu()
+	if not initialized then
+		initializeMasteryMenu()
+	end
+end
+
 local function hasMinimumMasteryRankData(t,tag,min)
 	if t == nil then return false end
 	return pcall(function()
@@ -152,7 +158,7 @@ end
 ---@param CharacterMasteryData characterMasteryData
 local function OpenMasteryMenu(characterMasteryData)
 	if not initialized then
-		InitMasteryMenu()
+		initializeMasteryMenu()
 	end
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
 	LeaderLib.PrintDebug(LeaderLib.Common.Dump(characterMasteryData))
@@ -201,7 +207,7 @@ local function NetMessage_SetClientId(call,id)
 	CLIENT_ID = tonumber(id)
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:NetMessage_SetClientId] Set CLIENT_ID to (",id,")")
 	if not initialized then
-		InitMasteryMenu()
+		initializeMasteryMenu()
 	end
 end
 

@@ -2,7 +2,6 @@ Key	Content	Handle
 LLWEAPONEX_Nofitications_BalrinAxeMissing	<font color='#CD1F1F'>Throwing Failed - You already threw Balrin's Axe!</font>	hb62421b1g2160g43b5gb54cgcf4ad9fe5e21
 LLWEAPONEX_Notifications_ArmCannonShieldBlocked	<font color='#CD1F1F'>The focus required to wield the Runic Cannon requires it to be the only weapon used.</font>	h1265f1ebg03f7g432bgbdacg392c566b69bc
 LLWEAPONEX_Notifications_BoltInsertedInNonCrossbow	<font color='#CD1F1F'>Bolts can only be inserted into an arm-mounted crossbow!</font>	h0b221586gde00g416aga288gce5d6b12b266
-LLWEAPONEX_Notifications_EternalSparkEquipped	<font color='#FF4800'>Your right hand surges with the power of the Eternal Spark.</font>	ha414aac8g1037g46deg97a9g92e49873e8af
 LLWEAPONEX_Notifications_HandCrossbow_InsertBolts_NotEquipped	<font color='#FF1155' size='22'>Insert Failed - No Hand Crossbow Equipped</font>	h4504bbc0gb7a6g42c3ga57eg83f3e78c0db2
 LLWEAPONEX_Notifications_OniGauntletRequiredForOrb	<font color='#FF001F'>The orb doesn't seem to fit. A special gauntlet is required.</font>	h18e76295g020dg4099gb881gfc0aeb55becf
 LLWEAPONEX_Notifications_UnequipDragonBoneClawsFailed	<font color='#CD1F1F'>To unequip the Dragon Bone Claws, unequip your glove armor instead of the weapon.</font>	h03bcab3bgb227g4c71gb14egf3964ebe80e2

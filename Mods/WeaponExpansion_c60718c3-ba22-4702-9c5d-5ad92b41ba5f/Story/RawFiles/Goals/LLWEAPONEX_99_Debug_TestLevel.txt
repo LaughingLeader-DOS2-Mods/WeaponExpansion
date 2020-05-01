@@ -2125,6 +2125,7 @@ CharacterGetEquippedItem(_Char, _Slot, (ITEMGUID)_Item)
 THEN
 ItemLevelUpTo(_Item, _Level);
 
+/*
 IF
 StoryEvent(_, "LeaderLib_Initialized")
 THEN
@@ -2147,6 +2148,7 @@ IF
 TimerFinished("Timers_LLWEAPONEX_Debug_InitLevelItems")
 THEN
 NRD_ModCall("WeaponExpansion", "LLWEAPONEX_Ext_Debug_Init");
+*/
 
 /*
 Harcoded colors:

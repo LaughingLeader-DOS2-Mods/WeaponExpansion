@@ -33,13 +33,18 @@ function OpenMasteryMenu_Start(uuid)
 	Ext.PostMessageToClient(uuid, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
 end
 
-local function RequestOpenMasteryMenu(call,id)
+local function RequestOpenMasteryMenu(call,id,callbackID)
+	--Ext.Print("RequestOpenMasteryMenu", "Sent ID", id, "Callback ID", callbackID, "Host UserID", CharacterGetReservedUserID(CharacterGetHostCharacter()))
+	--Ext.Print("RequestOpenMasteryMenu", "Sent UserName", GetUserName(tonumber(id)), "Callback UserName", GetUserName(callbackID), "Host UserName", GetUserName(CharacterGetReservedUserID(CharacterGetHostCharacter())))
+	if id == nil or id == "-1" then
+		id = callbackID+1
+	end
 	local clientID = tonumber(id)
 	if clientID ~= nil then
 		local character = GetCurrentCharacter(clientID)
 		if character ~= nil then
-			if CharacterIsSummon(character) then
-				if CharacterIsControlled(character) then
+			if CharacterIsSummon(character) == 1 then
+				if CharacterIsControlled(character) == 1 then
 					ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
 				else
 					CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
@@ -53,7 +58,7 @@ local function RequestOpenMasteryMenu(call,id)
 			local uuid = entry[1]
 			local id = CharacterGetReservedUserID(uuid)
 			print(id,clientID, id==clientID)
-			if id == clientID and CharacterIsControlled(uuid) then
+			if id == clientID and CharacterIsControlled(uuid) == 1 then
 				OpenMasteryMenu_Start(uuid)
 				return true
 			end

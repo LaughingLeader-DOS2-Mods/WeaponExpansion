@@ -12,6 +12,8 @@ NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode);
 IF
 UserConnected(_ID, _, _)
 AND
+DB_LeaderLib_GameStarted(1)
+AND
 GetCurrentCharacter(_ID, _Player)
 THEN
 NRD_ModCall("WeaponExpansion", "SendClientID", (STRING)_Player, (STRING)_ID);

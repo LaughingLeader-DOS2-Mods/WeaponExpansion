@@ -135,6 +135,11 @@ package masteryMenu
 			this.masteryMenuMC.setTitle(title);
 		}
 		
+		public function setEmptyListText(title:String, description:String) : *
+		{
+			this.masteryMenuMC.setEmptyListText(title, description);
+		}
+		
 		public function setButtonText(text:String) : *
 		{
 			this.masteryMenuMC.setButtonText(text);
