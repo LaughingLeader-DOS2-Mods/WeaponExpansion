@@ -10,3 +10,5 @@ LLWEAPONEX_UI_MasteryMenu_Rank2	Rank 2	ha647239bgf7a4g4142gb7a3g97bf618307b7
 LLWEAPONEX_UI_MasteryMenu_Rank3	Rank 3	hd2364fb1g646bg47cagbd53g71411ba6a0ad
 LLWEAPONEX_UI_MasteryMenu_Rank4	Rank 4	hbf31ff61gafa2g499fgbc58gf8a0defac3e7
 LLWEAPONEX_UI_MasteryMenu_Rank5	Rank 5	he14a313dg2a94g4084g9d10g3cc18ca4974b
+LLWEAPONEX_UI_MasteryMenu_RankLocked	<font color='#AAAAAA'>Locked</font>	h4f3937d2gfffbg4e84g922fg608f65fa105e
+LLWEAPONEX_UI_MasteryMenu_RankPlaceholder	<font color='#AAAAAA'>Not Yet Implemented</font>	h1d2c7bf8g249fg4acbg9c0bg47204fb87c9b

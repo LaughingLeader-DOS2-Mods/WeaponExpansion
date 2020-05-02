@@ -156,20 +156,26 @@ local function hasMinimumMasteryRankData(t,tag,min)
 	end)
 end
 
-local function getMasteryDescription(mastery, rank)
+local function buildMasteryDescription(mastery, rank)
 	local output = ""
 	local i = 1
-	while i <= rank do
+	while i <= 5 do
 		local rankText = "_Rank"..tostring(i)
 		local rankHeader = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
 		if rankHeader ~= nil and rankHeader ~= "" then
-			local description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
-			if description ~= nil and description ~= "" then
-				local text = Text.MasteryMenu.RankDescriptionTemplate:gsub("%[1%]", rankHeader):gsub("%[2%]", description)
-				output = output .. text
-				if i < rank then
-					output = output .. "<br>"
+			local description = ""
+			if i <= rank then
+				description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
+				if description == nil or description == "" then
+					description = Text.MasteryMenu.RankPlaceholder.Value
 				end
+			else
+				description = Text.MasteryMenu.RankLocked.Value
+			end
+			local text = Text.MasteryMenu.RankDescriptionTemplate:gsub("%[1%]", rankHeader):gsub("%[2%]", description)
+			output = output .. text
+			if i < 5 then
+				output = output .. "<br>"
 			end
 		end
 		i = i + 1
@@ -205,7 +211,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			local data = Masteries[tag]
 			local xp = characterMasteryData.Masteries[tag].XP
 			local rank = characterMasteryData.Masteries[tag].Rank
-			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data), testDescription, 0, xp, true)
+			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data), buildMasteryDescription(tag,rank), 0, xp, true)
 			i = i + 1
 		end
 		ui:Invoke("selectMastery", 0)
