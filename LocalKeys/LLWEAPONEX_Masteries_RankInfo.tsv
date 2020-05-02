@@ -1,0 +1,6 @@
+Key	Content	Handle
+LLWEAPONEX_Axe_Rank1_Description	Crippling Blow deals additional <font color='#CD1F1F'>piercing damage</font> to disabled targets.	h90a60c8fg1d73g4db9g906dgd10be6e3df63
+LLWEAPONEX_Axe_Rank2_Description	Blitz Attack applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.	h7755a064g6e0eg4434g9e34g857ca4e829b3
+LLWEAPONEX_Bludgeon_Rank1_Description	Battering Ram has a 25% chance to apply Dizzy for 1 turn.	he91f94eag4370g4caagbc62gde3b37a9e452
+LLWEAPONEX_Bludgeon_Rank2_Description	Crippling Blow applies Sundered, reducing max Physical and Magic Armor by 25%.	h6a51f8bbg89aeg4b36g90b4g67b9e206522e
+LLWEAPONEX_Bludgeon_Rank3_Description	Battle Stomp creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.	h3b90f6e5gfc36g4085gb291g03b83af766de

@@ -30,6 +30,7 @@ Text = {
 		MenuToggleTooltip = TranslatedString:Create("h7875b402g4783g4122gb2bdg35dcde66f221","Toggle Mastery Menu"),
 		NoMasteriesTitle = TranslatedString:Create("h47c00b1cg79b5g4ee7gbe3fg25c58809a3ef","No Masteries Learned"),
 		NoMasteriesDescription = TranslatedString:Create("h826d023bg5b10g4d79g874agb0f918554f34","Use weapons in battle to automatically gain mastery experience."),
+		RankDescriptionTemplate = TranslatedString:Create("ha931c2f8ge74fg4e46ga1b8g142846b61b46", "[1]<br>[2]"),
 	},
 	Mastery = TranslatedString:Create("hd84bd8c4gb25fg46bagbbf9ga3d43b8bfacc","Mastery"),
 	MasteryLeveledUp = TranslatedString:Create("hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c", "<font color='#F7BA14'>[1] increased to rank <font color='#00FF00'>[2]</font></font>"),

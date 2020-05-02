@@ -156,6 +156,27 @@ local function hasMinimumMasteryRankData(t,tag,min)
 	end)
 end
 
+local function getMasteryDescription(mastery, rank)
+	local output = ""
+	local i = 1
+	while i <= rank do
+		local rankText = "_Rank"..tostring(i)
+		local rankHeader = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
+		if rankHeader ~= nil and rankHeader ~= "" then
+			local description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
+			if description ~= nil and description ~= "" then
+				local text = Text.MasteryMenu.RankDescriptionTemplate:gsub("%[1%]", rankHeader):gsub("%[2%]", description)
+				output = output .. text
+				if i < rank then
+					output = output .. "<br>"
+				end
+			end
+		end
+		i = i + 1
+	end
+	return output
+end
+
 ---@param CharacterMasteryData characterMasteryData
 local function OpenMasteryMenu(characterMasteryData)
 	if not initialized then
