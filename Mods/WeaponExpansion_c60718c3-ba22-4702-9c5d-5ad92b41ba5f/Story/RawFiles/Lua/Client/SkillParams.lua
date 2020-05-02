@@ -26,7 +26,8 @@ local boltAmmoTypeText = TranslatedString:Create("hfc6af8f2gdd0ag40a0g8d9egc63f5
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
 	if rune ~= nil then
-		local runeNameText = Text.RuneNames[rune.BoostName]
+		--local runeNameText = Text.RuneNames[rune.BoostName]
+		local runeNameText = Ext.GetTranslatedStringFromKey(rune.BoostName)
 		if runeNameText ~= nil then
 			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
 		else
@@ -57,7 +58,8 @@ local bulletAmmoTypeText = TranslatedString:Create("h7eee4e3dg9eb0g4a6fg825egc09
 local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
 	if rune ~= nil then
-		local runeNameText = Text.RuneNames[rune.BoostName]
+		--local runeNameText = Text.RuneNames[rune.BoostName]
+		local runeNameText = Ext.GetTranslatedStringFromKey(rune.BoostName)
 		if runeNameText ~= nil then
 			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
 		else
@@ -88,7 +90,8 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 		if data.Tags ~= nil then
 			for tagName,tagData in pairs(data.Tags) do
 				if tagData.GetParam ~= nil and HasMasteryRequirement(character.Character, tagName) then
-					local tagLocalizedName = Text.MasteryRankTagText[tagName]
+					--local tagLocalizedName = Text.MasteryRankTagText[tagName]
+					local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
 					if tagLocalizedName == nil then 
 						tagLocalizedName = ""
 					else

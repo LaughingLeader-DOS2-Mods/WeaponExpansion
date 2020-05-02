@@ -97,8 +97,9 @@ end
 
 local testDescription = "This is some test description text.<br>Rank 1<br>Crippling Blow<br>If the target is disabled, deal additional piercing damage.<br><br>Rank 2<br>Blitz Attack<br>Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.<br>Rank 3<br>Some Skill<br>Some other description here.<br><br>Rank 4<br>Super Cool Skill<br>Does all the cool things whenever you need it to. Not broken at all.<br><br><br><br><br>The End"
 
-local function getMasteryDescriptionTitle(text)
-	return text:gsub("</font>", " " .. Text.Mastery.Value .. "</font>")
+---@param masteryData MasteryData
+local function getMasteryDescriptionTitle(masteryData)
+	return string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 end
 
 local function initializeMasteryMenu()
@@ -183,7 +184,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			local data = Masteries[tag]
 			local xp = characterMasteryData.Masteries[tag].XP
 			local rank = characterMasteryData.Masteries[tag].Rank
-			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data.Name.Value), testDescription, 0, xp, true)
+			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data), testDescription, 0, xp, true)
 			i = i + 1
 		end
 		ui:Invoke("selectMastery", 0)

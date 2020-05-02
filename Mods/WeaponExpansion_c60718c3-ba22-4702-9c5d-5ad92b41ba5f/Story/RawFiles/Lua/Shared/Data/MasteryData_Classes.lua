@@ -5,17 +5,22 @@ MasteryData = {
 	ID = "",
 	---@type TranslatedString
 	Name = {},
+	Color = "#FFFFFF",
+	---@type table<integer,TranslatedString>
+	Ranks = {}
 }
 MasteryData.__index = MasteryData
 
 ---@param id string
 ---@param name string
 ---@return MasteryData
-function MasteryData:Create(id,name)
+function MasteryData:Create(id,name,color,ranks)
     local this =
     {
 		ID = id,
-		Name = name
+		Name = name,
+		Color = color,
+		Ranks = ranks
 	}
 	setmetatable(this, self)
     return this
