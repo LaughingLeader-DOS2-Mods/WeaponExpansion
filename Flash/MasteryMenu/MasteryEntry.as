@@ -43,7 +43,8 @@ package
 				descriptionTitle = title;
 			}
 			this.m_MasteryDescriptionTitle = descriptionTitle;
-			textHelpers.setFormattedText(this.masteryFrame.title_txt, this.m_MasteryTitle);
+			//textHelpers.setFormattedText(this.masteryFrame.title_txt, this.m_MasteryTitle);
+			this.masteryFrame.title_txt.htmlText = this.m_MasteryTitle;
 			//this.masteryFrame.title_txt.htmlText = this.m_MasteryTitle;
 			this.positioningText();
 		}

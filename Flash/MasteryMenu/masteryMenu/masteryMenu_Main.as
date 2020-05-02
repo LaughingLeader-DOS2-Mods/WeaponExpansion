@@ -222,8 +222,10 @@ package masteryMenu
 		public function onSelectionChanged() : *
 		{
 			var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			textHelpers.setFormattedText(this.name_txt, entry.getDescriptionTitle());
-			textHelpers.setFormattedText(this.desc_txt, entry.getDescription());
+			this.name_txt.htmlText = entry.getDescriptionTitle();
+			this.desc_txt.htmlText = entry.getDescription();
+			//textHelpers.setFormattedText(this.name_txt, entry.getDescriptionTitle());
+			//textHelpers.setFormattedText(this.desc_txt, entry.getDescription());
 			this.resetTextScrollbar();
 		}
 		
