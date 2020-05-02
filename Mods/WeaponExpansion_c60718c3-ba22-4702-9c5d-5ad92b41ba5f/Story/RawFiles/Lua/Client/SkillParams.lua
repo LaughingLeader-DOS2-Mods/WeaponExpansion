@@ -29,7 +29,7 @@ local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 		--local runeNameText = Text.RuneNames[rune.BoostName]
 		local runeNameText = Ext.GetTranslatedStringFromKey(rune.BoostName)
 		if runeNameText ~= nil then
-			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
+			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText)
 		else
 			Ext.PrintError("No text for rune: ", rune.BoostName)
 		end
@@ -61,7 +61,7 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 		--local runeNameText = Text.RuneNames[rune.BoostName]
 		local runeNameText = Ext.GetTranslatedStringFromKey(rune.BoostName)
 		if runeNameText ~= nil then
-			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText.Value)
+			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText)
 		else
 			Ext.PrintError("No text for rune: ", rune.BoostName)
 		end
@@ -94,8 +94,6 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 					local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
 					if tagLocalizedName == nil then 
 						tagLocalizedName = ""
-					else
-						tagLocalizedName = tagLocalizedName.Value
 					end
 					local nextText = tagData.GetParam(character, tagLocalizedName, tagData.Param.Value)
 					paramText = paramText.."<br>"..nextText

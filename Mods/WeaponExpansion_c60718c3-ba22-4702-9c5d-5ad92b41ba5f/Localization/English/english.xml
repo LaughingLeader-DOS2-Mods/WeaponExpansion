@@ -295,7 +295,7 @@
 	<content contentuid="h1d0ec32eg270ag4b09ga012g5d3b29e2560d">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery V&lt;/font&gt;</content>
 	<content contentuid="h1d0f9860gbe8fg4aa2gba49gd44b218a8e9f">Lightningrod</content>
 	<content contentuid="h1d1757e3gdec6g4f0egb162g3cf349ea1ef3">Immolation Bonus III</content>
-	<content contentuid="h1d2c7bf8g249fg4acbg9c0bg47204fb87c9b">&lt;font color=&apos;#AAAAAA&apos;&gt;Not Yet Implemented&lt;/font&gt;</content>
+	<content contentuid="h1d2c7bf8g249fg4acbg9c0bg47204fb87c9b">&lt;font color=&apos;#FF3333&apos;&gt;Not Yet Implemented&lt;/font&gt;</content>
 	<content contentuid="h1d3537ebgd052g4409gad59gc8127c2796d8">&lt;font color=&apos;#FFB900&apos;&gt;Polearm Mastery V&lt;/font&gt;</content>
 	<content contentuid="h1d3c764dg3dd1g44a4gbe95g35db1db3546b">Burial Blade (Scythe)</content>
 	<content contentuid="h1d58a9e2gf439g4e3eg8f25g8e849ea7a6d5">Throw the displacement charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge randomly teleports characters and barrels within [1] to another displacement charge within 12m.&lt;/font&gt;</content>
@@ -775,7 +775,7 @@
 	<content contentuid="h4f0e6adcg34d8g4c8fgbfecg6fe6a80c7e9d">Character has been impaled by a thrown weapon!</content>
 	<content contentuid="h4f1b9001g7b29g4ac7g928dg0149cdeff75e">&lt;font color=&apos;#FFA900&apos; size=&apos;22&apos;&gt;Bolts Auto-Inserted into Hand Crossbow&lt;/font&gt;</content>
 	<content contentuid="h4f30febcg9b2fg421agb509g6c8d812ce9c6">Perpetual Growth - This item automatically levels up</content>
-	<content contentuid="h4f3937d2gfffbg4e84g922fg608f65fa105e">&lt;font color=&apos;#AAAAAA&apos;&gt;Locked&lt;/font&gt;</content>
+	<content contentuid="h4f3937d2gfffbg4e84g922fg608f65fa105e">&lt;font color=&apos;#555555&apos;&gt;Locked&lt;/font&gt;</content>
 	<content contentuid="h4f3c9483g3718g45f9gacfaga827e3a4972c">A sickle designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h4f4ae650gdac1g4f73g8b0bg00726f3e3c3b">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h5006a424g3d59g4356-baa7g26110b276aab">Runic Knight</content>

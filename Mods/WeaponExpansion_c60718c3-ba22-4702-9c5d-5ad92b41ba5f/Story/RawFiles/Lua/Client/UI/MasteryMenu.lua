@@ -161,18 +161,19 @@ local function buildMasteryDescription(mastery, rank)
 	local i = 1
 	while i <= 5 do
 		local rankText = "_Rank"..tostring(i)
-		local rankHeader = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
-		if rankHeader ~= nil and rankHeader ~= "" then
+		local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
+		if rankDisplayText ~= nil and rankDisplayText ~= "" then
+			local rankHeader = string.format("<font size='24'>%s</font>", rankDisplayText)
 			local description = ""
-			if i <= rank then
-				description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
-				if description == nil or description == "" then
-					description = Text.MasteryMenu.RankPlaceholder.Value
-				end
-			else
+			description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
+			if description == nil or description == "" then
+				description = Text.MasteryMenu.RankPlaceholder.Value
+			elseif i > rank then
 				description = Text.MasteryMenu.RankLocked.Value
 			end
-			local text = Text.MasteryMenu.RankDescriptionTemplate:gsub("%[1%]", rankHeader):gsub("%[2%]", description)
+			local rankInfoText = string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
+			print(rankHeader, rankInfoText)
+			local text = Text.MasteryMenu.RankDescriptionTemplate.Value:gsub("%[1%]", rankHeader):gsub("%[2%]", rankInfoText)
 			output = output .. text
 			if i < 5 then
 				output = output .. "<br>"
