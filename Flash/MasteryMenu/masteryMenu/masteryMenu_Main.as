@@ -150,19 +150,8 @@ package masteryMenu
 			this.accept_mc.setButtonType(2);
 			this.accept_mc.setButtonEvent("requestCloseUI");
 		}
-		
-		public function showControllerHints(param1:Boolean) : *
-		{
-			this.m_isController = param1;
-			this.buttonHintBar_mc.centerButtons = true;
-			this.buttonHintBar_mc.visible = param1;
-			this.accept_mc.visible = !param1;
-			this.close_btn.visible = !param1;
-			this.btn_bg.setController(param1);
-			this.masteryList.m_allowKeepIntoView = param1;
-		}
-		
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
+
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, barPercentage:Number=0, animateBar:Boolean = false) : *
 		{
 			noMasteries_mc.visible = false;
 
@@ -181,14 +170,19 @@ package masteryMenu
 			masteryMC.setTitle(title, descriptionTitle);
 			masteryMC.setDescription(description);
 			masteryMC.alpha = 1;
-			masteryMC.setBar(xpAmount, animateBar);
-			if(showIcon)
-			{
-				masteryMC.newIcon.gotoAndStop(2);
-			}
+			masteryMC.setBar(barPercentage, animateBar);
 			this.masteryList.selectByListID(0);
 		}
 
+		public function setRankNodeTooltipText(listId:Number, currentRank:uint, rank1Text:String, rank2Text:String, rank3Text:String, rank4Text:String) : *
+		{
+			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			if(masteryMC != null)
+			{
+				masteryMC.setupRankNodes(currentRank, rank1Text, rank2Text, rank3Text, rank4Text);
+			}
+		}
+		
 		public function resetList() : *
 		{
 			this.masteryList.clearElements();
@@ -199,6 +193,17 @@ package masteryMenu
 			noMasteries_mc.visible = true;
 			//textHelpers.setFormattedText(this.name_txt, this.emptyListTitle);
 			//textHelpers.setFormattedText(this.desc_txt, this.emptyListDescription);
+		}
+
+		public function showControllerHints(param1:Boolean) : *
+		{
+			this.m_isController = param1;
+			this.buttonHintBar_mc.centerButtons = true;
+			this.buttonHintBar_mc.visible = param1;
+			this.accept_mc.visible = !param1;
+			this.close_btn.visible = !param1;
+			this.btn_bg.setController(param1);
+			this.masteryList.m_allowKeepIntoView = param1;
 		}
 		
 		public function adjustMainScroll() : void

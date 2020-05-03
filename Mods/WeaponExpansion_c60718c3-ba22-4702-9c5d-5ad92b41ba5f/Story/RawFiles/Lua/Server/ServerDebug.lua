@@ -127,9 +127,14 @@ function DebugInit()
     CharacterAddAbility(host, "RogueLore", 4)
 
     local x,y,z = GetPosition(host)
-	for mastery,masterData in pairs(Masteries) do
-        TagMasteryRanks(host, mastery, 4)
-        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,4,Mastery.Variables.RankVariables[3].NextLevel + 1)
+    for mastery,masterData in pairs(Masteries) do
+        local rank = Ext.Random(0,4)
+        local xp = 0
+        if rank > 0 then
+            xp = Mastery.Variables.RankVariables[rank-1].NextLevel + 1
+        end
+        TagMasteryRanks(host, mastery, rank)
+        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)
 	end
 
     if ItemTemplateIsInPartyInventory(host, "ad15f666-285d-4634-a832-ea643fa0a9d2", 0) <= 0 then

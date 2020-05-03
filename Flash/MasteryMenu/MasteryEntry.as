@@ -7,7 +7,7 @@ package
 	{
 		public var masteryArt:MovieClip;
 		public var masteryFrame:MovieClip;
-		public var newIcon:MovieClip;
+		public var icon_mc:MovieClip;
 		public var m_Id:Number;
 		
 		public var m_MasteryId:String;
@@ -70,6 +70,11 @@ package
 		{
 			this.xpBar.setBarColour(color);
 		}
+
+		public function setupRankNodes(targetRank:uint, rank1Text:String, rank2Text:String, rank3Text:String, rank4Text:String) : *
+		{
+			this.xpBar.setupRankNodes(targetRank, rank1Text, rank2Text, rank3Text, rank4Text);
+		}
 		
 		public function getTitle() : *
 		{
@@ -88,19 +93,12 @@ package
 		
 		public function selectElement() : *
 		{
-			this.masteryFrame.bg_mc.gotoAndStop(2);
-			this.masteryFrame.masteryOverlay.gotoAndStop(2);
+			this.masteryFrame.select();
 		}
 		
 		public function deselectElement() : *
 		{
-			this.masteryFrame.bg_mc.gotoAndStop(1);
-			this.masteryFrame.masteryOverlay.gotoAndStop(1);
-		}
-		
-		public function setAsNew() : *
-		{
-			this.newIcon.gotoAndStop(2);
+			this.masteryFrame.deselect();
 		}
 		
 		function frame1() : *

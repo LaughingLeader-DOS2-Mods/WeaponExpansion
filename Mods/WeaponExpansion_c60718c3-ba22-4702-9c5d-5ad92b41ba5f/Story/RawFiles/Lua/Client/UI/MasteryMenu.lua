@@ -75,7 +75,9 @@ end
 
 local function OnMenuEvent(ui, call, ...)
 	local params = {...}
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(LeaderLib.Common.Dump(params))..")")
+	if call ~= "overMastery" then
+		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(LeaderLib.Common.Dump(params))..")")
+	end
 	if call == "requestCloseUI" then
 		ui:Invoke("closeMenu")
 		panelOpen = false
@@ -114,6 +116,23 @@ local function initializeMasteryMenu()
 	if ui ~= nil and panelOpen == false then
 		masteryMenu = ui
 		ui:Invoke("setEmptyListText", Text.MasteryMenu.NoMasteriesTitle.Value, Text.MasteryMenu.NoMasteriesDescription.Value)
+
+		local xpMax = Mastery.Variables.RankVariables[3].NextLevel
+		local i = 1
+		while i < 4 do
+			local data = Mastery.Variables.RankVariables[i-1]
+			local barPercentage = 0
+			local xp = data.NextLevel
+			--barPercentage = math.floor(((xp / xpMax) * 100) + 0.5) / 100
+			barPercentage = (xp / xpMax)
+			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:initializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+			ui:Invoke("setRankNodePosition", i, barPercentage)
+			i = i + 1
+		end
+		for i,data in ipairs(Mastery.Variables.RankVariables) do
+
+		end
+
 		if not registeredListeners then
 			Ext.RegisterUICall(ui, "requestCloseUI", OnMenuEvent)
 			Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
@@ -210,9 +229,19 @@ local function OpenMasteryMenu(characterMasteryData)
 		local i = 0
 		for _,tag in ipairs(masteryKeys) do
 			local data = Masteries[tag]
-			local xp = characterMasteryData.Masteries[tag].XP
 			local rank = characterMasteryData.Masteries[tag].Rank
-			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data), buildMasteryDescription(tag,rank), 0, xp, true)
+			local xp = characterMasteryData.Masteries[tag].XP
+			local xpMax = Mastery.Variables.RankVariables[3].NextLevel
+			local barPercentage = 0.0
+			if xp > 0 and xp < xpMax then
+				barPercentage = math.floor(((xp / xpMax) * 100) + 0.5) / 100
+			else
+				barPercentage = 1.0
+			end
+
+			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data), buildMasteryDescription(tag,rank), barPercentage, false)
+			ui:Invoke("setRankNodeTooltipText", i, rank, data.Ranks[1].Value, data.Ranks[2].Value, data.Ranks[3].Value, data.Ranks[4].Value)
+			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			i = i + 1
 		end
 		ui:Invoke("selectMastery", 0)

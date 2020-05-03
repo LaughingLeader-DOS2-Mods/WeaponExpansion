@@ -54,6 +54,10 @@ package LS_Classes
 			{
 				barPercentage = 1;
 			}
+			else if(barPercentage < 0)
+			{
+				barPercentage = 0;
+			}
 			if(animate)
 			{
 				this.percTemp = barPercentage;

@@ -29,6 +29,8 @@ package masteryMenu
 		public var items_array:Array;
 
 		private var lastFocus:InteractiveObject;
+
+		public static var rankNodePositions:Array = new Array();
 		
 		public function MainTimeline()
 		{
@@ -165,9 +167,19 @@ package masteryMenu
 			this.masteryMenuMC.resetList();
 		}
 		
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, showIcon:Boolean, xpAmount:Number=0, animateBar:Boolean = true) : *
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, barPercentage:Number=0, animateBar:Boolean = false) : *
 		{
-			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,description,showIcon,xpAmount,animateBar);
+			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,description,barPercentage,animateBar);
+		}
+
+		public function setRankNodePosition(rank:uint, barPercentage:Number) : *
+		{
+			rankNodePositions[rank] = barPercentage
+		}
+
+		public function setRankNodeTooltipText(listId:Number, currentRank:uint, rank1Text:String, rank2Text:String, rank3Text:String, rank4Text:String) : *
+		{
+			this.masteryMenuMC.setRankNodeTooltipText(listId, currentRank, rank1Text, rank2Text, rank3Text, rank4Text);
 		}
 		
 		public function selectMastery(id:Number) : *
@@ -181,6 +193,9 @@ package masteryMenu
 			this.alignment = "none";
 			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu");
 			this.items_array = new Array();
+
+			rankNodePositions[0] = 0.0;
+			rankNodePositions[4] = 1.0;
 		}
 	}
 }

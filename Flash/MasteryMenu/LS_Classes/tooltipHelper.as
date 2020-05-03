@@ -78,7 +78,7 @@ package LS_Classes
 					yOffset = targetMC.tooltipYOffset;
 				}
 				globalPos = getGlobalPositionOfMC(targetMC,displayObj);
-				ExternalInterface.call("showTooltip",targetMC.tooltip,globalPos.x + xOffset,globalPos.y + yOffset,width,height,tooltipPos,stayOpen);
+				ExternalInterface.call("showTooltip", targetMC.tooltip, globalPos.x + xOffset, globalPos.y + yOffset, width, height, tooltipPos, stayOpen);
 				displayMC = displayObj as MovieClip;
 				displayMC.hasTooltip = true;
 			}
