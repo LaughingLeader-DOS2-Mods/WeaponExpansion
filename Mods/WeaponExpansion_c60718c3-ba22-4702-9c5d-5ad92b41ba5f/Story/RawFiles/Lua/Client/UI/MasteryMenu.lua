@@ -5,7 +5,8 @@ MasteryMenu = {
 	Initialized = false,
 	Instance = nil,
 	DisplayingSkillTooltip = false,
-	SelectedMastery = nil
+	SelectedMastery = nil,
+	LastSelected = 0
 }
 local function CloseMenu()
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
@@ -45,6 +46,9 @@ end
 
 local function SetPlayerHandle(ui, call, handle)
 	CHARACTER_HANDLE = handle
+	if MasteryMenu.Instance ~= nil then
+		MasteryMenu.Instance:Invoke("setPlayerHandle", CHARACTER_HANDLE)
+	end
 end
 
 local function SetupListeners()
@@ -98,9 +102,11 @@ local function OnMenuEvent(ui, call, ...)
 			CloseMenu()
 		end
 		MasteryMenu.Open = not MasteryMenu.Open
+	elseif call == "onMasterySelected" then
+		MasteryMenu.LastSelected = params[1]
+		MasteryMenu.SelectedMastery = params[2]
 	elseif call == "selectedMastery" then
 		ui:Invoke("selectMastery", params[1])
-		MasteryMenu.SelectedMastery = params[2]
 	elseif call == "mastery_showSkillTooltip" then
 		MasteryMenu.DisplayingSkillTooltip = true
 		ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[1], params[2], params[3], params[4], params[5])
@@ -124,6 +130,9 @@ local function tryGetCharacterHandle()
 		local handle = sheet:GetValue("hotbar_mc.characterHandle", "Number")
 		if handle ~= nil then
 			MasteryMenu.CHARACTER_HANDLE = handle
+			if MasteryMenu.Instance ~= nil then
+				MasteryMenu.Instance:Invoke("setPlayerHandle", CHARACTER_HANDLE)
+			end
 			LeaderLib.PrintDebug("Set MasteryMenu.CHARACTER_HANDLE to ",MasteryMenu.CHARACTER_HANDLE)
 		end
 	end
@@ -170,6 +179,7 @@ local function initializeMasteryMenu()
 			Ext.RegisterUICall(ui, "toggleMasteryMenu", OnMenuEvent)
 			Ext.RegisterUICall(ui, "overMastery", OnMenuEvent)
 			Ext.RegisterUICall(ui, "selectedMastery", OnMenuEvent)
+			Ext.RegisterUICall(ui, "onMasterySelected", OnMenuEvent)
 			Ext.RegisterUICall(ui, "mastery_showSkillTooltip", OnMenuEvent)
 			Ext.RegisterUICall(ui, "mastery_hideSkillTooltip", OnMenuEvent)
 			
@@ -221,7 +231,7 @@ local function getRankTooltip(data, i)
 	end
 end
 
-local function buildMasteryDescription(mastery, rank, masteryData)
+local function buildMasteryDescription(ui, listId, mastery, masteryData)
 	local output = ""
 	local i = 1
 	while i < 5 do
@@ -248,10 +258,7 @@ local function buildMasteryDescription(mastery, rank, masteryData)
 			end
 			local rankInfoText = string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
 			local text = Text.MasteryMenu.RankDescriptionTemplate.Value:gsub("%[1%]", rankHeader):gsub("%[2%]", rankInfoText)
-			output = output .. text
-			if i < 5 then
-				output = output .. "<br>"
-			end
+			ui:invoke("addMasteryDescription", listId, text)
 		end
 		i = i + 1
 	end
@@ -299,7 +306,8 @@ local function OpenMasteryMenu(characterMasteryData)
 			local xpPercentage = math.floor(barPercentage * 100);
 			local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank))
 			local masteryColorTitle = getMasteryDescriptionTitle(data)
-			ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, buildMasteryDescription(tag,rank,data), rank, barPercentage, rank >= Mastery.Variables.MaxRank)
+			ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
+			buildMasteryDescription(ui, i, tag,data)
 			local expRankDisplay = rankDisplayText
 			if rank >= Mastery.Variables.MaxRank then
 				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
@@ -314,7 +322,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			i = i + 1
 		end
-		--ui:Invoke("selectMastery", 0)
+		ui:Invoke("selectMastery", MasteryMenu.LastSelected)
 		ui:Invoke("openMenu")
 		MasteryMenu.Open = true
 	else

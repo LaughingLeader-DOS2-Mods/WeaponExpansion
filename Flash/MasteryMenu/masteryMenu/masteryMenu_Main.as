@@ -11,6 +11,7 @@ package masteryMenu
 	import flash.text.TextField;
 	import flash.utils.Timer;
 	import flash.geom.Point;
+	import data.DescriptionData;
 	
 	public dynamic class masteryMenu_Main extends MovieClip
 	{
@@ -22,7 +23,7 @@ package masteryMenu
 		
 		public var close_btn:MovieClip;
 		
-		public var desc_txt:TextField;
+		public var desc_mc:masteryMenu_Description;
 		
 		public var masteryHandle:MovieClip;
 		
@@ -32,7 +33,7 @@ package masteryMenu
 
 		public var noMasteries_mc:MovieClip;
 		
-		public var masteryCount;
+		public var masteryCount:int = 0;
 		
 		public var m_isController:Boolean;
 		
@@ -45,12 +46,14 @@ package masteryMenu
 		
 		public var masteryList:scrollList;
 		
-		public var _scrollbar:scrollbar_text;
+		//public var _scrollbar:scrollbar_text;
+		public var descriptionPane:scrollList;
 		
 		public var time:Timer;
 
 		public var emptyListTitle:String = "";
 		public var emptyListDescription:String = "";
+		public var emptyListData:DescriptionData;
 		
 		public function masteryMenu_Main()
 		{
@@ -76,16 +79,34 @@ package masteryMenu
 			this.masteryList.OnSelectionChanged = this.onSelectionChanged;
 			this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 			this.masteryHandle.addChild(this.masteryList);
-			this._scrollbar = new scrollbar_text("downText_id","upText_id","handleText_id","scrollStory_bg_id");
-			addChild(this._scrollbar);
-			this._scrollbar.SB_SPACING = 20;
-			this._scrollbar.m_scaleBG = false;
-			this._scrollbar.addContent(this.desc_txt);
-			this._scrollbar.scrollbarVisible();
-			this._scrollbar.m_bg_mc.alpha = 0;
-			this.desc_txt.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
-			this.desc_txt.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
-			//this.desc_txt.mouseChildren = true;
+
+			this.descriptionPane = new scrollList();
+			this.descriptionPane.setFrame(462,672);
+			//this.descriptionPane.SB_SPACING = 10;
+			//this.descriptionPane.TOP_SPACING = 15;
+			//this.descriptionPane.SIDE_SPACING = 20;
+			//this.descriptionPane.EL_SPACING = 1;
+			this.descriptionPane.mouseWheelWhenOverEnabled = true;
+			this.descriptionPane.m_scrollbar_mc.m_hideWhenDisabled = true;
+			this.descriptionPane.m_customElementHeight = this.ELH;
+			this.descriptionPane.m_scrollbar_mc.m_SCROLLSPEED = this.ELH;
+			this.descriptionPane.m_scrollbar_mc.m_scrollOverShoot = this.ELH;
+			this.descriptionPane.m_scrollbar_mc.x = this.descriptionPane.m_scrollbar_mc.x - 15;
+			this.descriptionPane.m_cyclic = true;
+			this.descriptionPane.OnSelectionChanged = this.onSelectionChanged;
+			this.descriptionPane.m_scrollbar_mc.m_animateScrolling = true;
+			addChild(this.descriptionPane);
+			this.descriptionPane.addElement(desc_mc);
+			this.descriptionPane.checkScrollBar();
+			// this._scrollbar = new scrollbar_text("downText_id","upText_id","handleText_id","scrollStory_bg_id");
+			// addChild(this._scrollbar);
+			// this._scrollbar.SB_SPACING = 20;
+			// this._scrollbar.m_scaleBG = false;
+			// this._scrollbar.addContent(this.desc_mc);
+			// this._scrollbar.scrollbarVisible();
+			// this._scrollbar.m_bg_mc.alpha = 0;
+			this.desc_mc.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
+			this.desc_mc.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
 			this.buttonHintBar_mc.centerButtons = true;
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
 		}
@@ -98,24 +119,11 @@ package masteryMenu
 		public function onDescriptionMouseIn(e:MouseEvent) : void
 		{
 			this._scrollbar.mouseWheelEnabled = true;
-
-			// var myObjects: Array = stage.getObjectsUnderPoint(new Point(stage.mouseX, stage.mouseY));
-			// trace(myObjects);
-			// for each (var obj in myObjects){
-			// 	trace(obj.name);
-			// }
-			var pos:Point = desc_txt.localToGlobal(new Point(0,0));
-			//ExternalInterface.call("showSkillTooltip",3.4431514429141e-282,"Target_CripplingBlow",pos.x,pos.y,desc_txt.width,desc_txt.height);
-			ExternalInterface.call("mastery_showSkillTooltip","Target_CripplingBlow",pos.x,pos.y,50.522705078125, 58.118209838867);
-			//ExternalInterface.call("showSkillTooltip",3.4431514429141e-282,"Target_CripplingBlow",pos.x,pos.y,50.522705078125, 58.118209838867);
-			//ExternalInterface.call("showSkillTooltip",3.4431514429141e-282,"Target_CripplingBlow",339.00001335144, 940.0, 50.522705078125, 58.118209838867);
 		}
 		
 		public function onDescriptionMouseOut(e:MouseEvent) : void
 		{
 			this._scrollbar.mouseWheelEnabled = false;
-			ExternalInterface.call("hideTooltip");
-			ExternalInterface.call("mastery_hideSkillTooltip");
 		}
 		
 		public function resetTextScrollbar() : *
@@ -152,10 +160,15 @@ package masteryMenu
 			emptyListTitle = title;
 			emptyListDescription = description;
 
+			if(emptyListData == null)
+			{
+				emptyListData = new DescriptionData(emptyListDescription);
+			}
+
 			if (this.masteryCount <= 0)
 			{
 				this.name_txt.htmlText = this.emptyListTitle;
-				this.desc_txt.htmlText = this.emptyListDescription;
+				this.desc_mc.addEntry(emptyListData);
 			}
 		}
 		
@@ -191,6 +204,24 @@ package masteryMenu
 			this.masteryList.selectByListID(0);
 		}
 
+		public function addMasteryDescription(listId:Number, text:String) : *
+		{
+			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			if(masteryMC != null)
+			{
+				masteryMC.addDescription(text);
+			}
+		}
+
+		public function addMasterySkill(listId:Number, index:uint, skill:String, icon:String) : *
+		{
+			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			if(masteryMC != null)
+			{
+				masteryMC.addSKill(index, skill, icon);
+			}
+		}
+
 		public function setExperienceBarTooltip(listId:Number, text:String) : *
 		{
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
@@ -222,12 +253,12 @@ package masteryMenu
 		{
 			this.masteryList.clearElements();
 			this.name_txt.htmlText = this.emptyListTitle;
-			this.desc_txt.htmlText = this.emptyListDescription;
+			this.desc_mc.clearElements();
+			this.desc_mc.addEntry(this.emptyListData);
 			this.resetTextScrollbar();
 			this.masteryCount = 0;
 			noMasteries_mc.visible = true;
 			//textHelpers.setFormattedText(this.name_txt, this.emptyListTitle);
-			//textHelpers.setFormattedText(this.desc_txt, this.emptyListDescription);
 		}
 
 		public function showControllerHints(param1:Boolean) : *
@@ -263,9 +294,23 @@ package masteryMenu
 		{
 			var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
 			this.name_txt.htmlText = entry.getDescriptionTitle();
-			this.desc_txt.htmlText = entry.getDescription();
+
+			if (entry.descriptions.length > 0)
+			{
+				this.desc_mc.clearElements();
+				var i:uint = 0;
+				while (i < entry.descriptions.length)
+				{
+					this.desc_mc.addEntry(entry.descriptions[i]);
+					i = i + 1;
+				}
+			}
+			else
+			{
+				this.desc_mc.addEntry(this.emptyListData);
+			}
+			this.desc_mc.alignEntries();
 			//textHelpers.setFormattedText(this.name_txt, entry.getDescriptionTitle());
-			//textHelpers.setFormattedText(this.desc_txt, entry.getDescription());
 			this.resetTextScrollbar();
 		}
 		
@@ -278,6 +323,7 @@ package masteryMenu
 				currentMC.deselectElement();
 			}
 			this.masteryList.selectMC(nextMC);
+			ExternalInterface.call("onMasterySelected", nextMC.m_Id, nextMC.m_MasteryId);
 		}
 		
 		public function getCurrentSelection() : int
@@ -285,7 +331,7 @@ package masteryMenu
 			return this.masteryList.currentSelection;
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			this.masteryCount = 0;
 			this.m_isController = false;

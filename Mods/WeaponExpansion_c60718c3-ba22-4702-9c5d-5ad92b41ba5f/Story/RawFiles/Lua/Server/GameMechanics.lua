@@ -165,7 +165,7 @@ local function IsUnarmedDamage(handle)
 	return true
 end
 
-function LLWEAPONEX_Ext_ScaleUnarmedDamage(attacker, target, damage, handle)
+function ScaleUnarmedDamage(attacker, target, damage, handle)
 	if damage > 0 and IsUnarmedDamage(handle) then
 		local unarmedMastery = 0
 		local masteryEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(attacker, "LLWEAPONEX_Unarmed", nil, nil)
@@ -200,5 +200,3 @@ function LLWEAPONEX_Ext_ScaleUnarmedDamage(attacker, target, damage, handle)
 		--Ext.Print("Unarmed damage: ("..LeaderLib.Common.Dump(damages)..")")
 	end
 end
-
-Ext.NewCall(LLWEAPONEX_Ext_ScaleUnarmedDamage, "LLWEAPONEX_Ext_ScaleUnarmedDamage", "(CHARACTERGUID)_Attacker, (GUIDSTRING)_Target, (INTEGER)_Damage, (INTEGER64)_Handle")

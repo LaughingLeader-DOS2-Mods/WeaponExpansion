@@ -20,9 +20,6 @@ package masteryMenu
 		public var masteryEntry:MovieClip;
 		
 		public var buttonType:Number;
-		
-		public var m_Id:Number;
-		public var m_Mastery:String;
 
 		public var selected:Boolean = false;
 		
@@ -30,12 +27,6 @@ package masteryMenu
 		{
 			super();
 			addFrameScript(0,this.frame1);
-		}
-		
-		public function setId(id:Number, mastery:String) : *
-		{
-			this.m_Id = id;
-			this.m_Mastery = mastery;
 		}
 		
 		public function onOut(e:MouseEvent) : *
@@ -54,14 +45,10 @@ package masteryMenu
 				this.bg_mc.gotoAndStop(2);
 				this.masteryOverlay.gotoAndStop(2);
 			}
-			ExternalInterface.call("PlaySound","UI_Generic_Over");
-			ExternalInterface.call("overMastery", this.m_Id, this.m_Mastery);
 		}
 
 		public function onDown(e:MouseEvent) : *
 		{
-			ExternalInterface.call("PlaySound","UI_Generic_Click");
-			ExternalInterface.call("selectedMastery", this.m_Id, this.m_Mastery);
 			this.select();
 		}
 
@@ -81,9 +68,6 @@ package masteryMenu
 		
 		function frame1() : *
 		{
-			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
-			addEventListener(MouseEvent.ROLL_OVER,this.onOver);
-			addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
 			this.masteryEntry = MovieClip(this.parent);
 			this.buttonType = 1;
 		}

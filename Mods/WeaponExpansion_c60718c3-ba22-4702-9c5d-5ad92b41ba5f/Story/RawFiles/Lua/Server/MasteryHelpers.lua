@@ -129,15 +129,13 @@ function IsWeaponSkill(skill)
 			HasRequirement(Ext.StatGetAttribute(skill, "Requirement"))
 end
 
---- @param uuid character
---- @param expGain skill
-local function OnSkillCast(character,skill)
+--- @param character string
+--- @param skill string
+function OnSkillCast(character,skill)
 	if IsPlayer(character) and IsWeaponSkill(skill) then
 		AddMasteryExperienceForAllActive(character, 0.5)
 	end
 end
-
-Ext.NewCall(OnSkillCast, "LLWEAPONEX_Ext_OnSkillCast", "(CHARACTERGUID)_Character, (REAL)_ExperienceGain")
 
 --- @param uuid string
 --- @param mastery string

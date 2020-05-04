@@ -1,9 +1,6 @@
 package
 {
 	import flash.display.MovieClip;
-	import flash.geom.ColorTransform;
-	import flash.filters.ColorMatrixFilter;
-	import fl.motion.AdjustColor;
 	import flash.events.MouseEvent;
 	import LS_Classes.tooltipHelper;
 	import flash.external.ExternalInterface;
@@ -65,7 +62,7 @@ package
 			}
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			this.stop();
 			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);

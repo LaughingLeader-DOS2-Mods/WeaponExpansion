@@ -26,7 +26,7 @@ NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 THEN
-LLWEAPONEX_Ext_OnItemEquipped(_Char, _Item);
+NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item);
 //END_REGION
 
 //REGION PRESET_APPLIED
@@ -82,7 +82,7 @@ LLWEAPONEX_Ext_OnHit(_Target, _Source, _Damage, _StatusHandle);
 IF
 SkillCast(_Char, _Skill, _, _)
 THEN
-LLWEAPONEX_Ext_OnSkillCast(_Char, _Skill);
+NRD_ModCall("WeaponExpansion", "OnSkillCast", (STRING)_Char, _Skill);
 //END_REGION
 EXITSECTION
 ENDEXITSECTION

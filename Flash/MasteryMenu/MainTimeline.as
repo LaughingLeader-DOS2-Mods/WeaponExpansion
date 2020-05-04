@@ -32,6 +32,7 @@ package
 		public function MainTimeline()
 		{
 			super();
+			Registry.Init();
 			IconAtlases.Init();
 			addFrameScript(0,this.frame1);
 		}
@@ -139,6 +140,11 @@ package
 		{
 			return false;
 		}
+
+		public function setPlayerHandle(handle:Number) : *
+		{
+			Registry.CharacterHandle = handle;
+		}
 		
 		public function setMaxRank(maxRank:int) : *
 		{
@@ -185,9 +191,19 @@ package
 			this.masteryMenuMC.resetList();
 		}
 		
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : *
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : *
 		{
-			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,description,currentRank,barPercentage,isMastered);
+			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,currentRank,barPercentage,isMastered);
+		}
+
+		public function addMasteryDescription(listId:Number, text:String) : *
+		{
+			this.masteryMenuMC.addMasteryDescription(listId, text);
+		}
+
+		public function addMasterySkill(listId:Number, index:uint, skill:String, icon:String) : *
+		{
+			this.masteryMenuMC.addMasterySkill(listId, index, skill, icon);
 		}
 
 		public function setRankNodePosition(rank:uint, barPercentage:Number) : *
@@ -210,7 +226,7 @@ package
 			this.masteryMenuMC.select(id);
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			this.layout = "fixed";
 			this.alignment = "none";

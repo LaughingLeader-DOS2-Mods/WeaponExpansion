@@ -5,18 +5,20 @@ package
 	import LS_Classes.tooltipHelper;
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
+	import data.DescriptionData;
+	import data.SkillData;
 	
 	public dynamic class MasteryEntry extends MovieClip
 	{
-		public var masteryArt:MovieClip;
 		public var masteryFrame:MovieClip;
 		public var icon_mc:MovieClip;
-		public var m_Id:Number;
 		
+		public var m_Id:Number;
 		public var m_MasteryId:String;
 		public var m_MasteryTitle:String;
 		public var m_MasteryDescriptionTitle:String;
-		public var m_MasteryDesc:String;
+
+		public var descriptions:Array = new Array();
 		
 		public const DECOR_MARGIN:uint = 8;
 
@@ -31,11 +33,7 @@ package
 		public function setId(id:Number, mastery:String) : *
 		{
 			this.m_Id = id;
-			this.masteryArt.gotoAndStop(id + 2);
-			this.masteryArt.visible = true;
-			this.masteryArt.visible = false;
 			this.m_MasteryId = mastery;
-			this.masteryFrame.setId(id, mastery);
 		}
 		
 		public function setTitle(title:String, descriptionTitle:String = "") : *
@@ -59,9 +57,17 @@ package
 			this.masteryFrame.bottom_decor.y = this.masteryFrame.title_txt.y + this.masteryFrame.title_txt.height + this.DECOR_MARGIN * 2;
 		}
 		
-		public function setDescription(text:String) : *
+		public function addDescription(text:String) : *
 		{
-			this.m_MasteryDesc = text;
+			var d:DescriptionData = new DescriptionData(text);
+			descriptions.push(d);
+		}
+
+		public function addSkill(index:uint, skill:String, icon:String) : *
+		{
+			var skillMap:SkillData = new SkillData(skill, icon);
+			var d:DescriptionData = descriptions[index];
+			d.skills.push(skillMap);
 		}
 		
 		public function setBar(barPercentage:Number, animate:Boolean) : *
@@ -145,11 +151,6 @@ package
 			return this.m_MasteryDescriptionTitle;
 		}
 		
-		public function getDescription() : *
-		{
-			return this.m_MasteryDesc;
-		}
-		
 		public function selectElement() : *
 		{
 			this.masteryFrame.select();
@@ -159,12 +160,34 @@ package
 		{
 			this.masteryFrame.deselect();
 		}
+
+		public function onOut(e:MouseEvent) : *
+		{
+			masteryFrame.onOut(e);
+		}
 		
-		function frame1() : *
+		public function onOver(e:MouseEvent) : *
+		{
+			masteryFrame.onOver(e);
+			ExternalInterface.call("overMastery", this.m_Id, this.m_Mastery);
+		}
+
+		public function onDown(e:MouseEvent) : *
+		{
+			masteryFrame.onDown(e);
+			ExternalInterface.call("PlaySound","UI_Generic_Click");
+			ExternalInterface.call("selectedMastery", this.m_Id, this.m_Mastery);
+		}
+		
+		internal function frame1() : *
 		{
 			//this.xpBar.mouseChildren = false;
 			//this.xpBar.mouseEnabled = false;
 			icon_mc.tooltip = Registry.MasteredText;
+
+			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
+			addEventListener(MouseEvent.ROLL_OVER,this.onOver);
+			addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
 		}
 	}
 }

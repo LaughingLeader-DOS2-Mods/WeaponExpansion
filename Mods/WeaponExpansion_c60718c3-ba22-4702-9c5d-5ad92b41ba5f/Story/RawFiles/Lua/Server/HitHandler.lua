@@ -18,9 +18,11 @@ end
 --- @param damage integer
 --- @param handle integer
 local function OnPrepareHit(target,source,damage,handle)
-	
+	if source ~= nil and CharacterGetEquippedWeapon(source) == nil then
+		ScaleUnarmedDamage(target,source,damage,handle)
+	end
 end
-Ext.NewCall(OnPrepareHit, "LLWEAPONEX_Ext_OnPrepareHit", "(GUIDSTRING)_Target, (GUIDSTRING)_Instigator, (INTEGER)_Damage, (INTEGER64)_StatusHandle")
+Ext.NewCall(OnPrepareHit, "LLWEAPONEX_Ext_OnPrepareHit", "(GUIDSTRING)_Target, (GUIDSTRING)_Instigator, (INTEGER)_Damage, (INTEGER64)_Handle")
 
 --- @param target string
 --- @param source string

@@ -51,14 +51,6 @@ THEN
 NOT DB_LLWEAPONEX_Unarmed_Temp_BasicAttacking(_Attacker, _Target);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Unarmed:ClearBasicAttackDB] Cleared DB entry");
 */
-
-IF
-NRD_OnPrepareHit(_Target, (CHARACTERGUID)_Attacker, _Damage, _Handle)
-//NRD_OnHit(_Target, (CHARACTERGUID)_Attacker, _Damage, _Handle)
-AND
-NOT CharacterGetEquippedWeapon(_Attacker, _)
-THEN
-LLWEAPONEX_Ext_ScaleUnarmedDamage(_Attacker, _Target, _Damage, _Handle);
 //END_REGION
 
 //REGION NO_WEAPON_DAMAGE

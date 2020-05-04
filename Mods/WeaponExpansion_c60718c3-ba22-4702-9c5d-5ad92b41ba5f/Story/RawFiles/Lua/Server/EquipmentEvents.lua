@@ -9,7 +9,7 @@ end
 
 --- @param uuid string
 --- @param item string
-local function OnItemEquipped(uuid,item)
+function OnItemEquipped(uuid,item)
 	--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	--local offhand = CharacterGetEquippedItem(uuid, "Shield")
 	
@@ -41,7 +41,6 @@ local function OnItemEquipped(uuid,item)
 		end
 	end
 end
-Ext.NewCall(OnItemEquipped, "LLWEAPONEX_Ext_OnItemEquipped", "(CHARACTERGUID)_Character, (ITEMGUID)_Item")
 
 local rodSkills = {
 	Air = {"Projectile_LLWEAPONEX_ShootRod_Air", "Projectile_LLWEAPONEX_ShootRod_Air_Offhand"},

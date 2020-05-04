@@ -7,14 +7,14 @@ package
 	import flash.geom.Rectangle;
 	import flash.geom.Point;
 	
-	public dynamic class iconDisplay extends MovieClip
+	public dynamic class IconDisplay extends MovieClip
 	{
 		public var iconData:BitmapData;
 		public var iconBitmap:Bitmap;
 		public var iconWidth:int = 64;
 		public var iconHeight:int = 64;
 		
-		public function iconDisplay(w:int=64,h:int=64)
+		public function IconDisplay(w:int=64,h:int=64)
 		{
 			super();
 			iconWidth = w;
@@ -22,7 +22,6 @@ package
 			iconData = new BitmapData(iconWidth, iconHeight, true, 0x000000);
 			iconBitmap = new Bitmap(iconData, PixelSnapping.NEVER, true);
 			addChild(iconBitmap);
-
 			addFrameScript(0,this.frame1);
 		}
 		
