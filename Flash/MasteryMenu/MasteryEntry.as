@@ -65,9 +65,8 @@ package
 
 		public function addSkill(index:uint, skill:String, icon:String) : *
 		{
-			var skillMap:SkillData = new SkillData(skill, icon);
 			var d:DescriptionData = descriptions[index];
-			d.skills.push(skillMap);
+			d.addSkillData(skill, icon);
 		}
 		
 		public function setBar(barPercentage:Number, animate:Boolean) : *

@@ -3,7 +3,7 @@ package data
 	public class DescriptionData
 	{
 		public var descriptionText:String = "";
-		public var skills:Array;
+		public var skills:Array = new Array();
 		public var skillsCount:int = 0;
 
 		public function DescriptionData(text:String)

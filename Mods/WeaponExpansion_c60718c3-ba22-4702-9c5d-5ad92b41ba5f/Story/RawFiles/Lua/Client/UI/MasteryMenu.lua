@@ -231,6 +231,21 @@ local function getRankTooltip(data, i)
 	end
 end
 
+local function getSkillsFromDescription(descriptionText)
+	local skills = {}
+	for skillWord in string.gmatch(descriptionText, "(<skill.-/>)") do
+		descriptionText = descriptionText:gsub(skillWord, "")
+		local _,_,skillName = skillWord:find("id='(.-)'")
+		local _,_,icon = skillWord:find("icon='(.-)'")
+
+		if skillName ~= nil then
+			if icon == nil then icon = "unknown" end
+			table.insert(skills, {id=skillName, icon=icon})
+		end
+	end
+	return descriptionText,skills
+end
+
 local function buildMasteryDescription(ui, listId, mastery, masteryData)
 	local output = ""
 	local i = 1
@@ -258,7 +273,13 @@ local function buildMasteryDescription(ui, listId, mastery, masteryData)
 			end
 			local rankInfoText = string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
 			local text = Text.MasteryMenu.RankDescriptionTemplate.Value:gsub("%[1%]", rankHeader):gsub("%[2%]", rankInfoText)
-			ui:invoke("addMasteryDescription", listId, text)
+			local finalText,skills = getSkillsFromDescription(text)
+			ui:invoke("addMasteryDescription", listId, finalText)
+			if #skills > 0 then
+				for _,v in ipairs(skills) do
+					ui:invoke("addMasterySkill", listId, i, v.id, v.icon)
+				end
+			end
 		end
 		i = i + 1
 	end
