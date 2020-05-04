@@ -1,13 +1,12 @@
-package masteryMenu
+package
 {
 	import flash.display.MovieClip;
 	import flash.display.InteractiveObject;
 	import flash.external.ExternalInterface;
+	import masteryMenu.*;
 	
 	public dynamic class MainTimeline extends MovieClip
 	{
-		 
-		
 		public var masteryMenuMC:MovieClip;
 
 		public var menu_btn:MovieClip;
@@ -25,16 +24,15 @@ package masteryMenu
 		public const anchorTarget:String = "screen";
 		
 		public var events:Array;
-		
-		public var items_array:Array;
+
+		public var active:Boolean = false;
 
 		private var lastFocus:InteractiveObject;
 
-		public static var rankNodePositions:Array = new Array();
-		
 		public function MainTimeline()
 		{
 			super();
+			IconAtlases.Init();
 			addFrameScript(0,this.frame1);
 		}
 		
@@ -55,6 +53,8 @@ package masteryMenu
 				ExternalInterface.call("inputfocus");
 				this.masteryMenuMC.visible = true;
 				stage.focus = lastFocus;
+
+				active = true;
 			}
 		}
 
@@ -70,66 +70,79 @@ package masteryMenu
 				this.masteryMenuMC.visible = false;
 				lastFocus = stage.focus;
 				stage.focus = null;
+
+				active = false;
 			}
 		}
 		
 		public function onEventUp(eventIndex:Number, param2:Number, param3:Number) : *
 		{
 			var handled:Boolean = false;
-			ExternalInterface.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
-			switch(this.events[eventIndex])
+			if (active)
 			{
-				case "IE UIAccept":
-					break;
-				case "IE UICancel":
-				case "IE ToggleInGameMenu":
-					handled = true;
-					closeMenu();
-					break;
-				case "IE UIUp":
-				case "IE UIDown":
-					handled = true;
-					break;
-				case "IE UIDialogTextUp":
-				case "IE UIDialogTextDown":
-					this.masteryMenuMC.stopScrollText();
-					handled = true;
-					break;
+				//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
+				switch(this.events[eventIndex])
+				{
+					case "IE UIAccept":
+						break;
+					case "IE UICancel":
+					case "IE ToggleInGameMenu":
+						handled = true;
+						closeMenu();
+						break;
+					case "IE UIUp":
+					case "IE UIDown":
+						handled = true;
+						break;
+					case "IE UIDialogTextUp":
+					case "IE UIDialogTextDown":
+						this.masteryMenuMC.stopScrollText();
+						handled = true;
+						break;
+				}
 			}
+			
 			return handled;
 		}
 		
 		public function onEventDown(eventIndex:Number, param2:Number, param3:Number) : *
 		{
 			var handled:Boolean = false;
-			ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
-
-			switch(this.events[eventIndex])
+			if (active)
 			{
-				case "IE UIUp":
-					this.masteryMenuMC.previous();
-					this.masteryMenuMC.adjustMainScroll();
-					handled = true;
-					break;
-				case "IE UIDown":
-					this.masteryMenuMC.next();
-					this.masteryMenuMC.adjustMainScroll();
-					handled = true;
-					break;
-				case "IE UIDialogTextUp":
-					this.masteryMenuMC.startScrollText(true,param3);
-					handled = true;
-					break;
-				case "IE UIDialogTextDown":
-					this.masteryMenuMC.startScrollText(false,param3);
-					handled = true;
+				//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
+				switch(this.events[eventIndex])
+				{
+					case "IE UIUp":
+						this.masteryMenuMC.previous();
+						this.masteryMenuMC.adjustMainScroll();
+						handled = true;
+						break;
+					case "IE UIDown":
+						this.masteryMenuMC.next();
+						this.masteryMenuMC.adjustMainScroll();
+						handled = true;
+						break;
+					case "IE UIDialogTextUp":
+						this.masteryMenuMC.startScrollText(true,param3);
+						handled = true;
+						break;
+					case "IE UIDialogTextDown":
+						this.masteryMenuMC.startScrollText(false,param3);
+						handled = true;
+				}
 			}
 			return handled;
 		}
 
 		public function onEventTerminate(eventIndex:Number) : *
 		{
-			return true;
+			return false;
+		}
+		
+		public function setMaxRank(maxRank:int) : *
+		{
+			Registry.MaxRank = maxRank;
 		}
 		
 		public function setTitle(title:String) : *
@@ -140,6 +153,11 @@ package masteryMenu
 		public function setEmptyListText(title:String, description:String) : *
 		{
 			this.masteryMenuMC.setEmptyListText(title, description);
+		}
+
+		public function setTooltipText(masteredText:String) : *
+		{
+			Registry.MasteredText = masteredText;
 		}
 		
 		public function setButtonText(text:String) : *
@@ -167,19 +185,24 @@ package masteryMenu
 			this.masteryMenuMC.resetList();
 		}
 		
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, barPercentage:Number=0, animateBar:Boolean = false) : *
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : *
 		{
-			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,description,barPercentage,animateBar);
+			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,description,currentRank,barPercentage,isMastered);
 		}
 
 		public function setRankNodePosition(rank:uint, barPercentage:Number) : *
 		{
-			rankNodePositions[rank] = barPercentage
+			Registry.RankNodePositions[rank] = barPercentage
 		}
 
-		public function setRankNodeTooltipText(listId:Number, currentRank:uint, rank1Text:String, rank2Text:String, rank3Text:String, rank4Text:String) : *
+		public function setExperienceBarTooltip(listId:Number, text:String) : *
 		{
-			this.masteryMenuMC.setRankNodeTooltipText(listId, currentRank, rank1Text, rank2Text, rank3Text, rank4Text);
+			this.masteryMenuMC.setExperienceBarTooltip(listId, text);
+		}
+
+		public function setRankTooltipText(listId:Number, rank:int, text:String) : *
+		{
+			this.masteryMenuMC.setRankTooltipText(listId, rank, text);
 		}
 		
 		public function selectMastery(id:Number) : *
@@ -192,10 +215,13 @@ package masteryMenu
 			this.layout = "fixed";
 			this.alignment = "none";
 			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu");
-			this.items_array = new Array();
 
-			rankNodePositions[0] = 0.0;
-			rankNodePositions[4] = 1.0;
+			Registry.RankNodePositions[0] = 0.0;
+			Registry.RankNodePositions[4] = 1.0;
+
+			//var icon = new iconDisplay(32,32);
+			//icon.setIcon(IconAtlases.larianSkillIcons, 10);
+			//this.masteryMenuMC.addChild(icon);
 		}
 	}
 }

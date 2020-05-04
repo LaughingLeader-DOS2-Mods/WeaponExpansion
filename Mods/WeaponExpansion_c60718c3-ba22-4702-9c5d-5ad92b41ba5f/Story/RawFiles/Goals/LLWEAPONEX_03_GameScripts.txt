@@ -8,7 +8,7 @@ LLWEAPONEX_GameScripts_InitSettings()
 THEN
 LeaderLib_GameScripts_ClearScriptsForGroup("WeaponExpansion");
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_00_UI");
-LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_01_GS_00_EquipEvents");
+LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_01_GS_00_Listeners");
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_01_MasteryEvents");
 
 PROC

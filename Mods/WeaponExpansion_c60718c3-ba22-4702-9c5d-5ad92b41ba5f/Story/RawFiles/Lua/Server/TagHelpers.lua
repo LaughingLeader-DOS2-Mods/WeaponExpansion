@@ -3,7 +3,7 @@ local function TagFromStats(uuid, stat)
 	for statWord,tag in pairs(Tags.StatWordToTag) do
 		if string.find(stat, statWord) then
 			SetTag(uuid, tag)
-			LeaderLib.PrintDebug("[WeaponExpansion:TagFromStats] Tagged ("..uuid..")["..stat.."] with ("..tag..").")
+			--LeaderLib.PrintDebug("[WeaponExpansion:TagFromStats] Tagged ("..uuid..")["..stat.."] with ("..tag..").")
 			tagged = true
 		end
 	end
@@ -21,11 +21,11 @@ function TagWeapon(uuid, statType, stat)
 		if type(templateTag) == "table" then
 			for i,tag in pairs(templateTag) do
 				SetTag(uuid, templateTag)
-				LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..template.."] with ("..templateTag..").")
+				--LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..template.."] with ("..templateTag..").")
 			end
 		else
 			SetTag(uuid, templateTag)
-			LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..template.."] with ("..templateTag..").")
+			--LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..template.."] with ("..templateTag..").")
 		end
 		tagged = true
 	else
@@ -37,12 +37,12 @@ function TagWeapon(uuid, statType, stat)
 					local tag = Tags.WeaponTypeToTag[item.Stats.WeaponType]
 					if tag ~= nil then
 						SetTag(uuid, tag)
-						LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..item.StatsId.."] with ("..tag..").")
+						--LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..item.StatsId.."] with ("..tag..").")
 						tagged = true
 					end
 				elseif item.ItemType == "Shield" then
 					SetTag(uuid, "LLWEAPONEX_Shield")
-					LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..item.StatsId.."] with (LLWEAPONEX_Shield).")
+					--LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..item.StatsId.."] with (LLWEAPONEX_Shield).")
 					tagged = true
 				end
 			else
@@ -54,12 +54,12 @@ function TagWeapon(uuid, statType, stat)
 					local tag = Tags.WeaponTypeToTag[Ext.StatGetAttribute(stat, "WeaponType")]
 					if tag ~= nil then
 						SetTag(uuid, tag)
-						LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..stat.."] with ("..tag..").")
+						--LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..stat.."] with ("..tag..").")
 						tagged = true
 					end
 				elseif statType == "Shield" then
 					SetTag(uuid, "LLWEAPONEX_Shield")
-					LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..stat.."] with (LLWEAPONEX_Shield).")
+					--LeaderLib.PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..uuid..")["..stat.."] with (LLWEAPONEX_Shield).")
 					tagged = true
 				end
 			else

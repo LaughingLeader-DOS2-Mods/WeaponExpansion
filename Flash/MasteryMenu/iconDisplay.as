@@ -2,21 +2,28 @@ package
 {
 	import flash.display.MovieClip;
 	import flash.display.Bitmap;
+	import flash.display.BitmapData;
+	import flash.display.PixelSnapping;
+	import flash.geom.Rectangle;
+	import flash.geom.Point;
 	
 	public dynamic class iconDisplay extends MovieClip
 	{
-		public var displayBitmap:Bitmap;
-
-		public static var spriteSheet:Bitmap;
-
-		public static var spriteW:int = 64;
-		public static var spriteH:int = 64;
-		public static var sheetW:int = 5;
+		public var iconData:BitmapData;
+		public var iconBitmap:Bitmap;
+		public var iconWidth:int = 64;
+		public var iconHeight:int = 64;
 		
-		public function iconDisplay()
+		public function iconDisplay(w:int=64,h:int=64)
 		{
 			super();
-			addFrameScript(0,this.frame1,1);
+			iconWidth = w;
+			iconHeight = h;
+			iconData = new BitmapData(iconWidth, iconHeight, true, 0x000000);
+			iconBitmap = new Bitmap(iconData, PixelSnapping.NEVER, true);
+			addChild(iconBitmap);
+
+			addFrameScript(0,this.frame1);
 		}
 		
 		function frame1() : *
@@ -24,10 +31,11 @@ package
 			stop();
 		}
 
-		public function setIcon(index:int) : *
+		public function setIcon(sourceData:BitmapData, index:int, sourceWidth=64, sourceHeight=64) : *
 		{
-			displayBitmap.bitmapData.copyPixels(spriteSheet.bitmapData, 
-				new Rectangle((spriteIndex % sheetW) * spriteW, Math.floor(spriteIndex / sheetW) * spriteH, spriteW, spriteH),
+			var copyData = IconAtlases.resizeBitmapData(sourceData, 32, 32)
+			iconData.copyPixels(copyData, 
+				new Rectangle((index % 32) * sourceWidth, Math.floor(index / 32) * sourceHeight, sourceWidth, sourceHeight),
 				new Point(0,0)
 			);
 		}

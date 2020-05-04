@@ -20,26 +20,24 @@ local function OnItemEquipped(uuid,item)
 		TagWeapon(item, statType, stat)
 	end
 
-	local isPlayer = 0
-	if CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1 then
-		isPlayer = 1
-	end
+	local isPlayer = IsPlayerQRY(uuid)
 
 	for tag,data in pairs(Masteries) do
 		--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
 		if IsTagged(item,tag) == 1 then
-			local equippedTag = Tags.WeaponTypes[tag]
-			if equippedTag ~= nil then
-				LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
-				Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,equippedTag,isPlayer)
+			if isPlayer == 1 then
+				local equippedTag = Tags.WeaponTypes[tag]
+				if equippedTag ~= nil then
+					LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
+					Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,equippedTag,isPlayer)
+				end
+				Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, item, tag)
+				if IsTagged(uuid, tag) == 0 then
+					SetTag(uuid, tag)
+					LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
+				end
 			end
-			Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, item, tag)
-			ObjectSetFlag(item, "LLWEAPONEX_HasWeaponType", 0)
-			if IsTagged(uuid, tag) == 0 then
-				SetTag(uuid, tag)
-				LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
-				OnWeaponTypeEquipped(uuid, item, tag, stat, statType, isPlayer == 1)
-			end
+			OnWeaponTypeEquipped(uuid, item, tag, stat, statType, isPlayer == 1)
 		end
 	end
 end

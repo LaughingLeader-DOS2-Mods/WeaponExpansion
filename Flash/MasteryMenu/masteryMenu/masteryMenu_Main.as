@@ -10,6 +10,7 @@ package masteryMenu
 	import flash.external.ExternalInterface;
 	import flash.text.TextField;
 	import flash.utils.Timer;
+	import flash.geom.Point;
 	
 	public dynamic class masteryMenu_Main extends MovieClip
 	{
@@ -84,23 +85,37 @@ package masteryMenu
 			this._scrollbar.m_bg_mc.alpha = 0;
 			this.desc_txt.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
 			this.desc_txt.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
+			//this.desc_txt.mouseChildren = true;
 			this.buttonHintBar_mc.centerButtons = true;
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
 		}
 		
-		public function onLoaded(param1:Event) : *
+		public function onLoaded(e:Event) : *
 		{
 			ExternalInterface.call("masteryMenuLoaded");
 		}
 		
-		public function onDescriptionMouseIn(param1:MouseEvent) : void
+		public function onDescriptionMouseIn(e:MouseEvent) : void
 		{
 			this._scrollbar.mouseWheelEnabled = true;
+
+			// var myObjects: Array = stage.getObjectsUnderPoint(new Point(stage.mouseX, stage.mouseY));
+			// trace(myObjects);
+			// for each (var obj in myObjects){
+			// 	trace(obj.name);
+			// }
+			var pos:Point = desc_txt.localToGlobal(new Point(0,0));
+			//ExternalInterface.call("showSkillTooltip",3.4431514429141e-282,"Target_CripplingBlow",pos.x,pos.y,desc_txt.width,desc_txt.height);
+			ExternalInterface.call("mastery_showSkillTooltip","Target_CripplingBlow",pos.x,pos.y,50.522705078125, 58.118209838867);
+			//ExternalInterface.call("showSkillTooltip",3.4431514429141e-282,"Target_CripplingBlow",pos.x,pos.y,50.522705078125, 58.118209838867);
+			//ExternalInterface.call("showSkillTooltip",3.4431514429141e-282,"Target_CripplingBlow",339.00001335144, 940.0, 50.522705078125, 58.118209838867);
 		}
 		
-		public function onDescriptionMouseOut(param1:MouseEvent) : void
+		public function onDescriptionMouseOut(e:MouseEvent) : void
 		{
 			this._scrollbar.mouseWheelEnabled = false;
+			ExternalInterface.call("hideTooltip");
+			ExternalInterface.call("mastery_hideSkillTooltip");
 		}
 		
 		public function resetTextScrollbar() : *
@@ -151,7 +166,7 @@ package masteryMenu
 			this.accept_mc.setButtonEvent("requestCloseUI");
 		}
 
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, barPercentage:Number=0, animateBar:Boolean = false) : *
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, description:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : *
 		{
 			noMasteries_mc.visible = false;
 
@@ -170,16 +185,36 @@ package masteryMenu
 			masteryMC.setTitle(title, descriptionTitle);
 			masteryMC.setDescription(description);
 			masteryMC.alpha = 1;
-			masteryMC.setBar(barPercentage, animateBar);
+			masteryMC.createRankNodes(currentRank, Registry.MaxRank);
+			masteryMC.setBar(barPercentage, false);
+			masteryMC.setIsMastered(isMastered);
 			this.masteryList.selectByListID(0);
 		}
 
-		public function setRankNodeTooltipText(listId:Number, currentRank:uint, rank1Text:String, rank2Text:String, rank3Text:String, rank4Text:String) : *
+		public function setExperienceBarTooltip(listId:Number, text:String) : *
 		{
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
 			if(masteryMC != null)
 			{
-				masteryMC.setupRankNodes(currentRank, rank1Text, rank2Text, rank3Text, rank4Text);
+				masteryMC.setExperienceBarTooltip(text);
+			}
+		}
+
+		public function setRankTooltipText(listId:Number, rank:int, text:String) : *
+		{
+			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			if(masteryMC != null)
+			{
+				masteryMC.setRankTooltipText(rank, text);
+			}
+		}
+
+		public function positionRankNodes(listId:Number, currentRank:int) : *
+		{
+			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			if(masteryMC != null)
+			{
+				masteryMC.positionRankNodes(currentRank);
 			}
 		}
 		

@@ -3,6 +3,7 @@ SubGoalCombiner SGC_AND
 INITSECTION
 LLWEAPONEX_System_InitSettings();
 KBSECTION
+//REGION SETTINGS
 PROC
 LLWEAPONEX_System_InitSettings()
 THEN
@@ -40,6 +41,8 @@ AND
 IsGameLevel(_Region, 1)
 THEN
 SysActivateGoal("LLWEAPONEX_10_GameReady");
+//END_REGION
+
 EXITSECTION
 
 ENDEXITSECTION

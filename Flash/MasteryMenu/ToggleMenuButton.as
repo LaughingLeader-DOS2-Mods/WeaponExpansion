@@ -19,6 +19,7 @@ package
 		public function onOut(param1:MouseEvent) : *
 		{
 			ExternalInterface.call("hideTooltip");
+			this.button_mc.hasTooltip = false;
 			this.button_mc.removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.button_mc.gotoAndStop(1);
 		}

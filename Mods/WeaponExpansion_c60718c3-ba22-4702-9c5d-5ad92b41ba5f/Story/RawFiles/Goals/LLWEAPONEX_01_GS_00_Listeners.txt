@@ -1,0 +1,89 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+//REGION MAIN_EVENTS
+IF
+ItemUnEquipped(_Item, _Char)
+AND
+DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
+AND
+LLWEAPONEX_Ext_QRY_IsPlayer(_Char, _IsPlayer)
+AND
+GetTemplate(_Item, _Template)
+THEN
+NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
+LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
+LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
+LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(_Char, _Item);
+
+IF
+ItemEquipped(_Item, _Char)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
+THEN
+LLWEAPONEX_Ext_OnItemEquipped(_Char, _Item);
+//END_REGION
+
+//REGION PRESET_APPLIED
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LeaderLib_Timers_PresetMenu_OnPresetApplied")
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
+AND
+DB_LeaderLib_EquipmentSlots(_Slot)
+AND
+CharacterGetEquippedItem(_Char, _Slot,  (ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
+AND
+GetTemplate(_Item, _Template)
+THEN
+LLWEAPONEX_OnItemTemplateEquipped(_Char, _Item, _Template);
+//END_REGION
+
+//REGION CLEANUP
+IF
+GameStarted(_Region, _)
+AND
+IsGameLevel(_Region, 1)
+AND
+DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
+AND
+ObjectExists(_Char, _a)
+AND
+ObjectExists(_Item, _b)
+AND
+LeaderLib_Math_QRY_IsEqualToAny(0, _a, _b)
+AND
+GetTemplate(_Item, _Template)
+THEN
+NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
+LLWEAPONEX_Equipment_Internal_CleanupEntry(_Char, _Item, _a, _b);
+//END_REGION
+
+//REGION MASTERY_XP_EVENTS
+IF
+NRD_OnPrepareHit(_Target, _Source, _Damage, _StatusHandle)
+THEN
+LLWEAPONEX_Ext_OnPrepareHit(_Target, _Source, _Damage, _StatusHandle);
+
+IF
+NRD_OnHit(_Target, _Source, _Damage, _StatusHandle)
+THEN
+LLWEAPONEX_Ext_OnHit(_Target, _Source, _Damage, _StatusHandle);
+
+IF
+SkillCast(_Char, _Skill, _, _)
+THEN
+LLWEAPONEX_Ext_OnSkillCast(_Char, _Skill);
+//END_REGION
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_03_GameScripts"

@@ -28,13 +28,14 @@ Ext.Require("Shared/SkillDamageFunctions.lua")
 --- @param tag string
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
+	LeaderLib.PrintDebug("MasteryMenu.DisplayingSkillTooltip", MasteryMenu.DisplayingSkillTooltip)
 	if character:HasTag(tag) == true then
 		local a,b,mastery = string.find(tag,"(.+)_Mastery")
 		print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
 		if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 			return true
 		else
-			return character:HasTag(mastery)
+			return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or character:HasTag(mastery)
 		end
 		-- local hasTaggedWeapons = false
 		-- ---@type StatItem
@@ -66,12 +67,12 @@ function HasMasteryRequirement(character, tag)
 end
 
 local defaultExperienceAmounts = {
-	[0] = {Amount = 45, NextLevel = 1000},
-	[1] = {Amount = 30, NextLevel = 3000},
-	[2] = {Amount = 20, NextLevel = 6000},
-	[3] = {Amount = 12, NextLevel = 12000},
-	[4] = {Amount = 0, NextLevel = -1},
-	--[5] = {Amount = 0, NextLevel = 0},
+	[0] = {Amount = 45, Required = 0},
+	[1] = {Amount = 30, Required = 1000},
+	[2] = {Amount = 20, Required = 3000},
+	[3] = {Amount = 12, Required = 6000},
+	[4] = {Amount = 0, Required = 12000},
+	--[5] = {Amount = 0, Required = 36000},
 }
 
 local function LoadExperienceVariables()
@@ -79,12 +80,12 @@ local function LoadExperienceVariables()
 	local maxRank = LeaderLib.Game.GetExtraData("LLWEAPONEX_Mastery_MaxRank", 4)
 	local lastRankExpGain = 45
 	local lastRequiredNextLevelExperience = 1000
-	for i=0,maxRank,1 do
+	for i=0,maxRank+1,1 do
 		local rankGain = LeaderLib.Game.GetExtraData("LLWEAPONEX_Mastery_ExperienceGain"..tostring(i), nil)
 		if rankGain == nil then
 			local defaultRankGain = defaultExperienceAmounts[i]
 			if defaultRankGain ~= nil then
-				rankGain = defaultRankGain
+				rankGain = defaultRankGain.Amount
 			else
 				rankGain = lastRankExpGain / 2
 			end
@@ -93,14 +94,14 @@ local function LoadExperienceVariables()
 		if requiredNextLevelExperience == nil then
 			local defaultRequiredNextLevelExperience = defaultExperienceAmounts[i]
 			if defaultRequiredNextLevelExperience ~= nil then
-				requiredNextLevelExperience = defaultRequiredNextLevelExperience
+				requiredNextLevelExperience = defaultRequiredNextLevelExperience.Required
 			else
 				lastRequiredNextLevelExperience = lastRequiredNextLevelExperience * 1.5
 			end
 		end
 		RankVariables[i] = {
 			Amount = rankGain,
-			NextLevel = requiredNextLevelExperience
+			Required = requiredNextLevelExperience
 		}
 		lastRankExpGain = rankGain
 		lastRequiredNextLevelExperience = requiredNextLevelExperience

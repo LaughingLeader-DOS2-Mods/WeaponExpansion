@@ -512,6 +512,7 @@
 	<content contentuid="h30928730ge452g4fd3ga28bg45a66320258e">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery II&lt;/font&gt;</content>
 	<content contentuid="h30ecfbc9gae81g4f70g84d6ge44e9e14e9a6">*[HEAVY ARMOR] Click on the button labeled &apos;Heavy Armor&apos;.*</content>
 	<content contentuid="h30f12bcbg955eg499egae3fg240200a3c8a2">&lt;font color=&apos;#D9D9D9&apos; size=&apos;18&apos;&gt;Dual Shields Mastery I&lt;/font&gt;&lt;br&gt;Cover a target character remotely for 3 turns, redirecting 50% of the damage they take to you.&lt;br&gt;&lt;font color=&apos;#FFFF22&apos;&gt;The first time the target gets attacked, rush to their position and counter-attack the attacker for [1], and grant the target temporary damage resistance.&lt;/font&gt;</content>
+	<content contentuid="h3112e038g01abg4e7eg9efcg379e017e328f">Unranked</content>
 	<content contentuid="h31211dd3gf8eeg4d5bgb7ffg36e10368f488">&lt;font color=&apos;#00EE29&apos;&gt;Change Stance&lt;/font&gt;</content>
 	<content contentuid="h31246356gaf34g40e6g97bdg4809255e71f0">Test Status</content>
 	<content contentuid="h314ea21fg9e36g4d19gba1fgb5b55eb69808">Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;At the end of the beam, the energy explodes in a [2] radius, dealing [3] and applying any active rune effects.&lt;/font&gt;&lt;br&gt;Depletes the energy in the &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt;.</content>
@@ -1038,7 +1039,7 @@
 	<content contentuid="h6a268993g122ag4546g8d76g83c831fb552f">Fire Arrow</content>
 	<content contentuid="h6a30ea9cgec6bg4fb7g847cg6f52783ee045">Ancient Two-handed Bokuto</content>
 	<content contentuid="h6a3d6841g00e8g4d72g8172g071fccfac077">Dragonslayer&apos;s Greatbow</content>
-	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">Crippling Blow applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
+	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">&lt;img src=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Crippling Blow applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
 	<content contentuid="h6a8b7584g375bg4aa1g85fdg9178f76d434d">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery II&lt;/font&gt;</content>
 	<content contentuid="h6a8c5394gdba9g45ffg934eg7914a2427553">A magical blade imbued with the power of water. The runes can be invoked to bathe the blade in a dousing layer of water.</content>
 	<content contentuid="h6a9f08c6gc56cg4026gba88g0f2918d8e1c6">Banner of the Pack (Intelligence Scaling)</content>
@@ -1403,7 +1404,7 @@
 	<content contentuid="h904a6729gae64g4aecg8658g366b3ecc35a5">Gas Rune</content>
 	<content contentuid="h9054a1e9g8b48g42cfg8bbcg6483ed25a227">You really should think twice about attacking me. It won&apos;t end well for you.</content>
 	<content contentuid="h9090fd98g526dg47a4ga784ga9a53c0aea01">Character&apos;s &lt;font color=&apos;#c80030&apos;&gt;Piercing Resistance&lt;/font&gt; lowers as &lt;font color=&apos;#DC143C&apos;&gt;Vitality&lt;/font&gt; drops. Removed after Attacker&apos;s turn ends.</content>
-	<content contentuid="h90a60c8fg1d73g4db9g906dgd10be6e3df63">Crippling Blow deals additional &lt;font color=&apos;#CD1F1F&apos;&gt;piercing damage&lt;/font&gt; to disabled targets.</content>
+	<content contentuid="h90a60c8fg1d73g4db9g906dgd10be6e3df63">&lt;img src=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Crippling Blow deals additional &lt;font color=&apos;#CD1F1F&apos;&gt;piercing damage&lt;/font&gt; to disabled targets.</content>
 	<content contentuid="h90c0bf4fg3f1fg48d6g8275ga5ce8ab14dad">Enables Weapon Mastery</content>
 	<content contentuid="h90fdccf2gbb5fg4b23gb29agef990ec18575">Heatburst Rune</content>
 	<content contentuid="h9102ff74ge535g4526gaffdgde551dab819e">Deals Equivalent Shadow Damage to Vitality</content>
@@ -1854,6 +1855,7 @@
 	<content contentuid="hc135ad87g9f53g414cgbce3g9f88d2aba7dd">A lightweight blade with a razor-sharp point. Perfect for those who wish to dance along the battlefield.</content>
 	<content contentuid="hc13f4676gfbd2g4707g89fbg0e5badfe9895">A rock perfectly suited for throwing.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy&apos;s head!&lt;/font&gt;</content>
 	<content contentuid="hc15c2725gfb54g4d69g91f2g075df5407520">An old pipe. Functions as a makeshift quarterstaff.</content>
+	<content contentuid="hc167c125g2e75g402dg99b5gd78ed59e8f22">&lt;font color=&apos;#FFD900&apos;&gt;Mastered&lt;/font&gt;</content>
 	<content contentuid="hc1724c25gfae8g4519ga3e9g882fd22e1125">Katana</content>
 	<content contentuid="hc182f2f5g725dg4e69gba5fg22897f844f0f">Thunderguard</content>
 	<content contentuid="hc1a2de10gdc9dg402cg9301g9e65b62e635a">Duelist Stance</content>

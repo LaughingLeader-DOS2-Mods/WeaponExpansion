@@ -131,7 +131,19 @@ function DebugInit()
         local rank = Ext.Random(0,4)
         local xp = 0
         if rank > 0 then
-            xp = Mastery.Variables.RankVariables[rank-1].NextLevel + 1
+            if rank >= 4 then
+                xp = Mastery.Variables.RankVariables[rank].Required
+            else
+                local rankData = Mastery.Variables.RankVariables[rank]
+                local nextRankData = Mastery.Variables.RankVariables[rank+1]
+                if rankData.Amount > 0 then
+                    xp = Ext.Random(rankData.Required, nextRankData.Required - 1)
+                else
+                    xp = rankData.Required
+                end
+            end
+        else
+            xp = Ext.Random(0, Mastery.Variables.RankVariables[1].Required)
         end
         TagMasteryRanks(host, mastery, rank)
         Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)

@@ -12,7 +12,6 @@ package
 	{
 		public var crystal_mc:MovieClip;
 		public var isUnlocked:Boolean = false;
-		public var colorTransform:ColorTransform;
 
 		public function MasteryBarRankNode()
 		{
@@ -26,7 +25,12 @@ package
 			{
 				crystal_mc.gotoAndStop(1);
 			}
+			else
+			{
+				crystal_mc.gotoAndStop(3);
+			}
 			ExternalInterface.call("hideTooltip");
+			this.hasTooltip = false;
 		}
 		
 		public function onOver(param1:MouseEvent) : *
@@ -35,8 +39,12 @@ package
 			{
 				crystal_mc.gotoAndStop(2);
 			}
+			else
+			{
+				crystal_mc.gotoAndStop(4);
+			}
 			//ExternalInterface.call("PlaySound","UI_Generic_Over");
-			tooltipHelper.ShowTooltipForMC(this,root,"top");
+			tooltipHelper.ShowTooltipForMC(this,root,"right");
 		}
 
 		public function setTooltip(text:String) : *
@@ -44,36 +52,17 @@ package
 			this.tooltip = text;
 		}
 
-		private var aMatrix:Array = [
-			0, 0, 0, 0, 0xD5,
-			0, 0, 0, 0, 0xE4,
-			0, 0, 0, 0, 0x0D,
-			0, 0, 0, 1, 0 
-		];
-		private var aYellow:ColorMatrixFilter = new ColorMatrixFilter(aMatrix);
-
 		public function setUnlocked(unlocked:Boolean) : *
 		{
 			this.isUnlocked = unlocked;
 			if (unlocked)
 			{
-				crystal_mc.filters = [aYellow];
-				crystal_mc.gotoAndStop(2);
+				crystal_mc.gotoAndStop(3);
 			}
 			else
 			{
-				crystal_mc.filters = null;
-				// var adjustColor:AdjustColor = new AdjustColor();
-				// adjustColor.saturation = -100;
-				// adjustColor.brightness  = 50;
-				// adjustColor.contrast = 50;
-				// adjustColor.hue = 50;
-
-				// var matrix:Array = adjustColor.CalculateFinalFlatArray();
-				// var colorMatrix:ColorMatrixFilter = new ColorMatrixFilter(matrix);
-				// crystal_mc.filters = [colorMatrix];
+				crystal_mc.gotoAndStop(1);
 			}
-			//this.transform.colorTransform = colorTransform;
 		}
 		
 		function frame1() : *
@@ -81,8 +70,6 @@ package
 			this.stop();
 			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			this.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
-			//this.colorTransform = new ColorTransform();
-			//this.colorTransform.color = 0xFFFFFF;
 		}
 	}
 }

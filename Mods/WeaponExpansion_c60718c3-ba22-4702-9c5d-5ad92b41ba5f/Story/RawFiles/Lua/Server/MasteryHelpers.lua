@@ -66,15 +66,22 @@ function AddMasteryExperience(uuid,mastery,expGain)
 		if currentLevel < 4 then
 			local expAmountData = Mastery.Variables.RankVariables[currentLevel]
 			local maxAddExp = expAmountData.Amount
-			local nextLevelExp = expAmountData.NextLevel
+			local nextLevelExp = Mastery.Variables.RankVariables[currentLevel+1].Required
 			local nextLevel = currentLevel
 
-			currentExp = currentExp + (maxAddExp * expGain)
-			if currentExp >= nextLevelExp then
+			local nextExp = currentExp + (maxAddExp * expGain)
+			if nextExp >= nextLevelExp then
 				nextLevel = currentLevel + 1
+				if nextLevel >= Mastery.Variables.MaxRank then
+					nextExp = nextLevelExp
+				end
 			end
 
-			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(uuid, mastery, nextLevel, currentExp)
+			if Ext.IsDeveloperMode() then
+				CharacterStatusText(uuid, string.format("%s %i => %i", mastery, currentExp, nextExp))
+			end
+
+			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(uuid, mastery, nextLevel, nextExp)
 
 			if nextLevel > currentLevel then
 				MasteryLeveledUp(uuid, mastery, currentLevel, nextLevel)
@@ -111,6 +118,26 @@ function AddMasteryExperienceForAllActive(uuid,expGain)
 end
 
 Ext.NewCall(AddMasteryExperienceForAllActive, "LLWEAPONEX_Ext_AddMasteryExperienceForAllActive", "(CHARACTERGUID)_Character, (REAL)_ExperienceGain")
+
+local function HasRequirement(val)
+	return val ~= nil and val ~= "None" and val ~= ""
+end
+
+function IsWeaponSkill(skill)
+	return Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" or 
+		Ext.StatGetAttribute(skill, "UseWeaponProperties") == "Yes" or 
+			HasRequirement(Ext.StatGetAttribute(skill, "Requirement"))
+end
+
+--- @param uuid character
+--- @param expGain skill
+local function OnSkillCast(character,skill)
+	if IsPlayer(character) and IsWeaponSkill(skill) then
+		AddMasteryExperienceForAllActive(character, 0.5)
+	end
+end
+
+Ext.NewCall(OnSkillCast, "LLWEAPONEX_Ext_OnSkillCast", "(CHARACTERGUID)_Character, (REAL)_ExperienceGain")
 
 --- @param uuid string
 --- @param mastery string

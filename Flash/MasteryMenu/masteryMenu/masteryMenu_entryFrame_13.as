@@ -22,7 +22,7 @@ package masteryMenu
 		public var buttonType:Number;
 		
 		public var m_Id:Number;
-		public var m_Mastery:Number;
+		public var m_Mastery:String;
 
 		public var selected:Boolean = false;
 		
@@ -68,8 +68,8 @@ package masteryMenu
 		public function select(): *
 		{
 			this.selected = true;
-			this.bg_mc.gotoAndStop(2);
-			this.masteryOverlay.gotoAndStop(2);
+			this.bg_mc.gotoAndStop(3);
+			this.masteryOverlay.gotoAndStop(3);
 		}
 
 		public function deselect(): *

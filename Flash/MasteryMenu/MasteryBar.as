@@ -16,25 +16,16 @@ package
 
 		public var barBG_mc:MovieClip;
 
+		//public var nodes:Array.<MovieClip>;
+		public var nodes:Array;
+
 		public function MasteryBar()
 		{
 			super();
 			addFrameScript(0,this.frame1);
-		}
 
-		public function onOver(param1:MouseEvent) : *
-		{
-			trace("MasteryBar onOver");
-		}
-
-		public function onOut(param1:MouseEvent) : *
-		{
-			trace("MasteryBar onOut");
-		}
-
-		public function onDown(param1:MouseEvent) : *
-		{
-			trace("MasteryBar onDown");
+			//nodes = new <MovieClip>[node_rank1,node_rank2,node_rank3,node_rank4,];
+			nodes = new Array();
 		}
 
 		function frame1() : *
@@ -42,38 +33,98 @@ package
 			stop();
 		}
 
-		public function setupRankNodes(targetRank:uint, rank1Text:String, rank2Text:String, rank3Text:String, rank4Text:String) : *
+		public function setRankTooltipText(rank:int, text:String) : *
 		{
-			this.node_rank1.setTooltip(rank1Text);
-			this.node_rank2.setTooltip(rank2Text);
-			this.node_rank3.setTooltip(rank3Text);
-			this.node_rank4.setTooltip(rank4Text);
+			var node:MovieClip = this.nodes[rank-1];
+			if (node != null)
+			{
+				node.tooltip = text;
+			}
+		}
 
+		public function createRankNodes(currentRank:int, maxRank:int) : *
+		{
 			var maxWidth:Number = this.barBG_mc.width;
 			var startX:Number = this.barBG_mc.x;
 
-			this.node_rank1.x = (startX + (maxWidth * MainTimeline.rankNodePositions[1]));
-			this.node_rank2.x = (startX + (maxWidth * MainTimeline.rankNodePositions[2]));
-			this.node_rank3.x = (startX + (maxWidth * MainTimeline.rankNodePositions[3]));
-			this.node_rank4.x = (startX + maxWidth);
-
-			//trace(this.node_rank1.x, this.node_rank2.x, this.node_rank3.x, this.node_rank4.x);
-			//trace(startX, maxWidth);
-			//trace(MainTimeline.rankNodePositions[1], MainTimeline.rankNodePositions[2], MainTimeline.rankNodePositions[3]);
-
-			if (targetRank > 0)
+			var i:int = 0;
+			var max:int = nodes.length - 1;
+			while (i < maxRank)
 			{
-				this.node_rank1.setUnlocked(targetRank >= 1);
-				this.node_rank2.setUnlocked(targetRank >= 2);
-				this.node_rank3.setUnlocked(targetRank >= 3);
-				this.node_rank4.setUnlocked(targetRank >= 4);
+				var node:MasteryBarRankNode = null;
+
+				if (i < maxRank-1)
+				{
+					node = new MasteryBarRankNode();
+					addChild(node);
+					nodes.push(node);
+				}
+				else
+				{
+					node = new MasteryBarRankNodeEnd();
+					addChild(node);
+					nodes.push(node);
+				}
+
+				node.y = 8.0;
+
+				if (i < maxRank-1)
+				{
+					var nodeBarPercentage:Number = Registry.RankNodePositions[i+1];
+					node.x = (startX + (maxWidth * nodeBarPercentage));
+				}
+				else
+				{
+					node.x = (startX + maxWidth);
+				}
+
+				if (currentRank > 0)
+				{
+					node.setUnlocked(currentRank >= i+1);
+				}
+				else
+				{
+					node.setUnlocked(false);
+				}
+				i = i + 1;
 			}
-			else
+		}
+
+		public function positionRankNodes(targetRank:int) : *
+		{
+			var maxWidth:Number = this.barBG_mc.width;
+			var startX:Number = this.barBG_mc.x;
+
+			var i:int = 0;
+			var max:int = nodes.length - 1;
+			while (i < nodes.length)
 			{
-				this.node_rank1.setUnlocked(false);
-				this.node_rank2.setUnlocked(false);
-				this.node_rank3.setUnlocked(false);
-				this.node_rank4.setUnlocked(false);
+				var node:MovieClip = this.nodes[i];
+				if (node != null)
+				{
+					if (i < max)
+					{
+						var nodeBarPercentage:Number = Registry.RankNodePositions[i+1];
+						node.x = (startX + (maxWidth * nodeBarPercentage));
+					}
+					else
+					{
+						node.x = (startX + maxWidth);
+					}
+
+					node.y = 8.0;
+					
+					if (targetRank > 0)
+					{
+						node.setUnlocked(targetRank >= i+1);
+					}
+					else
+					{
+						node.setUnlocked(false);
+					}
+				}
+				
+				i = i + 1;
 			}
 		}
 	}

@@ -31,25 +31,48 @@ local function SetupUIListeners(ui)
 	end
 end
 
+local function OnSheetEvent(ui, call, ...)
+	local params = {...}
+	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+
+	if call == "showSkillTooltip" then
+		MasteryMenu.CHARACTER_HANDLE = params[1]
+	end
+end
+
 local function Client_UIDebugTest()
-	local ui = Ext.GetBuiltinUI("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf")
-	if ui == nil then
-		Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf).")
-		ui = Ext.GetBuiltinUI("Public/Game/GUI/mouseIcon.swf")
-		if ui ~= nil then
-			Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Found (mouseIcon.swf). Enabling event listener.")
-			SetupUIListeners(ui)
-		else
-			Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/Game/GUI/mouseIcon.swf).")
-		end
-	else
-		Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Found (mouseIcon_WithCallback.swf). Enabling event listener.")
-		SetupUIListeners(ui)
+	-- local ui = Ext.GetBuiltinUI("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf")
+	-- if ui == nil then
+	-- 	Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf).")
+	-- 	ui = Ext.GetBuiltinUI("Public/Game/GUI/mouseIcon.swf")
+	-- 	if ui ~= nil then
+	-- 		Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Found (mouseIcon.swf). Enabling event listener.")
+	-- 		SetupUIListeners(ui)
+	-- 	else
+	-- 		Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/Game/GUI/mouseIcon.swf).")
+	-- 	end
+	-- else
+	-- 	Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Found (mouseIcon_WithCallback.swf). Enabling event listener.")
+	-- 	SetupUIListeners(ui)
+	-- end
+	--showSkillTooltip
+	local ui = Ext.GetBuiltinUI("Public/Game/GUI/skills.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
 	end
 end
 
 local function LLWEAPONEX_Client_SessionLoaded()
 	InitMasteryMenu()
+	Client_UIDebugTest()
 end
 
 Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
