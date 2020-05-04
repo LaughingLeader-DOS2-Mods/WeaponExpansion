@@ -97,8 +97,6 @@ local function sortMasteries(a,b)
 	return a:upper() < b:upper()
 end
 
-local testDescription = "This is some test description text.<br>Rank 1<br>Crippling Blow<br>If the target is disabled, deal additional piercing damage.<br><br>Rank 2<br>Blitz Attack<br>Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.<br>Rank 3<br>Some Skill<br>Some other description here.<br><br>Rank 4<br>Super Cool Skill<br>Does all the cool things whenever you need it to. Not broken at all.<br><br><br><br><br>The End"
-
 ---@param masteryData MasteryData
 local function getMasteryDescriptionTitle(masteryData)
 	return string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
@@ -175,14 +173,35 @@ local function hasMinimumMasteryRankData(t,tag,min)
 	end)
 end
 
-local function buildMasteryDescription(mastery, rank)
+local function getRankTooltip(data, i)
+	local rankNameData = data.Ranks[i]
+	local rankName = nil
+	if rankNameData ~= nil then
+		return string.format("<font colr='%s'>%s</font>", rankNameData.Color, rankNameData.Name.Value)
+	else
+		local rankText = "_Rank"..tostring(i)
+		return Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank" .. tostring(i))
+	end
+end
+
+local function buildMasteryDescription(mastery, rank, masteryData)
 	local output = ""
 	local i = 1
-	while i <= 5 do
+	while i < 5 do
 		local rankText = "_Rank"..tostring(i)
 		local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
+		local rankNameData = masteryData.Ranks[i]
+		local rankName = nil
+		if rankNameData ~= nil then
+			rankName = rankNameData.Name.Value
+		end
 		if rankDisplayText ~= nil and rankDisplayText ~= "" then
-			local rankHeader = string.format("<font size='24'>%s</font>", rankDisplayText)
+			local rankHeader = ""
+			if rankName ~= nil then
+				rankHeader = string.format("<font size='24'>%s (%s)</font>", rankName, rankDisplayText)
+			else
+				rankHeader = string.format("<font size='24'>%s</font>", rankDisplayText)
+			end
 			local description = ""
 			description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
 			if description == nil or description == "" then
@@ -191,7 +210,6 @@ local function buildMasteryDescription(mastery, rank)
 				description = Text.MasteryMenu.RankLocked.Value
 			end
 			local rankInfoText = string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
-			print(rankHeader, rankInfoText)
 			local text = Text.MasteryMenu.RankDescriptionTemplate.Value:gsub("%[1%]", rankHeader):gsub("%[2%]", rankInfoText)
 			output = output .. text
 			if i < 5 then
@@ -239,8 +257,8 @@ local function OpenMasteryMenu(characterMasteryData)
 				barPercentage = 1.0
 			end
 
-			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data), buildMasteryDescription(tag,rank), barPercentage, false)
-			ui:Invoke("setRankNodeTooltipText", i, rank, data.Ranks[1].Value, data.Ranks[2].Value, data.Ranks[3].Value, data.Ranks[4].Value)
+			ui:Invoke("addMastery", i, tag, data.Name.Value, getMasteryDescriptionTitle(data), buildMasteryDescription(tag,rank,data), barPercentage, false)
+			ui:Invoke("setRankNodeTooltipText", i, rank, getRankTooltip(data, 1), getRankTooltip(data, 2), getRankTooltip(data, 3), getRankTooltip(data, 4))
 			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			i = i + 1
 		end

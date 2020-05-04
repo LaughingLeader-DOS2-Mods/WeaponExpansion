@@ -2,8 +2,11 @@ package
 {
 	import LS_Classes.larHealthbar;
 	import flash.display.MovieClip;
+	import flash.events.MouseEvent;
+	import flash.external.ExternalInterface;
+	import LS_Classes.tooltipHelper;
 	import masteryMenu.MainTimeline;
-	
+
 	public dynamic class MasteryBar extends larHealthbar
 	{
 		public var node_rank1:MovieClip;
@@ -19,9 +22,24 @@ package
 			addFrameScript(0,this.frame1);
 		}
 
+		public function onOver(param1:MouseEvent) : *
+		{
+			trace("MasteryBar onOver");
+		}
+
+		public function onOut(param1:MouseEvent) : *
+		{
+			trace("MasteryBar onOut");
+		}
+
+		public function onDown(param1:MouseEvent) : *
+		{
+			trace("MasteryBar onDown");
+		}
+
 		function frame1() : *
 		{
-			this.stop();
+			stop();
 		}
 
 		public function setupRankNodes(targetRank:uint, rank1Text:String, rank2Text:String, rank3Text:String, rank4Text:String) : *

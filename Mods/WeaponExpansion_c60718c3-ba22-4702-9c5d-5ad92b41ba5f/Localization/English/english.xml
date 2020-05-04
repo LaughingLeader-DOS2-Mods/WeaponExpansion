@@ -10,7 +10,7 @@
 	<content contentuid="h00b14254g9c1ag40cbgaa71g38557c1f8e8e">Weaponmaster Wiegraf</content>
 	<content contentuid="h00c4cb0ag7220g4f02g873eg2c540a7d719c">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery V&lt;/font&gt;</content>
 	<content contentuid="h00d3459bg4562g42dbgbe1fg0eba1a0e9f6c">*You take a look at the trader&apos;s wares.*</content>
-	<content contentuid="h00d6bd55ga775g45c7ga2c3ga181ec3f950c">&lt;font color=&apos;#CCB94A&apos;&gt;Expert Shieldsman&lt;/font&gt;</content>
+	<content contentuid="h00d6bd55ga775g45c7ga2c3ga181ec3f950c">Expert Shieldsman</content>
 	<content contentuid="h00db7873g33d9g4de5gaeb3gfc69f2588858">Solid Wooden Shields</content>
 	<content contentuid="h00db93a7g31abg4563gb671gd0c6b20d9cee">Shield Prison</content>
 	<content contentuid="h0105c199gf9f5g4d17g8aa5g85b10660932a">*Leave the rock alone and step away.*</content>
@@ -62,7 +62,7 @@
 	<content contentuid="h05128ff7g92f6g4379ga203g9c684ef02fcc">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#AA895B&apos;&gt;Earth Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h0516446bg80fdg485cg9560gd259a5028bf0">[Info] *You read the panel: &quot;Hit a button to order a treasure type.&quot;*</content>
 	<content contentuid="h052d8fd9g8c05g4c60gb6c2gf05f40109276">&lt;font color=&apos;#7478DC&apos;&gt;Electrified Mini-Bolts&lt;/font&gt;</content>
-	<content contentuid="h0574c86eg4e97g4faegb7e3g6d56465a1e12">&lt;font color=&apos;#FFE7AA&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h0574c86eg4e97g4faegb7e3g6d56465a1e12">Novice</content>
 	<content contentuid="h0579d113ga6e7g46dcg8540g05493daf6608">Quake</content>
 	<content contentuid="h060a6bb2g4db6g48bag9602g2a9d7c28a85a">Disciplined warriors who wield quarterstaffs, overwhelming enemies with finesse and sheer force of will</content>
 	<content contentuid="h061b0458g5e4ag4f60gaa59g99b2fabcced8">Assassinate</content>
@@ -106,7 +106,7 @@
 	<content contentuid="h0a4b302dgf862g4af4g98cfg322085c2d454">Legend</content>
 	<content contentuid="h0a4c714cg4ca2g47b9gb35bgdbcedde528a5">Balrin&apos;s Throwing Axe (Fire)</content>
 	<content contentuid="h0a973462g2b3dg4dbdgbffbg49ec01d86b23">An extremely sharp, star-shaped plate of metal.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Looks perfect for throwng!&lt;/font&gt;</content>
-	<content contentuid="h0a993e92g6c54g4951ga8abg59cdd28cd14d">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h0a993e92g6c54g4951ga8abg59cdd28cd14d">Beginner</content>
 	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">Pacifist&apos;s Wrath (2H)</content>
 	<content contentuid="h0ab8d13bg763eg48f2gb501g886ee85d35e3">Character is taking [1] from their &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; status being evaporated!</content>
 	<content contentuid="h0abdfdfag27b0g44e6g908eg74133ca9abba">Warchief&apos;s Halberd (Axe) (Memory Scaling)</content>
@@ -118,7 +118,7 @@
 	<content contentuid="h0b34a630gc0b8g413dg8c7cg388d52006514">Remorse</content>
 	<content contentuid="h0b38b148g2ea5g4a95g9ff7gae932c7d05b1">Activate the &lt;font color=&apos;#65c900&apos;&gt;Poison Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; to enemies hit for 1 turn.</content>
 	<content contentuid="h0b5a0893g808cg4fa8ga399g32c6b0593657">Breach</content>
-	<content contentuid="h0b69be34ge862g4a82gaea2g87abee3e57b4">&lt;font color=&apos;#C596FE&apos;&gt;Journeyman of Wands&lt;/font&gt;</content>
+	<content contentuid="h0b69be34ge862g4a82gaea2g87abee3e57b4">Journeyman of Wands</content>
 	<content contentuid="h0b8e61bagd0d3g434fgb4a2g96639225008d">Shield Toss</content>
 	<content contentuid="h0b8f6a66g4651g400bgafc6g9dbb22475420">&lt;font color=&apos;#C7A758&apos;&gt;Oni Gauntlet (Unleashed)&lt;/font&gt; Power</content>
 	<content contentuid="h0bce2460gea5cg42eaga781g0fa79906d7e6">Chaos Slash</content>
@@ -129,7 +129,7 @@
 	<content contentuid="h0c4109b1g92f9g4363gbc81gc85809032511">&lt;font color=&apos;#fe6e27&apos;&gt;Explosive Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h0c4d46eegcfd6g416bga747g3eaf9d72cfd7">Warchief&apos;s Halberd (Axe) (Wits Scaling)</content>
 	<content contentuid="h0c543f08g6221g419cg90a0gb9377f0500c8">Shiden, Thunder Orb Upgrade 2</content>
-	<content contentuid="h0c5f4242g43beg4425g99b4ge609bc89d9cc">&lt;font color=&apos;#5EDBFF&apos;&gt;Sage of Staves&lt;/font&gt;</content>
+	<content contentuid="h0c5f4242g43beg4425g99b4ge609bc89d9cc">Sage of Staves</content>
 	<content contentuid="h0c6c36d5g2e0cg4a08gaf55g891ee6f46533">Raizan (Intelligence Scaling)</content>
 	<content contentuid="h0c867766g47deg46a0ga8dfg4eaba7ac765e">A strange token.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Combine this with specific unique weapons to change their scaling attribute.&lt;/font&gt;</content>
 	<content contentuid="h0c9e00adgb092g4689g9b8dg5eb400da05af">&lt;font color=&apos;#40E0D0&apos; size=&apos;18&apos;&gt;Runeblade Mastery&lt;/font&gt;&lt;br&gt;Reverberate the last active rune or rune combination, applying it for 2 turns.</content>
@@ -138,11 +138,11 @@
 	<content contentuid="h0cd5fc18gb3cbg4d19gaeb6g6b4ac0cc98dc">Power Pole (Finesse Scaling)</content>
 	<content contentuid="h0ce310f5g9564g45f0gb0e2gd2c5c1dd89a3">Character has been hit by a thrown staff!</content>
 	<content contentuid="h0ceb51ffg9102g41ccga4f2gd9b57aaf9c16">Battle-Hardened Dual Shields</content>
-	<content contentuid="h0d05cb68gaa21g46eega70ag8ec9962dfc72">&lt;font color=&apos;#FFEAEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h0d05cb68gaa21g46eega70ag8ec9962dfc72">Beginner</content>
 	<content contentuid="h0d198b10gc1beg4a18ga695g3b7eb57fb371">Curse of the Muramasa</content>
 	<content contentuid="h0d40e3a7gd88fg45ccga4d6g68fc54998c7a">Chipped Glaive</content>
 	<content contentuid="h0d525994gf174g490eg94e5gca3b63f6d99e">Aspect of Fire</content>
-	<content contentuid="h0d5e3434gf8c9g4e64gae3fg8cdb6336bac0">&lt;font color=&apos;#FBBC7F&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h0d5e3434gf8c9g4e64gae3fg8cdb6336bac0">Novice</content>
 	<content contentuid="h0d6e3fdbg3c36g4b8bg9ac1g63a74f9b260a">Tremor</content>
 	<content contentuid="h0d87e29ega8c8g4f19ga409g88a83f218ee2">Death&apos;s Edge (Strength Scaling)</content>
 	<content contentuid="h0da99e4ag2de0g456dgba2eg43ed73c9a6d7">Artisan Greatbow</content>
@@ -152,18 +152,18 @@
 	<content contentuid="h0dfc61a0g40edg4887g8843g5a47a26ec0e6">Crippling Magistrike</content>
 	<content contentuid="h0e0b0e72ga192g4301gb445g10c5344ab3e3">Sorcerors who wield the power of Chaos, leveraging luck and foresight to lay waste upon the battlefield</content>
 	<content contentuid="h0e4a73f9g3111g4ef9g8c5ega855a2b8473b">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
-	<content contentuid="h0e70e249g7e55g4b9cga6c7g19ecd5fca8fe">&lt;font color=&apos;#A17EE8&apos;&gt;Journeyman Thief&lt;/font&gt;</content>
-	<content contentuid="h0e7d1237g1fa7g493bga730g75ba4247533b">&lt;font color=&apos;#EAFFFE&apos;&gt;Beginner&lt;/font&gt;</content>
-	<content contentuid="h0e9b4f32g273dg452bga51dgd984f003882a">&lt;font color=&apos;#6CF5E9&apos;&gt;Expert Runekeeper&lt;/font&gt;</content>
+	<content contentuid="h0e70e249g7e55g4b9cga6c7g19ecd5fca8fe">Journeyman Thief</content>
+	<content contentuid="h0e7d1237g1fa7g493bga730g75ba4247533b">Beginner</content>
+	<content contentuid="h0e9b4f32g273dg452bga51dgd984f003882a">Expert Runekeeper</content>
 	<content contentuid="h0ed78be5g1afag4d98ga3c3ge547395bf212">Dragon&apos;s Bane</content>
 	<content contentuid="h0ee0f7bbg3f1ag44b1g921ege32ac4f642a3">Capped Quarterstaff</content>
 	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">[1]&lt;br&gt;&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your weapon&apos;s element, gaining [2] for [3] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h0f05d7a3g7537g42b2g8816ge356bcadaef4">Gnak&apos;s Spell Scroll (Memory Scaling)</content>
 	<content contentuid="h0f0aca8cg237bg4696gb195gbd43e7378fd4">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Ice Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
 	<content contentuid="h0f364e95ga530g490cg846agce877c3a904a">Insert into a Pistol to Change Damage Type</content>
-	<content contentuid="h0f68040ag5fa7g4d96g8303gc3c2a8f64576">&lt;font color=&apos;#94E963&apos;&gt;Journeyman Slayer&lt;/font&gt;</content>
+	<content contentuid="h0f68040ag5fa7g4d96g8303gc3c2a8f64576">Journeyman Slayer</content>
 	<content contentuid="h0f6a5e9ag0dd9g4b14g90e2gd200af46dd99">Immolation Bonus II</content>
-	<content contentuid="h0f70049cgf59ag40ecgb093ga1c8db520da0">&lt;font color=&apos;#DD3939&apos;&gt;Expert Axefighter&lt;/font&gt;</content>
+	<content contentuid="h0f70049cgf59ag40ecgb093ga1c8db520da0">Expert Axefighter</content>
 	<content contentuid="h0f72bec6g0ff4g4af9gaa76ga90f7ec31aab">Throwable</content>
 	<content contentuid="h0f74df58g58abg4faagaebeg6af6dbfa8619">Oni Gauntlet (Empowered)</content>
 	<content contentuid="h0fe9414ag9805g49feg8350gd262911b1e8d">Sacrificial Shields of Chaos</content>
@@ -171,7 +171,7 @@
 	<content contentuid="h1035543cg81c3g43afg995cgdbf5cb3b3caa">Fire a massive, super-heated cannonball, dealing [1] to targets, knocking them down, and leaving behind a trail of &lt;font color=&apos;#ff5b0b&apos;&gt;explosive fire clouds&lt;/font&gt;.&lt;br&gt;At the end of the trail, the cannonball explodes for [2] in a [3] radius, applying &lt;font color=&apos;#ff5b0b&apos;&gt;Necrofire&lt;/font&gt; to targets hit for 1 turn.</content>
 	<content contentuid="h103f5af9g1796g4ba0gb403gdb5007789fb1">Character is inspired by the &lt;font color=&apos;#c5a65a&apos;&gt;Banner of the Pack&lt;/font&gt;. Ferocity is unleashed.</content>
 	<content contentuid="h1071f739gc117g4d6fg933fg6dda12d39ab1">a Sword</content>
-	<content contentuid="h107780b5g9816g4eeag923egf088d7d8e242">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h107780b5g9816g4eeag923egf088d7d8e242">Beginner</content>
 	<content contentuid="h10a5e511g5364g4b22g9356gf615120802d7">Omnibolt, Heaven&apos;s Wrath (Reset Scaling)</content>
 	<content contentuid="h10d0ca08gc1f7g4adegb98fg8244438216a0">Old Flintlock Pistol</content>
 	<content contentuid="h10dce197g7a65g4923ga8b1g58f5ec28306d">The &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt; is charged and ready to disperse stored energy.&quot;</content>
@@ -192,7 +192,7 @@
 	<content contentuid="h13bfb4ffg4ae6g4c67g839fg30ac91b2978f">A hardy blow with your shield that deals [1] and has a chance to daze the target.</content>
 	<content contentuid="h13cf43ddgfa62g4b7aga918g7e06719e8315">Muramasa, The Cursed Blade (Wits Scaling)</content>
 	<content contentuid="h1450e92egfe05g44b6gb78bgb8e6aef45d83">Raizan (Strength Scaling)</content>
-	<content contentuid="h1459cf28g0041g46e4gb2e8g6c3f86c272ba">&lt;font color=&apos;#94E963&apos;&gt;Journeyman Gunslinger&lt;/font&gt;</content>
+	<content contentuid="h1459cf28g0041g46e4gb2e8g6c3f86c272ba">Journeyman Gunslinger</content>
 	<content contentuid="h147316d6g357dg4c40gb1ddgb3c2110f2e2a">Ashenblade</content>
 	<content contentuid="h1481e457gb42cg4c8ag9d0cgdb2216832df9">Shuriken (Normal)</content>
 	<content contentuid="h1489c182g77f9g4398g8464g543d5568a8f6">The end of the Runic Cannon glimmers like a dazzling gem, powered by runic magic.&lt;br&gt;&lt;font color=&apos;#FF55C3&apos;&gt;Unequipping this requires detaching the safeties near your arm.&lt;/font&gt;</content>
@@ -206,7 +206,7 @@
 	<content contentuid="h1538fbc9g097ag44f1gb22cg855cafd72989">Character&apos;s next attack with their oversized scroll will unleash a random spell and grant bonus damage.</content>
 	<content contentuid="h15468505g7d00g48f7g87d2gb0c3d05786d4">Halberd</content>
 	<content contentuid="h154d0117g69e6g43fcg9356g02e1593341a5">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Countered&lt;/font&gt;</content>
-	<content contentuid="h156cb0ffg52f4g43ceg9b65g4c72ad9cbd9f">&lt;font color=&apos;#DDFFB3&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h156cb0ffg52f4g43ceg9b65g4c72ad9cbd9f">Novice</content>
 	<content contentuid="h1574c05dg6552g4cb7gbbbeg59b04967b6e4">Character is being covered by a nearby ally.</content>
 	<content contentuid="h159452b0gcf6dg4389gb6d8g738d7029dd07">Runic Gloves</content>
 	<content contentuid="h1599bddcg8b04g4ed6gbb4dg88f0196afca4">*[STAFFS] Click on the button labeled &apos;Staffs&apos;.*</content>
@@ -217,7 +217,7 @@
 	<content contentuid="h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a">Shrapnel Charge</content>
 	<content contentuid="h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59">Character&apos;s quiver is recharging.</content>
 	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target within [1], dealing an average of [2] (10m), depending on distance to the target (20m max).&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
-	<content contentuid="h16505df4g2c73g42ddg81b6gbc9788be5134">&lt;font color=&apos;#F49C4E&apos;&gt;Expert Staff Monk&lt;/font&gt;</content>
+	<content contentuid="h16505df4g2c73g42ddg81b6gbc9788be5134">Expert Staff Monk</content>
 	<content contentuid="h166ab28fg2de1g43f4g9566g7edab16ae25b">Marksman&amp;apos;s Fang</content>
 	<content contentuid="h1683f225g0155g4015gab2bgf7563a8f4510">Character has lowered resistances to &lt;font color=&apos;#9A00FF&apos;&gt;every element&lt;/font&gt;.</content>
 	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8">shadow</content>
@@ -234,7 +234,7 @@
 	<content contentuid="h17a906aeg8f00g4f9dga784g93b8e4ad26b2">One-Handed Bludgeon</content>
 	<content contentuid="h17ba62e1g37e8g47a7g968fg9446ccf64370">Metal Pipe</content>
 	<content contentuid="h17e56658gbfa0g46e5ga131gf4ce2d1f425a">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; to enemies hit for 1 turn.</content>
-	<content contentuid="h181d68fbge496g4c43gab95g26a4fcaee046">&lt;font color=&apos;#28FF00&apos;&gt;Banner Lord&lt;/font&gt;</content>
+	<content contentuid="h181d68fbge496g4c43gab95g26a4fcaee046">Banner Lord</content>
 	<content contentuid="h1834cf9dgc49cg4b8ag85eaga2d31fbff50d">Muramasa</content>
 	<content contentuid="h183de597ga842g42c5gac3bgd61680d21c0b">Undead character is taking bonus damage!</content>
 	<content contentuid="h1841b24ag5ceeg4c1dg9378g96f17f969d55">Leadslinger</content>
@@ -242,7 +242,7 @@
 	<content contentuid="h18432982g0f03g4a9fgb5e9g09d41a7a70f8">A magical staff said to be able to extend to great lengths. Once wielded by a warrior of legend.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="h18837538gae24g456bg91a1ged49be909078">Throw a poisen-tipped shuriken at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Poisoned&lt;/font&gt; for 2 turns.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
 	<content contentuid="h189386bag49ebg4d15ga457g3e1fe7b053ab">Soldier&apos;s Rifle</content>
-	<content contentuid="h18a5ea22gd8b0g423bga26fg4a2941611cf3">&lt;font color=&apos;#6CE3F5&apos;&gt;Scrapper&lt;/font&gt;</content>
+	<content contentuid="h18a5ea22gd8b0g423bga26fg4a2941611cf3">Scrapper</content>
 	<content contentuid="h18db5b3bg6b75g4ed1gab9ag309251d7d492">Immolation</content>
 	<content contentuid="h18e76295g020dg4099gb881gfc0aeb55becf">&lt;font color=&apos;#FF001F&apos;&gt;The orb doesn&apos;t seem to fit. A special gauntlet is required.&lt;/font&gt;</content>
 	<content contentuid="h18ee08fdg04f0g4ea3ga684g0614a456d44c">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery II&lt;/font&gt;</content>
@@ -279,7 +279,7 @@
 	<content contentuid="h1c1efec8g1da1g4353g82e5ge50841054af6">Throw the shrapnel charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius and applies Bleeding for 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ec3030&apos;&gt;If targets hit are already bleeding, their wounds Rupture for [3].&lt;/font&gt;</content>
 	<content contentuid="h1c2e17dag8206g42begb070g3a98701d976b">Throw your mainhand shield at an enemy. The shield can ricochet up to 3 times within [1], dealing [2] damage and restoring [3] and [4] for each enemy hit.&lt;br&gt;The shield then returns, restoring an additional amount of armor.&lt;br&gt;&lt;font color=&apos;#FFD700&apos; size=&apos;18&apos;&gt;Shield Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;If 3 targets are hit, restore [5] and [6] to allies within 8m.&lt;/font&gt;</content>
 	<content contentuid="h1c4fdef8g98d7g46e2g8cd5gcead0901a95b">Now you&apos;ll truly never miss your programs.</content>
-	<content contentuid="h1c713c7ag8952g44d1g8703g6609b75b29a7">&lt;font color=&apos;#D46A6A&apos;&gt;Journeyman Axefighter&lt;/font&gt;</content>
+	<content contentuid="h1c713c7ag8952g44d1g8703g6609b75b29a7">Journeyman Axefighter</content>
 	<content contentuid="h1ca30c1agc63eg4be2g924dg1ffb2e444c10">&lt;font color=&apos;#11D77A&apos;&gt;Aimed Shot&lt;/font&gt;</content>
 	<content contentuid="h1ca4c759gc0f8g48f7g9483g74852e609c32">Runeblade (Poison)</content>
 	<content contentuid="h1ca8e223g378bg494egbb3cg0396a79a5a41">&lt;font color=&apos;#00FF7F&apos;&gt;Greatbow Mastery V&lt;/font&gt;</content>
@@ -309,7 +309,7 @@
 	<content contentuid="h1e7673d0g6739g4be5gb84agf1d3fc43b003">Revenant</content>
 	<content contentuid="h1e98bcebg2e42g4699gba2bg6f647d428699">Unarmed</content>
 	<content contentuid="h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa">Scythe</content>
-	<content contentuid="h1eade98bgf8a1g4bb9g91f9gd964789a61d8">&lt;font color=&apos;#FFE933&apos;&gt;Master Fencer&lt;/font&gt;</content>
+	<content contentuid="h1eade98bgf8a1g4bb9g91f9gd964789a61d8">Master Fencer</content>
 	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">[1]&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [2]%&lt;/font&gt; for [3] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h1ec134feg2358g4666g91c3gb0808e20fd0a">[ORDER] *Hit the button labeled &apos;Place Order&apos;.*</content>
 	<content contentuid="h1ec7c569g945fg47a9g9efbg52852b310b6c">Wanderer&apos;s Blade</content>
@@ -336,7 +336,7 @@
 	<content contentuid="h20e3f8cagad11g4787gaae2g50a97c7ead7e">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery V&lt;/font&gt;</content>
 	<content contentuid="h20e48f61gf7f0g40ffg9cf7g93a82a53cb46">&lt;b&gt;NANI?!&lt;/b&gt;</content>
 	<content contentuid="h2109eb26g9fbag4848gb45egec61dbd6b93d">The artistry is all in the cunning way you affix the flask of water to the greatbow arrow. Or so you&apos;ve been told.</content>
-	<content contentuid="h213017b8g518ag468eg8564g1657f73eef09">&lt;font color=&apos;#FF9D9D&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h213017b8g518ag468eg8564g1657f73eef09">Novice</content>
 	<content contentuid="h2130789dg40b4g4170g8ac2gd216b66133b0">Give Lucian my regards.</content>
 	<content contentuid="h215bc56bgbcd5g4555g9194g4e091c515174">Runeblade of Fire</content>
 	<content contentuid="h21825119g98fag4193ga030g63776d49182d">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Cushion Force</content>
@@ -348,11 +348,11 @@
 	<content contentuid="h22017979g1b3ag42f4ga405g0e803198a34a">Scripture of the Righteous (Intelligence Scaling)</content>
 	<content contentuid="h220650a3g3aacg43dag8384g96824940cbc5">Poison Rune</content>
 	<content contentuid="h2215bc77gd613g48b6g975cg955d332a3943">Conduction Rune</content>
-	<content contentuid="h226ccab8gb20cg421bg8d4ag20b90872d15c">&lt;font color=&apos;#94E9FF&apos;&gt;Journeyman Bookkeeper&lt;/font&gt;</content>
+	<content contentuid="h226ccab8gb20cg421bg8d4ag20b90872d15c">Journeyman Bookkeeper</content>
 	<content contentuid="h228fd709g1af4g4d28g826dg1d919f1ad845">Etcher of Desecration</content>
 	<content contentuid="h22a9a9dagc252g47dcgad32g62ceecaf6061">Wraithblade (Reset Scaling)</content>
 	<content contentuid="h22a9b773g4d90g4519gb6c6g5441ce0bfc03">A high quality greatbow, crafted by an master artisan. This artifact is said to have slain dragons.</content>
-	<content contentuid="h22f563acgfc6fg4cddg9022g872a8fc0340c">&lt;font color=&apos;#FDC89B&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h22f563acgfc6fg4cddg9022g872a8fc0340c">Beginner</content>
 	<content contentuid="h22fef5f6g2151g4097gaed7g67297ccbfbc9">&lt;font color=&apos;#7f00ff&apos;&gt;Torment, Book of the Dead&lt;/font&gt; (Activated)</content>
 	<content contentuid="h232179b9g3a1fg4732ga4c3g1cd20f5dc912">Runeblade (Air)</content>
 	<content contentuid="h2338d7a1ged4eg44f1gbce1g30afe9499057">Throw a weapon at an enemy for [1].</content>
@@ -362,7 +362,7 @@
 	<content contentuid="h23cacf78g143fg45d1gb348g84fd913e573e">Mark of the Wraith</content>
 	<content contentuid="h23d7b881gd36eg4382g9390gde45f4aee624">The &lt;font color=&apos;#7d71d9&apos;&gt;Thunderbolt Rune&lt;/font&gt; is unable to trigger another &lt;font color=&apos;#7d71d9&apos;&gt;Thunderbolt Strike&lt;/font&gt; on this character.</content>
 	<content contentuid="h23eb9679g58eeg49e0gb863g70995541ce68">Balrin&apos;s Throwing Axe (Ice)</content>
-	<content contentuid="h24058293g1818g4389ga2d2ga7119b2c585e">&lt;font color=&apos;#F49C4E&apos;&gt;Expert Firearm Lunatic&lt;/font&gt;</content>
+	<content contentuid="h24058293g1818g4389ga2d2ga7119b2c585e">Expert Firearm Lunatic</content>
 	<content contentuid="h240913f2g92a0g4f1fgb730g23e3488d2308">Elementia</content>
 	<content contentuid="h241c1d92g6027g4837g9d25g009d917be036">Draw Arrow</content>
 	<content contentuid="h243c7832gca11g41e6g824agfc333c4bc9a8">Wooden Rod</content>
@@ -418,7 +418,7 @@
 	<content contentuid="h289d5964g03f9g4c60gbea3g14b8e0471a8e">Wreathed in sparking energy, this greatbow arrow can unleash a tempest upon its unlucky target.</content>
 	<content contentuid="h28a03530g38b5g4d32gbe06gabe3d62cf635">Extermination</content>
 	<content contentuid="h28a95dabg50a7g424eg9562gb44e8ad5c570">Throw Explosive Shuriken</content>
-	<content contentuid="h290c10edge191g4322g9234g8c8e840a30ad">&lt;font color=&apos;#FEFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h290c10edge191g4322g9234g8c8e840a30ad">Beginner</content>
 	<content contentuid="h290e3badg73d8g4c02g9e4fg6956ab910bf9">Random Elemental Ailment</content>
 	<content contentuid="h29159429ge888g4cc0g8d28g6aef1d0c4126">Warchief&apos;s Halberd (Spear) (Wits Scaling)</content>
 	<content contentuid="h29308e7agb660g470ag9d0fgf89e2e79913f">An ancient blade forged from runic metal, and tempered with the fire of a legendary elemental.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
@@ -433,7 +433,7 @@
 	<content contentuid="h29daef70gf6dcg47b6g9d5agb3a5e37ee9a4">Wraithblade (Strength Scaling)</content>
 	<content contentuid="h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd">Automatically Equips the Runic Cannon in the Mainhand</content>
 	<content contentuid="h29e9b77ag218bg4033gad5fga6ebe9de57d9">Shiden, Thunder Orb (Unleashed)</content>
-	<content contentuid="h29fb09ddg1428g4ee7g94efg9aceb4989436">&lt;font color=&apos;#DDFFB3&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h29fb09ddg1428g4ee7g94efg9aceb4989436">Novice</content>
 	<content contentuid="h2a1c77bcgc0e7g4689g8b43g0b794dca1052">Host Settings</content>
 	<content contentuid="h2a2acf6eg099ag48f3g8ffeg66f8800021a5">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery III&lt;/font&gt;</content>
 	<content contentuid="h2a39349dg9bccg420cgb6acg403e09874bd0">Character is flying through the air!</content>
@@ -450,7 +450,7 @@
 	<content contentuid="h2b489bfbg6c91g4ff5ga64cg50e31a5007c2">Gnak&apos;s Spell Scroll (Intelligence Scaling)</content>
 	<content contentuid="h2b4c15f8g00c6g4a50gbc9aga0f9b29f1116">Throw a bladed weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt; lowers AP Recovery/Start/Maximum by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, and does [4] per turn.</content>
 	<content contentuid="h2b5342e4g614cg4e5egb5cfg6b2c3dd9d117">Poison Shuriken</content>
-	<content contentuid="h2b57436cg4a2cg4220g94f0gf59ca7e03784">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h2b57436cg4a2cg4220g94f0gf59ca7e03784">Beginner</content>
 	<content contentuid="h2b7342e8gaaf5g47ebg862bg0cda1ed1efda">Stone Rod</content>
 	<content contentuid="h2b7863d6g2faag4ee8gba71g90f217bf1d52">Rank 1</content>
 	<content contentuid="h2b8d8701g5305g47a9ga7fbg72ac53cd79da">Soul Harvest (Constitution Scaling)</content>
@@ -459,7 +459,7 @@
 	<content contentuid="h2bd6993fg21f0g4223g8153g07ee4c6787d6">&lt;font color=&apos;#C7A758&apos;&gt;Balrin&apos;s Throwing Axe&lt;/font&gt; (Oil)</content>
 	<content contentuid="h2bda3229g17f3g4b04gb1c7g34464eceeb0e">War Charge</content>
 	<content contentuid="h2c2a74cag0023g4852g8856ga6d333132669">Thunderbolt Rune</content>
-	<content contentuid="h2c65600bg0fe8g4898g9a07g6d75f4e8f37d">&lt;font color=&apos;#CC9E03&apos;&gt;Shieldmaster&lt;/font&gt;</content>
+	<content contentuid="h2c65600bg0fe8g4898g9a07g6d75f4e8f37d">Shieldmaster</content>
 	<content contentuid="h2c72dda9gf24ag4bd0ga890ge00f5af40eb0">Finesse Conversion</content>
 	<content contentuid="h2c7d2267gcd8fg4a99g88f3g55fbab743bc0">Throw a scythe at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Enemies below 5% max health will be &lt;font color=&apos;#FF00FF&apos;&gt;Reaped&lt;/font&gt;, resulting in instant-death.&lt;/font&gt;</content>
 	<content contentuid="h2d0e8796g1d66g4541g8ce3ged8f936c4129">*Tell the mercenary to stop following you.*</content>
@@ -477,23 +477,23 @@
 	<content contentuid="h2e4ae01dga602g44e9gbd2eg7fd388dcb6b0">Throw a blunt weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
 	<content contentuid="h2e55bcbdg7ef2g4157gbf18g50fbc229cd17">Monk&apos;s Resolution</content>
 	<content contentuid="h2e562602g1cbbg4ba0gac36gcc780f8809e2">Tarred</content>
-	<content contentuid="h2e5ab189g901dg4c86ga74cgca3bf1dcba15">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h2e5ab189g901dg4c86ga74cgca3bf1dcba15">Beginner</content>
 	<content contentuid="h2e604607g818cg4c27gba6ag06f2d6e8f015">Water Burn</content>
 	<content contentuid="h2e7c7fabgca61g4ea4g9592g76b45b373680">Covering</content>
 	<content contentuid="h2ead0b87gb4b0g410ag8334ge82de5c8fea0">Weapon Masteries</content>
-	<content contentuid="h2ebfd90ag137eg4e96gbd08g2346f41f6d90">&lt;font color=&apos;#FF9D33&apos;&gt;Master Monk of Staves&lt;/font&gt;</content>
+	<content contentuid="h2ebfd90ag137eg4e96gbd08g2346f41f6d90">Master Monk of Staves</content>
 	<content contentuid="h2edcadadgbc7eg471fgb92eg5a54505d870f">Runeblade (Earth)</content>
 	<content contentuid="h2ef72a00ga6f5g43d1gba96gae4d9c8b2f2d">Old Inert Runeblade</content>
 	<content contentuid="h2efc37f8g80feg4ca4g8cdfgb975ae636a4f">Breach Charge</content>
 	<content contentuid="h2eff8b98g5686g4d54gafd3gf3a85ede0865">Magical Rod Of The Dwarf</content>
-	<content contentuid="h2effed72g3fcag4620gb39dg6faf68f3ae6f">&lt;font color=&apos;#FFEAEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h2effed72g3fcag4620gb39dg6faf68f3ae6f">Beginner</content>
 	<content contentuid="h2f001e80g4db8g4969ga0b2gb72579e4c35a">Devil Hand</content>
 	<content contentuid="h2f0aa7a0g7906g47deg9dc4g90ae9e3c588f">Nuke</content>
 	<content contentuid="h2f2dfc11g8799g4c8dga1c9g7036bd340814">Reacher</content>
 	<content contentuid="h2f4c3757gba72g4955g8e46g80ce56fb3e79">Blade of the Fallen Angel</content>
 	<content contentuid="h2f56f463ge322g4d7eg833cgd05de7de88cc">Crescent Blade</content>
 	<content contentuid="h2f6cd35dgc573g4ae0gbe45ge7ce4f7b3a60">A lightweight blade with a razor-sharp point. Perfect for those who wish to dance along the battlefield.</content>
-	<content contentuid="h2f7c6f84g2961g489ag95b0gd6b5eb28b974">&lt;font color=&apos;#8756EB&apos;&gt;Expert Rogue&lt;/font&gt;</content>
+	<content contentuid="h2f7c6f84g2961g489ag95b0gd6b5eb28b974">Expert Rogue</content>
 	<content contentuid="h2fbf265bg3a42g41cdga140gaf15b7720660">Reload your &lt;font color=&apos;#C7A758&apos;&gt;Hand Crossbow&lt;/font&gt;, instantly refreshing the &lt;font color=&apos;#C7A758&apos;&gt;Shoot Hand Crossbow&lt;/font&gt; skill.</content>
 	<content contentuid="h2fbf7643g3ecfg4035gba05g1e6d2eae92eb">Covering</content>
 	<content contentuid="h2fc91e04g9716g400cgaa32g067043c75888">Katara&apos;s Hope</content>
@@ -553,7 +553,7 @@
 	<content contentuid="h34f6772egc119g46b0g894age91618dddca1">Fire Bullets</content>
 	<content contentuid="h35037378g9f64g488dga457g5a32144339dd">Quarterstaff (Wood)</content>
 	<content contentuid="h35114895g606cg447cg8aeagc775b06a35bb">Gnak&apos;s Spell Scroll (Reset Scaling)</content>
-	<content contentuid="h3572bd9bg1350g4de5g92c9gb192f1f7a927">&lt;font color=&apos;#FFF59D&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h3572bd9bg1350g4de5g92c9gb192f1f7a927">Novice</content>
 	<content contentuid="h35865821g7403g4bb4g99bdga8a26e72f85f">Kevin (Normal)</content>
 	<content contentuid="h35ad18c6g01dbg47e0g9be9g7ec0412ca64e">Blademaster&apos;s Strike 5</content>
 	<content contentuid="h35d802e5g282ag41bfg8e93ga45d0292261e">Shinobi Arm</content>
@@ -585,7 +585,7 @@
 	<content contentuid="h392b7852g3ad6g40c3gbae1g47467f5a36b6">Character has activated the &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 20% chance to be &lt;font color=&apos;#a8a8a8&apos;&gt;Slowed&lt;/font&gt; for 1 turn.</content>
 	<content contentuid="h392e56e5g46fdg4d93g9bd1ge9e7ddbefee4">Peacekeeper</content>
 	<content contentuid="h393d0084gbc8cg4291gb02ege218a1abaa66">Activate &lt;font color=&apos;#b823cb&apos;&gt;Chaos Rune&lt;/font&gt;</content>
-	<content contentuid="h398feef7g53a2g490dg8a3egf22488dacc7c">&lt;font color=&apos;#B5D48D&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h398feef7g53a2g490dg8a3egf22488dacc7c">Novice</content>
 	<content contentuid="h39be1846g4a56g40d2g826cga46ecc87c5d0">Chaotic Weakness</content>
 	<content contentuid="h39c1891cg03e8g47d5g9142g969806c842c7">Oaken Aegis, Shield of the Divine</content>
 	<content contentuid="h39c5dbe1g768bg4d06g8847g0e3f4bd33489">&lt;font color=&apos;#D040D0&apos;&gt;Token of Reversal&lt;/font&gt;</content>
@@ -601,9 +601,9 @@
 	<content contentuid="h3acfd1eegad00g408dg84a5g8b93ec313b78">Grave Rune</content>
 	<content contentuid="h3ad7f502g9bd1g4954g92e5ga326d5565635">An electrified katana, once wielded by a slayer of demons.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="h3ae4b14eg11c6g48ffg95a2g2dd898dcae21">Runeblade of Poison</content>
-	<content contentuid="h3b2089bdgfaefg42b4gbf74g2fb7f027df6a">&lt;font color=&apos;#4CFF00&apos;&gt;Master Gunslinger&lt;/font&gt;</content>
+	<content contentuid="h3b2089bdgfaefg42b4gbf74g2fb7f027df6a">Master Gunslinger</content>
 	<content contentuid="h3b2dadbbg3989g4298-a860g979ba1616b3b">Fencer</content>
-	<content contentuid="h3b6db1dfgdda3g4a2dgadffg6904133abdd3">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h3b6db1dfgdda3g4a2dgadffg6904133abdd3">Beginner</content>
 	<content contentuid="h3b7aff29g3695g448agbd64g56261c9cf503">&lt;font color=&apos;#97fbff&apos;&gt;Blessed Water Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h3b87e4feg20b1g4ad1gae99gfd2c945c19f7">General&apos;s Mercy</content>
 	<content contentuid="h3b90f6e5gfc36g4085gb291g03b83af766de">Battle Stomp creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.</content>
@@ -616,9 +616,9 @@
 	<content contentuid="h3c0e91d5g36efg4a8cg93d6gc45f6bf374c7">Spellsponge</content>
 	<content contentuid="h3c24295cg7c91g42dega708g63b3f524e4ab">A sharp greatbow arrow shimmering beneath a toxic green mist; best not to inhale as you release this venomous cloud.</content>
 	<content contentuid="h3c29ef66g8d40g452cgb5f0g346b54e6b03e">Barricade of the Ancient Empire</content>
-	<content contentuid="h3c4adc5agfe20g4feega282gd5ff0bf85bdf">&lt;font color=&apos;#6827EC&apos;&gt;Master Shadowdancer&lt;/font&gt;</content>
-	<content contentuid="h3c662307g8ee5g4ca2g8426ge56fbb8d6ac2">&lt;font color=&apos;#52D4FF&apos;&gt;Expert Bookkeeper&lt;/font&gt;</content>
-	<content contentuid="h3c8a080cgb3b1g4e8fg8c49g13fdffdf5c49">&lt;font color=&apos;#FFC973&apos;&gt;Journeyman Dual Shieldsman&lt;/font&gt;</content>
+	<content contentuid="h3c4adc5agfe20g4feega282gd5ff0bf85bdf">Master Shadowdancer</content>
+	<content contentuid="h3c662307g8ee5g4ca2g8426ge56fbb8d6ac2">Expert Bookkeeper</content>
+	<content contentuid="h3c8a080cgb3b1g4e8fg8c49g13fdffdf5c49">Journeyman Dual Shieldsman</content>
 	<content contentuid="h3c905e53gc20bg434cgac81gd9877ebbbe4c">&lt;font color=&apos;#FD8826&apos;&gt;Quarterstaff Mastery II&lt;/font&gt;</content>
 	<content contentuid="h3cad14e9gc1a1g4d96gb7a3gf1513ca5a6fc">Steamcloud Arrow</content>
 	<content contentuid="h3d0276edgb096g4720g8f9fg03f6b75db509">Soul Scorcher</content>
@@ -660,11 +660,11 @@
 	<content contentuid="h413702f7gb1cfg418bg91dbgc7a60e1cbf14">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are covered in a deadly toxin, dealing Poison damage.</content>
 	<content contentuid="h4138a1cfg2f34g4167g8dd1g82fdcbddeec8">Raizan (Unleashed)</content>
 	<content contentuid="h4145e065g37b0g4670g824cgf978c9c1bc84">Such a headache...</content>
-	<content contentuid="h414c2944gf959g41bcgb30fg311454127738">&lt;font color=&apos;#73FFCC&apos;&gt;Reaper of Souls&lt;/font&gt;</content>
+	<content contentuid="h414c2944gf959g41bcgb30fg311454127738">Reaper of Souls</content>
 	<content contentuid="h41572b94g3984g4e03gb791g9017a6081cf4">Muramasa, The Cursed Blade (Strength Scaling)</content>
 	<content contentuid="h415f025egf93cg4ee8gafe0gec2c25669edb">Fire 15 bullets in a [1] degree arc. Each bullet deals [2].</content>
 	<content contentuid="h416e348bgb3ddg4b02g9f8cg228d9883f50f">&lt;font color=&apos;#65C900&apos;&gt;Attuned to Poison&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#65C900&apos;&gt;Contaminates surfaces.&lt;/font&gt;</content>
-	<content contentuid="h41d7d648geb74g4711gb607g374e572df966">&lt;font color=&apos;#FFB94A&apos;&gt;Expert Dual Shieldsman&lt;/font&gt;</content>
+	<content contentuid="h41d7d648geb74g4711gb607g374e572df966">Expert Dual Shieldsman</content>
 	<content contentuid="h41e991cbgbe00g4469g924bge4d4c73cffa2">Cripple the target with a sweeping blow, and all characters around it. Deals [1].[2]</content>
 	<content contentuid="h41f9a490ge372g43c7g989ag81b444fb98c8">&lt;font color=&apos;#FF0000&apos;&gt;*Only the grimoire user can equip that!*&lt;/font&gt;</content>
 	<content contentuid="h41ff62e4g3ae2g4f24ga725g0442f8e936a2">*[ONE-HANDED] Click on the button labeled &apos;One-Handed&apos;.*</content>
@@ -672,13 +672,13 @@
 	<content contentuid="h42445177g4747g4c91g9218gbc6a4e300981">&lt;font color=&apos;#fe6e27&apos;&gt;Fire Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h4262ee77g4c47g4730ga3d9gc1ebd98c28d7">Poison Gas Charge</content>
 	<content contentuid="h42f0c651g539fg4421gac51gd348b702763d">Common Greatbow</content>
-	<content contentuid="h4305abb5g75b4g41e7g9351ge3a0405cc957">&lt;font color=&apos;#DDFFB3&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h4305abb5g75b4g41e7g9351ge3a0405cc957">Novice</content>
 	<content contentuid="h43214f8cge37cg4950g9388gaaddd43d5590">&lt;font color=&apos;#FF23CB&apos;&gt;Chaos Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
 	<content contentuid="h4343971egf586g483bgba2ag7aebcba49c5e">Inert Runeblade</content>
 	<content contentuid="h4367cc22g9d4fg4c99ga1dfgc210f7915de3">Throw a chair weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
-	<content contentuid="h43b022fdg8c40g4dc2gadceg33269acfd0a9">&lt;font color=&apos;#A6D569&apos;&gt;Journeyman Crossbowman&lt;/font&gt;</content>
+	<content contentuid="h43b022fdg8c40g4dc2gadceg33269acfd0a9">Journeyman Crossbowman</content>
 	<content contentuid="h43cc06a4g9bcdg44b6g88ffgfc91981571dc">Concussion</content>
-	<content contentuid="h43e00fc3g0ac6g4ddag9864g161340dd5a62">&lt;font color=&apos;#CAEA9C&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h43e00fc3g0ac6g4ddag9864g161340dd5a62">Novice</content>
 	<content contentuid="h43ebaac0g9f8fg4923g9273ga2104220576b">Groundcracker</content>
 	<content contentuid="h441e6d3cg812eg40afg9842gcceb49b2e70b">Legend</content>
 	<content contentuid="h445ce10agf099g45e3g90a4g2ef44495bf43">Ancestral Bokuto</content>
@@ -689,7 +689,7 @@
 	<content contentuid="h44d793cbg555bg44fegaac2gc8fb48129c4d">Shadow Weakness</content>
 	<content contentuid="h44e46308g8f4dg4357gaac4g1d50a425d36a">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h4504bbc0gb7a6g42c3ga57eg83f3e78c0db2">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Insert Failed - No Hand Crossbow Equipped&lt;/font&gt;</content>
-	<content contentuid="h450704d2g528dg4032g9da7g77a6ad86beea">&lt;font color=&apos;#F56CA3&apos;&gt;Journeyman Thrower&lt;/font&gt;</content>
+	<content contentuid="h450704d2g528dg4032g9da7g77a6ad86beea">Journeyman Thrower</content>
 	<content contentuid="h451677d2ga792g4f99g8f77gccafa357861c">A warrior who strives to defend the innocent through a unique style that utilizes dual shields</content>
 	<content contentuid="h453d9d53gcdfdg4674g819fgbc0de4196a21">Heed the rallying cry of the Standard-Bearer, teleporting to the raised banner.</content>
 	<content contentuid="h45457359gaa62g40f9gaa6bgd1996571cc40">Shield Prison</content>
@@ -699,7 +699,7 @@
 	<content contentuid="h45c35594ga4efg4923g87b2g351240d83b96">Slayer&apos;s Greatbow</content>
 	<content contentuid="h46549881g092ag4c08ga301g9e043ee34d80">Character is unsteady, and has a chance to fall when moving.</content>
 	<content contentuid="h46875020ge016g4eccg94ecgc9f5233c07fd">[1]&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;If the target is disabled, deal an additional [2].&lt;/font&gt;</content>
-	<content contentuid="h46afecdbgf889g427ega96fge3e1d5c6a566">&lt;font color=&apos;#FF9E03&apos;&gt;Dual Shieldmaster&lt;/font&gt;</content>
+	<content contentuid="h46afecdbgf889g427ega96fge3e1d5c6a566">Dual Shieldmaster</content>
 	<content contentuid="h4746d357ge878g462eg86ccg30f7a8115f17">*[TWO-HANDED] Click on the button labeled &apos;Two-Handed&apos;.*</content>
 	<content contentuid="h4752734dg8d97g4a1eg9ef2g6c089c8a27fc">Character&apos;s firearm is attuned to ice.</content>
 	<content contentuid="h477c0babg3628g4207g922ega0f054a32cb6">&lt;font color=&apos;#9A5085&apos;&gt;Torment&lt;/font&gt;</content>
@@ -708,14 +708,14 @@
 	<content contentuid="h47d73bfcg16eag4504g83c0ge7b9c0048f13">*Ask to see the trader&apos;s goods.*</content>
 	<content contentuid="h4806c4d0gb9d3g4b2cg853fg79253e92c615">Water Rune</content>
 	<content contentuid="h480c4699g224bg4bccg9b43g3a6b0ea2bb38">Sniper&apos;s Rifle</content>
-	<content contentuid="h485b2ba6g6da5g4d12gbbdag54371429702b">&lt;font color=&apos;#FF662A&apos;&gt;Swordmaster&lt;/font&gt;</content>
+	<content contentuid="h485b2ba6g6da5g4d12gbbdag54371429702b">Swordmaster</content>
 	<content contentuid="h486c6d09gd254g4975ga044g67cd18579a97">Summon &lt;font color=&apos;#C7A758&apos;&gt;Raizan&lt;/font&gt;</content>
 	<content contentuid="h4893e298g0c9fg4593gad0dgb1a795c0d767">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
 	<content contentuid="h48d438bdg5d2bg4976gaef5g4b6f5425cdae">A magical blade imbued with the power of lightning. The runes can be invoked to bathe the blade in dangerous electrical energy.</content>
 	<content contentuid="h48db07bag5564g4e40g9de9gac7ffef1ffa6">Sniper&apos;s Vow</content>
-	<content contentuid="h48e0e878g1bd3g465dg8fc5g14a50291ffd3">&lt;font color=&apos;#77E9FE&apos;&gt;Expert Staffmeister&lt;/font&gt;</content>
+	<content contentuid="h48e0e878g1bd3g465dg8fc5g14a50291ffd3">Expert Staffmeister</content>
 	<content contentuid="h490c0a9dg5d8ag4675g9a3fgaf20283ef584">Breach Charge</content>
-	<content contentuid="h491f8119g2303g4b83g8a74g2ec7881ba4c9">&lt;font color=&apos;#52D43A&apos;&gt;Expert Gunslinger&lt;/font&gt;</content>
+	<content contentuid="h491f8119g2303g4b83g8a74g2ec7881ba4c9">Expert Gunslinger</content>
 	<content contentuid="h49452fe7gd1e1g4740ga206gec725a6f6727">Polished Rifle</content>
 	<content contentuid="h49625e23gdd8fg4e7dgb02eg691bfeb4387f">Dud?</content>
 	<content contentuid="h497b84f3g0d77g45acg929cg7d1fd008b839">&lt;font color=&apos;#80FFC3&apos;&gt;A pouch that contains an assortment of special tokens, used to modify unique equipment.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff6600&apos;&gt;Limit 1 bag per party.&lt;/font&gt;</content>
@@ -727,17 +727,17 @@
 	<content contentuid="h4a2ecb35g0887g430eg8398g1538d85d6ff5">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery V&lt;/font&gt;</content>
 	<content contentuid="h4a34bf73gdea3g49d8g98cag9d0ae3ae6b07">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery II&lt;/font&gt;&lt;br&gt;Instantly teleport to enemies marked with &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt;, dealing [1] on hit, and consuming each stack for [2] each.&lt;br&gt;&lt;font color=&apos;#F35C8E&apos;&gt;If an enemy dies, &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt; is spread to enemies within 6m.&lt;/font&gt;</content>
 	<content contentuid="h4a4410e4g444ag4cffg9ae1g5f8958f24ff5">Scripture of the Righteous (Strength Scaling)</content>
-	<content contentuid="h4a5670c7g1f24g42f8g93acg5f3b107eb433">&lt;font color=&apos;#F56C6C&apos;&gt;Journeyman Bladesman&lt;/font&gt;</content>
+	<content contentuid="h4a5670c7g1f24g42f8g93acg5f3b107eb433">Journeyman Bladesman</content>
 	<content contentuid="h4aa17b50g92e4g4783g9afcgcfdceca32bb2">&lt;font color=&apos;#00FF7F&apos; size=&apos;18&apos;&gt;Greatbow Mastery II&lt;/font&gt;&lt;br&gt;Designate a target position. After 3 turns in combat, a bombardment of [1] great arrows strike that position, each dealing [2].&lt;br&gt;&lt;font color=&apos;#FF4400&apos;&gt;Immobilized targets take an additional [3] per hit.&lt;/font&gt;</content>
 	<content contentuid="h4abed71agf2bdg489dgae88g06f2333e7666">Mountain&apos;s Oath</content>
 	<content contentuid="h4aeacdefg00bcg4dbcg87f1g2f109381fe5c">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h4aebc2e4g2ae1g4c5eg9c3agd1c7d026ac0b">Token of Strength</content>
-	<content contentuid="h4b2627dege20cg4b9agaff7ga3f748e04904">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h4b2627dege20cg4b9agaff7ga3f748e04904">Beginner</content>
 	<content contentuid="h4b3d0543g05d0g4553gb507gd01521f0824b">A magical blade imbued with the power of water. The runes can be invoked to bathe the blade in a dousing layer of water.</content>
 	<content contentuid="h4b4a555ag672fg4b15g8cafgaffd559ae169">Death&apos;s Edge (Finesse Scaling)</content>
 	<content contentuid="h4b5499begc386g4b73g976fge8d44a2b5142">Chaos Edge (Memory Scaling)</content>
 	<content contentuid="h4b681e66gd563g43abg892fg376ffaa37132">[1] Corrosive</content>
-	<content contentuid="h4b6dfd40g1a10g4ba5ga77cg19caee1b9fdb">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h4b6dfd40g1a10g4ba5ga77cg19caee1b9fdb">Beginner</content>
 	<content contentuid="h4b6f6764g5c7ag48d5gbd99g7a4faf5c7243">Weapon Expansion - Grenades</content>
 	<content contentuid="h4b7e178cg37c4g430dg8282g14bc022d3b20">Old Rifle</content>
 	<content contentuid="h4ba7413cga457g4d1bg85afg8f255c9e9034">Dazed</content>
@@ -765,7 +765,7 @@
 	<content contentuid="h4daee89cg04bfg4646g839cga7add594aa6e">Soul Rune</content>
 	<content contentuid="h4db85b3dga320g44d4g8cb6g05a4dc44ce41">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h4e08237bgb367g4170g8bddgd7dd679ff89f">Frostdyne (Empowered) (Reset Scaling)</content>
-	<content contentuid="h4e16f727gb7ceg4c04gac4ag25307029297a">&lt;font color=&apos;#C8FBFF&apos;&gt;Journeyman Reaper&lt;/font&gt;</content>
+	<content contentuid="h4e16f727gb7ceg4c04gac4ag25307029297a">Journeyman Reaper</content>
 	<content contentuid="h4e4de558g5137g4881ga8b3gff5625278817">A gauntlet once worn by a notorious demon. Seems to occasionally twitch.&lt;br&gt;&lt;font color=&apos;#ff13f1&apos;&gt;Gains power from slain enemies.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="h4e828850gecfbg4349g914dg2af390edffe5">Revenant</content>
 	<content contentuid="h4e990fe9g1ffcg46ecga18fg891f812ef7c0">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#D040D0&apos;&gt;All Resistances&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
@@ -858,7 +858,7 @@
 	<content contentuid="h57f6c5dcg34d5g4144g8e78g0bd2d0d164f6">&lt;font color=&apos;#AA895B&apos;&gt;Flask of Earth Weakness&lt;/font&gt;</content>
 	<content contentuid="h57fe3569g0a44g4321g98b5g9aec8d3d24a9">Air Rune</content>
 	<content contentuid="h583510a1gf1feg4755g9a22g0a897d282baf">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery I&lt;/font&gt;</content>
-	<content contentuid="h58711edbg90e3g4c5bgada2g8453b1e7554f">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h58711edbg90e3g4c5bgada2g8453b1e7554f">Beginner</content>
 	<content contentuid="h58a35a15gc595g4dcdga354ga8348f3add50">Eviscerating Estoc</content>
 	<content contentuid="h58aa4eb7g3635g4601gbe24g2646de261d8e">Murakumo, Great Blade</content>
 	<content contentuid="h58ada9c4g3932g43f3g9f2dg4972e1dfad4b">Electric Bullets</content>
@@ -910,12 +910,12 @@
 	<content contentuid="h5cf536d0g66bdg4d61ga3cfgec71c21cf84b">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#65c900&apos;&gt;Poison Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Applies &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; to enemies hit for 1 turn, or increases the duration of &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; by 1 turn per attack (4 turns max).</content>
 	<content contentuid="h5d019e10g0e45g4443gb6eeg4a3481650a0d">Character has lowered resistance to &lt;font color=&apos;#4197E2&apos;&gt;water damage&lt;/font&gt;.</content>
 	<content contentuid="h5d0dd2d4ga761g4aeegafc5g17f8ab856449">Necromantic Rune</content>
-	<content contentuid="h5d62b911g9204g4b88ga279gf899e1290b73">&lt;font color=&apos;#96F8FF&apos;&gt;Expert Reaper&lt;/font&gt;</content>
+	<content contentuid="h5d62b911g9204g4b88ga279gf899e1290b73">Expert Reaper</content>
 	<content contentuid="h5d6b0411geb36g415agafc8g59e8ed3ab0b1">Character is initiating a revolutionary war charge. Get&apos;em!</content>
 	<content contentuid="h5d896d52ge61cg4bb3ga98eg4bd8b8600800">Captain&apos;s Inspiration</content>
 	<content contentuid="h5d8a154eg64b7g4355g97abgb77587ce2898">Glorious Handcannon</content>
 	<content contentuid="h5d8baba3g6dfag4651gb405g2f9e93097e4f">Contamination Rune</content>
-	<content contentuid="h5d911119g2364g4baeg9f5dg74a095d048ce">&lt;font color=&apos;#F5A36C&apos;&gt;Journeyman Staff Monk&lt;/font&gt;</content>
+	<content contentuid="h5d911119g2364g4baeg9f5dg74a095d048ce">Journeyman Staff Monk</content>
 	<content contentuid="h5de7cd4agefe0g4ab3g8d0agdd9fdb52f2c5">Gravity Falls</content>
 	<content contentuid="h5e37e2c9g1d9fg4dc6g9d11g36ef081c0e27">Throwing Dagger</content>
 	<content contentuid="h5e406683g1f15g4998g869cgee124ba8d773">Frenzy Charge</content>
@@ -925,9 +925,9 @@
 	<content contentuid="h5eb0dcafg0ee8g4b0agb4b8gfc5df2e3e5b5">Pilgrim&apos;s Spiked Quarterstaff</content>
 	<content contentuid="h5eb9e127gdbfbg446egbaf0gb25418ef5ab9">Soul Rune</content>
 	<content contentuid="h5ef2270ag1abfg416agb60bge5c1ca312859">Great Odachi</content>
-	<content contentuid="h5f43361agb604g44beg8cdegf1e06dd14fb0">&lt;font color=&apos;#FF7251&apos;&gt;Expert Swordsman&lt;/font&gt;</content>
+	<content contentuid="h5f43361agb604g44beg8cdegf1e06dd14fb0">Expert Swordsman</content>
 	<content contentuid="h5f55d911g3801g416fgb2e7gef193b46b0cf">Exquisite Dwarven Greatbow</content>
-	<content contentuid="h5f751ba5g27deg4581gb1b2gf59ab659113f">&lt;font color=&apos;#FF3376&apos;&gt;Master Thrower&lt;/font&gt;</content>
+	<content contentuid="h5f751ba5g27deg4581gb1b2gf59ab659113f">Master Thrower</content>
 	<content contentuid="h5f792014g1a5bg4a8bg8e5cg85cae5a152fb">Dragon Bone Claws</content>
 	<content contentuid="h5f87d28fge5ddg4f71g8f4bgbade472afe64">A... Crossbow?&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h5f93ea7dg4d11g4cc6g870cg47c3d7373fb6">Tempered Runeblade of Earth</content>
@@ -977,11 +977,11 @@
 	<content contentuid="h64027897g645dg406eg8db4g8860542eacd0">Shiden, Thunder Orb (Empowered)</content>
 	<content contentuid="h64076fb9g07a1g403bgb543g1c841c83e765">Frostdyne (Empowered) (Memory Scaling)</content>
 	<content contentuid="h6413538ag16bag4b9aga8d0ga154dd712d66">Earthenblade</content>
-	<content contentuid="h6426796bgbbd4g4af3g94d3g01ee834f3cad">&lt;font color=&apos;#FF3333&apos;&gt;Blademaster&lt;/font&gt;</content>
+	<content contentuid="h6426796bgbbd4g4af3g94d3g01ee834f3cad">Blademaster</content>
 	<content contentuid="h64563df4g3fe0g404bga324g1c8ef0523057">Nightbane</content>
 	<content contentuid="h64584007g2094g4e07ga5a7g6ff6272f23f7">Mighty Quiver</content>
 	<content contentuid="h64758f3fg63a1g4389g9b38g7bed5ed1c8a1">Slowdown Arrow</content>
-	<content contentuid="h649f61ffg8842g40f4g8272gbfd109a337a9">&lt;font color=&apos;#B274FF&apos;&gt;Expert of Wands&lt;/font&gt;</content>
+	<content contentuid="h649f61ffg8842g40f4g8272gbfd109a337a9">Expert of Wands</content>
 	<content contentuid="h64a393ccg4ec7g4978gbb35g7bd51b2f8013">Deflect Projectiles</content>
 	<content contentuid="h64c23dfag551fg4d08g9a68gdb0f68cab0aa">Cold Calamity</content>
 	<content contentuid="h64c6053dge3b8g4f7dga3f2gfc611f216d3b">Gravelord&apos;s Blade</content>
@@ -1068,18 +1068,18 @@
 	<content contentuid="h6dda1c3fgd618g4160g87beg71885174333f">Lifeblood Rune</content>
 	<content contentuid="h6de80073g8e7dg4e1bg99a8g8de5ba3c6462">Bicorne of the Seas</content>
 	<content contentuid="h6dfbe19fgd3b9g4a18gb689gfc0156c415e9">&lt;font color=&apos;#E4CE93&apos;&gt;*Your axe finds its way back to you.*</content>
-	<content contentuid="h6e07e534gbaedg481dgb66ag0d845a2302cd">&lt;font color=&apos;#94E963&apos;&gt;Journeyman Bannerman&lt;/font&gt;</content>
+	<content contentuid="h6e07e534gbaedg481dgb66ag0d845a2302cd">Journeyman Bannerman</content>
 	<content contentuid="h6e194dd5g2ad5g4d96g965agcc05dac9c23f">Runic Cannon Energy</content>
 	<content contentuid="h6e21af89g96d5g4826ga11ag8688bee4a5f7">Blade</content>
 	<content contentuid="h6e3a04cbgb9a1g4f1dga2b3g71f181ec93d3">Weapon Expansion - Unique Weapons</content>
 	<content contentuid="h6e43d09bg30f6g462bgbd80gdd66ab3159f6">Warchief&apos;s Halberd (Spear) (Reset Scaling)</content>
-	<content contentuid="h6e76ccd9gbe3eg47e7g905bg5c15031949e3">&lt;font color=&apos;#FFF2C6&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h6e76ccd9gbe3eg47e7g905bg5c15031949e3">Novice</content>
 	<content contentuid="h6e79b305g83bfg4c49gac2dg1fa32a229166">Pin Down</content>
 	<content contentuid="h6e7f93aeg6389g49ffgbd17g56c38a61568b">Assassin&apos;s Retirement</content>
 	<content contentuid="h6e84de08g3e9bg43aega2acg098aa0085c8d">Charming Arrow</content>
 	<content contentuid="h6e8bf4fdgd720g43adg878ag75aff041a469">Magical Mini-Arbalest</content>
 	<content contentuid="h6ebe1ceegf67eg4baagbd37gec6cc8aee3e7">Debug Menu</content>
-	<content contentuid="h6ee30aaegaff6g4751gab87gbb71b9fe0292">&lt;font color=&apos;#52D43A&apos;&gt;Expert Bannerkeeper&lt;/font&gt;</content>
+	<content contentuid="h6ee30aaegaff6g4751gab87gbb71b9fe0292">Expert Bannerkeeper</content>
 	<content contentuid="h6f080319gd171g43e3gaa17gc7b1d244ce0c">Captain&apos;s Bicorne</content>
 	<content contentuid="h6f740d4cgf6ebg4a06g9217gbd2bb23a4271">*The labels on the red buttons light up, as you hear a mechanic voice.* &quot;Greetings [VALUED CUSTOMER]! Place an order, and be amazed as our stock of weaponry changes at the next available cycle!&quot;</content>
 	<content contentuid="h6f91bac2g6077g4c5fg8124g8d920cb68604">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to activate that element within their blade for a limited time.</content>
@@ -1100,7 +1100,7 @@
 	<content contentuid="h717f9025g66d1g4eb6gac52gc3e03398b4b9">[Exit]</content>
 	<content contentuid="h71aeb8ebgc32eg4f41g8151g248a32af656e">Internal Damage</content>
 	<content contentuid="h71b09f9fg285fg4532gab16g1c7640864141">Damage is based on your level and scales with [1].</content>
-	<content contentuid="h71cd4b64gc0c6g4cf7gaaa8g54b13eb8c40c">&lt;font color=&apos;#95D83F&apos;&gt;Expert Crossbowman&lt;/font&gt;</content>
+	<content contentuid="h71cd4b64gc0c6g4cf7gaaa8g54b13eb8c40c">Expert Crossbowman</content>
 	<content contentuid="h71d19b56gda1eg434aga7f0g58ffec6c6a0a">Adept mages who train in the ways of the sword, using special &apos;Runeblades&apos; as a conduit to enhance their magic. Crafty use of the runes etched upon their blades allow Runic Knights to weave their attacks and spells together, devastating the battlefield</content>
 	<content contentuid="h71ee789dga347g41dbg880eg60ccb9b76109">A greatbow arrow covered in acid that eats away at armor. Miraculously, it failed to degrade your quiver.</content>
 	<content contentuid="h71eeb1baga7ddg4719gb91cg1a500c7dbe74">Can Backstab</content>
@@ -1110,19 +1110,19 @@
 	<content contentuid="h724b0dbfg11c7g472eg8cf5g3772c2f7da26">An extremely sharp, star-shaped plate of metal.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Looks perfect for throwng!&lt;/font&gt;</content>
 	<content contentuid="h725f0092g85f3g48eeg9e7ag314699f9b0df">&lt;font color=&apos;#2EFFE9&apos;&gt;Arcane Staff Mastery III&lt;/font&gt;</content>
 	<content contentuid="h72759001g42c8g4953g8657gdc357b45f8cc">The personal axe of Balrin, a Dwarven Berserker known for his legendary axe throwing.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer.&lt;/font&gt;</content>
-	<content contentuid="h7277340dgb5a1g456cgb92agb687000a31cb">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h7277340dgb5a1g456cgb92agb687000a31cb">Beginner</content>
 	<content contentuid="h72b60345g80cdg437dg9e3cgc4f0f08397a8">This cute little greatbow arrow infused with a charming potion is quite something. You really, really, really like it.</content>
 	<content contentuid="h72bb594dge9f1g4d3eg9044g970fc1243a54">&lt;font color=&apos;#FF0000&apos; size=&apos;22&apos;&gt;Displacement Failed&lt;/font&gt;</content>
 	<content contentuid="h72c0eff2g75e3g43f6gbd70g395c6d2d1e95">*[GRENADES] Click on the button labeled &apos;Grenades&apos;.*</content>
 	<content contentuid="h72c5056dg86a0g48b4g939fgd5cf4e9780ed">Poisonwall, Seeker&apos;s Bane</content>
 	<content contentuid="h731eea3ag881dg4855g9057g342f2eebd0c4">Lava Rune</content>
-	<content contentuid="h732fb684g376eg420eg9978ga0d9a6953f82">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h732fb684g376eg420eg9978ga0d9a6953f82">Beginner</content>
 	<content contentuid="h7388db69ga1b3g40f9g904eg753cc7f52cfe">Wooden Quarterstaff</content>
 	<content contentuid="h73b9bec2ge039g4045g88d6g39e3f4ea1d92">Character will be Dizzy upon standing up.</content>
 	<content contentuid="h73da4328gbc8ag4d8dga3c4g2d4ce915cb49">&lt;font color=&apos;#7D71D9&apos;&gt;Attuned Shot (Air)&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#7D71D9&apos;&gt;Electrifies surfaces.&lt;/font&gt;</content>
 	<content contentuid="h73f6aa85gf252g4ccfg9b8cge3fc630f3ea1">Worn Rapier</content>
 	<content contentuid="h74079584gc288g4e7egab31g216c5a68c0e3">a Hand Crossbow</content>
-	<content contentuid="h7418eca3g9edcg41d4gbb06g46b1d5684d35">&lt;font color=&apos;#F5E06C&apos;&gt;Expert Fencer&lt;/font&gt;</content>
+	<content contentuid="h7418eca3g9edcg41d4gbb06g46b1d5684d35">Expert Fencer</content>
 	<content contentuid="h741caab7g9157g48cbg8110g9aef901dc508">Nightfall</content>
 	<content contentuid="h7424df1fg912bg4cfcg981fg82c457d28ed2">The Weapon Master</content>
 	<content contentuid="h7456913agb829g44d5gbdc4g84e7e5725755">Alphaguard, Wolf&apos;s Bite</content>
@@ -1158,11 +1158,11 @@
 	<content contentuid="h76668755g9a87g4cfbg868fgc197f2ff219f">A cursed greatbow arrow that lands like a witch&apos;s kiss, draining the fervour of any foe.</content>
 	<content contentuid="h767c2561g60c3g4d1fga74fg44f9c988666f">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery III&lt;/font&gt;</content>
 	<content contentuid="h768b67e9g819bg4c88ga9e1gcf1740fc11c4">Activate the &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Enemies hit have a 20% chance to be &lt;font color=&apos;#a8a8a8&apos;&gt;Slowed&lt;/font&gt; for 1 turn.</content>
-	<content contentuid="h76b72fe7gf6cag4953gba27ga7c886669f2f">&lt;font color=&apos;#FFDA9E&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h76b72fe7gf6cag4953gba27ga7c886669f2f">Novice</content>
 	<content contentuid="h76bcf828gaeb5g4329ga650ge7b2bebd87c1">Character is immune to being directly Shocked by a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.</content>
 	<content contentuid="h76c6f571gf887g40d9g884ag081f3ac052dc">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery II&lt;/font&gt;</content>
 	<content contentuid="h76e869b4gae45g47c6g8529gf55e8b414d5e">Weapon Expansion - Armor</content>
-	<content contentuid="h772c1170geb23g42c0gba32gb27e108379a6">&lt;font color=&apos;#9DFCFF&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h772c1170geb23g42c0gba32gb27e108379a6">Novice</content>
 	<content contentuid="h7747dee4g9740g4294g9888gb6aa57256eef">Frostdyne (Unleashed) (Constitution Scaling)</content>
 	<content contentuid="h77557ac7g4f6fg49bdga76cg404de43d92f5">Offhand</content>
 	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">Blitz Attack applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.</content>
@@ -1177,12 +1177,12 @@
 	<content contentuid="h7875b402g4783g4122gb2bdg35dcde66f221">Toggle Mastery Menu</content>
 	<content contentuid="h787f5de6g477cg43ffg8ee6gfc5faccb055c">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery II&lt;/font&gt;</content>
 	<content contentuid="h7896f1d2g1a94g43bcgb5b2g19bdf2c81cd0">Sludgeblade</content>
-	<content contentuid="h78ac89e4gcfeeg4e19gaaa7g9b0ac3098aff">&lt;font color=&apos;#88E213&apos;&gt;Master Marksman of Crossbows&lt;/font&gt;</content>
+	<content contentuid="h78ac89e4gcfeeg4e19gaaa7g9b0ac3098aff">Master Marksman of Crossbows</content>
 	<content contentuid="h78c35bcfg5089g491cg87b0g60307ab1a54d">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery III&lt;/font&gt;</content>
 	<content contentuid="h78e76f79gc970g43c1gbe25g309a84e022e1">Marked for Death</content>
 	<content contentuid="h78f5c557g2347g4a0agb6fagf0b52fdc604a">&lt;font color=&apos;#8A2BE2&apos;&gt;Curse of the Muramasa&lt;/font&gt;</content>
 	<content contentuid="h7928e7e9g3b27g4358gbb2agd086d00cf76b">Old Wakizashi</content>
-	<content contentuid="h7971be6dg17efg4c8cg8e77g9d57ac62578c">&lt;font color=&apos;#FFE178&apos;&gt;Expert Polearmsman&lt;/font&gt;</content>
+	<content contentuid="h7971be6dg17efg4c8cg8e77g9d57ac62578c">Expert Polearmsman</content>
 	<content contentuid="h79826083ge193g47a0g829bg7c25c1d163da">&lt;font color=&apos;#fcd203&apos;&gt;Shield Mastery&lt;/font&gt;</content>
 	<content contentuid="h799c0963gf930g41fag88aag00683aa81262">Soul Harvest</content>
 	<content contentuid="h799c4c01ga967g48f0gaa4fga880f88f7465">a Book</content>
@@ -1220,7 +1220,7 @@
 	<content contentuid="h7c06808agcfc4g4186ga572ge920f4d40365">Glaive</content>
 	<content contentuid="h7c6c4185gff98g433ag864eg111954e77510">&lt;font color=&apos;#8B0000&apos;&gt;Katana Mastery&lt;/font&gt;&lt;br&gt;Striking enemies with your blade applies Blademaster&apos;s Strike, causing different effects with katana-based skills.</content>
 	<content contentuid="h7c7707f6ge7deg4bfbgb947g1a9a0e8c8261">Character has activated the &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; to enemies hit for 1 turn.</content>
-	<content contentuid="h7cac4eb1g0d7ag475cgaa87g7df51a7e6d19">&lt;font color=&apos;#9BC362&apos;&gt;Journeyman Archer&lt;/font&gt;</content>
+	<content contentuid="h7cac4eb1g0d7ag475cgaa87g7df51a7e6d19">Journeyman Archer</content>
 	<content contentuid="h7cb130ddga46fg415bg96d0g33e60f726dca">Kor&apos;vash</content>
 	<content contentuid="h7cb4d6abgacb9g48d6gbf91g2bab271be60c">Toph&apos;s Pride</content>
 	<content contentuid="h7cbb99c6g0a38g40c4g8b08g64d486ff3350">Chaos Goblin</content>
@@ -1272,12 +1272,12 @@
 	<content contentuid="h81219921g27dcg424dg9125ga508ceb28f76">&lt;font color=&apos;#73F6FF&apos;&gt;Token of Intelligence&lt;/font&gt;</content>
 	<content contentuid="h812a5df2gba2fg40f7gafc3gb5b6162f5ec4">Death&apos;s Edge</content>
 	<content contentuid="h815f287dg5938g4e1cga2a3gf9b0b8aa0e71">Attacks Bathe Enemies in a Cone of Fire</content>
-	<content contentuid="h81807eedg4a5cg4f2bg89bcgf6aa16f9deff">&lt;font color=&apos;#FF9D33&apos;&gt;Master of Firearms, Destruction Supreme&lt;/font&gt;</content>
+	<content contentuid="h81807eedg4a5cg4f2bg89bcgf6aa16f9deff">Master of Firearms</content>
 	<content contentuid="h818a634cg4f07g431cga226g09dcdfbc45dc">Charged (Runic Cannon)</content>
 	<content contentuid="h819abaa1gf2c8g4f20gaefcg4906094b14a6">Helm Splitter</content>
-	<content contentuid="h81ad53d2g707ag468ag92b9g64df4f01fce4">&lt;font color=&apos;#9DFCFF&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h81ad53d2g707ag468ag92b9g64df4f01fce4">Novice</content>
 	<content contentuid="h81bf6306g22b9g48e1g896fg6dd883b1c09c">Reinforced Wooden Shields</content>
-	<content contentuid="h81cd05aag77afg4898g87d6g6ae61536a4bf">&lt;font color=&apos;#33FFB8&apos;&gt;Master Pugilist&lt;/font&gt;</content>
+	<content contentuid="h81cd05aag77afg4898g87d6g6ae61536a4bf">Master Pugilist</content>
 	<content contentuid="h82443abeg98f3g4977gba22ga9a785091dbe">Raging</content>
 	<content contentuid="h8251f6degbeb5g4172gaf37g843f01d2c099">&lt;font color=&apos;#FD8826&apos;&gt;Quarterstaff Mastery III&lt;/font&gt;</content>
 	<content contentuid="h826d023bg5b10g4d79g874agb0f918554f34">Use weapons in battle to automatically gain mastery experience.</content>
@@ -1315,7 +1315,7 @@
 	<content contentuid="h86c1d16cgc918g4625g9df8g19a8061fa282">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h86fdba0bgd3afg43e9gbd3fgcb70e445bff3">Forest&apos;s Wall, Seeker&apos;s Spurn</content>
 	<content contentuid="h872b22a6ga3b3g409ag8921g26eb2af4a0c5">Blademaster&apos;s Strike Target</content>
-	<content contentuid="h8747de57g3defg41d3gad6aged40bb3e9540">&lt;font color=&apos;#52D43A&apos;&gt;Expert Slayer&lt;/font&gt;</content>
+	<content contentuid="h8747de57g3defg41d3gad6aged40bb3e9540">Expert Slayer</content>
 	<content contentuid="h87828da3gd327g4c50g9691gb181fe64b063">Banner of Unruly Faith (Reset Scaling)</content>
 	<content contentuid="h87b9fc5dge459g4c59ga578g623077a09ac6">Weapon Mastery Menu</content>
 	<content contentuid="h87bec8f2g14a7g4863g9ce8g0ead44d68379">Runic Cannon (Wits Scaling)</content>
@@ -1328,7 +1328,7 @@
 	<content contentuid="h8859795age8b9g438fg9d49gfa11cd9bcf2e">Eagle Eye Quiver</content>
 	<content contentuid="h887c83aag37b0g4fd8g8477gc9c54344de7e">Arcane Knowledge - Chance to explode a basic spell on attack</content>
 	<content contentuid="h88c3f760g03b2g43d1g951ag5205a1fab669">Bloodstorm Rune</content>
-	<content contentuid="h88f412b9gf5e2g4182gbc13g474ac8480690">&lt;font color=&apos;#F44E4E&apos;&gt;Expert Blademaster&lt;/font&gt;</content>
+	<content contentuid="h88f412b9gf5e2g4182gbc13g474ac8480690">Expert Blademaster</content>
 	<content contentuid="h890fdfdag3d90g44e5ga74cgf40c514d2bea">Estoc</content>
 	<content contentuid="h891bed49g98e3g4269g9932g33150016921e">Stone</content>
 	<content contentuid="h89496259g0807g42a8ga24fg7180a602eb67">Frostmourne</content>
@@ -1348,7 +1348,7 @@
 	<content contentuid="h8ae1e87bg6b1cg4ec1g8a20gd506b45bb394">Dwarvenguard, Wolfbane</content>
 	<content contentuid="h8b0389dbge818g421egb679g3b1c28fd7a5e">Worn Quarterstaff</content>
 	<content contentuid="h8b079720gd454g4ecdgaa70g18cf5b9aea5d">Character has been hit by a Blademaster&apos;s strike 5 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
-	<content contentuid="h8b4ca477gf0e1g4375ga6c3g3b20035d337c">&lt;font color=&apos;#EAFFFE&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="h8b4ca477gf0e1g4375ga6c3g3b20035d337c">Beginner</content>
 	<content contentuid="h8b5344bbg6412g4536g8f18gf457888bcfea">A trick weapon capable of combining into one large scythe, or splitting into two separate weapons.&lt;br&gt;Its blade is forged with an otherworldly material known as siderite, said to have fallen from the heavens.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="h8b5cc97egfa7dg473agbf3fg7da2103c6362">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8b6c83f4g846bg4295g9749g61d616541046">[Previous] *Look at the previous set of buttons.*</content>
@@ -1411,7 +1411,7 @@
 	<content contentuid="h911f6633g79c2g41cdg8c45g076a0bbab99b">Soul Harvest</content>
 	<content contentuid="h9125efcdg0e97g4884g95a2g9bfc844868f3">Monk (Strength)</content>
 	<content contentuid="h913f5d85ge23fg4150ga904g73667e6baa1b">Blade of Regicide</content>
-	<content contentuid="h91785cbag2ef3g43f6ga44bg5bdcfc8caea2">&lt;font color=&apos;#FFE899&apos;&gt;Journeyman Polearmsman&lt;/font&gt;</content>
+	<content contentuid="h91785cbag2ef3g43f6ga44bg5bdcfc8caea2">Journeyman Polearmsman</content>
 	<content contentuid="h9190f415gd78ag4ec3g91fbgdf7a0ce6ea4a">Neck Relief</content>
 	<content contentuid="h9194e945g76d4g4b82g92cbg8981b54178fd">The Wyre</content>
 	<content contentuid="h919bba03g011ag48c9g845agf83610d44b17">&apos;Perfect for peppering your enemies with K.N.O.W.L.E.D.G.E.&apos;</content>
@@ -1459,7 +1459,7 @@
 	<content contentuid="h96126697gaefeg49e8gbc9egb475a5c03427">&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade Mastery I&lt;/font&gt;</content>
 	<content contentuid="h96135bc7gda76g453ag8f51g814a233239ad">Character has internal injuries from an impaled weapon.</content>
 	<content contentuid="h9620932bgb03bg4cb6gb965gc3c36e1f3d24">Surface Tension</content>
-	<content contentuid="h96519d70gf99cg45f3g9108gc02e00ba27ae">&lt;font color=&apos;#CCC973&apos;&gt;Journeyman Shieldsman&lt;/font&gt;</content>
+	<content contentuid="h96519d70gf99cg45f3g9108gc02e00ba27ae">Journeyman Shieldsman</content>
 	<content contentuid="h9668e4b7gd33bg4523gb769g5e85d5e3831e">Character is encased in a chained shell, and cannot act or take damage.</content>
 	<content contentuid="h96a503b9g1759g4e0ag89d1g377eb1f59ca8">Spikey Evisceration</content>
 	<content contentuid="h96d9d2fcge7eeg4c11g923cgc6f721840db6">Shuriken</content>
@@ -1475,7 +1475,7 @@
 	<content contentuid="h9830eac8g629eg4a9egac51g0e839dd67d54">Rallying Banner</content>
 	<content contentuid="h9864326eg2193g42abg8c2cg5d4402b60de2">A blade forged in a nation far to the east.  Cuts through flesh and bone with ease.</content>
 	<content contentuid="h987e1465ge0d6g42c7g8ea8gfff6d5b48128">&lt;font color=&apos;#73f6ff&apos;&gt;Gatekeeper&apos;s Codex&lt;/font&gt; (Activated)</content>
-	<content contentuid="h98918309g3e13g449dga904gca8263e76077">&lt;font color=&apos;#CCDA9E&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="h98918309g3e13g449dga904gca8263e76077">Novice</content>
 	<content contentuid="h98a34e7ag144bg4087gbbd8g91c46f852e29">Known as &apos;Arrow of the Dragon Slayer&apos; to the renowned Lapiterran archers, this explosive projectile will just as soon blow up in your face as at your enemy&apos;s feet.</content>
 	<content contentuid="h98a6c460g3397g4590ga523ge5519e2bbe70">Chaos Edge (Constitution Scaling)</content>
 	<content contentuid="h98aea6b5gcc3eg4690ga679gf360892e0ff5">Runeblade of Air</content>
@@ -1493,9 +1493,9 @@
 	<content contentuid="h99f0cb71g0f2cg49f6ga398gb0b827e3b5d3">Raizan (Reset Scaling)</content>
 	<content contentuid="h9a4b84b1g84d6g46f3ga481g93ca9cd637d3">&lt;font color=&apos;#AA11CC&apos;&gt;Scythe Mastery III&lt;/font&gt;</content>
 	<content contentuid="h9a4f3a3dgf031g43d4g83a9g79d09571e26c">Shoot a bolt of pure void energy that deals &lt;font color=&apos;#b823cb&apos;&gt;[1] Chaos Damage&lt;/font&gt; and creates a corresponding surface.&lt;br&gt;&lt;font color=&apos;#DD00AA&apos;&gt;Each bolt has a [2] chance to fork to a new target, up to [3] times max.&lt;/font&gt;</content>
-	<content contentuid="h9a91f4a8g8630g4db3g88c5ge15b73d5f5d3">&lt;font color=&apos;#6CE3F5&apos;&gt;Journeyman Runekeeper&lt;/font&gt;</content>
+	<content contentuid="h9a91f4a8g8630g4db3g88c5ge15b73d5f5d3">Journeyman Runekeeper</content>
 	<content contentuid="h9aef428egececg4818gbb69gafbd0ddcef37">Inert Runeblade</content>
-	<content contentuid="h9af72e9eg6922g4ddcg84a2ga1190d352f11">&lt;font color=&apos;#33FFB8&apos;&gt;Runemaster&lt;/font&gt;</content>
+	<content contentuid="h9af72e9eg6922g4ddcg84a2ga1190d352f11">Runemaster</content>
 	<content contentuid="h9b06e89agc2f6g4189gac4bg3d24e3a15a55">Call forth the &lt;font color=&apos;#C7A758&apos;&gt;Raizan&lt;/font&gt; through the &lt;font color=&apos;#C7A758&apos;&gt;Shiden, Thunder Orb&lt;/font&gt;, gaining a unique katana.&lt;br&gt;When unequipping the &lt;font color=&apos;#C7A758&apos;&gt;Raizan&lt;/font&gt;, the &lt;font color=&apos;#C7A758&apos;&gt;Oni Gauntlet&lt;/font&gt;, or the &lt;font color=&apos;#C7A758&apos;&gt;Shiden, Thunder Orb&lt;/font&gt;, the &lt;font color=&apos;#C7A758&apos;&gt;Raizan&lt;/font&gt; will return to the gauntlet.</content>
 	<content contentuid="h9b0a4bf7gbdb6g4c86g8f40ga7f59d86e44f">*[POTIONS] Click on the button labeled &apos;Potions&apos;.*</content>
 	<content contentuid="h9b29515cgf629g47cdga21egb7b2c2efc527">A pistol said to once below to the Sword Saint Isshin.&lt;br&gt;Weighty, yet fits well in your hand, and comes with an attachment to wear it on your waist.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer.&lt;/font&gt;</content>
@@ -1519,7 +1519,7 @@
 	<content contentuid="h9c7f3144g17d0g40b0gab03g29ca403e0291">*[ACCESSORY] Click on the button labeled &apos;Accessory&apos;.*</content>
 	<content contentuid="h9cc61366ged2ag4267gb920g29ba93854019">A weighty hammer. Prfect for knocking people out.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h9cc8826fg120fg4210g820fg430a6091d269">Blade of the Warrior</content>
-	<content contentuid="h9ccd54f8g82adg4abag84a8g4455602ee601">&lt;font color=&apos;#AA8B39&apos;&gt;Expert Smasher&lt;/font&gt;</content>
+	<content contentuid="h9ccd54f8g82adg4abag84a8g4455602ee601">Expert Smasher</content>
 	<content contentuid="h9cd677b5g6c02g4a12gb671g70df0a3e47d0">Charging (War Charge)</content>
 	<content contentuid="h9ceb8a1cge22dg4762g8bcdgf9cb4a2cdcca">Blunt Force</content>
 	<content contentuid="h9cf18464g2f51g4473g9d63ge904dd878460">&lt;font color=&apos;#fe6e27&apos;&gt;Cursed Fire Great Arrow&lt;/font&gt;</content>
@@ -1540,7 +1540,7 @@
 	<content contentuid="h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c">Pistol</content>
 	<content contentuid="h9eba2ad8g13b4g4e10gb3bfg626ad2e82cff">Recharging (Demolitionist&apos;s Backpack)</content>
 	<content contentuid="h9ecc7cdbgfeebg4500g8e0bgcbbf39653af4">Throw the remote charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius.&lt;/font&gt;</content>
-	<content contentuid="h9ed6820agdf93g47f1g9da6ge9a4552d014c">&lt;font color=&apos;#F56C8C&apos;&gt;Expert Thrower&lt;/font&gt;</content>
+	<content contentuid="h9ed6820agdf93g47f1g9da6ge9a4552d014c">Expert Thrower</content>
 	<content contentuid="h9f1bbe3bg7346g4b0dg933cg04a94849cddf">Blunt Trauma</content>
 	<content contentuid="h9f1f158ega654g48b8gabd8ge937ad328848">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery I&lt;/font&gt;</content>
 	<content contentuid="h9f42c10bg7199g4d94g8ed4g614ba0ee0820">&lt;font color=&apos;#AA11CC&apos;&gt;Scythe Mastery II&lt;/font&gt;</content>
@@ -1579,7 +1579,7 @@
 	<content contentuid="ha334211eg8502g4530ga132g3e96b8ded816">a Shield</content>
 	<content contentuid="ha33beed7ga922g4a63gbba6gddab9629cdee">&lt;font color=&apos;#24ff24&apos;&gt;Flourish (+1 AP)&lt;/font&gt;</content>
 	<content contentuid="ha39a9ad8gcbb4g44abgbb36gd7d435a1e029">&lt;font color=&apos;#ED9D07&apos;&gt;Bada Boom&lt;/font&gt;</content>
-	<content contentuid="ha3b93455g807fg42b3gb922ga411505d0d1c">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="ha3b93455g807fg42b3gb922ga411505d0d1c">Beginner</content>
 	<content contentuid="ha3e9e78cg1fa4g4f64ga835gbc35cb1ea463">Dust Blast Cooldown</content>
 	<content contentuid="ha3ecf09agcc75g4a2dga13dg0cf01e83de6c">Gnak&apos;s Spell Scroll (Constitution Scaling)</content>
 	<content contentuid="ha3f11fe3g126fg426cga000g7963c84fb47e">Enhanced Demolition</content>
@@ -1595,7 +1595,7 @@
 	<content contentuid="ha4e834f6g497cg46b6gacf1g0fef8cdce3a0">Charred Edge</content>
 	<content contentuid="ha4f50091g7b01g4351gb17eg1dceb9f6cc85">Character has been hit by a Blademaster&apos;s strike 2 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="ha509ee2ag0a0fg4f8eg8b9cg0583440301be">Soul Harvest</content>
-	<content contentuid="ha51571ffg655ag45eagb78ag379c98e7e0b2">&lt;font color=&apos;#A57C5B&apos;&gt;Master of Smashing&lt;/font&gt;</content>
+	<content contentuid="ha51571ffg655ag45eagb78ag379c98e7e0b2">Master of Smashing</content>
 	<content contentuid="ha5799518gef22g4d3bga215g67ee45a4a922">Contaminated</content>
 	<content contentuid="ha57eabe4gc0b8g4fccg9ca7g0f748d97117a">Trusty Old Greatbow</content>
 	<content contentuid="ha5e68b94gef5ag4f30gaa13gcd30063f5a58">Revolution</content>
@@ -1610,21 +1610,21 @@
 	<content contentuid="ha6c69629g6fbag4268g8826g82af57c354fc">Take a look.</content>
 	<content contentuid="ha6cf0993ge5ddg4dbdgbd6fg0f99d8bd93c5">First Strike (War Charge)</content>
 	<content contentuid="ha707626agda71g4f2bg9ba0g615dfe488b82">Elven Greatbow</content>
-	<content contentuid="ha70b98fbg18f9g48eegbc7dge24d718e21be">&lt;font color=&apos;#D258FF&apos;&gt;Master Wandweaver&lt;/font&gt;</content>
+	<content contentuid="ha70b98fbg18f9g48eegbc7dge24d718e21be">Master Wandweaver</content>
 	<content contentuid="ha740f5c7g2d56g42ccgb7deg0fc41a623e41">Raizan (Finesse Scaling)</content>
 	<content contentuid="ha755a81agdc09g4b57ga391gde04e4395bd0">Activate &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;</content>
 	<content contentuid="ha7bb24e6gbfb5g4bfcgae42gf706d1338fc7">The sure-fire, instant death wombo combo, done live.</content>
-	<content contentuid="ha7fd7be2gd67fg419ag89fbg7bc4ece52727">&lt;font color=&apos;#FFC154&apos;&gt;Polearm Master&lt;/font&gt;</content>
+	<content contentuid="ha7fd7be2gd67fg419ag89fbg7bc4ece52727">Polearm Master</content>
 	<content contentuid="ha870a02ag06fbg4202gbc1ag4e9b7e14d70b">Activate &lt;font color=&apos;#4197e2&apos;&gt;Ice Rune&lt;/font&gt;</content>
 	<content contentuid="ha8811aa0g9969g4340g97f7g4e6cbe7ff3eb">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#188EDE&apos;&gt;Water Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="ha88f49cdgbf37g4daag9c7cg18f30aa9889e">Dual Dwarven Shields</content>
 	<content contentuid="ha8c7ee33g458fg4398g92cdg9218b530669d">Heatburst Rune</content>
-	<content contentuid="ha8c8931cge34dg45bfg9d4fg77c1a25462bc">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="ha8c8931cge34dg45bfg9d4fg77c1a25462bc">Beginner</content>
 	<content contentuid="ha8c93effg30e8g4c95gb463g2bca95974279">Destroy Armor</content>
 	<content contentuid="ha8ed1a1cg53b6g4820g9b4eg4f0662bfdcaa">Pirate</content>
 	<content contentuid="ha911cc34gf1f9g43f1g86a1g0758281d11f1">A sturdy wooden staff with a heavy, metal end. A balanced weapon with a respectable reach.</content>
 	<content contentuid="ha91230cdga6ceg41c2g8429gb9e57408f101">Water or Ice Rune</content>
-	<content contentuid="ha9215cd6g7074g41b2ga826g99c3ba415c4c">&lt;font color=&apos;#CDBCF0&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="ha9215cd6g7074g41b2ga826g99c3ba415c4c">Novice</content>
 	<content contentuid="ha931c2f8ge74fg4e46ga1b8g142846b61b46">[1]&lt;br&gt;[2]</content>
 	<content contentuid="ha940ca64g3adag47a6g9fc8g4158109c4b3d">Eruption, the Portable Cannon</content>
 	<content contentuid="ha941a44dg4c0dg44a0gb5a4gfec18574f8d2">Character has been hit by a thrown wand!</content>
@@ -1650,11 +1650,11 @@
 	<content contentuid="hab06cff9g8908g4bedga5eagec558d1afb06">Chaos Glide</content>
 	<content contentuid="hab1ede38gf3c8g43d2g8633g1244f7459d6e">&lt;font color=&apos;#FF5522&apos;&gt;Rally of the Pack&lt;/font&gt;</content>
 	<content contentuid="hab32f40cg66bdg413cgab7fga6a77e28df1a">Quickdraw Quiver</content>
-	<content contentuid="hab43ee73ge916g4136gaf83g5d5c5a47384a">&lt;font color=&apos;#FBBC7F&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="hab43ee73ge916g4136gaf83g5d5c5a47384a">Novice</content>
 	<content contentuid="hab5551ebg9bf1g41f5g8e33g0184aeea5a6b">&lt;font color=&apos;#C7A758&apos;&gt;Throw Balrin&apos;s Throwing Axe (Offhand)&lt;/font&gt;</content>
 	<content contentuid="hab639ab6g8e43g48ffg90b4ge6ad3c707edb">Chaos &amp; Sin, Dark Lord&apos;s Calling</content>
 	<content contentuid="hab679dffg7b1fg4784g803cg2c90cbda07a3">Artisan&apos;s Glaive</content>
-	<content contentuid="hab688a4ag277dg45ffgaa09g4bedd5d2bf27">&lt;font color=&apos;#FF9178&apos;&gt;Journeyman Swordsman&lt;/font&gt;</content>
+	<content contentuid="hab688a4ag277dg45ffgaa09g4bedd5d2bf27">Journeyman Swordsman</content>
 	<content contentuid="hab7c8cc3gb00ag4557g9b87g030eb15798bd">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="hab845b9fg76adg4d45gb1d7gfd66e698a67c">Mighty Dragonslayer Boots</content>
 	<content contentuid="haba65499g7cd9g48e4g8892g95b286ecad6c">Soul Burn II</content>
@@ -1709,9 +1709,9 @@
 	<content contentuid="hb0ea127cg30fbg4c54gbfe5g70ef37b06f04">Give into the insanity of the flame, exploding targets for [1] when you light them on fire with the &lt;font color=&apos;#c5a65a&apos;&gt;Dragonblaze Flamethrower&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#DD9911&apos;&gt;Move faster on fire surfaces, and gain immunity to Burning.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#3399FF&apos;&gt;Removed by Wet, Chilled, or Frozen.&lt;/font&gt;</content>
 	<content contentuid="hb113755dgf463g4d03gbee1ged81ac87cf35">How?!</content>
 	<content contentuid="hb125328cg931eg45e5g8a5cg5430bc286dd6">&lt;font color=&apos;#FFD700&apos;&gt;Leg Sweep&lt;/font&gt;</content>
-	<content contentuid="hb128a361g31ebg48ceg8364gc999706020fa">&lt;font color=&apos;#DDFFB3&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="hb128a361g31ebg48ceg8364gc999706020fa">Novice</content>
 	<content contentuid="hb165d35fg662dg4865gb268g6abe4e4d3b11">This greatbow arrow is sure to slow your foes in their tracks as well as put a spring in your step.</content>
-	<content contentuid="hb171a4c2g5d8dg4653gb8afg728d998c63f6">&lt;font color=&apos;#28FFFF&apos;&gt;Pagemaster&lt;/font&gt;</content>
+	<content contentuid="hb171a4c2g5d8dg4653gb8afg728d998c63f6">Pagemaster</content>
 	<content contentuid="hb17ead8fg4025g4dd5g9164gbecbd6b79676">&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade Mastery IV&lt;/font&gt;</content>
 	<content contentuid="hb1d9d1d8g86e3g498bga603gfbbc3ec6c44c">Death Rune</content>
 	<content contentuid="hb1e7d05ag15e5g4b62gbf4eg837bf4b2fd4c">Undead Bonus Damage</content>
@@ -1744,7 +1744,7 @@
 	<content contentuid="hb524507fg0ec6g4652g8451gac6cc8496a7e">Orma and Reeve&apos;s Twin Greatshields</content>
 	<content contentuid="hb5394fdbg81e3g4b92g8ccbgfc1d9314b422">Draw a random, temporary arrow from your quiver.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Arrows retrieved this way disappear after combat ends.&lt;/font&gt;</content>
 	<content contentuid="hb540449eg1562g4f42g9d0cg615b0c0679ce">Malice &amp; Destruction</content>
-	<content contentuid="hb557309eg71fag4858gb5d2ga4c8dc93dee8">&lt;font color=&apos;#FFB94A&apos;&gt;Expert Spy&lt;/font&gt;</content>
+	<content contentuid="hb557309eg71fag4858gb5d2ga4c8dc93dee8">Expert Spy</content>
 	<content contentuid="hb585af98g73e2g4b5cg8f79gc10af03985ad">Banner of Unruly Faith (Finesse Scaling)</content>
 	<content contentuid="hb5964089gfd37g4008ga7d7g6737e5648e16">Ancient Bokuto</content>
 	<content contentuid="hb5cce093g12e6g4316ga31cga6b31812f70c">Cryoblade</content>
@@ -1768,7 +1768,7 @@
 	<content contentuid="hb7836906g4d15g44cfgad67g7412721e8915">Tempered Runeblade of Poison</content>
 	<content contentuid="hb7a3dc0cg8422g4a1cg83f5gefbaab6d835f">Throwing Sword?</content>
 	<content contentuid="hb7aab313g204ag4e87g9013gb0a170ce0442">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Deals additional damage when attacking Undead, with a 10% chance to &lt;font color=&apos;#b823cb&apos;&gt;Entangle&lt;/font&gt; enemies hit for 1 turn.&lt;br&gt;Entangle&apos;s chance is increased to 50% when attacking the Undead.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Earth Damage&lt;/font&gt; to weapon attacks and skills.</content>
-	<content contentuid="hb7cb3860gfe3ag453fg83f7g285a04613e44">&lt;font color=&apos;#D4B76A&apos;&gt;Journeyman Smasher&lt;/font&gt;</content>
+	<content contentuid="hb7cb3860gfe3ag453fg83f7g285a04613e44">Journeyman Smasher</content>
 	<content contentuid="hb7cc4c4dg4abcg4814g932cg0c2b233d479f">Cursing Arrow</content>
 	<content contentuid="hb7e57b16g1189g4068ga78dge9d8665c1127">Trusty Flintlock Pistol</content>
 	<content contentuid="hb7fa8332gaa9bg4f89g935dgff29086b8751">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are covered in a corrosive liquid, destroying Physical Armor on hit.</content>
@@ -1813,17 +1813,17 @@
 	<content contentuid="hbc153fa7g4cf3g4d94g94e5gb8b224ffe547">The Tutor</content>
 	<content contentuid="hbc5b8e77g1e41g479cg943eg71cefbe36ad3">Knowledge Dispenser</content>
 	<content contentuid="hbcb6f9b5gb856g48cdga381gace3f8fad77c">Heated</content>
-	<content contentuid="hbcc9ce2bg78fcg431dgabe6g1c3951ada646">&lt;font color=&apos;#D8BAFD&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="hbcc9ce2bg78fcg431dgabe6g1c3951ada646">Novice</content>
 	<content contentuid="hbce1acb8gdc8fg41a1gbebbg436fa188d5d9">&lt;font color=&apos;#79C1FF&apos;&gt;Chilling Mini-Bolts&lt;/font&gt;</content>
 	<content contentuid="hbcf3b2b5g8451g4117g9c5fg9160977df605">Poison Explosion</content>
 	<content contentuid="hbd1111ecg05aag4c03ga29ag07c8599f335b">Explosive Arrow</content>
 	<content contentuid="hbd182b92g8defg4737g87a7g9d066ec6e440">Throwing Crossbow?</content>
-	<content contentuid="hbd546d70g55c4g4d8dgb9b1gda8d054bdb08">&lt;font color=&apos;#FFC973&apos;&gt;Journeyman Spy&lt;/font&gt;</content>
+	<content contentuid="hbd546d70g55c4g4d8dgb9b1gda8d054bdb08">Journeyman Spy</content>
 	<content contentuid="hbd6aabecg3f75g47a0g8099g2dc2964b7520">Erosion</content>
 	<content contentuid="hbd792efeg585fg4f00g881fg93f0aae26af3">An anvil attached to a handle. As simple as that.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="hbdb02714gc326g4ea1gb63agea089a7b4591">Shoot on Cooldown</content>
 	<content contentuid="hbdb2aa9ag0e32g4b2fga9ccg59085dd8de7e">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
-	<content contentuid="hbdcd3719ga57ag42a3gae9eg6362d988921f">&lt;font color=&apos;#AAFF14&apos;&gt;Expert Archer&lt;/font&gt;</content>
+	<content contentuid="hbdcd3719ga57ag42a3gae9eg6362d988921f">Expert Archer</content>
 	<content contentuid="hbe0eff68g91c2g4409gbd66g555e64e8a73c">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
 	<content contentuid="hbe20f642g37cbg48a5g9f4agfd50776193a1">&lt;font color=&apos;#D5D7E3&apos;&gt;Slay Hidden&lt;/font&gt;</content>
 	<content contentuid="hbe73c99dg8a94g45f6ga7b7g23923104849b">Throw Stone</content>
@@ -1831,7 +1831,7 @@
 	<content contentuid="hbe8ca1e2g4683g4a93g8e20g984992e30d22">Banner</content>
 	<content contentuid="hbecd7d55g85f8g4716g9346g15ff17837431">Ice Rune</content>
 	<content contentuid="hbed06604gcd54g4416gbeaegd171f8e78a77">Iron Will, Lion&apos;s Courage</content>
-	<content contentuid="hbf033931gc683g4730gb293g5b65501d0d06">&lt;font color=&apos;#CCDA9E&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="hbf033931gc683g4730gb293g5b65501d0d06">Novice</content>
 	<content contentuid="hbf040bedgcb96g4c92ga4abg510ff2d22b2a">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to &lt;font color=&apos;#9a38ff&apos;&gt;Dizzying Smash&lt;/font&gt; that deals [1] and pushes the target back 3m.&lt;br&gt;If the target is Knocked Down, enemies they collide with have a chance to be knocked down, and both they and the target take [2] per collision.&lt;br&gt;&lt;font color=&apos;#44FF03&apos;&gt;On hit, refreshes the cooldown for Sucker Punch.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
 	<content contentuid="hbf199083gc108g4e76g9206g62938beeb989">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in a dark, etheral energy that deals shadow damage.</content>
 	<content contentuid="hbf253b8bg47b8g4c03g80a7g230269c0ad4b">Enhanced Demolition</content>
@@ -1842,7 +1842,7 @@
 	<content contentuid="hc01d8aa2g9c74g4748g89d2gbc3fbf0ad976">Mighty Dragonslayer Gloves</content>
 	<content contentuid="hc037c800gdc55g4209gad0fg40db7655a7b4">Muramasa, The Cursed Blade (Reset Scaling)</content>
 	<content contentuid="hc04318e7g3123g4dc4gb000g87a221bbb8b4">Fire three bullets at three targets of your choice, each dealing [1].</content>
-	<content contentuid="hc075921ag911ag4564gad10geecdd11ba4bd">&lt;font color=&apos;#28FF00&apos;&gt;Master Dragonslayer&lt;/font&gt;</content>
+	<content contentuid="hc075921ag911ag4564gad10geecdd11ba4bd">Master Dragonslayer</content>
 	<content contentuid="hc0797ac0g427fg415cgb1a6gfca18c3261e1">Throw Remote Charge</content>
 	<content contentuid="hc0a1757bg633bg4517ga1a4g3ba6c8dfd8c7">Searing Rune</content>
 	<content contentuid="hc0ad4b30gc94ag446fg9b6ag16b29e2d5401">Raijin</content>
@@ -1879,9 +1879,9 @@
 	<content contentuid="hc493236cg95bcg4990g8209gd972ba1b6b3d">&lt;font color=&apos;#FF337F&apos;&gt;Pistol Mastery IV&lt;/font&gt;</content>
 	<content contentuid="hc4aab8cfg47b2g410aga4c7gde8618aa77fd">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery V&lt;/font&gt;</content>
 	<content contentuid="hc4b9dd1aga878g462cgb8d2ge218851f305a">&lt;font color=&apos;#F5785A&apos;&gt;Axe Mastery III&lt;/font&gt;</content>
-	<content contentuid="hc4bf9383ga9b2g48fcgb253gcc7546987b56">Throwing Ability</content>
+	<content contentuid="hc4bf9383ga9b2g48fcgb253gcc7546987b56">Throwing</content>
 	<content contentuid="hc4c344a3g5aa5g40edg8f0fg0733352de3bd">Raizan (Empowered) (Finesse Scaling)</content>
-	<content contentuid="hc4c5019bg0fafg482cg8ad7gf2655e33393d">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="hc4c5019bg0fafg482cg8ad7gf2655e33393d">Beginner</content>
 	<content contentuid="hc4cbb3efg9cd3g4193g861bg8f086795ea16">Automatically Equips the Dragon Bone Claws Weapon</content>
 	<content contentuid="hc4cc8189gf306g47afga73bgad4370572c85">Banner of the Pack</content>
 	<content contentuid="hc4d7bbdcg90fdg4d2fgb72bg3bdf239f2aec">Stone Rod</content>
@@ -1892,7 +1892,7 @@
 	<content contentuid="hc564f7f1g956ag41f5ga4b8g16b9ddd77f45">Explode a &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; target, dealing [1] and an additional explosion of &lt;font color=&apos;#00aa00&apos;&gt;Poison Damage&lt;/font&gt; to enemies in a 3m-6m range.&lt;br&gt;The explosion damage scales with the target&apos;s &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; duration:&lt;br&gt;1 Turn: [2]&lt;br&gt;2 Turns: [3]&lt;br&gt;3 Turns: [4]&lt;br&gt;4 Turns: [5]&lt;br&gt; 5 Turns: [6]&lt;br&gt; 6 Turns: [7]</content>
 	<content contentuid="hc56fb80eg797fg46b5g89c3gd8bf0c458a4d">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Future Barrage</content>
 	<content contentuid="hc57ffc92gbbbag4f6eg9f17gee8b992ba15a">Throwing Bow?</content>
-	<content contentuid="hc581e09eg3478g457cg93d1g40a6ad4070dc">&lt;font color=&apos;#4DFF14&apos;&gt;Eagle Eye, Master Archer&lt;/font&gt;</content>
+	<content contentuid="hc581e09eg3478g457cg93d1g40a6ad4070dc">Eagle Eye, Master Archer</content>
 	<content contentuid="hc585475cge8fdg48c0g8dc0gea94afe8f24e">Bokuto</content>
 	<content contentuid="hc5b0dad7g7c99g4afbga957g927f7db6c3de">&lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt;</content>
 	<content contentuid="hc5d41814g352cg4bd8g8146g1e56d3bd676b">An orb of great power. An active current of electrical energy courses around the outer shell.</content>
@@ -1916,7 +1916,7 @@
 	<content contentuid="hc7fb64e6g6025g4e32gab90ga6d0d853afbe">Banner of Unruly Faith (Wits Scaling)</content>
 	<content contentuid="hc81de6aag392dg4c6fg9168g9c0a3dbdc09e">Special tattoos that grant the bearer tremendous strength.</content>
 	<content contentuid="hc82989a4gad80g43e9g9bb9geca7ab4d3b94">Intelligence Conversion</content>
-	<content contentuid="hc8394097g41d6g4841gb16ag20c57c59c3cb">&lt;font color=&apos;#9BF0FF&apos;&gt;Journeyman Staff Acolyte&lt;/font&gt;</content>
+	<content contentuid="hc8394097g41d6g4841gb16ag20c57c59c3cb">Journeyman Staff Acolyte</content>
 	<content contentuid="hc858f8dcg30aag415fg8d09g8f4e977744d9">Banner of Unruly Faith</content>
 	<content contentuid="hc8857631g4d14g45e6gbb3cgef8223b17eb5">Bandit&apos;s Quiver</content>
 	<content contentuid="hc8a0e65bg56c4g4ae5g8611g00bd189292d8">Enhanced Demolition Bonus</content>
@@ -1941,17 +1941,17 @@
 	<content contentuid="hcad935c0g582ag4b8egb609ga3365b3b4a13">Fire Weakness</content>
 	<content contentuid="hcadad3cbg4c92g4d31g801ag4722ebda504d">&lt;font color=&apos;#C7A758&apos;&gt;Kevin the Pet Rock&lt;/font&gt; (&lt;font color=&apos;#00AA00&apos;&gt;Poisoned&lt;/font&gt;)</content>
 	<content contentuid="hcae99263g291ag4d93g9c03geb6fd2fd3f60">Halberd</content>
-	<content contentuid="hcaf035f6g0202g4d15gbe00g9b1121fe7569">&lt;font color=&apos;#FF1515&apos;&gt;Warmaster, Axe of Legend&lt;/font&gt;</content>
+	<content contentuid="hcaf035f6g0202g4d15gbe00g9b1121fe7569">Warmaster, Axe of Legend</content>
 	<content contentuid="hcb0893f0g395cg4ef0ga0fcg7f0c2d5e93a8">Runeblade (Inert)</content>
 	<content contentuid="hcb0b08b6g66c4g49a7gb748g93ea03cc0dc5">A deadly scythe once belonging to the being known as &quot;The Harvester&quot;, said to have reaped countless souls in an unending thirst for power.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="hcb3086d4g369ag41d7ga4c1g71c0a33ec6cc">&lt;font color=&apos;#FF5522&apos;&gt;Rally of the Pack&lt;/font&gt;</content>
-	<content contentuid="hcb68c45bg3711g4cccg9094gd6c81f6aa000">&lt;font color=&apos;#FF9D9D&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="hcb68c45bg3711g4cccg9094gd6c81f6aa000">Novice</content>
 	<content contentuid="hcb7e4371g323bg4c19gac13ga9df7f281419">Character is being contaminated!</content>
 	<content contentuid="hcbb2f2c7g1f27g45e2gb025gf820968cef29">Attack your target with meticulous aim, dealing [1] in one shot. When performed from Stealth, this attack gains a 50% damage increase.</content>
 	<content contentuid="hcbbecaf8g3693g4395gbc22gcd92ba552044">Throw Tar Charge</content>
 	<content contentuid="hcbc80880gf241g4463ga610ga3ba5d2d71a7">Raizan (Constitution Scaling)</content>
 	<content contentuid="hcbd88005g2073g4893gaf79gb5649761370f">Tigerstrike</content>
-	<content contentuid="hcbdc584cg6a24g4c8bg957cg099db027fc2e">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="hcbdc584cg6a24g4c8bg957cg099db027fc2e">Beginner</content>
 	<content contentuid="hcbdf615bg7936g4681g8ccfgd7b160383f54">Character is being knocked down!</content>
 	<content contentuid="hcbe11fb4g22adg4b10g938bg467f8c41107c">Corrosive</content>
 	<content contentuid="hcbfb9dbdg1456g4d5fg8efagd22f80473d29">Character&apos;s firearm is attuned to fire.</content>
@@ -2035,7 +2035,7 @@
 	<content contentuid="hd57016f0g7a16g467agb8e4ga8a438c8b4c4">Adventurers.. Always an impulsive sort.</content>
 	<content contentuid="hd581f895g0564g4cffg8e38gfaa4ac13bc4d">Banner of the Pack (Memory Scaling)</content>
 	<content contentuid="hd5ac1dc5g2e52g4343gba96g1a4ce724b154">[Exit]</content>
-	<content contentuid="hd5cefba2g5104g48d2gb6a5g10eb32769d79">&lt;font color=&apos;#6CF5E9&apos;&gt;Elite Brawler&lt;/font&gt;</content>
+	<content contentuid="hd5cefba2g5104g48d2gb6a5g10eb32769d79">Elite Brawler</content>
 	<content contentuid="hd5d27d87gc0b2g4dbcgb490gb2bebcf1c248">Armor Increase - Increases physical armor by [1] and magic armor by [2]</content>
 	<content contentuid="hd5ef97f9gfdeeg4750ga076g2e3643758480">Kevin (Normal)</content>
 	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a">Charges Depleted&amp;lt;br&amp;gt;</content>
@@ -2105,7 +2105,7 @@
 	<content contentuid="hdde1468dg68b2g49e4g8636g441356966ec2">Soul Burn III</content>
 	<content contentuid="hdde16bcbgccfag422eg97d8gb36ae2834c31">Wraithblade (Finesse Scaling)</content>
 	<content contentuid="hddeb81ebg15eeg4e20g9524g1ccc8d80e97f">Frostdyne (Intelligence Scaling)</content>
-	<content contentuid="hde1bc355g000fg4bccg8cbege66943e3dd31">&lt;font color=&apos;#FDC89B&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="hde1bc355g000fg4bccg8cbege66943e3dd31">Beginner</content>
 	<content contentuid="hde2dcb4eg99f7g481bg8605gffdd329983cb">Exquisite Greatbow of the Empire</content>
 	<content contentuid="hde48ed24geaa0g4b21gbbd4g55d97cb65816">Death&apos;s Edge (Wits Scaling)</content>
 	<content contentuid="hde6d95b8g5327g4867gbb55g7da91582c247">Reinforced Odachi</content>
@@ -2127,7 +2127,7 @@
 	<content contentuid="hdffc3609gab35g4840gb0b2g086e0f9d4f87">Aspect of Polymorph</content>
 	<content contentuid="he020db27gb682g457cg9aa5g20122599d6d2">Dusty Book</content>
 	<content contentuid="he026dea3g4431g4c75g95bag621fe2770050">[KATANA] Enable the &quot;Finisher&quot; status, which automatically applies on hit when using a katana. </content>
-	<content contentuid="he041dc61g19acg4056g9482geb3302da7927">&lt;font color=&apos;#D1F8FF&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="he041dc61g19acg4056g9482geb3302da7927">Novice</content>
 	<content contentuid="he053a3abge5d8g4d14g9333ga18d6eba3df1">Battle Book</content>
 	<content contentuid="he062c53ag6e30g4087gb1b0g1eafa31ff59c">Earth Weakness</content>
 	<content contentuid="he06eefc3g4b22g42b2ga54agd5f19035f599">Balrin&apos;s Throwing Axe (Oil)</content>
@@ -2171,12 +2171,12 @@
 	<content contentuid="he58d4e65g6af7g41ccg8661g4f49fb9426fe">&lt;font color=&apos;#00AA00&apos;&gt;Poison Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
 	<content contentuid="he597b2b9g5732g4029g802eg1e73aee49ee0">Character is spreading &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; to nearby allies!</content>
 	<content contentuid="he5d22aaag42a6g45cfg8000g45270e27d785">Weapon Mastery (Expert)</content>
-	<content contentuid="he5f7f5fdge9c2g43d8gbc58g2f9009fe7553">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="he5f7f5fdge9c2g43d8gbc58g2f9009fe7553">Beginner</content>
 	<content contentuid="he6003f05g236bg4f79ga8beg22d5b30ad4f1">Water Spout</content>
 	<content contentuid="he60cf23cg6b6dg45bcgaa13g0932ca2be1e4">An electrified katana, once wielded by a slayer of demons.&lt;br&gt;The full potential of this blade has been realized through the &lt;font color=&apos;#C7A758&apos;&gt;Shiden Orb&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="he625016eg2212g4f39g814fg1845dee2edb9">Widowmaker</content>
 	<content contentuid="he6351779g9282g4d1bg9cd8g1b15a98ac55c">Warlord&apos;s Curved Greatsword</content>
-	<content contentuid="he67981aegee37g4467g8f82g1009a1a9c2be">&lt;font color=&apos;#FFAAAA&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="he67981aegee37g4467g8f82g1009a1a9c2be">Novice</content>
 	<content contentuid="he67e894ag310bg4016g8434gad6327dcde15">Dizzy</content>
 	<content contentuid="he6efb1d6gbcbbg4a02ga8e0gb54604aa71a8">&lt;font color=&apos;#b823cb&apos;&gt;Imitation, Guide to Mimicry&lt;/font&gt; (Activated)</content>
 	<content contentuid="he6fbf4e4g6053g4d6fgb1e7g25cf597a1f4d">Dual Shields</content>
@@ -2186,7 +2186,7 @@
 	<content contentuid="he791882dg4ce9g48dcgb4ccg67c95e1416ba">Fury&apos;s Reward II</content>
 	<content contentuid="he805d9ecg9a32g4e43gb39fg8ed925de6298">Weapon Expansion - Crafting</content>
 	<content contentuid="he80ce441g9499g4744gbd3ag5d55d702bf33">Dragon has been grounded by a Greatbow. Taking [1] per turn.</content>
-	<content contentuid="he81a1a2bgac20g4625ga1f7ge8cf7ff78a86">&lt;font color=&apos;#FF9E03&apos;&gt;Spymaster, Elite Assassin&lt;/font&gt;</content>
+	<content contentuid="he81a1a2bgac20g4625ga1f7ge8cf7ff78a86">Spymaster, Elite Assassin</content>
 	<content contentuid="he8315b61g1853g4f22g857cg992df0e2d56e">Balrin&apos;s Throwing Axe (Fire)</content>
 	<content contentuid="he86b7062g94beg485egb9dag0cf3c6b1d2ff">Battleworn Glaive</content>
 	<content contentuid="he8a552ecg47b7g4686gaeaagbd7b2705c331">&lt;font color=&apos;#ff780b&apos;&gt;Deadly Dud&lt;/font&gt;</content>
@@ -2196,7 +2196,7 @@
 	<content contentuid="he8c35cdeg7094g4882gabc5ga804cd74f43c">Frostdyne (Empowered) (Wits Scaling)</content>
 	<content contentuid="he8c8644fg8648g4394gb270g42e5b89ba370">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in an armor-eating acid, dealing corrosive damage.</content>
 	<content contentuid="he91f94eag4370g4caagbc62gde3b37a9e452">Battering Ram has a 25% chance to apply Dizzy for 1 turn.</content>
-	<content contentuid="he9479d69g5b24g4f51gb944g6e59f5f5ec2b">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="he9479d69g5b24g4f51gb944g6e59f5f5ec2b">Beginner</content>
 	<content contentuid="he99304c7gfdbag48e0gb57bgc8b1fcea2588">a Bludgeon</content>
 	<content contentuid="he9b6a6beg7f37g482fga96fgfb7a411819cd">Eruption, the Portable Cannon (Intelligence Scaling)</content>
 	<content contentuid="he9caef58g9dc1g49b4gb439gb78a46e18435">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery IV&lt;/font&gt;</content>
@@ -2217,12 +2217,12 @@
 	<content contentuid="head276c0gfecag4897gbc5cg4b74c26bb4d9">a Crossbow</content>
 	<content contentuid="headd90e1g4e62g45b3gb69ag0f25a7bd491e">Oni Edge</content>
 	<content contentuid="heae6a50fg68ceg4889g83b5gac0ef4eeaf67">Conduction Rune</content>
-	<content contentuid="heb1c4f4eg6e9dg45b7gbfdcg1439c6c4380d">&lt;font color=&apos;#FFDA9E&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="heb1c4f4eg6e9dg45b7gbfdcg1439c6c4380d">Novice</content>
 	<content contentuid="heb3b000egc1ffg49cdgb4ceg7d289e830454">a Wand</content>
 	<content contentuid="heb957fedgf165g4017ga0b9ge71f7038a453">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery III&lt;/font&gt;</content>
 	<content contentuid="hebb079bbg7dd3g4dd4gb8c7g73cb83f621d5">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are like mini-grenades, exploding with fire damage on hit.</content>
 	<content contentuid="hebda15e3gb225g4115ga087g542707bf4c87">Finisher</content>
-	<content contentuid="hebde993cgd7a6g4fc0ga40ag764f189c02c9">&lt;font color=&apos;#F5F06C&apos;&gt;Journeyman Fencer&lt;/font&gt;</content>
+	<content contentuid="hebde993cgd7a6g4fc0ga40ag764f189c02c9">Journeyman Fencer</content>
 	<content contentuid="hebe5befbg02b4g48d5gae1dg8355d0a40e48">Throw a shuriken at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
 	<content contentuid="hec1460e1gc88eg4cbfg8307g8dd645aadd0a">Raizan (Empowered) (Reset Scaling)</content>
 	<content contentuid="hec14d043g3a08g443bg8f3dg7c00ca41b340">Duelist Stance</content>
@@ -2280,7 +2280,7 @@
 	<content contentuid="hf1b58056gdd60g4cd0gbc69g1a21c24e5be5">Planetcracker</content>
 	<content contentuid="hf1c5d51agf5a3g4250gaf82g4a8237468a32">Argh!</content>
 	<content contentuid="hf1cc24b6g3c04g4414gb2d1g7bce123ef94c">Steel Odachi</content>
-	<content contentuid="hf1dfb1ecg4148g45dfgaac1gc11a8066436b">&lt;font color=&apos;#F5A36C&apos;&gt;Journeyman Firearm Enthusiast&lt;/font&gt;</content>
+	<content contentuid="hf1dfb1ecg4148g45dfgaac1gc11a8066436b">Journeyman Firearm Enthusiast</content>
 	<content contentuid="hf1e05614g2d6cg4d27g8a8bg866e9ce3d338">Activate the &lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; to enemies hit for 1 turn.</content>
 	<content contentuid="hf2062266gf3d0g4322g8e0dgd0cd88ddd27a">A shield designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="hf20cd8bagadbdg480cga5d2ge6b2af96dfc0">Old Quarterstaff</content>
@@ -2333,7 +2333,7 @@
 	<content contentuid="hf61a1a8fg62d0g4b70gb7fdg2d45a79ae981">Weapon Expansion - Runes</content>
 	<content contentuid="hf64cb19eg58e7g4e5eg8c46g1b7f853721b8">Nature&apos;s Guard, Nature&apos;s Might</content>
 	<content contentuid="hf64d955dg59deg42d5gb41cgcd64e621ccff">Absorb Surface Element</content>
-	<content contentuid="hf64fac40g06e6g4e41gb191g0aaf9cbc8d8b">&lt;font color=&apos;#FFAC99&apos;&gt;Novice&lt;/font&gt;</content>
+	<content contentuid="hf64fac40g06e6g4e41gb191g0aaf9cbc8d8b">Novice</content>
 	<content contentuid="hf66cbd65g2556g4db5g899cg12fde62aba69">Raizan (Empowered)</content>
 	<content contentuid="hf690cab0g66d6g45b3ga5f3gecace6fe38a9">Can&apos;t Strike Twice</content>
 	<content contentuid="hf6ab7e1bgccc1g4b9egb3e4g8d3d36079a34">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery II&lt;/font&gt;</content>
@@ -2377,7 +2377,7 @@
 	<content contentuid="hfabfbc56g0c4dg4987g9bf9gd96a83e9a2f7">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="hfac96ca6g1eb0g4c77g822fgac7966868992">Death&apos;s Edge (Intelligence Scaling)</content>
 	<content contentuid="hfad1780dgc1e6g4633ga0b5g774e05c537c4">Tattoos of Godly Strength</content>
-	<content contentuid="hfaf23f40g0fa5g4da7g9ae2g7a2a9300ada0">&lt;font color=&apos;#FDFFEA&apos;&gt;Beginner&lt;/font&gt;</content>
+	<content contentuid="hfaf23f40g0fa5g4da7g9ae2g7a2a9300ada0">Beginner</content>
 	<content contentuid="hfafd3311g676bg4859gb05fgbf60a832dabc">Death&apos;s Edge (Reset Scaling)</content>
 	<content contentuid="hfb07e83dg1d37g4d1ega2d7g869c8fdeab17">Throw Poison Gas Charge</content>
 	<content contentuid="hfb2ca138gad5fg44a2gbfccge0367ad3140d">Character is deflecting projectiles.</content>

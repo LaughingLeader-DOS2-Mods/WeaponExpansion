@@ -103,8 +103,8 @@ package
 		
 		function frame1() : *
 		{
-			this.xpBar.mouseChildren = false;
-			this.xpBar.mouseEnabled = false;
+			//this.xpBar.mouseChildren = false;
+			//this.xpBar.mouseEnabled = false;
 		}
 	}
 }

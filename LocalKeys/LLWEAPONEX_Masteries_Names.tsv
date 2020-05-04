@@ -1,146 +1,146 @@
 Key	Content	Handle
 LLWEAPONEX_Mastery	Mastery	hd84bd8c4gb25fg46bagbbf9ga3d43b8bfacc
 LLWEAPONEX_Axe	Axe	h99253a1dgaaf7g49bbga37fgf2c25b70073f
-LLWEAPONEX_AxeRank0	<font color='#FDFFEA'>Beginner</font>	h4b6dfd40g1a10g4ba5ga77cg19caee1b9fdb
-LLWEAPONEX_AxeRank1	<font color='#FFAAAA'>Novice</font>	he67981aegee37g4467g8f82g1009a1a9c2be
-LLWEAPONEX_AxeRank2	<font color='#D46A6A'>Journeyman Axefighter</font>	h1c713c7ag8952g44d1g8703g6609b75b29a7
-LLWEAPONEX_AxeRank3	<font color='#DD3939'>Expert Axefighter</font>	h0f70049cgf59ag40ecgb093ga1c8db520da0
-LLWEAPONEX_AxeRank4	<font color='#FF1515'>Warmaster, Axe of Legend</font>	hcaf035f6g0202g4d15gbe00g9b1121fe7569
+LLWEAPONEX_AxeRank0	Beginner	h4b6dfd40g1a10g4ba5ga77cg19caee1b9fdb
+LLWEAPONEX_AxeRank1	Novice	he67981aegee37g4467g8f82g1009a1a9c2be
+LLWEAPONEX_AxeRank2	Journeyman Axefighter	h1c713c7ag8952g44d1g8703g6609b75b29a7
+LLWEAPONEX_AxeRank3	Expert Axefighter	h0f70049cgf59ag40ecgb093ga1c8db520da0
+LLWEAPONEX_AxeRank4	Warmaster, Axe of Legend	hcaf035f6g0202g4d15gbe00g9b1121fe7569
 LLWEAPONEX_Banner	Banner	hbe8ca1e2g4683g4a93g8e20g984992e30d22
-LLWEAPONEX_BannerRank0	<font color='#FDFFEA'>Beginner</font>	h2e5ab189g901dg4c86ga74cgca3bf1dcba15
-LLWEAPONEX_BannerRank1	<font color='#DDFFB3'>Novice</font>	h156cb0ffg52f4g43ceg9b65g4c72ad9cbd9f
-LLWEAPONEX_BannerRank2	<font color='#94E963'>Journeyman Bannerman</font>	h6e07e534gbaedg481dgb66ag0d845a2302cd
-LLWEAPONEX_BannerRank3	<font color='#52D43A'>Expert Bannerkeeper</font>	h6ee30aaegaff6g4751gab87gbb71b9fe0292
-LLWEAPONEX_BannerRank4	<font color='#28FF00'>Banner Lord</font>	h181d68fbge496g4c43gab95g26a4fcaee046
+LLWEAPONEX_BannerRank0	Beginner	h2e5ab189g901dg4c86ga74cgca3bf1dcba15
+LLWEAPONEX_BannerRank1	Novice	h156cb0ffg52f4g43ceg9b65g4c72ad9cbd9f
+LLWEAPONEX_BannerRank2	Journeyman Bannerman	h6e07e534gbaedg481dgb66ag0d845a2302cd
+LLWEAPONEX_BannerRank3	Expert Bannerkeeper	h6ee30aaegaff6g4751gab87gbb71b9fe0292
+LLWEAPONEX_BannerRank4	Banner Lord	h181d68fbge496g4c43gab95g26a4fcaee046
 LLWEAPONEX_BattleBook	Battle Book	he053a3abge5d8g4d14g9333ga18d6eba3df1
-LLWEAPONEX_BattleBookRank0	<font color='#FDFFEA'>Beginner</font>	h3b6db1dfgdda3g4a2dgadffg6904133abdd3
-LLWEAPONEX_BattleBookRank1	<font color='#DDFFB3'>Novice</font>	hb128a361g31ebg48ceg8364gc999706020fa
-LLWEAPONEX_BattleBookRank2	<font color='#94E9FF'>Journeyman Bookkeeper</font>	h226ccab8gb20cg421bg8d4ag20b90872d15c
-LLWEAPONEX_BattleBookRank3	<font color='#52D4FF'>Expert Bookkeeper</font>	h3c662307g8ee5g4ca2g8426ge56fbb8d6ac2
-LLWEAPONEX_BattleBookRank4	<font color='#28FFFF'>Pagemaster</font>	hb171a4c2g5d8dg4653gb8afg728d998c63f6
+LLWEAPONEX_BattleBookRank0	Beginner	h3b6db1dfgdda3g4a2dgadffg6904133abdd3
+LLWEAPONEX_BattleBookRank1	Novice	hb128a361g31ebg48ceg8364gc999706020fa
+LLWEAPONEX_BattleBookRank2	Journeyman Bookkeeper	h226ccab8gb20cg421bg8d4ag20b90872d15c
+LLWEAPONEX_BattleBookRank3	Expert Bookkeeper	h3c662307g8ee5g4ca2g8426ge56fbb8d6ac2
+LLWEAPONEX_BattleBookRank4	Pagemaster	hb171a4c2g5d8dg4653gb8afg728d998c63f6
 LLWEAPONEX_Bludgeon	Bludgeon	h448753f3g7785g4681gb639ga0e9d58bfadd
-LLWEAPONEX_BludgeonRank0	<font color='#FDFFEA'>Beginner</font>	hc4c5019bg0fafg482cg8ad7gf2655e33393d
-LLWEAPONEX_BludgeonRank1	<font color='#FFE7AA'>Novice</font>	h0574c86eg4e97g4faegb7e3g6d56465a1e12
-LLWEAPONEX_BludgeonRank2	<font color='#D4B76A'>Journeyman Smasher</font>	hb7cb3860gfe3ag453fg83f7g285a04613e44
-LLWEAPONEX_BludgeonRank3	<font color='#AA8B39'>Expert Smasher</font>	h9ccd54f8g82adg4abag84a8g4455602ee601
-LLWEAPONEX_BludgeonRank4	<font color='#A57C5B'>Master of Smashing</font>	ha51571ffg655ag45eagb78ag379c98e7e0b2
+LLWEAPONEX_BludgeonRank0	Beginner	hc4c5019bg0fafg482cg8ad7gf2655e33393d
+LLWEAPONEX_BludgeonRank1	Novice	h0574c86eg4e97g4faegb7e3g6d56465a1e12
+LLWEAPONEX_BludgeonRank2	Journeyman Smasher	hb7cb3860gfe3ag453fg83f7g285a04613e44
+LLWEAPONEX_BludgeonRank3	Expert Smasher	h9ccd54f8g82adg4abag84a8g4455602ee601
+LLWEAPONEX_BludgeonRank4	Master of Smashing	ha51571ffg655ag45eagb78ag379c98e7e0b2
 LLWEAPONEX_Bow	Bow	h54e7afe8geee9g4aeeg97f5g5ab8421d0329
-LLWEAPONEX_BowRank0	<font color='#FDFFEA'>Beginner</font>	h732fb684g376eg420eg9978ga0d9a6953f82
-LLWEAPONEX_BowRank1	<font color='#CAEA9C'>Novice</font>	h43e00fc3g0ac6g4ddag9864g161340dd5a62
-LLWEAPONEX_BowRank2	<font color='#9BC362'>Journeyman Archer</font>	h7cac4eb1g0d7ag475cgaa87g7df51a7e6d19
-LLWEAPONEX_BowRank3	<font color='#AAFF14'>Expert Archer</font>	hbdcd3719ga57ag42a3gae9eg6362d988921f
-LLWEAPONEX_BowRank4	<font color='#4DFF14'>Eagle Eye, Master Archer</font>	hc581e09eg3478g457cg93d1g40a6ad4070dc
+LLWEAPONEX_BowRank0	Beginner	h732fb684g376eg420eg9978ga0d9a6953f82
+LLWEAPONEX_BowRank1	Novice	h43e00fc3g0ac6g4ddag9864g161340dd5a62
+LLWEAPONEX_BowRank2	Journeyman Archer	h7cac4eb1g0d7ag475cgaa87g7df51a7e6d19
+LLWEAPONEX_BowRank3	Expert Archer	hbdcd3719ga57ag42a3gae9eg6362d988921f
+LLWEAPONEX_BowRank4	Eagle Eye, Master Archer	hc581e09eg3478g457cg93d1g40a6ad4070dc
 LLWEAPONEX_Crossbow	Crossbow	hcaabd40cg42fag4646g896dg471c77946ed8
-LLWEAPONEX_CrossbowRank0	<font color='#FDFFEA'>Beginner</font>	h4b2627dege20cg4b9agaff7ga3f748e04904
-LLWEAPONEX_CrossbowRank1	<font color='#B5D48D'>Novice</font>	h398feef7g53a2g490dg8a3egf22488dacc7c
-LLWEAPONEX_CrossbowRank2	<font color='#A6D569'>Journeyman Crossbowman</font>	h43b022fdg8c40g4dc2gadceg33269acfd0a9
-LLWEAPONEX_CrossbowRank3	<font color='#95D83F'>Expert Crossbowman</font>	h71cd4b64gc0c6g4cf7gaaa8g54b13eb8c40c
-LLWEAPONEX_CrossbowRank4	<font color='#88E213'>Master Marksman of Crossbows</font>	h78ac89e4gcfeeg4e19gaaa7g9b0ac3098aff
+LLWEAPONEX_CrossbowRank0	Beginner	h4b2627dege20cg4b9agaff7ga3f748e04904
+LLWEAPONEX_CrossbowRank1	Novice	h398feef7g53a2g490dg8a3egf22488dacc7c
+LLWEAPONEX_CrossbowRank2	Journeyman Crossbowman	h43b022fdg8c40g4dc2gadceg33269acfd0a9
+LLWEAPONEX_CrossbowRank3	Expert Crossbowman	h71cd4b64gc0c6g4cf7gaaa8g54b13eb8c40c
+LLWEAPONEX_CrossbowRank4	Master Marksman of Crossbows	h78ac89e4gcfeeg4e19gaaa7g9b0ac3098aff
 LLWEAPONEX_Dagger	Dagger	h697f3261gc083g4152g84cdgbe559a5e0388
-LLWEAPONEX_DaggerRank0	<font color='#FDFFEA'>Beginner</font>	hcbdc584cg6a24g4c8bg957cg099db027fc2e
-LLWEAPONEX_DaggerRank1	<font color='#CDBCF0'>Novice</font>	ha9215cd6g7074g41b2ga826g99c3ba415c4c
-LLWEAPONEX_DaggerRank2	<font color='#A17EE8'>Journeyman Thief</font>	h0e70e249g7e55g4b9cga6c7g19ecd5fca8fe
-LLWEAPONEX_DaggerRank3	<font color='#8756EB'>Expert Rogue</font>	h2f7c6f84g2961g489ag95b0gd6b5eb28b974
-LLWEAPONEX_DaggerRank4	<font color='#6827EC'>Master Shadowdancer</font>	h3c4adc5agfe20g4feega282gd5ff0bf85bdf
+LLWEAPONEX_DaggerRank0	Beginner	hcbdc584cg6a24g4c8bg957cg099db027fc2e
+LLWEAPONEX_DaggerRank1	Novice	ha9215cd6g7074g41b2ga826g99c3ba415c4c
+LLWEAPONEX_DaggerRank2	Journeyman Thief	h0e70e249g7e55g4b9cga6c7g19ecd5fca8fe
+LLWEAPONEX_DaggerRank3	Expert Rogue	h2f7c6f84g2961g489ag95b0gd6b5eb28b974
+LLWEAPONEX_DaggerRank4	Master Shadowdancer	h3c4adc5agfe20g4feega282gd5ff0bf85bdf
 LLWEAPONEX_DualShields	Dual Shields	h00157a58g9ae0g4119gba1ag3f1e9f11db14
-LLWEAPONEX_DualShieldsRank0	<font color='#FDFFEA'>Beginner</font>	h2b57436cg4a2cg4220g94f0gf59ca7e03784
-LLWEAPONEX_DualShieldsRank1	<font color='#FFDA9E'>Novice</font>	heb1c4f4eg6e9dg45b7gbfdcg1439c6c4380d
-LLWEAPONEX_DualShieldsRank2	<font color='#FFC973'>Journeyman Dual Shieldsman</font>	h3c8a080cgb3b1g4e8fg8c49g13fdffdf5c49
-LLWEAPONEX_DualShieldsRank3	<font color='#FFB94A'>Expert Dual Shieldsman</font>	h41d7d648geb74g4711gb607g374e572df966
-LLWEAPONEX_DualShieldsRank4	<font color='#FF9E03'>Dual Shieldmaster</font>	h46afecdbgf889g427ega96fge3e1d5c6a566
+LLWEAPONEX_DualShieldsRank0	Beginner	h2b57436cg4a2cg4220g94f0gf59ca7e03784
+LLWEAPONEX_DualShieldsRank1	Novice	heb1c4f4eg6e9dg45b7gbfdcg1439c6c4380d
+LLWEAPONEX_DualShieldsRank2	Journeyman Dual Shieldsman	h3c8a080cgb3b1g4e8fg8c49g13fdffdf5c49
+LLWEAPONEX_DualShieldsRank3	Expert Dual Shieldsman	h41d7d648geb74g4711gb607g374e572df966
+LLWEAPONEX_DualShieldsRank4	Dual Shieldmaster	h46afecdbgf889g427ega96fge3e1d5c6a566
 LLWEAPONEX_Firearm	Firearm	h8d02e345ged4ag4d60g9be9g68a46dda623b
-LLWEAPONEX_FirearmRank0	<font color='#FDC89B'>Beginner</font>	hde1bc355g000fg4bccg8cbege66943e3dd31
-LLWEAPONEX_FirearmRank1	<font color='#FBBC7F'>Novice</font>	h0d5e3434gf8c9g4e64gae3fg8cdb6336bac0
-LLWEAPONEX_FirearmRank2	<font color='#F5A36C'>Journeyman Firearm Enthusiast</font>	hf1dfb1ecg4148g45dfgaac1gc11a8066436b
-LLWEAPONEX_FirearmRank3	<font color='#F49C4E'>Expert Firearm Lunatic</font>	h24058293g1818g4389ga2d2ga7119b2c585e
-LLWEAPONEX_FirearmRank4	<font color='#FF9D33'>Master of Firearms, Destruction Supreme</font>	h81807eedg4a5cg4f2bg89bcgf6aa16f9deff
+LLWEAPONEX_FirearmRank0	Beginner	hde1bc355g000fg4bccg8cbege66943e3dd31
+LLWEAPONEX_FirearmRank1	Novice	h0d5e3434gf8c9g4e64gae3fg8cdb6336bac0
+LLWEAPONEX_FirearmRank2	Journeyman Firearm Enthusiast	hf1dfb1ecg4148g45dfgaac1gc11a8066436b
+LLWEAPONEX_FirearmRank3	Expert Firearm Lunatic	h24058293g1818g4389ga2d2ga7119b2c585e
+LLWEAPONEX_FirearmRank4	Master of Firearms	h81807eedg4a5cg4f2bg89bcgf6aa16f9deff
 LLWEAPONEX_Greatbow	Greatbow	h52a81f92g3549g4cb4g9b18g066ba15399c0
-LLWEAPONEX_GreatbowRank0	<font color='#FDFFEA'>Beginner</font>	he5f7f5fdge9c2g43d8gbc58g2f9009fe7553
-LLWEAPONEX_GreatbowRank1	<font color='#DDFFB3'>Novice</font>	h29fb09ddg1428g4ee7g94efg9aceb4989436
-LLWEAPONEX_GreatbowRank2	<font color='#94E963'>Journeyman Slayer</font>	h0f68040ag5fa7g4d96g8303gc3c2a8f64576
-LLWEAPONEX_GreatbowRank3	<font color='#52D43A'>Expert Slayer</font>	h8747de57g3defg41d3gad6aged40bb3e9540
-LLWEAPONEX_GreatbowRank4	<font color='#28FF00'>Master Dragonslayer</font>	hc075921ag911ag4564gad10geecdd11ba4bd
+LLWEAPONEX_GreatbowRank0	Beginner	he5f7f5fdge9c2g43d8gbc58g2f9009fe7553
+LLWEAPONEX_GreatbowRank1	Novice	h29fb09ddg1428g4ee7g94efg9aceb4989436
+LLWEAPONEX_GreatbowRank2	Journeyman Slayer	h0f68040ag5fa7g4d96g8303gc3c2a8f64576
+LLWEAPONEX_GreatbowRank3	Expert Slayer	h8747de57g3defg41d3gad6aged40bb3e9540
+LLWEAPONEX_GreatbowRank4	Master Dragonslayer	hc075921ag911ag4564gad10geecdd11ba4bd
 LLWEAPONEX_HandCrossbow	Hand Crossbow	hd8d02aa1g5c35g48b5gbde6ga76293ef2798
-LLWEAPONEX_HandCrossbowRank0	<font color='#FDFFEA'>Beginner</font>	hfaf23f40g0fa5g4da7g9ae2g7a2a9300ada0
-LLWEAPONEX_HandCrossbowRank1	<font color='#FFDA9E'>Novice</font>	h76b72fe7gf6cag4953gba27ga7c886669f2f
-LLWEAPONEX_HandCrossbowRank2	<font color='#FFC973'>Journeyman Spy</font>	hbd546d70g55c4g4d8dgb9b1gda8d054bdb08
-LLWEAPONEX_HandCrossbowRank3	<font color='#FFB94A'>Expert Spy</font>	hb557309eg71fag4858gb5d2ga4c8dc93dee8
-LLWEAPONEX_HandCrossbowRank4	<font color='#FF9E03'>Spymaster, Elite Assassin</font>	he81a1a2bgac20g4625ga1f7ge8cf7ff78a86
+LLWEAPONEX_HandCrossbowRank0	Beginner	hfaf23f40g0fa5g4da7g9ae2g7a2a9300ada0
+LLWEAPONEX_HandCrossbowRank1	Novice	h76b72fe7gf6cag4953gba27ga7c886669f2f
+LLWEAPONEX_HandCrossbowRank2	Journeyman Spy	hbd546d70g55c4g4d8dgb9b1gda8d054bdb08
+LLWEAPONEX_HandCrossbowRank3	Expert Spy	hb557309eg71fag4858gb5d2ga4c8dc93dee8
+LLWEAPONEX_HandCrossbowRank4	Spymaster, Elite Assassin	he81a1a2bgac20g4625ga1f7ge8cf7ff78a86
 LLWEAPONEX_Katana	Katana	he467f39fg8b65g4136g828fg949f9f3aef15
-LLWEAPONEX_KatanaRank0	<font color='#FFEAEA'>Beginner</font>	h0d05cb68gaa21g46eega70ag8ec9962dfc72
-LLWEAPONEX_KatanaRank1	<font color='#FF9D9D'>Novice</font>	h213017b8g518ag468eg8564g1657f73eef09
-LLWEAPONEX_KatanaRank2	<font color='#F56C6C'>Journeyman Bladesman</font>	h4a5670c7g1f24g42f8g93acg5f3b107eb433
-LLWEAPONEX_KatanaRank3	<font color='#F44E4E'>Expert Blademaster</font>	h88f412b9gf5e2g4182gbc13g474ac8480690
-LLWEAPONEX_KatanaRank4	<font color='#FF3333'>Blademaster</font>	h6426796bgbbd4g4af3g94d3g01ee834f3cad
+LLWEAPONEX_KatanaRank0	Beginner	h0d05cb68gaa21g46eega70ag8ec9962dfc72
+LLWEAPONEX_KatanaRank1	Novice	h213017b8g518ag468eg8564g1657f73eef09
+LLWEAPONEX_KatanaRank2	Journeyman Bladesman	h4a5670c7g1f24g42f8g93acg5f3b107eb433
+LLWEAPONEX_KatanaRank3	Expert Blademaster	h88f412b9gf5e2g4182gbc13g474ac8480690
+LLWEAPONEX_KatanaRank4	Blademaster	h6426796bgbbd4g4af3g94d3g01ee834f3cad
 LLWEAPONEX_Pistol	Pistol	h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c
-LLWEAPONEX_PistolRank0	<font color='#FDFFEA'>Beginner</font>	ha3b93455g807fg42b3gb922ga411505d0d1c
-LLWEAPONEX_PistolRank1	<font color='#DDFFB3'>Novice</font>	h4305abb5g75b4g41e7g9351ge3a0405cc957
-LLWEAPONEX_PistolRank2	<font color='#94E963'>Journeyman Gunslinger</font>	h1459cf28g0041g46e4gb2e8g6c3f86c272ba
-LLWEAPONEX_PistolRank3	<font color='#52D43A'>Expert Gunslinger</font>	h491f8119g2303g4b83g8a74g2ec7881ba4c9
-LLWEAPONEX_PistolRank4	<font color='#4CFF00'>Master Gunslinger</font>	h3b2089bdgfaefg42b4gbf74g2fb7f027df6a
+LLWEAPONEX_PistolRank0	Beginner	ha3b93455g807fg42b3gb922ga411505d0d1c
+LLWEAPONEX_PistolRank1	Novice	h4305abb5g75b4g41e7g9351ge3a0405cc957
+LLWEAPONEX_PistolRank2	Journeyman Gunslinger	h1459cf28g0041g46e4gb2e8g6c3f86c272ba
+LLWEAPONEX_PistolRank3	Expert Gunslinger	h491f8119g2303g4b83g8a74g2ec7881ba4c9
+LLWEAPONEX_PistolRank4	Master Gunslinger	h3b2089bdgfaefg42b4gbf74g2fb7f027df6a
 LLWEAPONEX_Polearm	Polearm	hd61320b6ge4e6g4f51g8841g132159d6b282
-LLWEAPONEX_PolearmRank0	<font color='#FDFFEA'>Beginner</font>	ha8c8931cge34dg45bfg9d4fg77c1a25462bc
-LLWEAPONEX_PolearmRank1	<font color='#FFF2C6'>Novice</font>	h6e76ccd9gbe3eg47e7g905bg5c15031949e3
-LLWEAPONEX_PolearmRank2	<font color='#FFE899'>Journeyman Polearmsman</font>	h91785cbag2ef3g43f6ga44bg5bdcfc8caea2
-LLWEAPONEX_PolearmRank3	<font color='#FFE178'>Expert Polearmsman</font>	h7971be6dg17efg4c8cg8e77g9d57ac62578c
-LLWEAPONEX_PolearmRank4	<font color='#FFC154'>Polearm Master</font>	ha7fd7be2gd67fg419ag89fbg7bc4ece52727
+LLWEAPONEX_PolearmRank0	Beginner	ha8c8931cge34dg45bfg9d4fg77c1a25462bc
+LLWEAPONEX_PolearmRank1	Novice	h6e76ccd9gbe3eg47e7g905bg5c15031949e3
+LLWEAPONEX_PolearmRank2	Journeyman Polearmsman	h91785cbag2ef3g43f6ga44bg5bdcfc8caea2
+LLWEAPONEX_PolearmRank3	Expert Polearmsman	h7971be6dg17efg4c8cg8e77g9d57ac62578c
+LLWEAPONEX_PolearmRank4	Polearm Master	ha7fd7be2gd67fg419ag89fbg7bc4ece52727
 LLWEAPONEX_Quarterstaff	Quarterstaff	h8d11d8efg0bb8g4130g9393geb30841eaea5
-LLWEAPONEX_QuarterstaffRank0	<font color='#FDC89B'>Beginner</font>	h22f563acgfc6fg4cddg9022g872a8fc0340c
-LLWEAPONEX_QuarterstaffRank1	<font color='#FBBC7F'>Novice</font>	hab43ee73ge916g4136gaf83g5d5c5a47384a
-LLWEAPONEX_QuarterstaffRank2	<font color='#F5A36C'>Journeyman Staff Monk</font>	h5d911119g2364g4baeg9f5dg74a095d048ce
-LLWEAPONEX_QuarterstaffRank3	<font color='#F49C4E'>Expert Staff Monk</font>	h16505df4g2c73g42ddg81b6gbc9788be5134
-LLWEAPONEX_QuarterstaffRank4	<font color='#FF9D33'>Master Monk of Staves</font>	h2ebfd90ag137eg4e96gbd08g2346f41f6d90
+LLWEAPONEX_QuarterstaffRank0	Beginner	h22f563acgfc6fg4cddg9022g872a8fc0340c
+LLWEAPONEX_QuarterstaffRank1	Novice	hab43ee73ge916g4136gaf83g5d5c5a47384a
+LLWEAPONEX_QuarterstaffRank2	Journeyman Staff Monk	h5d911119g2364g4baeg9f5dg74a095d048ce
+LLWEAPONEX_QuarterstaffRank3	Expert Staff Monk	h16505df4g2c73g42ddg81b6gbc9788be5134
+LLWEAPONEX_QuarterstaffRank4	Master Monk of Staves	h2ebfd90ag137eg4e96gbd08g2346f41f6d90
 LLWEAPONEX_Rapier	Rapier	h84b2d805gff5ag44a5g9f81g416aaf5abf18
-LLWEAPONEX_RapierRank0	<font color='#FEFFEA'>Beginner</font>	h290c10edge191g4322g9234g8c8e840a30ad
-LLWEAPONEX_RapierRank1	<font color='#FFF59D'>Novice</font>	h3572bd9bg1350g4de5g92c9gb192f1f7a927
-LLWEAPONEX_RapierRank2	<font color='#F5F06C'>Journeyman Fencer</font>	hebde993cgd7a6g4fc0ga40ag764f189c02c9
-LLWEAPONEX_RapierRank3	<font color='#F5E06C'>Expert Fencer</font>	h7418eca3g9edcg41d4gbb06g46b1d5684d35
-LLWEAPONEX_RapierRank4	<font color='#FFE933'>Master Fencer</font>	h1eade98bgf8a1g4bb9g91f9gd964789a61d8
+LLWEAPONEX_RapierRank0	Beginner	h290c10edge191g4322g9234g8c8e840a30ad
+LLWEAPONEX_RapierRank1	Novice	h3572bd9bg1350g4de5g92c9gb192f1f7a927
+LLWEAPONEX_RapierRank2	Journeyman Fencer	hebde993cgd7a6g4fc0ga40ag764f189c02c9
+LLWEAPONEX_RapierRank3	Expert Fencer	h7418eca3g9edcg41d4gbb06g46b1d5684d35
+LLWEAPONEX_RapierRank4	Master Fencer	h1eade98bgf8a1g4bb9g91f9gd964789a61d8
 LLWEAPONEX_Runeblade	Runeblade	hb66213fdg1a98g4127ga55fg429f9cde9c6a
-LLWEAPONEX_RunebladeRank0	<font color='#EAFFFE'>Beginner</font>	h0e7d1237g1fa7g493bga730g75ba4247533b
-LLWEAPONEX_RunebladeRank1	<font color='#9DFCFF'>Novice</font>	h81ad53d2g707ag468ag92b9g64df4f01fce4
-LLWEAPONEX_RunebladeRank2	<font color='#6CE3F5'>Journeyman Runekeeper</font>	h9a91f4a8g8630g4db3g88c5ge15b73d5f5d3
-LLWEAPONEX_RunebladeRank3	<font color='#6CF5E9'>Expert Runekeeper</font>	h0e9b4f32g273dg452bga51dgd984f003882a
-LLWEAPONEX_RunebladeRank4	<font color='#33FFB8'>Runemaster</font>	h9af72e9eg6922g4ddcg84a2ga1190d352f11
+LLWEAPONEX_RunebladeRank0	Beginner	h0e7d1237g1fa7g493bga730g75ba4247533b
+LLWEAPONEX_RunebladeRank1	Novice	h81ad53d2g707ag468ag92b9g64df4f01fce4
+LLWEAPONEX_RunebladeRank2	Journeyman Runekeeper	h9a91f4a8g8630g4db3g88c5ge15b73d5f5d3
+LLWEAPONEX_RunebladeRank3	Expert Runekeeper	h0e9b4f32g273dg452bga51dgd984f003882a
+LLWEAPONEX_RunebladeRank4	Runemaster	h9af72e9eg6922g4ddcg84a2ga1190d352f11
 LLWEAPONEX_Scythe	Scythe	h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa
-LLWEAPONEX_ScytheRank0	<font color='#FDFFEA'>Beginner</font>	h7277340dgb5a1g456cgb92agb687000a31cb
-LLWEAPONEX_ScytheRank1	<font color='#CCDA9E'>Novice</font>	h98918309g3e13g449dga904gca8263e76077
-LLWEAPONEX_ScytheRank2	<font color='#C8FBFF'>Journeyman Reaper</font>	h4e16f727gb7ceg4c04gac4ag25307029297a
-LLWEAPONEX_ScytheRank3	<font color='#96F8FF'>Expert Reaper</font>	h5d62b911g9204g4b88ga279gf899e1290b73
-LLWEAPONEX_ScytheRank4	<font color='#73FFCC'>Reaper of Souls</font>	h414c2944gf959g41bcgb30fg311454127738
+LLWEAPONEX_ScytheRank0	Beginner	h7277340dgb5a1g456cgb92agb687000a31cb
+LLWEAPONEX_ScytheRank1	Novice	h98918309g3e13g449dga904gca8263e76077
+LLWEAPONEX_ScytheRank2	Journeyman Reaper	h4e16f727gb7ceg4c04gac4ag25307029297a
+LLWEAPONEX_ScytheRank3	Expert Reaper	h5d62b911g9204g4b88ga279gf899e1290b73
+LLWEAPONEX_ScytheRank4	Reaper of Souls	h414c2944gf959g41bcgb30fg311454127738
 LLWEAPONEX_Shield	Shield	h9ffd7826g03eeg4597gad11g03c6b56e547c
-LLWEAPONEX_ShieldRank0	<font color='#FDFFEA'>Beginner</font>	h107780b5g9816g4eeag923egf088d7d8e242
-LLWEAPONEX_ShieldRank1	<font color='#CCDA9E'>Novice</font>	hbf033931gc683g4730gb293g5b65501d0d06
-LLWEAPONEX_ShieldRank2	<font color='#CCC973'>Journeyman Shieldsman</font>	h96519d70gf99cg45f3g9108gc02e00ba27ae
-LLWEAPONEX_ShieldRank3	<font color='#CCB94A'>Expert Shieldsman</font>	h00d6bd55ga775g45c7ga2c3ga181ec3f950c
-LLWEAPONEX_ShieldRank4	<font color='#CC9E03'>Shieldmaster</font>	h2c65600bg0fe8g4898g9a07g6d75f4e8f37d
+LLWEAPONEX_ShieldRank0	Beginner	h107780b5g9816g4eeag923egf088d7d8e242
+LLWEAPONEX_ShieldRank1	Novice	hbf033931gc683g4730gb293g5b65501d0d06
+LLWEAPONEX_ShieldRank2	Journeyman Shieldsman	h96519d70gf99cg45f3g9108gc02e00ba27ae
+LLWEAPONEX_ShieldRank3	Expert Shieldsman	h00d6bd55ga775g45c7ga2c3ga181ec3f950c
+LLWEAPONEX_ShieldRank4	Shieldmaster	h2c65600bg0fe8g4898g9a07g6d75f4e8f37d
 LLWEAPONEX_Staff	Arcane Staff	h1f41efdegb2b0g4f80gab7cg28b15d2c0039
-LLWEAPONEX_StaffRank0	<font color='#FDFFEA'>Beginner</font>	h58711edbg90e3g4c5bgada2g8453b1e7554f
-LLWEAPONEX_StaffRank1	<font color='#D1F8FF'>Novice</font>	he041dc61g19acg4056g9482geb3302da7927
-LLWEAPONEX_StaffRank2	<font color='#9BF0FF'>Journeyman Staff Acolyte</font>	hc8394097g41d6g4841gb16ag20c57c59c3cb
-LLWEAPONEX_StaffRank3	<font color='#77E9FE'>Expert Staffmeister</font>	h48e0e878g1bd3g465dg8fc5g14a50291ffd3
-LLWEAPONEX_StaffRank4	<font color='#5EDBFF'>Sage of Staves</font>	h0c5f4242g43beg4425g99b4ge609bc89d9cc
+LLWEAPONEX_StaffRank0	Beginner	h58711edbg90e3g4c5bgada2g8453b1e7554f
+LLWEAPONEX_StaffRank1	Novice	he041dc61g19acg4056g9482geb3302da7927
+LLWEAPONEX_StaffRank2	Journeyman Staff Acolyte	hc8394097g41d6g4841gb16ag20c57c59c3cb
+LLWEAPONEX_StaffRank3	Expert Staffmeister	h48e0e878g1bd3g465dg8fc5g14a50291ffd3
+LLWEAPONEX_StaffRank4	Sage of Staves	h0c5f4242g43beg4425g99b4ge609bc89d9cc
 LLWEAPONEX_Sword	Sword	hd7347120gcb02g4fdcgaddcg282a83a42d58
-LLWEAPONEX_SwordRank0	<font color='#FDFFEA'>Beginner</font>	h0a993e92g6c54g4951ga8abg59cdd28cd14d
-LLWEAPONEX_SwordRank1	<font color='#FFAC99'>Novice</font>	hf64fac40g06e6g4e41gb191g0aaf9cbc8d8b
-LLWEAPONEX_SwordRank2	<font color='#FF9178'>Journeyman Swordsman</font>	hab688a4ag277dg45ffgaa09g4bedd5d2bf27
-LLWEAPONEX_SwordRank3	<font color='#FF7251'>Expert Swordsman</font>	h5f43361agb604g44beg8cdegf1e06dd14fb0
-LLWEAPONEX_SwordRank4	<font color='#FF662A'>Swordmaster</font>	h485b2ba6g6da5g4d12gbbdag54371429702b
-LLWEAPONEX_ThrowingAbility	Throwing Ability	hc4bf9383ga9b2g48fcgb253gcc7546987b56
-LLWEAPONEX_ThrowingAbilityRank0	<font color='#FFEAEA'>Beginner</font>	h2effed72g3fcag4620gb39dg6faf68f3ae6f
-LLWEAPONEX_ThrowingAbilityRank1	<font color='#FF9D9D'>Novice</font>	hcb68c45bg3711g4cccg9094gd6c81f6aa000
-LLWEAPONEX_ThrowingAbilityRank2	<font color='#F56CA3'>Journeyman Thrower</font>	h450704d2g528dg4032g9da7g77a6ad86beea
-LLWEAPONEX_ThrowingAbilityRank3	<font color='#F56C8C'>Expert Thrower</font>	h9ed6820agdf93g47f1g9da6ge9a4552d014c
-LLWEAPONEX_ThrowingAbilityRank4	<font color='#FF3376'>Master Thrower</font>	h5f751ba5g27deg4581gb1b2gf59ab659113f
+LLWEAPONEX_SwordRank0	Beginner	h0a993e92g6c54g4951ga8abg59cdd28cd14d
+LLWEAPONEX_SwordRank1	Novice	hf64fac40g06e6g4e41gb191g0aaf9cbc8d8b
+LLWEAPONEX_SwordRank2	Journeyman Swordsman	hab688a4ag277dg45ffgaa09g4bedd5d2bf27
+LLWEAPONEX_SwordRank3	Expert Swordsman	h5f43361agb604g44beg8cdegf1e06dd14fb0
+LLWEAPONEX_SwordRank4	Swordmaster	h485b2ba6g6da5g4d12gbbdag54371429702b
+LLWEAPONEX_ThrowingAbility	Throwing	hc4bf9383ga9b2g48fcgb253gcc7546987b56
+LLWEAPONEX_ThrowingAbilityRank0	Beginner	h2effed72g3fcag4620gb39dg6faf68f3ae6f
+LLWEAPONEX_ThrowingAbilityRank1	Novice	hcb68c45bg3711g4cccg9094gd6c81f6aa000
+LLWEAPONEX_ThrowingAbilityRank2	Journeyman Thrower	h450704d2g528dg4032g9da7g77a6ad86beea
+LLWEAPONEX_ThrowingAbilityRank3	Expert Thrower	h9ed6820agdf93g47f1g9da6ge9a4552d014c
+LLWEAPONEX_ThrowingAbilityRank4	Master Thrower	h5f751ba5g27deg4581gb1b2gf59ab659113f
 LLWEAPONEX_Unarmed	Unarmed	h1e98bcebg2e42g4699gba2bg6f647d428699
-LLWEAPONEX_UnarmedRank0	<font color='#EAFFFE'>Beginner</font>	h8b4ca477gf0e1g4375ga6c3g3b20035d337c
-LLWEAPONEX_UnarmedRank1	<font color='#9DFCFF'>Novice</font>	h772c1170geb23g42c0gba32gb27e108379a6
-LLWEAPONEX_UnarmedRank2	<font color='#6CE3F5'>Scrapper</font>	h18a5ea22gd8b0g423bga26fg4a2941611cf3
-LLWEAPONEX_UnarmedRank3	<font color='#6CF5E9'>Elite Brawler</font>	hd5cefba2g5104g48d2gb6a5g10eb32769d79
-LLWEAPONEX_UnarmedRank4	<font color='#33FFB8'>Master Pugilist</font>	h81cd05aag77afg4898g87d6g6ae61536a4bf
+LLWEAPONEX_UnarmedRank0	Beginner	h8b4ca477gf0e1g4375ga6c3g3b20035d337c
+LLWEAPONEX_UnarmedRank1	Novice	h772c1170geb23g42c0gba32gb27e108379a6
+LLWEAPONEX_UnarmedRank2	Scrapper	h18a5ea22gd8b0g423bga26fg4a2941611cf3
+LLWEAPONEX_UnarmedRank3	Elite Brawler	hd5cefba2g5104g48d2gb6a5g10eb32769d79
+LLWEAPONEX_UnarmedRank4	Master Pugilist	h81cd05aag77afg4898g87d6g6ae61536a4bf
 LLWEAPONEX_Wand	Wand	h8bf31994gb4a2g4423g949dg8102095a66ea
-LLWEAPONEX_WandRank0	<font color='#FDFFEA'>Beginner</font>	he9479d69g5b24g4f51gb944g6e59f5f5ec2b
-LLWEAPONEX_WandRank1	<font color='#D8BAFD'>Novice</font>	hbcc9ce2bg78fcg431dgabe6g1c3951ada646
-LLWEAPONEX_WandRank2	<font color='#C596FE'>Journeyman of Wands</font>	h0b69be34ge862g4a82gaea2g87abee3e57b4
-LLWEAPONEX_WandRank3	<font color='#B274FF'>Expert of Wands</font>	h649f61ffg8842g40f4g8272gbfd109a337a9
-LLWEAPONEX_WandRank4	<font color='#D258FF'>Master Wandweaver</font>	ha70b98fbg18f9g48eegbc7dge24d718e21be
+LLWEAPONEX_WandRank0	Beginner	he9479d69g5b24g4f51gb944g6e59f5f5ec2b
+LLWEAPONEX_WandRank1	Novice	hbcc9ce2bg78fcg431dgabe6g1c3951ada646
+LLWEAPONEX_WandRank2	Journeyman of Wands	h0b69be34ge862g4a82gaea2g87abee3e57b4
+LLWEAPONEX_WandRank3	Expert of Wands	h649f61ffg8842g40f4g8272gbfd109a337a9
+LLWEAPONEX_WandRank4	Master Wandweaver	ha70b98fbg18f9g48eegbc7dge24d718e21be

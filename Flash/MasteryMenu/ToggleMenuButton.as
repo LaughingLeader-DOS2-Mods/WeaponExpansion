@@ -27,7 +27,7 @@ package
 		{
 			this.button_mc.gotoAndStop(2);
 			ExternalInterface.call("PlaySound","UI_Generic_Over");
-			tooltipHelper.ShowTooltipForMC(this.button_mc,root,"top");
+			tooltipHelper.ShowTooltipForMC(this.button_mc,root,"right");
 		}
 		
 		public function onDown(param1:MouseEvent) : *
