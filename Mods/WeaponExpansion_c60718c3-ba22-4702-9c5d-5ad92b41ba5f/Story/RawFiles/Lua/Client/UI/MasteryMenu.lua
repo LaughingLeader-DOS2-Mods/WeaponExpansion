@@ -45,9 +45,12 @@ local function OnHotbarEvent(ui, call, ...)
 end
 
 local function SetPlayerHandle(ui, call, handle)
-	CHARACTER_HANDLE = handle
-	if MasteryMenu.Instance ~= nil then
-		MasteryMenu.Instance:Invoke("setPlayerHandle", CHARACTER_HANDLE)
+	if handle ~= nil then
+		MasteryMenu.CHARACTER_HANDLE = handle
+		if MasteryMenu.Instance ~= nil then
+			MasteryMenu.Instance:SetValue("characterHandle", MasteryMenu.CHARACTER_HANDLE)
+			MasteryMenu.Instance:Invoke("setPlayerHandle")
+		end
 	end
 end
 
@@ -109,7 +112,7 @@ local function OnMenuEvent(ui, call, ...)
 		ui:Invoke("selectMastery", params[1])
 	elseif call == "mastery_showSkillTooltip" then
 		MasteryMenu.DisplayingSkillTooltip = true
-		ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[1], params[2], params[3], params[4], params[5])
+		ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5])
 	elseif call == "mastery_hideSkillTooltip" then
 		MasteryMenu.DisplayingSkillTooltip = false
 	end
@@ -131,7 +134,8 @@ local function tryGetCharacterHandle()
 		if handle ~= nil then
 			MasteryMenu.CHARACTER_HANDLE = handle
 			if MasteryMenu.Instance ~= nil then
-				MasteryMenu.Instance:Invoke("setPlayerHandle", CHARACTER_HANDLE)
+				MasteryMenu.Instance:SetValue("characterHandle", MasteryMenu.CHARACTER_HANDLE)
+				MasteryMenu.Instance:Invoke("setPlayerHandle")
 			end
 			LeaderLib.PrintDebug("Set MasteryMenu.CHARACTER_HANDLE to ",MasteryMenu.CHARACTER_HANDLE)
 		end
@@ -233,11 +237,12 @@ end
 
 local function getSkillsFromDescription(descriptionText)
 	local skills = {}
+	print("getSkillsFromDescription preMatch:",descriptionText)
 	for skillWord in string.gmatch(descriptionText, "(<skill.-/>)") do
 		descriptionText = descriptionText:gsub(skillWord, "")
 		local _,_,skillName = skillWord:find("id='(.-)'")
 		local _,_,icon = skillWord:find("icon='(.-)'")
-
+		print("getSkillsFromDescription Results:",skillWord, skillName, icon)
 		if skillName ~= nil then
 			if icon == nil then icon = "unknown" end
 			table.insert(skills, {id=skillName, icon=icon})
@@ -246,7 +251,7 @@ local function getSkillsFromDescription(descriptionText)
 	return descriptionText,skills
 end
 
-local function buildMasteryDescription(ui, listId, mastery, masteryData)
+local function buildMasteryDescription(ui, listId, mastery, masteryData, rank)
 	local output = ""
 	local i = 1
 	while i < 5 do
@@ -274,10 +279,11 @@ local function buildMasteryDescription(ui, listId, mastery, masteryData)
 			local rankInfoText = string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
 			local text = Text.MasteryMenu.RankDescriptionTemplate.Value:gsub("%[1%]", rankHeader):gsub("%[2%]", rankInfoText)
 			local finalText,skills = getSkillsFromDescription(text)
-			ui:invoke("addMasteryDescription", listId, finalText)
+			ui:Invoke("addMasteryDescription", listId, finalText)
+			Ext.Print(finalText,Ext.JsonStringify(skills));
 			if #skills > 0 then
 				for _,v in ipairs(skills) do
-					ui:invoke("addMasterySkill", listId, i, v.id, v.icon)
+					ui:Invoke("addMasterySkill", listId, i-1, v.id, v.icon)
 				end
 			end
 		end
@@ -328,7 +334,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank))
 			local masteryColorTitle = getMasteryDescriptionTitle(data)
 			ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
-			buildMasteryDescription(ui, i, tag,data)
+			buildMasteryDescription(ui,i,tag,data,rank)
 			local expRankDisplay = rankDisplayText
 			if rank >= Mastery.Variables.MaxRank then
 				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)

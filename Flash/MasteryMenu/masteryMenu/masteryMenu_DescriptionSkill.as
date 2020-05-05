@@ -7,7 +7,7 @@ package masteryMenu
 	
 	public dynamic class masteryMenu_DescriptionSkill extends MovieClip
 	{
-		public var skillId:String;
+		public var id:String;
 		public var icon_mc:IconDisplay;
 
 		public function masteryMenu_DescriptionSkill()
@@ -23,21 +23,20 @@ package masteryMenu
 
 		public function init(skill:String,icon:String="") : *
 		{
-			this.skillId = skill
+			this.id = skill
 			if (icon != "")
 			{
-				icon_mc = new IconDisplay();
-				icon_mc.setIcon(IconAtlases.larianSkillIcons, 10);
-				addChild(icon_mc);
-				addEventListener(MouseEvent.ROLL_OUT,this.onOut);
-				addEventListener(MouseEvent.ROLL_OVER,this.onOver);
+				icon_mc = new IconDisplay(icon);
 			}
+			addChild(icon_mc);
+			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
+			addEventListener(MouseEvent.ROLL_OVER,this.onOver);
 		}
 		
 		public function onOver(e:MouseEvent) : *
 		{
 			var pos:Point = icon_mc.localToGlobal(new Point(0,0));
-			ExternalInterface.call("mastery_showSkillTooltip",Registry.CharacterHandle,skillId,pos.x,pos.y,icon_mc.width,icon_mc.height);
+			ExternalInterface.call("mastery_showSkillTooltip",Registry.CharacterHandle,id,pos.x,pos.y,icon_mc.width,icon_mc.height);
 		}
 
 		public function onOut(e:MouseEvent) : *

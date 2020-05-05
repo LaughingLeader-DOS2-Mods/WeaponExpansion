@@ -37,6 +37,8 @@ local function OnSheetEvent(ui, call, ...)
 
 	if call == "showSkillTooltip" then
 		MasteryMenu.CHARACTER_HANDLE = params[1]
+		MasteryMenu.Instance:SetValue("characterHandle", MasteryMenu.CHARACTER_HANDLE)
+		MasteryMenu.Instance:Invoke("setPlayerHandle")
 	end
 end
 

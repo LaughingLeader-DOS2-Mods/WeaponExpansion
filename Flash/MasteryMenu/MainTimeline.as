@@ -141,9 +141,12 @@ package
 			return false;
 		}
 
-		public function setPlayerHandle(handle:Number) : *
+		public var characterHandle:Number = 0;
+
+		public function setPlayerHandle() : *
 		{
-			Registry.CharacterHandle = handle;
+			Registry.CharacterHandle = characterHandle;
+			trace("Set Registry.CharacterHandle to", Registry.CharacterHandle, characterHandle)
 		}
 		
 		public function setMaxRank(maxRank:int) : *

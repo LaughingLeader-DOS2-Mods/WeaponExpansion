@@ -607,7 +607,7 @@
 	<content contentuid="h3b6db1dfgdda3g4a2dgadffg6904133abdd3">Beginner</content>
 	<content contentuid="h3b7aff29g3695g448agbd64g56261c9cf503">&lt;font color=&apos;#97fbff&apos;&gt;Blessed Water Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h3b87e4feg20b1g4ad1gae99gfd2c945c19f7">General&apos;s Mercy</content>
-	<content contentuid="h3b90f6e5gfc36g4085gb291g03b83af766de">Battle Stomp creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.</content>
+	<content contentuid="h3b90f6e5gfc36g4085gb291g03b83af766de">&lt;skill id=&apos;Cone_GroundSmash&apos; icon=&apos;Skill_Warrior_GroundSmash&apos;/&gt;Battle Stomp creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.</content>
 	<content contentuid="h3b93ab3bg1847g4e81gbdbegff9b008a03f2">Tuned Rifle</content>
 	<content contentuid="h3bb4c915gad6dg452ag8e76ga0f3b83cc0eb">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery V&lt;/font&gt;</content>
 	<content contentuid="h3bb9d050gd779g468fg8de7gfa7f906d7497">&lt;font color=&apos;#a6ffcc&apos;&gt;Throw Target&lt;/font&gt;</content>
@@ -1039,7 +1039,7 @@
 	<content contentuid="h6a268993g122ag4546g8d76g83c831fb552f">Fire Arrow</content>
 	<content contentuid="h6a30ea9cgec6bg4fb7g847cg6f52783ee045">Ancient Two-handed Bokuto</content>
 	<content contentuid="h6a3d6841g00e8g4d72g8172g071fccfac077">Dragonslayer&apos;s Greatbow</content>
-	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">&lt;img src=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Crippling Blow applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
+	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">&lt;skill id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Crippling Blow applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
 	<content contentuid="h6a8b7584g375bg4aa1g85fdg9178f76d434d">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery II&lt;/font&gt;</content>
 	<content contentuid="h6a8c5394gdba9g45ffg934eg7914a2427553">A magical blade imbued with the power of water. The runes can be invoked to bathe the blade in a dousing layer of water.</content>
 	<content contentuid="h6a9f08c6gc56cg4026gba88g0f2918d8e1c6">Banner of the Pack (Intelligence Scaling)</content>
@@ -1166,7 +1166,7 @@
 	<content contentuid="h772c1170geb23g42c0gba32gb27e108379a6">Novice</content>
 	<content contentuid="h7747dee4g9740g4294g9888gb6aa57256eef">Frostdyne (Unleashed) (Constitution Scaling)</content>
 	<content contentuid="h77557ac7g4f6fg49bdga76cg404de43d92f5">Offhand</content>
-	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">Blitz Attack applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.</content>
+	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;skill id=&apos;MultiStrike_BlinkStrike&apos; icon=&apos;Skill_Warrior_BlinkStrike&apos;/&gt;Blitz Attack applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.</content>
 	<content contentuid="h775bb53dg18c2g46f0g9cbbgfff54b7ac5a8">Omnibolt, Heaven&apos;s Wrath (Finesse Scaling)</content>
 	<content contentuid="h778419bdg900eg4b6egb376g652371ca7538">A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers</content>
 	<content contentuid="h7784b453g91ceg4c49g80cfg2d67bd2869fb">&lt;font color=&apos;#999999&apos;&gt;Oiled Mini-Bolts&lt;/font&gt;</content>
@@ -1404,7 +1404,7 @@
 	<content contentuid="h904a6729gae64g4aecg8658g366b3ecc35a5">Gas Rune</content>
 	<content contentuid="h9054a1e9g8b48g42cfg8bbcg6483ed25a227">You really should think twice about attacking me. It won&apos;t end well for you.</content>
 	<content contentuid="h9090fd98g526dg47a4ga784ga9a53c0aea01">Character&apos;s &lt;font color=&apos;#c80030&apos;&gt;Piercing Resistance&lt;/font&gt; lowers as &lt;font color=&apos;#DC143C&apos;&gt;Vitality&lt;/font&gt; drops. Removed after Attacker&apos;s turn ends.</content>
-	<content contentuid="h90a60c8fg1d73g4db9g906dgd10be6e3df63">&lt;img src=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Crippling Blow deals additional &lt;font color=&apos;#CD1F1F&apos;&gt;piercing damage&lt;/font&gt; to disabled targets.</content>
+	<content contentuid="h90a60c8fg1d73g4db9g906dgd10be6e3df63">&lt;skill id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Crippling Blow deals additional &lt;font color=&apos;#CD1F1F&apos;&gt;piercing damage&lt;/font&gt; to disabled targets.</content>
 	<content contentuid="h90c0bf4fg3f1fg48d6g8275ga5ce8ab14dad">Enables Weapon Mastery</content>
 	<content contentuid="h90fdccf2gbb5fg4b23gb29agef990ec18575">Heatburst Rune</content>
 	<content contentuid="h9102ff74ge535g4526gaffdgde551dab819e">Deals Equivalent Shadow Damage to Vitality</content>
@@ -2197,7 +2197,7 @@
 	<content contentuid="he8bee6adg6c3eg462cg9000gc72376ce2954">Ronin&apos;s Sidearm</content>
 	<content contentuid="he8c35cdeg7094g4882gabc5ga804cd74f43c">Frostdyne (Empowered) (Wits Scaling)</content>
 	<content contentuid="he8c8644fg8648g4394gb270g42e5b89ba370">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in an armor-eating acid, dealing corrosive damage.</content>
-	<content contentuid="he91f94eag4370g4caagbc62gde3b37a9e452">Battering Ram has a 25% chance to apply Dizzy for 1 turn.</content>
+	<content contentuid="he91f94eag4370g4caagbc62gde3b37a9e452">&lt;skill id=&apos;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_BatteringRam&apos;/&gt;Battering Ram has a 25% chance to apply Dizzy for 1 turn.</content>
 	<content contentuid="he9479d69g5b24g4f51gb944g6e59f5f5ec2b">Beginner</content>
 	<content contentuid="he99304c7gfdbag48e0gb57bgc8b1fcea2588">a Bludgeon</content>
 	<content contentuid="he9b6a6beg7f37g482fga96fgfb7a411819cd">Eruption, the Portable Cannon (Intelligence Scaling)</content>

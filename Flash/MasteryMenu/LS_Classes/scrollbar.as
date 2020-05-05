@@ -937,7 +937,7 @@ package LS_Classes
 			}
 		}
 		
-		function onOver(param1:Event) : *
+		public function onOver(param1:Event) : *
 		{
 			var _loc2_:MovieClip = param1.currentTarget as MovieClip;
 			if(!this.m_disabled)
@@ -947,7 +947,7 @@ package LS_Classes
 			}
 		}
 		
-		function onOut(param1:Event) : *
+		public function onOut(param1:Event) : *
 		{
 			var _loc2_:MovieClip = param1.currentTarget as MovieClip;
 			if(!this.m_disabled)

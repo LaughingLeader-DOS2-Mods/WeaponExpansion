@@ -7,7 +7,7 @@ package masteryMenu
 	
 	public dynamic class masteryMenu_DescriptionEntry extends MovieClip
 	{
-		public var icons:Array;
+		public var icons:Array = new Array();
 		public var description_txt:TextField;
 
 		public function masteryMenu_DescriptionEntry()
@@ -31,6 +31,7 @@ package masteryMenu
 			// }
 
 			description_txt.htmlText = descriptionData.descriptionText;
+			description_txt.height = description_txt.textHeight;
 
 			if (descriptionData.skillsCount > 0)
 			{
@@ -38,7 +39,10 @@ package masteryMenu
 				while (i < descriptionData.skillsCount)
 				{
 					var skillData:SkillData = descriptionData.skills[i];
-					addSkill(skillData.id, skillData.icon);
+					if (skillData != null)
+					{
+						this.createSkillMC(skillData.id, skillData.icon);
+					}
 					i += 1;
 				}
 
@@ -46,7 +50,7 @@ package masteryMenu
 			}
 		}
 
-		public function addSkill(skill:String,icon:String="") : *
+		public function createSkillMC(skill:String,icon:String="") : *
 		{
 			var skillEntry:masteryMenu_DescriptionSkill = new masteryMenu_DescriptionSkill();
 			skillEntry.init(skill,icon);
@@ -57,9 +61,11 @@ package masteryMenu
 		public function alignSkills() : *
 		{
 			var i:uint = 0;
+			description_txt.x = 0;
+			description_txt.y = 0;
 			var lastX:Number = 0;
-			var lastY:Number = 0;
 			var lastHeight:Number = 0;
+			var lastY:Number = description_txt.y + description_txt.textHeight;
 			while(i < icons.length)
 			{
 				var icon:masteryMenu_DescriptionSkill = icons[i];
@@ -67,16 +73,16 @@ package masteryMenu
 				{
 					lastHeight = icon.height;
 					icon.x = lastX;
-					lastX = lastX + icon.icon_mc.width + 2;
+					icon.y = lastY;
+					lastX += icon.width + 2;
 					if (lastX > description_txt.width)
 					{
 						lastX = 0;
-						lastY = icon.height + 2;
+						lastY += icon.height + 2;
 					}
 				}
-				i = i + 1;
+				i += 1;
 			}
-			description_txt.y = lastY + lastHeight;
 		}
 	}
 }

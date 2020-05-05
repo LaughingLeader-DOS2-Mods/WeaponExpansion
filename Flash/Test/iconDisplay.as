@@ -36,7 +36,7 @@
 				new Rectangle((index % 32) * iconWidth, Math.floor(index / 32) * iconHeight, iconWidth, iconHeight),
 				new Point(0,0)
 			);
-			iconData.draw(this);
+			//iconData.draw(this);
 		}
 	}
 }

@@ -6,7 +6,10 @@ package
 	import flash.display.PixelSnapping;
 	import flash.geom.Rectangle;
 	import flash.geom.Point;
-	
+	import icons.*;
+	import flash.utils.getDefinitionByName;
+	import flash.external.ExternalInterface;
+
 	public dynamic class IconDisplay extends MovieClip
 	{
 		public var iconData:BitmapData;
@@ -14,29 +17,43 @@ package
 		public var iconWidth:int = 64;
 		public var iconHeight:int = 64;
 		
-		public function IconDisplay(w:int=64,h:int=64)
+		public function IconDisplay(iconClass:String, w:int=64,h:int=64)
 		{
 			super();
 			iconWidth = w;
 			iconHeight = h;
-			iconData = new BitmapData(iconWidth, iconHeight, true, 0x000000);
-			iconBitmap = new Bitmap(iconData, PixelSnapping.NEVER, true);
-			addChild(iconBitmap);
+
+			try
+			{
+				var iconImageClass:Class = getDefinitionByName("icons."+iconClass) as Class;
+				iconData = new iconImageClass();
+				//iconData = new BitmapData(iconWidth, iconHeight, true, 0xFFFFFFFF);
+				iconBitmap = new Bitmap(iconData);
+				addChild(iconBitmap);
+			}
+			catch(e:Error)
+			{
+				ExternalInterface.call("UIAssert","[WeaponEx] Error creating icon image from name '"+iconClass+"':",e.getStackTrace());
+			}
+			
 			addFrameScript(0,this.frame1);
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			stop();
 		}
 
-		public function setIcon(sourceData:BitmapData, index:int, sourceWidth=64, sourceHeight=64) : *
+		public function setIcon(sourceData:BitmapData, index:int, sourceWidth:int=64, sourceHeight:int=64, sheetColumns:int=32) : *
 		{
-			var copyData = IconAtlases.resizeBitmapData(sourceData, 32, 32)
-			iconData.copyPixels(copyData, 
-				new Rectangle((index % 32) * sourceWidth, Math.floor(index / 32) * sourceHeight, sourceWidth, sourceHeight),
+			//var copyData:BitmapData = IconAtlases.resizeBitmapData(sourceData, 32, 32)
+			trace(sourceData, iconData)
+			iconData.copyPixels(sourceData, 
+				new Rectangle((index % sheetColumns) * iconWidth, Math.floor(index / sheetColumns) * iconHeight, iconWidth, iconHeight),
 				new Point(0,0)
 			);
+			//iconData = copyData;
+			//iconBitmap.bitmapData = iconData;
 		}
 	}
 }

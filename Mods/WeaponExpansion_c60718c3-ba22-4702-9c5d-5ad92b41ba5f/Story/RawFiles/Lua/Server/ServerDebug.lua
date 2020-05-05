@@ -147,7 +147,8 @@ function DebugInit()
         end
         TagMasteryRanks(host, mastery, rank)
         Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)
-	end
+    end
+    Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Axe",4,Mastery.Variables.RankVariables[4].Required)
 
     if ItemTemplateIsInPartyInventory(host, "ad15f666-285d-4634-a832-ea643fa0a9d2", 0) <= 0 then
         ItemTemplateAddTo("ad15f666-285d-4634-a832-ea643fa0a9d2", host, 1, 0)

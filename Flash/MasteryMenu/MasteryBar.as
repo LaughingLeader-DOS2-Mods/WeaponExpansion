@@ -5,7 +5,6 @@ package
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
 	import LS_Classes.tooltipHelper;
-	import masteryMenu.MainTimeline;
 
 	public dynamic class MasteryBar extends larHealthbar
 	{

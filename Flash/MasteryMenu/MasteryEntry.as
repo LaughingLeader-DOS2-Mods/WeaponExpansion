@@ -63,10 +63,13 @@ package
 			descriptions.push(d);
 		}
 
-		public function addSkill(index:uint, skill:String, icon:String) : *
+		public function addSkillData(index:uint, skill:String, icon:String) : *
 		{
 			var d:DescriptionData = descriptions[index];
-			d.addSkillData(skill, icon);
+			if (d != null)
+			{
+				d.addSkillData(skill, icon);
+			}
 		}
 		
 		public function setBar(barPercentage:Number, animate:Boolean) : *
@@ -180,6 +183,7 @@ package
 		
 		internal function frame1() : *
 		{
+			stop();
 			//this.xpBar.mouseChildren = false;
 			//this.xpBar.mouseEnabled = false;
 			icon_mc.tooltip = Registry.MasteredText;

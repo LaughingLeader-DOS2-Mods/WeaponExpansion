@@ -1,5 +1,7 @@
 package data
 {
+	import data.SkillData;
+
 	public class DescriptionData
 	{
 		public var descriptionText:String = "";
