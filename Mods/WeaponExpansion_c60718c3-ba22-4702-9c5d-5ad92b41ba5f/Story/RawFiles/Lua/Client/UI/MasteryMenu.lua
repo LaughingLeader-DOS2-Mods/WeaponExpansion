@@ -265,9 +265,9 @@ local function buildMasteryDescription(ui, listId, mastery, masteryData, rank)
 		if rankDisplayText ~= nil and rankDisplayText ~= "" then
 			local rankHeader = ""
 			if rankName ~= nil then
-				rankHeader = string.format("<font size='24'>%s (%s)</font>", rankName, rankDisplayText)
+				rankHeader = string.format("<font size='24'>%s (%s)</font><br><img src='Icon_Line' width='350%%%%'>", rankName, rankDisplayText)
 			else
-				rankHeader = string.format("<font size='24'>%s</font>", rankDisplayText)
+				rankHeader = string.format("<font size='24'>%s</font><br><img src='Icon_Line' width='350%%%%'>", rankDisplayText)
 			end
 			local description = ""
 			description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")

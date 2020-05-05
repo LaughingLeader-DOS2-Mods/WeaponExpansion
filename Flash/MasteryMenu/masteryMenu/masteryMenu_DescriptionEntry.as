@@ -10,6 +10,8 @@ package masteryMenu
 		public var icons:Array = new Array();
 		public var description_txt:TextField;
 
+		public var EL_SPACING:Number = 4;
+
 		public function masteryMenu_DescriptionEntry()
 		{
 			super();
@@ -31,6 +33,7 @@ package masteryMenu
 			// }
 
 			description_txt.htmlText = descriptionData.descriptionText;
+			description_txt.height = 0;
 			description_txt.height = description_txt.textHeight;
 
 			if (descriptionData.skillsCount > 0)
@@ -46,7 +49,7 @@ package masteryMenu
 					i += 1;
 				}
 
-				alignSkills();
+				alignElements();
 			}
 		}
 
@@ -58,14 +61,16 @@ package masteryMenu
 			addChild(skillEntry);
 		}
 
-		public function alignSkills() : *
+		public function alignElements() : *
 		{
 			var i:uint = 0;
-			description_txt.x = 0;
-			description_txt.y = 0;
+			var lastY:Number = 0;
 			var lastX:Number = 0;
 			var lastHeight:Number = 0;
-			var lastY:Number = description_txt.y + description_txt.textHeight;
+			description_txt.x = 0;
+			description_txt.y = 0;
+			lastY = description_txt.y + description_txt.textHeight + EL_SPACING;
+
 			while(i < icons.length)
 			{
 				var icon:masteryMenu_DescriptionSkill = icons[i];
@@ -74,11 +79,11 @@ package masteryMenu
 					lastHeight = icon.height;
 					icon.x = lastX;
 					icon.y = lastY;
-					lastX += icon.width + 2;
+					lastX += icon.width + EL_SPACING;
 					if (lastX > description_txt.width)
 					{
 						lastX = 0;
-						lastY += icon.height + 2;
+						lastY += icon.height + EL_SPACING;
 					}
 				}
 				i += 1;

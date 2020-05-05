@@ -3,11 +3,13 @@ package masteryMenu
 	import flash.display.MovieClip;
 	import data.DescriptionData;
 	import data.SkillData;
+	import LS_Classes.scrollList;
 	
 	public dynamic class masteryMenu_Description extends MovieClip
 	{
 		public var rows:Array = new Array();
 		public var lastY:Number = 0;
+		public var list:scrollList;
 
 		public function masteryMenu_Description()
 		{
@@ -30,7 +32,8 @@ package masteryMenu
 			rows.push(entry);
 			entry.y = lastY;
 			lastY = entry.y + entry.height;
-			addChild(entry);
+			//addChild(entry);
+			list.addElement(entry, true, false);
 		}
 
 		public function addSkill(entryId:uint, skill:String,icon:String="") : *
@@ -87,9 +90,10 @@ package masteryMenu
 			// 	}
 			// 	i = i + 1;
 			// }
-			while (numChildren > 0) {
-				removeChildAt(0);
-			}
+			list.clearElements();
+			// while (numChildren > 0) {
+			// 	removeChildAt(0);
+			// }
 			rows = new Array();
 		}
 	}

@@ -81,24 +81,24 @@ package masteryMenu
 			this.masteryHandle.addChild(this.masteryList);
 
 			this.descriptionPane = new scrollList();
-			this.descriptionPane.x = desc_mc.x;
-			this.descriptionPane.y = desc_mc.y;
-			this.descriptionPane.setFrame(462,672);
+			this.descriptionPane.scrollbarSpacing = 0;
+			//this.descriptionPane.x = desc_mc.x;
+			//this.descriptionPane.y = desc_mc.y;
+			this.descriptionPane.setFrame(462,648);
 			//this.descriptionPane.SB_SPACING = 10;
 			//this.descriptionPane.TOP_SPACING = 15;
 			//this.descriptionPane.SIDE_SPACING = 20;
 			//this.descriptionPane.EL_SPACING = 1;
 			this.descriptionPane.mouseWheelWhenOverEnabled = true;
-			this.descriptionPane.m_scrollbar_mc.m_hideWhenDisabled = true;
-			this.descriptionPane.m_customElementHeight = this.ELH;
-			this.descriptionPane.m_scrollbar_mc.m_SCROLLSPEED = this.ELH;
-			this.descriptionPane.m_scrollbar_mc.m_scrollOverShoot = this.ELH;
-			this.descriptionPane.m_scrollbar_mc.x = this.descriptionPane.m_scrollbar_mc.x - 15;
-			this.descriptionPane.m_cyclic = true;
-			this.descriptionPane.OnSelectionChanged = this.onSelectionChanged;
+			//this.descriptionPane.m_scrollbar_mc.m_hideWhenDisabled = true;
+			//this.descriptionPane.m_customElementHeight = this.ELH;
+			this.descriptionPane.m_scrollbar_mc.m_SCROLLSPEED = 20
+			//this.descriptionPane.m_scrollbar_mc.m_scrollOverShoot = this.ELH;
+			this.descriptionPane.m_scrollbar_mc.x = this.descriptionPane.m_scrollbar_mc.x - 64;
 			this.descriptionPane.m_scrollbar_mc.m_animateScrolling = true;
-			addChild(this.descriptionPane);
-			this.descriptionPane.addElement(desc_mc);
+			//addChild(this.descriptionPane);
+			//this.descriptionPane.addElement(desc_mc);
+			this.desc_mc.addChild(descriptionPane);
 			this.descriptionPane.checkScrollBar();
 			// this.descriptionPane = new scrollbar_text("downText_id","upText_id","handleText_id","scrollStory_bg_id");
 			// addChild(this.descriptionPane);
@@ -109,6 +109,7 @@ package masteryMenu
 			// this.descriptionPane.m_bg_mc.alpha = 0;
 			this.desc_mc.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
 			this.desc_mc.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
+			this.desc_mc.list = descriptionPane;
 			this.buttonHintBar_mc.centerButtons = true;
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
 		}
@@ -133,6 +134,7 @@ package masteryMenu
 			this.descriptionPane.m_scrollbar_mc.scrollTo(0,false);
 			this.descriptionPane.resetScroll();
 			this.descriptionPane.m_scrollbar_mc.adjustScrollHandle(0);
+			this.descriptionPane.checkScrollBar();
 		}
 		
 		public function startScrollText(up:Boolean, increment:Number) : *
