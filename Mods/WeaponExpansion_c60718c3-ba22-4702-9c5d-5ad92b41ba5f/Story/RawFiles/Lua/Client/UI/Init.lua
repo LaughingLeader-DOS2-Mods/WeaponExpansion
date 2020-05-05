@@ -34,12 +34,6 @@ end
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
-
-	if call == "showSkillTooltip" then
-		MasteryMenu.CHARACTER_HANDLE = params[1]
-		MasteryMenu.Instance:SetValue("characterHandle", MasteryMenu.CHARACTER_HANDLE)
-		MasteryMenu.Instance:Invoke("setPlayerHandle")
-	end
 end
 
 local function Client_UIDebugTest()
@@ -74,7 +68,9 @@ end
 
 local function LLWEAPONEX_Client_SessionLoaded()
 	InitMasteryMenu()
-	Client_UIDebugTest()
+	if Ext.IsDeveloperMode() then
+		Client_UIDebugTest()
+	end
 end
 
 Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)

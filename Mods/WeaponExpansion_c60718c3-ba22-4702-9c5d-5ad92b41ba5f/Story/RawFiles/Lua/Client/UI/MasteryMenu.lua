@@ -44,23 +44,12 @@ local function OnHotbarEvent(ui, call, ...)
 	end
 end
 
-local function SetPlayerHandle(ui, call, handle)
-	if handle ~= nil then
-		MasteryMenu.CHARACTER_HANDLE = handle
-		if MasteryMenu.Instance ~= nil then
-			MasteryMenu.Instance:SetValue("characterHandle", MasteryMenu.CHARACTER_HANDLE)
-			MasteryMenu.Instance:Invoke("setPlayerHandle")
-		end
-	end
-end
-
 local function SetupListeners()
 	local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "selectedTab", OnSheetEvent)
 		Ext.RegisterUICall(ui, "hotbarBtnPressed", OnSheetEvent)
 		Ext.RegisterUICall(ui, "showUI", OnSheetEvent)
-		Ext.RegisterUIInvokeListener(ui, "setPlayerHandle", SetPlayerHandle)
 		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (characterSheet.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/characterSheet.swf")
@@ -127,21 +116,6 @@ local function getMasteryDescriptionTitle(masteryData)
 	return string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 end
 
-local function tryGetCharacterHandle()
-	local sheet = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
-	if sheet ~= nil then
-		local handle = sheet:GetValue("hotbar_mc.characterHandle", "Number")
-		if handle ~= nil then
-			MasteryMenu.CHARACTER_HANDLE = handle
-			if MasteryMenu.Instance ~= nil then
-				MasteryMenu.Instance:SetValue("characterHandle", MasteryMenu.CHARACTER_HANDLE)
-				MasteryMenu.Instance:Invoke("setPlayerHandle")
-			end
-			LeaderLib.PrintDebug("Set MasteryMenu.CHARACTER_HANDLE to ",MasteryMenu.CHARACTER_HANDLE)
-		end
-	end
-end
-
 local function initializeMasteryMenu()
 	local newlyCreated = false
 	local ui = Ext.GetUI("MasteryMenu")
@@ -172,11 +146,6 @@ local function initializeMasteryMenu()
 			ui:Invoke("setRankNodePosition", i, barPercentage)
 			i = i + 1
 		end
-
-		if MasteryMenu.CHARACTER_HANDLE == nil then
-			pcall(tryGetCharacterHandle)
-		end
-
 		if not MasteryMenu.RegisteredListeners then
 			Ext.RegisterUICall(ui, "requestCloseUI", OnMenuEvent)
 			Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
@@ -298,7 +267,7 @@ local function OpenMasteryMenu(characterMasteryData)
 		initializeMasteryMenu()
 	end
 	if MasteryMenu.CHARACTER_HANDLE == nil then
-		pcall(tryGetCharacterHandle)
+		MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(Ext.GetCharacter(characterMasteryData.UUID).Handle)
 	end
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
 	LeaderLib.PrintDebug(LeaderLib.Common.Dump(characterMasteryData))
