@@ -27,7 +27,7 @@ package
 			nodes = new Array();
 		}
 
-		function frame1() : *
+		internal function frame1() : *
 		{
 			stop();
 		}

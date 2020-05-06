@@ -26,8 +26,15 @@ package
 			try
 			{
 				var iconImageClass:Class = getDefinitionByName("icons."+iconClass) as Class;
-				iconData = new iconImageClass();
-				//iconData = new BitmapData(iconWidth, iconHeight, true, 0xFFFFFFFF);
+				if (iconImageClass != null)
+				{
+					iconData = new iconImageClass();
+				}
+				else
+				{
+					iconData = new LeaderLib_Placeholder();
+				}
+				
 				iconBitmap = new Bitmap(iconData);
 				addChild(iconBitmap);
 			}

@@ -677,42 +677,42 @@ package LS_Classes
 			}
 		}
 		
-		public function scrollTo(param1:Number, param2:Boolean = false, param3:Boolean = false) : Boolean
+		public function scrollTo(startY:Number, animate:Boolean = false, roundScrollVal:Boolean = false) : Boolean
 		{
-			var _loc6_:Number = NaN;
-			var _loc7_:Number = NaN;
+			var scrollNormalized:Number = NaN;
+			var tweenTime:Number = NaN;
 			if(this.m_disabled || !this.m_noContent && (!this.m_content_mc || this.m_content_mc.scrollRect == null))
 			{
 				return false;
 			}
-			var _loc4_:Number = param1;
-			var _loc5_:Number = this.getContDiff();
-			if(_loc5_ < 0)
+			var scrollY:Number = startY;
+			var scrollDiff:Number = this.getContDiff();
+			if(scrollDiff < 0)
 			{
-				_loc5_ = 0;
+				scrollDiff = 0;
 			}
-			if(_loc4_ <= 0)
+			if(scrollY <= 0)
 			{
-				_loc4_ = 0;
+				scrollY = 0;
 			}
 			else
 			{
-				_loc6_ = this.m_NormalizeValue == -1?Number(this.m_SCROLLSPEED):Number(this.m_NormalizeValue);
-				if(this.scrolledY < _loc4_ && _loc4_ > _loc5_ - _loc6_ * 0.1)
+				scrollNormalized = this.m_NormalizeValue == -1?Number(this.m_SCROLLSPEED):Number(this.m_NormalizeValue);
+				if(this.scrolledY < scrollY && scrollY > scrollDiff - scrollNormalized * 0.1)
 				{
-					_loc4_ = _loc5_;
-					param3 = false;
-					if(this.m_scrollAnimToY == _loc4_ || this.scrolledY == _loc4_)
+					scrollY = scrollDiff;
+					roundScrollVal = false;
+					if(this.m_scrollAnimToY == scrollY || this.scrolledY == scrollY)
 					{
 						return false;
 					}
 				}
-				if(param3)
+				if(roundScrollVal)
 				{
-					_loc4_ = Math.round(_loc4_ / _loc6_) * _loc6_;
+					scrollY = Math.round(scrollY / scrollNormalized) * scrollNormalized;
 				}
 			}
-			if(param2)
+			if(animate)
 			{
 				this.m_tweenY = this.m_scrolledY;
 				if(this.m_movementTimeline)
@@ -723,15 +723,15 @@ package LS_Classes
 						this.m_movementTimeline.onComplete = null;
 					}
 				}
-				_loc7_ = this.m_currentScrollDelay * 0.001;
-				this.m_movementTimeline = new larTween(this,"m_tweenY",Linear.easeNone,this.m_tweenY,_loc4_,_loc7_,this.INTMoveDone);
+				tweenTime = this.m_currentScrollDelay * 0.001;
+				this.m_movementTimeline = new larTween(this,"m_tweenY",Linear.easeNone,this.m_tweenY,scrollY,tweenTime,this.INTMoveDone);
 				this.m_movementTimeline.onUpdate = this.INTUpdatePos;
 			}
 			else
 			{
-				this.scrolledY = _loc4_;
+				this.scrolledY = scrollY;
 			}
-			this.m_scrollAnimToY = Math.round(_loc4_);
+			this.m_scrollAnimToY = Math.round(scrollY);
 			return true;
 		}
 		

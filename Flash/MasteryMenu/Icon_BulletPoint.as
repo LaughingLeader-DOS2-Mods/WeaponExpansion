@@ -1,4 +1,4 @@
-package icons
+package
 {
 	import flash.display.BitmapData;
 	

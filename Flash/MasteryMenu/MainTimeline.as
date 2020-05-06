@@ -7,7 +7,7 @@ package
 	
 	public dynamic class MainTimeline extends MovieClip
 	{
-		public var masteryMenuMC:MovieClip;
+		public var masteryMenuMC:masteryMenu_Main;
 
 		public var menu_btn:MovieClip;
 		
@@ -28,6 +28,8 @@ package
 		public var active:Boolean = false;
 
 		private var lastFocus:InteractiveObject;
+
+		public var descriptionContent:Array;
 
 		public function MainTimeline()
 		{
@@ -199,14 +201,40 @@ package
 			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,currentRank,barPercentage,isMastered);
 		}
 
-		public function addMasteryDescription(listId:Number, text:String) : *
+		public function buildDescription() : *
 		{
-			this.masteryMenuMC.addMasteryDescription(listId, text);
-		}
+			var length:int = descriptionContent.length;
+			if (length > 0)
+			{
+				this.masteryMenuMC.descriptionList.clearElements();
+				var i:uint = 0;
+				while (i < length)
+				{
+					var text:String = descriptionContent[i];
+					var skillName:String = descriptionContent[i+1];
+					var skillIcon:String = descriptionContent[i+2];
 
-		public function addMasterySkill(listId:Number, index:uint, skill:String, icon:String) : *
-		{
-			this.masteryMenuMC.addMasterySkill(listId, index, skill, icon);
+					if (text != "")
+					{
+						this.masteryMenuMC.descriptionList.addText(text, false);
+					}
+					if (skillName != "")
+					{
+						if (skillIcon == null)
+						{
+							skillIcon = "";
+						}
+						this.masteryMenuMC.descriptionList.addSkill(skillName, skillIcon, false);
+					}
+					i = i + 3;
+				}
+				this.masteryMenuMC.descriptionList.positionElements();
+				descriptionContent = new Array();
+			}
+			else
+			{
+				this.masteryMenuMC.resetList();
+			}
 		}
 
 		public function setRankNodePosition(rank:uint, barPercentage:Number) : *
@@ -224,9 +252,9 @@ package
 			this.masteryMenuMC.setRankTooltipText(listId, rank, text);
 		}
 		
-		public function selectMastery(id:Number) : *
+		public function selectMastery(id:Number, instant:Boolean = false) : *
 		{
-			this.masteryMenuMC.select(id);
+			this.masteryMenuMC.select(id,instant);
 		}
 		
 		internal function frame1() : *
@@ -234,10 +262,9 @@ package
 			this.layout = "fixed";
 			this.alignment = "none";
 			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu");
-
+			this.descriptionContent = new Array();
 			Registry.RankNodePositions[0] = 0.0;
 			Registry.RankNodePositions[4] = 1.0;
-
 			//var icon = new iconDisplay(32,32);
 			//icon.setIcon(IconAtlases.larianSkillIcons, 10);
 			//this.masteryMenuMC.addChild(icon);

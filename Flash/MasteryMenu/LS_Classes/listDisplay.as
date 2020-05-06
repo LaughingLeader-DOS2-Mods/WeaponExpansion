@@ -901,9 +901,9 @@ package LS_Classes
 			this.selectMC(_loc2_);
 		}
 		
-		public function selectMC(param1:MovieClip, param2:Boolean = false) : *
+		public function selectMC(target:MovieClip, force:Boolean = false) : *
 		{
-			if(this.m_CurrentSelection != param1 || param2)
+			if(this.m_CurrentSelection != target || force)
 			{
 				if(this.m_CurrentSelection)
 				{
@@ -916,17 +916,17 @@ package LS_Classes
 						this.m_CurrentSelection.INTDeselect();
 					}
 				}
-				if(param1)
+				if(target)
 				{
-					this.m_CurrentSelection = param1;
+					this.m_CurrentSelection = target;
 					dispatchEvent(new Event(Event.CHANGE));
 					if(this.OnSelectionChanged != null)
 					{
 						this.OnSelectionChanged();
 					}
-					if(param1.selectElement)
+					if(target.selectElement)
 					{
-						param1.selectElement();
+						target.selectElement();
 					}
 				}
 				else

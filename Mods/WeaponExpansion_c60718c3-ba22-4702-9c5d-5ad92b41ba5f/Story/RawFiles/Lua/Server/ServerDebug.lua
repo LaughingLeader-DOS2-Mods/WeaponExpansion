@@ -126,6 +126,8 @@ function DebugInit()
     CharacterAddAbility(host, "WarriorLore", 4)
     CharacterAddAbility(host, "RogueLore", 4)
 
+    ApplyStatus(host, "LLWEAPONEX_RUPTURE", 10, host)
+
     local x,y,z = GetPosition(host)
     for mastery,masterData in pairs(Masteries) do
         local rank = Ext.Random(0,4)

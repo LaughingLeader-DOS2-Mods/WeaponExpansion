@@ -6,7 +6,9 @@ MasteryMenu = {
 	Instance = nil,
 	DisplayingSkillTooltip = false,
 	SelectedMastery = nil,
-	LastSelected = 0
+	LastSelected = 0,
+	---@type CharacterMasteryData
+	MasteryData = nil
 }
 local function CloseMenu()
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
@@ -19,7 +21,7 @@ end
 
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "hotbarBtnPressed" or call == "selectedTab" or call == "showUI" then
 		CloseMenu()
@@ -28,7 +30,7 @@ end
 
 local function OnSidebarEvent(ui, call, ...)
 	local params = {...}
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "charSel" then
 		CloseMenu()
@@ -37,7 +39,7 @@ end
 
 local function OnHotbarEvent(ui, call, ...)
 	local params = {...}
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "hotbarBtnPressed" then
 		CloseMenu()
@@ -80,6 +82,120 @@ local function TryOpenMasteryMenu()
 	end
 end
 
+
+local skillPattern = "(<skill.-/>)"
+local function splitDescriptionBySkills(str)
+	local list = {};
+	local pos = 1
+	local lastMatch = ""
+	if string.find("", skillPattern, 1) then
+		return list
+	end
+	while 1 do
+		local first,last,a,b = string.find(str, skillPattern, pos)
+		if first then
+			local s = string.sub(str, pos, first-1);
+			if s ~= "" then
+				if lastMatch ~= "" then
+					s = lastMatch..s
+					lastMatch = ""
+				elseif a ~= nil then
+					s = a..s
+				end
+				table.insert(list, s)
+			elseif a ~= nil then
+				lastMatch = a
+			end
+			pos = last+1
+		else
+			local s = string.sub(str, pos);
+			if s ~= "" then
+				if lastMatch ~= "" then
+					s = lastMatch..s
+					lastMatch = ""
+				elseif a ~= nil then
+					s = a..s
+				end
+				table.insert(list, s)
+			elseif a ~= nil then
+				lastMatch = a
+			end
+			break
+		end
+		lastMatch = a
+	end
+	return list
+end
+
+local function pushDescriptionEntry(ui, index, text, skillName, skillIcon)
+	ui:SetValue("descriptionContent", text, index)
+	if skillName == nil then
+		skillName = ""
+	end
+	if skillIcon == nil then
+		skillIcon = ""
+	end
+	ui:SetValue("descriptionContent", skillName, index+1)
+	ui:SetValue("descriptionContent", skillIcon, index+2)
+	return index + 3
+end
+
+local function parseDescription(ui, index, descriptionText)
+	local splitText = splitDescriptionBySkills(descriptionText)
+	for i,v in ipairs(splitText) do
+		local _,_,skillEntry = string.find(descriptionText, skillPattern)
+		print(v, skillEntry)
+		v = string.gsub(v, skillEntry, "")
+		local _,_,skillName = skillEntry:find("id='(.-)'")
+		local _,_,icon = skillEntry:find("icon='(.-)'")
+		index = pushDescriptionEntry(ui, index, v, skillName, icon)
+	end
+	return index
+end
+
+local function buildMasteryDescription(ui, mastery)
+	print(mastery)
+	local data = Masteries[mastery]
+	local rank = MasteryMenu.MasteryData.Masteries[mastery].Rank
+	local index = 0
+	for i=1,Mastery.Variables.MaxRank,1 do
+		local rankText = "_Rank"..tostring(i)
+		local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
+		local rankNameData = data.Ranks[i]
+		local rankName = nil
+		if rankNameData ~= nil then
+			rankName = rankNameData.Name.Value
+		end
+		if rankDisplayText ~= nil and rankDisplayText ~= "" then
+			local rankHeader = ""
+			if rankName ~= nil then
+				rankHeader = string.format("<font size='24'>%s: %s</font>", rankDisplayText, rankName)
+			else
+				rankHeader = string.format("<font size='24'>%s</font>", rankDisplayText)
+			end
+			local description = ""
+			description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
+			local hasDescription = true
+			if description == nil or description == "" then
+				description = Text.MasteryMenu.RankPlaceholder.Value
+				hasDescription = false
+			elseif i > rank then
+				description = Text.MasteryMenu.RankLocked.Value
+				hasDescription = false
+			end
+			--string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
+			index = pushDescriptionEntry(ui, index, rankHeader)
+			if hasDescription then
+				index = parseDescription(ui, index, description)
+			else
+				index = pushDescriptionEntry(ui, index, description) -- Escaping percentages)
+			end
+		end
+		i = i + 1
+	end
+	ui:Invoke("buildDescription")
+end
+
 local function OnMenuEvent(ui, call, ...)
 	local params = {...}
 	if call ~= "overMastery" then
@@ -97,6 +213,7 @@ local function OnMenuEvent(ui, call, ...)
 	elseif call == "onMasterySelected" then
 		MasteryMenu.LastSelected = params[1]
 		MasteryMenu.SelectedMastery = params[2]
+		buildMasteryDescription(ui, MasteryMenu.SelectedMastery)
 	elseif call == "selectedMastery" then
 		ui:Invoke("selectMastery", params[1])
 	elseif call == "mastery_showSkillTooltip" then
@@ -204,67 +321,11 @@ local function getRankTooltip(data, i)
 	end
 end
 
-local function getSkillsFromDescription(descriptionText)
-	local skills = {}
-	print("getSkillsFromDescription preMatch:",descriptionText)
-	for skillWord in string.gmatch(descriptionText, "(<skill.-/>)") do
-		descriptionText = descriptionText:gsub(skillWord, "")
-		local _,_,skillName = skillWord:find("id='(.-)'")
-		local _,_,icon = skillWord:find("icon='(.-)'")
-		print("getSkillsFromDescription Results:",skillWord, skillName, icon)
-		if skillName ~= nil then
-			if icon == nil then icon = "unknown" end
-			table.insert(skills, {id=skillName, icon=icon})
-		end
-	end
-	return descriptionText,skills
-end
-
-local function buildMasteryDescription(ui, listId, mastery, masteryData, rank)
-	local output = ""
-	local i = 1
-	while i < 5 do
-		local rankText = "_Rank"..tostring(i)
-		local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
-		local rankNameData = masteryData.Ranks[i]
-		local rankName = nil
-		if rankNameData ~= nil then
-			rankName = rankNameData.Name.Value
-		end
-		if rankDisplayText ~= nil and rankDisplayText ~= "" then
-			local rankHeader = ""
-			if rankName ~= nil then
-				rankHeader = string.format("<font size='24'>%s (%s)</font><br><img src='Icon_Line' width='350%%%%'>", rankName, rankDisplayText)
-			else
-				rankHeader = string.format("<font size='24'>%s</font><br><img src='Icon_Line' width='350%%%%'>", rankDisplayText)
-			end
-			local description = ""
-			description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
-			if description == nil or description == "" then
-				description = Text.MasteryMenu.RankPlaceholder.Value
-			elseif i > rank then
-				description = Text.MasteryMenu.RankLocked.Value
-			end
-			local rankInfoText = string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
-			local text = Text.MasteryMenu.RankDescriptionTemplate.Value:gsub("%[1%]", rankHeader):gsub("%[2%]", rankInfoText)
-			local finalText,skills = getSkillsFromDescription(text)
-			ui:Invoke("addMasteryDescription", listId, finalText)
-			Ext.Print(finalText,Ext.JsonStringify(skills));
-			if #skills > 0 then
-				for _,v in ipairs(skills) do
-					ui:Invoke("addMasterySkill", listId, i-1, v.id, v.icon)
-				end
-			end
-		end
-		i = i + 1
-	end
-	return output
-end
-
 ---@param CharacterMasteryData characterMasteryData
 local function OpenMasteryMenu(characterMasteryData)
 	if not MasteryMenu.Initialized then
 		initializeMasteryMenu()
+		MasteryMenu.MasteryData = characterMasteryData
 	end
 	if MasteryMenu.CHARACTER_HANDLE == nil then
 		MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(Ext.GetCharacter(characterMasteryData.UUID).Handle)
@@ -303,7 +364,6 @@ local function OpenMasteryMenu(characterMasteryData)
 			local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank))
 			local masteryColorTitle = getMasteryDescriptionTitle(data)
 			ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
-			buildMasteryDescription(ui,i,tag,data,rank)
 			local expRankDisplay = rankDisplayText
 			if rank >= Mastery.Variables.MaxRank then
 				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
@@ -318,7 +378,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			i = i + 1
 		end
-		ui:Invoke("selectMastery", MasteryMenu.LastSelected)
+		ui:Invoke("selectMastery", MasteryMenu.LastSelected, true)
 		ui:Invoke("openMenu")
 		MasteryMenu.Open = true
 	else
@@ -330,6 +390,7 @@ local function NetMessage_OpenMasteryMenu(call,data)
 	---@type CharacterMasteryData
 	local characterMasteryData = CharacterMasteryData:Create()
 	characterMasteryData:LoadFromString(data)
+	MasteryMenu.MasteryData = characterMasteryData
 	OpenMasteryMenu(characterMasteryData)
 end
 

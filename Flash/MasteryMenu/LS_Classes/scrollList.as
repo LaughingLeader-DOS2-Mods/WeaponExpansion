@@ -215,27 +215,27 @@ package LS_Classes
 			}
 		}
 		
-		override public function selectMC(param1:MovieClip, param2:Boolean = false) : *
+		override public function selectMC(target:MovieClip, force:Boolean = false) : *
 		{
-			var _loc4_:MovieClip = null;
-			var _loc5_:Number = NaN;
-			var _loc3_:Boolean = true;
-			if(param1 && m_CurrentSelection && param1.list_pos < m_CurrentSelection.list_pos)
+			var firstVisible:MovieClip = null;
+			var targetHeight:Number = NaN;
+			var higher:Boolean = true;
+			if(target && m_CurrentSelection && target.list_pos < m_CurrentSelection.list_pos)
 			{
-				_loc3_ = false;
+				higher = false;
 			}
-			super.selectMC(param1,param2);
+			super.selectMC(target,force);
 			if(this.m_scrollbar_mc.visible && this.m_allowKeepIntoView)
 			{
-				_loc4_ = getFirstVisible();
-				if(m_CurrentSelection == _loc4_)
+				firstVisible = getFirstVisible();
+				if(m_CurrentSelection == firstVisible)
 				{
 					this.m_scrollbar_mc.scrollTo(0,this.m_scrollbar_mc.m_animateScrolling);
 				}
 				else
 				{
-					_loc5_ = getElementHeight(m_CurrentSelection);
-					this.m_scrollbar_mc.scrollIntoView(m_CurrentSelection.y,_loc5_);
+					targetHeight = getElementHeight(m_CurrentSelection);
+					this.m_scrollbar_mc.scrollIntoView(m_CurrentSelection.y,targetHeight);
 				}
 			}
 		}
@@ -359,20 +359,20 @@ package LS_Classes
 			{
 				content_array.sortOn(m_SortOnFieldName,m_SortOnOptions);
 			}
-			var _loc1_:Number = TOP_SPACING;
-			var _loc2_:uint = 0;
-			while(_loc2_ < content_array.length)
+			var yPos:Number = TOP_SPACING;
+			var i:uint = 0;
+			while(i < content_array.length)
 			{
-				content_array[_loc2_].list_pos = _loc2_;
-				content_array[_loc2_].y = _loc1_;
-				content_array[_loc2_].x = SIDE_SPACING;
-				if(content_array[_loc2_].visible)
+				content_array[i].list_pos = i;
+				content_array[i].y = yPos;
+				content_array[i].x = SIDE_SPACING;
+				if(content_array[i].visible)
 				{
-					_loc1_ = _loc1_ + (getElementHeight(content_array[_loc2_]) + EL_SPACING);
+					yPos = yPos + (getElementHeight(content_array[i]) + EL_SPACING);
 				}
-				_loc2_++;
+				i++;
 			}
-			this.m_ScrollHeight = _loc1_ - EL_SPACING;
+			this.m_ScrollHeight = yPos - EL_SPACING;
 			this.checkScrollBar();
 			if(this.m_bottomAligned)
 			{

@@ -7,3 +7,4 @@ LLWEAPONEX_Notifications_OniGauntletRequiredForOrb	<font color='#FF001F'>The orb
 LLWEAPONEX_Notifications_UnequipDragonBoneClawsFailed	<font color='#CD1F1F'>To unequip the Dragon Bone Claws, unequip your glove armor instead of the weapon.</font>	h03bcab3bgb227g4c71gb14egf3964ebe80e2
 LLWEAPONEX_Notifications_MasteryRankedUp	<font color='#F7BA14'>[1]</font> increased to rank <font color='#00FF00'>[2]</font>	hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c
 LLWEAPONEX_Notifications_NoMasteriesForSummons	<font color='#FF001F'>Summons Can't Gain Mastery Experiences</font>	h7db7ef8bg57b5g4f1dgbb54g6409d807d794
+LLWEAPONEX_Notifications_NoMasteriesForFollowers	<font color='#FF001F'>Followers Can't Gain Mastery Experiences</font>	hfe292736g1003g4d08gab35ge3250879be98

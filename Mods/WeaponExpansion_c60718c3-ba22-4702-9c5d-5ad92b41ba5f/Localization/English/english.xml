@@ -259,7 +259,7 @@
 	<content contentuid="h19fa14e3gfea2g49b5gb88dg59e51fa3e21c">Warchief&apos;s Whirlwind</content>
 	<content contentuid="h1a427f46gffe1g479eg802dgc6fec0a14659">Mini-Arbalest</content>
 	<content contentuid="h1a441201gce6cg4239gae64g4ae486710219">Omnislash</content>
-	<content contentuid="h1a450a28g4751g4868gbe5eg31670563cafb">&lt;font color=&apos;#2EFFE9&apos;&gt;Arcane Staff Mastery V&lt;/font&gt;</content>
+	<content contentuid="h1a450a28g4751g4868gbe5eg31670563cafb">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery V&lt;/font&gt;</content>
 	<content contentuid="h1a5648acg3ea5g4b14gb96age9840a69f268">&lt;font color=&apos;#FF0000&apos;&gt;An empty hand is required!&lt;/font&gt;</content>
 	<content contentuid="h1a87d2a2g15c6g42dbg8811gb15a27da32c5">A big paddle.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h1a89229cg12fag400eg9be7gc36d4f099f17">Shadow Stalker</content>
@@ -317,7 +317,7 @@
 	<content contentuid="h1edb2543g2788g4049g8091ga9114721b59f">Shiden, Thunder Orb</content>
 	<content contentuid="h1f0d97c7gf46dg470bg9b0cg5fbd600337ff">&lt;font color=&apos;#c5a65a&apos;&gt;Kevin the Pet Rock&lt;/font&gt; is tired, and must recharge his energy before he can be thrown again.</content>
 	<content contentuid="h1f1f5486gb538g42d4gbf0egbec380f600ad">Crafted Halberd</content>
-	<content contentuid="h1f41efdegb2b0g4f80gab7cg28b15d2c0039">Arcane Staff</content>
+	<content contentuid="h1f41efdegb2b0g4f80gab7cg28b15d2c0039">Staff</content>
 	<content contentuid="h1f50077bgc01fg4894g94b0g9b4325c7769d">Token of Memory</content>
 	<content contentuid="h1f790598ge6e1g4395gb403gcf5ffb39d1f3">Water Bullets</content>
 	<content contentuid="h1f9afda1g6b20g4a64g8ebbg5272b5558145">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Dragon&apos;s Bane</content>
@@ -534,7 +534,7 @@
 	<content contentuid="h32a910e6gfc6cg431egbb26g9b4c67639010">Quarterstaff (Metal)</content>
 	<content contentuid="h32b2d731g95e4g4b68ga7f1ge6e5069a4a12">Death Rune</content>
 	<content contentuid="h32cc6a8cg93a9g4482g9ccfg5e332d7eb683">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h3322d0efg7420g408cg9053g57c1a5c6f914">&lt;font color=&apos;#2EFFE9&apos;&gt;Arcane Staff Mastery IV&lt;/font&gt;</content>
+	<content contentuid="h3322d0efg7420g408cg9053g57c1a5c6f914">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h336d150fg8c63g4707g9231g3c2cb5ad7764">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
 	<content contentuid="h338d9f08g2302g41f0g802bg5a937dda1cee">Mercy</content>
 	<content contentuid="h338fd30cg6831g4f12g9bccg7c73be01a085">Recharging (Quiver)</content>
@@ -1109,7 +1109,7 @@
 	<content contentuid="h720705f9g9a68g48c9g8b63gebf21d945fa0">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Throw Weapon</content>
 	<content contentuid="h72266d41ge248g44a3g93eeg48bfe62fb97d">Harken</content>
 	<content contentuid="h724b0dbfg11c7g472eg8cf5g3772c2f7da26">An extremely sharp, star-shaped plate of metal.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Looks perfect for throwng!&lt;/font&gt;</content>
-	<content contentuid="h725f0092g85f3g48eeg9e7ag314699f9b0df">&lt;font color=&apos;#2EFFE9&apos;&gt;Arcane Staff Mastery III&lt;/font&gt;</content>
+	<content contentuid="h725f0092g85f3g48eeg9e7ag314699f9b0df">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery III&lt;/font&gt;</content>
 	<content contentuid="h72759001g42c8g4953g8657gdc357b45f8cc">The personal axe of Balrin, a Dwarven Berserker known for his legendary axe throwing.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer.&lt;/font&gt;</content>
 	<content contentuid="h7277340dgb5a1g456cgb92agb687000a31cb">Beginner</content>
 	<content contentuid="h72b60345g80cdg437dg9e3cgc4f0f08397a8">This cute little greatbow arrow infused with a charming potion is quite something. You really, really, really like it.</content>
@@ -1376,7 +1376,7 @@
 	<content contentuid="h8d8bfc1cg51abg43ebgb2ccg15926654b3fd">[KATANA] Disable the &quot;Finisher&quot; status from automatically applying on hit.</content>
 	<content contentuid="h8d913678gdb4fg41begbca8g0e0a541c8c94">Piercing Weakness</content>
 	<content contentuid="h8db77e32g315ag4744gbaa6g883f6a73c659">Dizzy</content>
-	<content contentuid="h8dbad90bg2ecdg44begb735g92317326e23e">&lt;font color=&apos;#2EFFE9&apos;&gt;Arcane Staff Mastery II&lt;/font&gt;</content>
+	<content contentuid="h8dbad90bg2ecdg44begb735g92317326e23e">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery II&lt;/font&gt;</content>
 	<content contentuid="h8dbbf0f1g09edg44a3g8fd3gaab2c07f4066">Blademaster&apos;s Strike 8</content>
 	<content contentuid="h8dd76759gaf6dg40c9g8cd9g61faaae3b1ce">&lt;font color=&apos;#03FFAA&apos;&gt;Runic Absorption&lt;/font&gt;</content>
 	<content contentuid="h8ddd718dg3305g4ffcga042gcec4c6c3785f">An orb of great power. A powerful current of electrical energy courses around the outer shell.</content>
@@ -1607,7 +1607,7 @@
 	<content contentuid="ha64e30d3ga590g41c0g9447g73496802f497">Immolation Bonus IV</content>
 	<content contentuid="ha64fcca4g4d34g47eagbff5g4f165107631e">Kagutsuchi</content>
 	<content contentuid="ha689deecgac14g4f08gb908g4618421f0832">A product of technological innovation, this intricate armament is capable of ejecting metal pellets at high velocities.</content>
-	<content contentuid="ha6b77329g873eg458fgad79geca7bf05c066">&lt;font color=&apos;#2EFFE9&apos;&gt;Arcane Staff Mastery I&lt;/font&gt;</content>
+	<content contentuid="ha6b77329g873eg458fgad79geca7bf05c066">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery I&lt;/font&gt;</content>
 	<content contentuid="ha6c69629g6fbag4268g8826g82af57c354fc">Take a look.</content>
 	<content contentuid="ha6cf0993ge5ddg4dbdgbd6fg0f99d8bd93c5">First Strike (War Charge)</content>
 	<content contentuid="ha707626agda71g4f2bg9ba0g615dfe488b82">Elven Greatbow</content>

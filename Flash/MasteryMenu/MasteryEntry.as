@@ -5,8 +5,6 @@ package
 	import LS_Classes.tooltipHelper;
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
-	import data.DescriptionData;
-	import data.SkillData;
 	
 	public dynamic class MasteryEntry extends MovieClip
 	{
@@ -14,12 +12,10 @@ package
 		public var icon_mc:MovieClip;
 		
 		public var m_Id:Number;
-		public var m_MasteryId:String;
-		public var m_MasteryTitle:String;
-		public var m_MasteryDescriptionTitle:String;
+		public var masteryId:String;
+		public var masteryTitle:String;
+		public var masteryDescriptionTitle:String;
 
-		public var descriptions:Array = new Array();
-		
 		public const DECOR_MARGIN:uint = 8;
 
 		public var xpBar:MasteryBar;
@@ -33,45 +29,33 @@ package
 		public function setId(id:Number, mastery:String) : *
 		{
 			this.m_Id = id;
-			this.m_MasteryId = mastery;
+			this.masteryId = mastery;
 		}
 		
 		public function setTitle(title:String, descriptionTitle:String = "") : *
 		{
-			this.m_MasteryTitle = title;
+			this.masteryTitle = title;
 			if (descriptionTitle == "")
 			{
 				descriptionTitle = title;
 			}
-			this.m_MasteryDescriptionTitle = descriptionTitle;
-			//textHelpers.setFormattedText(this.masteryFrame.title_txt, this.m_MasteryTitle);
-			this.masteryFrame.title_txt.htmlText = this.m_MasteryTitle;
-			//this.masteryFrame.title_txt.htmlText = this.m_MasteryTitle;
+			this.masteryDescriptionTitle = descriptionTitle;
+			//textHelpers.setFormattedText(this.masteryFrame.title_txt, this.masteryTitle);
+			this.masteryFrame.title_txt.htmlText = this.masteryTitle;
+			//this.masteryFrame.title_txt.htmlText = this.masteryTitle;
 			this.positioningText();
 		}
 		
 		public function positioningText() : *
 		{
 			this.masteryFrame.title_txt.height = this.masteryFrame.title_txt.textHeight;
+			this.masteryFrame.title_txt.y = (this.masteryFrame.height/2) - (this.masteryFrame.title_txt.textHeight / 2);
+			//this.masteryFrame.title_txt.y = (this.xpBar.y + (this.xpBar.height/2)) - (this.masteryFrame.title_txt.textHeight/2);
+
 			this.masteryFrame.top_decor.y = this.masteryFrame.title_txt.y - this.DECOR_MARGIN;
 			this.masteryFrame.bottom_decor.y = this.masteryFrame.title_txt.y + this.masteryFrame.title_txt.height + this.DECOR_MARGIN * 2;
 		}
-		
-		public function addDescription(text:String) : *
-		{
-			var d:DescriptionData = new DescriptionData(text);
-			descriptions.push(d);
-		}
 
-		public function addSkillData(index:uint, skill:String, icon:String) : *
-		{
-			var d:DescriptionData = descriptions[index];
-			if (d != null)
-			{
-				d.addSkillData(skill, icon);
-			}
-		}
-		
 		public function setBar(barPercentage:Number, animate:Boolean) : *
 		{
 			this.xpBar.setBar(barPercentage, animate);
@@ -143,16 +127,6 @@ package
 			this.xpBar.positionRankNodes(currentRank);
 		}
 		
-		public function getTitle() : *
-		{
-			return this.m_MasteryTitle;
-		}
-
-		public function getDescriptionTitle() : *
-		{
-			return this.m_MasteryDescriptionTitle;
-		}
-		
 		public function selectElement() : *
 		{
 			this.masteryFrame.select();
@@ -171,14 +145,15 @@ package
 		public function onOver(e:MouseEvent) : *
 		{
 			masteryFrame.onOver(e);
-			ExternalInterface.call("overMastery", this.m_Id, this.m_Mastery);
+			ExternalInterface.call("overMastery", this.m_Id, this.masteryId);
 		}
 
 		public function onDown(e:MouseEvent) : *
 		{
 			masteryFrame.onDown(e);
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
-			ExternalInterface.call("selectedMastery", this.m_Id, this.m_Mastery);
+			//ExternalInterface.call("selectedMastery", this.m_Id, this.masteryId);
+			Registry.Main.selectEntry(this, false);
 		}
 		
 		internal function frame1() : *

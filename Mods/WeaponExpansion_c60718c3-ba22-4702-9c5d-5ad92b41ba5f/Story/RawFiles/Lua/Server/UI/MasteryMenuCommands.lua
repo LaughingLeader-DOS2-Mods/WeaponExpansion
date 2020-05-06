@@ -43,16 +43,22 @@ local function RequestOpenMasteryMenu(call,id,callbackID)
 	if clientID ~= nil then
 		local character = GetCurrentCharacter(clientID)
 		if character ~= nil then
-			if CharacterIsSummon(character) == 1 then
-				if CharacterIsControlled(character) == 1 then
-					ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-				else
-					CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-				end
+		if CharacterIsSummon(character) == 1 then
+			if CharacterIsControlled(character) == 1 then
+				ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
 			else
-				OpenMasteryMenu_Start(character)
-				return true
+				CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
 			end
+		elseif CharacterIsPartyFollower(character) == 1 then
+			if CharacterIsControlled(character) == 1 then
+				ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+			else
+				CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+			end
+		elseif CharacterIsPlayer(character) then
+			OpenMasteryMenu_Start(character)
+			return true
+		end
 		end
 		for i,entry in ipairs(Osi.DB_IsPlayer:Get(nil)) do
 			local uuid = entry[1]

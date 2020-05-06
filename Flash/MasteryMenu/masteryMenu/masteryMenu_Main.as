@@ -11,7 +11,7 @@ package masteryMenu
 	import flash.text.TextField;
 	import flash.utils.Timer;
 	import flash.geom.Point;
-	import data.DescriptionData;
+	import desc.DescriptionList;
 	
 	public dynamic class masteryMenu_Main extends MovieClip
 	{
@@ -23,9 +23,8 @@ package masteryMenu
 		
 		public var close_btn:MovieClip;
 		
-		public var desc_mc:masteryMenu_Description;
-		
 		public var masteryHandle:MovieClip;
+		public var masteryDesc_mc:MovieClip;
 		
 		public var name_txt:TextField;
 		
@@ -46,14 +45,13 @@ package masteryMenu
 		
 		public var masteryList:scrollList;
 		
-		//public var descriptionPane:scrollbar_text;
-		public var descriptionPane:scrollList;
+		//public var descriptionList:scrollbar_text;
+		public var descriptionList:DescriptionList;
 		
 		public var time:Timer;
 
 		public var emptyListTitle:String = "";
 		public var emptyListDescription:String = "";
-		public var emptyListData:DescriptionData;
 		
 		public function masteryMenu_Main()
 		{
@@ -80,36 +78,34 @@ package masteryMenu
 			this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 			this.masteryHandle.addChild(this.masteryList);
 
-			this.descriptionPane = new scrollList();
-			this.descriptionPane.scrollbarSpacing = 0;
-			//this.descriptionPane.x = desc_mc.x;
-			//this.descriptionPane.y = desc_mc.y;
-			this.descriptionPane.setFrame(462,648);
-			//this.descriptionPane.SB_SPACING = 10;
-			//this.descriptionPane.TOP_SPACING = 15;
-			//this.descriptionPane.SIDE_SPACING = 20;
-			//this.descriptionPane.EL_SPACING = 1;
-			this.descriptionPane.mouseWheelWhenOverEnabled = true;
-			//this.descriptionPane.m_scrollbar_mc.m_hideWhenDisabled = true;
-			//this.descriptionPane.m_customElementHeight = this.ELH;
-			this.descriptionPane.m_scrollbar_mc.m_SCROLLSPEED = 20
-			//this.descriptionPane.m_scrollbar_mc.m_scrollOverShoot = this.ELH;
-			this.descriptionPane.m_scrollbar_mc.x = this.descriptionPane.m_scrollbar_mc.x - 64;
-			this.descriptionPane.m_scrollbar_mc.m_animateScrolling = true;
-			//addChild(this.descriptionPane);
-			//this.descriptionPane.addElement(desc_mc);
-			this.desc_mc.addChild(descriptionPane);
-			this.descriptionPane.checkScrollBar();
-			// this.descriptionPane = new scrollbar_text("downText_id","upText_id","handleText_id","scrollStory_bg_id");
-			// addChild(this.descriptionPane);
-			// this.descriptionPane.SB_SPACING = 20;
-			// this.descriptionPane.m_scaleBG = false;
-			// this.descriptionPane.addContent(this.desc_mc);
-			// this.descriptionPane.scrollbarVisible();
-			// this.descriptionPane.m_bg_mc.alpha = 0;
-			this.desc_mc.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
-			this.desc_mc.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
-			this.desc_mc.list = descriptionPane;
+			this.descriptionList = new DescriptionList();
+			masteryDesc_mc.addChild(descriptionList);
+			this.descriptionList.scrollbarSpacing = 0;
+			//this.descriptionList.x = masteryDesc_mc.x;
+			//this.descriptionList.y = masteryDesc_mc.y;
+			this.descriptionList.setFrame(masteryDesc_mc.width,masteryDesc_mc.height);
+			//this.descriptionList.setFrame(462,648);
+			//this.descriptionList.SB_SPACING = 10;
+			this.descriptionList.TOP_SPACING = 36;
+			this.descriptionList.SIDE_SPACING = 4;
+			//this.descriptionList.EL_SPACING = 1;
+			this.descriptionList.mouseWheelWhenOverEnabled = true;
+			//this.descriptionList.m_scrollbar_mc.m_hideWhenDisabled = true;
+			//this.descriptionList.m_customElementHeight = this.ELH;
+			this.descriptionList.m_scrollbar_mc.m_SCROLLSPEED = 20
+			//this.descriptionList.m_scrollbar_mc.m_scrollOverShoot = this.ELH;
+			//this.descriptionList.m_scrollbar_mc.x = this.descriptionList.m_scrollbar_mc.x - 64;
+			this.descriptionList.m_scrollbar_mc.m_animateScrolling = true;
+			this.descriptionList.checkScrollBar();
+			// this.descriptionList = new scrollbar_text("downText_id","upText_id","handleText_id","scrollStory_bg_id");
+			// addChild(this.descriptionList);
+			// this.descriptionList.SB_SPACING = 20;
+			// this.descriptionList.m_scaleBG = false;
+			// this.descriptionList.addContent(this.desc_mc);
+			// this.descriptionList.scrollbarVisible();
+			// this.descriptionList.m_bg_mc.alpha = 0;
+			this.descriptionList.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
+			this.descriptionList.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
 			this.buttonHintBar_mc.centerButtons = true;
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
 		}
@@ -121,37 +117,37 @@ package masteryMenu
 		
 		public function onDescriptionMouseIn(e:MouseEvent) : void
 		{
-			this.descriptionPane.mouseWheelEnabled = true;
+			this.descriptionList.mouseWheelEnabled = true;
 		}
 		
 		public function onDescriptionMouseOut(e:MouseEvent) : void
 		{
-			this.descriptionPane.mouseWheelEnabled = false;
+			this.descriptionList.mouseWheelEnabled = false;
 		}
 		
 		public function resetTextScrollbar() : *
 		{
-			this.descriptionPane.m_scrollbar_mc.scrollTo(0,false);
-			this.descriptionPane.resetScroll();
-			this.descriptionPane.m_scrollbar_mc.adjustScrollHandle(0);
-			this.descriptionPane.checkScrollBar();
+			this.descriptionList.m_scrollbar_mc.scrollTo(0,false);
+			this.descriptionList.resetScroll();
+			this.descriptionList.m_scrollbar_mc.adjustScrollHandle(0);
+			this.descriptionList.checkScrollBar();
 		}
 		
 		public function startScrollText(up:Boolean, increment:Number) : *
 		{
 			if(up)
 			{
-				this.descriptionPane.m_scrollbar_mc.scrollUp();
+				this.descriptionList.m_scrollbar_mc.scrollUp();
 			}
 			else
 			{
-				this.descriptionPane.m_scrollbar_mc.scrollDown();
+				this.descriptionList.m_scrollbar_mc.scrollDown();
 			}
 		}
 		
 		public function stopScrollText() : *
 		{
-			this.descriptionPane.m_scrollbar_mc.stopAutoScroll();
+			this.descriptionList.m_scrollbar_mc.stopAutoScroll();
 		}
 		
 		public function setTitle(param1:String) : *
@@ -164,15 +160,10 @@ package masteryMenu
 			emptyListTitle = title;
 			emptyListDescription = description;
 
-			if(emptyListData == null)
-			{
-				emptyListData = new DescriptionData(emptyListDescription);
-			}
-
 			if (this.masteryCount <= 0)
 			{
 				this.name_txt.htmlText = this.emptyListTitle;
-				this.desc_mc.addEntry(emptyListData);
+				this.descriptionList.addText(emptyListDescription);
 			}
 		}
 		
@@ -206,24 +197,6 @@ package masteryMenu
 			this.masteryList.selectByListID(0);
 		}
 
-		public function addMasteryDescription(listId:Number, text:String) : *
-		{
-			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
-			if(masteryMC != null)
-			{
-				masteryMC.addDescription(text);
-			}
-		}
-
-		public function addMasterySkill(listId:Number, index:uint, skill:String, icon:String) : *
-		{
-			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
-			if(masteryMC != null)
-			{
-				masteryMC.addSkillData(index, skill, icon);
-			}
-		}
-
 		public function setExperienceBarTooltip(listId:Number, text:String) : *
 		{
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
@@ -255,8 +228,8 @@ package masteryMenu
 		{
 			this.masteryList.clearElements();
 			this.name_txt.htmlText = this.emptyListTitle;
-			this.desc_mc.clearElements();
-			this.desc_mc.addEntry(this.emptyListData);
+			this.descriptionList.clearElements();
+			this.descriptionList.addText(emptyListDescription);
 			this.resetTextScrollbar();
 			this.masteryCount = 0;
 			noMasteries_mc.visible = true;
@@ -291,49 +264,44 @@ package masteryMenu
 		{
 			this.masteryList.next();
 		}
-
-		public function updateDescription(entry:MasteryEntry):*
-		{
-			this.name_txt.htmlText = entry.getDescriptionTitle();
-			this.desc_mc.clearElements();
-			if (entry.descriptions.length > 0)
-			{
-				this.desc_mc.clearElements();
-				var i:uint = 0;
-				while (i < entry.descriptions.length)
-				{
-					this.desc_mc.addEntry(entry.descriptions[i]);
-					i = i + 1;
-				}
-			}
-			else
-			{
-				this.desc_mc.addEntry(this.emptyListData);
-			}
-			this.desc_mc.alignEntries();
-			this.resetTextScrollbar();
-		}
 		
 		public function onSelectionChanged() : *
 		{
-			var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			updateDescription(entry);
-			//textHelpers.setFormattedText(this.name_txt, entry.getDescriptionTitle());
+			//var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
 		}
 		
-		public function select(id:Number) : *
+		public function select(id:Number, instant:Boolean = false) : *
 		{
-			var currentMC:MovieClip = this.masteryList.getCurrentMovieClip();
-			var nextMC:MovieClip = this.masteryList.getElement(id);
+			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
+			var nextMC:MasteryEntry = this.masteryList.getElement(id) as MasteryEntry;
 			if(currentMC != nextMC)
 			{
 				currentMC.deselectElement();
 			}
+			this.masteryList.m_scrollbar_mc.m_animateScrolling = !instant;
 			this.masteryList.selectMC(nextMC);
+			this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 			if (nextMC != null)
 			{
-				updateDescription(nextMC as MasteryEntry);
-				ExternalInterface.call("onMasterySelected", nextMC.m_Id, nextMC.m_MasteryId);
+				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
+				ExternalInterface.call("onMasterySelected", nextMC.m_Id, nextMC.masteryId);
+			}
+		}
+
+		public function selectEntry(nextMC:MasteryEntry, instant:Boolean = false) : *
+		{
+			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
+			if(currentMC != nextMC)
+			{
+				currentMC.deselectElement();
+			}
+			this.masteryList.m_scrollbar_mc.m_animateScrolling = !instant;
+			this.masteryList.selectMC(nextMC);
+			this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
+			if (nextMC != null)
+			{
+				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
+				ExternalInterface.call("onMasterySelected", nextMC.m_Id, nextMC.masteryId);
 			}
 		}
 		
@@ -349,6 +317,8 @@ package masteryMenu
 			this.time = new Timer(1,1);
 			this.time.addEventListener(TimerEvent.TIMER_COMPLETE,this.onLoaded);
 			this.time.start();
+
+			Registry.Main = this;
 		}
 	}
 }

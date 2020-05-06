@@ -236,9 +236,9 @@ Mastery.Params = {
 					ID = "SUNDER",
 					Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","[1]<br><font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [2]%</font> for [3] turn(s).</font>"),
 					GetParam = function(character, tagName, param)
-						local armorReduction = Ext.StatGetAttribute("Stats_LLWEAPONEX_MasteryBonus_Blunt_Sunder", "ArmorBoost")
+						local armorReduction = Ext.StatGetAttribute("Stats_LLWEAPONEX_MasteryBonus_Sunder", "ArmorBoost")
 						if armorReduction == nil then
-							armorReduction = Ext.StatGetAttribute("Stats_LLWEAPONEX_MasteryBonus_Blunt_Sunder", "MagicArmorBoost")
+							armorReduction = Ext.StatGetAttribute("Stats_LLWEAPONEX_MasteryBonus_Sunder", "MagicArmorBoost")
 						end
 						local turns = 0
 						local duration = Ext.ExtraData["LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration"]
