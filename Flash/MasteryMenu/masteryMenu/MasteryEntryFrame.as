@@ -5,13 +5,11 @@ package masteryMenu
 	import flash.external.ExternalInterface;
 	import flash.text.TextField;
 	
-	public dynamic class masteryMenu_entryFrame extends MovieClip
+	public dynamic class MasteryEntryFrame extends MovieClip
 	{
-		public var bg_mc:MovieClip;
-		
 		public var bottom_decor:MovieClip;
 		
-		public var masteryOverlay:MovieClip;
+		public var bg_mc:MovieClip;
 		
 		public var title_txt:TextField;
 		
@@ -23,7 +21,7 @@ package masteryMenu
 
 		public var selected:Boolean = false;
 		
-		public function masteryMenu_entryFrame()
+		public function MasteryEntryFrame()
 		{
 			super();
 			addFrameScript(0,this.frame1);
@@ -34,7 +32,6 @@ package masteryMenu
 			if(!selected)
 			{
 				this.bg_mc.gotoAndStop(1);
-				this.masteryOverlay.gotoAndStop(1);
 			}
 		}
 		
@@ -43,7 +40,6 @@ package masteryMenu
 			if(!selected)
 			{
 				this.bg_mc.gotoAndStop(2);
-				this.masteryOverlay.gotoAndStop(2);
 			}
 		}
 
@@ -56,14 +52,12 @@ package masteryMenu
 		{
 			this.selected = true;
 			this.bg_mc.gotoAndStop(3);
-			this.masteryOverlay.gotoAndStop(3);
 		}
 
 		public function deselect(): *
 		{
 			this.selected = false;
 			this.bg_mc.gotoAndStop(1);
-			this.masteryOverlay.gotoAndStop(1);
 		}
 		
 		internal function frame1() : *

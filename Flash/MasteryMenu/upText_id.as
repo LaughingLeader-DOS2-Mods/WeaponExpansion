@@ -12,7 +12,7 @@ package
 			addFrameScript(0,this.frame1,1,this.frame2,2,this.frame3);
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			stop();
 		}

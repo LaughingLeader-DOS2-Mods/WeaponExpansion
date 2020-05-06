@@ -1,4 +1,4 @@
-package
+package masteryMenu
 {
 	import flash.display.MovieClip;
 
@@ -11,7 +11,7 @@ package
 			addFrameScript(0,this.frame1);
 		}
 
-		function frame1() : *
+		internal function frame1() : *
 		{
 			this.stop();
 		}

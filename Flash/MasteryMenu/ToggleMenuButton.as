@@ -51,7 +51,7 @@ package
 			//this.button_mc.tooltipYOffset = -10.0;
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			this.button_mc.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			this.button_mc.addEventListener(MouseEvent.ROLL_OVER,this.onOver);

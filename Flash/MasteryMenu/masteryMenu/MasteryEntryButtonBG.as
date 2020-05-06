@@ -2,11 +2,9 @@ package masteryMenu
 {
 	import flash.display.MovieClip;
 	
-	public dynamic class masteryMenu_btn_bg_4 extends MovieClip
+	public dynamic class MasteryEntryButtonBG extends MovieClip
 	{
-		 
-		
-		public function masteryMenu_btn_bg_4()
+		public function MasteryEntryButtonBG()
 		{
 			super();
 			addFrameScript(0,this.frame1);
@@ -24,7 +22,7 @@ package masteryMenu
 			}
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			stop();
 		}

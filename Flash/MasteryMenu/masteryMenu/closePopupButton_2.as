@@ -45,7 +45,7 @@ package masteryMenu
 			this.bg_mc.gotoAndStop(3);
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			addEventListener(MouseEvent.ROLL_OVER,this.onOver);

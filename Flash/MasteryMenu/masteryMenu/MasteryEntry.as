@@ -1,4 +1,4 @@
-package
+package masteryMenu
 {
 	import flash.display.MovieClip;
 	import LS_Classes.textHelpers;
@@ -49,7 +49,8 @@ package
 		public function positioningText() : *
 		{
 			this.masteryFrame.title_txt.height = this.masteryFrame.title_txt.textHeight;
-			this.masteryFrame.title_txt.y = (this.masteryFrame.height/2) - (this.masteryFrame.title_txt.textHeight / 2);
+			this.masteryFrame.title_txt.y = 33.15;
+			//this.masteryFrame.title_txt.y = (this.masteryFrame.height/2) - (this.masteryFrame.title_txt.textHeight / 2);
 			//this.masteryFrame.title_txt.y = (this.xpBar.y + (this.xpBar.height/2)) - (this.masteryFrame.title_txt.textHeight/2);
 
 			this.masteryFrame.top_decor.y = this.masteryFrame.title_txt.y - this.DECOR_MARGIN;

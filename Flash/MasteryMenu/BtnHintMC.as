@@ -33,7 +33,7 @@ package
 			this.text_txt.x = this.icon_mc.x + this.icon_mc.width;
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 		}
 	}

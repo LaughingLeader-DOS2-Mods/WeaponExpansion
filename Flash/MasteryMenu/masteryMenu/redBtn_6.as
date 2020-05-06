@@ -81,7 +81,7 @@ package masteryMenu
 			this.text_txt.y = this.textY + 2;
 		}
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			addEventListener(MouseEvent.ROLL_OVER,this.onOver);

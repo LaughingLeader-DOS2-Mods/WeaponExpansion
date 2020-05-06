@@ -23,7 +23,7 @@ package  {
 			ExternalInterface.call("showSkillTooltip",3.4431514429141e-282,"Target_CripplingBlow",339.00001335144, 940.0, 50.522705078125, 58.118209838867);
 		}
 
-		function frame1() : *
+		internal function frame1() : *
 		{
 			stop();
 

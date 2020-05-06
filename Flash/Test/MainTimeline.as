@@ -30,7 +30,7 @@
 		//[Embed(source="Ability_Skill_Status_Icons.png")]
 		//private var skillIcons:Class;
 		
-		function frame1() : *
+		internal function frame1() : *
 		{
 			var iconSheet = new Ability_Skill_Status_Icons();
 			iconTest.setIcon(iconSheet, 10);

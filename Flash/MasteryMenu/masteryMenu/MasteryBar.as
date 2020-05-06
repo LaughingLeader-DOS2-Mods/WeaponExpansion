@@ -1,4 +1,4 @@
-package
+package masteryMenu
 {
 	import LS_Classes.larHealthbar;
 	import flash.display.MovieClip;
