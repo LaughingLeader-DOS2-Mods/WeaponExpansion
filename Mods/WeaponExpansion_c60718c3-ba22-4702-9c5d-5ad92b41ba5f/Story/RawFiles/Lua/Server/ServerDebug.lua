@@ -177,6 +177,7 @@ function DebugInit()
    -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
     CharacterAddSkill(host, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", 0)
+    CharacterAddSkill(host, "Projectile_LLWEAPONEX_Status_Rupture_Damage", 0)
     --NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
 
     local userID = CharacterGetReservedUserID(host)

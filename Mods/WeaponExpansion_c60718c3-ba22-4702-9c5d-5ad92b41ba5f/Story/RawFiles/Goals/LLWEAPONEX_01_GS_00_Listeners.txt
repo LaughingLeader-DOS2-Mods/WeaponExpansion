@@ -84,6 +84,22 @@ SkillCast(_Char, _Skill, _, _)
 THEN
 NRD_ModCall("WeaponExpansion", "OnSkillCast", (STRING)_Char, _Skill);
 //END_REGION
+
+//REGION GENERIC_STATUS
+IF
+CharacterStatusApplied(_Char, _Status, _Source)
+AND
+NOT DB_LeaderLib_EngineStatus(_Status)
+THEN
+NRD_ModCall("WeaponExpansion", "OnStatusApplied", (STRING)_Char, _Status, (STRING)_Source);
+
+IF
+CharacterStatusRemoved(_Char, _Status, _)
+AND
+NOT DB_LeaderLib_EngineStatus(_Status)
+THEN
+NRD_ModCall("WeaponExpansion", "OnStatusRemoved", (STRING)_Char, _Status);
+//END_REGION
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_03_GameScripts"

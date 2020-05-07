@@ -1,20 +1,20 @@
-local FORBIDDEN = {
-	"ComboCategories",
-	"ExtraProperties",
-	"SkillProperties",
-	"TargetConditions",
-	"AoEConditions",
-	"CycleConditions",
-	"Requirements",
-}
-
 local overrides = {
 	-- Skills
 	Target_SingleHandedAttack = {
 		IgnoreSilence = "Yes",
 		AIFlags = "StatusIsSecondary",
 		UseWeaponDamage = "Yes",
-		SkillProperties = "LLWEAPONEX_SUCKER_PUNCH,100,1"
+		SkillProperties = {{
+			Type = "Status",
+			Action = "LLWEAPONEX_SUCKER_PUNCH",
+			Context = {"Target"},
+			Duration = 6.0,
+			StatusChance = 1.0,
+			Arg3 = "",
+			Arg4 = -1,
+			Arg5 = -1,
+			SurfaceBoost = false
+		}}
 	},
 	Target_TentacleLash = {
 		UseWeaponDamage = "Yes",
@@ -33,15 +33,19 @@ local overrides = {
 		Description = "LLWEAPONEX_Target_DemonicStare_Description",
 	},
 	-- Potions
-	Stats_LLWEAPONEX_UnrelentingRage = {
-		RogueLore = 0 -- Crit mult is handled by the extender
-	},
 	-- Weapons
 	NoWeapon = {
-		ExtraProperties = "LLWEAPONEX_UNARMED_HIT,100,0"
-	},
-	_Unarmed = {
-		ExtraProperties = "LLWEAPONEX_UNARMED_HIT,100,0"
+		ExtraProperties = {{
+			Type = "Status",
+			Action = "LLWEAPONEX_UNARMED_NOWEAPON_HIT",
+			Context = {"Target"},
+			Duration = 0.0,
+			StatusChance = 1.0,
+			Arg3 = "",
+			Arg4 = -1,
+			Arg5 = -1,
+			SurfaceBoost = false
+		}}
 	}
 }
 
@@ -58,24 +62,28 @@ local llweaponex_extender_additions = {
 	-- }
 }
 
-local function CanSetProperty(property)
-	local i = 1
-	while i < #FORBIDDEN do
-		if property == FORBIDDEN[i] then return false end
-		i = i + 1
-	end
-	return true
-end
-
 local function apply_overrides(stats)
     for statname,props in pairs(stats) do
 		for property,value in pairs(props) do
-			local next_value = value
-			if CanSetProperty(property) then
-				Ext.StatSetAttribute(statname, property, next_value)
-				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Overriding stat: " .. statname .. " (".. property ..") = \"".. next_value .."\"")
+			if property == "SkillProperties" or property == "ExtraProperties" then
+				local existingTable = Ext.StatGetAttribute(statname, property)
+				if existingTable ~= nil then
+					for i,v in ipairs(value) do
+						table.insert(existingTable, v)
+					end
+					LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat (appended table): ",statname," (".. property ..") = [")
+					LeaderLib.PrintDebug(LeaderLib.Common.Dump(existingTable))
+					LeaderLib.PrintDebug("]")
+					Ext.StatSetAttribute(statname, property, existingTable)
+				else
+					LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [")
+					LeaderLib.PrintDebug(LeaderLib.Common.Dump(value))
+					LeaderLib.PrintDebug("]")
+					Ext.StatSetAttribute(statname, property, value)
+				end
 			else
-				Ext.Print("[LLWEAPONEX_StatOverrides.lua] Cannot set property: " .. statname .. " (".. property .."). IT IS FORBIDDEN.")
+				LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [",value,"]")
+				Ext.StatSetAttribute(statname, property, value)
 			end
         end
     end
@@ -94,13 +102,33 @@ else
 	Ext.StatSetAttribute(statname, property, next_value)
 end ]]
 
-local customSkillText = Ext.Require("Client/SkillCustomText.lua")
+local LLWEAPONEX_PREFIX = "LLWEAPONEX_"
 
-local function LLWEAPONEX_StatOverrides_Init()
+local function OverrideLeaveActionStatuses()
+	-- LeaveAction damage is delayed after its first application, for whatever reason.
+	-- Instead, for WeaponEx statuses, we'll explode it with the extender, but keep LeaveAction in the status for compatibility,
+	-- so other mods can change the projectiles used.
+	local total = 0
+	for i,stat in pairs(Ext.GetStatEntries("StatusData")) do
+		local leaveActionSkill = Ext.StatGetAttribute(stat, "LeaveAction")
+		if not LeaderLib.Common.StringIsNullOrEmpty(leaveActionSkill) and stat:sub(1, #LLWEAPONEX_PREFIX) == LLWEAPONEX_PREFIX then
+			Ext.StatSetAttribute(stat, "LeaveAction", "")
+			LeaveActionData[stat] = leaveActionSkill
+			total = total + 1
+		end
+	end
+	LeaderLib.PrintDebug("[WeaponExpansion:OverrideLeaveActionStatuses] Registered ("..tostring(total)..") statuses to the LeaveActionData table.")
+	LeaderLib.PrintDebug(LeaderLib.Common.Dump(LeaveActionData))
+	LeaderLib.PrintDebug("]")
+end
+
+local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
+
+	OverrideLeaveActionStatuses()
 
 	for statType,entries in pairs(Mastery.Params) do
 		local statParamsAttribute = "StatsDescriptionParams"
@@ -128,8 +156,6 @@ local function LLWEAPONEX_StatOverrides_Init()
 	else
 		Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] AnimationsPlus is missing! Skipping animation stat overrides.")
 	end
-
-	customSkillText.InitSkillCustomText()
 end
 
-Ext.RegisterListener("ModuleLoading", LLWEAPONEX_StatOverrides_Init)
+Ext.RegisterListener("StatsLoaded", StatOverrides_Init)

@@ -12,10 +12,15 @@ Mastery = {
 		LLWEAPONEX_ThrowingAbility = true
 	}
 }
+LeaveActionData = {}
+Temp = {
+	StatusSource = {}
+}
 
 --- @type table<string,string>
 Tags = {}
 
+Ext.Require("Shared/StatOverrides.lua")
 Ext.Require("Shared/Data/LocalizedText.lua")
 Ext.Require("Shared/Data/MasteryData_Classes.lua")
 Ext.Require("Shared/Data/MasteryData_Masteries.lua")
@@ -119,9 +124,3 @@ local function SessionLoading()
 	LoadExperienceVariables()
 end
 Ext.RegisterListener("SessionLoading", SessionLoading)
-
---Ext.AddPathOverride("Public/Game/GUI/tooltip.swf", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/LLWEAPONEX_ToolTip.swf")
---Ext.Print("[WeaponExpansion] Enabled tooltip.swf override.")
---Ext.AddPathOverride("Public/Game/GUI/tooltip.swf", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/serverlist.swf")
---Ext.AddPathOverride("Public/Game/GUI/tooltipHelper_kb.swf", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/serverlist.swf")
---Ext.AddPathOverride("Public/Game/GUI/tooltipHelper.swf", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/serverlist.swf")

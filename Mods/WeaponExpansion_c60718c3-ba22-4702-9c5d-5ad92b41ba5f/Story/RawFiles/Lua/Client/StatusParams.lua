@@ -1,5 +1,14 @@
+local function TryPrintName(obj, prop)
+	local b,result = pcall(function()
+		return tostring(obj[prop])
+	end)
+	if b then return result end
+	return tostring(obj)
+end
+
 local function StatusGetDescriptionParam(status, statusSource, target, param, ...)
-	LeaderLib.PrintDebug("[WeaponEx:StatusParams:StatusGetDescriptionParam] status("..tostring(status["Name"])..") statusSource("..tostring(statusSource["Name"])..") character("..tostring(target["Name"])..") param("..tostring(param)..")")
+	print(status.Name)
+	LeaderLib.PrintDebug("[WeaponEx:StatusParams:StatusGetDescriptionParam] status("..TryPrintName(status, "Name")..") statusSource("..TryPrintName(statusSource, "Name")..") character("..TryPrintName(target, "Name")..") param("..tostring(param)..")")
 	if param == "Skill" then
 		local params = {...}
 		LeaderLib.PrintDebug("params("..LeaderLib.Common.Dump(params)..")")
@@ -22,7 +31,7 @@ local function StatusGetDescriptionParam(status, statusSource, target, param, ..
 							if max == min then
 								table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, math.tointeger(min)))
 							else
-								table.insert(damageTexts, LLeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
+								table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
 							end
 						end
 						totalDamageTypes = totalDamageTypes + 1

@@ -1,4 +1,3 @@
-Ext.Require("Shared/_Main.lua")
 
 function GetHandedness(weapon)
     if weapon == nil then

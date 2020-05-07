@@ -229,7 +229,7 @@ Mastery.Params = {
 			}
 		},
 		Target_CripplingBlow = {
-			Description = TranslatedString:Create("h5fdfca1dg8dd4g4cc3g9939g7433a38d4658","Throw a knife at your opponent, dealing [1].[2]"),
+			Description = TranslatedString:Create("h41e991cbgbe00g4469g924bge4d4c73cffa2","Cripple the target with a sweeping blow, and all characters around it. Deals [1].[2]"),
 			DescriptionKey = "LLWEAPONEX_Target_CripplingBlow_Description",
 			Tags = {
 				LLWEAPONEX_Bludgeon_Mastery1 = {

@@ -11,6 +11,6 @@ local function InitSkillCustomText()
 	-- end
 end
 
-return {
-	InitSkillCustomText = InitSkillCustomText
-}
+-- return {
+-- 	InitSkillCustomText = InitSkillCustomText
+-- }

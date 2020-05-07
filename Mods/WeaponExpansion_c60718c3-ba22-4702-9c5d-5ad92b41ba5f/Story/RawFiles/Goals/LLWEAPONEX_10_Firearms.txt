@@ -132,6 +132,7 @@ ApplyStatus(_Target, _Status, 0.0, 1, _Char);
 //END_REGION
 
 //REGION AIMED_SHOT_BONUSES
+/*
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
 AND
@@ -158,11 +159,7 @@ IF
 SkillCast(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
 THEN
 LeaderLib_Timers_StartObjectTimer(_Char, 1500, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses");
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_HIT_END", _)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses");
+*/
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")

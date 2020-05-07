@@ -485,6 +485,70 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	end
 end
 
+--- @param skill StatEntrySkillData
+--- @param attacker StatCharacter
+--- @param isFromItem boolean
+--- @param stealthed boolean
+--- @param attackerPos number[]
+--- @param targetPos number[]
+--- @param level integer
+--- @param noRandomization boolean
+local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	local skillProps = PrepareSkillProperties(skill.Name)
+	local distanceDamageMult = skill["Distance Damage Multiplier"]
+	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
+	skillProps["Damage Multiplier"] = 0
+
+	if isTooltip == true then
+		skillProps["Damage Multiplier"] = distanceDamageMult
+		local damageMin = Game.Math.GetSkillDamage(skillProps, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization):ToTable()
+
+		skillProps["Damage Multiplier"] = distanceDamageMult * 20
+		local damageMax = Game.Math.GetSkillDamage(skillProps, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization):ToTable()
+
+		local minDamageTexts = {}
+		local totalDamageTypes = 0
+		for damageType,damage in pairs(damageMin) do
+			local min = damage[1]
+			if min ~= nil then
+				table.insert(minDamageTexts, LeaderLib.Game.GetDamageText(damageType, math.tointeger(min)))
+			end
+		end
+		
+		local maxDamageTexts = {}
+		for damageType,damage in pairs(damageMax) do
+			local max = damage[2]
+			if max ~= nil then
+				table.insert(maxDamageTexts, LeaderLib.Game.GetDamageText(damageType, math.tointeger(max)))
+			end
+			totalDamageTypes = totalDamageTypes + 1
+		end
+
+		if totalDamageTypes > 0 then
+			local output = ""
+			if #minDamageTexts > 1 then
+				output = LeaderLib.Common.StringJoin(", ", minDamageTexts)
+			else
+				output = minDamageTexts[1]
+			end
+			output = output .. "(1m) - "
+			if #maxDamageTexts > 1 then
+				output = output .. LeaderLib.Common.StringJoin(", ", maxDamageTexts)
+			else
+				output = output .. maxDamageTexts[1]
+			end
+			output = output .. "(20m)"
+			return output
+		end
+	else
+		local targetDistance = math.sqrt((attackerPos[1] - targetPos[1])^2 + (attackerPos[3] - targetPos[3])^2)
+		-- 10% damage mult min, 200% damage mult max
+		local damageMult = math.max(distanceDamageMult * 20, math.min(distanceDamageMult, targetDistance * distanceDamageMult))
+		skillProps["Damage Multiplier"] = damageMult
+		return Game.Math.GetSkillDamage(skillProps, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+	end
+end
+
 Skills = {
 	GetHighestAttribute = GetHighestAttribute,
 	GetItem = GetItem,
@@ -502,6 +566,7 @@ Skills = {
 			Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolDamage,
 			Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolDamage,
 			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowDamage,
+			Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage,
 		}
 	}
 }

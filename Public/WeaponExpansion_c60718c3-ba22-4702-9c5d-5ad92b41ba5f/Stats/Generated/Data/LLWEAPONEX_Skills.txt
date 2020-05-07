@@ -363,12 +363,6 @@ data "CanTargetItems" "Yes"
 data "CanTargetTerrain" "No"
 data "UseWeaponDamage" "Yes"
 data "UseWeaponProperties" "No"
-data "ExplodeRadius" "1"
-
-new entry "Projectile_LLWEAPONEX_Status_RuptureInstant_Damage"
-type "SkillData"
-data "SkillType" "Projectile"
-using "Projectile_LLWEAPONEX_Status_Rupture_Damage"
 data "ExplodeRadius" "0"
 
 new entry "Projectile_LLWEAPONEX_ChaosGoblin_BasicAttack"
