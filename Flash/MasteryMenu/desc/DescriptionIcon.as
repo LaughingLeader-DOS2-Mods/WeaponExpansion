@@ -5,14 +5,14 @@ package desc
 	import flash.external.ExternalInterface;
 	import flash.geom.Point;
 
-	public dynamic class DescriptionSkill extends MovieClip
+	public dynamic class DescriptionIcon extends MovieClip
 	{
-		public var skill:String;
+		public var id:String;
 		public var icon:String;
-
 		public var icon_mc:IconDisplay;
+		public var iconType:int = 0
 
-		public function DescriptionSkill()
+		public function DescriptionIcon()
 		{
 			super();
 			addFrameScript(0,this.frame1);
@@ -34,19 +34,19 @@ package desc
 
 		public function onOver(e:MouseEvent) : *
 		{
-			if (skill != "")
+			if (id != "" && iconType > 0)
 			{
 				var pos:Point = this.localToGlobal(new Point(0,0));
-				ExternalInterface.call("mastery_showSkillTooltip",Registry.CharacterHandle,skill,pos.x,pos.y,width,height);
+				ExternalInterface.call("mastery_showIconTooltip", iconType,id,pos.x,pos.y,width,height);
 			}
 		}
 
 		public function onOut(e:MouseEvent) : *
 		{
-			if (skill != "")
+			if (id != "" && iconType > 0)
 			{
 				ExternalInterface.call("hideTooltip");
-				ExternalInterface.call("mastery_hideSkillTooltip");
+				ExternalInterface.call("mastery_hideIconTooltip", iconType);
 			}
 		}
 	}

@@ -5,6 +5,7 @@ MasteryMenu = {
 	Initialized = false,
 	Instance = nil,
 	DisplayingSkillTooltip = false,
+	DisplayingStatusTooltip = false,
 	SelectedMastery = nil,
 	LastSelected = 0,
 	---@type CharacterMasteryData
@@ -15,6 +16,7 @@ local function CloseMenu()
 		MasteryMenu.Instance:Invoke("closeMenu")
 		MasteryMenu.Open = false
 		MasteryMenu.DisplayingSkillTooltip = false
+		MasteryMenu.DisplayingStatusTooltip = false
 		MasteryMenu.SelectedMastery = nil
 	end
 end
@@ -82,17 +84,15 @@ local function TryOpenMasteryMenu()
 	end
 end
 
-
-local skillPattern = "(<skill.-/>)"
-local function splitDescriptionBySkills(str)
+local function splitDescriptionByPattern(str, pattern)
 	local list = {};
 	local pos = 1
 	local lastMatch = ""
-	if string.find("", skillPattern, 1) then
+	if string.find("", pattern, 1) then
 		return list
 	end
 	while 1 do
-		local first,last,a,b = string.find(str, skillPattern, pos)
+		local first,last,a,b = string.find(str, pattern, pos)
 		if first then
 			local s = string.sub(str, pos, first-1);
 			if s ~= "" then
@@ -127,28 +127,35 @@ local function splitDescriptionBySkills(str)
 	return list
 end
 
-local function pushDescriptionEntry(ui, index, text, skillName, skillIcon)
+local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
 	ui:SetValue("descriptionContent", text, index)
-	if skillName == nil then
-		skillName = ""
+	if iconId == nil then
+		iconId = ""
 	end
-	if skillIcon == nil then
-		skillIcon = ""
+	if iconName == nil then
+		iconName = ""
 	end
-	ui:SetValue("descriptionContent", skillName, index+1)
-	ui:SetValue("descriptionContent", skillIcon, index+2)
-	return index + 3
+	if iconType == nil then
+		iconType = 1
+	end
+	ui:SetValue("descriptionContent", iconId, index+1)
+	ui:SetValue("descriptionContent", iconName, index+2)
+	ui:SetValue("descriptionContent", iconType, index+3)
+	return index + 4
 end
 
+local iconPattern = "(<icon.-/>)"
+--<icon id='Target_LLWEAPONEX_BasicAttack' icon='Action_AttackGround'/>
 local function parseDescription(ui, index, descriptionText)
-	local splitText = splitDescriptionBySkills(descriptionText)
+	local splitText = splitDescriptionByPattern(descriptionText, iconPattern)
 	for i,v in ipairs(splitText) do
-		local _,_,skillEntry = string.find(descriptionText, skillPattern)
-		print(v, skillEntry)
-		v = string.gsub(v, skillEntry, "")
-		local _,_,skillName = skillEntry:find("id='(.-)'")
-		local _,_,icon = skillEntry:find("icon='(.-)'")
-		index = pushDescriptionEntry(ui, index, v, skillName, icon)
+		local _,_,iconEntry = string.find(descriptionText, iconPattern)
+		print(v, iconEntry)
+		v = string.gsub(v, iconEntry, "")
+		local _,_,iconName = iconEntry:find("id='(.-)'")
+		local _,_,icon = iconEntry:find("icon='(.-)'")
+		local _,_,iconType = iconEntry:find("type='(.-)'")
+		index = pushDescriptionEntry(ui, index, v, iconName, icon, iconType)
 	end
 	return index
 end
@@ -216,11 +223,20 @@ local function OnMenuEvent(ui, call, ...)
 		buildMasteryDescription(ui, MasteryMenu.SelectedMastery)
 	elseif call == "selectedMastery" then
 		ui:Invoke("selectMastery", params[1])
-	elseif call == "mastery_showSkillTooltip" then
-		MasteryMenu.DisplayingSkillTooltip = true
-		ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5])
-	elseif call == "mastery_hideSkillTooltip" then
-		MasteryMenu.DisplayingSkillTooltip = false
+	elseif call == "mastery_showIconTooltip" then
+		if params[1] == 1 then
+			MasteryMenu.DisplayingSkillTooltip = true
+			ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5])
+		elseif params[1] == 2 then
+			MasteryMenu.DisplayingStatusTooltip = true
+			ui:ExternalInterfaceCall("showStatusTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5])
+		end
+	elseif call == "mastery_hideIconTooltip" then
+		if params[1] == 1 then
+			MasteryMenu.DisplayingSkillTooltip = false
+		elseif params[1] == 2 then
+			MasteryMenu.DisplayingStatusTooltip = false
+		end
 	end
 end
 

@@ -211,22 +211,23 @@ package
 				while (i < length)
 				{
 					var text:String = descriptionContent[i];
-					var skillName:String = descriptionContent[i+1];
-					var skillIcon:String = descriptionContent[i+2];
+					var iconId:String = descriptionContent[i+1];
+					var iconName:String = descriptionContent[i+2];
+					var iconType:int = descriptionContent[i+3];
 
 					if (text != "")
 					{
 						this.masteryMenuMC.descriptionList.addText(text, false);
 					}
-					if (skillName != "")
+					if (iconId != "")
 					{
-						if (skillIcon == null)
+						if (iconName == null)
 						{
-							skillIcon = "";
+							iconName = "";
 						}
-						this.masteryMenuMC.descriptionList.addSkill(skillName, skillIcon, false);
+						this.masteryMenuMC.descriptionList.addIcon(iconId, iconName, iconType, false);
 					}
-					i = i + 3;
+					i = i + 4;
 				}
 				this.masteryMenuMC.descriptionList.positionElements();
 				descriptionContent = new Array();

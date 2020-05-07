@@ -24,11 +24,12 @@ package desc
 			addElement(entryContent, reposition, false);
 		}
 
-		public function addSkill(skill:String, icon:String = "", reposition:Boolean = true) : *
+		public function addIcon(id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true) : *
 		{
-			var entryContent:DescriptionSkill = new DescriptionSkill();
-			entryContent.skill = skill;
+			var entryContent:DescriptionIcon = new DescriptionIcon();
+			entryContent.skill = id;
 			entryContent.icon = icon;
+			entryContent.iconType = iconType;
 			entryContent.createIcon();
 			addElement(entryContent, reposition, false);
 		}
