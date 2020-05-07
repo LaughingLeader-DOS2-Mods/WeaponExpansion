@@ -1,4 +1,4 @@
-Mastery	Rank	Skill	Bonus	Implemented
+Mastery	Rank	Skill/Status/Name	Bonus	Implemented
 Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√
 Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	❌
 Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by Warfare. ❌
@@ -24,11 +24,11 @@ Bludgeon	1	Battering Ram	25% to apply Dizzy for 1 turn.	❌
 Bludgeon	2	Crippling Blow	Apply Sundered, reducing max physical/magic armor by 25%.	√
 Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts the ground, dealing damage to enemies in a 3m radius.	❌
 Bludgeon	4	Placeholder	Placeholder	❌
-Bow	1	Pin Down	When Crippled wears off, the target has a chance to Trip for 1 turn.	❌
+Bow	1	Pin Down	Shoot two arrows instead of one, hitting a random nearby enemy for half damage.	❌
 Bow	2	Assassinate	If the target is Marked, this skill deals a critical hit.	❌
 Bow	3	Placeholder	Placeholder	❌
 Bow	4	Placeholder	Placeholder	❌
-Crossbow	1	Sky Shot	If the target is Knocked Down, deal a critical hit.	❌
+Crossbow	1	Sky Shot	If the target is Knocked Down, this skill deals a critical hit.	❌
 Crossbow	2	Marksman's Fang	Each hit reduces the target's maximum physical/magic armor by 25% for 1 turn.	❌
 Crossbow	3	Placeholder	Placeholder	❌
 Crossbow	4	Placeholder	Placeholder	❌
@@ -39,23 +39,23 @@ Dagger	3	Fan of Knives	Throwing Knife's bonuses apply to each knife thrown (bonu
 Dagger	3	Corrupted Blade	Your blade(s) deal bonus shadow damage for 2 turns.	❌
 Dagger	4	Daggers Drawn	If the target is killed, the source cost and partial AP is refunded.	❌
 Dagger	4	Cloak and Dagger	When leaping, automatically throw knives are nearby enemies.	❌
-Dual Shields	1	Battering Ram	Damage taken while rushing is reduced by 75%. 	❌
+Dual Shields	1	Battering Ram / Bull Rush	You are immune to surface damage while using rush skills. 	❌
 Dual Shields	2	Placeholder	Placeholder	❌
 Dual Shields	3	Placeholder	Placeholder	❌
 Dual Shields	4	Placeholder	Placeholder	❌
-Firearm	1	Placeholder	Placeholder	❌
+Firearm	1	Tactical Retreat	Your last used skill's cooldown is reduced by 1 turn.	❌
 Firearm	2	Placeholder	Placeholder	❌
 Firearm	3	Placeholder	Placeholder	❌
 Firearm	4	Placeholder	Placeholder	❌
-Greatbow	1	Placeholder	Placeholder	❌
+Greatbow	1	Ricochet	Each ricochet bounce deals splash damage in a 2m radius.	❌
 Greatbow	2	Placeholder	Placeholder	❌
 Greatbow	3	Placeholder	Placeholder	❌
 Greatbow	4	Placeholder	Placeholder	❌
-Hand Crossbow	1	Placeholder	Placeholder	❌
+Hand Crossbow	1	Whirlwind	While spinning, shoot 1-3 enemies in a 6m radius.	❌
 Hand Crossbow	2	Placeholder	Placeholder	❌
 Hand Crossbow	3	Placeholder	Placeholder	❌
 Hand Crossbow	4	Placeholder	Placeholder	❌
-Katana	1	Placeholder	Placeholder	❌
+Katana	1	Backlash	After teleporting, your next attack deals 50% more damage.	❌
 Katana	2	Placeholder	Placeholder	❌
 Katana	3	Placeholder	Placeholder	❌
 Katana	4	Placeholder	Placeholder	❌
@@ -63,11 +63,11 @@ Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of 
 Pistol	2	Placeholder	Placeholder	❌
 Pistol	3	Placeholder	Placeholder	❌
 Pistol	4	Placeholder	Placeholder	❌
-Polearm	1	Placeholder	Placeholder	❌
+Polearm	1	Crippling Blow	Deal 25% splash damage around the target hit in a 3m radius.	❌
 Polearm	2	Placeholder	Placeholder	❌
 Polearm	3	Placeholder	Placeholder	❌
 Polearm	4	Placeholder	Placeholder	❌
-Quarterstaff	1	Placeholder	Placeholder	❌
+Quarterstaff	1	Battering Ram / Bull Rushing	After rushing, gain 25% Dodge and deflect the next attack or projectile.	❌
 Quarterstaff	2	Placeholder	Placeholder	❌
 Quarterstaff	3	Placeholder	Placeholder	❌
 Quarterstaff	4	Placeholder	Placeholder	❌
@@ -75,7 +75,7 @@ Rapier	1	Sucker Punch	Gain follow-up combo skills after punching a target. 25% c
 Rapier	2	Placeholder	Placeholder	❌
 Rapier	3	Placeholder	Placeholder	❌
 Rapier	4	Placeholder	Placeholder	❌
-Runeblade	1	Placeholder	Placeholder	❌
+Runeblade	1	Activate Rune	The next spell you cast with the same element of your activated rune deals 25% more damage.	❌
 Runeblade	2	Placeholder	Placeholder	❌
 Runeblade	3	Placeholder	Placeholder	❌
 Runeblade	4	Placeholder	Placeholder	❌
@@ -88,22 +88,24 @@ Shield	2	Taunt	Taunted enemies gain a 25% movement speed debuff.	❌
 Shield	3	Placeholder	Placeholder	❌
 Shield	4	Placeholder	Placeholder	❌
 Staff	1	Whirlwind	Targets hit have their resistance to your staff's element reduced by 25%.	√
+Staff	2	Staff of Magus	The projectile now has a chance to bounce to additional targets.	❌
 Staff	2	Battle Stomp	At the end of the stomp, a magical vortex with your staff's element explodes, dealing additional damage in a 3m range.	❌
 Staff	3	Placeholder	Placeholder	❌
 Staff	4	Placeholder	Placeholder	❌
-Sword	1	Placeholder	Placeholder	❌
+Sword	1	Crippling Blow	Targets hit gains a -20% damage debuff until their turn ends, while you deal 10% more damage against them until your turn ends.	❌
 Sword	2	Placeholder	Placeholder	❌
 Sword	3	Placeholder	Placeholder	❌
 Sword	4	Placeholder	Placeholder	❌
-Throwing	1	Placeholder	Placeholder	❌
+Throwing	1	Grenade	Basic grenades have a 25% chance to explode again.	❌
 Throwing	2	Placeholder	Placeholder	❌
 Throwing	3	Placeholder	Placeholder	❌
 Throwing	4	Placeholder	Placeholder	❌
-Unarmed	1	Placeholder	Placeholder	❌
+Unarmed	1	Way of the Fist	Your warfare skills can now be used while unarmed.	❌
 Unarmed	2	Placeholder	Placeholder	❌
 Unarmed	3	Placeholder	Placeholder	❌
 Unarmed	4	Placeholder	Placeholder	❌
 Wand	1	Flesh Sacrifice	If standing in a pool of blood before Flesh Sacrifice is cast, absorb it to restore health and negate the Constitution debuff.	❌
+Wand	1	Basic Attack	Basic attacks now lower the target's resistance to your wand's element by 10% for 1 turn.	❌
 Wand	2	Placeholder	Placeholder	❌
 Wand	3	Placeholder	Placeholder	❌
 Wand	4	Placeholder	Placeholder	❌
