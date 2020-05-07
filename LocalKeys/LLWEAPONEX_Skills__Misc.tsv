@@ -1,17 +1,19 @@
-Key	Content
-Cone_LLWEAPONEX_WaterSpout_Description	Channel a torrent of water through your hand, setting <font color='#4197e2'>Wet</font> on targets hit for 2 turns, and dousing burning surfaces.<br>If a <font color='#fe6e27'>Burning</font> <font color='#11d87a'>Ally</font> is <font color='#4197e2'>Doused</font>, <font color='#97fbff'>Mending</font> is applied for 1 turn.<br><font color='#97fbff' size='19'>Mending restores [1] and does not damage the Undead.</font><br><font color='#188EDE' size='19'>Allies hit are cleansed of Slowed and Enwebbed.</font>
-Cone_LLWEAPONEX_WaterSpout_DisplayName	Water Spout
-Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide
-Projectile_LLWEAPONEX_ChaosBolt_Description	Shoot a bolt of pure void energy that deals <font color='#b823cb'>[1] Chaos Damage</font> and creates a corresponding surface.<br><font color='#DD00AA'>Each bolt has a [2] chance to fork to a new target, up to [3] times max.</font>
-Projectile_LLWEAPONEX_ChaosBolt_DisplayName	Chaos Bolt
-Rush_LLWEAPONEX_MagicBatteringRam_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Rush forward in a straight line, to a designated point, hitting all enemies in your path for [1] and setting Knockdown.
-Rush_LLWEAPONEX_MagicBatteringRam_DisplayName	Magic Rush
-Shout_LLWEAPONEX_Quiver_DrawArrow_Description	Draw a random, temporary arrow from your quiver.<br><font color='#FF0000'>Arrows retrieved this way disappear after combat ends.</font>
-Shout_LLWEAPONEX_Quiver_DrawArrow_DisplayName	Draw Arrow
-Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].
-Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike
-Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge
-Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF3311'>You're Already Dead</font>
-Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.
-Shout_LLWEAPONEX_UnrelentingRage_DisplayName	<font color='#FF5533'>Unrelenting Rage</font>
-Shout_LLWEAPONEX_UnrelentingRage_Description	Fly into an unstoppable fury, gaining the following buffs:<br><img src='Icon_BulletPoint'><font color='#65C900'>Critical Chance +[1]%<br><img src='Icon_BulletPoint'>Critical Damage +50%<br><img src='Icon_BulletPoint'>Physical/Piercing Resistance +[2]%</font><br><img src='Icon_Line' width='350%'><br><font color='#FF5533'>Slaying an enemy extends Unrelenting Rage by an additional turn, up to the maximum (3), and provides a stacking <font color='#00FF00'>+[3]% Damage Boost</font>.</font><br><font color='#FF3333'>Ending your turn without attacking, or getting disabled ends Unrelenting Rage.</font>
+Key	Content	Handle
+Cone_LLWEAPONEX_WaterSpout_Description	Channel a torrent of water through your hand, setting <font color='#4197e2'>Wet</font> on targets hit for 2 turns, and dousing burning surfaces.<br>If a <font color='#fe6e27'>Burning</font> <font color='#11d87a'>Ally</font> is <font color='#4197e2'>Doused</font>, <font color='#97fbff'>Mending</font> is applied for 1 turn.<br><font color='#97fbff' size='19'>Mending restores [1] and does not damage the Undead.</font><br><font color='#188EDE' size='19'>Allies hit are cleansed of Slowed and Enwebbed.</font>	h2720377cg5500g4f26gbc9bg17503ce83248
+Cone_LLWEAPONEX_WaterSpout_DisplayName	Water Spout	he6003f05g236bg4f79ga8beg22d5b30ad4f1
+Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide	hab06cff9g8908g4bedga5eagec558d1afb06
+Projectile_LLWEAPONEX_ChaosBolt_Description	Shoot a bolt of pure void energy that deals <font color='#b823cb'>[1] Chaos Damage</font> and creates a corresponding surface.<br><font color='#DD00AA'>Each bolt has a [2] chance to fork to a new target, up to [3] times max.</font>	h9a4f3a3dgf031g43d4g83a9g79d09571e26c
+Projectile_LLWEAPONEX_ChaosBolt_DisplayName	Chaos Bolt	haf74627fg8e14g477bgb7a6g1aaae60b6bdc
+Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge	hefdafec9g6297g47bbgaa9fge772e6b52ccf
+Rush_LLWEAPONEX_MagicBatteringRam_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Rush forward in a straight line, to a designated point, hitting all enemies in your path for [1] and setting Knockdown.	h3ea5b8a1gbe52g4f3agaeccg02751abaed0b
+Rush_LLWEAPONEX_MagicBatteringRam_DisplayName	Magic Rush	h030a7775gcb43g42a7gacd3g70796e45351a
+Shout_LLWEAPONEX_Quiver_DrawArrow_Description	Draw a random, temporary arrow from your quiver.<br><font color='#FF0000'>Arrows retrieved this way disappear after combat ends.</font>	hb5394fdbg81e3g4b92g8ccbgfc1d9314b422
+Shout_LLWEAPONEX_Quiver_DrawArrow_DisplayName	Draw Arrow	h33c1a581gf442g4a60g9851gffe17d4151f4
+Shout_LLWEAPONEX_UnrelentingRage_Description	Fly into an unstoppable fury, gaining the following buffs:<br><img src='Icon_BulletPoint'><font color='#65C900'>Critical Chance +[1]%<br><img src='Icon_BulletPoint'>Critical Damage +50%<br><img src='Icon_BulletPoint'>Physical/Piercing Resistance +[2]%</font><br><img src='Icon_Line' width='350%'><br><font color='#FF5533'>Slaying an enemy extends Unrelenting Rage by an additional turn, up to the maximum (3), and provides a stacking <font color='#00FF00'>+[3]% Damage Boost</font>.</font><br><font color='#FF3333'>Ending your turn without attacking, or getting disabled ends Unrelenting Rage.</font>	h5e68b4a3gdb7fg48f5g803ag90f21fd89496
+Shout_LLWEAPONEX_UnrelentingRage_DisplayName	<font color='#FF5533'>Unrelenting Rage</font>	hd3793103gb3e4g4444gb422g0bf1511522a0
+Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.	ha7bb24e6gbfb5g4bfcgae42gf706d1338fc7
+Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF3311'>You're Already Dead</font>	h6c893108gee88g48f4gbdd5g3c6ee6dabb65
+Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].	h004f820eg3b47g4400ga26dgc77fb1d9292e
+Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike	h0dfc61a0g40edg4887g8843g5a47a26ec0e6
+Target_LLWEAPONEX_BasicAttack_DisplayName	Basic Attack	hbdac34fdg43b6g4439g9947g6676e9c03294
+Target_LLWEAPONEX_BasicAttack_Description	Attack with your currently equipped weapon.	hcacb94cbg4737g4a52g8b07gc5af8628eff5

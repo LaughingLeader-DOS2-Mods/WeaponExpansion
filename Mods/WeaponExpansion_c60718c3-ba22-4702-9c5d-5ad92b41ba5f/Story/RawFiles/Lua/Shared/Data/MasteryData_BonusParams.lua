@@ -293,6 +293,9 @@ Mastery.Params = {
 				},
 			}
 		}
+	},
+	UI = {
+		
 	}
 }
 

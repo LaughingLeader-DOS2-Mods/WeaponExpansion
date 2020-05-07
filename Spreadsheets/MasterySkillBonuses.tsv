@@ -5,7 +5,7 @@ Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by War
 Axe	3	Flurry	If all 3 hits connect, regain 1 AP. ❌
 Axe	3	Whirlwind	Keeping spinning up to 2-3 times, dealing reduced damage each spin.	❌
 Axe	4	Onslaught	Each hit cleaves up to 4m away, dealing reduced damage.	❌
-Banner	1	All In	The target is marked until your next turn. If an ally attacks the marked target, the mark is consumed, dealing bonus damage and restoring 1 AP to the attacker.	❌
+Banner	1	Basic Attack	Targets attacked are marked until your next turn. If an ally attacks the marked target, the mark is consumed, dealing bonus damage and restoring 1 AP to the attacker.	❌
 Banner	1	Encourage	Fear, Madness, and Sleep are purged from encouraged allies.	❌
 Banner	1	Battering Ram/Bull Horns	If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.	❌
 Banner	2	Rallying Cry	Physical Armor is restored as well.	❌
@@ -43,7 +43,7 @@ Dual Shields	1	Battering Ram / Bull Rush	You are immune to surface damage while 
 Dual Shields	2	Placeholder	Placeholder	❌
 Dual Shields	3	Placeholder	Placeholder	❌
 Dual Shields	4	Placeholder	Placeholder	❌
-Firearm	1	Tactical Retreat	Your last used skill's cooldown is reduced by 1 turn.	❌
+Firearm	1	Tactical Retreat	Your next action's AP cost is reduced by 1.	❌
 Firearm	2	Placeholder	Placeholder	❌
 Firearm	3	Placeholder	Placeholder	❌
 Firearm	4	Placeholder	Placeholder	❌
@@ -83,7 +83,7 @@ Scythe	1	Whirlwind	Consumes bleeding on targets hit to deal a burst of piercing 
 Scythe	2	Placeholder	Placeholder	❌
 Scythe	3	Placeholder	Placeholder	❌
 Scythe	4	Placeholder	Placeholder	❌
-Shield	1	Shields Up	Damage from the next hit taken is reduced by 25%.	❌
+Shield	1	Shields Up	Damage from the next hit taken is reduced by 50%.	❌
 Shield	2	Taunt	Taunted enemies gain a 25% movement speed debuff.	❌
 Shield	3	Placeholder	Placeholder	❌
 Shield	4	Placeholder	Placeholder	❌
