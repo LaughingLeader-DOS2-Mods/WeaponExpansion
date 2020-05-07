@@ -11,7 +11,7 @@ icon_folder = Path("G:/Modding/DOS2DE/Projects_Source/WeaponExpansion/UI/Mastery
 output_folder = script_dir.joinpath("MasteryMenu/icons")
 
 script_template = """
-package
+package icons
 {{
 	import flash.display.BitmapData;
 	
@@ -41,6 +41,6 @@ for f in files:
 	name = Path(f).stem
 	image = Image.open(f)
 	width,height = image.size
-	script = script_template.format(name=name, width=width, height=height)
+	script = script_template.format(name=name, width=width, height=height).strip()
 	export_path = output_folder.joinpath(name).with_suffix(".as")
 	export_file(export_path, script)

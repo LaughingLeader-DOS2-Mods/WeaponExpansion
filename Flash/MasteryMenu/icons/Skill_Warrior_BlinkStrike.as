@@ -1,12 +1,12 @@
-package icons {
-
+package icons
+{
 	import flash.display.BitmapData;
 	
-	public class Skill_Warrior_BlinkStrike extends BitmapData
+	public dynamic class Skill_Warrior_BlinkStrike extends BitmapData
 	{
-		public function Skill_Warrior_BlinkStrike()
+		public function Skill_Warrior_BlinkStrike(w:int=64, h:int=64)
 		{
-			super(64,64);
+			super(w,h);
 		}
 	}
 }
