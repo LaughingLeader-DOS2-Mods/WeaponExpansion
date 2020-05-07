@@ -213,7 +213,6 @@ package
 					var text:String = descriptionContent[i];
 					var iconId:String = descriptionContent[i+1];
 					var iconName:String = descriptionContent[i+2];
-					var iconType:int = descriptionContent[i+3];
 
 					if (text != "")
 					{
@@ -225,7 +224,16 @@ package
 						{
 							iconName = "";
 						}
-						this.masteryMenuMC.descriptionList.addIcon(iconId, iconName, iconType, false);
+						if (iconId.indexOf(",") > -1)
+						{
+							var iconTypes:String = descriptionContent[i+3];
+							this.masteryMenuMC.descriptionList.addIconGroup(iconId, iconName, iconTypes, false);
+						}
+						else
+						{
+							var iconType:int = descriptionContent[i+3];
+							this.masteryMenuMC.descriptionList.addIcon(iconId, iconName, iconType, false);
+						}
 					}
 					i = i + 4;
 				}
