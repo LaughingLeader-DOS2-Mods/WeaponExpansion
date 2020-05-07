@@ -27,7 +27,7 @@ package desc
 		public function addIcon(id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true) : *
 		{
 			var entryContent:DescriptionIcon = new DescriptionIcon();
-			entryContent.skill = id;
+			entryContent.id = id;
 			entryContent.icon = icon;
 			entryContent.iconType = iconType;
 			entryContent.createIcon();

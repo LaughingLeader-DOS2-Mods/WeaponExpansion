@@ -148,6 +148,7 @@ local iconPattern = "(<icon.-/>)"
 --<icon id='Target_LLWEAPONEX_BasicAttack' icon='Action_AttackGround'/>
 local function parseDescription(ui, index, descriptionText)
 	local splitText = splitDescriptionByPattern(descriptionText, iconPattern)
+	print(LeaderLib.Common.Dump(splitText))
 	for i,v in ipairs(splitText) do
 		local _,_,iconEntry = string.find(descriptionText, iconPattern)
 		print(v, iconEntry)
@@ -286,8 +287,8 @@ local function initializeMasteryMenu()
 			Ext.RegisterUICall(ui, "overMastery", OnMenuEvent)
 			Ext.RegisterUICall(ui, "selectedMastery", OnMenuEvent)
 			Ext.RegisterUICall(ui, "onMasterySelected", OnMenuEvent)
-			Ext.RegisterUICall(ui, "mastery_showSkillTooltip", OnMenuEvent)
-			Ext.RegisterUICall(ui, "mastery_hideSkillTooltip", OnMenuEvent)
+			Ext.RegisterUICall(ui, "mastery_showIconTooltip", OnMenuEvent)
+			Ext.RegisterUICall(ui, "mastery_hideTooltip", OnMenuEvent)
 			
 			if Ext.IsDeveloperMode() then
 				Ext.RegisterUICall(ui, "showSkillTooltip", OnMenuEvent)
