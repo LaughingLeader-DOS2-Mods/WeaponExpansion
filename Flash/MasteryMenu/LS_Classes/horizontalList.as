@@ -5,8 +5,6 @@ package LS_Classes
 	
 	public class horizontalList extends listDisplay
 	{
-		 
-		
 		public var rightSided:Boolean = true;
 		
 		public var m_MaxWidth:int = -1;
@@ -29,8 +27,8 @@ package LS_Classes
 		
 		override public function positionElements() : *
 		{
-			var _loc7_:Number = NaN;
-			var _loc8_:int = 0;
+			var elWidth:Number = NaN;
+			var contentElementWidth:int = 0;
 			if(content_array.length < 1)
 			{
 				return;
@@ -40,210 +38,208 @@ package LS_Classes
 				content_array.sortOn(m_SortOnFieldName,m_SortOnOptions);
 				m_NeedsSorting = false;
 			}
-			var _loc1_:Number = 0;
-			var _loc2_:uint = 0;
-			var _loc3_:uint = 1;
-			var _loc4_:uint = content_array.length;
-			var _loc5_:MovieClip = null;
-			var _loc6_:uint = 0;
-			while(_loc6_ < _loc4_)
+			var objX:Number = 0;
+			var rowIndex:uint = 0;
+			var colIndex:uint = 1;
+			var length:uint = content_array.length;
+			var rowHolder:MovieClip = null;
+			var index:uint = 0;
+			while(index < length)
 			{
-				if(content_array[_loc6_].visible || canPositionInvisibleElements)
+				if(content_array[index].visible || canPositionInvisibleElements)
 				{
 					if(this.rightSided)
 					{
-						content_array[_loc6_].x = _loc1_;
-						content_array[_loc6_].tweenToX = _loc1_;
-						_loc1_ = _loc1_ + Math.round(getElementWidth(content_array[_loc6_]) + EL_SPACING);
+						content_array[index].x = objX;
+						content_array[index].tweenToX = objX;
+						objX = objX + Math.round(getElementWidth(content_array[index]) + EL_SPACING);
 					}
 					else
 					{
-						_loc7_ = getElementWidth(content_array[_loc6_]);
-						content_array[_loc6_].x = _loc1_ - _loc7_;
-						content_array[_loc6_].tweenToX = _loc1_ - _loc7_;
-						_loc1_ = _loc1_ - Math.round(_loc7_ + EL_SPACING);
+						elWidth = getElementWidth(content_array[index]);
+						content_array[index].x = objX - elWidth;
+						content_array[index].tweenToX = objX - elWidth;
+						objX = objX - Math.round(elWidth + EL_SPACING);
 					}
 					if(this.m_MaxWidth > 0)
 					{
-						_loc8_ = content_array[_loc6_].x + content_array[_loc6_].width;
-						if(_loc8_ > this.m_MaxWidth)
+						contentElementWidth = content_array[index].x + content_array[index].width;
+						if(contentElementWidth > this.m_MaxWidth)
 						{
-							content_array[_loc6_].x = 0;
-							_loc2_++;
-							_loc1_ = Math.round(getElementWidth(content_array[_loc6_]) + EL_SPACING);
+							content_array[index].x = 0;
+							rowIndex++;
+							objX = Math.round(getElementWidth(content_array[index]) + EL_SPACING);
 						}
-						_loc5_ = this.createNewRowHolderWhenNeeded(_loc2_);
-						_loc5_.addChild(content_array[_loc6_]);
-						_loc5_.overrideWidth = content_array[_loc6_].x + getElementWidth(content_array[_loc6_]);
+						rowHolder = this.createNewRowHolderWhenNeeded(rowIndex);
+						rowHolder.addChild(content_array[index]);
+						rowHolder.overrideWidth = content_array[index].x + getElementWidth(content_array[index]);
 					}
 					else if(this.m_MaxRowElements > 0)
 					{
-						if(_loc3_ > this.m_MaxRowElements)
+						if(colIndex > this.m_MaxRowElements)
 						{
-							_loc3_ = 1;
-							content_array[_loc6_].x = 0;
-							_loc2_++;
-							_loc1_ = Math.round(getElementWidth(content_array[_loc6_]) + EL_SPACING);
+							colIndex = 1;
+							content_array[index].x = 0;
+							rowIndex++;
+							objX = Math.round(getElementWidth(content_array[index]) + EL_SPACING);
 						}
-						_loc5_ = this.createNewRowHolderWhenNeeded(_loc2_);
-						_loc5_.addChild(content_array[_loc6_]);
-						_loc5_.overrideWidth = content_array[_loc6_].x + getElementWidth(content_array[_loc6_]);
-						_loc3_++;
+						rowHolder = this.createNewRowHolderWhenNeeded(rowIndex);
+						rowHolder.addChild(content_array[index]);
+						rowHolder.overrideWidth = content_array[index].x + getElementWidth(content_array[index]);
+						colIndex++;
 					}
 				}
 				else
 				{
-					content_array[_loc6_].x = 0;
+					content_array[index].x = 0;
 				}
-				_loc6_++;
+				index++;
 			}
-			this.cleanupUnusedRowHolders(_loc2_);
+			this.cleanupUnusedRowHolders(rowIndex);
 			this.centerHolders();
 		}
 		
 		private function centerHolders() : void
 		{
-			var _loc1_:uint = 0;
-			var _loc2_:MovieClip = null;
+			var index:uint = 0;
+			var obj:MovieClip = null;
 			if(this.m_CenterHolders)
 			{
-				_loc1_ = 0;
-				while(_loc1_ < this.m_holderArray.length)
+				index = 0;
+				while(index < this.m_holderArray.length)
 				{
-					_loc2_ = this.m_holderArray[_loc1_];
-					_loc2_.x = -Math.round(_loc2_.overrideWidth * 0.5);
-					_loc1_++;
+					obj = this.m_holderArray[index];
+					obj.x = -Math.round(obj.overrideWidth * 0.5);
+					index++;
 				}
 			}
 		}
 		
-		private function createNewRowHolderWhenNeeded(param1:Number) : MovieClip
+		private function createNewRowHolderWhenNeeded(index:Number) : MovieClip
 		{
-			var _loc2_:MovieClip = null;
-			var _loc3_:MovieClip = null;
-			if(this.m_holderArray.length <= param1)
+			var rowHolder:MovieClip = null;
+			var previousRowHolder:MovieClip = null;
+			if(this.m_holderArray.length <= index)
 			{
-				_loc2_ = new MovieClip();
-				containerContent_mc.addChild(_loc2_);
+				rowHolder = new MovieClip();
+				containerContent_mc.addChild(rowHolder);
 				if(this.m_holderArray.length > 0)
 				{
-					_loc3_ = this.m_holderArray[this.m_holderArray.length - 1];
-					if(_loc3_)
+					previousRowHolder = this.m_holderArray[this.m_holderArray.length - 1];
+					if(previousRowHolder)
 					{
 						if(this.m_RowHeight == -1)
 						{
-							_loc2_.y = _loc3_.y + _loc3_.height + this.m_RowSpacing;
+							rowHolder.y = previousRowHolder.y + previousRowHolder.height + this.m_RowSpacing;
 						}
 						else
 						{
-							_loc2_.y = _loc3_.y + this.m_RowHeight + this.m_RowSpacing;
+							rowHolder.y = previousRowHolder.y + this.m_RowHeight + this.m_RowSpacing;
 						}
 					}
 				}
-				this.m_holderArray.push(_loc2_);
-				return _loc2_;
+				this.m_holderArray.push(rowHolder);
+				return rowHolder;
 			}
-			return this.m_holderArray[param1];
+			return this.m_holderArray[index];
 		}
 		
-		private function cleanupUnusedRowHolders(param1:Number) : *
+		private function cleanupUnusedRowHolders(targetIndex:Number) : *
 		{
-			var _loc2_:uint = param1 + 1;
-			while(this.m_holderArray.length > _loc2_)
+			var i:uint = targetIndex + 1;
+			while(this.m_holderArray.length > i)
 			{
-				containerContent_mc.removeChild(this.m_holderArray[_loc2_]);
-				this.m_holderArray.splice(_loc2_,1);
+				containerContent_mc.removeChild(this.m_holderArray[i]);
+				this.m_holderArray.splice(i,1);
 			}
 		}
 		
-		override public function moveElementsToPosition(param1:Number = 0.8, param2:Boolean = false) : *
+		override public function moveElementsToPosition(pos:Number = 0.8, tweenY:Boolean = false) : *
 		{
-			var _loc8_:Object = null;
-			var _loc10_:MovieClip = null;
-			var _loc11_:Number = NaN;
-			var _loc12_:int = 0;
+			var obj:MovieClip = null;
+			var elWidth:Number = NaN;
+			var colWidth:int = 0;
 			if(content_array.length < 1)
 			{
 				return;
 			}
-			var _loc3_:Number = 0;
-			var _loc4_:uint = 0;
-			var _loc5_:uint = 1;
-			var _loc6_:MovieClip = null;
+			var targetX:Number = 0;
+			var rowIndex:uint = 0;
+			var colIndex:uint = 1;
+			var rowHolder:MovieClip = null;
 			m_tweeningMcs = 0;
 			dispatchEvent(new Event("listMoveStart"));
-			var _loc7_:uint = content_array.length;
-			var _loc9_:uint = 0;
-			while(_loc9_ < _loc7_)
+			var length:uint = content_array.length;
+			var index:uint = 0;
+			while(index < length)
 			{
-				_loc10_ = content_array[_loc9_];
-				if(_loc10_)
+				obj = content_array[index];
+				if(obj)
 				{
 					if(this.rightSided)
 					{
 						m_tweeningMcs++;
-						_loc10_.tweening = true;
-						_loc10_.tweenToX = _loc3_;
-						_loc3_ = _loc3_ + Math.round(getElementWidth(content_array[_loc9_]) + EL_SPACING);
+						obj.tweening = true;
+						obj.tweenToX = targetX;
+						targetX = targetX + Math.round(getElementWidth(content_array[index]) + EL_SPACING);
 					}
 					else
 					{
 						m_tweeningMcs++;
-						_loc10_.tweening = true;
-						_loc11_ = getElementWidth(content_array[_loc9_]);
-						_loc10_.tweenToX = _loc3_ - _loc11_;
-						_loc3_ = _loc3_ - Math.round(_loc11_ + EL_SPACING);
+						obj.tweening = true;
+						elWidth = getElementWidth(content_array[index]);
+						obj.tweenToX = targetX - elWidth;
+						targetX = targetX - Math.round(elWidth + EL_SPACING);
 					}
-					stopElementMCPosTweens(_loc10_);
-					if(param2)
+					stopElementMCPosTweens(obj);
+					if(tweenY)
 					{
-						_loc10_.list_tweenY = new larTween(_loc10_,"y",m_PositionTweenFunc,_loc10_.y,0,param1);
+						obj.list_tweenY = new larTween(obj,"y",m_PositionTweenFunc,obj.y,0,pos);
 					}
-					_loc10_.list_tweenX = new larTween(_loc10_,"x",m_PositionTweenFunc,_loc10_.x,_loc10_.tweenToX,param1,removeTweenState,_loc10_.list_id);
+					obj.list_tweenX = new larTween(obj,"x",m_PositionTweenFunc,obj.x,obj.tweenToX,pos,removeTweenState,obj.list_id);
 					if(this.m_MaxWidth > 0)
 					{
-						_loc12_ = content_array[_loc9_].x + content_array[_loc9_].width;
-						if(_loc12_ > this.m_MaxWidth)
+						colWidth = content_array[index].x + content_array[index].width;
+						if(colWidth > this.m_MaxWidth)
 						{
-							content_array[_loc9_].tweenToX = 0;
-							_loc4_++;
-							_loc3_ = Math.round(getElementWidth(content_array[_loc9_]) + EL_SPACING);
+							content_array[index].tweenToX = 0;
+							rowIndex++;
+							targetX = Math.round(getElementWidth(content_array[index]) + EL_SPACING);
 						}
-						_loc6_ = this.createNewRowHolderWhenNeeded(_loc4_);
-						_loc6_.addChild(content_array[_loc9_]);
-						_loc6_.overrideWidth = content_array[_loc9_].tweenToX + getElementWidth(content_array[_loc9_]);
+						rowHolder = this.createNewRowHolderWhenNeeded(rowIndex);
+						rowHolder.addChild(content_array[index]);
+						rowHolder.overrideWidth = content_array[index].tweenToX + getElementWidth(content_array[index]);
 					}
 					else if(this.m_MaxRowElements > 0)
 					{
-						if(_loc5_ > this.m_MaxRowElements)
+						if(colIndex > this.m_MaxRowElements)
 						{
-							_loc5_ = 1;
-							content_array[_loc9_].x = 0;
-							_loc4_++;
-							_loc3_ = Math.round(getElementWidth(content_array[_loc9_]) + EL_SPACING);
+							colIndex = 1;
+							content_array[index].x = 0;
+							rowIndex++;
+							targetX = Math.round(getElementWidth(content_array[index]) + EL_SPACING);
 						}
-						_loc6_ = this.createNewRowHolderWhenNeeded(_loc4_);
-						_loc6_.addChild(content_array[_loc9_]);
-						_loc6_.overrideWidth = content_array[_loc9_].tweenToX + getElementWidth(content_array[_loc9_]);
-						_loc5_++;
+						rowHolder = this.createNewRowHolderWhenNeeded(rowIndex);
+						rowHolder.addChild(content_array[index]);
+						rowHolder.overrideWidth = content_array[index].tweenToX + getElementWidth(content_array[index]);
+						colIndex++;
 					}
 				}
-				_loc9_++;
+				index++;
 			}
-			this.cleanupUnusedRowHolders(_loc4_);
+			this.cleanupUnusedRowHolders(rowIndex);
 		}
 		
 		public function getContainerWidth() : Number
 		{
-			var _loc1_:Number = 0;
-			var _loc2_:MovieClip = getLastVisible();
-			if(_loc2_)
+			var obj:MovieClip = getLastVisible();
+			if(obj)
 			{
 				if(this.rightSided)
 				{
-					return _loc2_.x + getElementWidth(_loc2_);
+					return obj.x + getElementWidth(obj);
 				}
-				return -_loc2_.x;
+				return -obj.x;
 			}
 			return 0;
 		}
