@@ -32,7 +32,7 @@ local function dumpRanks(...)
 end
 Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 
-local function SessionLoading()
+local function SessionSetup()
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
@@ -40,6 +40,6 @@ local function SessionLoading()
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
     Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
 end
-Ext.RegisterListener("SessionLoading", SessionLoading)
+Ext.RegisterListener("SessionLoaded", SessionSetup)
 
 Ext.Print("[WeaponExpansion:BootstrapServer.lua] Finished running.")

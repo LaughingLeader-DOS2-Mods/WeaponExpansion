@@ -47,7 +47,7 @@ package LS_Classes
 			_loc10_.hasTooltip = true;
 		}
 		
-		public static function ShowTooltipForMC(targetMC:MovieClip, displayObj:DisplayObject, tooltipPos:String = "right", stayOpen:Boolean = true) : void
+		public static function ShowTooltipForMC(targetMC:MovieClip, displayObj:DisplayObject, tooltipPos:String = "right", allowDelay:Boolean = true) : void
 		{
 			var xOffset:Number = NaN;
 			var yOffset:Number = NaN;
@@ -78,46 +78,46 @@ package LS_Classes
 					yOffset = targetMC.tooltipYOffset;
 				}
 				globalPos = getGlobalPositionOfMC(targetMC,displayObj);
-				ExternalInterface.call("showTooltip", targetMC.tooltip, globalPos.x + xOffset, globalPos.y + yOffset, width, height, tooltipPos, stayOpen);
+				ExternalInterface.call("showTooltip", targetMC.tooltip, globalPos.x + xOffset, globalPos.y + yOffset, width, height, tooltipPos, allowDelay);
 				displayMC = displayObj as MovieClip;
 				displayMC.hasTooltip = true;
 			}
 		}
 		
-		public static function ShowStatusTooltipForMC(param1:MovieClip, param2:DisplayObject, param3:String = "right") : void
+		public static function ShowStatusTooltipForMC(statusMC:MovieClip, obj:DisplayObject, tooltipPos:String = "right") : void
 		{
-			var _loc4_:Number = NaN;
-			var _loc5_:Number = NaN;
-			var _loc6_:Number = NaN;
-			var _loc7_:Number = NaN;
-			var _loc8_:Point = null;
-			var _loc9_:MovieClip = null;
-			if(param1.owner && param1.id)
+			var xOffset:Number = NaN;
+			var yOffset:Number = NaN;
+			var tooltipWidth:Number = NaN;
+			var tooltipHeight:Number = NaN;
+			var targetTooltipPos:Point = null;
+			var displayObjMC:MovieClip = null;
+			if(statusMC.owner && statusMC.id)
 			{
-				_loc4_ = 0;
-				_loc5_ = 0;
-				_loc6_ = param1.width;
-				_loc7_ = param1.height;
-				if(param1.tooltipOverrideW)
+				xOffset = 0;
+				yOffset = 0;
+				tooltipWidth = statusMC.width;
+				tooltipHeight = statusMC.height;
+				if(statusMC.tooltipOverrideW)
 				{
-					_loc6_ = param1.tooltipOverrideW;
+					tooltipWidth = statusMC.tooltipOverrideW;
 				}
-				if(param1.tooltipOverrideH)
+				if(statusMC.tooltipOverrideH)
 				{
-					_loc7_ = param1.tooltipOverrideH;
+					tooltipHeight = statusMC.tooltipOverrideH;
 				}
-				if(param1.tooltipXOffset)
+				if(statusMC.tooltipXOffset)
 				{
-					_loc4_ = param1.tooltipXOffset;
+					xOffset = statusMC.tooltipXOffset;
 				}
-				if(param1.tooltipYOffset)
+				if(statusMC.tooltipYOffset)
 				{
-					_loc5_ = param1.tooltipYOffset;
+					yOffset = statusMC.tooltipYOffset;
 				}
-				_loc8_ = getGlobalPositionOfMC(param1,param2);
-				ExternalInterface.call("showStatusTooltip",param1.owner,param1.id,_loc8_.x + _loc4_,_loc8_.y + _loc5_,_loc6_,_loc7_,param3);
-				_loc9_ = param2 as MovieClip;
-				_loc9_.hasTooltip = true;
+				targetTooltipPos = getGlobalPositionOfMC(statusMC,obj);
+				ExternalInterface.call("showStatusTooltip", statusMC.owner, statusMC.id, targetTooltipPos.x + xOffset,targetTooltipPos.y + yOffset, tooltipWidth, tooltipHeight,tooltipPos);
+				displayObjMC = obj as MovieClip;
+				displayObjMC.hasTooltip = true;
 			}
 		}
 		

@@ -224,10 +224,10 @@ package
 						{
 							iconName = "";
 						}
-						if (iconId.indexOf(",") > -1)
+						if (iconId.indexOf(";") > -1)
 						{
 							var iconTypes:String = descriptionContent[i+3];
-							this.masteryMenuMC.descriptionList.addIconGroup(iconId, iconName, iconTypes, false);
+							this.masteryMenuMC.descriptionList.addIconGroup(iconId, iconName, iconTypes, false, ";");
 						}
 						else
 						{

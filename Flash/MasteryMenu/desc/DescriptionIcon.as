@@ -37,7 +37,7 @@ package desc
 			if (id != "" && iconType > 0)
 			{
 				var pos:Point = this.localToGlobal(new Point(0,0));
-				ExternalInterface.call("mastery_showIconTooltip", iconType,id,pos.x,pos.y,width,height);
+				ExternalInterface.call("mastery_showIconTooltip",iconType,id,pos.x,pos.y,width,height);
 			}
 		}
 
@@ -46,7 +46,7 @@ package desc
 			if (id != "" && iconType > 0)
 			{
 				ExternalInterface.call("hideTooltip");
-				ExternalInterface.call("mastery_hideIconTooltip", iconType);
+				ExternalInterface.call("mastery_hideIconTooltip",iconType);
 			}
 		}
 	}

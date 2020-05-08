@@ -3,6 +3,7 @@ MasteryMenu = {
 	Open = false,
 	RegisteredListeners = false,
 	Initialized = false,
+	---@type UIObject
 	Instance = nil,
 	DisplayingSkillTooltip = false,
 	DisplayingStatusTooltip = false,
@@ -11,6 +12,10 @@ MasteryMenu = {
 	---@type CharacterMasteryData
 	MasteryData = nil
 }
+
+---@type MessageData
+local MessageData = LeaderLib.Classes["MessageData"]
+
 local function CloseMenu()
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
 		MasteryMenu.Instance:Invoke("closeMenu")
@@ -84,7 +89,7 @@ local function TryOpenMasteryMenu()
 	end
 end
 
-local function splitDescriptionByPattern(str, pattern)
+local function splitDescriptionByPattern(str, pattern, includeMatch)
 	local list = {};
 	local pos = 1
 	local lastMatch = ""
@@ -96,11 +101,13 @@ local function splitDescriptionByPattern(str, pattern)
 		if first then
 			local s = string.sub(str, pos, first-1);
 			if s ~= "" then
-				if lastMatch ~= "" then
-					s = lastMatch..s
-					lastMatch = ""
-				elseif a ~= nil then
-					s = a..s
+				if includeMatch == true then
+					if lastMatch ~= "" then
+						s = lastMatch..s
+						lastMatch = ""
+					elseif a ~= nil then
+						s = a..s
+					end
 				end
 				table.insert(list, s)
 			elseif a ~= nil then
@@ -110,11 +117,13 @@ local function splitDescriptionByPattern(str, pattern)
 		else
 			local s = string.sub(str, pos);
 			if s ~= "" then
-				if lastMatch ~= "" then
-					s = lastMatch..s
-					lastMatch = ""
-				elseif a ~= nil then
-					s = a..s
+				if includeMatch == true then
+					if lastMatch ~= "" then
+						s = lastMatch..s
+						lastMatch = ""
+					elseif a ~= nil then
+						s = a..s
+					end
 				end
 				table.insert(list, s)
 			elseif a ~= nil then
@@ -136,7 +145,11 @@ local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
 		iconName = ""
 	end
 	if iconType == nil then
-		iconType = 1
+		if iconName ~= "" or iconId ~= "" then
+			iconType = 1
+		else	
+			iconType = 0
+		end
 	end
 	ui:SetValue("descriptionContent", iconId, index+1)
 	ui:SetValue("descriptionContent", iconName, index+2)
@@ -147,16 +160,42 @@ end
 local iconPattern = "(<icon.-/>)"
 --<icon id='Target_LLWEAPONEX_BasicAttack' icon='Action_AttackGround'/>
 local function parseDescription(ui, index, descriptionText)
-	local splitText = splitDescriptionByPattern(descriptionText, iconPattern)
-	print(LeaderLib.Common.Dump(splitText))
-	for i,v in ipairs(splitText) do
-		local _,_,iconEntry = string.find(descriptionText, iconPattern)
-		print(v, iconEntry)
-		v = string.gsub(v, iconEntry, "")
-		local _,_,iconName = iconEntry:find("id='(.-)'")
-		local _,_,icon = iconEntry:find("icon='(.-)'")
-		local _,_,iconType = iconEntry:find("type='(.-)'")
-		index = pushDescriptionEntry(ui, index, v, iconName, icon, iconType)
+	local icons = {}
+	local separatedText = splitDescriptionByPattern(descriptionText,iconPattern)
+	for v in string.gmatch(descriptionText, iconPattern) do
+		icons[#icons+1] = v
+	end
+	local result = {}
+	for i,v in ipairs(separatedText) do
+		local icon = icons[i]
+		if icon == nil then 
+			icon = "" 
+		else
+			icons[i] = nil
+		end
+		result[#result+1] = {
+			Text = v,
+			Icon = icon
+		}
+	end
+	for _,v in pairs(icons) do
+		if v ~= nil then
+			result[#result+1] = {
+				Text = "",
+				Icon = v
+			}
+		end
+	end
+	print(LeaderLib.Common.Dump(result))
+	for i,v in ipairs(result) do
+		if v.Icon ~= "" then
+			local _,_,iconName = v.Icon:find("id='(.-)'")
+			local _,_,icon = v.Icon:find("icon='(.-)'")
+			local _,_,iconType = v.Icon:find("type='(.-)'")
+			index = pushDescriptionEntry(ui, index, v.Text, iconName, icon, iconType)
+		else
+			index = pushDescriptionEntry(ui, index, v.Text, "", "", nil)
+		end
 	end
 	return index
 end
@@ -227,19 +266,63 @@ local function OnMenuEvent(ui, call, ...)
 	elseif call == "mastery_showIconTooltip" then
 		if params[1] == 1 then
 			MasteryMenu.DisplayingSkillTooltip = true
-			ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5])
+			ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5], params[6])
 		elseif params[1] == 2 then
-			MasteryMenu.DisplayingStatusTooltip = true
-			ui:ExternalInterfaceCall("showStatusTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5])
+			--MasteryMenu.DisplayingStatusTooltip = true
+			--ui:ExternalInterfaceCall("showStatusTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5], params[6], "leftTop")
+			-- x, y, width, height, tooltipPos
+			---@type MessageData
+			--local data = MessageData:CreateFromTable(MasteryMenu.MasteryData.UUID, {Status = params[2], x = params[3], y = params[4], width=params[5], height=params[6]})
+			--Ext.PostMessageToServer("LLWEAPONEX_MasteryMenu_RequestStatusTooltip", data:ToString())
+			---@type UIObject
+			local tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltipHelper_kb.swf")
+			if tooltipUI == nil then tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltipHelper.swf") end
+			if tooltipUI == nil then tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltip.swf") end
+			if tooltipUI == nil then 
+				tooltipUI = Ext.CreateUI("tooltipKB", "Public/Shared/GUI/tooltipHelper_kb.swf", 99) 
+			end
+			if tooltipUI ~= nil then
+				local i = 0
+				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription, i)
+				tooltipUI:SetValue("tooltip_array", "Status Info", i+1)
+				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.Title, i+2)
+				tooltipUI:SetValue("tooltip_array", "STATUS?!", i+3)
+				tooltipUI:Invoke("addStatusTooltip", 0, 0)
+			else
+				Ext.PrintError("tooltipHelper_kb is nil?")
+			end
 		end
 	elseif call == "mastery_hideIconTooltip" then
-		if params[1] == 1 then
-			MasteryMenu.DisplayingSkillTooltip = false
-		elseif params[1] == 2 then
-			MasteryMenu.DisplayingStatusTooltip = false
+		MasteryMenu.DisplayingSkillTooltip = false
+		MasteryMenu.DisplayingStatusTooltip = false
+	end
+end
+
+local function NetMessage_StatusHandleRetrieved(call,datastr)
+	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:LLWEAPONEX_MasteryMenu_StatusHandleRetrieved] Data:")
+	LeaderLib.PrintDebug(datastr)
+	local data = MessageData:CreateFromString(datastr)
+	if data ~= nil then
+		---@type EsvCharacter
+		local character = Ext.GetCharacter(data.Params.NetID)--Ext.GetCharacter("S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15")
+		local statuses = character:GetStatuses()
+		print("Statuses:", LeaderLib.Common.Dump(statuses))
+		---@type EsvStatus
+		local status = character:GetStatus(data.Params.Status)
+		if status ~= nil then
+			local dummyHandle = Ext.HandleToDouble(character.Handle)
+			local statusHandle = Ext.HandleToDouble(1)
+			print(status, STATUS_HANDLE_TEST, statusHandle)
+		--MasteryMenu.Instance:ExternalInterfaceCall("showTooltip", 7, STATUS_HANDLE_TEST, data.Params.x, data.Params.y, width, height, "right")
+		--MasteryMenu.Instance:ExternalInterfaceCall("showTooltip", 7, STATUS_HANDLE_TEST, 18.0, 254.0, 425.0, 32.999496459961, "right")
+			--MasteryMenu.Instance:ExternalInterfaceCall("showStatusTooltip", dummyHandle, STATUS_HANDLE_TEST, data.Params.x, data.Params.y, data.Params.width, data.Params.height, "right")
+			--("showTooltip", targetMC.tooltip, globalPos.x + xOffset, globalPos.y + yOffset, width, height, tooltipPos, stayOpen);
+			--MasteryMenu.Instance:ExternalInterfaceCall("showTooltip", "Test tooltip", data.Params.x, data.Params.y, data.Params.width, data.Params.height, "right", false)
 		end
 	end
 end
+
+Ext.RegisterNetListener("LLWEAPONEX_MasteryMenu_StatusHandleRetrieved", NetMessage_StatusHandleRetrieved)
 
 local function sortMasteries(a,b)
 	return a:upper() < b:upper()
@@ -292,6 +375,7 @@ local function initializeMasteryMenu()
 			
 			if Ext.IsDeveloperMode() then
 				Ext.RegisterUICall(ui, "showSkillTooltip", OnMenuEvent)
+				Ext.RegisterUICall(ui, "showStatusTooltip", OnMenuEvent)
 				Ext.RegisterUICall(ui, "UIAssert", OnMenuEvent)
 				Ext.RegisterUICall(ui, "hideTooltip", OnMenuEvent)
 				Ext.RegisterUICall(ui, "showTooltip", OnMenuEvent)

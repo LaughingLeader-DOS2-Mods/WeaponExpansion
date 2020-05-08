@@ -33,14 +33,17 @@ Ext.Require("Shared/SkillDamageFunctions.lua")
 --- @param tag string
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
-	LeaderLib.PrintDebug("MasteryMenu.DisplayingSkillTooltip", MasteryMenu.DisplayingSkillTooltip)
 	if character:HasTag(tag) == true then
 		local a,b,mastery = string.find(tag,"(.+)_Mastery")
 		print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
 		if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 			return true
 		else
-			return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or character:HasTag(mastery)
+			if Ext.IsClient() then
+				return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or character:HasTag(mastery)
+			else
+				return character:HasTag(mastery)
+			end
 		end
 		-- local hasTaggedWeapons = false
 		-- ---@type StatItem

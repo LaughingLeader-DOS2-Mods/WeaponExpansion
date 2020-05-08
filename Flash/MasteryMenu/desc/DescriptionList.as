@@ -35,20 +35,46 @@ package desc
 			addElement(entryContent, reposition, false);
 		}
 
-		public function addIconGroup(ids:String, icons:String, types:String, reposition:Boolean = true) : *
+		private function TryGetIconName(arr:Array, i:int) : String
+		{
+			try
+			{
+				var iconName:String = arr[i];
+				return iconName;
+			}
+			catch(e)
+			{
+				return "";
+			}
+		}
+
+		private function TryGetIconType(arr:Array, i:int) : int
+		{
+			try
+			{
+				var iconType:int = int(arr[i]);
+				return iconType;
+			}
+			catch(e)
+			{
+				return 1;
+			}
+		}
+
+		public function addIconGroup(ids:String, icons:String, types:String, reposition:Boolean = true, delimiter:String = ";") : *
 		{
 			var entryList:horizontalList = new horizontalList();
 			entryList.m_MaxWidth = this.width - (this.SIDE_SPACING * 2);
-			var iconIds:Array = ids.split(",");
-			var iconNames:Array = icons.split(",");
-			var iconTypes:Array = types.split(",");
+			var iconIds:Array = ids.split(delimiter);
+			var iconNames:Array = icons.split(delimiter);
+			var iconTypes:Array = types.split(delimiter);
 
 			var i:uint = 0;
 			while (i < iconIds.length)
 			{
 				var iconId:String = iconIds[i];
-				var iconName:String = iconNames[i];
-				var iconType:int = int(iconTypes[i]);
+				var iconName:String = TryGetIconName(iconNames, i);
+				var iconType:int = TryGetIconType(iconTypes, i);
 				if (iconName == null)
 				{
 					iconName = "";
@@ -57,12 +83,17 @@ package desc
 				{
 					iconType = 1;
 				}
+				else if (iconType > 2)
+				{
+					iconType = 2;
+				}
 				var entryContent:DescriptionIcon = new DescriptionIcon();
 				entryContent.id = iconId;
 				entryContent.icon = iconName;
 				entryContent.iconType = iconType;
 				entryContent.createIcon();
 				entryList.addElement(entryContent, false, false);
+				i++;
 			}
 
 			entryList.positionElements();

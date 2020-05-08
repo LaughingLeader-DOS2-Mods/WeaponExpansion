@@ -2,6 +2,8 @@
 local uiOverrides = {
 	--["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/LLWEAPONEX_ToolTip.swf",
 	--["Public/Game/GUI/mouseIcon.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon.swf",
+	["Public/Game/GUI/tooltipHelper_kb.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltipHelper_kb.swf",
+	["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltip.swf",
 }
 
 local function LLWEAPONEX_Client_ModuleSetup()
@@ -11,8 +13,11 @@ local function LLWEAPONEX_Client_ModuleSetup()
 	end
 end
 
+--Ext.RegisterListener("ModuleLoadStarted", LLWEAPONEX_Client_ModuleSetup)
 --Ext.RegisterListener("ModuleLoading", LLWEAPONEX_Client_ModuleSetup)
 --Ext.RegisterListener("ModuleResume", LLWEAPONEX_Client_ModuleSetup)
+--Ext.RegisterListener("SessionLoading", LLWEAPONEX_Client_ModuleSetup)
+--Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_ModuleSetup)
 
 local function OnMouseIconEvent(ui, call, ...)
 	local params = LeaderLib.Common.FlattenTable({...})
@@ -33,7 +38,12 @@ end
 
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
-	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	if call == "showTooltip" then
+		if params[1] == 7 then
+			STATUS_HANDLE_TEST = params[2]
+		end
+	end
 end
 
 local function Client_UIDebugTest()
@@ -63,6 +73,15 @@ local function Client_UIDebugTest()
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/examine.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showTooltip", OnSheetEvent)
+		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
 	end
 end
 
