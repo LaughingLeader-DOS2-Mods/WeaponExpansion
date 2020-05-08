@@ -29,7 +29,7 @@ local function StatusGetDescriptionParam(status, statusSource, target, param, ..
 						local max = damage[2]
 						if min > 0 or max > 0 then
 							if max == min then
-								table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, math.tointeger(min)))
+								table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
 							else
 								table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
 							end

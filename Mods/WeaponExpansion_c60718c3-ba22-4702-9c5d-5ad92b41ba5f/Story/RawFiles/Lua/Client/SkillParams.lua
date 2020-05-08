@@ -154,7 +154,13 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 			local resultString = ""
 			--Ext.Print("Skill damage param: " .. LeaderLib.Common.Dump(mainDamageRange))
 			for damageType,damage in pairs(mainDamageRange) do
-				resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%s-%s", math.tointeger(damage[1]), math.tointeger(damage[2])))
+				local min = damage[1]
+				local max = damage[2]
+				if min == max then
+					resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%i", max))
+				else
+					resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max))
+				end
 			end
 			return resultString
 		else

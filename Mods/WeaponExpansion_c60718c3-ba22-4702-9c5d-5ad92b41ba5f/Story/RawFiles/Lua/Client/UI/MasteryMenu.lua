@@ -283,9 +283,9 @@ local function OnMenuEvent(ui, call, ...)
 			end
 			if tooltipUI ~= nil then
 				local i = 0
-				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription, i)
+				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatName, i)
 				tooltipUI:SetValue("tooltip_array", "Status Info", i+1)
-				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.Title, i+2)
+				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatsDescription, i+2)
 				tooltipUI:SetValue("tooltip_array", "STATUS?!", i+3)
 				tooltipUI:Invoke("addStatusTooltip", 0, 0)
 			else
