@@ -7,6 +7,7 @@ KBSECTION
 PROC
 LLWEAPONEX_RemoteMines_InitSettings()
 THEN
+SysClear("DB_LLWEAPONEX_RemoteMines_Templates", 1);
 DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Breach_55cf7240-33d4-41a6-8d64-528d6fdc9d1d");
 DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Displacement_0dc36b1c-278d-4c88-9b24-8d4d5dd685fc");
 DB_LLWEAPONEX_RemoteMines_Templates("WPN_LLWEAPONEX_RemoteMine_A_Explosive_9723e927-785b-4fe9-91e7-a8ad1af30716");

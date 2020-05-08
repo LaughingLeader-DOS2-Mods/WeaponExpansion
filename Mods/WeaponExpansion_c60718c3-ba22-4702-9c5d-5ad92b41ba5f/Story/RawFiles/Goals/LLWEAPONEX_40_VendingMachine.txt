@@ -355,10 +355,17 @@ IF
 CharacterLeveledUp(_Player)
 AND
 DB_IsPlayer(_Player)
-AND
-CharacterGetLevel(_Player, _Level)
 THEN
-CharacterLevelUpTo(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Level);
+LeaderLib_Timers_StartObjectTimer(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 250, "Timers_LLWEAPONEX_LevelUpVendingMachine", "LLWEAPONEX_LevelUpVendingMachine");
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_LevelUpVendingMachine")
+AND
+LeaderLib_Helper_QRY_GetHighestPlayerLevel()
+AND
+DB_LeaderLib_Helper_Temp_HighestPlayerLevel(_Level)
+THEN
+CharacterLevelUpTo(_Char, _Level);
 
 IF
 CharacterLeveledUp(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a)
