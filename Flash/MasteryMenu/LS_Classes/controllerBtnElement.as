@@ -42,7 +42,6 @@ package LS_Classes
 			addChild(this.icon_mc);
 			this.text_txt = new TextField();
 			addChild(this.text_txt);
-			trace("[LLWEAPONEX] Trying to get $Title");
 			var _loc1_:Class = getDefinitionByName("$Title") as Class;
 			var _loc2_:Font = new _loc1_();
 			var _loc3_:TextFormat = this.text_txt.getTextFormat();
@@ -57,12 +56,12 @@ package LS_Classes
 			this.text_txt.filters = textEffect.createStrokeFilter(1050888,this.strokeW,1,1,9);
 		}
 		
-		public function setBtnHintState(enabled:Boolean) : *
+		public function setBtnHintState(param1:Boolean) : *
 		{
-			this.btnEnabled = enabled;
-			var textFormatter:TextFormat = this.text_txt.getTextFormat();
-			textFormatter.color = !!this.btnEnabled?16777215:11444117;
-			this.text_txt.setTextFormat(textFormatter);
+			this.btnEnabled = param1;
+			var _loc2_:TextFormat = this.text_txt.getTextFormat();
+			_loc2_.color = !!this.btnEnabled?16777215:11444117;
+			this.text_txt.setTextFormat(_loc2_);
 			alpha = !!this.btnEnabled?Number(1):Number(0.7);
 		}
 		
@@ -72,11 +71,11 @@ package LS_Classes
 			this.icon_mc.setHintIcon(this.iconId);
 			this.btnEnabled = enabled;
 			this.text_txt.htmlText = text;
-			var textWidth:Number = this.text_txt.textWidth;
-			var actualTextWidth:Number = textHelpers.getLongestWordLength(this.text_txt);
+			var _loc5_:Number = this.text_txt.textWidth;
+			var _loc6_:Number = textHelpers.getLongestWordLength(this.text_txt);
 			if(this.text_txt.textWidth > maxTextWidth)
 			{
-				textWidth = actualTextWidth > maxTextWidth?Number(actualTextWidth):Number(maxTextWidth);
+				_loc5_ = _loc6_ > maxTextWidth?Number(_loc6_):Number(maxTextWidth);
 				this.text_txt.multiline = true;
 				this.text_txt.wordWrap = true;
 			}
@@ -85,9 +84,9 @@ package LS_Classes
 				this.text_txt.multiline = false;
 				this.text_txt.wordWrap = false;
 			}
-			var strokePadding:Number = Math.round(this.strokeW) * 2;
-			this.text_txt.width = Math.ceil(textWidth + strokePadding);
-			this.text_txt.width = Math.ceil(this.text_txt.textWidth + strokePadding);
+			var _loc7_:Number = Math.round(this.strokeW) * 2;
+			this.text_txt.width = Math.ceil(_loc5_ + _loc7_);
+			this.text_txt.width = Math.ceil(this.text_txt.textWidth + _loc7_);
 			this.text_txt.y = -Math.round(this.text_txt.textHeight * 0.5) - 2;
 			this.iconY = this.icon_mc.y = -Math.round(this.icon_mc.height * 0.5);
 			this.text_txt.x = this.icon_mc.x + this.icon_mc.width + 3;

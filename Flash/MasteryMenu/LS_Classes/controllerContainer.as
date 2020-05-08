@@ -40,19 +40,19 @@ package LS_Classes
 			super();
 		}
 		
-		public function addBtnHint(id:Number, hintText:String, iconId:Number, maxTextWidth:Number = 110, buttonState:* = true) : MovieClip
+		public function addBtnHint(param1:Number, param2:String, param3:Number, param4:Number = 110, param5:* = true) : MovieClip
 		{
-			var buttonElement:MovieClip = getElementByNumber("id",id);
-			if(!buttonElement)
+			var _loc6_:MovieClip = getElementByNumber("id",param1);
+			if(!_loc6_)
 			{
-				buttonElement = new controllerBtnElement();
-				buttonElement.id = id;
-				buttonElement.setBtnHintState(buttonState);
-				addElement(buttonElement);
+				_loc6_ = new controllerBtnElement();
+				_loc6_.id = param1;
+				_loc6_.setBtnHintState(param5);
+				addElement(_loc6_);
 			}
-			if(buttonElement)
+			if(_loc6_)
 			{
-				buttonElement.setBtnHint(hintText,iconId,maxTextWidth,buttonState);
+				_loc6_.setBtnHint(param2,param3,param4,param5);
 				if(this.containerMaxWidth > 0)
 				{
 					this.recalculateButtonsWidth();
@@ -63,7 +63,7 @@ package LS_Classes
 			{
 				ExternalInterface.call("UIAssert","addBtnHint failed again because the flash exporter is CRAP");
 			}
-			return buttonElement;
+			return _loc6_;
 		}
 		
 		public function recenterTabs() : *

@@ -11,8 +11,6 @@ package LS_Classes
 	
 	public class listDisplay extends MovieClip
 	{
-		 
-		
 		public var content_array:Array;
 		
 		public var scrollHit_mc:MovieClip;
@@ -156,15 +154,15 @@ package LS_Classes
 		
 		protected function updateScrollHit() : *
 		{
-			var _loc1_:Sprite = null;
+			var scrollSprite:Sprite = null;
 			if(this.scrollHit_mc.numChildren == 0)
 			{
-				_loc1_ = new Sprite();
-				_loc1_.graphics.lineStyle(1,16777215);
-				_loc1_.graphics.beginFill(16777215);
-				_loc1_.graphics.drawRect(0,0,100,100);
-				_loc1_.graphics.endFill();
-				this.scrollHit_mc.addChild(_loc1_);
+				scrollSprite = new Sprite();
+				scrollSprite.graphics.lineStyle(1,16777215);
+				scrollSprite.graphics.beginFill(16777215);
+				scrollSprite.graphics.drawRect(0,0,100,100);
+				scrollSprite.graphics.endFill();
+				this.scrollHit_mc.addChild(scrollSprite);
 			}
 			this.scrollHit_mc.width = this.width;
 			this.scrollHit_mc.height = this.height;
@@ -189,48 +187,48 @@ package LS_Classes
 			return this.m_positionInvisibleElements;
 		}
 		
-		public function set canPositionInvisibleElements(param1:Boolean) : *
+		public function set canPositionInvisibleElements(b:Boolean) : *
 		{
-			if(this.m_positionInvisibleElements != param1)
+			if(this.m_positionInvisibleElements != b)
 			{
-				this.m_positionInvisibleElements = param1;
+				this.m_positionInvisibleElements = b;
 				this.positionElements();
 			}
 		}
 		
-		public function getElement(param1:Number) : MovieClip
+		public function getElement(index:Number) : MovieClip
 		{
-			if(param1 >= 0 && param1 < this.content_array.length)
+			if(index >= 0 && index < this.content_array.length)
 			{
-				return this.content_array[param1];
+				return this.content_array[index];
 			}
 			return null;
 		}
 		
-		public function getAt(param1:Number) : MovieClip
+		public function getAt(index:Number) : MovieClip
 		{
-			if(param1 >= 0 && param1 < this.content_array.length)
+			if(index >= 0 && index < this.content_array.length)
 			{
-				return this.content_array[param1];
+				return this.content_array[index];
 			}
 			return null;
 		}
 		
-		public function getElementByListID(param1:Number) : MovieClip
+		public function getElementByListID(index:Number) : MovieClip
 		{
-			if(param1 == -1)
+			if(index == -1)
 			{
 				return null;
 			}
-			var _loc2_:uint = 0;
-			while(_loc2_ < this.content_array.length)
+			var i:uint = 0;
+			while(i < this.content_array.length)
 			{
-				if(this.content_array[_loc2_] && this.content_array[_loc2_].hasOwnProperty("list_id") && this.content_array[_loc2_].list_id == param1)
+				if(this.content_array[i] && this.content_array[i].hasOwnProperty("list_id") && this.content_array[i].list_id == index)
 				{
-					this.content_array[_loc2_].list_pos = _loc2_;
-					return this.content_array[_loc2_];
+					this.content_array[i].list_pos = i;
+					return this.content_array[i];
 				}
-				_loc2_++;
+				i++;
 			}
 			return null;
 		}
@@ -389,31 +387,31 @@ package LS_Classes
 			{
 				this.INTSort();
 			}
-			var lastY:Number = this.m_topSpacing;
+			var _loc1_:Number = this.m_topSpacing;
 			this.m_visibleLength = 0;
-			var index:uint = 0;
-			while(index < this.content_array.length)
+			var _loc2_:uint = 0;
+			while(_loc2_ < this.content_array.length)
 			{
-				if(this.content_array[index].visible || this.canPositionInvisibleElements)
+				if(this.content_array[_loc2_].visible || this.canPositionInvisibleElements)
 				{
-					this.content_array[index].list_pos = index;
-					this.content_array[index].y = lastY;
-					this.content_array[index].tweenToY = lastY;
-					if(this.content_array[index].INTUpd4PosEl != null)
+					this.content_array[_loc2_].list_pos = _loc2_;
+					this.content_array[_loc2_].y = _loc1_;
+					this.content_array[_loc2_].tweenToY = _loc1_;
+					if(this.content_array[_loc2_].INTUpd4PosEl != null)
 					{
-						this.content_array[index].INTUpd4PosEl();
+						this.content_array[_loc2_].INTUpd4PosEl();
 					}
-					lastY = lastY + (this.getElementHeight(this.content_array[index]) + this.EL_SPACING);
+					_loc1_ = _loc1_ + (this.getElementHeight(this.content_array[_loc2_]) + this.EL_SPACING);
 					if(this.m_sideSpacing != 0)
 					{
-						this.content_array[index].x = this.SIDE_SPACING;
+						this.content_array[_loc2_].x = this.SIDE_SPACING;
 					}
-					if(this.content_array[index].visible)
+					if(this.content_array[_loc2_].visible)
 					{
 						this.m_visibleLength++;
 					}
 				}
-				index++;
+				_loc2_++;
 			}
 			if(this.m_NeedsSorting)
 			{
@@ -436,18 +434,18 @@ package LS_Classes
 			return _loc2_;
 		}
 		
-		public function getElementHeight(obj:MovieClip) : Number
+		public function getElementHeight(param1:MovieClip) : Number
 		{
-			var height:Number = obj.height;
-			if(obj.heightOverride != undefined && !isNaN(obj.heightOverride))
+			var _loc2_:Number = param1.height;
+			if(param1.heightOverride != undefined && !isNaN(param1.heightOverride))
 			{
-				height = obj.heightOverride;
+				_loc2_ = param1.heightOverride;
 			}
 			else if(this.m_customElementHeight != -1)
 			{
-				height = this.m_customElementHeight;
+				_loc2_ = this.m_customElementHeight;
 			}
-			return height;
+			return _loc2_;
 		}
 		
 		public function getContentHeight() : Number
@@ -560,24 +558,24 @@ package LS_Classes
 			}
 		}
 		
-		public function addElement(displayObj:DisplayObject, repositionElements:Boolean = true, selectable:Boolean = true) : *
+		public function addElement(param1:DisplayObject, param2:Boolean = true, param3:Boolean = true) : *
 		{
-			var elementMC:MovieClip = displayObj as MovieClip;
-			this.containerContent_mc.addChild(displayObj);
-			elementMC.list_pos = this.content_array.length;
-			this.content_array.push(elementMC);
-			displayObj.addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
-			elementMC.list_id = this.idInc++;
-			if(elementMC.deselectElement)
+			var _loc4_:MovieClip = param1 as MovieClip;
+			this.containerContent_mc.addChild(param1);
+			_loc4_.list_pos = this.content_array.length;
+			this.content_array.push(_loc4_);
+			param1.addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
+			_loc4_.list_id = this.idInc++;
+			if(_loc4_.deselectElement)
 			{
-				elementMC.deselectElement();
+				_loc4_.deselectElement();
 			}
-			elementMC.selectable = selectable;
-			elementMC.m_filteredObject = false;
+			_loc4_.selectable = param3;
+			_loc4_.m_filteredObject = false;
 			this.m_NeedsSorting = true;
 			this.reOrderDepths();
-			elementMC.ownerList = this;
-			if(repositionElements)
+			_loc4_.ownerList = this;
+			if(param2)
 			{
 				this.positionElements();
 			}
@@ -901,9 +899,9 @@ package LS_Classes
 			this.selectMC(_loc2_);
 		}
 		
-		public function selectMC(target:MovieClip, force:Boolean = false) : *
+		public function selectMC(param1:MovieClip, param2:Boolean = false) : *
 		{
-			if(this.m_CurrentSelection != target || force)
+			if(this.m_CurrentSelection != param1 || param2)
 			{
 				if(this.m_CurrentSelection)
 				{
@@ -916,17 +914,17 @@ package LS_Classes
 						this.m_CurrentSelection.INTDeselect();
 					}
 				}
-				if(target)
+				if(param1)
 				{
-					this.m_CurrentSelection = target;
+					this.m_CurrentSelection = param1;
 					dispatchEvent(new Event(Event.CHANGE));
 					if(this.OnSelectionChanged != null)
 					{
 						this.OnSelectionChanged();
 					}
-					if(target.selectElement)
+					if(param1.selectElement)
 					{
-						target.selectElement();
+						param1.selectElement();
 					}
 				}
 				else

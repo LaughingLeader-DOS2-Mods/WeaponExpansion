@@ -137,75 +137,75 @@ package LS_Classes
 		
 		private var m_frameHit_mc:MovieClip;
 		
-		public function scrollbar(downClassId:String = "down_id", upClassId:String = "up_id", handleClassId:String = "handle_id", bgClassId:String = "scrollBg_id", ffDownClassId:String = "", ffUpClassId:String = "")
+		public function scrollbar(param1:String = "down_id", param2:String = "up_id", param3:String = "handle_id", param4:String = "scrollBg_id", param5:String = "", param6:String = "")
 		{
-			var ffDownClass:Class = null;
-			var ffUpClass:Class = null;
+			var _loc13_:Class = null;
+			var _loc14_:Class = null;
 			this.m_scrollWheelTimer = new Timer(100);
 			super();
 			this.m_tweenY = 0;
-			var downClass:Class = downClassId == ""?MovieClip:getDefinitionByName(downClassId) as Class;
-			var upClass:Class = upClassId == ""?MovieClip:getDefinitionByName(upClassId) as Class;
-			var handleClass:Class = getDefinitionByName(handleClassId) as Class;
-			var bgClass:Class = getDefinitionByName(bgClassId) as Class;
-			this.m_down_mc = new downClass();
-			this.m_up_mc = new upClass();
-			this.m_handle_mc = new handleClass();
-			this.m_bg_mc = new bgClass();
+			var _loc7_:Class = param1 == ""?MovieClip:getDefinitionByName(param1) as Class;
+			var _loc8_:Class = param2 == ""?MovieClip:getDefinitionByName(param2) as Class;
+			var _loc9_:Class = getDefinitionByName(param3) as Class;
+			var _loc10_:Class = getDefinitionByName(param4) as Class;
+			this.m_down_mc = new _loc7_();
+			this.m_up_mc = new _loc8_();
+			this.m_handle_mc = new _loc9_();
+			this.m_bg_mc = new _loc10_();
 			this.m_scrollWheelTimer.addEventListener(TimerEvent.TIMER,this.onScrollWheelTimer);
 			addChild(this.m_bg_mc);
 			this.m_frameHit_mc = new MovieClip();
-			var frameHitSprite:Sprite = new Sprite();
-			frameHitSprite.graphics.lineStyle(0,16777215);
-			frameHitSprite.graphics.beginFill(16777215);
-			frameHitSprite.graphics.drawRect(0,0,10,10);
-			frameHitSprite.graphics.endFill();
-			this.m_frameHit_mc.addChild(frameHitSprite);
-			frameHitSprite.alpha = 0;
+			var _loc11_:Sprite = new Sprite();
+			_loc11_.graphics.lineStyle(0,16777215);
+			_loc11_.graphics.beginFill(16777215);
+			_loc11_.graphics.drawRect(0,0,10,10);
+			_loc11_.graphics.endFill();
+			this.m_frameHit_mc.addChild(_loc11_);
+			_loc11_.alpha = 0;
 			addChild(this.m_frameHit_mc);
 			addChild(this.m_handle_mc);
 			addChild(this.m_up_mc);
 			addChild(this.m_down_mc);
-			var bgWidth:Number = this.m_bg_mc.width;
-			if(bgWidth < this.m_up_mc.width)
+			var _loc12_:Number = this.m_bg_mc.width;
+			if(_loc12_ < this.m_up_mc.width)
 			{
-				bgWidth = this.m_up_mc.width;
+				_loc12_ = this.m_up_mc.width;
 			}
-			if(bgWidth < this.m_down_mc.width)
+			if(_loc12_ < this.m_down_mc.width)
 			{
-				bgWidth = this.m_down_mc.width;
+				_loc12_ = this.m_down_mc.width;
 			}
-			if(bgWidth < this.m_handle_mc.width)
+			if(_loc12_ < this.m_handle_mc.width)
 			{
-				bgWidth = this.m_handle_mc.width;
+				_loc12_ = this.m_handle_mc.width;
 			}
-			this.m_bg_mc.x = Math.round((bgWidth - this.m_bg_mc.width) * 0.5);
-			this.m_up_mc.x = Math.round((bgWidth - this.m_up_mc.width) * 0.5);
-			this.m_down_mc.x = Math.round((bgWidth - this.m_down_mc.width) * 0.5);
-			this.m_handle_mc.x = Math.round((bgWidth - this.m_handle_mc.width) * 0.5);
-			this.m_frameHit_mc.width = bgWidth;
-			if(ffDownClassId != "")
+			this.m_bg_mc.x = Math.round((_loc12_ - this.m_bg_mc.width) * 0.5);
+			this.m_up_mc.x = Math.round((_loc12_ - this.m_up_mc.width) * 0.5);
+			this.m_down_mc.x = Math.round((_loc12_ - this.m_down_mc.width) * 0.5);
+			this.m_handle_mc.x = Math.round((_loc12_ - this.m_handle_mc.width) * 0.5);
+			this.m_frameHit_mc.width = _loc12_;
+			if(param5 != "")
 			{
-				ffDownClass = getDefinitionByName(ffDownClassId) as Class;
-				this.m_FFdown_mc = new ffDownClass();
+				_loc13_ = getDefinitionByName(param5) as Class;
+				this.m_FFdown_mc = new _loc13_();
 				addChild(this.m_FFdown_mc);
 				this.m_FFdown_mc.addEventListener("mouseUp",this.onUp);
 				this.m_FFdown_mc.addEventListener("mouseDown",this.ffDownDown);
 				this.m_FFdown_mc.addEventListener("mouseOut",this.onOut);
 				this.m_FFdown_mc.addEventListener("mouseOver",this.onOver);
-				this.m_FFdown_mc.x = Math.round((bgWidth - this.m_FFdown_mc.width) * 0.5);
+				this.m_FFdown_mc.x = Math.round((_loc12_ - this.m_FFdown_mc.width) * 0.5);
 				this.m_ffDownH = this.m_FFdown_mc.height;
 			}
-			if(ffUpClassId != "")
+			if(param6 != "")
 			{
-				ffUpClass = getDefinitionByName(ffUpClassId) as Class;
-				this.m_FFup_mc = new ffUpClass();
+				_loc14_ = getDefinitionByName(param6) as Class;
+				this.m_FFup_mc = new _loc14_();
 				addChild(this.m_FFup_mc);
 				this.m_FFup_mc.addEventListener("mouseUp",this.onUp);
 				this.m_FFup_mc.addEventListener("mouseDown",this.ffUpDown);
 				this.m_FFup_mc.addEventListener("mouseOut",this.onOut);
 				this.m_FFup_mc.addEventListener("mouseOver",this.onOver);
-				this.m_FFup_mc.x = Math.round((bgWidth - this.m_FFup_mc.width) * 0.5);
+				this.m_FFup_mc.x = Math.round((_loc12_ - this.m_FFup_mc.width) * 0.5);
 				this.m_ffUpH = this.m_FFup_mc.height;
 			}
 			this.m_down_mc.addEventListener("mouseDown",this.downDown);
@@ -642,11 +642,11 @@ package LS_Classes
 				_loc2_ = this.m_content_mc.scrollRect;
 				if(this.m_scrolledY <= 0)
 				{
-					this.scrollTo(0,!!param1?false:Boolean(this.m_animateScrolling));
+					this.scrollTo(0,!!param1?Boolean(false):Boolean(this.m_animateScrolling));
 				}
 				else if(this.m_scrolledY > this.getContDiff())
 				{
-					this.scrollTo(this.getContDiff(),!!param1?false:Boolean(this.m_animateScrolling));
+					this.scrollTo(this.getContDiff(),!!param1?Boolean(false):Boolean(this.m_animateScrolling));
 				}
 			}
 		}
@@ -677,42 +677,42 @@ package LS_Classes
 			}
 		}
 		
-		public function scrollTo(startY:Number, animate:Boolean = false, roundScrollVal:Boolean = false) : Boolean
+		public function scrollTo(param1:Number, param2:Boolean = false, param3:Boolean = false) : Boolean
 		{
-			var scrollNormalized:Number = NaN;
-			var tweenTime:Number = NaN;
+			var _loc6_:Number = NaN;
+			var _loc7_:Number = NaN;
 			if(this.m_disabled || !this.m_noContent && (!this.m_content_mc || this.m_content_mc.scrollRect == null))
 			{
 				return false;
 			}
-			var scrollY:Number = startY;
-			var scrollDiff:Number = this.getContDiff();
-			if(scrollDiff < 0)
+			var _loc4_:Number = param1;
+			var _loc5_:Number = this.getContDiff();
+			if(_loc5_ < 0)
 			{
-				scrollDiff = 0;
+				_loc5_ = 0;
 			}
-			if(scrollY <= 0)
+			if(_loc4_ <= 0)
 			{
-				scrollY = 0;
+				_loc4_ = 0;
 			}
 			else
 			{
-				scrollNormalized = this.m_NormalizeValue == -1?Number(this.m_SCROLLSPEED):Number(this.m_NormalizeValue);
-				if(this.scrolledY < scrollY && scrollY > scrollDiff - scrollNormalized * 0.1)
+				_loc6_ = this.m_NormalizeValue == -1?Number(this.m_SCROLLSPEED):Number(this.m_NormalizeValue);
+				if(this.scrolledY < _loc4_ && _loc4_ > _loc5_ - _loc6_ * 0.1)
 				{
-					scrollY = scrollDiff;
-					roundScrollVal = false;
-					if(this.m_scrollAnimToY == scrollY || this.scrolledY == scrollY)
+					_loc4_ = _loc5_;
+					param3 = false;
+					if(this.m_scrollAnimToY == _loc4_ || this.scrolledY == _loc4_)
 					{
 						return false;
 					}
 				}
-				if(roundScrollVal)
+				if(param3)
 				{
-					scrollY = Math.round(scrollY / scrollNormalized) * scrollNormalized;
+					_loc4_ = Math.round(_loc4_ / _loc6_) * _loc6_;
 				}
 			}
-			if(animate)
+			if(param2)
 			{
 				this.m_tweenY = this.m_scrolledY;
 				if(this.m_movementTimeline)
@@ -723,15 +723,15 @@ package LS_Classes
 						this.m_movementTimeline.onComplete = null;
 					}
 				}
-				tweenTime = this.m_currentScrollDelay * 0.001;
-				this.m_movementTimeline = new larTween(this,"m_tweenY",Linear.easeNone,this.m_tweenY,scrollY,tweenTime,this.INTMoveDone);
+				_loc7_ = this.m_currentScrollDelay * 0.001;
+				this.m_movementTimeline = new larTween(this,"m_tweenY",Linear.easeNone,this.m_tweenY,_loc4_,_loc7_,this.INTMoveDone);
 				this.m_movementTimeline.onUpdate = this.INTUpdatePos;
 			}
 			else
 			{
-				this.scrolledY = scrollY;
+				this.scrolledY = _loc4_;
 			}
-			this.m_scrollAnimToY = Math.round(scrollY);
+			this.m_scrollAnimToY = Math.round(_loc4_);
 			return true;
 		}
 		
@@ -937,7 +937,7 @@ package LS_Classes
 			}
 		}
 		
-		public function onOver(param1:Event) : *
+		function onOver(param1:Event) : *
 		{
 			var _loc2_:MovieClip = param1.currentTarget as MovieClip;
 			if(!this.m_disabled)
@@ -947,7 +947,7 @@ package LS_Classes
 			}
 		}
 		
-		public function onOut(param1:Event) : *
+		function onOut(param1:Event) : *
 		{
 			var _loc2_:MovieClip = param1.currentTarget as MovieClip;
 			if(!this.m_disabled)

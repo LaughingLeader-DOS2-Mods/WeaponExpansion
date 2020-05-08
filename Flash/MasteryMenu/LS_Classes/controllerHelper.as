@@ -73,136 +73,136 @@ package LS_Classes
 			super();
 		}
 		
-		public static function getIconClassName(buttonId:uint, showBig:Boolean = false) : String
+		public static function getIconClassName(param1:uint, param2:Boolean = false) : String
 		{
-			var iconName:String = "";
-			switch(buttonId)
+			var _loc3_:String = "";
+			switch(param1)
 			{
 				case BTN_B:
-					if(showBig)
+					if(param2)
 					{
-						iconName = "iconBigCircle";
+						_loc3_ = "iconBigCircle";
 					}
 					else
 					{
-						iconName = "iconCircle";
+						_loc3_ = "iconCircle";
 					}
 					break;
 				case BTN_A:
-					if(showBig)
+					if(param2)
 					{
-						iconName = "iconBigCross";
+						_loc3_ = "iconBigCross";
 					}
 					else
 					{
-						iconName = "iconCross";
+						_loc3_ = "iconCross";
 					}
 					break;
 				case BTN_X:
-					iconName = "iconSquare";
+					_loc3_ = "iconSquare";
 					break;
 				case BTN_Y:
-					iconName = "iconTriangle";
+					_loc3_ = "iconTriangle";
 					break;
 				case BTN_LT:
-					iconName = "iconLT";
+					_loc3_ = "iconLT";
 					break;
 				case BTN_RT:
-					iconName = "iconRT";
+					_loc3_ = "iconRT";
 					break;
 				case BTN_StickLeft:
-					iconName = "iconStickLeft";
+					_loc3_ = "iconStickLeft";
 					break;
 				case BTN_StickRight:
-					iconName = "iconStickRight";
+					_loc3_ = "iconStickRight";
 					break;
 				case BTN_StickLeft_up:
-					iconName = "iconStickLeft_up";
+					_loc3_ = "iconStickLeft_up";
 					break;
 				case BTN_StickLeft_down:
-					iconName = "iconStickLeft_down";
+					_loc3_ = "iconStickLeft_down";
 					break;
 				case BTN_StickLeft_left:
-					iconName = "iconStickLeft_left";
+					_loc3_ = "iconStickLeft_left";
 					break;
 				case BTN_StickLeft_right:
-					iconName = "iconStickLeft_right";
+					_loc3_ = "iconStickLeft_right";
 					break;
 				case BTN_StickLeft_horiz:
-					iconName = "iconStickLeft_horiz";
+					_loc3_ = "iconStickLeft_horiz";
 					break;
 				case BTN_StickLeft_vert:
-					iconName = "iconStickLeft_vert";
+					_loc3_ = "iconStickLeft_vert";
 					break;
 				case BTN_StickRight_up:
-					iconName = "iconStickRight_up";
+					_loc3_ = "iconStickRight_up";
 					break;
 				case BTN_StickRight_down:
-					iconName = "iconStickRight_down";
+					_loc3_ = "iconStickRight_down";
 					break;
 				case BTN_StickRight_left:
-					iconName = "iconStickRight_left";
+					_loc3_ = "iconStickRight_left";
 					break;
 				case BTN_StickRight_right:
-					iconName = "iconStickRight_right";
+					_loc3_ = "iconStickRight_right";
 					break;
 				case BTN_StickRight_horiz:
-					iconName = "iconStickRight_horiz";
+					_loc3_ = "iconStickRight_horiz";
 					break;
 				case BTN_StickRight_vert:
-					iconName = "iconStickRight_vert";
+					_loc3_ = "iconStickRight_vert";
 					break;
 				case BTN_DPad_up:
-					iconName = "iconDpad_up";
+					_loc3_ = "iconDpad_up";
 					break;
 				case BTN_DPad_down:
-					iconName = "iconDpad_down";
+					_loc3_ = "iconDpad_down";
 					break;
 				case BTN_DPad_left:
-					iconName = "iconDpad_left";
+					_loc3_ = "iconDpad_left";
 					break;
 				case BTN_DPad_right:
-					iconName = "iconDpad_right";
+					_loc3_ = "iconDpad_right";
 					break;
 				case BTN_DPad_horiz:
-					iconName = "iconDpad_horiz";
+					_loc3_ = "iconDpad_horiz";
 					break;
 				case BTN_DPad_vert:
-					iconName = "iconDpad_vert";
+					_loc3_ = "iconDpad_vert";
 					break;
 				case BTN_Back:
-					iconName = "iconBack";
+					_loc3_ = "iconBack";
 					break;
 				case BTN_Start:
-					iconName = "iconStart";
+					_loc3_ = "iconStart";
 					break;
 				case BTN_StickLeft_press:
-					iconName = "iconStickLeft_press";
+					_loc3_ = "iconStickLeft_press";
 					break;
 				case BTN_StickRight_press:
-					iconName = "iconStickRight_press";
+					_loc3_ = "iconStickRight_press";
 					break;
 				case BTN_LB:
-					iconName = "iconLB";
+					_loc3_ = "iconLB";
 					break;
 				case BTN_RB:
-					iconName = "iconRB";
+					_loc3_ = "iconRB";
 			}
-			return iconName;
+			return _loc3_;
 		}
 		
-		public static function getIconHLClassName(buttonId:uint, showBig:Boolean = false) : String
+		public static function getIconHLClassName(param1:uint, param2:Boolean = false) : String
 		{
-			var iconName:String = "";
-			switch(buttonId)
+			var _loc3_:String = "";
+			switch(param1)
 			{
 				case BTN_LT:
-					iconName = "iconLTHL";
+					_loc3_ = "iconLTHL";
 					break;
 				case BTN_RT:
-					iconName = "iconRTHL";
+					_loc3_ = "iconRTHL";
 			}
-			return iconName;
+			return _loc3_;
 		}
 	}
 }

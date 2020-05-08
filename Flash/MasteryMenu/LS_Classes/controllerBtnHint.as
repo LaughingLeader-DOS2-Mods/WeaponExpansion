@@ -20,32 +20,31 @@ package LS_Classes
 			addChild(this.iconHL_mc);
 		}
 		
-		public function setHintIcon(buttonId:Number, showBig:Boolean = false) : *
+		public function setHintIcon(param1:Number, param2:Boolean = false) : *
 		{
-			var iconMC:MovieClip = null;
-			var hlcIconMC:MovieClip = null;
-			var iconClass:Class = null;
-			var hlcIconClass:Class = null;
-			var hlcIconName:String = controllerHelper.getIconHLClassName(buttonId,showBig);
-			var iconName:String = controllerHelper.getIconClassName(buttonId,showBig);
-			trace("[LLWEAPONEX] Trying to get icons " + iconName + " | " + hlcIconName);
-			if(!iconMC && iconName != "")
+			var _loc5_:MovieClip = null;
+			var _loc6_:MovieClip = null;
+			var _loc7_:Class = null;
+			var _loc8_:Class = null;
+			var _loc3_:String = controllerHelper.getIconHLClassName(param1,param2);
+			var _loc4_:String = controllerHelper.getIconClassName(param1,param2);
+			if(!_loc5_ && _loc4_ != "")
 			{
-				iconClass = getDefinitionByName(iconName) as Class;
-				iconMC = new iconClass();
+				_loc7_ = getDefinitionByName(_loc4_) as Class;
+				_loc5_ = new _loc7_();
 			}
-			if(iconMC)
+			if(_loc5_)
 			{
-				this.icon_mc.addChild(iconMC);
+				this.icon_mc.addChild(_loc5_);
 			}
-			if(!hlcIconMC && hlcIconName != "")
+			if(!_loc6_ && _loc3_ != "")
 			{
-				hlcIconClass = getDefinitionByName(hlcIconName) as Class;
-				hlcIconMC = new hlcIconClass();
+				_loc8_ = getDefinitionByName(_loc3_) as Class;
+				_loc6_ = new _loc8_();
 			}
-			if(hlcIconMC)
+			if(_loc6_)
 			{
-				this.iconHL_mc.addChild(hlcIconMC);
+				this.iconHL_mc.addChild(_loc6_);
 			}
 			this.iconHL_mc.visible = false;
 		}
