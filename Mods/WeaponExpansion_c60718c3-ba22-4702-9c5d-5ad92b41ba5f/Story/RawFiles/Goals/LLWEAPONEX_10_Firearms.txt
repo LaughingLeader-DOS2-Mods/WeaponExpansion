@@ -8,28 +8,7 @@ KBSECTION
 PROC
 LLWEAPONEX_Firearms_InitSettings()
 THEN
-SysClear("DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage", 3);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_01", 0.0, 2.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_02", 2.0, 3.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_03", 3.0, 4.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_04", 4.0, 5.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_05", 5.0, 6.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_06", 6.0, 7.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_07", 7.0, 8.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_08", 8.0, 9.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_09", 9.0, 10.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_10", 10.0, 11.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_11", 11.0, 12.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_12", 12.0, 13.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_13", 13.0, 14.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_14", 14.0, 15.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_15", 15.0, 16.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_16", 16.0, 17.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_17", 17.0, 18.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_18", 18.0, 19.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_19", 19.0, 20.0);
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage("LLWEAPONEX_FIREARM_AIMEDSHOT_DAMAGE_20", 20.0, 999.0);
-
+SysClear("DB_LLWEAPONEX_Firearms_RangerReplacementSkills", 3);
 DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_Multishot", "Projectile_LLWEAPONEX_Firearm_Multishot", 1);
 DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_EnemyMultishot", "Projectile_LLWEAPONEX_Firearm_Multishot_Enemy", 0);
 DB_LLWEAPONEX_Firearms_RangerReplacementSkills("Projectile_SkyShot", "Projectile_LLWEAPONEX_Firearm_SkyShot", 1);
@@ -102,33 +81,6 @@ IF
 ItemTemplateEquipped("WPN_LLWEAPONEX_Firearm_2H_Rifle_B_068246d7-b4cc-4b6d-9ac8-716fdfd1822d", _Char)
 THEN
 ObjectSetFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 0);
-//END_REGION
-
-//REGION AIMED_SHOT_DISTANCE_DAMAGE
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_FIREARM_AIMEDSHOT_HIT", (CHARACTERGUID)_Char)
-AND
-GetPosition(_Target, _x, _y, _z)
-THEN
-LLWEAPONEX_Firearms_AimedShot_ApplyDistanceDamage(_Char, (GUIDSTRING)_Target);
-
-IF
-ItemStatusChange(_Target, "LLWEAPONEX_FIREARM_AIMEDSHOT_HIT", (CHARACTERGUID)_Char)
-THEN
-LLWEAPONEX_Firearms_AimedShot_ApplyDistanceDamage(_Char, (GUIDSTRING)_Target);
-
-PROC
-LLWEAPONEX_Firearms_AimedShot_ApplyDistanceDamage((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-AND
-GetDistanceTo(_Char, _Target, _Dist)
-AND
-DB_LLWEAPONEX_Firearms_AimedShot_DistanceDamage(_Status, _Min, _Max)
-AND
-_Dist >= _Min
-AND
-_Dist < _Max
-THEN
-ApplyStatus(_Target, _Status, 0.0, 1, _Char);
 //END_REGION
 
 //REGION AIMED_SHOT_BONUSES
