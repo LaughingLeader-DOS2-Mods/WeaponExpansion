@@ -123,7 +123,6 @@ local function LoadExperienceVariables()
 	Mastery.Variables.RankVariables = RankVariables
 end
 
-local function SessionLoading()
-	LoadExperienceVariables()
-end
-Ext.RegisterListener("SessionLoading", SessionLoading)
+--Ext.RegisterListener("SessionLoading", LoadExperienceVariables)
+Ext.RegisterListener("ModuleResume", LoadExperienceVariables) -- Lua Reset
+Ext.RegisterListener("SessionLoaded", LoadExperienceVariables)
