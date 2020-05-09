@@ -4,7 +4,8 @@ INITSECTION
 
 KBSECTION
 //REGION EXPERIENCE
-//Basic attack & weapon skill gains
+/*
+// Basic attack & weapon skill gains
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_WEAPONMASTERY_EXPERIENCE", (CHARACTERGUID)_Player)
 AND
@@ -12,10 +13,8 @@ LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 0.50);
 
-/*
-To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
-Additionally, Runeblades gain less experience since it's standard to dual-wield them.
-*/
+// To reduce tooltip description lengths, the Runeblade apply status works as a mastery experience status
+// Additionally, Runeblades gain less experience since it's standard to dual-wield them.
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", (CHARACTERGUID)_Player)
 AND
@@ -23,13 +22,14 @@ LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, 0.50);
 
-//ArmCannon == Runic Cannon, a.k.a. rune weapon with fleeting ranged advantages
+// ArmCannon == Runic Cannon, a.k.a. rune weapon with fleeting ranged advantages
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Player)
 AND
 LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
 THEN
 LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Runeblade", 0.50);
+*/
 //END_REGION
 
 //REGION PISTOL_MASTERY_XP
