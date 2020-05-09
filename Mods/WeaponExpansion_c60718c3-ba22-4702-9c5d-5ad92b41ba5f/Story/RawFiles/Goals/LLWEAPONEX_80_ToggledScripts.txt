@@ -4,21 +4,7 @@ INITSECTION
 LLWEAPONEX_ToggleSettings_RegisterScripts();
 KBSECTION
 
-//REGION SETTINGS
-PROC
-LLWEAPONEX_ToggleSettings_RegisterScripts()
-THEN
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_DualShields", "LLWEAPONEX_DualShields", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Greatbow", "LLWEAPONEX_Greatbow", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_HandCrossbow", "LLWEAPONEX_HandCrossbow", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Katana", "LLWEAPONEX_Katana", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Rapier", "LLWEAPONEX_Rapier", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Dagger", "LLWEAPONEX_Dagger", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Runeblade", "LLWEAPONEX_Runeblade", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Firearms", "LLWEAPONEX_Firearm", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Throwing", "LLWEAPONEX_ThrowingAbility", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX", 0);
-
+//REGION UNSHEATHED_FX
 PROC
 LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 AND
@@ -43,14 +29,19 @@ THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_CustomUnsheathedFX", "WeaponExpansion", 250);
 //END_REGION
 
-//REGION UNIQUE_SCRIPTS
+//REGION REGISTER_SCRIPTS
 PROC
 LLWEAPONEX_ToggleSettings_RegisterScripts()
 THEN
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_00_MasteryActive", "LLWEAPONEX_MasterySystemActive");
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_00_ExtenderSkillRefreshing", "LeaderLib_ExtenderIsActive");
 
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_02_ThrowingListener", "LLWEAPONEX_ListenForThrowingSkill", 0);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Greatbow", "LLWEAPONEX_Greatbow", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Rapier", "LLWEAPONEX_Rapier", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Firearms", "LLWEAPONEX_Firearm", 1);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX", 0);
+
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_02_ThrowingListener", "LLWEAPONEX_ListenForThrowingSkill", 0, 1);
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_08_Quivers", "LLWEAPONEX_QuiverEquipped", 0);
 
@@ -74,8 +65,11 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_ShieldCover_C
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_UnrelentingRage", "LLWEAPONEX_UnrelentingRage_Active", 0);
 
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_20_ListenForTurnEnding", "LLWEAPONEX_ListenForTurnEnding", 0, 1);
+
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive");
+LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive", 1);
+
 //END_REGION
 
 //REGION UPDATES

@@ -218,7 +218,7 @@ function IsPlayer(uuid)
 end
 
 function IsPlayerQRY(uuid)
-    if CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) then
+    if CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1 then
         return 1
     end
     return 0

@@ -20,47 +20,6 @@ THEN
 LLWEAPONEX_Greatbows_StartPlayingPreparationEffect(_Character, _Template);
 LLWEAPONEX_Greatbows_OnAttackAtPosition(_Character, _Template, _x, _y, _z);
 
-//REGION OMNIBOLT
-IF
-CharacterUsedSkillOnTarget(_Character, _Target, "Projectile_SkyShot", _, _)
-AND
-CharacterGetEquippedWeapon(_Character, _Greatbow)
-AND
-GetTemplate(_Greatbow, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8")
-THEN
-DB_LLWEAPONEX_Greatbows_Temp_SkyShotProc(_Character, _Target, "Projectile_SkyShot");
-
-IF
-CharacterUsedSkillOnTarget(_Character, _Target, "Projectile_EnemySkyShot", _, _)
-AND
-CharacterGetEquippedWeapon(_Character, _Greatbow)
-AND
-GetTemplate(_Greatbow, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8")
-THEN
-DB_LLWEAPONEX_Greatbows_Temp_SkyShotProc(_Character, _Target, "Projectile_EnemySkyShot");
-
-IF
-SkillCast(_Character, _Skill, _, _)
-AND
-DB_LLWEAPONEX_Greatbows_Temp_SkyShotProc(_Character, _Target, _Skill)
-THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_SkyShotProc(_Character, _Target, _Skill);
-LeaderLib_Timers_StartObjectObjectTimer(_Character, _Target, 800, "LLWEAPONEX_Timers_Greatbows_OmniboltProc", "LLWEAPONEX_Greatbows_ProcOmniBolt");
-//END_REGION
-
-//REGION CUSHION_FORCE_LANDING
-IF
-CharacterStatusRemoved(_Target, "SHOCKWAVE", _)
-AND
-DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z)
-AND
-GetPosition(_Target, _tx, _ty, _tz)
-THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z);
-DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz);
-ProcObjectTimerCancel(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling");
-ProcObjectTimer(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling", 60);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

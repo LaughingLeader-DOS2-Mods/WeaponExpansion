@@ -48,3 +48,44 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedSh
 -- end
 
 -- OnTimerFinished["Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus"] = CheckAimedShotBonus
+
+local function SkyShot(char, state, funcParams)
+	if state == SKILL_STATE.HIT and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
+		local weapon = CharacterGetEquippedWeapon(char)
+		if weapon ~= nil and GetTemplate(weapon) == "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8" then
+			local target = funcParams[1]
+			if target ~= nil then
+				LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
+			end
+		end
+	elseif state == SKILL_STATE.USED then
+		local weapon = CharacterGetEquippedWeapon(char)
+		if weapon ~= nil and GetTemplate(weapon) == "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8" then
+			-- Position
+			if #funcParams == 3 then
+				local x = funcParams[1]
+				local y = funcParams[2]
+				local z = funcParams[3]
+				SetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition", x,y,z)
+				ObjectSetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
+			elseif #funcParams == 1 then
+				ObjectClearFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
+			end
+		end
+	elseif state == SKILL_STATE.CAST then
+		Mods.LeaderLib.StartTimer("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
+	end
+end
+
+LeaderLib.RegisterSkillListener("Projectile_SkyShot", SkyShot)
+LeaderLib.RegisterSkillListener("Projectile_EnemySkyShot", SkyShot)
+
+local function ProcGreatbowLightningStrike(funcParams)
+	local char = funcParams[1]
+	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
+		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition")
+		LeaderLib.Game.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", x,y,z)
+	end
+end
+
+OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = ProcGreatbowLightningStrike

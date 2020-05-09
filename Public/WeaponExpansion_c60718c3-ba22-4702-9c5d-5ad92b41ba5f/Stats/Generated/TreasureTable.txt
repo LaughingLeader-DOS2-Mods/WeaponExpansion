@@ -1424,8 +1424,6 @@ object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
 
 new treasuretable "CheatBooksWater"
 CanMerge 1
-MinLevel "-19"
-MaxLevel "19"
 IgnoreLevelDiff 1
 new subtable "-1"
 object category "I_SKILLBOOK_LLWEAPONEX_WaterSpout",1,0,0,0,0,0,0,0
@@ -1453,8 +1451,6 @@ object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
 
 new treasuretable "CheatBooksWarrior"
 CanMerge 1
-MinLevel "-19"
-MaxLevel "19"
 IgnoreLevelDiff 1
 new subtable "-1"
 object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0

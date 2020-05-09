@@ -187,15 +187,14 @@ function DebugInit()
     end
 
     -- GameMaster_RewardChest_Small
-    local chest = CreateItemTemplateAtPosition("dca4ff7a-c916-4e3a-968c-54adef3b10e2", x, y, z)
-    GenerateTreasure(chest, "TEST_Generation", 16, host)
-    ContainerIdentifyAll(chest)
-    InventoryLaunchIterator(chest, "LLWEAPONEX_BoostConversion_SwapDeltaMods", "")
-    local tx,ty,tz = FindValidPosition(x,y,z,12.0,chest)
-    TeleportToPosition(chest, tx,ty,tz)
-    LeaderLib.PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
-
-    TeleportToRandomPosition(chest, 8.0, "")
+    --local chest = CreateItemTemplateAtPosition("dca4ff7a-c916-4e3a-968c-54adef3b10e2", x, y, z)
+    --GenerateTreasure(chest, "TEST_Generation", 16, host)
+    --ContainerIdentifyAll(chest)
+    --InventoryLaunchIterator(chest, "LLWEAPONEX_BoostConversion_SwapDeltaMods", "")
+    --local tx,ty,tz = FindValidPosition(x,y,z,12.0,chest)
+    --TeleportToPosition(chest, tx,ty,tz)
+    --LeaderLib.PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
+    --TeleportToRandomPosition(chest, 8.0, "")
 
     --OpenMasteryMenu_Start(host)
 end

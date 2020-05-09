@@ -1,4 +1,4 @@
-local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType, isPlayer)
+local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType)
 	if weapontype == "Rapier" or weapontype == "Katana" then
 		local twohanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
 		if (twohanded and weapontype == "Katana") or (not twohanded and weapontype == "Rapier") then
@@ -36,8 +36,12 @@ function OnItemEquipped(uuid,item)
 					SetTag(uuid, tag)
 					LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
 				end
+			else
+				local template = GetTemplate(item)
+				Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,item,template)
+				Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,item,tag,isPlayer)
 			end
-			OnWeaponTypeEquipped(uuid, item, tag, stat, statType, isPlayer == 1)
+			OnWeaponTypeEquipped(uuid, item, tag, stat, statType)
 		end
 	end
 end

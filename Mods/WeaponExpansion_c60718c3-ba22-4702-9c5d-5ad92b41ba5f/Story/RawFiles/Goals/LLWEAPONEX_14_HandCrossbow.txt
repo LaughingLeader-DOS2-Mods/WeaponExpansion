@@ -362,6 +362,20 @@ THEN
 LLWEAPONEX_HandCrossbow_OnBoltInserted(_Char, _HandCrossbow, "LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Water_40af98d5-3584-40cc-8c9f-e3a49564f365", _Slot);
 //END_REGION
 
+//REGION DISABLE_AUTO_INSERT
+IF
+RuneRemoved(_Character, _HandCrossbow, _Bolt, _Slot)
+AND
+IsTagged(_HandCrossbow, "LLWEAPONEX_HandCrossbow", 1)
+AND
+ObjectGetFlag(_HandCrossbow, "LLWEAPONEX_HandCrossbow_DisableAutoInsert", 0)
+AND
+GetTemplate(_Bolt, _RuneTemplate)
+AND
+DB_LeaderLib_Helper_Runes_Templates("WeaponExpansion.HandCrossbowBolt", _RuneTemplate)
+THEN
+ObjectSetFlag(_HandCrossbow, "LLWEAPONEX_HandCrossbow_DisableAutoInsert", 0);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

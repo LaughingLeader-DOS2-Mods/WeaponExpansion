@@ -1,3 +1,43 @@
+
+local statusAttributes = {
+	"Ability",
+	--"ActionPoints",
+	--"Cooldown",
+	"Damage Multiplier",
+	"Damage Range",
+	"Damage",
+	"DamageType",
+	"DeathType",
+	"Distance Damage Multiplier",
+	--"IsEnemySkill",
+	--"IsMelee",
+	"Level",
+	--"Magic Cost",
+	--"Memory Cost",
+	--"OverrideMinAP",
+	"OverrideSkillLevel",
+	--"Range",
+	--"SkillType",
+	"Stealth Damage Multiplier",
+	--"Tier",
+	"UseCharacterStats",
+	"UseWeaponDamage",
+	"UseWeaponProperties",
+}
+
+---@param statusName string
+---@return StatEntryStatusData
+local function PrepareStatusProperties(statusName)
+	if statusName ~= nil and statusName ~= "" then
+		local status = {Name = statusName}
+		for i,v in pairs(statusAttributes) do
+			status[v] = Ext.StatGetAttribute(statusName, v)
+		end
+		return status
+	end
+	return nil
+end
+
 local function TryPrintName(obj, prop)
 	local b,result = pcall(function()
 		return tostring(obj[prop])
@@ -49,3 +89,7 @@ local function StatusGetDescriptionParam(status, statusSource, target, param, ..
 	end
 end
 Ext.RegisterListener("StatusGetDescriptionParam", StatusGetDescriptionParam)
+
+function GetStatusTooltipText(character, status)
+
+end

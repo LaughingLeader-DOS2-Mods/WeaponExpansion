@@ -303,12 +303,6 @@ NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay);
 //LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_10_Greatbows:OnAttackAtPosition] Shooting lightning bolt at position after [", _DelayClamped, "] ms.");
 SetVarFloat3(_Char, "LLWEAPONEX_Greatbow_LightningStrikePosition", _x, _y, _z);
 LeaderLib_Timers_StartObjectTimer(_Char, _DelayClamped, "LLWEAPONEX_Timers_Greatbow_Greatbow_ExplodeLightningStrikeAtPosition", "LLWEAPONEX_Greatbow_ExplodeLightningStrikeAtPosition");
-
-//Fired when specific skills like Sky Shot are used.
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (GUIDSTRING)_Target, "LLWEAPONEX_Greatbows_ProcOmniBolt")
-THEN
-ApplyStatus(_Target, "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE", 0.0, 0, _Char);
 //END_REGION
 
 //REGION CUSHION_FORCE
@@ -447,6 +441,20 @@ AND
 DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source)
 THEN
 NOT DB_LLWEAPONEX_Greatbows_Temp_FallDamageResolved(_Target, _Source);
+//END_REGION
+
+//REGION CUSHION_FORCE_LANDING
+IF
+CharacterStatusRemoved(_Target, "SHOCKWAVE", _)
+AND
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z)
+AND
+GetPosition(_Target, _tx, _ty, _tz)
+THEN
+NOT DB_LLWEAPONEX_Greatbows_Temp_CushionForce(_Target, _Source, _x, _y, _z);
+DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing(_Target, _Source, _x, _y, _z, _tx, _ty, _tz);
+ProcObjectTimerCancel(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling");
+ProcObjectTimer(_Target, "LLWEAPONEX_Timers_CushionForce_CheckIsFalling", 60);
 //END_REGION
 
 //REGION DELAYED_BARRAGE

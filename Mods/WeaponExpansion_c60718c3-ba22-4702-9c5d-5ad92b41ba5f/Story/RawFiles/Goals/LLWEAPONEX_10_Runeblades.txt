@@ -538,13 +538,22 @@ NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate)
 
 //REGION ON_HIT
 QRY
-LLWEAPONEX_Runeblades_QRY_CanApplyOnHit((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
+LLWEAPONEX_Runeblades_QRY_HasRuneStatus((CHARACTERGUID)_Character)
 AND
-ObjectGetFlag(_Source, "LLWEAPONEX_Runeblade_RuneActive", 1)
+DB_LLWEAPONEX_Statuses_Runes(_Status)
+AND
+HasActiveStatus(_Character, _Status, 1)
+THEN
+DB_NOOP(1);
+
+QRY
+LLWEAPONEX_Runeblades_QRY_CanApplyOnHit((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
 AND
 CharacterIsDead(_Source, 0)
 AND
 CharacterIsDead(_Target, 0)
+AND
+LLWEAPONEX_Runeblades_QRY_HasRuneStatus(_Source)
 THEN
 DB_NOOP(1);
 

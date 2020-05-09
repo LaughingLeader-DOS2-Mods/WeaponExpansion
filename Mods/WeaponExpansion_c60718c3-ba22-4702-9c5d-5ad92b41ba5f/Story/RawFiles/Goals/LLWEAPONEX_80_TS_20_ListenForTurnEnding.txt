@@ -1,0 +1,23 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+IF
+ObjectTurnEnded((CHARACTERGUID)_Source)
+AND
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
+THEN
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
+LeaderLib_Statuses_RemoveIfActive(_Target, _Status);
+LLWEAPONEX_Katanas_ComboRemoved(_Source, _Target);
+
+IF
+CharacterStatusRemoved(_Target, _Status, _)
+AND
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
+THEN
+NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
+LLWEAPONEX_Katanas_ComboRemoved(_Source, _Target);
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

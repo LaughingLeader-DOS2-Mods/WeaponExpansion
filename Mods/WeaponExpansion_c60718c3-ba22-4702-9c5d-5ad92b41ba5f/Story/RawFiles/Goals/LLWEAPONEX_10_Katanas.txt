@@ -271,6 +271,7 @@ THEN
 ApplyStatus(_Char, _Status, 6.0, 0, _Source);
 //END_REGION
 
+//REGION VANQUISH
 PROC
 LLWEAPONEX_Katanas_ComboRemoved((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
 AND
@@ -313,6 +314,49 @@ PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Source, "LLWEAPONEX_Timers_Katanas_ContinueVanquisher")
 THEN
 LLWEAPONEX_Katanas_Internal_VanquishNext(_Source);
+//END_REGION
+
+//REGION COMBO_FINISHER_STATUS_EVENTS
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_FINISHER_APPLY", (CHARACTERGUID)_Source)
+THEN
+LLWEAPONEX_Katana_Internal_OnComboFinisherApplied(_Source, _Target, "LLWEAPONEX_KATANA_FINISHER_APPLY");
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY", (CHARACTERGUID)_Source)
+THEN
+LLWEAPONEX_Katana_Internal_OnComboFinisherApplied(_Source, _Target, "LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY");
+
+IF
+CharacterStatusAttempt(_Target, "LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY", (CHARACTERGUID)_Source)
+THEN
+LLWEAPONEX_Katana_Internal_OnComboFinisherApplied(_Source, _Target, "LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY");
+//END_REGION
+
+//REGION COMBO_FINISHER
+PROC
+LLWEAPONEX_Katana_Internal_OnComboFinisherApplied((CHARACTERGUID)_Source, (CHARACTERGUID)_Target, (STRING)_ComboFinisherStatus)
+AND
+DB_LLWEAPONEX_Katanas_ComboFinisher(_ComboFinisherStatus, _ComboFinisher)
+AND
+DB_LLWEAPONEX_Katanas_ComboStatus(_Hits, _Status)
+AND
+ObjectGetFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo", 0)
+AND
+HasActiveStatus(_Target, _Status, 1)
+THEN
+ObjectSetFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo", 0);
+LLWEAPONEX_Katanas_SetFinisherHits(_Target, _Source, _Hits, _Status, _ComboFinisher);
+LLWEAPONEX_Katanas_StartFinisher(_Target, _Source);
+
+IF
+DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
+AND
+IsTagged(_Source, "LLWEAPONEX_Blademaster_Target_Available", 0)
+THEN
+SetTag(_Source, "LLWEAPONEX_Blademaster_Target_Available");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Source, "LLWEAPONEX_ListenForTurnEnding", "WeaponExpansion");
+//END_REGION
 
 EXITSECTION
 
