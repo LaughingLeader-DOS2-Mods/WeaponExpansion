@@ -29,9 +29,10 @@ Ext.NewCall(OnPrepareHit, "LLWEAPONEX_Ext_OnPrepareHit", "(GUIDSTRING)_Target, (
 --- @param damage integer
 --- @param handle integer
 local function OnHit(target,source,damage,handle)
+	LeaderLib.Debug_TraceOnHit(target,source,damage,handle)
 	if LeaderLib.Game.HitWithWeapon(target, handle, false) then
 		local b,expGain = CanGrantMasteryExperience(target,source)
-		if b then
+		if b and expGain > 0 then
 			AddMasteryExperienceForAllActive(source, expGain)
 		end
 	end

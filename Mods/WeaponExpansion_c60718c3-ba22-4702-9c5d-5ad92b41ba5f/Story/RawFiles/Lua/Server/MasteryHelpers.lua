@@ -60,6 +60,8 @@ function AddMasteryExperience(uuid,mastery,expGain)
 			if playerEntry ~= nil then
 				currentLevel = playerEntry[3]
 				currentExp = playerEntry[4]
+
+				if currentExp == nil then currentExp = 0 end
 			end
 		end
 
@@ -78,6 +80,8 @@ function AddMasteryExperience(uuid,mastery,expGain)
 			end
 
 			if Ext.IsDeveloperMode() then
+				if currentExp == nil then currentExp = 0 end
+				if nextExp == nil then nextExp = 0 end
 				CharacterStatusText(uuid, string.format("%s %i => %i", mastery, currentExp, nextExp))
 			end
 
