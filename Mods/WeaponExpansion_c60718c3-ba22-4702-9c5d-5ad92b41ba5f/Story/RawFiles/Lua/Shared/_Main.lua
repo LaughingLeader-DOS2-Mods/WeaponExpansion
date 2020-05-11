@@ -20,6 +20,7 @@ Temp = {
 --- @type table<string,string>
 Tags = {}
 
+Ext.Require("Shared/GameMathAlternatives.lua")
 Ext.Require("Shared/StatOverrides.lua")
 Ext.Require("Shared/Data/LocalizedText.lua")
 Ext.Require("Shared/Data/MasteryData_Classes.lua")

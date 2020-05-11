@@ -153,10 +153,7 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
 	--Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
 	--Ext.Print("skill("..tostring(skill)..") character("..tostring(character)..") isFromItem("..tostring(isFromItem)..")")
-	local isUnarmed = character.Character ~= nil and IsUnarmed(character)
-	if param == "Damage" and skill.UseWeaponDamage == "Yes" and isUnarmed then
-		character.MainWeapon = GetUnarmedWeapon(character)
-	end
+	local isUnarmed = IsUnarmed(character)
 
 	--print(param, skill.UseWeaponDamage, isUnarmed, character.Character:HasTag("LLWEAPONEX_Unarmed"), character.MainWeapon.DynamicStats[1].DamageFromBase)
 
@@ -203,9 +200,8 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 		end
 	end
 
-	if param == "Damage" and isUnarmed then
-		print("Getting unarmed damage for skill", skill.Name)
-		local damageRange = Game.Math.GetSkillDamageRange(character, skill)
+	if param == "Damage" and skill.UseWeaponDamage == "Yes" and isUnarmed then
+		local damageRange = Math.GetSkillDamageRange(character, skill, GetUnarmedWeapon(character))
 		if damageRange ~= nil then
 			local damageTexts = {}
 			local totalDamageTypes = 0

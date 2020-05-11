@@ -6,13 +6,13 @@ local unarmedAttributes = {
 
 function GetUnarmedMasteryBoost(unarmedMastery)
 	if unarmedMastery == 1 then
-		return 10
+		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost1", 20)
 	elseif unarmedMastery == 2 then
-		return 15
+		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost2", 40)
 	elseif unarmedMastery == 3 then
-		return 20
+		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost3", 60)
 	elseif unarmedMastery >= 4 then
-		return 350
+		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost4", 70)
 	end
 	return 0
 end
@@ -36,6 +36,9 @@ end
 
 ---@param character StatCharacter
 function IsUnarmed(character, noShields)
-	return (character.MainWeapon == nil or character.MainWeapon.Name == "NoWeapon") and (
-		character.OffHandWeapon == nil or (noShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
+	if character ~= nil then
+		return (character.MainWeapon == nil or character.MainWeapon.Name == "NoWeapon") and (
+			character.OffHandWeapon == nil or (noShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
+	end
+	return false
 end
