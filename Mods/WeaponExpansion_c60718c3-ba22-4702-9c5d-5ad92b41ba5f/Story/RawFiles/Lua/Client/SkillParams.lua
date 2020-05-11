@@ -95,7 +95,13 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 					if tagLocalizedName == nil then 
 						tagLocalizedName = ""
 					end
-					local nextText = tagData.GetParam(character, tagLocalizedName, tagData.Param.Value)
+					local paramText = ""
+					if tagLocalizedName ~= "" then
+						paramText = tagLocalizedName.."<br>"..tagData.Param.Value
+					else
+						paramText = tagData.Param.Value
+					end
+					local nextText = tagData.GetParam(character, tagName, paramText)
 					paramText = paramText.."<br>"..nextText
 				end
 			end

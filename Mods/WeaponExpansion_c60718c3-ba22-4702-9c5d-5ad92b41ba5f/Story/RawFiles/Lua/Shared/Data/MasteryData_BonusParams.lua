@@ -1,12 +1,12 @@
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
 local function GetThrowingKnifeBonusParam(character, tagName, param)
-	local paramText = param:gsub("%[1%]", tagName)
+	local paramText = param
 	local chance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
 	if chance > 0 then
-		paramText = paramText:gsub("%[2%]", math.tointeger(math.min(chance, 100)))
+		paramText = paramText:gsub("%[1%]", math.tointeger(math.min(chance, 100)))
 	else
-		paramText = paramText:gsub("%[2%]", "0")
+		paramText = paramText:gsub("%[1%]", "0")
 	end
 	local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive")
 	local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
@@ -23,7 +23,7 @@ local function GetThrowingKnifeBonusParam(character, tagName, param)
 		else
 			damageText = tostring(math.tointeger(totalMin))
 		end
-		paramText = string.gsub(paramText, "%[3%]", damageText)
+		paramText = string.gsub(paramText, "%[2%]", damageText)
 	end
 	return paramText
 end
@@ -131,7 +131,7 @@ local function GetCripplingBlowBonusDamage(character, tagName, param)
 			damageText = tostring(math.tointeger(totalMin))
 		end
 	end
-	return param:gsub("%[1%]", tagName):gsub("%[2%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
+	return param:gsub("%[1%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
 end
 
 local elementalWeakness = {
@@ -165,8 +165,7 @@ local checkResistanceStats = {
 --- @param tagName string
 --- @param param string
 local function GetElementalWeakness(character, tagName, param)
-	local paramText = param:gsub("%[1%]", tagName)
-
+	local paramText = param
 	local resistanceReductions = {}
 	local resistanceCount = 0
 	local weapon = character.MainWeapon
@@ -200,9 +199,9 @@ local function GetElementalWeakness(character, tagName, param)
 	local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_ElementalWeaknessDuration", 6.0)
 	if duration > 0 then
 		duration = math.tointeger(duration / 6.0)
-		paramText = paramText:gsub("%[2%]", duration)
+		paramText = paramText:gsub("%[1%]", duration)
 	else
-		paramText = paramText:gsub("%[2%]", "0")
+		paramText = paramText:gsub("%[1%]", "0")
 	end
 	local i = 0
 	for stat,value in pairs(resistanceReductions) do
@@ -212,7 +211,7 @@ local function GetElementalWeakness(character, tagName, param)
 			resistanceText = resistanceText .. "<br>"
 		end
 	end
-	paramText = paramText:gsub("%[3%]", resistanceText)
+	paramText = paramText:gsub("%[2%]", resistanceText)
 	return paramText
 end
 
@@ -223,7 +222,7 @@ Mastery.Params = {
 			DescriptionKey = "LLWEAPONEX_Projectile_ThrowingKnife_Description",
 			Tags = {
 				LLWEAPONEX_Dagger_Mastery1 = {
-					Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","[1]<br><font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[2]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[3] bonus damage</font> on hit.</font>"),
+					Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[1]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[2] bonus damage</font> on hit.</font>"),
 					GetParam = GetThrowingKnifeBonusParam,
 				}
 			}
@@ -234,7 +233,7 @@ Mastery.Params = {
 			Tags = {
 				LLWEAPONEX_Bludgeon_Mastery1 = {
 					ID = "SUNDER",
-					Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","[1]<br><font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [2]%</font> for [3] turn(s).</font>"),
+					Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [1]%</font> for [2] turn(s).</font>"),
 					GetParam = function(character, tagName, param)
 						local armorReduction = Ext.StatGetAttribute("Stats_LLWEAPONEX_MasteryBonus_Sunder", "ArmorBoost")
 						if armorReduction == nil then
@@ -243,16 +242,16 @@ Mastery.Params = {
 						local turns = 0
 						local duration = Ext.ExtraData["LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration"]
 						if duration ~= nil and duration > 0 then
-							turns = math.tointeger(duration / 6.0)
+							turns = math.floor(duration / 6.0)
 						else
 							turns = 1
 						end
-						return param:gsub("%[1%]", tagName):gsub("%[2%]", armorReduction):gsub("%[3%]", turns)
+						return param:gsub("%[1%]", armorReduction):gsub("%[2%]", turns)
 					end,
 				},
 				LLWEAPONEX_Axe_Mastery1 = {
 					ID = "BONUSDAMAGE",
-					Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","[1]<br><font color='#F19824'>If the target is disabled, deal an additional [2].</font>"),
+					Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","<font color='#F19824'>If the target is disabled, deal an additional [1].</font>"),
 					GetParam = GetCripplingBlowBonusDamage,
 				},
 			}
@@ -263,9 +262,9 @@ Mastery.Params = {
 			Tags = {
 				LLWEAPONEX_Scythe_Mastery1 = {
 					ID = "RUPTURE",
-					Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","[1]<br><font color='#803BFF'><font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [2] for each turn of <font color='#FF0000'>Bleeding</font> remaining.</font>"),
+					Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#803BFF'><font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [1] for each turn of <font color='#FF0000'>Bleeding</font> remaining.</font>"),
 					GetParam = function(character, tagName, param)
-						local paramText = param:gsub("%[1%]", tagName)
+						local paramText = param
 						local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
 						local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
 						if damageRange ~= nil then
@@ -281,14 +280,14 @@ Mastery.Params = {
 							else
 								damageText = tostring(math.tointeger(totalMin))
 							end
-							paramText = string.gsub(paramText, "%[2%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
+							paramText = string.gsub(paramText, "%[1%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
 						end
 						return paramText
 					end,
 				},
 				LLWEAPONEX_Staff_Mastery1 = {
 					ID = "ELEMENTAL_DEBUFF",
-					Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","[1]<br><font color='#9BF0FF'>Targets hit become weak to your weapon's element(s) for [2] turn(s).</font><br><font color='#D258FF'>Elemental Weaknesses:</font><br>[3]"),
+					Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [1] for [2] turn(s).</font>"),
 					GetParam = GetElementalWeakness,
 				},
 			}
