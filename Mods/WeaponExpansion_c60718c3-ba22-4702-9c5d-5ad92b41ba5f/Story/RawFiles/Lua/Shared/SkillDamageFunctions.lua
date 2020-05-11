@@ -169,7 +169,7 @@ local weaponStatAttributes = {
 ---@param attribute string
 ---@param weaponType string
 ---@return StatItem
-local function PrepareWeaponStat(stat,level,attribute,weaponType)
+local function PrepareWeaponStat(stat,level,attribute,weaponType,damageFromBaseBoost)
 	local weapon = {}
 	for i,v in pairs(weaponAttributes) do
 		weapon[v] = Ext.StatGetAttribute(stat, v)
@@ -188,6 +188,9 @@ local function PrepareWeaponStat(stat,level,attribute,weaponType)
 	for i,v in pairs(weaponStatAttributes) do
 		weaponStat[v] = Ext.StatGetAttribute(stat, v)
 	end
+	if damageFromBaseBoost ~= nil and damageFromBaseBoost > 0 then
+		weaponStat.DamageFromBase = weaponStat.DamageFromBase + damageFromBaseBoost
+	end
 	local damage = Game.Math.GetLevelScaledWeaponDamage(level)
 	local baseDamage = damage * (weaponStat.DamageFromBase * 0.01)
 	local range = baseDamage * (weaponStat["Damage Range"] * 0.01)
@@ -196,7 +199,9 @@ local function PrepareWeaponStat(stat,level,attribute,weaponType)
 	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))
 	weaponStat.DamageType = weaponStat["Damage Type"]
 	weaponStat.StatsType = "Weapon"
-	weaponStat.WeaponType = weaponType
+	if weaponType ~= nil then
+		weaponStat.WeaponType = weaponType
+	end
 	weaponStat.Requirements = weapon.Requirements
 	weapon.DynamicStats = {weaponStat}
 	return weapon
@@ -356,6 +361,7 @@ end
 --- @param targetPos number[]
 --- @param level integer
 --- @param noRandomization boolean
+--- @param isTooltip boolean
 local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
@@ -414,6 +420,7 @@ end
 --- @param targetPos number[]
 --- @param level integer
 --- @param noRandomization boolean
+--- @param isTooltip boolean
 local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
@@ -493,6 +500,7 @@ end
 --- @param targetPos number[]
 --- @param level integer
 --- @param noRandomization boolean
+--- @param isTooltip boolean
 local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local skillProps = PrepareSkillProperties(skill.Name)
 	local distanceDamageMult = skill["Distance Damage Multiplier"]

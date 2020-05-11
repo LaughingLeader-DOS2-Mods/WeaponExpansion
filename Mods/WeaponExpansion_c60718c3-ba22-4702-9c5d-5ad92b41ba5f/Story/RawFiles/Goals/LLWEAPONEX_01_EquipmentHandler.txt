@@ -3,6 +3,29 @@ SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
 
+//REGION TRACK_UNARMED
+PROC
+LLWEAPONEX_Equipment_TrackUnarmed((CHARACTERGUID)_Char)
+THEN
+DB_LLWEAPONEX_Equipment_ActiveTags(_Char, "LLWEAPONEX_Unarmed", NULL_00000000-0000-0000-0000-000000000000);
+LLWEAPONEX_WeaponMastery_TrackMastery(_Char, NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Unarmed");
+SetTag(_Char, "LLWEAPONEX_Unarmed");
+
+PROC
+LLWEAPONEX_Equipment_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
+AND
+DB_LLWEAPONEX_Equipment_ActiveTags(_Char, "LLWEAPONEX_Unarmed", NULL_00000000-0000-0000-0000-000000000000)
+THEN
+NOT DB_LLWEAPONEX_Equipment_ActiveTags(_Char, "LLWEAPONEX_Unarmed", NULL_00000000-0000-0000-0000-000000000000);
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Char, NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Unarmed");
+LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(_Char, "LLWEAPONEX_Unarmed");
+
+PROC
+LLWEAPONEX_Equipment_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
+THEN
+NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item);
+//END_REGION
+
 //REGION TRACK_EQUIPMENT
 PROC
 LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (INTEGER)_IsPlayer)
@@ -34,8 +57,15 @@ AND
 DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item)
 THEN
 NOT DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item);
-LLWEAPONEX_Equipment_OnTaggedItemUnEquipped(_Char, _Item, _Tag, _IsPlayer);
+LLWEAPONEX_Equipment_Internal_ClearItem(_Char, _Item, _Tag, _IsPlayer);
 LLWEAPONEX_Equipment_Internal_CheckTags(_Char, _Tag);
+
+PROC
+LLWEAPONEX_Equipment_Internal_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (INTEGER)_IsPlayer)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+THEN
+LLWEAPONEX_Equipment_OnTaggedItemUnEquipped(_Char, _Item, _Tag, _IsPlayer);
 
 PROC
 LLWEAPONEX_Equipment_Internal_CheckTags((CHARACTERGUID)_Char, (STRING)_Tag)

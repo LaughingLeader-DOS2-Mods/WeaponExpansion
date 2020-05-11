@@ -45,7 +45,7 @@ function OnItemEquipped(uuid,item)
 		else
 			ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 		end
-		local isUnarmed = Ext.StatGetAttribute(stat, "AnimType") == "Unarmed" or IsTagged(item, "LLWEAPONEX_Unarmed") == 1
+		local isUnarmed = Ext.StatGetAttribute(stat, "AnimType") == "Unarmed" or IsUnarmed(Ext.GetCharacter(uuid))
 		if not isUnarmed then
 			Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(uuid, "LLWEAPONEX_Unarmed")
 		end
@@ -79,6 +79,8 @@ function OnItemTemplateUnEquipped(uuid, item, template)
 	if HasMasteryLevel(uuid, "LLWEAPONEX_Unarmed", 1) then
 		--SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
+		Osi.LLWEAPONEX_Equipment_TrackUnarmed(uuid);
+		Osi.DB_LLWEAPONEX_Equipment_ActiveTags:Set(_Char, _Tag, NULL_00000000-0000-0000-0000-000000000000);
 		Osi.LLWEAPONEX_WeaponMastery_OnMasteryActivated(uuid, "LLWEAPONEX_Unarmed")
 	else
 		ClearTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")

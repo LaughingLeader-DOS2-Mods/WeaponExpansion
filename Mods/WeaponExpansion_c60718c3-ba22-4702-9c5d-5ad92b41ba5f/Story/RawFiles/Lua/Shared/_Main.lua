@@ -28,6 +28,7 @@ Ext.Require("Shared/Data/MasteryData_BonusParams.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
+Ext.Require("Shared/UnarmedMechanics.lua")
 
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string

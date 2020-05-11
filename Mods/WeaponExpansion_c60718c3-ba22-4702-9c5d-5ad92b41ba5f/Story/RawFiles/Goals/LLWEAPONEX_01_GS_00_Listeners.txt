@@ -26,7 +26,7 @@ NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 THEN
-NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item);
+LLWEAPONEX_Equipment_OnItemEquipped(_Char, _Item);
 //END_REGION
 
 //REGION PRESET_APPLIED

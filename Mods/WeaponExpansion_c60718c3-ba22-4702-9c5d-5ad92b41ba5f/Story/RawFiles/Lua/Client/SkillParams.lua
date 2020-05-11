@@ -153,22 +153,38 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
 	--Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
 	--Ext.Print("skill("..tostring(skill)..") character("..tostring(character)..") isFromItem("..tostring(isFromItem)..")")
+	local isUnarmed = character.Character ~= nil and IsUnarmed(character)
+	if param == "Damage" and skill.UseWeaponDamage == "Yes" and isUnarmed then
+		character.MainWeapon = GetUnarmedWeapon(character)
+	end
+
+	--print(param, skill.UseWeaponDamage, isUnarmed, character.Character:HasTag("LLWEAPONEX_Unarmed"), character.MainWeapon.DynamicStats[1].DamageFromBase)
+
 	local param_func = Skills.Damage.Params[param]
 	if param_func ~= nil then
 		local status,mainDamageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
 		if status and mainDamageRange ~= nil then
-			local resultString = ""
-			--Ext.Print("Skill damage param: " .. LeaderLib.Common.Dump(mainDamageRange))
+			local damageTexts = {}
+			local totalDamageTypes = 0
 			for damageType,damage in pairs(mainDamageRange) do
 				local min = damage[1]
 				local max = damage[2]
-				if min == max then
-					resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%i", max))
+				if min > 0 or max > 0 then
+					if max == min then
+						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
+					else
+						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
+					end
+				end
+				totalDamageTypes = totalDamageTypes + 1
+			end
+			if totalDamageTypes > 0 then
+				if totalDamageTypes > 1 then
+					return LeaderLib.Common.StringJoin(", ", damageTexts)
 				else
-					resultString = resultString .. LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max))
+					return damageTexts[1]
 				end
 			end
-			return resultString
 		else
 			Ext.PrintError("Error getting param ("..param..") for skill:\n",mainDamageRange)
 			return ""
@@ -184,6 +200,34 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 		else
 			Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
 			return ""
+		end
+	end
+
+	if param == "Damage" and isUnarmed then
+		print("Getting unarmed damage for skill", skill.Name)
+		local damageRange = Game.Math.GetSkillDamageRange(character, skill)
+		if damageRange ~= nil then
+			local damageTexts = {}
+			local totalDamageTypes = 0
+			for damageType,damage in pairs(damageRange) do
+				local min = damage[1]
+				local max = damage[2]
+				if min > 0 or max > 0 then
+					if max == min then
+						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
+					else
+						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
+					end
+				end
+				totalDamageTypes = totalDamageTypes + 1
+			end
+			if totalDamageTypes > 0 then
+				if totalDamageTypes > 1 then
+					return LeaderLib.Common.StringJoin(", ", damageTexts)
+				else
+					return damageTexts[1]
+				end
+			end
 		end
 	end
 end

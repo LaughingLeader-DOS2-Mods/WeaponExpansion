@@ -122,14 +122,21 @@ local function OverrideLeaveActionStatuses()
 	LeaderLib.PrintDebug("]")
 end
 
+local function AddRequirement(stat, param, inverse, requirementType)
+	-- ["Param"] = LLWEAPONEX_Katana_Equipped, ["Not"] = false, ["Requirement"] = Tag
+	local requirements = Ext.StatGetAttribute(stat, "Requirements")
+	if requirements ~= nil then
+		table.insert(requirements, {Param = param, Not = inverse, Requirement = requirementType})
+		Ext.StatSetAttribute(stat, "Requirements", requirements)
+	else
+		Ext.StatSetAttribute(stat, "Requirements", {{Param = param, Not = inverse, Requirement = requirementType}})
+	end
+end
+
 local function WarfareMeleeWeaponOverride(skill)
 	Ext.StatSetAttribute(skill, "Requirement", "None")
-	local requirements = Ext.StatGetAttribute(skill, "Requirements")
-	if requirements ~= nil then
-		print(LeaderLib.Common.Dump(requirements))
-	else
-		Ext.StatSetAttribute(skill, "Requirements", {"Tag LLWEAPONEX_MeleeWeaponEquipped"})
-	end
+	AddRequirement(skill, "LLWEAPONEX_MeleeWeaponEquipped", false, "Tag")
+	print(LeaderLib.Common.Dump(Ext.StatGetAttribute(skill, "Requirements")))
 end
 
 local function StatOverrides_Init()
@@ -142,8 +149,10 @@ local function StatOverrides_Init()
 		local gameMaster = Ext.StatGetAttribute(skill, "ForGameMaster")
 		local requirement = Ext.StatGetAttribute(skill, "Requirement")
 		local ability = Ext.StatGetAttribute(skill, "Ability")
+
+		--print(gameMaster, requirement, ability)
 	
-		if gameMaster == "Yes" and requirement == "MeleeWeapon" and ability == "Warfare" then
+		if gameMaster == "Yes" and requirement == "MeleeWeapon" and ability == "Warrior" then
 			WarfareMeleeWeaponOverride(skill)
 		end
 	end
