@@ -7,6 +7,21 @@ local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType)
 	end
 end
 
+local rangedWeaponTypes = {
+	None = false,
+	Sword = false,
+	Club = false,
+	Axe = false,
+	Staff = false,
+	Bow = true,
+	Crossbow = true,
+	Spear = false,
+	Knife = false,
+	Wand = true,
+	Arrow = true,
+	--Custom = false,
+}
+
 --- @param uuid string
 --- @param item string
 function OnItemEquipped(uuid,item)
@@ -19,9 +34,23 @@ function OnItemEquipped(uuid,item)
 	if IsTagged(item, "LLWEAPONEX_TaggedWeaponType") == 0 and statType == "Weapon" or statType == "Shield" then
 		TagWeapon(item, statType, stat)
 	end
-
+	
 	local isPlayer = IsPlayerQRY(uuid)
-
+	
+	if statType == "Weapon" and isPlayer == 1 then
+		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
+		local weapontype = Ext.StatGetAttribute(stat, "WeaponType")
+		if rangedWeaponTypes[weapontype] ~= true then
+			SetTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
+		else
+			ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
+		end
+		local isUnarmed = Ext.StatGetAttribute(stat, "AnimType") == "Unarmed" or IsTagged(item, "LLWEAPONEX_Unarmed") == 1
+		if not isUnarmed then
+			Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(uuid, "LLWEAPONEX_Unarmed")
+		end
+	end
+	
 	for tag,data in pairs(Masteries) do
 		--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
 		if IsTagged(item,tag) == 1 then
@@ -43,6 +72,17 @@ function OnItemEquipped(uuid,item)
 			end
 			OnWeaponTypeEquipped(uuid, item, tag, stat, statType)
 		end
+	end
+end
+
+function OnItemTemplateUnEquipped(uuid, item, template)
+	if HasMasteryLevel(uuid, "LLWEAPONEX_Unarmed", 1) then
+		--SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
+		SetTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
+		Osi.LLWEAPONEX_WeaponMastery_OnMasteryActivated(uuid, "LLWEAPONEX_Unarmed")
+	else
+		ClearTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
+		ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 	end
 end
 

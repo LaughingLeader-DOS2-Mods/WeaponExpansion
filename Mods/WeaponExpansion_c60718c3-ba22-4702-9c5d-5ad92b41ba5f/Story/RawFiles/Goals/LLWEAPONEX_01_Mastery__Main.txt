@@ -179,6 +179,8 @@ PROC
 LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _, _Mastery)
+AND
+IsTagged(_Player, _Mastery, 1)
 THEN
 ClearTag(_Player, _Mastery);
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _Mastery);

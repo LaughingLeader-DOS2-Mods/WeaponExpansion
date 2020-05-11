@@ -53,8 +53,6 @@ function AddMasteryExperience(uuid,mastery,expGain)
 		local currentExp = 0
 		--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
 		local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
-		LeaderLib.PrintDebug("[MasteryHelpers:AddMasteryExperience] dbEntry")
-		LeaderLib.PrintDebug(LeaderLib.Common.Dump(dbEntry))
 		if dbEntry ~= nil then
 			local playerEntry = dbEntry[1]
 			if playerEntry ~= nil then
@@ -146,4 +144,20 @@ end
 function OnMasteryDeactivated(uuid,mastery)
 	ClearTag(uuid,mastery)
 	LeaderLib.PrintDebug("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
+end
+
+--- @param uuid string
+--- @param mastery string
+--- @param minLevel integer
+function HasMasteryLevel(uuid,mastery,minLevel)
+	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
+	if dbEntry ~= nil then
+		local playerEntry = dbEntry[1]
+		if playerEntry ~= nil then
+			local currentLevel = playerEntry[3]
+			--currentExp = playerEntry[4]
+			return currentLevel >= minLevel
+		end
+	end
+	return false
 end
