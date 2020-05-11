@@ -94,12 +94,6 @@ data "Damage Type" "Piercing"
 data "Damage Range" "10"
 data "DamageFromBase" "10"
 
-new entry "Status_LLWEAPONEX_Runeblade_BloodCombo"
-type "Weapon"
-using "Status_LLWEAPONEX_Runeblade_Blood"
-data "Damage Range" "20"
-data "DamageFromBase" "20"
-
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_CHAOS"
 type "StatusData"
 data "StatusType" "CONSUME"

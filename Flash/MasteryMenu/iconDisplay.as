@@ -41,6 +41,9 @@ package
 			catch(e:Error)
 			{
 				ExternalInterface.call("UIAssert","[WeaponEx] Error creating icon image from name '"+iconClass+"':",e.getStackTrace());
+				iconData = new LeaderLib_Placeholder();
+				iconBitmap = new Bitmap(iconData);
+				addChild(iconBitmap);
 			}
 			
 			addFrameScript(0,this.frame1);

@@ -228,6 +228,7 @@ Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Ch
 
 function OnGameStarted(region, editorMode)
     if IsGameLevel(region) or editorMode == "1" then
-        InitClientID()
+        --InitClientID()
+        IterateUsers("LLWEAPONEX_SetClientID")
     end
 end

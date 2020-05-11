@@ -153,178 +153,178 @@ package LS_Classes
 			}
 		}
 		
-		public static function setFormattedText(param1:TextField, param2:String, param3:String = "$Title_Bold", param4:String = "$Title_Italic") : void
+		public static function setFormattedText(textField:TextField, text:String, boldClassName:String = "$Title_Bold", italicClassName:String = "$Title_Italic") : void
 		{
-			var _loc16_:Number = NaN;
-			var _loc17_:Number = NaN;
-			var _loc18_:uint = 0;
-			var _loc19_:TextLineMetrics = null;
-			var _loc20_:int = 0;
-			var _loc21_:int = 0;
-			var _loc22_:Rectangle = null;
-			var _loc23_:Rectangle = null;
-			var _loc24_:Number = NaN;
-			var _loc25_:Number = NaN;
-			var _loc26_:int = 0;
-			var _loc27_:TextFormat = null;
-			var _loc28_:uint = 0;
-			var _loc29_:Number = NaN;
-			var _loc5_:Class = getDefinitionByName(param3) as Class;
-			var _loc6_:Class = getDefinitionByName(param4) as Class;
-			var _loc7_:Font = new _loc5_();
-			var _loc8_:Font = new _loc6_();
-			var _loc9_:TextFormat = param1.getTextFormat();
-			var _loc10_:MovieClip = param1.parent as MovieClip;
-			_loc9_.font = _loc8_.fontName;
-			var _loc11_:TextFormat = param1.getTextFormat();
-			_loc11_.font = _loc7_.fontName;
-			param1.htmlText = param2;
-			var _loc12_:MovieClip = null;
-			if(_loc10_[param1.name + "Deco"] != null)
+			var lineIndex1:Number = NaN;
+			var lineIndex2:Number = NaN;
+			var lineIndex3:uint = 0;
+			var lineMetrics:TextLineMetrics = null;
+			var lineOffset:int = 0;
+			var lineOffsetEnd:int = 0;
+			var charBounds:Rectangle = null;
+			var charBounds2:Rectangle = null;
+			var lineToRight:Number = NaN;
+			var leftPos:Number = NaN;
+			var rightPos:int = 0;
+			var posFormatter:TextFormat = null;
+			var formatColor:uint = 0;
+			var formatSize:Number = NaN;
+			var boldClass:Class = getDefinitionByName(boldClassName) as Class;
+			var italicClass:Class = getDefinitionByName(italicClassName) as Class;
+			var boldFont:Font = new boldClass();
+			var italicFont:Font = new italicClass();
+			var italicFormatter:TextFormat = textField.getTextFormat();
+			var parentMC:MovieClip = textField.parent as MovieClip;
+			italicFormatter.font = italicFont.fontName;
+			var boldFormatter:TextFormat = textField.getTextFormat();
+			boldFormatter.font = boldFont.fontName;
+			textField.htmlText = text;
+			var decoMC:MovieClip = null;
+			if(parentMC[textField.name + "Deco"] != null)
 			{
-				_loc12_ = _loc10_[param1.name + "Deco"];
-				if(_loc12_)
+				decoMC = parentMC[textField.name + "Deco"];
+				if(decoMC)
 				{
-					_loc12_.graphics.clear();
+					decoMC.graphics.clear();
 				}
-				param1.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+				textField.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 			}
-			var _loc13_:Array = getTags(param2);
-			var _loc14_:int = 0;
-			var _loc15_:uint = 0;
-			while(_loc15_ < _loc13_.length)
+			var textTagsArr:Array = getTags(text);
+			var tagIndex1:int = 0;
+			var tagIter1:uint = 0;
+			while(tagIter1 < textTagsArr.length)
 			{
-				switch(_loc13_[_loc15_].tagStr)
+				switch(textTagsArr[tagIter1].tagStr)
 				{
 					case "<s>":
-						_loc14_ = findNextTag("</s>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						tagIndex1 = findNextTag("</s>",tagIter1,textTagsArr);
+						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
 						{
-							_loc16_ = param1.getLineIndexOfChar(_loc13_[_loc15_].charPos);
-							_loc17_ = param1.getLineIndexOfChar(_loc13_[_loc14_].charPos);
-							if(_loc17_ < 0)
+							lineIndex1 = textField.getLineIndexOfChar(textTagsArr[tagIter1].charPos);
+							lineIndex2 = textField.getLineIndexOfChar(textTagsArr[tagIndex1].charPos);
+							if(lineIndex2 < 0)
 							{
-								_loc17_ = param1.numLines - 1;
+								lineIndex2 = textField.numLines - 1;
 							}
-							if(_loc16_ >= 0 && _loc17_ >= 0)
+							if(lineIndex1 >= 0 && lineIndex2 >= 0)
 							{
-								_loc18_ = _loc16_;
-								while(_loc18_ <= _loc17_)
+								lineIndex3 = lineIndex1;
+								while(lineIndex3 <= lineIndex2)
 								{
-									if(_loc12_ == null)
+									if(decoMC == null)
 									{
-										_loc12_ = _loc10_[param1.name + "Deco"] = new MovieClip();
-										_loc10_.addChild(_loc12_);
-										_loc12_.x = param1.x;
-										_loc12_.y = param1.y;
-										param1.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+										decoMC = parentMC[textField.name + "Deco"] = new MovieClip();
+										parentMC.addChild(decoMC);
+										decoMC.x = textField.x;
+										decoMC.y = textField.y;
+										textField.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 									}
-									_loc19_ = param1.getLineMetrics(_loc18_);
-									_loc20_ = param1.getLineOffset(_loc18_);
-									_loc21_ = _loc20_ + param1.getLineLength(_loc18_);
-									if(_loc20_ < _loc13_[_loc15_].charPos)
+									lineMetrics = textField.getLineMetrics(lineIndex3);
+									lineOffset = textField.getLineOffset(lineIndex3);
+									lineOffsetEnd = lineOffset + textField.getLineLength(lineIndex3);
+									if(lineOffset < textTagsArr[tagIter1].charPos)
 									{
-										_loc20_ = _loc13_[_loc15_].charPos;
+										lineOffset = textTagsArr[tagIter1].charPos;
 									}
-									if(_loc21_ > _loc13_[_loc14_].charPos)
+									if(lineOffsetEnd > textTagsArr[tagIndex1].charPos)
 									{
-										_loc21_ = _loc13_[_loc14_].charPos;
+										lineOffsetEnd = textTagsArr[tagIndex1].charPos;
 									}
-									_loc22_ = param1.getCharBoundaries(_loc20_);
-									_loc23_ = param1.getCharBoundaries(_loc21_ - 1);
-									if(_loc22_)
+									charBounds = textField.getCharBoundaries(lineOffset);
+									charBounds2 = textField.getCharBoundaries(lineOffsetEnd - 1);
+									if(charBounds)
 									{
-										_loc24_ = Boolean(_loc23_)?Number(_loc23_.right):Number(_loc22_.right);
-										_loc25_ = _loc22_.left;
-										_loc26_ = _loc19_.ascent * 0.8 + _loc22_.top;
-										_loc27_ = param1.getTextFormat(_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
-										if(_loc27_.color == null)
+										lineToRight = Boolean(charBounds2)?Number(charBounds2.right):Number(charBounds.right);
+										leftPos = charBounds.left;
+										rightPos = lineMetrics.ascent * 0.8 + charBounds.top;
+										posFormatter = textField.getTextFormat(textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
+										if(posFormatter.color == null)
 										{
-											_loc27_ = param1.getTextFormat(_loc13_[_loc15_].charPos,_loc13_[_loc15_].charPos + 1);
+											posFormatter = textField.getTextFormat(textTagsArr[tagIter1].charPos,textTagsArr[tagIter1].charPos + 1);
 										}
-										_loc28_ = new uint(_loc27_.color);
-										_loc29_ = new Number(_loc27_.size);
-										_loc12_.graphics.lineStyle(Math.ceil(_loc29_ * 0.08),_loc28_);
-										_loc12_.graphics.moveTo(_loc25_,_loc26_);
-										_loc12_.graphics.lineTo(_loc24_,_loc26_);
+										formatColor = new uint(posFormatter.color);
+										formatSize = new Number(posFormatter.size);
+										decoMC.graphics.lineStyle(Math.ceil(formatSize * 0.08),formatColor);
+										decoMC.graphics.moveTo(leftPos,rightPos);
+										decoMC.graphics.lineTo(lineToRight,rightPos);
 									}
-									_loc18_++;
+									lineIndex3++;
 								}
 							}
 						}
 						break;
 					case "<u>":
-						_loc14_ = findNextTag("</u>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						tagIndex1 = findNextTag("</u>",tagIter1,textTagsArr);
+						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
 						{
-							_loc16_ = param1.getLineIndexOfChar(_loc13_[_loc15_].charPos);
-							_loc17_ = param1.getLineIndexOfChar(_loc13_[_loc14_].charPos);
-							if(_loc17_ < 0)
+							lineIndex1 = textField.getLineIndexOfChar(textTagsArr[tagIter1].charPos);
+							lineIndex2 = textField.getLineIndexOfChar(textTagsArr[tagIndex1].charPos);
+							if(lineIndex2 < 0)
 							{
-								_loc17_ = param1.numLines - 1;
+								lineIndex2 = textField.numLines - 1;
 							}
-							if(_loc16_ >= 0 && _loc17_ >= 0)
+							if(lineIndex1 >= 0 && lineIndex2 >= 0)
 							{
-								_loc18_ = _loc16_;
-								while(_loc18_ <= _loc17_)
+								lineIndex3 = lineIndex1;
+								while(lineIndex3 <= lineIndex2)
 								{
-									if(_loc12_ == null)
+									if(decoMC == null)
 									{
-										_loc12_ = _loc10_[param1.name + "Deco"] = new MovieClip();
-										_loc10_.addChild(_loc12_);
-										_loc12_.x = param1.x;
-										_loc12_.y = param1.y;
-										param1.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+										decoMC = parentMC[textField.name + "Deco"] = new MovieClip();
+										parentMC.addChild(decoMC);
+										decoMC.x = textField.x;
+										decoMC.y = textField.y;
+										textField.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 									}
-									_loc19_ = param1.getLineMetrics(_loc18_);
-									_loc20_ = param1.getLineOffset(_loc18_);
-									_loc21_ = _loc20_ + param1.getLineLength(_loc18_);
-									if(_loc20_ < _loc13_[_loc15_].charPos)
+									lineMetrics = textField.getLineMetrics(lineIndex3);
+									lineOffset = textField.getLineOffset(lineIndex3);
+									lineOffsetEnd = lineOffset + textField.getLineLength(lineIndex3);
+									if(lineOffset < textTagsArr[tagIter1].charPos)
 									{
-										_loc20_ = _loc13_[_loc15_].charPos;
+										lineOffset = textTagsArr[tagIter1].charPos;
 									}
-									if(_loc21_ > _loc13_[_loc14_].charPos)
+									if(lineOffsetEnd > textTagsArr[tagIndex1].charPos)
 									{
-										_loc21_ = _loc13_[_loc14_].charPos;
+										lineOffsetEnd = textTagsArr[tagIndex1].charPos;
 									}
-									_loc22_ = param1.getCharBoundaries(_loc20_);
-									if(_loc22_)
+									charBounds = textField.getCharBoundaries(lineOffset);
+									if(charBounds)
 									{
-										_loc23_ = param1.getCharBoundaries(_loc21_ - 1);
-										if(_loc23_)
+										charBounds2 = textField.getCharBoundaries(lineOffsetEnd - 1);
+										if(charBounds2)
 										{
-											_loc23_ = param1.getCharBoundaries(_loc21_ - 2);
+											charBounds2 = textField.getCharBoundaries(lineOffsetEnd - 2);
 										}
-										_loc24_ = Boolean(_loc23_)?Number(_loc23_.right):Number(_loc22_.right);
-										_loc25_ = _loc22_.left;
-										_loc27_ = param1.getTextFormat(_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
-										_loc28_ = new uint(_loc27_.color);
-										_loc29_ = new Number(_loc27_.size);
-										_loc26_ = _loc19_.ascent + _loc19_.descent * 0.04 * _loc29_ + _loc22_.top;
-										_loc12_.graphics.lineStyle(Math.ceil(_loc29_ * 0.08),_loc28_);
-										_loc12_.graphics.moveTo(_loc25_,_loc26_);
-										_loc12_.graphics.lineTo(_loc24_,_loc26_);
+										lineToRight = Boolean(charBounds2)?Number(charBounds2.right):Number(charBounds.right);
+										leftPos = charBounds.left;
+										posFormatter = textField.getTextFormat(textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
+										formatColor = new uint(posFormatter.color);
+										formatSize = new Number(posFormatter.size);
+										rightPos = lineMetrics.ascent + lineMetrics.descent * 0.04 * formatSize + charBounds.top;
+										decoMC.graphics.lineStyle(Math.ceil(formatSize * 0.08),formatColor);
+										decoMC.graphics.moveTo(leftPos,rightPos);
+										decoMC.graphics.lineTo(lineToRight,rightPos);
 									}
-									_loc18_++;
+									lineIndex3++;
 								}
 							}
 						}
 						break;
 					case "<b>":
-						_loc14_ = findNextTag("</b>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						tagIndex1 = findNextTag("</b>",tagIter1,textTagsArr);
+						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
 						{
-							param1.setTextFormat(_loc11_,_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
+							textField.setTextFormat(boldFormatter,textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
 						}
 						break;
 					case "<i>":
-						_loc14_ = findNextTag("</i>",_loc15_,_loc13_);
-						if(_loc14_ > 0 && _loc14_ < _loc13_.length)
+						tagIndex1 = findNextTag("</i>",tagIter1,textTagsArr);
+						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
 						{
-							param1.setTextFormat(_loc9_,_loc13_[_loc15_].charPos,_loc13_[_loc14_].charPos);
+							textField.setTextFormat(italicFormatter,textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
 						}
 				}
-				_loc15_++;
+				tagIter1++;
 			}
 		}
 		

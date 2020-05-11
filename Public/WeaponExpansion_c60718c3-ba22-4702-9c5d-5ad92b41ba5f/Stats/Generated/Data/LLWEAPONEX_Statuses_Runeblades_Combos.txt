@@ -245,6 +245,7 @@ using "Status_LLWEAPONEX_Runeblade_Base"
 data "Damage Type" "Piercing"
 data "Damage Range" "15"
 data "DamageFromBase" "20"
+data "ExtraProperties" "BLEEDING,25,1"
 
 new entry "LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_POISON"
 type "StatusData"

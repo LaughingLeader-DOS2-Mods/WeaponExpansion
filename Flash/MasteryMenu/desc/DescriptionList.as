@@ -39,8 +39,11 @@ package desc
 		{
 			try
 			{
-				var iconName:String = arr[i];
-				return iconName;
+				if (arr.length > i)
+				{
+					return arr[i];
+				}
+				return "";
 			}
 			catch(e)
 			{
@@ -52,8 +55,11 @@ package desc
 		{
 			try
 			{
-				var iconType:int = int(arr[i]);
-				return iconType;
+				if (arr.length > i)
+				{
+					return int(arr[i]);
+				}
+				return 1;
 			}
 			catch(e)
 			{
@@ -68,6 +74,8 @@ package desc
 			var iconIds:Array = ids.split(delimiter);
 			var iconNames:Array = icons.split(delimiter);
 			var iconTypes:Array = types.split(delimiter);
+
+			//trace(iconIds, iconNames, iconTypes)
 
 			var i:uint = 0;
 			while (i < iconIds.length)
@@ -87,6 +95,7 @@ package desc
 				{
 					iconType = 2;
 				}
+				//trace(iconId, iconName, iconType)
 				var entryContent:DescriptionIcon = new DescriptionIcon();
 				entryContent.id = iconId;
 				entryContent.icon = iconName;

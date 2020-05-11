@@ -126,11 +126,11 @@ function DebugInit()
     CharacterAddAbility(host, "WarriorLore", 4)
     CharacterAddAbility(host, "RogueLore", 4)
 
-    ApplyStatus(host, "LLWEAPONEX_RUPTURE", 360.0, 1, host)
-
+    --ApplyStatus(host, "LLWEAPONEX_RUPTURE", 360.0, 1, host)
+    RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
     local x,y,z = GetPosition(host)
     for mastery,masterData in pairs(Masteries) do
-        local rank = Ext.Random(0,4)
+        local rank = Ext.Random(1,4)
         local xp = 0
         if rank > 0 then
             if rank >= 4 then

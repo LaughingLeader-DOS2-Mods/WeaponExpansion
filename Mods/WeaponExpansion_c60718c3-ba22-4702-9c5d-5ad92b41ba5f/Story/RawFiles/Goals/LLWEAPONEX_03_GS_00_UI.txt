@@ -17,6 +17,13 @@ AND
 GetCurrentCharacter(_ID, _Player)
 THEN
 NRD_ModCall("WeaponExpansion", "SendClientID", (STRING)_Player, (STRING)_ID);
+
+IF
+UserEvent(_ID, "LLWEAPONEX_SetClientID")
+AND
+GetCurrentCharacter(_ID, _Player)
+THEN
+NRD_ModCall("WeaponExpansion", "SendClientID", (STRING)_Player, (STRING)_ID);
 //END_REGION
 
 EXITSECTION

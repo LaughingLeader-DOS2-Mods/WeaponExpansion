@@ -501,6 +501,12 @@ AND
 LeaderLib_Roll_QRY(100,999)
 THEN
 ApplyStatus(_Target, "LLWEAPONEX_FUMBLE", 0.0, 1, _Source);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_FUMBLE", _Source)
+THEN
+LeaderLib_Helper_ClearActionQueue(_Target, 1);
+PlayAnimation(_Target, "hit", "");
 //END_REGION
 
 //REGION BYPASS_ARMOR_STATUSES

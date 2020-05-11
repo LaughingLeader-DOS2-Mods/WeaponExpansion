@@ -2,7 +2,8 @@
 local MessageData = LeaderLib.Classes["MessageData"]
 
 function SendClientID(uuid, id)
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetClientID", tostring(id))
+	LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
+	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetClientID", id)
 end
 
 function InitClientID()
@@ -46,29 +47,20 @@ local function RequestOpenMasteryMenu(call,id,callbackID)
 	if clientID ~= nil then
 		local character = GetCurrentCharacter(clientID)
 		if character ~= nil then
-		if CharacterIsSummon(character) == 1 then
-			if CharacterIsControlled(character) == 1 then
-				ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-			else
-				CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-			end
-		elseif CharacterIsPartyFollower(character) == 1 then
-			if CharacterIsControlled(character) == 1 then
-				ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-			else
-				CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-			end
-		elseif CharacterIsPlayer(character) then
-			OpenMasteryMenu_Start(character)
-			return true
-		end
-		end
-		for i,entry in ipairs(Osi.DB_IsPlayer:Get(nil)) do
-			local uuid = entry[1]
-			local id = CharacterGetReservedUserID(uuid)
-			print(id,clientID, id==clientID)
-			if id == clientID and CharacterIsControlled(uuid) == 1 then
-				OpenMasteryMenu_Start(uuid)
+			if CharacterIsSummon(character) == 1 then
+				if CharacterIsControlled(character) == 1 then
+					ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+				else
+					CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+				end
+			elseif CharacterIsPartyFollower(character) == 1 then
+				if CharacterIsControlled(character) == 1 then
+					ShowNotification(character, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+				else
+					CharacterStatusText(character, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+				end
+			elseif IsPlayer(character) then
+				OpenMasteryMenu_Start(character)
 				return true
 			end
 		end

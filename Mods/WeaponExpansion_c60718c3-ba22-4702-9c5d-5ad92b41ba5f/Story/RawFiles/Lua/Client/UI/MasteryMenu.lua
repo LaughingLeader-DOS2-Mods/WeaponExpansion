@@ -145,16 +145,31 @@ local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
 		iconName = ""
 	end
 	if iconType == nil then
-		if iconName ~= "" or iconId ~= "" then
+		if iconId ~= "" then
 			iconType = 1
-		else	
+		else
 			iconType = 0
 		end
 	end
+	LeaderLib.PrintDebug(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
 	ui:SetValue("descriptionContent", iconId, index+1)
 	ui:SetValue("descriptionContent", iconName, index+2)
 	ui:SetValue("descriptionContent", iconType, index+3)
 	return index + 4
+end
+
+local function replaceDescriptionPlaceholders(str)
+	local output = str
+	for v in string.gmatch(str, "%[.-%]") do
+		local key = v:gsub("%[", ""):gsub("%]", "")
+		local translatedText = Ext.GetTranslatedStringFromKey(key)
+		if translatedText == nil then translatedText = "" end
+		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
+		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
+		print(key, translatedText, escapedReplace)
+		output = string.gsub(output, escapedReplace, translatedText)
+	end
+	return output
 end
 
 local iconPattern = "(<icon.-/>)"
@@ -174,7 +189,7 @@ local function parseDescription(ui, index, descriptionText)
 			icons[i] = nil
 		end
 		result[#result+1] = {
-			Text = v,
+			Text = replaceDescriptionPlaceholders(v),
 			Icon = icon
 		}
 	end
@@ -186,7 +201,7 @@ local function parseDescription(ui, index, descriptionText)
 			}
 		end
 	end
-	print(LeaderLib.Common.Dump(result))
+	--print(LeaderLib.Common.Dump(result))
 	for i,v in ipairs(result) do
 		if v.Icon ~= "" then
 			local _,_,iconName = v.Icon:find("id='(.-)'")
@@ -269,32 +284,34 @@ local function OnMenuEvent(ui, call, ...)
 			ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5], params[6])
 		elseif params[1] == 2 then
 			--MasteryMenu.DisplayingStatusTooltip = true
+			ui:ExternalInterfaceCall("showTooltip", GetStatusTooltipText(MasteryMenu.MasteryData.UUID, params[2]), params[3], params[4], params[5], params[6], "right", false)
 			--ui:ExternalInterfaceCall("showStatusTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5], params[6], "leftTop")
 			-- x, y, width, height, tooltipPos
 			---@type MessageData
 			--local data = MessageData:CreateFromTable(MasteryMenu.MasteryData.UUID, {Status = params[2], x = params[3], y = params[4], width=params[5], height=params[6]})
 			--Ext.PostMessageToServer("LLWEAPONEX_MasteryMenu_RequestStatusTooltip", data:ToString())
 			---@type UIObject
-			local tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltipHelper_kb.swf")
-			if tooltipUI == nil then tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltipHelper.swf") end
-			if tooltipUI == nil then tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltip.swf") end
-			if tooltipUI == nil then 
-				tooltipUI = Ext.CreateUI("tooltipKB", "Public/Shared/GUI/tooltipHelper_kb.swf", 99) 
-			end
-			if tooltipUI ~= nil then
-				local i = 0
-				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatName, i)
-				tooltipUI:SetValue("tooltip_array", "Status Info", i+1)
-				tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatsDescription, i+2)
-				tooltipUI:SetValue("tooltip_array", "STATUS?!", i+3)
-				tooltipUI:Invoke("addStatusTooltip", 0, 0)
-			else
-				Ext.PrintError("tooltipHelper_kb is nil?")
-			end
+			-- local tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltipHelper_kb.swf")
+			-- if tooltipUI == nil then tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltipHelper.swf") end
+			-- if tooltipUI == nil then tooltipUI = Ext.GetBuiltinUI("Public/Shared/GUI/tooltip.swf") end
+			-- if tooltipUI == nil then 
+			-- 	tooltipUI = Ext.CreateUI("tooltipKB", "Public/Shared/GUI/tooltipHelper_kb.swf", 99) 
+			-- end
+			-- if tooltipUI ~= nil then
+			-- 	local i = 0
+			-- 	tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatName, i)
+			-- 	tooltipUI:SetValue("tooltip_array", "Status Info", i+1)
+			-- 	tooltipUI:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatsDescription, i+2)
+			-- 	tooltipUI:SetValue("tooltip_array", "STATUS?!", i+3)
+			-- 	tooltipUI:Invoke("addStatusTooltip", 0, 0)
+			-- else
+			-- 	Ext.PrintError("tooltipHelper_kb is nil?")
+			-- end
 		end
 	elseif call == "mastery_hideIconTooltip" then
 		MasteryMenu.DisplayingSkillTooltip = false
 		MasteryMenu.DisplayingStatusTooltip = false
+		--ui:ExternalInterfaceCall("hideTooltip")
 	end
 end
 
