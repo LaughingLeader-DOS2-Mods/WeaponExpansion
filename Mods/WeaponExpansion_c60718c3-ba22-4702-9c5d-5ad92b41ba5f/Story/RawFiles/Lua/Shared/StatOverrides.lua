@@ -122,13 +122,33 @@ local function OverrideLeaveActionStatuses()
 	LeaderLib.PrintDebug("]")
 end
 
+local function WarfareMeleeWeaponOverride(skill)
+	Ext.StatSetAttribute(skill, "Requirement", "None")
+	local requirements = Ext.StatGetAttribute(skill, "Requirements")
+	if requirements ~= nil then
+		print(LeaderLib.Common.Dump(requirements))
+	else
+		Ext.StatSetAttribute(skill, "Requirements", {"Tag LLWEAPONEX_MeleeWeaponEquipped"})
+	end
+end
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 
-	OverrideLeaveActionStatuses()
+	for i,skill in pairs(Ext.GetStatEntries("SkillData")) do
+		local gameMaster = Ext.StatGetAttribute(skill, "ForGameMaster")
+		local requirement = Ext.StatGetAttribute(skill, "Requirement")
+		local ability = Ext.StatGetAttribute(skill, "Ability")
+	
+		if gameMaster == "Yes" and requirement == "MeleeWeapon" and ability == "Warfare" then
+			WarfareMeleeWeaponOverride(skill)
+		end
+	end
+
+	--OverrideLeaveActionStatuses()
 
 	for statType,entries in pairs(Mastery.Params) do
 		local statParamsAttribute = "StatsDescriptionParams"
