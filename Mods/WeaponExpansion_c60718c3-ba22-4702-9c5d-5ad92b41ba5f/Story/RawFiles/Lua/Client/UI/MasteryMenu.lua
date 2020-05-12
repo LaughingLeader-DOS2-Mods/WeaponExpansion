@@ -160,13 +160,24 @@ end
 
 local function replaceDescriptionPlaceholders(str)
 	local output = str
-	for v in string.gmatch(str, "%[.-%]") do
-		local key = v:gsub("%[", ""):gsub("%]", "")
+	for v in string.gmatch(output, "%[ExtraData.-%]") do
+		local key = v:gsub("%[ExtraData:", ""):gsub("%]", "")
+		local value = LeaderLib.Game.GetExtraData(key, "")
+		if value ~= "" then
+			value = string.format("%i", value)
+		end
+		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
+		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
+		print("Key:", key, "Value:", value, "Replace", escapedReplace)
+		output = string.gsub(output, escapedReplace, value)
+	end
+	for v in string.gmatch(output, "%[Key.-%]") do
+		local key = v:gsub("%[Key:", ""):gsub("%]", "")
 		local translatedText = Ext.GetTranslatedStringFromKey(key)
 		if translatedText == nil then translatedText = "" end
 		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
-		print(key, translatedText, escapedReplace)
+		print("Key:", key, "Value:", translatedText, "Replace", escapedReplace)
 		output = string.gsub(output, escapedReplace, translatedText)
 	end
 	return output

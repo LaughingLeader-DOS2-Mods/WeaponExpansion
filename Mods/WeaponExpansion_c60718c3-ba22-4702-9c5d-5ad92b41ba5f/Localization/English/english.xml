@@ -602,7 +602,7 @@
 	<content contentuid="h3b2dadbbg3989g4298-a860g979ba1616b3b">Fencer</content>
 	<content contentuid="h3b7aff29g3695g448agbd64g56261c9cf503">&lt;font color=&apos;#97fbff&apos;&gt;Blessed Water Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h3b87e4feg20b1g4ad1gae99gfd2c945c19f7">General&apos;s Mercy</content>
-	<content contentuid="h3b90f6e5gfc36g4085gb291g03b83af766de">&lt;icon id=&apos;Cone_GroundSmash&apos; icon=&apos;Skill_Warrior_GroundSmash&apos;/&gt;[Cone_GroundSmash_DisplayName] creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.</content>
+	<content contentuid="h3b90f6e5gfc36g4085gb291g03b83af766de">&lt;icon id=&apos;Cone_GroundSmash&apos; icon=&apos;Skill_Warrior_GroundSmash&apos;/&gt;[Key:Cone_GroundSmash_DisplayName] creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.</content>
 	<content contentuid="h3b93ab3bg1847g4e81gbdbegff9b008a03f2">Tuned Rifle</content>
 	<content contentuid="h3bb4c915gad6dg452ag8e76ga0f3b83cc0eb">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery V&lt;/font&gt;</content>
 	<content contentuid="h3bb9d050gd779g468fg8de7gfa7f906d7497">&lt;font color=&apos;#a6ffcc&apos;&gt;Throw Target&lt;/font&gt;</content>
@@ -612,6 +612,7 @@
 	<content contentuid="h3c0e91d5g36efg4a8cg93d6gc45f6bf374c7">Spellsponge</content>
 	<content contentuid="h3c24295cg7c91g42dega708g63b3f524e4ab">A sharp greatbow arrow shimmering beneath a toxic green mist; best not to inhale as you release this venomous cloud.</content>
 	<content contentuid="h3c29ef66g8d40g452cgb5f0g346b54e6b03e">Barricade of the Ancient Empire</content>
+	<content contentuid="h3c339bd7g4097g407ag89d1g293eb36f7e49">Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost4]% extra base damage in total, making it comparable to the damage of a two-handed weapon.</content>
 	<content contentuid="h3c905e53gc20bg434cgac81gd9877ebbbe4c">&lt;font color=&apos;#FD8826&apos;&gt;Quarterstaff Mastery II&lt;/font&gt;</content>
 	<content contentuid="h3cad14e9gc1a1g4d96gb7a3gf1513ca5a6fc">Steamcloud Arrow</content>
 	<content contentuid="h3d0276edgb096g4720g8f9fg03f6b75db509">Soul Scorcher</content>
@@ -683,7 +684,7 @@
 	<content contentuid="h44e46308g8f4dg4357gaac4g1d50a425d36a">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h4504bbc0gb7a6g42c3ga57eg83f3e78c0db2">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Insert Failed - No Hand Crossbow Equipped&lt;/font&gt;</content>
 	<content contentuid="h451677d2ga792g4f99g8f77gccafa357861c">A warrior who strives to defend the innocent through a unique style that utilizes dual shields</content>
-	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Warfare skills can now be used while unarmed.</content>
+	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Warfare skills can now be used while unarmed.&lt;br&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost1]%% extra base damage in total, and scale with your highest base attribute (Strength, Finesse, or Constitution).</content>
 	<content contentuid="h453d9d53gcdfdg4674g819fgbc0de4196a21">Heed the rallying cry of the Standard-Bearer, teleporting to the raised banner.</content>
 	<content contentuid="h45457359gaa62g40f9gaa6bgd1996571cc40">Shield Prison</content>
 	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1">Polearm</content>
@@ -697,7 +698,7 @@
 	<content contentuid="h477c0babg3628g4207g922ega0f054a32cb6">&lt;font color=&apos;#9A5085&apos;&gt;Torment&lt;/font&gt;</content>
 	<content contentuid="h4795ea48g3ffbg49e2ga99fgc51b65b7bac4">Journeyman Axefighter</content>
 	<content contentuid="h479e97b9g6dc3g428egb6e4g4fdbeb1592b4">Weapon Expansion - Quest Items</content>
-	<content contentuid="h47ab96e6gdce0g4fd6g9b20gedc0b7f491ec">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Targets hit by [Target_CripplingBlow_DisplayName] gain a -20% damage debuff until their turn ends. You deal 10% more damage against them until your turn ends.</content>
+	<content contentuid="h47ab96e6gdce0g4fd6g9b20gedc0b7f491ec">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Targets hit by [Key:Target_CripplingBlow_DisplayName] gain a -20% damage debuff until their turn ends. You deal 10% more damage against them until your turn ends.</content>
 	<content contentuid="h47c00b1cg79b5g4ee7gbe3fg25c58809a3ef">No Masteries Learned</content>
 	<content contentuid="h47d73bfcg16eag4504g83c0ge7b9c0048f13">*Ask to see the trader&apos;s goods.*</content>
 	<content contentuid="h4806c4d0gb9d3g4b2cg853fg79253e92c615">Water Rune</content>
@@ -777,9 +778,9 @@
 	<content contentuid="h5047443fg5e5dg4a8bg82e0gafc574d222f4">Tuned Flintlock Pistol</content>
 	<content contentuid="h507a3c21g7f2cg4232gab75g554c515f18d5">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery II&lt;/font&gt;</content>
 	<content contentuid="h50853c8cg2215g4f9fg8ab9g4cc10b4309cc">Throw Weapon</content>
-	<content contentuid="h5086140cg5c20g4fa9ga057g58a67546624f">&lt;icon id=&apos;Projectile_PinDown&apos; icon=&apos;Skill_Ranger_PinDown&apos;/&gt;[Projectile_PinDown_DisplayName] shoots two arrows instead of one, hitting a random nearby enemy for half damage.</content>
+	<content contentuid="h5086140cg5c20g4fa9ga057g58a67546624f">&lt;icon id=&apos;Projectile_PinDown&apos; icon=&apos;Skill_Ranger_PinDown&apos;/&gt;[Key:Projectile_PinDown_DisplayName] shoots two arrows instead of one, hitting a random nearby enemy for half damage.</content>
 	<content contentuid="h50a0e10bg494eg44d7gac24g5dae0e1cd67f">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery II&lt;/font&gt;</content>
-	<content contentuid="h50abd32eg1a6bg4c15ga318g19ad78699979">&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;After using [Jump_TacticalRetreat_DisplayName], your next action&apos;s AP cost is reduced by 1.</content>
+	<content contentuid="h50abd32eg1a6bg4c15ga318g19ad78699979">&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;After using [Key:Jump_TacticalRetreat_DisplayName], your next action&apos;s AP cost is reduced by 1.</content>
 	<content contentuid="h50df5d54g05b5g4ab6gaf57g3a5b570dc2d6">Beholder (Constitution Scaling)</content>
 	<content contentuid="h50ea178dgecafg4dd4gaad8g5c49a854ef0d">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery III&lt;/font&gt;</content>
 	<content contentuid="h50f6e0abgda94g409egb803g6023020bea8e">Novice</content>
@@ -974,6 +975,7 @@
 	<content contentuid="h6413538ag16bag4b9aga8d0ga154dd712d66">Earthenblade</content>
 	<content contentuid="h64563df4g3fe0g404bga324g1c8ef0523057">Nightbane</content>
 	<content contentuid="h64584007g2094g4e07ga5a7g6ff6272f23f7">Mighty Quiver</content>
+	<content contentuid="h645fc064g4d7ag47d6ga524g51a58d2980f0">Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost2]% extra base damage in total.</content>
 	<content contentuid="h64758f3fg63a1g4389g9b38g7bed5ed1c8a1">Slowdown Arrow</content>
 	<content contentuid="h64a393ccg4ec7g4978gbb35g7bd51b2f8013">Deflect Projectiles</content>
 	<content contentuid="h64c23dfag551fg4d08g9a68gdb0f68cab0aa">Cold Calamity</content>
@@ -1033,11 +1035,11 @@
 	<content contentuid="h6a268993g122ag4546g8d76g83c831fb552f">Fire Arrow</content>
 	<content contentuid="h6a30ea9cgec6bg4fb7g847cg6f52783ee045">Ancient Two-handed Bokuto</content>
 	<content contentuid="h6a3d6841g00e8g4d72g8172g071fccfac077">Dragonslayer&apos;s Greatbow</content>
-	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;[Target_CripplingBlow_DisplayName] applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
+	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;[Key:Target_CripplingBlow_DisplayName] applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
 	<content contentuid="h6a8b7584g375bg4aa1g85fdg9178f76d434d">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery II&lt;/font&gt;</content>
 	<content contentuid="h6a8c5394gdba9g45ffg934eg7914a2427553">A magical blade imbued with the power of water. The runes can be invoked to bathe the blade in a dousing layer of water.</content>
 	<content contentuid="h6a9f08c6gc56cg4026gba88g0f2918d8e1c6">Banner of the Pack (Intelligence Scaling)</content>
-	<content contentuid="h6ab0e2beg916eg4559g9981ga731585aa356">&lt;icon id=&apos;Projectile_SkyShot&apos; icon=&apos;Skill_Ranger_SkyShot&apos;/&gt;[Projectile_SkyShot_DisplayName] deals a guaranteed critical hit to targets that are Knocked Down.</content>
+	<content contentuid="h6ab0e2beg916eg4559g9981ga731585aa356">&lt;icon id=&apos;Projectile_SkyShot&apos; icon=&apos;Skill_Ranger_SkyShot&apos;/&gt;[Key:Projectile_SkyShot_DisplayName] deals a guaranteed critical hit to targets that are Knocked Down.</content>
 	<content contentuid="h6aba0319g7f05g456ag9228g6e2b281ee95b">&lt;font color=&apos;#fcd203&apos;&gt;Stunning Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h6ac77698g7cf7g4d8aga548gd1bf823df736">Strongman&apos;s Greatbow</content>
 	<content contentuid="h6add6a16ge3fdg4cdcg9420gd6320b918928">Journeyman of Wands</content>
@@ -1159,7 +1161,7 @@
 	<content contentuid="h76e869b4gae45g47c6g8529gf55e8b414d5e">Weapon Expansion - Armor</content>
 	<content contentuid="h7747dee4g9740g4294g9888gb6aa57256eef">Frostdyne (Unleashed) (Constitution Scaling)</content>
 	<content contentuid="h77557ac7g4f6fg49bdga76cg404de43d92f5">Offhand</content>
-	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike&apos; icon=&apos;Skill_Warrior_BlinkStrike&apos;/&gt;[MultiStrike_BlinkStrike_DisplayName] applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.</content>
+	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike&apos; icon=&apos;Skill_Warrior_BlinkStrike&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.</content>
 	<content contentuid="h775bb53dg18c2g46f0g9cbbgfff54b7ac5a8">Omnibolt, Heaven&apos;s Wrath (Finesse Scaling)</content>
 	<content contentuid="h778419bdg900eg4b6egb376g652371ca7538">A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers</content>
 	<content contentuid="h7784b453g91ceg4c49g80cfg2d67bd2869fb">&lt;font color=&apos;#999999&apos;&gt;Oiled Mini-Bolts&lt;/font&gt;</content>
@@ -1169,7 +1171,7 @@
 	<content contentuid="h77dc5f0cga805g4e21ga44fg0a0f7ba0d23f">&lt;font color=&apos;#F19824&apos;&gt;Deal an additional [1] in a [2]m radius around the target.&lt;/font&gt;</content>
 	<content contentuid="h77ead990g3f40g4c03g86f8ga8d64c1f00e4">Oathkeeper, Earthcracker</content>
 	<content contentuid="h78010912gec24g495ega080gedc162aa057a">*[ARCHER WEAPON] Click on the button labeled &apos;Ranger Weapons&apos;.*</content>
-	<content contentuid="h783c7092g4d63g45ffg89fcg5d7b78b510ac">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;[Shout_Whirlwind_DisplayName] consumes bleeding on targets hit to deal a burst of piercing damage. Damage increases for each turn of Bleeding.</content>
+	<content contentuid="h783c7092g4d63g45ffg89fcg5d7b78b510ac">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;[Key:Shout_Whirlwind_DisplayName] consumes bleeding on targets hit to deal a burst of piercing damage. Damage increases for each turn of Bleeding.</content>
 	<content contentuid="h785579b9ga78eg439aga55cg8ae1919479e6">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos; icon=&apos;Skill_Warrior_BatteringRam;Skill_Polymorph_BullRush&apos;/&gt;You are immune to surface damage while using rush skills.</content>
 	<content contentuid="h7875b402g4783g4122gb2bdg35dcde66f221">Toggle Mastery Menu</content>
 	<content contentuid="h787f5de6g477cg43ffg8ee6gfc5faccb055c">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery II&lt;/font&gt;</content>
@@ -1405,7 +1407,7 @@
 	<content contentuid="h904a6729gae64g4aecg8658g366b3ecc35a5">Gas Rune</content>
 	<content contentuid="h9054a1e9g8b48g42cfg8bbcg6483ed25a227">You really should think twice about attacking me. It won&apos;t end well for you.</content>
 	<content contentuid="h9090fd98g526dg47a4ga784ga9a53c0aea01">Character&apos;s &lt;font color=&apos;#c80030&apos;&gt;Piercing Resistance&lt;/font&gt; lowers as &lt;font color=&apos;#DC143C&apos;&gt;Vitality&lt;/font&gt; drops. Removed after Attacker&apos;s turn ends.</content>
-	<content contentuid="h90a60c8fg1d73g4db9g906dgd10be6e3df63">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;[Target_CripplingBlow_DisplayName] deals additional &lt;font color=&apos;#CD1F1F&apos;&gt;piercing damage&lt;/font&gt; to disabled targets.</content>
+	<content contentuid="h90a60c8fg1d73g4db9g906dgd10be6e3df63">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;[Key:Target_CripplingBlow_DisplayName] deals additional &lt;font color=&apos;#CD1F1F&apos;&gt;piercing damage&lt;/font&gt; to disabled targets.</content>
 	<content contentuid="h90c0bf4fg3f1fg48d6g8275ga5ce8ab14dad">Enables Weapon Mastery</content>
 	<content contentuid="h90fdccf2gbb5fg4b23gb29agef990ec18575">Heatburst Rune</content>
 	<content contentuid="h9102ff74ge535g4526gaffdgde551dab819e">Deals Equivalent Shadow Damage to Vitality</content>
@@ -1504,7 +1506,7 @@
 	<content contentuid="h9b42aacbgaaf6g445fgb7dag46036d6e2a38">Chaos Edge (Reset Scaling)</content>
 	<content contentuid="h9b461091g8457g4b2cgb483gc94a8007f1a0">Chaos Edge</content>
 	<content contentuid="h9b7b5b71gf0f5g4fb3g8982g6f10d682d807">&lt;font color=&apos;#00FF7F&apos;&gt;Whispersong&lt;/font&gt; (Activated)</content>
-	<content contentuid="h9b987ae9g9745g4b0cg89f7g1af3e9eedef3">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;[Target_CripplingBlow_DisplayName] deals 25% splash damage around the target in a 3m radius.</content>
+	<content contentuid="h9b987ae9g9745g4b0cg89f7g1af3e9eedef3">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;[Key:Target_CripplingBlow_DisplayName] deals 25% splash damage around the target in a 3m radius.</content>
 	<content contentuid="h9ba89439gabfeg40f1g8bdagfdc8daa50b40">You got it, chief.</content>
 	<content contentuid="h9bba903fg7170g4c8agbdd2g767716547ca3">A frost-capped greatbow arrow that bites deep and stops targets in their tracks.</content>
 	<content contentuid="h9bcf36d2g13e1g4d5agb4cbg5184482f14b3">Expert Bookkeeper</content>
@@ -1541,7 +1543,7 @@
 	<content contentuid="h9df0cb28gac01g470cg9502g0c6c3657cc0a">&lt;font color=&apos;#FF0000&apos; size=&apos;22&apos;&gt;*The rune fails to fit inside the &lt;font color=&apos;#c5a65a&apos;&gt;Oni Gauntlet&lt;/font&gt;.*&lt;/font&gt;</content>
 	<content contentuid="h9e059174g59a6g4ad7gad6eg66ecd59f5c87">Character is covering a nearby ally, and will counter-attack the first attempted attack.</content>
 	<content contentuid="h9e1136f1g7fe4g4fa5g9410g176394a28d81">Omnibolt, Heaven&apos;s Wrath (Strength Scaling)</content>
-	<content contentuid="h9e9877b3gc449g4cc3g88f5g3fba9c70e97d">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;Targets hit by [Shout_Whirlwind_DisplayName] have their resistance to your staff&apos;s element reduced by 25%.</content>
+	<content contentuid="h9e9877b3gc449g4cc3g88f5g3fba9c70e97d">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;Targets hit by [Key:Shout_Whirlwind_DisplayName] have their resistance to your staff&apos;s element reduced by 25%.</content>
 	<content contentuid="h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c">Pistol</content>
 	<content contentuid="h9eba2ad8g13b4g4e10gb3bfg626ad2e82cff">Recharging (Demolitionist&apos;s Backpack)</content>
 	<content contentuid="h9ecc7cdbgfeebg4500g8e0bgcbbf39653af4">Throw the remote charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius.&lt;/font&gt;</content>
@@ -1667,7 +1669,7 @@
 	<content contentuid="hac1d019cg6f2ag4391g95dfg65edfb7d60b1">Runic Cannon</content>
 	<content contentuid="hac1ed07dg13acg469bgae67ged02e05603cd">&lt;font color=&apos;#a6ffcc&apos;&gt;Throw Weapon&lt;/font&gt;</content>
 	<content contentuid="hac5db53dg06dbg4b9dg9e99g8a7340c53c41">Balrin&apos;s Throwing Axe (Lightning)</content>
-	<content contentuid="hac7da9cbgdb9dg4140g85f2g572856006cb9">&lt;icon id=&apos;Projectile_ThrowingKnife&apos; icon=&apos;Skill_Rogue_ThrowingKnife&apos;/&gt;[Projectile_ThrowingKnife_DisplayName] is enhanced with a chance to do bonus damage.</content>
+	<content contentuid="hac7da9cbgdb9dg4140g85f2g572856006cb9">&lt;icon id=&apos;Projectile_ThrowingKnife&apos; icon=&apos;Skill_Rogue_ThrowingKnife&apos;/&gt;[Key:Projectile_ThrowingKnife_DisplayName] is enhanced with a chance to do bonus damage.</content>
 	<content contentuid="hac7dad1dg50e3g461fga1abg30bb5aca84a5">Hunter&apos;s Greatbow</content>
 	<content contentuid="hac84b5bbgc5e1g429eg8928g8d9ee68ae371">Old Faithful</content>
 	<content contentuid="hacb862f7gdaa8g43e0g9da9g3301095fab6c">Tempered Chaotic Runeblade</content>
@@ -2215,7 +2217,7 @@
 	<content contentuid="he8bee6adg6c3eg462cg9000gc72376ce2954">Ronin&apos;s Sidearm</content>
 	<content contentuid="he8c35cdeg7094g4882gabc5ga804cd74f43c">Frostdyne (Empowered) (Wits Scaling)</content>
 	<content contentuid="he8c8644fg8648g4394gb270g42e5b89ba370">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in an armor-eating acid, dealing corrosive damage.</content>
-	<content contentuid="he91f94eag4370g4caagbc62gde3b37a9e452">&lt;icon id=&apos;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_BatteringRam&apos;/&gt;[Rush_BatteringRam_DisplayName] has a 25% chance to apply Dizzy for 1 turn.</content>
+	<content contentuid="he91f94eag4370g4caagbc62gde3b37a9e452">&lt;icon id=&apos;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_BatteringRam&apos;/&gt;[Key:Rush_BatteringRam_DisplayName] has a 25% chance to apply Dizzy for 1 turn.</content>
 	<content contentuid="he99304c7gfdbag48e0gb57bgc8b1fcea2588">a Bludgeon</content>
 	<content contentuid="he9b6a6beg7f37g482fga96fgfb7a411819cd">Eruption, the Portable Cannon (Intelligence Scaling)</content>
 	<content contentuid="he9caef58g9dc1g49b4gb439gb78a46e18435">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery IV&lt;/font&gt;</content>
@@ -2373,6 +2375,7 @@
 	<content contentuid="hf70024b2g0ca8g4515gbfb9g52c5d6061288">A lead-weight greatbow arrow that&apos;s almost too heavy to fire. Almost.</content>
 	<content contentuid="hf70a5f4eg6bafg4c3cg8723gb353371d94a9">Frostdyne (Empowered) (Intelligence Scaling)</content>
 	<content contentuid="hf716da2fgee20g479fg9c79gd5c020d29ded">Assassin&apos;s Wakizashi</content>
+	<content contentuid="hf722e5cag8e8eg4c9cga439gbbd32257fa64">Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost3]% extra base damage in total.</content>
 	<content contentuid="hf73e31b4g8d84g4119ga155g3e4e61e2b110">Dusty Manual</content>
 	<content contentuid="hf755889ag3ea8g4e6eg9d7dga1a3d24f5dfc">&lt;font color=&apos;#F5785A&apos;&gt;Axe Mastery I&lt;/font&gt;</content>
 	<content contentuid="hf75dd4f8g3f32g4736gad55g3bc7e18068f1">Magic-Resistant Wooden Shields</content>
