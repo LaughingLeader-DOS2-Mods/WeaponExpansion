@@ -17,3 +17,4 @@ Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'
 Target_LLWEAPONEX_MagicCripplingBlow_DisplayName	Crippling Magistrike	h0dfc61a0g40edg4887g8843g5a47a26ec0e6
 Target_LLWEAPONEX_BasicAttack_DisplayName	Basic Attack	hbdac34fdg43b6g4439g9947g6676e9c03294
 Target_LLWEAPONEX_BasicAttack_Description	Attack with your currently equipped weapon.	hcacb94cbg4737g4a52g8b07gc5af8628eff5
+Target_LLWEAPONEX_UnarmedBasicAttack_Description	Attack with your fists, dealing [1].	h5d9eca79g2820g4058gba1bgee5b291c2515

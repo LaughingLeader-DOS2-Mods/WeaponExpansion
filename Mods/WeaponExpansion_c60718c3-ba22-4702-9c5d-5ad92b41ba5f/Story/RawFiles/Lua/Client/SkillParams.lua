@@ -144,6 +144,41 @@ end
 
 Skills.Params["GetHighestAttribute"] = GetScaling
 
+--- @param skill StatEntrySkillData
+--- @param character StatCharacter
+--- @param isFromItem boolean
+--- @param param string
+local function GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
+	local weapon = GetUnarmedWeapon(character)
+	local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
+	if damageRange ~= nil then
+		local damageTexts = {}
+		local totalDamageTypes = 0
+		for damageType,damage in pairs(damageRange) do
+			local min = damage[1]
+			local max = damage[2]
+			if min > 0 or max > 0 then
+				if max == min then
+					table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
+				else
+					table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
+				end
+			end
+			totalDamageTypes = totalDamageTypes + 1
+		end
+		if totalDamageTypes > 0 then
+			if totalDamageTypes > 1 then
+				return LeaderLib.Common.StringJoin(", ", damageTexts)
+			else
+				return damageTexts[1]
+			end
+		end
+	end
+	return ""
+end
+
+Skills.Params["LLWEAPONEX_UnarmedBasicAttackDamage"] = GetUnarmedBasicAttackDamage
+
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
 --- @param skill StatEntrySkillData
@@ -201,31 +236,7 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 	end
 
 	if param == "Damage" and skill.UseWeaponDamage == "Yes" and isUnarmed then
-		local weapon = GetUnarmedWeapon(character)
-		local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
-		if damageRange ~= nil then
-			local damageTexts = {}
-			local totalDamageTypes = 0
-			for damageType,damage in pairs(damageRange) do
-				local min = damage[1]
-				local max = damage[2]
-				if min > 0 or max > 0 then
-					if max == min then
-						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
-					else
-						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
-					end
-				end
-				totalDamageTypes = totalDamageTypes + 1
-			end
-			if totalDamageTypes > 0 then
-				if totalDamageTypes > 1 then
-					return LeaderLib.Common.StringJoin(", ", damageTexts)
-				else
-					return damageTexts[1]
-				end
-			end
-		end
+		return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 	end
 end
 

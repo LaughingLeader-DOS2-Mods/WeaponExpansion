@@ -19,10 +19,10 @@ local MessageData = LeaderLib.Classes["MessageData"]
 local function CloseMenu()
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
 		MasteryMenu.Instance:Invoke("closeMenu")
-		MasteryMenu.Open = false
 		MasteryMenu.DisplayingSkillTooltip = false
 		MasteryMenu.DisplayingStatusTooltip = false
 		MasteryMenu.SelectedMastery = nil
+		MasteryMenu.Open = false
 	end
 end
 
@@ -81,6 +81,7 @@ end
 
 local function TryOpenMasteryMenu()
 	-- Try and get the controlled character through net messages
+	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_ID(", CLIENT_ID,")")
 	if CLIENT_ID ~= nil then
 		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(CLIENT_ID))
 	else
@@ -282,7 +283,6 @@ local function OnMenuEvent(ui, call, ...)
 		else
 			CloseMenu()
 		end
-		MasteryMenu.Open = not MasteryMenu.Open
 	elseif call == "onMasterySelected" then
 		MasteryMenu.LastSelected = params[1]
 		MasteryMenu.SelectedMastery = params[2]
