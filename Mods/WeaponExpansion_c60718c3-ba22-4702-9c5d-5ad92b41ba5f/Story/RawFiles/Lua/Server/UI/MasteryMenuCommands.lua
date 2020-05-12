@@ -21,10 +21,20 @@ function OpenMasteryMenu_Start(uuid)
 end
 
 local function RequestOpenMasteryMenu(call,id,callbackID)
-	--Ext.Print("RequestOpenMasteryMenu", "Sent ID", id, "Callback ID", callbackID, "Host UserID", CharacterGetReservedUserID(CharacterGetHostCharacter()))
+	Ext.Print("RequestOpenMasteryMenu", "Sent ID", id, "Callback ID", callbackID, "Host UserID", CharacterGetReservedUserID(CharacterGetHostCharacter()))
 	--Ext.Print("RequestOpenMasteryMenu", "Sent UserName", GetUserName(tonumber(id)), "Callback UserName", GetUserName(callbackID), "Host UserName", GetUserName(CharacterGetReservedUserID(CharacterGetHostCharacter())))
 	if id == nil or id == "-1" then
 		id = callbackID+1
+		local test = GetCurrentCharacter(id)
+		if test == nil then
+			test = GetCurrentCharacter(id-2)
+			if test ~= nil then
+				id = id - 2
+			else
+				InitClientID()
+			end
+		end
+		Ext.Print("[WeaponExpansion:RequestOpenMasteryMenu] Set client ID to fallback ID (",id,")")
 	end
 	local clientID = tonumber(id)
 	if clientID ~= nil then
