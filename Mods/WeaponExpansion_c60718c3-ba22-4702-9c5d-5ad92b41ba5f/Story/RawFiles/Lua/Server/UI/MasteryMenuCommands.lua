@@ -1,23 +1,6 @@
 ---@type MessageData
 local MessageData = LeaderLib.Classes["MessageData"]
 
-function SendClientID(uuid, id)
-	LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetClientID", id)
-end
-
-function InitClientID()
-	local sentIDs = {}
-	for i,player in ipairs(Osi.DB_IsPlayer:Get(nil)) do
-		local uuid = player[1]
-		local id = CharacterGetReservedUserID(uuid)
-		if not sentIDs[id] then
-			SendClientID(uuid, id)
-			sentIDs[id] = true
-		end
-	end
-end
-
 function OpenMasteryMenu_Start(uuid)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
 	local masteries = {}

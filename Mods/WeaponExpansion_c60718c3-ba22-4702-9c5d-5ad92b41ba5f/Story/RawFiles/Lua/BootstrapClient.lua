@@ -1,4 +1,6 @@
 CLIENT_ID = nil
+ACTIVE_CHARACTER = nil
+PARTY = nil
 
 Ext.Require("Shared/_Main.lua")
 Ext.Require("Client/SkillParams.lua")

@@ -201,7 +201,8 @@ local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem,
 	end
 
 	if param == "Damage" and skill.UseWeaponDamage == "Yes" and isUnarmed then
-		local damageRange = Math.GetSkillDamageRange(character, skill, GetUnarmedWeapon(character))
+		local weapon = GetUnarmedWeapon(character)
+		local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
 		if damageRange ~= nil then
 			local damageTexts = {}
 			local totalDamageTypes = 0

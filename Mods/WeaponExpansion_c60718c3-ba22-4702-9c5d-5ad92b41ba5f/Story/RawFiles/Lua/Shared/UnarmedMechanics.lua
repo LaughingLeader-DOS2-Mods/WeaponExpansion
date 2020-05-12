@@ -6,7 +6,7 @@ local unarmedAttributes = {
 
 function GetUnarmedMasteryBoost(unarmedMastery)
 	if unarmedMastery == 1 then
-		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost1", 20)
+		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost1", 30)
 	elseif unarmedMastery == 2 then
 		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost2", 40)
 	elseif unarmedMastery == 3 then
@@ -31,14 +31,18 @@ function GetUnarmedWeapon(character)
 	---@type StatItem
 	local weapon = Skills.PrepareWeaponStat("NoWeapon", character.Level, highestAttribute, "None", unarmedMasteryBoost)
 	print("Weapon:", LeaderLib.Common.Dump(weapon))
-	return weapon
+	return weapon,unarmedMasteryBoost,unarmedMasteryRank
+end
+
+local function statMatchOrNil(stat, name)
+	return stat == nil or (stat ~= nil and stat.Name == name)
 end
 
 ---@param character StatCharacter
-function IsUnarmed(character, noShields)
+function IsUnarmed(character, allowShields)
+	Ext.PrintError(character, character.MainWeapon.Name, character.OffHandWeapon)
 	if character ~= nil then
-		return (character.MainWeapon == nil or character.MainWeapon.Name == "NoWeapon") and (
-			character.OffHandWeapon == nil or (noShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
+		return statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
 	end
 	return false
 end

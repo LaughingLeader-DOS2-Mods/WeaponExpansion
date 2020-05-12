@@ -100,6 +100,7 @@ NOT DB_LeaderLib_EngineStatus(_Status)
 THEN
 NRD_ModCall("WeaponExpansion", "OnStatusRemoved", (STRING)_Char, _Status);
 //END_REGION
+
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_03_GameScripts"
