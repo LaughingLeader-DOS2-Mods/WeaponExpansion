@@ -684,7 +684,7 @@
 	<content contentuid="h44e46308g8f4dg4357gaac4g1d50a425d36a">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h4504bbc0gb7a6g42c3ga57eg83f3e78c0db2">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Insert Failed - No Hand Crossbow Equipped&lt;/font&gt;</content>
 	<content contentuid="h451677d2ga792g4f99g8f77gccafa357861c">A warrior who strives to defend the innocent through a unique style that utilizes dual shields</content>
-	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Warfare skills can now be used while unarmed.&lt;br&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost1]%% extra base damage in total, and scale with your highest base attribute (Strength, Finesse, or Constitution).</content>
+	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Warfare skills can now be used while unarmed.&lt;br&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost1]% extra base damage in total, and scale with your highest base attribute (Strength, Finesse, or Constitution).</content>
 	<content contentuid="h453d9d53gcdfdg4674g819fgbc0de4196a21">Heed the rallying cry of the Standard-Bearer, teleporting to the raised banner.</content>
 	<content contentuid="h45457359gaa62g40f9gaa6bgd1996571cc40">Shield Prison</content>
 	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1">Polearm</content>
