@@ -1297,8 +1297,23 @@ String(_Attacker, _Name)
 AND
 String(_Owner, _OwnerName)
 THEN
-LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:AttackedByObject] DamageSource [",_DamageSource,"] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
 SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
+
+IF
+AttackedByObject(_Target, _Owner, _Attacker, _DamageType, "Attack")
+AND
+HasActiveStatus(_Target, "AOO", 1)
+AND
+HasActiveStatus(_Attacker, "AOO", 1)
+AND
+String(_Target, _TargetStr)
+AND
+String(_Attacker, _Name)
+AND
+String(_Owner, _OwnerName)
+THEN
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:AttackedByObject] Attack of Opportunity! [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
 
 IF
 AttackedByObject(_Target, NULL_00000000-0000-0000-0000-000000000000, _Attacker, _DamageType, _DamageSource)
@@ -1307,7 +1322,7 @@ String(_Target, _TargetStr)
 AND
 String(_Attacker, _Name)
 THEN
-LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:AttackedByObject] DamageType [",_DamageType,"] DamageSource [",_DamageSource,"] [",_Name,"](No Owner) attacked [",_TargetStr,"].");
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:AttackedByObject] DamageSource [",_DamageSource,"] [",_Name,"](No Owner) attacked [",_TargetStr,"].");
 
 IF
 CharacterReceivedDamage(_Target, _Percentage, _Attacker)
@@ -1326,6 +1341,32 @@ StringConcatenate(_Str3, "].", _Suffix)
 THEN
 LeaderLog_LogInt("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterReceivedDamage] [",_Percentage, _Suffix);
 SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
+
+IF
+CharacterPhysicalHitBy(_Target, _Owner, _Attacker)
+AND
+String(_Target, _TargetStr)
+AND
+String(_Attacker, _Name)
+AND
+String(_Owner, _OwnerName)
+THEN
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterPhysicalHitBy] [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
+
+IF
+CharacterPhysicalHitBy(_Target, _Owner, _Attacker)
+AND
+HasActiveStatus(_Target, "AOO", 1)
+AND
+HasActiveStatus(_Attacker, "AOO", 1)
+AND
+String(_Target, _TargetStr)
+AND
+String(_Attacker, _Name)
+AND
+String(_Owner, _OwnerName)
+THEN
+LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterPhysicalHitBy] Attack of Opportunity! [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
 //END_REGION
 
 //REGION STATUSES
