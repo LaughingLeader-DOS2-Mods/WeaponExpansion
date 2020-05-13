@@ -186,12 +186,7 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 --- @param isFromItem boolean
 --- @param param string
 local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
-	--Ext.Print("Looking for skill param ("..tostring(param)..") for: " .. skill.Name)
-	--Ext.Print("skill("..tostring(skill)..") character("..tostring(character)..") isFromItem("..tostring(isFromItem)..")")
 	local isUnarmed = IsUnarmed(character)
-
-	--print(param, skill.UseWeaponDamage, isUnarmed, character.Character:HasTag("LLWEAPONEX_Unarmed"), character.MainWeapon.DynamicStats[1].DamageFromBase)
-
 	local param_func = Skills.Damage.Params[param]
 	if param_func ~= nil then
 		local status,mainDamageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)

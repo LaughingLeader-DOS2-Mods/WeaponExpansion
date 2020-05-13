@@ -196,7 +196,7 @@ local function GetElementalWeakness(character, tagName, param)
 	end
 
 	local resistanceText = ""
-	local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_ElementalWeaknessDuration", 6.0)
+	local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ElementalWeaknessDuration", 6.0)
 	if duration > 0 then
 		duration = math.tointeger(duration / 6.0)
 		paramText = paramText:gsub("%[1%]", duration)
@@ -286,6 +286,15 @@ Mastery.Params = {
 					end,
 				},
 				LLWEAPONEX_Staff_Mastery1 = {
+					ID = "ELEMENTAL_DEBUFF",
+					Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [1] for [2] turn(s).</font>"),
+					GetParam = GetElementalWeakness,
+				},
+			}
+		},
+		Target_LLWEAPONEX_BasicAttack = {
+			Tags = {
+				LLWEAPONEX_Wand_Mastery1 = {
 					ID = "ELEMENTAL_DEBUFF",
 					Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [1] for [2] turn(s).</font>"),
 					GetParam = GetElementalWeakness,

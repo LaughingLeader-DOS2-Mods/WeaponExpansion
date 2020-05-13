@@ -1,3 +1,8 @@
+HitHandler = {
+	---@type table<string,function>
+	OnHitCallbacks = {}
+}
+
 local function CanGrantMasteryExperience(target,player)
 	if IsTagged(target, "LLDUMMY_TrainingDummy") then
 		return true,0.1
@@ -24,16 +29,40 @@ local function OnPrepareHit(target,source,damage,handle)
 end
 Ext.NewCall(OnPrepareHit, "LLWEAPONEX_Ext_OnPrepareHit", "(GUIDSTRING)_Target, (GUIDSTRING)_Instigator, (INTEGER)_Damage, (INTEGER64)_Handle")
 
+local function WeaponIsTagged(char, weapon, tag)
+	if tag == "LLWEAPONEX_Unarmed" and CharacterGetEquippedWeapon(char) == nil then
+		return true
+	end
+	if (weapon ~= nil and IsTagged(weapon, weaponType) == 1) then
+		return true
+	end
+	return false
+end
+
 --- @param target string
 --- @param source string
 --- @param damage integer
 --- @param handle integer
 local function OnHit(target,source,damage,handle)
-	--LeaderLib.Debug_TraceOnHit(target,source,damage,handle)
-	if LeaderLib.Game.HitWithWeapon(target, handle, false) then
-		local b,expGain = CanGrantMasteryExperience(target,source)
-		if b and expGain > 0 then
-			AddMasteryExperienceForAllActive(source, expGain)
+	if source ~= nil then
+		--LeaderLib.Debug_TraceOnHit(target,source,damage,handle)
+		if LeaderLib.Game.HitWithWeapon(target, handle) then
+			local b,expGain = CanGrantMasteryExperience(target,source)
+			if b and expGain > 0 then
+				AddMasteryExperienceForAllActive(source, expGain)
+			end
+			if #HitHandler.OnHitCallbacks > 0 then
+				local mainhand = CharacterGetEquippedItem(source, "Weapon")
+				local offhand = CharacterGetEquippedItem(source, "Shield")
+				for tag,callback in pairs(HitHandler.OnHitCallbacks) do
+					if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
+						local status,err = xpcall(callback, debug.traceback, target, source, damage, handle)
+						if not status then
+							Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
+						end
+					end
+				end
+			end
 		end
 	end
 end

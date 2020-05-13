@@ -166,16 +166,19 @@ local function StatOverrides_Init()
 		end
 		for stat,data in pairs(entries) do
 			local statParams = Ext.StatGetAttribute(stat, statParamsAttribute)
-			if statParams == nil then
-				statParams = ""
-			else
-				statParams = statParams .. ";"
-			end
-			local nextParams = statParams .. "LLWEAPONEX_MasteryBonuses"
-			Ext.StatSetAttribute(stat, statParamsAttribute, nextParams)
-			LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Set params for ("..stat..") from ("..statParams..") to ("..nextParams..").")
-			if data.Description ~= nil then
-				Ext.StatSetAttribute(stat, "Description", data.Description.Value)
+			local canAddMasteryParam = statParams == nil or not string.find(statParams, "LLWEAPONEX_MasteryBonuses")
+			if canAddMasteryParam then
+				if statParams == nil then
+					statParams = ""
+				else
+					statParams = statParams .. ";"
+				end
+				local nextParams = statParams .. "LLWEAPONEX_MasteryBonuses"
+				Ext.StatSetAttribute(stat, statParamsAttribute, nextParams)
+				LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Set params for ("..stat..") from ("..statParams..") to ("..nextParams..").")
+				if data.Description ~= nil then
+					Ext.StatSetAttribute(stat, "Description", data.Description.Value)
+				end
 			end
 		end
 	end

@@ -100,10 +100,11 @@ Throwing	1	Grenade	Basic grenades have a 25% chance to explode again.	❌
 Throwing	2	Placeholder	Placeholder	❌
 Throwing	3	Placeholder	Placeholder	❌
 Throwing	4	Placeholder	Placeholder	❌
-Unarmed	1	Way of the Fist	Your warfare skills can now be used while unarmed. +30% base damage with unarmed attacks (20 -> 50 total).	√
-Unarmed	2	Placeholder	+40% base damage with unarmed attacks (20 base -> 60 total)	√
-Unarmed	3	Placeholder	+65% base damage with unarmed attacks (20 base -> 85 total)	√
-Unarmed	4	Placeholder	+80% base damage with unarmed attacks (20 base -> 100 total)	√
+Unarmed	1	Way of the Fist	Warfare skills can now be used while unarmed.	√
+Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 total).	√
+Unarmed	2	Unarmed Scaling 2	+40% base damage with unarmed attacks (20 base -> 60 total)	√
+Unarmed	3	Unarmed Scaling 3	+65% base damage with unarmed attacks (20 base -> 85 total)	√
+Unarmed	4	Unarmed Scaling 4	+80% base damage with unarmed attacks (20 base -> 100 total)	√
 Wand	1	Flesh Sacrifice	If standing in a pool of blood before Flesh Sacrifice is cast, absorb it to restore health and negate the Constitution debuff.	❌
 Wand	1	Basic Attack	Basic attacks now lower the target's resistance to your wand's element by 10% for 1 turn.	❌
 Wand	2	Placeholder	Placeholder	❌

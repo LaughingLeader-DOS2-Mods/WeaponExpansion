@@ -37,7 +37,7 @@ Ext.Require("Shared/UnarmedMechanics.lua")
 local function TryCheckMasteryRequirement(character, tag)
 	if character:HasTag(tag) == true then
 		local a,b,mastery = string.find(tag,"(.+)_Mastery")
-		print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
+		--print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
 		if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 			return true
 		else
