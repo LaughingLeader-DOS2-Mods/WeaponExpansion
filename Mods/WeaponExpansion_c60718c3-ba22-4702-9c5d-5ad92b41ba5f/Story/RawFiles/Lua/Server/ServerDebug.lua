@@ -127,7 +127,9 @@ function DebugInit()
     CharacterAddAbility(host, "RogueLore", 4)
 
     --ApplyStatus(host, "LLWEAPONEX_RUPTURE", 360.0, 1, host)
-    RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
+    --RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
+    RemoveStatus(host, "LLWEAPONEX_RUPTURE")
+    ApplyStatus(host, "LLWEAPONEX_DEBUG_BONUS_WEAPON_TEST", -1.0, 0, host)
     local x,y,z = GetPosition(host)
     for mastery,masterData in pairs(Masteries) do
         local rank = Ext.Random(1,4)

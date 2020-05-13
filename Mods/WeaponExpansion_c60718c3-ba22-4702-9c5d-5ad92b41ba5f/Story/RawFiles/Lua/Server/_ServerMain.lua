@@ -234,4 +234,6 @@ function OnGameStarted(region, editorMode)
             SetIsUnarmed(entry[1])
         end
     end
+
+    LeaderLib.EnableFeature("LeaderLib_ApplyBonusWeaponStatuses")
 end
