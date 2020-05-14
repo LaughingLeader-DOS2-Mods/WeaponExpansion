@@ -396,7 +396,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
-		local mainDmgs = Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, noRandomization, "RogueLore")
+		local mainDmgs = Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, nil, noRandomization, "RogueLore")
 		mainDmgs:Multiply(damageMultipliers)
 		if skillDamageType ~= nil then
 			mainDmgs:ConvertDamageType(skillDamageType)
@@ -406,7 +406,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
-		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, "RogueLore")
+		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
 		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end

@@ -195,32 +195,12 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 --- @param isFromItem boolean
 --- @param param string
 function SkillGetDescriptionParam(skill, character, isFromItem, param)
-	local isUnarmed = IsUnarmed(character)
+	--print(param, skill.Name)
 	local param_func = Skills.Damage.Params[param]
 	if param_func ~= nil then
 		local status,mainDamageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
 		if status and mainDamageRange ~= nil then
-			local damageTexts = {}
-			local totalDamageTypes = 0
-			for damageType,damage in pairs(mainDamageRange) do
-				local min = damage[1]
-				local max = damage[2]
-				if min > 0 or max > 0 then
-					if max == min then
-						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
-					else
-						table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
-					end
-				end
-				totalDamageTypes = totalDamageTypes + 1
-			end
-			if totalDamageTypes > 0 then
-				if totalDamageTypes > 1 then
-					return LeaderLib.Common.StringJoin(", ", damageTexts)
-				else
-					return damageTexts[1]
-				end
-			end
+			return LeaderLib.UI.Tooltip.FormatDamageRange(mainDamageRange)
 		else
 			Ext.PrintError("Error getting param ("..param..") for skill:\n",mainDamageRange)
 			return ""
@@ -239,9 +219,9 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 		end
 	end
 
-	if param == "Damage" and skill.UseWeaponDamage == "Yes" and isUnarmed then
+	if param == "Damage" and skill.UseWeaponDamage == "Yes" and IsUnarmed(character) then
 		return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 	end
 end
 
-Ext.RegisterListener("SkillGetDescriptionParam", LLWEAPONEX_SkillGetDescriptionParam)
+Ext.RegisterListener("SkillGetDescriptionParam", SkillGetDescriptionParam)

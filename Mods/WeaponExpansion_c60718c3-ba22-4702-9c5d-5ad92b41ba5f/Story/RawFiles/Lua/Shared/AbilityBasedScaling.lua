@@ -1,7 +1,9 @@
 --- @param ability integer
 local function ScaledDamageFromPrimaryAttribute(ability)
-	local attributeMax = Ext.ExtraData.AttributeSoftCap - Ext.ExtraData.AttributeBaseValue
-    return (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * (attributeMax/Ext.ExtraData.CombatAbilityCap))
+    local attributeMax = Ext.ExtraData.AttributeSoftCap - Ext.ExtraData.AttributeBaseValue
+    local result = (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * (attributeMax/Ext.ExtraData.CombatAbilityCap))
+    print("ScaledDamageFromPrimaryAttribute",ability,result*100, Game.Math.ScaledDamageFromPrimaryAttribute(40)*100)
+    return result
 end
 
 --- @param skill StatEntrySkillData
@@ -17,7 +19,7 @@ end
 --- @param character StatCharacter
 --- @param weapon StatItem
 local function ComputeWeaponRequirementScaledDamage(character, weapon, ability)
-	--Ext.Print("Character ability: ", ability, character, "Character("..tostring(character)..")")
+	Ext.Print("Character ability: ", ability)
     if ability ~= nil then
         return ScaledDamageFromPrimaryAttribute(character[ability]) * 100.0
     else
@@ -108,6 +110,7 @@ end
 
 --- @param character StatCharacter
 --- @param weapon StatItem
+--- @param weapon StatItem
 --- @param ability string
 --- @return number[]
 local function CalculateWeaponDamageRange(character, weapon, ability)
@@ -147,7 +150,7 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, 
     if skill.UseWeaponDamage == "Yes" then
         local mainDamageRange = CalculateWeaponDamageRange(character, mainWeapon, ability)
 
-        if offHandWeapon ~= nil and IsRangedWeapon(mainWeapon) == IsRangedWeapon(offHandWeapon) then
+        if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
             local offHandDamageRange = CalculateWeaponDamageRange(character, offHandWeapon, ability)
 
             local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
