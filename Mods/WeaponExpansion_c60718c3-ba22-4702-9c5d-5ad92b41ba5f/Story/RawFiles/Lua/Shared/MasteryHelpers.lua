@@ -1,4 +1,22 @@
 
+---@param character EsvCharacter|string
+---@param mastery string
+---@return integer
+local function GetHighestMasteryRank(character, mastery)
+	if type(character) == "string" then
+		character = Ext.GetCharacter(character)
+	end
+	for i=Mastery.Variables.MaxRank,1,-1 do
+		local tag = mastery.."_Mastery"..i
+		if character:HasTag(tag) then
+			return i
+		end
+	end
+	return 0
+end
+
+Mastery.GetHighestMasteryRank = GetHighestMasteryRank
+
 ---@param uuid string
 ---@param mastery string
 ---@param minLevel integer

@@ -383,14 +383,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0
-		local masteryLevel = 0
-		for i=1,Mastery.Variables.MaxRank,1 do
-			local tag = "HandCrossbow_Mastery"..i
-			local character = Ext.GetCharacter(uuid)
-			if character.Character:HasTag(tag) then
-				masteryLevel = i
-			end
-		end
+		local masteryLevel = Mastery.GetHighestMasteryRank(attacker.Character, "LLWEAPONEX_HandCrossbow")
 		if masteryLevel > 0 then
 			local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_HandCrossbowMasteryBoost"..masteryLevel, 0)
 			if boost > 0 then
@@ -462,14 +455,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0
-		local masteryLevel = 0
-		for i=1,Mastery.Variables.MaxRank,1 do
-			local tag = "Pistol_Mastery"..i
-			local character = Ext.GetCharacter(uuid)
-			if character.Character:HasTag(tag) then
-				masteryLevel = i
-			end
-		end
+		local masteryLevel = Mastery.GetHighestMasteryRank(attacker.Character, "LLWEAPONEX_Pistol")
 		if masteryLevel > 0 then
 			local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
 			if boost > 0 then
