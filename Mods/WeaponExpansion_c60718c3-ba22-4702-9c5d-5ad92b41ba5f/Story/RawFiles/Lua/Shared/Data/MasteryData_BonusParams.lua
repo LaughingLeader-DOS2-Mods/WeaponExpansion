@@ -196,16 +196,20 @@ local function GetElementalWeakness(character, tagName, param)
 	end
 
 	local resistanceText = ""
-	local i = 0
-	for stat,value in pairs(resistanceReductions) do
-		resistanceText = resistanceText.."<img src='Icon_BulletPoint'>"..LeaderLib.Game.GetResistanceText(stat, value)
-		i = i + 1
-		if i < resistanceCount then
-			resistanceText = resistanceText .. "<br>"
+	if #resistanceReductions > 0 then
+		local i = 0
+		for stat,value in pairs(resistanceReductions) do
+			resistanceText = resistanceText.."<img src='Icon_BulletPoint'>"..LeaderLib.Game.GetResistanceText(stat, value)
+			i = i + 1
+			if i < resistanceCount then
+				resistanceText = resistanceText .. "<br>"
+			end
 		end
+		paramText = string.gsub(paramText, "%[Special%]", resistanceText)
+		return paramText
+	else
+		return ""
 	end
-	paramText = paramText:gsub("%[Special%]", resistanceText)
-	return paramText
 end
 
 Mastery.Params = {
@@ -214,8 +218,6 @@ Mastery.Params = {
 }
 
 Mastery.Params.SkillData.Projectile_ThrowingKnife = {
-	Description = TranslatedString:Create("h5fdfca1dg8dd4g4cc3g9939g7433a38d4658","Throw a knife at your opponent, dealing [1].[2]"),
-	DescriptionKey = "LLWEAPONEX_Projectile_ThrowingKnife_Description",
 	Tags = {
 		LLWEAPONEX_Dagger_Mastery1 = {
 			Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[1]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[2] bonus damage</font> on hit.</font>"),
@@ -227,10 +229,8 @@ Mastery.Params.SkillData.Projectile_ThrowingKnife = {
 Mastery.Params.SkillData.Projectile_EnemyThrowingKnife = Mastery.Params.SkillData.Projectile_ThrowingKnife
 
 Mastery.Params.SkillData.Target_CripplingBlow = {
-	Description = TranslatedString:Create("h41e991cbgbe00g4469g924bge4d4c73cffa2","Cripple the target with a sweeping blow, and all characters around it. Deals [1].[2]"),
-	DescriptionKey = "LLWEAPONEX_Target_CripplingBlow_Description",
 	Tags = {
-		LLWEAPONEX_Bludgeon_Mastery1 = {
+		LLWEAPONEX_Bludgeon_Mastery2 = {
 			ID = "SUNDER",
 			Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration] turn(s).</font>"),
 			NamePrefix = "<font color='#F19824'>Sundering</font>"
@@ -247,8 +247,6 @@ Mastery.Params.SkillData.Target_CripplingBlow = {
 Mastery.Params.SkillData.Target_EnemyCripplingBlow = Mastery.Params.SkillData.Target_CripplingBlow
 
 Mastery.Params.SkillData.Shout_Whirlwind = {
-	Description = TranslatedString:Create("h83e82e86g9f8cg47bdgb7cdgeae280223625","Perform a whirlwind attack, hitting enemies around you for [1].[2]"),
-	DescriptionKey = "LLWEAPONEX_Shout_Whirlwind_Description",
 	Tags = {
 		LLWEAPONEX_Scythe_Mastery1 = {
 			ID = "RUPTURE",
@@ -279,6 +277,10 @@ Mastery.Params.SkillData.Shout_Whirlwind = {
 			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [1] for [2] turn(s).</font>"),
 			GetParam = GetElementalWeakness,
 		},
+		LLWEAPONEX_HandCrossbow_Mastery1 = {
+			ID = "WHIRLWIND_BOLTS",
+			Param = TranslatedString:Create("h665d9b1age332g4988gb57cgd1357c4c9af2","<font color='#F19824'>While spinning, shoot [ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets]-[ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets] enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget:ExplodeRadius]m radius, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].</font>"),
+		},
 	}
 }
 
@@ -308,12 +310,19 @@ Mastery.Params.SkillData.Shout_EnemyFleshSacrifice = Mastery.Params.SkillData.Sh
 Mastery.Params.SkillData.Rush_BatteringRam = {
 	Tags = {
 		LLWEAPONEX_Banner_Mastery1 = {
-			ID = "BLOOD_EMPOWER",
+			ID = "WAR_CHARGE_RUSH",
 			Param = TranslatedString:Create("h3c34bca6gc080g4de4gae5eg4909ad60ecc8","If under the effects of <font color='#FFCE58'>War Charge</font>, deal [ExtraData:LLWEAPONEX_MasteryBonus_WarChargeDamageBoost]% more damage and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing."),
-			GetParam = function(character, tagName, param)
-				return string.gsub(param, "%[1%]", Ext.StatGetAttribute("Stats_LLWEAPONEX_BloodEmpowered", "DamageBoost"))
-			end},
+		},
+		LLWEAPONEX_Bludgeon_Mastery1 = {
+			ID = "RUSH_DIZZY",
+			Params = TranslatedString:Create("h9831ecc7g21feg403cg9bd6ga0bab3f7eb9c", "Become a thundering force of will when rushing, <font color='#FFCE58'>knocking enemies aside</font> with a <font color='#F19824'>[ExtraData:LLWEAPONEX_MasteryBonus_RushDizzyChance]% chance to apply Dizzy for [LLWEAPONEX_MasteryBonus_RushDizzyTurns] turn(s)</font>.[ExtraData:LLWEAPONEX_MasteryBonus_WarChargeDamageBoost]% more damage on hit</font> and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing.")
+		}
 	}
 }
 
---Mastery.Params.SkillData.Rush_BullRush = Mastery.Params.SkillData.Rush_BatteringRam
+Mastery.Params.SkillData.Rush_BullRush = {
+	Tags = {
+		LLWEAPONEX_Banner_Mastery1 = Mastery.Params.SkillData.Rush_BatteringRam.Tags.LLWEAPONEX_Banner_Mastery1,
+		LLWEAPONEX_Bludgeon_Mastery1 = Mastery.Params.SkillData.Rush_BatteringRam.Tags.LLWEAPONEX_Bludgeon_Mastery1,
+	}
+}

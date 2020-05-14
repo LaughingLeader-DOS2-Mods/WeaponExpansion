@@ -22,7 +22,7 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	local tooltipHeader = ui:GetValue("tooltip_array", "string", 1)
 	local isDamageTooltip = tooltipHeader == "Damage"
 	LeaderLib.PrintDebug("[OnAddFormattedTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY, noCompare)
-	setupTooltip.DumpTooltipArray(ui)
+	--setupTooltip.DumpTooltipArray(ui)
 
 	local isSkill = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == "SkillName"
 
@@ -87,13 +87,15 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 						ui:SetValue("tooltip_array", description, index+1)
 					end
 				end
-				if namePrefix ~= "" then
-					local index = setupTooltip.FindTooltipTypeIndex(ui, LeaderLib.Data.UI.TOOLTIP_TYPE.SkillName)
-					if index ~= nil then
-						local name = ui:GetValue("tooltip_array", "string", index+1)
-						if name == nil then name = "" end
-						name = namePrefix .. " ".. name
-						ui:SetValue("tooltip_array", name, index+1)
+				if Ext.IsDeveloperMode() then
+					if namePrefix ~= "" then
+						local index = setupTooltip.FindTooltipTypeIndex(ui, LeaderLib.Data.UI.TOOLTIP_TYPE.SkillName)
+						if index ~= nil then
+							local name = ui:GetValue("tooltip_array", "string", index+1)
+							if name == nil then name = "" end
+							name = namePrefix .. " ".. name
+							ui:SetValue("tooltip_array", name, index+1)
+						end
 					end
 				end
 			end

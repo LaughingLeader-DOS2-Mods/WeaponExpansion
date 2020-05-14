@@ -567,7 +567,7 @@ Skills = {
 	Damage = {
 		Params = {
 			LLWEAPONEX_PistolDamage = GetPistolDamage,
-			LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowDamage
+			LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowDamage,
 		},
 		Skills = {
 			Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolDamage,
@@ -575,6 +575,7 @@ Skills = {
 			Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolDamage,
 			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowDamage,
 			Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage,
+			Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowDamage
 		}
 	}
 }

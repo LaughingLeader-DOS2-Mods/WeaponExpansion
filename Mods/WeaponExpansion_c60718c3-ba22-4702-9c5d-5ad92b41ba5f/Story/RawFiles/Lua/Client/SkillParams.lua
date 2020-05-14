@@ -194,7 +194,7 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 --- @param character StatCharacter
 --- @param isFromItem boolean
 --- @param param string
-local function LLWEAPONEX_SkillGetDescriptionParam(skill, character, isFromItem, param)
+function SkillGetDescriptionParam(skill, character, isFromItem, param)
 	local isUnarmed = IsUnarmed(character)
 	local param_func = Skills.Damage.Params[param]
 	if param_func ~= nil then

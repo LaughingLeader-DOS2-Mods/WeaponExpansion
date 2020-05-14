@@ -33,6 +33,33 @@ local function ReplacePlaceholders(str)
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
 		output = string.gsub(output, escapedReplace, value)
 	end
+	for v in string.gmatch(output, "%[SkillDamage:.-%]") do
+		local value = ""
+		local skillName = v:gsub("%[SkillDamage:", ""):gsub("%]", "")
+		if skillName ~= nil and skillName ~= "" then
+			local props = LeaderLib.Common.StringSplit(":", skillName)
+			local param = "Damage"
+			if props ~= nil and #props >= 1 then
+				param = props[1]
+			end
+			local skill = Skills.PrepareSkillProperties(skillName)
+			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER).Stats
+			local paramText = SkillGetDescriptionParam(skill, character, false, param)
+			if paramText == nil and param == "Damage" then
+				local damageRange = Game.Math.GetSkillDamageRange(character, skill)
+				value = LeaderLib.UI.Tooltip.FormatDamageRange(damageRange)
+			else
+				value = paramText
+			end
+		end
+		if value ~= nil and value ~= "" then
+			if type(value) == "number" then
+				value = string.format("%i", value)
+			end
+		end
+		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
+		output = string.gsub(output, escapedReplace, value)
+	end
 	for v in string.gmatch(output, "%[Key.-%]") do
 		local key = v:gsub("%[Key:", ""):gsub("%]", "")
 		local translatedText = Ext.GetTranslatedStringFromKey(key)
