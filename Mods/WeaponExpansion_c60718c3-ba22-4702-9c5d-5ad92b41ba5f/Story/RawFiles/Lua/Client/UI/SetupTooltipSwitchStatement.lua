@@ -4,7 +4,6 @@ local function FindTooltipTypeIndex(ui, enumType)
 	local index = 0
 	local totalNil = 0
 	while index < LENGTH and totalNil < 30 do
-		index = index + 1
 		local tooltipEntryType = ui:GetValue("tooltip_array", "number", index)
 		if tooltipEntryType ~= nil then
 			if tooltipEntryType == enumType then
@@ -456,8 +455,6 @@ local function FindTooltipTypeIndex(ui, enumType)
 				totalNil = totalNil + 1
 				index = index + 1
 			end
-		else
-			printValue(ui, index)
 		end
 		index = index + 1
 	end

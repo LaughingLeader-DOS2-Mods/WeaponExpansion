@@ -115,7 +115,7 @@ local function CripplingBlowBonus(char, state, funcParams)
 		local target = funcParams[1]
 		if target ~= nil then
 			if hasMasteries["SUNDER"] == true then
-				local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration", 6.0)
+				local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns", 2) * 6.0
 				if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
 					local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
 					NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
@@ -193,7 +193,7 @@ local function WhirlwindBonus(char, state, funcParams)
 				end
 			end
 			if hasMasteries["ELEMENTAL_DEBUFF"] == true then
-				local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ElementalWeaknessDuration", 6.0)
+				local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns", 1) * 6.0
 				local weaponuuid = CharacterGetEquippedWeapon(char)
 				--local damageType = Ext.StatGetAttribute(NRD_ItemGetStatsId(weapon), "Damage Type")
 				local weapon = Ext.GetItem(weaponuuid)

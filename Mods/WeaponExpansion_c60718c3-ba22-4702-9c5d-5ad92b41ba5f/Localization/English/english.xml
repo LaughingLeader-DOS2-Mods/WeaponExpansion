@@ -157,7 +157,7 @@
 	<content contentuid="h0e4a73f9g3111g4ef9g8c5ega855a2b8473b">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
 	<content contentuid="h0ed78be5g1afag4d98ga3c3ge547395bf212">Dragon&apos;s Bane</content>
 	<content contentuid="h0ee0f7bbg3f1ag44b1g921ege32ac4f642a3">Capped Quarterstaff</content>
-	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your weapon&apos;s element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessDuration] turn(s).&lt;/font&gt;</content>
+	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your weapon&apos;s element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h0f05d7a3g7537g42b2g8816ge356bcadaef4">Gnak&apos;s Spell Scroll (Memory Scaling)</content>
 	<content contentuid="h0f0aca8cg237bg4696gb195gbd43e7378fd4">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Ice Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
 	<content contentuid="h0f364e95ga530g490cg846agce877c3a904a">Insert into a Pistol to Change Damage Type</content>
@@ -305,7 +305,7 @@
 	<content contentuid="h1e7673d0g6739g4be5gb84agf1d3fc43b003">Revenant</content>
 	<content contentuid="h1e98bcebg2e42g4699gba2bg6f647d428699">Unarmed</content>
 	<content contentuid="h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa">Scythe</content>
-	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt; for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration] turn(s).&lt;/font&gt;</content>
+	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt; for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h1ec134feg2358g4666g91c3gb0808e20fd0a">[ORDER] *Hit the button labeled &apos;Place Order&apos;.*</content>
 	<content contentuid="h1ec7c569g945fg47a9g9efbg52852b310b6c">Wanderer&apos;s Blade</content>
 	<content contentuid="h1ed46838g214eg4110g92e7g03381bcdfe7e">Banner of the Pack (Finesse Scaling)</content>
