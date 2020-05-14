@@ -157,7 +157,11 @@ local function GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 		for damageType,damage in pairs(damageRange) do
 			local min = damage[1]
 			local max = damage[2]
-			if min > 0 or max > 0 then
+
+			if min == nil then min = 0 end
+			if max == nil then max = 0 end
+
+			if min > 0 and max > 0 then
 				if max == min then
 					table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
 				else

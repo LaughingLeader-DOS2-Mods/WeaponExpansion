@@ -32,7 +32,7 @@ LLWEAPONEX_LeaderLib_InitTraderSettings();
 LLWEAPONEX_LeaderLib_InitDeltamods();
 LLWEAPONEX_LeaderLib_AddBlockedSkills();
 
-//LeaderLib_Lua_EnableFeature(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, "LeaderLib_ApplyBonusWeaponStatuses");
+//LeaderLib_Lua_EnableFeature(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, "ApplyBonusWeaponStatuses");
 
 PROC
 LLWEAPONEX_LeaderLib_InitSettings()

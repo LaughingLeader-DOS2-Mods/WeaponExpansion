@@ -43,7 +43,7 @@ local function SessionSetup()
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
     Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
 
-    LeaderLib.EnableFeature("LeaderLib_ApplyBonusWeaponStatuses")
+    LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
 end
 Ext.RegisterListener("SessionLoaded", SessionSetup)
 

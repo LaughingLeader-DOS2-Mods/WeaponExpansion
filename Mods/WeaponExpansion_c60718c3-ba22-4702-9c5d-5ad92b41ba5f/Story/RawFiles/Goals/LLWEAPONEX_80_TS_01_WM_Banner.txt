@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+//REGION BANNER_RANK_1
+IF
+CharacterStatusApplied(_Target, "ENCOURAGED", (CHARACTERGUID)_Source)
+AND
+GetUUID(_Source, _UUID)
+AND
+//IsTagged(_Source, "LLWEAPONEX_Banner_Mastery1", 1)
+NRD_ModQuery2("WeaponExpansion", "HasMasteryRequirement", _UUID, "LLWEAPONEX_Banner_Mastery1")
+THEN
+NRD_ModCall("WeaponExpansion", "Banner_ApplyEncouragedBonus", (STRING)_Target, _UUID);
+//END_REGION
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

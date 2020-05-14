@@ -70,13 +70,6 @@ end
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
-	-- if call == "showTooltip" then
-	-- 	if params[1] == 7 then
-	-- 		STATUS_HANDLE_TEST = params[2]
-	-- 	end
-	-- end
-	--tryFindTooltip()
-
 	local minimap = Ext.GetBuiltinUI("Public/Game/GUI/minimap.swf")
 	if minimap ~= nil then
 		minimap:Invoke("showMiniMap", false)
@@ -85,6 +78,7 @@ end
 
 ---@param ui UIObject
 local function OnCharacterSelected(ui, call, ...)
+	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSelected] call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 	Ext.PostMessageToServer("LLWEAPONEX_RequestActiveCharacter", tostring(CLIENT_ID))
 	-- if call == "updateCharList" then
@@ -318,21 +312,19 @@ local function Client_UIDebugTest()
 		Ext.RegisterUICall(ui, "showStatTooltip", OnSheetEvent)
 		--Ext.RegisterUIInvokeListener(ui, "addSecondaryStat", OnCharacterSheetUpdating)
 		Ext.RegisterUIInvokeListener(ui, "updateArraySystem", OnCharacterSheetUpdating)
-		--Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
-		--Ext.RegisterUICall(ui, "cycleCharList", OnCharacterSelected)
+		Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
 		--Ext.RegisterUIInvokeListener(ui, "selectCharacter", OnCharacterSelected)
 		--Ext.RegisterUIInvokeListener(ui, "updateCharList", OnCharacterSelected)
 		--Ext.RegisterUIInvokeListener(ui, "cycleCharList", OnCharacterSelected)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
 		Ext.RegisterUICall(ui, "charSel", OnCharacterSelected)
-		--Ext.RegisterUIInvokeListener(ui, "selectPlayer", OnCharacterSelected)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/examine.swf")
 	if ui ~= nil then

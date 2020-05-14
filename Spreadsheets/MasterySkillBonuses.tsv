@@ -6,7 +6,7 @@ Axe	3	Flurry	If all 3 hits connect, regain 1 AP. ❌
 Axe	3	Whirlwind	Keeping spinning up to 2-3 times, dealing reduced damage each spin.	❌
 Axe	4	Onslaught	Each hit cleaves up to 4m away, dealing reduced damage.	❌
 Banner	1	Basic Attack	Targets attacked are marked until your next turn. If an ally attacks the marked target, the mark is consumed, dealing bonus damage and restoring 1 AP to the attacker.	❌
-Banner	1	Encourage	Fear, Madness, and Sleep are purged from encouraged allies.	❌
+Banner	1	Encourage	Fear, Madness, and Sleep are cleansed from encouraged allies.	❌
 Banner	1	Battering Ram/Bull Horns	If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.	❌
 Banner	2	Rallying Cry	Physical Armor is restored as well.	❌
 Banner	2	Guardian Angel	If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.	❌
@@ -105,8 +105,8 @@ Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 tota
 Unarmed	2	Unarmed Scaling 2	+40% base damage with unarmed attacks (20 base -> 60 total)	√
 Unarmed	3	Unarmed Scaling 3	+65% base damage with unarmed attacks (20 base -> 85 total)	√
 Unarmed	4	Unarmed Scaling 4	+80% base damage with unarmed attacks (20 base -> 100 total)	√
-Wand	1	Flesh Sacrifice	If standing in a pool of blood before Flesh Sacrifice is cast, absorb it to restore health and negate the Constitution debuff.	❌
-Wand	1	Basic Attack	Basic attacks now lower the target's resistance to your wand's element by 10% for 1 turn.	❌
+Wand	1	Flesh Sacrifice	Allies standing on blood surfaces gain a 5% damage bonus.	√
+Wand	1	Basic Attack	Basic attacks now lower the target's resistance to your wand's element by -25% for 1 turn.	√
 Wand	2	Placeholder	Placeholder	❌
 Wand	3	Placeholder	Placeholder	❌
 Wand	4	Placeholder	Placeholder	❌

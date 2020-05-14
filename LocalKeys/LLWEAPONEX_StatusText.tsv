@@ -1,23 +1,24 @@
-Key	Content
-LLWEAPONEX_NoElementFoundForChaosRune	<font color='#FF0000'>*The chaos rune fails - No surface to absorb!*</font>
-LLWEAPONEX_CaughtKevin	<font color='#00FF00' size='12'>Kevin Returned</font>
-LLWEAPONEX_Error_GrimoireMagicOwnerMismatch	<font color='#FF0000'>*Only the grimoire user can equip that!*</font>
-LLWEAPONEX_CombatLog_DeflectProjectilesCountdownFailed	<font color='#FF0000'>Deflect Projectiles Coundown Cancelled - Not in Combat!</font>
-LLWEAPONEX_Skills_ShieldToss_AllHit	<font color='#fcd203'>Shield Mastery</font>
-LLWEAPONEX_Skills_RunicReverb_Failed	<font color='#FF0000'>No Rune Combination Exists in Memory</font>
-LLWEAPONEX_Skills_RunicReverb_Success	<font color='#40E0D0'>Runic Reverb</font>
-LLWEAPONEX_Status_DuelistStance_Failed	<font color='#FF0000'>An empty hand is required!</font>
-LLWEAPONEX_Status_DuelistStance_Warning	<font color='#fcd203'>Duelist Stance disabled while other hand is occupied.</font>
-LLWEAPONEX_Skills_DuelistStance_Bonus	<font color='#24ff24'>Flourish (+1 AP)</font>
-LLWEAPONEX_Status_Torment_Applied	<font color='#9A5085'>Torment</font>
-LLWEAPONEX_Status_Sabotage_Applied	<font color='#F80F0F' size='28'>Sabotaged!</font>
-LLWEAPONEX_Status_DisplacementFailed	<font color='#FF0000' size='22'>Displacement Failed</font>
-LLWEAPONEX_StatusText_OniGauntlet_RuneBlocked	<font color='#FF0000' size='22'>*The rune fails to fit inside the <font color='#c5a65a'>Oni Gauntlet</font>.*</font>
-LLWEAPONEX_StatusText_Countered	<font color='#FF1155' size='22'>Countered</font>
-LLWEAPONEX_StatusText_ThrowObjectFailed	<font color='#FF1155' size='22'>Too Heavy!</font>
-LLWEAPONEX_StatusText_BlockedHealing	<font color='#c51fe8' size='18'>Healing Blocked</font>
-LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted	<font color='#FFA900' size='22'>Bolts Auto-Inserted into Hand Crossbow</font>
-LLWEAPONEX_StatusText_BalrinAxeRetrieved	<font color='#ED9D07'>*You retrieve your axe with a sharp pull. Brutal!*
-LLWEAPONEX_StatusText_BalrinAxeTimedOut	<font color='#E4CE93'>*Your axe finds its way back to you.*
-LLWEAPONEX_StatusText_BattleBook_SpellScroll_BadaBoom	<font color='#ED9D07'>Bada Boom</font>
-LLWEAPONEX_StatusText_BattleBook_SpellScroll_BonusProc	<font color='#ED9D07'>Spell Triggered!</font>
+Key	Content	Handle
+LLWEAPONEX_CaughtKevin	<font color='#00FF00' size='12'>Kevin Returned</font>	h74930f29g8434g4f7cg8811g3aab2afd78be
+LLWEAPONEX_CombatLog_DeflectProjectilesCountdownFailed	<font color='#FF0000'>Deflect Projectiles Coundown Cancelled - Not in Combat!</font>	h7b596ed2g245ag4088g9d9dgbe32b88a879b
+LLWEAPONEX_Error_GrimoireMagicOwnerMismatch	<font color='#FF0000'>*Only the grimoire user can equip that!*</font>	h41f9a490ge372g43c7g989ag81b444fb98c8
+LLWEAPONEX_NoElementFoundForChaosRune	<font color='#FF0000'>*The chaos rune fails - No surface to absorb!*</font>	hd31b44a8gac28g4d60gb040gf0654ed4ca5d
+LLWEAPONEX_Skills_DuelistStance_Bonus	<font color='#24ff24'>Flourish (+1 AP)</font>	ha33beed7ga922g4a63gbba6gddab9629cdee
+LLWEAPONEX_Skills_RunicReverb_Failed	<font color='#FF0000'>No Rune Combination Exists in Memory</font>	h91f3bf0cgf45eg4b35ga80dg3bae0b7a5e06
+LLWEAPONEX_Skills_RunicReverb_Success	<font color='#40E0D0'>Runic Reverb</font>	hb00e3efdg2d8ag4997g9504g31ff9682c582
+LLWEAPONEX_Skills_ShieldToss_AllHit	<font color='#fcd203'>Shield Mastery</font>	h79826083ge193g47a0g829bg7c25c1d163da
+LLWEAPONEX_Status_DisplacementFailed	<font color='#FF0000' size='22'>Displacement Failed</font>	h72bb594dge9f1g4d3eg9044g970fc1243a54
+LLWEAPONEX_Status_DuelistStance_Failed	<font color='#FF0000'>An empty hand is required!</font>	h1a5648acg3ea5g4b14gb96age9840a69f268
+LLWEAPONEX_Status_DuelistStance_Warning	<font color='#fcd203'>Duelist Stance disabled while other hand is occupied.</font>	h82ffec50gfbdeg4750g9cbagfbf098e750a2
+LLWEAPONEX_Status_Sabotage_Applied	<font color='#F80F0F' size='28'>Sabotaged!</font>	h80bc4296gf38eg4017gb2efgdf2199838599
+LLWEAPONEX_Status_Torment_Applied	<font color='#9A5085'>Torment</font>	h477c0babg3628g4207g922ega0f054a32cb6
+LLWEAPONEX_StatusText_BalrinAxeRetrieved	<font color='#ED9D07'>*You retrieve your axe with a sharp pull. Brutal!*	ha25632acg5716g49abgb3b3gd6ab458e1d8c
+LLWEAPONEX_StatusText_BalrinAxeTimedOut	<font color='#E4CE93'>*Your axe finds its way back to you.*	h6dfbe19fgd3b9g4a18gb689gfc0156c415e9
+LLWEAPONEX_StatusText_BattleBook_SpellScroll_BadaBoom	<font color='#ED9D07'>Bada Boom</font>	ha39a9ad8gcbb4g44abgbb36gd7d435a1e029
+LLWEAPONEX_StatusText_BattleBook_SpellScroll_BonusProc	<font color='#ED9D07'>Spell Triggered!</font>	h6a044bb9g0e3dg4cc6gbc56g23274880bc0f
+LLWEAPONEX_StatusText_BlockedHealing	<font color='#c51fe8' size='18'>Healing Blocked</font>	hd3a7be83g1896g41bcg926dg409ccde7e89f
+LLWEAPONEX_StatusText_Countered	<font color='#FF1155' size='22'>Countered</font>	h154d0117g69e6g43fcg9356g02e1593341a5
+LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted	<font color='#FFA900' size='22'>Bolts Auto-Inserted into Hand Crossbow</font>	h4f1b9001g7b29g4ac7g928dg0149cdeff75e
+LLWEAPONEX_StatusText_OniGauntlet_RuneBlocked	<font color='#FF0000' size='22'>*The rune fails to fit inside the <font color='#c5a65a'>Oni Gauntlet</font>.*</font>	h9df0cb28gac01g470cg9502g0c6c3657cc0a
+LLWEAPONEX_StatusText_ThrowObjectFailed	<font color='#FF1155' size='22'>Too Heavy!</font>	h6fc82247g8e16g4085g9bfag539c8a0eaca5
+LLWEAPONEX_StatusText_Encourage_Cleansed	<font color='#E4CE22'>Banner Inspiration! Cleansed [1]</font>	h63d42801g007eg4ae6g8609g856b214fb5d1

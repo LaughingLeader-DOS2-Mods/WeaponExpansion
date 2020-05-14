@@ -235,11 +235,11 @@ function OnGameStarted(region, editorMode)
         end
     end
 
-    LeaderLib.EnableFeature("LeaderLib_ApplyBonusWeaponStatuses")
+    LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
 end
 
 local function LeaderLibSetup()
-    LeaderLib.EnableFeature("LeaderLib_ApplyBonusWeaponStatuses")
+    LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
 end
 
 LeaderLib.RegisterListener("ModuleResume", LeaderLibSetup)
