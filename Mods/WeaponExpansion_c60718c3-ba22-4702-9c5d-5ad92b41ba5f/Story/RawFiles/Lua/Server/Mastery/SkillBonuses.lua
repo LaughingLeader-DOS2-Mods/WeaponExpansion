@@ -243,3 +243,36 @@ local function FleshSacrificeBonus(char, state, funcParams)
 end
 LeaderLib.RegisterSkillListener("Shout_FleshSacrifice", FleshSacrificeBonus)
 LeaderLib.RegisterSkillListener("Shout_EnemyFleshSacrifice", FleshSacrificeBonus)
+
+local function RushBonus(char, state, funcParams)
+
+end
+
+---@param char string
+---@param skill string
+---@param element string
+function OnRushSkillCast(char, skill, element)
+	local character = Ext.GetCharacter(char)
+	local hasMasteries = {}
+	local data = Mastery.Params.SkillData[skill]
+	if data ~= nil and data.Tags ~= nil then
+		for tagName,tagData in pairs(data.Tags) do
+			if HasMasteryRequirement(character, tagName) then
+				hasMasteries[tagData.ID] = true
+			end
+		end
+		if hasMasteries["BLOOD_EMPOWER"] == true then
+			---@return string[]
+			local party = LeaderLib.Game.GetParty(char, true, true, false, false)
+			if #party > 0 then
+				for i,partyMember in pairs(party) do
+					local surfaceGround = GetSurfaceGroundAt(partyMember)
+					local surfaceCloud = GetSurfaceCloudAt(partyMember)
+					if string.find(surfaceCloud, "Blood") or string.find(surfaceCloud, "Blood") then
+						ApplyStatus(partyMember, "LLWEAPONEX_BLOOD_EMPOWERED", 6.0, 0, char)
+					end
+				end
+			end
+		end
+	end
+end

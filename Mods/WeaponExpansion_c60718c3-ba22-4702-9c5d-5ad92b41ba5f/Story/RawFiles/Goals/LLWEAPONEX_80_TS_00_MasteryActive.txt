@@ -51,23 +51,6 @@ THEN
 LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy, 1.0);
 //END_REGION
 
-/*
-IF
-CharacterPolymorphedInto(_Char, _Race)
-THEN
-DB_NOOP(1);
-
-IF
-CharacterStoppedPolymorph(_Char)
-THEN
-DB_NOOP(1);
-
-IF
-ObjectTransformed((CHARACTERGUID)_Char, _Template)
-THEN
-DB_NOOP(1);
-*/
-
 //REGION BONUS_STATUS
 IF
 CharacterResurrected(_Char)
@@ -75,6 +58,15 @@ AND
 LLWEAPONEX_WeaponMastery_QRY_HasAnyActiveMastery(_Char)
 THEN
 LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char);
+//END_REGION
+
+//REGION RUSH_SKILL
+IF
+SkillCast(_Char, _Skill, "rush", _SkillElement)
+AND
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
+THEN
+NRD_ModCall("WeaponExpansion", "OnRushSkillCast", (STRING)_Char, _Skill, _SkillElement);
 //END_REGION
 
 EXITSECTION

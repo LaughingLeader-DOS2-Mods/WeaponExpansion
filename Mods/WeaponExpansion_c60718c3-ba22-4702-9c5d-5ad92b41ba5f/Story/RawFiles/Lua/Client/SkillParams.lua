@@ -89,7 +89,7 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 		local paramText = ""
 		if data.Tags ~= nil then
 			for tagName,tagData in pairs(data.Tags) do
-				if tagData.GetParam ~= nil and HasMasteryRequirement(character.Character, tagName) then
+				if HasMasteryRequirement(character.Character, tagName) then
 					--local tagLocalizedName = Text.MasteryRankTagText[tagName]
 					local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
 					if tagLocalizedName == nil then 
@@ -101,8 +101,13 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 					else
 						paramText = tagData.Param.Value
 					end
-					local nextText = tagData.GetParam(character, tagName, paramText)
-					paramText = paramText.."<br>"..nextText
+					paramText = Tooltip.ReplacePlaceholders(paramText)
+					if tagData.GetParam ~= nil then
+						local b,result = xpcall(tagData.GetParam, character, tagName, paramText)
+						if b and result ~= nil then
+							paramText = paramText.."<br>"..result
+						end
+					end
 				end
 			end
 		end

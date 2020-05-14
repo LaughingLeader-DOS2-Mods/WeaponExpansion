@@ -13,7 +13,7 @@ LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Dam
 LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status
 LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.
 LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles
-LLWEAPONEX_DEMON_HAND_DEFENSE_APPLY_DisplayName	<font color='#ffce58'>Devil Hand Aura (3m)</font>
+LLWEAPONEX_DEMON_HAND_DEFENSE_APPLY_DisplayName	<font color='#FFCE58'>Devil Hand Aura (3m)</font>
 LLWEAPONEX_DEMON_HAND_EQUIPPED_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a 30% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>
 LLWEAPONEX_DEMON_HAND_EQUIPPED_DisplayName	Gain Protection from a Demon
 LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.

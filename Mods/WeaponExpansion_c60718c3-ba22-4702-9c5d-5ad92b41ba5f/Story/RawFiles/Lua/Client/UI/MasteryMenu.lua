@@ -159,50 +159,6 @@ local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
 	return index + 4
 end
 
-local function replaceDescriptionPlaceholders(str)
-	local output = str
-	for v in string.gmatch(output, "%[ExtraData.-%]") do
-		local key = v:gsub("%[ExtraData:", ""):gsub("%]", "")
-		local value = LeaderLib.Game.GetExtraData(key, "")
-		if value ~= "" then
-			value = string.format("%i", value)
-		end
-		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
-		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
-		--print("Key:", key, "Value:", value, "Replace", escapedReplace)
-		output = string.gsub(output, escapedReplace, value)
-	end
-	for v in string.gmatch(output, "%[Stats:.-%]") do
-		local value = ""
-		local statFetcher = v:gsub("%[Stats:", ""):gsub("%]", "")
-		local props = LeaderLib.Common.StringSplit(":", statFetcher)
-		local stat = props[1]
-		local property = props[2]
-		if stat ~= nil and property ~= nil then
-			value = Ext.StatGetAttribute(stat, property)
-		end
-		if value ~= "" then
-			if type(value) == "number" then
-				value = string.format("%i", value)
-			end
-		end
-		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
-		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
-		--print("Key:", key, "Value:", value, "Replace", escapedReplace)
-		output = string.gsub(output, escapedReplace, value)
-	end
-	for v in string.gmatch(output, "%[Key.-%]") do
-		local key = v:gsub("%[Key:", ""):gsub("%]", "")
-		local translatedText = Ext.GetTranslatedStringFromKey(key)
-		if translatedText == nil then translatedText = "" end
-		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
-		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
-		--print("Key:", key, "Value:", translatedText, "Replace", escapedReplace)
-		output = string.gsub(output, escapedReplace, translatedText)
-	end
-	return output
-end
-
 local iconPattern = "(<icon.-/>)"
 --<icon id='Target_LLWEAPONEX_BasicAttack' icon='Action_AttackGround'/>
 local function parseDescription(ui, index, descriptionText)
@@ -220,7 +176,7 @@ local function parseDescription(ui, index, descriptionText)
 			icons[i] = nil
 		end
 		result[#result+1] = {
-			Text = replaceDescriptionPlaceholders(v),
+			Text = Tooltip.ReplacePlaceholders(v),
 			Icon = icon
 		}
 	end
