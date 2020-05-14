@@ -288,8 +288,7 @@ Mastery.Params.SkillData.Shout_Whirlwind = {
 					paramText = string.gsub(paramText, "%[1%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
 				end
 				return paramText
-			end,
-		},
+			end},
 		LLWEAPONEX_Staff_Mastery1 = {
 			ID = "ELEMENTAL_DEBUFF",
 			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [1] for [2] turn(s).</font>"),
@@ -314,9 +313,8 @@ Mastery.Params.SkillData.Shout_FleshSacrifice = {
 			ID = "BLOOD_EMPOWER",
 			Param = TranslatedString:Create("h0ad1536cg0e74g46dag8e1egc15967242d14","<font color='#CC33FF'>Allies standing on <font color='#F13324'>blood surfaces</font> or in <font color='#F13324'>blood clouds</font> gain a [1]% damage bonus.</font>"),
 			GetParam = function(character, tagName, param)
-				return param:string.gsub("%[1%]", Ext.StatGetAttribute("Stats_LLWEAPONEX_BloodEmpowered", "DamageBoost"))
-			end,
-		},
+				return string.gsub(param, "%[1%]", Ext.StatGetAttribute("Stats_LLWEAPONEX_BloodEmpowered", "DamageBoost"))
+			end},
 	}
 }
 

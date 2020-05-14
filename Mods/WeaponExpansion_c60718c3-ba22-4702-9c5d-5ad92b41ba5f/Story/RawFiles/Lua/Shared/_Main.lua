@@ -79,6 +79,11 @@ function HasMasteryRequirement(character, tag)
 	return false
 end
 
+function HasMasteryRequirement_QRY(call, uuid, tag)
+	print(call,uuid,tag)
+	return HasMasteryRequirement(Ext.GetCharacter(uuid), tag)
+end
+
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, Required = 0},
 	[1] = {Amount = 30, Required = 1000},

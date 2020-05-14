@@ -186,7 +186,7 @@ ClearTag(_Player, _Mastery);
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _Mastery);
 //END_REGION
 
-//REGION EQUIPPING
+//REGION ACTIVATION_DEACTIVATION
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND
@@ -207,6 +207,22 @@ AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_,_,_)
 THEN
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_MasterySystemActive", "WeaponExpansion", 500);
+//END_REGION
+
+//REGION TOGGLE_SCRIPTS
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
+AND
+DB_LeaderLib_ToggleScripts_Registered(_GoalTitle, _Mastery, _IsTag)
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Player, _Mastery, "WeaponExpansion");
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_Mastery)
+AND
+DB_LeaderLib_ToggleScripts_Registered(_GoalTitle, _Mastery, _IsTag)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObject(_Player, _Mastery, "WeaponExpansion");
 //END_REGION
 
 //REGION UNEQUIP_REMOVAL_EVENT

@@ -169,7 +169,26 @@ local function replaceDescriptionPlaceholders(str)
 		end
 		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
-		print("Key:", key, "Value:", value, "Replace", escapedReplace)
+		--print("Key:", key, "Value:", value, "Replace", escapedReplace)
+		output = string.gsub(output, escapedReplace, value)
+	end
+	for v in string.gmatch(output, "%[Stats:.-%]") do
+		local value = ""
+		local statFetcher = v:gsub("%[Stats:", ""):gsub("%]", "")
+		local props = LeaderLib.Common.StringSplit(":", statFetcher)
+		local stat = props[1]
+		local property = props[2]
+		if stat ~= nil and property ~= nil then
+			value = Ext.StatGetAttribute(stat, property)
+		end
+		if value ~= "" then
+			if type(value) == "number" then
+				value = string.format("%i", value)
+			end
+		end
+		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
+		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
+		--print("Key:", key, "Value:", value, "Replace", escapedReplace)
 		output = string.gsub(output, escapedReplace, value)
 	end
 	for v in string.gmatch(output, "%[Key.-%]") do
@@ -178,7 +197,7 @@ local function replaceDescriptionPlaceholders(str)
 		if translatedText == nil then translatedText = "" end
 		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
-		print("Key:", key, "Value:", translatedText, "Replace", escapedReplace)
+		--print("Key:", key, "Value:", translatedText, "Replace", escapedReplace)
 		output = string.gsub(output, escapedReplace, translatedText)
 	end
 	return output
@@ -501,7 +520,7 @@ local function OpenMasteryMenu(characterMasteryData)
 
 			for k=1,Mastery.Variables.MaxRank,1 do
 				ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))
-				print("Set rank tooltip: ", i, k)
+				--print("Set rank tooltip: ", i, k)
 			end
 
 			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")

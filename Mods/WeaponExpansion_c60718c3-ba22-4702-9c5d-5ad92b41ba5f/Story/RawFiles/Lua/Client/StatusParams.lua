@@ -130,7 +130,6 @@ local function TryPrintName(obj, prop)
 end
 
 local function StatusGetDescriptionParam(status, statusSource, target, param, ...)
-	print(status.Name)
 	LeaderLib.PrintDebug("[WeaponEx:StatusParams:StatusGetDescriptionParam] status("..TryPrintName(status, "Name")..") statusSource("..TryPrintName(statusSource, "Name")..") character("..TryPrintName(target, "Name")..") param("..tostring(param)..")")
 	if param == "Skill" then
 		local params = {...}
@@ -181,7 +180,7 @@ function GetStatusTooltipText(character, statusName)
 		local description = Ext.GetTranslatedStringFromKey(status.Description)
 		if status.DescriptionParams ~= nil and status.DescriptionParams ~= "" then
 			for i,param in status.DescriptionParams:gmatch("%[%d%]") do
-				print(param)
+				Ext.Print(status, param)
 			end
 		end
 		return string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name:upper(), description)

@@ -40,7 +40,12 @@ end
 
 ---@param character StatCharacter
 function IsUnarmed(character, allowShields)
-	Ext.PrintError(character, character.MainWeapon.Name, character.OffHandWeapon)
+	if type(character) == "string" then
+		character = Ext.GetCharacter(character).Stats
+	elseif character.Character == nil and character.Stats ~= nil then -- EsvCharacter to StatCharacter
+		character = character.Stats
+	end
+	--Ext.PrintError(character, character.MainWeapon.Name, character.OffHandWeapon)
 	if character ~= nil then
 		return statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
 	end

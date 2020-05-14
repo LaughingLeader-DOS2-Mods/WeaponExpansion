@@ -1,7 +1,7 @@
 ---@class TranslatedString
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
-WeaponExpansion.Masteries = {
+Masteries = {
 ["LLWEAPONEX_Axe"] = MasteryData:Create("LLWEAPONEX_Axe", TranslatedString:Create("h99253a1dgaaf7g49bbga37fgf2c25b70073f", "Axe"), "#F5785A", {
 	[0] = {Name = TranslatedString:Create("hf503b6cag1d99g488bga8efgf5ead043493d", "Beginner"), Color="#FDFFEA"},
 	[1] = {Name = TranslatedString:Create("h25afab32g53ccg4cf6g80cfg6c768304a925", "Novice"), Color="#FFAAAA"},

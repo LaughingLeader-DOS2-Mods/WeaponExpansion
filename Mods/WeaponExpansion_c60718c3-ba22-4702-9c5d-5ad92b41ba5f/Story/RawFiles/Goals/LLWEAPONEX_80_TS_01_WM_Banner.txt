@@ -10,8 +10,10 @@ CharacterStatusApplied(_Target, "ENCOURAGED", (CHARACTERGUID)_Source)
 AND
 GetUUID(_Source, _UUID)
 AND
-//IsTagged(_Source, "LLWEAPONEX_Banner_Mastery1", 1)
-NRD_ModQuery2("WeaponExpansion", "HasMasteryRequirement", _UUID, "LLWEAPONEX_Banner_Mastery1")
+LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Source, "LLWEAPONEX_Banner")
+AND
+IsTagged(_Source, "LLWEAPONEX_Banner_Mastery1", 1)
+//NRD_ModQuery2("WeaponExpansion", "HasMasteryRequirement_QRY", _UUID, "LLWEAPONEX_Banner_Mastery1")
 THEN
 NRD_ModCall("WeaponExpansion", "Banner_ApplyEncouragedBonus", (STRING)_Target, _UUID);
 //END_REGION

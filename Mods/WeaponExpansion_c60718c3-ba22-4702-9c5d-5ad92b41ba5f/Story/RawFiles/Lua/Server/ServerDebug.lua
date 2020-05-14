@@ -140,6 +140,7 @@ function DebugInit()
     --RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
     --RemoveStatus(host, "LLWEAPONEX_RUPTURE")
     --ApplyStatus(host, "LLWEAPONEX_DEBUG_BONUS_WEAPON_TEST", -1.0, 0, host)
+    --ApplyStatus(CharacterGetHostCharacter(), "SLEEPING", -1.0, 1, CharacterGetHostCharacter())
     local x,y,z = GetPosition(host)
     for mastery,masterData in pairs(Masteries) do
         local rank = Ext.Random(1,4)

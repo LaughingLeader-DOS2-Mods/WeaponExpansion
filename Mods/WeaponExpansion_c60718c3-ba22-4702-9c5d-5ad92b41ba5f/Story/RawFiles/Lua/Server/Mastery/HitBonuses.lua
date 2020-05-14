@@ -6,4 +6,4 @@ local function OnWandHit(target,source,damage,handle)
 
 end
 
-HitHandler.OnHitCallback["LLWEAPONEX_Wand"] = OnWandHit
+--HitHandler.OnHitCallbacks["LLWEAPONEX_Wand"] = OnWandHit
