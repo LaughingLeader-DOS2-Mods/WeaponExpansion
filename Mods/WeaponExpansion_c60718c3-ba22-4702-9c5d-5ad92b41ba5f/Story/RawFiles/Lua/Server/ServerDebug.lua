@@ -107,12 +107,13 @@ local bulletTemplates = {
 
 local gameTestTemplates = {
     "LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d",
-    "94838d55-d5e6-4115-b736-b8b26f321003",
+    "EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003",
     "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27",
     "WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1-d17a73312e53",
     "WPN_Lizards_Dagger_1H_A_028e9d6a-92b7-494b-a7fa-62218cf63914",
     "WPN_Tool_Scythe_2H_A_44525b09-a2b1-4b45-8d52-e893d04390dd",
     --"WPN_Dwarves_Staff_2H_A_545f2dc2-1da9-4387-af90-9e866f6288a8",
+    "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ee686596-394f-44ae-867b-4596de1feedb",
 }
 
 function DebugInit()
@@ -122,14 +123,23 @@ function DebugInit()
     local host = CharacterGetHostCharacter()
     GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
     GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
-    CharacterAddAttribute(host, "Memory", 20)
-    CharacterAddAbility(host, "WarriorLore", 4)
-    CharacterAddAbility(host, "RogueLore", 4)
+    if CharacterGetAttribute(host, "Strength") < 50 then
+        CharacterAddAttribute(host, "Strength", 50)
+    end
+    if CharacterGetAttribute(host, "Memory") < 50 then
+        CharacterAddAttribute(host, "Memory", 25)
+    end
+    if CharacterGetAbility(host, "WarriorLore") < 4 then
+        CharacterAddAbility(host, "WarriorLore", 4)
+    end
+    if CharacterGetAbility(host, "RogueLore") < 4 then
+        CharacterAddAbility(host, "RogueLore", 4)
+    end
 
     --ApplyStatus(host, "LLWEAPONEX_RUPTURE", 360.0, 1, host)
     --RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
-    RemoveStatus(host, "LLWEAPONEX_RUPTURE")
-    ApplyStatus(host, "LLWEAPONEX_DEBUG_BONUS_WEAPON_TEST", -1.0, 0, host)
+    --RemoveStatus(host, "LLWEAPONEX_RUPTURE")
+    --ApplyStatus(host, "LLWEAPONEX_DEBUG_BONUS_WEAPON_TEST", -1.0, 0, host)
     local x,y,z = GetPosition(host)
     for mastery,masterData in pairs(Masteries) do
         local rank = Ext.Random(1,4)
@@ -181,6 +191,7 @@ function DebugInit()
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
     CharacterAddSkill(host, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", 0)
     CharacterAddSkill(host, "Projectile_LLWEAPONEX_Status_Rupture_Damage", 0)
+    CharacterAddSkill(host, "Shout_InspireStart", 0)
     --NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
 
     local userID = CharacterGetReservedUserID(host)
