@@ -30,7 +30,6 @@ Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
-Ext.Require("Shared/TooltipHelpers.lua")
 
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string

@@ -158,9 +158,62 @@ local elementalWeakness = {
 	--Physical = "LLWEAPONEX_WEAKNESS_Physical",
 }
 
+local whirlwindHandCrossbowTargets = {}
+
+function OnWhirlwindHandCrossbowTargetFound(uuid, target)
+	if whirlwindHandCrossbowTargets[uuid] ~= nil then
+		table.insert(whirlwindHandCrossbowTargets[uuid].All, target)
+	end
+end
+
+function LaunchWhirlwindHandCrossbowBolt(uuid, target)
+	local data = whirlwindHandCrossbowTargets[uuid]
+	if data ~= nil and #data.All > 0 and data.Remaining > 0 then
+		data.Remaining = data.Remaining - 1
+		local target = LeaderLib.Common.PopRandomTableEntry(whirlwindHandCrossbowTargets[uuid].All)
+		if target ~= nil then
+			local level = CharacterGetLevel(uuid)
+			NRD_ProjectilePrepareLaunch()
+			NRD_ProjectileSetString("SkillId", "Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot")
+			NRD_ProjectileSetInt("CasterLevel", level)
+			NRD_ProjectileSetGuidString("SourcePosition", target)
+			NRD_ProjectileSetGuidString("Caster", uuid)
+			NRD_ProjectileSetGuidString("Source", uuid)
+			--NRD_ProjectileSetGuidString("HitObject", target)
+			--NRD_ProjectileSetGuidString("HitObjectPosition", target)
+			NRD_ProjectileSetGuidString("TargetPosition", target)
+			NRD_ProjectileLaunch()
+		end
+		if data.Remaining > 0 and #data.All > 0 then
+			Osi.LeaderLib_Timers_StartObjectTimer(uuid, 250, "Timers_LLWEAPONEX_HandCrossbow_Whirlwind_Shoot", "LLWEAPONEX_HandCrossbow_Whirlwind_Shoot")
+		end
+	end
+end
+
 local function WhirlwindBonus(char, state, funcParams)
 	LeaderLib.PrintDebug("[MasteryBonuses:Whirlwind] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
-	if state == SKILL_STATE.HIT then
+	if state == SKILL_STATE.USED then
+		local character = Ext.GetCharacter(char)
+		local hasMasteries = {}
+		local data = Mastery.Params.SkillData["Shout_Whirlwind"]
+		if data ~= nil and data.Tags ~= nil then
+			for tagName,tagData in pairs(data.Tags) do
+				if HasMasteryRequirement(character, tagName) then
+					hasMasteries[tagData.ID] = true
+				end
+			end
+		end
+		if hasMasteries["WHIRLWIND_BOLTS"] == true then
+			local minTargets = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets", 1)
+			local maxTargets = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets", 3)
+			local totalTargets = Ext.Random(minTargets, maxTargets)
+			whirlwindHandCrossbowTargets[GetUUID(char)] = { Remaining = totalTargets, All = {} }
+		end
+	elseif state == SKILL_STATE.CAST then
+		if whirlwindHandCrossbowTargets[GetUUID(char)] ~= nil then
+			LeaderLib.Game.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget", GetPosition(char))
+		end
+	elseif state == SKILL_STATE.HIT then
 		local character = Ext.GetCharacter(char)
 		local hasMasteries = {}
 		local data = Mastery.Params.SkillData["Shout_Whirlwind"]
