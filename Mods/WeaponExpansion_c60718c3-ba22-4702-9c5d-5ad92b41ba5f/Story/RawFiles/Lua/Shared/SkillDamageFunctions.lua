@@ -382,7 +382,22 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
 	if weaponBoostStat ~= nil then
-		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow")
+		local masteryBoost = 0
+		local masteryLevel = 0
+		for i=1,Mastery.Variables.MaxRank,1 do
+			local tag = "HandCrossbow_Mastery"..i
+			local character = Ext.GetCharacter(uuid)
+			if character.Character:HasTag(tag) then
+				masteryLevel = i
+			end
+		end
+		if masteryLevel > 0 then
+			local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_HandCrossbowMasteryBoost"..masteryLevel, 0)
+			if boost > 0 then
+				masteryBoost = boost
+			end
+		end
+		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost)
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
@@ -446,7 +461,22 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
 	if weaponBoostStat ~= nil then
-		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Rifle")
+		local masteryBoost = 0
+		local masteryLevel = 0
+		for i=1,Mastery.Variables.MaxRank,1 do
+			local tag = "Pistol_Mastery"..i
+			local character = Ext.GetCharacter(uuid)
+			if character.Character:HasTag(tag) then
+				masteryLevel = i
+			end
+		end
+		if masteryLevel > 0 then
+			local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
+			if boost > 0 then
+				masteryBoost = boost
+			end
+		end
+		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost)
 		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]

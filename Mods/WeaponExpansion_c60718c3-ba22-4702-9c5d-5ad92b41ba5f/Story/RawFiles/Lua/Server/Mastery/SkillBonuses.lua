@@ -169,6 +169,7 @@ function LaunchWhirlwindHandCrossbowBolt(uuid, target)
 			NRD_ProjectileSetGuidString("HitObjectPosition", target)
 			NRD_ProjectileSetGuidString("TargetPosition", target)
 			NRD_ProjectileLaunch()
+			PlayEffect(uuid, "LLWEAPONEX_FX_HandCrossbow_Shoot_01", "LowerArm_L_Twist_Bone")
 		end
 		if data.Remaining > 0 and #data.All > 0 then
 			Osi.LeaderLib_Timers_StartObjectTimer(uuid, 50, "Timers_LLWEAPONEX_HandCrossbow_Whirlwind_Shoot", "LLWEAPONEX_HandCrossbow_Whirlwind_Shoot")

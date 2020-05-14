@@ -20,6 +20,7 @@ Temp = {
 --- @type table<string,string>
 Tags = {}
 
+Ext.Require("Shared/MasteryHelpers.lua")
 Ext.Require("Shared/GameMathAlternatives.lua")
 Ext.Require("Shared/StatOverrides.lua")
 Ext.Require("Shared/Data/LocalizedText.lua")
@@ -30,60 +31,6 @@ Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
-
---- @param character EsvCharacter|StatCharacter
---- @param tag string
---- @return boolean
-local function TryCheckMasteryRequirement(character, tag)
-	if character:HasTag(tag) == true then
-		local a,b,mastery = string.find(tag,"(.+)_Mastery")
-		--print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
-		if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
-			return true
-		else
-			if Ext.IsClient() then
-				return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or character:HasTag(mastery)
-			else
-				return character:HasTag(mastery)
-			end
-		end
-		-- local hasTaggedWeapons = false
-		-- ---@type StatItem
-		-- local weapon = character.Stats:GetItemBySlot("Weapon")
-		-- ---@type StatItem
-		-- local offhand = character.Stats:GetItemBySlot("Shield")
-		-- if weapon ~= nil then
-		-- 	Ext.Print(string.format("HasMasteryRequirement[%s] MainWeapon[%s]", tag, weapon.Name))
-		-- end
-		-- if offhand ~= nil then
-		-- 	Ext.Print(string.format("HasMasteryRequirement[%s] OffHandWeapon[%s]", tag, offhand.Name))
-		-- end
-		-- return hasTaggedWeapons
-	end
-	return false
-end
-
---- @param character EsvCharacter|StatCharacter
---- @param tag string
---- @return boolean
-function HasMasteryRequirement(character, tag)
-	return true
-	-- if type(character) == "string" then
-	-- 	character = Ext.GetCharacter(character)
-	-- end
-	-- local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
-	-- if not status then
-	-- 	Ext.PrintError("Error checking mastery requirements:\n", result)
-	-- else
-	-- 	return result
-	-- end
-	-- return false
-end
-
-function HasMasteryRequirement_QRY(call, uuid, tag)
-	print(call,uuid,tag)
-	return HasMasteryRequirement(Ext.GetCharacter(uuid), tag)
-end
 
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, Required = 0},

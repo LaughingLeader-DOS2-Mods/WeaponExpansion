@@ -89,7 +89,7 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 		local paramText = ""
 		if data.Tags ~= nil then
 			for tagName,tagData in pairs(data.Tags) do
-				if HasMasteryRequirement(character.Character, tagName) then
+				if Mastery.HasMasteryRequirement(character.Character, tagName) then
 					--local tagLocalizedName = Text.MasteryRankTagText[tagName]
 					local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
 					if tagLocalizedName == nil then 

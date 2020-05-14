@@ -161,3 +161,7 @@ function HasMasteryLevel(uuid,mastery,minLevel)
 	end
 	return false
 end
+
+function HasMasteryRequirement_QRY(call, uuid, tag)
+	return Mastery.HasMasteryRequirement(Ext.GetCharacter(uuid), tag)
+end

@@ -45,7 +45,7 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 					table.sort(tagKeys, sortTagParams)
 					for i,tagName in ipairs(tagKeys) do
 						local tagData = data.Tags[tagName]
-						if HasMasteryRequirement(character, tagName) then
+						if Mastery.HasMasteryRequirement(character, tagName) then
 							if tagData.NamePrefix ~= nil then
 								if namePrefix ~= "" then
 									namePrefix = namePrefix .. " "
