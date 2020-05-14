@@ -220,6 +220,7 @@ Mastery.Params = {
 Mastery.Params.SkillData.Projectile_ThrowingKnife = {
 	Tags = {
 		LLWEAPONEX_Dagger_Mastery1 = {
+			ID = "BONUS_DAGGER",
 			Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[1]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[2] bonus damage</font> on hit.</font>"),
 			GetParam = GetThrowingKnifeBonusParam,
 		}
@@ -315,7 +316,7 @@ Mastery.Params.SkillData.Rush_BatteringRam = {
 		},
 		LLWEAPONEX_Bludgeon_Mastery1 = {
 			ID = "RUSH_DIZZY",
-			Params = TranslatedString:Create("h9831ecc7g21feg403cg9bd6ga0bab3f7eb9c", "Become a thundering force of will when rushing, <font color='#FFCE58'>knocking enemies aside</font> with a <font color='#F19824'>[ExtraData:LLWEAPONEX_MasteryBonus_RushDizzyChance]% chance to apply Dizzy for [LLWEAPONEX_MasteryBonus_RushDizzyTurns] turn(s)</font>.[ExtraData:LLWEAPONEX_MasteryBonus_WarChargeDamageBoost]% more damage on hit</font> and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing.")
+			Param = TranslatedString:Create("h9831ecc7g21feg403cg9bd6ga0bab3f7eb9c", "Become a thundering force of will when rushing, <font color='#FFCE58'>knocking enemies aside</font> with a <font color='#F19824'>[ExtraData:LLWEAPONEX_MasteryBonus_RushDizzyChance]% chance to apply Dizzy for [ExtraData:LLWEAPONEX_MasteryBonus_RushDizzyTurns] turn(s)</font>.")
 		}
 	}
 }

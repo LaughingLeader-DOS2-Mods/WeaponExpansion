@@ -386,7 +386,7 @@ AND
 GetUUID(_Target, _TargetUUID)
 THEN
 NRD_ModCall("WeaponExpansion", "OnWhirlwindHandCrossbowTargetFound", _SourceUUID, _TargetUUID);
-LeaderLib_Timers_StartObjectTimer(_Source, 250, "Timers_LLWEAPONEX_HandCrossbow_Whirlwind_Shoot", "LLWEAPONEX_HandCrossbow_Whirlwind_Shoot");
+LeaderLib_Timers_StartObjectTimer(_Source, 25, "Timers_LLWEAPONEX_HandCrossbow_Whirlwind_Shoot", "LLWEAPONEX_HandCrossbow_Whirlwind_Shoot");
 
 IF
 StoryEvent((CHARACTERGUID)_Source, "LLWEAPONEX_HandCrossbow_Whirlwind_Shoot")
