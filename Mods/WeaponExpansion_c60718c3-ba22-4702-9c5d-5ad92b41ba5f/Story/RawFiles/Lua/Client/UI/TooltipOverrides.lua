@@ -25,7 +25,6 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	--setupTooltip.DumpTooltipArray(ui)
 
 	local isSkill = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == "SkillName"
-
 	-- local school = ui:GetValue("tooltip_array", "string", 5)
 	-- if school ~= nil then
 	-- 	ui:SetValue("tooltip_array", "<font color='#FF00FF'>Witchery</font>", 5)
@@ -59,10 +58,12 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 							if tagLocalizedName == nil then 
 								tagLocalizedName = ""
 							end
-							if tagLocalizedName ~= "" then
-								paramText = tagLocalizedName.."<br>"..tagData.Param.Value
-							else
-								paramText = tagData.Param.Value
+							if tagData.Param ~= nil then
+								if tagLocalizedName ~= "" then
+									paramText = tagLocalizedName.."<br>"..tagData.Param.Value
+								else
+									paramText = tagData.Param.Value
+								end
 							end
 							paramText = Tooltip.ReplacePlaceholders(paramText)
 							if tagData.GetParam ~= nil then

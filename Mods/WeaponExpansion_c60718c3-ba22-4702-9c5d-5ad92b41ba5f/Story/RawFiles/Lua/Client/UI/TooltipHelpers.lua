@@ -8,7 +8,7 @@ local function ReplacePlaceholders(str)
 	for v in string.gmatch(output, "%[ExtraData.-%]") do
 		local key = v:gsub("%[ExtraData:", ""):gsub("%]", "")
 		local value = LeaderLib.Game.GetExtraData(key, "")
-		if value ~= "" then
+		if value ~= "" and type(value) == "number" then
 			value = string.format("%i", value)
 		end
 		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
@@ -40,7 +40,8 @@ local function ReplacePlaceholders(str)
 			local props = LeaderLib.Common.StringSplit(":", skillName)
 			local param = "Damage"
 			if props ~= nil and #props >= 1 then
-				param = props[1]
+				skillName = props[1]
+				param = props[2]
 			end
 			local skill = Skills.PrepareSkillProperties(skillName)
 			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER).Stats
