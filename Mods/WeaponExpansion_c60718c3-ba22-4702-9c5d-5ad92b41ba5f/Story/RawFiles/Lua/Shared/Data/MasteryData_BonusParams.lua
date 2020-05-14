@@ -233,20 +233,6 @@ Mastery.Params.SkillData.Target_CripplingBlow = {
 		LLWEAPONEX_Bludgeon_Mastery1 = {
 			ID = "SUNDER",
 			Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration] turn(s).</font>"),
-			-- GetParam = function(character, tagName, param)
-			-- 	local armorReduction = Ext.StatGetAttribute("Stats_LLWEAPONEX_MasteryBonus_Sunder", "ArmorBoost")
-			-- 	if armorReduction == nil then
-			-- 		armorReduction = Ext.StatGetAttribute("Stats_LLWEAPONEX_MasteryBonus_Sunder", "MagicArmorBoost")
-			-- 	end
-			-- 	local turns = 0
-			-- 	local duration = Ext.ExtraData["LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration"]
-			-- 	if duration ~= nil and duration > 0 then
-			-- 		turns = math.floor(duration / 6.0)
-			-- 	else
-			-- 		turns = 1
-			-- 	end
-			-- 	return param:gsub("%[1%]", armorReduction):gsub("%[2%]", turns)
-			-- end,
 		},
 		LLWEAPONEX_Axe_Mastery1 = {
 			ID = "BONUSDAMAGE",

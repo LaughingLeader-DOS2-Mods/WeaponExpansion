@@ -103,7 +103,7 @@ local function GetMasteryBonuses(skill, character, isFromItem, param)
 					end
 					paramText = Tooltip.ReplacePlaceholders(paramText)
 					if tagData.GetParam ~= nil then
-						local b,result = xpcall(tagData.GetParam, character, tagName, paramText)
+						local b,result = xpcall(tagData.GetParam, debug.traceback, character, tagName, paramText)
 						if b and result ~= nil then
 							paramText = paramText.."<br>"..result
 						end

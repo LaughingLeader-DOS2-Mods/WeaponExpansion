@@ -81,12 +81,12 @@ end
 
 local function TryOpenMasteryMenu()
 	-- Try and get the controlled character through net messages
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_ID(", CLIENT_ID,")")
-	if CLIENT_ID ~= nil then
-		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(CLIENT_ID))
+	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_UI.ID(", CLIENT_UI.ID,")")
+	if CLIENT_UI.ID ~= nil then
+		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(CLIENT_UI.ID))
 	else
 		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", "-1")
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_ID not set.")
+		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_UI.ID not set.")
 	end
 end
 
@@ -400,7 +400,7 @@ local function initializeMasteryMenu()
 	end
 end
 
-function InitMasteryMenu()
+local function InitMasteryMenu()
 	if not MasteryMenu.Initialized then
 		initializeMasteryMenu()
 	end
@@ -501,11 +501,15 @@ end
 Ext.RegisterNetListener("LLWEAPONEX_OpenMasteryMenu", NetMessage_OpenMasteryMenu)
 
 local function NetMessage_SetClientId(call,id)
-	CLIENT_ID = tonumber(id)
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:NetMessage_SetClientId] Set CLIENT_ID to (",id,")")
+	CLIENT_UI.ID = tonumber(id)
+	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:NetMessage_SetClientId] Set CLIENT_UI.ID to (",id,")")
 	if not MasteryMenu.Initialized then
 		initializeMasteryMenu()
 	end
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_SetClientID", NetMessage_SetClientId)
+
+return {
+	Init = InitMasteryMenu
+}

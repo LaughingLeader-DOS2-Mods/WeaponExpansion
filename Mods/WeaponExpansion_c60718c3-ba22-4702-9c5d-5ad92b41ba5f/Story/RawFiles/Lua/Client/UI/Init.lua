@@ -1,6 +1,9 @@
 ---@type MessageData
 local MessageData = LeaderLib.Classes["MessageData"]
 
+local masteryMenu = Ext.Require("Client/UI/MasteryMenu.lua")
+local tooltipOverrides = Ext.Require("Client/UI/TooltipOverrides.lua")
+
 local uiOverrides = {
 	--["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/LLWEAPONEX_ToolTip.swf",
 	--["Public/Game/GUI/mouseIcon.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon.swf",
@@ -70,24 +73,30 @@ end
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
-	local minimap = Ext.GetBuiltinUI("Public/Game/GUI/minimap.swf")
-	if minimap ~= nil then
-		minimap:Invoke("showMiniMap", false)
+	if call == "showSkillTooltip" then
+		CLIENT_UI.LAST_SKILL = params[2]
+		if Ext.DoubleToHandle ~= nil then
+			CLIENT_UI.ACTIVE_CHARACTER = Ext.DoubleToHandle(params[1])
+		end
 	end
+	-- local minimap = Ext.GetBuiltinUI("Public/Game/GUI/minimap.swf")
+	-- if minimap ~= nil then
+	-- 	minimap:Invoke("showMiniMap", false)
+	-- end
 end
 
 ---@param ui UIObject
 local function OnCharacterSelected(ui, call, ...)
 	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSelected] call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
-	Ext.PostMessageToServer("LLWEAPONEX_RequestActiveCharacter", tostring(CLIENT_ID))
+	--Ext.PostMessageToServer("LLWEAPONEX_RequestActiveCharacter", tostring(CLIENT_UI.ID))
 	-- if call == "updateCharList" then
 	-- 	--characterId, icon, orderIndex
 	-- 	local id = ui:GetValue("charList_array", "number", 0)
 	-- 	local icon = ui:GetValue("charList_array", "string", 1)
 	-- 	--local orderIndex = ui:GetValue("charList_array", "number", 2)
-	-- 	if PARTY ~= nil then
-	-- 		for i,v in pairs(PARTY) do
+	-- 	if CLIENT_UI.PARTY ~= nil then
+	-- 		for i,v in pairs(CLIENT_UI.PARTY) do
 	-- 			---@type EsvCharacter
 	-- 			local character = Ext.GetCharacter(v)
 	-- 			local handle = Ext.HandleToDouble(character.Handle)
@@ -97,34 +106,34 @@ local function OnCharacterSelected(ui, call, ...)
 	-- 		end
 	-- 	end
 	-- end
-	-- if PARTY ~= nil then
-	-- 	for i,v in pairs(PARTY) do
+	-- if CLIENT_UI.PARTY ~= nil then
+	-- 	for i,v in pairs(CLIENT_UI.PARTY) do
 	-- 		---@type EsvCharacter
 	-- 		local character = Ext.GetCharacter(v)
 	-- 		--if character.HostControl == true then
 	-- 		if character:HasTag("LLWEAPONEX_Active") == true then
-	-- 			ACTIVE_CHARACTER = character.NetID
-	-- 			Ext.Print(ACTIVE_CHARACTER, "is selected?", character.PlayerCustomData.Name)
+	-- 			CLIENT_UI.ACTIVE_CHARACTER = character.NetID
+	-- 			Ext.Print(CLIENT_UI.ACTIVE_CHARACTER, "is selected?", character.PlayerCustomData.Name)
 	-- 		end
 	-- 	end
 	-- else
-	-- 	Ext.PostMessageToServer("LLWEAPONEX_RequestUserCharacters", tostring(CLIENT_ID))
+	-- 	Ext.PostMessageToServer("LLWEAPONEX_RequestUserCharacters", tostring(CLIENT_UI.ID))
 	-- end
 end
 
 local function SetUserCharacters(channel, data)
 	local messageData = MessageData:CreateFromString(data)
 	if messageData.Params ~= nil then
-		PARTY = messageData.Params
+		CLIENT_UI.PARTY = messageData.Params
 	end
-	for i,v in pairs(PARTY) do
+	for i,v in pairs(CLIENT_UI.PARTY) do
 		---@type EsvCharacter
 		local character = Ext.GetCharacter(v)
 		if character.HostControl == true then
-			ACTIVE_CHARACTER = character.NetID
+			CLIENT_UI.ACTIVE_CHARACTER = character.NetID
 		end
 	end
-	LeaderLib.PrintDebug("Set active character for client to", ACTIVE_CHARACTER, "Party:", LeaderLib.Common.Dump(PARTY))
+	LeaderLib.PrintDebug("Set active character for client to", CLIENT_UI.ACTIVE_CHARACTER, "Party:", LeaderLib.Common.Dump(CLIENT_UI.PARTY))
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_SetUserCharacters", SetUserCharacters)
@@ -163,8 +172,8 @@ local function SetCharacterSheetDamageText(ui,character)
 end
 
 local function SetActiveCharacter(channel, netid)
-	ACTIVE_CHARACTER = tonumber(netid)
-	local character = Ext.GetCharacter(ACTIVE_CHARACTER)
+	CLIENT_UI.ACTIVE_CHARACTER = tonumber(netid)
+	local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
 	if character ~= nil then
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
 		if ui ~= nil then
@@ -191,9 +200,9 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 				local tooltipId = ui:GetValue("secStat_array", "number", i+4)
 				print(statType, label, value, tooltipId)
 				if tooltipId == damageStatID then
-					if ACTIVE_CHARACTER ~= nil then
-						local character = Ext.GetCharacter(ACTIVE_CHARACTER)
-						--print(tooltipHeader,isDamageTooltip,ACTIVE_CHARACTER,IsUnarmed(character.Stats), character.Stats.MainWeapon.Name)
+					if CLIENT_UI.ACTIVE_CHARACTER ~= nil then
+						local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+						--print(tooltipHeader,isDamageTooltip,CLIENT_UI.ACTIVE_CHARACTER,IsUnarmed(character.Stats), character.Stats.MainWeapon.Name)
 						if IsUnarmed(character.Stats) then
 							local weapon,boost = GetUnarmedWeapon(character.Stats)
 							local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
@@ -211,78 +220,6 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	for i=0,99,1 do
 		local var = ui:GetValue("tags_array", "number", i)
 	end
-end
-
----@param ui UIObject
-local function OnDebugTooltip(ui, ...)
-	-- local params = {...}
-	-- LeaderLib.PrintDebug("[OnDebugTooltip] Function running params("..LeaderLib.Common.Dump(params)..")")
-	-- local arrayValueSet = ui:GetValue("tooltip_array", "number", 0)
-	-- local totalNil = 0
-	-- if arrayValueSet ~= nil then
-	-- 	for i=0,999,1 do
-	-- 		local val = ui:GetValue("tooltip_array", "number", i)
-	-- 		if val == nil then val = ui:GetValue("tooltip_array", "string", i) end
-	-- 		if val == nil then val = ui:GetValue("tooltip_array", "boolean", i) end
-	-- 		if val ~= nil then
-	-- 			print(i, val)
-	-- 		else
-	-- 			totalNil = totalNil + 1
-	-- 			if totalNil > 20 then
-	-- 				break
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end
-end
-
----@param ui UIObject
-local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
-	local tooltipHeader = ui:GetValue("tooltip_array", "string", 1)
-	local isDamageTooltip = tooltipHeader == "Damage"
-	if isDamageTooltip then
-		if ACTIVE_CHARACTER ~= nil then
-			local character = Ext.GetCharacter(ACTIVE_CHARACTER)
-			--print(tooltipHeader,isDamageTooltip,ACTIVE_CHARACTER,IsUnarmed(character.Stats), character.Stats.MainWeapon.Name)
-			if IsUnarmed(character.Stats) then
-				local totalDamageText = Ext.GetTranslatedString("h1035c3e5gc73dg4cc4ga914ga03a8a31e820", "Total damage: [1]-[2]")
-				--local weaponDamageText = Ext.GetTranslatedString("hfa8c138bg7c52g4b7fgaccdgbe39e6a3324c", "<br>From Weapon: [1]-[2]")
-				--local offhandWeaponDamageText = Ext.GetTranslatedString("hfe5601bdg2912g4beag895eg6c28772311fb", "From Offhand Weapon: [1]-[2]")
-				local fromFistsText = Ext.GetTranslatedString("h0881bb60gf067g4223ga925ga343fa0f2cbd", "<br>From Fists: [1]-[2]")
-				local weapon,boost,unarmedMasteryRank = GetUnarmedWeapon(character.Stats)
-				--local weaponDamageRange,totalDamageRange = Math.GetBaseAndCalculatedWeaponDamageRange(character.Stats, weapon)
-				local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
-
-				local totalDamageFinalText = totalDamageText:gsub("%[1%]", totalMin):gsub("%[2%]", totalMax)
-				local weaponDamageFinalText = fromFistsText:gsub("%[1%]", baseMin):gsub("%[2%]", baseMax)
-				-- Total Damage
-				ui:SetValue("tooltip_array", totalDamageFinalText, 7)
-				-- From Fists
-				ui:SetValue("tooltip_array", weaponDamageFinalText, 9)
-				if boost > 0 then
-					ui:SetValue("tooltip_array", 102, 14)
-					ui:SetValue("tooltip_array", string.format("From Unarmed Mastery %i: +%i%%", unarmedMasteryRank,boost), 15)
-				end
-				print("Custom unarmed tooltip damage text:",totalDamageFinalText,weaponDamageFinalText,character.Stats.Name)
-			end
-		end
-	end
-	-- local totalNil = 0
-	-- if arrayValueSet ~= nil then
-	-- 	for i=0,999,1 do
-	-- 		local val = ui:GetValue("tooltip_array", "number", i)
-	-- 		if val == nil then val = ui:GetValue("tooltip_array", "string", i) end
-	-- 		if val == nil then val = ui:GetValue("tooltip_array", "boolean", i) end
-	-- 		if val ~= nil then
-	-- 			print(i, val)
-	-- 		else
-	-- 			totalNil = totalNil + 1
-	-- 			if totalNil > 20 then
-	-- 				break
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end
 end
 
 local function Client_UIDebugTest()
@@ -322,31 +259,16 @@ local function Client_UIDebugTest()
 		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
 		Ext.RegisterUICall(ui, "charSel", OnCharacterSelected)
 	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
-	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/examine.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showTooltip", OnSheetEvent)
 		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
 	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/tooltip.swf")
-	if ui ~= nil then
-		if Ext.IsDeveloperMode() then
-			Ext.RegisterUIInvokeListener(ui, "INTshowTooltip", OnDebugTooltip)
-			Ext.RegisterUIInvokeListener(ui, "INTRemoveTooltip", OnDebugTooltip)
-			Ext.RegisterUIInvokeListener(ui, "addTooltip", OnDebugTooltip)
-			Ext.RegisterUIInvokeListener(ui, "addStatusTooltip", OnDebugTooltip)
-			Ext.RegisterUIInvokeListener(ui, "setGroupLabel", OnDebugTooltip)
-			Ext.RegisterUIInvokeListener(ui, "addFormattedTooltip", OnDebugTooltip)
-		end
-		Ext.RegisterUIInvokeListener(ui, "addFormattedTooltip", OnAddFormattedTooltip)
-	end
 end
 
 local function LLWEAPONEX_Client_SessionLoaded()
-	InitMasteryMenu()
+	masteryMenu.Init()
+	tooltipOverrides.Init()
 	if Ext.IsDeveloperMode() then
 		Client_UIDebugTest()
 	end

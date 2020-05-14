@@ -112,6 +112,7 @@
 	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">Pacifist&apos;s Wrath (2H)</content>
 	<content contentuid="h0ab8d13bg763eg48f2gb501g886ee85d35e3">Character is taking [1] from their &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; status being evaporated!</content>
 	<content contentuid="h0abdfdfag27b0g44e6g908eg74133ca9abba">Warchief&apos;s Halberd (Axe) (Memory Scaling)</content>
+	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;Allies standing on &lt;font color=&apos;#F13324&apos;&gt;blood surfaces&lt;/font&gt; or in &lt;font color=&apos;#F13324&apos;&gt;blood clouds&lt;/font&gt; gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBonus]% damage bonus.&lt;/font&gt;</content>
 	<content contentuid="h0ada3a43g2943g4b09g900agd1a2b2587c3d">Sage of Staves</content>
 	<content contentuid="h0b0d24f1g43a3g4c02g9d6cg0ba2a1b2f1dc">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to Sucker Punch that deals [1].&lt;br&gt;If the target is Knocked Down, Dizzy is applied for 2 turns when they stand up.&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
 	<content contentuid="h0b157d20g8525g44e5g9cf2g9bb41a4820ce">Demonic Surge</content>
@@ -156,7 +157,7 @@
 	<content contentuid="h0e4a73f9g3111g4ef9g8c5ega855a2b8473b">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
 	<content contentuid="h0ed78be5g1afag4d98ga3c3ge547395bf212">Dragon&apos;s Bane</content>
 	<content contentuid="h0ee0f7bbg3f1ag44b1g921ege32ac4f642a3">Capped Quarterstaff</content>
-	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your weapon&apos;s element, gaining [1] for [2] turn(s).&lt;/font&gt;</content>
+	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your weapon&apos;s element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessDuration] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h0f05d7a3g7537g42b2g8816ge356bcadaef4">Gnak&apos;s Spell Scroll (Memory Scaling)</content>
 	<content contentuid="h0f0aca8cg237bg4696gb195gbd43e7378fd4">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Ice Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
 	<content contentuid="h0f364e95ga530g490cg846agce877c3a904a">Insert into a Pistol to Change Damage Type</content>
@@ -304,7 +305,7 @@
 	<content contentuid="h1e7673d0g6739g4be5gb84agf1d3fc43b003">Revenant</content>
 	<content contentuid="h1e98bcebg2e42g4699gba2bg6f647d428699">Unarmed</content>
 	<content contentuid="h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa">Scythe</content>
-	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [1]%&lt;/font&gt; for [2] turn(s).&lt;/font&gt;</content>
+	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt; for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h1ec134feg2358g4666g91c3gb0808e20fd0a">[ORDER] *Hit the button labeled &apos;Place Order&apos;.*</content>
 	<content contentuid="h1ec7c569g945fg47a9g9efbg52852b310b6c">Wanderer&apos;s Blade</content>
 	<content contentuid="h1ed46838g214eg4110g92e7g03381bcdfe7e">Banner of the Pack (Finesse Scaling)</content>
@@ -511,7 +512,7 @@
 	<content contentuid="h3112e038g01abg4e7eg9efcg379e017e328f">Unranked</content>
 	<content contentuid="h31211dd3gf8eeg4d5bgb7ffg36e10368f488">&lt;font color=&apos;#00EE29&apos;&gt;Change Stance&lt;/font&gt;</content>
 	<content contentuid="h31246356gaf34g40e6g97bdg4809255e71f0">Test Status</content>
-	<content contentuid="h313c4c7eg0562g4952gbbf9gd1c810163574">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos; icon=&apos;Skill_Warrior_BatteringRam;Skill_Polymorph_BullRush&apos;/&gt;If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.</content>
+	<content contentuid="h313c4c7eg0562g4952gbbf9gd1c810163574">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos; icon=&apos;Skill_Warrior_BatteringRam;Skill_Polymorph_BullRush&apos;/&gt;If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.&lt;icon id=&apos;Shout_InspireStart&apos; icon=&apos;Skill_Warrior_Inspire&apos;/&gt;Fear, Madness, and Sleep are cleansed from encouraged allies.</content>
 	<content contentuid="h314ea21fg9e36g4d19gba1fgb5b55eb69808">Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;At the end of the beam, the energy explodes in a [2] radius, dealing [3] and applying any active rune effects.&lt;/font&gt;&lt;br&gt;Depletes the energy in the &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt;.</content>
 	<content contentuid="h31557319gc435g4ec5ga57ag3c80024b6b71">Chaotic Power</content>
 	<content contentuid="h3162baf9g0fc0g4a9cg99a0g64b5cefe3e76">Dusty Book</content>
@@ -613,6 +614,7 @@
 	<content contentuid="h3c24295cg7c91g42dega708g63b3f524e4ab">A sharp greatbow arrow shimmering beneath a toxic green mist; best not to inhale as you release this venomous cloud.</content>
 	<content contentuid="h3c29ef66g8d40g452cgb5f0g346b54e6b03e">Barricade of the Ancient Empire</content>
 	<content contentuid="h3c339bd7g4097g407ag89d1g293eb36f7e49">Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost4]% extra base damage in total, making it comparable to the damage of a two-handed weapon.</content>
+	<content contentuid="h3c34bca6gc080g4de4gae5eg4909ad60ecc8">If under the effects of &lt;font color=&apos;#FFCE58&apos;&gt;War Charge&lt;/font&gt;, deal [ExtraData:LLWEAPONEX_MasteryBonus_WarChargeDamageBoost]% more damage and gain &lt;font color=&apos;#7D71D9&apos;&gt;[Key:HASTED_DisplayName]&lt;/font&gt; after rushing.</content>
 	<content contentuid="h3c905e53gc20bg434cgac81gd9877ebbbe4c">&lt;font color=&apos;#FD8826&apos;&gt;Quarterstaff Mastery II&lt;/font&gt;</content>
 	<content contentuid="h3cad14e9gc1a1g4d96gb7a3gf1513ca5a6fc">Steamcloud Arrow</content>
 	<content contentuid="h3d0276edgb096g4720g8f9fg03f6b75db509">Soul Scorcher</content>
@@ -642,6 +644,7 @@
 	<content contentuid="h3f55cf81gc40eg4539gae43g5ae634267e64">Through the power of the &lt;font color=&apos;#c5a65a&apos;&gt;Power Gauntlets&lt;/font&gt;, this character can wield two-handed melee weapons with one hand.</content>
 	<content contentuid="h3f6442e1gdc87g4b09ga9a8gca12fa86a07d">a Spear</content>
 	<content contentuid="h3f7f9468gbc7fg4982g81dbgdb856d1d452c">Toxic Edge</content>
+	<content contentuid="h3fb6e3f1g6fdcg4cfdg9761g6b8048ee5943">Character is empowered through an ally&apos;s Flesh Sacrifice.</content>
 	<content contentuid="h3fbb0e48g9ca6g4372g86e6gd35d9e3bec56">Glaive</content>
 	<content contentuid="h3fda20edg9786g47deg9aecgab17738b1ded">The Emperor&apos;s Wall</content>
 	<content contentuid="h4034995fg479cg46a0ga583g7709a973e538">Blademaster&apos;s Strike 9</content>
@@ -661,7 +664,6 @@
 	<content contentuid="h41572b94g3984g4e03gb791g9017a6081cf4">Muramasa, The Cursed Blade (Strength Scaling)</content>
 	<content contentuid="h415f025egf93cg4ee8gafe0gec2c25669edb">Fire 15 bullets in a [1] degree arc. Each bullet deals [2].</content>
 	<content contentuid="h416e348bgb3ddg4b02g9f8cg228d9883f50f">&lt;font color=&apos;#65C900&apos;&gt;Attuned to Poison&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#65C900&apos;&gt;Contaminates surfaces.&lt;/font&gt;</content>
-	<content contentuid="h41e991cbgbe00g4469g924bge4d4c73cffa2">Cripple the target with a sweeping blow, and all characters around it. Deals [1].[2]</content>
 	<content contentuid="h41f9a490ge372g43c7g989ag81b444fb98c8">&lt;font color=&apos;#FF0000&apos;&gt;*Only the grimoire user can equip that!*&lt;/font&gt;</content>
 	<content contentuid="h41ff62e4g3ae2g4f24ga725g0442f8e936a2">*[ONE-HANDED] Click on the button labeled &apos;One-Handed&apos;.*</content>
 	<content contentuid="h4230520dgdd57g4384g98cdg326bebd1bbe2">&lt;font color=&apos;#5B40FF&apos;&gt;Dagger Mastery II&lt;/font&gt;</content>
@@ -684,7 +686,7 @@
 	<content contentuid="h44e46308g8f4dg4357gaac4g1d50a425d36a">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h4504bbc0gb7a6g42c3ga57eg83f3e78c0db2">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Insert Failed - No Hand Crossbow Equipped&lt;/font&gt;</content>
 	<content contentuid="h451677d2ga792g4f99g8f77gccafa357861c">A warrior who strives to defend the innocent through a unique style that utilizes dual shields</content>
-	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Warfare skills can now be used while unarmed.&lt;br&gt;&lt;icon id=&apos;Target_LLWEAPONEX_UnarmedBasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost1]% extra base damage in total, and scale with your highest base attribute (Strength, Finesse, or Constitution).</content>
+	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Warfare skills can now be used while unarmed.&lt;icon id=&apos;Target_LLWEAPONEX_UnarmedBasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost1]% extra base damage in total, and scale with your highest base attribute (Strength, Finesse, or Constitution).</content>
 	<content contentuid="h453d9d53gcdfdg4674g819fgbc0de4196a21">Heed the rallying cry of the Standard-Bearer, teleporting to the raised banner.</content>
 	<content contentuid="h45457359gaa62g40f9gaa6bgd1996571cc40">Shield Prison</content>
 	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1">Polearm</content>
@@ -913,7 +915,7 @@
 	<content contentuid="h5d896d52ge61cg4bb3ga98eg4bd8b8600800">Captain&apos;s Inspiration</content>
 	<content contentuid="h5d8a154eg64b7g4355g97abgb77587ce2898">Glorious Handcannon</content>
 	<content contentuid="h5d8baba3g6dfag4651gb405g2f9e93097e4f">Contamination Rune</content>
-	<content contentuid="h5d9eca79g2820g4058gba1bgee5b291c2515">Attack with your fists, dealing [1].</content>
+	<content contentuid="h5d9eca79g2820g4058gba1bgee5b291c2515">Attack with your fists, dealing [1].[2]</content>
 	<content contentuid="h5de7cd4agefe0g4ab3g8d0agdd9fdb52f2c5">Gravity Falls</content>
 	<content contentuid="h5e37e2c9g1d9fg4dc6g9d11g36ef081c0e27">Throwing Dagger</content>
 	<content contentuid="h5e406683g1f15g4998g869cgee124ba8d773">Frenzy Charge</content>
@@ -932,7 +934,6 @@
 	<content contentuid="h5fc057e4g2495g40fdg8c75ga0940679a542">&lt;font color=&apos;#81AB00&apos;&gt;Token of Finesse&lt;/font&gt;</content>
 	<content contentuid="h5fc3738bgfd66g4868gb91eg8e4c5681b534">While Warfare skills are typically for warriors, specialized mages have bridged the gap via intense close combat training. Read this book to learn this skill.</content>
 	<content contentuid="h5fcfb3f1g8718g4c66g9b74g854452c7478f">Worn Metal Quarterstaff</content>
-	<content contentuid="h5fdfca1dg8dd4g4cc3g9939g7433a38d4658">Throw a knife at your opponent, dealing [1].[2]</content>
 	<content contentuid="h5feaed39g30ebg4823g85b3g0d23ca4c7f3f">Destroy Grimoire FX for Party</content>
 	<content contentuid="h600027f7gac39g419bgba1dg56a1a17df1f9">Sweeper</content>
 	<content contentuid="h600758d8g966ag4715g944eg443503a394cc"></content>
@@ -967,6 +968,7 @@
 	<content contentuid="h63586ac1g7c6fg4b7cg994bg5921ad89351e">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery I&lt;/font&gt;</content>
 	<content contentuid="h63925b78gb703g4e04gb401g502a7ab3f7b3">Wraithblade (Constitution Scaling)</content>
 	<content contentuid="h63b6a659ge378g4b1dga54ag7e90a7e74b4b">Raizan (Unleashed) (Reset Scaling)</content>
+	<content contentuid="h63d42801g007eg4ae6g8609g856b214fb5d1">&lt;font color=&apos;#E4CE22&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;Banner Inspiration!&lt;/font&gt;&lt;br&gt;Cleansed [1]&lt;/p&gt;</content>
 	<content contentuid="h63d5e39cg9ef5g4953gbf6ag8e9a9c5821b7">Charged (Runic Cannon)</content>
 	<content contentuid="h63dca9f7gd9c8g48e7g9999g71de1c362826">Scripture of the Righteous (Memory Scaling)</content>
 	<content contentuid="h63e8ccdbg84b8g411cg9797g605a5449494a">Duelist Stance</content>
@@ -1003,6 +1005,7 @@
 	<content contentuid="h66927417gec18g4fe5gbdd8gfc1541a8179a">Iron Maiden</content>
 	<content contentuid="h66a4c7d4gd550g4308gb159g1ca48d8c4f08">Poison Bullets</content>
 	<content contentuid="h66a7791egc5d9g4e06ga913g255216e74b2a">Enable Remote Charge Detonation Limit (Default)</content>
+	<content contentuid="h66bfffc1ga29cg4658g9b1cgad4e60f5b097">Empowered by Blood</content>
 	<content contentuid="h66e019e3g7dd3g41fdg9880gd479a73bf7ba">Character is taking [1] from a flying body.</content>
 	<content contentuid="h66ea9bb3g8724g4001gb9acgccf4a5696829">Rallying</content>
 	<content contentuid="h66fd8c59g8a4dg44a2gaafeg71d0a80db595">Air Weakness</content>
@@ -1045,6 +1048,7 @@
 	<content contentuid="h6ac77698g7cf7g4d8aga548gd1bf823df736">Strongman&apos;s Greatbow</content>
 	<content contentuid="h6add6a16ge3fdg4cdcg9420gd6320b918928">Journeyman of Wands</content>
 	<content contentuid="h6af0ae9eg0838g444dg8d9fge1fcbe76dcdc">Leap into the air before shooting, gaining damage bonuses for your superior height. Deals [1].</content>
+	<content contentuid="h6b16bc91ge0bag411ag9684g71a7a00685b1">Empowered by Blood</content>
 	<content contentuid="h6b4e0684g604bg40aeg9f91ga04ce93898e7">Old Metal Pipe</content>
 	<content contentuid="h6b5c3046gb028g4fdegb14bg46b42cd9b271">Character has been hit by a Blademaster&apos;s strike 9 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="h6b8c8e3ag008dg4829gb0c8gb38f86b5c810">Character has lowered resistance to &lt;font color=&apos;#65C900&apos;&gt;poison damage&lt;/font&gt;.</content>
@@ -1293,7 +1297,6 @@
 	<content contentuid="h83aa9859g7a83g472dg94cdg70b830d555ee">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery II&lt;/font&gt;</content>
 	<content contentuid="h83c84479gdaceg4a72g8557g4515ba2ce106">Character has been hit by a Blademaster&apos;s strike 6 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="h83caead8g3a51g4daag9145ge0b8a4dd23a5">Novice</content>
-	<content contentuid="h83e82e86g9f8cg47bdgb7cdgeae280223625">Perform a whirlwind attack, hitting enemies around you for [1].[2]</content>
 	<content contentuid="h83f21fd2gd4d8g44caga868gbc9a5c816e75">Kagutsuchi (Wits Scaling)</content>
 	<content contentuid="h84013f3ag47fag41c2gae89gf27bfdfaf979">Look closely; the only visible difference between this greatbow arrow and a normal greatbow arrow can be seen in the sizzling dents within the tip of the arrowhead.</content>
 	<content contentuid="h8406fbf2g4595g403ag8d5cgb007104ebd1c">Dual Shieldmaster</content>
@@ -1315,7 +1318,7 @@
 	<content contentuid="h86660c61gd073g4780g846egf0bd558cd1d3">Dust Rune</content>
 	<content contentuid="h86af1241g131ag4f8egb295g59ab4bdc4c72">You&apos;re already dead...</content>
 	<content contentuid="h86c1d16cgc918g4625g9df8g19a8061fa282">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h86e68aebgdd6eg436fg98c8gc34e0a5d0516">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Basic attacks now lower the target&apos;s resistance to your wand&apos;s element by 10% for 1 turn.</content>
+	<content contentuid="h86e68aebgdd6eg436fg98c8gc34e0a5d0516">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Basic attacks now lower the target&apos;s resistance to your wand&apos;s element by -25% for 1 turn.&lt;icon id=&apos;Shout_FleshSacrifice&apos; icon=&apos;Skill_Decay_FleshSacrifice&apos;/&gt;Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBonus]% damage bonus.</content>
 	<content contentuid="h86fdba0bgd3afg43e9gbd3fgcb70e445bff3">Forest&apos;s Wall, Seeker&apos;s Spurn</content>
 	<content contentuid="h872b22a6ga3b3g409ag8921g26eb2af4a0c5">Blademaster&apos;s Strike Target</content>
 	<content contentuid="h87828da3gd327g4c50g9691gb181fe64b063">Banner of Unruly Faith (Reset Scaling)</content>
@@ -1870,7 +1873,7 @@
 	<content contentuid="hc1dc0051gd74eg4fe9g8149g86be7fe4e201">&lt;font color=&apos;#69f900&apos;&gt;Poison Burst&lt;/font&gt;</content>
 	<content contentuid="hc1ec029eg99b2g498agbc02g39fc719a2386">Incinerator</content>
 	<content contentuid="hc2220687g3639g4340ga4efg10890425c245">Covered</content>
-	<content contentuid="hc23cbf18gaa51g4cdcgb329g38c8aa247f7b">&lt;font color=&apos;#ffce58&apos;&gt;Devil Hand Aura (3m)&lt;/font&gt;</content>
+	<content contentuid="hc23cbf18gaa51g4cdcgb329g38c8aa247f7b">&lt;font color=&apos;#FFCE58&apos;&gt;Devil Hand Aura (3m)&lt;/font&gt;</content>
 	<content contentuid="hc2cd4efdg1374g442cg8cacgfd5b79ac4edf">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery IV&lt;/font&gt;</content>
 	<content contentuid="hc3010253gf307g48b9gb9d0gb7d51b36b7c6">Wraithblade (Wits Scaling)</content>
 	<content contentuid="hc31eb4bcg870eg4375g9f05g66b18303eb29">Weapon Expansion - Weapons</content>

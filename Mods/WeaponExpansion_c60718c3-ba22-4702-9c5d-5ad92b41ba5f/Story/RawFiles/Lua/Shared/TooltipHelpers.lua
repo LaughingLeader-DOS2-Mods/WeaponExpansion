@@ -24,7 +24,7 @@ local function ReplacePlaceholders(str)
 		if stat ~= nil and property ~= nil then
 			value = Ext.StatGetAttribute(stat, property)
 		end
-		if value ~= "" then
+		if value ~= nil and value ~= "" then
 			if type(value) == "number" then
 				value = string.format("%i", value)
 			end

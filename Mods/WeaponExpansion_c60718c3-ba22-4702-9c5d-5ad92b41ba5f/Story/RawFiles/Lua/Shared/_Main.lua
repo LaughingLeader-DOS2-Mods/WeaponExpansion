@@ -30,6 +30,7 @@ Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
+Ext.Require("Shared/TooltipHelpers.lua")
 
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string
@@ -67,16 +68,17 @@ end
 --- @param tag string
 --- @return boolean
 function HasMasteryRequirement(character, tag)
-	if type(character) == "string" then
-		character = Ext.GetCharacter(character)
-	end
-	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
-	if not status then
-		Ext.PrintError("Error checking mastery requirements:\n", result)
-	else
-		return result
-	end
-	return false
+	return true
+	-- if type(character) == "string" then
+	-- 	character = Ext.GetCharacter(character)
+	-- end
+	-- local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
+	-- if not status then
+	-- 	Ext.PrintError("Error checking mastery requirements:\n", result)
+	-- else
+	-- 	return result
+	-- end
+	-- return false
 end
 
 function HasMasteryRequirement_QRY(call, uuid, tag)
