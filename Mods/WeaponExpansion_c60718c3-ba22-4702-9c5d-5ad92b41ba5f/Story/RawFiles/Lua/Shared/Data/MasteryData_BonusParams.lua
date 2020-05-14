@@ -233,11 +233,13 @@ Mastery.Params.SkillData.Target_CripplingBlow = {
 		LLWEAPONEX_Bludgeon_Mastery1 = {
 			ID = "SUNDER",
 			Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration] turn(s).</font>"),
+			NamePrefix = "<font color='#F19824'>Sundering</font>"
 		},
 		LLWEAPONEX_Axe_Mastery1 = {
 			ID = "BONUSDAMAGE",
 			Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","<font color='#F19824'>If the target is disabled, deal an additional [1].</font>"),
 			GetParam = GetCripplingBlowBonusDamage,
+			NamePrefix = "<font color='#DD4444'>Executioner's</font>"
 		},
 	}
 }

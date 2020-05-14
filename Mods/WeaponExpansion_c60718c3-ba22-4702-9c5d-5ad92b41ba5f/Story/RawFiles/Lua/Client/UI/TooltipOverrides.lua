@@ -36,6 +36,7 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 			if data ~= nil then
 				local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
 				local descriptionText = ""
+				local namePrefix = ""
 				if data.Tags ~= nil then
 					local tagKeys = {}
 					for tagName,tagData in pairs(data.Tags) do
@@ -46,6 +47,12 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 					for i,tagName in ipairs(tagKeys) do
 						local tagData = data.Tags[tagName]
 						if HasMasteryRequirement(character, tagName) then
+							if tagData.NamePrefix ~= nil then
+								if namePrefix ~= "" then
+									namePrefix = namePrefix .. " "
+								end
+								namePrefix = namePrefix .. tagData.NamePrefix
+							end
 							local paramText = ""
 							--local tagLocalizedName = Text.MasteryRankTagText[tagName]
 							local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
@@ -78,6 +85,15 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 						if description == nil then description = "" end
 						description = description .."<br>"..descriptionText
 						ui:SetValue("tooltip_array", description, index+1)
+					end
+				end
+				if namePrefix ~= "" then
+					local index = setupTooltip.FindTooltipTypeIndex(ui, LeaderLib.Data.UI.TOOLTIP_TYPE.SkillName)
+					if index ~= nil then
+						local name = ui:GetValue("tooltip_array", "string", index+1)
+						if name == nil then name = "" end
+						name = namePrefix .. " ".. name
+						ui:SetValue("tooltip_array", name, index+1)
 					end
 				end
 			end
