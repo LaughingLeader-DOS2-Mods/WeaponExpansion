@@ -16,7 +16,7 @@
 	<content contentuid="h0105c199gf9f5g4d17g8aa5g85b10660932a">*Leave the rock alone and step away.*</content>
 	<content contentuid="h011b99cag1e54g4b92g912ag58afbfdab053">Dragonslayer Mail</content>
 	<content contentuid="h012244c7gbb72g4652g8ee1g19be9a9da947">Inferno Rune</content>
-	<content contentuid="h01468f79gd9b2g4479ga596g8a68e07c39e7">&lt;font color=&apos;#FFCE58&apos;&gt;Slam the target with your palm, knocking them back &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m&lt;/font&gt; and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage:Damage].&lt;/font&gt;</content>
+	<content contentuid="h01468f79gd9b2g4479ga596g8a68e07c39e7">&lt;font color=&apos;#FFCE58&apos;&gt;Slam the target with your palm, knocking them back &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m&lt;/font&gt; and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage].&lt;/font&gt;</content>
 	<content contentuid="h014a89fcg6438g451dg96bag521c32259715">Balrin&apos;s Throwing Axe (Ice)</content>
 	<content contentuid="h016eba10ga3d5g4741ga89egdf0a8e13386e">Master Dragonslayer</content>
 	<content contentuid="h0177ec26ge046g4223gb328g687de003a4b1">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are covered in a chilling frost, dealing Water damage on hit.</content>
@@ -222,7 +222,7 @@
 	<content contentuid="h16cd4b5bged4cg4a2eg932eg1015dabd6c42">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery II&lt;/font&gt;</content>
 	<content contentuid="h16cdc860g50d2g4c52ga87fg5b5411562aaa">Bonus Ice Damage</content>
 	<content contentuid="h17265d91g7278g47d2g8109g5966d8291fec">Novice</content>
-	<content contentuid="h173b9449ge0c5g4f29g86f4g01124907841b">Each target hit becomes &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt;. If hit again, &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage:Damage].&lt;br&gt;&lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed when your turn ends.</content>
+	<content contentuid="h173b9449ge0c5g4f29g86f4g01124907841b">Each target hit becomes &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt;. If hit again, &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].&lt;br&gt;&lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed when your turn ends.</content>
 	<content contentuid="h1765f964g83e6g4e49g89afg2a7239aa0a3c">&lt;font color=&apos;#00AA00&apos;&gt;Flask of Poison Weakness&lt;/font&gt;</content>
 	<content contentuid="h176fd702g856eg4a56ga027g90f413fedc79">Soldier&apos;s Glaive</content>
 	<content contentuid="h177fef81gd571g4c7fgba7egfcb6f10eb00a">A handmade quiver, designed for quickly drawing arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
@@ -698,7 +698,7 @@
 	<content contentuid="h45a677d5g0b55g4d45ga42eg862f56d9602b">A rare set of dwarven gloves, said to grant the bearer enourmous strength.</content>
 	<content contentuid="h45c35594ga4efg4923g87b2g351240d83b96">Slayer&apos;s Greatbow</content>
 	<content contentuid="h46549881g092ag4c08ga301g9e043ee34d80">Character is unsteady, and has a chance to fall when moving.</content>
-	<content contentuid="h46875020ge016g4eccg94ecgc9f5233c07fd">&lt;font color=&apos;#F19824&apos;&gt;If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage:Damage].&lt;/font&gt;</content>
+	<content contentuid="h46875020ge016g4eccg94ecgc9f5233c07fd">&lt;font color=&apos;#F19824&apos;&gt;If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage].&lt;/font&gt;</content>
 	<content contentuid="h4746d357ge878g462eg86ccg30f7a8115f17">*[TWO-HANDED] Click on the button labeled &apos;Two-Handed&apos;.*</content>
 	<content contentuid="h4752734dg8d97g4a1eg9ef2g6c089c8a27fc">Character&apos;s firearm is attuned to ice.</content>
 	<content contentuid="h477c0babg3628g4207g922ega0f054a32cb6">&lt;font color=&apos;#9A5085&apos;&gt;Torment&lt;/font&gt;</content>
@@ -908,7 +908,7 @@
 	<content contentuid="h5c65b248g0e76g41a5gb068gb4c884703c5b">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h5c82bb74g471bg4d45g8aa0gd45071f22f65">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are electrified, dealing Air damage.</content>
 	<content contentuid="h5c90b0f6g92beg408fg97bbg77de5ee58c77">A banner of the Lone Wolves., the infamous mercenary company&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
-	<content contentuid="h5ca24bfeg14f5g437fg92fag4708f87547de">&lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt; the wounds of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding:Damage] for each turn of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; remaining.</content>
+	<content contentuid="h5ca24bfeg14f5g437fg92fag4708f87547de">&lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt; the wounds of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; remaining.</content>
 	<content contentuid="h5cacb163gcfd1g49bcgb391g25dd92b84fce">Kagutsuchi</content>
 	<content contentuid="h5cb2bd14ge6e9g4414gb251g68882368b0bf">Lunaris &amp; Solaris</content>
 	<content contentuid="h5cbe9e55gccafg4c3agbd26g8b31754a54eb">A scholar&apos;s dearest weapon. Beat them down with &lt;i&gt;KNOWLEDGE!&lt;/i&gt;</content>
@@ -2250,7 +2250,7 @@
 	<content contentuid="hea7b370fg93b8g4c74g9ebbgfc757898ff2c">Pacifist&apos;s Wrath (1H)</content>
 	<content contentuid="hea81e505gc83fg4ac1gbed5g7b03511ff083">&lt;font color=&apos;#4197E2&apos;&gt;Attuned to Water&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#4197E2&apos;&gt;Douses surfaces.&lt;/font&gt;</content>
 	<content contentuid="hea8585b2gae30g46efga47egf7afed684cc8">Param Test&lt;br&gt;Status_Arrowhead_Fire:Damage [1]&lt;br&gt;Projectile_Fireball:Damage [2]</content>
-	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%&lt;/font&gt; to be &lt;font color=&apos;#00FFAA&apos;&gt;coated in poison or explosive oil&lt;/font&gt;, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive:Damage] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison:Damage] on hit.&lt;/font&gt;</content>
+	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%&lt;/font&gt; to be &lt;font color=&apos;#00FFAA&apos;&gt;coated in poison or explosive oil&lt;/font&gt;, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.&lt;/font&gt;</content>
 	<content contentuid="hea8fbd35g2e22g4409gbd12g02488d4a64d7">Power Pole (Intelligence Scaling)</content>
 	<content contentuid="head276c0gfecag4897gbc5cg4b74c26bb4d9">a Crossbow</content>
 	<content contentuid="headd90e1g4e62g45b3gb69ag0f25a7bd491e">Oni Edge</content>
