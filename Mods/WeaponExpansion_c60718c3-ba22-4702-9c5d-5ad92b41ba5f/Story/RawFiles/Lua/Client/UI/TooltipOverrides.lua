@@ -32,7 +32,7 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 			weaponTooltips.TryOverrideItemTooltip(ui, item, character, setupTooltip)
 		end
 	end
-	setupTooltip.DumpTooltipArray(ui)
+	--setupTooltip.DumpTooltipArray(ui)
 
 	local isSkill = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == "SkillName"
 	-- local school = ui:GetValue("tooltip_array", "string", 5)
@@ -200,9 +200,19 @@ local function OnTooltip(ui, call, ...)
 	-- end
 end
 
+local function OnSlotOut(ui, call, ...)
+	if call ~= "addFormattedTooltip" then
+		lastTooltipCall = call
+	end
+	local params = {...}
+	LeaderLib.PrintDebug("[WeaponExpansion:UI/TooltipOverrides.lua:OnSlotOut] params("..LeaderLib.Common.Dump(params)..")")
+	CLIENT_UI.LAST_ITEM = nil
+end
+
 local itemTooltipFiles = {
 	"Public/Game/GUI/characterSheet.swf",
 	"Public/Game/GUI/partyInventory.swf",
+	"Public/Game/GUI/trade.swf",
 	"Public/Game/GUI/playerInfo.swf",
 	"Public/Game/GUI/statusConsole.swf",
 	"Public/Game/GUI/uiElements.swf",
@@ -212,6 +222,18 @@ local itemTooltipFiles = {
 	"Public/Game/GUI/tooltipHelper.swf",
 	"Public/Game/GUI/tooltipHelper_kb.swf",
 }
+
+local function HookIntoTrade(dialogUI, ...)
+	local ui = Ext.GetBuiltinUI("Public/Game/GUI/trade.swf")
+	if ui ~= nil then
+		Ext.Print("Found trade window")
+		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+		Ext.RegisterUICall(ui, "slotOver", OnTooltip)
+		Ext.RegisterUICall(ui, "slotOut", OnSlotOut)
+	else
+		Ext.PrintError("Cound not find trade window")
+	end
+end
 
 local function InitTooltipOverrides()
 	local ui = Ext.GetBuiltinUI("Public/Game/GUI/tooltip.swf")
@@ -232,18 +254,24 @@ local function InitTooltipOverrides()
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnTooltip)
 		Ext.RegisterUICall(ui, "showStatTooltip", OnTooltip)
-		Ext.RegisterUICall(ui, "slotOver", OnTooltip)
 	end
 	for i,file in pairs(itemTooltipFiles) do
 		ui = Ext.GetBuiltinUI(file)
 		if ui ~= nil then
 			Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
 			Ext.RegisterUICall(ui, "slotOver", OnTooltip)
+			Ext.RegisterUICall(ui, "slotOut", OnSlotOut)
 		end
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnTooltip)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/dialog.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "TradeButtonPressed", HookIntoTrade)
+	else
+		Ext.PrintError("Cound not find dialog.swf")
 	end
 end
 
