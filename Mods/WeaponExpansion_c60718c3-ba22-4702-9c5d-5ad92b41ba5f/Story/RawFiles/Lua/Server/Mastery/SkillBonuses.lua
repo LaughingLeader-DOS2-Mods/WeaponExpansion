@@ -6,7 +6,7 @@ local function GetMasteryBonuses(char, skill)
 	local data = Mastery.Params.SkillData[skill]
 	if data ~= nil and data.Tags ~= nil then
 		for tagName,tagData in pairs(data.Tags) do
-			if HasMasteryRequirement(character, tagName) then
+			if Mastery.HasMasteryRequirement(character, tagName) then
 				bonuses[tagData.ID] = true
 			end
 		end
@@ -111,7 +111,7 @@ local function CripplingBlowBonus(skill, char, state, funcParams)
 					LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 					
 					-- local targetPos = {[1] = x, [2] = y, [3] = z}
-					--local x,y,z = GetPosition(target)					-- local skill = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+					--local x,y,z = GetPosition(target)					-- local skill = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 					-- local damageList = Game.Math.GetSkillDamage(skill, character.Stats, false, false, character.Stats.Position, targetPos, character.Stats.Level, 0)
 					-- damageList:ConvertDamageType("Piercing")
 					-- for i,damage in pairs(damageList:ToTable()) do
@@ -346,3 +346,54 @@ LeaderLib.RegisterSkillListener("Rush_EnemyBullRush", RushBonus)
 function OnRushSkillCast(char, skill, element)
 
 end
+
+local function PetrifyingTouchBonus(skill, char, state, funcParams)
+	if state == SKILL_STATE.CAST then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["PETRIFYING_SLAM"] == true then
+			PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_R_HandFX")
+			PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_L_HandFX")
+		end
+	elseif state == SKILL_STATE.HIT then
+		local target = funcParams[1]
+		if target ~= nil then
+			local bonuses = GetMasteryBonuses(char, skill)
+			if bonuses["PETRIFYING_SLAM"] == true then
+				LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage")
+				local forceDistance = Game.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+				if forceDistance > 0 then
+					local character = Ext.GetCharacter(char)
+					local x,y,z = GetPosition(target)
+					PlayEffectAtPosition("RS3_FX_Skills_Void_Power_Attack_Impact_01",x,y,z)
+					PlayEffect(target, "RS3_FX_Skills_Warrior_Impact_Weapon_01", "Dummy_BodyFX")
+					local pos = character.Stats.Position
+					local rot = character.Stats.Rotation
+					local forwardVector = {
+						-rot[7] * forceDistance,
+						0,---rot[8] * distanceMult, -- Rot Y is never used since objects can't look "up"
+						-rot[9] * forceDistance,
+					}
+					x = pos[1] + forwardVector[1]
+					--y = pos[2] + forwardVector[2]
+					z = pos[3] + forwardVector[3]
+					local tx,ty,tz = FindValidPosition(x,y,z, 2.0, target)
+					local actionHandle = NRD_CreateGameObjectMove(target, tx,ty,tz, "", char)
+				end
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Target_PetrifyingTouch", PetrifyingTouchBonus)
+LeaderLib.RegisterSkillListener("Target_EnemyPetrifyingTouch", PetrifyingTouchBonus)
+
+--
+local function ShieldsUpBonus(skill, char, state, funcParams)
+	if state == SKILL_STATE.CAST then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["GUARANTEED_BLOCK"] == true then
+			PlayEffect(char, "RS3_FX_GP_Impacts_Arena_PillarLight_01_Silver", "")
+			ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK", -1.0, 0, char)
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Shout_RecoverArmour", ShieldsUpBonus)

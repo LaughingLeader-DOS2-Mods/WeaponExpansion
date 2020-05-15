@@ -26,6 +26,20 @@ local function OnPrepareHit(target,source,damage,handle)
 	if source ~= nil and CharacterGetEquippedWeapon(source) == nil then
 		ScaleUnarmedDamage(source,target,damage,handle)
 	end
+	if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 then
+		local hitType = NRD_HitGetInt(handle, "HitType")
+		if hitType < 4 then
+			local alreadyBlocked = NRD_HitGetInt(handle, "Blocked")
+			local dodged = NRD_HitGetInt(handle, "Dodged")
+			local missed = NRD_HitGetInt(handle, "Missed")
+			if alreadyBlocked == 0 and dodged == 0 and missed == 0 then
+				NRD_HitSetInt(handle, "Blocked", 1)
+				NRD_HitClearAllDamage(handle)
+				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
+				CharacterStatusText(target, string.format("<font color='#CCFF00'>%s</font>", Ext.GetTranslatedString("h175f5a66g78d1g41a8g9530g004e19a5db8a", "Blocked!")))
+			end
+		end
+	end
 end
 Ext.NewCall(OnPrepareHit, "LLWEAPONEX_Ext_OnPrepareHit", "(GUIDSTRING)_Target, (GUIDSTRING)_Instigator, (INTEGER)_Damage, (INTEGER64)_Handle")
 

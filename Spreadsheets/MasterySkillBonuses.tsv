@@ -83,7 +83,7 @@ Scythe	1	Whirlwind	Consumes bleeding on targets hit to deal a burst of piercing 
 Scythe	2	Placeholder	Placeholder	❌
 Scythe	3	Placeholder	Placeholder	❌
 Scythe	4	Placeholder	Placeholder	❌
-Shield	1	Shields Up	Damage from the next hit taken is reduced by 50%.	❌
+Shield	1	Shields Up	Damage from the next hit taken is reduced by 75%.	√
 Shield	2	Taunt	Taunted enemies gain a 25% movement speed debuff.	❌
 Shield	3	Placeholder	Placeholder	❌
 Shield	4	Placeholder	Placeholder	❌

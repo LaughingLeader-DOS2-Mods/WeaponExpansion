@@ -45,14 +45,16 @@ local function ReplacePlaceholders(str)
 				skillName = props[1]
 				param = props[2]
 			end
-			local skill = Skills.PrepareSkillProperties(skillName)
-			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER).Stats
-			local paramText = SkillGetDescriptionParam(skill, character, false, param)
-			if paramText == nil and param == "Damage" then
-				local damageRange = Game.Math.GetSkillDamageRange(character, skill)
-				value = LeaderLib.UI.Tooltip.FormatDamageRange(damageRange)
-			else
-				value = paramText
+			local skill = Skills.CreateSkillTable(skillName)
+			if skill ~= nil then
+				local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER).Stats
+				local paramText = SkillGetDescriptionParam(skill, character, false, param)
+				if paramText == nil and param == "Damage" then
+					local damageRange = Game.Math.GetSkillDamageRange(character, skill)
+					value = LeaderLib.UI.Tooltip.FormatDamageRange(damageRange)
+				else
+					value = paramText
+				end
 			end
 		end
 		if value ~= nil and value ~= "" then

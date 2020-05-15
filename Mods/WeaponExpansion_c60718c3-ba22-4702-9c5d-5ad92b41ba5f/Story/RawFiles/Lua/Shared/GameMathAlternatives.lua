@@ -48,7 +48,7 @@ local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPo
             damageList:Merge(mainDmgs)
         end
 
-        if offHand ~= nil and Game.Math.IsRangedWeapon(weapon) == Game.Math.IsRangedWeapon(offHand) then
+        if offHand ~= nil and (weapon ~= nil and Game.Math.IsRangedWeapon(weapon) == Game.Math.IsRangedWeapon(offHand)) or (weapon == nil and Game.Math.IsRangedWeapon(offHand)) then
             local offHandDmgs = Game.Math.CalculateWeaponDamage(attacker, offHand, noRandomization)
             offHandDmgs:Multiply(damageMultipliers)
             if damageType ~= nil then

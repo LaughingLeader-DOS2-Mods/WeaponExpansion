@@ -14,7 +14,7 @@ end
 --- @param targetPos number[]
 --- @param level integer
 --- @param noRandomization boolean
-local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 	--LeaderLib.PrintDebug("[LLWEAPONEX_GetSkillDamage] skill("..TryPrintName(skill, "Name")..") character("..TryPrintName(attacker, "Name")..") isFromItem("..tostring(isFromItem)..") stealthed("..tostring(stealthed)..") attackerPos("..LeaderLib.Common.Dump(attackerPos)..") targetPos("..LeaderLib.Common.Dump(attackerPos)..") level("..tostring(level)..") noRandomization("..tostring(noRandomization)..")")
 	--Mods.LeaderLib.Debug_TraceCharacter(attacker)
 	local skill_func = Skills.Damage.Skills[skill.Name]
@@ -28,9 +28,11 @@ local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed,
 		end
 	else
 		-- Unarmed weapon damage scaling
+		print("Scaling with unarmed damage", skill.Name)
 		if skill.UseWeaponDamage == "Yes" and IsUnarmed(attacker) then
 			--attacker:HasTag("LLWEAPONEX_MeleeWeaponEquipped") and 
-			return Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, GetUnarmedWeapon(attacker))
+			local weapon = GetUnarmedWeapon(attacker)
+			return Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon)
 		end
 	end
 	if string.find(skill.Name, "Trap") then
@@ -47,4 +49,4 @@ local function LLWEAPONEX_GetSkillDamage(skill, attacker, isFromItem, stealthed,
 	end
 end
 
-Ext.RegisterListener("GetSkillDamage", LLWEAPONEX_GetSkillDamage)
+Ext.RegisterListener("GetSkillDamage", OnGetSkillDamage)

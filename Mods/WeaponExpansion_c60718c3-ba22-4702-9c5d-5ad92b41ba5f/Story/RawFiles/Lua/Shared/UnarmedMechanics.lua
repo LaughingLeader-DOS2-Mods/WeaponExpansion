@@ -29,7 +29,7 @@ function GetUnarmedWeapon(character)
 	end
 	local unarmedMasteryBoost = GetUnarmedMasteryBoost(unarmedMasteryRank)
 	---@type StatItem
-	local weapon = Skills.PrepareWeaponStat("NoWeapon", character.Level, highestAttribute, "None", unarmedMasteryBoost)
+	local weapon = Skills.CreateWeaponTable("NoWeapon", character.Level, highestAttribute, "None", unarmedMasteryBoost)
 	print("Weapon:", LeaderLib.Common.Dump(weapon))
 	return weapon,unarmedMasteryBoost,unarmedMasteryRank
 end

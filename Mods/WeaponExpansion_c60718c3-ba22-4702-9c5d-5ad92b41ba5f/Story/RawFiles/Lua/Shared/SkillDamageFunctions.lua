@@ -131,12 +131,22 @@ local skillAttributes = {
 }
 
 ---@param skillName string
+---@param useWeaponDamage boolean
 ---@return StatEntrySkillData
-local function PrepareSkillProperties(skillName, useWeaponDamage)
+local function CreateSkillTable(skillName, useWeaponDamage)
 	if skillName ~= nil and skillName ~= "" then
+		local hasValidEntry = false
 		local skill = {Name = skillName}
 		for i,v in pairs(skillAttributes) do
-			skill[v] = Ext.StatGetAttribute(skillName, v)
+			local val = Ext.StatGetAttribute(skillName, v)
+			if val ~= nil then
+				hasValidEntry = true
+			end
+			skill[v] = val
+		end
+		if not hasValidEntry then
+			-- Skill doesn't exist?
+			return nil
 		end
 		if useWeaponDamage == true then skill["UseWeaponDamage"] = "Yes" end
 		--Ext.Print(Ext.JsonStringify(skill))
@@ -168,8 +178,9 @@ local weaponStatAttributes = {
 ---@param level integer
 ---@param attribute string
 ---@param weaponType string
+---@param damageFromBaseBoost integer
 ---@return StatItem
-local function PrepareWeaponStat(stat,level,attribute,weaponType,damageFromBaseBoost)
+local function CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost)
 	local weapon = {}
 	for i,v in pairs(weaponAttributes) do
 		weapon[v] = Ext.StatGetAttribute(stat, v)
@@ -376,7 +387,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties(baseSkill.Name, true)
+	local skill = CreateSkillTable(baseSkill.Name, true)
 	if skill == nil then skill = baseSkill end
 
 	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
@@ -392,7 +403,7 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 		end
 		--print("LLWEAPONEX_HandCrossbow mastery boost:", masteryLevel, masteryBoost)
 		--print(LeaderLib.Common.Dump(attacker.Character:GetTags()))
-		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost)
+		weapon = CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost)
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
@@ -445,7 +456,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = PrepareSkillProperties("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
+	local skill = CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
 
 	if skill == nil then
 		Ext.PrintError("Failed to prepare skill data for Projectile_LLWEAPONEX_Pistol_Shoot_Base?")
@@ -465,7 +476,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 			end
 		end
 		--print("LLWEAPONEX_Pistol mastery boost:", masteryLevel, masteryBoost)
-		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost)
+		weapon = CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost)
 		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
@@ -521,7 +532,7 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local skillProps = PrepareSkillProperties(skill.Name)
+	local skillProps = CreateSkillTable(skill.Name)
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
 	skillProps["Damage Multiplier"] = 0
@@ -580,8 +591,8 @@ Skills = {
 	GetHighestAttribute = GetHighestAttribute,
 	GetItem = GetItem,
 	GetRuneBoost = GetRuneBoost,
-	PrepareSkillProperties = PrepareSkillProperties,
-	PrepareWeaponStat = PrepareWeaponStat,
+	CreateSkillTable = CreateSkillTable,
+	CreateWeaponTable = CreateWeaponTable,
 	Params = {},
 	Damage = {
 		Params = {

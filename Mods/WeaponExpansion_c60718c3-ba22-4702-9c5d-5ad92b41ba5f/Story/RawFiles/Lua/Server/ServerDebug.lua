@@ -223,4 +223,21 @@ end
 local function OpenMasteryMenu(...)
     OpenMasteryMenu_Start(CharacterGetHostCharacter())
 end
-Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu);
+Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu)
+
+local function Debug_PlayEffectCommand(command, effect, bone, target)
+    if target == nil then target = CharacterGetHostCharacter() end
+    if bone == nil then bone = "" end
+    PlayEffect(target, effect, bone)
+end
+Ext.RegisterConsoleCommand("fx", Debug_PlayEffectCommand)
+
+---Cool effects:
+---RS3_FX_Skills_Void_Power_Attack_Impact_01
+---Cracked ground with blueish smoke and a spooky impact sound.
+---
+---RS3_FX_Skills_Voodoo_Impact_Target_Voodoo_Root_01
+---Poison burst with a beam from above.
+---
+---RS3_FX_Char_Creatures_Condor_Impact_Warrior_01
+---Would make for a cool Goblin Punch effect if played multiple times.

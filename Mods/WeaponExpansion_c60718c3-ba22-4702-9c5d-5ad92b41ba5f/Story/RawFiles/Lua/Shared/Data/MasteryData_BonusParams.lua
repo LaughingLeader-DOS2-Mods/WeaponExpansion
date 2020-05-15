@@ -8,7 +8,7 @@ local function GetThrowingKnifeBonusParam(character, tagName, rankHeader, param)
 	else
 		paramText = paramText:gsub("%[1%]", "0")
 	end
-	local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive")
+	local damageSkillProps = Skills.CreateSkillTable("Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive")
 	local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
 	if damageRange ~= nil then
 		local damageText = ""
@@ -115,7 +115,7 @@ end
 local function GetCripplingBlowBonusDamage(character, tagName, rankHeader, param)
 	--Ext.Print("Character:",character, "tagName:",tagName, "param:",param)
 	local damageText = ""
-	local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+	local damageSkillProps = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 	local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
 	if damageRange ~= nil then
 		--Ext.Print(LeaderLib.Common.Dump(damageRange))
@@ -256,7 +256,7 @@ Mastery.Params.SkillData.Shout_Whirlwind = {
 			Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#803BFF'><font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [1] for each turn of <font color='#FF0000'>Bleeding</font> remaining.</font>"),
 			GetParam = function(character, tagName, rankHeader, param)
 				local paramText = param
-				local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
+				local damageSkillProps = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
 				local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
 				if damageRange ~= nil then
 					local damageText = ""
@@ -289,15 +289,27 @@ Mastery.Params.SkillData.Shout_Whirlwind = {
 
 Mastery.Params.SkillData.Shout_EnemyWhirlwind = Mastery.Params.SkillData.Shout_Whirlwind
 
-Mastery.Params.SkillData.Target_LLWEAPONEX_BasicAttack = {
+Mastery.Params.SkillData.Shout_InspireStart = {
 	Tags = {
-		LLWEAPONEX_Wand_Mastery1 = {
-			ID = "ELEMENTAL_DEBUFF",
-			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessDuration] turn(s).</font>"),
-			GetParam = GetElementalWeakness,
+		LLWEAPONEX_Banner_Mastery1 = {
+			ID = "BANNER_INSPIRE",
+			Param = TranslatedString:Create("h4190e997g6776g46a5gbff1g711a310c6d38","<font color='#FFCE58'>Fear, Madness, and Sleep are cleansed from encouraged allies.</font>")
 		},
 	}
 }
+
+Mastery.Params.SkillData.Shout_EnemyInspire = Mastery.Params.SkillData.Shout_InspireStart
+
+Mastery.Params.SkillData.Target_PetrifyingTouch = {
+	Tags = {
+		LLWEAPONEX_Unarmed_Mastery1 = {
+			ID = "PETRIFYING_SLAM",
+			Param = TranslatedString:Create("h01468f79gd9b2g4479ga596g8a68e07c39e7","<font color='#FFCE58'>Slam the target with your palm, knocking them back [ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage:Damage].</font>")
+		},
+	}
+}
+
+Mastery.Params.SkillData.Target_EnemyPetrifyingTouch = Mastery.Params.SkillData.Target_PetrifyingTouch
 
 Mastery.Params.SkillData.Shout_FleshSacrifice = {
 	Tags = {
@@ -309,6 +321,16 @@ Mastery.Params.SkillData.Shout_FleshSacrifice = {
 }
 
 Mastery.Params.SkillData.Shout_EnemyFleshSacrifice = Mastery.Params.SkillData.Shout_FleshSacrifice
+
+Mastery.Params.SkillData.Target_LLWEAPONEX_BasicAttack = {
+	Tags = {
+		LLWEAPONEX_Wand_Mastery1 = {
+			ID = "ELEMENTAL_DEBUFF",
+			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessDuration] turn(s).</font>"),
+			GetParam = GetElementalWeakness,
+		},
+	}
+}
 
 Mastery.Params.SkillData.Rush_BatteringRam = {
 	Tags = {
@@ -327,5 +349,14 @@ Mastery.Params.SkillData.Rush_BullRush = {
 	Tags = {
 		LLWEAPONEX_Banner_Mastery1 = Mastery.Params.SkillData.Rush_BatteringRam.Tags.LLWEAPONEX_Banner_Mastery1,
 		LLWEAPONEX_Bludgeon_Mastery1 = Mastery.Params.SkillData.Rush_BatteringRam.Tags.LLWEAPONEX_Bludgeon_Mastery1,
+	}
+}
+
+Mastery.Params.SkillData.Shout_RecoverArmour = {
+	Tags = {
+		LLWEAPONEX_Shield_Mastery1 = {
+			ID = "GUARANTEED_BLOCK",
+			Param = TranslatedString:Create("h6a284017g342dg4809gab69g6e77bddaf8c2","Damage from the next direct hit taken is reduced by <font color='#33FF00'>[ExtraData:LLWEAPONEX_MasteryBonus_RecoverArmour_DamageReduction]%</font>."),
+		},
 	}
 }

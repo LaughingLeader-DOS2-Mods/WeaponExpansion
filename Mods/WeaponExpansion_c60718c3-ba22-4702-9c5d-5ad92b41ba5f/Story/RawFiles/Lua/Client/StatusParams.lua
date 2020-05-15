@@ -141,7 +141,7 @@ local function StatusGetDescriptionParam(status, statusSource, target, param, ..
 				if skillSource == nil then
 					skillSource = target
 				end
-				local damageSkillProps = Skills.PrepareSkillProperties(skill)
+				local damageSkillProps = Skills.CreateSkillTable(skill)
 				local damageRange = Game.Math.GetSkillDamageRange(skillSource, damageSkillProps)
 				if damageRange ~= nil then
 					local damageTexts = {}
