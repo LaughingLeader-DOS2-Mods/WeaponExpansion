@@ -173,7 +173,7 @@ Mastery.Params.SkillData.Projectile_ThrowingKnife = {
 	Tags = {
 		LLWEAPONEX_Dagger_Mastery1 = {
 			ID = "BONUS_DAGGER",
-			Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive:Damage] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison:Damage] on hit.</font>"),
+			Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.</font>"),
 		}
 	}
 }
@@ -189,7 +189,7 @@ Mastery.Params.SkillData.Target_CripplingBlow = {
 		},
 		LLWEAPONEX_Axe_Mastery1 = {
 			ID = "BONUSDAMAGE",
-			Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","<font color='#F19824'>If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage:Damage].</font>"),
+			Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","<font color='#F19824'>If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage].</font>"),
 			NamePrefix = "<font color='#DD4444'>Executioner's</font>"
 		},
 	}
@@ -201,7 +201,7 @@ Mastery.Params.SkillData.MultiStrike_BlinkStrike = {
 	Tags = {
 		LLWEAPONEX_Axe_Mastery2 = {
 			ID = "VULNERABLE",
-			Param = TranslatedString:Create("h173b9449ge0c5g4f29g86f4g01124907841b","Each target hit becomes <font color='#F13324'>Vulnerable</font>. If hit again, <font color='#F13324'>Vulnerable</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage:Damage].<br><font color='#F13324'>Vulnerable</font> is removed when your turn ends."),
+			Param = TranslatedString:Create("h173b9449ge0c5g4f29g86f4g01124907841b","Each target hit becomes <font color='#F13324'>Vulnerable</font>. If hit again, <font color='#F13324'>Vulnerable</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].<br><font color='#F13324'>Vulnerable</font> is removed when your turn ends."),
 		},
 	}
 }
@@ -210,7 +210,7 @@ Mastery.Params.SkillData.Shout_Whirlwind = {
 	Tags = {
 		LLWEAPONEX_Scythe_Mastery1 = {
 			ID = "RUPTURE",
-			Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding:Damage] for each turn of <font color='#FF0000'>Bleeding</font> remaining.")
+			Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of <font color='#FF0000'>Bleeding</font> remaining.")
 		},
 		LLWEAPONEX_Staff_Mastery1 = {
 			ID = "ELEMENTAL_DEBUFF",
@@ -241,7 +241,7 @@ Mastery.Params.SkillData.Target_PetrifyingTouch = {
 	Tags = {
 		LLWEAPONEX_Unarmed_Mastery1 = {
 			ID = "PETRIFYING_SLAM",
-			Param = TranslatedString:Create("h01468f79gd9b2g4479ga596g8a68e07c39e7","<font color='#FFCE58'>Slam the target with your palm, knocking them back [ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage:Damage].</font>")
+			Param = TranslatedString:Create("h01468f79gd9b2g4479ga596g8a68e07c39e7","<font color='#FFCE58'>Slam the target with your palm, knocking them back [ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage].</font>")
 		},
 	}
 }
