@@ -267,6 +267,10 @@ local function OnMenuEvent(ui, call, ...)
 	elseif call == "mastery_showIconTooltip" then
 		if params[1] == 1 then
 			MasteryMenu.DisplayingSkillTooltip = true
+			CLIENT_UI.LAST_SKILL = params[2]
+			if Ext.DoubleToHandle ~= nil then
+				CLIENT_UI.ACTIVE_CHARACTER = Ext.DoubleToHandle(MasteryMenu.CHARACTER_HANDLE)
+			end
 			ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5], params[6])
 		elseif params[1] == 2 then
 			--MasteryMenu.DisplayingStatusTooltip = true
