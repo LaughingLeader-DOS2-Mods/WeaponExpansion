@@ -1,5 +1,5 @@
 LeaderLib = Mods["LeaderLib"]
-WeaponExpansion = Mods["WeaponExpansion"]
+--WeaponExpansion = Mods["WeaponExpansion"]
 
 Main = {}
 Debug = {}
@@ -15,6 +15,10 @@ Mastery = {
 LeaveActionData = {}
 Temp = {
 	StatusSource = {}
+}
+Vars = {
+	GAME_STARTED = false,
+	SEND_USER_ID = false
 }
 
 --- @type table<string,string>

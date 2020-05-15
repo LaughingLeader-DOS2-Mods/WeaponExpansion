@@ -225,12 +225,30 @@ local function OpenMasteryMenu(...)
 end
 Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu)
 
-local function Debug_PlayEffectCommand(command, effect, bone, target)
-    if target == nil then target = CharacterGetHostCharacter() end
-    if bone == nil then bone = "" end
-    PlayEffect(target, effect, bone)
+if Ext.IsDeveloperMode() then
+    local function Debug_PlayEffectCommand(command, effect, bone, target)
+        if target == nil then target = CharacterGetHostCharacter() end
+        if bone == nil then bone = "" end
+        PlayEffect(target, effect, bone)
+    end
+    Ext.RegisterConsoleCommand("fx", Debug_PlayEffectCommand)
+
+    local function Debug_TradeTest(command, effect, bone, target)
+        if target == nil then 
+            target = CharacterGetHostCharacter() 
+        end
+        Osi.RequestTrade(target, target)
+    end
+    Ext.RegisterConsoleCommand("trade", Debug_TradeTest)
+
+    local function Debug_ResetLua(command, effect, bone, target)
+        local host = CharacterGetHostCharacter()
+        TimerCancel("Timers_LLWEAPONEX_OnLuaReset")
+        TimerLaunch("Timers_LLWEAPONEX_OnLuaReset", 250)
+        NRD_LuaReset(1,1,1)
+    end
+    Ext.RegisterConsoleCommand("reset", Debug_ResetLua)
 end
-Ext.RegisterConsoleCommand("fx", Debug_PlayEffectCommand)
 
 ---Cool effects:
 ---RS3_FX_Skills_Void_Power_Attack_Impact_01

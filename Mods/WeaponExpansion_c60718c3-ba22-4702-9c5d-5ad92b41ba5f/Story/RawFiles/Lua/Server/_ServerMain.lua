@@ -226,16 +226,20 @@ end
 
 Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Character, [out](INTEGER)_IsPlayer")
 
-function OnGameStarted(region, editorMode)
+function OnGameStarted(region, editorMode, sendClientIds)
+    Vars.GAME_STARTED = true
     if IsGameLevel(region) == 1 or editorMode == "1" then
-        --InitClientID()
-        IterateUsers("LLWEAPONEX_SetClientID")
         for i,entry in pairs(Osi.DB_IsPlayer:Get(nil)) do
             SetIsUnarmed(entry[1])
         end
     end
 
     LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
+
+    if Vars.SEND_USER_ID == true or sendClientIds ~= nil then
+        Vars.SEND_USER_ID = false
+        Osi.IterateUsers("LLWEAPONEX_SendClientID")
+    end
 end
 
 local function LeaderLibSetup()

@@ -512,7 +512,7 @@ local function NetMessage_SetClientId(call,id)
 	end
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_SetClientID", NetMessage_SetClientId)
+Ext.RegisterNetListener("LLWEAPONEX_SendClientID", NetMessage_SetClientId)
 
 return {
 	Init = InitMasteryMenu
