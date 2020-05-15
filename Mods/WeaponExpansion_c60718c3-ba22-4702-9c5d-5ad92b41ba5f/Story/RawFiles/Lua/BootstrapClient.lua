@@ -2,7 +2,8 @@ CLIENT_UI = {
 	ID = nil,
 	ACTIVE_CHARACTER = nil,
 	PARTY = nil,
-	LAST_SKILL = ""
+	LAST_SKILL = "",
+	LAST_ITEM = nil
 }
 
 Ext.Require("Shared/_Main.lua")

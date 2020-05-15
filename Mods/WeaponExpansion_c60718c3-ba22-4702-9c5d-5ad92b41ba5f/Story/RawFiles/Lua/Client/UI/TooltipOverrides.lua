@@ -21,8 +21,23 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	local tooltipType = ui:GetValue("tooltip_array", "number", 0)
 	local tooltipHeader = ui:GetValue("tooltip_array", "string", 1)
 	local isDamageTooltip = tooltipHeader == "Damage"
-	LeaderLib.PrintDebug("[OnAddFormattedTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY, noCompare, CLIENT_UI.LAST_SKILL)
-	--setupTooltip.DumpTooltipArray(ui)
+	LeaderLib.PrintDebug("[OnAddFormattedTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY, noCompare)
+	LeaderLib.PrintDebug("CLIENT_UI.LAST_SKILL", CLIENT_UI.LAST_SKILL)
+	LeaderLib.PrintDebug("CLIENT_UI.LAST_ITEM", CLIENT_UI.LAST_ITEM)
+
+	if CLIENT_UI.LAST_ITEM ~= nil then
+		---@type EsvItem
+		local item = Ext.GetItem(CLIENT_UI.LAST_ITEM)
+		if item ~= nil then
+			print(item.NetID, item.MyGuid, item.StatsId)
+			-- ---@type StatItem
+			-- local stats = item.Stats
+			-- if stats ~= nil then
+			-- 	print(stats.DynamicStats[1])
+			-- end
+		end
+	end
+	setupTooltip.DumpTooltipArray(ui)
 
 	local isSkill = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == "SkillName"
 	-- local school = ui:GetValue("tooltip_array", "string", 5)
@@ -178,6 +193,11 @@ local function OnTooltip(ui, call, ...)
 		end
 	elseif call == "showStatTooltip" then
 		tooltipType = params[1]
+	elseif call == "showItemTooltip" then
+		local handle = params[1]
+		if handle ~= nil and type(handle) == "number" then
+			CLIENT_UI.LAST_ITEM = Ext.DoubleToHandle(handle)
+		end
 	end
 	-- local minimap = Ext.GetBuiltinUI("Public/Game/GUI/minimap.swf")
 	-- if minimap ~= nil then
@@ -203,6 +223,23 @@ local function InitTooltipOverrides()
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnTooltip)
 		Ext.RegisterUICall(ui, "showStatTooltip", OnTooltip)
+		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/statusConsole.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/uiElements.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/worldTooltip.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
 	if ui ~= nil then
