@@ -318,7 +318,7 @@ local function HasParent(stat, statToFind)
 	end
 end
 
----@param character EsvCharacter
+---@param character StatCharacter
 ---@param parentStatName string
 ---@param slots string[]
 ---@return StatItem
@@ -341,7 +341,7 @@ local function GetItem(character, parentStatName, slots)
 	return nil
 end
 
----@param character EsvCharacter
+---@param character StatCharacter
 ---@param runeParentStat string
 ---@param itemParentStat string
 ---@param slots string[]
@@ -364,6 +364,62 @@ local function GetRuneBoost(character, runeParentStat, itemParentStat, slots)
 	return nil
 end
 
+---@param character StatCharacter
+---@return table<string,number[]>|DamageList
+local function GetAbilityBasedWeaponDamage(character, isTooltip, noRandomization, weaponBoostStat, masteryBoost, ability, weaponType)
+	if noRandomization == nil then 
+		noRandomization = false 
+	end
+	local highestAttribute = GetHighestAttribute(character)
+	local weapon = CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, weaponType, masteryBoost)
+	if isTooltip == true then
+		return Math.AbilityScaling.CalculateWeaponDamageRange(character, weapon, ability)
+	else
+		return Math.AbilityScaling.CalculateWeaponDamage(character, weapon, nil, noRandomization, ability)
+	end
+	return weapon
+end
+
+---@param character EsvCharacter
+---@param isTooltip boolean
+---@param noRandomization boolean
+---@return table<string,number[]>|DamageList
+local function GetPistolDamage(character, isTooltip, noRandomization)
+	local masteryBoost = 0
+	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_Pistol")
+	if masteryLevel > 0 then
+		local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
+		if boost > 0 then
+			masteryBoost = boost
+		end
+	end
+	local rune,weaponBoostStat = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	if weaponBoostStat == nil then 
+		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" 
+	end
+	return GetAbilityBasedWeaponDamage(character.Stats, isTooltip, noRandomization, weaponBoostStat, masteryBoost, "RogueLore", "Rifle")
+end
+
+---@param character EsvCharacter
+---@param isTooltip boolean
+---@param noRandomization boolean
+---@return table<string,number[]>|DamageList
+local function GetHandCrossbowDamage(character, isTooltip, noRandomization)
+	local masteryBoost = 0
+	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_HandCrossbows")
+	if masteryLevel > 0 then
+		local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_HandCrossbowsMasteryBoost"..masteryLevel, 0)
+		if boost > 0 then
+			masteryBoost = boost
+		end
+	end
+	local rune,weaponBoostStat = GetRuneBoost(character.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	if weaponBoostStat == nil then 
+		weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" 
+	end
+	return GetAbilityBasedWeaponDamage(character.Stats, isTooltip, noRandomization, weaponBoostStat, masteryBoost, "RogueLore", "Crossbow")
+end
+
 --- @param baseSkill StatEntrySkillData
 --- @param attacker StatCharacter
 --- @param isFromItem boolean
@@ -373,7 +429,7 @@ end
 --- @param level integer
 --- @param noRandomization boolean
 --- @param isTooltip boolean
-local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
 	end
@@ -442,7 +498,7 @@ end
 --- @param level integer
 --- @param noRandomization boolean
 --- @param isTooltip boolean
-local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
     if attacker ~= nil and level < 0 then
         level = attacker.Level
 	end
@@ -595,17 +651,21 @@ Skills = {
 	CreateWeaponTable = CreateWeaponTable,
 	Params = {},
 	Damage = {
+		GetPistolDamage = GetPistolDamage,
+		GetHandCrossbowDamage = GetHandCrossbowDamage,
+		GetPistolSkillDamage = GetPistolSkillDamage,
+		GetHandCrossbowSkillDamage = GetHandCrossbowSkillDamage,
 		Params = {
-			LLWEAPONEX_PistolDamage = GetPistolDamage,
-			LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowDamage,
+			LLWEAPONEX_PistolDamage = GetPistolSkillDamage,
+			LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowSkillDamage,
 		},
 		Skills = {
-			Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolDamage,
-			Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolDamage,
-			Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolDamage,
-			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowDamage,
+			Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolSkillDamage,
+			Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage,
+			Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage,
+			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage,
 			Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage,
-			Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowDamage
+			Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
 		}
 	}
 }

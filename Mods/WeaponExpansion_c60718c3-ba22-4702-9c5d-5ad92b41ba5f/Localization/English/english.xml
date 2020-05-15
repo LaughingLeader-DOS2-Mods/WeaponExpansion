@@ -269,7 +269,7 @@
 	<content contentuid="h1b24b8b3g138cg4052ga7c8g5cc25019fe2a">[Last] *Look at the bottom set of buttons.*</content>
 	<content contentuid="h1b283eafg771dg47aagb4b5ge7680c682398">Rend</content>
 	<content contentuid="h1b3920b8gab1ag4914gbe71ged645d9a309e">Water Rune</content>
-	<content contentuid="h1b412aefg3d56g47ecga034g20225843aff3">Changes Pistol Damage Type</content>
+	<content contentuid="h1b412aefg3d56g47ecga034g20225843aff3">Bonuses on Hit</content>
 	<content contentuid="h1b52dedbg001ag4370g8854g6e31685e5459">Omnibolt, Heaven&apos;s Wrath (Memory Scaling)</content>
 	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its glory. Huzzah!&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="h1bdb5e07gf441g4020g9f25g6ea0457e71fe">Enhanced Demolition Bonus</content>
@@ -546,7 +546,7 @@
 	<content contentuid="h340c2cffg5f68g4cdbga779gc0327133e200">Character has a damage bonus for their first attack.</content>
 	<content contentuid="h34401e0bg371fg449cg9e43g39208b508644">45%/30%/10% Chance for Bonus Missiles</content>
 	<content contentuid="h34471e48g19ddg4c10gbe3dg44c37cc651da">Delayed Dizzy</content>
-	<content contentuid="h345cc985g85a9g4d2fg9dd1g2c6f7ff9f7e6">Damage Scales With Your Highest Attribute</content>
+	<content contentuid="h345cc985g85a9g4d2fg9dd1g2c6f7ff9f7e6">Changes Damage Type</content>
 	<content contentuid="h3464c53dgce86g4e13g97f9gc44c00c4dcaf">Kevin (Oiled)</content>
 	<content contentuid="h347bb958g6498g4419g93a5g981542de87e6">The holiest of banners. Huzzah!</content>
 	<content contentuid="h348a2785g5750g4d3ag9ae4ge434051a48c2">Fury&apos;s Reward V</content>
@@ -1706,7 +1706,7 @@
 	<content contentuid="hae406347gce81g48cbga358g75b1e41c9f73">Old Runeblade of Chaos</content>
 	<content contentuid="hae49798dgfa34g46eeg80bcg0e12abd50d6f">Character has been impaled by &lt;font color=&apos;#C7A758&apos;&gt;Balrin&apos;s Throwing Axe&lt;/font&gt;!</content>
 	<content contentuid="hae626894g9011g4cdfg8eb8g3e3bbdb68d84">Blademaster&apos;s Strike</content>
-	<content contentuid="hae9820a4g858ag4c2eg8699gc0cd715020c5">Damage Scales With Your Highest Attribute</content>
+	<content contentuid="hae9820a4g858ag4c2eg8699gc0cd715020c5">Changes Damage Type</content>
 	<content contentuid="hae9f460bg62dcg4bd7g9242gb20cf29add61">Pirate&apos;s Wit</content>
 	<content contentuid="haeaa255fg1908g4d35g9a85g55c48aebf64d">Journeyman&apos;s Spiked Quarterstaff</content>
 	<content contentuid="haebca7c6g50fdg42e6gb833g93fd8ad3b03e">Heavy Book</content>
@@ -2307,7 +2307,7 @@
 	<content contentuid="hf03d8badg12b0g487aga5b4ge0fa05388fde">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to activate that element within their blade for a limited time.</content>
 	<content contentuid="hf03f9f98g4012g4eb2g9e7cg1e2e6c161693">Weighty Book</content>
 	<content contentuid="hf043482ege1efg49a5gbaf2gbac0ecb56e43">Character is empowered from slaying enemies.</content>
-	<content contentuid="hf04a4b0ag12aag4af4gb4eeg26d33d1aef1a">Changes Hand Crossbow Damage Type</content>
+	<content contentuid="hf04a4b0ag12aag4af4gb4eeg26d33d1aef1a">Bonuses on Hit</content>
 	<content contentuid="hf07efda2g90a3g4c9d-a9d1g79eb34cde7f3">A former gladiator whose repertoire of blade skills once amazed crowds and foes alike</content>
 	<content contentuid="hf0adc576g967cg4495gb4bbgec952d092415">Beholder</content>
 	<content contentuid="hf0d2102ag607cg4963g8428g16176cd50f2b">Expert Staffmeister</content>

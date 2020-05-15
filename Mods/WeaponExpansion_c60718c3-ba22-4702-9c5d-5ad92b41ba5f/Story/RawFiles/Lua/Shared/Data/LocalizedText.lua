@@ -161,5 +161,17 @@ Text = {
 		LLWEAPONEX_Wand_Mastery3 = TranslatedString:Create("hda00562eg0b3bg40f6g8329g9facd75ee190","<font color='#B658FF'>Wand Mastery III</font>"),
 		LLWEAPONEX_Wand_Mastery4 = TranslatedString:Create("ha294a1bfg2496g4badg9830gc88546c7e7c8","<font color='#B658FF'>Wand Mastery IV</font>"),
 		LLWEAPONEX_Wand_Mastery5 = TranslatedString:Create("hb2347eefgdc6ag4ab1g82a4g21139b4a7917","<font color='#B658FF'>Wand Mastery V</font>"),
+	},
+	WeaponScaling = {
+		Pistol = TranslatedString:Create("h893512aag4f27g45fdg974fgb0e3300c8bd5", "<font color='#FFD900'>Scales With Scoundrel and Pistol Mastery</font>"),
+		HandCrossbow = TranslatedString:Create("hadb5f130g449cg4e04gaeacgd5dfa2ab10ef", "<font color='#FFD900'>Scales With Scoundrel and Hand Crossbow Mastery</font>"),
+	},
+	Game = {
+		Attack = TranslatedString:Create("h60ca7387gcb64g4027g98a3g41679874f271","Attack"),
+		ActionPoints = TranslatedString:Create("h4ef9c467g3c7bg4614g96d0g801b09fcc05c","Action Points"),
+		Range = TranslatedString:Create("hfdbe9065g1eeeg42f9gbf1eg4cb865ac187e","Range"),
+		CriticalDamage = TranslatedString:Create("h99aa087ag4d93g4bf4gb191g9fc166800711","Critical Damage"),
+		SlotBelt = TranslatedString:Create("h2a76a9ecg2982g4c7bgb66fgbe707db0ac9e","Belt"),
+		SlotRing = TranslatedString:Create("h970199f8ge650g4fa3ga0deg5995696569b6","Ring"),
 	}
 }

@@ -14,3 +14,5 @@ LLWEAPONEX_UI_MasteryMenu_Rank5	Rank 5	he14a313dg2a94g4084g9d10g3cc18ca4974b
 LLWEAPONEX_UI_MasteryMenu_RankLocked	<font color='#555555'>Locked</font>	h4f3937d2gfffbg4e84g922fg608f65fa105e
 LLWEAPONEX_UI_MasteryMenu_RankPlaceholder	<font color='#FF3333'>Not Yet Implemented</font>	h1d2c7bf8g249fg4acbg9c0bg47204fb87c9b
 LLWEAPONEX_UI_MasteryMenu_MasteredTooltip	<font color='#FFD900'>Mastered</font>	hc167c125g2e75g402dg99b5gd78ed59e8f22
+LLWEAPONEX_UI_Scaling_Pistol	Scales With Scoundrel and Pistol Mastery	h893512aag4f27g45fdg974fgb0e3300c8bd5
+LLWEAPONEX_UI_Scaling_HandCrossbow	Scales With Scoundrel and Hand Crossbow Mastery	hadb5f130g449cg4e04gaeacgd5dfa2ab10ef

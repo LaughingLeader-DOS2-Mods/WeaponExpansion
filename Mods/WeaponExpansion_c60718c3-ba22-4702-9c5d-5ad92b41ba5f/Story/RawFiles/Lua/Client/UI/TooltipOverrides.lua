@@ -1,7 +1,7 @@
 local tooltipType = ""
 local lastTooltipCall = ""
 local setupTooltip = Ext.Require("Client/UI/SetupTooltipSwitchStatement.lua")
-
+local weaponTooltips = Ext.Require("Client/UI/WeaponTooltips.lua")
 
 -- local function GetTooltipDataStart(ui, enumVal)
 -- 	for i=0,#LeaderLib.Data.UI.TOOLTIP_ENUM,1 do
@@ -25,16 +25,11 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	LeaderLib.PrintDebug("CLIENT_UI.LAST_SKILL", CLIENT_UI.LAST_SKILL)
 	LeaderLib.PrintDebug("CLIENT_UI.LAST_ITEM", CLIENT_UI.LAST_ITEM)
 
-	if CLIENT_UI.LAST_ITEM ~= nil then
-		---@type EsvItem
+	if CLIENT_UI.LAST_ITEM ~= nil and CLIENT_UI.ACTIVE_CHARACTER ~= nil then
 		local item = Ext.GetItem(CLIENT_UI.LAST_ITEM)
-		if item ~= nil then
-			print(item.NetID, item.MyGuid, item.StatsId)
-			-- ---@type StatItem
-			-- local stats = item.Stats
-			-- if stats ~= nil then
-			-- 	print(stats.DynamicStats[1])
-			-- end
+		local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+		if item ~= nil and character ~= nil then
+			weaponTooltips.TryOverrideItemTooltip(ui, item, character, setupTooltip)
 		end
 	end
 	setupTooltip.DumpTooltipArray(ui)
@@ -205,6 +200,19 @@ local function OnTooltip(ui, call, ...)
 	-- end
 end
 
+local itemTooltipFiles = {
+	"Public/Game/GUI/characterSheet.swf",
+	"Public/Game/GUI/partyInventory.swf",
+	"Public/Game/GUI/playerInfo.swf",
+	"Public/Game/GUI/statusConsole.swf",
+	"Public/Game/GUI/uiElements.swf",
+	"Public/Game/GUI/worldTooltip.swf",
+	"Public/Game/GUI/LSClasses.swf",
+	"Public/Game/GUI/tooltip.swf",
+	"Public/Game/GUI/tooltipHelper.swf",
+	"Public/Game/GUI/tooltipHelper_kb.swf",
+}
+
 local function InitTooltipOverrides()
 	local ui = Ext.GetBuiltinUI("Public/Game/GUI/tooltip.swf")
 	if ui ~= nil then
@@ -212,6 +220,7 @@ local function InitTooltipOverrides()
 			Ext.RegisterUIInvokeListener(ui, "INTshowTooltip", OnTooltip)
 			Ext.RegisterUIInvokeListener(ui, "INTRemoveTooltip", OnTooltip)
 			Ext.RegisterUIInvokeListener(ui, "setGroupLabel", OnTooltip)
+			Ext.RegisterUIInvokeListener(ui, "addFormattedTooltip", OnTooltip)
 			Ext.RegisterUIInvokeListener(ui, "addFormattedTooltip", OnTooltip)
 		end
 		Ext.RegisterUIInvokeListener(ui, "addTooltip", OnTooltip)
@@ -223,23 +232,14 @@ local function InitTooltipOverrides()
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnTooltip)
 		Ext.RegisterUICall(ui, "showStatTooltip", OnTooltip)
-		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+		Ext.RegisterUICall(ui, "slotOver", OnTooltip)
 	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/statusConsole.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/uiElements.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/worldTooltip.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+	for i,file in pairs(itemTooltipFiles) do
+		ui = Ext.GetBuiltinUI(file)
+		if ui ~= nil then
+			Ext.RegisterUICall(ui, "showItemTooltip", OnTooltip)
+			Ext.RegisterUICall(ui, "slotOver", OnTooltip)
+		end
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
 	if ui ~= nil then

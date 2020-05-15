@@ -1,5 +1,24 @@
 local LENGTH = 200
 
+local function FindFreeIndex(ui)
+	local index = 0
+	local totalNil = 0
+	while index < LENGTH do
+		local val = ui:GetValue("tooltip_array", "number", index)
+		if val == nil then
+			val = ui:GetValue("tooltip_array", "string", index)
+			if val == nil then
+				val = ui:GetValue("tooltip_array", "boolean", index)
+			end
+		end
+		if val == nil then
+			return index
+		end
+		index = index + 1
+	end
+	return index
+end
+
 local function FindTooltipTypeIndex(ui, enumType)
 	local index = 0
 	local totalNil = 0
@@ -466,6 +485,8 @@ local function printValue(ui, index)
 		val = ui:GetValue("tooltip_array", "string", index)
 		if val == nil then
 			val = ui:GetValue("tooltip_array", "boolean", index)
+		else
+			val = "\""..val.."\""
 		end
 	end
 	if val ~= nil then
@@ -955,5 +976,6 @@ end
 
 return {
 	FindTooltipTypeIndex = FindTooltipTypeIndex,
-	DumpTooltipArray = DumpTooltipArray
+	DumpTooltipArray = DumpTooltipArray,
+	FindFreeIndex = FindFreeIndex
 }
