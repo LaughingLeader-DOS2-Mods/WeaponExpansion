@@ -1,33 +1,5 @@
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
-local function GetThrowingKnifeBonusParam(character, tagName, rankHeader, param)
-	local paramText = param
-	local chance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
-	if chance > 0 then
-		paramText = paramText:gsub("%[1%]", math.tointeger(math.min(chance, 100)))
-	else
-		paramText = paramText:gsub("%[1%]", "0")
-	end
-	local damageSkillProps = Skills.CreateSkillTable("Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive")
-	local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
-	if damageRange ~= nil then
-		local damageText = ""
-		local totalMin = 0
-		local totalMax = 0
-		for damageType,damage in pairs(damageRange) do
-			totalMin = totalMin + damage[1]
-			totalMax = totalMax + damage[2]
-		end
-		if totalMin ~= totalMax then
-			damageText = string.format("%s-%s", math.tointeger(totalMin), math.tointeger(totalMax))
-		else
-			damageText = tostring(math.tointeger(totalMin))
-		end
-		paramText = string.gsub(paramText, "%[2%]", damageText)
-	end
-	return paramText
-end
-
 local function GetSkillDamageRange(character, skill)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
@@ -110,28 +82,6 @@ local function GetSkillDamageRange(character, skill)
         }
         return damageRanges
     end
-end
-
-local function GetCripplingBlowBonusDamage(character, tagName, rankHeader, param)
-	--Ext.Print("Character:",character, "tagName:",tagName, "param:",param)
-	local damageText = ""
-	local damageSkillProps = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
-	local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
-	if damageRange ~= nil then
-		--Ext.Print(LeaderLib.Common.Dump(damageRange))
-		local totalMin = 0
-		local totalMax = 0
-		for damageType,damage in pairs(damageRange) do
-			totalMin = totalMin + damage[1]
-			totalMax = totalMax + damage[2]
-		end
-		if totalMin ~= totalMax then
-			damageText = string.format("%s-%s", math.tointeger(totalMin), math.tointeger(totalMax))
-		else
-			damageText = tostring(math.tointeger(totalMin))
-		end
-	end
-	return param:gsub("%[1%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
 end
 
 local elementalWeakness = {
@@ -223,8 +173,7 @@ Mastery.Params.SkillData.Projectile_ThrowingKnife = {
 	Tags = {
 		LLWEAPONEX_Dagger_Mastery1 = {
 			ID = "BONUS_DAGGER",
-			Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[1]%</font> to be coated in poison or explosive oil, dealing <font color='#00FFAA'>[2] bonus damage</font> on hit.</font>"),
-			GetParam = GetThrowingKnifeBonusParam,
+			Param = TranslatedString:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive:Damage] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison:Damage] on hit.</font>"),
 		}
 	}
 }
@@ -240,8 +189,7 @@ Mastery.Params.SkillData.Target_CripplingBlow = {
 		},
 		LLWEAPONEX_Axe_Mastery1 = {
 			ID = "BONUSDAMAGE",
-			Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","<font color='#F19824'>If the target is disabled, deal an additional [1].</font>"),
-			GetParam = GetCripplingBlowBonusDamage,
+			Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","<font color='#F19824'>If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage:Damage].</font>"),
 			NamePrefix = "<font color='#DD4444'>Executioner's</font>"
 		},
 	}
@@ -249,35 +197,24 @@ Mastery.Params.SkillData.Target_CripplingBlow = {
 
 Mastery.Params.SkillData.Target_EnemyCripplingBlow = Mastery.Params.SkillData.Target_CripplingBlow
 
+Mastery.Params.SkillData.MultiStrike_BlinkStrike = {
+	Tags = {
+		LLWEAPONEX_Axe_Mastery2 = {
+			ID = "VULNERABLE",
+			Param = TranslatedString:Create("h173b9449ge0c5g4f29g86f4g01124907841b","Each target hit becomes <font color='#F13324'>Vulnerable</font>. If hit again, <font color='#F13324'>Vulnerable</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage:Damage].<br><font color='#F13324'>Vulnerable</font> is removed when your turn ends."),
+		},
+	}
+}
+
 Mastery.Params.SkillData.Shout_Whirlwind = {
 	Tags = {
 		LLWEAPONEX_Scythe_Mastery1 = {
 			ID = "RUPTURE",
-			Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#803BFF'><font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [1] for each turn of <font color='#FF0000'>Bleeding</font> remaining.</font>"),
-			GetParam = function(character, tagName, rankHeader, param)
-				local paramText = param
-				local damageSkillProps = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
-				local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
-				if damageRange ~= nil then
-					local damageText = ""
-					local totalMin = 0
-					local totalMax = 0
-					for damageType,damage in pairs(damageRange) do
-						totalMin = totalMin + damage[1]
-						totalMax = totalMax + damage[2]
-					end
-					if totalMin ~= totalMax then
-						damageText = string.format("%s-%s", math.tointeger(totalMin), math.tointeger(totalMax))
-					else
-						damageText = tostring(math.tointeger(totalMin))
-					end
-					paramText = string.gsub(paramText, "%[1%]", LeaderLib.Game.GetDamageText("Piercing", damageText))
-				end
-				return paramText
-			end},
+			Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding:Damage] for each turn of <font color='#FF0000'>Bleeding</font> remaining.")
+		},
 		LLWEAPONEX_Staff_Mastery1 = {
 			ID = "ELEMENTAL_DEBUFF",
-			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [1] for [2] turn(s).</font>"),
+			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).</font>"),
 			GetParam = GetElementalWeakness,
 		},
 		LLWEAPONEX_HandCrossbow_Mastery1 = {

@@ -43,7 +43,9 @@ local function ReplacePlaceholders(str)
 			local param = "Damage"
 			if props ~= nil and #props >= 1 then
 				skillName = props[1]
-				param = props[2]
+				if props[2] ~= nil then
+					param = props[2]
+				end
 			end
 			local skill = Skills.CreateSkillTable(skillName)
 			if skill ~= nil then

@@ -386,7 +386,6 @@ end
 LeaderLib.RegisterSkillListener("Target_PetrifyingTouch", PetrifyingTouchBonus)
 LeaderLib.RegisterSkillListener("Target_EnemyPetrifyingTouch", PetrifyingTouchBonus)
 
---
 local function ShieldsUpBonus(skill, char, state, funcParams)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
@@ -397,3 +396,17 @@ local function ShieldsUpBonus(skill, char, state, funcParams)
 	end
 end
 LeaderLib.RegisterSkillListener("Shout_RecoverArmour", ShieldsUpBonus)
+
+local function BlitzAttackBonus(skill, char, state, funcParams)
+	if state == SKILL_STATE.HIT then
+		local target = funcParams[1]
+		if target ~= nil then
+			local bonuses = GetMasteryBonuses(char, skill)
+			if bonuses["VULNERABLE"] == true then
+				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("MultiStrike_BlinkStrike", BlitzAttackBonus)
+LeaderLib.RegisterSkillListener("MultiStrike_EnemyBlinkStrike", BlitzAttackBonus)

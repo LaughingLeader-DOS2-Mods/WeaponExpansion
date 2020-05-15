@@ -1,6 +1,6 @@
 Mastery	Rank	Skill/Status/Name	Bonus	Implemented
 Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√
-Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	❌
+Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	√
 Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by Warfare. ❌
 Axe	3	Flurry	If all 3 hits connect, regain 1 AP. ❌
 Axe	3	Whirlwind	Keeping spinning up to 2-3 times, dealing reduced damage each spin.	❌
