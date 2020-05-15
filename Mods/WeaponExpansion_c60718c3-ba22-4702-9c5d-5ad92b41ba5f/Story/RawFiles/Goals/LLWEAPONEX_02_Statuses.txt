@@ -51,6 +51,19 @@ ApplyStatus(_Target, _RealStatus, _Duration, 1, _Source);
 RemoveStatus(_Target, _TriggerStatus);
 //END_REGION
 
+//REGION LISTEN_FOR_TURN_ENDING
+PROC
+LLWEAPONEX_Statuses_ListenForTurnEnding((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+THEN
+DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _Target, _Status);
+LeaderLib_ToggleScripts_EnableScriptForObject(_Source, "LLWEAPONEX_ListenForTurnEnding", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_Statuses_TurnEnded_OnStatusRemoved((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+THEN
+DB_NOOP(1);
+//END_REGION
+
 //REGION TARRED_BURNING_BYPASS
 IF
 CharacterStatusAttempt(_Character, "BURNING", _Source)

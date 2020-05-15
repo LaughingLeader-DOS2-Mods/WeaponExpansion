@@ -32,76 +32,64 @@ CharacterItemSetEvent(_Source, _Target, "LLWEAPONEX_OnKatanaHit");
 
 //REGION COMBO_TURN_ENDING
 /*
-PROC
-LLWEAPONEX_Katanas_ListenForTurnEnding((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status)
-AND
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _OtherStatus)
-THEN
-NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _OtherStatus);
-
-PROC
-LLWEAPONEX_Katanas_ListenForTurnEnding((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_Status)
-THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
-*/
-
-/*
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding is cleared when the stored status is removed.
+DB_LLWEAPONEX_Statuses_ListenForTurnEnding is cleared when the stored status is removed.
 Since combos share the same stackID and have appropriate priorities, higher combo statuses will clear the previous entry.
 */
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO1", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO1");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO1");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO2", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO2");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO2");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO3", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO3");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO3");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO4", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO4");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO4");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO5", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO5");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO5");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO6", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO6");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO6");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO7", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO7");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO7");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO8", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO8");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO8");
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_KATANA_COMBO9", (CHARACTERGUID)_Source)
 THEN
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO9");
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding(_Source, _Target, "LLWEAPONEX_KATANA_COMBO9");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Source, "LLWEAPONEX_Katana")
 AND
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
+DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _Target, _Status)
+AND
+DB_LLWEAPONEX_Katanas_ComboStatus(_Hits, _Status)
 THEN
-NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status);
-LLWEAPONEX_Katanas_ComboRemoved(_Source, _Target);
+NOT DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _Target, _Status);
+LLWEAPONEX_Katanas_ComboRemoved(_Source, (CHARACTERGUID)_Target);
 //END_REGION
 
 //REGION FINISHER_COMBO
@@ -273,9 +261,18 @@ ApplyStatus(_Char, _Status, 6.0, 0, _Source);
 
 //REGION VANQUISH
 PROC
+LLWEAPONEX_Statuses_TurnEnded_OnStatusRemoved((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+AND
+DB_LLWEAPONEX_Katanas_ComboStatus(_Hits, _Status)
+AND
+ObjectIsCharacter((CHARACTERGUID)_Target, 1)
+THEN
+LLWEAPONEX_Katanas_ComboRemoved(_Source, _Target);
+
+PROC
 LLWEAPONEX_Katanas_ComboRemoved((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
 AND
-NOT DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _, _)
+NOT DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _, _)
 THEN
 ClearTag(_Source, "LLWEAPONEX_Blademaster_Target_Available");
 
@@ -287,7 +284,7 @@ LLWEAPONEX_Katanas_Internal_VanquishNext(_Source);
 PROC
 LLWEAPONEX_Katanas_Internal_VanquishNext((CHARACTERGUID)_Source)
 AND
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
+DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _Target, _Status)
 AND
 NOT DB_LLWEAPONEX_Katanas_Temp_VanquisherTeleporting(_Source, _)
 THEN
@@ -349,13 +346,18 @@ ObjectSetFlag(_Target, "LLWEAPONEX_Katanas_DisableCombo", 0);
 LLWEAPONEX_Katanas_SetFinisherHits(_Target, _Source, _Hits, _Status, _ComboFinisher);
 LLWEAPONEX_Katanas_StartFinisher(_Target, _Source);
 
-IF
-DB_LLWEAPONEX_Katanas_ListenForTurnEnding(_Source, _Target, _Status)
+PROC
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+THEN
+LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _Target, _Status);
+
+PROC
+LLWEAPONEX_Katanas_Internal_ListenForTurnEnding((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
 AND
 IsTagged(_Source, "LLWEAPONEX_Blademaster_Target_Available", 0)
 THEN
 SetTag(_Source, "LLWEAPONEX_Blademaster_Target_Available");
-LeaderLib_ToggleScripts_EnableScriptForObject(_Source, "LLWEAPONEX_ListenForTurnEnding", "WeaponExpansion");
+
 //END_REGION
 
 EXITSECTION
