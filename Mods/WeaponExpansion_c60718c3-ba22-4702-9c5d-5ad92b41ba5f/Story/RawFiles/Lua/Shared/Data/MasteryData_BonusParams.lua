@@ -201,7 +201,7 @@ Mastery.Params.SkillData.MultiStrike_BlinkStrike = {
 	Tags = {
 		LLWEAPONEX_Axe_Mastery2 = {
 			ID = "VULNERABLE",
-			Param = TranslatedString:Create("h173b9449ge0c5g4f29g86f4g01124907841b","Each target hit becomes <font color='#F13324'>Vulnerable</font>. If hit again, <font color='#F13324'>Vulnerable</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].<br><font color='#F13324'>Vulnerable</font> is removed when your turn ends."),
+			Param = TranslatedString:Create("h173b9449ge0c5g4f29g86f4g01124907841b","Each target hit becomes <font color='#F13324'>Vulnerable</font>. If hit again, <font color='#F13324'>Vulnerable</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].<br><font color='#F1CC00'><font color='#F13324'>Vulnerable</font> is removed when your turn ends.</font>"),
 		},
 	}
 }
@@ -252,7 +252,7 @@ Mastery.Params.SkillData.Shout_FleshSacrifice = {
 	Tags = {
 		LLWEAPONEX_Wand_Mastery1 = {
 			ID = "BLOOD_EMPOWER",
-			Param = TranslatedString:Create("h0ad1536cg0e74g46dag8e1egc15967242d14","<font color='#CC33FF'>Allies standing on <font color='#F13324'>blood surfaces</font> or in <font color='#F13324'>blood clouds</font> gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBonus]% damage bonus.</font>")
+			Param = TranslatedString:Create("h0ad1536cg0e74g46dag8e1egc15967242d14","<font color='#CC33FF'>Allies standing on <font color='#F13324'>blood surfaces</font> or in <font color='#F13324'>blood clouds</font> gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus.</font>")
 		} 
 	}
 }

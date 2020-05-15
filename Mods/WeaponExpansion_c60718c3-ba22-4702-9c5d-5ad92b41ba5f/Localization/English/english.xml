@@ -113,7 +113,7 @@
 	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">Pacifist&apos;s Wrath (2H)</content>
 	<content contentuid="h0ab8d13bg763eg48f2gb501g886ee85d35e3">Character is taking [1] from their &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; status being evaporated!</content>
 	<content contentuid="h0abdfdfag27b0g44e6g908eg74133ca9abba">Warchief&apos;s Halberd (Axe) (Memory Scaling)</content>
-	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;Allies standing on &lt;font color=&apos;#F13324&apos;&gt;blood surfaces&lt;/font&gt; or in &lt;font color=&apos;#F13324&apos;&gt;blood clouds&lt;/font&gt; gain a &lt;font color=&apos;#33FF00&apos;&gt;[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBonus]% damage bonus&lt;/font&gt;.&lt;/font&gt;</content>
+	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;Allies standing on &lt;font color=&apos;#F13324&apos;&gt;blood surfaces&lt;/font&gt; or in &lt;font color=&apos;#F13324&apos;&gt;blood clouds&lt;/font&gt; gain a &lt;font color=&apos;#33FF00&apos;&gt;[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="h0ada3a43g2943g4b09g900agd1a2b2587c3d">Sage of Staves</content>
 	<content contentuid="h0b0d24f1g43a3g4c02g9d6cg0ba2a1b2f1dc">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to Sucker Punch that deals [1].&lt;br&gt;If the target is Knocked Down, Dizzy is applied for 2 turns when they stand up.&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
 	<content contentuid="h0b157d20g8525g44e5g9cf2g9bb41a4820ce">Demonic Surge</content>
@@ -222,7 +222,7 @@
 	<content contentuid="h16cd4b5bged4cg4a2eg932eg1015dabd6c42">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery II&lt;/font&gt;</content>
 	<content contentuid="h16cdc860g50d2g4c52ga87fg5b5411562aaa">Bonus Ice Damage</content>
 	<content contentuid="h17265d91g7278g47d2g8109g5966d8291fec">Novice</content>
-	<content contentuid="h173b9449ge0c5g4f29g86f4g01124907841b">Each target hit becomes &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt;. If hit again, &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].&lt;br&gt;&lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed when your turn ends.</content>
+	<content contentuid="h173b9449ge0c5g4f29g86f4g01124907841b">Each target hit becomes &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt;. If hit again, &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].&lt;br&gt;&lt;font color=&apos;#F1CC00&apos;&gt;&lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed when your turn ends.&lt;/font&gt;</content>
 	<content contentuid="h1765f964g83e6g4e49g89afg2a7239aa0a3c">&lt;font color=&apos;#00AA00&apos;&gt;Flask of Poison Weakness&lt;/font&gt;</content>
 	<content contentuid="h176fd702g856eg4a56ga027g90f413fedc79">Soldier&apos;s Glaive</content>
 	<content contentuid="h177fef81gd571g4c7fgba7egfcb6f10eb00a">A handmade quiver, designed for quickly drawing arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>

@@ -403,7 +403,11 @@ local function BlitzAttackBonus(skill, char, state, funcParams)
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["VULNERABLE"] == true then
-				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
+				if CharacterIsInCombat(char) == 1 then
+					ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
+				else
+					ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
+				end
 			end
 		end
 	end
