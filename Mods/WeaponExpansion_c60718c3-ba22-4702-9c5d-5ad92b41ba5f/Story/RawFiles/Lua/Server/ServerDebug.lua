@@ -136,6 +136,12 @@ function DebugInit()
         CharacterAddAbility(host, "RogueLore", 4)
     end
 
+    for skill,data in pairs(Mastery.Params.SkillData) do
+        if not string.find(skill, "Enemy") then
+            CharacterAddSkill(host, skill, 0)
+        end
+    end
+
     --ApplyStatus(host, "LLWEAPONEX_RUPTURE", 360.0, 1, host)
     --RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
     --RemoveStatus(host, "LLWEAPONEX_RUPTURE")

@@ -21,7 +21,7 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	local tooltipType = ui:GetValue("tooltip_array", "number", 0)
 	local tooltipHeader = ui:GetValue("tooltip_array", "string", 1)
 	local isDamageTooltip = tooltipHeader == "Damage"
-	LeaderLib.PrintDebug("[OnAddFormattedTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY, noCompare)
+	LeaderLib.PrintDebug("[OnAddFormattedTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY, noCompare, CLIENT_UI.LAST_SKILL)
 	--setupTooltip.DumpTooltipArray(ui)
 
 	local isSkill = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == "SkillName"
@@ -44,6 +44,7 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 					local count = #tagKeys
 					table.sort(tagKeys, sortTagParams)
 					for i,tagName in ipairs(tagKeys) do
+						print(tagName)
 						local tagData = data.Tags[tagName]
 						if Mastery.HasMasteryRequirement(character, tagName) then
 							if tagData.NamePrefix ~= nil then
@@ -57,17 +58,19 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 							local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
 							if tagLocalizedName == nil then 
 								tagLocalizedName = ""
+							else
+								tagLocalizedName = tagLocalizedName .. "<br>"
 							end
 							if tagData.Param ~= nil then
 								if tagLocalizedName ~= "" then
-									paramText = tagLocalizedName.."<br>"..tagData.Param.Value
+									paramText = tagLocalizedName..tagData.Param.Value
 								else
 									paramText = tagData.Param.Value
 								end
 							end
 							paramText = Tooltip.ReplacePlaceholders(paramText)
 							if tagData.GetParam ~= nil then
-								local status,result = xpcall(tagData.GetParam, debug.traceback, character.Stats, tagName, paramText)
+								local status,result = xpcall(tagData.GetParam, debug.traceback, character.Stats, tagName, tagLocalizedName, paramText)
 								if status and result ~= nil then
 									paramText = result
 								elseif not status then
@@ -99,6 +102,8 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 						end
 					end
 				end
+			else
+				--Ext.PrintError("No data for ", CLIENT_UI.LAST_SKILL)
 			end
 		end
 

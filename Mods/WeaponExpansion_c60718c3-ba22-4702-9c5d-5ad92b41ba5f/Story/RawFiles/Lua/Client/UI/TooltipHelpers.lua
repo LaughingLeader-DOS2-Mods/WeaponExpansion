@@ -28,6 +28,8 @@ local function ReplacePlaceholders(str)
 			if type(value) == "number" then
 				value = string.format("%i", value)
 			end
+		else
+			value = ""
 		end
 		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
@@ -57,6 +59,8 @@ local function ReplacePlaceholders(str)
 			if type(value) == "number" then
 				value = string.format("%i", value)
 			end
+		else
+			value = ""
 		end
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
 		output = string.gsub(output, escapedReplace, value)

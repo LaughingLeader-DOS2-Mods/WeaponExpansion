@@ -390,6 +390,8 @@ local function GetHandCrossbowDamage(baseSkill, attacker, isFromItem, stealthed,
 				masteryBoost = boost
 			end
 		end
+		--print("LLWEAPONEX_HandCrossbow mastery boost:", masteryLevel, masteryBoost)
+		--print(LeaderLib.Common.Dump(attacker.Character:GetTags()))
 		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost)
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
@@ -462,6 +464,7 @@ local function GetPistolDamage(baseSkill, attacker, isFromItem, stealthed, attac
 				masteryBoost = boost
 			end
 		end
+		--print("LLWEAPONEX_Pistol mastery boost:", masteryLevel, masteryBoost)
 		weapon = PrepareWeaponStat(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost)
 		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))

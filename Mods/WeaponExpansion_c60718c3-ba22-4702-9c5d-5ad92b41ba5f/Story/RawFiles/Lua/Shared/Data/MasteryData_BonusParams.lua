@@ -1,6 +1,6 @@
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
-local function GetThrowingKnifeBonusParam(character, tagName, param)
+local function GetThrowingKnifeBonusParam(character, tagName, rankHeader, param)
 	local paramText = param
 	local chance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
 	if chance > 0 then
@@ -112,7 +112,7 @@ local function GetSkillDamageRange(character, skill)
     end
 end
 
-local function GetCripplingBlowBonusDamage(character, tagName, param)
+local function GetCripplingBlowBonusDamage(character, tagName, rankHeader, param)
 	--Ext.Print("Character:",character, "tagName:",tagName, "param:",param)
 	local damageText = ""
 	local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
@@ -161,10 +161,12 @@ local checkResistanceStats = {
 	"WaterResistance",
 }
 
---- @param character StatCharacter
---- @param tagName string
---- @param param string
-local function GetElementalWeakness(character, tagName, param)
+---@param character StatCharacter
+---@param tagName string
+---@param rankHeader string
+---@param param string
+---@return string
+local function GetElementalWeakness(character, tagName, rankHeader, param)
 	local paramText = param
 	local resistanceReductions = {}
 	local resistanceCount = 0
@@ -208,7 +210,7 @@ local function GetElementalWeakness(character, tagName, param)
 		paramText = string.gsub(paramText, "%[Special%]", resistanceText)
 		return paramText
 	else
-		return ""
+		return rankHeader..Tooltip.ReplacePlaceholders(Text.MasteryBonusParams.ElementalWeakness_NoElement.Value)
 	end
 end
 
@@ -252,7 +254,7 @@ Mastery.Params.SkillData.Shout_Whirlwind = {
 		LLWEAPONEX_Scythe_Mastery1 = {
 			ID = "RUPTURE",
 			Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#803BFF'><font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [1] for each turn of <font color='#FF0000'>Bleeding</font> remaining.</font>"),
-			GetParam = function(character, tagName, param)
+			GetParam = function(character, tagName, rankHeader, param)
 				local paramText = param
 				local damageSkillProps = Skills.PrepareSkillProperties("Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
 				local damageRange = Game.Math.GetSkillDamageRange(character, damageSkillProps)
