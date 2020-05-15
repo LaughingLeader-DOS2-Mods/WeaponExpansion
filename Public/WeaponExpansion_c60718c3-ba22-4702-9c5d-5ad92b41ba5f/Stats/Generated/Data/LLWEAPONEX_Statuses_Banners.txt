@@ -198,6 +198,7 @@ using "_Stats_LLWEAPONEX_Potions_Base"
 data "Strength" "3"
 data "Finesse" "3"
 data "Intelligence" "3"
+data "DodgeBoost" "5"
 data "DamageBoost" "5"
 
 new entry "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS"
