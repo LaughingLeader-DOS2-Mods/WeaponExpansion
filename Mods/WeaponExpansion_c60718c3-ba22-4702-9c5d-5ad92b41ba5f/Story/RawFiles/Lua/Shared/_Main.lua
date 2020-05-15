@@ -77,7 +77,7 @@ local function LoadExperienceVariables()
 	LeaderLib.PrintDebug(LeaderLib.Common.Dump(RankVariables))
 	LeaderLib.PrintDebug("==========================")
 
-	Mastery.Variables.MaxRank = maxRank
+	Mastery.Variables.MaxRank = math.floor(maxRank)
 	Mastery.Variables.RankVariables = RankVariables
 end
 
