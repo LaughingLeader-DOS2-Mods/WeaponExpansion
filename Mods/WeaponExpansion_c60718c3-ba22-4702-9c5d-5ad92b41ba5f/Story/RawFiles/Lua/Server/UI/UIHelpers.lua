@@ -27,10 +27,15 @@ end
 Ext.RegisterNetListener("LLWEAPONEX_RequestUserCharacters", RequestUserCharacters)
 
 function SendClientID(uuid, id)
-	LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetClientID", id)
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetActiveCharacter", Ext.GetCharacter(uuid).NetID)
-	--SendUserCharacters(id)
+	print(Vars.GAME_STARTED, Vars.SEND_USER_ID)
+	if Vars.GAME_STARTED == true then
+		LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
+		Ext.PostMessageToClient(uuid, "LLWEAPONEX_SendClientID", id)
+		Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetActiveCharacter", Ext.GetCharacter(uuid).NetID)
+		--SendUserCharacters(id)
+	else
+		Vars.SEND_USER_ID = true
+	end
 end
 
 function InitClientID()
@@ -70,8 +75,12 @@ local function RequestActiveCharacter(call,id_str,callbackID)
 	-- if character ~= nil then
 	-- 	Ext.PostMessageToClient(character, "LLWEAPONEX_SetActiveCharacter", character)
 	-- else
-	-- 	IterateUsers("LLWEAPONEX_SetClientID")
+	-- 	IterateUsers("LLWEAPONEX_SendClientID")
 	-- end
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_RequestActiveCharacter", RequestActiveCharacter)
+
+function HookIntoTradeWindow(uuid)
+	Ext.PostMessageToClient(uuid, "LLWEAPONEX_HookIntoTradeWindow", CharacterGetReservedUserID(uuid))
+end

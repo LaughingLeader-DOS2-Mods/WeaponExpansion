@@ -21,9 +21,10 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	local tooltipType = ui:GetValue("tooltip_array", "number", 0)
 	local tooltipHeader = ui:GetValue("tooltip_array", "string", 1)
 	local isDamageTooltip = tooltipHeader == "Damage"
-	LeaderLib.PrintDebug("[OnAddFormattedTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY, noCompare)
-	LeaderLib.PrintDebug("CLIENT_UI.LAST_SKILL", CLIENT_UI.LAST_SKILL)
-	LeaderLib.PrintDebug("CLIENT_UI.LAST_ITEM", CLIENT_UI.LAST_ITEM)
+	print("[OnAddFormattedTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY, noCompare)
+	print("CLIENT_UI.ACTIVE_CHARACTER", CLIENT_UI.ACTIVE_CHARACTER)
+	print("CLIENT_UI.LAST_SKILL", CLIENT_UI.LAST_SKILL)
+	print("CLIENT_UI.LAST_ITEM", CLIENT_UI.LAST_ITEM)
 
 	if CLIENT_UI.LAST_ITEM ~= nil and CLIENT_UI.ACTIVE_CHARACTER ~= nil then
 		local item = Ext.GetItem(CLIENT_UI.LAST_ITEM)
@@ -223,7 +224,7 @@ local itemTooltipFiles = {
 	"Public/Game/GUI/tooltipHelper_kb.swf",
 }
 
-local function HookIntoTrade(dialogUI, ...)
+local function HookIntoTrade()
 	local ui = Ext.GetBuiltinUI("Public/Game/GUI/trade.swf")
 	if ui ~= nil then
 		Ext.Print("Found trade window")
@@ -234,6 +235,11 @@ local function HookIntoTrade(dialogUI, ...)
 		Ext.PrintError("Cound not find trade window")
 	end
 end
+
+Ext.RegisterNetListener("LLWEAPONEX_HookIntoTradeWindow", function(call, id)
+	CLIENT_UI.ACTIVE_CHARACTER = tonumber(id)
+	HookIntoTrade()
+end)
 
 local function InitTooltipOverrides()
 	local ui = Ext.GetBuiltinUI("Public/Game/GUI/tooltip.swf")
@@ -267,12 +273,12 @@ local function InitTooltipOverrides()
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnTooltip)
 	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/dialog.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "TradeButtonPressed", HookIntoTrade)
-	else
-		Ext.PrintError("Cound not find dialog.swf")
-	end
+	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/dialog.swf")
+	-- if ui ~= nil then
+	-- 	Ext.RegisterUICall(ui, "TradeButtonPressed", HookIntoTrade)
+	-- else
+	-- 	Ext.PrintError("Cound not find dialog.swf")
+	-- end
 end
 
 return {
