@@ -674,6 +674,7 @@
 	<content contentuid="h4343971egf586g483bgba2ag7aebcba49c5e">Inert Runeblade</content>
 	<content contentuid="h4367cc22g9d4fg4c99ga1dfgc210f7915de3">Throw a chair weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
 	<content contentuid="h439e053bgd9c6g4dd4gbca4ge54f85d29d22">Expert Bannerkeeper</content>
+	<content contentuid="h43a29acfgcc05g45beg9826g10ddaa1ac4f9">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost3]% more base damage.</content>
 	<content contentuid="h43cc06a4g9bcdg44b6g88ffgfc91981571dc">Concussion</content>
 	<content contentuid="h43ebaac0g9f8fg4923g9273ga2104220576b">Groundcracker</content>
 	<content contentuid="h441e6d3cg812eg40afg9842gcceb49b2e70b">Legend</content>
@@ -871,6 +872,7 @@
 	<content contentuid="h59dfbe88g8f83g440bga8fbg5fe21502af1c">Explosion Rune</content>
 	<content contentuid="h5a0acb29gfeaag484eg84f8gb692381f545a">&lt;font color=&apos;#FF5522&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
 	<content contentuid="h5a14b843gd426g4481gaff6g01cfdc067527">Warrior&apos;s Greatbow</content>
+	<content contentuid="h5a1bc6cag0662g4041gbb15g9ee793a96690">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost4]% more base damage.</content>
 	<content contentuid="h5a2f3b15gb414g41d2g8740gab76180d63b6">Soldier&apos;s Odachi</content>
 	<content contentuid="h5a3b236cg8ac8g40begba68ge2d96e87e471">Marksman&apos;s Rifle</content>
 	<content contentuid="h5a467f3cg1c23g482eg97a6gfac2a4729c03">&lt;font color=&apos;#999999&apos;&gt;Sapper Bullets&lt;/font&gt;</content>
@@ -1318,7 +1320,7 @@
 	<content contentuid="h86660c61gd073g4780g846egf0bd558cd1d3">Dust Rune</content>
 	<content contentuid="h86af1241g131ag4f8egb295g59ab4bdc4c72">You&apos;re already dead...</content>
 	<content contentuid="h86c1d16cgc918g4625g9df8g19a8061fa282">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h86e68aebgdd6eg436fg98c8gc34e0a5d0516">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Basic attacks now lower the target&apos;s resistance to your wand&apos;s element by -25% for 1 turn.&lt;icon id=&apos;Shout_FleshSacrifice&apos; icon=&apos;Skill_Decay_FleshSacrifice&apos;/&gt;Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBonus]% damage bonus.</content>
+	<content contentuid="h86e68aebgdd6eg436fg98c8gc34e0a5d0516">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Basic attacks now lower the target&apos;s resistance to your wand&apos;s element by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for 1 turn.&lt;icon id=&apos;Shout_FleshSacrifice&apos; icon=&apos;Skill_Decay_FleshSacrifice&apos;/&gt;Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus.</content>
 	<content contentuid="h86fdba0bgd3afg43e9gbd3fgcb70e445bff3">Forest&apos;s Wall, Seeker&apos;s Spurn</content>
 	<content contentuid="h872b22a6ga3b3g409ag8921g26eb2af4a0c5">Blademaster&apos;s Strike Target</content>
 	<content contentuid="h87828da3gd327g4c50g9691gb181fe64b063">Banner of Unruly Faith (Reset Scaling)</content>
@@ -1444,7 +1446,7 @@
 	<content contentuid="h9360af89gad64g4c12ga59ege54f22107aff">Instantly warp to any hidden enemy and strike a grievous blow for [1].&lt;br&gt;&lt;font color=&apos;#C1A9FF&apos;&gt;Gain Invisibility if the target was Invisible.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF8585&apos;&gt;Targets hit become marked, preventing Invisibility for 1 turn.&lt;/font&gt;</content>
 	<content contentuid="h93a0cef7g8b1bg4bb7gb2abg367bc09fe791">&lt;font color=&apos;#FFB900&apos;&gt;Polearm Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h93acd4bdgd53dg4fb2g9de4g3b5945aaae17">&lt;font color=&apos;#C7A758&apos;&gt;A demon watches over you.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ee3f70&apos;&gt;Approaching enemies have a 30% chance to take &lt;font color=&apos;#9358ff&apos;&gt;Shadow Damage&lt;/font&gt;, and may be afflicted with &lt;font color=&apos;#3feeaa&apos;&gt;Soul Burn&lt;/font&gt; for 1 turn.&lt;/font&gt;</content>
-	<content contentuid="h93b80bc2g20a3g4465g81d6g5053de4acc8c">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;While spinning, shoot 1-3 enemies in a 6m radius.</content>
+	<content contentuid="h93b80bc2g20a3g4465g81d6g5053de4acc8c">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost1]% more base damage.&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;While spinning, shoot 1-3 enemies in a 6m radius.</content>
 	<content contentuid="h93bfbec1gb9cbg40acg950agb62772e4c9cc">&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade Mastery II&lt;/font&gt;</content>
 	<content contentuid="h940e6115g3ecbg4be0g9a0agb94b31759303">A magical blade imbued with the power of the earth. The runes can be invoked to bathe the blade in a impenetrable hardened surface.</content>
 	<content contentuid="h94127628g5630g4247gacf1ga669437aad77">Prepare Balrin&apos;s Throwing Axe</content>
@@ -1548,7 +1550,7 @@
 	<content contentuid="h9df0cb28gac01g470cg9502g0c6c3657cc0a">&lt;font color=&apos;#FF0000&apos; size=&apos;22&apos;&gt;*The rune fails to fit inside the &lt;font color=&apos;#c5a65a&apos;&gt;Oni Gauntlet&lt;/font&gt;.*&lt;/font&gt;</content>
 	<content contentuid="h9e059174g59a6g4ad7gad6eg66ecd59f5c87">Character is covering a nearby ally, and will counter-attack the first attempted attack.</content>
 	<content contentuid="h9e1136f1g7fe4g4fa5g9410g176394a28d81">Omnibolt, Heaven&apos;s Wrath (Strength Scaling)</content>
-	<content contentuid="h9e9877b3gc449g4cc3g88f5g3fba9c70e97d">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;Targets hit by [Key:Shout_Whirlwind_DisplayName] have their resistance to your staff&apos;s element reduced by 25%.</content>
+	<content contentuid="h9e9877b3gc449g4cc3g88f5g3fba9c70e97d">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;Targets hit by [Key:Shout_Whirlwind_DisplayName] have their resistance to your staff&apos;s element reduced by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]%.</content>
 	<content contentuid="h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c">Pistol</content>
 	<content contentuid="h9eba2ad8g13b4g4e10gb3bfg626ad2e82cff">Recharging (Demolitionist&apos;s Backpack)</content>
 	<content contentuid="h9ecc7cdbgfeebg4500g8e0bgcbbf39653af4">Throw the remote charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius.&lt;/font&gt;</content>
@@ -1858,6 +1860,7 @@
 	<content contentuid="hc0a1757bg633bg4517ga1a4g3ba6c8dfd8c7">Searing Rune</content>
 	<content contentuid="hc0ad4b30gc94ag446fg9b6ag16b29e2d5401">Raijin</content>
 	<content contentuid="hc0afa9e9g03deg48e9ga9b3gda55ed03ef4e">Flaying Foil</content>
+	<content contentuid="hc0afc564g5c15g47e1g9cf1g5ac28f02033a">&lt;font color=&apos;#FF3333&apos;&gt;Disabled - Your current weapon(s) deal no elemental damage.&lt;br&gt;&lt;font size=&apos;18&apos; color=&apos;#666666&apos;&gt;Targets hit become weak to your weapon&apos;s element for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).&lt;/font&gt;&lt;/font&gt;</content>
 	<content contentuid="hc0b5a373geaa1g42f7g846dg91e6005f7e40">Death&apos;s Edge (Constitution Scaling)</content>
 	<content contentuid="hc0ccbb1cgca5dg457cg9dc0gedc74a1982cb">Polished Flintlock Pistol</content>
 	<content contentuid="hc0d6f6bdgdbfdg41a5gb876gcf0ce7a585b1">Blackfinger</content>
@@ -2397,6 +2400,7 @@
 	<content contentuid="hf8b4f069g9305g4d2dg9949g69d67c069777">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are specially designed to penetrate armor.</content>
 	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Set [1] for [4] turn(s) [2][3]</content>
 	<content contentuid="hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb">Builds Energy on Hit</content>
+	<content contentuid="hf90feb29g1849g425dgae29ga5377df30f4b">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% more base damage.</content>
 	<content contentuid="hf950d4e3g4ccag41b2ga540g5dd692a09eed">Balrin&apos;s Throwing Axe (Oil)</content>
 	<content contentuid="hf983dfa7gdf75g4f61g9fa2ga9f189e5d4e0">Power Pole</content>
 	<content contentuid="hf9b06846g0062g4b99ga3afgb43f2d3e5149">&lt;font color=&apos;#00aa00&apos;&gt;Poisoncloud Great Arrow&lt;/font&gt;</content>
