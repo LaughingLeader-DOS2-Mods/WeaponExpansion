@@ -161,7 +161,6 @@
 	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your weapon&apos;s element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h0f05d7a3g7537g42b2g8816ge356bcadaef4">Gnak&apos;s Spell Scroll (Memory Scaling)</content>
 	<content contentuid="h0f0aca8cg237bg4696gb195gbd43e7378fd4">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Ice Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
-	<content contentuid="h0f364e95ga530g490cg846agce877c3a904a">Insert into a Pistol to Change Damage Type</content>
 	<content contentuid="h0f6a5e9ag0dd9g4b14g90e2gd200af46dd99">Immolation Bonus II</content>
 	<content contentuid="h0f72bec6g0ff4g4af9gaa76ga90f7ec31aab">Throwable</content>
 	<content contentuid="h0f74df58g58abg4faagaebeg6af6dbfa8619">Oni Gauntlet (Empowered)</content>
@@ -271,6 +270,7 @@
 	<content contentuid="h1b412aefg3d56g47ecga034g20225843aff3">Bonuses on Hit</content>
 	<content contentuid="h1b52dedbg001ag4370g8854g6e31685e5459">Omnibolt, Heaven&apos;s Wrath (Memory Scaling)</content>
 	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its glory. Huzzah!&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h1bd0f691g9646g4b28g932fg3ebd8377ca0e">Gain hyper-focus, increasing the &lt;font color=&apos;#33FF00&apos;&gt;damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%&lt;/font&gt;.</content>
 	<content contentuid="h1bdb5e07gf441g4020g9f25g6ea0457e71fe">Enhanced Demolition Bonus</content>
 	<content contentuid="h1c1efec8g1da1g4353g82e5ge50841054af6">Throw the shrapnel charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius and applies Bleeding for 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ec3030&apos;&gt;If targets hit are already bleeding, their wounds Rupture for [3].&lt;/font&gt;</content>
 	<content contentuid="h1c2e17dag8206g42begb070g3a98701d976b">Throw your mainhand shield at an enemy. The shield can ricochet up to 3 times within [1], dealing [2] damage and restoring [3] and [4] for each enemy hit.&lt;br&gt;The shield then returns, restoring an additional amount of armor.&lt;br&gt;&lt;font color=&apos;#FFD700&apos; size=&apos;18&apos;&gt;Shield Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;If 3 targets are hit, restore [5] and [6] to allies within 8m.&lt;/font&gt;</content>
@@ -769,6 +769,7 @@
 	<content contentuid="h4e990fe9g1ffcg46ecga18fg891f812ef7c0">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#D040D0&apos;&gt;All Resistances&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h4eb738edgf8a1g41a9gb1d6g405a8e63cf6a">&lt;font color=&apos;#C7A758&apos;&gt;Oni Gauntlet (Empowered)&lt;/font&gt; Power</content>
 	<content contentuid="h4ec36219g10d1g4dc7g97f8g000b65b93521">Character&apos;s &lt;font color=&apos;#C7A758&apos;&gt;Demolitionist&apos;s Backpack&lt;/font&gt; is recharging.</content>
+	<content contentuid="h4ed991d3gb2a2g4fe5g8a5fgf5783ab94ab4">&lt;font color=&apos;#5A9646&apos; size=&apos;22&apos;&gt;Hyper-Focus Pistol Damage Boost!&lt;/p&gt;</content>
 	<content contentuid="h4ef1e65bg14f6g4d4ag95ebg604f692cddb3">Fateslayer</content>
 	<content contentuid="h4f0e6adcg34d8g4c8fgbfecg6fe6a80c7e9d">Character has been impaled by a thrown weapon!</content>
 	<content contentuid="h4f1b9001g7b29g4ac7g928dg0149cdeff75e">&lt;font color=&apos;#FFA900&apos; size=&apos;22&apos;&gt;Bolts Auto-Inserted into Hand Crossbow&lt;/font&gt;</content>
@@ -870,6 +871,7 @@
 	<content contentuid="h59620562g06c7g4dd9gbd86g146525534f41">Soul Burn</content>
 	<content contentuid="h596f2c39g31dag4357g864eg6c635619d91e">A greatbow said to fire arrows so large that they shatter both men and mountains alike.</content>
 	<content contentuid="h5980966fg39c2g4908g9073g89fe309ebc70">Flicker Strike</content>
+	<content contentuid="h59b52860gd0e3g4e65g9e61gd66b862178c3">Blunderbuss</content>
 	<content contentuid="h59dfbe88g8f83g440bga8fbg5fe21502af1c">Explosion Rune</content>
 	<content contentuid="h5a0acb29gfeaag484eg84f8gb692381f545a">&lt;font color=&apos;#FF5522&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
 	<content contentuid="h5a14b843gd426g4481gaff6g01cfdc067527">Warrior&apos;s Greatbow</content>
@@ -1284,6 +1286,7 @@
 	<content contentuid="h818a634cg4f07g431cga226g09dcdfbc45dc">Charged (Runic Cannon)</content>
 	<content contentuid="h819abaa1gf2c8g4f20gaefcg4906094b14a6">Helm Splitter</content>
 	<content contentuid="h81bf6306g22b9g48e1g896fg6dd883b1c09c">Reinforced Wooden Shields</content>
+	<content contentuid="h8224bb41g2261g4a50ga1feg7dc0f7394eb7">&lt;font color=&apos;#99FF22&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;[1] Extended!&lt;/p&gt;&lt;/font&gt;&lt;p align=&apos;center&apos;&gt;[2] -&gt; [3]&lt;/p&gt;</content>
 	<content contentuid="h82443abeg98f3g4977gba22ga9a785091dbe">Raging</content>
 	<content contentuid="h8251f6degbeb5g4172gaf37g843f01d2c099">&lt;font color=&apos;#FD8826&apos;&gt;Quarterstaff Mastery III&lt;/font&gt;</content>
 	<content contentuid="h825a0ab6g2d8ag49d6ga502g430378863966">Journeyman Thief</content>
@@ -1340,6 +1343,7 @@
 	<content contentuid="h88c3f760g03b2g43d1g951ag5205a1fab669">Bloodstorm Rune</content>
 	<content contentuid="h890fdfdag3d90g44e5ga74cgf40c514d2bea">Estoc</content>
 	<content contentuid="h891bed49g98e3g4269g9932g33150016921e">Stone</content>
+	<content contentuid="h893512aag4f27g45fdg974fgb0e3300c8bd5">Scales With Scoundrel and Pistol Mastery</content>
 	<content contentuid="h89496259g0807g42a8ga24fg7180a602eb67">Frostmourne</content>
 	<content contentuid="h895a1c53g9553g49b7ga6b9g95a3e5644ec7">Enable automatically learning recipes for Weapon Expansion uniques. (User Setting) (Default)</content>
 	<content contentuid="h898afc1cgb1dbg4c75gad22g064b0553b3af">Expert Fencer</content>
@@ -1381,7 +1385,7 @@
 	<content contentuid="h8d11d8efg0bb8g4130g9393geb30841eaea5">Quarterstaff</content>
 	<content contentuid="h8d34a193g1102g4101g90a7g4345cb51d976">Aspect of Summoning</content>
 	<content contentuid="h8d38f076g3192g48fdg9d93g41f9acc3a9a1">a Runeblade</content>
-	<content contentuid="h8d3ec53cg6caag483eg8e9ag838a02ecb512">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.&lt;icon id=&apos;Shout_Adrenaline&apos; icon=&apos;Skill_Rogue_Adrenaline&apos;/&gt;Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.</content>
+	<content contentuid="h8d3ec53cg6caag483eg8e9ag838a02ecb512">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.&lt;icon id=&apos;Shout_Adrenaline&apos; icon=&apos;Skill_Rogue_Adrenaline&apos;/&gt;Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%.</content>
 	<content contentuid="h8d63157dg4167g465eg9b3fgd194422e8421">A wooden sword typically used for training.</content>
 	<content contentuid="h8d8bfc1cg51abg43ebgb2ccg15926654b3fd">[KATANA] Disable the &quot;Finisher&quot; status from automatically applying on hit.</content>
 	<content contentuid="h8d913678gdb4fg41begbca8g0e0a541c8c94">Piercing Weakness</content>
@@ -1690,6 +1694,7 @@
 	<content contentuid="had6f1fc6g42bbg419fg82d1gb37013834ae4">Odachi of the Forsaken</content>
 	<content contentuid="had840b6eg17aeg4c78g9d8dgcc46e1d35f7d">An imposing, heavy slab of metal, crafted from a mysterious alloy. A single eye, embedded in the hilt pulsates ever so slighly.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="had924ac4g3b89g43bcg8b31gccccb41ad202">Great Odachi of the Mighty</content>
+	<content contentuid="hadb5f130g449cg4e04gaeacgd5dfa2ab10ef">Scales With Scoundrel and Hand Crossbow Mastery</content>
 	<content contentuid="hade531feg5c76g4b2ag934cgf877630c453f">Blinder</content>
 	<content contentuid="hadf05d5fgfd23g4b1dgb558gbe9c35446aa5">Bullet Spray</content>
 	<content contentuid="hae0ad1f0gab24g4438ga502gcc6e482bae43">Weapon Expansion - Debug</content>
@@ -1768,6 +1773,7 @@
 	<content contentuid="hb6085203gadfag4df4gb323g6be0acc157e5">Frostdyne (Unleashed) (Strength Scaling)</content>
 	<content contentuid="hb608d005g94e2g4a71g934cg1035eb782db0">Chaos Pentaslash</content>
 	<content contentuid="hb62421b1g2160g43b5gb54cgcf4ad9fe5e21">&lt;font color=&apos;#CD1F1F&apos;&gt;Throwing Failed - You already threw Balrin&apos;s Axe!&lt;/font&gt;</content>
+	<content contentuid="hb6293431g0ad9g45bbg9334gb81365e8f2ca">&lt;font color=&apos;#33FF00&apos;&gt;Your next pistol shot will deal [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]% more damage.&lt;/font&gt;</content>
 	<content contentuid="hb62e44dfg79b4g4a88gac70gb89724dadf12">Banner Lord</content>
 	<content contentuid="hb659e04agdc4dg4b89gb62fg33b85c0c1d36">Anvilmar, Dwarven Negotiator (Intelligence Scaling)</content>
 	<content contentuid="hb65b2e2cg5720g44b7gbf1fg3730332162a1">Frostdyne (Finesse Scaling)</content>
@@ -2346,7 +2352,6 @@
 	<content contentuid="hf3c54680gefe0g4e8dga20ag29688625d9b6">Raizan</content>
 	<content contentuid="hf3e5ff9ag6f7eg4a28ga168g580f7a0e9b5e">Combat for Dummies</content>
 	<content contentuid="hf3ed32cbg53e8g412fg9156g418c80266425">Expert of Wands</content>
-	<content contentuid="hf3ed4698g23b7g4532g8284g2057c8738e9f">Damage Scales With Your Highest Attribute</content>
 	<content contentuid="hf3f86a5egb3e2g495bg867fg9328c965296b">Character&apos;s oversized scroll has been infused with a spell school, and has gained bonus damage.</content>
 	<content contentuid="hf4441e4cgfd32g49bfga758gb0f711be47e8">A former marksman from a long-forgotten regiment, tasked with destroying dragonkind. With their unyielding strength, Dragon Slayers utilize Greatbows to pierce their enemies with arrows the size of spears</content>
 	<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e">Shadow</content>
