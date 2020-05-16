@@ -360,7 +360,7 @@ local function PetrifyingTouchBonus(skill, char, state, funcParams)
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["PETRIFYING_SLAM"] == true then
 				LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage")
-				local forceDistance = Game.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+				local forceDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
 				if forceDistance > 0 then
 					local character = Ext.GetCharacter(char)
 					local x,y,z = GetPosition(target)
@@ -414,3 +414,45 @@ local function BlitzAttackBonus(skill, char, state, funcParams)
 end
 LeaderLib.RegisterSkillListener("MultiStrike_BlinkStrike", BlitzAttackBonus)
 LeaderLib.RegisterSkillListener("MultiStrike_EnemyBlinkStrike", BlitzAttackBonus)
+
+local function SuckerPunchBonus(skill, char, state, funcParams)
+	if state == SKILL_STATE.CAST then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["SUCKER_PUNCH_COMBO"] == true then
+			ApplyStatus(char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1", 12.0, 0, char)
+		end
+	elseif state == SKILL_STATE.HIT then
+		local target = funcParams[1]
+		if target ~= nil then
+			local bonuses = GetMasteryBonuses(char, skill)
+			if bonuses["SUCKER_PUNCH_COMBO"] == true then
+				if HasActiveStatus(target, "KNOCKED_DOWN") == 1 then
+					local chance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+					if Ext.Random(0,100) <= chance then
+						local handle = NRD_StatusGetHandle(target, "KNOCKED_DOWN")
+						if handle ~= nil then
+							local duration = NRD_StatusGetReal(target, handle, "CurrentLifeTime")
+							local lastTurns = math.floor(duration / 6)
+							duration = duration + 6.0
+							local nextTurns = math.floor(duration / 6)
+							NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
+							local text = Ext.GetTranslatedStringFromKey("LLWEAPONEX_StatusText_StatusExtended")
+							if text == nil then
+								text = "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"
+							end
+							text = text:gsub("%[1%]", Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute("KNOCKED_DOWN", "DisplayName")))
+							text = text:gsub("%[2%]", lastTurns)
+							text = text:gsub("%[3%]", nextTurns)
+							if ObjectIsCharacter(target) == 1 then
+								CharacterStatusText(target, text)
+							else
+								DisplayText(target, text)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Target_SingleHandedAttack", SuckerPunchBonus)

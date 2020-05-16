@@ -158,25 +158,6 @@ THEN
 NRD_SkillSetCooldown(_Char, "Target_SingleHandedAttack", 0.0);
 //END_REGION
 
-//REGION SUCKER_PUNCH_COMBO_KNOCKDOWN_INCREASE
-//Rapier Mastery Sucker Punch Knockdown
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_SUCKER_PUNCH", _Source)
-AND
-GetStatusTurns(_Target, "LLWEAPONEX_SUCKER_PUNCH", _CurrentTurns)
-AND
-IsTagged(_Source, "LLWEAPONEX_Rapier_SuckerComboEnabled", _AddTurns)
-AND
-IntegerSum(_CurrentTurns, _AddTurns, _Turns)
-AND
-IntegerProduct(_Turns, 6, _DurationInt)
-AND
-Real(_DurationInt, _Duration)
-THEN
-ApplyStatus(_Target, "KNOCKED_DOWN", _Duration, 0, _Source);
-RemoveStatus(_Target, "LLWEAPONEX_SUCKER_PUNCH");
-//END_REGION
-
 //REGION FLICKER_STRIKE
 QRY
 LLWEAPONEX_Rapiers_QRY_HasFrenzyCharge((CHARACTERGUID)_Char)

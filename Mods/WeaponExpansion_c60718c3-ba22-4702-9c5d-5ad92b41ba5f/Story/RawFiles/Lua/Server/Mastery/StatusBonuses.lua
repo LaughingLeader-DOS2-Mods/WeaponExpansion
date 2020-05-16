@@ -19,3 +19,11 @@ function Banner_ApplyEncouragedBonus(target, source)
 		CharacterStatusText(target,text)
 	end
 end
+
+-- function OnSuckerPunchApplied(target, source)
+-- 	local turns = GetStatusTurns(target, "LLWEAPONEX_SUCKER_PUNCH")
+-- 	if turns > 0 then
+-- 		ApplyStatus(target, "KNOCKED_DOWN", _Duration, 0, source)
+-- 		RemoveStatus(target, "LLWEAPONEX_SUCKER_PUNCH")
+-- 	end
+-- end
