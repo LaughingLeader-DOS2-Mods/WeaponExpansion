@@ -237,6 +237,15 @@ Mastery.Params.SkillData.Shout_InspireStart = {
 
 Mastery.Params.SkillData.Shout_EnemyInspire = Mastery.Params.SkillData.Shout_InspireStart
 
+Mastery.Params.SkillData.Target_SingleHandedAttack = {
+	Tags = {
+		LLWEAPONEX_Rapier_Mastery1 = {
+			ID = "SUCKER_PUNCH_COMBO",
+			Param = TranslatedString:Create("hd40f14d5g4946g4462gac7bga35fda61ed27","Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.<br><font color='#99FF22' size='22'>[ExtraData:LLWEAPONEX_MasteryBonus_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.</font>")
+		},
+	}
+}
+
 Mastery.Params.SkillData.Target_PetrifyingTouch = {
 	Tags = {
 		LLWEAPONEX_Unarmed_Mastery1 = {
