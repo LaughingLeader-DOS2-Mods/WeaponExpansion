@@ -316,6 +316,7 @@ Mastery.Params.SkillData.Shout_Adrenaline = {
 		},
 	}
 }
+Mastery.Params.SkillData.Shout_EnemyAdrenaline = Mastery.Params.SkillData.Shout_Adrenaline
 
 Mastery.Params.StatusData.ADRENALINE = {
 	Tags = {
@@ -326,4 +327,22 @@ Mastery.Params.StatusData.ADRENALINE = {
 	}
 }
 
-Mastery.Params.SkillData.Shout_EnemyAdrenaline = Mastery.Params.SkillData.Shout_Adrenaline
+Mastery.Params.SkillData.Jump_TacticalRetreat = {
+	Tags = {
+		LLWEAPONEX_HandCrossbow_Mastery1 = {
+			ID = "JUMP_MARKED",
+			Param = TranslatedString:Create("h6939fc3dgf4b0g45abg9362g5a9d5c04654c","Automatically apply [Key:MARKED_DisplayName] to [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets] target(s) max in a [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius]m radius when jumping away.")
+		},
+	}
+}
+Mastery.Params.SkillData.Jump_EnemyTacticalRetreat = Mastery.Params.SkillData.Jump_TacticalRetreat
+
+Mastery.Params.SkillData.Jump_CloakAndDagger = {
+	Tags = {
+		LLWEAPONEX_Pistol_Mastery1 = {
+			ID = "PISTOL_CLOAKEDJUMP",
+			Param = TranslatedString:Create("h62876a23g9b5cg4463g99dfg41e1192b02ab","Automatically reload your pistol when jumping.<br>When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius]m ([ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets] target(s) max).<br>Shooting targets [Key:MARKED_DisplayName] this way, with your pistol, guarantees one critical hit until you end your turn.")
+		},
+	}
+}
+Mastery.Params.SkillData.Jump_EnemyCloakAndDagger = Mastery.Params.SkillData.Jump_CloakAndDagger

@@ -81,13 +81,16 @@ local function FormatStatusTooltip(ui, tooltipX, tooltipY)
 
 	if CLIENT_UI.LAST_STATUS ~= nil then
 		if tooltipHeader == adrenaline then
-			local data = Mastery.Params.StatusData["ADRENALINE"]
-			if data ~= nil then
-				local index = setupTooltip.FindFreeIndex(ui)
-				if index ~= nil then
-					ui:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription, index)
-					local text = GetDescriptionText(Ext.GetCharacter(CLIENT_UI.LAST_STATUS_CHARACTER), data)
-					ui:SetValue("tooltip_array", text, index+1)
+			local character = Ext.GetCharacter(CLIENT_UI.LAST_STATUS_CHARACTER)
+			if character:HasTag("LLWEAPONEX_Pistol_Adrenaline_Active") then
+				local data = Mastery.Params.StatusData["ADRENALINE"]
+				if data ~= nil then
+					local index = setupTooltip.FindFreeIndex(ui)
+					if index ~= nil then
+						ui:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription, index)
+						local text = GetDescriptionText(character, data)
+						ui:SetValue("tooltip_array", text, index+1)
+					end
 				end
 			end
 		end

@@ -7,6 +7,12 @@ CharacterStatusApplied(_Target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", (CHARACTER
 THEN
 LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, (GUIDSTRING)_Target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE");
 
+PROC
+LLWEAPONEX_Statuses_TurnEnded_OnStatusRemoved((CHARACTERGUID)_Source, (GUIDSTRING)_Target, "MARKED")
+AND
+NOT DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_, _Target, "MARKED")
+THEN
+ClearTag(_Target, "LLWEAPONEX_Pistol_MarkedForCrit");
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_00_PostCC"

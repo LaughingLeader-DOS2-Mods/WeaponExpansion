@@ -457,24 +457,138 @@ local function SuckerPunchBonus(skill, char, state, funcParams)
 end
 LeaderLib.RegisterSkillListener("Target_SingleHandedAttack", SuckerPunchBonus)
 
+local function AdrenalineBonuses(skill, char, state, funcParams)
+	if state == SKILL_STATE.CAST then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["PISTOL_ADRENALINE"] == true then
+			SetTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
+			CharacterStatusText(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Shout_Adrenaline", AdrenalineBonuses)
+LeaderLib.RegisterSkillListener("Shout_EnemyAdrenaline", AdrenalineBonuses)
+
+local function TacticalRetreatBonuses(skill, char, state, funcParams)
+	if state == SKILL_STATE.CAST and CharacterIsInCombat(char) == 1 then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["JUMP_MARKED"] == true then
+			local data = Osi.DB_CombatCharacters(nil, CombatGetIDForCharacter(char))
+			if data ~= nil then
+				local totalEnemies = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets", 2)
+				local maxDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius", 4.0)
+				local combatEnemies = LeaderLib.Common.ShuffleTable(data)
+				for i,v in pairs(combatEnemies) do
+					local enemy = v[1]
+					if (enemy ~= char and CharacterIsEnemy(char, enemy) == 1 and 
+						not LeaderLib.IsSneakingOrInvisible(char) and GetDistanceTo(char,enemy) <= maxDistance) then
+							totalEnemies = totalEnemies - 1
+							ApplyStatus(enemy, "MARKED", 6.0, 0, char)
+					end
+					if totalEnemies <= 0 then
+						break
+					end
+				end
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Jump_TacticalRetreat", TacticalRetreatBonuses)
+LeaderLib.RegisterSkillListener("Jump_EnemyTacticalRetreat", TacticalRetreatBonuses)
+
+local function CloakAndDaggerBonuses(skill, char, state, funcParams)
+	if state == SKILL_STATE.CAST then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["PISTOL_CLOAKEDJUMP"] == true then
+			--NRD_SkillSetCooldown(char, "Target_LLWEAPONEX_Pistol_Shoot", 0.0)
+			Osi.CharacterUsedSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "shout", "")
+			if CharacterIsInCombat(char) == 1 then
+				Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Jump_CloakAndDagger", CloakAndDaggerBonuses)
+LeaderLib.RegisterSkillListener("Jump_EnemyCloakAndDagger", CloakAndDaggerBonuses)
+
+local function CloakAndDagger_Pistol_MarkEnemy(funcParams)
+	local char = funcParams[1]
+	if char ~= nil and CharacterIsInCombat(char) == 1 then
+		local data = Osi.DB_CombatCharacters(nil, CombatGetIDForCharacter(char))
+		if data ~= nil then
+			local totalEnemies = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets", 1)
+			local maxDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius", 6.0)
+			local combatEnemies = LeaderLib.Common.ShuffleTable(data)
+			local lastDist = 999
+			local targets = {}
+			for i,v in pairs(combatEnemies) do
+				local enemy = v[1]
+				if enemy ~= char and
+					CharacterIsEnemy(char, enemy) == 1 and 
+					CharacterIsDead(enemy) == 0 and 
+					not LeaderLib.IsSneakingOrInvisible(char) then
+						local dist = GetDistanceTo(char,enemy)
+						if dist <= maxDistance then
+							if totalEnemies == 1 then
+								if dist < lastDist then
+									targets[1] = enemy
+								end
+							else
+								table.insert(targets, {Dist = dist, UUID = enemy})
+							end
+							lastDist = dist
+						end
+				end
+			end
+			if #targets > 1 then
+				table.sort(targets, function(a,b)
+					return a.Dist < b.Dist
+				end)
+				for i,v in pairs(targets) do
+					local target = v.UUID
+					ApplyStatus(target, "MARKED", 6.0, 0, char)
+					SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
+					Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED")
+					totalEnemies = totalEnemies - 1
+					if totalEnemies <= 0 then
+						break
+					end
+				end
+			else
+				local target = targets[1].UUID
+				ApplyStatus(target, "MARKED", 6.0, 0, char)
+				SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
+				Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED")
+			end
+		end
+	else
+		LeaderLib.PrintDebug("CloakAndDagger_Pistol_MarkEnemy params: "..LeaderLib.Common.Dump(funcParams))
+	end
+end
+
+OnTimerFinished["LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy"] = CloakAndDagger_Pistol_MarkEnemy
+
 local function PistolShootBonuses(skill, char, state, funcParams)
+	CharacterStatusText(char, LeaderLib.Common.Dump(funcParams))
 	if state == SKILL_STATE.HIT then
 		local target = funcParams[1]
 		local handle = funcParams[2]
 		local damageAmount = funcParams[3]
-		if target ~= nil and damageAmount ~= nil and damageAmount > 0 then
-			local bonuses = GetMasteryBonuses(char, skill)
-			if bonuses["PISTOL_ADRENALINE"] == true and IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
+		if target ~= nil and damageAmount > 0 then
+			if IsTagged(char, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
+				LeaderLib.Game.IncreaseDamage(target, char, handle, 2.0, 0)
+				ClearTag(char, "LLWEAPONEX_Pistol_MarkedForCrit")
+			end
+			if IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
 				ClearTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
 				local damageBoost = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0)
 				if damageBoost > 0 then
-					LeaderLib.Game.IncreaseDamage(target, char, handle, damageBoost/100, 0)
+					LeaderLib.Game.IncreaseDamage(target, char, handle, damageBoost*0.01, 0)
 					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
 				end
 			end
 		end
 	end
 end
---LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", PistolShootBonuses)
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", PistolShootBonuses)

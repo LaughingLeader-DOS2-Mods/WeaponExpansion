@@ -52,15 +52,16 @@ Greatbow	3	Placeholder	Placeholder	❌
 Greatbow	4	Placeholder	Placeholder	❌
 Hand Crossbow	1	Whirlwind	While spinning, shoot 1-3 enemies in a 6m radius.	√
 Hand Crossbow	1	Base Damage	Deal +5% more base damage.	√
-Hand Crossbow	2	Placeholder	Placeholder	❌
+Hand Crossbow	2	Tactical Retreat	When jumping away from enemies, automatically apply Marked to 2 targets max.	√
 Hand Crossbow	3	Placeholder	Placeholder	❌
 Hand Crossbow	4	Placeholder	Placeholder	❌
 Katana	1	Backlash	After teleporting, your next attack deals 50% more damage.	❌
 Katana	2	Placeholder	Placeholder	❌
 Katana	3	Placeholder	Placeholder	❌
 Katana	4	Placeholder	Placeholder	❌
-Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.	❌
-Pistol	2	Placeholder	Placeholder	❌
+Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.	√
+Pistol	1	Base Damage	Deal +5% more base damage.	√
+Pistol	2	Cloak & Dagger	Automatically reload your pistol. When landing, a random enemy within 4m will be Marked. Attacking the Marked target with your pistol guarantees a critical hit.	√
 Pistol	3	Placeholder	Placeholder	❌
 Pistol	4	Placeholder	Placeholder	❌
 Polearm	1	Crippling Blow	Deal 25% splash damage around the target hit in a 3m radius.	❌

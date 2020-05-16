@@ -51,6 +51,27 @@ ApplyStatus(_Target, _RealStatus, _Duration, 1, _Source);
 RemoveStatus(_Target, _TriggerStatus);
 //END_REGION
 
+//REGION LISTEN_FOR_REMOVAL
+PROC
+LLWEAPONEX_Statuses_ListenForRemoval((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+AND
+NOT DB_LLWEAPONEX_MasteryBonus_ListenForRemoval(_, _Target, _)
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Target, "LLWEAPONEX_ListenForStatusRemoval", "WeaponExpansion");
+
+PROC
+LLWEAPONEX_Statuses_ListenForRemoval((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+THEN
+DB_LLWEAPONEX_MasteryBonus_ListenForRemoval(_Source, _Target, _Status);
+
+PROC
+LLWEAPONEX_Statuses_OnStatusRemoved((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+AND
+NOT DB_LLWEAPONEX_MasteryBonus_ListenForRemoval(_, _Target, _)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObject(_Target, "LLWEAPONEX_ListenForStatusRemoval", "WeaponExpansion");
+//END_REGION
+
 //REGION LISTEN_FOR_TURN_ENDING
 PROC
 LLWEAPONEX_Statuses_ListenForTurnEnding((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
