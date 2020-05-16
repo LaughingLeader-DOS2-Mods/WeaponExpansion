@@ -95,10 +95,10 @@ local function FormatStatusTooltip(ui, tooltipX, tooltipY)
 			end
 		end
 		---@type EsvStatus
-		-- local status = Ext.GetStatus(CLIENT_UI.LAST_STATUS_CHARACTER, CLIENT_UI.LAST_STATUS)
-		-- if status ~= nil then
-		-- 	print(status.StatusId)
-		-- end
+		local status = Ext.GetStatus(CLIENT_UI.LAST_STATUS_CHARACTER, CLIENT_UI.LAST_STATUS)
+		if status ~= nil then
+			print(status.StatusId)
+		end
 	end
 
 	--setupTooltip.DumpTooltipArray(ui)

@@ -14,6 +14,62 @@ local function GetMasteryBonuses(char, skill)
 	return bonuses
 end
 
+---Get a table of enemies in combat, determined by distance to a source.
+---@param char string
+---@param maxDistance number
+---@param sortByClosest boolean
+---@param limit integer
+---@param ignoreTarget string
+---@return string[]
+local function GetClosestCombatEnemies(char, maxDistance, sortByClosest, limit, ignoreTarget)
+	if maxDistance == nil then
+		maxDistance = 30
+	end
+	local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
+	if data ~= nil then
+		local lastDist = 999
+		local targets = {}
+		for i,v in pairs(data) do
+			local enemy = v[1]
+			if (enemy ~= char and enemy ~= ignoreTarget and
+				CharacterIsEnemy(char, enemy) == 1 and 
+				CharacterIsDead(enemy) == 0 and 
+				not LeaderLib.IsSneakingOrInvisible(char)) then
+					local dist = GetDistanceTo(char,enemy)
+					if dist <= maxDistance then
+						if limit == 1 then
+							if dist < lastDist then
+								targets[1] = enemy
+							end
+						else
+							table.insert(targets, {Dist = dist, UUID = enemy})
+						end
+						lastDist = dist
+					end
+			end
+		end
+		if #targets > 1 then
+			if sortByClosest then
+				table.sort(targets, function(a,b)
+					return a.Dist < b.Dist
+				end)
+			end
+			if limit ~= nil and limit > 1 then
+				local spliced = {}
+				local count = #targets
+				if limit < count then
+					count = limit
+				end
+				for i=1,count,1 do
+					spliced[#spliced+1] = targets[i]
+				end
+				return spliced
+			end
+		end
+		return targets
+	end
+end
+
 local throwingKnifeBonuses = {
 	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison",
 	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
@@ -403,17 +459,32 @@ local function BlitzAttackBonus(skill, char, state, funcParams)
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["VULNERABLE"] == true then
-				if CharacterIsInCombat(char) == 1 then
-					ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
-				else
-					ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
-				end
+				Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, target)
+				-- if CharacterIsInCombat(char) == 1 then
+				-- 	ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
+				-- else
+				-- 	ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
+				-- end
 			end
 		end
 	end
 end
 LeaderLib.RegisterSkillListener("MultiStrike_BlinkStrike", BlitzAttackBonus)
 LeaderLib.RegisterSkillListener("MultiStrike_EnemyBlinkStrike", BlitzAttackBonus)
+
+local function BlinkStrike_ApplyVulnerable(funcParams)
+	local char = funcParams[1]
+	local target = funcParams[2]
+	if char ~= nil and target ~= nil and CharacterIsDead(target) == 0 then
+		if CharacterIsInCombat(char) == 1 then
+			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
+		else
+			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
+		end
+	end
+end
+
+OnTimerFinished["LLWEAPONEX_MasteryBonus_ApplyVulnerable"] = BlinkStrike_ApplyVulnerable
 
 local function SuckerPunchBonus(skill, char, state, funcParams)
 	if state == SKILL_STATE.CAST then
@@ -596,3 +667,51 @@ local function PistolShootBonuses(skill, char, state, funcParams)
 end
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", PistolShootBonuses)
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", PistolShootBonuses)
+
+local pinDownTarget = {}
+
+local function PinDownBonuses(skill, char, state, funcParams)
+	if state == SKILL_STATE.USED then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["BOW_DOUBLE_SHOT"] == true then
+			if pinDownTarget[char] == nil then
+				pinDownTarget[char] = funcParams
+			elseif #funcParams == 1 then
+				pinDownTarget[char] = funcParams
+			end
+		end
+	elseif state == SKILL_STATE.CAST then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["BOW_DOUBLE_SHOT"] == true then
+			local targetParams = pinDownTarget[char]
+			local x,y,z = 0,0,0
+			local ignore = char
+			local target = nil
+			if #targetParams == 3 then
+				x = targetParams[1]
+				y = targetParams[2]
+				z = targetParams[3]
+			elseif targetParams[1] ~= nil then
+				x,y,z = GetPosition(targetParams[1])
+				ignore = targetParams[1]
+				target = targetParams[1]
+			end
+			if CharacterIsInCombat(char) == 1 then
+				local maxDist = Ext.StatGetAttribute(skill, "TargetRadius")
+				local targets = GetClosestCombatEnemies(char, maxDist, true, 3, ignore)
+				if #targets > 0 then
+					target = Common.GetRandomTableEntry(targets)
+				end
+			end
+			print(target, x,y,z, targetParams, LeaderLib.Common.Dump(targetParams))
+			if target ~= nil then
+				LeaderLib.Game.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+			else
+				LeaderLib.Game.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+			end
+			pinDownTarget[char] = nil
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Projectile_PinDown", PinDownBonuses)
+LeaderLib.RegisterSkillListener("Projectile_EnemyPinDown", PinDownBonuses)

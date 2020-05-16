@@ -185,7 +185,7 @@ Mastery.Params.SkillData.Target_CripplingBlow = {
 	Tags = {
 		LLWEAPONEX_Bludgeon_Mastery2 = {
 			ID = "SUNDER",
-			Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, <font color='#00FFAA'>reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderDuration] turn(s).</font>"),
+			Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, reducing max <font color='#AE9F95'>[Handle:h161d5479g06d6g408egade2g37a203e3361f]</font>/<font color='#4197E2'>[Handle:h50eb8e33g82edg412eg9886gec19ca591254]</font> by <font color='#AE9F95'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font>/<font color='#4197E2'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font></font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).</font>"),
 			NamePrefix = "<font color='#F19824'>Sundering</font>"
 		},
 		LLWEAPONEX_Axe_Mastery1 = {
@@ -346,3 +346,13 @@ Mastery.Params.SkillData.Jump_CloakAndDagger = {
 	}
 }
 Mastery.Params.SkillData.Jump_EnemyCloakAndDagger = Mastery.Params.SkillData.Jump_CloakAndDagger
+
+Mastery.Params.SkillData.Projectile_PinDown = {
+	Tags = {
+		LLWEAPONEX_Bow_Mastery1 = {
+			ID = "BOW_DOUBLE_SHOT",
+			Param = TranslatedString:Create("h651d4f13ge5ddg4111g871cgf92fab041bd4","Shoot a second bonus arrow at a nearby enemy for half damage.")
+		},
+	}
+}
+Mastery.Params.SkillData.Projectile_EnemyPinDown = Mastery.Params.SkillData.Projectile_PinDown

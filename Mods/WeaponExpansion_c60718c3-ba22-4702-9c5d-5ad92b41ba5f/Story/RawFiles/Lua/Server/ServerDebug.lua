@@ -152,7 +152,8 @@ function DebugInit()
     --ApplyStatus(CharacterGetHostCharacter(), "SLEEPING", -1.0, 1, CharacterGetHostCharacter())
     local x,y,z = GetPosition(host)
     for mastery,masterData in pairs(Masteries) do
-        local rank = Ext.Random(1,4)
+        --local rank = Ext.Random(1,4)
+        local rank = 4
         local xp = 0
         if rank > 0 then
             if rank >= 4 then
@@ -243,6 +244,14 @@ if Ext.IsDeveloperMode() then
         Osi.RequestTrade(target, target)
     end
     Ext.RegisterConsoleCommand("trade", Debug_TradeTest)
+
+    local function Debug_AddItem(command, template, target)
+        if target == nil then 
+            target = CharacterGetHostCharacter() 
+        end
+        ItemTemplateAddTo(template, target, 1, 1)
+    end
+    Ext.RegisterConsoleCommand("item", Debug_AddItem)
 
     local function Debug_ResetLua(command, effect, bone, target)
         local host = CharacterGetHostCharacter()

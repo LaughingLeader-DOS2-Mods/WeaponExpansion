@@ -69,10 +69,24 @@ local function ReplacePlaceholders(str)
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
 		output = string.gsub(output, escapedReplace, value)
 	end
-	for v in string.gmatch(output, "%[Key.-%]") do
+	for v in string.gmatch(output, "%[Key:.-%]") do
 		local key = v:gsub("%[Key:", ""):gsub("%]", "")
 		local translatedText = Ext.GetTranslatedStringFromKey(key)
 		if translatedText == nil then translatedText = "" end
+		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
+		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
+		output = string.gsub(output, escapedReplace, translatedText)
+	end
+	for v in string.gmatch(output, "%[Handle:.-%]") do
+		local text = v:gsub("%[Handle:", ""):gsub("%]", "")
+		local props = LeaderLib.Common.StringSplit(":", text)
+		if props[2] == nil then 
+			props[2] = ""
+		end
+		local translatedText = Ext.GetTranslatedString(props[1], props[2])
+		if translatedText == nil then 
+			translatedText = "" 
+		end
 		-- The parameter brackets will be considered for pattern matching unless we escape them with a percentage sign.
 		local escapedReplace = v:gsub("%[", "%%["):gsub("%]", "%%]")
 		output = string.gsub(output, escapedReplace, translatedText)
