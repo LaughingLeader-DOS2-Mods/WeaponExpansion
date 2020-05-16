@@ -60,10 +60,10 @@ end
 local function OnHit(target,source,damage,handle)
 	if source ~= nil then
 		--LeaderLib.Debug_TraceOnHit(target,source,damage,handle)
-		if LeaderLib.Game.HitWithWeapon(target, handle) then
+		if GameHelpers.HitWithWeapon(target, handle) then
 			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
 				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
-				LeaderLib.Game.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage")
+				GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage")
 			end
 			local b,expGain = CanGrantMasteryExperience(target,source)
 			if b and expGain > 0 then

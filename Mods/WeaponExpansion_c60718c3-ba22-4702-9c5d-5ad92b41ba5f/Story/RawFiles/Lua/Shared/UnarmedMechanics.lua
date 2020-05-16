@@ -6,13 +6,13 @@ local unarmedAttributes = {
 
 function GetUnarmedMasteryBoost(unarmedMastery)
 	if unarmedMastery == 1 then
-		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost1", 30)
+		return GameHelpers.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost1", 30)
 	elseif unarmedMastery == 2 then
-		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost2", 40)
+		return GameHelpers.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost2", 40)
 	elseif unarmedMastery == 3 then
-		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost3", 60)
+		return GameHelpers.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost3", 60)
 	elseif unarmedMastery >= 4 then
-		return LeaderLib.Game.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost4", 70)
+		return GameHelpers.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost4", 70)
 	end
 	return 0
 end

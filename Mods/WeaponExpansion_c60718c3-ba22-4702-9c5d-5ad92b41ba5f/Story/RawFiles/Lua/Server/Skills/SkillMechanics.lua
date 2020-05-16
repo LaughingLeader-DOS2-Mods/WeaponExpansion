@@ -55,7 +55,7 @@ local function SkyShot(char, state, funcParams)
 		if weapon ~= nil and GetTemplate(weapon) == "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8" then
 			local target = funcParams[1]
 			if target ~= nil then
-				LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
+				GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
 			end
 		end
 	elseif state == SKILL_STATE.USED then
@@ -84,7 +84,7 @@ local function ProcGreatbowLightningStrike(funcParams)
 	local char = funcParams[1]
 	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
 		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition")
-		LeaderLib.Game.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", x,y,z)
+		GameHelpers.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", x,y,z)
 	end
 end
 

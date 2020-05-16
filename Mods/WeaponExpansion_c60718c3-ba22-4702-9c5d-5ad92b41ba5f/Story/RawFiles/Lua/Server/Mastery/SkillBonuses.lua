@@ -84,7 +84,7 @@ local function ThrowingKnifeBonus(skill, char, state, funcParams)
 			if state == SKILL_STATE.USED then
 				if hasMastery and not procSet then 
 					local roll = Ext.Random(1,100)
-					local chance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
+					local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
 					if chance == nil or chance < 0 then chance = 25 end
 					LeaderLib.PrintDebug("LLWEAPONEX_ThrowingKnife_ActivateBonus|",roll, "/", chance)
 					if roll <= chance then
@@ -111,7 +111,7 @@ local function ThrowingKnifeBonus(skill, char, state, funcParams)
 					if target ~= nil then
 						Mods.LeaderLib.CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
 						local explodeSkill = throwingKnifeBonuses[Ext.Random(1,2)]
-						LeaderLib.Game.ExplodeProjectile(char, target, explodeSkill)
+						GameHelpers.ExplodeProjectile(char, target, explodeSkill)
 					end
 					ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 				end
@@ -153,7 +153,7 @@ local function CripplingBlowBonus(skill, char, state, funcParams)
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["SUNDER"] == true then
-				local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns", 2) * 6.0
+				local duration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns", 2) * 6.0
 				if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
 					local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
 					NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
@@ -164,7 +164,7 @@ local function CripplingBlowBonus(skill, char, state, funcParams)
 			if bonuses["BONUSDAMAGE"] == true then
 				if LeaderLib.HasStatusType(target, {"INCAPACITATED", "KNOCKED_DOWN"}) then
 					local level = CharacterGetLevel(char)
-					LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+					GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 					
 					-- local targetPos = {[1] = x, [2] = y, [3] = z}
 					--local x,y,z = GetPosition(target)					-- local skill = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
@@ -242,8 +242,8 @@ local function WhirlwindBonus(skill, char, state, funcParams)
 		if bonuses["WHIRLWIND_BOLTS"] == true then
 			local uuid = GetUUID(char)
 			if whirlwindHandCrossbowTargets[uuid] == nil then
-				local minTargets = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets", 1)
-				local maxTargets = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets", 3)
+				local minTargets = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets", 1)
+				local maxTargets = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets", 3)
 				local totalTargets = Ext.Random(minTargets, maxTargets)
 				whirlwindHandCrossbowTargets[uuid] = { Remaining = totalTargets, All = {} }
 				CharacterStatusText(char, string.format("Total targets: %i", totalTargets))
@@ -252,7 +252,7 @@ local function WhirlwindBonus(skill, char, state, funcParams)
 	elseif state == SKILL_STATE.CAST then
 		local uuid = GetUUID(char)
 		if whirlwindHandCrossbowTargets[uuid] ~= nil then
-			LeaderLib.Game.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget", GetPosition(char))
+			GameHelpers.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget", GetPosition(char))
 			CharacterStatusText(char, "Shooting")
 		end
 	elseif state == SKILL_STATE.HIT then
@@ -264,7 +264,7 @@ local function WhirlwindBonus(skill, char, state, funcParams)
 				if bleedingTurns ~= nil and bleedingTurns > 0 then
 					local level = CharacterGetLevel(char)
 					for i=bleedingTurns,1,-1 do
-						LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
+						GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding")
 					end
 					if ObjectIsCharacter(target) then
 						local text = Text.RupteredWound.Value
@@ -279,7 +279,7 @@ local function WhirlwindBonus(skill, char, state, funcParams)
 				end
 			end
 			if bonuses["ELEMENTAL_DEBUFF"] == true then
-				local duration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns", 1) * 6.0
+				local duration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns", 1) * 6.0
 				local weaponuuid = CharacterGetEquippedWeapon(char)
 				--local damageType = Ext.StatGetAttribute(NRD_ItemGetStatsId(weapon), "Damage Type")
 				local weapon = Ext.GetItem(weaponuuid).Stats
@@ -309,7 +309,7 @@ local function FleshSacrificeBonus(skill, char, state, funcParams)
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["BLOOD_EMPOWER"] == true then
 			---@return string[]
-			local party = LeaderLib.Game.GetParty(char, true, true, false, false)
+			local party = GameHelpers.GetParty(char, true, true, false, false)
 			if #party > 0 then
 				for i,partyMember in pairs(party) do
 					local surfaceGround = GetSurfaceGroundAt(partyMember)
@@ -371,9 +371,9 @@ local function RushBonus(skill, char, state, funcParams)
 					end
 				end
 				if hasStatus then
-					local bonusPercent = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_WarChargeDamageBoost", 25.0)
+					local bonusPercent = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_WarChargeDamageBoost", 25.0)
 					if bonusPercent > 0 then
-						LeaderLib.Game.IncreaseDamage(target, char, handle, bonusPercent/100, 0)
+						GameHelpers.IncreaseDamage(target, char, handle, bonusPercent/100, 0)
 					end
 				end
 			end
@@ -381,9 +381,9 @@ local function RushBonus(skill, char, state, funcParams)
 				local forceDist = Ext.Random(2,4)
 				local forceProjectile = "Projectile_LeaderLib_Force"..tostring(math.floor(forceDist))
 				CharacterStatusText(char, "Force! " .. forceProjectile)
-				LeaderLib.Game.ShootProjectile(char, target, forceProjectile, true)
-				local dizzyChance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyChance", 40.0)
-				local dizzyDuration = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyTurns", 1.0) * 6.0
+				GameHelpers.ShootProjectile(char, target, forceProjectile, true)
+				local dizzyChance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyChance", 40.0)
+				local dizzyDuration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyTurns", 1.0) * 6.0
 				if Ext.Random(0,100) <= dizzyChance then
 					ApplyStatus(target, "LLWEAPONEX_DIZZY", dizzyDuration, 0, char)
 				end
@@ -415,8 +415,8 @@ local function PetrifyingTouchBonus(skill, char, state, funcParams)
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["PETRIFYING_SLAM"] == true then
-				LeaderLib.Game.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage")
-				local forceDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+				GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage")
+				local forceDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
 				if forceDistance > 0 then
 					local character = Ext.GetCharacter(char)
 					local x,y,z = GetPosition(target)
@@ -498,7 +498,7 @@ local function SuckerPunchBonus(skill, char, state, funcParams)
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["SUCKER_PUNCH_COMBO"] == true then
 				if HasActiveStatus(target, "KNOCKED_DOWN") == 1 then
-					local chance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+					local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
 					if Ext.Random(0,100) <= chance then
 						local handle = NRD_StatusGetHandle(target, "KNOCKED_DOWN")
 						if handle ~= nil then
@@ -546,8 +546,8 @@ local function TacticalRetreatBonuses(skill, char, state, funcParams)
 		if bonuses["JUMP_MARKED"] == true then
 			local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 			if data ~= nil then
-				local totalEnemies = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets", 2)
-				local maxDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius", 4.0)
+				local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets", 2)
+				local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius", 4.0)
 				local combatEnemies = LeaderLib.Common.ShuffleTable(data)
 				for i,v in pairs(combatEnemies) do
 					local enemy = v[1]
@@ -587,8 +587,8 @@ local function CloakAndDagger_Pistol_MarkEnemy(funcParams)
 	if char ~= nil and CharacterIsInCombat(char) == 1 then
 		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then
-			local totalEnemies = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets", 1)
-			local maxDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius", 6.0)
+			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets", 1)
+			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius", 6.0)
 			local combatEnemies = LeaderLib.Common.ShuffleTable(data)
 			local lastDist = 999
 			local targets = {}
@@ -648,7 +648,7 @@ local function PistolShootBonuses(skill, char, state, funcParams)
 		if target ~= nil and damageAmount > 0 then
 			if IsTagged(target, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
 				local critMult = Ext.Round(CharacterGetAbility(char,"RogueLore") * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
-				LeaderLib.Game.IncreaseDamage(target, char, handle, critMult, 0)
+				GameHelpers.IncreaseDamage(target, char, handle, critMult, 0)
 				NRD_StatusSetInt(target, handle, "CriticalHit", 1)
 				ClearTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
 				--CharacterStatusText(target, string.format("<font color='#FF337F'>%s</font>", Ext.GetTranslatedString("h11065363gf07eg4764ga834g9eeab569ceec", "Critical Hit!")))
@@ -656,9 +656,9 @@ local function PistolShootBonuses(skill, char, state, funcParams)
 			end
 			if IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
 				ClearTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
-				local damageBoost = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0)
+				local damageBoost = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0)
 				if damageBoost > 0 then
-					LeaderLib.Game.IncreaseDamage(target, char, handle, damageBoost * 0.01, 0)
+					GameHelpers.IncreaseDamage(target, char, handle, damageBoost * 0.01, 0)
 					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
 				end
 			end
@@ -706,9 +706,9 @@ local function PinDownBonuses(skill, char, state, funcParams)
 				end
 			end
 			if target ~= nil then
-				LeaderLib.Game.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+				GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 			else
-				LeaderLib.Game.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+				GameHelpers.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 			end
 			pinDownTarget[char] = nil
 		end

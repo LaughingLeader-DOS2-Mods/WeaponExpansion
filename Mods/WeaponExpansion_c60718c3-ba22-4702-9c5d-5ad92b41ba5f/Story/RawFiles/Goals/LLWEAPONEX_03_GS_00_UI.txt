@@ -44,7 +44,7 @@ DB_CurrentLevel(_Region)
 AND
 GlobalGetFlag("LeaderLib_IsEditorMode", _IsEditorMode)
 THEN
-NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode, "1");
+NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode, "1", "1");
 //END_REGION
 
 //REGION TRADE_WINDOW

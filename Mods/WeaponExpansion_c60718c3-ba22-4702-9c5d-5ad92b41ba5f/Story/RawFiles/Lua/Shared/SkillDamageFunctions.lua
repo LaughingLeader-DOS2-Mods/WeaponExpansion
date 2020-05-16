@@ -388,7 +388,7 @@ local function GetPistolDamage(character, isTooltip, noRandomization)
 	local masteryBoost = 0
 	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_Pistol")
 	if masteryLevel > 0 then
-		local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
+		local boost = GameHelpers.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
 		if boost > 0 then
 			masteryBoost = boost
 		end
@@ -408,7 +408,7 @@ local function GetHandCrossbowDamage(character, isTooltip, noRandomization)
 	local masteryBoost = 0
 	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_HandCrossbows")
 	if masteryLevel > 0 then
-		local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_HandCrossbowsMasteryBoost"..masteryLevel, 0)
+		local boost = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbowsMasteryBoost"..masteryLevel, 0)
 		if boost > 0 then
 			masteryBoost = boost
 		end
@@ -452,7 +452,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 		local masteryBoost = 0
 		local masteryLevel = Mastery.GetHighestMasteryRank(attacker.Character, "LLWEAPONEX_HandCrossbow")
 		if masteryLevel > 0 then
-			local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_HandCrossbowMasteryBoost"..masteryLevel, 0)
+			local boost = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbowMasteryBoost"..masteryLevel, 0)
 			if boost > 0 then
 				masteryBoost = boost
 			end
@@ -526,7 +526,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		local masteryBoost = 0
 		local masteryLevel = Mastery.GetHighestMasteryRank(attacker.Character, "LLWEAPONEX_Pistol")
 		if masteryLevel > 0 then
-			local boost = LeaderLib.Game.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
+			local boost = GameHelpers.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
 			if boost > 0 then
 				masteryBoost = boost
 			end
@@ -605,7 +605,7 @@ local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attack
 		for damageType,damage in pairs(damageMin) do
 			local min = damage[1]
 			if min ~= nil then
-				table.insert(minDamageTexts, LeaderLib.Game.GetDamageText(damageType, math.tointeger(min)))
+				table.insert(minDamageTexts, GameHelpers.GetDamageText(damageType, math.tointeger(min)))
 			end
 		end
 		
@@ -613,7 +613,7 @@ local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attack
 		for damageType,damage in pairs(damageMax) do
 			local max = damage[2]
 			if max ~= nil then
-				table.insert(maxDamageTexts, LeaderLib.Game.GetDamageText(damageType, math.tointeger(max)))
+				table.insert(maxDamageTexts, GameHelpers.GetDamageText(damageType, math.tointeger(max)))
 			end
 			totalDamageTypes = totalDamageTypes + 1
 		end

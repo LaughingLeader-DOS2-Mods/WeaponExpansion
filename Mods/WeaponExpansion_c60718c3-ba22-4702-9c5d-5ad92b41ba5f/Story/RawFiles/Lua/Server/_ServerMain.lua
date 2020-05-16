@@ -226,7 +226,7 @@ end
 
 Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Character, [out](INTEGER)_IsPlayer")
 
-function OnGameStarted(region, editorMode, sendClientIds)
+function OnGameStarted(region, editorMode, sendClientIds, postReset)
     Vars.GAME_STARTED = true
     if IsGameLevel(region) == 1 or editorMode == "1" then
         for i,entry in pairs(Osi.DB_IsPlayer:Get(nil)) do
@@ -239,6 +239,10 @@ function OnGameStarted(region, editorMode, sendClientIds)
     if Vars.SEND_USER_ID == true or sendClientIds ~= nil then
         Vars.SEND_USER_ID = false
         Osi.IterateUsers("LLWEAPONEX_SendClientID")
+    end
+
+    if postReset ~= nil then
+        Ext.BroadcastMessage("LLWEAPONEX_LuaWasReset", "", nil)
     end
 end
 

@@ -7,7 +7,7 @@ local function ReplacePlaceholders(str)
 	local output = str
 	for v in string.gmatch(output, "%[ExtraData.-%]") do
 		local key = v:gsub("%[ExtraData:", ""):gsub("%]", "")
-		local value = LeaderLib.Game.GetExtraData(key, "")
+		local value = GameHelpers.GetExtraData(key, "")
 		if value ~= "" and type(value) == "number" then
 			value = string.format("%i", value)
 		end

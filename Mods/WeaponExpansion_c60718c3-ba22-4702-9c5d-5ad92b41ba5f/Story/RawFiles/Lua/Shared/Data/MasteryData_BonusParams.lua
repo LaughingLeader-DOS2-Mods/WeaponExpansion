@@ -151,7 +151,7 @@ local function GetElementalWeakness(character, tagName, rankHeader, param)
 	if #resistanceReductions > 0 then
 		local i = 0
 		for stat,value in pairs(resistanceReductions) do
-			resistanceText = resistanceText.."<img src='Icon_BulletPoint'>"..LeaderLib.Game.GetResistanceText(stat, value)
+			resistanceText = resistanceText.."<img src='Icon_BulletPoint'>"..GameHelpers.GetResistanceText(stat, value)
 			i = i + 1
 			if i < resistanceCount then
 				resistanceText = resistanceText .. "<br>"

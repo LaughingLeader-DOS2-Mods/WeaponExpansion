@@ -131,7 +131,7 @@ local skillAbility = {
 local function GetSkillAbility(skill, character, isFromItem, param)
 	local ability = skillAbility[skill.Name]
 	if ability ~= nil then
-		local text = string.gsub(damageScaleLevelText.Value, "%[1%]", LeaderLib.Game.GetAbilityName(ability))
+		local text = string.gsub(damageScaleLevelText.Value, "%[1%]", GameHelpers.GetAbilityName(ability))
 		if text ~= nil then
 			return "<br><font color='#078FC8'>"..text.."</font>"
 		end
@@ -168,9 +168,9 @@ local function GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 
 			if min > 0 and max > 0 then
 				if max == min then
-					table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i", max)))
+					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
 				else
-					table.insert(damageTexts, LeaderLib.Game.GetDamageText(damageType, string.format("%i-%i", min, max)))
+					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
 				end
 			end
 			totalDamageTypes = totalDamageTypes + 1

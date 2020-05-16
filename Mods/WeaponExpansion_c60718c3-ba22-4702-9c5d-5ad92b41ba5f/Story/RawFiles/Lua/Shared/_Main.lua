@@ -1,4 +1,5 @@
 LeaderLib = Mods["LeaderLib"]
+GameHelpers = LeaderLib.GameHelpers
 --WeaponExpansion = Mods["WeaponExpansion"]
 
 Main = {}
@@ -47,11 +48,11 @@ local defaultExperienceAmounts = {
 
 local function LoadExperienceVariables()
 	local RankVariables = {}
-	local maxRank = LeaderLib.Game.GetExtraData("LLWEAPONEX_Mastery_MaxRank", 4)
+	local maxRank = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_MaxRank", 4)
 	local lastRankExpGain = 45
 	local lastRequiredNextLevelExperience = 1000
 	for i=0,maxRank+1,1 do
-		local rankGain = LeaderLib.Game.GetExtraData("LLWEAPONEX_Mastery_ExperienceGain"..tostring(i), nil)
+		local rankGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_ExperienceGain"..tostring(i), nil)
 		if rankGain == nil then
 			local defaultRankGain = defaultExperienceAmounts[i]
 			if defaultRankGain ~= nil then
@@ -60,7 +61,7 @@ local function LoadExperienceVariables()
 				rankGain = lastRankExpGain / 2
 			end
 		end
-		local requiredNextLevelExperience = LeaderLib.Game.GetExtraData("LLWEAPONEX_Mastery_RequiredExperience"..tostring(i), nil)
+		local requiredNextLevelExperience = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_RequiredExperience"..tostring(i), nil)
 		if requiredNextLevelExperience == nil then
 			local defaultRequiredNextLevelExperience = defaultExperienceAmounts[i]
 			if defaultRequiredNextLevelExperience ~= nil then

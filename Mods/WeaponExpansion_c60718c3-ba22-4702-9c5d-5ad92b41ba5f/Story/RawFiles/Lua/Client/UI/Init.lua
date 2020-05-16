@@ -3,6 +3,7 @@ local MessageData = LeaderLib.Classes["MessageData"]
 
 local masteryMenu = Ext.Require("Client/UI/MasteryMenu.lua")
 local tooltipOverrides = Ext.Require("Client/UI/TooltipOverrides.lua")
+local tooltipAppending = Ext.Require("Client/UI/TooltipAppending.lua")
 
 local uiOverrides = {
 	--["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/LLWEAPONEX_ToolTip.swf",
@@ -268,13 +269,16 @@ end
 
 local function LLWEAPONEX_Client_SessionLoaded()
 	masteryMenu.Init()
-	tooltipOverrides.Init()
+	--tooltipOverrides.Init()
+	tooltipAppending.Init()
 	if Ext.IsDeveloperMode() then
 		Client_UIDebugTest()
 	end
+	print("Session loaded?")
 end
 
 Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
+Ext.RegisterNetListener("LLWEAPONEX_LuaWasReset", LLWEAPONEX_Client_SessionLoaded)
 
 local function LLWEAPONEX_OnClientMessage(call,param)
 	if param == "HookUI" then
