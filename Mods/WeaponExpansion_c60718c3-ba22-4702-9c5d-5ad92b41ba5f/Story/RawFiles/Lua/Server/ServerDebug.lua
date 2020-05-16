@@ -1,3 +1,6 @@
+---@type MessageData
+local MessageData = LeaderLib.Classes["MessageData"]
+
 local debug_templates = {
     "WPN_LLWEAPONEX_Shield_DualShields_Dwarves_A_91fd35cb-93dd-4489-9cf5-2dcc9b0ac168",
     "EQ_UNIQUE_LLWEAPONEX_Blindfold_Monk_A_78b08f39-3d9d-47b5-b251-f1b8dcebe65b",
@@ -248,6 +251,27 @@ if Ext.IsDeveloperMode() then
         NRD_LuaReset(1,1,1)
     end
     Ext.RegisterConsoleCommand("reset", Debug_ResetLua)
+
+    local function Debug_ResetLua(command, effect, bone, target)
+        local host = CharacterGetHostCharacter()
+        if HasActiveStatus(host, "HASTED") == 0 then
+            ApplyStatus(host, "HASTED", 24.0, 1, host)
+        else
+            local handle = NRD_StatusGetHandle(host, "HASTED")
+            if handle ~= nil then
+                local duration = NRD_StatusGetReal(host, handle, "CurrentLifeTime")
+                duration = duration + 6.0
+                NRD_StatusSetReal(host, handle, "CurrentLifeTime", duration)
+                Ext.PostMessageToClient(host, "LLWEAPONEX_UpdateStatusMC", MessageData:CreateFromTable("StatusUpdate", {
+                    UUID = host,
+                    ID = CharacterGetReservedUserID(host),
+                    StatusName = "HASTED",
+                    StatusHandle = Ext.HandleToDouble(handle)
+                }):ToString())
+            end
+        end
+    end
+    Ext.RegisterConsoleCommand("statusDuration", Debug_ResetLua)
 end
 
 ---Cool effects:

@@ -282,4 +282,16 @@ local function LLWEAPONEX_OnClientMessage(call,param)
 	end
 end
 
---Ext.RegisterNetListener("LLWEAPONEX_OnClientMessage", LLWEAPONEX_OnClientMessage)
+local function LLWEAPONEX_UpdateStatusMC(call,datastr)
+	---@type MessageData
+	local data = MessageData:CreateFromString(datastr)
+	if data ~= nil then
+		print(LeaderLib.Common.Dump(data.Params))
+		local ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
+		if ui ~= nil then
+			
+		end
+	end
+end
+
+Ext.RegisterNetListener("LLWEAPONEX_UpdateStatusMC", LLWEAPONEX_UpdateStatusMC)
