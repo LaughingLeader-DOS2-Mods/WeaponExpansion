@@ -963,6 +963,7 @@
 	<content contentuid="h621e60f2g5e1ag45ecg8f59g4680c8c0e830">Exquisite Dual Shields</content>
 	<content contentuid="h62471622g595fg4e81ga1feg0993c105098b">[Next] *Look at the next set of buttons.*</content>
 	<content contentuid="h6284479bgde6fg412cgb278g965cac95e214">&lt;font color=&apos;#97FBFF&apos;&gt;Attuned to Ice&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#97FBFF&apos;&gt;Freezes surfaces.&lt;/font&gt;</content>
+	<content contentuid="h62876a23g9b5cg4463g99dfg41e1192b02ab">Automatically reload your pistol when jumping.&lt;br&gt;When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius]m ([ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets] target(s) max).&lt;br&gt;Shooting targets [Key:MARKED_DisplayName] this way, with your pistol, guarantees one critical hit until you end your turn.</content>
 	<content contentuid="h62c62b98g6763g4956g82fdg8c4c4ccb2bae">Worn Runeblade of Water</content>
 	<content contentuid="h62c8f7b0g0240g4a13ga429g4bd9d359061e">Barrage</content>
 	<content contentuid="h62cdf626g757cg4796gb7a5gfa4f20b25d1b">Blademaster&apos;s Strike 5</content>
@@ -1033,6 +1034,7 @@
 	<content contentuid="h68e1f012gb647g41c5gb756gc079c4f28713">Weak Rod</content>
 	<content contentuid="h6901c55cg01acg4fe1g98ceg8e631aef4f91">*A small rock sits on the beach. It appears to have little googly eyes stuck on top.*</content>
 	<content contentuid="h69054861ga9f7g48dfg8370gd3ec17d5600e">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#65c900&apos;&gt;Poison Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;40% chance to apply &lt;font color=&apos;#00aa00&apos;&gt;Infectious Disease&lt;/font&gt; on enemies hit for 1 turn.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#65c900&apos;&gt;Poison Damage&lt;/font&gt; to weapon attacks and skills.</content>
+	<content contentuid="h6939fc3dgf4b0g45abg9362g5a9d5c04654c">While in combat, automatically apply [Key:MARKED_DisplayName] to [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets] enemies in a [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius]m radius when jumping away.</content>
 	<content contentuid="h694a45beg6d05g4854g90cege556577ae61b">Gnak&apos;s Spell Scroll (Wits Scaling)</content>
 	<content contentuid="h697deb03gee38g499cgae6fg38fe655fa676">Sparkstorm</content>
 	<content contentuid="h697f3261gc083g4152g84cdgbe559a5e0388">Dagger</content>
@@ -1782,6 +1784,7 @@
 	<content contentuid="hb69d0ce2g0c1dg4bdfg9d1fg6e77f212b510">Avalanche Rune</content>
 	<content contentuid="hb6b41943g9b7cg46a1gbff2g296ee08ac1a9">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are coated in a deadly toxin, dealing poison damage.</content>
 	<content contentuid="hb6ca4a83ga533g4331ga92cgd041f43b7675">Bonus Damage to Immobile Targets</content>
+	<content contentuid="hb6eef25cg3995g4611gabdfgd65916b4bf94">Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_CloakAndDagger&apos; icon=&apos;Skill_Rogue_CloakAndDagger&apos;/&gt;Automatically reload your pistol when jumping.&lt;br&gt;When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius]m.&lt;br&gt;If this marks a target, your pistol will deal one guaranteed critical hit until your turn ends.</content>
 	<content contentuid="hb6f630efgd273g468bg9875g32bffb7fb120">Reload your &lt;font color=&apos;#C7A758&apos;&gt;Pistol&lt;/font&gt;, instantly refreshing the &lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt; skill.</content>
 	<content contentuid="hb701a487g48dbg435fga69dg831fb8da30ca">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb723ab59ga442g4711g99d7g191f9c802164">Gas Rune</content>
@@ -1844,7 +1847,6 @@
 	<content contentuid="hbd792efeg585fg4f00g881fg93f0aae26af3">An anvil attached to a handle. As simple as that.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="hbdb02714gc326g4ea1gb63agea089a7b4591">Shoot on Cooldown</content>
 	<content contentuid="hbdb2aa9ag0e32g4b2fga9ccg59085dd8de7e">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
-	<content contentuid="hbde0e295gd397g46fagbdffg6b1d2a769db5">Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.</content>
 	<content contentuid="hbe0eff68g91c2g4409gbd66g555e64e8a73c">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
 	<content contentuid="hbe20f642g37cbg48a5g9f4agfd50776193a1">&lt;font color=&apos;#D5D7E3&apos;&gt;Slay Hidden&lt;/font&gt;</content>
 	<content contentuid="hbe73c99dg8a94g45f6ga7b7g23923104849b">Throw Stone</content>
@@ -2410,7 +2412,7 @@
 	<content contentuid="hf8b4f069g9305g4d2dg9949g69d67c069777">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are specially designed to penetrate armor.</content>
 	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Set [1] for [4] turn(s) [2][3]</content>
 	<content contentuid="hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb">Builds Energy on Hit</content>
-	<content contentuid="hf90feb29g1849g425dgae29ga5377df30f4b">Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% extra base damage in total.</content>
+	<content contentuid="hf90feb29g1849g425dgae29ga5377df30f4b">Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;In combat, [Key:Jump_TacticalRetreat_DisplayName] applies [Key:MARKED_DisplayName] to nearby enemies when jumping away.</content>
 	<content contentuid="hf950d4e3g4ccag41b2ga540g5dd692a09eed">Balrin&apos;s Throwing Axe (Oil)</content>
 	<content contentuid="hf983dfa7gdf75g4f61g9fa2ga9f189e5d4e0">Power Pole</content>
 	<content contentuid="hf9b06846g0062g4b99ga3afgb43f2d3e5149">&lt;font color=&apos;#00aa00&apos;&gt;Poisoncloud Great Arrow&lt;/font&gt;</content>
