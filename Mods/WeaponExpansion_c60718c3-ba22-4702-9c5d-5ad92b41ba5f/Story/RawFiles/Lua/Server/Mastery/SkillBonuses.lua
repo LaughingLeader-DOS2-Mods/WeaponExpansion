@@ -676,7 +676,7 @@ local function PinDownBonuses(skill, char, state, funcParams)
 		if bonuses["BOW_DOUBLE_SHOT"] == true then
 			if pinDownTarget[char] == nil then
 				pinDownTarget[char] = funcParams
-			elseif #funcParams == 1 then
+			elseif #funcParams == 1 then -- Prefer object targets
 				pinDownTarget[char] = funcParams
 			end
 		end
@@ -701,9 +701,10 @@ local function PinDownBonuses(skill, char, state, funcParams)
 				local targets = GetClosestCombatEnemies(char, maxDist, true, 3, ignore)
 				if #targets > 0 then
 					target = Common.GetRandomTableEntry(targets)
+				else
+					target = targetParams[1]
 				end
 			end
-			print(target, x,y,z, targetParams, LeaderLib.Common.Dump(targetParams))
 			if target ~= nil then
 				LeaderLib.Game.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 			else

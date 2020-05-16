@@ -322,7 +322,8 @@ Mastery.Params.StatusData.ADRENALINE = {
 	Tags = {
 		LLWEAPONEX_Pistol_Mastery1 = {
 			ID = "PISTOL_ADRENALINE",
-			Param = TranslatedString:Create("hb6293431g0ad9g45bbg9334gb81365e8f2ca","<font color='#33FF00'>Your next pistol shot will deal [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]% more damage.</font>")
+			Param = TranslatedString:Create("hb6293431g0ad9g45bbg9334gb81365e8f2ca","<font color='#33FF00'>Your next pistol shot will deal [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]% more damage.</font>"),
+			Active = {Value = "LLWEAPONEX_Pistol_Adrenaline_Active", Type = "Tag"}
 		},
 	}
 }

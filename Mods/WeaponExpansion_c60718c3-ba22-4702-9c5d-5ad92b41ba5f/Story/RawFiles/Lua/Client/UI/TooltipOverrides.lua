@@ -69,8 +69,6 @@ local function GetDescriptionText(character, data)
 	return descriptionText
 end
 
-local adrenaline = Ext.GetTranslatedString("h4c891442g3b79g4dbeg906fgf8eeffcf60df", "Adrenaline")
-
 ---@param ui UIObject
 local function FormatStatusTooltip(ui, tooltipX, tooltipY)
 	local tooltipType = ui:GetValue("tooltip_array", "number", 0)
@@ -80,24 +78,44 @@ local function FormatStatusTooltip(ui, tooltipX, tooltipY)
 	print("CLIENT_UI.LAST_STATUS", CLIENT_UI.LAST_STATUS)
 
 	if CLIENT_UI.LAST_STATUS ~= nil then
-		if tooltipHeader == adrenaline then
-			local character = Ext.GetCharacter(CLIENT_UI.LAST_STATUS_CHARACTER)
-			if character:HasTag("LLWEAPONEX_Pistol_Adrenaline_Active") then
-				local data = Mastery.Params.StatusData["ADRENALINE"]
-				if data ~= nil then
-					local index = setupTooltip.FindFreeIndex(ui)
-					if index ~= nil then
-						ui:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription, index)
-						local text = GetDescriptionText(character, data)
-						ui:SetValue("tooltip_array", text, index+1)
-					end
-				end
-			end
-		end
 		---@type EsvStatus
 		local status = Ext.GetStatus(CLIENT_UI.LAST_STATUS_CHARACTER, CLIENT_UI.LAST_STATUS)
 		if status ~= nil then
-			print(status.StatusId)
+			local data = Mastery.Params.StatusData[status.StatusId]
+			if data ~= nil then
+				local character = Ext.GetCharacter(CLIENT_UI.LAST_STATUS_CHARACTER)
+				--local character = Ext.GetCharacter(status.TargetHandle)
+				if character ~= nil then
+					local bonusIsActive = true
+					if data.Active ~= nil then
+						if data.Active.Type == "Tag" then
+							bonusIsActive = character:HasTag(data.Active.Value)
+						end
+					end
+					if bonusIsActive then
+						local descriptionText = GetDescriptionText(character, data)
+						if descriptionText ~= "" then
+							local index = setupTooltip.FindTooltipTypeIndex(ui, LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription)
+							if index ~= nil then
+								local description = ui:GetValue("tooltip_array", "string", index+1)
+								if description == nil then 
+									description = "" 
+								else
+									description = description.."<br>"
+								end
+								description = description..descriptionText
+								ui:SetValue("tooltip_array", description, index+1)
+							else
+								local index = setupTooltip.FindFreeIndex(ui)
+								if index ~= nil then
+									ui:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription, index)
+									ui:SetValue("tooltip_array", descriptionText, index+1)
+								end
+							end
+						end
+					end
+				end
+			end
 		end
 	end
 
@@ -186,8 +204,12 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 					local index = setupTooltip.FindTooltipTypeIndex(ui, LeaderLib.Data.UI.TOOLTIP_TYPE.SkillDescription)
 					if index ~= nil then
 						local description = ui:GetValue("tooltip_array", "string", index+1)
-						if description == nil then description = "" end
-						description = description .."<br>"..descriptionText
+						if description == nil then 
+							description = "" 
+						else
+							description = description.."<br>"
+						end
+						description = description..descriptionText
 						ui:SetValue("tooltip_array", description, index+1)
 					end
 				end
