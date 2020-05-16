@@ -16,6 +16,91 @@ local function sortTagParams(a,b)
 	return a:upper() < b:upper()
 end
 
+---@param character EsvCharacter
+---@param data MasteryData
+local function GetDescriptionText(character, data)
+	local descriptionText = ""
+	local namePrefix = ""
+	if data.Tags ~= nil then
+		local tagKeys = {}
+		for tagName,tagData in pairs(data.Tags) do
+			table.insert(tagKeys, tagName)
+		end
+		local count = #tagKeys
+		table.sort(tagKeys, sortTagParams)
+		for i,tagName in ipairs(tagKeys) do
+			local tagData = data.Tags[tagName]
+			if Mastery.HasMasteryRequirement(character, tagName) then
+				if tagData.NamePrefix ~= nil then
+					if namePrefix ~= "" then
+						namePrefix = namePrefix .. " "
+					end
+					namePrefix = namePrefix .. tagData.NamePrefix
+				end
+				local paramText = ""
+				--local tagLocalizedName = Text.MasteryRankTagText[tagName]
+				local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
+				if tagLocalizedName == nil then 
+					tagLocalizedName = ""
+				else
+					tagLocalizedName = tagLocalizedName .. "<br>"
+				end
+				if tagData.Param ~= nil then
+					if tagLocalizedName ~= "" then
+						paramText = tagLocalizedName..tagData.Param.Value
+					else
+						paramText = tagData.Param.Value
+					end
+				end
+				paramText = Tooltip.ReplacePlaceholders(paramText)
+				if tagData.GetParam ~= nil then
+					local status,result = xpcall(tagData.GetParam, debug.traceback, character.Stats, tagName, tagLocalizedName, paramText)
+					if status and result ~= nil then
+						paramText = result
+					elseif not status then
+						Ext.PrintError("Error calling GetParam function for "..tagName..":\n", result)
+					end
+				end
+				if descriptionText ~= "" then descriptionText = descriptionText .. "<br>" end
+				descriptionText = descriptionText .. paramText
+			end
+		end
+	end
+	return descriptionText
+end
+
+local adrenaline = Ext.GetTranslatedString("h4c891442g3b79g4dbeg906fgf8eeffcf60df", "Adrenaline")
+
+---@param ui UIObject
+local function FormatStatusTooltip(ui, tooltipX, tooltipY)
+	local tooltipType = ui:GetValue("tooltip_array", "number", 0)
+	local tooltipHeader = ui:GetValue("tooltip_array", "string", 1)
+	print("[FormatStatusTooltip] ", LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType], tooltipHeader, tooltipX, tooltipY)
+	print("CLIENT_UI.ACTIVE_CHARACTER", CLIENT_UI.LAST_STATUS_CHARACTER)
+	print("CLIENT_UI.LAST_STATUS", CLIENT_UI.LAST_STATUS)
+
+	if CLIENT_UI.LAST_STATUS ~= nil then
+		if tooltipHeader == adrenaline then
+			local data = Mastery.Params.StatusData["ADRENALINE"]
+			if data ~= nil then
+				local index = setupTooltip.FindFreeIndex(ui)
+				if index ~= nil then
+					ui:SetValue("tooltip_array", LeaderLib.Data.UI.TOOLTIP_TYPE.StatusDescription, index)
+					local text = GetDescriptionText(Ext.GetCharacter(CLIENT_UI.LAST_STATUS_CHARACTER), data)
+					ui:SetValue("tooltip_array", text, index+1)
+				end
+			end
+		end
+		---@type EsvStatus
+		-- local status = Ext.GetStatus(CLIENT_UI.LAST_STATUS_CHARACTER, CLIENT_UI.LAST_STATUS)
+		-- if status ~= nil then
+		-- 	print(status.StatusId)
+		-- end
+	end
+
+	setupTooltip.DumpTooltipArray(ui)
+end
+
 ---@param ui UIObject
 local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	local tooltipType = ui:GetValue("tooltip_array", "number", 0)
@@ -33,9 +118,10 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 			weaponTooltips.TryOverrideItemTooltip(ui, item, character, setupTooltip)
 		end
 	end
-	--setupTooltip.DumpTooltipArray(ui)
+	setupTooltip.DumpTooltipArray(ui)
 
 	local isSkill = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == "SkillName"
+	--local isStatus = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == Data.UI.TOOLTIP_TYPE.StatusDescription
 	-- local school = ui:GetValue("tooltip_array", "string", 5)
 	-- if school ~= nil then
 	-- 	ui:SetValue("tooltip_array", "<font color='#FF00FF'>Witchery</font>", 5)
@@ -149,29 +235,6 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 	end
 end
 
----@param ui UIObject
-local function OnDebugTooltip(ui, ...)
-	-- local params = {...}
-	-- LeaderLib.PrintDebug("[OnDebugTooltip] Function running params("..LeaderLib.Common.Dump(params)..")")
-	-- local arrayValueSet = ui:GetValue("tooltip_array", "number", 0)
-	-- local totalNil = 0
-	-- if arrayValueSet ~= nil then
-	-- 	for i=0,999,1 do
-	-- 		local val = ui:GetValue("tooltip_array", "number", i)
-	-- 		if val == nil then val = ui:GetValue("tooltip_array", "string", i) end
-	-- 		if val == nil then val = ui:GetValue("tooltip_array", "boolean", i) end
-	-- 		if val ~= nil then
-	-- 			print(i, val)
-	-- 		else
-	-- 			totalNil = totalNil + 1
-	-- 			if totalNil > 20 then
-	-- 				break
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end
-end
-
 local function OnTooltip(ui, call, ...)
 	if call ~= "addFormattedTooltip" then
 		lastTooltipCall = call
@@ -194,6 +257,11 @@ local function OnTooltip(ui, call, ...)
 		if handle ~= nil and type(handle) == "number" then
 			CLIENT_UI.LAST_ITEM = Ext.DoubleToHandle(handle)
 		end
+	elseif call == "showStatusTooltip" then
+		CLIENT_UI.LAST_STATUS_CHARACTER = Ext.DoubleToHandle(params[1])
+		CLIENT_UI.LAST_STATUS = Ext.DoubleToHandle(params[2])
+	elseif call == "addStatusTooltip" then
+		FormatStatusTooltip(ui, ...)
 	end
 	-- local minimap = Ext.GetBuiltinUI("Public/Game/GUI/minimap.swf")
 	-- if minimap ~= nil then
@@ -242,6 +310,9 @@ Ext.RegisterNetListener("LLWEAPONEX_HookIntoTradeWindow", function(call, id)
 end)
 
 local function InitTooltipOverrides()
+	if Ext.RegisterUINameInvokeListener ~= nil then
+		Ext.RegisterUINameInvokeListener("addFormattedTooltip", OnAddFormattedTooltip)
+	end
 	local ui = Ext.GetBuiltinUI("Public/Game/GUI/tooltip.swf")
 	if ui ~= nil then
 		if Ext.IsDeveloperMode() then
@@ -260,6 +331,10 @@ local function InitTooltipOverrides()
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnTooltip)
 		Ext.RegisterUICall(ui, "showStatTooltip", OnTooltip)
+	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
+	if ui ~= nil then
+		Ext.RegisterUICall(ui, "showStatusTooltip", OnTooltip)
 	end
 	for i,file in pairs(itemTooltipFiles) do
 		ui = Ext.GetBuiltinUI(file)

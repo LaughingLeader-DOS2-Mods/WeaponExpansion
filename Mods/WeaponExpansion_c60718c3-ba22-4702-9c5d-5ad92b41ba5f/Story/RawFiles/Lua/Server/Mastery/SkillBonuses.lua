@@ -456,3 +456,25 @@ local function SuckerPunchBonus(skill, char, state, funcParams)
 	end
 end
 LeaderLib.RegisterSkillListener("Target_SingleHandedAttack", SuckerPunchBonus)
+
+local function PistolShootBonuses(skill, char, state, funcParams)
+	if state == SKILL_STATE.HIT then
+		local target = funcParams[1]
+		local handle = funcParams[2]
+		local damageAmount = funcParams[3]
+		if target ~= nil and damageAmount ~= nil and damageAmount > 0 then
+			local bonuses = GetMasteryBonuses(char, skill)
+			if bonuses["PISTOL_ADRENALINE"] == true and IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
+				ClearTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
+				local damageBoost = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0)
+				if damageBoost > 0 then
+					LeaderLib.Game.IncreaseDamage(target, char, handle, damageBoost/100, 0)
+					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
+				end
+			end
+		end
+	end
+end
+--LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", PistolShootBonuses)
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", PistolShootBonuses)

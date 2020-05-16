@@ -166,6 +166,7 @@ end
 
 Mastery.Params = {
 	SkillData = {},
+	StatusData = {},
 	UI = {}
 }
 
@@ -306,3 +307,23 @@ Mastery.Params.SkillData.Shout_RecoverArmour = {
 		},
 	}
 }
+
+Mastery.Params.SkillData.Shout_Adrenaline = {
+	Tags = {
+		LLWEAPONEX_Pistol_Mastery1 = {
+			ID = "PISTOL_ADRENALINE",
+			Param = TranslatedString:Create("h1bd0f691g9646g4b28g932fg3ebd8377ca0e","Gain hyper-focus, increasing the <font color='#33FF00'>damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%</font>.")
+		},
+	}
+}
+
+Mastery.Params.StatusData.ADRENALINE = {
+	Tags = {
+		LLWEAPONEX_Pistol_Mastery1 = {
+			ID = "PISTOL_ADRENALINE",
+			Param = TranslatedString:Create("hb6293431g0ad9g45bbg9334gb81365e8f2ca","<font color='#33FF00'>Your next pistol shot will deal [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]% more damage.</font>")
+		},
+	}
+}
+
+Mastery.Params.SkillData.Shout_EnemyAdrenaline = Mastery.Params.SkillData.Shout_Adrenaline
