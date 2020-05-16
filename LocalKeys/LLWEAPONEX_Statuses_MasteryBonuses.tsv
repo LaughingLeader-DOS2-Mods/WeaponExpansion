@@ -6,4 +6,4 @@ LLWEAPONEX_MASTERYBONUS_BLOCK_Description	Character will block the next direct a
 LLWEAPONEX_BLOOD_EMPOWERED_DisplayName	Empowered by Blood	h66bfffc1ga29cg4658g9b1cgad4e60f5b097
 LLWEAPONEX_BLOOD_EMPOWERED_Description	Character is empowered through an ally's Flesh Sacrifice.	h3fb6e3f1g6fdcg4cfdg9761g6b8048ee5943
 LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName	Vulnerable	hbe25a690g42bag444fga5b5g368750273a9b
-LLWEAPONEX_MASTERYBONUS_VULNERABLE_Description	Character is vulnerable to a follow-up attack, which will deal [1] bonus damage on hit.<br>Removed when the attacker's turn ends.	h932f8db4g9c0bg4ae9gb715g3bc71166f5e7
+LLWEAPONEX_MASTERYBONUS_VULNERABLE_Description	<font color='#FF001F'>Character is vulnerable to a follow-up attack, which will deal [1] on hit.</font><br><font color='#FF337F'>Removed when the attacker's turn ends.</font>	h932f8db4g9c0bg4ae9gb715g3bc71166f5e7
