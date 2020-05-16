@@ -101,7 +101,7 @@ local function FormatStatusTooltip(ui, tooltipX, tooltipY)
 		-- end
 	end
 
-	setupTooltip.DumpTooltipArray(ui)
+	--setupTooltip.DumpTooltipArray(ui)
 end
 
 ---@param ui UIObject
@@ -121,7 +121,7 @@ local function OnAddFormattedTooltip(ui, call, tooltipX, tooltipY, noCompare)
 			weaponTooltips.TryOverrideItemTooltip(ui, item, character, setupTooltip)
 		end
 	end
-	setupTooltip.DumpTooltipArray(ui)
+	--setupTooltip.DumpTooltipArray(ui)
 
 	local isSkill = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == "SkillName"
 	--local isStatus = LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipType] == Data.UI.TOOLTIP_TYPE.StatusDescription

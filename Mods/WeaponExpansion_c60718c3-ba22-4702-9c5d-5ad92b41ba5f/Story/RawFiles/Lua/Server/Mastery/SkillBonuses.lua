@@ -473,7 +473,7 @@ local function TacticalRetreatBonuses(skill, char, state, funcParams)
 	if state == SKILL_STATE.CAST and CharacterIsInCombat(char) == 1 then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["JUMP_MARKED"] == true then
-			local data = Osi.DB_CombatCharacters(nil, CombatGetIDForCharacter(char))
+			local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 			if data ~= nil then
 				local totalEnemies = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets", 2)
 				local maxDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius", 4.0)
@@ -514,7 +514,7 @@ LeaderLib.RegisterSkillListener("Jump_EnemyCloakAndDagger", CloakAndDaggerBonuse
 local function CloakAndDagger_Pistol_MarkEnemy(funcParams)
 	local char = funcParams[1]
 	if char ~= nil and CharacterIsInCombat(char) == 1 then
-		local data = Osi.DB_CombatCharacters(nil, CombatGetIDForCharacter(char))
+		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then
 			local totalEnemies = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets", 1)
 			local maxDistance = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius", 6.0)
@@ -555,7 +555,7 @@ local function CloakAndDagger_Pistol_MarkEnemy(funcParams)
 					end
 				end
 			else
-				local target = targets[1].UUID
+				local target = targets[1]
 				ApplyStatus(target, "MARKED", 6.0, 0, char)
 				SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
 				Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED")
@@ -575,15 +575,19 @@ local function PistolShootBonuses(skill, char, state, funcParams)
 		local handle = funcParams[2]
 		local damageAmount = funcParams[3]
 		if target ~= nil and damageAmount > 0 then
-			if IsTagged(char, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
-				LeaderLib.Game.IncreaseDamage(target, char, handle, 2.0, 0)
-				ClearTag(char, "LLWEAPONEX_Pistol_MarkedForCrit")
+			if IsTagged(target, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
+				local critMult = Ext.Round(CharacterGetAbility(char,"RogueLore") * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
+				LeaderLib.Game.IncreaseDamage(target, char, handle, critMult, 0)
+				NRD_StatusSetInt(target, handle, "CriticalHit", 1)
+				ClearTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
+				--CharacterStatusText(target, string.format("<font color='#FF337F'>%s</font>", Ext.GetTranslatedString("h11065363gf07eg4764ga834g9eeab569ceec", "Critical Hit!")))
+				CharacterStatusText(target, "LLWEAPONEX_StatusText_Pistol_MarkedCrit")
 			end
 			if IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
 				ClearTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
 				local damageBoost = LeaderLib.Game.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0)
 				if damageBoost > 0 then
-					LeaderLib.Game.IncreaseDamage(target, char, handle, damageBoost*0.01, 0)
+					LeaderLib.Game.IncreaseDamage(target, char, handle, damageBoost * 0.01, 0)
 					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
 				end
 			end

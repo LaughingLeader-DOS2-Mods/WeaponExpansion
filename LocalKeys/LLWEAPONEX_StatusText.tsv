@@ -24,3 +24,4 @@ LLWEAPONEX_StatusText_ThrowObjectFailed	<font color='#FF1155' size='22'>Too Heav
 LLWEAPONEX_StatusText_Encourage_Cleansed	<font color='#E4CE22' size='22'><p align='center'>Banner Inspiration!</font><br>Cleansed [1]</p>	h63d42801g007eg4ae6g8609g856b214fb5d1
 LLWEAPONEX_StatusText_StatusExtended	<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>	h8224bb41g2261g4a50ga1feg7dc0f7394eb7
 LLWEAPONEX_StatusText_Pistol_AdrenalineBoost	<font color='#5A9646' size='22'><p align='center'>Pistol Damage Boost</p></font>	h4ed991d3gb2a2g4fe5g8a5fgf5783ab94ab4
+LLWEAPONEX_StatusText_Pistol_MarkedCrit	<font color='#FF337F' size='22'><p align='center'>Marked Critical!</p></font>	h89bf2557gf0a4g4d6eg9ec5gf642eb896aa3

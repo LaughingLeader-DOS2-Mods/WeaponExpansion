@@ -513,6 +513,7 @@
 	<content contentuid="h3112e038g01abg4e7eg9efcg379e017e328f">Unranked</content>
 	<content contentuid="h31211dd3gf8eeg4d5bgb7ffg36e10368f488">&lt;font color=&apos;#00EE29&apos;&gt;Change Stance&lt;/font&gt;</content>
 	<content contentuid="h31246356gaf34g40e6g97bdg4809255e71f0">Test Status</content>
+	<content contentuid="h31268fcagadacg4670ga80bge8322f1d79b5">Vulnerable</content>
 	<content contentuid="h313c4c7eg0562g4952gbbf9gd1c810163574">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos; icon=&apos;Skill_Warrior_BatteringRam;Skill_Polymorph_BullRush&apos;/&gt;If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.&lt;icon id=&apos;Shout_InspireStart&apos; icon=&apos;Skill_Warrior_Inspire&apos;/&gt;Fear, Madness, and Sleep are cleansed from encouraged allies.</content>
 	<content contentuid="h314ea21fg9e36g4d19gba1fgb5b55eb69808">Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;At the end of the beam, the energy explodes in a [2] radius, dealing [3] and applying any active rune effects.&lt;/font&gt;&lt;br&gt;Depletes the energy in the &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt;.</content>
 	<content contentuid="h31557319gc435g4ec5ga57ag3c80024b6b71">Chaotic Power</content>
@@ -769,7 +770,7 @@
 	<content contentuid="h4e990fe9g1ffcg46ecga18fg891f812ef7c0">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#D040D0&apos;&gt;All Resistances&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h4eb738edgf8a1g41a9gb1d6g405a8e63cf6a">&lt;font color=&apos;#C7A758&apos;&gt;Oni Gauntlet (Empowered)&lt;/font&gt; Power</content>
 	<content contentuid="h4ec36219g10d1g4dc7g97f8g000b65b93521">Character&apos;s &lt;font color=&apos;#C7A758&apos;&gt;Demolitionist&apos;s Backpack&lt;/font&gt; is recharging.</content>
-	<content contentuid="h4ed991d3gb2a2g4fe5g8a5fgf5783ab94ab4">&lt;font color=&apos;#5A9646&apos; size=&apos;22&apos;&gt;Hyper-Focus Pistol Damage Boost!&lt;/p&gt;</content>
+	<content contentuid="h4ed991d3gb2a2g4fe5g8a5fgf5783ab94ab4">&lt;font color=&apos;#5A9646&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;Pistol Damage Boost&lt;/p&gt;&lt;/font&gt;</content>
 	<content contentuid="h4ef1e65bg14f6g4d4ag95ebg604f692cddb3">Fateslayer</content>
 	<content contentuid="h4f0e6adcg34d8g4c8fgbfecg6fe6a80c7e9d">Character has been impaled by a thrown weapon!</content>
 	<content contentuid="h4f1b9001g7b29g4ac7g928dg0149cdeff75e">&lt;font color=&apos;#FFA900&apos; size=&apos;22&apos;&gt;Bolts Auto-Inserted into Hand Crossbow&lt;/font&gt;</content>
@@ -1352,6 +1353,7 @@
 	<content contentuid="h899607bagd698g474bg9ae1g92742a70cf36">Applies additional effects on hit</content>
 	<content contentuid="h89add4ffg9823g402bgb037g95165fa47fa8">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; + &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Enemies hit have a 60% chance to be bombarded with &lt;font color=&apos;#FF4000&apos;&gt;Lava&lt;/font&gt;, dealing &lt;font color=&apos;#fe6e27&apos;&gt;Fire Damage&lt;/font&gt;, forking up to [1] times, and creating fire surfaces.&lt;br&gt;Adds &lt;font color=&apos;#fe6e27&apos;&gt;Fire Damage&lt;/font&gt; and &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="h89bc52e1g8706g44a5g8dadgd3537d00bb89">Scholar&apos;s Lecture</content>
+	<content contentuid="h89bf2557gf0a4g4d6eg9ec5gf642eb896aa3">&lt;font color=&apos;#FF337F&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;Marked Critical!&lt;/p&gt;&lt;/font&gt;</content>
 	<content contentuid="h89dbdaf9g61bdg4246g82fag8e432a286751">Charges Depleted</content>
 	<content contentuid="h89e15aafg8ef3g47c5g868ag5195ade0519b">Speedy Solution</content>
 	<content contentuid="h89fe68aag3e7dg4cebg9fe6ge68e63616cef">Detonate Remote Charge</content>
@@ -1449,6 +1451,7 @@
 	<content contentuid="h930ebdb4gc9e0g4213gbb96ge8fa9a1f8953">[LLWEAPONEX_VendingMachine_OrderOption4_33af56c3-1b27-4867-9f71-ec84fc3a2fb4]</content>
 	<content contentuid="h93260664gc68dg4eb4gae7cgfbfc949edbe9">&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade Mastery III&lt;/font&gt;</content>
 	<content contentuid="h932f8384g5a7ag4809g8ebagf347850094e9">Rod Of The Dwarf</content>
+	<content contentuid="h932f8db4g9c0bg4ae9gb715g3bc71166f5e7">Character is vulnerable to a follow-up attack, which will deal [1] bonus damage on hit.&lt;br&gt;Removed when the attacker&apos;s turn ends.</content>
 	<content contentuid="h9344c978g53abg4b0bgaf48ga9c02d14ae06">Throw the tar charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius, turns water into oil, and applies Tarred for 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff7031&apos;&gt;Tarred reduces Fire Resistance, Movement Speed, and lets Burning bypass Magic Armor.&lt;/font&gt;</content>
 	<content contentuid="h93549a24ga289g4d7ag9d9cg55e7b15b8d93">Plates of Rivellon</content>
 	<content contentuid="h9360af89gad64g4c12ga59ege54f22107aff">Instantly warp to any hidden enemy and strike a grievous blow for [1].&lt;br&gt;&lt;font color=&apos;#C1A9FF&apos;&gt;Gain Invisibility if the target was Invisible.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF8585&apos;&gt;Targets hit become marked, preventing Invisibility for 1 turn.&lt;/font&gt;</content>
@@ -1849,6 +1852,7 @@
 	<content contentuid="hbdb2aa9ag0e32g4b2fga9ccg59085dd8de7e">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
 	<content contentuid="hbe0eff68g91c2g4409gbd66g555e64e8a73c">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
 	<content contentuid="hbe20f642g37cbg48a5g9f4agfd50776193a1">&lt;font color=&apos;#D5D7E3&apos;&gt;Slay Hidden&lt;/font&gt;</content>
+	<content contentuid="hbe25a690g42bag444fga5b5g368750273a9b">Vulnerable</content>
 	<content contentuid="hbe73c99dg8a94g45f6ga7b7g23923104849b">Throw Stone</content>
 	<content contentuid="hbe7e4dd2g827ag43a3g8c13g184fd0a01f69">Bada Bing</content>
 	<content contentuid="hbe8ca1e2g4683g4a93g8e20g984992e30d22">Banner</content>
