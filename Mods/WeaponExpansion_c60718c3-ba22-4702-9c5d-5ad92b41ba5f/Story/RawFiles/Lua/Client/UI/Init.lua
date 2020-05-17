@@ -2,14 +2,13 @@
 local MessageData = LeaderLib.Classes["MessageData"]
 
 local masteryMenu = Ext.Require("Client/UI/MasteryMenu.lua")
-local tooltipOverrides = Ext.Require("Client/UI/TooltipOverrides.lua")
 local tooltipHandler = Ext.Require("Client/UI/TooltipHandler.lua")
 
 local uiOverrides = {
 	--["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/LLWEAPONEX_ToolTip.swf",
 	--["Public/Game/GUI/mouseIcon.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon.swf",
-	["Public/Game/GUI/tooltipHelper_kb.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltipHelper_kb.swf",
-	["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltip.swf",
+	--["Public/Game/GUI/tooltipHelper_kb.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltipHelper_kb.swf",
+	--["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltip.swf",
 }
 
 local function LLWEAPONEX_Client_ModuleSetup()
@@ -39,35 +38,6 @@ local events = {
 local function SetupUIListeners(ui)
 	for i,event in pairs(events) do
 		Ext.RegisterUICall(ui, event, OnMouseIconEvent)
-	end
-end
-
---[Osiris] [WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call(showStatTooltip) params({  [1] = 6.0, [2] = 63.999996185303, [3] = 522.0, [4] = 269.0, [5] = 31.0, [6] = right,}
-
-local function tryFindTooltip()
-	local tooltipUI = Ext.GetBuiltinUI("Public/Game/GUI/tooltipHelper_kb.swf")
-	if tooltipUI == nil then
-		Ext.PrintError("tooltipHelper_kb is nil?")
-		tooltipUI = Ext.GetBuiltinUI("Public/Game/GUI/tooltipHelper.swf") 
-	else
-		Ext.Print("Got tooltipHelper_kb.swf")
-	end
-	if tooltipUI == nil then 
-		Ext.PrintError("tooltipHelper is nil?")
-		tooltipUI = Ext.GetBuiltinUI("Public/Game/GUI/tooltip.swf") 
-	else
-		Ext.Print("Got tooltipHelper.swf")
-	end
-	if tooltipUI == nil then 
-		Ext.PrintError("tooltip is nil?")
-		tooltipUI = Ext.GetBuiltinUI("Public/Game/GUI/tooltipHelper.iggy") 
-	else
-		Ext.Print("Got tooltip.swf")
-	end
-	if tooltipUI == nil then 
-		Ext.PrintError("tooltipHelper.iggy is nil?")
-	else
-		Ext.Print("Got tooltipHelper.iggy")
 	end
 end
 
@@ -199,7 +169,7 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 				local label = ui:GetValue("secStat_array", "string", i+2)
 				local value = ui:GetValue("secStat_array", "string", i+3)
 				local tooltipId = ui:GetValue("secStat_array", "number", i+4)
-				print(statType, label, value, tooltipId)
+				--print(statType, label, value, tooltipId)
 				if tooltipId == damageStatID then
 					if CLIENT_UI.ACTIVE_CHARACTER ~= nil then
 						local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
@@ -268,6 +238,15 @@ local function Client_UIDebugTest()
 end
 
 local function LLWEAPONEX_Client_SessionLoaded()
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
+	if ui ~= nil then
+		--Ext.RegisterUICall(ui, "setPlayerInfo", OnSheetEvent)
+		--Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
+		--Ext.RegisterUICall(ui, "showStatTooltip", OnSheetEvent)
+		--Ext.RegisterUIInvokeListener(ui, "addSecondaryStat", OnCharacterSheetUpdating)
+		Ext.RegisterUIInvokeListener(ui, "updateArraySystem", OnCharacterSheetUpdating)
+		Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
+	end
 	masteryMenu.Init()
 	--tooltipOverrides.Init()
 	tooltipHandler.Init()
