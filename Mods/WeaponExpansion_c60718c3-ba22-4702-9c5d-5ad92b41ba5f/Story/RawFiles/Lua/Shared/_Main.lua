@@ -1,5 +1,6 @@
 LeaderLib = Mods["LeaderLib"]
 GameHelpers = LeaderLib.GameHelpers
+Common = LeaderLib.Common
 --WeaponExpansion = Mods["WeaponExpansion"]
 
 Main = {}
