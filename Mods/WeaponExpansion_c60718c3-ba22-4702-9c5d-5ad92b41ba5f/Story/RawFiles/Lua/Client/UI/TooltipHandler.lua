@@ -294,20 +294,36 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 			elseif highestAttribute == "Constituton" then
 				attributeText = LeaderLib.LocalizedText.AttributeNames.Constituton.Value
 			end
+			local addedAttBoost = false
+			local attPercentage = math.floor(Game.Math.ScaledDamageFromPrimaryAttribute(character.Stats[highestAttribute]) * 100)
+			local valueSymbol = "+"
+			if attPercentage < 0 then
+				valueSymbol = ""
+			end
 			for i,v in pairs(elements) do
 				if string.find(v.Label, strengthText) then
-					local attPercentage = math.floor(Game.Math.ScaledDamageFromPrimaryAttribute(character.Stats[highestAttribute]) * 100)
-					v.Label = fromText:gsub("%[1%]", attributeText):gsub("%[2%]", "+"):gsub("%[3%]", attPercentage) 
+					addedAttBoost = true
+					v.Label = fromText:gsub("%[1%]", attributeText):gsub("%[2%]", valueSymbol):gsub("%[3%]", attPercentage)
 					break
 				end
 			end
+			if not addedAttBoost then
+				element = {
+					Type = "StatsPercentageBoost",
+					Label = fromText:gsub("%[1%]", attributeText):gsub("%[2%]", valueSymbol):gsub("%[3%]", attPercentage)
+				}
+				tooltip:AppendElementAfter(element, "StatsPercentageBoost")
+			end
 		end
 		if boost > 0 then
-			
+			local valueSymbol = "+"
+			if boost < 0 then
+				valueSymbol = ""
+			end
 			local rankText = Ext.GetTranslatedStringFromKey(string.format("LLWEAPONEX_Unarmed_Mastery%i", unarmedMasteryRank))
 			element = {
 				Type = "StatsPercentageBoost",
-				Label = fromText:gsub("%[1%]", rankText):gsub("%[2%]", "+"):gsub("%[3%]", boost)
+				Label = fromText:gsub("%[1%]", rankText):gsub("%[2%]", valueSymbol):gsub("%[3%]", boost)
 			}
 			tooltip:AppendElementAfter(element, "StatsPercentageBoost")
 		end

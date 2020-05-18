@@ -16,3 +16,4 @@ DB_LLWEAPONEX_Temp_HitHandle 3
 DB_LLWEAPONEX_Pistols_BulletTemplates 4
 DB_LLWEAPONEX_TagHelper_RangedWeaponTags 2
 DB_LLMIME_Mimicking_Blacklist_SkillPrefixes 2
+DB_LLWEAPONEX_WeaponMastery_NoBonusStatus 1
