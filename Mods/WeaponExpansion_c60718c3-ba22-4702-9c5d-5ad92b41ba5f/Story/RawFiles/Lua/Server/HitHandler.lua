@@ -1,7 +1,17 @@
-HitHandler = {
-	---@type table<string,function>
-	OnHitCallbacks = {}
-}
+if HitHandler == nil then
+	HitHandler = {
+		---@type table<string,function>
+		OnHitCallbacks = {},
+		TotalOnHitCallbacks = 0
+	}
+end
+
+local totalOnHitCallbacks = 0
+
+HitHandler.RegisterOnHit = function(tag, callback)
+	HitHandler.OnHitCallbacks[tag] = callback
+	totalOnHitCallbacks = totalOnHitCallbacks + 1
+end
 
 local function CanGrantMasteryExperience(target,player)
 	if IsTagged(target, "LLDUMMY_TrainingDummy") then
@@ -44,10 +54,7 @@ end
 Ext.NewCall(OnPrepareHit, "LLWEAPONEX_Ext_OnPrepareHit", "(GUIDSTRING)_Target, (GUIDSTRING)_Instigator, (INTEGER)_Damage, (INTEGER64)_Handle")
 
 local function WeaponIsTagged(char, weapon, tag)
-	if tag == "LLWEAPONEX_Unarmed" and CharacterGetEquippedWeapon(char) == nil then
-		return true
-	end
-	if (weapon ~= nil and IsTagged(weapon, weaponType) == 1) then
+	if (weapon ~= nil and IsTagged(weapon, tag) == 1) then
 		return true
 	end
 	return false
@@ -59,8 +66,8 @@ end
 --- @param handle integer
 local function OnHit(target,source,damage,handle)
 	if source ~= nil then
-		--LeaderLib.Debug_TraceOnHit(target,source,damage,handle)
-		if GameHelpers.HitWithWeapon(target, handle) then
+		if GameHelpers.HitWithWeapon(target, handle, false, true) then
+			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
 			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
 				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
 				GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage")
@@ -69,14 +76,25 @@ local function OnHit(target,source,damage,handle)
 			if b and expGain > 0 then
 				AddMasteryExperienceForAllActive(source, expGain)
 			end
-			if #HitHandler.OnHitCallbacks > 0 then
-				local mainhand = CharacterGetEquippedItem(source, "Weapon")
-				local offhand = CharacterGetEquippedItem(source, "Shield")
-				for tag,callback in pairs(HitHandler.OnHitCallbacks) do
-					if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
-						local status,err = xpcall(callback, debug.traceback, target, source, damage, handle)
+			if totalOnHitCallbacks > 0 then
+				-- Unarmed
+				if CharacterGetEquippedWeapon(source) == nil then
+					local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]
+					if unarmedCallback ~= nil then
+						local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle)
 						if not status then
 							Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
+						end
+					end
+				else
+					local mainhand = CharacterGetEquippedItem(source, "Weapon")
+					local offhand = CharacterGetEquippedItem(source, "Shield")
+					for tag,callback in pairs(HitHandler.OnHitCallbacks) do
+						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
+							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle)
+							if not status then
+								Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
+							end
 						end
 					end
 				end
