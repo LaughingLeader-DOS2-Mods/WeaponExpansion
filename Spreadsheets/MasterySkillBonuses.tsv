@@ -12,7 +12,7 @@ Banner	2	Guardian Angel	If an ally protected by Guardian Angel dies, automatical
 Banner	3	Thick of the Fight	Half of the damage boost is transferred to nearby allies for 1 turn.	❌
 Banner	4	Whirlwind	If near an active banner, enemies hit are drawn in closer to you.	❌
 Banner	4	Overpower	Damage is increased by 25% per ally within 6m.	❌
-Battle Book	1	Basic Attack	Each hit applies a stacking debuff that lower's an enemy's Wits by 1 for 1 turn. 	❌
+Battle Book	1	Basic Attack	Basic attacks and weapon skills have a 25% chance to give the target a Concussion, lowering Wits with a small chance to Fumble basic attacks.	√
 Battle Book	1	First Aid	Rested's duration is increased by 1 turn.	❌
 Battle Book	2	Bless	Your deep knowledge of sacred texts allow you to use Bless to deal damage to Undead.	❌
 Battle Book	2	Scroll	When using any scroll, gain 2 AP. Can only happen once per combat.	❌

@@ -383,9 +383,11 @@ local function RushBonus(skill, char, state, funcParams)
 				CharacterStatusText(char, "Force! " .. forceProjectile)
 				GameHelpers.ShootProjectile(char, target, forceProjectile, true)
 				local dizzyChance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyChance", 40.0)
-				local dizzyDuration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyTurns", 1.0) * 6.0
-				if Ext.Random(0,100) <= dizzyChance then
-					ApplyStatus(target, "LLWEAPONEX_DIZZY", dizzyDuration, 0, char)
+				if dizzyChance > 0 then
+					local dizzyDuration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyTurns", 1.0) * 6.0
+					if Ext.Random(0,100) <= dizzyChance then
+						ApplyStatus(target, "LLWEAPONEX_DIZZY", dizzyDuration, 0, char)
+					end
 				end
 			end
 		end
