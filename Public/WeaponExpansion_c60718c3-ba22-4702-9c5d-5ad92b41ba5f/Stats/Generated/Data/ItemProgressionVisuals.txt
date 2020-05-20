@@ -2340,16 +2340,10 @@ add levelgroup 0,0,"All"
 add rootgroup "b2d19374-d0ea-463a-a359-d3674842e21e",""
 add namegroup "LLWEAPONEX_RunicKnight_Helmet","",""
 
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper"
-
-add levelgroup 0,0,"All"
-add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_GenderSwapper","",""
-
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster"
 
 add levelgroup 0,0,"All"
-add rootgroup "29a1218c-e449-44de-8229-c0bd2477375d",""
+add rootgroup "9cdd8d76-7bb7-4ad2-b699-610a1f161917",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Ring_WeaponMaster","",""
 
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_Blindfold"
