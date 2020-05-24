@@ -1,4 +1,10 @@
 SKILL_STATE = LeaderLib.SKILL_STATE
+local Classes = LeaderLib.Classes
+
+---@type SkillEventData
+local SkillEventData = Classes.SkillEventData
+---@type HitData
+local HitData = Classes.HitData
 
 local function GetMasteryBonuses(char, skill)
 	local character = Ext.GetCharacter(char)
@@ -75,8 +81,12 @@ local throwingKnifeBonuses = {
 	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
 }
 
-local function ThrowingKnifeBonus(skill, char, state, funcParams)
-	--LeaderLib.PrintDebug("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function ThrowingKnifeBonus(skill, char, state, skillData)
+	--LeaderLib.PrintDebug("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") skillData("..Ext.JsonStringify(skillData)..")")
 	if state ~= SKILL_STATE.PREPARE then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["BONUS_DAGGER"] == true then
@@ -88,17 +98,16 @@ local function ThrowingKnifeBonus(skill, char, state, funcParams)
 					if chance == nil or chance < 0 then chance = 25 end
 					LeaderLib.PrintDebug("LLWEAPONEX_ThrowingKnife_ActivateBonus|",roll, "/", chance)
 					if roll <= chance then
-						-- Position
-						if #funcParams == 3 then
-							local x = funcParams[1]
-							local y = funcParams[2]
-							local z = funcParams[3]
-							SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
-						elseif funcParams[1] ~= nil then
-							local x,y,z = GetPosition(funcParams[1])
-							SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
+						if skillData.ID == SkillEventData.ID then
+							if skillData.TotalTargetObjects > 0 then
+								local x,y,z = GetPosition(skillData.TargetObjects[1])
+								SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
+							elseif skillData.TotalTargetPositions > 0 then
+								local x,y,z = table.unpack(skillData.TargetPositions[1])
+								SetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition", x,y,z)
+							end
+							ObjectSetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 						end
-						ObjectSetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 					end
 				end
 			elseif state == SKILL_STATE.CAST then
@@ -106,13 +115,10 @@ local function ThrowingKnifeBonus(skill, char, state, funcParams)
 					Mods.LeaderLib.StartTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", 250, char)
 				end
 			elseif state == SKILL_STATE.HIT then
-				if procSet then
-					local target = funcParams[1]
-					if target ~= nil then
-						Mods.LeaderLib.CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
-						local explodeSkill = throwingKnifeBonuses[Ext.Random(1,2)]
-						GameHelpers.ExplodeProjectile(char, target, explodeSkill)
-					end
+				if procSet and skillData.ID == HitData.ID then
+					Mods.LeaderLib.CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
+					local explodeSkill = throwingKnifeBonuses[Ext.Random(1,2)]
+					GameHelpers.ExplodeProjectile(char, target, explodeSkill)
 					ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 				end
 			end
@@ -146,32 +152,35 @@ end
 
 OnTimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
 
-local function CripplingBlowBonus(skill, char, state, funcParams)
-	LeaderLib.PrintDebug("[MasteryBonuses:CripplingBlow] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData HitData
+local function CripplingBlowBonus(skill, char, state, skillData)
+	LeaderLib.PrintDebug("[MasteryBonuses:CripplingBlow] char(",char,") state(",state,") skillData("..Ext.JsonStringify(skillData)..")")
 	if state == SKILL_STATE.HIT then
-		local target = funcParams[1]
-		if target ~= nil then
+		if skillData.Target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["SUNDER"] == true then
 				local duration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns", 2) * 6.0
-				if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
-					local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
-					NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
+				if HasActiveStatus(skillData.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
+					local handle = NRD_StatusGetHandle(skillData.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
+					NRD_StatusSetReal(skillData.Target, handle, "CurrentLifeTime", duration)
 				else
-					ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
+					ApplyStatus(skillData.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
 				end
 			end
 			if bonuses["BONUSDAMAGE"] == true then
-				if LeaderLib.HasStatusType(target, {"INCAPACITATED", "KNOCKED_DOWN"}) then
+				if LeaderLib.HasStatusType(skillData.Target, {"INCAPACITATED", "KNOCKED_DOWN"}) then
 					local level = CharacterGetLevel(char)
-					GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+					GameHelpers.ExplodeProjectile(char, skillData.Target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 					
-					-- local targetPos = {[1] = x, [2] = y, [3] = z}
-					--local x,y,z = GetPosition(target)					-- local skill = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
-					-- local damageList = Game.Math.GetSkillDamage(skill, character.Stats, false, false, character.Stats.Position, targetPos, character.Stats.Level, 0)
+					-- local skillData.TargetPos = {[1] = x, [2] = y, [3] = z}
+					--local x,y,z = GetPosition(skillData.Target)					-- local skill = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+					-- local damageList = Game.Math.GetSkillDamage(skill, character.Stats, false, false, character.Stats.Position, skillData.TargetPos, character.Stats.Level, 0)
 					-- damageList:ConvertDamageType("Piercing")
 					-- for i,damage in pairs(damageList:ToTable()) do
-					-- 	ApplyDamage(target, damage.Amount, "Piercing", char)
+					-- 	ApplyDamage(skillData.Target, damage.Amount, "Piercing", char)
 					-- end
 				else
 					LeaderLib.PrintDebug("[WeaponExpansion:MasteryBonuses:CripplingBlowBonus] Target is not disabled.")
@@ -235,8 +244,12 @@ function LaunchWhirlwindHandCrossbowBolt(uuid, target)
 	end
 end
 
-local function WhirlwindBonus(skill, char, state, funcParams)
-	LeaderLib.PrintDebug("[MasteryBonuses:Whirlwind] char(",char,") state(",state,") funcParams("..Ext.JsonStringify(funcParams)..")")
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function WhirlwindBonus(skill, char, state, skillData)
+	LeaderLib.PrintDebug("[MasteryBonuses:Whirlwind] char(",char,") state(",state,") skillData("..Ext.JsonStringify(skillData)..")")
 	if state == SKILL_STATE.USED then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["WHIRLWIND_BOLTS"] == true then
@@ -256,7 +269,7 @@ local function WhirlwindBonus(skill, char, state, funcParams)
 			CharacterStatusText(char, "Shooting")
 		end
 	elseif state == SKILL_STATE.HIT then
-		local target = funcParams[1]
+		local target = skillData.Target
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["RUPTURE"] == true then
@@ -304,7 +317,7 @@ end
 LeaderLib.RegisterSkillListener("Shout_Whirlwind", WhirlwindBonus)
 LeaderLib.RegisterSkillListener("Shout_EnemyWhirlwind", WhirlwindBonus)
 
-local function FleshSacrificeBonus(skill, char, state, funcParams)
+local function FleshSacrificeBonus(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["BLOOD_EMPOWER"] == true then
@@ -340,7 +353,11 @@ local warChargeStatuses = {
 	"LLWEAPONEX_WARCHARGE10",
 }
 
-local function RushBonus(skill, char, state, funcParams)
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData HitData
+local function RushBonus(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["WAR_CHARGE_RUSH"] == true then
@@ -356,10 +373,10 @@ local function RushBonus(skill, char, state, funcParams)
 				--ApplyStatus(char, "HASTED", 6.0, 0, char)
 			end
 		end
-	elseif state == SKILL_STATE.HIT then
-		local target = funcParams[1]
-		local handle = funcParams[2]
-		local damageAmount = funcParams[3]
+	elseif state == SKILL_STATE.HIT and skillData.ID == HitData.ID then
+		local target = skillData.Target
+		local handle = skillData.Handle
+		local damageAmount = skillData.Damage
 		if target ~= nil and damageAmount ~= nil and damageAmount > 0 then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["WAR_CHARGE_RUSH"] == true then
@@ -405,7 +422,11 @@ function OnRushSkillCast(char, skill, element)
 
 end
 
-local function PetrifyingTouchBonus(skill, char, state, funcParams)
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function PetrifyingTouchBonus(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["PETRIFYING_SLAM"] == true then
@@ -413,7 +434,7 @@ local function PetrifyingTouchBonus(skill, char, state, funcParams)
 			PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_L_HandFX")
 		end
 	elseif state == SKILL_STATE.HIT then
-		local target = funcParams[1]
+		local target = skillData.Target
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["PETRIFYING_SLAM"] == true then
@@ -444,7 +465,11 @@ end
 LeaderLib.RegisterSkillListener("Target_PetrifyingTouch", PetrifyingTouchBonus)
 LeaderLib.RegisterSkillListener("Target_EnemyPetrifyingTouch", PetrifyingTouchBonus)
 
-local function ShieldsUpBonus(skill, char, state, funcParams)
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function ShieldsUpBonus(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["GUARANTEED_BLOCK"] == true then
@@ -455,9 +480,13 @@ local function ShieldsUpBonus(skill, char, state, funcParams)
 end
 LeaderLib.RegisterSkillListener("Shout_RecoverArmour", ShieldsUpBonus)
 
-local function BlitzAttackBonus(skill, char, state, funcParams)
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function BlitzAttackBonus(skill, char, state, skillData)
 	if state == SKILL_STATE.HIT then
-		local target = funcParams[1]
+		local target = skillData.Target
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["VULNERABLE"] == true then
@@ -474,9 +503,9 @@ end
 LeaderLib.RegisterSkillListener("MultiStrike_BlinkStrike", BlitzAttackBonus)
 LeaderLib.RegisterSkillListener("MultiStrike_EnemyBlinkStrike", BlitzAttackBonus)
 
-local function BlinkStrike_ApplyVulnerable(funcParams)
-	local char = funcParams[1]
-	local target = funcParams[2]
+local function BlinkStrike_ApplyVulnerable(timerData)
+	local char = timerData[1]
+	local target = timerData[2]
 	if char ~= nil and target ~= nil and CharacterIsDead(target) == 0 then
 		if CharacterIsInCombat(char) == 1 then
 			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
@@ -488,14 +517,18 @@ end
 
 OnTimerFinished["LLWEAPONEX_MasteryBonus_ApplyVulnerable"] = BlinkStrike_ApplyVulnerable
 
-local function SuckerPunchBonus(skill, char, state, funcParams)
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function SuckerPunchBonus(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["SUCKER_PUNCH_COMBO"] == true then
 			ApplyStatus(char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1", 12.0, 0, char)
 		end
 	elseif state == SKILL_STATE.HIT then
-		local target = funcParams[1]
+		local target = skillData.Target
 		if target ~= nil then
 			local bonuses = GetMasteryBonuses(char, skill)
 			if bonuses["SUCKER_PUNCH_COMBO"] == true then
@@ -530,7 +563,7 @@ local function SuckerPunchBonus(skill, char, state, funcParams)
 end
 LeaderLib.RegisterSkillListener("Target_SingleHandedAttack", SuckerPunchBonus)
 
-local function AdrenalineBonuses(skill, char, state, funcParams)
+local function AdrenalineBonuses(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["PISTOL_ADRENALINE"] == true then
@@ -542,7 +575,7 @@ end
 LeaderLib.RegisterSkillListener("Shout_Adrenaline", AdrenalineBonuses)
 LeaderLib.RegisterSkillListener("Shout_EnemyAdrenaline", AdrenalineBonuses)
 
-local function TacticalRetreatBonuses(skill, char, state, funcParams)
+local function TacticalRetreatBonuses(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST and CharacterIsInCombat(char) == 1 then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["JUMP_MARKED"] == true then
@@ -569,7 +602,7 @@ end
 LeaderLib.RegisterSkillListener("Jump_TacticalRetreat", TacticalRetreatBonuses)
 LeaderLib.RegisterSkillListener("Jump_EnemyTacticalRetreat", TacticalRetreatBonuses)
 
-local function CloakAndDaggerBonuses(skill, char, state, funcParams)
+local function CloakAndDaggerBonuses(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["PISTOL_CLOAKEDJUMP"] == true then
@@ -584,8 +617,8 @@ end
 LeaderLib.RegisterSkillListener("Jump_CloakAndDagger", CloakAndDaggerBonuses)
 LeaderLib.RegisterSkillListener("Jump_EnemyCloakAndDagger", CloakAndDaggerBonuses)
 
-local function CloakAndDagger_Pistol_MarkEnemy(funcParams)
-	local char = funcParams[1]
+local function CloakAndDagger_Pistol_MarkEnemy(timerData)
+	local char = timerData[1]
 	if char ~= nil and CharacterIsInCombat(char) == 1 then
 		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then
@@ -635,19 +668,22 @@ local function CloakAndDagger_Pistol_MarkEnemy(funcParams)
 			end
 		end
 	else
-		LeaderLib.PrintDebug("CloakAndDagger_Pistol_MarkEnemy params: "..LeaderLib.Common.Dump(funcParams))
+		LeaderLib.PrintDebug("CloakAndDagger_Pistol_MarkEnemy params: "..LeaderLib.Common.Dump(skillData))
 	end
 end
 
 OnTimerFinished["LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy"] = CloakAndDagger_Pistol_MarkEnemy
 
-local function PistolShootBonuses(skill, char, state, funcParams)
-	CharacterStatusText(char, LeaderLib.Common.Dump(funcParams))
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function PistolShootBonuses(skill, char, state, skillData)
 	if state == SKILL_STATE.HIT then
-		local target = funcParams[1]
-		local handle = funcParams[2]
-		local damageAmount = funcParams[3]
+		local target = skillData.Target
+		local damageAmount = skillData.Damage
 		if target ~= nil and damageAmount > 0 then
+			local handle = skillData.Handle
 			if IsTagged(target, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
 				local critMult = Ext.Round(CharacterGetAbility(char,"RogueLore") * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
 				GameHelpers.IncreaseDamage(target, char, handle, critMult, 0)
@@ -670,49 +706,59 @@ end
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", PistolShootBonuses)
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", PistolShootBonuses)
 
-local pinDownTarget = {}
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function PinDownBonuses(skill, char, state, skillData)
+	if state == SKILL_STATE.CAST then
+		local bonuses = GetMasteryBonuses(char, skill)
+		if bonuses["BOW_DOUBLE_SHOT"] == true then
+			-- Support for a mod making Pin Down shoot multiple arrows through the use of iterating tables.
+			local shotBonus = false
+			local isInCombat = CharacterIsInCombat(char) == 1
+			if skillData.TotalTargetObjects ~= nil and skillData.TotalTargetObjects > 0 then
+				for i,v in ipairs(skillData.TotalTargetObjects) do
+					local target = nil
+					if isInCombat then
+						local maxDist = Ext.StatGetAttribute(skill, "TargetRadius")
+						local targets = GetClosestCombatEnemies(char, maxDist, true, 3, v)
+						if #targets > 0 then
+							target = Common.GetRandomTableEntry(targets)
+						else
+							target = v
+						end
+					end
 
-local function PinDownBonuses(skill, char, state, funcParams)
-	if state == SKILL_STATE.USED then
-		local bonuses = GetMasteryBonuses(char, skill)
-		if bonuses["BOW_DOUBLE_SHOT"] == true then
-			if pinDownTarget[char] == nil then
-				pinDownTarget[char] = funcParams
-			elseif #funcParams == 1 then -- Prefer object targets
-				pinDownTarget[char] = funcParams
-			end
-		end
-	elseif state == SKILL_STATE.CAST then
-		local bonuses = GetMasteryBonuses(char, skill)
-		if bonuses["BOW_DOUBLE_SHOT"] == true then
-			local targetParams = pinDownTarget[char]
-			local x,y,z = 0,0,0
-			local ignore = char
-			local target = nil
-			if #targetParams == 3 then
-				x = targetParams[1]
-				y = targetParams[2]
-				z = targetParams[3]
-			elseif targetParams[1] ~= nil then
-				x,y,z = GetPosition(targetParams[1])
-				ignore = targetParams[1]
-				target = targetParams[1]
-			end
-			if CharacterIsInCombat(char) == 1 then
-				local maxDist = Ext.StatGetAttribute(skill, "TargetRadius")
-				local targets = GetClosestCombatEnemies(char, maxDist, true, 3, ignore)
-				if #targets > 0 then
-					target = Common.GetRandomTableEntry(targets)
-				else
-					target = targetParams[1]
+					if target ~= nil then
+						GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+						shotBonus = true
+					else
+						GameHelpers.ShootProjectileAtPosition(char, GetPosition(v), "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+						shotBonus = true
+					end
 				end
 			end
-			if target ~= nil then
-				GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
-			else
-				GameHelpers.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+
+			if not shotBonus and skillData.TotalTargetPositions ~= nil and skillData.TotalTargetPositions > 0 then
+				for i,v in ipairs(skillData.TotalTargetPositions) do
+					local target = nil
+					local x,y,z = table.unpack(v)
+					if isInCombat then
+						local maxDist = Ext.StatGetAttribute(skill, "TargetRadius")
+						local targets = GetClosestCombatEnemies(char, maxDist, true, 3, v)
+						if #targets > 0 then
+							target = Common.GetRandomTableEntry(targets)
+						end
+					end
+
+					if target ~= nil then
+						GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+					else
+						GameHelpers.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+					end
+				end
 			end
-			pinDownTarget[char] = nil
 		end
 	end
 end
