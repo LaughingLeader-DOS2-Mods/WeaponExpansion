@@ -135,8 +135,9 @@ end
 
 local function WarfareMeleeWeaponOverride(skill)
 	Ext.StatSetAttribute(skill, "Requirement", "None")
-	AddRequirement(skill, "LLWEAPONEX_MeleeWeaponEquipped", false, "Tag")
-	print(LeaderLib.Common.Dump(Ext.StatGetAttribute(skill, "Requirements")))
+	--AddRequirement(skill, "LLWEAPONEX_MeleeWeaponEquipped", false, "Tag")
+	AddRequirement(skill, "LLWEAPONEX_NoMeleeWeaponEquipped", true, "Tag")
+	--print(LeaderLib.Common.Dump(Ext.StatGetAttribute(skill, "Requirements")))
 end
 
 local function StatOverrides_Init()

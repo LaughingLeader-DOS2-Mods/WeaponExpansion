@@ -39,6 +39,11 @@ local function MasteryLeveledUp(uuid,mastery,last,next)
 	end
 	TagMasteryRanks(uuid,mastery,next)
 
+	-- Set the special rank 1+ unarmed tags.
+	if mastery == "LLWEAPONEX_Unarmed" and next == 1 and CharacterGetEquippedWeapon(uuid) == nil then
+		SetIsUnarmed(uuid, true)
+	end
+
 	LeaderLib.PrintDebug("[WeaponExpansion] Mastery ["..mastery.."] leveled up ("..tostring(last).." => "..tostring(last)..") on ["..uuid.."]")
 end
 

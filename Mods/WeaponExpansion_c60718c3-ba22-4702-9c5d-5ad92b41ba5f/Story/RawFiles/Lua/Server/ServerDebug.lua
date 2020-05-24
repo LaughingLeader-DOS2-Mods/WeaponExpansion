@@ -253,7 +253,7 @@ if Ext.IsDeveloperMode() then
     end
     Ext.RegisterConsoleCommand("item", Debug_AddItem)
 
-    local function Debug_ResetLua(command, effect, bone, target)
+    local function Debug_ResetLua(command)
         local host = CharacterGetHostCharacter()
         TimerCancel("Timers_LLWEAPONEX_OnLuaReset")
         TimerLaunch("Timers_LLWEAPONEX_OnLuaReset", 250)
