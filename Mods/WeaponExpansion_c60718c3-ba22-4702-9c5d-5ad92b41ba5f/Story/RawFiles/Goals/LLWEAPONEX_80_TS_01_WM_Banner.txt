@@ -8,14 +8,12 @@ KBSECTION
 IF
 CharacterStatusApplied(_Target, "ENCOURAGED", (CHARACTERGUID)_Source)
 AND
-GetUUID(_Source, _UUID)
+IsTagged(_Source, "LLWEAPONEX_Banner_Mastery1", 1)
 AND
 LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Source, "LLWEAPONEX_Banner")
-AND
-IsTagged(_Source, "LLWEAPONEX_Banner_Mastery1", 1)
 //NRD_ModQuery2("WeaponExpansion", "HasMasteryRequirement_QRY", _UUID, "LLWEAPONEX_Banner_Mastery1")
 THEN
-NRD_ModCall("WeaponExpansion", "Banner_ApplyEncouragedBonus", (STRING)_Target, _UUID);
+NRD_ModCall("WeaponExpansion", "Banner_ApplyEncouragedBonus", (STRING)_Target, (STRING)_Source);
 //END_REGION
 
 EXITSECTION
