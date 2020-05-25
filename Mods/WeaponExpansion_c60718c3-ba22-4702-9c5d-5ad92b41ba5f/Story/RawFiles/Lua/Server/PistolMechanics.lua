@@ -30,7 +30,6 @@ end
 local function ShootPistolAtObject(source,target)
 	local level = CharacterGetLevel(source)
 	local skill = GetPistolProjectileSkill(source)
-	print(skill)
 	NRD_ProjectilePrepareLaunch()
 	NRD_ProjectileSetString("SkillId", skill)
 	NRD_ProjectileSetInt("CasterLevel", level)

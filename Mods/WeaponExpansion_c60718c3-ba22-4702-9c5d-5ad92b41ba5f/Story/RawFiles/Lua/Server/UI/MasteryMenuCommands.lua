@@ -5,7 +5,7 @@ function OpenMasteryMenu_Start(uuid)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
 	local masteries = {}
 	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, nil, nil, nil)
-	print(LeaderLib.Common.Dump(dbEntry))
+	--print(LeaderLib.Common.Dump(dbEntry))
 	if dbEntry ~= nil then
 		for i,entry in pairs(dbEntry) do
 			local mastery = entry[2]
