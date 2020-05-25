@@ -297,7 +297,6 @@ local function WhirlwindBonus(skill, char, state, skillData)
 				--local damageType = Ext.StatGetAttribute(NRD_ItemGetStatsId(weapon), "Damage Type")
 				local weapon = Ext.GetItem(weaponuuid).Stats
 				if weapon ~= nil then
-					print(weapon)
 					local stats = weapon.DynamicStats
 					if stats ~= nil then
 						for i, stat in pairs(stats) do
@@ -718,7 +717,7 @@ local function PinDownBonuses(skill, char, state, skillData)
 			local shotBonus = false
 			local isInCombat = CharacterIsInCombat(char) == 1
 			if skillData.TotalTargetObjects ~= nil and skillData.TotalTargetObjects > 0 then
-				for i,v in ipairs(skillData.TotalTargetObjects) do
+				for i,v in ipairs(skillData.TargetObjects) do
 					local target = nil
 					if isInCombat then
 						local maxDist = Ext.StatGetAttribute(skill, "TargetRadius")
@@ -734,14 +733,24 @@ local function PinDownBonuses(skill, char, state, skillData)
 						GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 						shotBonus = true
 					else
-						GameHelpers.ShootProjectileAtPosition(char, GetPosition(v), "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+						local x,y,z = GetPosition(v)
+						y = y + 1.0
+						GameHelpers.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 						shotBonus = true
 					end
 				end
 			end
 
 			if not shotBonus and skillData.TotalTargetPositions ~= nil and skillData.TotalTargetPositions > 0 then
-				for i,v in ipairs(skillData.TotalTargetPositions) do
+				local character = Ext.GetCharacter(char)
+				local rot = character.Stats.Rotation
+				local forwardVector = {
+					-rot[7] * 1.25,
+					0,
+					-rot[9] * 1.25,
+				}
+
+				for i,v in ipairs(skillData.TargetPositions) do
 					local target = nil
 					local x,y,z = table.unpack(v)
 					if isInCombat then
@@ -755,6 +764,8 @@ local function PinDownBonuses(skill, char, state, skillData)
 					if target ~= nil then
 						GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 					else
+						x = x + forwardVector[1]
+						z = z + forwardVector[3]
 						GameHelpers.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 					end
 				end
