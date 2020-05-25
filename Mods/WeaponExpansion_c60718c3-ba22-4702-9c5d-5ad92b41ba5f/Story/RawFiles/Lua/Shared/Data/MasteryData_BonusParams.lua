@@ -352,7 +352,7 @@ Mastery.Params.SkillData.Projectile_PinDown = {
 	Tags = {
 		LLWEAPONEX_Bow_Mastery1 = {
 			ID = "BOW_DOUBLE_SHOT",
-			Param = TranslatedString:Create("h651d4f13ge5ddg4111g871cgf92fab041bd4","Shoot a second bonus arrow at a nearby enemy for half damage.")
+			Param = TranslatedString:Create("h651d4f13ge5ddg4111g871cgf92fab041bd4","Shoot a <font color='#00FFAA'>second arrow</font> at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].<br><font color='#F19824'>If no enemies are nearby, the bonus arrow will fire at the original target.</font>")
 		},
 	}
 }

@@ -306,7 +306,7 @@
 	<content contentuid="h1e7673d0g6739g4be5gb84agf1d3fc43b003">Revenant</content>
 	<content contentuid="h1e98bcebg2e42g4699gba2bg6f647d428699">Unarmed</content>
 	<content contentuid="h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa">Scythe</content>
-	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, &lt;font color=&apos;#00FFAA&apos;&gt;reducing max Physical/Magic Armor by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%/[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt; for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).&lt;/font&gt;</content>
+	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, reducing max &lt;font color=&apos;#AE9F95&apos;&gt;[Handle:h161d5479g06d6g408egade2g37a203e3361f:Physical Armour]&lt;/font&gt;/&lt;font color=&apos;#4197E2&apos;&gt;[Handle:h50eb8e33g82edg412eg9886gec19ca591254:Magic Armour]&lt;/font&gt; by &lt;font color=&apos;#AE9F95&apos;&gt;[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%&lt;/font&gt;/&lt;font color=&apos;#4197E2&apos;&gt;[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt;&lt;/font&gt; for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h1ec134feg2358g4666g91c3gb0808e20fd0a">[ORDER] *Hit the button labeled &apos;Place Order&apos;.*</content>
 	<content contentuid="h1ec7c569g945fg47a9g9efbg52852b310b6c">Wanderer&apos;s Blade</content>
 	<content contentuid="h1ed46838g214eg4110g92e7g03381bcdfe7e">Banner of the Pack (Finesse Scaling)</content>
@@ -992,6 +992,7 @@
 	<content contentuid="h64c6053dge3b8g4f7dga3f2gfc611f216d3b">Gravelord&apos;s Blade</content>
 	<content contentuid="h64d30195g7144g4429gbf19g61dbdb16cf45">Weapon Expansion - Debug Weapons</content>
 	<content contentuid="h64e87ae9g8ceag4b96gaf83gd5ed4cd1c161">Wooden Destiny</content>
+	<content contentuid="h651d4f13ge5ddg4111g871cgf92fab041bd4">Shoot a &lt;font color=&apos;#00FFAA&apos;&gt;second arrow&lt;/font&gt; at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;If no enemies are nearby, the bonus arrow will fire at the original target.&lt;/font&gt;</content>
 	<content contentuid="h652d73fcg18b6g469cg8849g710028f8ec91">Strength Conversion</content>
 	<content contentuid="h6530180fg4563g4044gafefgc440ed2dd6a2">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release electrical energy on hit, dealing air damage.</content>
 	<content contentuid="h65373035g1641g4a8fga027g73e063bd5b31">[LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee]</content>
