@@ -41,6 +41,19 @@ local function SetupUIListeners(ui)
 	end
 end
 
+local function GetCharacterHandle(ui, call, ...)
+	local params = {...}
+	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:GetCharacterHandle] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	if params[1] ~= nil then
+		if Ext.DoubleToHandle ~= nil then
+			local handle = Ext.DoubleToHandle(params[1])
+			if handle ~= nil then
+				CLIENT_UI.ACTIVE_CHARACTER = handle
+			end
+		end
+	end
+end
+
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
@@ -193,23 +206,32 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	end
 end
 
+local function MouseTest()
+	---@type UIObject
+	local ui = Ext.GetBuiltinUI("Public/Game/GUI/mouseIcon.swf")
+	if ui ~= nil then
+		local mouseIconEvent = function(ui, call, ...)
+			local params = {...}
+			LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:mouseIconEvent] Function running params("..LeaderLib.Common.Dump(params)..")")
+		end
+		Ext.RegisterUIInvokeListener(ui, "setTexture", mouseIconEvent)
+		Ext.RegisterUIInvokeListener(ui, "setCrossVisible", mouseIconEvent)
+		Ext.RegisterUIInvokeListener(ui, "setVisible", mouseIconEvent)
+		Ext.RegisterUIInvokeListener(ui, "startsWith", mouseIconEvent)
+		Ext.RegisterUIInvokeListener(ui, "onEventDown", mouseIconEvent)
+		Ext.Print("[LLWEAPONEX:Client:UI.lua:MouseTest] Found (Public/Game/GUI/mouseIcon.swf).")
+	else
+		Ext.Print("[LLWEAPONEX:Client:UI.lua:MouseTest] Failed to get (Public/Game/GUI/mouseIcon.swf).")
+	end
+end
+
 local function Client_UIDebugTest()
+	---@type UIObject
+	local ui = nil
 	-- local ui = Ext.GetBuiltinUI("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf")
 	-- if ui == nil then
 	-- 	Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf).")
-	-- 	ui = Ext.GetBuiltinUI("Public/Game/GUI/mouseIcon.swf")
-	-- 	if ui ~= nil then
-	-- 		Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Found (mouseIcon.swf). Enabling event listener.")
-	-- 		SetupUIListeners(ui)
-	-- 	else
-	-- 		Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/Game/GUI/mouseIcon.swf).")
-	-- 	end
-	-- else
-	-- 	Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Found (mouseIcon_WithCallback.swf). Enabling event listener.")
-	-- 	SetupUIListeners(ui)
-	-- end
-	--showSkillTooltip
-	local ui = Ext.GetBuiltinUI("Public/Game/GUI/skills.swf")
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/skills.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
 	end
@@ -238,20 +260,36 @@ local function Client_UIDebugTest()
 end
 
 local function LLWEAPONEX_Client_SessionLoaded()
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
+	local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
 	if ui ~= nil then
-		--Ext.RegisterUICall(ui, "setPlayerInfo", OnSheetEvent)
-		--Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
-		--Ext.RegisterUICall(ui, "showStatTooltip", OnSheetEvent)
+		--Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
+		--Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
+		
 		--Ext.RegisterUIInvokeListener(ui, "addSecondaryStat", OnCharacterSheetUpdating)
 		Ext.RegisterUIInvokeListener(ui, "updateArraySystem", OnCharacterSheetUpdating)
-		Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
+		--Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
 	end
+	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
+	-- if ui ~= nil then
+	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
+	-- 	Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
+	-- end
+	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/skills.swf")
+	-- if ui ~= nil then
+	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
+	-- 	Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
+	-- end
+	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
+	-- if ui ~= nil then
+	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
+	-- 	Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
+	-- end
 	masteryMenu.Init()
 	--tooltipOverrides.Init()
 	tooltipHandler.Init()
 	if Ext.IsDeveloperMode() then
 		--Client_UIDebugTest()
+		MouseTest()
 	end
 end
 
@@ -268,7 +306,7 @@ local function LLWEAPONEX_UpdateStatusMC(call,datastr)
 	---@type MessageData
 	local data = MessageData:CreateFromString(datastr)
 	if data ~= nil then
-		print(LeaderLib.Common.Dump(data.Params))
+		--print(LeaderLib.Common.Dump(data.Params))
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
 		if ui ~= nil then
 			

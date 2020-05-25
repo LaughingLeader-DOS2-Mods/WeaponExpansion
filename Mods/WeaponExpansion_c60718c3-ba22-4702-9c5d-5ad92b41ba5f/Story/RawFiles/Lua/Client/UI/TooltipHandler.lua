@@ -59,7 +59,7 @@ end
 ---@param skill string
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
-	print(character, skill, tooltip)
+	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
 	local data = Mastery.Params.SkillData[skill]
 	if data ~= nil then
 		local descriptionText = GetDescriptionText(character, data)
@@ -67,7 +67,6 @@ local function OnSkillTooltip(character, skill, tooltip)
 			local existingDescription = tooltip:GetElement("SkillDescription")
 			if existingDescription ~= nil then
 				local description = existingDescription.Label
-				print(descriptionText, description)
 				if description == nil then 
 					description = "" 
 				else
@@ -103,7 +102,6 @@ local function OnStatusTooltip(character, status, tooltip)
 				local existingDescription = tooltip:GetElement("StatusDescription")
 				if existingDescription ~= nil then
 					local description = existingDescription.Label
-					print(descriptionText, description)
 					if description == nil then 
 						description = "" 
 					else
@@ -268,7 +266,8 @@ end
 ---@param character EsvCharacter
 ---@param tooltip TooltipData
 local function OnDamageStatTooltip(character, stat, tooltip)
-	print(character, tooltip, Common.Dump(tooltip))
+	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
+	--print(character, tooltip, Common.Dump(tooltip))
 	if IsUnarmed(character.Stats) then
 		local totalDamageText = Ext.GetTranslatedString("h1035c3e5gc73dg4cc4ga914ga03a8a31e820", "Total damage: [1]-[2]")
 		--local weaponDamageText = Ext.GetTranslatedString("hfa8c138bg7c52g4b7fgaccdgbe39e6a3324c", "<br>From Weapon: [1]-[2]")

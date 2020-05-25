@@ -203,7 +203,6 @@ local function parseDescription(ui, index, descriptionText)
 end
 
 local function buildMasteryDescription(ui, mastery)
-	print(mastery)
 	local data = Masteries[mastery]
 	local rank = MasteryMenu.MasteryData.Masteries[mastery].Rank
 	local index = 0
