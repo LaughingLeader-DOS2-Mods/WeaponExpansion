@@ -117,6 +117,7 @@ local gameTestTemplates = {
     "WPN_Tool_Scythe_2H_A_44525b09-a2b1-4b45-8d52-e893d04390dd",
     --"WPN_Dwarves_Staff_2H_A_545f2dc2-1da9-4387-af90-9e866f6288a8",
     "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ee686596-394f-44ae-867b-4596de1feedb",
+    "EQ_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_ce535023-af7f-46a3-bd70-85c8f820dc21",
 }
 
 function DebugInit()

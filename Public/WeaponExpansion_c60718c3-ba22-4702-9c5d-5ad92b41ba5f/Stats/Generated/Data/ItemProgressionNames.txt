@@ -905,9 +905,6 @@ new namegroup "WPN_LLWEAPONEX_Stone_Rod"
 add name "WPN_LLWEAPONEX_Stone_Rod_1_DisplayName",""
 add namecool "WPN_LLWEAPONEX_Stone_Rod_2_DisplayName",""
 
-new namegroup "WPN_LLWEAPONEX_Unarmed_Fist"
-add name "WPN_LLWEAPONEX_Unarmed_Fist_DisplayName",""
-
 new namegroup "WPN_LLWEAPONEX_Wooden_Rod"
 add name "WPN_LLWEAPONEX_Wooden_Rod_1_DisplayName",""
 add namecool "WPN_LLWEAPONEX_Wooden_Rod_2_DisplayName",""

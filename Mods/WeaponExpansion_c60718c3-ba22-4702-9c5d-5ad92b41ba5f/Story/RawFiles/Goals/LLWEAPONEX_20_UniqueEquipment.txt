@@ -662,6 +662,8 @@ SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
 //REGION DRAGON_BONE_CLAWS
 //WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5
 //EQ_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_ce535023-af7f-46a3-bd70-85c8f820dc21
+
+/*
 IF
 ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5", _Char)
 AND
@@ -675,6 +677,7 @@ AND
 GetTemplate(_Claws, "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5")
 THEN
 ShowNotification(_Char, "LLWEAPONEX_Notifications_UnequipDragonBoneClawsFailed");
+*/
 
 /*
 IF

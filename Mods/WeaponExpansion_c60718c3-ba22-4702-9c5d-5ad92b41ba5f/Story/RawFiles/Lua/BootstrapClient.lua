@@ -8,7 +8,7 @@ CLIENT_UI = {
 	LAST_STATUS = nil,
 }
 
-Ext.Require("Shared/_Main.lua")
+Ext.Require("Shared/Init.lua")
 Ext.Require("Client/SkillParams.lua")
 Ext.Require("Client/StatusParams.lua")
 Ext.Require("Client/SkillCustomText.lua")

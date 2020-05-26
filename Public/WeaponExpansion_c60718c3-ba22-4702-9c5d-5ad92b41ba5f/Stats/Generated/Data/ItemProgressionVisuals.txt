@@ -752,12 +752,6 @@ add levelgroup 0,0,"All"
 add rootgroup "5e8ca310-616d-4f18-b455-e510dade5b62",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A","",""
 
-new itemgroup "WPN_LLWEAPONEX_Unarmed_Fist"
-
-add levelgroup 0,0,"All"
-add rootgroup "e1bda904-93c2-4f6f-8136-1a547279fd1f",""
-add namegroup "WPN_LLWEAPONEX_Unarmed_Fist","",""
-
 new itemgroup "WPN_LLWEAPONEX_Quarterstaff_Wood_2H"
 
 add levelgroup 1,8,"Common"

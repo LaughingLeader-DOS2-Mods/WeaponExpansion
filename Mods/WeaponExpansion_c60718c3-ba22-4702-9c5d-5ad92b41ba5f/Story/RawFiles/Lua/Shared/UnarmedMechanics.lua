@@ -18,7 +18,19 @@ function GetUnarmedMasteryBoost(unarmedMastery)
 end
 
 ---@param character StatCharacter
-function GetUnarmedWeapon(character)
+---@param hasUnarmedWeapon boolean
+function GetUnarmedWeapon(character, hasUnarmedWeapon)
+	local weaponStat = "NoWeapon"
+	if hasUnarmedWeapon == true then
+		---@type StatItem
+		local gloves = character:GetItemBySlot("Gloves")
+		if gloves ~= nil then
+			local unarmedWeaponStat = UnarmedWeaponStats[gloves.Name]
+			if unarmedWeaponStat ~= nil then
+				weaponStat = unarmedWeaponStat
+			end
+		end
+	end
 	local highestAttribute = Skills.GetHighestAttribute(character, unarmedAttributes)
 	local unarmedMasteryRank = 0
 	for i=1,5,1 do
@@ -29,8 +41,8 @@ function GetUnarmedWeapon(character)
 	end
 	local unarmedMasteryBoost = GetUnarmedMasteryBoost(unarmedMasteryRank)
 	---@type StatItem
-	local weapon = Skills.CreateWeaponTable("NoWeapon", character.Level, highestAttribute, "None", unarmedMasteryBoost)
-	print("Weapon:", LeaderLib.Common.Dump(weapon))
+	local weapon = Skills.CreateWeaponTable(weaponStat, character.Level, highestAttribute, "None", unarmedMasteryBoost)
+	print("Unarmed weapon:", Common.Dump(weapon))
 	return weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute
 end
 

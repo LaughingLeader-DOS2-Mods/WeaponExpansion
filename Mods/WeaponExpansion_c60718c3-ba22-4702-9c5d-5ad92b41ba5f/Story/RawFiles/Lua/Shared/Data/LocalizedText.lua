@@ -165,6 +165,7 @@ Text = {
 	WeaponScaling = {
 		Pistol = TranslatedString:Create("h893512aag4f27g45fdg974fgb0e3300c8bd5", "<font color='#FFD900'>Scales With Scoundrel and Pistol Mastery</font>"),
 		HandCrossbow = TranslatedString:Create("hadb5f130g449cg4e04gaeacgd5dfa2ab10ef", "<font color='#FFD900'>Scales With Scoundrel and Hand Crossbow Mastery</font>"),
+		General = TranslatedString:Create("h565537edgdec5g4483g938fg296519760088", "Scales With [1]"),
 	},
 	Game = {
 		Attack = TranslatedString:Create("h60ca7387gcb64g4027g98a3g41679874f271","Attack"),

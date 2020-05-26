@@ -217,6 +217,7 @@ local TranslatedString = LeaderLib.Classes.TranslatedString
 
 local LLWEAPONEX_HandCrossbow = TranslatedString:Create("hd8d02aa1g5c35g48b5gbde6ga76293ef2798", "Hand Crossbow")
 local LLWEAPONEX_Pistol = TranslatedString:Create("h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c", "Pistol")
+local LLWEAPONEX_Unarmed = TranslatedString:Create("h1e98bcebg2e42g4699gba2bg6f647d428699", "Unarmed")
 
 local WeaponTypeNames = {
 	{Tag = "LLWEAPONEX_Banner", Text = TranslatedString:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
@@ -231,7 +232,7 @@ local WeaponTypeNames = {
 	{Tag = "LLWEAPONEX_Rapier", Text = TranslatedString:Create("h84b2d805gff5ag44a5g9f81g416aaf5abf18", "Rapier")},
 	{Tag = "LLWEAPONEX_Runeblade", Text = TranslatedString:Create("hb66213fdg1a98g4127ga55fg429f9cde9c6a", "Runeblade")},
 	{Tag = "LLWEAPONEX_Scythe", Text = TranslatedString:Create("h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa", "Scythe")},
-	{Tag = "LLWEAPONEX_Unarmed", Text = TranslatedString:Create("h1e98bcebg2e42g4699gba2bg6f647d428699", "Unarmed")},
+	{Tag = "LLWEAPONEX_Unarmed", Text = LLWEAPONEX_Unarmed},
 	--{Tag = "LLWEAPONEX_Bludgeon", Text = TranslatedString:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
 }
 
@@ -250,6 +251,14 @@ local function OnItemTooltip(item, tooltip)
 		local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
 		local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
 		CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
+	elseif item:HasTag("LLWEAPONEX_Unarmed") then
+		local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+		local weapon,boost,unarmedMasteryRank,highestAttribute = GetUnarmedWeapon(character.Stats, true)
+		local damageRange = Game.Math.CalculateWeaponDamageRange(character.Stats, weapon)
+		local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
+		local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
+		local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LeaderLib.LocalizedText.AttributeNames[highestAttribute])
+		CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Unarmed.Value, scalesWithText, damageRange, apCost, weaponRange)
 	else
 		for i,entry in ipairs(WeaponTypeNames) do
 			if item:HasTag(entry.Tag) then
