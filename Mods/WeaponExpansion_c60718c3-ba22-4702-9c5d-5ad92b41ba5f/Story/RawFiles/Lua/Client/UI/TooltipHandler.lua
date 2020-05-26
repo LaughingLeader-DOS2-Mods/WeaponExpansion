@@ -126,15 +126,27 @@ end
 ---@type scaleText string
 ---@type damageRange table<string,number[]>
 ---@type attackCost integer
-local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText, damageRange, attackCost, weaponRange)
+local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText, damageRange, attackCost, weaponRange, equippedLabel)
 	local armorSlotType = tooltip:GetElement("ArmorSlotType")
 	if armorSlotType ~= nil then
 		local itemType = armorSlotType.Label
 		armorSlotType.Label = weaponTypeName
 		local equipped = tooltip:GetElement("Equipped")
 		if equipped ~= nil then
-			--equipped.Label = itemType
-			equipped.Warning = itemType
+			if equippedLabel ~= nil then
+				equipped.Warning = equippedLabel
+			else
+				--equipped.Label = itemType
+				equipped.Warning = itemType
+			end
+		elseif equippedLabel ~= nil then
+			-- local element = {
+			-- 	Type = "Equipped",
+			-- 	EquippedBy = "",
+			-- 	Label = "",
+			-- 	Warning = equippedLabel,
+			-- }
+			-- tooltip:AppendElement(element)
 		end
 	end
 	
@@ -158,10 +170,11 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 		RequirementMet = true
 	}
 	tooltip:AppendElement(element)
+	print("damageRange", Common.Dump(damageRange))
 	for damageType,data in pairs(damageRange) do
 		element = {
 			Type = "WeaponDamage",
-			Label = LeaderLib.LocalizedText.DamageTypeHandles[damageType].Text.Value,
+			Label = LeaderLib.LocalizedText.DamageTypeNames[damageType].Text.Value,
 			MinDamage = data[1],
 			MaxDamage = data[2],
 			DamageType = LeaderLib.Data.DamageTypeEnums[damageType],
@@ -218,6 +231,8 @@ local TranslatedString = LeaderLib.Classes.TranslatedString
 local LLWEAPONEX_HandCrossbow = TranslatedString:Create("hd8d02aa1g5c35g48b5gbde6ga76293ef2798", "Hand Crossbow")
 local LLWEAPONEX_Pistol = TranslatedString:Create("h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c", "Pistol")
 local LLWEAPONEX_Unarmed = TranslatedString:Create("h1e98bcebg2e42g4699gba2bg6f647d428699", "Unarmed")
+local LLWEAPONEX_UnarmedWeapon = TranslatedString:Create("h4eb213a7g4793g4007g95c6gbaf47584f29d", "Unarmed Weapon[1]")
+local GlovesSlot = TranslatedString:Create("h185545eagdaf0g4286ga411gd50cbdcabc8b", "Gloves")
 
 local WeaponTypeNames = {
 	{Tag = "LLWEAPONEX_Banner", Text = TranslatedString:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
@@ -253,12 +268,20 @@ local function OnItemTooltip(item, tooltip)
 		CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
 	elseif item:HasTag("LLWEAPONEX_Unarmed") then
 		local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-		local weapon,boost,unarmedMasteryRank,highestAttribute = GetUnarmedWeapon(character.Stats, true)
-		local damageRange = Game.Math.CalculateWeaponDamageRange(character.Stats, weapon)
+		local damageRange,highestAttribute = GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
+		--local highestAttribute = "Finesse"
+		--local bonusWeapon = Skills.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
+		--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
 		local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
 		local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
-		local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LeaderLib.LocalizedText.AttributeNames[highestAttribute])
-		CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Unarmed.Value, scalesWithText, damageRange, apCost, weaponRange)
+		local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LeaderLib.LocalizedText.AttributeNames[highestAttribute].Value)
+		local slotInfoText = ""
+		local equipped = tooltip:GetElement("Equipped")
+		if equipped == nil then
+			slotInfoText = string.format(" (%s)", LeaderLib.LocalizedText.Slots[item.Stats.Slot].Value)
+		end
+		local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
+		CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
 	else
 		for i,entry in ipairs(WeaponTypeNames) do
 			if item:HasTag(entry.Tag) then
@@ -272,21 +295,30 @@ local function OnItemTooltip(item, tooltip)
 	end
 end
 
+local totalDamageText = Ext.GetTranslatedString("h1035c3e5gc73dg4cc4ga914ga03a8a31e820", "Total damage: [1]-[2]")
+--local weaponDamageText = Ext.GetTranslatedString("hfa8c138bg7c52g4b7fgaccdgbe39e6a3324c", "<br>From Weapon: [1]-[2]")
+--local offhandWeaponDamageText = Ext.GetTranslatedString("hfe5601bdg2912g4beag895eg6c28772311fb", "From Offhand Weapon: [1]-[2]")
+local fromFistsText = Ext.GetTranslatedString("h0881bb60gf067g4223ga925ga343fa0f2cbd", "<br>From Fists: [1]-[2]")
+local fromUnarmedWeaponText = Ext.GetTranslatedString("h6d1ce292g842cg4decg89deg09ec0e293e5e", "<br>From Unarmed Weapon: [1]-[2]")
+
 ---@param character EsvCharacter
 ---@param tooltip TooltipData
 local function OnDamageStatTooltip(character, stat, tooltip)
 	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
 	--print(character, tooltip, Common.Dump(tooltip))
 	if IsUnarmed(character.Stats) then
-		local totalDamageText = Ext.GetTranslatedString("h1035c3e5gc73dg4cc4ga914ga03a8a31e820", "Total damage: [1]-[2]")
-		--local weaponDamageText = Ext.GetTranslatedString("hfa8c138bg7c52g4b7fgaccdgbe39e6a3324c", "<br>From Weapon: [1]-[2]")
-		--local offhandWeaponDamageText = Ext.GetTranslatedString("hfe5601bdg2912g4beag895eg6c28772311fb", "From Offhand Weapon: [1]-[2]")
-		local fromFistsText = Ext.GetTranslatedString("h0881bb60gf067g4223ga925ga343fa0f2cbd", "<br>From Fists: [1]-[2]")
-		local weapon,boost,unarmedMasteryRank,highestAttribute = GetUnarmedWeapon(character.Stats)
+		local weapon,boost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = GetUnarmedWeapon(character.Stats)
 		local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
 
 		local totalDamageFinalText = totalDamageText:gsub("%[1%]", totalMin):gsub("%[2%]", totalMax)
-		local weaponDamageFinalText = fromFistsText:gsub("%[1%]", baseMin):gsub("%[2%]", baseMax)
+	
+		local weaponDamageFinalText = ""
+		if not hasUnarmedWeapon then
+			weaponDamageFinalText = fromFistsText:gsub("%[1%]", baseMin):gsub("%[2%]", baseMax)
+		else
+			weaponDamageFinalText = fromUnarmedWeaponText:gsub("%[1%]", baseMin):gsub("%[2%]", baseMax)
+		end
+
 		local element = tooltip:GetElement("StatsTotalDamage")
 		element.Label = totalDamageFinalText
 		-- From Fists

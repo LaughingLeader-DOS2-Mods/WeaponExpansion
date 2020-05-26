@@ -2573,12 +2573,6 @@ add rootgroup "a562214b-4a98-401a-bbfb-636bcf971900",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A","",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A","",""
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
-
-add levelgroup 0,0,"All"
-add rootgroup "1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A","",""
-
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
 
 add levelgroup 0,0,"All"

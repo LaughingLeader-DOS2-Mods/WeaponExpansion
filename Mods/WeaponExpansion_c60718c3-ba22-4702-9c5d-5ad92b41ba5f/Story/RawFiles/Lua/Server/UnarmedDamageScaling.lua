@@ -45,7 +45,7 @@ end
 function ScaleUnarmedDamage(attacker, target, damage, handle)
 	if damage > 0 and IsUnarmedDamage(handle) then
 		local character = Ext.GetCharacter(attacker)
-		local weapon = GetUnarmedWeapon(character.Stats, character:HasTag("LLWEAPONEX_UnarmedWeaponEquipped"))
+		local weapon = GetUnarmedWeapon(character.Stats)
 		--Ext.Print("Unarmed hit: damage("..tostring(damage)..") unarmedMastery("..tostring(unarmedMastery)..") attacker("..tostring(attacker)..") target("..tostring(target)..") attackerLevel("..tostring(level)..") itemLevel("..tostring(itemLevel)..")")
 
 		local damageList = Game.Math.CalculateWeaponDamage(character.Stats, weapon, false)

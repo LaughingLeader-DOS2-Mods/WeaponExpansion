@@ -951,9 +951,6 @@ add name "WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A_DisplayName",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_2H_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Bokken_2H_A_DisplayName",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
-add name "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_DisplayName",""
-
 new namegroup "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A"
 add name "WPN_UNIQUE_LLWEAPONEX_DualShields_GiantDoor_A_DisplayName",""
 

@@ -236,23 +236,20 @@ local function GetTotalBaseAndCalculatedWeaponDamage(character, weapon)
 
     local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
 
-    for damageType,damage in pairs(damages) do
-        baseMin = damage.Min + baseMin
-        baseMax = damage.Max + baseMax
-    end
-
     local abilityBoosts = character.DamageBoost 
         + Game.Math.ComputeWeaponCombatAbilityBoost(character, weapon)
         + Game.Math.ComputeWeaponRequirementScaledDamage(character, weapon)
     abilityBoosts = math.max(abilityBoosts + 100.0, 0.0) / 100.0
 
     local boost = 1.0 + damageBoost * 0.01
-    if not character.NotSneaking then
+    if character.IsSneaking then
         boost = boost + Ext.ExtraData['Sneak Damage Multiplier']
     end
 
-    local ranges = {}
     for damageType, damage in pairs(damages) do
+        baseMin = damage.Min + baseMin
+        baseMax = damage.Max + baseMax
+    
         local min = math.ceil(damage.Min * boost * abilityBoosts)
         local max = math.ceil(damage.Max * boost * abilityBoosts)
 

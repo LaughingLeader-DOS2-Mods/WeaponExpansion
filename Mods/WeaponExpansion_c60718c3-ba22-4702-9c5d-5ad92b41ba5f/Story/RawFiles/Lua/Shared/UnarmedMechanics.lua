@@ -17,17 +17,31 @@ function GetUnarmedMasteryBoost(unarmedMastery)
 	return 0
 end
 
+local unarmedWeaponSlots = {
+	"Gloves",
+	"Boots"
+}
+
 ---@param character StatCharacter
----@param hasUnarmedWeapon boolean
-function GetUnarmedWeapon(character, hasUnarmedWeapon)
+---@return StatItem,number,integer,string,boolean
+function GetUnarmedWeapon(character, skipItemCheck)
+	local hasUnarmedWeapon
 	local weaponStat = "NoWeapon"
-	if hasUnarmedWeapon == true then
-		---@type StatItem
-		local gloves = character:GetItemBySlot("Gloves")
-		if gloves ~= nil then
-			local unarmedWeaponStat = UnarmedWeaponStats[gloves.Name]
-			if unarmedWeaponStat ~= nil then
-				weaponStat = unarmedWeaponStat
+	local level = character.Level
+	if skipItemCheck ~= true and character.Character:HasTag("LLWEAPONEX_UnarmedWeaponEquipped") then
+		for i,slot in pairs(unarmedWeaponSlots) do
+			---@type StatItem
+			local item = character:GetItemBySlot(slot)
+			if item ~= nil then
+				if string.find(item.Tags, "LLWEAPONEX_UnarmedWeaponEquipped") then
+					local unarmedWeaponStat = UnarmedWeaponStats[item.Name]
+					if unarmedWeaponStat ~= nil then
+						weaponStat = unarmedWeaponStat
+						hasUnarmedWeapon = true
+						level = item.Level
+						break
+					end
+				end
 			end
 		end
 	end
@@ -41,9 +55,44 @@ function GetUnarmedWeapon(character, hasUnarmedWeapon)
 	end
 	local unarmedMasteryBoost = GetUnarmedMasteryBoost(unarmedMasteryRank)
 	---@type StatItem
-	local weapon = Skills.CreateWeaponTable(weaponStat, character.Level, highestAttribute, "None", unarmedMasteryBoost)
-	print("Unarmed weapon:", Common.Dump(weapon))
-	return weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute
+	local weapon = Skills.CreateWeaponTable(weaponStat, level, highestAttribute, "None", unarmedMasteryBoost)
+	--print("Unarmed weapon:", Common.Dump(weapon), getmetatable(character.Character))
+	--print(getmetatable(character), type(getmetatable(character)))
+	return weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
+end
+
+---@param character StatCharacter
+---@return table<string,number[]>,number,integer,string
+function GetUnarmedDamageRange(character)
+	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = GetUnarmedWeapon(character)
+	local damageRange = Game.Math.CalculateWeaponDamageRange(character, weapon)
+	return damageRange,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
+end
+
+---@param character StatCharacter
+---@param item StatItem
+---@return table<string,number[]>,string
+function GetUnarmedWeaponDamageRange(character, item)
+	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = GetUnarmedWeapon(character, true)
+	if item.Tags ~= nil and string.find(item.Tags, "LLWEAPONEX_UnarmedWeaponEquipped") then
+		local unarmedWeaponStatName = UnarmedWeaponStats[item.Name]
+		if unarmedWeaponStatName ~= nil then
+			local unarmedWeapon = Skills.CreateWeaponTable(unarmedWeaponStatName, item.Level, highestAttribute, "None", unarmedMasteryBoost)
+			if unarmedWeapon ~= nil then
+				for i,stat in ipairs(unarmedWeapon.DynamicStats) do
+					if i > 1 then
+						table.insert(noWeapon.DynamicStats, stat)
+					elseif i == 1 then
+						noWeapon.DynamicStats[1] = stat
+					end
+				end
+			end
+		end
+	end
+	local damageRange = Game.Math.CalculateWeaponDamageRange(character, noWeapon)
+	print("noWeapon:", Ext.JsonStringify(noWeapon))
+	print("GetUnarmedWeaponDamageRange:", Ext.JsonStringify(damageRange))
+	return damageRange,highestAttribute
 end
 
 local function statMatchOrNil(stat, name)

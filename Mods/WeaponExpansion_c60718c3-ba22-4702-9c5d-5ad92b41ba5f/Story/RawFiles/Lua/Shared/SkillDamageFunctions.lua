@@ -180,41 +180,63 @@ local weaponStatAttributes = {
 ---@param weaponType string
 ---@param damageFromBaseBoost integer
 ---@return StatItem
-local function CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost)
+local function CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage)
 	local weapon = {}
 	for i,v in pairs(weaponAttributes) do
 		weapon[v] = Ext.StatGetAttribute(stat, v)
 	end
 	weapon.ItemType = "Weapon"
-	weapon.WeaponType = weaponType
 	weapon.Name = stat
-	weapon.Requirements = {
-		{
-			Requirement = attribute,
-			Param = 0,
-			Not = false
+	if attribute ~= nil then
+		weapon.Requirements = {
+			{
+				Requirement = attribute,
+				Param = 0,
+				Not = false
+			}
 		}
-	}
-	local weaponStat = {}
+	else
+		weapon.Requirements = Ext.StatGetAttribute(stat, "Requirements")
+	end
+	local weaponStat = {Name = stat}
 	for i,v in pairs(weaponStatAttributes) do
 		weaponStat[v] = Ext.StatGetAttribute(stat, v)
 	end
 	if damageFromBaseBoost ~= nil and damageFromBaseBoost > 0 then
 		weaponStat.DamageFromBase = weaponStat.DamageFromBase + damageFromBaseBoost
 	end
-	local damage = Game.Math.GetLevelScaledWeaponDamage(level)
+	local damage = 0
+	if baseWeaponDamage ~= nil then
+		damage = baseWeaponDamage
+	else
+		damage = Game.Math.GetLevelScaledWeaponDamage(level)
+	end
 	local baseDamage = damage * (weaponStat.DamageFromBase * 0.01)
 	local range = baseDamage * (weaponStat["Damage Range"] * 0.01)
-	--Ext.Print("damage:",damage,"baseDamage:",baseDamage,"range:",range)
 	weaponStat.MinDamage = Ext.Round(baseDamage - (range/2))
 	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))
 	weaponStat.DamageType = weaponStat["Damage Type"]
 	weaponStat.StatsType = "Weapon"
 	if weaponType ~= nil then
+		weapon.WeaponType = weaponType
 		weaponStat.WeaponType = weaponType
 	end
 	weaponStat.Requirements = weapon.Requirements
 	weapon.DynamicStats = {weaponStat}
+	if not isBoostStat then
+		local boostsString = Ext.StatGetAttribute(stat, "Boosts")
+		if boostsString ~= nil and boostsString ~= "" then
+			local boosts = LeaderLib.StringHelpers.Split(";", boostsString)
+			for i,boostStat in ipairs(boosts) do
+				if boostStat ~= nil and boostStat ~= "" then
+					local boostWeaponStat = CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage)
+					if boostWeaponStat ~= nil then
+						table.insert(weapon.DynamicStats, boostWeaponStat.DynamicStats[1])
+					end
+				end
+			end
+		end
+	end
 	return weapon
 end
 
