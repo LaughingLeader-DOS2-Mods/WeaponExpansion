@@ -1,115 +1,112 @@
-Key	Content
-CONT_TradeBag_AttributeTokens	Bag of Special Tokens
-CONT_TradeBag_AttributeTokens_Initial	<font color='#80FFC3'>Bag of Special Tokens</font>
-LOOT_LLWEAPONEX_Orb_Thunder_A	Shiden, Thunder Orb
-LOOT_LLWEAPONEX_Orb_Thunder_B	Shiden, Thunder Orb (Empowered)
-LOOT_LLWEAPONEX_Orb_Thunder_C	Shiden, Thunder Orb (Unleashed)
-LOOT_LLWEAPONEX_Token_Constitution	<font color='#EA74B6'>Token of Constitution</font>
-LOOT_LLWEAPONEX_Token_Constitution_Free	<font color='#EA74B6'>Token of Constitution</font>
-LOOT_LLWEAPONEX_Token_Finesse	<font color='#81AB00'>Token of Finesse</font>
-LOOT_LLWEAPONEX_Token_Finesse_Free	<font color='#81AB00'>Token of Finesse</font>
-LOOT_LLWEAPONEX_Token_Intelligence	<font color='#73F6FF'>Token of Intelligence</font>
-LOOT_LLWEAPONEX_Token_Intelligence_Free	<font color='#73F6FF'>Token of Intelligence</font>
-LOOT_LLWEAPONEX_Token_Memory	<font color='#FCD203'>Token of Memory</font>
-LOOT_LLWEAPONEX_Token_Memory_Free	<font color='#FCD203'>Token of Memory</font>
-LOOT_LLWEAPONEX_Token_Reset	<font color='#D040D0'>Token of Reversal</font>
-LOOT_LLWEAPONEX_Token_Reset_Free	<font color='#D040D0'>Token of Reversal</font>
-LOOT_LLWEAPONEX_Token_Strength	<font color='#FF9600'>Token of Strength</font>
-LOOT_LLWEAPONEX_Token_Strength_Free	<font color='#FF9600'>Token of Strength</font>
-LOOT_LLWEAPONEX_Token_Wits	<font color='#A150FF'>Token of Wits</font>
-LOOT_LLWEAPONEX_Token_Wits_Free	<font color='#A150FF'>Token of Wits</font>
-TOOL_Hammer_LLWEAPONEX_Runesmith_A	<font color='#40E0D0'>Runesmith's Hammer</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Bleeding_A	<font color='#c80030'>Sharpened Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_BlessedWater_A	<font color='#97fbff'>Blessed Water Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Charming_A	<font color='#d040d0'>Charming Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Cloud_Static_A	<font color='#7d71d9'>Static Cloud Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Cloud_Steam_A	<font color='#639594'>Steamcloud Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_CursedFire_A	<font color='#fe6e27'>Cursed Fire Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Debuff_All_A	<font color='#b823cb'>Cursing Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Explosive_A	<font color='#fe6e27'>Explosive Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Fire_A	<font color='#fe6e27'>Fire Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Freezing_A	<font color='#4197e2'>Freezing Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_KO_A	<font color='#f7ba14'>Knockdown Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Poison_A	<font color='#00aa00'>Poison Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Poison_Cloud_A	<font color='#00aa00'>Poisoncloud Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Silver_A	<font color='#40b606'>Corrosive Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_SlowDown_A	<font color='#7f00ff'>Slowing Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_SmokeScreen_A	<font color='#797980'>Smokescreen Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Stunning_A	<font color='#fcd203'>Stunning Great Arrow</font>
-WPN_LLWEAPONEX_Greatbow_QuiverArrow_Water_A	<font color='#4197e2'>Water Great Arrow</font>
-WPN_LLWEAPONEX_QuiverArrow_BlessedWater_A	Blessed Water Arrow
-WPN_LLWEAPONEX_QuiverArrow_Charming_A	Charming Arrow
-WPN_LLWEAPONEX_QuiverArrow_Cloud_Static_A	Static Cloud Arrow
-WPN_LLWEAPONEX_QuiverArrow_Cloud_Steam_A	Steamcloud Arrow
-WPN_LLWEAPONEX_QuiverArrow_CursedFire_A	Cursed Fire Arrow
-WPN_LLWEAPONEX_QuiverArrow_Debuff_All_A	Cursing Arrow
-WPN_LLWEAPONEX_QuiverArrow_Explosive_A	Explosive Arrow
-WPN_LLWEAPONEX_QuiverArrow_Fire_A	Fire Arrow
-WPN_LLWEAPONEX_QuiverArrow_Freezing_A	Freezing Arrow
-WPN_LLWEAPONEX_QuiverArrow_KO_A	Knockdown Arrow
-WPN_LLWEAPONEX_QuiverArrow_Poison_A	Poison Arrow
-WPN_LLWEAPONEX_QuiverArrow_Poison_Cloud_A	Poisoncloud Arrow
-WPN_LLWEAPONEX_QuiverArrow_SlowDown_A	Slowdown Arrow
-WPN_LLWEAPONEX_QuiverArrow_SmokeScreen_A	Smokescreen Arrow
-WPN_LLWEAPONEX_QuiverArrow_Stunning_A	Stunning Arrow
-WPN_LLWEAPONEX_QuiverArrow_Water_A	Water Arrow
-WPN_LLWEAPONEX_RemoteMine_Breach	Breach Charge
-WPN_LLWEAPONEX_RemoteMine_Breach_Free	Breach Charge
-WPN_LLWEAPONEX_RemoteMine_Displacement	Displacement Charge
-WPN_LLWEAPONEX_RemoteMine_Displacement_Free	Displacement Charge
-WPN_LLWEAPONEX_RemoteMine_Explosive	Explosive Charge
-WPN_LLWEAPONEX_RemoteMine_Explosive_Free	Explosive Charge
-WPN_LLWEAPONEX_RemoteMine_PoisonCloud	Poison Gas Charge
-WPN_LLWEAPONEX_RemoteMine_PoisonCloud_Free	Poison Gas Charge
-WPN_LLWEAPONEX_RemoteMine_Shrapnel	Shrapnel Charge
-WPN_LLWEAPONEX_RemoteMine_Shrapnel_Free	Shrapnel Charge
-WPN_LLWEAPONEX_RemoteMine_Tar	Tar Charge
-WPN_LLWEAPONEX_RemoteMine_Tar_Free	Tar Charge
-SKILLBOOK_LLWEAPONEX_DualShields_Cover	<font color='#ffc721'>Mastery Scroll:</font> Dynamic Cover
-SKILLBOOK_LLWEAPONEX_DualShields_ShieldPrison	<font color='#ffc721'>Mastery Scroll:</font> Shield Prison
-SKILLBOOK_LLWEAPONEX_DualShields_IronMaiden	<font color='#ffc721'>Mastery Scroll:</font> Iron Maiden
-SKILLBOOK_LLWEAPONEX_Firearm_ElementalBullets	<font color='#ffc721'>Mastery Scroll:</font> Elemental Bullets
-SKILLBOOK_LLWEAPONEX_Greatbow_PiercingShot	<font color='#ffc721'>Mastery Scroll:</font> Dragon's Bane
-SKILLBOOK_LLWEAPONEX_Greatbow_KnockbackShot	<font color='#ffc721'>Mastery Scroll:</font> Cushion Force
-SKILLBOOK_LLWEAPONEX_Greatbow_FutureBarrage	<font color='#ffc721'>Mastery Scroll:</font> Future Barrage
-SKILLBOOK_LLWEAPONEX_Handcrossbow_Assassinate	<font color='#ffc721'>Mastery Scroll:</font> Assassinate
-SKILLBOOK_LLWEAPONEX_Katana_Iaido	<font color='#ffc721'>Mastery Scroll:</font> Flash of Steel
-SKILLBOOK_LLWEAPONEX_Quarterstaff_LegSweep	<font color='#ffc721'>Mastery Scroll:</font> Leg Sweep
-SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance	<font color='#ffc721'>Mastery Scroll:</font> Duelist Stance
-SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike	<font color='#ffc721'>Mastery Scroll:</font> Flicker Strike
-SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb	<font color='#ffc721'>Mastery Scroll:</font> Runic Reverb
-SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon	<font color='#ffc721'>Mastery Scroll:</font> Throw Weapon
-THR_LLWEAPONEX_Axe1H	Throwing Axe
-THR_LLWEAPONEX_Axe2H	Throwing Axe (Large)
-THR_LLWEAPONEX_Bow	Throwing Bow?
-THR_LLWEAPONEX_Chair_01	Throwing Stool
-THR_LLWEAPONEX_Crossbow	Throwing Crossbow?
-THR_LLWEAPONEX_Dagger	Throwing Dagger
-THR_LLWEAPONEX_Mace1H	Throwing Hammer
-THR_LLWEAPONEX_Mace2H	Throwing Paddle?
-THR_LLWEAPONEX_Rock	Stone
-THR_LLWEAPONEX_Rock_Unique_Kevin	Kevin the Pet Rock
-THR_LLWEAPONEX_Scythe	Throwing Scythe?
-THR_LLWEAPONEX_Shield	Throwing Shield
-THR_LLWEAPONEX_Shuriken	Shuriken
-THR_LLWEAPONEX_Shuriken_Poison	Poison Shuriken
-THR_LLWEAPONEX_Shuriken_Explosive	Explosive Shuriken
-THR_LLWEAPONEX_Sickle	Throwing Sickle
-THR_LLWEAPONEX_Spear	Throwing Spear
-THR_LLWEAPONEX_Staff	Throwing Staff?
-THR_LLWEAPONEX_Sword1H	Throwing Sword?
-THR_LLWEAPONEX_Sword2H	Throwing Sword? (Large)
-THR_LLWEAPONEX_Wand	Throwing Wand?
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin	<font color='#C7A758'>Kevin the Pet Rock</font>
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Disabled	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#b823cb'>Exausted</font>)
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Poison	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#00AA00'>Poisoned</font>)
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Oil	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#AA895B'>Oiled</font>)
-THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Nails	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#FF2244'>Nails</font>)
-GRN_LLWEAPONEX_BloodBall	Congealed Blood Ball
-GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask
-GRN_LLWEAPONEX_Flask_Weakness_Air_A	<font color='#7478DC'>Flask of Air Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Chaos_A	<font color='#D040D0'>Flask of Chaotic Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Earth_A	<font color='#AA895B'>Flask of Earth Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Fire_A	<font color='#C76537'>Flask of Fire Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Poison_A	<font color='#00AA00'>Flask of Poison Weakness</font>
-GRN_LLWEAPONEX_Flask_Weakness_Water_A	<font color='#188EDE'>Flask of Water Weakness</font>
+Key	Content	Handle
+CONT_TradeBag_AttributeTokens	Bag of Special Tokens	hacdffffagd70fg461dgb468gfb695746b853
+CONT_TradeBag_AttributeTokens_Initial	<font color='#80FFC3'>Bag of Special Tokens</font>	hb9d29345g4860g4a16gbf15g777e1e8998b8
+GRN_LLWEAPONEX_BloodBall	Congealed Blood Ball	hc3f850f7g42c0g4d41gb9b3g4cf024706cb3
+GRN_LLWEAPONEX_Flask_Weakness_Air_A	<font color='#7478DC'>Flask of Air Weakness</font>	hedda4e73gbe09g4678gb0dfg2f67ebbe7b64
+GRN_LLWEAPONEX_Flask_Weakness_Chaos_A	<font color='#D040D0'>Flask of Chaotic Weakness</font>	hc32ab995ga1eeg4c65gb1aag24255beb13e3
+GRN_LLWEAPONEX_Flask_Weakness_Earth_A	<font color='#AA895B'>Flask of Earth Weakness</font>	hf8102d0cg0d82g42f2g9b4bg8b31b197ac68
+GRN_LLWEAPONEX_Flask_Weakness_Fire_A	<font color='#C76537'>Flask of Fire Weakness</font>	h7b973523g0f82g40bfg81eaga78da1811e10
+GRN_LLWEAPONEX_Flask_Weakness_Poison_A	<font color='#00AA00'>Flask of Poison Weakness</font>	h1765f964g83e6g4e49g89afg2a7239aa0a3c
+GRN_LLWEAPONEX_Flask_Weakness_Water_A	<font color='#188EDE'>Flask of Water Weakness</font>	h3eebf141gc25cg449dga4aag3f7a3cfc3c57
+GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask	h91d6604fg166fg4390g88e4g1847a776456f
+LOOT_LLWEAPONEX_Token_Constitution	<font color='#EA74B6'>Token of Constitution</font>	h31cede19g57a8g48deg87d7gaa9dc607185c
+LOOT_LLWEAPONEX_Token_Constitution_Free	<font color='#EA74B6'>Token of Constitution</font>	haafc1fcfgb8adg4ba2gb6e4ge48d4225b936
+LOOT_LLWEAPONEX_Token_Finesse	<font color='#81AB00'>Token of Finesse</font>	ha62b3311gd53fg466ag833cg4828d2e6abd6
+LOOT_LLWEAPONEX_Token_Finesse_Free	<font color='#81AB00'>Token of Finesse</font>	h5fc057e4g2495g40fdg8c75ga0940679a542
+LOOT_LLWEAPONEX_Token_Intelligence	<font color='#73F6FF'>Token of Intelligence</font>	h81219921g27dcg424dg9125ga508ceb28f76
+LOOT_LLWEAPONEX_Token_Intelligence_Free	<font color='#73F6FF'>Token of Intelligence</font>	hedd0d950g6b46g4299gb106g373007c53a47
+LOOT_LLWEAPONEX_Token_Memory	<font color='#FCD203'>Token of Memory</font>	h757628cfg8bb1g4defgb24fgf3e5e4e3c328
+LOOT_LLWEAPONEX_Token_Memory_Free	<font color='#FCD203'>Token of Memory</font>	h9d93540cgce84g4d07g85beg2f24ccfb95b2
+LOOT_LLWEAPONEX_Token_Reset	<font color='#D040D0'>Token of Reversal</font>	h26f82774g8034g4385gb5fag3f1c7e7ce184
+LOOT_LLWEAPONEX_Token_Reset_Free	<font color='#D040D0'>Token of Reversal</font>	h39c5dbe1g768bg4d06g8847g0e3f4bd33489
+LOOT_LLWEAPONEX_Token_Strength	<font color='#FF9600'>Token of Strength</font>	h11723efcg6edbg45dag92f1g2f36eca30ecd
+LOOT_LLWEAPONEX_Token_Strength_Free	<font color='#FF9600'>Token of Strength</font>	h0de3cd8agddbcg4610ga371g3ddde27acf7c
+LOOT_LLWEAPONEX_Token_Wits	<font color='#A150FF'>Token of Wits</font>	h2743ea1ag857ag4f3egb34bg71129ad65ad1
+LOOT_LLWEAPONEX_Token_Wits_Free	<font color='#A150FF'>Token of Wits</font>	h37dd5ccag806fg4c58gbb05gd2cca622ae93
+SKILLBOOK_LLWEAPONEX_DualShields_Cover	<font color='#ffc721'>Mastery Scroll:</font> Dynamic Cover	h3dddcbc5g42a1g48f7g93a7g494971171e5f
+SKILLBOOK_LLWEAPONEX_DualShields_IronMaiden	<font color='#ffc721'>Mastery Scroll:</font> Iron Maiden	hfb91c5a8gf687g432cga2fag714f4071b6b4
+SKILLBOOK_LLWEAPONEX_DualShields_ShieldPrison	<font color='#ffc721'>Mastery Scroll:</font> Shield Prison	h6dc555eag7a68g4c9bg8ddage6b2bf0067e5
+SKILLBOOK_LLWEAPONEX_Firearm_ElementalBullets	<font color='#ffc721'>Mastery Scroll:</font> Elemental Bullets	h3dfb8edfg14d2g42f2ga19ag2734c9eefdb5
+SKILLBOOK_LLWEAPONEX_Greatbow_FutureBarrage	<font color='#ffc721'>Mastery Scroll:</font> Future Barrage	hc56fb80eg797fg46b5g89c3gd8bf0c458a4d
+SKILLBOOK_LLWEAPONEX_Greatbow_KnockbackShot	<font color='#ffc721'>Mastery Scroll:</font> Cushion Force	h21825119g98fag4193ga030g63776d49182d
+SKILLBOOK_LLWEAPONEX_Greatbow_PiercingShot	<font color='#ffc721'>Mastery Scroll:</font> Dragon's Bane	h1f9afda1g6b20g4a64g8ebbg5272b5558145
+SKILLBOOK_LLWEAPONEX_Handcrossbow_Assassinate	<font color='#ffc721'>Mastery Scroll:</font> Assassinate	h8ba03f9age3a5g4225gab00g1ab09efd2082
+SKILLBOOK_LLWEAPONEX_Katana_Iaido	<font color='#ffc721'>Mastery Scroll:</font> Flash of Steel	h25c234fegb51eg4854gb8dfg3289120baaad
+SKILLBOOK_LLWEAPONEX_Quarterstaff_LegSweep	<font color='#ffc721'>Mastery Scroll:</font> Leg Sweep	h6fe2f7f5g746fg4779g8029g89b1c9bb21b5
+SKILLBOOK_LLWEAPONEX_Rapier_DuelistStance	<font color='#ffc721'>Mastery Scroll:</font> Duelist Stance	h7a0187b4g6801g4c28gbb46g85d9d9565a9a
+SKILLBOOK_LLWEAPONEX_Rapier_FlickerStrike	<font color='#ffc721'>Mastery Scroll:</font> Flicker Strike	h2462e662ga70eg4c9fg8c5dga384c7d51a4e
+SKILLBOOK_LLWEAPONEX_Runeblade_RunicReverb	<font color='#ffc721'>Mastery Scroll:</font> Runic Reverb	hf61945acg7f82g4c91ga9adgd37e98e86795
+SKILLBOOK_LLWEAPONEX_ThrowingAbility_ThrowWeapon	<font color='#ffc721'>Mastery Scroll:</font> Throw Weapon	h720705f9g9a68g48c9g8b63gebf21d945fa0
+THR_LLWEAPONEX_Axe1H	Throwing Axe	hfc34de68gbdadg49acga2d8g7b2e8a2ace9d
+THR_LLWEAPONEX_Axe2H	Throwing Axe (Large)	h37b7b5fegc022g4a23gbd81g4dfc00682f4b
+THR_LLWEAPONEX_Bow	Throwing Bow?	hc57ffc92gbbbag4f6eg9f17gee8b992ba15a
+THR_LLWEAPONEX_Chair_01	Throwing Stool	h04c27940ge441g4903gac89ga4a0befb3723
+THR_LLWEAPONEX_Crossbow	Throwing Crossbow?	hbd182b92g8defg4737g87a7g9d066ec6e440
+THR_LLWEAPONEX_Dagger	Throwing Dagger	h5e37e2c9g1d9fg4dc6g9d11g36ef081c0e27
+THR_LLWEAPONEX_Mace1H	Throwing Hammer	h7dff47e0g6802g413cgb834gca087971273b
+THR_LLWEAPONEX_Mace2H	Throwing Paddle?	h1ce7689fgceb1g4b23gb627g9c87b162e086
+THR_LLWEAPONEX_Rock	Stone	h891bed49g98e3g4269g9932g33150016921e
+THR_LLWEAPONEX_Rock_Unique_Kevin	Kevin the Pet Rock	h01ec64eeg09ecg4813g996bg2834de7947fa
+THR_LLWEAPONEX_Scythe	Throwing Scythe?	h34c270b6gb07fg47ebg8d49g7a37abadb736
+THR_LLWEAPONEX_Shield	Throwing Shield	h850393bbg0109g4ac1g865cg27f25301e083
+THR_LLWEAPONEX_Shuriken	Shuriken	he55bae23g9850g45e8ga32eg62371f05bf47
+THR_LLWEAPONEX_Shuriken_Explosive	Explosive Shuriken	h6cdbe92agba8eg4100gbe89g89585aa10ec9
+THR_LLWEAPONEX_Shuriken_Poison	Poison Shuriken	h2b5342e4g614cg4e5egb5cfg6b2c3dd9d117
+THR_LLWEAPONEX_Sickle	Throwing Sickle	h41215ed6g9096g45f2g804ag1949dadd5fc5
+THR_LLWEAPONEX_Spear	Throwing Spear	hb378c6bdg6f8dg4779ga987gff0882edf749
+THR_LLWEAPONEX_Staff	Throwing Staff?	h65fdf547g44e0g4339ga5a7ge7f7b218cfca
+THR_LLWEAPONEX_Sword1H	Throwing Sword?	hb7a3dc0cg8422g4a1cg83f5gefbaab6d835f
+THR_LLWEAPONEX_Sword2H	Throwing Sword? (Large)	hd243200dg8324g483fg95b9g6a1f52922c7c
+THR_LLWEAPONEX_Wand	Throwing Wand?	hf788a89eg3e43g4b2ag8142g10791159f1e0
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin	<font color='#C7A758'>Kevin the Pet Rock</font>	hb876b972g396fg4e4dg82a9g4525b40d9089
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Disabled	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#b823cb'>Exausted</font>)	h4cfb2f23gdf9fg4904gab5eg212e986b905b
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Nails	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#FF2244'>Nails</font>)	ha1c630ffg42dbg4289g8d34g68de690fdde0
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Oil	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#AA895B'>Oiled</font>)	hfa208174gafc8g419cg8902g767d08782e95
+THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Poison	<font color='#C7A758'>Kevin the Pet Rock</font> (<font color='#00AA00'>Poisoned</font>)	hcadad3cbg4c92g4d31g801ag4722ebda504d
+TOOL_Hammer_LLWEAPONEX_Runesmith_A	<font color='#40E0D0'>Runesmith's Hammer</font>	h82a221d3g78bcg4251gb29dg6cefbb6e9430
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Bleeding_A	<font color='#c80030'>Sharpened Great Arrow</font>	hb98b5e57g62bbg4bb0g8973g69bf99d60252
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_BlessedWater_A	<font color='#97fbff'>Blessed Water Great Arrow</font>	h3b7aff29g3695g448agbd64g56261c9cf503
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Charming_A	<font color='#d040d0'>Charming Great Arrow</font>	hf84790b2g028dg44e4g96e3g099eff0b4599
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Cloud_Static_A	<font color='#7d71d9'>Static Cloud Great Arrow</font>	hdfe0b988gb5c2g456fg862cg6d13d1c1bf69
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Cloud_Steam_A	<font color='#639594'>Steamcloud Great Arrow</font>	h9b3661f8gba30g49begb16cgfbda00633bdd
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_CursedFire_A	<font color='#fe6e27'>Cursed Fire Great Arrow</font>	h9cf18464g2f51g4473g9d63ge904dd878460
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Debuff_All_A	<font color='#b823cb'>Cursing Great Arrow</font>	h49934c37g16b2g450bg9696g037136913386
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Explosive_A	<font color='#fe6e27'>Explosive Great Arrow</font>	h0c4109b1g92f9g4363gbc81gc85809032511
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Fire_A	<font color='#fe6e27'>Fire Great Arrow</font>	h42445177g4747g4c91g9218gbc6a4e300981
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Freezing_A	<font color='#4197e2'>Freezing Great Arrow</font>	h80a3a179g7b15g4f01gb3f6g2d2041d3395a
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_KO_A	<font color='#f7ba14'>Knockdown Great Arrow</font>	h40a99191g22dcg46f5gb5a6g085e3d8b0305
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Poison_A	<font color='#00aa00'>Poison Great Arrow</font>	h04d47318g7a54g4314g9900g10a117d4b075
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Poison_Cloud_A	<font color='#00aa00'>Poisoncloud Great Arrow</font>	hf9b06846g0062g4b99ga3afgb43f2d3e5149
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Silver_A	<font color='#40b606'>Corrosive Great Arrow</font>	he0a3a1bfge498g4c0cg8814g67773243d59c
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_SlowDown_A	<font color='#7f00ff'>Slowing Great Arrow</font>	hb7250405g5608g4408ga1e7gd7e8e1f4bfaa
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_SmokeScreen_A	<font color='#797980'>Smokescreen Great Arrow</font>	h6fc14e25ga766g4504gad15g5f4a4a66b99a
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Stunning_A	<font color='#fcd203'>Stunning Great Arrow</font>	h6aba0319g7f05g456ag9228g6e2b281ee95b
+WPN_LLWEAPONEX_Greatbow_QuiverArrow_Water_A	<font color='#4197e2'>Water Great Arrow</font>	h25bb1f86gfd15g4ad2g9a50ga54d90dd8fce
+WPN_LLWEAPONEX_QuiverArrow_BlessedWater_A	Blessed Water Arrow	h516be507g1b44g4701g8d0bg7a8562c700bd
+WPN_LLWEAPONEX_QuiverArrow_Charming_A	Charming Arrow	h6e84de08g3e9bg43aega2acg098aa0085c8d
+WPN_LLWEAPONEX_QuiverArrow_Cloud_Static_A	Static Cloud Arrow	h0c37f737g20d1g44c8g9e5bgf519aee4e18b
+WPN_LLWEAPONEX_QuiverArrow_Cloud_Steam_A	Steamcloud Arrow	h3cad14e9gc1a1g4d96gb7a3gf1513ca5a6fc
+WPN_LLWEAPONEX_QuiverArrow_CursedFire_A	Cursed Fire Arrow	h2073229eg3760g4d54g8861gf3d457f962f0
+WPN_LLWEAPONEX_QuiverArrow_Debuff_All_A	Cursing Arrow	hb7cc4c4dg4abcg4814g932cg0c2b233d479f
+WPN_LLWEAPONEX_QuiverArrow_Explosive_A	Explosive Arrow	hbd1111ecg05aag4c03ga29ag07c8599f335b
+WPN_LLWEAPONEX_QuiverArrow_Fire_A	Fire Arrow	h6a268993g122ag4546g8d76g83c831fb552f
+WPN_LLWEAPONEX_QuiverArrow_Freezing_A	Freezing Arrow	h124a92aeg5b4ag409eg84b6g5d37607b5720
+WPN_LLWEAPONEX_QuiverArrow_KO_A	Knockdown Arrow	hc9f3dfe5g5721g470agb642gf8ce0fef1d21
+WPN_LLWEAPONEX_QuiverArrow_Poison_A	Poison Arrow	hd50ed08aga85fg4e60g827bg854c27381f59
+WPN_LLWEAPONEX_QuiverArrow_Poison_Cloud_A	Poisoncloud Arrow	h534b4f1dg3737g40cdga614g80664270ca82
+WPN_LLWEAPONEX_QuiverArrow_SlowDown_A	Slowdown Arrow	h64758f3fg63a1g4389g9b38g7bed5ed1c8a1
+WPN_LLWEAPONEX_QuiverArrow_SmokeScreen_A	Smokescreen Arrow	h6be2e407g9ae2g4b76g8e7agce655779cc71
+WPN_LLWEAPONEX_QuiverArrow_Stunning_A	Stunning Arrow	had13bb21g843dg43f1ga05ag613aa954fbb1
+WPN_LLWEAPONEX_QuiverArrow_Water_A	Water Arrow	h26fc76bbga858g4121g81ecg318f6c2615e4
+WPN_LLWEAPONEX_RemoteMine_Breach	Breach Charge	h490c0a9dg5d8ag4675g9a3fgaf20283ef584
+WPN_LLWEAPONEX_RemoteMine_Breach_Free	Breach Charge	h2efc37f8g80feg4ca4g8cdfgb975ae636a4f
+WPN_LLWEAPONEX_RemoteMine_Displacement	Displacement Charge	h5262f340g9ae1g4659gbff9ge7ffa48745f0
+WPN_LLWEAPONEX_RemoteMine_Displacement_Free	Displacement Charge	hf9d4a8f8g08d8g4b3ag835cgb727193364b0
+WPN_LLWEAPONEX_RemoteMine_Explosive	Explosive Charge	h7f2a8331gda7cg4c66ga1a1g56af5ee35e86
+WPN_LLWEAPONEX_RemoteMine_Explosive_Free	Explosive Charge	hb681f9e5g7ac3g4da0g88f9ge30d4c14b563
+WPN_LLWEAPONEX_RemoteMine_PoisonCloud	Poison Gas Charge	h4262ee77g4c47g4730ga3d9gc1ebd98c28d7
+WPN_LLWEAPONEX_RemoteMine_PoisonCloud_Free	Poison Gas Charge	hf156b9a6ga23cg42b6ga9d3g1c5ff2051729
+WPN_LLWEAPONEX_RemoteMine_Shrapnel	Shrapnel Charge	h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a
+WPN_LLWEAPONEX_RemoteMine_Shrapnel_Free	Shrapnel Charge	he0dca1f1g445fg40ecg9a7ag3b09c7cf1429
+WPN_LLWEAPONEX_RemoteMine_Tar	Tar Charge	hb9317ba0ga942g4611g857egeff78f33de06
+WPN_LLWEAPONEX_RemoteMine_Tar_Free	Tar Charge	h51057b7cgb4c7g4807ga38fg0824fb151cd1

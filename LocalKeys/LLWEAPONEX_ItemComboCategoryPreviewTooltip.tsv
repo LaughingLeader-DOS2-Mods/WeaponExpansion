@@ -1,17 +1,13 @@
-Key	Content
-ObjectCategories_LLWEAPONEX_BalrinAxe_Elemental_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font> (Elemental)
-ObjectCategories_LLWEAPONEX_BalrinAxe_Oil_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font> (Oil)
-ObjectCategories_LLWEAPONEX_BalrinAxe_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font>
-ObjectCategories_LLWEAPONEX_Kevin_Normal_Tooltip	<font color='#C7A758'>Kevin</font> (Normal)
-ObjectCategories_LLWEAPONEX_Runeblade_Inert_1H_Tooltip	Inert Runeblade
-ObjectCategories_LLWEAPONEX_Transform_Constitution_Tooltip	Token of Constitution
-ObjectCategories_LLWEAPONEX_Transform_Finesse_Tooltip	Token of Finesse
-ObjectCategories_LLWEAPONEX_Transform_Intelligence_Tooltip	Token of Intelligence
-ObjectCategories_LLWEAPONEX_Transform_Memory_Tooltip	Token of Memory
-ObjectCategories_LLWEAPONEX_Transform_Reset_Tooltip	Token of Reversal
-ObjectCategories_LLWEAPONEX_Transform_Strength_Tooltip	Token of Strength
-ObjectCategories_LLWEAPONEX_Transform_Wits_Tooltip	Token of Wits
-ObjectCategories_LLWEAPONEX_OniGauntlet_1_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
-ObjectCategories_LLWEAPONEX_OniGauntlet_2_Tooltip	<font color='#C7A758'>Oni Gauntlet (Empowered)</font> Power
-ObjectCategories_LLWEAPONEX_OniGauntlet_3_Tooltip	<font color='#C7A758'>Oni Gauntlet (Unleashed)</font> Power
-ObjectCategories_LLWEAPONEX_OniGauntlet_Tooltip	<font color='#C7A758'>Oni Gauntlet</font> Power
+Key	Content	Handle
+ObjectCategories_LLWEAPONEX_BalrinAxe_Elemental_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font> (Elemental)	hd77ecaa3g654cg43b5gb502gf1519eb9a851
+ObjectCategories_LLWEAPONEX_BalrinAxe_Oil_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font> (Oil)	h2bd6993fg21f0g4223g8153g07ee4c6787d6
+ObjectCategories_LLWEAPONEX_BalrinAxe_Tooltip	<font color='#C7A758'>Balrin's Throwing Axe</font>	hdd7891d6ge6e6g40b6g8923gca9a6967f805
+ObjectCategories_LLWEAPONEX_Kevin_Normal_Tooltip	<font color='#C7A758'>Kevin</font> (Normal)	hbaf6baa1g5907g4653g9ddbgbec3701bb075
+ObjectCategories_LLWEAPONEX_Runeblade_Inert_1H_Tooltip	Inert Runeblade	h4343971egf586g483bgba2ag7aebcba49c5e
+ObjectCategories_LLWEAPONEX_Transform_Constitution_Tooltip	Token of Constitution	h3dd295f8g923eg46c3ga9bcgcea684e45b47
+ObjectCategories_LLWEAPONEX_Transform_Finesse_Tooltip	Token of Finesse	h201c3042g5cf5g4eeegb650ge3ee008c326e
+ObjectCategories_LLWEAPONEX_Transform_Intelligence_Tooltip	Token of Intelligence	hdeb48cc2gbcdeg4163ga029g5af09738e6a2
+ObjectCategories_LLWEAPONEX_Transform_Memory_Tooltip	Token of Memory	h1f50077bgc01fg4894g94b0g9b4325c7769d
+ObjectCategories_LLWEAPONEX_Transform_Reset_Tooltip	Token of Reversal	hda77fb68g5fcag4c07g9902gdc62758c1b24
+ObjectCategories_LLWEAPONEX_Transform_Strength_Tooltip	Token of Strength	h4aebc2e4g2ae1g4c5eg9c3agd1c7d026ac0b
+ObjectCategories_LLWEAPONEX_Transform_Wits_Tooltip	Token of Wits	hdd6363b2g3404g4c0egbf78g555b249b0acf

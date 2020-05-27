@@ -1,36 +1,34 @@
-Key	Content
-LLWEAPONEX_Kevin_Poisoned_1	Kevin (Poisoned)
-LLWEAPONEX_Kevin_Clear_Poison_1	Kevin (Normal)
-LLWEAPONEX_Kevin_Oiled_1	Kevin (Oiled)
-LLWEAPONEX_Kevin_Clear_Oil_1	Kevin (Normal)
-LLWEAPONEX_Kevin_Nails_1	Kevin (Nails)
-LLWEAPONEX_Kevin_Clear_Nails_1	Kevin (Normal)
-LLWEAPONEX_Shuriken_Normal_1	Shuriken (Normal)
-LLWEAPONEX_Shuriken_Poisoned_1	Shuriken (Poisoned)
-LLWEAPONEX_Shuriken_Clear_Poison_1	Shuriken
-LLWEAPONEX_Shuriken_Oiled_1	Shuriken (Oiled)
-LLWEAPONEX_Shuriken_Clear_Oil_1	Shuriken
-LLWEAPONEX_Quarterstaff_Crafted_Wood_1	Quarterstaff (Wood)
-LLWEAPONEX_Quarterstaff_Crafted_Metal_1	Quarterstaff (Metal)
-LLWEAPONEX_Runeblade_Inert_1H_Air_1	Runeblade (Air)
-LLWEAPONEX_Runeblade_Inert_1H_Chaos_1	Runeblade (Chaos)
-LLWEAPONEX_Runeblade_Inert_1H_Earth_1	Runeblade (Earth)
-LLWEAPONEX_Runeblade_Inert_1H_Fire_1	Runeblade (Fire)
-LLWEAPONEX_Runeblade_Inert_1H_Poison_1	Runeblade (Poison)
-LLWEAPONEX_Runeblade_Inert_1H_Water_1	Runeblade (Water)
-LLWEAPONEX_Runeblade_Inert_1H_1	Runeblade (Inert)
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil_1	Balrin's Throwing Axe (Oil)
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Oven_1	Balrin's Throwing Axe (Fire)
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Bonfire_1	Balrin's Throwing Axe (Fire)
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air_Anvil_1	Balrin's Throwing Axe (Lightning)
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water_Anvil_1	Balrin's Throwing Axe (Ice)
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Well_1	Balrin's Throwing Axe (Normal)
-WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Water_1	Balrin's Throwing Axe (Normal)
-LOOT_LLWEAPONEX_Orb_Thunder_A_Upgrade_1	Shiden, Thunder Orb Upgrade
-LOOT_LLWEAPONEX_Orb_Thunder_B_Upgrade_1	Shiden, Thunder Orb Upgrade 2
-GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Air_A_1	<font color='#7478DC'>Flask of Air Weakness</font>
-GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Chaos_A_1	<font color='#D040D0'>Flask of Chaotic Weakness</font>
-GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Earth_A_1	<font color='#AA895B'>Flask of Earth Weakness</font>
-GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Fire_A_1	<font color='#C76537'>Flask of Fire Weakness</font>
-GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Poison_A_1	<font color='#00AA00'>Flask of Poison Weakness</font>
-GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Water_A_1	<font color='#188EDE'>Flask of Water Weakness</font>
+Key	Content	Handle
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Air_A_1	<font color='#7478DC'>Flask of Air Weakness</font>	h2fef8892ga0f9g49d7g953bg64d7cb8d7249
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Chaos_A_1	<font color='#D040D0'>Flask of Chaotic Weakness</font>	h51346687ga5e7g43feg9047g1406918d0719
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Earth_A_1	<font color='#AA895B'>Flask of Earth Weakness</font>	h57f6c5dcg34d5g4144g8e78g0bd2d0d164f6
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Fire_A_1	<font color='#C76537'>Flask of Fire Weakness</font>	h2716e00ag9f1fg4830gbd23g8894f0cc5a98
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Poison_A_1	<font color='#00AA00'>Flask of Poison Weakness</font>	h34cca20cg817dg4132ga584gf9c6fcce8790
+GRN_LLWEAPONEX_Ingredient_Flask_Weakness_Water_A_1	<font color='#188EDE'>Flask of Water Weakness</font>	hc8c7c3d0g67c4g4048g8ab6gb72d9c8ced96
+LLWEAPONEX_Kevin_Clear_Nails_1	Kevin (Normal)	h35865821g7403g4bb4g99bdga8a26e72f85f
+LLWEAPONEX_Kevin_Clear_Oil_1	Kevin (Normal)	hd5ef97f9gfdeeg4750ga076g2e3643758480
+LLWEAPONEX_Kevin_Clear_Poison_1	Kevin (Normal)	he49060f5g395eg4d83g8b0dg9aa36eda8973
+LLWEAPONEX_Kevin_Nails_1	Kevin (Nails)	h3a77be5cgd727g4b23g83ebg8dd33ba995d3
+LLWEAPONEX_Kevin_Oiled_1	Kevin (Oiled)	h3464c53dgce86g4e13g97f9gc44c00c4dcaf
+LLWEAPONEX_Kevin_Poisoned_1	Kevin (Poisoned)	h7f203853gddc1g4fc5g8a28gde23abeda6f3
+LLWEAPONEX_Quarterstaff_Crafted_Metal_1	Quarterstaff (Metal)	h32a910e6gfc6cg431egbb26g9b4c67639010
+LLWEAPONEX_Quarterstaff_Crafted_Wood_1	Quarterstaff (Wood)	h35037378g9f64g488dga457g5a32144339dd
+LLWEAPONEX_Runeblade_Inert_1H_1	Runeblade (Inert)	hcb0893f0g395cg4ef0ga0fcg7f0c2d5e93a8
+LLWEAPONEX_Runeblade_Inert_1H_Air_1	Runeblade (Air)	h232179b9g3a1fg4732ga4c3g1cd20f5dc912
+LLWEAPONEX_Runeblade_Inert_1H_Chaos_1	Runeblade (Chaos)	hf0d87dc5gee89g4c41gaac6g452a2d790f97
+LLWEAPONEX_Runeblade_Inert_1H_Earth_1	Runeblade (Earth)	h2edcadadgbc7eg471fgb92eg5a54505d870f
+LLWEAPONEX_Runeblade_Inert_1H_Fire_1	Runeblade (Fire)	h5abd5ba3g9adfg4b29g81e9g342cfcf6d917
+LLWEAPONEX_Runeblade_Inert_1H_Poison_1	Runeblade (Poison)	h1ca4c759gc0f8g48f7g9483g74852e609c32
+LLWEAPONEX_Runeblade_Inert_1H_Water_1	Runeblade (Water)	hd82c139cgabd9g4856g9ebcg812f18491e9e
+LLWEAPONEX_Shuriken_Clear_Oil_1	Shuriken	h31e58acegf828g451bgbe86g5fea547456bc
+LLWEAPONEX_Shuriken_Clear_Poison_1	Shuriken	h96d9d2fcge7eeg4c11g923cgc6f721840db6
+LLWEAPONEX_Shuriken_Normal_1	Shuriken (Normal)	h1481e457gb42cg4c8ag9d0cgdb2216832df9
+LLWEAPONEX_Shuriken_Oiled_1	Shuriken (Oiled)	hc68a221bgb71bg4112g8075g6376ab651fe6
+LLWEAPONEX_Shuriken_Poisoned_1	Shuriken (Poisoned)	h4bc538cfge174g49fbg8a22geb2e8e320bc6
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Air_Anvil_1	Balrin's Throwing Axe (Lightning)	hf347a64dga297g4426g9397gbfaa416e7aba
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Bonfire_1	Balrin's Throwing Axe (Fire)	h0a4c714cg4ca2g47b9gb35bgdbcedde528a5
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Fire_Oven_1	Balrin's Throwing Axe (Fire)	h204aa235gc4e1g4cb9gb42eg061c50fc7b85
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Oil_1	Balrin's Throwing Axe (Oil)	he06eefc3g4b22g42b2ga54agd5f19035f599
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Water_1	Balrin's Throwing Axe (Normal)	hec77e9cagab3ag4750g8994g186dcea14ef1
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Reset_Well_1	Balrin's Throwing Axe (Normal)	hc6342d3bgfc64g4ac9gb5e7ge1b812759439
+WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A_Water_Anvil_1	Balrin's Throwing Axe (Ice)	h23eb9679g58eeg49e0gb863g70995541ce68

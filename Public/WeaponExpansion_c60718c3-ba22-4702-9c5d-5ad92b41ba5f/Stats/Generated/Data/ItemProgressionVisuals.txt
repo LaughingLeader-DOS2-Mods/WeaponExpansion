@@ -922,70 +922,6 @@ add levelgroup 0,0,"All"
 add rootgroup "6650aab3-c5e3-45a8-ae4e-b4e8011cb1a6",""
 add namegroup "WPN_LLWEAPONEX_Katana_1H_Crafted","",""
 
-new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_A"
-
-add levelgroup 0,0,"Common"
-add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","",""
-
-add levelgroup 0,0,"Uncommon"
-add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","Cool",""
-
-add levelgroup 0,0,"Rare"
-add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Rare","",""
-
-add levelgroup 0,0,"Epic"
-add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","",""
-
-add levelgroup 0,0,"Legendary"
-add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
-
-add levelgroup 0,0,"Divine"
-add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
-
-new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_A_Crafted"
-
-add levelgroup 0,0,"All"
-add rootgroup "54b25ea8-90e5-4376-8012-1289d6126ced",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Crafted","",""
-
-new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_B"
-
-add levelgroup 0,0,"Common"
-add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","",""
-
-add levelgroup 0,0,"Uncommon"
-add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal","Cool",""
-
-add levelgroup 0,0,"Rare"
-add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Rare","",""
-
-add levelgroup 0,0,"Epic"
-add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","",""
-
-add levelgroup 0,0,"Legendary"
-add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
-
-add levelgroup 0,0,"Divine"
-add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic","Cool",""
-
-new itemgroup "WPN_LLWEAPONEX_Wakizashi_1H_B_Crafted"
-
-add levelgroup 0,0,"All"
-add rootgroup "620fc8b8-da7f-4458-8b28-59e8e6c7b6a2",""
-add namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Crafted","",""
-
 new itemgroup "WPN_LLWEAPONEX_Katana_2H"
 
 add levelgroup 0,0,"Common"
@@ -1023,38 +959,6 @@ new itemgroup "WPN_LLWEAPONEX_Katana_2H_B_Crafted"
 add levelgroup 0,0,"All"
 add rootgroup "bd2a1c81-5aba-4c16-b878-00cc23f84d88",""
 add namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted","",""
-
-new itemgroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted"
-
-add levelgroup 0,0,"All"
-add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted","",""
-
-new itemgroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A"
-
-add levelgroup 0,0,"Common"
-add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal","",""
-
-add levelgroup 0,0,"Uncommon"
-add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal","Cool",""
-
-add levelgroup 0,0,"Rare"
-add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare","",""
-
-add levelgroup 0,0,"Epic"
-add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic","",""
-
-add levelgroup 0,0,"Legendary"
-add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic","",""
-
-add levelgroup 0,0,"Divine"
-add rootgroup "97f0cf49-df6b-46ef-9f94-976cced93314",""
-add namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic","",""
 
 new itemgroup "ARM_LLWEAPONEX_Katana_2H_B_Sheathe"
 
@@ -1976,24 +1880,6 @@ add levelgroup 0,0,"All"
 add rootgroup "507801c0-4c6b-4b39-9aed-13fcd0962dd9",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A","",""
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A"
-
-add levelgroup 0,0,"All"
-add rootgroup "6b7e1caa-a610-4e40-91dc-7f2df1b86d42",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
-
-add levelgroup 0,0,"All"
-add rootgroup "867b1acd-165d-42cb-9fed-7d165845915a",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged"
-
-add levelgroup 0,0,"All"
-add rootgroup "e1bb0780-be83-4425-850c-dce56e1706ef",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged","",""
-
 new itemgroup "WPN_LLWEAPONEX_HandCrossbow_Crafted_Lizards_A"
 
 add levelgroup 0,0,"All"
@@ -2150,24 +2036,6 @@ add levelgroup 0,0,"All"
 add rootgroup "ca59856d-6876-4f9c-8fe5-e086df193ca6",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A","",""
 
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
-
-add levelgroup 0,0,"All"
-add rootgroup "b1320940-1afb-479a-b510-875afdb12d41",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
-
-add levelgroup 0,0,"All"
-add rootgroup "e03787b9-acac-4563-953e-a1149a6ebec1",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
-
-add levelgroup 0,0,"All"
-add rootgroup "fa2345b0-68f5-443f-8665-d2a5991bbf29",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3","",""
-
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
 
 add levelgroup 0,0,"All"
@@ -2179,30 +2047,6 @@ new itemgroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A"
 add levelgroup 0,0,"All"
 add rootgroup "ca61e441-9446-40ac-811d-736327d4a0f0",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A"
-
-add levelgroup 0,0,"All"
-add rootgroup "e955f532-3e2c-41e7-b834-c53a50d4708c",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand"
-
-add levelgroup 0,0,"All"
-add rootgroup "0f42e70c-5b1b-4a8f-9f3e-e462e2f70850",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand"
-
-add levelgroup 0,0,"All"
-add rootgroup "a7512f1c-3c94-4b91-8d20-2580343e1cac",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand","",""
-
-new itemgroup "WPN_UNIQUE_LLWEAPONEX_Shield_1H_BurialBlade_A_Offhand"
-
-add levelgroup 0,0,"All"
-add rootgroup "a7512f1c-3c94-4b91-8d20-2580343e1cac",""
-add namegroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand","",""
 
 new itemgroup "ARM_LLWEAPONEX_Quiver_A"
 
@@ -2351,24 +2195,6 @@ new itemgroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A"
 add levelgroup 0,0,"All"
 add rootgroup "f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A","",""
-
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1"
-
-add levelgroup 0,0,"All"
-add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1","",""
-
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2"
-
-add levelgroup 0,0,"All"
-add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2","",""
-
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
-
-add levelgroup 0,0,"All"
-add rootgroup "27ac5dab-00a7-4013-9568-2d669b581939",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3","",""
 
 new itemgroup "WPN_LLWEAPONEX_Glaive_2H"
 
@@ -2573,12 +2399,6 @@ add rootgroup "a562214b-4a98-401a-bbfb-636bcf971900",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A","",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A","",""
 
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
-
-add levelgroup 0,0,"All"
-add rootgroup "ce535023-af7f-46a3-bd70-85c8f820dc21",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A","",""
-
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_ArmCannon_A"
 
 add levelgroup 0,0,"All"
@@ -2626,12 +2446,6 @@ new itemgroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A"
 add levelgroup 0,0,"All"
 add rootgroup "dda1182e-63e3-4a7a-8855-5295fa1e67cb",""
 add namegroup "ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A","",""
-
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A"
-
-add levelgroup 0,0,"All"
-add rootgroup "84af126d-0e35-482b-b117-f85e7672a129",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A","",""
 
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A"
 

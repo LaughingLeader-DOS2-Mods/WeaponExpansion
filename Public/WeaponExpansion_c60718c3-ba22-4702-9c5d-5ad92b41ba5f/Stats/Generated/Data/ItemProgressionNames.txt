@@ -45,27 +45,12 @@ add name "ARM_UNIQUE_LLWEAPONEX_Blindfold_DisplayName",""
 new namegroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A"
 add name "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A_DisplayName",""
 
-new namegroup "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
-add name "ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_DisplayName",""
-
 new namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A"
 add name "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_1_DisplayName",""
 add namecool "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_2_DisplayName",""
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_Captain_A"
 add name "ARM_UNIQUE_LLWEAPONEX_Pistol_Captain_A_DisplayName",""
-
-new namegroup "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A"
-add name "ARM_UNIQUE_LLWEAPONEX_Mask_Tengu_A_DisplayName",""
-
-new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1"
-add name "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_1_DisplayName",""
-
-new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2"
-add name "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_2_DisplayName",""
-
-new namegroup "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3"
-add name "ARM_UNIQUE_LLWEAPONEX_OniGauntlet_A_3_DisplayName",""
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A"
 add name "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A_DisplayName",""
@@ -575,30 +560,6 @@ add name "WPN_LLWEAPONEX_Katana_1H_Rare_3_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_1H_Rare_4_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_1H_Rare_5_DisplayName",""
 
-new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Crafted"
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Crafted_DisplayName",""
-
-new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Epic"
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_1_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_2_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_3_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Epic_4_DisplayName",""
-add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Epic_5_DisplayName",""
-add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Epic_6_DisplayName",""
-add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Epic_7_DisplayName",""
-
-new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Normal"
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Normal_1_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Normal_2_DisplayName",""
-add namecool "WPN_LLWEAPONEX_Wakizashi_1H_Normal_3_DisplayName",""
-
-new namegroup "WPN_LLWEAPONEX_Wakizashi_1H_Rare"
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_1_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_2_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_3_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_4_DisplayName",""
-add name "WPN_LLWEAPONEX_Wakizashi_1H_Rare_5_DisplayName",""
-
 new namegroup "WPN_LLWEAPONEX_Katana_2H_Crafted"
 add name "WPN_LLWEAPONEX_Katana_2H_Crafted_DisplayName",""
 
@@ -620,28 +581,6 @@ add name "WPN_LLWEAPONEX_Katana_2H_Epic_2_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_2H_Epic_3_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_2H_Epic_4_DisplayName",""
 add name "WPN_LLWEAPONEX_Katana_2H_Epic_5_DisplayName",""
-
-new namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted"
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Crafted",""
-
-new namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal"
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal_1_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal_2_DisplayName",""
-add namecool "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Normal_3_DisplayName",""
-
-new namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare"
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare_1_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare_2_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare_3_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare_4_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Rare_5_DisplayName",""
-
-new namegroup "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic"
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic_1_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic_2_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic_3_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic_4_DisplayName",""
-add name "WPN_LLWEAPONEX_Katana_2H_ShuraSamurai_A_Epic_5_DisplayName",""
 
 new namegroup "WPN_LLWEAPONEX_Quarterstaff_Epic"
 add name "WPN_LLWEAPONEX_Quarterstaff_Epic_1_DisplayName",""
@@ -942,9 +881,6 @@ add name "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_DisplayName",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_DisplayName",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A"
-add name "WPN_UNIQUE_LLWEAPONEX_Flamethrower_2H_A_DisplayName",""
-
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A_DisplayName",""
 
@@ -960,12 +896,6 @@ add name "WPN_UNIQUE_LLWEAPONEX_DualShields_OrmaReeve_DisplayName",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_DisplayName",""
 
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee"
-add name "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Melee_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged"
-add name "WPN_UNIQUE_LLWEAPONEX_Gun_1H_VampireSlayer_A_Ranged_DisplayName",""
-
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_DisplayName",""
 
@@ -974,15 +904,6 @@ add name "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_DisplayName",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
 add name "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1"
-add name "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2"
-add name "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3"
-add name "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_DisplayName",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H"
 add name "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_DisplayName",""
@@ -1010,15 +931,6 @@ add name "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A"
-add name "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand"
-add name "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_A_Mainhand_DisplayName",""
-
-new namegroup "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand"
-add name "WPN_UNIQUE_LLWEAPONEX_Club_1H_BurialBlade_A_Offhand_DisplayName",""
 
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_DisplayName",""

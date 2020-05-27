@@ -1,113 +1,110 @@
-LLWEAPONEX_BEER_CHAMPION_Description	Character never gets sleepy while drinking alcohol.
-LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer
-LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.
-LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power
-LLWEAPONEX_CONCUSSION_Description	Character has a serious concussion.<br>Small chance on each basic attack to <font color='#FF8C00'>Fumble</font>, interrupting the attack.
-LLWEAPONEX_CONCUSSION_DisplayName	Concussion
-LLWEAPONEX_COPYLASTSKILL_DisplayName	Copy Last Skill
-LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.
-LLWEAPONEX_DEATH_SENTENCE_BLOCKED_DisplayName	Marked for Death
-LLWEAPONEX_DEATH_SENTENCE_Description	Character has been marked for death.<br>If killed, the character will return as a friendly <font color='#73f6ff'>Revenant<font> for 2 turns.
-LLWEAPONEX_DEATH_SENTENCE_DisplayName	Death Sentence
-LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Damage [1]<br>Projectile_Fireball:Damage [2]
-LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status
-LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.
-LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles
-LLWEAPONEX_DEMON_HAND_DEFENSE_APPLY_DisplayName	<font color='#FFCE58'>Devil Hand Aura (3m)</font>
-LLWEAPONEX_DEMON_HAND_EQUIPPED_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a 30% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>
-LLWEAPONEX_DEMON_HAND_EQUIPPED_DisplayName	Gain Protection from a Demon
-LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.
-LLWEAPONEX_DIZZY_DisplayName	Dizzy
-LLWEAPONEX_DOUSED_DisplayName	Doused
-LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taking [1] per turn.
-LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane
-LLWEAPONEX_DRAW_ARROW_DisplayName	Draw Arrow
-LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!
-LLWEAPONEX_EVAPORATE_DisplayName	Evaporated
-LLWEAPONEX_FUMBLE_Description	Character has fumbled their basic attack!
-LLWEAPONEX_FUMBLE_DisplayName	Fumbled!
-LLWEAPONEX_HELMSPLITTER_Description	Character's Armor is being destroyed.
-LLWEAPONEX_HELMSPLITTER_DisplayName	Destroy Armor
-LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target
-LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.
-LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging
-LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!
-LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Knocked Down (Magic)
-LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] Vitality per turn.
-LLWEAPONEX_MENDING_DisplayName	Mending
-LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is recharging.
-LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)
-LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.
-LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound
-LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.
-LLWEAPONEX_SHOCKED_RESISTANCE_DisplayName	Shock Resistance
-LLWEAPONEX_SOUL_BURN_1_DisplayName	Soul Burn
-LLWEAPONEX_SOUL_BURN_2_DisplayName	Soul Burn II
-LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III
-LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV
-LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V
-LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.
-LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.
-LLWEAPONEX_TARRED_DisplayName	Tarred
-LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.
-LLWEAPONEX_TRIPPING_DisplayName	Tripping
-LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!
-LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage
-LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.
-LLWEAPONEX_WATER_BURN_DisplayName	Water Burn
-LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark
-LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.
-LLWEAPONEX_WARCHIEF_MARK_CONSUME_DisplayName	Explode Warchief's Mark for bonus damage
-LLWEAPONEX_WARCHIEF_WHIRLWIND_DAMAGE_DisplayName	Hit Enemies in a 4m Radius
-LLWEAPONEX_WARCHARGE_DisplayName	War Charge
-LLWEAPONEX_WARCHARGE_Description	Character is initiating a revolutionary war charge. Get'em!
-LLWEAPONEX_WARCHARGE_APPLY_DisplayName	War Charge
-LLWEAPONEX_WARCHARGE_BONUS_DisplayName	Charging (War Charge)
-LLWEAPONEX_WARCHARGE_BONUS_Description	Character is charging at their enemies. Get'em!
-LLWEAPONEX_WARCHARGE_DAMAGEBOOST_DisplayName	First Strike (War Charge)
-LLWEAPONEX_WARCHARGE_DAMAGEBOOST_Description	Character has a damage bonus for their first attack.
-LLWEAPONEX_BANNER_RALLY_DisplayName	Rallying
-LLWEAPONEX_BANNER_RALLY_Description	Character is rallying the party to battle.
-LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS_DisplayName	<font color='#FEFFB3'>Rally of the Divine</font>
-LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS_Description	Character is inspired by the <font color='#c5a65a'>Banner of Unruly Faith</font>. How glorious!
-LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS_DisplayName	<font color='#FF5522'>Rally of the Pack</font>
-LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS_Description	Character is inspired by the <font color='#c5a65a'>Banner of the Pack</font>. Ferocity is unleashed.
-LLWEAPONEX_RANDOM_AILMENT_DisplayName	Random Elemental Ailment
-LLWEAPONEX_ARMCANNON_CHARGED_DisplayName	Charged (Runic Cannon)
-LLWEAPONEX_ARMCANNON_CHARGED_Description	The <font color='#c5a65a'>Runic Cannon</font> is charged and ready to disperse stored energy."
-LLWEAPONEX_ARMCANNON_RANGED_HIT_DisplayName	Deals Shadow Damage to broken Magic Armour.
-LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith
-LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.
-LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName	Bounty of the Harvest
-LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls with <font color='#c5a65a'>Soul Harvest</font>, gaining a permanent damage bonus.
-LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_DisplayName	Bada Bing
-LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_Description	Character's next attack with their oversized scroll will unleash a random spell and grant bonus damage.
-LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_ELEMENT_Description	Character's oversized scroll has been infused with a spell school, and has gained bonus damage.
-LLWEAPONEX_FLAMETHROWER_PYRODANCE_DisplayName	Pyromaniac's Dance
-LLWEAPONEX_FLAMETHROWER_PYRODANCE_Description	Character gains bonuses from Burning things.<br><font color='#DD9911'>Character moves faster on fire surfaces.</font><br><font color='#3399FF'>Removed by Wet, Chilled, or Frozen.</font>
-LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED_DisplayName	Hot Feet (Pyromaniac's Dance)
-LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED_Description	Character gained a speed boost from standing on fire.<br><font color='#FF4411'>Removed when no longer standing on fire.</font>
-LLWEAPONEX_POWERGAUNTLETS_ACTIVE_DisplayName	Giant's Strength
-LLWEAPONEX_POWERGAUNTLETS_ACTIVE_Description	Through the power of the <font color='#c5a65a'>Power Gauntlets</font>, this character can wield two-handed melee weapons with one hand.
-LLWEAPONEX_UNRELENTING_RAGE_DisplayName	Raging
-LLWEAPONEX_UNRELENTING_RAGE_Description	Character is unleashing an unrelenting fury.<br><font color='#65C900'>Critical Damage +50%</font>
-LLWEAPONEX_UNRELENTING_RAGE_BONUS_DisplayName	Fury's Reward
-LLWEAPONEX_UNRELENTING_RAGE_BONUS_Description	Character is empowered from slaying enemies.
-LLWEAPONEX_WEAKNESS_AIR_DisplayName	Air Weakness
-LLWEAPONEX_WEAKNESS_AIR_Description	Character has lowered resistance to <font color='#7D71D9'>air damage</font>.
-LLWEAPONEX_WEAKNESS_CHAOS_DisplayName	Chaotic Weakness
-LLWEAPONEX_WEAKNESS_CHAOS_Description	Character has lowered resistances to <font color='#9A00FF'>every element</font>.
-LLWEAPONEX_WEAKNESS_EARTH_DisplayName	Earth Weakness
-LLWEAPONEX_WEAKNESS_EARTH_Description	Character has lowered resistance to <font color='#F7BA14'>earth damage</font>.
-LLWEAPONEX_WEAKNESS_FIRE_DisplayName	Fire Weakness
-LLWEAPONEX_WEAKNESS_FIRE_Description	Character has lowered resistance to <font color='#FE6E27'>fire damage</font>.
-LLWEAPONEX_WEAKNESS_POISON_DisplayName	Poison Weakness
-LLWEAPONEX_WEAKNESS_POISON_Description	Character has lowered resistance to <font color='#65C900'>poison damage</font>.
-LLWEAPONEX_WEAKNESS_WATER_DisplayName	Water Weakness
-LLWEAPONEX_WEAKNESS_WATER_Description	Character has lowered resistance to <font color='#4197E2'>water damage</font>.
-LLWEAPONEX_WEAKNESS_PIERCING_DisplayName	Piercing Weakness
-LLWEAPONEX_WEAKNESS_PIERCING_Description	Character has lowered resistance to <font color='#CD1F1F'>piercing damage</font>.
-LLWEAPONEX_WEAKNESS_PHYSICAL_DisplayName	Physical Weakness
-LLWEAPONEX_WEAKNESS_PHYSICAL_Description	Character has lowered resistance to <font color='#AE9F95'>physical damage</font>.
-LLWEAPONEX_WEAKNESS_SHADOW_DisplayName	Shadow Weakness
-LLWEAPONEX_WEAKNESS_SHADOW_Description	Character has lowered resistance to <font color='#797980'>shadow damage</font>.
+Key	Content	Handle
+LLWEAPONEX_ARMCANNON_CHARGED_Description	The <font color='#c5a65a'>Runic Cannon</font> is charged and ready to disperse stored energy."	h10dce197g7a65g4923ga8b1g58f5ec28306d
+LLWEAPONEX_ARMCANNON_CHARGED_DisplayName	Charged (Runic Cannon)	h818a634cg4f07g431cga226g09dcdfbc45dc
+LLWEAPONEX_ARMCANNON_RANGED_HIT_DisplayName	Deals Shadow Damage to broken Magic Armour.	hd0b7916bgcc5eg4739gb35fge74c48acf1b2
+LLWEAPONEX_BANNER_RALLY_Description	Character is rallying the party to battle.	h271090b1g4c5bg4ccbg8928gf421b8476af4
+LLWEAPONEX_BANNER_RALLY_DisplayName	Rallying	h66ea9bb3g8724g4001gb9acgccf4a5696829
+LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS_Description	Character is inspired by the <font color='#c5a65a'>Banner of Unruly Faith</font>. How glorious!	h85ba1d14g532dg4a0cg9a29gf1980a445150
+LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS_DisplayName	<font color='#FEFFB3'>Rally of the Divine</font>	hf3088c78gafa6g4b23ga6b2g65d07edc7440
+LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS_Description	Character is inspired by the <font color='#c5a65a'>Banner of the Pack</font>. Ferocity is unleashed.	h103f5af9g1796g4ba0gb403gdb5007789fb1
+LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS_DisplayName	<font color='#FF5522'>Rally of the Pack</font>	hcb3086d4g369ag41d7ga4c1g71c0a33ec6cc
+LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_ELEMENT_Description	Character's oversized scroll has been infused with a spell school, and has gained bonus damage.	hf3f86a5egb3e2g495bg867fg9328c965296b
+LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_Description	Character's next attack with their oversized scroll will unleash a random spell and grant bonus damage.	h1538fbc9g097ag44f1gb22cg855cafd72989
+LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_DisplayName	Bada Bing	hbe7e4dd2g827ag43a3g8c13g184fd0a01f69
+LLWEAPONEX_BEER_CHAMPION_Description	Character never gets sleepy while drinking alcohol.	h7baf56beg6176g4aa3ga091ge282f1da2c52
+LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer	hdb60b6b5gd43cg4510g88f5g54966bad0b2e
+LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.	hef1d7637g0c58g43a6gad84gf42a91fd0312
+LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power	hd90b1d2cg51b0g4cf3g9349g438c8aca171a
+LLWEAPONEX_CONCUSSION_Description	Character has a serious concussion.<br>Small chance on each basic attack to <font color='#FF8C00'>Fumble</font>, interrupting the attack.	h61d85a55gfadfg417dgb2d0gfc2c1f9a470d
+LLWEAPONEX_CONCUSSION_DisplayName	Concussion	h43cc06a4g9bcdg44b6g88ffgfc91981571dc
+LLWEAPONEX_COPYLASTSKILL_DisplayName	Copy Last Skill	hf7d36abdgcfecg4dc7g87d9gc83429c277a0
+LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.	h9c360dcfg50ebg4961ga029gd4a0215c0d4b
+LLWEAPONEX_DEATH_SENTENCE_BLOCKED_DisplayName	Marked for Death	h78e76f79gc970g43c1gbe25g309a84e022e1
+LLWEAPONEX_DEATH_SENTENCE_Description	Character has been marked for death.<br>If killed, the character will return as a friendly <font color='#73f6ff'>Revenant<font> for 2 turns.	h7e890068gbcdfg4aabg899bgbdf88a47e724
+LLWEAPONEX_DEATH_SENTENCE_DisplayName	Death Sentence	hfaa53f1bgc0a7g4b4cg8b88g1011d145653a
+LLWEAPONEX_DEBUG_TEST_PARAMS_Description	Param Test<br>Status_Arrowhead_Fire:Damage [1]<br>Projectile_Fireball:Damage [2]	hea8585b2gae30g46efga47egf7afed684cc8
+LLWEAPONEX_DEBUG_TEST_PARAMS_DisplayName	Test Status	h31246356gaf34g40e6g97bdg4809255e71f0
+LLWEAPONEX_DEFLECT_PROJECTILES_Description	Character is deflecting projectiles.	hfb2ca138gad5fg44a2gbfccge0367ad3140d
+LLWEAPONEX_DEFLECT_PROJECTILES_DisplayName	Deflect Projectiles	h64a393ccg4ec7g4978gbb35g7bd51b2f8013
+LLWEAPONEX_DEMON_HAND_DEFENSE_APPLY_DisplayName	<font color='#FFCE58'>Devil Hand Aura (3m)</font>	hc23cbf18gaa51g4cdcgb329g38c8aa247f7b
+LLWEAPONEX_DEMON_HAND_EQUIPPED_Description	<font color='#C7A758'>A demon watches over you.</font><br><font color='#ee3f70'>Approaching enemies have a 30% chance to take <font color='#9358ff'>Shadow Damage</font>, and may be afflicted with <font color='#3feeaa'>Soul Burn</font> for 1 turn.</font>	h93acd4bdgd53dg4fb2g9de4g3b5945aaae17
+LLWEAPONEX_DEMON_HAND_EQUIPPED_DisplayName	Gain Protection from a Demon	h6061f14dgad52g4b0dg8933g7cd1337a8da0
+LLWEAPONEX_DIZZY_Description	Character is suffering from extreme dizziness.<br>Actions cost [1] additional AP.	h91b96813g6bedg44acg8d15g5ae092afb051
+LLWEAPONEX_DIZZY_DisplayName	Dizzy	h8db77e32g315ag4744gbaa6g883f6a73c659
+LLWEAPONEX_DOUSED_DisplayName	Doused	h65f38720g1522g4819ga662g1b97e0a9af31
+LLWEAPONEX_DRAGONS_BANE_Description	Dragon has been grounded by a Greatbow. Taking [1] per turn.	he80ce441g9499g4744gbd3ag5d55d702bf33
+LLWEAPONEX_DRAGONS_BANE_DisplayName	Dragon's Bane	h0ed78be5g1afag4d98ga3c3ge547395bf212
+LLWEAPONEX_DRAW_ARROW_DisplayName	Draw Arrow	h241c1d92g6027g4837g9d25g009d917be036
+LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color='#4197e2'>Wet</font> status being evaporated!	h0ab8d13bg763eg48f2gb501g886ee85d35e3
+LLWEAPONEX_EVAPORATE_DisplayName	Evaporated	h44cbcabcgab9dg443bg9351gbb0cab133e98
+LLWEAPONEX_FUMBLE_Description	Character has fumbled their basic attack!	hba147a7bg1a91g4abega77dgc2204e66d8bd
+LLWEAPONEX_FUMBLE_DisplayName	Fumbled!	h7ea00032g103eg4ea1gbf1cg2b4da69e7621
+LLWEAPONEX_HELMSPLITTER_Description	Character's Armor is being destroyed.	hc6ede420gd7adg42edg9ea6g8d0821e4590d
+LLWEAPONEX_HELMSPLITTER_DisplayName	Destroy Armor	ha8c93effg30e8g4c95gb463g2bca95974279
+LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target	hf57b535fgf3fcg486ega575gf3cdbf031e7e
+LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.	h1f0d97c7gf46dg470bg9b0cg5fbd600337ff
+LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging	hb8845258g02cag45f1g88a0gad1068ea170d
+LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!	hcbdf615bg7936g4681g8ccfgd7b160383f54
+LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Knocked Down (Magic)	h74c569f8g2eadg4d48g9437g13375158a532
+LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] Vitality per turn.	h5ad5c605gf678g4489g89bcga95083784978
+LLWEAPONEX_MENDING_DisplayName	Mending	hecd7ffc3g0d63g4ccfg941dgd3d002eecd5a
+LLWEAPONEX_POWERGAUNTLETS_ACTIVE_Description	Through the power of the <font color='#c5a65a'>Power Gauntlets</font>, this character can wield two-handed melee weapons with one hand.	h3f55cf81gc40eg4539gae43g5ae634267e64
+LLWEAPONEX_POWERGAUNTLETS_ACTIVE_DisplayName	Giant's Strength	hc9c2031bg7fa5g4cadga8a6ga65e6e84dd7f
+LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is recharging.	h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59
+LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)	h338fd30cg6831g4f12g9bccg7c73be01a085
+LLWEAPONEX_RANDOM_AILMENT_DisplayName	Random Elemental Ailment	h290e3badg73d8g4c02g9e4fg6956ab910bf9
+LLWEAPONEX_RUPTURE_Description	Character's wound has ruptured! Taking [1] initially and per turn.	h23b919e1gefb5g4b87g9429gaa5146a9ae0b
+LLWEAPONEX_RUPTURE_DisplayName	Ruptured Wound	hca685c88g7af3g4dfcg81b4gbc75302081b3
+LLWEAPONEX_SHOCKED_RESISTANCE_Description	Character is immune to being directly Shocked.	h244ceccfga6f5g43eega961gbe5535607310
+LLWEAPONEX_SHOCKED_RESISTANCE_DisplayName	Shock Resistance	hda997e22g326bg44b2g87d3g3a4add95c505
+LLWEAPONEX_SOUL_BURN_1_DisplayName	Soul Burn	h59620562g06c7g4dd9gbd86g146525534f41
+LLWEAPONEX_SOUL_BURN_2_DisplayName	Soul Burn II	hfd155183g5742g43a3gb016g751208ae49e2
+LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III	hdde1468dg68b2g49e4g8636g441356966ec2
+LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV	h5e99c588ga880g43b5ga2f3g0d4cbc6fce5c
+LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V	h764bc299gdbdeg44d3g96a3g291e65d47063
+LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.	h958f6821gac5fg4a93g89f7gdfc5ad7be764
+LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls with <font color='#c5a65a'>Soul Harvest</font>, gaining a permanent damage bonus.	haf77ac67g58f1g461dgb239g5af43ebc6a6d
+LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName	Bounty of the Harvest	h002f643bg19afg4a78g8822g37c0614b0921
+LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.	h74945633ga7bag49daga570gdba5b298d003
+LLWEAPONEX_TARRED_DisplayName	Tarred	h2e562602g1cbbg4ba0gac36gcc780f8809e2
+LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.	h46549881g092ag4c08ga301g9e043ee34d80
+LLWEAPONEX_TRIPPING_DisplayName	Tripping	h55c9b359gad6fg45f5gb8edg2a98774cd5f5
+LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!	h183de597ga842g42c5gac3bgd61680d21c0b
+LLWEAPONEX_UNDEAD_BONUS_DAMAGE_DisplayName	Undead Bonus Damage	hb1e7d05ag15e5g4b62gbf4eg837bf4b2fd4c
+LLWEAPONEX_UNRELENTING_RAGE_BONUS_Description	Character is empowered from slaying enemies.	hf043482ege1efg49a5gbaf2gbac0ecb56e43
+LLWEAPONEX_UNRELENTING_RAGE_BONUS_DisplayName	Fury's Reward	h6f9c6b3fgfbddg4682gbdebgf5c3f04903d6
+LLWEAPONEX_UNRELENTING_RAGE_Description	Character is unleashing an unrelenting fury.<br><font color='#65C900'>Critical Damage +50%</font>	h4c2dc36bg924eg4a71gb211gc8d70743fdc9
+LLWEAPONEX_UNRELENTING_RAGE_DisplayName	Raging	h82443abeg98f3g4977gba22ga9a785091dbe
+LLWEAPONEX_WARCHARGE_APPLY_DisplayName	War Charge	ha0bc2e7ag52eeg4e97g87c8g406b40f75514
+LLWEAPONEX_WARCHARGE_BONUS_Description	Character is charging at their enemies. Get'em!	hed432810g1e5bg4cccgb869g0ed453f6f6ed
+LLWEAPONEX_WARCHARGE_BONUS_DisplayName	Charging (War Charge)	h31f9ea18g7adbg4b23g93a1g7be268564b95
+LLWEAPONEX_WARCHARGE_DAMAGEBOOST_Description	Character has a damage bonus for their first attack.	h340c2cffg5f68g4cdbga779gc0327133e200
+LLWEAPONEX_WARCHARGE_DAMAGEBOOST_DisplayName	First Strike (War Charge)	ha6cf0993ge5ddg4dbdgbd6fg0f99d8bd93c5
+LLWEAPONEX_WARCHARGE_Description	Character is initiating a revolutionary war charge. Get'em!	h5d6b0411geb36g415agafc8g59e8ed3ab0b1
+LLWEAPONEX_WARCHARGE_DisplayName	War Charge	h979e3a93g84a4g434cg8320gb5eb3931bee0
+LLWEAPONEX_WARCHIEF_MARK_CONSUME_DisplayName	Explode Warchief's Mark for bonus damage	hfab60f56g42abg40bfgb006g43d41f36d5cd
+LLWEAPONEX_WARCHIEF_MARK_Description	Character's has been marked by the <font color='#c5a65a'>Warchief's Halberd</font>.	hb9e220ceg072fg4b21gb00cg86ecef3a25f8
+LLWEAPONEX_WARCHIEF_MARK_DisplayName	Warchief's Mark	h84d76d1egc004g4e77g9b24gb87eb9dede90
+LLWEAPONEX_WARCHIEF_WHIRLWIND_DAMAGE_DisplayName	Hit Enemies in a 4m Radius	hf49aaa63gbb9fg44c6g8e16gd657951220ce
+LLWEAPONEX_WATER_BURN_Description	Character was burned from hot water, and is taking [1] and <font color='#fe6e27'>Fire Damage</font> per turn.	hdfc42773gac5ag42a6gbf66g8b5978d1d011
+LLWEAPONEX_WATER_BURN_DisplayName	Water Burn	h2e604607g818cg4c27gba6ag06f2d6e8f015
+LLWEAPONEX_WEAKNESS_AIR_Description	Character has lowered resistance to <font color='#7D71D9'>air damage</font>.	he071dae7gc53fg45c1ga708g45c4e456b766
+LLWEAPONEX_WEAKNESS_AIR_DisplayName	Air Weakness	h66fd8c59g8a4dg44a2gaafeg71d0a80db595
+LLWEAPONEX_WEAKNESS_CHAOS_Description	Character has lowered resistances to <font color='#9A00FF'>every element</font>.	h1683f225g0155g4015gab2bgf7563a8f4510
+LLWEAPONEX_WEAKNESS_CHAOS_DisplayName	Chaotic Weakness	h39be1846g4a56g40d2g826cga46ecc87c5d0
+LLWEAPONEX_WEAKNESS_EARTH_Description	Character has lowered resistance to <font color='#F7BA14'>earth damage</font>.	haa79df9eg3739g422agad02g3c8dbad36abd
+LLWEAPONEX_WEAKNESS_EARTH_DisplayName	Earth Weakness	h75df2ce7g7a9eg4c6fg9403g08e3d0d26053
+LLWEAPONEX_WEAKNESS_FIRE_Description	Character has lowered resistance to <font color='#FE6E27'>fire damage</font>.	hc38d1e18g8b64g47f6gb3c6g59f5f4912ae4
+LLWEAPONEX_WEAKNESS_FIRE_DisplayName	Fire Weakness	hd8bf07bdg92d1g4794ga271g5c7e1410cc10
+LLWEAPONEX_WEAKNESS_PHYSICAL_Description	Character has lowered resistance to <font color='#AE9F95'>physical damage</font>.	h02ba7b23g7cfbg4da1ga5c0g3afc50e54b66
+LLWEAPONEX_WEAKNESS_PHYSICAL_DisplayName	Physical Weakness	h1a9f4281gab6eg4569gb160gb40035162637
+LLWEAPONEX_WEAKNESS_PIERCING_Description	Character has lowered resistance to <font color='#CD1F1F'>piercing damage</font>.	h7e211432gb35bg4433g8cceg4ccc6949ea6e
+LLWEAPONEX_WEAKNESS_PIERCING_DisplayName	Piercing Weakness	h8d913678gdb4fg41begbca8g0e0a541c8c94
+LLWEAPONEX_WEAKNESS_POISON_Description	Character has lowered resistance to <font color='#65C900'>poison damage</font>.	h6b8c8e3ag008dg4829gb0c8gb38f86b5c810
+LLWEAPONEX_WEAKNESS_POISON_DisplayName	Poison Weakness	hb29bcef2g2085g45acg9401g697bd7fc43a5
+LLWEAPONEX_WEAKNESS_SHADOW_Description	Character has lowered resistance to <font color='#797980'>shadow damage</font>.	h16ba7b22gbbd1g4911gb6bage99f9593bc01
+LLWEAPONEX_WEAKNESS_SHADOW_DisplayName	Shadow Weakness	he42c6583geb61g4b77gbe27gbbc25e37bb5e
+LLWEAPONEX_WEAKNESS_WATER_Description	Character has lowered resistance to <font color='#4197E2'>water damage</font>.	h5d019e10g0e45g4443gb6eeg4a3481650a0d
+LLWEAPONEX_WEAKNESS_WATER_DisplayName	Water Weakness	h7b2b18c8g3e44g4c5bg84e2g36b6727b36d0
+LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.	h9438faeagb29fg4451g8ee7g17e4bf3e31e2
+LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith	hd53002a9g6a71g4350gbe19g9a90ce4d9e19
