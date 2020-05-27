@@ -15,7 +15,6 @@ local debug_templates = {
     "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27",
     "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d",
     "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af",
-    "EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_Captain_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d",
     "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9",
     "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42",
     "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8",

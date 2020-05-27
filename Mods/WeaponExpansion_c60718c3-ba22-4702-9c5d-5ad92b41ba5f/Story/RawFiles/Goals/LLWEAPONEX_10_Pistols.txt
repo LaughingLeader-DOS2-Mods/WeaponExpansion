@@ -19,7 +19,6 @@ DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol
 
 SysClear("DB_LLWEAPONEX_Pistols_ShootingStatus", 2);
 DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003", "LLWEAPONEX_FX_PISTOL_A_SHOOTING");
-DB_LLWEAPONEX_Pistols_ShootingStatus("EQ_UNIQUE_LLWEAPONEX_Belt_Pistol_Captain_A_6e667d23-c8a6-46d6-b6ec-2aa6aa95241d", "LLWEAPONEX_FX_UNIQUE_PISTOL_A_CAPTAIN_SHOOTING");
 
 SysClear("DB_LLWEAPONEX_Pistols_ShootingSkills", 1);
 DB_LLWEAPONEX_Pistols_ShootingSkills("Target_LLWEAPONEX_Pistol_Shoot");

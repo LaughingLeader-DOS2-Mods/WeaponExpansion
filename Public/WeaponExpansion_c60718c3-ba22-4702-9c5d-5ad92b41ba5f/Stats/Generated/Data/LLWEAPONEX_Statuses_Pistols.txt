@@ -14,12 +14,6 @@ data "StatusType" "CONSUME"
 using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 data "Items" "ARM_FX_LLWEAPONEX_Pistol_A"
 
-new entry "LLWEAPONEX_FX_UNIQUE_PISTOL_CAPTAIN_SHOOTING"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
-data "Items" "ARM_FX_UNIQUE_LLWEAPONEX_Pistol_Captain_A"
-
 new entry "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT"
 type "StatusData"
 data "StatusType" "CONSUME"

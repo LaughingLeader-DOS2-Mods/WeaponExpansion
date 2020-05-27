@@ -1976,22 +1976,10 @@ add levelgroup 0,0,"All"
 add rootgroup "94838d55-d5e6-4115-b736-b8b26f321003",""
 add namegroup "ARM_LLWEAPONEX_Pistol_A_Crafted","",""
 
-new itemgroup "ARM_UNIQUE_LLWEAPONEX_Pistol_Captain_A"
-
-add levelgroup 0,0,"All"
-add rootgroup "6e667d23-c8a6-46d6-b6ec-2aa6aa95241d",""
-add namegroup "ARM_UNIQUE_LLWEAPONEX_Pistol_Captain_A","",""
-
 new itemgroup "ARM_FX_LLWEAPONEX_Pistol_A"
 
 add levelgroup 0,0,"All"
 add rootgroup "728f8b1a-7f4d-4912-85e4-054f817f2592",""
-add namegroup "EMPTY","",""
-
-new itemgroup "ARM_FX_UNIQUE_LLWEAPONEX_Pistol_Captain_A"
-
-add levelgroup 0,0,"All"
-add rootgroup "6edf5778-1838-4095-beff-cf8a95dd6699",""
 add namegroup "EMPTY","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_A"
