@@ -1,134 +1,8 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-LLWEAPONEX_Uniques_InitSettings();
+
 KBSECTION
-
-//REGION SETTINGS
-PROC
-LLWEAPONEX_Uniques_InitSettings()
-THEN
-DB_LLWEAPONEX_Uniques_BurialBlade((ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_eef48291-e974-4899-9017-26f23da50c73, (ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_BurialBlade_Mainhand_A_3699038c-b403-4f7d-81c0-7c1fbe628f6d, (ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_BurialBlade_Offhand_A_47d716e9-ead0-45b2-9dc8-0ad841737183);
-
-//END_REGION
-
-//REGION BURIAL_BLADE_SWAP
-QRY
-LLWEAPONEX_Uniques_QRY_PrepareBurialBlade((ITEMGUID)_Mainhand)
-AND
-NOT DB_LLWEAPONEX_Uniques_BurialBlade(_, _Mainhand, _)
-AND
-GetPosition(ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c", _x, _y, _z, _Scythe)
-AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Shield_1H_BurialBlade_Offhand_A_a7512f1c-3c94-4b91-8d20-2580343e1cac", _x, _y, _z, _Offhand)
-THEN
-ItemToInventory(_Scythe, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
-ItemToInventory(_Offhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
-DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand);
-
-QRY
-LLWEAPONEX_Uniques_QRY_PrepareBurialBlade((ITEMGUID)_Mainhand)
-AND
-DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
-THEN
-DB_NOOP(1);
-
-PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
-THEN
-LLWEAPONEX_AnimationSetOverride_Clear(_Char);
-LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
-ObjectClearFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 0);
-
-PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
-THEN
-LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
-ObjectClearFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 0);
-
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
-THEN
-LLWEAPONEX_AnimationSetOverride_Set(_Char, "LLWEAPONEX_Override1", "BurialBlade");
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
-ObjectSetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 0);
-
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_BurialBlade_A_e955f532-3e2c-41e7-b834-c53a50d4708c")
-THEN
-LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_BurialBladeEquipped");
-ObjectSetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 0);
-
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
-AND
-LLWEAPONEX_Uniques_QRY_PrepareBurialBlade(_Mainhand)
-AND
-DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
-THEN
-LeaderLib_Helper_UnequipInSlot(_Char, "Shield");
-LeaderLib_Helper_EquipInSlot(_Char, _Offhand, "Shield");
-ItemLockUnEquip(_Offhand, 1);
-
-PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Mainhand, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
-AND
-DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
-THEN
-ItemLockUnEquip(_Offhand, 0);
-ItemToInventory(_Offhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
-
-IF
-SkillCast(_Char, "Shout_LLWEAPONEX_BurialBlade_Transform", _, _)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Blade", 1)
-AND
-LeaderLib_Helper_QRY_GetItemByTemplate(_Char, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850")
-AND
-DB_LeaderLib_Helper_Temp_ItemFound(_Char, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850", _Mainhand)
-AND
-LLWEAPONEX_Uniques_QRY_PrepareBurialBlade(_Mainhand)
-AND
-DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
-THEN
-NOT DB_LeaderLib_Helper_Temp_ItemFound(_Char, "WPN_UNIQUE_LLWEAPONEX_Sword_1H_BurialBlade_Mainhand_A_0f42e70c-5b1b-4a8f-9f3e-e462e2f70850", _Mainhand);
-CharacterUnequipItem(_Char, _Mainhand);
-CharacterUnequipItem(_Char, _Offhand);
-ItemToInventory(_Mainhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
-ItemToInventory(_Offhand, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
-ItemToInventory(_Scythe, _Char, 1, 0, 1);
-ItemSetOwner(_Scythe, _Char);
-LeaderLib_Helper_EquipInSlot(_Char, _Scythe, "Weapon");
-
-IF
-SkillCast(_Char, "Shout_LLWEAPONEX_BurialBlade_Transform", _, _)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_BurialBladeEquipped_Scythe", 1)
-AND
-CharacterGetEquippedWeapon(_Char, (ITEMGUID)_Scythe)
-AND
-DB_LLWEAPONEX_Uniques_BurialBlade(_Scythe, _Mainhand, _Offhand)
-THEN
-CharacterUnequipItem(_Char, _Scythe);
-ItemToInventory(_Scythe, ITEMGUID_S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f, 1, 0, 0);
-ItemToInventory(_Mainhand, _Char, 1, 0, 0);
-ItemToInventory(_Offhand, _Char, 1, 0, 0);
-ItemSetOwner(_Mainhand, _Char);
-ItemSetOwner(_Offhand, _Char);
-LeaderLib_Helper_EquipInSlot(_Char, _Mainhand, "Weapon");
-LeaderLib_Helper_EquipInSlot(_Char, _Offhand, "Shield");
-//END_REGION
-
-//REGION UPDATES
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 10)
-THEN
-LLWEAPONEX_Uniques_InitSettings();
-//END_REGION
 
 //REGION BEHOLDER
 PROC
@@ -657,38 +531,6 @@ NOT DB_LLWEAPONEX_Uniques_Temp_NextCombinedWarchiefHalberd(_Char, _Template, _Ot
 ItemToInventory(_OtherHalberd, _Halberd, 1, 0, 0);
 SetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", _OtherHalberd);
 SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
-//END_REGION
-
-//REGION DRAGON_BONE_CLAWS
-//WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5
-//EQ_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_ce535023-af7f-46a3-bd70-85c8f820dc21
-
-/*
-IF
-ItemTemplateEquipped("WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5", _Char)
-AND
-CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Claws)
-THEN
-ItemLockUnEquip(_Claws, 1);
-
-IF
-ItemUnEquipFailed(_Claws, _Char)
-AND
-GetTemplate(_Claws, "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5")
-THEN
-ShowNotification(_Char, "LLWEAPONEX_Notifications_UnequipDragonBoneClawsFailed");
-*/
-
-/*
-IF
-ItemTemplateUnEquipped("WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_1f7c15a2-a2ba-484a-9b7c-acb7f0e25ec5", _Char)
-AND
-CharacterGetEquippedItem(_Char, "Gloves", (ITEMGUID)_Claws)
-AND
-GetTemplate(_Claws, "EQ_UNIQUE_LLWEAPONEX_DragonBoneClaws_A_ce535023-af7f-46a3-bd70-85c8f820dc21")
-THEN
-CharacterUnequipItem(_Char, _Claws);
-*/
 //END_REGION
 
 //REGION BOKKEN_SWITCH
@@ -1335,44 +1177,6 @@ AND
 DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char)
 THEN
 NOT DB_LLWEAPONEX_Uniques_Temp_TattoosSwapped(_Char);
-//END_REGION
-
-//REGION FLAMETHROWER_PYRO_DANCE
-PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
-THEN
-LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion", 500);
-NOT DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
-LeaderLib_Statuses_RemoveIfActive(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE");
-LeaderLib_Statuses_RemoveIfActive(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
-
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Firearm_Flamethrower_2H_A_6b7e1caa-a610-4e40-91dc-7f2df1b86d42")
-THEN
-LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_FlamethrowerEquipped", "WeaponExpansion");
-DB_LLWEAPONEX_Flamethrower_Equipped(_Char, _Item);
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
-THEN
-LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_PyroDanceIsActive", "WeaponExpansion");
-
-IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
-THEN
-LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_PyroDanceIsActive", "WeaponExpansion");
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
-AND
-LLWEAPONEX_QRY_IsInSurfaceGroup(_Char, "Fire")
-THEN
-ApplyStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED", 12.0, 0, _Char);
-
-IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE", _)
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_FLAMETHROWER_PYRODANCE_HASTED");
 //END_REGION
 
 //REGION BANNER_STATUSES_REMOVE

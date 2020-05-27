@@ -143,9 +143,6 @@ end
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
-	print("[ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A] Tags:", Ext.StatGetAttribute("ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A", "Tags"))
-	print("[ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A] Comment:", Ext.StatGetAttribute("ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A", "Comment"))
-
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 

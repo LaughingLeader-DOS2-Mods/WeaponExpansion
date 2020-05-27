@@ -47,12 +47,9 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_02_ThrowingListe
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_08_Quivers", "LLWEAPONEX_QuiverEquipped", 0);
 
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_Flamethrower", "LLWEAPONEX_FlamethrowerEquipped", 1);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_BattleBook_SpellScroll", "LLWEAPONEX_BattleBooks_SpellScrollEquipped", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_PyroDance", "LLWEAPONEX_PyroDanceIsActive", 0);
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_DemonGauntlet", "LLWEAPONEX_DemonGauntletEquipped", 0);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_OniGauntlet", "LLWEAPONEX_OniGauntletEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_Muramasa", "LLWEAPONEX_MuramasaEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_DemolitionBackpack", "LLWEAPONEX_DemolitionBackpackEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_AnvilMace", "LLWEAPONEX_AnvilMaceEquipped", 0);
