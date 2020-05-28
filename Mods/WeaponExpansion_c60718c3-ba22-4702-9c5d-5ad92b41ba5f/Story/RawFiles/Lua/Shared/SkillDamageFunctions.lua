@@ -226,7 +226,7 @@ local function CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseB
 	if not isBoostStat then
 		local boostsString = Ext.StatGetAttribute(stat, "Boosts")
 		if boostsString ~= nil and boostsString ~= "" then
-			local boosts = LeaderLib.StringHelpers.Split(";", boostsString)
+			local boosts = LeaderLib.StringHelpers.Split(boostsString, ";")
 			for i,boostStat in ipairs(boosts) do
 				if boostStat ~= nil and boostStat ~= "" then
 					local boostWeaponStat = CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage)

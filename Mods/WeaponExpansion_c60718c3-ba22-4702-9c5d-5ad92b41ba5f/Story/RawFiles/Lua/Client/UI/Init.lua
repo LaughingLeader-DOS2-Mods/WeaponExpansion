@@ -200,10 +200,6 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 			end
 		end
 	end
-
-	for i=0,99,1 do
-		local var = ui:GetValue("tags_array", "number", i)
-	end
 end
 
 local function MouseTest()
