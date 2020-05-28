@@ -117,6 +117,9 @@ local gameTestTemplates = {
     --"WPN_Dwarves_Staff_2H_A_545f2dc2-1da9-4387-af90-9e866f6288a8",
     "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ee686596-394f-44ae-867b-4596de1feedb",
     "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616",
+    "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_0e98584a-7c57-4a5c-b7d9-57ec79aee85e",
+    "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_068246d7-b4cc-4b6d-9ac8-716fdfd1822d",
+    "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_NoScope_67b548a2-5fb3-44c1-bf9b-7148728df7c7",
 }
 
 function DebugInit()
@@ -286,6 +289,25 @@ if Ext.IsDeveloperMode() then
         end
     end
     Ext.RegisterConsoleCommand("statusDuration", Debug_ResetLua)
+
+    local function Debug_ResetLua(command)
+        local host = CharacterGetHostCharacter()
+        TimerCancel("Timers_LLWEAPONEX_OnLuaReset")
+        TimerLaunch("Timers_LLWEAPONEX_OnLuaReset", 250)
+        NRD_LuaReset(1,1,1)
+    end
+    Ext.RegisterConsoleCommand("questreward", function(command, treasure, identifyItems)
+        local host = CharacterGetHostCharacter()
+        local identified = identifyItems ~= 0
+        CharacterGiveReward(host, treasure, identified)
+    end)
+    Ext.RegisterConsoleCommand("questreward", function(command, treasure)
+        if treasure == nil then
+            treasure = "RC_GY_RykersContract"
+        end
+        local host = CharacterGetHostCharacter()
+        CharacterGiveQuestReward(host, treasure, "QuestReward")
+    end)
 end
 
 ---Cool effects:

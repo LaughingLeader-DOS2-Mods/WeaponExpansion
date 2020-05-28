@@ -135,7 +135,6 @@ function ChangeItemScaling(item, attribute, itemStat)
 		local stat = Ext.GetStat(itemStat)
 		local requirements = stat.Requirements
 		if requirements ~= nil then
-			Ext.Print("[WeaponExpansion] Changing requirements to ("..attribute.."):"..string.format("%s", Ext.JsonStringify(requirements)))
 			local addedRequirement = false
 			if #stat.Requirements > 0 then
 				for i,req in pairs(requirements) do
@@ -161,8 +160,8 @@ function ChangeItemScaling(item, attribute, itemStat)
 				}
 			}
 		end
+		--Ext.Print("[WeaponExpansion:ChangeItemScaling] Changed requirements:"..string.format("%s", Ext.JsonStringify(stat.Requirements)))
 		stat.Requirements = requirements
-		Ext.Print("[WeaponExpansion] Changed requirements:"..string.format("%s", Ext.JsonStringify(stat.Requirements)))
 		Ext.SyncStat(itemStat)
 		
 		local inventory = GetInventoryOwner(item)
