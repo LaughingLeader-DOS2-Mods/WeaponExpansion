@@ -27,11 +27,6 @@ local rangedWeaponTypes = {
 function OnItemEquipped(uuid,item)
 	--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	--local offhand = CharacterGetEquippedItem(uuid, "Shield")
-
-	print("Character has LLWEAPONEX_DIVINE_ORDER_BANNER_TAG_TEST tag:", IsTagged(uuid, "LLWEAPONEX_DIVINE_ORDER_BANNER_TAG_TEST"))
-	print("Character has LLWEAPONEX_DIVINE_ORDER_BANNER_TAG_TEST2 tag:", IsTagged(uuid, "LLWEAPONEX_DIVINE_ORDER_BANNER_TAG_TEST2"))
-	print("Item has LLWEAPONEX_DIVINE_ORDER_BANNER_TAG_TEST tag:", IsTagged(item, "LLWEAPONEX_DIVINE_ORDER_BANNER_TAG_TEST"))
-	
 	local stat = NRD_ItemGetStatsId(item)
 	local statType = NRD_StatGetType(stat)
 
@@ -50,7 +45,7 @@ function OnItemEquipped(uuid,item)
 			ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 			SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		end
-		local isUnarmed = Ext.StatGetAttribute(stat, "AnimType") == "Unarmed" or IsUnarmed(Ext.GetCharacter(uuid))
+		local isUnarmed = Ext.StatGetAttribute(stat, "AnimType") == "Unarmed" or IsUnarmed(uuid)
 		if not isUnarmed then
 			Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(uuid, "LLWEAPONEX_Unarmed")
 		end

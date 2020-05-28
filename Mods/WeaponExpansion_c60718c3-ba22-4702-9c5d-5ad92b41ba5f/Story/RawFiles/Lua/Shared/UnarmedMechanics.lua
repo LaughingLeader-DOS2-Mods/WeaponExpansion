@@ -28,6 +28,7 @@ function GetUnarmedWeapon(character, skipItemCheck)
 	local hasUnarmedWeapon
 	local weaponStat = "NoWeapon"
 	local level = character.Level
+	print("Checking for LLWEAPONEX_UnarmedWeaponEquipped tag", character, character.Character)
 	if skipItemCheck ~= true and character.Character:HasTag("LLWEAPONEX_UnarmedWeaponEquipped") then
 		for i,slot in pairs(unarmedWeaponSlots) do
 			---@type StatItem
@@ -103,10 +104,15 @@ end
 function IsUnarmed(character, allowShields)
 	if type(character) == "string" then
 		character = Ext.GetCharacter(character).Stats
-	elseif character.Character == nil and character.Stats ~= nil then -- EsvCharacter to StatCharacter
-		character = character.Stats
+	elseif type(character) == "userdata" then
+		local objType = getmetatable(character)
+		if objType == "ecl::Character" then
+			character = character.Stats
+		elseif objType ~= "CDivinityStats_Character" then
+			Ext.PrintError("[WeaponExpansion:IsUnarmed] The character param should be a string, EsvCharacter, or StatCharacter. Type is:", character, objType)
+			character = nil
+		end
 	end
-	--Ext.PrintError(character, character.MainWeapon.Name, character.OffHandWeapon)
 	if character ~= nil then
 		return statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
 	end
