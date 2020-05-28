@@ -1809,23 +1809,23 @@ add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Crafted","",""
 new itemgroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B"
 
 add levelgroup 0,0,"Common"
-add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add rootgroup "67b548a2-5fb3-44c1-bf9b-7148728df7c7",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Common","",""
 
 add levelgroup 1,3,"Uncommon"
-add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add rootgroup "67b548a2-5fb3-44c1-bf9b-7148728df7c7",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
 
 add levelgroup 4,7,"Uncommon"
-add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add rootgroup "67b548a2-5fb3-44c1-bf9b-7148728df7c7",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
 
 add levelgroup 8,11,"Uncommon"
-add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add rootgroup "67b548a2-5fb3-44c1-bf9b-7148728df7c7",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
 
 add levelgroup 12,15,"Uncommon"
-add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add rootgroup "67b548a2-5fb3-44c1-bf9b-7148728df7c7",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
 
 add levelgroup 16,18,"Uncommon"
@@ -1837,7 +1837,7 @@ add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Uncommon","",""
 
 add levelgroup 1,7,"Rare"
-add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
+add rootgroup "67b548a2-5fb3-44c1-bf9b-7148728df7c7",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Rare","",""
 
 add levelgroup 8,14,"Rare"
@@ -1869,6 +1869,12 @@ add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
 add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Divine","",""
 
 new itemgroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "67b548a2-5fb3-44c1-bf9b-7148728df7c7",""
+add namegroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Crafted_WithScope"
 
 add levelgroup 0,0,"All"
 add rootgroup "068246d7-b4cc-4b6d-9ac8-716fdfd1822d",""
