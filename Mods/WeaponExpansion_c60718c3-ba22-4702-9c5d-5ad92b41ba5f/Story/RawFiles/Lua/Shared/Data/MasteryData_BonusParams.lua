@@ -357,3 +357,28 @@ Mastery.Params.SkillData.Projectile_PinDown = {
 	}
 }
 Mastery.Params.SkillData.Projectile_EnemyPinDown = Mastery.Params.SkillData.Projectile_PinDown
+
+local firearmAlternatives = {
+["Projectile_Multishot"] = "Projectile_LLWEAPONEX_Firearm_Multishot",
+["Projectile_EnemyMultishot"] = "Projectile_LLWEAPONEX_Firearm_Multishot_Enemy",
+["Projectile_SkyShot"] = "Projectile_LLWEAPONEX_Firearm_SkyShot",
+["Projectile_EnemySkyShot"] = "Projectile_LLWEAPONEX_Firearm_SkyShot_Enemy",
+["Projectile_ArrowSpray"] = "Projectile_LLWEAPONEX_Firearm_ArrowSpray",
+["Projectile_EnemyArrowSpray"] = "Projectile_LLWEAPONEX_Firearm_ArrowSpray_Enemy",
+["Projectile_PiercingShot"] = "Projectile_LLWEAPONEX_Firearm_PiercingShot",
+["Projectile_EnemyPiercingShot"] = "Projectile_LLWEAPONEX_Firearm_PiercingShot_Enemy",
+["Projectile_Snipe"] = "Projectile_LLWEAPONEX_Firearm_Snipe",
+["Projectile_EnemySnipe"] = "Projectile_LLWEAPONEX_Firearm_Snipe_Enemy",
+["Projectile_Ricochet"] = "Projectile_LLWEAPONEX_Firearm_Ricochet",
+["Projectile_EnemyRicochet"] = "Projectile_LLWEAPONEX_Firearm_Ricochet_Enemy",
+["Projectile_BallisticShot"] = "Projectile_LLWEAPONEX_Firearm_BallisticShot",
+["Projectile_EnemyBallisticShot"] = "Projectile_LLWEAPONEX_Firearm_BallisticShot_Enemy",
+["Projectile_PinDown"] = "Projectile_LLWEAPONEX_Firearm_PinDown",
+["Projectile_EnemyPinDown"] = "Projectile_LLWEAPONEX_Firearm_PinDown_Enemy",
+}
+
+for skill,altVersion in pairs(firearmAlternatives) do
+	if Mastery.Params.SkillData[skill] ~= nil then
+		Mastery.Params.SkillData[altVersion] = Mastery.Params.SkillData[skill]
+	end
+end
