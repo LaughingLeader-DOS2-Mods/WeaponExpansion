@@ -34,7 +34,6 @@ data "PreviewTooltip" "Water Rune"
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_Rune_LLWEAPONEX_Runeblade_Water"
 data "Type" "Object"
-data "Result" "LOOT_Rune_LLWEAPONEX_Runeblade_Water"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_Rune_Frost_Small"
@@ -55,3 +54,38 @@ new ItemComboPropertyEntry
 data "ObjectID" "LOOT_Rune_Frost_Giant"
 data "Type" "Object"
 data "Result" "LOOT_Rune_Frost_Giant"
+data "Result" "LOOT_Rune_LLWEAPONEX_Runeblade_Water"
+
+new ItemComboProperty "LLWEAPONEX_Token_Attribute"
+data "PreviewIcon" "LLWEAPONEX_Items_Token_Attribute"
+data "PreviewTooltip" "Any Attribute Token"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Constitution"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Constitution"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Finesse"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Finesse"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Intelligence"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Intelligence"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Memory"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Memory"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Strength"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Strength"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Wits"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Wits"
