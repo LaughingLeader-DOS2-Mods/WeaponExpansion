@@ -140,6 +140,14 @@ local function WarfareMeleeWeaponOverride(skill)
 	--print(LeaderLib.Common.Dump(Ext.StatGetAttribute(skill, "Requirements")))
 end
 
+local function HasComboCategory(categoryTable, category)
+    if categoryTable == nil then return false end
+    for i,v in pairs(categoryTable) do
+        if v == category then return true end
+    end
+    return false
+end
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
@@ -155,6 +163,21 @@ local function StatOverrides_Init()
 	
 		if gameMaster == "Yes" and requirement == "MeleeWeapon" and ability == "Warrior" then
 			WarfareMeleeWeaponOverride(skill)
+		end
+	end
+
+	-- Add a combo category to unique weapons.
+	for i,stat in pairs(Ext.GetStatEntries("Weapon")) do
+		if Ext.StatGetAttribute(stat, "Unique") == 1 then
+			local combocategory = Ext.StatGetAttribute(stat, "ComboCategory")
+			if not HasComboCategory(combocategory, "UniqueWeapon") then
+				if combocategory ~= nil and combocategory ~= "" then
+					combocategory[#combocategory+1] = "UniqueWeapon"
+					Ext.StatSetAttribute(stat, "ComboCategory", combocategory)
+				else
+					Ext.StatSetAttribute(stat, "ComboCategory", {"UniqueWeapon"})
+				end
+			end
 		end
 	end
 
