@@ -60,6 +60,7 @@ end
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
 	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
+	print(skill)
 	local data = Mastery.Params.SkillData[skill]
 	if data ~= nil then
 		local descriptionText = GetDescriptionText(character, data)

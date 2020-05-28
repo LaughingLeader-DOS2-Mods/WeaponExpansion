@@ -18,7 +18,7 @@ local function ReplacePlaceholders(str)
 	for v in string.gmatch(output, "%[Stats:.-%]") do
 		local value = ""
 		local statFetcher = v:gsub("%[Stats:", ""):gsub("%]", "")
-		local props = LeaderLib.Common.StringSplit(":", statFetcher)
+		local props = LeaderLib.StringHelpers.Split(statFetcher, ":")
 		local stat = props[1]
 		local property = props[2]
 		if stat ~= nil and property ~= nil then
@@ -39,7 +39,7 @@ local function ReplacePlaceholders(str)
 		local value = ""
 		local skillName = v:gsub("%[SkillDamage:", ""):gsub("%]", "")
 		if skillName ~= nil and skillName ~= "" then
-			local props = LeaderLib.Common.StringSplit(":", skillName)
+			local props = LeaderLib.StringHelpers.Split(skillName, ":")
 			local param = "Damage"
 			if props ~= nil and #props >= 1 then
 				skillName = props[1]
@@ -83,7 +83,7 @@ local function ReplacePlaceholders(str)
 	end
 	for v in string.gmatch(output, "%[Handle:.-%]") do
 		local text = v:gsub("%[Handle:", ""):gsub("%]", "")
-		local props = LeaderLib.Common.StringSplit(":", text)
+		local props = LeaderLib.StringHelpers.Split(text, ":")
 		if props[2] == nil then 
 			props[2] = ""
 		end

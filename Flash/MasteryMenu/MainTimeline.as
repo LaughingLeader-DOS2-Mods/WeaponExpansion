@@ -16,11 +16,8 @@ package
 		public var alignment:String;
 		
 		public const anchorId:String = "masteryMenu";
-		
 		public const anchorPos:String = "center";
-		
 		public const anchorTPos:String = "center";
-		
 		public const anchorTarget:String = "screen";
 		
 		public var events:Array;
