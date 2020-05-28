@@ -1,0 +1,15 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+IF
+CanCombineItem(_Char,_ItemA,_ItemB,_ItemC,_ItemD,_ItemE,_RequestID)
+THEN
+NRD_ModCall("WeaponExpansion", "CanCombineItem", (STRING)_Char, (STRING)_ItemA, (STRING)_ItemB, (STRING)_ItemC, (STRING)_ItemD, (STRING)_ItemE, (STRING)_RequestID);
+
+IF
+ItemTemplateCombinedWithItemTemplate(_a, _b, _c, _d, _e, _Char, _NewItem)
+THEN
+NRD_ModCall("WeaponExpansion", "ItemTemplateCombinedWithItemTemplate", (STRING)_Char, _a, _b, _c, _d, _e, (STRING)_NewItem);
+EXITSECTION
+ENDEXITSECTION
