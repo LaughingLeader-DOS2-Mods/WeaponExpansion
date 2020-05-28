@@ -7,6 +7,13 @@ CanCombineItem(_Char,_ItemA,_ItemB,_ItemC,_ItemD,_ItemE,_RequestID)
 THEN
 NRD_ModCall("WeaponExpansion", "CanCombineItem", (STRING)_Char, (STRING)_ItemA, (STRING)_ItemB, (STRING)_ItemC, (STRING)_ItemD, (STRING)_ItemE, (STRING)_RequestID);
 
+PROC
+ProcProcessCustomCombineResponse((CHARACTERGUID)_Char,(ITEMGUID)_ItemA,(ITEMGUID)_ItemB,(ITEMGUID)_ItemC,(ITEMGUID)_ItemD,(ITEMGUID)_ItemE)
+AND
+NOT QryCombineItemIsBlocked(_Char,_ItemA,_ItemB,_ItemC,_ItemD,_ItemE)
+THEN
+NRD_ModCall("WeaponExpansion", "OnCraftingProcessed", (STRING)_Char, (STRING)_ItemA, (STRING)_ItemB, (STRING)_ItemC, (STRING)_ItemD, (STRING)_ItemE);
+
 IF
 ItemTemplateCombinedWithItemTemplate(_a, _b, _c, _d, _e, _Char, _NewItem)
 THEN
