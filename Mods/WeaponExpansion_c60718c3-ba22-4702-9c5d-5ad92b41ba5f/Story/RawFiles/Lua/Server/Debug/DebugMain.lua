@@ -98,6 +98,15 @@ local bulletTemplates = {
     "071b6f55-64a5-4efe-af02-1910d400e6b5",
 }
 
+local tokens = {
+    "c77de879-b29b-4707-a75c-2c42adc0712b",
+	"95284549-f8c1-496b-af36-9d96565f6c0f",
+	"bc8c81a1-106d-49ef-beac-e97678ba9b16",
+	"d360798f-50e3-4c9e-b0e5-0c69345b1a92",
+	"1a3acb90-a152-4ebd-8b02-c5fe99f6c0e3",
+	"dfb3db93-2562-46d2-9cd1-5ea5b57b72b9",
+}
+
 local gameTestTemplates = {
     "LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d",
     "EQ_LLWEAPONEX_Belt_Pistol_A_94838d55-d5e6-4115-b736-b8b26f321003",
@@ -107,6 +116,7 @@ local gameTestTemplates = {
     "WPN_Tool_Scythe_2H_A_44525b09-a2b1-4b45-8d52-e893d04390dd",
     --"WPN_Dwarves_Staff_2H_A_545f2dc2-1da9-4387-af90-9e866f6288a8",
     "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ee686596-394f-44ae-867b-4596de1feedb",
+    "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616",
 }
 
 function DebugInit()
@@ -185,6 +195,11 @@ function DebugInit()
     for i,template in pairs(gameTestTemplates) do
         if ItemTemplateIsInPartyInventory(host, template, 0) <= 0 then
             ItemTemplateAddTo(template, host, 1, 0)
+        end
+    end
+    for i,template in pairs(tokens) do
+        if ItemTemplateIsInPartyInventory(host, template, 0) <= 0 then
+            ItemTemplateAddTo(template, host, 10, 0)
         end
     end
     --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)

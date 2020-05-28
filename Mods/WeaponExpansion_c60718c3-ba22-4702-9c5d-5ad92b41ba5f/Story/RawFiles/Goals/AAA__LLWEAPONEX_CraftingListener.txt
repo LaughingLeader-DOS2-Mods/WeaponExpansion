@@ -8,6 +8,15 @@ THEN
 NRD_ModCall("WeaponExpansion", "CanCombineItem", (STRING)_Char, (STRING)_ItemA, (STRING)_ItemB, (STRING)_ItemC, (STRING)_ItemD, (STRING)_ItemE, (STRING)_RequestID);
 
 PROC
+ProcProcessCombineItem(_Char,_ItemA,_ItemB,_ItemC,_ItemD,_ItemE,_RequestID)
+AND
+NOT QryCombineItemHasCustomResult(_Char,_ItemA,_ItemB,_ItemC,_ItemD,_ItemE)
+AND
+CharacterIsPlayer(_Char,1)
+THEN
+NRD_ModCall("WeaponExpansion", "OnCraftingProcessed", (STRING)_Char, (STRING)_ItemA, (STRING)_ItemB, (STRING)_ItemC, (STRING)_ItemD, (STRING)_ItemE);
+
+PROC
 ProcProcessCustomCombineResponse((CHARACTERGUID)_Char,(ITEMGUID)_ItemA,(ITEMGUID)_ItemB,(ITEMGUID)_ItemC,(ITEMGUID)_ItemD,(ITEMGUID)_ItemE)
 AND
 NOT QryCombineItemIsBlocked(_Char,_ItemA,_ItemB,_ItemC,_ItemD,_ItemE)

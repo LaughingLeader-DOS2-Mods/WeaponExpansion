@@ -16,6 +16,7 @@ Ext.Require("Server/Skills/DamageHandler.lua")
 Ext.Require("Server/Skills/ElementalFirearms.lua")
 Ext.Require("Server/Skills/PrepareEffects.lua")
 Ext.Require("Server/TagHelpers.lua")
+Ext.Require("Server/CraftingMechanics.lua")
 Ext.Require("Server/Debug/DebugMain.lua")
 
 local function dumpRanks(...)

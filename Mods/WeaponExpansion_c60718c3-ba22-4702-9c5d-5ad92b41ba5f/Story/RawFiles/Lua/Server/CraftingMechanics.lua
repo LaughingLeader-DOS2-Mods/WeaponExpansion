@@ -43,11 +43,11 @@ local function getTemplateUUID(str)
 end
 
 local function getAttributeTokenAttribute(entries)
-	for i,v in pairs(entries) do
-		local template = getTemplateUUID(GetTemplate(v))
+	for i,entry in ipairs(entries) do
+		local template,item = table.unpack(entry)
 		local attribute = attributeTokenTemplates[template]
 		if attribute ~= nil then
-			return v
+			return attribute
 		end
 	end
 	return nil
@@ -76,7 +76,7 @@ end
 ---@param requestIDStr string
 function CanCombineItem(char, a, b, c, d, e, requestIDStr)
 	--local requestID = tonumber(requestIDStr)
-	
+	Ext.Print("[WeaponExpansion:CanCombineItem]",char, a, b, c, d, e, requestIDStr)
 end
 
 local craftingActions = {}
@@ -85,15 +85,20 @@ local craftingActions = {}
 function OnCraftingProcessed(char, ...)
 	--local requestID = tonumber(requestIDStr)
 	local itemArgs = {...}
+	Ext.Print("[WeaponExpansion:OnCraftingProcessed]",char, table.unpack(itemArgs))
 	local items = {}
 	for i,v in ipairs(itemArgs) do
-		local template = getTemplateUUID(GetTemplate(v))
-		items[#items+1] = {
-			template,
-			v
-		}
+		print(v)
+		if not LeaderLib.StringHelpers.IsNullOrEmpty(v) then
+			local template = getTemplateUUID(GetTemplate(v))
+			items[#items+1] = {
+				template,
+				v
+			}
+		end
 	end
 	craftingActions[char] = items
+	Ext.Print("[WeaponExpansion:OnCraftingProcessed]"..string.format("%s", Ext.JsonStringify(craftingActions)))
 end
 
 ---@param char string
@@ -104,14 +109,16 @@ end
 ---@param e string|nil	Combined template
 ---@param newItem string
 function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
+	Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate]",char, a, b, c, d, e, newItem)
 	local craftingEntry = craftingActions[char]
 	if craftingEntry ~= nil then
-		local attribute = getAttributeTokenAttribute({a,b,c,d,e})
+		local attribute = getAttributeTokenAttribute(craftingEntry)
+		Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate] Token attribute:"..tostring(attribute))
 		if attribute ~= nil then
 			local uniques = getUniqueItems(craftingEntry)
 			for i,v in pairs(uniques) do
 				local item,stat = table.unpack(v)
-				Ext.Print("[WeaponExpansion] "..string.format("Changing unique item scaling for (%s)[%s] to (%s)", item, stat, attribute))
+				Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate] "..string.format("Changing unique item scaling for (%s)[%s] to (%s)", item, stat, attribute))
 				ChangeItemScaling(item, attribute, stat)
 			end
 		end
@@ -123,33 +130,56 @@ function ChangeItemScaling(item, attribute, itemStat)
 	if itemStat == nil then
 		itemStat = NRD_ItemGetStatsId(item)
 	end
-	---@type StatEntryWeapon
-	local stat = Ext.GetStat(itemStat)
-	if stat.Requirements ~= nil then
-		local addedRequirement = false
-		if #stat.Requirements > 0 then
-			for i,req in pairs(stat.Requirements) do
-				if attributeTokens[req.Requirement] ~= nil then
-					req.Requirement = attribute
-					addedRequirement = true
+	if itemStat ~= nil then
+		---@type StatEntryWeapon
+		local stat = Ext.GetStat(itemStat)
+		local requirements = stat.Requirements
+		if requirements ~= nil then
+			Ext.Print("[WeaponExpansion] Changing requirements to ("..attribute.."):"..string.format("%s", Ext.JsonStringify(requirements)))
+			local addedRequirement = false
+			if #stat.Requirements > 0 then
+				for i,req in pairs(requirements) do
+					if attributes[req.Requirement] == true then
+						req.Requirement = attribute
+						addedRequirement = true
+					end
 				end
 			end
-		end
-		if not addedRequirement then
-			table.insert(stat.Requirements, {
-				Requirement = attribute,
-				Param = 0,
-				Not = false
-			})
-		end
-	else
-		stat.Requirements = {
-			{
-				Requirement = attribute,
-				Param = 0,
-				Not = false
+			if not addedRequirement then
+				table.insert(requirements, {
+					Requirement = attribute,
+					Param = 0,
+					Not = false
+				})
+			end
+		else
+			requirements = {
+				{
+					Requirement = attribute,
+					Param = 0,
+					Not = false
+				}
 			}
-		}
+		end
+		stat.Requirements = requirements
+		Ext.Print("[WeaponExpansion] Changed requirements:"..string.format("%s", Ext.JsonStringify(stat.Requirements)))
+		Ext.SyncStat(itemStat)
+		
+		local inventory = GetInventoryOwner(item)
+		local slot = nil
+		if ObjectIsCharacter(inventory) == 1 then
+			slot = LeaderLib.GameHelpers.GetEquippedSlot(inventory, item)
+		end
+		NRD_ItemCloneBegin(item)
+		local clone = NRD_ItemClone()
+		local amount = ItemGetAmount(clone)
+		ItemRemove(item)
+		if inventory ~= nil then
+			if slot ~= nil then
+				LeaderLib.GameHelpers.EquipInSlot(inventory, clone, slot)
+			else
+				ItemToInventory(clone, inventory, amount, 0, 0)
+			end
+		end
 	end
-    Ext.SyncStat(stat)
 end
