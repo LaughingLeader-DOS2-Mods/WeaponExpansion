@@ -57,8 +57,9 @@ data "Result" "LOOT_Rune_Frost_Giant"
 data "Result" "LOOT_Rune_LLWEAPONEX_Runeblade_Water"
 
 new ItemComboProperty "LLWEAPONEX_Token_Attribute"
-data "PreviewIcon" "LLWEAPONEX_Items_Token_Attribute"
+data "PreviewIcon" "LeaderLib_Placeholder"
 data "PreviewTooltip" "Any Attribute Token"
+//data "PreviewIcon" "LLWEAPONEX_Items_Token_Attribute"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_LLWEAPONEX_Token_Constitution"

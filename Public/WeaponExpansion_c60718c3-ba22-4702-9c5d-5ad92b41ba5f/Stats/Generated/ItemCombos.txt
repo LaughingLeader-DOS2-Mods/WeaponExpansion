@@ -528,5 +528,5 @@ data "Transform 2" "Consume"
 
 new ItemCombinationResult "LLWEAPONEX_Token_ChangeScalingAttribute_1"
 data "Result 1" ""
-data "PreviewIcon" "LLWEAPONEX_Combo_Scaling_Strength"
-data "PreviewTooltip" "Scaling Attribute Transformation"
+data "PreviewIcon" "LeaderLib_Placeholder"
+data "PreviewTooltip" "Transform Scaling Attribute (Unique Weapon)"
