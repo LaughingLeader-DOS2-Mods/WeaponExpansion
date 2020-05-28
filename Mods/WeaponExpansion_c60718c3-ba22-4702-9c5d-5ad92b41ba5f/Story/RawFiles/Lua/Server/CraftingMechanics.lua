@@ -67,6 +67,18 @@ local function getUniqueItems(entries)
 	return uniques
 end
 
+local function craftingTemplateMatch(entries, template, minCount)
+	local count = 0
+	for i,v in pairs(entries) do
+		if template == "NULL_00000000-0000-0000-0000-000000000000" and v == template then
+			count = count + 1
+		elseif not LeaderLib.StringHelpers.IsNullOrEmpty(v) and string.find(v, template) then
+			count = count + 1
+		end
+	end
+	return count >= minCount
+end
+
 ---@param char string
 ---@param a string
 ---@param b string
@@ -88,7 +100,6 @@ function OnCraftingProcessed(char, ...)
 	Ext.Print("[WeaponExpansion:OnCraftingProcessed]",char, table.unpack(itemArgs))
 	local items = {}
 	for i,v in ipairs(itemArgs) do
-		print(v)
 		if not LeaderLib.StringHelpers.IsNullOrEmpty(v) then
 			local template = getTemplateUUID(GetTemplate(v))
 			items[#items+1] = {
@@ -113,7 +124,6 @@ function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
 	local craftingEntry = craftingActions[char]
 	if craftingEntry ~= nil then
 		local attribute = getAttributeTokenAttribute(craftingEntry)
-		Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate] Token attribute:"..tostring(attribute))
 		if attribute ~= nil then
 			local uniques = getUniqueItems(craftingEntry)
 			for i,v in pairs(uniques) do
@@ -123,6 +133,14 @@ function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
 			end
 		end
 		craftingActions[char] = nil
+	end
+
+	local templates = {a,b,c,d,e}
+	-- LOOT_LLWEAPONEX_Token_Shard_dcd92e16-80a6-43bc-89c5-8e147d95606c
+	-- 3 shards = a new attribute token of choice
+	if craftingTemplateMatch(templates, "dcd92e16%-80a6%-43bc%-89c5%-8e147d95606c", 3) and craftingTemplateMatch(templates, "NULL_00000000-0000-0000-0000-000000000000", 2) then
+		print("Giving character quest reward: LLWEAPONEX_Rewards_AttributeToken")
+		CharacterGiveQuestReward(char, "LLWEAPONEX_Rewards_AttributeToken", "QuestReward")
 	end
 end
 

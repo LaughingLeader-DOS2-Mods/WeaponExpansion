@@ -524,7 +524,7 @@ data "Object 1" "UniqueWeapon"
 data "Transform 1" "None"
 data "Type 2" "Category"
 data "Object 2" "LLWEAPONEX_Token_Attribute"
-data "Transform 2" "Consume"
+data "Transform 2" "Transform"
 
 new ItemCombinationResult "LLWEAPONEX_Token_ChangeScalingAttribute_1"
 data "Result 1" "LOOT_LLWEAPONEX_Token_Shard"

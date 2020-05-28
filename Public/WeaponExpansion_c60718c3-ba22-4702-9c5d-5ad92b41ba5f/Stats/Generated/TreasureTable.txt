@@ -108,8 +108,6 @@ object category "I_LOOT_LLWEAPONEX_Token_Intelligence",1,0,0,0,0,0,0,0
 object category "I_LOOT_LLWEAPONEX_Token_Memory",1,0,0,0,0,0,0,0
 object category "I_LOOT_LLWEAPONEX_Token_Strength",1,0,0,0,0,0,0,0
 object category "I_LOOT_LLWEAPONEX_Token_Wits",1,0,0,0,0,0,0,0
-new subtable "0,1;1,1"
-object category "I_LOOT_LLWEAPONEX_Token_Reset",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_AttributeTokens_All"
 new subtable "-1"
@@ -124,8 +122,6 @@ new subtable "-1"
 object category "I_LOOT_LLWEAPONEX_Token_Strength",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_LOOT_LLWEAPONEX_Token_Wits",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_LOOT_LLWEAPONEX_Token_Reset",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_AttributeTokens_All_Free"
 new subtable "-1"
@@ -140,14 +136,10 @@ new subtable "-1"
 object category "I_LOOT_LLWEAPONEX_Token_Strength_Free",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_LOOT_LLWEAPONEX_Token_Wits_Free",1,0,0,0,0,0,0,0
-new subtable "-1"
-object category "I_LOOT_LLWEAPONEX_Token_Reset_Free",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_AttributeTokens_Start"
 new subtable "-3"
 object category "T_ST_LLWEAPONEX_AttributeTokens_All_Free",1,0,0,0,0,0,0,0
-new subtable "-2"
-object category "I_LOOT_LLWEAPONEX_Token_Reset_Free",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_WeaponsNormal"
 new subtable "0,1;2,4"

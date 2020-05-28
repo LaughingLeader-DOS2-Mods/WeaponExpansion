@@ -205,6 +205,9 @@ function DebugInit()
             ItemTemplateAddTo(template, host, 10, 0)
         end
     end
+    if ItemTemplateIsInPartyInventory(host, "LOOT_LLWEAPONEX_Token_Shard_dcd92e16-80a6-43bc-89c5-8e147d95606c", 0) <= 3 then
+        ItemTemplateAddTo("LOOT_LLWEAPONEX_Token_Shard_dcd92e16-80a6-43bc-89c5-8e147d95606c", host, 3, 0)
+    end
     --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
    -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
     CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
