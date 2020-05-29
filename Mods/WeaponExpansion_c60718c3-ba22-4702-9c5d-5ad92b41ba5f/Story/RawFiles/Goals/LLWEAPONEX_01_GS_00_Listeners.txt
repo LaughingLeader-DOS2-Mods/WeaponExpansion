@@ -8,16 +8,11 @@ KBSECTION
 IF
 ItemUnEquipped(_Item, _Char)
 AND
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
+NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
-LLWEAPONEX_Ext_QRY_IsPlayer(_Char, _IsPlayer)
-AND
-GetTemplate(_Item, _Template)
+NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
 THEN
-NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
-LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
-LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
-LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(_Char, _Item);
+NRD_ModCall("WeaponExpansion", "OnItemUnEquipped", (STRING)_Char, (STRING)_Item);
 
 IF
 ItemEquipped(_Item, _Char)
@@ -54,7 +49,7 @@ GameStarted(_Region, _)
 AND
 IsGameLevel(_Region, 1)
 AND
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
+DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType)
 AND
 ObjectExists(_Char, _a)
 AND
@@ -64,7 +59,7 @@ LeaderLib_Math_QRY_IsEqualToAny(0, _a, _b)
 AND
 GetTemplate(_Item, _Template)
 THEN
-NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
+NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
 LLWEAPONEX_Equipment_Internal_CleanupEntry(_Char, _Item, _a, _b);
 //END_REGION
 

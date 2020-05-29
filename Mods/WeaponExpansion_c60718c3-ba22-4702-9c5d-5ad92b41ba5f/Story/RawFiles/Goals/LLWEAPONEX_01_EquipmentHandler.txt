@@ -116,9 +116,9 @@ LLWEAPONEX_Equipment_ClearItem(_Char, _Item, 1);
 PROC
 LLWEAPONEX_Equipment_Internal_ClearEntries((CHARACTERGUID)_Char, (ITEMGUID)_Item)
 AND
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
+DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType)
 THEN
-NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
+NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
 
 PROC
 LLWEAPONEX_Equipment_Internal_ClearEntries((CHARACTERGUID)_Char, (ITEMGUID)_Item)

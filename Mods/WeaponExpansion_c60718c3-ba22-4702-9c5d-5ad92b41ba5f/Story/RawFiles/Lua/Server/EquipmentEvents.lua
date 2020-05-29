@@ -74,6 +74,14 @@ function OnItemEquipped(uuid,item)
 	end
 end
 
+function OnItemUnEquipped(uuid,item)
+	local template = GetTemplate(item)
+	local isPlayer = IsPlayerQRY(uuid)
+	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(uuid,item,template)
+	Osi.LLWEAPONEX_Equipment_ClearItem(uuid,item,isPlayer)
+	Osi.LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(uuid,item)
+end
+
 function OnItemTemplateUnEquipped(uuid, item, template)
 	SetIsUnarmed(uuid)
 end
@@ -111,29 +119,32 @@ local uniqueRodSkills = {
 
 function AddRodSkill(char, item)
 	local stat = NRD_ItemGetStatsId(item)
-	local mainhandSkill, offhandSkill = nil, nil
-	local skills = uniqueRodSkills[stat]
-	if skills == nil then
-		local damageType = Ext.StatGetAttribute(stat, "Damage Type")
-		skills = rodSkills[damageType]
-		if skills ~= nil then
+	if Ext.StatGetAttribute(stat, "WeaponType") ~= "Wand" then
+		local mainhandSkill, offhandSkill = nil, nil
+		local skills = uniqueRodSkills[stat]
+		if skills == nil then
+			local damageType = Ext.StatGetAttribute(stat, "Damage Type")
+			skills = rodSkills[damageType]
+			if skills ~= nil then
+				mainhandSkill,offhandSkill = table.unpack(skills)
+			end
+		else
 			mainhandSkill,offhandSkill = table.unpack(skills)
 		end
-	else
-		mainhandSkill,offhandSkill = table.unpack(skills)
-	end
 
-	if mainhandSkill ~= nil and offhandSkill ~= nil then
-		local slot = ItemGetEquipmentSlot(item)
-		if slot == "Weapon" then
-			CharacterAddSkill(char, mainhandSkill)
-			SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
-		elseif slot == "Shield" then
-			CharacterAddSkill(char, offhandSkill)
-			SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", offhandSkill)
-		else
-			CharacterRemoveSkill(char, mainhandSkill)
-			CharacterRemoveSkill(char, offhandSkill)
+		if mainhandSkill ~= nil and offhandSkill ~= nil then
+			local slot = GameHelpers.GetEquippedSlot(char,item)
+			print("AddRodSkill", stat, mainhandSkill, offhandSkill, slot)
+			if slot == "Weapon" then
+				CharacterAddSkill(char, mainhandSkill)
+				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
+			elseif slot == "Shield" then
+				CharacterAddSkill(char, offhandSkill)
+				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", offhandSkill)
+			else
+				CharacterRemoveSkill(char, mainhandSkill)
+				CharacterRemoveSkill(char, offhandSkill)
+			end
 		end
 	end
 end
@@ -206,9 +217,9 @@ Ext.NewQuery(SwapDeltaMods, "LLWEAPONEX_Ext_QRY_SwapDeltaMods", "[in](ITEMGUID)_
 function MagicMissileWeapon_Swap(char, wand, rod)
 	local equippedItem = nil
 	local targetItem = nil
-	local slot = ItemGetEquipmentSlot(wand)
+	local slot = GameHelpers.GetEquippedSlot(char,wand)
 	if slot == nil then
-		slot = ItemGetEquipmentSlot(rod)
+		slot = GameHelpers.GetEquippedSlot(char,rod)
 		equippedItem = rod
 		targetItem = wand
 	else
