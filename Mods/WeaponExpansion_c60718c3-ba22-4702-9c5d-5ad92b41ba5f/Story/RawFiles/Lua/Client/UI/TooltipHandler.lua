@@ -60,7 +60,6 @@ end
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
 	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
-	print(skill)
 	local descriptionElement = tooltip:GetElement("SkillDescription")
 	local description = ""
 	if descriptionElement ~= nil then
@@ -267,7 +266,6 @@ local WeaponTypeNames = {
 ---@param item EsvItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
-	print("OnItemTooltip", item, tooltip)
 	if item ~= nil then
 		if item:HasTag("LLWEAPONEX_Pistol") then
 			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)

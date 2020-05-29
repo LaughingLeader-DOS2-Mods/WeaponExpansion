@@ -139,7 +139,6 @@ function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
 	-- LOOT_LLWEAPONEX_Token_Shard_dcd92e16-80a6-43bc-89c5-8e147d95606c
 	-- 3 shards = a new attribute token of choice
 	if craftingTemplateMatch(templates, "dcd92e16%-80a6%-43bc%-89c5%-8e147d95606c", 3) and craftingTemplateMatch(templates, "NULL_00000000-0000-0000-0000-000000000000", 2) then
-		print("Giving character quest reward: LLWEAPONEX_Rewards_AttributeToken")
 		CharacterGiveQuestReward(char, "LLWEAPONEX_Rewards_AttributeToken", "QuestReward")
 	end
 end

@@ -29,7 +29,6 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 	else
 		-- Unarmed weapon damage scaling
 		if skill.UseWeaponDamage == "Yes" and IsUnarmed(attacker) then
-			print("Scaling with unarmed damage", skill.Name)
 			--attacker:HasTag("LLWEAPONEX_MeleeWeaponEquipped") and 
 			local weapon = GetUnarmedWeapon(attacker)
 			return Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon)

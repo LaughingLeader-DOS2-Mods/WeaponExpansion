@@ -28,7 +28,6 @@ function GetUnarmedWeapon(character, skipItemCheck)
 	local hasUnarmedWeapon
 	local weaponStat = "NoWeapon"
 	local level = character.Level
-	print("Checking for LLWEAPONEX_UnarmedWeaponEquipped tag", character, character.Character)
 	if skipItemCheck ~= true and character.Character:HasTag("LLWEAPONEX_UnarmedWeaponEquipped") then
 		for i,slot in pairs(unarmedWeaponSlots) do
 			---@type StatItem
@@ -91,8 +90,6 @@ function GetUnarmedWeaponDamageRange(character, item)
 		end
 	end
 	local damageRange = Game.Math.CalculateWeaponDamageRange(character, noWeapon)
-	print("noWeapon:", Ext.JsonStringify(noWeapon))
-	print("GetUnarmedWeaponDamageRange:", Ext.JsonStringify(damageRange))
 	return damageRange,highestAttribute
 end
 

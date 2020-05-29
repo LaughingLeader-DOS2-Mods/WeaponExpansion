@@ -134,7 +134,6 @@ function AddRodSkill(char, item)
 
 		if mainhandSkill ~= nil and offhandSkill ~= nil then
 			local slot = GameHelpers.GetEquippedSlot(char,item)
-			print("AddRodSkill", stat, mainhandSkill, offhandSkill, slot)
 			if slot == "Weapon" then
 				CharacterAddSkill(char, mainhandSkill, 0)
 				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
@@ -158,7 +157,6 @@ end
 
 function RemoveRodSkill(char, item)
 	local skill = GetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill")
-	print("RemoveRodSkill", char,item,skill)
 	if not LeaderLib.StringHelpers.IsNullOrEmpty(skill) then
 		local mainhand = CharacterGetEquippedItem(char, "Weapon")
 		local offhand = CharacterGetEquippedItem(char, "Shield")
@@ -170,7 +168,6 @@ end
 
 local function GetRodTypeQRY(item)
 	local stat = NRD_ItemGetStatsId(item)
-	print(item, stat)
 	local skills = uniqueRodSkills[stat]
 	if skills == nil then
 		local damageType = Ext.StatGetAttribute(stat, "Damage Type")
@@ -237,7 +234,6 @@ function MagicMissileWeapon_Swap(char, wand, rod)
 		equippedItem = wand
 		targetItem = rod
 	end
-	print(equippedItem, targetItem, slot)
 	if equippedItem ~= nil and targetItem ~= nil then
 		CharacterUnequipItem(char, equippedItem)
 		--ItemToInventory(equippedItem, targetItem, 1, 0, 0)

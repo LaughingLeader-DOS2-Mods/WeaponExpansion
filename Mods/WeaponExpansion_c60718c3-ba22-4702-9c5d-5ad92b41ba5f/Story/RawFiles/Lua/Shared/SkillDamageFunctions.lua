@@ -692,7 +692,6 @@ local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attack
 		-- 10% damage mult min, 200% damage mult max
 		local damageMult = math.min(distanceDamageMult * 20, math.max(distanceDamageMult, targetDistance * distanceDamageMult))
 		skillProps["Damage Multiplier"] = damageMult
-		print(targetDistance, damageMult)
 		return Game.Math.GetSkillDamage(skillProps, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 	end
 end

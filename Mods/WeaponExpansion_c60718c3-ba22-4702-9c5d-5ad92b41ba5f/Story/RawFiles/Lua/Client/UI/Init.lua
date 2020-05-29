@@ -311,3 +311,20 @@ local function LLWEAPONEX_UpdateStatusMC(call,datastr)
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_UpdateStatusMC", LLWEAPONEX_UpdateStatusMC)
+
+local function DisplayOverheadDamage(call,datastr)
+	---@type MessageData
+	local data = MessageData:CreateFromString(datastr)
+	if data ~= nil then
+		--print(LeaderLib.Common.Dump(data.Params))
+		---@type UIObject
+		local ui = Ext.GetBuiltinUI("Public/Game/GUI/overhead.swf")
+		if ui ~= nil then
+			print(datastr)
+			local handle = Ext.HandleToDouble(data.Params.Handle)
+			ui:Invoke("addOverheadDamage", handle, data.Params.Text)
+		end
+	end
+end
+
+Ext.RegisterNetListener("LLWEAPONEX_DisplayOverheadDamage", DisplayOverheadDamage)
