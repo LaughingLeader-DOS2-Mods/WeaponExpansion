@@ -34,6 +34,31 @@ AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,18,1)
 THEN
 LLWEAPONEX_Firearms_InitSettings();
+
+PROC
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+_LastVersion < 152567808
+AND
+DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill)
+AND
+CharacterIsPlayer(_Char, _IsPlayer)
+THEN
+NOT DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
+LLWEAPONEX_Firearms_RestoreRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
+
+PROC
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+_LastVersion < 152567808
+AND
+DB_IsPlayer(_Player)
+AND
+DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_Skill, _ReplacementSkill, _PlayerOnly)
+AND
+CharacterHasSkill(_Player, _ReplacementSkill, 1)
+THEN
+LLWEAPONEX_Firearms_RestoreRangerSkill(_Player, _Skill, _ReplacementSkill, 1);
 //END_REGION
 
 //REGION RIFLEMAN_RICOCHET_SWAP
@@ -313,6 +338,7 @@ NRD_SkillBarSetSkill(_Char, _Slot, _FindSkill);
 CharacterRemoveSkill(_Char, _ReplaceSkill);
 CharacterAddSkill(_Char, _FindSkill, 0);
 
+/*
 PROC
 LLWEAPONEX_Equipment_OnTaggedItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Firearm", (INTEGER)_IsPlayer)
 AND
@@ -335,6 +361,7 @@ PROC
 LLWEAPONEX_Equipment_OnTaggedItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Firearm", (INTEGER)_IsPlayer)
 THEN
 LLWEAPONEX_Firearms_RestoreAllRangerSkills(_Char);
+*/
 //END_REGION
 
 EXITSECTION

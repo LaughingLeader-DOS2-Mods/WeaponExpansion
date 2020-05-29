@@ -46,8 +46,80 @@ local overrides = {
 			Arg5 = -1,
 			SurfaceBoost = false
 		}}
-	}
+	},
 }
+
+local function appendProperties(statname, property, value)
+	local existingTable = Ext.StatGetAttribute(statname, property)
+	if existingTable ~= nil then
+		for i,v in ipairs(value) do
+			table.insert(existingTable, v)
+		end
+		LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat (appended table): ",statname," (".. property ..") = [")
+		LeaderLib.PrintDebug(LeaderLib.Common.Dump(existingTable))
+		LeaderLib.PrintDebug("]")
+		Ext.StatSetAttribute(statname, property, existingTable)
+	else
+		LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [")
+		LeaderLib.PrintDebug(LeaderLib.Common.Dump(value))
+		LeaderLib.PrintDebug("]")
+		Ext.StatSetAttribute(statname, property, value)
+	end
+end
+
+local function buildTemplateString(curlyBraceType, values)
+	local templateString = "{"..curlyBraceType.."}"
+	for type,template in pairs(values) do
+		templateString = templateString .. "["..type.."]"..template
+	end
+	return templateString
+end
+
+local gunExplosionEffectStatusProperties = {{
+	Type = "Status",
+	Action = "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX",
+	Context = {"Self"},
+	Duration = 0.0,
+	StatusChance = 1.0,
+	Arg3 = "",
+	Arg4 = -1,
+	Arg5 = -1,
+	SurfaceBoost = false
+}}
+
+local defaultBulletTemplate = "6e597ce1-d8b8-4720-89b9-75f6a71d64ba"
+local bulletTemplates = {
+	Projectile_ArrowSpray = "7ce736c8-1e02-462d-bee2-36bd86bd8979",
+	Projectile_EnemyArrowSpray = "7ce736c8-1e02-462d-bee2-36bd86bd8979",
+	Projectile_BallisticShot = "7ce736c8-1e02-462d-bee2-36bd86bd8979",
+	Projectile_EnemyBallisticShot = "7ce736c8-1e02-462d-bee2-36bd86bd8979",
+	Projectile_Multishot = "deb24a84-006f-4a3a-b4bb-b40fa52a447d",
+	Projectile_EnemyMultishot = "deb24a84-006f-4a3a-b4bb-b40fa52a447d",
+	Projectile_PiercingShot = "d4eebf4d-4f0c-4409-8fe8-32efeca06453",
+	Projectile_EnemyPiercingShot = "d4eebf4d-4f0c-4409-8fe8-32efeca06453",
+	Projectile_PinDown = "8814954c-b0d1-4cdf-b075-3313ac71cf20",
+	Projectile_EnemyPinDown = "8814954c-b0d1-4cdf-b075-3313ac71cf20",
+	Projectile_Ricochet = "22cae5a3-8427-4526-aa7f-4f277d0ff67e",
+	Projectile_EnemyRicochet = "22cae5a3-8427-4526-aa7f-4f277d0ff67e",
+	Projectile_SkyShot = "e44859b2-d55f-47e2-b509-fd32d7d3c745",
+	Projectile_EnemySkyShot = "e44859b2-d55f-47e2-b509-fd32d7d3c745",
+	Projectile_Snipe = "fbf17754-e604-4772-813a-3593b4e7bec8",
+	Projectile_EnemySnipe = "fbf17754-e604-4772-813a-3593b4e7bec8",
+}
+
+local function CreateFirearmDerivativeSkills()
+	for skill,bulletTemplate in pairs(bulletTemplates) do
+		local defaultTemplate = Ext.StatGetAttribute(skill, "Template")
+		local templateString = buildTemplateString("WeaponType", {
+			None = defaultTemplate,
+			Bow = defaultTemplate,
+			Crossbow = defaultTemplate,
+			Rifle = bulletTemplate
+		})
+		Ext.StatSetAttribute(skill, "Template", templateString)
+		appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
+	end
+end
 
 local anim_overrides = {
 	Target_SingleHandedAttack = {
@@ -66,21 +138,7 @@ local function apply_overrides(stats)
     for statname,props in pairs(stats) do
 		for property,value in pairs(props) do
 			if property == "SkillProperties" or property == "ExtraProperties" then
-				local existingTable = Ext.StatGetAttribute(statname, property)
-				if existingTable ~= nil then
-					for i,v in ipairs(value) do
-						table.insert(existingTable, v)
-					end
-					LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat (appended table): ",statname," (".. property ..") = [")
-					LeaderLib.PrintDebug(LeaderLib.Common.Dump(existingTable))
-					LeaderLib.PrintDebug("]")
-					Ext.StatSetAttribute(statname, property, existingTable)
-				else
-					LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [")
-					LeaderLib.PrintDebug(LeaderLib.Common.Dump(value))
-					LeaderLib.PrintDebug("]")
-					Ext.StatSetAttribute(statname, property, value)
-				end
+				appendProperties(statname, property, value)
 			else
 				LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [",value,"]")
 				Ext.StatSetAttribute(statname, property, value)
@@ -154,6 +212,8 @@ local function StatOverrides_Init()
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
 
+	CreateFirearmDerivativeSkills()
+
 	for i,skill in pairs(Ext.GetStatEntries("SkillData")) do
 		local gameMaster = Ext.StatGetAttribute(skill, "ForGameMaster")
 		local requirement = Ext.StatGetAttribute(skill, "Requirement")
@@ -163,6 +223,26 @@ local function StatOverrides_Init()
 	
 		if gameMaster == "Yes" and requirement == "MeleeWeapon" and ability == "Warrior" then
 			WarfareMeleeWeaponOverride(skill)
+		end
+
+		if bulletTemplates[skill] == nil then
+			if Ext.StatGetAttribute(skill, "SkillType") == "Projectile" and 
+				ability == "Ranger" and 
+				requirement == "RangedWeapon" then
+					local defaultTemplate = Ext.StatGetAttribute(skill, "Template")
+					if not string.find(defaultTemplate, "{") then
+						local templateString = buildTemplateString("WeaponType", {
+							None = defaultTemplate,
+							Bow = defaultTemplate,
+							Crossbow = defaultTemplate,
+							Rifle = defaultBulletTemplate
+						})
+						Ext.StatSetAttribute(skill, "Template", templateString)
+						print("[WeaponExpansion] Added rifle template support to skill ", skill)
+					end
+					appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
+					print("[WeaponExpansion] Added rifle bullet explosion effect support to skill ", skill)
+			end
 		end
 	end
 

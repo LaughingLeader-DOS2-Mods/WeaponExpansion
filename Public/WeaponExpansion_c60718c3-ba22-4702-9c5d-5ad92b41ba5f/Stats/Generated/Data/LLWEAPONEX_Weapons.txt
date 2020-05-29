@@ -1822,6 +1822,8 @@ data "CriticalChance" "0"
 data "WeaponRange" "1300"
 data "Value" "250"
 data "Weight" "4000"
+data "WeaponType" "Rifle"
+data "AnimType" "CrossBow"
 data "Projectile" "0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"
 data "Boosts" "_LLWEAPONEX_Boost_Firearm_OnHit"
 

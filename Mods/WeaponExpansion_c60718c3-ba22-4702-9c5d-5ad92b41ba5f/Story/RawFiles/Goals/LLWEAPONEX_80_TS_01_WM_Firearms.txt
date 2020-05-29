@@ -12,6 +12,7 @@ THEN
 ApplyStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 6.0, 0, _Char);
 */
 
+/*
 IF
 SkillAdded(_Char, _FindSkill, 1)
 AND
@@ -46,6 +47,7 @@ THEN
 NOT DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
 CharacterRemoveSkill(_Char, _ReplaceSkill);
 CharacterAddSkill(_Char, _FindSkill, 0);
+*/
 EXITSECTION
 
 ENDEXITSECTION

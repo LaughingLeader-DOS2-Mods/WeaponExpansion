@@ -61,26 +61,37 @@ end
 local function OnSkillTooltip(character, skill, tooltip)
 	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
 	print(skill)
+	local descriptionElement = tooltip:GetElement("SkillDescription")
+	local description = ""
+	if descriptionElement ~= nil then
+		description = descriptionElement.Label
+	end
+
 	local data = Mastery.Params.SkillData[skill]
 	if data ~= nil then
 		local descriptionText = GetDescriptionText(character, data)
 		if descriptionText ~= "" then
-			local existingDescription = tooltip:GetElement("SkillDescription")
-			if existingDescription ~= nil then
-				local description = existingDescription.Label
+			if descriptionElement ~= nil then
 				if description == nil then 
-					description = "" 
+					description = ""
 				else
 					description = description.."<br>"
 				end
 				description = description..descriptionText
-				existingDescription.Label = description
+				descriptionElement.Label = description
 			else
-				local description = {
+				local descriptionElement = {
 					Label = descriptionText
 				}
-				tooltip:AppendElement(description)
+				tooltip:AppendElement(descriptionElement)
 			end
+		end
+	end
+
+	if character:HasTag("LLWEAPONEX_Firearm_Equipped") then
+		if not LeaderLib.StringHelpers.IsNullOrEmpty(description) then
+			description = description:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
+			descriptionElement.Label = description
 		end
 	end
 end

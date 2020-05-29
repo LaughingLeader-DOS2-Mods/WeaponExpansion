@@ -377,8 +377,8 @@ local firearmAlternatives = {
 ["Projectile_EnemyPinDown"] = "Projectile_LLWEAPONEX_Firearm_PinDown_Enemy",
 }
 
-for skill,altVersion in pairs(firearmAlternatives) do
-	if Mastery.Params.SkillData[skill] ~= nil then
-		Mastery.Params.SkillData[altVersion] = Mastery.Params.SkillData[skill]
-	end
-end
+-- for skill,altVersion in pairs(firearmAlternatives) do
+-- 	if Mastery.Params.SkillData[skill] ~= nil then
+-- 		Mastery.Params.SkillData[altVersion] = Mastery.Params.SkillData[skill]
+-- 	end
+-- end
