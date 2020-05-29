@@ -68,8 +68,8 @@ function OnItemEquipped(uuid,item)
 			else
 				local template = GetTemplate(item)
 				Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,item,template)
-				Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,item,tag,isPlayer)
 			end
+			Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,item,tag,isPlayer)
 			OnWeaponTypeEquipped(uuid, item, tag, stat, statType)
 		end
 	end
@@ -164,3 +164,20 @@ function SwapDeltaMods(item)
 end
 
 Ext.NewQuery(SwapDeltaMods, "LLWEAPONEX_Ext_QRY_SwapDeltaMods", "[in](ITEMGUID)_Item, [out](ITEMGUID)_NewItem")
+
+function MagicMissileWeapon_Swap(char, wand, rod)
+	local equippedItem = nil
+	local targetItem = nil
+	local slot = LeaderLib.GameHelpers.GetEquippedSlot(char, wand)
+	if slot == nil then
+		slot = LeaderLib.GameHelpers.GetEquippedSlot(char, rod)
+		equippedItem = rod
+		targetItem = wand
+	else
+		equippedItem = wand
+		targetItem = rod
+	end
+	CharacterUnequipItem(char, equippedItem)
+	ItemToInventory(equippedItem, targetItem, 1, 0, 0)
+	NRD_CharacterEquipItem(char, targetItem, slot, 0, 0, 1, 1)
+end

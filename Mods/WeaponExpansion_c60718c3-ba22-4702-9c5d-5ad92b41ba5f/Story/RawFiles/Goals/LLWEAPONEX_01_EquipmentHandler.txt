@@ -41,7 +41,6 @@ PROC
 LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (INTEGER)_IsPlayer)
 THEN
 DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item);
-LLWEAPONEX_Equipment_OnTaggedItemEquipped(_Char, _Item, _Tag, _IsPlayer);
 SetTag(_Char, _Tag);
 
 PROC

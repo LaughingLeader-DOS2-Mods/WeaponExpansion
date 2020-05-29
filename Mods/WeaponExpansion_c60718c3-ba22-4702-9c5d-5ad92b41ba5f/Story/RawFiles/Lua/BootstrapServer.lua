@@ -1,3 +1,5 @@
+PersistentVars = {}
+
 Ext.Require("Shared/Init.lua")
 Ext.Require("Server/Init.lua")
 Ext.Require("Server/HitHandler.lua")

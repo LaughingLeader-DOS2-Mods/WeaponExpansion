@@ -211,158 +211,43 @@ RemoveStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
 //END_REGION
 
 //REGION MAGIC_MISSILE_WAND_MODE
-/*
-IF
-ItemTemplateAddedToCharacter(WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812, _Item, _Char)
+PROC
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Wand, "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812")
 AND
-NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
+NOT DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _)
 AND
-DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_MAGIC_MISSILE", _MainhandSkill, _OffhandSkill)
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", _x, _y, _z, _Rod)
 THEN
-SetVarString(_Item, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
-SetVarString(_Item, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
+DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _Rod);
+ItemToInventory(_Rod, _Wand, 1, 0, 0);
 
-IF
-ItemTemplateAddedToCharacter(WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96, _Item, _Char)
+PROC
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Rod, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96")
 AND
-NOT LLWEAPONEX_Rods_QRY_SkillVarsSet(_Item)
+NOT DB_LLWEAPONEX_Uniques_MagicMissileWand(_, _Rod)
 AND
-DB_LLWEAPONEX_Rods_Skills("LLWEAPONEX_ROD_MAGIC_MISSILE", _MainhandSkill, _OffhandSkill)
+GetPosition(_Char, _x, _y, _z)
+AND
+CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812", _x, _y, _z, _Wand)
 THEN
-SetVarString(_Item, "LLWEAPONEX_Rod_Skill", _MainhandSkill);
-SetVarString(_Item, "LLWEAPONEX_Rod_Skill_Offhand", _OffhandSkill);
-*/
+DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _Rod);
+ItemToInventory(_Wand, _Rod, 1, 0, 0);
 
 IF
 SkillCast(_Char, "Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode", _, _)
-THEN
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode(_Char);
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Char)
 AND
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char)
-AND
-GetItemForItemTemplateInInventory(_Char, "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812", _Weapon)
+DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _Rod)
 THEN
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char);
-CharacterUnequipItem(_Char, _Weapon);
-LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_WandToRod", "LLWEAPONEX_Uniques_TransformMagicMissile_WandToRod");
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Char)
-AND
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char)
-AND
-GetItemForItemTemplateInInventory(_Char, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", _Weapon)
-THEN
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char);
-CharacterUnequipItem(_Char, _Weapon);
-LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_RodToWand", "LLWEAPONEX_Uniques_TransformMagicMissile_RodToWand");
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_ChangeMode((CHARACTERGUID)_Char)
-AND
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char)
-THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileModeChanged(_Char);
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_WandToRod")
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Transforming Wand of Magic Missile to Rod form.");
-Transform(_Weapon, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", 1, 1, 1);
-LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_Equip", "LLWEAPONEX_Uniques_TransformMagicMissile_Equip");
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_RodToWand")
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Transforming Rod of Magic Missile to Wand form.");
-Transform(_Weapon, "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812", 1, 1, 1);
-LeaderLib_Timers_StartObjectObjectTimer(_Char, _Weapon, 50, "LLWEAPONEX_Timers_Uniques_TransformMagicMissile_Equip", "LLWEAPONEX_Uniques_TransformMagicMissile_Equip");
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (ITEMGUID)_Weapon, "LLWEAPONEX_Uniques_TransformMagicMissile_Equip")
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:ObjectObjectTimerFinished] Equipping Magic Missile wand/rod.");
-CharacterEquipItem(_Char, _Weapon);
+NRD_ModCall("WeaponExpansion", "MagicMissileWeapon_Swap", (STRING)_Char, (STRING)_Wand, (STRING)_Rod);
 //END_REGION
 
 //REGION MAGIC_MISSILE_BONUS_HITS
-IF
-CharacterStartAttackObject(_Target, _, _Char)
-AND
-HasActiveStatus(_Char, "LLWEAPONEX_WAND_MAGIC_MISSILE", 1)
-THEN
-LeaderLib_Timers_StartObjectObjectTimer(_Char, _Target, 580, "LLWEAPONEX_Timers_MagicMissile_Roll", "LLWEAPONEX_MagicMissile_RollForBonuses");
-
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (GUIDSTRING)_Target, "LLWEAPONEX_MagicMissile_RollForBonuses")
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
 THEN
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles(_Char, _Target);
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-AND
-LeaderLib_Roll_QRY(450)
-THEN
-SetVarInteger(_Char, "LLWEAPONEX_MagicMissile_Missile1", 1);
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-AND
-LeaderLib_Roll_QRY(300)
-THEN
-SetVarInteger(_Char, "LLWEAPONEX_MagicMissile_Missile2", 1);
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-AND
-LeaderLib_Roll_QRY(100)
-THEN
-SetVarInteger(_Char, "LLWEAPONEX_MagicMissile_Missile3", 1);
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_RollForBonusMissiles((CHARACTERGUID)_Char, (GUIDSTRING)_Target)
-AND
-DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Uniques_Temp_MagicMissileBonusSuccess(_Char, _Target);
-LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess(_Char, _Target, "LLWEAPONEX_MagicMissile_FireBonusMissile");
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (STRING)_Event)
-AND
-ObjectIsCharacter(_Target, 1)
-THEN
-CharacterCharacterSetEvent(_Char, (CHARACTERGUID)_Target, _Event);
-
-PROC
-LLWEAPONEX_Uniques_MagicMissileWand_Internal_RollSuccess((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (STRING)_Event)
-AND
-ObjectIsItem(_Target, 1)
-THEN
-CharacterItemSetEvent(_Char, (ITEMGUID)_Target, _Event);
-
-/*
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_MAGIC_MISSILE_BONUS1", (CHARACTERGUID)_Char)
-THEN
-CharacterCharacterSetEvent(_Char, _Char, "LLWEAPONEX_MagicMissile_FireBonusMissile1");
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_MAGIC_MISSILE_BONUS2", (CHARACTERGUID)_Char)
-THEN
-CharacterCharacterSetEvent(_Char, _Char, "LLWEAPONEX_MagicMissile_FireBonusMissile2");
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_MAGIC_MISSILE_BONUS3", (CHARACTERGUID)_Char)
-THEN
-CharacterCharacterSetEvent(_Char, _Char, "LLWEAPONEX_MagicMissile_FireBonusMissile3");
-*/
+NRD_ModCall("WeaponExpansion", "MagicMissileWeapon_RollForBasicAttackBonuses", (STRING)_Char);
 //END_REGION
 
 //REGION POWER_POLE

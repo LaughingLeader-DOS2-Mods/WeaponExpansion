@@ -85,6 +85,18 @@ THEN
 NRD_ModCall("WeaponExpansion", "OnSkillCast", (STRING)_Char, _Skill);
 //END_REGION
 
+//REGION ATTACK_EVENTS
+IF
+CharacterStartAttackObject(_Target, _Owner, _Attacker)
+THEN
+NRD_ModCall("WeaponExpansion", "OnBasicAttackTarget", (STRING)_Attacker, (STRING)_Target);
+
+IF
+CharacterStartAttackPosition(_x, _y, _z, _Owner, _Attacker)
+THEN
+NRD_ModCall("WeaponExpansion", "OnBasicAttackPosition", (STRING)_Attacker, (STRING)_x, (STRING)_y, (STRING)_z);
+//END_REGION
+
 //REGION GENERIC_STATUS
 IF
 CharacterStatusApplied(_Char, _Status, _Source)

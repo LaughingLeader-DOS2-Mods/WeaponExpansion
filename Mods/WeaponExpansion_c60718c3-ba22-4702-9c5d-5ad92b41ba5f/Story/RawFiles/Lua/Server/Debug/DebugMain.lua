@@ -120,6 +120,7 @@ local gameTestTemplates = {
     "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_0e98584a-7c57-4a5c-b7d9-57ec79aee85e",
     "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_068246d7-b4cc-4b6d-9ac8-716fdfd1822d",
     "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_NoScope_67b548a2-5fb3-44c1-bf9b-7148728df7c7",
+    "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812"
 }
 
 function DebugInit()
@@ -310,6 +311,14 @@ if Ext.IsDeveloperMode() then
         end
         local host = CharacterGetHostCharacter()
         CharacterGiveQuestReward(host, treasure, "QuestReward")
+    end)
+    Ext.RegisterConsoleCommand("addskill", function(command, skill)
+        local host = CharacterGetHostCharacter()
+        CharacterAddSkill(host, skill, 1)
+    end)
+    Ext.RegisterConsoleCommand("additem", function(command, template)
+        local host = CharacterGetHostCharacter()
+        ItemTemplateAddTo(template, host, 1, 1)
     end)
 end
 
