@@ -9,19 +9,3 @@ Projectile_LLWEAPONEX_Blunderbuss_Scattershot_DisplayName	<font color='#11D77A'>
 Projectile_LLWEAPONEX_Blunderbuss_Scattershot_Description	Fire a spread of 3 bullets at a target, dealing [1] per bullet.<br><font color='#44DD22'>If all 3 bullets hit the same target, knock them back 4m and deal an additional [2].</font>
 Projectile_LLWEAPONEX_Rifle_AimedShot_DisplayName	<font color='#11D77A'>Aimed Shot</font>
 Projectile_LLWEAPONEX_Rifle_AimedShot_Description	Take a focused shot on a target within [1], dealing [2], depending on distance to the target (damage caps at 20m max).<br><font color='#33FF11'>If the target is <font color='#DD3300'>Marked</font>, deal a critical hit.</font><br><font color='#FFBB22'>Aimed Shot provides an immense accuracy boost to ensure it always hits.</font>
-Projectile_LLWEAPONEX_Firearm_Multishot_DisplayName	Barrage
-Projectile_LLWEAPONEX_Firearm_Multishot_Description	Fire three bullets at three targets of your choice, each dealing [1].
-Projectile_LLWEAPONEX_Firearm_SkyShot_DisplayName	Sky Shot
-Projectile_LLWEAPONEX_Firearm_SkyShot_Description	Leap into the air before shooting, gaining damage bonuses for your superior height. Deals [1].
-Projectile_LLWEAPONEX_Firearm_ArrowSpray_DisplayName	Bullet Spray
-Projectile_LLWEAPONEX_Firearm_ArrowSpray_Description	Fire 15 bullets in a [1] degree arc. Each bullet deals [2].
-Projectile_LLWEAPONEX_Firearm_PiercingShot_DisplayName	Marksman&apos;s Fang
-Projectile_LLWEAPONEX_Firearm_PiercingShot_Description	Shoot a bullet that goes straight through enemies. Each enemy that&apos;s hit takes [1], ignoring Armour.
-Projectile_LLWEAPONEX_Firearm_Snipe_DisplayName	Assassinate
-Projectile_LLWEAPONEX_Firearm_Snipe_Description	Attack your target with meticulous aim, dealing [1] in one shot. When performed from Stealth, this attack gains a 50% damage increase.
-Projectile_LLWEAPONEX_Firearm_Ricochet_DisplayName	Ricochet
-Projectile_LLWEAPONEX_Firearm_Ricochet_Description	Fire a bullet that deals [3] and bounces to another target within [2]. Forks up to [1] times.
-Projectile_LLWEAPONEX_Firearm_BallisticShot_DisplayName	Ballistic Shot
-Projectile_LLWEAPONEX_Firearm_BallisticShot_Description	A shot that deals [1] and receives [2]% bonus damage per 1m distance to target.
-Projectile_LLWEAPONEX_Firearm_PinDown_DisplayName	Pin Down
-Projectile_LLWEAPONEX_Firearm_PinDown_Description	Deal [1] and Cripple target character.
