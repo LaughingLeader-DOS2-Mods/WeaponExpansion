@@ -58,17 +58,16 @@ function OnItemEquipped(uuid,item)
 				local equippedTag = Tags.WeaponTypes[tag]
 				if equippedTag ~= nil then
 					LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
-					Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,equippedTag,isPlayer)
+					Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,tag,equippedTag,isPlayer)
 				end
 				Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, item, tag)
 				if IsTagged(uuid, tag) == 0 then
 					SetTag(uuid, tag)
 					LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
 				end
-			else
-				local template = GetTemplate(item)
-				Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,item,template)
 			end
+			local template = GetTemplate(item)
+			Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,item,template)
 			Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,item,tag,isPlayer)
 			OnWeaponTypeEquipped(uuid, item, tag, stat, statType)
 		end
@@ -103,21 +102,60 @@ local rodSkills = {
 	Fire = {"Projectile_LLWEAPONEX_ShootRod_Fire", "Projectile_LLWEAPONEX_ShootRod_Fire_Offhand"},
 	Poison = {"Projectile_LLWEAPONEX_ShootRod_Poison", "Projectile_LLWEAPONEX_ShootRod_Poison_Offhand"},
 	Water = {"Projectile_LLWEAPONEX_ShootRod_Water", "Projectile_LLWEAPONEX_ShootRod_Water_Offhand"},
+	Magic = {"Projectile_LLWEAPONEX_ShootRod_MagicMissile", "Projectile_LLWEAPONEX_ShootRod_MagicMissile_Offhand"},
 }
 
 local uniqueRodSkills = {
 	WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A = { "Projectile_LLWEAPONEX_ShootRod_MagicMissile", "Projectile_LLWEAPONEX_ShootRod_MagicMissile_Offhand" },
 }
-local function GetRodTypeQRY(item)
+
+function AddRodSkill(char, item)
 	local stat = NRD_ItemGetStatsId(item)
+	local mainhandSkill, offhandSkill = nil, nil
 	local skills = uniqueRodSkills[stat]
 	if skills == nil then
 		local damageType = Ext.StatGetAttribute(stat, "Damage Type")
 		skills = rodSkills[damageType]
-		if skills == nil then
-			skills = rodSkills["Chaos"]
+		if skills ~= nil then
+			mainhandSkill,offhandSkill = table.unpack(skills)
 		end
-		return skills[1], skills[2]
+	else
+		mainhandSkill,offhandSkill = table.unpack(skills)
+	end
+
+	if mainhandSkill ~= nil and offhandSkill ~= nil then
+		local slot = ItemGetEquipmentSlot(item)
+		if slot == "Weapon" then
+			CharacterAddSkill(char, mainhandSkill)
+			SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
+		elseif slot == "Shield" then
+			CharacterAddSkill(char, offhandSkill)
+			SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", offhandSkill)
+		else
+			CharacterRemoveSkill(char, mainhandSkill)
+			CharacterRemoveSkill(char, offhandSkill)
+		end
+	end
+end
+
+function RemoveRodSkill(char, item)
+	local skill = GetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill")
+	print("RemoveRodSkill", char, item, skill)
+	if not LeaderLib.StringHelpers.IsNullOrEmpty(skill) then
+		CharacterRemoveSkill(char, skill)
+	end
+end
+
+local function GetRodTypeQRY(item)
+	local stat = NRD_ItemGetStatsId(item)
+	print(item, stat)
+	local skills = uniqueRodSkills[stat]
+	if skills == nil then
+		local damageType = Ext.StatGetAttribute(stat, "Damage Type")
+		skills = rodSkills[damageType]
+		if skills ~= nil then
+			return skills[1], skills[2]
+		end
 	else
 		return skills[1], skills[2]
 	end
@@ -168,16 +206,20 @@ Ext.NewQuery(SwapDeltaMods, "LLWEAPONEX_Ext_QRY_SwapDeltaMods", "[in](ITEMGUID)_
 function MagicMissileWeapon_Swap(char, wand, rod)
 	local equippedItem = nil
 	local targetItem = nil
-	local slot = LeaderLib.GameHelpers.GetEquippedSlot(char, wand)
+	local slot = ItemGetEquipmentSlot(wand)
 	if slot == nil then
-		slot = LeaderLib.GameHelpers.GetEquippedSlot(char, rod)
+		slot = ItemGetEquipmentSlot(rod)
 		equippedItem = rod
 		targetItem = wand
 	else
 		equippedItem = wand
 		targetItem = rod
 	end
-	CharacterUnequipItem(char, equippedItem)
-	ItemToInventory(equippedItem, targetItem, 1, 0, 0)
-	NRD_CharacterEquipItem(char, targetItem, slot, 0, 0, 1, 1)
+	print(equippedItem, targetItem, slot)
+	if equippedItem ~= nil and targetItem ~= nil then
+		CharacterUnequipItem(char, equippedItem)
+		--ItemToInventory(equippedItem, targetItem, 1, 0, 0)
+		NRD_CharacterEquipItem(char, targetItem, slot, 0, 0, 1, 1)
+		Osi.LeaderLib_Timers_StartObjectObjectTimer(equippedItem, targetItem, 50, "Timers_LLWEAPONEX_MoveMagicMissileWeapon", "LeaderLib_Commands_ItemToInventory")
+	end
 end

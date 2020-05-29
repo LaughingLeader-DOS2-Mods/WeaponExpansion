@@ -15,37 +15,16 @@ LeaderLog_Log("DEBUG", "[LLWEAPONEX:Rods] Refreshing rod weapon(s) to determine 
 LeaderLib_Helper_RefreshWeapons(_Player);
 //END_REGION
 
-//REGION ADD_ROD_SKILL
-PROC
-LLWEAPONEX_Rods_AddRodSkill((CHARACTERGUID)_Char, (ITEMGUID)_Rod, "Weapon", (STRING)_MainHandSkill, (STRING)_OffhandSkill)
-THEN
-CharacterAddSkill(_Char, _MainHandSkill, 0);
-CharacterRemoveSkill(_Char, _OffhandSkill);
-
-PROC
-LLWEAPONEX_Rods_AddRodSkill((CHARACTERGUID)_Char, (ITEMGUID)_Rod, "Shield", (STRING)_MainHandSkill, (STRING)_OffhandSkill)
-AND
-NOT LeaderLib_Helper_QRY_HasItemInSlot(_Char, "Weapon")
-THEN
-CharacterAddSkill(_Char, _MainHandSkill, 0);
-CharacterRemoveSkill(_Char, _OffhandSkill);
-
-PROC
-LLWEAPONEX_Rods_AddRodSkill((CHARACTERGUID)_Char, (ITEMGUID)_Rod, "Shield", (STRING)_MainHandSkill, (STRING)_OffhandSkill)
-AND
-LeaderLib_Helper_QRY_HasItemInSlot(_Char, "Weapon")
-THEN
-CharacterAddSkill(_Char, _OffhandSkill, 0);
-CharacterRemoveSkill(_Char, _MainHandSkill);
-
+//REGION ROD_SHOOT_SKILLS
 PROC
 LLWEAPONEX_Equipment_OnTaggedItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Rod", (INTEGER)_IsPlayer)
-AND
-ItemGetEquipmentSlot(_Item, _Slot)
-AND
-LLWEAPONEX_Ext_QRY_GetRodSkills(_Item, _MainhandSkill, _OffhandSkill)
 THEN
-LLWEAPONEX_Rods_AddRodSkill(_Char, _Item, _Slot, _MainHandSkill, _OffhandSkill);
+NRD_ModCall("WeaponExpansion", "AddRodSkill", (STRING)_Char, (STRING)_Item);
+
+PROC
+LLWEAPONEX_Equipment_OnTaggedItemUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "LLWEAPONEX_Rod", (INTEGER)_IsPlayer)
+THEN
+NRD_ModCall("WeaponExpansion", "RemoveRodSkill", (STRING)_Char, (STRING)_Item);
 //END_REGION
 EXITSECTION
 

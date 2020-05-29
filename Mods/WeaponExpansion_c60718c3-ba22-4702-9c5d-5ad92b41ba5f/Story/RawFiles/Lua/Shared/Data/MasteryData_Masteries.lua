@@ -171,3 +171,4 @@ Masteries = {
 	[4] = {Name = TranslatedString:Create("h0d7f2482ge6afg4ee1gb633g7b0e0769b52d", "Master Wandweaver"), Color="#D258FF"},
 }),
 }
+Masteries.LLWEAPONEX_Rod = Masteries.LLWEAPONEX_Wand

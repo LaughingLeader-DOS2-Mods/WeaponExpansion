@@ -2,6 +2,15 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
+//REGION UPDATES
+PROC
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+_LastVersion < 152567808
+THEN
+SysClear("DB_LLWEAPONEX_Equipment_TrackedItems", 2);
+SysClear("DB_LLWEAPONEX_Equipment_ActiveTags", 3);
+//END_REGION
 
 //REGION TRACK_UNARMED
 PROC
@@ -28,27 +37,19 @@ NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item);
 
 //REGION TRACK_EQUIPMENT
 PROC
-LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (INTEGER)_IsPlayer)
-AND
-NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
-AND
-GetTemplate(_Item, _Template)
+LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (STRING)_EquippedTag, (INTEGER)_IsPlayer)
 THEN
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
-LLWEAPONEX_OnItemTemplateEquipped(_Char, _Item, _Template);
-
-PROC
-LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (INTEGER)_IsPlayer)
-THEN
-DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item);
-SetTag(_Char, _Tag);
+DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
+DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _EquippedTag, _Item);
+SetTag(_Char, _EquippedTag);
 
 PROC
 LLWEAPONEX_Equipment_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_IsPlayer)
 AND
-DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item)
+DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType)
 THEN
-NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item);
+NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
+LLWEAPONEX_Equipment_OnTaggedItemUnEquipped(_Char, _Item, _WeaponType, _IsPlayer);
 
 PROC
 LLWEAPONEX_Equipment_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_IsPlayer)
@@ -56,15 +57,7 @@ AND
 DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item)
 THEN
 NOT DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _Tag, _Item);
-LLWEAPONEX_Equipment_Internal_ClearItem(_Char, _Item, _Tag, _IsPlayer);
 LLWEAPONEX_Equipment_Internal_CheckTags(_Char, _Tag);
-
-PROC
-LLWEAPONEX_Equipment_Internal_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Tag, (INTEGER)_IsPlayer)
-AND
-_Item != NULL_00000000-0000-0000-0000-000000000000
-THEN
-LLWEAPONEX_Equipment_OnTaggedItemUnEquipped(_Char, _Item, _Tag, _IsPlayer);
 
 PROC
 LLWEAPONEX_Equipment_Internal_CheckTags((CHARACTERGUID)_Char, (STRING)_Tag)

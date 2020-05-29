@@ -260,48 +260,52 @@ local WeaponTypeNames = {
 	{Tag = "LLWEAPONEX_Runeblade", Text = TranslatedString:Create("hb66213fdg1a98g4127ga55fg429f9cde9c6a", "Runeblade")},
 	{Tag = "LLWEAPONEX_Scythe", Text = TranslatedString:Create("h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa", "Scythe")},
 	{Tag = "LLWEAPONEX_Unarmed", Text = LLWEAPONEX_Unarmed},
+	{Tag = "LLWEAPONEX_Rod", Text = TranslatedString:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
 	--{Tag = "LLWEAPONEX_Bludgeon", Text = TranslatedString:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
 }
 
 ---@param item EsvItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
-	if item:HasTag("LLWEAPONEX_Pistol") then
-		local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-		local damageRange = Skills.Damage.GetPistolDamage(character, true)
-		local apCost = Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
-		local weaponRange = string.format("%sm", Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
-		CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
-	elseif item:HasTag("LLWEAPONEX_HandCrossbow") then
-		local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-		local damageRange = Skills.Damage.GetHandCrossbowDamage(character, true)
-		local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
-		local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
-		CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
-	elseif item:HasTag("LLWEAPONEX_Unarmed") then
-		local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-		local damageRange,highestAttribute = GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
-		--local highestAttribute = "Finesse"
-		--local bonusWeapon = Skills.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
-		--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
-		local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
-		local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
-		local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LeaderLib.LocalizedText.AttributeNames[highestAttribute].Value)
-		local slotInfoText = ""
-		local equipped = tooltip:GetElement("Equipped")
-		if equipped == nil then
-			slotInfoText = string.format(" (%s)", LeaderLib.LocalizedText.Slots[item.Stats.Slot].Value)
-		end
-		local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
-		CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
-	else
-		for i,entry in ipairs(WeaponTypeNames) do
-			if item:HasTag(entry.Tag) then
-				local armorSlotType = tooltip:GetElement("ArmorSlotType")
-				if armorSlotType ~= nil then
-					armorSlotType.Label = entry.Text.Value
+	print("OnItemTooltip", item, tooltip)
+	if item ~= nil then
+		if item:HasTag("LLWEAPONEX_Pistol") then
+			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+			local damageRange = Skills.Damage.GetPistolDamage(character, true)
+			local apCost = Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
+			local weaponRange = string.format("%sm", Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
+			CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
+		elseif item:HasTag("LLWEAPONEX_HandCrossbow") then
+			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+			local damageRange = Skills.Damage.GetHandCrossbowDamage(character, true)
+			local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
+			local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
+			CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
+		elseif item:HasTag("LLWEAPONEX_Unarmed") then
+			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+			local damageRange,highestAttribute = GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
+			--local highestAttribute = "Finesse"
+			--local bonusWeapon = Skills.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
+			--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
+			local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
+			local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
+			local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LeaderLib.LocalizedText.AttributeNames[highestAttribute].Value)
+			local slotInfoText = ""
+			local equipped = tooltip:GetElement("Equipped")
+			if equipped == nil then
+				slotInfoText = string.format(" (%s)", LeaderLib.LocalizedText.Slots[item.Stats.Slot].Value)
+			end
+			local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
+			CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
+		else
+			for i,entry in ipairs(WeaponTypeNames) do
+				if item:HasTag(entry.Tag) then
+					local armorSlotType = tooltip:GetElement("ArmorSlotType")
+					if armorSlotType ~= nil then
+						armorSlotType.Label = entry.Text.Value
+					end
+					break
 				end
-				break
 			end
 		end
 	end

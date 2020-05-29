@@ -722,3 +722,9 @@ data "DescriptionRef" "Through the power of the <font color='#c5a65a'>Power Gaun
 data "Icon" "LeaderLib_Placeholder"
 data "FormatColor" "Polymorph"
 data "StackId" "Stack_LLWEAPONEX_PowerGauntlets_Active"
+
+new entry "LLWEAPONEX_WAND_MAGIC_MISSILE"
+type "StatusData"
+using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
+data "DisplayName" "LLWEAPONEX_WAND_MAGIC_MISSILE_DisplayName"
+data "DisplayNameRef" "45%/30%/10% Chance for Bonus Missiles"
