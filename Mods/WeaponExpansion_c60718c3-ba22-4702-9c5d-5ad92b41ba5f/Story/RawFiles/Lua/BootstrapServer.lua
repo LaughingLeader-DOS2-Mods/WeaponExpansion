@@ -39,6 +39,19 @@ local function dumpRanks(...)
 end
 Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 
+---@param target EsvCharacter
+---@param attacker StatCharacter|StatItem
+---@param hit HitRequest
+---@param causeType string
+---@param impactDirection number[]
+local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection)
+	if hit.DamageType == "Magic" then
+        hit.DamageList:ConvertDamageType("Water")
+    elseif hit.DamageType == "Corrosive" then
+        hit.DamageList:ConvertDamageType("Physical")
+    end
+end
+
 local function SessionSetup()
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
@@ -48,6 +61,11 @@ local function SessionSetup()
     Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
 
     LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
+
+    if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") then
+        Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
+		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
+	end
 end
 Ext.RegisterListener("SessionLoaded", SessionSetup)
 
