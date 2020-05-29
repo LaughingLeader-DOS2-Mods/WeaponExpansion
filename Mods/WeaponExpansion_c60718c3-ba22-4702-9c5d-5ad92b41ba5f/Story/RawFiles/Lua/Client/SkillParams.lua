@@ -197,12 +197,17 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 function SkillGetDescriptionParam(skill, character, isFromItem, param)
 	--print(param, skill.Name)
 	local param_func = Skills.Damage.Params[param]
+	if param_func == nil and param == "Damage" then
+		param_func = Skills.Damage.Skills[skill.Name]
+	end
 	if param_func ~= nil then
-		local status,mainDamageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
-		if status and mainDamageRange ~= nil then
-			return LeaderLib.UI.Tooltip.FormatDamageRange(mainDamageRange)
+		local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
+		if status then
+			if txt ~= nil then
+				return txt
+			end
 		else
-			Ext.PrintError("Error getting param ("..param..") for skill:\n",mainDamageRange)
+			Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
 			return ""
 		end
 	end

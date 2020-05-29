@@ -136,10 +136,10 @@ function AddRodSkill(char, item)
 			local slot = GameHelpers.GetEquippedSlot(char,item)
 			print("AddRodSkill", stat, mainhandSkill, offhandSkill, slot)
 			if slot == "Weapon" then
-				CharacterAddSkill(char, mainhandSkill)
+				CharacterAddSkill(char, mainhandSkill, 0)
 				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
 			elseif slot == "Shield" then
-				CharacterAddSkill(char, offhandSkill)
+				CharacterAddSkill(char, offhandSkill, 0)
 				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", offhandSkill)
 			else
 				CharacterRemoveSkill(char, mainhandSkill)
@@ -149,11 +149,22 @@ function AddRodSkill(char, item)
 	end
 end
 
+local function WeaponHasRodSkill(weapon, skill)
+	if weapon ~= nil and GetVarFixedString(weapon, "LLWEAPONEX_Rod_ShootSkill") == skill then
+		return true
+	end
+	return false
+end
+
 function RemoveRodSkill(char, item)
 	local skill = GetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill")
-	print("RemoveRodSkill", char, item, skill)
+	print("RemoveRodSkill", char,item,skill)
 	if not LeaderLib.StringHelpers.IsNullOrEmpty(skill) then
-		CharacterRemoveSkill(char, skill)
+		local mainhand = CharacterGetEquippedItem(char, "Weapon")
+		local offhand = CharacterGetEquippedItem(char, "Shield")
+		if not WeaponHasRodSkill(mainhand, skill) and not WeaponHasRodSkill(offhand, skill) then
+			CharacterRemoveSkill(char, skill)
+		end
 	end
 end
 

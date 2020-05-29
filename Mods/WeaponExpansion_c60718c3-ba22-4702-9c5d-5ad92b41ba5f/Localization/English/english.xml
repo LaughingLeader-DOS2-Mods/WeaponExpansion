@@ -183,7 +183,7 @@
 	<content contentuid="h161d5479g06d6g408egade2g37a203e3361f">corrosive damage</content>
 	<content contentuid="h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a">Shrapnel Charge</content>
 	<content contentuid="h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59">Character&apos;s quiver is recharging.</content>
-	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target within [1], dealing [2], depending on distance to the target (damage caps at 20m max).&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
+	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target, &lt;font color=&apos;#00FFAA&apos;&gt;dealing [1]&lt;/font&gt;, depending on distance to the target.&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
 	<content contentuid="h1683f225g0155g4015gab2bgf7563a8f4510">Character has lowered resistances to &lt;font color=&apos;#9A00FF&apos;&gt;every element&lt;/font&gt;.</content>
 	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8">shadow</content>
 	<content contentuid="h16a53792g6604g4a6ag9f3agcfa5e63ac21d">Night&apos;s Edge</content>
@@ -1101,7 +1101,6 @@
 	<content contentuid="h7cb130ddga46fg415bg96d0g33e60f726dca">Kor&apos;vash</content>
 	<content contentuid="h7cb4d6abgacb9g48d6gbf91g2bab271be60c">Toph&apos;s Pride</content>
 	<content contentuid="h7cbb99c6g0a38g40c4g8b08g64d486ff3350">Chaos Goblin</content>
-	<content contentuid="h7cc43756g0f73g4a27g9b73g2229d956b10b">Rod Mode</content>
 	<content contentuid="h7cc93d1fge6ceg465fgbbb7gee5e2bb13418">Extermination</content>
 	<content contentuid="h7cceabb0ga5ebg4e5cg87beg4dc34df91652">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are covered in oil, dealing Earth damage.</content>
 	<content contentuid="h7d2f74bbg1a12g4a71gaef5g86533e0ee694">Ancestry Unbound, Dwarven Might</content>
@@ -2009,6 +2008,7 @@
 	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%&lt;/font&gt; to be &lt;font color=&apos;#00FFAA&apos;&gt;coated in poison or explosive oil&lt;/font&gt;, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.&lt;/font&gt;</content>
 	<content contentuid="head276c0gfecag4897gbc5cg4b74c26bb4d9">a Crossbow</content>
 	<content contentuid="heae6a50fg68ceg4889g83b5gac0ef4eeaf67">Conduction Rune</content>
+	<content contentuid="heb1c0428g158fg46d6gafa3g6d6143534f37">One-Handed Scepter</content>
 	<content contentuid="heb3b000egc1ffg49cdgb4ceg7d289e830454">a Wand</content>
 	<content contentuid="heb957fedgf165g4017ga0b9ge71f7038a453">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery III&lt;/font&gt;</content>
 	<content contentuid="hebb079bbg7dd3g4dd4gb8c7g73cb83f621d5">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are like mini-grenades, exploding with fire damage on hit.</content>
