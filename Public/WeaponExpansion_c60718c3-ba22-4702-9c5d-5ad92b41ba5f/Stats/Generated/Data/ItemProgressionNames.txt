@@ -45,9 +45,15 @@ add name "ARM_UNIQUE_LLWEAPONEX_Blindfold_DisplayName",""
 new namegroup "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A"
 add name "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A_DisplayName",""
 
+new namegroup "ARM_LLWEAPONEX_HandCrossbow_A"
+add name "ARM_LLWEAPONEX_HandCrossbow_A_1_DisplayName",""
+add namecool "ARM_LLWEAPONEX_HandCrossbow_A_2_DisplayName",""
+
+new namegroup "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart"
+add name "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart_1_DisplayName",""
+
 new namegroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A"
-add name "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_1_DisplayName",""
-add namecool "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_2_DisplayName",""
+add name "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_DisplayName",""
 
 new namegroup "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A"
 add name "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A_DisplayName",""
