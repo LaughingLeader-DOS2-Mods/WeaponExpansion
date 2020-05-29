@@ -183,7 +183,7 @@
 	<content contentuid="h161d5479g06d6g408egade2g37a203e3361f">corrosive damage</content>
 	<content contentuid="h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a">Shrapnel Charge</content>
 	<content contentuid="h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59">Character&apos;s quiver is recharging.</content>
-	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target, &lt;font color=&apos;#00FFAA&apos;&gt;dealing [1]&lt;/font&gt;, depending on distance to the target.&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
+	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target, &lt;font color=&apos;#00FFAA&apos;&gt;dealing [1] to [2]&lt;/font&gt;, depending on distance to the target.&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
 	<content contentuid="h1683f225g0155g4015gab2bgf7563a8f4510">Character has lowered resistances to &lt;font color=&apos;#9A00FF&apos;&gt;every element&lt;/font&gt;.</content>
 	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8">shadow</content>
 	<content contentuid="h16a53792g6604g4a6ag9f3agcfa5e63ac21d">Night&apos;s Edge</content>
