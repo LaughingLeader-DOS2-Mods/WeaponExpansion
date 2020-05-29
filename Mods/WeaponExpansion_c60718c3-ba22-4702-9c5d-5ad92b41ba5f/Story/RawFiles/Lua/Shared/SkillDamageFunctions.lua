@@ -620,7 +620,7 @@ local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed,
 	for i,damage in pairs(damageMin) do
 		local min = damage.Amount
 		if min ~= nil then
-			table.insert(minDamageTexts, GameHelpers.GetDamageText(damage.DamageType, math.tointeger(min)))
+			table.insert(minDamageTexts, GameHelpers.GetDamageText(damage.DamageType, min))
 		end
 	end
 	if totalDamageTypes > 0 then
