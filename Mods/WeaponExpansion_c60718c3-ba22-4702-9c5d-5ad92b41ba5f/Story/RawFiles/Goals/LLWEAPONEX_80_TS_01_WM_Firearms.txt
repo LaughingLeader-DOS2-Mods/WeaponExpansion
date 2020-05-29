@@ -11,43 +11,6 @@ DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPla
 THEN
 ApplyStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 6.0, 0, _Char);
 */
-
-/*
-IF
-SkillAdded(_Char, _FindSkill, 1)
-AND
-CharacterIsPlayer(_Char, _IsPlayer)
-AND
-LLWEAPONEX_QRY_WeaponTypeMasteryEnabled(_Char, "LLWEAPONEX_Firearm")
-AND
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPlayer)
-AND
-CharacterHasSkill(_Char, _FindSkill, 1)
-THEN
-LLWEAPONEX_Firearms_SwapRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
-
-IF
-SkillActivated(_Char, _FindSkill)
-AND
-CharacterIsPlayer(_Char, _IsPlayer)
-AND
-LLWEAPONEX_QRY_WeaponTypeMasteryEnabled(_Char, "LLWEAPONEX_Firearm")
-AND
-DB_LLWEAPONEX_Firearms_RangerReplacementSkills(_FindSkill, _ReplaceSkill, _IsPlayer)
-AND
-CharacterHasSkill(_Char, _FindSkill, 1)
-THEN
-LLWEAPONEX_Firearms_SwapRangerSkill(_Char, _FindSkill, _ReplaceSkill, _IsPlayer);
-
-IF
-SkillDeactivated(_Char, _ReplaceSkill)
-AND
-DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill)
-THEN
-NOT DB_LLWEAPONEX_Firearms_SwappedRangerSkill(_Char, _FindSkill, _ReplaceSkill);
-CharacterRemoveSkill(_Char, _ReplaceSkill);
-CharacterAddSkill(_Char, _FindSkill, 0);
-*/
 EXITSECTION
 
 ENDEXITSECTION
