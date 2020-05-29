@@ -28,6 +28,51 @@ local function CanGrantMasteryExperience(target,player)
 	return false,0.0
 end
 
+local armorDamageTypes = {
+	Magic = "CurrentMagicArmor",
+	Corrosive = "CurrentArmor"
+}
+
+---@param target EsvCharacter
+---@param attacker StatCharacter|StatItem
+---@param hit HitRequest
+---@param causeType string
+---@param impactDirection number[]
+local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection)
+	-- Divinity Unleashed
+	if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") then
+		if armorDamageTypes[hit.DamageType] ~= nil then
+			hit.DamageList:ConvertDamageType("None")
+		end
+	end
+end
+
+Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
+
+---Reduces magic/corrosive damage by armor before it gets converted to vitality damage in BeforeCharacterApplyDamage
+local function ConvertArmorDamage(target,handle)
+	if ObjectIsCharacter(target) == 1 then
+		---@type StatCharacter
+		local character = Ext.GetCharacter(target).Stats
+		for damageType,stat in pairs(armorDamageTypes) do
+			local damage = NRD_HitGetDamage(handle, damageType)
+			if damage > 0 then
+				local armor = NRD_CharacterGetStatInt(target, stat)
+				if armor > 0 then
+					local nextArmor = armor - damage
+					if nextArmor < 0 then
+						local nextDamage = -1 * nextArmor
+						NRD_HitClearDamage(handle, damageType)
+						NRD_HitAddDamage(handle, damageType, nextDamage)
+						nextArmor = 0
+					end
+					NRD_CharacterSetStatInt(target, stat, nextArmor)
+				end
+			end
+		end
+	end
+end
+
 --- @param target string
 --- @param source string
 --- @param damage integer
@@ -35,6 +80,9 @@ end
 local function OnPrepareHit(target,source,damage,handle)
 	if source ~= nil and CharacterGetEquippedWeapon(source) == nil then
 		ScaleUnarmedDamage(source,target,damage,handle)
+	end
+	if damage > 0 then
+		ConvertArmorDamage(target,handle)
 	end
 	if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 then
 		local hitType = NRD_HitGetInt(handle, "HitType")
