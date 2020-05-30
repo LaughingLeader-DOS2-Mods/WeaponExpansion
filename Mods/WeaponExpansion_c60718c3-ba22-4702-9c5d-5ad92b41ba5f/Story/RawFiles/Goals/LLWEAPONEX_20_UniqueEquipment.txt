@@ -1,8 +1,13 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-
+LLWEAPONEX_Uniques_InitSettings();
 KBSECTION
+
+PROC
+LLWEAPONEX_Uniques_InitSettings()
+THEN
+DB_LLWEAPONEX_Uniques_MagicMissileWand((ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_f8958c1e-1c9d-4fa9-b03f-b883c65f95c3, (ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_292b4b04-4ba1-4fa3-96df-19eab320c50f);
 
 //REGION BEHOLDER
 PROC
