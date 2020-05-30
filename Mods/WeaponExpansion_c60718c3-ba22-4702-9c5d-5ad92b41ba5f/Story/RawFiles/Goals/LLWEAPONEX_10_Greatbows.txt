@@ -520,7 +520,6 @@ NOT DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(_Char, _x, _y, _z, _Handle
 DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(_Char, _x, _y, _z, _NewHandle);
 StopLoopEffect(_Handle);
 
-
 PROC
 LeaderLib_Turns_OnTurnCounterComplete_PositionWithObject((STRING)_ID, (GUIDSTRING)_Char, (REAL)_x, (REAL)_y, (REAL)_z, "LLWEAPONEX_Greatbow_FutureBarrageFire")
 AND

@@ -7,8 +7,7 @@ KBSECTION
 PROC
 LLWEAPONEX_Uniques_InitSettings()
 THEN
-DB_LLWEAPONEX_Uniques_MagicMissileWand((ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_f8958c1e-1c9d-4fa9-b03f-b883c65f95c3, (ITEMGUID)S_WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_292b4b04-4ba1-4fa3-96df-19eab320c50f);
-
+DB_NOOP(1);
 //REGION BEHOLDER
 PROC
 LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616")
@@ -215,37 +214,11 @@ THEN
 RemoveStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
 //END_REGION
 
-//REGION MAGIC_MISSILE_WAND_MODE
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Wand, "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812")
-AND
-NOT DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _)
-AND
-GetPosition(_Char, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96", _x, _y, _z, _Rod)
-THEN
-DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _Rod);
-ItemToInventory(_Rod, _Wand, 1, 0, 0);
-
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Rod, "WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_1566e0f6-3718-40b4-a7ff-e2c07c3cbd96")
-AND
-NOT DB_LLWEAPONEX_Uniques_MagicMissileWand(_, _Rod)
-AND
-GetPosition(_Char, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812", _x, _y, _z, _Wand)
-THEN
-DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _Rod);
-ItemToInventory(_Wand, _Rod, 1, 0, 0);
-
+//REGION MAGIC_MISSILE_SWAP
 IF
-SkillCast(_Char, "Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode", _, _)
-AND
-DB_LLWEAPONEX_Uniques_MagicMissileWand(_Wand, _Rod)
+CharacterUsedSkill(_Char, "Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode", _, _)
 THEN
-NRD_ModCall("WeaponExpansion", "MagicMissileWeapon_Swap", (STRING)_Char, (STRING)_Wand, (STRING)_Rod);
+NRD_ModCall("WeaponExpansion", "SwapUnique", (STRING)_Char, "MagicMissileWand");
 //END_REGION
 
 //REGION MAGIC_MISSILE_BONUS_HITS
@@ -308,75 +281,26 @@ SkillCast(_Char, "Shout_LLWEAPONEX_Warchief_SwitchMode", _, _)
 THEN
 ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Warchief_StartModeToggle", 900);
 
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Warchief_StartModeToggle")
-AND
-CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Halberd)
+IF
+SkillCast(_Char, "Shout_LLWEAPONEX_Warchief_SwitchMode", _, _)
 THEN
-CharacterUnequipItem(_Char, _Halberd);
-LeaderLib_Timers_StartCharacterItemTimer(_Char, _Halberd, 25, "LLWEAPONEX_Timers_SwapWarchiefMode", "LLWEAPONEX_SwapWarchiefMode");
+NRD_ModCall("WeaponExpansion", "SaveSkillSlot", (STRING)_Char, "Zone_LLWEAPONEX_Warchief_CripplingBlow");
+NRD_ModCall("WeaponExpansion", "SaveSkillSlot", (STRING)_Char, "Rush_LLWEAPONEX_Warchief_Whirlwind");
 
 IF
-CharacterItemEvent(_Char, _Halberd, "LLWEAPONEX_SwapWarchiefMode")
-AND
-GetTemplate(_Halberd, _Template)
-AND
-CharacterGetLevel(_Char, _Level)
+SkillActivated(_Char, "Zone_LLWEAPONEX_Warchief_CripplingBlow")
 THEN
-LLWEAPONEX_Uniques_WarChief_CheckVariable(_Char, _Halberd, _Level, _Template);
-LLWEAPONEX_Uniques_WarChief_Swap(_Char, _Halberd, _Level, _Template);
+NRD_ModCall("WeaponExpansion", "RestoreSkillSlot", (STRING)_Char, "Rush_LLWEAPONEX_Warchief_Whirlwind", "Zone_LLWEAPONEX_Warchief_CripplingBlow");
+
+IF
+SkillActivated(_Char, "Rush_LLWEAPONEX_Warchief_Whirlwind")
+THEN
+NRD_ModCall("WeaponExpansion", "RestoreSkillSlot", (STRING)_Char, "Zone_LLWEAPONEX_Warchief_CripplingBlow", "Rush_LLWEAPONEX_Warchief_Whirlwind");
 
 PROC
-LLWEAPONEX_Uniques_WarChief_CheckVariable((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347")
-AND
-NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
-AND
-GetPosition(_Char, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08", _x, _y, _z, _OtherHalberd)
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Warchief_StartModeToggle")
 THEN
-SetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", _OtherHalberd);
-SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
-
-PROC
-LLWEAPONEX_Uniques_WarChief_CheckVariable((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08")
-AND
-NOT LeaderLib_Variables_QRY_ObjectVariableSet(_Halberd, "LLWEAPONEX_WarchiefHalberd")
-AND
-GetPosition(_Char, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition("WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347", _x, _y, _z, _OtherHalberd)
-THEN
-SetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", _OtherHalberd);
-SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
-
-PROC
-LLWEAPONEX_Uniques_WarChief_Swap((CHARACTERGUID)_Char, (ITEMGUID)_Halberd, (INTEGER)_Level, (STRING)_Template)
-AND
-GetVarObject(_Halberd, "LLWEAPONEX_WarchiefHalberd", (ITEMGUID)_OtherHalberd)
-THEN
-//Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08", 1, 1, 1);
-//Transform(_Halberd, "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347", 1, 1, 1);
-//ItemLevelUpTo(_OtherHalberd, _Level);
-ItemToInventory(_OtherHalberd, _Char);
-CharacterUnequipItem(_Char, _Halberd);
-LeaderLib_Timers_StartCharacterItemTimer(_Char, _OtherHalberd, 25, "LLWEAPONEX_Timers_WarChiefSwap_Equip", "LeaderLib_Commands_EquipItem");
-LeaderLib_Timers_StartObjectObjectTimer(_Halberd, _OtherHalberd, 150, "LLWEAPONEX_Timers_WarChiefSwap_ToInventory", "LLWEAPONEX_WarChiefSwap_ToInventory");
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((ITEMGUID)_Halberd, (ITEMGUID)_OtherHalberd, "LLWEAPONEX_WarChiefSwap_ToInventory")
-AND
-NOT GetInventoryOwner(_OtherHalberd, _Halberd)
-THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:LLWEAPONEX_WarChiefSwap_ToInventory] Moving halberd inside other halberd.");
-ItemToInventory(_Halberd, _OtherHalberd, 1, 0, 0);
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((ITEMGUID)_Halberd, (ITEMGUID)_OtherHalberd, "LLWEAPONEX_WarChiefSwap_ToInventory")
-AND
-GetInventoryOwner(_OtherHalberd, _Halberd)
-THEN
-LeaderLog_Log("ERROR", "[LLWEAPONEX_20_UniqueEquipment:LLWEAPONEX_WarChiefSwap_ToInventory] Something went wrong! Other haldberd is still within the one we're switching away from!");
+NRD_ModCall("WeaponExpansion", "SwapUnique", (STRING)_Char, "Warchief");
 
 IF
 CharacterUsedSkill(_Char, "Rush_LLWEAPONEX_Warchief_Whirlwind", _, _)
@@ -424,78 +348,37 @@ SetVarObject(_OtherHalberd, "LLWEAPONEX_WarchiefHalberd", _Halberd);
 //END_REGION
 
 //REGION BOKKEN_SWITCH
-/*
-WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c
-WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af
-*/
-QRY
-LLWEAPONEX_Uniques_QRY_BokkenMatch("WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c")
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Uniques_QRY_BokkenMatch("WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af")
-THEN
-DB_NOOP(1);
-
 IF
 SkillCast(_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToOneHanded", _, _)
 THEN
-ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Bokken_StartModeToggle", 900);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Bokken_ChangeStance_ToOneHanded", 900);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Bokken_ChangeStance_ToOneHanded")
+THEN
+NRD_ModCall("WeaponExpansion", "SaveSkillSlot", (STRING)_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToOneHanded");
+NRD_ModCall("WeaponExpansion", "SwapUnique", (STRING)_Char, "Bokken");
 
 IF
 SkillCast(_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToTwoHanded", _, _)
 THEN
-ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Bokken_StartModeToggle", 900);
+ProcObjectTimer(_Char, "LLWEAPONEX_Timers_Bokken_ChangeStance_ToTwoHanded", 900);
 
 PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Bokken_StartModeToggle")
-AND
-CharacterGetEquippedItem(_Char, "Weapon", (ITEMGUID)_Item)
-AND
-GetTemplate(_Item, _Template)
-AND
-LLWEAPONEX_Uniques_QRY_BokkenMatch(_Template)
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Bokken_ChangeStance_ToTwoHanded")
 THEN
-CharacterUnequipItem(_Char, _Item);
-LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 100, "LLWEAPONEX_Timers_SwapBokkenMode", "LLWEAPONEX_SwapBokkenMode");
-
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Bokken_StartModeToggle")
-AND
-CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
-AND
-GetTemplate(_Item, _Template)
-AND
-LLWEAPONEX_Uniques_QRY_BokkenMatch(_Template)
-THEN
-CharacterUnequipItem(_Char, _Item);
-LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 100, "LLWEAPONEX_Timers_SwapBokkenMode", "LLWEAPONEX_SwapBokkenMode");
+NRD_ModCall("WeaponExpansion", "SaveSkillSlot", (STRING)_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToTwoHanded");
+NRD_ModCall("WeaponExpansion", "SwapUnique", (STRING)_Char, "Bokken");
 
 IF
-CharacterItemEvent(_Char, _Item, "LLWEAPONEX_SwapBokkenMode")
-AND
-GetTemplate(_Item, _Template)
-AND
-CharacterGetLevel(_Char, _Level)
+SkillActivated(_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToTwoHanded")
 THEN
-LLWEAPONEX_Uniques_SwapBokkenMode(_Char, _Item, _Level, _Template);
+NRD_ModCall("WeaponExpansion", "RestoreSkillSlot", (STRING)_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToOneHanded", "Shout_LLWEAPONEX_Bokken_ChangeStance_ToTwoHanded");
 
-PROC
-LLWEAPONEX_Uniques_SwapBokkenMode((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c")
+IF
+SkillActivated(_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToOneHanded")
 THEN
-Transform(_Item, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af", 1, 1, 1);
-
-PROC
-LLWEAPONEX_Uniques_SwapBokkenMode((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_Level, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_ed8eadc4-41c9-4f99-b77a-a79a711ca6af")
-THEN
-Transform(_Item, "WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_e5fc86f9-a4fd-43dd-8814-b6ec906c287c", 1, 1, 1);
-
-PROC
-LLWEAPONEX_Uniques_SwapBokkenMode((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_Level, (STRING)_Template)
-THEN
-ItemLevelUpTo(_Item, _Level);
-LeaderLib_Timers_StartCharacterItemTimer(_Char, _Item, 25, "LLWEAPONEX_Timers_SwapBokkenMode_Equip", "LeaderLib_Commands_EquipItem");
+NRD_ModCall("WeaponExpansion", "RestoreSkillSlot", (STRING)_Char, "Shout_LLWEAPONEX_Bokken_ChangeStance_ToTwoHanded", "Shout_LLWEAPONEX_Bokken_ChangeStance_ToOneHanded");
 //END_REGION
 
 //REGION WRAITHBLADE_SLAY_HIDDEN
