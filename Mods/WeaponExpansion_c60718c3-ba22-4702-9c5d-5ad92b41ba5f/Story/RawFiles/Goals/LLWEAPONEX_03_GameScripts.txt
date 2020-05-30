@@ -10,6 +10,7 @@ LeaderLib_GameScripts_ClearScriptsForGroup("WeaponExpansion");
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_00_UI");
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_01_GS_00_Listeners");
 LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_01_MasteryEvents");
+LeaderLib_GameScripts_RegisterScript("WeaponExpansion", "LLWEAPONEX_03_GS_02_ItemEvents");
 
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)

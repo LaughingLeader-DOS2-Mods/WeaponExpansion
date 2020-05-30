@@ -44,9 +44,9 @@ new treasuretable "ST_LLWEAPONEX_DualShieldsNormal"
 new subtable "1,1"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 
-new treasuretable "ST_LLWEAPONEX_WakizashiNormal"
-new subtable "0,0"
-object category "Gold",1,1,0,0,0,0,0,0
+new treasuretable "ST_LLWEAPONEX_DaggersNormal"
+new subtable "1,1"
+object category "LLWEAPONEX_Dagger_1H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_KatanasNormal"
 new subtable "1,1"
@@ -54,7 +54,7 @@ object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
 new subtable "1,1"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsNormal"
 new subtable "1,1"
@@ -167,7 +167,7 @@ object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
 new subtable "0,1;1,2"
 object category "LLWEAPONEX_Bokken_1H",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
@@ -1176,7 +1176,7 @@ object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
 object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
 
@@ -1191,7 +1191,7 @@ object category "T_ST_LLWEAPONEX_DualShieldsNormal",1,1,0,0,0,0,0,0
 new subtable "0,3;1,2"
 object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "0,2;1,2"
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
 
@@ -1242,7 +1242,7 @@ new subtable "0,3;1,1"
 object category "LLWEAPONEX_Shuriken",1,1,0,0,0,0,0,0
 object category "I_GRN_LLWEAPONEX_Throwing_Dagger",2,1,0,0,0,0,0,0
 new subtable "0,1;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "0,4;1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
 
@@ -1325,7 +1325,7 @@ object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
 object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
 new subtable "1,1"
@@ -1343,7 +1343,7 @@ object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
 object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
 
@@ -1354,7 +1354,7 @@ object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
 object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
 
@@ -1374,7 +1374,7 @@ object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
 object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
 new subtable "0,1;1,2"
-object category "T_ST_LLWEAPONEX_WakizashiNormal",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
 
@@ -1453,7 +1453,6 @@ object category "I_SKILLBOOK_LLWEAPONEX_MagicBatteringRam",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "I_SKILLBOOK_LLWEAPONEX_MagicCripplingStrike",1,0,0,0,0,0,0,0
 
-
 new treasuretable "IngredientTrader"
 CanMerge 1
 new subtable "0,1;3,1"
@@ -1480,3 +1479,25 @@ new subtable "0,6;1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
 
 //END_REGION
+
+new treasuretable "ST_LLWEAPONEX_SmugglersBag_AssassinLoot"
+new subtable "1,1"
+object category "I_ARM_LLWEAPONEX_HandCrossbow_A_Crafted",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_LOOT_Drudanae_Pipe",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_FOOD_Apple_Poisoned",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_SmugglersBag_PirateLoot"
+new subtable "1,1"
+object category "I_ARM_LLWEAPONEX_Pistol_A_Crafted",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_CON_Drink_Bottle_Beer_A",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "I_CON_Drink_Cup_A_Orange",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_SmugglersBag_Random"
+new subtable "1,1"
+object category "T_ST_RandomLootJunkCharacters",1,1,0,0,0,0,0,0
+new subtable "1,1"
+object category "T_ST_RandomLootJunk",1,1,0,0,0,0,0,0

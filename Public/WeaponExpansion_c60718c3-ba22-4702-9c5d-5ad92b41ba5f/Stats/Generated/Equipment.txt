@@ -474,11 +474,11 @@ add equipment entry "ARM_Purge_UpperBody"
 add equipmentgroup
 add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
-add equipment entry "WPN_CraftedDagger"
+add equipment entry "WPN_LLWEAPONEX_Tanto_1H"
 add equipmentgroup
 add equipment entry "WPN_CraftedDagger"
 add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart"
+add equipment entry "LOOT_LLWEAPONEX_SmugglersBag"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -500,11 +500,11 @@ add equipment entry "ARM_Purge_Boots"
 add equipmentgroup
 add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
-add equipment entry "WPN_CraftedDagger"
+add equipment entry "WPN_LLWEAPONEX_Tanto_1H"
 add equipmentgroup
 add equipment entry "WPN_CraftedDagger"
 add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart"
+add equipment entry "LOOT_LLWEAPONEX_SmugglersBag"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -526,11 +526,11 @@ add equipment entry "ARM_Shadowblade_Gloves"
 add equipmentgroup
 add equipment entry "ARM_Shadowblade_Boots"
 add equipmentgroup
-add equipment entry "WPN_Rogue_Dagger_Lizards"
+add equipment entry "WPN_LLWEAPONEX_Tanto_1H_Preview"
 add equipmentgroup
-add equipment entry "WPN_Rogue_Dagger_Lizards"
+add equipment entry "WPN_Rogue_Dagger_Humans"
 add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A_Preview"
+add equipment entry "ARM_LLWEAPONEX_HandCrossbow_A_Preview"
 
 new equipment "Class_LLWEAPONEX_DualShields_Start"
 add equipmentgroup
@@ -742,7 +742,7 @@ add equipment entry "ARM_LLWEAPONEX_Rifleman_Boots"
 add equipmentgroup
 add equipment entry "ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_Preview"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_A_Preview"
+add equipment entry "WPN_LLWEAPONEX_Firearm_2H_Rifle_B_Preview"
 
 new equipment "Class_LLWEAPONEX_Pirate_Start"
 add equipmentgroup
@@ -754,7 +754,7 @@ add equipment entry "ARM_Purge_LowerBody"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
 add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_Pistol_A_Crafted"
+add equipment entry "LOOT_LLWEAPONEX_SmugglersBag"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup
@@ -780,7 +780,7 @@ add equipment entry "ARM_Purge_Gloves"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
 add equipmentgroup
-add equipment entry "ARM_LLWEAPONEX_Pistol_A_Crafted"
+add equipment entry "LOOT_LLWEAPONEX_SmugglersBag"
 add equipmentgroup
 add equipment entry "GRN_Grenade_Molotov_A"
 add equipmentgroup

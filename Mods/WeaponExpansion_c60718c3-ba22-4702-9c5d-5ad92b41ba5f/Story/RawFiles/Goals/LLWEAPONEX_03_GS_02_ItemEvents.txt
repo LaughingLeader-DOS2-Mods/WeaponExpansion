@@ -1,0 +1,11 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+IF
+CharacterItemEvent(_Char, _Item, "LLWEAPONEX_OpenSmugglersBag")
+THEN
+NRD_ModCall("WeaponExpansion", "OnSmugglersBagOpened", (STRING)_Char, (STRING)_Item);
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_03_GameScripts"
