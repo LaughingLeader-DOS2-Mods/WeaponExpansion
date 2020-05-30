@@ -39,10 +39,10 @@ data "ItemGroup" "ARM_LLWEAPONEX_HandCrossbow_A"
 data "ComboCategory" "ArmorRing,LLWEAPONEX_HandCrossbow"
 data "ItemColor" "LLWEAPONEX_HandCrossbow_A"
 
-new entry "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart"
+new entry "ARM_LLWEAPONEX_HandCrossbow_A_Crafted"
 type "Armor"
 using "_LLWEAPONEX_HandCrossbows"
-data "ItemGroup" "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart"
+data "ItemGroup" "ARM_LLWEAPONEX_HandCrossbow_A_Crafted"
 data "ComboCategory" "ArmorRing,LLWEAPONEX_HandCrossbow"
 data "Value" "50"
 
