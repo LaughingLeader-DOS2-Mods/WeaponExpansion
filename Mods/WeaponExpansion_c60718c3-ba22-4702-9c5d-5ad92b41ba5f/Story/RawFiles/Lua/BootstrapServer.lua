@@ -1,4 +1,5 @@
 PersistentVars = {}
+LoadPersistentVars = {}
 
 Ext.Require("Shared/Init.lua")
 Ext.Require("Server/Init.lua")
@@ -65,7 +66,14 @@ local function SessionSetup()
     if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") then
         Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
 		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
-	end
+    end
+    
+    for i,callback in ipairs(LoadPersistentVars) do
+        local status,err = xpcall(callback, debug.traceback)
+        if not status then
+            Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)
+        end
+    end
 end
 Ext.RegisterListener("SessionLoaded", SessionSetup)
 
