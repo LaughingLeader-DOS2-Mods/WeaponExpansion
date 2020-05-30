@@ -9,6 +9,7 @@ GRN_LLWEAPONEX_Flask_Weakness_Fire_A	<font color='#C76537'>Flask of Fire Weaknes
 GRN_LLWEAPONEX_Flask_Weakness_Poison_A	<font color='#00AA00'>Flask of Poison Weakness</font>	h1765f964g83e6g4e49g89afg2a7239aa0a3c
 GRN_LLWEAPONEX_Flask_Weakness_Water_A	<font color='#188EDE'>Flask of Water Weakness</font>	h3eebf141gc25cg449dga4aag3f7a3cfc3c57
 GRN_LLWEAPONEX_Ingredient_Flask_Empty	Empty Glass Flask	h91d6604fg166fg4390g88e4g1847a776456f
+LOOT_LLWEAPONEX_SmugglersBag	Smuggler's Bag	h8cfbd3e2g8bf0g4308gaf7fg708ad55ff7b6
 LOOT_LLWEAPONEX_Token_Constitution	<font color='#EA74B6'>Token of Constitution</font>	h31cede19g57a8g48deg87d7gaa9dc607185c
 LOOT_LLWEAPONEX_Token_Constitution_Free	<font color='#EA74B6'>Token of Constitution</font>	haafc1fcfgb8adg4ba2gb6e4ge48d4225b936
 LOOT_LLWEAPONEX_Token_Finesse	<font color='#81AB00'>Token of Finesse</font>	ha62b3311gd53fg466ag833cg4828d2e6abd6
@@ -19,11 +20,11 @@ LOOT_LLWEAPONEX_Token_Memory	<font color='#FCD203'>Token of Memory</font>	h75762
 LOOT_LLWEAPONEX_Token_Memory_Free	<font color='#FCD203'>Token of Memory</font>	h9d93540cgce84g4d07g85beg2f24ccfb95b2
 LOOT_LLWEAPONEX_Token_Reset	<font color='#D040D0'>Token of Reversal</font>	h26f82774g8034g4385gb5fag3f1c7e7ce184
 LOOT_LLWEAPONEX_Token_Reset_Free	<font color='#D040D0'>Token of Reversal</font>	h39c5dbe1g768bg4d06g8847g0e3f4bd33489
+LOOT_LLWEAPONEX_Token_Shard	<font color='#CCAAFF'>Attribute Token Shard</font>	h5e026ef6g4922g4ea9ga9dbgb44ceb73eb53
 LOOT_LLWEAPONEX_Token_Strength	<font color='#FF9600'>Token of Strength</font>	h11723efcg6edbg45dag92f1g2f36eca30ecd
 LOOT_LLWEAPONEX_Token_Strength_Free	<font color='#FF9600'>Token of Strength</font>	h0de3cd8agddbcg4610ga371g3ddde27acf7c
 LOOT_LLWEAPONEX_Token_Wits	<font color='#A150FF'>Token of Wits</font>	h2743ea1ag857ag4f3egb34bg71129ad65ad1
 LOOT_LLWEAPONEX_Token_Wits_Free	<font color='#A150FF'>Token of Wits</font>	h37dd5ccag806fg4c58gbb05gd2cca622ae93
-LOOT_LLWEAPONEX_Token_Shard	<font color='#CCAAFF'>Attribute Token Shard</font>	h5e026ef6g4922g4ea9ga9dbgb44ceb73eb53
 SKILLBOOK_LLWEAPONEX_DualShields_Cover	<font color='#ffc721'>Mastery Scroll:</font> Dynamic Cover	h3dddcbc5g42a1g48f7g93a7g494971171e5f
 SKILLBOOK_LLWEAPONEX_DualShields_IronMaiden	<font color='#ffc721'>Mastery Scroll:</font> Iron Maiden	hfb91c5a8gf687g432cga2fag714f4071b6b4
 SKILLBOOK_LLWEAPONEX_DualShields_ShieldPrison	<font color='#ffc721'>Mastery Scroll:</font> Shield Prison	h6dc555eag7a68g4c9bg8ddage6b2bf0067e5
