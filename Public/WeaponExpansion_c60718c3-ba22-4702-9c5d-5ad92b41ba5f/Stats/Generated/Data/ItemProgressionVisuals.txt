@@ -1904,11 +1904,11 @@ add levelgroup 0,0,"All"
 add rootgroup "0b765f8b-113a-408d-afa1-81695e34a19f",""
 add namegroup "ARM_LLWEAPONEX_HandCrossbow_A","",""
 
-new itemgroup "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart"
+new itemgroup "ARM_LLWEAPONEX_HandCrossbow_A_Crafted"
 
 add levelgroup 0,0,"All"
 add rootgroup "0b765f8b-113a-408d-afa1-81695e34a19f",""
-add namegroup "ARM_LLWEAPONEX_HandCrossbow_A_PresetStart","",""
+add namegroup "ARM_LLWEAPONEX_HandCrossbow_A_Crafted","",""
 
 new itemgroup "ARM_UNIQUE_LLWEAPONEX_HandCrossbow_A"
 
@@ -2379,6 +2379,48 @@ new itemgroup "WPN_LLWEAPONEX_Halberd_2H_D_Crafted"
 add levelgroup 0,0,"All"
 add rootgroup "439c9257-d07b-45b9-aa48-264ccb5bda7a",""
 add namegroup "WPN_LLWEAPONEX_Halberd_2H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Tanto_1H"
+
+add levelgroup 0,0,"Common"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Normal","",""
+
+add levelgroup 0,0,"Uncommon"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Normal","Cool",""
+
+add levelgroup 0,0,"Rare"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Rare","",""
+
+add levelgroup 0,0,"Epic"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Epic","",""
+
+add levelgroup 0,0,"Legendary"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Epic","Cool",""
+
+add levelgroup 0,0,"Divine"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Epic","Cool",""
+
+add levelgroup 0,0,"Unique"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Epic","Cool",""
+
+new itemgroup "WPN_LLWEAPONEX_Tanto_1H_Crafted"
+
+add levelgroup 0,0,"All"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Crafted","",""
+
+new itemgroup "WPN_LLWEAPONEX_Tanto_1H_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "53a214ff-46b3-428d-ad35-02543b8e10f9",""
+add namegroup "WPN_LLWEAPONEX_Tanto_1H_Crafted","",""
 
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A"
 

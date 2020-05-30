@@ -59,6 +59,10 @@ Thanks to all the artists listed below!
       - https://sketchfab.com/3d-models/full-rejuvernation-potion-diablo-ii-c29531095aa24d7399fcc777e821e90b
     - Flintlock Pistol by Silas6
       - https://sketchfab.com/3d-models/flintlock-pistol-45a50995fb134aef878fe432486ac9e9
+    - Blade of Basilus by Martin Jencka
+      - https://sketchfab.com/3d-models/blade-of-basilus-8f95dd0d7aa048bd8dc7c7231e882c68
+    - Tanto project by MichielBaumann
+      - https://sketchfab.com/3d-models/tanto-project-0d18554380fd4d8c97de9ef8f8582e46
 ### [CC Attribution-ShareAlike ](https://creativecommons.org/licenses/by-sa/3.0/us/) 
     - Old Glaive by patguilbo
       - https://sketchfab.com/3d-models/old-glaive-0d9de1c00d6c4a3fa1a50e87492102c9
