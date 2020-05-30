@@ -49,8 +49,8 @@ add skill "Target_CripplingBlow"
 add skill "Cone_GroundSmash"
 
 new skillset "Class_LLWEAPONEX_Rifleman"
-add skill "Projectile_LLWEAPONEX_Firearm_Ricochet"
-add skill "Projectile_LLWEAPONEX_Firearm_PinDown"
+add skill "Projectile_Ricochet"
+add skill "Projectile_PinDown"
 add skill "Shout_Adrenaline"
 
 new skillset "Class_LLWEAPONEX_Pirate"
