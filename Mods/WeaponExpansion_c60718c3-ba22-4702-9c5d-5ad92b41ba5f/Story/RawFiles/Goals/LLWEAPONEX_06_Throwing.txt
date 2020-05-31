@@ -1109,6 +1109,7 @@ ItemSetCanPickUp(_Object, 0);
 ItemSetOwner(_Object, _Player);
 LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects(_Weapon);
 
+/*
 PROC
 LLWEAPONEX_Throwing_MovingObject_CopyWeaponVisuals((CHARACTERGUID)_Player, (ITEMGUID)_Object)
 AND
@@ -1131,6 +1132,7 @@ THEN
 ItemSetCanPickUp(_OffhandWeapon, 0);
 DB_LLWEAPONEX_Throwing_Temp_ThrownOffhandProjectile(_Player, _Object, _OffhandWeapon);
 LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects(_Weapon);
+*/
 
 PROC
 LLWEAPONEX_Throwing_MovingObject_HideWeaponEffects((ITEMGUID)_Weapon)
@@ -1140,6 +1142,7 @@ THEN
 SetTag(_Weapon, "DISABLE_WEAPON_EFFECTS");
 ObjectSetFlag(_Weapon, "LLWEAPONEX_MovingObject_ResetDisableWeaponFXTag", 0);
 
+/*
 IF
 StoryEvent((ITEMGUID)_Object, "LLWEAPONEX_MovingObjectWeapon_Tick")
 AND
@@ -1153,6 +1156,7 @@ GetRotation(_Object, _rx, _ry, _rz)
 THEN
 ItemToTransform(_OffhandWeapon, _x, _ty, _z, _rx, _ry, _rz, 1, _Player);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX_06_Throwing:LLWEAPONEX_MovingObjectWeapon_Tick] Updating offhand projectile position.");
+*/
 
 IF
 CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObjectWeapon_Landed")
@@ -1166,6 +1170,7 @@ RemoveStatus(_Player, "LEADERLIB_HIDE_WEAPON");
 SetOnStage(_Object, 0);
 ItemDestroy(_Object);
 
+/*
 IF
 CharacterItemEvent(_Player, _Object, "LLWEAPONEX_MovingObjectWeapon_Landed")
 AND
@@ -1175,6 +1180,7 @@ NOT DB_LLWEAPONEX_Throwing_Temp_ThrownOffhandProjectile(_Player, _Object, _Offha
 LLWEAPONEX_Throwing_MovingObject_TeleportOffhandWeapon(_Player, _OffhandWeapon);
 SetOnStage(_OffhandWeapon, 0);
 ItemDestroy(_OffhandWeapon);
+*/
 
 PROC
 LLWEAPONEX_Throwing_MovingObject_TeleportWeapon((CHARACTERGUID)_Player, (ITEMGUID)_Object)
@@ -1218,6 +1224,7 @@ _Weapon != NULL_00000000-0000-0000-0000-000000000000
 THEN
 DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon);
 
+/*
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_THROWWEAPON_HIT", (CHARACTERGUID)_Source)
 AND
@@ -1228,6 +1235,7 @@ AND
 _Weapon != NULL_00000000-0000-0000-0000-000000000000
 THEN
 DB_LLWEAPONEX_Throwing_Temp_ListenForKill_LastEquippedWeapon(_Source, _Target, _Weapon);
+*/
 
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_THROWWEAPON_HIT", (CHARACTERGUID)_Source)

@@ -37,6 +37,7 @@ Uniques = {
 
 AllUniques = {
 	"S_EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_a1ce4c1c-a535-4184-a1df-268eb4035fe8",
+	"S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03",
 	"S_WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_52c0b4a4-3906-4229-93a9-b83aea9e657c",
 	"S_WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_5d8ec362-618e-48e9-87c2-dbc18ea4e779",
 	--"S_WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_292b4b04-4ba1-4fa3-96df-19eab320c50f",
