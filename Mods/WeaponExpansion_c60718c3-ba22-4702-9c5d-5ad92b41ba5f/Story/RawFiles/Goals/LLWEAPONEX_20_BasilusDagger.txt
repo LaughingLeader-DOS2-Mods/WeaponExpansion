@@ -11,6 +11,8 @@ LeaderLib_Timers_StartObjectTimer(S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c2
 IF
 StoryEvent((ITEMGUID)_Item, "LLWEAPONEX_BasilusDagger_CheckCombat")
 AND
+ItemIsInInventory(_Item, 0)
+AND
 //ItemGetOwner(S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03, _Owner)
 ItemGetOriginalOwner(S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03, _Owner)
 AND
@@ -21,18 +23,18 @@ AND
 CharacterGetLevel(_Owner, _Level)
 THEN
 SetTag(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, "AI_UNPREFERRED_TARGET");
-NRD_CharacterSetStatInt(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, "Gain", 0);
+//NRD_CharacterSetStatInt(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, "Gain", 0);
 SetFaction(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, _Faction);
 CharacterLevelUpTo(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, _Level);
 TeleportTo(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03, "LLWEAPONEX_BasilusDagger_GhostEquip", 0, 1, 1);
 
 IF
-StoryEvent((CHARACTERGUID)S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, "LLWEAPONEX_BasilusDagger_GhostEquip")
+StoryEvent((CHARACTERGUID)_DaggerGhost, "LLWEAPONEX_BasilusDagger_GhostEquip")
 THEN
-Proc_CharacterFullRestore(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5);
-SetOnStage(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, 1);
-CharacterEquipItem(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03);
-SetCanJoinCombat(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, 1);
+Proc_CharacterFullRestore(_DaggerGhost);
+SetOnStage(_DaggerGhost, 1);
+CharacterEquipItem(_DaggerGhost, S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03);
+SetCanJoinCombat(_DaggerGhost, 1);
 
 IF
 ItemEquipped(S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03, _Owner)
@@ -41,6 +43,7 @@ _Owner != S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7c
 THEN
 ItemSetOriginalOwner(S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03, _Owner);
 SetOnStage(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, 0);
+LeaveCombat(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5);
 //CharacterDieImmediate(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, 0, "None", _Owner);
 
 IF
