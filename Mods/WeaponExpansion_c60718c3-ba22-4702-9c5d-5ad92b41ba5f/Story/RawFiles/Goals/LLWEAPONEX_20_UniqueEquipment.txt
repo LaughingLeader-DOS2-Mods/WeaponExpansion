@@ -119,7 +119,7 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 14);
 
 //REGION MURAMASA
 PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaEquipped(_Char);
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
@@ -134,7 +134,7 @@ THEN
 ApplyStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, 0, _Char);
 
 PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
 THEN
 LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Char);
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
@@ -491,12 +491,12 @@ LeaderLib_Timers_StartObjectTimer(_Char, 700, "LLWEAPONEX_Timers_SlayHidden_Next
 
 //REGION ANVIL_MACE
 PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Mace_2H_Anvil_A_85e2e75e-4333-425e-adc4-94474c3fc201")
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 1);
 
 PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201")
+LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Mace_2H_Anvil_A_85e2e75e-4333-425e-adc4-94474c3fc201")
 THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_AnvilMaceEquipped", "WeaponExpansion", 1);
 

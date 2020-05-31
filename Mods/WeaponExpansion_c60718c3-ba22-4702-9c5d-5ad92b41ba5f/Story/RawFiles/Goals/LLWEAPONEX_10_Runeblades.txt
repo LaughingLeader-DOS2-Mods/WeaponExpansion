@@ -368,11 +368,9 @@ RemoveStatus(_Char, _Status);
 */
 
 PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Player, (ITEMGUID)_Item, (STRING)_Template)
-AND
-IsTagged(_Item, "LLWEAPONEX_Runeblade", 1)
+LLWEAPONEX_Equipment_OnTaggedItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item,  "LLWEAPONEX_Runeblade", (INTEGER)_IsPlayer)
 THEN
-LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Player, _Item);
+LLWEAPONEX_Runeblades_OnRunebladeEquipped(_Char, _Item);
 
 //Mainhand
 PROC
