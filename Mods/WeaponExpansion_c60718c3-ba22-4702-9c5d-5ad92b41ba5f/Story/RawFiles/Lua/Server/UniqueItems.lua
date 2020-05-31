@@ -35,6 +35,17 @@ Uniques = {
 	DaggerBasilus = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03"),
 }
 
+Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
+	local unique = Uniques[id]
+	if unique ~= nil then
+		local host = CharacterGetHostCharacter()
+		TeleportTo(unique, host, "", 0, 1, 0)
+		ItemToInventory(unique, host, 1, 1, 1)
+	else
+		print("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
+	end
+end)
+
 AllUniques = {
 	"S_EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_a1ce4c1c-a535-4184-a1df-268eb4035fe8",
 	"S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03",
