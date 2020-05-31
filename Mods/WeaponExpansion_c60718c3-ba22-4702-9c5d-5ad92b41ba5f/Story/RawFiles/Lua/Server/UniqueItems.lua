@@ -32,6 +32,7 @@ Uniques = {
 	MonkBlindfold = UniqueData:Create("4258f164-b548-471f-990d-ae641960a842"),
 	DemonHand = UniqueData:Create("0ac0d813-f58c-4399-99a8-1626a419bc53"),
 	AssassinHandCrossbow = UniqueData:Create("70c59769-2838-4137-9421-4e251fecdc89"),
+	DaggerBasilus = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03"),
 }
 
 AllUniques = {
