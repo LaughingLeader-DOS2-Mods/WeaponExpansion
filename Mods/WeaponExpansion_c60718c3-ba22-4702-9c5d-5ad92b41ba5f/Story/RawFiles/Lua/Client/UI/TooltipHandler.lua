@@ -263,6 +263,8 @@ local WeaponTypeNames = {
 	--{Tag = "LLWEAPONEX_Bludgeon", Text = TranslatedString:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
 }
 
+local AutoLevelingDescription = TranslatedString:Create("hca27994egc60eg495dg8146g7f81c970e265", "<font color='#80FFC3'>Automatically levels up with the user, gaining new bonuses at various levels.</font>")
+
 ---@param item EsvItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
@@ -305,6 +307,18 @@ local function OnItemTooltip(item, tooltip)
 					break
 				end
 			end
+		end
+
+		if item:HasTag("LeaderLib_AutoLevel") then
+			local element = tooltip:GetElement("ItemDescription")
+			if element ~= nil then
+				if not StringHelpers.IsNullOrEmpty(element.Label) then
+					element.Label = element.Label .. "<br>" .. AutoLevelingDescription.Text
+				else
+					element.Label = AutoLevelingDescription.Text
+				end
+			end
+			break
 		end
 	end
 end

@@ -19,3 +19,4 @@ LLWEAPONEX_UI_Scaling_HandCrossbow	Scales With Scoundrel and Hand Crossbow Maste
 LLWEAPONEX_UI_UnarmedWeapon	Unarmed Weapon[1]	h4eb213a7g4793g4007g95c6gbaf47584f29d
 LLWEAPONEX_UI_FromUnarmedWeapon	<br>From Unarmed Weapon: [1]-[2]	h6d1ce292g842cg4decg89deg09ec0e293e5e
 LLWEAPONEX_UI_WeaponType_Rod	One-Handed Scepter	heb1c0428g158fg46d6gafa3g6d6143534f37
+LLWEAPONEX_UI_ItemDescription_AutoLeveling	<font color='#80FFC3'>Automatically levels up with the user, gaining new bonuses at various levels.</font>	hca27994egc60eg495dg8146g7f81c970e265

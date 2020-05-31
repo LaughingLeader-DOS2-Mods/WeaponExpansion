@@ -31,7 +31,7 @@
 	<content contentuid="h02124cc6gecf8g4a72ga2aege9cb12e0f0d5">Tar Rune</content>
 	<content contentuid="h0238a784gd1cbg4137g8c0dgb967a83d37af">Champion&apos;s Rapier</content>
 	<content contentuid="h0246ca32gc4d7g4fc3g88a6gbd2aea51e3b7">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are covered in a dark liquid that deals Shadow damage.</content>
-	<content contentuid="h0249ca47g0502g4361gbf6eg25b369b7c23a">An oversized scroll that once belonged to an ogre.&lt;br&gt;Despite having no talent for magic, Gnak was worshipped by his kind as an all-powerful Ogre Magi.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h0249ca47g0502g4361gbf6eg25b369b7c23a">An oversized scroll that once belonged to an ogre.&lt;br&gt;Despite having no talent for magic, Gnak was worshipped by his kind as an all-powerful Ogre Magi.</content>
 	<content contentuid="h0262af7fgeaf0g4e52g85f9gd22df5a98af6">[Exit]</content>
 	<content contentuid="h0276588cgb86ag44a5g8ddag3c48cbaf7943">Kor&apos;vash</content>
 	<content contentuid="h027a0666g90c9g48efg90dcgde2bbb110a36">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery I&lt;/font&gt;&lt;br&gt;In a swift display of skill, instantly rend enemies in a line, dealing [1].&lt;br&gt;Consumes all stacks of &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt; on targets hit, dealing [2] per stack, and rupturing their wounds for [3] every 3 stacks.</content>
@@ -205,7 +205,7 @@
 	<content contentuid="h183de597ga842g42c5gac3bgd61680d21c0b">Undead character is taking bonus damage!</content>
 	<content contentuid="h1841b24ag5ceeg4c1dg9378g96f17f969d55">Leadslinger</content>
 	<content contentuid="h1841cca9g9763g4bcdga6c3g461fb52be390">Guardian of the Immortal</content>
-	<content contentuid="h18432982g0f03g4a9fgb5e9g09d41a7a70f8">A magical staff said to be able to extend to great lengths. Once wielded by a warrior of legend.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h18432982g0f03g4a9fgb5e9g09d41a7a70f8">A magical staff said to be able to extend to great lengths. Once wielded by a warrior of legend.</content>
 	<content contentuid="h18837538gae24g456bg91a1ged49be909078">Throw a poisen-tipped shuriken at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Poisoned&lt;/font&gt; for 2 turns.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
 	<content contentuid="h189386bag49ebg4d15ga457g3e1fe7b053ab">Soldier&apos;s Rifle</content>
 	<content contentuid="h18db5b3bg6b75g4ed1gab9ag309251d7d492">Immolation</content>
@@ -235,7 +235,7 @@
 	<content contentuid="h1b283eafg771dg47aagb4b5ge7680c682398">Rend</content>
 	<content contentuid="h1b3920b8gab1ag4914gbe71ged645d9a309e">Water Rune</content>
 	<content contentuid="h1b412aefg3d56g47ecga034g20225843aff3">Bonuses on Hit</content>
-	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its glory. Huzzah!&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its glory. Huzzah!</content>
 	<content contentuid="h1bd0f691g9646g4b28g932fg3ebd8377ca0e">Gain hyper-focus, increasing the &lt;font color=&apos;#33FF00&apos;&gt;damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%&lt;/font&gt;.</content>
 	<content contentuid="h1bdb5e07gf441g4020g9f25g6ea0457e71fe">Enhanced Demolition Bonus</content>
 	<content contentuid="h1c1efec8g1da1g4353g82e5ge50841054af6">Throw the shrapnel charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius and applies Bleeding for 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ec3030&apos;&gt;If targets hit are already bleeding, their wounds Rupture for [3].&lt;/font&gt;</content>
@@ -301,6 +301,7 @@
 	<content contentuid="h21b04452g5980g46e3ga8acg0657cb8cb5f8">&lt;font color=&apos;#FFB900&apos;&gt;Polearm Mastery III&lt;/font&gt;</content>
 	<content contentuid="h21c89079gfd43g4399g9f23g0d0760624f62">Executioner&apos;s Promise</content>
 	<content contentuid="h21d85e8eg3e61g4f9agb1a2g3a5ca2722144">Mini-Bolts</content>
+	<content contentuid="h21dfa4d9gbd77g4ca4g8471gff55c2988940">&lt;font color=&apos;#00ffff&apos;&gt;Blade of Basilus&lt;/font&gt;</content>
 	<content contentuid="h21e212d4gdf1cg43d2g973eg7db384a8921d">&lt;font color=&apos;#ff780b&apos;&gt;Lunatic&apos;s Cannonball&lt;/font&gt;</content>
 	<content contentuid="h220650a3g3aacg43dag8384g96824940cbc5">Poison Rune</content>
 	<content contentuid="h2215bc77gd613g48b6g975cg955d332a3943">Conduction Rune</content>
@@ -375,11 +376,11 @@
 	<content contentuid="h28a03530g38b5g4d32gbe06gabe3d62cf635">Extermination</content>
 	<content contentuid="h28a95dabg50a7g424eg9562gb44e8ad5c570">Throw Explosive Shuriken</content>
 	<content contentuid="h290e3badg73d8g4c02g9e4fg6956ab910bf9">Random Elemental Ailment</content>
-	<content contentuid="h29308e7agb660g470ag9d0fgf89e2e79913f">An ancient blade forged from runic metal, and tempered with the fire of a legendary elemental.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h29308e7agb660g470ag9d0fgf89e2e79913f">An ancient blade forged from runic metal, and tempered with the fire of a legendary elemental.</content>
 	<content contentuid="h29403bd1g8d3dg491ag80e5g20effb3cf32c">Leadslinger</content>
 	<content contentuid="h2942375bgc766g4b2egbb03g24f69ba81400">Earthbender</content>
 	<content contentuid="h296b969bg6d81g4aeaga55cg094e33f69e18">Frostdyne (Empowered)</content>
-	<content contentuid="h2977cfa1gc8b4g4fb6g8ee8gda55193c19f0">The product of Dwarven technology and mysticism, this cannon fits snugly on your arm.&lt;br&gt;Powered by runes, the Runic Cannon is capable of harnessing magic at level once thought to be impossible without Source.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h2977cfa1gc8b4g4fb6g8ee8gda55193c19f0">The product of Dwarven technology and mysticism, this cannon fits snugly on your arm.&lt;br&gt;Powered by runes, the Runic Cannon is capable of harnessing magic at level once thought to be impossible without Source.</content>
 	<content contentuid="h29b88cbdgcf34g4e8bg92fag54c3db611627">Activate &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;</content>
 	<content contentuid="h29d30edeg0e92g453ag95begcea9915f2e6d">Activate &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt;</content>
 	<content contentuid="h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd">Automatically Equips the Runic Cannon in the Mainhand</content>
@@ -526,7 +527,7 @@
 	<content contentuid="h39c5dbe1g768bg4d06g8847g0e3f4bd33489">&lt;font color=&apos;#D040D0&apos;&gt;Token of Reversal&lt;/font&gt;</content>
 	<content contentuid="h39e9434egbc5cg4779gb319gd191db9914ce">Magical Glaive</content>
 	<content contentuid="h3a038f25gb458g4a60g99d6gc1d6ccc3c0e7">Enable Runic Cannon Offhand Weapon Restriction (Default) - Only shields/grimoires can be used in the shield slot.</content>
-	<content contentuid="h3a03ca92g8413g4632g8ca2g69b0f7b1cc53">The holiest of bibles, this is a sacred relic to the Divine Order of Lucian.&lt;br&gt;While a typical priest would use this book for sermons, a more apt warrior may put its size to good use as a bludgeoning weapon.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h3a03ca92g8413g4632g8ca2g69b0f7b1cc53">The holiest of bibles, this is a sacred relic to the Divine Order of Lucian.&lt;br&gt;While a typical priest would use this book for sermons, a more apt warrior may put its size to good use as a bludgeoning weapon.</content>
 	<content contentuid="h3a48d368gf0f4g4b7agac88gf8888ea71945">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at an enemy for [1].&lt;br&gt;If &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&apos;s&lt;/font&gt; target is already &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt;, their wound will &lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt;, dealing [2] initially and per turn.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [3] additional enemies in a [4] radius.</content>
 	<content contentuid="h3a5327c8g38bbg460fgb9c6gd0d50e54385d">Simple and clean. I broke my last record.</content>
 	<content contentuid="h3a72bd6cg4c6bg4488g9bf0gf15603907e4d">&lt;font color=&apos;#FEFFB3&apos;&gt;Rally&lt;/font&gt;</content>
@@ -680,7 +681,7 @@
 	<content contentuid="h4da10f0ag01b5g4bdagb58cg468020b05690">Ancient Dual Shields</content>
 	<content contentuid="h4daee89cg04bfg4646g839cga7add594aa6e">Soul Rune</content>
 	<content contentuid="h4db85b3dga320g44d4g8cb6g05a4dc44ce41">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h4e4de558g5137g4881ga8b3gff5625278817">A gauntlet once worn by a notorious demon. Seems to occasionally twitch.&lt;br&gt;&lt;font color=&apos;#ff13f1&apos;&gt;Gains power from slain enemies.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h4e4de558g5137g4881ga8b3gff5625278817">A gauntlet once worn by a notorious demon. Seems to occasionally twitch.&lt;br&gt;&lt;font color=&apos;#ff13f1&apos;&gt;Gains power from slain enemies.&lt;/font&gt;</content>
 	<content contentuid="h4e828850gecfbg4349g914dg2af390edffe5">Revenant</content>
 	<content contentuid="h4e990fe9g1ffcg46ecga18fg891f812ef7c0">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#D040D0&apos;&gt;All Resistances&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h4eb213a7g4793g4007g95c6gbaf47584f29d">Unarmed Weapon[1]</content>
@@ -736,7 +737,7 @@
 	<content contentuid="h5382a04agef53g4d1eg942cg623f149e990d">&lt;font color=&apos;#FFDD00&apos;&gt;Sunder the Mountain&lt;/font&gt;</content>
 	<content contentuid="h53cfcfb9g7746g456ag93b2g1670d45d5d30">Flourish (Duelist Stance)</content>
 	<content contentuid="h53f74774g3ed0g4598g8faag041bf2ea2ca3">Mysterious Crystal</content>
-	<content contentuid="h540fcd9eg7a20g46e9g89b2gc3c862772a00">A mysterious Runeblade said to harness the power of Chaos.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h540fcd9eg7a20g46e9g89b2gc3c862772a00">A mysterious Runeblade said to harness the power of Chaos.</content>
 	<content contentuid="h54625e05g5c12g4374gb6d0gf802a75c491d">Air Rune</content>
 	<content contentuid="h547a7cafgcdc8g45c2gab55g6a6b63446c7c">Weighty Book</content>
 	<content contentuid="h54ceee42g7f18g4ac2g9d88gb807f7b3f74d">A razor-sharp, concealable blade of foreign design.</content>
@@ -760,7 +761,7 @@
 	<content contentuid="h56999c74g7b89g438ag81b4g62da605b2c1a">Bokuto</content>
 	<content contentuid="h569e7c31g8bbag4577g8100g8f1c439458a1">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="h56f5fd9dgc9a5g4f08ga37dgd50a1bf6d0d4">Stormblade</content>
-	<content contentuid="h572613fag8d51g42efg95afgae949bae5481">A legendary greatbow that once belonged to the hero known as the God of Thunder.&lt;br&gt;&lt;font color=&apos;#C7A758&apos;&gt;Strikes enemies down with the power of the heavens.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h572613fag8d51g42efg95afgae949bae5481">A legendary greatbow that once belonged to the hero known as the God of Thunder.&lt;br&gt;&lt;font color=&apos;#C7A758&apos;&gt;Strikes enemies down with the power of the heavens.&lt;/font&gt;</content>
 	<content contentuid="h575a6a47gc079g452ag9a59g9b02b66308fd">Blademaster&apos;s Strike 8</content>
 	<content contentuid="h5774357cg520bg4294g9859gdf1c67866438">A special pet rock, dipped in poison. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
 	<content contentuid="h578789e0g51d1g4191g888cg100014c1f5b1">Debug Runeblade</content>
@@ -816,7 +817,7 @@
 	<content contentuid="h5c5acb1cg685dg485dgb946g3adff577f871">Deadly Halberd</content>
 	<content contentuid="h5c65b248g0e76g41a5gb068gb4c884703c5b">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h5c82bb74g471bg4d45g8aa0gd45071f22f65">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are electrified, dealing Air damage.</content>
-	<content contentuid="h5c90b0f6g92beg408fg97bbg77de5ee58c77">A banner of the Lone Wolves., the infamous mercenary company&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h5c90b0f6g92beg408fg97bbg77de5ee58c77">A banner of the Lone Wolves., the infamous mercenary company</content>
 	<content contentuid="h5ca24bfeg14f5g437fg92fag4708f87547de">&lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt; the wounds of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; remaining.</content>
 	<content contentuid="h5cacb163gcfd1g49bcgb391g25dd92b84fce">Kagutsuchi</content>
 	<content contentuid="h5cb2bd14ge6e9g4414gb251g68882368b0bf">Lunaris &amp; Solaris</content>
@@ -966,7 +967,7 @@
 	<content contentuid="h6ce93883ga0f2g4027gb11dgd8930a10e17e">Traineee&apos;s Bokuto</content>
 	<content contentuid="h6cf155efg6d57g4ea6g8b5fg5c6a0817f4cf">Bearwindle</content>
 	<content contentuid="h6d1ce292g842cg4decg89deg09ec0e293e5e">&lt;br&gt;From Unarmed Weapon: [1]-[2]</content>
-	<content contentuid="h6d291cf3g17ffg44d3g8538gf910344d04e7">A legendary cursed blade, said to have absorbed the hatred of its victims.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h6d291cf3g17ffg44d3g8538gf910344d04e7">A legendary cursed blade, said to have absorbed the hatred of its victims.</content>
 	<content contentuid="h6d358f95gd475g4cdega0b8gf460ecb12bf1">Character is wearing a blindfold.&lt;br&gt;&lt;/font color=&apos;#FF0000&apos;&gt;-1m Range&lt;/font&gt;</content>
 	<content contentuid="h6d4a9c41g1261g496bga0edg86646b188462">Katana</content>
 	<content contentuid="h6dc555eag7a68g4c9bg8ddage6b2bf0067e5">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Shield Prison</content>
@@ -1011,7 +1012,7 @@
 	<content contentuid="h72266d41ge248g44a3g93eeg48bfe62fb97d">Harken</content>
 	<content contentuid="h724b0dbfg11c7g472eg8cf5g3772c2f7da26">An extremely sharp, star-shaped plate of metal.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Looks perfect for throwng!&lt;/font&gt;</content>
 	<content contentuid="h725f0092g85f3g48eeg9e7ag314699f9b0df">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery III&lt;/font&gt;</content>
-	<content contentuid="h72759001g42c8g4953g8657gdc357b45f8cc">The personal axe of Balrin, a Dwarven Berserker known for his legendary axe throwing.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer.&lt;/font&gt;</content>
+	<content contentuid="h72759001g42c8g4953g8657gdc357b45f8cc">The personal axe of Balrin, a Dwarven Berserker known for his legendary axe throwing.</content>
 	<content contentuid="h72b60345g80cdg437dg9e3cgc4f0f08397a8">This cute little greatbow arrow infused with a charming potion is quite something. You really, really, really like it.</content>
 	<content contentuid="h72bb594dge9f1g4d3eg9044g970fc1243a54">&lt;font color=&apos;#FF0000&apos; size=&apos;22&apos;&gt;Displacement Failed&lt;/font&gt;</content>
 	<content contentuid="h72c0eff2g75e3g43f6gbd70g395c6d2d1e95">*[GRENADES] Click on the button labeled &apos;Grenades&apos;.*</content>
@@ -1092,7 +1093,7 @@
 	<content contentuid="h7b2b18c8g3e44g4c5bg84e2g36b6727b36d0">Water Weakness</content>
 	<content contentuid="h7b46baddga6e9g47efga49fg00b390d0aabb">Legendary Quiver</content>
 	<content contentuid="h7b596ed2g245ag4088g9d9dgbe32b88a879b">&lt;font color=&apos;#FF0000&apos;&gt;Deflect Projectiles Coundown Cancelled - Not in Combat!&lt;/font&gt;</content>
-	<content contentuid="h7b6f604cgffefg4e14gbdc7ga46e73682d61">A rare estoc forged from &lt;font color=&apos;#40E0D0&apos;&gt;runic&lt;/font&gt; metal. Etched with runes signifying &quot;&lt;font color=&apos;#4197e2&apos;&gt;Ice&lt;/font&gt;&quot;, this blade pierces hearts with a bitter chlll.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="h7b6f604cgffefg4e14gbdc7ga46e73682d61">A rare estoc forged from &lt;font color=&apos;#40E0D0&apos;&gt;runic&lt;/font&gt; metal. Etched with runes signifying &quot;&lt;font color=&apos;#4197e2&apos;&gt;Ice&lt;/font&gt;&quot;, this blade pierces hearts with a bitter chlll.</content>
 	<content contentuid="h7b7b99e7g6848g4eaegaff2g6d1903b0f4d5">Hope&apos;s End, Evil&apos;s Foothold</content>
 	<content contentuid="h7b8060d1gb4f3g4cfagbed5gb96e60122001">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#00AA00&apos;&gt;Poison Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h7b84a8eeg44adg47a3g8649gd215531b4fbb">Disable Runic Cannon Offhand Weapon Restriction - Allows dual wielding with the Runic Cannon.</content>
@@ -1186,6 +1187,7 @@
 	<content contentuid="h84fd3aabgb35ag4293g8051ga7d8f6f084ae">Contaminating</content>
 	<content contentuid="h850393bbg0109g4ac1g865cg27f25301e083">Throwing Shield</content>
 	<content contentuid="h853768f2ga777g4833g9793g12261fd670cc">Worn Runeblade of Chaos</content>
+	<content contentuid="h854ab736g63d7g4f0fg8a43g9559526b5878">A magical blade, said to be possessed by a soul from the Void.</content>
 	<content contentuid="h857bd98agd795g43dcg91d9g000c6dcc40d0">a Firearm</content>
 	<content contentuid="h85ba1d14g532dg4a0cg9a29gf1980a445150">Character is inspired by the &lt;font color=&apos;#c5a65a&apos;&gt;Banner of Unruly Faith&lt;/font&gt;. How glorious!</content>
 	<content contentuid="h85f505c1g7212g4796g938egfb59ea9a93dd">Trusty Quiver</content>
@@ -1246,6 +1248,7 @@
 	<content contentuid="h8ca342feg25fcg44b4gb74cg533223203d19">Mini-Explosion</content>
 	<content contentuid="h8cbfe5e5gdf55g4bbfga8acg9d476bb1215e">Pacifist&apos;s Will</content>
 	<content contentuid="h8cf25d9aga6b9g49e0g8528ge581e3bd2986">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
+	<content contentuid="h8cfbd3e2g8bf0g4308gaf7fg708ad55ff7b6">Smuggler&apos;s Bag</content>
 	<content contentuid="h8d02e345ged4ag4d60g9be9g68a46dda623b">Firearm</content>
 	<content contentuid="h8d03efc5g6e18g4491g9fe3g72302b395c2d">Aspect of Poison</content>
 	<content contentuid="h8d11d8efg0bb8g4130g9393geb30841eaea5">Quarterstaff</content>
@@ -1535,7 +1538,7 @@
 	<content contentuid="had5f3bfbge848g466dgb7d1g12421f236cfb">Reinforced Tanto</content>
 	<content contentuid="had6e38d1g75c1g4628gbf05g6ccb68e7b28b">Worn Runeblade of Earth</content>
 	<content contentuid="had6f1fc6g42bbg419fg82d1gb37013834ae4">Odachi of the Forsaken</content>
-	<content contentuid="had840b6eg17aeg4c78g9d8dgcc46e1d35f7d">An imposing, heavy slab of metal, crafted from a mysterious alloy. A single eye, embedded in the hilt pulsates ever so slighly.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="had840b6eg17aeg4c78g9d8dgcc46e1d35f7d">An imposing, heavy slab of metal, crafted from a mysterious alloy. A single eye, embedded in the hilt pulsates ever so slighly.</content>
 	<content contentuid="hadb5f130g449cg4e04gaeacgd5dfa2ab10ef">Scales With Scoundrel and Hand Crossbow Mastery</content>
 	<content contentuid="hade531feg5c76g4b2ag934cgf877630c453f">Blinder</content>
 	<content contentuid="hae0ad1f0gab24g4438ga502gcc6e482bae43">Weapon Expansion - Debug</content>
@@ -1593,7 +1596,7 @@
 	<content contentuid="hb42d490dg2f63g4d12g9f26ga28b83b7d1b0">Insert into Hand Crossbow</content>
 	<content contentuid="hb4441c7fge804g4e61gbc9bgf0c3239e13c6">Flourish (Duelist Stance)</content>
 	<content contentuid="hb4825bd8g4a52g4d14gb1cdgd452ec7883d6">Spymaster, Elite Assassin</content>
-	<content contentuid="hb4aa5153gc6bbg4ad7g9cc4ge28d6555ee66">A wicked scythe once wielded by an infamous reaper. At night, you swear you can hear the skull quietly chattering...&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="hb4aa5153gc6bbg4ad7g9cc4ge28d6555ee66">A wicked scythe once wielded by an infamous reaper. At night, you swear you can hear the skull quietly chattering...</content>
 	<content contentuid="hb4e2acfeg3d33g4effg957eg6188f41d12c3">Aspect of Earth</content>
 	<content contentuid="hb4f53328g9301g4fd4gb002g1ff28db8fc98">a Bow</content>
 	<content contentuid="hb516cf4dgcaddg452agbf79g0985f99ec5c8">Any Unique Weapon</content>
@@ -1604,7 +1607,7 @@
 	<content contentuid="hb5964089gfd37g4008ga7d7g6737e5648e16">Ancient Bokuto</content>
 	<content contentuid="hb5cce093g12e6g4316ga31cga6b31812f70c">Cryoblade</content>
 	<content contentuid="hb5dd260dg2c3bg4befg8439g56d9b5260c11">Assassin&apos;s Tanto</content>
-	<content contentuid="hb5e88a63gf929g47d3g8ed4g68f619d45690">An ethereal blade, flickering ever so slightly. Said to have once belonged to a merciless wraith who eagerly persued its prey.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="hb5e88a63gf929g47d3g8ed4g68f619d45690">An ethereal blade, flickering ever so slightly. Said to have once belonged to a merciless wraith who eagerly persued its prey.</content>
 	<content contentuid="hb608d005g94e2g4a71g934cg1035eb782db0">Chaos Pentaslash</content>
 	<content contentuid="hb62421b1g2160g43b5gb54cgcf4ad9fe5e21">&lt;font color=&apos;#CD1F1F&apos;&gt;Throwing Failed - You already threw Balrin&apos;s Axe!&lt;/font&gt;</content>
 	<content contentuid="hb6293431g0ad9g45bbg9334gb81365e8f2ca">&lt;font color=&apos;#33FF00&apos;&gt;Your next pistol shot will deal [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]% more damage.&lt;/font&gt;</content>
@@ -1665,7 +1668,7 @@
 	<content contentuid="hbd1111ecg05aag4c03ga29ag07c8599f335b">Explosive Arrow</content>
 	<content contentuid="hbd182b92g8defg4737g87a7g9d066ec6e440">Throwing Crossbow?</content>
 	<content contentuid="hbd6aabecg3f75g47a0g8099g2dc2964b7520">Erosion</content>
-	<content contentuid="hbd792efeg585fg4f00g881fg93f0aae26af3">An anvil attached to a handle. As simple as that.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="hbd792efeg585fg4f00g881fg93f0aae26af3">An anvil attached to a handle. As simple as that.</content>
 	<content contentuid="hbdb02714gc326g4ea1gb63agea089a7b4591">Shoot on Cooldown</content>
 	<content contentuid="hbdb2aa9ag0e32g4b2fga9ccg59085dd8de7e">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
 	<content contentuid="hbe0eff68g91c2g4409gbd66g555e64e8a73c">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
@@ -1768,6 +1771,7 @@
 	<content contentuid="hc99f135fg8284g44a6g8073g29367864839d">&lt;font color=&apos;#7478DC&apos;&gt;Air Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
 	<content contentuid="hc9c2031bg7fa5g4cadga8a6ga65e6e84dd7f">Giant&apos;s Strength</content>
 	<content contentuid="hc9f3dfe5g5721g470agb642gf8ce0fef1d21">Knockdown Arrow</content>
+	<content contentuid="hca27994egc60eg495dg8146g7f81c970e265">&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the user, gaining new bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="hca64870fgdbe5g42a4g9c84g3f2d0f651e36">Runic Reverb</content>
 	<content contentuid="hca685c88g7af3g4dfcg81b4gbc75302081b3">Ruptured Wound</content>
 	<content contentuid="hca7bbf39gdd37g4310g96efge759ea6d84bd">Expert Blademaster</content>
@@ -1778,7 +1782,7 @@
 	<content contentuid="hcadad3cbg4c92g4d31g801ag4722ebda504d">&lt;font color=&apos;#C7A758&apos;&gt;Kevin the Pet Rock&lt;/font&gt; (&lt;font color=&apos;#00AA00&apos;&gt;Poisoned&lt;/font&gt;)</content>
 	<content contentuid="hcae99263g291ag4d93g9c03geb6fd2fd3f60">Halberd</content>
 	<content contentuid="hcb0893f0g395cg4ef0ga0fcg7f0c2d5e93a8">Runeblade (Inert)</content>
-	<content contentuid="hcb0b08b6g66c4g49a7gb748g93ea03cc0dc5">A deadly scythe once belonging to the being known as &quot;The Harvester&quot;, said to have reaped countless souls in an unending thirst for power.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="hcb0b08b6g66c4g49a7gb748g93ea03cc0dc5">A deadly scythe once belonging to the being known as &quot;The Harvester&quot;, said to have reaped countless souls in an unending thirst for power.</content>
 	<content contentuid="hcb3086d4g369ag41d7ga4c1g71c0a33ec6cc">&lt;font color=&apos;#FF5522&apos;&gt;Rally of the Pack&lt;/font&gt;</content>
 	<content contentuid="hcb7e4371g323bg4c19gac13ga9df7f281419">Character is being contaminated!</content>
 	<content contentuid="hcbbecaf8g3693g4395gbc22gcd92ba552044">Throw Tar Charge</content>
@@ -2111,6 +2115,7 @@
 	<content contentuid="hf3e5ff9ag6f7eg4a28ga168g580f7a0e9b5e">Combat for Dummies</content>
 	<content contentuid="hf3ed32cbg53e8g412fg9156g418c80266425">Expert of Wands</content>
 	<content contentuid="hf3f86a5egb3e2g495bg867fg9328c965296b">Character&apos;s oversized scroll has been infused with a spell school, and has gained bonus damage.</content>
+	<content contentuid="hf41342aag8eb2g490eg8e10g97e327843dc2">A secret cache used by smugglers to store hidden goods.&lt;br&gt;Don&apos;t ask where it was hidden.</content>
 	<content contentuid="hf4441e4cgfd32g49bfga758gb0f711be47e8">A former marksman from a long-forgotten regiment, tasked with destroying dragonkind. With their unyielding strength, Dragon Slayers utilize Greatbows to pierce their enemies with arrows the size of spears</content>
 	<content contentuid="hf4632a8fg42a7g4d53gbe26gd203f28e3d5e">Shadow</content>
 	<content contentuid="hf49aaa63gbb9fg44c6g8e16gd657951220ce">Hit Enemies in a 4m Radius</content>
@@ -2203,7 +2208,7 @@
 	<content contentuid="hfd58e7bbg94d5g4c0ag9f16ga1578bb4f182">Bokuto of the Elder Tree</content>
 	<content contentuid="hfd9f7735g3e5ag4aefgb963ga7b41ec6bf89">A hissing greatbow arrow packed tight with steam. This baby is ready to explode; shield your eyes as you nock and load.</content>
 	<content contentuid="hfda37976gd595g4455ga996g0ca7e5ea6bea">Wooden Quarterstaff</content>
-	<content contentuid="hfdc07355gdb3ag48eag8aabga2d66c1ec1a0">A portable cannon (otherwise known as a blunderbuss) capable of discharging firey bursts of lead.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Automatically levels up with the wearer, gaining new bonuses at various levels.&lt;/font&gt;</content>
+	<content contentuid="hfdc07355gdb3ag48eag8aabga2d66c1ec1a0">A portable cannon (otherwise known as a blunderbuss) capable of discharging firey bursts of lead.</content>
 	<content contentuid="hfded9a6bg59bfg4e06g8c9age629fb9ea612">Grand Scepter</content>
 	<content contentuid="hfdf149e6g4a1dg496dg8fddgf7194a8900fc">Shredding Rapier</content>
 	<content contentuid="hfe292736g1003g4d08gab35ge3250879be98">&lt;font color=&apos;#FF001F&apos;&gt;Followers Can&apos;t Gain Mastery Experiences&lt;/font&gt;</content>
