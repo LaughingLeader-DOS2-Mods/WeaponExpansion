@@ -10,7 +10,7 @@ local function AimedShotBonuses(char, state, funcParams)
 		if #funcParams == 1 then
 			local target = funcParams[1]
 			if HasActiveStatus(target, "MARKED") == 1 then
-				ApplyStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 12.0, 1, char);
+				ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 12.0, 1, char);
 			end
 		end
 	elseif state == SKILL_STATE.CAST then
@@ -20,8 +20,19 @@ local function AimedShotBonuses(char, state, funcParams)
 		SetStoryEvent(char, "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
 	end
 end
-
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedShotBonuses)
+
+local function Greatbow_PiercingShot_DragonBonus(char, state, funcParams)
+	if state == SKILL_STATE.HIT then
+		if #funcParams == 1 then
+			local target = funcParams[1]
+			if IsTagged(target, "DRAGON") == 1 then
+				ApplyStatus(target, "LLWEAPONEX_DRAGONS_BANE", 6.0, 0, char)
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", AimedShotBonuses)
 
 -- local function CheckAimedShotBonus(funcParams)
 -- 	local char = funcParams[1]
