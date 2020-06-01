@@ -318,7 +318,6 @@ local function OnItemTooltip(item, tooltip)
 					element.Label = AutoLevelingDescription.Text
 				end
 			end
-			break
 		end
 	end
 end

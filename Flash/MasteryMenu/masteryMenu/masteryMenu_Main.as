@@ -16,8 +16,8 @@ package masteryMenu
 	public dynamic class masteryMenu_Main extends MovieClip
 	{
 		public var accept_mc:MovieClip;
-		
 		public var btn_bg:MovieClip;
+		public var windowDragBG:MovieClip;
 		
 		public var buttonHintBar_mc:buttonHintBar;
 		
@@ -309,6 +309,58 @@ package masteryMenu
 		{
 			return this.masteryList.currentSelection;
 		}
+
+		public var isDragging:Boolean = false;
+		public var windowDragStarted:Boolean = false;
+		public var dragStartMP:Point;
+		public const startDragDiff:uint = 20;
+		public var mousePosX:Number;
+		public var mousePosY:Number;
+
+		public function windowUp(param1:MouseEvent) : *
+		{
+			if(this.isDragging)
+			{
+				ExternalInterface.call("cancelDragging");
+			}
+		}
+
+		public function dragInit(e:MouseEvent) : *
+		{
+			ExternalInterface.call("UIAssert","[WeaponExpansion] dragInit");
+			this.windowDragStarted = false;
+			stage.addEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
+			this.dragStartMP.y = stage.mouseY;
+			this.dragStartMP.x = stage.mouseX;
+			stage.addEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
+		}
+
+		public function dragMoveWindow(e:MouseEvent) : *
+		{
+			ExternalInterface.call("UIAssert","[WeaponExpansion] dragMoveWindow");
+			if(this.dragStartMP.x + this.startDragDiff > stage.mouseX || this.dragStartMP.y + this.startDragDiff > stage.mouseY || this.dragStartMP.x - this.startDragDiff < stage.mouseX || this.dragStartMP.y - this.startDragDiff < stage.mouseY)
+			{
+				ExternalInterface.call("hideTooltip");
+				ExternalInterface.call("startMoveWindow");
+				stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
+				this.windowDragStarted = true;
+			}
+		}
+
+		public function stopDragWindow(e:MouseEvent) : *
+		{
+			ExternalInterface.call("UIAssert","[WeaponExpansion] stopDragWindow");
+			if(this.windowDragStarted)
+			{
+				ExternalInterface.call("cancelMoveWindow");
+			}
+			else
+			{
+				stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
+			}
+			stage.removeEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
+			this.windowDragStarted = false;
+		}
 		
 		internal function frame1() : *
 		{
@@ -317,8 +369,12 @@ package masteryMenu
 			this.time = new Timer(1,1);
 			this.time.addEventListener(TimerEvent.TIMER_COMPLETE,this.onLoaded);
 			this.time.start();
-
 			Registry.Main = this;
+
+			this.windowDragBG.addEventListener(MouseEvent.MOUSE_DOWN,this.dragInit);
+			this.windowDragBG.addEventListener(MouseEvent.MOUSE_UP,this.windowUp);
+			this.dragStartMP = new Point();
+			this.windowDragBG.addEventListener(MouseEvent.MOUSE_DOWN,this.dragInit);
 		}
 	}
 }

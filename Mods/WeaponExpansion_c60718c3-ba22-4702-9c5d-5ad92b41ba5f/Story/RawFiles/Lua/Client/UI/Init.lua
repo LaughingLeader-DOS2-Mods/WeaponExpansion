@@ -202,57 +202,56 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	end
 end
 
-local function MouseTest()
-	---@type UIObject
-	local ui = Ext.GetBuiltinUI("Public/Game/GUI/mouseIcon.swf")
-	if ui ~= nil then
-		local mouseIconEvent = function(ui, call, ...)
-			local params = {...}
-			LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:mouseIconEvent] Function running params("..LeaderLib.Common.Dump(params)..")")
+local function SetToggleButtonVisibility(isVisible)
+	if MasteryMenu.ToggleButtonInstance ~= nil then
+		if not isVisible then
+			MasteryMenu.ToggleButtonInstance:Hide()
+		else
+			MasteryMenu.ToggleButtonInstance:Show()
 		end
-		Ext.RegisterUIInvokeListener(ui, "setTexture", mouseIconEvent)
-		Ext.RegisterUIInvokeListener(ui, "setCrossVisible", mouseIconEvent)
-		Ext.RegisterUIInvokeListener(ui, "setVisible", mouseIconEvent)
-		Ext.RegisterUIInvokeListener(ui, "startsWith", mouseIconEvent)
-		Ext.RegisterUIInvokeListener(ui, "onEventDown", mouseIconEvent)
-		Ext.Print("[LLWEAPONEX:Client:UI.lua:MouseTest] Found (Public/Game/GUI/mouseIcon.swf).")
-	else
-		Ext.Print("[LLWEAPONEX:Client:UI.lua:MouseTest] Failed to get (Public/Game/GUI/mouseIcon.swf).")
+		--MasteryMenu.ToggleButtonInstance:Invoke("setToggleButtonVisibility", isVisible)
+	end
+	if MasteryMenu.Instance ~= nil then
+		if not isVisible then
+			MasteryMenu.Instance:Hide()
+		else
+			MasteryMenu.Instance:Show()
+		end
+		--MasteryMenu.ToggleButtonInstance:Invoke("setToggleButtonVisibility", isVisible)
 	end
 end
 
-local function Client_UIDebugTest()
-	---@type UIObject
-	local ui = nil
-	-- local ui = Ext.GetBuiltinUI("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf")
-	-- if ui == nil then
-	-- 	Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf).")
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/skills.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
+Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function() SetToggleButtonVisibility(false) end)
+Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function() SetToggleButtonVisibility(true) end)
+
+---@param ui UIObject
+---@param call string
+---@param isVisible boolean
+local function OnShowSkillBar(ui, call, isVisible)
+	if isVisible ~= nil then
+		SetToggleButtonVisibility(isVisible)
 	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "setPlayerInfo", OnSheetEvent)
-		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
-		Ext.RegisterUICall(ui, "showStatTooltip", OnSheetEvent)
-		--Ext.RegisterUIInvokeListener(ui, "addSecondaryStat", OnCharacterSheetUpdating)
-		Ext.RegisterUIInvokeListener(ui, "updateArraySystem", OnCharacterSheetUpdating)
-		Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
-		--Ext.RegisterUIInvokeListener(ui, "selectCharacter", OnCharacterSelected)
-		--Ext.RegisterUIInvokeListener(ui, "updateCharList", OnCharacterSelected)
-		--Ext.RegisterUIInvokeListener(ui, "cycleCharList", OnCharacterSelected)
+end
+
+local ccUIMirrorHeaderText = Ext.GetTranslatedString("hf11e1d54g4cb6g4950g91e4g4d006ef46f15", "Magic Mirror")
+
+---@param ui UIObject
+---@param call string
+local function OnCCEvent(ui, call, ...)
+	local params = {...}
+	print("UI Type:", ui:GetTypeId())
+	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCCEvent] Event(",call,") params("..LeaderLib.Common.Dump(params)..")")
+
+	if call == "setText" and params[2] == ccUIMirrorHeaderText then
+		MasteryMenu.Instance:Invoke("setToggleButtonVisibility", false)
+	elseif call == "creationDone" or call == "updatePortraits" and params[1] == false then
+		MasteryMenu.Instance:Invoke("setToggleButtonVisibility", true)
 	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
-		Ext.RegisterUICall(ui, "charSel", OnCharacterSelected)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/examine.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showTooltip", OnSheetEvent)
-		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
-	end
+end
+
+local debug = nil
+if Ext.IsDeveloperMode() then
+	debug = Ext.Require("Client/UI/Debug.lua")
 end
 
 local function LLWEAPONEX_Client_SessionLoaded()
@@ -265,6 +264,10 @@ local function LLWEAPONEX_Client_SessionLoaded()
 		Ext.RegisterUIInvokeListener(ui, "updateArraySystem", OnCharacterSheetUpdating)
 		--Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
 	end
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
+	if ui ~= nil then
+		Ext.RegisterUIInvokeListener(ui, "showSkillBar", OnShowSkillBar)
+	end
 	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
 	-- if ui ~= nil then
 	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
@@ -275,17 +278,25 @@ local function LLWEAPONEX_Client_SessionLoaded()
 	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
 	-- 	Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
 	-- end
-	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
-	-- if ui ~= nil then
-	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
-	-- 	Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
-	-- end
+	--Ext.RegisterUINameInvokeListener("creationDone", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setBackButtonVisible", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setPanel", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("mainMenu", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setGM", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("enableStoryPlayback", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("onEventInit", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setText", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setDetails", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setTextField", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setClassEditTabLabel", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("setFreeClassPoints", OnCCEvent)
+	--Ext.RegisterUINameInvokeListener("updatePortraits", OnCCEvent)
 	masteryMenu.Init()
 	--tooltipOverrides.Init()
 	tooltipHandler.Init()
 	if Ext.IsDeveloperMode() then
-		--Client_UIDebugTest()
-		MouseTest()
+		--debug.Client_UIDebugTest()
+		--debug.MouseTest()
 	end
 end
 

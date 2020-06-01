@@ -5,6 +5,8 @@ MasteryMenu = {
 	Initialized = false,
 	---@type UIObject
 	Instance = nil,
+	---@type UIObject
+	ToggleButtonInstance = nil,
 	DisplayingSkillTooltip = false,
 	DisplayingStatusTooltip = false,
 	SelectedMastery = nil,
@@ -251,12 +253,6 @@ local function OnMenuEvent(ui, call, ...)
 	end
 	if call == "requestCloseUI" then
 		CloseMenu()
-	elseif call == "toggleMasteryMenu" then
-		if not MasteryMenu.Open then
-			TryOpenMasteryMenu()
-		else
-			CloseMenu()
-		end
 	elseif call == "onMasterySelected" then
 		MasteryMenu.LastSelected = params[1]
 		MasteryMenu.SelectedMastery = params[2]
@@ -339,6 +335,25 @@ local function getMasteryDescriptionTitle(masteryData)
 	return string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 end
 
+local function initializeToggleButton()
+	local ui = Ext.GetUI("MasteryMenuToggleButton")
+	if ui == nil then
+		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 1)
+		Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
+			if not MasteryMenu.Open then
+				TryOpenMasteryMenu()
+			else
+				CloseMenu()
+			end
+		end)
+	end
+	if ui ~= nil then
+		ui:Show()
+		ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
+	end
+	MasteryMenu.ToggleButtonInstance = ui
+end
+
 local function initializeMasteryMenu()
 	local newlyCreated = false
 	local ui = Ext.GetUI("MasteryMenu")
@@ -372,7 +387,6 @@ local function initializeMasteryMenu()
 		if not MasteryMenu.RegisteredListeners then
 			Ext.RegisterUICall(ui, "requestCloseUI", OnMenuEvent)
 			Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
-			Ext.RegisterUICall(ui, "toggleMasteryMenu", OnMenuEvent)
 			Ext.RegisterUICall(ui, "overMastery", OnMenuEvent)
 			Ext.RegisterUICall(ui, "selectedMastery", OnMenuEvent)
 			Ext.RegisterUICall(ui, "onMasterySelected", OnMenuEvent)
@@ -393,7 +407,6 @@ local function initializeMasteryMenu()
 			SetupListeners()
 			MasteryMenu.RegisteredListeners = true
 		end
-		ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
 		if newlyCreated then
 			ui:Show()
 		end
@@ -405,6 +418,7 @@ end
 
 local function InitMasteryMenu()
 	if not MasteryMenu.Initialized then
+		initializeToggleButton()
 		initializeMasteryMenu()
 	end
 end
@@ -431,6 +445,7 @@ end
 ---@param CharacterMasteryData characterMasteryData
 local function OpenMasteryMenu(characterMasteryData)
 	if not MasteryMenu.Initialized then
+		initializeToggleButton()
 		initializeMasteryMenu()
 		MasteryMenu.MasteryData = characterMasteryData
 	end
@@ -507,6 +522,7 @@ local function NetMessage_SetClientId(call,id)
 	CLIENT_UI.ID = tonumber(id)
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:NetMessage_SetClientId] Set CLIENT_UI.ID to (",id,")")
 	if not MasteryMenu.Initialized then
+		initializeToggleButton()
 		initializeMasteryMenu()
 	end
 end

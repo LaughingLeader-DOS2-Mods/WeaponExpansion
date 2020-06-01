@@ -3,14 +3,15 @@ package
 	import flash.display.MovieClip;
 	import flash.display.InteractiveObject;
 	import flash.external.ExternalInterface;
+	import flash.events.MouseEvent;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import masteryMenu.*;
 	
 	public dynamic class MainTimeline extends MovieClip
 	{
 		public var masteryMenuMC:masteryMenu_Main;
 
-		public var menu_btn:MovieClip;
-		
 		public var layout:String;
 		
 		public var alignment:String;
@@ -28,6 +29,10 @@ package
 
 		public var descriptionContent:Array;
 
+		public const designResolution:Point = new Point(1920,1080);
+		public var uiScaling:Number;
+		public var isResizing:Boolean;
+
 		public function MainTimeline()
 		{
 			super();
@@ -42,6 +47,11 @@ package
 			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
 			this.masteryMenuMC.masteryListInit();
 			this.masteryMenuMC.visible = false;
+		}
+
+		public function onEventResolution(width:Number, height:Number) : *
+		{
+
 		}
 
 		public function openMenu() : *
@@ -72,6 +82,18 @@ package
 				stage.focus = null;
 
 				active = false;
+			}
+		}
+
+		public function toggleMenu() : *
+		{
+			if (this.masteryMenuMC.visible)
+			{
+				closeMenu();
+			}
+			else
+			{
+				openMenu();
 			}
 		}
 		
@@ -108,9 +130,9 @@ package
 		public function onEventDown(eventIndex:Number, param2:Number, param3:Number) : *
 		{
 			var handled:Boolean = false;
+			ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
 			if (active)
 			{
-				//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
 				switch(this.events[eventIndex])
 				{
 					case "IE UIUp":
@@ -130,7 +152,17 @@ package
 					case "IE UIDialogTextDown":
 						this.masteryMenuMC.startScrollText(false,param3);
 						handled = true;
+						break;
+					case "IE ToggleCharacterPane":
+					case "IE ToggleEquipment":
+						this.closeMenu();
+						handled = false;
+						break;
 				}
+			}
+			if (this.events[eventIndex] == "IE ToggleStatusPanel")
+			{
+				this.toggleMenu();
 			}
 			return handled;
 		}
@@ -171,11 +203,6 @@ package
 		public function setButtonText(text:String) : *
 		{
 			this.masteryMenuMC.setButtonText(text);
-		}
-		
-		public function setToggleButtonTooltip(text:String) : *
-		{
-			this.menu_btn.setTooltip(text);
 		}
 		
 		public function showControllerHints(enabled:Boolean) : *
@@ -267,7 +294,7 @@ package
 		{
 			this.layout = "fixed";
 			this.alignment = "none";
-			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu");
+			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "IE ToggleStatusPanel", "IE ToggleMap", "IE ToggleCharacterPane", "IE ToggleEquipment");
 			this.descriptionContent = new Array();
 			Registry.RankNodePositions[0] = 0.0;
 			Registry.RankNodePositions[4] = 1.0;

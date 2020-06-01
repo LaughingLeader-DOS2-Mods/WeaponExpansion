@@ -64,6 +64,20 @@ THEN
 NRD_ModCall("WeaponExpansion", "HookIntoTradeWindow", (STRING)_Player);
 //END_REGION
 
+//REGION RESPEC
+PROC
+PROC_HandleMagicMirrorResult((CHARACTERGUID)_Player, 1) // Added
+THEN
+NRD_ModCall("LeaderLib", "BroadcastToClient", "LLWEAPONEX_OnCharacterCreationStarted", (STRING)_Player);
+
+IF
+CharacterCreationFinished(_Player)
+AND
+_Player != NULL_00000000-0000-0000-0000-000000000000
+THEN
+NRD_ModCall("LeaderLib", "BroadcastToClient", "LLWEAPONEX_OnCharacterCreationFinished", (STRING)_Player);
+//END_REGION
+
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_03_GameScripts"

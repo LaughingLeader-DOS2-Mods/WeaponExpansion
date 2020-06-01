@@ -316,6 +316,9 @@ if Ext.IsDeveloperMode() then
         local host = CharacterGetHostCharacter()
         ItemTemplateAddTo(template, host, 1, 1)
     end)
+    Ext.RegisterConsoleCommand("test", function(command, ...)
+        print("test:", Ext.JsonStringify({...}))
+    end)
 end
 
 ---Cool effects:
