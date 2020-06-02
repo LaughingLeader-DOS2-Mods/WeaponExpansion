@@ -153,14 +153,14 @@ package
 						this.masteryMenuMC.startScrollText(false,param3);
 						handled = true;
 						break;
-					case "IE ToggleCharacterPane":
-					case "IE ToggleEquipment":
+					case "ToggleCharacterPane":
+					case "ToggleEquipment":
 						this.closeMenu();
 						handled = false;
 						break;
 				}
 			}
-			if (this.events[eventIndex] == "IE ToggleStatusPanel")
+			if (this.events[eventIndex] == "ToggleStatusPanel")
 			{
 				this.toggleMenu();
 			}
@@ -294,7 +294,7 @@ package
 		{
 			this.layout = "fixed";
 			this.alignment = "none";
-			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "IE ToggleStatusPanel", "IE ToggleMap", "IE ToggleCharacterPane", "IE ToggleEquipment");
+			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "ToggleStatusPanel", "IE ToggleMap", "ToggleCharacterPane", "ToggleEquipment");
 			this.descriptionContent = new Array();
 			Registry.RankNodePositions[0] = 0.0;
 			Registry.RankNodePositions[4] = 1.0;
