@@ -3,6 +3,8 @@ package
 	import flash.display.MovieClip;
 	import flash.display.InteractiveObject;
 	import flash.external.ExternalInterface;
+	import fl.motion.easing.Quartic;
+	import LS_Classes.larTween;
 	
 	public dynamic class MainTimeline extends MovieClip
 	{
@@ -60,6 +62,18 @@ package
 		{
 			this.menu_btn.x = buttonX;
 			this.menu_btn.y = buttonY;
+		}
+
+		private var fadeTween:larTween;
+
+		public function fade(startAlpha:Number, endAlpha:Number, speed:Number) : *
+		{
+			if(fadeTween)
+			{
+				fadeTween.stop();
+			}
+			this.menu_btn.alpha = startAlpha;
+			fadeTween = new larTween(this.menu_btn,"alpha",Quartic.easeIn,startAlpha,endAlpha,speed);
 		}
 		
 		internal function frame1() : *

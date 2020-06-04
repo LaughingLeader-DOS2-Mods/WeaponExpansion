@@ -202,12 +202,21 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	end
 end
 
-local function SetToggleButtonVisibility(isVisible)
+local function SetToggleButtonVisibility(isVisible, tween)
 	if MasteryMenu.ToggleButtonInstance ~= nil then
 		if not isVisible then
-			MasteryMenu.ToggleButtonInstance:Hide()
+			if tween == true then
+				MasteryMenu.ToggleButtonInstance:Invoke("fade", 1.0, 0.0, 0.5)
+			else
+				MasteryMenu.ToggleButtonInstance:Hide()
+			end
 		else
-			MasteryMenu.ToggleButtonInstance:Show()
+			if tween == true then
+				MasteryMenu.ToggleButtonInstance:Show()
+				MasteryMenu.ToggleButtonInstance:Invoke("fade", 0.0, 1.0, 1.2)
+			else
+				MasteryMenu.ToggleButtonInstance:Show()
+			end
 		end
 		--MasteryMenu.ToggleButtonInstance:Invoke("setToggleButtonVisibility", isVisible)
 	end
@@ -222,7 +231,7 @@ local function SetToggleButtonVisibility(isVisible)
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function() SetToggleButtonVisibility(false) end)
-Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function() SetToggleButtonVisibility(true) end)
+Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function() SetToggleButtonVisibility(true, true) end)
 
 ---@param ui UIObject
 ---@param call string
