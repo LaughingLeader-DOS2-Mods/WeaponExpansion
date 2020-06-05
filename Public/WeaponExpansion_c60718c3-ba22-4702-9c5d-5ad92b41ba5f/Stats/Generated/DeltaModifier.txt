@@ -25,6 +25,26 @@ param "ModifierType" "Weapon"
 new boost "_Boost_LLWEAPONEX_Weapon_Damage_Chaos_Large",1
 //END_REGION
 
+//REGION ATTRIBUTE_BOOSTS
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Wits"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Wits",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Wits_Large"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Wits_Large",1
+//END_REGION
+
 new deltamod "Boost_Weapon_Damage_Air_Medium_Bow"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
