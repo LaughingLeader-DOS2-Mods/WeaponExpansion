@@ -47,7 +47,7 @@ function GetUnarmedWeapon(character, skipItemCheck)
 	end
 	local highestAttribute = Skills.GetHighestAttribute(character, unarmedAttributes)
 	local unarmedMasteryRank = 0
-	for i=1,5,1 do
+	for i=1,Mastery.Variables.MaxRank,1 do
 		local tag = "LLWEAPONEX_Unarmed_Mastery" .. i
 		if character.Character:HasTag(tag) then
 			unarmedMasteryRank = i

@@ -155,12 +155,6 @@ local function CreateSkillTable(skillName, useWeaponDamage)
 	return nil
 end
 
-local weaponAttributes = {
-	"ModifierType",
-	"IsTwoHanded",
-	"WeaponType",
-}
-
 local weaponStatAttributes = {
 	"ModifierType",
 	"Damage",
@@ -182,9 +176,6 @@ local weaponStatAttributes = {
 ---@return StatItem
 local function CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage)
 	local weapon = {}
-	for i,v in pairs(weaponAttributes) do
-		weapon[v] = Ext.StatGetAttribute(stat, v)
-	end
 	weapon.ItemType = "Weapon"
 	weapon.Name = stat
 	if attribute ~= nil then
@@ -202,6 +193,9 @@ local function CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseB
 	for i,v in pairs(weaponStatAttributes) do
 		weaponStat[v] = Ext.StatGetAttribute(stat, v)
 	end
+	weapon["ModifierType"] = weaponStat["ModifierType"]
+	weapon["IsTwoHanded"] = weaponStat["IsTwoHanded"]
+	weapon["WeaponType"] = weaponStat["WeaponType"]
 	if damageFromBaseBoost ~= nil and damageFromBaseBoost > 0 then
 		weaponStat.DamageFromBase = weaponStat.DamageFromBase + damageFromBaseBoost
 	end

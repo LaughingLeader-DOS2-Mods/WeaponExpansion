@@ -296,7 +296,9 @@ if Ext.IsDeveloperMode() then
         TimerLaunch("Timers_LLWEAPONEX_OnLuaReset", 250)
         NRD_LuaReset(1,1,1)
     end
-    Ext.RegisterConsoleCommand("questreward", function(command, treasure, identifyItems)
+    --!reward ST_LLWEAPONEX_RunebladesRare
+    --!printdeltamods
+    Ext.RegisterConsoleCommand("reward", function(command, treasure, identifyItems)
         local host = CharacterGetHostCharacter()
         local identified = identifyItems ~= 0
         CharacterGiveReward(host, treasure, identified)
@@ -319,6 +321,77 @@ if Ext.IsDeveloperMode() then
     Ext.RegisterConsoleCommand("test", function(command, ...)
         print("test:", Ext.JsonStringify({...}))
     end)
+    Ext.RegisterConsoleCommand("printdeltamods", function(command, ...)
+        local host = CharacterGetHostCharacter()
+        ---@type EsvCharacter
+        local character = Ext.GetCharacter(host)
+        for i,slot in LeaderLib.Data.EquipmentSlots:Get() do
+            ---@type StatItem
+            --local item = character.Stats:GetItemBySlot(slot)
+            local itemUUID = CharacterGetEquippedItem(host, slot)
+            if itemUUID ~= nil then
+                ---@type EsvItem
+                local item = Ext.GetItem(itemUUID)
+                if item ~= nil then
+                    print(slot, itemUUID)
+                    print("Stat:", item.StatsId)
+                    print("=======")
+                    print("Item Boost Stats:")
+                    print("=======")
+                    for i,stat in ipairs(item.Stats.DynamicStats) do
+                        if not StringHelpers.IsNullOrEmpty(stat.BoostName) then
+                            print(i,stat.BoostName)
+                        end
+                    end
+                    print("=======")
+                    NRD_ItemIterateDeltaModifiers(itemUUID, "LLWEAPONEX_Debug_PrintDeltamod")
+                end
+            end
+        end
+    end)
+end
+
+local debug_DeltaModBoostProperties = {
+    { Name="Boost", Type="string"},
+    { Name="Count", Type="integer"}
+}
+
+local debug_DeltaModProperties = {
+    {Name="Name", Type="string"},
+    {Name="BoostType", Type="string"},
+    {Name="MinLevel", Type="integer"},
+    {Name="MaxLevel", Type="integer"},
+    {Name="Frequency", Type="integer"},
+    {Name="ModifierType", Type="string"},
+    {Name="SlotType", Type="string"},
+    {Name="WeaponType", Type="string"},
+    {Name="Handedness", Type="string"},
+    {Name="ArmorType", Type="string"},
+    {Name="Boosts", Type="table"},
+}
+
+function Debug_PrintDeltaMod(item, deltamod, isGenerated)
+    local modifierType = NRD_StatGetType(NRD_ItemGetStatsId(item))
+    ---@type DeltaMod
+    local deltamodObj = Ext.GetDeltaMod(deltamod, modifierType)
+    print("*********")
+    print("DeltaMod:",deltamod, "ModifierType", modifierType, "IsGenerated:",isGenerated)
+    print("*********")
+    if deltamodObj ~= nil then
+        for i,prop in ipairs(debug_DeltaModProperties) do
+            if prop.Name == "Boosts" then
+                print("-------")
+                print("Deltamod Boosts:")
+                print("-------")
+                for i,boost in pairs(deltamodObj.Boosts) do
+                    print(boost.Boost, boost.Count)
+                end
+                print("-------")
+            else
+                print(prop.Name, deltamodObj[prop.Name])
+            end
+        end
+    end
 end
 
 ---Cool effects:

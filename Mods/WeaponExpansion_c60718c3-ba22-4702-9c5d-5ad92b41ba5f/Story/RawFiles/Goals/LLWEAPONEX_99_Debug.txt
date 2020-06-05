@@ -59,6 +59,11 @@ CharacterGetHostCharacter(_Host)
 THEN
 CharacterSetCustomTradeTreasure(_Trader, "LLWEAPONEX_CheatAllWeapons");
 GenerateItems(_Host, _Trader);
+
+IF
+NRD_ItemDeltaModIteratorEvent("LLWEAPONEX_Debug_PrintDeltamod", _Item, _DeltaMod, _IsGenerated)
+THEN
+NRD_ModCall("WeaponExpansion", "Debug_PrintDeltaMod", (STRING)_Item, _DeltaMod, (STRING)_IsGenerated);
 EXITSECTION
 
 ENDEXITSECTION

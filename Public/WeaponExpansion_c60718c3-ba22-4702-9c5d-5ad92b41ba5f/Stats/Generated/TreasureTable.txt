@@ -21,6 +21,10 @@ object category "LLWEAPONEX_Runeblade_Poison",9,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Runeblade_Air",9,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Runeblade_Chaos",5,1,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_RunebladesRare"
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,1,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_Runes"
 new subtable "1,1"
 object category "I_LOOT_Rune_LLWEAPONEX_Runeblade_Air",9,1,0,0,0,0,0,0

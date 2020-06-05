@@ -6,6 +6,11 @@ IF
 CharacterItemEvent(_Char, _Item, "LLWEAPONEX_OpenSmugglersBag")
 THEN
 NRD_ModCall("WeaponExpansion", "OnSmugglersBagOpened", (STRING)_Char, (STRING)_Item);
+
+IF
+NRD_ItemDeltaModIteratorEvent("LLWEAPONEX_Iterator_GetDeltamod", _Item, _Deltamod, _IsGenerated)
+THEN
+NRD_ModCall("WeaponExpansion", "SaveDeltamod", (STRING)_Item, _DeltaMod, (STRING)_IsGenerated);
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_03_GameScripts"
