@@ -83,10 +83,10 @@ DeltamodSwap.LLWEAPONEX_Runeblade = {
 
 local rodDamageBoosts = {
 	Air = {
-		Small = "Boost_Weapon_Damage_Air_Small_Rod",
-		Medium = "Boost_Weapon_Damage_Air_Medium_Rod",
-		Large = "Boost_Weapon_Damage_Air_Large_Rod",
-		Default = "Boost_Weapon_Damage_Air_Rod",
+		Small = "Boost_Weapon_Damage_Air_Small_Club",
+		Medium = "Boost_Weapon_Damage_Air_Medium_Club",
+		Large = "Boost_Weapon_Damage_Air_Large_Club",
+		Default = "Boost_Weapon_Damage_Air_Club",
 	},
 	Chaos = {
 		Small = "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Small",
@@ -95,28 +95,28 @@ local rodDamageBoosts = {
 		Default = "Boost_LLWEAPONEX_Weapon_Damage_Chaos",
 	},
 	Earth = {
-		Small = "Boost_Weapon_Damage_Earth_Small_Rod",
-		Medium = "Boost_Weapon_Damage_Earth_Medium_Rod",
-		Large = "Boost_Weapon_Damage_Earth_Large_Rod",
-		Default = "Boost_Weapon_Damage_Earth_Rod",
+		Small = "Boost_Weapon_Damage_Earth_Small_Club",
+		Medium = "Boost_Weapon_Damage_Earth_Medium_Club",
+		Large = "Boost_Weapon_Damage_Earth_Large_Club",
+		Default = "Boost_Weapon_Damage_Earth_Club",
 	},
 	Fire = {
-		Small = "Boost_Weapon_Damage_Fire_Small_Rod",
-		Medium = "Boost_Weapon_Damage_Fire_Medium_Rod",
-		Large = "Boost_Weapon_Damage_Fire_Large_Rod",
-		Default = "Boost_Weapon_Damage_Fire_Rod",
+		Small = "Boost_Weapon_Damage_Fire_Small_Club",
+		Medium = "Boost_Weapon_Damage_Fire_Medium_Club",
+		Large = "Boost_Weapon_Damage_Fire_Large_Club",
+		Default = "Boost_Weapon_Damage_Fire_Club",
 	},
 	Poison = {
-		Small = "Boost_Weapon_Damage_Poison_Small_Rod",
-		Medium = "Boost_Weapon_Damage_Poison_Medium_Rod",
-		Large = "Boost_Weapon_Damage_Poison_Large_Rod",
-		Default = "Boost_Weapon_Damage_Poison_Rod",
+		Small = "Boost_Weapon_Damage_Poison_Small_Club",
+		Medium = "Boost_Weapon_Damage_Poison_Medium_Club",
+		Large = "Boost_Weapon_Damage_Poison_Large_Club",
+		Default = "Boost_Weapon_Damage_Poison_Club",
 	},
 	Water = {
-		Small = "Boost_Weapon_Damage_Water_Small_Rod",
-		Medium = "Boost_Weapon_Damage_Water_Medium_Rod",
-		Large = "Boost_Weapon_Damage_Water_Large_Rod",
-		Default = "Boost_Weapon_Damage_Water_Rod",
+		Small = "Boost_Weapon_Damage_Water_Small_Club",
+		Medium = "Boost_Weapon_Damage_Water_Medium_Club",
+		Large = "Boost_Weapon_Damage_Water_Large_Club",
+		Default = "Boost_Weapon_Damage_Water_Club",
 	},
 }
 
@@ -181,14 +181,21 @@ DeltamodSwap.LLWEAPONEX_Quarterstaff = {
 	Boost_Weapon_Primary_Intelligence_Medium = GetQuarterstaffAttributeBoost,
 }
 
+DeltamodSwap.LLWEAPONEX_Firearm = {
+	-- Larian has this and the crossbow ones reversed on the weapon type value
+	Boost_Weapon_Primary_Finesse_Medium_Bow = "Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium",
+	Boost_Weapon_Primary_Finesse_Medium_Crossbow = "Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium"
+}
+
 function GetDeltamods(item)
 	NRD_ItemIterateDeltaModifiers(item, "LLWEAPONEX_Iterator_GetDeltamod")
 end
 
 function SaveDeltamod(item, deltamod, isGenerated)
 	if itemDeltaMods[item] == nil then
-		itemDeltaMods[item] = {}
+		itemDeltaMods[item] = {DeltaMods = {}, Swapped = false}
 	end
+	local itemEntry = itemDeltaMods[item]
 	local canAdd = true
 	for tag,deltamods in pairs(DeltamodSwap) do
 		if IsTagged(item, tag) == 1 then
@@ -197,6 +204,7 @@ function SaveDeltamod(item, deltamod, isGenerated)
 				if replacement == "" then
 					print("Disabled deltamod",deltamod,item)
 					canAdd = false
+					itemEntry.Swapped = true
 				elseif type(replacement) == "function" then
 					local b,replacementVal = pcall(replacement, item, deltamod)
 					if b then
@@ -205,92 +213,192 @@ function SaveDeltamod(item, deltamod, isGenerated)
 					else
 						canAdd = false
 					end
+					itemEntry.Swapped = true
 				else
 					print("Swapped deltamod",deltamod,"for",replacement,item)
 					deltamod = replacement
+					itemEntry.Swapped = true
 				end
 			end
 		end
 	end
 	--table.insert(itemDeltaMods[item], deltamod)
-	itemDeltaMods[item][deltamod] = canAdd
+	itemEntry.DeltaMods[deltamod] = canAdd
 end
 
-function TransformRunebladeDeltamods(item)
-	if itemDeltaMods[item] == nil then
-		NRD_ItemIterateDeltaModifiers(item, "LLWEAPONEX_Iterator_GetDeltamod")
-	end
-	if itemDeltaMods[item] ~= nil then
-		local stat = NRD_ItemGetStatsId(item)
+function SwapDeltamods(item)
+	if ObjectGetFlag(item, "LLWEAPONEX_ProcessedDeltamods") == 0 then
 		local baseStat,rarity,level,seed = NRD_ItemGetGenerationParams(item)
-		if rarity == nil then
-			SetStoryEvent(item, "LeaderLib_Commands_SetItemVariables")
+		if StringHelpers.IsNullOrEmpty(rarity) then
 			rarity = GetVarFixedString(item, "LeaderLib_Rarity")
-		end
-		if level == nil then
-			level = NRD_ItemGetInt(item, "LevelOverride")
-			if level == 0 or level == nil then
-				level = CharacterGetLevel(CharacterGetHostCharacter())
+			if StringHelpers.IsNullOrEmpty(rarity) then
+				SetStoryEvent(item, "LeaderLib_Commands_SetItemVariables")
 			end
 		end
-
-		print("TransformRunebladeDeltamods", Ext.JsonStringify(itemDeltaMods[item]))
-		local deltamods = itemDeltaMods[item]
-		if deltamods ~= nil then
-			NRD_ItemCloneBegin(item)
-			-- for deltamod,b in pairs(deltamods) do
-			-- 	if b == true then
-			-- 		NRD_ItemCloneAddBoost("DeltaMod", deltamod)
-			-- 	end
-			local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
-			if damageTypeString == nil then damageTypeString = "Physical" end
-			local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
-			NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
-
-			NRD_ItemCloneSetString("GenerationStatsId", stat)
-			NRD_ItemCloneSetString("StatsEntryName", stat)
-			NRD_ItemCloneSetInt("HasGeneratedStats", 0)
-			NRD_ItemCloneSetInt("GenerationLevel", level)
-			NRD_ItemCloneSetInt("StatsLevel", level)
-			NRD_ItemCloneSetInt("IsIdentified", 1)
-			NRD_ItemCloneSetString("ItemType", rarity)
-			NRD_ItemCloneSetString("GenerationItemType", rarity)
-
-			local clone = NRD_ItemClone()
-			SetVarFixedString(item, "LeaderLib_Rarity", rarity)
-			SetVarInteger(item, "LeaderLib_Level", level)
-			print("Swapped item to clone", clone)
-			for deltamod,b in pairs(deltamods) do
-				if b == true then
-					ItemAddDeltaModifier(clone, deltamod)
-					print("Added deltamod", deltamod)
+		if rarity ~= nil and rarity ~= "Common" and rarity ~= "Unique" then
+			if itemDeltaMods[item] == nil then
+				NRD_ItemIterateDeltaModifiers(item, "LLWEAPONEX_Iterator_GetDeltamod")
+			end
+			local itemEntry = itemDeltaMods[item]
+			if itemEntry ~= nil and itemEntry.Swapped == true then
+				local stat = NRD_ItemGetStatsId(item)
+				local baseStat,rarity,level,seed = NRD_ItemGetGenerationParams(item)
+				if level == nil then
+					level = NRD_ItemGetInt(item, "LevelOverride")
+					if level == 0 or level == nil then
+						level = CharacterGetLevel(CharacterGetHostCharacter())
+					end
 				end
-			end
 
-			local inventory = GetInventoryOwner(item)
-			local slot = nil
-			if ObjectIsCharacter(inventory) == 1 then
-				slot = GameHelpers.GetEquippedSlot(inventory,item)
-			end
-			if inventory ~= nil then
-				if slot ~= nil then
-					GameHelpers.EquipInSlot(inventory, clone, slot)
-				else
-					ItemToInventory(clone, inventory, 1, 0, 0)
+				--print("SwapDeltamods", Ext.JsonStringify(itemEntry.DeltaMods))
+				local deltamods = itemEntry.DeltaMods
+				if deltamods ~= nil then
+					NRD_ItemCloneBegin(item)
+					-- for deltamod,b in pairs(deltamods) do
+					-- 	if b == true then
+					-- 		NRD_ItemCloneAddBoost("DeltaMod", deltamod)
+					-- 	end
+					local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
+					if damageTypeString == nil then damageTypeString = "Physical" end
+					local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
+
+					NRD_ItemCloneSetString("GenerationStatsId", stat)
+					NRD_ItemCloneSetString("StatsEntryName", stat)
+					NRD_ItemCloneSetInt("HasGeneratedStats", 0)
+					NRD_ItemCloneSetInt("GenerationLevel", level)
+					NRD_ItemCloneSetInt("StatsLevel", level)
+					NRD_ItemCloneSetInt("IsIdentified", 1)
+					NRD_ItemCloneSetString("ItemType", rarity)
+					NRD_ItemCloneSetString("GenerationItemType", rarity)
+
+					local clone = NRD_ItemClone()
+					ObjectSetFlag(clone, "LLWEAPONEX_ProcessedDeltamods", 0)
+					SetVarFixedString(item, "LeaderLib_Rarity", rarity)
+					SetVarInteger(item, "LeaderLib_Level", level)
+					for deltamod,b in pairs(deltamods) do
+						if b == true then
+							ItemAddDeltaModifier(clone, deltamod)
+							PrintDebug("[WeaponExpansion:SwapDeltamods] Added deltamod", deltamod, "to item clone",clone)
+						end
+					end
+
+					local inventory = GetInventoryOwner(item)
+					local slot = nil
+					if ObjectIsCharacter(inventory) == 1 then
+						slot = GameHelpers.GetEquippedSlot(inventory,item)
+					end
+					if inventory ~= nil then
+						if slot ~= nil then
+							GameHelpers.EquipInSlot(inventory, clone, slot)
+						else
+							ItemToInventory(clone, inventory, 1, 0, 0)
+						end
+						ItemToInventory(item,inventory)
+					end
+					--ItemRemove(item)
+					--NRD_ItemIterateDeltaModifiers(clone, "LLWEAPONEX_Debug_PrintDeltamod")
 				end
-				ItemToInventory(item,inventory)
+				itemDeltaMods[item] = nil
+			else
+				ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
+				itemDeltaMods[item] = nil
+				--print("Skipping deltamod swap for",item)
 			end
-			--ItemRemove(item)
-			NRD_ItemIterateDeltaModifiers(clone, "LLWEAPONEX_Debug_PrintDeltamod")
+		else
+			ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
 		end
-		itemDeltaMods[item] = nil
 	end
 end
 
-Ext.RegisterConsoleCommand("runebladedeltamods", function(command)
-	local host = CharacterGetHostCharacter()
-	local weapon = CharacterGetEquippedWeapon(host)
-	if weapon ~= nil and IsTagged(weapon, "LLWEAPONEX_Runeblade") == 1 then
-		TransformRunebladeDeltamods(weapon)
-	end
-end)
+if Ext.IsDeveloperMode() then
+	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
+		local host = CharacterGetHostCharacter()
+		local weapon = CharacterGetEquippedWeapon(host)
+		if weapon ~= nil then
+			SwapDeltamods(weapon)
+		end
+	end)
+end
+
+-- TODO: More generalized attribute boost swapping?
+-- local attributeBoosts = {
+-- 	Strength = {
+-- 		"Boost_Weapon_Primary_Strength",
+-- 		"Boost_Weapon_Primary_Strength_Axe",
+-- 		"Boost_Weapon_Primary_Strength_Axe_Legendary",
+-- 		"Boost_Weapon_Primary_Strength_Axe_PrimaryAsSmall",
+-- 		"Boost_Weapon_Primary_Strength_Club",
+-- 		"Boost_Weapon_Primary_Strength_Club_Legendary",
+-- 		"Boost_Weapon_Primary_Strength_Club_PrimaryAsSmall",
+-- 		"Boost_Weapon_Primary_Strength_Medium",
+-- 		"Boost_Weapon_Primary_Strength_Medium_Axe",
+-- 		"Boost_Weapon_Primary_Strength_Medium_Club",
+-- 		"Boost_Weapon_Primary_Strength_Medium_PrimaryAsLarge",
+-- 		"Boost_Weapon_Primary_Strength_PrimaryAsLarge",
+-- 		"Boost_Weapon_Primary_Strength_Sword_Legendary",
+-- 		"Boost_Weapon_Primary_Strength_Sword_PrimaryAsSmall",
+-- 	},
+-- 	Finesse = {
+-- 		"Boost_Weapon_Primary_Finesse",
+-- 		"Boost_Weapon_Primary_Finesse_Bow_Legendary",
+-- 		"Boost_Weapon_Primary_Finesse_Bow_PrimaryAsSmall",
+-- 		"Boost_Weapon_Primary_Finesse_Crossbow_Legendary",
+-- 		"Boost_Weapon_Primary_Finesse_Crossbow_PrimaryAsSmall",
+-- 		"Boost_Weapon_Primary_Finesse_Knife_Legendary",
+-- 		"Boost_Weapon_Primary_Finesse_Knife_PrimaryAsSmall",
+-- 		"Boost_Weapon_Primary_Finesse_Medium",
+-- 		"Boost_Weapon_Primary_Finesse_Medium_Bow",
+-- 		"Boost_Weapon_Primary_Finesse_Medium_Crossbow",
+-- 		"Boost_Weapon_Primary_Finesse_Medium_PrimaryAsLarge",
+-- 		"Boost_Weapon_Primary_Finesse_PrimaryAsLarge",
+-- 		"Boost_Weapon_Primary_Finesse_Spear_Legendary",
+-- 		"Boost_Weapon_Primary_Finesse_Spear_PrimaryAsSmall",
+-- 	},
+-- 	Intelligence = {
+-- 		"Boost_Weapon_Primary_Intelligence",
+-- 		"Boost_Weapon_Primary_Intelligence_Medium",
+-- 		"Boost_Weapon_Primary_Intelligence_Medium_PrimaryAsLarge",
+-- 		"Boost_Weapon_Primary_Intelligence_PrimaryAsLarge",
+-- 		"Boost_Weapon_Primary_Intelligence_Staff_Legendary",
+-- 		"Boost_Weapon_Primary_Intelligence_Staff_PrimaryAsNormal",
+-- 		"Boost_Weapon_Primary_Intelligence_Staff_PrimaryAsSmall",
+-- 		"Boost_Weapon_Primary_Intelligence_Wand_Legendary",
+-- 		"Boost_Weapon_Primary_Intelligence_Wand_PrimaryAsNormal",
+-- 		"Boost_Weapon_Primary_Intelligence_Wand_PrimaryAsSmall",
+-- 	},
+-- 	Wits = {
+-- 		"Boost_LLWEAPONEX_Weapon_Primary_Wits",
+-- 		"Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium",
+-- 		"Boost_LLWEAPONEX_Weapon_Primary_Wits_Large",
+-- 	},
+-- }
+
+-- local function SwapAttributeBoosts(item, deltamods)
+-- 	local stat = NRD_ItemGetStatsId(item)
+-- 	local requirements = Ext.StatGetAttribute(stat, "Requirements")
+-- 	local primaryAttribute = nil
+-- 	if requirements ~= nil then
+-- 		local largestRequirement = 0
+-- 		for i,requirement in pairs(requirements) do
+-- 			local reqName = requirement.Requirement
+-- 			if not requirement.Not and requirement.Param > largestRequirement and
+-- 				(reqName == "Strength" or reqName == "Finesse" or reqName == "Constitution" or
+-- 				reqName == "Memory" or reqName == "Wits") then
+-- 				primaryAttribute = reqName
+-- 				largestRequirement = requirement.Param
+-- 			end
+-- 		end
+-- 	end
+-- 	if primaryAttribute ~= nil then
+-- 		for attribute,deltamods in pairs(attributeBoosts) do
+-- 			if attribute ~= primaryAttribute then
+-- 				for i,entry in pairs(deltamods) do
+-- 					if deltamods[entry] == true then
+
+-- 					end
+-- 				end
+-- 			end
+-- 		end
+-- 	end
+-- end
