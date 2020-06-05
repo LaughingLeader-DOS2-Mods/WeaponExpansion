@@ -216,30 +216,30 @@ RemoveStatus(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX_RIFLE");
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_BULLET_HIT", _)
 AND
-String(_Target, _TargetStr)
+GetUUID(_Target, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _TargetStr);
+NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _UUID);
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", _)
 AND
-String(_Target, _TargetStr)
+GetUUID(_Target, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _TargetStr);
+NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _UUID);
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_BULLET_HIT", _)
 AND
-String(_Target, _TargetStr)
+GetUUID(_Target, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _TargetStr);
+NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _UUID);
 
 IF
 ItemStatusChange(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", _)
 AND
-String(_Target, _TargetStr)
+GetUUID(_Target, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _TargetStr);
+NRD_ModCall("WeaponExpansion", "PlayBulletImpact", _UUID);
 //END_REGION
 EXITSECTION
 

@@ -297,6 +297,7 @@ if Ext.IsDeveloperMode() then
         NRD_LuaReset(1,1,1)
     end
     --!reward ST_LLWEAPONEX_RunebladesRare
+    --!reward ST_LLWEAPONEX_TestDeltamodReplacement
     --!printdeltamods
     Ext.RegisterConsoleCommand("reward", function(command, treasure, identifyItems)
         local host = CharacterGetHostCharacter()

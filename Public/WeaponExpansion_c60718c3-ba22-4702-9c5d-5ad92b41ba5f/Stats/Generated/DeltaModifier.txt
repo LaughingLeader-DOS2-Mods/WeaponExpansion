@@ -1,24 +1,24 @@
 //REGION RUNEBLADES
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Small_Sword"
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Small"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Sword"
 new boost "_Boost_LLWEAPONEX_Weapon_Damage_Chaos_Small",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Sword"
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_LLWEAPONEX_Weapon_Damage_Chaos",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Medium_Sword"
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Medium"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_LLWEAPONEX_Weapon_Damage_Chaos_Medium",1
 
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Large_Sword"
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Chaos_Large"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"
 param "ModifierType" "Weapon"

@@ -1505,3 +1505,11 @@ new subtable "1,1"
 object category "T_ST_RandomLootJunkCharacters",1,1,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_RandomLootJunk",1,1,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_TestDeltamodReplacement"
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,1,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,0,0,0,0,1,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,1,0,0
