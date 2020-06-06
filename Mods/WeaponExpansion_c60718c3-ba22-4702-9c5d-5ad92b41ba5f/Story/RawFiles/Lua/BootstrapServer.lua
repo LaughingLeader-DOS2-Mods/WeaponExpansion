@@ -1,5 +1,6 @@
 PersistentVars = {}
 LoadPersistentVars = {}
+BonusSkills = {}
 
 Ext.Require("Shared/Init.lua")
 Ext.Require("Server/Init.lua")
@@ -26,6 +27,7 @@ Ext.Require("Server/Items/ItemHandler.lua")
 Ext.Require("Server/Items/UniqueItems.lua")
 Ext.Require("Server/Items/CraftingMechanics.lua")
 Ext.Require("Server/Items/DeltaModSwapper.lua")
+local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
 Ext.Require("Server/Debug/DebugMain.lua")
 
 local function dumpRanks(...)
@@ -79,6 +81,10 @@ local function SessionSetup()
             Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)
         end
     end
+
+    itemBonusSkills.Init()
+
+    print("_Placeholder_Unarmed stat type test:",Ext.StatGetAttribute("_Placeholder_Unarmed", "type"))
 end
 Ext.RegisterListener("SessionLoaded", SessionSetup)
 
