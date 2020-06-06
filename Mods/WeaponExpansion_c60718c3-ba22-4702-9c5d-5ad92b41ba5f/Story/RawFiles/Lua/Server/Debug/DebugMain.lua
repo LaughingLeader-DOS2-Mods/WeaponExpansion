@@ -300,6 +300,23 @@ if Ext.IsDeveloperMode() then
     --!reward ST_LLWEAPONEX_RunebladesRare
     --!reward ST_LLWEAPONEX_TestDeltamodReplacement
     --!printdeltamods
+    local treasureChest = nil
+    Ext.RegisterConsoleCommand("treasure", function(command, treasure, identifyItems)
+        if treasure == nil then
+            treasure = "ArenaMode_ArmsTrader"
+        end
+        local host = CharacterGetHostCharacter()
+        local x,y,z = GetPosition(host)
+        if treasureChest == nil then
+            treasureChest = CreateItemTemplateAtPosition("219f6175-312b-4520-afce-a92c7fadc1ee", x, y, z)
+        end
+        local tx,ty,tz = FindValidPosition(x,y,z, 8.0, treasureChest)
+        ItemMoveToPosition(treasureChest, tx,ty,tz,16.0,20.0,"",0)
+        GenerateTreasure(treasureChest, treasure, CharacterGetLevel(host), host)
+        if identifyItems ~= 0 then
+            ContainerIdentifyAll(treasureChest)
+        end
+    end)
     Ext.RegisterConsoleCommand("reward", function(command, treasure, identifyItems)
         if treasure == nil then
             treasure = "ST_WeaponRare"
@@ -354,6 +371,22 @@ if Ext.IsDeveloperMode() then
             end
         end
     end)
+
+    local generateTreasureOriginal = GenerateTreasure
+    local generateTreasureHook = function(item, treasure, level, player)
+        Osi.LeaderLog_Log("DEBUG", "[GenerateTreasure] ",string.format("%s,%s,%i,%s",item, treasure, level, player))
+        generateTreasureOriginal(item, treasure, level, player)
+        --print("[GenerateTreasure] ",item, treasure, level, player)
+    end
+    GenerateTreasure = generateTreasureHook
+
+    local rewardOriginal = CharacterGiveReward
+    local rewardHook = function(player, treasure, identified)
+        Osi.LeaderLog_Log("DEBUG", "[CharacterGiveReward] ",string.format("%s,%s,%s",player,treasure,identified))
+        rewardOriginal(player, treasure, identified)
+        --print("[GenerateTreasure] ",item, treasure, level, player)
+    end
+    CharacterGiveReward = rewardHook
 end
 
 local debug_DeltaModBoostProperties = {
