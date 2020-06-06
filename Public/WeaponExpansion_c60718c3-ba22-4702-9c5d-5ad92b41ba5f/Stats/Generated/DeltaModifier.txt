@@ -25,6 +25,112 @@ param "ModifierType" "Weapon"
 new boost "_Boost_LLWEAPONEX_Weapon_Damage_Chaos_Large",1
 //END_REGION
 
+//REGION RIFLE
+new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Wits_Rifle"
+param "BoostType" "Primary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_LLWEAPONEX_Weapon_Primary_Wits",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Ability_Ranged_Rifle"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Ability_Ranged",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Ability_RangerLore_Rifle"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Ability_RangerLore",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Skill_SkyShot_Rifle"
+param "BoostType" "Legendary"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Skill_SkyShot_Crossbow",1
+
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Small_Rifle"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Small",1
+
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Normal_Rifle"
+param "BoostType" "BaseUncommon"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_ArmourPiercing",1
+
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Medium_Rifle"
+param "BoostType" "BaseRare"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Medium",1
+
+new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Large_Rifle"
+param "BoostType" "BaseEpic"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Large",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Air_Medium_Rifle"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_Air_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Earth_Medium_Rifle"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_Earth_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Poison_Medium_Rifle"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_Poison_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Fire_Medium_Rifle"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_Fire_Medium",1
+
+new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Water_Medium_Rifle"
+param "BoostType" "Normal"
+param "MinLevel" "1"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+param "WeaponType" "Rifle"
+new boost "_Boost_Weapon_Damage_Water_Medium",1
+//END_REGION
+
 //REGION ATTRIBUTE_BOOSTS
 new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Wits"
 param "BoostType" "ItemCombo"
@@ -44,36 +150,6 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_LLWEAPONEX_Weapon_Primary_Wits_Large",1
 //END_REGION
-
-new deltamod "Boost_Weapon_Damage_Air_Medium_Bow"
-param "BoostType" "ItemCombo"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Damage_Air_Medium",1
-
-new deltamod "Boost_Weapon_Damage_Earth_Medium_Bow"
-param "BoostType" "ItemCombo"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Damage_Earth_Medium",1
-
-new deltamod "Boost_Weapon_Damage_Poison_Medium_Bow"
-param "BoostType" "ItemCombo"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Damage_Poison_Medium",1
-
-new deltamod "Boost_Weapon_Damage_Fire_Medium_Bow"
-param "BoostType" "ItemCombo"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Damage_Fire_Medium",1
-
-new deltamod "Boost_Weapon_Damage_Water_Medium_Bow"
-param "BoostType" "ItemCombo"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_Damage_Water_Medium",1
 
 new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Small_Bow"
 param "BoostType" "Normal"
