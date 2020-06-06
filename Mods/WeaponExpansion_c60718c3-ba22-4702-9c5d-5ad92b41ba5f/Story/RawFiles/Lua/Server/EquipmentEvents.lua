@@ -75,11 +75,14 @@ function OnItemEquipped(uuid,item)
 end
 
 function OnItemUnEquipped(uuid,item)
-	local template = GetTemplate(item)
-	local isPlayer = IsPlayerQRY(uuid)
-	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(uuid,item,template)
-	Osi.LLWEAPONEX_Equipment_ClearItem(uuid,item,isPlayer)
-	Osi.LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(uuid,item)
+	if not StringHelpers.IsNullOrEmpty(item) then
+		local template = GetTemplate(item)
+		if not StringHelpers.IsNullOrEmpty(template) then
+			Osi.LLWEAPONEX_OnItemTemplateUnEquipped(uuid,item,template)
+			Osi.LLWEAPONEX_Equipment_ClearItem(uuid,item,IsPlayerQRY(uuid))
+			Osi.LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(uuid,item)
+		end
+	end
 end
 
 function OnItemTemplateUnEquipped(uuid, item, template)
