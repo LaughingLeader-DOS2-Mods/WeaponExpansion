@@ -16,7 +16,7 @@ THEN
 NRD_ModCall("WeaponExpansion", "SaveDeltamod", (STRING)_Item, _DeltaMod, (STRING)_IsGenerated);
 //END_REGION
 
-//REGION PARSE_GENERATED_ITEMS
+//REGION DELTAMOD_CHECK_EVENTS
 IF
 ItemTemplateOpening(_Template, _Item, _Character)
 AND
@@ -35,6 +35,28 @@ AND
 NRD_ModQuery1("WeaponExpansion", "CanParseCorpseTreasure", _UUID)
 THEN
 NRD_ModCall("WeaponExpansion", "CheckCharacterDeathTreasure", _UUID);
+
+IF
+ItemAddedToContainer(_Item, _Container)
+AND
+NRD_ItemGetGenerationParams(_Item, _BaseStat, _ItemType, _Level, _Seed) // Should fail if the item was not generated
+AND
+ObjectGetFlag(_Item, "LLWEAPONEX_ProcessedDeltamods", 0)
+AND
+GetUUID(_Item, _ItemUUID)
+THEN
+NRD_ModCall("WeaponExpansion", "SwapDeltamods", _ItemUUID, _BaseStat, _ItemType, (STRING)_Level, (STRING)_Seed);
+
+IF
+ItemAddedToCharacter(_Item, _Container)
+AND
+NRD_ItemGetGenerationParams(_Item, _BaseStat, _ItemType, _Level, _Seed)
+AND
+ObjectGetFlag(_Item, "LLWEAPONEX_ProcessedDeltamods", 0)
+AND
+GetUUID(_Item, _ItemUUID)
+THEN
+NRD_ModCall("WeaponExpansion", "SwapDeltamods", _ItemUUID, _BaseStat, _ItemType, (STRING)_Level, (STRING)_Seed);
 
 /*
 IF
