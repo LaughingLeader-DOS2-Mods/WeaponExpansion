@@ -250,6 +250,11 @@ function SwapDeltamods(item)
 					end
 				end
 
+				local isIdentified = NRD_ItemGetInt(item, "IsIdentified")
+				if isIdentified == nil then
+					isIdentified = 1
+				end
+
 				--print("SwapDeltamods", Ext.JsonStringify(itemEntry.DeltaMods))
 				local deltamods = itemEntry.DeltaMods
 				if deltamods ~= nil then
@@ -268,7 +273,7 @@ function SwapDeltamods(item)
 					NRD_ItemCloneSetInt("HasGeneratedStats", 0)
 					NRD_ItemCloneSetInt("GenerationLevel", level)
 					NRD_ItemCloneSetInt("StatsLevel", level)
-					NRD_ItemCloneSetInt("IsIdentified", 1)
+					NRD_ItemCloneSetInt("IsIdentified", isIdentified)
 					NRD_ItemCloneSetString("ItemType", rarity)
 					NRD_ItemCloneSetString("GenerationItemType", rarity)
 

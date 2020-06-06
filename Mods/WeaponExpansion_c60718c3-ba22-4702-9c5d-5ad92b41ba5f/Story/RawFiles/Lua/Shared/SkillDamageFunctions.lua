@@ -604,6 +604,7 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	print(GetAimedShotAverageDamage)
 	local skillProps = CreateSkillTable(skill.Name)
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
@@ -612,9 +613,10 @@ local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed,
 	local minDamageTexts = {}
 	local totalDamageTypes = 0
 	for i,damage in pairs(damageMin) do
-		local min = damage.Amount
+		local min = math.max(damage.Amount, 1)
 		if min ~= nil then
 			table.insert(minDamageTexts, GameHelpers.GetDamageText(damage.DamageType, min))
+			totalDamageTypes = totalDamageTypes + 1
 		end
 	end
 	if totalDamageTypes > 0 then
@@ -625,6 +627,7 @@ local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed,
 			output = minDamageTexts[1]
 		end
 		output = output .. " (10m)"
+		print(output)
 		return output
 	end
 end

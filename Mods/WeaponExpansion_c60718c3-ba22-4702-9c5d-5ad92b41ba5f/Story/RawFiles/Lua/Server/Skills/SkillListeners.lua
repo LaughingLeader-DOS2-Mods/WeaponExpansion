@@ -1,4 +1,5 @@
 SKILL_STATE = LeaderLib.SKILL_STATE
+
 local function AimedShotBonuses(char, state, funcParams)
 	if state == SKILL_STATE.PREPARE then
 		--ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", -1.0, 0, char)
@@ -32,7 +33,7 @@ local function Greatbow_PiercingShot_DragonBonus(char, state, funcParams)
 		end
 	end
 end
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", AimedShotBonuses)
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", Greatbow_PiercingShot_DragonBonus)
 
 -- local function CheckAimedShotBonus(funcParams)
 -- 	local char = funcParams[1]

@@ -195,6 +195,7 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 --- @param isFromItem boolean
 --- @param param string
 function SkillGetDescriptionParam(skill, character, isFromItem, param)
+	print(param)
 	local param_func = Skills.Damage.Params[param]
 	if param_func == nil and param == "Damage" then
 		param_func = Skills.Damage.Skills[skill.Name]

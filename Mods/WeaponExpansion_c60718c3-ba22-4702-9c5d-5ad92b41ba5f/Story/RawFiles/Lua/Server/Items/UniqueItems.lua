@@ -1,7 +1,7 @@
 local VENDING_MACHINE = "S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a"
 
 ---@type UniqueData
-local UniqueData = Ext.Require("Server/Items/UniqueData.lua")
+local UniqueData = Ext.Require("Server/Data/UniqueData.lua")
 
 Uniques = {
 	ArmCannon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8"),
@@ -18,11 +18,11 @@ Uniques = {
 	Wraithblade = UniqueData:Create("c68b5afa-2574-471d-85ac-0738ee0a6393"),
 	AnvilMace = UniqueData:Create("f3c71d85-1cc3-431f-b236-ad838bf2e418"),
 	WarchiefHalberd = UniqueData:Create("6c52f44e-1c27-4409-9bfe-f89ee5af4a0d"),
-	--WarchiefHalberd = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2"),
+	--WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2"),
 	Bible = UniqueData:Create("bcc43f30-b009-4b42-a4de-1c85a25b522a"),
 	OgreScroll = UniqueData:Create("cc4d26df-c8c4-458e-b88f-610387741533"),
 	Bokken = UniqueData:Create("6d75d449-e021-4b4d-ad2d-c0873127c3b3"),
-	--Bokken = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"),
+	--BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"),
 	Blunderbuss = UniqueData:Create("cd6c2b7d-ee74-401b-9866-409c45ae9413"),
 	Omnibolt = UniqueData:Create("dec81eed-fcab-48cc-bd67-0431abe4260c"),
 	BalrinAxe = UniqueData:Create("e4dc654c-db51-4b55-a342-83a864cfeff9"),
@@ -120,7 +120,7 @@ end
 
 LoadPersistentVars[#LoadPersistentVars+1] = function()
 	if PersistentVars.LinkedUniques ~= nil then
-		for id,entry in pairs(LoadPersistentVars.LinkedUniques) do
+		for id,entry in pairs(PersistentVars.LinkedUniques) do
 			if #entry >= 2 then
 				for i,v in pairs(entry) do
 					local item1,item2 = table.unpack(v)
@@ -162,26 +162,5 @@ function SwapUnique(char, id)
 			NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
 		end
 		Osi.LeaderLib_Timers_StartObjectObjectTimer(equipped, next, 50, "Timers_LLWEAPONEX_MoveMagicMissileWeapon", "LeaderLib_Commands_ItemToInventory")
-	end
-end
-
-local SkillSlots = {}
-
-function SaveSkillSlot(char, skill)
-	if SkillSlots[char] == nil then
-		SkillSlots[char] = {}
-	end
-	SkillSlots[char][skill] = NRD_SkillBarFindSkill(char, skill)
-end
-
-function RestoreSkillSlot(char, previousSkill, replacementSkill)
-	if SkillSlots[char] ~= nil then
-		local nextSlot = SkillSlots[char][previousSkill]
-		if nextSlot ~= nil then
-			local currentSlot = NRD_SkillBarFindSkill(char, replacementSkill)
-			NRD_SkillBarClear(char, currentSlot)
-			NRD_SkillBarSetSkill(char, nextSlot, replacementSkill)
-			SkillSlots[char][previousSkill] = nil
-		end
 	end
 end

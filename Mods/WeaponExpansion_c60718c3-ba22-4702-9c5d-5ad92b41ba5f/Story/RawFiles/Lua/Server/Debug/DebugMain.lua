@@ -124,6 +124,7 @@ function DebugInit()
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
 
     local host = CharacterGetHostCharacter()
+    CharacterAddAbility(host, "Luck", 20)
     GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
     GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
     if CharacterGetAttribute(host, "Strength") < 50 then
@@ -300,6 +301,9 @@ if Ext.IsDeveloperMode() then
     --!reward ST_LLWEAPONEX_TestDeltamodReplacement
     --!printdeltamods
     Ext.RegisterConsoleCommand("reward", function(command, treasure, identifyItems)
+        if treasure == nil then
+            treasure = "ST_WeaponRare"
+        end
         local host = CharacterGetHostCharacter()
         local identified = identifyItems ~= 0
         CharacterGiveReward(host, treasure, identified)
