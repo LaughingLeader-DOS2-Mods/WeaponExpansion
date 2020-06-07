@@ -49,11 +49,20 @@ DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", "Projectile_LLWEAPONEX_R
 
 //REGION UPDATING
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0,9,4,11)
+// Mimicry
+NRD_IsModLoaded(2f8d6338-5235-4237-9fa2-bc0411aec9c0, 1)
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", _)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:ModCompatibility] Updating settings from version [",_PastVersion,"] to [",_NewVersion,"]");
+LLWEAPONEX_ModCompatibility_InitMimicrySettings();
+
+PROC
+LeaderLib_Mods_OnVersionChanged(2f8d6338-5235-4237-9fa2-bc0411aec9c0, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+NOT DB_LLMIME_Mimicking_Blacklist_Skills("WeaponExpansion", _)
+THEN
 LLWEAPONEX_ModCompatibility_InitMimicrySettings();
 //END_REGION
 

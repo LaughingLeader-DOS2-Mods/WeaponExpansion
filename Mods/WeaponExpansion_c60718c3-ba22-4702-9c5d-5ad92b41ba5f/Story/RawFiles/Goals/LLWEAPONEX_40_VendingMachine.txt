@@ -105,55 +105,19 @@ LeaderLib_Requirements_Add_PartyLevelRequirement("LLWEAPONEX_LevelRequirement_Ti
 //END_REGION
 
 //REGION UPDATES
+/*
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,17,0)
-THEN
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Bible_B_d67c4ed3-4892-48e5-94fd-1cd966fe1f27");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_f393c9d6-d90c-483f-be94-b47e9419395d");
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_85e2e75e-4333-425e-adc4-94474c3fc201");
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,9,0)
-THEN
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee");
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,4,10)
-THEN
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "EQ_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_8995798f-f5b6-4e71-ae84-a29ed4ca51d7");
-
-//Hey, don't equip that!
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,4,7)
-AND
-GetItemForItemTemplateInInventory(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa", _Rapier)
-AND
-LLWEAPONEX_QRY_IsEquippedWeapon(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Rapier)
-THEN
-ItemToInventory(_Rapier, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a);
-
-//Raizan Update
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0,9,4,4)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 THEN
 LLWEAPONEX_VendingMachine_RegisterUniqueWeapons();
+*/
 
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
-DB_LeaderLib_StringExt_VersionIsLessThan(_PastVersion, 0, 9, 3, 3)
+DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime)
 THEN
-LeaderLib_Treasure_Register_UniqueItemTemplate("LLWEAPONEX.VendingMachine.Uniques", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");
+DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "");
 //END_REGION
 
 //REGION SAFETY_CHECK_START
@@ -491,15 +455,6 @@ LLWEAPONEX_VendingMachine_ResetSaleAttitude();
 DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "");
 ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_PlayedSaleEffect", 0);
 ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_SaleActive", 0);
-
-PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 32)
-AND
-DB_LLWEAPONEX_VendingMachine_SaleCooldown(-1, _CooldownTime)
-THEN
-DialogSetVariableString("LLWEAPONEX_VendingMachine_A", "LLWEAPONEX_VendingMachine_SaleStatus_b12f911c-7a98-4ff1-a35c-f2127335884f", "");
 //END_REGION
 
 //REGION SALES

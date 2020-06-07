@@ -64,6 +64,7 @@ DB_LLWEAPONEX_Greatbows_PrepareFX("LIZARD", 0, "Lightning", "LLWEAPONEX_FX_Proje
 //Omnibolt
 DB_LLWEAPONEX_Greatbows_TemplateToID("WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", "Lightning");
 
+SysClear("DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage", 3);
 DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(0.0, 1.2, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE1");
 DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(1.2, 2.4, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE2");
 DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(2.4, 3.6, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE3");
@@ -74,6 +75,7 @@ DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(7.2, 9.4, "LLWEAPONEX_GREATB
 DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(9.4, 11.5, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE8");
 DB_LLWEAPONEX_Greatbows_CushionForce_DistanceDamage(11.5, 999.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_DIST_DAMAGE9");
 
+SysClear("DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage", 3);
 DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(0.25, 2.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE1");
 DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(2.0, 3.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE2");
 DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(3.0, 4.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE3");
@@ -84,6 +86,7 @@ DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(12.0, 16.0, "LLWEAPONEX_GREATBOW
 DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(16.0, 19.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE8");
 DB_LLWEAPONEX_Greatbows_CushionForce_FallDamage(19.0, 999.0, "LLWEAPONEX_GREATBOW_CUSHIONFORCE_FALL_DAMAGE9");
 
+SysClear("DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance", 3);
 DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(0, -999.0, 5.0);
 DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(1, 5.0, 6.0);
 DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(2, 6.0, 7.0);
@@ -97,9 +100,7 @@ DB_LLWEAPONEX_Greatbows_CushionForce_ForceDistance(8, 12.0, 999.0);
 
 //REGION UPDATES
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 3, 33)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 THEN
 LLWEAPONEX_Greatbows_InitSettings();
 //END_REGION

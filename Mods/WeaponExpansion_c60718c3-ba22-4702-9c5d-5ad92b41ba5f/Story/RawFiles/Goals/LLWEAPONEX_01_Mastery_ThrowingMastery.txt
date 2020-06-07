@@ -15,7 +15,7 @@ DB_NOOP(1);
 //REGION UPDATES
 /*
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_PastVersion, (STRING)_NewVersion)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
 LeaderLib_StringExt_QRY_VersionIsLessThan(_PastVersion, 0, 9, 4, 10)
 THEN

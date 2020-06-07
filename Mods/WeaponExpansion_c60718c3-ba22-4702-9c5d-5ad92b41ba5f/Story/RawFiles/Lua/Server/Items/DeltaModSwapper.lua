@@ -311,7 +311,27 @@ function SwapDeltamods(item,baseStat,itemType,rarity,level,seed)
 					end
 				else
 					ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
-					RollForBonusSkill(item, stat, itemType, rarity)
+					if RollForBonusSkill(item, stat, itemType, rarity) then
+						NRD_ItemCloneBegin(item)
+						local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
+						if damageTypeString == nil then damageTypeString = "Physical" end
+						local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+						NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
+						local clone = NRD_ItemClone()
+						local inventory = GetInventoryOwner(item)
+						local slot = nil
+						if ObjectIsCharacter(inventory) == 1 then
+							slot = GameHelpers.GetEquippedSlot(inventory,item)
+						end
+						if inventory ~= nil then
+							if slot ~= nil then
+								GameHelpers.EquipInSlot(inventory, clone, slot)
+							else
+								ItemToInventory(clone, inventory, 1, 0, 0)
+							end
+						end
+						ItemRemove(item)
+					end
 				end
 			else
 				ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)

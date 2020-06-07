@@ -70,11 +70,10 @@ THEN
 DB_NOOP(1);
 
 //REGION UPDATING
+/*
 //Dual Shields eating items fix
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, (STRING)_NewVersion)
-AND
-LeaderLib_StringExt_QRY_VersionIsLessThan(_OldVersion, 0, 9, 17, 1)
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
 DB_IsPlayer(_Char)
 THEN
@@ -82,11 +81,12 @@ InventoryLaunchTagIterator(_Char, "LLWEAPONEX_DualShields", "", "LLWEAPONEX_Iter
 
 //Combat shield identify fix
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, "0.9.1.2")
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
 DB_IsPlayer(_Char)
 THEN
 InventoryLaunchTagIterator(_Char, "LLWEAPONEX_DualShields", "", "LLWEAPONEX_Iterators_FoundDualShield_Identify", "");
+*/
 
 IF
 StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_Iterators_FoundDualShield_Identify")

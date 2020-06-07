@@ -243,8 +243,9 @@ IsTagged(_Item, "LLWEAPONEX_KevinThePetRock", 0)
 THEN
 SetTag(_Item, "LLWEAPONEX_KevinThePetRock");
 
+/*
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, "0.9.0.2")
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
 CharacterGetHostCharacter(_Player)
 AND
@@ -255,13 +256,14 @@ THEN
 SetTag(_Item, "LLWEAPONEX_KevinThePetRock");
 
 PROC
-LeaderUpdater_ModUpdated("WeaponExpansion", "LaughingLeader", (STRING)_OldVersion, "0.9.0.2")
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
 GetItemForItemTemplateInInventory(CHARACTERGUID_S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, "THR_UNIQUE_LLWEAPONEX_Rock_Kevin_Normal_b3fc8995-8c7c-4de5-b465-e2573334cff7", _Item)
 AND
 IsTagged(_Item, "LLWEAPONEX_KevinThePetRock", 0)
 THEN
 SetTag(_Item, "LLWEAPONEX_KevinThePetRock");
+*/
 //END_REGION
 
 //REGION COMBAT_SHIELD_TOSS
