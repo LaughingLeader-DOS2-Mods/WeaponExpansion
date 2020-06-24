@@ -136,5 +136,5 @@ function RollForBonusSkill(item,stat,itemType,rarity)
 end
 
 return {
-	Init = LoadBonusSkills()
+	Init = LoadBonusSkills
 }
