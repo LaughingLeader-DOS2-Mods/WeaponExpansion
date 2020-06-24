@@ -45,7 +45,7 @@
                     <attribute id="NumPlayers" value="2" type="1" />
                     <attribute id="PhotoBooth" value="SYS_NPC_Portrait_A" type="22" />
                     <attribute id="StartupLevelName" value="" type="22" />
-                    <attribute id="Tags" value="" type="30" />
+                    <attribute id="Tags" value="Uniques;Skills;Items;Weapons;UI;Presets;Classes;Models" type="30" />
                     <attribute id="Type" value="Add-on" type="22" />
                     <attribute id="UUID" value="c60718c3-ba22-4702-9c5d-5ad92b41ba5f" type="22" />
                     <attribute id="Version" value="152567809" type="4" />
