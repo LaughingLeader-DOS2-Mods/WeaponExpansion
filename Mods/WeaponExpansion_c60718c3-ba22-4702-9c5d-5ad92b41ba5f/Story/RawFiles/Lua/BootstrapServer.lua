@@ -52,7 +52,8 @@ Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 ---@param hit HitRequest
 ---@param causeType string
 ---@param impactDirection number[]
-local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection)
+---@param context any
+local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection, context)
 	if hit.DamageType == "Magic" then
         hit.DamageList:ConvertDamageType("Water")
     elseif hit.DamageType == "Corrosive" then
@@ -61,6 +62,7 @@ local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impa
 end
 
 local function SessionSetup()
+    -- Enemy Upgrade Overhaul
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
@@ -70,6 +72,7 @@ local function SessionSetup()
 
     LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
 
+    -- Divinity Unleashed
     if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") then
         Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
 		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
