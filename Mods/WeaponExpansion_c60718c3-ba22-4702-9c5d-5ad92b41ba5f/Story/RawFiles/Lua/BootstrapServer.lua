@@ -86,8 +86,6 @@ local function SessionSetup()
     end
 
     itemBonusSkills.Init()
-
-    print("_Placeholder_Unarmed stat type test:",Ext.StatGetAttribute("_Placeholder_Unarmed", "type"))
 end
 Ext.RegisterListener("SessionLoaded", SessionSetup)
 

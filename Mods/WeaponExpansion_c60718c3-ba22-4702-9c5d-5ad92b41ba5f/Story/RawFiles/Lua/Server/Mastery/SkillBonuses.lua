@@ -295,7 +295,7 @@ local function WhirlwindBonus(skill, char, state, skillData)
 				local duration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns", 1) * 6.0
 				local weaponuuid = CharacterGetEquippedWeapon(char)
 				--local damageType = Ext.StatGetAttribute(NRD_ItemGetStatsId(weapon), "Damage Type")
-				local weapon = Ext.GetItem(weaponuuid).Stats
+				local weapon = Ext.GetItem(weaponuuid).Stats or nil
 				if weapon ~= nil then
 					local stats = weapon.DynamicStats
 					if stats ~= nil then
@@ -730,7 +730,7 @@ local function PinDownBonuses(skill, char, state, skillData)
 					end
 
 					if target ~= nil then
-						GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+						GameHelpers.ShootProjectile(char, target.UUID, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot", true)
 						shotBonus = true
 					else
 						local x,y,z = GetPosition(v)
@@ -762,7 +762,7 @@ local function PinDownBonuses(skill, char, state, skillData)
 					end
 
 					if target ~= nil then
-						GameHelpers.ShootProjectile(char, target, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
+						GameHelpers.ShootProjectile(char, target.UUID, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot", true)
 					else
 						x = x + forwardVector[1]
 						z = z + forwardVector[3]

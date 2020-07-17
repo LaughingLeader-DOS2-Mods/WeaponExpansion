@@ -229,7 +229,15 @@ end
 function SwapDeltamods(item,baseStat,itemType,rarity,level,seed)
 	if ObjectGetFlag(item, "LLWEAPONEX_ProcessedDeltamods") == 0 then
 		if baseStat == nil then
-			baseStat,itemType,rarity,level = NRD_ItemGetGenerationParams(item)
+			---@type EsvItem
+			local itemObject = Ext.GetItem(item)
+			---@type StatItem
+			local itemStatObject = itemObject.Stats
+			baseStat = itemStatObject.Name
+			itemType = itemObject.ItemType
+			rarity = itemStatObject.ItemTypeReal
+			level = itemStatObject.Level
+			--baseStat,itemType,rarity,level,seed = NRD_ItemGetGenerationParams(item)
 		end
 		local stat = NRD_ItemGetStatsId(item)
 		if StringHelpers.IsNullOrEmpty(rarity) then
@@ -290,7 +298,7 @@ function SwapDeltamods(item,baseStat,itemType,rarity,level,seed)
 						for deltamod,b in pairs(deltamods) do
 							if b == true then
 								ItemAddDeltaModifier(clone, deltamod)
-								PrintDebug("[WeaponExpansion:SwapDeltamods] Added deltamod", deltamod, "to item clone",clone)
+								LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltamods] Added deltamod", deltamod, "to item clone",clone)
 							end
 						end
 

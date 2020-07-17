@@ -85,7 +85,7 @@ function AddMasteryExperience(uuid,mastery,expGain)
 			if Ext.IsDeveloperMode() then
 				if currentExp == nil then currentExp = 0 end
 				if nextExp == nil then nextExp = 0 end
-				PrintDebug("Mastery XP:",uuid, mastery, currentExp, "=>", nextExp)
+				LeaderLib.PrintDebug("Mastery XP:",uuid, mastery, currentExp, "=>", nextExp)
 			end
 
 			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(uuid, mastery, nextLevel, nextExp)
@@ -138,11 +138,14 @@ end
 
 --- @param character string
 --- @param skill string
-function OnSkillCast(character,skill)
+--- @param skillType string
+--- @param skillElement string
+local function OnSkillCast(character, skill, skillType, skillElement)
 	if IsPlayer(character) and IsWeaponSkill(skill) then
 		AddMasteryExperienceForAllActive(character, 0.5)
 	end
 end
+Ext.RegisterOsirisListener("SkillCast", 4, "after", OnSkillCast)
 
 --- @param uuid string
 --- @param mastery string

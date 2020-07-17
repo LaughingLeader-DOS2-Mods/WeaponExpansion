@@ -27,60 +27,54 @@ local rangedWeaponTypes = {
 function OnItemEquipped(uuid,item)
 	--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	--local offhand = CharacterGetEquippedItem(uuid, "Shield")
-	local stat = NRD_ItemGetStatsId(item)
-	local statType = NRD_StatGetType(stat)
-
-	if IsTagged(item, "LLWEAPONEX_TaggedWeaponType") == 0 and statType == "Weapon" or statType == "Shield" then
-		TagWeapon(item, statType, stat)
-	end
-	
-	local isPlayer = IsPlayerQRY(uuid)
-	
-	if statType == "Weapon" and isPlayer == 1 then
-		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
-		local weapontype = Ext.StatGetAttribute(stat, "WeaponType")
-		if rangedWeaponTypes[weapontype] ~= true then
-			SetTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
-		else
-			ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
-			SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
-		end
-		local isUnarmed = Ext.StatGetAttribute(stat, "AnimType") == "Unarmed" or IsUnarmed(uuid)
-		if not isUnarmed then
-			Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(uuid, "LLWEAPONEX_Unarmed")
-		end
-	end
-	
-	for tag,data in pairs(Masteries) do
-		--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
-		if IsTagged(item,tag) == 1 then
-			if isPlayer == 1 then
-				local equippedTag = Tags.WeaponTypes[tag]
-				if equippedTag ~= nil then
-					LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
-					Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,tag,equippedTag,isPlayer)
-				end
-				Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, item, tag)
-				if IsTagged(uuid, tag) == 0 then
-					SetTag(uuid, tag)
-					LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
-				end
-			end
-			local template = GetTemplate(item)
-			Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,item,template)
-			Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,item,tag,isPlayer)
-			OnWeaponTypeEquipped(uuid, item, tag, stat, statType)
-		end
-	end
-end
-
-function OnItemUnEquipped(uuid,item)
 	if not StringHelpers.IsNullOrEmpty(item) then
-		local template = GetTemplate(item)
-		if not StringHelpers.IsNullOrEmpty(template) then
-			Osi.LLWEAPONEX_OnItemTemplateUnEquipped(uuid,item,template)
-			Osi.LLWEAPONEX_Equipment_ClearItem(uuid,item,IsPlayerQRY(uuid))
-			Osi.LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(uuid,item)
+		local stat = NRD_ItemGetStatsId(item)
+		if stat == nil then
+			return
+		end
+		local statType = NRD_StatGetType(stat)
+
+		if IsTagged(item, "LLWEAPONEX_TaggedWeaponType") == 0 and statType == "Weapon" or statType == "Shield" then
+			TagWeapon(item, statType, stat)
+		end
+		
+		local isPlayer = IsPlayerQRY(uuid)
+		
+		if statType == "Weapon" and isPlayer == 1 then
+			SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
+			local weapontype = Ext.StatGetAttribute(stat, "WeaponType")
+			if rangedWeaponTypes[weapontype] ~= true then
+				SetTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
+			else
+				ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
+				SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
+			end
+			local isUnarmed = Ext.StatGetAttribute(stat, "AnimType") == "Unarmed" or IsUnarmed(uuid)
+			if not isUnarmed then
+				Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(uuid, "LLWEAPONEX_Unarmed")
+			end
+		end
+		
+		for tag,data in pairs(Masteries) do
+			--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
+			if IsTagged(item,tag) == 1 then
+				if isPlayer == 1 then
+					local equippedTag = Tags.WeaponTypes[tag]
+					if equippedTag ~= nil then
+						LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
+						Osi.LLWEAPONEX_Equipment_TrackItem(uuid,item,tag,equippedTag,isPlayer)
+					end
+					Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, item, tag)
+					if IsTagged(uuid, tag) == 0 then
+						SetTag(uuid, tag)
+						LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
+					end
+				end
+				local template = GetTemplate(item)
+				Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,item,template)
+				Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,item,tag,isPlayer)
+				OnWeaponTypeEquipped(uuid, item, tag, stat, statType)
+			end
 		end
 	end
 end

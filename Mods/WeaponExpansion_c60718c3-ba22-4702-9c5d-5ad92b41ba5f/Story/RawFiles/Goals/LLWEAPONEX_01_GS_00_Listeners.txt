@@ -11,8 +11,14 @@ AND
 NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
 AND
 NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
+AND
+GetTemplate(_Item, _Template)
+AND
+CharacterIsPlayer(_Char, _IsPlayer)
 THEN
-NRD_ModCall("WeaponExpansion", "OnItemUnEquipped", (STRING)_Char, (STRING)_Item);
+LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
+LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
+LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(_Char, _Item);
 
 IF
 ItemEquipped(_Item, _Char)
@@ -61,35 +67,6 @@ GetTemplate(_Item, _Template)
 THEN
 NOT DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
 LLWEAPONEX_Equipment_Internal_CleanupEntry(_Char, _Item, _a, _b);
-//END_REGION
-
-//REGION MASTERY_XP_EVENTS
-IF
-NRD_OnPrepareHit(_Target, _Source, _Damage, _StatusHandle)
-THEN
-LLWEAPONEX_Ext_OnPrepareHit(_Target, _Source, _Damage, _StatusHandle);
-
-IF
-NRD_OnHit(_Target, _Source, _Damage, _StatusHandle)
-THEN
-LLWEAPONEX_Ext_OnHit(_Target, _Source, _Damage, _StatusHandle);
-
-IF
-SkillCast(_Char, _Skill, _, _)
-THEN
-NRD_ModCall("WeaponExpansion", "OnSkillCast", (STRING)_Char, _Skill);
-//END_REGION
-
-//REGION ATTACK_EVENTS
-IF
-CharacterStartAttackObject(_Target, _Owner, _Attacker)
-THEN
-NRD_ModCall("WeaponExpansion", "OnBasicAttackTarget", (STRING)_Attacker, (STRING)_Target);
-
-IF
-CharacterStartAttackPosition(_x, _y, _z, _Owner, _Attacker)
-THEN
-NRD_ModCall("WeaponExpansion", "OnBasicAttackPosition", (STRING)_Attacker, (STRING)_x, (STRING)_y, (STRING)_z);
 //END_REGION
 
 //REGION GENERIC_STATUS

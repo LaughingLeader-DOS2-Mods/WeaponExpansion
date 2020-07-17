@@ -227,10 +227,16 @@ end
 Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Character, [out](INTEGER)_IsPlayer")
 
 function OnGameStarted(region, editorMode, sendClientIds, postReset)
+    if region == nil then
+        region = GetRegion(CharacterGetHostCharacter())
+    end
     Vars.GAME_STARTED = true
     if IsGameLevel(region) == 1 or editorMode == "1" then
-        for i,entry in pairs(Osi.DB_IsPlayer:Get(nil)) do
-            SetIsUnarmed(entry[1])
+        local playersDB = Osi.DB_IsPlayer:Get(nil)
+        if playersDB ~= nil then
+            for i,entry in pairs(playersDB) do
+                SetIsUnarmed(entry[1])
+            end
         end
     end
 

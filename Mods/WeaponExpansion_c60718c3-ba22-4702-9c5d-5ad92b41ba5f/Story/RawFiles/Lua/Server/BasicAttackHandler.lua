@@ -15,19 +15,16 @@ local function GetBasicAttackTarget(attacker)
 	return nil
 end
 
-function OnBasicAttackTarget(attacker, target)
+local function OnBasicAttackTarget(target, owner, attacker)
 	if HasActiveStatus(attacker, "LLWEAPONEX_WAND_MAGIC_MISSILE") == 1 then
 		SaveBasicAttackTarget(attacker, target)
 		Osi.ProcObjectTimerCancel(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
 		Osi.ProcObjectTimer(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses", 580)
 	end
 end
+Ext.RegisterOsirisListener("CharacterStartAttackObject", 3, "after", OnBasicAttackTarget)
 
-function OnBasicAttackPosition(attacker, xs, ys, zs)
-	local x = tonumber(xs)
-	local y = tonumber(ys)
-	local z = tonumber(zs)
-
+local function OnBasicAttackPosition(x, y, z, owner, attacker)
 	if HasActiveStatus(attacker, "LLWEAPONEX_WAND_MAGIC_MISSILE") == 1 then
 		--local projectileTarget = GameHelpers.ExtendPositionWithForward(attacker, 1.25, x, y, z)
 		SaveBasicAttackTarget(attacker, {x,y,z})
@@ -35,6 +32,7 @@ function OnBasicAttackPosition(attacker, xs, ys, zs)
 		Osi.ProcObjectTimer(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses", 580)
 	end
 end
+Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAttackPosition)
 
 function MagicMissileWeapon_RollForBasicAttackBonuses(attacker)
 	local data = GetBasicAttackTarget(attacker)

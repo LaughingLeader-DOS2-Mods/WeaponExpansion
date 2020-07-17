@@ -1,7 +1,7 @@
 new entry "Projectile_LLWEAPONEX_ShootRod_Base"
 type "SkillData"
 data "SkillType" "Projectile"
-data "ForGameMaster" "Yes"
+data "ForGameMaster" "No"
 data "Ability" "None"
 data "Requirement" "MeleeWeapon"
 data "ActionPoints" "2"

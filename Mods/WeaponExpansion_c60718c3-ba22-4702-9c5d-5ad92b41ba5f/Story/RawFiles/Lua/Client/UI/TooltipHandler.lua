@@ -208,7 +208,7 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 	end
 end
 
-Game.Tooltip.EncodeTooltipElement = function(tt, spec, element)
+--[[ Game.Tooltip.EncodeTooltipElement = function(tt, spec, element)
 	for i,field in pairs(spec) do
 		local name = field[1]
 		local fieldType = field[2]
@@ -234,7 +234,7 @@ Game.Tooltip.EncodeTooltipElement = function(tt, spec, element)
 			table.insert(tt, val)
 		end
 	end
-end
+end ]]
 
 ---@type TranslatedString
 local TranslatedString = LeaderLib.Classes.TranslatedString
@@ -313,9 +313,9 @@ local function OnItemTooltip(item, tooltip)
 			local element = tooltip:GetElement("ItemDescription")
 			if element ~= nil then
 				if not StringHelpers.IsNullOrEmpty(element.Label) then
-					element.Label = element.Label .. "<br>" .. AutoLevelingDescription.Text
+					element.Label = element.Label .. "<br>" .. AutoLevelingDescription.Value
 				else
-					element.Label = AutoLevelingDescription.Text
+					element.Label = AutoLevelingDescription.Value
 				end
 			end
 		end

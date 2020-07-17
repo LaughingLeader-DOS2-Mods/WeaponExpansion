@@ -5,9 +5,7 @@ end
 local containerItems = {}
 
 function CanParseContainerTreasure(item)
-	return ItemIsContainer(item) == 1 
-		and ObjectGetFlag(item, "LLWEAPONEX_ParsedGeneratedItems") == 0
-		--and ItemIsInInventory(item) == 0
+	return ItemIsContainer(item) == 1 and ObjectGetFlag(item, "LLWEAPONEX_ParsedGeneratedItems") == 0
 end
 
 local function storeContainerItem(item, container)

@@ -96,7 +96,7 @@ local function OnPrepareHit(target,source,damage,handle)
 		end
 	end
 end
-Ext.NewCall(OnPrepareHit, "LLWEAPONEX_Ext_OnPrepareHit", "(GUIDSTRING)_Target, (GUIDSTRING)_Instigator, (INTEGER)_Damage, (INTEGER64)_Handle")
+LeaderLib.RegisterListener("OnPrepareHit", OnPrepareHit)
 
 local function WeaponIsTagged(char, weapon, tag)
 	if (weapon ~= nil and IsTagged(weapon, tag) == 1) then
@@ -147,4 +147,4 @@ local function OnHit(target,source,damage,handle)
 		end
 	end
 end
-Ext.NewCall(OnHit, "LLWEAPONEX_Ext_OnHit", "(GUIDSTRING)_Target, (GUIDSTRING)_Instigator, (INTEGER)_Damage, (INTEGER64)_StatusHandle")
+LeaderLib.RegisterListener("OnHit", OnHit)
