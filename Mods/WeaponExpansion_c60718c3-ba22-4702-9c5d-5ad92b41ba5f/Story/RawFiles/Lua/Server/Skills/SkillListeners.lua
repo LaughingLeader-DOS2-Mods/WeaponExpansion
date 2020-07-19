@@ -2,7 +2,7 @@ SKILL_STATE = LeaderLib.SKILL_STATE
 
 ---@param char string
 ---@param state SkillState
----@param data SkillEventData
+---@param data SkillEventData|HitData
 local function AimedShotBonuses(char, state, data)
 	if state == SKILL_STATE.PREPARE then
 		--ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", -1.0, 0, char)
@@ -27,14 +27,12 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedSh
 
 ---@param char string
 ---@param state SkillState
----@param data SkillEventData
+---@param data HitData
 local function Greatbow_PiercingShot_DragonBonus(char, state, data)
 	if state == SKILL_STATE.HIT then
-		data:ForEach(function(target)
-			if IsTagged(target, "DRAGON") == 1 then
-				ApplyStatus(target, "LLWEAPONEX_DRAGONS_BANE", 6.0, 0, char)
-			end
-		end)
+		if IsTagged(data.Target, "DRAGON") == 1 then
+			ApplyStatus(data.Target, "LLWEAPONEX_DRAGONS_BANE", 6.0, 0, char)
+		end
 	end
 end
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", Greatbow_PiercingShot_DragonBonus)
@@ -67,15 +65,11 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", G
 
 ---@param char string
 ---@param state SkillState
----@param data SkillEventData
+---@param data SkillEventData|HitData
 local function SkyShot(char, state, data)
 	if IsTagged(char, "LLWEAPONEX_Omnibolt_Equipped") == 1 then
 		if state == SKILL_STATE.HIT and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
-			if hasOmnibolt then
-				data:ForEach(function(target)
-					GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
-				end)
-			end
+			GameHelpers.ExplodeProjectile(char, data.Target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
 		elseif state == SKILL_STATE.USED then
 			if data.TotalTargetObjects > 0 then
 				ObjectClearFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
@@ -105,45 +99,40 @@ OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = ProcGreatbowL
 
 ---@param char string
 ---@param state SkillState
----@param data SkillEventData
+---@param data HitData
 LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(char, state, data)
 	if state == SKILL_STATE.HIT then
-		if data.TotalTargetObjects > 1 then
-			local treasure = {}
-			local level = CharacterGetLevel(char)
-			local targetOwner = char
-			for i,v in pairs(data.TargetObjects) do
-				targetOwner = v
-				local enemy = Ext.GetCharacter(v)
-				local enemyTreasure = enemy.Treasures
-				if enemyTreasure ~= nil then
-					table.insert(treasure, Common.GetRandomTableEntry(enemyTreasure))
-				end
-				if enemy.Stats.Level > level then
-					level = enemy.Stats.Level
-				end
-			end
-			if #treasure == 0 then
-				table.insert(treasure, "GenericEnemy")
-			end
-
-			local items = {}
-			--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
-			local x,y,z = GetPosition(char)
-			local container = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
-			for i,treasure in pairs(treasure) do
-				GenerateTreasure(container, treasure, level, char)
-			end
-			local treasureItems = Ext.GetItem(container):GetInventoryItems()
-			if #treasureItems > 0 then
-				local ranItem = Common.GetRandomTableEntry(treasureItems)
-				ItemSetOriginalOwner(ranItem, targetOwner) -- So it shows up as stolen
-				ItemToInventory(ranItem, char, ItemGetAmount(ranItem), 1, 0)
-			else
-				GenerateTreasure(container, "ST_LLWEAPONEX_JustGold", level, char)
-				MoveAllItemsTo(container, char, 0, 0, 0)
-			end
-			ItemRemove(container)
+		local treasure = {}
+		local level = CharacterGetLevel(char)
+		local targetOwner = data.Target
+		local enemy = Ext.GetCharacter(data.Target)
+		-- local enemyTreasure = enemy.Treasures
+		-- if enemyTreasure ~= nil then
+		-- 	table.insert(treasure, Common.GetRandomTableEntry(enemyTreasure))
+		-- end
+		if enemy.Stats.Level > level then
+			level = enemy.Stats.Level
 		end
+		if #treasure == 0 then
+			table.insert(treasure, "GenericEnemy")
+		end
+
+		local items = {}
+		--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
+		local x,y,z = GetPosition(char)
+		local container = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
+		for i,treasure in pairs(treasure) do
+			GenerateTreasure(container, treasure, level, char)
+		end
+		local treasureItems = Ext.GetItem(container):GetInventoryItems()
+		if #treasureItems > 0 then
+			local ranItem = Common.GetRandomTableEntry(treasureItems)
+			ItemSetOriginalOwner(ranItem, targetOwner) -- So it shows up as stolen
+			ItemToInventory(ranItem, char, ItemGetAmount(ranItem), 1, 0)
+		else
+			GenerateTreasure(container, "ST_LLWEAPONEX_JustGold", level, char)
+			MoveAllItemsTo(container, char, 0, 0, 0)
+		end
+		ItemRemove(container)
 	end
 end)
