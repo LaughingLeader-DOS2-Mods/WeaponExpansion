@@ -118,9 +118,6 @@ end
 
 Skills.Params["LLWEAPONEX_MasteryBonuses"] = GetMasteryBonuses
 
-local damageScaleWeaponText = TranslatedString:Create("ha4cfd852g52f1g4079g8919gd392ac8ade1a", "Damage is based on your basic attack and receives a bonus from [1].")
-local damageScaleLevelText = TranslatedString:Create("h71b09f9fg285fg4532gab16g1c7640864141", "Damage is based on your level and receives bonus from [1].")
-
 local skillAbility = {
 	Target_LLWEAPONEX_Pistol_Shoot = "RogueLore",
 	Target_LLWEAPONEX_Pistol_Shoot_Enemy = "RogueLore",
@@ -131,7 +128,7 @@ local skillAbility = {
 local function GetSkillAbility(skill, character, isFromItem, param)
 	local ability = skillAbility[skill.Name]
 	if ability ~= nil then
-		local text = string.gsub(damageScaleLevelText.Value, "%[1%]", GameHelpers.GetAbilityName(ability))
+		local text = string.gsub(Text.SkillScaling.LevelBased.Value, "%[1%]", GameHelpers.GetAbilityName(ability))
 		if text ~= nil then
 			return "<br><font color='#078FC8'>"..text.."</font>"
 		end
@@ -143,17 +140,56 @@ Skills.Params["LLWEAPONEX_ScalingStat"] = GetSkillAbility
 
 local function GetHighestAttribute(skill, character, isFromItem, param)
 	local att = Skills.GetHighestAttribute(character)
-	local text = string.gsub(damageScaleLevelText.Value, "%[1%]", att)
+	local text = string.gsub(Text.SkillScaling.LevelBased.Value, "%[1%]", att)
 	return "<br><font color='#078FC8'>"..text.."</font>"
 end
 
-Skills.Params["GetHighestAttribute"] = GetScaling
+Skills.Params["GetHighestAttribute"] = GetHighestAttribute
 
 --- @param skill StatEntrySkillData
 --- @param character StatCharacter
 --- @param isFromItem boolean
 --- @param param string
 local function GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
+	local weapon = GetUnarmedWeapon(character)
+	local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
+	if damageRange ~= nil then
+		local damageTexts = {}
+		local totalDamageTypes = 0
+		for damageType,damage in pairs(damageRange) do
+			local min = damage[1]
+			local max = damage[2]
+
+			if min == nil then min = 0 end
+			if max == nil then max = 0 end
+
+			if min > 0 and max > 0 then
+				if max == min then
+					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
+				else
+					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
+				end
+			end
+			totalDamageTypes = totalDamageTypes + 1
+		end
+		if totalDamageTypes > 0 then
+			if totalDamageTypes > 1 then
+				return LeaderLib.Common.StringJoin(", ", damageTexts)
+			else
+				return damageTexts[1]
+			end
+		end
+	end
+	return ""
+end
+
+Skills.Params["LLWEAPONEX_UnarmedBasicAttackDamage"] = GetUnarmedBasicAttackDamage
+
+--- @param skill StatEntrySkillData
+--- @param character StatCharacter
+--- @param isFromItem boolean
+--- @param param string
+local function GetStealDamage(skill, character, isFromItem, param)
 	local weapon = GetUnarmedWeapon(character)
 	local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
 	if damageRange ~= nil then
@@ -195,36 +231,36 @@ local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 --- @param isFromItem boolean
 --- @param param string
 function SkillGetDescriptionParam(skill, character, isFromItem, param)
-	local param_func = Skills.Damage.Params[param]
-	if param_func == nil and param == "Damage" then
-		param_func = Skills.Damage.Skills[skill.Name]
-	end
-	if param_func ~= nil then
-		local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
-		if status then
-			if txt ~= nil then
-				return txt
-			end
+	if param == "Damage" then
+		if skill.UseWeaponDamage == "Yes" and IsUnarmed(character) then
+			return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 		else
-			Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
-			return ""
-		end
-	end
-	param_func = Skills.Params[param]
-	if param_func ~= nil then
-		local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0)
-		if status then
-			if txt ~= nil then
-				return txt
+			local param_func = Skills.DamageParam[skill.Name]
+			if param_func ~= nil then
+				local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
+				if status then
+					if txt ~= nil then
+						return txt
+					end
+				else
+					Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
+					return ""
+				end
 			end
-		else
-			Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
-			return ""
 		end
-	end
-
-	if param == "Damage" and skill.UseWeaponDamage == "Yes" and IsUnarmed(character) then
-		return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
+	else
+		local param_func = Skills.Params[param]
+		if param_func ~= nil then
+			local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem, param)
+			if status then
+				if txt ~= nil then
+					return txt
+				end
+			else
+				Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
+				return ""
+			end
+		end
 	end
 end
 

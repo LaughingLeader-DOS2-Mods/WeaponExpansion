@@ -135,6 +135,7 @@ data "Unique" "1"
 data "ExtraProperties" "LLWEAPONEX_GREATBOW_LIGHTNINGSTRIKE,30,0"
 data "StrengthBoost" "1"
 data "Value" "829"
+data "Tags" "LLWEAPONEX_Omnibolt_Equipped"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa"
 type "Weapon"

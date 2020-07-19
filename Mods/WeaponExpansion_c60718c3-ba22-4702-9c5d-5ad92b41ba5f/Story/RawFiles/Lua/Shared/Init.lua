@@ -24,6 +24,12 @@ Vars = {
 	SEND_USER_ID = false
 }
 
+Skills = {
+	Params = {},
+	DamageParam = {},
+	DamageFunctions = {},
+}
+
 --- @type table<string,string>
 Tags = {}
 

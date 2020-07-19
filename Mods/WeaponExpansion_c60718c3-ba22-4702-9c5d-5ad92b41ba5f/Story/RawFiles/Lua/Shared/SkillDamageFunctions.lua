@@ -693,31 +693,25 @@ local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attack
 	end
 end
 
-Skills = {
-	GetHighestAttribute = GetHighestAttribute,
-	GetItem = GetItem,
-	GetRuneBoost = GetRuneBoost,
-	CreateSkillTable = CreateSkillTable,
-	CreateWeaponTable = CreateWeaponTable,
-	Params = {},
-	Damage = {
-		GetPistolDamage = GetPistolDamage,
-		GetHandCrossbowDamage = GetHandCrossbowDamage,
-		GetPistolSkillDamage = GetPistolSkillDamage,
-		GetHandCrossbowSkillDamage = GetHandCrossbowSkillDamage,
-		Params = {
-			LLWEAPONEX_PistolDamage = GetPistolSkillDamage,
-			LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowSkillDamage,
-			LLWEAPONEX_AimedShot_AverageDamage = GetAimedShotAverageDamage,
-			LLWEAPONEX_AimedShot_MaxDamage = GetAimedShotMaxDamage,
-		},
-		Skills = {
-			Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolSkillDamage,
-			Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage,
-			Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage,
-			Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage,
-			Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage,
-			Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
-		}
-	}
-}
+Skills.GetHighestAttribute = GetHighestAttribute
+Skills.GetItem = GetItem
+Skills.GetRuneBoost = GetRuneBoost
+Skills.CreateSkillTable = CreateSkillTable
+Skills.CreateWeaponTable = CreateWeaponTable
+
+Skills.Params.LLWEAPONEX_PistolDamage = GetPistolSkillDamage
+Skills.Params.LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowSkillDamage
+Skills.Params.LLWEAPONEX_AimedShot_AverageDamage = GetAimedShotAverageDamage
+Skills.Params.LLWEAPONEX_AimedShot_MaxDamage = GetAimedShotMaxDamage
+
+Skills.DamageParam.Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolSkillDamage
+Skills.DamageParam.Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage
+Skills.DamageParam.Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage
+Skills.DamageParam.Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
+Skills.DamageParam.Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage
+Skills.DamageParam.Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
+
+Skills.DamageFunctions.PistolDamage = GetPistolDamage
+Skills.DamageFunctions.HandCrossbowDamage = GetHandCrossbowDamage
+Skills.DamageFunctions.PistolSkillDamage = GetPistolSkillDamage
+Skills.DamageFunctions.HandCrossbowSkillDamage = GetHandCrossbowSkillDamage

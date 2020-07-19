@@ -55,7 +55,7 @@ add skill "Shout_Adrenaline"
 
 new skillset "Class_LLWEAPONEX_Pirate"
 add skill "MultiStrike_Vault"
-add skill "Target_CripplingBlow"
+add skill "Target_LLWEAPONEX_Steal"
 add skill "Shout_Adrenaline"
 
 new skillset "LLWEAPONEX_Goblins_Chaos_Grunt_A"

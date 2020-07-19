@@ -1,6 +1,9 @@
 SKILL_STATE = LeaderLib.SKILL_STATE
 
-local function AimedShotBonuses(char, state, funcParams)
+---@param char string
+---@param state SkillState
+---@param data SkillEventData
+local function AimedShotBonuses(char, state, data)
 	if state == SKILL_STATE.PREPARE then
 		--ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", -1.0, 0, char)
 		--Mods.LeaderLib.StartTimer("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
@@ -8,12 +11,11 @@ local function AimedShotBonuses(char, state, funcParams)
 		if HasActiveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY") == 0 then
 			ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, char)
 		end
-		if #funcParams == 1 then
-			local target = funcParams[1]
+		data:ForEach(function(target)
 			if HasActiveStatus(target, "MARKED") == 1 then
-				ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 12.0, 1, char);
+				ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 12.0, 1, char)
 			end
-		end
+		end)
 	elseif state == SKILL_STATE.CAST then
 		Osi.LeaderLib_Timers_StartObjectTimer(char, 1500, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
 	elseif state == SKILL_STATE.HIT then
@@ -23,20 +25,22 @@ local function AimedShotBonuses(char, state, funcParams)
 end
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedShotBonuses)
 
-local function Greatbow_PiercingShot_DragonBonus(char, state, funcParams)
+---@param char string
+---@param state SkillState
+---@param data SkillEventData
+local function Greatbow_PiercingShot_DragonBonus(char, state, data)
 	if state == SKILL_STATE.HIT then
-		if #funcParams == 1 then
-			local target = funcParams[1]
+		data:ForEach(function(target)
 			if IsTagged(target, "DRAGON") == 1 then
 				ApplyStatus(target, "LLWEAPONEX_DRAGONS_BANE", 6.0, 0, char)
 			end
-		end
+		end)
 	end
 end
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", Greatbow_PiercingShot_DragonBonus)
 
--- local function CheckAimedShotBonus(funcParams)
--- 	local char = funcParams[1]
+-- local function CheckAimedShotBonus(data)
+-- 	local char = data[1]
 -- 	if char ~= nil and HasActiveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY") == 1 then
 -- 		local removeStatus = false
 -- 		local action = NRD_CharacterGetCurrentAction(char)
@@ -61,39 +65,36 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", G
 
 -- OnTimerFinished["Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus"] = CheckAimedShotBonus
 
-local function SkyShot(char, state, funcParams)
-	if state == SKILL_STATE.HIT and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
-		local weapon = CharacterGetEquippedWeapon(char)
-		if weapon ~= nil and GetTemplate(weapon) == "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8" then
-			local target = funcParams[1]
-			if target ~= nil then
-				GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
+---@param char string
+---@param state SkillState
+---@param data SkillEventData
+local function SkyShot(char, state, data)
+	if IsTagged(char, "LLWEAPONEX_Omnibolt_Equipped") == 1 then
+		if state == SKILL_STATE.HIT and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
+			if hasOmnibolt then
+				data:ForEach(function(target)
+					GameHelpers.ExplodeProjectile(char, target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
+				end)
 			end
-		end
-	elseif state == SKILL_STATE.USED then
-		local weapon = CharacterGetEquippedWeapon(char)
-		if weapon ~= nil and GetTemplate(weapon) == "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8" then
-			-- Position
-			if #funcParams == 3 then
-				local x = funcParams[1]
-				local y = funcParams[2]
-				local z = funcParams[3]
-				SetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition", x,y,z)
-				ObjectSetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
-			elseif #funcParams == 1 then
+		elseif state == SKILL_STATE.USED then
+			if data.TotalTargetObjects > 0 then
 				ObjectClearFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
+			elseif data.TotalTargetPositions > 0 then
+				ObjectSetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
+				local x,y,z = table.unpack(data.TargetPositions[1])
+				SetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition", x, y, z)
 			end
+		elseif state == SKILL_STATE.CAST then
+			LeaderLib.StartTimer("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
 		end
-	elseif state == SKILL_STATE.CAST then
-		Mods.LeaderLib.StartTimer("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
 	end
 end
 
 LeaderLib.RegisterSkillListener("Projectile_SkyShot", SkyShot)
 LeaderLib.RegisterSkillListener("Projectile_EnemySkyShot", SkyShot)
 
-local function ProcGreatbowLightningStrike(funcParams)
-	local char = funcParams[1]
+local function ProcGreatbowLightningStrike(data)
+	local char = data[1]
 	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
 		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition")
 		GameHelpers.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", x,y,z)
@@ -101,3 +102,48 @@ local function ProcGreatbowLightningStrike(funcParams)
 end
 
 OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = ProcGreatbowLightningStrike
+
+---@param char string
+---@param state SkillState
+---@param data SkillEventData
+LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(char, state, data)
+	if state == SKILL_STATE.HIT then
+		if data.TotalTargetObjects > 1 then
+			local treasure = {}
+			local level = CharacterGetLevel(char)
+			local targetOwner = char
+			for i,v in pairs(data.TargetObjects) do
+				targetOwner = v
+				local enemy = Ext.GetCharacter(v)
+				local enemyTreasure = enemy.Treasures
+				if enemyTreasure ~= nil then
+					table.insert(treasure, Common.GetRandomTableEntry(enemyTreasure))
+				end
+				if enemy.Stats.Level > level then
+					level = enemy.Stats.Level
+				end
+			end
+			if #treasure == 0 then
+				table.insert(treasure, "GenericEnemy")
+			end
+
+			local items = {}
+			--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
+			local x,y,z = GetPosition(char)
+			local container = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
+			for i,treasure in pairs(treasure) do
+				GenerateTreasure(container, treasure, level, char)
+			end
+			local treasureItems = Ext.GetItem(container):GetInventoryItems()
+			if #treasureItems > 0 then
+				local ranItem = Common.GetRandomTableEntry(treasureItems)
+				ItemSetOriginalOwner(ranItem, targetOwner) -- So it shows up as stolen
+				ItemToInventory(ranItem, char, ItemGetAmount(ranItem), 1, 0)
+			else
+				GenerateTreasure(container, "ST_LLWEAPONEX_JustGold", level, char)
+				MoveAllItemsTo(container, char, 0, 0, 0)
+			end
+			ItemRemove(container)
+		end
+	end
+end)

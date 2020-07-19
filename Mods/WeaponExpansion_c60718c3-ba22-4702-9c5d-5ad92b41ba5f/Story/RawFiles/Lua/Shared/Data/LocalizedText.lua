@@ -1,5 +1,7 @@
+---@type TranslatedString
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
+---@type table<string, table<string,TranslatedString>>
 Text = {
 	RupteredWound = TranslatedString:Create("h325012b0g74d1g4e9bg859bg8b986e80561b", "<font color='#FF1155' size='16'>Ruptered Wound [1]</font>"),
 	RuneNames = {
@@ -166,6 +168,17 @@ Text = {
 		Pistol = TranslatedString:Create("h893512aag4f27g45fdg974fgb0e3300c8bd5", "<font color='#FFD900'>Scales With Scoundrel and Pistol Mastery</font>"),
 		HandCrossbow = TranslatedString:Create("hadb5f130g449cg4e04gaeacgd5dfa2ab10ef", "<font color='#FFD900'>Scales With Scoundrel and Hand Crossbow Mastery</font>"),
 		General = TranslatedString:Create("h565537edgdec5g4483g938fg296519760088", "Scales With [1]"),
+	},
+	SkillScaling = {
+		BasicAttack = TranslatedString:Create("ha4cfd852g52f1g4079g8919gd392ac8ade1a", "Damage is based on your basic attack and receives a bonus from [1]."),
+		LevelBased = TranslatedString:Create("h71b09f9fg285fg4532gab16g1c7640864141", "Damage is based on your level and receives bonus from [1]."),
+		PhysicalArmor = TranslatedString:Create("h1351a6d8g5dc2g4f9bgbda1gfee5cde2c85e", "Damage is based on your current Physical Armour."),
+		MagicArmor = TranslatedString:Create("hf1ff2734g96adg486fg800cgd9d0320b04c7", "Damage is based on your current Magic Armour."),
+		Shield = TranslatedString:Create("hc8bae163gccf2g4127g8e0dg68d172d2ecf6", "Damage is based on the Physical Armour of your shield."),
+		AttributeAndAbility = TranslatedString:Create("hb8f79e5bgd2c3g48d4g90e5g5de02f9129a8", "[1] and [2]"),
+	},
+	NewAbilitySchools = {
+		Pirate = TranslatedString:Create("hc64dff65g17ffg4b44gaf21g896521b144f2", "Piracy"),
 	},
 	Game = {
 		Attack = TranslatedString:Create("h60ca7387gcb64g4027g98a3g41679874f271","Attack"),

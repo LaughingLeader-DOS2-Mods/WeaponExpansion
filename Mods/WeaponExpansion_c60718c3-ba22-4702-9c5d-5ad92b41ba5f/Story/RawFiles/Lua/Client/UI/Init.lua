@@ -230,8 +230,14 @@ local function SetToggleButtonVisibility(isVisible, tween)
 	end
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function() SetToggleButtonVisibility(false) end)
-Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function() SetToggleButtonVisibility(true, true) end)
+Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(...)
+	print("LLWEAPONEX_OnCharacterCreationStarted")
+	SetToggleButtonVisibility(false, false) 
+end)
+Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(...)
+	print("LLWEAPONEX_OnCharacterCreationFinished")
+	SetToggleButtonVisibility(true, true) 
+end)
 
 ---@param ui UIObject
 ---@param call string

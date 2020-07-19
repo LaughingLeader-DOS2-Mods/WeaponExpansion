@@ -1513,3 +1513,7 @@ new subtable "1,1"
 object category "T_ST_LLWEAPONEX_QuarterstaffsNormal",1,0,0,0,0,1,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,1,0,0
+
+new treasuretable "ST_LLWEAPONEX_JustGold"
+new subtable "1,1"
+object category "Gold",1,0,0,0,0,1,0,0
