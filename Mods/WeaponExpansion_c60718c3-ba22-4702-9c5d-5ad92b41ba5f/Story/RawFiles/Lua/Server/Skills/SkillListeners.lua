@@ -166,9 +166,9 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 					end
 					ItemRemove(container)
 
-					GameHelpers.CombatLog(Text.CombatLog.StealSuccess:ReplacePlaceholders(name, chance-roll, itemName, enemy.DisplayName), 0)
+					GameHelpers.CombatLog(Text.CombatLog.StealSuccess:ReplacePlaceholders(name, itemName, enemy.DisplayName), 0)
 				else
-					GameHelpers.CombatLog(Text.CombatLog.StealFailed:ReplacePlaceholders(name, chance-roll, enemy.DisplayName), 0)
+					GameHelpers.CombatLog(Text.CombatLog.StealFailed:ReplacePlaceholders(name, enemy.DisplayName), 0)
 				end
 			else
 				GameHelpers.CombatLog(Text.CombatLog.StealLimitReached:ReplacePlaceholders(name, enemy.DisplayName), 0)

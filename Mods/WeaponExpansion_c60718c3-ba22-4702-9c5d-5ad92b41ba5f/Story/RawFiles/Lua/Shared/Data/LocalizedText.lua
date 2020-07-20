@@ -193,8 +193,8 @@ Text = {
 		SlotRing = TranslatedString:Create("h970199f8ge650g4fa3ga0deg5995696569b6","Ring"),
 	},
 	CombatLog = {
-		StealSuccess = TranslatedString:Create("h9f7d431dg1f6dg494dg89b8g4cb4b98994d4","<font color='#00FF00'>[1] rolled a [2] and stole </font><font color='#00FFAA'>[3]</font><font color='#00FF00'> from [4]!</font>"),
-		StealFailed = TranslatedString:Create("hade2f718gb41dg427cg81c8gff64a36ad95f","<font color='#FF0000'>[1] rolled a [2] and failed to steal anything from [3].</font>"),
+		StealSuccess = TranslatedString:Create("h9f7d431dg1f6dg494dg89b8g4cb4b98994d4","<font color='#00FF00'>[1] stole </font><font color='#00FFAA'>[2]</font><font color='#00FF00'> from [3]!</font>"),
+		StealFailed = TranslatedString:Create("hade2f718gb41dg427cg81c8gff64a36ad95f","<font color='#FF0000'>[1] failed to steal anything from [2].</font>"),
 		StealLimitReached = TranslatedString:Create("h62e44d39gae88g4785g9004g79e396516ee4","<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>"),
 	}
 }
