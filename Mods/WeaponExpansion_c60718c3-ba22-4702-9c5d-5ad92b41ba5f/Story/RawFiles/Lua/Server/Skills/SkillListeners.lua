@@ -1,5 +1,6 @@
 SKILL_STATE = LeaderLib.SKILL_STATE
 
+---@param skill string
 ---@param char string
 ---@param state SkillState
 ---@param data SkillEventData|HitData
@@ -25,6 +26,7 @@ local function AimedShotBonuses(skill, char, state, data)
 end
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedShotBonuses)
 
+---@param skill string
 ---@param char string
 ---@param state SkillState
 ---@param data HitData
@@ -63,6 +65,7 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", G
 
 -- OnTimerFinished["Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus"] = CheckAimedShotBonus
 
+---@param skill string
 ---@param char string
 ---@param state SkillState
 ---@param data SkillEventData|HitData
@@ -97,22 +100,22 @@ end
 
 OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = ProcGreatbowLightningStrike
 
+---@param skill string
 ---@param char string
 ---@param state SkillState
 ---@param data HitData
 LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, data)
-	print("Target_LLWEAPONEX_Steal", state)
 	if state == SKILL_STATE.HIT then
 		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Ext.IsDeveloperMode()
 		if canStealFrom then
-			local stolenSuccess = 0--GetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen") or 0
-
+			
 			local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
 			if IsTagged(char, "LLWEAPONEX_ThiefGloves_Equipped") == 1 then
 				local glovesBonusChance = Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0
 				chance = math.tointeger(chance + glovesBonusChance)
 			end
-
+			
+			local stolenSuccess = GetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen") or 0
 			if stolenSuccess > 0 then
 				local stealReduction = Ext.ExtraData["LLWEAPONEX_Steal_SuccessChanceReduction"] or 30.0
 				chance = math.tointeger(math.max(chance - (stolenSuccess * stealReduction), 0))
@@ -126,9 +129,6 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 				if roll <= chance then
 					stolenSuccess = stolenSuccess + 1
 					SetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen", stolenSuccess)
-					--SetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen", 0)
-
-					--LLWEAPONEX_Steal_SuccessChanceReduction
 
 					local treasure = {}
 					local level = CharacterGetLevel(char)
@@ -147,8 +147,8 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 					end
 		
 					local items = {}
-					--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
 					local x,y,z = GetPosition(char)
+					--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
 					local container = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
 					for i,treasure in pairs(treasure) do
 						GenerateTreasure(container, treasure, level, char)
