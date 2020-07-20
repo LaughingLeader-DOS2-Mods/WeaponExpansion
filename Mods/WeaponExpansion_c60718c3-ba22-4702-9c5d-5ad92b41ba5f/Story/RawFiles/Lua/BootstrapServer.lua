@@ -72,6 +72,8 @@ local function SessionSetup()
     Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
 
     LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
+    LeaderLib.EnableFeature("ExtraDataSkillParamReplacement")
+    LeaderLib.EnableFeature("TooltipGrammarHelper")
 
     -- Divinity Unleashed
     if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") then

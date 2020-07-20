@@ -1,19 +1,15 @@
 --- @param ability integer
-local function ScaledDamageFromPrimaryAttribute(ability)
+local function ScaledDamageFromPrimaryAbility(ability)
     local attributeMax = Ext.ExtraData.AttributeSoftCap - Ext.ExtraData.AttributeBaseValue
     local result = (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * (attributeMax/Ext.ExtraData.CombatAbilityCap))
-    print("ScaledDamageFromPrimaryAttribute",ability,result*100, Game.Math.ScaledDamageFromPrimaryAttribute(40)*100)
+    --print("ScaledDamageFromPrimaryAttribute",ability,result*100, Game.Math.ScaledDamageFromPrimaryAttribute(40)*100)
     return result
 end
 
 --- @param skill StatEntrySkillData
 --- @param attacker StatCharacter
 local function GetSkillAttributeDamageScale(skill, attacker, ability)
-    if attacker == nil or skill.UseWeaponDamage == "Yes" or skill.Ability == 0 then
-        return 1.0
-    else
-        return 1.0 + ScaledDamageFromAbility(ability)
-    end
+    return 1.0 + ScaledDamageFromPrimaryAbility(attacker[ability])
 end
 
 --- @param character StatCharacter
@@ -21,7 +17,7 @@ end
 local function ComputeWeaponRequirementScaledDamage(character, weapon, ability)
 	Ext.Print("Character ability: ", ability)
     if ability ~= nil then
-        return ScaledDamageFromPrimaryAttribute(character[ability]) * 100.0
+        return ScaledDamageFromPrimaryAbility(character[ability]) * 100.0
     else
         return 0
     end
@@ -39,7 +35,6 @@ local function ComputeWeaponCombatAbilityBoost(character, weapon)
         return 0
     end
 end
-
 
 -- from CDivinityStats_Character::CalculateWeaponDamageInner and CDivinityStats_Item::ComputeScaledDamage
 --- @param character StatCharacter
@@ -144,10 +139,10 @@ end
 --- @param character StatCharacter
 --- @param skill StatEntrySkillData
 --- @param ability string
-local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, ability)
+local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, ability, useWeaponDamageCalc)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
-    if skill.UseWeaponDamage == "Yes" then
+    if skill.UseWeaponDamage == "Yes" or useWeaponDamageCalc == true then
         local mainDamageRange = CalculateWeaponDamageRange(character, mainWeapon, ability)
 
         if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
@@ -205,7 +200,7 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, 
             attrDamageScale = 1.0
         end
 
-        local baseDamage = CalculateBaseDamage(skill.Damage, character, 0, level) * attrDamageScale * damageMultiplier
+        local baseDamage = Game.Math.CalculateBaseDamage(skill.Damage, character, 0, level) * attrDamageScale * damageMultiplier
         local damageRange = skill['Damage Range'] * baseDamage * 0.005
 
         local damageType = skill.DamageType

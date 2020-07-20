@@ -240,8 +240,6 @@ function OnGameStarted(region, editorMode, sendClientIds, postReset)
         end
     end
 
-    LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
-
     if Vars.SEND_USER_ID == true or sendClientIds ~= nil then
         Vars.SEND_USER_ID = false
         Osi.IterateUsers("LLWEAPONEX_SendClientID")

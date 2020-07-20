@@ -3,6 +3,10 @@ local LocalizedText = LeaderLib.LocalizedText
 ---@type TranslatedString
 local TranslatedString = LeaderLib.Classes.TranslatedString
 
+local TagDisplay = {
+	LLWEAPONEX_ThiefGloves_Equipped = true
+}
+
 ---@type tooltip TooltipData
 ---@type item EsvCharacter
 ---@type weaponTypeName string
@@ -116,6 +120,7 @@ local AutoLevelingDescription = TranslatedString:Create("hca27994egc60eg495dg814
 ---@param item EsvItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
+	--print(item.StatsId, Ext.JsonStringify(tooltip.Data))
 	if item ~= nil then
 		if item:HasTag("LLWEAPONEX_Pistol") then
 			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
@@ -173,6 +178,18 @@ local function OnItemTooltip(item, tooltip)
 				else
 					element.Label = AutoLevelingDescription.Value
 				end
+			end
+		end
+
+		for tag,b in pairs(TagDisplay) do
+			if item:HasTag(tag) or item.Stats.Tags:find(tag) then
+				local ref,handle = Ext.GetTranslatedStringFromKey(tag)
+				local text = Ext.GetTranslatedString(handle, ref)
+				local element = {
+					Type = "ExtraProperties",
+					Label = text
+				}
+				tooltip:AppendElement(element)
 			end
 		end
 	end

@@ -26,8 +26,13 @@ Vars = {
 
 Skills = {
 	Params = {},
-	DamageParam = {},
+	Damage = {},
 	DamageFunctions = {},
+}
+
+AttributeScaleTables = {
+	NoMemory = {"Strength", "Finesse", "Intelligence", "Wits", "Constitution"},
+	Default = {"Strength", "Finesse", "Intelligence"},
 }
 
 --- @type table<string,string>
@@ -57,11 +62,11 @@ local defaultExperienceAmounts = {
 
 local function LoadExperienceVariables()
 	local RankVariables = {}
-	local maxRank = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_MaxRank", 4)
+	local maxRank = math.tointeger(Ext.ExtraData["LLWEAPONEX_Mastery_MaxRank"] or 4.0)
 	local lastRankExpGain = 45
 	local lastRequiredNextLevelExperience = 1000
 	for i=0,maxRank+1,1 do
-		local rankGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_ExperienceGain"..tostring(i), nil)
+		local rankGain = Ext.ExtraData["LLWEAPONEX_Mastery_ExperienceGain"..tostring(i)] or nil
 		if rankGain == nil then
 			local defaultRankGain = defaultExperienceAmounts[i]
 			if defaultRankGain ~= nil then
@@ -70,7 +75,7 @@ local function LoadExperienceVariables()
 				rankGain = lastRankExpGain / 2
 			end
 		end
-		local requiredNextLevelExperience = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_RequiredExperience"..tostring(i), nil)
+		local requiredNextLevelExperience = Ext.ExtraData["LLWEAPONEX_Mastery_RequiredExperience"..tostring(i)] or nil
 		if requiredNextLevelExperience == nil then
 			local defaultRequiredNextLevelExperience = defaultExperienceAmounts[i]
 			if defaultRequiredNextLevelExperience ~= nil then

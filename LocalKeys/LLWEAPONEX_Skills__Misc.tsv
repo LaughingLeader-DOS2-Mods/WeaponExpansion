@@ -1,8 +1,8 @@
 Key	Content	Handle
-Cone_LLWEAPONEX_WaterSpout_Description	Channel a torrent of water through your hand, setting <font color='#4197e2'>Wet</font> on targets hit for 2 turns, and dousing burning surfaces.<br>If a <font color='#fe6e27'>Burning</font> <font color='#11d87a'>Ally</font> is <font color='#4197e2'>Doused</font>, <font color='#97fbff'>Mending</font> is applied for 1 turn.<br><font color='#97fbff' size='19'>Mending restores [1] and does not damage the Undead.</font><br><font color='#188EDE' size='19'>Allies hit are cleansed of Slowed and Enwebbed.</font>	h2720377cg5500g4f26gbc9bg17503ce83248
+Cone_LLWEAPONEX_WaterSpout_Description	Channel a torrent of water through your hand, setting <font color='#4197e2'>Wet</font> on targets hit for 2 turns, and dousing burning surfaces.<br>If a <font color='#fe6e27'>Burning</font> <font color='#11D87A'>Ally</font> is <font color='#4197e2'>Doused</font>, <font color='#97fbff'>Mending</font> is applied for 1 turn.<br><font color='#97fbff' size='19'>Mending restores [1] and does not damage the Undead.</font><br><font color='#188EDE' size='19'>Allies hit are cleansed of Slowed and Enwebbed.</font>	h2720377cg5500g4f26gbc9bg17503ce83248
 Cone_LLWEAPONEX_WaterSpout_DisplayName	Water Spout	he6003f05g236bg4f79ga8beg22d5b30ad4f1
 Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide	hab06cff9g8908g4bedga5eagec558d1afb06
-Projectile_LLWEAPONEX_ChaosBolt_Description	Shoot a bolt of pure void energy that deals <font color='#b823cb'>[1] Chaos Damage</font> and creates a corresponding surface.<br><font color='#DD00AA'>Each bolt has a [2] chance to fork to a new target, up to [3] times max.</font>	h9a4f3a3dgf031g43d4g83a9g79d09571e26c
+Projectile_LLWEAPONEX_ChaosBolt_Description	Shoot a bolt of pure void energy that deals <font color='#B823CB'>[1] Chaos Damage</font> and creates a corresponding surface.<br><font color='#DD00AA'>Each bolt has a [2] chance to fork to a new target, up to [3] times max.</font>	h9a4f3a3dgf031g43d4g83a9g79d09571e26c
 Projectile_LLWEAPONEX_ChaosBolt_DisplayName	Chaos Bolt	haf74627fg8e14g477bgb7a6g1aaae60b6bdc
 Rush_LLWEAPONEX_EnemyChaosCharge_DisplayName	Chaos Charge	hefdafec9g6297g47bbgaa9fge772e6b52ccf
 Rush_LLWEAPONEX_MagicBatteringRam_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Rush forward in a straight line, to a designated point, hitting all enemies in your path for [1] and setting Knockdown.	h3ea5b8a1gbe52g4f3agaeccg02751abaed0b
@@ -19,4 +19,4 @@ Target_LLWEAPONEX_BasicAttack_DisplayName	Basic Attack	hbdac34fdg43b6g4439g9947g
 Target_LLWEAPONEX_BasicAttack_Description	Attack with your currently equipped weapon, dealing [1].[2]	hcacb94cbg4737g4a52g8b07gc5af8628eff5
 Target_LLWEAPONEX_UnarmedBasicAttack_Description	Attack with your fists, dealing [1].[2]	h5d9eca79g2820g4058gba1bgee5b291c2515
 Target_LLWEAPONEX_Steal_DisplayName	Steal	h3c1cc3f6g61b3g45dfg9b9eg473e08e8b698
-Target_LLWEAPONEX_Steal_Description	Attack an enemy with a sneaky blow, dealing [1] with a [2]% chance to steal an item.	hd4aa6a1cg6195g4367g8c86g82a7b663daf2
+Target_LLWEAPONEX_Steal_Description	Attack an enemy with a sneaky blow, dealing [1] with a <font color='#11D87A'>[2]% chance to steal an item</font>.<br><font color='#FF5533'>Steal chance is dropped by [3]% per successful steal on the target.</font> 	hd4aa6a1cg6195g4367g8c86g82a7b663daf2

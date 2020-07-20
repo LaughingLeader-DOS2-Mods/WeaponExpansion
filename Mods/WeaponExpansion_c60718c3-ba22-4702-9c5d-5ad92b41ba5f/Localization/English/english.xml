@@ -545,6 +545,7 @@
 	<content contentuid="h3be6d074g49a8g46f4gb9c2gb667b45e4a9e">Runic Cannon</content>
 	<content contentuid="h3be90898g6b32g40f4g88c8gf3942133d944">Ashwood Branch</content>
 	<content contentuid="h3c0e91d5g36efg4a8cg93d6gc45f6bf374c7">Spellsponge</content>
+	<content contentuid="h3c1cc3f6g61b3g45dfg9b9eg473e08e8b698">Steal</content>
 	<content contentuid="h3c24295cg7c91g42dega708g63b3f524e4ab">A sharp greatbow arrow shimmering beneath a toxic green mist; best not to inhale as you release this venomous cloud.</content>
 	<content contentuid="h3c29ef66g8d40g452cgb5f0g346b54e6b03e">Barricade of the Ancient Empire</content>
 	<content contentuid="h3c339bd7g4097g407ag89d1g293eb36f7e49">Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost4]% extra base damage in total, making it comparable to the damage of a two-handed weapon.</content>
@@ -921,6 +922,7 @@
 	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756"></content>
 	<content contentuid="h67ff03dfgdf09g4d32g90e0gc95bb237d6e7">&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade Mastery V&lt;/font&gt;</content>
 	<content contentuid="h68318a8fgde5dg4055gabb8g3b0c8df8c202">Throw Breach Charge</content>
+	<content contentuid="h685b9c37g43d5g4a7cg8dacg9f5d4d104fcb">Increases Steal Skill Chance</content>
 	<content contentuid="h68735a40g362bg4d29gbe04g91441c93728e">Runic Leg Armor</content>
 	<content contentuid="h688b0700g55a2g46cdgb02cg6269d72d7dad">Close</content>
 	<content contentuid="h68abe298g93d2g46fdgbcb2gf4d116516d8b">Worn Estoc</content>
@@ -1437,6 +1439,7 @@
 	<content contentuid="ha1ba59b3g291dg4197ga676g5451dcd6d0ad">Character has temporary damage resistance.</content>
 	<content contentuid="ha1c630ffg42dbg4289g8d34g68de690fdde0">&lt;font color=&apos;#C7A758&apos;&gt;Kevin the Pet Rock&lt;/font&gt; (&lt;font color=&apos;#FF2244&apos;&gt;Nails&lt;/font&gt;)</content>
 	<content contentuid="ha1c8ab36g5d86g4c20ga8d6g9f784cbb50f4">Equalizer</content>
+	<content contentuid="ha1f212b4g9b29g46d2g8afegee51d7a60131">Thief&apos;s Gloves</content>
 	<content contentuid="ha1f92690g2af6g4515g9ad4gecd66178217e">Dragon Slayer</content>
 	<content contentuid="ha1fd7564g9a41g46c2g9840g876571c13de0">Ancient Dwarven Shields</content>
 	<content contentuid="ha20be5e6g580eg4b73gada6g997237924305">Highwayman&apos;s Quiver</content>
@@ -1635,6 +1638,7 @@
 	<content contentuid="hb876b972g396fg4e4dg82a9g4525b40d9089">&lt;font color=&apos;#C7A758&apos;&gt;Kevin the Pet Rock&lt;/font&gt;</content>
 	<content contentuid="hb8845258g02cag45f1g88a0gad1068ea170d">Kevin is Recharging</content>
 	<content contentuid="hb89a9234g3581g4ea9gbdd6g06c35cac20ab">&lt;font color=&apos;#C7A758&apos;&gt;Shoot Hand Crossbow&lt;/font&gt;</content>
+	<content contentuid="hb8f79e5bgd2c3g48d4g90e5g5de02f9129a8">[1] and [2]</content>
 	<content contentuid="hb9317ba0ga942g4611g857egeff78f33de06">Tar Charge</content>
 	<content contentuid="hb9766113gb6c6g4f55g882dgb4aca210f7ac">Gladiator&apos;s Estoc</content>
 	<content contentuid="hb98b5e57g62bbg4bb0g8973g69bf99d60252">&lt;font color=&apos;#c80030&apos;&gt;Sharpened Great Arrow&lt;/font&gt;</content>
@@ -1837,6 +1841,7 @@
 	<content contentuid="hd1b72f00g5ea9g4aabg9c95g3aab8513082b">Pistol Ammo</content>
 	<content contentuid="hd1babc39g64eag4b4ag9127g182678705d17">Throw a stone at an enemy for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.</content>
 	<content contentuid="hd1f5b5b8gbb67g4aa9ga1e5g46848566d29f">Earth Rune</content>
+	<content contentuid="hd1f993bag9dadg49cbga5edgb92880c38e46">Odachi</content>
 	<content contentuid="hd21a6fa4g7a9eg4cc0gb127g1ae07e801c4a">Novice</content>
 	<content contentuid="hd2364fb1g646bg47cagbd53g71411ba6a0ad">Rank 3</content>
 	<content contentuid="hd243200dg8324g483fg95b9g6a1f52922c7c">Throwing Sword? (Large)</content>
@@ -1860,6 +1865,7 @@
 	<content contentuid="hd4558384gf656g4e7bg96bfg4d2639fd45e6">Beginner</content>
 	<content contentuid="hd4676edeg5e3ag437eg952bg10d5f32e634e">Dusty Book</content>
 	<content contentuid="hd4864953g3439g4675g8315g48c09c293b71">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery III&lt;/font&gt;</content>
+	<content contentuid="hd4aa6a1cg6195g4367g8c86g82a7b663daf2">Attack an enemy with a sneaky blow, dealing [1] with a [2]% chance to steal an item.&lt;br&gt;&lt;font color=&apos;#FF5533&apos;&gt;Steal chance is dropped by [3]% per successful steal on the target.&lt;/font&gt; </content>
 	<content contentuid="hd4aede56g6547g43d7gaf29ge3588bd5d6f8">&lt;font color=&apos;#FEFFB3&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
 	<content contentuid="hd4ffb17bg123dg4776ga98bgcc138cee93af">Beginner</content>
 	<content contentuid="hd50ed08aga85fg4e60g827bg854c27381f59">Poison Arrow</content>

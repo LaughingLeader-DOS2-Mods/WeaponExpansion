@@ -604,7 +604,6 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	print(GetAimedShotAverageDamage)
 	local skillProps = CreateSkillTable(skill.Name)
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
@@ -627,7 +626,6 @@ local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed,
 			output = minDamageTexts[1]
 		end
 		output = output .. " (10m)"
-		print(output)
 		return output
 	end
 end
@@ -693,6 +691,54 @@ local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attack
 	end
 end
 
+--- @param ability string
+--- @param weaponStat string
+--- @param validAttributes string[]
+--- @param skill StatEntrySkillData
+--- @param attacker StatCharacter
+--- @param isFromItem boolean
+--- @param stealthed boolean
+--- @param attackerPos number[]
+--- @param targetPos number[]
+--- @param level integer
+--- @param noRandomization boolean
+--- @param isTooltip boolean
+local function ScaleByHighestAttributeAndAbility(ability, weaponStat, validAttributes, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+    if attacker ~= nil and level < 0 then
+        level = attacker.Level
+	end
+    if level == 0 then
+        level = skill.OverrideSkillLevel
+        if level == 0 then
+            level = skill.Level
+        end
+	end
+
+	local highestAttribute = GetHighestAttribute(attacker, validAttributes)
+	local weapon = CreateWeaponTable(weaponStat, attacker.Level, highestAttribute, "None")
+
+    local damageMultiplier = skill["Damage Multiplier"] * 0.01
+    local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
+	local skillDamageType = skill["DamageType"]
+
+	if isTooltip ~= true then
+		local damageList = Ext.NewDamageList()
+		local mainDmgs = Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, nil, noRandomization, "RogueLore")
+		mainDmgs:Multiply(damageMultipliers)
+		if skillDamageType ~= nil then
+			mainDmgs:ConvertDamageType(skillDamageType)
+		end
+		damageList:Merge(mainDmgs)
+		damageList:AggregateSameTypeDamages()
+		Ext.Print(skill.Name, "damageList:",Ext.JsonStringify(damageList:ToTable()))
+		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
+	else
+		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore", true)
+		Ext.Print(skill.Name, "mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
+        return mainDamageRange
+	end
+end
+
 Skills.GetHighestAttribute = GetHighestAttribute
 Skills.GetItem = GetItem
 Skills.GetRuneBoost = GetRuneBoost
@@ -704,12 +750,13 @@ Skills.Params.LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowSkillDamage
 Skills.Params.LLWEAPONEX_AimedShot_AverageDamage = GetAimedShotAverageDamage
 Skills.Params.LLWEAPONEX_AimedShot_MaxDamage = GetAimedShotMaxDamage
 
-Skills.DamageParam.Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolSkillDamage
-Skills.DamageParam.Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage
-Skills.DamageParam.Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage
-Skills.DamageParam.Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
-Skills.DamageParam.Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage
-Skills.DamageParam.Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage
+Skills.Damage.Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
+Skills.Damage.Target_LLWEAPONEX_Steal = function(...) return ScaleByHighestAttributeAndAbility("RogueLore", "_Daggers", AttributeScaleTables.NoMemory, ...) end
 
 Skills.DamageFunctions.PistolDamage = GetPistolDamage
 Skills.DamageFunctions.HandCrossbowDamage = GetHandCrossbowDamage

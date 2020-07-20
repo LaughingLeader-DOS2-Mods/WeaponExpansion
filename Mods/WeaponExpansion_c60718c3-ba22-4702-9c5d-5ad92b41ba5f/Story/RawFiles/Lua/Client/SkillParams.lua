@@ -189,40 +189,16 @@ Skills.Params["LLWEAPONEX_UnarmedBasicAttackDamage"] = GetUnarmedBasicAttackDama
 --- @param character StatCharacter
 --- @param isFromItem boolean
 --- @param param string
-local function GetStealDamage(skill, character, isFromItem, param)
-	local weapon = GetUnarmedWeapon(character)
-	local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
-	if damageRange ~= nil then
-		local damageTexts = {}
-		local totalDamageTypes = 0
-		for damageType,damage in pairs(damageRange) do
-			local min = damage[1]
-			local max = damage[2]
-
-			if min == nil then min = 0 end
-			if max == nil then max = 0 end
-
-			if min > 0 and max > 0 then
-				if max == min then
-					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
-				else
-					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
-				end
-			end
-			totalDamageTypes = totalDamageTypes + 1
-		end
-		if totalDamageTypes > 0 then
-			if totalDamageTypes > 1 then
-				return LeaderLib.Common.StringJoin(", ", damageTexts)
-			else
-				return damageTexts[1]
-			end
-		end
+local function GetStealChance(skill, character, isFromItem, param)
+	local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
+	if character.Character:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
+		local glovesBonusChance = Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0
+		chance = chance + glovesBonusChance
 	end
-	return ""
+	return string.format("%i", chance)
 end
 
-Skills.Params["LLWEAPONEX_UnarmedBasicAttackDamage"] = GetUnarmedBasicAttackDamage
+Skills.Params["LLWEAPONEX_StealChance"] = GetStealChance
 
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
@@ -235,15 +211,38 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 		if skill.UseWeaponDamage == "Yes" and IsUnarmed(character) then
 			return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 		else
-			local param_func = Skills.DamageParam[skill.Name]
+			local param_func = Skills.Damage[skill.Name]
 			if param_func ~= nil then
-				local status,txt = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
+				local status,damageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
 				if status then
-					if txt ~= nil then
-						return txt
+					if damageRange ~= nil then
+						local damageTexts = {}
+						local totalDamageTypes = 0
+						for damageType,damage in pairs(damageRange) do
+							local min = damage[1]
+							local max = damage[2]
+							if min == nil then min = 0 end
+							if max == nil then max = 0 end
+				
+							if min > 0 and max > 0 then
+								if max == min then
+									table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
+								else
+									table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
+								end
+							end
+							totalDamageTypes = totalDamageTypes + 1
+						end
+						if totalDamageTypes > 0 then
+							if totalDamageTypes > 1 then
+								return LeaderLib.Common.StringJoin(", ", damageTexts)
+							else
+								return damageTexts[1]
+							end
+						end
 					end
 				else
-					Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
+					Ext.PrintError("Error getting param ("..param..") for skill:\n",damageRange)
 					return ""
 				end
 			end
