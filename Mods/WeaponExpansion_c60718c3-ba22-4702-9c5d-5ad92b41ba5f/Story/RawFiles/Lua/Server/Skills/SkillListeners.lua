@@ -105,57 +105,73 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 	if state == SKILL_STATE.HIT then
 		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Ext.IsDeveloperMode()
 		if canStealFrom then
-			local stolenSuccess = GetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen") or 0
+			local stolenSuccess = 0--GetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen") or 0
 
 			local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
 			if IsTagged(char, "LLWEAPONEX_ThiefGloves_Equipped") == 1 then
 				local glovesBonusChance = Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0
-				chance = chance + glovesBonusChance
+				chance = math.tointeger(chance + glovesBonusChance)
 			end
 
 			if stolenSuccess > 0 then
 				local stealReduction = Ext.ExtraData["LLWEAPONEX_Steal_SuccessChanceReduction"] or 30.0
-				chance = math.max(chance - (stolenSuccess * stealReduction), 0)
+				chance = math.tointeger(math.max(chance - (stolenSuccess * stealReduction), 0))
 			end
 
-			if chance > 0 and Ext.Random(0,100) <= chance then
-				stolenSuccess = stolenSuccess + 1
-				SetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen", stolenSuccess)
+			local enemy = Ext.GetCharacter(data.Target)
+			local name = Ext.GetCharacter(char).DisplayName
+			
+			if chance > 0 then
+				local roll = Ext.Random(0,100)
+				if roll <= chance then
+					stolenSuccess = stolenSuccess + 1
+					SetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen", stolenSuccess)
+					--SetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen", 0)
 
-				--LLWEAPONEX_Steal_SuccessChanceReduction
+					--LLWEAPONEX_Steal_SuccessChanceReduction
 
-				local treasure = {}
-				local level = CharacterGetLevel(char)
-				local targetOwner = data.Target
-				local enemy = Ext.GetCharacter(data.Target)
-				-- local enemyTreasure = enemy.Treasures
-				-- if enemyTreasure ~= nil then
-				-- 	table.insert(treasure, Common.GetRandomTableEntry(enemyTreasure))
-				-- end
-				if enemy.Stats.Level > level then
-					level = enemy.Stats.Level
-				end
-				if #treasure == 0 then
-					table.insert(treasure, "GenericEnemy")
-				end
-	
-				local items = {}
-				--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
-				local x,y,z = GetPosition(char)
-				local container = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
-				for i,treasure in pairs(treasure) do
-					GenerateTreasure(container, treasure, level, char)
-				end
-				local treasureItems = Ext.GetItem(container):GetInventoryItems()
-				if #treasureItems > 0 then
-					local ranItem = Common.GetRandomTableEntry(treasureItems)
-					ItemSetOriginalOwner(ranItem, targetOwner) -- So it shows up as stolen
-					ItemToInventory(ranItem, char, ItemGetAmount(ranItem), 1, 0)
+					local treasure = {}
+					local level = CharacterGetLevel(char)
+					local targetOwner = data.Target
+					local itemName = ""
+
+					-- local enemyTreasure = enemy.Treasures
+					-- if enemyTreasure ~= nil then
+					-- 	table.insert(treasure, Common.GetRandomTableEntry(enemyTreasure))
+					-- end
+					if enemy.Stats.Level > level then
+						level = enemy.Stats.Level
+					end
+					if #treasure == 0 then
+						table.insert(treasure, "GenericEnemy")
+					end
+		
+					local items = {}
+					--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
+					local x,y,z = GetPosition(char)
+					local container = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
+					for i,treasure in pairs(treasure) do
+						GenerateTreasure(container, treasure, level, char)
+					end
+					local treasureItems = Ext.GetItem(container):GetInventoryItems()
+					if #treasureItems > 0 then
+						local ranItem = Common.GetRandomTableEntry(treasureItems)
+						itemName = Ext.GetItem(ranItem).DisplayName or "an item"
+						ItemSetOriginalOwner(ranItem, targetOwner) -- So it shows up as stolen
+						ItemToInventory(ranItem, char, ItemGetAmount(ranItem), 1, 0)
+					else
+						itemName = Ext.GetTranslatedString("h55e5ec72g331dg4dc9g9532g4a68ba0bc2a3", "Gold")
+						GenerateTreasure(container, "ST_LLWEAPONEX_JustGold", level, char)
+						MoveAllItemsTo(container, char, 0, 0, 0)
+					end
+					ItemRemove(container)
+
+					GameHelpers.CombatLog(Text.CombatLog.StealSuccess:ReplacePlaceholders(name, chance-roll, itemName, enemy.DisplayName), 0)
 				else
-					GenerateTreasure(container, "ST_LLWEAPONEX_JustGold", level, char)
-					MoveAllItemsTo(container, char, 0, 0, 0)
+					GameHelpers.CombatLog(Text.CombatLog.StealFailed:ReplacePlaceholders(name, chance-roll, enemy.DisplayName), 0)
 				end
-				ItemRemove(container)
+			else
+				GameHelpers.CombatLog(Text.CombatLog.StealLimitReached:ReplacePlaceholders(name, enemy.DisplayName), 0)
 			end
 		end
 	end
