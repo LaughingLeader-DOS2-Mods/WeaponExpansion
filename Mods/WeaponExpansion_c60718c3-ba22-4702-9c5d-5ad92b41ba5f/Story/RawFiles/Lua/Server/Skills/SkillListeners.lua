@@ -100,6 +100,9 @@ end
 
 OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = ProcGreatbowLightningStrike
 
+-- Placeholder until we can check a character's Treasures array
+local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
+
 ---@param skill string
 ---@param char string
 ---@param state SkillState
@@ -130,7 +133,7 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 					stolenSuccess = stolenSuccess + 1
 					SetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen", stolenSuccess)
 
-					local treasure = {}
+					local treasure = STEAL_DEFAULT_TREASURE
 					local level = CharacterGetLevel(char)
 					local targetOwner = data.Target
 					local itemName = ""
@@ -142,17 +145,18 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 					if enemy.Stats.Level > level then
 						level = enemy.Stats.Level
 					end
-					if #treasure == 0 then
-						table.insert(treasure, "GenericEnemy")
-					end
+					-- if #treasure == 0 then
+					-- 	table.insert(treasure, STEAL_DEFAULT_TREASURE)
+					-- end
 		
 					local items = {}
 					local x,y,z = GetPosition(char)
 					--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
 					local container = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
-					for i,treasure in pairs(treasure) do
-						GenerateTreasure(container, treasure, level, char)
-					end
+					-- for i,treasure in pairs(treasure) do
+					-- 	GenerateTreasure(container, treasure, level, char)
+					-- end
+					GenerateTreasure(container, treasure, level, char)
 					local treasureItems = Ext.GetItem(container):GetInventoryItems()
 					if #treasureItems > 0 then
 						local ranItem = Common.GetRandomTableEntry(treasureItems)

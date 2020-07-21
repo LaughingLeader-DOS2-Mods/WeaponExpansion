@@ -1517,3 +1517,14 @@ object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,1,0,0
 new treasuretable "ST_LLWEAPONEX_JustGold"
 new subtable "1,1"
 object category "Gold",1,0,0,0,0,1,0,0
+
+new treasuretable "ST_LLWEAPONEX_RandomEnemyTreasure"
+new subtable "1,1"
+object category "T_GenericEnemy",10,0,0,0,0,0,0,0
+object category "T_FTJ_GenericNpc",10,0,0,0,0,0,0,0
+object category "T_MegaBoss",1,0,0,0,0,0,0,0
+object category "T_MiniBoss",2,0,0,0,0,0,0,0
+object category "T_TinyBoss",2,0,0,0,0,0,0,0
+object category "T_RewardCombat",6,0,0,0,0,0,0,0
+object category "T_RewardSmall",6,0,0,0,0,0,0,0
+object category "T_RewardBig",3,0,0,0,0,0,0,0

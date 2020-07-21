@@ -4,15 +4,17 @@ local UniqueData = {
 	LevelData = {},
 	Owner = nil,
 	DefaultOwner = nil,
-	CurrentLevel = nil
+	CurrentLevel = nil,
+	AutoEquipOnOwner = false
 }
 UniqueData.__index = UniqueData
 
 ---@param uuid string
 ---@param leveldata table<string,number[]>
----@param defaultNPCOwner string An NPC that should wield the unique until a player takes it.
+---@param defaultNPCOwner string An NPC that should have the unique until a player takes it.
+---@param autoEquip boolean Whether to automatically equip the unique on the default owner.
 ---@return UniqueData
-function UniqueData:Create(uuid, leveldata, defaultNPCOwner)
+function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip)
 	if leveldata == nil then
 		leveldata = {}
 	end
@@ -21,14 +23,18 @@ function UniqueData:Create(uuid, leveldata, defaultNPCOwner)
 		UUID = uuid,
 		LevelData = leveldata,
 		Owner = nil,
-		DefaultOwner = defaultNPCOwner
+		DefaultOwner = defaultNPCOwner,
+		AutoEquipOnOwner = false
 	}
 	setmetatable(this, self)
+	if autoEquip ~= nil then
+		this.AutoEquipOnOwner = autoEquip
+	end
     return this
 end
 
 function UniqueData:OnLevelChange(region)
-	if GetRegion(self.UUID) ~= region then
+	if ObjectExists(self.UUID) == 1 and GetRegion(self.UUID) ~= region then
 		if self.Owner == nil then
 			if self.DefaultOwner ~= nil and 
 				ObjectExists(self.DefaultOwner) == 1 and 
@@ -43,7 +49,9 @@ function UniqueData:OnLevelChange(region)
 				-- end
 				--local currentWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Weapon")
 				--local currentOffhandWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Shield")
-				CharacterEquipItem(self.DefaultOwner, self.UUID)
+				if self.AutoEquipOnOwner then
+					CharacterEquipItem(self.DefaultOwner, self.UUID)
+				end
 			else
 				local targetPosition = self.LevelData[region]
 				if targetPosition ~= nil then

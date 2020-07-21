@@ -6,6 +6,10 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 	isInCharacterCreation = IsCharacterCreationLevel(region) == 1
 	if isInCharacterCreation then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
+	else
+		for id,unique in pairs (Uniques) do
+			unique:OnLevelChange(region)
+		end
 	end
 end)
 

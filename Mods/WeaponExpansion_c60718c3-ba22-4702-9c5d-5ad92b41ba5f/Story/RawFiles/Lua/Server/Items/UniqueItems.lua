@@ -3,6 +3,7 @@ local VENDING_MACHINE = "S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4
 ---@type UniqueData
 local UniqueData = Ext.Require("Server/Data/UniqueData.lua")
 
+---@type table<string, UniqueData>
 Uniques = {
 	ArmCannon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8"),
 	Muramasa = UniqueData:Create("52c0b4a4-3906-4229-93a9-b83aea9e657c"),
@@ -80,13 +81,19 @@ AllUniques = {
 
 local LinkedUniques = {
 	["MagicMissileWand"] = {
-		{"S_WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_f8958c1e-1c9d-4fa9-b03f-b883c65f95c3", "S_WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_292b4b04-4ba1-4fa3-96df-19eab320c50f"}
+		--S_WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_f8958c1e-1c9d-4fa9-b03f-b883c65f95c3
+		--S_WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_292b4b04-4ba1-4fa3-96df-19eab320c50f
+		{"f8958c1e-1c9d-4fa9-b03f-b883c65f95c3", "292b4b04-4ba1-4fa3-96df-19eab320c50f"}
 	},
 	["Bokken"] = {
-		{"S_WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_6d75d449-e021-4b4d-ad2d-c0873127c3b3",  "S_WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"}
+		--S_WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_6d75d449-e021-4b4d-ad2d-c0873127c3b3
+		--S_WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42
+		{"6d75d449-e021-4b4d-ad2d-c0873127c3b3", "a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"}
 	},
 	["Warchief"] = {
-		{"S_WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_6c52f44e-1c27-4409-9bfe-f89ee5af4a0d",  "S_WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_001_056c2c38-b7be-4e06-be41-99b79ffe83c2"}
+		--S_WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_6c52f44e-1c27-4409-9bfe-f89ee5af4a0d
+		--S_WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_056c2c38-b7be-4e06-be41-99b79ffe83c2
+		{"6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", "056c2c38-b7be-4e06-be41-99b79ffe83c2"}
 	}
 }
 
