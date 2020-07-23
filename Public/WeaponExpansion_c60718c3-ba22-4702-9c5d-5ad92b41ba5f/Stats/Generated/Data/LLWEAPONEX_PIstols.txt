@@ -59,7 +59,7 @@ new entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
 type "Armor"
 using "_LLWEAPONEX_Pistols"
 data "Act part" "1"
-data "ItemGroup" "ARM_LLWEAPONEX_Pistol_A_Crafted"
+data "ItemGroup" "ARM_FX_LLWEAPONEX_Pistol_A"
 data "Value" "0"
 data "Skills" ""
 
