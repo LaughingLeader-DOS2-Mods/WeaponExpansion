@@ -856,7 +856,7 @@
 	<content contentuid="h600758d8g966ag4715g944eg443503a394cc"></content>
 	<content contentuid="h600e653cg58bfg43b6gb546g116aef9ba9c9">Soul Harvest V</content>
 	<content contentuid="h605190aagd9c2g414cg93eeg7e595ddcb696">Thunderbolt Strike</content>
-	<content contentuid="h6061f14dgad52g4b0dg8933g7cd1337a8da0">Gain Protection from a Demon</content>
+	<content contentuid="h6061f14dgad52g4b0dg8933g7cd1337a8da0">Demonic Protection</content>
 	<content contentuid="h609008a2g3cb7g4670g93b7g7714013ddf12">A special pet rock. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
 	<content contentuid="h60d52c22g5db0g49a1g8b66g39b5c8b100b2">A bag of prototype &lt;font color=&apos;#C0C0C0&apos;&gt;Silver&lt;/font&gt; bullets.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;&lt;font color=&apos;#12FDDF&apos;&gt;Monsters such as Werebeasts, Demons, and the Undead are rumored to be suspectible to silver.&lt;/font&gt;</content>
 	<content contentuid="h60dabe53g4502g476ega6f5gc1a79fea2c5a">An inert Runeblade imbued with no specific element. Can crafted to give the blade magic once more.</content>
@@ -1116,7 +1116,6 @@
 	<content contentuid="h7c6c4185gff98g433ag864eg111954e77510">&lt;font color=&apos;#8B0000&apos;&gt;Katana Mastery&lt;/font&gt;&lt;br&gt;Striking enemies with your blade applies Blademaster&apos;s Strike, causing different effects with katana-based skills.</content>
 	<content contentuid="h7c7707f6ge7deg4bfbgb947g1a9a0e8c8261">Character has activated the &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; to enemies hit for 1 turn.</content>
 	<content contentuid="h7c860e8dgcd03g4877g8406gab762dc6b76e">Kor&apos;vash</content>
-	<content contentuid="h7cb130ddga46fg415bg96d0g33e60f726dca">Kor&apos;vash</content>
 	<content contentuid="h7cb4d6abgacb9g48d6gbf91g2bab271be60c">Toph&apos;s Pride</content>
 	<content contentuid="h7cbb99c6g0a38g40c4g8b08g64d486ff3350">Chaos Goblin</content>
 	<content contentuid="h7cc93d1fge6ceg465fgbbb7gee5e2bb13418">Extermination</content>
@@ -2211,7 +2210,7 @@
 	<content contentuid="hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e">&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#00FFAA&apos; size=&apos;16&apos;&gt;Ammo Type: [1]&lt;/font&gt;</content>
 	<content contentuid="hfc83703fg0120g40e9gb08ag1185eb332c94">Agni Ignus</content>
 	<content contentuid="hfc86af03g5ae6g4acdg8146g7e5415774ce1">Blinder</content>
-	<content contentuid="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf">After a stressful career as a mercenary, cleaning up after the messes of your crazy comrades, you find yourself captured by the Divine Order, charged with being a Sourcerer. If only they knew...</content>
+	<content contentuid="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf">After a stressful career as a mercenary, cleaning up the aftermath of your crazy comrades, you find yourself captured by the Divine Order, charged with being a Sourcerer. If only they knew...</content>
 	<content contentuid="hfcd7afbagcf8bg49cdg90ffg27193e3bf9ca">*[MAGE ARMOR] Click on the button labeled &apos;Mage Armor&apos;.*</content>
 	<content contentuid="hfce2d440g3c47g4b02g8d8ag7193391dd1dd">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;If an attacked target is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, a heatburst burns enemies within [1]m.&lt;br&gt;If a heatburst target is already &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, the heatburst continues.&lt;br&gt;Adds &lt;font color=&apos;#fe6e27&apos;&gt;Fire Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="hfced8b62g3d44g41e8g832fgb585046c2b55">&lt;font color=&apos;#79C1FF&apos;&gt;Cryogenic Bullets&lt;/font&gt;</content>
@@ -2230,6 +2229,7 @@
 	<content contentuid="hfe5ab83agc07fg46bcg912bg37af64f7d1c7">Blademaster&apos;s Strike 6</content>
 	<content contentuid="hfe7c8572g7718g4806gbaa3gd7928c34732e">Greatbow</content>
 	<content contentuid="hfef86678g922bg4f8cga1c2gd58bb5f3f9cd">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery II&lt;/font&gt;</content>
+	<content contentuid="hff1a0098g0d08g4386gb48ag5d2649cb5025">Demonic Protection</content>
 	<content contentuid="hff1e38f6g8441g4fe4ga450g8d536e1b5db7">Ice Bullets</content>
 	<content contentuid="hff72913fgdc8cg4e21g908eg5e5b3e7b1acf">Peacekeeper</content>
 	<content contentuid="hfffc1796gc71bg44bag8e7bgc568f8d6cd3a">Demon&apos;s Blade</content>
