@@ -67,6 +67,15 @@ CharacterUnequipItem(_Player, _Weapon);
 LeaderLib_Helper_EquipInSlot(_Player, _Placeholder, "Weapon");
 LeaderLib_Helper_EquipInSlot(_Player, _Weapon, "Shield");
 
+PROC
+LeaderLib_CC_OnPresetChanged((CHARACTERGUID)_Player, (STRING)_LastPreset, (STRING)_Preset)
+AND
+CharacterGetOrigin(_Player, 1, "LLWEAPONEX_Harken")
+AND
+LeaderLib_String_QRY_EqualsAny(_Preset, "Knight", "Inquisitor", "Berserker")
+THEN
+NRD_ModCall("WeaponExpansion", "CC_SwapToHarkenAnvilPreview", (STRING)_Player, _Preset);
+
 IF
 RegionEnded(_Level)
 AND
