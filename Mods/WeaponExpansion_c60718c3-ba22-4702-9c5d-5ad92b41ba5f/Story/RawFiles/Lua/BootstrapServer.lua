@@ -28,6 +28,7 @@ Ext.Require("Server/Items/ItemHandler.lua")
 Ext.Require("Server/Items/UniqueItems.lua")
 Ext.Require("Server/Items/CraftingMechanics.lua")
 Ext.Require("Server/Items/DeltaModSwapper.lua")
+Ext.Require("Server/Origins/OriginsMain.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
 Ext.Require("Server/Debug/DebugMain.lua")
 

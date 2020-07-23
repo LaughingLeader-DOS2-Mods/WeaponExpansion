@@ -1,4 +1,5 @@
-local VENDING_MACHINE = "S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a"
+--S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a
+local VENDING_MACHINE = "680d2702-721c-412d-b083-4f5e816b945a"
 
 ---@type UniqueData
 local UniqueData = Ext.Require("Server/Data/UniqueData.lua")
@@ -34,6 +35,11 @@ Uniques = {
 	DemonHand = UniqueData:Create("0ac0d813-f58c-4399-99a8-1626a419bc53"),
 	AssassinHandCrossbow = UniqueData:Create("70c59769-2838-4137-9421-4e251fecdc89"),
 	DaggerBasilus = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03"),
+	--S_EQ_UNIQUE_LLWEAPONEX_PowerGauntlets_Arms_A_Harken_1d71ffda-51a4-4404-ae08-e4d2d4f13b9f
+	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f"),
+	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", nil, "e446752a-13cc-4a88-a32e-5df244c90d8b", true, {OnEquipped=function(data, character)
+		ItemLockUnEquip(data.UUID, 1)
+	end}),
 }
 
 Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
@@ -77,6 +83,8 @@ AllUniques = {
 	"S_EQ_UNIQUE_LLWEAPONEX_Blindfold_Monk_A_4258f164-b548-471f-990d-ae641960a842",
 	"S_EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_0ac0d813-f58c-4399-99a8-1626a419bc53",
 	"S_EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_70c59769-2838-4137-9421-4e251fecdc89",
+	"S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_Harken_927669c3-b885-4b88-a0c2-6825fbf11af2",
+	"S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988",
 }
 
 local LinkedUniques = {
@@ -94,6 +102,11 @@ local LinkedUniques = {
 		--S_WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_6c52f44e-1c27-4409-9bfe-f89ee5af4a0d
 		--S_WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_056c2c38-b7be-4e06-be41-99b79ffe83c2
 		{"6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", "056c2c38-b7be-4e06-be41-99b79ffe83c2"}
+	},
+	["HarkenTattoos"] = {
+		--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988
+		--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_Harken_927669c3-b885-4b88-a0c2-6825fbf11af2
+		{"40039552-3aae-4beb-8cca-981809f82988", "927669c3-b885-4b88-a0c2-6825fbf11af2"}
 	}
 }
 
@@ -159,15 +172,31 @@ function SwapUnique(char, id)
 		end
 	end
 	if equipped ~= nil and next ~= nil then
-		local isTwoHanded = Ext.StatGetAttribute(NRD_ItemGetStatsId(next), "IsTwoHanded") == "Yes"
+		local stat = NRD_ItemGetStatsId(next)
+		local statType = NRD_StatGetType(stat)
+		local isTwoHanded = false
+		local locked = ObjectGetFlag(equipped, "LLWEAPONEX_ItemIsLocked") == 1
+		if statType == "Weapon" then
+			isTwoHanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
+		end
 		local slot = GameHelpers.GetEquippedSlot(char,equipped)
+
+		if locked then
+			ItemLockUnEquip(equipped, 0)
+		end
+
 		CharacterUnequipItem(char, equipped)
-		--ItemToInventory(equippedItem, targetItem, 1, 0, 0)
 		if not isTwoHanded then
 			NRD_CharacterEquipItem(char, next, slot, 0, 0, 1, 1)
 		else
 			NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
 		end
-		Osi.LeaderLib_Timers_StartObjectObjectTimer(equipped, next, 50, "Timers_LLWEAPONEX_MoveMagicMissileWeapon", "LeaderLib_Commands_ItemToInventory")
+
+		if locked then
+			ItemLockUnEquip(next, 1)
+		end
+
+		--S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f
+		Osi.LeaderLib_Timers_StartObjectObjectTimer(equipped, "80976258-a7a5-4430-b102-ba91a604c23f", 50, "Timers_LLWEAPONEX_MoveUniqueToUniqueHolder", "LeaderLib_Commands_ItemToInventory")
 	end
 end

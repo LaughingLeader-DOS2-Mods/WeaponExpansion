@@ -26,3 +26,11 @@ Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profi
 		Ext.PostMessageToClient(character, "LLWEAPONEX_OnCharacterCreationStarted", "")
 	end
 end)
+
+Ext.RegisterOsirisListener("ItemLockUnEquip", 2, "after", function(item, locked)
+	if locked == 1 then
+		ObjectSetFlag(item, "LLWEAPONEX_ItemIsLocked", 0)
+	else
+		ObjectClearFlag(item, "LLWEAPONEX_ItemIsLocked", 0)
+	end
+end)

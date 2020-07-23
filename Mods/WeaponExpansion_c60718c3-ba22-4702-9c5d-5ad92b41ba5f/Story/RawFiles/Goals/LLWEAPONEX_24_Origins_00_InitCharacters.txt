@@ -1,0 +1,18 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+
+IF
+GameStarted(_Region, _IsEditorMode)
+AND
+IsGameLevel(_Region, 1)
+THEN
+NRD_ModCall("WeaponExpansion", "Origins_InitCharacters", _Region, (STRING)_IsEditorMode);
+GoalCompleted;
+
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_24_Campaign_Start"

@@ -5,7 +5,10 @@ local UniqueData = {
 	Owner = nil,
 	DefaultOwner = nil,
 	CurrentLevel = nil,
-	AutoEquipOnOwner = false
+	AutoEquipOnOwner = false,
+	Initialized = false,
+	OnEquipped = nil,
+	OnGotOwner = nil
 }
 UniqueData.__index = UniqueData
 
@@ -14,7 +17,7 @@ UniqueData.__index = UniqueData
 ---@param defaultNPCOwner string An NPC that should have the unique until a player takes it.
 ---@param autoEquip boolean Whether to automatically equip the unique on the default owner.
 ---@return UniqueData
-function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip)
+function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip, params)
 	if leveldata == nil then
 		leveldata = {}
 	end
@@ -24,18 +27,48 @@ function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip)
 		LevelData = leveldata,
 		Owner = nil,
 		DefaultOwner = defaultNPCOwner,
-		AutoEquipOnOwner = false
+		AutoEquipOnOwner = false,
+		Initialized = false,
+		OnEquipped = nil,
+		OnGotOwner = nil,
 	}
 	setmetatable(this, self)
 	if autoEquip ~= nil then
 		this.AutoEquipOnOwner = autoEquip
 	end
+	if params ~= nil then
+		for prop,value in pairs(params) do
+			this[prop] = value
+		end
+	end
     return this
 end
 
 function UniqueData:OnLevelChange(region)
-	if ObjectExists(self.UUID) == 1 and GetRegion(self.UUID) ~= region then
-		if self.Owner == nil then
+	if ObjectExists(self.UUID) == 1 then
+
+	end
+	if not self.Initialized then
+		if self.DefaultOwner ~= nil and ObjectExists(self.DefaultOwner) == 1 and CharacterIsDead(self.DefaultOwner) == 0 then
+			ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
+			if self.AutoEquipOnOwner then
+				CharacterEquipItem(self.DefaultOwner, self.UUID)
+				if self.OnEquipped ~= nil then
+					pcall(self.OnEquipped(self, self.DefaultOwner))
+				end
+			end
+		else
+			local targetPosition = self.LevelData[region]
+			if targetPosition ~= nil then
+				local x,y,z,pitch,yaw,roll = table.unpack(targetPosition)
+				local host = CharacterGetHostCharacter()
+				TeleportTo(self.UUID, host, "", 0, 1, 0)
+				ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
+			end
+		end
+		self.Initialized = true
+	else
+		if GetRegion(self.UUID) ~= region and self.Owner == nil then
 			if self.DefaultOwner ~= nil and 
 				ObjectExists(self.DefaultOwner) == 1 and 
 				CharacterIsDead(self.DefaultOwner) == 0 and 
@@ -51,6 +84,9 @@ function UniqueData:OnLevelChange(region)
 				--local currentOffhandWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Shield")
 				if self.AutoEquipOnOwner then
 					CharacterEquipItem(self.DefaultOwner, self.UUID)
+					if self.OnEquipped ~= nil then
+						pcall(self.OnEquipped(self, self.DefaultOwner))
+					end
 				end
 			else
 				local targetPosition = self.LevelData[region]
@@ -74,4 +110,15 @@ function UniqueData:AddPosition(region,x,y,z,rx,ry,rz)
 	}
 end
 
+function UniqueData:Transfer(target, equip)
+	self.Initialized = true
+	self.Owner = target
+	ItemToInventory(self.UUID, target, 1, 1, 1)
+	if equip == true then
+		CharacterEquipItem(target, self.UUID)
+		if self.OnEquipped ~= nil then
+			pcall(self.OnEquipped(self, target))
+		end
+	end
+end
 return UniqueData

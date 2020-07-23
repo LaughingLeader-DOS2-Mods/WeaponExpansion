@@ -80,7 +80,7 @@ new skillset "Avatar_LLWEAPONEX_Harkin"
 add skill "Shout_LLWEAPONEX_UnrelentingRage"
 
 new skillset "Avatar_LLWEAPONEX_Korvash"
-add skill "Target_EnemyPressureSpike"
+add skill "Shout_LLWEAPONEX_DarkDragon"
 
 new skillset "LLWEAPONEX_FTJ_Harvester"
 add skill "MultiStrike_LLWEAPONEX_EnemyMeleeVault"
