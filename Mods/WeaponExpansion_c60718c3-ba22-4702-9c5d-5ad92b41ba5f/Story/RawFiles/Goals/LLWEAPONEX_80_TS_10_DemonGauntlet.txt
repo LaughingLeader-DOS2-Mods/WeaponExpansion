@@ -15,14 +15,14 @@ LLWEAPONEX_Uniques_DemonGauntlet_OnDemonKilledTarget(_Target);
 IF
 CharacterCriticalHitBy(_Target, _Source, _)
 AND
-HasActiveStatus(_Source, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
+HasActiveStatus(_Source, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT", 1)
 THEN
-RemoveStatus(_Source, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
+RemoveStatus(_Source, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT");
 
 IF
 SkillCast(_Player, _, _, _)
 AND
-HasActiveStatus(_Player, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
+HasActiveStatus(_Player, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT", 1)
 THEN
 ProcObjectTimer(_Player, "LLWEAPONEX_Timers_DemonGauntlet_RemoveCritBonus", 1500);
 EXITSECTION

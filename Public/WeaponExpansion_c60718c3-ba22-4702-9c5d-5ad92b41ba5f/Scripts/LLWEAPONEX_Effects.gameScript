@@ -2,19 +2,19 @@ INIT
 
 EVENTS
 
-EVENT LLWEAPONEX_DemonHand_Hit
+EVENT LLWEAPONEX_DemonGauntlet_Hit
 VARS
 	CHARACTER:_Target
 	CHARACTER:_Source
 ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_DEMON_HAND_HIT)
+	OnCharacterStatusApplied(_Target, LLWEAPONEX_DEMON_GAUNTLET_HIT)
 ACTIONS
 IF "c1&!c2"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_DEMON_HAND_HIT, _Source)
+	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_DEMON_GAUNTLET_HIT, _Source)
 	IsEqual(_Source, null)
 THEN
 	CharacterPlayEffect(_Source, "RS3_FX_Char_Creature_Demon_Caster_Cast_Target_Cast_LastRites_Hand_01", "Dummy_R_HandFX")
-	//CharacterPlayEffect(_Source, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R")
+	//CharacterPlayEffect(_Source, "LLWEAPONEX_FX_Status_DemonGauntletDefense_Impact_Back_01", "Dummy_BackFX_R")
 ENDIF
 
 EVENT LLWEAPONEX_Bullet_HitSound

@@ -162,9 +162,9 @@ LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_DemonGauntletE
 PROC
 LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Char)
 AND
-LeaderLib_Helper_QRY_HasStatus(_Char, "LLWEAPONEX_DEMON_HAND_DEFENSE")
+LeaderLib_Helper_QRY_HasStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE")
 THEN
-RemoveStatus(_Char, "LLWEAPONEX_DEMON_HAND_DEFENSE");
+RemoveStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE");
 
 PROC
 LLWEAPONEX_Uniques_OnDemonGauntletUnequipped((CHARACTERGUID)_Char)
@@ -174,7 +174,7 @@ THEN
 NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 
 IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_DEMON_HAND_HIT", (CHARACTERGUID)_Char)
+CharacterStatusApplied(_Target, "LLWEAPONEX_DEMON_GAUNTLET_HIT", (CHARACTERGUID)_Char)
 THEN
 LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 
@@ -196,11 +196,11 @@ AND
 DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
 THEN
 NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
-PlayEffect(_Char, "LLWEAPONEX_FX_Status_DemonHandDefense_Impact_Back_01", "Dummy_BackFX_R");
-ApplyStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", -1.0, 0, _Char);
+PlayEffect(_Char, "LLWEAPONEX_FX_Status_DemonGauntletDefense_Impact_Back_01", "Dummy_BackFX_R");
+ApplyStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT", -1.0, 0, _Char);
 
 IF
-CharacterStatusRemoved(_Target, "LLWEAPONEX_DEMON_HAND_HIT", _)
+CharacterStatusRemoved(_Target, "LLWEAPONEX_DEMON_GAUNTLET_HIT", _)
 AND
 DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target)
 THEN
@@ -209,9 +209,9 @@ NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_DemonGauntlet_RemoveCritBonus")
 AND
-HasActiveStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT", 1)
+HasActiveStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT", 1)
 THEN
-RemoveStatus(_Char, "LLWEAPONEX_DEMON_HAND_BONUS_CRIT");
+RemoveStatus(_Char, "LLWEAPONEX_DEMON_GAUNTLET_BONUS_CRIT");
 //END_REGION
 
 //REGION MAGIC_MISSILE_SWAP
