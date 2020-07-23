@@ -6,6 +6,7 @@ CLIENT_UI = {
 	LAST_ITEM = nil,
 	LAST_STATUS_CHARACTER = nil,
 	LAST_STATUS = nil,
+	IsInCharacterCreation = false,
 }
 
 Ext.Require("Shared/Init.lua")

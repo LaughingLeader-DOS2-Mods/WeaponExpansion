@@ -231,11 +231,11 @@ local function SetToggleButtonVisibility(isVisible, tween)
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(...)
-	print("LLWEAPONEX_OnCharacterCreationStarted")
+	CLIENT_UI.IsInCharacterCreation = true
 	SetToggleButtonVisibility(false, false) 
 end)
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(...)
-	print("LLWEAPONEX_OnCharacterCreationFinished")
+	CLIENT_UI.IsInCharacterCreation = false
 	SetToggleButtonVisibility(true, true) 
 end)
 
