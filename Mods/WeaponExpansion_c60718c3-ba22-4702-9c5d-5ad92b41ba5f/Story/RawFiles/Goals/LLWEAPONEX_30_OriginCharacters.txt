@@ -8,9 +8,11 @@ KBSECTION
 PROC
 LLWEAPONEX_Origins_InitCharacters()
 THEN
-LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Origin_LLWEAPONEX_Harken", "Hero LLWEAPONEX_Harken");
-LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Origin_LLWEAPONEX_Korvash", "Hero LLWEAPONEX_Korvash");
 //LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Generic_Companions_1", "Hero Henchman Knight");
+LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Origin_LLWEAPONEX_Harken", "Hero LLWEAPONEX_Harken");
+LeaderLib_Origins_Register_Tags(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "BARBARIAN", "OUTLAW", "SHAPESHIFT_LLWEAPONEX_HARKEN");
+LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Origin_LLWEAPONEX_Korvash", "Hero LLWEAPONEX_Korvash");
+LeaderLib_Origins_Register_Tags(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "SCHOLAR", "OUTLAW", "SHAPESHIFT_LLWEAPONEX_KORVASH");
 EXITSECTION
 
 ENDEXITSECTION
