@@ -291,6 +291,7 @@
 	<content contentuid="h20915294g90deg456ag821cgadedb811af47">Beginner</content>
 	<content contentuid="h2091e453g3133g487cgaf66g8c32943acee7">*Suddenly, the rock immediately reverses direction and flies toward your hand.*</content>
 	<content contentuid="h20d004bag1e6bg4ffega2f2g15fc4d61dd63">Skirmisher</content>
+	<content contentuid="h20d0701bgf814g4f84gb06fg2776f58377cc">A former mercenary, your job was to keep the more &lt;i&gt;eccentric&lt;/i&gt; members in check. When the company disbanded, you thought that chapter would be forever closed, yet circumstances beckon you back to a life of perpetual stress.</content>
 	<content contentuid="h20dca820ga17eg45ecgbd12g4ab207ec9e4a">Zuko&apos;s Fury</content>
 	<content contentuid="h20e3f8cagad11g4787gaae2g50a97c7ead7e">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery V&lt;/font&gt;</content>
 	<content contentuid="h20e48f61gf7f0g40ffg9cf7g93a82a53cb46">&lt;b&gt;NANI?!&lt;/b&gt;</content>
@@ -835,6 +836,7 @@
 	<content contentuid="h5d9eca79g2820g4058gba1bgee5b291c2515">Attack with your fists, dealing [1].[2]</content>
 	<content contentuid="h5de7cd4agefe0g4ab3g8d0agdd9fdb52f2c5">Gravity Falls</content>
 	<content contentuid="h5e026ef6g4922g4ea9ga9dbgb44ceb73eb53">&lt;font color=&apos;#CCAAFF&apos;&gt;Attribute Token Shard&lt;/font&gt;</content>
+	<content contentuid="h5e19e84fg2e1eg470bg8a66gaa6117bb834e">You are a former mercenary with a legendary lust for battle. The call for adventure leads you to the doorstep of the Divine Order, and the many secrets they keep so tightly guarded.</content>
 	<content contentuid="h5e37e2c9g1d9fg4dc6g9d11g36ef081c0e27">Throwing Dagger</content>
 	<content contentuid="h5e406683g1f15g4998g869cgee124ba8d773">Frenzy Charge</content>
 	<content contentuid="h5e68b4a3gdb7fg48f5g803ag90f21fd89496">Fly into an unstoppable fury, gaining the following buffs:&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;&lt;font color=&apos;#65C900&apos;&gt;Critical Chance +[1]%&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;Critical Damage +50%&lt;br&gt;&lt;img src=&apos;Icon_BulletPoint&apos;&gt;Physical/Piercing Resistance +[2]%&lt;/font&gt;&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#FF5533&apos;&gt;Slaying an enemy extends Unrelenting Rage by an additional turn, up to the maximum (3), and provides a stacking &lt;font color=&apos;#00FF00&apos;&gt;+[3]% Damage Boost&lt;/font&gt;.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF3333&apos;&gt;Ending your turn without attacking, or getting disabled ends Unrelenting Rage.&lt;/font&gt;</content>
@@ -1113,6 +1115,7 @@
 	<content contentuid="h7c06808agcfc4g4186ga572ge920f4d40365">Glaive</content>
 	<content contentuid="h7c6c4185gff98g433ag864eg111954e77510">&lt;font color=&apos;#8B0000&apos;&gt;Katana Mastery&lt;/font&gt;&lt;br&gt;Striking enemies with your blade applies Blademaster&apos;s Strike, causing different effects with katana-based skills.</content>
 	<content contentuid="h7c7707f6ge7deg4bfbgb947g1a9a0e8c8261">Character has activated the &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; to enemies hit for 1 turn.</content>
+	<content contentuid="h7c860e8dgcd03g4877g8406gab762dc6b76e">Kor&apos;vash</content>
 	<content contentuid="h7cb130ddga46fg415bg96d0g33e60f726dca">Kor&apos;vash</content>
 	<content contentuid="h7cb4d6abgacb9g48d6gbf91g2bab271be60c">Toph&apos;s Pride</content>
 	<content contentuid="h7cbb99c6g0a38g40c4g8b08g64d486ff3350">Chaos Goblin</content>
@@ -1426,6 +1429,7 @@
 	<content contentuid="h9f830ae4gff10g41f0gb1b2g88d7dd74ba46">Undead Delight</content>
 	<content contentuid="h9f9c234dg9aadg457cgb4e8g06adc6a23102">Pacifist&apos;s Will</content>
 	<content contentuid="h9fb31128g252ag4f9bga1ffgfdbd95ad55e0">[Back]</content>
+	<content contentuid="h9fee2cfeg963cg43f0ga4fcgdfb79b48f7e0">Harken</content>
 	<content contentuid="h9ffd7826g03eeg4597gad11g03c6b56e547c">Shield</content>
 	<content contentuid="ha05ebf00g32e8g4598g839cg6f272357ac3b">Character has been hit by a Blademaster&apos;s strike.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="ha08dba9dg429dg4409gbb8fg33d4b910ee36">Flabbergasted</content>
@@ -2207,6 +2211,7 @@
 	<content contentuid="hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e">&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#00FFAA&apos; size=&apos;16&apos;&gt;Ammo Type: [1]&lt;/font&gt;</content>
 	<content contentuid="hfc83703fg0120g40e9gb08ag1185eb332c94">Agni Ignus</content>
 	<content contentuid="hfc86af03g5ae6g4acdg8146g7e5415774ce1">Blinder</content>
+	<content contentuid="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf">After a stressful career as a mercenary, cleaning up after the messes of your crazy comrades, you find yourself captured by the Divine Order, charged with being a Sourcerer. If only they knew...</content>
 	<content contentuid="hfcd7afbagcf8bg49cdg90ffg27193e3bf9ca">*[MAGE ARMOR] Click on the button labeled &apos;Mage Armor&apos;.*</content>
 	<content contentuid="hfce2d440g3c47g4b02g8d8ag7193391dd1dd">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;If an attacked target is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, a heatburst burns enemies within [1]m.&lt;br&gt;If a heatburst target is already &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, the heatburst continues.&lt;br&gt;Adds &lt;font color=&apos;#fe6e27&apos;&gt;Fire Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="hfced8b62g3d44g41e8g832fgb585046c2b55">&lt;font color=&apos;#79C1FF&apos;&gt;Cryogenic Bullets&lt;/font&gt;</content>

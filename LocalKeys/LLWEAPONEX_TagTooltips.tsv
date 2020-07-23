@@ -1,3 +1,5 @@
-Key	Content
-tagkey_LLWEAPONEX_Katana_ComboEnabled	<font color='#8B0000'>Katana Mastery</font><br>Striking enemies with your blade applies Blademaster's Strike, causing different effects with katana-based skills.
-tagKey_LLWEAPONEX_Rapier_SuckerComboEnabled	<font color='#0e7700'>Rapier Mastery</font><br>Gain temporary follow-up skills when using Sucker Punch. Sucker Punch's knockdown duration is increased by 1.
+Key	Content	Handle
+tagkey_LLWEAPONEX_Katana_ComboEnabled	<font color='#8B0000'>Katana Mastery</font><br>Striking enemies with your blade applies Blademaster's Strike, causing different effects with katana-based skills.	h7c6c4185gff98g433ag864eg111954e77510
+tagKey_LLWEAPONEX_Rapier_SuckerComboEnabled	<font color='#0e7700'>Rapier Mastery</font><br>Gain temporary follow-up skills when using Sucker Punch. Sucker Punch's knockdown duration is increased by 1.	he51066e9g8497g4177gaf63g46856ce53329
+takKey_LLWEAPONEX_HARKEN	You are a former mercenary with a legendary lust for battle. The call for adventure leads you to the doorstep of the Divine Order, and the many secrets they keep so tightly guarded.	h5e19e84fg2e1eg470bg8a66gaa6117bb834e
+takKey_LLWEAPONEX_KORVASH	A former mercenary, your job was to keep the more <i>eccentric</i> members in check. When the company disbanded, you thought that chapter would be forever closed, yet circumstances beckon you back to a life of perpetual stress.	h20d0701bgf814g4f84gb06fg2776f58377cc

@@ -47,6 +47,8 @@ Ext.Require("Shared/Data/MasteryData_Masteries.lua")
 Ext.Require("Shared/Data/MasteryData_BonusParams.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/Data/UnarmedWeaponStats.lua")
+local initHarkenVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Harken.lua")
+local initKorvashVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Korvash.lua")
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
@@ -59,6 +61,11 @@ local defaultExperienceAmounts = {
 	[4] = {Amount = 0, Required = 12000},
 	--[5] = {Amount = 0, Required = 36000},
 }
+
+Ext.RegisterListener("ModuleLoading", function()
+	initHarkenVoiceMetaData()
+	initKorvashVoiceMetaData()
+end)
 
 local function LoadExperienceVariables()
 	local RankVariables = {}

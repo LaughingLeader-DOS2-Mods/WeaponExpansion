@@ -9,7 +9,7 @@
                 	<attribute id="OriginDisplayName" value="Harken" handle="h72266d41ge248g44a3g93eeg48bfe62fb97d" type="28" />
                     <attribute id="OriginName" value="LLWEAPONEX_Harken" type="22" />
                 	<attribute id="OriginDescription" value="After a illustrious career as a mercenary, brutally smashing enemies with the legendary Anvilmar, you find yourself adrift on the high seas, captured by the Divine Order" handle="hacc47205g32b1g4a86ga8a9gcb017e3ef4e4" type="28" />
-                	<attribute id="OriginLongDescription" value="After a illustrious career as a mercenary, brutally smashing enemies with the legendary Anvilmar, you find yourself adrift on the high seas, captured by the Divine Order" handle="hacc47205g32b1g4a86ga8a9gcb017e3ef4e4" type="28" />
+                	<attribute id="OriginLongDescription" value="" handle="hacc47205g32b1g4a86ga8a9gcb017e3ef4e4" type="28" />
                     <attribute id="CharacterUUID" value="e446752a-13cc-4a88-a32e-5df244c90d8b" type="22" />
                     <attribute id="UserCanAlterTags" value="0" type="19" />
                     <attribute id="SkillSet" value="Avatar_LLWEAPONEX_Harkin" type="22" />
