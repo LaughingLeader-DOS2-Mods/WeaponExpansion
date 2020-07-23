@@ -1,0 +1,22 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+LLWEAPONEX_Origins_InitCharacters();
+KBSECTION
+
+//REGION ORIGIN_SETUP
+PROC
+LLWEAPONEX_Origins_InitCharacters()
+THEN
+//LeaderLib_Origins_Register_All((CHARACTERGUID)_Char, (STRING)_NpcAlignment, (STRING)_DefaultFaction, (STRING)_DefaultRecruitmentDialog, (STRING)_DefaultInPartyDialog, (STRING)_ProfessionTag1, (STRING)_ProfessionTag2, (STRING)_PolymorphPreservedTag)
+//LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Generic_Companions_1", "Hero Henchman Knight");
+LeaderLib_Origins_Register_All(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Origin_LLWEAPONEX_Harken", "Hero LLWEAPONEX_Harken", "LeaderLib_Debug_RecruitCharacter", "GLO_Henchman", "OUTLAW", "BARBARIAN", "SHAPESHIFT_LLWEAPONEX_HARKEN");
+LeaderLib_Origins_Register_All(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Origin_LLWEAPONEX_Korvash", "Hero LLWEAPONEX_Korvash", "LeaderLib_Debug_RecruitCharacter", "GLO_Henchman", "OUTLAW", "SCHOLAR", "SHAPESHIFT_LLWEAPONEX_KORVASH");
+//LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "Origin_LLWEAPONEX_Harken", "Hero LLWEAPONEX_Harken");
+//LeaderLib_Origins_Register_Tags(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "BARBARIAN", "OUTLAW", "SHAPESHIFT_LLWEAPONEX_HARKEN");
+//LeaderLib_Origins_Register_Main(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "Origin_LLWEAPONEX_Korvash", "Hero LLWEAPONEX_Korvash");
+//LeaderLib_Origins_Register_Tags(S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6, "SCHOLAR", "OUTLAW", "SHAPESHIFT_LLWEAPONEX_KORVASH");
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "LaughingLeader_WeaponExpansion"
