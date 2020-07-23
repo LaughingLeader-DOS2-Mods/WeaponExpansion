@@ -46,42 +46,9 @@ end
 
 function UniqueData:OnLevelChange(region)
 	if ObjectExists(self.UUID) == 1 then
-
-	end
-	if not self.Initialized then
-		if self.DefaultOwner ~= nil and ObjectExists(self.DefaultOwner) == 1 and CharacterIsDead(self.DefaultOwner) == 0 then
-			ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
-			if self.AutoEquipOnOwner then
-				CharacterEquipItem(self.DefaultOwner, self.UUID)
-				if self.OnEquipped ~= nil then
-					pcall(self.OnEquipped(self, self.DefaultOwner))
-				end
-			end
-		else
-			local targetPosition = self.LevelData[region]
-			if targetPosition ~= nil then
-				local x,y,z,pitch,yaw,roll = table.unpack(targetPosition)
-				local host = CharacterGetHostCharacter()
-				TeleportTo(self.UUID, host, "", 0, 1, 0)
-				ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
-			end
-		end
-		self.Initialized = true
-	else
-		if GetRegion(self.UUID) ~= region and self.Owner == nil then
-			if self.DefaultOwner ~= nil and 
-				ObjectExists(self.DefaultOwner) == 1 and 
-				CharacterIsDead(self.DefaultOwner) == 0 and 
-				GetRegion(self.DefaultOwner) == region 
-			then
+		if not self.Initialized then
+			if self.DefaultOwner ~= nil and ObjectExists(self.DefaultOwner) == 1 and CharacterIsDead(self.DefaultOwner) == 0 then
 				ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
-				---@type EsvCharacter
-				-- local character = Ext.GetCharacter(self.DefaultOwner)
-				-- for i,v in pairs(character:GetInventoryItems()) do
-
-				-- end
-				--local currentWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Weapon")
-				--local currentOffhandWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Shield")
 				if self.AutoEquipOnOwner then
 					CharacterEquipItem(self.DefaultOwner, self.UUID)
 					if self.OnEquipped ~= nil then
@@ -95,6 +62,38 @@ function UniqueData:OnLevelChange(region)
 					local host = CharacterGetHostCharacter()
 					TeleportTo(self.UUID, host, "", 0, 1, 0)
 					ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
+				end
+			end
+			self.Initialized = true
+		else
+			if GetRegion(self.UUID) ~= region and self.Owner == nil then
+				if self.DefaultOwner ~= nil and 
+					ObjectExists(self.DefaultOwner) == 1 and 
+					CharacterIsDead(self.DefaultOwner) == 0 and 
+					GetRegion(self.DefaultOwner) == region 
+				then
+					ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
+					---@type EsvCharacter
+					-- local character = Ext.GetCharacter(self.DefaultOwner)
+					-- for i,v in pairs(character:GetInventoryItems()) do
+	
+					-- end
+					--local currentWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Weapon")
+					--local currentOffhandWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Shield")
+					if self.AutoEquipOnOwner then
+						CharacterEquipItem(self.DefaultOwner, self.UUID)
+						if self.OnEquipped ~= nil then
+							pcall(self.OnEquipped(self, self.DefaultOwner))
+						end
+					end
+				else
+					local targetPosition = self.LevelData[region]
+					if targetPosition ~= nil then
+						local x,y,z,pitch,yaw,roll = table.unpack(targetPosition)
+						local host = CharacterGetHostCharacter()
+						TeleportTo(self.UUID, host, "", 0, 1, 0)
+						ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
+					end
 				end
 			end
 		end

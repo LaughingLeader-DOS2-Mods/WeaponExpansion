@@ -171,7 +171,7 @@ function SwapUnique(char, id)
 			end
 		end
 	end
-	if equipped ~= nil and next ~= nil then
+	if equipped ~= nil and next ~= nil and ObjectExists(equipped) == 1 and ObjectExists(next) == 1 then
 		local stat = NRD_ItemGetStatsId(next)
 		local statType = NRD_StatGetType(stat)
 		local isTwoHanded = false

@@ -368,7 +368,7 @@ data "Unique" "1"
 data "Telekinesis" "1"
 data "Thievery" "1"
 data "DamageBoost" "10"
-data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_DEMON_HAND_EQUIPPED"
+data "ExtraProperties" "SELF:OnEquip:LLWEAPONEX_DEMON_GAUNTLET_EQUIPPED"
 
 new entry "ARM_UNIQUE_LLWEAPONEX_DemonGauntlet_A_Preview"
 type "Armor"
