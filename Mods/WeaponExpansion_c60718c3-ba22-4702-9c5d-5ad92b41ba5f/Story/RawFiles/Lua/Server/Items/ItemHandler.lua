@@ -28,7 +28,7 @@ function OnItemTemplateOpening(char, item, template)
 	InventoryLaunchIterator(item, "LLWEAPONEX_Iterator_StoreFoundItem", "")
 	FireOsirisEvents()
 	for i,v in pairs(containerItems[item]) do
-		SwapDeltamods(v)
+		SwapDeltaMods(v)
 	end
 
 	containerItems[item] = nil
@@ -46,7 +46,7 @@ function CheckCharacterDeathTreasure(char)
 	local character = Ext.GetCharacter(char)
 	local items = character:GetInventoryItems()
 	for i,v in pairs(items) do
-		SwapDeltamods(v)
+		SwapDeltaMods(v)
 	end
 end
 

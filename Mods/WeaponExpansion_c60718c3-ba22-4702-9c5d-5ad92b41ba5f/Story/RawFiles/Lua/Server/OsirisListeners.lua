@@ -84,7 +84,6 @@ local function ApplyRuneExtraProperties(target, source, item)
 end
 
 local function OnStatusApplied(target, status, source)
-	print(target, status, source)
 	if source ~= nil and ObjectIsCharacter(source) == 1 then
 		if status == "LLWEAPONEX_PISTOL_SHOOT_HIT" then
 			local items = GameHelpers.FindTaggedEquipment(source, "LLWEAPONEX_Pistol")

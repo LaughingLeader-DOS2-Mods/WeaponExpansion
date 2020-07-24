@@ -139,10 +139,7 @@ function StatusGetDescriptionParam(status, statusSource, target, param, ...)
 		if params[2] == "Damage" then
 			local skill = params[1]
 			if skill ~= nil then
-				local skillSource = statusSource
-				if skillSource == nil then
-					skillSource = target
-				end
+				local skillSource = statusSource or target
 				local damageSkillProps = ExtenderHelpers.CreateSkillTable(skill)
 				local damageRange = Game.Math.GetSkillDamageRange(skillSource, damageSkillProps)
 				if damageRange ~= nil then

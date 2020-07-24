@@ -186,8 +186,8 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 						local paramValues = {}
 						local params = StringHelpers.Split(descParams, ";")
 						for i,v in pairs(params) do
-							local characterStats = ExtenderHelpers.CreateStatCharacterTable(character.Stats.Name)
-							local paramValue = StatusGetDescriptionParam(v.Action, character, characterStats, table.unpack(StringHelpers.Split(v, ":")))
+							--local characterStats = ExtenderHelpers.CreateStatCharacterTable(character.Stats.Name)
+							local paramValue = StatusGetDescriptionParam(v.Action, character, character.Stats, table.unpack(StringHelpers.Split(v, ":")))
 							if paramValue ~= nil then
 								table.insert(paramValues, paramValue)
 							end
@@ -225,7 +225,6 @@ local EquipmentTypes = {
 local function OnItemTooltip(item, tooltip)
 	---@type EclCharacter
 	local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-	print(CLIENT_UI.ACTIVE_CHARACTER, character, character.Stats)
 	if item ~= nil then
 		local fakeDamageCreated = false
 		if character ~= nil then

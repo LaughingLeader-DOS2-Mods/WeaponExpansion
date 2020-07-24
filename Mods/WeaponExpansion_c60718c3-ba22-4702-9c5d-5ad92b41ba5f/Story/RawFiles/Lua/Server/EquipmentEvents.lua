@@ -179,46 +179,6 @@ end
 
 Ext.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_Rod, [out](STRING)_MainhandSkill, [out](STRING)_OffhandSkill")
 
-local deltamodSwap = {
-	{Tag="LLWEAPONEX_Greatbow", Find="FinesseBoost", Replace="StrengthBoost"},
-	{Tag="LLWEAPONEX_Quarterstaff", Find="FinesseBoost", Replace="StrengthBoost"},
-	{Tag="LLWEAPONEX_Rod", Find="StrengthBoost", Replace="IntelligenceBoost"},
-	{Tag="LLWEAPONEX_Runeblade", Find="FinesseBoost", Replace="IntelligenceBoost"},
-	{Tag="LLWEAPONEX_Runeblade", Find="StrengthBoost", Replace="IntelligenceBoost"},
-}
-
-function SwapDeltaMods(item)
-	local swapBoosts = {}
-	local hasSwapBoosts = false
-	for i,entry in pairs(deltamodSwap) do
-		if IsTagged(item, entry.Tag) == 1  then
-			swapBoosts[entry.Find] = entry.Replace
-			hasSwapBoosts = true
-		end
-	end
-
-	if hasSwapBoosts then
-		LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltaMods] Checking for boosts on item ("..item..")")
-		NRD_ItemCloneBegin(item)
-		local cloned = NRD_ItemClone()
-		for boostName,addBoost in pairs(swapBoosts) do
-			local boostValue = NRD_ItemGetPermanentBoostInt(item, boostName)
-			if boostValue > 0 then
-				LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltaMods] Swapping item boost ["..boostName.."]("..tostring(boostValue)..") for ["..addBoost.."]")
-				NRD_ItemSetPermanentBoostInt(cloned, boostName, 0)
-				NRD_ItemSetPermanentBoostInt(cloned, addBoost, boostValue)
-			else
-				LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltaMods] NRD_ItemGetPermanentBoostInt["..boostName.."]("..tostring(boostValue)..")")
-			end
-		end
-		ItemRemove(item)
-		ObjectSetFlag(cloned, "LLWEAPONEX_BoostConversionApplied", 0)
-		return cloned
-	end
-end
-
-Ext.NewQuery(SwapDeltaMods, "LLWEAPONEX_Ext_QRY_SwapDeltaMods", "[in](ITEMGUID)_Item, [out](ITEMGUID)_NewItem")
-
 function MagicMissileWeapon_Swap(char, wand, rod)
 	local equippedItem = nil
 	local targetItem = nil

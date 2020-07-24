@@ -35,6 +35,21 @@ THEN
 NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item);
 //END_REGION
 
+//REGION BOOST_SWAP_TIMER
+PROC
+LLWEAPONEX_Items_SaveGeneratedItem((ITEMGUID)_Item)
+THEN
+DB_LLWEAPONEX_Items_Temp_Generated(_Item);
+
+IF
+TimerFinished("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
+AND
+DB_LLWEAPONEX_Items_Temp_Generated(_Item)
+THEN
+NOT DB_LLWEAPONEX_Items_Temp_Generated(_Item);
+NRD_ModCall("WeaponExpansion", "SwapDeltaMods", (STRING)_Item);
+//END_REGION
+
 //REGION TRACK_EQUIPMENT
 PROC
 LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_WeaponType, (STRING)_EquippedTag, (INTEGER)_IsPlayer)

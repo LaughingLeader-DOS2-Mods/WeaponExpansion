@@ -1,5 +1,3 @@
-local itemDeltaMods = {}
-
 local DeltamodSwap = {}
 
 local runebladeDamageBoosts = {
@@ -187,174 +185,202 @@ DeltamodSwap.LLWEAPONEX_Firearm = {
 	Boost_Weapon_Primary_Finesse_Medium_Crossbow = "Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium"
 }
 
-function GetDeltamods(item)
-	NRD_ItemIterateDeltaModifiers(item, "LLWEAPONEX_Iterator_GetDeltamod")
-end
+---@param item EsvItem
+---@return table<string,boolean>
+local function GetAllBoosts(item)
+	local finalBoosts = {}
+	local swapped = false
 
-function SaveDeltamod(item, deltamod, isGenerated)
-	if itemDeltaMods[item] == nil then
-		itemDeltaMods[item] = {DeltaMods = {}, Swapped = false}
-	end
-	local itemEntry = itemDeltaMods[item]
-	local canAdd = true
-	for tag,deltamods in pairs(DeltamodSwap) do
-		if IsTagged(item, tag) == 1 then
-			local replacement = deltamods[deltamod]
-			if replacement ~= nil then
-				if replacement == "" then
-					print("Disabled deltamod",deltamod,item)
-					canAdd = false
-					itemEntry.Swapped = true
-				elseif type(replacement) == "function" then
-					local b,replacementVal = pcall(replacement, item, deltamod)
-					if b then
-						print("Swapped deltamod",deltamod,"for",replacementVal,item)
-						deltamod = replacementVal
+	local boostType = "DeltaMod"
+
+	for i,v in pairs(item:GetGeneratedBoosts()) do
+		for tag,deltamods in pairs(DeltamodSwap) do
+			if item:HasTag(tag) then
+				local replacement = deltamods[v]
+				print(v, replacement)
+				if replacement ~= nil then
+					if replacement == "" then
+						print("Disabled deltamod",v,item)
+						swapped = true
+					elseif type(replacement) == "function" then
+						local b,replacementVal = pcall(replacement, item, v)
+						if b then
+							print("Swapped deltamod",v,"for",replacementVal,item)
+							finalBoosts[replacementVal] = boostType
+							swapped = true
+						end
 					else
-						canAdd = false
+						print("Swapped deltamod",v,"for",replacement,item)
+						finalBoosts[replacement] = boostType
+						swapped = true
 					end
-					itemEntry.Swapped = true
 				else
-					print("Swapped deltamod",deltamod,"for",replacement,item)
-					deltamod = replacement
-					itemEntry.Swapped = true
+					finalBoosts[v] = boostType
 				end
 			end
 		end
 	end
-	--table.insert(itemDeltaMods[item], deltamod)
-	itemEntry.DeltaMods[deltamod] = canAdd
+
+	for i,deltamodName in pairs(item:GetDeltaMods()) do
+		local deltamodData = Ext.GetDeltaMod(deltamodName, item.ItemType)
+		if deltamodData ~= nil then
+			for i2,boostEntry in pairs(deltamodData.Boosts) do
+				local v = boostEntry.Boost
+				if finalBoosts[v] ~= true then
+					for tag,deltamods in pairs(DeltamodSwap) do
+						if item:HasTag(tag) then
+							local replacement = deltamods[v]
+							print(v, replacement)
+							if replacement ~= nil then
+								if replacement == "" then
+									print("Disabled deltamod",v,item)
+									swapped = true
+								elseif type(replacement) == "function" then
+									local b,replacementVal = pcall(replacement, item, v)
+									if b then
+										print("Swapped deltamod",v,"for",replacementVal,item)
+										finalBoosts[replacementVal] = boostType
+										swapped = true
+									end
+								else
+									print("Swapped deltamod",v,"for",replacement,item)
+									finalBoosts[replacement] = boostType
+									swapped = true
+								end
+							else
+								finalBoosts[v] = boostType
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	if swapped then
+		return finalBoosts
+	else
+		return nil
+	end
 end
 
-function SwapDeltamods(item,baseStat,itemType,rarity,level,seed)
-	if ObjectGetFlag(item, "LLWEAPONEX_ProcessedDeltamods") == 0 then
-		if baseStat == nil then
-			---@type EsvItem
-			local itemObject = Ext.GetItem(item)
-			---@type StatItem
-			local itemStatObject = itemObject.Stats
-			baseStat = itemStatObject.Name
-			itemType = itemObject.ItemType
+---@param item string
+function SwapDeltaMods(item)
+	if ObjectExists(item) == 1 and ObjectGetFlag(item, "LLWEAPONEX_ProcessedDeltamods") == 0 then
+		local stat,itemType,rarity,level = nil
+		---@type EsvItem
+		local itemObject = Ext.GetItem(item)
+		stat = itemObject.StatsId
+		---@type StatItem
+		local itemStatObject = itemObject.Stats
+		itemType = itemObject.ItemType
+		if itemStatObject ~= nil then
 			rarity = itemStatObject.ItemTypeReal
 			level = itemStatObject.Level
-			--baseStat,itemType,rarity,level,seed = NRD_ItemGetGenerationParams(item)
 		end
-		local stat = NRD_ItemGetStatsId(item)
+
 		if StringHelpers.IsNullOrEmpty(rarity) then
 			rarity = GetVarFixedString(item, "LeaderLib_Rarity")
 			if StringHelpers.IsNullOrEmpty(rarity) then
 				SetStoryEvent(item, "LeaderLib_Commands_SetItemVariables")
 			end
 		end
-		if StringHelpers.IsNullOrEmpty(itemType) then
-			itemType = Ext.StatGetAttribute(stat, "type")
-		end
+		print("SwapDeltaMods", item,stat,itemType,rarity,level)
 		if rarity ~= nil and rarity ~= "Common" and rarity ~= "Unique" then
-			if itemDeltaMods[item] == nil then
-				NRD_ItemIterateDeltaModifiers(item, "LLWEAPONEX_Iterator_GetDeltamod")
+			if level == nil then
+				level = NRD_ItemGetInt(item, "LevelOverride")
+				if level == 0 or level == nil then
+					level = CharacterGetLevel(CharacterGetHostCharacter())
+				end
 			end
-			local itemEntry = itemDeltaMods[item]
-			if itemEntry ~= nil then
-				if itemEntry.Swapped == true then
-					if level == nil then
-						level = NRD_ItemGetInt(item, "LevelOverride")
-						if level == 0 or level == nil then
-							level = CharacterGetLevel(CharacterGetHostCharacter())
-						end
-					end
 
-					local isIdentified = NRD_ItemGetInt(item, "IsIdentified")
-					if isIdentified == nil then
-						isIdentified = 1
-					end
+			--print("SwapDeltaMods", Ext.JsonStringify(itemEntry.DeltaMods))
+			local boosts = GetAllBoosts(itemObject)
+			if boosts ~= nil then
+				local template = GetTemplate(item)
+				NRD_ItemConstructBegin(template)
+				--NRD_ItemCloneBegin(item)
+				local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
+				if damageTypeString == nil then damageTypeString = "Physical" end
+				local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+				NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
 
-					--print("SwapDeltamods", Ext.JsonStringify(itemEntry.DeltaMods))
-					local deltamods = itemEntry.DeltaMods
-					if deltamods ~= nil then
-						NRD_ItemCloneBegin(item)
-						-- for deltamod,b in pairs(deltamods) do
-						-- 	if b == true then
-						-- 		NRD_ItemCloneAddBoost("DeltaMod", deltamod)
-						-- 	end
-						local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
-						if damageTypeString == nil then damageTypeString = "Physical" end
-						local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
-						NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
+				NRD_ItemCloneSetString("GenerationStatsId", stat)
+				NRD_ItemCloneSetString("StatsEntryName", stat)
+				NRD_ItemCloneSetString("RootTemplate", template)
+				NRD_ItemCloneSetString("OriginalRootTemplate", template)
+				NRD_ItemCloneSetInt("HasGeneratedStats", 0)
+				NRD_ItemCloneSetInt("GenerationLevel", level)
+				NRD_ItemCloneSetInt("StatsLevel", level)
+				NRD_ItemCloneSetInt("IsIdentified", itemObject.Stats.IsIdentified)
+				NRD_ItemCloneSetString("ItemType", rarity)
+				NRD_ItemCloneSetString("GenerationItemType", rarity)
 
-						NRD_ItemCloneSetString("GenerationStatsId", stat)
-						NRD_ItemCloneSetString("StatsEntryName", stat)
-						NRD_ItemCloneSetInt("HasGeneratedStats", 0)
-						NRD_ItemCloneSetInt("GenerationLevel", level)
-						NRD_ItemCloneSetInt("StatsLevel", level)
-						NRD_ItemCloneSetInt("IsIdentified", isIdentified)
-						NRD_ItemCloneSetString("ItemType", rarity)
-						NRD_ItemCloneSetString("GenerationItemType", rarity)
+				for boost,boostType in pairs(boosts) do
+					NRD_ItemCloneAddBoost(boostType, boost)
+					print("Adding boost", boostType, boost)
+				end
 
-						local clone = NRD_ItemClone()
-						RollForBonusSkill(clone, stat, itemType, rarity)
-						ObjectSetFlag(clone, "LLWEAPONEX_ProcessedDeltamods", 0)
-						SetVarFixedString(item, "LeaderLib_Rarity", rarity)
-						SetVarInteger(item, "LeaderLib_Level", level)
-						for deltamod,b in pairs(deltamods) do
-							if b == true then
-								ItemAddDeltaModifier(clone, deltamod)
-								LeaderLib.PrintDebug("[WeaponExpansion:SwapDeltamods] Added deltamod", deltamod, "to item clone",clone)
-							end
-						end
+				local clone = NRD_ItemClone()
+				--NRD_ItemSetIdentified(clone, itemObject.Stats.IsIdentified)
+				NRD_ItemSetIdentified(clone, 1)
+				RollForBonusSkill(clone, stat, itemType, rarity)
+				ObjectSetFlag(clone, "LLWEAPONEX_ProcessedDeltamods", 0)
+				SetVarFixedString(item, "LeaderLib_Rarity", rarity)
+				SetVarInteger(item, "LeaderLib_Level", level)
 
-						local inventory = GetInventoryOwner(item)
-						local slot = nil
-						if ObjectIsCharacter(inventory) == 1 then
-							slot = GameHelpers.GetEquippedSlot(inventory,item)
-						end
-						if inventory ~= nil then
-							if slot ~= nil then
-								GameHelpers.EquipInSlot(inventory, clone, slot)
-							else
-								ItemToInventory(clone, inventory, 1, 0, 0)
-							end
-						end
-						ItemRemove(item)
-						--NRD_ItemIterateDeltaModifiers(clone, "LLWEAPONEX_Debug_PrintDeltamod")
-					end
-				else
-					ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
-					if RollForBonusSkill(item, stat, itemType, rarity) then
-						NRD_ItemCloneBegin(item)
-						local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
-						if damageTypeString == nil then damageTypeString = "Physical" end
-						local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
-						NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
-						local clone = NRD_ItemClone()
-						local inventory = GetInventoryOwner(item)
-						local slot = nil
-						if ObjectIsCharacter(inventory) == 1 then
-							slot = GameHelpers.GetEquippedSlot(inventory,item)
-						end
-						if inventory ~= nil then
-							if slot ~= nil then
-								GameHelpers.EquipInSlot(inventory, clone, slot)
-							else
-								ItemToInventory(clone, inventory, 1, 0, 0)
-							end
-						end
-						ItemRemove(item)
+				local inventory = GetInventoryOwner(item) or nil
+				local slot = nil
+				if inventory == nil then
+					inventory = CharacterGetHostCharacter()
+				end
+				if inventory ~= nil and ObjectIsCharacter(inventory) == 1 then
+					slot = GameHelpers.GetEquippedSlot(inventory,item)
+				end
+				if inventory ~= nil then
+					if slot ~= nil then
+						GameHelpers.EquipInSlot(inventory, clone, slot)
+					else
+						ItemToInventory(clone, inventory, 1, 0, 0)
 					end
 				end
+				ItemRemove(item)
+				--NRD_ItemIterateDeltaModifiers(clone, "LLWEAPONEX_Debug_PrintDeltamod")
 			else
 				ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
-				--print("Skipping deltamod swap for",item)
+				if RollForBonusSkill(item, stat, itemType, rarity) then
+					NRD_ItemCloneBegin(item)
+					local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
+					if damageTypeString == nil then damageTypeString = "Physical" end
+					local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
+					local clone = NRD_ItemClone()
+					local inventory = GetInventoryOwner(item)
+					local slot = nil
+					if ObjectIsCharacter(inventory) == 1 then
+						slot = GameHelpers.GetEquippedSlot(inventory,item)
+					end
+					if inventory ~= nil then
+						if slot ~= nil then
+							GameHelpers.EquipInSlot(inventory, clone, slot)
+						else
+							ItemToInventory(clone, inventory, 1, 0, 0)
+						end
+					end
+					ItemRemove(item)
+				end
 			end
-			itemDeltaMods[item] = nil
 		else
 			ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
 		end
 	end
 end
 
+---@param item EsvItem
 Ext.RegisterListener("TreasureItemGenerated", function(item)
-	SwapDeltaMods(item)
-	SwapDeltamods(item,baseStat,itemType,rarity,level,seed)
+	Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
+	TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
+	TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 50)
+	--SwapDeltaMods(item.MyGuid)
 end)
 
 if Ext.IsDeveloperMode() then
@@ -362,7 +388,7 @@ if Ext.IsDeveloperMode() then
 		local host = CharacterGetHostCharacter()
 		local weapon = CharacterGetEquippedWeapon(host)
 		if weapon ~= nil then
-			SwapDeltamods(weapon)
+			SwapDeltaMods(weapon)
 		end
 	end)
 end
