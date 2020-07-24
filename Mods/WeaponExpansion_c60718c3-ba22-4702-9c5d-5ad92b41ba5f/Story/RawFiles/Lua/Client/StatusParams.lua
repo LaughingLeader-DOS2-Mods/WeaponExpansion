@@ -129,11 +129,13 @@ local function TryPrintName(obj, prop)
 	return tostring(obj)
 end
 
-local function StatusGetDescriptionParam(status, statusSource, target, param, ...)
-	LeaderLib.PrintDebug("[WeaponEx:StatusParams:StatusGetDescriptionParam] status("..TryPrintName(status, "Name")..") statusSource("..TryPrintName(statusSource, "Name")..") character("..TryPrintName(target, "Name")..") param("..tostring(param)..")")
+---@param status EsvStatus
+---@param statusSource EsvGameObject
+---@param target StatCharacter
+---@param param string
+function StatusGetDescriptionParam(status, statusSource, target, param, ...)
 	if param == "Skill" then
 		local params = {...}
-		LeaderLib.PrintDebug("params("..LeaderLib.Common.Dump(params)..")")
 		if params[2] == "Damage" then
 			local skill = params[1]
 			if skill ~= nil then
@@ -141,7 +143,7 @@ local function StatusGetDescriptionParam(status, statusSource, target, param, ..
 				if skillSource == nil then
 					skillSource = target
 				end
-				local damageSkillProps = Skills.CreateSkillTable(skill)
+				local damageSkillProps = ExtenderHelpers.CreateSkillTable(skill)
 				local damageRange = Game.Math.GetSkillDamageRange(skillSource, damageSkillProps)
 				if damageRange ~= nil then
 					local damageTexts = {}
@@ -167,7 +169,21 @@ local function StatusGetDescriptionParam(status, statusSource, target, param, ..
 					end
 				end
 			end
+		else
+			local skillName = params[1]
+			local attribute = params[2]
+			if skillName ~= nil and attribute ~= nil then
+				local value = Ext.StatGetAttribute(skillName, attribute)
+				if value ~= nil then
+					if type(value) == "number" then
+						return math.tointeger(value)
+					else
+						return tostring(value)
+					end
+				end
+			end
 		end
+		return ""
 	end
 end
 Ext.RegisterListener("StatusGetDescriptionParam", StatusGetDescriptionParam)

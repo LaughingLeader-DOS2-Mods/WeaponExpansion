@@ -26,6 +26,7 @@ Vars = {
 
 Skills = {
 	Params = {},
+	DamageParam = {},
 	Damage = {},
 	DamageFunctions = {},
 }
@@ -37,6 +38,8 @@ AttributeScaleTables = {
 
 --- @type table<string,string>
 Tags = {}
+
+UI = {}
 
 Ext.Require("Shared/MasteryHelpers.lua")
 Ext.Require("Shared/GameMathAlternatives.lua")
@@ -52,6 +55,7 @@ local initKorvashVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Korvash.
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
+Ext.Require("Shared/ExtenderHelpers.lua")
 
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, Required = 0},

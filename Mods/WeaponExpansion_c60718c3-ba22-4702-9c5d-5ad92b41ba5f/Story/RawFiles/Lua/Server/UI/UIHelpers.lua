@@ -27,15 +27,9 @@ end
 Ext.RegisterNetListener("LLWEAPONEX_RequestUserCharacters", RequestUserCharacters)
 
 function SendClientID(uuid, id)
-	print(Vars.GAME_STARTED, Vars.SEND_USER_ID)
-	if Vars.GAME_STARTED == true then
-		LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
-		Ext.PostMessageToClient(uuid, "LLWEAPONEX_SendClientID", id)
-		Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetActiveCharacter", Ext.GetCharacter(uuid).NetID)
-		--SendUserCharacters(id)
-	else
-		Vars.SEND_USER_ID = true
-	end
+	LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
+	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetActiveCharacter", uuid)
+	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SendClientUserID", id)
 end
 
 function InitClientID()
@@ -49,6 +43,11 @@ function InitClientID()
 		end
 	end
 end
+
+LeaderLib.RegisterListener("LuaReset", function()
+	print("****************************Resending client UI data.*****************************")
+	InitClientID()
+end)
 
 local function RequestActiveCharacter(call,id_str,callbackID)
 	TimerCancel("Timers_LLWEAPONEX_SetActivePlayers")

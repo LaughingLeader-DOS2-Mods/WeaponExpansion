@@ -176,7 +176,7 @@ local function CripplingBlowBonus(skill, char, state, skillData)
 					GameHelpers.ExplodeProjectile(char, skillData.Target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 					
 					-- local skillData.TargetPos = {[1] = x, [2] = y, [3] = z}
-					--local x,y,z = GetPosition(skillData.Target)					-- local skill = Skills.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
+					--local x,y,z = GetPosition(skillData.Target)					-- local skill = ExtenderHelpers.CreateSkillTable("Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 					-- local damageList = Game.Math.GetSkillDamage(skill, character.Stats, false, false, character.Stats.Position, skillData.TargetPos, character.Stats.Level, 0)
 					-- damageList:ConvertDamageType("Piercing")
 					-- for i,damage in pairs(damageList:ToTable()) do

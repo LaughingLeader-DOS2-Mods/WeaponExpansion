@@ -1,14 +1,3 @@
-CLIENT_UI = {
-	ID = nil,
-	ACTIVE_CHARACTER = nil,
-	PARTY = nil,
-	LAST_SKILL = "",
-	LAST_ITEM = nil,
-	LAST_STATUS_CHARACTER = nil,
-	LAST_STATUS = nil,
-	IsInCharacterCreation = false,
-}
-
 Ext.Require("Shared/Init.lua")
 Ext.Require("Client/SkillParams.lua")
 Ext.Require("Client/StatusParams.lua")

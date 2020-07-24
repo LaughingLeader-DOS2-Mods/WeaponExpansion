@@ -47,16 +47,18 @@ local function ReplacePlaceholders(str)
 					param = props[2]
 				end
 			end
-			local skill = Skills.CreateSkillTable(skillName)
+			local skill = ExtenderHelpers.CreateSkillTable(skillName)
 			if skill ~= nil then
 				if CLIENT_UI.ACTIVE_CHARACTER ~= nil then
 					local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER).Stats
-					local paramText = SkillGetDescriptionParam(skill, character, false, param)
-					if paramText == nil and param == "Damage" then
-						local damageRange = Game.Math.GetSkillDamageRange(character, skill)
-						value = LeaderLib.UI.Tooltip.FormatDamageRange(damageRange)
-					else
-						value = paramText
+					if character ~= nil then
+						local paramText = SkillGetDescriptionParam(skill, character, false, param)
+						if paramText == nil and param == "Damage" then
+							local damageRange = Game.Math.GetSkillDamageRange(character, skill)
+							value = LeaderLib.UI.Tooltip.FormatDamageRange(damageRange)
+						else
+							value = paramText
+						end
 					end
 				else
 					Ext.PrintError("[WeaponExpansion:TooltipHelpers.lua] CLIENT_UI.ACTIVE_CHARACTER is nil!")

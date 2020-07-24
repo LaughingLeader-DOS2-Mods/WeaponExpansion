@@ -4,6 +4,11 @@ local VENDING_MACHINE = "680d2702-721c-412d-b083-4f5e816b945a"
 ---@type UniqueData
 local UniqueData = Ext.Require("Server/Data/UniqueData.lua")
 
+local function OnTattoosEquipped(data, character)
+	ItemLockUnEquip(data.UUID, 1)
+	ObjectSetFlag(data.UUID, "LLWEAPONEX_ItemIsLocked", 0)
+end
+
 ---@type table<string, UniqueData>
 Uniques = {
 	ArmCannon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8"),
@@ -37,9 +42,7 @@ Uniques = {
 	DaggerBasilus = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03"),
 	--S_EQ_UNIQUE_LLWEAPONEX_PowerGauntlets_Arms_A_Harken_1d71ffda-51a4-4404-ae08-e4d2d4f13b9f
 	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f"),
-	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", nil, "e446752a-13cc-4a88-a32e-5df244c90d8b", true, {OnEquipped=function(data, character)
-		ItemLockUnEquip(data.UUID, 1)
-	end}),
+	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", nil, "e446752a-13cc-4a88-a32e-5df244c90d8b", true, {OnEquipped=OnTattoosEquipped}),
 }
 
 Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
@@ -134,8 +137,6 @@ local function AddLinkedUnique(id, item1, item2)
 		end
 		PersistentVars.LinkedUniques = LinkedUniques
 	end
-
-	print("AddLinkedUnique", Ext.JsonStringify(LinkedUniques))
 end
 
 LoadPersistentVars[#LoadPersistentVars+1] = function()
@@ -181,19 +182,22 @@ function SwapUnique(char, id)
 		end
 		local slot = GameHelpers.GetEquippedSlot(char,equipped)
 
-		if locked then
-			ItemLockUnEquip(equipped, 0)
-		end
+		ItemLockUnEquip(equipped, 0)
 
-		CharacterUnequipItem(char, equipped)
 		if not isTwoHanded then
-			NRD_CharacterEquipItem(char, next, slot, 0, 0, 1, 1)
+			NRD_CharacterEquipItem(char, next, slot, 0, 1, 1, 1)
 		else
 			NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
+			CharacterUnequipItem(char, equipped)
 		end
 
 		if locked then
 			ItemLockUnEquip(next, 1)
+		end
+
+		local uniqueData = Uniques[id]
+		if uniqueData ~= nil and uniqueData.OnEquipped ~= nil then
+			pcall(uniqueData.OnEquipped, uniqueData, char)
 		end
 
 		--S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f

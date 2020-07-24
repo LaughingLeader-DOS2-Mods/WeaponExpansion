@@ -62,6 +62,7 @@
 	<content contentuid="h0516446bg80fdg485cg9560gd259a5028bf0">[Info] *You read the panel: &quot;Hit a button to order a treasure type.&quot;*</content>
 	<content contentuid="h051a7395g4959g43b7gac39g18a872617097">Novice</content>
 	<content contentuid="h052d8fd9g8c05g4c60gb6c2gf05f40109276">&lt;font color=&apos;#7478DC&apos;&gt;Electrified Mini-Bolts&lt;/font&gt;</content>
+	<content contentuid="h056235e1ge01eg4caagb551g39f2eea4c3d8">Surging Shock</content>
 	<content contentuid="h0579d113ga6e7g46dcg8540g05493daf6608">Quake</content>
 	<content contentuid="h060a6bb2g4db6g48bag9602g2a9d7c28a85a">Disciplined warriors who wield quarterstaffs, overwhelming enemies with finesse and sheer force of will</content>
 	<content contentuid="h060c9019g5c2eg4003gb9cdg9add29793c37">Journeyman Gunslinger</content>
@@ -322,6 +323,7 @@
 	<content contentuid="h23cacf78g143fg45d1gb348g84fd913e573e">Mark of the Wraith</content>
 	<content contentuid="h23d7b881gd36eg4382g9390gde45f4aee624">The &lt;font color=&apos;#7d71d9&apos;&gt;Thunderbolt Rune&lt;/font&gt; is unable to trigger another &lt;font color=&apos;#7d71d9&apos;&gt;Thunderbolt Strike&lt;/font&gt; on this character.</content>
 	<content contentuid="h23eb9679g58eeg49e0gb863g70995541ce68">Balrin&apos;s Throwing Axe (Ice)</content>
+	<content contentuid="h2405a422gfa67g495agb1b5gdde42d586c80">Hand Crossbow Rune</content>
 	<content contentuid="h240913f2g92a0g4f1fgb730g23e3488d2308">Elementia</content>
 	<content contentuid="h241c1d92g6027g4837g9d25g009d917be036">Draw Arrow</content>
 	<content contentuid="h243c7832gca11g41e6g824agfc333c4bc9a8">Wooden Rod</content>
@@ -333,13 +335,14 @@
 	<content contentuid="h24da3fd1g3cf7g426ega797g1b20ce7ec786">Summon Lightning on Attack</content>
 	<content contentuid="h24f6a0fcg3426g4558g8605g47902488220a">Worn Runeblade of Air</content>
 	<content contentuid="h255918b4gac16g4dedgae98gc30117b6758b">Inert Runeblade, Family Heirloom</content>
-	<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135">shadow Damage</content>
+	<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135">shadow damage</content>
 	<content contentuid="h256eb14fg3bf7g4428g9b7dg410ff53221a8">Headcracker</content>
 	<content contentuid="h25965ce8g9e12g4518gbecag7d24ba09c699">&lt;font color=&apos;#FFCC22&apos;&gt;Reload Pistol&lt;/font&gt;</content>
 	<content contentuid="h25afab32g53ccg4cf6g80cfg6c768304a925">Novice</content>
 	<content contentuid="h25b104a6g160bg466egb60fg91f44323c005">Adventurers who sail the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it</content>
 	<content contentuid="h25b36dbbge4a8g4fb1gb7d8g31b6743268d6">Wooden Destiny</content>
 	<content contentuid="h25bb1f86gfd15g4ad2g9a50ga54d90dd8fce">&lt;font color=&apos;#4197e2&apos;&gt;Water Great Arrow&lt;/font&gt;</content>
+	<content contentuid="h25bbf6e6g536dg4dd0gb01egf760da3d4f84">Bonus damage with a [2]% chance&lt;br&gt;to fork [3] time(s).</content>
 	<content contentuid="h25c234fegb51eg4854gb8dfg3289120baaad">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Flash of Steel</content>
 	<content contentuid="h25ccf0bega988g4aadg975dgfeea08f0b1bf">Ancient Elven Quiver</content>
 	<content contentuid="h25ea9eedg7c30g4ef7g8b8cg9e8f902cd086">Dwarven Peacekeeper</content>
@@ -573,6 +576,7 @@
 	<content contentuid="h3eb917d7g036fg483dg8ee5gc83743845400">Welcome!</content>
 	<content contentuid="h3ec10656g574ag4f84gb269g7d3fc3c37c2d">Character is spreading &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; to nearby allies!</content>
 	<content contentuid="h3ed3f447g6232g427cg948cg376f405f8413">Novice</content>
+	<content contentuid="h3ee45020g2bb3g45c0ga195gc7282c87e628">Amplifies Shoot Skill</content>
 	<content contentuid="h3ee724a5gd0eag4d06g8d48gfb1c8cac12ce">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h3eebf141gc25cg449dga4aag3f7a3cfc3c57">&lt;font color=&apos;#188EDE&apos;&gt;Flask of Water Weakness&lt;/font&gt;</content>
 	<content contentuid="h3f55cf81gc40eg4539gae43g5ae634267e64">Through the power of the &lt;font color=&apos;#c5a65a&apos;&gt;Power Gauntlets&lt;/font&gt;, this character can wield two-handed melee weapons with one hand.</content>
@@ -684,7 +688,7 @@
 	<content contentuid="h4da10f0ag01b5g4bdagb58cg468020b05690">Ancient Dual Shields</content>
 	<content contentuid="h4daee89cg04bfg4646g839cga7add594aa6e">Soul Rune</content>
 	<content contentuid="h4db85b3dga320g44d4g8cb6g05a4dc44ce41">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h4e4de558g5137g4881ga8b3gff5625278817">A gauntlet once worn by a notorious demon. Seems to occasionally twitch.&lt;br&gt;&lt;font color=&apos;#ff13f1&apos;&gt;Gains power from slain enemies.&lt;/font&gt;</content>
+	<content contentuid="h4e4de558g5137g4881ga8b3gff5625278817">A gauntlet once worn by a notorious demon. Seems to occasionally twitch.</content>
 	<content contentuid="h4e828850gecfbg4349g914dg2af390edffe5">Revenant</content>
 	<content contentuid="h4e990fe9g1ffcg46ecga18fg891f812ef7c0">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#D040D0&apos;&gt;All Resistances&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h4eb213a7g4793g4007g95c6gbaf47584f29d">Unarmed Weapon[1]</content>
@@ -2025,6 +2029,7 @@
 	<content contentuid="he8adec30gee5fg453agb282g984b856e140a">Scepter of Magic Missile</content>
 	<content contentuid="he8bd3008g02a2g4d68g86d2g212a3d3c2d1f">Honed Halberd</content>
 	<content contentuid="he8c8644fg8648g4394gb270g42e5b89ba370">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in an armor-eating acid, dealing corrosive damage.</content>
+	<content contentuid="he8fa4715ge27ag4b47gb308g4c28e319a9e7">Pistol Rune</content>
 	<content contentuid="he91f94eag4370g4caagbc62gde3b37a9e452">&lt;icon id=&apos;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_BatteringRam&apos;/&gt;[Key:Rush_BatteringRam_DisplayName] has a 25% chance to apply Dizzy for 1 turn.</content>
 	<content contentuid="he99304c7gfdbag48e0gb57bgc8b1fcea2588">a Bludgeon</content>
 	<content contentuid="he9caef58g9dc1g49b4gb439gb78a46e18435">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery IV&lt;/font&gt;</content>
@@ -2232,5 +2237,6 @@
 	<content contentuid="hff1a0098g0d08g4386gb48ag5d2649cb5025">Demonic Protection</content>
 	<content contentuid="hff1e38f6g8441g4fe4ga450g8d536e1b5db7">Ice Bullets</content>
 	<content contentuid="hff72913fgdc8cg4e21g908eg5e5b3e7b1acf">Peacekeeper</content>
+	<content contentuid="hff86de07g52e5g491cga553g90bb501e6f52">&lt;font color=&apos;#FFD900&apos;&gt;Changes [1] damage to [2].&lt;/font&gt;</content>
 	<content contentuid="hfffc1796gc71bg44bag8e7bgc568f8d6cd3a">Demon&apos;s Blade</content>
 </contentList>

@@ -52,7 +52,7 @@ function UniqueData:OnLevelChange(region)
 				if self.AutoEquipOnOwner then
 					CharacterEquipItem(self.DefaultOwner, self.UUID)
 					if self.OnEquipped ~= nil then
-						pcall(self.OnEquipped(self, self.DefaultOwner))
+						pcall(self.OnEquipped, self, self.DefaultOwner)
 					end
 				end
 			else
@@ -83,7 +83,7 @@ function UniqueData:OnLevelChange(region)
 					if self.AutoEquipOnOwner then
 						CharacterEquipItem(self.DefaultOwner, self.UUID)
 						if self.OnEquipped ~= nil then
-							pcall(self.OnEquipped(self, self.DefaultOwner))
+							pcall(self.OnEquipped, self, self.DefaultOwner)
 						end
 					end
 				else
@@ -116,7 +116,7 @@ function UniqueData:Transfer(target, equip)
 	if equip == true then
 		CharacterEquipItem(target, self.UUID)
 		if self.OnEquipped ~= nil then
-			pcall(self.OnEquipped(self, target))
+			pcall(self.OnEquipped, self, target)
 		end
 	end
 end

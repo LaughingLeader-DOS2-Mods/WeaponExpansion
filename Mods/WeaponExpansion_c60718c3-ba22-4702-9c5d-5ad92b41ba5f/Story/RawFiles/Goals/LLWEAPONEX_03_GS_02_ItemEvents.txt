@@ -36,6 +36,7 @@ NRD_ModQuery1("WeaponExpansion", "CanParseCorpseTreasure", _UUID)
 THEN
 NRD_ModCall("WeaponExpansion", "CheckCharacterDeathTreasure", _UUID);
 
+/*
 IF
 ItemAddedToContainer(_Item, _Container)
 AND
@@ -57,6 +58,7 @@ AND
 GetUUID(_Item, _ItemUUID)
 THEN
 NRD_ModCall("WeaponExpansion", "SwapDeltamods", _ItemUUID, _BaseStat, _ItemType, (STRING)_Level, (STRING)_Seed);
+*/
 
 /*
 IF

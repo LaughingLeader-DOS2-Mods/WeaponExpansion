@@ -54,7 +54,7 @@ local function ConvertArmorDamage(target,handle)
 					else
 						nextDamage = 0
 						NRD_HitClearDamage(handle, damageType)
-						local damageText = GameHelpers.GetColoredDamageText(damageType, damage)
+						local damageText = GameHelpers.GetDamageText(damageType, damage)
 						local messageData = MessageData:CreateFromTable("LLWEAPONEX_DamageText", {
 							Handle = Ext.GetCharacter(target).NetID,
 							Text = damageText

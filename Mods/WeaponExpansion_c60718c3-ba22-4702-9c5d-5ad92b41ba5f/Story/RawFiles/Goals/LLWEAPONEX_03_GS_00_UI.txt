@@ -12,25 +12,29 @@ NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode);
 IF
 UserConnected(_ID, _, _)
 AND
-DB_LeaderLib_GameStarted(1)
-AND
 GetCurrentCharacter(_ID, _Player)
+AND
+GetUUID(_Player, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "SendClientID", (STRING)_Player, (STRING)_ID);
+NRD_ModCall("WeaponExpansion", "SendClientID", _UUID, (STRING)_ID);
 
 IF
 UserEvent(_ID, "LLWEAPONEX_SendClientID")
 AND
 GetCurrentCharacter(_ID, _Player)
+AND
+GetUUID(_Player, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "SendClientID", (STRING)_Player, (STRING)_ID);
+NRD_ModCall("WeaponExpansion", "SendClientID", _UUID, (STRING)_ID);
 
 IF
 CharacterReservedUserIDChanged(_Player, _Old, _New)
 AND
 _Old != _New
+AND
+GetUUID(_Player, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "SendClientID", (STRING)_Player, (STRING)_New);
+NRD_ModCall("WeaponExpansion", "SendClientID", _UUID, (STRING)_New);
 
 IF
 TimerFinished("Timers_LLWEAPONEX_SetActivePlayers")
@@ -38,7 +42,7 @@ THEN
 IterateUsers("LLWEAPONEX_SendClientID");
 
 IF
-TimerFinished("Timers_LLWEAPONEX_OnLuaReset")
+TimerFinished("Timers_LeaderLib_Debug_LuaReset")
 AND
 DB_CurrentLevel(_Region)
 AND

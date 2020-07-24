@@ -343,7 +343,6 @@ String(_Item, _ItemStr)
 AND
 String(_Owner, _OwnerStr)
 THEN
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_00_Helpers:Iterator_Npc_EquipInventory] Equipping item [",_ItemStr,"] on NPC [",_OwnerStr,"].");
 CharacterEquipItem(_Owner, _Item);
 //END_REGION
 

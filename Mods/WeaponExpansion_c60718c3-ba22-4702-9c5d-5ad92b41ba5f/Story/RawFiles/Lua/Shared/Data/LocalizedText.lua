@@ -26,6 +26,12 @@ Text = {
 		LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Shadow = TranslatedString:Create("h07354a00ga0f1g4bf5gbaddg2e466a5be964", "<font color='#797980'>Void-touched Bullets</font>"),
 		LOOT_Rune_LLWEAPONEX_Pistol_Bullets_Silver = TranslatedString:Create("h0a0ec3d0g79bcg4deegbcb2g46129e9603cd", "<font color='#C0C0C0'>Silver Bullets</font>"),
 	},
+	ItemTooltip = {
+		SpecialRuneDamageTypeText = TranslatedString:Create("hff86de07g52e5g491cga553g90bb501e6f52", "<font color='#FFD900'>Changes [1] damage to [2].</font>"),
+		RuneSlot = TranslatedString:Create("h975e0db3gc056g4211g9d3eg2b5d8a34bb5b", "Rune Slot"),
+		RuneOnHitTagText = TranslatedString:Create("h3ee45020g2bb3g45c0ga195gc7282c87e628", "Amplifies Shoot Skill"),
+		ChanceText = TranslatedString:Create("h54e0b91cg48a7g4d5agaedcgbde756a109ea", "([1]% Chance)"),
+	},
 	MasteryMenu = {
 		Title = TranslatedString:Create("h2ead0b87gb4b0g410ag8334ge82de5c8fea0","Weapon Masteries"),
 		CloseButton = TranslatedString:Create("h688b0700g55a2g46cdgb02cg6269d72d7dad","Close"),

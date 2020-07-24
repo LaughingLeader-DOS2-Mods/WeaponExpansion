@@ -27,9 +27,6 @@ function OnItemTemplateOpening(char, item, template)
 	containerItems[item] = {}
 	InventoryLaunchIterator(item, "LLWEAPONEX_Iterator_StoreFoundItem", "")
 	FireOsirisEvents()
-	print("OnItemTemplateOpening["..item.."]("..template..")")
-	print(Ext.JsonStringify(containerItems[item]))
-
 	for i,v in pairs(containerItems[item]) do
 		SwapDeltamods(v)
 	end
@@ -48,9 +45,6 @@ function CheckCharacterDeathTreasure(char)
 	---@type EsvCharacter
 	local character = Ext.GetCharacter(char)
 	local items = character:GetInventoryItems()
-	print("CheckCharacterDeathTreasure["..char.."]")
-	print(Ext.JsonStringify(items))
-
 	for i,v in pairs(items) do
 		SwapDeltamods(v)
 	end

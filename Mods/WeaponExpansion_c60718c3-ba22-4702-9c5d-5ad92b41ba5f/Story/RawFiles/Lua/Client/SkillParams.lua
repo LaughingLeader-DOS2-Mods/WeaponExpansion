@@ -128,7 +128,7 @@ local skillAbility = {
 local function GetSkillAbility(skill, character, isFromItem, param)
 	local ability = skillAbility[skill.Name]
 	if ability ~= nil then
-		local text = string.gsub(Text.SkillScaling.LevelBased.Value, "%[1%]", GameHelpers.GetAbilityName(ability))
+		local text = string.gsub(Text.DefaultSkillScaling.LevelBased.Value, "%[1%]", GameHelpers.GetAbilityName(ability))
 		if text ~= nil then
 			return "<br><font color='#078FC8'>"..text.."</font>"
 		end
@@ -140,7 +140,7 @@ Skills.Params["LLWEAPONEX_ScalingStat"] = GetSkillAbility
 
 local function GetHighestAttribute(skill, character, isFromItem, param)
 	local att = Skills.GetHighestAttribute(character)
-	local text = string.gsub(Text.SkillScaling.LevelBased.Value, "%[1%]", att)
+	local text = string.gsub(Text.DefaultSkillScaling.LevelBased.Value, "%[1%]", att)
 	return "<br><font color='#078FC8'>"..text.."</font>"
 end
 
@@ -202,6 +202,42 @@ Skills.Params["LLWEAPONEX_StealChance"] = GetStealChance
 
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
+local function GetDamageParamResult(param_func, skill, character, isFromItem)
+	local status,damageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
+	if status then
+		if damageRange ~= nil then
+			local damageTexts = {}
+			local totalDamageTypes = 0
+			for damageType,damage in pairs(damageRange) do
+				local min = damage[1]
+				local max = damage[2]
+				if min == nil then min = 0 end
+				if max == nil then max = 0 end
+	
+				if min > 0 and max > 0 then
+					if max == min then
+						table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
+					else
+						table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
+					end
+				end
+				totalDamageTypes = totalDamageTypes + 1
+			end
+			if totalDamageTypes > 0 then
+				if totalDamageTypes > 1 then
+					return LeaderLib.Common.StringJoin(", ", damageTexts)
+				else
+					return damageTexts[1]
+				end
+			end
+		end
+	else
+		Ext.PrintError("Error getting param ("..param..") for skill:\n",damageRange)
+		return ""
+	end
+	return ""
+end
+
 --- @param skill StatEntrySkillData
 --- @param character StatCharacter
 --- @param isFromItem boolean
@@ -213,39 +249,13 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 		else
 			local param_func = Skills.Damage[skill.Name]
 			if param_func ~= nil then
-				local status,damageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
-				if status then
-					if damageRange ~= nil then
-						local damageTexts = {}
-						local totalDamageTypes = 0
-						for damageType,damage in pairs(damageRange) do
-							local min = damage[1]
-							local max = damage[2]
-							if min == nil then min = 0 end
-							if max == nil then max = 0 end
-				
-							if min > 0 and max > 0 then
-								if max == min then
-									table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
-								else
-									table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
-								end
-							end
-							totalDamageTypes = totalDamageTypes + 1
-						end
-						if totalDamageTypes > 0 then
-							if totalDamageTypes > 1 then
-								return LeaderLib.Common.StringJoin(", ", damageTexts)
-							else
-								return damageTexts[1]
-							end
-						end
-					end
-				else
-					Ext.PrintError("Error getting param ("..param..") for skill:\n",damageRange)
-					return ""
-				end
+				return GetDamageParamResult(param_func, skill, character, isFromItem)
 			end
+		end
+	elseif Skills.DamageParam[param] ~= nil then
+		local param_func = Skills.DamageParam[param]
+		if param_func ~= nil then
+			return GetDamageParamResult(param_func, skill, character, isFromItem)
 		end
 	else
 		local param_func = Skills.Params[param]

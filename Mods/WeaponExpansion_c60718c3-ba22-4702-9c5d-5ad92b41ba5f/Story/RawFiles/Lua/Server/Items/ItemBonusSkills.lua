@@ -77,7 +77,7 @@ local function LoadBonusSkills()
 			end
 		end
 	end
-	print("[WeaponExpansion] Item bonus skills:", Ext.JsonStringify(ItemBonusSkills))
+	--print("[WeaponExpansion] Item bonus skills:", Ext.JsonStringify(ItemBonusSkills))
 end
 
 function RollForBonusSkill(item,stat,itemType,rarity)

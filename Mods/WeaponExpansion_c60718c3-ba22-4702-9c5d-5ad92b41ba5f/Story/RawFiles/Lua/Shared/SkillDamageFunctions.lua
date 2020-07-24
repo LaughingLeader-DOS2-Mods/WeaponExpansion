@@ -104,136 +104,6 @@ local function GetHighestAttribute(character, validAttributes)
 	return attribute
 end
 
-local skillAttributes = {
-	"Ability",
-	--"ActionPoints",
-	--"Cooldown",
-	"Damage Multiplier",
-	"Damage Range",
-	"Damage",
-	"DamageType",
-	"DeathType",
-	"Distance Damage Multiplier",
-	--"IsEnemySkill",
-	--"IsMelee",
-	"Level",
-	--"Magic Cost",
-	--"Memory Cost",
-	--"OverrideMinAP",
-	"OverrideSkillLevel",
-	--"Range",
-	--"SkillType",
-	"Stealth Damage Multiplier",
-	--"Tier",
-	"UseCharacterStats",
-	"UseWeaponDamage",
-	"UseWeaponProperties",
-}
-
----@param skillName string
----@param useWeaponDamage boolean
----@return StatEntrySkillData
-local function CreateSkillTable(skillName, useWeaponDamage)
-	if skillName ~= nil and skillName ~= "" then
-		local hasValidEntry = false
-		local skill = {Name = skillName}
-		for i,v in pairs(skillAttributes) do
-			local val = Ext.StatGetAttribute(skillName, v)
-			if val ~= nil then
-				hasValidEntry = true
-			end
-			skill[v] = val
-		end
-		if not hasValidEntry then
-			-- Skill doesn't exist?
-			return nil
-		end
-		if useWeaponDamage == true then skill["UseWeaponDamage"] = "Yes" end
-		--Ext.Print(Ext.JsonStringify(skill))
-		return skill
-	end
-	return nil
-end
-
-local weaponStatAttributes = {
-	"ModifierType",
-	"Damage",
-	"DamageFromBase",
-	"Damage Range",
-	"Damage Type",
-	"DamageBoost",
-	"CriticalDamage",
-	"CriticalChance",
-	"IsTwoHanded",
-	"WeaponType",
-}
-
----@param stat string
----@param level integer
----@param attribute string
----@param weaponType string
----@param damageFromBaseBoost integer
----@return StatItem
-local function CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage)
-	local weapon = {}
-	weapon.ItemType = "Weapon"
-	weapon.Name = stat
-	if attribute ~= nil then
-		weapon.Requirements = {
-			{
-				Requirement = attribute,
-				Param = 0,
-				Not = false
-			}
-		}
-	else
-		weapon.Requirements = Ext.StatGetAttribute(stat, "Requirements")
-	end
-	local weaponStat = {Name = stat}
-	for i,v in pairs(weaponStatAttributes) do
-		weaponStat[v] = Ext.StatGetAttribute(stat, v)
-	end
-	weapon["ModifierType"] = weaponStat["ModifierType"]
-	weapon["IsTwoHanded"] = weaponStat["IsTwoHanded"]
-	weapon["WeaponType"] = weaponStat["WeaponType"]
-	if damageFromBaseBoost ~= nil and damageFromBaseBoost > 0 then
-		weaponStat.DamageFromBase = weaponStat.DamageFromBase + damageFromBaseBoost
-	end
-	local damage = 0
-	if baseWeaponDamage ~= nil then
-		damage = baseWeaponDamage
-	else
-		damage = Game.Math.GetLevelScaledWeaponDamage(level)
-	end
-	local baseDamage = damage * (weaponStat.DamageFromBase * 0.01)
-	local range = baseDamage * (weaponStat["Damage Range"] * 0.01)
-	weaponStat.MinDamage = Ext.Round(baseDamage - (range/2))
-	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))
-	weaponStat.DamageType = weaponStat["Damage Type"]
-	weaponStat.StatsType = "Weapon"
-	if weaponType ~= nil then
-		weapon.WeaponType = weaponType
-		weaponStat.WeaponType = weaponType
-	end
-	weaponStat.Requirements = weapon.Requirements
-	weapon.DynamicStats = {weaponStat}
-	if not isBoostStat then
-		local boostsString = Ext.StatGetAttribute(stat, "Boosts")
-		if boostsString ~= nil and boostsString ~= "" then
-			local boosts = LeaderLib.StringHelpers.Split(boostsString, ";")
-			for i,boostStat in ipairs(boosts) do
-				if boostStat ~= nil and boostStat ~= "" then
-					local boostWeaponStat = CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage)
-					if boostWeaponStat ~= nil then
-						table.insert(weapon.DynamicStats, boostWeaponStat.DynamicStats[1])
-					end
-				end
-			end
-		end
-	end
-	return weapon
-end
-
 -- from CDivinityStats_Character::CalculateWeaponDamageInner and CDivinityStats_Item::ComputeScaledDamage
 --- @param character StatCharacter
 --- @param weapon StatItem
@@ -387,13 +257,36 @@ local function GetAbilityBasedWeaponDamage(character, isTooltip, noRandomization
 		noRandomization = false 
 	end
 	local highestAttribute = GetHighestAttribute(character)
-	local weapon = CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, weaponType, masteryBoost)
+	local weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, weaponType, masteryBoost)
 	if isTooltip == true then
 		return Math.AbilityScaling.CalculateWeaponDamageRange(character, weapon, ability)
 	else
 		return Math.AbilityScaling.CalculateWeaponDamage(character, weapon, nil, noRandomization, ability)
 	end
-	return weapon
+end
+
+---@param character EsvCharacter
+---@param isTooltip boolean
+---@param noRandomization boolean
+---@return StatItem
+local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
+	local masteryBoost = 0
+	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_Pistol")
+	if masteryLevel > 0 then
+		local boost = GameHelpers.GetExtraData("LLWEAPONEX_PistolMasteryBoost"..masteryLevel, 0)
+		if boost > 0 then
+			masteryBoost = boost
+		end
+	end
+	local rune,weaponBoostStat = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	if weaponBoostStat == nil then 
+		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" 
+	end
+	if noRandomization == nil then 
+		noRandomization = false 
+	end
+	local highestAttribute = GetHighestAttribute(character)
+	return ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, "Rifle", masteryBoost)
 end
 
 ---@param character EsvCharacter
@@ -459,7 +352,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = CreateSkillTable(baseSkill.Name, true)
+	local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name, true)
 	if skill == nil then skill = baseSkill end
 
 	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
@@ -475,7 +368,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 		end
 		--print("LLWEAPONEX_HandCrossbow mastery boost:", masteryLevel, masteryBoost)
 		--print(LeaderLib.Common.Dump(attacker.Character:GetTags()))
-		weapon = CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost)
+		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost)
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
@@ -515,6 +408,10 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	print("GetPistolSkillDamage", baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	if level == nil then
+		level = -1
+	end
     if attacker ~= nil and level < 0 then
         level = attacker.Level
 	end
@@ -528,7 +425,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
+	local skill = ExtenderHelpers.CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
 
 	if skill == nil then
 		Ext.PrintError("Failed to prepare skill data for Projectile_LLWEAPONEX_Pistol_Shoot_Base?")
@@ -548,7 +445,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 			end
 		end
 		--print("LLWEAPONEX_Pistol mastery boost:", masteryLevel, masteryBoost)
-		weapon = CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost)
+		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost)
 		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
@@ -604,7 +501,7 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local skillProps = CreateSkillTable(skill.Name)
+	local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
 	skillProps["Damage Multiplier"] = distanceDamageMult * 10
@@ -640,7 +537,7 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotMaxDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local skillProps = CreateSkillTable(skill.Name)
+	local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
 	skillProps["Damage Multiplier"] = distanceDamageMult * 20
@@ -677,7 +574,7 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local skillProps = CreateSkillTable(skill.Name)
+	local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
 	skillProps["Damage Multiplier"] = 0
@@ -715,7 +612,7 @@ local function ScaleByHighestAttributeAndAbility(ability, weaponStat, validAttri
 	end
 
 	local highestAttribute = GetHighestAttribute(attacker, validAttributes)
-	local weapon = CreateWeaponTable(weaponStat, attacker.Level, highestAttribute, "None")
+	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, attacker.Level, highestAttribute, "None")
 
     local damageMultiplier = skill["Damage Multiplier"] * 0.01
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
@@ -742,13 +639,12 @@ end
 Skills.GetHighestAttribute = GetHighestAttribute
 Skills.GetItem = GetItem
 Skills.GetRuneBoost = GetRuneBoost
-Skills.CreateSkillTable = CreateSkillTable
-Skills.CreateWeaponTable = CreateWeaponTable
 
-Skills.Params.LLWEAPONEX_PistolDamage = GetPistolSkillDamage
-Skills.Params.LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowSkillDamage
-Skills.Params.LLWEAPONEX_AimedShot_AverageDamage = GetAimedShotAverageDamage
-Skills.Params.LLWEAPONEX_AimedShot_MaxDamage = GetAimedShotMaxDamage
+Skills.DamageParam.LLWEAPONEX_PistolDamage = GetPistolSkillDamage
+Skills.DamageParam.LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowSkillDamage
+Skills.DamageParam.LLWEAPONEX_AimedShot_AverageDamage = GetAimedShotAverageDamage
+Skills.DamageParam.LLWEAPONEX_AimedShot_MaxDamage = GetAimedShotMaxDamage
+Skills.GetPistolWeaponStatTable = GetPistolWeaponStatTable
 
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage

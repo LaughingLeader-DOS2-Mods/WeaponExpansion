@@ -124,27 +124,27 @@ function DebugInit()
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
 
     local host = CharacterGetHostCharacter()
-    CharacterAddAbility(host, "Luck", 20)
-    GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
-    GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
-    if CharacterGetAttribute(host, "Strength") < 50 then
-        CharacterAddAttribute(host, "Strength", 50)
-    end
-    if CharacterGetAttribute(host, "Memory") < 50 then
-        CharacterAddAttribute(host, "Memory", 25)
-    end
-    if CharacterGetAbility(host, "WarriorLore") < 4 then
-        CharacterAddAbility(host, "WarriorLore", 4)
-    end
-    if CharacterGetAbility(host, "RogueLore") < 4 then
-        CharacterAddAbility(host, "RogueLore", 4)
-    end
+    -- CharacterAddAbility(host, "Luck", 20)
+    -- GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
+    -- GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
+    -- if CharacterGetAttribute(host, "Strength") < 50 then
+    --     CharacterAddAttribute(host, "Strength", 50)
+    -- end
+    -- if CharacterGetAttribute(host, "Memory") < 50 then
+    --     CharacterAddAttribute(host, "Memory", 25)
+    -- end
+    -- if CharacterGetAbility(host, "WarriorLore") < 4 then
+    --     CharacterAddAbility(host, "WarriorLore", 4)
+    -- end
+    -- if CharacterGetAbility(host, "RogueLore") < 4 then
+    --     CharacterAddAbility(host, "RogueLore", 4)
+    -- end
 
-    for skill,data in pairs(Mastery.Params.SkillData) do
-        if not string.find(skill, "Enemy") then
-            CharacterAddSkill(host, skill, 0)
-        end
-    end
+    -- for skill,data in pairs(Mastery.Params.SkillData) do
+    --     if not string.find(skill, "Enemy") then
+    --         CharacterAddSkill(host, skill, 0)
+    --     end
+    -- end
 
     --ApplyStatus(host, "LLWEAPONEX_RUPTURE", 360.0, 1, host)
     --RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
@@ -262,15 +262,7 @@ if Ext.IsDeveloperMode() then
     end
     Ext.RegisterConsoleCommand("item", Debug_AddItem)
 
-    local function Debug_ResetLua(command)
-        local host = CharacterGetHostCharacter()
-        TimerCancel("Timers_LLWEAPONEX_OnLuaReset")
-        TimerLaunch("Timers_LLWEAPONEX_OnLuaReset", 250)
-        NRD_LuaReset(1,1,1)
-    end
-    Ext.RegisterConsoleCommand("reset", Debug_ResetLua)
-
-    local function Debug_ResetLua(command, effect, bone, target)
+    Ext.RegisterConsoleCommand("statusDuration", function(command, effect, bone, target)
         local host = CharacterGetHostCharacter()
         if HasActiveStatus(host, "HASTED") == 0 then
             ApplyStatus(host, "HASTED", 24.0, 1, host)
@@ -288,15 +280,7 @@ if Ext.IsDeveloperMode() then
                 }):ToString())
             end
         end
-    end
-    Ext.RegisterConsoleCommand("statusDuration", Debug_ResetLua)
-
-    local function Debug_ResetLua(command)
-        local host = CharacterGetHostCharacter()
-        TimerCancel("Timers_LLWEAPONEX_OnLuaReset")
-        TimerLaunch("Timers_LLWEAPONEX_OnLuaReset", 250)
-        NRD_LuaReset(1,1,1)
-    end
+    end)
     --!reward ST_LLWEAPONEX_RunebladesRare
     --!reward ST_LLWEAPONEX_TestDeltamodReplacement
     --!printdeltamods

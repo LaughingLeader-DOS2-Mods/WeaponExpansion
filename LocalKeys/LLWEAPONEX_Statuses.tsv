@@ -108,3 +108,5 @@ LLWEAPONEX_WEAKNESS_WATER_Description	Character has lowered resistance to <font 
 LLWEAPONEX_WEAKNESS_WATER_DisplayName	Water Weakness	h7b2b18c8g3e44g4c5bg84e2g36b6727b36d0
 LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.	h9438faeagb29fg4451g8ee7g17e4bf3e31e2
 LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith	hd53002a9g6a71g4350gbe19g9a90ce4d9e19
+LLWEAPONEX_CHAIN_LIGHTNING_WEAK_DisplayName	Surging Shock	h056235e1ge01eg4caagb551g39f2eea4c3d8
+LLWEAPONEX_CHAIN_LIGHTNING_WEAK_Description	Bonus damage with a [1]% chance<br>to fork [2] time(s).	h25bbf6e6g536dg4dd0gb01egf760da3d4f84

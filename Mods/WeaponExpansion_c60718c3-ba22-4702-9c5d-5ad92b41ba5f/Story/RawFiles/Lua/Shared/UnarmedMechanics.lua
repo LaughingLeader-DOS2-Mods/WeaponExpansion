@@ -55,7 +55,7 @@ function GetUnarmedWeapon(character, skipItemCheck)
 	end
 	local unarmedMasteryBoost = GetUnarmedMasteryBoost(unarmedMasteryRank)
 	---@type StatItem
-	local weapon = Skills.CreateWeaponTable(weaponStat, level, highestAttribute, "None", unarmedMasteryBoost)
+	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, level, highestAttribute, "None", unarmedMasteryBoost)
 	--print("Unarmed weapon:", Common.Dump(weapon), getmetatable(character.Character))
 	--print(getmetatable(character), type(getmetatable(character)))
 	return weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
@@ -77,7 +77,7 @@ function GetUnarmedWeaponDamageRange(character, item)
 	if item.Tags ~= nil and string.find(item.Tags, "LLWEAPONEX_UnarmedWeaponEquipped") then
 		local unarmedWeaponStatName = UnarmedWeaponStats[item.Name]
 		if unarmedWeaponStatName ~= nil then
-			local unarmedWeapon = Skills.CreateWeaponTable(unarmedWeaponStatName, item.Level, highestAttribute, "None", unarmedMasteryBoost)
+			local unarmedWeapon = ExtenderHelpers.CreateWeaponTable(unarmedWeaponStatName, item.Level, highestAttribute, "None", unarmedMasteryBoost)
 			if unarmedWeapon ~= nil then
 				for i,stat in ipairs(unarmedWeapon.DynamicStats) do
 					if i > 1 then

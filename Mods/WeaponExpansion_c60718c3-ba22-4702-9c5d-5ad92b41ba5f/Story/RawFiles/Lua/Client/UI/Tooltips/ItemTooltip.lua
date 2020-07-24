@@ -21,10 +21,10 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 		local equipped = tooltip:GetElement("Equipped")
 		if equipped ~= nil then
 			if equippedLabel ~= nil then
-				equipped.Warning = equippedLabel
+				equipped.Slot = equippedLabel
 			else
 				--equipped.Label = itemType
-				equipped.Warning = itemType
+				equipped.Slot = itemType
 			end
 		elseif equippedLabel ~= nil then
 			-- local element = {
@@ -57,7 +57,6 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 		RequirementMet = true
 	}
 	tooltip:AppendElement(element)
-	print("damageRange", Common.Dump(damageRange))
 	for damageType,data in pairs(damageRange) do
 		element = {
 			Type = "WeaponDamage",
@@ -117,28 +116,137 @@ local WeaponTypeNames = {
 
 local AutoLevelingDescription = TranslatedString:Create("hca27994egc60eg495dg8146g7f81c970e265", "<font color='#80FFC3'>Automatically levels up with the user, gaining new bonuses at various levels.</font>")
 
----@param item EsvItem
+---@class StatProperty
+---@field Type string Status|Action
+---@field Action string LLWEAPONEX_UNARMED_NOWEAPON_HIT etc
+---@field Context string[] Target|Self
+---@field Duration number
+---@field StatusChance number
+---@field Arg3 string
+---@field Arg4 number
+---@field Arg5 number
+---@field SurfaceBoost boolean
+
+---@param item EclItem
+---@param tooltip TooltipData
+---@param character EclCharacter
+---@param weaponTypeTag string
+---@param weaponTypeTag string
+---@param slotTag string
+---@param weaponDamageFunction function
+local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotTag, weaponDamageFunction)
+	tooltip:RemoveElements("EmptyRuneSlot")
+	tooltip:RemoveElements("RuneSlot")
+	tooltip:RemoveElements("RuneEffect")
+	local boost = Ext.StatGetAttribute(item.StatsId, "RuneEffectWeapon")
+	local damageType = Ext.StatGetAttribute(boost, "Damage Type")
+	local weaponTypeName = Ext.GetTranslatedStringFromKey(weaponTypeTag)
+	local text = Text.ItemTooltip.SpecialRuneDamageTypeText:ReplacePlaceholders(weaponTypeName, GameHelpers.GetDamageText(damageType))
+	local element = {
+		Type = "SkillDescription",
+		Label = text
+	}
+	tooltip:AppendElement(element)
+
+	local armorSlotType = tooltip:GetElement("ArmorSlotType")
+	if armorSlotType == nil then
+		armorSlotType = {
+			Type = "ArmorSlotType",
+			Label = ""
+		}
+	end
+	armorSlotType.Label = Ext.GetTranslatedStringFromKey(slotTag)
+	local equipped = tooltip:GetElement("Equipped")
+	if equipped == nil then
+		equipped = {
+			Type = "Equipped",
+			Label = "",
+			EquippedBy = character.DisplayName,
+			Slot = Text.ItemTooltip.RuneSlot.Value
+		}
+		tooltip:AppendElement(equipped)
+	else
+		equipped.Slot = Text.ItemTooltip.RuneSlot.Value
+	end
+
+	---@type StatProperty[]
+	local extraProperties = Ext.StatGetAttribute(boost, "ExtraProperties")
+	if extraProperties ~= nil then
+		for i,v in pairs(extraProperties) do
+			if v.Type == "Status" then
+				local title = Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(v.Action, "DisplayName")) or "StatusName"
+				local description = Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(v.Action, "Description")) or ""
+				if v.StatusChance < 1.0 then
+					local chan
+					title = string.format("%s %s", title, Text.ItemTooltip.ChanceText:ReplacePlaceholders(math.ceil(v.StatusChance * 100)))
+				end
+				if description ~= nil and description ~= "" then
+					local descParams = Ext.StatGetAttribute(v.Action, "DescriptionParams")
+					if descParams ~= nil and descParams ~= "" then
+						local paramValues = {}
+						local params = StringHelpers.Split(descParams, ";")
+						for i,v in pairs(params) do
+							local characterStats = ExtenderHelpers.CreateStatCharacterTable(character.Stats.Name)
+							local paramValue = StatusGetDescriptionParam(v.Action, character, characterStats, table.unpack(StringHelpers.Split(v, ":")))
+							if paramValue ~= nil then
+								table.insert(paramValues, paramValue)
+							end
+						end
+						description = StringHelpers.ReplacePlaceholders(description, paramValues)
+					end
+				end
+				if description == nil then
+					description = ""
+				end
+				tooltip:AppendElement({
+					Type = "Tags",
+					Label = title,
+					Value = description,
+					Warning = Text.ItemTooltip.RuneOnHitTagText.Value
+				})
+			else
+				tooltip:AppendElement({
+					Type = "ExtraProperties",
+					Label = v.Action
+				})
+			end
+		end
+	end
+end
+
+local EquipmentTypes = {
+	Shield = true,
+	Weapon = true,
+	Armor = true,
+}
+
+---@param item EclItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
-	--print(item.StatsId, Ext.JsonStringify(tooltip.Data))
+	---@type EclCharacter
+	local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+	print(CLIENT_UI.ACTIVE_CHARACTER, character, character.Stats)
 	if item ~= nil then
-		if item:HasTag("LLWEAPONEX_Pistol") then
-			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-			local damageRange = Skills.DamageFunctions.PistolDamage(character, true)
-			local apCost = Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
-			local weaponRange = string.format("%sm", Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
-			CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
-		elseif item:HasTag("LLWEAPONEX_HandCrossbow") then
-			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-			local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true)
-			local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
-			local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
-			CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
-		elseif item:HasTag("LLWEAPONEX_Unarmed") then
-			local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+		local fakeDamageCreated = false
+		if character ~= nil then
+			if item:HasTag("LLWEAPONEX_Pistol") then
+				local damageRange = Skills.DamageFunctions.PistolDamage(character, true)
+				local apCost = Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
+				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
+				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
+				fakeDamageCreated = true
+			elseif item:HasTag("LLWEAPONEX_HandCrossbow") then
+				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true)
+				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
+				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
+				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
+				fakeDamageCreated = true
+			end
+		end
+		if not fakeDamageCreated and item:HasTag("LLWEAPONEX_Unarmed") then
 			local damageRange,highestAttribute = GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
 			--local highestAttribute = "Finesse"
-			--local bonusWeapon = Skills.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
+			--local bonusWeapon = ExtenderHelpers.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
 			--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
 			local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
 			local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
@@ -150,7 +258,8 @@ local function OnItemTooltip(item, tooltip)
 			end
 			local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
 			CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
-		else
+		end
+		if not fakeDamageCreated then
 			for i,entry in ipairs(WeaponTypeNames) do
 				if item:HasTag(entry.Tag) then
 					local armorSlotType = tooltip:GetElement("ArmorSlotType")
@@ -170,6 +279,16 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
+		if character ~= nil then
+			print(character.Stats, character.Stats.Name)
+			if item:HasTag("LLWEAPONEX_Rune_HandCrossbow_DamageType") then
+				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbowBolt")
+			end
+			if item:HasTag("LLWEAPONEX_Rune_Pistol_DamageType") then
+				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
+			end
+		end
+
 		if item:HasTag("LeaderLib_AutoLevel") then
 			local element = tooltip:GetElement("ItemDescription")
 			if element ~= nil and not string.find(element.Label, "Automatically levels up") then
@@ -181,8 +300,18 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
+		local statTags = ""
+
+		if EquipmentTypes[item.ItemType] then
+			if item.Stats ~= nil then
+				statTags = item.Stats.Tags
+			else
+				statTags = Ext.StatGetAttribute(item.StatsId, "Tags")
+			end
+		end
+
 		for tag,b in pairs(TagDisplay) do
-			if item:HasTag(tag) or item.Stats.Tags:find(tag) then
+			if item:HasTag(tag) or statTags:find(tag) then
 				local ref,handle = Ext.GetTranslatedStringFromKey(tag)
 				local text = Ext.GetTranslatedString(handle, ref)
 				local element = {

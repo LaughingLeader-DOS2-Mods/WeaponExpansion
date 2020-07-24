@@ -238,10 +238,10 @@ local function StatOverrides_Init()
 							Rifle = defaultBulletTemplate
 						})
 						Ext.StatSetAttribute(skill, "Template", templateString)
-						print("[WeaponExpansion] Added rifle template support to skill ", skill)
+						--print("[WeaponExpansion] Added rifle template support to skill ", skill)
 					end
 					appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
-					print("[WeaponExpansion] Added rifle bullet explosion effect support to skill ", skill)
+					--print("[WeaponExpansion] Added rifle bullet explosion effect support to skill ", skill)
 			end
 		end
 	end

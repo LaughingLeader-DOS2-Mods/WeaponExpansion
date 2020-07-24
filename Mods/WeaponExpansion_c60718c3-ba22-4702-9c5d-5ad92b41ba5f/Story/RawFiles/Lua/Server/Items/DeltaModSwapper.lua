@@ -352,6 +352,11 @@ function SwapDeltamods(item,baseStat,itemType,rarity,level,seed)
 	end
 end
 
+Ext.RegisterListener("TreasureItemGenerated", function(item)
+	SwapDeltaMods(item)
+	SwapDeltamods(item,baseStat,itemType,rarity,level,seed)
+end)
+
 if Ext.IsDeveloperMode() then
 	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
 		local host = CharacterGetHostCharacter()

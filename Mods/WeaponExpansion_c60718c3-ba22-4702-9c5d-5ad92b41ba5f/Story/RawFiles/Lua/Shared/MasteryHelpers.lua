@@ -6,7 +6,6 @@ local function GetHighestMasteryRank(character, mastery)
 	if type(character) == "string" then
 		character = Ext.GetCharacter(character)
 	end
-	print(character)
 	if character ~= nil then
 		for i=Mastery.Variables.MaxRank,1,-1 do
 			local tag = string.format("%s_Mastery%i", mastery, i)
