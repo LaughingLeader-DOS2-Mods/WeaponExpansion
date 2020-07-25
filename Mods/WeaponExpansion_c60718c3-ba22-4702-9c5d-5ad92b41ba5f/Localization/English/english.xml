@@ -722,6 +722,7 @@
 	<content contentuid="h512652d3gde9fg4c21ga542g84ba504ac1ba">Throw Remote Charge</content>
 	<content contentuid="h51274ed6gfb4dg4728g9f6fg8a8a69f49bfd">Weapon Mastery (Journeyman)</content>
 	<content contentuid="h51346687ga5e7g43feg9047g1406918d0719">&lt;font color=&apos;#D040D0&apos;&gt;Flask of Chaotic Weakness&lt;/font&gt;</content>
+	<content contentuid="h513c781bgc3e9g41ccga1a2g287a01b86471">Release an orb of dark fire, dealing [1] and applying Soul Burn.&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Damage/Range/Explosion Radius scales with the amount of every enemy that has died.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF3333&apos;&gt;Casting this spell resets the bonuses accumulated.&lt;/font&gt;</content>
 	<content contentuid="h514f7a04gd4bdg4d18g9afeg2ec6234555ad">Dwarven Greatbow</content>
 	<content contentuid="h516be507g1b44g4701g8d0bg7a8562c700bd">Blessed Water Arrow</content>
 	<content contentuid="h517bfe9fg7243g42b8ga592g0d774197a744">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to absorb elements in their surroundings and activate them their blade for a limited time.</content>
@@ -814,6 +815,7 @@
 	<content contentuid="h5b0872ddg4f86g4befg953cg6cda43630600">a Katana</content>
 	<content contentuid="h5b132a5cg9c3ag4905g884dg4e814fbef78e">Character&apos;s firearm is attuned to blood.</content>
 	<content contentuid="h5b16d546gf2c8g4350g894bg5b409289ae46">Blademaster</content>
+	<content contentuid="h5b745736g3b45g4164g9a40g0c45b9c78921">Breathe shadowey flames in a cone, dealing [1], applying Soul Burn, and leaving a cursed fire surface behind.</content>
 	<content contentuid="h5b8eef1cg79f0g40b6g9139gf9ad7b0a17e0">Old Foil</content>
 	<content contentuid="h5bb9e064ge628g4ee0gba9fg2d3ad2d80f20">Icecrash</content>
 	<content contentuid="h5bcba301g8929g4b57gbf08g99e888af12c4">Character has been hit by a flying blunt weapon. It&apos;s stuck!</content>
@@ -1772,6 +1774,7 @@
 	<content contentuid="hc75c7588gb43fg478egbf7eg85dbef7b8479">Runemaster</content>
 	<content contentuid="hc7a7b08cg6d28g4d2eg9cc8g7fc1dee50834">&lt;font color=&apos;#FF337F&apos;&gt;Pistol Mastery II&lt;/font&gt;</content>
 	<content contentuid="hc7d8f564ga55dg4767g9c6agfb9f2688d7d0">Empowered Runic Gloves</content>
+	<content contentuid="hc7f8dca2gb752g4627g9351ge185459bc219">A Dead Enemy in Combat</content>
 	<content contentuid="hc80e9017g9899g4524g83d2ga48f319a1eff">Expert Runekeeper</content>
 	<content contentuid="hc81de6aag392dg4c6fg9168g9c0a3dbdc09e">Special tattoos that grant the bearer tremendous strength.</content>
 	<content contentuid="hc82989a4gad80g43e9g9bb9geca7ab4d3b94">Intelligence Conversion</content>
@@ -1844,6 +1847,7 @@
 	<content contentuid="hd099bcf7gce2ag4984g9b97gb2085c3830cc">A sword designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="hd0b7916bgcc5eg4739gb35fge74c48acf1b2">Deals Shadow Damage to broken Magic Armour.</content>
 	<content contentuid="hd0bc2243g2842g4282g8dc0g80fd6e300650">Expert Archer</content>
+	<content contentuid="hd0cbbb71g0431g4007gb8cbg9a3bb5efcfdf">&lt;font color=&apos;#9933FF&apos;&gt;Dark Dragon Fireball&lt;/font&gt;</content>
 	<content contentuid="hd0ea72afgefc5g4008gae85g8f8743270847">Obliterator</content>
 	<content contentuid="hd0ef5c8cg7e6dg4f4dg9ec1g86b169ff0c97">Gladiator&apos;s Victory</content>
 	<content contentuid="hd101a6e8g78d1g4af6g9c85g9cf2abb64e5a">Throwing Ability</content>
@@ -1916,6 +1920,7 @@
 	<content contentuid="hd8da42fdge304g4572gbac6gd43fb7bde09b">Warchief&apos;s Mark</content>
 	<content contentuid="hd90b1d2cg51b0g4cf3g9349g438c8aca171a">Chaotic Power</content>
 	<content contentuid="hd9419db0g1326g48bcgb8a0g7532ff9c3fef">Toggle Rod/Wand Mode</content>
+	<content contentuid="hd952aec3gb0d1g4571gb573gc516e7c2ec3a">&lt;font color=&apos;#9933FF&apos;&gt;Dark Dragon&apos;s Blaze&lt;/font&gt;</content>
 	<content contentuid="hd956012dg01b2g4157gb23bg008312faa7c5">*Take your leave.*</content>
 	<content contentuid="hd9c5480dg8185g4e04ga6b1g2eecae743d0f">[Exit]</content>
 	<content contentuid="hd9d8a486ge548g4c23g94f6gdde08ef24188">Exquisite Quiver</content>

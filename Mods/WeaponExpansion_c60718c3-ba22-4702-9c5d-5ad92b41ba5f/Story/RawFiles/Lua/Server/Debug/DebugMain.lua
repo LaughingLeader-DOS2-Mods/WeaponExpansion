@@ -123,6 +123,9 @@ function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
 
+    PersistentVars.SkillData.DarkFireballCount = 5
+    UpdateDarkFireballSkill()
+
     local host = CharacterGetHostCharacter()
     -- CharacterAddAbility(host, "Luck", 20)
     -- GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
