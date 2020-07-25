@@ -291,6 +291,7 @@
 	<content contentuid="h20877087g6037g498cgb782gbd1817bc469e">Pierce a target with the &lt;font color=&apos;#c5a65a&apos;&gt;Warchief&apos;s Halberd&lt;/font&gt;, crippling enemies and dealing [1].</content>
 	<content contentuid="h20915294g90deg456ag821cgadedb811af47">Beginner</content>
 	<content contentuid="h2091e453g3133g487cgaf66g8c32943acee7">*Suddenly, the rock immediately reverses direction and flies toward your hand.*</content>
+	<content contentuid="h20c41dc2gdde9g41c4g98bagab0ff763160b">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Hardy Toss</content>
 	<content contentuid="h20d004bag1e6bg4ffega2f2g15fc4d61dd63">Skirmisher</content>
 	<content contentuid="h20d0701bgf814g4f84gb06fg2776f58377cc">A former mercenary, your job was to keep the more &lt;i&gt;eccentric&lt;/i&gt; members in check. When the company disbanded, you thought that chapter would be forever closed, yet circumstances beckon you back to a life of perpetual stress.</content>
 	<content contentuid="h20dca820ga17eg45ecgbd12g4ab207ec9e4a">Zuko&apos;s Fury</content>
@@ -342,7 +343,7 @@
 	<content contentuid="h25b104a6g160bg466egb60fg91f44323c005">Adventurers who sail the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it</content>
 	<content contentuid="h25b36dbbge4a8g4fb1gb7d8g31b6743268d6">Wooden Destiny</content>
 	<content contentuid="h25bb1f86gfd15g4ad2g9a50ga54d90dd8fce">&lt;font color=&apos;#4197e2&apos;&gt;Water Great Arrow&lt;/font&gt;</content>
-	<content contentuid="h25bbf6e6g536dg4dd0gb01egf760da3d4f84">Bonus damage with a [2]% chance&lt;br&gt;to fork [3] time(s).</content>
+	<content contentuid="h25bbf6e6g536dg4dd0gb01egf760da3d4f84">Bonus damage with a [1]% chance&lt;br&gt;to fork [2] time(s).</content>
 	<content contentuid="h25c234fegb51eg4854gb8dfg3289120baaad">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Flash of Steel</content>
 	<content contentuid="h25ccf0bega988g4aadg975dgfeea08f0b1bf">Ancient Elven Quiver</content>
 	<content contentuid="h25ea9eedg7c30g4ef7g8b8cg9e8f902cd086">Dwarven Peacekeeper</content>
@@ -754,6 +755,7 @@
 	<content contentuid="h550cf924gacd9g476cgb40egaa4f9ce34c97">Gain Detonation Skill and Enhanced Demolition</content>
 	<content contentuid="h552091c5g2750g44c6g9310gec09d04b0297">Think again. I&apos;ve taken the lives of many who think I&apos;m easy prey...</content>
 	<content contentuid="h553d0fc4gcde0g4864g8c48gf9aaac8c2b2f">Flexible Quickdraw Quiver</content>
+	<content contentuid="h554c032fge468g4805ga1b2gac83ba310781">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Vanquisher&apos;s Path</content>
 	<content contentuid="h55546bdage044g4cddg8e0dgb4af2c1e0ada">Detonate Remote Charge</content>
 	<content contentuid="h55c426bcg89f3g406ag97a6g3e90046c74a2">Pilgrim&apos;s Companion</content>
 	<content contentuid="h55c685d3g6f64g4e20ga159ga2177754a3da">Chaos Weaver</content>
