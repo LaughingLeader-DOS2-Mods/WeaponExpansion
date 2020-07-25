@@ -183,12 +183,12 @@ function SwapUnique(char, id)
 		local slot = GameHelpers.GetEquippedSlot(char,equipped)
 
 		ItemLockUnEquip(equipped, 0)
+		--CharacterUnequipItem(char, equipped)
 
 		if not isTwoHanded then
 			NRD_CharacterEquipItem(char, next, slot, 0, 1, 1, 1)
 		else
 			NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
-			CharacterUnequipItem(char, equipped)
 		end
 
 		if locked then

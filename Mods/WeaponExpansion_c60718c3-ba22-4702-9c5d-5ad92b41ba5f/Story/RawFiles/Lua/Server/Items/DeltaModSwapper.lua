@@ -321,14 +321,14 @@ function SwapDeltaMods(item)
 				end
 
 				local clone = NRD_ItemClone()
+				local inventory = GetInventoryOwner(item) or nil
 				--NRD_ItemSetIdentified(clone, itemObject.Stats.IsIdentified)
 				NRD_ItemSetIdentified(clone, 1)
 				RollForBonusSkill(clone, stat, itemType, rarity)
 				ObjectSetFlag(clone, "LLWEAPONEX_ProcessedDeltamods", 0)
-				SetVarFixedString(item, "LeaderLib_Rarity", rarity)
-				SetVarInteger(item, "LeaderLib_Level", level)
+				SetVarFixedString(clone, "LeaderLib_Rarity", rarity)
+				SetVarInteger(clone, "LeaderLib_Level", level)
 
-				local inventory = GetInventoryOwner(item) or nil
 				local slot = nil
 				if inventory == nil then
 					inventory = CharacterGetHostCharacter()
@@ -336,14 +336,17 @@ function SwapDeltaMods(item)
 				if inventory ~= nil and ObjectIsCharacter(inventory) == 1 then
 					slot = GameHelpers.GetEquippedSlot(inventory,item)
 				end
+				ItemRemove(item)
 				if inventory ~= nil then
 					if slot ~= nil then
 						GameHelpers.EquipInSlot(inventory, clone, slot)
 					else
 						ItemToInventory(clone, inventory, 1, 0, 0)
 					end
+					if CharacterIsPlayer(inventory) == 1 then
+						Ext.PostMessageToClient(inventory, "LeaderLib_AutoSortPlayerInventory", inventory)
+					end
 				end
-				ItemRemove(item)
 				--NRD_ItemIterateDeltaModifiers(clone, "LLWEAPONEX_Debug_PrintDeltamod")
 			else
 				ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
@@ -354,10 +357,14 @@ function SwapDeltaMods(item)
 					local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
 					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
 					local clone = NRD_ItemClone()
+					ItemRemove(item)
 					local inventory = GetInventoryOwner(item)
 					local slot = nil
 					if ObjectIsCharacter(inventory) == 1 then
 						slot = GameHelpers.GetEquippedSlot(inventory,item)
+						if CharacterIsPlayer(inventory) == 1 then
+							Ext.PostMessageToClient(inventory, "LeaderLib_AutoSortInventory", inventory)
+						end
 					end
 					if inventory ~= nil then
 						if slot ~= nil then
@@ -366,7 +373,6 @@ function SwapDeltaMods(item)
 							ItemToInventory(clone, inventory, 1, 0, 0)
 						end
 					end
-					ItemRemove(item)
 				end
 			end
 		else
@@ -379,7 +385,7 @@ end
 Ext.RegisterListener("TreasureItemGenerated", function(item)
 	Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
 	TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
-	TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 50)
+	TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
 	--SwapDeltaMods(item.MyGuid)
 end)
 

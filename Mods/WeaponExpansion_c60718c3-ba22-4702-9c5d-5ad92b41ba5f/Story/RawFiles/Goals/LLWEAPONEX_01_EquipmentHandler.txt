@@ -45,9 +45,11 @@ IF
 TimerFinished("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
 AND
 DB_LLWEAPONEX_Items_Temp_Generated(_Item)
+AND
+GetUUID(_Item, _UUID)
 THEN
 NOT DB_LLWEAPONEX_Items_Temp_Generated(_Item);
-NRD_ModCall("WeaponExpansion", "SwapDeltaMods", (STRING)_Item);
+NRD_ModCall("WeaponExpansion", "SwapDeltaMods", _UUID);
 //END_REGION
 
 //REGION TRACK_EQUIPMENT
