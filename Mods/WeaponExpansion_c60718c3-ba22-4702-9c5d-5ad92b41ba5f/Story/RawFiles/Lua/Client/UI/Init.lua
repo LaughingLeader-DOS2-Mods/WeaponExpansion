@@ -236,7 +236,7 @@ local function LLWEAPONEX_Client_SessionLoaded()
 	--tooltipOverrides.Init()
 	tooltipHandler.Init()
 	if Ext.IsDeveloperMode() then
-		--debug.Client_UIDebugTest()
+		debug.Client_UIDebugTest()
 		--debug.MouseTest()
 	end
 end

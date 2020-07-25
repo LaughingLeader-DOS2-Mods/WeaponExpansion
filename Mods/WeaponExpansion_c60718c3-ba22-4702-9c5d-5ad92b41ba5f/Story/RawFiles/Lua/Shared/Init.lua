@@ -21,7 +21,8 @@ Temp = {
 }
 Vars = {
 	GAME_STARTED = false,
-	SEND_USER_ID = false
+	SEND_USER_ID = false,
+	isInCharacterCreation = false,
 }
 
 Skills = {

@@ -20,34 +20,11 @@ end
 local function Client_UIDebugTest()
 	---@type UIObject
 	local ui = nil
-	-- local ui = Ext.GetBuiltinUI("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf")
-	-- if ui == nil then
-	-- 	Ext.Print("[LLWEAPONEX:Client:UI.lua:SetupOptionsSettings] Failed to get (Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon_WithCallback.swf).")
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/skills.swf")
+	ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
 	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "setPlayerInfo", OnSheetEvent)
-		Ext.RegisterUICall(ui, "showSkillTooltip", OnSheetEvent)
-		Ext.RegisterUICall(ui, "showStatTooltip", OnSheetEvent)
-		--Ext.RegisterUIInvokeListener(ui, "addSecondaryStat", OnCharacterSheetUpdating)
-		Ext.RegisterUIInvokeListener(ui, "updateArraySystem", OnCharacterSheetUpdating)
-		Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
-		--Ext.RegisterUIInvokeListener(ui, "selectCharacter", OnCharacterSelected)
-		--Ext.RegisterUIInvokeListener(ui, "updateCharList", OnCharacterSelected)
-		--Ext.RegisterUIInvokeListener(ui, "cycleCharList", OnCharacterSelected)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
-		Ext.RegisterUICall(ui, "charSel", OnCharacterSelected)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/examine.swf")
-	if ui ~= nil then
-		Ext.RegisterUICall(ui, "showTooltip", OnSheetEvent)
-		Ext.RegisterUICall(ui, "showStatusTooltip", OnSheetEvent)
+		Ext.RegisterUICall(ui, "selectOption", function(ui, ...)
+			print("selectOptions", Ext.JsonStringify({...}))
+		end)
 	end
 end
 

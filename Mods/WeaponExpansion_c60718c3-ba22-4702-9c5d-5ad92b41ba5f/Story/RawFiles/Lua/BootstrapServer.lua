@@ -1,4 +1,8 @@
-PersistentVars = {}
+PersistentVars = {
+    SkillData = {
+        DarkFireballCount = 0
+    }
+}
 LoadPersistentVars = {}
 BonusSkills = {}
 

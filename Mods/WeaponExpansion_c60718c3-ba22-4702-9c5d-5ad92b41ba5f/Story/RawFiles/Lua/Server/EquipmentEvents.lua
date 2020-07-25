@@ -198,17 +198,3 @@ function MagicMissileWeapon_Swap(char, wand, rod)
 		Osi.LeaderLib_Timers_StartObjectObjectTimer(equippedItem, targetItem, 50, "Timers_LLWEAPONEX_MoveMagicMissileWeapon", "LeaderLib_Commands_ItemToInventory")
 	end
 end
-
-function CC_SwapToHarkenAnvilPreview(player, preset)
-	local weapon = CharacterGetEquippedWeapon(player)
-	ItemRemove(weapon)
-	NRD_ItemConstructBegin("85e2e75e-4333-425e-adc4-94474c3fc201")
-	NRD_ItemCloneSetString("GenerationStatsId", "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_Preview")
-	NRD_ItemCloneSetString("StatsEntryName", "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_Preview")
-	NRD_ItemCloneSetInt("HasGeneratedStats", 0)
-	NRD_ItemCloneSetInt("GenerationLevel", 1)
-	NRD_ItemCloneSetInt("StatsLevel", 1)
-	NRD_ItemCloneSetInt("IsIdentified", 1)
-	local item = NRD_ItemClone()
-	NRD_CharacterEquipItem(player, item, "Weapon", 0, 0, 0, 1)
-end

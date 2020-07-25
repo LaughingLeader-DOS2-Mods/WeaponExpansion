@@ -54,3 +54,66 @@ Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMem
 		-- end
 	end
 end)
+
+
+local anvilSwapPresets = {
+	Knight = true,
+	Inquisitor = true,
+	Berserker = true,
+	Barbarian = true,
+}
+
+function CC_CheckKorvashColor(player)
+	local character = Ext.GetCharacter(player)
+	local color = character.PlayerCustomData.SkinColor
+	print(color)
+	if color == 4294902015 then-- Pink?
+		NRD_PlayerSetCustomDataInt(player, "SkinColor", 4281936940)
+		Ext.EnableExperimentalPropertyWrites()
+		character.PlayerCustomData.SkinColor = 4281936940
+		Ext.PostMessageToClient(player, "LLWEAPONEX_FixLizardSkin", player)
+	end
+end
+
+function CC_SwapToHarkenAnvilPreview(player, preset)
+	if anvilSwapPresets[preset] == true then
+		local weapon = CharacterGetEquippedWeapon(player)
+		ItemRemove(weapon)
+		NRD_ItemConstructBegin("85e2e75e-4333-425e-adc4-94474c3fc201")
+		NRD_ItemCloneSetString("GenerationStatsId", "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_Preview")
+		NRD_ItemCloneSetString("StatsEntryName", "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_Preview")
+		NRD_ItemCloneSetInt("HasGeneratedStats", 0)
+		NRD_ItemCloneSetInt("GenerationLevel", 1)
+		NRD_ItemCloneSetInt("StatsLevel", 1)
+		NRD_ItemCloneSetInt("IsIdentified", 1)
+		local item = NRD_ItemClone()
+		NRD_CharacterEquipItem(player, item, "Weapon", 0, 0, 0, 1)
+	end
+end
+
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData HitData
+local function ClearOriginSkillRequiredTag(skill, char, state, skillData)
+	if state == SKILL_STATE.CAST then
+		ClearTag(char, "LLWEAPONEX_EnemyDiedInCombat")
+	end
+end
+LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", ClearOriginSkillRequiredTag)
+
+function UpdateDarkFireballSkill()
+	if PersistentVars.SkillData.DarkFireballCount >= 1 then
+		local rangeBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_RangePerCount"] or 1.0
+		local radiusBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount"] or 0.4
+	
+		local nextRange = math.floor(6 + (rangeBonusMult * PersistentVars.SkillData.DarkFireballCount))
+		local nextRadius = math.floor(1 + (radiusBonusMult * PersistentVars.SkillData.DarkFireballCount))
+	
+		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
+		stat.TargetRadius = nextRadius
+		stat.AreaRadius = nextRadius
+		stat.ExplodeRadius = nextRadius
+		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
+	end
+end

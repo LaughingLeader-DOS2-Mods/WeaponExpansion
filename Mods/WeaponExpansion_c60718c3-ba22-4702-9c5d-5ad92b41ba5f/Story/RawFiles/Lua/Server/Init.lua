@@ -245,6 +245,8 @@ function OnGameStarted(region, editorMode, sendClientIds, postReset)
     if postReset ~= nil then
         Ext.BroadcastMessage("LLWEAPONEX_LuaWasReset", "", nil)
     end
+
+    UpdateDarkFireballSkill()
 end
 
 local function LeaderLibSetup()

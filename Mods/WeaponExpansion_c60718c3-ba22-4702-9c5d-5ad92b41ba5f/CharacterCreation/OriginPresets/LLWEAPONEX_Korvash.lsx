@@ -29,7 +29,17 @@
                                     <attribute id="Object" value="Lizard" type="22" />
                                 </node>
                 			</children>
-                		</node>
+                        </node>
+                        
+                        <node id="SkinColors">
+							<children>
+								<node id="ColorDesc">
+									<attribute id="ID" value="13" type="5" />
+									<attribute id="ColorName" value="Biotite" handle="h156c50begd220g4c63g9f0dg95b656de69b7" type="28" />
+									<attribute id="Value" value="0xff303032" type="5" />
+								</node>						
+							</children>
+						</node>
                 	</children>
                 </node>
             </children>

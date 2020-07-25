@@ -413,7 +413,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			if hasMinimumMasteryRankData(characterMasteryData, tag, 1) then
 				table.insert(masteryKeys, tag)
 			else
-				LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(characterMasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
+				--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(characterMasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
 			end
 		end
 		table.sort(masteryKeys, sortMasteries)

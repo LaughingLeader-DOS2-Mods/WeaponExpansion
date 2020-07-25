@@ -1,10 +1,8 @@
 local currentLevel = ""
-local isInCharacterCreation = false
-
 Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMode)
 	currentLevel = region
-	isInCharacterCreation = IsCharacterCreationLevel(region) == 1
-	if isInCharacterCreation then
+	Vars.isInCharacterCreation = IsCharacterCreationLevel(region) == 1
+	if Vars.isInCharacterCreation then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 	else
 		for id,unique in pairs (Uniques) do
@@ -16,13 +14,14 @@ end)
 Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
 	if IsCharacterCreationLevel(region) == 1 then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationFinished", "", nil)
-		isInCharacterCreation = false
+		Vars.isInCharacterCreation = false
+		Ext.GetCharacter(Mercs.Korvash):SetScale(1.1)
 	end
 end)
 
 Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profileId)
 	local character = GetCurrentCharacter(id)
-	if isInCharacterCreation then
+	if Vars.isInCharacterCreation then
 		Ext.PostMessageToClient(character, "LLWEAPONEX_OnCharacterCreationStarted", "")
 	end
 	Ext.PostMessageToClient(character, "LLWEAPONEX_SetActiveCharacter", GetUUID(character))
@@ -105,3 +104,38 @@ local function OnStatusApplied(target, status, source)
 end
 Ext.RegisterOsirisListener("CharacterStatusApplied", 3, "after", OnStatusApplied)
 Ext.RegisterOsirisListener("ItemStatusChange", 3, "after", OnStatusApplied)
+
+local function OnCharacterDied(char)
+	local id = CombatGetIDForCharacter(char)
+	if id ~= nil then
+		for i,entry in pairs(Osi.DB_CombatCharacter:Get(nil, id)) do
+			if CharacterIsEnemy(char, entry[1]) == 1 then
+				SetTag(entry[1], "LLWEAPONEX_EnemyDiedInCombat")
+			end
+		end
+	else
+		local x,y,z = GetPosition(char)
+		for i,v in pairs(Ext.GetCharactersAroundPosition(x, y, z, 20.0)) do
+			if CharacterIsEnemy(char, v) == 1 and CharacterIsInCombat(v) == 1 then
+				SetTag(entry[1], "LLWEAPONEX_EnemyDiedInCombat")
+			end
+		end
+	end
+
+	if CharacterIsPlayer(Mercs.Korvash) == 1 and CharacterCanSee(Mercs.Korvash, char) == 1 and CharacterIsEnemy(Mercs.Korvash, char) == 1 then
+		PersistentVars.SkillData.DarkFireballCount = math.max(PersistentVars.SkillData.DarkFireballCount + 1, 10)
+		Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
+
+		if PersistentVars.SkillData.DarkFireballCount >= 1 then
+			UpdateDarkFireballSkill()
+		end
+	end
+end
+
+Ext.RegisterOsirisListener("CharacterDied", 1, "after", OnCharacterDied)
+
+local function OnLeftCombat(char, id)
+	ClearTag(char, "LLWEAPONEX_EnemyDiedInCombat")
+end
+
+Ext.RegisterOsirisListener("ObjectLeftCombat", 2, "after", OnLeftCombat)

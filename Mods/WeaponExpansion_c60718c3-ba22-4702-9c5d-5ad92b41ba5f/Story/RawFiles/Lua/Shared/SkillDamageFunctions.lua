@@ -636,6 +636,62 @@ local function ScaleByHighestAttributeAndAbility(ability, weaponStat, validAttri
 	end
 end
 
+--- @param skill StatEntrySkillData
+--- @param attacker StatCharacter
+--- @param isFromItem boolean
+--- @param stealthed boolean
+--- @param attackerPos number[]
+--- @param targetPos number[]
+--- @param level integer
+--- @param noRandomization boolean
+--- @param isTooltip boolean
+local function GetDarkFireballDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	local countMult = 0
+	if Ext.IsClient() then
+		countMult = CLIENT_UI.Vars.SkillData.DarkFireballCount
+	else
+		countMult = PersistentVars.SkillData.DarkFireballCount
+	end
+	if countMult > 0 then
+		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFireball_DamageBonusPerCount"] or 20.0
+		-- key "LLWEAPONEX_DarkFireball_DamageBonusPerCount","20.0"
+		-- key "LLWEAPONEX_DarkFireball_RangePerCount","1.0"
+		-- key "LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount","0.4"
+		local damageMult = (countMult+1) * damageBonus
+
+		local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
+		skillProps["Damage Multiplier"] = skillProps["Damage Multiplier"] + damageMult
+	end
+	if isTooltip ~= true then
+		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+	else
+		local damageRange = Game.Math.GetSkillDamageRange(attacker, skill)
+		if damageRange ~= nil then
+			local damageTexts = {}
+			local totalDamageTypes = 0
+			for damageType,damage in pairs(damageRange) do
+				local min = damage[1]
+				local max = damage[2]
+				if min > 0 or max > 0 then
+					if max == min then
+						table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
+					else
+						table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
+					end
+				end
+				totalDamageTypes = totalDamageTypes + 1
+			end
+			if totalDamageTypes > 0 then
+				if totalDamageTypes > 1 then
+					return StringHelpers.Join(", ", damageTexts)
+				else
+					return damageTexts[1]
+				end
+			end
+		end
+	end
+end
+
 Skills.GetHighestAttribute = GetHighestAttribute
 Skills.GetItem = GetItem
 Skills.GetRuneBoost = GetRuneBoost
@@ -653,6 +709,7 @@ Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDam
 Skills.Damage.Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage
 Skills.Damage.Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
 Skills.Damage.Target_LLWEAPONEX_Steal = function(...) return ScaleByHighestAttributeAndAbility("RogueLore", "_Daggers", AttributeScaleTables.NoMemory, ...) end
+Skills.Damage.Projectile_LLWEAPONEX_DarkFireball = GetDarkFireballDamage
 
 Skills.DamageFunctions.PistolDamage = GetPistolDamage
 Skills.DamageFunctions.HandCrossbowDamage = GetHandCrossbowDamage
