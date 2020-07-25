@@ -119,6 +119,16 @@ local gameTestTemplates = {
     "WPN_LLWEAPONEX_Tanto_1H_A_53a214ff-46b3-428d-ad35-02543b8e10f9",
 }
 
+LeaderLib.RegisterListener("LuaReset", function()
+	print("****************************Resending client UI data.*****************************")
+	InitClientID()
+	if Ext.IsDeveloperMode() and PersistentVars.SkillData.DarkFireballCount == 0 then
+		PersistentVars.SkillData.DarkFireballCount = 5
+		UpdateDarkFireballSkill()
+	end
+	SyncVars()
+end)
+
 function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")

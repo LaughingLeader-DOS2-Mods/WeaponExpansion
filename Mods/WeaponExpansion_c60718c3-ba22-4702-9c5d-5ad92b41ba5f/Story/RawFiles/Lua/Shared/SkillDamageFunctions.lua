@@ -645,7 +645,7 @@ end
 --- @param level integer
 --- @param noRandomization boolean
 --- @param isTooltip boolean
-local function GetDarkFireballDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local countMult = 0
 	if Ext.IsClient() then
 		countMult = CLIENT_UI.Vars.SkillData.DarkFireballCount
@@ -658,36 +658,12 @@ local function GetDarkFireballDamage(skill, attacker, isFromItem, stealthed, att
 		-- key "LLWEAPONEX_DarkFireball_RangePerCount","1.0"
 		-- key "LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount","0.4"
 		local damageMult = (countMult+1) * damageBonus
-
-		local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
-		skillProps["Damage Multiplier"] = skillProps["Damage Multiplier"] + damageMult
-	end
-	if isTooltip ~= true then
-		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
-	else
-		local damageRange = Game.Math.GetSkillDamageRange(attacker, skill)
-		if damageRange ~= nil then
-			local damageTexts = {}
-			local totalDamageTypes = 0
-			for damageType,damage in pairs(damageRange) do
-				local min = damage[1]
-				local max = damage[2]
-				if min > 0 or max > 0 then
-					if max == min then
-						table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
-					else
-						table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
-					end
-				end
-				totalDamageTypes = totalDamageTypes + 1
-			end
-			if totalDamageTypes > 0 then
-				if totalDamageTypes > 1 then
-					return StringHelpers.Join(", ", damageTexts)
-				else
-					return damageTexts[1]
-				end
-			end
+		local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
+		skill["Damage Multiplier"] = skill["Damage Multiplier"] + damageMult
+		if isTooltip ~= true then
+			return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+		else
+			return Game.Math.GetSkillDamageRange(attacker, skill)
 		end
 	end
 end

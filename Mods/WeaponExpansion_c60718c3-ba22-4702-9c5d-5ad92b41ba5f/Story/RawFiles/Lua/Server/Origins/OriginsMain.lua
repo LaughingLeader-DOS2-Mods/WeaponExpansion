@@ -22,6 +22,8 @@ function Origins_InitCharacters(region, isEditorMode)
 		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Helmet", true)
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
 		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
+		CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
+		CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 	end
 	Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 
@@ -102,18 +104,44 @@ local function ClearOriginSkillRequiredTag(skill, char, state, skillData)
 end
 LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", ClearOriginSkillRequiredTag)
 
+
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData HitData
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, skillData)
+	if state == SKILL_STATE.CAST then
+		PersistentVars.SkillData.DarkFireballCount = 0
+		UpdateDarkFireballSkill()
+		SyncVars()
+	end
+end)
+
 function UpdateDarkFireballSkill()
-	if PersistentVars.SkillData.DarkFireballCount >= 1 then
+	local killCount = PersistentVars.SkillData.DarkFireballCount or 0
+	if killCount >= 1 then
 		local rangeBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_RangePerCount"] or 1.0
 		local radiusBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount"] or 0.4
 	
-		local nextRange = math.floor(6 + (rangeBonusMult * PersistentVars.SkillData.DarkFireballCount))
-		local nextRadius = math.floor(1 + (radiusBonusMult * PersistentVars.SkillData.DarkFireballCount))
+		local nextRange = math.floor(6 + (rangeBonusMult * killCount))
+		local nextRadius = math.floor(1 + (radiusBonusMult * killCount))
 	
 		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
-		stat.TargetRadius = nextRadius
+		stat.TargetRadius = nextRange
 		stat.AreaRadius = nextRadius
 		stat.ExplodeRadius = nextRadius
+
+		if killCount >= 5 then
+			stat.Template = "9bdb7e9c-02ce-4f2f-9e7b-463e3771af9c"
+		end
+
+		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
+	else
+		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
+		stat.TargetRadius = 6
+		stat.AreaRadius = 1
+		stat.ExplodeRadius = 1
+		stat.Template = "f3af4ac9-567c-4ac8-8976-ec9c7bc8260d"
 		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
 	end
 end

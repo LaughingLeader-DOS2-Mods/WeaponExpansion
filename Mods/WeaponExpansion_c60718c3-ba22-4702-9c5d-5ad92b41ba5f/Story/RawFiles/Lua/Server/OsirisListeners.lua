@@ -108,7 +108,7 @@ Ext.RegisterOsirisListener("ItemStatusChange", 3, "after", OnStatusApplied)
 local function OnCharacterDied(char)
 	local id = CombatGetIDForCharacter(char)
 	if id ~= nil then
-		for i,entry in pairs(Osi.DB_CombatCharacter:Get(nil, id)) do
+		for i,entry in pairs(Osi.DB_CombatCharacters:Get(nil, id)) do
 			if CharacterIsEnemy(char, entry[1]) == 1 then
 				SetTag(entry[1], "LLWEAPONEX_EnemyDiedInCombat")
 			end
@@ -124,8 +124,8 @@ local function OnCharacterDied(char)
 
 	if CharacterIsPlayer(Mercs.Korvash) == 1 and CharacterCanSee(Mercs.Korvash, char) == 1 and CharacterIsEnemy(Mercs.Korvash, char) == 1 then
 		PersistentVars.SkillData.DarkFireballCount = math.max(PersistentVars.SkillData.DarkFireballCount + 1, 10)
-		Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
-
+		--Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
+		SyncVars()
 		if PersistentVars.SkillData.DarkFireballCount >= 1 then
 			UpdateDarkFireballSkill()
 		end

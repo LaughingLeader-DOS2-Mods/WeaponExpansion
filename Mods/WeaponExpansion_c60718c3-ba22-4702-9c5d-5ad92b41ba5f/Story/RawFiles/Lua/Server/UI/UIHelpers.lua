@@ -44,11 +44,6 @@ function InitClientID()
 	end
 end
 
-LeaderLib.RegisterListener("LuaReset", function()
-	print("****************************Resending client UI data.*****************************")
-	InitClientID()
-end)
-
 local function RequestActiveCharacter(call,id_str,callbackID)
 	TimerCancel("Timers_LLWEAPONEX_SetActivePlayers")
 	TimerLaunch("Timers_LLWEAPONEX_SetActivePlayers", 250)
@@ -82,4 +77,9 @@ Ext.RegisterNetListener("LLWEAPONEX_RequestActiveCharacter", RequestActiveCharac
 
 function HookIntoTradeWindow(uuid)
 	Ext.PostMessageToClient(uuid, "LLWEAPONEX_HookIntoTradeWindow", CharacterGetReservedUserID(uuid))
+end
+
+function SyncVars()
+	--Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
+	Ext.BroadcastMessage("LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars), nil)
 end

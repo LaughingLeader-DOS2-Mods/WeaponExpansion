@@ -247,6 +247,7 @@ function OnGameStarted(region, editorMode, sendClientIds, postReset)
     end
 
     UpdateDarkFireballSkill()
+    SyncVars()
 end
 
 local function LeaderLibSetup()

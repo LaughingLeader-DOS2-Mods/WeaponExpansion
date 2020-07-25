@@ -14,7 +14,7 @@ Shout_LLWEAPONEX_UnrelentingRage_DisplayName	<font color='#FF5533'>Unrelenting R
 Cone_LLWEAPONEX_DarkFlamebreath_DisplayName	<font color='#9933FF'>Dark Dragon's Blaze</font>	hd952aec3gb0d1g4571gb573gc516e7c2ec3a
 Cone_LLWEAPONEX_DarkFlamebreath_Description	Breathe shadowey flames in a cone, dealing [1], applying Soul Burn, and leaving a cursed fire surface behind.	h5b745736g3b45g4164g9a40g0c45b9c78921
 Projectile_LLWEAPONEX_DarkFireball_DisplayName	<font color='#9933FF'>Dark Dragon Fireball</font>	hd0cbbb71g0431g4007gb8cbg9a3bb5efcfdf
-Projectile_LLWEAPONEX_DarkFireball_Description	Release an orb of dark fire, dealing [1] and applying Soul Burn.<br><font color='#00FFFF'>Damage/Range/Explosion Radius scales with the amount of every enemy that has died.</font><br><font color='#FF3333'>Casting this spell resets the bonuses accumulated.</font>	h513c781bgc3e9g41ccga1a2g287a01b86471
+Projectile_LLWEAPONEX_DarkFireball_Description	Release an orb of dark fire, dealing [1] and applying Soul Burn.<br><font color='#00FFFF'>Damage/Range/Explosion Radius increases with every enemy that dies in combat.</font><br><font color='#FF3333'>Casting this spell resets the bonuses accumulated.</font>	h513c781bgc3e9g41ccga1a2g287a01b86471
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_Description	The sure-fire, instant death wombo combo, done live.	ha7bb24e6gbfb5g4bfcgae42gf706d1338fc7
 Shout_LLWEAPONEX_WeaponMaster_OmaeWaMouShindeiru_DisplayName	<font color='#FF3311'>You're Already Dead</font>	h6c893108gee88g48f4gbdd5g3c6ee6dabb65
 Target_LLWEAPONEX_MagicCripplingBlow_Description	<font color='#00BFFF' size='18'>Magic Warfare</font><br>Cripple all enemies within [1] of the target. Deals [2].	h004f820eg3b47g4400ga26dgc77fb1d9292e
