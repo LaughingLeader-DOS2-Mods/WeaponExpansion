@@ -12,6 +12,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Weapon", true)
 		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Helmet", true)
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
+		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
 	end
 	Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
 	
@@ -20,6 +21,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Weapon", true)
 		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Helmet", true)
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
+		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
 	end
 	Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 
@@ -35,3 +37,20 @@ function Origins_InitCharacters(region, isEditorMode)
 		end
 	end
 end
+
+Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMember)
+	if ObjectGetFlag(partyMember, "LLWEAPONEX_FixSkillBar") == 1 then
+		ObjectClearFlag(partyMember, "LLWEAPONEX_FixSkillBar")
+		for i=0,64,1 do
+			local slot = NRD_SkillBarGetItem(partyMember, i)
+			if not StringHelpers.IsNullOrEmpty(slot) then
+				NRD_SkillBarClear(partyMember, i)
+			end
+		end
+		-- local slot = 0
+		-- for i,skill in pairs(Ext.GetCharacter(partyMember):GetSkills()) do
+		-- 	NRD_SkillBarSetSkill(partyMember, slot, skill)
+		-- 	slot = slot + 1
+		-- end
+	end
+end)
