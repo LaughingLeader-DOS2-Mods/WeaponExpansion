@@ -20,13 +20,7 @@ LLWEAPONEX_HandCrossbow_InitSettings();
 //END_REGION
 
 //REGION RELOADING
-IF
-SkillCast(_Char, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", _, _)
-AND
-CharacterHasSkill(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload", 1)
-THEN
-NRD_SkillSetCooldown(_Char, "Shout_LLWEAPONEX_HandCrossbow_Reload", 0.0);
-
+/*
 IF
 SkillCast(_Char, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", _, _)
 THEN
@@ -50,28 +44,7 @@ AND
 CharacterHasSkill(_Char, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", 1)
 THEN
 NRD_SkillSetCooldown(_Char, "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", 0.0);
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_HANDCROSSBOW_EMPTY", _)
-AND
-DB_LLWEAPONEX_HandCrossbow_ShootingSkills(_Skill)
-AND
-NRD_SkillGetCooldown(_Char, _Skill, _CD)
-AND
-_CD > 0.0
-THEN
-SetTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
-
-IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_HANDCROSSBOW_EMPTY", _)
-AND
-DB_LLWEAPONEX_HandCrossbow_ShootingSkills(_Skill)
-AND
-NRD_SkillGetCooldown(_Char, _Skill, _CD)
-AND
-_CD <= 0.0
-THEN
-ClearTag(_Char, "LLWEAPONEX_HandCrossbow_CanReload");
+*/
 //END_REGION
 
 //REGION EQUIPPED

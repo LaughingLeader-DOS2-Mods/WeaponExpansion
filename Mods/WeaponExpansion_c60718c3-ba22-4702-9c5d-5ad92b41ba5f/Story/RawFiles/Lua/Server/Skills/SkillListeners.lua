@@ -180,3 +180,22 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 		end
 	end
 end)
+
+--Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy
+
+---@param reverse boolean
+---@param skill string
+---@param char string
+---@param state SkillState
+---@param data HitData
+local function SwapSkills(nextSkill, skill, char, state, data)
+	if state == SKILL_STATE.CAST then
+		LeaderLib.SwapSkill(char, skill, nextSkill)
+	end
+end
+
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_HandCrossbow_Reload", ...) end)
+LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_HandCrossbow_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot", ...) end)
+LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", ...) end)
+LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Target_LLWEAPONEX_Pistol_Shoot", ...) end)
+--LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", function(...) SwapHandCrossbowSkills(false, ...) end)

@@ -1,8 +1,3 @@
-new entry "LLWEAPONEX_PISTOL_EMPTY"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
-
 new entry "LLWEAPONEX_PISTOL_SHOOT_HIT"
 type "StatusData"
 data "StatusType" "CONSUME"

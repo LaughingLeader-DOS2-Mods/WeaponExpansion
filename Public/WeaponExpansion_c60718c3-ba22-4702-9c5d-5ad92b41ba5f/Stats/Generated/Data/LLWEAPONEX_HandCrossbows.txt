@@ -30,7 +30,7 @@ data "Charges" "0"
 data "MaxCharges" "0"
 data "ItemColor" "LLWEAPONEX_HandCrossbow_A"
 data "RuneSlots" "1"
-data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot;Shout_LLWEAPONEX_HandCrossbow_Reload"
+data "Skills" "Projectile_LLWEAPONEX_HandCrossbow_Shoot"
 data "Tags" "LLWEAPONEX_HandCrossbow_Equipped"
 
 new entry "ARM_LLWEAPONEX_HandCrossbow_A"

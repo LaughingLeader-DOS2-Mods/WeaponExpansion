@@ -234,54 +234,6 @@ THEN
 DB_NOOP(1);
 //END_REGION
 
-//REGION RELOADING
-IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_Shoot", _, _)
-THEN
-NRD_SkillSetCooldown(_Char, "Shout_LLWEAPONEX_Pistol_Reload", 0.0);
-ApplyStatus(_Char, "LLWEAPONEX_PISTOL_EMPTY", 6.0, 1, _Char);
-
-IF
-SkillCast(_Char, "Target_LLWEAPONEX_Pistol_Shoot_Enemy", _, _)
-THEN
-NRD_SkillSetCooldown(_Char, "Shout_LLWEAPONEX_Pistol_Reload", 0.0);
-ApplyStatus(_Char, "LLWEAPONEX_PISTOL_EMPTY", 6.0, 1, _Char);
-
-IF
-CharacterUsedSkill(_Char, "Shout_LLWEAPONEX_Pistol_Reload", _, _)
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_PISTOL_EMPTY");
-
-IF
-CharacterUsedSkill(_Char, "Shout_LLWEAPONEX_Pistol_Reload", _, _)
-AND
-DB_LLWEAPONEX_Pistols_ShootingSkills(_Skill)
-AND
-CharacterHasSkill(_Char, _Skill, 1)
-THEN
-NRD_SkillSetCooldown(_Char, _Skill, 0.0);
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_PISTOL_EMPTY", _)
-AND
-DB_LLWEAPONEX_Pistols_ShootingSkills(_Skill)
-AND
-NRD_SkillGetCooldown(_Char, _Skill, _CD)
-AND
-_CD > 0.0
-THEN
-SetTag(_Char, "LLWEAPONEX_Pistol_CanReload");
-
-IF
-CharacterStatusRemoved(_Char, "LLWEAPONEX_PISTOL_EMPTY", _)
-AND
-DB_LLWEAPONEX_Pistols_ShootingSkills(_Skill)
-AND
-NRD_SkillGetCooldown(_Char, _Skill, _CD)
-AND
-_CD <= 0.0
-THEN
-ClearTag(_Char, "LLWEAPONEX_Pistol_CanReload");
 EXITSECTION
 
 ENDEXITSECTION
