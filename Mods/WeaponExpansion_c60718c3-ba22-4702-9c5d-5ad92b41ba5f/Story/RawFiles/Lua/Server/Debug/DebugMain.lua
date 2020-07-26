@@ -165,30 +165,6 @@ function DebugInit()
     --ApplyStatus(host, "LLWEAPONEX_DEBUG_BONUS_WEAPON_TEST", -1.0, 0, host)
     --ApplyStatus(CharacterGetHostCharacter(), "SLEEPING", -1.0, 1, CharacterGetHostCharacter())
     local x,y,z = GetPosition(host)
-    for mastery,masterData in pairs(Masteries) do
-        --local rank = Ext.Random(1,4)
-        local rank = 4
-        local xp = 0
-        if rank > 0 then
-            if rank >= 4 then
-                xp = Mastery.Variables.RankVariables[rank].Required
-            else
-                local rankData = Mastery.Variables.RankVariables[rank]
-                local nextRankData = Mastery.Variables.RankVariables[rank+1]
-                if rankData.Amount > 0 then
-                    xp = Ext.Random(rankData.Required, nextRankData.Required - 1)
-                else
-                    xp = rankData.Required
-                end
-            end
-        else
-            xp = Ext.Random(0, Mastery.Variables.RankVariables[1].Required)
-        end
-        TagMasteryRanks(host, mastery, rank)
-        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)
-    end
-    Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Axe",4,Mastery.Variables.RankVariables[4].Required)
-    Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Unarmed",4,Mastery.Variables.RankVariables[4].Required)
 
     if ItemTemplateIsInPartyInventory(host, "ad15f666-285d-4634-a832-ea643fa0a9d2", 0) <= 0 then
         ItemTemplateAddTo("ad15f666-285d-4634-a832-ea643fa0a9d2", host, 1, 0)
@@ -250,7 +226,42 @@ local function OpenMasteryMenu(...)
 end
 Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu)
 
+Ext.RegisterConsoleCommand("weaponex_removemastery", function(call, mastery)
+    local host = CharacterGetHostCharacter()
+    Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Delete(host, mastery, nil, nil)
+    Osi.DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries:Delete(host, nil, mastery)
+    Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(host, mastery)
+end)
+
 if Ext.IsDeveloperMode() then
+    Ext.RegisterConsoleCommand("weaponex_masterall", function(call)
+        local host = CharacterGetHostCharacter()
+        for mastery,masterData in pairs(Masteries) do
+            --local rank = Ext.Random(1,4)
+            local rank = 4
+            local xp = 0
+            if rank > 0 then
+                if rank >= 4 then
+                    xp = Mastery.Variables.RankVariables[rank].Required
+                else
+                    local rankData = Mastery.Variables.RankVariables[rank]
+                    local nextRankData = Mastery.Variables.RankVariables[rank+1]
+                    if rankData.Amount > 0 then
+                        xp = Ext.Random(rankData.Required, nextRankData.Required - 1)
+                    else
+                        xp = rankData.Required
+                    end
+                end
+            else
+                xp = Ext.Random(0, Mastery.Variables.RankVariables[1].Required)
+            end
+            TagMasteryRanks(host, mastery, rank)
+            Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)
+        end
+        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Axe",4,Mastery.Variables.RankVariables[4].Required)
+        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Unarmed",4,Mastery.Variables.RankVariables[4].Required)
+    end)
+
     local function Debug_PlayEffectCommand(command, effect, bone, target)
         if target == nil then target = CharacterGetHostCharacter() end
         if bone == nil then bone = "" end

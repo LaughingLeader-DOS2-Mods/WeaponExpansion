@@ -139,3 +139,14 @@ local function OnLeftCombat(char, id)
 end
 
 Ext.RegisterOsirisListener("ObjectLeftCombat", 2, "after", OnLeftCombat)
+
+Ext.RegisterOsirisListener("ObjectWasTagged", 2, "after", function(object, tag)
+
+
+end)
+
+Ext.RegisterOsirisListener("ObjectLostTag", 2, "after", function(object, tag)
+	if tag == "LLWEAPONEX_Unarmed" then
+
+	end
+end)

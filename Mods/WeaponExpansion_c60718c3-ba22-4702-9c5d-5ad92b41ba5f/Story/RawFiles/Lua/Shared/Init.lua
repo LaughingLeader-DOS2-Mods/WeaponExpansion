@@ -30,6 +30,7 @@ Skills = {
 	DamageParam = {},
 	Damage = {},
 	DamageFunctions = {},
+	WarfareMeleeSkills = {}
 }
 
 AttributeScaleTables = {
@@ -110,6 +111,19 @@ local function LoadExperienceVariables()
 
 	Mastery.Variables.MaxRank = math.floor(maxRank)
 	Mastery.Variables.RankVariables = RankVariables
+
+	for i,skill in pairs(Ext.GetStatEntries("SkillData")) do
+		---@type StatRequirement[]
+		local requirements = Ext.StatGetAttribute(skill, "Requirements")
+		if requirements ~= nil then
+			for i,v in pairs(requirements) do
+				if v.Param == "LLWEAPONEX_NoMeleeWeaponEquipped" then
+					Skills.WarfareMeleeSkills[skill] = true
+					break
+				end
+			end
+		end
+	end
 end
 
 --Ext.RegisterListener("SessionLoading", LoadExperienceVariables)

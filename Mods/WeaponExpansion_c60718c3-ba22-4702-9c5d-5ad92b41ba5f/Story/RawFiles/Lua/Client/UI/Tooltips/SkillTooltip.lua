@@ -51,7 +51,7 @@ end
 ---@param skill string
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
-	--print(skill, Ext.JsonStringify(tooltip.Data))
+	print(skill, Ext.JsonStringify(tooltip:GetElements("SkillRequiredEquipment")))
 	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
 	local descriptionElement = tooltip:GetElement("SkillDescription")
 	local description = ""
@@ -134,6 +134,23 @@ local function OnSkillTooltip(character, skill, tooltip)
 			-- end
 		end
 	end
+
+	if Skills.WarfareMeleeSkills[skill] == true and character:HasTag("LLWEAPONEX_NoMeleeWeaponEquipped") then
+		local isRushSkill = Ext.StatGetAttribute(skill, "SkillType") == "Rush"
+		local requirementName = Ext.GetTranslatedStringFromKey("LLWEAPONEX_NoMeleeWeaponEquipped")
+		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
+			if element.RequirementMet == false then
+				print(Text.Game.NotImmobileRequirement.Value, element.Label)
+				if element.Label == Text.Game.NotImmobileRequirement.Value then
+					tooltip:RemoveElement(element)
+				elseif string.find(element.Label, requirementName) then
+					local requiresText = Ext.GetTranslatedString("hf1571b7eg8f35g4da2g8e38g87fee1c3d79f", "Requires [1] [2]&lt;br&gt;")
+					element.Label = Text.Game.RequiresTag:ReplacePlaceholders("", requirementName):gsub("  ", " ")
+				end
+			end
+		end
+	end
+
 end
 
 return OnSkillTooltip

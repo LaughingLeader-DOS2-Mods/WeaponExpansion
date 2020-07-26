@@ -197,6 +197,8 @@ Text = {
 		CriticalDamage = TranslatedString:Create("h99aa087ag4d93g4bf4gb191g9fc166800711","Critical Damage"),
 		SlotBelt = TranslatedString:Create("h2a76a9ecg2982g4c7bgb66fgbe707db0ac9e","Belt"),
 		SlotRing = TranslatedString:Create("h970199f8ge650g4fa3ga0deg5995696569b6","Ring"),
+		RequiresTag = TranslatedString:Create("hf1571b7eg8f35g4da2g8e38g87fee1c3d79f", "Requires [1] [2]&lt;br&gt;"),
+		NotImmobileRequirement = TranslatedString:Create("hc3338918g67a4g4002g85f4g07818bad4e94", "Cannot use when Movement speed is 0."),
 	},
 	CombatLog = {
 		StealSuccess = TranslatedString:Create("h9f7d431dg1f6dg494dg89b8g4cb4b98994d4","<font color='#00FF00'>[1] stole </font><font color='#00FFAA'>[2]</font><font color='#00FF00'> from [3]!</font>"),

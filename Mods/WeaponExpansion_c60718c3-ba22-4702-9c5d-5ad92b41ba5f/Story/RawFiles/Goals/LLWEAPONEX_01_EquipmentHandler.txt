@@ -106,8 +106,10 @@ DB_NOOP(1);
 
 PROC
 LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
+AND
+GetUUID(_Char, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "OnItemTemplateUnEquipped", (STRING)_Char, (STRING)_Item, _Template);
+NRD_ModCall("WeaponExpansion", "OnItemTemplateUnEquipped", _UUID, (STRING)_Item, _Template);
 //END_REGION
 
 //REGION CLEANUP

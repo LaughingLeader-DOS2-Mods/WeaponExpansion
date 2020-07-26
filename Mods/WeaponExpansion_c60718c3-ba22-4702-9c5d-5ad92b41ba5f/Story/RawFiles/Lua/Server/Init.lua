@@ -226,7 +226,7 @@ end
 
 Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Character, [out](INTEGER)_IsPlayer")
 
-function OnGameStarted(region, editorMode, sendClientIds, postReset)
+function OnGameStarted(region, editorMode, postReset)
     if region == nil then
         region = GetRegion(CharacterGetHostCharacter())
     end
@@ -235,7 +235,7 @@ function OnGameStarted(region, editorMode, sendClientIds, postReset)
         local playersDB = Osi.DB_IsPlayer:Get(nil)
         if playersDB ~= nil then
             for i,entry in pairs(playersDB) do
-                SetIsUnarmed(entry[1])
+                Equipment.CheckUnarmedTags(uuid)
             end
         end
     end
