@@ -12,6 +12,12 @@ function Origins_InitCharacters(region, isEditorMode)
 		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Weapon", true)
 		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Helmet", true)
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
+
+		CharacterRemoveSkill(Mercs.Harken, "Dome_CircleOfProtection")
+		for i,skill in pairs(Ext.GetSkillSet("Avatar_LLWEAPONEX_Harkin")) do
+			CharacterAddSkill(Mercs.Harken, skill, 0)
+		end
+
 		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
 	end
 	Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
@@ -21,9 +27,16 @@ function Origins_InitCharacters(region, isEditorMode)
 		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Weapon", true)
 		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Helmet", true)
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
-		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
+		
+		CharacterRemoveSkill(Mercs.Korvash, "Dome_CircleOfProtection")
 		CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
 		CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
+
+		for i,skill in pairs(Ext.GetSkillSet("Avatar_LLWEAPONEX_Korvash")) do
+			CharacterAddSkill(Mercs.Korvash, skill, 0)
+		end
+
+		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
 	end
 	Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 
