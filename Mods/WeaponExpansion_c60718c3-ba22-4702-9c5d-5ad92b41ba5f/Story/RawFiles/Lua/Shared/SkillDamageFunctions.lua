@@ -631,7 +631,6 @@ local function ScaleByHighestAttributeAndAbility(ability, weaponStat, validAttri
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore", true)
-		Ext.Print(skill.Name, "mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end

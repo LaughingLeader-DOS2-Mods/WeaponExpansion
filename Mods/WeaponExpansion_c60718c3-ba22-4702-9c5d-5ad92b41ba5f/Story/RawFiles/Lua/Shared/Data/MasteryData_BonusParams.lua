@@ -23,8 +23,6 @@ local function GetSkillDamageRange(character, skill)
                 end
             end
 		end
-		
-		Ext.Print("mainDamageRange", LeaderLib.Common.Dump(mainDamageRange))
 
         for damageType, range in pairs(mainDamageRange) do
             local min = Ext.Round(range[1] * damageMultiplier)
@@ -33,8 +31,6 @@ local function GetSkillDamageRange(character, skill)
             range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
 		end
 		
-		Ext.Print("mainDamageRange Boosted", LeaderLib.Common.Dump(mainDamageRange))
-
         local damageType = skill.DamageType
         if damageType ~= "None" and damageType ~= "Sentinel" then
             local min, max = 0, 0
@@ -46,8 +42,6 @@ local function GetSkillDamageRange(character, skill)
             mainDamageRange = {}
             mainDamageRange[damageType] = {min, max}
 		end
-		
-		Ext.Print("mainDamageRange Final", LeaderLib.Common.Dump(mainDamageRange))
 
         return mainDamageRange
     else
