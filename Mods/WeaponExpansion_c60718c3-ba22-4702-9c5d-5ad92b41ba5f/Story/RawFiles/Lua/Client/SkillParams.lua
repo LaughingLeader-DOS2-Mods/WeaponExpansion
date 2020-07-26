@@ -233,9 +233,7 @@ local function GetDamageParamResult(param_func, skill, character, isFromItem)
 		end
 	else
 		Ext.PrintError("Error getting param ("..param..") for skill:\n",damageRange)
-		return ""
 	end
-	return ""
 end
 
 --- @param skill StatEntrySkillData
