@@ -83,14 +83,16 @@ LeaderLib_Timers_StartObjectTimer(_Char, 3, "Timers_LLWEAPONEX_Extender_RefreshT
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Extender_RefreshTagSkills")
 AND
-String(_Char, _CharStr)
+GetUUID(_Char, _UUID)
 AND
 DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag)
 AND
 CharacterHasSkill(_Char, _Skill, 1)
+AND
+IsTagged(_Char, _Tag, _IsTagged)
 THEN
 NOT DB_LLWEAPONEX_Extender_Temp_RefreshSkill(_Char, _Skill, _Tag);
-NRD_ModCall("LeaderLib", "StoreSkillData", _CharStr, _Skill);
+NRD_ModCall("LeaderLib", "SetSkillEnabled", _UUID, _Skill, (STRING)_IsTagged);
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Extender_RefreshTagSkills")

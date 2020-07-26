@@ -753,7 +753,7 @@ CharacterIsControlled(_Char, 1)
 AND
 String(_Char, _CharStr)
 THEN
-NRD_ModCall("LeaderLib", "StoreSkillData", _CharStr, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A");
+NRD_ModCall("LeaderLib", "StoreSkillCooldownData", _CharStr, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", "true");
 SetStoryEvent(_Char, "LeaderLib_RefreshUI_RevertSkillCooldowns");
 
 IF
@@ -763,7 +763,7 @@ CharacterIsControlled(_Char, 1)
 AND
 String(_Char, _CharStr)
 THEN
-NRD_ModCall("LeaderLib", "StoreSkillData", _CharStr, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand");
+NRD_ModCall("LeaderLib", "StoreSkillCooldownData", _CharStr, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", "true");
 SetStoryEvent(_Char, "LeaderLib_RefreshUI_RevertSkillCooldowns");
 //END_REGION
 
