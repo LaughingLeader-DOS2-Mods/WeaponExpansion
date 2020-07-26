@@ -1,4 +1,4 @@
-local Equipment = {}
+Equipment = {}
 
 local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType)
 	if weapontype == "Rapier" or weapontype == "Katana" then
