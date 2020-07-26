@@ -5,6 +5,12 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 	if Vars.isInCharacterCreation then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 	else
+		if IsGameLevel(region) == 1 then
+			if GlobalGetFlag("LLWEAPONEX_VendingMachine_InitializedUniques") == 0 then
+				MoveUniquesToVendingMachine()
+				GlobalFlagSet("LLWEAPONEX_VendingMachine_InitializedUniques")
+			end
+		end
 		for id,unique in pairs (Uniques) do
 			unique:OnLevelChange(region)
 		end

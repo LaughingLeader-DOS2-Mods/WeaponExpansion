@@ -86,9 +86,17 @@ AllUniques = {
 	"S_EQ_UNIQUE_LLWEAPONEX_Blindfold_Monk_A_4258f164-b548-471f-990d-ae641960a842",
 	"S_EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_0ac0d813-f58c-4399-99a8-1626a419bc53",
 	"S_EQ_UNIQUE_LLWEAPONEX_HandCrossbow_A_Ring_70c59769-2838-4137-9421-4e251fecdc89",
-	"S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_Harken_927669c3-b885-4b88-a0c2-6825fbf11af2",
-	"S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988",
+	--"S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_Harken_927669c3-b885-4b88-a0c2-6825fbf11af2",
+	--"S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988",
 }
+
+function MoveUniquesToVendingMachine()
+	for i,item in pairs(AllUniques) do
+		if not GameHelpers.ItemIsEquippedByCharacter(item) and GetInventoryOwner(item) ~= VENDING_MACHINE then
+			ItemToInventory(item, VENDING_MACHINE, 1, 0, 0)
+		end
+	end
+end
 
 local LinkedUniques = {
 	["MagicMissileWand"] = {
