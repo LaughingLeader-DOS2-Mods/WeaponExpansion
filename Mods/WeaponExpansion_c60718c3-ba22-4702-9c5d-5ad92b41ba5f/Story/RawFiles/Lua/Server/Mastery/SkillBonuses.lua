@@ -605,8 +605,9 @@ local function CloakAndDaggerBonuses(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		local bonuses = GetMasteryBonuses(char, skill)
 		if bonuses["PISTOL_CLOAKEDJUMP"] == true then
-			--NRD_SkillSetCooldown(char, "Target_LLWEAPONEX_Pistol_Shoot", 0.0)
-			Osi.CharacterUsedSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "shout", "")
+			if CharacterHasSkill(char, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
+				LeaderLib.SwapSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "Target_LLWEAPONEX_Pistol_Shoot")
+			end
 			if CharacterIsInCombat(char) == 1 then
 				Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
 			end
