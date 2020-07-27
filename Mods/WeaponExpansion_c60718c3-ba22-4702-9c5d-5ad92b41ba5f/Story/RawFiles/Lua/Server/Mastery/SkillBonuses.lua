@@ -1,11 +1,3 @@
-SKILL_STATE = LeaderLib.SKILL_STATE
-local Classes = LeaderLib.Classes
-
----@type SkillEventData
-local SkillEventData = Classes.SkillEventData
----@type HitData
-local HitData = Classes.HitData
-
 local function GetMasteryBonuses(char, skill)
 	local character = Ext.GetCharacter(char)
 	local bonuses = {}
