@@ -308,21 +308,21 @@ if Ext.IsDeveloperMode() then
     --!reward ST_LLWEAPONEX_TestDeltamodReplacement
     --!printdeltamods
 
-    local generateTreasureOriginal = GenerateTreasure
-    local generateTreasureHook = function(item, treasure, level, player)
-        Osi.LeaderLog_Log("DEBUG", "[GenerateTreasure] ",string.format("%s,%s,%i,%s",item, treasure, level, player))
-        generateTreasureOriginal(item, treasure, level, player)
-        --print("[GenerateTreasure] ",item, treasure, level, player)
-    end
-    GenerateTreasure = generateTreasureHook
+    -- local generateTreasureOriginal = GenerateTreasure
+    -- local generateTreasureHook = function(item, treasure, level, player)
+    --     Osi.LeaderLog_Log("DEBUG", "[GenerateTreasure] ",string.format("%s,%s,%i,%s",item, treasure, level, player))
+    --     generateTreasureOriginal(item, treasure, level, player)
+    --     --print("[GenerateTreasure] ",item, treasure, level, player)
+    -- end
+    -- GenerateTreasure = generateTreasureHook
 
-    local rewardOriginal = CharacterGiveReward
-    local rewardHook = function(player, treasure, identified)
-        Osi.LeaderLog_Log("DEBUG", "[CharacterGiveReward] ",string.format("%s,%s,%s",player,treasure,identified))
-        rewardOriginal(player, treasure, identified)
-        --print("[GenerateTreasure] ",item, treasure, level, player)
-    end
-    CharacterGiveReward = rewardHook
+    -- local rewardOriginal = CharacterGiveReward
+    -- local rewardHook = function(player, treasure, identified)
+    --     Osi.LeaderLog_Log("DEBUG", "[CharacterGiveReward] ",string.format("%s,%s,%s",player,treasure,identified))
+    --     rewardOriginal(player, treasure, identified)
+    --     --print("[GenerateTreasure] ",item, treasure, level, player)
+    -- end
+    -- CharacterGiveReward = rewardHook
 end
 
 local debug_DeltaModBoostProperties = {

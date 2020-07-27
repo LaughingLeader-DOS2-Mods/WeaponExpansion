@@ -667,6 +667,28 @@ local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed,
 	end
 end
 
+--- @param skill StatEntrySkillData
+--- @param attacker StatCharacter
+--- @param isFromItem boolean
+--- @param stealthed boolean
+--- @param attackerPos number[]
+--- @param targetPos number[]
+--- @param level integer
+--- @param noRandomization boolean
+--- @param isTooltip boolean
+local function GetDarkFlamebreathDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	local missingHealthMult = math.floor((1 - (attacker.CurrentVitality / attacker.MaxVitality)) * 100.0)
+	if missingHealthMult > 0 then
+		local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
+		skill["Damage Multiplier"] = skill["Damage Multiplier"] + missingHealthMult
+		if isTooltip ~= true then
+			return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+		else
+			return Game.Math.GetSkillDamageRange(attacker, skill)
+		end
+	end
+end
+
 Skills.GetHighestAttribute = GetHighestAttribute
 Skills.GetItem = GetItem
 Skills.GetRuneBoost = GetRuneBoost
@@ -685,6 +707,7 @@ Skills.Damage.Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage
 Skills.Damage.Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
 Skills.Damage.Target_LLWEAPONEX_Steal = function(...) return ScaleByHighestAttributeAndAbility("RogueLore", "_Daggers", AttributeScaleTables.NoMemory, ...) end
 Skills.Damage.Projectile_LLWEAPONEX_DarkFireball = GetDarkFireballDamage
+Skills.Damage.Cone_LLWEAPONEX_DarkFlamebreath = GetDarkFlamebreathDamage
 
 Skills.DamageFunctions.PistolDamage = GetPistolDamage
 Skills.DamageFunctions.HandCrossbowDamage = GetHandCrossbowDamage

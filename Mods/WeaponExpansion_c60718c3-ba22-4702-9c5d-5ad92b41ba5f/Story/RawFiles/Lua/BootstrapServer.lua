@@ -74,11 +74,9 @@ local function SessionSetup()
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
-    Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
-
-    LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
-    LeaderLib.EnableFeature("ExtraDataSkillParamReplacement")
-    LeaderLib.EnableFeature("TooltipGrammarHelper")
+    if Ext.IsDeveloperMode() then
+        --Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
+    end
 
     -- Divinity Unleashed
     if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") then

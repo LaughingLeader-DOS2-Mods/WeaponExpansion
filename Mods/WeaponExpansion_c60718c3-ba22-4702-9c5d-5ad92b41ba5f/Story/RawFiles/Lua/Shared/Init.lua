@@ -74,6 +74,10 @@ Ext.RegisterListener("ModuleLoading", function()
 end)
 
 local function LoadExperienceVariables()
+    LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
+    LeaderLib.EnableFeature("ExtraDataSkillParamReplacement")
+	LeaderLib.EnableFeature("TooltipGrammarHelper")
+	
 	local RankVariables = {}
 	local maxRank = math.tointeger(Ext.ExtraData["LLWEAPONEX_Mastery_MaxRank"] or 4.0)
 	local lastRankExpGain = 45
@@ -129,3 +133,5 @@ end
 --Ext.RegisterListener("SessionLoading", LoadExperienceVariables)
 Ext.RegisterListener("ModuleResume", LoadExperienceVariables) -- Lua Reset
 Ext.RegisterListener("SessionLoaded", LoadExperienceVariables)
+
+Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")

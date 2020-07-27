@@ -69,6 +69,9 @@ function OnItemEquipped(uuid,itemUUID)
 	--local offhand = CharacterGetEquippedItem(uuid, "Shield")
 	if not StringHelpers.IsNullOrEmpty(itemUUID) then
 		local item = Ext.GetItem(itemUUID)
+		if item == nil then
+			return
+		end
 		local stat = item.StatsId
 		local statType = item.Stats.ItemType
 

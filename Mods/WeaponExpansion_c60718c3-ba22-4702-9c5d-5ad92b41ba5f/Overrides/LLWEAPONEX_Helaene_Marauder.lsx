@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<save>
+    <header version="2" time="1387205254" />
+    <version major="1" minor="3" revision="0" build="0" />
+    <region id="CharacterCreationClass">
+        <node id="root">
+            <attribute id="ClassDescription" value="Bloodshed and the pursuit of treasure are no strangers to you, and you've garnered a somewhat unsavory reputation in many a port town." handle="h8335ed54g2419g45d3gbcbcgafc269f676af" type="28" />
+			<attribute id="ClassLongDescription" value="You spent your youth under the sway of a dread pirate, a ruthless cutthroat who taught you how to survive in a world of sharks and savages. Now, you've become a feared pirate in your own right. You have indulged in larceny on the high seas and sent more than one deserving soul to a briny grave." handle="hc66999d2g8dd4g4e42g89f1g29ba7d56c6df" type="28" />
+            <attribute id="ClassName" value="Marauder" handle="h2a0665b1g8dd2g4289g8904g55faee895595" type="28" />
+            <attribute id="ClassType" value="LLWEAPONEX_Helaene_Marauder" type="22" />
+            <attribute id="SkillSet" value="Class_Marauder" type="22" />
+            <attribute id="Voice" value="2" type="5" />
+			<attribute id="Icon" value="1" type="5" />
+
+            <attribute id="NumStartingCombatAbilityPoints" value="2" type="4" />
+            <attribute id="NumStartingCivilAbilityPoints" value="2" type="4" />
+            <attribute id="NumStartingAttributePoints" value="3" type="4" />
+            <attribute id="NumStartingTalentPoints" value="1" type="4" />
+
+			<attribute id="AreStatsWeighted" value="1" type="19" />
+            <children>
+                <node id="EquipmentProperties">
+                    <children>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Human" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start" type="22" />
+                        </node>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Dwarf" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview_Dwarf" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start" type="22" />
+                        </node>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Elf" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview_Elf" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start" type="22" />
+                        </node>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Lizard" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview_Lizard" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start" type="22" />
+                        </node>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Undead_Human" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start_Undead" type="22" />
+                        </node>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Undead_Dwarf" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview_Dwarf" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start_Undead" type="22" />
+                        </node>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Undead_Elf" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview_Elf" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start_Undead" type="22" />
+                        </node>
+                        <node id="EquipmentProperty">
+                            <attribute id="RaceName" value="Undead_Lizard" type="22" />
+                            <attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Preview_Lizard" type="22" />
+                            <attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Helaene_Marauder_Start_Undead" type="22" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AbilityChanges">
+                    <children>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="RogueLore" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Summoning" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Thievery" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                        <node id="AbilityChange">
+                            <attribute id="Ability" value="Luck" type="23" />
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                        </node>
+                    </children>
+                </node>
+                <node id="AttributeChanges">
+                    <children>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="FIN" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="INT" type="23" />
+                        </node>
+                        <node id="AttributeChange">
+                            <attribute id="AmountIncreased" value="1" type="4" />
+                            <attribute id="Attribute" value="WIT" type="23" />
+                        </node>
+                    </children>
+                </node>
+                <node id="TalentsAdded">
+                    <children>
+                        <node id="TalentAdded">
+                            <attribute id="Talent" value="AttackOfOpportunity" type="23" />
+                        </node>
+                    </children>
+                </node>
+            </children>
+        </node>
+    </region>
+</save>

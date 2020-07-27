@@ -901,3 +901,120 @@ add equipmentgroup
 add equipment entry "_WPN_LLWEAPONEX_Rapier_1H_B_NPC"
 add equipmentgroup
 add equipment entry "_ARM_LLWEAPONEX_Hat_Bicorne_A_NPC"
+
+
+new equipment "Class_LLWEAPONEX_Helaene_Marauder_Preview"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "Marauder_UpperBody_Default"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Enchanter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview"
+
+new equipment "Class_LLWEAPONEX_Helaene_Marauder_Preview_Dwarf"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "Marauder_UpperBody_Default"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Enchanter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview"
+
+new equipment "Class_LLWEAPONEX_Helaene_Marauder_Preview_Elf"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "Marauder_UpperBody_Default"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Enchanter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Mainhand"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Offhand"
+
+new equipment "Class_LLWEAPONEX_Helaene_Marauder_Preview_Lizard"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pirate_Helmet"
+add equipmentgroup
+add equipment entry "Marauder_UpperBody_Default"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Enchanter_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Wayfarer_Boots"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Pistol_Preview_A_Equipped"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Mainhand"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Offhand"
+
+new equipment "Class_LLWEAPONEX_Helaene_Marauder_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+add equipmentgroup
+add equipment entry "CON_Drink_Bottle_Beer_A"
+add equipmentgroup
+add equipment entry "FOOD_Orange"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
+add equipmentgroup
+add equipment entry "LOOT_LLWEAPONEX_SmugglersBag"
+
+new equipment "Class_LLWEAPONEX_Helaene_Marauder_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_CraftedDagger"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+add equipmentgroup
+add equipment entry "CON_Drink_Bottle_Beer_A_Poisoned"
+add equipmentgroup
+add equipment entry "FOOD_Orange_Poisoned"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
+add equipmentgroup
+add equipment entry "LOOT_LLWEAPONEX_SmugglersBag"

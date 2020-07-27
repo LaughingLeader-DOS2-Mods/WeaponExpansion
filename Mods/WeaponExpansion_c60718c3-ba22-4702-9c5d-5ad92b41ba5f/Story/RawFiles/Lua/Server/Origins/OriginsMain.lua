@@ -5,18 +5,33 @@ Mercs = {
 	Korvash = "3f20ae14-5339-4913-98f1-24476861ebd6",
 }
 
+local function SetupOriginSkills(char, skillset)
+	if CharacterHasSkill(char, "Dome_CircleOfProtection") == 1 then
+		CharacterRemoveSkill(char, "Dome_CircleOfProtection")
+	end
+
+	for i,skill in pairs(Ext.GetSkillSet(skillset)) do
+		if CharacterHasSkill(char, skill) == 0 then
+			CharacterAddSkill(char, skill, 0)
+		end		
+	end
+end
+
 function Origins_InitCharacters(region, isEditorMode)
+
+	SetupOriginSkills(Mercs.Harken, "Avatar_LLWEAPONEX_Harken")
+	SetupOriginSkills(Mercs.Korvash, "Avatar_LLWEAPONEX_Korvash")
+	if CharacterHasSkill(Mercs.Korvash, "Cone_Flamebreath") == 1 then
+		CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
+	end
+	CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
+
 	--IsCharacterCreationLevel(region) == 0
 	if CharacterIsPlayer(Mercs.Harken) == 0 or isEditorMode == 1 then
 		CharacterApplyPreset(Mercs.Harken, "Knight_Act2")
 		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Weapon", true)
 		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Helmet", true)
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
-
-		CharacterRemoveSkill(Mercs.Harken, "Dome_CircleOfProtection")
-		for i,skill in pairs(Ext.GetSkillSet("Avatar_LLWEAPONEX_Harkin")) do
-			CharacterAddSkill(Mercs.Harken, skill, 0)
-		end
 
 		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
 	end
@@ -27,18 +42,10 @@ function Origins_InitCharacters(region, isEditorMode)
 		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Weapon", true)
 		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Helmet", true)
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
-		
-		CharacterRemoveSkill(Mercs.Korvash, "Dome_CircleOfProtection")
-		CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
-		CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
-
-		for i,skill in pairs(Ext.GetSkillSet("Avatar_LLWEAPONEX_Korvash")) do
-			CharacterAddSkill(Mercs.Korvash, skill, 0)
-		end
 
 		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
+		Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 	end
-	Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 
 	if Ext.IsDeveloperMode() or isEditorMode == 1 then
 		local host = GetUUID(CharacterGetHostCharacter())

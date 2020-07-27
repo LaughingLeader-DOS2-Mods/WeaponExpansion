@@ -390,6 +390,7 @@
 	<content contentuid="h29b88cbdgcf34g4e8bg92fag54c3db611627">Activate &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;</content>
 	<content contentuid="h29d30edeg0e92g453ag95begcea9915f2e6d">Activate &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt;</content>
 	<content contentuid="h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd">Automatically Equips the Runic Cannon in the Mainhand</content>
+	<content contentuid="h2a0665b1g8dd2g4289g8904g55faee895595">Marauder</content>
 	<content contentuid="h2a1c77bcgc0e7g4689g8b43g0b794dca1052">Host Settings</content>
 	<content contentuid="h2a2acf6eg099ag48f3g8ffeg66f8800021a5">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery III&lt;/font&gt;</content>
 	<content contentuid="h2a39349dg9bccg420cgb6acg403e09874bd0">Character is flying through the air!</content>
@@ -698,6 +699,7 @@
 	<content contentuid="h4ef1e65bg14f6g4d4ag95ebg604f692cddb3">Fateslayer</content>
 	<content contentuid="h4f0e6adcg34d8g4c8fgbfecg6fe6a80c7e9d">Character has been impaled by a thrown weapon!</content>
 	<content contentuid="h4f1b9001g7b29g4ac7g928dg0149cdeff75e">&lt;font color=&apos;#FFA900&apos; size=&apos;22&apos;&gt;Bolts Auto-Inserted into Hand Crossbow&lt;/font&gt;</content>
+	<content contentuid="h4f2a2a76g3662g417cgb58cg27ddf3bedeea">Retrieve Goods</content>
 	<content contentuid="h4f30febcg9b2fg421agb509g6c8d812ce9c6">Perpetual Growth - This item automatically levels up</content>
 	<content contentuid="h4f3937d2gfffbg4e84g922fg608f65fa105e">&lt;font color=&apos;#555555&apos;&gt;Locked&lt;/font&gt;</content>
 	<content contentuid="h4f3c9483g3718g45f9gacfaga827e3a4972c">A sickle designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
@@ -815,7 +817,7 @@
 	<content contentuid="h5b0872ddg4f86g4befg953cg6cda43630600">a Katana</content>
 	<content contentuid="h5b132a5cg9c3ag4905g884dg4e814fbef78e">Character&apos;s firearm is attuned to blood.</content>
 	<content contentuid="h5b16d546gf2c8g4350g894bg5b409289ae46">Blademaster</content>
-	<content contentuid="h5b745736g3b45g4164g9a40g0c45b9c78921">Breathe shadowey flames in a cone, dealing [1], applying Soul Burn, and leaving a cursed fire surface behind.</content>
+	<content contentuid="h5b745736g3b45g4164g9a40g0c45b9c78921">Breathe shadowy flames in a cone, dealing [1], applying Soul Burn, and leaving a cursed fire surface behind.&lt;br&gt;&lt;font color=&apos;#FF00DD&apos;&gt;Damage increase for every percentage of vitality missing.&lt;/font&gt;</content>
 	<content contentuid="h5b8eef1cg79f0g40b6g9139gf9ad7b0a17e0">Old Foil</content>
 	<content contentuid="h5bb9e064ge628g4ee0gba9fg2d3ad2d80f20">Icecrash</content>
 	<content contentuid="h5bcba301g8929g4b57gbf08g99e888af12c4">Character has been hit by a flying blunt weapon. It&apos;s stuck!</content>
@@ -1186,6 +1188,7 @@
 	<content contentuid="h82ffec50gfbdeg4750g9cbagfbf098e750a2">&lt;font color=&apos;#fcd203&apos;&gt;Duelist Stance disabled while other hand is occupied.&lt;/font&gt;</content>
 	<content contentuid="h83044357g62f9g4476g85fdg3222377eaadc">Solardyne</content>
 	<content contentuid="h8311eb63g89cfg41c1g961cgde31f8d79927"></content>
+	<content contentuid="h8335ed54g2419g45d3gbcbcgafc269f676af">Bloodshed and the pursuit of treasure are no strangers to you, and you&apos;ve garnered a somewhat unsavory reputation in many a port town.</content>
 	<content contentuid="h83554f66gd91ag4ff4g8075g7339f022ab78">A prototype weapon capable of firing dense lead pellets at dangerous velocities.&lt;br&gt;Fits onto your belt.</content>
 	<content contentuid="h8360bff4g4ddcg4548g97a5g9ed84484f556">Journeyman Bladesman</content>
 	<content contentuid="h83aa9859g7a83g472dg94cdg70b830d555ee">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery II&lt;/font&gt;</content>
@@ -1193,6 +1196,7 @@
 	<content contentuid="h83caead8g3a51g4daag9145ge0b8a4dd23a5">Novice</content>
 	<content contentuid="h84013f3ag47fag41c2gae89gf27bfdfaf979">Look closely; the only visible difference between this greatbow arrow and a normal greatbow arrow can be seen in the sizzling dents within the tip of the arrowhead.</content>
 	<content contentuid="h8406fbf2g4595g403ag8d5cgb007104ebd1c">Dual Shieldmaster</content>
+	<content contentuid="h84842d41g5c7eg4bc1g967cgd2e8349d0aaa">Inconspicuous Pouch</content>
 	<content contentuid="h8487f1e4g71abg4414g9264gd085fcabaebf"></content>
 	<content contentuid="h84b2d805gff5ag44a5g9f81g416aaf5abf18">Rapier</content>
 	<content contentuid="h84bcdf2ega44cg4dd4g972ag52f9326ddd38">A sturdy staff with a balanced weight. Functions as both a walking stick, and a tool to bash skulls.</content>
@@ -1764,6 +1768,7 @@
 	<content contentuid="hc6198b34gfc48g4fd8gab35gb29a4c957eb3">Water Burn</content>
 	<content contentuid="hc6342d3bgfc64g4ac9gb5e7ge1b812759439">Balrin&apos;s Throwing Axe (Normal)</content>
 	<content contentuid="hc64e0870g94d2g40e1ga01cg8372542fcf25">Weapon Expansion - Explosives</content>
+	<content contentuid="hc66999d2g8dd4g4e42g89f1g29ba7d56c6df">You spent your youth under the sway of a dread pirate, a ruthless cutthroat who taught you how to survive in a world of sharks and savages. Now, you&apos;ve become a feared pirate in your own right. You have indulged in larceny on the high seas and sent more than one deserving soul to a briny grave. </content>
 	<content contentuid="hc66e1a35g4770g4edag9733g6ced528c1fc1">A fire greatbow arrow that is hot to the touch. You probably want to keep it safely away from oils and suchlike.</content>
 	<content contentuid="hc68a221bgb71bg4112g8075g6376ab651fe6">Shuriken (Oiled)</content>
 	<content contentuid="hc6ac2c15g8ba2g4cccgaea3g3a0846feb1a4">A heavy staff with a tough grip. Functions as a balanced offensive and defensive weapon.</content>
