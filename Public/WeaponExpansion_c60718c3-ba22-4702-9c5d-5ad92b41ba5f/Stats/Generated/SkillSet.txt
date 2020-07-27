@@ -76,7 +76,7 @@ add skill "Shout_EnemyChameleonSkin"
 add skill "Jump_EnemyPhoenixDive"
 add skill "Jump_EnemyTacticalRetreat"
 
-new skillset "Avatar_LLWEAPONEX_Harkin"
+new skillset "Avatar_LLWEAPONEX_Harken"
 add skill "Shout_LLWEAPONEX_UnrelentingRage"
 
 new skillset "Avatar_LLWEAPONEX_Korvash"

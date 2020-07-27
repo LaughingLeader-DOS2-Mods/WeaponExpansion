@@ -18,12 +18,9 @@ local function SetupOriginSkills(char, skillset)
 end
 
 function Origins_InitCharacters(region, isEditorMode)
-
-	SetupOriginSkills(Mercs.Harken, "Avatar_LLWEAPONEX_Harken")
-	SetupOriginSkills(Mercs.Korvash, "Avatar_LLWEAPONEX_Korvash")
-	if CharacterHasSkill(Mercs.Korvash, "Cone_Flamebreath") == 1 then
-		CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
-	end
+	pcall(SetupOriginSkills, Mercs.Harken, "Avatar_LLWEAPONEX_Harken")
+	pcall(SetupOriginSkills, Mercs.Korvash, "Avatar_LLWEAPONEX_Korvash")
+	CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
 	CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 
 	--IsCharacterCreationLevel(region) == 0
@@ -34,8 +31,8 @@ function Origins_InitCharacters(region, isEditorMode)
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
 
 		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
+		Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
 	end
-	Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
 	
 	if CharacterIsPlayer(Mercs.Korvash) == 0 or isEditorMode == 1 then
 		CharacterApplyPreset(Mercs.Korvash, "Inquisitor_Act2")
@@ -49,11 +46,11 @@ function Origins_InitCharacters(region, isEditorMode)
 
 	if Ext.IsDeveloperMode() or isEditorMode == 1 then
 		local host = GetUUID(CharacterGetHostCharacter())
-		if host ~= Mercs.Harken then
+		if CharacterIsInPartyWith(host, Mercs.Harken) == 0 then
 			Osi.PROC_GLO_PartyMembers_Add(Mercs.Harken, host)
 			TeleportTo(Mercs.Harken, host, "", 1, 0, 1)
 		end
-		if host ~= Mercs.Korvash then
+		if CharacterIsInPartyWith(host, Mercs.Korvash) == 0 then
 			Osi.PROC_GLO_PartyMembers_Add(Mercs.Korvash, host)
 			TeleportTo(Mercs.Korvash, host, "", 1, 0, 1)
 		end
@@ -86,14 +83,15 @@ local anvilSwapPresets = {
 }
 
 function CC_CheckKorvashColor(player)
-	local character = Ext.GetCharacter(player)
-	local color = character.PlayerCustomData.SkinColor
-	print(color)
-	if color == 4294902015 then-- Pink?
-		NRD_PlayerSetCustomDataInt(player, "SkinColor", 4281936940)
-		Ext.EnableExperimentalPropertyWrites()
-		character.PlayerCustomData.SkinColor = 4281936940
-		Ext.PostMessageToClient(player, "LLWEAPONEX_FixLizardSkin", player)
+	if Ext.IsDeveloperMode() then
+		local character = Ext.GetCharacter(player)
+		local color = character.PlayerCustomData.SkinColor
+		if color == 4294902015 then-- Pink?
+			NRD_PlayerSetCustomDataInt(player, "SkinColor", 4281936940)
+			Ext.EnableExperimentalPropertyWrites()
+			character.PlayerCustomData.SkinColor = 4281936940
+			Ext.PostMessageToClient(player, "LLWEAPONEX_FixLizardSkin", player)
+		end
 	end
 end
 
@@ -143,8 +141,8 @@ function UpdateDarkFireballSkill()
 		local rangeBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_RangePerCount"] or 1.0
 		local radiusBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount"] or 0.4
 	
-		local nextRange = math.floor(6 + (rangeBonusMult * killCount))
-		local nextRadius = math.floor(1 + (radiusBonusMult * killCount))
+		local nextRange = math.min(16, math.floor(6 + (rangeBonusMult * killCount)))
+		local nextRadius = math.min(8, math.floor(1 + (radiusBonusMult * killCount)))
 	
 		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
 		stat.TargetRadius = nextRange
@@ -165,3 +163,9 @@ function UpdateDarkFireballSkill()
 		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
 	end
 end
+
+Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
+	PersistentVars.SkillData.DarkFireballCount = tonumber(amount)
+	UpdateDarkFireballSkill()
+	SyncVars()
+end)

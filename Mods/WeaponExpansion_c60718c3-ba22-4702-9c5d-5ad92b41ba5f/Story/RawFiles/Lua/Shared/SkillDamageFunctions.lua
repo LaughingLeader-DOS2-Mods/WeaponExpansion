@@ -658,7 +658,8 @@ local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed,
 		-- key "LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount","0.4"
 		local damageMult = (countMult+1) * damageBonus
 		local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
-		skill["Damage Multiplier"] = skill["Damage Multiplier"] + damageMult
+		skill["Damage Multiplier"] = math.min(200.0, skill["Damage Multiplier"] + damageMult)
+		print(skill["Damage Multiplier"])
 		if isTooltip ~= true then
 			return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 		else
