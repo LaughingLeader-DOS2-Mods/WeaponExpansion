@@ -199,3 +199,25 @@ LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_HandCrossbow_Reload", function
 LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", ...) end)
 LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Target_LLWEAPONEX_Pistol_Shoot", ...) end)
 --LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", function(...) SwapHandCrossbowSkills(false, ...) end)
+
+---@param skill string
+---@param char string
+---@param state SkillState
+---@param data SkillEventData
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, data)
+	if state == SKILL_STATE.CAST then
+		local radius = math.max(1.0, Ext.StatGetAttribute("Projectile_LLWEAPONEX_DarkFireball", "ExplodeRadius") - 1.0)
+		if data.TotalTargetObjects > 0 then
+			for i,v in pairs(data.TargetObjects) do
+				local x,y,z = GetPosition(v)
+				--SurfaceSmokeCloudCursed
+				Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCursed", radius, 1)
+				Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCloudCursed", radius, 1)
+			end
+		elseif data.TotalTargetPositions > 0 then
+			local x,y,z = table.unpack(data.TargetPositions[1])
+			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCursed", radius, 1)
+			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCloudCursed", radius, 1)
+		end
+	end
+end)

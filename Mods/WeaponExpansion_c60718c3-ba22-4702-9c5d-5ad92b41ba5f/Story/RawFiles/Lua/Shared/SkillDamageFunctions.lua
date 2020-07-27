@@ -659,7 +659,6 @@ local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed,
 		local damageMult = (countMult+1) * damageBonus
 		local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
 		skill["Damage Multiplier"] = math.min(200.0, skill["Damage Multiplier"] + damageMult)
-		print(skill["Damage Multiplier"])
 		if isTooltip ~= true then
 			return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 		else
@@ -678,10 +677,12 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetDarkFlamebreathDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local missingHealthMult = math.floor((1 - (attacker.CurrentVitality / attacker.MaxVitality)) * 100.0)
+	local missingHealthMult = math.floor((1 - (attacker.CurrentVitality / attacker.MaxVitality)) * 100.0) + 1
 	if missingHealthMult > 0 then
+		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFlamebreath_DamageBonusPerPercent"] or 1.3
 		local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
-		skill["Damage Multiplier"] = skill["Damage Multiplier"] + missingHealthMult
+		skill["Damage Multiplier"] = math.ceil(skill["Damage Multiplier"] + (missingHealthMult * damageBonus))
+		print(missingHealthMult, skill["Damage Multiplier"])
 		if isTooltip ~= true then
 			return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 		else

@@ -4,6 +4,8 @@ Common = LeaderLib.Common
 StringHelpers = LeaderLib.StringHelpers
 --WeaponExpansion = Mods["WeaponExpansion"]
 
+SKILL_STATE = LeaderLib.SKILL_STATE
+
 Main = {}
 Debug = {}
 Math = { AbilityScaling = {}}
@@ -77,6 +79,7 @@ local function LoadExperienceVariables()
     LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
     LeaderLib.EnableFeature("ExtraDataSkillParamReplacement")
 	LeaderLib.EnableFeature("TooltipGrammarHelper")
+	LeaderLib.EnableFeature("FixChaosDamageDisplay")
 	
 	local RankVariables = {}
 	local maxRank = math.tointeger(Ext.ExtraData["LLWEAPONEX_Mastery_MaxRank"] or 4.0)
