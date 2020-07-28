@@ -143,7 +143,7 @@ function AddRodSkill(char, item)
 		end
 
 		if mainhandSkill ~= nil and offhandSkill ~= nil then
-			local slot = GameHelpers.GetEquippedSlot(char,item)
+			local slot = GameHelpers.Item.GetEquippedSlot(char,item)
 			if slot == "Weapon" then
 				CharacterAddSkill(char, mainhandSkill, 0)
 				SetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill", mainhandSkill)
@@ -195,9 +195,9 @@ Ext.NewQuery(GetRodTypeQRY, "LLWEAPONEX_Ext_QRY_GetRodSkills", "[in](ITEMGUID)_R
 function MagicMissileWeapon_Swap(char, wand, rod)
 	local equippedItem = nil
 	local targetItem = nil
-	local slot = GameHelpers.GetEquippedSlot(char,wand)
+	local slot = GameHelpers.Item.GetEquippedSlot(char,wand)
 	if slot == nil then
-		slot = GameHelpers.GetEquippedSlot(char,rod)
+		slot = GameHelpers.Item.GetEquippedSlot(char,rod)
 		equippedItem = rod
 		targetItem = wand
 	else

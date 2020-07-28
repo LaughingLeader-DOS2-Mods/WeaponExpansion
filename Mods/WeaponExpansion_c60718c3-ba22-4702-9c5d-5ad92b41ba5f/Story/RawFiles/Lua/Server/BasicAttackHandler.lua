@@ -26,7 +26,7 @@ Ext.RegisterOsirisListener("CharacterStartAttackObject", 3, "after", OnBasicAtta
 
 local function OnBasicAttackPosition(x, y, z, owner, attacker)
 	if HasActiveStatus(attacker, "LLWEAPONEX_WAND_MAGIC_MISSILE") == 1 then
-		--local projectileTarget = GameHelpers.ExtendPositionWithForward(attacker, 1.25, x, y, z)
+		--local projectileTarget = GameHelpers.Math.ExtendPositionWithForward(attacker, 1.25, x, y, z)
 		SaveBasicAttackTarget(attacker, {x,y,z})
 		Osi.ProcObjectTimerCancel(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
 		Osi.ProcObjectTimer(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses", 580)

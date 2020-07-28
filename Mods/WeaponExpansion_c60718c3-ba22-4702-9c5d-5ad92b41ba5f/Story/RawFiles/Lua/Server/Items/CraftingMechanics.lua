@@ -184,7 +184,7 @@ function ChangeItemScaling(item, attribute, itemStat)
 		local inventory = GetInventoryOwner(item)
 		local slot = nil
 		if ObjectIsCharacter(inventory) == 1 then
-			slot = GameHelpers.GetEquippedSlot(inventory,item)
+			slot = GameHelpers.Item.GetEquippedSlot(inventory,item)
 		end
 		NRD_ItemCloneBegin(item)
 		local clone = NRD_ItemClone()
@@ -192,7 +192,7 @@ function ChangeItemScaling(item, attribute, itemStat)
 		ItemRemove(item)
 		if inventory ~= nil then
 			if slot ~= nil then
-				LeaderLib.GameHelpers.EquipInSlot(inventory, clone, slot)
+				GameHelpers.Item.EquipInSlot(inventory, clone, slot)
 			else
 				ItemToInventory(clone, inventory, amount, 0, 0)
 			end

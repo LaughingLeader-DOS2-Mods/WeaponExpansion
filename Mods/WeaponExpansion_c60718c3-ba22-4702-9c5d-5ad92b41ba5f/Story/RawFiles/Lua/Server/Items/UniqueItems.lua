@@ -92,7 +92,7 @@ AllUniques = {
 
 function MoveUniquesToVendingMachine()
 	for i,item in pairs(AllUniques) do
-		if not GameHelpers.ItemIsEquippedByCharacter(item) and GetInventoryOwner(item) ~= VENDING_MACHINE then
+		if not GameHelpers.Item.ItemIsEquippedByCharacter(item) and ObjectIsCharacter(GetInventoryOwner(item)) ~= 1 and GetInventoryOwner(item) ~= VENDING_MACHINE then
 			ItemToInventory(item, VENDING_MACHINE, 1, 0, 0)
 		end
 	end
@@ -169,11 +169,11 @@ function SwapUnique(char, id)
 	if tbl ~= nil then
 		for i,v in pairs(tbl) do
 			local item1,item2 = table.unpack(v)
-			if GameHelpers.ItemIsEquipped(char, item1) then
+			if GameHelpers.Item.ItemIsEquipped(char, item1) then
 				equipped = item1
 				next = item2
 				break
-			elseif GameHelpers.ItemIsEquipped(char, item2) then
+			elseif GameHelpers.Item.ItemIsEquipped(char, item2) then
 				equipped = item2
 				next = item1
 				break
@@ -188,7 +188,7 @@ function SwapUnique(char, id)
 		if statType == "Weapon" then
 			isTwoHanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
 		end
-		local slot = GameHelpers.GetEquippedSlot(char,equipped)
+		local slot = GameHelpers.Item.GetEquippedSlot(char,equipped)
 
 		ItemLockUnEquip(equipped, 0)
 		--CharacterUnequipItem(char, equipped)

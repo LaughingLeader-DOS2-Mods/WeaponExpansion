@@ -91,7 +91,7 @@ end
 local function OnStatusApplied(target, status, source)
 	if source ~= nil and ObjectIsCharacter(source) == 1 then
 		if status == "LLWEAPONEX_PISTOL_SHOOT_HIT" then
-			local items = GameHelpers.FindTaggedEquipment(source, "LLWEAPONEX_Pistol")
+			local items = GameHelpers.Item.FindTaggedEquipment(source, "LLWEAPONEX_Pistol")
 			if items ~= nil then
 				print(Ext.JsonStringify(items))
 				for slot,v in pairs(items) do
@@ -99,7 +99,7 @@ local function OnStatusApplied(target, status, source)
 				end
 			end
 		elseif status == "LLWEAPONEX_HANDCROSSBOW_HIT" then
-			local items = GameHelpers.FindTaggedEquipment(source, "LLWEAPONEX_HandCrossbow")
+			local items = GameHelpers.Item.FindTaggedEquipment(source, "LLWEAPONEX_HandCrossbow")
 			if items ~= nil then
 				for slot,v in pairs(items) do
 					ApplyRuneExtraProperties(target, source, Ext.GetItem(v))
