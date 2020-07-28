@@ -860,6 +860,86 @@ add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Mainhand"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Rapier_1H_B_Pirate_Preview_Offhand"
 
+new equipment "Class_LLWEAPONEX_Reaper_Start"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Scythe_2H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Terror_A"
+add equipmentgroup
+add equipment entry "POTION_Minor_Healing_Potion"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Reaper_Start_Undead"
+add equipmentgroup
+add equipment entry "ARM_Purge_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Purge_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Purge_Boots"
+add equipmentgroup
+add equipment entry "ARM_Purge_Gloves"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Scythe_2H_Crafted"
+add equipmentgroup
+add equipment entry "GRN_Grenade_Terror_A"
+add equipmentgroup
+add equipment entry "CON_Potion_Poison_A"
+add equipmentgroup
+add equipment entry "SCROLL_Resurrect"
+add equipmentgroup
+add equipment entry "CONT_Backpack_A_SourceHunter"
+
+new equipment "Class_LLWEAPONEX_Reaper_Preview"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Boots"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Preview"
+
+new equipment "Class_LLWEAPONEX_Reaper_Preview_Humans"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Boots"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Preview_Humans"
+
+new equipment "Class_LLWEAPONEX_Reaper_Preview_Lizards"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Helmet"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Gloves"
+add equipmentgroup
+add equipment entry "ARM_LLWEAPONEX_Reaper_Boots"
+add equipmentgroup
+add equipment entry "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_Preview_Lizards"
+
 new equipment "LLWEAPONEX_Goblins_Chaos_Grunt_A"
 add equipmentgroup
 add equipment entry "_LLWEAPONEX_NPC_Goblins_Chaos_Grunt_A"
@@ -884,12 +964,6 @@ new equipment "LLWEAPONEX_WeaponMaster_Trader"
 add equipmentgroup
 add equipment entry "_WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_Npc"
 
-new equipment "LLWEAPONEX_Origins_Harken"
-add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_Tattoos_Normal_Upperbody_A_NPC"
-add equipmentgroup
-add equipment entry "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A"
-
 new equipment "LLWEAPONEX_FTJ_Harvester"
 add equipmentgroup
 add equipment entry "_WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Npc_Harvester"
@@ -901,7 +975,6 @@ add equipmentgroup
 add equipment entry "_WPN_LLWEAPONEX_Rapier_1H_B_NPC"
 add equipmentgroup
 add equipment entry "_ARM_LLWEAPONEX_Hat_Bicorne_A_NPC"
-
 
 new equipment "Class_LLWEAPONEX_Helaene_Marauder_Preview"
 add equipmentgroup

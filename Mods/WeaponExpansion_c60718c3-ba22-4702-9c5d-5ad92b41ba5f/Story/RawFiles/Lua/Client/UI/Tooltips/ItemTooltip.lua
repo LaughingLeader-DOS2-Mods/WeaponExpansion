@@ -279,7 +279,6 @@ local function OnItemTooltip(item, tooltip)
 		end
 
 		if character ~= nil then
-			print(character.Stats, character.Stats.Name)
 			if item:HasTag("LLWEAPONEX_Rune_HandCrossbow_DamageType") then
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbowBolt")
 			end

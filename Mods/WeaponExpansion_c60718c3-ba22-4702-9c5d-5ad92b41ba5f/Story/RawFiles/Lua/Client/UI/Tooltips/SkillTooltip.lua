@@ -39,7 +39,6 @@ local function ReplaceScalingText(checkText, character, element, func)
 	if replaceText ~= nil then
 		local newText = func(character)
 		if newText ~= nil then
-			print(newText, replaceText)
 			element.Label = string.gsub(element.Label, replaceText, newText)
 			return true
 		end
@@ -51,7 +50,6 @@ end
 ---@param skill string
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
-	print(skill, Ext.JsonStringify(tooltip:GetElements("SkillRequiredEquipment")))
 	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
 	local descriptionElement = tooltip:GetElement("SkillDescription")
 	local description = ""
@@ -140,7 +138,6 @@ local function OnSkillTooltip(character, skill, tooltip)
 		local requirementName = Ext.GetTranslatedStringFromKey("LLWEAPONEX_NoMeleeWeaponEquipped")
 		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
 			if element.RequirementMet == false then
-				print(Text.Game.NotImmobileRequirement.Value, element.Label)
 				if element.Label == Text.Game.NotImmobileRequirement.Value then
 					tooltip:RemoveElement(element)
 				elseif string.find(element.Label, requirementName) then

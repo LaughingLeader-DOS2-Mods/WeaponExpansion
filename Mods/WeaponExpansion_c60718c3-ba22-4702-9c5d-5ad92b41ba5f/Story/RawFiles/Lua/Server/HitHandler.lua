@@ -62,7 +62,6 @@ local function ConvertArmorDamage(target,handle)
 						Ext.BroadcastMessage("LLWEAPONEX_DisplayOverheadDamage", messageData:ToString(), nil)
 						--CharacterStatusText(target, GameHelpers.GetDamageText(damageType, damage))
 					end
-					print("Reduced "..damageType.." damage from ",damage,"to",nextDamage)
 					NRD_CharacterSetStatInt(target, stat, nextArmor)
 				end
 			end

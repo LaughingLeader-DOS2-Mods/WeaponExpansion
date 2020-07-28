@@ -23,36 +23,58 @@ function Origins_InitCharacters(region, isEditorMode)
 	CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
 	CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 
-	--IsCharacterCreationLevel(region) == 0
-	if CharacterIsPlayer(Mercs.Harken) == 0 or isEditorMode == 1 then
-		CharacterApplyPreset(Mercs.Harken, "Knight_Act2")
-		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Weapon", true)
-		GameHelpers.UnequipItemInSlot(Mercs.Harken, "Helmet", true)
-		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
+	if Ext.IsDeveloperMode() then
+		isEditorMode = 1
+	end
 
-		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
+	--IsCharacterCreationLevel(region) == 0
+	if CharacterIsPlayer(Mercs.Harken) == 0 then
+		if isEditorMode == 1 then
+			CharacterAddAbility(Mercs.Harken, "WarriorLore", 1)
+			CharacterAddAbility(Mercs.Harken, "TwoHanded", 1)
+			CharacterAddAbility(Mercs.Harken, "Barter", 1)
+			LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mercs.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+		end
+		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
 		Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
+		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
 	end
 	
-	if CharacterIsPlayer(Mercs.Korvash) == 0 or isEditorMode == 1 then
-		CharacterApplyPreset(Mercs.Korvash, "Inquisitor_Act2")
-		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Weapon", true)
-		GameHelpers.UnequipItemInSlot(Mercs.Korvash, "Helmet", true)
+	if CharacterIsPlayer(Mercs.Korvash) == 0 then
+		if isEditorMode == 1 then
+			CharacterAddAbility(Mercs.Korvash, "WarriorLore", 1)
+			CharacterAddAbility(Mercs.Korvash, "Necromancy", 1)
+			CharacterAddAbility(Mercs.Korvash, "Telekinesis", 1)
+			CharacterAddTalent(Mercs.Korvash, "Executioner")
+			LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+			--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+			--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+		end
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
-
-		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
 		Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
+		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
 	end
 
 	if Ext.IsDeveloperMode() or isEditorMode == 1 then
+		local totalAdded = 0
 		local host = GetUUID(CharacterGetHostCharacter())
 		if CharacterIsInPartyWith(host, Mercs.Harken) == 0 then
 			Osi.PROC_GLO_PartyMembers_Add(Mercs.Harken, host)
+			CharacterAddAttributePoint(Mercs.Harken, 2)
 			TeleportTo(Mercs.Harken, host, "", 1, 0, 1)
+			totalAdded = totalAdded + 1
 		end
 		if CharacterIsInPartyWith(host, Mercs.Korvash) == 0 then
 			Osi.PROC_GLO_PartyMembers_Add(Mercs.Korvash, host)
+			CharacterAddAttributePoint(Mercs.Korvash, 2)
 			TeleportTo(Mercs.Korvash, host, "", 1, 0, 1)
+			totalAdded = totalAdded + 1
+		end
+		local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
+		if frozenCount ~= nil and #frozenCount > 0 then
+			local count = frozenCount[1][2]
+			Osi.DB_GlobalCounter:Delete("FTJ_PlayersWokenUp", count)
+			Osi.DB_GlobalCounter("FTJ_PlayersWokenUp", count + totalAdded)
 		end
 	end
 end

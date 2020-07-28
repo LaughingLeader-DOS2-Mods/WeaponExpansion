@@ -55,14 +55,11 @@ local function appendProperties(statname, property, value)
 		for i,v in ipairs(value) do
 			table.insert(existingTable, v)
 		end
-		LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat (appended table): ",statname," (".. property ..") = [")
-		LeaderLib.PrintDebug(LeaderLib.Common.Dump(existingTable))
-		LeaderLib.PrintDebug("]")
+		-- LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat (appended table): ",statname," (".. property ..") = [")
+		-- LeaderLib.PrintDebug(LeaderLib.Common.Dump(existingTable))
+		-- LeaderLib.PrintDebug("]")
 		Ext.StatSetAttribute(statname, property, existingTable)
 	else
-		LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [")
-		LeaderLib.PrintDebug(LeaderLib.Common.Dump(value))
-		LeaderLib.PrintDebug("]")
 		Ext.StatSetAttribute(statname, property, value)
 	end
 end

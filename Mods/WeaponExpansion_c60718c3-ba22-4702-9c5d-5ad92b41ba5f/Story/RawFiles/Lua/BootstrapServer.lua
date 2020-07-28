@@ -34,7 +34,7 @@ Ext.Require("Server/Items/CraftingMechanics.lua")
 Ext.Require("Server/Items/DeltaModSwapper.lua")
 Ext.Require("Server/Origins/OriginsMain.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
-Ext.Require("Server/Debug/DebugMain.lua")
+local debugInit = Ext.Require("Server/Debug/DebugMain.lua")
 
 local function dumpRanks(...)
     --DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>")
@@ -75,7 +75,7 @@ local function SessionSetup()
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
     if Ext.IsDeveloperMode() then
-        --Mods.LeaderLib.AddDebugInitCall(Mods["WeaponExpansion"].DebugInit)
+        Mods.LeaderLib.AddDebugInitCall(debugInit)
     end
 
     -- Divinity Unleashed

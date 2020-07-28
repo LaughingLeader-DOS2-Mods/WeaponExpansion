@@ -129,41 +129,7 @@ LeaderLib.RegisterListener("LuaReset", function()
 	SyncVars()
 end)
 
-function DebugInit()
-    --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
-    LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
-
-    PersistentVars.SkillData.DarkFireballCount = 5
-    UpdateDarkFireballSkill()
-
-    local host = CharacterGetHostCharacter()
-    -- CharacterAddAbility(host, "Luck", 20)
-    -- GlobalSetFlag("LLWEAPONEX_Debug_EnableDebugScripts")
-    -- GlobalSetFlag("LLWEAPONEX_Debug_AutoRefreshCooldowns")
-    -- if CharacterGetAttribute(host, "Strength") < 50 then
-    --     CharacterAddAttribute(host, "Strength", 50)
-    -- end
-    -- if CharacterGetAttribute(host, "Memory") < 50 then
-    --     CharacterAddAttribute(host, "Memory", 25)
-    -- end
-    -- if CharacterGetAbility(host, "WarriorLore") < 4 then
-    --     CharacterAddAbility(host, "WarriorLore", 4)
-    -- end
-    -- if CharacterGetAbility(host, "RogueLore") < 4 then
-    --     CharacterAddAbility(host, "RogueLore", 4)
-    -- end
-
-    -- for skill,data in pairs(Mastery.Params.SkillData) do
-    --     if not string.find(skill, "Enemy") then
-    --         CharacterAddSkill(host, skill, 0)
-    --     end
-    -- end
-
-    --ApplyStatus(host, "LLWEAPONEX_RUPTURE", 360.0, 1, host)
-    --RemoveStatus(CharacterGetHostCharacter(), "LLWEAPONEX_RUPTURE")
-    --RemoveStatus(host, "LLWEAPONEX_RUPTURE")
-    --ApplyStatus(host, "LLWEAPONEX_DEBUG_BONUS_WEAPON_TEST", -1.0, 0, host)
-    --ApplyStatus(CharacterGetHostCharacter(), "SLEEPING", -1.0, 1, CharacterGetHostCharacter())
+local function AddTestItems(host)
     local x,y,z = GetPosition(host)
 
     if ItemTemplateIsInPartyInventory(host, "ad15f666-285d-4634-a832-ea643fa0a9d2", 0) <= 0 then
@@ -195,13 +161,21 @@ function DebugInit()
     if ItemTemplateIsInPartyInventory(host, "LOOT_LLWEAPONEX_Token_Shard_dcd92e16-80a6-43bc-89c5-8e147d95606c", 0) <= 3 then
         ItemTemplateAddTo("LOOT_LLWEAPONEX_Token_Shard_dcd92e16-80a6-43bc-89c5-8e147d95606c", host, 3, 0)
     end
-    --CharacterAddSkill(host, "Projectile_LLWEAPONEX_HandCrossbow_Shoot", 0)
-   -- CharacterAddSkill(host, "Projectile_EnemyFireball", 0)
-    CharacterAddSkill(host, "Projectile_ThrowingKnife", 0)
-    CharacterAddSkill(host, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", 0)
-    CharacterAddSkill(host, "Projectile_LLWEAPONEX_Status_Rupture_Damage", 0)
-    CharacterAddSkill(host, "Shout_InspireStart", 0)
-    --NRD_SkillBarSetSkill(host, 2, "Target_LLWEAPONEX_Pistol_Shoot")
+end
+
+local function DebugInit()
+    --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
+    LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
+
+    PersistentVars.SkillData.DarkFireballCount = 5
+    UpdateDarkFireballSkill()
+
+    local host = CharacterGetHostCharacter()
+
+    local template = "LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d"
+    if ItemTemplateIsInPartyInventory(host, template, 0) < 1 then
+        ItemTemplateAddTo(template, host, 1, 0)
+    end
 
     local userID = CharacterGetReservedUserID(host)
     local username = GetUserName(userID)
@@ -377,3 +351,5 @@ end
 ---
 ---RS3_FX_Char_Creatures_Condor_Impact_Warrior_01
 ---Would make for a cool Goblin Punch effect if played multiple times.
+
+return DebugInit

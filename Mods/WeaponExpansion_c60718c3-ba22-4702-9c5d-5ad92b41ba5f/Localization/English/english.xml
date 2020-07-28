@@ -142,6 +142,7 @@
 	<content contentuid="h0e0b0e72ga192g4301gb445g10c5344ab3e3">Sorcerors who wield the power of Chaos, leveraging luck and foresight to lay waste upon the battlefield</content>
 	<content contentuid="h0e44e82dg9385g417bg9887gad0eba289d6d">&lt;icon id=&apos;Target_SingleHandedAttack&apos; icon=&apos;Skill_SuckerPunch&apos;/&gt;Gain a follow-up combo skill after punching a target.&lt;br&gt;[ExtraData:LLWEAPONEX_MasteryBonus_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Sucker Punch&apos;s Knockdown by 1 turn.</content>
 	<content contentuid="h0e4a73f9g3111g4ef9g8c5ega855a2b8473b">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
+	<content contentuid="h0eaa31aag7f87g4e2fgae60g32bd41f463da">Curse a target character, lowering their resistances and chance to dodge.&lt;br&gt;&lt;font color=&apos;#BB00DD&apos;&gt;If a Cursed character dies, the curse spreads to nearby enemies within [1].&lt;/font&gt;</content>
 	<content contentuid="h0ed78be5g1afag4d98ga3c3ge547395bf212">Dragon&apos;s Bane</content>
 	<content contentuid="h0ee0f7bbg3f1ag44b1g921ege32ac4f642a3">Capped Quarterstaff</content>
 	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your weapon&apos;s element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).&lt;/font&gt;</content>
@@ -911,6 +912,7 @@
 	<content contentuid="h6530180fg4563g4044gafefgc440ed2dd6a2">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release electrical energy on hit, dealing air damage.</content>
 	<content contentuid="h65373035g1641g4a8fga027g73e063bd5b31">[LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee]</content>
 	<content contentuid="h656861f1gc0edg4200g9ffeg1d87269e1d08">Old Runeblade of Water</content>
+	<content contentuid="h659b7070g993dg4b23ga6c3g3bd445489697">Scythe</content>
 	<content contentuid="h65b11696gb71ag4f2aga52dg6f40ea524a00">What?!</content>
 	<content contentuid="h65eb30f3gc1adg4394gbba9gcf7d9a868fa5">Character is taking a defensive position until their next turn.&lt;br&gt;&lt;font color=&apos;#11FF99&apos;&gt;Reduces critical hit damage taken by 50%.&lt;/font&gt;</content>
 	<content contentuid="h65f38720g1522g4819ga662g1b97e0a9af31">Doused</content>
@@ -1228,6 +1230,7 @@
 	<content contentuid="h8853786fg4a4fg4f23g9fd1g02506c6802d4">Unleash chaotic energy within the Chaos Edge, creating 5 random cone-shaped surfaces in a 60 degree arc infront of you.</content>
 	<content contentuid="h8859795age8b9g438fg9d49gfa11cd9bcf2e">Eagle Eye Quiver</content>
 	<content contentuid="h887c83aag37b0g4fd8g8477gc9c54344de7e">Arcane Knowledge - Chance to explode a basic spell on attack</content>
+	<content contentuid="h889b84dfgcd27g41c8g8237g7f6fabdc824b">Reaper</content>
 	<content contentuid="h88c3f760g03b2g43d1g951ag5205a1fab669">Bloodstorm Rune</content>
 	<content contentuid="h890fdfdag3d90g44e5ga74cgf40c514d2bea">Estoc</content>
 	<content contentuid="h891bed49g98e3g4269g9932g33150016921e">Stone</content>
@@ -1252,6 +1255,7 @@
 	<content contentuid="h8b0389dbge818g421egb679g3b1c28fd7a5e">Worn Quarterstaff</content>
 	<content contentuid="h8b079720gd454g4ecdgaa70g18cf5b9aea5d">Character has been hit by a Blademaster&apos;s strike 5 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="h8b5cc97egfa7dg473agbf3fg7da2103c6362">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery V&lt;/font&gt;</content>
+	<content contentuid="h8b5ec746gb51eg4838gbec4g8562c30aa6e0">Character is inflicted with a curse, and will spread the curse in a [1] radius when dead.</content>
 	<content contentuid="h8b6c83f4g846bg4295g9749g61d616541046">[Previous] *Look at the previous set of buttons.*</content>
 	<content contentuid="h8ba03f9age3a5g4225gab00g1ab09efd2082">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Assassinate</content>
 	<content contentuid="h8bb384degc5a5g4c9ag998bg786395a5d4b7">Character has activated the &lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Applies &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; to enemies hit for 1 turn.</content>
@@ -1347,7 +1351,7 @@
 	<content contentuid="h948029b0ga4c5g4672g8bd6g2bdab15b39a7">Raijin&apos;s Onslaught</content>
 	<content contentuid="h94838712gfdd7g4df1gb9d7geeb61a14e9e7">Quake Rune</content>
 	<content contentuid="h949745a3g7b63g4c99g8a6eg1fb29bb5e1cd">Oakenwall, Heavenbreaker</content>
-	<content contentuid="h94a156acgdfa3g4759ga11bg84a478dbbcba">Send out an beam of pure Chaos energy, dealing &lt;font color=&apos;#b823cb&apos;&gt;[1] Chaos Damage&lt;/font&gt; and creating a &lt;font color=&apos;#f7ba14&apos;&gt;random elemental surface&lt;/font&gt; at the target.&lt;br&gt;&lt;font color=&apos;#sample&apos;&gt;The surface is also created beneath the beam as it travels.&lt;/font&gt;</content>
+	<content contentuid="h94a156acgdfa3g4759ga11bg84a478dbbcba">Send out an beam of pure Chaos energy, dealing [1] and creating a &lt;font color=&apos;#f7ba14&apos;&gt;random elemental surface&lt;/font&gt; at the target.&lt;br&gt;&lt;font color=&apos;#sample&apos;&gt;The surface is also created beneath the beam as it travels.&lt;/font&gt;</content>
 	<content contentuid="h9506ebefg5e02g4796g9904g76486278a261">Usurper&apos;s Tanto</content>
 	<content contentuid="h9530f360gf99cg4742g8d86g4ec69e6c0ee9">Old Runeblade of Poison</content>
 	<content contentuid="h953b1517g073bg4cddgb0c3gafe92c329a1b">My viscera!</content>
@@ -1386,7 +1390,7 @@
 	<content contentuid="h99bba884g2cbag452dga14bg707e48890bea">Well-Balanced Rifle</content>
 	<content contentuid="h99c0f939g2ed4g4335g9b0eg3218d3a1fe48">Weapon Mastery&lt;br&gt;[LLWEAPONEX_WeaponMastery_Current_f4dda1ff-ab17-4141-be2f-763c6c22a7cc]</content>
 	<content contentuid="h9a4b84b1g84d6g46f3ga481g93ca9cd637d3">&lt;font color=&apos;#AA11CC&apos;&gt;Scythe Mastery III&lt;/font&gt;</content>
-	<content contentuid="h9a4f3a3dgf031g43d4g83a9g79d09571e26c">Shoot a bolt of pure void energy that deals &lt;font color=&apos;#B823CB&apos;&gt;[1] Chaos Damage&lt;/font&gt; and creates a corresponding surface.&lt;br&gt;&lt;font color=&apos;#DD00AA&apos;&gt;Each bolt has a [2] chance to fork to a new target, up to [3] times max.&lt;/font&gt;</content>
+	<content contentuid="h9a4f3a3dgf031g43d4g83a9g79d09571e26c">Shoot a bolt of pure void energy that deals [1] and creates a corresponding surface.&lt;br&gt;&lt;font color=&apos;#DD00AA&apos;&gt;Each bolt has a [2] chance to fork to a new target, up to [3] times max.&lt;/font&gt;</content>
 	<content contentuid="h9a9b1b17g6d66g4822g8b55g9d610c5f3da8">Beginner</content>
 	<content contentuid="h9aef428egececg4818gbb69gafbd0ddcef37">Inert Runeblade</content>
 	<content contentuid="h9b0a4bf7gbdb6g4c86g8f40ga7f59d86e44f">*[POTIONS] Click on the button labeled &apos;Potions&apos;.*</content>
@@ -1741,6 +1745,7 @@
 	<content contentuid="hc35dbb4fgf387g46a9g9a99g6581b8eeec98">&lt;icon id=&apos;Shout_LLWEAPONEX_ActivateRuneblade_Air;Shout_LLWEAPONEX_ActivateRuneblade_Earth;Shout_LLWEAPONEX_ActivateRuneblade_Fire;Shout_LLWEAPONEX_ActivateRuneblade_Poison;Shout_LLWEAPONEX_ActivateRuneblade_Water;Shout_LLWEAPONEX_ActivateRuneblade_Chaos&apos; icon=&apos;LLWEAPONEX_Skills_Runeblade_Activate_Air;LLWEAPONEX_Skills_Runeblade_Activate_Earth;LLWEAPONEX_Skills_Runeblade_Activate_Fire;LLWEAPONEX_Skills_Runeblade_Activate_Poison;LLWEAPONEX_Skills_Runeblade_Activate_Water;LLWEAPONEX_Skills_Runeblade_Activate_Chaos&apos;/&gt;The next spell you cast with the same element of your activated rune deals 25% more damage.</content>
 	<content contentuid="hc36b02dbg4b4fg4b5eg8ed9gc71f93eb2efb">Worn Halberd</content>
 	<content contentuid="hc3788e7ag4777g47dbg9d44g14a09669d0de">a Polearm</content>
+	<content contentuid="hc389a26bg935cg42c9g92a9gb8f58881d0c8">A rare type of warrior that wields an intimidating scythe. Some believe them to be soldiers of Death, as their prowess with curved blades is second only to their innate affinity with Necromancy. </content>
 	<content contentuid="hc38d1e18g8b64g47f6gb3c6g59f5f4912ae4">Character has lowered resistance to &lt;font color=&apos;#FE6E27&apos;&gt;fire damage&lt;/font&gt;.</content>
 	<content contentuid="hc38fd333g9037g4b10ga3b6g09a18304fa17">Novice</content>
 	<content contentuid="hc3e23e57gd92dg4aa8ga314gb5a16d81235d">Disciplined warriors who wield metal quarterstaffs, overwhelming enemies with strength and sheer force of will.</content>

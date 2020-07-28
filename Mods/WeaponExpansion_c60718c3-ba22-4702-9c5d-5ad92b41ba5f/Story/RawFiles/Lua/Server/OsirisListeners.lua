@@ -33,14 +33,14 @@ Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profi
 	Ext.PostMessageToClient(character, "LLWEAPONEX_SetActiveCharacter", GetUUID(character))
 end)
 
-Ext.RegisterOsirisListener("ItemLockUnEquip", 2, "after", function(item, locked)
-	print("ItemLockUnEquip", item, locked)
-	if locked == 1 then
-		ObjectSetFlag(item, "LLWEAPONEX_ItemIsLocked", 0)
-	else
-		ObjectClearFlag(item, "LLWEAPONEX_ItemIsLocked", 0)
-	end
-end)
+-- Ext.RegisterOsirisListener("ItemLockUnEquip", 2, "after", function(item, locked)
+-- 	print("ItemLockUnEquip", item, locked)
+-- 	if locked == 1 then
+-- 		ObjectSetFlag(item, "LLWEAPONEX_ItemIsLocked", 0)
+-- 	else
+-- 		ObjectClearFlag(item, "LLWEAPONEX_ItemIsLocked", 0)
+-- 	end
+-- end)
 
 ---@param target string
 ---@param source string

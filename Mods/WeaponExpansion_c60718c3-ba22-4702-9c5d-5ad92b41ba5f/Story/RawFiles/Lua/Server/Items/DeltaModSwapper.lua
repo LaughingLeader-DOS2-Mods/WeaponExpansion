@@ -266,9 +266,15 @@ end
 ---@param item string
 function SwapDeltaMods(item)
 	if ObjectExists(item) == 1 and ObjectGetFlag(item, "LLWEAPONEX_ProcessedDeltamods") == 0 then
-		local stat,itemType,rarity,level = nil
 		---@type EsvItem
 		local itemObject = Ext.GetItem(item)
+
+		if itemObject.Stats == nil then
+			ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
+			return
+		end
+
+		local stat,itemType,rarity,level = nil
 		stat = itemObject.StatsId
 		---@type StatItem
 		local itemStatObject = itemObject.Stats
@@ -284,7 +290,6 @@ function SwapDeltaMods(item)
 				SetStoryEvent(item, "LeaderLib_Commands_SetItemVariables")
 			end
 		end
-		print("SwapDeltaMods", item,stat,itemType,rarity,level)
 		if rarity ~= nil and rarity ~= "Common" and rarity ~= "Unique" then
 			if level == nil then
 				level = NRD_ItemGetInt(item, "LevelOverride")
@@ -381,12 +386,20 @@ function SwapDeltaMods(item)
 	end
 end
 
+local equipmentTypes = {
+	Armor = true,
+	Weapon = true,
+	Shield = true
+}
+
 ---@param item EsvItem
 Ext.RegisterListener("TreasureItemGenerated", function(item)
-	Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
-	TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
-	TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
-	--SwapDeltaMods(item.MyGuid)
+	if equipmentTypes[item.ItemType] == true then
+		Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
+		TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
+		TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
+		--SwapDeltaMods(item.MyGuid)
+	end
 end)
 
 if Ext.IsDeveloperMode() then

@@ -4,11 +4,11 @@
 	<version major="1" minor="0" revision="0" build="0" />
 	<region id="CharacterCreationClass">
 		<node id="root">
-			<attribute id="ClassName" value="Assassin" handle="hc8ff1dbagf70cg4ecfg8a8cga3fb71de6a87" type="28" />
-			<attribute id="ClassDescription" value="A contract killer who slays their target with a pair of deadly blades, motivated by political, religious, or financial means" handle="h2bc57a65g2b75g457ag9b7agb148ad4e60cb" type="28" />
-			<attribute id="ClassLongDescription" value="A contract killer who slays their target with a pair of deadly blades, motivated by political, religious, or financial means" handle="h2bc57a65g2b75g457ag9b7agb148ad4e60cb" type="28" />
-			<attribute id="ClassType" value="LLWEAPONEX_Assassin" type="22" />
-			<attribute id="SkillSet" value="Class_LLWEAPONEX_Assassin" type="22" />
+			<attribute id="ClassName" value="Reaper" handle="h889b84dfgcd27g41c8g8237g7f6fabdc824b" type="28" />
+			<attribute id="ClassDescription" value="A rare type of warrior that wields an intimidating scythe. Some believe them to be soldiers of Death, as their prowess with curved blades is second only to their innate affinity with Necromancy." handle="hc389a26bg935cg42c9g92a9gb8f58881d0c8" type="28" />
+			<attribute id="ClassLongDescription" value="" handle="hc389a26bg935cg42c9g92a9gb8f58881d0c8" type="28" />
+			<attribute id="ClassType" value="LLWEAPONEX_Reaper" type="22" />
+			<attribute id="SkillSet" value="Class_LLWEAPONEX_Reaper" type="22" />
 			<attribute id="Voice" value="0" type="5" />
 			<attribute id="Icon" value="6" type="5" />
 
@@ -23,58 +23,58 @@
 					<children>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Human" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview_Humans" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Dwarf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Elf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Lizard" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview_Lizards" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Human" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview_Humans" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Dwarf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Elf" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start_Undead" type="22" />
 						</node>
 						<node id="EquipmentProperty">
 							<attribute id="RaceName" value="Undead_Lizard" type="22" />
-							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Assassin_Preview" type="22" />
-							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Assassin_Start_Undead" type="22" />
+							<attribute id="PreviewEquipmentSet" value="Class_LLWEAPONEX_Reaper_Preview_Lizards" type="22" />
+							<attribute id="StartingEquipmentSet" value="Class_LLWEAPONEX_Reaper_Start_Undead" type="22" />
 						</node>
 					</children>
 				</node>
 				<node id="AbilityChanges">
 					<children>
 						<node id="AbilityChange">
-							<attribute id="Ability" value="RogueLore" type="23" />
+							<attribute id="Ability" value="WarriorLore" type="23" />
 							<attribute id="AmountIncreased" value="1" type="4" />
 						</node>
 						<node id="AbilityChange">
-							<attribute id="Ability" value="Polymorph" type="23" />
+							<attribute id="Ability" value="Necromancy" type="23" />
 							<attribute id="AmountIncreased" value="1" type="4" />
 						</node>
 						<node id="AbilityChange">
-                            <attribute id="Ability" value="Thievery" type="23" />
+                            <attribute id="Ability" value="Telekinesis" type="23" />
                             <attribute id="AmountIncreased" value="1" type="4" />
                         </node>
 					</children>
@@ -94,7 +94,7 @@
 				<node id="TalentsAdded">
 					<children>
 						<node id="TalentAdded">
-							<attribute id="Talent" value="SurpriseAttack" type="23" />
+							<attribute id="Talent" value="Executioner" type="23" />
 						</node>
 					</children>
 				</node>
