@@ -78,8 +78,8 @@ local function SessionSetup()
         Mods.LeaderLib.AddDebugInitCall(debugInit)
     end
 
-    -- Divinity Unleashed
-    if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") then
+    -- Divinity Unleashed or Armor Mitigation
+    if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") and not Ext.IsModLoaded("edf1898c-d375-47e7-919a-11d5d44d1cca") then
         Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
 		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
     end
