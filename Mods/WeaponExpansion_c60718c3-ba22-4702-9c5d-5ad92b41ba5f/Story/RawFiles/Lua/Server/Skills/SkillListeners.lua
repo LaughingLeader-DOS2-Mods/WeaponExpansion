@@ -185,19 +185,30 @@ end)
 
 ---@param reverse boolean
 ---@param skill string
+---@param instant boolean
 ---@param char string
 ---@param state SkillState
 ---@param data HitData
-local function SwapSkills(nextSkill, skill, char, state, data)
+local function SwapSkills(nextSkill, instant, skill, char, state, data)
 	if state == SKILL_STATE.CAST then
-		LeaderLib.SwapSkill(char, skill, nextSkill)
+		if CharacterIsInCombat(char) == 1 or instant then
+			if instant ~= true then
+				LeaderLib.StartOneshotTimer("LLWEAPONEX_Pistol_SwapSkills_"..skill..char, 500, function()
+					GameHelpers.Skill.Swap(char, skill, nextSkill, true)
+				end)
+			else
+				GameHelpers.Skill.Swap(char, skill, nextSkill, true)
+			end
+		else
+			NRD_SkillSetCooldown(char, skill, 0.0)
+		end
 	end
 end
 
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_HandCrossbow_Reload", ...) end)
-LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_HandCrossbow_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot", ...) end)
-LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", ...) end)
-LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Target_LLWEAPONEX_Pistol_Shoot", ...) end)
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_HandCrossbow_Reload", false, ...) end)
+LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_HandCrossbow_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, ...) end)
+LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", false, ...) end)
+LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Target_LLWEAPONEX_Pistol_Shoot", true, ...) end)
 --LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", function(...) SwapHandCrossbowSkills(false, ...) end)
 
 ---@param skill string

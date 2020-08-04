@@ -1,3 +1,5 @@
+local HitData = LeaderLib.Classes.HitData
+
 local function GetMasteryBonuses(char, skill)
 	local character = Ext.GetCharacter(char)
 	local bonuses = {}

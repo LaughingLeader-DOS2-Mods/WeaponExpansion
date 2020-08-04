@@ -249,10 +249,3 @@ function OnGameStarted(region, editorMode, postReset)
     UpdateDarkFireballSkill()
     SyncVars()
 end
-
-local function LeaderLibSetup()
-    LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
-end
-
-LeaderLib.RegisterListener("ModuleResume", LeaderLibSetup)
-LeaderLib.RegisterListener("SessionLoaded", LeaderLibSetup)

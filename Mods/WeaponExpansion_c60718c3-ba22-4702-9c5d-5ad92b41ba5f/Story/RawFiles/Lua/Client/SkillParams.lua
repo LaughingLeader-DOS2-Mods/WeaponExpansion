@@ -154,33 +154,8 @@ local function GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 	local weapon = GetUnarmedWeapon(character)
 	local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
 	if damageRange ~= nil then
-		local damageTexts = {}
-		local totalDamageTypes = 0
-		for damageType,damage in pairs(damageRange) do
-			local min = damage[1]
-			local max = damage[2]
-
-			if min == nil then min = 0 end
-			if max == nil then max = 0 end
-
-			if min > 0 and max > 0 then
-				if max == min then
-					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
-				else
-					table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
-				end
-			end
-			totalDamageTypes = totalDamageTypes + 1
-		end
-		if totalDamageTypes > 0 then
-			if totalDamageTypes > 1 then
-				return LeaderLib.Common.StringJoin(", ", damageTexts)
-			else
-				return damageTexts[1]
-			end
-		end
+		return GameHelpers.Tooltip.FormatDamageRange(damageRange)
 	end
-	return ""
 end
 
 Skills.Params["LLWEAPONEX_UnarmedBasicAttackDamage"] = GetUnarmedBasicAttackDamage
@@ -245,7 +220,12 @@ end
 --- @param isFromItem boolean
 --- @param param string
 function SkillGetDescriptionParam(skill, character, isFromItem, param)
-	if param == "Damage" then
+	if Skills.DamageParam[param] ~= nil then
+		local param_func = Skills.DamageParam[param]
+		if param_func ~= nil then
+			return GetDamageParamResult(param_func, skill, character, isFromItem)
+		end
+	elseif param == "Damage" then
 		if skill.UseWeaponDamage == "Yes" and IsUnarmed(character) then
 			return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 		else
@@ -253,11 +233,6 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 			if param_func ~= nil then
 				return GetDamageParamResult(param_func, skill, character, isFromItem)
 			end
-		end
-	elseif Skills.DamageParam[param] ~= nil then
-		local param_func = Skills.DamageParam[param]
-		if param_func ~= nil then
-			return GetDamageParamResult(param_func, skill, character, isFromItem)
 		end
 	else
 		local param_func = Skills.Params[param]

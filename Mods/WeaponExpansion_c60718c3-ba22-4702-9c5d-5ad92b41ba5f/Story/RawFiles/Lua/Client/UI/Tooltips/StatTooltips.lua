@@ -8,6 +8,7 @@ local fromFistsText = Ext.GetTranslatedString("h0881bb60gf067g4223ga925ga343fa0f
 local fromUnarmedWeaponText = Ext.GetTranslatedString("h6d1ce292g842cg4decg89deg09ec0e293e5e", "<br>From Unarmed Weapon: [1]-[2]")
 
 ---@param character EsvCharacter
+---@param stat string
 ---@param tooltip TooltipData
 local function OnDamageStatTooltip(character, stat, tooltip)
 	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid

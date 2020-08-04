@@ -134,54 +134,7 @@ end
 ---@param target StatCharacter
 ---@param param string
 function StatusGetDescriptionParam(status, statusSource, target, param, ...)
-	if param == "Skill" then
-		local params = {...}
-		if params[2] == "Damage" then
-			local skill = params[1]
-			if skill ~= nil then
-				local skillSource = statusSource or target
-				local damageSkillProps = ExtenderHelpers.CreateSkillTable(skill)
-				local damageRange = Game.Math.GetSkillDamageRange(skillSource, damageSkillProps)
-				if damageRange ~= nil then
-					local damageTexts = {}
-					local totalDamageTypes = 0
-					for damageType,damage in pairs(damageRange) do
-						local min = damage[1]
-						local max = damage[2]
-						if min > 0 or max > 0 then
-							if max == min then
-								table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
-							else
-								table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
-							end
-						end
-						totalDamageTypes = totalDamageTypes + 1
-					end
-					if totalDamageTypes > 0 then
-						if totalDamageTypes > 1 then
-							return LeaderLib.Common.StringJoin(", ", damageTexts)
-						else
-							return damageTexts[1]
-						end
-					end
-				end
-			end
-		else
-			local skillName = params[1]
-			local attribute = params[2]
-			if skillName ~= nil and attribute ~= nil then
-				local value = Ext.StatGetAttribute(skillName, attribute)
-				if value ~= nil then
-					if type(value) == "number" then
-						return math.tointeger(value)
-					else
-						return tostring(value)
-					end
-				end
-			end
-		end
-		return ""
-	end
+
 end
 Ext.RegisterListener("StatusGetDescriptionParam", StatusGetDescriptionParam)
 
