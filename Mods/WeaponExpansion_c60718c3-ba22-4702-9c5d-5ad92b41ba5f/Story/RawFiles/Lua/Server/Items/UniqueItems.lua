@@ -92,7 +92,8 @@ AllUniques = {
 
 function MoveUniquesToVendingMachine()
 	for i,item in pairs(AllUniques) do
-		if not GameHelpers.Item.ItemIsEquippedByCharacter(item) and ObjectIsCharacter(GetInventoryOwner(item)) ~= 1 and GetInventoryOwner(item) ~= VENDING_MACHINE then
+		local owner = GetInventoryOwner(item)
+		if not GameHelpers.Item.ItemIsEquippedByCharacter(item) and (owner == nil or (ObjectIsCharacter(owner) ~= 1 and owner ~= VENDING_MACHINE)) then
 			ItemToInventory(item, VENDING_MACHINE, 1, 0, 0)
 		end
 	end
