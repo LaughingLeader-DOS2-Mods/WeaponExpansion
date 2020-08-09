@@ -5,11 +5,11 @@ local function GetSkillDamageRange(character, skill)
 
     if skill.UseWeaponDamage == "Yes" then
         local mainWeapon = character.MainWeapon
-        local mainDamageRange = Game.Math.CalculateWeaponDamageRange(character, mainWeapon)
+        local mainDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, mainWeapon)
         local offHandWeapon = character.OffHandWeapon
 
         if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
-            local offHandDamageRange = Game.Math.CalculateWeaponDamageRange(character, offHandWeapon)
+            local offHandDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, offHandWeapon)
 
             local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
             for damageType, range in pairs(offHandDamageRange) do

@@ -12,7 +12,7 @@ local elementalWeakness = {
 }
 
 MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, {"ELEMENTAL_DEBUFF"}, function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Target ~= nil then
+	if state == SKILL_STATE.HIT and hitData.Success then
 		local duration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns", 1) * 6.0
 		local weaponuuid = CharacterGetEquippedWeapon(char)
 		--local damageType = Ext.StatGetAttribute(NRD_ItemGetStatsId(weapon), "Damage Type")

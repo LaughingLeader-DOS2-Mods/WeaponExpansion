@@ -47,11 +47,13 @@ local function SetUserCharacters(channel, data)
 	if messageData.Params ~= nil then
 		CLIENT_UI.PARTY = messageData.Params
 	end
-	for i,v in pairs(CLIENT_UI.PARTY) do
-		---@type EsvCharacter
-		local character = Ext.GetCharacter(v)
-		if character.HostControl == true then
-			CLIENT_UI.ACTIVE_CHARACTER = v
+	if Ext.GetGameState() == "Running" then
+		for i,v in pairs(CLIENT_UI.PARTY) do
+			---@type EsvCharacter
+			local character = Ext.GetCharacter(v)
+			if character.HostControl == true then
+				CLIENT_UI.ACTIVE_CHARACTER = v
+			end
 		end
 	end
 	LeaderLib.PrintDebug("Set active character for client to", CLIENT_UI.ACTIVE_CHARACTER, "Party:", LeaderLib.Common.Dump(CLIENT_UI.PARTY))

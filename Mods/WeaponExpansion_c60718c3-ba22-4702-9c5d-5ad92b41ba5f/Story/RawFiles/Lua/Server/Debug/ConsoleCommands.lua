@@ -14,10 +14,9 @@ Ext.RegisterConsoleCommand("weaponex_tagboost", function()
 			for i,v in pairs(item:GetDeltaMods()) do
 				local status,err = xpcall(function()
 					local deltamod = Ext.GetDeltaMod(v, "Weapon")
-					print(i,v,deltamod)
 					for _,v2 in pairs(deltamod.Boosts) do
-						print(v2, tags)
-						local tags = Ext.StatGetAttribute(v2, "Tags")
+						local tags = Ext.StatGetAttribute(v2.Boost, "Tags")
+						print(v2.Boost, tags)
 					end
 				end, debug.traceback)
 				if not status then

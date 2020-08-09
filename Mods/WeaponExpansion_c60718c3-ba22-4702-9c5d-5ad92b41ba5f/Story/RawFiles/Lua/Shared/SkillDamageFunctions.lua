@@ -158,7 +158,7 @@ end
 --- @param weapon StatItem
 --- @param highestAttribute string
 --- @return number[]
-local function CalculateWeaponDamageRange(character, weapon, highestAttribute)
+local function CalculateWeaponScaledDamageRanges(character, weapon, highestAttribute)
     local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
 
     local abilityBoosts = character.DamageBoost 
@@ -259,7 +259,7 @@ local function GetAbilityBasedWeaponDamage(character, isTooltip, noRandomization
 	local highestAttribute = GetHighestAttribute(character)
 	local weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, weaponType, masteryBoost)
 	if isTooltip == true then
-		return Math.AbilityScaling.CalculateWeaponDamageRange(character, weapon, ability)
+		return Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon, ability)
 	else
 		return Math.AbilityScaling.CalculateWeaponDamage(character, weapon, nil, noRandomization, ability)
 	end

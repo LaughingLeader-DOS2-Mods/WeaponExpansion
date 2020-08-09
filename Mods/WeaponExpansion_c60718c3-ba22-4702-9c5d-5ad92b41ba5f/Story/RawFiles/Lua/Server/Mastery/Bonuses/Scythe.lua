@@ -1,5 +1,5 @@
 MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, {"SCYTHE_RUPTURE"}, function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Target ~= nil then
+	if state == SKILL_STATE.HIT and hitData.Success then
 		local bleedingTurns = GetStatusTurns(hitData.Target, "BLEEDING")
 		if bleedingTurns ~= nil and bleedingTurns > 0 then
 			local level = CharacterGetLevel(char)

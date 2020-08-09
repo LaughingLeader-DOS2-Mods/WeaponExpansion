@@ -1,5 +1,5 @@
 MasteryBonusManager.RegisterSkillListener({"Target_CripplingBlow", "Target_EnemyCripplingBlow"}, {"AXE_BONUSDAMAGE"}, function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Target ~= nil then
+	if state == SKILL_STATE.HIT and hitData.Success then
 		if GameHelpers.Status.IsDisabled(hitData.Target) then
 			GameHelpers.ExplodeProjectile(char, hitData.Target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
 		end
@@ -25,9 +25,9 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 	end
 end)
 
-MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"}, {"AXE_VULNERABLE"}, function(bonuses, skill, char, state, skillData)
-	if state == SKILL_STATE.HIT and skillData.Target ~= nil then
-		Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, skillData.Target)
+MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"}, {"AXE_VULNERABLE"}, function(bonuses, skill, char, state, hitData)
+	if state == SKILL_STATE.HIT and hitData.Success then
+		Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, hitData.Target)
 	end
 end)
 
@@ -44,3 +44,44 @@ local function BlinkStrike_ApplyVulnerable(timerData)
 end
 
 OnTimerFinished["LLWEAPONEX_MasteryBonus_ApplyVulnerable"] = BlinkStrike_ApplyVulnerable
+
+---@param hitData HitData
+MasteryBonusManager.RegisterSkillListener({"Target_HeavyAttack"}, {"AXE_ALLIN"}, function(bonuses, skill, char, state, hitData)
+	if state == SKILL_STATE.HIT and hitData.Success then
+		local totalPiercingDamage = 0
+		for i,damageType in Data.DamageTypes:Get() do
+			local damage = nil
+			damage = NRD_HitStatusGetDamage(hitData.Target, hitData.Handle, damageType)
+			if damage ~= nil and damage > 0 then
+				totalPiercingDamage = totalPiercingDamage + (damage / 2)
+				local reduced_damage = (damage/2) * -1
+				NRD_HitStatusAddDamage(hitData.Target, hitData.Handle, damageType, reduced_damage)
+			end
+		end
+		if totalPiercingDamage > 0 then
+			NRD_HitStatusAddDamage(hitData.Target, hitData.Handle, "Piercing", totalPiercingDamage)
+		end
+	end
+end)
+
+local flurryHits = {}
+
+---@param hitData HitData
+MasteryBonusManager.RegisterSkillListener({"Target_DualWieldingAttack"}, {"AXE_FLURRY"}, function(bonuses, skill, char, state, hitData)
+	if state == SKILL_STATE.HIT and hitData.Target ~= nil then
+		if flurryHits[char] == nil then
+			flurryHits[char] = 0
+		end
+		if hitData.Success then
+			flurryHits[char] = flurryHits[char] + 1
+		end
+		local timerName = "LLWEAPONEX_Axe_FlurryCounter"..char
+		LeaderLib.StartOneshotTimer(timerName, 1000, function()
+			if flurryHits[char] >= 3 then
+				CharacterAddActionPoints(char, 1)
+				CharacterStatusText(char, "LLWEAPONEX_StatusText_FlurryAxeCombo")
+			end
+			flurryHits[char] = nil
+		end)
+	end
+end)

@@ -39,8 +39,7 @@ local function ShootPistolAtObject(source,target)
 	--NRD_ProjectileSetGuidString("SourcePosition", source)
 	NRD_ProjectileSetGuidString("Source", source)
 	-- For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
-	if (ObjectIsCharacter(target) == 1 and CharacterIsEnemy(source,target) == 0) 
-	or GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN") then
+	if (ObjectIsCharacter(target) == 1 and CharacterIsEnemy(source,target) == 0) or GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN") then
 		NRD_ProjectileSetGuidString("HitObject", target)
 		NRD_ProjectileSetGuidString("HitObjectPosition", target)
 		NRD_ProjectileSetGuidString("SourcePosition", target) -- Fix for hit effects appearing at the source

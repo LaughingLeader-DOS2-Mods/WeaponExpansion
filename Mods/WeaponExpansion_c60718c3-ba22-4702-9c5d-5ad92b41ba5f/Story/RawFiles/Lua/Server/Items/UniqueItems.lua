@@ -185,7 +185,7 @@ function SwapUnique(char, id)
 		local stat = NRD_ItemGetStatsId(next)
 		local statType = NRD_StatGetType(stat)
 		local isTwoHanded = false
-		local locked = ObjectGetFlag(equipped, "LLWEAPONEX_ItemIsLocked") == 1
+		local locked = Ext.GetItem(equipped).UnEquipLocked
 		if statType == "Weapon" then
 			isTwoHanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
 		end

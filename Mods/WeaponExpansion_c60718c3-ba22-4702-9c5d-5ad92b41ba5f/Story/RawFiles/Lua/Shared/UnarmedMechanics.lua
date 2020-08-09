@@ -65,7 +65,7 @@ end
 ---@return table<string,number[]>,number,integer,string
 function GetUnarmedDamageRange(character)
 	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = GetUnarmedWeapon(character)
-	local damageRange = Game.Math.CalculateWeaponDamageRange(character, weapon)
+	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
 	return damageRange,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
 end
 
@@ -89,7 +89,7 @@ function GetUnarmedWeaponDamageRange(character, item)
 			end
 		end
 	end
-	local damageRange = Game.Math.CalculateWeaponDamageRange(character, noWeapon)
+	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, noWeapon)
 	return damageRange,highestAttribute
 end
 

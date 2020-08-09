@@ -28,7 +28,7 @@ Ext.RegisterNetListener("LLWEAPONEX_RequestUserCharacters", RequestUserCharacter
 
 function SendClientID(uuid, id)
 	LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetActiveCharacter", uuid)
+	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetActiveCharacter", GetUUID(uuid))
 	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SendClientUserID", id)
 end
 

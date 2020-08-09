@@ -55,8 +55,6 @@ Ext.Require("Shared/Data/MasteryData_BonusParams.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/Data/UnarmedWeaponStats.lua")
 Ext.Require("Shared/Data/PresetEntries.lua")
-local initHarkenVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Harken.lua")
-local initKorvashVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Korvash.lua")
 Ext.Require("Shared/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
@@ -71,9 +69,12 @@ local defaultExperienceAmounts = {
 	--[5] = {Amount = 0, Required = 36000},
 }
 
+local initHarkenVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Harken.lua")
+local initKorvashVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Korvash.lua")
+
 Ext.RegisterListener("ModuleLoading", function()
-	--initHarkenVoiceMetaData()
-	--initKorvashVoiceMetaData()
+	initHarkenVoiceMetaData()
+	initKorvashVoiceMetaData()
 end)
 
 local function LoadExperienceVariables()	
@@ -107,10 +108,10 @@ local function LoadExperienceVariables()
 		lastRankExpGain = rankGain
 		lastRequiredNextLevelExperience = requiredNextLevelExperience
 	end
-	LeaderLib.PrintDebug("[WeaponExpansion] Loaded mastery experience variables:")
-	LeaderLib.PrintDebug("==========================")
-	LeaderLib.PrintDebug(LeaderLib.Common.Dump(RankVariables))
-	LeaderLib.PrintDebug("==========================")
+	--LeaderLib.PrintDebug("[WeaponExpansion] Loaded mastery experience variables:")
+	--LeaderLib.PrintDebug("==========================")
+	--LeaderLib.PrintDebug(LeaderLib.Common.Dump(RankVariables))
+	--LeaderLib.PrintDebug("==========================")
 
 	Mastery.Variables.MaxRank = math.floor(maxRank)
 	Mastery.Variables.RankVariables = RankVariables
@@ -138,7 +139,7 @@ local function OnInit()
 	LeaderLib.EnableFeature("StatusParamSkillDamage")
 end
 
-Ext.RegisterListener("ModuleResume", OnInit) -- Lua Reset
+--Ext.RegisterListener("ModuleResume", OnInit) -- Lua Reset
 Ext.RegisterListener("SessionLoaded", OnInit)
 
 Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")

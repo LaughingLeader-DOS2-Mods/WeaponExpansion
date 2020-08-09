@@ -31,7 +31,7 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedSh
 ---@param state SkillState
 ---@param data HitData
 local function Greatbow_PiercingShot_DragonBonus(skill, char, state, data)
-	if state == SKILL_STATE.HIT then
+	if state == SKILL_STATE.HIT and data.Success then
 		if IsTagged(data.Target, "DRAGON") == 1 then
 			ApplyStatus(data.Target, "LLWEAPONEX_DRAGONS_BANE", 6.0, 0, char)
 		end
@@ -71,7 +71,7 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", G
 ---@param data SkillEventData|HitData
 local function SkyShot(skill, char, state, data)
 	if IsTagged(char, "LLWEAPONEX_Omnibolt_Equipped") == 1 then
-		if state == SKILL_STATE.HIT and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
+		if state == SKILL_STATE.HIT and data.Success and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
 			GameHelpers.ExplodeProjectile(char, data.Target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
 		elseif state == SKILL_STATE.USED then
 			if data.TotalTargetObjects > 0 then
@@ -108,7 +108,7 @@ local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
 ---@param state SkillState
 ---@param data HitData
 LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, data)
-	if state == SKILL_STATE.HIT then
+	if state == SKILL_STATE.HIT and data.Success then
 		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Ext.IsDeveloperMode()
 		if canStealFrom then
 			

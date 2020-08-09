@@ -62,14 +62,6 @@ local function appendProperties(statname, property, value)
 	end
 end
 
-local function buildTemplateString(curlyBraceType, values)
-	local templateString = "{"..curlyBraceType.."}"
-	for type,template in pairs(values) do
-		templateString = templateString .. "["..type.."]"..template
-	end
-	return templateString
-end
-
 local gunExplosionEffectStatusProperties = {{
 	Type = "Status",
 	Action = "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX",
@@ -81,6 +73,14 @@ local gunExplosionEffectStatusProperties = {{
 	Arg5 = -1,
 	SurfaceBoost = false
 }}
+
+local function buildTemplateString(curlyBraceType, values)
+	local templateString = "{"..curlyBraceType.."}"
+	for type,template in pairs(values) do
+		templateString = templateString .. "["..type.."]"..template
+	end
+	return templateString
+end
 
 local defaultBulletTemplate = "6e597ce1-d8b8-4720-89b9-75f6a71d64ba"
 local bulletTemplates = {

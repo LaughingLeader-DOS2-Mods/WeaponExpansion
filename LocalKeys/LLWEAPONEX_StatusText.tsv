@@ -25,3 +25,4 @@ LLWEAPONEX_StatusText_Encourage_Cleansed	<font color='#E4CE22' size='22'><p alig
 LLWEAPONEX_StatusText_StatusExtended	<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>	h8224bb41g2261g4a50ga1feg7dc0f7394eb7
 LLWEAPONEX_StatusText_Pistol_AdrenalineBoost	<font color='#5A9646' size='22'><p align='center'>Pistol Damage Boost</p></font>	h4ed991d3gb2a2g4fe5g8a5fgf5783ab94ab4
 LLWEAPONEX_StatusText_Pistol_MarkedCrit	<font color='#FF337F' size='22'><p align='center'>Marked Critical!</p></font>	h89bf2557gf0a4g4d6eg9ec5gf642eb896aa3
+LLWEAPONEX_StatusText_FlurryAxeCombo	<font color='#E4CE22' size='22'>Flurry Axe Combo! +1 AP</font>	hddbc42dfg304bg48ddga684g1bd7dff813cc

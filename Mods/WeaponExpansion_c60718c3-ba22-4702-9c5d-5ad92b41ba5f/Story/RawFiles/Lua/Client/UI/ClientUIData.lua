@@ -19,7 +19,7 @@ end)
 Ext.RegisterNetListener("LLWEAPONEX_SetActiveCharacter", function(call, uuid)
 	CLIENT_UI.ACTIVE_CHARACTER = uuid
 	print("Set active character for client to", uuid)
-	if CLIENT_UI.ACTIVE_CHARACTER ~= nil and Ext.GetCharacter(uuid) ~= nil then
+	if Ext.GetGameState() == "Running" and CLIENT_UI.ACTIVE_CHARACTER ~= nil and Ext.GetCharacter(uuid) ~= nil then
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
 		if ui ~= nil then
 			UI.SetCharacterSheetDamageText(ui,CLIENT_UI.ACTIVE_CHARACTER)

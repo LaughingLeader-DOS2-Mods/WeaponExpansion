@@ -10,15 +10,6 @@ THEN
 NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode);
 
 IF
-UserConnected(_ID, _, _)
-AND
-GetCurrentCharacter(_ID, _Player)
-AND
-GetUUID(_Player, _UUID)
-THEN
-NRD_ModCall("WeaponExpansion", "SendClientID", _UUID, (STRING)_ID);
-
-IF
 UserEvent(_ID, "LLWEAPONEX_SendClientID")
 AND
 GetCurrentCharacter(_ID, _Player)
@@ -29,6 +20,8 @@ NRD_ModCall("WeaponExpansion", "SendClientID", _UUID, (STRING)_ID);
 
 IF
 CharacterReservedUserIDChanged(_Player, _Old, _New)
+AND
+_Old != -65536 // Unset
 AND
 _Old != _New
 AND

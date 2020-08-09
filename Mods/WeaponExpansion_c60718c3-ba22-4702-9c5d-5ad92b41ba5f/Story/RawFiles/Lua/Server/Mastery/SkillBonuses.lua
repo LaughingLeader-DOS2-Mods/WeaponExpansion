@@ -2,37 +2,6 @@ MasteryBonusManager = {}
 
 HitData = LeaderLib.Classes.HitData
 
-local bonusScriptNames = {
-	"Axe.lua",
-	"Banner.lua",
-	"BattleBook.lua",
-	"Bludgeon.lua",
-	"Bow.lua",
-	"Crossbow.lua",
-	"Dagger.lua",
-	"DualShields.lua",
-	"Firearm.lua",
-	"Greatbow.lua",
-	"HandCrossbow.lua",
-	"Katana.lua",
-	"Pistol.lua",
-	"Polearm.lua",
-	"Quarterstaff.lua",
-	"Rapier.lua",
-	"Runeblade.lua",
-	"Scythe.lua",
-	"Shield.lua",
-	"Staff.lua",
-	"Sword.lua",
-	"Throwing.lua",
-	"Unarmed.lua",
-	"Wand.lua",
-}
-
-for i,v in pairs(bonusScriptNames) do
-	Ext.Require("Server/Mastery/Bonuses/"..v)
-end
-
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	local character = Ext.GetCharacter(char)
 	local bonuses = {}
@@ -213,4 +182,35 @@ LeaderLib.RegisterSkillListener("Rush_EnemyBullRush", RushBonus)
 ---@param element string
 function OnRushSkillCast(char, skill, element)
 
+end
+
+local bonusScriptNames = {
+	"Axe.lua",
+	"Banner.lua",
+	"BattleBook.lua",
+	"Bludgeon.lua",
+	"Bow.lua",
+	"Crossbow.lua",
+	"Dagger.lua",
+	"DualShields.lua",
+	"Firearm.lua",
+	"Greatbow.lua",
+	"HandCrossbow.lua",
+	"Katana.lua",
+	"Pistol.lua",
+	"Polearm.lua",
+	"Quarterstaff.lua",
+	"Rapier.lua",
+	"Runeblade.lua",
+	"Scythe.lua",
+	"Shield.lua",
+	"Staff.lua",
+	"Sword.lua",
+	"Throwing.lua",
+	"Unarmed.lua",
+	"Wand.lua",
+}
+
+for i,v in pairs(bonusScriptNames) do
+	Ext.Require("Server/Mastery/Bonuses/"..v)
 end

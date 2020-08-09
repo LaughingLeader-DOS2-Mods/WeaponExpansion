@@ -1,5 +1,5 @@
 MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, {"BANNER_VACUUM"}, function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Target ~= nil then
+	if state == SKILL_STATE.HIT and hitData.Success then
 		local worldBannerEntry = Osi.DB_LLWEAPONEX_Skills_Temp_RallyBanner:Get(char, nil)
 		if worldBannerEntry ~= nil and #worldBannerEntry > 0 then
 			local worldBanner = worldBannerEntry[1][2]

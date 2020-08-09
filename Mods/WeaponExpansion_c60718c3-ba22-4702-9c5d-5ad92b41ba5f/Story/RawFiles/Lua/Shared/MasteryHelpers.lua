@@ -81,20 +81,19 @@ end
 --- @param tag string
 --- @return boolean
 local function HasMasteryRequirement(character, tag)
-	if not Ext.IsDeveloperMode() then
-		if type(character) == "string" then
-			character = Ext.GetCharacter(character)
-		end
-		local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
-		if not status then
-			Ext.PrintError("Error checking mastery requirements:\n", result)
-		else
-			return result
-		end
-		return false
-	else
+	if Ext.IsDeveloperMode() then
 		return true
 	end
+	if type(character) == "string" then
+		character = Ext.GetCharacter(character)
+	end
+	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
+	if not status then
+		Ext.PrintError("Error checking mastery requirements:\n", result)
+	else
+		return result
+	end
+	return false
 end
 
 Mastery.HasMasteryRequirement = HasMasteryRequirement

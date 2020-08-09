@@ -632,7 +632,7 @@ IF
 SkillCast(_Char, "Target_LLWEAPONEX_AnvilMace_GroundSmash", _, _)
 THEN
 LeaderLib_Helper_ClearActionQueue(_Char);
-LeaderLib_Timers_StartObjectTimer(_Char, 1, "LLWEAPONEX_Timers_Skills_AnvilGroundSmash_Cast", "LLWEAPONEX_Skills_AnvilGroundSmash_Cast");
+LeaderLib_Timers_StartObjectTimer(_Char, 50, "LLWEAPONEX_Timers_Skills_AnvilGroundSmash_Cast", "LLWEAPONEX_Skills_AnvilGroundSmash_Cast");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Skills_AnvilGroundSmash_Cast")

@@ -84,7 +84,7 @@ OnTimerFinished["LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy"] = Clo
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param skillData SkillEventData|HitData
 local function PistolShootBonuses(skill, char, state, skillData)
-	if state == SKILL_STATE.HIT then
+	if state == SKILL_STATE.HIT and skillData.Success then
 		local target = skillData.Target
 		local damageAmount = skillData.Damage
 		if target ~= nil and damageAmount > 0 then
