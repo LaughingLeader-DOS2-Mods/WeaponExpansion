@@ -178,12 +178,12 @@ Mastery.Params.SkillData.Projectile_EnemyThrowingKnife = Mastery.Params.SkillDat
 Mastery.Params.SkillData.Target_CripplingBlow = {
 	Tags = {
 		LLWEAPONEX_Bludgeon_Mastery2 = {
-			ID = "SUNDER",
+			ID = "BLUDGEON_SUNDER",
 			Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, reducing max <font color='#AE9F95'>[Handle:h161d5479g06d6g408egade2g37a203e3361f]</font>/<font color='#4197E2'>[Handle:h50eb8e33g82edg412eg9886gec19ca591254]</font> by <font color='#AE9F95'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font>/<font color='#4197E2'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font></font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).</font>"),
 			NamePrefix = "<font color='#F19824'>Sundering</font>"
 		},
 		LLWEAPONEX_Axe_Mastery1 = {
-			ID = "BONUSDAMAGE",
+			ID = "AXE_BONUSDAMAGE",
 			Param = TranslatedString:Create("h46875020ge016g4eccg94ecgc9f5233c07fd","<font color='#F19824'>If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage].</font>"),
 			NamePrefix = "<font color='#DD4444'>Executioner's</font>"
 		},
@@ -195,26 +195,32 @@ Mastery.Params.SkillData.Target_EnemyCripplingBlow = Mastery.Params.SkillData.Ta
 Mastery.Params.SkillData.MultiStrike_BlinkStrike = {
 	Tags = {
 		LLWEAPONEX_Axe_Mastery2 = {
-			ID = "VULNERABLE",
+			ID = "AXE_VULNERABLE",
 			Param = TranslatedString:Create("h173b9449ge0c5g4f29g86f4g01124907841b","Each target hit becomes <font color='#F13324'>Vulnerable</font>. If hit again, <font color='#F13324'>Vulnerable</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].<br><font color='#F1CC00'><font color='#F13324'>Vulnerable</font> is removed when your turn ends.</font>"),
 		},
 	}
 }
 
+local elementalWeakness = {
+	ID = "ELEMENTAL_DEBUFF",
+	Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).</font>"),
+	GetParam = GetElementalWeakness,
+}
+
 Mastery.Params.SkillData.Shout_Whirlwind = {
 	Tags = {
 		LLWEAPONEX_Scythe_Mastery1 = {
-			ID = "RUPTURE",
+			ID = "SCYTHE_RUPTURE",
 			Param = TranslatedString:Create("h5ca24bfeg14f5g437fg92fag4708f87547de","<font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of <font color='#FF0000'>Bleeding</font> remaining.")
 		},
-		LLWEAPONEX_Staff_Mastery1 = {
-			ID = "ELEMENTAL_DEBUFF",
-			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).</font>"),
-			GetParam = GetElementalWeakness,
-		},
+		LLWEAPONEX_Staff_Mastery1 = elementalWeakness,
 		LLWEAPONEX_HandCrossbow_Mastery1 = {
 			ID = "WHIRLWIND_BOLTS",
 			Param = TranslatedString:Create("h665d9b1age332g4988gb57cgd1357c4c9af2","<font color='#F19824'>While spinning, shoot [ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets]-[ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets] enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget:ExplodeRadius]m radius, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].</font>"),
+		},
+		LLWEAPONEX_Axe_Mastery3 = {
+			ID = "AXE_SPINNING",
+			Param = TranslatedString:Create("h0f83aa9ag475bg4ddfgb546gbb83d237b44e", "Spin an additional 1-3 times, dealing reduced damage each spin."),
 		},
 	}
 }
@@ -265,11 +271,7 @@ Mastery.Params.SkillData.Shout_EnemyFleshSacrifice = Mastery.Params.SkillData.Sh
 
 Mastery.Params.SkillData.Target_LLWEAPONEX_BasicAttack = {
 	Tags = {
-		LLWEAPONEX_Wand_Mastery1 = {
-			ID = "ELEMENTAL_DEBUFF",
-			Param = TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessDuration] turn(s).</font>"),
-			GetParam = GetElementalWeakness,
-		},
+		LLWEAPONEX_Wand_Mastery1 = elementalWeakness
 	}
 }
 

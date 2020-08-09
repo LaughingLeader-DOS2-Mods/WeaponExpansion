@@ -25,6 +25,12 @@ param "ModifierType" "Weapon"
 new boost "_Boost_LLWEAPONEX_Weapon_Damage_Chaos_Large",1
 //END_REGION
 
+new deltamod "Boost_LLWEAPONEX_Debug_Tags"
+param "BoostType" "ItemCombo"
+param "Frequency" "1"
+param "ModifierType" "Weapon"
+new boost "_Boost_LLWEAPONEX_Debug_Tags",1
+
 //REGION RIFLE
 new deltamod "Boost_LLWEAPONEX_Weapon_Primary_Wits_Rifle"
 param "BoostType" "Primary"

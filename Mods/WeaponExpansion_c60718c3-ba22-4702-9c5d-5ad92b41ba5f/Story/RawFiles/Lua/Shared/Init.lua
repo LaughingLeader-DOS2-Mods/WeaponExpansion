@@ -72,8 +72,8 @@ local defaultExperienceAmounts = {
 }
 
 Ext.RegisterListener("ModuleLoading", function()
-	initHarkenVoiceMetaData()
-	initKorvashVoiceMetaData()
+	--initHarkenVoiceMetaData()
+	--initKorvashVoiceMetaData()
 end)
 
 local function LoadExperienceVariables()	

@@ -7,7 +7,7 @@ local totalDamageText = Ext.GetTranslatedString("h1035c3e5gc73dg4cc4ga914ga03a8a
 local fromFistsText = Ext.GetTranslatedString("h0881bb60gf067g4223ga925ga343fa0f2cbd", "<br>From Fists: [1]-[2]")
 local fromUnarmedWeaponText = Ext.GetTranslatedString("h6d1ce292g842cg4decg89deg09ec0e293e5e", "<br>From Unarmed Weapon: [1]-[2]")
 
----@param character EsvCharacter
+---@param character EclCharacter
 ---@param stat string
 ---@param tooltip TooltipData
 local function OnDamageStatTooltip(character, stat, tooltip)
