@@ -24,3 +24,23 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 		end
 	end
 end)
+
+MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"}, {"AXE_VULNERABLE"}, function(bonuses, skill, char, state, skillData)
+	if state == SKILL_STATE.HIT and skillData.Target ~= nil then
+		Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, skillData.Target)
+	end
+end)
+
+local function BlinkStrike_ApplyVulnerable(timerData)
+	local char = timerData[1]
+	local target = timerData[2]
+	if char ~= nil and target ~= nil and CharacterIsDead(target) == 0 then
+		if CharacterIsInCombat(char) == 1 then
+			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
+		else
+			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
+		end
+	end
+end
+
+OnTimerFinished["LLWEAPONEX_MasteryBonus_ApplyVulnerable"] = BlinkStrike_ApplyVulnerable

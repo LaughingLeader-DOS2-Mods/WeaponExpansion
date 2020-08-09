@@ -25,3 +25,50 @@ MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_Ene
 		end
 	end
 end)
+
+
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function SuckerPunchBonus(skill, char, state, skillData)
+	if state == SKILL_STATE.CAST then
+		local bonuses = MasteryBonusManager.GetMasteryBonuses(char, skill)
+		if bonuses["SUCKER_PUNCH_COMBO"] == true then
+			ApplyStatus(char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1", 12.0, 0, char)
+		end
+	elseif state == SKILL_STATE.HIT then
+		local target = skillData.Target
+		if target ~= nil then
+			local bonuses = MasteryBonusManager.GetMasteryBonuses(char, skill)
+			if bonuses["SUCKER_PUNCH_COMBO"] == true then
+				if HasActiveStatus(target, "KNOCKED_DOWN") == 1 then
+					local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+					if Ext.Random(0,100) <= chance then
+						local handle = NRD_StatusGetHandle(target, "KNOCKED_DOWN")
+						if handle ~= nil then
+							local duration = NRD_StatusGetReal(target, handle, "CurrentLifeTime")
+							local lastTurns = math.floor(duration / 6)
+							duration = duration + 6.0
+							local nextTurns = math.floor(duration / 6)
+							NRD_StatusSetReal(target, handle, "CurrentLifeTime", duration)
+							local text = Ext.GetTranslatedStringFromKey("LLWEAPONEX_StatusText_StatusExtended")
+							if text == nil then
+								text = "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"
+							end
+							text = text:gsub("%[1%]", Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute("KNOCKED_DOWN", "DisplayName")))
+							text = text:gsub("%[2%]", lastTurns)
+							text = text:gsub("%[3%]", nextTurns)
+							if ObjectIsCharacter(target) == 1 then
+								CharacterStatusText(target, text)
+							else
+								DisplayText(target, text)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Target_SingleHandedAttack", SuckerPunchBonus)

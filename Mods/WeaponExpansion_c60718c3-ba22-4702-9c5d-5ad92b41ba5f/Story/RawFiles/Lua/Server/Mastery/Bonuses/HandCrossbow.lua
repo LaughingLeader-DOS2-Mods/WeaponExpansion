@@ -53,3 +53,30 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 		end
 	end
 end)
+
+local function TacticalRetreatBonuses(skill, char, state, skillData)
+	if state == SKILL_STATE.CAST and CharacterIsInCombat(char) == 1 then
+		local bonuses = MasteryBonusManager.GetMasteryBonuses(char, skill)
+		if bonuses["JUMP_MARKED"] == true then
+			local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
+			if data ~= nil then
+				local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets", 2)
+				local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius", 4.0)
+				local combatEnemies = LeaderLib.Common.ShuffleTable(data)
+				for i,v in pairs(combatEnemies) do
+					local enemy = v[1]
+					if (enemy ~= char and CharacterIsEnemy(char, enemy) == 1 and 
+						not LeaderLib.IsSneakingOrInvisible(char) and GetDistanceTo(char,enemy) <= maxDistance) then
+							totalEnemies = totalEnemies - 1
+							ApplyStatus(enemy, "MARKED", 6.0, 0, char)
+					end
+					if totalEnemies <= 0 then
+						break
+					end
+				end
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Jump_TacticalRetreat", TacticalRetreatBonuses)
+LeaderLib.RegisterSkillListener("Jump_EnemyTacticalRetreat", TacticalRetreatBonuses)

@@ -1,0 +1,112 @@
+MasteryBonusManager.RegisterSkillListener({"Shout_Adrenaline", "Shout_EnemyAdrenaline"}, {"PISTOL_ADRENALINE"}, function(bonuses, skill, char, state, hitData)
+	if state == SKILL_STATE.CAST then
+		SetTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
+		CharacterStatusText(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
+	end
+end)
+
+
+local function CloakAndDaggerBonuses(skill, char, state, skillData)
+	if state == SKILL_STATE.CAST then
+		local bonuses = MasteryBonusManager.GetMasteryBonuses(char, skill)
+		if bonuses["PISTOL_CLOAKEDJUMP"] == true then
+			if CharacterHasSkill(char, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
+				LeaderLib.SwapSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "Target_LLWEAPONEX_Pistol_Shoot")
+			end
+			if CharacterIsInCombat(char) == 1 then
+				Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Jump_CloakAndDagger", CloakAndDaggerBonuses)
+LeaderLib.RegisterSkillListener("Jump_EnemyCloakAndDagger", CloakAndDaggerBonuses)
+
+local function CloakAndDagger_Pistol_MarkEnemy(timerData)
+	local char = timerData[1]
+	if char ~= nil and CharacterIsInCombat(char) == 1 then
+		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
+		if data ~= nil then
+			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets", 1)
+			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius", 6.0)
+			local combatEnemies = LeaderLib.Common.ShuffleTable(data)
+			local lastDist = 999
+			local targets = {}
+			for i,v in pairs(combatEnemies) do
+				local enemy = v[1]
+				if enemy ~= char and
+					CharacterIsEnemy(char, enemy) == 1 and 
+					CharacterIsDead(enemy) == 0 and 
+					not LeaderLib.IsSneakingOrInvisible(char) then
+						local dist = GetDistanceTo(char,enemy)
+						if dist <= maxDistance then
+							if totalEnemies == 1 then
+								if dist < lastDist then
+									targets[1] = enemy
+								end
+							else
+								table.insert(targets, {Dist = dist, UUID = enemy})
+							end
+							lastDist = dist
+						end
+				end
+			end
+			if #targets > 1 then
+				table.sort(targets, function(a,b)
+					return a.Dist < b.Dist
+				end)
+				for i,v in pairs(targets) do
+					local target = v.UUID
+					ApplyStatus(target, "MARKED", 6.0, 0, char)
+					SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
+					Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED")
+					totalEnemies = totalEnemies - 1
+					if totalEnemies <= 0 then
+						break
+					end
+				end
+			else
+				local target = targets[1]
+				ApplyStatus(target, "MARKED", 6.0, 0, char)
+				SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
+				Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED")
+			end
+		end
+	else
+		LeaderLib.PrintDebug("CloakAndDagger_Pistol_MarkEnemy params: "..LeaderLib.Common.Dump(skillData))
+	end
+end
+
+OnTimerFinished["LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy"] = CloakAndDagger_Pistol_MarkEnemy
+
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+local function PistolShootBonuses(skill, char, state, skillData)
+	if state == SKILL_STATE.HIT then
+		local target = skillData.Target
+		local damageAmount = skillData.Damage
+		if target ~= nil and damageAmount > 0 then
+			local handle = skillData.Handle
+			if IsTagged(target, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
+				local critMult = Ext.Round(CharacterGetAbility(char,"RogueLore") * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
+				GameHelpers.IncreaseDamage(target, char, handle, critMult, 0)
+				NRD_StatusSetInt(target, handle, "CriticalHit", 1)
+				ClearTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
+				--CharacterStatusText(target, string.format("<font color='#FF337F'>%s</font>", Ext.GetTranslatedString("h11065363gf07eg4764ga834g9eeab569ceec", "Critical Hit!")))
+				CharacterStatusText(target, "LLWEAPONEX_StatusText_Pistol_MarkedCrit")
+			end
+			if IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
+				ClearTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
+				local damageBoost = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0)
+				if damageBoost > 0 then
+					GameHelpers.IncreaseDamage(target, char, handle, damageBoost * 0.01, 0)
+					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
+				end
+			end
+		end
+	end
+end
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", PistolShootBonuses)
+LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", PistolShootBonuses)
