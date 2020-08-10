@@ -58,7 +58,12 @@ LLWEAPONEX_Banner_Mastery1 = {
 		Param = TranslatedString:Create("h3c34bca6gc080g4de4gae5eg4909ad60ecc8","If under the effects of <font color='#FFCE58'>War Charge</font>, deal [ExtraData:LLWEAPONEX_MasteryBonus_WarChargeDamageBoost]% more damage and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing."),
 	}
 },
-LLWEAPONEX_Banner_Mastery2 = {},
+LLWEAPONEX_Banner_Mastery2 = {
+	BANNER_RALLYINGCRY = {
+		Skills = {"Target_Harmony", "Target_EnemyHarmony"},
+		Param = TranslatedString:Create("h6d1e0bbbgc61bg4fbbg85b8g0f9f759d3cd9","<font color='#88FF33'>Affected allies will basic attack the nearest enemy within range.</font>")
+	},
+},
 LLWEAPONEX_Banner_Mastery3 = {},
 LLWEAPONEX_Banner_Mastery4 = {},
 LLWEAPONEX_Banner_Mastery5 = {},

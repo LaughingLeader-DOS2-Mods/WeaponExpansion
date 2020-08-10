@@ -51,6 +51,58 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 	end
 end
 
+local function OnStatusCallback(callback, matchBonuses, target, status, source)
+	local bonuses = {}
+	if ObjectIsCharacter(source) == 1 then
+		local b = MasteryBonusManager.GetMasteryBonuses(source)
+		if #b > 0 then
+			for i,v in pairs(b) do
+				if bonuses[v] == nil then bonuses[v] = {} end
+				bonuses[v][source] = true
+			end
+		end
+	end
+	if ObjectIsCharacter(target) == 1 then
+		local b = MasteryBonusManager.GetMasteryBonuses(target)
+		if #b > 0 then
+			for i,v in pairs(b) do
+				if bonuses[v] == nil then bonuses[v] = {} end
+				bonuses[v][target] = true
+			end
+		end
+	end
+	if matchBonuses == nil then
+		callback(target, status, source, bonuses)
+	else
+		for i,v in pairs(matchBonuses) do
+			if bonuses[v] ~= nil then
+				callback(target, status, source, bonuses)
+				break
+			end
+		end
+	end
+end
+
+function MasteryBonusManager.RegisterStatusListener(status, matchBonuses, callback)
+	if type(status) == "table" then
+		for i,v in pairs(status) do
+			if Listeners.Status[v] == nil then 
+				Listeners.Status[v] = {}
+			end
+			table.insert(Listeners.Status[v], function(target,v,source) 
+				OnStatusCallback(callback, matchBonuses, target, v, source)
+			end)
+		end
+	else
+		if Listeners.Status[status] == nil then 
+			Listeners.Status[status] = {}
+		end
+		table.insert(Listeners.Status[status], function(target,status,source) 
+			OnStatusCallback(callback, matchBonuses, target, status, source)
+		end)
+	end
+end
+
 ---Get a table of enemies in combat, determined by distance to a source.
 ---@param char string
 ---@param maxDistance number

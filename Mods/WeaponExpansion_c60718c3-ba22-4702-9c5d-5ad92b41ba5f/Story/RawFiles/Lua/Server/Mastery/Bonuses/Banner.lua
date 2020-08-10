@@ -29,3 +29,33 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 		end
 	end
 end)
+
+---@param target string
+---@param status string
+---@param source string
+---@param bonuses table<string,table<string,boolean>>
+MasteryBonusManager.RegisterStatusListener("HARMONY", {"BANNER_RALLYINGCRY"}, function(target, status, source, bonuses)
+	if (ObjectIsCharacter(target) == 1 
+	and not GameHelpers.Status.IsDisabled(target, true)
+	and NRD_ObjectHasStatusType(target, "DISARMED") == 0
+	and bonuses.BANNER_RALLYINGCRY[source] == true) then
+		local range = 1.0
+		local weapon = CharacterGetEquippedWeapon(target)
+		if weapon ~= nil then
+			range = Ext.GetItem(weapon).Stats.WeaponRange / 100
+		end
+
+		local targets = {}
+
+		for i,v in pairs(Ext.GetCharacter(target):GetNearbyCharacters(range)) do
+			if CharacterIsEnemy(target, v) == 1 then
+				table.insert(targets, v)
+			end
+		end
+
+		if #targets > 0 then
+			local attackTarget = Common.GetRandomTableEntry(targets)
+			CharacterAttack(target, attackTarget)
+		end
+	end
+end)

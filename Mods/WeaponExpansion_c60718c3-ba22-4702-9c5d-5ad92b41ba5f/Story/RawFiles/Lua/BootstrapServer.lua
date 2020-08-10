@@ -5,6 +5,9 @@ PersistentVars = {
 }
 LoadPersistentVars = {}
 BonusSkills = {}
+Listeners = {
+    Status = {}
+}
 
 Ext.Require("Shared/Init.lua")
 Ext.Require("Server/Init.lua")

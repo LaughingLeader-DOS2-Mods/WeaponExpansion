@@ -98,6 +98,15 @@ local function OnStatusApplied(target, status, source)
 			end
 		end
 	end
+	local callbacks = Listeners.Status[status]
+	if callbacks ~= nil then
+		for i,callback in ipairs(callbacks) do
+			local s,err = xpcall(callback, debug.traceback, target, status, source)
+			if not s then
+				Ext.PrintError(err)
+			end
+		end
+	end
 end
 Ext.RegisterOsirisListener("CharacterStatusApplied", 3, "after", OnStatusApplied)
 Ext.RegisterOsirisListener("ItemStatusChange", 3, "after", OnStatusApplied)
