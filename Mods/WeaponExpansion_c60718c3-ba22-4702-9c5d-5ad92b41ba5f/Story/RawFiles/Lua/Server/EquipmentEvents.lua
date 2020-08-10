@@ -29,10 +29,8 @@ local rangedWeaponTypes = {
 local function UpdatedUnarmedTagsFromWeapon(uuid, item)
 	SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 	if rangedWeaponTypes[item.Stats.WeaponType] ~= true then
-		SetTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 		ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 	else
-		ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 	end
 	if IsPlayer(uuid) then
@@ -43,22 +41,54 @@ local function UpdatedUnarmedTagsFromWeapon(uuid, item)
 end
 
 ---@param uuid string
-function Equipment.CheckUnarmedTags(uuid)
-	local weapon = CharacterGetEquippedWeapon(uuid)
-	if weapon ~= nil or HasMasteryLevel(uuid, "LLWEAPONEX_Unarmed", 1) then
-		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
+---@param item StatItem
+local function CheckScoundrelTags(uuid, itemUUID)
+	if itemUUID ~= nil then
+		local item = Ext.GetItem(itemUUID)
+		if item.Stats.WeaponType == "Knife" or item:HasTag("LLWEAPONEX_Katana") or (Mastery.HasMasteryRequirement(uuid, "LLWEAPONEX_Axe_Mastery4") and (item.Stats.WeaponType == "Axe" or item:HasTag("LLWEAPONEX_Axe"))) then
+			return true
+		end
+	end
+	return false
+end
+
+---@param uuid string
+function Equipment.CheckWeaponRequirementTags(uuid)
+	local character = Ext.GetCharacter(uuid)
+	local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
+	local offhand = CharacterGetEquippedItem(uuid, "Shield")
+	local weapon = mainhand or offhand
+	if weapon ~= nil then
 		local item = Ext.GetItem(weapon)
+		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		if rangedWeaponTypes[item.Stats.WeaponType] ~= true then
-			SetTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 			ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
+			if CheckScoundrelTags(uuid, mainhand) or CheckScoundrelTags(uuid, offhand) then
+				ClearTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+				print("ClearTag LLWEAPONEX_CannotUseScoundrelSkills")
+			else
+				SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+				print("SetTag LLWEAPONEX_CannotUseScoundrelSkills")
+			end
 		else
-			ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 			SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		end
+	elseif Mastery.HasMasteryRequirement(uuid, "LLWEAPONEX_Unarmed_Mastery1") then
+		ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
+		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
 	else
 		ClearTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
-		ClearTag(uuid, "LLWEAPONEX_MeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
+		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+	end
+
+	local hasWarfareTag = character:HasTag("LLWEAPONEX_NoMeleeWeaponEquipped")
+	local hasScoundrelTag = character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills")
+	for skill,b in pairs(Skills.WarfareMeleeSkills) do
+		GameHelpers.UI.SetSkillEnabled(uuid, skill, not hasWarfareTag)
+	end
+	for skill,b in pairs(Skills.ScoundrelMeleeSkills) do
+		GameHelpers.UI.SetSkillEnabled(uuid, skill, not hasScoundrelTag)
 	end
 end
 
@@ -82,7 +112,7 @@ function OnItemEquipped(uuid,itemUUID)
 		local isPlayer = IsPlayerQRY(uuid)
 		
 		if statType == "Weapon" then
-			UpdatedUnarmedTagsFromWeapon(uuid, item)
+			Equipment.CheckWeaponRequirementTags(uuid)
 		end
 		
 		for tag,data in pairs(Masteries) do
@@ -110,7 +140,7 @@ function OnItemEquipped(uuid,itemUUID)
 end
 
 function OnItemTemplateUnEquipped(uuid, item, template)
-	Equipment.CheckUnarmedTags(uuid)
+	Equipment.CheckWeaponRequirementTags(uuid)
 end
 
 local rodSkills = {

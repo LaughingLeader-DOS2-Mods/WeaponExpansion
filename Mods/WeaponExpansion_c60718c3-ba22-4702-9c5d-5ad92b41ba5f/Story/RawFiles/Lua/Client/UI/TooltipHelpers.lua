@@ -54,7 +54,13 @@ local function ReplacePlaceholders(str)
 					if character ~= nil then
 						local paramText = SkillGetDescriptionParam(skill, character, false, param)
 						if paramText == nil and param == "Damage" then
-							local damageRange = Game.Math.GetSkillDamageRange(character, skill)
+							local damageRange = nil
+							if character.MainWeapon == nil then
+								local weapon = GetUnarmedWeapon(character)
+								damageRange = Math.GetSkillDamageRange(character, skill, weapon)
+							else
+								damageRange = Math.GetSkillDamageRange(character, skill)
+							end
 							value = GameHelpers.Tooltip.FormatDamageRange(damageRange)
 						else
 							value = paramText

@@ -32,7 +32,8 @@ Skills = {
 	DamageParam = {},
 	Damage = {},
 	DamageFunctions = {},
-	WarfareMeleeSkills = {}
+	WarfareMeleeSkills = {},
+	ScoundrelMeleeSkills = {},
 }
 
 AttributeScaleTables = {
@@ -123,6 +124,9 @@ local function LoadExperienceVariables()
 			for i,v in pairs(requirements) do
 				if v.Param == "LLWEAPONEX_NoMeleeWeaponEquipped" then
 					Skills.WarfareMeleeSkills[skill] = true
+					break
+				elseif v.Param == "LLWEAPONEX_CannotUseScoundrelSkills" then
+					Skills.ScoundrelMeleeSkills[skill] = true
 					break
 				end
 			end

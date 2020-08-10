@@ -235,7 +235,7 @@ function OnGameStarted(region, editorMode, postReset)
         local playersDB = Osi.DB_IsPlayer:Get(nil)
         if playersDB ~= nil then
             for i,entry in pairs(playersDB) do
-                Equipment.CheckUnarmedTags(entry[1])
+                Equipment.CheckWeaponRequirementTags(entry[1])
             end
         end
     end

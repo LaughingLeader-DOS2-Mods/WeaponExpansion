@@ -120,43 +120,53 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
     if skill.UseWeaponDamage == "Yes" then
-		if mainWeapon == nil then mainWeapon = character.MainWeapon end
-		if offHandWeapon == nil then offHandWeapon = character.OffHandWeapon end
+        local mainWeapon = mainWeapon or character.MainWeapon
+        local offHandWeapon = offHandWeapon or character.OffHandWeapon
         local mainDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, mainWeapon)
 
         if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
             local offHandDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, offHandWeapon)
 
+            -- Note: This differs from the way the game applies DualWieldingDamagePenalty.
+            -- In the original tooltip code, it is applied for the whole damage value,
+            -- not per damage type, so the result may differ from the original tooltip code
+            -- if DualWieldingDamagePenalty is not 1.0 or 0.5.
+            -- However, this formula is the correct one and the vanilla tooltip returns
+            -- buggy values if DualWieldingDamagePenalty ~= 1.0 and ~= 0.5
             local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
             for damageType, range in pairs(offHandDamageRange) do
-                local min = range[1] * dualWieldPenalty
-                local max = range[2] * dualWieldPenalty
+                local min = math.ceil(range.Min * dualWieldPenalty)
+                local max = math.ceil(range.Max * dualWieldPenalty)
+                local range = mainDamageRange[damageType]
                 if mainDamageRange[damageType] ~= nil then
-                    mainDamageRange[damageType][1] = mainDamageRange[damageType][1] + min
-                    mainDamageRange[damageType][2] = mainDamageRange[damageType][2] + max
+                    range.Min = range.Min + min
+                    range.Max = range.Max + max
                 else
-                    mainDamageRange[damageType] = {min, max}
+                    mainDamageRange[damageType] = {Min = min, Min = max}
                 end
             end
         end
 
         for damageType, range in pairs(mainDamageRange) do
-            local min = Ext.Round(range[1] * damageMultiplier)
-            local max = Ext.Round(range[2] * damageMultiplier)
-            range[1] = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
-            range[2] = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
+            if range.Min == nil then range.Min = range.Max or 1 end
+            if range.Max == nil then range.Max = range.Min or 1 end
+            local min = Ext.Round(range.Min * damageMultiplier)
+            local max = Ext.Round(range.Max * damageMultiplier)
+            range.Min = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
+            range.Max = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
         end
 
         local damageType = skill.DamageType
         if damageType ~= "None" and damageType ~= "Sentinel" then
             local min, max = 0, 0
+            local boost = Game.Math.GetDamageBoostByType(character, damageType)
             for _, range in pairs(mainDamageRange) do
-                min = min + range[1]
-                max = max + range[2]
+                min = min + range.Min + math.ceil(range.Min * Game.Math.GetDamageBoostByType(character, damageType))
+                max = max + range.Max + math.ceil(range.Min * Game.Math.GetDamageBoostByType(character, damageType))
             end
     
             mainDamageRange = {}
-            mainDamageRange[damageType] = {min, max}
+            mainDamageRange[damageType] = {Min = min, Max = max}
         end
 
         return mainDamageRange
@@ -173,22 +183,28 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
 
         local skillDamageType = skill.Damage
         local attrDamageScale
-        if skillDamageType == "BaseLevelDamage" or skillDamageType == "AverageLevelDamge" then
+        if skillDamageType == "BaseLevelDamage" or skillDamageType == "AverageLevelDamge" or skillDamageType == "MonsterWeaponDamage" then
             attrDamageScale = Game.Math.GetSkillAttributeDamageScale(skill, character)
         else
             attrDamageScale = 1.0
         end
 
-        local baseDamage = Game.Math.CalculateBaseDamage(skill.Damage, character, 0, level) * attrDamageScale * damageMultiplier
+        local baseDamage = Game.Math.CalculateBaseDamage(skill.Damage, character, nil, level) * attrDamageScale * damageMultiplier
         local damageRange = skill['Damage Range'] * baseDamage * 0.005
 
-        local damageType = skill.DamageType
         local damageTypeBoost = 1.0 + Game.Math.GetDamageBoostByType(character, damageType)
         local damageBoost = 1.0 + (character.DamageBoost / 100.0)
+
+        local finalMin = math.ceil(math.ceil(Ext.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost)
+        local finalMax = math.ceil(math.ceil(Ext.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
+
+        if finalMin > 0 then
+            finalMax = math.max(finalMin + 1.0, finalMax)
+        end
+
         local damageRanges = {}
         damageRanges[damageType] = {
-            math.ceil(math.ceil(Ext.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost),
-            math.ceil(math.ceil(Ext.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)
+            Min = finalMin, Max = finalMax
         }
         return damageRanges
     end

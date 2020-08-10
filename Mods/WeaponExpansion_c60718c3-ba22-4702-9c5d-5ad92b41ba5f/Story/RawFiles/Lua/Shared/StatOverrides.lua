@@ -186,11 +186,9 @@ local function AddRequirement(stat, param, inverse, requirementType)
 	end
 end
 
-local function WarfareMeleeWeaponOverride(skill)
-	Ext.StatSetAttribute(skill, "Requirement", "None")
-	--AddRequirement(skill, "LLWEAPONEX_MeleeWeaponEquipped", false, "Tag")
-	AddRequirement(skill, "LLWEAPONEX_NoMeleeWeaponEquipped", true, "Tag")
-	--print(LeaderLib.Common.Dump(Ext.StatGetAttribute(skill, "Requirements")))
+local function SwapRequirementWithTag(skill, requirement, tag, inverse)
+	Ext.StatSetAttribute(skill, "Requirement", requirement)
+	AddRequirement(skill, tag, inverse or false, "Tag")
 end
 
 local function HasComboCategory(categoryTable, category)
@@ -216,8 +214,12 @@ local function StatOverrides_Init()
 
 		--print(gameMaster, requirement, ability)
 	
-		if gameMaster == "Yes" and requirement == "MeleeWeapon" and ability == "Warrior" then
-			WarfareMeleeWeaponOverride(skill)
+		if gameMaster == "Yes" then
+			if requirement == "MeleeWeapon" and ability == "Warrior" then
+				SwapRequirementWithTag(skill, "None", "LLWEAPONEX_NoMeleeWeaponEquipped", true)
+			elseif requirement == "DaggerWeapon" and ability == "Rogue" then
+				SwapRequirementWithTag(skill, "MeleeWeapon", "LLWEAPONEX_CannotUseScoundrelSkills", true)
+			end
 		end
 
 		if bulletTemplates[skill] == nil then

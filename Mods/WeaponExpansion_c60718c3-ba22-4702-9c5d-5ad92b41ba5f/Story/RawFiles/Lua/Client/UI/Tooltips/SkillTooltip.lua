@@ -133,21 +133,32 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	if Skills.WarfareMeleeSkills[skill] == true and character:HasTag("LLWEAPONEX_NoMeleeWeaponEquipped") then
-		local isRushSkill = Ext.StatGetAttribute(skill, "SkillType") == "Rush"
-		local requirementName = Ext.GetTranslatedStringFromKey("LLWEAPONEX_NoMeleeWeaponEquipped")
+	-- These blocks alter the "Incompatible with" text that's a result of using an inverse condition tag.
+	-- We want these skills to work unless the tags are set.
+	print(Ext.JsonStringify(Ext.StatGetAttribute(skill, "Requirements")))
+	if Skills.WarfareMeleeSkills[skill] == true then
+		local requirementName = GameHelpers.GetStringKeyText("LLWEAPONEX_NoMeleeWeaponEquipped", "a Melee Weapon")
 		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
 			if element.RequirementMet == false then
 				if element.Label == Text.Game.NotImmobileRequirement.Value then
 					tooltip:RemoveElement(element)
 				elseif string.find(element.Label, requirementName) then
-					local requiresText = Ext.GetTranslatedString("hf1571b7eg8f35g4da2g8e38g87fee1c3d79f", "Requires [1] [2]&lt;br&gt;")
+					element.Label = Text.Game.RequiresTag:ReplacePlaceholders("", requirementName):gsub("  ", " ")
+				end
+			end
+		end
+	elseif Skills.ScoundrelMeleeSkills[skill] == true then
+		local requirementName = GameHelpers.GetStringKeyText("LLWEAPONEX_CannotUseScoundrelSkills", "a Scoundrel Weapon")
+		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
+			if element.RequirementMet == false then
+				if element.Label == Text.Game.NotImmobileRequirement.Value then
+					tooltip:RemoveElement(element)
+				elseif string.find(element.Label, requirementName) then
 					element.Label = Text.Game.RequiresTag:ReplacePlaceholders("", requirementName):gsub("  ", " ")
 				end
 			end
 		end
 	end
-
 end
 
 return OnSkillTooltip

@@ -199,6 +199,7 @@ Text = {
 		SlotRing = TranslatedString:Create("h970199f8ge650g4fa3ga0deg5995696569b6","Ring"),
 		RequiresTag = TranslatedString:Create("hf1571b7eg8f35g4da2g8e38g87fee1c3d79f", "Requires [1] [2]&lt;br&gt;"),
 		NotImmobileRequirement = TranslatedString:Create("hc3338918g67a4g4002g85f4g07818bad4e94", "Cannot use when Movement speed is 0."),
+		IncompatibleTag = TranslatedString:Create("hd0534a06g535bg435bga75dg145e9cc7282f", "Incompatible with [1] [2]&lt;br&gt;"),
 	},
 	CombatLog = {
 		StealSuccess = TranslatedString:Create("h9f7d431dg1f6dg494dg89b8g4cb4b98994d4","<font color='#00FF00'>[1] stole </font><font color='#00FFAA'>[2]</font><font color='#00FF00'> from [3]!</font>"),

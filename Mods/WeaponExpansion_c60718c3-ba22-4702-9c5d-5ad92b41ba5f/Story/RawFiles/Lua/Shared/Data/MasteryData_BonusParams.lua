@@ -161,6 +161,7 @@ end
 Mastery.Params = {
 	SkillData = {},
 	StatusData = {},
+	Passives = {},
 	UI = {}
 }
 

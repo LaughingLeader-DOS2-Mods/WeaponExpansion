@@ -104,6 +104,19 @@ local function WeaponIsTagged(char, weapon, tag)
 	return false
 end
 
+local function GetMasteryBonuses(char)
+	local character = Ext.GetCharacter(char)
+	local bonuses = {}
+	local data = Mastery.Params.Passives
+	if data ~= nil and data.Tags ~= nil then
+		for tagName,tagData in pairs(data.Tags) do
+			if Mastery.HasMasteryRequirement(character, tagName) then
+				bonuses[tagData.ID] = true
+			end
+		end
+	end
+	return bonuses
+end
 --- @param target string
 --- @param source string
 --- @param damage integer
@@ -121,11 +134,12 @@ local function OnHit(target,source,damage,handle)
 				AddMasteryExperienceForAllActive(source, expGain)
 			end
 			if totalOnHitCallbacks > 0 then
+				local bonuses = GetMasteryBonuses(source)
 				-- Unarmed
 				if CharacterGetEquippedWeapon(source) == nil then
 					local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]
 					if unarmedCallback ~= nil then
-						local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle)
+						local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle, bonuses)
 						if not status then
 							Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
 						end
@@ -135,7 +149,7 @@ local function OnHit(target,source,damage,handle)
 					local offhand = CharacterGetEquippedItem(source, "Shield")
 					for tag,callback in pairs(HitHandler.OnHitCallbacks) do
 						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
-							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle)
+							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses)
 							if not status then
 								Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
 							end
