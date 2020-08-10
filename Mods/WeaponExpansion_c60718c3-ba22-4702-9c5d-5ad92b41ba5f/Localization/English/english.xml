@@ -3,6 +3,7 @@
 	<content contentuid="h00277f28g293fg49a2gbc19g4e1a54a92f0f">Weapon Expansion - Skillbooks</content>
 	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">Bounty of the Harvest</content>
 	<content contentuid="h0036c310g95a5g42e7gb715g06c09e6a4079">Character has activated the &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 10% chance to become &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 50%.&lt;/font&gt;</content>
+	<content contentuid="h003d6b87g216ag47cega199gf4f3c2d28998">a Scoundrel Weapon</content>
 	<content contentuid="h0042fce4g99a9g487egb7d2g3d594b9b4d17">Master Monk of Staves</content>
 	<content contentuid="h004d1b35g032ag4683g9ef5g5a8741a8bc90">Rally the party at the target location.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;Party members are granted a one-time use skill that teleports them to the raised banner.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF7733&apos;&gt;The banner unleashes the hunger of the pack, granting [1]% lifesteal and a [2] boost to damage.&lt;/font&gt;</content>
 	<content contentuid="h004f820eg3b47g4400ga26dgc77fb1d9292e">&lt;font color=&apos;#00BFFF&apos; size=&apos;18&apos;&gt;Magic Warfare&lt;/font&gt;&lt;br&gt;Cripple all enemies within [1] of the target. Deals [2].</content>
@@ -149,6 +150,7 @@
 	<content contentuid="h0f0aca8cg237bg4696gb195gbd43e7378fd4">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Ice Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
 	<content contentuid="h0f6a5e9ag0dd9g4b14g90e2gd200af46dd99">Immolation Bonus II</content>
 	<content contentuid="h0f72bec6g0ff4g4af9gaa76ga90f7ec31aab">Throwable</content>
+	<content contentuid="h0f83aa9ag475bg4ddfgb546gbb83d237b44e">Spin an additional 1-3 times, dealing reduced damage each spin.</content>
 	<content contentuid="h0fe9414ag9805g49feg8350gd262911b1e8d">Sacrificial Shields of Chaos</content>
 	<content contentuid="h10158f14g90deg4bc2g8331g555de4db3a25">Kiss Of Death</content>
 	<content contentuid="h1035543cg81c3g43afg995cgdbf5cb3b3caa">Fire a massive, super-heated cannonball, dealing [1] to targets, knocking them down, and leaving behind a trail of &lt;font color=&apos;#ff5b0b&apos;&gt;explosive fire clouds&lt;/font&gt;.&lt;br&gt;At the end of the trail, the cannonball explodes for [2] in a [3] radius, applying &lt;font color=&apos;#ff5b0b&apos;&gt;Necrofire&lt;/font&gt; to targets hit for 1 turn.</content>
@@ -1965,6 +1967,7 @@
 	<content contentuid="hdd6363b2g3404g4c0egbf78g555b249b0acf">Token of Wits</content>
 	<content contentuid="hdd7891d6ge6e6g40b6g8923gca9a6967f805">&lt;font color=&apos;#C7A758&apos;&gt;Balrin&apos;s Throwing Axe&lt;/font&gt;</content>
 	<content contentuid="hdd97747cgef6cg42b9gaa6age60edc02d4d5">*[LIGHT ARMOR] Click on the button labeled &apos;Light Armor&apos;.*</content>
+	<content contentuid="hddbc42dfg304bg48ddga684g1bd7dff813cc">&lt;font color=&apos;#E4CE22&apos; size=&apos;22&apos;&gt;Flurry Axe Combo! +1 AP&lt;/font&gt;</content>
 	<content contentuid="hdde1468dg68b2g49e4g8636g441356966ec2">Soul Burn III</content>
 	<content contentuid="hde2dcb4eg99f7g481bg8605gffdd329983cb">Exquisite Greatbow of the Empire</content>
 	<content contentuid="hde2f6029gd1deg4ec7g9dcfgdd00d749b8f3">Assassination</content>

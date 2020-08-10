@@ -135,7 +135,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 
 	-- These blocks alter the "Incompatible with" text that's a result of using an inverse condition tag.
 	-- We want these skills to work unless the tags are set.
-	print(Ext.JsonStringify(Ext.StatGetAttribute(skill, "Requirements")))
+	--print(Ext.JsonStringify(Ext.StatGetAttribute(skill, "Requirements")))
 	if Skills.WarfareMeleeSkills[skill] == true then
 		local requirementName = GameHelpers.GetStringKeyText("LLWEAPONEX_NoMeleeWeaponEquipped", "a Melee Weapon")
 		for i,element in pairs(tooltip:GetElements("SkillRequiredEquipment")) do
