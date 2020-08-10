@@ -63,8 +63,22 @@ LLWEAPONEX_Banner_Mastery2 = {
 		Skills = {"Target_Harmony", "Target_EnemyHarmony"},
 		Param = TranslatedString:Create("h6d1e0bbbgc61bg4fbbg85b8g0f9f759d3cd9","<font color='#88FF33'>Affected allies will basic attack the nearest enemy within range.</font>")
 	},
+	BANNER_GUARDIAN_ANGEL = {
+		Skills = {"Shout_GuardianAngel", "Shout_EnemyGuardianAngel"},
+		Param = TranslatedString:Create("h1d57a248gbe88g4143g8cb5g1b4ab6d7c44c","<font color='#00FFFF'>If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.</font>"),
+		StatusParam = {
+			Statuses = {"GUARDIAN_ANGEL"},
+			Param = TranslatedString:Create("hb8e7b768gac05g4835g9e6fg4f75b52cfb66","<font color='#00FFFF'>If killed, character will be resurrected by the Guardian when their turn starts.</font>"),
+			Active = {Value = "LLWEAPONEX_Banner_GuardianAngel_Active", Type = "Tag"}
+		}
+	},
 },
-LLWEAPONEX_Banner_Mastery3 = {},
+LLWEAPONEX_Banner_Mastery3 = {
+	BANNER_VACUUM = {
+		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
+		Param = TranslatedString:Create("h5b135257gec07g49f8gbf25g69df1d282001","<font color='#00CCAA'>If near an active banner, enemies hit are pulled towards the banner.</font>")
+	}
+},
 LLWEAPONEX_Banner_Mastery4 = {},
 LLWEAPONEX_Banner_Mastery5 = {},
 LLWEAPONEX_BattleBook_Mastery1 = {},

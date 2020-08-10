@@ -49,38 +49,43 @@ Mastery.HasMinimumMasteryLevel = HasMinimumMasteryLevel
 --- @param tag string
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
-	if character:HasTag(tag) == true then
-		local a,b,mastery = string.find(tag,"(.+)_Mastery")
-		--print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
-		if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
-			return true
-		else
-			if Ext.IsClient() then
-				return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or character:HasTag(mastery)
+	if type(tag) == "string" then
+		if character:HasTag(tag) == true then
+			local a,b,mastery = string.find(tag,"(.+)_Mastery")
+			--print("TryCheckMasteryRequirement character", character, "tag", tag, "mastery", mastery, character:HasTag(mastery))
+			if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
+				return true
 			else
-				return character:HasTag(mastery)
+				if Ext.IsClient() then
+					return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or character:HasTag(mastery)
+				else
+					return character:HasTag(mastery)
+				end
 			end
 		end
-		-- local hasTaggedWeapons = false
-		-- ---@type StatItem
-		-- local weapon = character.Stats:GetItemBySlot("Weapon")
-		-- ---@type StatItem
-		-- local offhand = character.Stats:GetItemBySlot("Shield")
-		-- if weapon ~= nil then
-		-- 	Ext.Print(string.format("HasMasteryRequirement[%s] MainWeapon[%s]", tag, weapon.Name))
-		-- end
-		-- if offhand ~= nil then
-		-- 	Ext.Print(string.format("HasMasteryRequirement[%s] OffHandWeapon[%s]", tag, offhand.Name))
-		-- end
-		-- return hasTaggedWeapons
+	elseif type(tag) == "table" then
+		for k,v in pairs(tag) do
+			if type(k) == "string" then
+				local hasReq = TryCheckMasteryRequirement(character, k)
+				if hasReq then
+					return true
+				end
+			else
+				local hasReq = TryCheckMasteryRequirement(character, v)
+				if hasReq then
+					return true
+				end
+			end
+		end
 	end
+
 	return false
 end
 
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string
 --- @return boolean
-local function HasMasteryRequirement(character, tag)
+function Mastery.HasMasteryRequirement(character, tag)
 	if Ext.IsDeveloperMode() then
 		return true
 	end
@@ -95,5 +100,3 @@ local function HasMasteryRequirement(character, tag)
 	end
 	return false
 end
-
-Mastery.HasMasteryRequirement = HasMasteryRequirement

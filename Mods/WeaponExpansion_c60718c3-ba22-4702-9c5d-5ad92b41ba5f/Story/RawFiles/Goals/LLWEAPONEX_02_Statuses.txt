@@ -715,6 +715,18 @@ CharacterStatusRemoved(_Char, "LLWEAPONEX_DIZZY", _)
 THEN
 CharacterSetAnimationOverride(_Char, "");
 //END_REGION
+
+//REGION GUARDIAN_ANGEL_BANNER
+IF
+CharacterStatusApplied(_Char, "GUARDIAN_ANGEL", _Source)
+THEN
+NRD_ModCall("WeaponExpansion", "Banner_OnGuardianAngelApplied", (STRING)_Char, (STRING)_Source);
+
+IF
+CharacterStatusRemoved(_Char, "GUARDIAN_ANGEL", _)
+THEN
+ClearTag(_Char, "LLWEAPONEX_Banner_GuardianAngel_Active");
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

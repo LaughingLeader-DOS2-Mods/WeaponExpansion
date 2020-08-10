@@ -1,3 +1,72 @@
+---@param target string
+---@param status string
+---@param source string
+---@param bonuses table<string,table<string,boolean>>
+MasteryBonusManager.RegisterStatusListener("HARMONY", {"BANNER_RALLYINGCRY"}, function(target, status, source, bonuses)
+	if (ObjectIsCharacter(target) == 1 
+	and not GameHelpers.Status.IsDisabled(target, true)
+	and NRD_ObjectHasStatusType(target, "DISARMED") == 0
+	and bonuses.BANNER_RALLYINGCRY[source] == true) then
+		local range = 1.0
+		local weapon = CharacterGetEquippedWeapon(target)
+		if weapon ~= nil then
+			range = Ext.GetItem(weapon).Stats.WeaponRange / 100
+		end
+
+		local targets = {}
+
+		for i,v in pairs(Ext.GetCharacter(target):GetNearbyCharacters(range)) do
+			if CharacterIsEnemy(target, v) == 1 then
+				table.insert(targets, v)
+			end
+		end
+
+		if #targets > 0 then
+			local attackTarget = Common.GetRandomTableEntry(targets)
+			CharacterAttack(target, attackTarget)
+		end
+	end
+end)
+
+function Banner_OnGuardianAngelApplied(char,source)
+	if not StringHelpers.IsNullOrEmpty(source) then
+		if Mastery.HasMasteryRequirement(source, Mastery.BonusID.BANNER_GUARDIAN_ANGEL.Tags) then
+			SetTag(char, "LLWEAPONEX_Banner_GuardianAngel_Active")
+		end
+	end
+end
+
+Ext.RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
+	if HasActiveStatus(char, "GUARDIAN_ANGEL") == 1 and IsTagged(char, "LLWEAPONEX_Banner_GuardianAngel_Active") == 1 then
+		local status = Ext.GetCharacter(char):GetStatus("GUARDIAN_ANGEL")
+		if status ~= nil and status.StatusSourceHandle ~= nil then
+			local sourceCharacter = Ext.GetCharacter(status.StatusSourceHandle)
+			if sourceCharacter ~= nil then
+				if Mastery.HasMasteryRequirement(sourceCharacter.MyGuid, Mastery.BonusID.BANNER_GUARDIAN_ANGEL.Tags) then
+					if PersistentVars.MasteryMechanics.GuardianAngelResurrect == nil then
+						PersistentVars.MasteryMechanics.GuardianAngelResurrect = {}
+					end
+					PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] = sourceCharacter.MyGuid
+				end
+			end
+		end
+	end
+end)
+
+Ext.RegisterOsirisListener("ObjectTurnStarted", 2, "after", function(char, combatid)
+	if PersistentVars.MasteryMechanics.GuardianAngelResurrect ~= nil and #PersistentVars.MasteryMechanics.GuardianAngelResurrect > 0 then
+		for deadChar,v in pairs(PersistentVars.MasteryMechanics.GuardianAngelResurrect) do
+			if v == GetUUID(char) then
+				if CharacterIsDead(deadChar) == 1 then
+					CharacterResurrect(deadChar)
+				else
+					PersistentVars.MasteryMechanics.GuardianAngelResurrect[deadChar] = nil
+				end
+			end
+		end
+	end
+end)
+
 MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, {"BANNER_VACUUM"}, function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
 		local worldBannerEntry = Osi.DB_LLWEAPONEX_Skills_Temp_RallyBanner:Get(char, nil)
@@ -26,36 +95,6 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 					local handle = NRD_CreateGameObjectMove(hitData.Target, fx, fy, fz, "", char)
 				end
 			end
-		end
-	end
-end)
-
----@param target string
----@param status string
----@param source string
----@param bonuses table<string,table<string,boolean>>
-MasteryBonusManager.RegisterStatusListener("HARMONY", {"BANNER_RALLYINGCRY"}, function(target, status, source, bonuses)
-	if (ObjectIsCharacter(target) == 1 
-	and not GameHelpers.Status.IsDisabled(target, true)
-	and NRD_ObjectHasStatusType(target, "DISARMED") == 0
-	and bonuses.BANNER_RALLYINGCRY[source] == true) then
-		local range = 1.0
-		local weapon = CharacterGetEquippedWeapon(target)
-		if weapon ~= nil then
-			range = Ext.GetItem(weapon).Stats.WeaponRange / 100
-		end
-
-		local targets = {}
-
-		for i,v in pairs(Ext.GetCharacter(target):GetNearbyCharacters(range)) do
-			if CharacterIsEnemy(target, v) == 1 then
-				table.insert(targets, v)
-			end
-		end
-
-		if #targets > 0 then
-			local attackTarget = Common.GetRandomTableEntry(targets)
-			CharacterAttack(target, attackTarget)
 		end
 	end
 end)
