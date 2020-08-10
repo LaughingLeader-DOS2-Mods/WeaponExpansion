@@ -482,11 +482,9 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		end
 		damageList:Merge(mainDmgs)
 		damageList:AggregateSameTypeDamages()
-		--Ext.Print("damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
-		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end
@@ -627,7 +625,6 @@ local function ScaleByHighestAttributeAndAbility(ability, weaponStat, validAttri
 		end
 		damageList:Merge(mainDmgs)
 		damageList:AggregateSameTypeDamages()
-		Ext.Print(skill.Name, "damageList:",Ext.JsonStringify(damageList:ToTable()))
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore", true)

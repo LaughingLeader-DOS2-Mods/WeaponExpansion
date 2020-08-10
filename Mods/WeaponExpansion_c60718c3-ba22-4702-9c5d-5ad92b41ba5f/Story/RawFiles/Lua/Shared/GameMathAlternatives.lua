@@ -123,7 +123,6 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
         local mainWeapon = mainWeapon or character.MainWeapon
         local offHandWeapon = offHandWeapon or character.OffHandWeapon
         local mainDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, mainWeapon)
-
         if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
             local offHandDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, offHandWeapon)
 
@@ -142,14 +141,13 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
                     range.Min = range.Min + min
                     range.Max = range.Max + max
                 else
-                    mainDamageRange[damageType] = {Min = min, Min = max}
+                    mainDamageRange[damageType] = {Min = min, Max = max}
                 end
             end
         end
-
         for damageType, range in pairs(mainDamageRange) do
-            if range.Min == nil then range.Min = range.Max or 1 end
-            if range.Max == nil then range.Max = range.Min or 1 end
+            --if range.Min == nil then range.Min = range.Max or 1 end
+            --if range.Max == nil then range.Max = range.Min or 1 end
             local min = Ext.Round(range.Min * damageMultiplier)
             local max = Ext.Round(range.Max * damageMultiplier)
             range.Min = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
@@ -168,7 +166,6 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon)
             mainDamageRange = {}
             mainDamageRange[damageType] = {Min = min, Max = max}
         end
-
         return mainDamageRange
     else
         local damageType = skill.DamageType

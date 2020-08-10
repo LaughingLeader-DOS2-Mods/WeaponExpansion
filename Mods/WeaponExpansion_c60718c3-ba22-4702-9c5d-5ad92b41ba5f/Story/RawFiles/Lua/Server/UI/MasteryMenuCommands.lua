@@ -1,6 +1,9 @@
 ---@type MessageData
 local MessageData = LeaderLib.Classes["MessageData"]
 
+local CharacterMasteryData = MasteryDataClasses.CharacterMasteryData
+local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
+
 function OpenMasteryMenu_Start(uuid)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
 	local masteries = {}

@@ -5,11 +5,18 @@ HitData = LeaderLib.Classes.HitData
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	local character = Ext.GetCharacter(char)
 	local bonuses = {}
-	local data = Mastery.Params.SkillData[skill]
-	if data ~= nil and data.Tags ~= nil then
-		for tagName,tagData in pairs(data.Tags) do
-			if Mastery.HasMasteryRequirement(character, tagName) then
-				bonuses[tagData.ID] = true
+	for tag,tbl in pairs(Mastery.Bonuses) do
+		if Mastery.HasMasteryRequirement(character, tag) then
+			for bonusName,v in pairs(tbl) do
+				if skill == nil then
+					bonuses[bonusName] = true
+				elseif v.Skills ~= nil then
+					for _,bonusReqSkill in pairs(v.Skills) do
+						if bonusReqSkill == skill then
+							bonuses[bonusName] = true
+						end
+					end
+				end
 			end
 		end
 	end

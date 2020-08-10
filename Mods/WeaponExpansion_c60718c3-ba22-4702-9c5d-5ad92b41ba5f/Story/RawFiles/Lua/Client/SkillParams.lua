@@ -78,46 +78,6 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 end
 Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletEffects
 
---- @param skill StatEntrySkillData
---- @param character StatCharacter
---- @param isFromItem boolean
---- @param param string
-local function GetMasteryBonuses(skill, character, isFromItem, param)
-	local data = Mastery.Params.SkillData[skill.Name]
-	--Ext.Print(LeaderLib.Common.Dump(data))
-	if data ~= nil then
-		local paramText = ""
-		if data.Tags ~= nil then
-			for tagName,tagData in pairs(data.Tags) do
-				if Mastery.HasMasteryRequirement(character.Character, tagName) then
-					--local tagLocalizedName = Text.MasteryRankTagText[tagName]
-					local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
-					if tagLocalizedName == nil then 
-						tagLocalizedName = ""
-					end
-					local paramText = ""
-					if tagLocalizedName ~= "" then
-						paramText = tagLocalizedName.."<br>"..tagData.Param.Value
-					else
-						paramText = tagData.Param.Value
-					end
-					paramText = Tooltip.ReplacePlaceholders(paramText)
-					if tagData.GetParam ~= nil then
-						local b,result = xpcall(tagData.GetParam, debug.traceback, character, tagName, paramText)
-						if b and result ~= nil then
-							paramText = paramText.."<br>"..result
-						end
-					end
-				end
-			end
-		end
-		return paramText
-	end
-	return ""
-end
-
-Skills.Params["LLWEAPONEX_MasteryBonuses"] = GetMasteryBonuses
-
 local skillAbility = {
 	Target_LLWEAPONEX_Pistol_Shoot = "RogueLore",
 	Target_LLWEAPONEX_Pistol_Shoot_Enemy = "RogueLore",

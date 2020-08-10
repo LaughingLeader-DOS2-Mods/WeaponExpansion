@@ -258,32 +258,6 @@ local function StatOverrides_Init()
 		end
 	end
 
-	--OverrideLeaveActionStatuses()
-
-	-- for statType,entries in pairs(Mastery.Params) do
-	-- 	local statParamsAttribute = "StatsDescriptionParams"
-	-- 	if statType == "StatusData" then
-	-- 		statParamsAttribute = "DescriptionParams"
-	-- 	end
-	-- 	for stat,data in pairs(entries) do
-	-- 		local statParams = Ext.StatGetAttribute(stat, statParamsAttribute)
-	-- 		local canAddMasteryParam = statParams == nil or not string.find(statParams, "LLWEAPONEX_MasteryBonuses")
-	-- 		if canAddMasteryParam then
-	-- 			if statParams == nil then
-	-- 				statParams = ""
-	-- 			else
-	-- 				statParams = statParams .. ";"
-	-- 			end
-	-- 			local nextParams = statParams .. "LLWEAPONEX_MasteryBonuses"
-	-- 			Ext.StatSetAttribute(stat, statParamsAttribute, nextParams)
-	-- 			LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Set params for ("..stat..") from ("..statParams..") to ("..nextParams..").")
-	-- 			if data.Description ~= nil then
-	-- 				Ext.StatSetAttribute(stat, "Description", data.Description.Value)
-	-- 			end
-	-- 		end
-	-- 	end
-	-- end
-
 	if Ext.IsModLoaded("326b8784-edd7-4950-86d8-fcae9f5c457c") then
 		apply_overrides(anim_overrides)
 	else

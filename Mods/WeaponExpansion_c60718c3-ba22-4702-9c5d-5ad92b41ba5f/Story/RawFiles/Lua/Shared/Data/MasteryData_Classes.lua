@@ -1,7 +1,9 @@
 local TranslatedString = LeaderLib.Classes["TranslatedString"]
 
+MasteryDataClasses = {}
+
 ---@class MasteryData
-MasteryData = {
+local MasteryData = {
 	ID = "",
 	---@type TranslatedString
 	Name = {},
@@ -26,8 +28,10 @@ function MasteryData:Create(id,name,color,ranks)
     return this
 end
 
+MasteryDataClasses.MasteryData = MasteryData
+
 ---@class CharacterMasteryDataEntry
-CharacterMasteryDataEntry = {
+local CharacterMasteryDataEntry = {
 	XP = 0,
 	Rank = 0
 }
@@ -47,6 +51,8 @@ function CharacterMasteryDataEntry:Create(xp,rank)
 	end
     return this
 end
+
+MasteryDataClasses.CharacterMasteryDataEntry = CharacterMasteryDataEntry
 
 ---@class CharacterMasteryData
 CharacterMasteryData = {
@@ -92,3 +98,37 @@ function CharacterMasteryData:LoadFromString(data)
 	end
     return this
 end
+
+MasteryDataClasses.CharacterMasteryData = CharacterMasteryData
+
+---@class CharacterMasteryData
+local BonusIDEntry = {
+	ID = "",
+	---@type table<string,table>
+	Tags = {},
+}
+BonusIDEntry.__index = BonusIDEntry
+
+---@param id string
+---@return BonusIDEntry
+function BonusIDEntry:Create(id)
+	local this = {
+		ID = id,
+		Tags = {}
+	}
+	setmetatable(this, self)
+    return this
+end
+
+---@param character EsvCharacter
+---@return boolean
+function BonusIDEntry:HasTag(character)
+	for tag,_ in pairs(self.Tags) do
+		if character:HasTag(tag) then
+			return true
+		end
+	end
+	return false
+end
+
+MasteryDataClasses.BonusIDEntry = BonusIDEntry

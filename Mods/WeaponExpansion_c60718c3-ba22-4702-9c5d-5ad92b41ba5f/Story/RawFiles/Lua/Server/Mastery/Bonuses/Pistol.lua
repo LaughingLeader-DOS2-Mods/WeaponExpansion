@@ -5,22 +5,20 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Adrenaline", "Shout_EnemyAdren
 	end
 end)
 
-
-local function CloakAndDaggerBonuses(skill, char, state, skillData)
+---@param skill string
+---@param char string
+---@param state SKILL_STATE PREPARE|USED|CAST|HIT
+---@param skillData SkillEventData|HitData
+MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Pistol_Mastery1.PISTOL_CLOAKEDJUMP.Skills, {"PISTOL_CLOAKEDJUMP"}, function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
-		local bonuses = MasteryBonusManager.GetMasteryBonuses(char, skill)
-		if bonuses["PISTOL_CLOAKEDJUMP"] == true then
-			if CharacterHasSkill(char, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
-				LeaderLib.SwapSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "Target_LLWEAPONEX_Pistol_Shoot")
-			end
-			if CharacterIsInCombat(char) == 1 then
-				Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
-			end
+		if CharacterHasSkill(char, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
+			LeaderLib.SwapSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "Target_LLWEAPONEX_Pistol_Shoot")
+		end
+		if CharacterIsInCombat(char) == 1 then
+			LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
 		end
 	end
-end
-LeaderLib.RegisterSkillListener("Jump_CloakAndDagger", CloakAndDaggerBonuses)
-LeaderLib.RegisterSkillListener("Jump_EnemyCloakAndDagger", CloakAndDaggerBonuses)
+end)
 
 local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 	local char = timerData[1]

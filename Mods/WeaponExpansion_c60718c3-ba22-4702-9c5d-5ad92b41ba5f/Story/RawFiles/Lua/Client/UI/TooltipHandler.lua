@@ -5,7 +5,7 @@ local function sortTagParams(a,b)
 end
 
 ---@param character EsvCharacter
----@param data MasteryData
+---@param data table
 function TooltipHandler.GetDescriptionText(character, data)
 	local descriptionText = ""
 	local namePrefix = ""

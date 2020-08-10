@@ -18,6 +18,9 @@ MasteryMenu = {
 ---@type MessageData
 local MessageData = LeaderLib.Classes["MessageData"]
 
+local CharacterMasteryData = MasteryDataClasses.CharacterMasteryData
+local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
+
 local function CloseMenu()
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
 		MasteryMenu.Instance:Invoke("closeMenu")

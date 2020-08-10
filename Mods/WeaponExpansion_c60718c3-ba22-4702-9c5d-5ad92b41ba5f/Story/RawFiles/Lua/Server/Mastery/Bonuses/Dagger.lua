@@ -46,7 +46,7 @@ local function ThrowingKnifeBonus(bonuses, skill, char, state, skillData)
 	end
 end
 
-MasteryBonusManager.RegisterSkillListener({"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"}, {"BONUS_DAGGER"}, ThrowingKnifeBonus)
+MasteryBonusManager.RegisterSkillListener({"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"}, {"DAGGER_THROWINGKNIFE"}, ThrowingKnifeBonus)
 
 local function ThrowingKnifeDelayedProc(funcParams)
 	local char = funcParams[1]

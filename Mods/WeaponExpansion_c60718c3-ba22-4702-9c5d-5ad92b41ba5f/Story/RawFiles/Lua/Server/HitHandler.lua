@@ -104,19 +104,6 @@ local function WeaponIsTagged(char, weapon, tag)
 	return false
 end
 
-local function GetMasteryBonuses(char)
-	local character = Ext.GetCharacter(char)
-	local bonuses = {}
-	local data = Mastery.Params.Passives
-	if data ~= nil and data.Tags ~= nil then
-		for tagName,tagData in pairs(data.Tags) do
-			if Mastery.HasMasteryRequirement(character, tagName) then
-				bonuses[tagData.ID] = true
-			end
-		end
-	end
-	return bonuses
-end
 --- @param target string
 --- @param source string
 --- @param damage integer
@@ -134,7 +121,7 @@ local function OnHit(target,source,damage,handle)
 				AddMasteryExperienceForAllActive(source, expGain)
 			end
 			if totalOnHitCallbacks > 0 then
-				local bonuses = GetMasteryBonuses(source)
+				local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
 				-- Unarmed
 				if CharacterGetEquippedWeapon(source) == nil then
 					local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]

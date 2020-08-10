@@ -37,6 +37,25 @@ THEN
 	//CharacterEvent(_Char, "LeaderLog_Commands_Log")
 ENDIF
 
+EVENT LLWEAPONEX_Flurry_Axe_CreateCleaveCone
+VARS
+	CHARACTER:_Char
+	FLOAT3:_Dir
+	FLOAT:_LevelF
+	INT:_Level
+ON
+	OnCharacterEvent(_Char, "LLWEAPONEX_Flurry_Axe_CreateCleaveCone")
+ACTIONS
+IF "c1"
+	CharacterGetStat(_LevelF, _Char, Level)
+THEN
+	Cast(_Level, _LevelF)
+ELSE
+	Set(_Level, 1)
+ENDIF
+	GetForwardDirection(_Char, _Dir)
+	ShootLocalCone(Cone_LLWEAPONEX_Flurry_Axe_Cleave, _Char, {0;0;0}, _Dir,_Level, _Char)
+
 EVENT LLWEAPONEX_ArmCannon_Disperse_Explode
 VARS
 	CHARACTER:_Char

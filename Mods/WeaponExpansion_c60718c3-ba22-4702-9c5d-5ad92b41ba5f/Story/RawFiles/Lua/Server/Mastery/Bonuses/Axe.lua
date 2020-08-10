@@ -31,6 +31,14 @@ MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStri
 	end
 end)
 
+---@param skillData SkillData
+MasteryBonusManager.RegisterSkillListener({"Target_Flurry", "Target_EnemyFlurry"}, {"AXE_CLEAVE"}, function(bonuses, skill, char, state, skillData)
+	if state == SKILL_STATE.HIT then
+		-- Uses ShootLocalCone in behavioe
+		SetStoryEvent(char, "LLWEAPONEX_Flurry_Axe_CreateCleaveCone")
+	end
+end)
+
 local function BlinkStrike_ApplyVulnerable(timerData)
 	local char = timerData[1]
 	local target = timerData[2]

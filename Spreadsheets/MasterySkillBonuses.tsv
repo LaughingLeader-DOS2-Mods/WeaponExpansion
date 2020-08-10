@@ -1,113 +1,113 @@
-Mastery	Rank	Skill/Status/Name	Bonus	Implemented
-Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√
-Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	√
-Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by Warfare.	❌
-Axe	3	Flurry	If all 3 hits connect, regain 1 AP.	❌
-Axe	3	Whirlwind	Keeping spinning up to 2-3 times, dealing reduced damage each spin.	√
-Axe	4	Onslaught	Each hit cleaves up to 4m away, dealing reduced damage.	❌
-Banner	1	Encourage	Fear, Madness, and Sleep are cleansed from encouraged allies.	√
-Banner	1	Battering Ram/Bull Rush	If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.	❌
-Banner	2	Rallying Cry	Physical Armor is restored as well.	❌
-Banner	2	Guardian Angel	If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.	❌
-Banner	3	Thick of the Fight	Half of the damage boost is transferred to nearby allies for 1 turn.	❌
-Banner	4	Whirlwind	If near an active banner, enemies hit are drawn in closer to to the banner.	√
-Banner	4	Overpower	Damage is increased by 25% per ally within 6m.	❌
-Battle Book	1	Basic Attack	Basic attacks and weapon skills have a 25% chance to give the target a Concussion, lowering Wits with a small chance to Fumble basic attacks.	√
-Battle Book	1	First Aid	Rested's duration is increased by 1 turn.	❌
-Battle Book	2	Bless	Your deep knowledge of sacred texts allow you to use Bless to deal damage to Undead.	❌
-Battle Book	2	Scroll	When using any scroll, gain 2 AP. Can only happen once per combat.	❌
-Battle Book	3	Challenge	You additionally challenge your target's book smarts. Upon winning, gain a random spellbook transcribed from the opponent's known skills.	❌
-Battle Book	3	Curse	Cursing a target deals 25% shadow damage to non-Undead, non-Voidwoken targets.	❌
-Battle Book	4	Placeholder	Placeholder	❌
-Bludgeon	1	Battering Ram/Bull Rush	25% to apply Dizzy for 1 turn.	❌
-Bludgeon	2	Crippling Blow	Apply Sundered, reducing max physical/magic armor by 25%.	√
-Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts the ground, dealing damage to enemies in a 3m radius.	❌
-Bludgeon	4	Placeholder	Placeholder	❌
-Bow	1	Pin Down	Shoot two arrows instead of one, hitting a random nearby enemy for half damage.	❌
-Bow	2	Assassinate	If the target is Marked, this skill deals a critical hit.	❌
-Bow	3	Placeholder	Placeholder	❌
-Bow	4	Placeholder	Placeholder	❌
-Crossbow	1	Sky Shot	If the target is Knocked Down, this skill deals a critical hit.	❌
-Crossbow	2	Marksman's Fang	Each hit reduces the target's maximum physical/magic armor by 25% for 1 turn.	❌
-Crossbow	3	Placeholder	Placeholder	❌
-Crossbow	4	Placeholder	Placeholder	❌
-Dagger	1	Throwing Knife	The knife thrown has a 25% chance to be coated in poison or explosive oil, dealing bonus damage on hit.	√
-Dagger	2	Backlash	Backlashing to a target you previously hit with Throwing Knife will partially refund the AP cost and refresh the cooldown of Throwing Knife.	❌
-Dagger	2	Sawtooth Knife	If the target is already Bleeding, Rupture the wound for bonus damage.	❌
-Dagger	3	Fan of Knives	Throwing Knife's bonuses apply to each knife thrown (bonus damage, Backlash marking).	❌
-Dagger	3	Corrupted Blade	Your blade(s) deal bonus shadow damage for 2 turns.	❌
-Dagger	4	Daggers Drawn	If the target is killed, the source cost and partial AP is refunded.	❌
-Dagger	4	Cloak and Dagger	When leaping, automatically throw knives are nearby enemies.	❌
-Dual Shields	1	Battering Ram / Bull Rush	You are immune to surface damage while using rush skills. 	❌
-Dual Shields	2	Placeholder	Placeholder	❌
-Dual Shields	3	Placeholder	Placeholder	❌
-Dual Shields	4	Placeholder	Placeholder	❌
-Firearm	1	Tactical Retreat	Your next action's AP cost is reduced by 1.	❌
-Firearm	2	Placeholder	Placeholder	❌
-Firearm	3	Placeholder	Placeholder	❌
-Firearm	4	Placeholder	Placeholder	❌
-Greatbow	1	Ricochet	Each ricochet bounce deals splash damage in a 2m radius.	❌
-Greatbow	2	Placeholder	Placeholder	❌
-Greatbow	3	Placeholder	Placeholder	❌
-Greatbow	4	Placeholder	Placeholder	❌
-Hand Crossbow	1	Whirlwind	While spinning, shoot 1-3 enemies in a 6m radius.	√
-Hand Crossbow	1	Base Damage	Deal +5% more base damage.	√
-Hand Crossbow	2	Tactical Retreat	When jumping away from enemies, automatically apply Marked to 2 targets max.	√
-Hand Crossbow	3	Placeholder	Placeholder	❌
-Hand Crossbow	4	Placeholder	Placeholder	❌
-Katana	1	Backlash	After teleporting, your next attack deals 50% more damage.	❌
-Katana	2	Placeholder	Placeholder	❌
-Katana	3	Placeholder	Placeholder	❌
-Katana	4	Placeholder	Placeholder	❌
-Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.	√
-Pistol	1	Base Damage	Deal +5% more base damage.	√
-Pistol	2	Cloak & Dagger	Automatically reload your pistol. When landing, a random enemy within 4m will be Marked. Attacking the Marked target with your pistol guarantees a critical hit.	√
-Pistol	3	Placeholder	Placeholder	❌
-Pistol	4	Placeholder	Placeholder	❌
-Polearm	1	Crippling Blow	Deal 25% splash damage around the target hit in a 3m radius.	❌
-Polearm	2	Placeholder	Placeholder	❌
-Polearm	3	Placeholder	Placeholder	❌
-Polearm	4	Placeholder	Placeholder	❌
-Quarterstaff	1	Battering Ram / Bull Rushing	After rushing, gain 25% Dodge and deflect the next attack or projectile.	❌
-Quarterstaff	2	Placeholder	Placeholder	❌
-Quarterstaff	3	Placeholder	Placeholder	❌
-Quarterstaff	4	Placeholder	Placeholder	❌
-Rapier	1	Sucker Punch	Gain follow-up combo skills after punching a target. 25% chance to increase Sucker Punch's Knockdown by 1 turn.	√
-Rapier	2	Placeholder	Placeholder	❌
-Rapier	3	Placeholder	Placeholder	❌
-Rapier	4	Placeholder	Placeholder	❌
-Runeblade	1	Activate Rune	The next spell you cast with the same element of your activated rune deals 25% more damage.	❌
-Runeblade	2	Placeholder	Placeholder	❌
-Runeblade	3	Placeholder	Placeholder	❌
-Runeblade	4	Placeholder	Placeholder	❌
-Scythe	1	Whirlwind	Consumes bleeding on targets hit to deal a burst of piercing damage. Damage increases for each turn of Bleeding.	√
-Scythe	2	Placeholder	Placeholder	❌
-Scythe	3	Placeholder	Placeholder	❌
-Scythe	4	Placeholder	Placeholder	❌
-Shield	1	Shields Up	Damage from the next hit taken is reduced by 75%.	√
-Shield	2	Taunt	Taunted enemies gain a 25% movement speed debuff.	❌
-Shield	3	Placeholder	Placeholder	❌
-Shield	4	Placeholder	Placeholder	❌
-Staff	1	Whirlwind	Targets hit have their resistance to your staff's element reduced by 25%.	√
-Staff	2	Staff of Magus	The projectile now has a chance to bounce to additional targets.	❌
-Staff	2	Battle Stomp	At the end of the stomp, a magical vortex with your staff's element explodes, dealing additional damage in a 3m range.	❌
-Staff	3	Placeholder	Placeholder	❌
-Staff	4	Placeholder	Placeholder	❌
-Sword	1	Crippling Blow	Targets hit gains a -20% damage debuff until their turn ends, while you deal 10% more damage against them until your turn ends.	❌
-Sword	2	Placeholder	Placeholder	❌
-Sword	3	Placeholder	Placeholder	❌
-Sword	4	Placeholder	Placeholder	❌
-Throwing	1	Grenade	Basic grenades have a 25% chance to explode again.	❌
-Throwing	2	Placeholder	Placeholder	❌
-Throwing	3	Placeholder	Placeholder	❌
-Throwing	4	Placeholder	Placeholder	❌
-Unarmed	1	Way of the Fist	Warfare skills can now be used while unarmed.	√
-Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 total).	√
-Unarmed	2	Unarmed Scaling 2	+40% base damage with unarmed attacks (20 base -> 60 total)	√
-Unarmed	3	Unarmed Scaling 3	+65% base damage with unarmed attacks (20 base -> 85 total)	√
-Unarmed	4	Unarmed Scaling 4	+80% base damage with unarmed attacks (20 base -> 100 total)	√
-Wand	1	Flesh Sacrifice	Allies standing on blood surfaces gain a 5% damage bonus.	√
-Wand	1	Basic Attack	Basic attacks now lower the target's resistance to your wand's element by -25% for 1 turn.	√
-Wand	2	Placeholder	Placeholder	❌
-Wand	3	Placeholder	Placeholder	❌
-Wand	4	Placeholder	Placeholder	❌
+Mastery	Rank	Skill/Status/Name	Bonus	Implemented	Tested	❌
+Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√	❌
+Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	√	❌
+Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by Warfare.	√	❌
+Axe	3	Flurry	If all 3 hits connect, regain 1 AP.	√	❌
+Axe	3	Whirlwind	Keeping spinning up to 2-3 times, dealing reduced damage each spin.	√	❌
+Axe	4	Onslaught	Each hit cleaves up to 4m away, dealing reduced damage.	√	❌
+Banner	1	Encourage	Fear, Madness, and Sleep are cleansed from encouraged allies.	√	❌
+Banner	1	Battering Ram/Bull Rush	If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.	❌	❌
+Banner	2	Rallying Cry	Physical Armor is restored as well.	❌	❌
+Banner	2	Guardian Angel	If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.	❌	❌
+Banner	3	Thick of the Fight	Half of the damage boost is transferred to nearby allies for 1 turn.	❌	❌
+Banner	4	Whirlwind	If near an active banner, enemies hit are drawn in closer to to the banner.	√	❌
+Banner	4	Overpower	Damage is increased by 25% per ally within 6m.	❌	❌
+Battle Book	1	Basic Attack	Basic attacks and weapon skills have a 25% chance to give the target a Concussion, lowering Wits with a small chance to Fumble basic attacks.	√	❌
+Battle Book	1	First Aid	Rested's duration is increased by 1 turn.	❌	❌
+Battle Book	2	Bless	Your deep knowledge of sacred texts allow you to use Bless to deal damage to Undead.	❌	❌
+Battle Book	2	Scroll	When using any scroll, gain 2 AP. Can only happen once per combat.	❌	❌
+Battle Book	3	Challenge	You additionally challenge your target's book smarts. Upon winning, gain a random spellbook transcribed from the opponent's known skills.	❌	❌
+Battle Book	3	Curse	Cursing a target deals 25% shadow damage to non-Undead, non-Voidwoken targets.	❌	❌
+Battle Book	4	Placeholder	Placeholder	❌	❌
+Bludgeon	1	Battering Ram/Bull Rush	25% to apply Dizzy for 1 turn.	❌	❌
+Bludgeon	2	Crippling Blow	Apply Sundered, reducing max physical/magic armor by 25%.	√	❌
+Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts the ground, dealing damage to enemies in a 3m radius.	❌	❌
+Bludgeon	4	Placeholder	Placeholder	❌	❌
+Bow	1	Pin Down	Shoot two arrows instead of one, hitting a random nearby enemy for half damage.	❌	❌
+Bow	2	Assassinate	If the target is Marked, this skill deals a critical hit.	❌	❌
+Bow	3	Placeholder	Placeholder	❌	❌
+Bow	4	Placeholder	Placeholder	❌	❌
+Crossbow	1	Sky Shot	If the target is Knocked Down, this skill deals a critical hit.	❌	❌
+Crossbow	2	Marksman's Fang	Each hit reduces the target's maximum physical/magic armor by 25% for 1 turn.	❌	❌
+Crossbow	3	Placeholder	Placeholder	❌	❌
+Crossbow	4	Placeholder	Placeholder	❌	❌
+Dagger	1	Throwing Knife	The knife thrown has a 25% chance to be coated in poison or explosive oil, dealing bonus damage on hit.	√	❌
+Dagger	2	Backlash	Backlashing to a target you previously hit with Throwing Knife will partially refund the AP cost and refresh the cooldown of Throwing Knife.	❌	❌
+Dagger	2	Sawtooth Knife	If the target is already Bleeding, Rupture the wound for bonus damage.	❌	❌
+Dagger	3	Fan of Knives	Throwing Knife's bonuses apply to each knife thrown (bonus damage, Backlash marking).	❌	❌
+Dagger	3	Corrupted Blade	Your blade(s) deal bonus shadow damage for 2 turns.	❌	❌
+Dagger	4	Daggers Drawn	If the target is killed, the source cost and partial AP is refunded.	❌	❌
+Dagger	4	Cloak and Dagger	When leaping, automatically throw knives are nearby enemies.	❌	❌
+Dual Shields	1	Battering Ram / Bull Rush	You are immune to surface damage while using rush skills. 	❌	❌
+Dual Shields	2	Placeholder	Placeholder	❌	❌
+Dual Shields	3	Placeholder	Placeholder	❌	❌
+Dual Shields	4	Placeholder	Placeholder	❌	❌
+Firearm	1	Tactical Retreat	Your next action's AP cost is reduced by 1.	❌	❌
+Firearm	2	Placeholder	Placeholder	❌	❌
+Firearm	3	Placeholder	Placeholder	❌	❌
+Firearm	4	Placeholder	Placeholder	❌	❌
+Greatbow	1	Ricochet	Each ricochet bounce deals splash damage in a 2m radius.	❌	❌
+Greatbow	2	Placeholder	Placeholder	❌	❌
+Greatbow	3	Placeholder	Placeholder	❌	❌
+Greatbow	4	Placeholder	Placeholder	❌	❌
+Hand Crossbow	1	Whirlwind	While spinning, shoot 1-3 enemies in a 6m radius.	√	❌
+Hand Crossbow	1	Base Damage	Deal +5% more base damage.	√	❌
+Hand Crossbow	2	Tactical Retreat	When jumping away from enemies, automatically apply Marked to 2 targets max.	√	❌
+Hand Crossbow	3	Placeholder	Placeholder	❌	❌
+Hand Crossbow	4	Placeholder	Placeholder	❌	❌
+Katana	1	Backlash	After teleporting, your next attack deals 50% more damage.	❌	❌
+Katana	2	Placeholder	Placeholder	❌	❌
+Katana	3	Placeholder	Placeholder	❌	❌
+Katana	4	Placeholder	Placeholder	❌	❌
+Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.	√	❌
+Pistol	1	Base Damage	Deal +5% more base damage.	√	❌
+Pistol	2	Cloak & Dagger	Automatically reload your pistol. When landing, a random enemy within 4m will be Marked. Attacking the Marked target with your pistol guarantees a critical hit.	√	❌
+Pistol	3	Placeholder	Placeholder	❌	❌
+Pistol	4	Placeholder	Placeholder	❌	❌
+Polearm	1	Crippling Blow	Deal 25% splash damage around the target hit in a 3m radius.	❌	❌
+Polearm	2	Placeholder	Placeholder	❌	❌
+Polearm	3	Placeholder	Placeholder	❌	❌
+Polearm	4	Placeholder	Placeholder	❌	❌
+Quarterstaff	1	Battering Ram / Bull Rushing	After rushing, gain 25% Dodge and deflect the next attack or projectile.	❌	❌
+Quarterstaff	2	Placeholder	Placeholder	❌	❌
+Quarterstaff	3	Placeholder	Placeholder	❌	❌
+Quarterstaff	4	Placeholder	Placeholder	❌	❌
+Rapier	1	Sucker Punch	Gain follow-up combo skills after punching a target. 25% chance to increase Sucker Punch's Knockdown by 1 turn.	√	❌
+Rapier	2	Placeholder	Placeholder	❌	❌
+Rapier	3	Placeholder	Placeholder	❌	❌
+Rapier	4	Placeholder	Placeholder	❌	❌
+Runeblade	1	Activate Rune	The next spell you cast with the same element of your activated rune deals 25% more damage.	❌	❌
+Runeblade	2	Placeholder	Placeholder	❌	❌
+Runeblade	3	Placeholder	Placeholder	❌	❌
+Runeblade	4	Placeholder	Placeholder	❌	❌
+Scythe	1	Whirlwind	Consumes bleeding on targets hit to deal a burst of piercing damage. Damage increases for each turn of Bleeding.	√	❌
+Scythe	2	Placeholder	Placeholder	❌	❌
+Scythe	3	Placeholder	Placeholder	❌	❌
+Scythe	4	Placeholder	Placeholder	❌	❌
+Shield	1	Shields Up	Damage from the next hit taken is reduced by 75%.	√	❌
+Shield	2	Taunt	Taunted enemies gain a 25% movement speed debuff.	❌	❌
+Shield	3	Placeholder	Placeholder	❌	❌
+Shield	4	Placeholder	Placeholder	❌	❌
+Staff	1	Whirlwind	Targets hit have their resistance to your staff's element reduced by 25%.	√	❌
+Staff	2	Staff of Magus	The projectile now has a chance to bounce to additional targets.	❌	❌
+Staff	2	Battle Stomp	At the end of the stomp, a magical vortex with your staff's element explodes, dealing additional damage in a 3m range.	❌	❌
+Staff	3	Placeholder	Placeholder	❌	❌
+Staff	4	Placeholder	Placeholder	❌	❌
+Sword	1	Crippling Blow	Targets hit gains a -20% damage debuff until their turn ends, while you deal 10% more damage against them until your turn ends.	❌	❌
+Sword	2	Placeholder	Placeholder	❌	❌
+Sword	3	Placeholder	Placeholder	❌	❌
+Sword	4	Placeholder	Placeholder	❌	❌
+Throwing	1	Grenade	Basic grenades have a 25% chance to explode again.	❌	❌
+Throwing	2	Placeholder	Placeholder	❌	❌
+Throwing	3	Placeholder	Placeholder	❌	❌
+Throwing	4	Placeholder	Placeholder	❌	❌
+Unarmed	1	Way of the Fist	Warfare skills can now be used while unarmed.	√	❌
+Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 total).	√	❌
+Unarmed	2	Unarmed Scaling 2	+40% base damage with unarmed attacks (20 base -> 60 total)	√	❌
+Unarmed	3	Unarmed Scaling 3	+65% base damage with unarmed attacks (20 base -> 85 total)	√	❌
+Unarmed	4	Unarmed Scaling 4	+80% base damage with unarmed attacks (20 base -> 100 total)	√	❌
+Wand	1	Flesh Sacrifice	Allies standing on blood surfaces gain a 5% damage bonus.	√	❌
+Wand	1	Basic Attack	Basic attacks now lower the target's resistance to your wand's element by -25% for 1 turn.	√	❌
+Wand	2	Placeholder	Placeholder	❌	❌
+Wand	3	Placeholder	Placeholder	❌	❌
+Wand	4	Placeholder	Placeholder	❌	❌
