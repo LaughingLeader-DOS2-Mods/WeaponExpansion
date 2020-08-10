@@ -82,13 +82,15 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
 	end
 
-	local hasWarfareTag = character:HasTag("LLWEAPONEX_NoMeleeWeaponEquipped")
-	local hasScoundrelTag = character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills")
-	for skill,b in pairs(Skills.WarfareMeleeSkills) do
-		GameHelpers.UI.SetSkillEnabled(uuid, skill, not hasWarfareTag)
-	end
-	for skill,b in pairs(Skills.ScoundrelMeleeSkills) do
-		GameHelpers.UI.SetSkillEnabled(uuid, skill, not hasScoundrelTag)
+	if IsPlayer(uuid) then
+		local hasWarfareTag = character:HasTag("LLWEAPONEX_NoMeleeWeaponEquipped")
+		local hasScoundrelTag = character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills")
+		for skill,b in pairs(Skills.WarfareMeleeSkills) do
+			GameHelpers.UI.SetSkillEnabled(uuid, skill, not hasWarfareTag)
+		end
+		for skill,b in pairs(Skills.ScoundrelMeleeSkills) do
+			GameHelpers.UI.SetSkillEnabled(uuid, skill, not hasScoundrelTag)
+		end
 	end
 end
 

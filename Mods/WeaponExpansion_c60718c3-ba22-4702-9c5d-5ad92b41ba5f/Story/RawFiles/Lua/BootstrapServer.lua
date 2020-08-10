@@ -1,12 +1,14 @@
 PersistentVars = {
     SkillData = {
         DarkFireballCount = 0
-    }
+    },
+    MasteryMechanics = {},
 }
 LoadPersistentVars = {}
 BonusSkills = {}
 Listeners = {
-    Status = {}
+    Status = {},
+    StatusAttempt = {},
 }
 
 Ext.Require("Shared/Init.lua")

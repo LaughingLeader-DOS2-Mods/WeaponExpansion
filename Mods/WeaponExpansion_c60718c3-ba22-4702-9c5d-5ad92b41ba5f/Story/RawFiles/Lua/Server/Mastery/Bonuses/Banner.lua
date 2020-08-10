@@ -2,7 +2,7 @@
 ---@param status string
 ---@param source string
 ---@param bonuses table<string,table<string,boolean>>
-MasteryBonusManager.RegisterStatusListener("HARMONY", {"BANNER_RALLYINGCRY"}, function(target, status, source, bonuses)
+MasteryBonusManager.RegisterStatusListener("HARMONY", "BANNER_RALLYINGCRY", function(target, status, source, bonuses)
 	if (ObjectIsCharacter(target) == 1 
 	and not GameHelpers.Status.IsDisabled(target, true)
 	and NRD_ObjectHasStatusType(target, "DISARMED") == 0
@@ -53,7 +53,10 @@ Ext.RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
 	end
 end)
 
-Ext.RegisterOsirisListener("ObjectTurnStarted", 2, "after", function(char, combatid)
+Ext.RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
+	if HasActiveStatus(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION") == 1 then
+		RemoveStatus(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION")
+	end
 	if PersistentVars.MasteryMechanics.GuardianAngelResurrect ~= nil and #PersistentVars.MasteryMechanics.GuardianAngelResurrect > 0 then
 		for deadChar,v in pairs(PersistentVars.MasteryMechanics.GuardianAngelResurrect) do
 			if v == GetUUID(char) then
@@ -67,7 +70,7 @@ Ext.RegisterOsirisListener("ObjectTurnStarted", 2, "after", function(char, comba
 	end
 end)
 
-MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, {"BANNER_VACUUM"}, function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, "BANNER_VACUUM", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
 		local worldBannerEntry = Osi.DB_LLWEAPONEX_Skills_Temp_RallyBanner:Get(char, nil)
 		if worldBannerEntry ~= nil and #worldBannerEntry > 0 then
@@ -94,6 +97,42 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 					local fx,fy,fz = FindValidPosition(x,y,z, 4.0, hitData.Target)
 					local handle = NRD_CreateGameObjectMove(hitData.Target, fx, fy, fz, "", char)
 				end
+			end
+		end
+	end
+end)
+
+MasteryBonusManager.RegisterStatusAttemptListener("FLANKING", nil, function(target, status, handle, source)
+	local statusSource = nil
+	if HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
+		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+	elseif HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
+		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+	end
+	if statusSource ~= nil then
+		statusSource = Ext.GetCharacter(statusSource)
+		if statusSource ~= nil then
+			local bonuses = MasteryBonusManager.GetMasteryBonuses(statusSource.MyGuid)
+			if bonuses.BANNER_PROTECTION == true then
+				NRD_StatusPreventApply(target, handle, 1)
+			end
+		end
+	end
+end, true)
+
+LeaderLib.RegisterListener("TurnDelayed", function(uuid)
+	local statusSource = nil
+	if HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
+		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+	elseif HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
+		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+	end
+	if statusSource ~= nil then
+		statusSource = Ext.GetCharacter(statusSource)
+		if statusSource ~= nil then
+			local bonuses = MasteryBonusManager.GetMasteryBonuses(statusSource.MyGuid)
+			if bonuses.BANNER_PROTECTION == true then
+				ApplyStatus(uuid, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION", 6.0, 0, uuid)
 			end
 		end
 	end

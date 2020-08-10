@@ -7,7 +7,17 @@ local function OnStatusTooltip(character, status, tooltip)
 		local bonusIsActive = true
 		if data.Active ~= nil then
 			if data.Active.Type == "Tag" then
-				bonusIsActive = character:HasTag(data.Active.Value)
+				if data.Active.Source == true then
+					if status.StatusSourceHandle ~= nil then
+						local source = Ext.GetCharacter(status.StatusSourceHandle)
+						if source ~= nil then
+							bonusIsActive = source:HasTag(data.Active.Value)
+						end
+					end
+					bonusIsActive = character:HasTag(data.Active.Value)
+				else
+					bonusIsActive = character:HasTag(data.Active.Value)
+				end
 			end
 		end
 		if bonusIsActive then

@@ -79,7 +79,17 @@ LLWEAPONEX_Banner_Mastery3 = {
 		Param = TranslatedString:Create("h5b135257gec07g49f8gbf25g69df1d282001","<font color='#00CCAA'>If near an active banner, enemies hit are pulled towards the banner.</font>")
 	}
 },
-LLWEAPONEX_Banner_Mastery4 = {},
+LLWEAPONEX_Banner_Mastery4 = {
+	BANNER_PROTECTION = {
+		Skills = {"Dome_LLWEAPONEX_Banner_Rally_Dwarves", "Dome_LLWEAPONEX_Banner_Rally_DivineOrder"},
+		Param = TranslatedString:Create("h57237b97gfe3bg437aga094g1d91268f9fc5","<font color='#33FF33'>When near a placed banner, allies cannot be flanked, and turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]% until the turn occurs.</font>"),
+		StatusParam = {
+			Statuses = {"LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS", "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS"},
+			Param = TranslatedString:Create("hb5b69849g6862g4db5gaa63gd4dd69e56a9d","<font color='#C9AA58'>Immune to Flanking</font><br><font color='#33FF33'>Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.</font>"),
+			Active = {Value = "LLWEAPONEX_Banner_Mastery4", Type = "Tag", Source=true}
+		}
+	}
+},
 LLWEAPONEX_Banner_Mastery5 = {},
 LLWEAPONEX_BattleBook_Mastery1 = {},
 LLWEAPONEX_BattleBook_Mastery2 = {},
@@ -303,5 +313,3 @@ for tag,tbl in pairs(Mastery.Bonuses) do
 		end
 	end
 end
-
-print(Ext.JsonStringify(Mastery.Params))

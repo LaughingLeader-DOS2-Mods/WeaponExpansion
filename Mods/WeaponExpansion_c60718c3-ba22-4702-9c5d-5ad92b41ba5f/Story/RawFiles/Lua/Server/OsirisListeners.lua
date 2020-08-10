@@ -111,6 +111,20 @@ end
 Ext.RegisterOsirisListener("CharacterStatusApplied", 3, "after", OnStatusApplied)
 Ext.RegisterOsirisListener("ItemStatusChange", 3, "after", OnStatusApplied)
 
+Ext.RegisterOsirisListener("NRD_OnStatusAttempt", 4, "after", function(target, status, handle, source)
+	if #Listeners.StatusAttempt	> 0 then
+		local callbacks = Listeners.StatusAttempt[status]
+		if callbacks ~= nil then
+			for i,callback in ipairs(callbacks) do
+				local s,err = xpcall(callback, debug.traceback, target, status, handle, source)
+				if not s then
+					Ext.PrintError(err)
+				end
+			end
+		end
+	end
+end)
+
 local function OnCharacterDied(char)
 	local id = CombatGetIDForCharacter(char)
 	if id ~= nil then

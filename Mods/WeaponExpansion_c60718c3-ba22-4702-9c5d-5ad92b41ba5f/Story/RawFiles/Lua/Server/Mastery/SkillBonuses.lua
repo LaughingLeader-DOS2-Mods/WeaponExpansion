@@ -23,17 +23,29 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	return bonuses
 end
 
-local function OnSkillCallback(callback, matchBonuses, skill, char, ...)
-	local bonuses = MasteryBonusManager.GetMasteryBonuses(char, skill)
-	if matchBonuses == nil then
-		callback(bonuses, skill, char, ...)
+local function HasMatchedBonuses(bonuses, matchBonuses)
+	if matchBonuses == nil or matchBonuses == "" then
+		return true
+	end
+	if type(matchBonuses) == "string" then
+		return bonuses[matchBonuses] == true
 	else
+		if #matchBonuses <= 0 then
+			return true
+		end
 		for i,v in pairs(matchBonuses) do
 			if bonuses[v] == true then
-				callback(bonuses, skill, char, ...)
-				break
+				return true
 			end
 		end
+	end
+	return false
+end
+
+local function OnSkillCallback(callback, matchBonuses, skill, char, ...)
+	local bonuses = MasteryBonusManager.GetMasteryBonuses(char, skill)
+	if HasMatchedBonuses(bonuses, matchBonuses) then
+		callback(bonuses, skill, char, ...)
 	end
 end
 
@@ -71,15 +83,8 @@ local function OnStatusCallback(callback, matchBonuses, target, status, source)
 			end
 		end
 	end
-	if matchBonuses == nil then
+	if HasMatchedBonuses(bonuses, matchBonuses) then
 		callback(target, status, source, bonuses)
-	else
-		for i,v in pairs(matchBonuses) do
-			if bonuses[v] ~= nil then
-				callback(target, status, source, bonuses)
-				break
-			end
-		end
 	end
 end
 
@@ -99,6 +104,56 @@ function MasteryBonusManager.RegisterStatusListener(status, matchBonuses, callba
 		end
 		table.insert(Listeners.Status[status], function(target,status,source) 
 			OnStatusCallback(callback, matchBonuses, target, status, source)
+		end)
+	end
+end
+
+
+local function OnStatusAttemptCallback(callback, matchBonuses, target, status, handle, source, skipBonusCheck)
+	if skipBonusCheck ~= true then
+		local bonuses = {}
+		if ObjectIsCharacter(source) == 1 then
+			local b = MasteryBonusManager.GetMasteryBonuses(source)
+			if #b > 0 then
+				for i,v in pairs(b) do
+					if bonuses[v] == nil then bonuses[v] = {} end
+					bonuses[v][source] = true
+				end
+			end
+		end
+		if ObjectIsCharacter(target) == 1 then
+			local b = MasteryBonusManager.GetMasteryBonuses(target)
+			if #b > 0 then
+				for i,v in pairs(b) do
+					if bonuses[v] == nil then bonuses[v] = {} end
+					bonuses[v][target] = true
+				end
+			end
+		end
+		if HasMatchedBonuses(bonuses, matchBonuses) then
+			callback(target, status, handle, source, bonuses)
+		end
+	else
+		callback(target, status, handle, source)
+	end
+end
+
+function MasteryBonusManager.RegisterStatusAttemptListener(status, matchBonuses, callback, skipBonusCheck)
+	if type(status) == "table" then
+		for i,v in pairs(status) do
+			if Listeners.StatusAttempt[v] == nil then 
+				Listeners.StatusAttempt[v] = {}
+			end
+			table.insert(Listeners.StatusAttempt[v], function(target,v,handle,source) 
+				OnStatusAttemptCallback(callback, matchBonuses, target, v, handle, source, skipBonusCheck)
+			end)
+		end
+	else
+		if Listeners.StatusAttempt[status] == nil then 
+			Listeners.StatusAttempt[status] = {}
+		end
+		table.insert(Listeners.StatusAttempt[status], function(target,status,handle,source) 
+			OnStatusAttemptCallback(callback, matchBonuses, target, status, handle, source, skipBonusCheck)
 		end)
 	end
 end
