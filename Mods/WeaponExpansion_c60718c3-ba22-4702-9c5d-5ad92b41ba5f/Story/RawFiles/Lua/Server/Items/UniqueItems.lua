@@ -6,7 +6,6 @@ local UniqueData = Ext.Require("Server/Data/UniqueData.lua")
 
 local function OnTattoosEquipped(data, character)
 	ItemLockUnEquip(data.UUID, 1)
-	ObjectSetFlag(data.UUID, "LLWEAPONEX_ItemIsLocked", 0)
 end
 
 ---@type table<string, UniqueData>
@@ -192,6 +191,7 @@ function SwapUnique(char, id)
 		local slot = GameHelpers.Item.GetEquippedSlot(char,equipped)
 
 		ItemLockUnEquip(equipped, 0)
+		ItemLockUnEquip(next, 0)
 		--CharacterUnequipItem(char, equipped)
 
 		if not isTwoHanded then

@@ -44,15 +44,33 @@ function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip, params)
     return this
 end
 
+local function CanMoveToOwner(item, owner)
+	if self.DefaultOwner ~= nil 
+	and (ObjectExists(self.DefaultOwner) == 1
+	and CharacterIsDead(self.DefaultOwner) == 0
+	and GetInventoryOwner(self.UUID) ~= self.DefaultOwner)
+	then
+		return true
+	end
+	return false
+end
+
 function UniqueData:OnLevelChange(region)
 	if ObjectExists(self.UUID) == 1 then
+		self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
 		if not self.Initialized then
-			if self.DefaultOwner ~= nil and ObjectExists(self.DefaultOwner) == 1 and CharacterIsDead(self.DefaultOwner) == 0 then
+			if CanMoveToOwner(self.UUID, self.DefaultOwner) then
 				ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
 				if self.AutoEquipOnOwner then
-					CharacterEquipItem(self.DefaultOwner, self.UUID)
-					if self.OnEquipped ~= nil then
-						pcall(self.OnEquipped, self, self.DefaultOwner)
+					local targetSlot = Ext.GetItem(self.UUID).Stats.Slot
+					local currentItem = CharacterGetEquippedItem(self.DefaultOwner, targetSlot)
+					if currentItem == nil then
+						CharacterEquipItem(self.DefaultOwner, self.UUID)
+						if self.OnEquipped ~= nil then
+							pcall(self.OnEquipped, self, self.DefaultOwner)
+						end
+					else
+						ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
 					end
 				end
 			else
@@ -65,25 +83,21 @@ function UniqueData:OnLevelChange(region)
 				end
 			end
 			self.Initialized = true
+			ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 		else
 			if GetRegion(self.UUID) ~= region and self.Owner == nil then
-				if self.DefaultOwner ~= nil and 
-					ObjectExists(self.DefaultOwner) == 1 and 
-					CharacterIsDead(self.DefaultOwner) == 0 and 
-					GetRegion(self.DefaultOwner) == region 
-				then
+				if CanMoveToOwner(self.UUID, self.DefaultOwner) and	GetRegion(self.DefaultOwner) == region then
 					ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
-					---@type EsvCharacter
-					-- local character = Ext.GetCharacter(self.DefaultOwner)
-					-- for i,v in pairs(character:GetInventoryItems()) do
-	
-					-- end
-					--local currentWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Weapon")
-					--local currentOffhandWeapon = CharacterGetEquippedItem(self.DefaultOwner, "Shield")
 					if self.AutoEquipOnOwner then
-						CharacterEquipItem(self.DefaultOwner, self.UUID)
-						if self.OnEquipped ~= nil then
-							pcall(self.OnEquipped, self, self.DefaultOwner)
+						local targetSlot = Ext.GetItem(self.UUID).Stats.Slot
+						local currentItem = CharacterGetEquippedItem(self.DefaultOwner, targetSlot)
+						if currentItem == nil then
+							CharacterEquipItem(self.DefaultOwner, self.UUID)
+							if self.OnEquipped ~= nil then
+								pcall(self.OnEquipped, self, self.DefaultOwner)
+							end
+						else
+							ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
 						end
 					end
 				else
