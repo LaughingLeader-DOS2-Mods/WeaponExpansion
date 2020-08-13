@@ -32,11 +32,13 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddAbility(Mercs.Harken, "WarriorLore", 1)
 		CharacterAddAbility(Mercs.Harken, "TwoHanded", 1)
 		CharacterAddAbility(Mercs.Harken, "Barter", 1)
-		CharacterAddTalent(Mercs.Korvash, "Opportunist")
+		CharacterAddTalent(Mercs.Harken, "Opportunist")
 		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mercs.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Mercs.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
 		Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
 		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
+		CharacterAddSkill(Mercs.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
 	end
 	
 	if CharacterIsPlayer(Mercs.Korvash) == 0 then
@@ -45,6 +47,8 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddAbility(Mercs.Korvash, "Telekinesis", 1)
 		CharacterAddTalent(Mercs.Korvash, "Executioner")
 		LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+		CharacterAddSkill(Mercs.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
@@ -106,8 +110,11 @@ Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMem
 			local tier2 = tierValue[Ext.StatGetAttribute(b, "Tier")] or -1
 			return tier1 < tier2
 		end)
+
+		local slotNum = 0
 		for i,v in pairs(slotEntries) do
-			NRD_SkillBarSetSkill(partyMember, i, v)
+			NRD_SkillBarSetSkill(partyMember, slotNum, v)
+			slotNum = slotNum + 1
 		end
 		-- local slot = 0
 		-- for i,skill in pairs(Ext.GetCharacter(partyMember):GetSkills()) do
