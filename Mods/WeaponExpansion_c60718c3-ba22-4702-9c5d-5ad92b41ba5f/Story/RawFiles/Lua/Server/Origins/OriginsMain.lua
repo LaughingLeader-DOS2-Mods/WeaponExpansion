@@ -51,6 +51,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddSkill(Mercs.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Mercs.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
 		Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
@@ -88,6 +89,13 @@ local tierValue = {
     Master = 4,
 }
 
+local ignoredSkillsForFixing = {
+	Shout_LLSPRINT_ToggleSprint = true,
+	Shout_LeaderLib_ChainAll = true,
+	Shout_LeaderLib_UnchainAll = true,
+	Shout_LeaderLib_OpenModMenu = true,
+}
+
 Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMember)
 	if ObjectGetFlag(partyMember, "LLWEAPONEX_FixSkillBar") == 1 then
 		ObjectClearFlag(partyMember, "LLWEAPONEX_FixSkillBar", 0)
@@ -99,20 +107,40 @@ Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMem
 				--slotEntries[i] = slot
 			else
 				slot = NRD_SkillBarGetSkill(partyMember, i)
-				if not StringHelpers.IsNullOrEmpty(slot) then
+				if not StringHelpers.IsNullOrEmpty(slot) and ignoredSkillsForFixing[slot] ~= true then
 					NRD_SkillBarClear(partyMember, i)
 					table.insert(slotEntries, slot)
 				end
 			end
 		end
 		table.sort(slotEntries, function(a,b)
-			local tier1 = tierValue[Ext.StatGetAttribute(a, "Tier")] or -1
-			local tier2 = tierValue[Ext.StatGetAttribute(b, "Tier")] or -1
-			return tier1 < tier2
+			local val1 = 0
+			local val2 = 0
+
+			local ma1 = Ext.StatGetAttribute(a, "Magic Cost")
+			if ma1 > 0 then
+				val1 = 9
+			elseif Ext.StatGetAttribute(a, "ForGameMaster") == "No" then
+				val1 = 6
+			else
+				val1 = tierValue[Ext.StatGetAttribute(a, "Tier")] or -1
+			end
+
+			local ma2 = Ext.StatGetAttribute(b, "Magic Cost")
+			if ma2 > 0 then
+				val2 = 9
+			elseif Ext.StatGetAttribute(b, "ForGameMaster") == "No" then
+				val2 = 6
+			else
+				val2 = tierValue[Ext.StatGetAttribute(b, "Tier")] or -1
+			end
+
+			return val1 < val2
 		end)
 
 		local slotNum = 0
 		for i,v in pairs(slotEntries) do
+			print(slotNum, v, partyMember)
 			NRD_SkillBarSetSkill(partyMember, slotNum, v)
 			slotNum = slotNum + 1
 		end
