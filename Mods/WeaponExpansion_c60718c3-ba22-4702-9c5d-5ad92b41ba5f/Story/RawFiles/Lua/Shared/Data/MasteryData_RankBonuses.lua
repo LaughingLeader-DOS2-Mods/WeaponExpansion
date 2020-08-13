@@ -41,7 +41,7 @@ LLWEAPONEX_Axe_Mastery3 = {
 LLWEAPONEX_Axe_Mastery4 = {
 	AXE_CLEAVE = {
 		Skills = {"Target_Flurry", "Target_EnemyFlurry"},
-		Param = TranslatedString:Create("he478deedg980eg4c61gaacdga2cfc8b63b8a","Each hit cleaves up to [Stats:Cone_LLWEAPONEX_Flurry_Axe_Cleave:Range]m away in a [Stats:Cone_LLWEAPONEX_Flurry_Axe_Cleave:Angle]º cone, dealing [SkillDamage:Cone_LLWEAPONEX_Flurry_Axe_Cleave].")
+		Param = TranslatedString:Create("he478deedg980eg4c61gaacdga2cfc8b63b8a","Each hit cleaves up to [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Range]m away in a [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Angle] degree cone, dealing [SkillDamage:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave].")
 	},
 	AXE_SCOUNDREL = {
 		Param = TranslatedString:Create("h4f01d52ag5c84g42d8gae3dgaf3f477bcc18","Axes can now be used with Scoundrel skills."),
@@ -105,11 +105,16 @@ LLWEAPONEX_Bludgeon_Mastery1 = {
 LLWEAPONEX_Bludgeon_Mastery2 = {
 	BLUDGEON_SUNDER = {
 		Skills = {"Target_CripplingBlow","Target_EnemyCripplingBlow"},
-		Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, reducing max <font color='#AE9F95'>[Handle:h161d5479g06d6g408egade2g37a203e3361f]</font>/<font color='#4197E2'>[Handle:h50eb8e33g82edg412eg9886gec19ca591254]</font> by <font color='#AE9F95'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font>/<font color='#4197E2'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font></font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).</font>"),
+		Param = TranslatedString:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, reducing max <font color='#AE9F95'>[Handle:h1feadc00g239ag430bgac99g7b5f3605a1c1:Physical Armour]</font>/<font color='#4197E2'>[Handle:h50eb8e33g82edg412eg9886gec19ca591254:Magic Armour]</font> by <font color='#AE9F95'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font>/<font color='#4197E2'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font></font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).</font>"),
 		NamePrefix = "<font color='#F19824'>Sundering</font>"
 	}
 },
-LLWEAPONEX_Bludgeon_Mastery3 = {},
+LLWEAPONEX_Bludgeon_Mastery3 = {
+	BLUDGEON_GROUNDQUAKE = {
+		Skills = {"Cone_GroundSmash","Cone_EnemyGroundSmash"},
+		Param = TranslatedString:Create("h06eacec9g1d7fg46cagba45g3cde5062c8a8","A <font color='#F19824'>localized quake</font> is created where your weapon contacts the ground, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake:ExplodeRadius]m radius.</font>"),
+	}
+},
 LLWEAPONEX_Bludgeon_Mastery4 = {},
 LLWEAPONEX_Bludgeon_Mastery5 = {},
 LLWEAPONEX_Bow_Mastery1 = {
@@ -118,7 +123,17 @@ LLWEAPONEX_Bow_Mastery1 = {
 		Param = TranslatedString:Create("h651d4f13ge5ddg4111g871cgf92fab041bd4","Shoot a <font color='#00FFAA'>second arrow</font> at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].<br><font color='#F19824'>If no enemies are nearby, the bonus arrow will fire at the original target.</font>")
 	}
 },
-LLWEAPONEX_Bow_Mastery2 = {},
+LLWEAPONEX_Bow_Mastery2 = {
+	BOW_ASSASSINATE_MARKED = {
+		Skills = {"Projectile_Snipe", "Projectile_EnemySnipe"},
+		Param = TranslatedString:Create("hcf6a97abge09ag4075g9ecbg7595d841b33f","If the target is <font color='#FF3300'>Marked</font>, deal a <font color='#33FF33'>guaranteed critical hit</font> and bypass dodging/blocking. The mark is cleansed after hit."),
+		StatusParam = {
+			Statuses = {"MARKED"},
+			Param = TranslatedString:Create("h7896d84dg032dg4651g9452g911a2b272668","<font color='#33FF00'>Character is vulnerable to a critical hit from [Key:Projectile_Snipe_DisplayName].</font>"),
+			Active = {Value = "LLWEAPONEX_Bow_Mastery2", Type = "Tag", Source=true}
+		}
+	}
+},
 LLWEAPONEX_Bow_Mastery3 = {},
 LLWEAPONEX_Bow_Mastery4 = {},
 LLWEAPONEX_Bow_Mastery5 = {},

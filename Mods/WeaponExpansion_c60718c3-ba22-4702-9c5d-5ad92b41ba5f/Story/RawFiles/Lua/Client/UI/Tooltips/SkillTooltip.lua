@@ -22,7 +22,7 @@ local AppendedText = {
 	---@param character EsvCharacter
 	Target_LLWEAPONEX_Steal = function(character)
 		if character:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
-			local chance = math.tointeger(Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0)
+			local chance = math.floor(Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0)
 			local ref,handle = Ext.GetTranslatedStringFromKey("ARM_UNIQUE_LLWEAPONEX_ThiefGloves_A_DisplayName")
 			local gloveName = Ext.GetTranslatedString(handle, ref)
 			return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName)

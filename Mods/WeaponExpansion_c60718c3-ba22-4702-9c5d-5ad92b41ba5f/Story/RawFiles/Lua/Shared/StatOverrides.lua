@@ -199,6 +199,17 @@ local function HasComboCategory(categoryTable, category)
     return false
 end
 
+local known = {
+	Custom = true,
+	SurfaceChange = true,
+	Summon = true,
+	Status = true,
+	GameAction = true,
+	OsirisTask = true,
+	Force = true,
+	Sabotage = true,
+}
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
@@ -211,6 +222,16 @@ local function StatOverrides_Init()
 		local gameMaster = Ext.StatGetAttribute(skill, "ForGameMaster")
 		local requirement = Ext.StatGetAttribute(skill, "Requirement")
 		local ability = Ext.StatGetAttribute(skill, "Ability")
+
+		local props = Ext.StatGetAttribute(skill, "SkillProperties")
+		if props ~= nil and #props > 0 then
+			for _,v in pairs(props) do
+				if known[v.Type] ~= true then
+					print(skill, Ext.JsonStringify(props))
+					break
+				end
+			end
+		end
 
 		--print(gameMaster, requirement, ability)
 	

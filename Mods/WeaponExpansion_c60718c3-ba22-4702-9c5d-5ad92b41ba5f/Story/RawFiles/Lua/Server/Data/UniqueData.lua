@@ -44,7 +44,7 @@ function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip, params)
     return this
 end
 
-local function CanMoveToOwner(item, owner)
+function UniqueData:CanMoveToOwner()
 	if self.DefaultOwner ~= nil 
 	and (ObjectExists(self.DefaultOwner) == 1
 	and CharacterIsDead(self.DefaultOwner) == 0
@@ -59,7 +59,7 @@ function UniqueData:OnLevelChange(region)
 	if ObjectExists(self.UUID) == 1 then
 		self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
 		if not self.Initialized then
-			if CanMoveToOwner(self.UUID, self.DefaultOwner) then
+			if self:CanMoveToOwner() then
 				ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
 				if self.AutoEquipOnOwner then
 					local targetSlot = Ext.GetItem(self.UUID).Stats.Slot
@@ -86,7 +86,7 @@ function UniqueData:OnLevelChange(region)
 			ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 		else
 			if GetRegion(self.UUID) ~= region and self.Owner == nil then
-				if CanMoveToOwner(self.UUID, self.DefaultOwner) and	GetRegion(self.DefaultOwner) == region then
+				if self:CanMoveToOwner() and GetRegion(self.DefaultOwner) == region then
 					ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
 					if self.AutoEquipOnOwner then
 						local targetSlot = Ext.GetItem(self.UUID).Stats.Slot

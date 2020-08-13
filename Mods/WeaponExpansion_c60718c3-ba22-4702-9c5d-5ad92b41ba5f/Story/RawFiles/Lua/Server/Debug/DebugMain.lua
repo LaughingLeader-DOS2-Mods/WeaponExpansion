@@ -352,4 +352,67 @@ end
 ---RS3_FX_Char_Creatures_Condor_Impact_Warrior_01
 ---Would make for a cool Goblin Punch effect if played multiple times.
 
+
+---@param projectile EsvProjectile
+local function CreateRectSurface(projectile, endPos)
+	Ext.EnableExperimentalPropertyWrites()
+	---@type EsvRectangleSurfaceAction
+	local surf = Ext.CreateSurfaceAction("RectangleSurfaceAction")
+	surf.Target = endPos
+	surf.Position = GameHelpers.Math.ExtendPositionWithForwardDirection(Ext.GetCharacter(projectile.SourceHandle), 2.0, projectile.SourcePosition[1], projectile.SourcePosition[2], projectile.SourcePosition[3])
+	surf.SurfaceType = "Fire"
+	surf.SurfaceArea = 2.0
+	surf.Width = 2.0
+	surf.Length = GameHelpers.Math.GetDistance(endPos, projectile.SourcePosition) + 0.01
+	surf.Duration = 3.0
+	surf.StatusChance = 0.0
+	surf.GrowStep = 128
+	surf.LineCheckBlock = 0
+	surf.DeathType = "DoT"
+	surf.OwnerHandle = projectile.SourceHandle
+	return surf
+end
+
+---@type table<integer,EsvChangeSurfaceOnPathAction>
+local surfaceActions = {}
+
+local function CreateFollowSurface(projectile)
+	Ext.EnableExperimentalPropertyWrites()
+	---@type EsvChangeSurfaceOnPathAction
+	local surf = Ext.CreateSurfaceAction("ChangeSurfaceOnPathAction")
+	surf.FollowObject = projectile.Handle
+	surf.SurfaceType = "FrostCloud"
+	--surf.SurfaceLayer = 0
+	surf.Radius = 4.0
+	--surf.CheckExistingSurfaces = false
+	--surf.IgnoreIrreplacableSurfaces = true
+	surf.Duration = 12.0
+	--surf.OwnerHandle = projectile.OwnerHandle
+	return surf
+end
+
+---@param projectile EsvProjectile
+Ext.RegisterListener("ShootProjectile", function (projectile)
+	if string.find(projectile.SkillId, "Projectile_EnemyTotem") then
+		local surf = CreateFollowSurface(projectile)
+		print("Created surface action for", projectile.Handle, surf.MyHandle)
+		surfaceActions[projectile.Handle] = surf.MyHandle
+		Ext.ExecuteSurfaceAction(surf)
+	end
+end)
+
+---@param projectile EsvProjectile
+Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
+	local surfHandle = surfaceActions[projectile.Handle]
+	if surfHandle ~= nil then
+		print("Canceled surface action for", projectile.Handle, surfHandle)
+		surfaceActions[projectile.Handle] = nil
+		Ext.CancelSurfaceAction(surfHandle)
+	end
+	if string.find(projectile.SkillId, "Projectile_EnemyTotem") then
+		local surf = CreateRectSurface(projectile, position)
+		Ext.ExecuteSurfaceAction(surf)
+	end
+end)
+
 return DebugInit

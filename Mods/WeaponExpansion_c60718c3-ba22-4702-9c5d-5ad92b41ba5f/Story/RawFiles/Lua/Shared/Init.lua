@@ -1,4 +1,5 @@
 LeaderLib = Mods["LeaderLib"]
+---@type GameHelpers
 GameHelpers = LeaderLib.GameHelpers
 Common = LeaderLib.Common
 StringHelpers = LeaderLib.StringHelpers

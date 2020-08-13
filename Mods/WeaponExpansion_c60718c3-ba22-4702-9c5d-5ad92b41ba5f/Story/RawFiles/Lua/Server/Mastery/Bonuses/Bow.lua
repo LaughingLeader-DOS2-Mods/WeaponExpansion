@@ -2,7 +2,7 @@
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param skillData SkillEventData|HitData
-MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery1.BOW_DOUBLE_SHOT.Skills, {"BOW_DOUBLE_SHOT"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery1.BOW_DOUBLE_SHOT.Skills, "BOW_DOUBLE_SHOT", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		-- Support for a mod making Pin Down shoot multiple arrows through the use of iterating tables.
 		local shotBonus = false
@@ -60,6 +60,28 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery
 					GameHelpers.ShootProjectileAtPosition(char, x,y,z, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot")
 				end
 			end
+		end
+	end
+end)
+
+---@param data HitData
+MasteryBonusManager.RegisterSkillListener({"Projectile_Snipe", "Projectile_EnemySnipe"}, "BOW_ASSASSINATE_MARKED", function(bonuses, skill, char, state, data)
+	if state == SKILL_STATE.HIT then
+		if HasActiveStatus(data.Target, "MARKED") == 1 then
+			if NRD_StatusGetInt(data.Target, data.Handle, "CriticalHit") == 0 or data.Damage <= 0 then
+				local attacker = Ext.GetCharacter(char).Stats
+				local target = Ext.GetCharacter(data.Target).Stats
+
+				NRD_HitStatusClearAllDamage(data.Target, data.Handle)
+
+				local hit = GameHelpers.Damage.CalculateSkillDamage(skill, attacker, target, data.Handle, true, true, true)
+				GameHelpers.Damage.ApplyHitRequestFlags(hit, data.Target, data.Handle)
+				for i,damage in pairs(hit.DamageList:ToTable()) do
+					NRD_HitStatusAddDamage(data.Target, data.Handle, damage.DamageType, damage.Amount)
+				end
+				NRD_StatusSetInt(data.Target, data.Handle, "CriticalHit", 1)
+			end
+			RemoveStatus(data.Target, "MARKED")
 		end
 	end
 end)

@@ -1,3 +1,49 @@
+local warChargeStatuses = {
+	"LLWEAPONEX_WARCHARGE_DAMAGEBOOST",
+	"LLWEAPONEX_WARCHARGE_BONUS",
+	"LLWEAPONEX_WARCHARGE01",
+	"LLWEAPONEX_WARCHARGE02",
+	"LLWEAPONEX_WARCHARGE03",
+	"LLWEAPONEX_WARCHARGE04",
+	"LLWEAPONEX_WARCHARGE05",
+	"LLWEAPONEX_WARCHARGE06",
+	"LLWEAPONEX_WARCHARGE07",
+	"LLWEAPONEX_WARCHARGE08",
+	"LLWEAPONEX_WARCHARGE09",
+	"LLWEAPONEX_WARCHARGE10",
+}
+local rushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
+
+---@param hitData HitData
+MasteryBonusManager.RegisterSkillListener(rushSkills, {"WAR_CHARGE_RUSH"}, function(bonuses, skill, char, state, hitData)
+	if state == SKILL_STATE.CAST then
+		local hasStatus = false
+		for i,status in pairs(warChargeStatuses) do
+			if HasActiveStatus(char, status) == 1 then
+				hasStatus = true
+				break
+			end
+		end
+		if hasStatus then
+			Osi.LeaderLib_Timers_StartObjectTimer(char, 1000, "Timers_LLWEAPONEX_ApplyHasted", "LLWEAPONEX_ApplyHasted")
+		end
+	elseif state == SKILL_STATE.HIT and hitData.Success then
+		local hasStatus = false
+		for i,status in pairs(warChargeStatuses) do
+			if HasActiveStatus(char, status) == 1 then
+				hasStatus = true
+				break
+			end
+		end
+		if hasStatus then
+			local bonusPercent = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_WarChargeDamageBoost", 25.0)
+			if bonusPercent > 0 then
+				GameHelpers.IncreaseDamage(hitData.Target, char, hitData.Handle, bonusPercent/100, 0)
+			end
+		end
+	end
+end)
+
 ---@param target string
 ---@param status string
 ---@param source string

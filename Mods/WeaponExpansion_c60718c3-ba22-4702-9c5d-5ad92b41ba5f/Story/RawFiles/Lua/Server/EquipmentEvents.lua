@@ -113,7 +113,7 @@ function OnItemEquipped(uuid,itemUUID)
 		
 		local isPlayer = IsPlayerQRY(uuid)
 		
-		if statType == "Weapon" then
+		if isPlayer and statType == "Weapon" then
 			Equipment.CheckWeaponRequirementTags(uuid)
 		end
 		

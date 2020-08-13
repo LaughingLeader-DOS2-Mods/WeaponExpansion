@@ -29,27 +29,24 @@ function Origins_InitCharacters(region, isEditorMode)
 
 	--IsCharacterCreationLevel(region) == 0
 	if CharacterIsPlayer(Mercs.Harken) == 0 then
-		if isEditorMode == 1 then
-			CharacterAddAbility(Mercs.Harken, "WarriorLore", 1)
-			CharacterAddAbility(Mercs.Harken, "TwoHanded", 1)
-			CharacterAddAbility(Mercs.Harken, "Barter", 1)
-			LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mercs.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		end
+		CharacterAddAbility(Mercs.Harken, "WarriorLore", 1)
+		CharacterAddAbility(Mercs.Harken, "TwoHanded", 1)
+		CharacterAddAbility(Mercs.Harken, "Barter", 1)
+		CharacterAddTalent(Mercs.Korvash, "Opportunist")
+		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mercs.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
 		Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
 		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
 	end
 	
 	if CharacterIsPlayer(Mercs.Korvash) == 0 then
-		if isEditorMode == 1 then
-			CharacterAddAbility(Mercs.Korvash, "WarriorLore", 1)
-			CharacterAddAbility(Mercs.Korvash, "Necromancy", 1)
-			CharacterAddAbility(Mercs.Korvash, "Telekinesis", 1)
-			CharacterAddTalent(Mercs.Korvash, "Executioner")
-			LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-			--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-			--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-		end
+		CharacterAddAbility(Mercs.Korvash, "WarriorLore", 1)
+		CharacterAddAbility(Mercs.Korvash, "Necromancy", 1)
+		CharacterAddAbility(Mercs.Korvash, "Telekinesis", 1)
+		CharacterAddTalent(Mercs.Korvash, "Executioner")
+		LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
 		Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
@@ -79,14 +76,38 @@ function Origins_InitCharacters(region, isEditorMode)
 	end
 end
 
+local tierValue = {
+    None = 0,
+    Starter = 1,
+    Novice = 2,
+    Adept = 3,
+    Master = 4,
+}
+
 Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMember)
 	if ObjectGetFlag(partyMember, "LLWEAPONEX_FixSkillBar") == 1 then
-		ObjectClearFlag(partyMember, "LLWEAPONEX_FixSkillBar")
-		for i=0,64,1 do
+		ObjectClearFlag(partyMember, "LLWEAPONEX_FixSkillBar", 0)
+		local slotEntries = {}
+		for i=0,28,1 do
 			local slot = NRD_SkillBarGetItem(partyMember, i)
 			if not StringHelpers.IsNullOrEmpty(slot) then
 				NRD_SkillBarClear(partyMember, i)
+				--slotEntries[i] = slot
+			else
+				slot = NRD_SkillBarGetSkill(partyMember, i)
+				if not StringHelpers.IsNullOrEmpty(slot) then
+					NRD_SkillBarClear(partyMember, i)
+					table.insert(slotEntries, slot)
+				end
 			end
+		end
+		table.sort(slotEntries, function(a,b)
+			local tier1 = tierValue[Ext.StatGetAttribute(a, "Tier")] or -1
+			local tier2 = tierValue[Ext.StatGetAttribute(b, "Tier")] or -1
+			return tier1 < tier2
+		end)
+		for i,v in pairs(slotEntries) do
+			NRD_SkillBarSetSkill(partyMember, i, v)
 		end
 		-- local slot = 0
 		-- for i,skill in pairs(Ext.GetCharacter(partyMember):GetSkills()) do

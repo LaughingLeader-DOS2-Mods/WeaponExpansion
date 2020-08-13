@@ -54,7 +54,7 @@ ELSE
 	Set(_Level, 1)
 ENDIF
 	GetForwardDirection(_Char, _Dir)
-	ShootLocalCone(Cone_LLWEAPONEX_Flurry_Axe_Cleave, _Char, {0;0;0}, _Dir,_Level, _Char)
+	ShootLocalCone(Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave, _Char, {0;0;0}, _Dir,_Level, _Char)
 
 EVENT LLWEAPONEX_ArmCannon_Disperse_Explode
 VARS

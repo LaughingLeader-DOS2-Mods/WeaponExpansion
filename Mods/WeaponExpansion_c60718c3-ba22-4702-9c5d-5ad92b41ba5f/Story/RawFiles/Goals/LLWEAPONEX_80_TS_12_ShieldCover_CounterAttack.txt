@@ -17,7 +17,7 @@ NRD_HitClearAllDamage(_Handle);
 DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker);
 
 IF
-NRD_OnHit((CHARACTERGUID)_Char, _, _Damage, _Handle)
+NRD_OnHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Attacker, _Damage, _Handle)
 AND
 DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker)
 THEN
