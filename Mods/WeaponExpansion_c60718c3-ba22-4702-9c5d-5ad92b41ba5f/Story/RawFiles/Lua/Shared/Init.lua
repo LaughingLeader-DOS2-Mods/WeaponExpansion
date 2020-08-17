@@ -75,6 +75,8 @@ local defaultExperienceAmounts = {
 	--[5] = {Amount = 0, Required = 36000},
 }
 
+LeaderLib.RegisterLeaveActionPrefix("LLWEAPONEX")
+
 local initHarkenVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Harken.lua")
 local initKorvashVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Korvash.lua")
 
@@ -142,7 +144,7 @@ end
 local function OnInit()
 	LoadExperienceVariables()
 	LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
-    LeaderLib.EnableFeature("ExtraDataSkillParamReplacement")
+    LeaderLib.EnableFeature("ReplaceTooltipPlaceholders")
 	LeaderLib.EnableFeature("TooltipGrammarHelper")
 	LeaderLib.EnableFeature("FixChaosDamageDisplay")
 	LeaderLib.EnableFeature("StatusParamSkillDamage")

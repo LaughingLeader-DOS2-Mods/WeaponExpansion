@@ -142,39 +142,6 @@ local function apply_overrides(stats)
     end
 end
 
---[[ if property == "ExtraProperties" or property == "SkillProperties" then
-	local status, err, propertiesOriginal = xpcall(Ext.StatGetAttribute, function(err) return err; end, statname, property)
-	if propertiesOriginal ~= nil and propertiesOriginal ~= "" then
-		local combined_value = tostring(propertiesOriginal..value)
-		Ext.StatSetAttribute(statname, property, combined_value)
-		next_value = combined_value
-	else
-		Ext.StatSetAttribute(statname, property, next_value)
-	end
-else
-	Ext.StatSetAttribute(statname, property, next_value)
-end ]]
-
-local LLWEAPONEX_PREFIX = "LLWEAPONEX_"
-
-local function OverrideLeaveActionStatuses()
-	-- LeaveAction damage is delayed after its first application, for whatever reason.
-	-- Instead, for WeaponEx statuses, we'll explode it with the extender, but keep LeaveAction in the status for compatibility,
-	-- so other mods can change the projectiles used.
-	local total = 0
-	for i,stat in pairs(Ext.GetStatEntries("StatusData")) do
-		local leaveActionSkill = Ext.StatGetAttribute(stat, "LeaveAction")
-		if not LeaderLib.Common.StringIsNullOrEmpty(leaveActionSkill) and stat:sub(1, #LLWEAPONEX_PREFIX) == LLWEAPONEX_PREFIX then
-			Ext.StatSetAttribute(stat, "LeaveAction", "")
-			LeaveActionData[stat] = leaveActionSkill
-			total = total + 1
-		end
-	end
-	LeaderLib.PrintDebug("[WeaponExpansion:OverrideLeaveActionStatuses] Registered ("..tostring(total)..") statuses to the LeaveActionData table.")
-	LeaderLib.PrintDebug(LeaderLib.Common.Dump(LeaveActionData))
-	LeaderLib.PrintDebug("]")
-end
-
 local function AddRequirement(stat, param, inverse, requirementType)
 	-- ["Param"] = LLWEAPONEX_Katana_Equipped, ["Not"] = false, ["Requirement"] = Tag
 	local requirements = Ext.StatGetAttribute(stat, "Requirements")

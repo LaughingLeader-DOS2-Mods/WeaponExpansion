@@ -94,7 +94,7 @@ local function ProcGreatbowLightningStrike(data)
 	local char = data[1]
 	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
 		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition")
-		GameHelpers.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", x,y,z)
+		GameHelpers.ExplodeProjectile(char, {x,y,z}, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
 	end
 end
 

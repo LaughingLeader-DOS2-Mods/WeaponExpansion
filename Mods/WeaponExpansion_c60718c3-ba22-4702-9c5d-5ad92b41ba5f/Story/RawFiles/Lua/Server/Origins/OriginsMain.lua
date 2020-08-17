@@ -10,10 +10,14 @@ local function SetupOriginSkills(char, skillset)
 		CharacterRemoveSkill(char, "Dome_CircleOfProtection")
 	end
 
-	for i,skill in pairs(Ext.GetSkillSet(skillset)) do
-		if CharacterHasSkill(char, skill) == 0 then
-			CharacterAddSkill(char, skill, 0)
-		end		
+	---@type StatSkillSet
+	local skillSet = Ext.GetSkillSet(skillset)
+	if skillSet ~= nil then
+		for i,skill in pairs(skillSet.Skills) do
+			if CharacterHasSkill(char, skill) == 0 then
+				CharacterAddSkill(char, skill, 0)
+			end		
+		end
 	end
 end
 
@@ -38,7 +42,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
 		Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
 		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
-		CharacterAddSkill(Mercs.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
+		--CharacterAddSkill(Mercs.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
 	end
 	
 	if CharacterIsPlayer(Mercs.Korvash) == 0 then
@@ -48,7 +52,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Mercs.Korvash, "Executioner")
 		LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-		CharacterAddSkill(Mercs.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
+		--CharacterAddSkill(Mercs.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Mercs.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
@@ -207,14 +211,14 @@ LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", ClearOriginS
 ---@param skillData HitData
 LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
-		PersistentVars.SkillData.DarkFireballCount = 0
-		UpdateDarkFireballSkill()
+		PersistentVars.SkillData.DarkFireballCount[char] = 0
+		UpdateDarkFireballSkill(char)
 		SyncVars()
 	end
 end)
 
-function UpdateDarkFireballSkill()
-	local killCount = PersistentVars.SkillData.DarkFireballCount or 0
+function UpdateDarkFireballSkill(char)
+	local killCount = PersistentVars.SkillData.DarkFireballCount[char] or 0
 	if killCount >= 1 then
 		local rangeBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_RangePerCount"] or 1.0
 		local radiusBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount"] or 0.4
@@ -244,6 +248,6 @@ end
 
 Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
 	PersistentVars.SkillData.DarkFireballCount = tonumber(amount)
-	UpdateDarkFireballSkill()
+	UpdateDarkFireballSkill(Mercs.Korvash)
 	SyncVars()
 end)

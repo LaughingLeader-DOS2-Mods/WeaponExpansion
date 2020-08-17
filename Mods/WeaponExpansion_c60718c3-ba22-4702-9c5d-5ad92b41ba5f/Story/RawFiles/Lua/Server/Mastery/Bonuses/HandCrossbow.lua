@@ -49,7 +49,7 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 	elseif state == SKILL_STATE.CAST then
 		local uuid = GetUUID(char)
 		if whirlwindHandCrossbowTargets[uuid] ~= nil then
-			GameHelpers.ExplodeProjectileAtPosition(char, "Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget", GetPosition(char))
+			GameHelpers.ExplodeProjectile(char, char, "Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget")
 		end
 	end
 end)
