@@ -64,11 +64,15 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 		if rangedWeaponTypes[item.Stats.WeaponType] ~= true then
 			ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 			if CheckScoundrelTags(uuid, mainhand) or CheckScoundrelTags(uuid, offhand) then
-				ClearTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-				print("ClearTag LLWEAPONEX_CannotUseScoundrelSkills")
+				if character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
+					ClearTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+					print("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
+				end
 			else
-				SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-				print("SetTag LLWEAPONEX_CannotUseScoundrelSkills")
+				if not character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
+					SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+					print("SetTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
+				end
 			end
 		else
 			SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
@@ -142,7 +146,9 @@ function OnItemEquipped(uuid,itemUUID)
 end
 
 function OnItemTemplateUnEquipped(uuid, item, template)
-	Equipment.CheckWeaponRequirementTags(uuid)
+	if IsPlayer(uuid) then
+		Equipment.CheckWeaponRequirementTags(uuid)
+	end
 end
 
 local rodSkills = {
