@@ -246,6 +246,6 @@ function OnGameStarted(region, editorMode, postReset)
         Ext.BroadcastMessage("LLWEAPONEX_LuaWasReset", "", nil)
     end
 
-    UpdateDarkFireballSkill()
+    UpdateDarkFireballSkill(Mercs.Korvash)
     SyncVars()
 end

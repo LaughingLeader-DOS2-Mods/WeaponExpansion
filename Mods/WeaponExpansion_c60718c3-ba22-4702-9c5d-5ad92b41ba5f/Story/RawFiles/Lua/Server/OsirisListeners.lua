@@ -125,29 +125,38 @@ Ext.RegisterOsirisListener("NRD_OnStatusAttempt", 4, "after", function(target, s
 	end
 end)
 
+local function IncreaseKillCount(char, fromTargetDying)
+	if CharacterHasSkill(char, "Projectile_LLWEAPONEX_DarkFireball") == 1 then
+		local maxCount = Ext.ExtraData["LLWEAPONEX_DarkFireball_MaxKillCount"] or 10
+		local current = PersistentVars.SkillData.DarkFireballCount[char] or 0
+		if current < maxCount then
+			PersistentVars.SkillData.DarkFireballCount[char] = current + 1
+			--Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
+			SyncVars()
+			if PersistentVars.SkillData.DarkFireballCount[char] >= 1 then
+				UpdateDarkFireballSkill(char)
+			end
+		end
+	end
+end
+
 local function OnCharacterDied(char)
 	local id = CombatGetIDForCharacter(char)
 	if id ~= nil then
 		for i,entry in pairs(Osi.DB_CombatCharacters:Get(nil, id)) do
-			if CharacterIsEnemy(char, entry[1]) == 1 then
-				SetTag(entry[1], "LLWEAPONEX_EnemyDiedInCombat")
+			local v = GetUUID(entry[1])
+			if IsPlayer(v) and CharacterIsEnemy(char, v) == 1 then
+				SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
+				IncreaseKillCount(v, char)
 			end
 		end
 	else
 		local x,y,z = GetPosition(char)
 		for i,v in pairs(Ext.GetCharactersAroundPosition(x, y, z, 20.0)) do
-			if CharacterIsEnemy(char, v) == 1 and CharacterIsInCombat(v) == 1 then
-				SetTag(entry[1], "LLWEAPONEX_EnemyDiedInCombat")
+			if IsPlayer(v) and CharacterIsEnemy(char, v) == 1 then
+				SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
+				IncreaseKillCount(v, char)
 			end
-		end
-	end
-
-	if CharacterIsPlayer(Mercs.Korvash) == 1 and CharacterCanSee(Mercs.Korvash, char) == 1 and CharacterIsEnemy(Mercs.Korvash, char) == 1 then
-		PersistentVars.SkillData.DarkFireballCount = math.max(PersistentVars.SkillData.DarkFireballCount + 1, 10)
-		--Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
-		SyncVars()
-		if PersistentVars.SkillData.DarkFireballCount >= 1 then
-			UpdateDarkFireballSkill()
 		end
 	end
 end
