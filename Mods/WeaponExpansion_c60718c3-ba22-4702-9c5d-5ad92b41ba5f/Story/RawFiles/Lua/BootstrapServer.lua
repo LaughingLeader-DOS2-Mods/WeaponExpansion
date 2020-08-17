@@ -1,6 +1,6 @@
 PersistentVars = {
     SkillData = {
-        DarkFireballCount = 0
+        DarkFireballCount = {}
     },
     MasteryMechanics = {},
 }

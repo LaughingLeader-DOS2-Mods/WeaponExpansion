@@ -46,7 +46,7 @@ local function ReplaceScalingText(checkText, character, element, func)
 	return false
 end
 
----@param character EsvCharacter
+---@param character EclCharacter
 ---@param skill string
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)

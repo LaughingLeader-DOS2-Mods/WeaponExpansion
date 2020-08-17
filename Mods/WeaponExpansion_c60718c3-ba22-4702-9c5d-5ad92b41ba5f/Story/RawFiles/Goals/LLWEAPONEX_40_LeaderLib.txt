@@ -55,8 +55,6 @@ PROC
 LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround()
 THEN
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_ExplodeFix", "WeaponExpansion");
-LeaderLib_ToggleScripts_EnableScript("LeaderLib_ExplodeStatusListenerEnabled", "WeaponExpansion");
-LeaderLib_ToggleScripts_EnableScript("LeaderLib_LeaveActionItemFixEnabled", "WeaponExpansion");
 
 PROC
 LLWEAPONEX_LeaderLib_InitHelperSettings()
