@@ -122,10 +122,6 @@ local gameTestTemplates = {
 LeaderLib.RegisterListener("LuaReset", function()
 	print("****************************Resending client UI data.*****************************")
 	InitClientID()
-	if Ext.IsDeveloperMode() and PersistentVars.SkillData.DarkFireballCount == 0 then
-		PersistentVars.SkillData.DarkFireballCount = 5
-		UpdateDarkFireballSkill()
-	end
 	SyncVars()
 end)
 
@@ -166,10 +162,7 @@ end
 local function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
     LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
-
-    PersistentVars.SkillData.DarkFireballCount = 5
-    UpdateDarkFireballSkill()
-
+    
     local host = CharacterGetHostCharacter()
 
     local template = "LOOT_LeaderLib_Ring_Shapeshifter_1892531e-4eeb-42ff-907e-4a7ce2278b3d"
@@ -412,7 +405,8 @@ Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
 	if string.find(projectile.SkillId, "Projectile_EnemyTotem") then
 		local surf = CreateRectSurface(projectile, position)
 		Ext.ExecuteSurfaceAction(surf)
-	end
+    end
+    
 end)
 
 return DebugInit
