@@ -334,7 +334,6 @@ data "ItemColor" "LLWEAPONEX_Runeblade_ChaosEdge"
 data "Flags" "Unbreakable"
 data "ExtraProperties" ""
 
-
 new entry "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 type "Weapon"
 using "_LLWEAPONEX_Firearms_2H"
