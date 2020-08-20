@@ -485,6 +485,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
+		print(Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end
@@ -644,9 +645,9 @@ end
 local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local countMult = 0
 	if Ext.IsClient() then
-		countMult = CLIENT_UI.Vars.SkillData.DarkFireballCount
+		countMult = CLIENT_UI.Vars.SkillData.DarkFireballCount[attacker.MyGuid] or 0
 	else
-		countMult = PersistentVars.SkillData.DarkFireballCount
+		countMult = PersistentVars.SkillData.DarkFireballCount[attacker.MyGuid] or 0
 	end
 	if countMult > 0 then
 		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFireball_DamageBonusPerCount"] or 20.0
