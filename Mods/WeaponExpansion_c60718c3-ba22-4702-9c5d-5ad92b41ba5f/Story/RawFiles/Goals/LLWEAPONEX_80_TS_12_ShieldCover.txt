@@ -10,17 +10,13 @@ DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Target)
 AND
 NOT DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Target)
 AND
-NRD_StatusGetInt(_Target, _Handle, "Dodged", 0)
-AND
-NRD_StatusGetInt(_Target, _Handle, "Missed", 0)
-AND
-NRD_StatusGetInt(_Target, _Handle, "Blocked", 0)
+LeaderLib_Hit_QRY_HitSucceeded(_Target, _Handle, 0)
 AND
 NRD_StatusGetInt(_Target, _Handle, "DamageSourceType", _DamageSourceType)
 AND
 LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/statuses/GM
 THEN
-NRD_ModCall("WeaponExpansion", "LLWEAPONEX_Ext_RedirectDamage", (STRING)_Blocker, (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.5");
+LeaderLib_Hit_RedirectDamage(_Target, _Blocker, _Attacker, _Handle, 0.5, 0);
 EXITSECTION
 
 ENDEXITSECTION
