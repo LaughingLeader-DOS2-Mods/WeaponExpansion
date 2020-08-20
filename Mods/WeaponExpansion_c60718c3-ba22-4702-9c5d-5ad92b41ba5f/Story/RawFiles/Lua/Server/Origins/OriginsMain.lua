@@ -16,7 +16,7 @@ local function SetupOriginSkills(char, skillset)
 		for i,skill in pairs(skillSet.Skills) do
 			if CharacterHasSkill(char, skill) == 0 then
 				CharacterAddSkill(char, skill, 0)
-			end		
+			end
 		end
 	end
 end
@@ -24,15 +24,12 @@ end
 function Origins_InitCharacters(region, isEditorMode)
 	pcall(SetupOriginSkills, Mercs.Harken, "Avatar_LLWEAPONEX_Harken")
 	pcall(SetupOriginSkills, Mercs.Korvash, "Avatar_LLWEAPONEX_Korvash")
+
 	CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
 	CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 
-	if Ext.IsDeveloperMode() then
-		isEditorMode = 1
-	end
-
 	--IsCharacterCreationLevel(region) == 0
-	if CharacterIsPlayer(Mercs.Harken) == 0 then
+	if CharacterIsPlayer(Mercs.Harken) == 0 and ObjectGetFlag(Mercs.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
 		CharacterAddAbility(Mercs.Harken, "WarriorLore", 1)
 		CharacterAddAbility(Mercs.Harken, "TwoHanded", 1)
 		CharacterAddAbility(Mercs.Harken, "Barter", 1)
@@ -42,10 +39,11 @@ function Origins_InitCharacters(region, isEditorMode)
 		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
 		Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
 		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
+		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
 		--CharacterAddSkill(Mercs.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
 	end
 	
-	if CharacterIsPlayer(Mercs.Korvash) == 0 then
+	if CharacterIsPlayer(Mercs.Korvash) == 0 and ObjectGetFlag(Mercs.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
 		CharacterAddAbility(Mercs.Korvash, "WarriorLore", 1)
 		CharacterAddAbility(Mercs.Korvash, "Necromancy", 1)
 		CharacterAddAbility(Mercs.Korvash, "Telekinesis", 1)
@@ -59,6 +57,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
 		Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
 		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
+		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
 	end
 
 	if Ext.IsDeveloperMode() or isEditorMode == 1 then
@@ -66,13 +65,11 @@ function Origins_InitCharacters(region, isEditorMode)
 		local host = GetUUID(CharacterGetHostCharacter())
 		if CharacterIsInPartyWith(host, Mercs.Harken) == 0 then
 			Osi.PROC_GLO_PartyMembers_Add(Mercs.Harken, host)
-			CharacterAddAttributePoint(Mercs.Harken, 2)
 			TeleportTo(Mercs.Harken, host, "", 1, 0, 1)
 			totalAdded = totalAdded + 1
 		end
 		if CharacterIsInPartyWith(host, Mercs.Korvash) == 0 then
 			Osi.PROC_GLO_PartyMembers_Add(Mercs.Korvash, host)
-			CharacterAddAttributePoint(Mercs.Korvash, 2)
 			TeleportTo(Mercs.Korvash, host, "", 1, 0, 1)
 			totalAdded = totalAdded + 1
 		end
