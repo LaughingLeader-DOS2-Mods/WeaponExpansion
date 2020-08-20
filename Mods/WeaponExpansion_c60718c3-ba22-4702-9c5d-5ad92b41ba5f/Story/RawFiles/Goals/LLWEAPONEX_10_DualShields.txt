@@ -282,11 +282,14 @@ LLWEAPONEX_DualShields_EquipCombatShield(_Owner, _Shield, _CombatShield);
 
 PROC
 LLWEAPONEX_DualShields_EquipCombatShield((CHARACTERGUID)_Char, (ITEMGUID)_Shield, (ITEMGUID)_CombatShield)
+AND
+NOT CharacterGetEquippedWeapon(_Char, _CombatShield)
 THEN
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:DualShields:OnDualShieldsEquipped] Equipping combat shield stored in a dual shield.");
 //DB_LLWEAPONEX_DualShields_Temp_ListenForEquipping(_Char, _Shield, _CombatShield);
 ItemToInventory(_CombatShield, _Char, 1, 0, 0);
-LeaderLib_Helper_EquipInSlot(_Char, _CombatShield, "Weapon");
+//LeaderLib_Helper_EquipInSlot(_Char, _CombatShield, "Weapon");
+NRD_CharacterEquipItem(_Char, _CombatShield, "Weapon", 0, 0, 1, 1);
 //CharacterUseItem(_Char, _CombatShield, "LLWEAPONEX_DualShields_CombatShieldEquipped");
 
 /*
@@ -762,7 +765,8 @@ LeaderLib_Timers_CancelCharacterItemTimerForCharacter(_Char, "Timers_LLWEAPONEX_
 SetVarObject(_Shield, "LLWEAPONEX_CombatShield", _CombatShield);
 SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
 //LeaderLib_Timers_StartCharacterItemTimer(_Char, _Shield, 50, "Timers_LLWEAPONEX_LeaderLib_Commands_EquipItem", "LeaderLib_Commands_EquipItem");
-CharacterEquipItem(_Char, _Shield);
+NRD_CharacterEquipItem(_Char, _Shield, "Shield", 0, 0, 1, 1);
+NRD_CharacterEquipItem(_Char, _CombatShield, "Weapon", 0, 0, 1, 1);
 //END_REGION
 /*
 QRY
