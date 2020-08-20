@@ -45,6 +45,7 @@ MasteryBonusManager.RegisterSkillListener({"Cone_GroundSmash","Cone_EnemyGroundS
 		local pos = GameHelpers.Math.GetForwardPosition(char, weaponRange)
 		GameHelpers.ExplodeProjectile(char, pos, "Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake")
 		-- TODO: Swap to a different effect
-		PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", pos)
+		local x,y,z = table.unpack(pos)
+		PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", x,y,z)
 	end
 end)
