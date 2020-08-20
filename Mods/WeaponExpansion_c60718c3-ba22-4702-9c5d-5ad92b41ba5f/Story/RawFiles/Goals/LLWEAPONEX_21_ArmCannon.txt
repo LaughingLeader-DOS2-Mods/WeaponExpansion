@@ -46,25 +46,35 @@ PROC
 LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
 AND
 _Energy > 0
+AND
+GetUUID(_Char, _UUID)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
+NRD_ModCall("LeaderLib", "SetSkillEnabled", _UUID, "Projectile_LLWEAPONEX_ArmCannon_Shoot", "true");
 
 PROC
 LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
 AND
 _Energy >= 3
+AND
+GetUUID(_Char, _UUID)
 THEN
 LeaderLib_Tags_PreserveTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
 LeaderLib_Statuses_ApplyPermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", 1);
+NRD_ModCall("LeaderLib", "SetSkillEnabled", _UUID, "Zone_LLWEAPONEX_ArmCannon_Disperse", "true");
 
 PROC
 LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
 AND
 _Energy <= 0
+AND
+GetUUID(_Char, _UUID)
 THEN
 LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_FullyCharged");
 LeaderLib_Tags_ClearPreservedTag(_Char, "LLWEAPONEX_ArmCannon_EnergyAvailable");
 LeaderLib_Statuses_RemovePermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED");
+NRD_ModCall("LeaderLib", "SetSkillEnabled", _UUID, "Projectile_LLWEAPONEX_ArmCannon_Shoot", "false");
+NRD_ModCall("LeaderLib", "SetSkillEnabled", _UUID, "Zone_LLWEAPONEX_ArmCannon_Disperse", "false");
 
 PROC
 LLWEAPONEX_ArmCannon_OnUnequipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
@@ -181,7 +191,7 @@ AND
 GetVarObject(_ArmCannon, "LLWEAPONEX_ArmCannon_Weapon", (ITEMGUID)_ArmCannonWeapon)
 THEN
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipSuccess(_Char, _ArmCannon);
-CharacterEquipItem(_Char, _ArmCannonWeapon);
+NRD_CharacterEquipItem(_Char, _ArmCannonWeapon, "Weapon", 0, 0, 1, 1);
 ItemLockUnEquip(_ArmCannonWeapon, 1);
 
 PROC
@@ -276,6 +286,13 @@ DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:OnVariableChanged] LLWEAPONEX_ArmCannon_Energy set to ",_LastValue, " => ",_NextValue, "");
 LLWEAPONEX_ArmCannon_SetEnergyTags(_Char, _ArmCannon, _NextValue);
+
+PROC
+LeaderLib_Variables_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
+AND
+GetUUID(_ArmCannon, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "ArmCannon_SyncData", _UUID);
 //END_REGION
 
 //REGION SKILL_USES

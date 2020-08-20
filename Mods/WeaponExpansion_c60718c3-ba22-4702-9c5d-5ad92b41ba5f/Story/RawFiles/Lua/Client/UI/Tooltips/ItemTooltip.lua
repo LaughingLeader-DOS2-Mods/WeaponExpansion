@@ -222,7 +222,7 @@ local EquipmentTypes = {
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
 	---@type EclCharacter
-	local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
+	local character = Ext.GetCharacter(LeaderLib.UI.ClientCharacter)
 	if item ~= nil then
 		local fakeDamageCreated = false
 		if character ~= nil then
@@ -282,6 +282,17 @@ local function OnItemTooltip(item, tooltip)
 			end
 			if item:HasTag("LLWEAPONEX_Rune_Pistol_DamageType") then
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
+			end
+			if item:HasTag("LLWEAPONEX_RunicCannon") then
+				local charges = CLIENT_UI.Vars.RunicCannonCharges[item.MyGuid]
+				if charges ~= nil then
+					local element = {
+						Type = "WandCharges",
+						Label = "<font color='#33FFAA'>Runic Energy</font>",
+						Value = tostring(charges),
+						MaxValue = "3"
+					}
+				end
 			end
 		end
 

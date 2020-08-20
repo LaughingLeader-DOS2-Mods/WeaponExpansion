@@ -131,7 +131,6 @@ local function IncreaseKillCount(char, fromTargetDying)
 		local current = PersistentVars.SkillData.DarkFireballCount[char] or 0
 		if current < maxCount then
 			PersistentVars.SkillData.DarkFireballCount[char] = current + 1
-			--Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
 			SyncVars()
 			if PersistentVars.SkillData.DarkFireballCount[char] >= 1 then
 				UpdateDarkFireballSkill(char)

@@ -1,6 +1,8 @@
+---@class WeaponExpansionVars
 PersistentVars = {
     SkillData = {
-        DarkFireballCount = {}
+        DarkFireballCount = {},
+        RunicCannonCharges = {}
     },
     MasteryMechanics = {},
 }
@@ -11,8 +13,8 @@ Listeners = {
     StatusAttempt = {},
 }
 
-Ext.Require("Shared/Init.lua")
-Ext.Require("Server/Init.lua")
+Ext.Require("Shared/InitShared.lua")
+Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/HitHandler.lua")
 Ext.Require("Server/StatusHandler.lua")
 Ext.Require("Server/BasicAttackHandler.lua")
@@ -33,6 +35,7 @@ Ext.Require("Server/Skills/PrepareEffects.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")
 Ext.Require("Server/Skills/SkillListeners.lua")
 Ext.Require("Server/TagHelpers.lua")
+Ext.Require("Server/Items/ArmCannon.lua")
 Ext.Require("Server/Items/ItemHandler.lua")
 Ext.Require("Server/Items/UniqueItems.lua")
 Ext.Require("Server/Items/CraftingMechanics.lua")

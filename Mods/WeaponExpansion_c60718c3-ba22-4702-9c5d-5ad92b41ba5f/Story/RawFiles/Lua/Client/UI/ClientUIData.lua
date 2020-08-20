@@ -8,6 +8,7 @@ CLIENT_UI = {
 	LAST_STATUS_CHARACTER = nil,
 	LAST_STATUS = nil,
 	IsInCharacterCreation = false,
+	---@type WeaponExpansionVars
 	Vars = {}
 }
 
