@@ -44,7 +44,7 @@ local function MasteryLeveledUp(uuid,mastery,last,next)
 		Equipment.CheckWeaponRequirementTags(uuid)
 	end
 
-	LeaderLib.PrintDebug("[WeaponExpansion] Mastery ["..mastery.."] leveled up ("..tostring(last).." => "..tostring(last)..") on ["..uuid.."]")
+	LeaderLib.PrintDebug(string.format("[WeaponExpansion] Mastery [%s] leveled up (%i => %i) on [%s]", mastery, last, next, uuid))
 end
 
 --- Adds mastery experience a specific masteries.
