@@ -9,6 +9,8 @@ NRD_OnPrepareHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Attacker,_, _Handle)
 AND
 DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
 AND
+_Char != _Blocker
+AND
 NRD_HitGetInt(_Handle, "HitType", _Val)
 AND
 _Val <=3 // Everything but Surface,DoT,Reflected
