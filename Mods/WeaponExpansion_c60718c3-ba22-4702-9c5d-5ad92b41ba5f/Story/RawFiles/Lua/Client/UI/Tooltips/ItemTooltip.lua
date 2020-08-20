@@ -61,8 +61,8 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 		element = {
 			Type = "WeaponDamage",
 			Label = LocalizedText.DamageTypeNames[damageType].Text.Value,
-			MinDamage = data[1],
-			MaxDamage = data[2],
+			MinDamage = data.Min or data[1],
+			MaxDamage = data.Max or data[2],
 			DamageType = LeaderLib.Data.DamageTypeEnums[damageType],
 		}
 		tooltip:AppendElement(element)
@@ -113,8 +113,6 @@ local WeaponTypeNames = {
 	{Tag="LLWEAPONEX_Rod", Text=TranslatedString:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
 	--{Tag="LLWEAPONEX_Bludgeon", Text=TranslatedString:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
 }
-
-local AutoLevelingDescription = TranslatedString:Create("hca27994egc60eg495dg8146g7f81c970e265", "<font color='#80FFC3'>Automatically levels up with the user, gaining new bonuses at various levels.</font>")
 
 ---@class StatProperty
 ---@field Type string Status|Action
@@ -284,17 +282,6 @@ local function OnItemTooltip(item, tooltip)
 			end
 			if item:HasTag("LLWEAPONEX_Rune_Pistol_DamageType") then
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
-			end
-		end
-
-		if item:HasTag("LeaderLib_AutoLevel") then
-			local element = tooltip:GetElement("ItemDescription")
-			if element ~= nil and not string.find(element.Label, "Automatically levels up") then
-				if not StringHelpers.IsNullOrEmpty(element.Label) then
-					element.Label = element.Label .. "<br>" .. AutoLevelingDescription.Value
-				else
-					element.Label = AutoLevelingDescription.Value
-				end
 			end
 		end
 
