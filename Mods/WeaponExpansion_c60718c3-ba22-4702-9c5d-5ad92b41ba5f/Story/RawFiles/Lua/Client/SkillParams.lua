@@ -145,8 +145,8 @@ local function GetDamageParamResult(param_func, skill, character, isFromItem)
 				local damageTexts = {}
 				local totalDamageTypes = 0
 				for damageType,damage in pairs(damageRange) do
-					local min = damage[1]
-					local max = damage[2]
+					local min = damage.Min or damage[1]
+					local max = damage.Max or damage[2]
 					if min == nil then min = 0 end
 					if max == nil then max = 0 end
 		
