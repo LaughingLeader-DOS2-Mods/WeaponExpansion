@@ -27,10 +27,12 @@ end)
 
 Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profileId)
 	local character = GetCurrentCharacter(id)
-	if Vars.isInCharacterCreation then
-		Ext.PostMessageToClient(character, "LLWEAPONEX_OnCharacterCreationStarted", "")
+	if character ~= nil then
+		if Vars.isInCharacterCreation then
+			Ext.PostMessageToClient(character, "LLWEAPONEX_OnCharacterCreationStarted", "")
+		end
+		Ext.PostMessageToUser(id, "LLWEAPONEX_SetActiveCharacter", GetUUID(character))
 	end
-	Ext.PostMessageToUser(id, "LLWEAPONEX_SetActiveCharacter", GetUUID(character))
 end)
 
 ---@param target string

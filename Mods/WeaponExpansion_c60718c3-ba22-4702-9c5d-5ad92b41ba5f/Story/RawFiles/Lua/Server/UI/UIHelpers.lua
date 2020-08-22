@@ -12,7 +12,7 @@ local function SendUserCharacters(id)
 		end
 	end
 	local partyData = MessageData:CreateFromTable("PartyData", party)
-	Ext.PostMessageToClient(client, "LLWEAPONEX_SetUserCharacters", partyData:ToString())
+	Ext.PostMessageToUser(id, "LLWEAPONEX_SetUserCharacters", partyData:ToString())
 end
 
 local function RequestUserCharacters(call,id_str,callbackID)
@@ -27,20 +27,27 @@ end
 Ext.RegisterNetListener("LLWEAPONEX_RequestUserCharacters", RequestUserCharacters)
 
 function SendClientID(uuid, id)
-	LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SetActiveCharacter", GetUUID(uuid))
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_SendClientUserID", id)
+	if Ext.GetGameState() == "Running" then
+		LeaderLib.PrintDebug("[WeaponExpansion:SendClientID] Setting client ID for ("..uuid..") to ["..id.."]")
+		Ext.PostMessageToUser(id, "LLWEAPONEX_SetActiveCharacter", GetUUID(uuid))
+		Ext.PostMessageToUser(id, "LLWEAPONEX_SendClientUserID", id)
+	end
 end
 
 function InitClientID()
-	local sentIDs = {}
-	for i,player in ipairs(Osi.DB_IsPlayer:Get(nil)) do
-		local uuid = player[1]
-		local id = CharacterGetReservedUserID(uuid)
-		if not sentIDs[id] then
-			SendClientID(uuid, id)
-			sentIDs[id] = true
+	if Ext.GetGameState() == "Running" then
+		local sentIDs = {}
+		for i,player in ipairs(Osi.DB_IsPlayer:Get(nil)) do
+			local uuid = player[1]
+			local id = CharacterGetReservedUserID(uuid)
+			if not sentIDs[id] then
+				SendClientID(uuid, id)
+				sentIDs[id] = true
+			end
 		end
+	else
+		TimerCancel("Timers_LLWEAPONEX_InitClientID")
+		TimerLaunch("Timers_LLWEAPONEX_InitClientID", 500)
 	end
 end
 
@@ -81,5 +88,10 @@ end
 
 function SyncVars()
 	--Ext.PostMessageToClient(Mercs.Korvash, "LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars))
-	Ext.BroadcastMessage("LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars), nil)
+	if Ext.GetGameState() == "Running" then
+		Ext.BroadcastMessage("LLWEAPONEX_SyncVars", Ext.JsonStringify(PersistentVars), nil)
+	else
+		TimerCancel("Timers_LLWEAPONEX_SyncVars")
+		TimerLaunch("Timers_LLWEAPONEX_SyncVars", 500)
+	end
 end

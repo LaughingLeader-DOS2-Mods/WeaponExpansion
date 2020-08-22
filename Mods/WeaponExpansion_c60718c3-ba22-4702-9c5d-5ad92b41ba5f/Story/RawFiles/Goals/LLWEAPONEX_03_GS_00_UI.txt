@@ -35,6 +35,16 @@ THEN
 IterateUsers("LLWEAPONEX_SendClientID");
 
 IF
+TimerFinished("Timers_LLWEAPONEX_InitClientID")
+THEN
+NRD_ModCall("WeaponExpansion", "InitClientID");
+
+IF
+TimerFinished("Timers_LLWEAPONEX_SyncVars")
+THEN
+NRD_ModCall("WeaponExpansion", "SyncVars");
+
+IF
 TimerFinished("Timers_LeaderLib_Debug_LuaReset")
 AND
 DB_CurrentLevel(_Region)
