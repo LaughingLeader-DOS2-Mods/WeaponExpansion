@@ -60,19 +60,10 @@ THEN
 LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Char);
 //END_REGION
 
-//REGION RUSH_SKILL
-IF
-SkillCast(_Char, _Skill, "rush", _SkillElement)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
-THEN
-NRD_ModCall("WeaponExpansion", "OnRushSkillCast", (STRING)_Char, _Skill, _SkillElement);
-
 IF
 StoryEvent(_Char, "LLWEAPONEX_ApplyHasted")
 THEN
 ApplyStatus(_Char, "HASTED", 6.0, 0, _Char);
-//END_REGION
 
 EXITSECTION
 LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries();

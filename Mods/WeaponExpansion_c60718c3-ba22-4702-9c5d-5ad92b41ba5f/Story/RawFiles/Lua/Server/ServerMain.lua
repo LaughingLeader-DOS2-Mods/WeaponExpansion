@@ -151,7 +151,7 @@ function RedirectDamage(blocker, target, attacker, handlestr, reduction_str)
         local redirected_hit = NRD_HitPrepare(blocker, attacker)
         local damageRedirected = false
 
-        for k,v in pairs(_G["LeaderLib"].Data["DamageTypes"]) do
+        for _,v in Data.DamageTypes:Get() do
             local damage = NRD_HitStatusGetDamage(target, handle, v)
             if damage ~= nil and damage > 0 then
                 local reduced_damage = math.max(math.ceil(damage * reduction), 1)

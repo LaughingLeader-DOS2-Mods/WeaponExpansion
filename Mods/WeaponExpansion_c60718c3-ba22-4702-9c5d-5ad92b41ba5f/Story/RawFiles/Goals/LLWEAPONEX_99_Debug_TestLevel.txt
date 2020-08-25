@@ -57,7 +57,6 @@ DB_LLWEAPONEX_Debug_StatusClear("DRUNK");
 //LeaderLib_ToggleScripts_EnableScript("LeaderLib_Debug_Tracing_Hit", "WeaponExpansion");
 
 KBSECTION
-
 IF
 CharacterStatusRemoved(CHARACTERGUID_Humans_Male_RedFaction_Brute_001_f2e09090-0eb8-4d24-bf8c-32ca42cb42f3, "ENRAGED", _)
 THEN
@@ -1342,6 +1341,7 @@ THEN
 LeaderLog_LogInt("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterReceivedDamage] [",_Percentage, _Suffix);
 SetStoryEvent(_Target, "LLWEAPONEX_Debug_CheckDamageType");
 
+/*
 IF
 CharacterPhysicalHitBy(_Target, _Owner, _Attacker)
 AND
@@ -1367,6 +1367,7 @@ AND
 String(_Owner, _OwnerName)
 THEN
 LeaderLog_Log("DEBUG_EVENTS", "[WeaponExpansion:Debug:CharacterPhysicalHitBy] Attack of Opportunity! [",_Name,"](",_OwnerName,") attacked [",_TargetStr,"].");
+*/
 //END_REGION
 
 //REGION STATUSES
