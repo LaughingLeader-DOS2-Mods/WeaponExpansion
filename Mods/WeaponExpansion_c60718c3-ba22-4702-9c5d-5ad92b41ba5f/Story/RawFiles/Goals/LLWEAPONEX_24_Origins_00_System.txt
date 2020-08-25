@@ -15,6 +15,12 @@ DB_LLWEAPONEX_CampaignRegions("Campaign", "CoS_Main", 4);
 DB_LLWEAPONEX_CampaignRegions("Campaign", "Arx_Main", 5);
 DB_LLWEAPONEX_CampaignRegions("Campaign", "Arx_Endgame", 6);
 
+IF
+StoryEvent(_Char, "LLWEAPONEX_FixSkillbar")
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "Origins_FixSkillBar", _UUID);
 EXITSECTION
 
 ENDEXITSECTION

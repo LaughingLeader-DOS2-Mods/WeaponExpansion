@@ -60,24 +60,26 @@ function Origins_InitCharacters(region, isEditorMode)
 		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
 	end
 
-	if Ext.IsDeveloperMode() or isEditorMode == 1 then
-		local totalAdded = 0
-		local host = GetUUID(CharacterGetHostCharacter())
-		if CharacterIsInPartyWith(host, Mercs.Harken) == 0 then
-			Osi.PROC_GLO_PartyMembers_Add(Mercs.Harken, host)
-			TeleportTo(Mercs.Harken, host, "", 1, 0, 1)
-			totalAdded = totalAdded + 1
-		end
-		if CharacterIsInPartyWith(host, Mercs.Korvash) == 0 then
-			Osi.PROC_GLO_PartyMembers_Add(Mercs.Korvash, host)
-			TeleportTo(Mercs.Korvash, host, "", 1, 0, 1)
-			totalAdded = totalAdded + 1
-		end
-		local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
-		if frozenCount ~= nil and #frozenCount > 0 then
-			local count = frozenCount[1][2]
-			Osi.DB_GlobalCounter:Delete("FTJ_PlayersWokenUp", count)
-			Osi.DB_GlobalCounter("FTJ_PlayersWokenUp", count + totalAdded)
+	if Ext.IsDeveloperMode() or isEditorMode == 1 then		
+		local host = CharacterGetHostCharacter()
+		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
+			local totalAdded = 0
+			if CharacterIsInPartyWith(host, Mercs.Harken) == 0 then
+				Osi.PROC_GLO_PartyMembers_Add(Mercs.Harken, host)
+				TeleportTo(Mercs.Harken, host, "", 1, 0, 1)
+				totalAdded = totalAdded + 1
+			end
+			if CharacterIsInPartyWith(host, Mercs.Korvash) == 0 then
+				Osi.PROC_GLO_PartyMembers_Add(Mercs.Korvash, host)
+				TeleportTo(Mercs.Korvash, host, "", 1, 0, 1)
+				totalAdded = totalAdded + 1
+			end
+			local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
+			if frozenCount ~= nil and #frozenCount > 0 then
+				local count = frozenCount[1][2]
+				Osi.DB_GlobalCounter:Delete("FTJ_PlayersWokenUp", count)
+				Osi.DB_GlobalCounter("FTJ_PlayersWokenUp", count + totalAdded)
+			end
 		end
 	end
 end
@@ -97,59 +99,63 @@ local ignoredSkillsForFixing = {
 	Shout_LeaderLib_OpenModMenu = true,
 }
 
+function Origins_FixSkillBar(uuid)
+	local slotEntries = {}
+	for i=0,28,1 do
+		local slot = NRD_SkillBarGetItem(uuid, i)
+		if not StringHelpers.IsNullOrEmpty(slot) then
+			NRD_SkillBarClear(uuid, i)
+			--slotEntries[i] = slot
+		else
+			slot = NRD_SkillBarGetSkill(uuid, i)
+			if not StringHelpers.IsNullOrEmpty(slot) and ignoredSkillsForFixing[slot] ~= true then
+				NRD_SkillBarClear(uuid, i)
+				table.insert(slotEntries, slot)
+			end
+		end
+	end
+	table.sort(slotEntries, function(a,b)
+		local val1 = 0
+		local val2 = 0
+
+		local ma1 = Ext.StatGetAttribute(a, "Magic Cost")
+		if ma1 > 0 then
+			val1 = 9
+		elseif Ext.StatGetAttribute(a, "ForGameMaster") == "No" then
+			val1 = 6
+		else
+			val1 = tierValue[Ext.StatGetAttribute(a, "Tier")] or -1
+		end
+
+		local ma2 = Ext.StatGetAttribute(b, "Magic Cost")
+		if ma2 > 0 then
+			val2 = 9
+		elseif Ext.StatGetAttribute(b, "ForGameMaster") == "No" then
+			val2 = 6
+		else
+			val2 = tierValue[Ext.StatGetAttribute(b, "Tier")] or -1
+		end
+
+		return val1 < val2
+	end)
+
+	local slotNum = 0
+	for i,v in pairs(slotEntries) do
+		print(slotNum, v, uuid)
+		NRD_SkillBarSetSkill(uuid, slotNum, v)
+		slotNum = slotNum + 1
+	end
+	-- local slot = 0
+	-- for i,skill in pairs(Ext.GetCharacter(uuid):GetSkills()) do
+	-- 	NRD_SkillBarSetSkill(uuid, slot, skill)
+	-- 	slot = slot + 1
+	-- end
+end
+
 Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMember)
 	if ObjectGetFlag(partyMember, "LLWEAPONEX_FixSkillBar") == 1 then
 		ObjectClearFlag(partyMember, "LLWEAPONEX_FixSkillBar", 0)
-		local slotEntries = {}
-		for i=0,28,1 do
-			local slot = NRD_SkillBarGetItem(partyMember, i)
-			if not StringHelpers.IsNullOrEmpty(slot) then
-				NRD_SkillBarClear(partyMember, i)
-				--slotEntries[i] = slot
-			else
-				slot = NRD_SkillBarGetSkill(partyMember, i)
-				if not StringHelpers.IsNullOrEmpty(slot) and ignoredSkillsForFixing[slot] ~= true then
-					NRD_SkillBarClear(partyMember, i)
-					table.insert(slotEntries, slot)
-				end
-			end
-		end
-		table.sort(slotEntries, function(a,b)
-			local val1 = 0
-			local val2 = 0
-
-			local ma1 = Ext.StatGetAttribute(a, "Magic Cost")
-			if ma1 > 0 then
-				val1 = 9
-			elseif Ext.StatGetAttribute(a, "ForGameMaster") == "No" then
-				val1 = 6
-			else
-				val1 = tierValue[Ext.StatGetAttribute(a, "Tier")] or -1
-			end
-
-			local ma2 = Ext.StatGetAttribute(b, "Magic Cost")
-			if ma2 > 0 then
-				val2 = 9
-			elseif Ext.StatGetAttribute(b, "ForGameMaster") == "No" then
-				val2 = 6
-			else
-				val2 = tierValue[Ext.StatGetAttribute(b, "Tier")] or -1
-			end
-
-			return val1 < val2
-		end)
-
-		local slotNum = 0
-		for i,v in pairs(slotEntries) do
-			print(slotNum, v, partyMember)
-			NRD_SkillBarSetSkill(partyMember, slotNum, v)
-			slotNum = slotNum + 1
-		end
-		-- local slot = 0
-		-- for i,skill in pairs(Ext.GetCharacter(partyMember):GetSkills()) do
-		-- 	NRD_SkillBarSetSkill(partyMember, slot, skill)
-		-- 	slot = slot + 1
-		-- end
+		Osi.LeaderLib_Timers_StartObjectTimer(partyMember, 500, "Timers_LLWEAPONEX_FixSkillbar", "LLWEAPONEX_FixSkillbar")
 	end
 end)
 
