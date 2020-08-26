@@ -9,8 +9,7 @@ Banner	1	Encourage	Fear, Madness, and Sleep are cleansed from encouraged allies.
 Banner	1	Battering Ram/Bull Rush	If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.	√	❌
 Banner	2	Rallying Cry	Physical Armor is restored as well.	√	❌
 Banner	2	Guardian Angel	If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.	√	❌
-Banner	3	Thick of the Fight	Half of the damage boost is transferred to nearby allies for 1 turn.	❌	❌
-Banner	4	Whirlwind	If near an active banner, enemies hit are drawn in closer to to the banner.	√	❌
+Banner	3	Whirlwind	If near an active banner, enemies hit are drawn in closer to to the banner.	√	❌
 Banner	4	Overpower	Damage is increased by 25% per ally within 6m.	√	❌
 Battle Book	1	Basic Attack	Basic attacks and weapon skills have a 25% chance to give the target a Concussion, lowering Wits with a small chance to Fumble basic attacks.	√	❌
 Battle Book	1	First Aid	Rested's duration is increased by 1 turn.	❌	❌

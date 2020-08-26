@@ -1,0 +1,105 @@
+Mastery	Rank	Skill/Status/Name	Bonus	Implemented	Tested
+Axe	1	Executioner	Axes now deal 25% more damage to Knocked Down targets.	√	❌
+Axe	2	Savage	Attack of opportunities gain 50% bonus damage proportional to the target's missing vitality.	√	❌
+Axe	4	Stalker	Axes can now be used with Scoundrel skills.	√	❌
+Banner	3	Inspiring Leadership	If affected by Leadership, allies have a 30%(50%) chance to become Inspired on their turn.	❌	❌
+Banner	4	Banner Protection	When near a placed banner, you cannot be flanked. Delaying your turn grants you 50% damage reduction. 	√	❌
+Battle Book	1	Placeholder	Desc	√	❌
+Battle Book	1	Placeholder	Desc	❌	❌
+Battle Book	2	Placeholder	Desc	❌	❌
+Battle Book	2	Placeholder	Desc	❌	❌
+Battle Book	3	Placeholder	Desc	❌	❌
+Battle Book	3	Placeholder	Desc	❌	❌
+Battle Book	4	Placeholder	Desc	❌	❌
+Bludgeon	1	Placeholder	Desc	❌	❌
+Bludgeon	2	Placeholder	Desc	√	❌
+Bludgeon	3	Placeholder	Desc	❌	❌
+Bludgeon	4	Placeholder	Desc	❌	❌
+Bow	1	Placeholder	Desc	❌	❌
+Bow	2	Placeholder	Desc	❌	❌
+Bow	3	Placeholder	Desc	❌	❌
+Bow	4	Placeholder	Desc	❌	❌
+Crossbow	1	Placeholder	Desc	❌	❌
+Crossbow	2	Placeholder	Desc	❌	❌
+Crossbow	3	Placeholder	Desc	❌	❌
+Crossbow	4	Placeholder	Desc	❌	❌
+Dagger	1	Placeholder	Desc	√	❌
+Dagger	2	Placeholder	Desc	❌	❌
+Dagger	2	Placeholder	Desc	❌	❌
+Dagger	3	Placeholder	Desc	❌	❌
+Dagger	3	Placeholder	Desc	❌	❌
+Dagger	4	Placeholder	Desc	❌	❌
+Dagger	4	Placeholder	Desc	❌	❌
+Dual Shields	1	Placeholder	Desc	❌	❌
+Dual Shields	2	Placeholder	Desc	❌	❌
+Dual Shields	3	Placeholder	Desc	❌	❌
+Dual Shields	4	Placeholder	Desc	❌	❌
+Firearm	1	Placeholder	Desc	❌	❌
+Firearm	2	Placeholder	Desc	❌	❌
+Firearm	3	Placeholder	Desc	❌	❌
+Firearm	4	Placeholder	Desc	❌	❌
+Greatbow	1	Placeholder	Desc	❌	❌
+Greatbow	2	Placeholder	Desc	❌	❌
+Greatbow	3	Placeholder	Desc	❌	❌
+Greatbow	4	Placeholder	Desc	❌	❌
+Hand Crossbow	1	Placeholder	Desc	√	❌
+Hand Crossbow	1	Placeholder	Desc	√	❌
+Hand Crossbow	2	Placeholder	Desc	√	❌
+Hand Crossbow	3	Placeholder	Desc	❌	❌
+Hand Crossbow	4	Placeholder	Desc	❌	❌
+Katana	1	Placeholder	Desc	❌	❌
+Katana	2	Placeholder	Desc	❌	❌
+Katana	3	Placeholder	Desc	❌	❌
+Katana	4	Placeholder	Desc	❌	❌
+Pistol	1	Placeholder	Desc	√	❌
+Pistol	1	Placeholder	Desc	√	❌
+Pistol	2	Placeholder	Desc	√	❌
+Pistol	3	Placeholder	Desc	❌	❌
+Pistol	4	Placeholder	Desc	❌	❌
+Polearm	1	Placeholder	Desc	❌	❌
+Polearm	2	Placeholder	Desc	❌	❌
+Polearm	3	Placeholder	Desc	❌	❌
+Polearm	4	Placeholder	Desc	❌	❌
+Quarterstaff	1	Placeholder	Desc	❌	❌
+Quarterstaff	2	Placeholder	Desc	❌	❌
+Quarterstaff	3	Placeholder	Desc	❌	❌
+Quarterstaff	4	Placeholder	Desc	❌	❌
+Rapier	1	Placeholder	Desc	√	❌
+Rapier	2	Placeholder	Desc	❌	❌
+Rapier	3	Placeholder	Desc	❌	❌
+Rapier	4	Placeholder	Desc	❌	❌
+Runeblade	1	Placeholder	Desc	❌	❌
+Runeblade	2	Placeholder	Desc	❌	❌
+Runeblade	3	Placeholder	Desc	❌	❌
+Runeblade	4	Placeholder	Desc	❌	❌
+Scythe	1	Placeholder	Desc	√	❌
+Scythe	2	Placeholder	Desc	❌	❌
+Scythe	3	Placeholder	Desc	❌	❌
+Scythe	4	Placeholder	Desc	❌	❌
+Shield	1	Placeholder	Desc	√	❌
+Shield	2	Placeholder	Desc	❌	❌
+Shield	3	Placeholder	Desc	❌	❌
+Shield	4	Placeholder	Desc	❌	❌
+Staff	1	Placeholder	Desc	√	❌
+Staff	2	Placeholder	Desc	❌	❌
+Staff	2	Placeholder	Desc	❌	❌
+Staff	3	Placeholder	Desc	❌	❌
+Staff	4	Placeholder	Desc	❌	❌
+Sword	1	Placeholder	Desc	❌	❌
+Sword	2	Placeholder	Desc	❌	❌
+Sword	3	Placeholder	Desc	❌	❌
+Sword	4	Placeholder	Desc	❌	❌
+Throwing	1	Placeholder	Desc	❌	❌
+Throwing	2	Placeholder	Desc	❌	❌
+Throwing	3	Placeholder	Desc	❌	❌
+Throwing	4	Placeholder	Desc	❌	❌
+Unarmed	1	Placeholder	Desc	√	❌
+Unarmed	1	Placeholder	Desc	√	❌
+Unarmed	2	Placeholder	Desc	√	❌
+Unarmed	3	Placeholder	Desc	√	❌
+Unarmed	4	Placeholder	Desc	√	❌
+Wand	1	Placeholder	Desc	√	❌
+Wand	1	Placeholder	Desc	√	❌
+Wand	2	Placeholder	Desc	❌	❌
+Wand	3	Placeholder	Desc	❌	❌
+Wand	4	Placeholder	Desc	❌	❌

@@ -15,7 +15,7 @@ local warChargeStatuses = {
 local rushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
 
 ---@param hitData HitData
-MasteryBonusManager.RegisterSkillListener(rushSkills, {"WAR_CHARGE_RUSH"}, function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener(rushSkills, {"BANNER_WARCHARGE"}, function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.CAST then
 		local hasStatus = false
 		for i,status in pairs(warChargeStatuses) do
@@ -100,16 +100,51 @@ Ext.RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
 end)
 
 Ext.RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
+	char = StringHelpers.GetUUID(char)
 	if HasActiveStatus(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION") == 1 then
 		RemoveStatus(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION")
 	end
 	if PersistentVars.MasteryMechanics.GuardianAngelResurrect ~= nil and #PersistentVars.MasteryMechanics.GuardianAngelResurrect > 0 then
 		for deadChar,v in pairs(PersistentVars.MasteryMechanics.GuardianAngelResurrect) do
-			if v == GetUUID(char) then
+			if v == char then
 				if CharacterIsDead(deadChar) == 1 then
 					CharacterResurrect(deadChar)
 				else
 					PersistentVars.MasteryMechanics.GuardianAngelResurrect[deadChar] = nil
+				end
+			end
+		end
+	end
+	if HasActiveStatus(char, "LEADERSHIP") == 1 and IsPlayer(char) then
+		local status = Ext.GetCharacter(char):GetStatus("LEADERSHIP")
+		if status ~= nil then
+			local bonusChance = 0
+			local bonusSource = nil
+
+			local source = Ext.GetCharacter(status.StatusSourceHandle)
+			if source ~= nil then
+				if MasteryBonusManager.HasMasteryBonuses(source, "BANNER_LEADERSHIP") then
+					bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2"] or 25.0)
+					bonusSource = source.MyGuid
+				end
+			end
+
+			if bonusChance == 0 then
+				local combatid = CombatGetIDForCharacter(char)
+				for i,entry in pairs(Osi.DB_CombatCharacters:Get(nil, combatid)) do
+					local v = GetUUID(entry[1])
+					if v ~= char and CharacterIsInPartyWith(v, char) == 1 then
+						if MasteryBonusManager.HasMasteryBonuses(source, "BANNER_LEADERSHIP") then
+							bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance"] or 25.0)
+							bonusSource = v
+						end
+					end
+				end
+			end
+
+			if bonusChance > 0 then
+				if Ext.Round(1,100) <= bonusChance then
+					ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS", 6.0, 0, bonusSource)
 				end
 			end
 		end

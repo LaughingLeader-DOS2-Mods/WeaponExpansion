@@ -111,5 +111,5 @@ LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith	hd53002a9g6a71g4350gb
 LLWEAPONEX_CHAIN_LIGHTNING_WEAK_DisplayName	Surging Shock	h056235e1ge01eg4caagb551g39f2eea4c3d8
 LLWEAPONEX_CHAIN_LIGHTNING_WEAK_Description	Bonus damage with a [1]% chance<br>to fork [2] time(s).	h25bbf6e6g536dg4dd0gb01egf760da3d4f84
 LLWEAPONEX_CURSED_Description	Character is inflicted with a curse, and will spread the curse in a [1] radius when dead.	h8b5ec746gb51eg4838gbec4g8562c30aa6e0
-LLWEAPONEX_BANNER_TURNDELAYPROTECTION_DisplayName	Banner Protection	h22660e99g8542g4966gb446g0caff46a2daf
-LLWEAPONEX_BANNER_TURNDELAYPROTECTION_Description	Character is taking reduced damage until their next turn.	hf969c08agb2ffg41adgaa24gcd006e8e92c0
+LLWEAPONEX_BLOOD_EMPOWERED_DisplayName	Empowered by Blood	h66bfffc1ga29cg4658g9b1cgad4e60f5b097
+LLWEAPONEX_BLOOD_EMPOWERED_Description	Character is empowered through an ally's Flesh Sacrifice.	h3fb6e3f1g6fdcg4cfdg9761g6b8048ee5943

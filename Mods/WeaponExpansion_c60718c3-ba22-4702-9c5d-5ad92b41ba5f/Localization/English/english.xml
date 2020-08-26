@@ -229,7 +229,7 @@
 	<content contentuid="h1a427f46gffe1g479eg802dgc6fec0a14659">Arm-Mounted Crossbow</content>
 	<content contentuid="h1a441201gce6cg4239gae64g4ae486710219">Omnislash</content>
 	<content contentuid="h1a450a28g4751g4868gbe5eg31670563cafb">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery V&lt;/font&gt;</content>
-	<content contentuid="h1a4fa3b9g93d9g4f09g98fbg18f92aec103c">&lt;icon id=&apos;Shout_Whirlwind;Dome_LLWEAPONEX_Banner_Rally_DivineOrder;Dome_LLWEAPONEX_Banner_Rally_Dwarves&apos; icon=&apos;Skill_Warior_WhirlWind;LLWEAPONEX_Skills_Banner_Rally_DivineOrder;LLWEAPONEX_Skills_Banner_Rally_Dwarves&apos;/&gt;If near an active banner, enemies hit by [Key:Shout_Whirlwind] are pulled towards the banner. </content>
+	<content contentuid="h1a4fa3b9g93d9g4f09g98fbg18f92aec103c">&lt;icon id=&apos;Shout_Whirlwind;Dome_LLWEAPONEX_Banner_Rally_DivineOrder;Dome_LLWEAPONEX_Banner_Rally_Dwarves&apos; icon=&apos;Skill_Warior_WhirlWind;LLWEAPONEX_Skills_Banner_Rally_DivineOrder;LLWEAPONEX_Skills_Banner_Rally_Dwarves&apos;/&gt;If near an active banner, enemies hit by [Key:Shout_Whirlwind] are pulled towards the banner.&lt;br&gt;&lt;icon id=&apos;LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS&apos; icon=&apos;LeaderLib_Placeholder&apos; type=&apos;2&apos;/&gt;[Key:LLWEAPONEX_MB_Banner_Leadership] </content>
 	<content contentuid="h1a5648acg3ea5g4b14gb96age9840a69f268">&lt;font color=&apos;#FF0000&apos;&gt;An empty hand is required!&lt;/font&gt;</content>
 	<content contentuid="h1a87d2a2g15c6g42dbg8811gb15a27da32c5">A big paddle.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h1a9b3453gfd69g4790g8d60gcf5707b57881">Beginner</content>
@@ -942,6 +942,7 @@
 	<content contentuid="h66bfffc1ga29cg4658g9b1cgad4e60f5b097">Empowered by Blood</content>
 	<content contentuid="h66e019e3g7dd3g41fdg9880gd479a73bf7ba">Character is taking [1] from a flying body.</content>
 	<content contentuid="h66ea9bb3g8724g4001gb9acgccf4a5696829">Rallying</content>
+	<content contentuid="h66ed93b8geecfg48aeg8bbcgbdc584475c99">Character is inspired by Leadership in the presence of a banner.</content>
 	<content contentuid="h66fd8c59g8a4dg44a2gaafeg71d0a80db595">Air Weakness</content>
 	<content contentuid="h670d368ag009fg4991gb535ge3720fb99f2f">Swap between two-handed and single-handed styles with the &lt;font color=&apos;#c5a</content>
 	<content contentuid="h673b26f0g9e0ag45d3g857fg353aa68f1086">*[WANDS] Click on the button labeled &apos;Wands&apos;.*</content>
@@ -1238,6 +1239,7 @@
 	<content contentuid="h86e68aebgdd6eg436fg98c8gc34e0a5d0516">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Basic attacks now lower the target&apos;s resistance to your wand&apos;s element by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).&lt;icon id=&apos;Shout_FleshSacrifice&apos; icon=&apos;Skill_Decay_FleshSacrifice&apos;/&gt;Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus.</content>
 	<content contentuid="h86fdba0bgd3afg43e9gbd3fgcb70e445bff3">Forest&apos;s Wall, Seeker&apos;s Spurn</content>
 	<content contentuid="h872b22a6ga3b3g409ag8921g26eb2af4a0c5">Blademaster&apos;s Strike Target</content>
+	<content contentuid="h87871f97gb8c0g4df4g8920g157e54180e46">Inspiration</content>
 	<content contentuid="h878ac150g627eg4f82ga7cegbe7f49f2f606">Expert Thrower</content>
 	<content contentuid="h87b9fc5dge459g4c59ga578g623077a09ac6">Weapon Mastery Menu</content>
 	<content contentuid="h87ce0decg2b41g4200gbdbege95858c1448f">Marksman&apos;s Rifle</content>
@@ -1339,6 +1341,7 @@
 	<content contentuid="h91c254adgbe70g42e2g9f12g4e7249e9d896">Monk&apos;s Quarterstaff</content>
 	<content contentuid="h91d6604fg166fg4390g88e4g1847a776456f">Empty Glass Flask</content>
 	<content contentuid="h91de1e73g1430g45afg9ceegf47ba419a7cb">Honor &amp; Duty</content>
+	<content contentuid="h91df6fefg6cb4g4f27ga116g992a6a2e4774">Inspiration</content>
 	<content contentuid="h91f3bf0cgf45eg4b35ga80dg3bae0b7a5e06">&lt;font color=&apos;#FF0000&apos;&gt;No Rune Combination Exists in Memory&lt;/font&gt;</content>
 	<content contentuid="h91f9839bg6559g4bf5ga9d8g0ee6790f9896">The &lt;font color=&apos;#F7BE81&apos;&gt;Dust Rune&lt;/font&gt; is cooling down, and is unable to trigger another &lt;font color=&apos;#8A4B08&apos;&gt;Dust Blast&lt;/font&gt;.</content>
 	<content contentuid="h924c15e9gb9c8g441fg9397g9d870f86dd9b">Makeshift Chaotic Rod</content>
@@ -1724,6 +1727,7 @@
 	<content contentuid="hbe73c99dg8a94g45f6ga7b7g23923104849b">Throw Stone</content>
 	<content contentuid="hbe7e4dd2g827ag43a3g8c13g184fd0a01f69">Bada Bing</content>
 	<content contentuid="hbe8ca1e2g4683g4a93g8e20g984992e30d22">Banner</content>
+	<content contentuid="hbe92489bgf77dg4af5g9cfbg2c05c28c5535">Banner Protection</content>
 	<content contentuid="hbecd7d55g85f8g4716g9346g15ff17837431">Ice Rune</content>
 	<content contentuid="hbed06604gcd54g4416gbeaegd171f8e78a77">Iron Will, Lion&apos;s Courage</content>
 	<content contentuid="hbf040bedgcb96g4c92ga4abg510ff2d22b2a">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to &lt;font color=&apos;#9a38ff&apos;&gt;Dizzying Smash&lt;/font&gt; that deals [1] and pushes the target back 3m.&lt;br&gt;If the target is Knocked Down, enemies they collide with have a chance to be knocked down, and both they and the target take [2] per collision.&lt;br&gt;&lt;font color=&apos;#44FF03&apos;&gt;On hit, refreshes the cooldown for Sucker Punch.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
@@ -1979,6 +1983,7 @@
 	<content contentuid="hdc676435gde33g47e9gbb3agbca51542f431">Snowed</content>
 	<content contentuid="hdc8a4479g65a0g4626g926eg20f6e5e44446">Two-handed Bokuto</content>
 	<content contentuid="hdc98ec8dg571eg4a24g8963g8d99760058fb">Expert Shieldsman</content>
+	<content contentuid="hdcab69c9gc26ag4c53gb624gbba1c5f13ee2">Allies within [ExtraData:LeadershipRange]m affected by &lt;font color=&apos;#11FF44&apos;&gt;Leadership&lt;/font&gt; have a [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance]% chance to gain &lt;font color=&apos;#11FF88&apos;&gt;Inspiration&lt;/font&gt; on their turn. If &lt;font color=&apos;#11FF44&apos;&gt;Leadership&lt;/font&gt; is from you, this chance is increased to [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2]%.</content>
 	<content contentuid="hdcacc003g3fa3g4e51g934cg7fc60b3ba861">*[WARRIOR WEAPONS] Click on the button labeled &apos;Warrior Weapons&apos;.*</content>
 	<content contentuid="hdcbe8f3eg3960g49b2g8f63ged3336519e25">*[ANY WEAPON] Click on the button labeled &apos;Any Weapon&apos;.*</content>
 	<content contentuid="hdcc36d4cgfbf4g42b3gbe66g6d2da570dc70">*A strange crystal-like object quietly hovers before you. Etched upon its surface are symbols of war.*</content>

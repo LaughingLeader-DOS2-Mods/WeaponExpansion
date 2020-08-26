@@ -23,6 +23,31 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	return bonuses
 end
 
+---@param character EsvCharacter
+---@param bonus string|table<string,boolean>
+---@return boolean
+function MasteryBonusManager.HasMasteryBonuses(character, bonus)
+	local character = Ext.GetCharacter(char)
+	for tag,tbl in pairs(Mastery.Bonuses) do
+		if Mastery.HasMasteryRequirement(character, tag) then
+			for bonusName,_ in pairs(tbl) do
+				if type(bonus) == "table" then
+					for i,v in pairs(bonus) do
+						if v == bonusName then
+							return true
+						end
+					end
+				else
+					if bonusName == bonus then
+						return true
+					end
+				end
+			end
+		end
+	end
+	return false
+end
+
 local function HasMatchedBonuses(bonuses, matchBonuses)
 	if matchBonuses == nil or matchBonuses == "" then
 		return true

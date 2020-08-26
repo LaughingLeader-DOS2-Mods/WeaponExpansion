@@ -53,7 +53,7 @@ LLWEAPONEX_Banner_Mastery1 = {
 		Skills = {"Shout_InspireStart", "Shout_EnemyInspire"},
 		Param = TranslatedString:Create("h4190e997g6776g46a5gbff1g711a310c6d38","<font color='#FFCE58'>Fear, Madness, and Sleep are cleansed from encouraged allies.</font>")
 	},
-	WAR_CHARGE_RUSH = {
+	BANNER_WARCHARGE = {
 		Skills = RUSH_SKILLS,
 		Param = TranslatedString:Create("h3c34bca6gc080g4de4gae5eg4909ad60ecc8","If under the effects of <font color='#FFCE58'>War Charge</font>, deal [ExtraData:LLWEAPONEX_MasteryBonus_WarChargeDamageBoost]% more damage and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing."),
 	}
@@ -77,6 +77,9 @@ LLWEAPONEX_Banner_Mastery3 = {
 	BANNER_VACUUM = {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
 		Param = TranslatedString:Create("h5b135257gec07g49f8gbf25g69df1d282001","<font color='#00CCAA'>If near an active banner, enemies hit are pulled towards the banner.</font>")
+	},
+	BANNER_LEADERSHIP = {
+		Param = TranslatedString:Create("hdcab69c9gc26ag4c53gb624gbba1c5f13ee2", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>Leadership</font> have a [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>Inspiration</font> on their turn. If <font color='#11FF44'>Leadership</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2]%."),
 	}
 },
 LLWEAPONEX_Banner_Mastery4 = {
