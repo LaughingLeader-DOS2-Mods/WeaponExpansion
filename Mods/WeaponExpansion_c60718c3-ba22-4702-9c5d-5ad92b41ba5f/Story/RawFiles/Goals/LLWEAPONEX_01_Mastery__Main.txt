@@ -214,6 +214,8 @@ PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_,_,_)
+AND
+DB_LeaderLib_ToggleScripts_Registered(_GoalTitle, _Mastery, _IsTag)
 THEN
 LeaderLib_ToggleScripts_DisableScriptAfterDelay("LLWEAPONEX_MasterySystemActive", "WeaponExpansion", 500);
 //END_REGION
@@ -224,14 +226,14 @@ LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mas
 AND
 DB_LeaderLib_ToggleScripts_Registered(_GoalTitle, _Mastery, _IsTag)
 THEN
-LeaderLib_ToggleScripts_EnableScriptForObject(_Player, _Mastery, "WeaponExpansion");
+LeaderLib_ToggleScripts_EnableScriptForObject(_Player, _Mastery, "WeaponExpansion", 0);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND
 DB_LeaderLib_ToggleScripts_Registered(_GoalTitle, _Mastery, _IsTag)
 THEN
-LeaderLib_ToggleScripts_DisableScriptForObject(_Player, _Mastery, "WeaponExpansion");
+LeaderLib_ToggleScripts_DisableScriptForObject(_Player, _Mastery, "WeaponExpansion", 0);
 //END_REGION
 
 //REGION UNEQUIP_REMOVAL_EVENT
@@ -257,23 +259,11 @@ StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_MasteryDeactivated"
 AND
 DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _Mastery)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
-AND
 NOT LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _Mastery)
 THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery);
 NOT DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _Mastery);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:LLWEAPONEX_Timers_MasteryDeactivated] Weapon Mastery [",_Mastery,"] was deactivated.");
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _Mastery);
-
-IF
-StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_MasteryDeactivated")
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_DeactivatedMasteries(_Player, _Item, _Mastery)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery);
 
 IF
 StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_MasteryDeactivated")
