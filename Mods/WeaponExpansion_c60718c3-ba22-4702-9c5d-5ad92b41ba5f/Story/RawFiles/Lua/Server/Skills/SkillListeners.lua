@@ -3,6 +3,7 @@ SKILL_STATE = LeaderLib.SKILL_STATE
 local SkillListeners = {
 	SkillType = {},
 	Element = {},
+	Any = {}
 }
 
 if SkillManager == nil then
@@ -25,7 +26,17 @@ function SkillManager.RegisterElementListener(element, func)
 	table.insert(SkillListeners.Element[element], func)
 end
 
+function SkillManager.RegisterAnySkillListener(func)
+	table.insert(SkillListeners.Any, func)
+end
+
 function OnSkillEvent(uuid, state, skill, skilltype, element)
+	for i,callback in ipairs(SkillListeners.SkillType[skilltype]) do
+		local b,err = xpcall(callback, debug.traceback, uuid, state, skill, skilltype, element)
+		if not b then
+			Ext.PrintError(err)
+		end
+	end
 	skilltype = string.lower(skilltype)
 	if SkillListeners.SkillType[skilltype] ~= nil then
 		for i,callback in ipairs(SkillListeners.SkillType[skilltype]) do
@@ -34,9 +45,6 @@ function OnSkillEvent(uuid, state, skill, skilltype, element)
 				Ext.PrintError(err)
 			end
 		end
-	end
-	if state == SKILL_STATE.CAST and HasActiveStatus(uuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_RETREAT") == 1 then
-		RemoveStatus(uuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_RETREAT")
 	end
 end
 

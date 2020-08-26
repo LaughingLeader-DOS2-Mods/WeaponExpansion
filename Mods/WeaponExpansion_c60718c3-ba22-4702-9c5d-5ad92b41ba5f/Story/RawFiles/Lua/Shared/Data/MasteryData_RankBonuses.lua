@@ -160,7 +160,7 @@ LLWEAPONEX_DualShields_Mastery5 = {},
 LLWEAPONEX_Firearm_Mastery1 = {
 	FIREARM_TACTICAL_RETREAT = {
 		Skills = {"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"},
-		Param = TranslatedString:Create("h04af99ffg3a85g4e52gad12g7d585b20e3a9","After jumping, the next skill used will cost [ExtraData:LLWEAPONEX_MasteryBonus_Firearm_RetreatAPReduction] less Action Point.")
+		Param = TranslatedString:Create("h6b4f5697g12aeg4ccdgba8bgccff2ba9aa56","<font color='#00FF99'>After jumping, your next action's AP cost is reduced by [Stats:Stats_LLWEAPONEX_MasteryBonus_Firearm_Retreat:APCostBoost].</font>")
 	},
 },
 LLWEAPONEX_Firearm_Mastery2 = {},

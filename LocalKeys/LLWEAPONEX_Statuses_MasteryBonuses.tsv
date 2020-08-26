@@ -7,3 +7,5 @@ LLWEAPONEX_BLOOD_EMPOWERED_DisplayName	Empowered by Blood	h66bfffc1ga29cg4658g9b
 LLWEAPONEX_BLOOD_EMPOWERED_Description	Character is empowered through an ally's Flesh Sacrifice.	h3fb6e3f1g6fdcg4cfdg9761g6b8048ee5943
 LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName	Vulnerable	hbe25a690g42bag444fga5b5g368750273a9b
 LLWEAPONEX_MASTERYBONUS_VULNERABLE_Description	<font color='#FF001F'>Character is vulnerable to a follow-up attack, which will deal [1] on hit.</font><br><font color='#FF337F'>Removed when the attacker's turn ends.</font>	h932f8db4g9c0bg4ae9gb715g3bc71166f5e7
+LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS_DisplayName	Tactics	heafd775cg148dg45e9g87feg747b2d938754
+LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS_Description	Character's next action is reduced by [1] AP.	h478d282egda0ag4900g9771gdead5d66b1b7
