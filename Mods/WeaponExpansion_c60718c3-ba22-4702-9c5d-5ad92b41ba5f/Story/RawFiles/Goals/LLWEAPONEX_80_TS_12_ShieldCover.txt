@@ -10,9 +10,9 @@ DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Target)
 AND
 NOT DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Target)
 AND
-LeaderLib_Hit_QRY_HitSucceeded(_Target, _Handle, 0)
+LeaderLib_Hit_QRY_HitSucceeded((GUIDSTRING)_Target, _Handle, 0)
 AND
-NRD_StatusGetInt(_Target, _Handle, "DamageSourceType", _DamageSourceType)
+NRD_StatusGetInt((CHARACTERGUID)_Target, _Handle, "DamageSourceType", _DamageSourceType)
 AND
 LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/statuses/GM
 THEN
