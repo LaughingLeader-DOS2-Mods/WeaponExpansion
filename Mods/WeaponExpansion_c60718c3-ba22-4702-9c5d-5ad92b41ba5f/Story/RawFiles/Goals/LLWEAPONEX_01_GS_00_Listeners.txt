@@ -99,7 +99,7 @@ StoryEvent(_Char, "LLWEAPONEX_RefreshRequirementTagSkills")
 AND
 GetUUID(_Char, _UUID)
 THEN
-NRD_ModCall("LeaderLib", _UUID, "RefreshSkillBar");
+NRD_ModCall("LeaderLib", "RefreshSkillBar", _UUID);
 //END_REGION
 
 //REGION CLEANUP
