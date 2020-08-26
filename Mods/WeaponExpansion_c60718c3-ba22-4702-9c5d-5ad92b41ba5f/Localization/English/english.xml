@@ -646,6 +646,7 @@
 	<content contentuid="h4746d357ge878g462eg86ccg30f7a8115f17">*[TWO-HANDED] Click on the button labeled &apos;Two-Handed&apos;.*</content>
 	<content contentuid="h4752734dg8d97g4a1eg9ef2g6c089c8a27fc">Character&apos;s firearm is attuned to ice.</content>
 	<content contentuid="h477c0babg3628g4207g922ega0f054a32cb6">&lt;font color=&apos;#9A5085&apos;&gt;Torment&lt;/font&gt;</content>
+	<content contentuid="h478d282egda0ag4900g9771gdead5d66b1b7">Character&apos;s next action is reduced by [1] AP.</content>
 	<content contentuid="h4795ea48g3ffbg49e2ga99fgc51b65b7bac4">Journeyman Axefighter</content>
 	<content contentuid="h479e97b9g6dc3g428egb6e4g4fdbeb1592b4">Weapon Expansion - Quest Items</content>
 	<content contentuid="h47ab96e6gdce0g4fd6g9b20gedc0b7f491ec">&lt;icon id=&apos;Target_CripplingBlow&apos; icon=&apos;Skill_Warrior_CripplingBlow&apos;/&gt;Targets hit by [Key:Target_CripplingBlow_DisplayName] gain a -20% damage debuff until their turn ends. You deal 10% more damage against them until your turn ends.</content>
@@ -725,7 +726,7 @@
 	<content contentuid="h50853c8cg2215g4f9fg8ab9g4cc10b4309cc">Throw Weapon</content>
 	<content contentuid="h5086140cg5c20g4fa9ga057g58a67546624f">&lt;icon id=&apos;Projectile_PinDown&apos; icon=&apos;Skill_Ranger_PinDown&apos;/&gt;[Key:Projectile_PinDown_DisplayName] shoots two arrows instead of one, hitting a random nearby enemy for half damage.</content>
 	<content contentuid="h50a0e10bg494eg44d7gac24g5dae0e1cd67f">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery II&lt;/font&gt;</content>
-	<content contentuid="h50abd32eg1a6bg4c15ga318g19ad78699979">&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;After using [Key:Jump_TacticalRetreat_DisplayName], your next action&apos;s AP cost is reduced by 1.</content>
+	<content contentuid="h50abd32eg1a6bg4c15ga318g19ad78699979">&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;After using [Key:Jump_TacticalRetreat_DisplayName], your next action&apos;s AP cost is reduced by [Stats:Stats_LLWEAPONEX_MasteryBonus_Firearm_Tactics:APCostBoost].</content>
 	<content contentuid="h50ea178dgecafg4dd4gaad8g5c49a854ef0d">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery III&lt;/font&gt;</content>
 	<content contentuid="h50f6e0abgda94g409egb803g6023020bea8e">Novice</content>
 	<content contentuid="h50ff0f9cgaf03g4842g9697gacd91fe6f4d9">Runic Reverb</content>
@@ -983,6 +984,7 @@
 	<content contentuid="h6add6a16ge3fdg4cdcg9420gd6320b918928">Journeyman of Wands</content>
 	<content contentuid="h6b16bc91ge0bag411ag9684g71a7a00685b1">Empowered by Blood</content>
 	<content contentuid="h6b4e0684g604bg40aeg9f91ga04ce93898e7">Old Metal Pipe</content>
+	<content contentuid="h6b4f5697g12aeg4ccdgba8bgccff2ba9aa56">&lt;font color=&apos;#00FF99&apos;&gt;After jumping, your next action&apos;s AP cost is reduced by [Stats:Stats_LLWEAPONEX_MasteryBonus_Firearm_Tactics:APCostBoost].&lt;/font&gt;</content>
 	<content contentuid="h6b5c3046gb028g4fdegb14bg46b42cd9b271">Character has been hit by a Blademaster&apos;s strike 9 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="h6b8c8e3ag008dg4829gb0c8gb38f86b5c810">Character has lowered resistance to &lt;font color=&apos;#65C900&apos;&gt;poison damage&lt;/font&gt;.</content>
 	<content contentuid="h6bce28e1ga572g4ba6ga08cgefab5c0fdd45">*Tell the mercenary to follow you.*</content>
@@ -2086,6 +2088,7 @@
 	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%&lt;/font&gt; to be &lt;font color=&apos;#00FFAA&apos;&gt;coated in poison or explosive oil&lt;/font&gt;, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.&lt;/font&gt;</content>
 	<content contentuid="head276c0gfecag4897gbc5cg4b74c26bb4d9">a Crossbow</content>
 	<content contentuid="heae6a50fg68ceg4889g83b5gac0ef4eeaf67">Conduction Rune</content>
+	<content contentuid="heafd775cg148dg45e9g87feg747b2d938754">Tactics</content>
 	<content contentuid="heb1c0428g158fg46d6gafa3g6d6143534f37">One-Handed Scepter</content>
 	<content contentuid="heb3b000egc1ffg49cdgb4ceg7d289e830454">a Wand</content>
 	<content contentuid="heb957fedgf165g4017ga0b9ge71f7038a453">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery III&lt;/font&gt;</content>
