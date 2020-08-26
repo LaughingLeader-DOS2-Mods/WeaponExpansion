@@ -11,11 +11,7 @@ HasActiveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE", 1)
 AND
 NRD_HitGetInt(_Handle, "CriticalHit", 1)
 AND
-NRD_HitGetInt(_Handle, "Dodged", 0)
-AND
-NRD_HitGetInt(_Handle, "Missed", 0)
-AND
-NRD_HitGetInt(_Handle, "Blocked", 0)
+LeaderLib_Hit_QRY_HitSucceeded(_Target, _Handle, 1)
 AND
 NRD_HitGetInt(_Handle, "DamageSourceType", _DamageSourceType)
 AND

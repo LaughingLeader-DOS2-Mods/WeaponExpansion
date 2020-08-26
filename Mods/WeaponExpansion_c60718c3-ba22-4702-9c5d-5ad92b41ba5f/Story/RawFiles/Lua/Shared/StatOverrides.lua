@@ -177,6 +177,16 @@ local known = {
 	Sabotage = true,
 }
 
+local AIFLAG_CANNOT_USE = 140689826905584
+
+local function IsEnemySkill(skill)
+	local aiflags = Ext.StatGetAttribute(skill, "AIFlags")
+	if string.find(skill, "Enemy") and Ext.StatGetAttribute(skill, "IsEnemySkill") == "Yes" and aiflags ~= AIFLAG_CANNOT_USE then
+		return true
+	end
+	return false
+end
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
@@ -202,7 +212,7 @@ local function StatOverrides_Init()
 
 		--print(gameMaster, requirement, ability)
 	
-		if gameMaster == "Yes" then
+		if gameMaster == "Yes" and not IsEnemySkill(skill) then
 			if requirement == "MeleeWeapon" and ability == "Warrior" then
 				SwapRequirementWithTag(skill, "None", "LLWEAPONEX_NoMeleeWeaponEquipped", true)
 			elseif requirement == "DaggerWeapon" and ability == "Rogue" then

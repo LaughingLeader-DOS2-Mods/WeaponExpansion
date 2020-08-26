@@ -768,34 +768,13 @@ SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
 NRD_CharacterEquipItem(_Char, _Shield, "Shield", 0, 0, 1, 1);
 NRD_CharacterEquipItem(_Char, _CombatShield, "Weapon", 0, 0, 1, 1);
 //END_REGION
-/*
-QRY
-LLWEAPONEX_DualShields_QRY_WatchItem((ITEMGUID)_Item, (ITEMGUID)_DualShield)
-THEN
-DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield);
 
+//REGION RUSH_PROTECTION
 IF
-ItemAddedToContainer(_Item, _DualShield)
-AND
-IsTagged(_DualShield, "LLWEAPONEX_DualShields", 1)
-AND
-IsTagged(_Item, "LLWEAPONEX_CombatShield", 0)
-AND
-ItemGetOwner(_Item, _Owner)
-AND
-ItemGetAmount(_Item, _Amount)
+StoryEvent(_Char, "LLWEAPONEX_ResetDualShieldsRushProtection")
 THEN
-ItemToInventory(_Item, _Owner, _Amount, 0, 0);
-NOT DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield);
-
-IF
-ItemAddedToContainer(_Item, _DualShield)
-AND
-DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield)
-THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_WatchingItem(_Item, _DualShield);
-ItemDrop(_Item);
-*/
+ObjectClearFlag(_Char, "LLWEAPONEX_MasteryBonus_RushProtection", 0);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

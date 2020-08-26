@@ -58,7 +58,7 @@ end)
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param skillData SkillEventData|HitData
-MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_HandCrossbow_Mastery1.JUMP_MARKED.Skills, {"JUMP_MARKED"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener({"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"}, {"HANDCROSSBOW_JUMP_MARKING"}, function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST and CharacterIsInCombat(char) == 1 then
 		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then

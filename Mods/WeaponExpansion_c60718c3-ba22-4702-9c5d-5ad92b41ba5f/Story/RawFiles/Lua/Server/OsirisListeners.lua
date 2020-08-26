@@ -103,8 +103,8 @@ local function OnStatusApplied(target, status, source)
 	local callbacks = Listeners.Status[status]
 	if callbacks ~= nil then
 		for i,callback in ipairs(callbacks) do
-			local s,err = xpcall(callback, debug.traceback, target, status, source)
-			if not s then
+			local b,err = xpcall(callback, debug.traceback, target, status, source)
+			if not b then
 				Ext.PrintError(err)
 			end
 		end

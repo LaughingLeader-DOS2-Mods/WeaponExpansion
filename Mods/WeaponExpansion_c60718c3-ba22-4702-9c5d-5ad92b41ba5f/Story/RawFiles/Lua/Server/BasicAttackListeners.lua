@@ -1,3 +1,21 @@
+if BasicAttackManager == nil then
+	BasicAttackManager = {}
+end
+
+if BasicAttackManager.Listeners == nil then
+	BasicAttackManager.Listeners = {
+		OnStart = {},
+		OnHit = {},
+	}
+end
+
+function BasicAttackManager.RegisterListener(event, func)
+	if BasicAttackManager.Listeners[event] == nil then
+		BasicAttackManager.Listeners[event] = {}
+	end
+	table.insert(BasicAttackManager.Listeners[event], func)
+end
+
 local function SaveBasicAttackTarget(attacker, target)
 	if PersistentVars["BasicAttackData"] == nil then
 		PersistentVars["BasicAttackData"] = {}
@@ -21,6 +39,12 @@ local function OnBasicAttackTarget(target, owner, attacker)
 		Osi.ProcObjectTimerCancel(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
 		Osi.ProcObjectTimer(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses", 580)
 	end
+	for i,callback in ipairs(BasicAttackManager.Listeners.OnStart) do
+		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(owner), StringHelpers.GetUUID(target))
+		if not b then
+			Ext.PrintError(err)
+		end
+	end
 end
 Ext.RegisterOsirisListener("CharacterStartAttackObject", 3, "after", OnBasicAttackTarget)
 
@@ -30,6 +54,12 @@ local function OnBasicAttackPosition(x, y, z, owner, attacker)
 		SaveBasicAttackTarget(attacker, {x,y,z})
 		Osi.ProcObjectTimerCancel(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
 		Osi.ProcObjectTimer(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses", 580)
+	end
+	for i,callback in ipairs(BasicAttackManager.Listeners.OnStart) do
+		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(owner), {x,y,z})
+		if not b then
+			Ext.PrintError(err)
+		end
 	end
 end
 Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAttackPosition)
@@ -54,3 +84,15 @@ function MagicMissileWeapon_RollForBasicAttackBonuses(attacker)
 		PersistentVars["BasicAttackData"][attacker] = nil
 	end
 end
+
+--- @param caster EsvGameObject
+--- @param position number[]
+--- @param damageList DamageList
+Ext.RegisterListener("GroundHit", function (caster, position, damageList)
+	for i,callback in ipairs(BasicAttackManager.Listeners.OnHit) do
+		local b,err = xpcall(callback, debug.traceback, false, caster.MyGuid, position, damageList)
+		if not b then
+			Ext.PrintError(err)
+		end
+	end
+end)

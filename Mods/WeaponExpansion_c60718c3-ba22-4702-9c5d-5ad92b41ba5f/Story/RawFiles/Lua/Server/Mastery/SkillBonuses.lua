@@ -63,6 +63,27 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 	end
 end
 
+local function OnSkillTypeCallback(callback, matchBonuses, uuid, ...)
+	local bonuses = MasteryBonusManager.GetMasteryBonuses(uuid, nil)
+	if HasMatchedBonuses(bonuses, matchBonuses) then
+		callback(bonuses, uuid, ...)
+	end
+end
+
+function MasteryBonusManager.RegisterSkillTypeListener(skillType, matchBonuses, callback)
+	if type(skillType) == "table" then
+		for i,v in pairs(skillType) do
+			SkillManager.RegisterTypeListener(v, function(uuid, ...)
+				OnSkillTypeCallback(callback, matchBonuses, uuid, ...)
+			end)
+		end
+	else
+		SkillManager.RegisterTypeListener(skillType, function(uuid, ...)
+			OnSkillTypeCallback(callback, matchBonuses, uuid, ...)
+		end)
+	end
+end
+
 local function OnStatusCallback(callback, matchBonuses, target, status, source)
 	local bonuses = {}
 	if ObjectIsCharacter(source) == 1 then

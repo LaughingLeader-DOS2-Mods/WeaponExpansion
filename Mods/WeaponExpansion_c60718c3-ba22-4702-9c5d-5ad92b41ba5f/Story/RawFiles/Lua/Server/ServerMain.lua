@@ -1,4 +1,3 @@
-
 function GetHandedness(weapon)
     if weapon == nil then
         return nil

@@ -1,5 +1,45 @@
 SKILL_STATE = LeaderLib.SKILL_STATE
 
+local SkillListeners = {
+	SkillType = {},
+	Element = {},
+}
+
+if SkillManager == nil then
+	SkillManager = {}
+end
+
+function SkillManager.RegisterTypeListener(skilltype, func)
+	skilltype = string.lower(skilltype)
+	if SkillListeners.SkillType[skilltype] == nil then
+		SkillListeners.SkillType[skilltype] = {}
+	end
+	table.insert(SkillListeners.SkillType[skilltype], func)
+end
+
+function SkillManager.RegisterElementListener(element, func)
+	skilltype = string.lower(element)
+	if SkillListeners.Element[element] == nil then
+		SkillListeners.Element[element] = {}
+	end
+	table.insert(SkillListeners.Element[element], func)
+end
+
+function OnSkillEvent(uuid, state, skill, skilltype, element)
+	skilltype = string.lower(skilltype)
+	if SkillListeners.SkillType[skilltype] ~= nil then
+		for i,callback in ipairs(SkillListeners.SkillType[skilltype]) do
+			local b,err = xpcall(callback, debug.traceback, uuid, state, skill, skilltype, element)
+			if not b then
+				Ext.PrintError(err)
+			end
+		end
+	end
+	if state == SKILL_STATE.CAST and HasActiveStatus(uuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_RETREAT") == 1 then
+		RemoveStatus(uuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_RETREAT")
+	end
+end
+
 ---@param skill string
 ---@param char string
 ---@param state SkillState

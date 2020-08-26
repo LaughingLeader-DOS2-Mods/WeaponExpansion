@@ -80,6 +80,14 @@ local function OnPrepareHit(target,source,damage,handle)
 	if damage > 0 then
 		--ConvertArmorDamage(target,handle)
 	end
+	if ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 then
+		local hitType = NRD_HitGetString(handle, "HitType")
+		if hitType == "Surface" and GameHelpers.HitSucceeded(target, handle, 1) then
+			NRD_HitSetInt(handle, "Blocked", 1)
+			NRD_HitClearAllDamage(handle)
+			Osi.LeaderLib_Timers_StartObjectTimer(GetUUID(target), 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
+		end
+	end
 	if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 then
 		local hitType = NRD_HitGetInt(handle, "HitType")
 		if hitType < 4 then
@@ -112,10 +120,6 @@ local function OnHit(target,source,damage,handle)
 	if source ~= nil then
 		if GameHelpers.HitWithWeapon(target, handle, false, true) then
 			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
-			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
-				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
-				GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage")
-			end
 			local b,expGain = CanGrantMasteryExperience(target,source)
 			if b and expGain > 0 then
 				AddMasteryExperienceForAllActive(source, expGain)
@@ -142,6 +146,12 @@ local function OnHit(target,source,damage,handle)
 							end
 						end
 					end
+				end
+			end
+			for i,callback in ipairs(BasicAttackManager.Listeners.OnHit) do
+				local b,err = xpcall(callback, debug.traceback, true, StringHelpers.GetUUID(source), StringHelpers.GetUUID(target), handle, damage)
+				if not b then
+					Ext.PrintError(err)
 				end
 			end
 		end

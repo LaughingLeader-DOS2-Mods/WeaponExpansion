@@ -49,6 +49,22 @@ THEN
 LLWEAPONEX_OnItemTemplateEquipped(_Char, _Item, _Template);
 //END_REGION
 
+//REGION SKILL_TYPE_USAGE
+IF
+CharacterUsedSkill(_Char, _Skill, _SkillType, _Element)
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "OnSkillEvent", _UUID, "USED", _Skill, _SkillType, _Element);
+
+IF
+SkillCast(_Char, _Skill, _SkillType, _Element)
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "OnSkillEvent", _UUID, "CAST", _Skill, _SkillType, _Element);
+//END_REGION
+
 //REGION CLEANUP
 IF
 GameStarted(_Region, _)

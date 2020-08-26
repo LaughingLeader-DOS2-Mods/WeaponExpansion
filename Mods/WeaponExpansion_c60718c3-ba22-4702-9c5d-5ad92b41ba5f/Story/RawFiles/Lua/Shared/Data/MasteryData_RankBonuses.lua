@@ -157,7 +157,12 @@ LLWEAPONEX_DualShields_Mastery2 = {},
 LLWEAPONEX_DualShields_Mastery3 = {},
 LLWEAPONEX_DualShields_Mastery4 = {},
 LLWEAPONEX_DualShields_Mastery5 = {},
-LLWEAPONEX_Firearm_Mastery1 = {},
+LLWEAPONEX_Firearm_Mastery1 = {
+	FIREARM_TACTICAL_RETREAT = {
+		Skills = {"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"},
+		Param = TranslatedString:Create("h04af99ffg3a85g4e52gad12g7d585b20e3a9","After jumping, the next skill used will cost [ExtraData:LLWEAPONEX_MasteryBonus_Firearm_RetreatAPReduction] less Action Point.")
+	},
+},
 LLWEAPONEX_Firearm_Mastery2 = {},
 LLWEAPONEX_Firearm_Mastery3 = {},
 LLWEAPONEX_Firearm_Mastery4 = {},
@@ -168,7 +173,7 @@ LLWEAPONEX_Greatbow_Mastery3 = {},
 LLWEAPONEX_Greatbow_Mastery4 = {},
 LLWEAPONEX_Greatbow_Mastery5 = {},
 LLWEAPONEX_HandCrossbow_Mastery1 = {
-	JUMP_MARKED = {
+	HANDCROSSBOW_JUMP_MARKING = {
 		Skills = {"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"},
 		Param = TranslatedString:Create("h6939fc3dgf4b0g45abg9362g5a9d5c04654c","Automatically apply [Key:MARKED_DisplayName] to [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets] target(s) max in a [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius]m radius when jumping away.")
 	},
