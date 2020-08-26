@@ -86,7 +86,7 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
 	end
 
-	if IsPlayer(uuid) then
+	--[[ if IsPlayer(uuid) then
 		local hasWarfareTag = character:HasTag("LLWEAPONEX_NoMeleeWeaponEquipped")
 		local hasScoundrelTag = character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills")
 		for skill,b in pairs(Skills.WarfareMeleeSkills) do
@@ -95,7 +95,7 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 		for skill,b in pairs(Skills.ScoundrelMeleeSkills) do
 			GameHelpers.UI.SetSkillEnabled(uuid, skill, not hasScoundrelTag)
 		end
-	end
+	end ]]
 end
 
 --- @param uuid string
@@ -127,7 +127,11 @@ function OnItemEquipped(uuid,itemUUID)
 				if isPlayer == 1 then
 					local equippedTag = Tags.WeaponTypes[tag]
 					if equippedTag ~= nil then
-						LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
+						if Ext.IsDeveloperMode() then
+							if IsTagged(uuid, equippedTag) == 0 then
+								LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
+							end
+						end
 						Osi.LLWEAPONEX_Equipment_TrackItem(uuid,itemUUID,tag,equippedTag,isPlayer)
 					end
 					Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, itemUUID, tag)
