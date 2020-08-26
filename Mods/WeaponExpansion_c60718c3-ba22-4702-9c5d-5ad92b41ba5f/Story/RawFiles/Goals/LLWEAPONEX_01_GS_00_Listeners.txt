@@ -65,6 +65,43 @@ THEN
 NRD_ModCall("WeaponExpansion", "OnSkillEvent", _UUID, "CAST", _Skill, _SkillType, _Element);
 //END_REGION
 
+//REGION TAG_REQUIREMENTS_CHANGED
+IF
+ObjectWasTagged((CHARACTERGUID)_Char, "LLWEAPONEX_NoMeleeWeaponEquipped")
+AND
+CharacterIsPlayer(_Char, 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_RefreshRequirementTagSkills", "LLWEAPONEX_RefreshRequirementTagSkills");
+
+IF
+ObjectLostTag((CHARACTERGUID)_Char, "LLWEAPONEX_NoMeleeWeaponEquipped")
+AND
+CharacterIsPlayer(_Char, 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_RefreshRequirementTagSkills", "LLWEAPONEX_RefreshRequirementTagSkills");
+
+IF
+ObjectWasTagged((CHARACTERGUID)_Char, "LLWEAPONEX_CannotUseScoundrelSkills")
+AND
+CharacterIsPlayer(_Char, 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_RefreshRequirementTagSkills", "LLWEAPONEX_RefreshRequirementTagSkills");
+
+IF
+ObjectLostTag((CHARACTERGUID)_Char, "LLWEAPONEX_CannotUseScoundrelSkills")
+AND
+CharacterIsPlayer(_Char, 1)
+THEN
+LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_RefreshRequirementTagSkills", "LLWEAPONEX_RefreshRequirementTagSkills");
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_RefreshRequirementTagSkills")
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("LeaderLib", _UUID, "RefreshSkillBar");
+//END_REGION
+
 //REGION CLEANUP
 IF
 GameStarted(_Region, _)
