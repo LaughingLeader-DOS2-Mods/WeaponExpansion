@@ -30,21 +30,33 @@ function SkillManager.RegisterAnySkillListener(func)
 	table.insert(SkillListeners.Any, func)
 end
 
-function OnSkillEvent(uuid, state, skill, skilltype, element)
-	for i,callback in ipairs(SkillListeners.SkillType[skilltype]) do
+local function RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
+	for i=1,#tbl do
+		local callback = tbl[i]
 		local b,err = xpcall(callback, debug.traceback, uuid, state, skill, skilltype, element)
 		if not b then
 			Ext.PrintError(err)
 		end
 	end
+end
+
+function OnSkillEvent(uuid, state, skill, skilltype, element)
+	element = string.lower(element)
 	skilltype = string.lower(skilltype)
-	if SkillListeners.SkillType[skilltype] ~= nil then
-		for i,callback in ipairs(SkillListeners.SkillType[skilltype]) do
-			local b,err = xpcall(callback, debug.traceback, uuid, state, skill, skilltype, element)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
+
+	local tbl = SkillListeners.Element[element]
+	if tbl ~= nil and #tbl > 0 then
+		RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
+	end
+
+	local tbl = SkillListeners.SkillType[skilltype]
+	if tbl ~= nil and #tbl > 0 then
+		RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
+	end
+
+	local tbl = SkillListeners.Any
+	if #tbl > 0 then
+		RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
 	end
 end
 
