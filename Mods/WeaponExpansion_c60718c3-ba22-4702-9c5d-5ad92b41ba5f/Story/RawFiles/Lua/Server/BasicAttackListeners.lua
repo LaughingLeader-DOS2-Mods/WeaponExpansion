@@ -39,7 +39,7 @@ local function OnBasicAttackTarget(target, owner, attacker)
 		Osi.ProcObjectTimerCancel(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
 		Osi.ProcObjectTimer(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses", 580)
 	end
-	for i,callback in ipairs(BasicAttackManager.Listeners.OnStart) do
+	for i,callback in pairs(BasicAttackManager.Listeners.OnStart) do
 		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(owner), StringHelpers.GetUUID(target))
 		if not b then
 			Ext.PrintError(err)
@@ -55,7 +55,7 @@ local function OnBasicAttackPosition(x, y, z, owner, attacker)
 		Osi.ProcObjectTimerCancel(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
 		Osi.ProcObjectTimer(attacker, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses", 580)
 	end
-	for i,callback in ipairs(BasicAttackManager.Listeners.OnStart) do
+	for i,callback in pairs(BasicAttackManager.Listeners.OnStart) do
 		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(owner), {x,y,z})
 		if not b then
 			Ext.PrintError(err)
@@ -89,7 +89,7 @@ end
 --- @param position number[]
 --- @param damageList DamageList
 Ext.RegisterListener("GroundHit", function (caster, position, damageList)
-	for i,callback in ipairs(BasicAttackManager.Listeners.OnHit) do
+	for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
 		local b,err = xpcall(callback, debug.traceback, false, caster.MyGuid, position, damageList)
 		if not b then
 			Ext.PrintError(err)

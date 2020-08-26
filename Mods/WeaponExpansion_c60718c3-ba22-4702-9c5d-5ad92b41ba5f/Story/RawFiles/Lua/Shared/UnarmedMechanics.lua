@@ -79,7 +79,7 @@ function GetUnarmedWeaponDamageRange(character, item)
 		if unarmedWeaponStatName ~= nil then
 			local unarmedWeapon = ExtenderHelpers.CreateWeaponTable(unarmedWeaponStatName, item.Level, highestAttribute, "None", unarmedMasteryBoost)
 			if unarmedWeapon ~= nil then
-				for i,stat in ipairs(unarmedWeapon.DynamicStats) do
+				for i,stat in pairs(unarmedWeapon.DynamicStats) do
 					if i > 1 then
 						table.insert(noWeapon.DynamicStats, stat)
 					elseif i == 1 then

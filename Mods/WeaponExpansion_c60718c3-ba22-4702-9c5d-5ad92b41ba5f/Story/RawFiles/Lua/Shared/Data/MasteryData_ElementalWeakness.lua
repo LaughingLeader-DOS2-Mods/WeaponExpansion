@@ -74,7 +74,7 @@ local function GetElementalWeakness(character, tagName, rankHeader, param)
 		paramText = string.gsub(paramText, "%[Special%]", resistanceText)
 		return paramText
 	else
-		return rankHeader..Tooltip.ReplacePlaceholders(Text.MasteryBonusParams.ElementalWeakness_NoElement.Value)
+		return rankHeader..GameHelpers.Tooltip.ReplacePlaceholders(Text.MasteryBonusParams.ElementalWeakness_NoElement.Value)
 	end
 end
 

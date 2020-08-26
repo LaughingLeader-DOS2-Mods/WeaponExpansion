@@ -173,7 +173,7 @@ local function parseDescription(ui, index, descriptionText)
 		icons[#icons+1] = v
 	end
 	local result = {}
-	for i,v in ipairs(separatedText) do
+	for i,v in pairs(separatedText) do
 		local icon = icons[i]
 		if icon == nil then 
 			icon = "" 
@@ -181,7 +181,7 @@ local function parseDescription(ui, index, descriptionText)
 			icons[i] = nil
 		end
 		result[#result+1] = {
-			Text = Tooltip.ReplacePlaceholders(v),
+			Text = GameHelpers.Tooltip.ReplacePlaceholders(v),
 			Icon = icon
 		}
 	end
@@ -194,7 +194,7 @@ local function parseDescription(ui, index, descriptionText)
 		end
 	end
 	--print(LeaderLib.Common.Dump(result))
-	for i,v in ipairs(result) do
+	for i,v in pairs(result) do
 		if v.Icon ~= "" then
 			local _,_,iconName = v.Icon:find("id='(.-)'")
 			local _,_,icon = v.Icon:find("icon='(.-)'")
@@ -269,6 +269,23 @@ local function OnMenuEvent(ui, call, ...)
 			ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5], params[6])
 		elseif params[1] == 2 then
 			ui:ExternalInterfaceCall("showTooltip", GetStatusTooltipText(MasteryMenu.MasteryData.UUID, params[2]), params[3], params[4], params[5], params[6], "right", false)
+		elseif params[1] == 3 then
+			local specialVals = StringHelpers.Split(params[2], ",")
+			if specialVals ~= nil and #specialVals >= 2 then
+				local name,_ = Ext.GetTranslatedStringFromKey(specialVals[1])
+				local description,_ = Ext.GetTranslatedStringFromKey(specialVals[2])
+				if name ~= nil then
+					local passiveDesc,_ = Ext.GetTranslatedStringFromKey("LLWEAPONEX_MasteryBonus_Passive_Description")
+					name = GameHelpers.Tooltip.ReplacePlaceholders(name)
+					if description ~= nil then
+						description = GameHelpers.Tooltip.ReplacePlaceholders(description).."<br>"..passiveDesc
+					else
+						description = passiveDesc
+					end
+					local text = string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name, description)
+					ui:ExternalInterfaceCall("showTooltip", text, params[3], params[4], params[5], params[6], "right", false)
+				end
+			end
 		end
 	elseif call == "mastery_hideIconTooltip" then
 		MasteryMenu.DisplayingSkillTooltip = false
@@ -331,7 +348,7 @@ local function initializeMasteryMenu()
 			local barPercentage = 0
 			local xp = data.Required
 			barPercentage = (xp / xpMax)
-			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:initializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+			--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:initializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			ui:Invoke("setRankNodePosition", i, barPercentage)
 			i = i + 1
 		end
@@ -375,6 +392,9 @@ local function InitMasteryMenu()
 end
 
 local function hasMinimumMasteryRankData(t,tag,min)
+	if Debug.MasteryTests then
+		return true
+	end
 	if t == nil then return false end
 	return pcall(function()
 		return t.Masteries[tag].Rank >= min
@@ -422,11 +442,17 @@ local function OpenMasteryMenu(characterMasteryData)
 		table.sort(masteryKeys, sortMasteries)
 		
 		local i = 0
-		for _,tag in ipairs(masteryKeys) do
+		for _,tag in pairs(masteryKeys) do
 			local data = Masteries[tag]
 			local rank = characterMasteryData.Masteries[tag].Rank
 			local xp = math.ceil(characterMasteryData.Masteries[tag].XP)
 			local xpMax = math.ceil(Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required)
+			if Debug.MasteryTests then
+				characterMasteryData.Masteries[tag].Rank = 4
+				characterMasteryData.Masteries[tag].XP = xpMax
+				rank = 4
+				xp = xpMax
+			end
 			local barPercentage = 0.0
 			if xp > 0 and xp < xpMax then
 				barPercentage = math.floor(((xp / xpMax) * 100) + 0.5) / 100

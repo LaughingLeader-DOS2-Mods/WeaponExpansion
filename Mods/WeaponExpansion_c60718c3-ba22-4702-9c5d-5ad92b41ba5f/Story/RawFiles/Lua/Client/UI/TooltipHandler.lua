@@ -4,6 +4,32 @@ local function sortTagParams(a,b)
 	return a:upper() < b:upper()
 end
 
+---@param skill SkillEventData
+---@param character StatCharacter
+---@return string
+LeaderLib.RegisterListener("GetTooltipSkillDamage", function(skill, character)
+	local paramText = SkillGetDescriptionParam(skill, character, false, "Damage")
+	if paramText ~= nil then
+		return paramText
+	end
+	-- if character.Stats.MainWeapon == nil and character.Stats.OffHandWeapon == nil then
+	-- 	local damageRange = nil
+	-- 	local weapon = GetUnarmedWeapon(character)
+	-- 	damageRange = Math.GetSkillDamageRange(character, skillData, weapon)
+	-- 	return GameHelpers.Tooltip.FormatDamageRange(damageRange)
+	-- end
+
+end)
+---@param skill SkillEventData
+---@param character StatCharacter
+---@return string
+LeaderLib.RegisterListener("GetTooltipSkillParam", function(skill, character, param)
+	local paramText = SkillGetDescriptionParam(skill, character, false, param)
+	if paramText ~= nil then
+		return paramText
+	end
+end)
+
 ---@param character EsvCharacter
 ---@param data table
 function TooltipHandler.GetDescriptionText(character, data)
@@ -16,7 +42,7 @@ function TooltipHandler.GetDescriptionText(character, data)
 		end
 		local count = #tagKeys
 		table.sort(tagKeys, sortTagParams)
-		for i,tagName in ipairs(tagKeys) do
+		for i,tagName in pairs(tagKeys) do
 			local tagData = data.Tags[tagName]
 			if CLIENT_UI.IsInCharacterCreation or Mastery.HasMasteryRequirement(character, tagName) then
 				if tagData.NamePrefix ~= nil then
@@ -40,7 +66,7 @@ function TooltipHandler.GetDescriptionText(character, data)
 						paramText = tagData.Param.Value
 					end
 				end
-				paramText = Tooltip.ReplacePlaceholders(paramText)
+				paramText = GameHelpers.Tooltip.ReplacePlaceholders(paramText)
 				if tagData.GetParam ~= nil then
 					local status,result = xpcall(tagData.GetParam, debug.traceback, character.Stats, tagName, tagLocalizedName, paramText)
 					if status and result ~= nil then

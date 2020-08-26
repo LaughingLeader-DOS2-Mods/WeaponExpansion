@@ -352,7 +352,10 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name, true)
+	local skill = baseSkill
+	if not baseSkill.IsTable then
+		skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name, true)
+	end
 	if skill == nil then skill = baseSkill end
 
 	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
@@ -425,7 +428,10 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 	local highestAttribute = GetHighestAttribute(attacker)
 
 	local weapon = nil
-	local skill = ExtenderHelpers.CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
+	local skill = baseSkill
+	if not baseSkill.IsTable then
+		skill = ExtenderHelpers.CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
+	end
 
 	if skill == nil then
 		Ext.PrintError("Failed to prepare skill data for Projectile_LLWEAPONEX_Pistol_Shoot_Base?")
@@ -500,7 +506,10 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
+	local skillProps = skill
+	if not skillProps.IsTable then
+		skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
+	end
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
 	skillProps["Damage Multiplier"] = distanceDamageMult * 10
@@ -536,7 +545,10 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotMaxDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
+	local skillProps = skill
+	if not skillProps.IsTable then
+		skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
+	end
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
 	skillProps["Damage Multiplier"] = distanceDamageMult * 20
@@ -573,7 +585,10 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	local skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
+	local skillProps = skill
+	if not skillProps.IsTable then
+		skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
+	end
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
 	skillProps["Distance Damage Multiplier"] = 0 -- Used for manual calculation
 	skillProps["Damage Multiplier"] = 0
@@ -655,7 +670,10 @@ local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed,
 		-- key "LLWEAPONEX_DarkFireball_RangePerCount","1.0"
 		-- key "LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount","0.4"
 		local damageMult = (countMult+1) * damageBonus
-		local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
+		local skill = baseSkill
+		if not skill.IsTable then
+			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
+		end
 		skill["Damage Multiplier"] = math.min(200.0, skill["Damage Multiplier"] + damageMult)
 		if isTooltip ~= true then
 			return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
@@ -678,7 +696,10 @@ local function GetDarkFlamebreathDamage(baseSkill, attacker, isFromItem, stealth
 	local missingHealthMult = math.floor((1 - (attacker.CurrentVitality / attacker.MaxVitality)) * 100.0) + 1
 	if missingHealthMult > 0 then
 		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFlamebreath_DamageBonusPerPercent"] or 1.3
-		local skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
+		local skill = baseSkill
+		if not skill.IsTable then
+			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
+		end
 		skill["Damage Multiplier"] = math.ceil(skill["Damage Multiplier"] + (missingHealthMult * damageBonus))
 		print(missingHealthMult, skill["Damage Multiplier"])
 		if isTooltip ~= true then

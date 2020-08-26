@@ -8,7 +8,9 @@ StringHelpers = LeaderLib.StringHelpers
 SKILL_STATE = LeaderLib.SKILL_STATE
 
 Main = {}
-Debug = {}
+Debug = {
+	MasteryTests = Ext.IsDeveloperMode()
+}
 Math = { AbilityScaling = {}}
 Text = {}
 Mastery = {

@@ -66,8 +66,8 @@ local statusAttributes = {
 	"OnlyWhileMoving",
 	"DescriptionCaster",
 	"DescriptionTarget",
-	"WinBoost",
-	"LoseBoost",
+	--"WinBoost",
+	--"LoseBoost",
 	"WeaponOverride",
 	"ApplyEffect",
 	"ForGameMaster",
@@ -142,11 +142,21 @@ function GetStatusTooltipText(character, statusName)
 	local status = PrepareStatusProperties(statusName)
 	if status ~= nil then
 		---@type string
-		local name = Ext.GetTranslatedStringFromKey(status.DisplayName)
-		local description = Ext.GetTranslatedStringFromKey(status.Description)
+		local name,_ = Ext.GetTranslatedStringFromKey(status.DisplayName)
+		local description,_ = Ext.GetTranslatedStringFromKey(status.Description)
 		if status.DescriptionParams ~= nil and status.DescriptionParams ~= "" then
-			for i,param in status.DescriptionParams:gmatch("%[%d%]") do
-				Ext.Print(status, param)
+			local descParams = StringHelpers.Split(status.DescriptionParams, ";")
+			for paramText in string.gmatch(description, "%[%d+%]") do
+				local paramNumText = paramText:gsub("%[", ""):gsub("%]", "")
+				local paramNum = tonumber(paramNumText)
+				local paramKey = descParams[paramNum]
+				if paramNum ~= nil and paramKey ~= nil then
+					if string.find(paramKey, ":Damage") and string.find(paramKey, "Skill:") then
+						paramKey = "["..string.gsub(paramKey, ":Damage", ""):gsub("Skill:", "SkillDamage:").."]"
+					end
+					local paramValue = GameHelpers.Tooltip.ReplacePlaceholders(paramKey, character)
+					description = string.gsub(description, paramText:gsub("%[", "%%["):gsub("%]", "%%]"), paramValue)
+				end
 			end
 		end
 		return string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name:upper(), description)

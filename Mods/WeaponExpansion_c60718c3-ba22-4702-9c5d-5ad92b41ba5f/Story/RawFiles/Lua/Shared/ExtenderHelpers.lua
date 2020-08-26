@@ -471,7 +471,7 @@ function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damag
 		local boostsString = Ext.StatGetAttribute(stat, "Boosts")
 		if boostsString ~= nil and boostsString ~= "" then
 			local boosts = StringHelpers.Split(boostsString, ";")
-			for i,boostStat in ipairs(boosts) do
+			for i,boostStat in pairs(boosts) do
 				if boostStat ~= nil and boostStat ~= "" then
 					local boostWeaponStat = CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage)
 					if boostWeaponStat ~= nil then
@@ -530,6 +530,7 @@ function ExtenderHelpers.CreateSkillTable(skillName, useWeaponDamage)
 		end
 		if useWeaponDamage == true then skill["UseWeaponDamage"] = "Yes" end
 		--Ext.Print(Ext.JsonStringify(skill))
+		skill.IsTable = true
 		return skill
 	end
 	return nil

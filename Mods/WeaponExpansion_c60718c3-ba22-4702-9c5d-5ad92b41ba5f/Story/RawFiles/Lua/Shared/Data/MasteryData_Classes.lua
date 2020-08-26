@@ -62,17 +62,27 @@ CharacterMasteryData = {
 }
 CharacterMasteryData.__index = CharacterMasteryData
 
+local function CreateDefaultData(masteryData)
+	for mastery,_ in pairs(Masteries) do
+		masteryData.Masteries[mastery] = CharacterMasteryDataEntry:Create(0,0)
+	end
+end
+
 ---@param uuid string
 ---@param masteries table
 ---@return CharacterMasteryData
 function CharacterMasteryData:Create(uuid,masteries)
-	local this = {}
+	local this = {
+		UUID = uuid or "",
+		Masteries = {}
+	}
+	CreateDefaultData(this)
 	setmetatable(this, self)
-	if uuid ~= nil then
-		this.UUID = uuid
-	end
 	if masteries ~= nil then
-		this.Masteries = masteries
+		for mastery,data in pairs(masteries) do
+			this.Masteries[mastery].Rank = data.Rank
+			this.Masteries[mastery].XP = data.XP
+		end
 	end
     return this
 end
@@ -80,23 +90,18 @@ end
 ---@param data string
 ---@return CharacterMasteryData
 function CharacterMasteryData:LoadFromString(data)
-	local status,result = xpcall(function()
-		if data ~= nil then
-			local tbl = Ext.JsonParse(data)
-			if tbl["UUID"] ~= nil then
-				self.UUID = tbl.UUID
-			end
-			if tbl["Masteries"] ~= nil then
-				self.Masteries = tbl.Masteries
-			end
-			return true
+	if data ~= nil then
+		local tbl = Ext.JsonParse(data)
+		if tbl.UUID ~= nil then
+			self.UUID = tbl.UUID
 		end
-		return false
-	end, debug.traceback)
-	if not status then
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryData_Classes:CharacterMasteryData:LoadFromString] Error parsing data:", result)
+		if tbl.Masteries ~= nil then
+			for mastery,data in pairs(tbl.Masteries) do
+				self.Masteries[mastery].Rank = data.Rank
+				self.Masteries[mastery].XP = data.XP
+			end
+		end
 	end
-    return this
 end
 
 MasteryDataClasses.CharacterMasteryData = CharacterMasteryData

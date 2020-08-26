@@ -43,7 +43,7 @@ local function getTemplateUUID(str)
 end
 
 local function getAttributeTokenAttribute(entries)
-	for i,entry in ipairs(entries) do
+	for i,entry in pairs(entries) do
 		local template,item = table.unpack(entry)
 		local attribute = attributeTokenTemplates[template]
 		if attribute ~= nil then
@@ -55,7 +55,7 @@ end
 
 local function getUniqueItems(entries)
 	local uniques = {}
-	for i,entry in ipairs(entries) do
+	for i,entry in pairs(entries) do
 		local template,item = table.unpack(entry)
 		if ObjectExists(item) == 1 then
 			local stat = NRD_ItemGetStatsId(item)
@@ -99,7 +99,7 @@ function OnCraftingProcessed(char, ...)
 	local itemArgs = {...}
 	Ext.Print("[WeaponExpansion:OnCraftingProcessed]",char, table.unpack(itemArgs))
 	local items = {}
-	for i,v in ipairs(itemArgs) do
+	for i,v in pairs(itemArgs) do
 		if not LeaderLib.StringHelpers.IsNullOrEmpty(v) then
 			local template = getTemplateUUID(GetTemplate(v))
 			items[#items+1] = {

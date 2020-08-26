@@ -204,7 +204,6 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 				end
 			else
 				Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
-				return ""
 			end
 		end
 	end

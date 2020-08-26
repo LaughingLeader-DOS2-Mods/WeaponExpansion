@@ -319,7 +319,7 @@ function Debug_PrintDeltaMod(item, deltamod, isGenerated)
     print("DeltaMod:",deltamod, "ModifierType", modifierType, "IsGenerated:",isGenerated)
     print("*********")
     if deltamodObj ~= nil then
-        for i,prop in ipairs(debug_DeltaModProperties) do
+        for i,prop in pairs(debug_DeltaModProperties) do
             if prop.Name == "Boosts" then
                 print("-------")
                 print("Deltamod Boosts:")

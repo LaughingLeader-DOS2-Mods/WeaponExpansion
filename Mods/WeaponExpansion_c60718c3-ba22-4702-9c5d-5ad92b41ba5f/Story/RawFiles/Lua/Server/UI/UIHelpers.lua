@@ -4,7 +4,7 @@ local MessageData = LeaderLib.Classes["MessageData"]
 local function SendUserCharacters(id)
 	local party = {}
 	local client = nil
-	for i,player in ipairs(Osi.DB_IsPlayer:Get(nil)) do
+	for i,player in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local uuid = player[1]
 		if CharacterGetReservedUserID(uuid) == id then
 			table.insert(party, Ext.GetCharacter(uuid).NetID)
@@ -37,7 +37,7 @@ end
 function InitClientID()
 	if Ext.GetGameState() == "Running" then
 		local sentIDs = {}
-		for i,player in ipairs(Osi.DB_IsPlayer:Get(nil)) do
+		for i,player in pairs(Osi.DB_IsPlayer:Get(nil)) do
 			local uuid = player[1]
 			local id = CharacterGetReservedUserID(uuid)
 			if not sentIDs[id] then
@@ -55,7 +55,7 @@ local function RequestActiveCharacter(call,id_str,callbackID)
 	TimerCancel("Timers_LLWEAPONEX_SetActivePlayers")
 	TimerLaunch("Timers_LLWEAPONEX_SetActivePlayers", 250)
 	-- local id = tonumber(id_str)
-	-- for i,player in ipairs(Osi.DB_IsPlayer:Get(nil)) do
+	-- for i,player in pairs(Osi.DB_IsPlayer:Get(nil)) do
 	-- 	local uuid = player[1]
 		
 	-- 	if CharacterIsControlled(uuid) == 1 then

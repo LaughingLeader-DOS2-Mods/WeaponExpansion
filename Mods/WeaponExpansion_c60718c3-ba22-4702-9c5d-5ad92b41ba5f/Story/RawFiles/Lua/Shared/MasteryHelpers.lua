@@ -86,9 +86,9 @@ end
 --- @param tag string
 --- @return boolean
 function Mastery.HasMasteryRequirement(character, tag)
-	-- if Ext.IsDeveloperMode() then
-	-- 	return true
-	-- end
+	if Debug.MasteryTests then
+		return true
+	end
 	if type(character) == "string" then
 		character = Ext.GetCharacter(character)
 	end

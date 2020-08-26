@@ -24,16 +24,16 @@ Ext.Require("Server/UnarmedDamageScaling.lua")
 Ext.Require("Server/OsirisListeners.lua")
 Ext.Require("Server/UI/MasteryMenuCommands.lua")
 Ext.Require("Server/UI/UIHelpers.lua")
-Ext.Require("Server/MasteryHelpers.lua")
-Ext.Require("Server/PistolMechanics.lua")
-Ext.Require("Server/Mastery/SkillBonuses.lua")
-Ext.Require("Server/Mastery/HitBonuses.lua")
-Ext.Require("Server/Mastery/StatusBonuses.lua")
 Ext.Require("Server/Skills/DamageHandler.lua")
 Ext.Require("Server/Skills/ElementalFirearms.lua")
 Ext.Require("Server/Skills/PrepareEffects.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")
 Ext.Require("Server/Skills/SkillListeners.lua")
+Ext.Require("Server/MasteryHelpers.lua")
+Ext.Require("Server/PistolMechanics.lua")
+Ext.Require("Server/Mastery/SkillBonuses.lua")
+Ext.Require("Server/Mastery/HitBonuses.lua")
+Ext.Require("Server/Mastery/StatusBonuses.lua")
 Ext.Require("Server/TagHelpers.lua")
 Ext.Require("Server/Items/ArmCannon.lua")
 Ext.Require("Server/Items/ItemHandler.lua")
@@ -49,7 +49,7 @@ local function dumpRanks(...)
     --DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>")
     local rankNamesDB = Osi.DB_LLWEAPONEX_WeaponMastery_RankNames:Get(nil, nil, nil)
     local output = ""
-    for i,entry in ipairs(rankNamesDB) do
+    for i,entry in pairs(rankNamesDB) do
         --AddRank(masteryID, level, color, name)
         local masteryID = entry[1]
         local level = entry[2]
@@ -93,7 +93,7 @@ local function SessionSetup()
 		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
     end
     
-    for i,callback in ipairs(LoadPersistentVars) do
+    for i,callback in pairs(LoadPersistentVars) do
         local status,err = xpcall(callback, debug.traceback)
         if not status then
             Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)

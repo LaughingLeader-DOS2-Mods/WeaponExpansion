@@ -148,7 +148,7 @@ local function OnHit(target,source,damage,handle)
 					end
 				end
 			end
-			for i,callback in ipairs(BasicAttackManager.Listeners.OnHit) do
+			for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
 				local b,err = xpcall(callback, debug.traceback, true, StringHelpers.GetUUID(source), StringHelpers.GetUUID(target), handle, damage)
 				if not b then
 					Ext.PrintError(err)

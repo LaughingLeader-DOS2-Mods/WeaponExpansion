@@ -56,7 +56,7 @@ function TagItemType(player)
         DualWieldWands = "Wand",
         ShieldWands = "Wand"}
         
-    for i, slot in ipairs(slots) do
+    for i, slot in pairs(slots) do
         local item = CharacterGetEquippedItem(player, slot)
         if item ~= nil then
             local stat = NRD_ItemGetStatsId(item)

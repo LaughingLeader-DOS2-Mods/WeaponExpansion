@@ -257,7 +257,7 @@ local function OnItemTooltip(item, tooltip)
 			CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
 		end
 		if not fakeDamageCreated then
-			for i,entry in ipairs(WeaponTypeNames) do
+			for i,entry in pairs(WeaponTypeNames) do
 				if item:HasTag(entry.Tag) then
 					local armorSlotType = tooltip:GetElement("ArmorSlotType")
 					if armorSlotType == nil then

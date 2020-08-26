@@ -21,16 +21,9 @@ package desc
 			addFrameScript(0,this.frame1);
 		}
 
-		internal function frame1() : *
-		{
-			stop();
-
-			//statusbg_mc.visible = false;
-		}
-
 		public function createIcon(w:int=64,h:int=64) : *
 		{
-			if (this.iconType == 2)
+			if (this.iconType >= 2)
 			{
 				w = 40;
 				h = 40;
@@ -75,6 +68,11 @@ package desc
 				ExternalInterface.call("mastery_hideIconTooltip",iconType);
 				this.hasTooltip = false;
 			}
+		}
+
+		internal function frame1() : *
+		{
+			stop();
 		}
 	}
 }

@@ -612,6 +612,7 @@
 	<content contentuid="h4190e997g6776g46a5gbff1g711a310c6d38">&lt;font color=&apos;#FFCE58&apos;&gt;Fear, Madness, and Sleep are cleansed from encouraged allies.&lt;/font&gt;</content>
 	<content contentuid="h41f9a490ge372g43c7g989ag81b444fb98c8">&lt;font color=&apos;#FF0000&apos;&gt;*Only the grimoire user can equip that!*&lt;/font&gt;</content>
 	<content contentuid="h41ff62e4g3ae2g4f24ga725g0442f8e936a2">*[ONE-HANDED] Click on the button labeled &apos;One-Handed&apos;.*</content>
+	<content contentuid="h422e8df6gbc43g4189gaa52ga7bf873ce86d">&lt;font color=&apos;#00FF66&apos;&gt;This is a passive bonus that is always active if conditions apply.&lt;/font&gt;</content>
 	<content contentuid="h4230520dgdd57g4384g98cdg326bebd1bbe2">&lt;font color=&apos;#5B40FF&apos;&gt;Dagger Mastery II&lt;/font&gt;</content>
 	<content contentuid="h4231ee0dgf851g419aga741gacf969630fe7">Lone Wolf&apos;s Ace</content>
 	<content contentuid="h42445177g4747g4c91g9218gbc6a4e300981">&lt;font color=&apos;#fe6e27&apos;&gt;Fire Great Arrow&lt;/font&gt;</content>
@@ -621,7 +622,7 @@
 	<content contentuid="h4343971egf586g483bgba2ag7aebcba49c5e">Inert Runeblade</content>
 	<content contentuid="h4367cc22g9d4fg4c99ga1dfgc210f7915de3">Throw a chair weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
 	<content contentuid="h439e053bgd9c6g4dd4gbca4ge54f85d29d22">Expert Bannerkeeper</content>
-	<content contentuid="h43a29acfgcc05g45beg9826g10ddaa1ac4f9">Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost3]% extra base damage in total.</content>
+	<content contentuid="h43a29acfgcc05g45beg9826g10ddaa1ac4f9">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost3]% extra base damage in total.</content>
 	<content contentuid="h43cc06a4g9bcdg44b6g88ffgfc91981571dc">Concussion</content>
 	<content contentuid="h43ebaac0g9f8fg4923g9273ga2104220576b">Groundcracker</content>
 	<content contentuid="h441e6d3cg812eg40afg9842gcceb49b2e70b">Legend</content>
@@ -813,7 +814,7 @@
 	<content contentuid="h59dfbe88g8f83g440bga8fbg5fe21502af1c">Explosion Rune</content>
 	<content contentuid="h5a0acb29gfeaag484eg84f8gb692381f545a">&lt;font color=&apos;#FF5522&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
 	<content contentuid="h5a14b843gd426g4481gaff6g01cfdc067527">Warrior&apos;s Greatbow</content>
-	<content contentuid="h5a1bc6cag0662g4041gbb15g9ee793a96690">Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost4]% extra base damage in total.</content>
+	<content contentuid="h5a1bc6cag0662g4041gbb15g9ee793a96690">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost4]% extra base damage in total.</content>
 	<content contentuid="h5a2f3b15gb414g41d2g8740gab76180d63b6">Soldier&apos;s Odachi</content>
 	<content contentuid="h5a3b236cg8ac8g40begba68ge2d96e87e471">Marksman&apos;s Rifle</content>
 	<content contentuid="h5a467f3cg1c23g482eg97a6gfac2a4729c03">&lt;font color=&apos;#999999&apos;&gt;Sapper Bullets&lt;/font&gt;</content>
@@ -934,7 +935,7 @@
 	<content contentuid="h661cff27geb36g4644gb34fg9553b9a51fe5">Piercing Weakness</content>
 	<content contentuid="h66384e98g2365g4eccg8a28g3ccdbc0a6442">Good. My blade was getting hungry.</content>
 	<content contentuid="h66440b41g98bbg46e9gb7acg23a663b36d75">An occluding greatbow arrow was made from a recipe stolen from the chronicles of the Kallavi, an elusive troupe of burglars.</content>
-	<content contentuid="h665d9b1age332g4988gb57cgd1357c4c9af2">&lt;font color=&apos;#F19824&apos;&gt;While spinning, shoot [ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets]-[ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets] enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget:ExplodeRadius]m radius, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].&lt;/font&gt;</content>
+	<content contentuid="h665d9b1age332g4988gb57cgd1357c4c9af2">&lt;font color=&apos;#F19824&apos;&gt;While spinning, shoot [ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets]-[ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets] enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget:ExplodeRadius]m radius, dealing [Skill:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].&lt;/font&gt;</content>
 	<content contentuid="h6662f4beg5cbfg4148g9df2g9f1ebbb63d0b">Blademaster&apos;s Strike 3</content>
 	<content contentuid="h66927417gec18g4fe5gbdd8gfc1541a8179a">Iron Maiden</content>
 	<content contentuid="h66a4c7d4gd550g4308gb159g1ca48d8c4f08">Poison Bullets</content>
@@ -968,7 +969,7 @@
 	<content contentuid="h697deb03gee38g499cgae6fg38fe655fa676">Sparkstorm</content>
 	<content contentuid="h697f3261gc083g4152g84cdgbe559a5e0388">Dagger</content>
 	<content contentuid="h698f1a51gdcf5g491bg8c6fgff6d8863c00b">Exceptional Dual Shields</content>
-	<content contentuid="h69abab56gc6aag4f2ag8cdegfab6e3651afd">&lt;icon id=&apos;Target_Harmony_DisplayName&apos; icon=&apos;Skill_Warrior_GuardianAngel&apos;/&gt;[Key:Target_Harmony_DisplayName] causes allies affected to attack the nearest enemy with a basic attack.&lt;icon id=&apos;Shout_GuardianAngel&apos; icon=&apos;Skill_Warrior_GuardianAngel&apos;/&gt;Resurrect slain protected allies when your turn begins. </content>
+	<content contentuid="h69abab56gc6aag4f2ag8cdegfab6e3651afd">&lt;icon id=&apos;Target_Harmony&apos; icon=&apos;Skill_Summoning_Harmony&apos;/&gt;[Key:Target_Harmony_DisplayName] causes allies affected to attack the nearest enemy with a basic attack.&lt;icon id=&apos;Shout_GuardianAngel&apos; icon=&apos;Skill_Warrior_GuardianAngel&apos;/&gt;Resurrect slain protected allies when your turn begins. </content>
 	<content contentuid="h69c827cag62f8g4080g802agc8b830a3ef7f">Earthen Dwarven Shields</content>
 	<content contentuid="h6a044bb9g0e3dg4cc6gbc56g23274880bc0f">&lt;font color=&apos;#ED9D07&apos;&gt;Spell Triggered!&lt;/font&gt;</content>
 	<content contentuid="h6a1e045eg3d51g47adg8642gfa2764ed01f6">[LLWEAPONEX_VendingMachine_OrderOption6_d70c702c-a0c1-49a7-8772-1479725e2a39]</content>
@@ -1013,7 +1014,7 @@
 	<content contentuid="h6e194dd5g2ad5g4d96g965agcc05dac9c23f">Runic Cannon Energy</content>
 	<content contentuid="h6e21af89g96d5g4826ga11ag8688bee4a5f7">Blade</content>
 	<content contentuid="h6e3a04cbgb9a1g4f1dga2b3g71f181ec93d3">Weapon Expansion - Unique Weapons</content>
-	<content contentuid="h6e62632bgd952g474ag824aga7513eaab0c6">Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.</content>
+	<content contentuid="h6e62632bgd952g474ag824aga7513eaab0c6">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.</content>
 	<content contentuid="h6e7f93aeg6389g49ffgbd17g56c38a61568b">Assassin&apos;s Retirement</content>
 	<content contentuid="h6e84de08g3e9bg43aega2acg098aa0085c8d">Charming Arrow</content>
 	<content contentuid="h6e8bf4fdgd720g43adg878ag75aff041a469">Magical Arm-Mounted Crossbow</content>
@@ -1095,7 +1096,7 @@
 	<content contentuid="h76bcf828gaeb5g4329ga650ge7b2bebd87c1">Character is immune to being directly Shocked by a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.</content>
 	<content contentuid="h76c6f571gf887g40d9g884ag081f3ac052dc">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery II&lt;/font&gt;</content>
 	<content contentuid="h76e869b4gae45g47c6g8529gf55e8b414d5e">Weapon Expansion - Armor</content>
-	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike&apos; icon=&apos;Skill_Warrior_BlinkStrike&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.&lt;br&gt;[Key:LLWEAPONEX_MB_Axe_Savage]</content>
+	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike;LLWEAPONEX_MASTERYBONUS_VULNERABLE&apos; icon=&apos;Skill_Warrior_BlinkStrike;LeaderLib_Placeholder&apos; type=&apos;1;2&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies Vulnerable to targets hit. Vulnerable lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Savage_DisplayName,LLWEAPONEX_MB_Axe_Savage&apos; icon=&apos;LeaderLib_Placeholder&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Savage]</content>
 	<content contentuid="h778419bdg900eg4b6egb376g652371ca7538">A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers</content>
 	<content contentuid="h7784b453g91ceg4c49g80cfg2d67bd2869fb">&lt;font color=&apos;#999999&apos;&gt;Oiled Mini-Bolts&lt;/font&gt;</content>
 	<content contentuid="h77cc8da4g0275g49fdgab2ag7b8383f38d48">Chaos Edge</content>
@@ -1493,6 +1494,7 @@
 	<content contentuid="ha2711c4bg28d6g42c1gb315g1ebfa564bae0">Boom!</content>
 	<content contentuid="ha2940579g2b42g4b63gbc8fg41f8ba5e358c">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="ha294a1bfg2496g4badg9830gc88546c7e7c8">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery IV&lt;/font&gt;</content>
+	<content contentuid="ha2bb0653g0733g468cgb260g9956cd1337c7">Axe Stalker</content>
 	<content contentuid="ha2e642b4ga7a9g4e8dg9602gc99caba74917">[LLWEAPONEX_VendingMachine_OrderOption3_048eaa1b-d937-48bb-ac2c-5759cd64540f]</content>
 	<content contentuid="ha334211eg8502g4530ga132g3e96b8ded816">a Shield</content>
 	<content contentuid="ha33beed7ga922g4a63gbba6gddab9629cdee">&lt;font color=&apos;#24ff24&apos;&gt;Flourish (+1 AP)&lt;/font&gt;</content>
@@ -1512,7 +1514,7 @@
 	<content contentuid="ha509ee2ag0a0fg4f8eg8b9cg0583440301be">Soul Harvest</content>
 	<content contentuid="ha5799518gef22g4d3bga215g67ee45a4a922">Contaminated</content>
 	<content contentuid="ha57eabe4gc0b8g4fccg9ca7g0f748d97117a">Trusty Old Greatbow</content>
-	<content contentuid="ha58bb241gb3cfg4ac0g845ag0ae0342bb50d">Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.</content>
+	<content contentuid="ha58bb241gb3cfg4ac0g845ag0ae0342bb50d">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.</content>
 	<content contentuid="ha5e68b94gef5ag4f30gaa13gcd30063f5a58">Revolution</content>
 	<content contentuid="ha5e7da5cg6dcdg45cegbe67g378a44986204">A special pet rock. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
 	<content contentuid="ha61a9beeg3dcbg426eg86dfg93adbbe40b56">Worn Glaive</content>
@@ -1626,7 +1628,7 @@
 	<content contentuid="hb22c57efg4b49g4c61g8ebfg2534587f2c03">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb2347eefgdc6ag4ab1g82a4g21139b4a7917">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery V&lt;/font&gt;</content>
 	<content contentuid="hb24bd0c9gc9fbg414cga6d7g6f9c286fbbcc">&lt;icon id=&apos;MultiStrike_Vault&apos; icon=&apos;Skill_Rogue_Vault&apos;/&gt;After teleporting, your next attack deals 50% more damage.</content>
-	<content contentuid="hb275dc8eg9d9dg4ba9g8c76g3f9e4f447388">&lt;icon id=&apos;Target_Flurry&apos; icon=&apos;Skill_Warrior_Onslaught&apos;/&gt;Each hit with [Key:Target_Flurry_DisplayName] cleaves in a small cone.&lt;br&gt;[Key:LLWEAPONEX_MB_Axe_Stalker]</content>
+	<content contentuid="hb275dc8eg9d9dg4ba9g8c76g3f9e4f447388">&lt;icon id=&apos;Target_Flurry&apos; icon=&apos;Skill_Warrior_Onslaught&apos;/&gt;Each hit with [Key:Target_Flurry_DisplayName] cleaves in a small cone.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Stalker_DisplayName,LLWEAPONEX_MB_Axe_Stalker&apos; icon=&apos;LeaderLib_Placeholder&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Stalker]</content>
 	<content contentuid="hb2773ad0g3c62g4ba3gbc63gb215e6b9e0f7">Soulcursed Ebon Skewer</content>
 	<content contentuid="hb28cf019g6f7dg4a3fg9f19gf8721bd23f46">An old blindfold, said to once belong to a monk in a distance land.&lt;br&gt;By choosing to cloak the perceived world in darkness, the monk found her inner strength grow.</content>
 	<content contentuid="hb29bcef2g2085g45acg9401g697bd7fc43a5">Poison Weakness</content>
@@ -1665,7 +1667,7 @@
 	<content contentuid="hb69d0ce2g0c1dg4bdfg9d1fg6e77f212b510">Avalanche Rune</content>
 	<content contentuid="hb6b41943g9b7cg46a1gbff2g296ee08ac1a9">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are coated in a deadly toxin, dealing poison damage.</content>
 	<content contentuid="hb6ca4a83ga533g4331ga92cgd041f43b7675">Bonus Damage to Immobile Targets</content>
-	<content contentuid="hb6eef25cg3995g4611gabdfgd65916b4bf94">Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_CloakAndDagger&apos; icon=&apos;Skill_Rogue_CloakAndDagger&apos;/&gt;Automatically reload your pistol when jumping.&lt;br&gt;When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius]m.&lt;br&gt;If this marks a target, your pistol will deal one guaranteed critical hit until your turn ends.</content>
+	<content contentuid="hb6eef25cg3995g4611gabdfgd65916b4bf94">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_CloakAndDagger&apos; icon=&apos;Skill_Rogue_CloakAndDagger&apos;/&gt;Automatically reload your pistol when jumping.&lt;br&gt;When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius]m.&lt;br&gt;If this marks a target, your pistol will deal one guaranteed critical hit until your turn ends.</content>
 	<content contentuid="hb6f630efgd273g468bg9875g32bffb7fb120">Reload your &lt;font color=&apos;#C7A758&apos;&gt;Pistol&lt;/font&gt;, instantly refreshing the &lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt; skill.</content>
 	<content contentuid="hb701a487g48dbg435fga69dg831fb8da30ca">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb723ab59ga442g4711g99d7g191f9c802164">Gas Rune</content>
@@ -2233,7 +2235,7 @@
 	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Set [1] for [4] turn(s) [2][3]</content>
 	<content contentuid="hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb">Builds Energy on Hit</content>
 	<content contentuid="hf90e918egb64fg4601g9e94g26341d6599da">Create Attribute Token</content>
-	<content contentuid="hf90feb29g1849g425dgae29ga5377df30f4b">Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;In combat, [Key:Jump_TacticalRetreat_DisplayName] applies [Key:MARKED_DisplayName] to nearby enemies when jumping away.</content>
+	<content contentuid="hf90feb29g1849g425dgae29ga5377df30f4b">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;In combat, [Key:Jump_TacticalRetreat_DisplayName] applies [Key:MARKED_DisplayName] to nearby enemies when jumping away.</content>
 	<content contentuid="hf950d4e3g4ccag41b2ga540g5dd692a09eed">Balrin&apos;s Throwing Axe (Oil)</content>
 	<content contentuid="hf969c08agb2ffg41adgaa24gcd006e8e92c0">Character is taking reduced damage until their next turn.</content>
 	<content contentuid="hf9b06846g0062g4b99ga3afgb43f2d3e5149">&lt;font color=&apos;#00aa00&apos;&gt;Poisoncloud Great Arrow&lt;/font&gt;</content>

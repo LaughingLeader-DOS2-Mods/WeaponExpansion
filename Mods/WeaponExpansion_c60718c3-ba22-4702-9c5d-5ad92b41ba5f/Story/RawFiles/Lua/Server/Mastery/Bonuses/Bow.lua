@@ -8,7 +8,7 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery
 		local shotBonus = false
 		local isInCombat = CharacterIsInCombat(char) == 1
 		if skillData.TotalTargetObjects ~= nil and skillData.TotalTargetObjects > 0 then
-			for i,v in ipairs(skillData.TargetObjects) do
+			for i,v in pairs(skillData.TargetObjects) do
 				local target = nil
 				if isInCombat then
 					local maxDist = Ext.StatGetAttribute(skill, "TargetRadius")
@@ -41,7 +41,7 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery
 				-rot[9] * 1.25,
 			}
 
-			for i,v in ipairs(skillData.TargetPositions) do
+			for i,v in pairs(skillData.TargetPositions) do
 				local target = nil
 				local x,y,z = table.unpack(v)
 				if isInCombat then

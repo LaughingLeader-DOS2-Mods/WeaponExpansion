@@ -52,7 +52,7 @@ local overrides = {
 local function appendProperties(statname, property, value)
 	local existingTable = Ext.StatGetAttribute(statname, property)
 	if existingTable ~= nil then
-		for i,v in ipairs(value) do
+		for i,v in pairs(value) do
 			table.insert(existingTable, v)
 		end
 		Ext.StatSetAttribute(statname, property, existingTable)

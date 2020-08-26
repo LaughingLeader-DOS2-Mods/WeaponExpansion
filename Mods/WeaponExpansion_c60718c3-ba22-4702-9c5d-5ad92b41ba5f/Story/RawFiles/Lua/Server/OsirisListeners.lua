@@ -102,7 +102,7 @@ local function OnStatusApplied(target, status, source)
 	end
 	local callbacks = Listeners.Status[status]
 	if callbacks ~= nil then
-		for i,callback in ipairs(callbacks) do
+		for i,callback in pairs(callbacks) do
 			local b,err = xpcall(callback, debug.traceback, target, status, source)
 			if not b then
 				Ext.PrintError(err)
@@ -117,7 +117,7 @@ Ext.RegisterOsirisListener("NRD_OnStatusAttempt", 4, "after", function(target, s
 	if #Listeners.StatusAttempt	> 0 then
 		local callbacks = Listeners.StatusAttempt[status]
 		if callbacks ~= nil then
-			for i,callback in ipairs(callbacks) do
+			for i,callback in pairs(callbacks) do
 				local s,err = xpcall(callback, debug.traceback, target, status, handle, source)
 				if not s then
 					Ext.PrintError(err)
