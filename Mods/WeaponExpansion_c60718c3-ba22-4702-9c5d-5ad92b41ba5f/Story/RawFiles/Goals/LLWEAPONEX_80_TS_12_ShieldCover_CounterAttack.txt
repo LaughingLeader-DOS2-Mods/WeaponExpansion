@@ -17,7 +17,7 @@ NRD_HitGetInt(_Handle, "HitType", _Val)
 AND
 _Val <=3 // Everything but Surface,DoT,Reflected
 AND
-LeaderLib_Hit_QRY_HitSucceeded(_Char, _Handle, 1)
+LeaderLib_Hit_QRY_HitSucceeded((GUIDSTRING)_Char, _Handle, 1)
 THEN
 NRD_HitClearAllDamage(_Handle);
 NRD_HitSetInt(_Handle,"SimulateHit",0);
@@ -26,7 +26,7 @@ NRD_HitSetInt(_Handle,"Missed",0);
 NRD_HitSetInt(_Handle,"Blocked",1);
 NRD_HitSetInt(_Handle,"Hit",0);
 NRD_HitSetInt(_Handle,"DontCreateBloodSurface",1);
-DB_LLWEAPONEX_DualShields_Temp_BlockedHit(_Char, _Blocker, _Attacker);
+DB_LLWEAPONEX_DualShields_Temp_BlockedHit((CHARACTERGUID)_Char, _Blocker, _Attacker);
 
 IF
 NRD_OnHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Attacker, _Damage, _Handle)
