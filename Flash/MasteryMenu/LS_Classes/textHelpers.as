@@ -24,94 +24,94 @@ package LS_Classes
 		
 		public static function smallCaps(param1:TextField, param2:Number = 7, param3:Boolean = false, param4:String = "") : void
 		{
-			var _loc12_:Object = null;
-			var _loc13_:Number = NaN;
-			var _loc14_:String = null;
-			var _loc15_:Array = null;
-			var _loc16_:Number = NaN;
-			var _loc17_:Number = NaN;
-			var _loc18_:String = null;
-			var _loc19_:String = null;
-			var _loc5_:String = "";
-			var _loc6_:TextFormat = param1.getTextFormat();
-			var _loc7_:Number = Number(_loc6_.size);
-			var _loc8_:Number = _loc7_ - param2;
-			var _loc9_:String = param1.htmlText;
+			var val12:Object = null;
+			var val13:Number = NaN;
+			var val14:String = null;
+			var val15:Array = null;
+			var val16:Number = NaN;
+			var val17:Number = NaN;
+			var val18:String = null;
+			var val19:String = null;
+			var val5:String = "";
+			var val6:TextFormat = param1.getTextFormat();
+			var val7:Number = Number(val6.size);
+			var val8:Number = val7 - param2;
+			var val9:String = param1.htmlText;
 			if(param4 != "")
 			{
-				_loc9_ = param4;
+				val9 = param4;
 			}
-			var _loc10_:Array = getFullTags(_loc9_);
-			if(_loc10_.length == 0)
+			var val10:Array = getFullTags(val9);
+			if(val10.length == 0)
 			{
-				_loc12_ = new Object();
-				_loc12_.tagStr = "";
-				_loc12_.charPos = 0;
-				_loc12_.tagContent = _loc9_;
-				_loc10_.push(_loc12_);
+				val12 = new Object();
+				val12.tagStr = "";
+				val12.charPos = 0;
+				val12.tagContent = val9;
+				val10.push(val12);
 			}
-			var _loc11_:Number = 0;
-			while(_loc11_ < _loc10_.length)
+			var val11:Number = 0;
+			while(val11 < val10.length)
 			{
-				_loc13_ = _loc9_.length - 1;
-				if(_loc11_ + 1 != _loc10_.length)
+				val13 = val9.length - 1;
+				if(val11 + 1 != val10.length)
 				{
-					_loc13_ = _loc10_[_loc11_ + 1].charPos;
+					val13 = val10[val11 + 1].charPos;
 				}
-				_loc14_ = _loc10_[_loc11_].tagContent;
-				_loc15_ = new Array(_loc14_);
+				val14 = val10[val11].tagContent;
+				val15 = new Array(val14);
 				if(param3)
 				{
-					_loc15_ = _loc14_.split(" ");
+					val15 = val14.split(" ");
 				}
-				_loc5_ = _loc5_ + ("" + _loc10_[_loc11_].tagStr);
-				_loc16_ = 0;
-				while(_loc16_ < _loc15_.length)
+				val5 = val5 + ("" + val10[val11].tagStr);
+				val16 = 0;
+				while(val16 < val15.length)
 				{
-					if(_loc15_[_loc16_].length > 0)
+					if(val15[val16].length > 0)
 					{
-						_loc17_ = Number(_loc15_[_loc16_]);
-						if(isNaN(_loc17_))
+						val17 = Number(val15[val16]);
+						if(isNaN(val17))
 						{
-							_loc18_ = _loc15_[_loc16_].charAt(0).toUpperCase();
-							_loc19_ = _loc15_[_loc16_].slice(1).toUpperCase();
-							_loc5_ = _loc5_ + (_loc18_ + "<font size=\'" + _loc8_ + "\'>" + _loc19_ + "</font>");
+							val18 = val15[val16].charAt(0).toUpperCase();
+							val19 = val15[val16].slice(1).toUpperCase();
+							val5 = val5 + (val18 + "<font size=\'" + val8 + "\'>" + val19 + "</font>");
 						}
 						else
 						{
-							_loc5_ = _loc5_ + _loc17_;
+							val5 = val5 + val17;
 						}
 						if(param3)
 						{
-							_loc5_ = _loc5_ + " ";
+							val5 = val5 + " ";
 						}
 					}
-					_loc16_++;
+					val16++;
 				}
-				_loc11_++;
+				val11++;
 			}
-			param1.htmlText = _loc5_;
+			param1.htmlText = val5;
 		}
 		
 		public static function capTextFieldWidth(param1:TextField, param2:uint) : Boolean
 		{
-			var _loc3_:Rectangle = null;
-			var _loc4_:uint = 0;
-			var _loc5_:String = null;
+			var val3:Rectangle = null;
+			var val4:uint = 0;
+			var val5:String = null;
 			if(param1.textWidth > param2)
 			{
-				_loc4_ = 0;
-				while(_loc4_ < param1.length)
+				val4 = 0;
+				while(val4 < param1.length)
 				{
-					_loc3_ = param1.getCharBoundaries(_loc4_);
-					if(_loc3_.left > param2)
+					val3 = param1.getCharBoundaries(val4);
+					if(val3.left > param2)
 					{
-						_loc5_ = param1.htmlText.slice(0,_loc4_);
-						_loc5_ = _loc5_ + "...";
-						param1.htmlText = _loc5_;
+						val5 = param1.htmlText.slice(0,val4);
+						val5 = val5 + "...";
+						param1.htmlText = val5;
 						return true;
 					}
-					_loc4_++;
+					val4++;
 				}
 			}
 			return false;
@@ -119,437 +119,437 @@ package LS_Classes
 		
 		public static function toUpperCase(param1:String) : String
 		{
-			var _loc2_:Array = getFullTags(param1);
-			if(_loc2_.length == 0)
+			var val2:Array = getFullTags(param1);
+			if(val2.length == 0)
 			{
 				return param1.toUpperCase();
 			}
-			var _loc3_:String = "";
-			var _loc4_:Number = 0;
-			while(_loc4_ < _loc2_.length)
+			var val3:String = "";
+			var val4:Number = 0;
+			while(val4 < val2.length)
 			{
-				_loc3_ = _loc3_ + ("" + _loc2_[_loc4_].tagStr + _loc2_[_loc4_].tagContent.toUpperCase());
-				_loc4_++;
+				val3 = val3 + ("" + val2[val4].tagStr + val2[val4].tagContent.toUpperCase());
+				val4++;
 			}
-			return _loc3_;
+			return val3;
 		}
 		
 		public static function cleanUpTextFieldDecoration(param1:Event) : *
 		{
-			var _loc4_:MovieClip = null;
-			var _loc2_:TextField = param1.currentTarget as TextField;
-			var _loc3_:MovieClip = _loc2_.parent as MovieClip;
-			if(_loc3_)
+			var val4:MovieClip = null;
+			var val2:TextField = param1.currentTarget as TextField;
+			var val3:MovieClip = val2.parent as MovieClip;
+			if(val3)
 			{
-				if(_loc3_[_loc2_.name + "Deco"] != null)
+				if(val3[val2.name + "Deco"] != null)
 				{
-					_loc4_ = _loc3_[_loc2_.name + "Deco"];
-					if(_loc4_)
+					val4 = val3[val2.name + "Deco"];
+					if(val4)
 					{
-						_loc4_.graphics.clear();
+						val4.graphics.clear();
 					}
-					_loc2_.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+					val2.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 				}
 			}
 		}
 		
-		public static function setFormattedText(textField:TextField, text:String, boldClassName:String = "$Title_Bold", italicClassName:String = "$Title_Italic") : void
+		public static function setFormattedText(param1:TextField, param2:String, param3:String = "$Title_Bold", param4:String = "$Title_Italic") : void
 		{
-			var lineIndex1:Number = NaN;
-			var lineIndex2:Number = NaN;
-			var lineIndex3:uint = 0;
-			var lineMetrics:TextLineMetrics = null;
-			var lineOffset:int = 0;
-			var lineOffsetEnd:int = 0;
-			var charBounds:Rectangle = null;
-			var charBounds2:Rectangle = null;
-			var lineToRight:Number = NaN;
-			var leftPos:Number = NaN;
-			var rightPos:int = 0;
-			var posFormatter:TextFormat = null;
-			var formatColor:uint = 0;
-			var formatSize:Number = NaN;
-			var boldClass:Class = getDefinitionByName(boldClassName) as Class;
-			var italicClass:Class = getDefinitionByName(italicClassName) as Class;
-			var boldFont:Font = new boldClass();
-			var italicFont:Font = new italicClass();
-			var italicFormatter:TextFormat = textField.getTextFormat();
-			var parentMC:MovieClip = textField.parent as MovieClip;
-			italicFormatter.font = italicFont.fontName;
-			var boldFormatter:TextFormat = textField.getTextFormat();
-			boldFormatter.font = boldFont.fontName;
-			textField.htmlText = text;
-			var decoMC:MovieClip = null;
-			if(parentMC[textField.name + "Deco"] != null)
+			var val16:Number = NaN;
+			var val17:Number = NaN;
+			var val18:uint = 0;
+			var val19:TextLineMetrics = null;
+			var val20:int = 0;
+			var val21:int = 0;
+			var val22:Rectangle = null;
+			var val23:Rectangle = null;
+			var val24:Number = NaN;
+			var val25:Number = NaN;
+			var val26:int = 0;
+			var val27:TextFormat = null;
+			var val28:uint = 0;
+			var val29:Number = NaN;
+			var val5:Class = getDefinitionByName(param3) as Class;
+			var val6:Class = getDefinitionByName(param4) as Class;
+			var val7:Font = new val5();
+			var val8:Font = new val6();
+			var val9:TextFormat = param1.getTextFormat();
+			var val10:MovieClip = param1.parent as MovieClip;
+			val9.font = val8.fontName;
+			var val11:TextFormat = param1.getTextFormat();
+			val11.font = val7.fontName;
+			param1.htmlText = param2;
+			var val12:MovieClip = null;
+			if(val10[param1.name + "Deco"] != null)
 			{
-				decoMC = parentMC[textField.name + "Deco"];
-				if(decoMC)
+				val12 = val10[param1.name + "Deco"];
+				if(val12)
 				{
-					decoMC.graphics.clear();
+					val12.graphics.clear();
 				}
-				textField.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+				param1.removeEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 			}
-			var textTagsArr:Array = getTags(text);
-			var tagIndex1:int = 0;
-			var tagIter1:uint = 0;
-			while(tagIter1 < textTagsArr.length)
+			var val13:Array = getTags(param2);
+			var val14:int = 0;
+			var val15:uint = 0;
+			while(val15 < val13.length)
 			{
-				switch(textTagsArr[tagIter1].tagStr)
+				switch(val13[val15].tagStr)
 				{
 					case "<s>":
-						tagIndex1 = findNextTag("</s>",tagIter1,textTagsArr);
-						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
+						val14 = findNextTag("</s>",val15,val13);
+						if(val14 > 0 && val14 < val13.length)
 						{
-							lineIndex1 = textField.getLineIndexOfChar(textTagsArr[tagIter1].charPos);
-							lineIndex2 = textField.getLineIndexOfChar(textTagsArr[tagIndex1].charPos);
-							if(lineIndex2 < 0)
+							val16 = param1.getLineIndexOfChar(val13[val15].charPos);
+							val17 = param1.getLineIndexOfChar(val13[val14].charPos);
+							if(val17 < 0)
 							{
-								lineIndex2 = textField.numLines - 1;
+								val17 = param1.numLines - 1;
 							}
-							if(lineIndex1 >= 0 && lineIndex2 >= 0)
+							if(val16 >= 0 && val17 >= 0)
 							{
-								lineIndex3 = lineIndex1;
-								while(lineIndex3 <= lineIndex2)
+								val18 = val16;
+								while(val18 <= val17)
 								{
-									if(decoMC == null)
+									if(val12 == null)
 									{
-										decoMC = parentMC[textField.name + "Deco"] = new MovieClip();
-										parentMC.addChild(decoMC);
-										decoMC.x = textField.x;
-										decoMC.y = textField.y;
-										textField.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+										val12 = val10[param1.name + "Deco"] = new MovieClip();
+										val10.addChild(val12);
+										val12.x = param1.x;
+										val12.y = param1.y;
+										param1.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 									}
-									lineMetrics = textField.getLineMetrics(lineIndex3);
-									lineOffset = textField.getLineOffset(lineIndex3);
-									lineOffsetEnd = lineOffset + textField.getLineLength(lineIndex3);
-									if(lineOffset < textTagsArr[tagIter1].charPos)
+									val19 = param1.getLineMetrics(val18);
+									val20 = param1.getLineOffset(val18);
+									val21 = val20 + param1.getLineLength(val18);
+									if(val20 < val13[val15].charPos)
 									{
-										lineOffset = textTagsArr[tagIter1].charPos;
+										val20 = val13[val15].charPos;
 									}
-									if(lineOffsetEnd > textTagsArr[tagIndex1].charPos)
+									if(val21 > val13[val14].charPos)
 									{
-										lineOffsetEnd = textTagsArr[tagIndex1].charPos;
+										val21 = val13[val14].charPos;
 									}
-									charBounds = textField.getCharBoundaries(lineOffset);
-									charBounds2 = textField.getCharBoundaries(lineOffsetEnd - 1);
-									if(charBounds)
+									val22 = param1.getCharBoundaries(val20);
+									val23 = param1.getCharBoundaries(val21 - 1);
+									if(val22)
 									{
-										lineToRight = Boolean(charBounds2)?Number(charBounds2.right):Number(charBounds.right);
-										leftPos = charBounds.left;
-										rightPos = lineMetrics.ascent * 0.8 + charBounds.top;
-										posFormatter = textField.getTextFormat(textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
-										if(posFormatter.color == null)
+										val24 = Boolean(val23)?Number(val23.right):Number(val22.right);
+										val25 = val22.left;
+										val26 = val19.ascent * 0.8 + val22.top;
+										val27 = param1.getTextFormat(val13[val15].charPos,val13[val14].charPos);
+										if(val27.color == null)
 										{
-											posFormatter = textField.getTextFormat(textTagsArr[tagIter1].charPos,textTagsArr[tagIter1].charPos + 1);
+											val27 = param1.getTextFormat(val13[val15].charPos,val13[val15].charPos + 1);
 										}
-										formatColor = new uint(posFormatter.color);
-										formatSize = new Number(posFormatter.size);
-										decoMC.graphics.lineStyle(Math.ceil(formatSize * 0.08),formatColor);
-										decoMC.graphics.moveTo(leftPos,rightPos);
-										decoMC.graphics.lineTo(lineToRight,rightPos);
+										val28 = new uint(val27.color);
+										val29 = new Number(val27.size);
+										val12.graphics.lineStyle(Math.ceil(val29 * 0.08),val28);
+										val12.graphics.moveTo(val25,val26);
+										val12.graphics.lineTo(val24,val26);
 									}
-									lineIndex3++;
+									val18++;
 								}
 							}
 						}
 						break;
 					case "<u>":
-						tagIndex1 = findNextTag("</u>",tagIter1,textTagsArr);
-						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
+						val14 = findNextTag("</u>",val15,val13);
+						if(val14 > 0 && val14 < val13.length)
 						{
-							lineIndex1 = textField.getLineIndexOfChar(textTagsArr[tagIter1].charPos);
-							lineIndex2 = textField.getLineIndexOfChar(textTagsArr[tagIndex1].charPos);
-							if(lineIndex2 < 0)
+							val16 = param1.getLineIndexOfChar(val13[val15].charPos);
+							val17 = param1.getLineIndexOfChar(val13[val14].charPos);
+							if(val17 < 0)
 							{
-								lineIndex2 = textField.numLines - 1;
+								val17 = param1.numLines - 1;
 							}
-							if(lineIndex1 >= 0 && lineIndex2 >= 0)
+							if(val16 >= 0 && val17 >= 0)
 							{
-								lineIndex3 = lineIndex1;
-								while(lineIndex3 <= lineIndex2)
+								val18 = val16;
+								while(val18 <= val17)
 								{
-									if(decoMC == null)
+									if(val12 == null)
 									{
-										decoMC = parentMC[textField.name + "Deco"] = new MovieClip();
-										parentMC.addChild(decoMC);
-										decoMC.x = textField.x;
-										decoMC.y = textField.y;
-										textField.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
+										val12 = val10[param1.name + "Deco"] = new MovieClip();
+										val10.addChild(val12);
+										val12.x = param1.x;
+										val12.y = param1.y;
+										param1.addEventListener(Event.REMOVED_FROM_STAGE,cleanUpTextFieldDecoration);
 									}
-									lineMetrics = textField.getLineMetrics(lineIndex3);
-									lineOffset = textField.getLineOffset(lineIndex3);
-									lineOffsetEnd = lineOffset + textField.getLineLength(lineIndex3);
-									if(lineOffset < textTagsArr[tagIter1].charPos)
+									val19 = param1.getLineMetrics(val18);
+									val20 = param1.getLineOffset(val18);
+									val21 = val20 + param1.getLineLength(val18);
+									if(val20 < val13[val15].charPos)
 									{
-										lineOffset = textTagsArr[tagIter1].charPos;
+										val20 = val13[val15].charPos;
 									}
-									if(lineOffsetEnd > textTagsArr[tagIndex1].charPos)
+									if(val21 > val13[val14].charPos)
 									{
-										lineOffsetEnd = textTagsArr[tagIndex1].charPos;
+										val21 = val13[val14].charPos;
 									}
-									charBounds = textField.getCharBoundaries(lineOffset);
-									if(charBounds)
+									val22 = param1.getCharBoundaries(val20);
+									if(val22)
 									{
-										charBounds2 = textField.getCharBoundaries(lineOffsetEnd - 1);
-										if(charBounds2)
+										val23 = param1.getCharBoundaries(val21 - 1);
+										if(val23)
 										{
-											charBounds2 = textField.getCharBoundaries(lineOffsetEnd - 2);
+											val23 = param1.getCharBoundaries(val21 - 2);
 										}
-										lineToRight = Boolean(charBounds2)?Number(charBounds2.right):Number(charBounds.right);
-										leftPos = charBounds.left;
-										posFormatter = textField.getTextFormat(textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
-										formatColor = new uint(posFormatter.color);
-										formatSize = new Number(posFormatter.size);
-										rightPos = lineMetrics.ascent + lineMetrics.descent * 0.04 * formatSize + charBounds.top;
-										decoMC.graphics.lineStyle(Math.ceil(formatSize * 0.08),formatColor);
-										decoMC.graphics.moveTo(leftPos,rightPos);
-										decoMC.graphics.lineTo(lineToRight,rightPos);
+										val24 = Boolean(val23)?Number(val23.right):Number(val22.right);
+										val25 = val22.left;
+										val27 = param1.getTextFormat(val13[val15].charPos,val13[val14].charPos);
+										val28 = new uint(val27.color);
+										val29 = new Number(val27.size);
+										val26 = val19.ascent + val19.descent * 0.04 * val29 + val22.top;
+										val12.graphics.lineStyle(Math.ceil(val29 * 0.08),val28);
+										val12.graphics.moveTo(val25,val26);
+										val12.graphics.lineTo(val24,val26);
 									}
-									lineIndex3++;
+									val18++;
 								}
 							}
 						}
 						break;
 					case "<b>":
-						tagIndex1 = findNextTag("</b>",tagIter1,textTagsArr);
-						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
+						val14 = findNextTag("</b>",val15,val13);
+						if(val14 > 0 && val14 < val13.length)
 						{
-							textField.setTextFormat(boldFormatter,textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
+							param1.setTextFormat(val11,val13[val15].charPos,val13[val14].charPos);
 						}
 						break;
 					case "<i>":
-						tagIndex1 = findNextTag("</i>",tagIter1,textTagsArr);
-						if(tagIndex1 > 0 && tagIndex1 < textTagsArr.length)
+						val14 = findNextTag("</i>",val15,val13);
+						if(val14 > 0 && val14 < val13.length)
 						{
-							textField.setTextFormat(italicFormatter,textTagsArr[tagIter1].charPos,textTagsArr[tagIndex1].charPos);
+							param1.setTextFormat(val9,val13[val15].charPos,val13[val14].charPos);
 						}
 				}
-				tagIter1++;
+				val15++;
 			}
 		}
 		
 		private static function findNextTag(param1:String, param2:uint, param3:Array) : int
 		{
-			var _loc4_:uint = param2;
-			while(_loc4_ < param3.length)
+			var val4:uint = param2;
+			while(val4 < param3.length)
 			{
-				if(param3[_loc4_].tagStr == param1)
+				if(param3[val4].tagStr == param1)
 				{
-					return _loc4_;
+					return val4;
 				}
-				_loc4_++;
+				val4++;
 			}
 			return -1;
 		}
 		
 		private static function getFullTags(param1:String) : Array
 		{
-			var _loc5_:Object = null;
-			var _loc2_:Array = new Array();
-			var _loc3_:int = 0;
-			var _loc4_:int = param1.indexOf("<",_loc3_);
-			while(_loc4_ != -1)
+			var val5:Object = null;
+			var val2:Array = new Array();
+			var val3:int = 0;
+			var val4:int = param1.indexOf("<",val3);
+			while(val4 != -1)
 			{
-				_loc3_ = _loc4_;
-				_loc4_ = param1.indexOf(">",_loc3_);
-				_loc5_ = new Object();
-				_loc5_.tagStr = param1.substring(_loc3_,_loc4_ + 1);
-				_loc5_.charPos = _loc3_;
-				_loc2_.push(_loc5_);
-				_loc3_ = _loc4_;
-				_loc4_ = param1.indexOf("<",_loc3_);
-				if(_loc3_ == -1 && _loc4_ == -1 || _loc3_ >= param1.length - 1)
+				val3 = val4;
+				val4 = param1.indexOf(">",val3);
+				val5 = new Object();
+				val5.tagStr = param1.substring(val3,val4 + 1);
+				val5.charPos = val3;
+				val2.push(val5);
+				val3 = val4;
+				val4 = param1.indexOf("<",val3);
+				if(val3 == -1 && val4 == -1 || val3 >= param1.length - 1)
 				{
-					_loc5_.tagContent = "";
+					val5.tagContent = "";
 				}
-				else if(_loc4_ == -1)
+				else if(val4 == -1)
 				{
-					_loc5_.tagContent = param1.substring(_loc3_ + 1);
+					val5.tagContent = param1.substring(val3 + 1);
 				}
 				else
 				{
-					_loc5_.tagContent = param1.substring(_loc3_ + 1,_loc4_);
+					val5.tagContent = param1.substring(val3 + 1,val4);
 				}
 			}
-			return _loc2_;
+			return val2;
 		}
 		
 		private static function getTags(param1:String) : Array
 		{
-			var _loc6_:Object = null;
-			var _loc2_:Array = new Array();
-			var _loc3_:int = 0;
-			var _loc4_:int = param1.indexOf("<",_loc3_);
-			var _loc5_:int = 0;
-			while(_loc4_ != -1)
+			var val6:Object = null;
+			var val2:Array = new Array();
+			var val3:int = 0;
+			var val4:int = param1.indexOf("<",val3);
+			var val5:int = 0;
+			while(val4 != -1)
 			{
-				_loc3_ = _loc4_;
-				_loc4_ = param1.indexOf(">",_loc3_);
-				_loc6_ = new Object();
-				_loc6_.tagStr = param1.substr(_loc3_,_loc4_ - _loc3_ + 1);
-				_loc6_.charPos = _loc3_ - _loc5_;
-				_loc2_.push(_loc6_);
-				_loc5_ = _loc5_ + _loc6_.tagStr.length;
-				_loc3_ = _loc4_;
-				_loc4_ = param1.indexOf("<",_loc3_);
+				val3 = val4;
+				val4 = param1.indexOf(">",val3);
+				val6 = new Object();
+				val6.tagStr = param1.substr(val3,val4 - val3 + 1);
+				val6.charPos = val3 - val5;
+				val2.push(val6);
+				val5 = val5 + val6.tagStr.length;
+				val3 = val4;
+				val4 = param1.indexOf("<",val3);
 			}
-			return _loc2_;
+			return val2;
 		}
 		
 		public static function trim(param1:String) : String
 		{
-			var _loc2_:Number = 0;
-			while(param1.charAt(_loc2_) == " ")
+			var val2:Number = 0;
+			while(param1.charAt(val2) == " ")
 			{
-				_loc2_ = _loc2_ + 1;
+				val2 = val2 + 1;
 			}
-			param1 = param1.substring(_loc2_);
-			var _loc3_:Number = param1.length;
-			_loc3_ = _loc3_ - 1;
-			while(param1.charAt(_loc3_) == " ")
+			param1 = param1.substring(val2);
+			var val3:Number = param1.length;
+			val3 = val3 - 1;
+			while(param1.charAt(val3) == " ")
 			{
-				_loc3_ = _loc3_ - 1;
+				val3 = val3 - 1;
 			}
-			param1 = param1.substring(0,_loc3_ + 1);
+			param1 = param1.substring(0,val3 + 1);
 			return param1;
 		}
 		
 		public static function getLongestWordLength(param1:TextField) : Number
 		{
-			var _loc3_:Boolean = false;
-			var _loc4_:Boolean = false;
-			var _loc5_:String = null;
-			var _loc6_:Number = NaN;
-			var _loc7_:Number = NaN;
-			var _loc8_:Number = NaN;
-			var _loc9_:Boolean = false;
-			var _loc10_:Rectangle = null;
-			var _loc11_:Rectangle = null;
-			var _loc12_:Number = NaN;
-			var _loc13_:Number = NaN;
-			var _loc2_:Number = 0;
+			var val3:Boolean = false;
+			var val4:Boolean = false;
+			var val5:String = null;
+			var val6:Number = NaN;
+			var val7:Number = NaN;
+			var val8:Number = NaN;
+			var val9:Boolean = false;
+			var val10:Rectangle = null;
+			var val11:Rectangle = null;
+			var val12:Number = NaN;
+			var val13:Number = NaN;
+			var val2:Number = 0;
 			if(param1.text.length > 0)
 			{
-				_loc3_ = param1.multiline;
-				_loc4_ = param1.wordWrap;
-				_loc5_ = param1.autoSize;
+				val3 = param1.multiline;
+				val4 = param1.wordWrap;
+				val5 = param1.autoSize;
 				param1.multiline = false;
 				param1.autoSize = TextFieldAutoSize.LEFT;
-				_loc6_ = 0;
-				_loc7_ = 0;
-				_loc8_ = 0;
-				_loc9_ = false;
-				while(_loc6_ != -1)
+				val6 = 0;
+				val7 = 0;
+				val8 = 0;
+				val9 = false;
+				while(val6 != -1)
 				{
-					_loc7_ = _loc6_;
-					_loc6_ = param1.text.indexOf(" ",_loc7_ + 1);
-					if(_loc6_ == -1)
+					val7 = val6;
+					val6 = param1.text.indexOf(" ",val7 + 1);
+					if(val6 == -1)
 					{
-						_loc6_ = param1.text.length;
-						_loc9_ = true;
+						val6 = param1.text.length;
+						val9 = true;
 					}
-					if(_loc6_ != -1 && _loc7_ != -1)
+					if(val6 != -1 && val7 != -1)
 					{
-						_loc10_ = param1.getCharBoundaries(_loc6_ - 1);
-						if(_loc10_)
+						val10 = param1.getCharBoundaries(val6 - 1);
+						if(val10)
 						{
-							_loc11_ = param1.getCharBoundaries(_loc7_);
-							if(_loc11_)
+							val11 = param1.getCharBoundaries(val7);
+							if(val11)
 							{
-								_loc12_ = _loc10_.right;
-								_loc13_ = _loc11_.right;
-								if(_loc7_ == 0)
+								val12 = val10.right;
+								val13 = val11.right;
+								if(val7 == 0)
 								{
-									_loc13_ = _loc11_.left;
+									val13 = val11.left;
 								}
-								_loc8_ = _loc12_ - _loc13_;
-								if(_loc8_ > _loc2_)
+								val8 = val12 - val13;
+								if(val8 > val2)
 								{
-									_loc2_ = _loc8_;
+									val2 = val8;
 								}
 							}
 						}
 					}
-					if(_loc9_)
+					if(val9)
 					{
-						_loc6_ = -1;
+						val6 = -1;
 					}
 				}
-				if(_loc2_ == 0)
+				if(val2 == 0)
 				{
-					_loc2_ = param1.textWidth;
+					val2 = param1.textWidth;
 				}
-				param1.multiline = _loc3_;
-				param1.wordWrap = _loc4_;
-				param1.autoSize = _loc5_;
+				param1.multiline = val3;
+				param1.wordWrap = val4;
+				param1.autoSize = val5;
 			}
-			return Math.ceil(_loc2_);
+			return Math.ceil(val2);
 		}
 		
 		public static function firstLetterUpperCase(param1:String) : String
 		{
-			var _loc4_:* = null;
-			var _loc2_:Array = param1.split(" ");
-			var _loc3_:Array = [];
-			for(_loc4_ in _loc2_)
+			var val4:* = null;
+			var val2:Array = param1.split(" ");
+			var val3:Array = [];
+			for(val4 in val2)
 			{
-				_loc3_.push(_loc2_[_loc4_].charAt(0).toUpperCase() + _loc2_[_loc4_].slice(1));
+				val3.push(val2[val4].charAt(0).toUpperCase() + val2[val4].slice(1));
 			}
-			return _loc3_.join(" ");
+			return val3.join(" ");
 		}
 		
 		public static function getSelectionLengthOfText(param1:TextField, param2:Number, param3:Number) : Number
 		{
-			var _loc4_:Number = textHelpers.getCharIndexAtPoint(param1,param2,param3);
-			var _loc5_:Number = Math.max(param1.selectionEndIndex,param1.selectionBeginIndex);
-			var _loc6_:Number = Math.min(param1.selectionEndIndex,param1.selectionBeginIndex);
-			if(_loc5_ < _loc4_ || _loc4_ < _loc6_)
+			var val4:Number = textHelpers.getCharIndexAtPoint(param1,param2,param3);
+			var val5:Number = Math.max(param1.selectionEndIndex,param1.selectionBeginIndex);
+			var val6:Number = Math.min(param1.selectionEndIndex,param1.selectionBeginIndex);
+			if(val5 < val4 || val4 < val6)
 			{
-				param1.setSelection(_loc4_,_loc4_);
+				param1.setSelection(val4,val4);
 			}
 			return Math.abs(param1.selectionEndIndex - param1.selectionBeginIndex);
 		}
 		
 		public static function getCharIndexAtPoint(param1:TextField, param2:Number, param3:Number) : Number
 		{
-			var _loc9_:Rectangle = null;
-			var _loc10_:Number = NaN;
-			var _loc11_:Number = NaN;
-			var _loc4_:Number = 0;
-			var _loc5_:Number = param1.text.length;
-			var _loc6_:Number = -1;
-			var _loc7_:Boolean = false;
-			var _loc8_:Number = 0;
-			while(_loc8_ < _loc5_)
+			var val9:Rectangle = null;
+			var val10:Number = NaN;
+			var val11:Number = NaN;
+			var val4:Number = 0;
+			var val5:Number = param1.text.length;
+			var val6:Number = -1;
+			var val7:Boolean = false;
+			var val8:Number = 0;
+			while(val8 < val5)
 			{
-				_loc9_ = param1.getCharBoundaries(_loc8_);
-				if(_loc9_)
+				val9 = param1.getCharBoundaries(val8);
+				if(val9)
 				{
-					_loc10_ = _loc9_.y + _loc9_.height;
-					if(_loc6_ > 0 && _loc10_ > _loc6_)
+					val10 = val9.y + val9.height;
+					if(val6 > 0 && val10 > val6)
 					{
-						_loc7_ = true;
+						val7 = true;
 						break;
 					}
-					if(_loc10_ > param3)
+					if(val10 > param3)
 					{
-						_loc6_ = _loc10_;
-						if(_loc9_.x > param2)
+						val6 = val10;
+						if(val9.x > param2)
 						{
-							_loc7_ = true;
-							_loc11_ = _loc9_.x + _loc9_.width / 2;
-							if(param2 > _loc11_)
+							val7 = true;
+							val11 = val9.x + val9.width / 2;
+							if(param2 > val11)
 							{
-								_loc4_++;
+								val4++;
 							}
 							break;
 						}
 					}
 				}
-				_loc4_ = _loc8_;
-				_loc8_++;
+				val4 = val8;
+				val8++;
 			}
-			return !!_loc7_?Number(_loc4_):Number(_loc5_);
+			return !!val7?Number(val4):Number(val5);
 		}
 		
 		public static function makeInputFieldModal(param1:TextField, param2:Boolean = true) : *
@@ -572,14 +572,14 @@ package LS_Classes
 		
 		public static function onFocusInModalInputField(param1:FocusEvent) : *
 		{
-			var _loc2_:TextField = null;
+			var val2:TextField = null;
 			if(param1.target is TextField)
 			{
-				_loc2_ = param1.target as TextField;
-				if(_loc2_.type == TextFieldType.INPUT)
+				val2 = param1.target as TextField;
+				if(val2.type == TextFieldType.INPUT)
 				{
-					_loc2_.removeEventListener(FocusEvent.FOCUS_IN,onFocusInModalInputField);
-					_loc2_.addEventListener(FocusEvent.FOCUS_OUT,onFocusOutModalInputField);
+					val2.removeEventListener(FocusEvent.FOCUS_IN,onFocusInModalInputField);
+					val2.addEventListener(FocusEvent.FOCUS_OUT,onFocusOutModalInputField);
 					ExternalInterface.call("inputFocus");
 				}
 			}
@@ -587,14 +587,14 @@ package LS_Classes
 		
 		public static function onFocusOutModalInputField(param1:FocusEvent) : *
 		{
-			var _loc2_:TextField = null;
+			var val2:TextField = null;
 			if(param1.target is TextField)
 			{
-				_loc2_ = param1.target as TextField;
-				if(_loc2_.type == TextFieldType.INPUT)
+				val2 = param1.target as TextField;
+				if(val2.type == TextFieldType.INPUT)
 				{
-					_loc2_.addEventListener(FocusEvent.FOCUS_IN,onFocusInModalInputField);
-					_loc2_.removeEventListener(FocusEvent.FOCUS_OUT,onFocusOutModalInputField);
+					val2.addEventListener(FocusEvent.FOCUS_IN,onFocusInModalInputField);
+					val2.removeEventListener(FocusEvent.FOCUS_OUT,onFocusOutModalInputField);
 					ExternalInterface.call("inputFocusLost");
 				}
 			}
@@ -602,27 +602,27 @@ package LS_Classes
 		
 		public static function adjustFontSize(param1:TextField, param2:Number, param3:Number) : *
 		{
-			var _loc5_:Number = NaN;
-			var _loc6_:Number = NaN;
-			var _loc4_:TextFormat = param1.getTextFormat();
-			if(Number(_loc4_.size) != param2)
+			var val5:Number = NaN;
+			var val6:Number = NaN;
+			var val4:TextFormat = param1.getTextFormat();
+			if(Number(val4.size) != param2)
 			{
-				_loc4_.size = param2;
-				param1.setTextFormat(_loc4_);
+				val4.size = param2;
+				param1.setTextFormat(val4);
 			}
 			if(param1.textWidth > param1.width)
 			{
-				_loc5_ = param1.width / param1.textWidth;
-				_loc6_ = Math.floor(param2 * _loc5_);
-				if(_loc6_ >= param3)
+				val5 = param1.width / param1.textWidth;
+				val6 = Math.floor(param2 * val5);
+				if(val6 >= param3)
 				{
-					_loc4_.size = _loc6_;
-					param1.setTextFormat(_loc4_);
+					val4.size = val6;
+					param1.setTextFormat(val4);
 				}
 				else
 				{
-					_loc4_.size = param3;
-					param1.setTextFormat(_loc4_);
+					val4.size = param3;
+					param1.setTextFormat(val4);
 					capTextFieldWidth(param1,param1.width);
 				}
 			}

@@ -29,8 +29,8 @@ package LS_Classes
 		
 		override public function positionElements() : *
 		{
-			var _loc7_:Number = NaN;
-			var _loc8_:int = 0;
+			var val7:Number = NaN;
+			var val8:int = 0;
 			if(content_array.length < 1)
 			{
 				return;
@@ -40,210 +40,210 @@ package LS_Classes
 				content_array.sortOn(m_SortOnFieldName,m_SortOnOptions);
 				m_NeedsSorting = false;
 			}
-			var _loc1_:Number = 0;
-			var _loc2_:uint = 0;
-			var _loc3_:uint = 1;
-			var _loc4_:uint = content_array.length;
-			var _loc5_:MovieClip = null;
-			var _loc6_:uint = 0;
-			while(_loc6_ < _loc4_)
+			var val1:Number = 0;
+			var val2:uint = 0;
+			var val3:uint = 1;
+			var val4:uint = content_array.length;
+			var val5:MovieClip = null;
+			var val6:uint = 0;
+			while(val6 < val4)
 			{
-				if(content_array[_loc6_].visible || canPositionInvisibleElements)
+				if(content_array[val6].visible || canPositionInvisibleElements)
 				{
 					if(this.rightSided)
 					{
-						content_array[_loc6_].x = _loc1_;
-						content_array[_loc6_].tweenToX = _loc1_;
-						_loc1_ = _loc1_ + Math.round(getElementWidth(content_array[_loc6_]) + EL_SPACING);
+						content_array[val6].x = val1;
+						content_array[val6].tweenToX = val1;
+						val1 = val1 + Math.round(getElementWidth(content_array[val6]) + EL_SPACING);
 					}
 					else
 					{
-						_loc7_ = getElementWidth(content_array[_loc6_]);
-						content_array[_loc6_].x = _loc1_ - _loc7_;
-						content_array[_loc6_].tweenToX = _loc1_ - _loc7_;
-						_loc1_ = _loc1_ - Math.round(_loc7_ + EL_SPACING);
+						val7 = getElementWidth(content_array[val6]);
+						content_array[val6].x = val1 - val7;
+						content_array[val6].tweenToX = val1 - val7;
+						val1 = val1 - Math.round(val7 + EL_SPACING);
 					}
 					if(this.m_MaxWidth > 0)
 					{
-						_loc8_ = content_array[_loc6_].x + content_array[_loc6_].width;
-						if(_loc8_ > this.m_MaxWidth)
+						val8 = content_array[val6].x + content_array[val6].width;
+						if(val8 > this.m_MaxWidth)
 						{
-							content_array[_loc6_].x = 0;
-							_loc2_++;
-							_loc1_ = Math.round(getElementWidth(content_array[_loc6_]) + EL_SPACING);
+							content_array[val6].x = 0;
+							val2++;
+							val1 = Math.round(getElementWidth(content_array[val6]) + EL_SPACING);
 						}
-						_loc5_ = this.createNewRowHolderWhenNeeded(_loc2_);
-						_loc5_.addChild(content_array[_loc6_]);
-						_loc5_.overrideWidth = content_array[_loc6_].x + getElementWidth(content_array[_loc6_]);
+						val5 = this.createNewRowHolderWhenNeeded(val2);
+						val5.addChild(content_array[val6]);
+						val5.overrideWidth = content_array[val6].x + getElementWidth(content_array[val6]);
 					}
 					else if(this.m_MaxRowElements > 0)
 					{
-						if(_loc3_ > this.m_MaxRowElements)
+						if(val3 > this.m_MaxRowElements)
 						{
-							_loc3_ = 1;
-							content_array[_loc6_].x = 0;
-							_loc2_++;
-							_loc1_ = Math.round(getElementWidth(content_array[_loc6_]) + EL_SPACING);
+							val3 = 1;
+							content_array[val6].x = 0;
+							val2++;
+							val1 = Math.round(getElementWidth(content_array[val6]) + EL_SPACING);
 						}
-						_loc5_ = this.createNewRowHolderWhenNeeded(_loc2_);
-						_loc5_.addChild(content_array[_loc6_]);
-						_loc5_.overrideWidth = content_array[_loc6_].x + getElementWidth(content_array[_loc6_]);
-						_loc3_++;
+						val5 = this.createNewRowHolderWhenNeeded(val2);
+						val5.addChild(content_array[val6]);
+						val5.overrideWidth = content_array[val6].x + getElementWidth(content_array[val6]);
+						val3++;
 					}
 				}
 				else
 				{
-					content_array[_loc6_].x = 0;
+					content_array[val6].x = 0;
 				}
-				_loc6_++;
+				val6++;
 			}
-			this.cleanupUnusedRowHolders(_loc2_);
+			this.cleanupUnusedRowHolders(val2);
 			this.centerHolders();
 		}
 		
 		private function centerHolders() : void
 		{
-			var _loc1_:uint = 0;
-			var _loc2_:MovieClip = null;
+			var val1:uint = 0;
+			var val2:MovieClip = null;
 			if(this.m_CenterHolders)
 			{
-				_loc1_ = 0;
-				while(_loc1_ < this.m_holderArray.length)
+				val1 = 0;
+				while(val1 < this.m_holderArray.length)
 				{
-					_loc2_ = this.m_holderArray[_loc1_];
-					_loc2_.x = -Math.round(_loc2_.overrideWidth * 0.5);
-					_loc1_++;
+					val2 = this.m_holderArray[val1];
+					val2.x = -Math.round(val2.overrideWidth * 0.5);
+					val1++;
 				}
 			}
 		}
 		
 		private function createNewRowHolderWhenNeeded(param1:Number) : MovieClip
 		{
-			var _loc2_:MovieClip = null;
-			var _loc3_:MovieClip = null;
+			var val2:MovieClip = null;
+			var val3:MovieClip = null;
 			if(this.m_holderArray.length <= param1)
 			{
-				_loc2_ = new MovieClip();
-				containerContent_mc.addChild(_loc2_);
+				val2 = new MovieClip();
+				containerContent_mc.addChild(val2);
 				if(this.m_holderArray.length > 0)
 				{
-					_loc3_ = this.m_holderArray[this.m_holderArray.length - 1];
-					if(_loc3_)
+					val3 = this.m_holderArray[this.m_holderArray.length - 1];
+					if(val3)
 					{
 						if(this.m_RowHeight == -1)
 						{
-							_loc2_.y = _loc3_.y + _loc3_.height + this.m_RowSpacing;
+							val2.y = val3.y + val3.height + this.m_RowSpacing;
 						}
 						else
 						{
-							_loc2_.y = _loc3_.y + this.m_RowHeight + this.m_RowSpacing;
+							val2.y = val3.y + this.m_RowHeight + this.m_RowSpacing;
 						}
 					}
 				}
-				this.m_holderArray.push(_loc2_);
-				return _loc2_;
+				this.m_holderArray.push(val2);
+				return val2;
 			}
 			return this.m_holderArray[param1];
 		}
 		
 		private function cleanupUnusedRowHolders(param1:Number) : *
 		{
-			var _loc2_:uint = param1 + 1;
-			while(this.m_holderArray.length > _loc2_)
+			var val2:uint = param1 + 1;
+			while(this.m_holderArray.length > val2)
 			{
-				containerContent_mc.removeChild(this.m_holderArray[_loc2_]);
-				this.m_holderArray.splice(_loc2_,1);
+				containerContent_mc.removeChild(this.m_holderArray[val2]);
+				this.m_holderArray.splice(val2,1);
 			}
 		}
 		
 		override public function moveElementsToPosition(param1:Number = 0.8, param2:Boolean = false) : *
 		{
-			var _loc8_:Object = null;
-			var _loc10_:MovieClip = null;
-			var _loc11_:Number = NaN;
-			var _loc12_:int = 0;
+			var val8:Object = null;
+			var val10:MovieClip = null;
+			var val11:Number = NaN;
+			var val12:int = 0;
 			if(content_array.length < 1)
 			{
 				return;
 			}
-			var _loc3_:Number = 0;
-			var _loc4_:uint = 0;
-			var _loc5_:uint = 1;
-			var _loc6_:MovieClip = null;
+			var val3:Number = 0;
+			var val4:uint = 0;
+			var val5:uint = 1;
+			var val6:MovieClip = null;
 			m_tweeningMcs = 0;
 			dispatchEvent(new Event("listMoveStart"));
-			var _loc7_:uint = content_array.length;
-			var _loc9_:uint = 0;
-			while(_loc9_ < _loc7_)
+			var val7:uint = content_array.length;
+			var val9:uint = 0;
+			while(val9 < val7)
 			{
-				_loc10_ = content_array[_loc9_];
-				if(_loc10_)
+				val10 = content_array[val9];
+				if(val10)
 				{
 					if(this.rightSided)
 					{
 						m_tweeningMcs++;
-						_loc10_.tweening = true;
-						_loc10_.tweenToX = _loc3_;
-						_loc3_ = _loc3_ + Math.round(getElementWidth(content_array[_loc9_]) + EL_SPACING);
+						val10.tweening = true;
+						val10.tweenToX = val3;
+						val3 = val3 + Math.round(getElementWidth(content_array[val9]) + EL_SPACING);
 					}
 					else
 					{
 						m_tweeningMcs++;
-						_loc10_.tweening = true;
-						_loc11_ = getElementWidth(content_array[_loc9_]);
-						_loc10_.tweenToX = _loc3_ - _loc11_;
-						_loc3_ = _loc3_ - Math.round(_loc11_ + EL_SPACING);
+						val10.tweening = true;
+						val11 = getElementWidth(content_array[val9]);
+						val10.tweenToX = val3 - val11;
+						val3 = val3 - Math.round(val11 + EL_SPACING);
 					}
-					stopElementMCPosTweens(_loc10_);
+					stopElementMCPosTweens(val10);
 					if(param2)
 					{
-						_loc10_.list_tweenY = new larTween(_loc10_,"y",m_PositionTweenFunc,_loc10_.y,0,param1);
+						val10.list_tweenY = new larTween(val10,"y",m_PositionTweenFunc,val10.y,0,param1);
 					}
-					_loc10_.list_tweenX = new larTween(_loc10_,"x",m_PositionTweenFunc,_loc10_.x,_loc10_.tweenToX,param1,removeTweenState,_loc10_.list_id);
+					val10.list_tweenX = new larTween(val10,"x",m_PositionTweenFunc,val10.x,val10.tweenToX,param1,removeTweenState,val10.list_id);
 					if(this.m_MaxWidth > 0)
 					{
-						_loc12_ = content_array[_loc9_].x + content_array[_loc9_].width;
-						if(_loc12_ > this.m_MaxWidth)
+						val12 = content_array[val9].x + content_array[val9].width;
+						if(val12 > this.m_MaxWidth)
 						{
-							content_array[_loc9_].tweenToX = 0;
-							_loc4_++;
-							_loc3_ = Math.round(getElementWidth(content_array[_loc9_]) + EL_SPACING);
+							content_array[val9].tweenToX = 0;
+							val4++;
+							val3 = Math.round(getElementWidth(content_array[val9]) + EL_SPACING);
 						}
-						_loc6_ = this.createNewRowHolderWhenNeeded(_loc4_);
-						_loc6_.addChild(content_array[_loc9_]);
-						_loc6_.overrideWidth = content_array[_loc9_].tweenToX + getElementWidth(content_array[_loc9_]);
+						val6 = this.createNewRowHolderWhenNeeded(val4);
+						val6.addChild(content_array[val9]);
+						val6.overrideWidth = content_array[val9].tweenToX + getElementWidth(content_array[val9]);
 					}
 					else if(this.m_MaxRowElements > 0)
 					{
-						if(_loc5_ > this.m_MaxRowElements)
+						if(val5 > this.m_MaxRowElements)
 						{
-							_loc5_ = 1;
-							content_array[_loc9_].x = 0;
-							_loc4_++;
-							_loc3_ = Math.round(getElementWidth(content_array[_loc9_]) + EL_SPACING);
+							val5 = 1;
+							content_array[val9].x = 0;
+							val4++;
+							val3 = Math.round(getElementWidth(content_array[val9]) + EL_SPACING);
 						}
-						_loc6_ = this.createNewRowHolderWhenNeeded(_loc4_);
-						_loc6_.addChild(content_array[_loc9_]);
-						_loc6_.overrideWidth = content_array[_loc9_].tweenToX + getElementWidth(content_array[_loc9_]);
-						_loc5_++;
+						val6 = this.createNewRowHolderWhenNeeded(val4);
+						val6.addChild(content_array[val9]);
+						val6.overrideWidth = content_array[val9].tweenToX + getElementWidth(content_array[val9]);
+						val5++;
 					}
 				}
-				_loc9_++;
+				val9++;
 			}
-			this.cleanupUnusedRowHolders(_loc4_);
+			this.cleanupUnusedRowHolders(val4);
 		}
 		
 		public function getContainerWidth() : Number
 		{
-			var _loc1_:Number = 0;
-			var _loc2_:MovieClip = getLastVisible();
-			if(_loc2_)
+			var val1:Number = 0;
+			var val2:MovieClip = getLastVisible();
+			if(val2)
 			{
 				if(this.rightSided)
 				{
-					return _loc2_.x + getElementWidth(_loc2_);
+					return val2.x + getElementWidth(val2);
 				}
-				return -_loc2_.x;
+				return -val2.x;
 			}
 			return 0;
 		}

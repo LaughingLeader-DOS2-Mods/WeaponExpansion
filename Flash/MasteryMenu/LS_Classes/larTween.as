@@ -27,23 +27,23 @@ package LS_Classes
 		
 		public function larTween(param1:Object, param2:String, param3:Function, param4:Number, param5:Number, param6:Number, param7:Function = null, param8:Object = null, param9:Number = 0.0)
 		{
-			var _loc12_:MovieClip = null;
-			var _loc10_:Boolean = true;
-			var _loc11_:DisplayObject = param1 as DisplayObject;
-			if(_loc11_)
+			var val12:MovieClip = null;
+			var val10:Boolean = true;
+			var val11:DisplayObject = param1 as DisplayObject;
+			if(val11)
 			{
-				if(!_loc11_.stage)
+				if(!val11.stage)
 				{
-					_loc12_ = _loc11_.parent as MovieClip;
-					while(_loc12_)
+					val12 = val11.parent as MovieClip;
+					while(val12)
 					{
-						_loc12_ = _loc12_.parent as MovieClip;
+						val12 = val12.parent as MovieClip;
 					}
-					ExternalInterface.call("UIAssert","using tween on displayObject that is not attached to the stage :" + _loc11_.name + " parent:" + (_loc11_.parent as MovieClip).name);
-					_loc10_ = false;
+					ExternalInterface.call("UIAssert","using tween on displayObject that is not attached to the stage :" + val11.name + " parent:" + (val11.parent as MovieClip).name);
+					val10 = false;
 				}
 			}
-			if(_loc10_)
+			if(val10)
 			{
 				super(param1,param2,param3,param4,param5,param6,true,true,true);
 				if(param9 > 0)
@@ -60,10 +60,10 @@ package LS_Classes
 		
 		private function removedFromStageHandler(param1:Event) : *
 		{
-			var _loc2_:DisplayObject = param1.currentTarget as DisplayObject;
-			if(_loc2_)
+			var val2:DisplayObject = param1.currentTarget as DisplayObject;
+			if(val2)
 			{
-				_loc2_.removeEventListener(Event.REMOVED_FROM_STAGE,this.removedFromStageHandler);
+				val2.removeEventListener(Event.REMOVED_FROM_STAGE,this.removedFromStageHandler);
 			}
 			this.stop();
 			this.cleanupTimer();
@@ -105,16 +105,16 @@ package LS_Classes
 		
 		override public function motionStart() : *
 		{
-			var _loc1_:DisplayObject = null;
+			var val1:DisplayObject = null;
 			super.motionStart();
 			if(obj)
 			{
-				_loc1_ = obj as DisplayObject;
-				if(_loc1_)
+				val1 = obj as DisplayObject;
+				if(val1)
 				{
-					if(_loc1_.stage)
+					if(val1.stage)
 					{
-						_loc1_.addEventListener(Event.REMOVED_FROM_STAGE,this.removedFromStageHandler,false,0,true);
+						val1.addEventListener(Event.REMOVED_FROM_STAGE,this.removedFromStageHandler,false,0,true);
 					}
 				}
 			}
@@ -122,14 +122,14 @@ package LS_Classes
 		
 		override public function motionStop() : *
 		{
-			var _loc1_:DisplayObject = null;
+			var val1:DisplayObject = null;
 			super.motionStop();
 			if(obj)
 			{
-				_loc1_ = obj as DisplayObject;
-				if(_loc1_)
+				val1 = obj as DisplayObject;
+				if(val1)
 				{
-					_loc1_.removeEventListener(Event.REMOVED_FROM_STAGE,this.removedFromStageHandler);
+					val1.removeEventListener(Event.REMOVED_FROM_STAGE,this.removedFromStageHandler);
 				}
 			}
 		}

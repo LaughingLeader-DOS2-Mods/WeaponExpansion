@@ -22,29 +22,29 @@ package LS_Classes
 		
 		public function setHintIcon(param1:Number, param2:Boolean = false) : *
 		{
-			var _loc5_:MovieClip = null;
-			var _loc6_:MovieClip = null;
-			var _loc7_:Class = null;
-			var _loc8_:Class = null;
-			var _loc3_:String = controllerHelper.getIconHLClassName(param1,param2);
-			var _loc4_:String = controllerHelper.getIconClassName(param1,param2);
-			if(!_loc5_ && _loc4_ != "")
+			var val5:MovieClip = null;
+			var val6:MovieClip = null;
+			var val7:Class = null;
+			var val8:Class = null;
+			var val3:String = controllerHelper.getIconHLClassName(param1,param2);
+			var val4:String = controllerHelper.getIconClassName(param1,param2);
+			if(!val5 && val4 != "")
 			{
-				_loc7_ = getDefinitionByName(_loc4_) as Class;
-				_loc5_ = new _loc7_();
+				val7 = getDefinitionByName(val4) as Class;
+				val5 = new val7();
 			}
-			if(_loc5_)
+			if(val5)
 			{
-				this.icon_mc.addChild(_loc5_);
+				this.icon_mc.addChild(val5);
 			}
-			if(!_loc6_ && _loc3_ != "")
+			if(!val6 && val3 != "")
 			{
-				_loc8_ = getDefinitionByName(_loc3_) as Class;
-				_loc6_ = new _loc8_();
+				val8 = getDefinitionByName(val3) as Class;
+				val6 = new val8();
 			}
-			if(_loc6_)
+			if(val6)
 			{
-				this.iconHL_mc.addChild(_loc6_);
+				this.iconHL_mc.addChild(val6);
 			}
 			this.iconHL_mc.visible = false;
 		}

@@ -90,39 +90,39 @@ package LS_Classes
 		
 		public function scrollbar_text(param1:String = "down_id", param2:String = "up_id", param3:String = "handle_id", param4:String = "scrollBg_id", param5:String = "", param6:String = "")
 		{
-			var _loc12_:Class = null;
-			var _loc13_:Class = null;
+			var val12:Class = null;
+			var val13:Class = null;
 			this.m_scrollFunc = Sine.easeOut;
 			super();
-			var _loc7_:Class = getDefinitionByName(param1) as Class;
-			var _loc8_:Class = getDefinitionByName(param2) as Class;
-			var _loc9_:Class = getDefinitionByName(param3) as Class;
-			var _loc10_:Class = getDefinitionByName(param4) as Class;
-			this.m_down_mc = new _loc7_();
-			this.m_up_mc = new _loc8_();
-			this.m_handle_mc = new _loc9_();
-			this.m_bg_mc = new _loc10_();
+			var val7:Class = getDefinitionByName(param1) as Class;
+			var val8:Class = getDefinitionByName(param2) as Class;
+			var val9:Class = getDefinitionByName(param3) as Class;
+			var val10:Class = getDefinitionByName(param4) as Class;
+			this.m_down_mc = new val7();
+			this.m_up_mc = new val8();
+			this.m_handle_mc = new val9();
+			this.m_bg_mc = new val10();
 			addChild(this.m_bg_mc);
 			addChild(this.m_handle_mc);
 			addChild(this.m_up_mc);
 			addChild(this.m_down_mc);
-			var _loc11_:Number = this.m_bg_mc.width;
-			if(_loc11_ < this.m_up_mc.width)
+			var val11:Number = this.m_bg_mc.width;
+			if(val11 < this.m_up_mc.width)
 			{
-				_loc11_ = this.m_up_mc.width;
+				val11 = this.m_up_mc.width;
 			}
-			if(_loc11_ < this.m_down_mc.width)
+			if(val11 < this.m_down_mc.width)
 			{
-				_loc11_ = this.m_down_mc.width;
+				val11 = this.m_down_mc.width;
 			}
-			if(_loc11_ < this.m_handle_mc.width)
+			if(val11 < this.m_handle_mc.width)
 			{
-				_loc11_ = this.m_handle_mc.width;
+				val11 = this.m_handle_mc.width;
 			}
-			this.m_bg_mc.x = Math.round((_loc11_ - this.m_bg_mc.width) * 0.5);
-			this.m_up_mc.x = Math.round((_loc11_ - this.m_up_mc.width) * 0.5);
-			this.m_down_mc.x = Math.round((_loc11_ - this.m_down_mc.width) * 0.5);
-			this.m_handle_mc.x = Math.round((_loc11_ - this.m_handle_mc.width) * 0.5);
+			this.m_bg_mc.x = Math.round((val11 - this.m_bg_mc.width) * 0.5);
+			this.m_up_mc.x = Math.round((val11 - this.m_up_mc.width) * 0.5);
+			this.m_down_mc.x = Math.round((val11 - this.m_down_mc.width) * 0.5);
+			this.m_handle_mc.x = Math.round((val11 - this.m_handle_mc.width) * 0.5);
 			this.m_down_mc.addEventListener("mouseDown",this.downDown);
 			this.m_down_mc.addEventListener("mouseOut",this.onOut);
 			this.m_down_mc.addEventListener("mouseOver",this.onOver);
@@ -138,26 +138,26 @@ package LS_Classes
 			this.m_bg_mc.addEventListener("mouseDown",this.bgDown);
 			if(param5 != "")
 			{
-				_loc12_ = getDefinitionByName(param5) as Class;
-				this.m_FFdown_mc = new _loc12_();
+				val12 = getDefinitionByName(param5) as Class;
+				this.m_FFdown_mc = new val12();
 				addChild(this.m_FFdown_mc);
 				this.m_FFdown_mc.addEventListener("mouseUp",this.onUp);
 				this.m_FFdown_mc.addEventListener("mouseDown",this.ffDownDown);
 				this.m_FFdown_mc.addEventListener("mouseOut",this.onOut);
 				this.m_FFdown_mc.addEventListener("mouseOver",this.onOver);
-				this.m_FFdown_mc.x = Math.round((_loc11_ - this.m_FFdown_mc.width) * 0.5);
+				this.m_FFdown_mc.x = Math.round((val11 - this.m_FFdown_mc.width) * 0.5);
 				this.m_ffDownH = this.m_FFdown_mc.height;
 			}
 			if(param6 != "")
 			{
-				_loc13_ = getDefinitionByName(param6) as Class;
-				this.m_FFup_mc = new _loc13_();
+				val13 = getDefinitionByName(param6) as Class;
+				this.m_FFup_mc = new val13();
 				addChild(this.m_FFup_mc);
 				this.m_FFup_mc.addEventListener("mouseUp",this.onUp);
 				this.m_FFup_mc.addEventListener("mouseDown",this.ffUpDown);
 				this.m_FFup_mc.addEventListener("mouseOut",this.onOut);
 				this.m_FFup_mc.addEventListener("mouseOver",this.onOver);
-				this.m_FFup_mc.x = Math.round((_loc11_ - this.m_FFup_mc.width) * 0.5);
+				this.m_FFup_mc.x = Math.round((val11 - this.m_FFup_mc.width) * 0.5);
 				this.m_ffUpH = this.m_FFup_mc.height;
 			}
 			this.setScrollDiff();
@@ -538,19 +538,19 @@ package LS_Classes
 		
 		function onOver(param1:Event) : *
 		{
-			var _loc2_:MovieClip = param1.currentTarget as MovieClip;
+			var val2:MovieClip = param1.currentTarget as MovieClip;
 			if(!this.m_disabled)
 			{
-				_loc2_.gotoAndStop(2);
+				val2.gotoAndStop(2);
 			}
 		}
 		
 		function onOut(param1:Event) : *
 		{
-			var _loc2_:MovieClip = param1.currentTarget as MovieClip;
+			var val2:MovieClip = param1.currentTarget as MovieClip;
 			if(!this.m_disabled)
 			{
-				_loc2_.gotoAndStop(1);
+				val2.gotoAndStop(1);
 				this.stopAutoScroll();
 			}
 		}

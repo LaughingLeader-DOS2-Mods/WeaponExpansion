@@ -11,6 +11,8 @@ package LS_Classes
 	
 	public class listDisplay extends MovieClip
 	{
+		 
+		
 		public var content_array:Array;
 		
 		public var scrollHit_mc:MovieClip;
@@ -103,13 +105,13 @@ package LS_Classes
 		
 		public function get visibleHeight() : Number
 		{
-			var _loc1_:Number = 0;
-			var _loc2_:MovieClip = this.getLastVisible(false);
-			if(_loc2_)
+			var val1:Number = 0;
+			var val2:MovieClip = this.getLastVisible(false);
+			if(val2)
 			{
-				_loc1_ = this.getElementHeight(_loc2_) + _loc2_.y;
+				val1 = this.getElementHeight(val2) + val2.y;
 			}
-			return _loc1_;
+			return val1;
 		}
 		
 		override public function set width(param1:Number) : void
@@ -154,15 +156,15 @@ package LS_Classes
 		
 		protected function updateScrollHit() : *
 		{
-			var scrollSprite:Sprite = null;
+			var val1:Sprite = null;
 			if(this.scrollHit_mc.numChildren == 0)
 			{
-				scrollSprite = new Sprite();
-				scrollSprite.graphics.lineStyle(1,16777215);
-				scrollSprite.graphics.beginFill(16777215);
-				scrollSprite.graphics.drawRect(0,0,100,100);
-				scrollSprite.graphics.endFill();
-				this.scrollHit_mc.addChild(scrollSprite);
+				val1 = new Sprite();
+				val1.graphics.lineStyle(1,16777215);
+				val1.graphics.beginFill(16777215);
+				val1.graphics.drawRect(0,0,100,100);
+				val1.graphics.endFill();
+				this.scrollHit_mc.addChild(val1);
 			}
 			this.scrollHit_mc.width = this.width;
 			this.scrollHit_mc.height = this.height;
@@ -187,48 +189,48 @@ package LS_Classes
 			return this.m_positionInvisibleElements;
 		}
 		
-		public function set canPositionInvisibleElements(b:Boolean) : *
+		public function set canPositionInvisibleElements(param1:Boolean) : *
 		{
-			if(this.m_positionInvisibleElements != b)
+			if(this.m_positionInvisibleElements != param1)
 			{
-				this.m_positionInvisibleElements = b;
+				this.m_positionInvisibleElements = param1;
 				this.positionElements();
 			}
 		}
 		
-		public function getElement(index:Number) : MovieClip
+		public function getElement(param1:Number) : MovieClip
 		{
-			if(index >= 0 && index < this.content_array.length)
+			if(param1 >= 0 && param1 < this.content_array.length)
 			{
-				return this.content_array[index];
+				return this.content_array[param1];
 			}
 			return null;
 		}
 		
-		public function getAt(index:Number) : MovieClip
+		public function getAt(param1:Number) : MovieClip
 		{
-			if(index >= 0 && index < this.content_array.length)
+			if(param1 >= 0 && param1 < this.content_array.length)
 			{
-				return this.content_array[index];
+				return this.content_array[param1];
 			}
 			return null;
 		}
 		
-		public function getElementByListID(index:Number) : MovieClip
+		public function getElementByListID(param1:Number) : MovieClip
 		{
-			if(index == -1)
+			if(param1 == -1)
 			{
 				return null;
 			}
-			var i:uint = 0;
-			while(i < this.content_array.length)
+			var val2:uint = 0;
+			while(val2 < this.content_array.length)
 			{
-				if(this.content_array[i] && this.content_array[i].hasOwnProperty("list_id") && this.content_array[i].list_id == index)
+				if(this.content_array[val2] && this.content_array[val2].hasOwnProperty("list_id") && this.content_array[val2].list_id == param1)
 				{
-					this.content_array[i].list_pos = i;
-					return this.content_array[i];
+					this.content_array[val2].list_pos = val2;
+					return this.content_array[val2];
 				}
-				i++;
+				val2++;
 			}
 			return null;
 		}
@@ -261,76 +263,76 @@ package LS_Classes
 		
 		public function getElementByNumber(param1:String, param2:Number) : MovieClip
 		{
-			var _loc4_:MovieClip = null;
-			var _loc3_:uint = 0;
-			while(_loc3_ < this.content_array.length)
+			var val4:MovieClip = null;
+			var val3:uint = 0;
+			while(val3 < this.content_array.length)
 			{
-				_loc4_ = this.content_array[_loc3_];
-				if(_loc4_ && _loc4_[param1] == param2)
+				val4 = this.content_array[val3];
+				if(val4 && val4[param1] == param2)
 				{
-					_loc4_.list_pos = _loc3_;
-					return _loc4_;
+					val4.list_pos = val3;
+					return val4;
 				}
-				_loc3_++;
+				val3++;
 			}
 			return null;
 		}
 		
 		public function getElementByBool(param1:String, param2:Boolean) : MovieClip
 		{
-			var _loc4_:MovieClip = null;
-			var _loc3_:uint = 0;
-			while(_loc3_ < this.content_array.length)
+			var val4:MovieClip = null;
+			var val3:uint = 0;
+			while(val3 < this.content_array.length)
 			{
-				_loc4_ = this.content_array[_loc3_];
-				if(_loc4_ && _loc4_[param1] == param2)
+				val4 = this.content_array[val3];
+				if(val4 && val4[param1] == param2)
 				{
-					_loc4_.list_pos = _loc3_;
-					return _loc4_;
+					val4.list_pos = val3;
+					return val4;
 				}
-				_loc3_++;
+				val3++;
 			}
 			return null;
 		}
 		
 		public function selectByOffset(param1:Number, param2:Boolean = true) : Boolean
 		{
-			var _loc5_:MovieClip = null;
-			var _loc6_:Number = NaN;
-			var _loc3_:Boolean = false;
+			var val5:MovieClip = null;
+			var val6:Number = NaN;
+			var val3:Boolean = false;
 			param1 = param1 + this.TOP_SPACING;
-			var _loc4_:uint = 0;
-			while(_loc4_ < this.content_array.length)
+			var val4:uint = 0;
+			while(val4 < this.content_array.length)
 			{
-				_loc5_ = this.content_array[_loc4_];
-				if(_loc5_ && _loc5_.visible)
+				val5 = this.content_array[val4];
+				if(val5 && val5.visible)
 				{
-					_loc6_ = this.getElementHeight(_loc5_);
-					if(_loc5_.y <= param1 && _loc5_.y + _loc6_ > param1)
+					val6 = this.getElementHeight(val5);
+					if(val5.y <= param1 && val5.y + val6 > param1)
 					{
-						_loc3_ = true;
-						this.selectMC(_loc5_);
+						val3 = true;
+						this.selectMC(val5);
 						break;
 					}
 				}
-				_loc4_++;
+				val4++;
 			}
-			return _loc3_;
+			return val3;
 		}
 		
 		public function getElementByString(param1:String, param2:String) : MovieClip
 		{
-			var _loc4_:MovieClip = null;
-			var _loc3_:uint = 0;
-			while(_loc3_ < this.content_array.length)
+			var val4:MovieClip = null;
+			var val3:uint = 0;
+			while(val3 < this.content_array.length)
 			{
-				_loc4_ = this.content_array[_loc3_];
-				if(_loc4_ && _loc4_[param1] == param2)
+				val4 = this.content_array[val3];
+				if(val4 && val4[param1] == param2)
 				{
-					_loc4_.list_pos = _loc3_;
-					return _loc4_;
+					val4.list_pos = val3;
+					return val4;
 				}
-				_loc3_++;
+				val3++;
 			}
 			return null;
 		}
@@ -345,26 +347,26 @@ package LS_Classes
 		
 		public function cleanUpElements() : *
 		{
-			var _loc2_:MovieClip = null;
-			var _loc1_:uint = 0;
-			while(_loc1_ < this.content_array.length)
+			var val2:MovieClip = null;
+			var val1:uint = 0;
+			while(val1 < this.content_array.length)
 			{
-				_loc2_ = this.content_array[_loc1_];
-				if(_loc2_)
+				val2 = this.content_array[val1];
+				if(val2)
 				{
-					if(_loc2_.isUpdated)
+					if(val2.isUpdated)
 					{
-						_loc2_.isUpdated = false;
-						_loc1_++;
+						val2.isUpdated = false;
+						val1++;
 					}
 					else
 					{
-						this.removeElement(_loc1_,false);
+						this.removeElement(val1,false);
 					}
 				}
 				else
 				{
-					_loc1_++;
+					val1++;
 				}
 			}
 			if(this.content_array.length > 0)
@@ -387,31 +389,31 @@ package LS_Classes
 			{
 				this.INTSort();
 			}
-			var _loc1_:Number = this.m_topSpacing;
+			var val1:Number = this.m_topSpacing;
 			this.m_visibleLength = 0;
-			var _loc2_:uint = 0;
-			while(_loc2_ < this.content_array.length)
+			var val2:uint = 0;
+			while(val2 < this.content_array.length)
 			{
-				if(this.content_array[_loc2_].visible || this.canPositionInvisibleElements)
+				if(this.content_array[val2].visible || this.canPositionInvisibleElements)
 				{
-					this.content_array[_loc2_].list_pos = _loc2_;
-					this.content_array[_loc2_].y = _loc1_;
-					this.content_array[_loc2_].tweenToY = _loc1_;
-					if(this.content_array[_loc2_].INTUpd4PosEl != null)
+					this.content_array[val2].list_pos = val2;
+					this.content_array[val2].y = val1;
+					this.content_array[val2].tweenToY = val1;
+					if(this.content_array[val2].INTUpd4PosEl != null)
 					{
-						this.content_array[_loc2_].INTUpd4PosEl();
+						this.content_array[val2].INTUpd4PosEl();
 					}
-					_loc1_ = _loc1_ + (this.getElementHeight(this.content_array[_loc2_]) + this.EL_SPACING);
+					val1 = val1 + (this.getElementHeight(this.content_array[val2]) + this.EL_SPACING);
 					if(this.m_sideSpacing != 0)
 					{
-						this.content_array[_loc2_].x = this.SIDE_SPACING;
+						this.content_array[val2].x = this.SIDE_SPACING;
 					}
-					if(this.content_array[_loc2_].visible)
+					if(this.content_array[val2].visible)
 					{
 						this.m_visibleLength++;
 					}
 				}
-				_loc2_++;
+				val2++;
 			}
 			if(this.m_NeedsSorting)
 			{
@@ -422,111 +424,111 @@ package LS_Classes
 		
 		public function getElementWidth(param1:MovieClip) : Number
 		{
-			var _loc2_:Number = param1.width;
+			var val2:Number = param1.width;
 			if(param1.widthOverride != undefined && !isNaN(param1.widthOverride))
 			{
-				_loc2_ = param1.widthOverride;
+				val2 = param1.widthOverride;
 			}
 			else if(this.m_customElementWidth != -1)
 			{
-				_loc2_ = this.m_customElementWidth;
+				val2 = this.m_customElementWidth;
 			}
-			return _loc2_;
+			return val2;
 		}
 		
 		public function getElementHeight(param1:MovieClip) : Number
 		{
-			var _loc2_:Number = param1.height;
+			var val2:Number = param1.height;
 			if(param1.heightOverride != undefined && !isNaN(param1.heightOverride))
 			{
-				_loc2_ = param1.heightOverride;
+				val2 = param1.heightOverride;
 			}
 			else if(this.m_customElementHeight != -1)
 			{
-				_loc2_ = this.m_customElementHeight;
+				val2 = this.m_customElementHeight;
 			}
-			return _loc2_;
+			return val2;
 		}
 		
 		public function getContentHeight() : Number
 		{
-			var _loc3_:MovieClip = null;
-			var _loc1_:uint = 0;
-			var _loc2_:int = 0;
-			for each(_loc3_ in this.content_array)
+			var val3:MovieClip = null;
+			var val1:uint = 0;
+			var val2:int = 0;
+			for each(val3 in this.content_array)
 			{
-				if(_loc3_ && _loc3_.visible)
+				if(val3 && val3.visible)
 				{
-					_loc1_ = _loc1_ + (this.getElementHeight(_loc3_) + _loc2_);
-					_loc2_ = this.EL_SPACING;
+					val1 = val1 + (this.getElementHeight(val3) + val2);
+					val2 = this.EL_SPACING;
 				}
 			}
-			return _loc1_;
+			return val1;
 		}
 		
 		protected function reOrderDepths() : *
 		{
-			var _loc1_:int = 0;
+			var val1:int = 0;
 			if(this.m_forceDepthReorder)
 			{
-				_loc1_ = this.content_array.length - 1;
-				while(_loc1_ >= 0)
+				val1 = this.content_array.length - 1;
+				while(val1 >= 0)
 				{
-					this.containerContent_mc.addChild(this.content_array[_loc1_]);
-					_loc1_--;
+					this.containerContent_mc.addChild(this.content_array[val1]);
+					val1--;
 				}
 			}
 		}
 		
 		public function moveElementsToPosition(param1:Number = 0.8, param2:Boolean = false) : *
 		{
-			var _loc4_:Object = null;
-			var _loc6_:MovieClip = null;
+			var val4:Object = null;
+			var val6:MovieClip = null;
 			if(this.content_array.length < 1)
 			{
 				return;
 			}
-			var _loc3_:Number = 0;
+			var val3:Number = 0;
 			this.m_tweeningMcs = 0;
 			dispatchEvent(new Event("listMoveStart"));
-			var _loc5_:uint = 0;
-			while(_loc5_ < this.content_array.length)
+			var val5:uint = 0;
+			while(val5 < this.content_array.length)
 			{
 				this.m_tweeningMcs++;
-				_loc6_ = this.content_array[_loc5_];
-				_loc6_.tweening = true;
-				_loc6_.tweenToY = _loc3_;
-				this.stopElementMCPosTweens(_loc6_);
-				_loc6_.list_tweenY = new larTween(_loc6_,"y",this.m_PositionTweenFunc,NaN,_loc3_,param1,this.removeTweenState,_loc6_.list_id);
+				val6 = this.content_array[val5];
+				val6.tweening = true;
+				val6.tweenToY = val3;
+				this.stopElementMCPosTweens(val6);
+				val6.list_tweenY = new larTween(val6,"y",this.m_PositionTweenFunc,NaN,val3,param1,this.removeTweenState,val6.list_id);
 				if(param2 || this.m_sideSpacing != 0)
 				{
-					_loc6_.list_tweenX = new larTween(_loc6_,"x",this.m_PositionTweenFunc,NaN,this.m_sideSpacing,param1);
+					val6.list_tweenX = new larTween(val6,"x",this.m_PositionTweenFunc,NaN,this.m_sideSpacing,param1);
 				}
-				_loc3_ = _loc3_ + (this.getElementHeight(_loc6_) + this.EL_SPACING);
-				_loc5_++;
+				val3 = val3 + (this.getElementHeight(val6) + this.EL_SPACING);
+				val5++;
 			}
 		}
 		
 		protected function removeTweenState(param1:uint) : *
 		{
-			var _loc2_:MovieClip = this.getElementByNumber("list_id",param1);
+			var val2:MovieClip = this.getElementByNumber("list_id",param1);
 			this.m_tweeningMcs--;
 			if(this.m_tweeningMcs == 0)
 			{
 				dispatchEvent(new Event("listMoveStop"));
 			}
-			_loc2_.dispatchEvent(new Event("elementMoveStop"));
-			_loc2_.tweening = false;
+			val2.dispatchEvent(new Event("elementMoveStop"));
+			val2.tweening = false;
 		}
 		
 		public function moveElementToPosition(param1:Number, param2:Number) : Boolean
 		{
-			var _loc3_:DisplayObject = null;
+			var val3:DisplayObject = null;
 			if(param1 >= 0 && param2 >= 0)
 			{
-				_loc3_ = this.content_array[param1];
+				val3 = this.content_array[param1];
 				this.content_array.splice(param1,1);
-				this.content_array.splice(param2,0,_loc3_);
+				this.content_array.splice(param2,0,val3);
 				this.resetListPos();
 				return true;
 			}
@@ -535,14 +537,14 @@ package LS_Classes
 		
 		public function moveElementToBack(param1:Number) : *
 		{
-			var _loc2_:DisplayObject = null;
+			var val2:DisplayObject = null;
 			if(param1 >= 0 && param1 < this.content_array.length)
 			{
-				_loc2_ = this.content_array[param1];
-				if(_loc2_)
+				val2 = this.content_array[param1];
+				if(val2)
 				{
 					this.content_array.splice(param1,1);
-					this.content_array.push(_loc2_);
+					this.content_array.push(val2);
 					this.resetListPos();
 				}
 			}
@@ -550,31 +552,31 @@ package LS_Classes
 		
 		public function onRemovedFromStage(param1:Event) : *
 		{
-			var _loc2_:MovieClip = param1.currentTarget as MovieClip;
-			if(_loc2_)
+			var val2:MovieClip = param1.currentTarget as MovieClip;
+			if(val2)
 			{
-				this.stopElementMCTweens(_loc2_);
-				_loc2_.removeEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
+				this.stopElementMCTweens(val2);
+				val2.removeEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
 			}
 		}
 		
 		public function addElement(param1:DisplayObject, param2:Boolean = true, param3:Boolean = true) : *
 		{
-			var _loc4_:MovieClip = param1 as MovieClip;
+			var val4:MovieClip = param1 as MovieClip;
 			this.containerContent_mc.addChild(param1);
-			_loc4_.list_pos = this.content_array.length;
-			this.content_array.push(_loc4_);
+			val4.list_pos = this.content_array.length;
+			this.content_array.push(val4);
 			param1.addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
-			_loc4_.list_id = this.idInc++;
-			if(_loc4_.deselectElement)
+			val4.list_id = this.idInc++;
+			if(val4.deselectElement)
 			{
-				_loc4_.deselectElement();
+				val4.deselectElement();
 			}
-			_loc4_.selectable = param3;
-			_loc4_.m_filteredObject = false;
+			val4.selectable = param3;
+			val4.m_filteredObject = false;
 			this.m_NeedsSorting = true;
 			this.reOrderDepths();
-			_loc4_.ownerList = this;
+			val4.ownerList = this;
 			if(param2)
 			{
 				this.positionElements();
@@ -583,16 +585,16 @@ package LS_Classes
 		
 		public function addElementOnPosition(param1:DisplayObject, param2:uint, param3:Boolean = true, param4:Boolean = true) : *
 		{
-			var _loc5_:MovieClip = param1 as MovieClip;
-			if(_loc5_.deselectElement)
+			var val5:MovieClip = param1 as MovieClip;
+			if(val5.deselectElement)
 			{
-				_loc5_.deselectElement();
+				val5.deselectElement();
 			}
 			this.containerContent_mc.addChild(param1);
-			_loc5_.list_id = this.idInc;
+			val5.list_id = this.idInc;
 			this.idInc++;
-			_loc5_.selectable = param4;
-			this.content_array.splice(param2,0,_loc5_);
+			val5.selectable = param4;
+			this.content_array.splice(param2,0,val5);
 			this.m_NeedsSorting = true;
 			this.reOrderDepths();
 			this.resetListPos();
@@ -616,11 +618,11 @@ package LS_Classes
 		
 		public function resetListPos() : *
 		{
-			var _loc1_:uint = 0;
-			while(_loc1_ < this.content_array.length)
+			var val1:uint = 0;
+			while(val1 < this.content_array.length)
 			{
-				this.content_array[_loc1_].list_pos = _loc1_;
-				_loc1_++;
+				this.content_array[val1].list_pos = val1;
+				val1++;
 			}
 		}
 		
@@ -725,28 +727,28 @@ package LS_Classes
 		
 		public function removeElement(param1:Number, param2:Boolean = true, param3:Boolean = false, param4:Number = 0.3) : *
 		{
-			var _loc5_:MovieClip = null;
-			var _loc6_:Number = NaN;
-			var _loc7_:MovieClip = null;
+			var val5:MovieClip = null;
+			var val6:Number = NaN;
+			var val7:MovieClip = null;
 			if(param1 >= 0 && param1 < this.content_array.length)
 			{
-				_loc5_ = this.content_array[param1];
-				if(_loc5_)
+				val5 = this.content_array[param1];
+				if(val5)
 				{
-					this.stopElementMCTweens(_loc5_);
-					_loc7_ = _loc5_.parent as MovieClip;
-					if(_loc7_)
+					this.stopElementMCTweens(val5);
+					val7 = val5.parent as MovieClip;
+					if(val7)
 					{
-						_loc7_.removeChild(_loc5_);
+						val7.removeChild(val5);
 					}
 				}
 				this.content_array.splice(param1,1);
-				_loc6_ = this.currentSelection;
-				if(param1 == _loc6_ && this.content_array.length > 0)
+				val6 = this.currentSelection;
+				if(param1 == val6 && this.content_array.length > 0)
 				{
-					if(_loc6_ > 0)
+					if(val6 > 0)
 					{
-						this.m_CurrentSelection = this.content_array[_loc6_ - 1];
+						this.m_CurrentSelection = this.content_array[val6 - 1];
 					}
 					else
 					{
@@ -779,32 +781,32 @@ package LS_Classes
 		
 		public function removeElementByListId(param1:Number, param2:Boolean = true) : Boolean
 		{
-			var _loc3_:uint = 0;
-			while(_loc3_ < this.content_array.length)
+			var val3:uint = 0;
+			while(val3 < this.content_array.length)
 			{
-				if(this.content_array[_loc3_].list_id == param1)
+				if(this.content_array[val3].list_id == param1)
 				{
-					this.removeElement(_loc3_,param2);
+					this.removeElement(val3,param2);
 					return true;
 				}
-				_loc3_++;
+				val3++;
 			}
 			return false;
 		}
 		
 		public function clearElements() : *
 		{
-			var _loc2_:MovieClip = null;
-			var _loc1_:uint = 0;
-			while(_loc1_ < this.content_array.length)
+			var val2:MovieClip = null;
+			var val1:uint = 0;
+			while(val1 < this.content_array.length)
 			{
-				if(this.content_array[_loc1_])
+				if(this.content_array[val1])
 				{
-					_loc2_ = this.content_array[_loc1_];
-					this.stopElementMCTweens(_loc2_);
-					this.containerContent_mc.removeChild(this.content_array[_loc1_]);
+					val2 = this.content_array[val1];
+					this.stopElementMCTweens(val2);
+					this.containerContent_mc.removeChild(this.content_array[val1]);
 				}
-				_loc1_++;
+				val1++;
 			}
 			this.content_array = new Array();
 			this.idInc = 0;
@@ -852,17 +854,17 @@ package LS_Classes
 		
 		public function next() : *
 		{
-			var _loc1_:Number = NaN;
+			var val1:Number = NaN;
 			if(this.visibleLength > 1)
 			{
-				_loc1_ = this.currentSelection;
+				val1 = this.currentSelection;
 				if(this.currentSelection <= 0)
 				{
-					_loc1_ = 0;
+					val1 = 0;
 				}
 				if(!this.m_CurrentSelection || this.m_CurrentSelection.INTSelectNext == null || !this.m_CurrentSelection.INTSelectNext())
 				{
-					this.select(_loc1_ + 1,false,true);
+					this.select(val1 + 1,false,true);
 				}
 			}
 		}
@@ -877,17 +879,17 @@ package LS_Classes
 		
 		public function getPreviousVisibleElement() : MovieClip
 		{
-			var _loc1_:int = 0;
+			var val1:int = 0;
 			if(this.currentSelection > 0)
 			{
-				_loc1_ = this.currentSelection - 1;
-				while(_loc1_ >= 0)
+				val1 = this.currentSelection - 1;
+				while(val1 >= 0)
 				{
-					if(this.content_array[_loc1_] && this.content_array[_loc1_].visible)
+					if(this.content_array[val1] && this.content_array[val1].visible)
 					{
-						return this.content_array[_loc1_];
+						return this.content_array[val1];
 					}
-					_loc1_--;
+					val1--;
 				}
 			}
 			return null;
@@ -895,8 +897,8 @@ package LS_Classes
 		
 		public function selectByListID(param1:Number) : *
 		{
-			var _loc2_:MovieClip = this.getElementByListID(param1);
-			this.selectMC(_loc2_);
+			var val2:MovieClip = this.getElementByListID(param1);
+			this.selectMC(val2);
 		}
 		
 		public function selectMC(param1:MovieClip, param2:Boolean = false) : *
@@ -955,7 +957,7 @@ package LS_Classes
 		
 		public function select(param1:Number, param2:Boolean = false, param3:Boolean = true) : *
 		{
-			var _loc4_:MovieClip = null;
+			var val4:MovieClip = null;
 			if(this.visibleLength <= 1 && this.m_CurrentSelection && this.m_CurrentSelection.visible && !(this.currentSelection == param1 && param2))
 			{
 				return;
@@ -977,17 +979,17 @@ package LS_Classes
 			}
 			if(this.currentSelection != param1 || param2)
 			{
-				_loc4_ = this.content_array[param1];
-				if(_loc4_)
+				val4 = this.content_array[param1];
+				if(val4)
 				{
-					if(_loc4_.visible && _loc4_.selectable)
+					if(val4.visible && val4.selectable)
 					{
-						this.selectMC(_loc4_,param2);
-						if(!param3 && _loc4_.INTSelectLast != null && _loc4_.INTSelectLast())
+						this.selectMC(val4,param2);
+						if(!param3 && val4.INTSelectLast != null && val4.INTSelectLast())
 						{
-							if(_loc4_.deselectElement)
+							if(val4.deselectElement)
 							{
-								_loc4_.deselectElement();
+								val4.deselectElement();
 							}
 						}
 					}
@@ -1005,179 +1007,179 @@ package LS_Classes
 		
 		public function filterShowAll() : *
 		{
-			var _loc1_:uint = 0;
-			while(_loc1_ < this.content_array.length)
+			var val1:uint = 0;
+			while(val1 < this.content_array.length)
 			{
-				this.content_array[_loc1_].visible = true;
-				this.content_array[_loc1_].m_filteredObject = false;
-				_loc1_++;
+				this.content_array[val1].visible = true;
+				this.content_array[val1].m_filteredObject = false;
+				val1++;
 			}
 			this.m_visibleLength = -1;
 		}
 		
 		public function filterHideAll() : *
 		{
-			var _loc1_:uint = 0;
-			while(_loc1_ < this.content_array.length)
+			var val1:uint = 0;
+			while(val1 < this.content_array.length)
 			{
-				this.content_array[_loc1_].visible = false;
-				this.content_array[_loc1_].m_filteredObject = false;
-				_loc1_++;
+				this.content_array[val1].visible = false;
+				this.content_array[val1].m_filteredObject = false;
+				val1++;
 			}
 			this.m_visibleLength = -1;
 		}
 		
 		public function filterHideBoolean(param1:String, param2:Boolean) : *
 		{
-			var _loc3_:Number = 0;
-			var _loc4_:uint = 0;
-			while(_loc4_ < this.content_array.length)
+			var val3:Number = 0;
+			var val4:uint = 0;
+			while(val4 < this.content_array.length)
 			{
-				if(this.content_array[_loc4_][param1] && this.content_array[_loc4_][param1] == param2)
+				if(this.content_array[val4][param1] && this.content_array[val4][param1] == param2)
 				{
-					this.content_array[_loc4_].visible = false;
-					this.content_array[_loc4_].m_filteredObject = true;
+					this.content_array[val4].visible = false;
+					this.content_array[val4].m_filteredObject = true;
 				}
-				if(this.content_array[_loc4_].visible)
+				if(this.content_array[val4].visible)
 				{
-					_loc3_++;
+					val3++;
 				}
-				_loc4_++;
+				val4++;
 			}
-			this.m_visibleLength = _loc3_;
+			this.m_visibleLength = val3;
 		}
 		
 		public function filterShowBoolean(param1:String, param2:Boolean, param3:Boolean = true) : *
 		{
-			var _loc4_:Number = 0;
-			var _loc5_:uint = 0;
-			while(_loc5_ < this.content_array.length)
+			var val4:Number = 0;
+			var val5:uint = 0;
+			while(val5 < this.content_array.length)
 			{
-				if(this.content_array[_loc5_][param1])
+				if(this.content_array[val5][param1])
 				{
-					if(this.content_array[_loc5_][param1] == param2)
+					if(this.content_array[val5][param1] == param2)
 					{
-						this.content_array[_loc5_].visible = true;
+						this.content_array[val5].visible = true;
 					}
 					else if(param3)
 					{
-						this.content_array[_loc5_].visible = false;
+						this.content_array[val5].visible = false;
 					}
 				}
-				if(this.content_array[_loc5_].visible)
+				if(this.content_array[val5].visible)
 				{
-					_loc4_++;
+					val4++;
 				}
-				_loc5_++;
+				val5++;
 			}
-			this.m_visibleLength = _loc4_;
+			this.m_visibleLength = val4;
 		}
 		
 		public function filterBySubString(param1:String, param2:String) : *
 		{
-			var _loc3_:Number = 0;
-			var _loc4_:uint = 0;
-			while(_loc4_ < this.content_array.length)
+			var val3:Number = 0;
+			var val4:uint = 0;
+			while(val4 < this.content_array.length)
 			{
-				if(!this.content_array[_loc4_].m_filteredObject && (param2 == "" || this.content_array[_loc4_][param1].toLowerCase().indexOf(param2.toLowerCase()) != -1))
+				if(!this.content_array[val4].m_filteredObject && (param2 == "" || this.content_array[val4][param1].toLowerCase().indexOf(param2.toLowerCase()) != -1))
 				{
-					this.content_array[_loc4_].visible = true;
-					this.content_array[_loc4_].m_filteredObject = false;
+					this.content_array[val4].visible = true;
+					this.content_array[val4].m_filteredObject = false;
 				}
 				else
 				{
-					this.content_array[_loc4_].visible = false;
-					this.content_array[_loc4_].m_filteredObject = true;
+					this.content_array[val4].visible = false;
+					this.content_array[val4].m_filteredObject = true;
 				}
-				if(this.content_array[_loc4_].visible)
+				if(this.content_array[val4].visible)
 				{
-					_loc3_++;
+					val3++;
 				}
-				_loc4_++;
+				val4++;
 			}
-			this.m_visibleLength = _loc3_;
+			this.m_visibleLength = val3;
 		}
 		
 		public function filterShowType(param1:String, param2:Object, param3:Boolean = true) : *
 		{
-			var _loc4_:Number = 0;
-			var _loc5_:uint = 0;
-			while(_loc5_ < this.content_array.length)
+			var val4:Number = 0;
+			var val5:uint = 0;
+			while(val5 < this.content_array.length)
 			{
-				if(this.content_array[_loc5_][param1] != null && this.content_array[_loc5_][param1] == param2)
+				if(this.content_array[val5][param1] != null && this.content_array[val5][param1] == param2)
 				{
-					this.content_array[_loc5_].visible = true;
-					this.content_array[_loc5_].m_filteredObject = false;
+					this.content_array[val5].visible = true;
+					this.content_array[val5].m_filteredObject = false;
 				}
 				else if(param3)
 				{
-					this.content_array[_loc5_].visible = false;
-					this.content_array[_loc5_].m_filteredObject = true;
+					this.content_array[val5].visible = false;
+					this.content_array[val5].m_filteredObject = true;
 				}
-				if(this.content_array[_loc5_].visible)
+				if(this.content_array[val5].visible)
 				{
-					_loc4_++;
+					val4++;
 				}
-				_loc5_++;
+				val5++;
 			}
-			this.m_visibleLength = _loc4_;
+			this.m_visibleLength = val4;
 		}
 		
 		public function filterHideType(param1:String, param2:Object) : *
 		{
-			var _loc3_:Number = 0;
-			var _loc4_:uint = 0;
-			while(_loc4_ < this.content_array.length)
+			var val3:Number = 0;
+			var val4:uint = 0;
+			while(val4 < this.content_array.length)
 			{
-				if(this.content_array[_loc4_][param1] != null && this.content_array[_loc4_][param1] == param2)
+				if(this.content_array[val4][param1] != null && this.content_array[val4][param1] == param2)
 				{
-					this.content_array[_loc4_].visible = false;
-					this.content_array[_loc4_].m_filteredObject = true;
+					this.content_array[val4].visible = false;
+					this.content_array[val4].m_filteredObject = true;
 				}
-				if(this.content_array[_loc4_].visible)
+				if(this.content_array[val4].visible)
 				{
-					_loc3_++;
+					val3++;
 				}
-				_loc4_++;
+				val4++;
 			}
-			this.m_visibleLength = _loc3_;
+			this.m_visibleLength = val3;
 		}
 		
 		public function filterType(param1:String, param2:Object) : *
 		{
-			var _loc3_:Number = 0;
-			var _loc4_:uint = 0;
-			while(_loc4_ < this.content_array.length)
+			var val3:Number = 0;
+			var val4:uint = 0;
+			while(val4 < this.content_array.length)
 			{
-				if(!(this.content_array[_loc4_][param1] != null && this.content_array[_loc4_][param1] == param2))
+				if(!(this.content_array[val4][param1] != null && this.content_array[val4][param1] == param2))
 				{
-					this.content_array[_loc4_].visible = false;
+					this.content_array[val4].visible = false;
 				}
-				if(this.content_array[_loc4_].visible)
+				if(this.content_array[val4].visible)
 				{
-					_loc3_++;
+					val3++;
 				}
-				_loc4_++;
+				val4++;
 			}
-			this.m_visibleLength = _loc3_;
+			this.m_visibleLength = val3;
 		}
 		
 		public function getFirstElement(param1:Boolean = true, param2:Boolean = true) : MovieClip
 		{
-			var _loc3_:uint = 0;
-			while(_loc3_ < this.content_array.length)
+			var val3:uint = 0;
+			while(val3 < this.content_array.length)
 			{
-				if(this.content_array[_loc3_])
+				if(this.content_array[val3])
 				{
-					if(!(param1 && !this.content_array[_loc3_].visible))
+					if(!(param1 && !this.content_array[val3].visible))
 					{
-						if(!(param2 && this.content_array[_loc3_].selectable == false))
+						if(!(param2 && this.content_array[val3].selectable == false))
 						{
-							return this.content_array[_loc3_];
+							return this.content_array[val3];
 						}
 					}
 				}
-				_loc3_++;
+				val3++;
 			}
 			return null;
 		}
@@ -1189,20 +1191,20 @@ package LS_Classes
 		
 		public function getLastElement(param1:Boolean = true, param2:Boolean = true) : MovieClip
 		{
-			var _loc3_:int = this.content_array.length - 1;
-			while(_loc3_ >= 0)
+			var val3:int = this.content_array.length - 1;
+			while(val3 >= 0)
 			{
-				if(this.content_array[_loc3_])
+				if(this.content_array[val3])
 				{
-					if(!(param1 && !this.content_array[_loc3_].visible))
+					if(!(param1 && !this.content_array[val3].visible))
 					{
-						if(!(param2 && this.content_array[_loc3_].selectable == false))
+						if(!(param2 && this.content_array[val3].selectable == false))
 						{
-							return this.content_array[_loc3_];
+							return this.content_array[val3];
 						}
 					}
 				}
-				_loc3_--;
+				val3--;
 			}
 			return null;
 		}
@@ -1214,10 +1216,10 @@ package LS_Classes
 		
 		public function selectFirstVisible(param1:Boolean = false) : *
 		{
-			var _loc2_:MovieClip = this.getFirstVisible();
-			if(_loc2_)
+			var val2:MovieClip = this.getFirstVisible();
+			if(val2)
 			{
-				this.selectMC(_loc2_,param1);
+				this.selectMC(val2,param1);
 			}
 		}
 		

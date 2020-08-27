@@ -14,35 +14,35 @@ package LS_Classes
 		
 		public static function createStrokeFilter(param1:uint, param2:Number, param3:Number = 1.0, param4:uint = 1, param5:uint = 2) : Array
 		{
-			var _loc8_:DropShadowFilter = null;
-			var _loc9_:DropShadowFilter = null;
-			var _loc10_:Number = NaN;
-			var _loc11_:Number = NaN;
-			var _loc12_:Number = NaN;
-			var _loc13_:DropShadowFilter = null;
-			var _loc6_:Array = new Array();
-			var _loc7_:Number = 0;
+			var val8:DropShadowFilter = null;
+			var val9:DropShadowFilter = null;
+			var val10:Number = NaN;
+			var val11:Number = NaN;
+			var val12:Number = NaN;
+			var val13:DropShadowFilter = null;
+			var val6:Array = new Array();
+			var val7:Number = 0;
 			if(param5 <= 2)
 			{
-				_loc8_ = new DropShadowFilter(param2,45,param1,param3,_loc7_,_loc7_,param4,BitmapFilterQuality.LOW,false,false,false);
-				_loc9_ = new DropShadowFilter(param2,135,param1,param3,_loc7_,_loc7_,param4,BitmapFilterQuality.LOW,false,false,false);
-				_loc6_.push(_loc8_);
-				_loc6_.push(_loc9_);
+				val8 = new DropShadowFilter(param2,45,param1,param3,val7,val7,param4,BitmapFilterQuality.LOW,false,false,false);
+				val9 = new DropShadowFilter(param2,135,param1,param3,val7,val7,param4,BitmapFilterQuality.LOW,false,false,false);
+				val6.push(val8);
+				val6.push(val9);
 			}
 			else
 			{
-				_loc10_ = 45;
-				_loc11_ = 360 / param5;
-				_loc12_ = 0;
-				while(_loc12_ < param5)
+				val10 = 45;
+				val11 = 360 / param5;
+				val12 = 0;
+				while(val12 < param5)
 				{
-					_loc13_ = new DropShadowFilter(param2,_loc10_,param1,param3,_loc7_,_loc7_,param4,BitmapFilterQuality.LOW,false,false,false);
-					_loc6_.push(_loc13_);
-					_loc10_ = _loc10_ + _loc11_;
-					_loc12_++;
+					val13 = new DropShadowFilter(param2,val10,param1,param3,val7,val7,param4,BitmapFilterQuality.LOW,false,false,false);
+					val6.push(val13);
+					val10 = val10 + val11;
+					val12++;
 				}
 			}
-			return _loc6_;
+			return val6;
 		}
 	}
 }

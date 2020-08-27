@@ -75,134 +75,134 @@ package LS_Classes
 		
 		public static function getIconClassName(param1:uint, param2:Boolean = false) : String
 		{
-			var _loc3_:String = "";
+			var val3:String = "";
 			switch(param1)
 			{
 				case BTN_B:
 					if(param2)
 					{
-						_loc3_ = "iconBigCircle";
+						val3 = "iconBigCircle";
 					}
 					else
 					{
-						_loc3_ = "iconCircle";
+						val3 = "iconCircle";
 					}
 					break;
 				case BTN_A:
 					if(param2)
 					{
-						_loc3_ = "iconBigCross";
+						val3 = "iconBigCross";
 					}
 					else
 					{
-						_loc3_ = "iconCross";
+						val3 = "iconCross";
 					}
 					break;
 				case BTN_X:
-					_loc3_ = "iconSquare";
+					val3 = "iconSquare";
 					break;
 				case BTN_Y:
-					_loc3_ = "iconTriangle";
+					val3 = "iconTriangle";
 					break;
 				case BTN_LT:
-					_loc3_ = "iconLT";
+					val3 = "iconLT";
 					break;
 				case BTN_RT:
-					_loc3_ = "iconRT";
+					val3 = "iconRT";
 					break;
 				case BTN_StickLeft:
-					_loc3_ = "iconStickLeft";
+					val3 = "iconStickLeft";
 					break;
 				case BTN_StickRight:
-					_loc3_ = "iconStickRight";
+					val3 = "iconStickRight";
 					break;
 				case BTN_StickLeft_up:
-					_loc3_ = "iconStickLeft_up";
+					val3 = "iconStickLeft_up";
 					break;
 				case BTN_StickLeft_down:
-					_loc3_ = "iconStickLeft_down";
+					val3 = "iconStickLeft_down";
 					break;
 				case BTN_StickLeft_left:
-					_loc3_ = "iconStickLeft_left";
+					val3 = "iconStickLeft_left";
 					break;
 				case BTN_StickLeft_right:
-					_loc3_ = "iconStickLeft_right";
+					val3 = "iconStickLeft_right";
 					break;
 				case BTN_StickLeft_horiz:
-					_loc3_ = "iconStickLeft_horiz";
+					val3 = "iconStickLeft_horiz";
 					break;
 				case BTN_StickLeft_vert:
-					_loc3_ = "iconStickLeft_vert";
+					val3 = "iconStickLeft_vert";
 					break;
 				case BTN_StickRight_up:
-					_loc3_ = "iconStickRight_up";
+					val3 = "iconStickRight_up";
 					break;
 				case BTN_StickRight_down:
-					_loc3_ = "iconStickRight_down";
+					val3 = "iconStickRight_down";
 					break;
 				case BTN_StickRight_left:
-					_loc3_ = "iconStickRight_left";
+					val3 = "iconStickRight_left";
 					break;
 				case BTN_StickRight_right:
-					_loc3_ = "iconStickRight_right";
+					val3 = "iconStickRight_right";
 					break;
 				case BTN_StickRight_horiz:
-					_loc3_ = "iconStickRight_horiz";
+					val3 = "iconStickRight_horiz";
 					break;
 				case BTN_StickRight_vert:
-					_loc3_ = "iconStickRight_vert";
+					val3 = "iconStickRight_vert";
 					break;
 				case BTN_DPad_up:
-					_loc3_ = "iconDpad_up";
+					val3 = "iconDpad_up";
 					break;
 				case BTN_DPad_down:
-					_loc3_ = "iconDpad_down";
+					val3 = "iconDpad_down";
 					break;
 				case BTN_DPad_left:
-					_loc3_ = "iconDpad_left";
+					val3 = "iconDpad_left";
 					break;
 				case BTN_DPad_right:
-					_loc3_ = "iconDpad_right";
+					val3 = "iconDpad_right";
 					break;
 				case BTN_DPad_horiz:
-					_loc3_ = "iconDpad_horiz";
+					val3 = "iconDpad_horiz";
 					break;
 				case BTN_DPad_vert:
-					_loc3_ = "iconDpad_vert";
+					val3 = "iconDpad_vert";
 					break;
 				case BTN_Back:
-					_loc3_ = "iconBack";
+					val3 = "iconBack";
 					break;
 				case BTN_Start:
-					_loc3_ = "iconStart";
+					val3 = "iconStart";
 					break;
 				case BTN_StickLeft_press:
-					_loc3_ = "iconStickLeft_press";
+					val3 = "iconStickLeft_press";
 					break;
 				case BTN_StickRight_press:
-					_loc3_ = "iconStickRight_press";
+					val3 = "iconStickRight_press";
 					break;
 				case BTN_LB:
-					_loc3_ = "iconLB";
+					val3 = "iconLB";
 					break;
 				case BTN_RB:
-					_loc3_ = "iconRB";
+					val3 = "iconRB";
 			}
-			return _loc3_;
+			return val3;
 		}
 		
 		public static function getIconHLClassName(param1:uint, param2:Boolean = false) : String
 		{
-			var _loc3_:String = "";
+			var val3:String = "";
 			switch(param1)
 			{
 				case BTN_LT:
-					_loc3_ = "iconLTHL";
+					val3 = "iconLTHL";
 					break;
 				case BTN_RT:
-					_loc3_ = "iconRTHL";
+					val3 = "iconRTHL";
 			}
-			return _loc3_;
+			return val3;
 		}
 	}
 }

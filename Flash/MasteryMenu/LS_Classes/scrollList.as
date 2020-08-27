@@ -82,19 +82,19 @@ package LS_Classes
 		
 		private function onDragAutoScrollMove(param1:Event) : *
 		{
-			var _loc2_:Number = NaN;
+			var val2:Number = NaN;
 			if(root != null && (root as MovieClip).isDragging)
 			{
-				_loc2_ = 0;
+				val2 = 0;
 				if(this.mouseY > 0 && this.mouseY < this.m_dragAutoScrollDistance)
 				{
-					_loc2_ = this.m_dragAutoScrollDistance - this.mouseY;
-					this.m_scrollbar_mc.adjustScrollHandle(-_loc2_ * this.m_dragAutoScrollMod);
+					val2 = this.m_dragAutoScrollDistance - this.mouseY;
+					this.m_scrollbar_mc.adjustScrollHandle(-val2 * this.m_dragAutoScrollMod);
 				}
 				else if(this.mouseY > m_height - this.m_dragAutoScrollDistance && this.mouseY < m_height)
 				{
-					_loc2_ = this.mouseY - (m_height - this.m_dragAutoScrollDistance);
-					this.m_scrollbar_mc.adjustScrollHandle(_loc2_ * this.m_dragAutoScrollMod);
+					val2 = this.mouseY - (m_height - this.m_dragAutoScrollDistance);
+					this.m_scrollbar_mc.adjustScrollHandle(val2 * this.m_dragAutoScrollMod);
 				}
 			}
 		}
@@ -112,9 +112,9 @@ package LS_Classes
 		
 		public function set setTileableBG(param1:String) : *
 		{
-			var _loc2_:Class = getDefinitionByName(param1) as Class;
-			this.m_bgTile1_mc = new _loc2_();
-			this.m_bgTile2_mc = new _loc2_();
+			var val2:Class = getDefinitionByName(param1) as Class;
+			this.m_bgTile1_mc = new val2();
+			this.m_bgTile2_mc = new val2();
 			this.m_bgTile1_mc.id = 1;
 			this.m_bgTile2_mc.id = 2;
 			containerBG_mc.addChild(this.m_bgTile1_mc);
@@ -125,20 +125,20 @@ package LS_Classes
 		
 		private function updateBGPos(param1:Event) : *
 		{
-			var _loc2_:MovieClip = null;
-			var _loc3_:MovieClip = null;
+			var val2:MovieClip = null;
+			var val3:MovieClip = null;
 			containerBG_mc.scrollRect = containerContent_mc.scrollRect;
 			if(this.m_bgTile1_mc && this.m_bgTile2_mc)
 			{
-				_loc2_ = this.topBgTile;
-				_loc3_ = this.bottomBgTile;
-				if(_loc3_.y < this.m_scrollbar_mc.scrolledY)
+				val2 = this.topBgTile;
+				val3 = this.bottomBgTile;
+				if(val3.y < this.m_scrollbar_mc.scrolledY)
 				{
-					_loc2_.y = _loc3_.y + _loc3_.height;
+					val2.y = val3.y + val3.height;
 				}
-				else if(_loc3_.y > this.m_scrollbar_mc.scrolledY + height)
+				else if(val3.y > this.m_scrollbar_mc.scrolledY + height)
 				{
-					_loc3_.y = _loc2_.y - _loc3_.height;
+					val3.y = val2.y - val3.height;
 				}
 			}
 			dispatchEvent(new Event(Event.CHANGE));
@@ -165,23 +165,23 @@ package LS_Classes
 		
 		private function cullMcsToFrame() : *
 		{
-			var _loc2_:MovieClip = null;
-			var _loc1_:uint = 0;
-			while(_loc1_ < content_array.length)
+			var val2:MovieClip = null;
+			var val1:uint = 0;
+			while(val1 < content_array.length)
 			{
-				_loc2_ = content_array[_loc1_];
-				if(_loc2_ && _loc2_.elementInView && _loc2_.elementInView is Function)
+				val2 = content_array[val1];
+				if(val2 && val2.elementInView && val2.elementInView is Function)
 				{
-					if(_loc2_.y + getElementHeight(_loc2_) - this.m_TextGlowOffset > this.m_scrollbar_mc.scrolledY && _loc2_.y + this.m_TextGlowOffset <= this.m_scrollbar_mc.scrolledY + height)
+					if(val2.y + getElementHeight(val2) - this.m_TextGlowOffset > this.m_scrollbar_mc.scrolledY && val2.y + this.m_TextGlowOffset <= this.m_scrollbar_mc.scrolledY + height)
 					{
-						_loc2_.elementInView(_loc2_.visible);
+						val2.elementInView(val2.visible);
 					}
 					else
 					{
-						_loc2_.elementInView(false);
+						val2.elementInView(false);
 					}
 				}
-				_loc1_++;
+				val1++;
 			}
 		}
 		
@@ -215,25 +215,25 @@ package LS_Classes
 		
 		override public function selectMC(param1:MovieClip, param2:Boolean = false) : *
 		{
-			var _loc4_:MovieClip = null;
-			var _loc5_:Number = NaN;
-			var _loc3_:Boolean = true;
+			var val4:MovieClip = null;
+			var val5:Number = NaN;
+			var val3:Boolean = true;
 			if(param1 && m_CurrentSelection && param1.list_pos < m_CurrentSelection.list_pos)
 			{
-				_loc3_ = false;
+				val3 = false;
 			}
 			super.selectMC(param1,param2);
 			if(this.m_scrollbar_mc.visible && this.m_allowKeepIntoView)
 			{
-				_loc4_ = getFirstVisible();
-				if(m_CurrentSelection == _loc4_)
+				val4 = getFirstVisible();
+				if(m_CurrentSelection == val4)
 				{
 					this.m_scrollbar_mc.scrollTo(0,this.m_scrollbar_mc.m_animateScrolling);
 				}
 				else
 				{
-					_loc5_ = getElementHeight(m_CurrentSelection);
-					this.m_scrollbar_mc.scrollIntoView(m_CurrentSelection.y,_loc5_);
+					val5 = getElementHeight(m_CurrentSelection);
+					this.m_scrollbar_mc.scrollIntoView(m_CurrentSelection.y,val5);
 				}
 			}
 		}
@@ -255,33 +255,33 @@ package LS_Classes
 		
 		override public function selectByOffset(param1:Number, param2:Boolean = false) : Boolean
 		{
-			var _loc4_:* = undefined;
-			var _loc5_:MovieClip = null;
-			var _loc6_:Number = NaN;
-			var _loc3_:Boolean = false;
+			var val4:* = undefined;
+			var val5:MovieClip = null;
+			var val6:Number = NaN;
+			var val3:Boolean = false;
 			if(param2)
 			{
 				return super.selectByOffset(param1);
 			}
 			param1 = param1 + TOP_SPACING;
 			param1 = param1 + this.m_scrollbar_mc.scrolledY;
-			_loc4_ = 0;
-			while(_loc4_ < content_array.length)
+			val4 = 0;
+			while(val4 < content_array.length)
 			{
-				_loc5_ = content_array[_loc4_];
-				if(_loc5_ && _loc5_.visible)
+				val5 = content_array[val4];
+				if(val5 && val5.visible)
 				{
-					_loc6_ = getElementHeight(_loc5_);
-					if(_loc5_.y <= param1 && _loc5_.y + _loc6_ > param1)
+					val6 = getElementHeight(val5);
+					if(val5.y <= param1 && val5.y + val6 > param1)
 					{
-						_loc3_ = true;
-						this.selectMC(_loc5_);
+						val3 = true;
+						this.selectMC(val5);
 						break;
 					}
 				}
-				_loc4_++;
+				val4++;
 			}
-			return _loc3_;
+			return val3;
 		}
 		
 		public function get mouseWheelEnabled() : Boolean
@@ -357,20 +357,20 @@ package LS_Classes
 			{
 				content_array.sortOn(m_SortOnFieldName,m_SortOnOptions);
 			}
-			var _loc1_:Number = TOP_SPACING;
-			var _loc2_:uint = 0;
-			while(_loc2_ < content_array.length)
+			var val1:Number = TOP_SPACING;
+			var val2:uint = 0;
+			while(val2 < content_array.length)
 			{
-				content_array[_loc2_].list_pos = _loc2_;
-				content_array[_loc2_].y = _loc1_;
-				content_array[_loc2_].x = SIDE_SPACING;
-				if(content_array[_loc2_].visible)
+				content_array[val2].list_pos = val2;
+				content_array[val2].y = val1;
+				content_array[val2].x = SIDE_SPACING;
+				if(content_array[val2].visible)
 				{
-					_loc1_ = _loc1_ + (getElementHeight(content_array[_loc2_]) + EL_SPACING);
+					val1 = val1 + (getElementHeight(content_array[val2]) + EL_SPACING);
 				}
-				_loc2_++;
+				val2++;
 			}
-			this.m_ScrollHeight = _loc1_ - EL_SPACING;
+			this.m_ScrollHeight = val1 - EL_SPACING;
 			this.checkScrollBar();
 			if(this.m_bottomAligned)
 			{

@@ -42,15 +42,15 @@ package LS_Classes
 			addChild(this.icon_mc);
 			this.text_txt = new TextField();
 			addChild(this.text_txt);
-			var _loc1_:Class = getDefinitionByName("$Title") as Class;
-			var _loc2_:Font = new _loc1_();
-			var _loc3_:TextFormat = this.text_txt.getTextFormat();
-			_loc3_.font = _loc2_.fontName;
-			_loc3_.color = 16777215;
-			_loc3_.size = 24;
-			_loc3_.leading = -10;
-			_loc3_.align = "left";
-			this.text_txt.defaultTextFormat = _loc3_;
+			var val1:Class = getDefinitionByName("$Title") as Class;
+			var val2:Font = new val1();
+			var val3:TextFormat = this.text_txt.getTextFormat();
+			val3.font = val2.fontName;
+			val3.color = 16777215;
+			val3.size = 24;
+			val3.leading = -10;
+			val3.align = "left";
+			this.text_txt.defaultTextFormat = val3;
 			this.text_txt.x = 50;
 			this.text_txt.autoSize = TextFieldAutoSize.LEFT;
 			this.text_txt.filters = textEffect.createStrokeFilter(1050888,this.strokeW,1,1,9);
@@ -59,23 +59,23 @@ package LS_Classes
 		public function setBtnHintState(param1:Boolean) : *
 		{
 			this.btnEnabled = param1;
-			var _loc2_:TextFormat = this.text_txt.getTextFormat();
-			_loc2_.color = !!this.btnEnabled?16777215:11444117;
-			this.text_txt.setTextFormat(_loc2_);
+			var val2:TextFormat = this.text_txt.getTextFormat();
+			val2.color = !!this.btnEnabled?16777215:11444117;
+			this.text_txt.setTextFormat(val2);
 			alpha = !!this.btnEnabled?Number(1):Number(0.7);
 		}
 		
-		public function setBtnHint(text:String, iconId:Number, maxTextWidth:Number = 200, enabled:Boolean = true) : *
+		public function setBtnHint(param1:String, param2:Number, param3:Number = 200, param4:Boolean = true) : *
 		{
-			this.iconId = iconId;
+			this.iconId = param2;
 			this.icon_mc.setHintIcon(this.iconId);
-			this.btnEnabled = enabled;
-			this.text_txt.htmlText = text;
-			var _loc5_:Number = this.text_txt.textWidth;
-			var _loc6_:Number = textHelpers.getLongestWordLength(this.text_txt);
-			if(this.text_txt.textWidth > maxTextWidth)
+			this.btnEnabled = param4;
+			this.text_txt.htmlText = param1;
+			var val5:Number = this.text_txt.textWidth;
+			var val6:Number = textHelpers.getLongestWordLength(this.text_txt);
+			if(this.text_txt.textWidth > param3)
 			{
-				_loc5_ = _loc6_ > maxTextWidth?Number(_loc6_):Number(maxTextWidth);
+				val5 = val6 > param3?Number(val6):Number(param3);
 				this.text_txt.multiline = true;
 				this.text_txt.wordWrap = true;
 			}
@@ -84,9 +84,9 @@ package LS_Classes
 				this.text_txt.multiline = false;
 				this.text_txt.wordWrap = false;
 			}
-			var _loc7_:Number = Math.round(this.strokeW) * 2;
-			this.text_txt.width = Math.ceil(_loc5_ + _loc7_);
-			this.text_txt.width = Math.ceil(this.text_txt.textWidth + _loc7_);
+			var val7:Number = Math.round(this.strokeW) * 2;
+			this.text_txt.width = Math.ceil(val5 + val7);
+			this.text_txt.width = Math.ceil(this.text_txt.textWidth + val7);
 			this.text_txt.y = -Math.round(this.text_txt.textHeight * 0.5) - 2;
 			this.iconY = this.icon_mc.y = -Math.round(this.icon_mc.height * 0.5);
 			this.text_txt.x = this.icon_mc.x + this.icon_mc.width + 3;

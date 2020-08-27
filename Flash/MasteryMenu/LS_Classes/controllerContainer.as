@@ -42,17 +42,17 @@ package LS_Classes
 		
 		public function addBtnHint(param1:Number, param2:String, param3:Number, param4:Number = 110, param5:* = true) : MovieClip
 		{
-			var _loc6_:MovieClip = getElementByNumber("id",param1);
-			if(!_loc6_)
+			var val6:MovieClip = getElementByNumber("id",param1);
+			if(!val6)
 			{
-				_loc6_ = new controllerBtnElement();
-				_loc6_.id = param1;
-				_loc6_.setBtnHintState(param5);
-				addElement(_loc6_);
+				val6 = new controllerBtnElement();
+				val6.id = param1;
+				val6.setBtnHintState(param5);
+				addElement(val6);
 			}
-			if(_loc6_)
+			if(val6)
 			{
-				_loc6_.setBtnHint(param2,param3,param4,param5);
+				val6.setBtnHint(param2,param3,param4,param5);
 				if(this.containerMaxWidth > 0)
 				{
 					this.recalculateButtonsWidth();
@@ -63,7 +63,7 @@ package LS_Classes
 			{
 				ExternalInterface.call("UIAssert","addBtnHint failed again because the flash exporter is CRAP");
 			}
-			return _loc6_;
+			return val6;
 		}
 		
 		public function recenterTabs() : *
@@ -148,22 +148,22 @@ package LS_Classes
 		
 		private function recalculateButtonsWidth() : *
 		{
-			var _loc4_:* = undefined;
-			var _loc5_:* = undefined;
-			var _loc1_:int = content_array.length;
-			var _loc2_:int = Math.ceil((this.containerMaxWidth - (_loc1_ - 1) * EL_SPACING) / _loc1_);
-			var _loc3_:int = 0;
-			for each(_loc4_ in content_array)
+			var val4:* = undefined;
+			var val5:* = undefined;
+			var val1:int = content_array.length;
+			var val2:int = Math.ceil((this.containerMaxWidth - (val1 - 1) * EL_SPACING) / val1);
+			var val3:int = 0;
+			for each(val4 in content_array)
 			{
-				_loc3_ = _loc3_ + _loc4_.getTextWidth();
+				val3 = val3 + val4.getTextWidth();
 			}
-			if(this.containerMaxWidth - _loc3_ > 0)
+			if(this.containerMaxWidth - val3 > 0)
 			{
-				_loc2_ = _loc2_ + Math.ceil((this.containerMaxWidth - _loc3_) / _loc1_);
+				val2 = val2 + Math.ceil((this.containerMaxWidth - val3) / val1);
 			}
-			for each(_loc5_ in content_array)
+			for each(val5 in content_array)
 			{
-				_loc5_.setBtnHint(_loc5_.text_txt.htmlText,_loc5_.iconId,_loc2_,_loc5_.btnEnabled);
+				val5.setBtnHint(val5.text_txt.htmlText,val5.iconId,val2,val5.btnEnabled);
 			}
 			positionElements();
 		}
