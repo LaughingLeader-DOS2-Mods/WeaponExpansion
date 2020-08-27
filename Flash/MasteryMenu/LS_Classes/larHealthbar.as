@@ -7,7 +7,9 @@ package LS_Classes
 	
 	public class larHealthbar extends MovieClip
 	{
-		 
+		public var bg_mc:MovieClip;
+		
+		public var lightBG_mc:MovieClip;
 		
 		public var hBar_mc:MovieClip;
 		
