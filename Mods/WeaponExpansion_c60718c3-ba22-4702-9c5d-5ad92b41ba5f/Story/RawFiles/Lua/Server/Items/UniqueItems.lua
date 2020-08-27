@@ -4,6 +4,10 @@ local VENDING_MACHINE = "680d2702-721c-412d-b083-4f5e816b945a"
 ---@type UniqueData
 local UniqueData = Ext.Require("Server/Data/UniqueData.lua")
 
+local function CheckForAnvilWeightChange(data, character)
+
+end
+
 local function OnTattoosEquipped(data, character)
 	ItemLockUnEquip(data.UUID, 1)
 end
@@ -40,8 +44,8 @@ Uniques = {
 	AssassinHandCrossbow = UniqueData:Create("70c59769-2838-4137-9421-4e251fecdc89"),
 	DaggerBasilus = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03"),
 	--S_EQ_UNIQUE_LLWEAPONEX_PowerGauntlets_Arms_A_Harken_1d71ffda-51a4-4404-ae08-e4d2d4f13b9f
-	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f"),
-	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", nil, "e446752a-13cc-4a88-a32e-5df244c90d8b", true, {OnEquipped=OnTattoosEquipped}),
+	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", nil, Mercs.Harken, true, {OnEquipped=CheckForAnvilWeightChange}),
+	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", nil, Mercs.Harken, true, {OnEquipped=OnTattoosEquipped}),
 }
 
 Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
@@ -162,6 +166,19 @@ LoadPersistentVars[#LoadPersistentVars+1] = function()
 	end
 end
 
+function SwapTattoos(char)
+	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Mercs.Harken, "HarkenTattoos")
+	if HasActiveStatus(char, "UNSHEATHED") == 1 then
+		if GetUUID(CharacterGetEquippedItem(char, "Breast")) == "40039552-3aae-4beb-8cca-981809f82988" then
+			SwapUnique(char, "HarkenTattoos")
+		end
+	else
+		if GetUUID(CharacterGetEquippedItem(char, "Breast")) == "927669c3-b885-4b88-a0c2-6825fbf11af2" then
+			SwapUnique(char, "HarkenTattoos")
+		end
+	end
+end
+
 function SwapUnique(char, id)
 	local equipped = nil
 	local next = nil
@@ -195,7 +212,7 @@ function SwapUnique(char, id)
 		--CharacterUnequipItem(char, equipped)
 
 		if not isTwoHanded then
-			NRD_CharacterEquipItem(char, next, slot, 0, 1, 1, 1)
+			NRD_CharacterEquipItem(char, next, slot, 0, 0, 1, 1)
 		else
 			NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
 		end
