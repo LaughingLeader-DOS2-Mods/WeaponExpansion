@@ -14,37 +14,37 @@ package LS_Classes
 			super();
 		}
 		
-		public static function ShowItemTooltipForMC(param1:MovieClip, param2:DisplayObject, param3:String = "right") : void
+		public static function ShowItemTooltipForMC(mc:MovieClip, obj:DisplayObject, tooltipSide:String = "right") : void
 		{
-			var _loc4_:Number = param1.width;
-			var _loc5_:Number = param1.height;
-			var _loc6_:Number = 0;
-			var _loc7_:Number = 0;
-			var _loc8_:Number = -1;
-			if(param1.tooltipOverrideW)
+			var width:Number = mc.width;
+			var height:Number = mc.height;
+			var offsetX:Number = 0;
+			var offsetY:Number = 0;
+			var contextParam:Number = -1;
+			if(mc.tooltipOverrideW)
 			{
-				_loc4_ = param1.tooltipOverrideW;
+				width = mc.tooltipOverrideW;
 			}
-			if(param1.tooltipOverrideH)
+			if(mc.tooltipOverrideH)
 			{
-				_loc5_ = param1.tooltipOverrideH;
+				height = mc.tooltipOverrideH;
 			}
-			if(param1.tooltipXOffset)
+			if(mc.tooltipXOffset)
 			{
-				_loc6_ = param1.tooltipXOffset;
+				offsetX = mc.tooltipXOffset;
 			}
-			if(param1.tooltipYOffset)
+			if(mc.tooltipYOffset)
 			{
-				_loc7_ = param1.tooltipYOffset;
+				offsetY = mc.tooltipYOffset;
 			}
-			if(param1.contextParam)
+			if(mc.contextParam)
 			{
-				_loc8_ = param1.contextParam;
+				contextParam = mc.contextParam;
 			}
-			var _loc9_:Point = getGlobalPositionOfMC(param1,param2);
-			ExternalInterface.call("showItemTooltip",param1.itemHandle,_loc9_.x + _loc6_,_loc9_.y + _loc7_,_loc4_,_loc5_,_loc8_,param3);
-			var _loc10_:MovieClip = param2 as MovieClip;
-			_loc10_.hasTooltip = true;
+			var globalPos:Point = getGlobalPositionOfMC(mc,obj);
+			ExternalInterface.call("showItemTooltip",mc.itemHandle,globalPos.x + offsetX,globalPos.y + offsetY,width,height,contextParam,tooltipSide);
+			var displayMC:MovieClip = obj as MovieClip;
+			displayMC.hasTooltip = true;
 		}
 		
 		public static function ShowTooltipForMC(targetMC:MovieClip, displayObj:DisplayObject, tooltipPos:String = "right", allowDelay:Boolean = true) : void
