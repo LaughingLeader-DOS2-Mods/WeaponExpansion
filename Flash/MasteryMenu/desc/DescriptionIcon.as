@@ -27,8 +27,11 @@ package desc
 			{
 				w = 40;
 				h = 40;
-				statusbg_mc = new StatusBackground();
-				this.addChild(statusbg_mc);
+				if (this.iconType == 2)
+				{
+					statusbg_mc = new StatusBackground();
+					this.addChild(statusbg_mc);
+				}
 			}
 			icon_mc = new IconDisplay(icon,w,h);
 			addChild(icon_mc);
