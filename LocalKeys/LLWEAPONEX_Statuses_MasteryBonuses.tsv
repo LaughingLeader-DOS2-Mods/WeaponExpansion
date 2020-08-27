@@ -4,7 +4,7 @@ LLWEAPONEX_MASTERYBONUS_SUNDER_Description	Character's max armor is temporarily 
 LLWEAPONEX_MASTERYBONUS_BLOCK_DisplayName	Blocking	hda08f9b7g2052g4078g9d38g8937db6d326f
 LLWEAPONEX_MASTERYBONUS_BLOCK_Description	Character will block the next direct attack.	h79079ad8gd6c8g452ag84cbg1df8ccdd5e95
 LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName	Vulnerable	hbe25a690g42bag444fga5b5g368750273a9b
-LLWEAPONEX_MASTERYBONUS_VULNERABLE_Description	<font color='#FF001F'>Character is vulnerable to a follow-up attack, which will deal [1] on hit.</font><br><font color='#FF337F'>Removed when the attacker's turn ends.</font>	h932f8db4g9c0bg4ae9gb715g3bc71166f5e7
+LLWEAPONEX_MASTERYBONUS_VULNERABLE_Description	Character is vulnerable to a follow-up attack, which will deal [1] on hit.</font><br><font color='#FF337F'>Removed when the attacker's turn ends.	h932f8db4g9c0bg4ae9gb715g3bc71166f5e7
 LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS_DisplayName	Tactics	heafd775cg148dg45e9g87feg747b2d938754
 LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS_Description	Character's next action is reduced by [1] AP.	h478d282egda0ag4900g9771gdead5d66b1b7
 Stats_LLWEAPONEX_MasteryBonus_Banner_LeadershipBonus	Tactics	h1bfbbfb7g6525g4016ga0f7g2268e5e3db06

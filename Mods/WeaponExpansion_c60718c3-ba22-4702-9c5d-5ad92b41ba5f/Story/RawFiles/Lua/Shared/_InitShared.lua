@@ -150,6 +150,7 @@ local function OnInit()
     LeaderLib.EnableFeature("ReplaceTooltipPlaceholders")
 	LeaderLib.EnableFeature("TooltipGrammarHelper")
 	LeaderLib.EnableFeature("FixChaosDamageDisplay")
+	LeaderLib.EnableFeature("FixCorrosiveMagicDamageDisplay")
 	LeaderLib.EnableFeature("StatusParamSkillDamage")
 end
 

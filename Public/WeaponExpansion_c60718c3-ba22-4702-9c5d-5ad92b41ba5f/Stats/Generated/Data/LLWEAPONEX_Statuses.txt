@@ -1121,7 +1121,6 @@ type "Potion"
 using "Stats_LLWEAPONEX_UnrelentingRageBonus"
 data "DamageBoost" "25"
 
-
 new entry "LLWEAPONEX_WEAKNESS_AIR"
 type "StatusData"
 data "StatusType" "CONSUME"

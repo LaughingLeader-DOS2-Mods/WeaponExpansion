@@ -16,15 +16,15 @@ MasteryBonusManager.RegisterSkillListener(rushSkills, "RUSH_DIZZY", function(bon
 	end
 end)
 
----@param hitData HitData
-MasteryBonusManager.RegisterSkillListener({"Target_CripplingBlow", "Target_EnemyCripplingBlow"}, "BLUDGEON_SUNDER", function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Success then
+---@param data HitData
+MasteryBonusManager.RegisterSkillListener({"Target_CripplingBlow", "Target_EnemyCripplingBlow"}, "BLUDGEON_SUNDER", function(bonuses, skill, char, state, data)
+	if state == SKILL_STATE.HIT and data.Success then
 		local duration = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns", 2) * 6.0
-		if HasActiveStatus(hitData.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
-			local handle = NRD_StatusGetHandle(hitData.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
-			NRD_StatusSetReal(hitData.Target, handle, "CurrentLifeTime", duration)
+		if HasActiveStatus(data.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER") == 1 then
+			local handle = NRD_StatusGetHandle(data.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER")
+			NRD_StatusSetReal(data.Target, handle, "CurrentLifeTime", duration)
 		else
-			ApplyStatus(hitData.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
+			ApplyStatus(data.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
 		end
 	end
 end)
