@@ -13,7 +13,7 @@ Listeners = {
     StatusAttempt = {},
 }
 
-Ext.Require("Shared/InitShared.lua")
+Ext.Require("Shared/_InitShared.lua")
 Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/HitHandler.lua")
 Ext.Require("Server/StatusHandler.lua")
