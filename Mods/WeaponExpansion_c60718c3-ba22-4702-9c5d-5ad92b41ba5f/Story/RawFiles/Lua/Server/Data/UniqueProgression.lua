@@ -43,6 +43,7 @@ local function CreateStatusProps(status,chance,turns)
 	return prop
 end
 
+---@class AllUniqueProgressionData
 local bonuses = {
 	AnvilMace = {},
 	ArmCannon = {},
@@ -136,3 +137,5 @@ local bonuses = {
 	WarchiefHalberd = {},
 	Wraithblade = {},
 }
+
+return bonuses

@@ -12,39 +12,42 @@ local function OnTattoosEquipped(data, character)
 	ItemLockUnEquip(data.UUID, 1)
 end
 
+---@type AllUniqueProgressionData
+local ProgressionData = Ext.Require("Server/Data/UniqueProgression.lua")
+
 ---@type table<string, UniqueData>
 Uniques = {
-	AnvilMace = UniqueData:Create("f3c71d85-1cc3-431f-b236-ad838bf2e418"),
-	ArmCannon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8"),
-	AssassinHandCrossbow = UniqueData:Create("70c59769-2838-4137-9421-4e251fecdc89"),
-	BalrinAxe = UniqueData:Create("e4dc654c-db51-4b55-a342-83a864cfeff9"),
-	BeholderSword = UniqueData:Create("ddf11ed0-126f-4bec-8360-455ddf9cef12"),
-	Bible = UniqueData:Create("bcc43f30-b009-4b42-a4de-1c85a25b522a"),
-	Blunderbuss = UniqueData:Create("cd6c2b7d-ee74-401b-9866-409c45ae9413"),
-	Bokken = UniqueData:Create("6d75d449-e021-4b4d-ad2d-c0873127c3b3"),
-	--BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"),
-	ChaosEdge = UniqueData:Create("61bbcd14-82a2-4efc-9a66-ac4b8a1310cf"),
-	DaggerBasilus = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03"),
-	DeathEdge = UniqueData:Create("ea775987-18a6-4947-bb7c-3eea55a6f875"),
-	DemoBackpack = UniqueData:Create("253e14da-cdb9-4cda-b9d4-352d8ed784c5"),
-	DemonGauntlet = UniqueData:Create("0ac0d813-f58c-4399-99a8-1626a419bc53"),
-	DivineBanner = UniqueData:Create("3113b901-340a-4f24-a38b-473e61d23371"),
-	FireRunebladeKatana = UniqueData:Create("6f735ef9-524c-4514-b37f-c48a20b313c5"),
-	Frostdyne = UniqueData:Create("S5d8ec362-618e-48e9-87c2-dbc18ea4e779"),
-	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", nil, Mercs.Harken, true, {OnEquipped=CheckForAnvilWeightChange}),
-	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", nil, Mercs.Harken, true, {OnEquipped=OnTattoosEquipped}),
-	Harvest = UniqueData:Create("d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1"),
-	LoneWolfBanner = UniqueData:Create("aa63e570-695a-461b-bb35-60cf7c915570"),
-	--MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f"),
-	MagicMissileWand = UniqueData:Create("f8958c1e-1c9d-4fa9-b03f-b883c65f95c3"),
-	MonkBlindfold = UniqueData:Create("4258f164-b548-471f-990d-ae641960a842"),
-	Muramasa = UniqueData:Create("52c0b4a4-3906-4229-93a9-b83aea9e657c"),
-	OgreScroll = UniqueData:Create("cc4d26df-c8c4-458e-b88f-610387741533"),
-	Omnibolt = UniqueData:Create("dec81eed-fcab-48cc-bd67-0431abe4260c"),
-	PowerPole = UniqueData:Create("da0ac3e5-8a9e-417c-b516-dc8cd9245d0e"),
-	--WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2"),
-	WarchiefHalberd = UniqueData:Create("6c52f44e-1c27-4409-9bfe-f89ee5af4a0d"),
-	Wraithblade = UniqueData:Create("c68b5afa-2574-471d-85ac-0738ee0a6393"),
+	AnvilMace = UniqueData:Create("f3c71d85-1cc3-431f-b236-ad838bf2e418", ProgressionData.AnvilMace),
+	ArmCannon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8", ProgressionData.ArmCannon),
+	AssassinHandCrossbow = UniqueData:Create("70c59769-2838-4137-9421-4e251fecdc89", ProgressionData.AssassinHandCrossbow),
+	BalrinAxe = UniqueData:Create("e4dc654c-db51-4b55-a342-83a864cfeff9", ProgressionData.BalrinAxe),
+	BeholderSword = UniqueData:Create("ddf11ed0-126f-4bec-8360-455ddf9cef12", ProgressionData.BeholderSword),
+	Bible = UniqueData:Create("bcc43f30-b009-4b42-a4de-1c85a25b522a", ProgressionData.Bible),
+	Blunderbuss = UniqueData:Create("cd6c2b7d-ee74-401b-9866-409c45ae9413", ProgressionData.Blunderbuss),
+	Bokken = UniqueData:Create("6d75d449-e021-4b4d-ad2d-c0873127c3b3", ProgressionData.Bokken),
+	--BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData),
+	ChaosEdge = UniqueData:Create("61bbcd14-82a2-4efc-9a66-ac4b8a1310cf", ProgressionData.ChaosEdge),
+	DaggerBasilus = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03", ProgressionData.DaggerBasilus),
+	DeathEdge = UniqueData:Create("ea775987-18a6-4947-bb7c-3eea55a6f875", ProgressionData.DeathEdge),
+	DemoBackpack = UniqueData:Create("253e14da-cdb9-4cda-b9d4-352d8ed784c5", ProgressionData.DemoBackpack),
+	DemonGauntlet = UniqueData:Create("0ac0d813-f58c-4399-99a8-1626a419bc53", ProgressionData.DemonGauntlet),
+	DivineBanner = UniqueData:Create("3113b901-340a-4f24-a38b-473e61d23371", ProgressionData.DivineBanner),
+	FireRunebladeKatana = UniqueData:Create("6f735ef9-524c-4514-b37f-c48a20b313c5", ProgressionData.FireRunebladeKatana),
+	Frostdyne = UniqueData:Create("S5d8ec362-618e-48e9-87c2-dbc18ea4e779", ProgressionData.Frostdyne),
+	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", ProgressionData.HarkenPowerGloves, {DefaultOwner = Mercs.Harken, AutoEquipOnOwner=true, OnEquipped=CheckForAnvilWeightChange}),
+	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", ProgressionData.HarkenTattoos, {DefaultOwner = Mercs.Harken, AutoEquipOnOwner=true, OnEquipped=OnTattoosEquipped}),
+	Harvest = UniqueData:Create("d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1", ProgressionData.Harvest),
+	LoneWolfBanner = UniqueData:Create("aa63e570-695a-461b-bb35-60cf7c915570", ProgressionData.LoneWolfBanner),
+	--MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod),
+	MagicMissileWand = UniqueData:Create("f8958c1e-1c9d-4fa9-b03f-b883c65f95c3", ProgressionData.MagicMissileWand),
+	MonkBlindfold = UniqueData:Create("4258f164-b548-471f-990d-ae641960a842", ProgressionData.MonkBlindfold),
+	Muramasa = UniqueData:Create("52c0b4a4-3906-4229-93a9-b83aea9e657c", ProgressionData.Muramasa),
+	OgreScroll = UniqueData:Create("cc4d26df-c8c4-458e-b88f-610387741533", ProgressionData.OgreScroll),
+	Omnibolt = UniqueData:Create("dec81eed-fcab-48cc-bd67-0431abe4260c", ProgressionData.Omnibolt),
+	PowerPole = UniqueData:Create("da0ac3e5-8a9e-417c-b516-dc8cd9245d0e", ProgressionData.PowerPole),
+	--WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe),
+	WarchiefHalberd = UniqueData:Create("6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", ProgressionData.WarchiefHalberd),
+	Wraithblade = UniqueData:Create("c68b5afa-2574-471d-85ac-0738ee0a6393", ProgressionData.Wraithblade),
 }
 
 Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
@@ -92,8 +95,8 @@ AllUniques = {
 }
 
 function MoveUniquesToVendingMachine()
-	for i,item in pairs(AllUniques) do
-		local owner = GetInventoryOwner(item)
+	for i,item in pairs(Uniques) do
+		local owner = item.Owner
 		if not GameHelpers.Item.ItemIsEquippedByCharacter(item) and (owner == nil or (ObjectIsCharacter(owner) ~= 1 and owner ~= VENDING_MACHINE)) then
 			ItemToInventory(item, VENDING_MACHINE, 1, 0, 0)
 		end

@@ -9,35 +9,30 @@ local UniqueData = {
 	Initialized = false,
 	OnEquipped = nil,
 	OnGotOwner = nil,
-	LastProgressionLevel = 0
+	LastProgressionLevel = 0,
+	ProgressionData = nil
 }
 UniqueData.__index = UniqueData
 
 ---@param uuid string
----@param leveldata table<string,number[]>
----@param defaultNPCOwner string An NPC that should have the unique until a player takes it.
----@param autoEquip boolean Whether to automatically equip the unique on the default owner.
+---@param progressionData table<string, table<int, UniqueProgressionEntry>>
+---@param params table<string,any>
 ---@return UniqueData
-function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip, params)
-	if leveldata == nil then
-		leveldata = {}
-	end
+function UniqueData:Create(uuid, progressionData, params)
     local this =
     {
 		UUID = uuid,
-		LevelData = leveldata,
+		LevelData = {},
 		Owner = nil,
-		DefaultOwner = defaultNPCOwner,
+		DefaultOwner = nil,
 		AutoEquipOnOwner = false,
 		Initialized = false,
 		OnEquipped = nil,
 		OnGotOwner = nil,
-		LastProgressionLevel = 0
+		LastProgressionLevel = 0,
+		ProgressionData = progressionData
 	}
 	setmetatable(this, self)
-	if autoEquip ~= nil then
-		this.AutoEquipOnOwner = autoEquip
-	end
 	if params ~= nil then
 		for prop,value in pairs(params) do
 			this[prop] = value
@@ -59,12 +54,17 @@ end
 
 function UniqueData:OnLevelChange(region)
 	if ObjectExists(self.UUID) == 1 then
+		local item = Ext.GetItem(self.UUID)
+		self.LastProgressionLevel = item.Stats.Level
+		if self.ProgressionData ~= nil then
+			self:ApplyProgression(self.ProgressionData, false)
+		end
 		self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
 		if not self.Initialized then
 			if self:CanMoveToOwner() then
 				ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
 				if self.AutoEquipOnOwner then
-					local targetSlot = Ext.GetItem(self.UUID).Stats.Slot
+					local targetSlot = item.Stats.Slot
 					local currentItem = CharacterGetEquippedItem(self.DefaultOwner, targetSlot)
 					if currentItem == nil then
 						CharacterEquipItem(self.DefaultOwner, self.UUID)
@@ -166,7 +166,8 @@ local function ApplyProgressionEntry(entry, stat)
 end
 
 ---@param progressionTable table<integer,UniqueProgressionEntry|UniqueProgressionEntry[]>
-function UniqueData:ApplyProgression(progressionTable)
+---@param persist boolean
+function UniqueData:ApplyProgression(progressionTable, persist)
 	local item = Ext.GetItem(self)
 	local level = item.Stats.Level
 	if progressionTable ~= nil and #progressionTable > 0 then
@@ -183,7 +184,9 @@ function UniqueData:ApplyProgression(progressionTable)
 				end
 			end
 		end
+		Ext.SyncStat(item.StatsId, persist or false)
 	end
+	self.LastProgressionLevel = level
 end
 
 return UniqueData

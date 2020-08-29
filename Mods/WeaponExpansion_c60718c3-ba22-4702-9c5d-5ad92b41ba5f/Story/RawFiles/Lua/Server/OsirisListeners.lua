@@ -199,6 +199,7 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(character)
 			end
 		end
 	end
+	
 end)
 
 local levelTest = 1
