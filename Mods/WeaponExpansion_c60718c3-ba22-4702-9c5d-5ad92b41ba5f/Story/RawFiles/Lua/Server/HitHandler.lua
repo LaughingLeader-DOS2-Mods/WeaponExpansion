@@ -118,7 +118,9 @@ end
 --- @param handle integer
 local function OnHit(target,source,damage,handle)
 	if source ~= nil then
-		if GameHelpers.HitWithWeapon(target, handle, false, true) then
+		local hitWithWeapon = GameHelpers.HitWithWeapon(target, handle, false, true)
+
+		if hitWithWeapon then
 			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
 			local b,expGain = CanGrantMasteryExperience(target,source)
 			if b and expGain > 0 then
