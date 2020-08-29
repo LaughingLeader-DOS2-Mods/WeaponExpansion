@@ -180,3 +180,31 @@ Ext.RegisterOsirisListener("ObjectLostTag", 2, "after", function(object, tag)
 		Equipment.CheckWeaponRequirementTags(GetUUID(object))
 	end
 end)
+
+local LoneWolfBannerLifeStealScale = {
+	[0] = 5,
+	[8] = 10,
+	[12] = 25,
+	[16] = 30,
+}
+
+Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(character)
+	if IsPlayer(character) and Uniques.LoneWolfBanner.Owner == GetUUID(character) then
+		local level = CharacterGetLevel(character)
+		if level > 1 then
+			local stat = Ext.GetStat("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus")
+			if stat ~= nil then
+				local newLifeSteal = (math.ceil((5 - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
+				print("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus", level, newLifeSteal)
+			end
+		end
+	end
+end)
+
+local levelTest = 1
+Ext.RegisterConsoleCommand("scaletest", function(cmd, levelstr)
+	local level = tonumber(levelstr) or levelTest + 1
+	local newLifeSteal = (math.ceil(((5*(level*.7)) - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
+	print("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus|LifeSteal", level, newLifeSteal)
+	levelTest = level
+end)

@@ -221,13 +221,6 @@ THEN
 NRD_ModCall("WeaponExpansion", "SwapUnique", (STRING)_Char, "MagicMissileWand");
 //END_REGION
 
-//REGION MAGIC_MISSILE_BONUS_HITS
-PROC
-ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLWEAPONEX_MagicMissile_RollForBonuses")
-THEN
-NRD_ModCall("WeaponExpansion", "MagicMissileWeapon_RollForBasicAttackBonuses", (STRING)_Char);
-//END_REGION
-
 //REGION POWER_POLE
 /* Doesn't work since a skill is needed to attach effects to weapon bones
 IF

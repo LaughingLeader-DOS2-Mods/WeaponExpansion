@@ -178,6 +178,7 @@ DeltamodSwap.LLWEAPONEX_Quarterstaff = {
 	Boost_Weapon_Ability_Summoning_Staff = "Boost_Weapon_Ability_WarriorLore_Spear",
 	Boost_Weapon_Primary_Intelligence_Medium = GetQuarterstaffAttributeBoost,
 }
+DeltamodSwap.LLWEAPONEX_Banner = DeltamodSwap.LLWEAPONEX_Quarterstaff
 
 DeltamodSwap.LLWEAPONEX_Firearm = {
 	-- Larian has this and the crossbow ones reversed on the weapon type value

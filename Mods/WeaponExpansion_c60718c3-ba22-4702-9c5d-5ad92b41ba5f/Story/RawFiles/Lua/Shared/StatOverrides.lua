@@ -212,7 +212,7 @@ local function StatOverrides_Init()
 
 		--print(gameMaster, requirement, ability)
 	
-		if gameMaster == "Yes" and not IsEnemySkill(skill) then
+		if gameMaster == "Yes" and not IsEnemySkill(skill) and Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
 			if requirement == "MeleeWeapon" and ability == "Warrior" then
 				SwapRequirementWithTag(skill, "None", "LLWEAPONEX_NoMeleeWeaponEquipped", true)
 			elseif requirement == "DaggerWeapon" and ability == "Rogue" then

@@ -22,7 +22,7 @@ Uniques = {
 	ChaosEdge = UniqueData:Create("61bbcd14-82a2-4efc-9a66-ac4b8a1310cf"),
 	DeathEdge = UniqueData:Create("ea775987-18a6-4947-bb7c-3eea55a6f875"),
 	Harvest = UniqueData:Create("d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1"),
-	DivineBanner = UniqueData:Create("113b901-340a-4f24-a38b-473e61d23371"),
+	DivineBanner = UniqueData:Create("3113b901-340a-4f24-a38b-473e61d23371"),
 	LoneWolfBanner = UniqueData:Create("aa63e570-695a-461b-bb35-60cf7c915570"),
 	BeholderSword = UniqueData:Create("ddf11ed0-126f-4bec-8360-455ddf9cef12"),
 	Wraithblade = UniqueData:Create("c68b5afa-2574-471d-85ac-0738ee0a6393"),
@@ -52,8 +52,7 @@ Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
 	local unique = Uniques[id]
 	if unique ~= nil then
 		local host = CharacterGetHostCharacter()
-		TeleportTo(unique, host, "", 0, 1, 0)
-		ItemToInventory(unique, host, 1, 1, 1)
+		unique:Transfer(host)
 	else
 		print("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
 	end

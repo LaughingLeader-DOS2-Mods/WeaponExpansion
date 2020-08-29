@@ -124,6 +124,10 @@ function UniqueData:AddPosition(region,x,y,z,rx,ry,rz)
 end
 
 function UniqueData:Transfer(target, equip)
+	if ObjectExists(self.UUID) == 0 then
+		print("[UniqueData:Transfer] Item", self.UUID, "does not exist!")
+		return
+	end
 	self.Initialized = true
 	self.Owner = target
 	ItemToInventory(self.UUID, target, 1, 1, 1)
