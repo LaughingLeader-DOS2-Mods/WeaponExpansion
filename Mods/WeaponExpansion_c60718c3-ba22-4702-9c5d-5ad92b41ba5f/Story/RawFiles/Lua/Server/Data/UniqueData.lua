@@ -8,7 +8,8 @@ local UniqueData = {
 	AutoEquipOnOwner = false,
 	Initialized = false,
 	OnEquipped = nil,
-	OnGotOwner = nil
+	OnGotOwner = nil,
+	LastProgressionLevel = 0
 }
 UniqueData.__index = UniqueData
 
@@ -31,6 +32,7 @@ function UniqueData:Create(uuid, leveldata, defaultNPCOwner, autoEquip, params)
 		Initialized = false,
 		OnEquipped = nil,
 		OnGotOwner = nil,
+		LastProgressionLevel = 0
 	}
 	setmetatable(this, self)
 	if autoEquip ~= nil then
@@ -138,4 +140,50 @@ function UniqueData:Transfer(target, equip)
 		end
 	end
 end
+
+---@param entry UniqueProgressionEntry
+---@param stat StatEntryWeapon
+local function ApplyProgressionEntry(entry, stat)
+	if entry.Attribute == "ExtraProperties" then
+		if entry.Append == true then
+			local props = stat.ExtraProperties or {}
+			table.insert(props, entry.Value)
+		else
+			stat.ExtraProperties = {entry.Value}
+		end
+	else
+		if entry.Append == true then
+			local current = stat[entry.Attribute]
+			if entry.Attribute == "Boosts" or entry.Attribute == "Skills" then
+				stat[entry.Attribute] = current .. ";" .. entry.Value
+			else
+				stat[entry.Attribute] = current + entry.Value
+			end
+		else
+			stat[entry.Attribute] = entry.Value
+		end
+	end
+end
+
+---@param progressionTable table<integer,UniqueProgressionEntry|UniqueProgressionEntry[]>
+function UniqueData:ApplyProgression(progressionTable)
+	local item = Ext.GetItem(self)
+	local level = item.Stats.Level
+	if progressionTable ~= nil and #progressionTable > 0 then
+		local stat = Ext.GetStat(item.StatsId, level)
+		for i=self.LastProgressionLevel,level do
+			local entries = progressionTable[i]
+			if entries ~= nil then
+				if entries.Type == "UniqueProgressionEntry" then
+					ApplyProgressionEntry(entries, stat)
+				elseif #entries > 0 then
+					for i,v in pairs(entries) do
+						ApplyProgressionEntry(v, stat)
+					end
+				end
+			end
+		end
+	end
+end
+
 return UniqueData
