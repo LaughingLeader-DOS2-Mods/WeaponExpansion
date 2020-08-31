@@ -44,12 +44,12 @@ NOT DB_LLWEAPONEX_Companions_EquipResolved(_Char, _Template);
 IF
 CharacterStatusApplied(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "UNSHEATHED", _)
 THEN
-LeaderLib_Timers_StartObjectTimer(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, 250, "Timers_LLWEAPONEX_Harken_SwapTattoos", "LLWEAPONEX_Harken_SwapTattoos");
+LeaderLib_Timers_StartObjectTimer(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, 500, "Timers_LLWEAPONEX_Harken_SwapTattoos", "LLWEAPONEX_Harken_SwapTattoos");
 
 IF
 CharacterStatusRemoved(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, "UNSHEATHED", _)
 THEN
-LeaderLib_Timers_StartObjectTimer(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, 250, "Timers_LLWEAPONEX_Harken_SwapTattoos", "LLWEAPONEX_Harken_SwapTattoos");
+LeaderLib_Timers_StartObjectTimer(S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b, 500, "Timers_LLWEAPONEX_Harken_SwapTattoos", "LLWEAPONEX_Harken_SwapTattoos");
 
 IF
 StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Harken_SwapTattoos")
