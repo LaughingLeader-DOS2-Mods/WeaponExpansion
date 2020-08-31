@@ -43,6 +43,7 @@ function UniqueData:Create(uuid, progressionData, params)
 	if this.DefaultOwner ~= nil or this.Owner ~= nil then
 		this.CanMoveToVendingMachine = false
 	elseif this.CanMoveToVendingMachine then
+		-- Vending Machine
 		this.DefaultOwner = "680d2702-721c-412d-b083-4f5e816b945a"
 	end
     return this

@@ -17,6 +17,6 @@ Target_LLWEAPONEX_BasicAttack_DisplayName	Basic Attack	hbdac34fdg43b6g4439g9947g
 Target_LLWEAPONEX_BasicAttack_Description	Attack with your currently equipped weapon, dealing [1].[2]	hcacb94cbg4737g4a52g8b07gc5af8628eff5
 Target_LLWEAPONEX_UnarmedBasicAttack_Description	Attack with your fists, dealing [1].[2]	h5d9eca79g2820g4058gba1bgee5b291c2515
 Target_LLWEAPONEX_Steal_DisplayName	Steal	h3c1cc3f6g61b3g45dfg9b9eg473e08e8b698
-Target_LLWEAPONEX_Steal_Description	Attack an enemy with a sneaky blow, dealing [1] with a <font color='#11D87A'>[2]% chance to steal an item</font>.<br><font color='#FF5533'>Steal chance is dropped by [3]% per successful steal on the target.</font> 	hd4aa6a1cg6195g4367g8c86g82a7b663daf2
+Target_LLWEAPONEX_Steal_Description	Attack an enemy with a sneaky blow, dealing [1] with a <font color='#11D87A'>[2]% chance to steal an item</font>.<br><font color='#FF5533'>Steal chance is dropped by [ExtraData:LLWEAPONEX_Steal_SuccessChanceReduction]% per successful steal on the target.</font> 	hd4aa6a1cg6195g4367g8c86g82a7b663daf2
 Target_LLWEAPONEX_Curse_DisplayName	Malediction	hf5cfe219gda21g47ecga3b5g92fe2672bd65
 Target_LLWEAPONEX_Curse_Description	Curse a target character, lowering their resistances and chance to dodge.<br><font color='#FF00DD'>If a Cursed character dies, the curse spreads to nearby enemies within [1] and deals [2].</font>	h0eaa31aag7f87g4e2fgae60g32bd41f463da

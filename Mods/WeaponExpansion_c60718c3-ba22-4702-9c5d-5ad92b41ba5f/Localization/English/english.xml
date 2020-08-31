@@ -267,6 +267,7 @@
 	<content contentuid="h1d3537ebgd052g4409gad59gc8127c2796d8">&lt;font color=&apos;#FFB900&apos;&gt;Polearm Mastery V&lt;/font&gt;</content>
 	<content contentuid="h1d57a248gbe88g4143g8cb5g1b4ab6d7c44c">&lt;font color=&apos;#00FFFF&apos;&gt;If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.&lt;/font&gt;</content>
 	<content contentuid="h1d58a9e2gf439g4e3eg8f25g8e849ea7a6d5">Throw the displacement charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge randomly teleports characters and barrels within [1] to another displacement charge within 12m.&lt;/font&gt;</content>
+	<content contentuid="h1d607908g32abg4efbg8e11g2922e2c659e3">Character is inspired by Leadership in the presence of a banner.</content>
 	<content contentuid="h1d896e50gc00eg4e2agadb0gd13962c0248c">Throw Shuriken</content>
 	<content contentuid="h1dc0f616g9bc1g4b3cga4c0g2d57581d28a5">&lt;font color=&apos;#5B40FF&apos;&gt;Dagger Mastery V&lt;/font&gt;</content>
 	<content contentuid="h1dcd2a61g81e5g42edga77cgde1d6831918a">Chaos Incarnate</content>
@@ -943,7 +944,6 @@
 	<content contentuid="h66bfffc1ga29cg4658g9b1cgad4e60f5b097">Empowered by Blood</content>
 	<content contentuid="h66e019e3g7dd3g41fdg9880gd479a73bf7ba">Character is taking [1] from a flying body.</content>
 	<content contentuid="h66ea9bb3g8724g4001gb9acgccf4a5696829">Rallying</content>
-	<content contentuid="h66ed93b8geecfg48aeg8bbcgbdc584475c99">Character is inspired by Leadership in the presence of a banner.</content>
 	<content contentuid="h66fd8c59g8a4dg44a2gaafeg71d0a80db595">Air Weakness</content>
 	<content contentuid="h670d368ag009fg4991gb535ge3720fb99f2f">Swap between two-handed and single-handed styles with the &lt;font color=&apos;#c5a</content>
 	<content contentuid="h673b26f0g9e0ag45d3g857fg353aa68f1086">*[WANDS] Click on the button labeled &apos;Wands&apos;.*</content>
@@ -1071,7 +1071,7 @@
 	<content contentuid="h74c569f8g2eadg4d48g9437g13375158a532">Knocked Down (Magic)</content>
 	<content contentuid="h74dcf0dag97edg4529g87d2gf67fc14fdf2d">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery V&lt;/font&gt;</content>
 	<content contentuid="h74f4ac59gf13ag470bga79cg83fa8dfabd0a">Throw a staff at an enemy for [1] and apply &lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt; lowers all Elemental Resistances &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF00FF&apos;&gt;When hit by a staff, it explodes with a random element.&lt;/font&gt;</content>
-	<content contentuid="h75169d2cg498dg4241gbc66g600953a95398">Rally the party at the target location.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;Party members are granted a one-time use skill that teleports them to the raised banner.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#99FFFF&apos;&gt;The banner inspires faith in the Divine, granting a +[1] boost to attributes, a [2]% boost to dodge, and a [3]% boost to damage.&lt;/font&gt;</content>
+	<content contentuid="h75169d2cg498dg4241gbc66g600953a95398">Rally the party at the target location.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;Party members are granted a one-time use skill that teleports them to the raised banner.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#99FFFF&apos;&gt;The banner inspires faith in the Divine, granting a +[1] boost to attributes, a +[2]% boost to dodge, and a +[3]% boost to damage.&lt;/font&gt;</content>
 	<content contentuid="h75268a77g2c50g42d3ga0f0ga5c4b25b55e6">Reset Balrin&apos;s Throwing Axe - Use this if your axe never came back.</content>
 	<content contentuid="h7547e220gcc49g448dg9b07gcee33764d303">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h757628cfg8bb1g4defgb24fgf3e5e4e3c328">&lt;font color=&apos;#FCD203&apos;&gt;Token of Memory&lt;/font&gt;</content>
@@ -1919,7 +1919,7 @@
 	<content contentuid="hd4558384gf656g4e7bg96bfg4d2639fd45e6">Beginner</content>
 	<content contentuid="hd4676edeg5e3ag437eg952bg10d5f32e634e">Dusty Book</content>
 	<content contentuid="hd4864953g3439g4675g8315g48c09c293b71">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery III&lt;/font&gt;</content>
-	<content contentuid="hd4aa6a1cg6195g4367g8c86g82a7b663daf2">Attack an enemy with a sneaky blow, dealing [1] with a &lt;font color=&apos;#11D87A&apos;&gt;[2]% chance to steal an item&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF5533&apos;&gt;Steal chance is dropped by [3]% per successful steal on the target.&lt;/font&gt; </content>
+	<content contentuid="hd4aa6a1cg6195g4367g8c86g82a7b663daf2">Attack an enemy with a sneaky blow, dealing [1] with a &lt;font color=&apos;#11D87A&apos;&gt;[2]% chance to steal an item&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF5533&apos;&gt;Steal chance is dropped by [ExtraData:LLWEAPONEX_Steal_SuccessChanceReduction]% per successful steal on the target.&lt;/font&gt; </content>
 	<content contentuid="hd4aede56g6547g43d7gaf29ge3588bd5d6f8">&lt;font color=&apos;#FEFFB3&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
 	<content contentuid="hd4ffb17bg123dg4776ga98bgcc138cee93af">Beginner</content>
 	<content contentuid="hd50ed08aga85fg4e60g827bg854c27381f59">Poison Arrow</content>
