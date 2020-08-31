@@ -68,7 +68,7 @@ MasteryBonusManager.RegisterSkillListener({"Jump_TacticalRetreat", "Jump_EnemyTa
 			for i,v in pairs(combatEnemies) do
 				local enemy = v[1]
 				if (enemy ~= char and CharacterIsEnemy(char, enemy) == 1 and 
-					not LeaderLib.IsSneakingOrInvisible(char) and GetDistanceTo(char,enemy) <= maxDistance) then
+					not GameHelpers.Status.IsSneakingOrInvisible(char) and GetDistanceTo(char,enemy) <= maxDistance) then
 						totalEnemies = totalEnemies - 1
 						ApplyStatus(enemy, "MARKED", 6.0, 0, char)
 				end

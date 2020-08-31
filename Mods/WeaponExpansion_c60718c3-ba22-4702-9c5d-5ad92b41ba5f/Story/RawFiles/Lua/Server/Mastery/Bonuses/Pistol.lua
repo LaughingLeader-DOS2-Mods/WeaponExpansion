@@ -32,21 +32,23 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 			local targets = {}
 			for i,v in pairs(combatEnemies) do
 				local enemy = v[1]
-				if enemy ~= char and
-					CharacterIsEnemy(char, enemy) == 1 and 
-					CharacterIsDead(enemy) == 0 and 
-					not LeaderLib.IsSneakingOrInvisible(char) then
-						local dist = GetDistanceTo(char,enemy)
-						if dist <= maxDistance then
-							if totalEnemies == 1 then
-								if dist < lastDist then
-									targets[1] = enemy
-								end
-							else
-								table.insert(targets, {Dist = dist, UUID = enemy})
+				if enemy ~= char 
+				and CharacterIsEnemy(char, enemy) == 1 
+				and CharacterIsDead(enemy) == 0 
+				and not GameHelpers.Status.IsSneakingOrInvisible(enemy) 
+				and HasActiveStatus(enemy, "MARKED") == 0
+				then
+					local dist = GetDistanceTo(char,enemy)
+					if dist <= maxDistance then
+						if totalEnemies == 1 then
+							if dist < lastDist then
+								targets[1] = enemy
 							end
-							lastDist = dist
+						else
+							table.insert(targets, {Dist = dist, UUID = enemy})
 						end
+						lastDist = dist
+					end
 				end
 			end
 			if #targets > 1 then
@@ -63,7 +65,7 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 						break
 					end
 				end
-			else
+			elseif targets[1] ~= nil then
 				local target = targets[1]
 				ApplyStatus(target, "MARKED", 6.0, 0, char)
 				SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")

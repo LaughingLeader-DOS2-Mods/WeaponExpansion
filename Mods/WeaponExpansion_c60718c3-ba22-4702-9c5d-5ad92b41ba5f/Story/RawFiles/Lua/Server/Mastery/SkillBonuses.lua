@@ -224,7 +224,7 @@ function MasteryBonusManager.GetClosestCombatEnemies(char, maxDistance, sortByCl
 			if (enemy ~= char and enemy ~= ignoreTarget and
 				CharacterIsEnemy(char, enemy) == 1 and 
 				CharacterIsDead(enemy) == 0 and 
-				not LeaderLib.IsSneakingOrInvisible(char)) then
+				not GameHelpers.Status.IsSneakingOrInvisible(char)) then
 					local dist = GetDistanceTo(char,enemy)
 					if dist <= maxDistance then
 						if limit == 1 then
