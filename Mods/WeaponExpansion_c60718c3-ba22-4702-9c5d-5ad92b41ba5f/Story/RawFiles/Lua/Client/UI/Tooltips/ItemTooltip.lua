@@ -224,6 +224,15 @@ local function OnItemTooltip(item, tooltip)
 	---@type EclCharacter
 	local character = Ext.GetCharacter(LeaderLib.UI.ClientCharacter)
 	if item ~= nil then
+		if item.StatsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
+			--Removes the Requires Dwarf / Male
+			for i,element in pairs(tooltip:GetElements("ItemRequirement")) do
+				if element.RequirementMet == true then
+					tooltip:RemoveElement(element)
+				end
+			end
+		end
+
 		local fakeDamageCreated = false
 		if character ~= nil then
 			if item:HasTag("LLWEAPONEX_Pistol") then

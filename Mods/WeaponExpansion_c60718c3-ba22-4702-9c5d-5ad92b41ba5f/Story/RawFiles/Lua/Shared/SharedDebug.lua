@@ -61,7 +61,7 @@ local dynamicStatsVars = {
 	MagicArmorValue = "integer",
 	MagicArmorBoost = "integer",
 	Blocking = "integer",
-	}
+}
 
 function PrintDynamicStats(dynamicStats)
 	for i,v in pairs(dynamicStats) do
