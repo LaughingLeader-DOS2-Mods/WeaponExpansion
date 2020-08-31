@@ -5,12 +5,6 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 	if Vars.isInCharacterCreation then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 	else
-		if IsGameLevel(region) == 1 then
-			if GlobalGetFlag("LLWEAPONEX_VendingMachine_InitializedUniques") == 0 then
-				MoveUniquesToVendingMachine()
-				GlobalFlagSet("LLWEAPONEX_VendingMachine_InitializedUniques")
-			end
-		end
 		for id,unique in pairs (Uniques) do
 			unique:OnLevelChange(region)
 		end
@@ -86,7 +80,6 @@ local function OnStatusApplied(target, status, source)
 		if status == "LLWEAPONEX_PISTOL_SHOOT_HIT" then
 			local items = GameHelpers.Item.FindTaggedEquipment(source, "LLWEAPONEX_Pistol")
 			if items ~= nil then
-				print(Ext.JsonStringify(items))
 				for slot,v in pairs(items) do
 					ApplyRuneExtraProperties(target, source, Ext.GetItem(v))
 				end

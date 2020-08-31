@@ -94,15 +94,6 @@ AllUniques = {
 	--"S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988",
 }
 
-function MoveUniquesToVendingMachine()
-	for i,item in pairs(Uniques) do
-		local owner = item.Owner
-		if not GameHelpers.Item.ItemIsEquippedByCharacter(item) and (owner == nil or (ObjectIsCharacter(owner) ~= 1 and owner ~= VENDING_MACHINE)) then
-			ItemToInventory(item, VENDING_MACHINE, 1, 0, 0)
-		end
-	end
-end
-
 local LinkedUniques = {
 	["MagicMissileWand"] = {
 		--S_WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_f8958c1e-1c9d-4fa9-b03f-b883c65f95c3
