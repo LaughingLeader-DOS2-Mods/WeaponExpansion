@@ -364,7 +364,7 @@ local function initializeMasteryMenu()
 			if Ext.IsDeveloperMode() then
 				Ext.RegisterUICall(ui, "showSkillTooltip", OnMenuEvent)
 				Ext.RegisterUICall(ui, "showStatusTooltip", OnMenuEvent)
-				Ext.RegisterUICall(ui, "UIAssert", OnMenuEvent)
+				--Ext.RegisterUICall(ui, "UIAssert", OnMenuEvent)
 				Ext.RegisterUICall(ui, "hideTooltip", OnMenuEvent)
 				Ext.RegisterUICall(ui, "showTooltip", OnMenuEvent)
 				Ext.RegisterUICall(ui, "focusLost", OnMenuEvent)

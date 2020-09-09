@@ -4,7 +4,11 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 	Vars.isInCharacterCreation = IsCharacterCreationLevel(region) == 1
 	if Vars.isInCharacterCreation then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
-	else
+	end
+end)
+
+LeaderLib.RegisterListener("Initialized", function(region)
+	if region ~= nil and IsGameLevel(region) == 1 then
 		for id,unique in pairs (Uniques) do
 			unique:OnLevelChange(region)
 		end
@@ -42,7 +46,6 @@ local function ApplyRuneExtraProperties(target, source, item)
 					---@type StatProperty[]
 					local extraProperties = Ext.StatGetAttribute(boost, "ExtraProperties")
 					if extraProperties ~= nil then
-						print(Ext.JsonStringify(extraProperties))
 						for i,v in pairs(extraProperties) do
 							if v.Type == "Status" then
 								if v.StatusChance < 1.0 then

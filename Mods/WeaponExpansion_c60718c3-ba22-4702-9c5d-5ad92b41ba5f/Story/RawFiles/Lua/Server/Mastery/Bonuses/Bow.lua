@@ -71,10 +71,8 @@ MasteryBonusManager.RegisterSkillListener({"Projectile_Snipe", "Projectile_Enemy
 			if NRD_StatusGetInt(data.Target, data.Handle, "CriticalHit") == 0 or data.Damage <= 0 then
 				local attacker = Ext.GetCharacter(char).Stats
 				local target = Ext.GetCharacter(data.Target).Stats
-
 				NRD_HitStatusClearAllDamage(data.Target, data.Handle)
-
-				local hit = GameHelpers.Damage.CalculateSkillDamage(skill, attacker, target, data.Handle, true, true, true)
+				local hit = GameHelpers.Damage.CalculateSkillDamage(skill, attacker, target, data.Handle, false, true, true)
 				GameHelpers.Damage.ApplyHitRequestFlags(hit, data.Target, data.Handle)
 				for i,damage in pairs(hit.DamageList:ToTable()) do
 					NRD_HitStatusAddDamage(data.Target, data.Handle, damage.DamageType, damage.Amount)
