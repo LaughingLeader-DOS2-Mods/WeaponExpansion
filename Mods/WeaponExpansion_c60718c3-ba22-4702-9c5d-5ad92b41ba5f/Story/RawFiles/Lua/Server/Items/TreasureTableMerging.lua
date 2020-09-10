@@ -3,7 +3,8 @@ local function CreateBasicCategory(name, isTable, rarities)
 	local tbl = {Frequency = 1}
 
 	if isTable == true then
-		tbl.TreasureTable = "T_"..name
+		--tbl.TreasureTable = "T_"..name
+		tbl.TreasureTable = name
 	else
 		tbl.TreasureCategory = name
 	end
@@ -20,12 +21,12 @@ end
 local TreasureTableOverrides = {
 	ST_WandNormal = {
 		Categories = {
-			CreateBasicCategory("ST_LLWEAPONEX_RodsNormal", false, {Common=1})
+			CreateBasicCategory("ST_LLWEAPONEX_RodsNormal", true, {Common=1})
 		}
 	},
 	ST_TwoHandedNormal = {
 		Categories = {
-			CreateBasicCategory("ST_LLWEAPONEX_TwoHandedNormal", false, {Common=1})
+			CreateBasicCategory("ST_LLWEAPONEX_TwoHandedNormal", true, {Common=1})
 		}
 	},
 	ST_OneHandedNormal = {
