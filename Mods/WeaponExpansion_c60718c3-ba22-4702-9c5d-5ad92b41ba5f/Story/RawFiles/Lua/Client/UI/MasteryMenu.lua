@@ -12,7 +12,8 @@ MasteryMenu = {
 	SelectedMastery = nil,
 	LastSelected = 0,
 	---@type CharacterMasteryData
-	MasteryData = nil
+	MasteryData = nil,
+	IsControllerMode = false
 }
 
 ---@type MessageData
@@ -304,22 +305,24 @@ local function getMasteryDescriptionTitle(masteryData)
 end
 
 local function initializeToggleButton()
-	local ui = Ext.GetUI("MasteryMenuToggleButton")
-	if ui == nil then
-		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 1)
-		Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
-			if not MasteryMenu.Open then
-				TryOpenMasteryMenu()
-			else
-				CloseMenu()
-			end
-		end)
+	if not MasteryMenu.IsControllerMode then
+		local ui = Ext.GetUI("MasteryMenuToggleButton")
+		if ui == nil then
+			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 1)
+			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
+				if not MasteryMenu.Open then
+					TryOpenMasteryMenu()
+				else
+					CloseMenu()
+				end
+			end)
+		end
+		if ui ~= nil then
+			ui:Show()
+			ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
+		end
+		MasteryMenu.ToggleButtonInstance = ui
 	end
-	if ui ~= nil then
-		ui:Show()
-		ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
-	end
-	MasteryMenu.ToggleButtonInstance = ui
 end
 
 local function initializeMasteryMenu()
@@ -385,6 +388,10 @@ local function initializeMasteryMenu()
 end
 
 local function InitMasteryMenu()
+	if Game.Tooltip.ControllerVars ~= nil then
+		MasteryMenu.IsControllerMode = Game.Tooltip.ControllerVars.Enabled
+	end
+
 	if not MasteryMenu.Initialized then
 		initializeToggleButton()
 		initializeMasteryMenu()

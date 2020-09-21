@@ -191,6 +191,7 @@ Text = {
 		Pirate = TranslatedString:Create("hc64dff65g17ffg4b44gaf21g896521b144f2", "Piracy"),
 	},
 	Game = {
+		WeaponExpansion = TranslatedString:Create("h2cb50244g8d38g4a87g8924gc01a4a02f19a", "Weapon Expansion"),
 		Attack = TranslatedString:Create("h60ca7387gcb64g4027g98a3g41679874f271","Attack"),
 		ActionPoints = TranslatedString:Create("h4ef9c467g3c7bg4614g96d0g801b09fcc05c","Action Points"),
 		Range = TranslatedString:Create("hfdbe9065g1eeeg42f9gbf1eg4cb865ac187e","Range"),

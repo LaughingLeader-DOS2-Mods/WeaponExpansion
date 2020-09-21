@@ -13,7 +13,8 @@ local AlternativeScaling = {
 
 ---@type table<string, TranslatedString>
 local AbilitySchool = {
-	Target_LLWEAPONEX_Steal = Text.NewAbilitySchools.Pirate
+	Target_LLWEAPONEX_Steal = Text.NewAbilitySchools.Pirate,
+	Shout_LLWEAPONEX_OpenMenu = Text.Game.WeaponExpansion,
 }
 
 local thiefGloveChanceBonusText = TranslatedString:Create("h1fce3bfeg41a6g41adgbc5bg03d39281b469", "<font color='#11D87A'>+[1]% chance from [2]</font>")
