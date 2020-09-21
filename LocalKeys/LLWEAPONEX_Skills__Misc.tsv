@@ -1,4 +1,6 @@
 Key	Content	Handle
+Shout_LLWEAPONEX_OpenMenu_DisplayName	Open Mastery Menu	h18949f78ga9ffg4525ga9cfg46d3eb68b15c
+Shout_LLWEAPONEX_OpenMenu_Description	Open the mastery menu to check current weapon masteries.	hc87fc4e3g8a3bg4112g946dg5efd106fc16b
 Cone_LLWEAPONEX_WaterSpout_Description	Channel a torrent of water through your hand, setting <font color='#4197e2'>Wet</font> on targets hit for 2 turns, and dousing burning surfaces.<br>If a <font color='#fe6e27'>Burning</font> <font color='#11D87A'>Ally</font> is <font color='#4197e2'>Doused</font>, <font color='#97fbff'>Mending</font> is applied for 1 turn.<br><font color='#97fbff' size='19'>Mending restores [1] and does not damage the Undead.</font><br><font color='#188EDE' size='19'>Allies hit are cleansed of Slowed and Enwebbed.</font>	h2720377cg5500g4f26gbc9bg17503ce83248
 Cone_LLWEAPONEX_WaterSpout_DisplayName	Water Spout	he6003f05g236bg4f79ga8beg22d5b30ad4f1
 Jump_LLWEAPONEX_EnemyChaosDive_DisplayName	Chaos Glide	hab06cff9g8908g4bedga5eagec558d1afb06

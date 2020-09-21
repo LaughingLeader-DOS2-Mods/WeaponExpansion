@@ -35,7 +35,7 @@
                     <attribute id="CharacterCreationLevelName" value="" type="22" />
                     <attribute id="Description" value="Adds a plethora of new weapons, including katana/odachi, quarterstaffs, offhand melee wands, runeblades, throwing weapons, dual shields, firearms, tons of unique items, and more!" type="30" />
                     <attribute id="DescriptionName" value="" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
-                    <attribute id="DisplayName" value="" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                    <attribute id="DisplayName" value="Weapon Expansion" handle="h2cb50244g8d38g4a87g8924gc01a4a02f19a" type="28" />
                     <attribute id="Folder" value="WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f" type="30" />
                     <attribute id="GMTemplate" value="" type="22" />
                     <attribute id="LobbyLevelName" value="" type="22" />
