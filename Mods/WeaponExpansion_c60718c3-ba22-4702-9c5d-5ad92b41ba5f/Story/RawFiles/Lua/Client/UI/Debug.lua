@@ -23,7 +23,7 @@ local function Client_UIDebugTest()
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "selectOption", function(ui, ...)
-			print("selectOptions", Ext.JsonStringify({...}))
+			--print("selectOptions", Ext.JsonStringify({...}))
 		end)
 	end
 end
