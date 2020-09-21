@@ -175,6 +175,7 @@ local known = {
 	OsirisTask = true,
 	Force = true,
 	Sabotage = true,
+	SelfOnEquip = true,
 }
 
 local AIFLAG_CANNOT_USE = 140689826905584
@@ -202,11 +203,14 @@ local function StatOverrides_Init()
 
 		local props = Ext.StatGetAttribute(skill, "SkillProperties")
 		if props ~= nil and #props > 0 then
+			local printNewInfo = false
 			for _,v in pairs(props) do
-				if known[v.Type] ~= true then
-					print(skill, Ext.JsonStringify(props))
-					break
+				if not StringHelpers.IsNullOrEmpty(v.Type) and known[v.Type] ~= true then
+					printNewInfo = true
 				end
+			end
+			if printNewInfo then
+				--print(skill, Ext.JsonStringify(props))
 			end
 		end
 
