@@ -43,7 +43,7 @@ end
 ---@param uuid string
 ---@param item StatItem
 local function CheckScoundrelTags(uuid, itemUUID)
-	if itemUUID ~= nil then
+	if itemUUID ~= nil and ObjectExists(itemUUID) == 1 then
 		local item = Ext.GetItem(itemUUID)
 		if item.Stats.WeaponType == "Knife" or item:HasTag("LLWEAPONEX_Katana") or (Mastery.HasMasteryRequirement(uuid, "LLWEAPONEX_Axe_Mastery4") and (item.Stats.WeaponType == "Axe" or item:HasTag("LLWEAPONEX_Axe"))) then
 			return true
@@ -58,7 +58,7 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 	local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	local offhand = CharacterGetEquippedItem(uuid, "Shield")
 	local weapon = mainhand or offhand
-	if weapon ~= nil then
+	if weapon ~= nil and ObjectExists(weapon) == 1 then
 		local item = Ext.GetItem(weapon)
 		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		if rangedWeaponTypes[item.Stats.WeaponType] ~= true then
@@ -103,7 +103,7 @@ end
 function OnItemEquipped(uuid,itemUUID)
 	--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	--local offhand = CharacterGetEquippedItem(uuid, "Shield")
-	if not StringHelpers.IsNullOrEmpty(itemUUID) then
+	if not StringHelpers.IsNullOrEmpty(itemUUID) and ObjectExists(itemUUID) == 1 then
 		local item = Ext.GetItem(itemUUID)
 		if item == nil then
 			return
