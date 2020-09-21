@@ -161,11 +161,11 @@ end
 function SwapTattoos(char)
 	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Mercs.Harken, "HarkenTattoos")
 	if HasActiveStatus(char, "UNSHEATHED") == 1 then
-		if GetUUID(CharacterGetEquippedItem(char, "Breast")) == "40039552-3aae-4beb-8cca-981809f82988" then
+		if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "40039552-3aae-4beb-8cca-981809f82988" then
 			SwapUnique(char, "HarkenTattoos")
 		end
 	else
-		if GetUUID(CharacterGetEquippedItem(char, "Breast")) == "927669c3-b885-4b88-a0c2-6825fbf11af2" then
+		if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "927669c3-b885-4b88-a0c2-6825fbf11af2" then
 			SwapUnique(char, "HarkenTattoos")
 		end
 	end
