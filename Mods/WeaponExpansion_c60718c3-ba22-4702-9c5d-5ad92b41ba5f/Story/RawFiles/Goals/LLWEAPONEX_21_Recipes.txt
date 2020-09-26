@@ -231,7 +231,7 @@ DB_IsPlayer(_Player)
 AND
 DB_LLWEAPONEX_Recipes_Uniques(_ID, _Template, _Flag)
 AND
-UserGetFlag(_Player, "WeaponExpansion_Settings_AutoUnlockRecipesDisabled", 0)
+UserGetFlag(_Player, "LLWEAPONEX_AutoUnlockRecipesDisabled", 0)
 AND
 ObjectGetFlag(_Player, _Flag, 0)
 THEN

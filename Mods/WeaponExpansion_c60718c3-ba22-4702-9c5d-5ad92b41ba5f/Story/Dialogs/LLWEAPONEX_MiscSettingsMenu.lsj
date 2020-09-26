@@ -380,7 +380,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "WeaponExpansion_Settings_AutoUnlockRecipesDisabled"
+															"value": "LLWEAPONEX_AutoUnlockRecipesDisabled"
 														},
 														"paramval": {
 															"type": 4,
@@ -486,7 +486,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "WeaponExpansion_Settings_AutoUnlockRecipesDisabled"
+															"value": "LLWEAPONEX_AutoUnlockRecipesDisabled"
 														},
 														"paramval": {
 															"type": 4,
@@ -636,7 +636,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "WeaponExpansion_Settings_AutoUnlockRecipesDisabled"
+															"value": "LLWEAPONEX_AutoUnlockRecipesDisabled"
 														},
 														"paramval": {
 															"type": 4,
@@ -742,7 +742,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "WeaponExpansion_Settings_AutoUnlockRecipesDisabled"
+															"value": "LLWEAPONEX_AutoUnlockRecipesDisabled"
 														},
 														"paramval": {
 															"type": 4,

@@ -175,33 +175,6 @@ DB_LeaderLib_BlockedSkill(_MainSkill);
 DB_LeaderLib_BlockedSkill(_DualWieldSkill);
 //END_REGION
 
-//REGION RESET_UNIQUES
-PROC
-LLWEAPONEX_System_ResetUniques()
-AND
-DB_LeaderLib_Growth_Items_TemplateID("WeaponExpansion", _ID, _Template)
-THEN
-LeaderLib_Growth_Items_ResetItemsByID(_ID);
-
-//Reset uniques in the vending machine
-PROC
-LLWEAPONEX_System_ResetUniques()
-AND
-ObjectExists(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1)
-AND
-DB_LeaderLib_Growth_Items_TemplateID("WeaponExpansion", _ID, _Template)
-AND
-GetItemForItemTemplateInInventory(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Template, _Item)
-AND
-LeaderLib_Helper_QRY_RemoveRunes(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _Item)
-AND
-GetPosition(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, _x, _y, _z)
-AND
-CreateItemTemplateAtPosition(_Template, _x, _y, _z, _NewItem)
-THEN
-ItemToInventory(_NewItem, S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a, 1, 0, 1);
-//END_REGION
-
 //REGION TOGGLE_SKILLS
 PROC
 LLWEAPONEX_LeaderLib_InitSettings()

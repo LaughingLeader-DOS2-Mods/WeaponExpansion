@@ -41,6 +41,7 @@ Ext.Require("Server/Items/ItemHandler.lua")
 Ext.Require("Server/Items/UniqueItems.lua")
 Ext.Require("Server/Items/CraftingMechanics.lua")
 Ext.Require("Server/Items/DeltaModSwapper.lua")
+Ext.Require("Server/Items/LootBonuses.lua")
 Ext.Require("Server/Items/TreasureTableMerging.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
 local debugInit = Ext.Require("Server/Debug/DebugMain.lua")
@@ -71,13 +72,19 @@ Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 ---@param context any
 local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection, context)
 	if hit.DamageType == "Magic" then
-        hit.DamageList:ConvertDamageType("Water")
+        hit.DamageList:ConvertDamageType("Earth")
     elseif hit.DamageType == "Corrosive" then
         hit.DamageList:ConvertDamageType("Physical")
     end
 end
 
 local function SessionSetup()
+    -- Divinity Unleashed or Armor Mitigation
+    if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") and not Ext.IsModLoaded("edf1898c-d375-47e7-919a-11d5d44d1cca") then
+        Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
+		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
+    end
+
     -- Enemy Upgrade Overhaul
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
@@ -86,12 +93,6 @@ local function SessionSetup()
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
     if Ext.IsDeveloperMode() then
         Mods.LeaderLib.AddDebugInitCall(debugInit)
-    end
-
-    -- Divinity Unleashed or Armor Mitigation
-    if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") and not Ext.IsModLoaded("edf1898c-d375-47e7-919a-11d5d44d1cca") then
-        Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
-		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
     end
     
     for i,callback in pairs(LoadPersistentVars) do

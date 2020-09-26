@@ -170,6 +170,7 @@
 	<content contentuid="h133cf4degf968g4ebfg9354gec021e928aa2">&lt;font color=&apos;#F7BA14&apos;&gt;Earth Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
 	<content contentuid="h13ac28ceg70feg4617gb124g5cdb198bbcac">Execution</content>
 	<content contentuid="h13bfb4ffg4ae6g4c67g839fg30ac91b2978f">A hardy blow with your shield that deals [1] and has a chance to daze the target.</content>
+	<content contentuid="h145c7401gf7bbg45cag9233g74278a112220">Disable Remote Charge Detonation Limit</content>
 	<content contentuid="h147316d6g357dg4c40gb1ddgb3c2110f2e2a">Ashenblade</content>
 	<content contentuid="h1481e457gb42cg4c8ag9d0cgdb2216832df9">Shuriken (Normal)</content>
 	<content contentuid="h1489c182g77f9g4398g8464g543d5568a8f6">The end of the Runic Cannon glimmers like a dazzling gem, powered by runic magic.&lt;br&gt;&lt;font color=&apos;#FF55C3&apos;&gt;Unequipping this requires detaching the safeties near your arm.&lt;/font&gt;</content>
@@ -802,6 +803,7 @@
 	<content contentuid="h57e57a5cge010g47bdgb9adg632266ea2ad2">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Melee attacks restore Vitality to allies within [1]m.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="h57f6c5dcg34d5g4144g8e78g0bd2d0d164f6">&lt;font color=&apos;#AA895B&apos;&gt;Flask of Earth Weakness&lt;/font&gt;</content>
 	<content contentuid="h57fe3569g0a44g4321g98b5g9aec8d3d24a9">Air Rune</content>
+	<content contentuid="h580f2857g0a22g417cg80begc399154191cc">Allow remote changes to detonate without restriction, meaning you can blow up everything in an inventory at once.</content>
 	<content contentuid="h583510a1gf1feg4755g9a22g0a897d282baf">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery I&lt;/font&gt;</content>
 	<content contentuid="h58a35a15gc595g4dcdga354ga8348f3add50">Eviscerating Estoc</content>
 	<content contentuid="h58ada9c4g3932g43f3g9f2dg4972e1dfad4b">Electric Bullets</content>
@@ -1029,6 +1031,7 @@
 	<content contentuid="h6fc14e25ga766g4504gad15g5f4a4a66b99a">&lt;font color=&apos;#797980&apos;&gt;Smokescreen Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h6fc82247g8e16g4085g9bfag539c8a0eaca5">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Too Heavy!&lt;/font&gt;</content>
 	<content contentuid="h6fe2f7f5g746fg4779g8029g89b1c9bb21b5">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Leg Sweep</content>
+	<content contentuid="h701b61a2g639eg4cf4gb76cg41c26d551d63">Disable Arm Cannon Restrictions</content>
 	<content contentuid="h703f41c3g4ca1g463ag8550g3ef66dfd8a8d">Character is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; from a hot wind!</content>
 	<content contentuid="h7072fa7bgc209g40dfgb255g26cfcc34b6da">Grave Rune</content>
 	<content contentuid="h7081960fg5dc7g4f98gb8ffg6c2f900e4259">Stormrider</content>
@@ -1467,6 +1470,7 @@
 	<content contentuid="h9f830ae4gff10g41f0gb1b2g88d7dd74ba46">Undead Delight</content>
 	<content contentuid="h9f9c234dg9aadg457cgb4e8g06adc6a23102">Pacifist&apos;s Will</content>
 	<content contentuid="h9fb31128g252ag4f9bga1ffgfdbd95ad55e0">[Back]</content>
+	<content contentuid="h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f">If disables, you can equip other weapons to your other hand when wielding the Arm Cannon.</content>
 	<content contentuid="h9fee2cfeg963cg43f0ga4fcgdfb79b48f7e0">Harken</content>
 	<content contentuid="h9ffd7826g03eeg4597gad11g03c6b56e547c">Shield</content>
 	<content contentuid="ha05ebf00g32e8g4598g839cg6f272357ac3b">Character has been hit by a Blademaster&apos;s strike.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
