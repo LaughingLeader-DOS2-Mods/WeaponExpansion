@@ -26,3 +26,10 @@ Ext.RegisterConsoleCommand("weaponex_tagboost", function()
 		end)
 	end
 end)
+
+Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
+	local host = CharacterGetHostCharacter()
+	for i,v in pairs(Uniques) do
+		v:Transfer(host)
+	end
+end)

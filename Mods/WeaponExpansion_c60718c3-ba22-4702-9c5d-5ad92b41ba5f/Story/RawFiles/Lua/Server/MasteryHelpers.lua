@@ -141,8 +141,14 @@ end
 --- @param skillType string
 --- @param skillElement string
 local function OnSkillCast(character, skill, skillType, skillElement)
-	if IsPlayer(character) and IsWeaponSkill(skill) then
-		AddMasteryExperienceForAllActive(character, 0.5)
+	if IsPlayer(character) then
+		if skill == "Shout_LLWEAPONEX_OpenMenu" then
+			OpenMasteryMenu_Start(GetUUID(character))
+		else
+			if IsWeaponSkill(skill) then
+				AddMasteryExperienceForAllActive(character, 0.5)
+			end
+		end
 	end
 end
 Ext.RegisterOsirisListener("SkillCast", 4, "after", OnSkillCast)
