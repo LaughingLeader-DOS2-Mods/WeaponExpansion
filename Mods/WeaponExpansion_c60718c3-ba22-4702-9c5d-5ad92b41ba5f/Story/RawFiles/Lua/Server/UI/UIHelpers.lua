@@ -95,3 +95,8 @@ function SyncVars()
 		TimerLaunch("Timers_LLWEAPONEX_SyncVars", 500)
 	end
 end
+
+Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText_Request", function(cmd, datastr)
+	local data = Ext.JsonParse(datastr)
+	Ext.PostMessageToUser(data.Client, "LLWEAPONEX_SetWorldTooltipText", data.Text)
+end)

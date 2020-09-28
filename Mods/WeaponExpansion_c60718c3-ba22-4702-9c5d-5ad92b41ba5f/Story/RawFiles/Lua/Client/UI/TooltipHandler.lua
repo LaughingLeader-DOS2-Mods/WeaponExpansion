@@ -90,11 +90,45 @@ local OnStatusTooltip = Ext.Require("Client/UI/Tooltips/StatusTooltip.lua")
 local statTooltips = Ext.Require("Client/UI/Tooltips/StatTooltips.lua")
 local OnDamageStatTooltip = statTooltips.Damage
 
+Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText", function(cmd, text)
+	local ui = Ext.GetUIByType(44)
+	if ui ~= nil then
+		local main = ui:GetRoot()
+		if main ~= nil then
+			if main.tf ~= nil then
+				main.tf.shortDesc = text
+				main.tf.setText(text,0)
+			else
+				main.defaultTooltip.shortDesc = text
+				main.defaultTooltip.setText(text, 0)
+			end
+		end
+	end
+end)
+
+---@param ui UIObject
+---@param text string
+local function OnWorldTooltip(ui, text, x, y, ...)
+	local startPos,endPos = string.find(text, '<font size="15"><br>.-</font>')
+	if startPos then
+		local nextText = string.sub(text, 0, startPos-1)
+		Ext.PostMessageToServer("LLWEAPONEX_SetWorldTooltipText_Request", Ext.JsonStringify({Client = LeaderLib.UI.ClientID, Text=nextText}))
+		-- local main = ui:GetRoot()
+		-- if main ~= nil and main.tf ~= nil then
+		-- 	main.tf.setText(nextText,0)
+		-- else
+		-- 	main.defaultTooltip.setText(nextText, 0)
+		-- end
+		-- print(text, nextText)
+	end
+end
+
 local function Init()
 	Game.Tooltip.RegisterListener("Stat", "Damage", OnDamageStatTooltip)
 	Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)
 	Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
 	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
+	LeaderLib.UI.RegisterListener("OnWorldTooltip", OnWorldTooltip)
 end
 return {
 	Init = Init
