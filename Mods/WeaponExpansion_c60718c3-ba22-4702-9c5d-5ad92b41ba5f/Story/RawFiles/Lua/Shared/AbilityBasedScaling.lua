@@ -1,5 +1,7 @@
+Math.AbilityScaling = {}
+
 --- @param ability integer
-local function ScaledDamageFromPrimaryAbility(ability)
+function Math.AbilityScaling.ScaledDamageFromPrimaryAbility(ability)
     local attributeMax = Ext.ExtraData.AttributeSoftCap - Ext.ExtraData.AttributeBaseValue
     local result = (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * (attributeMax/Ext.ExtraData.CombatAbilityCap))
     --print("ScaledDamageFromPrimaryAttribute",ability,result*100, Game.Math.ScaledDamageFromPrimaryAttribute(40)*100)
@@ -9,15 +11,15 @@ end
 --- @param skill StatEntrySkillData
 --- @param attacker StatCharacter
 --- @param ability string
-local function GetSkillAttributeDamageScale(skill, attacker, ability)
-    return 1.0 + ScaledDamageFromPrimaryAbility(attacker[ability])
+function Math.AbilityScaling.GetSkillAttributeDamageScale(skill, attacker, ability)
+    return 1.0 + Math.AbilityScaling.ScaledDamageFromPrimaryAbility(attacker[ability])
 end
 
 --- @param character StatCharacter
 --- @param weapon StatItem
-local function ComputeWeaponRequirementScaledDamage(character, weapon, ability)
+function Math.AbilityScaling.ComputeWeaponRequirementScaledDamage(character, weapon, ability)
     if ability ~= nil then
-        return ScaledDamageFromPrimaryAbility(character[ability]) * 100.0
+        return Math.AbilityScaling.ScaledDamageFromPrimaryAbility(character[ability]) * 100.0
     else
         return 0
     end
@@ -25,7 +27,7 @@ end
 
 --- @param character StatCharacter
 --- @param weapon StatItem
-local function ComputeWeaponCombatAbilityBoost(character, weapon)
+function Math.AbilityScaling.ComputeWeaponCombatAbilityBoost(character, weapon)
     local abilityType = Game.Math.GetWeaponAbility(character, weapon)
 
     if abilityType == "SingleHanded" or abilityType == "TwoHanded" or abilityType == "Ranged" or abilityType == "DualWielding" then
@@ -43,8 +45,8 @@ function Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon
     local damages = Game.Math.CalculateWeaponDamageWithDamageBoost(weapon)
 
     local boost = character.DamageBoost 
-        + ComputeWeaponCombatAbilityBoost(character, weapon)
-        + ComputeWeaponRequirementScaledDamage(character, weapon, ability)
+        + Math.AbilityScaling.ComputeWeaponCombatAbilityBoost(character, weapon)
+        + Math.AbilityScaling.ComputeWeaponRequirementScaledDamage(character, weapon, ability)
     boost = boost / 100.0
 
     if character.IsSneaking then
@@ -88,10 +90,10 @@ end
 --- @param weapon StatItem
 --- @param noRandomization boolean
 --- @param ability string
-local function CalculateWeaponDamage(attacker, weapon, offHand, noRandomization, ability)
+function Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, offHand, noRandomization, ability)
     local damageList = Ext.NewDamageList()
 
-    CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization, ability)
+    Math.AbilityScaling.CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization, ability)
 
     if offHand ~= nil and weapon.InstanceId ~= offHand.InstanceId and false then -- Temporarily off
         local bonusWeapons = attacker.BonusWeapons -- FIXME - enumerate BonusWeapons /multiple/ from character stats!
@@ -99,7 +101,7 @@ local function CalculateWeaponDamage(attacker, weapon, offHand, noRandomization,
             -- FIXME Create item from bonus weapon stat and apply attack as item???
             error("BonusWeapons not implemented")
             local bonusWeaponStats = Game.Math.CreateBonusWeapon(bonusWeapon)
-            CalculateWeaponScaledDamage(attacker, bonusWeaponStats, damageList, noRandomization, ability)
+            Math.AbilityScaling.CalculateWeaponScaledDamage(attacker, bonusWeaponStats, damageList, noRandomization, ability)
         end
     end
 
@@ -115,7 +117,7 @@ end
 
 --- @param character StatCharacter
 --- @param skill StatEntrySkillData
-local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, ability, useWeaponDamageCalc)
+function Math.AbilityScaling.GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, ability, useWeaponDamageCalc)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
     if skill.UseWeaponDamage == "Yes" or useWeaponDamageCalc == true then
@@ -179,7 +181,7 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, 
         local skillDamageType = skill.Damage
         local attrDamageScale
         if skillDamageType == "BaseLevelDamage" or skillDamageType == "AverageLevelDamge" or skillDamageType == "MonsterWeaponDamage" then
-            attrDamageScale = GetSkillAttributeDamageScale(skill, character, ability)
+            attrDamageScale = Math.AbilityScaling.GetSkillAttributeDamageScale(skill, character, ability)
         else
             attrDamageScale = 1.0
         end
@@ -204,10 +206,3 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, 
         return damageRanges
     end
 end
-
-Math.AbilityScaling = {
-	GetSkillDamageRange = GetSkillDamageRange,
-	CalculateWeaponDamage = CalculateWeaponDamage,
-	CalculateWeaponScaledDamageRanges = CalculateWeaponScaledDamageRanges,
-	GetSkillAttributeDamageScale = GetSkillAttributeDamageScale,
-}

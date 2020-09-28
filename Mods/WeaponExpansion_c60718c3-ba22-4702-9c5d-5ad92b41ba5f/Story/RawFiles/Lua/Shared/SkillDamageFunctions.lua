@@ -1,3 +1,7 @@
+local function SkillPropsIsTable(skill)
+	return type(skill) == "table" and not SkillPropsIsTable(skill)
+end
+
 --- @param character StatCharacter
 --- @param skill StatEntrySkillData
 --- @param mainWeapon table
@@ -353,7 +357,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 
 	local weapon = nil
 	local skill = baseSkill
-	if not baseSkill.IsTable then
+	if not SkillPropsIsTable(baseSkill) then
 		skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name, true)
 	end
 	if skill == nil then skill = baseSkill end
@@ -411,7 +415,7 @@ end
 --- @param noRandomization boolean
 --- @param isTooltip boolean
 local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
-	print("GetPistolSkillDamage", baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	--print("GetPistolSkillDamage", baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	if level == nil then
 		level = -1
 	end
@@ -429,7 +433,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 
 	local weapon = nil
 	local skill = baseSkill
-	if not baseSkill.IsTable then
+	if not SkillPropsIsTable(baseSkill) then
 		skill = ExtenderHelpers.CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
 	end
 
@@ -491,7 +495,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
-		print(Ext.JsonStringify(mainDamageRange))
+		--print(Ext.JsonStringify(mainDamageRange))
         return mainDamageRange
 	end
 end
@@ -507,7 +511,7 @@ end
 --- @param isTooltip boolean
 local function GetAimedShotAverageDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local skillProps = skill
-	if not skillProps.IsTable then
+	if not SkillPropsIsTable(skillProps) then
 		skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
 	end
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
@@ -546,7 +550,7 @@ end
 --- @param isTooltip boolean
 local function GetAimedShotMaxDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local skillProps = skill
-	if not skillProps.IsTable then
+	if not SkillPropsIsTable(skillProps) then
 		skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
 	end
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
@@ -586,7 +590,7 @@ end
 --- @param isTooltip boolean
 local function GetAimedShotDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local skillProps = skill
-	if not skillProps.IsTable then
+	if not SkillPropsIsTable(skillProps) then
 		skillProps = ExtenderHelpers.CreateSkillTable(skill.Name)
 	end
 	local distanceDamageMult = skill["Distance Damage Multiplier"]
@@ -671,7 +675,7 @@ local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed,
 		-- key "LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount","0.4"
 		local damageMult = (countMult+1) * damageBonus
 		local skill = baseSkill
-		if not skill.IsTable then
+		if not SkillPropsIsTable(skill) then
 			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
 		end
 		skill["Damage Multiplier"] = math.min(200.0, skill["Damage Multiplier"] + damageMult)
@@ -697,7 +701,7 @@ local function GetDarkFlamebreathDamage(baseSkill, attacker, isFromItem, stealth
 	if missingHealthMult > 0 then
 		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFlamebreath_DamageBonusPerPercent"] or 1.3
 		local skill = baseSkill
-		if not skill.IsTable then
+		if not SkillPropsIsTable(skill) then
 			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
 		end
 		skill["Damage Multiplier"] = math.ceil(skill["Damage Multiplier"] + (missingHealthMult * damageBonus))
