@@ -15,6 +15,7 @@ MasteryMenu = {
 	MasteryData = nil,
 	IsControllerMode = false
 }
+MasteryMenu.__index = MasteryMenu
 
 ---@type MessageData
 local MessageData = LeaderLib.Classes["MessageData"]
@@ -304,11 +305,67 @@ local function getMasteryDescriptionTitle(masteryData)
 	return string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 end
 
-local function initializeToggleButton()
+local buttonSpacingX = 16
+
+function MasteryMenu.RepositionToggleButton(ui, width, height, skillbarVisible)
+	local main = ui:GetRoot()
+	local menu_btn = main.menu_btn
+	local hotBar = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
+	--local dialog = Ext.GetBuiltinUI("Public/Game/GUI/dialog.swf")
+	if hotBar ~= nil then
+		local hotbarMain = hotBar:GetRoot()
+		local chatButton = hotbarMain.hotbar_mc.chatBtn_mc
+		--print("hotBar:", hotbarMain.y, hotbarMain.hotbar_mc.y, chatButton.y)
+
+		menu_btn.x = hotbarMain.hotbar_mc.x + chatButton.x + chatButton.width + buttonSpacingX
+
+		if skillbarVisible ~= false then
+			menu_btn.y = main.toggleButtonDefaultY
+			--menu_btn.y = (hotbarMain.height - hotbarMain.hotbar_mc.height) - 5
+			--menu_btn.y = (main.designResHeight or 1080) - (hotbarMain.hotbar_mc.basebarFrame_mc.height/2)
+		else
+			menu_btn.y = main.designResHeight or 1080
+		end
+		--print("button:", menu_btn.x, menu_btn.y, dialogShown, hotbarMain.height, hotbarMain.hotbar_mc.height)
+	else
+		menu_btn.y = main.designResHeight or 1080
+	end
+end
+
+function MasteryMenu.SetToggleButtonVisibility(isVisible, tween)
+	if MasteryMenu.ToggleButtonInstance ~= nil then
+		MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance)
+		if not isVisible then
+			if tween == true then
+				MasteryMenu.ToggleButtonInstance:Invoke("fade", 1.0, 0.0, 0.5)
+			else
+				MasteryMenu.ToggleButtonInstance:Hide()
+			end
+		else
+			if tween == true then
+				MasteryMenu.ToggleButtonInstance:Show()
+				MasteryMenu.ToggleButtonInstance:Invoke("fade", 0.0, 1.0, 1.2)
+			else
+				MasteryMenu.ToggleButtonInstance:Show()
+			end
+		end
+		--MasteryMenu.ToggleButtonInstance:Invoke("setToggleButtonVisibility", isVisible)
+	end
+	if MasteryMenu.Instance ~= nil then
+		if not isVisible then
+			MasteryMenu.Instance:Hide()
+		else
+			MasteryMenu.Instance:Show()
+		end
+		--MasteryMenu.ToggleButtonInstance:Invoke("setToggleButtonVisibility", isVisible)
+	end
+end
+
+function MasteryMenu.InitializeToggleButton()
 	if not MasteryMenu.IsControllerMode then
 		local ui = Ext.GetUI("MasteryMenuToggleButton")
 		if ui == nil then
-			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 1)
+			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 70)
 			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
 				if not MasteryMenu.Open then
 					TryOpenMasteryMenu()
@@ -316,16 +373,19 @@ local function initializeToggleButton()
 					CloseMenu()
 				end
 			end)
-		end
-		if ui ~= nil then
-			ui:Show()
-			ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
+			Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call,...)
+				MasteryMenu.RepositionToggleButton(ui, ...)
+			end)
 		end
 		MasteryMenu.ToggleButtonInstance = ui
+		if ui ~= nil then
+			MasteryMenu.SetToggleButtonVisibility(true, false)
+			ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
+		end
 	end
 end
 
-local function initializeMasteryMenu()
+function MasteryMenu.InitializeMasteryMenu()
 	local newlyCreated = false
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui == nil then
@@ -342,7 +402,7 @@ local function initializeMasteryMenu()
 
 		local xpMax = Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required
 		if xpMax <= 0 then
-			Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:initializeMasteryMenu] Max mastery XP is (",xpMax,")! Is something configured wrong?")
+			Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] Max mastery XP is (",xpMax,")! Is something configured wrong?")
 			xpMax = 12000
 		end
 		local i = 1
@@ -351,7 +411,7 @@ local function initializeMasteryMenu()
 			local barPercentage = 0
 			local xp = data.Required
 			barPercentage = (xp / xpMax)
-			--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:initializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+			--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			ui:Invoke("setRankNodePosition", i, barPercentage)
 			i = i + 1
 		end
@@ -393,8 +453,8 @@ local function InitMasteryMenu()
 	end
 
 	if not MasteryMenu.Initialized then
-		initializeToggleButton()
-		initializeMasteryMenu()
+		MasteryMenu.InitializeToggleButton()
+		MasteryMenu.InitializeMasteryMenu()
 	end
 end
 
@@ -423,15 +483,15 @@ end
 ---@param CharacterMasteryData characterMasteryData
 local function OpenMasteryMenu(characterMasteryData)
 	if not MasteryMenu.Initialized then
-		initializeToggleButton()
-		initializeMasteryMenu()
+		MasteryMenu.InitializeToggleButton()
+		MasteryMenu.InitializeMasteryMenu()
 		MasteryMenu.MasteryData = characterMasteryData
 	end
 	if MasteryMenu.CHARACTER_HANDLE == nil then
 		MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(Ext.GetCharacter(characterMasteryData.UUID).Handle)
 	end
 	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
-	LeaderLib.PrintDebug(LeaderLib.Common.Dump(characterMasteryData))
+	--LeaderLib.PrintDebug(LeaderLib.Common.Dump(characterMasteryData))
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui ~= nil then
 		MasteryMenu.Instance = ui
@@ -460,29 +520,31 @@ local function OpenMasteryMenu(characterMasteryData)
 				rank = 4
 				xp = xpMax
 			end
-			local barPercentage = 0.0
-			if xp > 0 and xp < xpMax then
-				barPercentage = math.floor(((xp / xpMax) * 100) + 0.5) / 100
-			elseif xp >= xpMax then
-				barPercentage = 1.0
+			if rank > 0 or xp > 0 then
+				local barPercentage = 0.0
+				if xp > 0 and xp < xpMax then
+					barPercentage = math.floor(((xp / xpMax) * 100) + 0.5) / 100
+				elseif xp >= xpMax then
+					barPercentage = 1.0
+				end
+				local xpPercentage = math.floor(barPercentage * 100);
+				local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank))
+				local masteryColorTitle = getMasteryDescriptionTitle(data)
+				ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
+				local expRankDisplay = rankDisplayText
+				if rank >= Mastery.Variables.MaxRank then
+					expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
+				end
+				ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, LeaderLib.Common.FormatNumber(xp), LeaderLib.Common.FormatNumber(xpMax)))
+	
+				for k=1,Mastery.Variables.MaxRank,1 do
+					ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))
+					--print("Set rank tooltip: ", i, k)
+				end
+	
+				LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+				i = i + 1
 			end
-			local xpPercentage = math.floor(barPercentage * 100);
-			local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank))
-			local masteryColorTitle = getMasteryDescriptionTitle(data)
-			ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
-			local expRankDisplay = rankDisplayText
-			if rank >= Mastery.Variables.MaxRank then
-				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
-			end
-			ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, LeaderLib.Common.FormatNumber(xp), LeaderLib.Common.FormatNumber(xpMax)))
-
-			for k=1,Mastery.Variables.MaxRank,1 do
-				ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))
-				--print("Set rank tooltip: ", i, k)
-			end
-
-			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
-			i = i + 1
 		end
 		ui:Invoke("selectMastery", MasteryMenu.LastSelected, true)
 		ui:Invoke("openMenu")
@@ -504,8 +566,8 @@ Ext.RegisterNetListener("LLWEAPONEX_OpenMasteryMenu", NetMessage_OpenMasteryMenu
 
 Ext.RegisterNetListener("LLWEAPONEX_SetActiveCharacter", function(call,uuid)
 	if not MasteryMenu.Initialized then
-		initializeToggleButton()
-		initializeMasteryMenu()
+		MasteryMenu.InitializeToggleButton()
+		MasteryMenu.InitializeMasteryMenu()
 	end
 end)
 

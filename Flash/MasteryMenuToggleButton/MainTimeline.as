@@ -17,6 +17,11 @@ package
 		public const anchorTPos:String = "center";
 		public const anchorTarget:String = "screen";
 
+		public const designResWidth = 1920;
+		public const designResHeight = 1080;
+		public var resWidth:Number = 1920;
+		public var resHeight:Number = 1080;
+
 		public function MainTimeline()
 		{
 			super();
@@ -27,6 +32,13 @@ package
 		{
 			ExternalInterface.call("registerAnchorId",this.anchorId);
 			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
+		}
+
+		public function onEventResolution(w:Number, h:Number) : *
+		{
+			resWidth = w;
+			resHeight = h;
+			ExternalInterface.call("repositionMasteryMenuToggleButton", w, h);
 		}
 		
 		public function setToggleButtonTooltip(text:String) : *
@@ -39,10 +51,10 @@ package
 			this.menu_btn.visible = setVisible;
 		}
 
-		private var toggleButtonDefaultX:Number = 175;
-		private var toggleButtonDefaultY:Number = 1015.45;
-		private var toggleButtonDialogX:Number = 86;
-		private var toggleButtonDialogY:Number = 0;
+		public var toggleButtonDefaultX:Number = 175;
+		public var toggleButtonDefaultY:Number = 1015.45;
+		public var toggleButtonDialogX:Number = 86;
+		public var toggleButtonDialogY:Number = 0;
 
 		public function setDialogOpened(isOpened:Boolean) : *
 		{

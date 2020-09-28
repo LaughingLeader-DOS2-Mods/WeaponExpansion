@@ -141,7 +141,6 @@ function Origins_FixSkillBar(uuid)
 
 	local slotNum = 0
 	for i,v in pairs(slotEntries) do
-		print(slotNum, v, uuid)
 		NRD_SkillBarSetSkill(uuid, slotNum, v)
 		slotNum = slotNum + 1
 	end
@@ -168,15 +167,12 @@ local anvilSwapPresets = {
 }
 
 function CC_CheckKorvashColor(player)
-	if Ext.IsDeveloperMode() then
-		local character = Ext.GetCharacter(player)
-		local color = character.PlayerCustomData.SkinColor
-		if color == 4294902015 then-- Pink?
-			NRD_PlayerSetCustomDataInt(player, "SkinColor", 4281936940)
-			Ext.EnableExperimentalPropertyWrites()
-			character.PlayerCustomData.SkinColor = 4281936940
-			Ext.PostMessageToClient(player, "LLWEAPONEX_FixLizardSkin", player)
-		end
+	local character = Ext.GetCharacter(player)
+	local color = character.PlayerCustomData.SkinColor
+	if color == 4294902015 then-- Pink?
+		--NRD_PlayerSetCustomDataInt(player, "SkinColor", 4281936940)
+		character.PlayerCustomData.SkinColor = 4281936940
+		Ext.PostMessageToClient(player, "LLWEAPONEX_FixLizardSkin", player)
 	end
 end
 

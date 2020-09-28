@@ -130,41 +130,13 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	end
 end
 
-local function SetToggleButtonVisibility(isVisible, tween)
-	if MasteryMenu.ToggleButtonInstance ~= nil then
-		if not isVisible then
-			if tween == true then
-				MasteryMenu.ToggleButtonInstance:Invoke("fade", 1.0, 0.0, 0.5)
-			else
-				MasteryMenu.ToggleButtonInstance:Hide()
-			end
-		else
-			if tween == true then
-				MasteryMenu.ToggleButtonInstance:Show()
-				MasteryMenu.ToggleButtonInstance:Invoke("fade", 0.0, 1.0, 1.2)
-			else
-				MasteryMenu.ToggleButtonInstance:Show()
-			end
-		end
-		--MasteryMenu.ToggleButtonInstance:Invoke("setToggleButtonVisibility", isVisible)
-	end
-	if MasteryMenu.Instance ~= nil then
-		if not isVisible then
-			MasteryMenu.Instance:Hide()
-		else
-			MasteryMenu.Instance:Show()
-		end
-		--MasteryMenu.ToggleButtonInstance:Invoke("setToggleButtonVisibility", isVisible)
-	end
-end
-
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(...)
 	CLIENT_UI.IsInCharacterCreation = true
-	SetToggleButtonVisibility(false, false) 
+	MasteryMenu.SetToggleButtonVisibility(false, false) 
 end)
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(...)
 	CLIENT_UI.IsInCharacterCreation = false
-	SetToggleButtonVisibility(true, true) 
+	MasteryMenu.SetToggleButtonVisibility(true, true) 
 end)
 
 ---@param ui UIObject
@@ -172,7 +144,8 @@ end)
 ---@param isVisible boolean
 local function OnShowSkillBar(ui, call, isVisible)
 	if isVisible ~= nil then
-		SetToggleButtonVisibility(isVisible)
+		MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance, nil, nil, isVisible)
+		--MasteryMenu.SetToggleButtonVisibility(isVisible)
 	end
 end
 
@@ -245,6 +218,15 @@ end
 
 Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
 --Ext.RegisterNetListener("LLWEAPONEX_LuaWasReset", LLWEAPONEX_Client_SessionLoaded)
+
+Ext.RegisterConsoleCommand("gender", function(cmd)
+	local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
+	if ui ~= nil then
+		local main = ui:GetRoot()
+		main.setDetails(0, true)
+		print("Unhid gender button?")
+	end
+end)
 
 local function LLWEAPONEX_OnClientMessage(call,param)
 	if param == "HookUI" then

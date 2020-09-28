@@ -9,7 +9,7 @@ SKILL_STATE = LeaderLib.SKILL_STATE
 
 Main = {}
 Debug = {
-	MasteryTests = Ext.IsDeveloperMode()
+	MasteryTests = false
 }
 Math = { AbilityScaling = {}}
 Text = {}
@@ -155,9 +155,3 @@ Ext.RegisterListener("SessionLoaded", function()
 end)
 
 Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")
-
-if Ext.IsDeveloperMode() then
-    Ext.RegisterListener("GetHitChance", function(attacker, target)
-		return 100
-	end)
-end

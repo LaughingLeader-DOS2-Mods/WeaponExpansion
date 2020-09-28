@@ -63,7 +63,7 @@ data "Charges" "999"
 data "TargetConditions" "Character;Enemy;NonSelf"
 data "StatsId" "Stats_LLWEAPONEX_DemonGauntletDefense"
 data "StackId" "Stack_LLWEAPONEX_DemonGauntletDefense"
-data "TargetEffect" "LLWEAPONEX_FX_Status_DemonGauntletDefense_01"
+data "TargetEffect" "LLWEAPONEX_FX_Status_DemonHandDefense_01"
 
 new entry "Stats_LLWEAPONEX_DemonGauntletDefense"
 type "Potion"

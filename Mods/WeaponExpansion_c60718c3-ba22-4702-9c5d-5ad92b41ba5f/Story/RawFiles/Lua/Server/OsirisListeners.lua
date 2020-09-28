@@ -1,3 +1,7 @@
+local function IgnoreCharacter(uuid)
+	return Osi.LeaderLib_Helper_QRY_IgnoreCharacter(uuid) == true or CharacterIsSummon(uuid) == 1 or CharacterIsPartyFollower(uuid) == 1
+end
+
 local currentLevel = ""
 Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMode)
 	currentLevel = region
@@ -8,9 +12,14 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 end)
 
 LeaderLib.RegisterListener("Initialized", function(region)
-	if region ~= nil and IsGameLevel(region) == 1 then
-		for id,unique in pairs (Uniques) do
-			unique:OnLevelChange(region)
+	if region ~= nil then
+		if IsGameLevel(region) == 1 then
+			for id,unique in pairs (Uniques) do
+				unique:OnLevelChange(region)
+			end
+		end
+		if IsCharacterCreationLevel(region) == 1 then
+			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 		end
 	end
 end)
@@ -137,28 +146,47 @@ local function IncreaseKillCount(char, fromTargetDying)
 	end
 end
 
-local function OnCharacterDied(char)
-	local id = CombatGetIDForCharacter(char)
-	if id ~= nil then
-		for i,entry in pairs(Osi.DB_CombatCharacters:Get(nil, id)) do
-			local v = GetUUID(entry[1])
-			if IsPlayer(v) and CharacterIsEnemy(char, v) == 1 then
-				SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
-				IncreaseKillCount(v, char)
+local function SkipDeathXP(uuid, region)
+	-- Ignore Windigo Source Blast
+	if region == "TUT_Tutorial_A" then
+		local killedDB = Osi.DB_TUT_WindegoKilledNPC:Get(nil)
+		for i,v in pairs(killedDB) do
+			if StringHelpers.GetUUID(v[1]) == uuid then
+				return true
 			end
 		end
-	else
-		local x,y,z = GetPosition(char)
-		for i,v in pairs(Ext.GetCharactersAroundPosition(x, y, z, 20.0)) do
-			if IsPlayer(v) and CharacterIsEnemy(char, v) == 1 then
-				SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
-				IncreaseKillCount(v, char)
+	end
+	return false
+end
+
+local function OnCharacterDied(uuid)
+	if not SkipDeathXP(uuid, GetRegion(uuid)) then
+		local id = CombatGetIDForCharacter(uuid)
+		if id ~= nil then
+			for i,entry in pairs(Osi.DB_CombatCharacters:Get(nil, id)) do
+				local v = GetUUID(entry[1])
+				if IsPlayer(v) and CharacterIsEnemy(uuid, v) == 1 then
+					SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
+					IncreaseKillCount(v, uuid)
+				end
+			end
+		else
+			local x,y,z = GetPosition(uuid)
+			for i,v in pairs(Ext.GetCharactersAroundPosition(x, y, z, 20.0)) do
+				if IsPlayer(v) and CharacterIsEnemy(uuid, v) == 1 then
+					SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
+					IncreaseKillCount(v, uuid)
+				end
 			end
 		end
 	end
 end
 
-Ext.RegisterOsirisListener("CharacterDied", 1, "after", OnCharacterDied)
+Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(char)
+	if ObjectExists(char) == 1 and not StringHelpers.IsNullOrEmpty(char) and not IgnoreCharacter(char) then
+		OnCharacterDied(StringHelpers.GetUUID(char))
+	end
+end)
 
 local function OnLeftCombat(char, id)
 	ClearTag(char, "LLWEAPONEX_EnemyDiedInCombat")

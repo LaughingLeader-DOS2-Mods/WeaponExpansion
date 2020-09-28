@@ -22,8 +22,11 @@ GetFaction(_Owner, _Faction)
 AND
 CharacterGetLevel(_Owner, _Level)
 THEN
+SetCanJoinCombat(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, 0);
 SetTag(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, "AI_UNPREFERRED_TARGET");
 //NRD_CharacterSetStatInt(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, "Gain", 0);
+CharacterAddAttitudeTowardsPlayer(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, _Owner, 100);
+CharacterAddAttitudeTowardsPlayer(_Owner, S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, 100);
 SetFaction(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, _Faction);
 CharacterLevelUpTo(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, _Level);
 TeleportTo(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03, "LLWEAPONEX_BasilusDagger_GhostEquip", 0, 1, 1);

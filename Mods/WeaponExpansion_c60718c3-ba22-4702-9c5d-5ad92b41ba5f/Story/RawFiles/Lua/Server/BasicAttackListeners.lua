@@ -80,11 +80,15 @@ end
 --- @param position number[]
 --- @param damageList DamageList
 Ext.RegisterListener("GroundHit", function (caster, position, damageList)
-	for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
-		local b,err = xpcall(callback, debug.traceback, false, caster.MyGuid, position, damageList)
-		if not b then
-			Ext.PrintError(err)
+	if caster ~= nil then
+		for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
+			local b,err = xpcall(callback, debug.traceback, false, caster.MyGuid, position, damageList)
+			if not b then
+				Ext.PrintError(err)
+			end
 		end
+	elseif Ext.IsDeveloperMode() then
+		Ext.PrintError("[LLWEAPONEX:GroundHit] caster is nil?", Common.Dump(position))
 	end
 end)
 

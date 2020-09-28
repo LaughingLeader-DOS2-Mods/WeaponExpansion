@@ -39,7 +39,7 @@ end
 --- @param character StatCharacter
 --- @param weapon StatItem
 --- @param ability string
-local function CalculateWeaponScaledDamageRanges(character, weapon, ability)
+function Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon, ability)
     local damages = Game.Math.CalculateWeaponDamageWithDamageBoost(weapon)
 
     local boost = character.DamageBoost 
@@ -68,7 +68,7 @@ end
 --- @param noRandomization boolean
 --- @param ability string
 local function CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization, ability)
-    local damages = CalculateWeaponScaledDamageRanges(character, weapon, ability)
+    local damages = Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon, ability)
 
     for damageType, damage in pairs(damages) do
         local randRange = math.max(1, damage.Max - damage.Min)
@@ -119,10 +119,10 @@ local function GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, 
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
 
     if skill.UseWeaponDamage == "Yes" or useWeaponDamageCalc == true then
-        local mainDamageRange = CalculateWeaponScaledDamageRanges(character, mainWeapon, ability)
+        local mainDamageRange = Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, mainWeapon, ability)
 
         if offHandWeapon ~= nil and Game.Math.IsRangedWeapon(mainWeapon) == Game.Math.IsRangedWeapon(offHandWeapon) then
-            local offHandDamageRange = CalculateWeaponScaledDamageRanges(character, offHandWeapon, ability)
+            local offHandDamageRange = Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, offHandWeapon, ability)
 
             -- Note: This differs from the way the game applies DualWieldingDamagePenalty.
             -- In the original tooltip code, it is applied for the whole damage value,

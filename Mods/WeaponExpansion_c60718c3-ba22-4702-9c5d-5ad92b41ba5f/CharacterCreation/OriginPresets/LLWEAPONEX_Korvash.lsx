@@ -13,7 +13,7 @@
                     <attribute id="CharacterUUID" value="3f20ae14-5339-4913-98f1-24476861ebd6" type="22" />
                     <attribute id="UserCanAlterTags" value="0" type="19" />
                     <attribute id="SkillSet" value="Avatar_LLWEAPONEX_Korvash" type="22" />
-					<attribute id="RootTemplateOverride" value="2a09ab5c-d8d2-4c90-ae74-9e5b06151d54" type="22" />
+                    <attribute id="RootTemplateOverride" value="2a09ab5c-d8d2-4c90-ae74-9e5b06151d54" type="22" />
                 	<children>
                 		<node id="SupportedGenders">
                 			<children>
