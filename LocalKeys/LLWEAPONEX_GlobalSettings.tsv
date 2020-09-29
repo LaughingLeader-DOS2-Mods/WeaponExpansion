@@ -1,5 +1,5 @@
 Key	Content	Handle
-LLWEAPONEX_NoArmCannonRestrictions	Disable Arm Cannon Restrictions	h701b61a2g639eg4cf4gb76cg41c26d551d63
-LLWEAPONEX_NoArmCannonRestrictions_Description	If disables, you can equip other weapons to your other hand when wielding the Arm Cannon.	h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f
+LLWEAPONEX_NoArmCannonRestrictions	Enable Runic Cannon Restrictions	h701b61a2g639eg4cf4gb76cg41c26d551d63
+LLWEAPONEX_NoArmCannonRestrictions_Description	The Runic Cannon normally only works with an empty hand or shield. Disabling this allows you to dual-wield it with regular weapons, but this may not be as balanced.	h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f
 LLWEAPONEX_RemoteChargeDetonationCountDisabled	Disable Remote Charge Detonation Limit	h145c7401gf7bbg45cag9233g74278a112220
 LLWEAPONEX_RemoteChargeDetonationCountDisabled_Description	Allow remote changes to detonate without restriction, meaning you can blow up everything in an inventory at once.	h580f2857g0a22g417cg80begc399154191cc

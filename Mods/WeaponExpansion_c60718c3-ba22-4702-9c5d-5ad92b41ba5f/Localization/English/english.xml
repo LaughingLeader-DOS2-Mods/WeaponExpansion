@@ -36,6 +36,7 @@
 	<content contentuid="h0262af7fgeaf0g4e52g85f9gd22df5a98af6">[Exit]</content>
 	<content contentuid="h0276588cgb86ag44a5g8ddag3c48cbaf7943">Kor&apos;vash</content>
 	<content contentuid="h027a0666g90c9g48efg90dcgde2bbb110a36">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery I&lt;/font&gt;&lt;br&gt;In a swift display of skill, instantly rend enemies in a line, dealing [1].&lt;br&gt;Consumes all stacks of &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt; on targets hit, dealing [2] per stack, and rupturing their wounds for [3] every 3 stacks.</content>
+	<content contentuid="h02882207g5e7bg4deaga22eg854b68f8dd29">&lt;font color=&apos;#33FFAA&apos;&gt;Runic Energy&lt;/font&gt;</content>
 	<content contentuid="h02978a74g0280g48eag9bd7g18b63ff4872c">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery I&lt;/font&gt;&lt;br&gt;Character is taking the stance of a duelist.&lt;br&gt;&lt;font color=&apos;#ff9600&apos; size=&apos;20&apos;&gt;Requires an empty hand.&lt;/font&gt;</content>
 	<content contentuid="h029cec56g78f1g42ffgb475gac9b75747b01">*Skip the rock along the top of the sea.*</content>
 	<content contentuid="h02ba7b23g7cfbg4da1ga5c0g3afc50e54b66">Character has lowered resistance to &lt;font color=&apos;#AE9F95&apos;&gt;physical damage&lt;/font&gt;.</content>
@@ -1033,7 +1034,7 @@
 	<content contentuid="h6fc14e25ga766g4504gad15g5f4a4a66b99a">&lt;font color=&apos;#797980&apos;&gt;Smokescreen Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h6fc82247g8e16g4085g9bfag539c8a0eaca5">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Too Heavy!&lt;/font&gt;</content>
 	<content contentuid="h6fe2f7f5g746fg4779g8029g89b1c9bb21b5">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Leg Sweep</content>
-	<content contentuid="h701b61a2g639eg4cf4gb76cg41c26d551d63">Disable Arm Cannon Restrictions</content>
+	<content contentuid="h701b61a2g639eg4cf4gb76cg41c26d551d63">Enable Runic Cannon Restrictions</content>
 	<content contentuid="h703f41c3g4ca1g463ag8550g3ef66dfd8a8d">Character is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; from a hot wind!</content>
 	<content contentuid="h7072fa7bgc209g40dfgb255g26cfcc34b6da">Grave Rune</content>
 	<content contentuid="h7081960fg5dc7g4f98gb8ffg6c2f900e4259">Stormrider</content>
@@ -1473,7 +1474,7 @@
 	<content contentuid="h9f830ae4gff10g41f0gb1b2g88d7dd74ba46">Undead Delight</content>
 	<content contentuid="h9f9c234dg9aadg457cgb4e8g06adc6a23102">Pacifist&apos;s Will</content>
 	<content contentuid="h9fb31128g252ag4f9bga1ffgfdbd95ad55e0">[Back]</content>
-	<content contentuid="h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f">If disables, you can equip other weapons to your other hand when wielding the Arm Cannon.</content>
+	<content contentuid="h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f">The Runic Cannon normally only works with an empty hand or shield. Disabling this allows you to dual-wield it with regular weapons, but this may not be as balanced.</content>
 	<content contentuid="h9fee2cfeg963cg43f0ga4fcgdfb79b48f7e0">Harken</content>
 	<content contentuid="h9ffd7826g03eeg4597gad11g03c6b56e547c">Shield</content>
 	<content contentuid="ha05ebf00g32e8g4598g839cg6f272357ac3b">Character has been hit by a Blademaster&apos;s strike.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>

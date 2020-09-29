@@ -297,7 +297,7 @@ local function OnItemTooltip(item, tooltip)
 				if charges ~= nil then
 					local element = {
 						Type = "WandCharges",
-						Label = "<font color='#33FFAA'>Runic Energy</font>",
+						Label = GameHelpers.GetStringKeyText("LLWEAPONEX_UI_RunicCannonEnergy", "<font color='#33FFAA'>Runic Energy</font>"),
 						Value = tostring(charges),
 						MaxValue = "3"
 					}
