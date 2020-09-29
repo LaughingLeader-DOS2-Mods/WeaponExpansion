@@ -11,7 +11,6 @@ local fromUnarmedWeaponText = Ext.GetTranslatedString("h6d1ce292g842cg4decg89deg
 ---@param stat string
 ---@param tooltip TooltipData
 local function OnDamageStatTooltip(character, stat, tooltip)
-	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
 	--print(character, tooltip, Common.Dump(tooltip))
 	if IsUnarmed(character.Stats) then
 		local weapon,boost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = GetUnarmedWeapon(character.Stats)

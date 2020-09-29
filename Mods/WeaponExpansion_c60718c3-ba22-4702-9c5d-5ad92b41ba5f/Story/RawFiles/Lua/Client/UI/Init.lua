@@ -42,25 +42,6 @@ local function SetupUIListeners(ui)
 	end
 end
 
-local function SetUserCharacters(channel, data)
-	local messageData = MessageData:CreateFromString(data)
-	if messageData.Params ~= nil then
-		CLIENT_UI.PARTY = messageData.Params
-	end
-	if Ext.GetGameState() == "Running" then
-		for i,v in pairs(CLIENT_UI.PARTY) do
-			---@type EsvCharacter
-			local character = Ext.GetCharacter(v)
-			if character.HostControl == true then
-				CLIENT_UI.ACTIVE_CHARACTER = v
-			end
-		end
-	end
-	LeaderLib.PrintDebug("Set active character for client to", CLIENT_UI.ACTIVE_CHARACTER, "Party:", LeaderLib.Common.Dump(CLIENT_UI.PARTY))
-end
-
-Ext.RegisterNetListener("LLWEAPONEX_SetUserCharacters", SetUserCharacters)
-
 --[[ 
 addSecondaryStat(statType:Number, labelText:String, valueText:String, tooltipStatId:Number, iconFrame:Number, boostValue:Number)
 
@@ -82,8 +63,7 @@ secStat_array Mapping:
 local damageStatID = 6
 
 ---@param ui UIObject
----@param uuid string
-function UI.SetCharacterSheetDamageText(ui,uuid)
+function UI.SetCharacterSheetDamageText(ui, uuid)
 	local character = Ext.GetCharacter(uuid)
 	if character ~= nil and IsUnarmed(character.Stats) then
 		local weapon,boost = GetUnarmedWeapon(character.Stats)
@@ -102,41 +82,36 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	local params = {...}
 	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] Function running params("..LeaderLib.Common.Dump(params)..")")
 
-	local arrayValueSet = ui:GetValue("secStat_array", "number", 1)
-	if arrayValueSet ~= nil then
-		for i=0,999,7 do
-			local statType = ui:GetValue("secStat_array", "number", i+1)
+	local main = ui:GetRoot()
+	local array = main.secStat_array
+
+	if array ~= nil and #array > 0 then
+		for i=0,#array,7 do
+			local statType = array[i+1]
 			if statType ~= nil then
-				local label = ui:GetValue("secStat_array", "string", i+2)
-				local value = ui:GetValue("secStat_array", "string", i+3)
-				local tooltipId = ui:GetValue("secStat_array", "number", i+4)
+				local label = array[i+2]
+				local value = array[i+3]
+				local tooltipId = array[i+4]
 				--print(statType, label, value, tooltipId)
 				if tooltipId == damageStatID then
-					if CLIENT_UI.ACTIVE_CHARACTER ~= nil then
-						local character = Ext.GetCharacter(CLIENT_UI.ACTIVE_CHARACTER)
-						--print(tooltipHeader,isDamageTooltip,CLIENT_UI.ACTIVE_CHARACTER,IsUnarmed(character.Stats), character.Stats.MainWeapon.Name)
-						if character ~= nil and IsUnarmed(character.Stats) then
-							local weapon,boost = GetUnarmedWeapon(character.Stats)
-							local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
-							ui:SetValue("secStat_array", string.format("%i-%i", totalMin, totalMax), i+3)
-						end
+					local character = ClientData:GetCharacter()
+					if character ~= nil and IsUnarmed(character.Stats) then
+						local weapon,boost = GetUnarmedWeapon(character.Stats)
+						local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
+						array[i+3] = string.format("%i-%i", totalMin, totalMax)
 					end
 					break
 				end
-			else
-				break
 			end
 		end
 	end
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(...)
-	CLIENT_UI.IsInCharacterCreation = true
 	MasteryMenu.SetToggleButtonVisibility(false, false) 
 end)
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(...)
-	CLIENT_UI.IsInCharacterCreation = false
-	MasteryMenu.SetToggleButtonVisibility(true, true) 
+	MasteryMenu.SetToggleButtonVisibility(true, Ext.GetGameState() ~= "Running")
 end)
 
 ---@param ui UIObject
@@ -144,8 +119,10 @@ end)
 ---@param isVisible boolean
 local function OnShowSkillBar(ui, call, isVisible)
 	if isVisible ~= nil then
-		MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance, nil, nil, isVisible)
-		--MasteryMenu.SetToggleButtonVisibility(isVisible)
+		if MasteryMenu.ToggleButtonInstance ~= nil then
+			MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance, nil, nil, isVisible)
+			--MasteryMenu.SetToggleButtonVisibility(isVisible)
+		end
 	end
 end
 

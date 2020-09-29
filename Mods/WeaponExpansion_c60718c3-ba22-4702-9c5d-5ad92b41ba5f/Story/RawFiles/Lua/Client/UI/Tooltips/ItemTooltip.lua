@@ -293,7 +293,7 @@ local function OnItemTooltip(item, tooltip)
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
 			end
 			if item:HasTag("LLWEAPONEX_RunicCannon") then
-				local charges = CLIENT_UI.Vars.RunicCannonCharges[item.MyGuid]
+				local charges = PersistentVars.RunicCannonCharges[item.MyGuid]
 				if charges ~= nil then
 					local element = {
 						Type = "WandCharges",

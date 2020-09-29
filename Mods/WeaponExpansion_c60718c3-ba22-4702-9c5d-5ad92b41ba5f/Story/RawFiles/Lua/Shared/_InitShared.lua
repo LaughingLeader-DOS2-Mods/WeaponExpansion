@@ -171,5 +171,5 @@ Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35d
 
 if Ext.IsClient() then
 	---@type ClientData
-	ClientData = LeaderLib.ClientData
+	Client = LeaderLib.Client
 end

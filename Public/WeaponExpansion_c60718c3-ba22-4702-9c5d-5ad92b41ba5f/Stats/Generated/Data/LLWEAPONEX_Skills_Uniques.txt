@@ -781,7 +781,7 @@ data "CastEffect" "RS3_FX_SubEffects_FireTrail_02:Dummy_R_HandFX,Dummy_L_HandFX;
 data "OverrideMinAP" "Yes"
 data "Memory Cost" "0"
 data "Magic Cost" "0"
-data "CycleConditions" "Enemy|Tagged:LeaderLib_FriendlyFireEnabled;!Dead"
+data "CycleConditions" "NonSelf;Enemy|Tagged:LeaderLib_FriendlyFireEnabled;!Dead"
 
 new entry "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact"
 type "SkillData"
@@ -800,7 +800,7 @@ data "UseWeaponProperties" "No"
 data "ExplodeRadius" "3"
 data "ProjectileCount" "1"
 data "SkillProperties" "AlwaysHighGround;LLWEAPONEX_ANVILMACE_KNOCKUP,100,0"
-data "TargetConditions" "NonSelf;Item|(Character&(!Ally|Tagged:LeaderLib_FriendlyFireEnabled));!Dead;!HasStatus:LLWEAPONEX_ANVILMACE_KNOCKUP_DISABLED"
+data "TargetConditions" "NonSelf;Item|(NonSelf&Character&(!Ally|Tagged:LeaderLib_FriendlyFireEnabled));!Dead;!HasStatus:LLWEAPONEX_ANVILMACE_KNOCKUP_DISABLED"
 data "Template" "c428310b-d402-42a8-89d2-e2d3b56452ca"
 
 new entry "Projectile_LLWEAPONEX_AnvilMace_RushSmash_FallDamage_Low"

@@ -663,11 +663,7 @@ end
 --- @param isTooltip boolean
 local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local countMult = 0
-	if Ext.IsClient() then
-		countMult = CLIENT_UI.Vars.SkillData.DarkFireballCount[attacker.MyGuid] or 0
-	else
-		countMult = PersistentVars.SkillData.DarkFireballCount[attacker.MyGuid] or 0
-	end
+	countMult = PersistentVars.SkillData.DarkFireballCount[attacker.MyGuid] or 0
 	if countMult > 0 then
 		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFireball_DamageBonusPerCount"] or 20.0
 		-- key "LLWEAPONEX_DarkFireball_DamageBonusPerCount","20.0"

@@ -1,29 +1,12 @@
-CLIENT_UI = {
-	ID = nil,
-	---@type EclCharacter
-	ACTIVE_CHARACTER = nil,
-	PARTY = nil,
-	LAST_SKILL = "",
-	LAST_ITEM = nil,
-	LAST_STATUS_CHARACTER = nil,
-	LAST_STATUS = nil,
-	IsInCharacterCreation = false,
-	---@type WeaponExpansionVars
-	Vars = {}
-}
-
-Ext.RegisterNetListener("LLWEAPONEX_SendClientUserID", function(call,id)
-	CLIENT_UI.ID = math.tointeger(tonumber(id))
-	print("[WeaponExpansion:MasteryMenu.lua:NetMessage_SetClientId] Set CLIENT_UI.ID to (",CLIENT_UI.ID,")")
-end)
-
-Ext.RegisterNetListener("LLWEAPONEX_SetActiveCharacter", function(call, uuid)
-	CLIENT_UI.ACTIVE_CHARACTER = uuid
-	print("Set active character for client to", uuid)
-	if Ext.GetGameState() == "Running" and CLIENT_UI.ACTIVE_CHARACTER ~= nil and Ext.GetCharacter(uuid) ~= nil then
+---@param uuid string
+---@param id integer
+---@param profile string
+---@param isHost boolean
+LeaderLib.RegisterListener("ClientCharacterChanged", function(uuid, id, profile, isHost)
+	if Ext.GetGameState() == "Running" then
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
 		if ui ~= nil then
-			UI.SetCharacterSheetDamageText(ui,CLIENT_UI.ACTIVE_CHARACTER)
+			UI.SetCharacterSheetDamageText(ui, uuid)
 		end
 	end
 end)
@@ -41,8 +24,4 @@ Ext.RegisterNetListener("LLWEAPONEX_FixLizardSkin", function(call, uuid)
 			ui:ExternalInterfaceCall("selectOption", 3, 13, false)
 		end
 	end
-end)
-
-Ext.RegisterNetListener("LLWEAPONEX_SyncVars", function(call, dataStr)
-	CLIENT_UI.Vars = Ext.JsonParse(dataStr)
 end)

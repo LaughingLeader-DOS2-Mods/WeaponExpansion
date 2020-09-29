@@ -1,9 +1,3 @@
-Mercs = {
-	-- S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b
-	Harken = "e446752a-13cc-4a88-a32e-5df244c90d8b",
-	-- S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6
-	Korvash = "3f20ae14-5339-4913-98f1-24476861ebd6",
-}
 
 local function SetupOriginSkills(char, skillset)
 	if CharacterHasSkill(char, "Dome_CircleOfProtection") == 1 then
@@ -22,56 +16,56 @@ local function SetupOriginSkills(char, skillset)
 end
 
 function Origins_InitCharacters(region, isEditorMode)
-	pcall(SetupOriginSkills, Mercs.Harken, "Avatar_LLWEAPONEX_Harken")
-	pcall(SetupOriginSkills, Mercs.Korvash, "Avatar_LLWEAPONEX_Korvash")
+	pcall(SetupOriginSkills, Origin.Harken, "Avatar_LLWEAPONEX_Harken")
+	pcall(SetupOriginSkills, Origin.Korvash, "Avatar_LLWEAPONEX_Korvash")
 
-	CharacterRemoveSkill(Mercs.Korvash, "Cone_Flamebreath")
-	CharacterAddSkill(Mercs.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
+	CharacterRemoveSkill(Origin.Korvash, "Cone_Flamebreath")
+	CharacterAddSkill(Origin.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 
 	--IsCharacterCreationLevel(region) == 0
-	if CharacterIsPlayer(Mercs.Harken) == 0 and ObjectGetFlag(Mercs.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
-		CharacterAddAbility(Mercs.Harken, "WarriorLore", 1)
-		CharacterAddAbility(Mercs.Harken, "TwoHanded", 1)
-		CharacterAddAbility(Mercs.Harken, "Barter", 1)
-		CharacterAddTalent(Mercs.Harken, "Opportunist")
-		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mercs.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Mercs.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		Uniques.AnvilMace:Transfer(Mercs.Harken, true)
-		Uniques.HarkenPowerGloves:Transfer(Mercs.Harken, true)
-		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_FixSkillBar", 0)
-		ObjectSetFlag(Mercs.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
-		--CharacterAddSkill(Mercs.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
+	if CharacterIsPlayer(Origin.Harken) == 0 and ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		CharacterAddAbility(Origin.Harken, "WarriorLore", 1)
+		CharacterAddAbility(Origin.Harken, "TwoHanded", 1)
+		CharacterAddAbility(Origin.Harken, "Barter", 1)
+		CharacterAddTalent(Origin.Harken, "Opportunist")
+		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+		Uniques.AnvilMace:Transfer(Origin.Harken, true)
+		Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
+		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_FixSkillBar", 0)
+		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
+		--CharacterAddSkill(Origin.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
 	end
 	
-	if CharacterIsPlayer(Mercs.Korvash) == 0 and ObjectGetFlag(Mercs.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
-		CharacterAddAbility(Mercs.Korvash, "WarriorLore", 1)
-		CharacterAddAbility(Mercs.Korvash, "Necromancy", 1)
-		CharacterAddAbility(Mercs.Korvash, "Telekinesis", 1)
-		CharacterAddTalent(Mercs.Korvash, "Executioner")
-		LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Mercs.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-		--CharacterAddSkill(Mercs.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
+	if CharacterIsPlayer(Origin.Korvash) == 0 and ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		CharacterAddAbility(Origin.Korvash, "WarriorLore", 1)
+		CharacterAddAbility(Origin.Korvash, "Necromancy", 1)
+		CharacterAddAbility(Origin.Korvash, "Telekinesis", 1)
+		CharacterAddTalent(Origin.Korvash, "Executioner")
+		LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+		--CharacterAddSkill(Origin.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Mercs.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
-		Uniques.DeathEdge:Transfer(Mercs.Korvash, true)
-		Uniques.DemonGauntlet:Transfer(Mercs.Korvash, true)
-		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_FixSkillBar", 0)
-		ObjectSetFlag(Mercs.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
+		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
+		Uniques.DeathEdge:Transfer(Origin.Korvash, true)
+		Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
+		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_FixSkillBar", 0)
+		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
 	end
 
 	if Ext.IsDeveloperMode() or isEditorMode == 1 then		
 		local host = CharacterGetHostCharacter()
 		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
 			local totalAdded = 0
-			if CharacterIsInPartyWith(host, Mercs.Harken) == 0 then
-				Osi.PROC_GLO_PartyMembers_Add(Mercs.Harken, host)
-				TeleportTo(Mercs.Harken, host, "", 1, 0, 1)
+			if CharacterIsInPartyWith(host, Origin.Harken) == 0 then
+				Osi.PROC_GLO_PartyMembers_Add(Origin.Harken, host)
+				TeleportTo(Origin.Harken, host, "", 1, 0, 1)
 				totalAdded = totalAdded + 1
 			end
-			if CharacterIsInPartyWith(host, Mercs.Korvash) == 0 then
-				Osi.PROC_GLO_PartyMembers_Add(Mercs.Korvash, host)
-				TeleportTo(Mercs.Korvash, host, "", 1, 0, 1)
+			if CharacterIsInPartyWith(host, Origin.Korvash) == 0 then
+				Osi.PROC_GLO_PartyMembers_Add(Origin.Korvash, host)
+				TeleportTo(Origin.Korvash, host, "", 1, 0, 1)
 				totalAdded = totalAdded + 1
 			end
 			local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
@@ -247,6 +241,6 @@ end
 
 Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
 	PersistentVars.SkillData.DarkFireballCount = tonumber(amount)
-	UpdateDarkFireballSkill(Mercs.Korvash)
+	UpdateDarkFireballSkill(Origin.Korvash)
 	SyncVars()
 end)

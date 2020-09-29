@@ -87,14 +87,7 @@ local function SetupListeners()
 end
 
 local function TryOpenMasteryMenu()
-	-- Try and get the controlled character through net messages
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_UI.ID(", CLIENT_UI.ID,")")
-	if CLIENT_UI.ID ~= nil then
-		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(CLIENT_UI.ID))
-	else
-		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", "-1")
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:TryOpenMasteryMenu] CLIENT_UI.ID not set.")
-	end
+	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", ClientData.Character.UUID)
 end
 
 local function splitDescriptionByPattern(str, pattern, includeMatch)
@@ -267,7 +260,6 @@ local function OnMenuEvent(ui, call, ...)
 	elseif call == "mastery_showIconTooltip" then
 		if params[1] == 1 then
 			MasteryMenu.DisplayingSkillTooltip = true
-			CLIENT_UI.LAST_SKILL = params[2]
 			ui:ExternalInterfaceCall("showSkillTooltip", MasteryMenu.CHARACTER_HANDLE, params[2], params[3], params[4], params[5], params[6])
 		elseif params[1] == 2 then
 			ui:ExternalInterfaceCall("showTooltip", GetStatusTooltipText(MasteryMenu.MasteryData.UUID, params[2]), params[3], params[4], params[5], params[6], "right", false)
@@ -365,7 +357,7 @@ function MasteryMenu.InitializeToggleButton()
 	if not MasteryMenu.IsControllerMode then
 		local ui = Ext.GetUI("MasteryMenuToggleButton")
 		if ui == nil then
-			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 70)
+			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 7)
 			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
 				if not MasteryMenu.Open then
 					TryOpenMasteryMenu()
@@ -452,7 +444,7 @@ local function InitMasteryMenu()
 		MasteryMenu.IsControllerMode = Game.Tooltip.ControllerVars.Enabled
 	end
 
-	if not MasteryMenu.Initialized then
+	if not MasteryMenu.Initialized and Ext.GetGameState() == "Running" then
 		MasteryMenu.InitializeToggleButton()
 		MasteryMenu.InitializeMasteryMenu()
 	end
@@ -564,8 +556,17 @@ end
 
 Ext.RegisterNetListener("LLWEAPONEX_OpenMasteryMenu", NetMessage_OpenMasteryMenu)
 
+Ext.RegisterListener("GameStateChanged", function(last, next)
+	if next == "Running" and last ~= "Paused" then
+		if not MasteryMenu.Initialized then
+			MasteryMenu.InitializeToggleButton()
+			MasteryMenu.InitializeMasteryMenu()
+		end
+	end
+end)
+
 Ext.RegisterNetListener("LLWEAPONEX_SetActiveCharacter", function(call,uuid)
-	if not MasteryMenu.Initialized then
+	if not MasteryMenu.Initialized and Ext.GetGameState() == "Running" then
 		MasteryMenu.InitializeToggleButton()
 		MasteryMenu.InitializeMasteryMenu()
 	end

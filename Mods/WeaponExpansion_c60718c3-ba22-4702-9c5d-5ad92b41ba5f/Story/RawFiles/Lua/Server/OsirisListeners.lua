@@ -28,7 +28,7 @@ Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
 	if IsCharacterCreationLevel(region) == 1 then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationFinished", "", nil)
 		Vars.isInCharacterCreation = false
-		Ext.GetCharacter(Mercs.Korvash):SetScale(1.1)
+		Ext.GetCharacter(Origin.Korvash):SetScale(1.1)
 	end
 end)
 

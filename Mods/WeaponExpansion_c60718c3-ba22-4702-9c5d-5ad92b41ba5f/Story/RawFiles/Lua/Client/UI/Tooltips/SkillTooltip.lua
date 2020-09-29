@@ -51,7 +51,6 @@ end
 ---@param skill string
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
-	CLIENT_UI.ACTIVE_CHARACTER = character.MyGuid
 	local descriptionElement = tooltip:GetElement("SkillDescription")
 	local description = ""
 	if descriptionElement ~= nil then

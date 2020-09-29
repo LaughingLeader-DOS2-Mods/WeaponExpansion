@@ -44,7 +44,7 @@ function TooltipHandler.GetDescriptionText(character, data)
 		table.sort(tagKeys, sortTagParams)
 		for i,tagName in pairs(tagKeys) do
 			local tagData = data.Tags[tagName]
-			if CLIENT_UI.IsInCharacterCreation or Mastery.HasMasteryRequirement(character, tagName) then
+			if ClientData.Character.IsInCharacterCreation == true or Mastery.HasMasteryRequirement(character, tagName) then
 				if tagData.NamePrefix ~= nil then
 					if namePrefix ~= "" then
 						namePrefix = namePrefix .. " "
@@ -100,7 +100,7 @@ Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText", function(cmd, text)
 				main.tf.setText(text,0)
 			else
 				main.defaultTooltip.shortDesc = text
-				main.defaultTooltip.setText(text, 0)
+				main.defaultTooltip.setText(text,0)
 			end
 		end
 	end
@@ -113,13 +113,6 @@ local function OnWorldTooltip(ui, text, x, y, ...)
 	if startPos then
 		local nextText = string.sub(text, 0, startPos-1)
 		Ext.PostMessageToServer("LLWEAPONEX_SetWorldTooltipText_Request", Ext.JsonStringify({Client = LeaderLib.UI.ClientID, Text=nextText}))
-		-- local main = ui:GetRoot()
-		-- if main ~= nil and main.tf ~= nil then
-		-- 	main.tf.setText(nextText,0)
-		-- else
-		-- 	main.defaultTooltip.setText(nextText, 0)
-		-- end
-		-- print(text, nextText)
 	end
 end
 

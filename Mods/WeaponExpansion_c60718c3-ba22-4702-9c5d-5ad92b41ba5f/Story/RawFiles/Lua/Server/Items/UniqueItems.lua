@@ -34,8 +34,8 @@ Uniques = {
 	DivineBanner = UniqueData:Create("3113b901-340a-4f24-a38b-473e61d23371", ProgressionData.DivineBanner),
 	FireRunebladeKatana = UniqueData:Create("6f735ef9-524c-4514-b37f-c48a20b313c5", ProgressionData.FireRunebladeKatana),
 	Frostdyne = UniqueData:Create("S5d8ec362-618e-48e9-87c2-dbc18ea4e779", ProgressionData.Frostdyne),
-	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", ProgressionData.HarkenPowerGloves, {DefaultOwner = Mercs.Harken, AutoEquipOnOwner=true, OnEquipped=CheckForAnvilWeightChange}),
-	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", ProgressionData.HarkenTattoos, {DefaultOwner = Mercs.Harken, AutoEquipOnOwner=true, OnEquipped=OnTattoosEquipped}),
+	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", ProgressionData.HarkenPowerGloves, {DefaultOwner = Origin.Harken, AutoEquipOnOwner=true, OnEquipped=CheckForAnvilWeightChange}),
+	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", ProgressionData.HarkenTattoos, {DefaultOwner = Origin.Harken, AutoEquipOnOwner=true, OnEquipped=OnTattoosEquipped}),
 	Harvest = UniqueData:Create("d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1", ProgressionData.Harvest),
 	LoneWolfBanner = UniqueData:Create("aa63e570-695a-461b-bb35-60cf7c915570", ProgressionData.LoneWolfBanner),
 	--MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod),
@@ -159,7 +159,7 @@ LoadPersistentVars[#LoadPersistentVars+1] = function()
 end
 
 function SwapTattoos(char)
-	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Mercs.Harken, "HarkenTattoos")
+	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Origin.Harken, "HarkenTattoos")
 	if HasActiveStatus(char, "UNSHEATHED") == 1 then
 		if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "40039552-3aae-4beb-8cca-981809f82988" then
 			SwapUnique(char, "HarkenTattoos")
