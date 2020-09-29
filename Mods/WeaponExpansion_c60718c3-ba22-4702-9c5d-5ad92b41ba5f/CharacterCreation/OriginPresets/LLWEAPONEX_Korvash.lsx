@@ -11,9 +11,10 @@
                 	<attribute id="OriginDescription" value="After a stressful career as a mercenary, cleaning up after the messes of your crazy comrades, you find yourself captured by the Divine Order, charged with being a Sourcerer. If only they knew..." handle="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf" type="28" />
                 	<attribute id="OriginLongDescription" value="" handle="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf" type="28" />
                     <attribute id="CharacterUUID" value="3f20ae14-5339-4913-98f1-24476861ebd6" type="22" />
-                    <attribute id="UserCanAlterTags" value="0" type="19" />
+                    <attribute id="UserCanAlterTags" value="1" type="19" />
                     <attribute id="SkillSet" value="Avatar_LLWEAPONEX_Korvash" type="22" />
                     <attribute id="RootTemplateOverride" value="2a09ab5c-d8d2-4c90-ae74-9e5b06151d54" type="22" />
+                    
                 	<children>
                 		<node id="SupportedGenders">
                 			<children>
@@ -39,7 +40,22 @@
 									<attribute id="Value" value="0xff303032" type="5" />
 								</node>						
 							</children>
-						</node>
+                        </node>
+                        
+                        <node id="MaleRootTemplateIDs">
+                            <children>
+                                <node id="MaleRootTemplateIDs">
+                                    <attribute id="Object" value="2a09ab5c-d8d2-4c90-ae74-9e5b06151d54" type="22" />
+                                </node>
+                            </children>
+                        </node>
+                        <node id="FemaleRootTemplateIDs">
+                            <children>
+                                <node id="FemaleRootTemplateIDs">
+                                    <attribute id="Object" value="1f44a5ab-b378-44bc-8b3f-8cde5607c6a7" type="22" />
+                                </node>
+                            </children>
+                        </node>
                 	</children>
                 </node>
             </children>

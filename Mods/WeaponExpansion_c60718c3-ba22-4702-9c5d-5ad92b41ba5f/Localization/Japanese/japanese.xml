@@ -41,6 +41,7 @@
 	<content contentuid="h02ba7b23g7cfbg4da1ga5c0g3afc50e54b66">Character has lowered resistance to &lt;font color=&apos;#AE9F95&apos;&gt;physical damage&lt;/font&gt;.</content>
 	<content contentuid="h02d805a5g06d5g4b8cg8710g2d2824ea2552">*Reach out and touch the crystal, activating it.*</content>
 	<content contentuid="h03011923g1a94g417dg9af6gc5dcdfe6d003">A scholar&apos;s dearest weapon. Beat them down with &lt;i&gt;KNOWLEDGE!&lt;/i&gt;</content>
+	<content contentuid="h0302f720g7990g42b4gbf5eg921d1af83b55">Malediction</content>
 	<content contentuid="h030a7775gcb43g42a7gacd3g70796e45351a">Magic Rush</content>
 	<content contentuid="h031b0a74g0630g4f79ga05fg71c06e49015d">*Step away.*</content>
 	<content contentuid="h03451e09g2f0bg410eg89cdg1d80b656605c">*[WIZARD WEAPONS] Click on the button labeled &apos;Wizard Weapons&apos;.*</content>
@@ -337,6 +338,7 @@
 	<content contentuid="h2405a422gfa67g495agb1b5gdde42d586c80">Hand Crossbow Rune</content>
 	<content contentuid="h240913f2g92a0g4f1fgb730g23e3488d2308">Elementia</content>
 	<content contentuid="h241c1d92g6027g4837g9d25g009d917be036">Draw Arrow</content>
+	<content contentuid="h242acea8g1b36g482ag9027g8e7ecbbc9257">Kel&apos;vah</content>
 	<content contentuid="h243c7832gca11g41e6g824agfc333c4bc9a8">Wooden Rod</content>
 	<content contentuid="h244ceccfga6f5g43eega961gbe5535607310">Character is immune to being directly Shocked.</content>
 	<content contentuid="h2462e662ga70eg4c9fg8c5dga384c7d51a4e">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Flicker Strike</content>
@@ -679,7 +681,7 @@
 	<content contentuid="h4aeacdefg00bcg4dbcg87f1g2f109381fe5c">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h4aebc2e4g2ae1g4c5eg9c3agd1c7d026ac0b">Token of Strength</content>
 	<content contentuid="h4b3d0543g05d0g4553gb507gd01521f0824b">A magical blade imbued with the power of water. The runes can be invoked to bathe the blade in a dousing layer of water.</content>
-	<content contentuid="h4b681e66gd563g43abg892fg376ffaa37132">[1] Corrosive</content>
+	<content contentuid="h4b681e66gd563g43abg892fg376ffaa37132">[1] Corrosive Damage</content>
 	<content contentuid="h4b6f6764g5c7ag48d5gbd99g7a4faf5c7243">Weapon Expansion - Grenades</content>
 	<content contentuid="h4b7e178cg37c4g430dg8282g14bc022d3b20">Old Rifle</content>
 	<content contentuid="h4b944ff3g75d2g45eegaf26g7ae7c6c4be04">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos; icon=&apos;Skill_Warrior_BatteringRam;Skill_Polymorph_BullRush&apos;/&gt;After rushing, gain 25% Dodge and deflect the next attack or projectile.</content>
@@ -1092,7 +1094,7 @@
 	<content contentuid="h76350dd6g3e8dg4b63g92c2ga375f18c1359">Novice</content>
 	<content contentuid="h764a0686ga38cg43fdga3e6g2867c50395e1">Dragonslayer Pants</content>
 	<content contentuid="h764bc299gdbdeg44d3g96a3g291e65d47063">Soul Burn V</content>
-	<content contentuid="h7656635fg959dg4396ga8bfgfc35e70f828f">[1] Magic</content>
+	<content contentuid="h7656635fg959dg4396ga8bfgfc35e70f828f">[1] Magic Damage</content>
 	<content contentuid="h76592aa4g2758g49b2g9111g5171102c0039">&lt;font color=&apos;#FF3E2A&apos;&gt;Sword Mastery III&lt;/font&gt;</content>
 	<content contentuid="h76668755g9a87g4cfbg868fgc197f2ff219f">A cursed greatbow arrow that lands like a witch&apos;s kiss, draining the fervour of any foe.</content>
 	<content contentuid="h767c2561g60c3g4d1fga74fg44f9c988666f">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery III&lt;/font&gt;</content>
@@ -1302,6 +1304,7 @@
 	<content contentuid="h8d34a193g1102g4101g90a7g4345cb51d976">Aspect of Summoning</content>
 	<content contentuid="h8d38f076g3192g48fdg9d93g41f9acc3a9a1">a Runeblade</content>
 	<content contentuid="h8d3ec53cg6caag483eg8e9ag838a02ecb512">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.&lt;icon id=&apos;Shout_Adrenaline&apos; icon=&apos;Skill_Rogue_Adrenaline&apos;/&gt;Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%.</content>
+	<content contentuid="h8d50df62gd613g465fga926g1f5d5e04b0a7">Malediction</content>
 	<content contentuid="h8d63157dg4167g465eg9b3fgd194422e8421">A wooden sword typically used for training.</content>
 	<content contentuid="h8d8bfc1cg51abg43ebgb2ccg15926654b3fd">[KATANA] Disable the &quot;Finisher&quot; status from automatically applying on hit.</content>
 	<content contentuid="h8d913678gdb4fg41begbca8g0e0a541c8c94">Piercing Weakness</content>
