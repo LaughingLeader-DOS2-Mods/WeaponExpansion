@@ -1,0 +1,507 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+DB_KCE_ArmourCheck("Physical","MaxArmor");
+DB_KCE_ArmourCheck("Fire","MaxMagicArmor");
+DB_KCE_ArmourCheck("Poison","MaxMagicArmor");
+DB_KCE_ArmourCheck("Earth","MaxMagicArmor");
+DB_KCE_ArmourCheck("Air","MaxMagicArmor");
+DB_KCE_ArmourCheck("Water","MaxMagicArmor");
+DB_KCE_ArmourCheck("Magic","MaxMagicArmor");
+DB_KCE_ArmourCheck("Corrosive","MaxArmor");
+KBSECTION
+
+IF
+SavegameLoaded(_,_,_,_)
+AND
+NOT DB_KCE_ArmourCheck("Magic",_)
+THEN
+DB_KCE_ArmourCheck("Magic","MaxMagicArmor");
+DB_KCE_ArmourCheck("Corrosive","MaxArmor");
+
+// --------------------
+// Corrosive and Magic Damage
+// --------------------
+// These should always end up acting as Physical and Air instead, respectively
+
+
+// Acid (3 = acid)
+/*
+IF
+    NRD_OnPrepareHit(_Target, _, _, _Handle)
+AND
+    NRD_HitGetDamage(_Handle, "Corrosive", _Damage)
+AND
+	_Damage > 0
+THEN
+NRD_HitClearDamage(_Handle, "Corrosive");
+NRD_HitAddDamage(_Handle, "Physical", _Damage);
+//NRD_HitExecute(_Handle);
+
+
+// Magic (4 = magic)
+IF
+    NRD_OnPrepareHit(_Target, _, _, _Handle)
+AND
+    NRD_HitGetDamage(_Handle, "Magic", _Damage)
+AND
+	_Damage > 0
+THEN
+NRD_HitClearDamage(_Handle, "Magic");
+NRD_HitAddDamage(_Handle, "Air", _Damage);
+//NRD_HitExecute(_Handle);
+*/
+
+
+
+
+// ---------------------------------
+// NEW ARMOUR SYSTEM 06/2020
+// ---------------------------------
+
+IF
+StoryEvent(_Char,"KCE_BootlegTheLegacyArmourSystemPls")
+THEN
+KCE_Ext_LegacyToggle(1);
+
+// Toggle legacy armour
+IF
+GlobalFlagSet("KCE_LegacyArmour")
+THEN
+KCE_Ext_LegacyToggle(1);
+
+
+
+IF
+GlobalFlagCleared("KCE_LegacyArmour")
+THEN
+KCE_Ext_LegacyToggle(0);
+
+// If a player starts a new game, give them the new armour by default.
+IF
+RegionStarted(_Level)
+AND
+GlobalGetFlag("KCE_LegacyChoiceMade",0)
+AND
+IsCharacterCreationLevel(_Level,1)
+THEN
+GlobalSetFlag("KCE_LegacyChoiceMade");
+GlobalSetFlag("KCE_NewGame_2.0");
+
+IF
+RegionStarted(_Level)
+AND
+GlobalGetFlag("KCE_LegacyChoiceMade",0)
+AND
+IsCharacterCreationLevel(_Level,0)
+THEN
+TimerLaunch("KCE_OfferChoiceTimer",500);
+GlobalClearFlag("KCE_NewGame_2.0");
+
+IF
+TimerFinished("KCE_OfferChoiceTimer")
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+THEN
+KCE_Ext_LegacyToggle(1);
+
+
+// NEW 2.1: fuck choices, they can use the mod if they really want the old armour system
+IF
+TimerFinished("KCE_OfferChoiceTimer")
+AND
+GlobalGetFlag("KCE_LegacyArmour",0)
+THEN
+KCE_Ext_LegacyToggle(0);
+
+
+/*
+IF
+TimerFinished("KCE_OfferChoiceTimer")
+AND
+CharacterGetHostCharacter(_Char)
+THEN
+OpenMessageBoxChoice(_Char,"Divinity Unleashed's armour system has been updated. Would you like to apply the modern system to your current save or play with the old version? (You may use a separate mod to play with Legacy Armour at any time)","Modern","Legacy");
+
+
+IF
+MessageBoxChoiceClosed(_Char,"Divinity Unleashed's armour system has been updated. Would you like to apply the modern system to your current save or play with the old version? (You may use a separate mod to play with Legacy Armour at any time)","Legacy")
+THEN
+GlobalSetFlag("KCE_LegacyArmour");
+GlobalSetFlag("KCE_LegacyChoiceMade");
+OpenMessageBox(_Char,"Legacy Armour mode enabled. Armour bars will temporarily deplete from damage and various sources of damage, such as surfaces, will not bypass armour.");
+
+
+IF
+MessageBoxChoiceClosed(_Char,"Divinity Unleashed's armour system has been updated. Would you like to apply the modern system to your current save or play with the old version? (You may use a separate mod to play with Legacy Armour at any time)","Modern")
+THEN
+GlobalClearFlag("KCE_LegacyArmour");
+GlobalSetFlag("KCE_LegacyChoiceMade");
+OpenMessageBox(_Char,"Modern Armour mode enabled.");
+*/
+
+// New armour
+IF
+StoryEvent((CHARACTERGUID)_Char,"KCE_AttributeCheck")
+AND
+GlobalGetFlag("KCE_LegacyArmour",0)
+AND
+CharacterIsDead(_Char,0)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestorePhysArmour",0)
+AND
+NRD_CharacterGetStatInt(_Char,"MaxArmor",_Max)
+AND
+NRD_CharacterGetStatInt(_Char,"CurrentArmor",_Cur)
+AND
+_Cur != _Max
+THEN
+NRD_CharacterSetStatInt(_Char,"CurrentArmor",_Max);
+
+IF
+StoryEvent((CHARACTERGUID)_Char,"KCE_AttributeCheck")
+AND
+GlobalGetFlag("KCE_LegacyArmour",0)
+AND
+CharacterIsDead(_Char,0)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestoreMagArmour",0)
+AND
+NRD_CharacterGetStatInt(_Char,"MaxMagicArmor",_Max)
+AND
+NRD_CharacterGetStatInt(_Char,"CurrentMagicArmor",_Cur)
+AND
+_Cur != _Max
+THEN
+NRD_CharacterSetStatInt(_Char,"CurrentMagicArmor",_Max);
+
+
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char,_,_Damage,_Handle)
+AND
+GlobalGetFlag("KCE_LegacyArmour",0)
+AND
+NOT GetVarInteger(_Char,"KCE_SuccessiveHits",_)
+THEN
+SetVarInteger(_Char,"KCE_SuccessiveHits",0);
+
+
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char,_,_,_)
+AND
+DB_KCE_TempBlacklistDamage(_Char,_Damage)
+THEN
+NOT DB_KCE_TempBlacklistDamage(_Char,_Damage);
+
+
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char,_,_,_Handle)
+AND
+GlobalGetFlag("KCE_LegacyArmour",0)
+AND
+DB_KCE_ArmourCheck(_Damage,_Armour)
+AND
+NOT DB_KCE_TempBlacklistDamage(_Char,_Damage)
+AND
+NRD_HitGetInt(_Handle,"HitType",_Val)
+AND
+_Val < 4
+AND
+NRD_HitGetDamage(_Handle,_Damage,_Amount)
+AND
+_Amount > 0
+AND
+NRD_CharacterGetStatInt(_Char,_Armour,_Arm)
+AND
+IntegerSubtract(_Amount,_Arm,_NewDmg1)
+AND
+GetVarInteger(_Char,"KCE_SuccessiveHits",_Hits)
+AND
+IntegerSum(_Hits,1,_Hits2)
+AND
+IntegerProduct(_Hits2,2,_Divider)
+AND
+IntegerDivide(_Amount,_Divider,_Subtract)
+AND
+IntegerMin(_Subtract,_Arm,_Max)
+AND
+IntegerSubtract(0,_Max,_Add)
+THEN
+NRD_HitAddDamage(_Handle,_Damage,_Add);
+
+
+
+/*
+AND
+IntegerProduct(_Hits,2,_Div)
+AND
+IntegerDivide(_Amount,_Div,_Division1)
+AND
+IntegerSubtract(_Amount,_Division1,_Minimum)
+AND
+IntegerMax(_NewDmg1,_Minimum,_Max)
+THEN
+NRD_HitClearDamage(_Handle,_Damage);
+NRD_HitAddDamage(_Handle,_Damage,_Max);
+*/
+
+
+IF
+NRD_OnHit(_Char,_,_Damage,_)
+AND
+GlobalGetFlag("KCE_LegacyArmour",0)
+AND
+_Damage > 0
+AND
+GetVarInteger(_Char,"KCE_SuccessiveHits",_Hits)
+AND
+IntegerSum(_Hits,1,_NewHits)
+THEN
+SetVarInteger(_Char,"KCE_SuccessiveHits",_NewHits);
+ProcObjectTimerCancel(_Char,"KCE_ResetHitCounter");
+ProcObjectTimer(_Char,"KCE_ResetHitCounter",900);
+
+
+
+PROC
+ProcObjectTimerFinished(_Char,"KCE_ResetHitCounter")
+THEN
+SetVarInteger(_Char,"KCE_SuccessiveHits",0);
+
+
+
+IF
+CharacterStartAttackObject((CHARACTERGUID)_Char,_,_)
+THEN
+ProcObjectTimerCancel(_Char,"KCE_ResetHitCounter");
+ProcObjectTimer(_Char,"KCE_ResetHitCounter",10);
+
+
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char,_,_Damage,_Handle)
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+_Damage > 0
+AND
+NRD_HitGetInt(_Handle,"HitType",5)
+THEN
+NRD_CharacterSetStatInt(_Char,"CurrentArmor",0);
+NRD_CharacterSetStatInt(_Char,"CurrentMagicArmor",0);
+
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char,_,_Damage,_Handle)
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+_Damage > 0
+AND
+NRD_HitGetInt(_Handle,"HitType",6)
+THEN
+NRD_CharacterSetStatInt(_Char,"CurrentArmor",0);
+NRD_CharacterSetStatInt(_Char,"CurrentMagicArmor",0);
+
+IF
+NRD_OnHeal(_Char,_,_,_)
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestoreMagArmour",0)
+THEN
+ProcObjectTimerCancel(_Char,"KCE_RestoreMagArmour");
+ProcObjectTimer(_Char,"KCE_RestoreMagArmour",800);
+
+IF
+NRD_OnHeal(_Char,_,_,_)
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestorePhysArmour",0)
+THEN
+ProcObjectTimerCancel(_Char,"KCE_RestorePhysArmour");
+ProcObjectTimer(_Char,"KCE_RestorePhysArmour",800);
+
+IF
+CharacterReceivedDamage(_Char,_,_)
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+CharacterIsDead(_Char,0)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestorePhysArmour",0)
+THEN
+ProcObjectTimerCancel(_Char,"KCE_RestorePhysArmour");
+ProcObjectTimer(_Char,"KCE_RestorePhysArmour",800);
+
+IF
+CharacterReceivedDamage(_Char,_,_)
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+CharacterIsDead(_Char,0)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestoreMagArmour",0)
+THEN
+ProcObjectTimerCancel(_Char,"KCE_RestoreMagArmour");
+ProcObjectTimer(_Char,"KCE_RestoreMagArmour",800);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char,"KCE_RestorePhysArmour")
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+CharacterIsDead(_Char,0)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestorePhysArmour",0)
+AND
+NRD_CharacterGetStatInt(_Char,"MaxArmor",_Max)
+THEN
+NRD_CharacterSetStatInt(_Char,"CurrentArmor",_Max);
+
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char,"KCE_RestoreMagArmour")
+AND
+GlobalGetFlag("KCE_LegacyArmour",1)
+AND
+CharacterIsDead(_Char,0)
+AND
+ObjectGetFlag(_Char,"KCE_DontRestoreMagArmour",0)
+AND
+NRD_CharacterGetStatInt(_Char,"MaxMagicArmor",_Max)
+THEN
+NRD_CharacterSetStatInt(_Char,"CurrentMagicArmor",_Max);
+
+
+
+
+
+// Set all healing to not be armour
+IF
+	NRD_OnStatusAttempt((CHARACTERGUID)_Char,_Any,_Handle,_)
+AND
+	GetStatusType(_Any,"HEALING")
+AND
+	NRD_StatusGetString(_Char,_Handle,"StatusId",_StatsId)
+AND
+	NRD_StatGetString(_StatsId,"HealStat",_Stat)
+AND
+	_Stat != "Vitality"
+AND
+	NRD_StatGetInt(_StatsId,"HealValue",_Val)
+AND
+	IntegerDivide(_Val,2,_Add)
+AND
+	IntegerProduct(_Val,_Add,_Sum)
+THEN	
+	NRD_StatusSetInt(_Char,_Handle,"HealValue",_Sum);
+	NRD_StatusSetString(_Char,_Handle,"HealStat","Vitality");
+
+IF
+	NRD_OnStatusAttempt((CHARACTERGUID)_Char,_Any,_Handle,_)
+AND
+	GetStatusType(_Any,"HEALING")
+AND
+	NRD_StatusGetString(_Char,_Handle,"StatusId",_StatsId)
+AND
+	NRD_StatGetString(_StatsId,"HealStat",_Stat)
+AND
+	_Stat != "Vitality"
+THEN	
+	NRD_StatusSetString(_Char,_Handle,"HealStat","Vitality");
+
+// Set all healing to not be armour
+IF
+	NRD_OnStatusAttempt((CHARACTERGUID)_Char,_Any,_Handle,_)
+AND
+	GetStatusType(_Any,"HEAL")
+AND
+	NRD_StatusGetString(_Char,_Handle,"StatusId",_StatsId)
+AND
+	NRD_StatGetString(_StatsId,"HealType",_Stat)
+AND
+	_Stat != "Vitality"
+THEN	
+	NRD_StatusSetString(_Char,_Handle,"HealType","Vitality");
+
+IF
+	NRD_OnHeal(_Char,_,_,_Handle)
+AND
+	NRD_StatusGetString(_Char,_Handle,"HealType",_Stat)
+AND
+	_Stat != "Vitality"
+THEN
+	NRD_StatusSetString(_Char,_Handle,"HealType","Vitality");
+
+// Set magic hits to weaponstyle hits so they can miss and crit by default
+
+
+
+
+IF
+CharacterUsedItem(_Char,_Item)
+AND
+IsTagged(_Item,"POTIONS",1)
+THEN
+ObjectSetFlag(_Char,"KCE_RecentlyAtePotion");
+ProcObjectTimerCancel(_Char,"KCE_ClearRecentlyAtePotion");
+ProcObjectTimer(_Char,"KCE_ClearRecentlyAtePotion",500);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char,"KCE_ClearRecentlyAtePotion")
+THEN
+ObjectClearFlag(_Char,"KCE_RecentlyAtePotion");
+
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char,(CHARACTERGUID)_Causee,_Damage,_Handle)
+AND
+_Damage > 0
+AND
+CharacterHasTalent(_Causee,"Haymaker",0)	// So Haymaker doesn't trigger a miss
+AND
+_Char != _Causee
+AND
+ObjectGetFlag(_Char,"KCE_RecentlyAtePotion",0)	// Potions shouldn't miss!
+AND
+NRD_HitGetInt(_Handle,"HitType",1)
+AND
+NRD_CharacterGetComputedStat(_Char,"Dodge",0,_Dodge1)
+AND
+IntegerMax(_Dodge1,0,_Dodge)
+AND
+NRD_CharacterGetComputedStat(_Causee,"Accuracy",0,_Acc1)
+AND
+IntegerMax(_Acc1,0,_Accuracy)
+AND
+IntegerSubtract(_Accuracy,_Dodge,_ChanceBoost)
+AND
+Random(101,_Rand)
+AND
+IntegerSum(_Rand,_ChanceBoost,_Outcome)
+AND
+_Outcome < 100
+THEN
+	NRD_HitSetInt(_Handle,"HitType",0);
+	ObjectSetFlag(_Char,"KCE_GetHitNot");
+	NRD_HitClearAllDamage(_Handle);
+
+
+
+
+// For hits that should definitely miss
+IF
+	NRD_OnHit((CHARACTERGUID)_Target,_,_,_Handle)
+AND
+	ObjectGetFlag(_Target,"KCE_GetHitNot",1)
+THEN
+    NRD_StatusSetInt(_Target,_Handle,"RollForDamage",0);
+    NRD_StatusSetInt(_Target,_Handle,"Hit",0);
+    NRD_StatusSetInt(_Target,_Handle,"Blocked",0);
+    NRD_StatusSetInt(_Target,_Handle,"Dodged",0);
+    NRD_StatusSetInt(_Target,_Handle,"Missed",1);
+	ObjectClearFlag(_Target,"KCE_GetHitNot");
+
+
+EXITSECTION
+
+ENDEXITSECTION

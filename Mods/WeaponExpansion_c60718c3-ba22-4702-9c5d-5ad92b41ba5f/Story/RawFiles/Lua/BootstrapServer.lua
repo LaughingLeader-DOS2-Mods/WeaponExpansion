@@ -72,15 +72,18 @@ Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 ---@param context any
 local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection, context)
 	if hit.DamageType == "Magic" then
-        hit.DamageList:ConvertDamageType("Earth")
+        hit.DamageList:ConvertDamageType("Water")
     elseif hit.DamageType == "Corrosive" then
-        hit.DamageList:ConvertDamageType("Physical")
+        hit.DamageList:ConvertDamageType("Earth")
     end
 end
 
+local DIVINITY_UNLEASHED = "e844229e-b744-4294-9102-a7362a926f71"
+local ARMOR_MITIGATION = "edf1898c-d375-47e7-919a-11d5d44d1cca"
+
 local function SessionSetup()
     -- Divinity Unleashed or Armor Mitigation
-    if not Ext.IsModLoaded("e844229e-b744-4294-9102-a7362a926f71") and not Ext.IsModLoaded("edf1898c-d375-47e7-919a-11d5d44d1cca") then
+    if not Ext.IsModLoaded(ARMOR_MITIGATION) then
         Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
 		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
     end
@@ -107,3 +110,5 @@ end
 Ext.RegisterListener("SessionLoaded", SessionSetup)
 
 Ext.Print("[WeaponExpansion:BootstrapServer.lua] Finished running.")
+
+Ext.AddPathOverride("Mods/Kalavinkas_Combat_Enhanced_e844229e-b744-4294-9102-a7362a926f71/Story/RawFiles/Goals/KCE_CoreRules_Story.txt", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/KCE_CoreRules_Story.txt")
