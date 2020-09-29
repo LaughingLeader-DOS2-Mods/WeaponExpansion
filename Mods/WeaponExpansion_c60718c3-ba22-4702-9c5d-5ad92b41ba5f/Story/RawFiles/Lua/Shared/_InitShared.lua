@@ -49,6 +49,13 @@ Tags = {}
 
 UI = {}
 
+Origin = {
+	-- S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b
+	Harken = "e446752a-13cc-4a88-a32e-5df244c90d8b",
+	-- S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6
+	Korvash = "3f20ae14-5339-4913-98f1-24476861ebd6",
+}
+
 Ext.Require("Shared/MasteryHelpers.lua")
 Ext.Require("Shared/GameMathAlternatives.lua")
 Ext.Require("Shared/StatOverrides.lua")
@@ -64,6 +71,7 @@ Ext.Require("Shared/SkillAPListener.lua")
 Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
 Ext.Require("Shared/ExtenderHelpers.lua")
+Ext.Require("Shared/SharedDataHooks.lua")
 
 if Ext.IsDeveloperMode() then
 	--Ext.Require("Shared/Debug/GameMathTracing.lua")
@@ -80,12 +88,17 @@ local defaultExperienceAmounts = {
 
 LeaderLib.RegisterLeaveActionPrefix("LLWEAPONEX")
 
-local initHarkenVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Harken.lua")
-local initKorvashVoiceMetaData = Ext.Require("Shared/Data/VoiceMetaData_Korvash.lua")
-
 Ext.RegisterListener("ModuleLoading", function()
-	initHarkenVoiceMetaData()
-	initKorvashVoiceMetaData()
+	local femaleKorvash = Ext.ExtraData.LLWEAPONEX_Origins_FemaleKorvashEnabled == 1
+	if femaleKorvash then
+		Ext.AddPathOverride("Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/CharacterCreation/OriginPresets/LLWEAPONEX_Korvash.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Korvash_Female.lsx")
+		Ext.AddPathOverride("Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Globals/TestLevel_LL_WeaponExpansion/Characters/S_Player_LLWEAPONEX_Korvash_3f20ae14-5339-4913-98f1-24476861ebd6.lsf", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/S_Player_LLWEAPONEX_Korvash_Female_3f20ae14-5339-4913-98f1-24476861ebd6.lsf")
+		GameHelpers.VoiceMetaData.Register.ScholarFemale(Origin.Korvash)
+	else
+		GameHelpers.VoiceMetaData.Register.ScholarMale(Origin.Korvash)
+	end
+	--Harken
+	GameHelpers.VoiceMetaData.Register.WarriorMale(Origin.Harken)
 end)
 
 local function LoadExperienceVariables()	
@@ -155,3 +168,8 @@ Ext.RegisterListener("SessionLoaded", function()
 end)
 
 Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")
+
+if Ext.IsClient() then
+	---@type ClientData
+	ClientData = LeaderLib.ClientData
+end
