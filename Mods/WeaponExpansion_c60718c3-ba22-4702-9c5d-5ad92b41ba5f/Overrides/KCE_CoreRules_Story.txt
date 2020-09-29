@@ -19,42 +19,6 @@ THEN
 DB_KCE_ArmourCheck("Magic","MaxMagicArmor");
 DB_KCE_ArmourCheck("Corrosive","MaxArmor");
 
-// --------------------
-// Corrosive and Magic Damage
-// --------------------
-// These should always end up acting as Physical and Air instead, respectively
-
-
-// Acid (3 = acid)
-/*
-IF
-    NRD_OnPrepareHit(_Target, _, _, _Handle)
-AND
-    NRD_HitGetDamage(_Handle, "Corrosive", _Damage)
-AND
-	_Damage > 0
-THEN
-NRD_HitClearDamage(_Handle, "Corrosive");
-NRD_HitAddDamage(_Handle, "Physical", _Damage);
-//NRD_HitExecute(_Handle);
-
-
-// Magic (4 = magic)
-IF
-    NRD_OnPrepareHit(_Target, _, _, _Handle)
-AND
-    NRD_HitGetDamage(_Handle, "Magic", _Damage)
-AND
-	_Damage > 0
-THEN
-NRD_HitClearDamage(_Handle, "Magic");
-NRD_HitAddDamage(_Handle, "Air", _Damage);
-//NRD_HitExecute(_Handle);
-*/
-
-
-
-
 // ---------------------------------
 // NEW ARMOUR SYSTEM 06/2020
 // ---------------------------------

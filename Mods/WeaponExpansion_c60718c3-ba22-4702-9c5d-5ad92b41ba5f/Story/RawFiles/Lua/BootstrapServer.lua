@@ -64,6 +64,9 @@ local function dumpRanks(...)
 end
 Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 
+local DIVINITY_UNLEASHED = "e844229e-b744-4294-9102-a7362a926f71"
+local ARMOR_MITIGATION = "edf1898c-d375-47e7-919a-11d5d44d1cca"
+
 ---@param target EsvCharacter
 ---@param attacker StatCharacter|StatItem
 ---@param hit HitRequest
@@ -78,14 +81,11 @@ local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impa
     end
 end
 
-local DIVINITY_UNLEASHED = "e844229e-b744-4294-9102-a7362a926f71"
-local ARMOR_MITIGATION = "edf1898c-d375-47e7-919a-11d5d44d1cca"
-
 local function SessionSetup()
     -- Divinity Unleashed or Armor Mitigation
-    if not Ext.IsModLoaded(ARMOR_MITIGATION) then
+    if not Ext.IsModLoaded(DIVINITY_UNLEASHED) and not Ext.IsModLoaded(ARMOR_MITIGATION) then
         Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
-		Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
+        Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
     end
 
     -- Enemy Upgrade Overhaul
