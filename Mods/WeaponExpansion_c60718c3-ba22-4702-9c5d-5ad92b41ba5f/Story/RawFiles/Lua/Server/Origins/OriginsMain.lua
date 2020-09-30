@@ -206,7 +206,7 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(s
 	if state == SKILL_STATE.CAST then
 		PersistentVars.SkillData.DarkFireballCount[char] = 0
 		UpdateDarkFireballSkill(char)
-		SyncVars()
+		GameHelpers.Data.SyncSharedData(nil,nil,true)
 	end
 end)
 
@@ -242,5 +242,5 @@ end
 Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
 	PersistentVars.SkillData.DarkFireballCount = tonumber(amount)
 	UpdateDarkFireballSkill(Origin.Korvash)
-	SyncVars()
+	GameHelpers.Data.SyncSharedData(nil,nil,true)
 end)

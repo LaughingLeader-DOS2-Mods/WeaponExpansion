@@ -176,6 +176,8 @@ NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ListenForDeath(_Char, _Target);
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_DEMON_GAUNTLET_EQUIPPED", _)
 AND
+NOT DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense(_Char, _)
+AND
 NRD_ApplyActiveDefense(_Char, "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE", -1.0, _Handle)
 THEN
 DB_LLWEAPONEX_Uniques_DemonGauntlet_ActiveDefense(_Char, _Handle);

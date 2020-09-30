@@ -94,7 +94,7 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 				local tooltipId = array[i+4]
 				--print(statType, label, value, tooltipId)
 				if tooltipId == damageStatID then
-					local character = ClientData:GetCharacter()
+					local character = Client:GetCharacter()
 					if character ~= nil and IsUnarmed(character.Stats) then
 						local weapon,boost = GetUnarmedWeapon(character.Stats)
 						local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
@@ -130,15 +130,11 @@ local ccUIMirrorHeaderText = Ext.GetTranslatedString("hf11e1d54g4cb6g4950g91e4g4
 
 ---@param ui UIObject
 ---@param call string
-local function OnCCEvent(ui, call, ...)
-	local params = {...}
-	print("UI Type:", ui:GetTypeId())
-	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCCEvent] Event(",call,") params("..LeaderLib.Common.Dump(params)..")")
-
-	if call == "setText" and params[2] == ccUIMirrorHeaderText then
-		MasteryMenu.Instance:Invoke("setToggleButtonVisibility", false)
-	elseif call == "creationDone" or call == "updatePortraits" and params[1] == false then
-		MasteryMenu.Instance:Invoke("setToggleButtonVisibility", true)
+local function OnCCEvent(ui, call, param1, param2)
+	if call == "setText" and param2 == ccUIMirrorHeaderText then
+		MasteryMenu.SetToggleButtonVisibility(false, false) 
+	elseif call == "creationDone" or call == "updatePortraits" and param1 == false then
+		--MasteryMenu.SetToggleButtonVisibility(false, true) 
 	end
 end
 

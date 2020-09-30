@@ -121,8 +121,6 @@ local gameTestTemplates = {
 
 LeaderLib.RegisterListener("LuaReset", function()
 	print("****************************Resending client UI data.*****************************")
-	InitClientID()
-	SyncVars()
 end)
 
 local function AddTestItems(host)

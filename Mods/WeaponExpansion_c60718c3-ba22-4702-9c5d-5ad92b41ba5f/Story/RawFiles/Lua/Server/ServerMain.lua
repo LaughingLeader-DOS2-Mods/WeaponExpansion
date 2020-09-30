@@ -239,12 +239,10 @@ function OnGameStarted(region, editorMode, postReset)
         end
     end
 
-    InitClientID()
-
     if postReset ~= nil then
         Ext.BroadcastMessage("LLWEAPONEX_LuaWasReset", "", nil)
     end
 
     UpdateDarkFireballSkill(Origin.Korvash)
-    SyncVars()
+    GameHelpers.Data.SyncSharedData(nil,nil,true)
 end

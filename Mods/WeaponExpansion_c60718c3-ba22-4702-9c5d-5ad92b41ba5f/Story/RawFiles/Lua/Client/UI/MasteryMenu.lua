@@ -370,8 +370,12 @@ function MasteryMenu.InitializeToggleButton()
 			end)
 		end
 		MasteryMenu.ToggleButtonInstance = ui
-		if ui ~= nil then
-			MasteryMenu.SetToggleButtonVisibility(true, false)
+		if MasteryMenu.ToggleButtonInstance ~= nil then
+			local displayButton = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf") == nil
+			if displayButton and SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION then
+				displayButton = false
+			end
+			MasteryMenu.SetToggleButtonVisibility(displayButton, false)
 			ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
 		end
 	end
@@ -512,10 +516,10 @@ local function OpenMasteryMenu(characterMasteryData)
 				rank = 4
 				xp = xpMax
 			end
-			if rank > 0 or xp > 0 then
+			if rank > 0 then
 				local barPercentage = 0.0
 				if xp > 0 and xp < xpMax then
-					barPercentage = math.floor(((xp / xpMax) * 100) + 0.5) / 100
+					barPercentage = math.max(math.floor(((xp / xpMax) * 100) + 0.5) / 100, 1)
 				elseif xp >= xpMax then
 					barPercentage = 1.0
 				end

@@ -12,6 +12,7 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 end)
 
 LeaderLib.RegisterListener("Initialized", function(region)
+	region = region or SharedData.RegionData.Current
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then
 			for id,unique in pairs (Uniques) do
@@ -138,7 +139,6 @@ local function IncreaseKillCount(char, fromTargetDying)
 		local current = PersistentVars.SkillData.DarkFireballCount[char] or 0
 		if current < maxCount then
 			PersistentVars.SkillData.DarkFireballCount[char] = current + 1
-			SyncVars()
 			if PersistentVars.SkillData.DarkFireballCount[char] >= 1 then
 				UpdateDarkFireballSkill(char)
 			end
