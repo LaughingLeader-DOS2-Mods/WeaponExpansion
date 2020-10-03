@@ -196,11 +196,25 @@ Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(char)
 	end
 end)
 
-local function OnLeftCombat(char, id)
-	ClearTag(char, "LLWEAPONEX_EnemyDiedInCombat")
+local function ReloadAmmoSkills()
+	if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_HandCrossbow_Reload") == 1 then
+		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_HandCrossbow_Reload", "Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, true)
+	end
+	if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
+		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_Pistol_Reload", "Target_LLWEAPONEX_Pistol_Shoot", true, true)
+	end
 end
 
-Ext.RegisterOsirisListener("ObjectLeftCombat", 2, "after", OnLeftCombat)
+local function OnLeftCombat(uuid, id)
+	ClearTag(uuid, "LLWEAPONEX_EnemyDiedInCombat")
+	ReloadAmmoSkills()
+end
+
+Ext.RegisterOsirisListener("ObjectLeftCombat", 2, "after", function(object,id)
+	if ObjectIsCharacter(object) == 1 then
+		OnLeftCombat(StringHelpers.GetUUID(object), id)
+	end
+end)
 
 Ext.RegisterOsirisListener("ObjectWasTagged", 2, "after", function(object, tag)
 
@@ -241,3 +255,7 @@ Ext.RegisterConsoleCommand("scaletest", function(cmd, levelstr)
 	print("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus|LifeSteal", level, newLifeSteal)
 	levelTest = level
 end)
+
+function OnRest(target, source)
+	ReloadAmmoSkills()
+end

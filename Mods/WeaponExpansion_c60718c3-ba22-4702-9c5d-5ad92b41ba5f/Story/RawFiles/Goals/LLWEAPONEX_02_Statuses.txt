@@ -727,6 +727,13 @@ CharacterStatusRemoved(_Char, "GUARDIAN_ANGEL", _)
 THEN
 ClearTag(_Char, "LLWEAPONEX_Banner_GuardianAngel_Active");
 //END_REGION
+
+//REGION REST
+IF
+CharacterStatusApplied(_Char, "STORY_PartyRest", _Source)
+THEN
+NRD_ModCall("WeaponExpansion", "OnRest", (STRING)_Char, (STRING)_Source);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
