@@ -159,6 +159,19 @@ local function OnSkillTooltip(character, skill, tooltip)
 			end
 		end
 	end
+
+	if skill == "Target_LLWEAPONEX_RemoteMine_Detonate" then
+		if Settings.Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
+			local element = tooltip:GetElement("SkillDescription")
+			if element ~= nil then
+				local desc,_ = GameHelpers.GetStringKeyText("Target_LLWEAPONEX_RemoteMine_Detonate_NoRestriction_Description", "Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.</font>")
+				if desc ~= nil then
+					desc:gsub("%[1%]", Ext.StatGetAttribute("Target_LLWEAPONEX_RemoteMine_Detonate", "TargetRadius"))
+					element.Label = desc
+				end
+			end
+		end
+	end
 end
 
 return OnSkillTooltip
