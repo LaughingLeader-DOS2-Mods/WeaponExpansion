@@ -295,6 +295,7 @@ local function OnItemTooltip(item, tooltip)
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
 			end
 			if item:HasTag("LLWEAPONEX_RunicCannon") then
+				tooltip:RemoveElement("WandCharges")
 				local charges = PersistentVars.RunicCannonCharges[item.MyGuid]
 				if charges ~= nil then
 					local element = {
@@ -303,7 +304,10 @@ local function OnItemTooltip(item, tooltip)
 						Value = tostring(charges),
 						MaxValue = "3"
 					}
+					tooltip:AppendElement(element)
 				end
+			elseif item:HasTag("LLWEAPONEX_DemolitionBackpack") then
+
 			end
 		end
 
