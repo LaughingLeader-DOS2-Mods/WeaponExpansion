@@ -72,6 +72,10 @@ Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
 Ext.Require("Shared/ExtenderHelpers.lua")
 Ext.Require("Shared/SharedDataHooks.lua")
+local initSettings = Ext.Require("Shared/Settings.lua")
+
+---@type ModSettings
+Settings = nil
 
 if Ext.IsDeveloperMode() then
 	--Ext.Require("Shared/Debug/GameMathTracing.lua")
@@ -158,6 +162,8 @@ local function LoadExperienceVariables()
 end
 
 Ext.RegisterListener("SessionLoaded", function()
+	Settings = initSettings()
+
 	LoadExperienceVariables()
 	LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
     LeaderLib.EnableFeature("ReplaceTooltipPlaceholders")

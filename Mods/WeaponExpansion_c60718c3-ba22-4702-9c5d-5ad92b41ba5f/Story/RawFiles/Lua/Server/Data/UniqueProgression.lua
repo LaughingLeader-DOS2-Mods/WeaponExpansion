@@ -16,8 +16,11 @@ function UniqueProgressionEntry:Create(attribute, value, append)
     {
 		Attribute = attribute,
 		Value = value,
-		Append = append or true
+		Append = append
 	}
+	if this.Append == nil then
+		this.Append = true
+	end
 	setmetatable(this, self)
 	return this
 end

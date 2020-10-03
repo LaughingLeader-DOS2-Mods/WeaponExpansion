@@ -222,7 +222,8 @@ local EquipmentTypes = {
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
 	---@type EclCharacter
-	local character = Ext.GetCharacter(LeaderLib.UI.ClientCharacter)
+	local character = Client:GetCharacter()
+
 	if item ~= nil then
 		if item.StatsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
 			--Removes the Requires Dwarf / Male
@@ -265,6 +266,7 @@ local function OnItemTooltip(item, tooltip)
 			local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
 			CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
 		end
+
 		if not fakeDamageCreated then
 			for i,entry in pairs(WeaponTypeNames) do
 				if item:HasTag(entry.Tag) then

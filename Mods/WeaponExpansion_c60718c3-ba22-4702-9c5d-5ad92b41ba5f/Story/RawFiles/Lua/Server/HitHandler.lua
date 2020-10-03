@@ -16,7 +16,7 @@ HitHandler.RegisterOnHit = function(tag, callback)
 	totalOnHitCallbacks = totalOnHitCallbacks + 1
 end
 
-local function CanGrantMasteryExperience(target,player)
+function Mastery.CanGrantMasteryExperience(target,player)
 	if IsTagged(target, "LLDUMMY_TrainingDummy") then
 		return true,0.1
 	else
@@ -119,10 +119,9 @@ end
 local function OnHit(target,source,damage,handle)
 	if source ~= nil then
 		local hitWithWeapon = GameHelpers.HitWithWeapon(target, handle, false, true)
-
 		if hitWithWeapon then
 			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
-			local b,expGain = CanGrantMasteryExperience(target,source)
+			local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
 			if b and expGain > 0 then
 				AddMasteryExperienceForAllActive(source, expGain)
 			end

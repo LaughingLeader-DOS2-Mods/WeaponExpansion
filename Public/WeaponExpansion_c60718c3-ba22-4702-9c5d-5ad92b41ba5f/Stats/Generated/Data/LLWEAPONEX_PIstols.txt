@@ -24,7 +24,7 @@ data "ItemColor" "DefaultGray"
 data "RuneSlots" "1"
 data "RuneSlots_V1" "1"
 data "Skills" "Target_LLWEAPONEX_Pistol_Shoot"
-data "Tags" "LLWEAPONEX_Pistol_Equipped"
+data "Tags" "LLWEAPONEX_Pistol;LLWEAPONEX_Pistol_Equipped"
 
 new entry "ARM_LLWEAPONEX_Pistol_A"
 type "Armor"

@@ -52,7 +52,7 @@ end
 --- @param mastery string
 --- @param expGain number
 --- @param skipFlagCheck boolean
-function AddMasteryExperience(uuid,mastery,expGain)
+function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 	if skipFlagCheck == true or ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		local currentLevel = 0
 		local currentExp = 0

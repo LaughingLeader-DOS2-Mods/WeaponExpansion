@@ -87,6 +87,7 @@ local function SetupListeners()
 end
 
 local function TryOpenMasteryMenu()
+	print(Ext.JsonStringify(Client))
 	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Client.Character.UUID)
 end
 
@@ -510,20 +511,20 @@ local function OpenMasteryMenu(characterMasteryData)
 			local rank = characterMasteryData.Masteries[tag].Rank
 			local xp = math.ceil(characterMasteryData.Masteries[tag].XP)
 			local xpMax = math.ceil(Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required)
-			if Debug.MasteryTests then
-				characterMasteryData.Masteries[tag].Rank = 4
-				characterMasteryData.Masteries[tag].XP = xpMax
-				rank = 4
-				xp = xpMax
-			end
+			-- if Debug.MasteryTests then
+			-- 	characterMasteryData.Masteries[tag].Rank = 4
+			-- 	characterMasteryData.Masteries[tag].XP = xpMax
+			-- 	rank = 4
+			-- 	xp = xpMax
+			-- end
 			if rank > 0 then
 				local barPercentage = 0.0
 				if xp > 0 and xp < xpMax then
-					barPercentage = math.max(math.floor(((xp / xpMax) * 100) + 0.5) / 100, 1)
+					barPercentage = math.max(math.floor(((xp / xpMax) * 100) + 0.5) / 100, 0.01)
 				elseif xp >= xpMax then
 					barPercentage = 1.0
 				end
-				local xpPercentage = math.floor(barPercentage * 100);
+				local xpPercentage = math.floor(barPercentage * 100)
 				local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank))
 				local masteryColorTitle = getMasteryDescriptionTitle(data)
 				ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)

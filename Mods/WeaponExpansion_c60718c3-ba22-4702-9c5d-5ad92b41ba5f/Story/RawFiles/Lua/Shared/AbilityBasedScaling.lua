@@ -69,7 +69,7 @@ end
 --- @param damageList DamageList
 --- @param noRandomization boolean
 --- @param ability string
-local function CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization, ability)
+function Math.AbilityScaling.CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization, ability)
     local damages = Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon, ability)
 
     for damageType, damage in pairs(damages) do

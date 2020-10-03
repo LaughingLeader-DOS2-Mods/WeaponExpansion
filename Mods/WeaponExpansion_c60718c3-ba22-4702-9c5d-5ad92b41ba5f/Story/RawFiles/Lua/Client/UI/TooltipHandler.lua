@@ -112,7 +112,7 @@ local function OnWorldTooltip(ui, text, x, y, ...)
 	local startPos,endPos = string.find(text, '<font size="15"><br>.-</font>')
 	if startPos then
 		local nextText = string.sub(text, 0, startPos-1)
-		Ext.PostMessageToServer("LLWEAPONEX_SetWorldTooltipText_Request", Ext.JsonStringify({Client = LeaderLib.UI.ClientID, Text=nextText}))
+		Ext.PostMessageToServer("LLWEAPONEX_SetWorldTooltipText_Request", Ext.JsonStringify({ID = Client.ID, Text=nextText}))
 	end
 end
 

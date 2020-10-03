@@ -236,3 +236,11 @@ local function DisplayOverheadDamage(call,datastr)
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_DisplayOverheadDamage", DisplayOverheadDamage)
+
+Ext.RegisterListener("GameStateChanged", function(from, to)
+	if from == "Running" and to == "UnloadLevel" then
+		MasteryMenu.SetToggleButtonVisibility(false, true)
+	elseif from == "Sync" and to == "Running" then
+		--MasteryMenu.SetToggleButtonVisibility(true, true)
+	end
+end)

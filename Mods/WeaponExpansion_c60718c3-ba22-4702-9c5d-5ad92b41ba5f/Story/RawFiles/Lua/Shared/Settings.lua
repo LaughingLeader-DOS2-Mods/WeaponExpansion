@@ -1,4 +1,4 @@
-local function Init()
+return function()
 	---@type ModSettings
 	local settings = LeaderLib.CreateModSettings("e21fcd37-daec-490d-baec-f6f3e83f1ac9")
 	---@type TranslatedString
@@ -23,5 +23,3 @@ local function Init()
 
 	return settings
 end
-	
-return Init

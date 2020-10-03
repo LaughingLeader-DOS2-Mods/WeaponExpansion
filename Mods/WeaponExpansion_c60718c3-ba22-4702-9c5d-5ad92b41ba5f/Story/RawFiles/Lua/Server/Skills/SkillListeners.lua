@@ -171,9 +171,9 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 	if state == SKILL_STATE.HIT and data.Success then
 		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Ext.IsDeveloperMode()
 		if canStealFrom then
-			
+			local attacker = Ext.GetCharacter(char)
 			local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
-			if IsTagged(char, "LLWEAPONEX_ThiefGloves_Equipped") == 1 then
+			if attacker:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
 				local glovesBonusChance = Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0
 				chance = math.tointeger(chance + glovesBonusChance)
 			end
@@ -185,7 +185,7 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 			end
 
 			local enemy = Ext.GetCharacter(data.Target)
-			local name = Ext.GetCharacter(char).DisplayName
+			local name = attacker.DisplayName
 			
 			if chance > 0 then
 				local roll = Ext.Random(0,100)
@@ -220,7 +220,7 @@ LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char,
 					local treasureItems = Ext.GetItem(container):GetInventoryItems()
 					if #treasureItems > 0 then
 						local ranItem = Common.GetRandomTableEntry(treasureItems)
-						itemName = Ext.GetItem(ranItem).DisplayName or "an item"
+						itemName = Ext.GetItem(ranItem).DisplayName or Ext.GetTranslatedString("h6f1e6e58g9918g4f9bga5f1gae66ef1915d4", "an item")
 						ItemSetOriginalOwner(ranItem, targetOwner) -- So it shows up as stolen
 						ItemToInventory(ranItem, char, ItemGetAmount(ranItem), 1, 0)
 					else

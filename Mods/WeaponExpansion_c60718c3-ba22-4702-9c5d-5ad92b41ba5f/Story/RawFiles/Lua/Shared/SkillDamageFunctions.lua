@@ -1,5 +1,5 @@
 local function SkillPropsIsTable(skill)
-	return type(skill) == "table" and not SkillPropsIsTable(skill)
+	return type(skill) == "table" and skill.IsTable == true
 end
 
 --- @param character StatCharacter

@@ -3,5 +3,7 @@ local MessageData = LeaderLib.Classes["MessageData"]
 
 Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText_Request", function(cmd, datastr)
 	local data = Ext.JsonParse(datastr)
-	Ext.PostMessageToUser(data.Client, "LLWEAPONEX_SetWorldTooltipText", data.Text)
+	if data ~= nil and data.ID ~= nil then
+		Ext.PostMessageToUser(data.ID, "LLWEAPONEX_SetWorldTooltipText", data.Text)
+	end
 end)
