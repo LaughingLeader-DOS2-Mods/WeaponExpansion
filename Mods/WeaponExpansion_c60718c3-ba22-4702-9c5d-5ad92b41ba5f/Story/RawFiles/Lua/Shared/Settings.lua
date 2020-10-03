@@ -1,12 +1,13 @@
 return function()
 	---@type ModSettings
-	local settings = LeaderLib.CreateModSettings("e21fcd37-daec-490d-baec-f6f3e83f1ac9")
+	local settings = LeaderLib.CreateModSettings("c60718c3-ba22-4702-9c5d-5ad92b41ba5f")
 	---@type TranslatedString
 	local ts = LeaderLib.Classes.TranslatedString
 	
 	settings.Global:AddLocalizedFlags({
 		"LLWEAPONEX_NoArmCannonRestrictions",
 		"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
+		"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
 	})
 	settings.Global:AddLocalizedFlag("LLWEAPONEX_AutoUnlockRecipesDisabled", "User", false, nil, nil, false)
 
