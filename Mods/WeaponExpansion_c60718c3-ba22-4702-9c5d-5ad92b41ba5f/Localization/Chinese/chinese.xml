@@ -130,7 +130,7 @@
 	<content contentuid="h0c9e00adgb092g4689g9b8dg5eb400da05af">&lt;font color=&apos;#40E0D0&apos; size=&apos;18&apos;&gt;Runeblade Mastery&lt;/font&gt;&lt;br&gt;Reverberate the last active rune or rune combination, applying it for 2 turns.</content>
 	<content contentuid="h0cb1a1eag87c4g42d4gafb6gd862c3856941">Expert Axefighter</content>
 	<content contentuid="h0cb99d43g74b0g4053g90f1gd689f4831231">Character&apos;s firearm is attuned to earth.</content>
-	<content contentuid="h0cbde0a1ge3a8g45ecg9803ga33c8e9b5f19">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at an enemy for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [2] additional enemies in a [3] radius.</content>
+	<content contentuid="h0cbde0a1ge3a8g45ecg9803ga33c8e9b5f19">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at a target for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [2] additional enemies in a [3] radius.</content>
 	<content contentuid="h0ce310f5g9564g45f0gb0e2gd2c5c1dd89a3">Character has been hit by a thrown staff!</content>
 	<content contentuid="h0ceb51ffg9102g41ccga4f2gd9b57aaf9c16">Battle-Hardened Dual Shields</content>
 	<content contentuid="h0d198b10gc1beg4a18ga695g3b7eb57fb371">Curse of the Muramasa</content>
@@ -172,7 +172,7 @@
 	<content contentuid="h133cf4degf968g4ebfg9354gec021e928aa2">&lt;font color=&apos;#F7BA14&apos;&gt;Earth Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
 	<content contentuid="h13ac28ceg70feg4617gb124g5cdb198bbcac">Execution</content>
 	<content contentuid="h13bfb4ffg4ae6g4c67g839fg30ac91b2978f">A hardy blow with your shield that deals [1] and has a chance to daze the target.</content>
-	<content contentuid="h145c7401gf7bbg45cag9233g74278a112220">Disable Remote Charge Detonation Limit</content>
+	<content contentuid="h145c7401gf7bbg45cag9233g74278a112220">Enable Remote Charge Detonation Limit</content>
 	<content contentuid="h147316d6g357dg4c40gb1ddgb3c2110f2e2a">Ashenblade</content>
 	<content contentuid="h1481e457gb42cg4c8ag9d0cgdb2216832df9">Shuriken (Normal)</content>
 	<content contentuid="h1489c182g77f9g4398g8464g543d5568a8f6">The end of the Runic Cannon glimmers like a dazzling gem, powered by runic magic.&lt;br&gt;&lt;font color=&apos;#FF55C3&apos;&gt;Unequipping this requires detaching the safeties near your arm.&lt;/font&gt;</content>
@@ -214,7 +214,7 @@
 	<content contentuid="h1841b24ag5ceeg4c1dg9378g96f17f969d55">Leadslinger</content>
 	<content contentuid="h1841cca9g9763g4bcdga6c3g461fb52be390">Guardian of the Immortal</content>
 	<content contentuid="h18432982g0f03g4a9fgb5e9g09d41a7a70f8">A magical staff said to be able to extend to great lengths. Once wielded by a warrior of legend.</content>
-	<content contentuid="h18837538gae24g456bg91a1ged49be909078">Throw a poisen-tipped shuriken at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Poisoned&lt;/font&gt; for 2 turns.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
+	<content contentuid="h18837538gae24g456bg91a1ged49be909078">Throw a poisen-tipped shuriken at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Poisoned&lt;/font&gt; for 2 turns.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
 	<content contentuid="h189386bag49ebg4d15ga457g3e1fe7b053ab">Soldier&apos;s Rifle</content>
 	<content contentuid="h18949f78ga9ffg4525ga9cfg46d3eb68b15c">Open Mastery Menu</content>
 	<content contentuid="h18db5b3bg6b75g4ed1gab9ag309251d7d492">Immolation</content>
@@ -248,6 +248,7 @@
 	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its glory. Huzzah!</content>
 	<content contentuid="h1bd0f691g9646g4b28g932fg3ebd8377ca0e">Gain hyper-focus, increasing the &lt;font color=&apos;#33FF00&apos;&gt;damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%&lt;/font&gt;.</content>
 	<content contentuid="h1bdb5e07gf441g4020g9f25g6ea0457e71fe">Enhanced Demolition Bonus</content>
+	<content contentuid="h1bfbbfb7g6525g4016ga0f7g2268e5e3db06">Tactics</content>
 	<content contentuid="h1c1efec8g1da1g4353g82e5ge50841054af6">Throw the shrapnel charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge deals [1] in a [2] radius and applies Bleeding for 2 turns.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ec3030&apos;&gt;If targets hit are already bleeding, their wounds Rupture for [3].&lt;/font&gt;</content>
 	<content contentuid="h1c2e17dag8206g42begb070g3a98701d976b">Throw your mainhand shield at an enemy. The shield can ricochet up to 3 times within [1], dealing [2] damage and restoring [3] and [4] for each enemy hit.&lt;br&gt;The shield then returns, restoring an additional amount of armor.&lt;br&gt;&lt;font color=&apos;#FFD700&apos; size=&apos;18&apos;&gt;Shield Mastery I&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;If 3 targets are hit, restore [5] and [6] to allies within 8m.&lt;/font&gt;</content>
 	<content contentuid="h1c4fdef8g98d7g46e2g8cd5gcead0901a95b">Now you&apos;ll truly never miss your programs.</content>
@@ -329,7 +330,7 @@
 	<content contentuid="h22fb7041g1bfag49f8g9f8egfec10c7b11fa">Beginner</content>
 	<content contentuid="h22fef5f6g2151g4097gaed7g67297ccbfbc9">&lt;font color=&apos;#7f00ff&apos;&gt;Torment, Book of the Dead&lt;/font&gt; (Activated)</content>
 	<content contentuid="h232179b9g3a1fg4732ga4c3g1cd20f5dc912">Runeblade (Air)</content>
-	<content contentuid="h2338d7a1ged4eg44f1gbce1g30afe9499057">Throw a weapon at an enemy for [1].</content>
+	<content contentuid="h2338d7a1ged4eg44f1gbce1g30afe9499057">Throw a weapon at a target for [1].</content>
 	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43">[1][2][3]</content>
 	<content contentuid="h23b392d6g5b99g492bg9acfg485eb02b05a7">Crafted Glaive</content>
 	<content contentuid="h23b919e1gefb5g4b87g9429gaa5146a9ae0b">Character&apos;s wound has ruptured! Taking [1] initially and per turn.</content>
@@ -417,7 +418,7 @@
 	<content contentuid="h2ac6e71fgd744g4ab1g952eg3616a153d749">Makeshift Rod</content>
 	<content contentuid="h2ac9b716gbf99g412egb145ga12fd057d5a7">Elderguard, Wrath</content>
 	<content contentuid="h2aebc2eag3bbbg4f03gaa3cg63668ab9609e">&lt;font color=&apos;#C7A758&apos;&gt;Devil Hand&lt;/font&gt;</content>
-	<content contentuid="h2b4c15f8g00c6g4a50gbc9aga0f9b29f1116">Throw a bladed weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt; lowers AP Recovery/Start/Maximum by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, and does [4] per turn.</content>
+	<content contentuid="h2b4c15f8g00c6g4a50gbc9aga0f9b29f1116">Throw a bladed weapon at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Internal Damage&lt;/font&gt; lowers AP Recovery/Start/Maximum by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, and does [4] per turn.</content>
 	<content contentuid="h2b5342e4g614cg4e5egb5cfg6b2c3dd9d117">Poison Shuriken</content>
 	<content contentuid="h2b7342e8gaaf5g47ebg862bg0cda1ed1efda">Stone Rod</content>
 	<content contentuid="h2b7863d6g2faag4ee8gba71g90f217bf1d52">Rank 1</content>
@@ -427,7 +428,7 @@
 	<content contentuid="h2bda3229g17f3g4b04gb1c7g34464eceeb0e">War Charge</content>
 	<content contentuid="h2c2a74cag0023g4852g8856ga6d333132669">Thunderbolt Rune</content>
 	<content contentuid="h2c72dda9gf24ag4bd0ga890ge00f5af40eb0">Finesse Conversion</content>
-	<content contentuid="h2c7d2267gcd8fg4a99g88f3g55fbab743bc0">Throw a scythe at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Enemies below 5% max health will be &lt;font color=&apos;#FF00FF&apos;&gt;Reaped&lt;/font&gt;, resulting in instant-death.&lt;/font&gt;</content>
+	<content contentuid="h2c7d2267gcd8fg4a99g88f3g55fbab743bc0">Throw a scythe at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Enemies below 5% max health will be &lt;font color=&apos;#FF00FF&apos;&gt;Reaped&lt;/font&gt;, resulting in instant-death.&lt;/font&gt;</content>
 	<content contentuid="h2cb50244g8d38g4a87g8924gc01a4a02f19a">Weapon Expansion</content>
 	<content contentuid="h2cd9bce1gba34g4a4fgae35g13868c6adb5c">Tanto</content>
 	<content contentuid="h2d0e8796g1d66g4541g8ce3ged8f936c4129">*Tell the mercenary to stop following you.*</content>
@@ -438,7 +439,7 @@
 	<content contentuid="h2dcf53bbgced5g46eagbabdg54b3d617317a">Dusty Book</content>
 	<content contentuid="h2de49223g49a5g4bc5g9224g05413bb0a013">Disable Remote Charge Detonation Limit - *WARNING* - Disable at your own risk!</content>
 	<content contentuid="h2dfe07d4g1368g42b0g8d87gaf09bd403689">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery I&lt;/font&gt;</content>
-	<content contentuid="h2e4ae01dga602g44e9gbd2eg7fd388dcb6b0">Throw a blunt weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
+	<content contentuid="h2e4ae01dga602g44e9gbd2eg7fd388dcb6b0">Throw a blunt weapon at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
 	<content contentuid="h2e55bcbdg7ef2g4157gbf18g50fbc229cd17">Monk&apos;s Resolution</content>
 	<content contentuid="h2e562602g1cbbg4ba0gac36gcc780f8809e2">Tarred</content>
 	<content contentuid="h2e604607g818cg4c27gba6ag06f2d6e8f015">Water Burn</content>
@@ -538,7 +539,7 @@
 	<content contentuid="h389bb022gfad2g4520ga8b2gf1cc8c854026">Weighty Book</content>
 	<content contentuid="h38a97819g0b16g4ba9ga62eg3cedb395668b">Weapon Expansion - Equipment</content>
 	<content contentuid="h38b4fc09g14feg4992gb26cgd5cecc492de7">Speedy Quickdraw Quiver</content>
-	<content contentuid="h38e0877dg20d4g43a2ga956g936a3146eda8">Throw &lt;font color=&apos;#C7A758&apos;&gt;Balrin&apos;s Throwing Axe&lt;/font&gt; at an enemy for [1], with a &lt;font color=&apos;#F1D466&apos;&gt;[6]% damage bonus per 1m distance to the target&lt;/font&gt;.&lt;font color=&apos;#FF9600&apos;&gt;Lose your axe for 2 turns, or until you get within [4]m of the target and retrieve it, dealing [5].&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;If the target dies from initial damage, refresh the cooldown of this skill.&lt;/font&gt;&lt;br&gt;Targets hit are &lt;font color=&apos;#FF2121&apos;&gt;Impaled&lt;/font&gt; for 2 turns, lowering &lt;font color=&apos;#69FF75&apos;&gt;Movement Speed&lt;/font&gt; by &lt;font color=&apos;#FF2121&apos;&gt;[2]%&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Piercing Resistance&lt;/font&gt; by &lt;font color=&apos;#FF2121&apos;&gt;[3]%&lt;/font&gt;.</content>
+	<content contentuid="h38e0877dg20d4g43a2ga956g936a3146eda8">Throw &lt;font color=&apos;#C7A758&apos;&gt;Balrin&apos;s Throwing Axe&lt;/font&gt; at a target for [1], with a &lt;font color=&apos;#F1D466&apos;&gt;[6]% damage bonus per 1m distance to the target&lt;/font&gt;.&lt;font color=&apos;#FF9600&apos;&gt;Lose your axe for 2 turns, or until you get within [4]m of the target and retrieve it, dealing [5].&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;If the target dies from initial damage, refresh the cooldown of this skill.&lt;/font&gt;&lt;br&gt;Targets hit are &lt;font color=&apos;#FF2121&apos;&gt;Impaled&lt;/font&gt; for 2 turns, lowering &lt;font color=&apos;#69FF75&apos;&gt;Movement Speed&lt;/font&gt; by &lt;font color=&apos;#FF2121&apos;&gt;[2]%&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Piercing Resistance&lt;/font&gt; by &lt;font color=&apos;#FF2121&apos;&gt;[3]%&lt;/font&gt;.</content>
 	<content contentuid="h38f62f77g4d45g4ec1gb022g265f73c668e2">Threw Balrin&apos;s Throwing Axe</content>
 	<content contentuid="h390bd599g3b0bg4a72g8750gab8d78d92253">A large, weight axe.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h392b7852g3ad6g40c3gbae1g47467f5a36b6">Character has activated the &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 20% chance to be &lt;font color=&apos;#a8a8a8&apos;&gt;Slowed&lt;/font&gt; for 1 turn.</content>
@@ -551,7 +552,7 @@
 	<content contentuid="h39e9434egbc5cg4779gb319gd191db9914ce">Magical Glaive</content>
 	<content contentuid="h3a038f25gb458g4a60g99d6gc1d6ccc3c0e7">Enable Runic Cannon Offhand Weapon Restriction (Default) - Only shields/grimoires can be used in the shield slot.</content>
 	<content contentuid="h3a03ca92g8413g4632g8ca2g69b0f7b1cc53">The holiest of bibles, this is a sacred relic to the Divine Order of Lucian.&lt;br&gt;While a typical priest would use this book for sermons, a more apt warrior may put its size to good use as a bludgeoning weapon.</content>
-	<content contentuid="h3a48d368gf0f4g4b7agac88gf8888ea71945">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at an enemy for [1].&lt;br&gt;If &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&apos;s&lt;/font&gt; target is already &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt;, their wound will &lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt;, dealing [2] initially and per turn.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [3] additional enemies in a [4] radius.</content>
+	<content contentuid="h3a48d368gf0f4g4b7agac88gf8888ea71945">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at a target for [1].&lt;br&gt;If &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&apos;s&lt;/font&gt; target is already &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt;, their wound will &lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt;, dealing [2] initially and per turn.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [3] additional enemies in a [4] radius.</content>
 	<content contentuid="h3a5327c8g38bbg460fgb9c6gd0d50e54385d">Simple and clean. I broke my last record.</content>
 	<content contentuid="h3a72bd6cg4c6bg4488g9bf0gf15603907e4d">&lt;font color=&apos;#FEFFB3&apos;&gt;Rally&lt;/font&gt;</content>
 	<content contentuid="h3a77be5cgd727g4b23g83ebg8dd33ba995d3">Kevin (Nails)</content>
@@ -627,7 +628,7 @@
 	<content contentuid="h42f0c651g539fg4421gac51gd348b702763d">Common Greatbow</content>
 	<content contentuid="h43214f8cge37cg4950g9388gaaddd43d5590">&lt;font color=&apos;#FF23CB&apos;&gt;Chaos Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
 	<content contentuid="h4343971egf586g483bgba2ag7aebcba49c5e">Inert Runeblade</content>
-	<content contentuid="h4367cc22g9d4fg4c99ga1dfgc210f7915de3">Throw a chair weapon at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
+	<content contentuid="h4367cc22g9d4fg4c99ga1dfgc210f7915de3">Throw a chair weapon at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
 	<content contentuid="h439e053bgd9c6g4dd4gbca4ge54f85d29d22">Expert Bannerkeeper</content>
 	<content contentuid="h43a29acfgcc05g45beg9826g10ddaa1ac4f9">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost3]% extra base damage in total.</content>
 	<content contentuid="h43cc06a4g9bcdg44b6g88ffgfc91981571dc">Concussion</content>
@@ -646,7 +647,7 @@
 	<content contentuid="h453d9d53gcdfdg4674g819fgbc0de4196a21">Heed the rallying cry of the Standard-Bearer, teleporting to the raised banner.</content>
 	<content contentuid="h45457359gaa62g40f9gaa6bgd1996571cc40">Shield Prison</content>
 	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1">Polearm</content>
-	<content contentuid="h458c7bdag87d1g4eadg83cbg178234e050ce">Throw a wand at an enemy for [1] and apply &lt;font color=&apos;#FF0000&apos;&gt;Flabbergasted&lt;/font&gt;, with a small chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Flabbergasted&lt;/font&gt; lowers all Elemental Resistances &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF00FF&apos;&gt;When hit by a wand, it explodes, creating a random surface.&lt;/font&gt;</content>
+	<content contentuid="h458c7bdag87d1g4eadg83cbg178234e050ce">Throw a wand at a target for [1] and apply &lt;font color=&apos;#FF0000&apos;&gt;Flabbergasted&lt;/font&gt;, with a small chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Flabbergasted&lt;/font&gt; lowers all Elemental Resistances &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF00FF&apos;&gt;When hit by a wand, it explodes, creating a random surface.&lt;/font&gt;</content>
 	<content contentuid="h45a677d5g0b55g4d45ga42eg862f56d9602b">A rare set of dwarven gloves, said to grant the bearer enourmous strength.</content>
 	<content contentuid="h45c35594ga4efg4923g87b2g351240d83b96">Slayer&apos;s Greatbow</content>
 	<content contentuid="h46549881g092ag4c08ga301g9e043ee34d80">Character is unsteady, and has a chance to fall when moving.</content>
@@ -806,7 +807,7 @@
 	<content contentuid="h57e57a5cge010g47bdgb9adg632266ea2ad2">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Melee attacks restore Vitality to allies within [1]m.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="h57f6c5dcg34d5g4144g8e78g0bd2d0d164f6">&lt;font color=&apos;#AA895B&apos;&gt;Flask of Earth Weakness&lt;/font&gt;</content>
 	<content contentuid="h57fe3569g0a44g4321g98b5g9aec8d3d24a9">Air Rune</content>
-	<content contentuid="h580f2857g0a22g417cg80begc399154191cc">Allow remote changes to detonate without restriction, meaning you can blow up everything in an inventory at once.</content>
+	<content contentuid="h580f2857g0a22g417cg80begc399154191cc">Restrict the total number of remote changes that can detonate at once. If disabled, you can blow up everything in an inventory at once (not recommended for balance).</content>
 	<content contentuid="h583510a1gf1feg4755g9a22g0a897d282baf">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery I&lt;/font&gt;</content>
 	<content contentuid="h58a35a15gc595g4dcdga354ga8348f3add50">Eviscerating Estoc</content>
 	<content contentuid="h58ada9c4g3932g43f3g9f2dg4972e1dfad4b">Electric Bullets</content>
@@ -848,7 +849,7 @@
 	<content contentuid="h5bdbc3d4g61d0g452ag87d5ga13d9e8ad68a">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to activate that element within their blade for a limited time.</content>
 	<content contentuid="h5c14442bg1c7bg400cgbb84gac21bec6aa04">a Quarterstaff</content>
 	<content contentuid="h5c1b46f9gc7bdg4a81gad39g740f78f3360a">Shoot Rod</content>
-	<content contentuid="h5c237b8ag5bf3g42c4gb5e7g0f4daaae915c">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at an enemy for [1].&lt;br&gt;If &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&apos;s&lt;/font&gt; target is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, mini-explosions will occur, hitting enemies for [2] in a [3] radius.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [4] additional enemies in a [5] radius.</content>
+	<content contentuid="h5c237b8ag5bf3g42c4gb5e7g0f4daaae915c">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at a target for [1].&lt;br&gt;If &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&apos;s&lt;/font&gt; target is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, mini-explosions will occur, hitting enemies for [2] in a [3] radius.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [4] additional enemies in a [5] radius.</content>
 	<content contentuid="h5c350cdcg74d3g4803gb026ge7eba5ae0e32">Wall of Chaos, Evil&apos;s Reign</content>
 	<content contentuid="h5c5acb1cg685dg485dgb946g3adff577f871">Deadly Halberd</content>
 	<content contentuid="h5c65b248g0e76g41a5gb068gb4c884703c5b">Blademaster&apos;s Strike 7</content>
@@ -1078,7 +1079,7 @@
 	<content contentuid="h74b5ad8fga523g41b7g9487ga9267d843e0b">Trusty Rifle</content>
 	<content contentuid="h74c569f8g2eadg4d48g9437g13375158a532">Knocked Down (Magic)</content>
 	<content contentuid="h74dcf0dag97edg4529g87d2gf67fc14fdf2d">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery V&lt;/font&gt;</content>
-	<content contentuid="h74f4ac59gf13ag470bga79cg83fa8dfabd0a">Throw a staff at an enemy for [1] and apply &lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt; lowers all Elemental Resistances &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF00FF&apos;&gt;When hit by a staff, it explodes with a random element.&lt;/font&gt;</content>
+	<content contentuid="h74f4ac59gf13ag470bga79cg83fa8dfabd0a">Throw a staff at a target for [1] and apply &lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt; lowers all Elemental Resistances &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF00FF&apos;&gt;When hit by a staff, it explodes with a random element.&lt;/font&gt;</content>
 	<content contentuid="h75169d2cg498dg4241gbc66g600953a95398">Rally the party at the target location.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;Party members are granted a one-time use skill that teleports them to the raised banner.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#99FFFF&apos;&gt;The banner inspires faith in the Divine, granting a +[1] boost to attributes, a +[2]% boost to dodge, and a +[3]% boost to damage.&lt;/font&gt;</content>
 	<content contentuid="h75268a77g2c50g42d3ga0f0ga5c4b25b55e6">Reset Balrin&apos;s Throwing Axe - Use this if your axe never came back.</content>
 	<content contentuid="h7547e220gcc49g448dg9b07gcee33764d303">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery IV&lt;/font&gt;</content>
@@ -1238,7 +1239,7 @@
 	<content contentuid="h857bd98agd795g43dcg91d9g000c6dcc40d0">a Firearm</content>
 	<content contentuid="h85ba1d14g532dg4a0cg9a29gf1980a445150">Character is inspired by the &lt;font color=&apos;#c5a65a&apos;&gt;Banner of Unruly Faith&lt;/font&gt;. How glorious!</content>
 	<content contentuid="h85f505c1g7212g4796g938egfb59ea9a93dd">Trusty Quiver</content>
-	<content contentuid="h85f7e46dg1c33g4e85ga475g25a970c2e696">Throw a shield at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy unconscious.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
+	<content contentuid="h85f7e46dg1c33g4e85ga475g25a970c2e696">Throw a shield at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy unconscious.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
 	<content contentuid="h860e2aa9ge90cg4c70g89adge2bc761bba08">A strange token.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Combine this with specific unique weapons to change their scaling attribute.&lt;/font&gt;</content>
 	<content contentuid="h864d81c7g8addg4ac3g91c4gff1d1c317f19">Magical Rod Of Nature</content>
 	<content contentuid="h86591e8cg57ceg4992g98c7g56d4f2ef8bef">Soldier&apos;s Katana</content>
@@ -1354,6 +1355,7 @@
 	<content contentuid="h91df6fefg6cb4g4f27ga116g992a6a2e4774">Inspiration</content>
 	<content contentuid="h91f3bf0cgf45eg4b35ga80dg3bae0b7a5e06">&lt;font color=&apos;#FF0000&apos;&gt;No Rune Combination Exists in Memory&lt;/font&gt;</content>
 	<content contentuid="h91f9839bg6559g4bf5ga9d8g0ee6790f9896">The &lt;font color=&apos;#F7BE81&apos;&gt;Dust Rune&lt;/font&gt; is cooling down, and is unable to trigger another &lt;font color=&apos;#8A4B08&apos;&gt;Dust Blast&lt;/font&gt;.</content>
+	<content contentuid="h9234fbabgf1cdg4d9dgae64g81c7b5576da8">Detonate remote charges in a [1] radius.&lt;br&gt;&lt;font color=&apos;#188EDE&apos;&gt;Can target mines in the world, or an object holding mines.&lt;/font&gt;</content>
 	<content contentuid="h924c15e9gb9c8g441fg9397g9d870f86dd9b">Makeshift Chaotic Rod</content>
 	<content contentuid="h926a3433gfd61g4d2dg9e82g338902b1340e">Monk&apos;s Quarterstaff</content>
 	<content contentuid="h92ae06feg133fg4bc9g8e07gcafd7778207f">&lt;font color=&apos;#00FF7F&apos;&gt;Greatbow Mastery I&lt;/font&gt;</content>
@@ -1400,7 +1402,7 @@
 	<content contentuid="h97922a29g735bg4d3ag8832g7cd2022f7e27">Shield Prison</content>
 	<content contentuid="h979e3a93g84a4g434cg8320gb5eb3931bee0">War Charge</content>
 	<content contentuid="h97b3c037gcb0dg410egb778g6cca738d33f3">Death&apos;s Edge</content>
-	<content contentuid="h97c8f9a5g8aa0g49f2g9815g538cba0b8405">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at an enemy for [1].&lt;br&gt;If &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&apos;s&lt;/font&gt; target is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, mini-explosions will occur, hitting enemies for [2] in a [3] radius.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [4] additional enemies in a [5] radius.</content>
+	<content contentuid="h97c8f9a5g8aa0g49f2g9815g538cba0b8405">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at a target for [1].&lt;br&gt;If &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&apos;s&lt;/font&gt; target is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, mini-explosions will occur, hitting enemies for [2] in a [3] radius.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [4] additional enemies in a [5] radius.</content>
 	<content contentuid="h98038fd1ga171g44d8g8051g4b814fe74314">Water Spout Skillbook</content>
 	<content contentuid="h9826a174g86bag4ed5g8467g7e6ca4a500c2">Journeyman Staff Monk</content>
 	<content contentuid="h9830eac8g629eg4a9egac51g0e839dd67d54">Rallying Banner</content>
@@ -1742,6 +1744,7 @@
 	<content contentuid="hbe92489bgf77dg4af5g9cfbg2c05c28c5535">Banner Protection</content>
 	<content contentuid="hbecd7d55g85f8g4716g9346g15ff17837431">Ice Rune</content>
 	<content contentuid="hbed06604gcd54g4416gbeaegd171f8e78a77">Iron Will, Lion&apos;s Courage</content>
+	<content contentuid="hbefa3efagfeb1g4073g83feg213f15681c0f">Pistol Damage Boost Activated</content>
 	<content contentuid="hbf040bedgcb96g4c92ga4abg510ff2d22b2a">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to &lt;font color=&apos;#9a38ff&apos;&gt;Dizzying Smash&lt;/font&gt; that deals [1] and pushes the target back 3m.&lt;br&gt;If the target is Knocked Down, enemies they collide with have a chance to be knocked down, and both they and the target take [2] per collision.&lt;br&gt;&lt;font color=&apos;#44FF03&apos;&gt;On hit, refreshes the cooldown for Sucker Punch.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
 	<content contentuid="hbf199083gc108g4e76g9206g62938beeb989">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in a dark, etheral energy that deals shadow damage.</content>
 	<content contentuid="hbf253b8bg47b8g4c03g80a7g230269c0ad4b">Enhanced Demolition</content>
@@ -1904,7 +1907,7 @@
 	<content contentuid="hd17c52d6g4c33g481fga4bag25941adbd51f">Heartpiercer</content>
 	<content contentuid="hd1858204gc63dg4fd4g97fcg884c7e3f6081">a Melee Weapon</content>
 	<content contentuid="hd1b72f00g5ea9g4aabg9c95g3aab8513082b">Pistol Ammo</content>
-	<content contentuid="hd1babc39g64eag4b4ag9127g182678705d17">Throw a stone at an enemy for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.</content>
+	<content contentuid="hd1babc39g64eag4b4ag9127g182678705d17">Throw a stone at a target for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.</content>
 	<content contentuid="hd1f5b5b8gbb67g4aa9ga1e5g46848566d29f">Earth Rune</content>
 	<content contentuid="hd1f993bag9dadg49cbga5edgb92880c38e46">Odachi</content>
 	<content contentuid="hd21a6fa4g7a9eg4cc0gb127g1ae07e801c4a">Novice</content>
@@ -1942,7 +1945,7 @@
 	<content contentuid="hd5ac1dc5g2e52g4343gba96g1a4ce724b154">[Exit]</content>
 	<content contentuid="hd5d27d87gc0b2g4dbcgb490gb2bebcf1c248">Armor Increase - Increases physical armor by [1] and magic armor by [2]</content>
 	<content contentuid="hd5ef97f9gfdeeg4750ga076g2e3643758480">Kevin (Normal)</content>
-	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a">Charges Depleted&amp;lt;br&amp;gt;</content>
+	<content contentuid="hd5f94f7eg6557g45cdg835ege011e66a3a3a">Charges Depleted</content>
 	<content contentuid="hd61320b6ge4e6g4f51g8841g132159d6b282">Polearm</content>
 	<content contentuid="hd627d524gfb28g4fe1g9139gab79c7605691">Reinforced Halberd</content>
 	<content contentuid="hd65b7915g09dfg4cb6gacfagea168fce9614">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
@@ -2052,6 +2055,7 @@
 	<content contentuid="he301a2cag4ac9g4a73gba19g0449b7366d23">Master of Firearms</content>
 	<content contentuid="he30d8120g13e1g4261g853cgdce0c96a00da">Journeyman Bookkeeper</content>
 	<content contentuid="he30fb376g9cf7g4a1bga23ag0e1a8fdd3726">Threw Balrin&apos;s Throwing Axe</content>
+	<content contentuid="he3183667gd912g4492g833fgadb200ea2dd7">Make the [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] Automatically Recharge</content>
 	<content contentuid="he387afe8gc7ecg40beg8ffbg3206cb34c665">&lt;font color=&apos;#FFD700&apos;&gt;Dragon&apos;s Bane&lt;/font&gt;</content>
 	<content contentuid="he39536b3g0aaag4fe9g9dd2g444dff2e1b7b">Dancing Steel</content>
 	<content contentuid="he40e57f8g77eeg4675gb9c1g7f0994012fea">If knowledge is power, a book can conquer the world.</content>
@@ -2062,7 +2066,7 @@
 	<content contentuid="he4501b79g40a4g496aga99ag8510af90d294">Forestguard, Elderwall</content>
 	<content contentuid="he467f39fg8b65g4136g828fg949f9f3aef15">Katana</content>
 	<content contentuid="he478deedg980eg4c61gaacdga2cfc8b63b8a">Each hit cleaves up to [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Range]m away in a [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Angle] degree cone, dealing [SkillDamage:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave].</content>
-	<content contentuid="he47cdb34ge958g41cag8136gb8827dc2f586">Throw an exploding shuriken at an enemy for [1] in a [2] radius. Applies &lt;font color=&apos;#FF0000&apos;&gt;Burning&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
+	<content contentuid="he47cdb34ge958g41cag8136gb8827dc2f586">Throw an exploding shuriken at a target for [1] in a [2] radius. Applies &lt;font color=&apos;#FF0000&apos;&gt;Burning&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
 	<content contentuid="he49060f5g395eg4d83g8b0dg9aa36eda8973">Kevin (Normal)</content>
 	<content contentuid="he4dff8beg2f51g4229g979fg165d2c08026f">&lt;font color=&apos;#AA11CC&apos;&gt;Scythe Mastery I&lt;/font&gt;</content>
 	<content contentuid="he51066e9g8497g4177gaf63g46856ce53329">&lt;font color=&apos;#0e7700&apos;&gt;Rapier Mastery&lt;/font&gt;&lt;br&gt;Gain temporary follow-up skills when using Sucker Punch. Sucker Punch&apos;s knockdown duration is increased by 1.</content>
@@ -2113,7 +2117,7 @@
 	<content contentuid="heb957fedgf165g4017ga0b9ge71f7038a453">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery III&lt;/font&gt;</content>
 	<content contentuid="hebb079bbg7dd3g4dd4gb8c7g73cb83f621d5">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are like mini-grenades, exploding with fire damage on hit.</content>
 	<content contentuid="hebda15e3gb225g4115ga087g542707bf4c87">Finisher</content>
-	<content contentuid="hebe5befbg02b4g48d5gae1dg8355d0a40e48">Throw a shuriken at an enemy for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
+	<content contentuid="hebe5befbg02b4g48d5gae1dg8355d0a40e48">Throw a shuriken at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
 	<content contentuid="hec14d043g3a08g443bg8f3dg7c00ca41b340">Duelist Stance</content>
 	<content contentuid="hec1ea95bg0743g4df6g804cg909b14dc4881">Battleworn Halberd</content>
 	<content contentuid="hec77e9cagab3ag4750g8994g186dcea14ef1">Balrin&apos;s Throwing Axe (Normal)</content>
@@ -2151,7 +2155,7 @@
 	<content contentuid="hf005d1f7g1496g4a33g91fag3c1b85faecdb">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
 	<content contentuid="hf010c20dg262cg4c78g9facgbc982c680aee">Novice</content>
 	<content contentuid="hf01d79b0g4b08g482ag91f9g64e6523b775d">Character has activated the &lt;font color=&apos;#b823cb&apos;&gt;Death Rune&lt;/font&gt; from absorbing &lt;font color=&apos;#2EFE9A&apos;&gt;Deathfog&lt;/font&gt;.&lt;br&gt;Enemies hit with a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt; are marked with &lt;font color=&apos;#2EFE9A&apos;&gt;Death Sentence&lt;/font&gt; for 1 turn, and cannot be marked again for 4 turns.&lt;br&gt;When an enemy with &lt;font color=&apos;#2EFE9A&apos;&gt;Death Sentence&lt;/font&gt; dies, they return as a friendly &lt;font color=&apos;#73f6ff&apos;&gt;Revenant&lt;font&gt; for 2 turns.&lt;br&gt;&lt;font color=&apos;#73f6ff&apos;&gt;Revenants&lt;font&gt; do 50% less damage, and cannot be created from bosses.&lt;/font&gt;</content>
-	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69">Charges Depleted&amp;lt;br&amp;gt;</content>
+	<content contentuid="hf0293ca3g9022g4181gb4beg5f614e846c69">Charges Depleted</content>
 	<content contentuid="hf0348094g4ff3g447fg829cg980f497e24c2">&lt;font color=&apos;#FF23CB&apos;&gt;Cursed Mini-Bolts&lt;/font&gt;</content>
 	<content contentuid="hf03d8badg12b0g487aga5b4ge0fa05388fde">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to activate that element within their blade for a limited time.</content>
 	<content contentuid="hf03f9f98g4012g4eb2g9e7cg1e2e6c161693">Weighty Book</content>

@@ -1,19 +1,20 @@
-Key	Content
-Projectile_LLWEAPONEX_RemoteMine_Explosion_DisplayName	Detonated Remote Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_Description	Throw the breach charge at a target position.<br><font color='#ff5a11'>Detonating this charge breaks locks up to level 10 in a [1] radius, and knocking back objects within [2].</font>
-Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_DisplayName	Throw Breach Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_Description	Throw the displacement charge at a target position.<br><font color='#ff5a11'>Detonating this charge randomly teleports characters and barrels within [1] to another displacement charge within 12m.</font>
-Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_DisplayName	Throw Displacement Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_DisplayName	Throw Remote Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive_Description	Throw the remote charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius.</font>
-Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive_DisplayName	Throw Remote Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonCloud_Description	Throw the poison gas charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius and creates a poison cloud.</font>
-Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonCloud_DisplayName	Throw Poison Gas Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel_Description	Throw the shrapnel charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius and applies Bleeding for 2 turns.</font><br><font color='#ec3030'>If targets hit are already bleeding, their wounds Rupture for [3].</font>
-Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel_DisplayName	Throw Shrapnel Charge
-Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_Description	Throw the tar charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius, turns water into oil, and applies Tarred for 2 turns.</font><br><font color='#ff7031'>Tarred reduces Fire Resistance, Movement Speed, and lets Burning bypass Magic Armor.</font>
-Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_DisplayName	Throw Tar Charge
-Shout_LLWEAPONEX_RemoteMine_Add_Description	Retrieve a random remote charge from the <font color='#C7A758'>Demolitionist's Backpack</font>.
-Shout_LLWEAPONEX_RemoteMine_Add_DisplayName	Retrieve Remote Charge
-Target_LLWEAPONEX_RemoteMine_Detonate_Description	Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.<br>Only 5 mines max can be detonated in an inventory.</font>
-Target_LLWEAPONEX_RemoteMine_Detonate_DisplayName	Detonate Remote Charge
+Key	Content	Handle
+Projectile_LLWEAPONEX_RemoteMine_Explosion_DisplayName	Detonated Remote Charge	h1ca9680dg1c14g41b4ga6efg14cb9e8cd106
+Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_Description	Throw the breach charge at a target position.<br><font color='#ff5a11'>Detonating this charge breaks locks up to level 10 in a [1] radius, and knocking back objects within [2].</font>	hc40e13abge322g44d1g9fc4gf13b7ea652d2
+Projectile_LLWEAPONEX_RemoteMine_Throw_Breach_DisplayName	Throw Breach Charge	h68318a8fgde5dg4055gabb8g3b0c8df8c202
+Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_Description	Throw the displacement charge at a target position.<br><font color='#ff5a11'>Detonating this charge randomly teleports characters and barrels within [1] to another displacement charge within 12m.</font>	h1d58a9e2gf439g4e3eg8f25g8e849ea7a6d5
+Projectile_LLWEAPONEX_RemoteMine_Throw_Displacement_DisplayName	Throw Displacement Charge	h10f14d81ga145g468ag892fg8392908c6a4f
+Projectile_LLWEAPONEX_RemoteMine_Throw_DisplayName	Throw Remote Charge	h512652d3gde9fg4c21ga542g84ba504ac1ba
+Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive_Description	Throw the remote charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius.</font>	h9ecc7cdbgfeebg4500g8e0bgcbbf39653af4
+Projectile_LLWEAPONEX_RemoteMine_Throw_Explosive_DisplayName	Throw Remote Charge	hc0797ac0g427fg415cgb1a6gfca18c3261e1
+Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonCloud_Description	Throw the poison gas charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius and creates a poison cloud.</font>	h5cee9974gbd8eg48cfg8db7ga5a2a06c3a70
+Projectile_LLWEAPONEX_RemoteMine_Throw_PoisonCloud_DisplayName	Throw Poison Gas Charge	hfb07e83dg1d37g4d1ega2d7g869c8fdeab17
+Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel_Description	Throw the shrapnel charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius and applies Bleeding for 2 turns.</font><br><font color='#ec3030'>If targets hit are already bleeding, their wounds Rupture for [3].</font>	h1c1efec8g1da1g4353g82e5ge50841054af6
+Projectile_LLWEAPONEX_RemoteMine_Throw_Shrapnel_DisplayName	Throw Shrapnel Charge	h27d3b05cg0dcbg4334g90b4gca709b318406
+Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_Description	Throw the tar charge at a target position.<br><font color='#ff5a11'>Detonating this charge deals [1] in a [2] radius, turns water into oil, and applies Tarred for 2 turns.</font><br><font color='#ff7031'>Tarred reduces Fire Resistance, Movement Speed, and lets Burning bypass Magic Armor.</font>	h9344c978g53abg4b0bgaf48ga9c02d14ae06
+Projectile_LLWEAPONEX_RemoteMine_Throw_Tar_DisplayName	Throw Tar Charge	hcbbecaf8g3693g4395gbc22gcd92ba552044
+Shout_LLWEAPONEX_RemoteMine_Add_Description	Retrieve a random remote charge from the <font color='#C7A758'>Demolitionist's Backpack</font>.	h2a8b8d8cg21f8g49e1gaafbgfa9297bb4ba1
+Shout_LLWEAPONEX_RemoteMine_Add_DisplayName	Retrieve Remote Charge	ha4dae9eege663g4884g8fa1gf68ee0953d51
+Target_LLWEAPONEX_RemoteMine_Detonate_Description	Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.<br>Only 5 mines max can be detonated in an inventory.</font>	h7e623ea0g8955g471bgbe88gf0d7cc883dd2
+Target_LLWEAPONEX_RemoteMine_Detonate_DisplayName	Detonate Remote Charge	h89fe68aag3e7dg4cebg9fe6ge68e63616cef
+Target_LLWEAPONEX_RemoteMine_Detonate_NoRestriction_Description	Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.</font>	h9234fbabgf1cdg4d9dgae64g81c7b5576da8
