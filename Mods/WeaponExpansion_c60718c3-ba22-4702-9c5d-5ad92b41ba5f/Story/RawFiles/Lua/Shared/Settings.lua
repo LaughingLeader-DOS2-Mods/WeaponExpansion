@@ -8,6 +8,7 @@ return function()
 		"LLWEAPONEX_NoArmCannonRestrictions",
 		"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
 		"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
+		"LLWEAPONEX_ThrowObjectLimitDisabled",
 	})
 	settings.Global:AddLocalizedFlag("LLWEAPONEX_AutoUnlockRecipesDisabled", "User", false, nil, nil, false)
 

@@ -266,7 +266,7 @@ ACTIONS
 		IsGreaterThen(_Strength, 40)
 		IsGreaterThen(_Weight, 0.0)
 		IsTagged(_Source, "LLWEAPONEX_ThrowingAbility_Mastery4")
-		HasGlobalFlag("WeaponExpansion_Settings_ThrowObject_NoLimit")
+		HasGlobalFlag("LLWEAPONEX_ThrowObjectLimitDisabled")
 	THEN
 		CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
 	ELSE
@@ -323,7 +323,7 @@ ACTIONS
 		IsGreaterThen(_Strength, 40)
 		IsGreaterThen(_Weight, 0.0)
 		IsTagged(_Source, "LLWEAPONEX_ThrowingAbility_Mastery4")
-		HasGlobalFlag("WeaponExpansion_Settings_ThrowObject_NoLimit")
+		HasGlobalFlag("LLWEAPONEX_ThrowObjectLimitDisabled")
 	THEN
 		CharacterItemEvent(_Source, _Target, "LLWEAPONEX_ThrowObject_CanThrowObject")
 	ELSE

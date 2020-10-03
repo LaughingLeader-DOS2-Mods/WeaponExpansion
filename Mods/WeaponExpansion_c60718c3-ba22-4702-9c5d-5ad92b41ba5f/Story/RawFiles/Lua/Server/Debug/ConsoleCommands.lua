@@ -30,6 +30,8 @@ end)
 Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
 	local host = CharacterGetHostCharacter()
 	for i,v in pairs(Uniques) do
-		v:Transfer(host)
+		if v.Owner == nil then
+			v:Transfer(host)
+		end
 	end
 end)

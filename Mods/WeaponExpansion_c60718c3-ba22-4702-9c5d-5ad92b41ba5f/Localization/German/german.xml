@@ -1283,6 +1283,7 @@
 	<content contentuid="h8ae1e87bg6b1cg4ec1g8a20gd506b45bb394">Dwarvenguard, Wolfbane</content>
 	<content contentuid="h8b0389dbge818g421egb679g3b1c28fd7a5e">Worn Quarterstaff</content>
 	<content contentuid="h8b079720gd454g4ecdgaa70g18cf5b9aea5d">Character has been hit by a Blademaster&apos;s strike 5 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
+	<content contentuid="h8b499dd6g523fg40e2ga746g4adf2a1f63fb">Enable [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] Limit</content>
 	<content contentuid="h8b5cc97egfa7dg473agbf3fg7da2103c6362">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8b5ec746gb51eg4838gbec4g8562c30aa6e0">Character is inflicted with a curse, and will spread the curse in a [1] radius when dead.</content>
 	<content contentuid="h8b6c83f4g846bg4295g9749g61d616541046">[Previous] *Look at the previous set of buttons.*</content>
@@ -2278,6 +2279,7 @@
 	<content contentuid="hfbf99a12gb134g49eag8407g4b444c78bf0d">A scholar&apos;s dearest weapon. Beat them down with &lt;i&gt;KNOWLEDGE!&lt;/i&gt;</content>
 	<content contentuid="hfc34de68gbdadg49acga2d8g7b2e8a2ace9d">Throwing Axe</content>
 	<content contentuid="hfc3aff25gc784g4108gb393g5a346f5b212a">Tarred</content>
+	<content contentuid="hfc4163a2g4e16g4de9gb991g4e92e7d6b438">Enable the weight limit on [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] (Recommended). If enabled, you can only throw heavy characters if you have 40 Strength or Rank 4 Throwing Mastery.</content>
 	<content contentuid="hfc5bd7d3g7aa4g4bc4g8992gbe28f32ff443">Oakenguard, Thunder&apos;s Bane</content>
 	<content contentuid="hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e">&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#00FFAA&apos; size=&apos;16&apos;&gt;Ammo Type: [1]&lt;/font&gt;</content>
 	<content contentuid="hfc83703fg0120g40e9gb08ag1185eb332c94">Agni Ignus</content>
