@@ -23,5 +23,5 @@ LLWEAPONEX_UI_TwoHandedKatana	Odachi	hd1f993bag9dadg49cbga5edgb92880c38e46
 LLWEAPONEX_UI_ThiefGloveChanceEnhancement	+[1]% chance from [2]	h1fce3bfeg41a6g41adgbc5bg03d39281b469
 LLWEAPONEX_UI_SpecialRuneDamageTypeText	<font color='#FFD900'>Changes [1] damage to [2].</font>	hff86de07g52e5g491cga553g90bb501e6f52
 LLWEAPONEX_UI_RuneOnHitTagText	Amplifies Shoot Skill	h3ee45020g2bb3g45c0ga195gc7282c87e628
-LLWEAPONEX_UI_RunicCannonEnergy	<font color='#33FFAA'>Runic Energy</font>	h02882207g5e7bg4deaga22eg854b68f8dd29
+LLWEAPONEX_UI_RunicCannonEnergy	<font color='#33FFAA'>Runic Energy [1]/[2]</font>	h02882207g5e7bg4deaga22eg854b68f8dd29
 LLWEAPONEX_Mod_DisplayName	Weapon Expansion	h2cb50244g8d38g4a87g8924gc01a4a02f19a

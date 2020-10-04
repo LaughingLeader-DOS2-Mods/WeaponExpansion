@@ -6,27 +6,28 @@ local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
 
 local printd = LeaderLib.PrintDebug
 
-function OpenMasteryMenu_Start(uuid)
+function OpenMasteryMenu_Start(uuid, id)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
 	local masteries = {}
-	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, nil, nil, nil)
-	--print(LeaderLib.Common.Dump(dbEntry))
-	if dbEntry ~= nil then
-		for i,entry in pairs(dbEntry) do
-			local mastery = entry[2]
-			local rank = entry[3]
-			local xp = entry[4]
-			masteries[mastery] = CharacterMasteryDataEntry:Create(xp,rank)
-		end
+
+	for i,db in pairs(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, nil, nil, nil)) do
+		local char,mastery,rank,xp = table.unpack(db)
+		masteries[mastery] = CharacterMasteryDataEntry:Create(xp,rank)
 	end
+	--print(LeaderLib.Common.Dump(masteries))
 
 	---@type CharacterMasteryData
 	local data = CharacterMasteryData:Create(uuid, masteries)
-	Ext.PostMessageToClient(uuid, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
+	if id ~= nil then
+		Ext.PostMessageToUser(id, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
+	else
+		Ext.PostMessageToClient(uuid, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
+	end
 end
 
-local function RequestOpenMasteryMenu(call, uuid)
-	printd(call, uuid)
+local function RequestOpenMasteryMenu(call, payload)
+	local data = Ext.JsonParse(payload)
+	local uuid = StringHelpers.GetUUID(data.UUID)
 	if uuid ~= nil then
 		if CharacterIsSummon(uuid) == 1 then
 			if CharacterIsControlled(uuid) == 1 then
@@ -41,7 +42,7 @@ local function RequestOpenMasteryMenu(call, uuid)
 				CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
 			end
 		elseif IsPlayer(uuid) then
-			OpenMasteryMenu_Start(uuid)
+			OpenMasteryMenu_Start(uuid, data.ID)
 		end
 	end
 end

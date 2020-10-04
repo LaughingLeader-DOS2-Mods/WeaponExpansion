@@ -1360,7 +1360,7 @@ object category "LLWEAPONEX_Flask_Empty",1,0,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_SmugglersBag_AssassinLoot"
 IgnoreLevelDiff 1
 new subtable "-1"
-object category "I_ARM_LLWEAPONEX_HandCrossbow_A_Crafted",1,0,0,1,0,0,0,0
+object category "I_ARM_LLWEAPONEX_HandCrossbow_A_Crafted",1,0,1,0,0,0,0,0
 new subtable "-1"
 object category "I_LOOT_Drudanae_Pipe",1,1,0,0,0,0,0,0
 new subtable "-1"
@@ -1369,7 +1369,7 @@ object category "I_FOOD_Apple_Poisoned",1,1,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_SmugglersBag_PirateLoot"
 IgnoreLevelDiff 1
 new subtable "-1"
-object category "I_ARM_LLWEAPONEX_Pistol_A_Crafted",1,0,0,1,0,0,0,0
+object category "I_ARM_LLWEAPONEX_Pistol_A_Crafted",1,0,1,0,0,0,0,0
 new subtable "-1"
 object category "I_CON_Drink_Bottle_Beer_A",1,1,0,0,0,0,0,0
 new subtable "-1"
@@ -1380,7 +1380,7 @@ object category "Precious",1,1,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_SmugglersBag_MarauderLoot"
 IgnoreLevelDiff 1
 new subtable "-1"
-object category "I_ARM_LLWEAPONEX_Pistol_A_Crafted",1,1,0,0,0,0,0,0
+object category "I_ARM_LLWEAPONEX_Pistol_A_Crafted",1,0,1,0,0,0,0,0
 new subtable "-1"
 object category "IngredientSwamps",1,1,0,0,0,0,0,0
 new subtable "-1"

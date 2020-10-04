@@ -10,12 +10,20 @@ end
 
 if Ext.IsClient() then
 	Ext.RegisterNetListener("LLWEAPONEX_SyncData", function(cmd, payload)
-		if PersistentVars == nil then PersistentVars = {} end
+		if PersistentVars == nil then
+			PersistentVars = {
+				SkillData = {
+					DarkFireballCount = {},
+					RunicCannonCharges = {}
+				},
+				MasteryMechanics = {},
+			}
+		end
 		PersistentVars.SkillData = Ext.JsonParse(payload)
-		if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION then
+		if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Client.Character.IsInCharacterCreation then
 			MasteryMenu.SetToggleButtonVisibility(false, false)
 		elseif SharedData.RegionData.LevelType == LEVELTYPE.GAME then
-			MasteryMenu.SetToggleButtonVisibility(true, true)
+			MasteryMenu.SetToggleButtonVisibility(true, false)
 		end
 	end)
 end

@@ -1,7 +1,7 @@
 ---@type LeaderLibLocalizedText
 local LocalizedText = LeaderLib.LocalizedText
 ---@type TranslatedString
-local TranslatedString = LeaderLib.Classes.TranslatedString
+local ts = LeaderLib.Classes.TranslatedString
 
 local TagDisplay = {
 	LLWEAPONEX_ThiefGloves_Equipped = true
@@ -83,35 +83,36 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 	end
 end
 
-local LLWEAPONEX_HandCrossbow = TranslatedString:Create("hd8d02aa1g5c35g48b5gbde6ga76293ef2798", "Hand Crossbow")
-local LLWEAPONEX_Pistol = TranslatedString:Create("h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c", "Pistol")
-local LLWEAPONEX_Unarmed = TranslatedString:Create("h1e98bcebg2e42g4699gba2bg6f647d428699", "Unarmed")
-local LLWEAPONEX_UnarmedWeapon = TranslatedString:Create("h4eb213a7g4793g4007g95c6gbaf47584f29d", "Unarmed Weapon[1]")
-local GlovesSlot = TranslatedString:Create("h185545eagdaf0g4286ga411gd50cbdcabc8b", "Gloves")
-local TwoHandedText = TranslatedString:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Handed")
+local LLWEAPONEX_HandCrossbow = ts:Create("hd8d02aa1g5c35g48b5gbde6ga76293ef2798", "Hand Crossbow")
+local LLWEAPONEX_Pistol = ts:Create("h9ead3ee9g63e6g4fdbg987dg87f8c9f5220c", "Pistol")
+local LLWEAPONEX_Unarmed = ts:Create("h1e98bcebg2e42g4699gba2bg6f647d428699", "Unarmed")
+local LLWEAPONEX_UnarmedWeapon = ts:Create("h4eb213a7g4793g4007g95c6gbaf47584f29d", "Unarmed Weapon[1]")
+local GlovesSlot = ts:Create("h185545eagdaf0g4286ga411gd50cbdcabc8b", "Gloves")
+local TwoHandedText = ts:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Handed")
 
 ---@class WeaponTypeNameEntry
 ---@field Tag string
----@field Text TranslatedString
----@field TwoHandedText TranslatedString|nil
+---@field Text ts
+---@field TwoHandedText ts|nil
 
 ---@type WeaponTypeNameEntry[]
 local WeaponTypeNames = {
-	{Tag="LLWEAPONEX_Banner", Text=TranslatedString:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
-	{Tag="LLWEAPONEX_BattleBook", Text=TranslatedString:Create("he053a3abge5d8g4d14g9333ga18d6eba3df1", "Battle Book")},
-	{Tag="LLWEAPONEX_Blunderbuss", Text=TranslatedString:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss")},
-	{Tag="LLWEAPONEX_DualShields", Text=TranslatedString:Create("h00157a58g9ae0g4119gba1ag3f1e9f11db14", "Dual Shields")},
-	{Tag="LLWEAPONEX_Firearm", Text=TranslatedString:Create("h8d02e345ged4ag4d60g9be9g68a46dda623b", "Firearm")},
-	{Tag="LLWEAPONEX_Greatbow", Text=TranslatedString:Create("h52a81f92g3549g4cb4g9b18g066ba15399c0", "Greatbow")},
-	{Tag="LLWEAPONEX_Katana", Text=TranslatedString:Create("he467f39fg8b65g4136g828fg949f9f3aef15", "Katana"), TwoHandedText=TranslatedString:Create("hd1f993bag9dadg49cbga5edgb92880c38e46", "Odachi")},
-	{Tag="LLWEAPONEX_Quarterstaff", Text=TranslatedString:Create("h8d11d8efg0bb8g4130g9393geb30841eaea5", "Quarterstaff")},
-	{Tag="LLWEAPONEX_Polearm", Text=TranslatedString:Create("hd61320b6ge4e6g4f51g8841g132159d6b282", "Polearm")},
-	{Tag="LLWEAPONEX_Rapier", Text=TranslatedString:Create("h84b2d805gff5ag44a5g9f81g416aaf5abf18", "Rapier")},
-	{Tag="LLWEAPONEX_Runeblade", Text=TranslatedString:Create("hb66213fdg1a98g4127ga55fg429f9cde9c6a", "Runeblade")},
-	{Tag="LLWEAPONEX_Scythe", Text=TranslatedString:Create("h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa", "Scythe")},
+	{Tag="LLWEAPONEX_RunicCannon", Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Cannon")},
+	{Tag="LLWEAPONEX_Banner", Text=ts:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
+	{Tag="LLWEAPONEX_BattleBook", Text=ts:Create("he053a3abge5d8g4d14g9333ga18d6eba3df1", "Battle Book")},
+	{Tag="LLWEAPONEX_Blunderbuss", Text=ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss")},
+	{Tag="LLWEAPONEX_DualShields", Text=ts:Create("h00157a58g9ae0g4119gba1ag3f1e9f11db14", "Dual Shields")},
+	{Tag="LLWEAPONEX_Firearm", Text=ts:Create("h8d02e345ged4ag4d60g9be9g68a46dda623b", "Firearm")},
+	{Tag="LLWEAPONEX_Greatbow", Text=ts:Create("h52a81f92g3549g4cb4g9b18g066ba15399c0", "Greatbow")},
+	{Tag="LLWEAPONEX_Katana", Text=ts:Create("he467f39fg8b65g4136g828fg949f9f3aef15", "Katana"), TwoHandedText=ts:Create("hd1f993bag9dadg49cbga5edgb92880c38e46", "Odachi")},
+	{Tag="LLWEAPONEX_Quarterstaff", Text=ts:Create("h8d11d8efg0bb8g4130g9393geb30841eaea5", "Quarterstaff")},
+	{Tag="LLWEAPONEX_Polearm", Text=ts:Create("hd61320b6ge4e6g4f51g8841g132159d6b282", "Polearm")},
+	{Tag="LLWEAPONEX_Rapier", Text=ts:Create("h84b2d805gff5ag44a5g9f81g416aaf5abf18", "Rapier")},
+	{Tag="LLWEAPONEX_Runeblade", Text=ts:Create("hb66213fdg1a98g4127ga55fg429f9cde9c6a", "Runeblade")},
+	{Tag="LLWEAPONEX_Scythe", Text=ts:Create("h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa", "Scythe")},
 	{Tag="LLWEAPONEX_Unarmed", Text=LLWEAPONEX_Unarmed},
-	{Tag="LLWEAPONEX_Rod", Text=TranslatedString:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
-	--{Tag="LLWEAPONEX_Bludgeon", Text=TranslatedString:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
+	{Tag="LLWEAPONEX_Rod", Text=ts:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
+	--{Tag="LLWEAPONEX_Bludgeon", Text=ts:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
 }
 
 ---@class StatProperty
@@ -138,7 +139,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	tooltip:RemoveElements("RuneEffect")
 	local boost = Ext.StatGetAttribute(item.StatsId, "RuneEffectWeapon")
 	local damageType = Ext.StatGetAttribute(boost, "Damage Type")
-	local weaponTypeName = Ext.GetTranslatedStringFromKey(weaponTypeTag)
+	local weaponTypeName = Ext.GettsFromKey(weaponTypeTag)
 	local text = Text.ItemTooltip.SpecialRuneDamageTypeText:ReplacePlaceholders(weaponTypeName, GameHelpers.GetDamageText(damageType))
 	local element = {
 		Type = "SkillDescription",
@@ -153,7 +154,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 			Label = ""
 		}
 	end
-	armorSlotType.Label = Ext.GetTranslatedStringFromKey(slotTag)
+	armorSlotType.Label = Ext.GettsFromKey(slotTag)
 	local equipped = tooltip:GetElement("Equipped")
 	if equipped == nil then
 		equipped = {
@@ -172,8 +173,8 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	if extraProperties ~= nil then
 		for i,v in pairs(extraProperties) do
 			if v.Type == "Status" then
-				local title = Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(v.Action, "DisplayName")) or "StatusName"
-				local description = Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(v.Action, "Description")) or ""
+				local title = Ext.GettsFromKey(Ext.StatGetAttribute(v.Action, "DisplayName")) or "StatusName"
+				local description = Ext.GettsFromKey(Ext.StatGetAttribute(v.Action, "Description")) or ""
 				if v.StatusChance < 1.0 then
 					local chan
 					title = string.format("%s %s", title, Text.ItemTooltip.ChanceText:ReplacePlaceholders(math.ceil(v.StatusChance * 100)))
@@ -217,6 +218,8 @@ local EquipmentTypes = {
 	Weapon = true,
 	Armor = true,
 }
+
+local LLWEAPONEX_UI_RunicCannonEnergy = ts:Create("h02882207g5e7bg4deaga22eg854b68f8dd29", "<font color='#33FFAA'>Runic Energy [1]</font>")
 
 ---@param item EclItem
 ---@param tooltip TooltipData
@@ -295,17 +298,14 @@ local function OnItemTooltip(item, tooltip)
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
 			end
 			if item:HasTag("LLWEAPONEX_RunicCannon") then
-				tooltip:RemoveElement("WandCharges")
-				local charges = PersistentVars.RunicCannonCharges[item.MyGuid]
-				if charges ~= nil then
-					local element = {
-						Type = "WandCharges",
-						Label = GameHelpers.GetStringKeyText("LLWEAPONEX_UI_RunicCannonEnergy", "<font color='#33FFAA'>Runic Energy</font>"),
-						Value = tostring(charges),
-						MaxValue = "3"
-					}
-					tooltip:AppendElement(element)
-				end
+				local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
+				local charges = PersistentVars.SkillData.RunicCannonCharges[item.MyGuid] or 0
+				local text = LLWEAPONEX_UI_RunicCannonEnergy:ReplacePlaceholders(charges, max)
+				local element = {
+					Type = "ExtraProperties",
+					Label = text
+				}
+				tooltip:AppendElement(element)
 			elseif item:HasTag("LLWEAPONEX_DemolitionBackpack") then
 
 			end
@@ -323,8 +323,8 @@ local function OnItemTooltip(item, tooltip)
 
 		for tag,b in pairs(TagDisplay) do
 			if item:HasTag(tag) or statTags:find(tag) then
-				local ref,handle = Ext.GetTranslatedStringFromKey(tag)
-				local text = Ext.GetTranslatedString(handle, ref)
+				local ref,handle = Ext.GettsFromKey(tag)
+				local text = Ext.Getts(handle, ref)
 				local element = {
 					Type = "ExtraProperties",
 					Label = text

@@ -63,6 +63,7 @@ end
 function UniqueData:OnLevelChange(region)
 	if ObjectExists(self.UUID) == 1 then
 		local item = Ext.GetItem(self.UUID)
+		self.Owner = ItemGetOwner(self.UUID)
 		self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
 		if not self.Initialized then
 			self:ApplyProgression(self.ProgressionData, false, item)
@@ -133,7 +134,7 @@ end
 
 function UniqueData:Transfer(target, equip)
 	if ObjectExists(self.UUID) == 0 then
-		print("[UniqueData:Transfer] Item", self.UUID, "does not exist!")
+		Ext.PrintError("[UniqueData:Transfer] Item", self.UUID, "does not exist!")
 		return
 	end
 	self.Initialized = true

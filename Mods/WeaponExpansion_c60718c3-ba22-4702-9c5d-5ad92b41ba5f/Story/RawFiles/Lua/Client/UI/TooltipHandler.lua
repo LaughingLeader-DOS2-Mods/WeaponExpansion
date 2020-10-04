@@ -116,12 +116,39 @@ local function OnWorldTooltip(ui, text, x, y, ...)
 	end
 end
 
+local ts = LeaderLib.Classes.TranslatedString
+local LLWEAPONEX_UI_RunicCannonEnergy = ts:Create("h02882207g5e7bg4deaga22eg854b68f8dd29", "<font color='#33FFAA'>Runic Energy [1]</font>")
+
+---@param ui UIObject
+---@param tooltip_mc any
+---@param isControllerMode boolean
+---@param lastItem EclItem|nil
+local function OnTooltipPositioned(ui, tooltip_mc, isControllerMode, lastItem, ...)
+	if lastItem ~= nil and lastItem:HasTag("LLWEAPONEX_RunicCannon") then
+		local array = tooltip_mc.list.content_array
+		for i=0,#array do
+			local group = array[i]
+			if group ~= nil and group.groupID == 2 then
+				local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
+				local charges = PersistentVars.SkillData.RunicCannonCharges[lastItem.MyGuid] or 0
+				local text = LLWEAPONEX_UI_RunicCannonEnergy:ReplacePlaceholders(charges, max)
+				group.addElNoColour(text)
+				--tooltip_mc.list.positionElements()
+				--tooltip_mc.resetBackground()
+				--tooltip_mc.repositionElements()
+				break
+			end
+		end
+	end
+end
+
 local function Init()
 	Game.Tooltip.RegisterListener("Stat", "Damage", OnDamageStatTooltip)
 	Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)
 	Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
 	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
 	LeaderLib.UI.RegisterListener("OnWorldTooltip", OnWorldTooltip)
+	--LeaderLib.UI.RegisterListener("OnTooltipPositioned", OnTooltipPositioned)
 end
 return {
 	Init = Init

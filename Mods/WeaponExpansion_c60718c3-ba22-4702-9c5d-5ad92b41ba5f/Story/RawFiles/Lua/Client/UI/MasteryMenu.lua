@@ -87,8 +87,7 @@ local function SetupListeners()
 end
 
 local function TryOpenMasteryMenu()
-	print(Ext.JsonStringify(Client))
-	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Client.Character.UUID)
+	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({UUID=Client.Character.UUID, ID=Client.ID}))
 end
 
 local function splitDescriptionByPattern(str, pattern, includeMatch)

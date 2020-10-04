@@ -196,7 +196,7 @@ Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(char)
 	end
 end)
 
-local function ReloadAmmoSkills()
+local function ReloadAmmoSkills(uuid)
 	if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_HandCrossbow_Reload") == 1 then
 		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_HandCrossbow_Reload", "Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, true)
 	end
@@ -207,7 +207,7 @@ end
 
 local function OnLeftCombat(uuid, id)
 	ClearTag(uuid, "LLWEAPONEX_EnemyDiedInCombat")
-	ReloadAmmoSkills()
+	ReloadAmmoSkills(uuid)
 end
 
 Ext.RegisterOsirisListener("ObjectLeftCombat", 2, "after", function(object,id)
@@ -257,5 +257,5 @@ Ext.RegisterConsoleCommand("scaletest", function(cmd, levelstr)
 end)
 
 function OnRest(target, source)
-	ReloadAmmoSkills()
+	ReloadAmmoSkills(target)
 end

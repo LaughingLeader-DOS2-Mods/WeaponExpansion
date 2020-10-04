@@ -90,15 +90,6 @@ SysClear("DB_LLWEAPONEX_WeaponMastery_MaxExperience", 2);
 SysClear("DB_LLWEAPONEX_WeaponMastery_Progression", 4);
 SysClear("DB_LLWEAPONEX_WeaponMastery_Flags", 4);
 LLWEAPONEX_WeaponMastery_InitSettings();
-
-PROC
-LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
-AND
-_LastVersion < 152502276
-AND
-DB_IsPlayer(_Player)
-THEN
-LLWEAPONEX_WeaponMastery_ClearBonusStatus(_Player);
 //END_REGION
 
 //REGION QUERIES
@@ -389,65 +380,25 @@ THEN
 RemoveStatus(_Player, _InfoStatus);
 //END_REGION
 
-//REGION BONUS_STATUS
-PROC
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus((CHARACTERGUID)_Player)
+//REGION PARTY_WIDE_EXPERIENCE
+IF
+CharacterDying(_Enemy)
 AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
-THEN
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Player, _Mastery);
-
-PROC
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus((CHARACTERGUID)_Player, (STRING)_Mastery)
+NRD_CharacterGetInt(_Enemy, "Resurrected", 0) // Never resurrected
 AND
-DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _CurrentLevel, _Experience)
-THEN
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Player, _Mastery, _CurrentLevel);
-
-PROC
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus((CHARACTERGUID)_Player, (STRING)_Mastery, (INTEGER)_CurrentLevel)
-THEN
-DB_NOOP(1);
-
-/*
-PROC
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus((CHARACTERGUID)_Player, (STRING)_Mastery, (INTEGER)_CurrentLevel)
+DB_IsPlayer(_Player)
 AND
-NOT DB_LLWEAPONEX_WeaponMastery_NoBonusStatus(_Mastery)
+LLWEAPONEX_QRY_CanGrantExperience(_Enemy, _Player)
 AND
-DB_LLWEAPONEX_WeaponMastery_BonusStatus(_CurrentLevel, _Status)
-AND
-HasActiveStatus(_Player, _Status, 0)
+NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
 THEN
-ApplyStatus(_Player, _Status, -1.0, 1, _Player);
-*/
-
-PROC
-LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
-THEN
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Player, _Mastery);
-
-PROC
-LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, (STRING)_Mastery, (INTEGER)_MasteryLevel)
-AND
-LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, _Mastery)
-THEN
-LLWEAPONEX_WeaponMastery_ApplyBonusStatus(_Player, _Mastery, _MasteryLevel);
-
-PROC
-LLWEAPONEX_WeaponMastery_ClearBonusStatus((CHARACTERGUID)_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_BonusStatus(_Level, _Status)
-THEN
-RemoveStatus(_Player, _Status);
-
-/*
-PROC
-LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, (STRING)_Mastery)
-THEN
-LLWEAPONEX_WeaponMastery_ClearBonusStatus(_Player);
-*/
+LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy, 1.0);
 //END_REGION
+
+IF
+StoryEvent(_Char, "LLWEAPONEX_ApplyHasted")
+THEN
+ApplyStatus(_Char, "HASTED", 6.0, 0, _Char);
 EXITSECTION
 
 ENDEXITSECTION
