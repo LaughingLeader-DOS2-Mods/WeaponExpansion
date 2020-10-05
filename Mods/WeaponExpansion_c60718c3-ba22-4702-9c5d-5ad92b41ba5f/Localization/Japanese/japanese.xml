@@ -958,6 +958,7 @@
 	<content contentuid="h6762114bg6c18g4341gbddbg74de8166e47d">Lead your allies into a strategic charge, increasing &lt;font color=&quot;#9370DB&quot;&gt;Movement Speed by [1]%&lt;/font&gt;, &lt;font color=&quot;#32CD32&quot;&gt;Initiative by [2]&lt;/font&gt;, and the &lt;font color=&quot;#FF31FF&quot;&gt;damage of the first attack by [3]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&quot;#58FFFA&quot;&gt;Range of the War Charge scales with Leadership.&lt;/font&gt;</content>
 	<content contentuid="h67766b52g9d1fg4c92g85c3g0381aa9a878b">Regicide</content>
 	<content contentuid="h67d7633bgfd6fg42f5g8d31g3680482ab058">Poison Weakness</content>
+	<content contentuid="h67e6fbecg1cafg4202ga78ag45db47880450">&lt;font color=&apos;#AA00FF&apos;&gt;[1]/[2] Deaths Charges&lt;/font&gt;</content>
 	<content contentuid="h67e90c1eg8eefg4313ga2efg34d42f163756"></content>
 	<content contentuid="h67ff03dfgdf09g4d32g90e0gc95bb237d6e7">&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade Mastery V&lt;/font&gt;</content>
 	<content contentuid="h68318a8fgde5dg4055gabb8g3b0c8df8c202">Throw Breach Charge</content>
@@ -979,7 +980,7 @@
 	<content contentuid="h698f1a51gdcf5g491bg8c6fgff6d8863c00b">Exceptional Dual Shields</content>
 	<content contentuid="h69abab56gc6aag4f2ag8cdegfab6e3651afd">&lt;icon id=&apos;Target_Harmony&apos; icon=&apos;Skill_Summoning_Harmony&apos;/&gt;[Key:Target_Harmony_DisplayName] causes allies affected to attack the nearest enemy with a basic attack.&lt;icon id=&apos;Shout_GuardianAngel&apos; icon=&apos;Skill_Warrior_GuardianAngel&apos;/&gt;Slain allies who were affected by [Key:GUARDIAN_ANGEL_DisplayName] are resurrected when your turn ends. </content>
 	<content contentuid="h69c827cag62f8g4080g802agc8b830a3ef7f">Earthen Dwarven Shields</content>
-	<content contentuid="h6a044bb9g0e3dg4cc6gbc56g23274880bc0f">&lt;font color=&apos;#ED9D07&apos;&gt;Spell Triggered!&lt;/font&gt;</content>
+	<content contentuid="h6a044bb9g0e3dg4cc6gbc56g23274880bc0f">&lt;font color=&apos;#ED9D07&apos;&gt;Spell Triggered! [1]&lt;/font&gt;</content>
 	<content contentuid="h6a1e045eg3d51g47adg8642gfa2764ed01f6">[LLWEAPONEX_VendingMachine_OrderOption6_d70c702c-a0c1-49a7-8772-1479725e2a39]</content>
 	<content contentuid="h6a268993g122ag4546g8d76g83c831fb552f">Fire Arrow</content>
 	<content contentuid="h6a284017g342dg4809gab69g6e77bddaf8c2">Damage from the next direct hit taken is reduced by &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_RecoverArmour_DamageReduction]%&lt;/font&gt;.</content>
@@ -1225,6 +1226,7 @@
 	<content contentuid="h83aa9859g7a83g472dg94cdg70b830d555ee">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery II&lt;/font&gt;</content>
 	<content contentuid="h83c84479gdaceg4a72g8557g4515ba2ce106">Character has been hit by a Blademaster&apos;s strike 6 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="h83caead8g3a51g4daag9145ge0b8a4dd23a5">Novice</content>
+	<content contentuid="h83e65b1fg30c2g4e9ega9bag005eb17c5d75">&lt;font color=&apos;#FF2200&apos;&gt;[1]/[2] Death Charges&lt;/font&gt;</content>
 	<content contentuid="h84013f3ag47fag41c2gae89gf27bfdfaf979">Look closely; the only visible difference between this greatbow arrow and a normal greatbow arrow can be seen in the sizzling dents within the tip of the arrowhead.</content>
 	<content contentuid="h8406fbf2g4595g403ag8d5cgb007104ebd1c">Dual Shieldmaster</content>
 	<content contentuid="h84842d41g5c7eg4bc1g967cgd2e8349d0aaa">Inconspicuous Pouch</content>
