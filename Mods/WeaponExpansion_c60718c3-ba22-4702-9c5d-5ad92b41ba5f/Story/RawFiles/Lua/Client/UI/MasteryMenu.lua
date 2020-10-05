@@ -87,7 +87,7 @@ local function SetupListeners()
 end
 
 local function TryOpenMasteryMenu()
-	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({UUID=Client.Character.UUID, ID=Client.ID}))
+	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(Client.ID))
 end
 
 local function splitDescriptionByPattern(str, pattern, includeMatch)
@@ -357,7 +357,7 @@ function MasteryMenu.InitializeToggleButton()
 	if not MasteryMenu.IsControllerMode then
 		local ui = Ext.GetUI("MasteryMenuToggleButton")
 		if ui == nil then
-			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 7)
+			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 12)
 			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
 				if not MasteryMenu.Open then
 					TryOpenMasteryMenu()
