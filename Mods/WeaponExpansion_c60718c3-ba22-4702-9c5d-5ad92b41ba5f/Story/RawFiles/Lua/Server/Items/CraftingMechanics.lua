@@ -47,7 +47,7 @@ local function getAttributeTokenAttribute(entries)
 		local template,item = table.unpack(entry)
 		local attribute = attributeTokenTemplates[template]
 		if attribute ~= nil then
-			return attribute
+			return attribute,item
 		end
 	end
 	return nil
@@ -120,10 +120,10 @@ end
 ---@param e string|nil	Combined template
 ---@param newItem string
 function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
-	Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate]",char, a, b, c, d, e, newItem)
+	--Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate]",char, a, b, c, d, e, newItem)
 	local craftingEntry = craftingActions[char]
 	if craftingEntry ~= nil then
-		local attribute = getAttributeTokenAttribute(craftingEntry)
+		local attribute,tokenItem = getAttributeTokenAttribute(craftingEntry)
 		if attribute ~= nil then
 			local uniques = getUniqueItems(craftingEntry)
 			for i,v in pairs(uniques) do
