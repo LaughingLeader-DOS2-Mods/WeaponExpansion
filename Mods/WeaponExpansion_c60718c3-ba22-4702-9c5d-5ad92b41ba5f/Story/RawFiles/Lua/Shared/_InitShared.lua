@@ -59,6 +59,10 @@ Origin = {
 	Korvash = "3f20ae14-5339-4913-98f1-24476861ebd6",
 }
 
+NPC = {
+	VendingMachine = "680d2702-721c-412d-b083-4f5e816b945a"
+}
+
 Ext.Require("Shared/MasteryHelpers.lua")
 Ext.Require("Shared/GameMathAlternatives.lua")
 Ext.Require("Shared/StatOverrides.lua")
@@ -75,6 +79,7 @@ Ext.Require("Shared/SkillDamageFunctions.lua")
 Ext.Require("Shared/UnarmedMechanics.lua")
 Ext.Require("Shared/ExtenderHelpers.lua")
 Ext.Require("Shared/SharedDataHooks.lua")
+Ext.Require("Shared/Items/RunicCannon.lua")
 local initSettings = Ext.Require("Shared/Settings.lua")
 
 ---@type ModSettings
