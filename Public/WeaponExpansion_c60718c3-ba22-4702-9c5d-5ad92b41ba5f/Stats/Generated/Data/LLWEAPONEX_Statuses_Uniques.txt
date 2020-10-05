@@ -478,7 +478,6 @@ data "StackId" "Stack_LLWEAPONEX_BattleBook_SpellScroll_Material_Replacement"
 new entry "_Stats_LLWEAPONEX_BattleBook_SpellScroll_Element_Base"
 type "Potion"
 using "_Stats_LLWEAPONEX_Potions_Base"
-data "BoostConditions" "OnWeaponClub"
 
 new entry "_Status_LLWEAPONEX_BattleBook_SpellScroll_Element_Base"
 type "Weapon"

@@ -350,7 +350,8 @@ function SwapDeltaMods(item)
 						ItemToInventory(clone, inventory, 1, 0, 0)
 					end
 					if CharacterIsPlayer(inventory) == 1 and CharacterGetReservedUserID(inventory) ~= nil then
-						Ext.PostMessageToClient(inventory, "LeaderLib_AutoSortPlayerInventory", inventory)
+						local id = CharacterGetReservedUserID(inventory)
+						Ext.PostMessageToUser(id, "LeaderLib_AutoSortPlayerInventory", inventory)
 					end
 				end
 				--NRD_ItemIterateDeltaModifiers(clone, "LLWEAPONEX_Debug_PrintDeltamod")
@@ -369,7 +370,8 @@ function SwapDeltaMods(item)
 					if ObjectIsCharacter(inventory) == 1 then
 						slot = GameHelpers.Item.GetEquippedSlot(inventory,item)
 						if CharacterIsPlayer(inventory) == 1 and CharacterGetReservedUserID(inventory) ~= nil then
-							Ext.PostMessageToClient(inventory, "LeaderLib_AutoSortInventory", inventory)
+							local id = CharacterGetReservedUserID(inventory)
+							Ext.PostMessageToUser(id, "LeaderLib_AutoSortPlayerInventory", inventory)
 						end
 					end
 					if inventory ~= nil then

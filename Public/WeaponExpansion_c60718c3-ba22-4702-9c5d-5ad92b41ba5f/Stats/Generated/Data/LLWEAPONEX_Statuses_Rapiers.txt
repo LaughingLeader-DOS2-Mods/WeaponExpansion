@@ -30,7 +30,6 @@ data "StackId" "Stack_LLWEAPONEX_RapierMastery_DuelistStance_Weapon"
 new entry "Stats_LLWEAPONEX_RapierMastery_DuelistStance_Weapon"
 type "Potion"
 using "_Stats_LLWEAPONEX_Potions_Base"
-data "BoostConditions" "OnWeaponKnife"
 data "BonusWeapon" "Status_LLWEAPONEX_RapierMastery_DuelistStance"
 
 new entry "Status_LLWEAPONEX_RapierMastery_DuelistStance"

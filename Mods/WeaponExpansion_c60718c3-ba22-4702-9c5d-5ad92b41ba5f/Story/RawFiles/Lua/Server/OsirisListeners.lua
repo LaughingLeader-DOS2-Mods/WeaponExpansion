@@ -37,7 +37,7 @@ Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profi
 	local character = GetCurrentCharacter(id)
 	if character ~= nil then
 		if Vars.isInCharacterCreation then
-			Ext.PostMessageToClient(character, "LLWEAPONEX_OnCharacterCreationStarted", "")
+			Ext.PostMessageToUser(id, "LLWEAPONEX_OnCharacterCreationStarted", "")
 		end
 		Ext.PostMessageToUser(id, "LLWEAPONEX_SetActiveCharacter", GetUUID(character))
 	end
@@ -143,11 +143,12 @@ end)
 
 local function IncreaseKillCount(char, fromTargetDying)
 	if CharacterHasSkill(char, "Projectile_LLWEAPONEX_DarkFireball") == 1 then
+		local character = Ext.GetCharacter(char)
 		local maxCount = Ext.ExtraData["LLWEAPONEX_DarkFireball_MaxKillCount"] or 10
-		local current = PersistentVars.SkillData.DarkFireballCount[char] or 0
+		local current = PersistentVars.SkillData.DarkFireballCount[character.NetID] or 0
 		if current < maxCount then
-			PersistentVars.SkillData.DarkFireballCount[char] = current + 1
-			if PersistentVars.SkillData.DarkFireballCount[char] >= 1 then
+			PersistentVars.SkillData.DarkFireballCount[character.NetID] = current + 1
+			if PersistentVars.SkillData.DarkFireballCount[character.NetID] >= 1 then
 				UpdateDarkFireballSkill(char)
 			end
 			--print("IncreaseKillCount", char, current, maxCount)

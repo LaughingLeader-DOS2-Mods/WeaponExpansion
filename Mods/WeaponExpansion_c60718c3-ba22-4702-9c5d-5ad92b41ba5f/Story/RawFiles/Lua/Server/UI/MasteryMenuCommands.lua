@@ -26,23 +26,27 @@ function OpenMasteryMenu_Start(uuid, id)
 end
 
 local function RequestOpenMasteryMenu(call, payload)
-	local data = Ext.JsonParse(payload)
-	local uuid = StringHelpers.GetUUID(data.UUID)
-	if uuid ~= nil then
-		if CharacterIsSummon(uuid) == 1 then
-			if CharacterIsControlled(uuid) == 1 then
-				ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-			else
-				CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+	if payload ~= nil then
+		local id = tonumber(payload)
+		if id ~= nil then
+			local uuid = StringHelpers.GetUUID(GetCurrentCharacter(id))
+			if not StringHelpers.IsNullOrEmpty(uuid) then
+				if CharacterIsSummon(uuid) == 1 then
+					if CharacterIsControlled(uuid) == 1 then
+						ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+					else
+						CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+					end
+				elseif CharacterIsPartyFollower(uuid) == 1 then
+					if CharacterIsControlled(uuid) == 1 then
+						ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+					else
+						CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+					end
+				elseif IsPlayer(uuid) then
+					OpenMasteryMenu_Start(uuid, id)
+				end
 			end
-		elseif CharacterIsPartyFollower(uuid) == 1 then
-			if CharacterIsControlled(uuid) == 1 then
-				ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-			else
-				CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-			end
-		elseif IsPlayer(uuid) then
-			OpenMasteryMenu_Start(uuid, data.ID)
 		end
 	end
 end
@@ -55,7 +59,7 @@ local function RequestStatusTooltip(call,datastr)
 	LeaderLib.PrintDebug(datastr)
 	local data = MessageData:CreateFromString(datastr)
 	if data ~= nil then
-		local character = data.ID
+		local character = Ext.GetCharacter(data.ID)
 		local status = data.Params.Status
 		if status ~= nil then
 			local handle = NRD_StatusGetHandle(statusDummy, status)
@@ -83,7 +87,7 @@ local function RequestStatusTooltip(call,datastr)
 			local resultStr = data:ToString()
 			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Sending data back to client:")
 			LeaderLib.PrintDebug(resultStr)
-			Ext.PostMessageToClient(character, "LLWEAPONEX_MasteryMenu_StatusHandleRetrieved", resultStr)
+			Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_MasteryMenu_StatusHandleRetrieved", resultStr)
 		end
 	else
 		Ext.PrintError("MessageData:CreateFromString failed.")

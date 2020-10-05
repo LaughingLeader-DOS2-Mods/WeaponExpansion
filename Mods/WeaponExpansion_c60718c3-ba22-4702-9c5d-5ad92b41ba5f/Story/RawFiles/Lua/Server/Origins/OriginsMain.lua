@@ -169,7 +169,7 @@ function CC_CheckKorvashColor(player)
 	if color == 4294902015 then-- Pink?
 		--NRD_PlayerSetCustomDataInt(player, "SkinColor", 4281936940)
 		character.PlayerCustomData.SkinColor = 4281936940
-		Ext.PostMessageToClient(player, "LLWEAPONEX_FixLizardSkin", player)
+		Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_FixLizardSkin", player)
 	end
 end
 

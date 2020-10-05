@@ -19,7 +19,7 @@ if Ext.IsClient() then
 				MasteryMechanics = {},
 			}
 		end
-		PersistentVars.SkillData = Ext.JsonParse(payload)
+		PersistentVars.SkillData = Common.JsonParse(payload)
 		if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Client.Character.IsInCharacterCreation then
 			MasteryMenu.SetToggleButtonVisibility(false, false)
 		elseif SharedData.RegionData.LevelType == LEVELTYPE.GAME then
