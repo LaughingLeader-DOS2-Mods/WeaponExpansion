@@ -116,10 +116,19 @@ end
 --- @param source string
 --- @param damage integer
 --- @param handle integer
-local function OnHit(target,source,damage,handle)
-	if not StringHelpers.IsNullOrEmpty(source) and GameHelpers.HitSucceeded(target, handle, false) then
+LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
+	local hitSucceeded = GameHelpers.HitSucceeded(target, handle, false)
+	local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
+	if skill == "Zone_LLWEAPONEX_ArmCannon_Disperse" or skill == "Projectile_LLWEAPONEX_ArmCannon_Shoot" then
+		NRD_StatusSetInt(target, handle, "Hit", 1)
+		NRD_StatusSetInt(target, handle, "Dodged", 0)
+		NRD_StatusSetInt(target, handle, "Missed", 0)
+		NRD_StatusSetInt(target, handle, "Blocked", 0)
+		hitSucceeded = true
+	end
+
+	if not StringHelpers.IsNullOrEmpty(source) and not StringHelpers.IsNullOrEmpty(target) and hitSucceeded then
 		local hitWithWeapon = GameHelpers.HitWithWeapon(target, handle, false, true)
-		local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
 		if hitWithWeapon or IsWeaponSkill(skill) then
 			local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
 			if b and expGain > 0 then
@@ -160,5 +169,4 @@ local function OnHit(target,source,damage,handle)
 			end
 		end
 	end
-end
-LeaderLib.RegisterListener("OnHit", OnHit)
+end)
