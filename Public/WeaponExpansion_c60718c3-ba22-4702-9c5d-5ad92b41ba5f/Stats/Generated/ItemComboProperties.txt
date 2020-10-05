@@ -57,36 +57,75 @@ data "Result" "LOOT_Rune_Frost_Giant"
 data "Result" "LOOT_Rune_LLWEAPONEX_Runeblade_Water"
 
 new ItemComboProperty "LLWEAPONEX_Token_Attribute"
-data "PreviewIcon" "LeaderLib_Placeholder"
+data "PreviewIcon" "LLWEAPONEX_CraftingCategory_AttributeToken"
 data "PreviewTooltip" "Any Attribute Token"
-//data "PreviewIcon" "LLWEAPONEX_Items_Token_Attribute"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_LLWEAPONEX_Token_Constitution"
 data "Type" "Object"
-data "Result" "LOOT_LLWEAPONEX_Token_Constitution"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_LLWEAPONEX_Token_Finesse"
 data "Type" "Object"
-data "Result" "LOOT_LLWEAPONEX_Token_Finesse"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_LLWEAPONEX_Token_Intelligence"
 data "Type" "Object"
-data "Result" "LOOT_LLWEAPONEX_Token_Intelligence"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_LLWEAPONEX_Token_Memory"
 data "Type" "Object"
-data "Result" "LOOT_LLWEAPONEX_Token_Memory"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_LLWEAPONEX_Token_Strength"
 data "Type" "Object"
-data "Result" "LOOT_LLWEAPONEX_Token_Strength"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
 
 new ItemComboPropertyEntry
 data "ObjectID" "LOOT_LLWEAPONEX_Token_Wits"
 data "Type" "Object"
-data "Result" "LOOT_LLWEAPONEX_Token_Wits"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Reset"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Constitution_Free"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Finesse_Free"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Intelligence_Free"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Memory_Free"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Strength_Free"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Wits_Free"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
+
+new ItemComboPropertyEntry
+data "ObjectID" "LOOT_LLWEAPONEX_Token_Reset_Free"
+data "Type" "Object"
+data "Result" "LOOT_LLWEAPONEX_Token_Shard"
