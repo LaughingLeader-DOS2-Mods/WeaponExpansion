@@ -1557,7 +1557,7 @@
 	<content contentuid="ha9259747g75d2g452ag8688g3ce77b6cad95">Journeyman Bannerman</content>
 	<content contentuid="ha931c2f8ge74fg4e46ga1b8g142846b61b46">[1]&lt;br&gt;[2]</content>
 	<content contentuid="ha941a44dg4c0dg44a0gb5a4gfec18574f8d2">Character has been hit by a thrown wand!</content>
-	<content contentuid="ha942de52g11edg49e8gae4fgfc0015bdf289">Fire a concentrated mass of energy at a target, dealing ([1]|[3]) in a [2] radius.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;Applies any active rune effect on hit.&lt;/font&gt;</content>
+	<content contentuid="ha942de52g11edg49e8gae4fgfc0015bdf289">Fire a concentrated mass of energy at a target, dealing [1] in a [2] radius.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;Applies any active rune effects on hit.&lt;/font&gt;</content>
 	<content contentuid="ha94aeeacg8c7bg4de8g955bga4a93106690c">Two-handed Bokuto</content>
 	<content contentuid="ha98389e6g8056g4845ga3d8g016b45a2c9a2">Shoot on Cooldown</content>
 	<content contentuid="ha9b11e8cg4760g4462g8bafg275aca4952c6">[TRADE] *Look at the panel of buttons.*</content>
