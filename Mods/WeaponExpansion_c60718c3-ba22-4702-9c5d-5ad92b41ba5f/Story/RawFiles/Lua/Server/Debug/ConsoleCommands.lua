@@ -30,7 +30,8 @@ end)
 Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
 	local host = CharacterGetHostCharacter()
 	for i,v in pairs(Uniques) do
-		if v.Owner == nil then
+		local inventory = GetInventoryOwner(v.UUID)
+		if StringHelpers.IsNullOrEmpty(inventory) or StringHelpers.IsNullOrEmpty(v.Owner) or v.Owner == NPC.VendingMachine then
 			v:Transfer(host)
 		end
 	end
