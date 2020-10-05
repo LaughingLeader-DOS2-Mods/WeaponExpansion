@@ -131,9 +131,18 @@ local function HasRequirement(val)
 end
 
 function IsWeaponSkill(skill)
-	return Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" or 
-		Ext.StatGetAttribute(skill, "UseWeaponProperties") == "Yes" or 
-			HasRequirement(Ext.StatGetAttribute(skill, "Requirement"))
+	if skill == nil or skill == "" then
+		return false
+	end
+	local stat = Ext.GetStat(skill)
+	if stat ~= nil then
+		if (stat.UseWeaponDamage == "Yes" 
+		or stat.UseWeaponProperties == "Yes")
+		or (HasRequirement(stat.Requirement) and stat["Damage Multiplier"] > 0) then
+			return true
+		end
+	end
+	return false
 end
 
 --- @param character string

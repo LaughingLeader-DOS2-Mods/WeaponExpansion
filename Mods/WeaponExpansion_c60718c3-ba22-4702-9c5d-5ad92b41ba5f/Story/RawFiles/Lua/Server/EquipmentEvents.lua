@@ -77,7 +77,7 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 		else
 			SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		end
-	elseif Mastery.HasMasteryRequirement(uuid, "LLWEAPONEX_Unarmed_Mastery1") then
+	elseif Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Unarmed_Mastery1") then
 		ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
 	else

@@ -120,6 +120,7 @@ data "IntelligenceBoost" "1"
 data "Flags" "Unbreakable"
 data "ExtraProperties" "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT,100,0"
 data "Skills" "Shout_LLWEAPONEX_SpellScroll_PrepareMagic;Target_HeavyAttack"
+data "Tags" "LLWEAPONEX_BattleBook;LLWEAPONEX_BattleBook_Equipped;LLWEAPONEX_GnakSpellScrollEquipped"
 
 new entry "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A"
 type "Weapon"

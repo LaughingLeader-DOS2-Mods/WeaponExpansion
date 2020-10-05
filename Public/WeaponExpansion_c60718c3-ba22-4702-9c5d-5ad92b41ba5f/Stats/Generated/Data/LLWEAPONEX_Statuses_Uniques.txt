@@ -457,7 +457,7 @@ data "DisplayName" "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_DisplayName"
 data "DisplayNameRef" "Bada Bing"
 data "Description" "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_Description"
 data "DescriptionRef" "Character's next attack with their oversized scroll will unleash a random spell and grant bonus damage."
-data "Icon" "LLWEAPONEX_Status_SpellScroll_Ready"
+data "Icon" "LLWEAPONEX_Items_Unique_BattleScroll_2H_A"
 data "FormatColor" "Source"
 data "StackId" "Stack_BattleBook_SpellScroll_HitReady"
 

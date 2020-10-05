@@ -50,7 +50,7 @@ Mastery.HasMinimumMasteryLevel = HasMinimumMasteryLevel
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
 	if type(tag) == "string" then
-		if character:HasTag(tag) == true then
+		if character ~= nil and character:HasTag(tag) == true then
 			local a,b,mastery = string.find(tag,"(.+)_Mastery")
 			if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 				return true
@@ -90,6 +90,9 @@ function Mastery.HasMasteryRequirement(character, tag)
 	end
 	if type(character) == "string" then
 		character = Ext.GetCharacter(character)
+		if character == nil then
+			return false
+		end
 	end
 	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
 	if not status then

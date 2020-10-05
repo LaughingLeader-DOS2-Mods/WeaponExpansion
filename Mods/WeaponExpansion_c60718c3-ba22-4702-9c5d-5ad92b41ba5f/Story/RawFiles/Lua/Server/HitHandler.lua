@@ -74,7 +74,7 @@ end
 --- @param damage integer
 --- @param handle integer
 local function OnPrepareHit(target,source,damage,handle)
-	if source ~= nil and CharacterGetEquippedWeapon(source) == nil then
+	if not StringHelpers.IsNullOrEmpty(source) and CharacterGetEquippedWeapon(source) == nil then
 		ScaleUnarmedDamage(source,target,damage,handle)
 	end
 	if damage > 0 then
@@ -117,14 +117,17 @@ end
 --- @param damage integer
 --- @param handle integer
 local function OnHit(target,source,damage,handle)
-	if source ~= nil then
+	if not StringHelpers.IsNullOrEmpty(source) and GameHelpers.HitSucceeded(target, handle, false) then
 		local hitWithWeapon = GameHelpers.HitWithWeapon(target, handle, false, true)
-		if hitWithWeapon then
-			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
+		local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
+		if hitWithWeapon or IsWeaponSkill(skill) then
 			local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
 			if b and expGain > 0 then
 				AddMasteryExperienceForAllActive(source, expGain)
 			end
+		end
+		if GameHelpers.HitSucceeded(target, handle, false) then
+			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
 			if totalOnHitCallbacks > 0 then
 				local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
 				-- Unarmed

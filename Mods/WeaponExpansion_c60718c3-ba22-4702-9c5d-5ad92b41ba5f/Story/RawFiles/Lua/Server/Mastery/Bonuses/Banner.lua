@@ -76,19 +76,19 @@ end)
 
 function Banner_OnGuardianAngelApplied(char,source)
 	if not StringHelpers.IsNullOrEmpty(source) then
-		if Mastery.HasMasteryRequirement(source, Mastery.BonusID.BANNER_GUARDIAN_ANGEL.Tags) then
+		if Mastery.HasMasteryRequirement(Ext.GetCharacter(source), Mastery.BonusID.BANNER_GUARDIAN_ANGEL.Tags) then
 			SetTag(char, "LLWEAPONEX_Banner_GuardianAngel_Active")
 		end
 	end
 end
 
-Ext.RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
+RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(char)
 	if HasActiveStatus(char, "GUARDIAN_ANGEL") == 1 and IsTagged(char, "LLWEAPONEX_Banner_GuardianAngel_Active") == 1 then
 		local status = Ext.GetCharacter(char):GetStatus("GUARDIAN_ANGEL")
 		if status ~= nil and status.StatusSourceHandle ~= nil then
 			local sourceCharacter = Ext.GetCharacter(status.StatusSourceHandle)
 			if sourceCharacter ~= nil then
-				if Mastery.HasMasteryRequirement(sourceCharacter.MyGuid, Mastery.BonusID.BANNER_GUARDIAN_ANGEL.Tags) then
+				if Mastery.HasMasteryRequirement(sourceCharacter, Mastery.BonusID.BANNER_GUARDIAN_ANGEL.Tags) then
 					if PersistentVars.MasteryMechanics.GuardianAngelResurrect == nil then
 						PersistentVars.MasteryMechanics.GuardianAngelResurrect = {}
 					end
@@ -186,9 +186,9 @@ end)
 MasteryBonusManager.RegisterStatusAttemptListener("FLANKING", nil, function(target, status, handle, source)
 	local statusSource = nil
 	if HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
-		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+		statusSource = Ext.GetStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
 	elseif HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
-		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+		statusSource = Ext.GetStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
 	end
 	if statusSource ~= nil then
 		statusSource = Ext.GetCharacter(statusSource)
@@ -203,10 +203,10 @@ end, true)
 
 LeaderLib.RegisterListener("TurnDelayed", function(uuid)
 	local statusSource = nil
-	if HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
-		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
-	elseif HasActiveStatus(target, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
-		statusSource = Ext.GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+	if HasActiveStatus(uuid, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
+		statusSource = Ext.GetStatus(uuid, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
+	elseif HasActiveStatus(uuid, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
+		statusSource = Ext.GetStatus(uuid, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle
 	end
 	if statusSource ~= nil then
 		statusSource = Ext.GetCharacter(statusSource)

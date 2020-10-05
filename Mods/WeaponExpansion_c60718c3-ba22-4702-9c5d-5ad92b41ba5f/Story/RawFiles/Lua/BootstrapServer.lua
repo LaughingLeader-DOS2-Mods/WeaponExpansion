@@ -1,10 +1,16 @@
+RegisterProtectedOsirisListener = Mods.LeaderLib.RegisterProtectedOsirisListener
+StartOneshotTimer = Mods.LeaderLib.StartOneshotTimer
+
 ---@class WeaponExpansionVars
 PersistentVars = {
     SkillData = {
         DarkFireballCount = {},
-        RunicCannonCharges = {}
+        RunicCannonCharges = {},
+        GnakSpells = {}
     },
     MasteryMechanics = {},
+    Timers = {},
+    OnDeath = {}
 }
 LoadPersistentVars = {}
 BonusSkills = {}
@@ -22,6 +28,7 @@ Ext.Require("Server/TimerListeners.lua")
 Ext.Require("Server/EquipmentEvents.lua")
 Ext.Require("Server/UnarmedDamageScaling.lua")
 Ext.Require("Server/OsirisListeners.lua")
+Ext.Require("Server/DeathMechanics.lua")
 Ext.Require("Server/UI/MasteryMenuCommands.lua")
 Ext.Require("Server/UI/UIHelpers.lua")
 Ext.Require("Server/Skills/DamageHandler.lua")
@@ -29,6 +36,7 @@ Ext.Require("Server/Skills/ElementalFirearms.lua")
 Ext.Require("Server/Skills/PrepareEffects.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")
 Ext.Require("Server/Skills/SkillListeners.lua")
+Ext.Require("Server/Skills/GnakSpellScroll.lua")
 Ext.Require("Server/MasteryHelpers.lua")
 Ext.Require("Server/PistolMechanics.lua")
 Ext.Require("Server/Mastery/SkillBonuses.lua")

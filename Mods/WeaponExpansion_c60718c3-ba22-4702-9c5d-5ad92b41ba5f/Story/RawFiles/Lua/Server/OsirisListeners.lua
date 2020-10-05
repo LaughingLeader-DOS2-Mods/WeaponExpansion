@@ -124,10 +124,10 @@ local function OnStatusApplied(target, status, source)
 		end
 	end
 end
-Ext.RegisterOsirisListener("CharacterStatusApplied", 3, "after", OnStatusApplied)
-Ext.RegisterOsirisListener("ItemStatusChange", 3, "after", OnStatusApplied)
+RegisterProtectedOsirisListener("CharacterStatusApplied", 3, "after", OnStatusApplied)
+RegisterProtectedOsirisListener("ItemStatusChange", 3, "after", OnStatusApplied)
 
-Ext.RegisterOsirisListener("NRD_OnStatusAttempt", 4, "after", function(target, status, handle, source)
+RegisterProtectedOsirisListener("NRD_OnStatusAttempt", 4, "after", function(target, status, handle, source)
 	if #Listeners.StatusAttempt	> 0 then
 		local callbacks = Listeners.StatusAttempt[status]
 		if callbacks ~= nil then
@@ -150,6 +150,7 @@ local function IncreaseKillCount(char, fromTargetDying)
 			if PersistentVars.SkillData.DarkFireballCount[char] >= 1 then
 				UpdateDarkFireballSkill(char)
 			end
+			--print("IncreaseKillCount", char, current, maxCount)
 		end
 	end
 end
@@ -167,12 +168,13 @@ local function SkipDeathXP(uuid, region)
 	return false
 end
 
-local function OnCharacterDied(uuid)
-	if not SkipDeathXP(uuid, GetRegion(uuid)) then
+function OnCharacterDied(uuid, force)
+	if force == true or not SkipDeathXP(uuid, GetRegion(uuid)) then
 		local id = CombatGetIDForCharacter(uuid)
+		--print("OnCharacterDied", uuid, id)
 		if id ~= nil then
 			for i,entry in pairs(Osi.DB_CombatCharacters:Get(nil, id)) do
-				local v = GetUUID(entry[1])
+				local v = StringHelpers.GetUUID(entry[1])
 				if IsPlayer(v) and CharacterIsEnemy(uuid, v) == 1 then
 					SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
 					IncreaseKillCount(v, uuid)
@@ -190,7 +192,7 @@ local function OnCharacterDied(uuid)
 	end
 end
 
-Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(char)
+RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(char)
 	if ObjectExists(char) == 1 and not StringHelpers.IsNullOrEmpty(char) and not IgnoreCharacter(char) then
 		OnCharacterDied(StringHelpers.GetUUID(char))
 	end
@@ -210,16 +212,16 @@ local function OnLeftCombat(uuid, id)
 	ReloadAmmoSkills(uuid)
 end
 
-Ext.RegisterOsirisListener("ObjectLeftCombat", 2, "after", function(object,id)
+RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(object,id)
 	if ObjectIsCharacter(object) == 1 then
 		OnLeftCombat(StringHelpers.GetUUID(object), id)
 	end
 end)
 
-Ext.RegisterOsirisListener("ObjectWasTagged", 2, "after", function(object, tag)
+-- Ext.RegisterOsirisListener("ObjectWasTagged", 2, "after", function(object, tag)
 
 
-end)
+-- end)
 
 Ext.RegisterOsirisListener("ObjectLostTag", 2, "after", function(object, tag)
 	if tag == "LLWEAPONEX_Unarmed" then
@@ -259,3 +261,10 @@ end)
 function OnRest(target, source)
 	ReloadAmmoSkills(target)
 end
+
+-- Why is this happening?
+RegisterProtectedOsirisListener("SkillAdded", 3, "after", function(char, skill, learned)
+	if IsTagged(char, "TOTEM") == 1 and skill == "Target_SingleHandedAttack" then
+		CharacterRemoveSkill(char, skill)
+	end
+end)

@@ -1,7 +1,7 @@
 ---@type LeaderLibLocalizedText
 local LocalizedText = LeaderLib.LocalizedText
 ---@type TranslatedString
-local TranslatedString = LeaderLib.Classes.TranslatedString
+local ts = LeaderLib.Classes.TranslatedString
 
 ---@type table<string,fun(character:EsvCharacter):string>
 local AlternativeScaling = {
@@ -11,22 +11,36 @@ local AlternativeScaling = {
 	end	
 }
 
----@type table<string, TranslatedString>
+---@type table<string, ts>
 local AbilitySchool = {
 	Target_LLWEAPONEX_Steal = Text.NewAbilitySchools.Pirate,
 	Shout_LLWEAPONEX_OpenMenu = Text.Game.WeaponExpansion,
 }
 
-local thiefGloveChanceBonusText = TranslatedString:Create("h1fce3bfeg41a6g41adgbc5bg03d39281b469", "<font color='#11D87A'>+[1]% chance from [2]</font>")
+local thiefGloveChanceBonusText = ts:Create("h1fce3bfeg41a6g41adgbc5bg03d39281b469", "<font color='#11D87A'>+[1]% chance from [2]</font>")
+local darkFireballEmptyLevelText = ts:Create("h83e65b1fg30c2g4e9ega9bag005eb17c5d75", "<font color='#FF2200'>[1]/[2] Death Charges</font>")
+local darkFireballLevelText = ts:Create("h67e6fbecg1cafg4202ga78ag45db47880450", "<font color='#AA00FF'>[1]/[2] Death Charges</font>")
 
 local AppendedText = {
 	---@param character EsvCharacter
 	Target_LLWEAPONEX_Steal = function(character)
 		if character:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
 			local chance = math.floor(Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0)
-			local ref,handle = Ext.GetTranslatedStringFromKey("ARM_UNIQUE_LLWEAPONEX_ThiefGloves_A_DisplayName")
-			local gloveName = Ext.GetTranslatedString(handle, ref)
-			return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName)
+			local ref,handle = Ext.GettsFromKey("ARM_UNIQUE_LLWEAPONEX_ThiefGloves_A_DisplayName")
+			local gloveName = Ext.Getts(handle, ref)
+			return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName),true
+		end
+	end,
+	---@param character EsvCharacter
+	Projectile_LLWEAPONEX_DarkFireball = function(character)
+		if PersistentVars ~= nil and PersistentVars.SkillData ~= nil and PersistentVars.SkillData.DarkFireballCount ~= nil then
+			local count = PersistentVars.SkillData.DarkFireballCount[character.MyGuid] or 0
+			local max = Ext.ExtraData["LLWEAPONEX_DarkFireball_MaxKillCount"] or 10
+			if count > 0 then
+				return darkFireballLevelText:ReplacePlaceholders(count, max)
+			else
+				return darkFireballEmptyLevelText:ReplacePlaceholders(count, max)
+			end
 		end
 	end
 }
@@ -108,14 +122,22 @@ local function OnSkillTooltip(character, skill, tooltip)
 	end
 
 	if AppendedText[skill] ~= nil then
-		local text = AppendedText[skill](character)
+		local text,appendToSkillProperties = AppendedText[skill](character)
 		if text ~= nil then
-			local element = tooltip:GetElement("SkillProperties")
-			if element ~= nil then
-				table.insert(element.Properties, {
-					Label = text
-				})
+			if appendToSkillProperties == true then
+				local element = tooltip:GetElement("SkillProperties") or {Type="SkillProperties", Properties={}, Resistances={}}
+				if element ~= nil then
+					table.insert(element.Properties, {
+						Label = text
+					})
+				end
+			else
+				local element = tooltip:GetElement("SkillDescription")
+				if element ~= nil then
+					element.Label = string.format("%s<br>%s", element.Label, text)
+				end
 			end
+			
 			-- if descriptionElement ~= nil then
 			-- 	if description == nil then 
 			-- 		description = ""

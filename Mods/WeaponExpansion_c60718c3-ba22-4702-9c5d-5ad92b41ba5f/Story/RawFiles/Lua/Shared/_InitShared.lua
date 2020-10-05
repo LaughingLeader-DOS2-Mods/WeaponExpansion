@@ -1,9 +1,12 @@
 LeaderLib = Mods["LeaderLib"]
+
 ---@type GameHelpers
 GameHelpers = LeaderLib.GameHelpers
 Common = LeaderLib.Common
 StringHelpers = LeaderLib.StringHelpers
 --WeaponExpansion = Mods["WeaponExpansion"]
+
+printd = LeaderLib.PrintDebug
 
 SKILL_STATE = LeaderLib.SKILL_STATE
 

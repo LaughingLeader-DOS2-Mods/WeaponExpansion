@@ -148,7 +148,7 @@ function Origins_FixSkillBar(uuid)
 	-- end
 end
 
-Ext.RegisterOsirisListener("CharacterJoinedParty", 1, "after", function(partyMember)
+RegisterProtectedOsirisListener("CharacterJoinedParty", 1, "after", function(partyMember)
 	if ObjectGetFlag(partyMember, "LLWEAPONEX_FixSkillBar") == 1 then
 		ObjectClearFlag(partyMember, "LLWEAPONEX_FixSkillBar", 0)
 		Osi.LeaderLib_Timers_StartObjectTimer(partyMember, 500, "Timers_LLWEAPONEX_FixSkillbar", "LLWEAPONEX_FixSkillbar")

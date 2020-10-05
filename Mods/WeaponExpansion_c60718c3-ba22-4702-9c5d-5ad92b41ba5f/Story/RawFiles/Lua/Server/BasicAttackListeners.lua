@@ -16,6 +16,17 @@ function BasicAttackManager.RegisterListener(event, func)
 	table.insert(BasicAttackManager.Listeners[event], func)
 end
 
+function BasicAttackManager.RemoveListener(event, func)
+	if BasicAttackManager.Listeners[event] ~= nil then
+		for i,callback in pairs(BasicAttackManager.Listeners[event]) do
+			if callback == func then
+				BasicAttackManager.Listeners[event][i] = nil
+				break
+			end
+		end
+	end
+end
+
 local function SaveBasicAttackTarget(attacker, target)
 	if PersistentVars["BasicAttackData"] == nil then
 		PersistentVars["BasicAttackData"] = {}

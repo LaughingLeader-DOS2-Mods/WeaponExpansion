@@ -701,7 +701,6 @@ local function GetDarkFlamebreathDamage(baseSkill, attacker, isFromItem, stealth
 			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
 		end
 		skill["Damage Multiplier"] = math.ceil(skill["Damage Multiplier"] + (missingHealthMult * damageBonus))
-		print(missingHealthMult, skill["Damage Multiplier"])
 		if isTooltip ~= true then
 			return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 		else

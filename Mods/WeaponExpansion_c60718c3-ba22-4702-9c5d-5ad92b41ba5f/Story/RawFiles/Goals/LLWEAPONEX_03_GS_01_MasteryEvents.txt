@@ -31,16 +31,6 @@ THEN
 LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Runeblade", 0.50);
 */
 //END_REGION
-
-//REGION PISTOL_MASTERY_XP
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_PISTOL_SHOOT_HIT", (CHARACTERGUID)_Player)
-AND
-LLWEAPONEX_QRY_CanGrantExperience(_Target, _Player)
-THEN
-LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_Pistol", 0.50);
-//END_REGION
-
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_03_GameScripts"
