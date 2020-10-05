@@ -20,7 +20,6 @@ using "_LLWEAPONEX_HIDDEN_CONSUME_BASE"
 new entry "Stats_LLWEAPONEX_Activate_Runeblade_Base"
 type "Potion"
 using "_Stats_LLWEAPONEX_Potions_Base"
-data "BoostConditions" "OnWeaponSword"
 
 new entry "Stats_LLWEAPONEX_Runeblade_Resistance_Base"
 type "Potion"
