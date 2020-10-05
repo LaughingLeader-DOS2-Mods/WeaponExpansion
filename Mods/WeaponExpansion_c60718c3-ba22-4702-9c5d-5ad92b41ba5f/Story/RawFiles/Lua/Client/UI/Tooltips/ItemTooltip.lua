@@ -299,7 +299,7 @@ local function OnItemTooltip(item, tooltip)
 			end
 			if item:HasTag("LLWEAPONEX_RunicCannon") then
 				local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
-				local charges = PersistentVars.SkillData.RunicCannonCharges[item.MyGuid] or 0
+				local charges = PersistentVars.SkillData.RunicCannonCharges[item.NetID] or 0
 				local text = LLWEAPONEX_UI_RunicCannonEnergy:ReplacePlaceholders(charges, max)
 				local element = {
 					Type = "ExtraProperties",

@@ -260,9 +260,10 @@ if Ext.IsDeveloperMode() then
                 local duration = NRD_StatusGetReal(host, handle, "CurrentLifeTime")
                 duration = duration + 6.0
                 NRD_StatusSetReal(host, handle, "CurrentLifeTime", duration)
-                Ext.PostMessageToClient(host, "LLWEAPONEX_UpdateStatusMC", MessageData:CreateFromTable("StatusUpdate", {
+                local id = CharacterGetReservedUserID(host)
+                Ext.PostMessageToUser(id, "LLWEAPONEX_UpdateStatusMC", MessageData:CreateFromTable("StatusUpdate", {
                     UUID = host,
-                    ID = CharacterGetReservedUserID(host),
+                    ID = id,
                     StatusName = "HASTED",
                     StatusHandle = Ext.HandleToDouble(handle)
                 }):ToString())

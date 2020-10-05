@@ -8,9 +8,9 @@ local function IsEngineStatus(status)
 end
 
 Ext.RegisterOsirisListener("NRD_OnHit", 4, "before", function (target, source, damage, handle)
-	local skillprototype = NRD_StatusGetString(target, handle, "SkillId")
-	local skill = nil
+    local skillprototype = NRD_StatusGetString(target, handle, "SkillId")
 	if skillprototype ~= "" and skillprototype ~= nil then
+        local skill = nil
 		skill = string.gsub(skillprototype, "_%-?%d+$", "")
         print(string.format("(%s) NRD_OnHit(%s)", Ext.MonotonicTime(), skill))
 	end

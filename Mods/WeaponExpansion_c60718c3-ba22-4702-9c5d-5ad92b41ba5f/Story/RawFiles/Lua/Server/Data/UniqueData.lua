@@ -44,7 +44,7 @@ function UniqueData:Create(uuid, progressionData, params)
 		this.CanMoveToVendingMachine = false
 	elseif this.CanMoveToVendingMachine then
 		-- Vending Machine
-		this.DefaultOwner = "680d2702-721c-412d-b083-4f5e816b945a"
+		this.DefaultOwner = NPC.VendingMachine
 	end
     return this
 end

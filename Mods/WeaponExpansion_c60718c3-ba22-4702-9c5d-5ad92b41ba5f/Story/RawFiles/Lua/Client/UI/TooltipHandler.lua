@@ -130,7 +130,7 @@ local function OnTooltipPositioned(ui, tooltip_mc, isControllerMode, lastItem, .
 			local group = array[i]
 			if group ~= nil and group.groupID == 2 then
 				local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
-				local charges = PersistentVars.SkillData.RunicCannonCharges[lastItem.MyGuid] or 0
+				local charges = PersistentVars.SkillData.RunicCannonCharges[lastItem.NetID] or 0
 				local text = LLWEAPONEX_UI_RunicCannonEnergy:ReplacePlaceholders(charges, max)
 				group.addElNoColour(text)
 				--tooltip_mc.list.positionElements()
