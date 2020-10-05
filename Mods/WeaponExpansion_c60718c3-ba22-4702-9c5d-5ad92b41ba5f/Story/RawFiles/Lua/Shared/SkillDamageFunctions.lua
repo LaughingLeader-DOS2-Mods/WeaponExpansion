@@ -664,7 +664,7 @@ end
 local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local skill = baseSkill
 	local countMult = 0
-	countMult = PersistentVars.SkillData.DarkFireballCount[attacker.MyGuid] or 0
+	countMult = PersistentVars.SkillData.DarkFireballCount[attacker.NetID] or 0
 	if countMult > 0 then
 		if not SkillPropsIsTable(skill) then
 			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
@@ -728,6 +728,21 @@ Skills.Damage.Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = 
 Skills.Damage.Target_LLWEAPONEX_Steal = function(...) return ScaleByHighestAttributeAndAbility("RogueLore", "_Daggers", AttributeScaleTables.NoMemory, ...) end
 Skills.Damage.Projectile_LLWEAPONEX_DarkFireball = GetDarkFireballDamage
 Skills.Damage.Cone_LLWEAPONEX_DarkFlamebreath = GetDarkFlamebreathDamage
+
+local function GetRunicCannonSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
+	---@type StatItem
+	local weapon = attacker.MainWeapon
+	if isTooltip ~= true then
+		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon, {WeaponType="Rifle"})
+	else
+		--return Game.Math.GetSkillDamageRange(attacker, skill, weapon, {WeaponType="Rifle"})
+		return Game.Math.GetSkillDamageRange(attacker, skill, weapon, {WeaponType="Rifle"})
+	end
+end
+
+Skills.Damage.Projectile_LLWEAPONEX_ArmCannon_Shoot = GetRunicCannonSkillDamage
+Skills.Damage.Zone_LLWEAPONEX_ArmCannon_Disperse = GetRunicCannonSkillDamage
 
 Skills.DamageFunctions.PistolDamage = GetPistolDamage
 Skills.DamageFunctions.HandCrossbowDamage = GetHandCrossbowDamage
