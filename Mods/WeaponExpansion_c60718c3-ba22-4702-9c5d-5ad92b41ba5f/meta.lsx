@@ -19,7 +19,7 @@
                             <attribute id="MD5" value="" type="23" />
                             <attribute id="Name" value="LeaderLib - Definitive Edition" type="22" />
                             <attribute id="UUID" value="7e737d2f-31d2-4751-963f-be6ccc59cd0c" type="22" />
-                            <attribute id="Version" value="371195908" type="4" />
+                            <attribute id="Version" value="385875968" type="4" />
                         </node>
                         <node id="ModuleShortDesc">
                             <attribute id="Folder" value="AnimationsPlus_326b8784-edd7-4950-86d8-fcae9f5c457c" type="30" />
@@ -33,7 +33,7 @@
                 <node id="ModuleInfo">
                     <attribute id="Author" value="LaughingLeader" type="30" />
                     <attribute id="CharacterCreationLevelName" value="" type="22" />
-                    <attribute id="Description" value="Adds a plethora of new weapons, including katana/odachi, quarterstaffs, offhand melee wands, runeblades, throwing weapons, dual shields, firearms, tons of unique items, and more!" type="30" />
+                    <attribute id="Description" value="Adds a plethora of new weapons, including katana/odachi, quarterstaffs, offhand melee wands, runeblades, throwing weapons, dual shields, firearms, tons of unique items, and more! Additionally Weapon Expansions adds a mastery sytem and menu, allowing you to grow your ability to wield specific weapon types as you use them in battle. Requires the script extender." type="30" />
                     <attribute id="DescriptionName" value="" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
                     <attribute id="DisplayName" value="Weapon Expansion" handle="h2cb50244g8d38g4a87g8924gc01a4a02f19a" type="28" />
                     <attribute id="Folder" value="WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f" type="30" />
@@ -41,14 +41,14 @@
                     <attribute id="LobbyLevelName" value="" type="22" />
                     <attribute id="MD5" value="" type="23" />
                     <attribute id="MenuLevelName" value="" type="22" />
-                    <attribute id="Name" value="Weapon Expansion" type="22" />
+                    <attribute id="Name" value="Weapon Expansion (Beta)" type="22" />
                     <attribute id="NumPlayers" value="2" type="1" />
                     <attribute id="PhotoBooth" value="SYS_NPC_Portrait_A" type="22" />
                     <attribute id="StartupLevelName" value="" type="22" />
-                    <attribute id="Tags" value="Uniques;Skills;Items;Weapons;UI;Presets;Classes;Models" type="30" />
+                    <attribute id="Tags" value="" type="30" />
                     <attribute id="Type" value="Add-on" type="22" />
                     <attribute id="UUID" value="c60718c3-ba22-4702-9c5d-5ad92b41ba5f" type="22" />
-                    <attribute id="Version" value="152633346" type="4" />
+                    <attribute id="Version" value="152698880" type="4" />
                     <children>
                         <node id="PublishVersion">
                             <attribute id="Version" value="909321303" type="4" />
