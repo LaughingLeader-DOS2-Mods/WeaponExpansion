@@ -203,7 +203,7 @@ if Ext.IsDeveloperMode() then
         local host = CharacterGetHostCharacter()
         for mastery,masterData in pairs(Masteries) do
             --local rank = Ext.Random(1,4)
-            local rank = 4
+            local rank = Ext.Random(1,4)
             local xp = 0
             if rank > 0 then
                 if rank >= 4 then
@@ -223,8 +223,6 @@ if Ext.IsDeveloperMode() then
             TagMasteryRanks(host, mastery, rank)
             Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)
         end
-        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Axe",4,Mastery.Variables.RankVariables[4].Required)
-        Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Unarmed",4,Mastery.Variables.RankVariables[4].Required)
     end)
 
     local function Debug_TradeTest(command, effect, bone, target)
