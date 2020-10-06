@@ -8,6 +8,8 @@ DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Elves_1H_B_1268f5f
 DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Humans_1H_A_3a404dab-4862-4490-aa0f-bc27d06fdc6c", "LLWEAPONEX_FX_EQ_CombatShield_Common_B");
 DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Lizards_1H_C_067f48be-857d-43a8-bd0a-add59f025843", "LLWEAPONEX_FX_EQ_CombatShield_Lizards_D");
 
+DB_LLWEAPONEX_CC_OriginPreset("LLWEAPONEX_Korvash");
+DB_LLWEAPONEX_CC_OriginPreset("LLWEAPONEX_Harken");
 KBSECTION
 
 IF
@@ -30,11 +32,35 @@ CharacterSetVisualElement(_Char, 0, "Color");
 */
 
 IF
-SkillAdded(_Char, _Skill, 0)
+SkillAdded(_Char, _Skill, _)
 AND
 CharacterGetOrigin(_Char, 1, "LLWEAPONEX_Korvash")
+AND
+GetUUID(_Char, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "CC_CheckKorvashColor", (STRING)_Char);
+NRD_ModCall("WeaponExpansion", "CC_CheckKorvashColor", _UUID);
+
+IF
+SkillAdded(_Char, _Skill, _)
+AND
+CharacterGetOrigin(_Char, 1, _Preset)
+AND
+DB_LLWEAPONEX_CC_OriginPreset(_Preset)
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "CC_HideStoryButton", _UUID);
+
+IF
+SkillAdded(_Char, _Skill, _)
+AND
+CharacterGetOrigin(_Char, 1, _Preset)
+AND
+NOT DB_LLWEAPONEX_CC_OriginPreset(_Preset)
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "CC_EnableStoryButton", _UUID);
 //END_REGION
 
 //REGION CC_EFFECTS

@@ -25,3 +25,36 @@ Ext.RegisterNetListener("LLWEAPONEX_FixLizardSkin", function(call, uuid)
 		end
 	end
 end)
+
+local registerCCListener = false
+local lastCCHandle = nil
+
+Ext.RegisterNetListener("LLWEAPONEX_CC_HideStoryButton", function(call, uuid)
+	local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
+	if ui ~= nil then
+		local main = ui:GetRoot()
+		main.header_mc.voiceOriginBtn_mc.visible = false
+		main.header_mc.voiceOriginBtn_mc.isEnabled = false
+		main.enableOrigin = false
+		lastCCHandle = main.characterHandle
+		print("Hid story button for", uuid)
+
+		if not registerCCListener then
+			Ext.RegisterUIInvokeListener(ui, "enableStoryPlayback", function(ui, method, enabled)
+				if enabled and main.characterHandle == lastCCHandle then
+					main.header_mc.voiceOriginBtn_mc.visible = false
+					main.header_mc.voiceOriginBtn_mc.isEnabled = false
+					main.enableOrigin = false
+				end
+			end)
+			registerCCListener = true
+		end
+	end
+end)
+
+Ext.RegisterNetListener("LLWEAPONEX_CC_EnableStoryButton", function(call, uuid)
+	local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
+	if ui ~= nil then
+		ui:Invoke("enableStoryPlayback", true)
+	end
+end)

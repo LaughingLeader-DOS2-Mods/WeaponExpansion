@@ -173,6 +173,20 @@ function CC_CheckKorvashColor(player)
 	end
 end
 
+function CC_HideStoryButton(uuid)
+	local character = Ext.GetCharacter(uuid)
+	if character ~= nil then-- Pink?
+		Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_CC_HideStoryButton", uuid)
+	end
+end
+
+function CC_EnableStoryButton(uuid)
+	local character = Ext.GetCharacter(uuid)
+	if character ~= nil then-- Pink?
+		Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_CC_EnableStoryButton", uuid)
+	end
+end
+
 function CC_SwapToHarkenAnvilPreview(player, preset)
 	if anvilSwapPresets[preset] == true then
 		local weapon = CharacterGetEquippedWeapon(player)
