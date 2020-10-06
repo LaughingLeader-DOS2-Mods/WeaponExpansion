@@ -8,10 +8,10 @@
                 <node id="OriginDesc">
                 	<attribute id="OriginDisplayName" value="Kor'vash" handle="h0276588cgb86ag44a5g8ddag3c48cbaf7943" type="28" />
                     <attribute id="OriginName" value="LLWEAPONEX_Korvash" type="22" />
-                	<attribute id="OriginDescription" value="After a stressful career as a mercenary, cleaning up after the messes of your crazy comrades, you find yourself captured by the Divine Order, charged with being a Sourcerer. If only they knew..." handle="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf" type="28" />
+                	<attribute id="OriginDescription" value="After a stressful career as a mercenary, cleaning up after the messes of your crazy comrades, you find yourself captured by the Divine Order, charged with being a Sourcerer. If only they knew." handle="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf" type="28" />
                 	<attribute id="OriginLongDescription" value="" handle="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf" type="28" />
                     <attribute id="CharacterUUID" value="3f20ae14-5339-4913-98f1-24476861ebd6" type="22" />
-                    <attribute id="UserCanAlterTags" value="1" type="19" />
+                    <attribute id="UserCanAlterTags" value="0" type="19" />
                     <attribute id="SkillSet" value="Avatar_LLWEAPONEX_Korvash" type="22" />
                     <attribute id="RootTemplateOverride" value="2a09ab5c-d8d2-4c90-ae74-9e5b06151d54" type="22" />
                     
