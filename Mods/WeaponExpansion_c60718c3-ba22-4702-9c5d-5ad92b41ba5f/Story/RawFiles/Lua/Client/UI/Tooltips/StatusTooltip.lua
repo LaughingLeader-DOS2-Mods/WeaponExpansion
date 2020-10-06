@@ -1,5 +1,5 @@
----@param character EsvCharacter
----@param status EsvStatus
+---@param character EclCharacter
+---@param status EclStatus
 ---@param tooltip TooltipData
 local function OnStatusTooltip(character, status, tooltip)
 	local data = Mastery.Params.StatusData[status.StatusId]
@@ -41,6 +41,26 @@ local function OnStatusTooltip(character, status, tooltip)
 				end
 			end
 		end
+	end
+	if status.StatusId == "LLWEAPONEX_ARMCANNON_CHARGED" then
+		-- local item = nil
+		-- for i,v in pairs(character:GetInventoryItems()) do
+		-- 	local x = Ext.GetItem(v)
+		-- 	if x:HasTag("LLWEAPONEX_RunicCannon") then
+		-- 		item = x
+		-- 		break
+		-- 	end
+		-- end
+		-- if item ~= nil then
+		-- 	local charges = PersistentVars.SkillData.RunicCannonCharges[item.NetID] or 0
+		-- end
+		local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
+		local text = Text.ItemTooltip.RunicCannonEnergy:ReplacePlaceholders(max, max)
+		local element = {
+			Type = "StatusImmunity",
+			Label = text
+		}
+		tooltip:AppendElement(element)
 	end
 end
 

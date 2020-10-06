@@ -68,7 +68,6 @@ Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAt
 ---@param target number[]
 ---@param hitObject EsvGameObject
 function MagicMissileWeapon_RollForBonusMissiles(attacker, target, hitObject)
-	print("MagicMissile rolling")
 	local chance1 = GameHelpers.GetExtraData("LLWEAPONEX_MagicMissile_BonusChance1", 45)
 	local chance2 = GameHelpers.GetExtraData("LLWEAPONEX_MagicMissile_BonusChance2", 30)
 	local chance3 = GameHelpers.GetExtraData("LLWEAPONEX_MagicMissile_BonusChance3", 10)

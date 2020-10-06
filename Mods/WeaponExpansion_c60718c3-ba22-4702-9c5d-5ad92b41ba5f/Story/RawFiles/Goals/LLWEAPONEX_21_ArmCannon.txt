@@ -6,6 +6,19 @@ LeaderLib_Statuses_Register_PermanentStatus("WeaponExpansion", "ArmCannon", "LLW
 KBSECTION
 
 //REGION EQUIP_EVENTS
+PROC
+LeaderLib_LoadingDone((STRING)_Region)
+AND
+DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+AND
+GetVarInteger(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", _Energy)
+AND
+GetUUID(_ArmCannon, _UUID)
+THEN
+ObjectClearFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
+LLWEAPONEX_ArmCannon_SetEnergyTags(_Char, _ArmCannon, _Energy);
+NRD_ModCall("WeaponExpansion", "ArmCannon_SyncData", _UUID);
+
 IF
 ItemTemplateEquipped("EQ_UNIQUE_LLWEAPONEX_ArmCannon_A_8a02d95d-dd91-4d97-9265-c3254923f9ee", _Char)
 AND
@@ -24,9 +37,11 @@ NOT DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon);
 
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
+AND
+CharacterIsPlayer(_Char, _ShowNotification)
 THEN
-CharacterAddSkill(_Char, "Projectile_LLWEAPONEX_ArmCannon_Shoot", 1);
-CharacterAddSkill(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", 1);
+CharacterAddSkill(_Char, "Projectile_LLWEAPONEX_ArmCannon_Shoot", _ShowNotification);
+CharacterAddSkill(_Char, "Zone_LLWEAPONEX_ArmCannon_Disperse", _ShowNotification);
 
 PROC
 LLWEAPONEX_ArmCannon_OnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
@@ -55,7 +70,11 @@ NRD_ModCall("LeaderLib", "SetSkillEnabled", _UUID, "Projectile_LLWEAPONEX_ArmCan
 PROC
 LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
 AND
-_Energy >= 3
+NRD_StatGetExtraData("LLWEAPONEX_RunicCannon_MaxEnergy", _MaxR)
+AND
+Integer(_MaxR, _Max)
+AND
+_Energy >= _Max
 AND
 GetUUID(_Char, _UUID)
 THEN
@@ -64,9 +83,7 @@ LeaderLib_Statuses_ApplyPermanentStatus(_Char, "LLWEAPONEX_ARMCANNON_CHARGED", 1
 NRD_ModCall("LeaderLib", "SetSkillEnabled", _UUID, "Zone_LLWEAPONEX_ArmCannon_Disperse", "true");
 
 PROC
-LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, (INTEGER)_Energy)
-AND
-_Energy <= 0
+LLWEAPONEX_ArmCannon_SetEnergyTags((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon, 0)
 AND
 GetUUID(_Char, _UUID)
 THEN
@@ -183,6 +200,23 @@ THEN
 CharacterUnequipItem(_Char, _Item);
 ItemToInventory(_Item, _Char, 1, 0, 0);
 
+QRY
+LLWEAPONEX_ArmCannon_QRY_UnequipCurrentWeapon((CHARACTERGUID)_Char)
+AND
+NOT DB_GlobalFlag("LLWEAPONEX_ArmCannonRestrictionsDisabled")
+AND
+CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
+AND
+_Item != NULL_00000000-0000-0000-0000-000000000000
+AND
+NRD_ItemGetStatsId(_Item, _Stat)
+AND
+NRD_StatGetString(_Stat, "ItemType", "Weapon")
+THEN
+ItemLockUnEquip(_Item, 0);
+CharacterUnequipItem(_Char, _Item);
+ItemToInventory(_Item, _Char, 1, 0, 0);
+
 PROC
 LLWEAPONEX_ArmCannon_EquipCannonWeapon((CHARACTERGUID)_Char, (ITEMGUID)_ArmCannon)
 AND
@@ -230,7 +264,7 @@ DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 AND
 ItemIsEquipable(_Weapon, 1)
 AND
-NOT DB_GlobalFlag("LLWEAPONEX_NoArmCannonRestrictions")
+NOT DB_GlobalFlag("LLWEAPONEX_ArmCannonRestrictionsDisabled")
 AND
 NOT GetTemplate(_Weapon, "WPN_UNIQUE_LLWEAPONEX_ArmCannon_A_3b11f892-f6ae-43c8-af73-bcdf5abf64ec")
 AND
@@ -245,7 +279,7 @@ PROC
 LLWEAPONEX_ArmCannon_BlockNextEnergyGain((CHARACTERGUID)_Char, (INTEGER)_Delay)
 THEN
 ObjectSetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
-LeaderLib_Timers_StartObjectTimer(_Char, 750, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy", "LLWEAPONEX_ArmCannon_ClearBlockEnergy");
+LeaderLib_Timers_StartObjectTimer(_Char, _Delay, "LLWEAPONEX_Timers_ArmCannon_ClearBlockEnergy", "LLWEAPONEX_ArmCannon_ClearBlockEnergy");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_ArmCannon_ClearBlockEnergy")
@@ -254,38 +288,39 @@ ObjectClearFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0);
 
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Char)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0)
-AND
-CharacterIsEnemy(_Char, _Target, 1)
-AND
-DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
-LeaderLib_Variables_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 1, 3);
+LLWEAPONEX_ArmCannon_OnHit(_Char, _Target);
 
-//Allow only 1 energy per attack when dual wielding
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_ARMCANNON_HIT", (CHARACTERGUID)_Char)
-AND
-CharacterIsEnemy(_Char, _Target, 1)
+PROC
+LLWEAPONEX_ArmCannon_OnHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Target)
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0)
 AND
+CharacterIsEnemy(_Char, _Target, 1)
+AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 AND
-CharacterGetEquippedItem(_Char, "Shield", (ITEMGUID)_Item)
+NRD_StatGetExtraData("LLWEAPONEX_RunicCannon_MaxEnergy", _MaxR)
 AND
-LLWEAPONEX_QRY_ItemIsWeapon(_Char, _Item)
+Integer(_MaxR, _Max)
 THEN
-LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
+LeaderLib_Variables_ModifyVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 1, _Max);
 
 PROC
 LeaderLib_Variables_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
+AND
+GetUUID(_Char, _UUID)
+AND
+GetUUID(_ArmCannon, _ItemUUID)
+AND
+NRD_IntegerToString(_LastValue, _Last)
+AND
+NRD_IntegerToString(_NextValue, _Next)
 THEN
-LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_20_UniqueEquipment:OnVariableChanged] LLWEAPONEX_ArmCannon_Energy set to ",_LastValue, " => ",_NextValue, "");
 LLWEAPONEX_ArmCannon_SetEnergyTags(_Char, _ArmCannon, _NextValue);
+NRD_ModCall("WeaponExpansion", "ArmCannon_OnEnergyChanged", _UUID, _ItemUUID, _Last, _Next);
 
 PROC
 LeaderLib_Variables_OnVariableIntChanged((ITEMGUID)_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", (INTEGER)_LastValue, (INTEGER)_NextValue)
@@ -311,7 +346,14 @@ DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 THEN
 LLWEAPONEX_ArmCannon_BlockNextEnergyGain(_Char, 750);
 LeaderLib_Variables_SetVariableInt(_ArmCannon, "LLWEAPONEX_ArmCannon_Energy", 0);
-SetStoryEvent(_Char, "LLWEAPONEX_ArmCannon_Disperse_Explode");
+ProcObjectTimer(_Char, "Timers_LLWEAPONEX_RunicCannonDisperse_Explode", 1000);
+
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLWEAPONEX_RunicCannonDisperse_Explode")
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "ArmCannon_DisperseCast", _UUID);
 
 IF
 CharacterUsedSkillAtPosition(_Char, _x, _y, _z, "Target_LLWEAPONEX_ArmCannon_AbsorbSurface", _, _)

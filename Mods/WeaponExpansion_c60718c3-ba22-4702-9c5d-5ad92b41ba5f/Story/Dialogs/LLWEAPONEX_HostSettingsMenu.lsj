@@ -496,7 +496,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "LLWEAPONEX_NoArmCannonRestrictions"
+															"value": "LLWEAPONEX_ArmCannonRestrictionsDisabled"
 														},
 														"value": {
 															"type": 19,
@@ -598,7 +598,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "LLWEAPONEX_NoArmCannonRestrictions"
+															"value": "LLWEAPONEX_ArmCannonRestrictionsDisabled"
 														},
 														"value": {
 															"type": 19,
@@ -1643,7 +1643,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "LLWEAPONEX_NoArmCannonRestrictions"
+															"value": "LLWEAPONEX_ArmCannonRestrictionsDisabled"
 														},
 														"value": {
 															"type": 19,
@@ -1745,7 +1745,7 @@
 													{
 														"name": {
 															"type": 22,
-															"value": "LLWEAPONEX_NoArmCannonRestrictions"
+															"value": "LLWEAPONEX_ArmCannonRestrictionsDisabled"
 														},
 														"value": {
 															"type": 19,

@@ -119,23 +119,15 @@ end
 LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 	local hitSucceeded = GameHelpers.HitSucceeded(target, handle, false)
 	local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
-	if skill == "Zone_LLWEAPONEX_ArmCannon_Disperse" or skill == "Projectile_LLWEAPONEX_ArmCannon_Shoot" then
+	if skill == "Zone_LLWEAPONEX_ArmCannon_Disperse" or skill == "Projectile_LLWEAPONEX_ArmCannon_Shoot" or skill == "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion" then
 		NRD_StatusSetInt(target, handle, "Hit", 1)
 		NRD_StatusSetInt(target, handle, "Dodged", 0)
 		NRD_StatusSetInt(target, handle, "Missed", 0)
-		NRD_StatusSetInt(target, handle, "Blocked", 0)
 		hitSucceeded = true
 	end
 
 	if not StringHelpers.IsNullOrEmpty(source) and not StringHelpers.IsNullOrEmpty(target) and hitSucceeded then
-		local hitWithWeapon = GameHelpers.HitWithWeapon(target, handle, false, true)
-		if hitWithWeapon or IsWeaponSkill(skill) then
-			local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
-			if b and expGain > 0 then
-				AddMasteryExperienceForAllActive(source, expGain)
-			end
-		end
-		if GameHelpers.HitSucceeded(target, handle, false) then
+		if skill == "" and GameHelpers.HitWithWeapon(target, handle, false, false) then
 			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
 			if totalOnHitCallbacks > 0 then
 				local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
@@ -165,6 +157,20 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 				local b,err = xpcall(callback, debug.traceback, true, StringHelpers.GetUUID(source), StringHelpers.GetUUID(target), handle, damage)
 				if not b then
 					Ext.PrintError(err)
+				end
+			end
+		elseif skill ~= "" then
+			if IsTagged(source, "LLWEAPONEX_RunicCannonEquipped") == 1 
+			and not string.find(skill, "Cannon")
+			and IsMeleeWeaponSkill(skill)
+			then
+				ArmCannon_OnWeaponSkillHit(source, target, skill)
+			end
+			if IsWeaponSkill(skill) then
+				printd("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon skill by source("..tostring(source)..").")
+				local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
+				if b and expGain > 0 then
+					AddMasteryExperienceForAllActive(source, expGain)
 				end
 			end
 		end

@@ -126,8 +126,19 @@ end
 
 Ext.NewCall(AddMasteryExperienceForAllActive, "LLWEAPONEX_Ext_AddMasteryExperienceForAllActive", "(CHARACTERGUID)_Character, (REAL)_ExperienceGain")
 
-local function HasRequirement(val)
-	return val ~= nil and val ~= "None" and val ~= ""
+local function HasRequirement(val, matchAny)
+	if matchAny == nil then
+		return val ~= nil and val ~= "None" and val ~= ""
+	else
+		if val ~= nil and val ~= "None" and val ~= "" then
+			for i,v in pairs(matchAny) do
+				if val == v then
+					return true
+				end
+			end
+		end
+		return false
+	end
 end
 
 function IsWeaponSkill(skill)
@@ -139,6 +150,21 @@ function IsWeaponSkill(skill)
 		if (stat.UseWeaponDamage == "Yes" 
 		or stat.UseWeaponProperties == "Yes")
 		or (HasRequirement(stat.Requirement) and stat["Damage Multiplier"] > 0) then
+			return true
+		end
+	end
+	return false
+end
+
+function IsMeleeWeaponSkill(skill)
+	if skill == nil or skill == "" then
+		return false
+	end
+	local stat = Ext.GetStat(skill)
+	if stat ~= nil then
+		if (stat.UseWeaponDamage == "Yes" 
+		or stat.UseWeaponProperties == "Yes")
+		or (HasRequirement(stat.Requirement, {"MeleeWeapon", "DaggerWeapon", "StaffWeapon", "ShieldWeapon"}) and stat["Damage Multiplier"] > 0) then
 			return true
 		end
 	end

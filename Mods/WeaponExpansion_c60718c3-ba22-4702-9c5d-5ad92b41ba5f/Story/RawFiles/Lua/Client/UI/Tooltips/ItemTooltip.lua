@@ -97,7 +97,7 @@ local TwoHandedText = ts:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Ha
 
 ---@type WeaponTypeNameEntry[]
 local WeaponTypeNames = {
-	{Tag="LLWEAPONEX_RunicCannon", Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Cannon")},
+	{Tag="LLWEAPONEX_RunicCannon", Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry")},
 	{Tag="LLWEAPONEX_Banner", Text=ts:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
 	{Tag="LLWEAPONEX_BattleBook", Text=ts:Create("he053a3abge5d8g4d14g9333ga18d6eba3df1", "Battle Book")},
 	{Tag="LLWEAPONEX_Blunderbuss", Text=ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss")},
@@ -219,13 +219,20 @@ local EquipmentTypes = {
 	Armor = true,
 }
 
-local LLWEAPONEX_UI_RunicCannonEnergy = ts:Create("h02882207g5e7bg4deaga22eg854b68f8dd29", "<font color='#33FFAA'>Runic Energy [1]</font>")
-
 ---@param item EclItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
 	---@type EclCharacter
 	local character = Client:GetCharacter()
+
+	local flags = tooltip:GetElements("Flags")
+	if flags ~= nil and #flags > 0 then
+		for i,v in pairs(flags) do
+			if v.Label == Text.Game.Unbreakable.Value then
+				tooltip:RemoveElement(v)
+			end
+		end
+	end
 
 	if item ~= nil then
 		if item.StatsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
@@ -298,9 +305,13 @@ local function OnItemTooltip(item, tooltip)
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
 			end
 			if item:HasTag("LLWEAPONEX_RunicCannon") then
+				if item.ItemType == "Weapon" then
+					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_ARMCANNON_HIT_DisplayName", "Builds Energy on Hit")
+					tooltip:AppendElement({Type="ExtraProperties", Label = text})
+				end
 				local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
 				local charges = PersistentVars.SkillData.RunicCannonCharges[item.NetID] or 0
-				local text = LLWEAPONEX_UI_RunicCannonEnergy:ReplacePlaceholders(charges, max)
+				local text = Text.ItemTooltip.RunicCannonEnergy:ReplacePlaceholders(charges, max)
 				local element = {
 					Type = "ExtraProperties",
 					Label = text
