@@ -188,6 +188,39 @@ local function IsEnemySkill(skill)
 	return false
 end
 
+local player_stats = {
+	--["_Base"] = true,
+	["_Hero"] = true,
+	["HumanFemaleHero"] = true,
+	["HumanMaleHero"] = true,
+	["DwarfFemaleHero"] = true,
+	["DwarfMaleHero"] = true,
+	["ElfFemaleHero"] = true,
+	["ElfMaleHero"] = true,
+	["LizardFemaleHero"] = true,
+	["LizardMaleHero"] = true,
+	["HumanUndeadFemaleHero"] = true,
+	["HumanUndeadMaleHero"] = true,
+	["DwarfUndeadFemaleHero"] = true,
+	["DwarfUndeadMaleHero"] = true,
+	["ElfUndeadFemaleHero"] = true,
+	["ElfUndeadMaleHero"] = true,
+	["LizardUndeadFemaleHero"] = true,
+	["LizardUndeadMaleHero"] = true,
+	["_Companions"] = true,
+	["StoryPlayer"] = true,
+	["CasualPlayer"] = true,
+	["NormalPlayer"] = true,
+	["HardcorePlayer"] = true,
+	["Player_Ifan"] = true,
+	["Player_Lohse"] = true,
+	["Player_RedPrince"] = true,
+	["Player_Sebille"] = true,
+	["Player_Beast"] = true,
+	["Player_Fane"] = true,
+	--["Summon_Earth_Ooze_Player"] = true,
+}
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
@@ -256,6 +289,14 @@ local function StatOverrides_Init()
 				else
 					Ext.StatSetAttribute(stat, "ComboCategory", {"UniqueWeapon"})
 				end
+			end
+		end
+	end
+
+	if Ext.IsDeveloperMode() then
+		for stat,b in pairs(player_stats) do
+			if b and Ext.StatGetAttribute(stat, "Accuracy") == 95 then
+				Ext.StatSetAttribute(stat, "Accuracy", 100)
 			end
 		end
 	end
