@@ -227,13 +227,6 @@ if Ext.IsDeveloperMode() then
         Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,"LLWEAPONEX_Unarmed",4,Mastery.Variables.RankVariables[4].Required)
     end)
 
-    local function Debug_PlayEffectCommand(command, effect, bone, target)
-        if target == nil then target = CharacterGetHostCharacter() end
-        if bone == nil then bone = "" end
-        PlayEffect(target, effect, bone)
-    end
-    Ext.RegisterConsoleCommand("fx", Debug_PlayEffectCommand)
-
     local function Debug_TradeTest(command, effect, bone, target)
         if target == nil then 
             target = CharacterGetHostCharacter() 

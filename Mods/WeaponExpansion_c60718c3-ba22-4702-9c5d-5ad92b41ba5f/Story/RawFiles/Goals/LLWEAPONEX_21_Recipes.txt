@@ -43,166 +43,6 @@ DB_LLWEAPONEX_Recipes_Data("BalrinAxe", "WPN_UNIQUE_LLWEAPONEX_Axe_1H_Throwable_
 DB_LLWEAPONEX_Recipes_Data("Orb_Thunder", "LOOT_LLWEAPONEX_Orb_Thunder_A_Upgrade");
 DB_LLWEAPONEX_Recipes_Data("Orb_Thunder", "LOOT_LLWEAPONEX_Orb_Thunder_B_Upgrade");
 
-LLWEAPONEX_Recipes_Register_Unique("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Firearm_Blunderbuss_2H_A_507801c0-4c6b-4b39-9aed-13fcd0962dd9");
-DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Blunderbuss_A", "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8");
-DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Omnibolt", "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Warchief_A_Spear", "WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_93acdd5a-dc43-4cdc-90cf-560b310d5f08");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Spear", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Spear", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Spear", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Spear", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Spear", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Spear", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Spear_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Warchief_A_Axe", "WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_76ab9d36-2f5f-4cb1-822d-2da2040a5347");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Axe", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Axe", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Axe", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Axe", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Axe", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Warchief_A_Axe", "WPN_UNIQUE_LLWEAPONEX_Halberd_2H_Warchief_Axe_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a");
-DB_LLWEAPONEX_Recipes_Data("Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Muramasa", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_1_b1320940-1afb-479a-b510-875afdb12d41");
-DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Raizan_1", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_1_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_2_e03787b9-acac-4563-953e-a1149a6ebec1");
-DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Raizan_2", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_2_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Sword_2H_Raizan_3_fa2345b0-68f5-443f-8665-d2a5991bbf29");
-DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Raizan_3", "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Raizan_3_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("FireKatanaRuneblade", "WPN_UNIQUE_LLWEAPONEX_Katana_Dagger_Runeblade_Fire_1H_A_25726991-6bc1-45fb-a00b-d3bf855cd0d1");
-DB_LLWEAPONEX_Recipes_Data("FireKatanaRuneblade", "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToCon");
-DB_LLWEAPONEX_Recipes_Data("FireKatanaRuneblade", "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToFin");
-DB_LLWEAPONEX_Recipes_Data("FireKatanaRuneblade", "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToInt");
-DB_LLWEAPONEX_Recipes_Data("FireKatanaRuneblade", "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToMem");
-DB_LLWEAPONEX_Recipes_Data("FireKatanaRuneblade", "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToStr");
-DB_LLWEAPONEX_Recipes_Data("FireKatanaRuneblade", "WPN_UNIQUE_LLWEAPONEX_Katana_Runeblade_Fire_1H_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("PowerPole", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_Spear_2H_PowerPole_3a40634d-b4c3-482a-9f24-c5e93b336d6a");
-DB_LLWEAPONEX_Recipes_Data("PowerPole", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToCon");
-DB_LLWEAPONEX_Recipes_Data("PowerPole", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToFin");
-DB_LLWEAPONEX_Recipes_Data("PowerPole", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToInt");
-DB_LLWEAPONEX_Recipes_Data("PowerPole", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToMem");
-DB_LLWEAPONEX_Recipes_Data("PowerPole", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToStr");
-DB_LLWEAPONEX_Recipes_Data("PowerPole", "WPN_UNIQUE_LLWEAPONEX_Quarterstaff_PowerPole_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("WaterRapierRuneblade_1", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_d82bc239-4782-484c-88ab-e1fa571c9f6a");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_1", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToCon");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_1", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToFin");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_1", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToInt");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_1", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToMem");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_1", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToStr");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_1", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("WaterRapierRuneblade_2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_2_6a811339-a28f-44a6-980b-0289cc45cffa");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToCon");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToFin");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToInt");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToMem");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToStr");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_2", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("WaterRapierRuneblade_3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Dagger_Runeblade_Water_1H_3_c715d004-5d66-4301-8360-2c6c2e25f678");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToCon");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToFin");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToInt");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToMem");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToStr");
-DB_LLWEAPONEX_Recipes_Data("WaterRapierRuneblade_3", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("ChaosEdge_2H", "WPN_UNIQUE_LLWEAPONEX_Runeblade_Chaos_Sword_2H_428c023d-a614-49cc-911d-499a6af4cbf5");
-DB_LLWEAPONEX_Recipes_Data("ChaosEdge_2H", "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToCon");
-DB_LLWEAPONEX_Recipes_Data("ChaosEdge_2H", "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToFin");
-DB_LLWEAPONEX_Recipes_Data("ChaosEdge_2H", "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToInt");
-DB_LLWEAPONEX_Recipes_Data("ChaosEdge_2H", "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToMem");
-DB_LLWEAPONEX_Recipes_Data("ChaosEdge_2H", "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToStr");
-DB_LLWEAPONEX_Recipes_Data("ChaosEdge_2H", "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("DeathEdge_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ca61e441-9446-40ac-811d-736327d4a0f0");
-DB_LLWEAPONEX_Recipes_Data("DeathEdge_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("DeathEdge_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("DeathEdge_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("DeathEdge_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("DeathEdge_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("DeathEdge_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("SoulHarvest_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_c308b26a-98d1-4429-8cce-4940f6eb5f69");
-DB_LLWEAPONEX_Recipes_Data("SoulHarvest_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("SoulHarvest_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("SoulHarvest_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("SoulHarvest_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("SoulHarvest_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("SoulHarvest_A", "WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Banner_DivineOrder_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ee686596-394f-44ae-867b-4596de1feedb");
-DB_LLWEAPONEX_Recipes_Data("Banner_DivineOrder_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Banner_DivineOrder_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Banner_DivineOrder_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Banner_DivineOrder_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Banner_DivineOrder_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Banner_DivineOrder_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_DivineOrder_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Banner_Dwarves_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_59675259-8e78-48fd-acad-cf70c90bc909");
-DB_LLWEAPONEX_Recipes_Data("Banner_Dwarves_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Banner_Dwarves_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Banner_Dwarves_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Banner_Dwarves_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Banner_Dwarves_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Banner_Dwarves_A", "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Beholder_A", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_1cc2baa1-cd58-40a3-8b53-89ef2e081616");
-DB_LLWEAPONEX_Recipes_Data("Beholder_A", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Beholder_A", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Beholder_A", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Beholder_A", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Beholder_A", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Beholder_A", "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_ToWit");
-
-LLWEAPONEX_Recipes_Register_Unique("Wraithblade_2H_A", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_Sword_2H_A_ca59856d-6876-4f9c-8fe5-e086df193ca6");
-DB_LLWEAPONEX_Recipes_Data("Wraithblade_2H_A", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToCon");
-DB_LLWEAPONEX_Recipes_Data("Wraithblade_2H_A", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToFin");
-DB_LLWEAPONEX_Recipes_Data("Wraithblade_2H_A", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToInt");
-DB_LLWEAPONEX_Recipes_Data("Wraithblade_2H_A", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToMem");
-DB_LLWEAPONEX_Recipes_Data("Wraithblade_2H_A", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToStr");
-DB_LLWEAPONEX_Recipes_Data("Wraithblade_2H_A", "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A_ToWit");
-
 PROC
 LLWEAPONEX_Recipes_Register_Unique((STRING)_ID, (STRING)_Template)
 AND
@@ -244,6 +84,8 @@ LLWEAPONEX_Recipes_Unlock(_Player, _ID);
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, "LLWEAPONEX_Runeblade", (INTEGER)_MasteryLevel)
 AND
+UserGetFlag(_Player, "LLWEAPONEX_AutoUnlockRecipesDisabled", 0)
+AND
 _MasteryLevel >= 1
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Runeblade_Inert", 1)
@@ -254,6 +96,8 @@ LLWEAPONEX_Recipes_Unlock(_Player, "Runeblade_Inert");
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, "LLWEAPONEX_Quarterstaff", (INTEGER)_MasteryLevel)
 AND
+UserGetFlag(_Player, "LLWEAPONEX_AutoUnlockRecipesDisabled", 0)
+AND
 _MasteryLevel >= 0
 AND
 ObjectGetFlag(_Player, "LLWEAPONEX_Recipes_Unlocked_Quarterstaff", 1)
@@ -263,6 +107,8 @@ LLWEAPONEX_Recipes_Unlock(_Player, "Quarterstaffs");
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryLeveledUp((CHARACTERGUID)_Player, "LLWEAPONEX_ThrowingAbility", (INTEGER)_MasteryLevel)
+AND
+UserGetFlag(_Player, "LLWEAPONEX_AutoUnlockRecipesDisabled", 0)
 AND
 _MasteryLevel >= 1
 AND
