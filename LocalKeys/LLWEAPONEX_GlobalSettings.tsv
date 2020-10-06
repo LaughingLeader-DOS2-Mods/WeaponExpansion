@@ -1,9 +1,13 @@
 Key	Content	Handle
-LLWEAPONEX_NoArmCannonRestrictions	Enable Runic Cannon Restrictions	h701b61a2g639eg4cf4gb76cg41c26d551d63
-LLWEAPONEX_NoArmCannonRestrictions_Description	The Runic Cannon normally only works with an empty hand or shield. Disabling this allows you to dual-wield it with regular weapons, but this may not be as balanced.	h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f
+LLWEAPONEX_ArmCannonRestrictionsDisabled	Enable [Key:ARM_UNIQUE_LLWEAPONEX_ArmCannon_A_DisplayName] Restrictions	h701b61a2g639eg4cf4gb76cg41c26d551d63
+LLWEAPONEX_ArmCannonRestrictionsDisabled_Description	The [Key:ARM_UNIQUE_LLWEAPONEX_ArmCannon_A_DisplayName] normally only works with an empty hand or shield. Disabling this allows you to dual-wield it with regular weapons, but this may not be as balanced.	h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f
+LLWEAPONEX_AutoUnlockRecipesDisabled	Enable Recipe Auto-Unlock	h9620e662g0eb2g4a12ga163gb4d80feefcfc
+LLWEAPONEX_AutoUnlockRecipesDisabled_Description	Enable automatically unlocking certain Weapon Expansion recipes when requirements are met, such as shuriken recipes as Throwing Mastery rank 1.	he722bf48g92b6g4a97g8776g281d899f9b1d
 LLWEAPONEX_RemoteChargeDetonationCountDisabled	Enable Remote Charge Detonation Limit	h145c7401gf7bbg45cag9233g74278a112220
 LLWEAPONEX_RemoteChargeDetonationCountDisabled_Description	Restrict the total number of remote changes that can detonate at once. If disabled, you can blow up everything in an inventory at once (not recommended for balance).	h580f2857g0a22g417cg80begc399154191cc
 LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled	Make the [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] Automatically Recharge	he3183667gd912g4492g833fgadb200ea2dd7
 LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled_Description	If enabled, [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] will automatically recharge over time. If disabled, charges are restored by enemies dying in battle.
 LLWEAPONEX_ThrowObjectLimitDisabled	Enable [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] Limit	h8b499dd6g523fg40e2ga746g4adf2a1f63fb
 LLWEAPONEX_ThrowObjectLimitDisabled_Description	Enable the weight limit on [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] (Recommended). If enabled, you can only throw heavy characters if you have 40 Strength or Rank 4 Throwing Mastery.	hfc4163a2g4e16g4de9gb991g4e92e7d6b438
+LLWEAPONEX_SettingsMenu_Section_General	General	h6145e729g4cb0g4018gafe9gd89175b8943d
+LLWEAPONEX_SettingsMenu_Section_Uniques	<font color='#C7A758'>Unique Items</font>	h903efedcge7b3g485ag87bfgc121d0ecad7f

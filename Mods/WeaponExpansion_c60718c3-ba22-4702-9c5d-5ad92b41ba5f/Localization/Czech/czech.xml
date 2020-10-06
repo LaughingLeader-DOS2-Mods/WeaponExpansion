@@ -160,7 +160,7 @@
 	<content contentuid="h103f5af9g1796g4ba0gb403gdb5007789fb1">Character is inspired by the &lt;font color=&apos;#c5a65a&apos;&gt;Banner of the Pack&lt;/font&gt;. Ferocity is unleashed.</content>
 	<content contentuid="h1071f739gc117g4d6fg933fg6dda12d39ab1">a Sword</content>
 	<content contentuid="h10d0ca08gc1f7g4adegb98fg8244438216a0">Old Flintlock Pistol</content>
-	<content contentuid="h10dce197g7a65g4923ga8b1g58f5ec28306d">The &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt; is charged and ready to disperse stored energy.&quot;</content>
+	<content contentuid="h10dce197g7a65g4923ga8b1g58f5ec28306d">The &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt; is charged and ready to disperse stored energy.</content>
 	<content contentuid="h10eec491gd033g4bcfgb924gcdbd52f11ffd">Lightning Rune</content>
 	<content contentuid="h10f14d81ga145g468ag892fg8392908c6a4f">Throw Displacement Charge</content>
 	<content contentuid="h11723efcg6edbg45dag92f1g2f36eca30ecd">&lt;font color=&apos;#FF9600&apos;&gt;Token of Strength&lt;/font&gt;</content>
@@ -404,7 +404,7 @@
 	<content contentuid="h29991fbcg6968g4feeg9a60gcc8c04fdbd73">Attack of Opportunities deal [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_AttackOfOpportunityMaxDamageBonus]% more damage, in proportion to the target&apos;s missing vitality.</content>
 	<content contentuid="h29b88cbdgcf34g4e8bg92fag54c3db611627">Activate &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;</content>
 	<content contentuid="h29d30edeg0e92g453ag95begcea9915f2e6d">Activate &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt;</content>
-	<content contentuid="h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd">Automatically Equips the Runic Cannon in the Mainhand</content>
+	<content contentuid="h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd">Mainhand Auto-Equip</content>
 	<content contentuid="h2a0665b1g8dd2g4289g8904g55faee895595">Marauder</content>
 	<content contentuid="h2a1c77bcgc0e7g4689g8b43g0b794dca1052">Host Settings</content>
 	<content contentuid="h2a2acf6eg099ag48f3g8ffeg66f8800021a5">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery III&lt;/font&gt;</content>
@@ -480,7 +480,7 @@
 	<content contentuid="h31246356gaf34g40e6g97bdg4809255e71f0">Test Status</content>
 	<content contentuid="h31268fcagadacg4670ga80bge8322f1d79b5">Vulnerable</content>
 	<content contentuid="h313c4c7eg0562g4952gbbf9gd1c810163574">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos; icon=&apos;Skill_Warrior_BatteringRam;Skill_Polymorph_BullRush&apos;/&gt;If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.&lt;icon id=&apos;Shout_InspireStart&apos; icon=&apos;Skill_Warrior_Inspire&apos;/&gt;Fear, Madness, and Sleep are cleansed from encouraged allies.</content>
-	<content contentuid="h314ea21fg9e36g4d19gba1fgb5b55eb69808">Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;At the end of the beam, the energy explodes in a [2] radius, dealing [3] and applying any active rune effects.&lt;/font&gt;&lt;br&gt;Depletes the energy in the &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt;.</content>
+	<content contentuid="h314ea21fg9e36g4d19gba1fgb5b55eb69808">Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;After the beam expires, the remaining energy explodes in a [2] radius around you, dealing [3] and applying any active rune effects.&lt;/font&gt;&lt;br&gt;Depletes the energy in the &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt;.</content>
 	<content contentuid="h31557319gc435g4ec5ga57ag3c80024b6b71">Chaotic Power</content>
 	<content contentuid="h3162baf9g0fc0g4a9cg99a0g64b5cefe3e76">Dusty Book</content>
 	<content contentuid="h31665c96g84a4g4e62g9309g68dad236cf99">Shoddy Greatbow</content>
@@ -898,6 +898,7 @@
 	<content contentuid="h612c0e22ga361g49f4g832ag8c6ef843f0e3">Honed Glaive</content>
 	<content contentuid="h612dc892gf5b9g4ef6g93f5gc65ee9714c24">A scholar&apos;s dearest weapon. Beat them down with &lt;i&gt;KNOWLEDGE!&lt;/i&gt;</content>
 	<content contentuid="h6138ae71gce86g4ef9g8c83gd44176e04f5c">Old Runeblade of Air</content>
+	<content contentuid="h6145e729g4cb0g4018gafe9gd89175b8943d">General</content>
 	<content contentuid="h615bb491g0d04g468fgaa1dg334d3941b2a7">Shoot Rod (Offhand)</content>
 	<content contentuid="h61662ba1ga358g4544ga3c7gd013f937dc5b">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to activate that element within their blade for a limited time.</content>
 	<content contentuid="h6170c12dgb0abg4bccg93bag5f6450105b58">Vineguard, Cradle of the Divine</content>
@@ -1036,8 +1037,8 @@
 	<content contentuid="h6fc14e25ga766g4504gad15g5f4a4a66b99a">&lt;font color=&apos;#797980&apos;&gt;Smokescreen Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h6fc82247g8e16g4085g9bfag539c8a0eaca5">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Too Heavy!&lt;/font&gt;</content>
 	<content contentuid="h6fe2f7f5g746fg4779g8029g89b1c9bb21b5">&lt;font color=&apos;#ffc721&apos;&gt;Mastery Scroll:&lt;/font&gt; Leg Sweep</content>
-	<content contentuid="h701b61a2g639eg4cf4gb76cg41c26d551d63">Enable Runic Cannon Restrictions</content>
-	<content contentuid="h702bf925gf664g45a7gb3f5g34418bfa2c56">Runic Cannon</content>
+	<content contentuid="h701b61a2g639eg4cf4gb76cg41c26d551d63">Enable [Key:ARM_UNIQUE_LLWEAPONEX_ArmCannon_A_DisplayName] Restrictions</content>
+	<content contentuid="h702bf925gf664g45a7gb3f5g34418bfa2c56">Runic Weaponry</content>
 	<content contentuid="h703f41c3g4ca1g463ag8550g3ef66dfd8a8d">Character is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; from a hot wind!</content>
 	<content contentuid="h7072fa7bgc209g40dfgb255g26cfcc34b6da">Grave Rune</content>
 	<content contentuid="h7081960fg5dc7g4f98gb8ffg6c2f900e4259">Stormrider</content>
@@ -1337,6 +1338,7 @@
 	<content contentuid="h9007385fg317ag4f1dg9a03g11f9d263f11f">Severing Halberd</content>
 	<content contentuid="h90150fa8ge487g45e5g8aabg80686ce84769">&lt;font color=&apos;#5B40FF&apos;&gt;Dagger Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h902c583egd55eg4088gb872gaffefa72041d">Hero&apos;s Estoc</content>
+	<content contentuid="h903efedcge7b3g485ag87bfgc121d0ecad7f">&lt;font color=&apos;#C7A758&apos;&gt;Unique Items&lt;/font&gt;</content>
 	<content contentuid="h9045efcdg0e97g4884g95a2g9bfc844868f2">Monk (Finesse)</content>
 	<content contentuid="h904a6729gae64g4aecg8658g366b3ecc35a5">Gas Rune</content>
 	<content contentuid="h9054a1e9g8b48g42cfg8bbcg6483ed25a227">You really should think twice about attacking me. It won&apos;t end well for you.</content>
@@ -1397,6 +1399,7 @@
 	<content contentuid="h96126697gaefeg49e8gbc9egb475a5c03427">&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade Mastery I&lt;/font&gt;</content>
 	<content contentuid="h96135bc7gda76g453ag8f51g814a233239ad">Character has internal injuries from an impaled weapon.</content>
 	<content contentuid="h9620932bgb03bg4cb6gb965gc3c36e1f3d24">Surface Tension</content>
+	<content contentuid="h9620e662g0eb2g4a12ga163gb4d80feefcfc">Enable Recipe Auto-Unlock</content>
 	<content contentuid="h9668e4b7gd33bg4523gb769g5e85d5e3831e">Character is encased in a chained shell, and cannot act or take damage.</content>
 	<content contentuid="h96a503b9g1759g4e0ag89d1g377eb1f59ca8">Spikey Evisceration</content>
 	<content contentuid="h96d9d2fcge7eeg4c11g923cgc6f721840db6">Shuriken</content>
@@ -1480,7 +1483,7 @@
 	<content contentuid="h9f830ae4gff10g41f0gb1b2g88d7dd74ba46">Undead Delight</content>
 	<content contentuid="h9f9c234dg9aadg457cgb4e8g06adc6a23102">Pacifist&apos;s Will</content>
 	<content contentuid="h9fb31128g252ag4f9bga1ffgfdbd95ad55e0">[Back]</content>
-	<content contentuid="h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f">The Runic Cannon normally only works with an empty hand or shield. Disabling this allows you to dual-wield it with regular weapons, but this may not be as balanced.</content>
+	<content contentuid="h9fe2b2d8g3794g483cg9b3fgcaa4ac51bd9f">The [Key:ARM_UNIQUE_LLWEAPONEX_ArmCannon_A_DisplayName] normally only works with an empty hand or shield. Disabling this allows you to dual-wield it with regular weapons, but this may not be as balanced.</content>
 	<content contentuid="h9fee2cfeg963cg43f0ga4fcgdfb79b48f7e0">Harken</content>
 	<content contentuid="h9ffd7826g03eeg4597gad11g03c6b56e547c">Shield</content>
 	<content contentuid="ha05ebf00g32e8g4598g839cg6f272357ac3b">Character has been hit by a Blademaster&apos;s strike.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
@@ -2086,6 +2089,7 @@
 	<content contentuid="he6efb1d6gbcbbg4a02ga8e0gb54604aa71a8">&lt;font color=&apos;#b823cb&apos;&gt;Imitation, Guide to Mimicry&lt;/font&gt; (Activated)</content>
 	<content contentuid="he6fbf4e4g6053g4d6fgb1e7g25cf597a1f4d">Dual Shields</content>
 	<content contentuid="he71f1677g9ef3g44efg87d8gc2e17c463e15">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery III&lt;/font&gt;&lt;br&gt;Jump between [1] targets within [2], dealing [3].&lt;br&gt;Upon hit, there is a 25% chance to gain a Frenzy Charge.&lt;br&gt;Flicker Strike consumes Frenzy Charges to continue jumping, dealing [4] per hit.</content>
+	<content contentuid="he722bf48g92b6g4a97g8776g281d899f9b1d">Enable automatically unlocking certain Weapon Expansion recipes when requirements are met, such as shuriken recipes as Throwing Mastery rank 1.</content>
 	<content contentuid="he770b73agb777g4b00ga3a5g0cbe13b85048">Rusty Pipe</content>
 	<content contentuid="he77b3516g2d79g494bgb20dg59fae4610eee">A big staff.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="he791882dg4ce9g48dcgb4ccg67c95e1416ba">Fury&apos;s Reward II</content>
