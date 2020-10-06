@@ -2,19 +2,7 @@ local overrides = {
 	-- Skills
 	Target_SingleHandedAttack = {
 		IgnoreSilence = "Yes",
-		AIFlags = "StatusIsSecondary",
 		UseWeaponDamage = "Yes",
-		-- SkillProperties = {{
-		-- 	Type = "Status",
-		-- 	Action = "LLWEAPONEX_SUCKER_PUNCH",
-		-- 	Context = {"Target"},
-		-- 	Duration = 6.0,
-		-- 	StatusChance = 1.0,
-		-- 	StatsId = "",
-		-- 	Arg4 = -1,
-		-- 	Arg5 = -1,
-		-- 	SurfaceBoost = false
-		-- }}
 	},
 	Target_TentacleLash = {
 		UseWeaponDamage = "Yes",
