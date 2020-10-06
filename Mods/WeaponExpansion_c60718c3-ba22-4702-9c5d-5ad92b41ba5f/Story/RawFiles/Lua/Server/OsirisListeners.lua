@@ -264,8 +264,8 @@ function OnRest(target, source)
 end
 
 -- Why is this happening?
-RegisterProtectedOsirisListener("SkillAdded", 3, "after", function(char, skill, learned)
-	if IsTagged(char, "TOTEM") == 1 and skill == "Target_SingleHandedAttack" then
-		CharacterRemoveSkill(char, skill)
-	end
-end)
+-- RegisterProtectedOsirisListener("SkillAdded", 3, "after", function(char, skill, learned)
+-- 	if IsTagged(char, "TOTEM") == 1 and skill == "Target_SingleHandedAttack" then
+-- 		CharacterRemoveSkill(char, skill)
+-- 	end
+-- end)
