@@ -11,6 +11,10 @@ DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
 AND
 _Char != _Blocker
 AND
+_Attacker != _Blocker
+AND
+CharacterIsEnemy(_Blocker, _Attacker, 1)
+AND
 _Damage > 0
 AND
 CharacterCanSee(_Blocker, _Attacker, 1)
