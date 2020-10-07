@@ -333,13 +333,9 @@ LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Char, 250, "LLWEAPONEX_T
 
 IF
 CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_FlickerStrike_FireBonusHit")
-AND
-String(_Source, _SourceStr)
-AND
-String(_Target, _TargetStr)
 THEN
-TeleportTo(_Source, _Target, "LLWEAPONEX_FlickerStrike_Teleported", 0, 1, 0);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Rapiers:LLWEAPONEX_FlickerStrike_FireBonusHit] Teleporting [",_SourceStr,"] to [",_TargetStr,"].");
+LeaderLib_Behavior_TeleportTo(_Source, _Target);
+LeaderLib_Timers_StartObjectTimer(_Source, 5, "Timers_LLWEAPONEX_FlickerStrike_Teleported", "LLWEAPONEX_FlickerStrike_Teleported");
 LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 25, "LLWEAPONEX_Timers_FlickerStrike_LookAtTarget", "LLWEAPONEX_FlickerStrike_LookAtTarget");
 LeaderLib_Timers_StartCharacterCharacterTimer(_Source, _Target, 150, "LLWEAPONEX_Timers_FlickerStrike_CheckForContinue", "LLWEAPONEX_FlickerStrike_CheckForContinue");
 

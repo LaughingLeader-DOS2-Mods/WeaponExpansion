@@ -465,7 +465,8 @@ PlayEffectAtPosition("LLWEAPONEX_FX_Skills_InstantTransmission_Disappear_01", _x
 SetVarFloat3(_Char, "LLWEAPONEX_SlayHidden_StartPosition", _x, _cy, _z);
 CharacterSetFightMode(_Char, 1, 1);
 CharacterLookAt(_Char, _Target, 1);
-TeleportTo(_Char, _Target, "LLWEAPONEX_SlayHidden_Teleported", 0, 1, 0);
+LeaderLib_Behavior_TeleportTo(_Char, _Target);
+LeaderLib_Timers_StartObjectTimer(_Char, 100, "Timers_LLWEAPONEX_SlayHidden_Teleported", "LLWEAPONEX_SlayHidden_Teleported");
 LeaderLib_Timers_StartCharacterCharacterTimer(_Char, _Target, 250, "LLWEAPONEX_Timers_SlayHidden_Hit", "LLWEAPONEX_SlayHidden_Hit");
 
 IF
