@@ -30,9 +30,11 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Harken, "Opportunist")
 		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		Uniques.AnvilMace:Transfer(Origin.Harken, true)
-		--Mods.WeaponExpansion.Uniques.AnvilMace:Transfer(Mods.WeaponExpansion.Origin.Harken, true)
-		Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
+		LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
+			Uniques.AnvilMace:Transfer(Origin.Harken, true)
+			Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
+		end)
+
 		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_FixSkillBar", 0)
 		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
 		--CharacterAddSkill(Origin.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
@@ -49,8 +51,11 @@ function Origins_InitCharacters(region, isEditorMode)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
-		Uniques.DeathEdge:Transfer(Origin.Korvash, true)
-		Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
+		LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
+			Uniques.DeathEdge:Transfer(Origin.Korvash, true)
+			Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
+		end)
+
 		--Mods.WeaponExpansion.Uniques.DeathEdge:Transfer(Mods.WeaponExpansion.Origin.Korvash, true)
 		--Mods.WeaponExpansion.Uniques.DemonGauntlet:Transfer(Mods.WeaponExpansion.Origin.Korvash, true)
 		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_FixSkillBar", 0)
@@ -261,3 +266,60 @@ Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
 	UpdateDarkFireballSkill(Origin.Korvash)
 	GameHelpers.Data.SyncSharedData(nil,nil,true)
 end)
+
+function Harken_SwapTattoos(char)
+	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Origin.Harken, "HarkenTattoos")
+	if HasActiveStatus(char, "UNSHEATHED") == 1 then
+		if StringHelpers.GetUUID(char) == Origin.Harken then
+			CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+		end
+		-- if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "40039552-3aae-4beb-8cca-981809f82988" then
+		-- 	SwapUnique(char, "HarkenTattoos")
+		-- end
+
+	else
+		if StringHelpers.GetUUID(char) == Origin.Harken then
+			CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+		end
+		-- if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "927669c3-b885-4b88-a0c2-6825fbf11af2" then
+		-- 	SwapUnique(char, "HarkenTattoos")
+		-- end
+	end
+end
+
+function Harken_SetTattoosActive(uuid)
+	local needsSync = false
+	local stat = Ext.GetStat("LLWEAPONEX_TATTOOS_STRENGTH")
+	if CharacterIsInCombat(uuid) == 1 and StringHelpers.IsNullOrEmpty(CharacterGetEquippedItem(uuid, "Breast")) then
+		if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength_Active" then
+			needsSync = true
+			stat.StatsId = "Stats_LLWEAPONEX_Tattoos_Strength_Active"
+			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description"
+			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_Magic_A"
+		end
+	else
+		if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength" then
+			needsSync = true
+			stat.StatsId = "Stats_LLWEAPONEX_Tattoos_Strength"
+			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_Description"
+			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_A"
+		end
+	end
+	if needsSync then
+		Ext.SyncStat("Stats_LLWEAPONEX_Tattoos_Strength", true)
+		if HasActiveStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH") == 1 then
+			RemoveStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH")
+		else
+			ApplyStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH", -1.0, 0, uuid)
+		end
+		-- local character = Ext.GetCharacter(uuid)
+		-- if character ~= nil then
+		-- 	local status = character:GetStatus("LLWEAPONEX_TATTOOS_STRENGTH")
+		-- 	if status ~= nil then
+		-- 		status.RequestClientSync = true
+		-- 	else
+		-- 		ApplyStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH", -1.0, 0, uuid)
+		-- 	end
+		-- end
+	end
+end

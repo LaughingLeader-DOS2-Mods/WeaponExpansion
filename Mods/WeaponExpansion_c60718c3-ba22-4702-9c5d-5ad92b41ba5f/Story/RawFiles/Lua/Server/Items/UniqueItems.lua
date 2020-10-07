@@ -35,7 +35,7 @@ Uniques = {
 	FireRunebladeKatana = UniqueData:Create("6f735ef9-524c-4514-b37f-c48a20b313c5", ProgressionData.FireRunebladeKatana),
 	Frostdyne = UniqueData:Create("S5d8ec362-618e-48e9-87c2-dbc18ea4e779", ProgressionData.Frostdyne),
 	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", ProgressionData.HarkenPowerGloves, {DefaultOwner = Origin.Harken, AutoEquipOnOwner=true, OnEquipped=CheckForAnvilWeightChange}),
-	HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", ProgressionData.HarkenTattoos, {DefaultOwner = Origin.Harken, AutoEquipOnOwner=true, OnEquipped=OnTattoosEquipped}),
+	--HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", ProgressionData.HarkenTattoos, {DefaultOwner = Origin.Harken, AutoEquipOnOwner=true, OnEquipped=OnTattoosEquipped}),
 	Harvest = UniqueData:Create("d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1", ProgressionData.Harvest),
 	LoneWolfBanner = UniqueData:Create("aa63e570-695a-461b-bb35-60cf7c915570", ProgressionData.LoneWolfBanner),
 	--MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod),
@@ -110,11 +110,11 @@ local LinkedUniques = {
 		--S_WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_056c2c38-b7be-4e06-be41-99b79ffe83c2
 		{"6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", "056c2c38-b7be-4e06-be41-99b79ffe83c2"}
 	},
-	["HarkenTattoos"] = {
-		--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988
-		--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_Harken_927669c3-b885-4b88-a0c2-6825fbf11af2
-		{"40039552-3aae-4beb-8cca-981809f82988", "927669c3-b885-4b88-a0c2-6825fbf11af2"}
-	}
+	-- ["HarkenTattoos"] = {
+	-- 	--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988
+	-- 	--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_Harken_927669c3-b885-4b88-a0c2-6825fbf11af2
+	-- 	{"40039552-3aae-4beb-8cca-981809f82988", "927669c3-b885-4b88-a0c2-6825fbf11af2"}
+	-- }
 }
 
 local function AddLinkedUnique(id, item1, item2)
@@ -159,25 +159,6 @@ LoadPersistentVars[#LoadPersistentVars+1] = function()
 end
 
 -- CharacterSetVisualElement(Mods.WeaponExpansion.Origin.Harken, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
-
-function SwapTattoos(char)
-	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Origin.Harken, "HarkenTattoos")
-	if HasActiveStatus(char, "UNSHEATHED") == 1 then
-		if StringHelpers.GetUUID(char) == Origin.Harken then
-			CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
-		end
-		-- if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "40039552-3aae-4beb-8cca-981809f82988" then
-		-- 	SwapUnique(char, "HarkenTattoos")
-		-- end
-	else
-		if StringHelpers.GetUUID(char) == Origin.Harken then
-			CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
-		end
-		-- if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "927669c3-b885-4b88-a0c2-6825fbf11af2" then
-		-- 	SwapUnique(char, "HarkenTattoos")
-		-- end
-	end
-end
 
 function SwapUnique(char, id)
 	local equipped = nil
