@@ -87,7 +87,7 @@ local function SetupListeners()
 end
 
 local function TryOpenMasteryMenu()
-	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(Client.ID))
+	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=Client.ID, UUID=Client.UUID, Profile=Client.Profile}))
 end
 
 local function splitDescriptionByPattern(str, pattern, includeMatch)
@@ -354,30 +354,28 @@ function MasteryMenu.SetToggleButtonVisibility(isVisible, tween)
 end
 
 function MasteryMenu.InitializeToggleButton()
-	if not MasteryMenu.IsControllerMode then
-		local ui = Ext.GetUI("MasteryMenuToggleButton")
-		if ui == nil then
-			ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 12)
-			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
-				if not MasteryMenu.Open then
-					TryOpenMasteryMenu()
-				else
-					CloseMenu()
-				end
-			end)
-			Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call,...)
-				MasteryMenu.RepositionToggleButton(ui, ...)
-			end)
-		end
-		MasteryMenu.ToggleButtonInstance = ui
-		if MasteryMenu.ToggleButtonInstance ~= nil then
-			local displayButton = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf") == nil
-			if displayButton and SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION then
-				displayButton = false
+	local ui = Ext.GetUI("MasteryMenuToggleButton")
+	if ui == nil then
+		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 12)
+		Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
+			if not MasteryMenu.Open then
+				TryOpenMasteryMenu()
+			else
+				CloseMenu()
 			end
-			MasteryMenu.SetToggleButtonVisibility(displayButton, false)
-			ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
+		end)
+		Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call,...)
+			MasteryMenu.RepositionToggleButton(ui, ...)
+		end)
+	end
+	MasteryMenu.ToggleButtonInstance = ui
+	if MasteryMenu.ToggleButtonInstance ~= nil then
+		local displayButton = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf") == nil and Ext.GetBuiltinUI("Public/Game/GUI/characterCreation_c.swf") == nil
+		if displayButton and SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION then
+			displayButton = false
 		end
+		MasteryMenu.SetToggleButtonVisibility(displayButton, false)
+		ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
 	end
 end
 
