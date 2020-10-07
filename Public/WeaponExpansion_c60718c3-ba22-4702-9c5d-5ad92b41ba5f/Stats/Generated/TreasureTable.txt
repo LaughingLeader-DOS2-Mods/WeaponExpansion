@@ -155,48 +155,48 @@ new subtable "-3"
 object category "T_ST_LLWEAPONEX_AttributeTokens_All_Free",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_WeaponsNormal"
-new subtable "0,1;2,4"
+new subtable "1,1"
 object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
-new subtable "0,1;2,4"
+new subtable "1,1"
 object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
-new subtable "0,1;1,4"
+new subtable "1,1"
 object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
-new subtable "0,1;1,4"
+new subtable "1,1"
 object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
-new subtable "0,1;1,4"
+new subtable "1,1"
 object category "LLWEAPONEX_Greatbows",1,1,0,0,0,0,0,0
-new subtable "0,1;1,4"
+new subtable "1,1"
 object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
-new subtable "0,1;1,4"
+new subtable "1,1"
 object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
-new subtable "0,1;1,4"
+new subtable "1,1"
 object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
-new subtable "0,1;1,4"
+new subtable "1,1"
 object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
-new subtable "0,1;1,2"
+new subtable "1,1"
 object category "LLWEAPONEX_Bokken_1H",1,1,0,0,0,0,0,0
-new subtable "0,2;1,2"
+new subtable "1,1"
 object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
-new subtable "0,2;1,2"
+new subtable "1,1"
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
-new subtable "0,2;1,2"
+new subtable "1,1"
 object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
-new subtable "0,4;1,1"
+new subtable "1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
-new subtable "0,3;1,2"
+new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",9,0,1,0,0,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,1,0,0,0,0
-new subtable "0,3;1,2"
+new subtable "1,1"
 StartLevel "9"
 EndLevel "14"
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",9,0,1,0,0,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",3,0,0,1,0,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,0,1,0,0,0
-new subtable "0,3;1,2"
+new subtable "1,1"
 StartLevel "15"
 EndLevel "30"
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",5,0,1,0,0,0,0,0
@@ -205,7 +205,7 @@ object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",5,0,0,0,1,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,0,0,0,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareAccessories"
-new subtable "0,3;1,2"
+new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
 object category "T_ST_LLWEAPONEX_Accessories",9,0,1,0,0,0,0,0
@@ -258,10 +258,10 @@ object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,1,0,0,0,0,0,0
 new subtable "1,1"
 StartLevel "16"
 EndLevel "30"
-object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,1,1,0,0,0,0,0
-new subtable "0,2;1,3"
+object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,1,0,0,0,0,0
+new subtable "1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_RareWeapons",1,0,0,0,0,0,0,0
-new subtable "0,3;1,2"
+new subtable "1,1"
 StartLevel "5"
 EndLevel "30"
 object category "LLWEAPONEX_Runeblade_Inert",1,1,1,0,0,0,0,0
