@@ -56,7 +56,14 @@ StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Harken_SwapTattoos")
 AND
 GetUUID(_Char, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "SwapTattoos", _UUID);
+NRD_ModCall("WeaponExpansion", "Harken_SwapTattoos", _UUID);
+
+IF
+StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Harken_SetTattoosActive")
+AND
+GetUUID(_Char, _UUID)
+THEN
+NRD_ModCall("WeaponExpansion", "Harken_SetTattoosActive", _UUID);
 
 IF
 StoryEvent(_Char, "LeaderLib_StoryEvents_OnInit")
@@ -100,6 +107,17 @@ NOT DB_OriginRecruitmentLocation_Region(_,_Origin,_,_)
 THEN
 SetStoryEvent(_Origin,"Origin_RestoreDialog");
 
+//REGION UPDATES
+// PROC
+// LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+// AND
+// _LastVersion < 152764417 //152633346
+// THEN
+// ItemLockUnEquip(40039552-3aae-4beb-8cca-981809f82988, 0);
+// ItemToInventory(40039552-3aae-4beb-8cca-981809f82988, 80976258-a7a5-4430-b102-ba91a604c23f);
+// ItemLockUnEquip(927669c3-b885-4b88-a0c2-6825fbf11af2, 0);
+// ItemToInventory(927669c3-b885-4b88-a0c2-6825fbf11af2, 80976258-a7a5-4430-b102-ba91a604c23f);
+//END_REGION
 EXITSECTION
 
 ENDEXITSECTION

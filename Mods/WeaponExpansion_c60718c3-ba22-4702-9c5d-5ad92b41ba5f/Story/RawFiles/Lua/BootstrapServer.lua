@@ -54,6 +54,7 @@ Ext.Require("Server/Items/TreasureTableMerging.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
 local debugInit = Ext.Require("Server/Debug/DebugMain.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
+Ext.Require("Server/Updates.lua")
 
 local function dumpRanks(...)
     --DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>")
