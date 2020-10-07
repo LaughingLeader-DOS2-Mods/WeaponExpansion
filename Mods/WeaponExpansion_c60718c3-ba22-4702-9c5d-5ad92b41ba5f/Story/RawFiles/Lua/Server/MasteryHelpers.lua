@@ -40,7 +40,7 @@ local function MasteryLeveledUp(uuid,mastery,last,next)
 	TagMasteryRanks(uuid,mastery,next)
 
 	-- Set the special rank 1+ unarmed tags.
-	if mastery == "LLWEAPONEX_Unarmed" and next == 1 and CharacterGetEquippedWeapon(uuid) == nil then
+	if mastery == "LLWEAPONEX_Unarmed" and next == 1 then
 		Equipment.CheckWeaponRequirementTags(uuid)
 	end
 

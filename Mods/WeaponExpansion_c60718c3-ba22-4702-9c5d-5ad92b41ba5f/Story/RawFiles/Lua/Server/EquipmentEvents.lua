@@ -58,6 +58,9 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 	local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	local offhand = CharacterGetEquippedItem(uuid, "Shield")
 	local weapon = mainhand or offhand
+	if StringHelpers.IsNullOrEmpty(weapon) and StringHelpers.IsNullOrEmpty(offhand) then
+		Osi.LLWEAPONEX_Equipment_TrackUnarmed(uuid)
+	end
 	if weapon ~= nil and ObjectExists(weapon) == 1 then
 		local item = Ext.GetItem(weapon)
 		SetTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
@@ -77,13 +80,16 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 		else
 			SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		end
+		LeaderLib.RefreshSkillBar(uuid)
 	elseif Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Unarmed_Mastery1") then
 		ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+		LeaderLib.RefreshSkillBar(uuid)
 	else
 		ClearTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+		LeaderLib.RefreshSkillBar(uuid)
 	end
 
 	--[[ if IsPlayer(uuid) then
