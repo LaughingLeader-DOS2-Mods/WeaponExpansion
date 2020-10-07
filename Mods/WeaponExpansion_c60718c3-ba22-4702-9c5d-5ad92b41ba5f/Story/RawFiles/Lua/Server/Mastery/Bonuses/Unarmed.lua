@@ -25,3 +25,24 @@ MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_Ene
 		end
 	end
 end)
+
+---@param skill string
+---@param char string
+---@param state SkillState
+---@param data HitData
+local function AddUnarmedExperienceForSkill(skill, char, state, data)
+	if state == SKILL_STATE.HIT and data.Success then
+		if IsPlayer(char) then
+			MasterySystem.GrantWeaponSkillExperience(char, data.Target, "LLWEAPONEX_Unarmed")
+		end
+	end
+end
+
+local UnarmedSkills = {
+	"Target_SingleHandedAttack",
+	"Target_PetrifyingTouch",
+}
+
+for _,skill in pairs(UnarmedSkills) do
+	LeaderLib.RegisterSkillListener(skill, AddUnarmedExperienceForSkill)
+end
