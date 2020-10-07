@@ -123,6 +123,34 @@ ObjectClearFlag(_Character, "LLWEAPONEX_BlockTeleportFalling");
 
 //REGION RALLY
 IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER", _)
+AND
+CharacterIsInCombat(_Char, 0)
+AND
+NRD_StatusGetHandle(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER", _Handle)
+AND
+NRD_StatusGetReal(_Char, _Handle, "CurrentLifeTime", _Duration)
+AND
+RealSum(_Duration, 6.0, _Next)
+THEN
+NRD_StatusSetReal(_Char, _Handle, "CurrentLifeTime", _Next);
+NRD_StatusSetInt(_Char, _Handle, "RequestClientSync", 1);
+
+IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES", _)
+AND
+CharacterIsInCombat(_Char, 0)
+AND
+NRD_StatusGetHandle(_Char, "LLWEAPONEX_BANNER_RALLY_DWARVES", _Handle)
+AND
+NRD_StatusGetReal(_Char, _Handle, "CurrentLifeTime", _Duration)
+AND
+RealSum(_Duration, 6.0, _Next)
+THEN
+NRD_StatusSetReal(_Char, _Handle, "CurrentLifeTime", _Next);
+NRD_StatusSetInt(_Char, _Handle, "RequestClientSync", 1);
+
+IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_BANNER_RALLY_DIVINEORDER", _)
 THEN
 LLWEAPONEX_Skills_OnRallyFinished(_Char);
