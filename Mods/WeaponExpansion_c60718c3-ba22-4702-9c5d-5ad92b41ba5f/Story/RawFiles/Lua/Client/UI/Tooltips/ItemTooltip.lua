@@ -242,6 +242,18 @@ local function OnItemTooltip(item, tooltip)
 					tooltip:RemoveElement(element)
 				end
 			end
+		elseif item:HasTag("LLWEAPONEX_UniqueStrengthTattoos") then
+			if character ~= nil then
+				if character:GetStatus("UNSHEATHED") then
+					local name = GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A_DisplayName", "<font color='#FF4400'>Tattoos of Godly Strength (Unleashed)</font>")
+					local element = tooltip:GetElement("ItemName")
+					if element == nil then
+						element = {Type="ItemName", Label=""}
+						tooltip:AppendElement(element)
+					end
+					element.Label = name
+				end
+			end
 		end
 
 		local fakeDamageCreated = false
