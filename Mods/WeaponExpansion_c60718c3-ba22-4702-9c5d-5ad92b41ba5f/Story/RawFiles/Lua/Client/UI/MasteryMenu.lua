@@ -354,6 +354,10 @@ function MasteryMenu.SetToggleButtonVisibility(isVisible, tween)
 end
 
 function MasteryMenu.InitializeToggleButton()
+	-- TODO: Figure out something for controllers.
+	if MasteryMenu.IsControllerMode then
+		return false
+	end
 	local ui = Ext.GetUI("MasteryMenuToggleButton")
 	if ui == nil then
 		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 12)
