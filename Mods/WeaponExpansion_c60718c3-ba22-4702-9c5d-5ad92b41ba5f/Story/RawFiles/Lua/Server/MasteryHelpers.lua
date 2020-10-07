@@ -54,6 +54,7 @@ end
 --- @param skipFlagCheck boolean
 function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 	if skipFlagCheck == true or ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
+		expGain = expGain or 0.25
 		local currentLevel = 0
 		local currentExp = 0
 		--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _WeaponType, _Level, _Experience)
@@ -180,9 +181,9 @@ local function OnSkillCast(character, skill, skillType, skillElement)
 		if skill == "Shout_LLWEAPONEX_OpenMenu" then
 			OpenMasteryMenu_Start(GetUUID(character))
 		else
-			if IsWeaponSkill(skill) then
-				AddMasteryExperienceForAllActive(character, 0.5)
-			end
+			-- if IsWeaponSkill(skill) then
+			-- 	AddMasteryExperienceForAllActive(character, 0.5)
+			-- end
 		end
 	end
 end

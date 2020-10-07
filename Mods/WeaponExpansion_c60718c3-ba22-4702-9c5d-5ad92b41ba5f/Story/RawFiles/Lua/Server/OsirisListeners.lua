@@ -97,10 +97,7 @@ local function OnStatusApplied(target, status, source)
 					ApplyRuneExtraProperties(target, source, Ext.GetItem(v))
 				end
 			end
-			local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
-			if b and expGain > 0 then
-				AddMasteryExperience(source, "LLWEAPONEX_Pistol", expGain)
-			end
+			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_Pistol")
 		elseif status == "LLWEAPONEX_HANDCROSSBOW_HIT" then
 			local items = GameHelpers.Item.FindTaggedEquipment(source, "LLWEAPONEX_HandCrossbow")
 			if items ~= nil then
@@ -108,10 +105,7 @@ local function OnStatusApplied(target, status, source)
 					ApplyRuneExtraProperties(target, source, Ext.GetItem(v))
 				end
 			end
-			local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
-			if b and expGain > 0 then
-				AddMasteryExperience(source, "LLWEAPONEX_HandCrossbow", expGain)
-			end
+			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_HandCrossbow")
 		end
 	end
 	local callbacks = Listeners.Status[status]

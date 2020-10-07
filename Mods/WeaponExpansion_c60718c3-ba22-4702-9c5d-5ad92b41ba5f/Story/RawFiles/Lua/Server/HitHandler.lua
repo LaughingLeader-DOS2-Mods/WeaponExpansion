@@ -16,21 +16,6 @@ HitHandler.RegisterOnHit = function(tag, callback)
 	totalOnHitCallbacks = totalOnHitCallbacks + 1
 end
 
-function Mastery.CanGrantMasteryExperience(target,player)
-	if IsTagged(target, "LLDUMMY_TrainingDummy") then
-		return true,0.1
-	else
-		local isSummon = CharacterIsSummon(target) == 1
-		local isEnemy = CharacterIsEnemy(target,player) == 1
-		local ignoreCharacter = Osi.LeaderLib_Helper_QRY_IgnoreCharacter(target) == true
-		local combatID = CombatGetIDForCharacter(player)
-		if not isSummon and isEnemy and not ignoreCharacter then
-			return true,0.5
-		end
-	end
-	return false,0.0
-end
-
 local armorDamageTypes = {
 	Magic = "CurrentMagicArmor",
 	Corrosive = "CurrentArmor"
@@ -167,11 +152,8 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 				ArmCannon_OnWeaponSkillHit(source, target, skill)
 			end
 			if IsWeaponSkill(skill) then
-				printd("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon skill by source("..tostring(source)..").")
-				local b,expGain = Mastery.CanGrantMasteryExperience(target,source)
-				if b and expGain > 0 then
-					AddMasteryExperienceForAllActive(source, expGain)
-				end
+				printd(string.format("[WeaponExpansion:HitHandler:OnHit] target(%s) was hit with a weapon skill by source(%s).", target, source))
+				MasterySystem.GrantWeaponSkillExperience(source, target)
 			end
 		end
 	end

@@ -115,43 +115,6 @@ AND
 DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Player, _Item, _Mastery)
 THEN
 DB_NOOP(1);
-
-QRY
-LLWEAPONEX_QRY_CanGrantExperience((CHARACTERGUID)_Target)
-AND
-CharacterIsSummon(_Target, 0)
-AND
-LeaderLib_Party_QRY_IsEnemyOfParty(_Target)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Target)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_QRY_CanGrantExperience((CHARACTERGUID)_Target, (CHARACTERGUID)_Player)
-AND
-DB_IsPlayer(_Player)
-AND
-CharacterIsEnemy(_Player, _Target, 1)
-AND
-CharacterIsSummon(_Target, 0)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Target)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_QRY_CanGrantExperience((CHARACTERGUID)_Target, (CHARACTERGUID)_Player, (INTEGER)_CombatID)
-AND
-CharacterIsSummon(_Target, 0)
-AND
-CharacterIsEnemy(_Player, _Target, 1)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Target)
-AND
-CombatGetIDForCharacter(_Player, _CombatID)
-THEN
-DB_NOOP(1);
 //END_REGION
 
 //REGION ACTIVE_MASTERY_TRACKING
@@ -278,53 +241,6 @@ THEN
 DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Level, _TotalExperience);
 //END_REGION
 
-//REGION PARTY_WIDE_EXPERIENCE
-PROC
-LLWEAPONEX_WeaponMastery_AddPartyExperience((CHARACTERGUID)_PartyMember, (CHARACTERGUID)_Enemy, (REAL)_Gain)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
-THEN
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:WeaponMastery:CharacterDying] Enemy died. Adding mastery experience to all party members.");
-LeaderLib_Timers_StartObjectTimer(_Enemy, 250, "LLWEAPONEX_Timers_WeaponMastery_ClearPartyIteratorDB", "LLWEAPONEX_WeaponMastery_ClearPartyIteratorDB");
-IterateParty(_PartyMember, "LLWEAPONEX_WeaponMastery_AddPartyExperience");
-
-IF
-StoryEvent((CHARACTERGUID)_Enemy, "LLWEAPONEX_WeaponMastery_ClearPartyIteratorDB")
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain);
-
-IF
-StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_WeaponMastery_AddPartyExperience")
-AND
-NOT QRY_IsSummonOrPartyFollower(_Player)
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_PartyMember, _Enemy, _Gain)
-AND
-CharacterIsInPartyWith(_Player, _PartyMember, 1)
-AND
-IsBoss(_Enemy, _IsBoss)
-AND
-Real(_IsBoss, _IsBossReal)
-AND
-RealProduct(_IsBossReal, 2.0, _BossMult) // 2x exp for bosses
-AND
-RealSum(_Gain, _BossMult, _ExpGain)
-THEN
-LLWEAPONEX_Ext_AddMasteryExperienceForAllActive(_Player, _ExpGain);
-//END_REGION
-
-//REGION EXPERIENCE_LISTENING_RESET
-PROC
-LLWEAPONEX_WeaponMastery_TS_RemoveListenEntries()
-AND
-DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage((CHARACTERGUID)_Player, (STRING)_Mastery)
-THEN
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ListenForSkillDamage(_Player, _Mastery);
-//END_REGION
-
 //REGION STATUS_UNLOCKING
 PROC
 LLWEAPONEX_WeaponMastery_ApplyInfoStatus((CHARACTERGUID)_Player, (STRING)_Status, (STRING)_InfoStatus, 0)
@@ -378,21 +294,6 @@ _InfoStatus != ""
 //NOT LLWEAPONEX_WeaponMastery_QRY_HasAnySkillUnlockStatus(_Player, _Mastery, _SkillID)
 THEN
 RemoveStatus(_Player, _InfoStatus);
-//END_REGION
-
-//REGION PARTY_WIDE_EXPERIENCE
-IF
-CharacterDying(_Enemy)
-AND
-NRD_CharacterGetInt(_Enemy, "Resurrected", 0) // Never resurrected
-AND
-DB_IsPlayer(_Player)
-AND
-LLWEAPONEX_QRY_CanGrantExperience(_Enemy, _Player)
-AND
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_IteratingParty(_,_Enemy,_)
-THEN
-LLWEAPONEX_WeaponMastery_AddPartyExperience(_Player, _Enemy, 1.0);
 //END_REGION
 
 IF
