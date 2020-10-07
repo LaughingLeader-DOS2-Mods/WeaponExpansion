@@ -245,7 +245,7 @@
 	<content contentuid="h1b283eafg771dg47aagb4b5ge7680c682398">Rend</content>
 	<content contentuid="h1b3920b8gab1ag4914gbe71ged645d9a309e">Water Rune</content>
 	<content contentuid="h1b412aefg3d56g47ecga034g20225843aff3">Bonuses on Hit</content>
-	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its glory. Huzzah!</content>
+	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its divine glory. While wielding the emblem of your captors is questionable, something about this banner stirs up a desire for leadership and teamwork.</content>
 	<content contentuid="h1bd0f691g9646g4b28g932fg3ebd8377ca0e">Gain hyper-focus, increasing the &lt;font color=&apos;#33FF00&apos;&gt;damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%&lt;/font&gt;.</content>
 	<content contentuid="h1bdb5e07gf441g4020g9f25g6ea0457e71fe">Enhanced Demolition Bonus</content>
 	<content contentuid="h1bfbbfb7g6525g4016ga0f7g2268e5e3db06">Tactics</content>
@@ -854,7 +854,7 @@
 	<content contentuid="h5c5acb1cg685dg485dgb946g3adff577f871">Deadly Halberd</content>
 	<content contentuid="h5c65b248g0e76g41a5gb068gb4c884703c5b">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h5c82bb74g471bg4d45g8aa0gd45071f22f65">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are electrified, dealing Air damage.</content>
-	<content contentuid="h5c90b0f6g92beg408fg97bbg77de5ee58c77">A banner of the Lone Wolves., the infamous mercenary company</content>
+	<content contentuid="h5c90b0f6g92beg408fg97bbg77de5ee58c77">A banner of the Lone Wolves, the infamous mercenary company. Inspire allies through a fierce pack mentality.</content>
 	<content contentuid="h5ca24bfeg14f5g437fg92fag4708f87547de">&lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt; the wounds of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; remaining.</content>
 	<content contentuid="h5cacb163gcfd1g49bcgb391g25dd92b84fce">Kagutsuchi</content>
 	<content contentuid="h5cb2bd14ge6e9g4414gb251g68882368b0bf">Lunaris &amp; Solaris</content>
