@@ -114,3 +114,8 @@ LLWEAPONEX_CURSED_DisplayName	Malediction	h8d50df62gd613g465fga926g1f5d5e04b0a7
 LLWEAPONEX_CURSED_Description	Character is inflicted with a curse, and will spread the curse in a [1] radius when dead.	h8b5ec746gb51eg4838gbec4g8562c30aa6e0
 LLWEAPONEX_BLOOD_EMPOWERED_DisplayName	Empowered by Blood	h66bfffc1ga29cg4658g9b1cgad4e60f5b097
 LLWEAPONEX_BLOOD_EMPOWERED_Description	Character is empowered through an ally's Flesh Sacrifice.	h3fb6e3f1g6fdcg4cfdg9761g6b8048ee5943
+LLWEAPONEX_TATTOOS_STRENGTH_DisplayName	Tattoos of Godly Strength	he5114ae4g830cg43dfg8bc5gf440538c6696
+LLWEAPONEX_TATTOOS_STRENGTH_Description	Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength.<br><font color='#CC3344'>If [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] goes shirtless, the tattoos will activate in combat and grant bonuses.</font> 	h64ef8f8eg48d8g468dga4ebg2a6357d7e30a
+LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description	Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength, and are currently activated. 	h64ef8f8eg48d8g468dga4ebg2a6357d7e30a
+Stats_LLWEAPONEX_Tattoos_Strength	Tattoos of Godly Strength	hbaade02ag92c3g458ega2e5gf8323343d4f4
+Stats_LLWEAPONEX_Tattoos_Strength_Active	Tattoos of Godly Strength (Active)	h5fa6dbc7g445bg4cdbgbf71gb41f4d009861

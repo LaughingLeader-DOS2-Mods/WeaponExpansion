@@ -882,6 +882,7 @@
 	<content contentuid="h5f87d28fge5ddg4f71g8f4bgbade472afe64">A... Crossbow?&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h5f93ea7dg4d11g4cc6g870cg47c3d7373fb6">Tempered Runeblade of Earth</content>
 	<content contentuid="h5fa48b03gc1bag4f16g8e3ag7e9745dc4a1b">Worn Greatbow</content>
+	<content contentuid="h5fa6dbc7g445bg4cdbgbf71gb41f4d009861">Tattoos of Godly Strength (Active)</content>
 	<content contentuid="h5fc057e4g2495g40fdg8c75ga0940679a542">&lt;font color=&apos;#81AB00&apos;&gt;Token of Finesse&lt;/font&gt;</content>
 	<content contentuid="h5fc3738bgfd66g4868gb91eg8e4c5681b534">While Warfare skills are typically for warriors, specialized mages have bridged the gap via intense close combat training. Read this book to learn this skill.</content>
 	<content contentuid="h5fcfb3f1g8718g4c66g9b74g854452c7478f">Worn Metal Quarterstaff</content>
@@ -931,6 +932,7 @@
 	<content contentuid="h64c6053dge3b8g4f7dga3f2gfc611f216d3b">Gravelord&apos;s Blade</content>
 	<content contentuid="h64d30195g7144g4429gbf19g61dbdb16cf45">Weapon Expansion - Debug Weapons</content>
 	<content contentuid="h64e87ae9g8ceag4b96gaf83gd5ed4cd1c161">Wooden Destiny</content>
+	<content contentuid="h64ef8f8eg48d8g468dga4ebg2a6357d7e30a">Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength.&lt;br&gt;&lt;font color=&apos;#CC3344&apos;&gt;If [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] goes shirtless, the tattoos will activate in combat and grant bonuses.&lt;/font&gt; </content>
 	<content contentuid="h651d4f13ge5ddg4111g871cgf92fab041bd4">Shoot a &lt;font color=&apos;#00FFAA&apos;&gt;second arrow&lt;/font&gt; at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;If no enemies are nearby, the bonus arrow will fire at the original target.&lt;/font&gt;</content>
 	<content contentuid="h652d73fcg18b6g469cg8849g710028f8ec91">Strength Conversion</content>
 	<content contentuid="h6530180fg4563g4044gafefgc440ed2dd6a2">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release electrical energy on hit, dealing air damage.</content>
@@ -1718,6 +1720,7 @@
 	<content contentuid="hba48fc68g201fg454bga114gae251e299f95">Dirty Fighting I</content>
 	<content contentuid="hba4dcfa5gbdbbg4fc5g96f8g916f9e2cbf41">Delayed Dizzy</content>
 	<content contentuid="hbaa16661gaef7g4e3fg8c33g0ea6ff00c91c">Staff Infection</content>
+	<content contentuid="hbaade02ag92c3g458ega2e5gf8323343d4f4">Tattoos of Godly Strength</content>
 	<content contentuid="hbab27529g2cdcg41d2g8f90ga083cb7811d4">Anvilmar, Dwarven Negotiator</content>
 	<content contentuid="hbab6a799g391fg4efcg89dcg7c08d0cbdd5a">Arm-Mounted Crossbow</content>
 	<content contentuid="hbabdca73ge22fg44fcga31eg29559aee3e04">Old Two-handed Bokuto</content>
@@ -2077,6 +2080,7 @@
 	<content contentuid="he49060f5g395eg4d83g8b0dg9aa36eda8973">Kevin (Normal)</content>
 	<content contentuid="he4dff8beg2f51g4229g979fg165d2c08026f">&lt;font color=&apos;#AA11CC&apos;&gt;Scythe Mastery I&lt;/font&gt;</content>
 	<content contentuid="he51066e9g8497g4177gaf63g46856ce53329">&lt;font color=&apos;#0e7700&apos;&gt;Rapier Mastery&lt;/font&gt;&lt;br&gt;Gain temporary follow-up skills when using Sucker Punch. Sucker Punch&apos;s knockdown duration is increased by 1.</content>
+	<content contentuid="he5114ae4g830cg43dfg8bc5gf440538c6696">Tattoos of Godly Strength</content>
 	<content contentuid="he5310e99g8e49g4223ga5ffgd355b34b259e">Divine Smite - Deals bonus damage to Voidwoken and Undead</content>
 	<content contentuid="he55bae23g9850g45e8ga32eg62371f05bf47">Shuriken</content>
 	<content contentuid="he574f9bfg6f80g4879ga936ge4952c1b3603">&lt;icon id=&apos;Shout_Whirlwind&apos; icon=&apos;Skill_Warior_WhirlWind&apos;/&gt;Keep spinning when using [Key:Shout_Whirlwind_DisplayName], dealing reduced damage per spin.</content>
