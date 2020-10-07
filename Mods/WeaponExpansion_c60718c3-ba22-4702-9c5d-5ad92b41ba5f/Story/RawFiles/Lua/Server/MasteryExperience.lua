@@ -20,7 +20,7 @@ function MasterySystem.GrantDeathExperienceToParty(enemy)
 	local bossMult = IsBoss(enemy) == 1 and 2.0 or 1.0
 	local mult = Ext.ExtraData.LLWEAPONEX_Mastery_DeathExperienceMult or 1.0
 	local expGain = mult * bossMult
-	for i,db in pairs(DB_IsPlayer:Get(nil)) do
+	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local player = db[1]
 		AddMasteryExperienceForAllActive(StringHelpers.GetUUID(player))
 	end

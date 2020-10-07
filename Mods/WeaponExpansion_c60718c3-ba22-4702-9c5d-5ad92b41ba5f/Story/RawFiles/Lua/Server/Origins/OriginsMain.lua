@@ -297,7 +297,7 @@ function Harken_SetTattoosActive(uuid)
 			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description"
 			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_Magic_A"
 		end
-		CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+		CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
 	else
 		if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength" then
 			needsSync = true
@@ -305,7 +305,7 @@ function Harken_SetTattoosActive(uuid)
 			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_Description"
 			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_A"
 		end
-		CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+		CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
 	end
 	if needsSync then
 		Ext.SyncStat("Stats_LLWEAPONEX_Tattoos_Strength", true)
