@@ -97,7 +97,7 @@ end
 
 function DeathManager.OnDeath(uuid)
 	local data = PersistentVars.OnDeath[uuid]
-	if entries ~= nil then
+	if data ~= nil then
 		printd("[LLWEAPONEX:DeathMechanics:OnDeath]", uuid, "died. Firing callbacks.")
 		for attacker,attackerData in pairs(data.Attackers) do
 			for id,timerName in pairs(attackerData) do
@@ -106,6 +106,7 @@ function DeathManager.OnDeath(uuid)
 		end
 		PersistentVars.OnDeath[uuid] = nil
 	end
+	
 end
 
 RegisterProtectedOsirisListener("CharacterDied", 1, "after", function(char)
