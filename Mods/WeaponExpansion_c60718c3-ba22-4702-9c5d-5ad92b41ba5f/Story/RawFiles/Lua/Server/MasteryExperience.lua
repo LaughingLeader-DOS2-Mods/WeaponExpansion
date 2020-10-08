@@ -3,6 +3,9 @@ if MasterySystem == nil then
 end
 
 function Mastery.CanGrantXP(char)
+	if IsTagged(char, "LLDUMMY_TrainingDummy") == 1 then
+		return true
+	end
 	if NRD_CharacterGetInt(char, "Resurrected") == 0 
 	and not IsPlayer(char)
 	and CharacterIsSummon(char) == 0
@@ -22,7 +25,7 @@ function MasterySystem.GrantDeathExperienceToParty(enemy)
 	local expGain = mult * bossMult
 	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local player = db[1]
-		AddMasteryExperienceForAllActive(StringHelpers.GetUUID(player))
+		AddMasteryExperienceForAllActive(StringHelpers.GetUUID(player), expGain)
 	end
 end
 
@@ -32,6 +35,9 @@ function MasterySystem.GrantBasicAttackExperience(player, enemy, mastery)
 		if IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1 then
 			expGain = Ext.ExtraData.LLWEAPONEX_Mastery_TrainingDummyExperienceMult or 0.1
 		end
+		-- if mastery == "LLWEAPONEX_Unarmed" and IsTagged(player, "LIZARD") == 1 then
+		-- 	expGain = expGain * 0.5
+		-- end
 		if mastery == nil then
 			AddMasteryExperienceForAllActive(player, expGain)
 		else
