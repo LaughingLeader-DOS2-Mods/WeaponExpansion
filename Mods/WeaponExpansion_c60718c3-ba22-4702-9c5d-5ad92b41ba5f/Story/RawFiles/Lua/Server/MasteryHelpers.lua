@@ -75,7 +75,7 @@ function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 			local nextLevelExp = Mastery.Variables.RankVariables[currentLevel+1].Required
 			local nextLevel = currentLevel
 
-			local nextExp = currentExp + (maxAddExp * expGain)
+			local nextExp = Ext.Round(currentExp + (maxAddExp * expGain))
 			if nextExp >= nextLevelExp then
 				nextLevel = currentLevel + 1
 				if nextLevel >= Mastery.Variables.MaxRank then
