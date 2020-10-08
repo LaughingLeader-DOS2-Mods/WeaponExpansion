@@ -518,7 +518,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			-- 	rank = 4
 			-- 	xp = xpMax
 			-- end
-			if rank > 0 then
+			if rank > 0 or xp >= (xpMax*0.4) then -- If rank 0, show if at 40% of the way there
 				local barPercentage = 0.0
 				if xp > 0 and xp < xpMax then
 					barPercentage = math.max(math.floor(((xp / xpMax) * 100) + 0.5) / 100, 0.01)
