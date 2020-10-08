@@ -1447,6 +1447,7 @@
 	<content contentuid="h9bf4a6bdg3e45g4183g8641g9738ef7f09d3">Shield Bash</content>
 	<content contentuid="h9bf52d4ag3acfg47cfg857cg141857c2ede4">Razor-Sharp Katana</content>
 	<content contentuid="h9bfc46cegf1c1g4e72g8f62g5e175517b2bf">A dagger designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
+	<content contentuid="h9c185c53gfcdag4349gab64g314e51005c21">From Right Claws: [1]-[2]</content>
 	<content contentuid="h9c204683gdf1cg4f72gb18cg3433f45a7e18">Tempered Runeblade of Fire</content>
 	<content contentuid="h9c2ec983g6c2fg4608g9c5eg2aa80a46f3d7">Old Katana</content>
 	<content contentuid="h9c360dcfg50ebg4961ga029gd4a0215c0d4b">Character has been marked for death, and cannot be marked again.</content>
@@ -1627,6 +1628,7 @@
 	<content contentuid="haf0de280g47e7g41e3g9401g03e636e870d3">Venom Rune</content>
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
 	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
+	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
 	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[2][3]</content>
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
@@ -2061,6 +2063,7 @@
 	<content contentuid="he210cbc0g8b27g48d1ga9c1gb010f687fc1a">Mighty Dragonslayer Pants</content>
 	<content contentuid="he24e735fgcbe6g422agb0bagf43f654f6e1e">Demolitionist&apos;s Backpack</content>
 	<content contentuid="he251452eg65a3g4e6dgb8c0gdd7bc5fadef3">&lt;font color=&apos;#F5785A&apos;&gt;Axe Mastery II&lt;/font&gt;</content>
+	<content contentuid="he27df360gc0cag4612gaec1g4d8fe4c76b1e">From Left Claws: [1]-[2]</content>
 	<content contentuid="he2a39abbg1cdeg49f3ga6c4g9bf389ebffee">Any Attribute Token</content>
 	<content contentuid="he301a2cag4ac9g4a73gba19g0449b7366d23">Master of Firearms</content>
 	<content contentuid="he30d8120g13e1g4261g853cgdce0c96a00da">Journeyman Bookkeeper</content>

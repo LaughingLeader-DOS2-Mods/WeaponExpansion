@@ -27,3 +27,6 @@ LLWEAPONEX_UI_RunicCannonEnergy	<font color='#33FFAA'>Runic Energy [1]/[2]</font
 LLWEAPONEX_UI_DarkFireballKillCount	<font color='#AA00FF'>[1]/[2] Deaths Charges</font>	h67e6fbecg1cafg4202ga78ag45db47880450
 LLWEAPONEX_UI_DarkFireballEmptyKillCount	<font color='#FF2200'>[1]/[2] Death Charges</font>	h83e65b1fg30c2g4e9ega9bag005eb17c5d75
 LLWEAPONEX_Mod_DisplayName	Weapon Expansion	h2cb50244g8d38g4a87g8924gc01a4a02f19a
+LLWEAPONEX_UI_LizardClawWeaponMainhand	From Right Claws: [1]-[2]	h9c185c53gfcdag4349gab64g314e51005c21
+LLWEAPONEX_UI_LizardClawWeaponOffhand	From Left Claws: [1]-[2]	he27df360gc0cag4612gaec1g4d8fe4c76b1e
+LLWEAPONEX_UI_BaseDamage	Base Damage	haf8ef486g9b5eg46b0g95efg2c5795550240
