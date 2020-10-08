@@ -3,11 +3,16 @@ local UniqueData = {
 	UUID = "",
 	LevelData = {},
 	Owner = nil,
+	---@type string|table<string,string>
 	DefaultOwner = nil,
 	CurrentLevel = nil,
 	AutoEquipOnOwner = false,
 	Initialized = false,
+	---@type function
 	OnEquipped = nil,
+	---@type function
+	OnOwnerDeath = nil,
+	---@type function
 	OnGotOwner = nil,
 	LastProgressionLevel = 0,
 	ProgressionData = nil,
@@ -30,6 +35,7 @@ function UniqueData:Create(uuid, progressionData, params)
 		Initialized = false,
 		OnEquipped = nil,
 		OnGotOwner = nil,
+		OnOwnerDeath = nil,
 		LastProgressionLevel = 0,
 		ProgressionData = progressionData,
 		CanMoveToVendingMachine = true
@@ -49,58 +55,96 @@ function UniqueData:Create(uuid, progressionData, params)
     return this
 end
 
-function UniqueData:CanMoveToOwner()
-	if self.DefaultOwner ~= nil 
-	and (ObjectExists(self.DefaultOwner) == 1
-	and CharacterIsDead(self.DefaultOwner) == 0
-	and StringHelpers.GetUUID(GetInventoryOwner(self.UUID)) ~= self.DefaultOwner)
+function UniqueData:CanMoveToOwner(owner, region)
+	if StringHelpers.IsNullOrEmpty(owner) then
+		return false
+	end
+	--local inventoryOwner = GetInventoryOwner(self.UUID)
+	if owner ~= nil 
+	and ObjectExists(owner) == 1
+	and CharacterIsDead(owner) == 0
+	and GetRegion(owner) == region
 	then
 		return true
 	end
 	return false
 end
 
+---@param item EsvItem
+---@return string
+local function TryGetOwner(item, inventoryOnly)
+	if item.InventoryHandle ~= nil then
+		local object = Ext.GetGameObject(item.InventoryHandle)
+		if object ~= nil then
+			return object.MyGuid
+		end
+	end
+	if inventoryOnly ~= true then
+		if item.OwnerHandle ~= nil then
+			local object = Ext.GetGameObject(item.OwnerHandle)
+			if object ~= nil then
+				return object.MyGuid
+			end
+		end
+	end
+	return nil
+end
+
+---@return boolean
+function UniqueData:IsReleasedFromOwner()
+	return ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner") == 1
+end
+
+---@param clear clearRelease|nil If true, clear the flag instead.
+function UniqueData:ReleaseFromOwner(clearRelease)
+	if clearRelease ~= true then
+		ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+		self.Owner = nil
+	else
+		ObjectClearFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+	end
+end
+
+---@param self UniqueData
+---@param region string
+---@param item EsvItem|nil
+local function MoveToRegionPosition(self, region, item)
+	local targetPosition = self.LevelData[region]
+	if targetPosition ~= nil then
+		local x,y,z,pitch,yaw,roll = table.unpack(targetPosition)
+		local host = CharacterGetHostCharacter()
+		TeleportTo(self.UUID, host, "", 0, 1, 0)
+		ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
+	else
+		-- Fallback
+		ItemToInventory(self.UUID, NPC.VendingMachine, 1, 0, 0)
+	end
+end
+
 function UniqueData:OnLevelChange(region)
 	if ObjectExists(self.UUID) == 1 then
 		local item = Ext.GetItem(self.UUID)
-		self.Owner = ItemGetOwner(self.UUID)
-		self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
-		if not self.Initialized then
-			self:ApplyProgression(self.ProgressionData, false, item)
-			if self:CanMoveToOwner() then
-				ItemLockUnEquip(self.UUID, 0)
-				ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
-				if self.AutoEquipOnOwner then
-					self:Transfer(self.DefaultOwner, true)
+		if not self:IsReleasedFromOwner() then
+			self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
+			if item.CurrentLevel ~= region then
+				if not self.Initialized then
+					self:ApplyProgression(self.ProgressionData, false, item)
+					local targetOwner = self.DefaultOwner
+					if type(self.DefaultOwner) == "table" then
+						targetOwner = self.DefaultOwner[region] or self.DefaultOwner["Any"]
+					end
+					if self:CanMoveToOwner(targetOwner, region) then
+						self:Transfer(targetOwner, self.AutoEquipOnOwner)
+					else
+						MoveToRegionPosition(self, region, item)
+					end
+					ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 				end
-			else
-				local targetPosition = self.LevelData[region]
-				if targetPosition ~= nil then
-					local x,y,z,pitch,yaw,roll = table.unpack(targetPosition)
-					local host = CharacterGetHostCharacter()
-					TeleportTo(self.UUID, host, "", 0, 1, 0)
-					ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
-				end
+				self.Initialized = true
 			end
-			self.Initialized = true
-			ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 		else
-			if GetRegion(self.UUID) ~= region and self.Owner == nil then
-				if self:CanMoveToOwner() and GetRegion(self.DefaultOwner) == region then
-					ItemLockUnEquip(self.UUID, 0)
-					ItemToInventory(self.UUID, self.DefaultOwner, 1, 0, 1)
-					if self.AutoEquipOnOwner then
-						self:Transfer(self.DefaultOwner, true)
-					end
-				else
-					local targetPosition = self.LevelData[region]
-					if targetPosition ~= nil then
-						local x,y,z,pitch,yaw,roll = table.unpack(targetPosition)
-						local host = CharacterGetHostCharacter()
-						TeleportTo(self.UUID, host, "", 0, 1, 0)
-						ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
-					end
-				end
+			if item.CurrentLevel ~= region then
+				MoveToRegionPosition(self, region, item)
 			end
 		end
 	end
@@ -147,6 +191,10 @@ function UniqueData:Transfer(target, equip)
 	if equip == true then
 		self:Equip(target)
 	end
+end
+
+function UniqueData:ClearOwner()
+	self.Owner = nil
 end
 
 ---@param entry UniqueProgressionEntry
