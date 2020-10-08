@@ -21,6 +21,7 @@ package
 		public const designResHeight = 1080;
 		public var resWidth:Number = 1920;
 		public var resHeight:Number = 1080;
+		public var uiScaling:Number;
 
 		public function MainTimeline()
 		{
@@ -36,6 +37,9 @@ package
 
 		public function onEventResolution(w:Number, h:Number) : *
 		{
+			w = w / this.uiScaling;
+			h = h / this.uiScaling;
+			var resRatio:uint = Math.floor(w / h * (this.designResWidth / this.uiScaling));
 			resWidth = w;
 			resHeight = h;
 			ExternalInterface.call("repositionMasteryMenuToggleButton", w, h);

@@ -14,7 +14,9 @@ return function()
 		"LLWEAPONEX_ThrowObjectLimitDisabled",
 	})
 	settings.Global:AddLocalizedFlag("LLWEAPONEX_AutoUnlockRecipesDisabled", "User", false, nil, nil, false)
-
+	--settings.Global:AddLocalizedVariable("ButtonOffsetX", "LLWEAPONEX_Variables_ButtonOffsetX", 0, -100, 100, 0.1)
+	--settings.Global:AddLocalizedVariable("ButtonOffsetY", "LLWEAPONEX_Variables_ButtonOffsetY", 0, -100, 100, 0.1)
+	
 	---@param self SettingsData
 	---@param name string
 	---@param data VariableData
