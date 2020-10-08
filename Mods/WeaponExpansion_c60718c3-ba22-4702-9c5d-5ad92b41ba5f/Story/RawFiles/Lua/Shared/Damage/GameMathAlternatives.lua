@@ -210,7 +210,7 @@ end
 --- @param character StatCharacter
 --- @param weapon StatItem
 --- @return table,table
-local function GetBaseAndCalculatedWeaponDamageRange(character, weapon)
+function Math.GetBaseAndCalculatedWeaponDamageRange(character, weapon)
     local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
 
     local abilityBoosts = character.DamageBoost 
@@ -240,44 +240,65 @@ end
 
 --- @param character StatCharacter
 --- @param weapon StatItem
+--- @param applyDualWieldingPenalty boolean
 --- @return integer,integer,integer,integer
-local function GetTotalBaseAndCalculatedWeaponDamage(character, weapon)
+function Math.GetTotalBaseAndCalculatedWeaponDamage(character, weapon, applyDualWieldingPenalty)
     local baseMin = 0
     local baseMax = 0
     local totalMin = 0
     local totalMax = 0
 
-    local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
-
-    local abilityBoosts = character.DamageBoost 
-        + Game.Math.ComputeWeaponCombatAbilityBoost(character, weapon)
-        + Game.Math.ComputeWeaponRequirementScaledDamage(character, weapon)
-    abilityBoosts = math.max(abilityBoosts + 100.0, 0.0) / 100.0
-
-    local boost = 1.0 + damageBoost * 0.01
-    if character.IsSneaking then
-        boost = boost + Ext.ExtraData['Sneak Damage Multiplier']
-    end
-
-    for damageType, damage in pairs(damages) do
-        baseMin = damage.Min + baseMin
-        baseMax = damage.Max + baseMax
-    
-        local min = math.ceil(damage.Min * boost * abilityBoosts)
-        local max = math.ceil(damage.Max * boost * abilityBoosts)
-
-        if min > max then
-            max = min
-        end
-
-        totalMin = min + totalMin
-        totalMax = max + totalMax
-    end
+    local mainDamageRange = CalculateWeaponScaledDamageRanges(character, mainWeapon)
 
     return math.floor(baseMin),math.floor(baseMax),math.floor(totalMin),math.floor(totalMax)
 end
 
+-- function Math.GetTotalBaseAndCalculatedWeaponDamage(character, weapon, applyDualWieldingPenalty)
+--     local baseMin = 0
+--     local baseMax = 0
+--     local totalMin = 0
+--     local totalMax = 0
+
+--     local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
+--     local penalty = applyDualWieldingPenalty == true and Ext.ExtraData.DualWieldingDamagePenalty or 1
+
+--     --CalculateWeaponDamageWithDamageBoost
+--     local boost = 1.0 + damageBoost * 0.01
+--     for damageType, damage in pairs(damages) do
+--         baseMin = baseMin + Ext.Round(damage.Min * penalty)
+--         baseMax = baseMax + Ext.Round(damage.Max * penalty)
+--         if damageBoost ~= 0 then
+--             damage.Min = math.ceil(damage.Min * boost)
+--             damage.Max = math.ceil(damage.Max * boost)
+--         else
+--             damage.Min = Ext.Round(damage.Min)
+--             damage.Max = Ext.Round(damage.Max)
+--         end
+--         totalMin = totalMin + damage.Min
+--         totalMax = totalMax + damage.Max
+--     end
+
+--     --CalculateWeaponScaledDamageRanges
+--     -- local boost = character.DamageBoost 
+--     --     + Game.Math.ComputeWeaponCombatAbilityBoost(character, weapon)
+--     --     + Game.Math.ComputeWeaponRequirementScaledDamage(character, weapon)
+--     -- boost = boost / 100.0
+
+--     -- if character.IsSneaking then
+--     --     --boost = boost + Ext.ExtraData['Sneak Damage Multiplier']
+--     -- end
+
+--     -- local boostMin = math.max(-1.0, boost)
+
+--     -- for damageType, damage in pairs(damages) do
+--     --     damage.Min = damage.Min + math.ceil(damage.Min * boostMin)
+--     --     damage.Max = damage.Max + math.ceil(damage.Max * boost)
+--     --     totalMin = totalMin + damage.Min
+--     --     totalMax = totalMax + damage.Max
+--     -- end
+
+--     return math.floor(baseMin),math.floor(baseMax),math.floor(totalMin),math.floor(totalMax)
+-- end
+
 Math.GetSkillDamage = GetSkillDamage
 Math.GetSkillDamageRange = GetSkillDamageRange
-Math.GetBaseAndCalculatedWeaponDamageRange = GetBaseAndCalculatedWeaponDamageRange
-Math.GetTotalBaseAndCalculatedWeaponDamage = GetTotalBaseAndCalculatedWeaponDamage

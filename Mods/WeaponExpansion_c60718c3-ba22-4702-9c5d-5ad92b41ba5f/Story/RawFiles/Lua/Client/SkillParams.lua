@@ -111,7 +111,7 @@ Skills.Params["GetHighestAttribute"] = GetHighestAttribute
 --- @param isFromItem boolean
 --- @param param string
 local function GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
-	local weapon = GetUnarmedWeapon(character)
+	local weapon = UnarmedHelpers.GetUnarmedWeapon(character)
 	local damageRange = Math.GetSkillDamageRange(character, skill, weapon)
 	if damageRange ~= nil then
 		return GameHelpers.Tooltip.FormatDamageRange(damageRange)
@@ -186,7 +186,7 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 			return GetDamageParamResult(param_func, skill, character, isFromItem)
 		end
 	elseif param == "Damage" then
-		if skill.UseWeaponDamage == "Yes" and IsUnarmed(character) then
+		if skill.UseWeaponDamage == "Yes" and UnarmedHelpers.HasUnarmedWeaponStats(character) then
 			return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
 		else
 			local param_func = Skills.Damage[skill.Name]

@@ -65,9 +65,8 @@ local damageStatID = 6
 ---@param ui UIObject
 function UI.SetCharacterSheetDamageText(ui, uuid)
 	local character = Ext.GetCharacter(uuid)
-	if character ~= nil and IsUnarmed(character.Stats) then
-		local weapon,boost = GetUnarmedWeapon(character.Stats)
-		local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
+	if character ~= nil and UnarmedHelpers.HasUnarmedWeaponStats(character.Stats) then
+		local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
 		local i = 0
 		ui:SetValue("secStat_array", 1, i+1)
 		ui:SetValue("secStat_array", Ext.GetTranslatedString("h9531fd22g6366g4e93g9b08g11763cac0d86", "Damage"), i+2)
@@ -80,7 +79,7 @@ end
 ---@param ui UIObject
 local function OnCharacterSheetUpdating(ui, call, ...)
 	local params = {...}
-	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] Function running params("..LeaderLib.Common.Dump(params)..")")
+	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] ",call," running params(", LeaderLib.Common.Dump(params))
 
 	local main = ui:GetRoot()
 	local array = main.secStat_array
@@ -95,9 +94,8 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 				--print(statType, label, value, tooltipId)
 				if tooltipId == damageStatID then
 					local character = Client:GetCharacter()
-					if character ~= nil and IsUnarmed(character.Stats) then
-						local weapon,boost = GetUnarmedWeapon(character.Stats)
-						local baseMin,baseMax,totalMin,totalMax = Math.GetTotalBaseAndCalculatedWeaponDamage(character.Stats, weapon)
+					if character ~= nil and UnarmedHelpers.HasUnarmedWeaponStats(character.Stats) then
+						local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
 						array[i+3] = string.format("%i-%i", totalMin, totalMax)
 					end
 					break

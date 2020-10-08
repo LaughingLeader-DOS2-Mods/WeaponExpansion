@@ -273,7 +273,7 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 		if not fakeDamageCreated and item:HasTag("LLWEAPONEX_Unarmed") then
-			local damageRange,highestAttribute = GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
+			local damageRange,highestAttribute = UnarmedHelpers.GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
 			--local highestAttribute = "Finesse"
 			--local bonusWeapon = ExtenderHelpers.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
 			--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)

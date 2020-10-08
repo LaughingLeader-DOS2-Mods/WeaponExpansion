@@ -6,6 +6,8 @@ Common = LeaderLib.Common
 StringHelpers = LeaderLib.StringHelpers
 --WeaponExpansion = Mods["WeaponExpansion"]
 
+LocalizedText = LeaderLib.LocalizedText
+
 printd = LeaderLib.PrintDebug
 
 SKILL_STATE = LeaderLib.SKILL_STATE
@@ -67,7 +69,7 @@ NPC = {
 }
 
 Ext.Require("Shared/MasteryHelpers.lua")
-Ext.Require("Shared/GameMathAlternatives.lua")
+Ext.Require("Shared/Damage/GameMathAlternatives.lua")
 Ext.Require("Shared/StatOverrides.lua")
 Ext.Require("Shared/Data/LocalizedText.lua")
 Ext.Require("Shared/Data/MasteryData_Classes.lua")
@@ -76,10 +78,12 @@ Ext.Require("Shared/Data/MasteryData_RankBonuses.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/Data/UnarmedWeaponStats.lua")
 Ext.Require("Shared/Data/PresetEntries.lua")
-Ext.Require("Shared/AbilityBasedScaling.lua")
+Ext.Require("Shared/Damage/AbilityBasedScaling.lua")
 Ext.Require("Shared/SkillAPListener.lua")
-Ext.Require("Shared/SkillDamageFunctions.lua")
-Ext.Require("Shared/UnarmedMechanics.lua")
+Ext.Require("Shared/Damage/SkillDamageFunctions.lua")
+Ext.Require("Shared/Helpers/UnarmedHelpers.lua")
+Ext.Require("Shared/Damage/UnarmedScalingMath.lua")
+Ext.Require("Shared/Damage/UnarmedDamageScaling.lua")
 Ext.Require("Shared/ExtenderHelpers.lua")
 Ext.Require("Shared/SharedDataHooks.lua")
 Ext.Require("Shared/Items/RunicCannon.lua")

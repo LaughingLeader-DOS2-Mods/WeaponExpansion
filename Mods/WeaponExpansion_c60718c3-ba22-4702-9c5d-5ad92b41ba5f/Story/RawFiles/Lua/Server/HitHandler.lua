@@ -59,12 +59,13 @@ end
 --- @param damage integer
 --- @param handle integer
 local function OnPrepareHit(target,source,damage,handle)
-	if not StringHelpers.IsNullOrEmpty(source) and CharacterGetEquippedWeapon(source) == nil then
-		ScaleUnarmedDamage(source,target,damage,handle)
+	if not StringHelpers.IsNullOrEmpty(source) then
+		local attacker = Ext.GetCharacter(source)
+		if UnarmedHelpers.HasUnarmedWeaponStats(attacker.Stats) then
+			UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle)
+		end
 	end
-	if damage > 0 then
-		--ConvertArmorDamage(target,handle)
-	end
+
 	if ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 then
 		local hitType = NRD_HitGetString(handle, "HitType")
 		if hitType == "Surface" and GameHelpers.HitSucceeded(target, handle, 1) then
@@ -110,30 +111,33 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 		NRD_StatusSetInt(target, handle, "Missed", 0)
 		hitSucceeded = true
 	end
-
-	if not StringHelpers.IsNullOrEmpty(source) and not StringHelpers.IsNullOrEmpty(target) and hitSucceeded then
+	if hitSucceeded and not StringHelpers.IsNullOrEmpty(source) and not StringHelpers.IsNullOrEmpty(target) then
 		if skill == "" and GameHelpers.HitWithWeapon(target, handle, false, false) then
-			LeaderLib.PrintDebug("[WeaponExpansion:HitHandler:OnHit] target("..target..") was hit with a weapon from source("..tostring(source)..").")
-			if totalOnHitCallbacks > 0 then
-				local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
-				-- Unarmed
-				if CharacterGetEquippedWeapon(source) == nil then
-					local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]
-					if unarmedCallback ~= nil then
-						local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle, bonuses)
+			
+			local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
+			local mainhand = CharacterGetEquippedItem(source, "Weapon")
+			local offhand = CharacterGetEquippedItem(source, "Shield")
+			-- Unarmed
+			if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
+				local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]
+				if unarmedCallback ~= nil then
+					local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle, bonuses)
+					if not status then
+						Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
+					end
+				end
+				if damage > 0 and IsPlayer(source) then
+					MasterySystem.GrantBasicAttackExperience(source, target, "LLWEAPONEX_Unarmed")
+				end
+			else
+				if damage > 0 and IsPlayer(source) then
+					MasterySystem.GrantBasicAttackExperience(source, target)
+				end
+				for tag,callback in pairs(HitHandler.OnHitCallbacks) do
+					if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
+						local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses)
 						if not status then
 							Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
-						end
-					end
-				else
-					local mainhand = CharacterGetEquippedItem(source, "Weapon")
-					local offhand = CharacterGetEquippedItem(source, "Shield")
-					for tag,callback in pairs(HitHandler.OnHitCallbacks) do
-						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
-							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses)
-							if not status then
-								Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
-							end
 						end
 					end
 				end
@@ -152,7 +156,7 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 				ArmCannon_OnWeaponSkillHit(source, target, skill)
 			end
 			if IsWeaponSkill(skill) then
-				printd(string.format("[WeaponExpansion:HitHandler:OnHit] target(%s) was hit with a weapon skill by source(%s).", target, source))
+				--printd(string.format("[WeaponExpansion:HitHandler:OnHit] target(%s) was hit with a weapon skill by source(%s).", target, source))
 				MasterySystem.GrantWeaponSkillExperience(source, target)
 			end
 		end

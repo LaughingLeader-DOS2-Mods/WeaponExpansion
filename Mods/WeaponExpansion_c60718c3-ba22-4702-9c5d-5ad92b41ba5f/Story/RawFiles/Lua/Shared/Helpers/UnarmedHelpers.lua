@@ -1,10 +1,12 @@
+UnarmedHelpers = {}
+
 local unarmedAttributes = {
 	"Strength",
 	"Finesse",
 	"Constitution"
 }
 
-function GetUnarmedMasteryBoost(unarmedMastery)
+function UnarmedHelpers.GetMasteryBoost(unarmedMastery)
 	if unarmedMastery == 1 then
 		return GameHelpers.GetExtraData("LLWEAPONEX_UnarmedMasteryBoost1", 30)
 	elseif unarmedMastery == 2 then
@@ -24,7 +26,7 @@ local unarmedWeaponSlots = {
 
 ---@param character StatCharacter
 ---@return StatItem,number,integer,string,boolean
-function GetUnarmedWeapon(character, skipItemCheck)
+function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck)
 	local hasUnarmedWeapon
 	local weaponStat = "NoWeapon"
 	local level = character.Level
@@ -53,9 +55,9 @@ function GetUnarmedWeapon(character, skipItemCheck)
 			unarmedMasteryRank = i
 		end
 	end
-	local unarmedMasteryBoost = GetUnarmedMasteryBoost(unarmedMasteryRank)
+	local unarmedMasteryBoost = UnarmedHelpers.GetMasteryBoost(unarmedMasteryRank)
 	---@type StatItem
-	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, level, highestAttribute, "None", unarmedMasteryBoost)
+	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, level, highestAttribute, "Club", unarmedMasteryBoost)
 	--print("Unarmed weapon:", Common.Dump(weapon), getmetatable(character.Character))
 	--print(getmetatable(character), type(getmetatable(character)))
 	return weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
@@ -63,17 +65,47 @@ end
 
 ---@param character StatCharacter
 ---@return table<string,number[]>,number,integer,string
-function GetUnarmedDamageRange(character)
-	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = GetUnarmedWeapon(character)
+function UnarmedHelpers.GetDamageRange(character)
+	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character)
 	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
+	if character.Character:HasTag("LIZARD") then
+		local offHandDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
+		local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
+		for damageType, range in pairs(offHandDamageRange) do
+			local min = math.ceil(range.Min * dualWieldPenalty)
+			local max = math.ceil(range.Max * dualWieldPenalty)
+			local range = damageRange[damageType]
+			if damageRange[damageType] ~= nil then
+				range.Min = range.Min + min
+				range.Max = range.Max + max
+			else
+				damageRange[damageType] = {Min = min, Max = max}
+			end
+		end
+	end
 	return damageRange,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
+end
+
+---@param character EclCharacter
+function UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
+	local isLizard = character:HasTag("LIZARD")
+	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats, true)
+	local damageList,baseMin,baseMax,totalMin,totalMax = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, isLizard, false)
+	if isLizard then
+		local damageList2,baseMin2,baseMax2,totalMin2,totalMax2 = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, isLizard, true)
+		baseMin = baseMin + baseMin2
+		baseMax = baseMax + baseMax2
+		totalMin = totalMin + totalMin2
+		totalMax = totalMax + totalMax2
+	end
+	return baseMin,baseMax,totalMin,totalMax,unarmedMasteryBoost
 end
 
 ---@param character StatCharacter
 ---@param item StatItem
 ---@return table<string,number[]>,string
-function GetUnarmedWeaponDamageRange(character, item)
-	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = GetUnarmedWeapon(character, true)
+function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item)
+	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, true)
 	if item.Tags ~= nil and string.find(item.Tags, "LLWEAPONEX_UnarmedWeaponEquipped") then
 		local unarmedWeaponStatName = UnarmedWeaponStats[item.Name]
 		if unarmedWeaponStatName ~= nil then
@@ -90,6 +122,21 @@ function GetUnarmedWeaponDamageRange(character, item)
 		end
 	end
 	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, noWeapon)
+	if character.Character:HasTag("LIZARD") then
+		local offHandDamageRange = Common.CopyTable(damageRange, true)
+		local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
+		for damageType, range in pairs(offHandDamageRange) do
+			local min = math.ceil(range.Min * dualWieldPenalty)
+			local max = math.ceil(range.Max * dualWieldPenalty)
+			local range = damageRange[damageType]
+			if damageRange[damageType] ~= nil then
+				range.Min = range.Min + min
+				range.Max = range.Max + max
+			else
+				damageRange[damageType] = {Min = min, Max = max}
+			end
+		end
+	end
 	return damageRange,highestAttribute
 end
 
@@ -98,7 +145,7 @@ local function statMatchOrNil(stat, name)
 end
 
 ---@param character StatCharacter
-function IsUnarmed(character, allowShields)
+function UnarmedHelpers.HasUnarmedWeaponStats(character, allowShields)
 	if type(character) == "string" then
 		character = Ext.GetCharacter(character).Stats
 	elseif type(character) == "userdata" then
@@ -106,7 +153,7 @@ function IsUnarmed(character, allowShields)
 		if objType == "ecl::Character" then
 			character = character.Stats
 		elseif objType ~= "CDivinityStats_Character" then
-			Ext.PrintError("[WeaponExpansion:IsUnarmed] The character param should be a string, EsvCharacter, or StatCharacter. Type is:", character, objType)
+			Ext.PrintError("[WeaponExpansion:UnarmedHelpers.HasUnarmedWeaponStats] The character param should be a string, EsvCharacter, or StatCharacter. Type is:", character, objType)
 			character = nil
 		end
 	end
@@ -114,4 +161,23 @@ function IsUnarmed(character, allowShields)
 		return statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
 	end
 	return false
+end
+
+---@param uuid string
+function UnarmedHelpers.IsUnarmedWeapon(uuid)
+	if StringHelpers.IsNullOrEmpty(uuid) then
+		return true
+	else
+		local item = Ext.GetItem(uuid)
+		if item:HasTag("LLWEAPONEX_Unarmed") then
+			return true
+		end
+	end
+	return false
+end
+
+---@param mainhand string
+---@param offhand string
+function UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand)
+	return UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand)
 end

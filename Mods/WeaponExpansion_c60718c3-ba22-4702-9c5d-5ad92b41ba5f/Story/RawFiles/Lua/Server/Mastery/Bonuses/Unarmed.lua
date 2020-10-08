@@ -26,6 +26,14 @@ MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_Ene
 	end
 end)
 
+--- @param target string
+--- @param source string
+--- @param damage integer
+--- @param handle integer
+HitHandler.RegisterOnHit("LLWEAPONEX_Unarmed", function(target,source,damage,handle)
+	
+end)
+
 ---@param skill string
 ---@param char string
 ---@param state SkillState

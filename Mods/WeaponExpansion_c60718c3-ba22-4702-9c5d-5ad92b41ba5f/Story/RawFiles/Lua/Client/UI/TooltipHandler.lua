@@ -14,7 +14,7 @@ LeaderLib.RegisterListener("GetTooltipSkillDamage", function(skill, character)
 	end
 	-- if character.Stats.MainWeapon == nil and character.Stats.OffHandWeapon == nil then
 	-- 	local damageRange = nil
-	-- 	local weapon = GetUnarmedWeapon(character)
+	-- 	local weapon = UnarmedHelpers.GetUnarmedWeapon(character)
 	-- 	damageRange = Math.GetSkillDamageRange(character, skillData, weapon)
 	-- 	return GameHelpers.Tooltip.FormatDamageRange(damageRange)
 	-- end

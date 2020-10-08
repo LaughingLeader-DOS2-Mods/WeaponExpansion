@@ -1,96 +1,26 @@
 Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
-/*
-DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_01");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_02");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_03");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(4, "Strength", "LLWEAPONEX_UNARMED_DAMAGE_STRENGTH_04");
-
-DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_01");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_02");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_03");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(4, "Finesse", "LLWEAPONEX_UNARMED_DAMAGE_FINESSE_04");
-
-DB_LLWEAPONEX_Unarmed_DamageStatuses(1, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_01");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(2, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_02");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(3, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_03");
-DB_LLWEAPONEX_Unarmed_DamageStatuses(4, "Constitution", "LLWEAPONEX_UNARMED_DAMAGE_CONSTITUTION_04");
-*/
 KBSECTION
 
-// [BEGIN_NO_OSITOOLS]
-IF
-TextEventSet("leaderlib_luareset")
+//REGION SUCKER_PUNCH
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, "LLWEAPONEX_Unarmed")
 THEN
-NRD_DebugLog("BEGIN_NO_OSITOOLS compiled!");
-// [END_NO_OSITOOLS]
-
-/* [OSITOOLS_ONLY]
-IF
-TextEventSet("leaderlib_luareset")
-THEN
-NRD_DebugLog("OSITOOLS_ONLY compiled!");
-*/
-
-//REGION HIT_SCALING
-/*
-IF
-CharacterStartAttackObject(_Target, _, _Attacker)
-AND
-NOT CharacterGetEquippedWeapon(_Attacker, _)
-THEN
-DB_LLWEAPONEX_Unarmed_Temp_BasicAttacking(_Attacker, _Target);
-LeaderLib_Timers_StartObjectObjectTimer(_Attacker, _Target, 2000, "Timers_LLWEAPONEX_Unarmed_ClearBasicAttackDB", "LLWEAPONEX_Unarmed_ClearBasicAttackDB");
+// We use a derivative here because the game does a bunch of hackery to remove the original
+CharacterAddSkill(_Player, "Target_SinglehandedAttack", 0);
 
 PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((GUIDSTRING)_Attacker, (GUIDSTRING)_Target, "LLWEAPONEX_Unarmed_ClearBasicAttackDB")
-AND
-DB_LLWEAPONEX_Unarmed_Temp_BasicAttacking((CHARACTERGUID)_Attacker, _Target)
+LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, "LLWEAPONEX_Unarmed")
 THEN
-NOT DB_LLWEAPONEX_Unarmed_Temp_BasicAttacking(_Attacker, _Target);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX_10_Unarmed:ClearBasicAttackDB] Cleared DB entry");
-*/
-//END_REGION
-
-//REGION NO_WEAPON_DAMAGE
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_UNARMED_NOWEAPON_HIT", (CHARACTERGUID)_Source)
-AND
-IsTagged(_Source, "LIZARD", _IsLizard)
-THEN
-LLWEAPONEX_Unarmed_OnNoWeaponHit(_Source, (GUIDSTRING)_Target, _IsLizard);
-
-PROC
-LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, (INTEGER)_IsLizard)
-AND
-DB_IsPlayer(_Char)
-THEN
-LLWEAPONEX_Ext_AddMasteryExperience(_Char, "LLWEAPONEX_Unarmed", 1.0);
-
-PROC
-LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, 1)
-AND
-NOT LeaderLib_Helper_QRY_HasStatus((GUIDSTRING)_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
-THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Unarmed_ApplyLizardDebuff", "LLWEAPONEX_Unarmed_ApplyLizardDebuff");
+CharacterRemoveSkill(_Player, "Target_SinglehandedAttack");
 
 IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Unarmed_ApplyLizardDebuff")
-THEN
-ApplyStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF", 6.0, 0, _Char);
-
-PROC
-LLWEAPONEX_Unarmed_OnNoWeaponHit((CHARACTERGUID)_Char, (GUIDSTRING)_Target, 1)
+SkillDeactivated(_Player, "Target_SinglehandedAttack")
 AND
-HasActiveStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF", 1)
+LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, "LLWEAPONEX_Unarmed")
 THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 50, "Timers_LLWEAPONEX_Unarmed_RemoveLizardDebuff", "LLWEAPONEX_Unarmed_RemoveLizardDebuff");
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Unarmed_RemoveLizardDebuff")
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF");
+CharacterAddSkill(_Player, "Target_SinglehandedAttack", 0);
 //END_REGION
 EXITSECTION
 
