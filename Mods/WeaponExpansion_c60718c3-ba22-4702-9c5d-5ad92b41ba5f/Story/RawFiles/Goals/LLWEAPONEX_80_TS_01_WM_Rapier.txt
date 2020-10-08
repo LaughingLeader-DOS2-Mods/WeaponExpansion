@@ -11,7 +11,9 @@ HasActiveStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", 1)
 AND
 LLWEAPONEX_QRY_IsEquippedWeapon(_Player, _Item)
 AND
-LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+GetUUID(_Player, _UUID)
+AND
+NOT NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance");
 LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandLost(_Player);
@@ -32,7 +34,9 @@ ProcObjectTimer(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance", 500);
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance")
 AND
-NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+GetUUID(_Player, _UUID)
+AND
+NRD_ModQuery2("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandGained(_Player);
 //END_REGION

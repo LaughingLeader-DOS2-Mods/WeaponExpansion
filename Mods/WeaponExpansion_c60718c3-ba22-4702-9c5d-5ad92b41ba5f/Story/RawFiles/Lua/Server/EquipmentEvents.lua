@@ -259,3 +259,24 @@ function MagicMissileWeapon_Swap(char, wand, rod)
 		Osi.LeaderLib_Timers_StartObjectObjectTimer(equippedItem, targetItem, 50, "Timers_LLWEAPONEX_MoveMagicMissileWeapon", "LeaderLib_Commands_ItemToInventory")
 	end
 end
+
+function HasEmptyHand(uuid, ignoreShields)
+	local mainhand = CharacterGetEquippedItem(source, "Weapon")
+	local offhand = CharacterGetEquippedItem(source, "Shield")
+	if not StringHelpers.IsNullOrEmpty(mainhand) then
+		local item = Ext.GetItem(mainhand)
+		if item ~= nil and item.Stats.IsTwoHanded then
+			return false
+		end
+		if not StringHelpers.IsNullOrEmpty(offhand) then
+			if ignoreShields ~= nil then
+				item = Ext.GetItem(offhand)
+				if item ~= nil and item.ItemType == "Shield" then
+					return true
+				end
+			end
+			return false
+		end
+	end
+	return true
+end

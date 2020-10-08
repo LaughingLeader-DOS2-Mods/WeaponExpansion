@@ -7,45 +7,15 @@ DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE1");
 DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE2");
 DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE3");
 DB_LLWEAPONEX_Rapiers_FrenzyCharge("LLWEAPONEX_RAPIER_FRENZYCHARGE4");
-DB_LLWEAPONEX_Rapiers_IgnoreWithTag("Grimoires", "LLGRIMOIRE_Grimoire");
-
 KBSECTION
-//REGION OFFHAND_QRY
-QRY
-LLWEAPONEX_Rapiers_QRY_IgnoreItem((ITEMGUID)_Item)
-AND
-LeaderLib_Helper_QRY_IgnoreItem(_Item)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Rapiers_QRY_IgnoreItem((ITEMGUID)_Item)
-AND
-DB_LLWEAPONEX_Rapiers_IgnoreWithTag(_Grimoire, _Tag)
-AND
-IsTagged(_Item, _Tag, 1)
-THEN
-DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Rapiers_QRY_HasFullHands((CHARACTERGUID)_Player)
-AND
-CharacterGetEquippedItem(_Player, "Weapon", (ITEMGUID)_Weapon)
-AND
-NOT LLWEAPONEX_Rapiers_QRY_IgnoreItem(_Weapon)
-AND
-CharacterGetEquippedItem(_Player, "Shield", (ITEMGUID)_Shield)
-AND
-NOT LLWEAPONEX_Rapiers_QRY_IgnoreItem(_Shield)
-THEN
-DB_NOOP(1);
-//END_REGION
 
 //REGION DUELIST_EMPTY_HAND
 PROC
 LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, "LLWEAPONEX_Rapier", "DuelistStance")
 AND
-NOT LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+GetUUID(_Player, _UUID)
+AND
+NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandGained(_Player);
 
@@ -68,7 +38,9 @@ RemoveStatus(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
 PROC
 LeaderLib_Skills_BlockStatusToggle((CHARACTERGUID)_Player, "Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST")
 AND
-LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+GetUUID(_Player, _UUID)
+AND
+NOT NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 ShowNotification(_Player, "LLWEAPONEX_Status_DuelistStance_Failed");
 DB_LeaderLib_Skills_BlockStatusToggle(_Player, "Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
@@ -85,7 +57,9 @@ LeaderLib_Statuses_BlockPermanentStatus((CHARACTERGUID)_Player, "LLWEAPONEX_RAPI
 AND
 NOT DB_LeaderLib_Statuses_PermanentStatusBlocked(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", "LLWEAPONEX_DuelistStanceWasEnabled")
 AND
-LLWEAPONEX_Rapiers_QRY_HasFullHands(_Player)
+GetUUID(_Player, _UUID)
+AND
+NOT NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 DB_LeaderLib_Statuses_PermanentStatusBlocked(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", "LLWEAPONEX_DuelistStanceWasEnabled");
 //END_REGION
