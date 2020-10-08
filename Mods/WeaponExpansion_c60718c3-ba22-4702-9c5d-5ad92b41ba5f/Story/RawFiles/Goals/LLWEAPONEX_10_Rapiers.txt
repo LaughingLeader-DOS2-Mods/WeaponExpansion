@@ -15,7 +15,7 @@ LLWEAPONEX_WeaponMastery_UnlockSkill((CHARACTERGUID)_Player, "LLWEAPONEX_Rapier"
 AND
 GetUUID(_Player, _UUID)
 AND
-NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
+NRD_ModQuery2("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandGained(_Player);
 
@@ -40,7 +40,7 @@ LeaderLib_Skills_BlockStatusToggle((CHARACTERGUID)_Player, "Shout_LLWEAPONEX_Rap
 AND
 GetUUID(_Player, _UUID)
 AND
-NOT NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
+NOT NRD_ModQuery2("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 ShowNotification(_Player, "LLWEAPONEX_Status_DuelistStance_Failed");
 DB_LeaderLib_Skills_BlockStatusToggle(_Player, "Shout_LLWEAPONEX_Rapier_DuelistStance", "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST");
@@ -59,7 +59,7 @@ NOT DB_LeaderLib_Statuses_PermanentStatusBlocked(_Player, "LLWEAPONEX_RAPIER_MAS
 AND
 GetUUID(_Player, _UUID)
 AND
-NOT NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
+NOT NRD_ModQuery2("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 DB_LeaderLib_Statuses_PermanentStatusBlocked(_Player, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST", "LLWEAPONEX_DuelistStanceWasEnabled");
 //END_REGION

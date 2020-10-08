@@ -261,8 +261,8 @@ function MagicMissileWeapon_Swap(char, wand, rod)
 end
 
 function HasEmptyHand(uuid, ignoreShields)
-	local mainhand = CharacterGetEquippedItem(source, "Weapon")
-	local offhand = CharacterGetEquippedItem(source, "Shield")
+	local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
+	local offhand = CharacterGetEquippedItem(uuid, "Shield")
 	if not StringHelpers.IsNullOrEmpty(mainhand) then
 		local item = Ext.GetItem(mainhand)
 		if item ~= nil and item.Stats.IsTwoHanded then

@@ -13,7 +13,7 @@ LLWEAPONEX_QRY_IsEquippedWeapon(_Player, _Item)
 AND
 GetUUID(_Player, _UUID)
 AND
-NOT NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID, "true")
+NOT NRD_ModQuery2("WeaponExpansion", "HasEmptyHand", _UUID, "true")
 THEN
 ProcObjectTimerCancel(_Player, "LLWEAPONEX_Timers_ReApplyDuelistStance");
 LLWEAPONEX_WeaponMastery_Rapiers_OnEmptyHandLost(_Player);
