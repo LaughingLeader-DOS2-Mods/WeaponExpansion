@@ -50,11 +50,22 @@ function CheckCharacterDeathTreasure(char)
 	end
 end
 
+local function GetPlayerDataPreset(char)
+	local character = Ext.GetCharacter(char)
+	if character ~= nil and character.PlayerCustomData ~= nil then
+		return character.PlayerCustomData.ClassType
+	end
+	return nil
+end
+
 function OnSmugglersBagOpened(char, item)
 	local owner = ItemGetOriginalOwner(item)
-	local preset = GetVarFixedString(owner, "LeaderLib_CurrentPreset")
-	if preset == "" or preset == nil then
-		preset = GetVarFixedString(owner, "LeaderLib_CharacterCreationPreset")
+	local preset =  GetVarFixedString(owner, "LeaderLib_CurrentPreset") or GetVarString(owner, "LeaderLib_CurrentPreset")
+	if StringHelpers.IsNullOrEmpty(preset) then
+		preset = GetPlayerDataPreset(char)
+		if StringHelpers.IsNullOrEmpty(preset) then
+			preset = GetVarFixedString(owner, "LeaderLib_CharacterCreationPreset")
+		end
 	end
 	if not StringHelpers.IsNullOrEmpty(preset) then
 		if preset == "LLWEAPONEX_Assassin" then
@@ -66,6 +77,8 @@ function OnSmugglersBagOpened(char, item)
 		else
 			CharacterGiveReward(char, "ST_LLWEAPONEX_SmugglersBag_Random", 1)
 		end
-		ItemDestroy(item)
+	else
+		CharacterGiveReward(char, "ST_LLWEAPONEX_SmugglersBag_Random", 1)
 	end
+	ItemDestroy(item)
 end
