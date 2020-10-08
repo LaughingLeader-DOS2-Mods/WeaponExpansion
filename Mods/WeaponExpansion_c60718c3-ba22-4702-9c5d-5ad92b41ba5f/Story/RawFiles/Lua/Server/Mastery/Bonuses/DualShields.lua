@@ -29,11 +29,18 @@ end)
 ---@param data SkillEventData
 LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_DualShields_HunkerDown", function(skill, char, state, data)
 	if state == SKILL_STATE.CAST then
-		if Ext.IsModLoaded(MODID.DivinityUnleashed) or Ext.IsModLoaded(MODID.ArmorMitigation) then
-
-		else
+		-- Armor Overhaul Support
+		-- Only restores armor if these statuses still do that.
+		local healStat = Ext.StatGetAttribute("SHIELDED_PHYSICAL", "HealStat")
+		local healType = Ext.StatGetAttribute("SHIELDED_PHYSICAL", "HealType")
+		if healStat == "PhysicalArmor" and healType == "Shield" then
 			ApplyStatus(char, "SHIELDED_PHYSICAL", 0.0, 0, char)
+		end
+		healStat = Ext.StatGetAttribute("SHIELDED_MAGIC", "HealStat")
+		healType = Ext.StatGetAttribute("SHIELDED_MAGIC", "HealType")
+		if healStat == "MagicArmor" and healType == "Shield" then
 			ApplyStatus(char, "SHIELDED_MAGIC", 0.0, 0, char)
 		end
+		--Ext.IsModLoaded(MODID.DivinityUnleashed) or Ext.IsModLoaded(MODID.ArmorMitigation) then
 	end
 end)
