@@ -467,6 +467,22 @@ THEN
 LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion");
 
 IF
+CharacterStatusApplied(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+AND
+IsTagged(_Char, "AI_PREFERRED_TARGET", 0)
+THEN
+SetTag(_Char, "AI_PREFERRED_TARGET");
+DB_LLWEAPONEX_DualShields_Temp_AddedAITag(_Char);
+
+IF
+CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
+AND
+DB_LLWEAPONEX_DualShields_Temp_AddedAITag(_Char)
+THEN
+NOT DB_LLWEAPONEX_DualShields_Temp_AddedAITag(_Char);
+ClearTag(_Char, "AI_PREFERRED_TARGET");
+
+IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion", 500);
