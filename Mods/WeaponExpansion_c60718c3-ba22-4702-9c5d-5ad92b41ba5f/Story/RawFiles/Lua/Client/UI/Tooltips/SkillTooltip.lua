@@ -194,6 +194,16 @@ local function OnSkillTooltip(character, skill, tooltip)
 			end
 		end
 	end
+
+	if string.find(skill, "Banner") then
+		local element = tooltip:GetElement("SkillRequiredEquipment")
+		if element ~= nil then
+			if string.find(element.Label:lower(), "staff") then
+				element.Label = string.gsub(element.Label, "Staff", Text.WeaponType.Banner.Value)
+				element.Label = string.gsub(element.Label, "staff", Text.WeaponType.Banner.Value:lower())
+			end
+		end
+	end
 end
 
 return OnSkillTooltip

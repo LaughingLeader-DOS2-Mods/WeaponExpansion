@@ -204,6 +204,11 @@ Text = {
 		IncompatibleTag = ts:Create("hd0534a06g535bg435bga75dg145e9cc7282f", "Incompatible with [1] [2]&lt;br&gt;"),
 		Unbreakable = ts:Create("h03b9013dg183cg4543gbcd5gf9e832e74fae", "Unbreakable"),
 	},
+	WeaponType = {
+		StaffWeaponRequirement = ts:Create("h9d2c3f11g8702g4504ga467g9e63531ce7ab", "Staff Weapon"),
+		StaffWeaponRequirementMissing = ts:Create("h517cf8f4gbc56g4724g8d11g5207dfe26094", "No staff weapon equipped&lt;br&gt;"),
+		Banner = ts:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")
+	},
 	CombatLog = {
 		StealSuccess = ts:Create("h9f7d431dg1f6dg494dg89b8g4cb4b98994d4","<font color='#00FF00'>[1] stole </font><font color='#00FFAA'>[2]</font><font color='#00FF00'> from [3]!</font>"),
 		StealFailed = ts:Create("hade2f718gb41dg427cg81c8gff64a36ad95f","<font color='#FF0000'>[1] failed to steal anything from [2].</font>"),
