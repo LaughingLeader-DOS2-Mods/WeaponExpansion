@@ -85,6 +85,7 @@ new entry "WPN_LLWEAPONEX_DualShields_Start"
 type "Shield"
 using "WPN_LLWEAPONEX_DualShields_Common_A"
 data "ObjectCategory" ""
+data "ComboCategory" "ShieldWood,Shield"
 
 new entry "WPN_LLWEAPONEX_DualShields_Dwarves_A"
 type "Shield"
