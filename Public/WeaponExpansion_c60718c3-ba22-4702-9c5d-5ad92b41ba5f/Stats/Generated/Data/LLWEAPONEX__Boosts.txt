@@ -147,3 +147,19 @@ type "Weapon"
 using "_BOOSTS_Weapon"
 data "Value" "16"
 data "Tags" "LLWEAPONEX_BOOST_TAG_TEST"
+
+new entry "_Boost_Weapon_Damage_ArmourPiercing_Small_LLWEAPONEX_Rifle"
+using "_Boost_Weapon_Damage_ArmourPiercing_Small"
+data "Projectile" "0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"
+
+new entry "_Boost_Weapon_Damage_ArmourPiercing_LLWEAPONEX_Rifle"
+using "_Boost_Weapon_Damage_ArmourPiercing"
+data "Projectile" "0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"
+
+new entry "_Boost_Weapon_Damage_ArmourPiercing_Medium_LLWEAPONEX_Rifle"
+using "_Boost_Weapon_Damage_ArmourPiercing_Medium"
+data "Projectile" "0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"
+
+new entry "_Boost_Weapon_Damage_ArmourPiercing_Large_LLWEAPONEX_Rifle"
+using "_Boost_Weapon_Damage_ArmourPiercing_Large"
+data "Projectile" "0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"

@@ -70,7 +70,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_ArmourPiercing_Small",1
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Small_LLWEAPONEX_Rifle",1
 
 new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Normal_Rifle"
 param "BoostType" "BaseUncommon"
@@ -78,7 +78,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_ArmourPiercing",1
+new boost "_Boost_Weapon_Damage_ArmourPiercing_LLWEAPONEX_Rifle",1
 
 new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Medium_Rifle"
 param "BoostType" "BaseRare"
@@ -86,7 +86,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_ArmourPiercing_Medium",1
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Medium_LLWEAPONEX_Rifle",1
 
 new deltamod "Boost_Weapon_LLWEAPONEX_Damage_Piercing_Large_Rifle"
 param "BoostType" "BaseEpic"
@@ -94,47 +94,7 @@ param "MinLevel" "1"
 param "Frequency" "1"
 param "ModifierType" "Weapon"
 param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_ArmourPiercing_Large",1
-
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Air_Medium_Rifle"
-param "BoostType" "Normal"
-param "MinLevel" "1"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_Air_Medium",1
-
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Earth_Medium_Rifle"
-param "BoostType" "Normal"
-param "MinLevel" "1"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_Earth_Medium",1
-
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Poison_Medium_Rifle"
-param "BoostType" "Normal"
-param "MinLevel" "1"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_Poison_Medium",1
-
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Fire_Medium_Rifle"
-param "BoostType" "Normal"
-param "MinLevel" "1"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_Fire_Medium",1
-
-new deltamod "Boost_LLWEAPONEX_Weapon_Damage_Water_Medium_Rifle"
-param "BoostType" "Normal"
-param "MinLevel" "1"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-param "WeaponType" "Rifle"
-new boost "_Boost_Weapon_Damage_Water_Medium",1
+new boost "_Boost_Weapon_Damage_ArmourPiercing_Large_LLWEAPONEX_Rifle",1
 //END_REGION
 
 //REGION ATTRIBUTE_BOOSTS
