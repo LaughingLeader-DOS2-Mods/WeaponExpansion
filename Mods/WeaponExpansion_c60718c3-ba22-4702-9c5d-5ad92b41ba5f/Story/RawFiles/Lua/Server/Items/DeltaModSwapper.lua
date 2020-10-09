@@ -186,6 +186,59 @@ DeltamodSwap.LLWEAPONEX_Firearm = {
 	Boost_Weapon_Primary_Finesse_Medium_Crossbow = "Boost_LLWEAPONEX_Weapon_Primary_Wits_Medium"
 }
 
+local PistolReplacementMediumAbilityBoosts = {
+	"Boost_Armor_Belt_Ability_Hunting",
+	"Boost_Armor_Belt_Ability_Rogues",
+	"Boost_Armor_Belt_Ability_Warfare",
+}
+
+local PistolReplacementLargeAbilityBoosts = {
+	"Boost_Armor_Belt_Ability_Hunting_Large",
+	"Boost_Armor_Belt_Ability_Hunting_Medium",
+	"Boost_Armor_Belt_Ability_Rogues_Large",
+	"Boost_Armor_Belt_Ability_Rogues_Medium",
+	"Boost_Armor_Belt_Ability_Warfare_Large",
+	"Boost_Armor_Belt_Ability_Warfare_Medium",
+}
+
+local PistolReplacementCivilBoosts = {
+	"Boost_Armor_Belt_Ability_Lockpicking_Medium",
+	"Boost_Armor_Belt_Ability_Luck_Medium",
+	"Boost_Armor_Belt_Ability_Sneaking_Medium",
+	"Boost_Armor_Belt_Ability_Telekinesis_Medium"
+}
+
+local PistolReplacementBoosts = {
+	"Boost_Armor_Belt_Secondary_CriticalChance_Medium",
+	"Boost_Armor_Belt_Secondary_CriticalChance_Small",
+}
+
+local function GetRandomPistolAbilityBoost(item, deltamod)
+	return Common.GetRandomTableEntry(PistolReplacementMediumAbilityBoosts)
+end
+
+local function GetRandomPistolLargeAbilityBoost(item, deltamod)
+	return Common.GetRandomTableEntry(PistolReplacementLargeAbilityBoosts)
+end
+
+local function GetRandomPistolCivilBoost(item, deltamod)
+	return Common.GetRandomTableEntry(PistolReplacementCivilBoosts)
+end
+
+DeltamodSwap.LLWEAPONEX_Pistol = {
+	Boost_Armor_Belt_Armour_Physical = "Boost_Armor_Belt_Secondary_CriticalChance_Small",
+	Boost_Armor_Belt_Armour_Physical_Medium = "Boost_Armor_Belt_Secondary_CriticalChance_Medium",
+	Boost_Armor_Belt_Armour_Physical_Large = "Boost_Armor_Belt_Secondary_CriticalChance_Medium",
+	Boost_Armor_Belt_Ability_PainReflection = GetRandomPistolAbilityBoost,
+	Boost_Armor_Belt_Ability_PainReflection_Large = GetRandomPistolLargeAbilityBoost,
+	Boost_Armor_Belt_Ability_Perseverance = GetRandomPistolAbilityBoost,
+	Boost_Armor_Belt_Ability_Perseverance_Large = GetRandomPistolLargeAbilityBoost,
+	Boost_Armor_Belt_Primary_Constitution = GetRandomPistolCivilBoost,
+	Boost_Armor_Belt_Primary_Constitution_Large = GetRandomPistolCivilBoost,
+	Boost_Armor_Belt_Secondary_Vitality = "Boost_Armor_Belt_Secondary_CriticalChance_Small",
+	Boost_Armor_Belt_Secondary_Vitality_Large = "Boost_Armor_Belt_Secondary_CriticalChance_Small",
+}
+
 ---@param item EsvItem
 ---@return table<string,boolean>
 local function GetAllBoosts(item)
@@ -198,7 +251,6 @@ local function GetAllBoosts(item)
 		for tag,deltamods in pairs(DeltamodSwap) do
 			if item:HasTag(tag) then
 				local replacement = deltamods[v]
-				printd(v, replacement)
 				if replacement ~= nil then
 					if replacement == "" then
 						printd("Disabled deltamod",v,item)
@@ -305,10 +357,12 @@ function SwapDeltaMods(item)
 				local template = GetTemplate(item)
 				NRD_ItemConstructBegin(template)
 				--NRD_ItemCloneBegin(item)
-				local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
-				if damageTypeString == nil then damageTypeString = "Physical" end
-				local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
-				NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
+				if item.ItemType == "Weapon" then
+					local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
+					if damageTypeString == nil then damageTypeString = "Physical" end
+					local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
+				end
 
 				NRD_ItemCloneSetString("GenerationStatsId", stat)
 				NRD_ItemCloneSetString("StatsEntryName", stat)
@@ -334,6 +388,9 @@ function SwapDeltaMods(item)
 				ObjectSetFlag(clone, "LLWEAPONEX_ProcessedDeltamods", 0)
 				SetVarFixedString(clone, "LeaderLib_Rarity", rarity)
 				SetVarInteger(clone, "LeaderLib_Level", level)
+				local cloneItem = Ext.GetItem(clone)
+				cloneItem.TreasureGenerated = itemObject.TreasureGenerated
+				cloneItem.UnsoldGenerated = itemObject.UnsoldGenerated
 
 				local slot = nil
 				if inventory == nil then
@@ -396,14 +453,17 @@ local equipmentTypes = {
 }
 
 ---@param item EsvItem
-Ext.RegisterListener("TreasureItemGenerated", function(item)
+function OnTreasureItemGenerate(item)
 	if equipmentTypes[item.ItemType] == true then
 		Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
 		TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
 		TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
 		--SwapDeltaMods(item.MyGuid)
 	end
-end)
+end
+
+---@param item EsvItem
+Ext.RegisterListener("TreasureItemGenerated", OnTreasureItemGenerate)
 
 if Ext.IsDeveloperMode() then
 	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
