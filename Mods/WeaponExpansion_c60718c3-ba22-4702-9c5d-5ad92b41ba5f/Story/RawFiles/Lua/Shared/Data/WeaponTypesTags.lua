@@ -1,6 +1,8 @@
 Tags.TemplateToTag = {
-	["WPN_Ataraxians_Scythe_2H_A_3b45c978-5a42-40b5-a7aa-183852616910"] = "LLWEAPONEX_Scythe",
-	["WPN_Tool_Scythe_2H_A_44525b09-a2b1-4b45-8d52-e893d04390dd"] = "LLWEAPONEX_Scythe",
+	--WPN_Ataraxians_Scythe_2H_A
+	["3b45c978-5a42-40b5-a7aa-183852616910"] = "LLWEAPONEX_Scythe",
+	--WPN_Tool_Scythe_2H_A_
+	["44525b09-a2b1-4b45-8d52-e893d04390dd"] = "LLWEAPONEX_Scythe",
 }
 
 Tags.WeaponTypeToTag = {

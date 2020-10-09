@@ -15,7 +15,7 @@ end
 ---@param stat string The item's stat. Optional.
 function TagWeapon(uuid, statType, stat)
 	local tagged = false
-	local template = GetTemplate(uuid)
+	local template = StringHelpers.GetUUID(GetTemplate(uuid))
 	local templateTag = Tags.TemplateToTag[template]
 	if templateTag ~= nil then
 		if type(templateTag) == "table" then
