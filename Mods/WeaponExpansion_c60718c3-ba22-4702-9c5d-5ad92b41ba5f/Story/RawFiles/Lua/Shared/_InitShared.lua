@@ -68,6 +68,12 @@ NPC = {
 	Slane = "c099caa6-1938-4b4f-9365-d0881c611e71"
 }
 
+MODID = {
+	DivinityUnleashed = "e844229e-b744-4294-9102-a7362a926f71",
+	ArmorMitigation = "edf1898c-d375-47e7-919a-11d5d44d1cca",
+	EE2Core = "63bb9b65-2964-4c10-be5b-55a63ec02fa0",
+}
+
 Ext.Require("Shared/MasteryHelpers.lua")
 Ext.Require("Shared/Damage/GameMathAlternatives.lua")
 Ext.Require("Shared/StatOverrides.lua")

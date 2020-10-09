@@ -42,7 +42,9 @@ local function RequestOpenMasteryMenu(call, payload)
 				end
 			end
 			if id ~= nil then
-				local uuid = StringHelpers.GetUUID(GetCurrentCharacter(id))
+				if StringHelpers.IsNullOrEmpty(uuid) then
+					uuid = StringHelpers.GetUUID(GetCurrentCharacter(id))
+				end
 				if not StringHelpers.IsNullOrEmpty(uuid) then
 					if CharacterIsSummon(uuid) == 1 then
 						if CharacterIsControlled(uuid) == 1 then
@@ -60,7 +62,7 @@ local function RequestOpenMasteryMenu(call, payload)
 						OpenMasteryMenu_Start(uuid, id)
 					end
 				else
-					Ext.PrintError("[WeaponExpansion] Failed to find character for User ID:", id)
+					Ext.PrintError("[WeaponExpansion] Failed to find character for User ID:", id, payload)
 				end
 			else
 				Ext.PrintError("[WeaponExpansion] Failed to find character/user id from client data:", payload)

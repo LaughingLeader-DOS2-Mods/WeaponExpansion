@@ -260,6 +260,24 @@ local function StatOverrides_Init()
 					--print("[WeaponExpansion] Added rifle bullet explosion effect support to skill ", skill)
 			end
 		end
+
+		if Ext.IsModLoaded(MODID.EE2Core) then
+			--EE2 AP cost adjustment
+			if string.find(skill, "LLWEAPONEX") then
+				local ap = Ext.StatGetAttribute(skill, "ActionPoints")
+				local originalAP = ap
+				if ap == 1 then
+					ap = 2
+				elseif ap == 2 then
+					ap = 4
+				elseif ap == 3 then
+					ap = 6
+				end
+				if ap ~= originalAP then
+					Ext.StatSetAttribute(skill, "ActionPoints", ap)
+				end
+			end
+		end
 	end
 
 	-- Add a combo category to unique weapons.

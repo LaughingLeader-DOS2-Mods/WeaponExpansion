@@ -36,7 +36,7 @@ Dagger	2	Sawtooth Knife	If the target is already Bleeding, Rupture the wound for
 Dagger	3	Fan of Knives	Throwing Knife's bonuses apply to each knife thrown (bonus damage, Backlash marking).	√	❌
 Dagger	3	Corrupted Blade	Your blade(s) deal bonus shadow damage for 2 turns.	❌	❌
 Dagger	4	Daggers Drawn	If the target is killed, the source cost and partial AP is refunded.	❌	❌
-Dagger	4	Cloak and Dagger	When leaping, automatically throw knives are nearby enemies.	❌	❌
+Dagger	4	Cloak and Dagger	When leaping, automatically throw knives at nearby enemies.	❌	❌
 Dual Shields	1	Battering Ram / Bull Rush / etc	You are immune to surface damage while using rush skills. 	√	❌
 Dual Shields	2	Placeholder	Placeholder	❌	❌
 Dual Shields	3	Placeholder	Placeholder	❌	❌
