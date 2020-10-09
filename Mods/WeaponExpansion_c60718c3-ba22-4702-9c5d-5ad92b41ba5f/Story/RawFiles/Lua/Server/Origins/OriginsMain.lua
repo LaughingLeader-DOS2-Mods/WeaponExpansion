@@ -64,6 +64,7 @@ function Origins_InitCharacters(region, isEditorMode)
 
 	if Ext.IsDeveloperMode() or isEditorMode == 1 then		
 		local host = CharacterGetHostCharacter()
+		local user = CharacterGetReservedUserID(host)
 		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
 			local totalAdded = 0
 			if CharacterIsInPartyWith(host, Origin.Harken) == 0 then
@@ -71,11 +72,14 @@ function Origins_InitCharacters(region, isEditorMode)
 				TeleportTo(Origin.Harken, host, "", 1, 0, 1)
 				totalAdded = totalAdded + 1
 			end
+			CharacterAssignToUser(user, Origin.Harken)
 			if CharacterIsInPartyWith(host, Origin.Korvash) == 0 then
 				Osi.PROC_GLO_PartyMembers_Add(Origin.Korvash, host)
+				CharacterAssignToUser(user, Origin.Korvash)
 				TeleportTo(Origin.Korvash, host, "", 1, 0, 1)
 				totalAdded = totalAdded + 1
 			end
+			CharacterAssignToUser(user, Origin.Korvash)
 			local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
 			if frozenCount ~= nil and #frozenCount > 0 then
 				local count = frozenCount[1][2]
