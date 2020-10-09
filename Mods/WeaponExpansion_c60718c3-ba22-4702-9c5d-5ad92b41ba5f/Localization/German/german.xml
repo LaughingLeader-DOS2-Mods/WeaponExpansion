@@ -193,7 +193,7 @@
 	<content contentuid="h161d5479g06d6g408egade2g37a203e3361f">corrosive damage</content>
 	<content contentuid="h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a">Shrapnel Charge</content>
 	<content contentuid="h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59">Character&apos;s quiver is recharging.</content>
-	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target, &lt;font color=&apos;#00FFAA&apos;&gt;dealing [1] to [2]&lt;/font&gt;, depending on distance to the target.&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
+	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target, dealing &lt;font color=&apos;#00FFAA&apos;&gt;[1]&lt;/font&gt; to &lt;font color=&apos;#00FFAA&apos;&gt;[2]&lt;/font&gt;, depending on distance to the target.&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
 	<content contentuid="h1683f225g0155g4015gab2bgf7563a8f4510">Character has lowered resistances to &lt;font color=&apos;#9A00FF&apos;&gt;every element&lt;/font&gt;.</content>
 	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8">shadow</content>
 	<content contentuid="h16a53792g6604g4a6ag9f3agcfa5e63ac21d">Night&apos;s Edge</content>
@@ -643,7 +643,7 @@
 	<content contentuid="h44e46308g8f4dg4357gaac4g1d50a425d36a">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h4504bbc0gb7a6g42c3ga57eg83f3e78c0db2">&lt;font color=&apos;#FF1155&apos; size=&apos;22&apos;&gt;Insert Failed - No Hand Crossbow Equipped&lt;/font&gt;</content>
 	<content contentuid="h451677d2ga792g4f99g8f77gccafa357861c">A warrior who strives to defend the innocent through a unique style that utilizes dual shields</content>
-	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_LLWEAPONEX_UnarmedBasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost1]% extra base damage in total, and scale with your highest base attribute (Strength, Finesse, or Constitution).&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Warfare skills can now be used while unarmed.&lt;icon id=&apos;Target_PetrifyingTouch&apos; icon=&apos;Skill_Earth_Metamorph&apos;/&gt;Petrifying Touch now deals bonus damage and knocks the target back.</content>
+	<content contentuid="h4528456eg74feg4e6agabd6gbbced0a900f6">&lt;icon id=&apos;Target_LLWEAPONEX_UnarmedBasicAttack&apos; icon=&apos;Action_AttackGround&apos;/&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost1]% extra base damage in total, and scale with your highest base attribute (Strength, Finesse, or Constitution).&lt;icon id=&apos;Target_CripplingBlow;Shout_Whirlwind;Rush_BatteringRam&apos; icon=&apos;Skill_Warrior_CripplingBlow;Skill_Warior_WhirlWind;Skill_Warrior_BatteringRam&apos;/&gt;Skills that require a melee weapon can now be used while unarmed.&lt;icon id=&apos;Target_PetrifyingTouch&apos; icon=&apos;Skill_Earth_Metamorph&apos;/&gt;Petrifying Touch now deals bonus damage and knocks the target back.</content>
 	<content contentuid="h453d9d53gcdfdg4674g819fgbc0de4196a21">Heed the rallying cry of the Standard-Bearer, teleporting to the raised banner.</content>
 	<content contentuid="h45457359gaa62g40f9gaa6bgd1996571cc40">Shield Prison</content>
 	<content contentuid="h45830ff5g54bdg4098g9395gede7110cf8f1">Polearm</content>
@@ -995,6 +995,7 @@
 	<content contentuid="h6ab0e2beg916eg4559g9981ga731585aa356">&lt;icon id=&apos;Projectile_SkyShot&apos; icon=&apos;Skill_Ranger_SkyShot&apos;/&gt;[Key:Projectile_SkyShot_DisplayName] deals a guaranteed critical hit to targets that are Knocked Down.</content>
 	<content contentuid="h6aba0319g7f05g456ag9228g6e2b281ee95b">&lt;font color=&apos;#fcd203&apos;&gt;Stunning Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h6ac77698g7cf7g4d8aga548gd1bf823df736">Strongman&apos;s Greatbow</content>
+	<content contentuid="h6ad69540ga85dg41e4ga6abg080720b0761b">&lt;font color=&apos;#00CCAA&apos;&gt;Recharges slowly over time.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00CCAA&apos;&gt;Killing an enemy with a remote charge grants a charge and additional bonuses.&lt;/font&gt;</content>
 	<content contentuid="h6add6a16ge3fdg4cdcg9420gd6320b918928">Journeyman of Wands</content>
 	<content contentuid="h6b16bc91ge0bag411ag9684g71a7a00685b1">Empowered by Blood</content>
 	<content contentuid="h6b4e0684g604bg40aeg9f91ga04ce93898e7">Old Metal Pipe</content>
@@ -2050,6 +2051,7 @@
 	<content contentuid="he071dae7gc53fg45c1ga708g45c4e456b766">Character has lowered resistance to &lt;font color=&apos;#7D71D9&apos;&gt;air damage&lt;/font&gt;.</content>
 	<content contentuid="he0792923g3b6ag4605g8b14g5bfba66847a8">Rod Of The Lizard</content>
 	<content contentuid="he0a3a1bfge498g4c0cg8814g67773243d59c">&lt;font color=&apos;#40b606&apos;&gt;Corrosive Great Arrow&lt;/font&gt;</content>
+	<content contentuid="he0cceb33g75ddg44a5g94b4geda5fd12c886">&lt;font color=&apos;#EBC808&apos;&gt;[1] unlocked [2] Mastery Rank [3].&lt;/font&gt;</content>
 	<content contentuid="he0dca1f1g445fg40ecg9a7ag3b09c7cf1429">Shrapnel Charge</content>
 	<content contentuid="he0f60351g01b2g4824ga28aga1064daae544">&lt;icon id=&apos;Projectile_Ricochet&apos; icon=&apos;Skill_Ranger_Ricochet&apos;/&gt;Each ricochet bounce deals splash damage in a 2m radius.</content>
 	<content contentuid="he1154cb0g4127g43c1gb287gee2314567d43">Unholy Razor</content>
@@ -2143,6 +2145,7 @@
 	<content contentuid="hed0e8b5cg1540g4644g83d0g8481460442bd">Displace</content>
 	<content contentuid="hed2480c5g8fa9g45c5g8f14gcf828d5b6c19">Journeyman Spy</content>
 	<content contentuid="hed432810g1e5bg4cccgb869g0ed453f6f6ed">Character is charging at their enemies. Get&apos;em!</content>
+	<content contentuid="hed496668g0478g4a5cgbcb7g9cf9e7bedfbf">Recharges when enemies die in battle.&lt;br&gt;&lt;font color=&apos;#00CCAA&apos;&gt;Killing an enemy with a remote charge grants a charge and additional bonuses.&lt;/font&gt;</content>
 	<content contentuid="hed715bafgf43cg4dd1gb4dfg4834f859f411">Twin Faces of Evil</content>
 	<content contentuid="hed7adf4fg66d2g420eg86f9g1a4db226e260">General&apos;s Mercy</content>
 	<content contentuid="hedaa0142g30dbg4ce1g9befgc9566dd8829e">Expert Polearmsman</content>
