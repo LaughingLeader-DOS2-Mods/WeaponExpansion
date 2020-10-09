@@ -90,6 +90,8 @@ local bulletTemplates = {
 	Projectile_EnemySnipe = "fbf17754-e604-4772-813a-3593b4e7bec8",
 }
 
+Skills.BulletTemplates = bulletTemplates
+
 local function CreateFirearmDerivativeSkills()
 	for skill,bulletTemplate in pairs(bulletTemplates) do
 		local defaultTemplate = Ext.StatGetAttribute(skill, "Template")
@@ -100,7 +102,10 @@ local function CreateFirearmDerivativeSkills()
 			Rifle = bulletTemplate
 		})
 		Ext.StatSetAttribute(skill, "Template", templateString)
-		appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
+		--local castEffect = Ext.StatGetAttribute(skill, "CastEffect")
+		--castEffect = castEffect .. "{WeaponType}[Rifle]"
+		--Ext.StatSetAttribute(skill, "CastEffect", castEffect)
+		--appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
 	end
 end
 

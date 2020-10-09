@@ -186,6 +186,9 @@ local function OnSkillCast(character, skill, skillType, skillElement)
 			-- end
 		end
 	end
+	if Skills.BulletTemplates[skill] and IsTagged(character, "LLWEAPONEX_Firearm_Equipped") == 1 then
+		ApplyStatus(character, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, 0, character)
+	end
 end
 Ext.RegisterOsirisListener("SkillCast", 4, "after", OnSkillCast)
 
