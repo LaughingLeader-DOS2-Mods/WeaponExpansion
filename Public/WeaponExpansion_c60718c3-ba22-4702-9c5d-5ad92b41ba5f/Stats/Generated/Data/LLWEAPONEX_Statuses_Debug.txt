@@ -9,7 +9,7 @@ data "StatsId" "Stats_LLWEAPONEX_Debug_FireReflect"
 
 new entry "Stats_LLWEAPONEX_Debug_FireReflect"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "Reflection" "all:Fire:Water:melee"
 
 new entry "LLWEAPONEX_DEBUG_TESTDAMAGE"
@@ -38,7 +38,7 @@ data "ExtraProperties" ""
 
 new entry "Stats_LLWEAPONEX_Debug_TestDamage"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "Perseverance" "10"
 data "Polymorph" "10"
 
@@ -190,7 +190,7 @@ data "StatsId" "Stats_LLWEAPONEX_Debug_SurfaceOnMove_Apply"
 
 new entry "Stats_LLWEAPONEX_Debug_SurfaceOnMove_Apply"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "ExtraProperties" "LLWEAPONEX_DEBUG_SURFACE_ON_MOVE,100,10,,50"
 
 new entry "LLWEAPONEX_DEBUG_SURFACE_ON_MOVE"
@@ -264,7 +264,7 @@ data "StackId" "Stack_LLWEAPONEX_Debug_BonusWeaponTest"
 
 new entry "Stats_LLWEAPONEX_Debug_BonusWeaponTest"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "BonusWeapon" "Status_LLWEAPONEX_Debug_BonusWeaponTest"
 
 new entry "Status_LLWEAPONEX_Debug_BonusWeaponTest"

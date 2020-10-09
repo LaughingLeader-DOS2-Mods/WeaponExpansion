@@ -19,7 +19,7 @@ using "_LEADERLIB_HIDDEN_CONSUME_BASE"
 
 new entry "Stats_LLWEAPONEX_Activate_Runeblade_Base"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 
 new entry "Stats_LLWEAPONEX_Runeblade_Resistance_Base"
 type "Potion"

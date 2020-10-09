@@ -139,7 +139,7 @@ data "StackId" "Stack_LLWEAPONEX_Firearm_AimedShot_Accuracy"
 
 new entry "Stats_LLWEAPONEX_Firearm_AimedShot_Accuracy"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "ChanceToHitBoost" "200"
 data "AccuracyBoost" "200"
 
@@ -152,5 +152,5 @@ data "StackId" "Stack_LLWEAPONEX_Firearm_AimedShot_Critical"
 
 new entry "Stats_LLWEAPONEX_Firearm_AimedShot_Critical"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "CriticalChance" "200"

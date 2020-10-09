@@ -19,6 +19,6 @@ data "StackId" "Stack_LLWEAPONEX_Unarmed_LizardDebuff"
 
 new entry "Stats_LLWEAPONEX_Unarmed_LizardDebuff"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "DamageBoost" "-50"
 data "Duration" "1"

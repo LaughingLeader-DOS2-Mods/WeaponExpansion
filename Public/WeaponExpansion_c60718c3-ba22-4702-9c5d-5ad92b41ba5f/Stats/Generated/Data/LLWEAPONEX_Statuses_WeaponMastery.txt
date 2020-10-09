@@ -23,7 +23,7 @@ data "StackId" "Stack_LLWEAPONEX_MasteryBonus1"
 
 new entry "Stats_LLWEAPONEX_MasteryBonus1"
 type "Potion"
-using "_Stats_LeaderLib_Base"
+using "_Stats_LLWEAPONEX_Base"
 data "DamageBoost" "1"
 
 new entry "LLWEAPONEX_MASTERYBONUS2"
