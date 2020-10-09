@@ -23,13 +23,11 @@ if Ext.IsServer() then
 			if type(k) == "number" then
 				varTable[k] = nil
 			else
-				print("ArmCannon_SyncData", k, type(k))
 				local x = Ext.GetItem(k)
 				if x ~= nil then
 					data[x.NetID] = v
 					local weaponUUID = GetVarObject(k, "LLWEAPONEX_ArmCannon_Weapon")
 					if not StringHelpers.IsNullOrEmpty(weaponUUID) then
-						print("LLWEAPONEX_ArmCannon_Weapon", weaponUUID)
 						local weapon = Ext.GetItem(weaponUUID)
 						if weapon ~= nil then
 							data[weapon.NetID] = v
@@ -54,7 +52,6 @@ if Ext.IsServer() then
 	end
 
 	function ArmCannon_OnWeaponSkillHit(source, target, skill)
-		print("ArmCannon_OnWeaponSkillHit", source, target, skill)
 		Osi.LLWEAPONEX_ArmCannon_OnHit(source, target)
 		Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(source, 750)
 	end
@@ -92,7 +89,6 @@ if Ext.IsClient() then
 		if data ~= nil then
 			local varTable = GameHelpers.Data.GetPersistentVars("WeaponExpansion", true, "SkillData", "RunicCannonCharges")
 			PersistentVars.SkillData.RunicCannonCharges = data
-			print(Common.Dump(data))
 		end
 	end)
 end

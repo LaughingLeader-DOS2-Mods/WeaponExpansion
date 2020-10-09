@@ -195,7 +195,6 @@ Ext.RegisterConsoleCommand("gender", function(cmd)
 	if ui ~= nil then
 		local main = ui:GetRoot()
 		main.setDetails(0, true)
-		print("Unhid gender button?")
 	end
 end)
 

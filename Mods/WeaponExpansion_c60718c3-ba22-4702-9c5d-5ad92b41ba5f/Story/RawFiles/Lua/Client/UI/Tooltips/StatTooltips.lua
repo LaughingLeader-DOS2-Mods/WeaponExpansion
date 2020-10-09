@@ -131,7 +131,6 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 			end
 		end
 	end
-	print(Ext.JsonStringify(tooltip.Data))
 end
 
 return {

@@ -49,7 +49,6 @@ end)
 local function ApplyRuneExtraProperties(target, source, item)
 	local runes = ExtenderHelpers.GetRuneBoosts(item.Stats)
 	if #runes > 0 then
-		print(Ext.JsonStringify(runes))
 		for i,runeEntry in pairs(runes) do
 			for attribute,boost in pairs(runeEntry.Boosts) do
 				if boost ~= nil and boost ~= "" then
@@ -69,7 +68,6 @@ local function ApplyRuneExtraProperties(target, source, item)
 									}
 									local chance = Game.Math.StatusGetEnterChance(statusObject, true)
 									local roll = Ext.Random(0,100)
-									print(v.Action, chance, roll)
 									if roll <= chance then
 										ApplyStatus(target, v.Action, v.Duration, 0, source)
 									end
@@ -238,7 +236,7 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(character)
 			local stat = Ext.GetStat("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus")
 			if stat ~= nil then
 				local newLifeSteal = (math.ceil((5 - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
-				print("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus", level, newLifeSteal)
+				printd("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus", level, newLifeSteal)
 			end
 		end
 	end
@@ -249,7 +247,7 @@ local levelTest = 1
 Ext.RegisterConsoleCommand("scaletest", function(cmd, levelstr)
 	local level = tonumber(levelstr) or levelTest + 1
 	local newLifeSteal = (math.ceil(((5*(level*.7)) - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
-	print("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus|LifeSteal", level, newLifeSteal)
+	printd("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus|LifeSteal", level, newLifeSteal)
 	levelTest = level
 end)
 

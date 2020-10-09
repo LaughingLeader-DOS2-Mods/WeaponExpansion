@@ -37,8 +37,6 @@ Ext.RegisterNetListener("LLWEAPONEX_CC_HideStoryButton", function(call, uuid)
 		main.header_mc.voiceOriginBtn_mc.isEnabled = false
 		main.enableOrigin = false
 		lastCCHandle = main.characterHandle
-		print("Hid story button for", uuid)
-
 		if not registerCCListener then
 			Ext.RegisterUIInvokeListener(ui, "enableStoryPlayback", function(ui, method, enabled)
 				if enabled and main.characterHandle == lastCCHandle then

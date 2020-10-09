@@ -198,20 +198,20 @@ local function GetAllBoosts(item)
 		for tag,deltamods in pairs(DeltamodSwap) do
 			if item:HasTag(tag) then
 				local replacement = deltamods[v]
-				print(v, replacement)
+				printd(v, replacement)
 				if replacement ~= nil then
 					if replacement == "" then
-						print("Disabled deltamod",v,item)
+						printd("Disabled deltamod",v,item)
 						swapped = true
 					elseif type(replacement) == "function" then
 						local b,replacementVal = pcall(replacement, item, v)
 						if b then
-							print("Swapped deltamod",v,"for",replacementVal,item)
+							printd("Swapped deltamod",v,"for",replacementVal,item)
 							finalBoosts[replacementVal] = boostType
 							swapped = true
 						end
 					else
-						print("Swapped deltamod",v,"for",replacement,item)
+						printd("Swapped deltamod",v,"for",replacement,item)
 						finalBoosts[replacement] = boostType
 						swapped = true
 					end
@@ -231,20 +231,20 @@ local function GetAllBoosts(item)
 					for tag,deltamods in pairs(DeltamodSwap) do
 						if item:HasTag(tag) then
 							local replacement = deltamods[v]
-							print(v, replacement)
+							printd(v, replacement)
 							if replacement ~= nil then
 								if replacement == "" then
-									print("Disabled deltamod",v,item)
+									printd("Disabled deltamod",v,item)
 									swapped = true
 								elseif type(replacement) == "function" then
 									local b,replacementVal = pcall(replacement, item, v)
 									if b then
-										print("Swapped deltamod",v,"for",replacementVal,item)
+										printd("Swapped deltamod",v,"for",replacementVal,item)
 										finalBoosts[replacementVal] = boostType
 										swapped = true
 									end
 								else
-									print("Swapped deltamod",v,"for",replacement,item)
+									printd("Swapped deltamod",v,"for",replacement,item)
 									finalBoosts[replacement] = boostType
 									swapped = true
 								end
@@ -323,7 +323,7 @@ function SwapDeltaMods(item)
 
 				for boost,boostType in pairs(boosts) do
 					NRD_ItemCloneAddBoost(boostType, boost)
-					print("Adding boost", boostType, boost)
+					printd("Adding boost", boostType, boost)
 				end
 
 				local clone = NRD_ItemClone()

@@ -161,7 +161,7 @@ end
 
 function UniqueData:Equip(target)
 	if ObjectExists(self.UUID) == 0 then
-		print("[UniqueData:Equip] Item", self.UUID, "does not exist!")
+		Ext.PrintError("[UniqueData:Equip] Item", self.UUID, "does not exist!")
 		return
 	end
 	local item = Ext.GetItem(self.UUID)

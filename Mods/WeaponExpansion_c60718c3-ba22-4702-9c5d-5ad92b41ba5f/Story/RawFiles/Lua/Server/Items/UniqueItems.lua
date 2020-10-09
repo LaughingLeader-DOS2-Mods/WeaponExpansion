@@ -67,7 +67,7 @@ Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
 		local host = CharacterGetHostCharacter()
 		unique:Transfer(host)
 	else
-		print("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
+		Ext.PrintError("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
 	end
 end)
 

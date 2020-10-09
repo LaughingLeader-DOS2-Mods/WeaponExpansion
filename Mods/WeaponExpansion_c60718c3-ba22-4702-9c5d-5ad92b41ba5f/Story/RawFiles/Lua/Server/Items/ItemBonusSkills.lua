@@ -127,7 +127,7 @@ function RollForBonusSkill(item,stat,itemType,rarity)
 			else
 				skills = nextSkill
 			end
-			print("[WeaponExpansion:RollForBonusSkill] Adding bonus skill "..nextSkill.." to item",item,skills)
+			printd("[WeaponExpansion:RollForBonusSkill] Adding bonus skill "..nextSkill.." to item",item,skills)
 			NRD_ItemSetPermanentBoostString(item, "Skills", skills)
 			return true
 		end

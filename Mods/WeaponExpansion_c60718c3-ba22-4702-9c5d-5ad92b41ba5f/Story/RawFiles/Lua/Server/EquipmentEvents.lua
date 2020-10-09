@@ -69,12 +69,12 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 			if CheckScoundrelTags(uuid, mainhand) or CheckScoundrelTags(uuid, offhand) then
 				if character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
 					ClearTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-					print("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
+					printd("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
 				end
 			else
 				if not character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
 					SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-					print("SetTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
+					printd("SetTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
 				end
 			end
 		else
