@@ -103,61 +103,63 @@ end
 --- @param damage integer
 --- @param handle integer
 LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
-	local hitSucceeded = GameHelpers.HitSucceeded(target, handle, false)
-	local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
-	if skill == "Zone_LLWEAPONEX_ArmCannon_Disperse" or skill == "Projectile_LLWEAPONEX_ArmCannon_Shoot" or skill == "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion" then
-		NRD_StatusSetInt(target, handle, "Hit", 1)
-		NRD_StatusSetInt(target, handle, "Dodged", 0)
-		NRD_StatusSetInt(target, handle, "Missed", 0)
-		hitSucceeded = true
-	end
-	if hitSucceeded and not StringHelpers.IsNullOrEmpty(source) and not StringHelpers.IsNullOrEmpty(target) then
-		if skill == "" and GameHelpers.HitWithWeapon(target, handle, false, false) then
-			
-			local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
-			local mainhand = CharacterGetEquippedItem(source, "Weapon")
-			local offhand = CharacterGetEquippedItem(source, "Shield")
-			-- Unarmed
-			if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
-				local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]
-				if unarmedCallback ~= nil then
-					local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle, bonuses)
-					if not status then
-						Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
-					end
-				end
-				if damage > 0 and IsPlayer(source) then
-					MasterySystem.GrantBasicAttackExperience(source, target, "LLWEAPONEX_Unarmed")
-				end
-			else
-				if damage > 0 and IsPlayer(source) then
-					MasterySystem.GrantBasicAttackExperience(source, target)
-				end
-				for tag,callback in pairs(HitHandler.OnHitCallbacks) do
-					if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
-						local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses)
+	if not StringHelpers.IsNullOrEmpty(source) then
+		local hitSucceeded = GameHelpers.HitSucceeded(target, handle, false)
+		local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
+		if skill == "Zone_LLWEAPONEX_ArmCannon_Disperse" or skill == "Projectile_LLWEAPONEX_ArmCannon_Shoot" or skill == "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion" then
+			NRD_StatusSetInt(target, handle, "Hit", 1)
+			NRD_StatusSetInt(target, handle, "Dodged", 0)
+			NRD_StatusSetInt(target, handle, "Missed", 0)
+			hitSucceeded = true
+		end
+		if hitSucceeded and not StringHelpers.IsNullOrEmpty(target) then
+			if skill == "" and GameHelpers.HitWithWeapon(target, handle, false, false) then
+				
+				local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
+				local mainhand = CharacterGetEquippedItem(source, "Weapon")
+				local offhand = CharacterGetEquippedItem(source, "Shield")
+				-- Unarmed
+				if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
+					local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]
+					if unarmedCallback ~= nil then
+						local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle, bonuses)
 						if not status then
 							Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
 						end
 					end
+					if damage > 0 and IsPlayer(source) then
+						MasterySystem.GrantBasicAttackExperience(source, target, "LLWEAPONEX_Unarmed")
+					end
+				else
+					if damage > 0 and IsPlayer(source) then
+						MasterySystem.GrantBasicAttackExperience(source, target)
+					end
+					for tag,callback in pairs(HitHandler.OnHitCallbacks) do
+						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
+							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses)
+							if not status then
+								Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
+							end
+						end
+					end
 				end
-			end
-			for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
-				local b,err = xpcall(callback, debug.traceback, true, StringHelpers.GetUUID(source), StringHelpers.GetUUID(target), handle, damage)
-				if not b then
-					Ext.PrintError(err)
+				for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
+					local b,err = xpcall(callback, debug.traceback, true, StringHelpers.GetUUID(source), StringHelpers.GetUUID(target), handle, damage)
+					if not b then
+						Ext.PrintError(err)
+					end
 				end
-			end
-		elseif skill ~= "" then
-			if IsTagged(source, "LLWEAPONEX_RunicCannonEquipped") == 1 
-			and not string.find(skill, "Cannon")
-			and IsMeleeWeaponSkill(skill)
-			then
-				ArmCannon_OnWeaponSkillHit(source, target, skill)
-			end
-			if IsWeaponSkill(skill) then
-				--printd(string.format("[WeaponExpansion:HitHandler:OnHit] target(%s) was hit with a weapon skill by source(%s).", target, source))
-				MasterySystem.GrantWeaponSkillExperience(source, target)
+			elseif skill ~= "" then
+				if IsTagged(source, "LLWEAPONEX_RunicCannonEquipped") == 1 
+				and not string.find(skill, "Cannon")
+				and IsMeleeWeaponSkill(skill)
+				then
+					ArmCannon_OnWeaponSkillHit(source, target, skill)
+				end
+				if IsWeaponSkill(skill) then
+					--printd(string.format("[WeaponExpansion:HitHandler:OnHit] target(%s) was hit with a weapon skill by source(%s).", target, source))
+					MasterySystem.GrantWeaponSkillExperience(source, target)
+				end
 			end
 		end
 	end
