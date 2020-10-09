@@ -30,3 +30,5 @@ LLWEAPONEX_Mod_DisplayName	Weapon Expansion	h2cb50244g8d38g4a87g8924gc01a4a02f19
 LLWEAPONEX_UI_LizardClawWeaponMainhand	From Right Claws: [1]-[2]	h9c185c53gfcdag4349gab64g314e51005c21
 LLWEAPONEX_UI_LizardClawWeaponOffhand	From Left Claws: [1]-[2]	he27df360gc0cag4612gaec1g4d8fe4c76b1e
 LLWEAPONEX_UI_BaseDamage	Base Damage	haf8ef486g9b5eg46b0g95efg2c5795550240
+LLWEAPONEX_UI_DemoBackpackChargeMode_CombatOnly	Recharges when enemies die in battle.<br><font color='#00CCAA'>Killing an enemy with a remote charge grants a charge and additional bonuses.</font>	hed496668g0478g4a5cgbcb7g9cf9e7bedfbf
+LLWEAPONEX_UI_DemoBackpackChargeMode_Recharging	<font color='#00CCAA'>Recharges slowly over time.</font><br><font color='#00CCAA'>Killing an enemy with a remote charge grants a charge and additional bonuses.</font>	h6ad69540ga85dg41e4ga6abg080720b0761b
