@@ -172,33 +172,38 @@ local anvilSwapPresets = {
 	Barbarian = true,
 }
 
-function CC_CheckKorvashColor(player)
-	local character = Ext.GetCharacter(player)
-	local color = character.PlayerCustomData.SkinColor
-	if color == 4294902015 then-- Pink?
-		--NRD_PlayerSetCustomDataInt(player, "SkinColor", 4281936940)
-		character.PlayerCustomData.SkinColor = 4281936940
-		Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_FixLizardSkin", player)
+function CC_CheckKorvashColor(uuid)
+	local id = CharacterGetReservedUserID(uuid)
+	local character = Ext.GetCharacter(uuid)
+	if character ~= nil and character.PlayerCustomData ~= nil then
+		local color = character.PlayerCustomData.SkinColor
+		if color == 4294902015 then-- Pink?
+			--NRD_PlayerSetCustomDataInt(uuid, "SkinColor", 4281936940)
+			character.PlayerCustomData.SkinColor = 4281936940
+			Ext.PostMessageToUser(id, "LLWEAPONEX_FixLizardSkin", uuid)
+		end
 	end
 end
 
 function CC_HideStoryButton(uuid)
 	local character = Ext.GetCharacter(uuid)
 	if character ~= nil then-- Pink?
-		Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_CC_HideStoryButton", uuid)
+		local id = CharacterGetReservedUserID(uuid)
+		Ext.PostMessageToUser(id, "LLWEAPONEX_CC_HideStoryButton", uuid)
 	end
 end
 
 function CC_EnableStoryButton(uuid)
 	local character = Ext.GetCharacter(uuid)
 	if character ~= nil then-- Pink?
-		Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_CC_EnableStoryButton", uuid)
+		local id = CharacterGetReservedUserID(uuid)
+		Ext.PostMessageToUser(id, "LLWEAPONEX_CC_EnableStoryButton", uuid)
 	end
 end
 
-function CC_SwapToHarkenAnvilPreview(player, preset)
+function CC_SwapToHarkenAnvilPreview(uuid, preset)
 	if anvilSwapPresets[preset] == true then
-		local weapon = CharacterGetEquippedWeapon(player)
+		local weapon = CharacterGetEquippedWeapon(uuid)
 		ItemRemove(weapon)
 		NRD_ItemConstructBegin("85e2e75e-4333-425e-adc4-94474c3fc201")
 		NRD_ItemCloneSetString("GenerationStatsId", "WPN_UNIQUE_LLWEAPONEX_Anvil_Mace_2H_A_Preview")
@@ -208,7 +213,7 @@ function CC_SwapToHarkenAnvilPreview(player, preset)
 		NRD_ItemCloneSetInt("StatsLevel", 1)
 		NRD_ItemCloneSetInt("IsIdentified", 1)
 		local item = NRD_ItemClone()
-		NRD_CharacterEquipItem(player, item, "Weapon", 0, 0, 0, 1)
+		NRD_CharacterEquipItem(uuid, item, "Weapon", 0, 0, 0, 1)
 	end
 end
 
