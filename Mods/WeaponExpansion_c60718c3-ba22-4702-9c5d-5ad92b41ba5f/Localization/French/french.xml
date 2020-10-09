@@ -1733,7 +1733,7 @@
 	<content contentuid="hbb8018a4g2968g49f6g9d4cga8d369b0d9ab">Eternal Spark</content>
 	<content contentuid="hbba36a94g60e4g450bga576gad7c1eb97320">Weapon Expansion - Loot</content>
 	<content contentuid="hbbb5c902g46afg43f2gbe91gf8192d4fa733">Inferno Rune</content>
-	<content contentuid="hbbd0dff3g4352g45c1ga9b6gebc3d0b2b09b">Bolster your defenses, gaining a [1]% boost to your armor values until your next turn.&lt;br&gt;&lt;font color-&apos;#FF6600&apos;&gt;When hunkering down, you will be Grounded and be unable to move, while becoming a priority target for enemies.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#11FF99&apos;&gt;Critical hit damage taken is reduced by 50%.&lt;/font&gt;</content>
+	<content contentuid="hbbd0dff3g4352g45c1ga9b6gebc3d0b2b09b">Bolster your defenses, gaining a &lt;font color=&apos;#11FF00&apos;&gt;[1]% boost to your armor values&lt;/font&gt; until your next turn.&lt;br&gt;&lt;font color-&apos;#FF6600&apos;&gt;When hunkering down, you will be Grounded and be unable to move, while becoming a priority target for enemies.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#11FF99&apos;&gt;Critical hit damage taken is reduced by 50%.&lt;/font&gt;</content>
 	<content contentuid="hbbf7c090g345bg49d2gaeffg016350a20739">Venomblade</content>
 	<content contentuid="hbc153fa7g4cf3g4d94g94e5gb8b224ffe547">The Tutor</content>
 	<content contentuid="hbc5b8e77g1e41g479cg943eg71cefbe36ad3">Knowledge Dispenser</content>
