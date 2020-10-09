@@ -47,4 +47,21 @@ if Ext.IsDeveloperMode() then
 			end
 		end
 	end)
+
+	local function dumpRanks(...)
+		--DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>")
+		local rankNamesDB = Osi.DB_LLWEAPONEX_WeaponMastery_RankNames:Get(nil, nil, nil)
+		local output = ""
+		for i,entry in pairs(rankNamesDB) do
+			--AddRank(masteryID, level, color, name)
+			local masteryID = entry[1]
+			local level = entry[2]
+			local text = entry[3]
+			local _,_,color = string.find(text, "color='(.+)'")
+			local _,_,rankName = string.find(text, ">(.+)<")
+			output = output .. string.format("AddRank(\"%s\", %s, \"%s\", \"%s\")\n", masteryID, level, color, rankName)
+		end
+		print(output)
+	end
+	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
 end

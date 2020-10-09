@@ -56,26 +56,6 @@ local debugInit = Ext.Require("Server/Debug/DebugMain.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
 Ext.Require("Server/Updates.lua")
 
-local function dumpRanks(...)
-    --DB_LLWEAPONEX_WeaponMastery_RankNames("LLWEAPONEX_DualShields", 0, "<font color='#FDFFEA'>Beginner</font>")
-    local rankNamesDB = Osi.DB_LLWEAPONEX_WeaponMastery_RankNames:Get(nil, nil, nil)
-    local output = ""
-    for i,entry in pairs(rankNamesDB) do
-        --AddRank(masteryID, level, color, name)
-        local masteryID = entry[1]
-        local level = entry[2]
-        local text = entry[3]
-        local _,_,color = string.find(text, "color='(.+)'")
-        local _,_,rankName = string.find(text, ">(.+)<")
-        output = output .. string.format("AddRank(\"%s\", %s, \"%s\", \"%s\")\n", masteryID, level, color, rankName)
-    end
-    print(output)
-end
-Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
-
-local DIVINITY_UNLEASHED = "e844229e-b744-4294-9102-a7362a926f71"
-local ARMOR_MITIGATION = "edf1898c-d375-47e7-919a-11d5d44d1cca"
-
 ---@param target EsvCharacter
 ---@param attacker StatCharacter|StatItem
 ---@param hit HitRequest
@@ -92,7 +72,7 @@ end
 
 local function SessionSetup()
     -- Divinity Unleashed or Armor Mitigation
-    if not Ext.IsModLoaded(DIVINITY_UNLEASHED) and not Ext.IsModLoaded(ARMOR_MITIGATION) then
+    if not Ext.IsModLoaded(MODID.DivinityUnleashed) and not Ext.IsModLoaded(MODID.ArmorMitigation) then
         Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
         Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
     end
