@@ -275,19 +275,16 @@ function Harken_SwapTattoos(char)
 	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Origin.Harken, "HarkenTattoos")
 	if HasActiveStatus(char, "UNSHEATHED") == 1 then
 		if StringHelpers.GetUUID(char) == Origin.Harken then
-			CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+			if Ext.GameVersion() ~= "v3.6.51.9303" then -- Old editor version
+				CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+			end
 		end
-		-- if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "40039552-3aae-4beb-8cca-981809f82988" then
-		-- 	SwapUnique(char, "HarkenTattoos")
-		-- end
-
 	else
 		if StringHelpers.GetUUID(char) == Origin.Harken then
-			CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+			if Ext.GameVersion() ~= "v3.6.51.9303" then
+				CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+			end
 		end
-		-- if StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Breast")) == "927669c3-b885-4b88-a0c2-6825fbf11af2" then
-		-- 	SwapUnique(char, "HarkenTattoos")
-		-- end
 	end
 end
 
