@@ -2,3 +2,4 @@ Key	Content	Handle
 LLWEAPONEX_CombatLog_StealSuccess	<font color='#00FF00'>[1] stole </font><font color='#00FFAA'>[2]</font><font color='#00FF00'> from [3]!</font>	h9f7d431dg1f6dg494dg89b8g4cb4b98994d4
 LLWEAPONEX_CombatLog_StealFailed	<font color='#FF0000'>[1] failed to steal anything from [2].</font>	hade2f718gb41dg427cg81c8gff64a36ad95f
 LLWEAPONEX_CombatLog_StealLimitReached	<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>	h62e44d39gae88g4785g9004g79e396516ee4
+LLWEAPONEX_CombatLog_MasteryRankUp	<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>	he0cceb33g75ddg44a5g94b4geda5fd12c886

@@ -45,6 +45,9 @@ local function MasteryLeveledUp(uuid,mastery,last,next)
 	end
 
 	LeaderLib.PrintDebug(string.format("[WeaponExpansion] Mastery [%s] leveled up (%i => %i) on [%s]", mastery, last, next, uuid))
+	local name = Ext.GetCharacter(uuid).DisplayName
+	local text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(name, masteryName, next)
+	GameHelpers.UI.CombatLog(text)
 end
 
 --- Adds mastery experience a specific masteries.
