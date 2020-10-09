@@ -41,6 +41,28 @@ local function RequestOpenMasteryMenu(call, payload)
 					id = characterData.ID or CharacterGetReservedUserID(characterData.UUID)
 				end
 			end
+			if id == nil then
+				local users = {}
+				local totalUsers = 0
+				local lastID = nil
+				local lastUUID = nil
+				for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
+					local playerUUID = StringHelpers.GetUUID(db[1])
+					local playerID = CharacterGetReservedUserID(playerUUID)
+					if users[playerID] == nil then
+						totalUsers = totalUsers + 1
+					end
+					if StringHelpers.GetUUID(GetCurrentCharacter(playerID)) == playerUUID then
+						users[playerID] = playerUUID
+						lastID = playerID
+						lastUUID = playerUUID
+					end
+				end
+				if totalUsers == 1 then
+					id = lastID
+					uuid = lastUUID
+				end
+			end
 			if id ~= nil then
 				if StringHelpers.IsNullOrEmpty(uuid) then
 					uuid = StringHelpers.GetUUID(GetCurrentCharacter(id))
