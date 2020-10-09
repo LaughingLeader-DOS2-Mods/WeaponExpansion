@@ -571,7 +571,7 @@ Ext.RegisterListener("GameStateChanged", function(last, next)
 	end
 end)
 
-Ext.RegisterNetListener("LLWEAPONEX_SetActiveCharacter", function(call,uuid)
+Ext.RegisterNetListener("LLWEAPONEX_InitializeMasteryMenu", function(call,uuid)
 	if not MasteryMenu.Initialized and Ext.GetGameState() == "Running" then
 		MasteryMenu.InitializeToggleButton()
 		MasteryMenu.InitializeMasteryMenu()
