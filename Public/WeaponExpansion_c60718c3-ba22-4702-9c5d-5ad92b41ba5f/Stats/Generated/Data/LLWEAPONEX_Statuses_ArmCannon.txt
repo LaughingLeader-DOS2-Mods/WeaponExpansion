@@ -30,6 +30,6 @@ data "StackId" "Stack_LLWEAPONEX_ArmCannon_Charged"
 
 new entry "Stats_LLWEAPONEX_ArmCannon_Charged"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "MovementSpeedBoost" "10"
 data "DodgeBoost" "10"

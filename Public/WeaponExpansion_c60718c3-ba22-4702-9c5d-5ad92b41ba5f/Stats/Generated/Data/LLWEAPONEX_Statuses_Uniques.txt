@@ -14,7 +14,7 @@ data "StackId" "Stack_LLWEAPONEX_BlindfoldEquipped"
 
 new entry "Stats_LLWEAPONEX_BlindfoldEquipped"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "RangeBoost" "-100"
 
 new entry "LLWEAPONEX_DEMON_GAUNTLET_EQUIPPED"
@@ -33,7 +33,7 @@ data "FormatColor" "Summoner"
 
 new entry "Stats_LLWEAPONEX_DemonGauntletEquipped"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "Reflection" "10::Shadow:"
 
 new entry "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE"
@@ -53,7 +53,7 @@ data "TargetEffect" "LLWEAPONEX_FX_Status_DemonHandDefense_01"
 
 new entry "Stats_LLWEAPONEX_DemonGauntletDefense"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 
 new entry "LLWEAPONEX_DEMON_GAUNTLET_HIT"
 type "StatusData"
@@ -105,7 +105,7 @@ data "FormatColor" "Summoner"
 
 new entry "Stats_LLWEAPONEX_DemonGauntletBonusCrit"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "CriticalChance" "200"
 
 new entry "LLWEAPONEX_TATTOOS_STRENGTH"
@@ -125,7 +125,7 @@ data "FormatColor" "Warrior"
 
 new entry "Stats_LLWEAPONEX_Tattoos_Strength"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "PhysicalResistance" "10"
 data "Strength" "4"
 
@@ -189,7 +189,7 @@ data "StatsId" "Stats_LLWEAPONEX_SoulHarvest_DamageBonusApply"
 
 new entry "Stats_LLWEAPONEX_SoulHarvest_DamageBonusApply"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "MagicPoints" "1"
 
 new entry "LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS1"
@@ -206,7 +206,7 @@ data "StackPriority" "0"
 
 new entry "Stats_LLWEAPONEX_SoulHarvest_DamageBonus1"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "DamageBoost" "2"
 data "Lifesteal" "2"
 
@@ -289,7 +289,7 @@ data "ForceOverhead" "No"
 
 new entry "Stats_LLWEAPONEX_WarchiefMark"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "DamageBoost" "-10"
 data "CriticalChance" "-10"
 
@@ -363,7 +363,7 @@ data "ForceOverhead" "Yes"
 
 new entry "Stats_LLWEAPONEX_WraithbladeMark"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "Flags" "InvisibilityImmunity"
 data "MovementSpeedBoost" "-10"
 data "DamageBoost" "-5"
@@ -424,7 +424,7 @@ data "StackId" "Stack_LLWEAPONEX_AnvilMace_Knockup_Disabled"
 
 new entry "Stats_LLWEAPONEX_AnvilMace_Knockup_Disabled"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "Sight" "-10000"
 data "MovementSpeedBoost" "-100"
 data "DodgeBoost" "-100"
@@ -507,7 +507,7 @@ data "StackId" "Stack_LLWEAPONEX_BattleBook_SpellScroll_Material_Replacement"
 
 new entry "_Stats_LLWEAPONEX_BattleBook_SpellScroll_Element_Base"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 
 new entry "_Status_LLWEAPONEX_BattleBook_SpellScroll_Element_Base"
 type "Weapon"

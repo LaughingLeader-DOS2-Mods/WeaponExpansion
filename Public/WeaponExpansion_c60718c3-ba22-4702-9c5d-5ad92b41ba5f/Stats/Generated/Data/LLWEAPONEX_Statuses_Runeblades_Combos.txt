@@ -70,7 +70,7 @@ data "SavingThrow" "MagicArmor"
 
 new entry "Stats_LLWEAPONEX_Runeblade_Avalanche_Snow"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "MovementSpeedBoost" "-25"
 data "DodgeBoost" "-10"
 data "APStart" "-1"

@@ -35,7 +35,7 @@ data "ExtraProperties" "EXPLODE,100,0,Projectile_LLWEAPONEX_Status_DragonsBaneDa
 
 new entry "Stats_LLWEAPONEX_DragonsBane"
 type "Potion"
-using "_Stats_LLWEAPONEX_Potions_Base"
+using "_Stats_LeaderLib_Base"
 data "MovementSpeedBoost" "-100"
 data "DodgeBoost" "-70"
 
