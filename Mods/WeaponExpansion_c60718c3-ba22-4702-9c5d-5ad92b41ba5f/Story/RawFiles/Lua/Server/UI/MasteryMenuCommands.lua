@@ -59,6 +59,9 @@ local function RequestOpenMasteryMenu(call, payload)
 					end
 				end
 				if totalUsers == 1 then
+					Ext.PrintWarning("[WeaponExpansion:RequestOpenMasteryMenu] Had to use the final failsafe to find the player's ID.")
+					Ext.PrintWarning(string.format("id(%s) uuid(%s) foundID(%s) foundUUID(%s)", id, uuid, lastID, lastUUID))
+					Ext.PrintWarning("Client payload:", payload)
 					id = lastID
 					uuid = lastUUID
 				end
