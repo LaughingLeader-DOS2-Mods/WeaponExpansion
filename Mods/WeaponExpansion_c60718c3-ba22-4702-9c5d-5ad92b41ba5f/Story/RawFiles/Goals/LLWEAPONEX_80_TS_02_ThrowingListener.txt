@@ -23,9 +23,13 @@ IF
 SkillCast(_Player, _Skill, _, _)
 AND
 DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target)
+AND
+GetUUID(_Player, _UUID)
+AND
+GetUUID(_Target, _TargetUUID)
 THEN
 NOT DB_LLWEAPONEX_ThrowingMastery_Temp_ListenForSkill(_Player, _Item, _Target);
-LLWEAPONEX_Ext_AddMasteryExperience(_Player, "LLWEAPONEX_ThrowingAbility", 1.0);
+NRD_ModCall("WeaponExpansion", "GainThrowingMasteryXP", _UUID, _TargetUUID);
 LLWEAPONEX_ThrowingMastery_OnThrowingItemUsed(_Player, _Item, _Skill);
 
 //Cancelled Throwing
