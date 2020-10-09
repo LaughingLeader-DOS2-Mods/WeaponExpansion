@@ -40,12 +40,20 @@ local function UpdatedUnarmedTagsFromWeapon(uuid, item)
 	end
 end
 
+local function AxeScoundrelEnabled(uuid, item)
+	return Mastery.HasMasteryRequirement(uuid, "LLWEAPONEX_Axe_Mastery4")
+	and (item.Stats.WeaponType == "Axe" or item:HasTag("LLWEAPONEX_Axe"))
+end
+
 ---@param uuid string
 ---@param item StatItem
 local function CheckScoundrelTags(uuid, itemUUID)
 	if itemUUID ~= nil and ObjectExists(itemUUID) == 1 then
 		local item = Ext.GetItem(itemUUID)
-		if item.Stats.WeaponType == "Knife" or item:HasTag("LLWEAPONEX_Katana") or (Mastery.HasMasteryRequirement(uuid, "LLWEAPONEX_Axe_Mastery4") and (item.Stats.WeaponType == "Axe" or item:HasTag("LLWEAPONEX_Axe"))) then
+		if item.Stats.WeaponType == "Knife" 
+		or item:HasTag("LLWEAPONEX_Katana") 
+		or AxeScoundrelEnabled(uuid, item)
+		then
 			return true
 		end
 	end
