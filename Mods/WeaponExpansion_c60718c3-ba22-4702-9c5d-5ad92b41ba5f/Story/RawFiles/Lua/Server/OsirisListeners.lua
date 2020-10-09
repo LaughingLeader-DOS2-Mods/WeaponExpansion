@@ -38,8 +38,9 @@ Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profi
 	if character ~= nil then
 		if Vars.isInCharacterCreation then
 			Ext.PostMessageToUser(id, "LLWEAPONEX_OnCharacterCreationStarted", "")
+		else
+			Ext.PostMessageToUser(id, "LLWEAPONEX_InitializeMasteryMenu", "")
 		end
-		Ext.PostMessageToUser(id, "LLWEAPONEX_SetActiveCharacter", GetUUID(character))
 	end
 end)
 

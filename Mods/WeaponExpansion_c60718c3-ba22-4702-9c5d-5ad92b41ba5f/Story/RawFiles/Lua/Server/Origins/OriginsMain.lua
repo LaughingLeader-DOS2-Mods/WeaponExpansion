@@ -70,6 +70,7 @@ function Origins_InitCharacters(region, isEditorMode)
 			if CharacterIsInPartyWith(host, Origin.Harken) == 0 then
 				Osi.PROC_GLO_PartyMembers_Add(Origin.Harken, host)
 				TeleportTo(Origin.Harken, host, "", 1, 0, 1)
+				CharacterAttachToGroup(Origin.Harken, host)
 				totalAdded = totalAdded + 1
 			end
 			CharacterAssignToUser(user, Origin.Harken)
@@ -77,6 +78,7 @@ function Origins_InitCharacters(region, isEditorMode)
 				Osi.PROC_GLO_PartyMembers_Add(Origin.Korvash, host)
 				CharacterAssignToUser(user, Origin.Korvash)
 				TeleportTo(Origin.Korvash, host, "", 1, 0, 1)
+				CharacterAttachToGroup(Origin.Korvash, host)
 				totalAdded = totalAdded + 1
 			end
 			CharacterAssignToUser(user, Origin.Korvash)
@@ -173,31 +175,41 @@ local anvilSwapPresets = {
 }
 
 function CC_CheckKorvashColor(uuid)
-	local id = CharacterGetReservedUserID(uuid)
-	local character = Ext.GetCharacter(uuid)
-	if character ~= nil and character.PlayerCustomData ~= nil then
-		local color = character.PlayerCustomData.SkinColor
-		if color == 4294902015 then-- Pink?
-			--NRD_PlayerSetCustomDataInt(uuid, "SkinColor", 4281936940)
-			character.PlayerCustomData.SkinColor = 4281936940
-			Ext.PostMessageToUser(id, "LLWEAPONEX_FixLizardSkin", uuid)
+	if Ext.GetGameState() == "Running" then
+		local id = GameHelpers.GetUserID(uuid)
+		if id ~= nil then
+			local character = Ext.GetCharacter(uuid)
+			if character ~= nil and character.PlayerCustomData ~= nil then
+				local color = character.PlayerCustomData.SkinColor
+				if color == 4294902015 then-- Pink?
+					--NRD_PlayerSetCustomDataInt(uuid, "SkinColor", 4281936940)
+					character.PlayerCustomData.SkinColor = 4281936940
+					Ext.PostMessageToUser(id, "LLWEAPONEX_FixLizardSkin", uuid)
+				end
+			end
 		end
 	end
 end
 
+local hiddenStoryButtons = {}
+
 function CC_HideStoryButton(uuid)
-	local character = Ext.GetCharacter(uuid)
-	if character ~= nil then-- Pink?
-		local id = CharacterGetReservedUserID(uuid)
-		Ext.PostMessageToUser(id, "LLWEAPONEX_CC_HideStoryButton", uuid)
+	if Ext.GetGameState() == "Running" then
+		local id = GameHelpers.GetUserID(uuid)
+		if id ~= nil then
+			hiddenStoryButtons[id] = true
+			Ext.PostMessageToUser(id, "LLWEAPONEX_CC_HideStoryButton", uuid)
+		end
 	end
 end
 
 function CC_EnableStoryButton(uuid)
-	local character = Ext.GetCharacter(uuid)
-	if character ~= nil then-- Pink?
-		local id = CharacterGetReservedUserID(uuid)
-		Ext.PostMessageToUser(id, "LLWEAPONEX_CC_EnableStoryButton", uuid)
+	if Ext.GetGameState() == "Running" then
+		local id = GameHelpers.GetUserID(uuid)
+		if id ~= nil and hiddenStoryButtons[id] ~= nil then
+			hiddenStoryButtons[id] = nil
+			Ext.PostMessageToUser(id, "LLWEAPONEX_CC_EnableStoryButton", uuid)
+		end
 	end
 end
 
@@ -214,6 +226,17 @@ function CC_SwapToHarkenAnvilPreview(uuid, preset)
 		NRD_ItemCloneSetInt("IsIdentified", 1)
 		local item = NRD_ItemClone()
 		NRD_CharacterEquipItem(uuid, item, "Weapon", 0, 0, 0, 1)
+	end
+end
+
+function CC_OnPresetSelected(uuid, preset)
+	if preset == "LLWEAPONEX_Korvash" then
+		CC_HideStoryButton(uuid)
+		CC_CheckKorvashColor(uuid)
+	elseif preset == "LLWEAPONEX_Harken" then
+		CC_HideStoryButton(uuid)
+	else
+		CC_EnableStoryButton(uuid)
 	end
 end
 
@@ -277,6 +300,7 @@ Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
 end)
 
 function Harken_SwapTattoos(char)
+	local character = Ext.GetCharacter(char)
 	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Origin.Harken, "HarkenTattoos")
 	if HasActiveStatus(char, "UNSHEATHED") == 1 then
 		if StringHelpers.GetUUID(char) == Origin.Harken then

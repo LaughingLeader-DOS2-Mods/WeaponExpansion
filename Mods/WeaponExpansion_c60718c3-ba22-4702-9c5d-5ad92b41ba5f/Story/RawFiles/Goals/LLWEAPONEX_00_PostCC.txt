@@ -34,33 +34,22 @@ CharacterSetVisualElement(_Char, 0, "Color");
 IF
 SkillAdded(_Char, _Skill, _)
 AND
-CharacterGetOrigin(_Char, 1, "LLWEAPONEX_Korvash")
-AND
-GetUUID(_Char, _UUID)
-THEN
-NRD_ModCall("WeaponExpansion", "CC_CheckKorvashColor", _UUID);
-
-IF
-SkillAdded(_Char, _Skill, _)
+NOT DB_LLWEAPONEX_CC_JustReactedToSkills(_Char)
 AND
 CharacterGetOrigin(_Char, 1, _Preset)
 AND
-DB_LLWEAPONEX_CC_OriginPreset(_Preset)
-AND
 GetUUID(_Char, _UUID)
 THEN
-NRD_ModCall("WeaponExpansion", "CC_HideStoryButton", _UUID);
+DB_LLWEAPONEX_CC_JustReactedToSkills(_Char);
+ProcObjectTimer(_Char, "Timers_LLWEAPONEX_CC_ClearBlockerDB", 50);
+NRD_ModCall("WeaponExpansion", "CC_OnPresetSelected", _UUID, _Preset);
 
-IF
-SkillAdded(_Char, _Skill, _)
+PROC
+ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLWEAPONEX_CC_ClearBlockerDB")
 AND
-CharacterGetOrigin(_Char, 1, _Preset)
-AND
-NOT DB_LLWEAPONEX_CC_OriginPreset(_Preset)
-AND
-GetUUID(_Char, _UUID)
+DB_LLWEAPONEX_CC_JustReactedToSkills(_Char)
 THEN
-NRD_ModCall("WeaponExpansion", "CC_EnableStoryButton", _UUID);
+NOT DB_LLWEAPONEX_CC_JustReactedToSkills(_Char);
 //END_REGION
 
 //REGION CC_EFFECTS

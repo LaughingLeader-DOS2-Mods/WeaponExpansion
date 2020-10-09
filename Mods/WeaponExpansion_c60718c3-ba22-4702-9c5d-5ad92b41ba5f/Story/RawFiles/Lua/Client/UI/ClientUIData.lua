@@ -2,11 +2,11 @@
 ---@param id integer
 ---@param profile string
 ---@param isHost boolean
-LeaderLib.RegisterListener("ClientCharacterChanged", function(uuid, id, profile, isHost)
+LeaderLib.RegisterListener("ClientCharacterChanged", function(uuid, id, profile, netID, isHost)
 	if Ext.GetGameState() == "Running" then
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
 		if ui ~= nil then
-			UI.SetCharacterSheetDamageText(ui, uuid)
+			UI.SetCharacterSheetDamageText(ui, netID)
 		end
 	end
 end)
