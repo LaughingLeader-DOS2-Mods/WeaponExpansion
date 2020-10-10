@@ -526,6 +526,7 @@
 	<content contentuid="h36977f30g86afg4c49gbd11gda439c232bd0">&lt;font color=&apos;#FF337F&apos;&gt;Pistol Mastery III&lt;/font&gt;</content>
 	<content contentuid="h36ea4bc1g8a7cg4f67g8025ge66503ca547d">Old Tanto</content>
 	<content contentuid="h36fb9f8agcc45g4627g863bg1994aaace86e">&lt;font color=&apos;#FF961A&apos;&gt;Explosive Bullets&lt;/font&gt;</content>
+	<content contentuid="h3716cca7ga9fcg4c76g8c61gaabdbbd47017">&lt;font color=&apos;#FFAA00&apos;&gt;Enabled Mastery: [1]&lt;/font&gt;</content>
 	<content contentuid="h371b35eegbfbcg47dag91cfg38bd40e2cf7e">Permafrost</content>
 	<content contentuid="h372458e1g39e6g41ccg89e8g1821272e41ac">Crossbow Bolts</content>
 	<content contentuid="h37b7b5fegc022g4a23gbd81g4dfc00682f4b">Throwing Axe (Large)</content>
@@ -842,6 +843,7 @@
 	<content contentuid="h5b132a5cg9c3ag4905g884dg4e814fbef78e">Character&apos;s firearm is attuned to blood.</content>
 	<content contentuid="h5b135257gec07g49f8gbf25g69df1d282001">&lt;font color=&apos;#00CCAA&apos;&gt;If near an active banner, enemies hit are pulled towards the banner.&lt;/font&gt;</content>
 	<content contentuid="h5b16d546gf2c8g4350g894bg5b409289ae46">Blademaster</content>
+	<content contentuid="h5b484a05g654bg43bdgb455gbab5e178ca58">&lt;font color=&apos;#FFAA00&apos;&gt;Enabled Masteries: [1]&lt;/font&gt;</content>
 	<content contentuid="h5b745736g3b45g4164g9a40g0c45b9c78921">Breathe shadowy flames in a cone, dealing [1], applying &lt;font color=&apos;#73f6ff&apos;&gt;Soul Burn&lt;/font&gt;, and leaving a &lt;font color=&apos;#9A00FF&apos;&gt;cursed fire surface&lt;/font&gt; behind.&lt;br&gt;&lt;font color=&apos;#FF00DD&apos;&gt;Damage increases for every percentage of vitality you are missing.&lt;/font&gt;</content>
 	<content contentuid="h5b8eef1cg79f0g40b6g9139gf9ad7b0a17e0">Old Foil</content>
 	<content contentuid="h5bb9e064ge628g4ee0gba9fg2d3ad2d80f20">Icecrash</content>

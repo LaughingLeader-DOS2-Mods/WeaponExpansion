@@ -328,11 +328,9 @@ local function OnItemTooltip(item, tooltip)
 				element.Label = element.Label .. "<br>"
 			end
 			if totalMasteries > 1 then
-				local masteryText = string.format("<font color='#FFAA00'>Enables Masteries: %s</font>", enabledMasteriesText)
-				element.Label = element.Label .. masteryText
+				element.Label = element.Label .. Text.ItemDescription.EnabledMasteries:ReplacePlaceholders(enabledMasteriesText)
 			else
-				local masteryText = string.format("<font color='#FFAA00'>Enables Mastery: %s</font>", enabledMasteriesText)
-				element.Label = element.Label .. masteryText
+				element.Label = element.Label .. Text.ItemDescription.EnabledMastery:ReplacePlaceholders(enabledMasteriesText)
 			end
 		end
 

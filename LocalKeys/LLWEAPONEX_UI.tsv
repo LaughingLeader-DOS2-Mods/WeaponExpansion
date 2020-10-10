@@ -32,3 +32,5 @@ LLWEAPONEX_UI_LizardClawWeaponOffhand	From Left Claws: [1]-[2]	he27df360gc0cag46
 LLWEAPONEX_UI_BaseDamage	Base Damage	haf8ef486g9b5eg46b0g95efg2c5795550240
 LLWEAPONEX_UI_DemoBackpackChargeMode_CombatOnly	Recharges when enemies die in battle.<br><font color='#00CCAA'>Killing an enemy with a remote charge grants a charge and additional bonuses.</font>	hed496668g0478g4a5cgbcb7g9cf9e7bedfbf
 LLWEAPONEX_UI_DemoBackpackChargeMode_Recharging	<font color='#00CCAA'>Recharges slowly over time.</font><br><font color='#00CCAA'>Killing an enemy with a remote charge grants a charge and additional bonuses.</font>	h6ad69540ga85dg41e4ga6abg080720b0761b
+LLWEAPONEX_UI_EnabledMastery	<font color='#FFAA00'>Enabled Mastery: [1]</font>	h3716cca7ga9fcg4c76g8c61gaabdbbd47017
+LLWEAPONEX_UI_EnabledMasteries	<font color='#FFAA00'>Enabled Masteries: [1]</font>	h5b484a05g654bg43bdgb455gbab5e178ca58

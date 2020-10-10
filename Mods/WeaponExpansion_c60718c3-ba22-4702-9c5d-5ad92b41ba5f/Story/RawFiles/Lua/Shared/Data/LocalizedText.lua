@@ -214,5 +214,9 @@ Text = {
 		StealFailed = ts:Create("hade2f718gb41dg427cg81c8gff64a36ad95f","<font color='#FF0000'>[1] failed to steal anything from [2].</font>"),
 		StealLimitReached = ts:Create("h62e44d39gae88g4785g9004g79e396516ee4","<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>"),
 		MasteryRankUp = ts:Create("he0cceb33g75ddg44a5g94b4geda5fd12c886", "<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>")
+	},
+	ItemDescription = {
+		EnabledMastery = ts:Create("h3716cca7ga9fcg4c76g8c61gaabdbbd47017", "<font color='#FFAA00'>Enabled Mastery: [1]</font>"),
+		EnabledMasteries = ts:Create("h5b484a05g654bg43bdgb455gbab5e178ca58", "<font color='#FFAA00'>Enabled Masteries: [1]</font>"),
 	}
 }
