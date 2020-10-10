@@ -103,6 +103,9 @@ end
 --- @param damage integer
 --- @param handle integer
 LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
+	if Ext.IsDeveloperMode() then
+		printd(string.format("[LLWEAPONEX:OnHit] skill(%s) target(%s) source(%s)", NRD_StatusGetString(target, handle, "SkillId"), target, source))
+	end
 	if not StringHelpers.IsNullOrEmpty(source) then
 		local hitSucceeded = GameHelpers.HitSucceeded(target, handle, false)
 		local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
