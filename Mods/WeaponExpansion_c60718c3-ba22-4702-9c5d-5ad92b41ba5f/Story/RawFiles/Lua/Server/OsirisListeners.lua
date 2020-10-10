@@ -16,7 +16,7 @@ LeaderLib.RegisterListener("Initialized", function(region)
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then
 			for id,unique in pairs (Uniques) do
-				unique:OnLevelChange(region)
+				unique:Initialize(region)
 			end
 		end
 		if IsCharacterCreationLevel(region) == 1 then

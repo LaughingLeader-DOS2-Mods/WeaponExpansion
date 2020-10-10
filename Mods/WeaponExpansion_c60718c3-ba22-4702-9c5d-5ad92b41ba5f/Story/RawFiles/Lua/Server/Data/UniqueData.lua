@@ -87,6 +87,10 @@ local function TryGetOwner(item, inventoryOnly)
 			end
 		end
 	end
+	local inventory = StringHelpers.GetUUID(GetInventoryOwner(item.MyGuid))
+	if not StringHelpers.IsNullOrEmpty(inventory) then
+		return inventory
+	end
 	return nil
 end
 
@@ -121,7 +125,7 @@ local function MoveToRegionPosition(self, region, item)
 	end
 end
 
-function UniqueData:OnLevelChange(region)
+function UniqueData:Initialize(region)
 	if ObjectExists(self.UUID) == 1 then
 		local item = Ext.GetItem(self.UUID)
 		if not self:IsReleasedFromOwner() then
@@ -147,6 +151,13 @@ function UniqueData:OnLevelChange(region)
 				MoveToRegionPosition(self, region, item)
 			end
 		end
+		if self.Owner == nil then
+			local owner = TryGetOwner(item)
+			if owner ~= nil then
+				self.Owner = owner
+			end
+		end
+		printd("Unique initialized:", self.UUID, item.DisplayName, self.Owner)
 	end
 end
 
