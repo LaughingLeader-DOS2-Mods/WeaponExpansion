@@ -210,6 +210,22 @@ local player_stats = {
 	--["Summon_Earth_Ooze_Player"] = true,
 }
 
+local CanBackstabPropEntry = {
+	Action = "CanBackstab",
+	Context =
+	{
+			"Target",
+			"AoE"
+	},
+	Type = "Custom"
+}
+
+local function AddCanBackstab(props)
+	if not string.find(Ext.JsonStringify(props), "CanBackstab") then
+		table.insert(props, CanBackstabPropEntry)
+	end
+end
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
@@ -218,23 +234,26 @@ local function StatOverrides_Init()
 
 	CreateFirearmDerivativeSkills()
 
+	local props = Ext.StatGetAttribute("Projectile_LLWEAPONEX_BackstabbingFlamingDaggers", "SkillProperties") or {}
+	AddCanBackstab(props)
+
 	for i,skill in pairs(Ext.GetStatEntries("SkillData")) do
 		local gameMaster = Ext.StatGetAttribute(skill, "ForGameMaster")
 		local requirement = Ext.StatGetAttribute(skill, "Requirement")
 		local ability = Ext.StatGetAttribute(skill, "Ability")
 
-		local props = Ext.StatGetAttribute(skill, "SkillProperties")
-		if props ~= nil and #props > 0 then
-			local printNewInfo = false
-			for _,v in pairs(props) do
-				if not StringHelpers.IsNullOrEmpty(v.Type) and known[v.Type] ~= true then
-					printNewInfo = true
-				end
-			end
-			if printNewInfo then
-				--print(skill, Ext.JsonStringify(props))
-			end
-		end
+		-- local props = Ext.StatGetAttribute(skill, "SkillProperties")
+		-- if props ~= nil and #props > 0 then
+		-- 	local printNewInfo = false
+		-- 	for _,v in pairs(props) do
+		-- 		if not StringHelpers.IsNullOrEmpty(v.Type) and known[v.Type] ~= true then
+		-- 			printNewInfo = true
+		-- 		end
+		-- 	end
+		-- 	if printNewInfo then
+		-- 		--print(skill, Ext.JsonStringify(props))
+		-- 	end
+		-- end
 
 		--print(gameMaster, requirement, ability)
 	
