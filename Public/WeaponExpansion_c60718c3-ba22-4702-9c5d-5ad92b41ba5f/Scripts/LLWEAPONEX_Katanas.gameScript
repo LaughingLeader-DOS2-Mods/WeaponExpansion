@@ -95,7 +95,7 @@ VARS
 ON
 	OnCharacterItemEvent(_Source, _Target, "LLWEAPONEX_OnKatanaHit")
 ACTIONS
-IF "c1&c2!c3"
+IF "c1&c2&!c3"
 	IsTagged(_Source, "LLWEAPONEX_Katana_Mastery1")
 	IsTagged(_Source, "LLWEAPONEX_Katana_Equipped")
 	HasFlag(_Source, "LLWEAPONEX_Katana_ComboDisabled")
