@@ -1,0 +1,25 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+//REGION ALEXANDER_LOOT
+// Defeated
+IF
+StoryEvent(S_GLO_Alexandar_03e6345f-1bd3-403c-80e2-a443a74f6349, "GEN_Teleport_Out")
+THEN
+NRD_ModCall("WeaponExpansion", "FortJoyEvent", "AlexanderDefeated");
+
+IF
+GlobalFlagSet("FTJ_SW_PurgedDragonSaved")
+THEN
+NRD_ModCall("WeaponExpansion", "FortJoyEvent", "SlaneReward");
+//END_REGION
+
+IF 
+RegionEnded("FJ_FortJoy_Main")
+THEN
+GoalCompleted;
+
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_24_Origins_FortJoy"

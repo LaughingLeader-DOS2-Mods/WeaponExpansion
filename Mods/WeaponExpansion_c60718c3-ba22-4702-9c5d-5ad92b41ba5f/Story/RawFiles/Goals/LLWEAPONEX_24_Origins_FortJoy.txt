@@ -1,0 +1,11 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+KBSECTION
+IF
+RegionStarted("FJ_FortJoy_Main")
+THEN
+GoalCompleted;
+EXITSECTION
+ENDEXITSECTION
+ParentTargetEdge "LLWEAPONEX_24_Campaign_Start"
