@@ -105,10 +105,13 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	end
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(...)
-	MasteryMenu.SetToggleButtonVisibility(false, false) 
+Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(call, uuid)
+	MasteryMenu.SetToggleButtonVisibility(false, false)
+	if uuid == Origin.Korvash then
+		Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", uuid)
+	end
 end)
-Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(...)
+Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(call, uuid)
 	MasteryMenu.SetToggleButtonVisibility(true, Ext.GetGameState() ~= "Running")
 end)
 
