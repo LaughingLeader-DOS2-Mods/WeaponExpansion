@@ -6,8 +6,9 @@ function FortJoyEvent(event)
 			if x == nil then
 				x,y,z = GetPosition(NPC.Dallis)
 			end
+			Uniques.DivineBanner:ReleaseFromOwner(true)
 			ItemScatterAt(Uniques.DivineBanner.UUID, x, y, z)
-			Uniques.DivineBanner:ReleaseFromOwner()
+			PlayEffectAtPosition("RS3_FX_Skills_Divine_Barrage_Impact_01", x, y, z)
 		end
 	elseif event == "SlaneReward" then
 		if Uniques.Frostdyne.Owner == NPC.Slane then

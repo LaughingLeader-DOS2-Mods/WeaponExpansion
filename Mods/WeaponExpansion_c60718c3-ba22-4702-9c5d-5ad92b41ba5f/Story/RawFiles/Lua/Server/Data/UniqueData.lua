@@ -99,14 +99,18 @@ function UniqueData:IsReleasedFromOwner()
 	return ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner") == 1
 end
 
----@param clear clearRelease|nil If true, clear the flag instead.
-function UniqueData:ReleaseFromOwner(clearRelease)
-	if clearRelease ~= true then
-		ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
-		self.Owner = nil
-	else
-		ObjectClearFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+function UniqueData:ReleaseFromOwner(unequip)
+	ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+	if unequip == true and self.Owner ~= nil then
+		ItemLockUnEquip(self.UUID, 0)
+		CharacterUnequipItem(self.Owner, self.UUID)
+		ItemClearOwner(self.UUID)
 	end
+	self.Owner = nil
+end
+
+function UniqueData:ResetRelease()
+	ObjectClearFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
 end
 
 ---@param self UniqueData
