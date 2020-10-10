@@ -89,7 +89,7 @@ function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 			if Ext.IsDeveloperMode() then
 				if currentExp == nil then currentExp = 0 end
 				if nextExp == nil then nextExp = 0 end
-				LeaderLib.PrintDebug("Mastery XP:",uuid, mastery, currentExp, "=>", nextExp)
+				Ext.PrintWarning("Mastery XP:",uuid, mastery, currentExp, "=>", nextExp)
 			end
 
 			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(uuid, mastery, nextLevel, nextExp)
