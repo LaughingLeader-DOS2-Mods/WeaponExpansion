@@ -59,7 +59,7 @@ local bonuses = {
 		[6] = ue:Create("DodgeBoost", 7),
 		[10] = {ue:Create("CleavePercentage", 50), ue:Create("CleaveAngle", 150)},
 		[12] = ue:Create("CriticalChance", 10),
-		[14] = ue:Create("ExtraProperties",CreateStatusProps("ACID",0.15,1)),
+		[14] = ue:Create("ExtraProperties",CreateStatusProps("ACID",0.15,1), false),
 		[15] = runeslot2,
 	},
 	Bible = {},

@@ -130,14 +130,14 @@ local function MoveToRegionPosition(self, region, item)
 end
 
 function UniqueData:OnItemLeveledUp(owner)
-	self:ApplyProgression(self.ProgressionData, true, Ext.GetItem(self.UUID))
+	self:ApplyProgression(self.ProgressionData, false, Ext.GetItem(self.UUID))
 end
 
 function UniqueData:Initialize(region, firstLoad)
 	if ObjectExists(self.UUID) == 1 then
 		local item = Ext.GetItem(self.UUID)
 		if firstLoad == true then
-			self:ApplyProgression(self.ProgressionData, true, item)
+			self:ApplyProgression(self.ProgressionData, false, item)
 		end
 		if not self:IsReleasedFromOwner() then
 			self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
@@ -221,11 +221,12 @@ end
 ---@param entry UniqueProgressionEntry
 ---@param stat StatEntryWeapon
 local function ApplyProgressionEntry(entry, stat)
-	print(stat.Name, entry.Attribute, entry.Value)
 	if entry.Attribute == "ExtraProperties" then
 		if entry.Append == true then
 			local props = stat.ExtraProperties or {}
-			table.insert(props, entry.Value)
+			if not string.find(Common.Dump(props), entry.Value.Action) then
+				table.insert(props, entry.Value)
+			end
 		else
 			stat.ExtraProperties = {entry.Value}
 		end
@@ -234,7 +235,9 @@ local function ApplyProgressionEntry(entry, stat)
 			local current = stat[entry.Attribute]
 			if entry.Attribute == "Boosts" or entry.Attribute == "Skills" then
 				if current ~= "" then
-					stat[entry.Attribute] = current .. ";" .. entry.Value
+					if not string.find(current, entry.Value) then
+						stat[entry.Attribute] = current .. ";" .. entry.Value
+					end
 				else
 					stat[entry.Attribute] = entry.Value
 				end
@@ -270,19 +273,24 @@ end
 ---@param persist boolean
 ---@param item EsvItem
 function UniqueData:ApplyProgression(progressionTable, persist, item)
-	if item == nil then
-		item = Ext.GetItem(self.UUID)
+	-- TODO - Testing. Making sure bonuses don't overlap if they're set to append when you save/load/change level/level up etc.
+	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
+	-- enries aren't nerfing things.
+	if Ext.IsDeveloperMode() then
 		if item == nil then
-			Ext.PrintError("[WeaponExpansion] Failed to get item object for,", self.UUID)
-			return
+			item = Ext.GetItem(self.UUID)
+			if item == nil then
+				Ext.PrintError("[WeaponExpansion] Failed to get item object for,", self.UUID)
+				return
+			end
 		end
+		local level = item.Stats.Level
+		local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
+		if not b then
+			Ext.Print(self.UUID, err)
+		end
+		self.LastProgressionLevel = level
 	end
-	local level = item.Stats.Level
-	local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
-	if not b then
-		Ext.Print(self.UUID, err)
-	end
-	self.LastProgressionLevel = level
 end
 
 return UniqueData
