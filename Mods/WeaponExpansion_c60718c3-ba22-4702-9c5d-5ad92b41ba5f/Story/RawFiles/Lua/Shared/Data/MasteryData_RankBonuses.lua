@@ -170,7 +170,12 @@ LLWEAPONEX_Firearm_Mastery2 = {},
 LLWEAPONEX_Firearm_Mastery3 = {},
 LLWEAPONEX_Firearm_Mastery4 = {},
 LLWEAPONEX_Firearm_Mastery5 = {},
-LLWEAPONEX_Greatbow_Mastery1 = {},
+LLWEAPONEX_Greatbow_Mastery1 = {
+	GREATBOW_RICOCHET = {
+		Skills = {"Projectile_Ricochet", "Projectile_EnemyRicochet"},
+		Param = TranslatedString:Create("h803a2376g5729g4d56g8c47gd7156ee5d348","<font color='#F19824'>Eat hit deals [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet] in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet:ExplodeRadius]m radius around the target.</font>")
+	},
+},
 LLWEAPONEX_Greatbow_Mastery2 = {},
 LLWEAPONEX_Greatbow_Mastery3 = {},
 LLWEAPONEX_Greatbow_Mastery4 = {},

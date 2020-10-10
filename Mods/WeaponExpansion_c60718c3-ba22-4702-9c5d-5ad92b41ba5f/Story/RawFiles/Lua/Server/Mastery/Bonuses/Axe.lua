@@ -29,7 +29,7 @@ end)
 
 MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"}, {"AXE_VULNERABLE"}, function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
-		Mods.LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, hitData.Target)
+		LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, hitData.Target)
 	end
 end)
 
