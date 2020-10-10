@@ -13,6 +13,11 @@ IF
 GlobalFlagSet("FTJ_SW_PurgedDragonSaved")
 THEN
 NRD_ModCall("WeaponExpansion", "FortJoyEvent", "SlaneReward");
+
+IF
+CharacterDied(S_FTJ_SW_PurgedDragon_c099caa6-1938-4b4f-9365-d0881c611e71)
+THEN
+NRD_ModCall("WeaponExpansion", "FortJoyEvent", "SlaneReward");
 //END_REGION
 
 IF 

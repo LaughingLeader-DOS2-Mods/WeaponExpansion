@@ -44,7 +44,7 @@ Uniques = {
 	DemonGauntlet = UniqueData:Create("0ac0d813-f58c-4399-99a8-1626a419bc53", ProgressionData.DemonGauntlet),
 	DivineBanner = UniqueData:Create("3113b901-340a-4f24-a38b-473e61d23371", ProgressionData.DivineBanner, {DefaultOwner=NPC.BishopAlexander, AutoEquipOnOwner=true}),
 	FireRunebladeKatana = UniqueData:Create("6f735ef9-524c-4514-b37f-c48a20b313c5", ProgressionData.FireRunebladeKatana),
-	Frostdyne = UniqueData:Create("S5d8ec362-618e-48e9-87c2-dbc18ea4e779", ProgressionData.Frostdyne, {DefaultOwner=NPC.Slane}),
+	Frostdyne = UniqueData:Create("S5d8ec362-618e-48e9-87c2-dbc18ea4e779", ProgressionData.Frostdyne, {DefaultOwner=NPC.Slane, AutoEquipOnOwner=false}),
 	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", ProgressionData.HarkenPowerGloves, {DefaultOwner=Origin.Harken, AutoEquipOnOwner=true, OnEquipped=CheckForAnvilWeightChange}),
 	--HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", ProgressionData.HarkenTattoos, {DefaultOwner = Origin.Harken, AutoEquipOnOwner=true, OnEquipped=OnTattoosEquipped}),
 	Harvest = UniqueData:Create("d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1", ProgressionData.Harvest),
