@@ -15,49 +15,6 @@ THEN
 LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_BlunderbussEquipped", "WeaponExpansion");
 //END_REGION
 
-//REGION BASIC_ATTACK
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_BULLET_HIT", (CHARACTERGUID)_Source)
-AND
-DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, (GUIDSTRING)_Target)
-THEN
-NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, _Target);
-LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Blunderbuss_ClearBasicAttackEntry");
-CharacterCharacterSetEvent(_Source, (CHARACTERGUID)_Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
-
-IF
-ItemStatusAttempt(_Target, "LLWEAPONEX_BULLET_HIT", (CHARACTERGUID)_Source)
-AND
-DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, (GUIDSTRING)_Target)
-THEN
-NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Source, _Target);
-LeaderLib_Timers_CancelObjectObjectTimer(_Source, _Target, "LLWEAPONEX_Timers_Blunderbuss_ClearBasicAttackEntry");
-CharacterItemSetEvent(_Source, (ITEMGUID)_Target, "LLWEAPONEX_Blunderbuss_ExplodeProjectile");
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished((CHARACTERGUID)_Char, (GUIDSTRING)_Target, "LLWEAPONEX_Blunderbuss_ClearBasicAttackEntry")
-AND
-DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Char, _Target)
-THEN
-NOT DB_LLWEAPONEX_Blunderbuss_Temp_BasicAttack(_Char, _Target);
-
-PROC
-LLWEAPONEX_Blunderbuss_OnAttackAtPosition((CHARACTERGUID)_Char, (REAL)_x, (REAL)_y, (REAL)_z)
-AND
-GetDistanceToPosition(_Char, _x, _y, _z, _Dist)
-AND
-RealProduct(_Dist, 80.0, _DelayR)
-AND
-Integer(_DelayR, _DelayInt)
-AND
-IntegerSum(_DelayInt, 245, _Delay)
-AND
-IntegerMax(_Delay, 950, _DelayClamped)
-THEN
-SetVarFloat3(_Char, "LLWEAPONEX_Blunderbuss_AttackPosition", _x, _y, _z);
-LeaderLib_Timers_StartObjectTimer(_Char, _DelayClamped, "LLWEAPONEX_Timers_Blunderbuss_ExplodeAtPosition", "LLWEAPONEX_Blunderbuss_ExplodeAtPosition");
-//END_REGION
-
 //REGION SKILLS
 IF
 SkillCast(_Player, "Zone_LLWEAPONEX_Blunderbuss_Cannonball", _, _)

@@ -1,24 +1,23 @@
-Key	Content
-LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item automatically levels up
-LLWEAPONEX_BLINDFOLD_EQUIPPED_Description	Character is wearing a blindfold.<br></font color='#FF0000'>-1m Range</font>
-LLWEAPONEX_BLINDFOLD_EQUIPPED_DisplayName	Blindfolded
-LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand
-LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Life Steal rise, but Resistances faulter.</font>
-LLWEAPONEX_MURAMASA_CURSE_DisplayName	<font color='#8A2BE2'>Curse of the Muramasa</font>
-LLWEAPONEX_RUNEBLADE_APPLY_STATUS_DisplayName	Runic Blade - Apply rune effects on attack
-LLWEAPONEX_RUNEBLADE_WEAPON_ICE_DAMAGE_DisplayName	Bonus Ice Damage
-LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Enables Weapon Mastery
-LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_DisplayName	Gain Detonation Skill and Enhanced Demolition
-LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_Description	Character deals bonus damage with grenades, and has a chance to sabotage enemies with explosions.
-LLWEAPONEX_BLUNDERBUSS_EQUIPPED_DisplayName	Attacks Explode in a 1m Radius
-LLWEAPONEX_DRAGONBONECLAWS_EQUIPPED_DisplayName	Automatically Equips the Dragon Bone Claws Weapon
-LLWEAPONEX_ARMCANNON_EQUIPPED_DisplayName	Mainhand Auto-Equip
-LLWEAPONEX_ARMCANNON_HIT_DisplayName	Builds Energy on Hit
-LLWEAPONEX_WRAITHBLADE_HIT_DisplayName	Deals Equivalent Shadow Damage to Vitality
-LLWEAPONEX_SOULHARVEST_REAP_DisplayName	Soul Harvest
-LLWEAPONEX_WAND_MAGIC_MISSILE_DisplayName	45%/30%/10% Chance for Bonus Missiles
-LLWEAPONEX_ANVILMACE_HIT_DisplayName	Earthsplitter - Attack the ground for 80% damage in a 2m radius
-LLWEAPONEX_BATTLEBOOK_BIBLE_BONUS_DisplayName	Divine Smite - Deals bonus damage to Voidwoken and Undead
-LLWEAPONEX_BATTLEBOOK_SPELLBOOK_HIT_DisplayName	Arcane Knowledge - Chance to explode a basic spell on attack
-LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_DisplayName	Bada Boom - Explode spells when primed
-LLWEAPONEX_FLAMETHROWER_EQUIPPED_DisplayName	Attacks Bathe Enemies in a Cone of Fire
+Key	Content	Handle
+LLWEAPONEX_ANVILMACE_HIT_DisplayName	Earthsplitter - Attack the ground for 80% damage in a 2m radius	h504347e6gbf4eg4996g8090g3556c3a10e35
+LLWEAPONEX_ARMCANNON_EQUIPPED_DisplayName	Mainhand Auto-Equip	h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd
+LLWEAPONEX_ARMCANNON_HIT_DisplayName	Builds Energy on Hit	hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb
+LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item automatically levels up	h4f30febcg9b2fg421agb509g6c8d812ce9c6
+LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_Description	Character deals bonus damage with grenades, and has a chance to sabotage enemies with explosions.	h9420616fg4e36g420ega98eg7039d658c12f
+LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_DisplayName	Gain Detonation Skill and Enhanced Demolition	h550cf924gacd9g476cgb40egaa4f9ce34c97
+LLWEAPONEX_BATTLEBOOK_BIBLE_BONUS_DisplayName	Divine Smite - Deals bonus damage to Voidwoken and Undead	he5310e99g8e49g4223ga5ffgd355b34b259e
+LLWEAPONEX_BATTLEBOOK_SPELLBOOK_HIT_DisplayName	Arcane Knowledge - Chance to explode a basic spell on attack	h887c83aag37b0g4fd8g8477gc9c54344de7e
+LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_DisplayName	Bada Boom - Explode spells when primed	ha1a96cc2g2a66g4552g9b74gd7b4d14d5413
+LLWEAPONEX_BLINDFOLD_EQUIPPED_Description	Character is wearing a blindfold.<br></font color='#FF0000'>-1m Range</font>	h6d358f95gd475g4cdega0b8gf460ecb12bf1
+LLWEAPONEX_BLINDFOLD_EQUIPPED_DisplayName	Blindfolded	h04da119dg55f5g4051g9411g60859d397914
+LLWEAPONEX_DRAGONBONECLAWS_EQUIPPED_DisplayName	Automatically Equips the Dragon Bone Claws Weapon	hc4cbb3efg9cd3g4193g861bg8f086795ea16
+LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand	h385c287dgb46dg4a18g8076g743fd7b9f831
+LLWEAPONEX_FLAMETHROWER_EQUIPPED_DisplayName	Attacks Bathe Enemies in a Cone of Fire	h815f287dg5938g4e1cga2a3gf9b0b8aa0e71
+LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Life Steal rise, but Resistances faulter.</font>	h58ead5d8ga714g4837g961age6c320cb2691
+LLWEAPONEX_MURAMASA_CURSE_DisplayName	<font color='#8A2BE2'>Curse of the Muramasa</font>	h78f5c557g2347g4a0agb6fagf0b52fdc604a
+LLWEAPONEX_RUNEBLADE_APPLY_STATUS_DisplayName	Runic Blade - Apply rune effects on attack	h501a08ddg508bg4542g9008geddce73365d8
+LLWEAPONEX_RUNEBLADE_WEAPON_ICE_DAMAGE_DisplayName	Bonus Ice Damage	h16cdc860g50d2g4c52ga87fg5b5411562aaa
+LLWEAPONEX_SOULHARVEST_REAP_DisplayName	Soul Harvest	h911f6633g79c2g41cdg8c45g076a0bbab99b
+LLWEAPONEX_WAND_MAGIC_MISSILE_DisplayName	45%/30%/10% Chance for Bonus Missiles	h34401e0bg371fg449cg9e43g39208b508644
+LLWEAPONEX_WEAPONMASTERY_EXPERIENCE_DisplayName	Enables Weapon Mastery	h90c0bf4fg3f1fg48d6g8275ga5ce8ab14dad
+LLWEAPONEX_WRAITHBLADE_HIT_DisplayName	Deals Equivalent Shadow Damage to Vitality	h9102ff74ge535g4526gaffdgde551dab819e

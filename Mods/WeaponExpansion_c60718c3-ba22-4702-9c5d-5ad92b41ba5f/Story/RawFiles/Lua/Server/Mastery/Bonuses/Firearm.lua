@@ -22,3 +22,14 @@ BasicAttackManager.RegisterListener("OnStart", function(attacker,owner,target)
 		RemoveStatus(attacker, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
 	end
 end)
+
+--Blunderbuss bonus on hit
+---@param hitObject boolean
+---@param attacker string
+---@param target string|number[]
+---@param handle integer|DamageList
+BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,handle)
+	if hitObject and IsTagged(attacker, "LLWEAPONEX_Blunderbuss_Equipped") == 1 then
+		GameHelpers.ExplodeProjectile(attacker, target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode")
+	end
+end)

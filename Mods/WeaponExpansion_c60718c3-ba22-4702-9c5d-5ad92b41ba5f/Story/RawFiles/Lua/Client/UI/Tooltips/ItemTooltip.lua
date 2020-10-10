@@ -4,7 +4,8 @@ local LocalizedText = LeaderLib.LocalizedText
 local ts = LeaderLib.Classes.TranslatedString
 
 local TagDisplay = {
-	LLWEAPONEX_ThiefGloves_Equipped = true
+	LLWEAPONEX_ThiefGloves_Equipped = true,
+	LLWEAPONEX_Blunderbuss_Equipped = true,
 }
 
 ---@type tooltip TooltipData
@@ -371,13 +372,14 @@ local function OnItemTooltip(item, tooltip)
 
 		for tag,b in pairs(TagDisplay) do
 			if item:HasTag(tag) or statTags:find(tag) then
-				local ref,handle = Ext.GettsFromKey(tag)
-				local text = Ext.Getts(handle, ref)
-				local element = {
-					Type = "ExtraProperties",
-					Label = text
-				}
-				tooltip:AppendElement(element)
+				local text = GameHelpers.GetStringKeyText(tag, "")
+				if text ~= "" then
+					local element = {
+						Type = "ExtraProperties",
+						Label = text
+					}
+					tooltip:AppendElement(element)
+				end
 			end
 		end
 	end
