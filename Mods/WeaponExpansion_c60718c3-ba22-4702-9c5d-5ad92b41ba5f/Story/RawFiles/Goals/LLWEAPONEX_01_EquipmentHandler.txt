@@ -31,8 +31,12 @@ LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(_Char, "LLWEAPONEX_Unarm
 
 PROC
 LLWEAPONEX_Equipment_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
+AND
+GetUUID(_Char, _CharUUID)
+AND
+GetUUID(_Item, _ItemUUID)
 THEN
-NRD_ModCall("WeaponExpansion", "OnItemEquipped", (STRING)_Char, (STRING)_Item);
+NRD_ModCall("WeaponExpansion", "OnItemEquipped", _CharUUID, _ItemUUID);
 //END_REGION
 
 //REGION BOOST_SWAP_TIMER

@@ -10,11 +10,21 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 	end
 
 	-- Tag updating
-	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
+	for _,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local uuid = db[1]
 		Equipment.CheckWeaponRequirementTags(StringHelpers.GetUUID(db[1]))
 		if HasActiveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
 			RemoveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
+		end
+
+		local hasBluntTag = not StringHelpers.IsNullOrEmpty(CharacterFindTaggedItem(uuid, "LLWEAPONEX_Blunt"))
+		if hasBluntTag then
+			for i,v in pairs(Ext.GetCharacter(uuid):GetInventoryItems()) do
+				if IsTagged(v, "LLWEAPONEX_Blunt") == 1 then
+					ClearTag(v, "LLWEAPONEX_Blunt")
+					SetTag(v, "LLWEAPONEX_Bludgeon")
+				end
+			end
 		end
 	end
 end)
