@@ -120,12 +120,14 @@ function OnItemEquipped(uuid,itemUUID)
 	if not StringHelpers.IsNullOrEmpty(itemUUID) and ObjectExists(itemUUID) == 1 then
 		local item = Ext.GetItem(itemUUID)
 		if item == nil then
-			return
+			Ext.PrintError("[WeaponExpansion:OnItemEquipped] Failed to get item from:", itemUUID)
+			return false
 		end
 		local stat = item.StatsId
 		local statType = item.Stats.ItemType
 
-		if not item:HasTag("LLWEAPONEX_TaggedWeaponType") and statType == "Weapon" or statType == "Shield" then
+		-- LLWEAPONEX_Blunt was an old tag name that became LLWEAPONEX_Bludgeon
+		if item:HasTag("LLWEAPONEX_Blunt") or (not item:HasTag("LLWEAPONEX_TaggedWeaponType") and (statType == "Weapon" or statType == "Shield")) then
 			TagWeapon(itemUUID, statType, stat)
 		end
 		
