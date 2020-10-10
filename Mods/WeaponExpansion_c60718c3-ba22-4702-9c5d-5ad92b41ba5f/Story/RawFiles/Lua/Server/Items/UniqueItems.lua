@@ -61,6 +61,14 @@ Uniques = {
 	Wraithblade = UniqueData:Create("c68b5afa-2574-471d-85ac-0738ee0a6393", ProgressionData.Wraithblade),
 }
 
+---For getting unique data by UUID.
+---@type table<string,UniqueData>
+AllUniques = {}
+
+for id,v in pairs(Uniques) do
+	AllUniques[v.UUID] = v
+end
+
 Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
 	local unique = Uniques[id]
 	if unique ~= nil then

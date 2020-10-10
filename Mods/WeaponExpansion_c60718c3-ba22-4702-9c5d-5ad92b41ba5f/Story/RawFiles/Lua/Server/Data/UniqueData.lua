@@ -129,14 +129,20 @@ local function MoveToRegionPosition(self, region, item)
 	end
 end
 
-function UniqueData:Initialize(region)
+function UniqueData:OnItemLeveledUp(owner)
+	self:ApplyProgression(self.ProgressionData, true, Ext.GetItem(self.UUID))
+end
+
+function UniqueData:Initialize(region, firstLoad)
 	if ObjectExists(self.UUID) == 1 then
 		local item = Ext.GetItem(self.UUID)
+		if firstLoad == true then
+			self:ApplyProgression(self.ProgressionData, true, item)
+		end
 		if not self:IsReleasedFromOwner() then
 			self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
 			if item.CurrentLevel ~= region then
 				if not self.Initialized then
-					self:ApplyProgression(self.ProgressionData, false, item)
 					local targetOwner = self.DefaultOwner
 					if type(self.DefaultOwner) == "table" then
 						targetOwner = self.DefaultOwner[region] or self.DefaultOwner["Any"]
@@ -215,6 +221,7 @@ end
 ---@param entry UniqueProgressionEntry
 ---@param stat StatEntryWeapon
 local function ApplyProgressionEntry(entry, stat)
+	print(stat.Name, entry.Attribute, entry.Value)
 	if entry.Attribute == "ExtraProperties" then
 		if entry.Append == true then
 			local props = stat.ExtraProperties or {}
@@ -226,7 +233,11 @@ local function ApplyProgressionEntry(entry, stat)
 		if entry.Append == true then
 			local current = stat[entry.Attribute]
 			if entry.Attribute == "Boosts" or entry.Attribute == "Skills" then
-				stat[entry.Attribute] = current .. ";" .. entry.Value
+				if current ~= "" then
+					stat[entry.Attribute] = current .. ";" .. entry.Value
+				else
+					stat[entry.Attribute] = entry.Value
+				end
 			else
 				stat[entry.Attribute] = current + entry.Value
 			end
@@ -236,21 +247,10 @@ local function ApplyProgressionEntry(entry, stat)
 	end
 end
 
----@param progressionTable table<integer,UniqueProgressionEntry|UniqueProgressionEntry[]>
----@param persist boolean
-function UniqueData:ApplyProgression(progressionTable, persist, item)
-	if item == nil then
-		item = Ext.GetItem(self.UUID)
-		if item == nil then
-			Ext.PrintError("[WeaponExpansion] Failed to get item object for,", self.UUID)
-			return
-		end
-	end
-	local level = item.Stats.Level
-	self.LastProgressionLevel = level
-	if progressionTable ~= nil and #progressionTable > 0 then
+local function TryApplyProgression(self, progressionTable, persist, item, level)
+	if progressionTable ~= nil then
 		local stat = Ext.GetStat(item.StatsId, level)
-		for i=self.LastProgressionLevel,level do
+		for i=1,level do
 			local entries = progressionTable[i]
 			if entries ~= nil then
 				if entries.Type == "UniqueProgressionEntry" then
@@ -263,6 +263,24 @@ function UniqueData:ApplyProgression(progressionTable, persist, item)
 			end
 		end
 		Ext.SyncStat(item.StatsId, persist or false)
+	end
+end
+
+---@param progressionTable table<integer,UniqueProgressionEntry|UniqueProgressionEntry[]>
+---@param persist boolean
+---@param item EsvItem
+function UniqueData:ApplyProgression(progressionTable, persist, item)
+	if item == nil then
+		item = Ext.GetItem(self.UUID)
+		if item == nil then
+			Ext.PrintError("[WeaponExpansion] Failed to get item object for,", self.UUID)
+			return
+		end
+	end
+	local level = item.Stats.Level
+	local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
+	if not b then
+		Ext.Print(self.UUID, err)
 	end
 	self.LastProgressionLevel = level
 end
