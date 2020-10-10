@@ -10,7 +10,8 @@ PersistentVars = {
     },
     MasteryMechanics = {},
     Timers = {},
-    OnDeath = {}
+    OnDeath = {},
+    UniqueDataIDSwap = {},
 }
 LoadPersistentVars = {}
 BonusSkills = {}

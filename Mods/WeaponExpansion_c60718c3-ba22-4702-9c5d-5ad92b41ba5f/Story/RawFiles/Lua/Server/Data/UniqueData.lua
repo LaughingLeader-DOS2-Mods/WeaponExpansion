@@ -130,14 +130,14 @@ local function MoveToRegionPosition(self, region, item)
 end
 
 function UniqueData:OnItemLeveledUp(owner)
-	self:ApplyProgression(self.ProgressionData, false, Ext.GetItem(self.UUID))
+	self:ApplyProgression(self.ProgressionData, true, Ext.GetItem(self.UUID))
 end
 
 function UniqueData:Initialize(region, firstLoad)
 	if ObjectExists(self.UUID) == 1 then
 		local item = Ext.GetItem(self.UUID)
 		if firstLoad == true then
-			self:ApplyProgression(self.ProgressionData, false, item)
+			self:ApplyProgression(self.ProgressionData, true, item)
 		end
 		if not self:IsReleasedFromOwner() then
 			self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
@@ -221,14 +221,22 @@ end
 ---@param entry UniqueProgressionEntry
 ---@param stat StatEntryWeapon
 local function ApplyProgressionEntry(entry, stat)
+	local statChanged = false
+	if not StringHelpers.IsNullOrEmpty(entry.MatchStat) then
+		if stat ~= entry.MatchStat then
+			return false
+		end
+	end
 	if entry.Attribute == "ExtraProperties" then
 		if entry.Append == true then
 			local props = stat.ExtraProperties or {}
 			if not string.find(Common.Dump(props), entry.Value.Action) then
 				table.insert(props, entry.Value)
+				statChanged = true
 			end
 		else
 			stat.ExtraProperties = {entry.Value}
+			statChanged = true
 		end
 	else
 		if entry.Append == true then
@@ -237,35 +245,152 @@ local function ApplyProgressionEntry(entry, stat)
 				if current ~= "" then
 					if not string.find(current, entry.Value) then
 						stat[entry.Attribute] = current .. ";" .. entry.Value
+						statChanged = true
 					end
 				else
 					stat[entry.Attribute] = entry.Value
+					statChanged = true
 				end
 			else
 				stat[entry.Attribute] = current + entry.Value
+				statChanged = true
 			end
 		else
-			stat[entry.Attribute] = entry.Value
+			if stat[entry.Attribute] ~= entry.Value then
+				stat[entry.Attribute] = entry.Value
+				statChanged = true
+			end
 		end
+	end
+	return statChanged
+end
+
+---@param self UniqueData
+---@param item EsvItem
+---@param template string
+---@param stat string
+---@param level integer
+local function CloneItem(self, item, template, stat, level)
+	local constructor = Ext.CreateItemConstructor(item)
+	---@type ItemDefinition
+	local props = constructor[1]
+	props.GoldValueOverwrite = math.floor(item.Stats.Value * 0.4)
+
+	if item.ItemType == "Weapon" then
+		-- Damage type fix
+		-- Deltamods with damage boosts may make the weapon's damage type be all of that type, so overwriting the statType
+		-- fixes this issue.
+		local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
+		if damageTypeString == nil then damageTypeString = "Physical" end
+		local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+		props.DamageTypeOverwrite = damageTypeEnum
+	end
+
+	props.GenerationStatsId = stat
+	props.StatsEntryName = stat
+	props.IsIdentified = true
+	props.OriginalRootTemplate = template
+	props.RootTemplate = template
+	props.DeltaMods = item.GetDeltaMods()
+	props.GenerationLevel = level
+	props.StatsLevel = level
+
+	local cloned = constructor:Construct()
+	if cloned ~= nil then
+		ItemSetOwner(cloned.MyGuid, self.Owner)
+		ItemToInventory(cloned, self.Owner, 1, 0, 0)
+		PersistentVars.UniqueDataIDSwap[self.UUID] = cloned.MyGuid
+		self.UUID = cloned.MyGuid
+		ItemRemove(item.MyGuid)
+	else
+		print("Error constructing item?", item.MyGuid)
 	end
 end
 
+---@param self UniqueData
+---@param item EsvItem
+---@param template string
+---@param stat string
+---@param level integer
+local function TransformItem(self, item, template, stat, level)
+	local slot = ""
+	local owner = ""
+	if item.InUseByCharacterHandle ~= nil then
+		local character = Ext.GetCharacter(item.InUseByCharacterHandle)
+		if character ~= nil then
+			owner = character.MyGuid
+			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+				if StringHelpers.GetUUID(CharacterGetEquippedItem(character.MyGuid, slotid)) == item.MyGuid then
+					slot = slotid
+					break
+				end
+			end
+			if slot ~= "" then
+				CharacterUnequipItem(character.MyGuid, item)
+			end
+		end
+	end
+	local deltamods = item:GetDeltaMods()
+	Transform(item.MyGuid, template, 0, 0, 1)
+	if not StringHelpers.IsNullOrEmpty(stat) then
+		item.StatsId = stat
+	end
+	ItemLevelUpTo(item.MyGuid, level)
+
+	for i,v in pairs(deltamods) do
+		if not ItemHasDeltaModifier(item.MyGuid, v) then
+			ItemAddDeltaModifier(item.MyGuid, v)
+		end
+	end
+
+	if slot ~= nil and owner ~= "" then
+		StartOneshotTimer("Timers_LLWEAPONEX_PostTransformEquip", 250, function()
+			NRD_CharacterEquipItem(owner, item.MyGuid, slot, 0, 0, 1, 1)
+		end)
+	end
+	return true
+end
+
+local function EvaluateEntry(self, progressionTable, persist, item, level, stat, entry)
+	local statChanged = false
+	if entry.Type == "UniqueProgressionEntry" then
+		if ApplyProgressionEntry(entry, stat) then
+			statChanged = true
+		end
+	elseif entry.Type == "UniqueProgressionTransform" then
+		if not StringHelpers.IsNullOrEmpty(entry.Template) then
+			if TransformItem(self, item, entry.Template, entry.Stat, level) then
+				statChanged = true
+			end
+		end
+	elseif #entry > 0 then
+		for i,v in pairs(entry) do
+			if EvaluateEntry(self, progressionTable, persist, item, level, stat, v) then
+				statChanged = true
+			end
+		end
+	end
+	return statChanged
+end
+
 local function TryApplyProgression(self, progressionTable, persist, item, level)
+	local statChanged = false
 	if progressionTable ~= nil then
 		local stat = Ext.GetStat(item.StatsId, level)
 		for i=1,level do
 			local entries = progressionTable[i]
 			if entries ~= nil then
-				if entries.Type == "UniqueProgressionEntry" then
-					ApplyProgressionEntry(entries, stat)
-				elseif #entries > 0 then
-					for i,v in pairs(entries) do
-						ApplyProgressionEntry(v, stat)
-					end
+				if EvaluateEntry(self, progressionTable, persist, item, level, stat, entries) then
+					statChanged = true
 				end
 			end
 		end
-		Ext.SyncStat(item.StatsId, persist or false)
+		if statChanged then
+			if persist == nil then
+				persist = false
+			end
+			Ext.SyncStat(item.StatsId, persist)
+		end
 	end
 end
 
