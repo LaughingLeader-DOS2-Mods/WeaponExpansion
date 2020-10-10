@@ -29,20 +29,12 @@ if Ext.IsDeveloperMode() then
 	end)
 	
 	Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
-		local host = CharacterGetHostCharacter()
+		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
 		for i,v in pairs(Uniques) do
-			local inventory = GetInventoryOwner(v.UUID)
-			if StringHelpers.IsNullOrEmpty(inventory) or StringHelpers.IsNullOrEmpty(v.Owner) or v.Owner == NPC.VendingMachine then
+			if v.Owner == NPC.VendingMachine then
+				v:ReleaseFromOwner()
 				v:Transfer(host)
-			end
-		end
-	end)
-	
-	Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
-		local host = CharacterGetHostCharacter()
-		for i,v in pairs(Uniques) do
-			local inventory = GetInventoryOwner(v.UUID)
-			if StringHelpers.IsNullOrEmpty(inventory) or StringHelpers.IsNullOrEmpty(v.Owner) or v.Owner == NPC.VendingMachine then
+			elseif not StringHelpers.IsNullOrEmpty(v.Owner) and not IsPlayer(v.Owner) and v.Owner ~= host then
 				v:Transfer(host)
 			end
 		end

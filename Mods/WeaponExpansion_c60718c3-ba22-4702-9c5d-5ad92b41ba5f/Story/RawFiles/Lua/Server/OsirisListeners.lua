@@ -234,6 +234,7 @@ local LoneWolfBannerLifeStealScale = {
 }
 
 Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(character)
+	character = StringHelpers.GetUUID(character)
 	if IsPlayer(character) then
 		if Uniques.LoneWolfBanner.Owner == GetUUID(character) then
 			local level = CharacterGetLevel(character)
@@ -245,15 +246,12 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(character)
 				end
 			end
 		end
+		for id,unique in pairs(Uniques) do
+			if unique.Owner == character then
+				unique:ApplyProgression()
+			end
+		end
 	end
-end)
-
-local levelTest = 1
-Ext.RegisterConsoleCommand("scaletest", function(cmd, levelstr)
-	local level = tonumber(levelstr) or levelTest + 1
-	local newLifeSteal = (math.ceil(((5*(level*.7)) - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
-	printd("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus|LifeSteal", level, newLifeSteal)
-	levelTest = level
 end)
 
 function OnRest(target, source)

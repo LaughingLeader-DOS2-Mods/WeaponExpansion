@@ -5,6 +5,7 @@ local UniqueProgressionEntry = {
 	Value = "",
 	Append = false,
 	MatchStat = "",
+	MatchTemplate = "",
 }
 UniqueProgressionEntry.__index = UniqueProgressionEntry
 
@@ -34,18 +35,24 @@ local UniqueProgressionTransform = {
 	Template = "",
 	Stat = "",
 	MatchStat = "",
+	MatchTemplate = "",
 }
 UniqueProgressionTransform.__index = UniqueProgressionTransform
 
 ---@param template string
 ---@param stat string
 ---@return UniqueProgressionTransform
-function UniqueProgressionTransform:Create(template, stat)
+function UniqueProgressionTransform:Create(template, stat, params)
     local this =
     {
 		Template = template or "",
 		Stat = stat or ""
 	}
+	if params ~= nil and type(params) == "table" then
+		for k,v in pairs(params) do
+			this[k] = v
+		end
+	end
 	setmetatable(this, self)
 	return this
 end
@@ -128,9 +135,9 @@ local bonuses = {
 	},
 	Frostdyne = {
 		[3] = ue:Create("Skills", "Shout_LLWEAPONEX_ActivateRuneblade_Ice;Shout_GlobalCooling", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"}),
-		[5] = ut:Create("6a811339-a28f-44a6-980b-0289cc45cffa", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"}),
-		[9] = ue:Create("Skills", "Shout_LLWEAPONEX_ActivateRuneblade_Ice;Shout_GlobalCooling;Cone_Shatter;Shout_IceBreaker", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"}),
-		[12] = ut:Create("c715d004-5d66-4301-8360-2c6c2e25f678", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"}),
+		[5] = ut:Create("6a811339-a28f-44a6-980b-0289cc45cffa", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2", {MatchTemplate="d82bc239-4782-484c-88ab-e1fa571c9f6a"}),
+		[9] = ue:Create("Skills", "Shout_LLWEAPONEX_ActivateRuneblade_Ice;Shout_GlobalCooling;Cone_Shatter", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"}),
+		[12] = ut:Create("c715d004-5d66-4301-8360-2c6c2e25f678", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"),
 	},
 	HarkenPowerGloves = {},
 	HarkenTattoos = {},

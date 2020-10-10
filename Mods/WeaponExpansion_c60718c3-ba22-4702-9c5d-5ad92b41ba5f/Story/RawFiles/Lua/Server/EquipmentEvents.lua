@@ -162,6 +162,14 @@ function OnItemEquipped(uuid,itemUUID)
 				OnWeaponTypeEquipped(uuid, itemUUID, tag, stat, statType)
 			end
 		end
+
+		if isPlayer == 1 then
+			local unique = AllUniques[itemUUID]
+			if unique ~= nil and not unique:IsReleasedFromOwner() then
+				unique:ReleaseFromOwner()
+				unique.Owner = uuid
+			end
+		end
 	end
 end
 

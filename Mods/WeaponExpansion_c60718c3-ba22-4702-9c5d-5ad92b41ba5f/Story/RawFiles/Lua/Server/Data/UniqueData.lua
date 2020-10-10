@@ -96,7 +96,12 @@ end
 
 ---@return boolean
 function UniqueData:IsReleasedFromOwner()
-	return ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner") == 1
+	if ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner") == 1 then
+		return true
+	elseif self.Owner ~= nil and IsPlayer(self.Owner) then
+		return true
+	end
+	return false
 end
 
 function UniqueData:ReleaseFromOwner(unequip)
@@ -130,14 +135,20 @@ local function MoveToRegionPosition(self, region, item)
 end
 
 function UniqueData:OnItemLeveledUp(owner)
-	self:ApplyProgression(self.ProgressionData, true, Ext.GetItem(self.UUID))
+	self:ApplyProgression(self.ProgressionData)
 end
 
 function UniqueData:Initialize(region, firstLoad)
 	if ObjectExists(self.UUID) == 1 then
 		local item = Ext.GetItem(self.UUID)
+		if self.Owner == nil then
+			local owner = TryGetOwner(item)
+			if owner ~= nil then
+				self.Owner = owner
+			end
+		end
 		if firstLoad == true then
-			self:ApplyProgression(self.ProgressionData, true, item)
+			self:ApplyProgression(self.ProgressionData, nil, item)
 		end
 		if not self:IsReleasedFromOwner() then
 			self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
@@ -156,15 +167,9 @@ function UniqueData:Initialize(region, firstLoad)
 				end
 				self.Initialized = true
 			end
-		else
+		elseif self.Owner == nil then
 			if item.CurrentLevel ~= region then
 				MoveToRegionPosition(self, region, item)
-			end
-		end
-		if self.Owner == nil then
-			local owner = TryGetOwner(item)
-			if owner ~= nil then
-				self.Owner = owner
 			end
 		end
 		printd("Unique initialized:", self.UUID, item.DisplayName, self.Owner)
@@ -262,6 +267,7 @@ local function ApplyProgressionEntry(entry, stat)
 			end
 		end
 	end
+	print(statChanged, entry.Attribute, entry.Value)
 	return statChanged
 end
 
@@ -312,13 +318,26 @@ end
 ---@param template string
 ---@param stat string
 ---@param level integer
-local function TransformItem(self, item, template, stat, level)
+local function TransformItem(self, item, template, stat, level, matchStat, matchTemplate)
+	local currentTemplate = StringHelpers.GetUUID(GetTemplate(item.MyGuid))
+	if currentTemplate == StringHelpers.GetUUID(template) then
+		return true
+	end
+	if not StringHelpers.IsNullOrEmpty(matchTemplate) then
+		if currentTemplate ~= matchTemplate then
+			return false
+		end
+	end
+	if not StringHelpers.IsNullOrEmpty(matchStat) then
+		if item.StatsId ~= matchStat then
+			return false
+		end
+	end
 	local slot = ""
-	local owner = ""
-	if item.InUseByCharacterHandle ~= nil then
-		local character = Ext.GetCharacter(item.InUseByCharacterHandle)
+	local owner = GetInventoryOwner(item.MyGuid)
+	if not StringHelpers.IsNullOrEmpty(owner) ~= nil and ObjectIsCharacter(owner) then
+		local character = Ext.GetCharacter(owner)
 		if character ~= nil then
-			owner = character.MyGuid
 			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
 				if StringHelpers.GetUUID(CharacterGetEquippedItem(character.MyGuid, slotid)) == item.MyGuid then
 					slot = slotid
@@ -326,16 +345,15 @@ local function TransformItem(self, item, template, stat, level)
 				end
 			end
 			if slot ~= "" then
-				CharacterUnequipItem(character.MyGuid, item)
+				CharacterUnequipItem(character.MyGuid, item.MyGuid)
 			end
 		end
 	end
 	local deltamods = item:GetDeltaMods()
-	Transform(item.MyGuid, template, 0, 0, 1)
+	Transform(item.MyGuid, template, 1, 1, 1)
 	if not StringHelpers.IsNullOrEmpty(stat) then
 		item.StatsId = stat
 	end
-	ItemLevelUpTo(item.MyGuid, level)
 
 	for i,v in pairs(deltamods) do
 		if not ItemHasDeltaModifier(item.MyGuid, v) then
@@ -343,12 +361,23 @@ local function TransformItem(self, item, template, stat, level)
 		end
 	end
 
+	ItemLevelUpTo(item.MyGuid, level)
+
 	if slot ~= nil and owner ~= "" then
 		StartOneshotTimer("Timers_LLWEAPONEX_PostTransformEquip", 250, function()
+			print("Timers_LLWEAPONEX_PostTransformEquip", slot, owner)
 			NRD_CharacterEquipItem(owner, item.MyGuid, slot, 0, 0, 1, 1)
 		end)
 	end
 	return true
+end
+
+if Ext.IsDeveloperMode() then
+	function UniqueData:TryTransform(template)
+		local item = Ext.GetItem(self.UUID)
+		local level = CharacterGetLevel(CharacterGetHostCharacter())
+		TransformItem(self, item, template, nil, level)
+	end
 end
 
 local function EvaluateEntry(self, progressionTable, persist, item, level, stat, entry)
@@ -359,7 +388,7 @@ local function EvaluateEntry(self, progressionTable, persist, item, level, stat,
 		end
 	elseif entry.Type == "UniqueProgressionTransform" then
 		if not StringHelpers.IsNullOrEmpty(entry.Template) then
-			if TransformItem(self, item, entry.Template, entry.Stat, level) then
+			if TransformItem(self, item, entry.Template, entry.Stat, level, entry.MatchStat, entry.MatchTemplate) then
 				statChanged = true
 			end
 		end
@@ -373,6 +402,8 @@ local function EvaluateEntry(self, progressionTable, persist, item, level, stat,
 	return statChanged
 end
 
+---@param self UniqueData
+---@param item EsvItem
 local function TryApplyProgression(self, progressionTable, persist, item, level)
 	local statChanged = false
 	if progressionTable ~= nil then
@@ -391,25 +422,35 @@ local function TryApplyProgression(self, progressionTable, persist, item, level)
 			end
 			Ext.SyncStat(item.StatsId, persist)
 		end
+		item.Stats.ShouldSyncStats = true
 	end
+	return statChanged
 end
 
 ---@param progressionTable table<integer,UniqueProgressionEntry|UniqueProgressionEntry[]>
 ---@param persist boolean
 ---@param item EsvItem
 function UniqueData:ApplyProgression(progressionTable, persist, item)
+	progressionTable = progressionTable or self.ProgressionData
+	if item == nil then
+		item = Ext.GetItem(self.UUID)
+		if item == nil then
+			Ext.PrintError("[WeaponExpansion] Failed to get item object for,", self.UUID)
+			return
+		end
+	end
 	-- TODO - Testing. Making sure bonuses don't overlap if they're set to append when you save/load/change level/level up etc.
 	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
 	-- enries aren't nerfing things.
 	if Ext.IsDeveloperMode() then
-		if item == nil then
-			item = Ext.GetItem(self.UUID)
-			if item == nil then
-				Ext.PrintError("[WeaponExpansion] Failed to get item object for,", self.UUID)
-				return
+		local level = item.Stats.Level
+		if item:HasTag("LeaderLib_AutoLevel") and self.Owner ~= nil then
+			if ObjectIsCharacter(self.Owner) == 1 then
+				level = CharacterGetLevel(self.Owner)
+				ItemLevelUpTo(item.MyGuid, level)
+				print(self.UUID, level)
 			end
 		end
-		local level = item.Stats.Level
 		local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
 		if not b then
 			Ext.Print(self.UUID, err)
