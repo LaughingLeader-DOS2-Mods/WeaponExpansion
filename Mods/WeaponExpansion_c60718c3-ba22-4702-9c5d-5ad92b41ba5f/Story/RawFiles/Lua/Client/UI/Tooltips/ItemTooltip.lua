@@ -97,22 +97,22 @@ local TwoHandedText = ts:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Ha
 
 ---@type WeaponTypeNameEntry[]
 local WeaponTypeNames = {
-	{Tag="LLWEAPONEX_RunicCannon", Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry")},
-	{Tag="LLWEAPONEX_Banner", Text=ts:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
-	{Tag="LLWEAPONEX_BattleBook", Text=ts:Create("he053a3abge5d8g4d14g9333ga18d6eba3df1", "Battle Book")},
-	{Tag="LLWEAPONEX_Blunderbuss", Text=ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss")},
-	{Tag="LLWEAPONEX_DualShields", Text=ts:Create("h00157a58g9ae0g4119gba1ag3f1e9f11db14", "Dual Shields")},
-	{Tag="LLWEAPONEX_Firearm", Text=ts:Create("h8d02e345ged4ag4d60g9be9g68a46dda623b", "Firearm")},
-	{Tag="LLWEAPONEX_Greatbow", Text=ts:Create("h52a81f92g3549g4cb4g9b18g066ba15399c0", "Greatbow")},
-	{Tag="LLWEAPONEX_Katana", Text=ts:Create("he467f39fg8b65g4136g828fg949f9f3aef15", "Katana"), TwoHandedText=ts:Create("hd1f993bag9dadg49cbga5edgb92880c38e46", "Odachi")},
-	{Tag="LLWEAPONEX_Quarterstaff", Text=ts:Create("h8d11d8efg0bb8g4130g9393geb30841eaea5", "Quarterstaff")},
-	{Tag="LLWEAPONEX_Polearm", Text=ts:Create("hd61320b6ge4e6g4f51g8841g132159d6b282", "Polearm")},
-	{Tag="LLWEAPONEX_Rapier", Text=ts:Create("h84b2d805gff5ag44a5g9f81g416aaf5abf18", "Rapier")},
-	{Tag="LLWEAPONEX_Runeblade", Text=ts:Create("hb66213fdg1a98g4127ga55fg429f9cde9c6a", "Runeblade")},
-	{Tag="LLWEAPONEX_Scythe", Text=ts:Create("h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa", "Scythe")},
-	{Tag="LLWEAPONEX_Unarmed", Text=LLWEAPONEX_Unarmed},
-	{Tag="LLWEAPONEX_Rod", Text=ts:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
-	--{Tag="LLWEAPONEX_Bludgeon", Text=ts:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
+	--LLWEAPONEX_Bludgeon = {Text=ts:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
+	LLWEAPONEX_RunicCannon = {Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry")},
+	LLWEAPONEX_Banner = {Text=ts:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
+	LLWEAPONEX_BattleBook = {Text=ts:Create("he053a3abge5d8g4d14g9333ga18d6eba3df1", "Battle Book")},
+	LLWEAPONEX_Blunderbuss = {Text=ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss")},
+	LLWEAPONEX_DualShields = {Text=ts:Create("h00157a58g9ae0g4119gba1ag3f1e9f11db14", "Dual Shields")},
+	LLWEAPONEX_Firearm = {Text=ts:Create("h8d02e345ged4ag4d60g9be9g68a46dda623b", "Firearm")},
+	LLWEAPONEX_Greatbow = {Text=ts:Create("h52a81f92g3549g4cb4g9b18g066ba15399c0", "Greatbow")},
+	LLWEAPONEX_Katana = {Text=ts:Create("he467f39fg8b65g4136g828fg949f9f3aef15", "Katana"), TwoHanded=ts:Create("hd1f993bag9dadg49cbga5edgb92880c38e46", "Odachi")},
+	LLWEAPONEX_Quarterstaff = {Text=ts:Create("h8d11d8efg0bb8g4130g9393geb30841eaea5", "Quarterstaff")},
+	LLWEAPONEX_Polearm = {Text=ts:Create("hd61320b6ge4e6g4f51g8841g132159d6b282", "Polearm")},
+	LLWEAPONEX_Rapier = {Text=ts:Create("h84b2d805gff5ag44a5g9f81g416aaf5abf18", "Rapier")},
+	LLWEAPONEX_Runeblade = {Text=ts:Create("hb66213fdg1a98g4127ga55fg429f9cde9c6a", "Runeblade")},
+	LLWEAPONEX_Scythe = {Text=ts:Create("h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa", "Scythe")},
+	LLWEAPONEX_Unarmed = LLWEAPONEX_Unarmed,
+	LLWEAPONEX_Rod = {Text=ts:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
 }
 
 ---@class StatProperty
@@ -289,23 +289,50 @@ local function OnItemTooltip(item, tooltip)
 			CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
 		end
 
-		if not fakeDamageCreated then
-			for i,entry in pairs(WeaponTypeNames) do
-				if item:HasTag(entry.Tag) then
-					local armorSlotType = tooltip:GetElement("ArmorSlotType")
-					if armorSlotType == nil then
-						armorSlotType = {
-							Type = "ArmorSlotType",
-							Label = ""
-						}
+		local enabledMasteriesText = ""
+		local totalMasteries = 0
+		for tag,entry in pairs(Masteries) do
+			if item:HasTag(tag) then
+				totalMasteries = totalMasteries + 1
+				local renameWeaponType = WeaponTypeNames[tag]
+				if renameWeaponType ~= nil then
+					if not fakeDamageCreated then
+						local armorSlotType = tooltip:GetElement("ArmorSlotType")
+						if armorSlotType == nil then
+							armorSlotType = {
+								Type = "ArmorSlotType",
+								Label = ""
+							}
+						end
+						if entry.TwoHanded ~= nil and item.Stats.IsTwoHanded and not Game.Math.IsRangedWeapon(item.Stats) then
+							armorSlotType.Label = TwoHandedText.Value .. " " .. renameWeaponType.TwoHandedText.Value
+						else
+							armorSlotType.Label = renameWeaponType.Text.Value
+						end
 					end
-					if entry.TwoHanded ~= nil and item.Stats.IsTwoHanded and not Game.Math.IsRangedWeapon(item.Stats) then
-						armorSlotType.Label = TwoHandedText.Value .. " " .. entry.TwoHandedText.Value
-					else
-						armorSlotType.Label = entry.Text.Value
-					end
-					break
 				end
+				local masteryName = GameHelpers.GetStringKeyText(tag)
+				if enabledMasteriesText ~= "" then
+					enabledMasteriesText = enabledMasteriesText .. ", "
+				end
+				enabledMasteriesText = enabledMasteriesText .. masteryName
+			end
+		end
+		if enabledMasteriesText ~= "" then
+			local element = tooltip:GetElement("ItemDescription")
+			if element == nil then
+				element = {Type="ItemDescription", Label=""}
+				tooltip:AppendElement(element)
+			end
+			if element.Label ~= "" then
+				element.Label = element.Label .. "<br>"
+			end
+			if totalMasteries > 1 then
+				local masteryText = string.format("<font color='#FFAA00'>Enables Masteries: %s</font>", enabledMasteriesText)
+				element.Label = element.Label .. masteryText
+			else
+				local masteryText = string.format("<font color='#FFAA00'>Enables Mastery: %s</font>", enabledMasteriesText)
+				element.Label = element.Label .. masteryText
 			end
 		end
 
