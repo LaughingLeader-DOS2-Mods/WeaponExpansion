@@ -668,6 +668,7 @@
 	<content contentuid="h48db07bag5564g4e40g9de9gac7ffef1ffa6">Sniper&apos;s Vow</content>
 	<content contentuid="h490c0a9dg5d8ag4675g9a3fgaf20283ef584">Breach Charge</content>
 	<content contentuid="h49452fe7gd1e1g4740ga206gec725a6f6727">Polished Rifle</content>
+	<content contentuid="h49592eb6g382bg4504gb2dfgc19cb1d703d9">Shoot [2] flaming daggers at targets of your choice, each creating a fire surface and dealing [1]. Can backstab.</content>
 	<content contentuid="h49625e23gdd8fg4e7dgb02eg691bfeb4387f">Dud?</content>
 	<content contentuid="h497b84f3g0d77g45acg929cg7d1fd008b839">&lt;font color=&apos;#80FFC3&apos;&gt;A pouch that contains an assortment of special tokens, used to modify unique equipment.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff6600&apos;&gt;Limit 1 bag per party.&lt;/font&gt;</content>
 	<content contentuid="h497e6434gbaaeg4ef9g8441g90e33058ca6c">Novice</content>
@@ -1198,6 +1199,7 @@
 	<content contentuid="h7fbbfee8geee0g4fdcgad0dgbfe83a26124e">Soul Harvest II</content>
 	<content contentuid="h7fe83c57g2951g45a3gb9d0g0b6cb9631808">An greatbow arrow infused with the fury of the air. If you listen closely you can hear it whistle and seethe with anticipation.</content>
 	<content contentuid="h801f36abg7da8g485ega1fcg4bf3416cdcc7">Gas Cooldown</content>
+	<content contentuid="h803a2376g5729g4d56g8c47gd7156ee5d348">&lt;font color=&apos;#F19824&apos;&gt;Eat hit deals [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet] in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet:ExplodeRadius]m radius around the target.&lt;/font&gt;</content>
 	<content contentuid="h80a3a179g7b15g4f01gb3f6g2d2041d3395a">&lt;font color=&apos;#4197e2&apos;&gt;Freezing Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h80ad64beg129dg4b44g86f2g00c666b6cd46">Master Pugilist</content>
 	<content contentuid="h80bc4296gf38eg4017gb2efgdf2199838599">&lt;font color=&apos;#F80F0F&apos; size=&apos;28&apos;&gt;Sabotaged!&lt;/font&gt;</content>
@@ -1367,6 +1369,7 @@
 	<content contentuid="h9234fbabgf1cdg4d9dgae64g81c7b5576da8">Detonate remote charges in a [1] radius.&lt;br&gt;&lt;font color=&apos;#188EDE&apos;&gt;Can target mines in the world, or an object holding mines.&lt;/font&gt;</content>
 	<content contentuid="h924c15e9gb9c8g441fg9397g9d870f86dd9b">Makeshift Chaotic Rod</content>
 	<content contentuid="h926a3433gfd61g4d2dg9e82g338902b1340e">Monk&apos;s Quarterstaff</content>
+	<content contentuid="h928de244g9b5ag4f41g88fag001abd3317b0">&lt;font color=&apos;#FF6600&apos;&gt;Searing Runic Daggers&lt;/font&gt;</content>
 	<content contentuid="h92ae06feg133fg4bc9g8e07gcafd7778207f">&lt;font color=&apos;#00FF7F&apos;&gt;Greatbow Mastery I&lt;/font&gt;</content>
 	<content contentuid="h92dad7ecg6151g443bgac50g8826a2c37ee8">Bloodstorm Rune</content>
 	<content contentuid="h92f3f702g85deg485fgb8e2ge304af280768">Banner of the Pack</content>
@@ -2053,7 +2056,7 @@
 	<content contentuid="he0a3a1bfge498g4c0cg8814g67773243d59c">&lt;font color=&apos;#40b606&apos;&gt;Corrosive Great Arrow&lt;/font&gt;</content>
 	<content contentuid="he0cceb33g75ddg44a5g94b4geda5fd12c886">&lt;font color=&apos;#EBC808&apos;&gt;[1] unlocked [2] Mastery Rank [3].&lt;/font&gt;</content>
 	<content contentuid="he0dca1f1g445fg40ecg9a7ag3b09c7cf1429">Shrapnel Charge</content>
-	<content contentuid="he0f60351g01b2g4824ga28aga1064daae544">&lt;icon id=&apos;Projectile_Ricochet&apos; icon=&apos;Skill_Ranger_Ricochet&apos;/&gt;Each ricochet bounce deals splash damage in a 2m radius.</content>
+	<content contentuid="he0f60351g01b2g4824ga28aga1064daae544">&lt;icon id=&apos;Projectile_Ricochet&apos; icon=&apos;Skill_Ranger_Ricochet&apos;/&gt;Each ricochet bounce deals splash damage in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet:ExplodeRadius]m radius.</content>
 	<content contentuid="he1154cb0g4127g43c1gb287gee2314567d43">Unholy Razor</content>
 	<content contentuid="he1253aecg8871g4e7dgb1f8gd19d7dabb9e9">Elemental Bullets</content>
 	<content contentuid="he14a313dg2a94g4084g9d10g3cc18ca4974b">Rank 5</content>
