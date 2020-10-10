@@ -4,7 +4,6 @@ type "StatusData"
 data "StatusType" "EFFECT"
 using "_LLWEAPONEX_HIDDEN_EFFECT_BASE"
 
-
 new entry "LLWEAPONEX_MURAMASA_CURSE"
 type "StatusData"
 data "StatusType" "DAMAGE"
