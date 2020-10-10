@@ -1,4 +1,4 @@
-Mastery	Rank	Skill/Status/Name	Bonus	Implemented	Tested	❌
+Mastery	Rank	Skill/Status/Name	Bonus	Implemented	Tested
 Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√	❌
 Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	√	❌
 Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by Warfare.	√	❌
@@ -45,7 +45,7 @@ Firearm	1	Tactical Retreat	Your next action's AP cost is reduced by 1.	√	❌
 Firearm	2	Placeholder	Placeholder	❌	❌
 Firearm	3	Placeholder	Placeholder	❌	❌
 Firearm	4	Placeholder	Placeholder	❌	❌
-Greatbow	1	Ricochet	Each ricochet bounce deals splash damage in a 2m radius.	❌	❌
+Greatbow	1	Ricochet	Each ricochet bounce deals splash damage in a 2m radius.	√	√
 Greatbow	2	Placeholder	Placeholder	❌	❌
 Greatbow	3	Placeholder	Placeholder	❌	❌
 Greatbow	4	Placeholder	Placeholder	❌	❌
