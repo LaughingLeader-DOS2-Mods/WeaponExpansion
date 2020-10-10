@@ -11,13 +11,16 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 	end
 end)
 
+local firstLoad = true
+
 LeaderLib.RegisterListener("Initialized", function(region)
 	region = region or SharedData.RegionData.Current
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then
 			for id,unique in pairs (Uniques) do
-				unique:Initialize(region)
+				unique:Initialize(region, firstLoad)
 			end
+			firstLoad = false
 		end
 		if IsCharacterCreationLevel(region) == 1 then
 			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
@@ -231,17 +234,18 @@ local LoneWolfBannerLifeStealScale = {
 }
 
 Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(character)
-	if IsPlayer(character) and Uniques.LoneWolfBanner.Owner == GetUUID(character) then
-		local level = CharacterGetLevel(character)
-		if level > 1 then
-			local stat = Ext.GetStat("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus")
-			if stat ~= nil then
-				local newLifeSteal = (math.ceil((5 - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
-				printd("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus", level, newLifeSteal)
+	if IsPlayer(character) then
+		if Uniques.LoneWolfBanner.Owner == GetUUID(character) then
+			local level = CharacterGetLevel(character)
+			if level > 1 then
+				local stat = Ext.GetStat("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus")
+				if stat ~= nil then
+					local newLifeSteal = (math.ceil((5 - 1) / 100.0 * (Ext.ExtraData.AttributeLevelGrowth + Ext.ExtraData.AttributeBoostGrowth) * level) * Ext.ExtraData.AttributeGrowthDamp) + 5
+					printd("Stats_LLWEAPONEX_Banner_Rally_Dwarves_AuraBonus", level, newLifeSteal)
+				end
 			end
 		end
 	end
-	
 end)
 
 local levelTest = 1
