@@ -39,15 +39,19 @@ NRD_ModCall("WeaponExpansion", "HookIntoTradeWindow", (STRING)_Player);
 //REGION RESPEC
 PROC
 PROC_HandleMagicMirrorResult((CHARACTERGUID)_Player, 1) // Added
+AND
+GetUUID(_Player, _UUID)
 THEN
-NRD_ModCall("LeaderLib", "BroadcastToClient", "LLWEAPONEX_OnCharacterCreationStarted", (STRING)_Player);
+NRD_ModCall("LeaderLib", "BroadcastToClient", "LLWEAPONEX_OnCharacterCreationStarted", _UUID);
 
 IF
 CharacterCreationFinished(_Player)
 AND
 _Player != NULL_00000000-0000-0000-0000-000000000000
+AND
+GetUUID(_Player, _UUID)
 THEN
-NRD_ModCall("LeaderLib", "BroadcastToClient", "LLWEAPONEX_OnCharacterCreationFinished", (STRING)_Player);
+NRD_ModCall("LeaderLib", "BroadcastToClient", "LLWEAPONEX_OnCharacterCreationFinished", _UUID);
 //END_REGION
 
 EXITSECTION

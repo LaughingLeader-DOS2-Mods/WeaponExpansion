@@ -24,9 +24,11 @@ function Origins_InitCharacters(region, isEditorMode)
 
 	--IsCharacterCreationLevel(region) == 0
 	if CharacterIsPlayer(Origin.Harken) == 0 and ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		--CharacterApplyPreset(Origin.Harken, "LLWEAPONEX_Harken")
 		CharacterAddAbility(Origin.Harken, "WarriorLore", 1)
 		CharacterAddAbility(Origin.Harken, "TwoHanded", 1)
 		CharacterAddAbility(Origin.Harken, "Barter", 1)
+		CharacterAddAttribute(Origin.Harken, "Strength", 3)
 		CharacterAddTalent(Origin.Harken, "Opportunist")
 		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
@@ -41,9 +43,12 @@ function Origins_InitCharacters(region, isEditorMode)
 	end
 	
 	if CharacterIsPlayer(Origin.Korvash) == 0 and ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		--CharacterApplyPreset(Origin.Korvash, "LLWEAPONEX_Korvash")
 		CharacterAddAbility(Origin.Korvash, "WarriorLore", 1)
 		CharacterAddAbility(Origin.Korvash, "Necromancy", 1)
 		CharacterAddAbility(Origin.Korvash, "Telekinesis", 1)
+		CharacterAddAttribute(Origin.Korvash, "Strength", 2)
+		CharacterAddAttribute(Origin.Korvash, "Wits", 1)
 		CharacterAddTalent(Origin.Korvash, "Executioner")
 		LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
@@ -74,6 +79,13 @@ function Origins_InitCharacters(region, isEditorMode)
 				totalAdded = totalAdded + 1
 			end
 			CharacterAssignToUser(user, Origin.Harken)
+			local pdata = Ext.GetCharacter(Origin.Harken).PlayerCustomData
+			if pdata ~= nil then
+				pdata.OriginName = "LLWEAPONEX_Harken"
+				pdata.Race = "Dwarf"
+				pdata.IsMale = true
+			end
+			
 			if CharacterIsInPartyWith(host, Origin.Korvash) == 0 then
 				Osi.PROC_GLO_PartyMembers_Add(Origin.Korvash, host)
 				CharacterAssignToUser(user, Origin.Korvash)
@@ -82,6 +94,12 @@ function Origins_InitCharacters(region, isEditorMode)
 				totalAdded = totalAdded + 1
 			end
 			CharacterAssignToUser(user, Origin.Korvash)
+			pdata = Ext.GetCharacter(Origin.Korvash).PlayerCustomData
+			if pdata ~= nil then
+				pdata.OriginName = "LLWEAPONEX_Korvash"
+				pdata.Race = "Lizard"
+				pdata.IsMale = true
+			end
 			local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
 			if frozenCount ~= nil and #frozenCount > 0 then
 				local count = frozenCount[1][2]
@@ -190,6 +208,10 @@ function CC_CheckKorvashColor(uuid)
 		end
 	end
 end
+
+Ext.RegisterNetListener("LLWEAPONEX_CC_CheckKorvashColor", function(cmd, uuid)
+	CC_CheckKorvashColor(uuid)
+end)
 
 local hiddenStoryButtons = {}
 
