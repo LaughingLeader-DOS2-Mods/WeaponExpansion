@@ -321,25 +321,29 @@ Ext.RegisterConsoleCommand("llweaponex_darkfireballtest", function(call, amount)
 	GameHelpers.Data.SyncSharedData(nil,nil,true)
 end)
 
-function Harken_SwapTattoos(char)
-	local character = Ext.GetCharacter(char)
-	--Mods.WeaponExpansion.SwapUnique(Mods.WeaponExpansion.Origin.Harken, "HarkenTattoos")
-	if HasActiveStatus(char, "UNSHEATHED") == 1 then
-		if StringHelpers.GetUUID(char) == Origin.Harken then
-			if Ext.GameVersion() ~= "v3.6.51.9303" then -- Old editor version
-				CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
-			end
-		end
-	else
-		if StringHelpers.GetUUID(char) == Origin.Harken then
-			if Ext.GameVersion() ~= "v3.6.51.9303" then
-				CharacterSetVisualElement(char, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+local function HasHarkenVisualSet(uuid)
+	local character = Ext.GetCharacter(uuid)
+	return character ~= nil and character.RootTemplate ~= nil and character.RootTemplate.VisualTemplate == "b8ddbc75-415f-4894-afc2-2256e11b723d"
+end
+
+function Harken_SwapTattoos(uuid)
+	-- CharacterSetVisualElement doesn't work in the editor
+	if Ext.GameVersion() ~= "v3.6.51.9303" then
+		local character = Ext.GetCharacter(uuid)
+		if character ~= nil and character.RootTemplate ~= nil 
+		and character.RootTemplate.VisualTemplate == "b8ddbc75-415f-4894-afc2-2256e11b723d"
+		then
+			if HasActiveStatus(uuid, "UNSHEATHED") == 1 then
+				CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+			else
+				CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
 			end
 		end
 	end
 end
 
 function Harken_SetTattoosActive(uuid)
+	local canSetVisualElement = CharacterSetVisualElement ~= nil and HasHarkenVisualSet(uuid)
 	local needsSync = false
 	local stat = Ext.GetStat("LLWEAPONEX_TATTOOS_STRENGTH")
 	if CharacterIsInCombat(uuid) == 1 and StringHelpers.IsNullOrEmpty(CharacterGetEquippedItem(uuid, "Breast")) then
@@ -349,7 +353,9 @@ function Harken_SetTattoosActive(uuid)
 			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description"
 			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_Magic_A"
 		end
-		CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+		if canSetVisualElement then
+			CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
+		end
 	else
 		if stat.StatsId ~= "Stats_LLWEAPONEX_Tattoos_Strength" then
 			needsSync = true
@@ -357,7 +363,9 @@ function Harken_SetTattoosActive(uuid)
 			stat.Description = "LLWEAPONEX_TATTOOS_STRENGTH_Description"
 			stat.Icon = "LLWEAPONEX_Items_Armor_Unique_Tattoos_A"
 		end
-		CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+		if canSetVisualElement then
+			CharacterSetVisualElement(uuid, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Normal_A")
+		end
 	end
 	if needsSync then
 		Ext.SyncStat("Stats_LLWEAPONEX_Tattoos_Strength", true)
