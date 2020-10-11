@@ -6,6 +6,7 @@ local ts = LeaderLib.Classes.TranslatedString
 local TagDisplay = {
 	LLWEAPONEX_ThiefGloves_Equipped = true,
 	LLWEAPONEX_Blunderbuss_Equipped = true,
+	LLWEAPONEX_MagicMissileWand_Equipped = true
 }
 
 ---@type tooltip TooltipData

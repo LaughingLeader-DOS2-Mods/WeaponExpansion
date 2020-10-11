@@ -116,7 +116,7 @@ Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
 		and projectile.RootTemplate.PathShift == 0.5
 	then
 		local attacker = Ext.GetCharacter(projectile.SourceHandle)
-		if attacker ~= nil and attacker:GetStatus("LLWEAPONEX_WAND_MAGIC_MISSILE") ~= nil then
+		if attacker ~= nil and attacker:HasTag("LLWEAPONEX_MagicMissileWand_Equipped") then
 			MagicMissileWeapon_RollForBonusMissiles(attacker.MyGuid, position, hitObject)
 		end
 	end
