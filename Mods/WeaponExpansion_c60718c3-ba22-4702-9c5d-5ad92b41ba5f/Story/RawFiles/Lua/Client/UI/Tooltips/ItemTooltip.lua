@@ -116,6 +116,7 @@ local WeaponTypeNames = {
 	LLWEAPONEX_Unarmed = LLWEAPONEX_Unarmed,
 	LLWEAPONEX_Rod = {Text=ts:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
 }
+--WeaponTypeNames.LLWEAPONEX_CombatShield = WeaponTypeNames.LLWEAPONEX_DualShields
 
 ---@class StatProperty
 ---@field Type string Status|Action
@@ -313,11 +314,13 @@ local function OnItemTooltip(item, tooltip)
 						end
 					end
 				end
-				local masteryName = GameHelpers.GetStringKeyText(tag)
-				if enabledMasteriesText ~= "" then
-					enabledMasteriesText = enabledMasteriesText .. ", "
+				local masteryName = GameHelpers.GetStringKeyText(tag, "")
+				if masteryName ~= "" then
+					if enabledMasteriesText ~= "" then
+						enabledMasteriesText = enabledMasteriesText .. ", "
+					end
+					enabledMasteriesText = enabledMasteriesText .. masteryName
 				end
-				enabledMasteriesText = enabledMasteriesText .. masteryName
 			end
 		end
 		if enabledMasteriesText ~= "" then

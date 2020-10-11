@@ -71,7 +71,7 @@ local function OnPrepareHit(target,source,damage,handle)
 				local blocker = coverData.Blocker
 				if blocker ~= nil 
 				and CharacterIsDead(blocker) == 0
-				and (CharacterIsEnemy(blocker, source) == 1 or Ext.IsDeveloperMode())
+				and CharacterIsEnemy(blocker, source) == 1
 				and CharacterCanSee(blocker, source) == 1
 				and NRD_HitGetInt(handle, "HitType") <= 3 then -- Everything but Surface,DoT,Reflected
 					damage = 0
