@@ -59,7 +59,6 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_11_Blunderbuss",
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_HunkerDown", "LLWEAPONEX_DualShields_HunkeringDown", 1);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_ShieldCover", "LLWEAPONEX_DualShields_Cover_Active", 0);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_ShieldCover_CounterAttack", "LLWEAPONEX_DualShields_CanCounterAttack", 0);
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_12_UnrelentingRage", "LLWEAPONEX_UnrelentingRage_Active", 0);
 

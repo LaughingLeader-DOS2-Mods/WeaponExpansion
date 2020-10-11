@@ -1,18 +1,27 @@
+Ext.Require("Shared/_InitShared.lua")
+
 RegisterProtectedOsirisListener = Mods.LeaderLib.RegisterProtectedOsirisListener
 StartOneshotTimer = Mods.LeaderLib.StartOneshotTimer
 
 ---@class WeaponExpansionVars
-PersistentVars = {
+local defaultPersistentVars = {
     SkillData = {
         DarkFireballCount = {},
         RunicCannonCharges = {},
-        GnakSpells = {}
+        GnakSpells = {},
+        ShieldCover = {
+            Blocking = {},
+            BlockedHit = {},
+        }
     },
     MasteryMechanics = {},
     Timers = {},
     OnDeath = {},
     UniqueDataIDSwap = {},
 }
+---@type WeaponExpansionVars
+PersistentVars = defaultPersistentVars
+
 LoadPersistentVars = {}
 BonusSkills = {}
 Listeners = {
@@ -20,7 +29,25 @@ Listeners = {
     StatusAttempt = {},
 }
 
-Ext.Require("Shared/_InitShared.lua")
+local firstLoad = true
+
+LeaderLib.RegisterListener("Initialized", function(region)
+    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
+    print(Ext.JsonStringify(PersistentVars))
+	region = region or SharedData.RegionData.Current
+	if region ~= nil then
+		if IsGameLevel(region) == 1 then
+			for id,unique in pairs (Uniques) do
+				unique:Initialize(region, firstLoad)
+			end
+			firstLoad = false
+		end
+		if IsCharacterCreationLevel(region) == 1 then
+			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
+		end
+	end
+end)
+
 Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/HitHandler.lua")
 Ext.Require("Server/StatusHandler.lua")

@@ -64,17 +64,45 @@ local function OnPrepareHit(target,source,damage,handle)
 		if UnarmedHelpers.HasUnarmedWeaponStats(attacker.Stats) then
 			UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle)
 		end
+
+		if damage > 0 and GameHelpers.HitSucceeded(target, handle, true) then
+			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
+			if coverData ~= nil and coverData.CanCounterAttack == true then
+				local blocker = coverData.Blocker
+				if blocker ~= nil 
+				and CharacterIsDead(blocker) == 0
+				and (CharacterIsEnemy(blocker, source) == 1 or Ext.IsDeveloperMode())
+				and CharacterCanSee(blocker, source) == 1
+				and NRD_HitGetInt(handle, "HitType") <= 3 then -- Everything but Surface,DoT,Reflected
+					damage = 0
+					NRD_HitClearAllDamage(handle)
+					NRD_HitSetInt(handle,"SimulateHit",0)
+					NRD_HitSetInt(handle,"Dodged",0)
+					NRD_HitSetInt(handle,"Missed",0)
+					NRD_HitSetInt(handle,"Blocked",1)
+					NRD_HitSetInt(handle,"Hit",0)
+					NRD_HitSetInt(handle,"DontCreateBloodSurface",1)
+					PersistentVars.SkillData.ShieldCover.BlockedHit[target] = {
+						Blocker = blocker,
+						Attacker = source
+					}
+					coverData.CanCounterAttack = false
+				end
+			end
+		end
 	end
 
-	if ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 then
+	if damage > 0 and ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 then
 		local hitType = NRD_HitGetString(handle, "HitType")
 		if hitType == "Surface" and GameHelpers.HitSucceeded(target, handle, 1) then
 			NRD_HitSetInt(handle, "Blocked", 1)
 			NRD_HitClearAllDamage(handle)
-			Osi.LeaderLib_Timers_StartObjectTimer(GetUUID(target), 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
+			damage = 0
+			Osi.LeaderLib_Timers_StartObjectTimer(StringHelpers.GetUUID(target), 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
 		end
 	end
-	if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 then
+
+	if damage > 0 and HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 then
 		local hitType = NRD_HitGetInt(handle, "HitType")
 		if hitType < 4 then
 			local alreadyBlocked = NRD_HitGetInt(handle, "Blocked")
@@ -107,6 +135,14 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 		printd(string.format("[LLWEAPONEX:OnHit] skill(%s) target(%s) source(%s)", NRD_StatusGetString(target, handle, "SkillId"), target, source))
 	end
 	if not StringHelpers.IsNullOrEmpty(source) then
+		local blockedHit = PersistentVars.SkillData.ShieldCover.BlockedHit[target]
+		if blockedHit ~= nil then
+			NRD_StatusSetInt(target,handle,"AllowInterruptAction",0)
+			NRD_StatusSetInt(target,handle,"ForceInterrupt",0)
+			NRD_StatusSetInt(target,handle,"Interruption",0)
+			DualShields_Cover_OnCounter(target, blockedHit.Blocker, blockedHit.Attacker)
+			PersistentVars.SkillData.ShieldCover.BlockedHit[target] = nil
+		end
 		local hitSucceeded = GameHelpers.HitSucceeded(target, handle, false)
 		local skill = string.gsub(NRD_StatusGetString(target, handle, "SkillId") or "", "_%-?%d+$", "")
 		if skill == "Zone_LLWEAPONEX_ArmCannon_Disperse" or skill == "Projectile_LLWEAPONEX_ArmCannon_Shoot" or skill == "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion" then
@@ -116,8 +152,11 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 			hitSucceeded = true
 		end
 		if hitSucceeded and not StringHelpers.IsNullOrEmpty(target) then
+			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
+			if coverData ~= nil then
+				DualShields_Cover_RedirectDamage(target, coverData.Blocker, source, handle)
+			end
 			if skill == "" and GameHelpers.HitWithWeapon(target, handle, false, false) then
-				
 				local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
 				local mainhand = CharacterGetEquippedItem(source, "Weapon")
 				local offhand = CharacterGetEquippedItem(source, "Shield")

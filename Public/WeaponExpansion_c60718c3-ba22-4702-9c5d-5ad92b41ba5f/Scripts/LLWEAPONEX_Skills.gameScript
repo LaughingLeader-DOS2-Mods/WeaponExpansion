@@ -133,39 +133,6 @@ ENDIF
 	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Rapier_FlickerStrike_FrenzyBonus, _Level, _Source)
 	CharacterApplyStatus(_Target, LLWEAPONEX_RAPIER_FLICKER_HIT_PROC, 0, 0, _Source)
 
-EVENT LLWEAPONEX_DualShields_ShieldCover_CounterAttack
-VARS
-	CHARACTER:_Blocker
-	CHARACTER:_Attacker
-	CHARACTER:_BlockingTarget
-	FLOAT3:_Direction
-	FLOAT:_Dist
-	FLOAT3:_TeleportSpot
-	FLOAT3:_ValidPos
-ON
-	OnCharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_Teleport")
-ACTIONS
-IF "c1&!c2"
-	GetVar(_BlockingTarget, _Blocker, "LLWEAPONEX_ShieldCover_Covering")
-	IsEqual(_BlockingTarget, null)
-THEN
-	GetDirection(_Attacker, _BlockingTarget, _Direction, _Dist)
-ELSE
-	GetForwardDirection(_Attacker, _Direction)
-ENDIF
-	GetPosition(_Attacker, _TeleportSpot)
-	Add(_TeleportSpot, _Direction)
-	Multiply(_TeleportSpot, 1.5)
-	IF "c1&c2"
-		FindPosition(_ValidPos,_Blocker,1,0,0,12.0,0,_Blocker,-1,-1,-1,-1,null,0,_TeleportSpot)
-		FindValidPosition(_ValidPos, 12, _Blocker)
-	THEN
-		SetVar(_Blocker, "LLWEAPONEX_ShieldCover_TeleportPos", _ValidPos)
-		CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill")
-	ELSE
-		CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill_NoPositionFound")
-	ENDIF
-
 EVENT LLWEAPONEX_ForceLaunch_Start
 VARS
 	CHARACTER:_Target

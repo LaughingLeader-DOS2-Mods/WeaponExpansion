@@ -11,23 +11,6 @@ Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMod
 	end
 end)
 
-local firstLoad = true
-
-LeaderLib.RegisterListener("Initialized", function(region)
-	region = region or SharedData.RegionData.Current
-	if region ~= nil then
-		if IsGameLevel(region) == 1 then
-			for id,unique in pairs (Uniques) do
-				unique:Initialize(region, firstLoad)
-			end
-			firstLoad = false
-		end
-		if IsCharacterCreationLevel(region) == 1 then
-			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
-		end
-	end
-end)
-
 Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
 	if IsCharacterCreationLevel(region) == 1 then
 		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationFinished", "", nil)

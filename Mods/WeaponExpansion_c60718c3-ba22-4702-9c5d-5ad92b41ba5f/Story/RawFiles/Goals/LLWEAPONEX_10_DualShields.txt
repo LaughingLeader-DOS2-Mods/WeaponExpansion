@@ -550,119 +550,18 @@ ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet",
 
 //REGION SHIELD_COVER
 IF
-TextEventSet("llweap_covertest")
-AND
-CharacterGetHostCharacter(_Host)
-THEN
-//DB_LLWEAPONEX_DualShields_Temp_Covering(_Host, (CHARACTERGUID)CHARACTERGUID_Creatures_Troll_A_000_6a9cc5d0-827c-4d21-89a0-6c89e93e318d);
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Host, (CHARACTERGUID)CHARACTERGUID_S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b);
-LeaderLib_ToggleScripts_EnableScriptForObject(_Host, "LLWEAPONEX_DualShields_Cover_Active", "WeaponExpansion");
-
-IF
 CharacterStatusRemoved(_Char, "LLWEAPONEX_COVERED", _)
 AND
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
+GetUUID(_Char, _UUID)
 THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char);
-NOT DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Char);
-LLWEAPONEX_DualShields_OnCoveredRemoved(_Blocker, _Char);
+NRD_ModCall("WeaponExpansion", "DualShields_Cover_OnRemoved", _UUID);
 
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_COVERED", (CHARACTERGUID)_Blocker)
+AND GetUUID(_Char, _UUID)
+AND GetUUID(_Blocker, _BlockerUUID)
 THEN
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char);
-DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Char);
-LeaderLib_ToggleScripts_EnableScriptForObject(_Blocker, "LLWEAPONEX_DualShields_CanCounterAttack", "WeaponExpansion");
-LeaderLib_ToggleScripts_EnableScriptForObject(_Blocker, "LLWEAPONEX_DualShields_Cover_Active", "WeaponExpansion");
-
-PROC
-LLWEAPONEX_DualShields_OnCoveredRemoved((CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
-AND
-NOT LeaderLib_Helper_QRY_HasStatus(_Blocker, "LLWEAPONEX_COVERING")
-AND
-NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _)
-THEN
-RemoveStatus(_Blocker, "LLWEAPONEX_COVERING");
-LeaderLib_ToggleScripts_DisableScriptForObject(_Blocker, "LLWEAPONEX_DualShields_Cover_Active", "WeaponExpansion");
-LeaderLib_ToggleScripts_DisableScriptForObject(_Blocker, "LLWEAPONEX_DualShields_CanCounterAttack", "WeaponExpansion");
-
-IF
-CharacterStatusRemoved(_Blocker, "LLWEAPONEX_COVERING", _)
-AND
-DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char)
-THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_Blocker, _Char);
-NOT DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Char);
-LLWEAPONEX_DualShields_OnCoveredRemoved(_Blocker, _Char);
-
-PROC
-LLWEAPONEX_DualShields_OnCoveredRemoved((CHARACTERGUID)_Blocker, (CHARACTERGUID)_Char)
-AND
-NOT DB_LLWEAPONEX_DualShields_Temp_Covering(_, _Char)
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_COVERING");
-
-PROC
-LLWEAPONEX_DualShields_ShieldCover((CHARACTERGUID)_Attacker, (CHARACTERGUID)_Blocker, (CHARACTERGUID)_Defender)
-AND
-DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Char)
-AND
-QRY_CharacterIsNotDisabled(_Blocker)
-THEN
-NOT DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _Char);
-ApplyStatus(_Defender, "LLWEAPONEX_COVERED_SHELL", 6.0, 0, _Blocker);
-SetVarObject(_Blocker, "LLWEAPONEX_ShieldCover_Covering", _Defender);
-CharacterCharacterSetEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_Teleport");
-
-PROC
-LLWEAPONEX_DualShields_ShieldCover((CHARACTERGUID)_Attacker, (CHARACTERGUID)_Blocker, (CHARACTERGUID)_Defender)
-AND
-NOT DB_LLWEAPONEX_DualShields_Temp_CounterAttackAvailable(_Blocker, _)
-THEN
-LeaderLib_ToggleScripts_DisableScriptForObject(_Blocker, "LLWEAPONEX_DualShields_CanCounterAttack", "WeaponExpansion");
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AttachToGrid")
-THEN
-CharacterSetDetached(_Char, 0);
-
-IF
-CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill")
-AND
-GetPosition(_Blocker, _tx, _ty, _tz)
-AND
-GetVarFloat3(_Blocker, "LLWEAPONEX_ShieldCover_TeleportPos", _x, _y, _z)
-THEN
-PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _tx, _ty, _tz);
-PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _x, _y, _z);
-PlayEffect(_Blocker, "LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay_01");
-// Use behavior to teleport so summons don't follow
-LeaderLib_Behavior_TeleportTo(_Blocker, _x, _y, _z);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Blocker, _Attacker, 50, "LLWEAPONEX_Timers_ShieldCover_UseCounterSkill", "UseCounterSkill");
-
-//When a valid position isn't found, teleport to the attacker
-IF
-CharacterCharacterEvent(_Blocker, _Attacker, "LLWEAPONEX_ShieldCover_CounterAttack_UseSkill_NoPositionFound")
-AND
-CharacterCanSee(_Blocker, _Attacker, 1)
-AND
-GetPosition(_Blocker, _tx, _ty, _tz)
-AND
-GetPosition(_Attacker, _x, _y, _z)
-THEN
-PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _tx, _ty, _tz);
-PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Root_01", _x, _y, _z);
-PlayEffect(_Blocker, "LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay_01");
-// Use behavior to teleport so summons don't follow
-LeaderLib_Behavior_TeleportTo(_Blocker, _Attacker);
-LeaderLib_Timers_StartCharacterCharacterTimer(_Blocker, _Attacker, 50, "LLWEAPONEX_Timers_ShieldCover_UseCounterSkill", "UseCounterSkill");
-
-IF
-CharacterCharacterEvent(_Blocker, _Attacker, "UseCounterSkill")
-THEN
-DisplayText(_Attacker, "LLWEAPONEX_StatusText_Countered");
-LeaderLib_Helper_ClearActionQueue(_Blocker);
-CharacterUseSkill(_Blocker, "Target_LLWEAPONEX_ShieldCover_CounterAttack", _Attacker, 1, 1, 1);
+NRD_ModCall("WeaponExpansion", "DualShields_Cover_OnApplied", _UUID, _BlockerUUID);
 //END_REGION
 
 //REGION IRON_MAIDEN
