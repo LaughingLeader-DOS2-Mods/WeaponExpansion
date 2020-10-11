@@ -672,12 +672,12 @@ THEN
 CharacterSetStill(_Char);
 CharacterSetAnimationOverride(_Char, "knockdown_loop");
 ProcObjectTimerCancel(_Char, "Timers_LLWEAPONEX_GroundSlam_FallbackAnimOverrideClear");
-ProcObjectTimer(_Char, "Timers_LLWEAPONEX_GroundSlam_FallbackAnimOverrideClear", 1500);
+ProcObjectTimer(_Char, "Timers_LLWEAPONEX_GroundSlam_FallbackAnimOverrideClear", 3000);
 
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "Timers_LLWEAPONEX_GroundSlam_FallbackAnimOverrideClear")
 THEN
-LeaderLib_Hacks_ClearAnimationOverride(_Char, "LLWEAPONEX_AnvilMace_GroundSlam_GetupAnim");
+LeaderLib_Hacks_ClearAnimationOverride(_Char, "Play_Anim_knockdown_getup");
 
 PROC
 LLWEAPONEX_Uniques_AnvilMace_SpawnSkillPlatform((GUIDSTRING)_Target, (CHARACTERGUID)_Caster)
@@ -708,13 +708,7 @@ AND
 ObjectIsCharacter((CHARACTERGUID)_Target, 1)
 THEN
 ProcObjectTimerCancel(_Target, "Timers_LLWEAPONEX_GroundSlam_FallbackAnimOverrideClear");
-LeaderLib_Hacks_ClearAnimationOverride(_Target, "LLWEAPONEX_AnvilMace_GroundSlam_GetupAnim");
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_AnvilMace_GroundSlam_GetupAnim")
-THEN
-CharacterSetAnimationOverride(_Char, "");
-PlayAnimation(_Char,"knockdown_getup", "");
+LeaderLib_Hacks_ClearAnimationOverride(_Target, "Play_Anim_knockdown_getup");
 
 PROC
 LeaderLib_Platforms_OnLaunchFinished((GUIDSTRING)_Target, "LLWEAPONEX_AnvilMace_GroundSlam_Launch")
