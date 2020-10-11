@@ -487,65 +487,6 @@ CharacterStatusRemoved(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
 THEN
 LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Char, "LLWEAPONEX_DualShields_HunkeringDown", "WeaponExpansion", 500);
 SetStoryEvent(_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride");
-
-/*
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
-AND
-CharacterIsInCombat(_Char, 0)
-AND
-HasActiveStatus(_Char, "UNSHEATHED", 0)
-THEN
-CharacterSetFightMode(_Char, 1, 1);
-ObjectSetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 0);
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", _)
-AND
-CharacterIsInCombat(_Char, 0)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 1000, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_HunkerDown_PlayAnimation")
-THEN
-LeaderLib_Helper_ClearActionQueue(_Char);
-PlayAnimation(_Char, "skill_prepare_weapon_01_loop", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimOverride");
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_HunkerDown_PlayAnimOverride")
-THEN
-CharacterSetAnimationOverride(_Char, "skill_prepare_weapon_01_loop");
-ObjectSetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride")
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
-THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 0);
-CharacterSetAnimationOverride(_Char, "");
-LeaderLib_Timers_CancelObjectTimer(_Char, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride")
-AND
-CharacterIsInCombat(_Char, 0)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 1)
-AND
-CharacterIsInFightMode(_Char, 1)
-THEN
-CharacterSetFightMode(_Char, 0, 0);
-ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 0);
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride")
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 1)
-THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_FightModeOverrideSet", 0);
-*/
 //END_REGION
 
 //REGION SHIELD_COVER
