@@ -1065,11 +1065,6 @@ ItemTemplateAddTo("WPN_UNIQUE_LLWEAPONEX_Humans_Axe_1H_A_8ff641b7-920a-4bbc-b1c1
 
 //REGION MOVING_OBJECT_WEAPON
 IF
-CharacterUsedSkill(_Player, "Projectile_LLWEAPONEX_ThrowWeapon", _, _)
-THEN
-DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player);
-
-IF
 StoryEvent(_Object, "LLWEAPONEX_MovingObjectWeapon_Init")
 AND
 ObjectExists(_Object, 1)
@@ -1078,7 +1073,7 @@ ObjectIsItem((ITEMGUID)_Object, 1)
 AND
 ItemGetOwner(_Object, _Player)
 AND
-DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(_Player)
+DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting((CHARACTERGUID)_Player)
 AND
 NOT DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Active(_, _Object)
 THEN

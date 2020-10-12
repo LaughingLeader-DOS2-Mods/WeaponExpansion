@@ -22,28 +22,60 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", OnBalri
 ---@param state SkillState
 ---@param data SkillEventData|HitData
 local function OnThrowWeapon(skill, char, state, data)
-	if state == SKILL_STATE.HIT and data.Success then
+	print(skill, state, Common.Dump(data))
+	if state == SKILL_STATE.USED then
 		local mainhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Weapon"))
 		local offhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Shield"))
 		PersistentVars.SkillData.ThrowWeapon[char] = {
 			Weapon = mainhand,
 			Shield = offhand
 		}
-	elseif state == SKILL_STATE.HIT and data.Success then
-		DeathManager.ListenForDeath("ThrowWeapon", data.Target, char, 500)
+		Osi.DB_LLWEAPONEX_Throwing_Temp_MovingObjectWeapon_Waiting(char)
+	elseif state == SKILL_STATE.PROJECTILEHIT then
+		if ObjectIsCharacter(data.Target) == 1 then
+			DeathManager.ListenForDeath("ThrowWeapon", data.Target, char, 500)
+		end
+
+		local mainWeapon = nil
+		local offhandWeapon = nil
+		
+		local weaponData = PersistentVars.SkillData.ThrowWeapon[char]
+		if weaponData ~= nil then
+			if not StringHelpers.IsNullOrEmpty(weaponData.Weapon) then
+				mainWeapon = Ext.GetItem(weaponData.Weapon).Stats
+			end
+			if not StringHelpers.IsNullOrEmpty(weaponData.Shield) then
+				local item = Ext.GetItem(weaponData.Shield)
+				if item.ItemType == "Weapon" then
+					offhandWeapon = item.Stats
+				end
+			end
+		end
+
+		GameHelpers.Damage.ApplySkillDamage(Ext.GetCharacter(char), data.Target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", {
+			SimulateHit = 1,
+			HitType = "WeaponDamage",
+			HitWithWeapon = 1,
+			Hit = 1,
+			Blocked = 0,
+			Dodged = 0,
+			Missed = 0,
+		}, mainWeapon, offhandWeapon, true)
 	end
 end
 RegisterSkillListener("Projectile_LLWEAPONEX_ThrowWeapon", OnThrowWeapon)
 RegisterSkillListener("Projectile_LLWEAPONEX_ThrowWeapon_Enemy", OnThrowWeapon)
 
-DeathManager.RegisterListener("ThrowWeapon", function(target, attacker)
+DeathManager.RegisterListener("ThrowWeapon", function(target, attacker, success)
 	local data = PersistentVars.SkillData.ThrowWeapon[attacker]
 	if data ~= nil then
-		if not StringHelpers.IsNullOrEmpty(data.Weapon) then
-			NRD_CharacterEquipItem(attacker, data.Weapon, "Weapon", 0, 0, 1, 1)
-		end
-		if not StringHelpers.IsNullOrEmpty(data.Shield) then
-			NRD_CharacterEquipItem(attacker, data.Shield, "Shield", 0, 0, 1, 1)
+		if success then
+			if not StringHelpers.IsNullOrEmpty(data.Weapon) then
+				NRD_CharacterEquipItem(attacker, data.Weapon, "Weapon", 0, 0, 1, 1)
+			end
+			if not StringHelpers.IsNullOrEmpty(data.Shield) then
+				NRD_CharacterEquipItem(attacker, data.Shield, "Shield", 0, 0, 1, 1)
+			end
 		end
 		PersistentVars.SkillData.ThrowWeapon[attacker] = nil
 	end
