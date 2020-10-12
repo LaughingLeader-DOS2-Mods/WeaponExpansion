@@ -2,17 +2,20 @@ if MasterySystem == nil then
 	MasterySystem = {}
 end
 
-function Mastery.CanGrantXP(char)
-	if IsTagged(char, "LLDUMMY_TrainingDummy") == 1 then
+function Mastery.CanGrantXP(uuid)
+	if ObjectIsCharacter(uuid) == 0 then
+		return false
+	end
+	if IsTagged(uuid, "LLDUMMY_TrainingDummy") == 1 then
 		return true
 	end
-	if NRD_CharacterGetInt(char, "Resurrected") == 0 
-	and not IsPlayer(char)
-	and CharacterIsSummon(char) == 0
-	and CharacterIsPartyFollower(char) == 0
-	and Osi.LeaderLib_Helper_QRY_IgnoreCharacter(char) ~= true
-	and CharacterIsInCombat(char) == 1
-	and Osi.LeaderLib_Party_QRY_IsEnemyOfParty(char) == true
+	if NRD_CharacterGetInt(uuid, "Resurrected") == 0
+	and not IsPlayer(uuid)
+	and CharacterIsSummon(uuid) == 0
+	and CharacterIsPartyFollower(uuid) == 0
+	and Osi.LeaderLib_Helper_QRY_IgnoreCharacter(uuid) ~= true
+	and CharacterIsInCombat(uuid) == 1
+	and Osi.LeaderLib_Party_QRY_IsEnemyOfParty(uuid) == true
 	then
 		return true
 	end
