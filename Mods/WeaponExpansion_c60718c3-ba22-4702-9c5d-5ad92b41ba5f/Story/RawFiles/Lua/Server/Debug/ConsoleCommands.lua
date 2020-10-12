@@ -27,7 +27,7 @@ if Ext.IsDeveloperMode() then
 			end)
 		end
 	end)
-	
+	--TeleportTo(CharacterGetHostCharacter(), Mods.WeaponExpansion.NPC.VendingMachine)
 	Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
 		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
 		for i,v in pairs(Uniques) do

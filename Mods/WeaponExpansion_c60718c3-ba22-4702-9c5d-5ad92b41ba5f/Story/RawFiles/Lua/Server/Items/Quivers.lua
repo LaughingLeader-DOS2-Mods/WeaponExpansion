@@ -42,11 +42,9 @@ RegisterSkillListener("Shout_LLWEAPONEX_Quiver_DrawArrow", function(skill, char,
 				addedArrow = true
 			end
 		end
-
 		if addedArrow then
-			local shouldRecharge = false
 			local quiver = CharacterGetEquippedItem(character.MyGuid, "Belt")
-			if not StringHelpers.IsNullOrEmpty(quiver) then
+			if not StringHelpers.IsNullOrEmpty(quiver) and IsTagged(quiver, "LLWEAPONEX_Quiver") == 1 then
 				Quiver_StartRecharge(character, Ext.GetItem(quiver))
 			end
 		end
@@ -58,7 +56,7 @@ RegisterStatusListener("StatusRemoved", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", funct
 	if character ~= nil and not character.Dead then
 		local shouldRecharge = false
 		local quiver = CharacterGetEquippedItem(character.MyGuid, "Belt")
-		if not StringHelpers.IsNullOrEmpty(quiver) then
+		if not StringHelpers.IsNullOrEmpty(quiver) and IsTagged(quiver, "LLWEAPONEX_Quiver") == 1 then
 			Quiver_StartRecharge(character, Ext.GetItem(quiver), 1)
 		end
 	end
