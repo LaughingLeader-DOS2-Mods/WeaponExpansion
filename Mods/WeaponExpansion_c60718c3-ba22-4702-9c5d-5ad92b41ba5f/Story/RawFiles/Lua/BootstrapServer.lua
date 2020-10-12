@@ -33,7 +33,6 @@ local firstLoad = true
 
 LeaderLib.RegisterListener("Initialized", function(region)
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
-    print(Ext.JsonStringify(PersistentVars))
 	region = region or SharedData.RegionData.Current
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then

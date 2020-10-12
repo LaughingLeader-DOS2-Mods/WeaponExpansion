@@ -149,6 +149,9 @@ function UniqueData:Initialize(region, firstLoad)
 		local item = Ext.GetItem(self.UUID)
 		if self.Owner == nil then
 			local owner = TryGetOwner(item)
+			if owner == NPC.UniqueHoldingChest then
+				owner = nil
+			end
 			if owner ~= nil then
 				self.Owner = owner
 			end
