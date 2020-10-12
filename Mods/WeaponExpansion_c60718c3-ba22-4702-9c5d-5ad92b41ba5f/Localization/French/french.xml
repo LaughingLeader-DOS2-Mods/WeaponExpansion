@@ -74,7 +74,7 @@
 	<content contentuid="h06681904g0440g41fag964eg42d43c0ade1f">Death&apos;s Last Stand</content>
 	<content contentuid="h0692074agdc1cg4a2eg9518g09d39df61122">Execution</content>
 	<content contentuid="h06ae90dbg0fabg4fdfg90ecgf9d698e7031d">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;30% chance on hit to shoot out a cone of dust in a 7m range, applying &lt;font color=&apos;#d040d0&apos;&gt;Blinded&lt;/font&gt; to enemies for 1 turn and dealing minor &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#fcd203&apos;&gt;Dust Blast can only occur once per turn.&lt;/font&gt;&lt;br&gt;Adds &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
-	<content contentuid="h06b63c74gd36bg40a0g9cd6gfcd6200256c2">A well-crafted mainhand shield for a set of intricate dual shields.&lt;br&gt;Dwarven craftsmen hammered this pair into perfection.</content>
+	<content contentuid="h06b63c74gd36bg40a0g9cd6gfcd6200256c2">A well-crafted mainhand shield for a set of intricate dual shields. A dwarven craftsman must have hammered this pair of shields into perfection.</content>
 	<content contentuid="h06cbe437gf5d8g4188g8d16g277a0d72308e">Chaosblade</content>
 	<content contentuid="h06e35e52g6879g48a6g9dc9ga9dafc2f0fe2">Swap your stance with the &lt;font color=&apos;#c5a65a&apos;&gt;Warchief&apos;s Halberd&lt;/font&gt;, going between spear and axe mode.&lt;br&gt;In &lt;font color=&apos;#e8ff67&apos;&gt;Spear Mode&lt;/font&gt;, the halberd has increased range, critical damage, and applies &lt;font color=&apos;#ff3232&apos;&gt;Warchief&apos;s Mark&lt;/font&gt; on hit.&lt;br&gt;In &lt;font color=&apos;#ff67ef&apos;&gt;Axe Mode&lt;/font&gt;, the halberd has reduced range, increased damage, and consumes &lt;font color=&apos;#ff3232&apos;&gt;Warchief&apos;s Mark&lt;/font&gt; to deal [1].</content>
 	<content contentuid="h06eacec9g1d7fg46cagba45g3cde5062c8a8">A &lt;font color=&apos;#F19824&apos;&gt;localized quake&lt;/font&gt; is created where your weapon contacts the ground, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake:ExplodeRadius]m radius.&lt;/font&gt;</content>
@@ -261,7 +261,7 @@
 	<content contentuid="h1caedd2ag7cccg444fg9d6cgf907a1288056">Dual Elven Shields</content>
 	<content contentuid="h1cbd8471gb85fg4e8fg84c7g554d08d2166e">Journeyman Crossbowman</content>
 	<content contentuid="h1cbf80a3g66ebg4279gbb19g7bd94d679647">Lifeblood Rune</content>
-	<content contentuid="h1cc82519g2895g4a23g96ccg7b71aab6c5cc">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
+	<content contentuid="h1cc82519g2895g4a23g96ccg7b71aab6c5cc">Two solid wooden shields, paired together for expert use. While these elven designs may eschew metal, the ancient tree from which they were formed provides elegant magical resistance.</content>
 	<content contentuid="h1cc82a7bge6d4g4009g89f8g44a0f195c643">Soul Burn IV</content>
 	<content contentuid="h1cc9cd1dga69eg4618g8763g0ad2373c3d11">First Strike (War Charge)</content>
 	<content contentuid="h1ce7689fgceb1g4b23gb627g9c87b162e086">Throwing Paddle?</content>
@@ -432,6 +432,7 @@
 	<content contentuid="h2c7d2267gcd8fg4a99g88f3g55fbab743bc0">Throw a scythe at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Enemies below 5% max health will be &lt;font color=&apos;#FF00FF&apos;&gt;Reaped&lt;/font&gt;, resulting in instant-death.&lt;/font&gt;</content>
 	<content contentuid="h2cb50244g8d38g4a87g8924gc01a4a02f19a">Weapon Expansion</content>
 	<content contentuid="h2cd9bce1gba34g4a4fgae35g13868c6adb5c">Tanto</content>
+	<content contentuid="h2d0bd945g3345g446ag8845gc78010e0018c">A set of dark dual shields. Their vicious design reflect the Black Ring well.</content>
 	<content contentuid="h2d0e8796g1d66g4541g8ce3ged8f936c4129">*Tell the mercenary to stop following you.*</content>
 	<content contentuid="h2d15369bg951bg438cga94fg7ccb48f7a9b1">Lava Rune</content>
 	<content contentuid="h2d40dd25gb718g4809ga2e9gb83912e9cbfd">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release a freezing gas, dealing water damage on hit.</content>
@@ -1097,7 +1098,7 @@
 	<content contentuid="h757e6edcgbac5g4bf9g9541g9e37657ce48f">Character is encased in snow and takes [1] when moving, with a chance to fall down.</content>
 	<content contentuid="h7592e177g12eag4941g91b3gfdb27b66bbd8">Impaled</content>
 	<content contentuid="h75a2fd78gec4dg47f3ga53bg3f962bf88aa4">&lt;font color=&apos;#D9D9D9&apos; size=&apos;18&apos;&gt;Dual Shields Mastery III&lt;/font&gt;&lt;br&gt;Slam the target in an &lt;font color=&apos;#CCCCCC&apos;&gt;Iron Maiden&lt;/font&gt;, dealing [1].&lt;br&gt;If the target is in a &lt;font color=&apos;#00AA00&apos;&gt;Shield Prison&lt;/font&gt;, deal an extra [2] and apply &lt;font color=&apos;#AAAAEE&apos;&gt;Dazed&lt;/font&gt;.&lt;br&gt;Applies &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt;, and &lt;font color=&apos;#DC143C&apos;&gt;Ruptures&lt;/font&gt; &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; targets for [3].</content>
-	<content contentuid="h75bca2d1g30aag4254g9a45g71bc0a375561">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
+	<content contentuid="h75bca2d1g30aag4254g9a45g71bc0a375561">A knightly pair of shields, used by those of the highest calling that value protection of allies above all else.</content>
 	<content contentuid="h75df2ce7g7a9eg4c6fg9403g08e3d0d26053">Earth Weakness</content>
 	<content contentuid="h75e03bdcg485cg4ebeg96d5gf265dc94d79a">Ancient Elven Quickdraw Quiver</content>
 	<content contentuid="h75e94f4ag130ag4913gb958gbbd5c1aa1323">*You study the column of buttons.*</content>
@@ -1311,7 +1312,7 @@
 	<content contentuid="h8c7e5e8fgdb3cg4350g9b5egb2cf3e1051f9">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Applies &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; to enemies hit for 1 turns, or extends the duration of &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; by 1 turn per attack (4 turns max).</content>
 	<content contentuid="h8ca342feg25fcg44b4gb74cg533223203d19">Mini-Explosion</content>
 	<content contentuid="h8cbfe5e5gdf55g4bbfga8acg9d476bb1215e">Pacifist&apos;s Will</content>
-	<content contentuid="h8cf25d9aga6b9g49e0g8528ge581e3bd2986">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
+	<content contentuid="h8cf25d9aga6b9g49e0g8528ge581e3bd2986">A regal pair of shields, adorned with the insignia of the Empire. Common sense may dictate shields such as these are too ceremonial for battle, yet behind their beauty lies a fierce metallic will.</content>
 	<content contentuid="h8cfbd3e2g8bf0g4308gaf7fg708ad55ff7b6">Smuggler&apos;s Bag</content>
 	<content contentuid="h8d02e345ged4ag4d60g9be9g68a46dda623b">Firearm</content>
 	<content contentuid="h8d03efc5g6e18g4491g9fe3g72302b395c2d">Aspect of Poison</content>
@@ -1333,7 +1334,7 @@
 	<content contentuid="h8e770ac0gc6b4g4fa7gbe06gc010adeb6938">Leap forward and slam the almighty &lt;font color=&apos;#c5a65a&apos;&gt;Anvilmar&lt;/font&gt; into the ground, cracking the earth for [1] in a [2] radius, and knocking targets up.&lt;br&gt;&lt;font color=&apos;#BB5533&apos;&gt;Targets landing take [3] to [4] damage upon landing, depending on the launch height.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF00CC&apos;&gt;The impact radius begins where from your anvil hits the ground, which is 2m infront of your landing position.&lt;/font&gt;</content>
 	<content contentuid="h8e8ad7bdge201g4e47gb783g4aab39451266">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8ea5f0f3ga212g4a36g8edcg55ba5daf97a9">Blademaster&apos;s Strike 2</content>
-	<content contentuid="h8eb07842gc1b0g4218ga570gc9432148af51">The mainhand shield for a set of dual shields.&lt;br&gt;Rare Blackring soldiers once wielded these wicked shields, gutting foes upon their sharp edges.</content>
+	<content contentuid="h8eb07842gc1b0g4218ga570gc9432148af51">A set of dark dual shields. Rare Black Ring soldiers once wielded these wicked shields, gutting foes upon their sharp edges.</content>
 	<content contentuid="h8ed077b7gfbccg48ebg8605ge999dc08df28">Blood Bullets</content>
 	<content contentuid="h8ee33f70g05a2g4783gbd91g9ef8c1e2804a">Ancient Inert Runeblade</content>
 	<content contentuid="h8f0d5103g9deeg4606gb1bfge121f36a2f4e">Fateslayer</content>
@@ -1516,7 +1517,7 @@
 	<content contentuid="ha1f92690g2af6g4515g9ad4gecd66178217e">Dragon Slayer</content>
 	<content contentuid="ha1fd7564g9a41g46c2g9840g876571c13de0">Ancient Dwarven Shields</content>
 	<content contentuid="ha20be5e6g580eg4b73gada6g997237924305">Highwayman&apos;s Quiver</content>
-	<content contentuid="ha2178a0fg7528g478fg820eg35e2f7705672">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
+	<content contentuid="ha2178a0fg7528g478fg820eg35e2f7705672">A set of intricate dwarven shields. Sturdy and true.</content>
 	<content contentuid="ha217d9c5g03e8g49d8g903fgcc3ced117f7a">Character has been hit by a Blademaster&apos;s strike 3 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
 	<content contentuid="ha245854eg0862g4e47gbd5cgbcdc097dfde3">&lt;font color=&apos;#FF3E2A&apos;&gt;Sword Mastery I&lt;/font&gt;</content>
 	<content contentuid="ha25632acg5716g49abgb3b3gd6ab458e1d8c">&lt;font color=&apos;#ED9D07&apos;&gt;*You retrieve your axe with a sharp pull. Brutal!*</content>
@@ -1755,7 +1756,6 @@
 	<content contentuid="hbd792efeg585fg4f00g881fg93f0aae26af3">An anvil attached to a handle. As simple as that.</content>
 	<content contentuid="hbdb02714gc326g4ea1gb63agea089a7b4591">Shoot on Cooldown</content>
 	<content contentuid="hbdb2aa9ag0e32g4b2fga9ccg59085dd8de7e">Deal [1] to target character, draining that amount as &lt;font color=&apos;#188EDE&apos;&gt;Magic Armour&lt;/font&gt;.</content>
-	<content contentuid="hbe0eff68g91c2g4409gbd66g555e64e8a73c">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
 	<content contentuid="hbe20f642g37cbg48a5g9f4agfd50776193a1">&lt;font color=&apos;#D5D7E3&apos;&gt;Slay Hidden&lt;/font&gt;</content>
 	<content contentuid="hbe25a690g42bag444fga5b5g368750273a9b">Vulnerable</content>
 	<content contentuid="hbe73c99dg8a94g45f6ga7b7g23923104849b">Throw Stone</content>
