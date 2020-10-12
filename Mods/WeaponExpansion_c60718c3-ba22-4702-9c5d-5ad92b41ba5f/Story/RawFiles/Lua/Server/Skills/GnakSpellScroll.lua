@@ -651,8 +651,8 @@ local function FireSpell(source, target)
 	return false
 end
 
-DeathManager.RegisterListener("GnakSpellScroll", function(target, attacker)
-	if CharacterHasSkill(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic") == 1 then
+DeathManager.RegisterListener("GnakSpellScroll", function(target, attacker, success)
+	if success and CharacterHasSkill(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic") == 1 then
         NRD_SkillSetCooldown(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic", 0.0)
     end
 end)

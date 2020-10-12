@@ -14,6 +14,24 @@ function DeathManager.RegisterListener(id, callback)
 	table.insert(DeathManager.Listeners[id], callback)
 end
 
+local function FireCallbacks(id, target, attacker, success)
+	local callbacks = DeathManager.Listeners[id]
+	if callbacks ~= nil then
+		for i=1,#callbacks do
+			local callback = callbacks[i]
+			if callback ~= nil then
+				local b,result = xpcall(callback, debug.traceback, target, attacker, success)
+				if not b then
+					Ext.PrintError("[LLWEAPONEX:DeathManager] Error invoking callback:")
+					Ext.PrintError(result)
+				end
+			else
+				Ext.PrintError("FireCallbacks", i, id, target, attacker, success)
+			end
+		end
+	end
+end
+
 function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	if PersistentVars.OnDeath[target] == nil then
 		PersistentVars.OnDeath[target] = {
@@ -47,6 +65,7 @@ RegisterProtectedOsirisListener("TimerFinished", 1, "after", function(timerName)
 				for id,tName in pairs(attackerData) do
 					if tName ~= "" and tName == timerName then
 						printd("[LLWEAPONEX:DeathMechanics:TimerFinished] OnDeath timer finished", timerName, id, uuid, attacker)
+						FireCallbacks(id, uuid, attacker, false)
 						data.Total = math.max(0, data.Total - 1)
 						data.Attackers[attacker][id] = nil
 						break
@@ -81,34 +100,22 @@ LeaderLib.RegisterListener("Initialized", function(region)
 	end
 end)
 
-local function FireCallbacks(id, target, attacker)
-	local callbacks = DeathManager.Listeners[id]
-	if callbacks ~= nil then
-		for i=0,#callbacks,1 do
-			local callback = callbacks[i]
-			local b,result = xpcall(callback, debug.traceback, target, attacker)
-			if not b then
-				Ext.PrintError("[LLWEAPONEX:DeathManager] Error invoking callback:")
-				Ext.PrintError(result)
-			end
-		end
-	end
-end
-
 function DeathManager.OnDeath(uuid)
 	local data = PersistentVars.OnDeath[uuid]
 	if data ~= nil then
 		printd("[LLWEAPONEX:DeathMechanics:OnDeath]", uuid, "died. Firing callbacks.")
 		for attacker,attackerData in pairs(data.Attackers) do
-			for id,timerName in pairs(attackerData) do
-				FireCallbacks(id, uuid, attacker)
+			for id,tName in pairs(attackerData) do
+				FireCallbacks(id, uuid, attacker, true)
+				if tName ~= "" then
+					TimerCancel(tName)
+				end
 			end
 		end
 		PersistentVars.OnDeath[uuid] = nil
 	end
-	
 end
 
-RegisterProtectedOsirisListener("CharacterDied", 1, "after", function(char)
+RegisterProtectedOsirisListener("CharacterDying", 1, "after", function(char)
 	DeathManager.OnDeath(StringHelpers.GetUUID(char))
 end)
