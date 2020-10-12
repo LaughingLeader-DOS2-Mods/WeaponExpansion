@@ -90,6 +90,7 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 		end
 		LeaderLib.RefreshSkillBar(uuid)
 	elseif Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Unarmed_Mastery1") then
+		ClearTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
 		LeaderLib.RefreshSkillBar(uuid)

@@ -66,10 +66,10 @@ end
 RegisterSkillListener("Projectile_LLWEAPONEX_ThrowWeapon", OnThrowWeapon)
 RegisterSkillListener("Projectile_LLWEAPONEX_ThrowWeapon_Enemy", OnThrowWeapon)
 
-DeathManager.RegisterListener("ThrowWeapon", function(target, attacker, success)
+DeathManager.RegisterListener("ThrowWeapon", function(target, attacker, targetDied)
 	local data = PersistentVars.SkillData.ThrowWeapon[attacker]
 	if data ~= nil then
-		if success then
+		if targetDied then
 			if not StringHelpers.IsNullOrEmpty(data.Weapon) then
 				NRD_CharacterEquipItem(attacker, data.Weapon, "Weapon", 0, 0, 1, 1)
 			end
