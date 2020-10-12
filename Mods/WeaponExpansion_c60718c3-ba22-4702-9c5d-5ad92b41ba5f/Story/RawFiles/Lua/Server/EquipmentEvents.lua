@@ -139,6 +139,13 @@ function OnItemEquipped(uuid,itemUUID)
 			Equipment.CheckWeaponRequirementTags(uuid)
 		end
 
+		if item:HasTag("LLWEAPONEX_Quiver") then
+			Quiver_Equipped(uuid, item)
+		end
+
+		local template = GetTemplate(itemUUID)
+		Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,itemUUID,template)
+
 		if not item:HasTag("LLWEAPONEX_NoTracking") then
 			for tag,data in pairs(Masteries) do
 				--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
@@ -159,8 +166,6 @@ function OnItemEquipped(uuid,itemUUID)
 							LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
 						end
 					end
-					local template = GetTemplate(itemUUID)
-					Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,itemUUID,template)
 					Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,itemUUID,tag,isPlayer)
 					OnWeaponTypeEquipped(uuid, itemUUID, tag, stat, statType)
 				end
@@ -180,6 +185,9 @@ end
 function OnItemTemplateUnEquipped(uuid, item, template)
 	if IsPlayer(uuid) then
 		Equipment.CheckWeaponRequirementTags(uuid)
+	end
+	if IsTagged(item, "LLWEAPONEX_Quiver") == 1 then
+		Quiver_Unequipped(uuid, item)
 	end
 end
 

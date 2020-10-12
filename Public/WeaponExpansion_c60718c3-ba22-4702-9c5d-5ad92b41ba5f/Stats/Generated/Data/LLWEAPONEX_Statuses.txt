@@ -731,6 +731,7 @@ data "DescriptionRef" "Character's quiver is gathering power."
 data "Icon" "LLWEAPONEX_Status_Quiver_Recharging"
 data "FormatColor" "Ranger"
 data "StackId" "Stack_LLWEAPONEX_Quiver_Draw_Recharge"
+data "StackPriority" "0"
 
 new entry "LLWEAPONEX_CORPSE_EXPLOSION_EXPLODE"
 type "StatusData"

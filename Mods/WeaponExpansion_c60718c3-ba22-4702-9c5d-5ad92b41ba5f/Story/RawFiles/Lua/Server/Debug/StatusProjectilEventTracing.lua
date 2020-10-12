@@ -25,7 +25,7 @@ Ext.RegisterOsirisListener("CharacterStatusAttempt", 3, "before", function(char,
     end
 end)
 
-Ext.RegisterOsirisListener("CharacterStatusApplied", 3, "before", function(char, status, _)
+RegisterProtectedOsirisListener("CharacterStatusApplied", 3, "before", function(char, status, _)
     if not IsEngineStatus(status) then
         local leaveAction = Ext.StatGetAttribute(status, "LeaveAction")
         if status == "CHILLED" or leaveAction ~= nil and leaveAction ~= "" then
@@ -34,7 +34,7 @@ Ext.RegisterOsirisListener("CharacterStatusApplied", 3, "before", function(char,
     end
 end)
 
-Ext.RegisterOsirisListener("CharacterStatusRemoved", 3, "before", function(char, status, _)
+RegisterProtectedOsirisListener("CharacterStatusRemoved", 3, "before", function(char, status, _)
     if not IsEngineStatus(status) then
         local leaveAction = Ext.StatGetAttribute(status, "LeaveAction")
         if status == "CHILLED" or leaveAction ~= nil and leaveAction ~= "" then

@@ -17,6 +17,16 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 			RemoveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
 		end
 
+		if IsTagged(uuid, "LLWEAPONEX_Quiver_Equipped") == 1 and last < 153026560 then
+			local quiver = Ext.GetCharacter(uuid).Stats:GetItemBySlot("Belt")
+			if quiver ~= nil then
+				ItemResetChargesToMax(quiver.MyGuid)
+			end
+			if CharacterIsInCombat(uuid) == 0 then
+				Quiver_RemoveTempArrows(uuid)
+			end
+		end
+
 		local hasBluntTag = not StringHelpers.IsNullOrEmpty(CharacterFindTaggedItem(uuid, "LLWEAPONEX_Blunt"))
 		if hasBluntTag then
 			for i,v in pairs(Ext.GetCharacter(uuid):GetInventoryItems()) do
