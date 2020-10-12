@@ -28,7 +28,7 @@ Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Description	Throw <font color='#C7A758'>
 Shout_LLWEAPONEX_Prepare_BalrinsAxe_DisplayName	<font color='#C7A758'>Prepare Balrin's Throwing Axe</font>
 Shout_LLWEAPONEX_Prepare_BalrinsAxe_Description	Prepare to throw <font color='#C7A758'>Balrin's Throwing Axe</font>, gaining a different skill depending on which hand wields the axe.
 Projectile_LLWEAPONEX_ThrowWeapon_DisplayName	<font color='#a6ffcc'>Throw Weapon</font>
-Projectile_LLWEAPONEX_ThrowWeapon_Description	Throw your equipped mainhand weapon at a target, dealing [1] and disarming yourself.<br><font color='#22FF00'>If the target dies from this skill, your weapon find its way back to you.</font>
+Projectile_LLWEAPONEX_ThrowWeapon_Description	Throw your equipped mainhand weapon at a target, dealing [1] and disarming yourself.<br><font color='#22FF00'>If the target dies from this skill, the weapon is automatically re-equipped.</font>
 Target_LLWEAPONEX_ThrowObject_DisplayName	<font color='#a6ffcc'>Throw Target</font>
 Target_LLWEAPONEX_ThrowObject_Description	<font color='#40E0D0' size='18'>Throwing Mastery II</font><br>Launch a target 2m-11m away from you. <font color='#FFAA00'>Distance tossed scales with Strength.</font><br>At higher launch distances, the target deals [1] to [2] to surrounding enemies in a [3] to [4] radius when it lands.<br><font color='#D72C2C'>Launching heavier targets requires higher levels of Strength</font><br><font color='#FFAA00'>At 40 Strength, weight restrictions are lifted.</font><br><font color='#FFDF4A'>Damage and impact radius scale with the weight of the object.</font><br><font color='#D72C2C'>Resisted by Grounded.</font>
 Projectile_LLWEAPONEX_Throw_Flask_DisplayName	Throw Flask

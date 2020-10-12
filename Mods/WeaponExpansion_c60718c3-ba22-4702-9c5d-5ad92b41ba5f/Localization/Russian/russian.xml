@@ -189,7 +189,7 @@
 	<content contentuid="h1574c05dg6552g4cb7gbbbeg59b04967b6e4">Character is being covered by a nearby ally.</content>
 	<content contentuid="h159452b0gcf6dg4389gb6d8g738d7029dd07">Runic Gloves</content>
 	<content contentuid="h1599bddcg8b04g4ed6gbb4dg88f0196afca4">*[STAFFS] Click on the button labeled &apos;Staffs&apos;.*</content>
-	<content contentuid="h15be09d7g741eg4b32ga829g88c309b938f0">Throw your equipped mainhand weapon at a target, dealing [1] and disarming yourself.&lt;br&gt;&lt;font color=&apos;#22FF00&apos;&gt;If the target dies from this skill, your weapon find its way back to you.&lt;/font&gt;</content>
+	<content contentuid="h15be09d7g741eg4b32ga829g88c309b938f0">Throw your equipped mainhand weapon at a target, dealing [1] and disarming yourself.&lt;br&gt;&lt;font color=&apos;#22FF00&apos;&gt;If the target dies from this skill, the weapon is automatically re-equipped.&lt;/font&gt;</content>
 	<content contentuid="h160bdde7g5fdfg4981ga01fgeffcc36441a1">More souls on my conscience...</content>
 	<content contentuid="h161d5479g06d6g408egade2g37a203e3361f">corrosive damage</content>
 	<content contentuid="h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a">Shrapnel Charge</content>
@@ -1334,7 +1334,7 @@
 	<content contentuid="h8e770ac0gc6b4g4fa7gbe06gc010adeb6938">Leap forward and slam the almighty &lt;font color=&apos;#c5a65a&apos;&gt;Anvilmar&lt;/font&gt; into the ground, cracking the earth for [1] in a [2] radius, and knocking targets up.&lt;br&gt;&lt;font color=&apos;#BB5533&apos;&gt;Targets landing take [3] to [4] damage upon landing, depending on the launch height.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF00CC&apos;&gt;The impact radius begins where from your anvil hits the ground, which is 2m infront of your landing position.&lt;/font&gt;</content>
 	<content contentuid="h8e8ad7bdge201g4e47gb783g4aab39451266">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8ea5f0f3ga212g4a36g8edcg55ba5daf97a9">Blademaster&apos;s Strike 2</content>
-	<content contentuid="h8eb07842gc1b0g4218ga570gc9432148af51">A set of dark dual shields. Rare Black Ring soldiers once wielded these wicked shields, gutting foes upon their sharp edges.</content>
+	<content contentuid="h8eb07842gc1b0g4218ga570gc9432148af51">A pair of shields that are used together. Rare Black Ring soldiers once wielded these wicked shields, gutting foes upon their sharp edges.</content>
 	<content contentuid="h8ed077b7gfbccg48ebg8605ge999dc08df28">Blood Bullets</content>
 	<content contentuid="h8ee33f70g05a2g4783gbd91g9ef8c1e2804a">Ancient Inert Runeblade</content>
 	<content contentuid="h8f0d5103g9deeg4606gb1bfge121f36a2f4e">Fateslayer</content>
