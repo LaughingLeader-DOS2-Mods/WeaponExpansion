@@ -230,7 +230,7 @@ LLWEAPONEX_Quarterstaff_Mastery4 = {},
 LLWEAPONEX_Quarterstaff_Mastery5 = {},
 LLWEAPONEX_Rapier_Mastery1 = {
 	SUCKER_PUNCH_COMBO = {
-		Skills = {"Target_SingleHandedAttack"},
+		Skills = {"Target_SingleHandedAttack", "Target_LLWEAPONEX_SinglehandedAttack"},
 		Param = TranslatedString:Create("hd40f14d5g4946g4462gac7bga35fda61ed27","Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.<br><font color='#99FF22' size='22'>[ExtraData:LLWEAPONEX_MasteryBonus_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.</font>")
 	}
 },

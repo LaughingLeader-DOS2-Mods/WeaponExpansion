@@ -48,6 +48,7 @@ end
 
 local UnarmedSkills = {
 	"Target_SingleHandedAttack",
+	"Target_LLWEAPONEX_SinglehandedAttack",
 	"Target_PetrifyingTouch",
 }
 

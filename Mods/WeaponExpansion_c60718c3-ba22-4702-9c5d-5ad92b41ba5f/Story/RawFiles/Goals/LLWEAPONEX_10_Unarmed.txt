@@ -7,7 +7,7 @@ KBSECTION
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, "LLWEAPONEX_Unarmed")
 THEN
-CharacterAddSkill(_Player, "Target_SingleHandedAttack", 0);
+CharacterAddSkill(_Player, "Target_LLWEAPONEX_SinglehandedAttack", 0);
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Player, "LLWEAPONEX_Unarmed")
@@ -16,14 +16,7 @@ GetUUID(_Player, _UUID)
 AND
 NOT NRD_ModQuery1("WeaponExpansion", "HasEmptyHand", _UUID)
 THEN
-CharacterRemoveSkill(_Player, "Target_SingleHandedAttack");
-
-IF
-SkillDeactivated(_Player, "Target_SingleHandedAttack")
-AND
-LLWEAPONEX_WeaponMastery_QRY_HasActiveMastery(_Player, "LLWEAPONEX_Unarmed")
-THEN
-CharacterAddSkill(_Player, "Target_SingleHandedAttack", 0);
+CharacterRemoveSkill(_Player, "Target_LLWEAPONEX_SinglehandedAttack");
 //END_REGION
 EXITSECTION
 
