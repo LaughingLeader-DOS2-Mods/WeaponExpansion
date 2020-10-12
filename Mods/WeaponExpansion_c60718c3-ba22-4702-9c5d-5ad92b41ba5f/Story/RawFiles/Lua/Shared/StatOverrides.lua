@@ -226,6 +226,20 @@ local function AddCanBackstab(props)
 	end
 end
 
+local IgnoreModPrefixes = {
+	-- Musketeer
+	_MUSK_ = true
+}
+
+local function IgnoreRangerSkill(skill)
+	for k,b in pairs(IgnoreModPrefixes) do
+		if string.find(skill, k) then
+			return true
+		end
+	end
+	return false
+end
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
 
@@ -268,9 +282,11 @@ local function StatOverrides_Init()
 		end
 
 		if bulletTemplates[skill] == nil then
-			if Ext.StatGetAttribute(skill, "SkillType") == "Projectile" and 
-				ability == "Ranger" and 
-				requirement == "RangedWeapon" then
+			if Ext.StatGetAttribute(skill, "SkillType") == "Projectile" 
+				and ability == "Ranger"
+				and requirement == "RangedWeapon" 
+				and not IgnoreRangerSkill(skill)
+				then
 					local defaultTemplate = Ext.StatGetAttribute(skill, "Template")
 					if not string.find(defaultTemplate, "{") then
 						local templateString = buildTemplateString("WeaponType", {
@@ -282,7 +298,7 @@ local function StatOverrides_Init()
 						Ext.StatSetAttribute(skill, "Template", templateString)
 						--print("[WeaponExpansion] Added rifle template support to skill ", skill)
 					end
-					appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
+					--appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
 					--print("[WeaponExpansion] Added rifle bullet explosion effect support to skill ", skill)
 			end
 		end
