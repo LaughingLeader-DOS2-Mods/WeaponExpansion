@@ -65,7 +65,8 @@ NPC = {
 	VendingMachine = "680d2702-721c-412d-b083-4f5e816b945a",
 	BishopAlexander = "03e6345f-1bd3-403c-80e2-a443a74f6349",
 	Dallis = "69b951dc-55a4-44b8-a2d5-5efedbd7d572",
-	Slane = "c099caa6-1938-4b4f-9365-d0881c611e71"
+	Slane = "c099caa6-1938-4b4f-9365-d0881c611e71",
+	UniqueHoldingChest = "80976258-a7a5-4430-b102-ba91a604c23f"
 }
 
 MODID = {
