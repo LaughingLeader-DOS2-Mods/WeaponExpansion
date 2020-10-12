@@ -73,18 +73,24 @@ end
 ---@param item EsvItem
 ---@return string
 local function TryGetOwner(item, inventoryOnly)
-	if item.InventoryHandle ~= nil then
-		local object = Ext.GetGameObject(item.InventoryHandle)
-		if object ~= nil then
-			return object.MyGuid
-		end
-	end
 	if inventoryOnly ~= true then
 		if item.OwnerHandle ~= nil then
 			local object = Ext.GetGameObject(item.OwnerHandle)
 			if object ~= nil then
 				return object.MyGuid
 			end
+		end
+	end
+	if item.ParentInventoryHandle ~= nil then
+		local object = Ext.GetGameObject(item.ParentInventoryHandle)
+		if object ~= nil then
+			return object.MyGuid
+		end
+	end
+	if item.InventoryHandle ~= nil then
+		local object = Ext.GetGameObject(item.InventoryHandle)
+		if object ~= nil then
+			return object.MyGuid
 		end
 	end
 	local inventory = StringHelpers.GetUUID(GetInventoryOwner(item.MyGuid))

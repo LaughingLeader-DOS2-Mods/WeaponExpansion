@@ -37,7 +37,7 @@ LeaderLib.RegisterListener("Initialized", function(region)
 	region = region or SharedData.RegionData.Current
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then
-			for id,unique in pairs (Uniques) do
+			for id,unique in pairs(Uniques) do
 				unique:Initialize(region, firstLoad)
 			end
 			firstLoad = false

@@ -227,7 +227,6 @@ local EquipmentTypes = {
 local function OnItemTooltip(item, tooltip)
 	---@type EclCharacter
 	local character = Client:GetCharacter()
-
 	local flags = tooltip:GetElements("Flags")
 	if flags ~= nil and #flags > 0 then
 		for i,v in pairs(flags) do
