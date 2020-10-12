@@ -27,7 +27,7 @@ end
 ---@param bonus string|table<string,boolean>
 ---@return boolean
 function MasteryBonusManager.HasMasteryBonuses(character, bonus)
-	local character = Ext.GetCharacter(char)
+	local character = Ext.GetCharacter(character)
 	for tag,tbl in pairs(Mastery.Bonuses) do
 		if Mastery.HasMasteryRequirement(character, tag) then
 			for bonusName,_ in pairs(tbl) do
