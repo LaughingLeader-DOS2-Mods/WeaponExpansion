@@ -112,9 +112,12 @@ end
 local anim_overrides = {
 	Target_SingleHandedAttack = {
 		CastAnimation = "skill_cast_ll_suckerpunch_01_cast",
-		CastSelfAnimation = "skill_cast_ll_suckerpunch_01_cast"
-	}
+		CastSelfAnimation = "skill_cast_ll_suckerpunch_01_cast",
+		CastTextEvent = "cast",
+	},
 }
+anim_overrides.Target_LLWEAPONEX_SinglehandedAttack = anim_overrides.Target_SingleHandedAttack
+
 ---These are stats that gain new features if the extender is active.
 local llweaponex_extender_additions = {
 	-- ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A = {
