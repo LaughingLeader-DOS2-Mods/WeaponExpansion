@@ -74,6 +74,7 @@
 	<content contentuid="h06681904g0440g41fag964eg42d43c0ade1f">Death&apos;s Last Stand</content>
 	<content contentuid="h0692074agdc1cg4a2eg9518g09d39df61122">Execution</content>
 	<content contentuid="h06ae90dbg0fabg4fdfg90ecgf9d698e7031d">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;30% chance on hit to shoot out a cone of dust in a 7m range, applying &lt;font color=&apos;#d040d0&apos;&gt;Blinded&lt;/font&gt; to enemies for 1 turn and dealing minor &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#fcd203&apos;&gt;Dust Blast can only occur once per turn.&lt;/font&gt;&lt;br&gt;Adds &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
+	<content contentuid="h06b63c74gd36bg40a0g9cd6gfcd6200256c2">A well-crafted mainhand shield for a set of intricate dual shields.&lt;br&gt;Dwarven craftsmen hammered this pair into perfection.</content>
 	<content contentuid="h06cbe437gf5d8g4188g8d16g277a0d72308e">Chaosblade</content>
 	<content contentuid="h06e35e52g6879g48a6g9dc9ga9dafc2f0fe2">Swap your stance with the &lt;font color=&apos;#c5a65a&apos;&gt;Warchief&apos;s Halberd&lt;/font&gt;, going between spear and axe mode.&lt;br&gt;In &lt;font color=&apos;#e8ff67&apos;&gt;Spear Mode&lt;/font&gt;, the halberd has increased range, critical damage, and applies &lt;font color=&apos;#ff3232&apos;&gt;Warchief&apos;s Mark&lt;/font&gt; on hit.&lt;br&gt;In &lt;font color=&apos;#ff67ef&apos;&gt;Axe Mode&lt;/font&gt;, the halberd has reduced range, increased damage, and consumes &lt;font color=&apos;#ff3232&apos;&gt;Warchief&apos;s Mark&lt;/font&gt; to deal [1].</content>
 	<content contentuid="h06eacec9g1d7fg46cagba45g3cde5062c8a8">A &lt;font color=&apos;#F19824&apos;&gt;localized quake&lt;/font&gt; is created where your weapon contacts the ground, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake:ExplodeRadius]m radius.&lt;/font&gt;</content>
@@ -1148,7 +1149,7 @@
 	<content contentuid="h7b2b18c8g3e44g4c5bg84e2g36b6727b36d0">Water Weakness</content>
 	<content contentuid="h7b46baddga6e9g47efga49fg00b390d0aabb">Legendary Quiver</content>
 	<content contentuid="h7b596ed2g245ag4088g9d9dgbe32b88a879b">&lt;font color=&apos;#FF0000&apos;&gt;Deflect Projectiles Coundown Cancelled - Not in Combat!&lt;/font&gt;</content>
-	<content contentuid="h7b6f604cgffefg4e14gbdc7ga46e73682d61">A rare estoc forged from &lt;font color=&apos;#40E0D0&apos;&gt;runic&lt;/font&gt; metal. Etched with runes signifying &quot;&lt;font color=&apos;#4197e2&apos;&gt;Ice&lt;/font&gt;&quot;, this blade pierces hearts with a bitter chlll.</content>
+	<content contentuid="h7b6f604cgffefg4e14gbdc7ga46e73682d61">A rare estoc forged from &lt;font color=&apos;#40E0D0&apos;&gt;runic&lt;/font&gt; metal. This blade pierces hearts with a bitter chlll.</content>
 	<content contentuid="h7b7b99e7g6848g4eaegaff2g6d1903b0f4d5">Hope&apos;s End, Evil&apos;s Foothold</content>
 	<content contentuid="h7b8060d1gb4f3g4cfagbed5gb96e60122001">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#00AA00&apos;&gt;Poison Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h7b84a8eeg44adg47a3g8649gd215531b4fbb">Disable Runic Cannon Offhand Weapon Restriction - Allows dual wielding with the Runic Cannon.</content>
@@ -1332,6 +1333,7 @@
 	<content contentuid="h8e770ac0gc6b4g4fa7gbe06gc010adeb6938">Leap forward and slam the almighty &lt;font color=&apos;#c5a65a&apos;&gt;Anvilmar&lt;/font&gt; into the ground, cracking the earth for [1] in a [2] radius, and knocking targets up.&lt;br&gt;&lt;font color=&apos;#BB5533&apos;&gt;Targets landing take [3] to [4] damage upon landing, depending on the launch height.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF00CC&apos;&gt;The impact radius begins where from your anvil hits the ground, which is 2m infront of your landing position.&lt;/font&gt;</content>
 	<content contentuid="h8e8ad7bdge201g4e47gb783g4aab39451266">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8ea5f0f3ga212g4a36g8edcg55ba5daf97a9">Blademaster&apos;s Strike 2</content>
+	<content contentuid="h8eb07842gc1b0g4218ga570gc9432148af51">The mainhand shield for a set of dual shields.&lt;br&gt;Rare Blackring soldiers once wielded these wicked shields, gutting foes upon their sharp edges.</content>
 	<content contentuid="h8ed077b7gfbccg48ebg8605ge999dc08df28">Blood Bullets</content>
 	<content contentuid="h8ee33f70g05a2g4783gbd91g9ef8c1e2804a">Ancient Inert Runeblade</content>
 	<content contentuid="h8f0d5103g9deeg4606gb1bfge121f36a2f4e">Fateslayer</content>
@@ -2076,6 +2078,7 @@
 	<content contentuid="he30d8120g13e1g4261g853cgdce0c96a00da">Journeyman Bookkeeper</content>
 	<content contentuid="he30fb376g9cf7g4a1bga23ag0e1a8fdd3726">Threw Balrin&apos;s Throwing Axe</content>
 	<content contentuid="he3183667gd912g4492g833fgadb200ea2dd7">Make the [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] Automatically Recharge</content>
+	<content contentuid="he36d1dd5gc9bdg4d3ag8d27g735c32e8297c">Surprisingly, for those looking to draw their foes&apos; ire, a target makes for a worthy shield.</content>
 	<content contentuid="he387afe8gc7ecg40beg8ffbg3206cb34c665">&lt;font color=&apos;#FFD700&apos;&gt;Dragon&apos;s Bane&lt;/font&gt;</content>
 	<content contentuid="he39536b3g0aaag4fe9g9dd2g444dff2e1b7b">Dancing Steel</content>
 	<content contentuid="he40e57f8g77eeg4675gb9c1g7f0994012fea">If knowledge is power, a book can conquer the world.</content>
