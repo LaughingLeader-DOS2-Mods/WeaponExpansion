@@ -2,6 +2,7 @@ Ext.Require("Shared/_InitShared.lua")
 
 RegisterProtectedOsirisListener = Mods.LeaderLib.RegisterProtectedOsirisListener
 StartOneshotTimer = Mods.LeaderLib.StartOneshotTimer
+RegisterSkillListener = Mods.LeaderLib.RegisterSkillListener
 
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
@@ -12,7 +13,8 @@ local defaultPersistentVars = {
         ShieldCover = {
             Blocking = {},
             BlockedHit = {},
-        }
+        },
+        ThrowWeapon = {}
     },
     MasteryMechanics = {},
     Timers = {},
