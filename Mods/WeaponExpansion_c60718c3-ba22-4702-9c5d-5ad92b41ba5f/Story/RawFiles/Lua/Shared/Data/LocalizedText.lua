@@ -31,7 +31,12 @@ Text = {
 		RuneSlot = ts:Create("h975e0db3gc056g4211g9d3eg2b5d8a34bb5b", "Rune Slot"),
 		RuneOnHitTagText = ts:Create("h3ee45020g2bb3g45c0ga195gc7282c87e628", "Amplifies Shoot Skill"),
 		ChanceText = ts:Create("h54e0b91cg48a7g4d5agaedcgbde756a109ea", "([1]% Chance)"),
-		RunicCannonEnergy = ts:Create("h02882207g5e7bg4deaga22eg854b68f8dd29", "<font color='#33FFAA'>Runic Energy [1]</font>")
+		RunicCannonEnergy = ts:Create("h02882207g5e7bg4deaga22eg854b68f8dd29", "<font color='#33FFAA'>Runic Energy [1]</font>"),
+	},
+	ItemDescription = {
+		EnabledMastery = ts:Create("h3716cca7ga9fcg4c76g8c61gaabdbbd47017", "<font color='#FFAA00'>Enabled Mastery: [1]</font>"),
+		EnabledMasteries = ts:Create("h5b484a05g654bg43bdgb455gbab5e178ca58", "<font color='#FFAA00'>Enabled Masteries: [1]</font>"),
+		AutoLeveling = ts:Create("hd5277dddg7b7dg4f95g9216g0e1515f5a461", "<font color='#80FFC3' size='18'>Automatically levels up when equipped, gaining bonuses at various levels.</font>")
 	},
 	MasteryMenu = {
 		Title = ts:Create("h2ead0b87gb4b0g410ag8334ge82de5c8fea0","Weapon Masteries"),
@@ -215,8 +220,4 @@ Text = {
 		StealLimitReached = ts:Create("h62e44d39gae88g4785g9004g79e396516ee4","<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>"),
 		MasteryRankUp = ts:Create("he0cceb33g75ddg44a5g94b4geda5fd12c886", "<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>")
 	},
-	ItemDescription = {
-		EnabledMastery = ts:Create("h3716cca7ga9fcg4c76g8c61gaabdbbd47017", "<font color='#FFAA00'>Enabled Mastery: [1]</font>"),
-		EnabledMasteries = ts:Create("h5b484a05g654bg43bdgb455gbab5e178ca58", "<font color='#FFAA00'>Enabled Masteries: [1]</font>"),
-	}
 }

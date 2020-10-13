@@ -8,6 +8,7 @@ return function()
 	local MenuSectionUniques = ts:Create("h903efedcge7b3g485ag87bfgc121d0ecad7f", "<font color='#C7A758'>Unique Items</font>")
 	
 	settings.Global:AddLocalizedFlags({
+		"LLWEAPONEX_UniqueAutoLevelingDisabled",
 		"LLWEAPONEX_ArmCannonRestrictionsDisabled",
 		"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
 		"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
@@ -28,6 +29,7 @@ return function()
 		return {{
 			DisplayName = MenuSectionGeneral.Value,
 			Entries = {
+				"LLWEAPONEX_UniqueAutoLevelingDisabled",
 				"LLWEAPONEX_AutoUnlockRecipesDisabled",
 				"LLWEAPONEX_ThrowObjectLimitDisabled",
 			}},

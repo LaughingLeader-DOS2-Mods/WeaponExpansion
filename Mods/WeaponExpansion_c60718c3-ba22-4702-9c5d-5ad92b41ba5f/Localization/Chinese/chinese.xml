@@ -396,6 +396,7 @@
 	<content contentuid="h289d5964g03f9g4c60gbea3g14b8e0471a8e">Wreathed in sparking energy, this greatbow arrow can unleash a tempest upon its unlucky target.</content>
 	<content contentuid="h28a03530g38b5g4d32gbe06gabe3d62cf635">Extermination</content>
 	<content contentuid="h28a95dabg50a7g424eg9562gb44e8ad5c570">Throw Explosive Shuriken</content>
+	<content contentuid="h28e6f038g408eg4421g91a6g4f86c40c4c39">Auto-Level Weapon Expansion Uniques</content>
 	<content contentuid="h290e3badg73d8g4c02g9e4fg6956ab910bf9">Random Elemental Ailment</content>
 	<content contentuid="h29308e7agb660g470ag9d0fgf89e2e79913f">An ancient blade forged from runic metal, and tempered with the fire of a legendary elemental.</content>
 	<content contentuid="h29403bd1g8d3dg491ag80e5g20effb3cf32c">Leadslinger</content>
@@ -1959,6 +1960,7 @@
 	<content contentuid="hd4ffb17bg123dg4776ga98bgcc138cee93af">Beginner</content>
 	<content contentuid="hd50ed08aga85fg4e60g827bg854c27381f59">Poison Arrow</content>
 	<content contentuid="hd52062c4gcf18g4dc0ga6c0ge90fec9a1a88">&lt;font color=&apos;#79C1FF&apos;&gt;Water Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
+	<content contentuid="hd5277dddg7b7dg4f95g9216g0e1515f5a461">&lt;font color=&apos;#80FFC3&apos; size=&apos;18&apos;&gt;Automatically levels up when equipped, gaining bonuses at various levels.&lt;/font&gt;</content>
 	<content contentuid="hd53002a9g6a71g4350gbe19g9a90ce4d9e19">Mark of the Wraith</content>
 	<content contentuid="hd561f4cag5c2eg4b5dg8756g09158906c09a">Ice Rune</content>
 	<content contentuid="hd56dc0d5g60d2g414egbb54g4eb73600004f">Journeyman Smasher</content>
@@ -2088,6 +2090,7 @@
 	<content contentuid="he424aec6gdb47g4a75gb89fg28bbb6a9ceb2">A strange token.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Combine this with specific unique weapons to change their scaling attribute.&lt;/font&gt;</content>
 	<content contentuid="he42c6583geb61g4b77gbe27gbbc25e37bb5e">Shadow Weakness</content>
 	<content contentuid="he4501b79g40a4g496aga99ag8510af90d294">Forestguard, Elderwall</content>
+	<content contentuid="he464eb6bg3fe9g4a19gbc32g09a4cc2f1b7f">If enabled, Weapon Expansion uniques will automatically level up to your level when equipped. If disabled, you will need to use another mod to level them up.</content>
 	<content contentuid="he467f39fg8b65g4136g828fg949f9f3aef15">Katana</content>
 	<content contentuid="he478deedg980eg4c61gaacdga2cfc8b63b8a">Each hit cleaves up to [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Range]m away in a [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Angle] degree cone, dealing [SkillDamage:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave].</content>
 	<content contentuid="he47cdb34ge958g41cag8136gb8827dc2f586">Throw an exploding shuriken at a target for [1] in a [2] radius. Applies &lt;font color=&apos;#FF0000&apos;&gt;Burning&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>

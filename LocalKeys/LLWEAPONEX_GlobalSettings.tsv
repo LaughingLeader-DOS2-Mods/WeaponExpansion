@@ -9,5 +9,7 @@ LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled	Make the [Key:ARM_UNIQUE_LLWEAP
 LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled_Description	If enabled, [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] will automatically recharge over time. If disabled, charges are restored by enemies dying in battle.
 LLWEAPONEX_ThrowObjectLimitDisabled	Enable [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] Limit	h8b499dd6g523fg40e2ga746g4adf2a1f63fb
 LLWEAPONEX_ThrowObjectLimitDisabled_Description	Enable the weight limit on [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] (Recommended). If enabled, you can only throw heavy characters if you have 40 Strength or Rank 4 Throwing Mastery.	hfc4163a2g4e16g4de9gb991g4e92e7d6b438
+LLWEAPONEX_UniqueAutoLevelingDisabled	Auto-Level Weapon Expansion Uniques	h28e6f038g408eg4421g91a6g4f86c40c4c39
+LLWEAPONEX_UniqueAutoLevelingDisabled_Description	If enabled, Weapon Expansion uniques will automatically level up to your level when equipped. If disabled, you will need to use another mod to level them up.	he464eb6bg3fe9g4a19gbc32g09a4cc2f1b7f
 LLWEAPONEX_SettingsMenu_Section_General	General	h6145e729g4cb0g4018gafe9gd89175b8943d
 LLWEAPONEX_SettingsMenu_Section_Uniques	<font color='#C7A758'>Unique Items</font>	h903efedcge7b3g485ag87bfgc121d0ecad7f
