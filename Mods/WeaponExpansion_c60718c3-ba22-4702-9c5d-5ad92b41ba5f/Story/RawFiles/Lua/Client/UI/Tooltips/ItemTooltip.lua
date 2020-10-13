@@ -142,13 +142,15 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	tooltip:RemoveElements("RuneEffect")
 	local boost = Ext.StatGetAttribute(item.StatsId, "RuneEffectWeapon")
 	local damageType = Ext.StatGetAttribute(boost, "Damage Type")
-	local weaponTypeName = Ext.GettsFromKey(weaponTypeTag)
-	local text = Text.ItemTooltip.SpecialRuneDamageTypeText:ReplacePlaceholders(weaponTypeName, GameHelpers.GetDamageText(damageType))
-	local element = {
-		Type = "SkillDescription",
-		Label = text
-	}
-	tooltip:AppendElement(element)
+	local weaponTypeName = GameHelpers.GetStringKeyText(weaponTypeTag, "")
+	if weaponTypeName ~= "" then
+		local text = Text.ItemTooltip.SpecialRuneDamageTypeText:ReplacePlaceholders(weaponTypeName, GameHelpers.GetDamageText(damageType))
+		local element = {
+			Type = "SkillDescription",
+			Label = text
+		}
+		tooltip:AppendElement(element)
+	end
 
 	local armorSlotType = tooltip:GetElement("ArmorSlotType")
 	if armorSlotType == nil then
@@ -157,7 +159,10 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 			Label = ""
 		}
 	end
-	armorSlotType.Label = Ext.GettsFromKey(slotTag)
+	local text = Ext.GameHelpers.GetStringKeyText(slotTag, "")
+	if text ~= "" then
+		armorSlotType.Label = text
+	end
 	local equipped = tooltip:GetElement("Equipped")
 	if equipped == nil then
 		equipped = {
@@ -176,8 +181,8 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	if extraProperties ~= nil then
 		for i,v in pairs(extraProperties) do
 			if v.Type == "Status" then
-				local title = Ext.GettsFromKey(Ext.StatGetAttribute(v.Action, "DisplayName")) or "StatusName"
-				local description = Ext.GettsFromKey(Ext.StatGetAttribute(v.Action, "Description")) or ""
+				local title = Ext.GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName")) or "StatusName"
+				local description = Ext.GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "Description")) or ""
 				if v.StatusChance < 1.0 then
 					local chan
 					title = string.format("%s %s", title, Text.ItemTooltip.ChanceText:ReplacePlaceholders(math.ceil(v.StatusChance * 100)))
