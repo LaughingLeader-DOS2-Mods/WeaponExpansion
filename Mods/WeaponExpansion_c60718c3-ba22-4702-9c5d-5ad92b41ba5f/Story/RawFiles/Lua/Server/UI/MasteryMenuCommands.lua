@@ -85,6 +85,7 @@ local function RequestOpenMasteryMenu(call, payload)
 						end
 					elseif IsPlayer(uuid) then
 						OpenMasteryMenu_Start(uuid, id)
+						return true
 					end
 				else
 					Ext.PrintError("[WeaponExpansion] Failed to find character for User ID:", id, payload)
@@ -94,9 +95,14 @@ local function RequestOpenMasteryMenu(call, payload)
 			end
 		end
 	end
+	return false
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_RequestOpenMasteryMenu", RequestOpenMasteryMenu)
+Ext.RegisterNetListener("LLWEAPONEX_RequestOpenMasteryMenu", function(cmd, payload)
+	if not RequestOpenMasteryMenu(cmd, payload) then
+		Ext.BroadcastMessage("LLWEAPONEX_TryGetClientID_RequestOpen", "", nil)
+	end
+end)
 
 local statusDummy = "S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15"
 local function RequestStatusTooltip(call,datastr)

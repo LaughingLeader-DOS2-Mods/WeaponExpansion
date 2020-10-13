@@ -86,9 +86,47 @@ local function SetupListeners()
 	end
 end
 
-local function TryOpenMasteryMenu()
-	Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=Client.ID, UUID=Client.UUID, Profile=Client.Profile}))
+local function ClientIsUnset()
+	if Client == nil or Client.ID < 0 then
+		return true
+	end
+	return false
 end
+
+local requestingToOpenMenu = false
+
+local function TryOpenMasteryMenu()
+	requestingToOpenMenu = true
+	if ClientIsUnset() then
+		Ext.PrintWarning("[LLWEAPONEX] Client values are unset? Trying to get current character from the hotbar.")
+		local character = GameHelpers.Client.GetCharacter()
+		if character ~= nil then
+			local profile = ""
+			if character.PlayerCustomData ~= nil then
+				profile = character.PlayerCustomData.OwnerProfileID
+			end
+			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=character.UserID, UUID=character.MyGuid, Profile=profile}))
+		else
+			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=Client.ID, UUID=Client.UUID, Profile=Client.Profile}))
+		end
+	else
+		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=Client.ID, UUID=Client.UUID, Profile=Client.Profile}))
+	end
+end
+
+Ext.RegisterNetListener("LLWEAPONEX_TryGetClientID_RequestOpen", function(cmd, payload)
+	if requestingToOpenMenu then
+		requestingToOpenMenu = false
+		local character = GameHelpers.Client.GetCharacter()
+		if character ~= nil then
+			local profile = ""
+			if character.PlayerCustomData ~= nil then
+				profile = character.PlayerCustomData.OwnerProfileID
+			end
+			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=character.UserID, UUID=character.MyGuid, Profile=profile}))
+		end
+	end
+end)
 
 local function splitDescriptionByPattern(str, pattern, includeMatch)
 	local list = {};
@@ -553,6 +591,7 @@ local function OpenMasteryMenu(characterMasteryData)
 end
 
 local function NetMessage_OpenMasteryMenu(call,data)
+	requestingToOpenMenu = false
 	---@type CharacterMasteryData
 	local characterMasteryData = CharacterMasteryData:Create()
 	characterMasteryData:LoadFromString(data)
