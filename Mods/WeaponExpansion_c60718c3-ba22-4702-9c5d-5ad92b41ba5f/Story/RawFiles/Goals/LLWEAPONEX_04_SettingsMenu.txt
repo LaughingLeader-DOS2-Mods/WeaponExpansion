@@ -4,17 +4,6 @@ INITSECTION
 
 KBSECTION
 
-IF
-ObjectFlagSet("LLWEAPONEX_Commands_ResetBalrinAxe", (CHARACTERGUID)_Player, _)
-AND
-LeaderLib_Helper_QRY_ClearObjectFlag(_Player, "LLWEAPONEX_Commands_ResetBalrinAxe")
-AND
-DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe, _Success)
-THEN
-NOT DB_LLWEAPONEX_Throwing_Temp_ThrowingAxeCaster(_Player, _Target, _ThrowingAxe, _Success);
-LeaderLib_Statuses_SafeRemoval(_Target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A");
-LLWEAPONEX_Throwing_ReturnBalrinAxe(_Player, _ThrowingAxe);
-
 //REGION CHEATS
 // Makes the vending machine spawn all the unique items locked behind level requirements
 IF

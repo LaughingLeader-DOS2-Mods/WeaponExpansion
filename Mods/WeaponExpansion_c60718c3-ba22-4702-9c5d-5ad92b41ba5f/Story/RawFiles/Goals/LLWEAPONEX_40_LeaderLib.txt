@@ -22,7 +22,6 @@ LeaderLib_ToggleScripts_EnableScript("LeaderLib_LuaSkillListeners_Enabled", "Wea
 PROC
 LLWEAPONEX_LeaderLib_InitSettings()
 THEN
-LeaderLib_Register_ModMenuByUUID("c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "LLWEAPONEX_SettingsMenu", "[Weapon Expansion] Settings", "WeaponExpansion", "LaughingLeader");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_TS_GrowthEvents_Item_Enabled", "WeaponExpansion");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_StatusEvents_DisableScriptEnabled", "WeaponExpansion");
 LeaderLib_ToggleScripts_EnableScript("LeaderLib_LuaSkillListeners_Enabled", "WeaponExpansion");
@@ -183,6 +182,13 @@ LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_PowerGauntlets_Tog
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+_LastVersion < 153092096
+THEN
+LeaderLib_ClearModMenuEntry("c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "LLWEAPONEX_SettingsMenu");
+
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
