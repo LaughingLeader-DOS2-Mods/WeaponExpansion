@@ -87,12 +87,6 @@ local function TryGetOwner(item, inventoryOnly)
 			return object.MyGuid
 		end
 	end
-	if item.InventoryHandle ~= nil then
-		local object = Ext.GetGameObject(item.InventoryHandle)
-		if object ~= nil then
-			return object.MyGuid
-		end
-	end
 	local inventory = StringHelpers.GetUUID(GetInventoryOwner(item.MyGuid))
 	if not StringHelpers.IsNullOrEmpty(inventory) then
 		return inventory
@@ -449,21 +443,19 @@ function UniqueData:ApplyProgression(progressionTable, persist, item)
 	-- TODO - Testing. Making sure bonuses don't overlap if they're set to append when you save/load/change level/level up etc.
 	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
 	-- enries aren't nerfing things.
-	if Ext.IsDeveloperMode() then
-		local level = item.Stats.Level
-		if item:HasTag("LeaderLib_AutoLevel") and self.Owner ~= nil then
-			if ObjectIsCharacter(self.Owner) == 1 then
-				level = CharacterGetLevel(self.Owner)
-				ItemLevelUpTo(item.MyGuid, level)
-			end
+	local level = item.Stats.Level
+	if item:HasTag("LeaderLib_AutoLevel") and self.Owner ~= nil then
+		if ObjectIsCharacter(self.Owner) == 1 then
+			level = CharacterGetLevel(self.Owner)
+			ItemLevelUpTo(item.MyGuid, level)
 		end
-		local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
-		if not b then
-			Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", self.UUID, item.StatsId)
-			Ext.PrintError(self.UUID, err)
-		end
-		self.LastProgressionLevel = level
 	end
+	local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
+	if not b then
+		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", self.UUID, item.StatsId)
+		Ext.PrintError(self.UUID, err)
+	end
+	self.LastProgressionLevel = level
 end
 
 return UniqueData
