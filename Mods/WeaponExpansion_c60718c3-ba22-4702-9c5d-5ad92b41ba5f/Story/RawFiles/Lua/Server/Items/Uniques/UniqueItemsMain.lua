@@ -213,3 +213,25 @@ function UniqueManager.OnDeath(char)
 		end
 	end
 end
+
+local function CanAutoLevelUnique(item)
+	return (item:HasTag("LeaderLib_AutoLevel") or item:HasTag("LLWEAPONEX_AutoLevel")) and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
+end
+---@param character EsvCharacter
+---@param item EsvItem
+function UniqueManager.LevelUpUnique(character, item)
+	if CanAutoLevelUnique(item) then
+		local uniqueData = Uniques[item.MyGuid]
+		if uniqueData ~= nil then
+			if uniqueData.Owner == character.MyGuid then
+				uniqueData:ApplyProgression(uniqueData.ProgressionData, nil, item)
+			end
+		else
+			if item.Stats.Unique == 1 or item.Stats.ItemTypeReal == "Unique" then
+				if item.Stats.Level < character.Stats.Level then
+					ItemLevelUpTo(item.MyGuid, character.Stats.Level)
+				end
+			end
+		end
+	end
+end

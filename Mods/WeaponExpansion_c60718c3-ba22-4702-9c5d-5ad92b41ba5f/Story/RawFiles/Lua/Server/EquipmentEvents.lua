@@ -186,6 +186,7 @@ function OnItemEquipped(uuid,itemUUID)
 		end
 
 		if isPlayer then
+			UniqueManager.LevelUpUnique(character, item)
 			local unique = AllUniques[itemUUID]
 			if unique ~= nil and not unique:IsReleasedFromOwner() then
 				unique:ReleaseFromOwner()
