@@ -24,7 +24,7 @@ local function ScatterOnDeath(data, owner)
 end
 
 ---@type AllUniqueProgressionData
-local ProgressionData = Ext.Require("Server/Data/UniqueProgression.lua")
+local ProgressionData = Ext.Require("Server/Items/Uniques/UniqueItemsProgression.lua")
 
 ---@type table<string, UniqueData>
 Uniques = {
