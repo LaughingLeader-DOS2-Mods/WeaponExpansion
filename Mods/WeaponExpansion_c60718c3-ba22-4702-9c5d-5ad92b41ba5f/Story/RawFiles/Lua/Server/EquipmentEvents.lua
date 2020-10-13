@@ -192,7 +192,7 @@ function OnItemEquipped(uuid,itemUUID)
 				end
 			end
 		end
-		for tag,callback in pairs(Listeners.EquipmentChanged.Tag) do
+		for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 			if item:HasTag(tag) then
 				for i,callback in pairs(callbacks) do
 					local b,err = xpcall(callback, debug.traceback, character, item, tag, true)
@@ -219,16 +219,16 @@ function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 	local callbacks = Listeners.EquipmentChanged.Template[template]
 	if callbacks ~= nil then
 		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, character, item, template, true)
+			local b,err = xpcall(callback, debug.traceback, character, item, template, false)
 			if not b then
 				Ext.PrintError(err)
 			end
 		end
 	end
-	for tag,callback in pairs(Listeners.EquipmentChanged.Tag) do
+	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 		if item:HasTag(tag) then
 			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, character, item, tag, true)
+				local b,err = xpcall(callback, debug.traceback, character, item, tag, false)
 				if not b then
 					Ext.PrintError(err)
 				end
