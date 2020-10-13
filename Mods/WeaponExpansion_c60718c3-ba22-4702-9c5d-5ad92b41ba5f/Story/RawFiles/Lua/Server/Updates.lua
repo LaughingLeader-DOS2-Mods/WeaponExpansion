@@ -9,7 +9,7 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 		ItemToInventory("927669c3-b885-4b88-a0c2-6825fbf11af2", "80976258-a7a5-4430-b102-ba91a604c23f")
 	end
 
-	if last < 153026562 then
+	if last < 153092096 then
 		if not Ext.IsDeveloperMode() then
 			if not IsPlayer(Origin.Harken) then
 				if not IsPlayer(Uniques.AnvilMace.Owner) then
@@ -54,6 +54,10 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 					SetTag(v, "LLWEAPONEX_Bludgeon")
 				end
 			end
+		end
+
+		if HasActiveStatus(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
+			CharacterRemoveSkill(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
 		end
 	end
 end)
