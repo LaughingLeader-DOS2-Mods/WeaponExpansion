@@ -2,6 +2,8 @@ Ext.Require("Shared/_InitShared.lua")
 
 RegisterProtectedOsirisListener = Mods.LeaderLib.RegisterProtectedOsirisListener
 StartOneshotTimer = Mods.LeaderLib.StartOneshotTimer
+StartTimer = Mods.LeaderLib.StartTimer
+CancelTimer = Mods.LeaderLib.CancelTimer
 RegisterSkillListener = Mods.LeaderLib.RegisterSkillListener
 
 ---@class WeaponExpansionVars

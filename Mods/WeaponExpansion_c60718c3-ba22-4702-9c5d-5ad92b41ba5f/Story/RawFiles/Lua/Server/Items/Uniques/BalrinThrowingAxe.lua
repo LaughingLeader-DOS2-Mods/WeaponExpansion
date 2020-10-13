@@ -82,13 +82,30 @@ RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_UniqueThrowingAxeA",
 	end
 end)
 
-RegisterStatusListener("StatusApplied", "LLWEAPONEX_BALRINAXE_RECOVER_START", function(target, status, source)
+local function RecoverBalrinAxe(target)
 	local data = PersistentVars.SkillData.ThrowBalrinAxe[target]
 	if data ~= nil then
 		EquipBalrinAxe(target, true)
 		CharacterStatusText(target, "LLWEAPONEX_StatusText_BalrinAxeRetrieved")
-		RemoveStatus(source, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
-		ApplyStatus(source, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, target)
+		return true
+	end
+	return false
+end
+
+RegisterStatusListener("StatusApplied", "LLWEAPONEX_BALRINAXE_RECOVER_START", function(balrinUser, status, target)
+	if RecoverBalrinAxe(balrinUser) then
+		RemoveStatus(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
+		ApplyStatus(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, balrinUser) -- No Aura
+		local character = Ext.GetCharacter(balrinUser)
+		if ObjectIsCharacter(target) == 1 then
+			local targetCharacter = Ext.GetCharacter(target)
+			local backStab = Game.Math.CanBackstab(character.Stats, targetCharacter.Stats)
+			GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", HitFlagPresets.GuaranteedWeaponHit:Append({
+				Backstab = backStab and 1 or 0
+			}))
+		else
+			GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", HitFlagPresets.GuaranteedWeaponHit)
+		end
 	end
 end)
 
@@ -100,4 +117,8 @@ RegisterStatusListener("StatusRemoved", "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A"
 			break
 		end
 	end
+end)
+
+RegisterStatusListener("StatusRemoved", "LLWEAPONEX_BALRINAXE_DISARMED_INFO", function(target, status)
+	RecoverBalrinAxe(target)
 end)

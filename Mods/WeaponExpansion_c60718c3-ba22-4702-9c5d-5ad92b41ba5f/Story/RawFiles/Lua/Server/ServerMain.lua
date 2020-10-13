@@ -1,3 +1,42 @@
+---@class HitFlagPreset
+local HitFlagPreset = {}
+HitFlagPreset.__index = HitFlagPreset
+
+function HitFlagPreset:Create(params)
+    local this = {}
+    for k,v in pairs(params) do
+        this[k] = v
+    end
+    setmetatable(this, self)
+    return this
+end
+
+function HitFlagPreset:Append(params)
+    local this = {}
+    for k,v in pairs(self) do
+        this[k] = v
+    end
+    for k,v in pairs(params) do
+        this[k] = v
+    end
+    setmetatable(this, self)
+    return this
+end
+
+---@type table<string, HitFlagPreset>
+HitFlagPresets = {
+    ---@type HitFlagPreset
+    GuaranteedWeaponHit = HitFlagPreset:Create({
+        SimulateHit = 1,
+        HitType = "WeaponDamage",
+        HitWithWeapon = 1,
+        Hit = 1,
+        Blocked = 0,
+        Dodged = 0,
+        Missed = 0,
+    })
+}
+
 function GetHandedness(weapon)
     if weapon == nil then
         return nil

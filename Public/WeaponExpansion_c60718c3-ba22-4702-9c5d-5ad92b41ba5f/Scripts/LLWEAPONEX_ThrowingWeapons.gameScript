@@ -178,23 +178,3 @@ THEN
 		ShootLocalProjectileAt(_Skill, _OriginItem, %LLWEAPONEX_ProjectileOffset, _Caster, _Level, _Caster)
 	ENDIF
 ENDIF
-
-EVENT LLWEAPONEX_Throwing_BalrinAxeBonusDamage
-VARS
-	CHARACTER:_Character
-	CHARACTER:_Source
-	FLOAT:_LevelF
-	INT:_Level
-ON
-	OnCharacterStatusApplied(_Character, LLWEAPONEX_BALRINAXE_DEBUFF)
-ACTIONS
-IF "c1"
-	CharacterGetStatusSourceCharacter(_Character, LLWEAPONEX_BALRINAXE_DEBUFF, _Source)
-THEN
-	IF "c1"
-		CharacterGetStat(_LevelF, _Source, Level)
-	THEN
-		Cast(_Level, _LevelF)
-	ENDIF
-	ExplodeAt(_Character, Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage, _Level, _Source)
-ENDIF

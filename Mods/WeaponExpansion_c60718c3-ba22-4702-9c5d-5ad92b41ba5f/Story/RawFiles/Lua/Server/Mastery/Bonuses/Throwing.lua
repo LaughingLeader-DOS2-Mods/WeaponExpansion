@@ -52,15 +52,7 @@ local function OnThrowWeapon(skill, char, state, data)
 				end
 			end
 	
-			GameHelpers.Damage.ApplySkillDamage(Ext.GetCharacter(char), data.Target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", {
-				SimulateHit = 1,
-				HitType = "WeaponDamage",
-				HitWithWeapon = 1,
-				Hit = 1,
-				Blocked = 0,
-				Dodged = 0,
-				Missed = 0,
-			}, mainWeapon, offhandWeapon, true)
+			GameHelpers.Damage.ApplySkillDamage(Ext.GetCharacter(char), data.Target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", HitFlagPresets.GuaranteedWeaponHit, mainWeapon, offhandWeapon, true)
 		else
 			PersistentVars.SkillData.ThrowWeapon[char] = nil
 		end
