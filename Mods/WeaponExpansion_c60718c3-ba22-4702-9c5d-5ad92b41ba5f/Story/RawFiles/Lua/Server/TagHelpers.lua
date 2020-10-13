@@ -17,7 +17,7 @@ function TagWeapon(uuid, statType, stat)
 	local tagged = false
 	local template = StringHelpers.GetUUID(GetTemplate(uuid))
 	local templateTag = Tags.TemplateToTag[template]
-	print("TagWeapon", uuid, statType, stat, template, templateTag)
+	printd("TagWeapon", uuid, statType, stat, template, templateTag)
 	if templateTag ~= nil then
 		if type(templateTag) == "table" then
 			for i,tag in pairs(templateTag) do

@@ -216,7 +216,6 @@ function UniqueData:Transfer(target, equip)
 		Ext.PrintError("[UniqueData:Transfer] Item", self.UUID, "does not exist!")
 		return
 	end
-	self.Initialized = true
 	self.Owner = target
 
 	if GetInventoryOwner(self.UUID) ~= target then
@@ -276,7 +275,7 @@ local function ApplyProgressionEntry(entry, stat)
 			end
 		end
 	end
-	print(statChanged, entry.Attribute, entry.Value)
+	printd(statChanged, entry.Attribute, entry.Value)
 	return statChanged
 end
 
@@ -374,7 +373,6 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 
 	if slot ~= nil and owner ~= "" then
 		StartOneshotTimer("Timers_LLWEAPONEX_PostTransformEquip", 250, function()
-			print("Timers_LLWEAPONEX_PostTransformEquip", slot, owner)
 			NRD_CharacterEquipItem(owner, item.MyGuid, slot, 0, 0, 1, 1)
 		end)
 	end
@@ -457,12 +455,12 @@ function UniqueData:ApplyProgression(progressionTable, persist, item)
 			if ObjectIsCharacter(self.Owner) == 1 then
 				level = CharacterGetLevel(self.Owner)
 				ItemLevelUpTo(item.MyGuid, level)
-				print(self.UUID, level)
 			end
 		end
 		local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
 		if not b then
-			Ext.Print(self.UUID, err)
+			Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", self.UUID, item.StatsId)
+			Ext.PrintError(self.UUID, err)
 		end
 		self.LastProgressionLevel = level
 	end
