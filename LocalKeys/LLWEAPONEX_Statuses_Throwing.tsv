@@ -1,22 +1,22 @@
-Key	Content
-LLWEAPONEX_THROW_DAZED_DEBUFF_Description	Such a headache...
-LLWEAPONEX_THROW_DAZED_DEBUFF_DisplayName	Blunt Trauma
-LLWEAPONEX_THROW_DAZED_FX_Description	Character has been hit by a flying blunt weapon. It's stuck!
-LLWEAPONEX_THROW_DAZED_FX_DisplayName	Dazed
-LLWEAPONEX_THROW_IMPALED_DEBUFF_Description	Character has internal injuries from an impaled weapon.
-LLWEAPONEX_THROW_IMPALED_DEBUFF_DisplayName	Internal Damage
-LLWEAPONEX_THROW_IMPALED_Description	Character has been impaled by a thrown weapon!
-LLWEAPONEX_THROW_IMPALED_DisplayName	Impaled
-LLWEAPONEX_WEAPON_THROW_SEAL_Description	Character has been hit by seal!<br><font color='#FF0000'>10% chance on spell cast to get interrupted.</font>
-LLWEAPONEX_WEAPON_THROW_SEAL_DisplayName	Inhibited
-LLWEAPONEX_WEAPON_THROW_STAFF_Description	Character has been hit by a thrown staff!
-LLWEAPONEX_WEAPON_THROW_STAFF_DisplayName	Staff Infection
-LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A_Description	Character has been impaled by <font color='#C7A758'>Balrin's Throwing Axe</font>!
-LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A_DisplayName	Impaled (Balrin's Throwing Axe)
-LLWEAPONEX_WEAPON_THROW_WAND_Description	Character has been hit by a thrown wand!
-LLWEAPONEX_WEAPON_THROW_WAND_DisplayName	Surface Tension
-LLWEAPONEX_BALRINAXE_DISARMED_INFO_DisplayName	Threw Balrin's Throwing Axe
-LLWEAPONEX_BALRINAXE_DISARMED_INFO_Description	Character has thrown <font color='#C7A758'>Balrin's Throwing Axe</font> at a target.<br><font color='#ED9D07'>Get near the target to retrieve the axe, otherwise it will return when this status ends.</font>
-LLWEAPONEX_BALRINAXE_INFO_DisplayName	Throwable
-LLWEAPONEX_BALRINAXE_PREPARED_DisplayName	Prepare Balrin's Throwing Axe
-LLWEAPONEX_TOSSED_DisplayName	Throw Target
+Key	Content	Handle
+LLWEAPONEX_BALRINAXE_DISARMED_INFO_Description	Character has thrown <font color='#C7A758'>Balrin's Throwing Axe</font> at a target.<br><font color='#ED9D07'>Get near the target to retrieve the axe, otherwise it will return when this status ends.</font>	h810a07e9gb875g4acagab83g71bcb1fdb17e
+LLWEAPONEX_BALRINAXE_DISARMED_INFO_DisplayName	Threw Balrin's Throwing Axe	h38f62f77g4d45g4ec1gb022g265f73c668e2
+LLWEAPONEX_BALRINAXE_INFO_DisplayName	Throwable	h0f72bec6g0ff4g4af9gaa76ga90f7ec31aab
+LLWEAPONEX_BALRINAXE_PREPARED_DisplayName	Prepare Balrin's Throwing Axe	h94127628g5630g4247gacf1ga669437aad77
+LLWEAPONEX_THROW_DAZED_DEBUFF_Description	Such a headache...	h4145e065g37b0g4670g824cgf978c9c1bc84
+LLWEAPONEX_THROW_DAZED_DEBUFF_DisplayName	Blunt Trauma	h9f1bbe3bg7346g4b0dg933cg04a94849cddf
+LLWEAPONEX_THROW_DAZED_FX_Description	Character has been hit by a flying blunt weapon. It's stuck!	h5bcba301g8929g4b57gbf08g99e888af12c4
+LLWEAPONEX_THROW_DAZED_FX_DisplayName	Dazed	h8becafcdg2237g4429g984cgf2713aa43a55
+LLWEAPONEX_THROW_IMPALED_DEBUFF_Description	Character has internal injuries from an impaled weapon.	h96135bc7gda76g453ag8f51g814a233239ad
+LLWEAPONEX_THROW_IMPALED_DEBUFF_DisplayName	Internal Damage	h71aeb8ebgc32eg4f41g8151g248a32af656e
+LLWEAPONEX_THROW_IMPALED_Description	Character has been impaled by a thrown weapon!	h4f0e6adcg34d8g4c8fgbfecg6fe6a80c7e9d
+LLWEAPONEX_THROW_IMPALED_DisplayName	Impaled	h7592e177g12eag4941g91b3gfdb27b66bbd8
+LLWEAPONEX_TOSSED_DisplayName	Throw Target	hb09d7b54g908cg4bf8g92cbg1c9f5d91f9a0
+LLWEAPONEX_WEAPON_THROW_SEAL_Description	Character has been hit by seal!<br><font color='#FF0000'>10% chance on spell cast to get interrupted.</font>	h27a4034dg9f11g43c7gbf7dgb27813eaea1b
+LLWEAPONEX_WEAPON_THROW_SEAL_DisplayName	Inhibited	h36115a3dg19f8g4ee8gb3edg06bc19b01fae
+LLWEAPONEX_WEAPON_THROW_STAFF_Description	Character has been hit by a thrown staff!	h0ce310f5g9564g45f0gb0e2gd2c5c1dd89a3
+LLWEAPONEX_WEAPON_THROW_STAFF_DisplayName	Staff Infection	hdb292c4fg2cf6g432dga031gb762b7f18bc0
+LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A_Description	Character has been impaled by <font color='#C7A758'>Balrin's Throwing Axe</font>!	hae49798dgfa34g46eeg80bcg0e12abd50d6f
+LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A_DisplayName	Impaled (Balrin's Throwing Axe)	h306f7581gbdc9g4fe7g9f09gd675c4ecbd34
+LLWEAPONEX_WEAPON_THROW_WAND_Description	Character has been hit by a thrown wand!	ha941a44dg4c0dg44a0gb5a4gfec18574f8d2
+LLWEAPONEX_WEAPON_THROW_WAND_DisplayName	Surface Tension	h9620932bgb03bg4cb6gb965gc3c36e1f3d24

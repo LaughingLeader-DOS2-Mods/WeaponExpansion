@@ -1,9 +1,9 @@
-Key	Content
-Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter
-Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] + [2] + [3].<br><font color='#ffe86a'>Corrosive damage breaks physical armor, while magic damage breaks magic armor.</font>
-LLWEAPONEX_Target_Raizan_Flurry_DisplayName	Raijin's Onslaught
-LLWEAPONEX_Target_Raizan_Flurry_Description	(Placeholder)<br>Unleash the magic within the Raizan, attacking 5 times with astonishing speed, each hit dealing [1].
-Rush_LLWEAPONEX_Katana_Iaido_DisplayName	Flash of Steel
-Rush_LLWEAPONEX_Katana_Iaido_Description	<font color='#FF2D2D'>Katana Mastery I</font><br>In a swift display of skill, instantly rend enemies in a line, dealing [1].<br>Consumes all stacks of <font color='#C9AA58'>Blademaster's Strike</font> on targets hit, dealing [2] per stack, and rupturing their wounds for [3] every 3 stacks.
-Shout_LLWEAPONEX_Katana_VanquishersPath_DisplayName	Vanquisher's Path
-Shout_LLWEAPONEX_Katana_VanquishersPath_Description	<font color='#FF2D2D'>Katana Mastery II</font><br>Instantly teleport to enemies marked with <font color='#C9AA58'>Blademaster's Strike</font>, dealing [1] on hit, and consuming each stack for [2] each.<br><font color='#F35C8E'>If an enemy dies, <font color='#C9AA58'>Blademaster's Strike</font> is spread to enemies within 6m.</font>
+Key	Content	Handle
+LLWEAPONEX_Target_Raizan_Flurry_Description	(Placeholder)<br>Unleash the magic within the Raizan, attacking 5 times with astonishing speed, each hit dealing [1].	h563cad19gb5b7g491ag8872g3ea4ae20daad
+LLWEAPONEX_Target_Raizan_Flurry_DisplayName	Raijin's Onslaught	h948029b0ga4c5g4672g8bd6g2bdab15b39a7
+Rush_LLWEAPONEX_Katana_Iaido_Description	<font color='#FF2D2D'>Katana Mastery I</font><br>In a swift display of skill, instantly rend enemies in a line, dealing [1].<br>Consumes all stacks of <font color='#C9AA58'>Blademaster's Strike</font> on targets hit, dealing [2] per stack, and rupturing their wounds for [3] every 3 stacks.	h027a0666g90c9g48efg90dcgde2bbb110a36
+Rush_LLWEAPONEX_Katana_Iaido_DisplayName	Flash of Steel	ha1160b55g42e7g4f4dg994fgfbb95d93c8b8
+Shout_LLWEAPONEX_Katana_VanquishersPath_Description	<font color='#FF2D2D'>Katana Mastery II</font><br>Instantly teleport to enemies marked with <font color='#C9AA58'>Blademaster's Strike</font>, dealing [1] on hit, and consuming each stack for [2] each.<br><font color='#F35C8E'>If an enemy dies, <font color='#C9AA58'>Blademaster's Strike</font> is spread to enemies within 6m.</font>	h4a34bf73gdea3g49d8g98cag9d0ae3ae6b07
+Shout_LLWEAPONEX_Katana_VanquishersPath_DisplayName	Vanquisher's Path	h7d5fe80bg7bdcg43c0g9779gb697f81eccef
+Target_LLWEAPONEX_HelmSplitter_Description	Swing your blade down upon an opponent's head, dealing [1] + [2] + [3].<br><font color='#ffe86a'>Corrosive damage breaks physical armor, while magic damage breaks magic armor.</font>	h1963266cgf33eg4841g915cgce17383614cf
+Target_LLWEAPONEX_HelmSplitter_DisplayName	Helm Splitter	h819abaa1gf2c8g4f20gaefcg4906094b14a6

@@ -1,5 +1,5 @@
-Key	Content
-LLWEAPONEX_Target_CorrosiveTouch_Description	Deal [1] to target character, destroying <font color='#A8A8A8'>Physical Armour</font> and setting Acid.
-LLWEAPONEX_Cone_CorrosiveSpray_Description	Deal [1] to targets in a cone, destroying <font color='#A8A8A8'>Physical Armour</font> and setting Acid and Atrophy.
-LLWEAPONEX_Projectile_SilverArrow_Description	Deal [1], destroying <font color='#A8A8A8'>Physical Armour</font>.
-LLWEAPONEX_Target_DemonicStare_Description	Deal [1] to target character, draining that amount as <font color='#188EDE'>Magic Armour</font>.
+Key	Content	Handle
+LLWEAPONEX_Cone_CorrosiveSpray_Description	Deal [1] to targets in a cone, destroying <font color='#A8A8A8'>Physical Armour</font> and setting Acid and Atrophy.	hc1b5b2a1g7571g45c9ga1abge8668ed79a7e
+LLWEAPONEX_Projectile_SilverArrow_Description	Deal [1], destroying <font color='#A8A8A8'>Physical Armour</font>.	h4893e298g0c9fg4593gad0dgb1a795c0d767
+LLWEAPONEX_Target_CorrosiveTouch_Description	Deal [1] to target character, destroying <font color='#A8A8A8'>Physical Armour</font> and setting Acid.	hccff890fged12g404eg9ea0g44216d866d20
+LLWEAPONEX_Target_DemonicStare_Description	Deal [1] to target character, draining that amount as <font color='#188EDE'>Magic Armour</font>.	hbdb2aa9ag0e32g4b2fga9ccg59085dd8de7e

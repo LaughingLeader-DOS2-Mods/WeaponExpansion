@@ -1,14 +1,14 @@
-Key	Content
-Projectile_LLWEAPONEX_ShieldToss_Description	Throw your mainhand shield at an enemy. The shield can ricochet up to 3 times within [1], dealing [2] damage and restoring [3] and [4] for each enemy hit.<br>The shield then returns, restoring an additional amount of armor.<br><font color='#FFD700' size='18'>Shield Mastery I</font><br><font color='#4197e2'>If 3 targets are hit, restore [5] and [6] to allies within 8m.</font>
-Projectile_LLWEAPONEX_ShieldToss_DisplayName	Shield Toss
-Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and has a chance to daze the target.
-Target_LLWEAPONEX_ShieldBash_DisplayName	Shield Bash
-Target_LLWEAPONEX_ShieldCover_DisplayName	Shield Cover
-Target_LLWEAPONEX_ShieldCover_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery I</font><br>Cover a target character remotely for 3 turns, redirecting 50% of the damage they take to you.<br><font color='#FFFF22'>The first time the target gets attacked, rush to their position and counter-attack the attacker for [1], and grant the target temporary damage resistance.</font>
-Target_LLWEAPONEX_ShieldCover_CounterAttack_DisplayName	Shield Counter
-Target_LLWEAPONEX_ShieldPrison_DisplayName	Shield Prison
-Target_LLWEAPONEX_ShieldPrison_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery II</font><br>Encase the target in a hardened shell, removing them from combat for 1 turn.<br>Allies gain +2 AP upon being freed.
-Target_LLWEAPONEX_IronMaiden_DisplayName	Iron Maiden
-Target_LLWEAPONEX_IronMaiden_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery III</font><br>Slam the target in an <font color='#CCCCCC'>Iron Maiden</font>, dealing [1].<br>If the target is in a <font color='#00AA00'>Shield Prison</font>, deal an extra [2] and apply <font color='#AAAAEE'>Dazed</font>.<br>Applies <font color='#FF0000'>Bleeding</font>, and <font color='#DC143C'>Ruptures</font> <font color='#FF0000'>Bleeding</font> targets for [3].
-Shout_LLWEAPONEX_DualShields_HunkerDown_DisplayName	Hunker Down
-Shout_LLWEAPONEX_DualShields_HunkerDown_Description	Bolster your defenses, gaining a <font color='#11FF00'>[1]% boost to your armor values</font> until your next turn.<br><font color-'#FF6600'>When hunkering down, you will be Grounded and be unable to move, while becoming a priority target for enemies.</font><br><font color='#11FF99'>Critical hit damage taken is reduced by 50%.</font>
+Key	Content	Handle
+Projectile_LLWEAPONEX_ShieldToss_Description	Throw your mainhand shield at an enemy. The shield can ricochet up to 3 times within [1], dealing [2] damage and restoring [3] and [4] for each enemy hit.<br>The shield then returns, restoring an additional amount of armor.<br><font color='#FFD700' size='18'>Shield Mastery I</font><br><font color='#4197e2'>If 3 targets are hit, restore [5] and [6] to allies within 8m.</font>	h1c2e17dag8206g42begb070g3a98701d976b
+Projectile_LLWEAPONEX_ShieldToss_DisplayName	Shield Toss	h0b8e61bagd0d3g434fgb4a2g96639225008d
+Shout_LLWEAPONEX_DualShields_HunkerDown_Description	Bolster your defenses, gaining a <font color='#11FF00'>[1]% boost to your armor values</font> until your next turn.<br><font color-'#FF6600'>When hunkering down, you will be Grounded and be unable to move, while becoming a priority target for enemies.</font><br><font color='#11FF99'>Critical hit damage taken is reduced by 50%.</font>	hbbd0dff3g4352g45c1ga9b6gebc3d0b2b09b
+Shout_LLWEAPONEX_DualShields_HunkerDown_DisplayName	Hunker Down	hdf5e5d57gc92bg4f81g9ff1gf1c448fcdb4b
+Target_LLWEAPONEX_IronMaiden_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery III</font><br>Slam the target in an <font color='#CCCCCC'>Iron Maiden</font>, dealing [1].<br>If the target is in a <font color='#00AA00'>Shield Prison</font>, deal an extra [2] and apply <font color='#AAAAEE'>Dazed</font>.<br>Applies <font color='#FF0000'>Bleeding</font>, and <font color='#DC143C'>Ruptures</font> <font color='#FF0000'>Bleeding</font> targets for [3].	h75a2fd78gec4dg47f3ga53bg3f962bf88aa4
+Target_LLWEAPONEX_IronMaiden_DisplayName	Iron Maiden	h66927417gec18g4fe5gbdd8gfc1541a8179a
+Target_LLWEAPONEX_ShieldBash_Description	A hardy blow with your shield that deals [1] and has a chance to daze the target.	h13bfb4ffg4ae6g4c67g839fg30ac91b2978f
+Target_LLWEAPONEX_ShieldBash_DisplayName	Shield Bash	h9bf4a6bdg3e45g4183g8641g9738ef7f09d3
+Target_LLWEAPONEX_ShieldCover_CounterAttack_DisplayName	Shield Counter	h260973ecg28e7g41dega892g11912a594345
+Target_LLWEAPONEX_ShieldCover_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery I</font><br>Cover a target character remotely for 3 turns, redirecting 50% of the damage they take to you.<br><font color='#FFFF22'>The first time the target gets attacked, rush to their position and counter-attack the attacker for [1], and grant the target temporary damage resistance.</font>	h30f12bcbg955eg499egae3fg240200a3c8a2
+Target_LLWEAPONEX_ShieldCover_DisplayName	Shield Cover	h35ea756dg3af6g4640gb5f2g9861efa3d5b5
+Target_LLWEAPONEX_ShieldPrison_Description	<font color='#D9D9D9' size='18'>Dual Shields Mastery II</font><br>Encase the target in a hardened shell, removing them from combat for 1 turn.<br>Allies gain +2 AP upon being freed.	hc99902e9g50eag4b0cgbeb0gc945046ad8b3
+Target_LLWEAPONEX_ShieldPrison_DisplayName	Shield Prison	h45457359gaa62g40f9gaa6bgd1996571cc40

@@ -1,7 +1,7 @@
-Key	Content
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_DisplayName	<font color='#C7A758'>Shoot Hand Crossbow</font>
-Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1].[2][3]
-Shout_LLWEAPONEX_HandCrossbow_Reload_DisplayName	<font color='#C7A758'>Reload</font>
-Shout_LLWEAPONEX_HandCrossbow_Reload_Description	Reload your <font color='#C7A758'>Hand Crossbow</font>, instantly refreshing the <font color='#C7A758'>Shoot Hand Crossbow</font> skill.
-Projectile_LLWEAPONEX_HandCrossbow_Assassinate_DisplayName	<font color='#C80030'>Assassin's Requiem</font>
-Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Description	Fire a decisive shot at a target with your <font color='#C7A758'>Hand Crossbow</font>, dealing [1].<br><font color='#8652f0'>Deals double damage from stealth.</font>
+Key	Content	Handle
+Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Description	Fire a decisive shot at a target with your <font color='#C7A758'>Hand Crossbow</font>, dealing [1].<br><font color='#8652f0'>Deals double damage from stealth.</font>	h0bfab9eegc053g4228gb930gab52eb0b1d62
+Projectile_LLWEAPONEX_HandCrossbow_Assassinate_DisplayName	<font color='#C80030'>Assassin's Requiem</font>	hf5b22339gb0acg43b4gb843g238c5bd85deb
+Projectile_LLWEAPONEX_HandCrossbow_Shoot_Description	Shoot your <font color='#C7A758'>Hand Crossbow</font> at a target, dealing [1].[2][3]	hc4557351g0123g43adga970gafe2a3715d1b
+Projectile_LLWEAPONEX_HandCrossbow_Shoot_DisplayName	<font color='#C7A758'>Shoot Hand Crossbow</font>	hb89a9234g3581g4ea9gbdd6g06c35cac20ab
+Shout_LLWEAPONEX_HandCrossbow_Reload_Description	Reload your <font color='#C7A758'>Hand Crossbow</font>, instantly refreshing the <font color='#C7A758'>Shoot Hand Crossbow</font> skill.	h2fbf265bg3a42g41cdga140gaf15b7720660
+Shout_LLWEAPONEX_HandCrossbow_Reload_DisplayName	<font color='#C7A758'>Reload</font>	h88455bb3g2c7fg44fcg8607g295ece5e9775
