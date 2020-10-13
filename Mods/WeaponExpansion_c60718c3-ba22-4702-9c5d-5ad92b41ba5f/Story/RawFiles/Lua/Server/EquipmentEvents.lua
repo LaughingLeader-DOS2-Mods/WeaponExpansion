@@ -125,6 +125,8 @@ function OnItemEquipped(uuid,itemUUID)
 			return false
 		end
 
+		local character = Ext.GetCharacter(uuid)
+
 		local stat = item.StatsId
 		local statType = item.Stats.ItemType
 
@@ -133,9 +135,9 @@ function OnItemEquipped(uuid,itemUUID)
 			TagWeapon(itemUUID, statType, stat)
 		end
 		
-		local isPlayer = IsPlayerQRY(uuid)
+		local isPlayer = character.IsPlayer or character.IsGameMaster
 		
-		if isPlayer == 1 and statType == "Weapon" then
+		if isPlayer and statType == "Weapon" then
 			Equipment.CheckWeaponRequirementTags(uuid)
 		end
 
@@ -150,7 +152,7 @@ function OnItemEquipped(uuid,itemUUID)
 			for tag,data in pairs(Masteries) do
 				--LeaderLib.PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
 				if item:HasTag(tag) then
-					if isPlayer == 1 then
+					if isPlayer then
 						local equippedTag = Tags.WeaponTypes[tag]
 						if equippedTag ~= nil then
 							if Ext.IsDeveloperMode() then
@@ -158,7 +160,7 @@ function OnItemEquipped(uuid,itemUUID)
 									LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
 								end
 							end
-							Osi.LLWEAPONEX_Equipment_TrackItem(uuid,itemUUID,tag,equippedTag,isPlayer)
+							Osi.LLWEAPONEX_Equipment_TrackItem(uuid,itemUUID,tag,equippedTag,isPlayer and 1 or 0)
 						end
 						Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, itemUUID, tag)
 						if IsTagged(uuid, tag) == 0 then
@@ -166,28 +168,72 @@ function OnItemEquipped(uuid,itemUUID)
 							LeaderLib.PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
 						end
 					end
-					Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,itemUUID,tag,isPlayer)
+					Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,itemUUID,tag,isPlayer and 1 or 0)
 					OnWeaponTypeEquipped(uuid, itemUUID, tag, stat, statType)
 				end
 			end
 		end
 
-		if isPlayer == 1 then
+		if isPlayer then
 			local unique = AllUniques[itemUUID]
 			if unique ~= nil and not unique:IsReleasedFromOwner() then
 				unique:ReleaseFromOwner()
 				unique.Owner = uuid
 			end
 		end
+
+		template = StringHelpers.GetUUID(template)
+		local callbacks = Listeners.EquipmentChanged.Template[template]
+		if callbacks ~= nil then
+			for i,callback in pairs(callbacks) do
+				local b,err = xpcall(callback, debug.traceback, character, item, template, true)
+				if not b then
+					Ext.PrintError(err)
+				end
+			end
+		end
+		for tag,callback in pairs(Listeners.EquipmentChanged.Tag) do
+			if item:HasTag(tag) then
+				for i,callback in pairs(callbacks) do
+					local b,err = xpcall(callback, debug.traceback, character, item, tag, true)
+					if not b then
+						Ext.PrintError(err)
+					end
+				end
+			end
+		end
 	end
 end
 
-function OnItemTemplateUnEquipped(uuid, item, template)
+function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 	if IsPlayer(uuid) then
 		Equipment.CheckWeaponRequirementTags(uuid)
 	end
-	if IsTagged(item, "LLWEAPONEX_Quiver") == 1 then
-		Quiver_Unequipped(uuid, item)
+	if IsTagged(itemUUID, "LLWEAPONEX_Quiver") == 1 then
+		Quiver_Unequipped(uuid, itemUUID)
+	end
+	
+	local character = Ext.GetCharacter(uuid)
+	local item = Ext.GetItem(itemUUID)
+	template = StringHelpers.GetUUID(template)
+	local callbacks = Listeners.EquipmentChanged.Template[template]
+	if callbacks ~= nil then
+		for i,callback in pairs(callbacks) do
+			local b,err = xpcall(callback, debug.traceback, character, item, template, true)
+			if not b then
+				Ext.PrintError(err)
+			end
+		end
+	end
+	for tag,callback in pairs(Listeners.EquipmentChanged.Tag) do
+		if item:HasTag(tag) then
+			for i,callback in pairs(callbacks) do
+				local b,err = xpcall(callback, debug.traceback, character, item, tag, true)
+				if not b then
+					Ext.PrintError(err)
+				end
+			end
+		end
 	end
 end
 

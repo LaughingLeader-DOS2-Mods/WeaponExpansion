@@ -14,7 +14,8 @@ local defaultPersistentVars = {
             Blocking = {},
             BlockedHit = {},
         },
-        ThrowWeapon = {}
+        ThrowWeapon = {},
+        ThrowBalrinAxe = {}
     },
     MasteryMechanics = {},
     Timers = {},
@@ -24,13 +25,64 @@ local defaultPersistentVars = {
 ---@type WeaponExpansionVars
 PersistentVars = defaultPersistentVars
 
+---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
+---@alias EquipmentChangedIDType Tag|Template
+---@alias ItemListenerEvent EquipmentChanged
+---@alias StatusEventCallback fun(target:string, status:string, source:string|nil):void
+---@alias StatusEventID StatusApplied|StatusAttempt|StatusRemoved
+
 LoadPersistentVars = {}
 BonusSkills = {}
 Listeners = {
-    Status = {},
+    ---@type table<string, StatusEventCallback>
+    StatusApplied = {},
+    ---@type table<string, StatusEventCallback>
     StatusAttempt = {},
+    ---@type table<string, StatusEventCallback>
     StatusRemoved = {},
+    ---@type table<string, table<string, EquipmentChangedCallback>>
+    EquipmentChanged = {
+        Template = {},
+        Tag = {}
+    }
 }
+
+EID = {
+    EquipmentChanged = {
+        Template = "Template",
+        Tag = "Tag",
+    }
+}
+
+---@param event StatusEventID
+---@param status string
+---@param callback StatusEventCallback
+function RegisterStatusListener(event, status, callback)
+    local statusEventHolder = Listeners[event]
+    if statusEventHolder ~= nil then
+        if statusEventHolder[status] == nil then
+            statusEventHolder[status] = {}
+        end
+        table.insert(statusEventHolder[status], callback)
+    end
+end
+
+---@param event ItemListenerEvent
+---@param idType EquipmentChangedIDType
+---@param id string The template, tag, etc.
+---@param callback EquipmentChangedCallback
+function RegisterItemListener(event, idType, id, callback)
+    local callbackHolder = Listeners[event]
+    if callbackHolder ~= nil then
+        if callbackHolder[idType] == nil then
+            callbackHolder[idType] = {}
+        end
+        if callbackHolder[idType][id] == nil then
+            callbackHolder[idType][id] = {}
+        end
+        table.insert(callbackHolder[idType][id], callback)
+    end
+end
 
 local firstLoad = true
 
@@ -65,7 +117,6 @@ Ext.Require("Server/Skills/ElementalFirearms.lua")
 Ext.Require("Server/Skills/PrepareEffects.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")
 Ext.Require("Server/Skills/SkillListeners.lua")
-Ext.Require("Server/Skills/GnakSpellScroll.lua")
 Ext.Require("Server/MasteryExperience.lua")
 Ext.Require("Server/MasteryHelpers.lua")
 Ext.Require("Server/PistolMechanics.lua")
@@ -83,6 +134,7 @@ Ext.Require("Server/Items/DeltaModSwapper.lua")
 Ext.Require("Server/Items/LootBonuses.lua")
 Ext.Require("Server/Items/TreasureTableMerging.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
+Ext.Require("Server/Items/Uniques/_Init.lua")
 local debugInit = Ext.Require("Server/Debug/DebugMain.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
 Ext.Require("Server/Updates.lua")
