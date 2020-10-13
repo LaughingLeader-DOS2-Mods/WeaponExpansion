@@ -213,6 +213,9 @@ function TwoHandedToOnehanded(char, item)
 end
 
 function IsPlayer(uuid)
+    if StringHelpers.IsNullOrEmpty(uuid) then
+        return false
+    end
 	return CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1
 end
 

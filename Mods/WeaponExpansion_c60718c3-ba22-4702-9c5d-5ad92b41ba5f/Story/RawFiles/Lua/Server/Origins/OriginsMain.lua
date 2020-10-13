@@ -32,10 +32,12 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Harken, "Opportunist")
 		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
-			Uniques.AnvilMace:Transfer(Origin.Harken, true)
-			Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
-		end)
+		if Ext.IsDeveloperMode() then
+			LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
+				Uniques.AnvilMace:Transfer(Origin.Harken, true)
+				Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
+			end)
+		end
 
 		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_FixSkillBar", 0)
 		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
@@ -56,10 +58,12 @@ function Origins_InitCharacters(region, isEditorMode)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
-		LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
-			Uniques.DeathEdge:Transfer(Origin.Korvash, true)
-			Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
-		end)
+		if Ext.IsDeveloperMode()then
+			LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
+				Uniques.DeathEdge:Transfer(Origin.Korvash, true)
+				Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
+			end)
+		end
 
 		--Mods.WeaponExpansion.Uniques.DeathEdge:Transfer(Mods.WeaponExpansion.Origin.Korvash, true)
 		--Mods.WeaponExpansion.Uniques.DemonGauntlet:Transfer(Mods.WeaponExpansion.Origin.Korvash, true)
