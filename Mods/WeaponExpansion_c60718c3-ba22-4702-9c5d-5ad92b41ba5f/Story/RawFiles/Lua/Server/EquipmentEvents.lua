@@ -113,6 +113,15 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 	end ]]
 end
 
+local function CheckForUnarmed(uuid, isPlayer)
+	local hasEmptyHands = HasEmptyHand(uuid, false)
+	if not hasEmptyHands and CharacterHasSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1 then
+		CharacterRemoveSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack")
+	elseif hasEmptyHands and CharacterHasSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack") == 0 then
+		CharacterAddSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack", isPlayer and 1 or 0)
+	end
+end
+
 --- @param uuid string
 --- @param item string
 function OnItemEquipped(uuid,itemUUID)
@@ -136,6 +145,8 @@ function OnItemEquipped(uuid,itemUUID)
 		end
 		
 		local isPlayer = character.IsPlayer or character.IsGameMaster
+
+		CheckForUnarmed(uuid, isPlayer)
 		
 		if isPlayer and statType == "Weapon" then
 			Equipment.CheckWeaponRequirementTags(uuid)
@@ -206,7 +217,10 @@ function OnItemEquipped(uuid,itemUUID)
 end
 
 function OnItemTemplateUnEquipped(uuid, itemUUID, template)
-	if IsPlayer(uuid) then
+	local isPlayer = IsPlayer(uuid)
+	CheckForUnarmed(uuid, isPlayer)
+
+	if isPlayer then
 		Equipment.CheckWeaponRequirementTags(uuid)
 	end
 	if IsTagged(itemUUID, "LLWEAPONEX_Quiver") == 1 then
