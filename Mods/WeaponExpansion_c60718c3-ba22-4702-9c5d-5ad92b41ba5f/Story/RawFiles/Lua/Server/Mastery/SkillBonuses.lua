@@ -137,18 +137,18 @@ end
 function MasteryBonusManager.RegisterStatusListener(status, matchBonuses, callback)
 	if type(status) == "table" then
 		for i,v in pairs(status) do
-			if Listeners.Status[v] == nil then 
-				Listeners.Status[v] = {}
+			if Listeners.StatusApplied[v] == nil then 
+				Listeners.StatusApplied[v] = {}
 			end
-			table.insert(Listeners.Status[v], function(target,v,source) 
+			table.insert(Listeners.StatusApplied[v], function(target,v,source) 
 				OnStatusCallback(callback, matchBonuses, target, v, source)
 			end)
 		end
 	else
-		if Listeners.Status[status] == nil then 
-			Listeners.Status[status] = {}
+		if Listeners.StatusApplied[status] == nil then 
+			Listeners.StatusApplied[status] = {}
 		end
-		table.insert(Listeners.Status[status], function(target,status,source) 
+		table.insert(Listeners.StatusApplied[status], function(target,status,source) 
 			OnStatusCallback(callback, matchBonuses, target, status, source)
 		end)
 	end
