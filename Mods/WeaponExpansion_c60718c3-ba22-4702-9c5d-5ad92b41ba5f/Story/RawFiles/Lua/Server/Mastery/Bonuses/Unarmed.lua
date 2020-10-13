@@ -53,5 +53,5 @@ local UnarmedSkills = {
 }
 
 for _,skill in pairs(UnarmedSkills) do
-	LeaderLib.RegisterSkillListener(skill, AddUnarmedExperienceForSkill)
+	RegisterSkillListener(skill, AddUnarmedExperienceForSkill)
 end
