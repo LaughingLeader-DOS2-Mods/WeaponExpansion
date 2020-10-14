@@ -298,7 +298,7 @@ ObjectClearFlag(_Player, "LLWEAPONEX_VendingMachine_CompleteOrder", _Instance);
 IF
 StoryEvent(_VendingMachine, "LLWEAPONEX_VendingMachine_OnOrderGenerated")
 THEN
-ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled");
+ObjectClearFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled", 0);
 LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:OnOrderGenerated] Treasure order complete. Cleared flag 'LLWEAPONEX_VendingMachine_OrderMenuDisabled'.");
 PlayEffect(_VendingMachine, "LLWEAPONEX_FX_VendingMachine_Words_OrderArrived_01", "Dummy_OverheadFX");
 //END_REGION

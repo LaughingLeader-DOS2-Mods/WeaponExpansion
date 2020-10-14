@@ -269,278 +269,278 @@ new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
 object category "T_ST_Trader_RingAmuletBeltNormal",7,1,0,0,0,0,0,0
-object category "T_ST_LLWEAPONEX_Accessories",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,1,1,0,0,0,0,0
 new subtable "1,1"
 StartLevel "9"
 EndLevel "13"
 object category "T_ST_Trader_RingAmuletBeltNormal",7,1,1,0,0,0,0,0
-object category "T_ST_LLWEAPONEX_Accessories",1,1,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,0,2,1,0,0,0,0
 new subtable "1,1"
 StartLevel "14"
 EndLevel "16"
 object category "T_ST_Trader_RingAmuletBeltNormal",7,1,1,1,0,0,0,0
-object category "T_ST_LLWEAPONEX_Accessories",1,1,1,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,0,1,2,1,0,0,0
 new subtable "1,1"
 StartLevel "17"
 EndLevel "30"
 object category "T_ST_Trader_RingAmuletBeltNormal",7,1,1,1,1,0,0,0
-object category "T_ST_LLWEAPONEX_Accessories",1,1,1,1,1,0,0,0
+object category "T_ST_LLWEAPONEX_Accessories",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderArmor"
 new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_ArmorNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_ArmorNormal",1,1,1,0,0,0,0,0
 new subtable "1,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_ArmorNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_ArmorNormal",1,0,2,1,0,0,0,0
 new subtable "1,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_ArmorNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_ArmorNormal",1,0,1,2,1,0,0,0
 new subtable "1,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_ArmorNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_ArmorNormal",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderClothArmor"
 new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_ClothArmor",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_ClothArmor",1,1,1,0,0,0,0,0
 new subtable "1,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_ClothArmor",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_ClothArmor",1,0,2,1,0,0,0,0
 new subtable "1,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_ClothArmor",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_ClothArmor",1,0,1,2,1,0,0,0
 new subtable "1,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_ClothArmor",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_ClothArmor",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderHeavyArmor"
 new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_HeavyArmor",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_HeavyArmor",1,1,1,0,0,0,0,0
 new subtable "1,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_HeavyArmor",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_HeavyArmor",1,0,2,1,0,0,0,0
 new subtable "1,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_HeavyArmor",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_HeavyArmor",1,0,1,2,1,0,0,0
 new subtable "1,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_HeavyArmor",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_HeavyArmor",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderLightArmor"
 new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_LightArmor",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_LightArmor",1,1,1,0,0,0,0,0
 new subtable "1,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_LightArmor",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_LightArmor",1,0,2,1,0,0,0,0
 new subtable "1,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_LightArmor",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_LightArmor",1,0,1,2,1,0,0,0
 new subtable "1,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_LightArmor",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_LightArmor",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderMageArmor"
 new subtable "1,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_MageArmor",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_MageArmor",1,2,1,0,0,0,0,0
 new subtable "1,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_MageArmor",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_MageArmor",1,0,2,1,0,0,0,0
 new subtable "1,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_MageArmor",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_MageArmor",1,0,1,2,1,0,0,0
 new subtable "1,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_MageArmor",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_MageArmor",1,0,1,1,1,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_WeaponNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_WeaponNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_WeaponNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_WeaponNormal",1,0,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_WeaponNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_WeaponNormal",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_WeaponNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_WeaponNormal",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderOneHandedWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_OneHandedNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_OneHandedNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_OneHandedNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_OneHandedNormal",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_OneHandedNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_OneHandedNormal",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_OneHandedNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_OneHandedNormal",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderTwoHandedWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_TwoHandedNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_TwoHandedNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_TwoHandedNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_TwoHandedNormal",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_TwoHandedNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_TwoHandedNormal",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_TwoHandedNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_TwoHandedNormal",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderRangedWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_RangedNormal",10,1,0,0,0,0,0,0
-object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_RangedNormal",10,1,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
 object category "T_ST_Trader_RangedNormal",10,1,1,0,0,0,0,0
-object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,1,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
 object category "T_ST_Trader_RangedNormal",10,1,1,1,0,0,0,0
-object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,1,1,0,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
 object category "T_ST_Trader_RangedNormal",10,1,1,1,1,0,0,0
-object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,1,1,1,0,0,0
+object category "T_ST_LLWEAPONEX_QuiversNormal",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderStaff"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_StaffNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_StaffNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_StaffNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_StaffNormal",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_StaffNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_StaffNormal",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_StaffNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_StaffNormal",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderWand"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_WandNormal",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_WandNormal",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_WandNormal",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_WandNormal",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_WandNormal",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_WandNormal",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_WandNormal",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_WandNormal",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderRogueWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_WeaponRogue",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_WeaponRogue",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_WeaponRogue",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_WeaponRogue",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_WeaponRogue",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_WeaponRogue",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_WeaponRogue",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_WeaponRogue",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderWarriorWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_WeaponWarrior",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_WeaponWarrior",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_WeaponWarrior",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_WeaponWarrior",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_WeaponWarrior",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_WeaponWarrior",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_WeaponWarrior",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_WeaponWarrior",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderWizardWeapon"
 new subtable "2,1"
 StartLevel "1"
 EndLevel "8"
-object category "T_ST_Trader_WeaponWizard",1,1,0,0,0,0,0,0
+object category "T_ST_Trader_WeaponWizard",1,1,1,0,0,0,0,0
 new subtable "2,1"
 StartLevel "9"
 EndLevel "13"
-object category "T_ST_Trader_WeaponWizard",1,1,1,0,0,0,0,0
+object category "T_ST_Trader_WeaponWizard",1,0,2,1,0,0,0,0
 new subtable "2,1"
 StartLevel "14"
 EndLevel "16"
-object category "T_ST_Trader_WeaponWizard",1,1,1,1,0,0,0,0
+object category "T_ST_Trader_WeaponWizard",1,0,1,2,1,0,0,0
 new subtable "2,1"
 StartLevel "17"
 EndLevel "30"
-object category "T_ST_Trader_WeaponWizard",1,1,1,1,1,0,0,0
+object category "T_ST_Trader_WeaponWizard",1,0,1,4,3,1,0,0
 
 new treasuretable "ST_LLWEAPONEX_Quiver_Arrows"
 new subtable "1,1"
