@@ -5,7 +5,7 @@ local function SetItemStats(target, tbl)
 			SetItemStats(target[k], v)
 		else
 			target[k] = v
-			print("SetItemStats", k, v)
+			printd("SetItemStats", target, k, v)
 		end
 	end
 end
@@ -16,7 +16,11 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 		if data.NetID ~= nil and data.Stats ~= nil then
 			local item = Ext.GetItem(data.NetID)
 			if item ~= nil then
-				SetItemStats(item.Stats, data.Stats)
+				if data.DynamicIndex ~= nil then
+					SetItemStats(item.Stats.DynamicStats[data.DynamicIndex], data.Stats)
+				else
+					SetItemStats(item.Stats, data.Stats)
+				end
 			else
 				Ext.PrintError("[LLWEAPONEX_SetItemStats] Failed to get item from NetID", data.NetID)
 			end

@@ -224,7 +224,10 @@ function UniqueManager.LevelUpUnique(character, item)
 		local uniqueData = Uniques[item.MyGuid]
 		if uniqueData ~= nil then
 			if uniqueData.Owner == character.MyGuid then
-				uniqueData:ApplyProgression(uniqueData.ProgressionData, nil, item)
+				if item.Stats.Level < character.Stats.Level then
+					ItemLevelUpTo(item.MyGuid, character.Stats.Level)
+					uniqueData:OnItemLeveledUp()
+				end
 			end
 		else
 			if item.Stats.Unique == 1 or item.Stats.ItemTypeReal == "Unique" then

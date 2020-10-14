@@ -134,7 +134,7 @@ local function MoveToRegionPosition(self, region, item)
 	end
 end
 
-function UniqueData:OnItemLeveledUp(owner)
+function UniqueData:OnItemLeveledUp()
 	self:ApplyProgression(self.ProgressionData)
 end
 
@@ -151,7 +151,7 @@ function UniqueData:Initialize(region, firstLoad)
 			end
 		end
 		if firstLoad == true then
-			self:ApplyProgression(self.ProgressionData, nil, item)
+			self:ApplyProgression(self.ProgressionData, nil, item, true)
 		end
 		if not self:IsReleasedFromOwner() then
 			self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
@@ -227,7 +227,7 @@ end
 
 ---@param entry UniqueProgressionEntry
 ---@param stat StatEntryWeapon
-local function ApplyProgressionEntry(entry, stat)
+local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
 	local statChanged = false
 	if not StringHelpers.IsNullOrEmpty(entry.MatchStat) then
 		if stat ~= entry.MatchStat then
@@ -269,7 +269,9 @@ local function ApplyProgressionEntry(entry, stat)
 			end
 		end
 	end
-	printd(statChanged, entry.Attribute, entry.Value)
+	if statChanged or firstLoad == true then
+		changes[entry.Attribute] = stat[entry.Attribute]
+	end
 	return statChanged
 end
 
@@ -365,7 +367,7 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 
 	ItemLevelUpTo(item.MyGuid, level)
 
-	if slot ~= nil and owner ~= "" then
+	if not StringHelpers.IsNullOrEmpty(slot) and not StringHelpers.IsNullOrEmpty(owner) then
 		StartOneshotTimer("Timers_LLWEAPONEX_PostTransformEquip", 250, function()
 			NRD_CharacterEquipItem(owner, item.MyGuid, slot, 0, 0, 1, 1)
 		end)
@@ -381,10 +383,10 @@ if Ext.IsDeveloperMode() then
 	end
 end
 
-local function EvaluateEntry(self, progressionTable, persist, item, level, stat, entry)
+local function EvaluateEntry(self, progressionTable, persist, item, level, stat, entry, changes, firstLoad)
 	local statChanged = false
 	if entry.Type == "UniqueProgressionEntry" then
-		if ApplyProgressionEntry(entry, stat) then
+		if ApplyProgressionEntry(entry, stat, changes, firstLoad) then
 			statChanged = true
 		end
 	elseif entry.Type == "UniqueProgressionTransform" then
@@ -395,7 +397,7 @@ local function EvaluateEntry(self, progressionTable, persist, item, level, stat,
 		end
 	elseif #entry > 0 then
 		for i,v in pairs(entry) do
-			if EvaluateEntry(self, progressionTable, persist, item, level, stat, v) then
+			if EvaluateEntry(self, progressionTable, persist, item, level, stat, v, changes, firstLoad) then
 				statChanged = true
 			end
 		end
@@ -405,19 +407,19 @@ end
 
 ---@param self UniqueData
 ---@param item EsvItem
-local function TryApplyProgression(self, progressionTable, persist, item, level)
+local function TryApplyProgression(self, progressionTable, persist, item, level, changes, firstLoad)
 	local statChanged = false
 	if progressionTable ~= nil then
 		local stat = Ext.GetStat(item.StatsId, level)
 		for i=1,level do
 			local entries = progressionTable[i]
 			if entries ~= nil then
-				if EvaluateEntry(self, progressionTable, persist, item, level, stat, entries) then
+				if EvaluateEntry(self, progressionTable, persist, item, level, stat, entries, changes, firstLoad) then
 					statChanged = true
 				end
 			end
 		end
-		if statChanged then
+		if statChanged or firstLoad == true then
 			if persist == nil then
 				persist = false
 			end
@@ -425,13 +427,14 @@ local function TryApplyProgression(self, progressionTable, persist, item, level)
 		end
 		item.Stats.ShouldSyncStats = true
 	end
-	return statChanged
+	return statChanged or firstLoad == true
 end
 
 ---@param progressionTable table<integer,UniqueProgressionEntry|UniqueProgressionEntry[]>
 ---@param persist boolean
 ---@param item EsvItem
-function UniqueData:ApplyProgression(progressionTable, persist, item)
+---@param firstLoad boolean|nil
+function UniqueData:ApplyProgression(progressionTable, persist, item, firstLoad)
 	progressionTable = progressionTable or self.ProgressionData
 	if item == nil then
 		item = Ext.GetItem(self.UUID)
@@ -444,16 +447,15 @@ function UniqueData:ApplyProgression(progressionTable, persist, item)
 	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
 	-- enries aren't nerfing things.
 	local level = item.Stats.Level
-	if item:HasTag("LeaderLib_AutoLevel") and self.Owner ~= nil then
-		if ObjectIsCharacter(self.Owner) == 1 then
-			level = CharacterGetLevel(self.Owner)
-			ItemLevelUpTo(item.MyGuid, level)
-		end
-	end
-	local b,err = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level)
+	local changes = {}
+	local b,result = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level, changes, firstLoad)
 	if not b then
 		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", self.UUID, item.StatsId)
-		Ext.PrintError(self.UUID, err)
+		Ext.PrintError(self.UUID, result)
+	elseif result == true or firstLoad == true then
+		if changes ~= nil and Common.TableHasAnyEntry(changes) then
+			EquipmentManager.SyncItemStatChanges(item, changes, 1)
+		end
 	end
 	self.LastProgressionLevel = level
 end

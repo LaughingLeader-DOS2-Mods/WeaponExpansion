@@ -506,10 +506,11 @@ local bulletTemplates = {
 
 ---@param item EsvItem
 ---@param stats table
-function EquipmentManager.SyncItemStatChanges(item, stats)
+function EquipmentManager.SyncItemStatChanges(item, stats, dynamicIndex)
 	local data = {
 		NetID = item.NetID,
-		Stats = stats
+		Stats = stats,
+		DynamicIndex = dynamicIndex or nil
 	}
 	Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
 end
