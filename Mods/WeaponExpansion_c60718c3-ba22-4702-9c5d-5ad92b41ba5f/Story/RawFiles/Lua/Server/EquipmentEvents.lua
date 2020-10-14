@@ -1,4 +1,6 @@
-Equipment = {}
+if EquipmentManager == nil then
+	EquipmentManager = {}
+end
 
 ---@param uuid string
 ---@param item EsvItem
@@ -63,7 +65,7 @@ local function CheckScoundrelTags(uuid, itemUUID)
 end
 
 ---@param uuid string
-function Equipment.CheckWeaponRequirementTags(uuid)
+function EquipmentManager.CheckWeaponRequirementTags(uuid)
 	local character = Ext.GetCharacter(uuid)
 	local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	local offhand = CharacterGetEquippedItem(uuid, "Shield")
@@ -123,10 +125,17 @@ local function CheckForUnarmed(character, isPlayer, newlyEquipped)
 	if newlyEquipped ~= nil and newlyEquipped.Stats ~= nil and newlyEquipped.Stats.IsTwoHanded then
 		hasEmptyHands = false
 	end
-	if not hasEmptyHands and CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1 then
-		CharacterRemoveSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack")
-	elseif hasEmptyHands and CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 0 then
-		CharacterAddSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack", isPlayer and 1 or 0)
+	if hasEmptyHands and CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1 then
+		GameHelpers.Skill.Swap(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack", "Target_SingleHandedAttack", true, false)
+	else
+		local hasSkill = CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1
+		if UnarmedHelpers.IsUnarmed(character) then
+			if not hasSkill then
+				GameHelpers.Skill.Swap(character.MyGuid, "Target_SingleHandedAttack", "Target_LLWEAPONEX_SinglehandedAttack", true, false)
+			end
+		elseif hasSkill then
+			CharacterRemoveSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack")
+		end
 	end
 end
 
@@ -153,11 +162,10 @@ function OnItemEquipped(uuid,itemUUID)
 		end
 		
 		local isPlayer = character.IsPlayer or character.IsGameMaster
-
-		CheckForUnarmed(uuid, isPlayer, item)
 		
 		if isPlayer and statType == "Weapon" then
-			Equipment.CheckWeaponRequirementTags(uuid)
+			EquipmentManager.CheckWeaponRequirementTags(uuid)
+			CheckForUnarmed(character, isPlayer, item)
 		end
 
 		local template = GetTemplate(itemUUID)
@@ -198,7 +206,7 @@ function OnItemEquipped(uuid,itemUUID)
 				unique.Owner = uuid
 			end
 
-			CheckFirearmRunes(character, item)
+			EquipmentManager.CheckFirearmProjectile(character, item)
 		end
 
 		template = StringHelpers.GetUUID(template)
@@ -234,7 +242,7 @@ function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 	local isPlayer = IsPlayer(uuid)
 
 	if isPlayer then
-		Equipment.CheckWeaponRequirementTags(uuid)
+		EquipmentManager.CheckWeaponRequirementTags(uuid)
 	end
 	
 	local character = Ext.GetCharacter(uuid)
@@ -498,7 +506,7 @@ local bulletTemplates = {
 
 ---@param item EsvItem
 ---@param stats table
-local function SyncItemStatChanges(item, stats)
+function EquipmentManager.SyncItemStatChanges(item, stats)
 	local data = {
 		NetID = item.NetID,
 		Stats = stats
@@ -506,8 +514,11 @@ local function SyncItemStatChanges(item, stats)
 	Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
 end
 
-function CheckFirearmRunes(char, item)
-	if item:HasTag("LLWEAPONEX_Firearm") 
+---@param char EsvCharacter
+---@param item EsvItem
+function EquipmentManager.CheckFirearmProjectile(char, item)
+	if item:HasTag("LLWEAPONEX_Firearm")
+	and not item:HasTag("Musk_Rifle")
 	and item.Stats ~= nil and string.find(item.StatsId, "LLWEAPONEX")
 	then
 		local changedProjectile = false
@@ -529,7 +540,7 @@ function CheckFirearmRunes(char, item)
 		end
 		if changedProjectile then
 			item.Stats.ShouldSyncStats = true
-			SyncItemStatChanges(item, statChanges)
+			EquipmentManager.SyncItemStatChanges(item, statChanges)
 		end
 	end
 end
@@ -537,5 +548,11 @@ end
 RegisterProtectedOsirisListener("RuneInserted", 4, "after", function(charUUID, itemUUID, runeTemplate, slot)
 	local char = Ext.GetCharacter(charUUID)
 	local item = Ext.GetItem(itemUUID)
-	CheckFirearmRunes(char, item)
+	EquipmentManager.CheckFirearmProjectile(char, item)
+end)
+
+RegisterProtectedOsirisListener("RuneRemoved", 4, "after", function(charUUID, itemUUID, runeUUID, slot)
+	local char = Ext.GetCharacter(charUUID)
+	local item = Ext.GetItem(itemUUID)
+	EquipmentManager.CheckFirearmProjectile(char, item)
 end)

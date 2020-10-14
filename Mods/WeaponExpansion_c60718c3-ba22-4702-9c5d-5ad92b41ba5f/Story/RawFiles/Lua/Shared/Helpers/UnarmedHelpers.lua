@@ -181,3 +181,8 @@ end
 function UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand)
 	return UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand)
 end
+
+---@param character EsvCharacter|EclCharacter
+function UnarmedHelpers.IsUnarmed(character)
+	return character.Stats:GetItemBySlot("Weapon") == nil and character.Stats:GetItemBySlot("Shield") == nil
+end

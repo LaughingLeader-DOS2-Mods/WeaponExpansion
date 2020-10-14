@@ -115,7 +115,7 @@ end)
 
 Ext.RegisterOsirisListener("ObjectLostTag", 2, "after", function(object, tag)
 	if tag == "LLWEAPONEX_Unarmed" then
-		Equipment.CheckWeaponRequirementTags(StringHelpers.GetUUID(object))
+		EquipmentManager.CheckWeaponRequirementTags(StringHelpers.GetUUID(object))
 	end
 end)
 
@@ -196,7 +196,6 @@ end
 local firstLoad = true
 
 LeaderLib.RegisterListener("Initialized", function(region)
-    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
 	region = region or SharedData.RegionData.Current
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then

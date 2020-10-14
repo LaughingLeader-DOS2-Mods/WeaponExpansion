@@ -27,6 +27,10 @@ local defaultPersistentVars = {
 ---@type WeaponExpansionVars
 PersistentVars = defaultPersistentVars
 
+LeaderLib.RegisterListener("Initialized", function(region)
+    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
+end)
+
 ---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
 ---@alias EquipmentChangedIDType Tag|Template
 ---@alias ItemListenerEvent EquipmentChanged
