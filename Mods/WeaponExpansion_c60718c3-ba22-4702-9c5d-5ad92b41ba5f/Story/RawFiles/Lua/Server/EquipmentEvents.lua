@@ -401,7 +401,10 @@ end)
 
 local blockTagCombinations = {
 	ARROWS = {
-		LLWEAPONEX_Firearm_Equipped = "LLWEAPONEX_StatusText_BlockedArrowOnGun"
+		LLWEAPONEX_Firearm_Equipped = "LLWEAPONEX_Notifications_BlockedArrowOnGun"
+	},
+	LLWEAPONEX_HandCrossbow = {
+		LLWEAPONEX_HandCrossbow_Equipped = "LLWEAPONEX_Notifications_BlockedHandCrossbow"
 	}
 }
 
@@ -412,8 +415,8 @@ local function ShouldBlockItem(item, char)
 		if item:HasTag(itemTag) then
 			for tag,blockText in pairs(characterTags) do
 				if char:HasTag(tag) then
-					if blockText ~= "" and CharacterIsControlled(charUUID) == 1 then
-						CharacterStatusText(char.MyGuid, blockText)
+					if blockText ~= "" and CharacterIsControlled(char.MyGuid) == 1 and (char.IsPlayer or char.IsGameMaster) then
+						ShowNotification(char.MyGuid, blockText)
 					end
 					return true
 				end
