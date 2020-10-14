@@ -17,6 +17,7 @@ LLWEAPONEX_StatusText_BalrinAxeTimedOut	<font color='#E4CE93'>*Your axe finds it
 LLWEAPONEX_StatusText_GnakSpellScroll_BadaBoom	<font color='#ED9D07'>Bada Boom</font>	ha39a9ad8gcbb4g44abgbb36gd7d435a1e029
 LLWEAPONEX_StatusText_GnakSpellScroll_Spell	<font color='#ED9D07'>Spell Triggered! [1]</font>	h6a044bb9g0e3dg4cc6gbc56g23274880bc0f
 LLWEAPONEX_StatusText_BlockedHealing	<font color='#c51fe8' size='18'>Healing Blocked</font>	hd3a7be83g1896g41bcg926dg409ccde7e89f
+LLWEAPONEX_StatusText_BlockedArrowOnGun	<font color='#FF0000' size='18'>*Arrows require a Bow or Crossbow.*</font>	h76bc24d7gd236g4ec3g8323g7f791fe738fd
 LLWEAPONEX_StatusText_Countered	<font color='#FF1155' size='22'>Countered</font>	h154d0117g69e6g43fcg9356g02e1593341a5
 LLWEAPONEX_StatusText_Handcrossbow_BoltAutoInserted	<font color='#FFA900' size='22'>Bolts Auto-Inserted into Hand Crossbow</font>	h4f1b9001g7b29g4ac7g928dg0149cdeff75e
 LLWEAPONEX_StatusText_OniGauntlet_RuneBlocked	<font color='#FF0000' size='22'>*The rune fails to fit inside the <font color='#c5a65a'>Oni Gauntlet</font>.*</font>	h9df0cb28gac01g470cg9502g0c6c3657cc0a

@@ -192,6 +192,8 @@ function OnItemEquipped(uuid,itemUUID)
 				unique:ReleaseFromOwner()
 				unique.Owner = uuid
 			end
+
+			CheckFirearmRunes(character, item)
 		end
 
 		template = StringHelpers.GetUUID(template)
@@ -390,4 +392,93 @@ Ext.RegisterOsirisListener("CharacterItemEvent", 3, "after", function(char, item
 			unique:OnItemLeveledUp(char)
 		end
 	end
+end)
+
+local blockTagCombinations = {
+	ARROWS = {
+		LLWEAPONEX_Firearm_Equipped = "LLWEAPONEX_StatusText_BlockedArrowOnGun"
+	}
+}
+
+---@param item EsvItem
+---@param char EsvCharacter
+local function ShouldBlockItem(item, char)
+	for itemTag,characterTags in pairs(blockTagCombinations) do
+		if item:HasTag(itemTag) then
+			for tag,blockText in pairs(characterTags) do
+				if char:HasTag(tag) then
+					if blockText ~= "" and CharacterIsControlled(charUUID) == 1 then
+						CharacterStatusText(char.MyGuid, blockText)
+					end
+					return true
+				end
+			end
+		end
+	end
+	return false
+end
+
+RegisterProtectedOsirisListener("CanUseItem", 3, "before", function(charUUID, itemUUID, request)
+	local item = Ext.GetItem(itemUUID)
+	local char = Ext.GetCharacter(charUUID)
+
+	if item ~= nil and char ~= nil then
+		local db = Osi.DB_CurrentGameMode:Get("GameMaster")
+		local isGameMaster = db ~= nil and #db > 0
+		if ShouldBlockItem(item, char) then
+			if not isGameMaster then
+				Osi.DB_CustomUseItemResponse(charUUID, itemUUID, 0)
+			else
+				RequestProcessed(charUUID, request, 0)
+			end
+		end
+	end
+end)
+
+local bulletTemplates = {
+	["0f0dea4a-4e3b-48b0-92c7-6f33bdc3f2df"] = true,
+	["0a1fa669-d8fb-4767-a129-e14fbd91b195"] = true,
+	["d1b28a79-ccd2-481b-b035-13e15346cefb"] = true,
+	["bc37a903-547a-4010-a845-7ef244e6b2cb"] = true,
+	["92862716-b0db-46b4-9356-9858f9e743f0"] = true,
+	["932fb7ba-2634-4b8a-b40a-936077a08008"] = true,
+	["6e569546-bd74-4856-819b-d40b08b026ba"] = true,
+	["e1125176-cd00-4f7a-8298-ac862d12cf15"] = true,
+	["6572eec4-eeb3-4b9d-9cdd-15952a9a8ca6"] = true,
+	["6e597ce1-d8b8-4720-89b9-75f6a71d64ba"] = true,
+	["b059c11d-458a-4f89-8f18-15b48a402008"] = true,
+	["a38aa4e6-ee75-4bb4-8c98-b9f358a23c25"] = true,
+	["7ce736c8-1e02-462d-bee2-36bd86bd8979"] = true,
+	["7c31f878-1f04-47bb-b8b1-05e605dc0b60"] = true,
+	["deb24a84-006f-4a3a-b4bb-b40fa52a447d"] = true,
+	["d4eebf4d-4f0c-4409-8fe8-32efeca06453"] = true,
+	["8814954c-b0d1-4cdf-b075-3313ac71cf20"] = true,
+	["22cae5a3-8427-4526-aa7f-4f277d0ff67e"] = true,
+	["e44859b2-d55f-47e2-b509-fd32d7d3c745"] = true,
+	["fbf17754-e604-4772-813a-3593b4e7bec8"] = true,
+}
+
+function CheckFirearmRunes(char, item)
+	if item:HasTag("LLWEAPONEX_Firearm") then
+		local changedProjectile = false
+		for i,v in pairs(item.Stats.DynamicStats) do
+			if not StringHelpers.IsNullOrEmpty(v.BoostName) 
+			and not StringHelpers.IsNullOrEmpty(v.Projectile) 
+			and v.Projectile ~= item.Stats.Projectile
+			and bulletTemplates[v.Projectile] ~= true then
+				print(i, v.BoostName, v.Projectile)
+				v.Projectile = item.Stats.Projectile
+				changedProjectile = true
+			end
+		end
+		if changedProjectile then
+			item.Stats.ShouldSyncStats = true
+		end
+	end
+end
+
+RegisterProtectedOsirisListener("RuneInserted", 4, "after", function(charUUID, itemUUID, runeTemplate, slot)
+	local char = Ext.GetCharacter(charUUID)
+	local item = Ext.GetItem(itemUUID)
+	CheckFirearmRunes(char, item)
 end)
