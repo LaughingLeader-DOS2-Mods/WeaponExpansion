@@ -86,24 +86,6 @@ function RegisterItemListener(event, idType, id, callback)
     end
 end
 
-local firstLoad = true
-
-LeaderLib.RegisterListener("Initialized", function(region)
-    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
-	region = region or SharedData.RegionData.Current
-	if region ~= nil then
-		if IsGameLevel(region) == 1 then
-			for id,unique in pairs(Uniques) do
-				unique:Initialize(region, firstLoad)
-			end
-			firstLoad = false
-		end
-		if IsCharacterCreationLevel(region) == 1 then
-			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
-		end
-	end
-end)
-
 Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/HitHandler.lua")
 Ext.Require("Server/StatusHandler.lua")

@@ -192,3 +192,33 @@ end
 -- 		end
 -- 	end
 -- end)
+
+local firstLoad = true
+
+LeaderLib.RegisterListener("Initialized", function(region)
+    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
+	region = region or SharedData.RegionData.Current
+	if region ~= nil then
+		if IsGameLevel(region) == 1 then
+			for id,unique in pairs(Uniques) do
+				unique:Initialize(region, firstLoad)
+			end
+			-- in case equipment events have changed and need to fire again
+            for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
+                local player = Ext.GetCharacter(db[1])
+                if player ~= nil then
+                    for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+                        local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
+                        if not StringHelpers.IsNullOrEmpty(itemid) then
+                            OnItemEquipped(player.MyGuid, itemid)
+                        end
+                    end
+                end
+            end
+			firstLoad = false
+		end
+		if IsCharacterCreationLevel(region) == 1 then
+			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
+		end
+	end
+end)

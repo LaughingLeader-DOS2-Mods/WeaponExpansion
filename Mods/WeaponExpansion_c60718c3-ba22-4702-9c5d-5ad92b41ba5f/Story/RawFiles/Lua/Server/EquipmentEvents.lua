@@ -152,10 +152,6 @@ function OnItemEquipped(uuid,itemUUID)
 			Equipment.CheckWeaponRequirementTags(uuid)
 		end
 
-		if item:HasTag("LLWEAPONEX_Quiver") then
-			Quiver_Equipped(uuid, item)
-		end
-
 		local template = GetTemplate(itemUUID)
 		Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,itemUUID,template)
 
@@ -199,6 +195,9 @@ function OnItemEquipped(uuid,itemUUID)
 		template = StringHelpers.GetUUID(template)
 		local callbacks = Listeners.EquipmentChanged.Template[template]
 		if callbacks ~= nil then
+			if Vars.DebugEnabled then
+				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", template, item.StatsId, character.MyGuid))
+			end
 			for i,callback in pairs(callbacks) do
 				local b,err = xpcall(callback, debug.traceback, character, item, template, true)
 				if not b then
@@ -208,6 +207,9 @@ function OnItemEquipped(uuid,itemUUID)
 		end
 		for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 			if item:HasTag(tag) then
+				if Vars.DebugEnabled then
+					Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.StatsId, character.MyGuid))
+				end
 				for i,callback in pairs(callbacks) do
 					local b,err = xpcall(callback, debug.traceback, character, item, tag, true)
 					if not b then
@@ -226,15 +228,15 @@ function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 	if isPlayer then
 		Equipment.CheckWeaponRequirementTags(uuid)
 	end
-	if IsTagged(itemUUID, "LLWEAPONEX_Quiver") == 1 then
-		Quiver_Unequipped(uuid, itemUUID)
-	end
 	
 	local character = Ext.GetCharacter(uuid)
 	local item = Ext.GetItem(itemUUID)
 	template = StringHelpers.GetUUID(template)
 	local callbacks = Listeners.EquipmentChanged.Template[template]
 	if callbacks ~= nil then
+		if Vars.DebugEnabled then
+			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.StatsId, character.MyGuid))
+		end
 		for i,callback in pairs(callbacks) do
 			local b,err = xpcall(callback, debug.traceback, character, item, template, false)
 			if not b then
@@ -244,6 +246,9 @@ function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 	end
 	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 		if item:HasTag(tag) then
+			if Vars.DebugEnabled then
+				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.StatsId, character.MyGuid))
+			end
 			for i,callback in pairs(callbacks) do
 				local b,err = xpcall(callback, debug.traceback, character, item, tag, false)
 				if not b then

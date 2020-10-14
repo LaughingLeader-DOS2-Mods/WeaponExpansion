@@ -79,7 +79,7 @@ end
 ---@param ui UIObject
 local function OnCharacterSheetUpdating(ui, call, ...)
 	local params = {...}
-	LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] ",call," running params(", LeaderLib.Common.Dump(params))
+	--LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] ",call," running params(", LeaderLib.Common.Dump(params))
 
 	local main = ui:GetRoot()
 	local array = main.secStat_array
