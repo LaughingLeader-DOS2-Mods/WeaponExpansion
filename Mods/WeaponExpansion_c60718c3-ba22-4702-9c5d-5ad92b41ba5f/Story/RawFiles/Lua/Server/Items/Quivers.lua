@@ -62,18 +62,14 @@ RegisterStatusListener("StatusRemoved", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", funct
 	end
 end)
 
-function Quiver_Unequipped(char, item)
-	RemoveStatus(char, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
-	Quiver_RemoveTempArrows(char)
-end
-
-function Quiver_Equipped(char, item)
-	local quiver = item
-	if type(item) == "string" then
-		quiver = Ext.GetItem(item)
+RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_Quiver", function(char, item, tag, equipped)
+	if equipped then
+		Quiver_StartRecharge(char, item)
+	else
+		RemoveStatus(char.MyGuid, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
+		Quiver_RemoveTempArrows(char.MyGuid)
 	end
-	Quiver_StartRecharge(Ext.GetCharacter(char), quiver)
-end
+end)
 
 function Quiver_RemoveTempArrows(char)
 	local character = Ext.GetCharacter(char)
