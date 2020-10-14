@@ -166,3 +166,29 @@ end
 -- 		CharacterRemoveSkill(char, skill)
 -- 	end
 -- end)
+
+--- @param request EsvShootProjectileRequest
+-- Ext.RegisterListener("BeforeShootProjectile", function (request)
+--     print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.Target))
+-- end)
+
+-- ---@param projectile EsvProjectile
+-- Ext.RegisterListener("ShootProjectile", function(projectile)
+-- 	print(string.format("(%s) ShootProjectile(%s)", Ext.MonotonicTime(), projectile.RootTemplate))
+-- end)
+
+-- ---@param projectile EsvProjectile
+-- ---@param hitObject EsvGameObject
+-- ---@param position number[]
+-- Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
+-- 	local char = Ext.GetCharacter(projectile.SourceHandle)
+-- 	local item = Ext.GetItem(CharacterGetEquippedWeapon(char.MyGuid))
+-- 	print(string.format("ProjectileHit(%s) RootTemplate(%s) Weapon.Stats.Projectile(%s)", Ext.MonotonicTime(), projectile.RootTemplate.Name, item.Stats.Projectile))
+-- 	if item:HasTag("LLWEAPONEX_Firearm") then
+-- 		for i,v in pairs(item.Stats.DynamicStats) do
+-- 			if not StringHelpers.IsNullOrEmpty(v.BoostName) and not StringHelpers.IsNullOrEmpty(v.Projectile) and v.Projectile ~= item.Stats.Projectile then
+-- 				print(i, v.BoostName, v.Projectile)
+-- 			end
+-- 		end
+-- 	end
+-- end)
