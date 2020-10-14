@@ -389,16 +389,20 @@ function MasteryMenu.InitializeToggleButton()
 	local ui = Ext.GetUI("MasteryMenuToggleButton")
 	if ui == nil then
 		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 12)
-		Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
-			if not MasteryMenu.Open then
-				TryOpenMasteryMenu()
-			else
-				CloseMenu()
-			end
-		end)
-		Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call,...)
-			MasteryMenu.RepositionToggleButton(ui, ...)
-		end)
+		if ui ~= nil then
+			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
+				if not MasteryMenu.Open then
+					TryOpenMasteryMenu()
+				else
+					CloseMenu()
+				end
+			end)
+			Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call,...)
+				MasteryMenu.RepositionToggleButton(ui, ...)
+			end)
+		else
+			Ext.PrintError("[WeaponExpansion] Error creating MasteryMenuToggleButton.swf.")
+		end
 	end
 	MasteryMenu.ToggleButtonInstance = ui
 	if MasteryMenu.ToggleButtonInstance ~= nil then
