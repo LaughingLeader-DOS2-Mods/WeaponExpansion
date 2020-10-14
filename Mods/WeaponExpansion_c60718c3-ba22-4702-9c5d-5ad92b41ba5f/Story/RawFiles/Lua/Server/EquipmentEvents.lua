@@ -113,12 +113,18 @@ function Equipment.CheckWeaponRequirementTags(uuid)
 	end ]]
 end
 
-local function CheckForUnarmed(uuid, isPlayer)
-	local hasEmptyHands = HasEmptyHand(uuid, false)
-	if not hasEmptyHands and CharacterHasSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1 then
-		CharacterRemoveSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack")
-	elseif hasEmptyHands and CharacterHasSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack") == 0 then
-		CharacterAddSkill(uuid, "Target_LLWEAPONEX_SinglehandedAttack", isPlayer and 1 or 0)
+---@param character EsvCharacter
+---@param isPlayer boolean
+---@param newlyEquipped EsvItem
+local function CheckForUnarmed(character, isPlayer, newlyEquipped)
+	local hasEmptyHands = HasEmptyHand(character, false)
+	if newlyEquipped ~= nil and newlyEquipped.Stats ~= nil and newlyEquipped.Stats.IsTwoHanded then
+		hasEmptyHands = false
+	end
+	if not hasEmptyHands and CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1 then
+		CharacterRemoveSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack")
+	elseif hasEmptyHands and CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 0 then
+		CharacterAddSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack", isPlayer and 1 or 0)
 	end
 end
 
@@ -146,7 +152,7 @@ function OnItemEquipped(uuid,itemUUID)
 		
 		local isPlayer = character.IsPlayer or character.IsGameMaster
 
-		CheckForUnarmed(uuid, isPlayer)
+		CheckForUnarmed(uuid, isPlayer, item)
 		
 		if isPlayer and statType == "Weapon" then
 			Equipment.CheckWeaponRequirementTags(uuid)
@@ -223,13 +229,13 @@ end
 
 function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 	local isPlayer = IsPlayer(uuid)
-	CheckForUnarmed(uuid, isPlayer)
 
 	if isPlayer then
 		Equipment.CheckWeaponRequirementTags(uuid)
 	end
 	
 	local character = Ext.GetCharacter(uuid)
+	CheckForUnarmed(character, isPlayer)
 	local item = Ext.GetItem(itemUUID)
 	template = StringHelpers.GetUUID(template)
 	local callbacks = Listeners.EquipmentChanged.Template[template]
@@ -358,25 +364,46 @@ function MagicMissileWeapon_Swap(char, wand, rod)
 	end
 end
 
-function HasEmptyHand(uuid, ignoreShields)
-	local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
-	local offhand = CharacterGetEquippedItem(uuid, "Shield")
-	if not StringHelpers.IsNullOrEmpty(mainhand) then
-		local item = Ext.GetItem(mainhand)
-		if item ~= nil and item.Stats.IsTwoHanded then
-			return false
+---@param character EsvCharacter
+function HasEmptyHand(character, ignoreShields)
+	local uuid = ""
+	if type(character) == "string" then
+		uuid = character
+		character = Ext.GetCharacter(character)
+	end
+	if type(ignoreShields) == "string" then
+		ignoreShields = string.lower(ignoreShields) == "true"
+	end
+	if character ~= nil and character.Stats ~= nil then
+		if character.Stats.MainWeapon ~= nil then
+			if character.Stats.MainWeapon.IsTwoHanded then
+				return false
+			end
+			if character.Stats.OffHandWeapon ~= nil and (ignoreShields or character.Stats.OffHandWeapon.ItemType == "Shield") then
+				return false
+			end
 		end
-		if not StringHelpers.IsNullOrEmpty(offhand) then
-			if ignoreShields ~= nil then
-				item = Ext.GetItem(offhand)
-				if item ~= nil and item.ItemType == "Shield" then
-					return true
+		return true
+	else
+		local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
+		local offhand = CharacterGetEquippedItem(uuid, "Shield")
+		if not StringHelpers.IsNullOrEmpty(mainhand) then
+			local item = Ext.GetItem(mainhand)
+			if item ~= nil and item.Stats.IsTwoHanded then
+				return false
+			end
+			if not StringHelpers.IsNullOrEmpty(offhand) then
+				if ignoreShields == true then
+					item = Ext.GetItem(offhand)
+					if item ~= nil and item.ItemType == "Shield" then
+						return true
+					end
 				end
 			end
-			return false
 		end
+		return true
 	end
-	return true
+	return false
 end
 
 RegisterProtectedOsirisListener("ItemAddedToCharacter", 2, "after", function(item, char)
@@ -467,7 +494,9 @@ local bulletTemplates = {
 }
 
 function CheckFirearmRunes(char, item)
-	if item:HasTag("LLWEAPONEX_Firearm") then
+	if item:HasTag("LLWEAPONEX_Firearm") 
+	and item.Stats ~= nil and string.find(item.StatsId, "LLWEAPONEX")
+	then
 		local changedProjectile = false
 		for i,v in pairs(item.Stats.DynamicStats) do
 			if not StringHelpers.IsNullOrEmpty(v.BoostName) 
