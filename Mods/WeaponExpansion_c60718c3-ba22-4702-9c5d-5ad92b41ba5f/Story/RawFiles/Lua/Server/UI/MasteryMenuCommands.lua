@@ -27,71 +27,36 @@ end
 
 local function RequestOpenMasteryMenu(call, payload)
 	if payload ~= nil then
-		local data = Common.JsonParse(payload)
-		if data ~= nil then
-			local id = data.ID
-			local uuid = data.UUID
-			local profile = data.Profile
-			if id == nil and uuid ~= nil then
+		local netid = tonumber(payload)
+		local id = -1
+		local uuid = ""
+		local profile = ""
+		if netid ~= nil then
+			local character = Ext.GetCharacter(netid)
+			if character ~= nil then
+				uuid = character.MyGuid
 				id = CharacterGetReservedUserID(uuid)
+				profile = GetUserProfileID(id)
 			end
-			if id == nil and profile ~= nil then
-				local characterData = SharedData.CharacterData[profile]
-				if characterData ~= nil then
-					id = characterData.ID or CharacterGetReservedUserID(characterData.UUID)
-				end
-			end
-			if id == nil then
-				local users = {}
-				local totalUsers = 0
-				local lastID = nil
-				local lastUUID = nil
-				for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-					local playerUUID = StringHelpers.GetUUID(db[1])
-					local playerID = CharacterGetReservedUserID(playerUUID)
-					if users[playerID] == nil then
-						totalUsers = totalUsers + 1
+			if not StringHelpers.IsNullOrEmpty(uuid) then
+				if CharacterIsSummon(uuid) == 1 then
+					if CharacterIsControlled(uuid) == 1 then
+						ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+					else
+						CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
 					end
-					if StringHelpers.GetUUID(GetCurrentCharacter(playerID)) == playerUUID then
-						users[playerID] = playerUUID
-						lastID = playerID
-						lastUUID = playerUUID
+				elseif CharacterIsPartyFollower(uuid) == 1 then
+					if CharacterIsControlled(uuid) == 1 then
+						ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+					else
+						CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
 					end
+				elseif IsPlayer(uuid) then
+					OpenMasteryMenu_Start(uuid, id)
 				end
-				if totalUsers == 1 then
-					Ext.PrintWarning("[WeaponExpansion:RequestOpenMasteryMenu] Had to use the final failsafe to find the player's ID.")
-					Ext.PrintWarning(string.format("id(%s) uuid(%s) foundID(%s) foundUUID(%s)", id, uuid, lastID, lastUUID))
-					Ext.PrintWarning("Client payload:", payload)
-					id = lastID
-					uuid = lastUUID
-				end
-			end
-			if id ~= nil then
-				if StringHelpers.IsNullOrEmpty(uuid) then
-					uuid = StringHelpers.GetUUID(GetCurrentCharacter(id))
-				end
-				if not StringHelpers.IsNullOrEmpty(uuid) then
-					if CharacterIsSummon(uuid) == 1 then
-						if CharacterIsControlled(uuid) == 1 then
-							ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-						else
-							CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-						end
-					elseif CharacterIsPartyFollower(uuid) == 1 then
-						if CharacterIsControlled(uuid) == 1 then
-							ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-						else
-							CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-						end
-					elseif IsPlayer(uuid) then
-						OpenMasteryMenu_Start(uuid, id)
-						return true
-					end
-				else
-					Ext.PrintError("[WeaponExpansion] Failed to find character for User ID:", id, payload)
-				end
+				return true
 			else
-				Ext.PrintError("[WeaponExpansion] Failed to find character/user id from client data:", payload)
+				Ext.PrintError("[WeaponExpansion] Failed to find character for user. NetID(%s) ID(%s) Profile(%s) UUID(%s)", payload, id, profile, uuid)
 			end
 		end
 	end

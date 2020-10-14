@@ -33,6 +33,7 @@ Vars = {
 	GAME_STARTED = false,
 	SEND_USER_ID = false,
 	isInCharacterCreation = false,
+	DebugEnabled = Ext.IsDeveloperMode()
 }
 
 Skills = {

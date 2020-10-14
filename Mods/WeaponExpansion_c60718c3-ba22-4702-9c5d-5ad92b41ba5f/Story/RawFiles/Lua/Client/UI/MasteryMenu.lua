@@ -97,20 +97,10 @@ local requestingToOpenMenu = false
 
 local function TryOpenMasteryMenu()
 	requestingToOpenMenu = true
-	if ClientIsUnset() then
-		Ext.PrintWarning("[LLWEAPONEX] Client values are unset? Trying to get current character from the hotbar.")
-		local character = GameHelpers.Client.GetCharacter()
-		if character ~= nil then
-			local profile = ""
-			if character.PlayerCustomData ~= nil then
-				profile = character.PlayerCustomData.OwnerProfileID
-			end
-			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=character.UserID, UUID=character.MyGuid, Profile=profile}))
-		else
-			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=Client.ID, UUID=Client.UUID, Profile=Client.Profile}))
-		end
-	else
-		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", Ext.JsonStringify({ID=Client.ID, UUID=Client.UUID, Profile=Client.Profile}))
+	local character = GameHelpers.Client.GetCharacter() or Client:GetCharacter()
+	if character ~= nil then
+		local netid = character.NetID
+		Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(netid))
 	end
 end
 
