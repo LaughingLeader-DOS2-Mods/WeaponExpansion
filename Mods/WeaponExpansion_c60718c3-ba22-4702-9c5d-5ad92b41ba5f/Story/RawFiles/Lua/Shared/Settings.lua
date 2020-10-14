@@ -29,12 +29,12 @@ return function()
 		return {{
 			DisplayName = MenuSectionGeneral.Value,
 			Entries = {
-				"LLWEAPONEX_UniqueAutoLevelingDisabled",
 				"LLWEAPONEX_AutoUnlockRecipesDisabled",
 				"LLWEAPONEX_ThrowObjectLimitDisabled",
 			}},
 			{DisplayName = MenuSectionUniques.Value, 
 			Entries = {		
+				"LLWEAPONEX_UniqueAutoLevelingDisabled",
 				"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
 				"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
 				"LLWEAPONEX_ArmCannonRestrictionsDisabled",
