@@ -1,11 +1,13 @@
 Equipment = {}
 
-local function OnWeaponTypeEquipped(uuid, item, weapontype, stat, statType)
-	if weapontype == "Rapier" or weapontype == "Katana" then
-		local twohanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
-		if (twohanded and weapontype == "Katana") or (not twohanded and weapontype == "Rapier") then
-			Osi.LLWEAPONEX_AnimationSetOverride_Set(uuid, "LLWEAPONEX_Override1", weapontype)
-		end
+---@param uuid string
+---@param item EsvItem
+local function CheckWeaponAnimation(uuid, item)
+	local isTwoHanded = item.Stats.IsTwoHanded
+	if item:HasTag("LLWEAPONEX_Rapier") and not isTwoHanded then
+		Osi.LLWEAPONEX_AnimationSetOverride_Set(uuid, "LLWEAPONEX_Override1", "LLWEAPONEX_Rapier")
+	elseif item:HasTag("LLWEAPONEX_Katana") and isTwoHanded then
+		Osi.LLWEAPONEX_AnimationSetOverride_Set(uuid, "LLWEAPONEX_Override1", "LLWEAPONEX_Katana")
 	end
 end
 
@@ -182,10 +184,11 @@ function OnItemEquipped(uuid,itemUUID)
 						end
 					end
 					Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,itemUUID,tag,isPlayer and 1 or 0)
-					OnWeaponTypeEquipped(uuid, itemUUID, tag, stat, statType)
 				end
 			end
 		end
+
+		CheckWeaponAnimation(uuid, item)
 
 		if isPlayer then
 			UniqueManager.LevelUpUnique(character, item)
@@ -493,11 +496,24 @@ local bulletTemplates = {
 	["fbf17754-e604-4772-813a-3593b4e7bec8"] = true,
 }
 
+---@param item EsvItem
+---@param stats table
+local function SyncItemStatChanges(item, stats)
+	local data = {
+		NetID = item.NetID,
+		Stats = stats
+	}
+	Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
+end
+
 function CheckFirearmRunes(char, item)
 	if item:HasTag("LLWEAPONEX_Firearm") 
 	and item.Stats ~= nil and string.find(item.StatsId, "LLWEAPONEX")
 	then
 		local changedProjectile = false
+		local statChanges = {
+			DynamicStats = {}
+		}
 		for i,v in pairs(item.Stats.DynamicStats) do
 			if not StringHelpers.IsNullOrEmpty(v.BoostName) 
 			and not StringHelpers.IsNullOrEmpty(v.Projectile) 
@@ -506,10 +522,14 @@ function CheckFirearmRunes(char, item)
 				print(i, v.BoostName, v.Projectile)
 				v.Projectile = item.Stats.Projectile
 				changedProjectile = true
+				statChanges.DynamicStats[i] = {
+					Projectile = v.Projectile
+				}
 			end
 		end
 		if changedProjectile then
 			item.Stats.ShouldSyncStats = true
+			SyncItemStatChanges(item, statChanges)
 		end
 	end
 end
