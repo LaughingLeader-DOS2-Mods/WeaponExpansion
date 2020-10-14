@@ -26,9 +26,10 @@ local AppendedText = {
 	Target_LLWEAPONEX_Steal = function(character)
 		if character:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
 			local chance = math.floor(Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0)
-			local ref,handle = Ext.GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_ThiefGloves_A_DisplayName")
-			local gloveName = Ext.Getts(handle, ref)
-			return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName),true
+			local gloveName = GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_ThiefGloves_A_DisplayName", "Thief's Gloves")
+			if gloveName ~= "" then
+				return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName),true
+			end
 		end
 	end,
 	---@param character EsvCharacter

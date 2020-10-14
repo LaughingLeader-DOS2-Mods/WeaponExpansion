@@ -159,7 +159,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 			Label = ""
 		}
 	end
-	local text = Ext.GameHelpers.GetStringKeyText(slotTag, "")
+	local text = GameHelpers.GetStringKeyText(slotTag, "")
 	if text ~= "" then
 		armorSlotType.Label = text
 	end
@@ -192,10 +192,9 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	if extraProperties ~= nil then
 		for i,v in pairs(extraProperties) do
 			if v.Type == "Status" then
-				local title = Ext.GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName")) or "StatusName"
-				local description = Ext.GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "Description")) or ""
+				local title = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName"), "StatusName")
+				local description = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "Description"), "")
 				if v.StatusChance < 1.0 then
-					local chan
 					title = string.format("%s %s", title, Text.ItemTooltip.ChanceText:ReplacePlaceholders(math.ceil(v.StatusChance * 100)))
 				end
 				if description ~= nil and description ~= "" then
@@ -364,7 +363,9 @@ local function OnItemTooltip(item, tooltip)
 			if item:HasTag("LLWEAPONEX_RunicCannon") then
 				if item.ItemType == "Weapon" then
 					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_ARMCANNON_HIT_DisplayName", "Builds Energy on Hit")
-					tooltip:AppendElement({Type="ExtraProperties", Label = text})
+					if text ~= "" then
+						tooltip:AppendElement({Type="ExtraProperties", Label = text})
+					end
 				end
 				local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
 				local charges = PersistentVars.SkillData.RunicCannonCharges[item.NetID] or 0

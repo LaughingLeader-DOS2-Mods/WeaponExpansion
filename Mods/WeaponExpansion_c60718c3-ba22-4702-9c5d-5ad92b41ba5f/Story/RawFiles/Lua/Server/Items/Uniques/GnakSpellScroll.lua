@@ -635,9 +635,11 @@ local function FireSpell(source, target)
 		end
 
 		local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_GnakSpellScroll_Spell", "<font color='#ED9D07'>Spell Triggered! [1]</font>")
-		local spellName,_ = Ext.GetTranslatedStringFromKey(data.DisplayName)
-		text = string.gsub(text, "%[1%]", spellName)
-		CharacterStatusText(source, text)
+		local spellName = GameHelpers.GetStringKeyText(data.DisplayName, "")
+		if spellName ~= "" then
+			text = string.gsub(text, "%[1%]", spellName)
+			CharacterStatusText(source, text)
+		end
 
 		PlayEffectAtPosition("LLWEAPONEX_FX_Status_SpellScroll_Hit_Text_01", x, y, z)
 
