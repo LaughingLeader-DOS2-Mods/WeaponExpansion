@@ -54,7 +54,15 @@ local bonuses = {
 	},
 	Bokken = {},
 	--BokkenOneHanded = {},
-	ChaosEdge = {},
+	ChaosEdge = {
+		[2] = ue:Create("TwoHanded", 1),
+		[3] = ue:Create("Luck", 1),
+		[7] = runeslot2,
+		[8] = ue:Create("IntelligenceBoost", 2),
+		[10] = ue:Create("CriticalDamage", 155),
+		[12] = runeslot3,
+		[14] = ue:Create("DamageBoost", 10),
+	},
 	DaggerBasilus = {},
 	DeathEdge = {
 		[3] = ue:Create("TwoHanded", 1),
