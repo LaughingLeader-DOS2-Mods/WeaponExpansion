@@ -17,10 +17,12 @@ local defaultPersistentVars = {
             BlockedHit = {},
         },
         ThrowWeapon = {},
-        ThrowBalrinAxe = {}
+        ThrowBalrinAxe = {},
+        VanquishersPath = {},
     },
     StatusData = {
-        RemoveOnTurnEnd = {}
+        RemoveOnTurnEnd = {},
+        KatanaCombo = {},
     },
     MasteryMechanics = {},
     Timers = {},
@@ -28,10 +30,20 @@ local defaultPersistentVars = {
     UniqueDataIDSwap = {},
 }
 ---@type WeaponExpansionVars
-PersistentVars = defaultPersistentVars
+PersistentVars = Common.CopyTable(defaultPersistentVars, true)
 
 LeaderLib.RegisterListener("Initialized", function(region)
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
+    if PersistentVars.StatusData.RemoveOnTurnEnd ~= nil then
+        for uuid,data in pairs(PersistentVars.StatusData.RemoveOnTurnEnd) do
+            StatusManager.RemoveAllInactiveStatuses(uuid)
+        end
+    end
+end)
+
+LeaderLib.RegisterListener("LuaReset", function()
+    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
+    print(Ext.JsonStringify(PersistentVars))
 end)
 
 ---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void

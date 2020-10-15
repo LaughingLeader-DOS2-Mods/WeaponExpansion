@@ -16,6 +16,34 @@ local Finishers = {
 	Vanquisher = "LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY",
 }
 
+local function ClearBlademasterComboTag(uuid)
+	if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 1 then
+		ClearTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
+		GameHelpers.UI.RefreshSkillBar(uuid)
+	end
+end
+
+local function SetBlademasterComboTag(uuid)
+	if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 0 then
+		SetTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
+		GameHelpers.UI.RefreshSkillBar(uuid)
+	end
+end
+
+local function ClearBlademasterComboStatuses(uuid)
+	if CharacterIsDead(uuid) == 1 then
+		return false
+	end
+	for i,v in pairs(ComboStatuses) do
+		if HasActiveStatus(uuid, v) == 1 then
+			RemoveStatus(uuid, v)
+			return true
+		end
+	end
+	return false
+end
+
+---@return boolean,integer
 local function HasComboStatus(uuid)
 	if CharacterIsDead(uuid) == 1 then
 		return false,0
@@ -28,8 +56,28 @@ local function HasComboStatus(uuid)
 	return false,0
 end
 
-function OnKatanaHit(attacker, target)
-
+local function CheckActiveCombo(target, isSource)
+	if isSource == true then
+		local data = PersistentVars.StatusData.KatanaCombo[target]
+		if data ~= nil then
+			if not Common.TableHasAnyEntry(data) then
+				ClearBlademasterComboTag(target)
+				PersistentVars.StatusData.KatanaCombo[target] = nil
+			end
+		else
+			ClearBlademasterComboTag(target)
+		end
+	else
+		for source,data in pairs(PersistentVars.StatusData.KatanaCombo) do
+			if data[target] == true then
+				data[target] = nil
+			end
+			if not Common.TableHasAnyEntry(data) then
+				ClearBlademasterComboTag(source)
+				PersistentVars.StatusData.KatanaCombo[source] = nil
+			end
+		end
+	end
 end
 
 RegisterSkillListener("Shout_LLWEAPONEX_Katana_VanquishersPath", function(skill, char, state, data)
@@ -40,36 +88,108 @@ RegisterSkillListener("Shout_LLWEAPONEX_Katana_VanquishersPath", function(skill,
 		local targetData = PersistentVars.SkillData.VanquishersPath[char]
 		for i,v in pairs(caster:GetNearbyCharacters(radius)) do
 			--local character = Ext.GetCharacter(v)
-			if HasComboStatus(v) then
-				table.insert(targetData, v)
+			local b,count = HasComboStatus(v)
+			if b then
+				table.insert(targetData, {UUID=v,Count=count,Valid=true})
+				ClearBlademasterComboStatuses(v)
 			end
 		end
 		if #targetData > 0 then
+			ObjectSetFlag(char, "LLWEAPONEX_Katanas_DisableCombo", 0)
 			StartTimer("LLWEAPONEX_Katana_VanquishersPath_HitNext", 250, char)
+		else
+			PersistentVars.SkillData.VanquishersPath[char] = nil
+			CheckActiveCombo(char, true)
 		end
 	end
 end)
 
+local function GetRandomVanquisherTarget(casterData)
+	local tbl = {}
+	for i,v in pairs(casterData) do
+		if v.Valid then
+			table.insert(tbl. v)
+		end
+	end
+	return Common.GetRandomTableEntry(tbl)
+end
+
 OnTimerFinished["LLWEAPONEX_Katana_VanquishersPath_HitNext"] = function(timerData)
 	local caster = StringHelpers.GetUUID(timerData[1])
 	if not StringHelpers.IsNullOrEmpty(caster) then
-		local targetData = PersistentVars.SkillData.VanquishersPath[caster]
-		if targetData ~= nil then
-			local target = Common.PopRandomTableEntry(targetData)
-			if target ~= nil then
+		local casterData = PersistentVars.SkillData.VanquishersPath[caster]
+		if casterData ~= nil then
+			local targetData = GetRandomVanquisherTarget(casterData)
+			if targetData ~= nil then
+				targetData.Valid = false
 				GameHelpers.ClearActionQueue(caster)
-				Osi.LeaderLib_Behavior_TeleportTo(caster, target)
-				CharacterUseSkill(caster, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", target, 1, 1, 1)
+				Osi.LeaderLib_Behavior_TeleportTo(caster, targetData.UUID)
+				DeathManager.ListenForDeath("VanquishersPath", targetData.UUID, caster, 1500)
+				CharacterUseSkill(caster, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", targetData.UUID, 1, 1, 1)
+			else
+				PersistentVars.SkillData.VanquishersPath[caster] = nil
 			end
 		end
 	end
 end
 
+local function GetVanquishersPathTargetData(caster, target)
+	local casterData = PersistentVars.SkillData.VanquishersPath[caster]
+	local targetData = nil
+	local index = -1
+	if casterData ~= nil then
+		for i,v in pairs(casterData) do
+			if v.UUID == target then
+				targetData = v
+				index = i
+				break
+			end
+		end
+	end
+	return targetData,index
+end
+
+DeathManager.RegisterListener("VanquishersPath", function(target, attacker, success)
+	local targetData,index = GetVanquishersPathTargetData(attacker, target)
+	if targetData ~= nil then
+		if success then
+			local hasTarget = false
+			if targetData.Count ~= nil and targetData.Count > 0 then
+				local applyComboStatus = ComboStatuses[math.min(#ComboStatuses, targetData.Count)]
+				local enemy = Ext.GetCharacter(target)
+				if enemy ~= nil then
+					for i,v in pairs(enemy:GetNearbyCharacters(6.0)) do
+						if CharacterIsDead(v) == 0 and (CharacterIsEnemy(v, attacker) == 1 or IsTagged(v, "LeaderLib_FriendlyFireEnabled") == 1) then
+							ApplyStatus(v, applyComboStatus, 6.0, 0, attacker)
+							hasTarget = true
+						end
+					end
+				end
+			end
+			if hasTarget then
+				SetBlademasterComboTag(attacker)
+			end
+		end
+		table.remove(PersistentVars.SkillData.VanquishersPath[attacker], index)
+	end
+end)
+
 RegisterSkillListener("Target_LLWEAPONEX_Katana_VanquishersPath_Hit", function(skill, char, state, data)
-	if state == SKILL_STATE.HIT and CharacterIsDead(char) == 0 then
+	if state == SKILL_STATE.HIT then
+		local targetData,index = GetVanquishersPathTargetData(char, data.Target)
+		if targetData ~= nil then
+			local comboCount = targetData.Count or 0
+			if comboCount >= #ComboStatuses then
+				NRD_HitClearAllDamage(data.Handle)
+				GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit_Max", HitFlagPresets.GuaranteedWeaponHit:Append({CriticalHit=1}))
+			end
+		end
+	elseif state == SKILL_STATE.CAST then
 		local targetData = PersistentVars.SkillData.VanquishersPath[char]
-		if targetData ~= nil and #data > 0 then
-			StartTimer("LLWEAPONEX_Katana_VanquishersPath_HitNext", 1000, char)
+		if targetData ~= nil and #targetData > 0 then
+			StartTimer("LLWEAPONEX_Katana_VanquishersPath_HitNext", 2000, char)
+		else
+			PersistentVars.SkillData.VanquishersPath[char] = nil
 		end
 	end
 end)
@@ -129,7 +249,7 @@ local FinisherDamageData = {
 RegisterStatusListener("StatusApplied", {
 	"LLWEAPONEX_KATANA_FINISHER_APPLY", 
 	"LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY", 
-	"LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY"
+	--"LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY"
 }, 
 function(target, status, source)
 	if not StringHelpers.IsNullOrEmpty(source) then
@@ -143,9 +263,11 @@ function(target, status, source)
 			end
 			local deadComboAmount = 0
 			for i=total,0,-1 do
-				if CharacterIsDead(target) == 1 then
+				if CharacterGetHitpointsPercentage(target) <= 0 then
 					deadComboAmount = i
 					break
+				else
+					ClearBlademasterComboStatuses(target)
 				end
 				local b,result = xpcall(damageCallback, debug.traceback, i, target, sourceChar)
 				if not b then
@@ -154,41 +276,38 @@ function(target, status, source)
 			end
 			local hasTarget = false
 			ObjectClearFlag(source, "LLWEAPONEX_Katanas_DisableCombo", 0)
-			if deadComboAmount > 0 then
-				local applyComboStatus = ComboStatuses[deadComboAmount]
-				local enemy = Ext.GetCharacter(target)
-				if enemy ~= nil then
-					for i,v in pairs(enemy:GetNearbyCharacters(6.0)) do
-						if CharacterIsDead(v) == 0 and (CharacterIsEnemy(v, source) == 1 or IsTagged(v, "LeaderLib_FriendlyFireEnabled") == 1) then
-							ApplyStatus(v, applyComboStatus, 6.0, 0, source)
-							hasTarget = true
-						end
-					end
-				end
-			end
-			if not hasTarget then
-				ClearTag(source, "LLWEAPONEX_Blademaster_Target_Available")
-			end
 		end
 	end
 end)
 
+-- Remove combat statuses when the attacker's turn ends, instead of the target.
 RegisterStatusListener("StatusApplied", ComboStatuses, function(target, status, source)
-	if CharacterIsInCombat(source) == 1 then
-		StatusManager.SaveTurnEndStatus(target, status, source, {"LLWEAPONEX_Blademaster_Target_Available"})
+	if PersistentVars.StatusData.KatanaCombo[source] == nil then
+		PersistentVars.StatusData.KatanaCombo[source] = {}
 	end
-	SetTag(source, "LLWEAPONEX_Blademaster_Target_Available")
+	PersistentVars.StatusData.KatanaCombo[source][target] = true
+	if IsTagged(source, "LLWEAPONEX_Blademaster_Target_Available") == 0 then
+		SetTag(source, "LLWEAPONEX_Blademaster_Target_Available")
+		GameHelpers.UI.RefreshSkillBar(source)
+	end
+	if ObjectIsCharacter(target) == 1 then
+		local statusObj = Ext.GetCharacter(target):GetStatus(status)
+		if statusObj ~= nil then
+			statusObj.KeepAlive = true
+		end
+	end
 end)
 
-RegisterStatusListener("EndTurnStatusRemoved", ComboStatuses, function(target, status, source)
-	if not StringHelpers.IsNullOrEmpty(source) then
-		ClearTag(source, "LLWEAPONEX_Blademaster_Target_Available")
+RegisterStatusListener("StatusRemoved", ComboStatuses, function(target, status, ...)
+	if not HasComboStatus(target) then
+		CheckActiveCombo(target)
 	end
 end)
 
 RegisterMasteryListener("MasteryDeactivated", "LLWEAPONEX_Katana", function(uuid, mastery)
-	StatusManager.RemoveTurnEndStatusesFromSource(uuid, ComboStatuses)
-	ClearTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
+	ClearBlademasterComboTag(uuid)
+	PersistentVars.SkillData.VanquishersPath[uuid] = nil
+	PersistentVars.StatusData.KatanaCombo[uuid] = nil
 end)
 
 local function ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, tag, skill)

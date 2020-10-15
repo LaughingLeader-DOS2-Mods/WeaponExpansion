@@ -119,10 +119,6 @@ local gameTestTemplates = {
     "WPN_LLWEAPONEX_Tanto_1H_A_53a214ff-46b3-428d-ad35-02543b8e10f9",
 }
 
-LeaderLib.RegisterListener("LuaReset", function()
-	print("****************************Resending client UI data.*****************************")
-end)
-
 local function AddTestItems(host)
     local x,y,z = GetPosition(host)
 

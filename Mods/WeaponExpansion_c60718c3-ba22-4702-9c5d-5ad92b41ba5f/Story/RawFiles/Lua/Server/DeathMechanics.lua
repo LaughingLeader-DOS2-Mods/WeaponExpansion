@@ -7,6 +7,8 @@ DeathManager = {
 	ActiveTimers = 0
 }
 
+---@param id string
+---@param callback fun(target:string, attacker:string, success:boolean):void
 function DeathManager.RegisterListener(id, callback)
 	if DeathManager.Listeners[id] == nil then
 		DeathManager.Listeners[id] = {}

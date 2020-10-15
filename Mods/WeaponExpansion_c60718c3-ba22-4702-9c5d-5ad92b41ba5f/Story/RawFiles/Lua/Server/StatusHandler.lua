@@ -97,7 +97,7 @@ end
 
 RegisterProtectedOsirisListener("NRD_OnStatusAttempt", 4, "after", OnNRDStatusAttempt)
 
-local function OnStatusRemoved(target, status, source)
+local function OnStatusRemoved(target, status, nilSource)
 	target = StringHelpers.GetUUID(target)
 	local callbacks = Listeners.StatusRemoved[status]
 	if callbacks ~= nil then
@@ -108,6 +108,7 @@ local function OnStatusRemoved(target, status, source)
 			end
 		end
 	end
+	StatusManager.RemoveTurnEndStatus(target, status, true)
 end
 
 RegisterProtectedOsirisListener("CharacterStatusRemoved", 3, "after", OnStatusRemoved)
@@ -117,7 +118,7 @@ local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 	local callbacks = Listeners.EndTurnStatusRemoved[status]
 	if callbacks ~= nil then
 		for i,callback in pairs(callbacks) do
-			local s,err = xpcall(callback, debug.traceback, uuid, status, source)
+			local s,err = xpcall(callback, debug.traceback, target, status, source)
 			if not s then
 				Ext.PrintError(err)
 			end
@@ -125,14 +126,14 @@ local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 	end
 end
 
-function StatusManager.RemoveTurnEndStatusesFromSource(fromSource, matchStatuses, targetUUID)
+function StatusManager.RemoveTurnEndStatusesFromSource(fromSource, matchStatuses, targetUUID, wasRemoved)
 	if targetUUID ~= nil then
 		local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[targetUUID]
 		if turnEndData ~= nil then
 			for status,source in pairs(turnEndData) do
 				if source == fromSource then
 					if matchStatuses == nil or (matchStatuses ~= nil and type(matchStatuses) == "table" and matchStatuses[status] == true) then
-						if HasActiveStatus(targetUUID, status) == 1 then
+						if wasRemoved == true or HasActiveStatus(targetUUID, status) == 1 then
 							RemoveStatus(targetUUID, status)
 							InvokeEndTurnStatusRemovedCallbacks(targetUUID, status, source)
 						end
@@ -158,34 +159,60 @@ function StatusManager.RemoveTurnEndStatusesFromSource(fromSource, matchStatuses
 	end
 end
 
-function StatusManager.RemoveAllTurnEndStatuses(uuid)
-	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
-	if turnEndData ~= nil then
-		for status,source in pairs(turnEndData) do
-			if HasActiveStatus(uuid, status) == 1 then
-				RemoveStatus(uuid, status)
-				InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
-			end
-		end
-		PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
-	end
-end
-
 function StatusManager.SaveTurnEndStatus(uuid, status, source)
 	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid] or {}
 	turnEndData[status] = source or ""
 	PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = turnEndData
 end
 
-function StatusManager.RemoveTurnEndStatus(uuid, status)
+function StatusManager.RemoveAllTurnEndStatuses(uuid)
 	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
 	if turnEndData ~= nil then
-		local source = turnEndData[status] or ""
-		if HasActiveStatus(uuid, status) == 1 then
-			RemoveStatus(uuid, status)
+		for status,source in pairs(turnEndData) do
+			if HasActiveStatus(uuid, status) == 1 then
+				RemoveStatus(uuid, status)
+			end
 			InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
 		end
-		turnEndData[status] = nil
+		PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
+	end
+end
+
+function StatusManager.RemoveTurnEndStatus(uuid, status, wasRemoved)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
+	if turnEndData ~= nil then
+		if type(status) == "table" then
+			for i,v in pairs(status) do
+				local source = turnEndData[v] or ""
+				if HasActiveStatus(uuid, v) == 1 then
+					RemoveStatus(uuid, v)
+					InvokeEndTurnStatusRemovedCallbacks(uuid, v, source)
+				end
+				turnEndData[v] = nil
+			end
+		else
+			local source = turnEndData[status] or ""
+			if wasRemoved == true or HasActiveStatus(uuid, status) == 1 then
+				RemoveStatus(uuid, status)
+				InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
+			end
+			turnEndData[status] = nil
+		end
+		if not Common.TableHasAnyEntry(turnEndData) then
+			PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
+		end
+	end
+end
+
+function StatusManager.RemoveAllInactiveStatuses(uuid)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
+	if turnEndData ~= nil then
+		for status,source in pairs(turnEndData) do
+			if HasActiveStatus(uuid, status) == 0 then
+				InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
+				turnEndData[status] = nil
+			end
+		end
 		if not Common.TableHasAnyEntry(turnEndData) then
 			PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
 		end
