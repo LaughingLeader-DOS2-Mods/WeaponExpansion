@@ -1,7 +1,7 @@
 Key	Content	Handle
 Projectile_LLWEAPONEX_ChaosPentaSlash_Description	Unleash chaotic energy within the Chaos Edge, creating 5 random cone-shaped surfaces in a 60 degree arc infront of you.	h8853786fg4a4fg4f23g9fd1g02506c6802d4
 Projectile_LLWEAPONEX_ChaosPentaSlash_DisplayName	Chaos Pentaslash	hb608d005g94e2g4a71g934cg1035eb782db0
-Projectile_LLWEAPONEX_ChaosSlash_Description	Send out an beam of pure Chaos energy, dealing [1] and creating a <font color='#f7ba14'>random elemental surface</font> at the target.<br><font color='#sample'>The surface is also created beneath the beam as it travels.</font>	h94a156acgdfa3g4759ga11bg84a478dbbcba
+Projectile_LLWEAPONEX_ChaosSlash_Description	Send out an beam of pure chaotic energy, dealing [1] and creating a <font color='#f7ba14'>random elemental surface</font> at the target.<br><font color='#FF22FF'>A surface also created beneath the beam as it travels.</font>	h94a156acgdfa3g4759ga11bg84a478dbbcba
 Projectile_LLWEAPONEX_ChaosSlash_DisplayName	Chaos Slash	h0bce2460gea5cg42eaga781g0fa79906d7e6
 Shout_LLWEAPONEX_ActivateRuneblade_Air_Description	Activate the <font color='#7d71d9'>Air Rune</font> within your <font color='#40E0D0'>Runeblade</font>, adding [1] to melee attacks.<br>Enemies hit have a 10% chance to become <font color='#7d71d9'>Shocked</font> for 1 turn.<br><font color='#4197e2'>Wet increases this chance to 50%.</font>	h8a6cbb9ag679fg453ega509g5dd16d2ed7ef
 Shout_LLWEAPONEX_ActivateRuneblade_Air_DisplayName	Activate <font color='#7d71d9'>Air Rune</font>	ha755a81agdc09g4b57ga391gde04e4395bd0
