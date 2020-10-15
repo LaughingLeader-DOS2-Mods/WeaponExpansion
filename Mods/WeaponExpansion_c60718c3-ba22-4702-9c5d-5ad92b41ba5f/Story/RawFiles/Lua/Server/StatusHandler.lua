@@ -1,3 +1,7 @@
+if StatusManager == nil then
+	StatusManager = {}
+end
+
 ---@param target string
 ---@param source string
 ---@param item EsvItem
@@ -108,3 +112,62 @@ end
 
 RegisterProtectedOsirisListener("CharacterStatusRemoved", 3, "after", OnStatusRemoved)
 RegisterProtectedOsirisListener("ItemStatusRemoved", 3, "after", OnStatusRemoved)
+
+function StatusManager.RemoveTurnEndStatusesFromSource(fromSource, matchStatuses, targetUUID)
+	if targetUUID ~= nil then
+		local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[targetUUID]
+		if turnEndData ~= nil then
+			for status,source in pairs(turnEndData) do
+				if source == fromSource then
+					if matchStatuses == nil or (matchStatuses ~= nil and type(matchStatuses) == "table" and matchStatuses[status] == true) then
+						if HasActiveStatus(uuid, status) == 1 then
+							RemoveStatus(uuid, status)
+						end
+						turnEndData[status] = nil
+					end
+				end
+			end
+		end
+	else
+		for target,turnEndData in pairs(PersistentVars.StatusData.RemoveOnTurnEnd) do
+			for status,source in pairs(turnEndData) do
+				if source == fromSource then
+					if matchStatuses == nil or (matchStatuses ~= nil and type(matchStatuses) == "table" and matchStatuses[status] == true) then
+						if HasActiveStatus(uuid, status) == 1 then
+							RemoveStatus(uuid, status)
+						end
+						turnEndData[status] = nil
+					end
+				end
+			end
+		end
+	end
+end
+
+function StatusManager.RemoveAllTurnEndStatuses(uuid)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
+	if turnEndData ~= nil then
+		for status,source in pairs(turnEndData) do
+			if HasActiveStatus(uuid, status) == 1 then
+				RemoveStatus(uuid, status)
+			end
+		end
+		PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
+	end
+end
+
+function StatusManager.SaveTurnEndStatus(uuid, status, source)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid] or {}
+	turnEndData[status] = source or ""
+	PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = turnEndData
+end
+
+function StatusManager.RemoveTurnEndStatus(uuid, status)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
+	if turnEndData ~= nil then
+		turnEndData[status] = nil
+		if not Common.TableHasAnyEntry(turnEndData) then
+			PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
+		end
+	end
+end

@@ -200,6 +200,15 @@ Ext.RegisterOsirisListener("SkillCast", 4, "after", OnSkillCast)
 function OnMasteryDeactivated(uuid,mastery)
 	ClearTag(uuid,mastery)
 	LeaderLib.PrintDebug("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
+	local callbacks = Listeners.MasteryDeactivated[mastery]
+	if callbacks ~= nil then
+		for i,callback in pairs(callbacks) do
+			local b,err = xpcall(callback, debug.traceback, uuid, mastery)
+			if not b then
+				Ext.PrintError(err)
+			end
+		end
+	end
 end
 
 --- @param uuid string

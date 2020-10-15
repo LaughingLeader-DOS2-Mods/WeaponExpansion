@@ -2,6 +2,9 @@ MasteryBonusManager = {}
 
 HitData = LeaderLib.Classes.HitData
 
+---@param char string
+---@param skill string|nil
+---@return table<string, boolean>
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	local character = Ext.GetCharacter(char)
 	local bonuses = {}

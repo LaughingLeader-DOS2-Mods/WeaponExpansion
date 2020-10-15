@@ -59,7 +59,7 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 					local target = v.UUID
 					ApplyStatus(target, "MARKED", 6.0, 0, char)
 					SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
-					Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED")
+					Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED", "")
 					totalEnemies = totalEnemies - 1
 					if totalEnemies <= 0 then
 						break
@@ -69,7 +69,7 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 				local target = targets[1]
 				ApplyStatus(target, "MARKED", 6.0, 0, char)
 				SetTag(target, "LLWEAPONEX_Pistol_MarkedForCrit")
-				Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED")
+				Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED", "")
 			end
 		end
 	else

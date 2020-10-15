@@ -97,17 +97,6 @@ local function ReloadAmmoSkills(uuid)
 	end
 end
 
-local function OnLeftCombat(uuid, id)
-	ClearTag(uuid, "LLWEAPONEX_EnemyDiedInCombat")
-	ReloadAmmoSkills(uuid)
-end
-
-RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(object,id)
-	if ObjectIsCharacter(object) == 1 then
-		OnLeftCombat(StringHelpers.GetUUID(object), id)
-	end
-end)
-
 -- Ext.RegisterOsirisListener("ObjectWasTagged", 2, "after", function(object, tag)
 
 
@@ -219,5 +208,23 @@ LeaderLib.RegisterListener("Initialized", function(region)
 		if IsCharacterCreationLevel(region) == 1 then
 			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 		end
+	end
+end)
+
+local function OnLeftCombat(uuid, id)
+	ClearTag(uuid, "LLWEAPONEX_EnemyDiedInCombat")
+	ReloadAmmoSkills(uuid)
+	StatusManager.RemoveAllTurnEndStatuses(uuid)
+end
+
+Ext.RegisterListener("ObjectTurnEnded", 2, "after", function(obj, combat)
+	obj = StringHelpers.GetUUID(obj)
+	StatusManager.RemoveAllTurnEndStatuses(obj)
+end)
+
+RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(obj,id)
+	obj = StringHelpers.GetUUID(obj)
+	if ObjectIsCharacter(obj) == 1 then
+		OnLeftCombat(obj, id)
 	end
 end)

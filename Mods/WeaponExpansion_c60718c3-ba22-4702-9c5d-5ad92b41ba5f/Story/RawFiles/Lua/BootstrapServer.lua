@@ -19,6 +19,9 @@ local defaultPersistentVars = {
         ThrowWeapon = {},
         ThrowBalrinAxe = {}
     },
+    StatusData = {
+        RemoveOnTurnEnd = {}
+    },
     MasteryMechanics = {},
     Timers = {},
     OnDeath = {},
@@ -34,8 +37,15 @@ end)
 ---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
 ---@alias EquipmentChangedIDType Tag|Template
 ---@alias ItemListenerEvent EquipmentChanged
+
 ---@alias StatusEventCallback fun(target:string, status:string, source:string|nil):void
 ---@alias StatusEventID StatusApplied|StatusAttempt|StatusRemoved
+
+---@alias MasteryEventID MasteryActivated|MasteryDeactivated
+---@alias MasteryEventCallback fun(uuid:string, mastery:string):void
+
+---@alias HitEventID OnHit|OnWeaponSkillHit
+---@alias HitHandlerCallback fun(target:string, source:string, damage:integer, handle:integer, masteryBonuses:table<string, boolean>, tag:string, skill:string|nil):void
 
 LoadPersistentVars = {}
 BonusSkills = {}
@@ -50,7 +60,15 @@ Listeners = {
     EquipmentChanged = {
         Template = {},
         Tag = {}
-    }
+    },
+    ---@type table<string, MasteryEventCallback>
+    MasteryActivated = {},
+    ---@type table<string, MasteryEventCallback>
+    MasteryDeactivated = {},
+    ---@type table<string, HitHandlerCallback>
+    OnHit = {},
+    ---@type table<string, HitHandlerCallback>
+    OnWeaponSkillHit = {},
 }
 
 EID = {
@@ -60,16 +78,69 @@ EID = {
     }
 }
 
+---@param event HitEventID
+---@param tag string
+---@param callback HitHandlerCallback
+function RegisterHitListener(event, tag, callback)
+    local eventHolder = Listeners[event]
+    if eventHolder ~= nil then
+        if type(tag) == "table" then
+            for i,v in pairs(tag) do
+                if eventHolder[v] == nil then
+                    eventHolder[v] = {}
+                end
+                table.insert(eventHolder[v], callback)
+            end
+        else
+            if eventHolder[tag] == nil then
+                eventHolder[tag] = {}
+            end
+            table.insert(eventHolder[tag], callback)
+        end
+    end
+end
+
+---@param event MasteryEventID
+---@param mastery string
+---@param callback MasteryEventCallback
+function RegisterMasteryListener(event, mastery, callback)
+    local eventHolder = Listeners[event]
+    if eventHolder ~= nil then
+        if type(mastery) == "table" then
+            for i,v in pairs(mastery) do
+                if eventHolder[v] == nil then
+                    eventHolder[v] = {}
+                end
+                table.insert(eventHolder[v], callback)
+            end
+        else
+            if eventHolder[mastery] == nil then
+                eventHolder[mastery] = {}
+            end
+            table.insert(eventHolder[mastery], callback)
+        end
+    end
+end
+
 ---@param event StatusEventID
 ---@param status string
 ---@param callback StatusEventCallback
 function RegisterStatusListener(event, status, callback)
     local statusEventHolder = Listeners[event]
     if statusEventHolder ~= nil then
-        if statusEventHolder[status] == nil then
-            statusEventHolder[status] = {}
+        if type(status) == "table" then
+            for i,v in pairs(status) do
+                if statusEventHolder[v] == nil then
+                    statusEventHolder[v] = {}
+                end
+                table.insert(statusEventHolder[v], callback)
+            end
+        else
+            if statusEventHolder[status] == nil then
+                statusEventHolder[status] = {}
+            end
+            table.insert(statusEventHolder[status], callback)
         end
-        table.insert(statusEventHolder[status], callback)
     end
 end
 

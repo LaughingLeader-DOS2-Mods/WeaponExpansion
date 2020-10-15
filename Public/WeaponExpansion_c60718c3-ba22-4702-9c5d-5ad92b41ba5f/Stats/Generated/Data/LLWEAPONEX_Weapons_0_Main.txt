@@ -373,7 +373,7 @@ data "Charges" "0"
 data "MaxCharges" "0"
 data "RuneSlots" "0"
 data "RuneSlots_V1" "0"
-data "Boosts" "_LLWEAPONEX_Boost_Katana_OnHit"
+data "Boosts" ""
 data "Tags" "LLWEAPONEX_Katana;LLWEAPONEX_Katana_Equipped"
 
 new entry "_LLWEAPONEX_Boost_Katana_OnHit"

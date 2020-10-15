@@ -26,4 +26,4 @@ local function OnBookHit(target,source,damage,handle)
 	end
 end
 
-HitHandler.RegisterOnHit("LLWEAPONEX_BattleBook", OnBookHit)
+RegisterHitListener("OnHit", "LLWEAPONEX_BattleBook", OnBookHit)

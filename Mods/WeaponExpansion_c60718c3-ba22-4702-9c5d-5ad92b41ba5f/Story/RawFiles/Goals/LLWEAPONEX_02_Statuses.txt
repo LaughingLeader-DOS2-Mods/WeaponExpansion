@@ -74,13 +74,13 @@ LeaderLib_ToggleScripts_DisableScriptForObject(_Target, "LLWEAPONEX_ListenForSta
 
 //REGION LISTEN_FOR_TURN_ENDING
 PROC
-LLWEAPONEX_Statuses_ListenForTurnEnding((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+LLWEAPONEX_Statuses_ListenForTurnEnding((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status, (STRING)_Group)
 THEN
-DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _Target, _Status);
+DB_LLWEAPONEX_Statuses_ListenForTurnEnding(_Source, _Target, _Status, _Group);
 LeaderLib_ToggleScripts_EnableScriptForObject(_Source, "LLWEAPONEX_ListenForTurnEnding", "WeaponExpansion");
 
 PROC
-LLWEAPONEX_Statuses_TurnEnded_OnStatusRemoved((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status)
+LLWEAPONEX_Statuses_TurnEnded_OnStatusRemoved((CHARACTERGUID)_Source, (GUIDSTRING)_Target, (STRING)_Status, (STRING)_Group)
 THEN
 DB_NOOP(1);
 //END_REGION

@@ -108,13 +108,8 @@ MasteryBonusManager.RegisterSkillListener({"Target_DualWieldingAttack"}, {"AXE_F
 	end
 end)
 
---- @param target string
---- @param source string
---- @param damage integer
---- @param handle integer
---- @param bonuses table<string,bool>
-HitHandler.RegisterOnHit("LLWEAPONEX_Axe", function(target,source,damage,handle,bonuses)
-	if damage > 0 and GameHelpers.HitSucceeded(target, handle) then
+RegisterHitListener("OnHit", "LLWEAPONEX_Axe", function(target,source,damage,handle,bonuses,tag)
+	if damage > 0 then
 		if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target, "KNOCKED_DOWN") == 1 then
 			local damageBonus = (Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus"] or 25) / 100
 			GameHelpers.IncreaseDamage(target, source, handle, damageBonus, 0)

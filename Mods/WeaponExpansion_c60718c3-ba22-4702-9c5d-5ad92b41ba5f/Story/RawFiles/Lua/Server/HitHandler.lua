@@ -1,21 +1,6 @@
 ---@type MessageData
 local MessageData = LeaderLib.Classes["MessageData"]
 
-if HitHandler == nil then
-	HitHandler = {
-		---@type table<string,function>
-		OnHitCallbacks = {},
-		TotalOnHitCallbacks = 0
-	}
-end
-
-local totalOnHitCallbacks = 0
-
-HitHandler.RegisterOnHit = function(tag, callback)
-	HitHandler.OnHitCallbacks[tag] = callback
-	totalOnHitCallbacks = totalOnHitCallbacks + 1
-end
-
 local armorDamageTypes = {
 	Magic = "CurrentMagicArmor",
 	Corrosive = "CurrentArmor"
@@ -156,17 +141,17 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 			if coverData ~= nil then
 				DualShields_Cover_RedirectDamage(target, coverData.Blocker, source, handle)
 			end
+			local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
+			local mainhand = CharacterGetEquippedItem(source, "Weapon")
+			local offhand = CharacterGetEquippedItem(source, "Shield")
 			if skill == "" and GameHelpers.HitWithWeapon(target, handle, false, false) then
-				local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
-				local mainhand = CharacterGetEquippedItem(source, "Weapon")
-				local offhand = CharacterGetEquippedItem(source, "Shield")
 				-- Unarmed
 				if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
-					local unarmedCallback = HitHandler.OnHitCallbacks["LLWEAPONEX_Unarmed"]
+					local unarmedCallback = Listeners.OnHit["LLWEAPONEX_Unarmed"]
 					if unarmedCallback ~= nil then
-						local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle, bonuses)
+						local status,err = xpcall(unarmedCallback, debug.traceback, target, source, damage, handle, bonuses, "LLWEAPONEX_Unarmed")
 						if not status then
-							Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
+							Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
 						end
 					end
 					if damage > 0 and IsPlayer(source) then
@@ -176,11 +161,11 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 					if damage > 0 and IsPlayer(source) then
 						MasterySystem.GrantBasicAttackExperience(source, target)
 					end
-					for tag,callback in pairs(HitHandler.OnHitCallbacks) do
+					for tag,callback in pairs(Listeners.OnHit) do
 						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
-							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses)
+							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses, tag)
 							if not status then
-								Ext.PrintError("Error calling function for 'HitHandler.OnHitCallbacks':\n", err)
+								Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
 							end
 						end
 					end
@@ -199,8 +184,15 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 					ArmCannon_OnWeaponSkillHit(source, target, skill)
 				end
 				if IsWeaponSkill(skill) then
-					--printd(string.format("[WeaponExpansion:HitHandler:OnHit] target(%s) was hit with a weapon skill by source(%s).", target, source))
 					MasterySystem.GrantWeaponSkillExperience(source, target)
+					for tag,callback in pairs(Listeners.OnWeaponSkillHit) do
+						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
+							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses, tag, skill)
+							if not status then
+								Ext.PrintError("Error calling function for 'Listeners.OnWeaponSkillHit':\n", err)
+							end
+						end
+					end
 				end
 			end
 		end
