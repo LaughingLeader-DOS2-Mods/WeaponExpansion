@@ -519,7 +519,7 @@ end
 ---@param item EsvItem
 function EquipmentManager.CheckFirearmProjectile(char, item)
 	if item:HasTag("LLWEAPONEX_Firearm")
-	and not item:HasTag("Musk_Rifle")
+	and not item:HasTag("Musk_Rifle") -- Musketeer has its own rune projectile tweaks
 	and item.Stats ~= nil and string.find(item.StatsId, "LLWEAPONEX")
 	then
 		local changedProjectile = false
