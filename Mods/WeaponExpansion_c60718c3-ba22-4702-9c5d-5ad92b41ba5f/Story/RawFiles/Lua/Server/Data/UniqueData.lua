@@ -206,9 +206,13 @@ function UniqueData:Equip(target)
 end
 
 function UniqueData:Transfer(target, equip)
+	if target == "host" then target = CharacterGetHostCharacter() end
 	if ObjectExists(self.UUID) == 0 then
 		Ext.PrintError("[UniqueData:Transfer] Item", self.UUID, "does not exist!")
-		return
+		return false
+	elseif ObjectExists(target) == 0 then
+		Ext.PrintError("[UniqueData:Transfer] Target", target, "does not exist!")
+		return false
 	end
 	self.Owner = target
 
@@ -233,6 +237,9 @@ local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
 		if stat ~= entry.MatchStat then
 			return false
 		end
+	end
+	if Ext.Version() < 53 then
+		Ext.EnableExperimentalPropertyWrites()
 	end
 	if entry.Attribute == "ExtraProperties" then
 		if entry.Append == true then
@@ -264,13 +271,18 @@ local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
 			end
 		else
 			if stat[entry.Attribute] ~= entry.Value then
+				printd(stat.Name, entry.Attribute, stat[entry.Attribute], "=>", entry.Value)
 				stat[entry.Attribute] = entry.Value
 				statChanged = true
 			end
 		end
 	end
 	if statChanged or firstLoad == true then
-		changes[entry.Attribute] = stat[entry.Attribute]
+		if entry.Append == true then
+			changes[entry.Attribute] = stat[entry.Attribute]
+		else
+			changes[entry.Attribute] = entry.Value
+		end
 	end
 	return statChanged
 end

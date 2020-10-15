@@ -39,7 +39,7 @@ end)
 ---@alias ItemListenerEvent EquipmentChanged
 
 ---@alias StatusEventCallback fun(target:string, status:string, source:string|nil):void
----@alias StatusEventID StatusApplied|StatusAttempt|StatusRemoved
+---@alias StatusEventID StatusApplied|StatusAttempt|StatusRemoved|EndTurnStatusRemoved
 
 ---@alias MasteryEventID MasteryActivated|MasteryDeactivated
 ---@alias MasteryEventCallback fun(uuid:string, mastery:string):void
@@ -56,6 +56,8 @@ Listeners = {
     StatusAttempt = {},
     ---@type table<string, StatusEventCallback>
     StatusRemoved = {},
+    ---@type table<string, fun(target:string, status:string, source:string):void>
+    EndTurnStatusRemoved = {},
     ---@type table<string, table<string, EquipmentChangedCallback>>
     EquipmentChanged = {
         Template = {},

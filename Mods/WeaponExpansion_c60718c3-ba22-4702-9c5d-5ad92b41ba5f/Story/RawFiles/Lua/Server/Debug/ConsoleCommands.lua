@@ -55,5 +55,9 @@ if Ext.IsDeveloperMode() then
 		end
 		print(output)
 	end
-	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks);
+	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks)
+
+	LeaderLib.RegisterListener("BeforeLuaReset", function()
+		Ext.BroadcastMessage("LLWEAPONEX_Debug_DestroyUI", "", nil)
+	end)
 end

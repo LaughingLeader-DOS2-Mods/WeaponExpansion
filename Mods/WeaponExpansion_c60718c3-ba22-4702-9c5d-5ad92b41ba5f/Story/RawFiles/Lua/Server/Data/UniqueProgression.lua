@@ -9,6 +9,16 @@ local UniqueProgressionEntry = {
 }
 UniqueProgressionEntry.__index = UniqueProgressionEntry
 
+local Qualifiers = {
+	StrengthBoost = true,
+	FinesseBoost = true,
+	IntelligenceBoost = true,
+	ConstitutionBoost = true,
+	MemoryBoost = true,
+	WitsBoost = true,
+	MagicPointsBoost = true,
+}
+
 ---@param attribute string
 ---@param value integer|string|any
 ---@param append boolean
@@ -20,6 +30,9 @@ function UniqueProgressionEntry:Create(attribute, value, params)
 		Value = value,
 		Append = false
 	}
+	if Qualifiers[attribute] == true then
+		this.Value = tostring(value)
+	end
 	if params ~= nil and type(params) == "table" then
 		for k,v in pairs(params) do
 			this[k] = v

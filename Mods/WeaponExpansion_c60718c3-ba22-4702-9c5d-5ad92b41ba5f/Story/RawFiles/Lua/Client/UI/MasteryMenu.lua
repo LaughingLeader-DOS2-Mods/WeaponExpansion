@@ -611,6 +611,15 @@ Ext.RegisterNetListener("LLWEAPONEX_InitializeMasteryMenu", function(call,uuid)
 	end
 end)
 
+Ext.RegisterNetListener("LLWEAPONEX_Debug_DestroyUI", function(...)
+	if MasteryMenu.Instance ~= nil then
+		MasteryMenu.Instance:Destroy()
+	end
+	if MasteryMenu.ToggleButtonInstance ~= nil then
+		MasteryMenu.ToggleButtonInstance:Destroy()
+	end
+end)
+
 return {
 	Init = InitMasteryMenu
 }

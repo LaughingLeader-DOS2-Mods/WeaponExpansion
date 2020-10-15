@@ -94,6 +94,31 @@ local function ApplyVanquisherDamage(i, target, source)
 	end
 end
 
+local function IncrementCombo(target, source, comboMod)
+	comboMod = comboMod or 1
+	local comboNum = comboMod
+	for i,v in pairs(ComboStatuses) do
+		if HasActiveStatus(target, v) == 1 then
+			comboNum = math.min(#ComboStatuses, i + comboMod)
+			break
+		end
+	end
+	local nextStatus = ComboStatuses[comboNum]
+	if nextStatus ~= nil then
+		if HasActiveStatus(target, nextStatus) == 0 then
+			ApplyStatus(target, nextStatus, 6.0, 0, source)
+		end
+		if ObjectIsCharacter(target) == 1 then
+			local status = Ext.GetCharacter(target):GetStatus(nextStatus)
+			if status ~= nil then
+				status.CurrentLifeTime = 6.0
+				status.KeepAlive = true
+				status.RequestClientSync = true
+			end
+		end
+	end
+end
+
 ---@type table<string, fun(i:integer, target:string, source:EsvCharacter)>
 local FinisherDamageData = {
 	LLWEAPONEX_KATANA_FINISHER_APPLY = ApplyDefaultFinisherDamage,
@@ -122,7 +147,7 @@ function(target, status, source)
 					deadComboAmount = i
 					break
 				end
-				local b,result = xpcall(damageCallback, debug.traceback, i, sourceChar, target)
+				local b,result = xpcall(damageCallback, debug.traceback, i, target, sourceChar)
 				if not b then
 					Ext.PrintError(result)
 				end
@@ -149,18 +174,43 @@ function(target, status, source)
 end)
 
 RegisterStatusListener("StatusApplied", ComboStatuses, function(target, status, source)
-	StatusManager.SaveTurnEndStatus(target, status, source)
+	if CharacterIsInCombat(source) == 1 then
+		StatusManager.SaveTurnEndStatus(target, status, source, {"LLWEAPONEX_Blademaster_Target_Available"})
+	end
 	SetTag(source, "LLWEAPONEX_Blademaster_Target_Available")
+end)
+
+RegisterStatusListener("EndTurnStatusRemoved", ComboStatuses, function(target, status, source)
+	if not StringHelpers.IsNullOrEmpty(source) then
+		ClearTag(source, "LLWEAPONEX_Blademaster_Target_Available")
+	end
 end)
 
 RegisterMasteryListener("MasteryDeactivated", "LLWEAPONEX_Katana", function(uuid, mastery)
 	StatusManager.RemoveTurnEndStatusesFromSource(uuid, ComboStatuses)
-	ClearTag(source, "LLWEAPONEX_Blademaster_Target_Available")
+	ClearTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
 end)
 
 local function ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, tag, skill)
-	if masteryBonuses.KATANA_COMBO == true and ObjectIsCharacter(target) == 1 and ObjectGetFlag(source, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
-		ApplyStatus(target, "LLWEAPONEX_KATANA_COMBO_PROC", 0.0, 0, source)
+	if ObjectIsCharacter(target) == 1 and CharacterIsEnemy(target, source) == 1 then
+		if masteryBonuses.KATANA_COMBO == true and ObjectGetFlag(source, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
+			local maxStatus = ComboStatuses[#ComboStatuses]
+			if HasActiveStatus(target, maxStatus) == 1 then
+				local status = Ext.GetCharacter(target):GetStatus(maxStatus)
+				if status ~= nil then
+					status.CurrentLifeTime = status.LifeTime
+					status.RequestClientSync = true
+				end
+			else
+				if NRD_StatusGetInt(target, handle, "Backstab") == 1 or NRD_StatusGetInt(target, handle, "CriticalHit") == 1 then
+					local comboIncrement = Ext.ExtraData["LLWEAPONEX_MasteryBonus_Katana_ComboIncrementCritical"] or 2.0
+					IncrementCombo(target, source, math.tointeger(comboIncrement))
+				else
+					local comboIncrement = Ext.ExtraData["LLWEAPONEX_MasteryBonus_Katana_ComboIncrementDefault"] or 1.0
+					IncrementCombo(target, source, math.tointeger(comboIncrement))
+				end
+			end
+		end
 	end
 end
 

@@ -16,6 +16,9 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 		if data.NetID ~= nil and data.Stats ~= nil then
 			local item = Ext.GetItem(data.NetID)
 			if item ~= nil then
+				if Ext.Version() < 53 then
+					Ext.EnableExperimentalPropertyWrites()
+				end
 				if data.DynamicIndex ~= nil then
 					SetItemStats(item.Stats.DynamicStats[data.DynamicIndex], data.Stats)
 				else

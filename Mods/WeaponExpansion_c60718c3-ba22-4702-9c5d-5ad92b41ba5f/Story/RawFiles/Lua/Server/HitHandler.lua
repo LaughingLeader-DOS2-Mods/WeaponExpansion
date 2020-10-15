@@ -161,11 +161,13 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 					if damage > 0 and IsPlayer(source) then
 						MasterySystem.GrantBasicAttackExperience(source, target)
 					end
-					for tag,callback in pairs(Listeners.OnHit) do
-						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
-							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses, tag)
-							if not status then
-								Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
+					for tag,callbacks in pairs(Listeners.OnHit) do
+						if #callbacks > 0 and WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
+							for i,callback in pairs(callbacks) do
+								local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses, tag)
+								if not status then
+									Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
+								end
 							end
 						end
 					end
@@ -185,11 +187,13 @@ LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
 				end
 				if IsWeaponSkill(skill) then
 					MasterySystem.GrantWeaponSkillExperience(source, target)
-					for tag,callback in pairs(Listeners.OnWeaponSkillHit) do
-						if WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
-							local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses, tag, skill)
-							if not status then
-								Ext.PrintError("Error calling function for 'Listeners.OnWeaponSkillHit':\n", err)
+					for tag,callbacks in pairs(Listeners.OnWeaponSkillHit) do
+						if #callbacks > 0 and WeaponIsTagged(source,mainhand,tag) or WeaponIsTagged(source,offhand,tag) then
+							for i,callback in pairs(callbacks) do
+								local status,err = xpcall(callback, debug.traceback, target, source, damage, handle, bonuses, tag, skill)
+								if not status then
+									Ext.PrintError("Error calling function for 'Listeners.OnWeaponSkillHit':\n", err)
+								end
 							end
 						end
 					end
