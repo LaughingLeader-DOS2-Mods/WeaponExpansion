@@ -32,6 +32,7 @@ function MasterySystem.GrantDeathExperienceToParty(enemy)
 	end
 end
 
+--Mods.WeaponExpansion.AddMasteryExperienceForAllActive(Mods.WeaponExpansion.Origin.Harken, 20.0)
 function MasterySystem.GrantBasicAttackExperience(player, enemy, mastery)
 	if Mastery.CanGrantXP(enemy) then
 		local expGain = Ext.ExtraData.LLWEAPONEX_Mastery_BasicAttackExperienceMult or 0.5
