@@ -126,6 +126,12 @@ using "_BOOSTS_Weapon"
 data "Value" "8"
 data "ExtraProperties" "LLWEAPONEX_PHYSICAL_WEAK_CHECK,10,1"
 
+new entry "_Boost_Weapon_LLWEAPONEX_Status_Set_PhysicalWeak2"
+type "Weapon"
+using "_BOOSTS_Weapon"
+data "Value" "12"
+data "ExtraProperties" "LLWEAPONEX_PHYSICAL_WEAK_CHECK,15,1"
+
 new entry "_Boost_Weapon_LLWEAPONEX_Skill_BlackShroud"
 type "Weapon"
 using "_BOOSTS_Weapon"
