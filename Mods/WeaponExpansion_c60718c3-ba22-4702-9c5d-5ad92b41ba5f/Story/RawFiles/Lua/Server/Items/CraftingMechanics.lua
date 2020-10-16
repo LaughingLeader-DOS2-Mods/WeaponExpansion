@@ -127,8 +127,9 @@ function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
 		if attribute ~= nil then
 			local uniques = getUniqueItems(craftingEntry)
 			for i,v in pairs(uniques) do
-				local item,stat = table.unpack(v)
-				Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate] "..string.format("Changing unique item scaling for (%s)[%s] to (%s)", item, stat, attribute))
+				local itemuuid,stat = table.unpack(v)
+				local item = Ext.GetItem(itemuuid)
+				Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate] "..string.format("Changing unique item scaling for (%s)[%s] to (%s)", itemuuid, stat, attribute))
 				ChangeItemScaling(item, attribute, stat)
 			end
 		end
@@ -143,9 +144,12 @@ function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
 	end
 end
 
+---@param item EsvItem
+---@param attribute string
+---@param itemStat string
 function ChangeItemScaling(item, attribute, itemStat)
 	if itemStat == nil then
-		itemStat = NRD_ItemGetStatsId(item)
+		itemStat = item.StatsId
 	end
 	if itemStat ~= nil then
 		---@type StatEntryWeapon
@@ -179,23 +183,27 @@ function ChangeItemScaling(item, attribute, itemStat)
 		end
 		--Ext.Print("[WeaponExpansion:ChangeItemScaling] Changed requirements:"..string.format("%s", Ext.JsonStringify(stat.Requirements)))
 		stat.Requirements = requirements
-		Ext.SyncStat(itemStat)
+		item.Stats.ShouldSyncStats = true
+		Ext.SyncStat(itemStat, true)
+		print(Common.Dump(stat.Requirements))
+		EquipmentManager.SyncItemStatChanges(item, {ShouldSyncStats=true})
+		--EquipmentManager.SyncItemStatChanges(item, {Requirements=requirements})
 		
-		local inventory = GetInventoryOwner(item)
-		local slot = nil
-		if ObjectIsCharacter(inventory) == 1 then
-			slot = GameHelpers.Item.GetEquippedSlot(inventory,item)
-		end
-		NRD_ItemCloneBegin(item)
-		local clone = NRD_ItemClone()
-		local amount = ItemGetAmount(clone)
-		ItemRemove(item)
-		if inventory ~= nil then
-			if slot ~= nil then
-				GameHelpers.Item.EquipInSlot(inventory, clone, slot)
-			else
-				ItemToInventory(clone, inventory, amount, 0, 0)
-			end
-		end
+		-- local inventory = GetInventoryOwner(item)
+		-- local slot = nil
+		-- if ObjectIsCharacter(inventory) == 1 then
+		-- 	slot = GameHelpers.Item.GetEquippedSlot(inventory,item)
+		-- end
+		-- NRD_ItemCloneBegin(item)
+		-- local clone = NRD_ItemClone()
+		-- local amount = ItemGetAmount(clone)
+		-- ItemRemove(item)
+		-- if inventory ~= nil then
+		-- 	if slot ~= nil then
+		-- 		GameHelpers.Item.EquipInSlot(inventory, clone, slot)
+		-- 	else
+		-- 		ItemToInventory(clone, inventory, amount, 0, 0)
+		-- 	end
+		-- end
 	end
 end
