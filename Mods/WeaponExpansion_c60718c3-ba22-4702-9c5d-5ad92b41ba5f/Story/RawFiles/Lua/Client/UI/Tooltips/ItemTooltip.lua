@@ -176,17 +176,6 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 		equipped.Slot = Text.ItemTooltip.RuneSlot.Value
 	end
 
-	if not item:HasTag("LeaderLib_AutoLevel") and item:HasTag("LLWEAPONEX_AutoLevel") and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false) then
-		local element = tooltip:GetElement("ItemDescription")
-		if element ~= nil and not string.find(string.lower(element.Label), "automatically level") then
-			if not StringHelpers.IsNullOrEmpty(element.Label) then
-				element.Label = element.Label .. "<br>" .. Text.ItemDescription.AutoLeveling.Value
-			else
-				element.Label = Text.ItemDescription.AutoLeveling.Value
-			end
-		end
-	end
-
 	---@type StatProperty[]
 	local extraProperties = Ext.StatGetAttribute(boost, "ExtraProperties")
 	if extraProperties ~= nil then
@@ -252,6 +241,17 @@ local function OnItemTooltip(item, tooltip)
 	end
 
 	if item ~= nil then
+		if not item:HasTag("LeaderLib_AutoLevel") and item:HasTag("LLWEAPONEX_AutoLevel") and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false) then
+			local element = tooltip:GetElement("ItemDescription")
+			if element ~= nil and not string.find(string.lower(element.Label), "automatically level") then
+				if not StringHelpers.IsNullOrEmpty(element.Label) then
+					element.Label = element.Label .. "<br>" .. Text.ItemDescription.AutoLeveling.Value
+				else
+					element.Label = Text.ItemDescription.AutoLeveling.Value
+				end
+			end
+		end
+
 		if item.StatsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
 			--Removes the Requires Dwarf / Male
 			for i,element in pairs(tooltip:GetElements("ItemRequirement")) do
