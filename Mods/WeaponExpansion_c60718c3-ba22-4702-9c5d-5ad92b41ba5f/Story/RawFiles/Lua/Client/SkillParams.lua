@@ -52,7 +52,6 @@ local PistolRuneBoosts = {
 	["_Boost_LLWEAPONEX_Pistol_Bullets_Silver"] = {Apply="", Transform=""},
 }
 
-
 local bulletAmmoTypeText = TranslatedString:Create("h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad", "Ammo Type: [1]")
 
 local function GetPistolBulletEffects(skill, character, isFromItem, param)

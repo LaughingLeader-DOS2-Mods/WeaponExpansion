@@ -1,5 +1,5 @@
----@type LeaderLibLocalizedText
-local LocalizedText = LeaderLib.LocalizedText
+
+--local LocalizedText = LeaderLib.LocalizedText
 ---@type TranslatedString
 local ts = LeaderLib.Classes.TranslatedString
 
@@ -191,6 +191,36 @@ local function OnSkillTooltip(character, skill, tooltip)
 				if desc ~= nil then
 					desc:gsub("%[1%]", Ext.StatGetAttribute("Target_LLWEAPONEX_RemoteMine_Detonate", "TargetRadius"))
 					element.Label = desc
+				end
+			end
+		end
+	elseif skill == "Target_LLWEAPONEX_Pistol_Shoot" then
+		local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+		if weaponBoostStat ~= nil then
+			---@type StatProperty[]
+			local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
+			if props ~= nil then
+				for i,v in pairs(props) do
+					if v.Type == "Status" then
+						local chance = max.min(100, math.ceil(v.StatusChance * 100))
+						local turns = v.Duration
+						local text = ""
+						local chanceText = ""
+						local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
+						if chance > 0 then
+							chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+						end
+						if turns > 0 then
+							turns = math.ceil(v.Duration / 6.0)
+							text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+						else
+							text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+						end
+						tooltip:AppendElement({
+							Type="ExtraProperties",
+							Label=text
+						})
+					end
 				end
 			end
 		end

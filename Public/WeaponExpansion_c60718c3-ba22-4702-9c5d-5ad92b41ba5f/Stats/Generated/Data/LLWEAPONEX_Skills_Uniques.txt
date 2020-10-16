@@ -934,7 +934,6 @@ data "Memory Cost" "0"
 data "Magic Cost" "0"
 data "IgnoreSilence" "Yes"
 
-
 new entry "Shout_LLWEAPONEX_Prepare_BalrinsAxe"
 type "SkillData"
 data "SkillType" "Shout"

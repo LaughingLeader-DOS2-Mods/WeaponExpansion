@@ -79,6 +79,20 @@ end
 
 OnTimerFinished["LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy"] = CloakAndDagger_Pistol_MarkEnemy
 
+---@param target string
+---@param weaponBoostStat string
+---@param source EsvCharacter
+function Pistol_ApplyRuneProperties(target, source)
+	local rune,weaponBoostStat = Skills.GetRuneBoost(source.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	if weaponBoostStat ~= nil then
+		---@type StatProperty[]
+		local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
+		if props ~= nil then
+			GameHelpers.ApplyProperties(target, source.MyGuid, props)
+		end
+	end
+end
+
 ---@param skill string
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
@@ -88,6 +102,7 @@ local function PistolShootBonuses(skill, char, state, skillData)
 		local target = skillData.Target
 		local damageAmount = skillData.Damage
 		if target ~= nil and damageAmount > 0 then
+			local caster = Ext.GetCharacter(char)
 			local handle = skillData.Handle
 			if IsTagged(target, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
 				local critMult = Ext.Round(CharacterGetAbility(char,"RogueLore") * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
@@ -107,6 +122,14 @@ local function PistolShootBonuses(skill, char, state, skillData)
 				if damageBoost > 0 then
 					GameHelpers.IncreaseDamage(target, char, handle, damageBoost * 0.01, 0)
 					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
+				end
+			end
+			local rune,weaponBoostStat = Skills.GetRuneBoost(caster.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+			if weaponBoostStat ~= nil then
+				---@type StatProperty[]
+				local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
+				if props ~= nil then
+					GameHelpers.ApplyProperties(target, char, props)
 				end
 			end
 		end
