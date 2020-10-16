@@ -16,7 +16,9 @@ local UniqueData = {
 	OnGotOwner = nil,
 	LastProgressionLevel = 0,
 	ProgressionData = nil,
-	CanMoveToVendingMachine = true
+	CanMoveToVendingMachine = true,
+	Tag = "",
+	Copies = nil
 }
 UniqueData.__index = UniqueData
 
@@ -38,7 +40,9 @@ function UniqueData:Create(uuid, progressionData, params)
 		OnOwnerDeath = nil,
 		LastProgressionLevel = 0,
 		ProgressionData = progressionData,
-		CanMoveToVendingMachine = true
+		CanMoveToVendingMachine = true,
+		Tag = "",
+		Copies = {}
 	}
 	setmetatable(this, self)
 	if params ~= nil then
@@ -94,28 +98,67 @@ local function TryGetOwner(item, inventoryOnly)
 	return nil
 end
 
+function UniqueData:GetOwner(itemUUID)
+	if self.UUID == itemUUID then
+		return self.Owner
+	else
+		local copyOwner = self.Copies[itemUUID]
+		if copyOwner ~= nil then
+			local item = Ext.GetItem(itemUUID)
+			if item ~= nil then
+				return TryGetOwner(item)
+			end
+		end
+	end
+	return nil
+end
+
+local function GetUUIDAndOwner(self, uuid)
+	if uuid == nil then
+		uuid = self.UUID
+	end
+	local owner = self:GetOwner(uuid)
+	return uuid,owner
+end
+
 ---@return boolean
-function UniqueData:IsReleasedFromOwner()
-	if ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner") == 1 then
+function UniqueData:IsReleasedFromOwner(uuid)
+	local uuid,owner = GetUUIDAndOwner(self, uuid)
+	if ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner") == 1 then
 		return true
-	elseif self.Owner ~= nil and IsPlayer(self.Owner) then
+	elseif owner ~= nil and IsPlayer(owner) then
 		return true
 	end
 	return false
 end
 
-function UniqueData:ReleaseFromOwner(unequip)
-	ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
-	if unequip == true and self.Owner ~= nil then
-		ItemLockUnEquip(self.UUID, 0)
-		CharacterUnequipItem(self.Owner, self.UUID)
-		ItemClearOwner(self.UUID)
+function UniqueData:ReleaseFromOwner(unequip, uuid)
+	local uuid,owner = GetUUIDAndOwner(self, uuid)
+	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+	if unequip == true and owner ~= nil then
+		ItemLockUnEquip(uuid, 0)
+		CharacterUnequipItem(owner, uuid)
+		ItemClearOwner(uuid)
 	end
-	self.Owner = nil
+	if uuid == self.UUID then
+		self.Owner = nil
+	end
 end
 
-function UniqueData:ResetRelease()
-	ObjectClearFlag(self.UUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+function UniqueData:SetOwner(uuid, owner)
+	if uuid == nil then
+		uuid = self.UUID
+	end
+	if self.Copies[uuid] ~= nil then
+		self.Copies[uuid] = owner
+	elseif uuid == self.UUID then
+		self.Owner = owner
+	end
+end
+
+function UniqueData:ResetRelease(uuid)
+	local uuid,owner = GetUUIDAndOwner(self, uuid)
+	ObjectClearFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
 end
 
 ---@param self UniqueData
@@ -134,13 +177,48 @@ local function MoveToRegionPosition(self, region, item)
 	end
 end
 
-function UniqueData:OnItemLeveledUp()
+function UniqueData:OnItemLeveledUp(uuid)
 	self:ApplyProgression(self.ProgressionData)
 end
 
-function UniqueData:Initialize(region, firstLoad)
-	if ObjectExists(self.UUID) == 1 then
-		local item = Ext.GetItem(self.UUID)
+function UniqueData:AddCopy(uuid, owner)
+	if owner == nil then
+		uuid,owner = GetUUIDAndOwner(self, uuid)
+	end
+	if self.Copies[uuid] ~= owner then
+		self.Copies[uuid] = owner
+		PersistentVars.ExtraUniques[uuid] = self.Tag
+		Ext.PrintWarning(string.format("[LLWEAPONEX:UniqueData:AddCopy] Found a copy of a unique. Tag(%s) Copy(%s) Owner(%s)", self.Tag, uuid, owner))
+	end
+end
+
+function UniqueData:FindPlayerCopies()
+	if not StringHelpers.IsNullOrEmpty(self.Tag) then
+		for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
+			local player = StringHelpers.GetUUID(db[1])
+			local taggedItem = StringHelpers.GetUUID(CharacterFindTaggedItem(player, self.Tag))
+			if not StringHelpers.IsNullOrEmpty(taggedItem) and taggedItem ~= self.UUID then
+				self:AddCopy(taggedItem, player)
+			end
+		end
+	end
+end
+
+function UniqueData:Initialize(region, firstLoad, uuid)
+	if uuid == nil then
+		uuid = self.UUID
+	end
+	if ObjectExists(uuid) == 0 and self.Copies ~= nil then
+		for copyUUID,copyOwner in pairs(self.Copies) do
+			if ObjectExists(uuid) == 1 then
+				self.UUID = copyUUID
+				uuid = self.UUID
+				break
+			end
+		end
+	end
+	if ObjectExists(uuid) == 1 then
+		local item = Ext.GetItem(uuid)
 		if self.Owner == nil then
 			local owner = TryGetOwner(item)
 			if owner == NPC.UniqueHoldingChest then
@@ -154,7 +232,7 @@ function UniqueData:Initialize(region, firstLoad)
 			self:ApplyProgression(self.ProgressionData, nil, item, true)
 		end
 		if not self:IsReleasedFromOwner() then
-			self.Initialized = ObjectGetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1
+			self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
 			if item.CurrentLevel ~= region then
 				if not self.Initialized then
 					local targetOwner = self.DefaultOwner
@@ -166,7 +244,7 @@ function UniqueData:Initialize(region, firstLoad)
 					else
 						MoveToRegionPosition(self, region, item)
 					end
-					ObjectSetFlag(self.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+					ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
 				end
 				self.Initialized = true
 			end
@@ -175,7 +253,7 @@ function UniqueData:Initialize(region, firstLoad)
 				MoveToRegionPosition(self, region, item)
 			end
 		end
-		printd("Unique initialized:", self.UUID, item.DisplayName, self.Owner)
+		printd("Unique initialized:", uuid, item.DisplayName, self.Owner)
 	end
 end
 
@@ -188,27 +266,29 @@ function UniqueData:AddPosition(region,x,y,z,rx,ry,rz)
 	}
 end
 
-function UniqueData:Equip(target)
-	if ObjectExists(self.UUID) == 0 then
-		Ext.PrintError("[UniqueData:Equip] Item", self.UUID, "does not exist!")
+function UniqueData:Equip(target, uuid)
+	local uuid,owner = GetUUIDAndOwner(self, uuid)
+	if ObjectExists(uuid) == 0 then
+		Ext.PrintError("[UniqueData:Equip] Item", uuid, "does not exist!")
 		return
 	end
-	local item = Ext.GetItem(self.UUID)
+	local item = Ext.GetItem(uuid)
 	local locked = item.UnEquipLocked
-	ItemLockUnEquip(self.UUID, 0)
-	CharacterEquipItem(target, self.UUID)
+	ItemLockUnEquip(uuid, 0)
+	CharacterEquipItem(target, uuid)
 	if self.OnEquipped ~= nil then
 		pcall(self.OnEquipped, self, target)
 	end
 	if locked then
-		ItemLockUnEquip(self.UUID, 1)
+		ItemLockUnEquip(uuid, 1)
 	end
 end
 
-function UniqueData:Transfer(target, equip)
+function UniqueData:Transfer(target, equip, uuid)
+	local uuid,owner = GetUUIDAndOwner(self, uuid)
 	if target == "host" then target = CharacterGetHostCharacter() end
-	if ObjectExists(self.UUID) == 0 then
-		Ext.PrintError("[UniqueData:Transfer] Item", self.UUID, "does not exist!")
+	if ObjectExists(uuid) == 0 then
+		Ext.PrintError("[UniqueData:Transfer] Item", uuid, "does not exist!")
 		return false
 	elseif ObjectExists(target) == 0 then
 		Ext.PrintError("[UniqueData:Transfer] Target", target, "does not exist!")
@@ -216,12 +296,12 @@ function UniqueData:Transfer(target, equip)
 	end
 	self.Owner = target
 
-	if GetInventoryOwner(self.UUID) ~= target then
-		ItemLockUnEquip(self.UUID, 0)
-		ItemToInventory(self.UUID, target, 1, 1, 1)
+	if GetInventoryOwner(uuid) ~= target then
+		ItemLockUnEquip(uuid, 0)
+		ItemToInventory(uuid, target, 1, 1, 1)
 	end
 	if equip == true then
-		self:Equip(target)
+		self:Equip(target, uuid)
 	end
 end
 
@@ -241,7 +321,8 @@ local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
 	if Ext.Version() < 53 then
 		Ext.EnableExperimentalPropertyWrites()
 	end
-	if entry.Attribute == "ExtraProperties" then
+	local attribute = entry:GetBoostAttribute(stat)
+	if attribute == "ExtraProperties" then
 		if entry.Append == true then
 			local props = stat.ExtraProperties or {}
 			if not string.find(Common.Dump(props), entry.Value.Action) then
@@ -254,34 +335,34 @@ local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
 		end
 	else
 		if entry.Append == true then
-			local current = stat[entry.Attribute]
-			if entry.Attribute == "Boosts" or entry.Attribute == "Skills" then
+			local current = stat[attribute]
+			if attribute == "Boosts" or attribute == "Skills" then
 				if current ~= "" then
 					if not string.find(current, entry.Value) then
-						stat[entry.Attribute] = current .. ";" .. entry.Value
+						stat[attribute] = current .. ";" .. entry.Value
 						statChanged = true
 					end
 				else
-					stat[entry.Attribute] = entry.Value
+					stat[attribute] = entry.Value
 					statChanged = true
 				end
 			else
-				stat[entry.Attribute] = current + entry.Value
+				stat[attribute] = current + entry.Value
 				statChanged = true
 			end
 		else
-			if stat[entry.Attribute] ~= entry.Value then
-				printd(stat.Name, entry.Attribute, stat[entry.Attribute], "=>", entry.Value)
-				stat[entry.Attribute] = entry.Value
+			if stat[attribute] ~= entry.Value then
+				printd(stat.Name, attribute, stat[attribute], "=>", entry.Value)
+				stat[attribute] = entry.Value
 				statChanged = true
 			end
 		end
 	end
 	if statChanged or firstLoad == true then
 		if entry.Append == true then
-			changes[entry.Attribute] = stat[entry.Attribute]
+			changes[attribute] = stat[attribute]
 		else
-			changes[entry.Attribute] = entry.Value
+			changes[attribute] = entry.Value
 		end
 	end
 	return statChanged
@@ -321,7 +402,7 @@ local function CloneItem(self, item, template, stat, level)
 	if cloned ~= nil then
 		ItemSetOwner(cloned.MyGuid, self.Owner)
 		ItemToInventory(cloned, self.Owner, 1, 0, 0)
-		PersistentVars.UniqueDataIDSwap[self.UUID] = cloned.MyGuid
+		PersistentVars.ExtraUniques[cloned.MyGuid] = self.Tag
 		self.UUID = cloned.MyGuid
 		ItemRemove(item.MyGuid)
 	else
@@ -409,8 +490,16 @@ local function EvaluateEntry(self, progressionTable, persist, item, level, stat,
 		end
 	elseif #entry > 0 then
 		for i,v in pairs(entry) do
-			if EvaluateEntry(self, progressionTable, persist, item, level, stat, v, changes, firstLoad) then
-				statChanged = true
+			if v.Type == "UniqueProgressionEntry" then
+				if ApplyProgressionEntry(v, stat, changes, firstLoad) then
+					statChanged = true
+				end
+			elseif v.Type == "UniqueProgressionTransform" then
+				if not StringHelpers.IsNullOrEmpty(entry.Template) then
+					if TransformItem(self, item, v.Template, v.Stat, level, v.MatchStat, v.MatchTemplate) then
+						statChanged = true
+					end
+				end
 			end
 		end
 	end
@@ -442,6 +531,43 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 	return statChanged or firstLoad == true
 end
 
+local function StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
+	-- TODO - Testing. Making sure bonuses don't overlap if they're set to append when you save/load/change level/level up etc.
+	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
+	-- enries aren't nerfing things.
+	local level = item.Stats.Level
+	local changes = {}
+	local b,result = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level, changes, firstLoad)
+	if not b then
+		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", item.MyGuid, item.StatsId)
+		Ext.PrintError(result)
+	elseif result == true or firstLoad == true then
+		if changes ~= nil and Common.TableHasAnyEntry(changes) then
+			if firstLoad == true then
+				local originalValues = Temp.OriginalUniqueStats[item.StatsId]
+				if originalValues ~= nil then
+					for attribute,value in pairs(originalValues) do
+						if changes[attribute] == nil then
+							changes[attribute] = value
+						end
+					end
+				end
+			end
+			EquipmentManager.SyncItemStatChanges(item, changes, 1)
+			if self.Copies ~= nil then
+				for uuid,owner in pairs(self.Copies) do
+					if uuid ~= item.MyGuid then
+						local copyItem = Ext.GetItem(uuid)
+						if copyItem ~= nil then
+							EquipmentManager.SyncItemStatChanges(copyItem, changes, 1)
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
 ---@param progressionTable table<integer,UniqueProgressionEntry|UniqueProgressionEntry[]>
 ---@param persist boolean
 ---@param item EsvItem
@@ -451,25 +577,24 @@ function UniqueData:ApplyProgression(progressionTable, persist, item, firstLoad)
 	if item == nil then
 		item = Ext.GetItem(self.UUID)
 		if item == nil then
-			Ext.PrintError("[WeaponExpansion] Failed to get item object for,", self.UUID)
-			return
+			if Common.TableHasAnyEntry(self.Copies) then
+				for uuid,owner in pairs(self.Copies) do
+					local copyItem = Ext.GetItem(uuid)
+					if copyItem ~= nil then
+						item = copyItem
+						break
+					end
+				end
+			end
+		end
+		if item == nil then
+			Ext.PrintError("[WeaponExpansion] Failed to get item object for", self.UUID, self.Tag)
 		end
 	end
-	-- TODO - Testing. Making sure bonuses don't overlap if they're set to append when you save/load/change level/level up etc.
-	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
-	-- enries aren't nerfing things.
-	local level = item.Stats.Level
-	local changes = {}
-	local b,result = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level, changes, firstLoad)
-	if not b then
-		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", self.UUID, item.StatsId)
-		Ext.PrintError(self.UUID, result)
-	elseif result == true or firstLoad == true then
-		if changes ~= nil and Common.TableHasAnyEntry(changes) then
-			EquipmentManager.SyncItemStatChanges(item, changes, 1)
-		end
+	if item ~= nil then
+		StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
+		self.LastProgressionLevel = item.Stats.Level
 	end
-	self.LastProgressionLevel = level
 end
 
 return UniqueData

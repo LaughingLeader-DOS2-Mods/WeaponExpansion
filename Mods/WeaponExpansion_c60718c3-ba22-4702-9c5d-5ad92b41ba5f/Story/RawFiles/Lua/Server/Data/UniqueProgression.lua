@@ -6,6 +6,7 @@ local UniqueProgressionEntry = {
 	Append = false,
 	MatchStat = "",
 	MatchTemplate = "",
+	GetAttribute = nil
 }
 UniqueProgressionEntry.__index = UniqueProgressionEntry
 
@@ -40,6 +41,17 @@ function UniqueProgressionEntry:Create(attribute, value, params)
 	end
 	setmetatable(this, self)
 	return this
+end
+
+---@param stat StatEntryWeapon|StatEntryArmor
+function UniqueProgressionEntry:GetBoostAttribute(stat)
+	if self.GetAttribute ~= nil then
+		local b,val = pcall(self.GetAttribute, stat, self.Attribute)
+		if b and val ~= nil then
+			return val
+		end
+	end
+	return self.Attribute
 end
 
 ---@class UniqueProgressionTransform

@@ -9,6 +9,40 @@ local runeslot1 = {ue:Create("RuneSlots", 1), ue:Create("RuneSlots_V1", 1)}
 local runeslot2 = {ue:Create("RuneSlots", 2), ue:Create("RuneSlots_V1", 2)}
 local runeslot3 = {ue:Create("RuneSlots", 3), ue:Create("RuneSlots_V1", 3)}
 
+local Attributes = {
+	Strength = true,
+	Finesse = true,
+	Intelligence = true,
+	Constitution = true,
+	Memory = true,
+	Wits = true,
+}
+
+---@param stat StatEntryWeapon
+local function GetRequirementAttributeBoost(stat, fallback)
+	local attribute = ""
+	if stat.Requirements ~= nil then
+		for i,v in pairs(stat.Requirements) do
+			if Attributes[v.Requirement] == true then
+				attribute = v.Requirement
+				break
+			end
+		end
+	end
+	print(stat.Name, "GetRequirementAttributeBoost", attribute)
+	if not StringHelpers.IsNullOrEmpty(attribute) then
+		if not string.find(attribute, "Boost") then
+			return attribute.."Boost"
+		else
+			return attribute
+		end
+	else
+		return fallback
+	end
+end
+
+local GetReqAttributeParams = {GetAttribute=GetRequirementAttributeBoost}
+
 local function CreateStatusProps(status,chance,turns)
 	local prop = {
 		Type = "Status",
@@ -28,14 +62,14 @@ end
 local bonuses = {
 	AnvilMace = {
 		[2] = ue:Create("WarriorLore", 1),
-		[6] = ue:Create("StrengthBoost", "2"),
+		[6] = ue:Create("StrengthBoost", "2", GetReqAttributeParams),
 		[7] = runeslot1,
 		[8] = ue:Create("TwoHanded", 1),
 		[12] = ue:Create("DamageFromBase", 120),
 		[15] = runeslot2,
 	},
 	ArmCannon = {
-		[2] = ue:Create("WitsBoost", "1"),
+		[2] = ue:Create("WitsBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("ArmorBoost", 20),
 		[6] = ue:Create("ConstitutionBoost", "1"),
 		[8] = ue:Create("MagicArmorBoost", 40),
@@ -57,7 +91,7 @@ local bonuses = {
 	BeholderSword = {
 		[2] = ue:Create("LifeSteal", 10),
 		[4] = ue:Create("WarriorLore", 1),
-		[6] = ue:Create("StrengthBoost", "1"),
+		[6] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),
 		[7] = runeslot1,
 		[8] = ue:Create("DodgeBoost", 7),
 		[10] = ue:Create("Boosts", "_LLWEAPONEX_Boost_Weapon_Damage_Corrosive_Beholder;_Boost_Weapon_Cleave_Large_TwoHanded"),
@@ -67,7 +101,7 @@ local bonuses = {
 	},
 	Bible = {
 		[2] = ue:Create("TwoHanded", 1),
-		[6] = ue:Create("StrengthBoost", "2"),
+		[6] = ue:Create("StrengthBoost", "2", GetReqAttributeParams),
 		[7] = runeslot1,
 		[8] = ue:Create("TwoHanded", 2),
 		[12] = ue:Create("DamageFromBase", 115),
@@ -89,12 +123,12 @@ local bonuses = {
 		[2] = ue:Create("TwoHanded", 1),
 		[3] = ue:Create("Luck", 1),
 		[7] = runeslot2,
-		[8] = ue:Create("IntelligenceBoost", "2"),
+		[8] = ue:Create("IntelligenceBoost", "2", GetReqAttributeParams),
 		[10] = ue:Create("CriticalDamage", 155),
 		[12] = runeslot3,
 		[14] = ue:Create("DamageBoost", 10),
 	},
-	DaggerBasilus = {
+	BasilusDagger = {
 		[2] = ue:Create("RogueLore", 1),
 		[4] = ue:Create("Skills", "Projectile_ThrowingKnife"),
 		[7] = runeslot1,
@@ -116,7 +150,7 @@ local bonuses = {
 	DemoBackpack = {},
 	DemonGauntlet = {},
 	DivineBanner = {
-		[2] = ue:Create("StrengthBoost", "1"),
+		[2] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),
 		[6] = ue:Create("Leadership", 2),
 		[7] = runeslot1,
 		[8] = ue:Create("Leadership", 3),
@@ -128,7 +162,7 @@ local bonuses = {
 		[4] = ue:Create("DamageFromBase", 67),
 		[6] = ue:Create("FireSpecialist", 1),
 		[8] = runeslot1,
-		[10] = ue:Create("IntelligenceBoost", "2"),
+		[10] = ue:Create("IntelligenceBoost", "2", GetReqAttributeParams),
 		[12] = runeslot2,
 		[14] = ue:Create("Boosts", "_Boost_Weapon_Damage_Fire_Small"),
 		[15] = runeslot3,
@@ -160,30 +194,30 @@ local bonuses = {
 		[15] = runeslot2,
 	},
 	MagicMissileRod = {
-		[2] = ue:Create("IntelligenceBoost", "1"),
+		[2] = ue:Create("IntelligenceBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("Damage Range", 20),
 		[6] = ue:Create("CriticalDamage", 160),
 		[7] = runeslot1,
-		[8] = ue:Create("IntelligenceBoost", "2"),
+		[8] = ue:Create("IntelligenceBoost", "2", GetReqAttributeParams),
 		[10] = ue:Create("DamageFromBase", 65),
-		[12] = ue:Create("IntelligenceBoost", "3"),
+		[12] = ue:Create("IntelligenceBoost", "3", GetReqAttributeParams),
 		[15] = runeslot2,
 	},
 	MagicMissileWand = {
-		[2] = ue:Create("IntelligenceBoost", "1"),
+		[2] = ue:Create("IntelligenceBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("Damage Range", 20),
 		[6] = ue:Create("CriticalDamage", 155),
 		[7] = runeslot1,
-		[8] = ue:Create("IntelligenceBoost", "2"),
+		[8] = ue:Create("IntelligenceBoost", "2", GetReqAttributeParams),
 		[10] = ue:Create("DamageFromBase", 60),
-		[12] = ue:Create("IntelligenceBoost", "3"),
+		[12] = ue:Create("IntelligenceBoost", "3", GetReqAttributeParams),
 		[15] = runeslot2,
 	},
 	MonkBlindfold = {},
 	Muramasa = {
-		[2] = ue:Create("WitsBoost", "1"),
+		[2] = {ue:Create("StrengthBoost", "1", GetReqAttributeParams), ue:Create("LifeSteal", 10)},
 		[4] = ue:Create("Skills","Target_LLWEAPONEX_HelmSplitter;Target_SerratedEdge"),
-		[6] = ue:Create("StrengthBoost", "1"),
+		[6] = ue:Create("WitsBoost", "1"),
 		[7] = runeslot1,
 		[8] = ue:Create("WarriorLore", 1),
 		[10] = ue:Create("Boosts", "_Boost_Weapon_Status_Set_Bleeding_TwoHanded"),
@@ -192,18 +226,18 @@ local bonuses = {
 		[15] = runeslot2,
 	},
 	OgreScroll = {
-		[2] = ue:Create("StrengthBoost", "1"),
+		[2] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("DamageFromBase", 110),
-		[6] = ue:Create("StrengthBoost", "2"),
+		[6] = ue:Create("StrengthBoost", "2", GetReqAttributeParams),
 		[7] = runeslot1,
 		[8] = ue:Create("TwoHanded", 1),
-		[10] = ue:Create("StrengthBoost", "3"),
+		[10] = ue:Create("StrengthBoost", "3", GetReqAttributeParams),
 		[12] = ue:Create("DamageFromBase", 115),
 		[15] = runeslot2,
 	},
 	Omnibolt = {
 		[2] = ue:Create("AirSpecialist", 1),
-		[6] = ue:Create("StrengthBoost", "2"),
+		[6] = ue:Create("StrengthBoost", "2", GetReqAttributeParams),
 		[6] = ue:Create("DodgeBoost", 7),
 		[8] = runeslot1,
 		[10] = ue:Create("DamageFromBase", 120),
@@ -213,38 +247,38 @@ local bonuses = {
 		[16] = ue:Create("CriticalDamage", 140),
 	},
 	PowerPole = {
-		[2] = ue:Create("FinesseBoost", "1"),
+		[2] = ue:Create("FinesseBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("WarriorLore", 1),
 		[7] = runeslot1,
 		[8] = ue:Create("DamageFromBase", 105),
-		[10] = ue:Create("FinesseBoost", "2"),
+		[10] = ue:Create("FinesseBoost", "2", GetReqAttributeParams),
 		[12] = ue:Create("WarriorLore", 2),
 		[15] = runeslot2,
 	},
 	WarchiefAxe = {
-		[2] = ue:Create("StrengthBoost", "1"),
+		[2] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("TwoHanded", 1),
 		[7] = runeslot1,
 		[8] = ue:Create("DamageFromBase", 120),
-		[10] = ue:Create("StrengthBoost", "2"),
+		[10] = ue:Create("StrengthBoost", "2", GetReqAttributeParams),
 		[12] = ue:Create("WarriorLore", 2),
 		[15] = runeslot2,
 	},
 	WarchiefHalberd = {
-		[2] = ue:Create("StrengthBoost", "1"),
+		[2] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("TwoHanded", 1),
 		[7] = runeslot1,
 		[8] = ue:Create("DamageFromBase", 110),
-		[10] = ue:Create("StrengthBoost", "2"),
+		[10] = ue:Create("StrengthBoost", "2", GetReqAttributeParams),
 		[12] = ue:Create("WarriorLore", 2),
 		[15] = runeslot2,
 	},
 	Wraithblade = {
-		[2] = ue:Create("FinesseBoost", "1"),
+		[2] = ue:Create("FinesseBoost", "1", GetReqAttributeParams),
 		[4] = ue:Create("CriticalChance", 10),
 		[7] = runeslot1,
 		[8] = ue:Create("DamageFromBase", 70),
-		[10] = ue:Create("FinesseBoost", "2"),
+		[10] = ue:Create("FinesseBoost", "2", GetReqAttributeParams),
 		[12] = ue:Create("WitsBoost", "2"),
 		[15] = runeslot2,
 	},

@@ -199,11 +199,22 @@ function OnItemEquipped(uuid,itemUUID)
 		CheckWeaponAnimation(uuid, item)
 
 		if isPlayer then
-			UniqueManager.LevelUpUnique(character, item)
-			local unique = AllUniques[itemUUID]
-			if unique ~= nil and not unique:IsReleasedFromOwner() then
-				unique:ReleaseFromOwner()
-				unique.Owner = uuid
+			if item.Stats.Unique == 1 then
+				UniqueManager.LevelUpUnique(character, item)
+				for i,tag in pairs(item:GetTags()) do
+					local unique = UniqueManager.GetDataByTag(tag)
+					if unique ~= nil then
+						if unique.UUID ~= item.MyGuid then
+							unique:AddCopy(item.MyGuid, uuid)
+							unique:ApplyProgression(nil, nil, item, true)
+						end
+						if not unique:IsReleasedFromOwner(item.MyGuid) then
+							unique:ReleaseFromOwner(false, item.MyGuid)
+						end
+						unique:SetOwner(item.MyGuid, uuid)
+						break
+					end
+				end
 			end
 
 			EquipmentManager.CheckFirearmProjectile(character, item)
@@ -430,9 +441,12 @@ Ext.RegisterOsirisListener("CharacterItemEvent", 3, "after", function(char, item
 	if event == "LeaderLib_Events_ItemLeveledUp" then
 		char = StringHelpers.GetUUID(char)
 		item = StringHelpers.GetUUID(item)
-		local unique = AllUniques[item]
-		if unique ~= nil then
-			unique:OnItemLeveledUp(char)
+		local itemData = Ext.GetItem(item)
+		if itemData ~= nil and itemData.Stats ~= nil and itemData.Stats.Unique == 1 then
+			local data = UniqueManager.GetDataByItem(itemData)
+			if data ~= nil then
+				data:OnItemLeveledUp(item)
+			end
 		end
 	end
 end)
@@ -507,12 +521,26 @@ local bulletTemplates = {
 ---@param item EsvItem
 ---@param stats table
 function EquipmentManager.SyncItemStatChanges(item, stats, dynamicIndex)
-	local data = {
-		NetID = item.NetID,
-		Stats = stats,
-		DynamicIndex = dynamicIndex or nil
-	}
-	Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
+	local slot = nil
+	local owner = nil
+	if item.Slot < 14 and item.OwnerHandle ~= nil then
+		local char = Ext.GetCharacter(item.OwnerHandle)
+		if char ~= nil then
+			slot = GameHelpers.Item.GetEquippedSlot(char.MyGuid, item.MyGuid)
+			owner = char.NetID
+		end
+	end
+	if item ~= nil and item.NetID ~= nil then
+		local data = {
+			UUID = item.MyGuid,
+			NetID = item.NetID,
+			Slot = slot,
+			Owner = owner,
+			Stats = stats,
+			DynamicIndex = dynamicIndex
+		}
+		Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
+	end
 end
 
 ---@param char EsvCharacter
