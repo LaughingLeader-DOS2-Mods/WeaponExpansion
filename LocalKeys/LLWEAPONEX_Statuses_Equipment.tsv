@@ -13,7 +13,7 @@ LLWEAPONEX_BLINDFOLD_EQUIPPED_DisplayName	Blindfolded	h04da119dg55f5g4051g9411g6
 LLWEAPONEX_DRAGONBONECLAWS_EQUIPPED_DisplayName	Automatically Equips the Dragon Bone Claws Weapon	hc4cbb3efg9cd3g4193g861bg8f086795ea16
 LLWEAPONEX_DUALSHIELDS_EQUIPPED_DisplayName	Dual Shields - Automatically equips a Combat Shield in your main hand	h385c287dgb46dg4a18g8076g743fd7b9f831
 LLWEAPONEX_FLAMETHROWER_EQUIPPED_DisplayName	Attacks Bathe Enemies in a Cone of Fire	h815f287dg5938g4e1cga2a3gf9b0b8aa0e71
-LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, Critical Damage and Life Steal rise, but Resistances faulter.</font>	h58ead5d8ga714g4837g961age6c320cb2691
+LLWEAPONEX_MURAMASA_CURSE_Description	Character is wielding a legendary cursed blade.<br><font color='#8A2BE2'>As health drops, damage & life steal rise, but resistances faulter.</font>	h58ead5d8ga714g4837g961age6c320cb2691
 LLWEAPONEX_MURAMASA_CURSE_DisplayName	<font color='#8A2BE2'>Curse of the Muramasa</font>	h78f5c557g2347g4a0agb6fagf0b52fdc604a
 LLWEAPONEX_RUNEBLADE_APPLY_STATUS_DisplayName	Runic Blade - Apply rune effects on attack	h501a08ddg508bg4542g9008geddce73365d8
 LLWEAPONEX_RUNEBLADE_WEAPON_ICE_DAMAGE_DisplayName	Bonus Ice Damage	h16cdc860g50d2g4c52ga87fg5b5411562aaa
