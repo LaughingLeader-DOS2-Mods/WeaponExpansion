@@ -335,3 +335,10 @@ end
 
 RegisterHitListener("OnHit", "LLWEAPONEX_Katana", ApplyKatanaCombo)
 RegisterHitListener("OnWeaponSkillHit", "LLWEAPONEX_Katana", ApplyKatanaCombo)
+
+RegisterStatusListener("StatusApplied", "LLWEAPONEX_HELMSPLITTER", function(target, status, source)
+	if not Ext.IsModLoaded(MODID.DivinityUnleashed) and not Ext.IsModLoaded(MODID.ArmorMitigation) then
+		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor")
+		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor")
+    end
+end)

@@ -27,7 +27,8 @@ Mastery = {
 }
 LeaveActionData = {}
 Temp = {
-	StatusSource = {}
+	StatusSource = {},
+	OriginalUniqueStats = {}
 }
 Vars = {
 	GAME_STARTED = false,

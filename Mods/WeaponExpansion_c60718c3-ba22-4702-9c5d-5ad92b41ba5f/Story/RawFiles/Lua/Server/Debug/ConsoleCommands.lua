@@ -60,4 +60,13 @@ if Ext.IsDeveloperMode() then
 	LeaderLib.RegisterListener("BeforeLuaReset", function()
 		Ext.BroadcastMessage("LLWEAPONEX_Debug_DestroyUI", "", nil)
 	end)
+
+	--Ext.GetStat(Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).StatsId).Requirements = {[1]={Requirement="Finesse", Not=false, Param=0}}
+	--Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify({NetID=Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).NetID, Stats={Requirements={[1]={Requirement="Finesse", Not=false, Param=0}}}}), nil)
+	Ext.RegisterConsoleCommand("llweaponex_changereq", function(cmd)
+		local item = Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter()))
+		local stat = Ext.GetStat(item.StatsId)
+		stat.Requirements = {[1]={Requirement="Memory", Not=false, Param=0}}
+		EquipmentManager.SyncItemStatChanges(item, {Requirements=stat.Requirements})
+	end)
 end

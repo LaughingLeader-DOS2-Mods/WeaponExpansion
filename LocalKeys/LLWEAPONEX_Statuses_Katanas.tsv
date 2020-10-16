@@ -20,3 +20,5 @@ LLWEAPONEX_KATANA_COMBO9_DisplayName	Blademaster's Strike 9	h4034995fg479cg46a0g
 LLWEAPONEX_KATANA_FINISHER_APPLY_DisplayName	Finisher - Temporarily apply a piercing vulnerability to dying targets	h8bb89a75g077fg4696gb9a0gcf0dd14d19bb
 LLWEAPONEX_KATANA_FINISHER_Description	Character's <font color='#c80030'>Piercing Resistance</font> lowers as <font color='#DC143C'>Vitality</font> drops. Removed after Attacker's turn ends.	h9090fd98g526dg47a4ga784ga9a53c0aea01
 LLWEAPONEX_KATANA_FINISHER_DisplayName	Finisher	hebda15e3gb225g4115ga087g542707bf4c87
+LLWEAPONEX_HELMSPLITTER_Description	Character's armor is lowered.	hc6ede420gd7adg42edg9ea6g8d0821e4590d
+LLWEAPONEX_HELMSPLITTER_DisplayName	Armor Break	ha8c93effg30e8g4c95gb463g2bca95974279

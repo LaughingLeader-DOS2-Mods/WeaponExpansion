@@ -39,8 +39,6 @@ LLWEAPONEX_EVAPORATE_Description	Character is taking [1] from their <font color=
 LLWEAPONEX_EVAPORATE_DisplayName	Evaporated	h44cbcabcgab9dg443bg9351gbb0cab133e98
 LLWEAPONEX_FUMBLE_Description	Character has fumbled their basic attack!	hba147a7bg1a91g4abega77dgc2204e66d8bd
 LLWEAPONEX_FUMBLE_DisplayName	Fumbled!	h7ea00032g103eg4ea1gbf1cg2b4da69e7621
-LLWEAPONEX_HELMSPLITTER_Description	Character's Armor is being destroyed.	hc6ede420gd7adg42edg9ea6g8d0821e4590d
-LLWEAPONEX_HELMSPLITTER_DisplayName	Destroy Armor	ha8c93effg30e8g4c95gb463g2bca95974279
 LLWEAPONEX_HIT_BY_KEVIN_DisplayName	Kevin's Target	hf57b535fgf3fcg486ega575gf3cdbf031e7e
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_Description	<font color='#c5a65a'>Kevin the Pet Rock</font> is tired, and must recharge his energy before he can be thrown again.	h1f0d97c7gf46dg470bg9b0cg5fbd600337ff
 LLWEAPONEX_KEVIN_EXAUSTED_INFO_DisplayName	Kevin is Recharging	hb8845258g02cag45f1g88a0gad1068ea170d

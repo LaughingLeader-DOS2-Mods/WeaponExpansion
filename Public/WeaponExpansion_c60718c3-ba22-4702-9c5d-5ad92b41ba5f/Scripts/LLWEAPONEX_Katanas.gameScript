@@ -54,21 +54,3 @@ ACTIONS
 //GetRandom(_FX, "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_01", "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_02")
 //ItemPlayEffect(_Target, _FX)
 PlayEffectAt(_Target, "LLWEAPONEX_FX_Skills_Katana_Iaido_Impact_Random_01")
-
-EVENT LLWEAPONEX_Katanas_HelmSplitter
-VARS
-	CHARACTER:_Target
-	CHARACTER:_Source
-	FLOAT:_LevelF
-	INT:_Level
-ON
-	OnCharacterStatusApplied(_Target, LLWEAPONEX_HELMSPLITTER)
-ACTIONS
-IF "c1&c2"
-	CharacterGetStatusSourceCharacter(_Target, LLWEAPONEX_HELMSPLITTER, _Source)
-	CharacterGetStat(_LevelF, _Source, Level)
-THEN
-	Cast(_Level, _LevelF)
-	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor, _Level, _Source)
-	ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor, _Level, _Source)
-ENDIF
