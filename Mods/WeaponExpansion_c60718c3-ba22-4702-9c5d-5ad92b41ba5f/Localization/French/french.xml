@@ -222,7 +222,7 @@
 	<content contentuid="h18ee08fdg04f0g4ea3ga684g0614a456d44c">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery II&lt;/font&gt;</content>
 	<content contentuid="h18f048d7g2230g4037g88b6g9191c6c0be0c">Lucky for you, I&apos;ll make this quick.</content>
 	<content contentuid="h192a08b3gd474g4dacg85bagc0ce5e0e27e4">Empty Slot</content>
-	<content contentuid="h1963266cgf33eg4841g915cgce17383614cf">Swing your blade down upon an opponent&apos;s head, dealing [1] + [2] + [3].&lt;br&gt;&lt;font color=&apos;#ffe86a&apos;&gt;Corrosive damage breaks physical armor, while magic damage breaks magic armor.&lt;/font&gt;</content>
+	<content contentuid="h1963266cgf33eg4841g915cgce17383614cf">Swing your blade down upon an opponent&apos;s head, dealing [1] and &lt;font color=&apos;#ffe86a&apos;&gt;lowering physical/magic armor by [2]&lt;/font&gt;.</content>
 	<content contentuid="h197b37c2ge4afg4f51gb9f2gd2446efa31b6">Priceless Elven Shields</content>
 	<content contentuid="h197d7e3dgc431g488bgaeefgf10b218dedd6">a Dagger</content>
 	<content contentuid="h19af8fb0ga679g4b3fg9198gce738b710253">Polished Rifle</content>
@@ -1569,7 +1569,7 @@
 	<content contentuid="ha8811aa0g9969g4340g97f7g4e6cbe7ff3eb">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#188EDE&apos;&gt;Water Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="ha88f49cdgbf37g4daag9c7cg18f30aa9889e">Dual Dwarven Shields</content>
 	<content contentuid="ha8c7ee33g458fg4398g92cdg9218b530669d">Heatburst Rune</content>
-	<content contentuid="ha8c93effg30e8g4c95gb463g2bca95974279">Destroy Armor</content>
+	<content contentuid="ha8c93effg30e8g4c95gb463g2bca95974279">Armor Break</content>
 	<content contentuid="ha8ed1a1cg53b6g4820g9b4eg4f0662bfdcaa">Pirate</content>
 	<content contentuid="ha911cc34gf1f9g43f1g86a1g0758281d11f1">A sturdy wooden staff with a heavy, metal end. A balanced weapon with a respectable reach.</content>
 	<content contentuid="ha91230cdga6ceg41c2g8429gb9e57408f101">Water or Ice Rune</content>
@@ -1639,6 +1639,7 @@
 	<content contentuid="haef91ab2g2193g430bgb19eg8d13b9259488">&lt;font color=&apos;#00AA00&apos;&gt;Poison-tipped Mini-Bolts&lt;/font&gt;</content>
 	<content contentuid="haf03c33cg569fg49cagad24gb343749d0897">Fire Rune</content>
 	<content contentuid="haf0de280g47e7g41e3g9401g03e636e870d3">Venom Rune</content>
+	<content contentuid="haf1b80d3g97d1g477ag9547g1fd7878f3e35">Armor Break</content>
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
 	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
@@ -1840,7 +1841,7 @@
 	<content contentuid="hc68a221bgb71bg4112g8075g6376ab651fe6">Shuriken (Oiled)</content>
 	<content contentuid="hc6ac2c15g8ba2g4cccgaea3g3a0846feb1a4">A heavy staff with a tough grip. Functions as a balanced offensive and defensive weapon.</content>
 	<content contentuid="hc6db5f97g0e7bg4657g98d0g6d72624edccb">Voidkin</content>
-	<content contentuid="hc6ede420gd7adg42edg9ea6g8d0821e4590d">Character&apos;s Armor is being destroyed.</content>
+	<content contentuid="hc6ede420gd7adg42edg9ea6g8d0821e4590d">Character&apos;s armor is lowered.</content>
 	<content contentuid="hc71ec556g55d4g44cfg91b7g3b3a68a03f99">Misc Settings</content>
 	<content contentuid="hc748d6ccg182ag4c6cg9e59gd2d2416e6d35">Gnak&apos;s Spell Scroll</content>
 	<content contentuid="hc75c7588gb43fg478egbf7eg85dbef7b8479">Runemaster</content>
