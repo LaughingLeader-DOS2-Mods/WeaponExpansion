@@ -221,7 +221,7 @@ local function OnLeftCombat(uuid, id)
 	StatusManager.RemoveAllTurnEndStatuses(uuid)
 end
 
-Ext.RegisterListener("ObjectTurnEnded", 2, "after", function(obj, combat)
+Ext.RegisterOsirisListener("ObjectTurnEnded", 1, "after", function(obj)
 	obj = StringHelpers.GetUUID(obj)
 	StatusManager.RemoveAllTurnEndStatuses(obj)
 end)
