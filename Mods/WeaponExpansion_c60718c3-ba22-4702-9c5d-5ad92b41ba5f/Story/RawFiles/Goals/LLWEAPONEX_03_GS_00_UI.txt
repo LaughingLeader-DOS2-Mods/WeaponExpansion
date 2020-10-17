@@ -19,23 +19,6 @@ THEN
 NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode, "1");
 //END_REGION
 
-//REGION TRADE_WINDOW
-IF
-RequestTrade(_Player, _Npc)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Player, 50, "Timers_LLWEAPONEX_UI_HookIntoTradeWindow", "LLWEAPONEX_UI_HookIntoTradeWindow");
-
-IF
-TradeEnds(_Player, _Npc)
-THEN
-LeaderLib_Timers_CancelObjectTimer(_Player, "Timers_LLWEAPONEX_UI_HookIntoTradeWindow");
-
-IF
-StoryEvent((CHARACTERGUID)_Player, "LLWEAPONEX_UI_HookIntoTradeWindow")
-THEN
-NRD_ModCall("WeaponExpansion", "HookIntoTradeWindow", (STRING)_Player);
-//END_REGION
-
 //REGION RESPEC
 PROC
 PROC_HandleMagicMirrorResult((CHARACTERGUID)_Player, 1) // Added
