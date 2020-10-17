@@ -107,7 +107,7 @@ local WeaponTypeNames = {
 	LLWEAPONEX_DualShields = {Text=ts:Create("h00157a58g9ae0g4119gba1ag3f1e9f11db14", "Dual Shields")},
 	LLWEAPONEX_Firearm = {Text=ts:Create("h8d02e345ged4ag4d60g9be9g68a46dda623b", "Firearm")},
 	LLWEAPONEX_Greatbow = {Text=ts:Create("h52a81f92g3549g4cb4g9b18g066ba15399c0", "Greatbow")},
-	LLWEAPONEX_Katana = {Text=ts:Create("he467f39fg8b65g4136g828fg949f9f3aef15", "Katana"), TwoHanded=ts:Create("hd1f993bag9dadg49cbga5edgb92880c38e46", "Odachi")},
+	LLWEAPONEX_Katana = {Text=ts:Create("he467f39fg8b65g4136g828fg949f9f3aef15", "Katana"), TwoHandedText=ts:Create("hd1f993bag9dadg49cbga5edgb92880c38e46", "Odachi")},
 	LLWEAPONEX_Quarterstaff = {Text=ts:Create("h8d11d8efg0bb8g4130g9393geb30841eaea5", "Quarterstaff")},
 	LLWEAPONEX_Polearm = {Text=ts:Create("hd61320b6ge4e6g4f51g8841g132159d6b282", "Polearm")},
 	LLWEAPONEX_Rapier = {Text=ts:Create("h84b2d805gff5ag44a5g9f81g416aaf5abf18", "Rapier")},
@@ -321,8 +321,9 @@ local function OnItemTooltip(item, tooltip)
 								Label = ""
 							}
 						end
-						if entry.TwoHanded ~= nil and item.Stats.IsTwoHanded and not Game.Math.IsRangedWeapon(item.Stats) then
-							armorSlotType.Label = TwoHandedText.Value .. " " .. renameWeaponType.TwoHandedText.Value
+						if item.Stats.IsTwoHanded and renameWeaponType.TwoHandedText ~= nil and not Game.Math.IsRangedWeapon(item.Stats) then
+							--armorSlotType.Label = TwoHandedText.Value .. " " .. renameWeaponType.TwoHandedText.Value
+							armorSlotType.Label = renameWeaponType.TwoHandedText.Value
 						else
 							armorSlotType.Label = renameWeaponType.Text.Value
 						end

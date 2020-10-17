@@ -1,3 +1,13 @@
+local Qualifiers = {
+	StrengthBoost = true,
+	FinesseBoost = true,
+	IntelligenceBoost = true,
+	ConstitutionBoost = true,
+	MemoryBoost = true,
+	WitsBoost = true,
+	MagicPointsBoost = true,
+}
+
 ---@param tbl table
 local function SetItemStats(target, tbl)
 	for k,v in pairs(tbl) do
@@ -7,7 +17,23 @@ local function SetItemStats(target, tbl)
 			if type(v) == "table" then
 				SetItemStats(target[k], v)
 			else
-				target[k] = v
+				local b,err = xpcall(function()
+					if target[k] ~= nil then
+						if Qualifiers[k] == true then
+							if v == "None" then
+								target[k] = "0"
+							else
+								target[k] = tostring(v)
+							end
+						else
+							print(k,v)
+							target[k] = v
+						end
+					end
+				end, debug.traceback)
+				if not b then
+					Ext.PrintError(err)
+				end
 			end
 		end
 	end
@@ -35,6 +61,7 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 		if item ~= nil and stats == nil then
 			stats = item.Stats
 		end
+		
 		if stats ~= nil then
 			if Ext.Version() < 53 then
 				Ext.EnableExperimentalPropertyWrites()
@@ -44,8 +71,9 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 			else
 				SetItemStats(stats, data.Stats)
 			end
+			stats.ShouldSyncStats = true
 			if Vars.DebugEnabled then
-				print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]\n%s", stats.Name, payload))
+				print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]", stats.Name))
 			end
 		else
 			Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s) UUID(%s) Slot(%s) Owner(%s)", data.NetID, data.UUID, data.Slot, data.Owner))

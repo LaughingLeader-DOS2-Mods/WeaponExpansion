@@ -520,6 +520,19 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 				end
 			end
 		end
+		if firstLoad == true then
+			local originalValues = Temp.OriginalUniqueStats[item.StatsId]
+			if originalValues ~= nil then
+				for attribute,value in pairs(originalValues) do
+					if changes[attribute] == nil then
+						changes[attribute] = value
+						if not persist then
+							stat[attribute] = value
+						end
+					end
+				end
+			end
+		end
 		if statChanged or firstLoad == true then
 			if persist == nil then
 				persist = false
@@ -543,16 +556,6 @@ local function StartApplyingProgression(self, progressionTable, persist, item, f
 		Ext.PrintError(result)
 	elseif result == true or firstLoad == true then
 		if changes ~= nil and Common.TableHasAnyEntry(changes) then
-			if firstLoad == true then
-				local originalValues = Temp.OriginalUniqueStats[item.StatsId]
-				if originalValues ~= nil then
-					for attribute,value in pairs(originalValues) do
-						if changes[attribute] == nil then
-							changes[attribute] = value
-						end
-					end
-				end
-			end
 			EquipmentManager.SyncItemStatChanges(item, changes, 1)
 			if self.Copies ~= nil then
 				for uuid,owner in pairs(self.Copies) do

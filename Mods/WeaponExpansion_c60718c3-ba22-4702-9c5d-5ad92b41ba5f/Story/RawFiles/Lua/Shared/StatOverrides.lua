@@ -243,8 +243,110 @@ local function IgnoreRangerSkill(skill)
 	return false
 end
 
+local UniqueItemAttributes = {
+    Weapon = {
+        --IsTwoHanded = "YesNo",
+        ["Damage Type"] = "Damage Type",
+        --Damage = "ConstantInt",
+        ["Damage Range"] = "ConstantInt",
+        DamageBoost = "ConstantInt",
+        DamageFromBase = "ConstantInt",
+        CriticalDamage = "ConstantInt",
+        CriticalChance = "ConstantInt",
+        Movement = "ConstantInt",
+        Initiative = "ConstantInt",
+        --Requirements = "Requirements",
+        --Slot = "Itemslot",
+        --Durability = "ConstantInt",
+        --DurabilityDegradeSpeed = "Qualifier",
+        --Value = "ConstantInt",
+        --WeaponType = "WeaponType",
+        --AnimType = "AnimType",
+        WeaponRange = "ConstantInt",
+        --ModifierType = "ModifierType",
+        --Projectile = "FixedString",
+        --Act = "Act",
+        --Act part = "ActPart",
+        StrengthBoost = "Penalty Qualifier",
+        FinesseBoost = "Penalty Qualifier",
+        IntelligenceBoost = "Penalty Qualifier",
+        ConstitutionBoost = "Penalty Qualifier",
+        MemoryBoost = "Penalty Qualifier",
+        WitsBoost = "Penalty Qualifier",
+        SingleHanded = "ConstantInt",
+        TwoHanded = "ConstantInt",
+        Ranged = "ConstantInt",
+        DualWielding = "ConstantInt",
+        RogueLore = "ConstantInt",
+        WarriorLore = "ConstantInt",
+        RangerLore = "ConstantInt",
+        FireSpecialist = "ConstantInt",
+        WaterSpecialist = "ConstantInt",
+        AirSpecialist = "ConstantInt",
+        EarthSpecialist = "ConstantInt",
+        Sourcery = "ConstantInt",
+        Necromancy = "ConstantInt",
+        Polymorph = "ConstantInt",
+        Summoning = "ConstantInt",
+        Leadership = "ConstantInt",
+        PainReflection = "ConstantInt",
+        Perseverance = "ConstantInt",
+        Telekinesis = "ConstantInt",
+        Sneaking = "ConstantInt",
+        Thievery = "ConstantInt",
+        Loremaster = "ConstantInt",
+        Repair = "ConstantInt",
+        Barter = "ConstantInt",
+        Persuasion = "ConstantInt",
+        Luck = "ConstantInt",
+        --Fire = "ConstantInt",
+        --Earth = "ConstantInt",
+        --Water = "ConstantInt",
+        --Air = "ConstantInt",
+        --Poison = "ConstantInt",
+        --Physical = "ConstantInt",
+        --Piercing = "ConstantInt",
+        --SightBoost = "Penalty Qualifier",
+        --HearingBoost = "Penalty Qualifier",
+        VitalityBoost = "ConstantInt",
+        --MagicPointsBoost = "Penalty Qualifier",
+        --ChanceToHitBoost = "ConstantInt",
+        --APMaximum = "ConstantInt",
+        --APStart = "ConstantInt",
+        --APRecovery = "ConstantInt",
+        AccuracyBoost = "ConstantInt",
+        DodgeBoost = "ConstantInt",
+        --Weight = "ConstantInt",
+        --AttackAPCost = "ConstantInt",
+        --ComboCategory = "FixedString",
+        --Flags = "AttributeFlags",
+        --Boosts = "FixedString",
+        --InventoryTab = "InventoryTabs",
+        --Charges = "ConstantInt",
+        --MaxCharges = "ConstantInt",
+        --Skills = "FixedString",
+        --Reflection = "FixedString",
+        --ItemGroup = "FixedString",
+        --ObjectCategory = "FixedString",
+        --MinAmount = "ConstantInt",
+        --MaxAmount = "ConstantInt",
+        --Priority = "ConstantInt",
+        --Unique = "ConstantInt",
+        --MinLevel = "ConstantInt",
+        --MaxLevel = "ConstantInt",
+        --ItemColor = "FixedString",
+        --MaxSummons = "ConstantInt",
+        --RuneSlots = "ConstantInt",
+        --RuneSlots_V1 = "ConstantInt",
+        --NeedsIdentification = "YesNo",
+        LifeSteal = "ConstantInt",
+        CleavePercentage = "ConstantInt",
+        CleaveAngle = "ConstantInt",
+    }
+}
+
 local function StatOverrides_Init()
-	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides.")
+	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides. Server:", Ext.IsServer())
 
 	apply_overrides(overrides)
 	apply_overrides(llweaponex_extender_additions)
@@ -325,6 +427,7 @@ local function StatOverrides_Init()
 		end
 	end
 
+	local uniqueStats = {}
 	-- Add a combo category to unique weapons.
 	for i,stat in pairs(Ext.GetStatEntries("Weapon")) do
 		if Ext.StatGetAttribute(stat, "Unique") == 1 then
@@ -337,7 +440,23 @@ local function StatOverrides_Init()
 					Ext.StatSetAttribute(stat, "ComboCategory", {"UniqueWeapon"})
 				end
 			end
+			if string.find(stat, "LLWEAPONEX_") then
+				uniqueStats[stat] = {}
+				for attribute,valType in pairs(UniqueItemAttributes["Weapon"]) do
+					local val = Ext.StatGetAttribute(stat, attribute)
+					if val ~= nil then
+						uniqueStats[stat][attribute] = val
+					end
+				end
+			end
 		end
+	end
+	Ext.Print("Saving WeaponExpansion_UniqueBaseStats.json.")
+	local b,err = xpcall(function()
+		Ext.SaveFile("WeaponExpansion_UniqueBaseStats.json", Ext.JsonStringify(uniqueStats))
+	end, debug.traceback)
+	if not b then
+		Ext.PrintError(err)
 	end
 
 	if Ext.IsDeveloperMode() then
