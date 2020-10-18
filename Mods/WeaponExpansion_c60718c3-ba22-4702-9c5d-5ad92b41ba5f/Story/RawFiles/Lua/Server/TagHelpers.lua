@@ -15,6 +15,15 @@ end
 ---@param stat string The item's stat. Optional.
 function TagWeapon(uuid, statType, stat)
 	local tagged = false
+
+	-- Has mastery tag but is missing LLWEAPONEX_TaggedWeaponType
+	for tag,data in pairs(Masteries) do
+		if IsTagged(uuid, tag) == 1 then
+			SetTag(uuid, "LLWEAPONEX_TaggedWeaponType")
+			return true
+		end
+	end
+
 	local template = StringHelpers.GetUUID(GetTemplate(uuid))
 	local templateTag = Tags.TemplateToTag[template]
 	printd("TagWeapon", uuid, statType, stat, template, templateTag)
