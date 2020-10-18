@@ -232,3 +232,23 @@ RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(obj,id)
 		OnLeftCombat(obj, id)
 	end
 end)
+
+--- @param char string
+--- @param skill string
+--- @param skillType string
+--- @param skillElement string
+local function OnSkillCast(char, skill, skillType, skillElement)
+	char = StringHelpers.GetUUID(char)
+	if IsPlayer(char) then
+		if skill == "Shout_LLWEAPONEX_OpenMenu" then
+			OpenMasteryMenu_Start(char)
+		end
+	end
+	if Skills.BulletTemplates[skill] and IsTagged(char, "LLWEAPONEX_Firearm_Equipped") == 1 then
+		ApplyStatus(char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, 0, char)
+	end
+	-- if ObjectGetFlag(char, "LLWEAPONEX_BasilusDagger_ListenForAction") == 1 then
+	-- 	Basilus_OnTargetActionTaken(char)
+	-- end
+end
+Ext.RegisterOsirisListener("SkillCast", 4, "after", OnSkillCast)

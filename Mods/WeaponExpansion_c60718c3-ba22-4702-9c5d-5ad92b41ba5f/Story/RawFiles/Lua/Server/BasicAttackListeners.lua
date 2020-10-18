@@ -9,6 +9,11 @@ if BasicAttackManager.Listeners == nil then
 	}
 end
 
+---@alias BasicAttackEventID OnStart|OnHit
+---@alias BasicAttackCallback fun(attacker:string, owner:string, target:string|number[])
+
+---@param event BasicAttackEventID
+---@param func BasicAttackCallback
 function BasicAttackManager.RegisterListener(event, func)
 	if BasicAttackManager.Listeners[event] == nil then
 		BasicAttackManager.Listeners[event] = {}

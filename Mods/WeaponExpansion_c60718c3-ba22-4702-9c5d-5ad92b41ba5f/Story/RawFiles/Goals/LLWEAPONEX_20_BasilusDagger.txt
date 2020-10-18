@@ -2,6 +2,23 @@ Version 1
 SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_BASILUS_HAUNTED", _)
+THEN
+LeaderLib_ToggleScripts_EnableScriptForObject(_Target, "LLWEAPONEX_BasilusDaggerHauntingActive", "WeaponExpansion");
+
+IF
+CharacterStatusRemoved(_Target, "LLWEAPONEX_BASILUS_HAUNTED", _)
+THEN
+LeaderLib_ToggleScripts_DisableScriptForObjectAfterDelay(_Target, "LLWEAPONEX_BasilusDaggerHauntingActive", "WeaponExpansion", 500);
+
+IF
+CharacterStatusApplied(_Target, "LLWEAPONEX_BASILUS_TURN_TICK", _)
+THEN
+ObjectSetFlag(_Target, "LLWEAPONEX_BasilusDagger_ListenForAction", 0);
+
+/*
 //S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5
 IF
 ItemDropped(S_WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A_5b5c20e1-cef4-40a2-b367-a984c38c1f03)
@@ -80,7 +97,7 @@ PROC
 LLWEAPONEX_Basilus_DropDagger()
 THEN
 SetOnStage(S_Ghost_LLWEAPONEX_Dagger_Basilus_A_e4fcee11-628c-42f2-9393-fb41d79a7ce5, 0);
-
+*/
 EXITSECTION
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_00_PostCC"

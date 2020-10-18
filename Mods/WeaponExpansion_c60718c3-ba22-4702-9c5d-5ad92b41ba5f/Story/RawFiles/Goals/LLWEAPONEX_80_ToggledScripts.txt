@@ -53,6 +53,7 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_DemolitionBac
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_AnvilMace", "LLWEAPONEX_AnvilMaceEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_SoulHarvest", "LLWEAPONEX_SoulHarvestEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_PowerGauntlets", "LLWEAPONEX_PowerGauntletsActive", 0);
+LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_BasilusDagger", "LLWEAPONEX_BasilusDaggerHauntingActive", 0);
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_11_Blunderbuss", "LLWEAPONEX_BlunderbussEquipped", 1);
 

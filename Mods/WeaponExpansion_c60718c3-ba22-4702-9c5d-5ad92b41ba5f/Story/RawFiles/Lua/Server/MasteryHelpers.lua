@@ -175,26 +175,6 @@ function IsMeleeWeaponSkill(skill)
 	return false
 end
 
---- @param character string
---- @param skill string
---- @param skillType string
---- @param skillElement string
-local function OnSkillCast(character, skill, skillType, skillElement)
-	if IsPlayer(character) then
-		if skill == "Shout_LLWEAPONEX_OpenMenu" then
-			OpenMasteryMenu_Start(GetUUID(character))
-		else
-			-- if IsWeaponSkill(skill) then
-			-- 	AddMasteryExperienceForAllActive(character, 0.5)
-			-- end
-		end
-	end
-	if Skills.BulletTemplates[skill] and IsTagged(character, "LLWEAPONEX_Firearm_Equipped") == 1 then
-		ApplyStatus(character, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, 0, character)
-	end
-end
-Ext.RegisterOsirisListener("SkillCast", 4, "after", OnSkillCast)
-
 --- @param uuid string
 --- @param mastery string
 function OnMasteryDeactivated(uuid,mastery)

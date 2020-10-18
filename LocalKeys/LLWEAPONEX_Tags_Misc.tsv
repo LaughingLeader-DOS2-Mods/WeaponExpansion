@@ -25,4 +25,4 @@ LLWEAPONEX_RunicCannon	Runic Weaponry	h702bf925gf664g45a7gb3f5g34418bfa2c56
 LLWEAPONEX_Blunderbuss_Equipped	Attacks Explode in a 1m Radius	h68cb792dgceffg4eb4gb1fag638d175859cb
 LLWEAPONEX_MagicMissileWand_Equipped	45%/30%/10% Chance for Bonus Missiles	h34401e0bg371fg449cg9e43g39208b508644
 LLWEAPONEX_UniqueBasilusDagger	<font color='#00FFCC'>Haunted</font>	h16aeb04cg8a64g47fdg8ee3g32f2a2c70e5c
-LLWEAPONEX_UniqueBasilusDagger_Description	The first enemy hit by this dagger will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] after taking an action, once per turn.	hb7879842g19c1g4470ga1f7gcc91d53c40c8
+LLWEAPONEX_UniqueBasilusDagger_Description	The first enemy hit by this dagger will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] after taking an action, once per turn. Has a [ExtraData:LLWEAPONEX_BasilusDagger_BackstabChance]% chance to backstab.	hb7879842g19c1g4470ga1f7gcc91d53c40c8

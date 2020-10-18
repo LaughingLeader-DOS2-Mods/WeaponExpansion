@@ -147,8 +147,9 @@ local function Init()
 	Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)
 	Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
 	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
+
 	LeaderLib.UI.RegisterListener("OnWorldTooltip", OnWorldTooltip)
-	--LeaderLib.UI.RegisterListener("OnTooltipPositioned", OnTooltipPositioned)
+	LeaderLib.UI.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
 end
 return {
 	Init = Init
