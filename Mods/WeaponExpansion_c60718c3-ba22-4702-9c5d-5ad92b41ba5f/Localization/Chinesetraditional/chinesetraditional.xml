@@ -15,6 +15,7 @@
 	<content contentuid="h00db93a7g31abg4563gb671gd0c6b20d9cee">Shield Prison</content>
 	<content contentuid="h0105c199gf9f5g4d17g8aa5g85b10660932a">*Leave the rock alone and step away.*</content>
 	<content contentuid="h011b99cag1e54g4b92g912ag58afbfdab053">Dragonslayer Mail</content>
+	<content contentuid="h011e1b92g4ce2g4e99g890eg6be8a6a58a28">&lt;font color=&apos;#00FFCC&apos; size=&apos;22&apos;&gt;Haunted!&lt;/font&gt;</content>
 	<content contentuid="h012244c7gbb72g4652g8ee1g19be9a9da947">Inferno Rune</content>
 	<content contentuid="h01468f79gd9b2g4479ga596g8a68e07c39e7">&lt;font color=&apos;#FFCE58&apos;&gt;Slam the target with your palm, knocking them back &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m&lt;/font&gt; and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage].&lt;/font&gt;</content>
 	<content contentuid="h014a89fcg6438g451dg96bag521c32259715">Balrin&apos;s Throwing Axe (Ice)</content>
@@ -249,6 +250,7 @@
 	<content contentuid="h1b3920b8gab1ag4914gbe71ged645d9a309e">Water Rune</content>
 	<content contentuid="h1b412aefg3d56g47ecga034g20225843aff3">Bonuses on Hit</content>
 	<content contentuid="h1b907c6agcf25g4ad9gb01bg1e4519814660">A holy banner of the Divine Order, said to inspire all with its divine glory. While wielding the emblem of your captors is questionable, something about this banner stirs up a desire for leadership and teamwork.</content>
+	<content contentuid="h1ba91504g8197g442dg8726g1b49470e8cdd">&lt;font color=&apos;#CC00FF&apos;&gt;[1] was haunted by the Blade of Basilus!&lt;/font&gt;</content>
 	<content contentuid="h1bd0f691g9646g4b28g932fg3ebd8377ca0e">Gain hyper-focus, increasing the &lt;font color=&apos;#33FF00&apos;&gt;damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%&lt;/font&gt;.</content>
 	<content contentuid="h1bdb5e07gf441g4020g9f25g6ea0457e71fe">Enhanced Demolition Bonus</content>
 	<content contentuid="h1bfbbfb7g6525g4016ga0f7g2268e5e3db06">Tactics</content>
@@ -1714,7 +1716,7 @@
 	<content contentuid="hb7250405g5608g4408ga1e7gd7e8e1f4bfaa">&lt;font color=&apos;#7f00ff&apos;&gt;Slowing Great Arrow&lt;/font&gt;</content>
 	<content contentuid="hb7457779g1eecg4c54g8090gd57198c3b57e">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery II&lt;/font&gt;</content>
 	<content contentuid="hb7836906g4d15g44cfgad67g7412721e8915">Tempered Runeblade of Poison</content>
-	<content contentuid="hb7879842g19c1g4470ga1f7gcc91d53c40c8">The first enemy hit will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] when taking an action (once per turn), with a [ExtraData:LLWEAPONEX_BasilusDagger_BackstabChance]% chance to backstab.</content>
+	<content contentuid="hb7879842g19c1g4470ga1f7gcc91d53c40c8">&lt;font color=&apos;#C7A758&apos;&gt;The first enemy hit will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] when taking an action (once per turn), with a [ExtraData:LLWEAPONEX_BasilusDagger_BackstabChance]% chance to be backstabbed.&lt;/font&gt;</content>
 	<content contentuid="hb7a3dc0cg8422g4a1cg83f5gefbaab6d835f">Throwing Sword?</content>
 	<content contentuid="hb7aab313g204ag4e87g9013gb0a170ce0442">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Deals additional damage when attacking Undead, with a 10% chance to &lt;font color=&apos;#b823cb&apos;&gt;Entangle&lt;/font&gt; enemies hit for 1 turn.&lt;br&gt;Entangle&apos;s chance is increased to 50% when attacking the Undead.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Earth Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="hb7cc4c4dg4abcg4814g932cg0c2b233d479f">Cursing Arrow</content>
@@ -2080,6 +2082,7 @@
 	<content contentuid="he1e58190g1732g427cga8a9g7ba9ec1c3049">A greatbow enhanced with modern technological advances. Still requires great strength to wield.</content>
 	<content contentuid="he20d9663gf6d9g4b29g8789gd053539c8f62">Estoc of the Champion</content>
 	<content contentuid="he210cbc0g8b27g48d1ga9c1gb010f687fc1a">Mighty Dragonslayer Pants</content>
+	<content contentuid="he24285d8geb08g4177g8454g78c27e41dab2">&lt;font color=&apos;#00FFCC&apos; size=&apos;22&apos;&gt;Haunted Backstab Critical!&lt;/font&gt;</content>
 	<content contentuid="he24e735fgcbe6g422agb0bagf43f654f6e1e">Demolitionist&apos;s Backpack</content>
 	<content contentuid="he251452eg65a3g4e6dgb8c0gdd7bc5fadef3">&lt;font color=&apos;#F5785A&apos;&gt;Axe Mastery II&lt;/font&gt;</content>
 	<content contentuid="he27df360gc0cag4612gaec1g4d8fe4c76b1e">From Left Claws: [1]-[2]</content>

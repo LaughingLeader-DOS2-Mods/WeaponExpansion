@@ -34,7 +34,15 @@ function Basilus_OnTargetActionTaken(target)
 						backstab = 1
 					end
 				end
-				GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", HitFlagPresets.GuaranteedWeaponHit:Append({Backstab=backstab}))
+				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_CombatLog_BasilusDaggerHauntedDamage", "<font color='#CC00FF'>[1] was haunted by the Blade of Basilus!</font>")
+				text = string.gsub(text, "%[1%]", Ext.GetCharacter(target).DisplayName)
+				GameHelpers.UI.CombatLog(text)
+				if backstab == 1 then
+					CharacterStatusText(target, "LLWEAPONEX_StatusText_BasilusHauntedDamage_Backstab")
+				else
+					CharacterStatusText(target, "LLWEAPONEX_StatusText_BasilusHauntedDamage_Normal")
+				end
+				GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", HitFlagPresets.GuaranteedWeaponHit:Append({Backstab=backstab,CriticalHit=backstab}))
 			end
 		end
 	end
