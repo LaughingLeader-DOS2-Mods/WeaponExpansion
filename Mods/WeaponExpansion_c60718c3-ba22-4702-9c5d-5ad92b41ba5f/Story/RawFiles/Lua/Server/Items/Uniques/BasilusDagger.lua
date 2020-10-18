@@ -42,7 +42,7 @@ function Basilus_OnTargetActionTaken(target)
 				else
 					CharacterStatusText(target, "LLWEAPONEX_StatusText_BasilusHauntedDamage_Normal")
 				end
-				GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", HitFlagPresets.GuaranteedWeaponHit:Append({Backstab=backstab,CriticalHit=backstab}))
+				GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", HitFlagPresets.GuaranteedWeaponHit:Append({Backstab=backstab}))
 			end
 		end
 	end
