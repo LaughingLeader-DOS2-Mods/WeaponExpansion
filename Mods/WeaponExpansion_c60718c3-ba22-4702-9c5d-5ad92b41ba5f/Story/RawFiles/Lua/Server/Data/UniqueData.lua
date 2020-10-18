@@ -334,6 +334,9 @@ local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
 			statChanged = true
 		end
 	else
+		if attribute == "WeaponRange" then
+			entry.Value = math.ceil(entry.Value / 100)
+		end
 		if entry.Append == true then
 			local current = stat[attribute]
 			if attribute == "Boosts" or attribute == "Skills" then
@@ -534,6 +537,9 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 						changes["MaxDamage"] = max
 						changes["Damage Range"] = nil
 					else
+						if attribute == "WeaponRange" then
+							value = math.ceil(value / 100)
+						end
 						if changes[attribute] == nil then
 							changes[attribute] = value
 							if not persist then
