@@ -31,6 +31,7 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 	-- Tag updating
 	for _,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local uuid = db[1]
+		local player = Ext.GetCharacter(uuid)
 		EquipmentManager.CheckWeaponRequirementTags(StringHelpers.GetUUID(db[1]))
 		if HasActiveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
 			RemoveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
@@ -58,6 +59,18 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 
 		if HasActiveStatus(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
 			CharacterRemoveSkill(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
+		end
+
+		if last < 153157632 then
+			for i,v in pairs(player:GetInventoryItems()) do
+				local item = Ext.GetItem(v)
+				if item ~= nil then
+					-- Musketeer firearms were auto-tagged with crossbow previously
+					if item:HasTag("LLWEAPONEX_TaggedWeaponType") and item:HasTag("LLWEAPONEX_Firearm") and item:HasTag("LLWEAPONEX_Crossbow") then
+						ClearTag(item.MyGuid, "LLWEAPONEX_Crossbow")
+					end
+				end
+			end
 		end
 	end
 end)
