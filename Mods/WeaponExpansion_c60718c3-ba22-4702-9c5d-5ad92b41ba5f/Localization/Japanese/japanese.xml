@@ -199,11 +199,12 @@
 	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8">shadow</content>
 	<content contentuid="h16a53792g6604g4a6ag9f3agcfa5e63ac21d">Night&apos;s Edge</content>
 	<content contentuid="h16ad8746g8be9g4c34g84ebg5ab468104deb">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
+	<content contentuid="h16aeb04cg8a64g47fdg8ee3g32f2a2c70e5c">&lt;font color=&apos;#00FFCC&apos;&gt;Haunted&lt;/font&gt;</content>
 	<content contentuid="h16ba7b22gbbd1g4911gb6bage99f9593bc01">Character has lowered resistance to &lt;font color=&apos;#797980&apos;&gt;shadow damage&lt;/font&gt;.</content>
 	<content contentuid="h16cd4b5bged4cg4a2eg932eg1015dabd6c42">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery II&lt;/font&gt;</content>
 	<content contentuid="h16cdc860g50d2g4c52ga87fg5b5411562aaa">Bonus Ice Damage</content>
 	<content contentuid="h17265d91g7278g47d2g8109g5966d8291fec">Novice</content>
-	<content contentuid="h173b9449ge0c5g4f29g86f4g01124907841b">Each target hit becomes &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt;. If hit again, &lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].&lt;br&gt;&lt;font color=&apos;#F1CC00&apos;&gt;&lt;font color=&apos;#F13324&apos;&gt;Vulnerable&lt;/font&gt; is removed when your turn ends.&lt;/font&gt;</content>
+	<content contentuid="h173b9449ge0c5g4f29g86f4g01124907841b">Each target hit becomes &lt;font color=&apos;#F13324&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName]&lt;/font&gt;. If hit again, &lt;font color=&apos;#F13324&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName]&lt;/font&gt; is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].&lt;br&gt;&lt;font color=&apos;#F1CC00&apos;&gt;&lt;font color=&apos;#F13324&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName]&lt;/font&gt; is removed when your turn ends.&lt;/font&gt;</content>
 	<content contentuid="h1765f964g83e6g4e49g89afg2a7239aa0a3c">&lt;font color=&apos;#00AA00&apos;&gt;Flask of Poison Weakness&lt;/font&gt;</content>
 	<content contentuid="h176fd702g856eg4a56ga027g90f413fedc79">Soldier&apos;s Glaive</content>
 	<content contentuid="h177fef81gd571g4c7fgba7egfcb6f10eb00a">A handmade quiver, designed for quickly drawing arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
@@ -1710,6 +1711,7 @@
 	<content contentuid="hb7250405g5608g4408ga1e7gd7e8e1f4bfaa">&lt;font color=&apos;#7f00ff&apos;&gt;Slowing Great Arrow&lt;/font&gt;</content>
 	<content contentuid="hb7457779g1eecg4c54g8090gd57198c3b57e">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery II&lt;/font&gt;</content>
 	<content contentuid="hb7836906g4d15g44cfgad67g7412721e8915">Tempered Runeblade of Poison</content>
+	<content contentuid="hb7879842g19c1g4470ga1f7gcc91d53c40c8">The first enemy hit by this dagger will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] after taking an action, once per turn.</content>
 	<content contentuid="hb7a3dc0cg8422g4a1cg83f5gefbaab6d835f">Throwing Sword?</content>
 	<content contentuid="hb7aab313g204ag4e87g9013gb0a170ce0442">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Deals additional damage when attacking Undead, with a 10% chance to &lt;font color=&apos;#b823cb&apos;&gt;Entangle&lt;/font&gt; enemies hit for 1 turn.&lt;br&gt;Entangle&apos;s chance is increased to 50% when attacking the Undead.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Earth Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="hb7cc4c4dg4abcg4814g932cg0c2b233d479f">Cursing Arrow</content>
