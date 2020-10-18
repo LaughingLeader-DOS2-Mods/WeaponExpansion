@@ -35,7 +35,7 @@ end
 
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
-	--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--printd("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "hotbarBtnPressed" or call == "selectedTab" or call == "showUI" then
 		CloseMenu()
@@ -44,7 +44,7 @@ end
 
 local function OnSidebarEvent(ui, call, ...)
 	local params = {...}
-	--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--printd("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "charSel" then
 		CloseMenu()
@@ -53,7 +53,7 @@ end
 
 local function OnHotbarEvent(ui, call, ...)
 	local params = {...}
-	--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--printd("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
 
 	if call == "hotbarBtnPressed" then
 		CloseMenu()
@@ -66,21 +66,21 @@ local function SetupListeners()
 		Ext.RegisterUICall(ui, "selectedTab", OnSheetEvent)
 		Ext.RegisterUICall(ui, "hotbarBtnPressed", OnSheetEvent)
 		Ext.RegisterUICall(ui, "showUI", OnSheetEvent)
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (characterSheet.swf). Registered listeners.")
+		printd("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (characterSheet.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/characterSheet.swf")
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "charSel", OnSidebarEvent)
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (playerInfo.swf). Registered listeners.")
+		printd("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (playerInfo.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/playerInfo.swf")
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "hotbarBtnPressed", OnHotbarEvent)
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (hotBar.swf). Registered listeners.")
+		printd("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (hotBar.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/hotBar.swf")
 	end
@@ -180,7 +180,7 @@ local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
 			iconType = 0
 		end
 	end
-	LeaderLib.PrintDebug(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
+	printd(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
 	ui:SetValue("descriptionContent", iconId, index+1)
 	ui:SetValue("descriptionContent", iconName, index+2)
 	ui:SetValue("descriptionContent", iconType, index+3)
@@ -230,13 +230,24 @@ local function parseDescription(ui, index, descriptionText)
 	return index
 end
 
+local function GetAdditionalMasteryRankText(mastery, rank)
+	local parentTable = Mastery.AdditionalRankText[mastery]
+	if parentTable ~= nil then
+		local rankTable = parentTable[rank]
+		if rankTable ~= nil then
+			return rankTable
+		end
+	end
+	return nil
+end
+
 local function buildMasteryDescription(ui, mastery)
 	local data = Masteries[mastery]
 	local rank = MasteryMenu.MasteryData.Masteries[mastery].Rank
 	local index = 0
 	for i=1,Mastery.Variables.MaxRank,1 do
 		local rankText = "_Rank"..tostring(i)
-		local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. rankText)
+		local rankDisplayText = GameHelpers.GetStringKeyText("LLWEAPONEX_UI_MasteryMenu" .. rankText)
 		local rankNameData = data.Ranks[i]
 		local rankName = nil
 		if rankNameData ~= nil then
@@ -250,7 +261,7 @@ local function buildMasteryDescription(ui, mastery)
 				rankHeader = string.format("<font size='24'>%s</font>", rankDisplayText)
 			end
 			local description = ""
-			description = Ext.GetTranslatedStringFromKey(mastery..rankText.."_Description")
+			description = GameHelpers.GetStringKeyText(mastery..rankText.."_Description", "")
 			local hasDescription = true
 			if description == nil or description == "" then
 				description = Text.MasteryMenu.RankPlaceholder.Value
@@ -258,6 +269,19 @@ local function buildMasteryDescription(ui, mastery)
 			elseif i > rank then
 				description = Text.MasteryMenu.RankLocked.Value
 				hasDescription = false
+			end
+			if hasDescription then
+				local extraTextTable = GetAdditionalMasteryRankText(mastery, i)
+				if extraTextTable ~= nil then
+					for stringKey,enabled in pairs(extraTextTable) do
+						if enabled ~= false then
+							local text = GameHelpers.GetStringKeyText(stringKey, "")
+							if not StringHelpers.IsNullOrEmpty(stringKey) then
+								description = description .. "<br>" .. text
+							end
+						end
+					end
+				end
 			end
 			--string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
 			index = pushDescriptionEntry(ui, index, rankHeader)
@@ -275,7 +299,7 @@ end
 local function OnMenuEvent(ui, call, ...)
 	local params = {...}
 	if call ~= "overMastery" then
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(LeaderLib.Common.Dump(params))..")")
+		printd("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(LeaderLib.Common.Dump(params))..")")
 	end
 	if call == "requestCloseUI" then
 		CloseMenu()
@@ -294,10 +318,10 @@ local function OnMenuEvent(ui, call, ...)
 		elseif params[1] == 3 then
 			local specialVals = StringHelpers.Split(params[2], ",")
 			if specialVals ~= nil and #specialVals >= 2 then
-				local name,_ = Ext.GetTranslatedStringFromKey(specialVals[1])
-				local description,_ = Ext.GetTranslatedStringFromKey(specialVals[2])
+				local name,_ = GameHelpers.GetStringKeyText(specialVals[1])
+				local description,_ = GameHelpers.GetStringKeyText(specialVals[2])
 				if name ~= nil then
-					local passiveDesc,_ = Ext.GetTranslatedStringFromKey("LLWEAPONEX_MasteryBonus_Passive_Description")
+					local passiveDesc,_ = GameHelpers.GetStringKeyText("LLWEAPONEX_MasteryBonus_Passive_Description")
 					name = GameHelpers.Tooltip.ReplacePlaceholders(name)
 					if description ~= nil then
 						description = GameHelpers.Tooltip.ReplacePlaceholders(description).."<br>"..passiveDesc
@@ -420,7 +444,7 @@ function MasteryMenu.InitializeMasteryMenu()
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui == nil then
 		MasteryMenu.RegisteredListeners = false
-		LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Creating mastery menu ui.")
+		printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Creating mastery menu ui.")
 		ui = Ext.CreateUI("MasteryMenu", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", 12)
 		newlyCreated = true
 	end
@@ -441,7 +465,7 @@ function MasteryMenu.InitializeMasteryMenu()
 			local barPercentage = 0
 			local xp = data.Required
 			barPercentage = (xp / xpMax)
-			--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+			--printd("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			ui:Invoke("setRankNodePosition", i, barPercentage)
 			i = i + 1
 		end
@@ -506,7 +530,7 @@ local function getRankTooltip(data, i)
 		return string.format("<font color='%s'>%s</font><br>%s xp", rankNameData.Color, rankNameData.Name.Value, LeaderLib.Common.FormatNumber(xpMax))
 	else
 		local rankText = "_Rank"..tostring(i)
-		return Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank" .. tostring(i))
+		return GameHelpers.GetStringKeyText("LLWEAPONEX_UI_MasteryMenu" .. "_Rank" .. tostring(i))
 	end
 end
 
@@ -520,8 +544,8 @@ local function OpenMasteryMenu(characterMasteryData)
 	if MasteryMenu.CHARACTER_HANDLE == nil then
 		MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(Ext.GetCharacter(characterMasteryData.UUID).Handle)
 	end
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
-	--LeaderLib.PrintDebug(LeaderLib.Common.Dump(characterMasteryData))
+	printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
+	--printd(LeaderLib.Common.Dump(characterMasteryData))
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui ~= nil then
 		MasteryMenu.Instance = ui
@@ -533,7 +557,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			if hasMinimumMasteryRankData(characterMasteryData, tag, 1) then
 				table.insert(masteryKeys, tag)
 			else
-				--LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(characterMasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
+				--printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(characterMasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
 			end
 		end
 		table.sort(masteryKeys, sortMasteries)
@@ -558,7 +582,7 @@ local function OpenMasteryMenu(characterMasteryData)
 					barPercentage = 1.0
 				end
 				local xpPercentage = math.floor(barPercentage * 100)
-				local rankDisplayText = Ext.GetTranslatedStringFromKey("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank))
+				local rankDisplayText = GameHelpers.GetStringKeyText("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank), "")
 				local masteryColorTitle = getMasteryDescriptionTitle(data)
 				ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
 				local expRankDisplay = rankDisplayText
@@ -572,7 +596,7 @@ local function OpenMasteryMenu(characterMasteryData)
 					--print("Set rank tooltip: ", i, k)
 				end
 	
-				LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+				printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 				i = i + 1
 			end
 		end

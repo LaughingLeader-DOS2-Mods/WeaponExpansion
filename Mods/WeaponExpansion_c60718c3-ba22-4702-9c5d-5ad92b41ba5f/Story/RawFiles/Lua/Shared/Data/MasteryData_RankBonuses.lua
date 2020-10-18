@@ -11,6 +11,11 @@ local RUSH_SKILLS = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringR
 
 local ELEMENTAL_WEAKNESS_BASE = Ext.Require("Shared/Data/MasteryData_ElementalWeakness.lua")
 
+---@class MasteryBonusData
+---@field Skills string[]|string|nil
+---@field Param TranslatedString
+---@field NamePrefix TranslatedString|string|nil
+
 Mastery.BonusID = {}
 Mastery.Bonuses = {
 LLWEAPONEX_Axe_Mastery1 = {

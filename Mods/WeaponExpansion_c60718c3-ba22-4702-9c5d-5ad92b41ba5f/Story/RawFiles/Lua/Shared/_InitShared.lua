@@ -23,7 +23,8 @@ Mastery = {
 	Variables = {},
 	PermanentMasteries = {
 		LLWEAPONEX_ThrowingAbility = true
-	}
+	},
+	AdditionalRankText = {}
 }
 LeaveActionData = {}
 Temp = {
@@ -78,6 +79,7 @@ MODID = {
 }
 
 Ext.Require("Shared/MasteryHelpers.lua")
+Ext.Require("Shared/MasteryRegistration.lua")
 Ext.Require("Shared/Damage/GameMathAlternatives.lua")
 Ext.Require("Shared/StatOverrides.lua")
 Ext.Require("Shared/Data/LocalizedText.lua")
@@ -200,6 +202,7 @@ Ext.RegisterListener("SessionLoaded", function()
 	LeaderLib.EnableFeature("StatusParamSkillDamage")
 	LeaderLib.EnableFeature("TooltipGrammarHelper")
     LeaderLib.EnableFeature("ReplaceTooltipPlaceholders")
+    LeaderLib.EnableFeature("FixFarOutManSkillRangeTooltip")
 end)
 
 Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")
