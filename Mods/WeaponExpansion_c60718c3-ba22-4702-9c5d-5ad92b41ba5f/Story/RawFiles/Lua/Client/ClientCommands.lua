@@ -26,7 +26,6 @@ local function SetItemStats(target, tbl)
 								target[k] = tostring(v)
 							end
 						else
-							print(k,v)
 							target[k] = v
 						end
 					end
