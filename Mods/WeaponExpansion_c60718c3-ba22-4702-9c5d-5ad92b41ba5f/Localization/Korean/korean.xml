@@ -156,6 +156,7 @@
 	<content contentuid="h0f72bec6g0ff4g4af9gaa76ga90f7ec31aab">Throwable</content>
 	<content contentuid="h0f83aa9ag475bg4ddfgb546gbb83d237b44e">Spin an additional 1-3 times, dealing reduced damage each spin.</content>
 	<content contentuid="h0fe9414ag9805g49feg8350gd262911b1e8d">Sacrificial Shields of Chaos</content>
+	<content contentuid="h0ff2b713g0469g4ce0g9cf3gb2fe9f288069">Character is haunted by an otherworldly presence, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] from their first action on their turn.</content>
 	<content contentuid="h10158f14g90deg4bc2g8331g555de4db3a25">Kiss Of Death</content>
 	<content contentuid="h1035543cg81c3g43afg995cgdbf5cb3b3caa">Fire a massive, super-heated cannonball, dealing [1] to targets, knocking them down, and leaving behind a trail of &lt;font color=&apos;#ff5b0b&apos;&gt;explosive fire clouds&lt;/font&gt;.&lt;br&gt;At the end of the trail, the cannonball explodes for [2] in a [3] radius, applying &lt;font color=&apos;#ff5b0b&apos;&gt;Necrofire&lt;/font&gt; to targets hit for 1 turn.</content>
 	<content contentuid="h103f5af9g1796g4ba0gb403gdb5007789fb1">Character is inspired by the &lt;font color=&apos;#c5a65a&apos;&gt;Banner of the Pack&lt;/font&gt;. Ferocity is unleashed.</content>
@@ -257,6 +258,7 @@
 	<content contentuid="h1c5ecd4ag935cg4971gab38g92c3a6ef8b0c">Journeyman Shieldsman</content>
 	<content contentuid="h1ca30c1agc63eg4be2g924dg1ffb2e444c10">&lt;font color=&apos;#11D77A&apos;&gt;Aimed Shot&lt;/font&gt;</content>
 	<content contentuid="h1ca4c759gc0f8g48f7g9483g74852e609c32">Runeblade (Poison)</content>
+	<content contentuid="h1ca74fb4g3bcag4c28gaae0gdd1966fecbc0">Haunted (Blade of Basilus)</content>
 	<content contentuid="h1ca8e223g378bg494egbb3cg0396a79a5a41">&lt;font color=&apos;#00FF7F&apos;&gt;Greatbow Mastery V&lt;/font&gt;</content>
 	<content contentuid="h1ca9680dg1c14g41b4ga6efg14cb9e8cd106">Detonated Remote Charge</content>
 	<content contentuid="h1caedd2ag7cccg444fg9d6cgf907a1288056">Dual Elven Shields</content>
@@ -1159,6 +1161,7 @@
 	<content contentuid="h7b7b99e7g6848g4eaegaff2g6d1903b0f4d5">Hope&apos;s End, Evil&apos;s Foothold</content>
 	<content contentuid="h7b8060d1gb4f3g4cfagbed5gb96e60122001">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#00AA00&apos;&gt;Poison Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="h7b84a8eeg44adg47a3g8649gd215531b4fbb">Disable Runic Cannon Offhand Weapon Restriction - Allows dual wielding with the Runic Cannon.</content>
+	<content contentuid="h7b89673fg1967g4699g95e2gd0265eacb05d">Haunted (Blade of Basilus)</content>
 	<content contentuid="h7b959808gefecg4891gae04g21585e074ac3">Yo!</content>
 	<content contentuid="h7b973523g0f82g40bfg81eaga78da1811e10">&lt;font color=&apos;#C76537&apos;&gt;Flask of Fire Weakness&lt;/font&gt;</content>
 	<content contentuid="h7b9b63a4gf2ceg4294gbc14g8ef464edd9a1">Mercy</content>
@@ -1711,7 +1714,7 @@
 	<content contentuid="hb7250405g5608g4408ga1e7gd7e8e1f4bfaa">&lt;font color=&apos;#7f00ff&apos;&gt;Slowing Great Arrow&lt;/font&gt;</content>
 	<content contentuid="hb7457779g1eecg4c54g8090gd57198c3b57e">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery II&lt;/font&gt;</content>
 	<content contentuid="hb7836906g4d15g44cfgad67g7412721e8915">Tempered Runeblade of Poison</content>
-	<content contentuid="hb7879842g19c1g4470ga1f7gcc91d53c40c8">The first enemy hit by this dagger will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] after taking an action, once per turn.</content>
+	<content contentuid="hb7879842g19c1g4470ga1f7gcc91d53c40c8">The first enemy hit by this dagger will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] after taking an action, once per turn. Has a [ExtraData:LLWEAPONEX_BasilusDagger_BackstabChance]% chance to backstab.</content>
 	<content contentuid="hb7a3dc0cg8422g4a1cg83f5gefbaab6d835f">Throwing Sword?</content>
 	<content contentuid="hb7aab313g204ag4e87g9013gb0a170ce0442">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Deals additional damage when attacking Undead, with a 10% chance to &lt;font color=&apos;#b823cb&apos;&gt;Entangle&lt;/font&gt; enemies hit for 1 turn.&lt;br&gt;Entangle&apos;s chance is increased to 50% when attacking the Undead.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Earth Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="hb7cc4c4dg4abcg4814g932cg0c2b233d479f">Cursing Arrow</content>
