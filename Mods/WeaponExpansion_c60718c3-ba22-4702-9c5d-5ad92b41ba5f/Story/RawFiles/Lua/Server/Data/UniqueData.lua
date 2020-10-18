@@ -524,10 +524,21 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 			local originalValues = Temp.OriginalUniqueStats[item.StatsId]
 			if originalValues ~= nil then
 				for attribute,value in pairs(originalValues) do
-					if changes[attribute] == nil then
-						changes[attribute] = value
-						if not persist then
-							stat[attribute] = value
+					if attribute == "Damage Range" then
+						local damage = Game.Math.GetLevelScaledWeaponDamage(level)
+						local baseDamage = damage * (stat.DamageFromBase * 0.01)
+						local range = baseDamage * (stat["Damage Range"] * 0.01)
+						local min = Ext.Round(baseDamage - (range/2))
+						local max = Ext.Round(baseDamage + (range/2))
+						changes["MinDamage"] = min
+						changes["MaxDamage"] = max
+						changes["Damage Range"] = nil
+					else
+						if changes[attribute] == nil then
+							changes[attribute] = value
+							if not persist then
+								stat[attribute] = value
+							end
 						end
 					end
 				end
@@ -556,6 +567,16 @@ local function StartApplyingProgression(self, progressionTable, persist, item, f
 		Ext.PrintError(result)
 	elseif result == true or firstLoad == true then
 		if changes ~= nil and Common.TableHasAnyEntry(changes) then
+			if changes["Damage Range"] ~= nil then
+				local damage = Game.Math.GetLevelScaledWeaponDamage(level)
+				local baseDamage = damage * (stat.DamageFromBase * 0.01)
+				local range = baseDamage * (stat["Damage Range"] * 0.01)
+				local min = Ext.Round(baseDamage - (range/2))
+				local max = Ext.Round(baseDamage + (range/2))
+				changes["MinDamage"] = min
+				changes["MaxDamage"] = max
+				changes["Damage Range"] = nil
+			end
 			EquipmentManager.SyncItemStatChanges(item, changes, 1)
 			if self.Copies ~= nil then
 				for uuid,owner in pairs(self.Copies) do

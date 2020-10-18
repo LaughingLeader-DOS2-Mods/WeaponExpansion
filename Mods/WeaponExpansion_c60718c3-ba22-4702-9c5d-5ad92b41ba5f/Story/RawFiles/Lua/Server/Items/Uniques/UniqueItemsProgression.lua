@@ -195,7 +195,7 @@ local bonuses = {
 	},
 	MagicMissileRod = {
 		[2] = ue:Create("IntelligenceBoost", "1", GetReqAttributeParams),
-		[4] = ue:Create("Damage Range", 20),
+		[4] = ue:Create("DamageRange", 20),
 		[6] = ue:Create("CriticalDamage", 160),
 		[7] = runeslot1,
 		[8] = ue:Create("IntelligenceBoost", "2", GetReqAttributeParams),
@@ -205,7 +205,7 @@ local bonuses = {
 	},
 	MagicMissileWand = {
 		[2] = ue:Create("IntelligenceBoost", "1", GetReqAttributeParams),
-		[4] = ue:Create("Damage Range", 20),
+		[4] = ue:Create("DamageRange", 20),
 		[6] = ue:Create("CriticalDamage", 155),
 		[7] = runeslot1,
 		[8] = ue:Create("IntelligenceBoost", "2", GetReqAttributeParams),

@@ -246,9 +246,9 @@ end
 local UniqueItemAttributes = {
     Weapon = {
         --IsTwoHanded = "YesNo",
-        ["Damage Type"] = "Damage Type",
+        ["DamageType"] = "Damage Type",
         --Damage = "ConstantInt",
-        ["Damage Range"] = "ConstantInt",
+        --["Damage Range"] = "ConstantInt",
         DamageBoost = "ConstantInt",
         DamageFromBase = "ConstantInt",
         CriticalDamage = "ConstantInt",

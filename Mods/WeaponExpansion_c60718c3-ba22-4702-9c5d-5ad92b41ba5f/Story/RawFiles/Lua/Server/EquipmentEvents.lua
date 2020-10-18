@@ -521,6 +521,10 @@ local bulletTemplates = {
 ---@param item EsvItem
 ---@param stats table
 function EquipmentManager.SyncItemStatChanges(item, stats, dynamicIndex)
+	if stats["Damage Type"] ~= nil then
+		stats["DamageType"] = stats["Damage Type"]
+		stats["Damage Type"] = nil
+	end
 	local slot = nil
 	local owner = nil
 	if item.Slot < 14 and item.OwnerHandle ~= nil then
