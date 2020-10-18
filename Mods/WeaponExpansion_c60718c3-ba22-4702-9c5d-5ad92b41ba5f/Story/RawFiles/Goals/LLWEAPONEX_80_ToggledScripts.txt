@@ -37,7 +37,6 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_00_ExtenderSkillRefres
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Greatbow", "LLWEAPONEX_Greatbow", 1);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Rapier", "LLWEAPONEX_Rapier", 1);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Firearms", "LLWEAPONEX_Firearm", 1);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_01_WM_Banner", "LLWEAPONEX_Banner", 1);
 
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_03_WeaponFX", "LLWEAPONEX_CustomUnsheathedFX", 0);
@@ -71,6 +70,13 @@ LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLW
 //END_REGION
 
 //REGION UPDATES
+PROC
+LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
+AND
+_LastVersion < 153157632
+THEN
+LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_01_WM_Firearms");
+
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 THEN
