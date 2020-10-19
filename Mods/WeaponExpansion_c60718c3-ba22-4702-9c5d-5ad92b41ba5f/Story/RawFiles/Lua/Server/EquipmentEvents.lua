@@ -142,6 +142,9 @@ end
 --- @param uuid string
 --- @param item string
 function OnItemEquipped(uuid,itemUUID)
+	if uuid == NPC.VendingMachine then
+		return false
+	end
 	--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
 	--local offhand = CharacterGetEquippedItem(uuid, "Shield")
 	if not StringHelpers.IsNullOrEmpty(itemUUID) and ObjectExists(itemUUID) == 1 then
@@ -250,6 +253,9 @@ function OnItemEquipped(uuid,itemUUID)
 end
 
 function OnItemTemplateUnEquipped(uuid, itemUUID, template)
+	if uuid == NPC.VendingMachine then
+		return false
+	end
 	local isPlayer = IsPlayer(uuid)
 
 	if isPlayer then
