@@ -744,6 +744,25 @@ end
 Skills.Damage.Projectile_LLWEAPONEX_ArmCannon_Shoot = GetRunicCannonSkillDamage
 Skills.Damage.Zone_LLWEAPONEX_ArmCannon_Disperse = GetRunicCannonSkillDamage
 
+local function BalrinSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
+	---@type StatItem
+	local weapon = attacker.MainWeapon
+	if attacker.OffHandWeapon ~= nil and string.find(attacker.OffHandWeapon.Tags, "LLWEAPONEX_BalrinAxe_Equipped") then
+		weapon = attacker.OffHandWeapon
+	end
+	if isTooltip ~= true then
+		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon, {WeaponType="Rifle"})
+	else
+		--return Game.Math.GetSkillDamageRange(attacker, skill, weapon, {WeaponType="Rifle"})
+		return Game.Math.GetSkillDamageRange(attacker, skill, weapon, {WeaponType="Rifle"})
+	end
+end
+
+Skills.Damage.Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage = BalrinSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Throw_UniqueAxe_A = BalrinSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand = BalrinSkillDamage
+
 Skills.Damage.Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage = function(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
 	---@type StatItem
