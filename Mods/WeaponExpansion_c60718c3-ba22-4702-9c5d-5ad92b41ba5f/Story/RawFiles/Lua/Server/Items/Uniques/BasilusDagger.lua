@@ -42,7 +42,15 @@ function Basilus_OnTargetActionTaken(target)
 				else
 					CharacterStatusText(target, "LLWEAPONEX_StatusText_BasilusHauntedDamage_Normal")
 				end
-				GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", HitFlagPresets.GuaranteedWeaponHit:Append({Backstab=backstab}))
+				local basilusWeapon = nil
+				local mainhand = CharacterGetEquippedItem(source.MyGuid, "Weapon")
+				local offhand = CharacterGetEquippedItem(source.MyGuid, "Shield")
+				if not StringHelpers.IsNullOrEmpty(mainhand) and IsTagged(mainhand, "LLWEAPONEX_UniqueBasilusDagger") == 1 then
+					basilusWeapon = source.Stats.MainWeapon
+				elseif not StringHelpers.IsNullOrEmpty(mainhand) and IsTagged(mainhand, "LLWEAPONEX_UniqueBasilusDagger") == 1 then
+					basilusWeapon = source.Stats.OffHandWeapon
+				end
+				GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", HitFlagPresets.GuaranteedWeaponHit:Append({Backstab=backstab}), basilusWeapon, {WeaponType="Rifle"}, false)
 			end
 		end
 	end
