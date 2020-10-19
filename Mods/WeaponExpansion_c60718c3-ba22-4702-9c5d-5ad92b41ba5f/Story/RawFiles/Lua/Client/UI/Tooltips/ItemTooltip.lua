@@ -3,10 +3,11 @@ local LocalizedText = LeaderLib.LocalizedText
 ---@type TranslatedString
 local ts = LeaderLib.Classes.TranslatedString
 
-local TagDisplay = {
+local ExtraPropsTags = {
 	LLWEAPONEX_ThiefGloves_Equipped = true,
 	LLWEAPONEX_Blunderbuss_Equipped = true,
-	LLWEAPONEX_MagicMissileWand_Equipped = true
+	LLWEAPONEX_MagicMissileWand_Equipped = true,
+	LLWEAPONEX_UniqueThrowingAxeA = true
 }
 
 ---@type tooltip TooltipData
@@ -391,7 +392,7 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
-		for tag,b in pairs(TagDisplay) do
+		for tag,b in pairs(ExtraPropsTags) do
 			if item:HasTag(tag) or statTags:find(tag) then
 				local text = GameHelpers.GetStringKeyText(tag, "")
 				if text ~= "" then
