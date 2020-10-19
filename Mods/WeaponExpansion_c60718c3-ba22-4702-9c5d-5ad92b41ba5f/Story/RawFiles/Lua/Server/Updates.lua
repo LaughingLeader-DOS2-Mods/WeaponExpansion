@@ -47,17 +47,7 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 			end
 		end
 
-		local hasBluntTag = not StringHelpers.IsNullOrEmpty(CharacterFindTaggedItem(uuid, "LLWEAPONEX_Blunt"))
-		if hasBluntTag then
-			for i,v in pairs(Ext.GetCharacter(uuid):GetInventoryItems()) do
-				if IsTagged(v, "LLWEAPONEX_Blunt") == 1 then
-					ClearTag(v, "LLWEAPONEX_Blunt")
-					SetTag(v, "LLWEAPONEX_Bludgeon")
-				end
-			end
-		end
-
-		if HasActiveStatus(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
+		if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
 			CharacterRemoveSkill(uuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
 		end
 
@@ -68,6 +58,10 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 					-- Musketeer firearms were auto-tagged with crossbow previously
 					if item:HasTag("LLWEAPONEX_TaggedWeaponType") and item:HasTag("LLWEAPONEX_Firearm") and item:HasTag("LLWEAPONEX_Crossbow") then
 						ClearTag(item.MyGuid, "LLWEAPONEX_Crossbow")
+					end
+					if IsTagged(v, "LLWEAPONEX_Blunt") == 1 then
+						ClearTag(v, "LLWEAPONEX_Blunt")
+						SetTag(v, "LLWEAPONEX_Bludgeon")
 					end
 				end
 			end
