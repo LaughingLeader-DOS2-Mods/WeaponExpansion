@@ -323,7 +323,7 @@
 	<content contentuid="h21b04452g5980g46e3ga8acg0657cb8cb5f8">&lt;font color=&apos;#FFB900&apos;&gt;Polearm Mastery III&lt;/font&gt;</content>
 	<content contentuid="h21c89079gfd43g4399g9f23g0d0760624f62">Executioner&apos;s Promise</content>
 	<content contentuid="h21d85e8eg3e61g4f9agb1a2g3a5ca2722144">Mini-Bolts</content>
-	<content contentuid="h21dfa4d9gbd77g4ca4g8471gff55c2988940">&lt;font color=&apos;#00ffff&apos;&gt;Blade of Basilus&lt;/font&gt;</content>
+	<content contentuid="h21dfa4d9gbd77g4ca4g8471gff55c2988940">Blade of Basilus</content>
 	<content contentuid="h21e212d4gdf1cg43d2g973eg7db384a8921d">&lt;font color=&apos;#ff780b&apos;&gt;Lunatic&apos;s Cannonball&lt;/font&gt;</content>
 	<content contentuid="h220650a3g3aacg43dag8384g96824940cbc5">Poison Rune</content>
 	<content contentuid="h2215bc77gd613g48b6g975cg955d332a3943">Conduction Rune</content>
@@ -1038,7 +1038,6 @@
 	<content contentuid="h6de80073g8e7dg4e1bg99a8g8de5ba3c6462">Bicorne of the Seas</content>
 	<content contentuid="h6dfbe19fgd3b9g4a18gb689gfc0156c415e9">&lt;font color=&apos;#E4CE93&apos;&gt;*Your axe finds its way back to you.*</content>
 	<content contentuid="h6e194dd5g2ad5g4d96g965agcc05dac9c23f">Runic Cannon Energy</content>
-	<content contentuid="h6e21af89g96d5g4826ga11ag8688bee4a5f7">Blade</content>
 	<content contentuid="h6e3a04cbgb9a1g4f1dga2b3g71f181ec93d3">Weapon Expansion - Unique Weapons</content>
 	<content contentuid="h6e62632bgd952g474ag824aga7513eaab0c6">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.</content>
 	<content contentuid="h6e7f93aeg6389g49ffgbd17g56c38a61568b">Assassin&apos;s Retirement</content>
@@ -1984,7 +1983,6 @@
 	<content contentuid="hd627d524gfb28g4fe1g9139gab79c7605691">Reinforced Halberd</content>
 	<content contentuid="hd65b7915g09dfg4cb6gacfagea168fce9614">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
 	<content contentuid="hd687b5a4g6df3g4f1fgb399g7a8ed307d17c">Impaled (Balrin&apos;s Throwing Axe)</content>
-	<content contentuid="hd6d18316gbc8bg400bga46eg18cd9f4185ee">Blade</content>
 	<content contentuid="hd715647fgc1dfg4a34gb619gfd612133a8ca">a Glaive</content>
 	<content contentuid="hd7347120gcb02g4fdcgaddcg282a83a42d58">Sword</content>
 	<content contentuid="hd74e7ac1gafb5g49ecgbaabg336447214556">Magicwood Two-handed Bokuto</content>
