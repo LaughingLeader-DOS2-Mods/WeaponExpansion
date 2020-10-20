@@ -98,6 +98,12 @@ local TwoHandedText = ts:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Ha
 ---@field Text ts
 ---@field TwoHandedText ts|nil
 
+local UniqueWeaponTypeTags = {
+	LLWEAPONEX_UniqueBokken1H = ts:Create("h5264ef62gdc22g401fg8b62g303379cd7693", "Wooden Katana"),
+}
+
+UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken2H = UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken1H
+
 ---@type WeaponTypeNameEntry[]
 local WeaponTypeNames = {
 	--LLWEAPONEX_Bludgeon = {Text=ts:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
@@ -338,6 +344,23 @@ local function OnItemTooltip(item, tooltip)
 					end
 					enabledMasteriesText = enabledMasteriesText .. masteryName
 				end
+			end
+		end
+		for tag,t in pairs(UniqueWeaponTypeTags) do
+			if item:HasTag(tag) then
+				local armorSlotType = tooltip:GetElement("ArmorSlotType")
+				if armorSlotType == nil then
+					armorSlotType = {
+						Type = "ArmorSlotType",
+						Label = ""
+					}
+				end
+				if item.Stats.IsTwoHanded then
+					armorSlotType.Label = TwoHandedText.Value .. " " .. t.Value
+				else
+					armorSlotType.Label = t.Value
+				end
+				break
 			end
 		end
 		if enabledMasteriesText ~= "" then

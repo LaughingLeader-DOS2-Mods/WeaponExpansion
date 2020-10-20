@@ -110,7 +110,7 @@
 	<content contentuid="h0a4b302dgf862g4af4g98cfg322085c2d454">Legend</content>
 	<content contentuid="h0a4c714cg4ca2g47b9gb35bgdbcedde528a5">Balrin&apos;s Throwing Axe (Fire)</content>
 	<content contentuid="h0a973462g2b3dg4dbdgbffbg49ec01d86b23">An extremely sharp, star-shaped plate of metal.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Looks perfect for throwng!&lt;/font&gt;</content>
-	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">Pacifist&apos;s Wrath (2H)</content>
+	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">Pacifist&apos;s Wrath</content>
 	<content contentuid="h0ab8d13bg763eg48f2gb501g886ee85d35e3">Character is taking [1] from their &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; status being evaporated!</content>
 	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;Allies standing on &lt;font color=&apos;#F13324&apos;&gt;blood surfaces&lt;/font&gt; or in &lt;font color=&apos;#F13324&apos;&gt;blood clouds&lt;/font&gt; gain a &lt;font color=&apos;#33FF00&apos;&gt;[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="h0ada3a43g2943g4b09g900agd1a2b2587c3d">Sage of Staves</content>
@@ -767,6 +767,7 @@
 	<content contentuid="h51fd13d2gcfeag418ag83ecg3e32ec98126b">Character has increased armor from a combat shield.</content>
 	<content contentuid="h52408aa9gab17g47c9g91b2g9c130cb33443">&lt;font color=&apos;#FF6624&apos;&gt;Targets hit deal &lt;font color=&apos;#FF0000&apos;&gt;[1]% less damage&lt;/font&gt; until their turn ends, while you deal &lt;font color=&apos;#33FF00&apos;&gt;[2]% more damage to them&lt;/font&gt; until your turn ends.&lt;/font&gt;</content>
 	<content contentuid="h5262f340g9ae1g4659gbff9ge7ffa48745f0">Displacement Charge</content>
+	<content contentuid="h5264ef62gdc22g401fg8b62g303379cd7693">Wooden Katana</content>
 	<content contentuid="h5266cde0g6ce8g45e1gbab6g2ca4b3fbb101">Activate &lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt;</content>
 	<content contentuid="h52718af4gd3c1g4d32g968egc807f80c9830">Acolyte&apos;s Quarterstaff</content>
 	<content contentuid="h5290b499ga959g4addg8b01g6ccb4a5fbda4">Champion of Beer</content>
@@ -2144,7 +2145,7 @@
 	<content contentuid="hea65adb5g3567g4b08gb788gca45e36dea33">Rifleman</content>
 	<content contentuid="hea6c778ega59ag481bga0e0g7efe3348f44c">Dusty Book</content>
 	<content contentuid="hea6f639cg0d5dg45fegae8dg6d112d0057fa">Yamato&apos;s Edge</content>
-	<content contentuid="hea7b370fg93b8g4c74g9ebbgfc757898ff2c">Pacifist&apos;s Wrath (1H)</content>
+	<content contentuid="hea7b370fg93b8g4c74g9ebbgfc757898ff2c">Pacifist&apos;s Wrath</content>
 	<content contentuid="hea81e505gc83fg4ac1gbed5g7b03511ff083">&lt;font color=&apos;#4197E2&apos;&gt;Attuned to Water&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#4197E2&apos;&gt;Douses surfaces.&lt;/font&gt;</content>
 	<content contentuid="hea8585b2gae30g46efga47egf7afed684cc8">Param Test&lt;br&gt;Status_Arrowhead_Fire:Damage [1]&lt;br&gt;Projectile_Fireball:Damage [2]</content>
 	<content contentuid="hea8e7051gfc68g4d9dgaba8g7c871bbd4056">&lt;font color=&apos;#F19824&apos;&gt;The knife thrown has a &lt;font color=&apos;#CC33FF&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance]%&lt;/font&gt; to be &lt;font color=&apos;#00FFAA&apos;&gt;coated in poison or explosive oil&lt;/font&gt;, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.&lt;/font&gt;</content>
