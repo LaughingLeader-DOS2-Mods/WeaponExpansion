@@ -36,7 +36,6 @@ Uniques = {
 	Bible = UniqueData:Create("bcc43f30-b009-4b42-a4de-1c85a25b522a", ProgressionData.Bible, {Tag="LLWEAPONEX_UniqueBible"}),
 	Blunderbuss = UniqueData:Create("cd6c2b7d-ee74-401b-9866-409c45ae9413", ProgressionData.Blunderbuss, {Tag="LLWEAPONEX_UniqueBlunderbuss"}),
 	Bokken = UniqueData:Create("6d75d449-e021-4b4d-ad2d-c0873127c3b3", ProgressionData.Bokken, {Tag="LLWEAPONEX_UniqueBokken2H"}),
-	BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData.BokkenOneHanded, {Tag="LLWEAPONEX_UniqueBokken1H"}),
 	ChaosEdge = UniqueData:Create("61bbcd14-82a2-4efc-9a66-ac4b8a1310cf", ProgressionData.ChaosEdge, {Tag="LLWEAPONEX_UniqueRunebladeChaosGreatsword"}),
 	BasilusDagger = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03", ProgressionData.BasilusDagger, {Tag="LLWEAPONEX_UniqueBasilusDagger"}),
 	DeathEdge = UniqueData:Create("ea775987-18a6-4947-bb7c-3eea55a6f875", ProgressionData.DeathEdge, {Tag="LLWEAPONEX_UniqueDeathEdge"}),
@@ -55,10 +54,19 @@ Uniques = {
 	OgreScroll = UniqueData:Create("cc4d26df-c8c4-458e-b88f-610387741533", ProgressionData.OgreScroll, {Tag="LLWEAPONEX_UniqueOgreScroll"}),
 	Omnibolt = UniqueData:Create("dec81eed-fcab-48cc-bd67-0431abe4260c", ProgressionData.Omnibolt, {Tag="LLWEAPONEX_UniqueOmniboltGreatbow"}),
 	PowerPole = UniqueData:Create("da0ac3e5-8a9e-417c-b516-dc8cd9245d0e", ProgressionData.PowerPole, {Tag="LLWEAPONEX_UniquePowerPole"}),
-	WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe"}),
 	WarchiefHalberd = UniqueData:Create("6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", ProgressionData.WarchiefHalberd, {Tag="LLWEAPONEX_UniqueWarchiefHalberdSpear"}),
 	Wraithblade = UniqueData:Create("c68b5afa-2574-471d-85ac-0738ee0a6393", ProgressionData.Wraithblade, {Tag="LLWEAPONEX_UniqueWraithblade"}),
 }
+
+--Uniques.ArmCannonWeapon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8", ProgressionData.ArmCannonWeapon, {Tag="LLWEAPONEX_RunicCannonWeapon", LinkedItem=Uniques.ArmCannon, CanMoveToVendingMachine=false})
+--Uniques.ArmCannonWeapon.CanMoveToVendingMachine = false
+Uniques.MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", LinkedItem=Uniques.MagicMissileWand, CanMoveToVendingMachine=false})
+
+Uniques.BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData.BokkenOneHanded, {Tag="LLWEAPONEX_UniqueBokken1H", LinkedItem=Uniques.Bokken, CanMoveToVendingMachine=false})
+Uniques.Bokken.LinkedItem = Uniques.BokkenOneHanded
+
+Uniques.WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false})
+Uniques.WarchiefHalberd.LinkedItem = Uniques.WarchiefAxe
 
 function UniqueManager.GetDataByTag(tag)
 	for k,v in pairs(Uniques) do
@@ -79,9 +87,6 @@ function UniqueManager.GetDataByItem(item)
 	end
 	return nil
 end
-
---Uniques.ArmCannonWeapon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8", ProgressionData.ArmCannonWeapon, {Tag="LLWEAPONEX_RunicCannonWeapon", Link=Uniques.ArmCannon})
---Uniques.MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", Linked=Uniques.MagicMissileWand}),
 
 ---For getting unique data by UUID.
 ---@type table<string,UniqueData>

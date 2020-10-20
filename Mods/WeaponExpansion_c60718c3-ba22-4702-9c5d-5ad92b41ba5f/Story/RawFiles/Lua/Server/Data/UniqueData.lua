@@ -17,6 +17,7 @@ local UniqueData = {
 	LastProgressionLevel = 0,
 	ProgressionData = nil,
 	CanMoveToVendingMachine = true,
+	LinkedItem = nil,
 	Tag = "",
 	Copies = nil
 }
@@ -42,7 +43,8 @@ function UniqueData:Create(uuid, progressionData, params)
 		ProgressionData = progressionData,
 		CanMoveToVendingMachine = true,
 		Tag = "",
-		Copies = {}
+		Copies = {},
+		LinkedItem = nil,
 	}
 	setmetatable(this, self)
 	if params ~= nil then
@@ -173,7 +175,11 @@ local function MoveToRegionPosition(self, region, item)
 		ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
 	else
 		-- Fallback
-		ItemToInventory(self.UUID, NPC.VendingMachine, 1, 0, 0)
+		if self.CanMoveToVendingMachine ~= false then
+			ItemToInventory(self.UUID, NPC.VendingMachine, 1, 0, 0)
+		else
+			ItemToInventory(self.UUID, NPC.UniqueHoldingChest, 1, 0, 0)
+		end
 	end
 end
 

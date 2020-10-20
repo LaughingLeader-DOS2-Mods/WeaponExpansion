@@ -78,6 +78,7 @@ local bonuses = {
 		[14] = ue:Create("Air", 20),
 		[15] = runeslot3,
 	},
+	ArmCannonWeapon = {},
 	AssassinHandCrossbow = {
 		[2] = ue:Create("Sneaking", 1),
 		[4] = ue:Create("WitsBoost", "1"),
