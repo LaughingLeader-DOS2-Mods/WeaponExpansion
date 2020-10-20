@@ -5,6 +5,7 @@ LLWEAPONEX_Notifications_BoltInsertedInNonCrossbow	<font color='#CD1F1F'>Bolts c
 LLWEAPONEX_Notifications_HandCrossbow_InsertBolts_NotEquipped	<font color='#FF1155' size='22'>Insert Failed - No Hand Crossbow Equipped</font>	h4504bbc0gb7a6g42c3ga57eg83f3e78c0db2
 LLWEAPONEX_Notifications_UnequipDragonBoneClawsFailed	<font color='#CD1F1F'>To unequip the Dragon Bone Claws, unequip your glove armor instead of the weapon.</font>	h03bcab3bgb227g4c71gb14egf3964ebe80e2
 LLWEAPONEX_Notifications_MasteryRankedUp	<font color='#F7BA14'>[1]</font> increased to rank <font color='#00FF00'>[2]</font>	hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c
+LLWEAPONEX_Notifications_CharacterMasteryRankedUp	[1] reached <font color='#F7BA14'>[2]</font> rank <font color='#00FF00'>[3]</font>	hb545218bgc1f1g4b7cg93c4gaa8a48e04f58
 LLWEAPONEX_Notifications_NoMasteriesForSummons	<font color='#FF001F'>Summons Can't Gain Mastery Experience</font>	h7db7ef8bg57b5g4f1dgbb54g6409d807d794
 LLWEAPONEX_Notifications_NoMasteriesForFollowers	<font color='#FF001F'>Followers Can't Gain Mastery Experience</font>	hfe292736g1003g4d08gab35ge3250879be98
 LLWEAPONEX_Notifications_BlockedArrowOnGun	<font color='#FF0000' size='18'>Arrows require a Bow or Crossbow.</font>	h76bc24d7gd236g4ec3g8323g7f791fe738fd

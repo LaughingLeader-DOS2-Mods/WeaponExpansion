@@ -32,11 +32,12 @@ local function MasteryLeveledUp(uuid,mastery,last,next)
 	local masteryData = Masteries[mastery]
 	local masteryName = string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName):gsub("%[2%]", next)
-	if CharacterIsPlayer(uuid) == 1 and CharacterIsControlled(uuid) == 1 then
-		ShowNotification(uuid, text)
-	else
-		CharacterStatusText(uuid, text)
-	end
+	CharacterStatusText(uuid, text)
+	-- if CharacterIsPlayer(uuid) == 1 and CharacterIsControlled(uuid) == 1 then
+	-- 	ShowNotification(uuid, text)
+	-- else
+	-- 	CharacterStatusText(uuid, text)
+	-- end
 	TagMasteryRanks(uuid,mastery,next)
 
 	-- Set the special rank 1+ unarmed tags.
