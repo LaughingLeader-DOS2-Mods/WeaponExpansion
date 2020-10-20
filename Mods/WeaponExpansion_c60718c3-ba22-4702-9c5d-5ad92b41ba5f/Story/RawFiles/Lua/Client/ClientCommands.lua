@@ -74,7 +74,7 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 			if Vars.DebugEnabled then
 				print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]", stats.Name))
 			end
-		else
+		elseif Vars.DebugEnabled then
 			Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s) UUID(%s) Slot(%s) Owner(%s)", data.NetID, data.UUID, data.Slot, data.Owner))
 		end
 	end
