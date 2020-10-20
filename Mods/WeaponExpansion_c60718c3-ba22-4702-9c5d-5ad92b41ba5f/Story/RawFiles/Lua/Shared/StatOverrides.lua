@@ -131,7 +131,7 @@ local function apply_overrides(stats)
 			if property == "SkillProperties" or property == "ExtraProperties" then
 				appendProperties(statname, property, value)
 			else
-				LeaderLib.PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [",value,"]")
+				printd("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [",value,"]")
 				Ext.StatSetAttribute(statname, property, value)
 			end
         end

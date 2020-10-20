@@ -15,7 +15,7 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 				end
 				CharacterStatusText(hitData.Target, text)
 			end
-			LeaderLib.PrintDebug("[MasteryBonuses:WhirlwindBonus] Exploded (",bleedingTurns,") rupture projectiles on ("..hitData.Target..").")
+			printd("[MasteryBonuses:WhirlwindBonus] Exploded (",bleedingTurns,") rupture projectiles on ("..hitData.Target..").")
 		end
 	end
 end)

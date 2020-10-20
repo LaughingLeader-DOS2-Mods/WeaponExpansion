@@ -490,7 +490,7 @@ local function printValue(ui, index)
 		end
 	end
 	if val ~= nil then
-		LeaderLib.PrintDebug(" ["..index.."] = ["..tostring(val).."]")
+		printd(" ["..index.."] = ["..tostring(val).."]")
 	end
 end
 
@@ -502,15 +502,15 @@ end
 
 local function tooltipEntryMatch(tooltipEntryType, enum, index)
 	if tooltipEntryType == enum then
-		LeaderLib.PrintDebug("["..index.."] = "..LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipEntryType].." | "..tooltipEntryType)
+		printd("["..index.."] = "..LeaderLib.Data.UI.TOOLTIP_ENUM[tooltipEntryType].." | "..tooltipEntryType)
 		return true
 	end
 	return false
 end
 
 local function DumpTooltipArray(ui)
-	LeaderLib.PrintDebug("[DumpTooltipArray]")
-	LeaderLib.PrintDebug("=======================")
+	printd("[DumpTooltipArray]")
+	printd("=======================")
 	local index = 0
 	local totalNil = 0
 	local typeError = false
@@ -739,7 +739,7 @@ local function DumpTooltipArray(ui)
 				index = index + 1
 				local spacing = ui:GetValue("tooltip_array", "number", index)
 				if spacing ~= nil and spacing > 0 then
-					LeaderLib.PrintDebug(" ["..index.."] = Properties Count ["..tostring(math.floor(spacing)).."]")
+					printd(" ["..index.."] = Properties Count ["..tostring(math.floor(spacing)).."]")
 					local i = 0
 					while i < spacing do
 						index = increaseIndex(ui, index)
@@ -750,7 +750,7 @@ local function DumpTooltipArray(ui)
 				index = index + 1
 				local resistIndex = ui:GetValue("tooltip_array", "number", index)
 				if resistIndex ~= nil and resistIndex > 0 then
-					LeaderLib.PrintDebug(" ["..index.."] = Resistances Count ["..tostring(math.floor(resistIndex)).."]")
+					printd(" ["..index.."] = Resistances Count ["..tostring(math.floor(resistIndex)).."]")
 					local i = 0
 					while i < resistIndex do
 						index = increaseIndex(ui, index)
@@ -971,7 +971,7 @@ local function DumpTooltipArray(ui)
 		end
 		index = index + 1
 	end
-	LeaderLib.PrintDebug("=======================")
+	printd("=======================")
 end
 
 return {

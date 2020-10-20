@@ -155,7 +155,7 @@ end
 
 local function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
-    LeaderLib.PrintDebug("[WeaponExpansion] Running debug init code.")
+    printd("[WeaponExpansion] Running debug init code.")
     
     local host = CharacterGetHostCharacter()
 
@@ -176,7 +176,7 @@ local function DebugInit()
     --ContainerIdentifyAll(chest)
     --local tx,ty,tz = FindValidPosition(x,y,z,12.0,chest)
     --TeleportToPosition(chest, tx,ty,tz)
-    --LeaderLib.PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
+    --printd("[WeaponExpansion:DebugInit] Generated treasure chest.")
     --TeleportToRandomPosition(chest, 8.0, "")
 
     --OpenMasteryMenu_Start(host)

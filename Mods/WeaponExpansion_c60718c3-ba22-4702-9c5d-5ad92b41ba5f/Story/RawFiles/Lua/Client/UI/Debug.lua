@@ -4,7 +4,7 @@ local function MouseTest()
 	if ui ~= nil then
 		local mouseIconEvent = function(ui, call, ...)
 			local params = {...}
-			LeaderLib.PrintDebug("[WeaponExpansion:UI/Init.lua:mouseIconEvent] Function running params("..LeaderLib.Common.Dump(params)..")")
+			printd("[WeaponExpansion:UI/Init.lua:mouseIconEvent] Function running params("..LeaderLib.Common.Dump(params)..")")
 		end
 		Ext.RegisterUIInvokeListener(ui, "setTexture", mouseIconEvent)
 		Ext.RegisterUIInvokeListener(ui, "setCrossVisible", mouseIconEvent)

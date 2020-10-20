@@ -4,8 +4,6 @@ local MessageData = LeaderLib.Classes["MessageData"]
 local CharacterMasteryData = MasteryDataClasses.CharacterMasteryData
 local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
 
-local printd = LeaderLib.PrintDebug
-
 function OpenMasteryMenu_Start(uuid, id)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
 	local masteries = {}
@@ -71,8 +69,8 @@ end)
 
 local statusDummy = "S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15"
 local function RequestStatusTooltip(call,datastr)
-	LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Data:")
-	LeaderLib.PrintDebug(datastr)
+	printd("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Data:")
+	printd(datastr)
 	local data = MessageData:CreateFromString(datastr)
 	if data ~= nil then
 		local character = Ext.GetCharacter(data.ID)
@@ -101,8 +99,8 @@ local function RequestStatusTooltip(call,datastr)
 			data.Params.Host = host
 
 			local resultStr = data:ToString()
-			LeaderLib.PrintDebug("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Sending data back to client:")
-			LeaderLib.PrintDebug(resultStr)
+			printd("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Sending data back to client:")
+			printd(resultStr)
 			Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_MasteryMenu_StatusHandleRetrieved", resultStr)
 		end
 	else

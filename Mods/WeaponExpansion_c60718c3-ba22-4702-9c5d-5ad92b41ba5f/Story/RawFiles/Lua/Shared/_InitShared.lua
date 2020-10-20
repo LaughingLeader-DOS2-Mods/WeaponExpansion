@@ -163,10 +163,10 @@ local function LoadExperienceVariables()
 		lastRankExpGain = rankGain
 		lastRequiredNextLevelExperience = requiredNextLevelExperience
 	end
-	--LeaderLib.PrintDebug("[WeaponExpansion] Loaded mastery experience variables:")
-	--LeaderLib.PrintDebug("==========================")
-	--LeaderLib.PrintDebug(LeaderLib.Common.Dump(RankVariables))
-	--LeaderLib.PrintDebug("==========================")
+	--printd("[WeaponExpansion] Loaded mastery experience variables:")
+	--printd("==========================")
+	--printd(LeaderLib.Common.Dump(RankVariables))
+	--printd("==========================")
 
 	Mastery.Variables.MaxRank = math.floor(maxRank)
 	Mastery.Variables.RankVariables = RankVariables
