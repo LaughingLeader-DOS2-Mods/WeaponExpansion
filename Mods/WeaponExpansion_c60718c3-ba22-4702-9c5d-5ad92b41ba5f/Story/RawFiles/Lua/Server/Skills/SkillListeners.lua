@@ -169,7 +169,7 @@ local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
 ---@param data HitData
 LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, data)
 	if state == SKILL_STATE.HIT and data.Success then
-		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Ext.IsDeveloperMode()
+		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Vars.DebugEnabled == true
 		if canStealFrom then
 			local attacker = Ext.GetCharacter(char)
 			local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0

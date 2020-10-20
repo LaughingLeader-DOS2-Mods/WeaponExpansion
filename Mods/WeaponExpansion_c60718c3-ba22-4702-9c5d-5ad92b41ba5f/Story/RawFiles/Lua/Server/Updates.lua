@@ -9,25 +9,6 @@ LeaderLib.RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", 
 		ItemToInventory("927669c3-b885-4b88-a0c2-6825fbf11af2", "80976258-a7a5-4430-b102-ba91a604c23f")
 	end
 
-	if last < 153092096 then
-		if not Ext.IsDeveloperMode() then
-			if not IsPlayer(Origin.Harken) then
-				if not IsPlayer(Uniques.AnvilMace.Owner) then
-					Uniques.AnvilMace:Transfer(NPC.VendingMachine)
-				end
-				--Uniques.HarkenPowerGloves:Transfer(NPC.VendingMachine)
-			end
-			if not IsPlayer(Origin.Korvash) then
-				if not IsPlayer(Uniques.DeathEdge.Owner) then
-					Uniques.DeathEdge:Transfer(NPC.VendingMachine)
-				end
-				if not IsPlayer(Uniques.DemonGauntlet.Owner) then
-					Uniques.DemonGauntlet:Transfer(NPC.VendingMachine)
-				end
-			end
-		end
-	end
-
 	-- Tag updating
 	for _,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local uuid = db[1]

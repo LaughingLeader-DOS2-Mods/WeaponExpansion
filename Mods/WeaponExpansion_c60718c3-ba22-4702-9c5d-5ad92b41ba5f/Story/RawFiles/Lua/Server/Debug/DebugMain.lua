@@ -194,7 +194,7 @@ Ext.RegisterConsoleCommand("weaponex_removemastery", function(call, mastery)
     Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(host, mastery)
 end)
 
-if Ext.IsDeveloperMode() then
+if Vars.DebugEnabled then
     Ext.RegisterConsoleCommand("weaponex_masterall", function(call)
         local host = CharacterGetHostCharacter()
         for mastery,masterData in pairs(Masteries) do

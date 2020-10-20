@@ -246,7 +246,7 @@ end
 local UniqueItemAttributes = {
     Weapon = {
         --IsTwoHanded = "YesNo",
-        ["DamageType"] = "Damage Type",
+        ["Damage Type"] = "Damage Type",
         --Damage = "ConstantInt",
         --["Damage Range"] = "ConstantInt",
         DamageBoost = "ConstantInt",
@@ -459,7 +459,7 @@ local function StatOverrides_Init()
 		Ext.PrintError(err)
 	end
 
-	if Ext.IsDeveloperMode() then
+	if Vars.DebugEnabled then
 		for stat,b in pairs(player_stats) do
 			if b and Ext.StatGetAttribute(stat, "Accuracy") == 95 then
 				Ext.StatSetAttribute(stat, "Accuracy", 100)

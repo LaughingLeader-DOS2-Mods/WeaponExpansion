@@ -763,12 +763,19 @@ Skills.Damage.Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage = BalrinSkillDama
 Skills.Damage.Projectile_LLWEAPONEX_Throw_UniqueAxe_A = BalrinSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand = BalrinSkillDamage
 
+---@param attacker StatCharacter
 Skills.Damage.Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage = function(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
 	---@type StatItem
-	local weapon = attacker.MainWeapon
+	local weapon = nil
+	if attacker.MainWeapon ~= nil and string.find(attacker.MainWeapon.Tags, "LLWEAPONEX_BasilusDagger_Equipped") then
+		weapon = attacker.MainWeapon
+	end
 	if attacker.OffHandWeapon ~= nil and string.find(attacker.OffHandWeapon.Tags, "LLWEAPONEX_BasilusDagger_Equipped") then
 		weapon = attacker.OffHandWeapon
+	end
+	if weapon == nil then
+		weapon = GameHelpers.Ext.CreateWeaponTable("WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A", attacker.Level)
 	end
 	if isTooltip ~= true then
 		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon, {WeaponType="Rifle"})

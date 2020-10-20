@@ -102,7 +102,7 @@ Ext.RegisterListener("GroundHit", function (caster, position, damageList)
 				Ext.PrintError(err)
 			end
 		end
-	elseif Ext.IsDeveloperMode() then
+	elseif Vars.DebugEnabled then
 		Ext.PrintError("[LLWEAPONEX:GroundHit] caster is nil?", Common.Dump(position))
 	end
 end)

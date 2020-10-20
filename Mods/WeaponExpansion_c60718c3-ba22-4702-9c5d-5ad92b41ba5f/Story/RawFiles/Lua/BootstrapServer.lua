@@ -239,9 +239,9 @@ local function SessionSetup()
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
-    if Ext.IsDeveloperMode() then
-        Mods.LeaderLib.AddDebugInitCall(debugInit)
-    end
+    -- Vars.DebugEnabled then
+    --     Mods.LeaderLib.AddDebugInitCall(debugInit)
+    -- end
     
     for i,callback in pairs(LoadPersistentVars) do
         local status,err = xpcall(callback, debug.traceback)

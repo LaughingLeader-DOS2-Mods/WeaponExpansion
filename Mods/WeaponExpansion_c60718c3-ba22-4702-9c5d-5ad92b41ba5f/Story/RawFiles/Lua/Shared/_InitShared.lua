@@ -32,7 +32,7 @@ Vars = {
 	GAME_STARTED = false,
 	SEND_USER_ID = false,
 	isInCharacterCreation = false,
-	DebugEnabled = Ext.IsDeveloperMode()
+	DebugEnabled = Ext.IsDeveloperMode() == true
 }
 
 Skills = {
@@ -100,7 +100,7 @@ local initSettings = Ext.Require("Shared/Settings.lua")
 ---@type ModSettings
 Settings = nil
 
-if Ext.IsDeveloperMode() then
+if Vars.DebugEnabled then
 	--Ext.Require("Shared/Debug/GameMathTracing.lua")
 end
 

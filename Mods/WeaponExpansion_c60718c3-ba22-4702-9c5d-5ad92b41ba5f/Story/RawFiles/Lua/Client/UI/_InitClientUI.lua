@@ -140,7 +140,7 @@ local function OnCCEvent(ui, call, param1, param2)
 end
 
 local debug = nil
-if Ext.IsDeveloperMode() then
+if Vars.DebugEnabled then
 	debug = Ext.Require("Client/UI/Debug.lua")
 end
 
@@ -184,7 +184,7 @@ local function LLWEAPONEX_Client_SessionLoaded()
 	masteryMenu.Init()
 	--tooltipOverrides.Init()
 	tooltipHandler.Init()
-	if Ext.IsDeveloperMode() then
+	if Vars.DebugEnabled then
 		debug.Client_UIDebugTest()
 		--debug.MouseTest()
 	end

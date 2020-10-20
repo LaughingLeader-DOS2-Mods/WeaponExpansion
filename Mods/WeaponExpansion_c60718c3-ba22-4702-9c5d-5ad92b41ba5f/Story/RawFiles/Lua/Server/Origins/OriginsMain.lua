@@ -32,7 +32,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Harken, "Opportunist")
 		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		if Ext.IsDeveloperMode() then
+		if Vars.DebugEnabled then
 			LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
 				Uniques.AnvilMace:Transfer(Origin.Harken, true)
 				Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
@@ -58,7 +58,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
-		if Ext.IsDeveloperMode()then
+		if Vars.DebugEnabled then
 			LeaderLib.StartOneshotTimer("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
 				Uniques.DeathEdge:Transfer(Origin.Korvash, true)
 				Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
@@ -71,7 +71,21 @@ function Origins_InitCharacters(region, isEditorMode)
 		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
 	end
 
-	if Ext.IsDeveloperMode() or isEditorMode == 1 then		
+	if not Vars.DebugEnabled then
+		if not IsPlayer(Origin.Harken) and not IsPlayer(Uniques.AnvilMace.Owner) then
+			Uniques.AnvilMace:Transfer(NPC.VendingMachine)
+		end
+		if not IsPlayer(Origin.Korvash) then
+			if not IsPlayer(Uniques.DeathEdge.Owner) then
+				Uniques.DeathEdge:Transfer(NPC.VendingMachine)
+			end
+			if not IsPlayer(Uniques.DemonGauntlet.Owner) then
+				Uniques.DemonGauntlet:Transfer(NPC.VendingMachine)
+			end
+		end
+	end
+
+	if Vars.DebugEnabled then
 		local host = CharacterGetHostCharacter()
 		local user = CharacterGetReservedUserID(host)
 		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then

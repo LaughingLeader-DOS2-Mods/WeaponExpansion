@@ -181,7 +181,7 @@ function OnItemEquipped(uuid,itemUUID)
 					if isPlayer then
 						local equippedTag = Tags.WeaponTypes[tag]
 						if equippedTag ~= nil then
-							if Ext.IsDeveloperMode() then
+							if Vars.DebugEnabled then
 								if IsTagged(uuid, equippedTag) == 0 then
 									printd("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
 								end

@@ -1,6 +1,6 @@
 local StartOneshotTimer = LeaderLib.StartOneshotTimer
 
-if Ext.IsDeveloperMode() then
+if Vars.DebugEnabled then
 	Ext.RegisterConsoleCommand("weaponex_tagboost", function()
 		local host = CharacterGetHostCharacter()
 		local weapon = CharacterGetEquippedWeapon(host)
@@ -70,3 +70,7 @@ if Ext.IsDeveloperMode() then
 		EquipmentManager.SyncItemStatChanges(item, {Requirements=stat.Requirements})
 	end)
 end
+
+Ext.RegisterConsoleCommand("llweaponex_tovendor", function(cmd)
+	TeleportTo(CharacterGetHostCharacter(), NPC.VendingMachine)
+end)

@@ -409,7 +409,7 @@ local function CloneItem(self, item, template, stat, level)
 		self.UUID = cloned.MyGuid
 		ItemRemove(item.MyGuid)
 	else
-		print("Error constructing item?", item.MyGuid)
+		Ext.PrintError("Error constructing item?", item.MyGuid)
 	end
 end
 
@@ -471,7 +471,7 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 	return true
 end
 
-if Ext.IsDeveloperMode() then
+if Vars.DebugEnabled then
 	function UniqueData:TryTransform(template)
 		local item = Ext.GetItem(self.UUID)
 		local level = CharacterGetLevel(CharacterGetHostCharacter())

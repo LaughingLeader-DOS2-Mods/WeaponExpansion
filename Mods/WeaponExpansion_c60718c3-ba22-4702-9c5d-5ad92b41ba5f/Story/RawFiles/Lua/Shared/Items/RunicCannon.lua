@@ -1,7 +1,7 @@
 if Ext.IsServer() then
 
 	function ArmCannon_OnEnergyChanged(character, item, last, next)
-		if Ext.IsDeveloperMode() then
+		if Vars.DebugEnabled then
 			Ext.Print(string.format("[LLWEAPONEX:ArmCannon_OnEnergyChanged] character(%s) item(%s) last(%s) next(%s)", character, item, last, next))
 		end
 		last = tonumber(last)

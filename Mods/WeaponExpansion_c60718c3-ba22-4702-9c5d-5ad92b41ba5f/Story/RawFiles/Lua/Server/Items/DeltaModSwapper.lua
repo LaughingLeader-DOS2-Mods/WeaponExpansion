@@ -468,7 +468,7 @@ end
 ---@param item EsvItem
 Ext.RegisterListener("TreasureItemGenerated", OnTreasureItemGenerate)
 
-if Ext.IsDeveloperMode() then
+if Vars.DebugEnabled then
 	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
 		local host = CharacterGetHostCharacter()
 		local weapon = CharacterGetEquippedWeapon(host)
