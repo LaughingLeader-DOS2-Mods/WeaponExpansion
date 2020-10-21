@@ -108,7 +108,7 @@ local function GetRandomVanquisherTarget(casterData)
 	local tbl = {}
 	for i,v in pairs(casterData) do
 		if v.Valid then
-			table.insert(tbl. v)
+			table.insert(tbl, v)
 		end
 	end
 	return Common.GetRandomTableEntry(tbl)
@@ -351,9 +351,15 @@ local function OnKatanaHit(target, source, damage, handle, masteryBonuses, tag, 
 	ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, tag, skill)
 	if damage > 0 and HasActiveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
 		RemoveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
-		local damageBonus = Ext.ExtraData.LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus or 50
+		local damageBonus = (Ext.ExtraData.LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus or 50) * 0.01
 		if damageBonus > 0 then
-			GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBonus, false)
+			GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBonus)
+			CharacterStatusText(source, "LLWEAPONEX_StatusText_Katana_VaultBoost")
+			if ObjectIsCharacter(target) == 1 then
+				PlayEffect(target, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")
+			else
+				PlayEffect(source, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
+			end
 		end
 	end
 end

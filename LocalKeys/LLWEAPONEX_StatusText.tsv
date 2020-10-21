@@ -28,3 +28,4 @@ LLWEAPONEX_StatusText_Pistol_MarkedCrit	<font color='#FF337F' size='22'><p align
 LLWEAPONEX_StatusText_FlurryAxeCombo	<font color='#E4CE22' size='22'>Flurry Axe Combo! +1 AP</font>	hddbc42dfg304bg48ddga684g1bd7dff813cc
 LLWEAPONEX_StatusText_BasilusHauntedDamage_Normal	<font color='#00FFCC' size='22'>Haunted!</font>	h011e1b92g4ce2g4e99g890eg6be8a6a58a28
 LLWEAPONEX_StatusText_BasilusHauntedDamage_Backstab	<font color='#00FFCC' size='22'>Haunted Backstab Critical!</font>	he24285d8geb08g4177g8454g78c27e41dab2
+LLWEAPONEX_StatusText_Katana_VaultBoost	<font color='#FF337F' size='22'><p align='center'>Flanking Strike!</p></font>	hfe9263e0g33aag4459g8710gb0ff55b2427f
