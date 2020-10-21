@@ -251,6 +251,19 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 						MoveToRegionPosition(self, region, item)
 					end
 					ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
+				else
+					if self.Owner == NPC.VendingMachine and not self.CanMoveToVendingMachine then
+						if self.LinkedItem ~= nil then
+							local linkedOwner = TryGetOwner(Ext.GetItem(self.LinkedItem))
+							if linkedOwner == NPC.UniqueHoldingChest then
+								-- Skip moving out of the vending machine
+							else
+								ItemToInventory(self.UUID, NPC.UniqueHoldingChest, 1, 0, 0)
+							end
+						else
+							ItemToInventory(self.UUID, NPC.UniqueHoldingChest, 1, 0, 0)
+						end
+					end
 				end
 				self.Initialized = true
 			end
