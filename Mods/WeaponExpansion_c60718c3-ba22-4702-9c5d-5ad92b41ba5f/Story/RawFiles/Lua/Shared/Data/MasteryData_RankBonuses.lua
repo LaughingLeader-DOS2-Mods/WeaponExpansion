@@ -200,8 +200,10 @@ LLWEAPONEX_HandCrossbow_Mastery3 = {},
 LLWEAPONEX_HandCrossbow_Mastery4 = {},
 LLWEAPONEX_HandCrossbow_Mastery5 = {},
 LLWEAPONEX_Katana_Mastery1 = {
-	KATANA_COMBO = {
-		Param = ts:Create("h5e2df2a5gda8dg4baeg9155gc3c50082beb4","<icon id='Rush_LLWEAPONEX_Katana_Iaido;LLWEAPONEX_KATANA_COMBO9' icon='LLWEAPONEX_Skills_Katana_Iaido;LLWEAPONEX_Status_KatanaCombo09' type='1;2'/>Basic attacks and weapon skills now apply [Key:LLWEAPONEX_KATANA_COMBO1_DisplayName], a stacking status that is removed when your turn ends. Katana mastery skills consume this status for bonus damage. Backstabs or critical hits apply two stacks."),
+	KATANA_COMBO = {},
+	KATANA_VAULT = {
+		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
+		Param = ts:Create("h78ab607fgbbb0g46adgb3f9g271749a251bf","<font color='#F19966'>After teleporting, your next basic attack or weapon skill will deal +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% additional damage.</font>"),
 	},
 },
 LLWEAPONEX_Katana_Mastery2 = {},

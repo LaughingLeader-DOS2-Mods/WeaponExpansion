@@ -333,12 +333,30 @@ local function ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, 
 	end
 end
 
-RegisterHitListener("OnHit", "LLWEAPONEX_Katana", ApplyKatanaCombo)
-RegisterHitListener("OnWeaponSkillHit", "LLWEAPONEX_Katana", ApplyKatanaCombo)
-
 RegisterStatusListener("StatusApplied", "LLWEAPONEX_HELMSPLITTER", function(target, status, source)
 	if not Ext.IsModLoaded(MODID.DivinityUnleashed) and not Ext.IsModLoaded(MODID.ArmorMitigation) then
 		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor")
 		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor")
     end
 end)
+
+MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_EnemyVault"}, {"KATANA_VAULT"}, function(bonuses, skill, char, state, skillData)
+	if state == SKILL_STATE.HIT then
+		ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", 6.0, 0, char)
+		StatusManager.SaveTurnEndStatus(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", char)
+	end
+end)
+
+local function OnKatanaHit(target, source, damage, handle, masteryBonuses, tag, skill)
+	ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, tag, skill)
+	if damage > 0 and HasActiveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
+		RemoveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
+		local damageBonus = Ext.ExtraData.LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus or 50
+		if damageBonus > 0 then
+			GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBonus, false)
+		end
+	end
+end
+
+RegisterHitListener("OnHit", "LLWEAPONEX_Katana", OnKatanaHit)
+RegisterHitListener("OnWeaponSkillHit", "LLWEAPONEX_Katana", OnKatanaHit)
