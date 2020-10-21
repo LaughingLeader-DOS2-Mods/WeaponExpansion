@@ -165,7 +165,6 @@ object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Bokken_1H",1,1,0,0,0,0,0,0
 object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
