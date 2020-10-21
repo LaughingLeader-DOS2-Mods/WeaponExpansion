@@ -106,7 +106,7 @@ local function PistolShootBonuses(skill, char, state, skillData)
 			local handle = skillData.Handle
 			if IsTagged(target, "LLWEAPONEX_Pistol_MarkedForCrit") == 1 then
 				local critMult = Ext.Round(CharacterGetAbility(char,"RogueLore") * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
-				GameHelpers.IncreaseDamage(target, char, handle, critMult, 0)
+				GameHelpers.IncreaseDamage(target, char, handle, critMult)
 				NRD_StatusSetInt(target, handle, "CriticalHit", 1)
 				NRD_StatusSetInt(target, handle, "Hit", 1)
 				NRD_StatusSetInt(target, handle, "Dodged", 0)
@@ -118,9 +118,9 @@ local function PistolShootBonuses(skill, char, state, skillData)
 			end
 			if IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
 				ClearTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
-				local damageBoost = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0)
+				local damageBoost = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0) * 0.01
 				if damageBoost > 0 then
-					GameHelpers.IncreaseDamage(target, char, handle, damageBoost * 0.01, 0)
+					GameHelpers.IncreaseDamage(target, char, handle, damageBoost)
 					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
 				end
 			end

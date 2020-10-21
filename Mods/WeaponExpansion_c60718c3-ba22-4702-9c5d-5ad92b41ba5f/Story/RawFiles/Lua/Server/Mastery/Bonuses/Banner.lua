@@ -36,9 +36,9 @@ MasteryBonusManager.RegisterSkillListener(rushSkills, {"BANNER_WARCHARGE"}, func
 			end
 		end
 		if hasStatus then
-			local bonusPercent = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_WarChargeDamageBoost", 25.0)
+			local bonusPercent = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_WarChargeDamageBoost", 25.0) *0.01
 			if bonusPercent > 0 then
-				GameHelpers.IncreaseDamage(hitData.Target, char, hitData.Handle, bonusPercent/100, 0)
+				GameHelpers.IncreaseDamage(hitData.Target, char, hitData.Handle, bonusPercent)
 			end
 		end
 	end

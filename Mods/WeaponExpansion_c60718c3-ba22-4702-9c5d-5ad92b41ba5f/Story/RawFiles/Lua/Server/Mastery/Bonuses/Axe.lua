@@ -111,16 +111,16 @@ end)
 RegisterHitListener("OnHit", "LLWEAPONEX_Axe", function(target,source,damage,handle,bonuses,tag)
 	if damage > 0 then
 		if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target, "KNOCKED_DOWN") == 1 then
-			local damageBonus = (Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus"] or 25) / 100
-			GameHelpers.IncreaseDamage(target, source, handle, damageBonus, 0)
+			local damageBonus = (Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus"] or 25) * 0.01
+			GameHelpers.IncreaseDamage(target, source, handle, damageBonus)
 		end
 		if bonuses.AXE_EXECUTIONER and HasActiveStatus(source, "AOO") == 1 then
 			if ObjectIsCharacter(target) == 1 then
-				local damageBonus = (Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_AttackOfOpportunityMaxDamageBonus"] or 50) / 100
+				local damageBonus = (Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_AttackOfOpportunityMaxDamageBonus"] or 50) * 0.01
 				local missingVitPerc = 0.0
 				local character = Ext.GetCharacter(target)
 				missingVitPerc = math.max(0.01, math.min(1, 1 - (character.Stats.CurrentVitality / character.Stats.MaxVitality) + 0.01))
-				GameHelpers.IncreaseDamage(target, source, handle, damageBonus * missingVitPerc, 0)
+				GameHelpers.IncreaseDamage(target, source, handle, damageBonus * missingVitPerc)
 			end
 		end
 	end
