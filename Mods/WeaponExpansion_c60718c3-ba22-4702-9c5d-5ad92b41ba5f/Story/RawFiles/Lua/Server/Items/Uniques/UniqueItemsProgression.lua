@@ -109,8 +109,7 @@ local bonuses = {
 		[15] = runeslot2,
 	},
 	Blunderbuss = {
-		[2] = ue:Create("Skills", "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud"),
-		[4] = ue:Create("Skills", "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud;Projectile_LLWEAPONEX_Blunderbuss_Scattershot"),
+		[4] = ue:Create("Skills", "Projectile_LLWEAPONEX_Blunderbuss_LaunchDud"),
 		[6] = ue:Create("Ranged", 1),
 		[7] = runeslot1,
 		[8] = ue:Create("Boosts", "_Boost_Weapon_LLWEAPONEX_Blunderbuss_BonusDamage_Physical;_Boost_Weapon_Damage_Fire_Large"),
