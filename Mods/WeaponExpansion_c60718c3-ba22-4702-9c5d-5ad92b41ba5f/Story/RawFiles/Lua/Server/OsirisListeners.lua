@@ -185,6 +185,7 @@ end
 local firstLoad = true
 
 LeaderLib.RegisterListener("Initialized", function(region)
+	UniqueManager.LoadLinkedUniques()
 	region = region or SharedData.RegionData.Current
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then

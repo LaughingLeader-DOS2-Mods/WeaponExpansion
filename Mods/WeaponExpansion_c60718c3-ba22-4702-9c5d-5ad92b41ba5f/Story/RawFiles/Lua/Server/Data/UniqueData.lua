@@ -17,6 +17,7 @@ local UniqueData = {
 	LastProgressionLevel = 0,
 	ProgressionData = nil,
 	CanMoveToVendingMachine = true,
+	---@type UniqueData
 	LinkedItem = nil,
 	Tag = "",
 	Copies = nil
@@ -87,12 +88,12 @@ local function TryGetOwner(item, inventoryOnly)
 			end
 		end
 	end
-	if item.ParentInventoryHandle ~= nil then
-		local object = Ext.GetGameObject(item.ParentInventoryHandle)
-		if object ~= nil then
-			return object.MyGuid
-		end
-	end
+	-- if item.ParentInventoryHandle ~= nil then
+	-- 	local object = Ext.GetGameObject(item.ParentInventoryHandle)
+	-- 	if object ~= nil then
+	-- 		return object.MyGuid
+	-- 	end
+	-- end
 	local inventory = StringHelpers.GetUUID(GetInventoryOwner(item.MyGuid))
 	if not StringHelpers.IsNullOrEmpty(inventory) then
 		return inventory
@@ -253,15 +254,16 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 					ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
 				else
 					if self.Owner == NPC.VendingMachine and not self.CanMoveToVendingMachine then
-						if self.LinkedItem ~= nil then
-							local linkedOwner = TryGetOwner(Ext.GetItem(self.LinkedItem))
+						local linkedItem = UniqueManager.GetLinkedUnique(uuid)
+						if linkedItem ~= nil then
+							local linkedOwner = TryGetOwner(Ext.GetItem(linkedItem))
 							if linkedOwner == NPC.UniqueHoldingChest then
 								-- Skip moving out of the vending machine
 							else
-								ItemToInventory(self.UUID, NPC.UniqueHoldingChest, 1, 0, 0)
+								ItemToInventory(uuid, NPC.UniqueHoldingChest, 1, 0, 0)
 							end
 						else
-							ItemToInventory(self.UUID, NPC.UniqueHoldingChest, 1, 0, 0)
+							ItemToInventory(uuid, NPC.UniqueHoldingChest, 1, 0, 0)
 						end
 					end
 				end

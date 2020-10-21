@@ -108,68 +108,39 @@ Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
 	end
 end)
 
-local LinkedUniques = {
-	["MagicMissileWand"] = {
-		--S_WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_f8958c1e-1c9d-4fa9-b03f-b883c65f95c3
-		--S_WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_292b4b04-4ba1-4fa3-96df-19eab320c50f
-		{"f8958c1e-1c9d-4fa9-b03f-b883c65f95c3", "292b4b04-4ba1-4fa3-96df-19eab320c50f"}
-	},
-	["Bokken"] = {
-		--S_WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_2H_A_6d75d449-e021-4b4d-ad2d-c0873127c3b3
-		--S_WPN_UNIQUE_LLWEAPONEX_Bokken_Sword_1H_A_a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42
-		{"6d75d449-e021-4b4d-ad2d-c0873127c3b3", "a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"}
-	},
-	["Warchief"] = {
-		--S_WPN_UNIQUE_LLWEAPONEX_Spear_Halberd_2H_Warchief_A_6c52f44e-1c27-4409-9bfe-f89ee5af4a0d
-		--S_WPN_UNIQUE_LLWEAPONEX_Axe_Halberd_2H_Warchief_A_056c2c38-b7be-4e06-be41-99b79ffe83c2
-		{"6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", "056c2c38-b7be-4e06-be41-99b79ffe83c2"}
-	},
-	-- ["HarkenTattoos"] = {
-	-- 	--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Normal_A_Harken_40039552-3aae-4beb-8cca-981809f82988
-	-- 	--S_EQ_UNIQUE_LLWEAPONEX_Upperbody_Tattoos_Magic_A_Harken_927669c3-b885-4b88-a0c2-6825fbf11af2
-	-- 	{"40039552-3aae-4beb-8cca-981809f82988", "927669c3-b885-4b88-a0c2-6825fbf11af2"}
-	-- }
-}
+local LinkedUniques = {}
 
-local function AddLinkedUnique(id, item1, item2)
-	if item1 ~= nil and item2 ~= nil then
-		local tbl = LinkedUniques[id]
-		if tbl ~= nil then
-			local canAdd = true
-			local uuid1 = GetUUID(item1)
-			local uuid2 = GetUUID(item2)
-			for i,v in pairs(tbl) do
-				local a,b = table.unpack(v)
-				if GetUUID(a) == uuid1 and GetUUID(b) == uuid2 then
-					canAdd = false
-					break
-				end
-			end
-			if canAdd then
-				table.insert(tbl, {item1,item2})
-			end
-		else
-			LinkedUniques[id] = {
-				{item1,item2}
-			}
-		end
+---@param item1 string
+---@param item2 string
+---@param skipSave boolean|nil
+function UniqueManager.LinkItems(item1, item2, skipSave)
+	LinkedUniques[item1] = item2
+	LinkedUniques[item2] = item1
+	if skipSave ~= true then
 		PersistentVars.LinkedUniques = LinkedUniques
 	end
 end
 
-LoadPersistentVars[#LoadPersistentVars+1] = function()
+UniqueManager.LinkItems(Uniques.MagicMissileWand.UUID, Uniques.MagicMissileRod.UUID, true)
+UniqueManager.LinkItems(Uniques.WarchiefAxe.UUID, Uniques.WarchiefHalberd.UUID, true)
+UniqueManager.LinkItems(Uniques.Bokken.UUID, Uniques.BokkenOneHanded.UUID, true)
+
+function UniqueManager.LoadLinkedUniques()
 	if PersistentVars.LinkedUniques ~= nil then
-		for id,entry in pairs(PersistentVars.LinkedUniques) do
-			if #entry >= 2 then
-				for i,v in pairs(entry) do
-					local item1,item2 = table.unpack(v)
-					AddLinkedUnique(id, item1, item2)
-				end
+		for uuid,uuid2 in pairs(PersistentVars.LinkedUniques) do
+			if ObjectExists(uuid) == 1 and ObjectExists(uuid2) == 1 then
+				UniqueManager.LinkItems(uuid,uuid2,true)
+			else
+				LinkedUniques[uuid] = nil
+				LinkedUniques[uuid2] = nil
 			end
 		end
-	else
-		PersistentVars.LinkedUniques = LinkedUniques
 	end
+	PersistentVars.LinkedUniques = LinkedUniques
+end
+
+function UniqueManager.GetLinkedUnique(uuid)
+	return LinkedUniques[uuid]
 end
 
 -- CharacterSetVisualElement(Mods.WeaponExpansion.Origin.Harken, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")

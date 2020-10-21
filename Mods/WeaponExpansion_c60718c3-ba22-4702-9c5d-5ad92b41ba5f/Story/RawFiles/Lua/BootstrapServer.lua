@@ -43,6 +43,12 @@ end)
 
 LeaderLib.RegisterListener("LuaReset", function()
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
+    for i,callback in pairs(LoadPersistentVars) do
+        local status,err = xpcall(callback, debug.traceback)
+        if not status then
+            Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)
+        end
+    end
     print(Ext.JsonStringify(PersistentVars))
 end)
 
@@ -249,7 +255,6 @@ local function SessionSetup()
             Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)
         end
     end
-
 
     local b,err = xpcall(function()
         local uniqueDataStr = Ext.LoadFile("WeaponExpansion_UniqueBaseStats.json")
