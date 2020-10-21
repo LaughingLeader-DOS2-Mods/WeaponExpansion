@@ -42,12 +42,11 @@ Greatbow	1	Placeholder	Desc	❌	❌
 Greatbow	2	Placeholder	Desc	❌	❌
 Greatbow	3	Placeholder	Desc	❌	❌
 Greatbow	4	Placeholder	Desc	❌	❌
-Hand Crossbow	1	Placeholder	Desc	√	❌
-Hand Crossbow	1	Placeholder	Desc	√	❌
-Hand Crossbow	2	Placeholder	Desc	√	❌
-Hand Crossbow	3	Placeholder	Desc	❌	❌
-Hand Crossbow	4	Placeholder	Desc	❌	❌
-Katana	1	Placeholder	Desc	❌	❌
+Hand Crossbow	1	Base Damage	Deal +5% more base damage.	√	√
+Hand Crossbow	2	Base Damage	Deal +10% more base damage.	√	√
+Hand Crossbow	3	Base Damage	Deal +15% more base damage.	√	√
+Hand Crossbow	4	Base Damage	Deal +20% more base damage.	√	√
+Katana	1	Blademaster's Strike	Weapon skills and attacks grant a stacking combo status on targets hit that interact with Katana mastery skills.	√	❌
 Katana	2	Placeholder	Desc	❌	❌
 Katana	3	Placeholder	Desc	❌	❌
 Katana	4	Placeholder	Desc	❌	❌

@@ -49,18 +49,16 @@ Greatbow	1	Ricochet	Each ricochet bounce deals splash damage in a 2m radius.	√
 Greatbow	2	Placeholder	Placeholder	❌	❌
 Greatbow	3	Placeholder	Placeholder	❌	❌
 Greatbow	4	Placeholder	Placeholder	❌	❌
-Hand Crossbow	1	Whirlwind	While spinning, shoot 1-3 enemies in a 6m radius.	√	❌
-Hand Crossbow	1	Base Damage	Deal +5% more base damage.	√	❌
-Hand Crossbow	2	Tactical Retreat	When jumping away from enemies, automatically apply Marked to 2 targets max.	√	❌
+Hand Crossbow	1	Whirlwind	While spinning, shoot 1-3 enemies in a 6m radius.	√	√
+Hand Crossbow	2	Tactical Retreat	When jumping away from enemies, automatically apply Marked to 2 targets max.	√	√
 Hand Crossbow	3	Placeholder	Placeholder	❌	❌
 Hand Crossbow	4	Placeholder	Placeholder	❌	❌
-Katana	1	Backlash	After teleporting, your next attack deals 50% more damage.	❌	❌
+Katana	1	Backlash	After teleporting, your next attack deals 50% more damage.	√	❌
 Katana	2	Placeholder	Placeholder	❌	❌
 Katana	3	Placeholder	Placeholder	❌	❌
 Katana	4	Placeholder	Placeholder	❌	❌
-Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.	√	❌
-Pistol	1	Base Damage	Deal +5% more base damage.	√	❌
-Pistol	2	Cloak & Dagger	Automatically reload your pistol. When landing, a random enemy within 4m will be Marked. Attacking the Marked target with your pistol guarantees a critical hit.	√	❌
+Pistol	1	Adrenaline	Gain hyper-focus, increasing the damage of the next shot of your pistol by 50%.	√	√
+Pistol	2	Cloak & Dagger	Automatically reload your pistol. When landing, a random enemy within 4m will be Marked. Attacking the Marked target with your pistol guarantees a critical hit.	√	√
 Pistol	3	Placeholder	Placeholder	❌	❌
 Pistol	4	Placeholder	Placeholder	❌	❌
 Polearm	1	Crippling Blow	Deal 25% splash damage around the target hit in a 3m radius.	❌	❌
@@ -71,7 +69,7 @@ Quarterstaff	1	Battering Ram / Bull Rushing	After rushing, gain 25% Dodge and de
 Quarterstaff	2	Placeholder	Placeholder	❌	❌
 Quarterstaff	3	Placeholder	Placeholder	❌	❌
 Quarterstaff	4	Placeholder	Placeholder	❌	❌
-Rapier	1	Sucker Punch	Gain follow-up combo skills after punching a target. 25% chance to increase Sucker Punch's Knockdown by 1 turn.	√	❌
+Rapier	1	Sucker Punch	Gain follow-up combo skills after punching a target. 25% chance to increase Sucker Punch's Knockdown by 1 turn.	√	√
 Rapier	2	Placeholder	Placeholder	❌	❌
 Rapier	3	Placeholder	Placeholder	❌	❌
 Rapier	4	Placeholder	Placeholder	❌	❌
@@ -79,7 +77,7 @@ Runeblade	1	Activate Rune	The next spell you cast with the same element of your 
 Runeblade	2	Placeholder	Placeholder	❌	❌
 Runeblade	3	Placeholder	Placeholder	❌	❌
 Runeblade	4	Placeholder	Placeholder	❌	❌
-Scythe	1	Whirlwind	Consumes bleeding on targets hit to deal a burst of piercing damage. Damage increases for each turn of Bleeding.	√	❌
+Scythe	1	Whirlwind	Consumes bleeding on targets hit to deal a burst of piercing damage. Damage increases for each turn of Bleeding.	√	√
 Scythe	2	Placeholder	Placeholder	❌	❌
 Scythe	3	Placeholder	Placeholder	❌	❌
 Scythe	4	Placeholder	Placeholder	❌	❌
