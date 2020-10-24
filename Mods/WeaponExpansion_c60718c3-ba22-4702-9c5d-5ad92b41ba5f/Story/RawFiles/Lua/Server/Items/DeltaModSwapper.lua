@@ -457,7 +457,7 @@ function OnTreasureItemGenerate(item)
 	if item == nil or item.MyGuid == nil or item.Stats == nil then
 		return
 	end
-	if equipmentTypes[item.ItemType] == true then
+	if item.Stats.Unique ~= 1 and equipmentTypes[item.ItemType] == true then
 		Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
 		TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
 		TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
