@@ -214,6 +214,15 @@ LeaderLib.RegisterListener("Initialized", function(region)
 			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 		end
 	end
+    if PersistentVars.UniqueRequirements ~= nil then
+        for statName,requirements in pairs(PersistentVars.UniqueRequirements) do
+            local stat = Ext.GetStat(statName)
+            if stat ~= nil then
+                stat.Requirements = requirements
+                Ext.SyncStat(statName, false)
+            end
+        end
+    end
 end)
 
 local function OnLeftCombat(uuid, id)

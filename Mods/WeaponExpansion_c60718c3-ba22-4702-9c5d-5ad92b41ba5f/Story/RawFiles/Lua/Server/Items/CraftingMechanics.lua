@@ -184,8 +184,8 @@ function ChangeItemScaling(item, attribute, itemStat)
 		--Ext.Print("[WeaponExpansion:ChangeItemScaling] Changed requirements:"..string.format("%s", Ext.JsonStringify(stat.Requirements)))
 		stat.Requirements = requirements
 		item.Stats.ShouldSyncStats = true
-		Ext.SyncStat(itemStat, true)
-		print(Common.Dump(stat.Requirements))
+		Ext.SyncStat(itemStat, false)
+		PersistentVars.UniqueRequirements[stat.Name] = requirements
 		EquipmentManager.SyncItemStatChanges(item, {ShouldSyncStats=true})
 		--EquipmentManager.SyncItemStatChanges(item, {Requirements=requirements})
 		

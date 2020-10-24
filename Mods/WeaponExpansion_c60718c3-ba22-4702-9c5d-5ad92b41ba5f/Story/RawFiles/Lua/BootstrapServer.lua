@@ -28,6 +28,7 @@ local defaultPersistentVars = {
     Timers = {},
     OnDeath = {},
     ExtraUniques = {},
+    UniqueRequirements = {}
 }
 ---@type WeaponExpansionVars
 PersistentVars = Common.CopyTable(defaultPersistentVars, true)
@@ -49,7 +50,7 @@ LeaderLib.RegisterListener("LuaReset", function()
             Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)
         end
     end
-    print(Ext.JsonStringify(PersistentVars))
+    printd(Ext.JsonStringify(PersistentVars))
 end)
 
 ---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
@@ -214,10 +215,11 @@ Ext.Require("Server/Items/LootBonuses.lua")
 Ext.Require("Server/Items/TreasureTableMerging.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
 Ext.Require("Server/Items/Uniques/_Init.lua")
-local debugInit = Ext.Require("Server/Debug/DebugMain.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
 Ext.Require("Server/Updates.lua")
-
+if Ext.IsDeveloperMode() then
+    Ext.Require("Server/Debug/DebugMain.lua")
+end
 ---@param target EsvCharacter
 ---@param attacker StatCharacter|StatItem
 ---@param hit HitRequest
@@ -245,10 +247,7 @@ local function SessionSetup()
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Target_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
-    -- Vars.DebugEnabled then
-    --     Mods.LeaderLib.AddDebugInitCall(debugInit)
-    -- end
-    
+
     for i,callback in pairs(LoadPersistentVars) do
         local status,err = xpcall(callback, debug.traceback)
         if not status then
