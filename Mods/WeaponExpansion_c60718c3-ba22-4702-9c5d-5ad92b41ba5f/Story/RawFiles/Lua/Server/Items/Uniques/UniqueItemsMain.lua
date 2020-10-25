@@ -249,3 +249,11 @@ function UniqueManager.FindOrphanedUniques()
         end
 	end
 end
+
+function UniqueManager.SaveRequirementChanges()
+	if PersistentVars.UniqueRequirements ~= nil then
+		local payload = Ext.JsonStringify(PersistentVars.UniqueRequirements)
+		--Ext.SaveFile("WeaponExpansion_UniqueRequirementChanges.json", payload)
+		Ext.BroadcastMessage("LLWEAPONEX_SaveUniqueRequirementChanges", payload)
+	end
+end
