@@ -12,7 +12,11 @@ local Qualifiers = {
 local function SetItemStats(target, tbl)
 	for k,v in pairs(tbl) do
 		if k == "Requirements" then
-			target.Requirements = v
+			local stat = Ext.GetStat(target.Name)
+			if stat ~= nil then
+				stat.Requirements = v
+			end
+			--target.Requirements = v
 		else
 			if type(v) == "table" then
 				SetItemStats(target[k], v)
@@ -38,6 +42,10 @@ local function SetItemStats(target, tbl)
 	end
 end
 
+Ext.RegisterNetListener("LLWEAPONEX_SaveUniqueRequirementChanges", function(cmd, payload)
+	Ext.SaveFile("WeaponExpansion_UniqueRequirementChanges.json", payload)
+end)
+
 Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 	local data = Common.JsonParse(payload)
 	if data ~= nil then
@@ -60,7 +68,7 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 		if item ~= nil and stats == nil then
 			stats = item.Stats
 		end
-		
+
 		if stats ~= nil then
 			if Ext.Version() < 53 then
 				Ext.EnableExperimentalPropertyWrites()

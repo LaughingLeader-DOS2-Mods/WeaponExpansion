@@ -345,6 +345,23 @@ local UniqueItemAttributes = {
     }
 }
 
+function LoadUniqueRequirementChanges()
+	local b,result = xpcall(function()
+		local payload = Ext.LoadFile("WeaponExpansion_UniqueRequirementChanges.json")
+		if payload ~= nil then
+			local data = Ext.JsonParse(payload)
+			if data ~= nil then
+				for statName,requirements in pairs(data) do
+					Ext.StatSetAttribute(statName, "Requirements", requirements)
+				end
+			end
+		end
+	end, debug.traceback)
+	if not b then
+		Ext.PrintError(result)
+	end
+end
+
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides. Server:", Ext.IsServer())
 
@@ -472,6 +489,8 @@ local function StatOverrides_Init()
 	else
 		Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] AnimationsPlus is missing! Skipping animation stat overrides.")
 	end
+
+	LoadUniqueRequirementChanges()
 end
 
 Ext.RegisterListener("StatsLoaded", StatOverrides_Init)
