@@ -1,5 +1,5 @@
 ---@return StatTreasureCategory
-local function CreateBasicCategory(name, isTable, rarities)
+local function CreateBasicCategory(name, isTable, params)
 	local tbl = {Frequency = 1}
 
 	if isTable == true then
@@ -9,8 +9,8 @@ local function CreateBasicCategory(name, isTable, rarities)
 		tbl.TreasureCategory = name
 	end
 
-	if rarities ~= nil then
-		for key,v in pairs(rarities) do
+	if params ~= nil then
+		for key,v in pairs(params) do
 			tbl[key] = v
 		end
 	end
