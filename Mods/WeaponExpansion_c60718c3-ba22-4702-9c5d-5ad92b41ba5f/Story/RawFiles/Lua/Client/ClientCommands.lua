@@ -18,7 +18,7 @@ local function SetItemStats(target, tbl)
 			end
 			--target.Requirements = v
 		else
-			if type(v) == "table" then
+			if type(v) == "table" and target[k] ~= nil then
 				SetItemStats(target[k], v)
 			else
 				local b,err = xpcall(function()
@@ -73,12 +73,20 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 			if Ext.Version() < 53 then
 				Ext.EnableExperimentalPropertyWrites()
 			end
-			if data.DynamicIndex ~= nil then
-				SetItemStats(stats.DynamicStats[data.DynamicIndex], data.Stats)
-			else
-				SetItemStats(stats, data.Stats)
+
+			if data.Changes ~= nil then
+				local changes = data.Changes
+				if changes.Boosts ~= nil and stats.DynamicStats[2] ~= nil then
+					SetItemStats(stats.DynamicStats[2], changes.Boosts)
+				end
+				if changes.Stats ~= nil then
+					SetItemStats(stats, changes.Stats)
+				end
+				if changes.DynamicStats ~= nil then
+					SetItemStats(stats.DynamicStats, changes.DynamicStats)
+				end
 			end
-			stats.ShouldSyncStats = true
+			--stats.ShouldSyncStats = true
 			if Vars.DebugEnabled then
 				Ext.Print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]", stats.Name))
 			end

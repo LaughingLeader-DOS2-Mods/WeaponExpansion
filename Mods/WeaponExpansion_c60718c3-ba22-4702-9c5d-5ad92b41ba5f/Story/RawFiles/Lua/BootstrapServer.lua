@@ -256,7 +256,8 @@ local function SessionSetup()
     end
 
     local b,err = xpcall(function()
-        local uniqueDataStr = Ext.LoadFile("WeaponExpansion_UniqueBaseStats.json")
+        --local uniqueDataStr = Ext.LoadFile("WeaponExpansion_UniqueBaseStats.json")
+        local uniqueDataStr = Ext.LoadFile("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Stats/Custom/WeaponExpansion_UniqueBaseStats.json", "data")
         if uniqueDataStr ~= nil then
             Temp.OriginalUniqueStats = Ext.JsonParse(uniqueDataStr) or {}
         end

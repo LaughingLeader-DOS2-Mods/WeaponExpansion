@@ -1,5 +1,3 @@
-
---local LocalizedText = LeaderLib.LocalizedText
 ---@type TranslatedString
 local ts = LeaderLib.Classes.TranslatedString
 

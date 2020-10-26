@@ -3,7 +3,7 @@ local UniqueProgressionEntry = {
 	Type = "UniqueProgressionEntry",
 	Attribute = "",
 	Value = "",
-	Append = false,
+	IsBoost = true,
 	MatchStat = "",
 	MatchTemplate = "",
 	GetAttribute = nil
@@ -29,7 +29,7 @@ function UniqueProgressionEntry:Create(attribute, value, params)
     {
 		Attribute = attribute,
 		Value = value,
-		Append = false
+		IsBoost = true
 	}
 	if Qualifiers[attribute] == true then
 		this.Value = tostring(value)

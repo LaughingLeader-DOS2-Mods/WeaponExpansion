@@ -526,10 +526,10 @@ local bulletTemplates = {
 
 ---@param item EsvItem
 ---@param stats table
-function EquipmentManager.SyncItemStatChanges(item, stats, dynamicIndex)
-	if stats["Damage Type"] ~= nil then
-		stats["DamageType"] = stats["Damage Type"]
-		stats["Damage Type"] = nil
+function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
+	if changes.Boosts ~= nil and changes.Boosts["Damage Type"] ~= nil then
+		changes.Boosts["DamageType"] = changes.Boosts["Damage Type"]
+		changes.Boosts["Damage Type"] = nil
 	end
 	local slot = nil
 	local owner = nil
@@ -546,8 +546,7 @@ function EquipmentManager.SyncItemStatChanges(item, stats, dynamicIndex)
 			NetID = item.NetID,
 			Slot = slot,
 			Owner = owner,
-			Stats = stats,
-			DynamicIndex = dynamicIndex
+			Changes = changes
 		}
 		Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
 	end

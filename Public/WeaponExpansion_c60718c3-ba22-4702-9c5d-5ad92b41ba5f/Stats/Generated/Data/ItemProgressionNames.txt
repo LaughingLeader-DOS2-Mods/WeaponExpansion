@@ -748,9 +748,6 @@ add name "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare_2_DisplayName",""
 add name "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare_3_DisplayName",""
 add name "WPN_LLWEAPONEX_Runeblade_Chaos_1H_Rare_4_DisplayName",""
 
-new namegroup "WPN_LLWEAPONEX_Runeblade_Debug_1H"
-add name "WPN_LLWEAPONEX_Runeblade_Debug_1H_DisplayName",""
-
 new namegroup "WPN_LLWEAPONEX_Runeblade_Earth_1H_Crafted"
 add name "WPN_LLWEAPONEX_Runeblade_Earth_1H_Crafted_DisplayName",""
 

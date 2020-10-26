@@ -1,5 +1,3 @@
----@type LeaderLibLocalizedText
-local LocalizedText = LeaderLib.LocalizedText
 ---@type TranslatedString
 local ts = LeaderLib.Classes.TranslatedString
 
@@ -304,11 +302,11 @@ local function OnItemTooltip(item, tooltip)
 			--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
 			local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
 			local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
-			local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LeaderLib.LocalizedText.AttributeNames[highestAttribute].Value)
+			local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LocalizedText.AttributeNames[highestAttribute].Value)
 			local slotInfoText = ""
 			local equipped = tooltip:GetElement("Equipped")
 			if equipped == nil then
-				slotInfoText = string.format(" (%s)", LeaderLib.LocalizedText.Slots[item.Stats.Slot].Value)
+				slotInfoText = string.format(" (%s)", LocalizedText.Slots[item.Stats.Slot].Value)
 			end
 			local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
 			CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)

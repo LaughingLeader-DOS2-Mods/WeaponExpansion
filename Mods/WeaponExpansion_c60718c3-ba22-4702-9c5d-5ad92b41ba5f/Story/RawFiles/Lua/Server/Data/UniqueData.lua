@@ -332,7 +332,8 @@ end
 
 ---@param entry UniqueProgressionEntry
 ---@param stat StatEntryWeapon
-local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
+---@param item EsvItem
+local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad)
 	local statChanged = false
 	if not StringHelpers.IsNullOrEmpty(entry.MatchStat) then
 		if stat ~= entry.MatchStat then
@@ -342,52 +343,37 @@ local function ApplyProgressionEntry(entry, stat, changes, firstLoad)
 	if Ext.Version() < 53 then
 		Ext.EnableExperimentalPropertyWrites()
 	end
+	local target = stat
+	if entry.IsBoost == true then
+		target = item.Stats.DynamicStats[2]
+	end
 	local attribute = entry:GetBoostAttribute(stat)
 	if attribute == "ExtraProperties" then
-		if entry.Append == true then
-			local props = stat.ExtraProperties or {}
-			if not string.find(Common.Dump(props), entry.Value.Action) then
-				table.insert(props, entry.Value)
+		local props = target.ExtraProperties or {}
+		if not string.find(Common.Dump(props), entry.Value.Action) then
+			table.insert(props, entry.Value)
+			statChanged = true
+		end
+	elseif attribute == "WeaponRange" then
+		entry.Value = math.ceil(entry.Value / 100)
+	elseif attribute == "Boosts" or attribute == "Skills" then
+		local current = target[attribute]
+		if current ~= "" then
+			if not string.find(current, entry.Value) then
+				target[attribute] = current .. ";" .. entry.Value
 				statChanged = true
 			end
 		else
-			stat.ExtraProperties = {entry.Value}
+			target[attribute] = entry.Value
 			statChanged = true
 		end
 	else
-		if attribute == "WeaponRange" then
-			entry.Value = math.ceil(entry.Value / 100)
-		end
-		if entry.Append == true then
-			local current = stat[attribute]
-			if attribute == "Boosts" or attribute == "Skills" then
-				if current ~= "" then
-					if not string.find(current, entry.Value) then
-						stat[attribute] = current .. ";" .. entry.Value
-						statChanged = true
-					end
-				else
-					stat[attribute] = entry.Value
-					statChanged = true
-				end
-			else
-				stat[attribute] = current + entry.Value
-				statChanged = true
-			end
-		else
-			if stat[attribute] ~= entry.Value then
-				printd(stat.Name, attribute, stat[attribute], "=>", entry.Value)
-				stat[attribute] = entry.Value
-				statChanged = true
-			end
-		end
+		printd(stat.Name, attribute, target[attribute], "=>", entry.Value)
+		target[attribute] = entry.Value
+		statChanged = true
 	end
 	if statChanged or firstLoad == true then
-		if entry.Append == true then
-			changes[attribute] = stat[attribute]
-		else
-			changes[attribute] = entry.Value
-		end
+		changes.Boosts[attribute] = target[attribute]
 	end
 	return statChanged
 end
@@ -503,7 +489,7 @@ end
 local function EvaluateEntry(self, progressionTable, persist, item, level, stat, entry, changes, firstLoad)
 	local statChanged = false
 	if entry.Type == "UniqueProgressionEntry" then
-		if ApplyProgressionEntry(entry, stat, changes, firstLoad) then
+		if ApplyProgressionEntry(entry, stat, item, changes, firstLoad) then
 			statChanged = true
 		end
 	elseif entry.Type == "UniqueProgressionTransform" then
@@ -515,7 +501,7 @@ local function EvaluateEntry(self, progressionTable, persist, item, level, stat,
 	elseif #entry > 0 then
 		for i,v in pairs(entry) do
 			if v.Type == "UniqueProgressionEntry" then
-				if ApplyProgressionEntry(v, stat, changes, firstLoad) then
+				if ApplyProgressionEntry(v, stat, item, changes, firstLoad) then
 					statChanged = true
 				end
 			elseif v.Type == "UniqueProgressionTransform" then
@@ -528,6 +514,122 @@ local function EvaluateEntry(self, progressionTable, persist, item, level, stat,
 		end
 	end
 	return statChanged
+end
+
+local BoostAttributes = {
+	--Durability = "integer",
+	--DurabilityDegradeSpeed = "integer",
+	StrengthBoost = "integer",
+	FinesseBoost = "integer",
+	IntelligenceBoost = "integer",
+	ConstitutionBoost = "integer",
+	MemoryBoost = "integer",
+	WitsBoost = "integer",
+	--SightBoost = "integer",
+	--HearingBoost = "integer",
+	VitalityBoost = "integer",
+	SourcePointsBoost = "integer",
+	MaxAP = "integer",
+	StartAP = "integer",
+	APRecovery = "integer",
+	AccuracyBoost = "integer",
+	DodgeBoost = "integer",
+	LifeSteal = "integer",
+	CriticalChance = "integer",
+	ChanceToHitBoost = "integer",
+	MovementSpeedBoost = "integer",
+	RuneSlots = "integer",
+	RuneSlots_V1 = "integer",
+	FireResistance = "integer",
+	AirResistance = "integer",
+	WaterResistance = "integer",
+	EarthResistance = "integer",
+	PoisonResistance = "integer",
+	--ShadowResistance = "integer",
+	PiercingResistance = "integer",
+	--CorrosiveResistance = "integer",
+	PhysicalResistance = "integer",
+	--MagicResistance = "integer",
+	--CustomResistance = "integer",
+	Movement = "integer",
+	Initiative = "integer",
+	Willpower = "integer",
+	Bodybuilding = "integer",
+	MaxSummons = "integer",
+	--Value = "integer",
+	--Weight = "integer",
+	Skills = "string",
+	--ItemColor = "string",
+	--ModifierType = "integer",
+	--ObjectInstanceName = "string",
+	--BoostName = "string",
+	--StatsType = "string",
+}
+
+local WeaponBoosts = {
+	DamageType = "integer",
+	MinDamage = "integer",
+	MaxDamage = "integer",
+	DamageBoost = "integer",
+	DamageFromBase = "integer",
+	CriticalDamage = "integer",
+	WeaponRange = "integer",
+	CleaveAngle = "integer",
+	CleavePercentage = "integer",
+	AttackAPCost = "integer",
+}
+
+local ArmorBoosts = {
+	ArmorValue = "integer",
+	ArmorBoost = "integer",
+	MagicArmorValue = "integer",
+	MagicArmorBoost = "integer",
+	Blocking = "integer",
+}
+
+local function ResetBoostAttributes(tbl, target, changes)
+	for boost,type in pairs(tbl) do
+		if target[boost] ~= nil then
+			if type == "integer" then
+				changes.Boosts[boost] = 0
+				target[boost] = 0
+			elseif type == "string" then
+				changes.Boosts[boost] = ""
+				target[boost] = ""
+			end
+		end
+	end
+end
+
+local function ResetUnique(item, stat, level, changes)
+	local target = item.Stats.DynamicStats[2]
+	ResetBoostAttributes(BoostAttributes, target, changes)
+	local itemType = item.ItemType
+	if itemType == "Weapon" then
+		ResetBoostAttributes(WeaponBoosts, target, changes)
+	elseif itemType == "Armor" or itemType == "Shield" then
+		ResetBoostAttributes(ArmorBoosts, target, changes)
+	end
+	local originalValues = Temp.OriginalUniqueStats[item.StatsId]
+	if originalValues ~= nil then
+		for attribute,value in pairs(originalValues) do
+			if attribute == "Damage Range" then
+				local damage = Game.Math.GetLevelScaledWeaponDamage(level)
+				local baseDamage = damage * (stat.DamageFromBase * 0.01)
+				local range = baseDamage * (stat["Damage Range"] * 0.01)
+				local min = Ext.Round(baseDamage - (range/2))
+				local max = Ext.Round(baseDamage + (range/2))
+				changes.Boosts["MinDamage"] = min
+				changes.Boosts["MaxDamage"] = max
+			else
+				if attribute == "WeaponRange" then
+					value = math.ceil(value / 100)
+				end
+				changes.Stats[attribute] = value
+				stat[attribute] = value
+			end
+		end
+	end
 end
 
 ---@param self UniqueData
@@ -545,31 +647,7 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 			end
 		end
 		if firstLoad == true then
-			local originalValues = Temp.OriginalUniqueStats[item.StatsId]
-			if originalValues ~= nil then
-				for attribute,value in pairs(originalValues) do
-					if attribute == "Damage Range" then
-						local damage = Game.Math.GetLevelScaledWeaponDamage(level)
-						local baseDamage = damage * (stat.DamageFromBase * 0.01)
-						local range = baseDamage * (stat["Damage Range"] * 0.01)
-						local min = Ext.Round(baseDamage - (range/2))
-						local max = Ext.Round(baseDamage + (range/2))
-						changes["MinDamage"] = min
-						changes["MaxDamage"] = max
-						changes["Damage Range"] = nil
-					else
-						if attribute == "WeaponRange" then
-							value = math.ceil(value / 100)
-						end
-						if changes[attribute] == nil then
-							changes[attribute] = value
-							if not persist then
-								stat[attribute] = value
-							end
-						end
-					end
-				end
-			end
+			ResetUnique(item, stat, level, changes)
 		end
 		if statChanged or firstLoad == true then
 			if persist == nil then
@@ -582,35 +660,39 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 	return statChanged or firstLoad == true
 end
 
+---@param item EsvItem
 local function StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
 	-- TODO - Testing. Making sure bonuses don't overlap if they're set to append when you save/load/change level/level up etc.
 	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
 	-- enries aren't nerfing things.
 	local level = item.Stats.Level
-	local changes = {}
+	local changes = {
+		Boosts = {},
+		Stats = {}
+	}
 	local b,result = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level, changes, firstLoad)
 	if not b then
 		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", item.MyGuid, item.StatsId)
 		Ext.PrintError(result)
 	elseif result == true or firstLoad == true then
 		if changes ~= nil and Common.TableHasAnyEntry(changes) then
-			if changes["Damage Range"] ~= nil then
+			if changes.Stats["Damage Range"] ~= nil then
 				local damage = Game.Math.GetLevelScaledWeaponDamage(level)
-				local baseDamage = damage * (stat.DamageFromBase * 0.01)
-				local range = baseDamage * (stat["Damage Range"] * 0.01)
+				local baseDamage = damage * (item.Stats.DamageFromBase * 0.01)
+				local range = baseDamage * (item.Stats["Damage Range"] * 0.01)
 				local min = Ext.Round(baseDamage - (range/2))
 				local max = Ext.Round(baseDamage + (range/2))
-				changes["MinDamage"] = min
-				changes["MaxDamage"] = max
-				changes["Damage Range"] = nil
+				changes.Boosts["MinDamage"] = min
+				changes.Boosts["MaxDamage"] = max
+				changes.Stats["Damage Range"] = nil
 			end
-			EquipmentManager.SyncItemStatChanges(item, changes, 1)
+			EquipmentManager.SyncItemStatChanges(item, changes)
 			if self.Copies ~= nil then
 				for uuid,owner in pairs(self.Copies) do
 					if uuid ~= item.MyGuid then
 						local copyItem = Ext.GetItem(uuid)
 						if copyItem ~= nil then
-							EquipmentManager.SyncItemStatChanges(copyItem, changes, 1)
+							EquipmentManager.SyncItemStatChanges(copyItem, changes)
 						end
 					end
 				end

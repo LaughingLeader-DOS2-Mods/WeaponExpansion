@@ -394,38 +394,3 @@ Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
     end
     
 end)
-
-if Mods.LeaderLib.Classes.VisualElementData ~= nil then
-    local VisualManager = Mods.LeaderLib.VisualManager
-    ---@type VisualElementData
-    local ve = Mods.LeaderLib.Classes.VisualElementData
-    ---@type VisualResourceData
-    local vr = Mods.LeaderLib.Classes.VisualResourceData
-
-    local slot = VisualManager.Slot
-    local visualSlot = VisualManager.VisualSlot
-
-    local DemonVisuals = ve:Create({VisualSet="33028fe7-03a6-4f43-8104-717b5f1564b1"})
-    DemonVisuals:AddVisualsForType(VisualManager.ArmorType.None, {
-        [slot.Helmet] = {
-            vr:Create("Creatures_Ghoul_Body_Naked_A_Hair_A", visualSlot.Helmet),
-            vr:Create("Creatures_Ghoul_Body_Naked_A", visualSlot.Head)
-        },
-        [slot.Breast] = vr:Create("Creatures_Ghoul_Armor_Leather_A_Upperbody_A", visualSlot.Torso),
-        [slot.Gloves] = vr:Create("Creatures_Ghoul_Body_Naked_A_Arms_A", visualSlot.Arms),
-        [slot.Leggings] = vr:Create("Creatures_Ghoul_Armor_Leather_A_Lowerbody_A", visualSlot.Trousers),
-        [slot.Boots] = vr:Create("Creatures_Ghoul_Armor_Leather_A_Legs_A", visualSlot.Boots),
-        [slot.Ring] = vr:Create("", visualSlot.Extra1, {IfEmpty=slot.Ring2}),
-        [slot.Ring2] = vr:Create("", visualSlot.Extra2, {IfEmpty=slot.Ring}),
-    })
-
-    DemonVisuals:AddVisualsForType(VisualManager.ArmorType.Plate, {
-        [slot.Helmet] = vr:Create("Creatures_Ghoul_Armor_Platemail_A_Helmet_A", visualSlot.Helmet),
-        [slot.Breast] = vr:Create("Creatures_Ghoul_Armor_Platemail_A_Upperbody_A", visualSlot.Torso),
-        [slot.Gloves] = vr:Create("Creatures_Ghoul_Armor_Platemail_A_Arms_A", visualSlot.Arms),
-        [slot.Leggings] = vr:Create("Creatures_Ghoul_Armor_Platemail_A_Lowerbody_A", visualSlot.Trousers),
-        [slot.Boots] = vr:Create("Creatures_Ghoul_Armor_Platemail_A_Legs_A", visualSlot.Boots),
-        [slot.Ring] = vr:Create("Creatures_Ghoul_Armor_Platemail_A_Accessory_A", visualSlot.Extra1),
-        [slot.Ring2] = vr:Create("Creatures_Ghoul_Armor_Platemail_A_Accessory_A", visualSlot.Extra2),
-    })
-end

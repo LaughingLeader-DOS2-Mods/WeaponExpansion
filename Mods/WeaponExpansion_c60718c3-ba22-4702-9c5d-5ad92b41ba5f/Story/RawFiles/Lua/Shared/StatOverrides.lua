@@ -468,15 +468,15 @@ local function StatOverrides_Init()
 			end
 		end
 	end
-	Ext.Print("Saving WeaponExpansion_UniqueBaseStats.json.")
-	local b,err = xpcall(function()
-		Ext.SaveFile("WeaponExpansion_UniqueBaseStats.json", Ext.JsonStringify(uniqueStats))
-	end, debug.traceback)
-	if not b then
-		Ext.PrintError(err)
-	end
 
 	if Vars.DebugEnabled then
+		Ext.Print("Saving WeaponExpansion_UniqueBaseStats.json.")
+		local b,err = xpcall(function()
+			Ext.SaveFile("WeaponExpansion_UniqueBaseStats.json", Ext.JsonStringify(uniqueStats))
+		end, debug.traceback)
+		if not b then
+			Ext.PrintError(err)
+		end
 		for stat,b in pairs(player_stats) do
 			if b and Ext.StatGetAttribute(stat, "Accuracy") == 95 then
 				Ext.StatSetAttribute(stat, "Accuracy", 100)

@@ -1564,12 +1564,6 @@ add levelgroup 0,0,"Divine"
 add rootgroup "c3049b3a-c600-4d17-9d33-2b0878daa88c","HumansCommon"
 add namegroup "WPN_LLWEAPONEX_Runeblade_Inert_1H","Cool",""
 
-new itemgroup "WPN_LLWEAPONEX_Runeblade_Debug_1H"
-
-add levelgroup 0,0,"All"
-add rootgroup "4fea1d0f-8847-450c-b75e-c2fe8cbfd850","LLWEAPONEX_Runeblade_Human_A"
-add namegroup "WPN_LLWEAPONEX_Runeblade_Debug_1H","","Item_WPN_Human_Normal_BastardSword_A_C"
-
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Runeblade_ChaosEdge_2H"
 
 add levelgroup 0,0,"All"
