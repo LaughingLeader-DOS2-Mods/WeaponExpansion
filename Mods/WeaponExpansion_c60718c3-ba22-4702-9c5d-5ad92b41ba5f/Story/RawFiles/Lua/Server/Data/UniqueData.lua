@@ -359,9 +359,12 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad)
 	elseif attribute == "Boosts" or attribute == "Skills" then
 		local current = target[attribute]
 		if current ~= "" then
-			if not string.find(current, entry.Value) then
-				target[attribute] = current .. ";" .. entry.Value
-				statChanged = true
+			local boostNames = StringHelpers.Split(entry.Value, ";")
+			for i,v in pairs(boostNames) do
+				if not string.find(current, v) then
+					target[attribute] = current .. ";" .. v
+					statChanged = true
+				end
 			end
 		else
 			target[attribute] = entry.Value
