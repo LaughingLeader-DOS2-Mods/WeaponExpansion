@@ -51,6 +51,14 @@ local function OnPrepareHit(target,source,damage,handle)
 		end
 
 		if damage > 0 and GameHelpers.HitSucceeded(target, handle, true) then
+			if HasActiveStatus(source, "LLWEAPONEX_MURAMASA_CURSE") == 1 then
+				local isCrit = NRD_HitGetInt(handle, "Backstab") == 1 or NRD_HitGetInt(handle, "CriticalHit") == 1
+				if isCrit then
+					local max = Ext.ExtraData.LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease or 50
+					local damageBoost = (((100 - CharacterGetHitpointsPercentage(source))/100) * max)/100
+					GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBoost, true)
+				end
+			end
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
 			if coverData ~= nil and coverData.CanCounterAttack == true then
 				local blocker = coverData.Blocker

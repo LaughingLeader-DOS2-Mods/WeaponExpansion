@@ -61,6 +61,15 @@ local function OnStatusTooltip(character, status, tooltip)
 			Label = text
 		}
 		tooltip:AppendElement(element)
+	elseif status.StatusId == "LLWEAPONEX_MURAMASA_CURSE" then
+		local max = Ext.ExtraData.LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease or 50
+		local hpPercentage = character.Stats.CurrentVitality / character.Stats.MaxVitality
+		local damageBoost = Ext.Round(((100 - hpPercentage)/100) * max)
+		local text = string.format("+%s %s", tostring(damageBoost).."%", Text.Game.CriticalDamage)
+		tooltip:AppendElement({
+			Type="StatusBonus",
+			Label=text
+		})
 	end
 end
 
