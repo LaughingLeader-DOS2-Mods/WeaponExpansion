@@ -1,0 +1,7 @@
+Key	Content	Handle
+Projectile_LLWEAPONEX_ShootRod_Chaos_Description	Launch a magical missile from your rod that deals <font color='#b823cb'>[1] Chaos Damage</font>, and creates a random surface.	hcf834af0g8e9bg4a0bgbb92g06492e1386d5
+Projectile_LLWEAPONEX_ShootRod_Description	Launch a magical missile from your rod that deals [1], and creates a surface of the related element.	hf364491bg7509g415fgae03g4d7047a534bd
+Projectile_LLWEAPONEX_ShootRod_DisplayName	Shoot Rod	h5c1b46f9gc7bdg4a81gad39g740f78f3360a
+Projectile_LLWEAPONEX_ShootRod_Offhand_DisplayName	Shoot Rod (Offhand)	h615bb491g0d04g468fgaa1dg334d3941b2a7
+Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode_Description	Swap between using the <font color='#C7A758'>[Key:WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_DisplayName]</font> as a melee scepter or wand.	h03ceee62ga198g4cf1gbc0eg2b54e6beb5a7
+Shout_LLWEAPONEX_Rods_MagicMissile_ToggleMode_DisplayName	Toggle Scepter/Wand Mode	hd9419db0g1326g48bcgb8a0g7532ff9c3fef
