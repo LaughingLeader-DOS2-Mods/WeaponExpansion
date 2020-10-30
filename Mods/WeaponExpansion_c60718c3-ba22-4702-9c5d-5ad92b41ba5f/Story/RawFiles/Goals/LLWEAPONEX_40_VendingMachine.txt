@@ -280,8 +280,9 @@ DB_LLWEAPONEX_VendingMachine_NextOrder(_TreasureTable, _Instance)
 AND
 DialogGetInvolvedNPC(_Instance, 1, _VendingMachine)
 THEN
+SysClear("DB_LLWEAPONEX_VendingMachine_NextOrder", 2);
+SysClear("DB_LLWEAPONEX_VendingMachine_LastOrdered", 2);
 DB_LLWEAPONEX_VendingMachine_LastOrdered(_TreasureTable, _Instance);
-NOT DB_LLWEAPONEX_VendingMachine_NextOrder(_TreasureTable, _Instance);
 DB_LLWEAPONEX_VendingMachine_GenerateNext(_TreasureTable);
 ObjectSetFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled", 0);
 
