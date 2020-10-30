@@ -282,10 +282,16 @@ DialogGetInvolvedNPC(_Instance, 1, _VendingMachine)
 THEN
 DB_LLWEAPONEX_VendingMachine_LastOrdered(_TreasureTable, _Instance);
 NOT DB_LLWEAPONEX_VendingMachine_NextOrder(_TreasureTable, _Instance);
-LeaderLib_Treasure_Register_TreasureTable("LLWEAPONEX.VendingMachine.Orders", _TreasureTable);
-LeaderLib_Treasure_Configure_GenerateOnce("LLWEAPONEX.VendingMachine.Orders", _TreasureTable, "LLWEAPONEX_VendingMachine_OnOrderGenerated");
+DB_LLWEAPONEX_VendingMachine_GenerateNext(_TreasureTable);
 ObjectSetFlag(_VendingMachine, "LLWEAPONEX_VendingMachine_OrderMenuDisabled", 0);
-LeaderLog_Log("DEBUG", "[LLWEAPONEX:VendingMachine:CompleteOrder] Added [",_TreasureTable,"] as the next treasure order.");
+
+IF
+TradeGenerationStarted(S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a)
+AND
+DB_LLWEAPONEX_VendingMachine_GenerateNext(_TreasureTable)
+THEN
+NOT DB_LLWEAPONEX_VendingMachine_GenerateNext(_TreasureTable);
+NRD_ModCall("WeaponExpansion", "GenerateTradeTreasure", "680d2702-721c-412d-b083-4f5e816b945a", _TreasureTable);
 
 IF
 DialogEnded("LLWEAPONEX_VendingMachine_OrderMenu", _Instance)

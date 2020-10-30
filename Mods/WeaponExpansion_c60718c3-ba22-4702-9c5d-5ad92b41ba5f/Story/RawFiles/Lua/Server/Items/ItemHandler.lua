@@ -82,3 +82,25 @@ function OnSmugglersBagOpened(char, item)
 	end
 	ItemDestroy(item)
 end
+
+function GenerateTradeTreasure(uuid, treasure)
+	if ObjectIsCharacter(uuid) == 1 then
+		local x,y,z = GetPosition(uuid)
+		local backpack = CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
+		GenerateTreasure(backpack, treasure, CharacterGetLevel(uuid), uuid)
+		for i,v in pairs(Ext.GetItem(backpack):GetInventoryItems()) do
+			local tItem = Ext.GetItem(v)
+			if tItem ~= nil then
+				tItem.UnsoldGenerated = true -- Trade treasure flag
+				ItemToInventory(v, uuid, tItem.Amount, 0, 0)
+			else
+				ItemToInventory(v, uuid, 1, 0, 0)
+			end
+			ItemSetOwner(v, uuid)
+			ItemSetOriginalOwner(v, uuid)
+		end
+		ItemRemove(backpack)
+	elseif ObjectIsItem(uuid) == 1 then
+		GenerateTreasure(uuid, treasure, Ext.GetItem(uuid).Stats.Level or 1, uuid)
+	end
+end
