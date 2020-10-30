@@ -22,6 +22,9 @@ local function SetItemStats(target, tbl)
 				SetItemStats(target[k], v)
 			else
 				local b,err = xpcall(function()
+					if k == "Damage Type" then
+						k = "DamageType"
+					end
 					if target[k] ~= nil then
 						if Qualifiers[k] == true then
 							if v == "None" then
@@ -80,7 +83,7 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 					SetItemStats(stats.DynamicStats[2], changes.Boosts)
 				end
 				if changes.Stats ~= nil then
-					SetItemStats(stats, changes.Stats)
+					SetItemStats(stats.DynamicStats[1], changes.Stats)
 				end
 				if changes.DynamicStats ~= nil then
 					SetItemStats(stats.DynamicStats, changes.DynamicStats)
