@@ -257,13 +257,13 @@ object category "T_ST_LLWEAPONEX_Accessories",1,1,0,0,0,0,0,0
 new subtable "0,4;1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_RareAccessories",1,0,0,0,0,0,0,0
 new subtable "1,1"
-object category "Trader Gold",1,0,0,0,0,0,0,0
-new subtable "1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_Skillbooks",1,0,0,0,0,0,0,0
 new subtable "0,2;1,1"
 object category "LLWEAPONEX_HandCrossbow_Bolts",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_CraftingItems",1,0,0,0,0,0,0,0
+new subtable "1,1"
+object category "Trader Gold",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_OrderAccessory"
 new subtable "1,1"
