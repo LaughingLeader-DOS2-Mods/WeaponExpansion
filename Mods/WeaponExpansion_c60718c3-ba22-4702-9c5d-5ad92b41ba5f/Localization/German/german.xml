@@ -49,7 +49,7 @@
 	<content contentuid="h03451e09g2f0bg410eg89cdg1d80b656605c">*[WIZARD WEAPONS] Click on the button labeled &apos;Wizard Weapons&apos;.*</content>
 	<content contentuid="h03bcab3bgb227g4c71gb14egf3964ebe80e2">&lt;font color=&apos;#CD1F1F&apos;&gt;To unequip the Dragon Bone Claws, unequip your glove armor instead of the weapon.&lt;/font&gt;</content>
 	<content contentuid="h03c42c40g5520g496bgaf72g150449510bca">Wooden Rod</content>
-	<content contentuid="h03ceee62ga198g4cf1gbc0eg2b54e6beb5a7">Swap between using the &lt;font color=&apos;#C7A758&apos;&gt;Scepter of Magic Missile&lt;/font&gt; as a rod or wand.&lt;br&gt;Bonus: When the &lt;font color=&apos;#C7A758&apos;&gt;Scepter of Magic Missile&lt;/font&gt; hits a target with no &lt;font color=&apos;#4BA0FF&apos;&gt;Magic Armour&lt;/font&gt;, they take [1].</content>
+	<content contentuid="h03ceee62ga198g4cf1gbc0eg2b54e6beb5a7">Swap between using the &lt;font color=&apos;#C7A758&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_DisplayName]&lt;/font&gt; as a melee scepter or wand.</content>
 	<content contentuid="h03e4cb52g3ae2g4cd3g8a2eg5d4857837938">Ronin&apos;s Odachi</content>
 	<content contentuid="h03ef37b2g017eg446bg9c4cg5105a7896273">a Banner</content>
 	<content contentuid="h03f25018g85fbg4befg9416g536d01747342">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery V&lt;/font&gt;</content>
@@ -827,7 +827,7 @@
 	<content contentuid="h58ada9c4g3932g43f3g9f2dg4972e1dfad4b">Electric Bullets</content>
 	<content contentuid="h58bdc191g686fg4de9g8728g9f9aef72eaac">Journeyman Reaper</content>
 	<content contentuid="h58e320c5ge336g41a2g97b2ge27371f5bdbd">Throw Chair</content>
-	<content contentuid="h58ead5d8ga714g4837g961age6c320cb2691">Character is wielding a legendary cursed blade.&lt;br&gt;&lt;font color=&apos;#8A2BE2&apos;&gt;As health drops, damage &amp; life steal rise, but resistances faulter.&lt;/font&gt;</content>
+	<content contentuid="h58ead5d8ga714g4837g961age6c320cb2691">Character is wielding a legendary cursed blade.&lt;br&gt;&lt;font color=&apos;#8A2BE2&apos;&gt;As health drops, critical damage &amp; life steal rise, but resistances faulter.&lt;/font&gt;</content>
 	<content contentuid="h592e3375g1b3fg426cg804fgdc280f683531">*Take your leave.*</content>
 	<content contentuid="h5933a5e2gcacfg4408g924fg56a10d7a3c1a">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; + &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Enemies hit have a &lt;font color=&apos;#cfecff&apos;&gt;40% chance to be encased in Snow&lt;/font&gt;, lowering &lt;font color=&apos;#FF0000&apos;&gt;AP Recovery/Start by [1]&lt;/font&gt;, &lt;font color=&apos;#FF0000&apos;&gt;Movement Speed by [2]%&lt;/font&gt;, and dealing &lt;font color=&apos;#4197e2&apos;&gt;Water Damage&lt;/font&gt; with a chance to fall down when moving.&lt;br&gt;Adds &lt;font color=&apos;#4197e2&apos;&gt;Water Damage&lt;/font&gt; and &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="h59620562g06c7g4dd9gbd86g146525534f41">Soul Burn</content>
@@ -2007,7 +2007,7 @@
 	<content contentuid="hd8d02aa1g5c35g48b5gbde6ga76293ef2798">Hand Crossbow</content>
 	<content contentuid="hd8da42fdge304g4572gbac6gd43fb7bde09b">Warchief&apos;s Mark</content>
 	<content contentuid="hd90b1d2cg51b0g4cf3g9349g438c8aca171a">Chaotic Power</content>
-	<content contentuid="hd9419db0g1326g48bcgb8a0g7532ff9c3fef">Toggle Rod/Wand Mode</content>
+	<content contentuid="hd9419db0g1326g48bcgb8a0g7532ff9c3fef">Toggle Scepter/Wand Mode</content>
 	<content contentuid="hd952aec3gb0d1g4571gb573gc516e7c2ec3a">&lt;font color=&apos;#9933FF&apos;&gt;Dark Dragon&apos;s Blaze&lt;/font&gt;</content>
 	<content contentuid="hd956012dg01b2g4157gb23bg008312faa7c5">*Take your leave.*</content>
 	<content contentuid="hd9c5480dg8185g4e04ga6b1g2eecae743d0f">[Exit]</content>
