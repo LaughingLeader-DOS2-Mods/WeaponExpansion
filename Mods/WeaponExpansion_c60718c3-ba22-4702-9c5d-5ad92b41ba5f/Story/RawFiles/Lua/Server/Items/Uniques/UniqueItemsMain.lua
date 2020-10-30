@@ -146,21 +146,24 @@ end
 -- CharacterSetVisualElement(Mods.WeaponExpansion.Origin.Harken, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
 
 function SwapUnique(char, id)
+	local uuid = nil
+	local uniqueData = Uniques[id]
+	if uniqueData ~= nil then
+		uuid = uniqueData:GetUUID(char)
+	end
+	if uuid == nil then
+		return false
+	end
 	local equipped = nil
 	local next = nil
-	local tbl = LinkedUniques[id]
-	if tbl ~= nil then
-		for i,v in pairs(tbl) do
-			local item1,item2 = table.unpack(v)
-			if GameHelpers.Item.ItemIsEquipped(char, item1) then
-				equipped = item1
-				next = item2
-				break
-			elseif GameHelpers.Item.ItemIsEquipped(char, item2) then
-				equipped = item2
-				next = item1
-				break
-			end
+	local link = LinkedUniques[uuid]
+	if link ~= nil then
+		if link == uuid then
+			equipped = link
+			next = uuid
+		else
+			equipped = uuid
+			next = link
 		end
 	end
 	if equipped ~= nil and next ~= nil and ObjectExists(equipped) == 1 and ObjectExists(next) == 1 then
@@ -185,11 +188,6 @@ function SwapUnique(char, id)
 
 		if locked then
 			ItemLockUnEquip(next, 1)
-		end
-
-		local uniqueData = Uniques[id]
-		if uniqueData ~= nil and uniqueData.OnEquipped ~= nil then
-			pcall(uniqueData.OnEquipped, uniqueData, char)
 		end
 
 		--S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f

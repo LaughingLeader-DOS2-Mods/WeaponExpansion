@@ -116,6 +116,18 @@ function UniqueData:GetOwner(itemUUID)
 	return nil
 end
 
+function UniqueData:GetUUID(owner)
+	if self:GetOwner(self.UUID) == owner then
+		return self.UUID
+	end
+	for uuid,v in pairs(self.Copies) do
+		if v == owner then
+			return uuid
+		end
+	end
+	return self.UUID
+end
+
 local function GetUUIDAndOwner(self, uuid)
 	if uuid == nil then
 		uuid = self.UUID

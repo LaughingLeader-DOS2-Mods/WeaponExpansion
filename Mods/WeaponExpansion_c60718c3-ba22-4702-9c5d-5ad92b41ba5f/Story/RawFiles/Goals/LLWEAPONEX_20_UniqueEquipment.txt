@@ -310,7 +310,7 @@ NRD_ModCall("WeaponExpansion", "RestoreSkillSlot", (STRING)_Char, "Zone_LLWEAPON
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "LLWEAPONEX_Timers_Warchief_StartModeToggle")
 THEN
-NRD_ModCall("WeaponExpansion", "SwapUnique", (STRING)_Char, "Warchief");
+NRD_ModCall("WeaponExpansion", "SwapUnique", (STRING)_Char, "WarchiefHalberd");
 
 IF
 CharacterUsedSkill(_Char, "Rush_LLWEAPONEX_Warchief_Whirlwind", _, _)
