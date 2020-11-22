@@ -185,9 +185,9 @@ LeaderLib_Skills_Register_StatusToggleSkill("Shout_LLWEAPONEX_PowerGauntlets_Tog
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
 AND
-_LastVersion < 153092096
+DB_LeaderLib_ModMenu_RegisteredMenuData(_UUID, _DisplayName, "LLWEAPONEX_SettingsMenu", _ModID, _Author)
 THEN
-LeaderLib_ClearModMenuEntry("c60718c3-ba22-4702-9c5d-5ad92b41ba5f", "LLWEAPONEX_SettingsMenu");
+LeaderLib_ClearModMenuEntry(_UUID, "LLWEAPONEX_SettingsMenu");
 
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
