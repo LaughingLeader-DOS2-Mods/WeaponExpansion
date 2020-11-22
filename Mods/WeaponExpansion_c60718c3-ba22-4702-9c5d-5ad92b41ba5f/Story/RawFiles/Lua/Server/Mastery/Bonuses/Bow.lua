@@ -1,19 +1,27 @@
 
 ---@type SkillEventDataForEachCallback
-local function OnPinDownTarget(v, targetType, char, skill, isInCombat, forwardVector, maxDist)
+local function OnPinDownTarget(v, targetType, char, skill, forwardVector, radius)
+	--print("OnPinDownTarget", v, targetType, char, skill, forwardVector, radius)
 	local target = nil
 	if targetType == "string" then
-		if isInCombat then
-			local targets = MasteryBonusManager.GetClosestCombatEnemies(char, maxDist, true, 3, v)
-			if #targets > 0 then
-				target = Common.GetRandomTableEntry(targets)
-			else
-				target = v
-			end
+		local targets = nil
+		
+		if ObjectIsCharacter(v) == 1 then
+			targets = MasteryBonusManager.GetClosestEnemiesToObject(char, Ext.GetCharacter(v), radius, true, 3, v)
+		elseif ObjectIsItem(v) == 1 then
+			targets = MasteryBonusManager.GetClosestEnemiesToObject(char, Ext.GetItem(v), radius, true, 3, v)
+		end
+		
+		if targets ~= nil and #targets > 0 then
+			target = Common.GetRandomTableEntry(targets)
+		end
+
+		if target == nil then
+			target = v
 		end
 
 		if target ~= nil then
-			GameHelpers.ShootProjectile(char, target.UUID, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot", true)
+			GameHelpers.ShootProjectile(char, target.UUID, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot", false, nil, target.UUID, true)
 		else
 			local x,y,z = GetPosition(v)
 			y = y + 1.0
@@ -22,15 +30,13 @@ local function OnPinDownTarget(v, targetType, char, skill, isInCombat, forwardVe
 		return true
 	elseif targetType == "table" then
 		local x,y,z = table.unpack(v)
-		if isInCombat then
-			local targets = MasteryBonusManager.GetClosestCombatEnemies(char, maxDist, true, 3, v)
-			if #targets > 0 then
-				target = Common.GetRandomTableEntry(targets)
-			end
+		local targets = MasteryBonusManager.GetClosestCombatEnemies(v, radius, true, 3, v)
+		if #targets > 0 then
+			target = Common.GetRandomTableEntry(targets)
 		end
 
 		if target ~= nil then
-			GameHelpers.ShootProjectile(char, target.UUID, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot", true)
+			GameHelpers.ShootProjectile(char, target.UUID, "Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot", false, nil, target.UUID, true)
 		else
 			x = x + forwardVector[1]
 			z = z + forwardVector[3]
@@ -51,7 +57,6 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery
 		local maxBonusShots = Ext.ExtraData.LLWEAPONEX_MasteryBonus_Bow_PinDownBonusShots or 1
 		if maxBonusShots > 0 then
 			local bonusShots = 0
-			local isInCombat = CharacterIsInCombat(char) == 1
 			local character = Ext.GetCharacter(char)
 			local rot = character.Stats.Rotation
 			local forwardVector = {
@@ -59,12 +64,14 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery
 				0,
 				-rot[9] * 1.25,
 			}
-			local maxDist = Ext.StatGetAttribute(skill, "TargetRadius")
+			local radius = (Ext.StatGetAttribute(skill, "TargetRadius") or 6.0) / 2
 			skillData:ForEach(function(v, targetType, skillEventData)
 				if bonusShots < maxBonusShots then
-					local _,b = pcall(OnPinDownTarget, v, targetType, skill, char, isInCombat, forwardVector, maxDist)
+					local success,b = xpcall(OnPinDownTarget, debug.traceback, v, targetType, char, skill, forwardVector, radius)
 					if b == true then
 						bonusShots = bonusShots + 1
+					elseif not success then
+						print(b)
 					end
 				end
 			end)

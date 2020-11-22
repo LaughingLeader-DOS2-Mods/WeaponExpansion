@@ -214,6 +214,63 @@ end
 
 ---Get a table of enemies in combat, determined by distance to a source.
 ---@param char string
+---@param target EsvCharacter|EsvItem
+---@param radius number
+---@param sortByClosest boolean
+---@param limit integer
+---@param ignoreTarget string
+---@return string[]
+function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sortByClosest, limit, ignoreTarget)
+	if target == nil then
+		return {}
+	end
+	if radius == nil then
+		radius = 8
+	end
+	local lastDist = 999
+	local targets = {}
+	for _,enemy in pairs(target:GetNearbyCharacters(radius)) do
+		print(enemy)
+		if enemy ~= char 
+		and enemy ~= ignoreTarget
+		and (CharacterIsEnemy(char, enemy) == 1 or IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1)
+		and CharacterIsDead(enemy) == 0
+		and not GameHelpers.Status.IsSneakingOrInvisible(char)
+		then
+			local dist = GetDistanceTo(char,enemy)
+			if limit == 1 then
+				if dist < lastDist then
+					targets[1] = enemy
+				end
+			else
+				table.insert(targets, {Dist = dist, UUID = enemy})
+			end
+			lastDist = dist
+		end
+	end
+	if #targets > 1 then
+		if sortByClosest then
+			table.sort(targets, function(a,b)
+				return a.Dist < b.Dist
+			end)
+		end
+		if limit ~= nil and limit > 1 then
+			local spliced = {}
+			local count = #targets
+			if limit < count then
+				count = limit
+			end
+			for i=1,count,1 do
+				spliced[#spliced+1] = targets[i]
+			end
+			return spliced
+		end
+	end
+	return targets
+end
+
+---Get a table of enemies in combat, determined by distance to a source.
+---@param char string
 ---@param maxDistance number
 ---@param sortByClosest boolean
 ---@param limit integer
