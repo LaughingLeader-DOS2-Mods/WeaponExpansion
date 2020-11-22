@@ -158,12 +158,12 @@ function SwapUnique(char, id)
 	local next = nil
 	local link = LinkedUniques[uuid]
 	if link ~= nil then
-		if link == uuid then
-			equipped = link
-			next = uuid
-		else
-			equipped = uuid
+		if GameHelpers.Item.ItemIsEquipped(char, uuid) then
 			next = link
+			equipped = uuid
+		else
+			next = uuid
+			equipped = link
 		end
 	end
 	if equipped ~= nil and next ~= nil and ObjectExists(equipped) == 1 and ObjectExists(next) == 1 then
@@ -174,7 +174,7 @@ function SwapUnique(char, id)
 		if statType == "Weapon" then
 			isTwoHanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
 		end
-		local slot = GameHelpers.Item.GetEquippedSlot(char,equipped)
+		local slot = GameHelpers.Item.GetEquippedSlot(char,equipped) or GameHelpers.Item.GetEquippedSlot(char,next) or "Weapon"
 
 		ItemLockUnEquip(equipped, 0)
 		ItemLockUnEquip(next, 0)
