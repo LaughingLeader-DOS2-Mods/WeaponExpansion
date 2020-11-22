@@ -77,6 +77,11 @@ local function OnSkillCallback(callback, matchBonuses, skill, char, ...)
 	end
 end
 
+---@alias WeaponExpansionMasterySkillListenerCallback fun(bonuses:string[], skill:string, char:string, state:SKILL_STATE, data:SkillEventData|HitData)
+
+---@param skill string|string[]
+---@param matchBonuses string|string[]
+---@param callback WeaponExpansionMasterySkillListenerCallback
 function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback)
 	if type(skill) == "table" then
 		for i,v in pairs(skill) do
