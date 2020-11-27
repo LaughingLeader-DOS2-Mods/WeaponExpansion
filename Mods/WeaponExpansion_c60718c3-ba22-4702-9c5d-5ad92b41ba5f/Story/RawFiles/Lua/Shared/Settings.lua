@@ -6,6 +6,8 @@ return function()
 
 	local MenuSectionGeneral = ts:Create("h6145e729g4cb0g4018gafe9gd89175b8943d", "General")
 	local MenuSectionUniques = ts:Create("h903efedcge7b3g485ag87bfgc121d0ecad7f", "<font color='#C7A758'>Unique Items</font>")
+
+	settings.TitleColor = "#FFCC00"
 	
 	settings.Global:AddLocalizedFlags({
 		"LLWEAPONEX_UniqueAutoLevelingDisabled",
