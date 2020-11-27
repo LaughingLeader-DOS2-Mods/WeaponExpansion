@@ -345,7 +345,7 @@ end
 ---@param entry UniqueProgressionEntry
 ---@param stat StatEntryWeapon
 ---@param item EsvItem
-local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad)
+local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, level)
 	local statChanged = false
 	if not StringHelpers.IsNullOrEmpty(entry.MatchStat) then
 		if stat ~= entry.MatchStat then
@@ -382,12 +382,33 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad)
 			target[attribute] = entry.Value
 			statChanged = true
 		end
+	elseif attribute == "DamageRange" then
+		attribute = ""
+		local damage = Game.Math.GetLevelScaledWeaponDamage(level)
+		local minDamage = 0
+		local maxDamage = 0
+		local damageFrombase = stat.DamageFromBase + target.DamageFromBase
+		local baseDamage = damage * (damageFrombase * 0.01)
+		local baseRange = stat["Damage Range"]
+		local range = baseDamage * ((baseRange+entry.Value) * 0.01)
+		local baseMinDamage = item.Stats.DynamicStats[1].MinDamage
+		local baseMaxDamage = item.Stats.DynamicStats[1].MaxDamage
+		minDamage = Ext.Round(baseDamage - (range/2))
+		maxDamage = Ext.Round(baseDamage + (range/2))
+		changes.Boosts["MinDamage"] = (changes.Boosts["MinDamage"] or 0) + math.abs(minDamage - baseMinDamage)
+		changes.Boosts["MaxDamage"] = (changes.Boosts["MaxDamage"] or 0) + math.abs(maxDamage - baseMaxDamage)
+		if LeaderLib.Vars.DebugMode then
+			LeaderLib.PrintLog("[%s] Damage Range (%s) MinDamage(%s => %s) MaxDamage(%s => %s)", stat.Name, entry.Value, baseMinDamage, minDamage, baseMinDamage+minDamage, baseMaxDamage, maxDamage, baseMaxDamage)
+		end
+		target.MinDamage = minDamage
+		target.MaxDamage = maxDamage
+		
 	else
 		printd(stat.Name, attribute, target[attribute], "=>", entry.Value)
 		target[attribute] = entry.Value
 		statChanged = true
 	end
-	if statChanged or firstLoad == true then
+	if (statChanged or firstLoad == true) and not StringHelpers.IsNullOrEmpty(attribute) then
 		changes.Boosts[attribute] = target[attribute]
 	end
 	return statChanged
@@ -504,7 +525,7 @@ end
 local function EvaluateEntry(self, progressionTable, persist, item, level, stat, entry, changes, firstLoad)
 	local statChanged = false
 	if entry.Type == "UniqueProgressionEntry" then
-		if ApplyProgressionEntry(entry, stat, item, changes, firstLoad) then
+		if ApplyProgressionEntry(entry, stat, item, changes, firstLoad, level) then
 			statChanged = true
 		end
 	elseif entry.Type == "UniqueProgressionTransform" then
@@ -516,7 +537,7 @@ local function EvaluateEntry(self, progressionTable, persist, item, level, stat,
 	elseif #entry > 0 then
 		for i,v in pairs(entry) do
 			if v.Type == "UniqueProgressionEntry" then
-				if ApplyProgressionEntry(v, stat, item, changes, firstLoad) then
+				if ApplyProgressionEntry(v, stat, item, changes, firstLoad, level) then
 					statChanged = true
 				end
 			elseif v.Type == "UniqueProgressionTransform" then
@@ -599,6 +620,13 @@ local ArmorBoosts = {
 	ArmorBoost = "integer",
 	MagicArmorValue = "integer",
 	MagicArmorBoost = "integer",
+}
+
+local ShieldBoosts = {
+	ArmorValue = "integer",
+	ArmorBoost = "integer",
+	MagicArmorValue = "integer",
+	MagicArmorBoost = "integer",
 	Blocking = "integer",
 }
 
@@ -622,8 +650,10 @@ local function ResetUnique(item, stat, level, changes)
 	local itemType = item.ItemType
 	if itemType == "Weapon" then
 		ResetBoostAttributes(WeaponBoosts, target, changes)
-	elseif itemType == "Armor" or itemType == "Shield" then
+	elseif itemType == "Armor" then
 		ResetBoostAttributes(ArmorBoosts, target, changes)
+	elseif itemType == "Shield" then
+		ResetBoostAttributes(ShieldBoosts, target, changes)
 	end
 	local originalValues = Temp.OriginalUniqueStats[item.StatsId]
 	if originalValues ~= nil then
