@@ -525,6 +525,18 @@ local bulletTemplates = {
 }
 
 ---@param item EsvItem
+function EquipmentManager.ItemIsNearPlayers(item)
+	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
+		local uuid = db[1]
+		local dist = GetDistanceTo(uuid, item.MyGuid)
+		if dist ~= nil and dist <= 30 then
+			return true
+		end
+	end
+	return false
+end
+
+---@param item EsvItem
 ---@param stats table
 function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 	if changes.Boosts ~= nil and changes.Boosts["Damage Type"] ~= nil then
@@ -548,7 +560,11 @@ function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 			Owner = owner,
 			Changes = changes
 		}
-		Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
+		if EquipmentManager.ItemIsNearPlayers(item) then
+			Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
+		else
+			Ext.PrintWarning(string.format("[WeaponExpansion:EquipmentManager.SyncItemStatChanges] Item[%s] NetID(%s) UUID(%s) is not near any players, and cannot be retrieved by clients.", item.StatsId, item.NetID, item.MyGuid))
+		end
 	end
 end
 
