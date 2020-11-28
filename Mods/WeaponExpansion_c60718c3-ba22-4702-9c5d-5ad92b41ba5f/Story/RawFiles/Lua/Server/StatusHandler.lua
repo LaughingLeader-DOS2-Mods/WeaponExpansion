@@ -2,6 +2,14 @@ if StatusManager == nil then
 	StatusManager = {}
 end
 
+local function CleanupForceAction(handle, target, x, y, z, timerStartFunc)
+	if GetDistanceToPosition(target, x,y,z) < 1 then
+		NRD_GameActionDestroy(handle)
+		return true
+	end
+	return false
+end
+
 ---@param target string
 ---@param source string
 ---@param item EsvItem
@@ -36,6 +44,25 @@ local function ApplyRuneExtraProperties(target, source, item)
 							elseif v.Type == "SurfaceTransform" then
 								local x,y,z = GetPosition(target)
 								TransformSurfaceAtPosition(x, y, z, v.Action, "Ground", 1.0, 6.0, source)
+							elseif v.Type == "Force" then
+								local dist = GetDistanceTo(target, source)
+								local pos = GameHelpers.Math.GetForwardPosition(source, dist + v.Distance)
+								local x,y,z = table.unpack(pos)
+								local handle = NRD_CreateGameObjectMove(target, x, y, z, "", source)
+								local timerName = "Timers_LLWEAPONEX_RuneForceAction_"..source..target
+								local startTimerFunction
+								local cleanupMoveAction = function()
+									if not CleanupForceAction(handle, target, x, y, z) then
+										startTimerFunction(250)
+									else
+										local x,y,z = GetPosition(target)
+										TeleportToRandomPosition(target, 1.0, "") -- Keep on the grid
+									end
+								end
+								startTimerFunction = function(delay)
+									StartOneshotTimer(timerName, delay, cleanupMoveAction)
+								end
+								startTimerFunction(1000)
 							end
 						end
 					end
