@@ -18,6 +18,7 @@ local AbilitySchool = {
 local thiefGloveChanceBonusText = ts:Create("h1fce3bfeg41a6g41adgbc5bg03d39281b469", "<font color='#11D87A'>+[1]% chance from [2]</font>")
 local darkFireballEmptyLevelText = ts:Create("h83e65b1fg30c2g4e9ega9bag005eb17c5d75", "<font color='#FF2200'>[1]/[2] Death Charges</font>")
 local darkFireballLevelText = ts:Create("h67e6fbecg1cafg4202ga78ag45db47880450", "<font color='#AA00FF'>[1]/[2] Death Charges</font>")
+local heavyBoltText = ts:Create("hb931f729g9df1g461bg887fgb7eae7662e12", "Heavy Bolt (+AP Cost)")
 
 local AppendedText = {
 	---@param character EsvCharacter
@@ -41,7 +42,7 @@ local AppendedText = {
 				return darkFireballEmptyLevelText:ReplacePlaceholders(count, max)
 			end
 		end
-	end
+	end,
 }
 
 ---@param checkText string
@@ -221,6 +222,43 @@ local function OnSkillTooltip(character, skill, tooltip)
 					end
 				end
 			end
+		end
+	elseif skill == "Projectile_LLWEAPONEX_HandCrossbow_Shoot" then
+		local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+		if weaponBoostStat ~= nil then
+			---@type StatProperty[]
+			local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
+			if props ~= nil then
+				for i,v in pairs(props) do
+					if v.Type == "Status" then
+						local chance = max.min(100, math.ceil(v.StatusChance * 100))
+						local turns = v.Duration
+						local text = ""
+						local chanceText = ""
+						local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
+						if chance > 0 then
+							chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+						end
+						if turns > 0 then
+							turns = math.ceil(v.Duration / 6.0)
+							text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+						else
+							text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+						end
+						tooltip:AppendElement({
+							Type="ExtraProperties",
+							Label=text
+						})
+					end
+				end
+			end
+		end
+		local isHeavyBolt = (weaponBoostStat ~= nil and string.find(Ext.StatGetAttribute(weaponBoostStat, "Tags"), "LLWEAPONEX_HeavyAmmo"))
+		if isHeavyBolt then
+			tooltip:AppendElement({
+				Type="ExtraProperties",
+				Label=heavyBoltText.Value
+			})
 		end
 	end
 
