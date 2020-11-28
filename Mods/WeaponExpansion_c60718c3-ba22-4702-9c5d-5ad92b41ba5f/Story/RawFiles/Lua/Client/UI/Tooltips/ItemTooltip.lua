@@ -282,13 +282,13 @@ local function OnItemTooltip(item, tooltip)
 		local fakeDamageCreated = false
 		if character ~= nil then
 			if item:HasTag("LLWEAPONEX_Pistol") then
-				local damageRange = Skills.DamageFunctions.PistolDamage(character, true)
+				local damageRange = Skills.DamageFunctions.PistolDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Target_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
 				fakeDamageCreated = true
 			elseif item:HasTag("LLWEAPONEX_HandCrossbow") then
-				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true)
+				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
