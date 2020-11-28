@@ -83,7 +83,7 @@ OnTimerFinished["LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy"] = Clo
 ---@param weaponBoostStat string
 ---@param source EsvCharacter
 function Pistol_ApplyRuneProperties(target, source)
-	local rune,weaponBoostStat = Skills.GetRuneBoost(source.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	local rune,weaponBoostStat = Skills.GetRuneBoost(source.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 	if weaponBoostStat ~= nil then
 		---@type StatProperty[]
 		local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
@@ -124,7 +124,7 @@ local function PistolShootBonuses(skill, char, state, skillData)
 					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
 				end
 			end
-			local rune,weaponBoostStat = Skills.GetRuneBoost(caster.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+			local rune,weaponBoostStat = Skills.GetRuneBoost(caster.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 			if weaponBoostStat ~= nil then
 				---@type StatProperty[]
 				local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")

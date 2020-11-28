@@ -1,4 +1,3 @@
-
 local whirlwindHandCrossbowTargets = {}
 
 function OnWhirlwindHandCrossbowTargetFound(uuid, target)

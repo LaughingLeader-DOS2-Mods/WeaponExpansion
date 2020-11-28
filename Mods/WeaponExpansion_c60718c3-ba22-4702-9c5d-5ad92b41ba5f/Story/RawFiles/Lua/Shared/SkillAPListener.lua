@@ -60,9 +60,7 @@ Ext.RegisterListener("GetSkillAPCost", function (skill, character, grid, positio
 		end
 	end
 	if skill.Name == "Projectile_LLWEAPONEX_HandCrossbow_Shoot" then
-		local rune,weaponBoostStat,rarity = Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
-		local isHeavyBolt = weaponBoostStat ~= nil and string.find(Ext.StatGetAttribute(weaponBoostStat, "Tags", "LLWEAPONEX_HeavyAmmo"))
-		if isHeavyBolt then
+		if Skills.HasTaggedRuneBoost(character, "LLWEAPONEX_HeavyAmmo", "_LLWEAPONEX_HandCrossbows") then
 			local masteryLevel = Mastery.GetHighestMasteryRank(character.Character, "LLWEAPONEX_HandCrossbow")
 			if masteryLevel >= 3 then
 				return 2,false

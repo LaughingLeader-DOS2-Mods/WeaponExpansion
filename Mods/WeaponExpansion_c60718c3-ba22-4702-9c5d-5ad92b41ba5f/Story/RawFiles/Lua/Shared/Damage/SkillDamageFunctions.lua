@@ -210,6 +210,19 @@ local function HasParent(stat, statToFind)
 	end
 end
 
+---@param item StatItem
+---@param tags string[]
+local function HasSharedBaseTags(item, tags)
+	if #tags > 0 then
+		for _,tag in pairs(tags) do
+			if string.find(item.Tags, tag) then
+				return true
+			end
+		end
+	end
+	return false
+end
+
 ---@param character StatCharacter
 ---@param parentStatName string
 ---@param slots string[]
@@ -217,15 +230,20 @@ end
 local function GetItem(character, parentStatName, slots)
 	---@type StatItem
 	local item = nil
+	local tagsStr = Ext.StatGetAttribute(parentStatName, "Tags")
+	local tags = {}
+	if not StringHelpers.IsNullOrEmpty(tagsStr) then
+		tags = StringHelpers.Split(tagsStr, ";")
+	end
 	if type(slots) == "string" then
 		item = character:GetItemBySlot(slots)
-		if item ~= nil and HasParent(item.Name, parentStatName) then
+		if item ~= nil and HasParent(item.Name, parentStatName) or HasSharedBaseTags(item, tags) then
 			return item
 		end
 	else
 		for i,slot in pairs(slots) do
 			item = character:GetItemBySlot(slot)
-			if item ~= nil and HasParent(item.Name, parentStatName) then
+			if item ~= nil and HasParent(item.Name, parentStatName) or HasSharedBaseTags(item, tags) then
 				return item
 			end
 		end
@@ -233,6 +251,7 @@ local function GetItem(character, parentStatName, slots)
 	return nil
 end
 
+local ringSlots = {"Ring", "Ring2"}
 ---@param character StatCharacter
 ---@param runeParentStat string
 ---@param itemParentStat string
@@ -240,6 +259,14 @@ end
 ---@param currentItem StatItem An existing item (skips trying to find one).
 ---@return StatItemDynamic,string,StatItem
 local function GetRuneBoost(character, runeParentStat, itemParentStat, slots, currentItem)
+	if slots == nil then
+		local slot = Ext.StatGetAttribute(itemParentStat, "Slot")
+		if slot == "Ring" then
+			slots = ringSlots
+		else
+			slots = slot
+		end
+	end
 	local item = currentItem or GetItem(character, itemParentStat, slots)
 	if item ~= nil then
 		for i=3,5,1 do
@@ -256,6 +283,30 @@ local function GetRuneBoost(character, runeParentStat, itemParentStat, slots, cu
 		return nil,nil,item.ItemTypeReal
 	end
 	return nil,nil,"Common"
+end
+
+---@param character StatCharacter
+---@param itemParentStat string
+---@param slots string[]
+---@param currentItem StatItem An existing item (skips trying to find one).
+---@return boolean
+function Skills.HasTaggedRuneBoost(character, tag, itemParentStat, slots, currentItem)
+	local item = currentItem or GetItem(character, itemParentStat, slots)
+	if item ~= nil then
+		for i=3,5,1 do
+			local boost = item.DynamicStats[i]
+			if boost ~= nil and boost.BoostName ~= "" then
+				local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
+				if boostStat ~= nil then
+					local tags = Ext.StatGetAttribute(boostStat, "Tags")
+					if not StringHelpers.IsNullOrEmpty(tags) and string.find(tags, tag) then
+						return true
+					end
+				end
+			end
+		end
+	end
+	return false
 end
 
 ---@param character StatCharacter
@@ -286,7 +337,7 @@ local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
 			masteryBoost = boost
 		end
 	end
-	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 	if weaponBoostStat == nil then 
 		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" 
 	end
@@ -311,7 +362,7 @@ local function GetPistolDamage(character, isTooltip, noRandomization, item)
 			masteryBoost = boost
 		end
 	end
-	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt", item)
+	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", nil, item)
 	if weaponBoostStat == nil then 
 		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" 
 	end
@@ -332,7 +383,7 @@ local function GetHandCrossbowDamage(character, isTooltip, noRandomization, item
 			masteryBoost = boost
 		end
 	end
-	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"}, item)
+	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", nil, item)
 	if weaponBoostStat == nil then 
 		weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" 
 	end
@@ -369,7 +420,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	end
 	if skill == nil then skill = baseSkill end
 
-	local rune,weaponBoostStat,rarity = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	local rune,weaponBoostStat,rarity = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0
@@ -454,7 +505,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		skill["UseWeaponDamage"] = "Yes"
 	end
 
-	local rune,weaponBoostStat,rarity = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	local rune,weaponBoostStat,rarity = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0

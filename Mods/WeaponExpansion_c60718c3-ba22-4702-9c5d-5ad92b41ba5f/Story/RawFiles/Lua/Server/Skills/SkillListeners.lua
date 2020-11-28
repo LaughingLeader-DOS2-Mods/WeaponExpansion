@@ -1,4 +1,6 @@
 SKILL_STATE = LeaderLib.SKILL_STATE
+---@type fun(skill:string|string[], callback:LeaderLibSkillListenerCallback):void
+local RegisterSkillListener = LeaderLib.RegisterSkillListener
 
 local SkillListeners = {
 	SkillType = {},
@@ -84,7 +86,7 @@ local function AimedShotBonuses(skill, char, state, data)
 		SetStoryEvent(char, "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
 	end
 end
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedShotBonuses)
+RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedShotBonuses)
 
 ---@param skill string
 ---@param char string
@@ -97,7 +99,7 @@ local function Greatbow_PiercingShot_DragonBonus(skill, char, state, data)
 		end
 	end
 end
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", Greatbow_PiercingShot_DragonBonus)
+RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", Greatbow_PiercingShot_DragonBonus)
 
 -- local function CheckAimedShotBonus(data)
 -- 	local char = data[1]
@@ -147,8 +149,8 @@ local function SkyShot(skill, char, state, data)
 	end
 end
 
-LeaderLib.RegisterSkillListener("Projectile_SkyShot", SkyShot)
-LeaderLib.RegisterSkillListener("Projectile_EnemySkyShot", SkyShot)
+RegisterSkillListener("Projectile_SkyShot", SkyShot)
+RegisterSkillListener("Projectile_EnemySkyShot", SkyShot)
 
 local function ProcGreatbowLightningStrike(data)
 	local char = data[1]
@@ -167,7 +169,7 @@ local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
 ---@param char string
 ---@param state SkillState
 ---@param data HitData
-LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, data)
+RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, data)
 	if state == SKILL_STATE.HIT and data.Success then
 		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Vars.DebugEnabled == true
 		if canStealFrom then
@@ -265,17 +267,17 @@ local function SwapSkills(nextSkill, instant, skill, char, state, data)
 	end
 end
 
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_HandCrossbow_Reload", false, ...) end)
-LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_HandCrossbow_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, ...) end)
-LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", false, ...) end)
-LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Target_LLWEAPONEX_Pistol_Shoot", true, ...) end)
---LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", function(...) SwapHandCrossbowSkills(false, ...) end)
+RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_HandCrossbow_Reload", false, ...) end)
+RegisterSkillListener("Shout_LLWEAPONEX_HandCrossbow_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, ...) end)
+RegisterSkillListener("Target_LLWEAPONEX_Pistol_Shoot", function(...) SwapSkills("Shout_LLWEAPONEX_Pistol_Reload", false, ...) end)
+RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Target_LLWEAPONEX_Pistol_Shoot", true, ...) end)
+--RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", function(...) SwapHandCrossbowSkills(false, ...) end)
 
 ---@param skill string
 ---@param char string
 ---@param state SkillState
 ---@param data SkillEventData
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, data)
+RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		local radius = math.max(1.0, Ext.StatGetAttribute("Projectile_LLWEAPONEX_DarkFireball", "ExplodeRadius") - 1.0)
 		if data.TotalTargetObjects > 0 then
@@ -289,6 +291,33 @@ LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(s
 			local x,y,z = table.unpack(data.TargetPositions[1])
 			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCursed", radius, 1)
 			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCloudCursed", radius, 1)
+		end
+	end
+end)
+
+RegisterSkillListener({"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"}, function(skill, char, state, data)
+	if state == SKILL_STATE.HIT then
+		--local target = Ext.GetCharacter(data.Target)
+		-- Silver bolts / Bullets do bonus damage to undead/voidwoken
+		if TagHelpers.IsUndeadOrVoidwoken(data.Target) then
+			local character = Ext.GetCharacter(char)
+			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
+				local bonus = Ext.ExtraData.LLWEAPONEX_HandCrossbow_SilverBonusDamage or 1.5
+				GameHelpers.Damage.IncreaseDamage(data.Target, char, data.Handle, bonus, false)
+			end
+		end
+	end
+end)
+
+RegisterSkillListener({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"}, function(skill, char, state, data)
+	if state == SKILL_STATE.HIT then
+		-- Silver bullets do bonus damage to undead/voidwoken
+		if TagHelpers.IsUndeadOrVoidwoken(data.Target) then
+			local character = Ext.GetCharacter(char)
+			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
+				local bonus = Ext.ExtraData.LLWEAPONEX_Pistol_SilverBonusDamage or 1.5
+				GameHelpers.Damage.IncreaseDamage(data.Target, char, data.Handle, bonus, false)
+			end
 		end
 	end
 end)
