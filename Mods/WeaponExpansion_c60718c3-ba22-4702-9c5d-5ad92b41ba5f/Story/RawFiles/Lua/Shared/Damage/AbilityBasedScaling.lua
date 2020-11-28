@@ -1,10 +1,15 @@
+local printf = LeaderLib.PrintLog
+
 Math.AbilityScaling = {}
 
 --- @param ability integer
 function Math.AbilityScaling.ScaledDamageFromPrimaryAbility(ability)
     local attributeMax = Ext.ExtraData.AttributeSoftCap - Ext.ExtraData.AttributeBaseValue
-    local result = (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * (attributeMax/Ext.ExtraData.CombatAbilityCap))
-    --print("ScaledDamageFromPrimaryAttribute",ability,result*100, Game.Math.ScaledDamageFromPrimaryAttribute(40)*100)
+    local damageBonusMult = attributeMax/Ext.ExtraData.CombatAbilityCap
+    local result = (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * damageBonusMult)
+    -- if Vars.DebugEnabled then
+    --     print("ScaledDamageFromPrimaryAttribute",ability,result,Game.Math.ScaledDamageFromPrimaryAttribute(40))
+    -- end
     return result
 end
 
@@ -49,16 +54,25 @@ function Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon
         + Math.AbilityScaling.ComputeWeaponRequirementScaledDamage(character, weapon, ability)
     boost = boost / 100.0
 
+    boost = boost + 0.1
+
     if character.IsSneaking then
         boost = boost + Ext.ExtraData['Sneak Damage Multiplier']
     end
 
     local boostMin = math.max(-1.0, boost)
 
+    --printf("[AbilityScaling.CalculateWeaponScaledDamageRanges] ComputeWeaponCombatAbilityBoost(%s) ComputeWeaponRequirementScaledDamage(%s) character.DamageBoost(%s)", Math.AbilityScaling.ComputeWeaponCombatAbilityBoost(character, weapon), Math.AbilityScaling.ComputeWeaponRequirementScaledDamage(character, weapon, ability), character.DamageBoost)
+
+    --printf("[AbilityScaling.CalculateWeaponScaledDamageRanges] boost(%s) boostMin(%s) weapon.DamageFromBase(%s) weapon.Damage Range(%s) weapon.MinDamage(%s) weapon.MaxDamage(%s)", boost, boostMin, weapon.DynamicStats[1].DamageFromBase, weapon["Damage Range"], weapon.DynamicStats[1].MinDamage, weapon.DynamicStats[1].MaxDamage)
+    --print(Ext.JsonStringify(damages))
+
     for damageType, damage in pairs(damages) do
         damage.Min = damage.Min + math.ceil(damage.Min * boostMin)
         damage.Max = damage.Max + math.ceil(damage.Max * boost)
     end
+
+    --printf("[AbilityScaling.CalculateWeaponScaledDamageRanges] Min(%s) Max(%s)", damages.Physical.Min, damages.Physical.Max)
 
     return damages
 end
@@ -119,6 +133,7 @@ end
 --- @param skill StatEntrySkillData
 function Math.AbilityScaling.GetSkillDamageRange(character, skill, mainWeapon, offHandWeapon, ability, useWeaponDamageCalc)
     local damageMultiplier = skill['Damage Multiplier'] * 0.01
+    --print(damageMultiplier, skill["Damage Multiplier"])
 
     if skill.UseWeaponDamage == "Yes" or useWeaponDamageCalc == true then
         local mainDamageRange = Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, mainWeapon, ability)
@@ -147,20 +162,22 @@ function Math.AbilityScaling.GetSkillDamageRange(character, skill, mainWeapon, o
         end
 
         for damageType, range in pairs(mainDamageRange) do
+            --printf("[AbilityScaling.mainDamageRange] damageType(%s) GetDamageBoostByType(%s)", damageType, Game.Math.GetDamageBoostByType(character, damageType))
             local min = Ext.Round(range.Min * damageMultiplier)
             local max = Ext.Round(range.Max * damageMultiplier)
             range.Min = min + math.ceil(min * Game.Math.GetDamageBoostByType(character, damageType))
             range.Max = max + math.ceil(max * Game.Math.GetDamageBoostByType(character, damageType))
         end
-
+        --printf("[AbilityScaling.GetSkillDamageRange] Min(%s) Max(%s)", mainDamageRange.Physical.Min, mainDamageRange.Physical.Max)
         local damageType = skill.DamageType
         if damageType ~= "None" and damageType ~= "Sentinel" then
             local min, max = 0, 0
             local boost = Game.Math.GetDamageBoostByType(character, damageType)
             for _, range in pairs(mainDamageRange) do
-                min = min + range.Min + math.ceil(range.Min * Game.Math.GetDamageBoostByType(character, damageType))
-                max = max + range.Max + math.ceil(range.Min * Game.Math.GetDamageBoostByType(character, damageType))
+                min = min + range.Min + math.ceil(range.Min * boost)
+                max = max + range.Max + math.ceil(range.Min * boost)
             end
+            --printf("[AbilityScaling.mainDamageRange] damageType(%s) GetDamageBoostByType(%s)", damageType, Game.Math.GetDamageBoostByType(character, damageType))
     
             mainDamageRange = {}
             mainDamageRange[damageType] = {Min = min, Max = max}
@@ -185,12 +202,13 @@ function Math.AbilityScaling.GetSkillDamageRange(character, skill, mainWeapon, o
         else
             attrDamageScale = 1.0
         end
-
+        
         local baseDamage = Game.Math.CalculateBaseDamage(skill.Damage, character, nil, level) * attrDamageScale * damageMultiplier
         local damageRange = skill['Damage Range'] * baseDamage * 0.005
-
+        
         local damageTypeBoost = 1.0 + Game.Math.GetDamageBoostByType(character, damageType)
         local damageBoost = 1.0 + (character.DamageBoost / 100.0)
+        --print(attrDamageScale, damageMultiplier, Game.Math.CalculateBaseDamage(skill.Damage, character, nil, level), baseDamage, damageTypeBoost, damageBoost)
 
         local finalMin = math.ceil(math.ceil(Ext.Round(baseDamage - damageRange) * damageBoost) * damageTypeBoost)
         local finalMax = math.ceil(math.ceil(Ext.Round(baseDamage + damageRange) * damageBoost) * damageTypeBoost)

@@ -418,13 +418,37 @@ local weaponStatAttributes = {
 	"WeaponType",
 }
 
+local function NewWeaponDynamicStatEntry()
+	return {
+		StatsType = "Weapon",
+		MinDamage = 0,
+		MaxDamage = 0,
+		DamageType = "None",
+		DamageBoost = 0,
+		DamageFromBase = 0
+	}
+end
+
+local RarityValue = {
+	Common = 0,
+	Uncommon = 1,
+	Rare = 2,
+	Epic = 3,
+	Legendary = 4,
+	Divine = 5,
+	Unique = 6
+}
+
 ---@param stat string
 ---@param level integer
 ---@param attribute string
 ---@param weaponType string
 ---@param damageFromBaseBoost integer
+---@param isBoostStat boolean
+---@param baseWeaponDamage number
+---@param rarity string|nil
 ---@return StatItem
-function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage)
+function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage,rarity)
 	local weapon = {}
 	weapon.ItemType = "Weapon"
 	weapon.Name = stat
@@ -446,6 +470,7 @@ function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damag
 	weapon["ModifierType"] = weaponStat["ModifierType"]
 	weapon["IsTwoHanded"] = weaponStat["IsTwoHanded"]
 	weapon["WeaponType"] = weaponStat["WeaponType"]
+	weapon["Damage Range"] = weaponStat["Damage Range"]
 	if damageFromBaseBoost ~= nil and damageFromBaseBoost > 0 then
 		weaponStat.DamageFromBase = weaponStat.DamageFromBase + damageFromBaseBoost
 	end
@@ -457,8 +482,8 @@ function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damag
 	end
 	local baseDamage = damage * (weaponStat.DamageFromBase * 0.01)
 	local range = baseDamage * (weaponStat["Damage Range"] * 0.01)
-	weaponStat.MinDamage = Ext.Round(baseDamage - (range/2))
-	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))
+	weaponStat.MinDamage = Ext.Round(baseDamage - (range/2))+1
+	weaponStat.MaxDamage = Ext.Round(baseDamage + (range/2))+1
 	weaponStat.DamageType = weaponStat["Damage Type"]
 	weaponStat.StatsType = "Weapon"
 	if weaponType ~= nil then
@@ -467,13 +492,31 @@ function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damag
 	end
 	weaponStat.Requirements = weapon.Requirements
 	weapon.DynamicStats = {weaponStat}
+
+	local rarityVal = RarityValue[rarity] or 0
+	print(rarity, rarityVal)
 	if not isBoostStat then
+		for i=2,15 do
+			weapon.DynamicStats[i] = NewWeaponDynamicStatEntry()
+			if i == 2 then
+				weapon.DynamicStats[i].DamageType = weaponStat.DamageType
+			elseif i == 11 and rarityVal > 0 then
+				if rarityVal >= RarityValue.Epic then
+					weapon.DynamicStats[i].DamageBoost = Ext.StatGetAttribute("_Boost_Weapon_Damage_Bonus_Large", "DamageBoost")
+				elseif rarityVal == RarityValue.Rare then
+					weapon.DynamicStats[i].DamageBoost = Ext.StatGetAttribute("_Boost_Weapon_Damage_Bonus_Medium", "DamageBoost")
+				elseif rarityVal == RarityValue.Uncommon then
+					weapon.DynamicStats[i].DamageBoost = Ext.StatGetAttribute("_Boost_Weapon_Damage_Bonus", "DamageBoost")
+				end
+			end
+		end
+
 		local boostsString = Ext.StatGetAttribute(stat, "Boosts")
 		if boostsString ~= nil and boostsString ~= "" then
 			local boosts = StringHelpers.Split(boostsString, ";")
 			for i,boostStat in pairs(boosts) do
 				if boostStat ~= nil and boostStat ~= "" then
-					local boostWeaponStat = CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage)
+					local boostWeaponStat = CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage, rarity)
 					if boostWeaponStat ~= nil then
 						table.insert(weapon.DynamicStats, boostWeaponStat.DynamicStats[1])
 					end

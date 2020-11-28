@@ -35,3 +35,4 @@ LLWEAPONEX_UI_DemoBackpackChargeMode_Recharging	<font color='#00CCAA'>Recharges 
 LLWEAPONEX_UI_EnabledMastery	<font color='#FFAA00'>Enabled Mastery: [1]</font>	h3716cca7ga9fcg4c76g8c61gaabdbbd47017
 LLWEAPONEX_UI_EnabledMasteries	<font color='#FFAA00'>Enabled Masteries: [1]</font>	h5b484a05g654bg43bdgb455gbab5e178ca58
 LLWEAPONEX_UI_AutoLevelText	<font color='#80FFC3' size='18'>Automatically levels up when equipped, gaining bonuses at various levels.</font>	hd5277dddg7b7dg4f95g9216g0e1515f5a461
+LLWEAPONEX_UI_HeavyBoltAPCost	Heavy Bolt (+AP Cost)	hb931f729g9df1g461bg887fgb7eae7662e12

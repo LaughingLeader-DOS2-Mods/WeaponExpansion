@@ -197,6 +197,8 @@ end
 local function HasParent(stat, statToFind)
 	if stat == statToFind then
 		return true
+	elseif stat == nil then
+		return false
 	end
 	local parent = Ext.StatGetAttribute(stat, "Using")
 	if parent == nil or parent == "" then
@@ -235,9 +237,10 @@ end
 ---@param runeParentStat string
 ---@param itemParentStat string
 ---@param slots string[]
----@return StatItemDynamic,string
-local function GetRuneBoost(character, runeParentStat, itemParentStat, slots)
-	local item = GetItem(character, itemParentStat, slots)
+---@param currentItem StatItem An existing item (skips trying to find one).
+---@return StatItemDynamic,string,StatItem
+local function GetRuneBoost(character, runeParentStat, itemParentStat, slots, currentItem)
+	local item = currentItem or GetItem(character, itemParentStat, slots)
 	if item ~= nil then
 		for i=3,5,1 do
 			local boost = item.DynamicStats[i]
@@ -245,23 +248,24 @@ local function GetRuneBoost(character, runeParentStat, itemParentStat, slots)
 				if HasParent(boost.BoostName, runeParentStat) then
 					local boostStat = Ext.StatGetAttribute(boost.BoostName, "RuneEffectWeapon")
 					if boostStat ~= nil then
-						return boost,boostStat
+						return boost,boostStat,item.ItemTypeReal
 					end
 				end
 			end
 		end
+		return nil,nil,item.ItemTypeReal
 	end
-	return nil
+	return nil,nil,"Common"
 end
 
 ---@param character StatCharacter
 ---@return table<string,number[]>|DamageList
-local function GetAbilityBasedWeaponDamage(character, isTooltip, noRandomization, weaponBoostStat, masteryBoost, ability, weaponType)
+local function GetAbilityBasedWeaponDamage(character, isTooltip, noRandomization, weaponBoostStat, masteryBoost, ability, weaponType, rarity)
 	if noRandomization == nil then 
 		noRandomization = false 
 	end
 	local highestAttribute = GetHighestAttribute(character)
-	local weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, weaponType, masteryBoost)
+	local weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, weaponType, masteryBoost, nil, nil, rarity)
 	if isTooltip == true then
 		return Math.AbilityScaling.CalculateWeaponScaledDamageRanges(character, weapon, ability)
 	else
@@ -282,7 +286,7 @@ local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
 			masteryBoost = boost
 		end
 	end
-	local rune,weaponBoostStat = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
 	if weaponBoostStat == nil then 
 		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" 
 	end
@@ -290,14 +294,15 @@ local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
 		noRandomization = false 
 	end
 	local highestAttribute = GetHighestAttribute(character)
-	return ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, "Rifle", masteryBoost)
+	return ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, "Rifle", masteryBoost, nil, nil, rarity)
 end
 
 ---@param character EsvCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
+---@param item StatItem
 ---@return table<string,number[]>|DamageList
-local function GetPistolDamage(character, isTooltip, noRandomization)
+local function GetPistolDamage(character, isTooltip, noRandomization, item)
 	local masteryBoost = 0
 	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_Pistol")
 	if masteryLevel > 0 then
@@ -306,31 +311,32 @@ local function GetPistolDamage(character, isTooltip, noRandomization)
 			masteryBoost = boost
 		end
 	end
-	local rune,weaponBoostStat = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt", item)
 	if weaponBoostStat == nil then 
 		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" 
 	end
-	return GetAbilityBasedWeaponDamage(character.Stats, isTooltip, noRandomization, weaponBoostStat, masteryBoost, "RogueLore", "Rifle")
+	return GetAbilityBasedWeaponDamage(character.Stats, isTooltip, noRandomization, weaponBoostStat, masteryBoost, "RogueLore", "Rifle", rarity)
 end
 
 ---@param character EsvCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
+---@param item StatItem
 ---@return table<string,number[]>|DamageList
-local function GetHandCrossbowDamage(character, isTooltip, noRandomization)
+local function GetHandCrossbowDamage(character, isTooltip, noRandomization, item)
 	local masteryBoost = 0
-	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_HandCrossbows")
+	local masteryLevel = Mastery.GetHighestMasteryRank(character, "LLWEAPONEX_HandCrossbow")
 	if masteryLevel > 0 then
-		local boost = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbowsMasteryBoost"..masteryLevel, 0)
+		local boost = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbowMasteryBoost"..masteryLevel, 0)
 		if boost > 0 then
 			masteryBoost = boost
 		end
 	end
-	local rune,weaponBoostStat = GetRuneBoost(character.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"}, item)
 	if weaponBoostStat == nil then 
 		weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" 
 	end
-	return GetAbilityBasedWeaponDamage(character.Stats, isTooltip, noRandomization, weaponBoostStat, masteryBoost, "RogueLore", "Crossbow")
+	return GetAbilityBasedWeaponDamage(character.Stats, isTooltip, noRandomization, weaponBoostStat, masteryBoost, "RogueLore", "Crossbow", rarity)
 end
 
 --- @param baseSkill StatEntrySkillData
@@ -355,6 +361,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	
 	local highestAttribute = GetHighestAttribute(attacker)
 
+	---@type StatItem
 	local weapon = nil
 	local skill = baseSkill
 	if not SkillPropsIsTable(baseSkill) then
@@ -362,7 +369,7 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	end
 	if skill == nil then skill = baseSkill end
 
-	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
+	local rune,weaponBoostStat,rarity = GetRuneBoost(attacker, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", {"Ring", "Ring2"})
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_HandCrossbow_Bolts_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0
@@ -373,9 +380,11 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 				masteryBoost = boost
 			end
 		end
+
+		masteryBoost = masteryBoost + 5
 		--print("LLWEAPONEX_HandCrossbow mastery boost:", masteryLevel, masteryBoost)
 		--print(LeaderLib.Common.Dump(attacker.Character:GetTags()))
-		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost)
+		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost, nil, nil, rarity)
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
@@ -383,10 +392,10 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 		--skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
 	end
 
-    local damageMultiplier = skill['Damage Multiplier'] * 0.01
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
 
+	print(weapon.Name, weapon.DynamicStats[1].DamageFromBase, attacker.MainWeapon.Name, attacker.MainWeapon.DamageFromBase)
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
 		local mainDmgs = Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, nil, noRandomization, "RogueLore")
@@ -400,7 +409,9 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 		return damageList,Game.Math.DamageTypeToDeathType(skillDamageType)
 	else
 		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
-		--Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
+		--local mainDamageRange = Game.Math.GetSkillDamageRange(attacker, skill, weapon)
+		Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
+		Ext.Print("mainDamageRange test:",Ext.JsonStringify(Game.Math.GetSkillDamageRange(attacker, skill, attacker.MainWeapon)))
         return mainDamageRange
 	end
 end
@@ -443,7 +454,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		skill["UseWeaponDamage"] = "Yes"
 	end
 
-	local rune,weaponBoostStat = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
+	local rune,weaponBoostStat,rarity = GetRuneBoost(attacker, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", "Belt")
 	if weaponBoostStat == nil then weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" end
 	if weaponBoostStat ~= nil then
 		local masteryBoost = 0
@@ -455,7 +466,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 			end
 		end
 		--print("LLWEAPONEX_Pistol mastery boost:", masteryLevel, masteryBoost)
-		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost)
+		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost, nil, nil, rarity)
 		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
 		--Ext.Print(LeaderLib.Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]

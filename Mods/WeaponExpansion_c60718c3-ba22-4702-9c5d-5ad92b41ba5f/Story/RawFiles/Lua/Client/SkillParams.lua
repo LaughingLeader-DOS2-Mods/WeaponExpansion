@@ -78,18 +78,34 @@ end
 Skills.Params["LLWEAPONEX_PistolRuneEffects"] = GetPistolBulletEffects
 
 local skillAbility = {
-	Target_LLWEAPONEX_Pistol_Shoot = "RogueLore",
-	Target_LLWEAPONEX_Pistol_Shoot_Enemy = "RogueLore",
-	Projectile_LLWEAPONEX_HandCrossbow_Shoot = "RogueLore",
-	Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = "RogueLore",
+	Target_LLWEAPONEX_Pistol_Shoot = {"RogueLore", "LLWEAPONEX_Pistol"},
+	Target_LLWEAPONEX_Pistol_Shoot_Enemy = {"RogueLore", "LLWEAPONEX_Pistol"},
+	Projectile_LLWEAPONEX_HandCrossbow_Shoot = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
+	Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
 }
 
 local function GetSkillAbility(skill, character, isFromItem, param)
 	local ability = skillAbility[skill.Name]
 	if ability ~= nil then
-		local text = string.gsub(Text.DefaultSkillScaling.LevelBased.Value, "%[1%]", GameHelpers.GetAbilityName(ability))
-		if text ~= nil then
-			return "<br><font color='#078FC8'>"..text.."</font>"
+		local t = type(ability)
+		if t == "string" then
+			local text = Text.DefaultSkillScaling.LevelBased:ReplacePlaceholders(GameHelpers.GetAbilityName(ability))
+			if text ~= nil then
+				return "<br><font color='#078FC8'>"..text.."</font>"
+			end
+		elseif t == "table" then
+			local allBonuses = {}
+			for i,v in pairs(ability) do
+				if LeaderLib.Data.AbilityEnum[v] ~= nil then
+					table.insert(allBonuses, GameHelpers.GetAbilityName(v))
+				elseif Masteries[v] ~= nil then
+					table.insert(allBonuses, string.format("%s %s", Masteries[v].Name.Value, Text.Mastery.Value))
+				end
+			end
+			local text = Text.DefaultSkillScaling.LevelBased:ReplacePlaceholders(StringHelpers.Join(", ", allBonuses))
+			if text ~= nil then
+				return "<br><font color='#078FC8'>"..text.."</font>"
+			end
 		end
 	end
 	return ""
