@@ -27,6 +27,11 @@ local function SetItemStats(target, tbl)
 			maxDamage = Ext.Round(baseDamage + (range/2))
 			target.MinDamage = minDamage
 			target.MaxDamage = maxDamage
+		elseif k == "Boosts" then
+			local stat = Ext.GetStat(target.Name)
+			if stat ~= nil then
+				stat.Boosts = v
+			end
 		else
 			if type(v) == "table" and target[k] ~= nil then
 				SetItemStats(target[k], v)

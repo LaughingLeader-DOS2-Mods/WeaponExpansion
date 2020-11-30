@@ -368,11 +368,10 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, leve
 		end
 	elseif attribute == "WeaponRange" then
 		entry.Value = math.ceil(entry.Value / 100)
-	elseif attribute == "Boosts" or attribute == "Skills" then
+	elseif attribute == "Skills" then
 		local current = target[attribute]
-		if current ~= "" then
-			local boostNames = StringHelpers.Split(entry.Value, ";")
-			for i,v in pairs(boostNames) do
+		if not StringHelpers.IsNullOrEmpty(current) then
+			for i,v in pairs(StringHelpers.Split(entry.Value, ";")) do
 				if not string.find(current, v) then
 					target[attribute] = current .. ";" .. v
 					statChanged = true
@@ -382,6 +381,12 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, leve
 			target[attribute] = entry.Value
 			statChanged = true
 		end
+	elseif attribute == "Boosts" then
+		-- TODO
+		-- printd(stat.Name, attribute, stat.Boosts, "=>", entry.Value)
+		-- stat.Boosts = entry.Value
+		-- statChanged = true
+		firstLoad = false
 	elseif attribute == "DamageRange" then
 		attribute = ""
 		local damage = Game.Math.GetLevelScaledWeaponDamage(level)
