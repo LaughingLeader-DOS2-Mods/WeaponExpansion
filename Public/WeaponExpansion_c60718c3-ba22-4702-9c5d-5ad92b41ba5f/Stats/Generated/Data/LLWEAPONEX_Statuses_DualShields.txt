@@ -293,7 +293,6 @@ data "Description" "LLWEAPONEX_SHIELD_PRISON_BUFF_Description"
 data "Icon" "LLWEAPONEX_Status_ShieldPrisonBuff"
 data "StatsId" "Stats_LLWEAPONEX_ShieldPrisonBuff"
 data "StackId" "Stack_LLWEAPONEX_ShieldPrisonBuff"
-data "LeaveAction" "Projectile_LLWEAPONEX_Status_ShieldPrison_OnRemove"
 
 new entry "Stats_LLWEAPONEX_ShieldPrisonBuff"
 type "Potion"
