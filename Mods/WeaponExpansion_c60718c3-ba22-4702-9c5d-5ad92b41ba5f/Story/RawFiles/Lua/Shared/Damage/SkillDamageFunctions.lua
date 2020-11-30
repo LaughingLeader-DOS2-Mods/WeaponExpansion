@@ -213,6 +213,9 @@ end
 ---@param item StatItem
 ---@param tags string[]
 local function HasSharedBaseTags(item, tags)
+	if item == nil then
+		return false
+	end
 	if #tags > 0 and not StringHelpers.IsNullOrEmpty(item.Tags) then
 		for _,tag in pairs(tags) do
 			if string.find(item.Tags, tag) then
