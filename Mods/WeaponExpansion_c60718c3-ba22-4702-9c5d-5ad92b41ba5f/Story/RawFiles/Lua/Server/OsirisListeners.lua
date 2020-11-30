@@ -34,15 +34,25 @@ local function IncreaseKillCount(char, fromTargetDying)
 	if CharacterHasSkill(char, "Projectile_LLWEAPONEX_DarkFireball") == 1 then
 		local character = Ext.GetCharacter(char)
 		local maxCount = Ext.ExtraData["LLWEAPONEX_DarkFireball_MaxKillCount"] or 10
-		local current = PersistentVars.SkillData.DarkFireballCount[character.NetID] or 0
+		local current = PersistentVars.SkillData.DarkFireballCount[character.MyGuid] or 0
 		if current < maxCount then
-			PersistentVars.SkillData.DarkFireballCount[character.NetID] = current + 1
-			if PersistentVars.SkillData.DarkFireballCount[character.NetID] >= 1 then
+			PersistentVars.SkillData.DarkFireballCount[character.MyGuid] = current + 1
+			if PersistentVars.SkillData.DarkFireballCount[character.MyGuid] >= 1 then
 				UpdateDarkFireballSkill(char)
 			end
-			--print("IncreaseKillCount", char, current, maxCount)
+			SyncDataToClient(CharacterGetReservedUserID(char))
+			if Vars.DebugEnabled then
+				print("IncreaseKillCount", char, PersistentVars.SkillData.DarkFireballCount[character.MyGuid], maxCount)
+			end
 		end
 	end
+end
+
+if Vars.DebugEnabled then
+	Ext.RegisterConsoleCommand("llweaponex_killcount", function(cmd)
+		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
+		IncreaseKillCount(host)
+	end)
 end
 
 local function SkipDeathXP(uuid, region)

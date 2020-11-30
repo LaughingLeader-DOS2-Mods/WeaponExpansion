@@ -309,14 +309,17 @@ function UpdateDarkFireballSkill(char)
 	if killCount >= 1 then
 		local rangeBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_RangePerCount"] or 1.0
 		local radiusBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount"] or 0.4
+		--local damageBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_DamageMultPerCount"] or 15
 	
 		local nextRange = math.min(16, math.floor(6 + (rangeBonusMult * killCount)))
 		local nextRadius = math.min(8, math.floor(1 + (radiusBonusMult * killCount)))
+		--local nextDamageMult = math.min(200, math.floor(1 + (damageBonusMult * killCount)))
 	
 		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
 		stat.TargetRadius = nextRange
 		stat.AreaRadius = nextRadius
 		stat.ExplodeRadius = nextRadius
+		--stat["Damage Multiplier"] = nextDamageMult
 
 		if killCount >= 5 then
 			stat.Template = "9bdb7e9c-02ce-4f2f-9e7b-463e3771af9c"
@@ -325,6 +328,7 @@ function UpdateDarkFireballSkill(char)
 		Ext.SyncStat("Projectile_LLWEAPONEX_DarkFireball", true)
 	else
 		local stat = Ext.GetStat("Projectile_LLWEAPONEX_DarkFireball")
+		--stat["Damage Multiplier"] = 10
 		stat.TargetRadius = 6
 		stat.AreaRadius = 1
 		stat.ExplodeRadius = 1

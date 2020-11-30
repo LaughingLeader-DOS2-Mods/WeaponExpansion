@@ -734,18 +734,15 @@ end
 --- @param isTooltip boolean
 local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local skill = baseSkill
-	local countMult = 0
-	countMult = PersistentVars.SkillData.DarkFireballCount[attacker.NetID] or 0
+	local countMult = 1
+	countMult = PersistentVars.SkillData.DarkFireballCount[attacker.Character.NetID] or 0
 	if countMult > 0 then
 		if not SkillPropsIsTable(skill) then
 			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
 		end
 		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFireball_DamageBonusPerCount"] or 20.0
-		-- key "LLWEAPONEX_DarkFireball_DamageBonusPerCount","20.0"
-		-- key "LLWEAPONEX_DarkFireball_RangePerCount","1.0"
-		-- key "LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount","0.4"
 		local damageMult = (countMult+1) * damageBonus
-		skill["Damage Multiplier"] = math.min(200.0, skill["Damage Multiplier"] + damageMult)
+		skill["Damage Multiplier"] = skill["Damage Multiplier"] + damageMult
 	end
 	if isTooltip ~= true then
 		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)

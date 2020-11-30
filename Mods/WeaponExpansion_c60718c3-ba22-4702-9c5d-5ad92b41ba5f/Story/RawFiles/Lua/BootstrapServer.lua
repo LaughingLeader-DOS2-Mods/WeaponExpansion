@@ -51,6 +51,7 @@ LeaderLib.RegisterListener("LuaReset", function()
         end
     end
     printd(Ext.JsonStringify(PersistentVars))
+    UpdateDarkFireballSkill(Origin.Korvash)
 end)
 
 ---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
