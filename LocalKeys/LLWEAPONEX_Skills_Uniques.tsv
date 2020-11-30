@@ -7,7 +7,7 @@ Rush_LLWEAPONEX_AnvilMace_GroundSmash_Description	Leap forward and slam the almi
 Rush_LLWEAPONEX_AnvilMace_GroundSmash_DisplayName	<font color='#FFDD00'>Sunder the Mountain</font>	h5382a04agef53g4d1eg942cg623f149e990d
 Rush_LLWEAPONEX_Warchief_Whirlwind_Description	Spin forward with the <font color='#c5a65a'>Warchief's Halberd</font>, hitting enemies in a [1] radius for [2].	hf7df1b3ag9bd6g4d6agbef6gd2fab51a9782
 Rush_LLWEAPONEX_Warchief_Whirlwind_DisplayName	Warchief's Whirlwind	h19fa14e3gfea2g49b5gb88dg59e51fa3e21c
-Shout_LLWEAPONEX_Bokken_ChangeStance_Description	Swap between two-handed and single-handed styles with the <font color='#c5a	h670d368ag009fg4991gb535ge3720fb99f2f
+Shout_LLWEAPONEX_Bokken_ChangeStance_Description	Swap between two-handed and single-handed styles with the <font color='#c5a65a'>[Key:WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A_DisplayName]</font>.	h670d368ag009fg4991gb535ge3720fb99f2f
 Shout_LLWEAPONEX_Bokken_ChangeStance_DisplayName	<font color='#00EE29'>Change Stance</font>	h31211dd3gf8eeg4d5bgb7ffg36e10368f488
 Shout_LLWEAPONEX_SpellScroll_PrepareMagic_Description	<i>As is written on <font color='#c5a65a'>Gnak's Spell Scroll</font>:</i><br><font color='#ff9933'>&quot;Me no spell<br>hit bad with biggem<br>biggo boom!&quot;</font><br><i>Repeating the words activates the magic within the scroll. Smashing something with the scroll will then explode a random, basic spell.</i><br>Possible spells include most starting spells, both hostile and beneficial (Fortity vs. Contamination), with a smaller chance at an adept or greater spell.	hc0d71f4ag6d05g460eg953fgde2e5bc20ca9
 Shout_LLWEAPONEX_SpellScroll_PrepareMagic_DisplayName	<font color='#22eeFF'>Gnak's Incantation</font>	h7bbbda96g45f1g490egb52dgb58c12124e0d

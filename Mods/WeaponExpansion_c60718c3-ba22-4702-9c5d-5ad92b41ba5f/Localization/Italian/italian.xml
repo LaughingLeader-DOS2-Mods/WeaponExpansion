@@ -746,7 +746,7 @@
 	<content contentuid="h5047443fg5e5dg4a8bg82e0gafc574d222f4">Tuned Flintlock Pistol</content>
 	<content contentuid="h507a3c21g7f2cg4232gab75g554c515f18d5">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery II&lt;/font&gt;</content>
 	<content contentuid="h50853c8cg2215g4f9fg8ab9g4cc10b4309cc">Throw Weapon</content>
-	<content contentuid="h5086140cg5c20g4fa9ga057g58a67546624f">&lt;icon id=&apos;Projectile_PinDown&apos; icon=&apos;Skill_Ranger_PinDown&apos;/&gt;[Key:Projectile_PinDown_DisplayName] shoots two arrows instead of one, hitting a random nearby enemy for half damage.</content>
+	<content contentuid="h5086140cg5c20g4fa9ga057g58a67546624f">&lt;icon id=&apos;Projectile_PinDown&apos; icon=&apos;Skill_Ranger_PinDown&apos;/&gt;[Key:Projectile_PinDown_DisplayName] shoots [ExtraData:LLWEAPONEX_MasteryBonus_Bow_PinDownBonusShots] arrow(s), hitting a random nearby enemy for half damage.</content>
 	<content contentuid="h50a0e10bg494eg44d7gac24g5dae0e1cd67f">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery II&lt;/font&gt;</content>
 	<content contentuid="h50abd32eg1a6bg4c15ga318g19ad78699979">&lt;icon id=&apos;Jump_TacticalRetreat&apos; icon=&apos;Skill_Ranger_TacticalRetreat&apos;/&gt;After using [Key:Jump_TacticalRetreat_DisplayName], your next action&apos;s AP cost is reduced by [Stats:Stats_LLWEAPONEX_MasteryBonus_Firearm_Tactics:APCostBoost].</content>
 	<content contentuid="h50ea178dgecafg4dd4gaad8g5c49a854ef0d">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery III&lt;/font&gt;</content>
@@ -949,7 +949,7 @@
 	<content contentuid="h64d30195g7144g4429gbf19g61dbdb16cf45">Weapon Expansion - Debug Weapons</content>
 	<content contentuid="h64e87ae9g8ceag4b96gaf83gd5ed4cd1c161">Wooden Destiny</content>
 	<content contentuid="h64ef8f8eg48d8g468dga4ebg2a6357d7e30a">Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength.&lt;br&gt;&lt;font color=&apos;#CC3344&apos;&gt;If [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] goes shirtless, the tattoos will activate in combat and grant bonuses.&lt;/font&gt; </content>
-	<content contentuid="h651d4f13ge5ddg4111g871cgf92fab041bd4">Shoot a &lt;font color=&apos;#00FFAA&apos;&gt;second arrow&lt;/font&gt; at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;If no enemies are nearby, the bonus arrow will fire at the original target.&lt;/font&gt;</content>
+	<content contentuid="h651d4f13ge5ddg4111g871cgf92fab041bd4">Shoot &lt;font color=&apos;#00FFAA&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_Bow_PinDownBonusShots]&lt;/font&gt; additional arrow(s) at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].&lt;br&gt;&lt;font color=&apos;#F19824&apos;&gt;If no enemies are nearby, the bonus arrow(s) will fire at the original target.&lt;/font&gt;</content>
 	<content contentuid="h652d73fcg18b6g469cg8849g710028f8ec91">Strength Conversion</content>
 	<content contentuid="h6530180fg4563g4044gafefgc440ed2dd6a2">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release electrical energy on hit, dealing air damage.</content>
 	<content contentuid="h65373035g1641g4a8fga027g73e063bd5b31">[LLWEAPONEX_VendingMachine_OrderOption8_643f5348-d324-4508-ace3-71505bb30dee]</content>
@@ -972,7 +972,7 @@
 	<content contentuid="h66e019e3g7dd3g41fdg9880gd479a73bf7ba">Character is taking [1] from a flying body.</content>
 	<content contentuid="h66ea9bb3g8724g4001gb9acgccf4a5696829">Rallying</content>
 	<content contentuid="h66fd8c59g8a4dg44a2gaafeg71d0a80db595">Air Weakness</content>
-	<content contentuid="h670d368ag009fg4991gb535ge3720fb99f2f">Swap between two-handed and single-handed styles with the &lt;font color=&apos;#c5a</content>
+	<content contentuid="h670d368ag009fg4991gb535ge3720fb99f2f">Swap between two-handed and single-handed styles with the &lt;font color=&apos;#c5a65a&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Bokken_1H_A_DisplayName]&lt;/font&gt;.</content>
 	<content contentuid="h673b26f0g9e0ag45d3g857fg353aa68f1086">*[WANDS] Click on the button labeled &apos;Wands&apos;.*</content>
 	<content contentuid="h6762114bg6c18g4341gbddbg74de8166e47d">Lead your allies into a strategic charge, increasing &lt;font color=&quot;#9370DB&quot;&gt;Movement Speed by [1]%&lt;/font&gt;, &lt;font color=&quot;#32CD32&quot;&gt;Initiative by [2]&lt;/font&gt;, and the &lt;font color=&quot;#FF31FF&quot;&gt;damage of the first attack by [3]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&quot;#58FFFA&quot;&gt;Range of the War Charge scales with Leadership.&lt;/font&gt;</content>
 	<content contentuid="h67766b52g9d1fg4c92g85c3g0381aa9a878b">Regicide</content>
@@ -1736,6 +1736,7 @@
 	<content contentuid="hb8e7b768gac05g4835g9e6fg4f75b52cfb66">&lt;font color=&apos;#00FFFF&apos;&gt;If killed, character will be resurrected by the Guardian when their turn starts.&lt;/font&gt;</content>
 	<content contentuid="hb8f79e5bgd2c3g48d4g90e5g5de02f9129a8">[1] and [2]</content>
 	<content contentuid="hb9317ba0ga942g4611g857egeff78f33de06">Tar Charge</content>
+	<content contentuid="hb931f729g9df1g461bg887fgb7eae7662e12">Heavy Bolt (+AP Cost)</content>
 	<content contentuid="hb9766113gb6c6g4f55g882dgb4aca210f7ac">Gladiator&apos;s Estoc</content>
 	<content contentuid="hb98b5e57g62bbg4bb0g8973g69bf99d60252">&lt;font color=&apos;#c80030&apos;&gt;Sharpened Great Arrow&lt;/font&gt;</content>
 	<content contentuid="hb9994325g25c9g4159gbaadg693042a4b51a">an Equipped Weapon</content>
