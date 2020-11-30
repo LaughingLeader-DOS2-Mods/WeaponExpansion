@@ -332,7 +332,7 @@ data "LeaveAction" "Projectile_LLWEAPONEX_Status_IronMaiden_BonusHit"
 
 new entry "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX"
 type "StatusData"
-data "StatusType" "EFFECT"
+data "StatusType" "CONSUME"
 using "_LEADERLIB_HIDDEN_CONSUME_BASE"
 data "DisplayName" "LLWEAPONEX_SHIELD_PRISON_DisplayName"
 data "Description" "LLWEAPONEX_SHIELD_PRISON_Description"
