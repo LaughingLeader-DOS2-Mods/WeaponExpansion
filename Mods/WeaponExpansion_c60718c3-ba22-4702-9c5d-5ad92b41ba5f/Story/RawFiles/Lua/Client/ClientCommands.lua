@@ -160,12 +160,14 @@ local function CaptureRewardScreenItems(ui, method)
 				local item = Ext.GetItem(Ext.DoubleToHandle(handle))
 				if item ~= nil then
 					rewardScreenItems[item.NetID] = item
-					print("Found quest reward item", item.NetID, handle)
-					LeaderLib.PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s) GetOwnerCharacter(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos), item:GetOwnerCharacter())
 					local changes = syncUpdateScreenItems[item.NetID]
 					if changes ~= nil then
 						SyncItemBoostChanges(item, changes)
 						syncUpdateScreenItems[item.NetID] = nil
+					end
+					if Vars.DebugEnabled then
+						print("Found quest reward item", item.NetID, handle)
+						LeaderLib.PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos))
 					end
 				end
 			end
@@ -179,13 +181,16 @@ Ext.RegisterListener("SessionLoaded", function()
 	local reward = 136
 	local reward_c = 137
 
-	Ext.RegisterUITypeInvokeListener(reward, "updateItems", CaptureRewardScreenItems)
-	Ext.RegisterUITypeCall(reward, "acceptClicked", function(ui, call)
+	local onRewardScreenClosed = function(ui, call)
 		rewardScreenItems = {}
-	end)
+		syncUpdateScreenItems = {}
+	end
 
-	Ext.RegisterUITypeInvokeListener(reward_c, "updateItems", CaptureRewardScreenItems)
-	Ext.RegisterUITypeCall(reward_c, "acceptClicked", function(ui, call)
-		rewardScreenItems = {}
-	end)
+	if not LeaderLib.Vars.ControllerEnabled then
+		Ext.RegisterUITypeInvokeListener(reward, "updateItems", CaptureRewardScreenItems)
+		Ext.RegisterUITypeCall(reward, "acceptClicked", onRewardScreenClosed)
+	else
+		Ext.RegisterUITypeInvokeListener(reward_c, "updateItems", CaptureRewardScreenItems)
+		Ext.RegisterUITypeCall(reward_c, "acceptClicked", onRewardScreenClosed)
+	end
 end)
