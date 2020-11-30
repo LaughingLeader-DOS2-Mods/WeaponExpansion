@@ -243,8 +243,9 @@ local function SwapDeltaMods(item)
 					local replaceBoost = replace.Boost
 					local existingBoostEntry = boostMap[replaceBoost]
 					if existingBoostEntry ~= nil then
-						existingBoostEntry.ObjectInstanceName = newBoost
-						existingBoostEntry.BoostName = newBoost
+						--existingBoostEntry.ObjectInstanceName = newBoost
+						--existingBoostEntry.BoostName = newBoost
+						--generatedBoostNames[#generatedBoostNames+1] = newBoost
 						local boostStat = Ext.GetStat(newBoost)
 						local statMap = StatMap[itemType]
 						for boostAttribute,statAttribute in pairs(statMap) do
@@ -262,6 +263,8 @@ local function SwapDeltaMods(item)
 								end
 							end
 						end
+						boostMap[newBoost] = existingBoostEntry
+						boostMap[replaceBoost] = nil
 					end
 				end
 			else
@@ -272,6 +275,7 @@ local function SwapDeltaMods(item)
 						printd("Removing boost", replaceBoost)
 						if ResetBoostEntry(replaceBoost, existingBoostEntry, item.ItemType, changes) then
 							hasChanges = true
+							boostMap[replaceBoost] = nil
 						end
 					end
 				end
@@ -280,8 +284,16 @@ local function SwapDeltaMods(item)
 	end
 
 	if hasChanges then
-		local value = NRD_ItemGetPermanentBoostInt(item.MyGuid, "Value")
-		NRD_ItemSetPermanentBoostInt(item.MyGuid, "Value", value)
+		if item.SetGeneratedBoosts ~= nil then
+			-- Save persistence
+			---@type string[]
+			local generatedBoostNames = {}
+			for name,_ in pairs(boostMap) do
+				generatedBoostNames[generatedBoostNames+1] = name
+			end
+			item:SetGeneratedBoosts(generatedBoostNames)
+		end
+
 		local payload = Ext.JsonStringify({
 			NetID = item.NetID,
 			Changes = changes
