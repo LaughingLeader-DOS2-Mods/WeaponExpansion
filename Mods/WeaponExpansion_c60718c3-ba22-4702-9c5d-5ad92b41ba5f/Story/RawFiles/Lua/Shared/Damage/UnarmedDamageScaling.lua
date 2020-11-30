@@ -46,46 +46,40 @@ if Ext.IsServer() then
 	local lizardHits = {}
 
 	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, damage, handle)
-		if damage > 0 then
-			--LeaderLib.Debug_TraceHitPrepare(target, attacker, damage, handle)
-			if IsUnarmedHit(handle) then
-				-- Just why?
-				local character = Ext.GetCharacter(attacker)
-				local isLizard = character:HasTag("LIZARD")
-				local isCombinedHit = isLizard and NRD_HitGetInt(handle, "ProcWindWalker") == 0
-				local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats, true)
+		if IsUnarmedHit(handle) then
+			-- Just why?
+			local character = Ext.GetCharacter(attacker)
+			local isLizard = character:HasTag("LIZARD")
+			local isCombinedHit = isLizard and NRD_HitGetInt(handle, "ProcWindWalker") == 0
+			local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats, true)
 
-				if isCombinedHit then
-					lizardHits[attacker] = nil
-				elseif isLizard then
-					if lizardHits[attacker] == nil then
-						lizardHits[attacker] = 0
-					end
-					lizardHits[attacker] = lizardHits[attacker] + 1
+			if isCombinedHit then
+				lizardHits[attacker] = nil
+			elseif isLizard then
+				if lizardHits[attacker] == nil then
+					lizardHits[attacker] = 0
 				end
+				lizardHits[attacker] = lizardHits[attacker] + 1
+			end
 
-				local isSecondHit = lizardHits[attacker] == 2
-				local damageList = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, isSecondHit)
+			local isSecondHit = lizardHits[attacker] == 2
+			local damageList = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, isSecondHit)
 
-				if isCombinedHit then
-					local offhandDamage = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, true)
-					damageList:Merge(offhandDamage)
-				end
-				NRD_HitClearAllDamage(handle)
-				--NRD_HitStatusClearAllDamage(target, handle)
-				local damages = damageList:ToTable()
-				local totalDamage = 0
-				for i,damage in pairs(damages) do
-					NRD_HitAddDamage(handle, damage.DamageType, damage.Amount)
-					totalDamage = totalDamage + damage.Amount
-				end
-				Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", totalDamage, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
-				if lizardHits[attacker] == 2 then
-					lizardHits[attacker] = nil
-				end
-			else
-				LeaderLib.Debug_TraceHitPrepare(target, attacker, damage, handle)
-				Ext.PrintError("Is not an unarmed hit?")
+			if isCombinedHit then
+				local offhandDamage = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, true)
+				damageList:Merge(offhandDamage)
+			end
+			NRD_HitClearAllDamage(handle)
+			--NRD_HitStatusClearAllDamage(target, handle)
+			local damages = damageList:ToTable()
+			local totalDamage = 0
+			for i,damage in pairs(damages) do
+				NRD_HitAddDamage(handle, damage.DamageType, damage.Amount)
+				totalDamage = totalDamage + damage.Amount
+			end
+			Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", totalDamage, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
+			if lizardHits[attacker] == 2 then
+				lizardHits[attacker] = nil
 			end
 		end
 	end
