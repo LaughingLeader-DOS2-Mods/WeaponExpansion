@@ -210,6 +210,10 @@ local function ResetBoostEntry(boostEntryName, boostEntry, itemType, changes)
 	return changesMade
 end
 
+--[[
+!questreward LLWEAPONEX_Rewards_NewWeapons_1 3000
+]]
+
 ---@param item EsvItem
 local function SwapDeltaMods(item)
 	local level = item.Stats.Level
@@ -218,15 +222,15 @@ local function SwapDeltaMods(item)
 
 	local changes = {}
 	local hasChanges = false
+	local boostMap = {}
 
 	local boosts = GetAllBoosts(item)
 	if boosts ~= nil then
 		print(Ext.JsonStringify(boosts))
-		local boostMap = {}
 		for i=2,#item.Stats.DynamicStats do
 			local boost = item.Stats.DynamicStats[i]
-			LeaderLib.PrintLog("[%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
 			if not StringHelpers.IsNullOrEmpty(boost.ObjectInstanceName) then
+				LeaderLib.PrintLog("[SwapDeltaMods] [%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
 				boostMap[boost.ObjectInstanceName] = boost
 			end
 		end
@@ -289,9 +293,12 @@ local function SwapDeltaMods(item)
 			---@type string[]
 			local generatedBoostNames = {}
 			for name,_ in pairs(boostMap) do
-				generatedBoostNames[generatedBoostNames+1] = name
+				generatedBoostNames[#generatedBoostNames+1] = name
 			end
-			item:SetGeneratedBoosts(generatedBoostNames)
+			if Vars.DebugEnabled then
+				LeaderLib.PrintLog("[SwapDeltaMods] Setting item MyGuid(%s) StatsId(%s) generated boosts to:\n%s", item.MyGuid, item.StatsId, Ext.JsonStringify(generatedBoostNames))
+			end
+			--item:SetGeneratedBoosts(generatedBoostNames)
 		end
 
 		local payload = Ext.JsonStringify({
