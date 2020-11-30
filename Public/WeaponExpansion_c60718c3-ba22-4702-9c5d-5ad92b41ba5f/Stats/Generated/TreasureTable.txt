@@ -154,21 +154,32 @@ new treasuretable "ST_LLWEAPONEX_VendingMachine_AttributeTokens_Start"
 new subtable "-3"
 object category "T_ST_LLWEAPONEX_AttributeTokens_All_Free",1,0,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_AllWeapons"
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_RunebladesNormal",1,0,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_RodsNormal",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Quarterstaff",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Polearm_2H",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Greatbows",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_DualShields",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Rapiers",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Katanas_1H",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Katanas_2H",1,0,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_DaggersNormal",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_BattleBooks_1H",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Firearms_2H",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_Pistols",1,0,0,0,0,0,0,0
+
+new treasuretable "QuestReward_LLWEAPONEX_Weapons_One"
+IgnoreLevelDiff 1
+new subtable "3,1"
+object category "T_ST_LLWEAPONEX_AllWeapons",1,0,0,1,0,0,0,0
+new subtable "1,1"
+object category "T_ST_LLWEAPONEX_AllWeapons",1,0,0,1,2,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_VendingMachine_WeaponsNormal"
 new subtable "1,1"
-object category "T_ST_LLWEAPONEX_RunebladesNormal",1,1,0,0,0,0,0,0
-object category "T_ST_LLWEAPONEX_RodsNormal",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Quarterstaff",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Greatbows",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_DualShields",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Rapiers",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Katanas_1H",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
-object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_BattleBooks_1H",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_AllWeapons",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine_RareWeapons"
 new subtable "1,1"
@@ -1116,7 +1127,7 @@ object category "I_WPN_LLWEAPONEX_CombatShield_Lizards_C",1,1,1,1,1,1,1,0
 new treasuretable "LLWEAPONEX_CheatAllWeapons"
 IgnoreLevelDiff 1
 new subtable "-1"
-object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0
+object category "T_LLWEAPONEX_CheatQuarterstaffs",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatRuneblades",1,0,0,0,0,0,0,0
 new subtable "-1"
@@ -1124,7 +1135,7 @@ object category "T_LLWEAPONEX_CheatRods",1,0,0,0,0,0,0,0
 new subtable "-1"
 object category "T_LLWEAPONEX_CheatThrowingWeapons",1,0,0,0,0,0,0,0
 new subtable "-1"
-object category "I_GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin",1,0,0,0,0,0,0,0
+object category "I_GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin",1,0,0,0,0,0,0
 new subtable "-1"
 object category "I_GRN_LLWEAPONEX_Throwing_Rock_Unique_Kevin_Poison",1,0,0,0,0,0,0,0
 new subtable "-1"
@@ -1223,6 +1234,13 @@ new treasuretable "ST_LLWEAPONEX_Trader_RingAmuletBeltNormal"
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_RingAmuletBelt"
+new subtable "1,1"
+object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+
+//REGION MAIN_TABLES_MERGE
+//Adding items to Shared/Origins tables
+
 new treasuretable "ST_Trader_WeaponRogue"
 CanMerge 1
 new subtable "1,1"
@@ -1257,13 +1275,6 @@ object category "LLWEAPONEX_Polearm_2H",2,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Katanas_2H",2,1,0,0,0,0,0,0
 object category "LLWEAPONEX_DualShields",2,1,0,0,0,0,0,0
 object category "I_WPN_LLWEAPONEX_Quarterstaff_Metal",1,1,0,0,0,0,0,0
-
-new treasuretable "ST_LLWEAPONEX_RingAmuletBelt"
-new subtable "1,1"
-object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
-
-//REGION MAIN_TABLES_MERGE
-//Adding items to Shared/Origins tables
 
 new treasuretable "ST_FTJ_Grenade"
 CanMerge 1
@@ -1399,7 +1410,6 @@ object category "Gold",1,0,0,0,0,1,0,0
 new treasuretable "ST_LLWEAPONEX_RandomEnemyTreasure"
 new subtable "1,1"
 object category "T_GenericEnemy",10,0,0,0,0,0,0,0
-object category "T_FTJ_GenericNpc",10,0,0,0,0,0,0,0
 object category "T_MegaBoss",1,0,0,0,0,0,0,0
 object category "T_MiniBoss",2,0,0,0,0,0,0,0
 object category "T_TinyBoss",2,0,0,0,0,0,0,0

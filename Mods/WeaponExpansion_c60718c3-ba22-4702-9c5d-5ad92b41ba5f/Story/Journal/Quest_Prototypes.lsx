@@ -43,6 +43,44 @@
                         </node>
 					</children>
 				</node>
+                <node id="Quest">
+                    <attribute id="CategoryID" value="LLWEAPONEX_Rewards" type="22" />
+                    <attribute id="MainQuest" value="0" type="19" />
+                    <attribute id="QuestBroadcastLevel" value="0" type="1" />
+                    <attribute id="QuestID" value="LLWEAPONEX_Rewards_NewWeapons_1" type="22" />
+                    <attribute id="QuestTitle" value="" handle="ls::TranslatedStringRepository::s_HandleUnknown" type="28" />
+                    <attribute id="Shareable" value="0" type="19" />
+					<attribute id="SortingPriority" value="0" type="4" />
+					<children>
+                        <node id="QuestState">
+                            <attribute id="Achievement" value="" type="22" />
+                            <attribute id="Act" value="0" type="4" />
+                            <attribute id="Description" value="| QUEST REWARD UI |" handle="h65a39d51ga2ccg47d2gbae4g4ecd832cc962" type="28" />
+                            <attribute id="DevComment" value="" type="22" />
+                            <attribute id="Gain" value="0" type="4" />
+                            <attribute id="Mystery" value="" type="22" />
+                            <attribute id="MysteryAction" value="0" type="1" />
+                            <attribute id="MysteryDescription" value="" handle="h248966eag678eg4ad8g8f2agd2910d0087c5" type="28" />
+                            <attribute id="Objective" value="" type="22" />
+                            <attribute id="QuestRewardCount" value="1" type="4" />
+                            <attribute id="QuestRewardLevel" value="0" type="4" />
+                            <attribute id="ReputationGain" value="0" type="4" />
+                            <attribute id="StatTriggerGUID" value="" type="22" />
+                            <attribute id="Status" value="QuestReward" type="22" />
+                            <children>
+                                <node id="ActivateMarkers">
+                                    <attribute id="ActivateMarkers" value="" type="22" />
+                                </node>
+                                <node id="QuestRewardOptionalTables">
+                                    <attribute id="QuestRewardOptionalTables" value="QuestReward_LLWEAPONEX_Weapons_One" type="22" />
+                                </node>
+                                <node id="QuestRewardTables">
+                                    <attribute id="QuestRewardTables" value="" type="22" />
+                                </node>
+                            </children>
+                        </node>
+					</children>
+				</node>
 			</children>
 		</node>
 	</region>

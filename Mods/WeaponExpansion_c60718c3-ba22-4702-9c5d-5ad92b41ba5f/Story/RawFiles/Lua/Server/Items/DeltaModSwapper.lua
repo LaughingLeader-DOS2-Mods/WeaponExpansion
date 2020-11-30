@@ -316,9 +316,25 @@ local function GetAllBoosts(item)
 	end
 end
 
+local tempQuestRewardItems = {}
+
+local function CanSwapDeltaMods(uuid)
+	if ObjectExists(uuid) == 0 then
+		return false
+	elseif StringHelpers.IsNullOrEmpty(GetInventoryOwner(uuid)) or tempQuestRewardItems[uuid] then
+		-- Quest reward?
+		tempQuestRewardItems[uuid] = true
+		LeaderLib.PrintLog("[WeaponExpansion:CanSwapDeltaMods] Waiting until a quest reward item is added to a character. item(%s)", uuid)
+		return false
+	elseif ObjectGetFlag(uuid, "LLWEAPONEX_ProcessedDeltamods") == 1 then
+		return false
+	end
+	return true
+end
+
 ---@param item string
 function SwapDeltaMods(item)
-	if ObjectExists(item) == 1 and ObjectGetFlag(item, "LLWEAPONEX_ProcessedDeltamods") == 0 then
+	if CanSwapDeltaMods(item) then
 		---@type EsvItem
 		local itemObject = Ext.GetItem(item)
 
@@ -351,8 +367,8 @@ function SwapDeltaMods(item)
 				end
 			end
 
-			--print("SwapDeltaMods", Ext.JsonStringify(itemEntry.DeltaMods))
 			local boosts = GetAllBoosts(itemObject)
+			print("SwapDeltaMods", Ext.JsonStringify(boosts))
 			if boosts ~= nil then
 				local template = GetTemplate(item)
 				NRD_ItemConstructBegin(template)
@@ -440,8 +456,6 @@ function SwapDeltaMods(item)
 					end
 				end
 			end
-		else
-			ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
 		end
 	end
 end
@@ -453,7 +467,9 @@ local equipmentTypes = {
 }
 
 ---@param item EsvItem
-function OnTreasureItemGenerate(item)
+Ext.RegisterListener("TreasureItemGenerated", function(item)
+	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
+	--LeaderLib.PrintLog("[OnTreasureItemGenerated] item(%s) stat(%s) isInInventory(%s) InventoryHandle(%s) TreasureGenerated(%s) OwnerHandle(%s) ParentInventoryHandle(%s)", item.MyGuid, item.StatsId, isInInventory, item.InventoryHandle, item.TreasureGenerated, item.OwnerHandle, item.ParentInventoryHandle)
 	if item == nil or item.MyGuid == nil or item.Stats == nil then
 		return
 	end
@@ -463,10 +479,17 @@ function OnTreasureItemGenerate(item)
 		TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
 		--SwapDeltaMods(item.MyGuid)
 	end
-end
+end)
 
----@param item EsvItem
-Ext.RegisterListener("TreasureItemGenerated", OnTreasureItemGenerate)
+RegisterProtectedOsirisListener("ItemAddedToCharacter", 2, "after", function(item, character)
+	item = StringHelpers.GetUUID(item)
+	character = StringHelpers.GetUUID(character)
+	if tempQuestRewardItems[item] == true then
+		tempQuestRewardItems[item] = nil
+		LeaderLib.PrintLog("[WeaponExpansion:ItemAddedToCharacter] Checking quest reward item's deltamods. item(%s) character(%s)", item, character)
+		SwapDeltaMods(item)
+	end
+end)
 
 if Vars.DebugEnabled then
 	Ext.RegisterConsoleCommand("swapdeltamods", function(command)

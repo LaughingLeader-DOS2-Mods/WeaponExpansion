@@ -210,7 +210,11 @@ Ext.Require("Server/Items/ItemHandler.lua")
 Ext.Require("Server/Items/Uniques/UniqueItemsMain.lua")
 Ext.Require("Server/Items/Quivers.lua")
 Ext.Require("Server/Items/CraftingMechanics.lua")
-Ext.Require("Server/Items/DeltaModSwapper.lua")
+if Ext.IsDeveloperMode() then
+    Ext.Require("Server/Items/DeltaModSwapperv2.lua")
+else
+    Ext.Require("Server/Items/DeltaModSwapper.lua")
+end
 Ext.Require("Server/Items/LootBonuses.lua")
 Ext.Require("Server/Items/TreasureTableMerging.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")

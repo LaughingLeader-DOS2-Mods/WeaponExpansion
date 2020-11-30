@@ -494,7 +494,6 @@ function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damag
 	weapon.DynamicStats = {weaponStat}
 
 	local rarityVal = RarityValue[rarity] or 0
-	print(rarity, rarityVal)
 	if not isBoostStat then
 		for i=2,15 do
 			weapon.DynamicStats[i] = NewWeaponDynamicStatEntry()

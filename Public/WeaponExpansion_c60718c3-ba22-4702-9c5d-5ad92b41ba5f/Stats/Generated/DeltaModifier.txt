@@ -296,18 +296,6 @@ param "Frequency" "1"
 param "ModifierType" "Weapon"
 new boost "_Boost_Weapon_LLWEAPONEX_Skill_BlackShroud",1
 
-new deltamod "Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier1"
-param "BoostType" "ItemCombo"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier1",1
-
-new deltamod "Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier2"
-param "BoostType" "ItemCombo"
-param "Frequency" "1"
-param "ModifierType" "Weapon"
-new boost "_Boost_Weapon_LLWEAPONEX_Blunderbuss_Skills_Tier2",1
-
 new deltamod "Boost_Weapon_LLWEAPONEX_Status_Set_PhysicalWeak"
 param "BoostType" "ItemCombo"
 param "Frequency" "1"

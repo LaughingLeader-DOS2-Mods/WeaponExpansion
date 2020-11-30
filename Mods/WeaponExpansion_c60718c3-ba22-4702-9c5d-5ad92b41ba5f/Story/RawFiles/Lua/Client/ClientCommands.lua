@@ -108,3 +108,84 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 		end
 	end
 end)
+
+local rewardScreenItems = {}
+local syncUpdateScreenItems = {}
+
+local function SyncItemBoostChanges(item, changes)
+	local boostMap = {}
+	for i=2,#item.Stats.DynamicStats do
+		local boost = item.Stats.DynamicStats[i]
+		LeaderLib.PrintLog("[%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
+		if not StringHelpers.IsNullOrEmpty(boost.ObjectInstanceName) then
+			boostMap[boost.ObjectInstanceName] = boost
+		end
+	end
+	for boostName,boosts in pairs(changes) do
+		local boostEntry = boostMap[boostName]
+		if boostEntry ~= nil then
+			for k,v in pairs(boosts) do
+				boostEntry[k] = v
+			end
+		else
+			Ext.PrintError(string.format("[LLWEAPONEX_DeltaModSwapper_SyncBoosts] No DynamicStats entry for boost (%s)", boostName))
+		end
+	end
+end
+
+Ext.RegisterNetListener("LLWEAPONEX_DeltaModSwapper_SyncBoosts", function(cmd, payload)
+	local data = Common.JsonParse(payload)
+	if data ~= nil then
+		local item = Ext.GetItem(data.NetID) or rewardScreenItems[data.NetID]
+		if item ~= nil then
+			SyncItemBoostChanges(item, data.Changes)
+		else
+			syncUpdateScreenItems[data.NetID] = data.Changes
+			if Vars.DebugEnabled then
+				Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s)", data.NetID))
+			end
+		end
+	end
+end)
+
+local function CaptureRewardScreenItems(ui, method)
+	rewardScreenItems = {}
+	local main = ui:GetRoot()
+	local i = 0
+	while i < #main.items_array do
+		if main.items_array[i+4] > 0 then
+			local handle = main.items_array[i+3]
+			if handle ~= nil then
+				---@type EclItem
+				local item = Ext.GetItem(Ext.DoubleToHandle(handle))
+				if item ~= nil then
+					rewardScreenItems[item.NetID] = item
+					print("Found quest reward item", item.NetID, handle)
+					LeaderLib.PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s) GetOwnerCharacter(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos), item:GetOwnerCharacter())
+					local changes = syncUpdateScreenItems[item.NetID]
+					if changes ~= nil then
+						SyncItemBoostChanges(item, changes)
+						syncUpdateScreenItems[item.NetID] = nil
+					end
+				end
+			end
+		end
+		
+		i = i + 5
+	end
+end
+
+Ext.RegisterListener("SessionLoaded", function()
+	local reward = 136
+	local reward_c = 137
+
+	Ext.RegisterUITypeInvokeListener(reward, "updateItems", CaptureRewardScreenItems)
+	Ext.RegisterUITypeCall(reward, "acceptClicked", function(ui, call)
+		rewardScreenItems = {}
+	end)
+
+	Ext.RegisterUITypeInvokeListener(reward_c, "updateItems", CaptureRewardScreenItems)
+	Ext.RegisterUITypeCall(reward_c, "acceptClicked", function(ui, call)
+		rewardScreenItems = {}
+	end)
+end)
