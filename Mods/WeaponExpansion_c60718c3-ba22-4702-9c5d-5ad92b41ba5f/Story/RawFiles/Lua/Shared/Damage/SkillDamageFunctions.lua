@@ -456,8 +456,6 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
-
-	print(weapon.Name, weapon.DynamicStats[1].DamageFromBase, attacker.MainWeapon.Name, attacker.MainWeapon.DamageFromBase)
 	if isTooltip ~= true then
 		local damageList = Ext.NewDamageList()
 		local mainDmgs = Math.AbilityScaling.CalculateWeaponDamage(attacker, weapon, nil, noRandomization, "RogueLore")

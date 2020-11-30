@@ -71,7 +71,7 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery
 					if b == true then
 						bonusShots = bonusShots + 1
 					elseif not success then
-						print(b)
+						Ext.PrintError(b)
 					end
 				end
 			end)

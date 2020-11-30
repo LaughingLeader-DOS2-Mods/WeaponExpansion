@@ -264,29 +264,32 @@ function OnItemTemplateUnEquipped(uuid, itemUUID, template)
 	
 	local character = Ext.GetCharacter(uuid)
 	CheckForUnarmed(character, isPlayer)
-	local item = Ext.GetItem(itemUUID)
 	template = StringHelpers.GetUUID(template)
-	local callbacks = Listeners.EquipmentChanged.Template[template]
-	if callbacks ~= nil then
-		if Vars.DebugEnabled then
-			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.StatsId, character.MyGuid))
-		end
-		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, character, item, template, false)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
-	end
-	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
-		if item:HasTag(tag) then
+
+	if ObjectExists(itemUUID) == 1 then
+		local item = Ext.GetItem(itemUUID)
+		local callbacks = Listeners.EquipmentChanged.Template[template]
+		if callbacks ~= nil then
 			if Vars.DebugEnabled then
-				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.StatsId, character.MyGuid))
+				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.StatsId, character.MyGuid))
 			end
 			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, character, item, tag, false)
+				local b,err = xpcall(callback, debug.traceback, character, item, template, false)
 				if not b then
 					Ext.PrintError(err)
+				end
+			end
+		end
+		for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
+			if item:HasTag(tag) then
+				if Vars.DebugEnabled then
+					Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.StatsId, character.MyGuid))
+				end
+				for i,callback in pairs(callbacks) do
+					local b,err = xpcall(callback, debug.traceback, character, item, tag, false)
+					if not b then
+						Ext.PrintError(err)
+					end
 				end
 			end
 		end
@@ -485,6 +488,11 @@ local function ShouldBlockItem(item, char)
 end
 
 RegisterProtectedOsirisListener("CanUseItem", 3, "before", function(charUUID, itemUUID, request)
+	charUUID = StringHelpers.GetUUID(charUUID)
+	itemUUID = StringHelpers.GetUUID(itemUUID)
+	if ObjectExists(itemUUID) == 0 or ObjectExists(charUUID) == 0 then
+		return
+	end
 	local item = Ext.GetItem(itemUUID)
 	local char = Ext.GetCharacter(charUUID)
 
@@ -584,7 +592,6 @@ function EquipmentManager.CheckFirearmProjectile(char, item)
 			and not StringHelpers.IsNullOrEmpty(v.Projectile) 
 			and v.Projectile ~= item.Stats.Projectile
 			and bulletTemplates[v.Projectile] ~= true then
-				print(i, v.BoostName, v.Projectile)
 				v.Projectile = item.Stats.Projectile
 				changedProjectile = true
 				statChanges.DynamicStats[i] = {

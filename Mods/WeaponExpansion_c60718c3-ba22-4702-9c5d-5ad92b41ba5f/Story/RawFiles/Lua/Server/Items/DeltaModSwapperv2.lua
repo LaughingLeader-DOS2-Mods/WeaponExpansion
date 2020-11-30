@@ -244,6 +244,7 @@ local function SwapDeltaMods(item)
 					local existingBoostEntry = boostMap[replaceBoost]
 					if existingBoostEntry ~= nil then
 						existingBoostEntry.ObjectInstanceName = newBoost
+						existingBoostEntry.BoostName = newBoost
 						local boostStat = Ext.GetStat(newBoost)
 						local statMap = StatMap[itemType]
 						for boostAttribute,statAttribute in pairs(statMap) do

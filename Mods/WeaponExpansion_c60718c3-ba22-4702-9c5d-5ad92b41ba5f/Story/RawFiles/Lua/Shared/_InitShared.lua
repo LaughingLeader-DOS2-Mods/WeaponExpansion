@@ -103,9 +103,9 @@ local initSettings = Ext.Require("Shared/Settings.lua")
 ---@type ModSettings
 Settings = nil
 
-if Vars.DebugEnabled then
-	--Ext.Require("Shared/Debug/GameMathTracing.lua")
-end
+-- if Vars.DebugEnabled then
+-- 	Ext.Require("Shared/Debug/GameMathTracing.lua")
+-- end
 
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, Required = 0},

@@ -29,7 +29,6 @@ local function GetRequirementAttributeBoost(stat, fallback)
 			end
 		end
 	end
-	print(stat.Name, "GetRequirementAttributeBoost", attribute)
 	if not StringHelpers.IsNullOrEmpty(attribute) then
 		if not string.find(attribute, "Boost") then
 			return attribute.."Boost"

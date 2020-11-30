@@ -364,7 +364,6 @@ function SwapDeltaMods(item)
 			end
 
 			local boosts = GetAllBoosts(itemObject)
-			print("SwapDeltaMods", Ext.JsonStringify(boosts))
 			if boosts ~= nil then
 				local template = GetTemplate(item)
 				NRD_ItemConstructBegin(template)

@@ -230,7 +230,6 @@ function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sor
 	local lastDist = 999
 	local targets = {}
 	for _,enemy in pairs(target:GetNearbyCharacters(radius)) do
-		print(enemy)
 		if enemy ~= char 
 		and enemy ~= ignoreTarget
 		and (CharacterIsEnemy(char, enemy) == 1 or IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1)

@@ -194,7 +194,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 			end
 		end
 	elseif skill == "Target_LLWEAPONEX_Pistol_Shoot" then
-		local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
+		local rune,weaponBoostStat = Skills.GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 		if weaponBoostStat ~= nil then
 			---@type StatProperty[]
 			local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
@@ -224,7 +224,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 			end
 		end
 	elseif skill == "Projectile_LLWEAPONEX_HandCrossbow_Shoot" then
-		local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
+		local rune,weaponBoostStat = Skills.GetRuneBoost(character.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
 		if weaponBoostStat ~= nil then
 			---@type StatProperty[]
 			local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
