@@ -36,7 +36,7 @@ if Ext.IsServer() then
 	local function IsUnarmedHit(handle)
 		for prop,val in pairs(UnarmedHitMatchProperties) do
 			if NRD_HitGetInt(handle, prop) ~= val then
-				Ext.PrintError(prop,"does not equal", val)
+				--Ext.PrintError(prop,"does not equal", val)
 				return false
 			end
 		end
