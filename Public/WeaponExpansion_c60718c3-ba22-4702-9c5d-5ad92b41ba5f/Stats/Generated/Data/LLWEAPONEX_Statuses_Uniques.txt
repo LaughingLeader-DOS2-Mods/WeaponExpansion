@@ -35,6 +35,7 @@ new entry "Stats_LLWEAPONEX_DemonGauntletEquipped"
 type "Potion"
 using "_Stats_LLWEAPONEX_Base"
 data "Reflection" "10::Shadow:"
+data "DamageBoost" "10"
 
 new entry "LLWEAPONEX_DEMON_GAUNTLET_DEFENSE"
 type "StatusData"
