@@ -80,22 +80,27 @@ RemoveStatus(_Char, "LLWEAPONEX_RAPIER_MASTERY_STANCE_DUELIST_WEAPON");
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo1", _, _)
 THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 750, "Timers_LLWEAPONEX_Rapiers_ClearSuckerComboStatus1", "LLWEAPONEX_Rapiers_ClearSuckerComboStatus1");
+LeaderLib_Timers_StartObjectTimer(_Char, 1200, "Timers_LLWEAPONEX_Rapiers_ClearSuckerComboStatus1", "LLWEAPONEX_Rapiers_ClearSuckerComboStatus1");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Rapiers_ClearSuckerComboStatus1")
 THEN
-RemoveStatus(_Char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO1");
+RemoveStatus(_Char, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1");
+
+IF
+CharacterUsedSkill(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
+THEN
+RemoveStatus(_Char, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1");
 
 IF
 SkillCast(_Char, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
 THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 250, "Timers_LLWEAPONEX_Rapiers_ClearSuckerComboStatus2", "LLWEAPONEX_Rapiers_ClearSuckerComboStatus2");
+LeaderLib_Timers_StartObjectTimer(_Char, 1200, "Timers_LLWEAPONEX_Rapiers_ClearSuckerComboStatus2", "LLWEAPONEX_Rapiers_ClearSuckerComboStatus2");
 
 IF
 StoryEvent(_Char, "LLWEAPONEX_Rapiers_ClearSuckerComboStatus2")
 THEN
-RemoveStatus(_Char, "LLWEAPONEX_WS_RAPIER_SUCKERCOMBO2");
+RemoveStatus(_Char, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO2");
 
 IF
 CharacterUsedSkillOnTarget(_Char, _Target, "Target_LLWEAPONEX_Rapier_SuckerCombo2", _, _)
