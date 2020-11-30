@@ -316,15 +316,11 @@ local function GetAllBoosts(item)
 	end
 end
 
-local tempQuestRewardItems = {}
-
 local function CanSwapDeltaMods(uuid)
 	if ObjectExists(uuid) == 0 then
 		return false
-	elseif StringHelpers.IsNullOrEmpty(GetInventoryOwner(uuid)) or tempQuestRewardItems[uuid] then
+	elseif StringHelpers.IsNullOrEmpty(GetInventoryOwner(uuid)) then
 		-- Quest reward?
-		tempQuestRewardItems[uuid] = true
-		LeaderLib.PrintLog("[WeaponExpansion:CanSwapDeltaMods] Waiting until a quest reward item is added to a character. item(%s)", uuid)
 		return false
 	elseif ObjectGetFlag(uuid, "LLWEAPONEX_ProcessedDeltamods") == 1 then
 		return false
@@ -467,39 +463,39 @@ local equipmentTypes = {
 }
 
 ---@param item EsvItem
-Ext.RegisterListener("TreasureItemGenerated", function(item)
-	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
-	--LeaderLib.PrintLog("[OnTreasureItemGenerated] item(%s) stat(%s) isInInventory(%s) InventoryHandle(%s) TreasureGenerated(%s) OwnerHandle(%s) ParentInventoryHandle(%s)", item.MyGuid, item.StatsId, isInInventory, item.InventoryHandle, item.TreasureGenerated, item.OwnerHandle, item.ParentInventoryHandle)
-	if item == nil or item.MyGuid == nil or item.Stats == nil then
-		return
-	end
-	if item.Stats.Unique ~= 1 and equipmentTypes[item.ItemType] == true then
-		Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
-		TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
-		TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
-		--SwapDeltaMods(item.MyGuid)
-	end
-end)
+-- Ext.RegisterListener("TreasureItemGenerated", function(item)
+-- 	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
+-- 	--LeaderLib.PrintLog("[OnTreasureItemGenerated] item(%s) stat(%s) isInInventory(%s) InventoryHandle(%s) TreasureGenerated(%s) OwnerHandle(%s) ParentInventoryHandle(%s)", item.MyGuid, item.StatsId, isInInventory, item.InventoryHandle, item.TreasureGenerated, item.OwnerHandle, item.ParentInventoryHandle)
+-- 	if item == nil or item.MyGuid == nil or item.Stats == nil then
+-- 		return
+-- 	end
+-- 	if item.Stats.Unique ~= 1 and equipmentTypes[item.ItemType] == true then
+-- 		Osi.LLWEAPONEX_Items_SaveGeneratedItem(item.MyGuid)
+-- 		TimerCancel("Timers_LLWEAPONEX_SwapGeneratedItemBoosts")
+-- 		TimerLaunch("Timers_LLWEAPONEX_SwapGeneratedItemBoosts", 10)
+-- 		--SwapDeltaMods(item.MyGuid)
+-- 	end
+-- end)
 
-RegisterProtectedOsirisListener("ItemAddedToCharacter", 2, "after", function(item, character)
-	item = StringHelpers.GetUUID(item)
-	character = StringHelpers.GetUUID(character)
-	if tempQuestRewardItems[item] == true then
-		tempQuestRewardItems[item] = nil
-		LeaderLib.PrintLog("[WeaponExpansion:ItemAddedToCharacter] Checking quest reward item's deltamods. item(%s) character(%s)", item, character)
-		SwapDeltaMods(item)
-	end
-end)
+-- RegisterProtectedOsirisListener("ItemAddedToCharacter", 2, "after", function(item, character)
+-- 	item = StringHelpers.GetUUID(item)
+-- 	character = StringHelpers.GetUUID(character)
+-- 	if tempQuestRewardItems[item] == true then
+-- 		tempQuestRewardItems[item] = nil
+-- 		LeaderLib.PrintLog("[WeaponExpansion:ItemAddedToCharacter] Checking quest reward item's deltamods. item(%s) character(%s)", item, character)
+-- 		SwapDeltaMods(item)
+-- 	end
+-- end)
 
-if Vars.DebugEnabled then
-	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
-		local host = CharacterGetHostCharacter()
-		local weapon = CharacterGetEquippedWeapon(host)
-		if weapon ~= nil then
-			SwapDeltaMods(weapon)
-		end
-	end)
-end
+-- if Vars.DebugEnabled then
+-- 	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
+-- 		local host = CharacterGetHostCharacter()
+-- 		local weapon = CharacterGetEquippedWeapon(host)
+-- 		if weapon ~= nil then
+-- 			SwapDeltaMods(weapon)
+-- 		end
+-- 	end)
+-- end
 
 -- TODO: More generalized attribute boost swapping?
 -- local attributeBoosts = {
