@@ -213,7 +213,7 @@ end
 ---@param item StatItem
 ---@param tags string[]
 local function HasSharedBaseTags(item, tags)
-	if #tags > 0 then
+	if #tags > 0 and not StringHelpers.IsNullOrEmpty(item.Tags) then
 		for _,tag in pairs(tags) do
 			if string.find(item.Tags, tag) then
 				return true
@@ -235,18 +235,21 @@ local function GetItem(character, parentStatName, slots)
 	if not StringHelpers.IsNullOrEmpty(tagsStr) then
 		tags = StringHelpers.Split(tagsStr, ";")
 	end
-	if type(slots) == "string" then
+	local slotsType = type(slots)
+	if slotsType == "string" then
 		item = character:GetItemBySlot(slots)
 		if item ~= nil and HasParent(item.Name, parentStatName) or HasSharedBaseTags(item, tags) then
 			return item
 		end
-	else
+	elseif slotsType == "table" then
 		for i,slot in pairs(slots) do
 			item = character:GetItemBySlot(slot)
 			if item ~= nil and HasParent(item.Name, parentStatName) or HasSharedBaseTags(item, tags) then
 				return item
 			end
 		end
+	elseif slots == nil then
+	
 	end
 	return nil
 end
@@ -291,6 +294,14 @@ end
 ---@param currentItem StatItem An existing item (skips trying to find one).
 ---@return boolean
 function Skills.HasTaggedRuneBoost(character, tag, itemParentStat, slots, currentItem)
+	if slots == nil and itemParentStat ~= nil then
+		local slot = Ext.StatGetAttribute(itemParentStat, "Slot")
+		if slot == "Ring" then
+			slots = ringSlots
+		else
+			slots = slot
+		end
+	end
 	local item = currentItem or GetItem(character, itemParentStat, slots)
 	if item ~= nil then
 		for i=3,5,1 do
