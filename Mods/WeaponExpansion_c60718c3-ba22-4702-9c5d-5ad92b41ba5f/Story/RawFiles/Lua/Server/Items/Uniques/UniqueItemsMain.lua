@@ -181,8 +181,23 @@ function SwapUnique(char, id)
 		--CharacterUnequipItem(char, equipped)
 
 		if not isTwoHanded then
+			local currentEquipped = StringHelpers.GetUUID(CharacterGetEquippedItem(char, slot))
+			if not StringHelpers.IsNullOrEmpty(currentEquipped) and currentEquipped ~= equipped then
+				ItemLockUnEquip(currentEquipped, 0)
+				CharacterUnequipItem(char, currentEquipped)
+			end
 			NRD_CharacterEquipItem(char, next, slot, 0, 0, 1, 1)
 		else
+			local mainhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Weapon"))
+			local offhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Shield"))
+			if not StringHelpers.IsNullOrEmpty(mainhand) and mainhand ~= equipped then
+				ItemLockUnEquip(mainhand, 0)
+				CharacterUnequipItem(char, mainhand)
+			end
+			if not StringHelpers.IsNullOrEmpty(offhand) and offhand ~= equipped then
+				ItemLockUnEquip(offhand, 0)
+				CharacterUnequipItem(char, offhand)
+			end
 			NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
 		end
 
