@@ -244,7 +244,6 @@ local function SwapDeltaMods(item)
 					local existingBoostEntry = boostMap[replaceBoost]
 					if existingBoostEntry ~= nil then
 						existingBoostEntry.ObjectInstanceName = newBoost
-						printd("Replacing boost", replaceBoost, "with", newBoost)
 						local boostStat = Ext.GetStat(newBoost)
 						local statMap = StatMap[itemType]
 						for boostAttribute,statAttribute in pairs(statMap) do
@@ -304,11 +303,13 @@ local equipmentTypes = {
 ---@param item EsvItem
 Ext.RegisterListener("TreasureItemGenerated", function(item)
 	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
-	LeaderLib.PrintLog("[OnTreasureItemGenerated] MyGuid(%s) StatsId(%s) ItemType(%s)", item.MyGuid, item.StatsId, item.ItemType)
-	if item == nil or item.MyGuid == nil or item.Stats == nil then
-		return
-	end
-	if skipRarities[item.Stats.ItemTypeReal] ~= true and equipmentTypes[item.ItemType] == true then
-		SwapDeltaMods(item)
+	if item ~= nil and equipmentTypes[item.ItemType] == true then
+		LeaderLib.PrintLog("[OnTreasureItemGenerated] MyGuid(%s) StatsId(%s) ItemType(%s)", item.MyGuid, item.StatsId, item.ItemType)
+		if item.Stats == nil then
+			return
+		end
+		if skipRarities[item.Stats.ItemTypeReal] ~= true then
+			SwapDeltaMods(item)
+		end
 	end
 end)
