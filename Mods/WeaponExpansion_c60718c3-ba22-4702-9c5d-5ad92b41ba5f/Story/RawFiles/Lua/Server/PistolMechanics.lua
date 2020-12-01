@@ -83,6 +83,7 @@ local function ShootPistolAtPosition(source,x,y,z)
 		--y = pos[2] + forwardVector[2]
 		z = pos[3] + forwardVector[3]
 	end
+	y = GameHelpers.Grid.GetY(x,z)
 	--Ext.Print("heightDiff:",heightDiff)
 	--Ext.Print("targetPos:",Ext.JsonStringify({x,y,z}))
 
