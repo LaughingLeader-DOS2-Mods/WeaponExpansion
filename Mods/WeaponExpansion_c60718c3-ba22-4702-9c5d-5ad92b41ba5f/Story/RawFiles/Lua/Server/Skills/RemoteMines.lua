@@ -35,9 +35,9 @@ RegisterStatusListener("StatusApplied", "LLWEAPONEX_REMOTEMINE_DETONATE", functi
 		if skill == "Projectile_LLWEAPONEX_RemoteMine_Breach" then
 			RunBreachKnockback(Ext.GetCharacter(source), Ext.GetItem(target))
 		end
-		-- local x,y,z = GetPosition(target)
-		-- GameHelpers.ExplodeProjectile(source, {x,y,z}, skill)
-		-- CharacterItemSetEvent(source, target, "LLWEAPONEX_RemoteMine_DetonationDone")
+		local x,y,z = GetPosition(target)
+		GameHelpers.ExplodeProjectile(source, {x,y,z}, skill)
+		CharacterItemSetEvent(source, target, "LLWEAPONEX_RemoteMine_DetonationDone")
 		return true
 	end
 	local items = nil
