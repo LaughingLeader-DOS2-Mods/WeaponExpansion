@@ -19,6 +19,11 @@ local defaultPersistentVars = {
         ThrowWeapon = {},
         ThrowBalrinAxe = {},
         VanquishersPath = {},
+        ---@class RemoteMineDetonationData:table
+        ---@field Mines string[]
+        ---@field Remaining integer
+        ---@type table<string, table<string, RemoteMineDetonationData>>
+        RemoteMineDetonation = {}
     },
     StatusData = {
         RemoveOnTurnEnd = {},

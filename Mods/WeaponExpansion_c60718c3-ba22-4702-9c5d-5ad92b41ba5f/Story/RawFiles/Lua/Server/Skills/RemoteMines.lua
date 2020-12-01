@@ -1,6 +1,45 @@
+local function BreachHitTarget(source, target, minePosition)
+
+end
+
+---@param source EsvCharacter
+---@param item EsvItem
+local function RunBreachKnockback(source, item)
+	local radius = Ext.StatGetAttribute("Projectile_LLWEAPONEX_RemoteMine_Breach", "ExplodeRadius")
+	for i,v in pairs(item:GetNearbyCharacters(radius)) do
+		local target = Ext.GetCharacter(v)
+		local startPos = target.WorldPos
+		local dir = GameHelpers.Math.GetDirectionVector(item.WorldPos, target.WorldPos)
+		dir[1] = dir[1] * -1
+		dir[3] = dir[3] * -1
+		local tx,ty,tz = GameHelpers.Grid.GetValidPositionAlongLine(startPos, dir, 3)
+		if tx ~= nil and tz ~= nil then
+			GameHelpers.ForceMoveObjectToPosition(source, target, {tx,ty,tz})
+		end
+	end
+end
+
 RegisterStatusListener("StatusApplied", "LLWEAPONEX_REMOTEMINE_DETONATE", function(target, status, source)
 	target = StringHelpers.GetUUID(target)
 	source = StringHelpers.GetUUID(source)
+	if target == source or CharacterIsAlly(target, source) == 1 then
+		-- Prevent the caster from detonating their own inventory, or an ally's
+		return false
+	end
+	if IsTagged(target, "LLWEAPONEX_RemoteMine") == 1 then
+		local skill = GetVarFixedString(target, "LLWEAPONEX_Mine_Skill")
+		if StringHelpers.IsNullOrEmpty(CharacterGetEquippedWeapon(source)) then
+			skill = GetVarFixedString(target, "LLWEAPONEX_Mine_Skill_NoWeapon")
+		end
+		SetVarInteger(target, "LLWEAPONEX_ItemAmount", Ext.GetItem(target).Amount)
+		if skill == "Projectile_LLWEAPONEX_RemoteMine_Breach" then
+			RunBreachKnockback(Ext.GetCharacter(source), Ext.GetItem(target))
+		end
+		-- local x,y,z = GetPosition(target)
+		-- GameHelpers.ExplodeProjectile(source, {x,y,z}, skill)
+		-- CharacterItemSetEvent(source, target, "LLWEAPONEX_RemoteMine_DetonationDone")
+		return true
+	end
 	local items = nil
 	if ObjectIsCharacter(target) == 1 then
 		items = Ext.GetCharacter(target):GetInventoryItems()
@@ -61,6 +100,7 @@ local function OnDetonationTimer(timerData)
 								GameHelpers.ExplodeProjectile(source, {x,y,z}, skill)
 								detonated = true
 								item.Amount = item.Amount - 1
+								SetVarInteger(target, "LLWEAPONEX_ItemAmount", item.Amount)
 								if item.Amount <= 0 then
 									ItemDestroy(item.MyGuid)
 								end
@@ -86,3 +126,31 @@ local function OnDetonationTimer(timerData)
 end
 
 OnTimerFinished["LLWEAPONEX_OnDetonationTimer"] = OnDetonationTimer
+
+RegisterSkillListener("Projectile_LLWEAPONEX_RemoteMine_Breach", function(skill, source, state, data)
+	if state == SKILL_STATE.CAST then
+		local radius = Ext.StatGetAttribute(skill, "ExplodeRadius")
+		
+	end
+end)
+
+RegisterStatusListener("StatusApplied", "LLWEAPONEX_REMOTEMINE_BREACHED", function(target, status, source)
+	local target = StringHelpers.GetUUID(target)
+	local source = StringHelpers.GetUUID(source)
+	if ObjectIsItem(target) == 1 and ItemIsDestroyed(target) == 0 then
+		local item = Ext.GetItem(target)
+		if item.CanBeMoved then
+			GameHelpers.ForceMoveObject(Ext.GetCharacter(source), item, 2)
+		elseif item.CanUse and item.LockLevel <= 10 and item.LockLevel > 0 then
+			ItemUnLock(item.MyGuid)
+			ItemOpen(item.MyGuid)
+			DisplayText(item.MyGuid, "Breached!")
+		end
+	elseif ObjectIsCharacter(target) == 1 then
+		-- if source == target then
+		-- 	GameHelpers.ForceMoveObject(Ext.GetCharacter(source), Ext.GetCharacter(target), 2)
+		-- else
+		-- 	GameHelpers.ForceMoveObject(Ext.GetCharacter(source), Ext.GetCharacter(target), 2)
+		-- end
+	end
+end)
