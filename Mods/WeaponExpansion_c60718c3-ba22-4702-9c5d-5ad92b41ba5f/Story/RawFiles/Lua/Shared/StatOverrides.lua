@@ -88,6 +88,25 @@ local bulletTemplates = {
 	Projectile_EnemySkyShot = "e44859b2-d55f-47e2-b509-fd32d7d3c745",
 	Projectile_Snipe = "fbf17754-e604-4772-813a-3593b4e7bec8",
 	Projectile_EnemySnipe = "fbf17754-e604-4772-813a-3593b4e7bec8",
+	-- Arrows
+	Projectile_FireArrow = defaultBulletTemplate,
+	Projectile_ExplosionArrow = defaultBulletTemplate,
+	Projectile_FreezingArrow = defaultBulletTemplate,
+	Projectile_WaterArrow = defaultBulletTemplate,
+	Projectile_CursedFireArrow = defaultBulletTemplate,
+	Projectile_BlessedWaterArrow = defaultBulletTemplate,
+	Projectile_SlowDownArrow = defaultBulletTemplate,
+	Projectile_StunningArrow = defaultBulletTemplate,
+	Projectile_SteamCloudArrow = defaultBulletTemplate,
+	Projectile_SmokescreenArrow = defaultBulletTemplate,
+	Projectile_StaticCloudArrow = defaultBulletTemplate,
+	Projectile_SilverArrow = defaultBulletTemplate,
+	Projectile_BleedingArrow = defaultBulletTemplate,
+	Projectile_KnockedOutArrow = defaultBulletTemplate,
+	Projectile_PoisonedCloudArrow = defaultBulletTemplate,
+	Projectile_CharmingArrow = defaultBulletTemplate,
+	Projectile_PoisonArrow = defaultBulletTemplate,
+	Projectile_DebuffAllArrow = defaultBulletTemplate,
 }
 
 Skills.BulletTemplates = bulletTemplates
