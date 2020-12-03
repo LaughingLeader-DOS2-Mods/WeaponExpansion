@@ -85,12 +85,12 @@ end
 function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback)
 	if type(skill) == "table" then
 		for i,v in pairs(skill) do
-			LeaderLib.RegisterSkillListener(v, function(inskill, char, ...)
+			RegisterSkillListener(v, function(inskill, char, ...)
 				OnSkillCallback(callback, matchBonuses, inskill, char, ...)
 			end)
 		end
 	else
-		LeaderLib.RegisterSkillListener(skill, function(inskill, char, ...)
+		RegisterSkillListener(skill, function(inskill, char, ...)
 			OnSkillCallback(callback, matchBonuses, inskill, char, ...)
 		end)
 	end

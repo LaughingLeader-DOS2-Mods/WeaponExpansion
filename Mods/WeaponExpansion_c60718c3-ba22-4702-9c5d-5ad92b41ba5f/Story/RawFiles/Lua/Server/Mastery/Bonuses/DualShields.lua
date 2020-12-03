@@ -17,7 +17,7 @@ end)
 ---@param char string
 ---@param state SkillState
 ---@param data HitData
-LeaderLib.RegisterSkillListener("Target_LLWEAPONEX_ShieldBash", function(skill, char, state, data)
+RegisterSkillListener("Target_LLWEAPONEX_ShieldBash", function(skill, char, state, data)
 	if state == SKILL_STATE.HIT and data.Success then
 		Osi.LeaderLib_Force_Apply(char, data.Target, 1)
 	end
@@ -27,7 +27,7 @@ end)
 ---@param char string
 ---@param state SkillState
 ---@param data SkillEventData
-LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_DualShields_HunkerDown", function(skill, char, state, data)
+RegisterSkillListener("Shout_LLWEAPONEX_DualShields_HunkerDown", function(skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		-- Armor Overhaul Support
 		-- Only restores armor if these statuses still do that.

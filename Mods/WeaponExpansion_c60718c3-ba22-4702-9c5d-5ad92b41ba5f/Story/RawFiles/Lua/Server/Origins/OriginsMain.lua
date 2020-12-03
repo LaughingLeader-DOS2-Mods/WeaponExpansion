@@ -280,23 +280,13 @@ function CC_OnPresetSelected(uuid, preset)
 	end
 end
 
----@param skill string
----@param char string
----@param state SKILL_STATE PREPARE|USED|CAST|HIT
----@param skillData HitData
-local function ClearOriginSkillRequiredTag(skill, char, state, skillData)
+RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", function(skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		ClearTag(char, "LLWEAPONEX_EnemyDiedInCombat")
 	end
-end
-LeaderLib.RegisterSkillListener("Shout_LLWEAPONEX_UnrelentingRage", ClearOriginSkillRequiredTag)
+end)
 
-
----@param skill string
----@param char string
----@param state SKILL_STATE PREPARE|USED|CAST|HIT
----@param skillData HitData
-LeaderLib.RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, skillData)
+RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		PersistentVars.SkillData.DarkFireballCount[char] = 0
 		UpdateDarkFireballSkill(char)

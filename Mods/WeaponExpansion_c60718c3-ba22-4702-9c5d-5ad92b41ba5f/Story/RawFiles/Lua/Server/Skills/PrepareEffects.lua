@@ -66,5 +66,5 @@ local function PlaySkillEffect(char, state, funcParams, tagData)
 end
 
 for skill,tagData in pairs(PrepareEffects) do
-	LeaderLib.RegisterSkillListener(skill, function(char,state,funcParams) PlaySkillEffect(char,state,funcParams,tagData); end)
+	RegisterSkillListener(skill, function(char,state,funcParams) PlaySkillEffect(char,state,funcParams,tagData); end)
 end
