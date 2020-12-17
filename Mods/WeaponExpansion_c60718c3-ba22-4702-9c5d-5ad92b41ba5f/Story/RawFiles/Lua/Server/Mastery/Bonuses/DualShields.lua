@@ -104,3 +104,32 @@ function DualShields_Cover_RedirectDamage(target, blocker, attacker, handle)
 		end
 	end
 end
+
+RegisterSkillListener("Target_LLWEAPONEX_IronMaiden", function(skill, char, state, data)
+	if state == SKILL_STATE.USED then
+		data:ForEach(function(v, targetType, skillEventData)
+			if HasActiveStatus(v, "LLWEAPONEX_SHIELD_PRISON") == 1 then
+				RemoveStatus(v, "LLWEAPONEX_SHIELD_PRISON")
+				ApplyStatus(v, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX", 3.0, 1, char)
+			end
+		end)
+	end
+	if state == SKILL_STATE.HIT and data.Success then
+		if HasActiveStatus(data.Target, "BLEEDING") == 1 then
+			--LLWEAPONEX_RUPTURE_INSTANT
+			GameHelpers.ExplodeProjectile(char, data.Target, "Projectile_LLWEAPONEX_Status_Rupture_Damage")
+		else
+			ApplyStatus(data.Target, "BLEEDING", 6.0, 0, char)
+		end
+		if HasActiveStatus(data.Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX") == 1 then
+			GameHelpers.ExplodeProjectile(char, data.Target, "Projectile_LLWEAPONEX_Status_IronMaiden_BonusHit")
+			PlayEffect(data.Target, "LLWEAPONEX_FX_Status_IronMaidenHit_01", "")
+			RemoveStatus(data.Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX")
+		end
+		local target = Ext.GetCharacter(data.Target)
+		if target then
+			local surface = target.Stats.TALENT_Zombie and "Poison" or "Blood"
+			GameHelpers.Surface.CreateSurface(target.WorldPos, surface, 1.0, 6.0, Ext.GetCharacter(char).Handle, true)
+		end
+	end
+end)
