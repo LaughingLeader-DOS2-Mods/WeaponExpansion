@@ -7,9 +7,7 @@ KBSECTION
 PROC
 LLWEAPONEX_HandCrossbow_InitSettings()
 THEN
-SysClear("DB_LLWEAPONEX_Pistols_ShootingSkills", 1);
-DB_LLWEAPONEX_HandCrossbow_ShootingSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot");
-DB_LLWEAPONEX_HandCrossbow_ShootingSkills("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy");
+SysClear("DB_LLWEAPONEX_HandCrossbow_ShootingSkills", 1);
 
 PROC
 LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)

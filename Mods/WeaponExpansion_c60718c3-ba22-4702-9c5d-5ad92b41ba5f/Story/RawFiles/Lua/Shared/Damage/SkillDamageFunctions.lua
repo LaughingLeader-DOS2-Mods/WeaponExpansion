@@ -508,11 +508,11 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 	local weapon = nil
 	local skill = baseSkill
 	if not SkillPropsIsTable(baseSkill) then
-		skill = ExtenderHelpers.CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot_Base", true)
+		skill = ExtenderHelpers.CreateSkillTable("Projectile_LLWEAPONEX_Pistol_Shoot", true)
 	end
 
 	if skill == nil then
-		Ext.PrintError("Failed to prepare skill data for Projectile_LLWEAPONEX_Pistol_Shoot_Base?")
+		Ext.PrintError("Failed to prepare skill data for Projectile_LLWEAPONEX_Pistol_Shoot?")
 		skill = baseSkill
 		skill["UseWeaponDamage"] = "Yes"
 	end
@@ -790,7 +790,7 @@ Skills.DamageParam.LLWEAPONEX_AimedShot_AverageDamage = GetAimedShotAverageDamag
 Skills.DamageParam.LLWEAPONEX_AimedShot_MaxDamage = GetAimedShotMaxDamage
 Skills.GetPistolWeaponStatTable = GetPistolWeaponStatTable
 
-Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_Base = GetPistolSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage

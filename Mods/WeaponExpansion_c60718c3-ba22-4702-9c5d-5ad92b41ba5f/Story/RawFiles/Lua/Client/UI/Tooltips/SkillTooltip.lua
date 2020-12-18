@@ -193,7 +193,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 				end
 			end
 		end
-	elseif skill == "Target_LLWEAPONEX_Pistol_Shoot" then
+	elseif skill == "Projectile_LLWEAPONEX_Pistol_Shoot" then
 		local rune,weaponBoostStat = Skills.GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 		if weaponBoostStat ~= nil then
 			---@type StatProperty[]

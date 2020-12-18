@@ -14,39 +14,161 @@ local function GetRaceTag(source)
 	return nil
 end
 
-local function GetPistolProjectileSkill(source)
-	local isFemale = IsTagged(source, "FEMALE")
-	local race = GetRaceTag(source)
-	if race == nil then race = "HUMAN" end
+local function GetPistolProjectileSkill(char)
+	local skill = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
+	if char:HasTag("DWARF") then
+		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
+	elseif char:HasTag("ELF") then
+		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"
+	elseif char:HasTag("HUMAN") then
+		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
+	elseif char:HasTag("LIZARD") then
+		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"
+	end
+	return skill
+end
 
-	local skillEntry = Osi.DB_LLWEAPONEX_Pistols_HandProjectiles:Get(race, isFemale, nil, nil, nil)
-	if skillEntry ~= nil then
-		return skillEntry[1][3]
+local PistolEffects = {
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+	-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+	DWARF = {
+		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
+		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+	},
+	ELF = {
+		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+	},
+	HUMAN = {
+		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
+		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
+	},
+	LIZARD = {
+		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+	},
+}
+
+local function GetPistolExplosionEffect(char)
+	local race = GetRaceTag(char.MyGuid) or "HUMAN"
+	local isFemale = 0
+	if char:HasTag("FEMALE") then
+		isFemale = 1
+	end
+	local raceData = PistolEffects[race]
+	if raceData then
+		local effect = raceData[isFemale]
+		return effect
+	end
+	return "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT"
+end
+
+local function GetPistolRemoveDelay(char)
+	if char:HasTag("DWARF") then
+		return 600
+	elseif char:HasTag("ELF") then
+		return 250
+	elseif char:HasTag("HUMAN") then
+		return 400
+	elseif char:HasTag("LIZARD") then
+		return 800
 	else
-		return "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"
+		return 150
 	end
 end
 
+local function ShouldPlaySheatheAnimation(caster)
+	if caster:HasTag("DWARF") or caster:HasTag("ELF") then
+		return true
+	end
+	return false
+end
+
+---@param request EsvShootProjectileRequest
+Ext.RegisterListener("BeforeShootProjectile", function (request)
+	--print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.SkillId))
+	local skill = LeaderLib.GetSkillEntryName(request.SkillId) or ""
+	if skill == "Projectile_LLWEAPONEX_Pistol_Shoot" then
+		local caster = Ext.GetCharacter(request.Caster)
+		request.SkillId = GetPistolProjectileSkill(caster).."-1"
+		local target = Ext.GetGameObject(request.Target)
+		if target ~= nil then
+			
+		else
+			local targetPos = request.EndPosition
+			targetPos[2] = targetPos[2] + 2.0
+			local maxDistance = Ext.ExtraData.LLWEAPONEX_Pistol_MaxBonusDistance or 12.0
+			local currentDist = GameHelpers.Math.GetDistance(caster.WorldPos, targetPos)
+			local dist = maxDistance - currentDist
+			request.IgnoreObjects = false
+			targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(caster, dist, targetPos[1], targetPos[2], targetPos[3])
+			request.EndPosition = targetPos
+		end
+		print(target, Common.Dump(request.EndPosition))
+	end
+end)
+
+---@param projectile EsvProjectile
+Ext.RegisterListener("ShootProjectile", function (projectile)
+	local skill = LeaderLib.GetSkillEntryName(projectile.SkillId) or ""
+	if string.find(skill, "Projectile_LLWEAPONEX_Pistol_Shoot") then
+		local caster = Ext.GetCharacter(projectile.CasterHandle)
+		local status = GetPistolExplosionEffect(caster)
+		print(caster.MyGuid, status)
+		ApplyStatus(caster.MyGuid, status, 0.0, 0, caster.MyGuid)
+		-- local handle = projectile.Handle
+		-- print(string.format("SourcePosition(%s) Position(%s) PrevPosition(%s)", Common.Dump(projectile.SourcePosition), Common.Dump(projectile.Position), Common.Dump(projectile.PrevPosition)))
+		-- StartOneshotTimer("LLWEAPONEX_Pistol_PlayProjectileExplosion_"..tostring(projectile.NetID), 1, function()
+		-- 	projectile = Ext.GetGameObject(handle)
+		-- 	print(handle, projectile)
+		-- 	if projectile and projectile.Position then
+		-- 		local x,y,z = table.unpack(projectile.Position)
+		-- 		PlayEffectAtPosition("LLWEAPONEX_FX_Pistol_A_Shoot_01", x, y, z)
+		-- 	end
+		-- end)
+	end
+end)
+
+OnTimerFinished["LLWEAPONEX_RemovePistolEffect"] = function(timerData)
+	local char = timerData[1]
+	if char ~= nil then
+		RemoveStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
+		-- if ShouldPlaySheatheAnimation(Ext.GetCharacter(char)) then
+		-- 	GameHelpers.ClearActionQueue(char)
+		-- 	PlayAnimation(char, "skill_cast_ll_pistol_01_sheathe", "")
+		-- end
+	end
+end
+
+RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char, state, data)
+	if state == SKILL_STATE.USED then
+		local caster = Ext.GetCharacter(char)
+		if ShouldPlaySheatheAnimation(caster) then
+			StartOneshotTimer("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
+				ApplyStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
+			end)
+		else
+			ApplyStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
+		end
+	elseif state == SKILL_STATE.CAST then
+		local caster = Ext.GetCharacter(char)
+		local delay = GetPistolRemoveDelay(caster)
+		LeaderLib.StartTimer("LLWEAPONEX_RemovePistolEffect", delay, char)
+	end
+end)
+
 local function ShootPistolAtObject(source,target)
-	local level = CharacterGetLevel(source) or CharacterGetLevel(target)
 	local skill = GetPistolProjectileSkill(source)
-	NRD_ProjectilePrepareLaunch()
-	NRD_ProjectileSetString("SkillId", skill)
-	NRD_ProjectileSetInt("CasterLevel", level)
-	NRD_ProjectileSetGuidString("Caster", source)
-	local x,y,z = GetPosition(source)
-	NRD_ProjectileSetVector3("SourcePosition", x,y+2.0,z)
-	--NRD_ProjectileSetGuidString("SourcePosition", source)
-	NRD_ProjectileSetGuidString("Source", source)
 	-- For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
 	-- Allies also cannot be hit by script-spawned 0 ExplodeRadius projectiles, so we have to force the hit there too.
-	if (ObjectIsCharacter(target) == 1 and CharacterIsEnemy(source,target) == 0) or GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN") then
-		NRD_ProjectileSetGuidString("HitObject", target)
-		NRD_ProjectileSetGuidString("HitObjectPosition", target)
-		NRD_ProjectileSetGuidString("SourcePosition", target) -- Fix for hit effects appearing at the source
-	end
-	NRD_ProjectileSetGuidString("TargetPosition", target)
-	NRD_ProjectileLaunch()
+	local forceHit = (ObjectIsCharacter(target) == 1 and CharacterIsEnemy(source,target) == 0) or GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN")
+	GameHelpers.ShootProjectile(source, target, skill, forceHit)
 end
 Ext.NewCall(ShootPistolAtObject, "LLWEAPONEX_ShootPistolAtObject", "(CHARACTERGUID)_Source, (GUIDSTRING)_Target")
 
