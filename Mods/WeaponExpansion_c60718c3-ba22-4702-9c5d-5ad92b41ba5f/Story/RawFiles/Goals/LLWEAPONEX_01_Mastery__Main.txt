@@ -89,6 +89,11 @@ LLWEAPONEX_WeaponMastery_OnMasteryDeactivated(_Player, _Mastery);
 //REGION ACTIVATION_DEACTIVATION
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
+THEN
+NRD_ModCall("WeaponExpansion", "OnMasteryActivated", (STRING)_Player, _Mastery);
+
+PROC
+LLWEAPONEX_WeaponMastery_OnMasteryActivated((CHARACTERGUID)_Player, (STRING)_Mastery)
 AND
 NOT DB_GlobalFlag("LLWEAPONEX_MasterySystemActive")
 THEN

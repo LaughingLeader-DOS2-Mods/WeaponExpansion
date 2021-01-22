@@ -178,6 +178,22 @@ end
 
 --- @param uuid string
 --- @param mastery string
+function OnMasteryActivated(uuid,mastery)
+	uuid = StringHelpers.GetUUID(uuid)
+	printd("[WeaponExpansion] Activated mastery tag ["..mastery.."] on ["..uuid.."].")
+	local callbacks = Listeners.MasteryActivated[mastery]
+	if callbacks ~= nil then
+		for i,callback in pairs(callbacks) do
+			local b,err = xpcall(callback, debug.traceback, uuid, mastery)
+			if not b then
+				Ext.PrintError(err)
+			end
+		end
+	end
+end
+
+--- @param uuid string
+--- @param mastery string
 function OnMasteryDeactivated(uuid,mastery)
 	ClearTag(uuid,mastery)
 	printd("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
