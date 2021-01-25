@@ -6,12 +6,12 @@ end
 ---@param displayName TranslatedString
 ---@param masteryColor string
 ---@param ranks table<integer,MasteryRankDisplayInfo>
-function Mastery.Register.NewMastery(mastery, displayName, masteryColor, rankText)
+function Mastery.Register.NewMastery(mastery, displayName, masteryColor, ranks)
 	if masteryColor == nil then
 		masteryColor = "#FFFFFF"
 	end
 	if Masteries[mastery] == nil then
-		Masteries[mastery] = MasteryDataClasses.MasteryData:Create(mastery, displayName, masteryColor, rankText)
+		Masteries[mastery] = MasteryDataClasses.MasteryData:Create(mastery, displayName, masteryColor, ranks)
 	end
 end
 
