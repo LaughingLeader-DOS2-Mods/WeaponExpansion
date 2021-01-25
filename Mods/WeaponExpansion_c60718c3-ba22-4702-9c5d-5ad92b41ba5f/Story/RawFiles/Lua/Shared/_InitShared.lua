@@ -192,6 +192,7 @@ local function LoadExperienceVariables()
 end
 
 Ext.RegisterListener("SessionLoaded", function()
+	Mastery.InitBonusIdentifiers()
 	Settings = initSettings()
 
 	LoadExperienceVariables()

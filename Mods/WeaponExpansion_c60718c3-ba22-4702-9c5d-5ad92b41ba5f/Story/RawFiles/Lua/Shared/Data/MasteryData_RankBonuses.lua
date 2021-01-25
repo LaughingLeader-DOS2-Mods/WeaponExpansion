@@ -324,30 +324,32 @@ LLWEAPONEX_Wand_Mastery5 = {},
 
 local BonusIDEntry = MasteryDataClasses.BonusIDEntry
 
-for tag,tbl in pairs(Mastery.Bonuses) do
-	for bonusName,bonusEntry in pairs(tbl) do
-		if Mastery.BonusID[bonusName] == nil then
-			Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
-		end
-		Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
-		if bonusEntry.Skills ~= nil then
-			for i,v in pairs(bonusEntry.Skills) do
-				if Mastery.Params.SkillData[v] == nil then
-					Mastery.Params.SkillData[v] = {
-						Tags = {}
-					}
-				end
-				Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
+function Mastery.InitBonusIdentifiers()
+	for tag,tbl in pairs(Mastery.Bonuses) do
+		for bonusName,bonusEntry in pairs(tbl) do
+			if Mastery.BonusID[bonusName] == nil then
+				Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
 			end
-		end
-		if bonusEntry.StatusParam ~= nil then
-			for i,v in pairs(bonusEntry.StatusParam.Statuses) do
-				if Mastery.Params.StatusData[v] == nil then
-					Mastery.Params.StatusData[v] = {
-						Tags = {}
-					}
+			Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
+			if bonusEntry.Skills ~= nil then
+				for i,v in pairs(bonusEntry.Skills) do
+					if Mastery.Params.SkillData[v] == nil then
+						Mastery.Params.SkillData[v] = {
+							Tags = {}
+						}
+					end
+					Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
 				end
-				Mastery.Params.StatusData[v].Tags[tag] = bonusEntry.StatusParam
+			end
+			if bonusEntry.StatusParam ~= nil then
+				for i,v in pairs(bonusEntry.StatusParam.Statuses) do
+					if Mastery.Params.StatusData[v] == nil then
+						Mastery.Params.StatusData[v] = {
+							Tags = {}
+						}
+					end
+					Mastery.Params.StatusData[v].Tags[tag] = bonusEntry.StatusParam
+				end
 			end
 		end
 	end
