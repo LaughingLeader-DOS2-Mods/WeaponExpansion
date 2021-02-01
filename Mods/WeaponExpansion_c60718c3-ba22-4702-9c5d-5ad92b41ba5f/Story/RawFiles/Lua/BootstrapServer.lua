@@ -5,6 +5,7 @@ StartOneshotTimer = Mods.LeaderLib.StartOneshotTimer
 StartTimer = Mods.LeaderLib.StartTimer
 CancelTimer = Mods.LeaderLib.CancelTimer
 RegisterSkillListener = Mods.LeaderLib.RegisterSkillListener
+RegisterStatusListener = Mods.LeaderLib.RegisterStatusListener
 
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
@@ -145,46 +146,6 @@ function RegisterMasteryListener(event, mastery, callback)
                 eventHolder[mastery] = {}
             end
             table.insert(eventHolder[mastery], callback)
-        end
-    end
-end
-
----@param event StatusEventID
----@param status string
----@param callback StatusEventCallback
-function RegisterStatusListener(event, status, callback)
-    local statusEventHolder = Listeners[event]
-    if statusEventHolder ~= nil then
-        if type(status) == "table" then
-            for i,v in pairs(status) do
-                if statusEventHolder[v] == nil then
-                    statusEventHolder[v] = {}
-                end
-                table.insert(statusEventHolder[v], callback)
-            end
-        else
-            if statusEventHolder[status] == nil then
-                statusEventHolder[status] = {}
-            end
-            table.insert(statusEventHolder[status], callback)
-        end
-    end
-end
-
-function RemoveStatusListener(event, status, callback, all)
-    local statusEventHolder = Listeners[event]
-    if statusEventHolder then
-        local tbl = statusEventHolder[status]
-        if tbl then
-            if all ~= true then
-                for i,v in pairs(tbl) do
-                    if v == callback then
-                        table.remove(tbl, i)
-                    end
-                end
-            else
-                statusEventHolder[status] = nil
-            end
         end
     end
 end

@@ -246,7 +246,7 @@ local FinisherDamageData = {
 	LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY = ApplyVanquisherDamage,
 }
 
-RegisterStatusListener("StatusApplied", {
+RegisterStatusListener(StatusEvent.Applied, {
 	"LLWEAPONEX_KATANA_FINISHER_APPLY", 
 	"LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY", 
 	--"LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY"
@@ -281,7 +281,7 @@ function(target, status, source)
 end)
 
 -- Remove combat statuses when the attacker's turn ends, instead of the target.
-RegisterStatusListener("StatusApplied", ComboStatuses, function(target, status, source)
+RegisterStatusListener(StatusEvent.Applied, ComboStatuses, function(target, status, source)
 	if PersistentVars.StatusData.KatanaCombo[source] == nil then
 		PersistentVars.StatusData.KatanaCombo[source] = {}
 	end
@@ -298,7 +298,7 @@ RegisterStatusListener("StatusApplied", ComboStatuses, function(target, status, 
 	end
 end)
 
-RegisterStatusListener("StatusRemoved", ComboStatuses, function(target, status, ...)
+RegisterStatusListener(StatusEvent.Removed, ComboStatuses, function(target, status, ...)
 	if not HasComboStatus(target) then
 		CheckActiveCombo(target)
 	end
@@ -333,12 +333,12 @@ local function ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, 
 	end
 end
 
-RegisterStatusListener("StatusApplied", "LLWEAPONEX_HELMSPLITTER", function(target, status, source)
-	if not Ext.IsModLoaded(MODID.DivinityUnleashed) and not Ext.IsModLoaded(MODID.ArmorMitigation) then
-		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor")
-		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor")
-    end
-end)
+-- RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_HELMSPLITTER", function(target, status, source)
+-- 	if not Ext.IsModLoaded(MODID.DivinityUnleashed) and not Ext.IsModLoaded(MODID.ArmorMitigation) then
+-- 		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor")
+-- 		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor")
+--     end
+-- end)
 
 MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_EnemyVault"}, {"KATANA_VAULT"}, function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.HIT then

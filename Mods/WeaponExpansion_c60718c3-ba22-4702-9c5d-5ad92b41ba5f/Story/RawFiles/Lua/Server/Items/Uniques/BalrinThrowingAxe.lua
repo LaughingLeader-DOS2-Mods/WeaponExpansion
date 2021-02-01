@@ -118,7 +118,7 @@ local function RecoverBalrinAxe(char, timedOut)
 	return false
 end
 
-RegisterStatusListener("StatusApplied", "LLWEAPONEX_BALRINAXE_RECOVER_START", function(balrinUser, status, target)
+RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_BALRINAXE_RECOVER_START", function(balrinUser, status, target)
 	if RecoverBalrinAxe(balrinUser) then
 		RemoveStatus(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
 		ApplyStatus(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, balrinUser) -- No Aura
@@ -135,7 +135,7 @@ RegisterStatusListener("StatusApplied", "LLWEAPONEX_BALRINAXE_RECOVER_START", fu
 	end
 end)
 
-RegisterStatusListener("StatusRemoved", "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A", function(target, status)
+RegisterStatusListener(StatusEvent.Removed, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A", function(target, status)
 	for char,data in pairs(PersistentVars.SkillData.ThrowBalrinAxe) do
 		if data.Target == target then
 			EquipBalrinAxe(char, true)
@@ -145,6 +145,6 @@ RegisterStatusListener("StatusRemoved", "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A"
 	end
 end)
 
-RegisterStatusListener("StatusRemoved", "LLWEAPONEX_BALRINAXE_DISARMED_INFO", function(target, status)
+RegisterStatusListener(StatusEvent.Removed, "LLWEAPONEX_BALRINAXE_DISARMED_INFO", function(target, status)
 	RecoverBalrinAxe(target, true)
 end)

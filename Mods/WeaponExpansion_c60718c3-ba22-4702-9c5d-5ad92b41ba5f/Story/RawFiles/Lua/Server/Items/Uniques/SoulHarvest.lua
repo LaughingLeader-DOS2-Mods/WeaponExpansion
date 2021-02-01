@@ -20,14 +20,14 @@ DeathManager.RegisterListener("SoulHarvestReaping", function(target, source, tar
     end
 end)
 
-RegisterStatusListener("StatusAttempt", "LLWEAPONEX_SOULHARVEST_REAP", function(target, status, source, handle)
+RegisterStatusListener(StatusEvent.Attempt, "LLWEAPONEX_SOULHARVEST_REAP", function(target, status, source, handle)
 	DeathManager.ListenForDeath("SoulHarvestReaping", target, source, 1000)
 end)
 
 RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_UniqueHarvestScythe", function(char, item, tag, equipped)
 	printf("EquipmentChanged(%s, %s, %s, %s)", char, item, tag, equipped)
 	-- if equipped then
-	-- 	RegisterStatusListener("StatusAttempt", "LLWEAPONEX_SOULHARVEST_REAP", OnReapingAttempt)
+	-- 	RegisterStatusListener(StatusEvent.Attempt, "LLWEAPONEX_SOULHARVEST_REAP", OnReapingAttempt)
 	-- else
 	-- 	if registeredListeners > 0 then
 	-- 		registeredListeners = registeredListeners - 1

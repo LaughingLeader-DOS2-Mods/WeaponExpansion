@@ -37,6 +37,9 @@ HitFlagPresets = {
     })
 }
 
+---@type StatusEventValues
+StatusEvent = LeaderLib.Vars.StatusEvent
+
 Vars.SERVEREVENT = {
     OnModUpdated = "OnModUpdated"
 }
