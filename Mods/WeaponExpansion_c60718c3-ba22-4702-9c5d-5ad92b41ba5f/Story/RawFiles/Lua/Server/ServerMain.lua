@@ -37,6 +37,25 @@ HitFlagPresets = {
     })
 }
 
+Vars.SERVEREVENT = {
+    OnModUpdated = "OnModUpdated"
+}
+
+ServerEvents = {
+    ---@type fun(lastVersion:integer, nextVersion:integer, player:string)[]
+    OnModUpdated = {}
+}
+
+---@param event string
+---@param callback function
+function RegisterServerEventCallback(event, callback)
+    if ServerEvents[event] ~= nil then
+		table.insert(ServerEvents[event], callback)
+	else
+		Ext.PrintError("[WeaponExpansion:ServerMain.lua:RegisterServerEventCallback] Event ("..tostring(event)..") is not a valid event!")
+	end
+end
+
 function GetHandedness(weapon)
     if weapon == nil then
         return nil

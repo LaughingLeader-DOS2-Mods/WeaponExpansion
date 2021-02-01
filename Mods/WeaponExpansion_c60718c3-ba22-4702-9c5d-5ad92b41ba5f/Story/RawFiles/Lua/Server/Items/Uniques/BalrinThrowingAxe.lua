@@ -13,6 +13,18 @@ local function EquipBalrinAxe(char, refreshSkill, deleteData)
 	end
 end
 
+RegisterServerEventCallback(Vars.SERVEREVENT, function(lastVersion, nextVersion, player)
+	-- Deprecated skill
+	if CharacterHasSkill(player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
+		CharacterRemoveSkill(player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
+	end
+	-- Fix for Balrin's Axe disappearing due to unforseen consequences
+	-- May need some additional checks
+	if not GameHelpers.IsInCombat(player) then
+		EquipBalrinAxe(player)
+	end
+end)
+
 LeaderLib.RegisterListener("NamedTimerFinished", "Timers_LLWEAPONEX_CheckForAxeMiss", function(timerName, char)
 	EquipBalrinAxe(char)
 	CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
