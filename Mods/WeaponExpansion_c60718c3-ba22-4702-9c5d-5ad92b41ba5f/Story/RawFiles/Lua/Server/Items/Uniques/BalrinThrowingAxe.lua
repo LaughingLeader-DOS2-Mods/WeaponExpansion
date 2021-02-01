@@ -13,6 +13,11 @@ local function EquipBalrinAxe(char, refreshSkill, deleteData)
 	end
 end
 
+LeaderLib.RegisterListener("NamedTimerFinished", "Timers_LLWEAPONEX_CheckForAxeMiss", function(timerName, char)
+	EquipBalrinAxe(char)
+	CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
+end)
+
 ---@param skill string
 ---@param char string
 ---@param state SkillState
@@ -35,16 +40,21 @@ local function OnBalrinAxeThrown(skill, char, state, data)
 		Osi.ProcObjectTimer(char, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200)
 		StartTimer("Timers_LLWEAPONEX_CheckForAxeMiss", 1200, char)
 	elseif state == SKILL_STATE.HIT then
-		CancelTimer("Timers_LLWEAPONEX_CheckForAxeMiss", char)
-		if not data.Success then
+		local bCancelTimer = true
+		if not data.Success or ObjectIsItem(data.Target) == 1 then
+			bCancelTimer = false
 			EquipBalrinAxe(char)
 			CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 		else
 			local axeData = PersistentVars.SkillData.ThrowBalrinAxe[char]
 			if axeData ~= nil then
+				bCancelTimer = false
 				axeData.Target = data.Target
 				DeathManager.ListenForDeath("ThrowBalrinAxe", data.Target, char, 1000)
 			end
+		end
+		if bCancelTimer then
+			CancelTimer("Timers_LLWEAPONEX_CheckForAxeMiss", char)
 		end
 	elseif state == SKILL_STATE.PROJECTILEHIT then
 		CancelTimer("Timers_LLWEAPONEX_CheckForAxeMiss", char)
@@ -56,7 +66,7 @@ local function OnBalrinAxeThrown(skill, char, state, data)
 end
 
 DeathManager.RegisterListener("ThrowBalrinAxe", function(target, attacker, targetDied)
-	if targetDied then
+	if targetDied or HasActiveStatus(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A") == 0 then
 		EquipBalrinAxe(attacker, true)
 	end
 end)
@@ -82,11 +92,15 @@ RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_UniqueThrowingAxeA",
 	end
 end)
 
-local function RecoverBalrinAxe(target)
-	local data = PersistentVars.SkillData.ThrowBalrinAxe[target]
+local function RecoverBalrinAxe(char, timedOut)
+	local data = PersistentVars.SkillData.ThrowBalrinAxe[char]
 	if data ~= nil then
-		EquipBalrinAxe(target, true)
-		CharacterStatusText(target, "LLWEAPONEX_StatusText_BalrinAxeRetrieved")
+		EquipBalrinAxe(char, true)
+		if timedOut == true then
+			CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
+		else
+			CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeRetrieved")
+		end
 		return true
 	end
 	return false
@@ -120,5 +134,5 @@ RegisterStatusListener("StatusRemoved", "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A"
 end)
 
 RegisterStatusListener("StatusRemoved", "LLWEAPONEX_BALRINAXE_DISARMED_INFO", function(target, status)
-	RecoverBalrinAxe(target)
+	RecoverBalrinAxe(target, true)
 end)
