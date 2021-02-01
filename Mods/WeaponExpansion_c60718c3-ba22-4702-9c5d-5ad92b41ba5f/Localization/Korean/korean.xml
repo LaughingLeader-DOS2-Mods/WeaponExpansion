@@ -1,7 +1,7 @@
 <contentList>
 	<content contentuid="h00157a58g9ae0g4119gba1ag3f1e9f11db14">Dual Shields</content>
 	<content contentuid="h00277f28g293fg49a2gbc19g4e1a54a92f0f">Weapon Expansion - Skillbooks</content>
-	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">Bounty of the Harvest</content>
+	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">Soul Harvest</content>
 	<content contentuid="h0036c310g95a5g42e7gb715g06c09e6a4079">Character has activated the &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 10% chance to become &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 50%.&lt;/font&gt;</content>
 	<content contentuid="h003d6b87g216ag47cega199gf4f3c2d28998">a Scoundrel Weapon</content>
 	<content contentuid="h0042fce4g99a9g487egb7d2g3d594b9b4d17">Master Monk of Staves</content>
@@ -99,7 +99,7 @@
 	<content contentuid="h09132fbbg49fdg46c8g81b2g6b6de312721e">An old greatbow passed down as a family heirloom. Not the strongest, but it&apos;ll do.</content>
 	<content contentuid="h092713ecg7833g48d5g8627g3d17c449f055">A set of small &lt;font color=&apos;#C0C0C0&apos;&gt;silver-tipped&lt;/font&gt; bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;&lt;font color=&apos;#12FDDF&apos;&gt;Monsters such as Werebeasts, Demons, and the Undead are rumored to be suspectible to silver.&lt;/font&gt;</content>
 	<content contentuid="h095f914fg0387g4a3bgaa8fg2aa6c557c7b4">&lt;font color=&apos;#03fcdb&apos;&gt;Runic Dispersal&lt;/font&gt;</content>
-	<content contentuid="h0989fe2fg6173g4d75ga291gac5e9e4a6db0">Soul Harvest IV</content>
+	<content contentuid="h0989fe2fg6173g4d75ga291gac5e9e4a6db0">Soul Bounty IV</content>
 	<content contentuid="h0990e543gd885g4861ga84bgdb4a6ae2f0ef">Runic Boots</content>
 	<content contentuid="h0991fa6cgdc68g410dgbc3cg0c6a36fe8d8b">*[RANGED] Click on the button labeled &apos;Ranged&apos;.*</content>
 	<content contentuid="h09ef58e3g0c75g456ag95a2g7dbf3900e2e7">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Applies &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; to &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; enemies for 1 turn, otherwise &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; is applied for 1 turn.&lt;br&gt;&lt;font color=&apos;#7d71d9&apos;&gt;Attacking a Shocked or Stunned enemy sends out a jolt of electricity to other enemies within 8m.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#f7ba14&apos;&gt;When Shocked is applied, that enemy gets Shock Resistance, preventing Shocked from being applied by Runeblades for 3 turns.&lt;/font&gt;&lt;br&gt;Adds &lt;font color=&apos;#4197e2&apos;&gt;Water Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
@@ -396,7 +396,7 @@
 	<content contentuid="h2805baeagd4b0g44b4ga012g2b821374160c">&lt;font color=&apos;#EA2E2E&apos;&gt;Extend &amp; Smash&lt;/font&gt;</content>
 	<content contentuid="h2817af00ge17eg4388g8d72g3a3d7481e757">Launch a dud at a target position, dealing [1].&lt;br&gt;&lt;font color=&apos;#ffb526&apos;&gt;After 3 turns in combat (any source), the dud explodes for [2] in a [3] radius.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#ff2626&apos;&gt;If the dud is destroyed before being fully armed, it deals [4] instead.&lt;/font&gt;</content>
 	<content contentuid="h2836b8b0g84a9g42e9gb62agce332eb1121e">&lt;font color=&apos;#FF3E2A&apos;&gt;Sword Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h28548559g70e2g4391gbcc2gb3d0d8618782">Soul Harvest I</content>
+	<content contentuid="h28548559g70e2g4391gbcc2gb3d0d8618782">Soul Bounty I</content>
 	<content contentuid="h2869c187g43c7g4a43g840eg09183a619b9e">Beginner</content>
 	<content contentuid="h286ef794g72f7g4b59gaa20geaf4bbdeabc6">Avalanche Rune</content>
 	<content contentuid="h2896b037geda2g4458ga782ga27dc02db941">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Every third basic attack grants a &lt;font color=&apos;#8B0000&apos;&gt;Congealed Blood Ball&lt;/font&gt;, which can be thrown to create a blood surface.</content>
@@ -444,7 +444,7 @@
 	<content contentuid="h2d0e8796g1d66g4541g8ce3ged8f936c4129">*Tell the mercenary to stop following you.*</content>
 	<content contentuid="h2d15369bg951bg438cga94fg7ccb48f7a9b1">Lava Rune</content>
 	<content contentuid="h2d40dd25gb718g4809ga2e9gb83912e9cbfd">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release a freezing gas, dealing water damage on hit.</content>
-	<content contentuid="h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6">Reap the battlefield, dealing [1] to enemies in an arc.&lt;br&gt;&lt;font color=&apos;#CD39C0&apos;&gt;Slain enemies provide a permanent, stacking damage bonus and restore &lt;font color=&apos;#80FFC3&apos;&gt;source points&lt;/font&gt;.&lt;/font&gt;</content>
+	<content contentuid="h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6">Reap the battlefield, dealing [1] to enemies in an arc.&lt;br&gt;&lt;font color=&apos;#CD39C0&apos;&gt;Slaying enemies grants &lt;font color=&apos;#80FFC3&apos;&gt;[Key:LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName]&lt;/font&gt; (a stacking damage bonus), and restores &lt;font color=&apos;#80FFC3&apos;&gt;source points&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="h2d9d60e3gf171g47ffgbf7fg126af4dd7ef6">Expert Slayer</content>
 	<content contentuid="h2dcf53bbgced5g46eagbabdg54b3d617317a">Dusty Book</content>
 	<content contentuid="h2de49223g49a5g4bc5g9224g05413bb0a013">Disable Remote Charge Detonation Limit - *WARNING* - Disable at your own risk!</content>
@@ -905,7 +905,7 @@
 	<content contentuid="h5feaed39g30ebg4823g85b3g0d23ca4c7f3f">Destroy Grimoire FX for Party</content>
 	<content contentuid="h600027f7gac39g419bgba1dg56a1a17df1f9">Sweeper</content>
 	<content contentuid="h600758d8g966ag4715g944eg443503a394cc"></content>
-	<content contentuid="h600e653cg58bfg43b6gb546g116aef9ba9c9">Soul Harvest V</content>
+	<content contentuid="h600e653cg58bfg43b6gb546g116aef9ba9c9">Soul Bounty V</content>
 	<content contentuid="h605190aagd9c2g414cg93eeg7e595ddcb696">Thunderbolt Strike</content>
 	<content contentuid="h6061f14dgad52g4b0dg8933g7cd1337a8da0">Demonic Protection</content>
 	<content contentuid="h609008a2g3cb7g4670g93b7g7714013ddf12">A special pet rock. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
@@ -1213,7 +1213,7 @@
 	<content contentuid="h7f674e8dg9485g4e4ag84f1gaf005cded23a">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery III&lt;/font&gt;</content>
 	<content contentuid="h7f82ca3fg7d3dg43b6gb692gda14c4b94b0f">Old Rifle</content>
 	<content contentuid="h7fa5d20cg6190g4f09ga0abg7737430ae55f">Pilgrim&apos;s Quarterstaff</content>
-	<content contentuid="h7fbbfee8geee0g4fdcgad0dgbfe83a26124e">Soul Harvest II</content>
+	<content contentuid="h7fbbfee8geee0g4fdcgad0dgbfe83a26124e">Soul Bounty II</content>
 	<content contentuid="h7fe83c57g2951g45a3gb9d0g0b6cb9631808">An greatbow arrow infused with the fury of the air. If you listen closely you can hear it whistle and seethe with anticipation.</content>
 	<content contentuid="h801f36abg7da8g485ega1fcg4bf3416cdcc7">Gas Cooldown</content>
 	<content contentuid="h803a2376g5729g4d56g8c47gd7156ee5d348">&lt;font color=&apos;#F19824&apos;&gt;Eat hit deals [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet] in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet:ExplodeRadius]m radius around the target.&lt;/font&gt;</content>
@@ -1547,7 +1547,7 @@
 	<content contentuid="ha3e9e78cg1fa4g4f64ga835gbc35cb1ea463">Dust Blast Cooldown</content>
 	<content contentuid="ha3f11fe3g126fg426cga000g7963c84fb47e">Enhanced Demolition</content>
 	<content contentuid="ha421bcffge033g47d5g9b73ga8d03abc2364">Aspect of Necromancy</content>
-	<content contentuid="ha42425fbg4d35g4818g84fag128b9eb13e6e">Soul Harvest III</content>
+	<content contentuid="ha42425fbg4d35g4818g84fag128b9eb13e6e">Soul Bounty III</content>
 	<content contentuid="ha451f720g9544g4dd0gbb07g4e01903b4d42">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#C76537&apos;&gt;Fire Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
 	<content contentuid="ha4aed062gd504g4ae6ga917g83547a3fe6c6">Worn Katana</content>
 	<content contentuid="ha4c0ed93g8c38g4b37ga948gd95e768d573e">Old Runeblade of Earth</content>
@@ -1650,7 +1650,7 @@
 	<content contentuid="haf0de280g47e7g41e3g9401g03e636e870d3">Venom Rune</content>
 	<content contentuid="haf1b80d3g97d1g477ag9547g1fd7878f3e35">Armor Break</content>
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
-	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
+	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with the &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
 	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[2][3]</content>
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
@@ -2232,7 +2232,7 @@
 	<content contentuid="hf2f3f5dfg801eg4b17ga5d6g59c975b1c065">*[ANY ARMOR] Click on the button labeled &apos;Any Armor&apos;.*</content>
 	<content contentuid="hf3088c78gafa6g4b23ga6b2g65d07edc7440">&lt;font color=&apos;#FEFFB3&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
 	<content contentuid="hf33113e4g2e7bg42ecga6b8g8fe816db8004">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery I&lt;/font&gt;</content>
-	<content contentuid="hf33cdaccgc14bg4cdegaa50g800a6c761add">&lt;font color=&apos;#80FFC3&apos;&gt;Soul Harvest&lt;/font&gt;</content>
+	<content contentuid="hf33cdaccgc14bg4cdegaa50g800a6c761add">&lt;font color=&apos;#80FFC3&apos;&gt;Soul Reaping&lt;/font&gt;</content>
 	<content contentuid="hf3437e3fge87dg4a87g92acgde369c86cdb5">Covered (Shell)</content>
 	<content contentuid="hf347a64dga297g4426g9397gbfaa416e7aba">Balrin&apos;s Throwing Axe (Lightning)</content>
 	<content contentuid="hf353e512gada6g41bdgaf47g813ef6af6f17">A special pet rock, dipped in oil. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
