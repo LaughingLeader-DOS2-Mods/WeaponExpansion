@@ -13,7 +13,7 @@ local function EquipBalrinAxe(char, refreshSkill, deleteData)
 	end
 end
 
-RegisterServerEventCallback(Vars.SERVEREVENT, function(lastVersion, nextVersion, player)
+RegisterServerEventCallback(Vars.SERVEREVENT.OnModUpdated, function(lastVersion, nextVersion, player)
 	-- Deprecated skill
 	if CharacterHasSkill(player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
 		CharacterRemoveSkill(player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
