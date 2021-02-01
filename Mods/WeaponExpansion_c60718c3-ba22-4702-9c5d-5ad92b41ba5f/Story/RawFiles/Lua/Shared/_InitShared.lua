@@ -43,6 +43,7 @@ Skills = {
 	DamageFunctions = {},
 	WarfareMeleeSkills = {},
 	ScoundrelMeleeSkills = {},
+	Data = {}
 }
 
 AttributeScaleTables = {
