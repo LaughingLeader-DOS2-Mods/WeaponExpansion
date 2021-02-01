@@ -7,7 +7,7 @@ DeathManager = {
 	ActiveTimers = 0
 }
 
----@param id string
+---@param id string The ID for the death event, specified in ListenForDeath.
 ---@param callback fun(target:string, attacker:string, success:boolean):void
 function DeathManager.RegisterListener(id, callback)
 	if DeathManager.Listeners[id] == nil then
@@ -58,6 +58,13 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 		end
 	end
 	data.Attackers[attacker][id] = timerName
+	if Vars.DebugMode and IsTagged(target, "LLDUMMY_TrainingDummy") == 1 then
+		local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Random(0,999))
+		StartOneshotTimer(tDebugName, listenDelay/2, function()
+			printd("[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer", tDebugName)
+			DeathManager.OnDeath(target)
+		end)
+	end
 end
 
 RegisterProtectedOsirisListener("TimerFinished", 1, "after", function(timerName)
