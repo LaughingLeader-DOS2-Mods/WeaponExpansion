@@ -171,6 +171,24 @@ function RegisterStatusListener(event, status, callback)
     end
 end
 
+function RemoveStatusListener(event, status, callback, all)
+    local statusEventHolder = Listeners[event]
+    if statusEventHolder then
+        local tbl = statusEventHolder[status]
+        if tbl then
+            if all ~= true then
+                for i,v in pairs(tbl) do
+                    if v == callback then
+                        table.remove(tbl, i)
+                    end
+                end
+            else
+                statusEventHolder[status] = nil
+            end
+        end
+    end
+end
+
 ---@param event ItemListenerEvent
 ---@param idType EquipmentChangedIDType
 ---@param id string The template, tag, etc.
