@@ -51,7 +51,6 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_DemonGauntlet
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_Muramasa", "LLWEAPONEX_MuramasaEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_DemolitionBackpack", "LLWEAPONEX_DemolitionBackpackEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_AnvilMace", "LLWEAPONEX_AnvilMaceEquipped", 0);
-LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_SoulHarvest", "LLWEAPONEX_SoulHarvestEquipped", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_PowerGauntlets", "LLWEAPONEX_PowerGauntletsActive", 0);
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_10_BasilusDagger", "LLWEAPONEX_BasilusDaggerHauntingActive", 0);
 
