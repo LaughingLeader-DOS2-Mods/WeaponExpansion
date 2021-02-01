@@ -1,5 +1,3 @@
-local printf = LeaderLib.PrintLog
-
 Math.AbilityScaling = {}
 
 --- @param ability integer
@@ -7,7 +5,7 @@ function Math.AbilityScaling.ScaledDamageFromPrimaryAbility(ability)
     local attributeMax = Ext.ExtraData.AttributeSoftCap - Ext.ExtraData.AttributeBaseValue
     local damageBonusMult = attributeMax/Ext.ExtraData.CombatAbilityCap
     local result = (ability - Ext.ExtraData.AbilityBaseValue) * (Ext.ExtraData.DamageBoostFromAttribute * damageBonusMult)
-    -- if Vars.DebugEnabled then
+    -- if Vars.DebugMode then
     --     print("ScaledDamageFromPrimaryAttribute",ability,result,Game.Math.ScaledDamageFromPrimaryAttribute(40))
     -- end
     return result

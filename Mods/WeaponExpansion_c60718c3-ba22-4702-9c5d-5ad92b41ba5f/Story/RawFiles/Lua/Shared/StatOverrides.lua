@@ -488,7 +488,7 @@ local function StatOverrides_Init()
 		end
 	end
 
-	if Vars.DebugEnabled then
+	if Vars.DebugMode then
 		Ext.Print("Saving WeaponExpansion_UniqueBaseStats.json.")
 		local b,err = xpcall(function()
 			Ext.SaveFile("WeaponExpansion_UniqueBaseStats.json", Ext.JsonStringify(uniqueStats))

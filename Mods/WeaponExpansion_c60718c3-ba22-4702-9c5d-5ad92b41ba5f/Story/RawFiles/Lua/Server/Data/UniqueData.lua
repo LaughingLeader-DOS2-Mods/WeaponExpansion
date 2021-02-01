@@ -519,7 +519,7 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 	return true
 end
 
-if Vars.DebugEnabled then
+if Vars.DebugMode then
 	function UniqueData:TryTransform(template)
 		local item = Ext.GetItem(self.UUID)
 		local level = CharacterGetLevel(CharacterGetHostCharacter())

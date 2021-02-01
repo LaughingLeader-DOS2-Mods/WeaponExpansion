@@ -124,7 +124,7 @@ end
 --- @param damage integer
 --- @param handle integer
 LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
-	if Vars.DebugEnabled then
+	if Vars.DebugMode then
 		printd(string.format("[LLWEAPONEX:OnHit] skill(%s) target(%s) source(%s)", NRD_StatusGetString(target, handle, "SkillId"), target, source))
 	end
 	if not StringHelpers.IsNullOrEmpty(source) then

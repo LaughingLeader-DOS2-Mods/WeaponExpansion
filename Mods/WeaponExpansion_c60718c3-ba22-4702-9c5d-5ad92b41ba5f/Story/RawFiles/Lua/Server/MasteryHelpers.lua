@@ -87,7 +87,7 @@ function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 				end
 			end
 
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				if currentExp == nil then currentExp = 0 end
 				if nextExp == nil then nextExp = 0 end
 				Ext.PrintWarning("Mastery XP:",uuid, mastery, currentExp, "=>", nextExp)

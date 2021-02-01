@@ -478,7 +478,7 @@ function MasteryMenu.InitializeMasteryMenu()
 			Ext.RegisterUICall(ui, "mastery_showIconTooltip", OnMenuEvent)
 			Ext.RegisterUICall(ui, "mastery_hideTooltip", OnMenuEvent)
 			
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				Ext.RegisterUICall(ui, "showSkillTooltip", OnMenuEvent)
 				Ext.RegisterUICall(ui, "showStatusTooltip", OnMenuEvent)
 				--Ext.RegisterUICall(ui, "UIAssert", OnMenuEvent)

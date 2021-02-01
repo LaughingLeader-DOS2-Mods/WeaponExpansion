@@ -41,14 +41,14 @@ local function IncreaseKillCount(char, fromTargetDying)
 				UpdateDarkFireballSkill(char)
 			end
 			SyncDataToClient(CharacterGetReservedUserID(char))
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				print("IncreaseKillCount", char, PersistentVars.SkillData.DarkFireballCount[character.MyGuid], maxCount)
 			end
 		end
 	end
 end
 
-if Vars.DebugEnabled then
+if Vars.DebugMode then
 	Ext.RegisterConsoleCommand("llweaponex_killcount", function(cmd)
 		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
 		IncreaseKillCount(host)

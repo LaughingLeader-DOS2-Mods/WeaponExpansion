@@ -486,7 +486,7 @@ local equipmentTypes = {
 -- 	end
 -- end)
 
--- if Vars.DebugEnabled then
+-- if Vars.DebugMode then
 -- 	Ext.RegisterConsoleCommand("swapdeltamods", function(command)
 -- 		local host = CharacterGetHostCharacter()
 -- 		local weapon = CharacterGetEquippedWeapon(host)

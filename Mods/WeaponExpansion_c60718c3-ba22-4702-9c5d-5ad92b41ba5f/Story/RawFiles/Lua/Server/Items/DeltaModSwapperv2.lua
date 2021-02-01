@@ -295,7 +295,7 @@ local function SwapDeltaMods(item)
 			for name,_ in pairs(boostMap) do
 				generatedBoostNames[#generatedBoostNames+1] = name
 			end
-			if Vars.DebugEnabled then
+			if Vars.DebugMode then
 				LeaderLib.PrintLog("[SwapDeltaMods] Setting item MyGuid(%s) StatsId(%s) generated boosts to:\n%s", item.MyGuid, item.StatsId, Ext.JsonStringify(generatedBoostNames))
 			end
 			--item:SetGeneratedBoosts(generatedBoostNames)

@@ -6,6 +6,7 @@ Common = LeaderLib.Common
 StringHelpers = LeaderLib.StringHelpers
 LocalizedText = LeaderLib.LocalizedText
 printd = LeaderLib.PrintDebug
+printf = LeaderLib.PrintLog
 
 SKILL_STATE = LeaderLib.SKILL_STATE
 
@@ -32,7 +33,7 @@ Vars = {
 	GAME_STARTED = false,
 	SEND_USER_ID = false,
 	isInCharacterCreation = false,
-	DebugEnabled = Ext.IsDeveloperMode() == true
+	DebugMode = Ext.IsDeveloperMode() == true
 }
 
 Skills = {
@@ -103,7 +104,7 @@ local initSettings = Ext.Require("Shared/Settings.lua")
 ---@type ModSettings
 Settings = nil
 
--- if Vars.DebugEnabled then
+-- if Vars.DebugMode then
 -- 	Ext.Require("Shared/Debug/GameMathTracing.lua")
 -- end
 

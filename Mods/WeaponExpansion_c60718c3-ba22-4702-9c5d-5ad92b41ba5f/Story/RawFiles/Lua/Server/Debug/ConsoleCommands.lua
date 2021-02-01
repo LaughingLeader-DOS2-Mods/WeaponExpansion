@@ -1,6 +1,6 @@
 local StartOneshotTimer = LeaderLib.StartOneshotTimer
 
-if Vars.DebugEnabled then
+if Vars.DebugMode then
 	Ext.RegisterConsoleCommand("weaponex_tagboost", function()
 		local host = CharacterGetHostCharacter()
 		local weapon = CharacterGetEquippedWeapon(host)
