@@ -23,6 +23,9 @@ local MessageData = LeaderLib.Classes["MessageData"]
 local CharacterMasteryData = MasteryDataClasses.CharacterMasteryData
 local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
 
+---@type LeaderLibInputManager
+local Input = LeaderLib.Input
+
 local function CloseMenu()
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
 		MasteryMenu.Instance:Invoke("closeMenu")
@@ -641,6 +644,22 @@ Ext.RegisterNetListener("LLWEAPONEX_Debug_DestroyUI", function(...)
 	end
 	if MasteryMenu.ToggleButtonInstance ~= nil then
 		MasteryMenu.ToggleButtonInstance:Destroy()
+	end
+end)
+
+---@type InputEventCallback
+Input.RegisterListener(function(event, inputMap, controllerEnabled)
+	if controllerEnabled then
+		 -- Right Trigger + Left Trigger 
+		if not MasteryMenu.Open and event.EventId == 215 and inputMap[217] == true then
+			TryOpenMasteryMenu()
+		elseif MasteryMenu.Open and MasteryMenu.Instance then
+			if event.EventId == 222 and event.Release then -- The accept button
+		
+			elseif event.EventId == 226 and event.Release then
+
+			end
+		end
 	end
 end)
 

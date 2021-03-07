@@ -118,7 +118,10 @@ package
 						break;
 					case "IE UIDialogTextUp":
 					case "IE UIDialogTextDown":
+					case "IE UITooltipUp":
+					case "IE UITooltipDown":
 						this.masteryMenuMC.stopScrollText();
+						this.masteryMenuMC.descriptionList.m_scrollbar_mc.stopAutoScroll();
 						handled = true;
 						break;
 				}
@@ -146,23 +149,40 @@ package
 						handled = true;
 						break;
 					case "IE UIDialogTextUp":
-						this.masteryMenuMC.startScrollText(true,param3);
+						//this.masteryMenuMC.startScrollText(true,param3);
 						handled = true;
 						break;
 					case "IE UIDialogTextDown":
-						this.masteryMenuMC.startScrollText(false,param3);
+						//this.masteryMenuMC.startScrollText(false,param3);
 						handled = true;
 						break;
-					case "ToggleCharacterPane":
-					case "ToggleEquipment":
-						this.closeMenu();
-						handled = false;
+					case "IE UITooltipUp":
+						this.masteryMenuMC.descriptionList.m_scrollbar_mc.startAutoScroll(false);
+						handled = true;
+						break;
+					case "IE UITooltipDown":
+						this.masteryMenuMC.descriptionList.m_scrollbar_mc.startAutoScroll(true);
+						handled = true;
+						break;
+					case "IE PartyManagement":
+						this.masteryMenuMC.top();
+						handled = true;
+						break;
+					case "IE PanelSelect":
+						this.masteryMenuMC.bottom();
+						handled = true;
+						break;
+					case "IE UILeft":
+					case "IE PrevObject":
+						this.masteryMenuMC.previous(3);
+						handled = true;
+						break;
+					case "IE UIRight":
+					case "IE NextObject":
+						this.masteryMenuMC.next(3);
+						handled = true;
 						break;
 				}
-			}
-			if (this.events[eventIndex] == "ToggleStatusPanel")
-			{
-				this.toggleMenu();
 			}
 			return handled;
 		}
@@ -294,7 +314,7 @@ package
 		{
 			this.layout = "fixed";
 			this.alignment = "none";
-			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "ToggleStatusPanel", "IE ToggleMap", "ToggleCharacterPane", "ToggleEquipment");
+			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "IE PartyManagement", "IE PanelSelect", "IE UILeft", "IE UIRight", "IE PrevObject", "IE NextObject", "IE UITooltipUp", "IE UITooltipDown");
 			this.descriptionContent = new Array();
 			Registry.RankNodePositions[0] = 0.0;
 			Registry.RankNodePositions[4] = 1.0;
