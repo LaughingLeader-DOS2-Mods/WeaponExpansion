@@ -167,6 +167,7 @@ function RegisterItemListener(event, idType, id, callback)
     end
 end
 
+Ext.Require("Server/Data/PresetEntries.lua")
 Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/HitHandler.lua")
 Ext.Require("Server/StatusHandler.lua")
