@@ -657,7 +657,8 @@ Input.RegisterListener(function(event, inputMap, controllerEnabled)
 			if event.EventId == 222 and event.Release then -- The accept button
 		
 			elseif event.EventId == 226 and event.Release then
-
+				--local main = MasteryMenu.Instance:GetRoot()
+				
 			end
 		end
 	end
