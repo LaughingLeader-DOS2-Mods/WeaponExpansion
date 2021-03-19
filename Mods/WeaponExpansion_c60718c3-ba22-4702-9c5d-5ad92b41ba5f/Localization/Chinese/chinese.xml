@@ -1,139 +1,139 @@
 <contentList>
-	<content contentuid="h00157a58g9ae0g4119gba1ag3f1e9f11db14">Dual Shields</content>
-	<content contentuid="h00277f28g293fg49a2gbc19g4e1a54a92f0f">Weapon Expansion - Skillbooks</content>
-	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">Soul Harvest</content>
-	<content contentuid="h0036c310g95a5g42e7gb715g06c09e6a4079">Character has activated the &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 10% chance to become &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 50%.&lt;/font&gt;</content>
-	<content contentuid="h003d6b87g216ag47cega199gf4f3c2d28998">a Scoundrel Weapon</content>
-	<content contentuid="h0042fce4g99a9g487egb7d2g3d594b9b4d17">Master Monk of Staves</content>
-	<content contentuid="h004d1b35g032ag4683g9ef5g5a8741a8bc90">Rally the party at the target location.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;Party members are granted a one-time use skill that teleports them to the raised banner.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF7733&apos;&gt;The banner unleashes the hunger of the pack, granting [1]% lifesteal and a [2]% boost to damage.&lt;/font&gt;</content>
-	<content contentuid="h004f820eg3b47g4400ga26dgc77fb1d9292e">&lt;font color=&apos;#00BFFF&apos; size=&apos;18&apos;&gt;Magic Warfare&lt;/font&gt;&lt;br&gt;Cripple all enemies within [1] of the target. Deals [2].</content>
-	<content contentuid="h009602a9g38aeg4454g9679g8986234ef1ff">Chaotic Weakness</content>
-	<content contentuid="h00b14254g9c1ag40cbgaa71g38557c1f8e8e">Weaponmaster Wiegraf</content>
-	<content contentuid="h00c4cb0ag7220g4f02g873eg2c540a7d719c">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery V&lt;/font&gt;</content>
-	<content contentuid="h00d3459bg4562g42dbgbe1fg0eba1a0e9f6c">*You take a look at the trader&apos;s wares.*</content>
-	<content contentuid="h00db7873g33d9g4de5gaeb3gfc69f2588858">Solid Wooden Shields</content>
-	<content contentuid="h00db93a7g31abg4563gb671gd0c6b20d9cee">Shield Prison</content>
-	<content contentuid="h0105c199gf9f5g4d17g8aa5g85b10660932a">*Leave the rock alone and step away.*</content>
-	<content contentuid="h011b99cag1e54g4b92g912ag58afbfdab053">Dragonslayer Mail</content>
-	<content contentuid="h011e1b92g4ce2g4e99g890eg6be8a6a58a28">&lt;font color=&apos;#00FFCC&apos; size=&apos;22&apos;&gt;Haunted!&lt;/font&gt;</content>
-	<content contentuid="h012244c7gbb72g4652g8ee1g19be9a9da947">Inferno Rune</content>
-	<content contentuid="h01468f79gd9b2g4479ga596g8a68e07c39e7">&lt;font color=&apos;#FFCE58&apos;&gt;Slam the target with your palm, knocking them back &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m&lt;/font&gt; and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage].&lt;/font&gt;</content>
-	<content contentuid="h014a89fcg6438g451dg96bag521c32259715">Balrin&apos;s Throwing Axe (Ice)</content>
-	<content contentuid="h016a3338gde80g4ec7gb694g63b2f592b3c8">Any Attribute Token</content>
-	<content contentuid="h016eba10ga3d5g4741ga89egdf0a8e13386e">Master Dragonslayer</content>
-	<content contentuid="h0177ec26ge046g4223gb328g687de003a4b1">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are covered in a chilling frost, dealing Water damage on hit.</content>
-	<content contentuid="h01904c95g4bf4g42c8g8ce3gd13e2acd3309">Stormrider</content>
-	<content contentuid="h01908419g9fcdg4d1dg9497ga384494ad72a">Throw</content>
-	<content contentuid="h01a090cdg2ba7g48fcga098g7897b19d6d4b">&lt;font color=&apos;#88A25B&apos;&gt;Acid Bullets&lt;/font&gt;</content>
-	<content contentuid="h01aeaef6g3e97g4364ga211gc7155fe79be5">Banner of the Pack</content>
-	<content contentuid="h01ec64eeg09ecg4813g996bg2834de7947fa">Kevin the Pet Rock</content>
-	<content contentuid="h01ed487cgf2ebg43ecgad19g7f79e3510e41">&lt;font color=&apos;#00FF7F&apos;&gt;Greatbow Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h01f28833g2ba1g4e8dgaeccge79ea00aae94">Aimed Shot (Distance Damage)</content>
-	<content contentuid="h020fe6b7gc348g43aag9f29g0b43b3c21904">Recharging (Demolitionist&apos;s Backpack)</content>
-	<content contentuid="h02124cc6gecf8g4a72ga2aege9cb12e0f0d5">Tar Rune</content>
-	<content contentuid="h0238a784gd1cbg4137g8c0dgb967a83d37af">Champion&apos;s Rapier</content>
-	<content contentuid="h0246ca32gc4d7g4fc3g88a6gbd2aea51e3b7">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are covered in a dark liquid that deals Shadow damage.</content>
-	<content contentuid="h0249ca47g0502g4361gbf6eg25b369b7c23a">An oversized scroll that once belonged to an ogre.&lt;br&gt;Despite having no talent for magic, Gnak was worshipped by his kind as an all-powerful Ogre Magi.</content>
+	<content contentuid="h00157a58g9ae0g4119gba1ag3f1e9f11db14">双盾</content>
+	<content contentuid="h00277f28g293fg49a2gbc19g4e1a54a92f0f">武器扩展 - 技能书</content>
+	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">灵魂收割</content>
+	<content contentuid="h0036c310g95a5g42e7gb715g06c09e6a4079">角色已经激活 the &lt;font color=&apos;#7d71d9&apos;&gt;大气符文&lt;/font&gt; 在 &lt;font color=&apos;#40E0D0&apos;&gt;符文剑&lt;/font&gt;.&lt;br&gt;击中有10%几率 &lt;font color=&apos;#7d71d9&apos;&gt;麻痹&lt;/font&gt; 持续一回合.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;潮湿会增加概率到50%.&lt;/font&gt;</content>
+	<content contentuid="h003d6b87g216ag47cega199gf4f3c2d28998">一个凶器/content>
+	<content contentuid="h0042fce4g99a9g487egb7d2g3d594b9b4d17">高僧法杖</content>
+	<content contentuid="h004d1b35g032ag4683g9ef5g5a8741a8bc90">在目标地点集合.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;队员拥有一次性技能，传送到升起的旗帜.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF7733&apos;&gt;旗帜释放了饥饿感, 获得 [1]% 吸血 和 [2]% 伤害增强.&lt;/font&gt;</content>
+	<content contentuid="h004f820eg3b47g4400ga26dgc77fb1d9292e">&lt;font color=&apos;#00BFFF&apos; size=&apos;18&apos;&gt;魔能战火&lt;/font&gt;&lt;br&gt;使目标 [1] 范围内的所有敌人致残. 造成 [2].</content>
+	<content contentuid="h009602a9g38aeg4454g9679g8986234ef1ff">混沌弱点</content>
+	<content contentuid="h00b14254g9c1ag40cbgaa71g38557c1f8e8e">武器大师 Wiegraf</content>
+	<content contentuid="h00c4cb0ag7220g4f02g873eg2c540a7d719c">&lt;font color=&apos;#FD8826&apos;&gt;热武器精通 V&lt;/font&gt;</content>
+	<content contentuid="h00d3459bg4562g42dbgbe1fg0eba1a0e9f6c">*你查看了商人&apos;的物品.*</content>
+	<content contentuid="h00db7873g33d9g4de5gaeb3gfc69f2588858">实木盾</content>
+	<content contentuid="h00db93a7g31abg4563gb671gd0c6b20d9cee">盾之牢笼</content>
+	<content contentuid="h0105c199gf9f5g4d17g8aa5g85b10660932a">*别碰那个石头，走开。*</content>
+	<content contentuid="h011b99cag1e54g4b92g912ag58afbfdab053">屠龙者护甲</content>
+	<content contentuid="h011e1b92g4ce2g4e99g890eg6be8a6a58a28">&lt;font color=&apos;#00FFCC&apos; size=&apos;22&apos;&gt;闹鬼!&lt;/font&gt;</content>
+	<content contentuid="h012244c7gbb72g4652g8ee1g19be9a9da947">地狱符文</content>
+	<content contentuid="h01468f79gd9b2g4479ga596g8a68e07c39e7">&lt;font color=&apos;#FFCE58&apos;&gt;用手掌猛烈击退目标 &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m&lt;/font&gt; and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage].&lt;/font&gt;</content>
+	<content contentuid="h014a89fcg6438g451dg96bag521c32259715">Balrin&apos;的投掷斧 (冰)</content>
+	<content contentuid="h016a3338gde80g4ec7gb694g63b2f592b3c8">任何属性的令牌</content>
+	<content contentuid="h016eba10ga3d5g4741ga89egdf0a8e13386e">屠龙大师</content>
+	<content contentuid="h0177ec26ge046g4223gb328g687de003a4b1">一套小弩箭，臂弩专用&lt;br&gt;寒冰弩箭，造成冰霜伤害。</content>
+	<content contentuid="h01904c95g4bf4g42c8g8ce3gd13e2acd3309">风暴骑士</content>
+	<content contentuid="h01908419g9fcdg4d1dg9497ga384494ad72a">投掷</content>
+	<content contentuid="h01a090cdg2ba7g48fcga098g7897b19d6d4b">&lt;font color=&apos;#88A25B&apos;&gt;酸性子弹&lt;/font&gt;</content>
+	<content contentuid="h01aeaef6g3e97g4364ga211gc7155fe79be5">旗帜包</content>
+	<content contentuid="h01ec64eeg09ecg4813g996bg2834de7947fa">Kevin 宠物石</content>
+	<content contentuid="h01ed487cgf2ebg43ecgad19g7f79e3510e41">&lt;font color=&apos;#00FF7F&apos;&gt;长弓精通4&lt;/font&gt;</content>
+	<content contentuid="h01f28833g2ba1g4e8dgaeccge79ea00aae94">瞄准射击 (远程伤害)</content>
+	<content contentuid="h020fe6b7gc348g43aag9f29g0b43b3c21904">再装填 (爆炸狂&apos;的背包)</content>
+	<content contentuid="h02124cc6gecf8g4a72ga2aege9cb12e0f0d5">油符文</content>
+	<content contentuid="h0238a784gd1cbg4137g8c0dgb967a83d37af">冠军&apos;的细剑</content>
+	<content contentuid="h0246ca32gc4d7g4fc3g88a6gbd2aea51e3b7">一套小弩箭，臂弩专用.&lt;br&gt;被黑色液体覆盖，造成暗影伤害.</content>
+	<content contentuid="h0249ca47g0502g4361gbf6eg25b369b7c23a">属于食人魔的巨大卷轴.&lt;br&gt;尽管没有魔法天赋, 食人魔Gnak依然被同类崇拜.</content>
 	<content contentuid="h0262af7fgeaf0g4e52g85f9gd22df5a98af6">[Exit]</content>
 	<content contentuid="h0276588cgb86ag44a5g8ddag3c48cbaf7943">Kor&apos;vash</content>
-	<content contentuid="h027a0666g90c9g48efg90dcgde2bbb110a36">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery I&lt;/font&gt;&lt;br&gt;In a swift display of skill, instantly rend enemies in a line, dealing [1].&lt;br&gt;Consumes all stacks of &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt; on targets hit, dealing [2] per stack, and rupturing wounds for [3] every 3 stacks.</content>
-	<content contentuid="h02882207g5e7bg4deaga22eg854b68f8dd29">&lt;font color=&apos;#33FFAA&apos;&gt;Runic Energy [1]/[2]&lt;/font&gt;</content>
-	<content contentuid="h02978a74g0280g48eag9bd7g18b63ff4872c">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery I&lt;/font&gt;&lt;br&gt;Character is taking the stance of a duelist.&lt;br&gt;&lt;font color=&apos;#ff9600&apos; size=&apos;20&apos;&gt;Requires an empty hand.&lt;/font&gt;</content>
-	<content contentuid="h029cec56g78f1g42ffgb475gac9b75747b01">*Skip the rock along the top of the sea.*</content>
-	<content contentuid="h02ba7b23g7cfbg4da1ga5c0g3afc50e54b66">Character has lowered resistance to &lt;font color=&apos;#AE9F95&apos;&gt;physical damage&lt;/font&gt;.</content>
-	<content contentuid="h02d805a5g06d5g4b8cg8710g2d2824ea2552">*Reach out and touch the crystal, activating it.*</content>
-	<content contentuid="h03011923g1a94g417dg9af6gc5dcdfe6d003">A scholar&apos;s dearest weapon. Beat them down with &lt;i&gt;KNOWLEDGE!&lt;/i&gt;</content>
-	<content contentuid="h0302f720g7990g42b4gbf5eg921d1af83b55">Malediction</content>
-	<content contentuid="h030a7775gcb43g42a7gacd3g70796e45351a">Magic Rush</content>
-	<content contentuid="h031b0a74g0630g4f79ga05fg71c06e49015d">*Step away.*</content>
-	<content contentuid="h03451e09g2f0bg410eg89cdg1d80b656605c">*[WIZARD WEAPONS] Click on the button labeled &apos;Wizard Weapons&apos;.*</content>
-	<content contentuid="h03bcab3bgb227g4c71gb14egf3964ebe80e2">&lt;font color=&apos;#CD1F1F&apos;&gt;To unequip the Dragon Bone Claws, unequip your glove armor instead of the weapon.&lt;/font&gt;</content>
-	<content contentuid="h03c42c40g5520g496bgaf72g150449510bca">Wooden Rod</content>
-	<content contentuid="h03ceee62ga198g4cf1gbc0eg2b54e6beb5a7">Swap between using the &lt;font color=&apos;#C7A758&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_DisplayName]&lt;/font&gt; as a melee scepter or wand.</content>
-	<content contentuid="h03e4cb52g3ae2g4cd3g8a2eg5d4857837938">Ronin&apos;s Odachi</content>
-	<content contentuid="h03ef37b2g017eg446bg9c4cg5105a7896273">a Banner</content>
-	<content contentuid="h03f25018g85fbg4befg9416g536d01747342">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery V&lt;/font&gt;</content>
-	<content contentuid="h0452b3c3gba0cg4c6egbc2ag8e57dd92da97">&lt;font color=&apos;#F5785A&apos;&gt;Axe Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h04a22392g871dg4a70ga732gd836046a962f">[First] *Look at the top set of buttons.*</content>
-	<content contentuid="h04bb4688g60e6g4016g8381g7fd9923b3120">Scepter of Magic Missile</content>
-	<content contentuid="h04bdfb08g5e31g42a7g8bcdge5b12d07cb4e">Character has absorbed &lt;font color=&apos;#8B0000&apos;&gt;Blood&lt;/font&gt; after activating the &lt;font color=&apos;#b823cb&apos;&gt;Chaos Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;. 20% chance to apply &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; to enemies hit for 1 turn (Resisted by Magic Armor).</content>
-	<content contentuid="h04c27940ge441g4903gac89ga4a0befb3723">Throwing Stool</content>
-	<content contentuid="h04d47318g7a54g4314g9900g10a117d4b075">&lt;font color=&apos;#00aa00&apos;&gt;Poison Great Arrow&lt;/font&gt;</content>
-	<content contentuid="h04da119dg55f5g4051g9411g60859d397914">Blindfolded</content>
-	<content contentuid="h04ed8460g6bcag414fg8500g1a92c10d54a8">*With a satisfying &quot;click&quot;, you hit a button and select a treasure category.*</content>
-	<content contentuid="h04fa61c6gcce7g4790gb3edgd8a321a6613e">Blademaster&apos;s Strike</content>
-	<content contentuid="h05128ff7g92f6g4379ga203g9c684ef02fcc">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#AA895B&apos;&gt;Earth Resistance&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
-	<content contentuid="h0516446bg80fdg485cg9560gd259a5028bf0">[Info] *You read the panel: &quot;Hit a button to order a treasure type.&quot;*</content>
-	<content contentuid="h051a7395g4959g43b7gac39g18a872617097">Novice</content>
-	<content contentuid="h052d8fd9g8c05g4c60gb6c2gf05f40109276">&lt;font color=&apos;#7478DC&apos;&gt;Electrified Mini-Bolts&lt;/font&gt;</content>
-	<content contentuid="h056235e1ge01eg4caagb551g39f2eea4c3d8">Surging Shock</content>
-	<content contentuid="h0579d113ga6e7g46dcg8540g05493daf6608">Quake</content>
-	<content contentuid="h060a6bb2g4db6g48bag9602g2a9d7c28a85a">Disciplined warriors who wield quarterstaffs, overwhelming enemies with finesse and sheer force of will</content>
-	<content contentuid="h060c9019g5c2eg4003gb9cdg9add29793c37">Journeyman Gunslinger</content>
-	<content contentuid="h062603bfg2678g4ac0gb76bg1171751d68d6">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery III&lt;/font&gt;</content>
-	<content contentuid="h06554f6bg3b88g4bf2gbbc4g3936883a1a9e">Never should have come here...</content>
-	<content contentuid="h06681904g0440g41fag964eg42d43c0ade1f">Death&apos;s Last Stand</content>
-	<content contentuid="h068b0028g627ag4f10g913bg93be9a332c3a">Character&apos;s next weapon attack or skill will deal +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% extra damage.</content>
-	<content contentuid="h0692074agdc1cg4a2eg9518g09d39df61122">Execution</content>
-	<content contentuid="h06ae90dbg0fabg4fdfg90ecgf9d698e7031d">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;30% chance on hit to shoot out a cone of dust in a 7m range, applying &lt;font color=&apos;#d040d0&apos;&gt;Blinded&lt;/font&gt; to enemies for 1 turn and dealing minor &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#fcd203&apos;&gt;Dust Blast can only occur once per turn.&lt;/font&gt;&lt;br&gt;Adds &lt;font color=&apos;#7f3d00&apos;&gt;Earth Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
-	<content contentuid="h06b63c74gd36bg40a0g9cd6gfcd6200256c2">A well-crafted mainhand shield for a set of intricate dual shields. A dwarven craftsman must have hammered this pair of shields into perfection.</content>
-	<content contentuid="h06cbe437gf5d8g4188g8d16g277a0d72308e">Chaosblade</content>
-	<content contentuid="h06e35e52g6879g48a6g9dc9ga9dafc2f0fe2">Swap your stance with the &lt;font color=&apos;#c5a65a&apos;&gt;Warchief&apos;s Halberd&lt;/font&gt;, going between spear and axe mode.&lt;br&gt;In &lt;font color=&apos;#e8ff67&apos;&gt;Spear Mode&lt;/font&gt;, the halberd has increased range, critical damage, and applies &lt;font color=&apos;#ff3232&apos;&gt;Warchief&apos;s Mark&lt;/font&gt; on hit.&lt;br&gt;In &lt;font color=&apos;#ff67ef&apos;&gt;Axe Mode&lt;/font&gt;, the halberd has reduced range, increased damage, and consumes &lt;font color=&apos;#ff3232&apos;&gt;Warchief&apos;s Mark&lt;/font&gt; to deal [1].</content>
-	<content contentuid="h06eacec9g1d7fg46cagba45g3cde5062c8a8">A &lt;font color=&apos;#F19824&apos;&gt;localized quake&lt;/font&gt; is created where your weapon contacts the ground, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake:ExplodeRadius]m radius.&lt;/font&gt;</content>
-	<content contentuid="h07354a00ga0f1g4bf5gbaddg2e466a5be964">&lt;font color=&apos;#797980&apos;&gt;Void-touched Bullets&lt;/font&gt;</content>
-	<content contentuid="h075930c8ge31cg452bg8125g5646ed09deb7">Runeblade of Water</content>
-	<content contentuid="h0759631agf5f6g42c7ga551g96cc79c664ba">Novice</content>
-	<content contentuid="h0790a7c0g329cg42acgb521ge50c700bfc23">Dented Metal Pipe</content>
-	<content contentuid="h079832fbg714dg4b2eg9d1bgfcd86b530e9b">Dragonslayer Boots</content>
-	<content contentuid="h079883c9g8f7bg43bcgb889g0bf7589a0b80">Water Weakness</content>
-	<content contentuid="h07d13066g56c1g4b92g9bc3g9ddc4562a2b7">A large two-handed sword, obviously not designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
-	<content contentuid="h07f8d882g500cg4688gadc9g1a86f661d045">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h0804127ege06fg462agbae6ga12cfacc82bc">A mastery scroll. Meet the mastery requirement to unlock the scroll and learn the secrets within.</content>
-	<content contentuid="h080c68b2g315eg490dgbf34g85d2af74ad68">Blindfolded</content>
-	<content contentuid="h08140fd2gad6cg4738gabb1gcc450033c183">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery III&lt;/font&gt;</content>
-	<content contentuid="h081df726g94ceg4114ga790gcb00b79bfccb">Wicked Shields of Chaos</content>
-	<content contentuid="h085bc0degcf38g488fgbc0eg1046951a0d39">Weapon Expansion - Puzzle Items</content>
-	<content contentuid="h088a4dfdgbb73g431ag93f6gaa4feb096845">Mighty Dragonslayer Mail</content>
-	<content contentuid="h08e99608gb836g4c96g8b87gb28d670ae62a">Demon Hunter&apos;s Oath</content>
+	<content contentuid="h027a0666g90c9g48efg90dcgde2bbb110a36">&lt;font color=&apos;#FF2D2D&apos;&gt;武士刀精通 I&lt;/font&gt;&lt;br&gt;一种迅速出击的技能，能快速撕裂一排敌人, 造成 [1].&lt;br&gt;消耗所有层数 &lt;font color=&apos;#C9AA58&apos;&gt;剑术大师&apos;的打击&lt;/font&gt; 击中目标，造成 [2] 每层, 然后撕裂伤口 [3] 每三层.</content>
+	<content contentuid="h02882207g5e7bg4deaga22eg854b68f8dd29">&lt;font color=&apos;#33FFAA&apos;&gt;符文能量 [1]/[2]&lt;/font&gt;</content>
+	<content contentuid="h02978a74g0280g48eag9bd7g18b63ff4872c">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;细剑精通 I&lt;/font&gt;&lt;br&gt;角色以决斗者的姿态出现.&lt;br&gt;&lt;font color=&apos;#ff9600&apos; size=&apos;20&apos;&gt;需要一个空手.&lt;/font&gt;</content>
+	<content contentuid="h029cec56g78f1g42ffgb475gac9b75747b01">*沿着海面，跳过岩石.*</content>
+	<content contentuid="h02ba7b23g7cfbg4da1ga5c0g3afc50e54b66">角色降低了抵抗力对 &lt;font color=&apos;#AE9F95&apos;&gt;物理伤害&lt;/font&gt;.</content>
+	<content contentuid="h02d805a5g06d5g4b8cg8710g2d2824ea2552">*伸手触摸水晶，激活它.*</content>
+	<content contentuid="h03011923g1a94g417dg9af6gc5dcdfe6d003">一个学者&apos;最爱的武器， 打败他们用 &lt;i&gt;知识!&lt;/i&gt;</content>
+	<content contentuid="h0302f720g7990g42b4gbf5eg921d1af83b55">诅咒</content>
+	<content contentuid="h030a7775gcb43g42a7gacd3g70796e45351a">魔力冲刺</content>
+	<content contentuid="h031b0a74g0630g4f79ga05fg71c06e49015d">*走开.*</content>
+	<content contentuid="h03451e09g2f0bg410eg89cdg1d80b656605c">*[WIZARD WEAPONS] 点击标记的按钮 &apos;巫师武器&apos;.*</content>
+	<content contentuid="h03bcab3bgb227g4c71gb14egf3964ebe80e2">&lt;font color=&apos;#CD1F1F&apos;&gt;要取消装备龙骨爪, 需要卸下手套护甲而不是武器.&lt;/font&gt;</content>
+	<content contentuid="h03c42c40g5520g496bgaf72g150449510bca">木棍</content>
+	<content contentuid="h03ceee62ga198g4cf1gbc0eg2b54e6beb5a7">可以在使用期间交换 &lt;font color=&apos;#C7A758&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Rod_1H_MagicMissile_A_DisplayName]&lt;/font&gt; 作为近战武器或者魔杖.</content>
+	<content contentuid="h03e4cb52g3ae2g4cd3g8a2eg5d4857837938">Ronin&apos;的 大田刀</content>
+	<content contentuid="h03ef37b2g017eg446bg9c4cg5105a7896273">一个旗</content>
+	<content contentuid="h03f25018g85fbg4befg9416g536d01747342">&lt;font color=&apos;#FF44FF&apos;&gt;徒手精通 V&lt;/font&gt;</content>
+	<content contentuid="h0452b3c3gba0cg4c6egbc2ag8e57dd92da97">&lt;font color=&apos;#F5785A&apos;&gt;斧头精通 IV&lt;/font&gt;</content>
+	<content contentuid="h04a22392g871dg4a70ga732gd836046a962f">[First] *看看上面的按钮.*</content>
+	<content contentuid="h04bb4688g60e6g4016g8381g7fd9923b3120">魔法飞弹权杖</content>
+	<content contentuid="h04bdfb08g5e31g42a7g8bcdge5b12d07cb4e">角色已经吸收了 &lt;font color=&apos;#8B0000&apos;&gt;血&lt;/font&gt; 激活后 &lt;font color=&apos;#b823cb&apos;&gt;混沌符文&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;符文剑&lt;/font&gt;. 20%的几率造成 &lt;font color=&apos;#FF0000&apos;&gt;流血&lt;/font&gt; 攻击敌人一回合 (被魔法护甲抵抗).</content>
+	<content contentuid="h04c27940ge441g4903gac89ga4a0befb3723">砸屎</content>
+	<content contentuid="h04d47318g7a54g4314g9900g10a117d4b075">&lt;font color=&apos;#00aa00&apos;&gt;毒大箭&lt;/font&gt;</content>
+	<content contentuid="h04da119dg55f5g4051g9411g60859d397914">蒙眼</content>
+	<content contentuid="h04ed8460g6bcag414fg8500g1a92c10d54a8">*满意的 &quot;点击&quot;, 你点击一个按钮然后选择一个宝藏类别.*</content>
+	<content contentuid="h04fa61c6gcce7g4790gb3edgd8a321a6613e">剑术大师&apos;的打击</content>
+	<content contentuid="h05128ff7g92f6g4379ga203g9c684ef02fcc">把烧瓶扔到目标位置，浇灭目标并至于的肮脏液体中&lt;font color=&apos;#AA895B&apos;&gt;大地抵抗&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; 两个回合.</content>
+	<content contentuid="h0516446bg80fdg485cg9560gd259a5028bf0">[Info] *你读取面板: &quot;点击按钮来订购宝藏类型.&quot;*</content>
+	<content contentuid="h051a7395g4959g43b7gac39g18a872617097">新手</content>
+	<content contentuid="h052d8fd9g8c05g4c60gb6c2gf05f40109276">&lt;font color=&apos;#7478DC&apos;&gt;带电小弩箭&lt;/font&gt;</content>
+	<content contentuid="h056235e1ge01eg4caagb551g39f2eea4c3d8">震荡冲击</content>
+	<content contentuid="h0579d113ga6e7g46dcg8540g05493daf6608">地震</content>
+	<content contentuid="h060a6bb2g4db6g48bag9602g2a9d7c28a85a">训练有素的战士，挥舞着军杖，以灵巧和纯粹的意志压倒敌人</content>
+	<content contentuid="h060c9019g5c2eg4003gb9cdg9add29793c37">熟练枪手</content>
+	<content contentuid="h062603bfg2678g4ac0gb76bg1171751d68d6">&lt;font color=&apos;#FD8826&apos;&gt;热武器精通 III&lt;/font&gt;</content>
+	<content contentuid="h06554f6bg3b88g4bf2gbbc4g3936883a1a9e">不该来这里...</content>
+	<content contentuid="h06681904g0440g41fag964eg42d43c0ade1f">死神&apos;的最后抵抗</content>
+	<content contentuid="h068b0028g627ag4f10g913bg93be9a332c3a">角色&apos;的下一次武器攻击或者技能会 +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% 额外伤害.</content>
+	<content contentuid="h0692074agdc1cg4a2eg9518g09d39df61122">Execution（n.执行，实行, 完成, 死刑）</content>
+	<content contentuid="h06ae90dbg0fabg4fdfg90ecgf9d698e7031d">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7f3d00&apos;&gt;大地符文&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;大气符文&lt;/font&gt;&lt;/font&gt;&lt;br&gt;命中有30%概率射出7米范围的锥形尘土 &lt;font color=&apos;#d040d0&apos;&gt;致盲&lt;/font&gt; 一个回个并造成次要的 &lt;font color=&apos;#7f3d00&apos;&gt;大地伤害&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#fcd203&apos;&gt;尘埃每回合只出现一次&lt;/font&gt;&lt;br&gt;增加 &lt;font color=&apos;#7f3d00&apos;&gt;大地伤害&lt;/font&gt; 和 &lt;font color=&apos;#7d71d9&apos;&gt;大气伤害&lt;/font&gt; 给武器攻击和技能</content>
+	<content contentuid="h06b63c74gd36bg40a0g9cd6gfcd6200256c2">一种制作精良的主手护盾，用于一系列复杂的双护盾。一定是一个矮人工匠把这副盾牌打得完美无缺。</content>
+	<content contentuid="h06cbe437gf5d8g4188g8d16g277a0d72308e">混沌</content>
+	<content contentuid="h06e35e52g6879g48a6g9dc9ga9dafc2f0fe2">改变你的姿势 &lt;font color=&apos;#c5a65a&apos;&gt;酋长&apos;的长戟&lt;/font&gt;, 在矛和斧模式之间切换.&lt;br&gt;在 &lt;font color=&apos;#e8ff67&apos;&gt;长矛模式&lt;/font&gt;, 戟会增加射程, 降低伤害, 获得 &lt;font color=&apos;#ff3232&apos;&gt;酋长&apos;的标记&lt;/font&gt; 击中时.&lt;br&gt;在 &lt;font color=&apos;#ff67ef&apos;&gt;斧模式&lt;/font&gt;,戟的射程缩小了, 伤害增加, 消耗 &lt;font color=&apos;#ff3232&apos;&gt;酋长&apos;的标记&lt;/font&gt; 去造成 [1].</content>
+	<content contentuid="h06eacec9g1d7fg46cagba45g3cde5062c8a8">一个 &lt;font color=&apos;#F19824&apos;&gt;局部地震&lt;/font&gt; 在你的武器与地面接触的地方产生, 造成 [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake] 给敌人在 [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake:ExplodeRadius]m 圆内.&lt;/font&gt;</content>
+	<content contentuid="h07354a00ga0f1g4bf5gbaddg2e466a5be964">&lt;font color=&apos;#797980&apos;&gt;虚空之触子弹&lt;/font&gt;</content>
+	<content contentuid="h075930c8ge31cg452bg8125g5646ed09deb7">水之符文剑</content>
+	<content contentuid="h0759631agf5f6g42c7ga551g96cc79c664ba">新手</content>
+	<content contentuid="h0790a7c0g329cg42acgb521ge50c700bfc23">有凹痕的金属管</content>
+	<content contentuid="h079832fbg714dg4b2eg9d1bgfcd86b530e9b">屠龙者的靴子</content>
+	<content contentuid="h079883c9g8f7bg43bcgb889g0bf7589a0b80">弱水</content>
+	<content contentuid="h07d13066g56c1g4b92g9bc3g9ddc4562a2b7">一把很大的双手剑，显然不是用来投掷的.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;作为武器看起来毫无用处。&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;扔给敌人!&lt;/font&gt;</content>
+	<content contentuid="h07f8d882g500cg4688gadc9g1a86f661d045">&lt;font color=&apos;#FF2D2D&apos;&gt;武士刀精通 IV&lt;/font&gt;</content>
+	<content contentuid="h0804127ege06fg462agbae6ga12cfacc82bc">精通卷轴. 符合解锁卷轴的精通要求，并学习内部的秘密.</content>
+	<content contentuid="h080c68b2g315eg490dgbf34g85d2af74ad68">Blindfolded（蒙住眼睛）</content>
+	<content contentuid="h08140fd2gad6cg4738gabb1gcc450033c183">&lt;font color=&apos;#F8FF2D&apos;&gt;细剑精通 III&lt;/font&gt;</content>
+	<content contentuid="h081df726g94ceg4114ga790gcb00b79bfccb">邪恶混乱之盾</content>
+	<content contentuid="h085bc0degcf38g488fgbc0eg1046951a0d39">武器扩展 - 智力项目</content>
+	<content contentuid="h088a4dfdgbb73g431ag93f6gaa4feb096845">强大的屠龙者盔甲</content>
+	<content contentuid="h08e99608gb836g4c96g8b87gb28d670ae62a">恶魔猎手&apos;的誓言</content>
 	<content contentuid="h0911451dgfb95g4bbdg81e0g9869e974d62d">Gutwrencher </content>
-	<content contentuid="h09132fbbg49fdg46c8g81b2g6b6de312721e">An old greatbow passed down as a family heirloom. Not the strongest, but it&apos;ll do.</content>
-	<content contentuid="h092713ecg7833g48d5g8627g3d17c449f055">A set of small &lt;font color=&apos;#C0C0C0&apos;&gt;silver-tipped&lt;/font&gt; bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;&lt;font color=&apos;#12FDDF&apos;&gt;Monsters such as Werebeasts, Demons, and the Undead are rumored to be suspectible to silver.&lt;/font&gt;</content>
-	<content contentuid="h095f914fg0387g4a3bgaa8fg2aa6c557c7b4">&lt;font color=&apos;#03fcdb&apos;&gt;Runic Dispersal&lt;/font&gt;</content>
-	<content contentuid="h0989fe2fg6173g4d75ga291gac5e9e4a6db0">Soul Bounty IV</content>
-	<content contentuid="h0990e543gd885g4861ga84bgdb4a6ae2f0ef">Runic Boots</content>
-	<content contentuid="h0991fa6cgdc68g410dgbc3cg0c6a36fe8d8b">*[RANGED] Click on the button labeled &apos;Ranged&apos;.*</content>
-	<content contentuid="h09ef58e3g0c75g456ag95a2g7dbf3900e2e7">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Applies &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; to &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; enemies for 1 turn, otherwise &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; is applied for 1 turn.&lt;br&gt;&lt;font color=&apos;#7d71d9&apos;&gt;Attacking a Shocked or Stunned enemy sends out a jolt of electricity to other enemies within 8m.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#f7ba14&apos;&gt;When Shocked is applied, that enemy gets Shock Resistance, preventing Shocked from being applied by Runeblades for 3 turns.&lt;/font&gt;&lt;br&gt;Adds &lt;font color=&apos;#4197e2&apos;&gt;Water Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
-	<content contentuid="h0a0ec3d0g79bcg4deegbcb2g46129e9603cd">&lt;font color=&apos;#C0C0C0&apos;&gt;Silver Bullets&lt;/font&gt;</content>
-	<content contentuid="h0a2ec845g3935g49dbgba4agf40ff07a092f">Extend the &lt;font color=&apos;#C7A758&apos;&gt;Power Pole&lt;/font&gt; to great lengths, smashing it down upon everything infront of you for [1].&lt;br&gt;&lt;font color=&apos;#FF3758&apos;&gt;Targets hit become Dizzy, causing actions to take 1 additional AP.&lt;/font&gt;</content>
-	<content contentuid="h0a35399fg4cd3g4806gb670g9383253562cd">Insert into Pistol</content>
-	<content contentuid="h0a3be573g6d67g4953gb4fcgcf4a5db30a27">Blademaster&apos;s Strike 4</content>
-	<content contentuid="h0a40fa06gcb2cg400eg96ebgd9e51694706e">Subzero Slayer</content>
-	<content contentuid="h0a4b302dgf862g4af4g98cfg322085c2d454">Legend</content>
-	<content contentuid="h0a4c714cg4ca2g47b9gb35bgdbcedde528a5">Balrin&apos;s Throwing Axe (Fire)</content>
-	<content contentuid="h0a973462g2b3dg4dbdgbffbg49ec01d86b23">An extremely sharp, star-shaped plate of metal.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Looks perfect for throwng!&lt;/font&gt;</content>
-	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">Pacifist&apos;s Wrath</content>
-	<content contentuid="h0ab8d13bg763eg48f2gb501g886ee85d35e3">Character is taking [1] from their &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; status being evaporated!</content>
-	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;Allies standing on &lt;font color=&apos;#F13324&apos;&gt;blood surfaces&lt;/font&gt; or in &lt;font color=&apos;#F13324&apos;&gt;blood clouds&lt;/font&gt; gain a &lt;font color=&apos;#33FF00&apos;&gt;[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus&lt;/font&gt;.&lt;/font&gt;</content>
-	<content contentuid="h0ada3a43g2943g4b09g900agd1a2b2587c3d">Sage of Staves</content>
-	<content contentuid="h0b0d24f1g43a3g4c02g9d6cg0ba2a1b2f1dc">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to Sucker Punch that deals [1].&lt;br&gt;If the target is Knocked Down, Dizzy is applied for 2 turns when they stand up.&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
-	<content contentuid="h0b157d20g8525g44e5g9cf2g9bb41a4820ce">Demonic Surge</content>
-	<content contentuid="h0b221586gde00g416aga288gce5d6b12b266">&lt;font color=&apos;#CD1F1F&apos;&gt;Bolts can only be inserted into an arm-mounted crossbow!&lt;/font&gt;</content>
-	<content contentuid="h0b34a3b1g6adeg4fb1g9ee1g21dd67825551">Worn Odachi</content>
-	<content contentuid="h0b34a630gc0b8g413dg8c7cg388d52006514">Remorse</content>
-	<content contentuid="h0b38b148g2ea5g4a95g9ff7gae932c7d05b1">Activate the &lt;font color=&apos;#65c900&apos;&gt;Poison Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; to enemies hit for 1 turn.</content>
-	<content contentuid="h0b5a0893g808cg4fa8ga399g32c6b0593657">Breach</content>
-	<content contentuid="h0b8e61bagd0d3g434fgb4a2g96639225008d">Shield Toss</content>
-	<content contentuid="h0bce2460gea5cg42eaga781g0fa79906d7e6">Chaos Slash</content>
-	<content contentuid="h0bfab9eegc053g4228gb930gab52eb0b1d62">Fire a decisive shot at a target with your &lt;font color=&apos;#C7A758&apos;&gt;Hand Crossbow&lt;/font&gt;, dealing [1].&lt;br&gt;&lt;font color=&apos;#8652f0&apos;&gt;Deals double damage from stealth.&lt;/font&gt;</content>
-	<content contentuid="h0c0796c6g22ddg445fg873dg1750c323f481">Quake Rune</content>
-	<content contentuid="h0c1ff519g4a0eg47ddg9384g40cc5f1cc96e">Retrieve Remote Charge</content>
-	<content contentuid="h0c37f737g20d1g44c8g9e5bgf519aee4e18b">Static Cloud Arrow</content>
-	<content contentuid="h0c4109b1g92f9g4363gbc81gc85809032511">&lt;font color=&apos;#fe6e27&apos;&gt;Explosive Great Arrow&lt;/font&gt;</content>
-	<content contentuid="h0c867766g47deg46a0ga8dfg4eaba7ac765e">A strange token.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;Combine this with specific unique weapons to change their scaling attribute.&lt;/font&gt;</content>
-	<content contentuid="h0c9e00adgb092g4689g9b8dg5eb400da05af">&lt;font color=&apos;#40E0D0&apos; size=&apos;18&apos;&gt;Runeblade Mastery&lt;/font&gt;&lt;br&gt;Reverberate the last active rune or rune combination, applying it for 2 turns.</content>
-	<content contentuid="h0cb1a1eag87c4g42d4gafb6gd862c3856941">Expert Axefighter</content>
-	<content contentuid="h0cb99d43g74b0g4053g90f1gd689f4831231">Character&apos;s firearm is attuned to earth.</content>
-	<content contentuid="h0cbde0a1ge3a8g45ecg9803ga33c8e9b5f19">Throw &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at a target for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [2] additional enemies in a [3] radius.</content>
+	<content contentuid="h09132fbbg49fdg46c8g81b2g6b6de312721e">一把古老的长弓作为传家宝传了下来. 不是最强, 但是它&apos;会的.</content>
+	<content contentuid="h092713ecg7833g48d5g8627g3d17c449f055">一组小的 &lt;font color=&apos;#C0C0C0&apos;&gt;银尖&lt;/font&gt; 弩箭, 为臂弩特殊设计.&lt;br&gt;&lt;font color=&apos;#12FDDF&apos;&gt;传说狼人、恶魔和不死族等怪物会受到银的惩戒.&lt;/font&gt;</content>
+	<content contentuid="h095f914fg0387g4a3bgaa8fg2aa6c557c7b4">&lt;font color=&apos;#03fcdb&apos;&gt;Runic Dispersal（符文传播）&lt;/font&gt;</content>
+	<content contentuid="h0989fe2fg6173g4d75ga291gac5e9e4a6db0">灵魂赏金 IV</content>
+	<content contentuid="h0990e543gd885g4861ga84bgdb4a6ae2f0ef">符文靴子</content>
+	<content contentuid="h0991fa6cgdc68g410dgbc3cg0c6a36fe8d8b">*[RANGED] 点击标签按钮 &apos;远程&apos;.*</content>
+	<content contentuid="h09ef58e3g0c75g456ag95a2g7dbf3900e2e7">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;水符文&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;大气符文&lt;/font&gt;&lt;/font&gt;&lt;br&gt;获得 &lt;font color=&apos;#7d71d9&apos;&gt;眩晕&lt;/font&gt; 给 &lt;font color=&apos;#4197e2&apos;&gt;潮湿&lt;/font&gt; 的敌人一回合内, 否则 &lt;font color=&apos;#4197e2&apos;&gt;潮湿&lt;/font&gt; 一回合.&lt;br&gt;&lt;font color=&apos;#7d71d9&apos;&gt;攻击一个被电击或昏迷的敌人会向8m以内的其他敌人发出电震。&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#f7ba14&apos;&gt;当施加电击时, 该敌人获得眩晕抗性，防止被符文剑施加眩晕3个回合。&lt;/font&gt;&lt;br&gt;增加 &lt;font color=&apos;#4197e2&apos;&gt;水伤害&lt;/font&gt; 和 &lt;font color=&apos;#7d71d9&apos;&gt;大气伤害&lt;/font&gt; 给武器攻击和技能.</content>
+	<content contentuid="h0a0ec3d0g79bcg4deegbcb2g46129e9603cd">&lt;font color=&apos;#C0C0C0&apos;&gt;银子弹&lt;/font&gt;</content>
+	<content contentuid="h0a2ec845g3935g49dbgba4agf40ff07a092f">延长 &lt;font color=&apos;#C7A758&apos;&gt;力臂&lt;/font&gt; 到最大长度, 砸倒你面前的一切 [1].&lt;br&gt;&lt;font color=&apos;#FF3758&apos;&gt;被击中的目标会头晕, 导致行动额外消耗一个AP.&lt;/font&gt;</content>
+	<content contentuid="h0a35399fg4cd3g4806gb670g9383253562cd">插入手枪</content>
+	<content contentuid="h0a3be573g6d67g4953gb4fcgcf4a5db30a27">剑术大师&apos;的打击 4</content>
+	<content contentuid="h0a40fa06gcb2cg400eg96ebgd9e51694706e">严寒杀手</content>
+	<content contentuid="h0a4b302dgf862g4af4g98cfg322085c2d454">Legend（n. 传奇, 说明）</content>
+	<content contentuid="h0a4c714cg4ca2g47b9gb35bgdbcedde528a5">Balrin&apos;的投掷斧 (火)</content>
+	<content contentuid="h0a973462g2b3dg4dbdgbffbg49ec01d86b23">非常锋利的, 星形金属板.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;看起来很适合扔!&lt;/font&gt;</content>
+	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">和平主义者&apos;的愤怒</content>
+	<content contentuid="h0ab8d13bg763eg48f2gb501g886ee85d35e3">角色 带走 [1] 从他们的 &lt;font color=&apos;#4197e2&apos;&gt;潮湿&lt;/font&gt; 状态被蒸发!</content>
+	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;右方站在 &lt;font color=&apos;#F13324&apos;&gt;血液表面&lt;/font&gt; 或者在 &lt;font color=&apos;#F13324&apos;&gt;血云中&lt;/font&gt; 获得一个 &lt;font color=&apos;#33FF00&apos;&gt;[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% 伤害加成&lt;/font&gt;.&lt;/font&gt;</content>
+	<content contentuid="h0ada3a43g2943g4b09g900agd1a2b2587c3d">圣人的法杖</content>
+	<content contentuid="h0b0d24f1g43a3g4c02g9d6cg0ba2a1b2f1dc">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;剑术精通 II&lt;/font&gt;&lt;br&gt;连续打击造成 [1].&lt;br&gt;如果目标被击倒, 站起来时头晕2回合.&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;一次性的技能.&lt;/font&gt;</content>
+	<content contentuid="h0b157d20g8525g44e5g9cf2g9bb41a4820ce">邪恶涌动</content>
+	<content contentuid="h0b221586gde00g416aga288gce5d6b12b266">&lt;font color=&apos;#CD1F1F&apos;&gt;弩箭只能插在臂弩上!&lt;/font&gt;</content>
+	<content contentuid="h0b34a3b1g6adeg4fb1g9ee1g21dd67825551">磨损的双手武士刀</content>
+	<content contentuid="h0b34a630gc0b8g413dg8c7cg388d52006514">悔恨，同情</content>
+	<content contentuid="h0b38b148g2ea5g4a95g9ff7gae932c7d05b1">激活 &lt;font color=&apos;#65c900&apos;&gt;毒符文&lt;/font&gt; 在你的 &lt;font color=&apos;#40E0D0&apos;&gt;符文剑&lt;/font&gt;, 增加 [1] 给近战攻击.&lt;br&gt;Applies &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt; 持续一回合.</content>
+	<content contentuid="h0b5a0893g808cg4fa8ga399g32c6b0593657">Breach（n.违背，违反, 缺口）</content>
+	<content contentuid="h0b8e61bagd0d3g434fgb4a2g96639225008d">盾牌投掷</content>
+	<content contentuid="h0bce2460gea5cg42eaga781g0fa79906d7e6">混沌砍击</content>
+	<content contentuid="h0bfab9eegc053g4228gb930gab52eb0b1d62">用你的武器向目标开决定性的一枪 &lt;font color=&apos;#C7A758&apos;&gt;手弩&lt;/font&gt;, 造成 [1].&lt;br&gt;&lt;font color=&apos;#8652f0&apos;&gt;隐形，潜行造成双倍伤害.&lt;/font&gt;</content>
+	<content contentuid="h0c0796c6g22ddg445fg873dg1750c323f481">地震符文</content>
+	<content contentuid="h0c1ff519g4a0eg47ddg9384g40cc5f1cc96e">收回远程攻击</content>
+	<content contentuid="h0c37f737g20d1g44c8g9e5bgf519aee4e18b">静电云箭头</content>
+	<content contentuid="h0c4109b1g92f9g4363gbc81gc85809032511">&lt;font color=&apos;#fe6e27&apos;&gt;爆炸性大箭&lt;/font&gt;</content>
+	<content contentuid="h0c867766g47deg46a0ga8dfg4eaba7ac765e">奇怪的令牌.&lt;br&gt;&lt;font color=&apos;#80FFC3&apos;&gt;结合具体的独特武器来改变他们的扩展属性.&lt;/font&gt;</content>
+	<content contentuid="h0c9e00adgb092g4689g9b8dg5eb400da05af">&lt;font color=&apos;#40E0D0&apos; size=&apos;18&apos;&gt;符文剑 精通&lt;/font&gt;&lt;br&gt;回响最后一个有效的符文或符文组合, 应用2回合.</content>
+	<content contentuid="h0cb1a1eag87c4g42d4gafb6gd862c3856941">斧头专家</content>
+	<content contentuid="h0cb99d43g74b0g4053g90f1gd689f4831231">角色&apos;的枪是大地适应.</content>
+	<content contentuid="h0cbde0a1ge3a8g45ecg9803ga33c8e9b5f19">投 &lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; at a target for [1], with a chance to give them a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt;.&lt;br&gt;Enemies suffering from a &lt;font color=&apos;#FF0000&apos;&gt;Concussion&lt;/font&gt; have a small chance to &lt;font color=&apos;#FF8C00&apos;&gt;Fumble&lt;/font&gt; their basic attacks.&lt;br&gt;&lt;font color=&apos;#c5a65a&apos;&gt;Kevin&lt;/font&gt; will ricochet to hit [2] additional enemies in a [3] radius.</content>
 	<content contentuid="h0ce310f5g9564g45f0gb0e2gd2c5c1dd89a3">Character has been hit by a thrown staff!</content>
 	<content contentuid="h0ceb51ffg9102g41ccga4f2gd9b57aaf9c16">Battle-Hardened Dual Shields</content>
 	<content contentuid="h0d198b10gc1beg4a18ga695g3b7eb57fb371">Curse of the Muramasa</content>
