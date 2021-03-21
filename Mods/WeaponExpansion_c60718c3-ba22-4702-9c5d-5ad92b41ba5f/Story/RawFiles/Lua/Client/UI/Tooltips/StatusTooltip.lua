@@ -70,6 +70,18 @@ local function OnStatusTooltip(character, status, tooltip)
 			Type="StatusBonus",
 			Label=text
 		})
+	elseif status.StatusId == "LLWEAPONEX_UNRELENTING_RAGE" then
+		local maxResBonus = Ext.ExtraData["LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus"] or 20
+		local currentRes = character.Stats.PhysicalResistance
+		local bonus = 0
+		if currentRes < maxResBonus then
+			bonus = maxResBonus - currentRes
+		end
+		local text = Text.Game.CappedBonus:ReplacePlaceholders(bonus, LocalizedText.ResistanceNames.PhysicalResistance.Text.Value, maxResBonus)
+		tooltip:AppendElement({
+			Type="StatusBonus",
+			Label=text
+		})
 	end
 end
 

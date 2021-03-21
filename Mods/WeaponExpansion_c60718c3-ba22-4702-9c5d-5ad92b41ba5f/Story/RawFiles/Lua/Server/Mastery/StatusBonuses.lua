@@ -20,6 +20,22 @@ function Banner_ApplyEncouragedBonus(target, source)
 	end
 end
 
+--- @param character StatCharacter
+--- @param damageType string DamageType enumeration
+--- @param resistancePenetration integer
+--- @param currentResistance integer
+local function GetHitResistanceBonus(character, damageType, resistancePenetration, currentResistance)
+	if damageType == "Physical" then
+		-- Unrelenting Rage grants up to a max of 20% Physical Resistance, but anything over that isn't added to.
+		local maxResBonus = Ext.ExtraData["LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus"] or 20
+		if currentResistance < maxResBonus and character.Character:GetStatus("LLWEAPONEX_UNRELENTING_RAGE") then
+			return maxResBonus - currentResistance
+		end
+	end
+end
+
+LeaderLib.RegisterListener("GetHitResistanceBonus", GetHitResistanceBonus)
+
 -- function OnSuckerPunchApplied(target, source)
 -- 	local turns = GetStatusTurns(target, "LLWEAPONEX_SUCKER_PUNCH")
 -- 	if turns > 0 then

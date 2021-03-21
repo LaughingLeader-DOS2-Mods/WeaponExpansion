@@ -208,6 +208,7 @@ Text = {
 		NotImmobileRequirement = ts:Create("hc3338918g67a4g4002g85f4g07818bad4e94", "Cannot use when Movement speed is 0."),
 		IncompatibleTag = ts:Create("hd0534a06g535bg435bga75dg145e9cc7282f", "Incompatible with [1] [2]&lt;br&gt;"),
 		Unbreakable = ts:Create("h03b9013dg183cg4543gbcd5gf9e832e74fae", "Unbreakable"),
+		CappedBonus = ts:Create("h97e7078cg6d42g46edgb7e0g5ec87a48a56d", "+[1]% [2] ([3]% Max)"),
 	},
 	WeaponType = {
 		StaffWeaponRequirement = ts:Create("h9d2c3f11g8702g4504ga467g9e63531ce7ab", "Staff Weapon"),
@@ -219,5 +220,5 @@ Text = {
 		StealFailed = ts:Create("hade2f718gb41dg427cg81c8gff64a36ad95f","<font color='#FF0000'>[1] failed to steal anything from [2].</font>"),
 		StealLimitReached = ts:Create("h62e44d39gae88g4785g9004g79e396516ee4","<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>"),
 		MasteryRankUp = ts:Create("he0cceb33g75ddg44a5g94b4geda5fd12c886", "<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>")
-	},
+	}
 }

@@ -87,8 +87,7 @@ local OnItemTooltip = Ext.Require("Client/UI/Tooltips/ItemTooltip.lua")
 local OnSkillTooltip = Ext.Require("Client/UI/Tooltips/SkillTooltip.lua")
 local OnStatusTooltip = Ext.Require("Client/UI/Tooltips/StatusTooltip.lua")
 
-local statTooltips = Ext.Require("Client/UI/Tooltips/StatTooltips.lua")
-local OnDamageStatTooltip = statTooltips.Damage
+local OnStatTooltip = Ext.Require("Client/UI/Tooltips/StatTooltips.lua")
 
 Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText", function(cmd, text)
 	local ui = Ext.GetUIByType(44)
@@ -143,7 +142,7 @@ local function OnTooltipPositioned(ui, tooltip_mc, isControllerMode, lastItem, .
 end
 
 local function Init()
-	Game.Tooltip.RegisterListener("Stat", "Damage", OnDamageStatTooltip)
+	Game.Tooltip.RegisterListener("Stat", nil, OnStatTooltip)
 	Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)
 	Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
 	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
