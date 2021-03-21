@@ -380,8 +380,8 @@ function MasteryMenu.RepositionToggleButton(ui, width, height, skillbarVisible)
 end
 
 function MasteryMenu.SetToggleButtonVisibility(isVisible, tween)
+	print("MasteryMenu.SetToggleButtonVisibility", isVisible, tween)
 	if MasteryMenu.ToggleButtonInstance ~= nil then
-		MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance)
 		if not isVisible then
 			if tween == true then
 				MasteryMenu.ToggleButtonInstance:Invoke("fade", 1.0, 0.0, 0.5)
@@ -389,6 +389,7 @@ function MasteryMenu.SetToggleButtonVisibility(isVisible, tween)
 				MasteryMenu.ToggleButtonInstance:Hide()
 			end
 		else
+			MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance)
 			if tween == true then
 				MasteryMenu.ToggleButtonInstance:Show()
 				MasteryMenu.ToggleButtonInstance:Invoke("fade", 0.0, 1.0, 1.2)

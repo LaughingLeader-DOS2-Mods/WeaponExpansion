@@ -119,10 +119,9 @@ end)
 ---@param call string
 ---@param isVisible boolean
 local function OnShowSkillBar(ui, call, isVisible)
-	if isVisible ~= nil then
+	if isVisible ~= nil and SharedData.RegionData.LevelType ~= LEVELTYPE.CHARACTER_CREATION then
 		if MasteryMenu.ToggleButtonInstance ~= nil then
 			MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance, nil, nil, isVisible)
-			--MasteryMenu.SetToggleButtonVisibility(isVisible)
 		end
 	end
 end
