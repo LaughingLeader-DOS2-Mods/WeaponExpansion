@@ -484,42 +484,6 @@ ObjectClearFlag(_Object, _Flag);
 */
 //END_REGION
 
-//REGION RUNE_BLOCKING
-IF
-RuneInserted(_Char, _Item, _RuneTemplate, _Slot)
-AND
-StringContains(_RuneTemplate, "LOOT_Rune_LLWEAPONEX_Runeblade_", 1)
-AND
-IsTagged(_Item, "LLWEAPONEX_Runeblade", 0)
-//AND
-//GetTemplate(_Item, _ItemTemplate)
-//AND
-//StringContains(_ItemTemplate, "WPN_", 1)
-THEN
-DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
-LeaderLib_Timers_StartCharacterItemTimer(_Char, (ITEMGUID)_Item, 50, "LLWEAPONEX_Timers_RemoveRune_", "LLWEAPONEX_Runeblade_RemoveBlockedRune");
-
-IF
-CharacterItemEvent(_Char, _Item, "LLWEAPONEX_Runeblade_RemoveBlockedRune")
-AND
-DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate)
-AND
-LeaderLog_QRY_SetNextOneshotStatus(_Char, "#FF0000", "22")
-AND
-LeaderLog_QRY_Log("STATUS", "*This rune can only be inserted into a <font color='#40E0D0'>Runeblade</font>.*")
-AND
-ItemRemoveRune(_Char, _Item, _Slot, _Rune)
-THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
-
-IF
-CharacterItemEvent(_Char, _Item, "LLWEAPONEX_Runeblade_RemoveBlockedRune")
-AND
-DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate)
-THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_RemoveRune(_Char, _Item, _Slot, _RuneTemplate);
-//END_REGION
-
 //REGION ON_HIT
 QRY
 LLWEAPONEX_Runeblades_QRY_HasRuneStatus((CHARACTERGUID)_Character)
