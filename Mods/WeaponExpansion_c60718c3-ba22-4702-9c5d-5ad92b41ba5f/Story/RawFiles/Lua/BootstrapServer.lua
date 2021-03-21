@@ -50,13 +50,7 @@ end)
 
 LeaderLib.RegisterListener("LuaReset", function()
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
-    for i,callback in pairs(LoadPersistentVars) do
-        local status,err = xpcall(callback, debug.traceback)
-        if not status then
-            Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)
-        end
-    end
-    printd(Ext.JsonStringify(PersistentVars))
+    LeaderLib.InvokeListenerCallbacks(LoadPersistentVars)
     UpdateDarkFireballSkill(Origin.Korvash)
 end)
 
@@ -239,12 +233,7 @@ local function SessionSetup()
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
 
-    for i,callback in pairs(LoadPersistentVars) do
-        local status,err = xpcall(callback, debug.traceback)
-        if not status then
-            Ext.PrintError("[WeaponExpansion:SessionLoaded] Error invoking LoadPersistentVars callback:",err)
-        end
-    end
+    LeaderLib.InvokeListenerCallbacks(LoadPersistentVars)
 
     local b,err = xpcall(function()
         --local uniqueDataStr = Ext.LoadFile("WeaponExpansion_UniqueBaseStats.json")
