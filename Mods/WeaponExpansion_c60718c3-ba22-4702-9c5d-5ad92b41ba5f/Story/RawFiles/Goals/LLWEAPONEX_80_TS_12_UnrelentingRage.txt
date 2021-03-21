@@ -17,11 +17,15 @@ NRD_HitGetInt(_Handle, "DamageSourceType", _DamageSourceType)
 AND
 LLWEAPONEX_Helper_IntMatch(_DamageSourceType, 0, 6, 7) // Ignore surfaces/statuses/GM
 AND
+NRD_StatGetExtraData("LLWEAPONEX_UnrelentingRage_CriticalDamageBonus", _MultA)
+AND
+RealDivide(_MultA, 100.0, _CritMult)
+AND
 GetUUID(_Target, _UUID1)
 AND
 GetUUID(_Char, _UUID2)
 THEN
-LeaderLib_Hit_IncreaseDamage(_Target, _Char, _Handle, 1.5, 1);
+LeaderLib_Hit_IncreaseDamage(_Target, _Char, _Handle, _CritMult, 1);
 //END_REGION
 
 //REGION DAMAGE_BONUS
@@ -55,25 +59,25 @@ ObjectTurnStarted((CHARACTERGUID)_Char)
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE", 1)
 THEN
-DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char);
+DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked(_Char);
 
 IF
 AttackedByObject(_, _, (CHARACTERGUID)_Char, _, _)
 AND
-DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char)
+DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked(_Char)
 THEN
-NOT DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char);
+NOT DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked(_Char);
 
 IF
 ObjectTurnEnded((CHARACTERGUID)_Char)
 AND
-DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char)
+DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked(_Char)
 THEN
-NOT DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked(_Char);
+NOT DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked(_Char);
 RemoveStatus(_Char, "LLWEAPONEX_UNRELENTING_RAGE");
 //END_REGION
 
 EXITSECTION
-SysClear("DB_LLWEAPONEX_tatuses_Temp_Rage_ListenForAttacked", 1);
+SysClear("DB_LLWEAPONEX_Statuses_Temp_Rage_ListenForAttacked", 1);
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"
