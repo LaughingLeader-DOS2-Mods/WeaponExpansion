@@ -497,55 +497,55 @@
 	<content contentuid="h316d542cgbcc6g48f4g81a6g1f454c382533">&lt;font color=&apos;#ff7a29&apos;&gt;Change Stance&lt;/font&gt;</content>
 	<content contentuid="h317c0b40g39a6g451bgb923gb03fc052d1f1">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in a sticky tar, dealing earth damage.</content>
 	<content contentuid="h3192a94bg96f7g421dgbed2g9da98d308c05">A weight throwing axe.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
-	<content contentuid="h31bc6a06ga3fbg455fg9572g7f6298cd93cb">Fired like a prayer, this blessed water greatbow arrow might be just the divine intervention you need in a hot situation.</content>
+	<content contentuid="h31bc6a06ga3fbg455fg9572g7f6298cd93cb">像祷告一样射击, this blessed water greatbow arrow might be just the divine intervention you need in a hot situation.</content>
 	<content contentuid="h31cede19g57a8g48deg87d7gaa9dc607185c">&lt;font color=&apos;#EA74B6&apos;&gt;Token of Constitution&lt;/font&gt;</content>
-	<content contentuid="h31d83c23gc0fag412fg9f48gebc89f3e9d11">Muramasa, The Cursed Blade</content>
-	<content contentuid="h31e58acegf828g451bgbe86g5fea547456bc">Shuriken</content>
+	<content contentuid="h31d83c23gc0fag412fg9f48gebc89f3e9d11">村正, 诅咒之刃</content>
+	<content contentuid="h31e58acegf828g451bgbe86g5fea547456bc">手里剑</content>
 	<content contentuid="h31f9ea18g7adbg4b23g93a1g7be268564b95">Charging (War Charge)</content>
-	<content contentuid="h3215fb30gf588g41dfga22dg9dbadd052fb3">Beginner</content>
-	<content contentuid="h321920a0g2c8eg467egb930g093f073a1312">Heavy Book</content>
-	<content contentuid="h32537de7gdbefg4f73g84f1ge8d975ab42a0">Runeweave Hood</content>
-	<content contentuid="h32749b80g4544g449egb4e5g1e4bd9ce04c3">Axes deal [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].</content>
-	<content contentuid="h32a910e6gfc6cg431egbb26g9b4c67639010">Quarterstaff (Metal)</content>
-	<content contentuid="h32b2d731g95e4g4b68ga7f1ge6e5069a4a12">Death Rune</content>
-	<content contentuid="h32cc6a8cg93a9g4482g9ccfg5e332d7eb683">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h3322d0efg7420g408cg9053g57c1a5c6f914">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h336d150fg8c63g4707g9231g3c2cb5ad7764">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
-	<content contentuid="h338d9f08g2302g41f0g802bg5a937dda1cee">Mercy</content>
+	<content contentuid="h3215fb30gf588g41dfga22dg9dbadd052fb3">新手</content>
+	<content contentuid="h321920a0g2c8eg467egb930g093f073a1312">沉重的书</content>
+	<content contentuid="h32537de7gdbefg4f73g84f1ge8d975ab42a0">符文编织的兜帽</content>
+	<content contentuid="h32749b80g4544g449egb4e5g1e4bd9ce04c3">斧子造成 [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus]% 对目标造成更多伤害 [Key:KNOCKED_DOWN_DisplayName].</content>
+	<content contentuid="h32a910e6gfc6cg431egbb26g9b4c67639010">铁头木棒 (金属)</content>
+	<content contentuid="h32b2d731g95e4g4b68ga7f1ge6e5069a4a12">死亡符文。</content>
+	<content contentuid="h32cc6a8cg93a9g4482g9ccfg5e332d7eb683">&lt;font color=&apos;#40E0D0&apos;&gt;投掷能力精通IV&lt;/font&gt;</content>
+	<content contentuid="h3322d0efg7420g408cg9053g57c1a5c6f914">&lt;font color=&apos;#2EFFE9&apos;&gt;法杖精通IV&lt;/font&gt;</content>
+	<content contentuid="h336d150fg8c63g4707g9231g3c2cb5ad7764">手工制作的箭袋,快速的抽出箭矢。曾经属于一个弓箭手 &apos;Trusy Nick&apos;, 据说他总是带着各种各样的箭.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;快速抽取箭袋在战斗外能自动补充。&lt;/font&gt;</content>
+	<content contentuid="h338d9f08g2302g41f0g802bg5a937dda1cee">Mercy（仁慈, 宽恕, 幸运, 恩惠）</content>
 	<content contentuid="h338fd30cg6831g4f12g9bccg7c73be01a085">Recharging (Quiver)</content>
-	<content contentuid="h33927abfgb354g477dgb204g3ba65c950f71">A large scythe.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
-	<content contentuid="h33abf26agf855g4803g8770g3dbad1ce2f9b">A pair of two shields, designed to be used with both arms. For those who truly want to become an unstoppable wall.</content>
-	<content contentuid="h33c1a581gf442g4a60g9851gffe17d4151f4">Draw Arrow</content>
-	<content contentuid="h33c3c87bg18acg457fg9fadg13b2ead3e47a">Widowmaker</content>
-	<content contentuid="h340c2cffg5f68g4cdbga779gc0327133e200">Character has a damage bonus for their first attack.</content>
-	<content contentuid="h34401e0bg371fg449cg9e43g39208b508644">45%/30%/10% Chance for Bonus Missiles</content>
-	<content contentuid="h34471e48g19ddg4c10gbe3dg44c37cc651da">Delayed Dizzy</content>
-	<content contentuid="h345cc985g85a9g4d2fg9dd1g2c6f7ff9f7e6">Changes Damage Type</content>
-	<content contentuid="h3464c53dgce86g4e13g97f9gc44c00c4dcaf">Kevin (Oiled)</content>
-	<content contentuid="h347bb958g6498g4419g93a5g981542de87e6">The holiest of banners. Huzzah!</content>
-	<content contentuid="h348a2785g5750g4d3ag9ae4ge434051a48c2">Fury&apos;s Reward V</content>
-	<content contentuid="h34c270b6gb07fg47ebg8d49g7a37abadb736">Throwing Scythe?</content>
-	<content contentuid="h34cca20cg817dg4132ga584gf9c6fcce8790">&lt;font color=&apos;#00AA00&apos;&gt;Flask of Poison Weakness&lt;/font&gt;</content>
-	<content contentuid="h34f6772egc119g46b0g894age91618dddca1">Fire Bullets</content>
-	<content contentuid="h35037378g9f64g488dga457g5a32144339dd">Quarterstaff (Wood)</content>
-	<content contentuid="h35865821g7403g4bb4g99bdga8a26e72f85f">Kevin (Normal)</content>
-	<content contentuid="h35ad18c6g01dbg47e0g9be9g7ec0412ca64e">Blademaster&apos;s Strike 5</content>
-	<content contentuid="h35ea756dg3af6g4640gb5f2g9861efa3d5b5">Shield Cover</content>
-	<content contentuid="h360e2f3fg2d1cg4ee3g9b7bg9954fd904714">Magical Mini-Arbalest</content>
-	<content contentuid="h36115a3dg19f8g4ee8gb3edg06bc19b01fae">Inhibited</content>
-	<content contentuid="h36977f30g86afg4c49gbd11gda439c232bd0">&lt;font color=&apos;#FF337F&apos;&gt;Pistol Mastery III&lt;/font&gt;</content>
-	<content contentuid="h36ea4bc1g8a7cg4f67g8025ge66503ca547d">Old Tanto</content>
-	<content contentuid="h36fb9f8agcc45g4627g863bg1994aaace86e">&lt;font color=&apos;#FF961A&apos;&gt;Explosive Bullets&lt;/font&gt;</content>
-	<content contentuid="h3716cca7ga9fcg4c76g8c61gaabdbbd47017">&lt;font color=&apos;#FFAA00&apos;&gt;Enabled Mastery: [1]&lt;/font&gt;</content>
-	<content contentuid="h371b35eegbfbcg47dag91cfg38bd40e2cf7e">Permafrost</content>
-	<content contentuid="h372458e1g39e6g41ccg89e8g1821272e41ac">Crossbow Bolts</content>
-	<content contentuid="h37b7b5fegc022g4a23gbd81g4dfc00682f4b">Throwing Axe (Large)</content>
-	<content contentuid="h37c7be81g701bg4c19ga8ebg2c9db9da0c0c">Raging</content>
-	<content contentuid="h37dd5ccag806fg4c58gbb05gd2cca622ae93">&lt;font color=&apos;#A150FF&apos;&gt;Token of Wits&lt;/font&gt;</content>
-	<content contentuid="h37e4fb5bg10a7g428bg8aa3g719e66107aa0">Blademaster&apos;s Strike 2</content>
-	<content contentuid="h381f1719g2ab0g4098g8439gea240cd9374a">Empowered Runeweave Hood</content>
-	<content contentuid="h382df0a1g35f0g4720g989dgedfee3e7df28">Dragonslayer Gloves</content>
-	<content contentuid="h385c287dgb46dg4a18g8076g743fd7b9f831">Dual Shields - Automatically equips a Combat Shield in your main hand</content>
+	<content contentuid="h33927abfgb354g477dgb204g3ba65c950f71">一个大镰刀。&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;作为武器看起来毫无用处。&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;把它扔给敌人吧!&lt;/font&gt;</content>
+	<content contentuid="h33abf26agf855g4803g8770g3dbad1ce2f9b">一对两个盾牌，设计用于双臂。对于那些真正想要成为一堵坚不可摧的墙的人。</content>
+	<content contentuid="h33c1a581gf442g4a60g9851gffe17d4151f4">牵引箭</content>
+	<content contentuid="h33c3c87bg18acg457fg9fadg13b2ead3e47a">寡妇制造者</content>
+	<content contentuid="h340c2cffg5f68g4cdbga779gc0327133e200">角色的第一次攻击有一个伤害加成。</content>
+	<content contentuid="h34401e0bg371fg449cg9e43g39208b508644">45%/30%/10% 奖励投掷物的几率</content>
+	<content contentuid="h34471e48g19ddg4c10gbe3dg44c37cc651da">延迟晕眩</content>
+	<content contentuid="h345cc985g85a9g4d2fg9dd1g2c6f7ff9f7e6">改变损害类型</content>
+	<content contentuid="h3464c53dgce86g4e13g97f9gc44c00c4dcaf">凯文(醉酒)</content>
+	<content contentuid="h347bb958g6498g4419g93a5g981542de87e6">最神圣的旗帜。万岁!</content>
+	<content contentuid="h348a2785g5750g4d3ag9ae4ge434051a48c2">狂怒&apos;奖励V</content>
+	<content contentuid="h34c270b6gb07fg47ebg8d49g7a37abadb736">扔镰刀？</content>
+	<content contentuid="h34cca20cg817dg4132ga584gf9c6fcce8790">&lt;font color=&apos;#00AA00&apos;&gt;毒药瓶的弱点&lt;/font&gt;</content>
+	<content contentuid="h34f6772egc119g46b0g894age91618dddca1">火子弹</content>
+	<content contentuid="h35037378g9f64g488dga457g5a32144339dd">铁头木棒 (木头)</content>
+	<content contentuid="h35865821g7403g4bb4g99bdga8a26e72f85f">凯文 (正常)</content>
+	<content contentuid="h35ad18c6g01dbg47e0g9be9g7ec0412ca64e">剑术大师&apos;的打击5</content>
+	<content contentuid="h35ea756dg3af6g4640gb5f2g9861efa3d5b5">防护罩</content>
+	<content contentuid="h360e2f3fg2d1cg4ee3g9b7bg9954fd904714">魔幻迷你劲弩</content>
+	<content contentuid="h36115a3dg19f8g4ee8gb3edg06bc19b01fae">Inhibited（抑制）</content>
+	<content contentuid="h36977f30g86afg4c49gbd11gda439c232bd0">&lt;font color=&apos;#FF337F&apos;&gt;手枪精通III&lt;/font&gt;</content>
+	<content contentuid="h36ea4bc1g8a7cg4f67g8025ge66503ca547d">Old Tanto（老这么多）</content>
+	<content contentuid="h36fb9f8agcc45g4627g863bg1994aaace86e">&lt;font color=&apos;#FF961A&apos;&gt;爆炸子弹&lt;/font&gt;</content>
+	<content contentuid="h3716cca7ga9fcg4c76g8c61gaabdbbd47017">&lt;font color=&apos;#FFAA00&apos;&gt;能够精通: [1]&lt;/font&gt;</content>
+	<content contentuid="h371b35eegbfbcg47dag91cfg38bd40e2cf7e">永久冻土</content>
+	<content contentuid="h372458e1g39e6g41ccg89e8g1821272e41ac">十字弓弩箭</content>
+	<content contentuid="h37b7b5fegc022g4a23gbd81g4dfc00682f4b">投掷斧头(大量的)</content>
+	<content contentuid="h37c7be81g701bg4c19ga8ebg2c9db9da0c0c">Raging（狂怒的）</content>
+	<content contentuid="h37dd5ccag806fg4c58gbb05gd2cca622ae93">&lt;font color=&apos;#A150FF&apos;&gt;智慧的象征&lt;/font&gt;</content>
+	<content contentuid="h37e4fb5bg10a7g428bg8aa3g719e66107aa0">剑术大师&apos;的打击2</content>
+	<content contentuid="h381f1719g2ab0g4098g8439gea240cd9374a">增强符文编织的兜帽</content>
+	<content contentuid="h382df0a1g35f0g4720g989dgedfee3e7df28">屠龙者手套</content>
+	<content contentuid="h385c287dgb46dg4a18g8076g743fd7b9f831">双护盾-自动装备一个战斗护盾在你的主手</content>
 	<content contentuid="h38979687g2dd2g48d1gb70cg63816ec51135">Runeblade of Earth</content>
 	<content contentuid="h389bb022gfad2g4520ga8b2gf1cc8c854026">Weighty Book</content>
 	<content contentuid="h38a97819g0b16g4ba9ga62eg3cedb395668b">Weapon Expansion - Equipment</content>
