@@ -649,15 +649,15 @@ Ext.RegisterNetListener("LLWEAPONEX_Debug_DestroyUI", function(...)
 end)
 
 ---@type InputEventCallback
-Input.RegisterListener(function(event, inputMap, controllerEnabled)
+Input.RegisterListener(function(eventName, pressed, id, inputMap, controllerEnabled)
 	if controllerEnabled then
 		 -- Right Trigger + Left Trigger 
-		if not MasteryMenu.Open and event.EventId == 215 and inputMap[217] == true then
+		if not MasteryMenu.Open and eventName == "PartyManagement" and Input.GetKeyState("PanelSelect") == true then
 			TryOpenMasteryMenu()
 		elseif MasteryMenu.Open and MasteryMenu.Instance then
-			if event.EventId == 222 and event.Release then -- The accept button
+			if eventName == "Interact" and not pressed then -- The accept button
 		
-			elseif event.EventId == 226 and event.Release then
+			elseif eventName == "PrevObject" and not pressed then
 				--local main = MasteryMenu.Instance:GetRoot()
 				
 			end
