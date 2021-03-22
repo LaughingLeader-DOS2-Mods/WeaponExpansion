@@ -32,6 +32,7 @@ package
 		public const designResolution:Point = new Point(1920,1080);
 		public var uiScaling:Number;
 		public var isResizing:Boolean;
+		public var controllerEnabled:Boolean = false;
 
 		public function MainTimeline()
 		{
@@ -68,13 +69,15 @@ package
 			}
 		}
 
-		public function closeMenu() : *
+		public function closeMenu(skipRequest:Boolean = false) : *
 		{
 			if (this.masteryMenuMC.visible)
 			{
 				ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
 				//ExternalInterface.call("PlaySound","UI_Game_Inventory_Close");
-				ExternalInterface.call("requestCloseUI");
+				if(!skipRequest) {
+					ExternalInterface.call("requestCloseUI");
+				}
 				ExternalInterface.call("inputFocusLost");
 				ExternalInterface.call("focusLost");
 				this.masteryMenuMC.visible = false;
@@ -96,14 +99,18 @@ package
 				openMenu();
 			}
 		}
+
+		public var ctrlDown:Boolean = false;
+		public var shiftDown:Boolean = false;
 		
-		public function onEventUp(eventIndex:Number, param2:Number, param3:Number) : *
+		public function onEventUp(eventIndex:Number) : *
 		{
+			var eventName:String = this.events[eventIndex];
 			var handled:Boolean = false;
 			if (active)
 			{
 				//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
-				switch(this.events[eventIndex])
+				switch(eventName)
 				{
 					case "IE UIAccept":
 						break;
@@ -126,17 +133,28 @@ package
 						break;
 				}
 			}
+
+			switch(eventName)
+			{
+				case "IE FlashCtrl":
+					ctrlDown = false;
+					break;
+				case "IE SplitItemToggle":
+					shiftDown = false;
+					break;
+			}
 			
 			return handled;
 		}
 		
-		public function onEventDown(eventIndex:Number, param2:Number, param3:Number) : *
+		public function onEventDown(eventIndex:Number) : *
 		{
 			var handled:Boolean = false;
-			ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
+			//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
+			var eventName:String = this.events[eventIndex];
 			if (active)
 			{
-				switch(this.events[eventIndex])
+				switch(eventName)
 				{
 					case "IE UIUp":
 						this.masteryMenuMC.previous();
@@ -183,6 +201,25 @@ package
 						handled = true;
 						break;
 				}
+			}
+			switch(eventName)
+			{
+				case "IE FlashCtrl":
+					ctrlDown = !controllerEnabled;
+					break;
+				case "IE SplitItemToggle":
+					shiftDown = !controllerEnabled;
+					break;
+				case "IE ToggleMap":
+					if (!controllerEnabled && ctrlDown)
+					{
+						handled = true;
+						if(active)
+						{
+							ExternalInterface.call("requestCloseMasteryMenu");
+						}
+					}
+					break;
 			}
 			return handled;
 		}
@@ -314,7 +351,7 @@ package
 		{
 			this.layout = "fixed";
 			this.alignment = "none";
-			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "IE PartyManagement", "IE PanelSelect", "IE UILeft", "IE UIRight", "IE PrevObject", "IE NextObject", "IE UITooltipUp", "IE UITooltipDown");
+			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "IE PartyManagement", "IE PanelSelect", "IE UILeft", "IE UIRight", "IE PrevObject", "IE NextObject", "IE UITooltipUp", "IE UITooltipDown", "IE ToggleMap", "IE FlashCtrl", "IE SplitItemToggle");
 			this.descriptionContent = new Array();
 			Registry.RankNodePositions[0] = 0.0;
 			Registry.RankNodePositions[4] = 1.0;

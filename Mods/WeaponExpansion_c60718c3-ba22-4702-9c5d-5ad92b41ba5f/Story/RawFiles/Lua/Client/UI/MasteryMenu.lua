@@ -26,9 +26,9 @@ local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
 ---@type LeaderLibInputManager
 local Input = LeaderLib.Input
 
-local function CloseMenu()
+local function CloseMenu(skipRequest)
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
-		MasteryMenu.Instance:Invoke("closeMenu")
+		MasteryMenu.Instance:Invoke("closeMenu", skipRequest ~= nil and skipRequest or false)
 		MasteryMenu.DisplayingSkillTooltip = false
 		MasteryMenu.DisplayingStatusTooltip = false
 		MasteryMenu.SelectedMastery = nil
@@ -39,7 +39,6 @@ end
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
 	--printd("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
-
 	if call == "hotbarBtnPressed" or call == "selectedTab" or call == "showUI" then
 		CloseMenu()
 	end
@@ -48,7 +47,6 @@ end
 local function OnSidebarEvent(ui, call, ...)
 	local params = {...}
 	--printd("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
-
 	if call == "charSel" then
 		CloseMenu()
 	end
@@ -57,7 +55,7 @@ end
 local function OnHotbarEvent(ui, call, ...)
 	local params = {...}
 	--printd("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
-
+	
 	if call == "hotbarBtnPressed" then
 		CloseMenu()
 	end
@@ -304,8 +302,8 @@ local function OnMenuEvent(ui, call, ...)
 	if call ~= "overMastery" then
 		printd("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(LeaderLib.Common.Dump(params))..")")
 	end
-	if call == "requestCloseUI" then
-		CloseMenu()
+	if call == "requestCloseUI" or call == "requestCloseMasteryMenu" then
+		CloseMenu(true)
 	elseif call == "onMasterySelected" then
 		MasteryMenu.LastSelected = params[1]
 		MasteryMenu.SelectedMastery = params[2]
@@ -363,9 +361,9 @@ function MasteryMenu.RepositionToggleButton(ui, width, height, skillbarVisible)
 		local hotbarMain = hotBar:GetRoot()
 		local chatButton = hotbarMain.hotbar_mc.chatBtn_mc
 		--print("hotBar:", hotbarMain.y, hotbarMain.hotbar_mc.y, chatButton.y)
-
+		
 		menu_btn.x = hotbarMain.hotbar_mc.x + chatButton.x + chatButton.width + buttonSpacingX
-
+		
 		if skillbarVisible ~= false then
 			menu_btn.y = main.toggleButtonDefaultY
 			--menu_btn.y = (hotbarMain.height - hotbarMain.hotbar_mc.height) - 5
@@ -454,10 +452,11 @@ function MasteryMenu.InitializeMasteryMenu()
 	end
 	if ui ~= nil and MasteryMenu.Open == false then
 		MasteryMenu.Instance = ui
+		ui:GetRoot().controllerEnabled = LeaderLib.Vars.ControllerEnabled
 		ui:Invoke("setEmptyListText", Text.MasteryMenu.NoMasteriesTitle.Value, Text.MasteryMenu.NoMasteriesDescription.Value)
 		ui:Invoke("setTooltipText", Text.MasteryMenu.MasteredTooltip.Value)
 		ui:Invoke("setMaxRank", Mastery.Variables.MaxRank)
-
+		
 		local xpMax = Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required
 		if xpMax <= 0 then
 			Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] Max mastery XP is (",xpMax,")! Is something configured wrong?")
@@ -475,6 +474,7 @@ function MasteryMenu.InitializeMasteryMenu()
 		end
 		if not MasteryMenu.RegisteredListeners then
 			Ext.RegisterUICall(ui, "requestCloseUI", OnMenuEvent)
+			Ext.RegisterUICall(ui, "requestCloseMasteryMenu", OnMenuEvent)
 			Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
 			Ext.RegisterUICall(ui, "overMastery", OnMenuEvent)
 			Ext.RegisterUICall(ui, "selectedMastery", OnMenuEvent)
@@ -509,7 +509,7 @@ local function InitMasteryMenu()
 	if Game.Tooltip.ControllerVars ~= nil then
 		MasteryMenu.IsControllerMode = Game.Tooltip.ControllerVars.Enabled
 	end
-
+	
 	if not MasteryMenu.Initialized and Ext.GetGameState() == "Running" then
 		MasteryMenu.InitializeToggleButton()
 		MasteryMenu.InitializeMasteryMenu()
@@ -520,10 +520,10 @@ local function hasMinimumMasteryRankData(t,tag,min)
 	if Debug.MasteryTests then
 		return true
 	end
-	if t == nil then return false end
-	return pcall(function()
-		return t.Masteries[tag].Rank >= min
-	end)
+if t == nil then return false end
+return pcall(function()
+	return t.Masteries[tag].Rank >= min
+end)
 end
 
 local function getRankTooltip(data, i)
@@ -573,10 +573,10 @@ local function OpenMasteryMenu(characterMasteryData)
 			local xp = math.ceil(characterMasteryData.Masteries[tag].XP)
 			local xpMax = math.ceil(Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required)
 			-- if Debug.MasteryTests then
-			-- 	characterMasteryData.Masteries[tag].Rank = 4
-			-- 	characterMasteryData.Masteries[tag].XP = xpMax
-			-- 	rank = 4
-			-- 	xp = xpMax
+				-- 	characterMasteryData.Masteries[tag].Rank = 4
+				-- 	characterMasteryData.Masteries[tag].XP = xpMax
+				-- 	rank = 4
+				-- 	xp = xpMax
 			-- end
 			if rank > 0 or xp >= math.floor(Mastery.Variables.RankVariables[1].Required*0.4) then -- If rank 0, show if at 40% of the way there
 				local barPercentage = 0.0
@@ -594,12 +594,12 @@ local function OpenMasteryMenu(characterMasteryData)
 					expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
 				end
 				ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, LeaderLib.Common.FormatNumber(xp), LeaderLib.Common.FormatNumber(xpMax)))
-	
+				
 				for k=1,Mastery.Variables.MaxRank,1 do
 					ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))
 					--print("Set rank tooltip: ", i, k)
 				end
-	
+				
 				printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 				i = i + 1
 			end
@@ -650,18 +650,26 @@ end)
 
 ---@type InputEventCallback
 Input.RegisterListener(function(eventName, pressed, id, inputMap, controllerEnabled)
-	if controllerEnabled then
-		 -- Right Trigger + Left Trigger 
-		if not MasteryMenu.Open and eventName == "PartyManagement" and Input.GetKeyState("PanelSelect") == true then
-			TryOpenMasteryMenu()
-		elseif MasteryMenu.Open and MasteryMenu.Instance then
-			if eventName == "Interact" and not pressed then -- The accept button
-		
-			elseif eventName == "PrevObject" and not pressed then
-				--local main = MasteryMenu.Instance:GetRoot()
-				
+	if not MasteryMenu.Open then
+		if controllerEnabled then
+			-- Right Trigger + Left Trigger 
+			if eventName == "PartyManagement" and Input.GetKeyState("PanelSelect") == true then
+				TryOpenMasteryMenu()
+			end
+		else
+			-- CTRL + Shift + M
+			--Ext.Print(eventName, Input.GetKeyState("FlashCtrl"), Input.GetKeyState("SplitItemToggle"))
+			if eventName == "ToggleMap" and pressed and Input.GetKeyState("FlashCtrl") then
+				TryOpenMasteryMenu()
 			end
 		end
+	elseif controllerEnabled then
+		-- if eventName == "Interact" and not pressed then -- The accept button
+			
+		-- elseif eventName == "PrevObject" and not pressed then
+			-- 	--local main = MasteryMenu.Instance:GetRoot()
+			
+		-- end
 	end
 end)
 
