@@ -354,26 +354,28 @@ local buttonSpacingX = 16
 
 function MasteryMenu.RepositionToggleButton(ui, width, height, skillbarVisible)
 	local main = ui:GetRoot()
-	local menu_btn = main.menu_btn
-	local hotBar = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
-	--local dialog = Ext.GetBuiltinUI("Public/Game/GUI/dialog.swf")
-	if hotBar ~= nil then
-		local hotbarMain = hotBar:GetRoot()
-		local chatButton = hotbarMain.hotbar_mc.chatBtn_mc
-		--print("hotBar:", hotbarMain.y, hotbarMain.hotbar_mc.y, chatButton.y)
-		
-		menu_btn.x = hotbarMain.hotbar_mc.x + chatButton.x + chatButton.width + buttonSpacingX
-		
-		if skillbarVisible ~= false then
-			menu_btn.y = main.toggleButtonDefaultY
-			--menu_btn.y = (hotbarMain.height - hotbarMain.hotbar_mc.height) - 5
-			--menu_btn.y = (main.designResHeight or 1080) - (hotbarMain.hotbar_mc.basebarFrame_mc.height/2)
+	if main then
+		local menu_btn = main.menu_btn
+		local hotBar = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
+		--local dialog = Ext.GetBuiltinUI("Public/Game/GUI/dialog.swf")
+		if hotBar ~= nil then
+			local hotbarMain = hotBar:GetRoot()
+			local chatButton = hotbarMain.hotbar_mc.chatBtn_mc
+			--print("hotBar:", hotbarMain.y, hotbarMain.hotbar_mc.y, chatButton.y)
+			
+			menu_btn.x = hotbarMain.hotbar_mc.x + chatButton.x + chatButton.width + buttonSpacingX
+			
+			if skillbarVisible ~= false then
+				menu_btn.y = main.toggleButtonDefaultY
+				--menu_btn.y = (hotbarMain.height - hotbarMain.hotbar_mc.height) - 5
+				--menu_btn.y = (main.designResHeight or 1080) - (hotbarMain.hotbar_mc.basebarFrame_mc.height/2)
+			else
+				menu_btn.y = main.designResHeight or 1080
+			end
+			--print("button:", menu_btn.x, menu_btn.y, dialogShown, hotbarMain.height, hotbarMain.hotbar_mc.height)
 		else
 			menu_btn.y = main.designResHeight or 1080
 		end
-		--print("button:", menu_btn.x, menu_btn.y, dialogShown, hotbarMain.height, hotbarMain.hotbar_mc.height)
-	else
-		menu_btn.y = main.designResHeight or 1080
 	end
 end
 
