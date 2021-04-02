@@ -17,11 +17,12 @@ end
 local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
 	local skill_func = Skills.Damage[skill.Name]
 	if skill_func ~= nil then
-		local status,damageList,deathType = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
-		if status and damageList ~= nil then
+		local b,damageList,deathType = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+		if b and damageList ~= nil then
 			return damageList,deathType
-		else
-			Ext.PrintError("Error getting damage for skill:\n",skill.Name,damageList)
+		elseif not b then
+			Ext.PrintError("Error getting damage for skill ",skill.Name)
+			Ext.PrintError(damageList)
 		end
 	else
 		-- Unarmed weapon damage scaling
