@@ -68,7 +68,7 @@ BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,
 end)
 
 ---@param hitData HitData
-MasteryBonusManager.RegisterSkillListener({"Target_HeavyAttack"}, {"AXE_ALLIN"}, function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener("Target_HeavyAttack", {"AXE_ALLIN"}, function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
 		local totalPiercingDamage = 0
 		for i,damageType in Data.DamageTypes:Get() do
@@ -89,7 +89,7 @@ end)
 local flurryHits = {}
 
 ---@param hitData HitData
-MasteryBonusManager.RegisterSkillListener({"Target_DualWieldingAttack"}, {"AXE_FLURRY"}, function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener("Target_DualWieldingAttack", {"AXE_FLURRY"}, function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Target ~= nil then
 		if flurryHits[char] == nil then
 			flurryHits[char] = 0
