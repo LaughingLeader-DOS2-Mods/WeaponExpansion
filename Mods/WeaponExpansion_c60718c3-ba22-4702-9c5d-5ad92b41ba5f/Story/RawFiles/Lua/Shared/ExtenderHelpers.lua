@@ -577,35 +577,3 @@ function ExtenderHelpers.CreateSkillTable(skillName, useWeaponDamage)
 	end
 	return nil
 end
-
-local RuneAttributes = {
-	"RuneEffectWeapon",
-	"RuneEffectUpperbody",
-	"RuneEffectAmulet",
-}
-
----@param item StatItem
----@return StatItemDynamic,string
-function ExtenderHelpers.GetRuneBoosts(item)
-	local boosts = {}
-	if item ~= nil then
-		for i=3,5,1 do
-			local boost = item.DynamicStats[i]
-			if boost ~= nil and boost.BoostName ~= "" then
-				local runeEntry = {
-					Name = boost.BoostName,
-					Boosts = {}
-				}
-				table.insert(boosts, runeEntry)
-				for i,attribute in pairs(RuneAttributes) do
-					runeEntry.Boosts[attribute] = ""
-					local boostStat = Ext.StatGetAttribute(boost.BoostName, attribute)
-					if boostStat ~= nil then
-						runeEntry.Boosts[attribute] = boostStat
-					end
-				end
-			end
-		end
-	end
-	return boosts
-end

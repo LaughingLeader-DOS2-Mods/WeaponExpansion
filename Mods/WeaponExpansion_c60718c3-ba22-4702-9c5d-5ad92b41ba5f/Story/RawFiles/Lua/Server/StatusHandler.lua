@@ -14,7 +14,7 @@ end
 ---@param source string
 ---@param item EsvItem
 local function ApplyRuneExtraProperties(target, source, item)
-	local runes = ExtenderHelpers.GetRuneBoosts(item.Stats)
+	local runes = GameHelpers.Stats.GetRuneBoosts(item.Stats)
 	if #runes > 0 then
 		for i,runeEntry in pairs(runes) do
 			for attribute,boost in pairs(runeEntry.Boosts) do
