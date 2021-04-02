@@ -286,7 +286,7 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 				MoveToRegionPosition(self, region, item)
 			end
 		end
-		printd("Unique initialized:", uuid, item.DisplayName, self.Owner)
+		--printd("Unique initialized:", uuid, item.DisplayName, self.Owner)
 	end
 end
 

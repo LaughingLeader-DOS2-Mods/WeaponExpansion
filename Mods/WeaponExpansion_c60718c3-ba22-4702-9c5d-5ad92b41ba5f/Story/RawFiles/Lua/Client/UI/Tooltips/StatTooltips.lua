@@ -141,7 +141,7 @@ local statHandlers = {
 ---@param stat string
 ---@param tooltip TooltipData
 local function OnStatTooltip(character, stat, tooltip)
-	print(stat, Ext.JsonStringify(tooltip.Data))
+	--print(stat, Ext.JsonStringify(tooltip.Data))
 	local handler = statHandlers[stat]
 	if handler then
 		local b,err = xpcall(handler, debug.traceback, character, stat, tooltip)

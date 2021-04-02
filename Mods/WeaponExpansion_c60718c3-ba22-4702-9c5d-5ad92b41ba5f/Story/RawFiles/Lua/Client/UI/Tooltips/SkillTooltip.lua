@@ -65,7 +65,7 @@ end
 ---@param skill string
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
-	print(skill, Ext.JsonStringify(tooltip.Data))
+	--print(skill, Ext.JsonStringify(tooltip.Data))
 	local descriptionElement = tooltip:GetElement("SkillDescription")
 	local description = ""
 	if descriptionElement ~= nil then

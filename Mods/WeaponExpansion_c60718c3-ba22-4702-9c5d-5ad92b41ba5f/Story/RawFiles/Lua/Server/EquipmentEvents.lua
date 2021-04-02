@@ -579,7 +579,7 @@ function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 		if EquipmentManager.ItemIsNearPlayers(item) then
 			Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)
 		else
-			Ext.PrintWarning(string.format("[WeaponExpansion:EquipmentManager.SyncItemStatChanges] Item[%s] NetID(%s) UUID(%s) is not near any players, and cannot be retrieved by clients.", item.StatsId, item.NetID, item.MyGuid))
+			--Ext.PrintWarning(string.format("[WeaponExpansion:EquipmentManager.SyncItemStatChanges] Item[%s] NetID(%s) UUID(%s) is not near any players, and cannot be retrieved by clients.", item.StatsId, item.NetID, item.MyGuid))
 		end
 	end
 end

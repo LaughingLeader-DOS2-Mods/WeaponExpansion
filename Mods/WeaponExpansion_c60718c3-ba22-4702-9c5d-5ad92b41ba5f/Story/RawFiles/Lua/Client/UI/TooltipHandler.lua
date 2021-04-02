@@ -6,20 +6,14 @@ end
 
 ---@param skill SkillEventData
 ---@param character StatCharacter
----@return string
+---@return table<string, number[]>
 LeaderLib.RegisterListener("GetTooltipSkillDamage", function(skill, character)
 	local paramText = SkillGetDescriptionParam(skill, character, false, "Damage")
 	if paramText ~= nil then
 		return paramText
 	end
-	-- if character.Stats.MainWeapon == nil and character.Stats.OffHandWeapon == nil then
-	-- 	local damageRange = nil
-	-- 	local weapon = UnarmedHelpers.GetUnarmedWeapon(character)
-	-- 	damageRange = Math.GetSkillDamageRange(character, skillData, weapon)
-	-- 	return GameHelpers.Tooltip.FormatDamageRange(damageRange)
-	-- end
-
 end)
+
 ---@param skill SkillEventData
 ---@param character StatCharacter
 ---@return string
