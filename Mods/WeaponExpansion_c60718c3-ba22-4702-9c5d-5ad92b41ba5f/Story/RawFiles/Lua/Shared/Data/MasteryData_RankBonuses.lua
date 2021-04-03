@@ -110,9 +110,26 @@ LLWEAPONEX_BattleBook_Mastery1 = {
 	BOOK_CONCUSSION = {
 		Skills = BASIC_ATTACK,
 		Param = ts:Create("h36b6a824g20a5g42acga0efg69102b1f801f", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionTurns] turn(s).</font>"),
+	},
+	BATTLEBOOK_FIRST_AID = {
+		Skills = {"Target_FirstAid", "Target_FirstAidEnemy"},
+		Param = ts:Create("h91f2c123gbcadg4a72g8c23g98250fe3706c", "<font color='#99AACC'>Medical book knowledge restores an additional <font color='#97FBFF'>[Stats:LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID:HealValue]% [Handle:h67a4c781g589ag4872g8c46g870e336074bd:Vitality]</font>.</font>"),
+		StatusParam = {
+			Statuses = {"RESTED"},
+			Param = ts:Create("hf1ec1489g29f3g43f4g9452gc4f4e8e0c108", "Duration increased by [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_TurnBonus].</font>"),
+			Active = {Value = "LLWEAPONEX_BattleBook_FirstAid_Active", Type = "Tag", Source = false}
+		}
+	},
+},
+LLWEAPONEX_BattleBook_Mastery2 = {
+	BATTLEBOOK_BLESS = {
+		Skills = {"Target_Bless", "Target_EnemyBless"},
+		Param = ts:Create("hb253b8ddgba7dg4f42g9426gc62332e8ebca", "<font color='#99AACC'>Deep knowledge of sacred texts allows [Key:Target_Bless_DisplayName] to deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage] to enemy Undead.</font>"),
+	},
+	BATTLEBOOK_SCROLLS = {
+		Param = ts:Create("had396c8dgfa88g44b5g983fg250eecb5d5f4", "<font color='#99AACC'>Gain [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_ScrollUseAPBonus] AP on use. Can only happen once per turn.</font>"),
 	}
 },
-LLWEAPONEX_BattleBook_Mastery2 = {},
 LLWEAPONEX_BattleBook_Mastery3 = {},
 LLWEAPONEX_BattleBook_Mastery4 = {},
 LLWEAPONEX_BattleBook_Mastery5 = {},

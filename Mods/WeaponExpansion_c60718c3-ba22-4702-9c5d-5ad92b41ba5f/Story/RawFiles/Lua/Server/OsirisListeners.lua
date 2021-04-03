@@ -235,15 +235,28 @@ LeaderLib.RegisterListener("Initialized", function(region)
     end
 end)
 
-local function OnLeftCombat(uuid, id)
-	ClearTag(uuid, "LLWEAPONEX_EnemyDiedInCombat")
-	ReloadAmmoSkills(uuid)
-	StatusManager.RemoveAllTurnEndStatuses(uuid)
+TurnEndRemoveTags = {
+	LLWEAPONEX_EnemyDiedInCombat = true,
+}
+
+local function RemoveTagsOnTurnEnd(uuid)
+	for tag,b in pairs(TurnEndRemoveTags) do
+		if b then
+			ClearTag(uuid, tag)
+		end
+	end
 end
 
-Ext.RegisterOsirisListener("ObjectTurnEnded", 1, "after", function(obj)
-	obj = StringHelpers.GetUUID(obj)
-	StatusManager.RemoveAllTurnEndStatuses(obj)
+local function OnLeftCombat(uuid, id)
+	ReloadAmmoSkills(uuid)
+	StatusManager.RemoveAllTurnEndStatuses(uuid)
+	RemoveTagsOnTurnEnd(uuid)
+end
+
+Ext.RegisterOsirisListener("ObjectTurnEnded", 1, "after", function(uuid)
+	uuid = StringHelpers.GetUUID(uuid)
+	StatusManager.RemoveAllTurnEndStatuses(uuid)
+	RemoveTagsOnTurnEnd(uuid)
 end)
 
 RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(obj,id)

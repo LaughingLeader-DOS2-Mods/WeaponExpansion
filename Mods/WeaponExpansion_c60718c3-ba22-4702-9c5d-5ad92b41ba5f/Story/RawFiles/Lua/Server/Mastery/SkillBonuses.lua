@@ -26,11 +26,15 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	return bonuses
 end
 
----@param character EsvCharacter
+---@param uuid string
 ---@param bonus string|table<string,boolean>
 ---@return boolean
-function MasteryBonusManager.HasMasteryBonuses(character, bonus)
-	local character = Ext.GetCharacter(character)
+function MasteryBonusManager.HasMasteryBonuses(uuid, bonus)
+	local character = uuid
+	local t = type(uuid)
+	if t == "string" or t == "number" then
+		character = Ext.GetCharacter(uuid)
+	end
 	for tag,tbl in pairs(Mastery.Bonuses) do
 		if Mastery.HasMasteryRequirement(character, tag) then
 			for bonusName,_ in pairs(tbl) do
@@ -142,6 +146,12 @@ local function OnStatusCallback(callback, matchBonuses, target, status, source)
 	end
 end
 
+---@alias WeaponExpansionMasteryStatusListenerCallback fun(target:string, status:string, source:string, bonuses:table<string,table<string,boolean>>)
+
+---@param event string
+---@param status string|string[]
+---@param matchBonuses string|string[]
+---@param callback WeaponExpansionMasteryStatusListenerCallback
 function MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses, callback)
 	if type(status) == "table" then
 		for i,v in pairs(status) do

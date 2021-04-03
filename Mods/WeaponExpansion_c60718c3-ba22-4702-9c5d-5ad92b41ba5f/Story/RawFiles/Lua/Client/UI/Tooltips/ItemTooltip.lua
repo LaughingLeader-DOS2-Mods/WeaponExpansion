@@ -258,6 +258,18 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
+		if string.find(item.StatsId, "SCROLL") or item:HasTag("SCROLL") and item.Stats.UseAPCost > 0 then
+			if Mastery.HasMasteryRequirement(character, "LLWEAPONEX_BattleBook_Mastery2") then
+				if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
+					local paramText = Mastery.Bonuses.LLWEAPONEX_BattleBook_Mastery2.BATTLEBOOK_SCROLLS.Param.Value
+					tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(paramText, character)})
+				else
+					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
+					tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(text, character)})
+				end
+			end
+		end
+
 		if item.StatsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
 			--Removes the Requires Dwarf / Male
 			for i,element in pairs(tooltip:GetElements("ItemRequirement")) do
