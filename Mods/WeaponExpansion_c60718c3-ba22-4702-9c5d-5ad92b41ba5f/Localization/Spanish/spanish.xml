@@ -1383,6 +1383,7 @@
 	<content contentuid="h91d6604fg166fg4390g88e4g1847a776456f">Empty Glass Flask</content>
 	<content contentuid="h91de1e73g1430g45afg9ceegf47ba419a7cb">Honor &amp; Duty</content>
 	<content contentuid="h91df6fefg6cb4g4f27ga116g992a6a2e4774">Inspiration</content>
+	<content contentuid="h91f2c123gbcadg4a72g8c23g98250fe3706c">&lt;font color=&apos;#99AACC&apos;&gt;Medical book knowledge restores an additional &lt;font color=&apos;#97FBFF&apos;&gt;[Stats:LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID:HealValue]% [Handle:h67a4c781g589ag4872g8c46g870e336074bd:Vitality]&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="h91f3bf0cgf45eg4b35ga80dg3bae0b7a5e06">&lt;font color=&apos;#FF0000&apos;&gt;No Rune Combination Exists in Memory&lt;/font&gt;</content>
 	<content contentuid="h91f9839bg6559g4bf5ga9d8g0ee6790f9896">The &lt;font color=&apos;#F7BE81&apos;&gt;Dust Rune&lt;/font&gt; is cooling down, and is unable to trigger another &lt;font color=&apos;#8A4B08&apos;&gt;Dust Blast&lt;/font&gt;.</content>
 	<content contentuid="h9234fbabgf1cdg4d9dgae64g81c7b5576da8">Detonate remote charges in a [1] radius.&lt;br&gt;&lt;font color=&apos;#188EDE&apos;&gt;Can target mines in the world, or an object holding mines.&lt;/font&gt;</content>
@@ -1430,6 +1431,7 @@
 	<content contentuid="h96d9d2fcge7eeg4c11g923cgc6f721840db6">Shuriken</content>
 	<content contentuid="h96e55571g2a2fg4946g962dg559ef4f5a7ac">Rapier</content>
 	<content contentuid="h97393307gf796g492agbf67gc5697357efb2">Apply Bolt Effects on Hit</content>
+	<content contentuid="h97851202g90c0g492cg896bgf9491216d827">&lt;font color=&apos;#C9AA58&apos; size=&apos;22&apos;&gt;*Divine Knowledge*&lt;/font&gt;</content>
 	<content contentuid="h979060b5g1deeg4066g982dgdc9a8ac14e9b">&lt;font color=&apos;#C0C0C0&apos;&gt;Silver Mini-Bolts&lt;/font&gt;</content>
 	<content contentuid="h97922a29g735bg4d3ag8832g7cd2022f7e27">Shield Prison</content>
 	<content contentuid="h979e3a93g84a4g434cg8320gb5eb3931bee0">War Charge</content>
@@ -1629,6 +1631,7 @@
 	<content contentuid="hacdffffagd70fg461dgb468gfb695746b853">Bag of Special Tokens</content>
 	<content contentuid="hacecc8abgd7bag4eb6gb284g68907a29d4e6">Reinforced Katana</content>
 	<content contentuid="had13bb21g843dg43f1ga05ag613aa954fbb1">Stunning Arrow</content>
+	<content contentuid="had396c8dgfa88g44b5g983fg250eecb5d5f4">&lt;font color=&apos;#99AACC&apos;&gt;Gain [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_ScrollUseAPBonus] AP on use. Can only happen once per turn.&lt;/font&gt;</content>
 	<content contentuid="had5f3bfbge848g466dgb7d1g12421f236cfb">Reinforced Tanto</content>
 	<content contentuid="had6e38d1g75c1g4628gbf05g6ccb68e7b28b">Worn Runeblade of Earth</content>
 	<content contentuid="had6f1fc6g42bbg419fg82d1gb37013834ae4">Odachi of the Forsaken</content>
@@ -1676,6 +1679,7 @@
 	<content contentuid="hb20261f4g5595g4702gb045g998f4d9bdd25">Debug Menu</content>
 	<content contentuid="hb22c57efg4b49g4c61g8ebfg2534587f2c03">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb2347eefgdc6ag4ab1g82a4g21139b4a7917">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery V&lt;/font&gt;</content>
+	<content contentuid="hb253b8ddgba7dg4f42g9426gc62332e8ebca">&lt;font color=&apos;#99AACC&apos;&gt;Deep knowledge of sacred texts allows [Key:Target_Bless_DisplayName] to deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage] to enemy Undead.&lt;/font&gt;</content>
 	<content contentuid="hb275dc8eg9d9dg4ba9g8c76g3f9e4f447388">&lt;icon id=&apos;Target_Flurry&apos; icon=&apos;Skill_Warrior_Onslaught&apos;/&gt;Each hit with [Key:Target_Flurry_DisplayName] cleaves in a small cone.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Stalker_DisplayName,LLWEAPONEX_MB_Axe_Stalker&apos; icon=&apos;LLWEAPONEX_UI_PassiveBonus&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Stalker]</content>
 	<content contentuid="hb2773ad0g3c62g4ba3gbc63gb215e6b9e0f7">Soulcursed Ebon Skewer</content>
 	<content contentuid="hb28cf019g6f7dg4a3fg9f19gf8721bd23f46">An old blindfold, said to once belong to a monk in a distance land.&lt;br&gt;By choosing to cloak the perceived world in darkness, the monk found her inner strength grow.</content>
@@ -1793,6 +1797,7 @@
 	<content contentuid="hbf6365bdga33fg4332g823dge30a4b8f16ca">Musashi&apos;s Victory</content>
 	<content contentuid="hbf879135gcdb1g4a16gbcd7gc3a8b2c8592a">Expert Dual Shieldsman</content>
 	<content contentuid="hbfa1685fg8c26g4327g9a2ag14f7c718001e">Omnibolt, Heaven&apos;s Wrath</content>
+	<content contentuid="hbfb6fc77gdf67g48b9g9c80g9d5d12d4b5ee">&lt;font color=&apos;#FF2222&apos;&gt;Bonus AP already gained this turn.&lt;/font&gt;</content>
 	<content contentuid="hbfd7a8fdg607fg4176ga182g2be56bbc7209">Journeyman Staff Acolyte</content>
 	<content contentuid="hc01d8aa2g9c74g4748g89d2gbc3fbf0ad976">Mighty Dragonslayer Gloves</content>
 	<content contentuid="hc0797ac0g427fg415cgb1a6gfca18c3261e1">Throw Remote Charge</content>
@@ -2223,6 +2228,7 @@
 	<content contentuid="hf1c5d51agf5a3g4250gaf82g4a8237468a32">Argh!</content>
 	<content contentuid="hf1cc24b6g3c04g4414gb2d1g7bce123ef94c">Steel Odachi</content>
 	<content contentuid="hf1e05614g2d6cg4d27g8a8bg866e9ce3d338">Activate the &lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; to enemies hit for 1 turn.</content>
+	<content contentuid="hf1ec1489g29f3g43f4g9452gc4f4e8e0c108">Duration increased by [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_TurnBonus].&lt;/font&gt;</content>
 	<content contentuid="hf2062266gf3d0g4322g8e0dgd0cd88ddd27a">A shield designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="hf208e35egd21eg41e9gbadbga737e5e106cf">Eagle Eye, Master Archer</content>
 	<content contentuid="hf20cd8bagadbdg480cga5d2ge6b2af96dfc0">Old Quarterstaff</content>
