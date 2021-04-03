@@ -1,4 +1,4 @@
-MasteryBonusManager.RegisterSkillListener({"Shout_FleshSacrifice", "Shout_EnemyFleshSacrifice"}, {"BLOOD_EMPOWER"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener({"Shout_FleshSacrifice", "Shout_EnemyFleshSacrifice"}, "BLOOD_EMPOWER", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		---@return string[]
 		local party = GameHelpers.GetParty(char, true, true, false, false)

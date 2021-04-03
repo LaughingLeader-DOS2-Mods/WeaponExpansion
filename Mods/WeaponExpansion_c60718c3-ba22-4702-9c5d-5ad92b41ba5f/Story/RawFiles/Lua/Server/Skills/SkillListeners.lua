@@ -1,7 +1,3 @@
-SKILL_STATE = LeaderLib.SKILL_STATE
----@type fun(skill:string|string[], callback:LeaderLibSkillListenerCallback):void
-local RegisterSkillListener = LeaderLib.RegisterSkillListener
-
 local SkillListeners = {
 	SkillType = {},
 	Element = {},

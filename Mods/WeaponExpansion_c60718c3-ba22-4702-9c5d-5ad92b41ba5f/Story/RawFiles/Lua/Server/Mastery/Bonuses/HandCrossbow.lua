@@ -36,7 +36,7 @@ function LaunchWhirlwindHandCrossbowBolt(uuid, target)
 	end
 end
 
-MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, {"WHIRLWIND_BOLTS"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, "WHIRLWIND_BOLTS", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.USED then
 		local uuid = GetUUID(char)
 		if whirlwindHandCrossbowTargets[uuid] == nil then
@@ -57,7 +57,7 @@ end)
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param skillData SkillEventData|HitData
-MasteryBonusManager.RegisterSkillListener({"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"}, {"HANDCROSSBOW_JUMP_MARKING"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener({"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"}, "HANDCROSSBOW_JUMP_MARKING", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST and CharacterIsInCombat(char) == 1 then
 		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then

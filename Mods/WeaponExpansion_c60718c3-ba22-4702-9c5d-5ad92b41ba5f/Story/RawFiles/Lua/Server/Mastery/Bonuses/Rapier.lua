@@ -3,7 +3,7 @@
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param skillData SkillEventData|HitData
-MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Rapier_Mastery1.SUCKER_PUNCH_COMBO.Skills, {"SUCKER_PUNCH_COMBO"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Rapier_Mastery1.SUCKER_PUNCH_COMBO.Skills, "SUCKER_PUNCH_COMBO", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		ApplyStatus(char, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1", 12.0, 0, char)
 	elseif state == SKILL_STATE.HIT and skillData.Success then

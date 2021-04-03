@@ -340,7 +340,7 @@ end
 --     end
 -- end)
 
-MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_EnemyVault"}, {"KATANA_VAULT"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_EnemyVault"}, "KATANA_VAULT", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.HIT then
 		ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", 6.0, 0, char)
 		StatusManager.SaveTurnEndStatus(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", char)

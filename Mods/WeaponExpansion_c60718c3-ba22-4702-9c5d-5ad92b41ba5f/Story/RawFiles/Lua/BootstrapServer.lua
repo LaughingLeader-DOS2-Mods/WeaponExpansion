@@ -6,6 +6,7 @@ StartTimer = Mods.LeaderLib.StartTimer
 CancelTimer = Mods.LeaderLib.CancelTimer
 RegisterSkillListener = Mods.LeaderLib.RegisterSkillListener
 RegisterStatusListener = Mods.LeaderLib.RegisterStatusListener
+SKILL_STATE = Mods.LeaderLib.SKILL_STATE
 
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {

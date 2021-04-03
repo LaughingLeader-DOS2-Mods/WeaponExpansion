@@ -1,4 +1,4 @@
-MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_EnemyPetrifyingTouch"}, {"PETRIFYING_SLAM"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_EnemyPetrifyingTouch"}, "PETRIFYING_SLAM", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_R_HandFX")
 		PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_L_HandFX")
