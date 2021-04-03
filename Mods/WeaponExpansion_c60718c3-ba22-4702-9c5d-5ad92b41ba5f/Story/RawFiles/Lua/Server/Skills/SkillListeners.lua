@@ -19,7 +19,7 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", function(skill, c
 	end
 end)
 
-RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", function(skill, char, state, data)
+RegisterSkillListener({"Projectile_LLWEAPONEX_Greatbow_PiercingShot", "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Enemy"}, function(skill, char, state, data)
 	if state == SKILL_STATE.HIT and data.Success then
 		if IsTagged(data.Target, "DRAGON") == 1 then
 			ApplyStatus(data.Target, "LLWEAPONEX_DRAGONS_BANE", 6.0, 0, char)
@@ -183,9 +183,8 @@ end)
 
 RegisterSkillListener({"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"}, function(skill, char, state, data)
 	if state == SKILL_STATE.HIT then
-		--local target = Ext.GetCharacter(data.Target)
 		-- Silver bolts / Bullets do bonus damage to undead/voidwoken
-		if TagHelpers.IsUndeadOrVoidwoken(data.Target) then
+		if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
 			local character = Ext.GetCharacter(char)
 			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
 				local bonus = Ext.ExtraData.LLWEAPONEX_HandCrossbow_SilverBonusDamage or 1.5
@@ -198,7 +197,7 @@ end)
 RegisterSkillListener({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"}, function(skill, char, state, data)
 	if state == SKILL_STATE.HIT then
 		-- Silver bullets do bonus damage to undead/voidwoken
-		if TagHelpers.IsUndeadOrVoidwoken(data.Target) then
+		if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
 			local character = Ext.GetCharacter(char)
 			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
 				local bonus = Ext.ExtraData.LLWEAPONEX_Pistol_SilverBonusDamage or 1.5
