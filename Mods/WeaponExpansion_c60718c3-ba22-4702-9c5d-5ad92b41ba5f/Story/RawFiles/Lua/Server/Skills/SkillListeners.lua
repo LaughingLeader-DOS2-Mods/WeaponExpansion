@@ -1,68 +1,4 @@
-local SkillListeners = {
-	SkillType = {},
-	Element = {},
-	Any = {}
-}
-
-if SkillManager == nil then
-	SkillManager = {}
-end
-
-function SkillManager.RegisterTypeListener(skilltype, func)
-	skilltype = string.lower(skilltype)
-	if SkillListeners.SkillType[skilltype] == nil then
-		SkillListeners.SkillType[skilltype] = {}
-	end
-	table.insert(SkillListeners.SkillType[skilltype], func)
-end
-
-function SkillManager.RegisterElementListener(element, func)
-	skilltype = string.lower(element)
-	if SkillListeners.Element[element] == nil then
-		SkillListeners.Element[element] = {}
-	end
-	table.insert(SkillListeners.Element[element], func)
-end
-
-function SkillManager.RegisterAnySkillListener(func)
-	table.insert(SkillListeners.Any, func)
-end
-
-local function RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
-	for i=1,#tbl do
-		local callback = tbl[i]
-		local b,err = xpcall(callback, debug.traceback, uuid, state, skill, skilltype, element)
-		if not b then
-			Ext.PrintError(err)
-		end
-	end
-end
-
-function OnSkillEvent(uuid, state, skill, skilltype, element)
-	element = string.lower(element)
-	skilltype = string.lower(skilltype)
-
-	local tbl = SkillListeners.Element[element]
-	if tbl ~= nil and #tbl > 0 then
-		RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
-	end
-
-	local tbl = SkillListeners.SkillType[skilltype]
-	if tbl ~= nil and #tbl > 0 then
-		RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
-	end
-
-	local tbl = SkillListeners.Any
-	if #tbl > 0 then
-		RunSkillCallbacks(tbl, uuid, state, skill, skilltype, element)
-	end
-end
-
----@param skill string
----@param char string
----@param state SkillState
----@param data SkillEventData|HitData
-local function AimedShotBonuses(skill, char, state, data)
+RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", function(skill, char, state, data)
 	if state == SKILL_STATE.PREPARE then
 		--ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", -1.0, 0, char)
 		--Mods.LeaderLib.StartTimer("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
@@ -81,53 +17,17 @@ local function AimedShotBonuses(skill, char, state, data)
 		Osi.LeaderLib_Timers_CancelObjectObjectTimer(char, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
 		SetStoryEvent(char, "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
 	end
-end
-RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", AimedShotBonuses)
+end)
 
----@param skill string
----@param char string
----@param state SkillState
----@param data HitData
-local function Greatbow_PiercingShot_DragonBonus(skill, char, state, data)
+RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", function(skill, char, state, data)
 	if state == SKILL_STATE.HIT and data.Success then
 		if IsTagged(data.Target, "DRAGON") == 1 then
 			ApplyStatus(data.Target, "LLWEAPONEX_DRAGONS_BANE", 6.0, 0, char)
 		end
 	end
-end
-RegisterSkillListener("Projectile_LLWEAPONEX_Greatbow_PiercingShot", Greatbow_PiercingShot_DragonBonus)
+end)
 
--- local function CheckAimedShotBonus(data)
--- 	local char = data[1]
--- 	if char ~= nil and HasActiveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY") == 1 then
--- 		local removeStatus = false
--- 		local action = NRD_CharacterGetCurrentAction(char)
--- 		if action ~= "PrepareSkill" and action ~= "UseSkill" then
--- 			removeStatus = true
--- 		else
--- 			local skillprototype = NRD_ActionStateGetString(char, "SkillId")
--- 			if skillprototype ~= "" and skillprototype ~= nil then
--- 				local skill = string.gsub(skillprototype, "_%-?%d+$", "")
--- 				if skill ~= "Projectile_LLWEAPONEX_Rifle_AimedShot" then
--- 					removeStatus = true
--- 				end
--- 			end
--- 		end
--- 		if removeStatus then
--- 			RemoveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY")
--- 		else
--- 			Mods.LeaderLib.StartTimer("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
--- 		end
--- 	end
--- end
-
--- OnTimerFinished["Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus"] = CheckAimedShotBonus
-
----@param skill string
----@param char string
----@param state SkillState
----@param data SkillEventData|HitData
-local function SkyShot(skill, char, state, data)
+RegisterSkillListener({"Projectile_SkyShot", "Projectile_EnemySkyShot"}, function(skill, char, state, data)
 	if IsTagged(char, "LLWEAPONEX_Omnibolt_Equipped") == 1 then
 		if state == SKILL_STATE.HIT and data.Success and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
 			GameHelpers.ExplodeProjectile(char, data.Target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
@@ -143,12 +43,9 @@ local function SkyShot(skill, char, state, data)
 			LeaderLib.StartTimer("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
 		end
 	end
-end
+end)
 
-RegisterSkillListener("Projectile_SkyShot", SkyShot)
-RegisterSkillListener("Projectile_EnemySkyShot", SkyShot)
-
-local function ProcGreatbowLightningStrike(data)
+OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = function(data)
 	local char = data[1]
 	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
 		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition")
@@ -156,14 +53,9 @@ local function ProcGreatbowLightningStrike(data)
 	end
 end
 
-OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = ProcGreatbowLightningStrike
-
 -- Placeholder until we can check a character's Treasures array
 local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
 
----@param skill string
----@param char string
----@param state SkillState
 ---@param data HitData
 RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, data)
 	if state == SKILL_STATE.HIT and data.Success then
@@ -239,14 +131,12 @@ RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, da
 	end
 end)
 
---Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy
-
 ---@param reverse boolean
 ---@param skill string
 ---@param instant boolean
 ---@param char string
 ---@param state SkillState
----@param data HitData
+---@param data SkillEventData
 local function SwapSkills(nextSkill, instant, skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		if CharacterIsInCombat(char) == 1 or instant then
