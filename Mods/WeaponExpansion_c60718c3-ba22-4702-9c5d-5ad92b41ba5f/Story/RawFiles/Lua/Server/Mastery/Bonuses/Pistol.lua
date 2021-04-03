@@ -1,4 +1,4 @@
-MasteryBonusManager.RegisterSkillListener({"Shout_Adrenaline", "Shout_EnemyAdrenaline"}, {"PISTOL_ADRENALINE"}, function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener({"Shout_Adrenaline", "Shout_EnemyAdrenaline"}, "PISTOL_ADRENALINE", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.CAST then
 		SetTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
 		CharacterStatusText(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
@@ -9,7 +9,7 @@ end)
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param skillData SkillEventData|HitData
-MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Pistol_Mastery1.PISTOL_CLOAKEDJUMP.Skills, {"PISTOL_CLOAKEDJUMP"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Pistol_Mastery1.PISTOL_CLOAKEDJUMP.Skills, "PISTOL_CLOAKEDJUMP", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		if CharacterHasSkill(char, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
 			LeaderLib.SwapSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "Projectile_LLWEAPONEX_Pistol_Shoot")

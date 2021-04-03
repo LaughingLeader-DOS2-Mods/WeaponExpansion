@@ -15,7 +15,7 @@ local warChargeStatuses = {
 local rushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
 
 ---@param hitData HitData
-MasteryBonusManager.RegisterSkillListener(rushSkills, {"BANNER_WARCHARGE"}, function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener(rushSkills, "BANNER_WARCHARGE", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.CAST then
 		local hasStatus = false
 		for i,status in pairs(warChargeStatuses) do
@@ -44,10 +44,6 @@ MasteryBonusManager.RegisterSkillListener(rushSkills, {"BANNER_WARCHARGE"}, func
 	end
 end)
 
----@param target string
----@param status string
----@param source string
----@param bonuses table<string,table<string,boolean>>
 MasteryBonusManager.RegisterStatusListener(StatusEvent.Applied, "HARMONY", "BANNER_RALLYINGCRY", function(target, status, source, bonuses)
 	if (ObjectIsCharacter(target) == 1 
 	and not GameHelpers.Status.IsDisabled(target, true)

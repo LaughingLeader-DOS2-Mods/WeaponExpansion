@@ -1,4 +1,4 @@
-MasteryBonusManager.RegisterSkillListener({"Target_CripplingBlow", "Target_EnemyCripplingBlow"}, {"AXE_BONUSDAMAGE"}, function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener({"Target_CripplingBlow", "Target_EnemyCripplingBlow"}, "AXE_BONUSDAMAGE", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
 		if GameHelpers.Status.IsDisabled(hitData.Target) then
 			GameHelpers.ExplodeProjectile(char, hitData.Target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
@@ -8,7 +8,7 @@ end)
 
 local whirlwindSkills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3"}
 
-MasteryBonusManager.RegisterSkillListener(whirlwindSkills, {"AXE_SPINNING"}, function(bonuses, skill, char, state, skillData)
+MasteryBonusManager.RegisterSkillListener(whirlwindSkills, "AXE_SPINNING", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		if skill == "Shout_Whirlwind" or "Shout_EnemyWhirlwind" then
 			GameHelpers.ClearActionQueue(char)
