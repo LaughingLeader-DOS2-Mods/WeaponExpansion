@@ -7,7 +7,7 @@ RegisterListener("ClientCharacterChanged", function(uuid, userID, profile, netID
 	if Ext.GetGameState() == "Running" then
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
 		if ui ~= nil then
-			UI.SetCharacterSheetDamageText(ui, netID)
+			SetCharacterSheetDamageText(ui, netID)
 		end
 	end
 end)

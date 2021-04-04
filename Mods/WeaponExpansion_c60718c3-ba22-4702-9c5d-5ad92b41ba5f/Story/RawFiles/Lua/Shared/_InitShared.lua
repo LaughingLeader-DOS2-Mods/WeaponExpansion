@@ -1,5 +1,3 @@
-Mods.LeaderLib.ImportUnsafe(Mods.WeaponExpansion)
-
 Main = {}
 Debug = {
 	MasteryTests = false
@@ -44,8 +42,6 @@ AttributeScaleTables = {
 --- @type table<string,string>
 Tags = {}
 
-UI = {}
-
 Origin = {
 	-- S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b
 	Harken = "e446752a-13cc-4a88-a32e-5df244c90d8b",
@@ -67,6 +63,11 @@ MODID = {
 	ArmorMitigation = "edf1898c-d375-47e7-919a-11d5d44d1cca",
 	EE2Core = "63bb9b65-2964-4c10-be5b-55a63ec02fa0",
 }
+
+---@type ModSettings
+Settings = {}
+
+Mods.LeaderLib.ImportUnsafe(Mods.WeaponExpansion)
 
 Ext.Require("Shared/MasteryHelpers.lua")
 Ext.Require("Shared/MasteryRegistration.lua")
@@ -91,9 +92,6 @@ Ext.Require("Shared/ExtenderHelpers.lua")
 Ext.Require("Shared/SharedDataHooks.lua")
 Ext.Require("Shared/Items/RunicCannon.lua")
 local initSettings = Ext.Require("Shared/Settings.lua")
-
----@type ModSettings
-Settings = nil
 
 -- if Vars.DebugMode then
 -- 	Ext.Require("Shared/Debug/GameMathTracing.lua")

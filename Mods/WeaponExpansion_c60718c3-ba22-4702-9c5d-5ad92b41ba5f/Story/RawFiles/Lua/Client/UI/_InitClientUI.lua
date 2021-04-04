@@ -63,7 +63,7 @@ secStat_array Mapping:
 local damageStatID = 6
 
 ---@param ui UIObject
-function UI.SetCharacterSheetDamageText(ui, uuid)
+function SetCharacterSheetDamageText(ui, uuid)
 	local character = Ext.GetCharacter(uuid)
 	if character ~= nil and UnarmedHelpers.HasUnarmedWeaponStats(character.Stats) then
 		local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
