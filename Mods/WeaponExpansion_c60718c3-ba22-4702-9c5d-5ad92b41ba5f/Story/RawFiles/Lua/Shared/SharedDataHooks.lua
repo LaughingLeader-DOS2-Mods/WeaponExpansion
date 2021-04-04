@@ -17,7 +17,7 @@ if Ext.IsServer() then
 	---@param profile string
 	---@param uuid string
 	---@param isHost boolean
-	LeaderLib.RegisterListener("SyncData", SyncDataToClient)
+	RegisterListener("SyncData", SyncDataToClient)
 end
 
 if Ext.IsClient() then
@@ -27,7 +27,7 @@ if Ext.IsClient() then
 		PersistentVars.SkillData.DarkFireballCount = vtable.DarkFireballCount
 	end)
 	-- Checks for SharedData.RegionData need to happen here since this is after that data has been synced
-	LeaderLib.RegisterListener("ClientDataSynced", function(modData, sharedData)
+	RegisterListener("ClientDataSynced", function(modData, sharedData)
 		if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Client.Character.IsInCharacterCreation then
 			MasteryMenu.SetToggleButtonVisibility(false, false)
 		elseif SharedData.RegionData.LevelType == LEVELTYPE.GAME then

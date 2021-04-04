@@ -110,7 +110,7 @@ local function OnPrepareHit(target,source,damage,handle)
 		end
 	end
 end
-LeaderLib.RegisterListener("OnPrepareHit", OnPrepareHit)
+RegisterListener("OnPrepareHit", OnPrepareHit)
 
 local function WeaponIsTagged(char, weapon, tag)
 	if (weapon ~= nil and IsTagged(weapon, tag) == 1) then
@@ -123,7 +123,7 @@ end
 --- @param source string
 --- @param damage integer
 --- @param handle integer
-LeaderLib.RegisterListener("OnHit", function(target,source,damage,handle)
+RegisterListener("OnHit", function(target,source,damage,handle)
 	if Vars.DebugMode then
 		printd(string.format("[LLWEAPONEX:OnHit] skill(%s) target(%s) source(%s)", NRD_StatusGetString(target, handle, "SkillId"), target, source))
 	end

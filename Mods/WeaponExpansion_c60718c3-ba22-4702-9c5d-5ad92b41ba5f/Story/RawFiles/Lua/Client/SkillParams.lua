@@ -163,7 +163,7 @@ local function GetDamageParamResult(param_func, skill, character, isFromItem)
 				end
 				if totalDamageTypes > 0 then
 					if totalDamageTypes > 1 then
-						return LeaderLib.Common.StringJoin(", ", damageTexts)
+						return Common.StringJoin(", ", damageTexts)
 					else
 						return damageTexts[1]
 					end

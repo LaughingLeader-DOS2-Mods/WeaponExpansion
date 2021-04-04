@@ -448,10 +448,10 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 
 		masteryBoost = masteryBoost + 5
 		--print("LLWEAPONEX_HandCrossbow mastery boost:", masteryLevel, masteryBoost)
-		--print(LeaderLib.Common.Dump(attacker.Character:GetTags()))
+		--print(Common.Dump(attacker.Character:GetTags()))
 		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost, nil, nil, rarity)
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
-		--Ext.Print(LeaderLib.Common.Dump(weapon))
+		--Ext.Print(Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
 		--skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
 		--skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
@@ -531,7 +531,7 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		--print("LLWEAPONEX_Pistol mastery boost:", masteryLevel, masteryBoost)
 		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost, nil, nil, rarity)
 		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
-		--Ext.Print(LeaderLib.Common.Dump(weapon))
+		--Ext.Print(Common.Dump(weapon))
 		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
 		--skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
 		--skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
@@ -543,11 +543,11 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 
 	-- Ext.Print("Skill Stats:")
 	-- Ext.Print("================================")
-	-- Ext.Print(LeaderLib.Common.Dump(skill))
+	-- Ext.Print(Common.Dump(skill))
 	-- Ext.Print("================================")
 	-- Ext.Print("Fake Weapon Stats:")
 	-- Ext.Print("================================")
-	-- Ext.Print(LeaderLib.Common.Dump(weapon))
+	-- Ext.Print(Common.Dump(weapon))
 	-- Ext.Print("================================")
 	-- Ext.Print("Real Weapon Stats:")
 	-- Ext.Print("================================")

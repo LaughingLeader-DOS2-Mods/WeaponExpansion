@@ -15,7 +15,7 @@ function Banner_ApplyEncouragedBonus(target, source)
 	if #cleansed > 0 then
 		--PlayBeamEffect(source, target, "RS3_FX_GP_Status_Retaliation_Beam_01", "Dummy_R_HandFX", "Dummy_BodyFX")
 		ApplyStatus(target, "LLWEAPONEX_ENCOURAGED_CLEANSE_BEAM_FX", 0.0, 1, source)
-		local text = Ext.GetTranslatedStringFromKey("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", LeaderLib.Common.StringJoin("/", cleansed))
+		local text = Ext.GetTranslatedStringFromKey("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", Common.StringJoin("/", cleansed))
 		CharacterStatusText(target,text)
 	end
 end
@@ -34,7 +34,7 @@ local function GetHitResistanceBonus(character, damageType, resistancePenetratio
 	end
 end
 
-LeaderLib.RegisterListener("GetHitResistanceBonus", GetHitResistanceBonus)
+RegisterListener("GetHitResistanceBonus", GetHitResistanceBonus)
 
 -- function OnSuckerPunchApplied(target, source)
 -- 	local turns = GetStatusTurns(target, "LLWEAPONEX_SUCKER_PUNCH")

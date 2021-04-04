@@ -38,7 +38,7 @@ end
 
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
-	--printd("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--printd("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
 	if call == "hotbarBtnPressed" or call == "selectedTab" or call == "showUI" then
 		CloseMenu()
 	end
@@ -46,7 +46,7 @@ end
 
 local function OnSidebarEvent(ui, call, ...)
 	local params = {...}
-	--printd("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--printd("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
 	if call == "charSel" then
 		CloseMenu()
 	end
@@ -54,7 +54,7 @@ end
 
 local function OnHotbarEvent(ui, call, ...)
 	local params = {...}
-	--printd("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..LeaderLib.Common.Dump(params)..")")
+	--printd("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
 	
 	if call == "hotbarBtnPressed" then
 		CloseMenu()
@@ -217,7 +217,7 @@ local function parseDescription(ui, index, descriptionText)
 			}
 		end
 	end
-	--print(LeaderLib.Common.Dump(result))
+	--print(Common.Dump(result))
 	for i,v in pairs(result) do
 		if v.Icon ~= "" then
 			local _,_,iconName = v.Icon:find("id='(.-)'")
@@ -300,7 +300,7 @@ end
 local function OnMenuEvent(ui, call, ...)
 	local params = {...}
 	if call ~= "overMastery" then
-		printd("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(LeaderLib.Common.Dump(params))..")")
+		printd("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
 	end
 	if call == "requestCloseUI" or call == "requestCloseMasteryMenu" then
 		CloseMenu(true)
@@ -533,7 +533,7 @@ local function getRankTooltip(data, i)
 	local rankName = nil
 	local xpMax = math.ceil(Mastery.Variables.RankVariables[i].Required)
 	if rankNameData ~= nil then
-		return string.format("<font color='%s'>%s</font><br>%s xp", rankNameData.Color, rankNameData.Name.Value, LeaderLib.Common.FormatNumber(xpMax))
+		return string.format("<font color='%s'>%s</font><br>%s xp", rankNameData.Color, rankNameData.Name.Value, Common.FormatNumber(xpMax))
 	else
 		local rankText = "_Rank"..tostring(i)
 		return GameHelpers.GetStringKeyText("LLWEAPONEX_UI_MasteryMenu" .. "_Rank" .. tostring(i))
@@ -551,7 +551,7 @@ local function OpenMasteryMenu(characterMasteryData)
 		MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(Ext.GetCharacter(characterMasteryData.UUID).Handle)
 	end
 	printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
-	--printd(LeaderLib.Common.Dump(characterMasteryData))
+	--printd(Common.Dump(characterMasteryData))
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui ~= nil then
 		MasteryMenu.Instance = ui
@@ -595,7 +595,7 @@ local function OpenMasteryMenu(characterMasteryData)
 				if rank >= Mastery.Variables.MaxRank then
 					expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
 				end
-				ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, LeaderLib.Common.FormatNumber(xp), LeaderLib.Common.FormatNumber(xpMax)))
+				ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, Common.FormatNumber(xp), Common.FormatNumber(xpMax)))
 				
 				for k=1,Mastery.Variables.MaxRank,1 do
 					ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))

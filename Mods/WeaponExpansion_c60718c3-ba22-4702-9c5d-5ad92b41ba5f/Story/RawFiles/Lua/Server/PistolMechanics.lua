@@ -93,7 +93,7 @@ end
 ---@param request EsvShootProjectileRequest
 Ext.RegisterListener("BeforeShootProjectile", function (request)
 	--print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.SkillId))
-	local skill = LeaderLib.GetSkillEntryName(request.SkillId) or ""
+	local skill = GetSkillEntryName(request.SkillId) or ""
 	if skill == "Projectile_LLWEAPONEX_Pistol_Shoot" then
 		local caster = Ext.GetCharacter(request.Caster)
 		request.SkillId = GetPistolProjectileSkill(caster).."-1"
@@ -116,7 +116,7 @@ end)
 
 ---@param projectile EsvProjectile
 Ext.RegisterListener("ShootProjectile", function (projectile)
-	local skill = LeaderLib.GetSkillEntryName(projectile.SkillId) or ""
+	local skill = GetSkillEntryName(projectile.SkillId) or ""
 	if string.find(skill, "Projectile_LLWEAPONEX_Pistol_Shoot") then
 		local caster = Ext.GetCharacter(projectile.CasterHandle)
 		local status = GetPistolExplosionEffect(caster)
@@ -159,7 +159,7 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char
 	elseif state == SKILL_STATE.CAST then
 		local caster = Ext.GetCharacter(char)
 		local delay = GetPistolRemoveDelay(caster)
-		LeaderLib.StartTimer("LLWEAPONEX_RemovePistolEffect", delay, char)
+		StartTimer("LLWEAPONEX_RemovePistolEffect", delay, char)
 	end
 end)
 

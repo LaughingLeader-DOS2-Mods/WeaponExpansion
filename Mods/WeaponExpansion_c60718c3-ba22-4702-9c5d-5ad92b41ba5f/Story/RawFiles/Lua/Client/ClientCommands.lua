@@ -121,7 +121,7 @@ local function SyncItemBoostChanges(item, changes)
 	local boostMap = {}
 	for i=2,#item.Stats.DynamicStats do
 		local boost = item.Stats.DynamicStats[i]
-		LeaderLib.PrintLog("[SyncItemBoostChanges] [%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
+		--PrintLog("[SyncItemBoostChanges] [%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
 		if not StringHelpers.IsNullOrEmpty(boost.ObjectInstanceName) then
 			boostMap[boost.ObjectInstanceName] = boost
 		end
@@ -166,7 +166,7 @@ local function CaptureRewardScreenItems(ui, method)
 				if item ~= nil then
 					if Vars.DebugMode then
 						print("Found quest reward item", item.NetID, handle)
-						LeaderLib.PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos))
+						PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos))
 					end
 					rewardScreenItems[item.NetID] = item
 					local changes = syncUpdateScreenItems[item.NetID]

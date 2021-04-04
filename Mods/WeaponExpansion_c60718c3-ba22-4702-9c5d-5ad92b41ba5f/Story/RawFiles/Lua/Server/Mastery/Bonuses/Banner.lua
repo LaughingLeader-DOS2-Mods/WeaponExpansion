@@ -197,7 +197,7 @@ MasteryBonusManager.RegisterStatusAttemptListener("FLANKING", nil, function(targ
 	end
 end, true)
 
-LeaderLib.RegisterListener("TurnDelayed", function(uuid)
+RegisterListener("TurnDelayed", function(uuid)
 	local statusSource = nil
 	if HasActiveStatus(uuid, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS") == 1 then
 		statusSource = Ext.GetStatus(uuid, "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS").StatusSourceHandle

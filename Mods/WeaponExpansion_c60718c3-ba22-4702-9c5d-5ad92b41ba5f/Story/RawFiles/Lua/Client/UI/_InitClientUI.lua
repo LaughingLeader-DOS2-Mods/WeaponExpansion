@@ -26,8 +26,8 @@ end
 --Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_ModuleSetup)
 
 local function OnMouseIconEvent(ui, call, ...)
-	local params = LeaderLib.Common.FlattenTable({...})
-	Ext.Print("[LLWEAPONEX:Client:UI.lua:OnMouseIconEvent] Event called. call("..tostring(call)..") params("..tostring(LeaderLib.Common.Dump(params))..")")
+	local params = Common.FlattenTable({...})
+	Ext.Print("[LLWEAPONEX:Client:UI.lua:OnMouseIconEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
 end
 
 local events = {
@@ -79,7 +79,7 @@ end
 ---@param ui UIObject
 local function OnCharacterSheetUpdating(ui, call, ...)
 	local params = {...}
-	--printd("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] ",call," running params(", LeaderLib.Common.Dump(params))
+	--printd("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] ",call," running params(", Common.Dump(params))
 
 	local main = ui:GetRoot()
 	local array = main.secStat_array
@@ -210,7 +210,7 @@ local function LLWEAPONEX_UpdateStatusMC(call,datastr)
 	---@type MessageData
 	local data = MessageData:CreateFromString(datastr)
 	if data ~= nil then
-		--print(LeaderLib.Common.Dump(data.Params))
+		--print(Common.Dump(data.Params))
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
 		if ui ~= nil then
 			
@@ -224,7 +224,7 @@ local function DisplayOverheadDamage(call,datastr)
 	---@type MessageData
 	local data = MessageData:CreateFromString(datastr)
 	if data ~= nil then
-		--print(LeaderLib.Common.Dump(data.Params))
+		--print(Common.Dump(data.Params))
 		---@type UIObject
 		local ui = Ext.GetBuiltinUI("Public/Game/GUI/overhead.swf")
 		if ui ~= nil then

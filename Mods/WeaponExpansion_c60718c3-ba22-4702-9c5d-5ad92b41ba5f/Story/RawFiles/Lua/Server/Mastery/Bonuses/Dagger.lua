@@ -33,11 +33,11 @@ local function ThrowingKnifeBonus(bonuses, skill, char, state, skillData)
 			end
 		elseif state == SKILL_STATE.CAST then
 			if procSet then
-				Mods.LeaderLib.StartTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", 250, char)
+				StartTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", 250, char)
 			end
 		elseif state == SKILL_STATE.HIT then
 			if procSet and skillData.ID == HitData.ID then
-				Mods.LeaderLib.CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
+				CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
 				local explodeSkill = throwingKnifeBonuses[Ext.Random(1,2)]
 				GameHelpers.ExplodeProjectile(char, target, explodeSkill)
 				ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
@@ -65,7 +65,7 @@ local function ThrowingKnifeDelayedProc(funcParams)
 		NRD_ProjectileLaunch()
 		ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 	else
-		printd("ThrowingKnifeDelayedProc params: "..LeaderLib.Common.Dump(funcParams))
+		printd("ThrowingKnifeDelayedProc params: "..Common.Dump(funcParams))
 	end
 end
 

@@ -95,7 +95,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 	end
 
 	if character:HasTag("LLWEAPONEX_Firearm_Equipped") then
-		if not LeaderLib.StringHelpers.IsNullOrEmpty(description) then
+		if not StringHelpers.IsNullOrEmpty(description) then
 			description = description:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
 			descriptionElement.Label = description
 		end

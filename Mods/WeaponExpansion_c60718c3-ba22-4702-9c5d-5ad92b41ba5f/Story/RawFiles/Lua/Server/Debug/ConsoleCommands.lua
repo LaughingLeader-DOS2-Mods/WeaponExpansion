@@ -1,5 +1,3 @@
-local StartOneshotTimer = LeaderLib.StartOneshotTimer
-
 if Vars.DebugMode then
 	Ext.RegisterConsoleCommand("weaponex_tagboost", function()
 		local host = CharacterGetHostCharacter()
@@ -57,7 +55,7 @@ if Vars.DebugMode then
 	end
 	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks)
 
-	LeaderLib.RegisterListener("BeforeLuaReset", function()
+	RegisterListener("BeforeLuaReset", function()
 		Ext.BroadcastMessage("LLWEAPONEX_Debug_DestroyUI", "", nil)
 	end)
 

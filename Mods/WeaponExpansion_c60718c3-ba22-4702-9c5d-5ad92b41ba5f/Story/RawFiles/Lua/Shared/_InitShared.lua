@@ -1,14 +1,4 @@
-LeaderLib = Mods.LeaderLib
-
----@type GameHelpers
-GameHelpers = LeaderLib.GameHelpers
-Common = LeaderLib.Common
-StringHelpers = LeaderLib.StringHelpers
-LocalizedText = LeaderLib.LocalizedText
-printd = LeaderLib.PrintDebug
-printf = LeaderLib.PrintLog
-
-SKILL_STATE = LeaderLib.SKILL_STATE
+Mods.LeaderLib.ImportUnsafe(Mods.WeaponExpansion)
 
 Main = {}
 Debug = {
@@ -118,7 +108,7 @@ local defaultExperienceAmounts = {
 	--[5] = {Amount = 0, Required = 36000},
 }
 
-LeaderLib.RegisterLeaveActionPrefix("LLWEAPONEX")
+RegisterLeaveActionPrefix("LLWEAPONEX")
 
 local function SetupFemaleKorvash()
 	Ext.AddPathOverride("Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/CharacterCreation/OriginPresets/LLWEAPONEX_Korvash.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Korvash_Female.lsx")
@@ -170,7 +160,7 @@ local function LoadExperienceVariables()
 	end
 	--printd("[WeaponExpansion] Loaded mastery experience variables:")
 	--printd("==========================")
-	--printd(LeaderLib.Common.Dump(RankVariables))
+	--printd(Common.Dump(RankVariables))
 	--printd("==========================")
 
 	Mastery.Variables.MaxRank = math.floor(maxRank)
@@ -198,22 +188,15 @@ Ext.RegisterListener("SessionLoaded", function()
 	Settings = initSettings()
 
 	LoadExperienceVariables()
-	LeaderLib.EnableFeature("ApplyBonusWeaponStatuses")
-	LeaderLib.EnableFeature("FixChaosDamageDisplay")
-	LeaderLib.EnableFeature("FixCorrosiveMagicDamageDisplay")
-	LeaderLib.EnableFeature("FixRifleWeaponRequirement")
-	LeaderLib.EnableFeature("StatusParamSkillDamage")
-	LeaderLib.EnableFeature("TooltipGrammarHelper")
-    LeaderLib.EnableFeature("ReplaceTooltipPlaceholders")
-    LeaderLib.EnableFeature("FixFarOutManSkillRangeTooltip")
-	LeaderLib.EnableFeature("FormatTagElementTooltips")
+	EnableFeature("ApplyBonusWeaponStatuses")
+	EnableFeature("FixChaosDamageDisplay")
+	EnableFeature("FixCorrosiveMagicDamageDisplay")
+	EnableFeature("FixRifleWeaponRequirement")
+	EnableFeature("StatusParamSkillDamage")
+	EnableFeature("TooltipGrammarHelper")
+    EnableFeature("ReplaceTooltipPlaceholders")
+    EnableFeature("FixFarOutManSkillRangeTooltip")
+	EnableFeature("FormatTagElementTooltips")
 end)
 
 Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")
-
-SharedData = LeaderLib.SharedData
-LEVELTYPE = LeaderLib.LEVELTYPE
-if Ext.IsClient() then
-	---@type ClientData
-	Client = LeaderLib.Client
-end

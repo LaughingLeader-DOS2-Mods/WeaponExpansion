@@ -1,13 +1,5 @@
 Ext.Require("Shared/_InitShared.lua")
 
-RegisterProtectedOsirisListener = Mods.LeaderLib.RegisterProtectedOsirisListener
-StartOneshotTimer = Mods.LeaderLib.StartOneshotTimer
-StartTimer = Mods.LeaderLib.StartTimer
-CancelTimer = Mods.LeaderLib.CancelTimer
-RegisterSkillListener = Mods.LeaderLib.RegisterSkillListener
-RegisterStatusListener = Mods.LeaderLib.RegisterStatusListener
-SKILL_STATE = Mods.LeaderLib.SKILL_STATE
-
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
     SkillData = {
@@ -40,7 +32,7 @@ local defaultPersistentVars = {
 ---@type WeaponExpansionVars
 PersistentVars = Common.CopyTable(defaultPersistentVars, true)
 
-LeaderLib.RegisterListener("Initialized", function(region)
+RegisterListener("Initialized", function(region)
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
     if PersistentVars.StatusData.RemoveOnTurnEnd ~= nil then
         for uuid,data in pairs(PersistentVars.StatusData.RemoveOnTurnEnd) do
@@ -49,9 +41,9 @@ LeaderLib.RegisterListener("Initialized", function(region)
     end
 end)
 
-LeaderLib.RegisterListener("LuaReset", function()
+RegisterListener("LuaReset", function()
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
-    LeaderLib.InvokeListenerCallbacks(LoadPersistentVars)
+    InvokeListenerCallbacks(LoadPersistentVars)
     UpdateDarkFireballSkill(Origin.Korvash)
 end)
 
@@ -234,7 +226,7 @@ local function SessionSetup()
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
 
-    LeaderLib.InvokeListenerCallbacks(LoadPersistentVars)
+    InvokeListenerCallbacks(LoadPersistentVars)
 
     local b,err = xpcall(function()
         --local uniqueDataStr = Ext.LoadFile("WeaponExpansion_UniqueBaseStats.json")

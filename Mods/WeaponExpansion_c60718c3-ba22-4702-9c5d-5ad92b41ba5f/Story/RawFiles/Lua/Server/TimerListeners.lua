@@ -14,4 +14,4 @@ local function OnTimerFinished_RunCallbacks(event, ...)
 	end
 end
 
-LeaderLib.RegisterListener("TimerFinished", OnTimerFinished_RunCallbacks)
+RegisterListener("TimerFinished", OnTimerFinished_RunCallbacks)

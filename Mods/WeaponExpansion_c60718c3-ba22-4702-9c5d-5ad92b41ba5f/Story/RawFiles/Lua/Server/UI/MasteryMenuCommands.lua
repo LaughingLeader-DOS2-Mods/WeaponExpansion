@@ -12,7 +12,7 @@ function OpenMasteryMenu_Start(uuid, id)
 		local char,mastery,rank,xp = table.unpack(db)
 		masteries[mastery] = CharacterMasteryDataEntry:Create(xp,rank)
 	end
-	--print(LeaderLib.Common.Dump(masteries))
+	--print(Common.Dump(masteries))
 
 	---@type CharacterMasteryData
 	local data = CharacterMasteryData:Create(uuid, masteries)

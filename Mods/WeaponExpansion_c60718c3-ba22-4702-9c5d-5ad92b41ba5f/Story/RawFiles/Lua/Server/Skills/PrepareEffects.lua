@@ -40,8 +40,6 @@ local PrepareEffects = {
 PrepareEffects.Projectile_LLWEAPONEX_Greatbow_PiercingShot_Enemy = PrepareEffects.Projectile_LLWEAPONEX_Greatbow_PiercingShot
 PrepareEffects.Projectile_LLWEAPONEX_Greatbow_Knockback_Enemy = PrepareEffects.Projectile_LLWEAPONEX_Greatbow_Knockback
 
-SKILL_STATE = LeaderLib.SKILL_STATE
-
 local function PlaySkillEffect(char, state, funcParams, tagData)
 	if state == SKILL_STATE.PREPARE or state == SKILL_STATE.USED then
 		for tag,effectData in pairs(tagData) do

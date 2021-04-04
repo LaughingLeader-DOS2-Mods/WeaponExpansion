@@ -7,7 +7,7 @@ end
 ---@param skill SkillEventData
 ---@param character StatCharacter
 ---@return table<string, number[]>
-LeaderLib.RegisterListener("GetTooltipSkillDamage", function(skill, character)
+RegisterListener("GetTooltipSkillDamage", function(skill, character)
 	local paramText = SkillGetDescriptionParam(skill, character, false, "Damage")
 	if paramText ~= nil then
 		return paramText
@@ -17,7 +17,7 @@ end)
 ---@param skill SkillEventData
 ---@param character StatCharacter
 ---@return string
-LeaderLib.RegisterListener("GetTooltipSkillParam", function(skill, character, param)
+RegisterListener("GetTooltipSkillParam", function(skill, character, param)
 	local paramText = SkillGetDescriptionParam(skill, character, false, param)
 	if paramText ~= nil then
 		return paramText
@@ -38,7 +38,7 @@ function TooltipHandler.GetDescriptionText(character, data)
 		table.sort(tagKeys, sortTagParams)
 		for i,tagName in pairs(tagKeys) do
 			local tagData = data.Tags[tagName]
-			if SharedData.RegionData.LevelType == LeaderLib.LEVELTYPE.CHARACTER_CREATION or Mastery.HasMasteryRequirement(character, tagName) or Vars.DebugMode then
+			if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Mastery.HasMasteryRequirement(character, tagName) or Vars.DebugMode then
 				if tagData.NamePrefix ~= nil then
 					if namePrefix ~= "" then
 						namePrefix = namePrefix .. " "

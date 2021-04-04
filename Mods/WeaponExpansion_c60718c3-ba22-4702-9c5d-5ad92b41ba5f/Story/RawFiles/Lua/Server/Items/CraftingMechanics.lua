@@ -72,7 +72,7 @@ local function craftingTemplateMatch(entries, template, minCount)
 	for i,v in pairs(entries) do
 		if template == "NULL_00000000-0000-0000-0000-000000000000" and v == template then
 			count = count + 1
-		elseif not LeaderLib.StringHelpers.IsNullOrEmpty(v) and string.find(v, template) then
+		elseif not StringHelpers.IsNullOrEmpty(v) and string.find(v, template) then
 			count = count + 1
 		end
 	end
@@ -100,7 +100,7 @@ function OnCraftingProcessed(char, ...)
 	Ext.Print("[WeaponExpansion:OnCraftingProcessed]",char, table.unpack(itemArgs))
 	local items = {}
 	for i,v in pairs(itemArgs) do
-		if not LeaderLib.StringHelpers.IsNullOrEmpty(v) then
+		if not StringHelpers.IsNullOrEmpty(v) then
 			local template = getTemplateUUID(GetTemplate(v))
 			items[#items+1] = {
 				template,

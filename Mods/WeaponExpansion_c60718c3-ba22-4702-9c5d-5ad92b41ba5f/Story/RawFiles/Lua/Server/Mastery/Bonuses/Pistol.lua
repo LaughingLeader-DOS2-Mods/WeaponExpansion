@@ -12,10 +12,10 @@ end)
 MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Pistol_Mastery1.PISTOL_CLOAKEDJUMP.Skills, "PISTOL_CLOAKEDJUMP", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		if CharacterHasSkill(char, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
-			LeaderLib.SwapSkill(char, "Shout_LLWEAPONEX_Pistol_Reload", "Projectile_LLWEAPONEX_Pistol_Shoot")
+			GameHelpers.Skill.Swap(char, "Shout_LLWEAPONEX_Pistol_Reload", "Projectile_LLWEAPONEX_Pistol_Shoot")
 		end
 		if CharacterIsInCombat(char) == 1 then
-			LeaderLib.StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
+			StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
 		end
 	end
 end)
@@ -27,7 +27,7 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 		if data ~= nil then
 			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets", 1)
 			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius", 6.0)
-			local combatEnemies = LeaderLib.Common.ShuffleTable(data)
+			local combatEnemies = Common.ShuffleTable(data)
 			local lastDist = 999
 			local targets = {}
 			for i,v in pairs(combatEnemies) do
@@ -73,7 +73,7 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 			end
 		end
 	else
-		printd("CloakAndDagger_Pistol_MarkEnemy params: "..LeaderLib.Common.Dump(skillData))
+		printd("CloakAndDagger_Pistol_MarkEnemy params: "..Common.Dump(skillData))
 	end
 end
 

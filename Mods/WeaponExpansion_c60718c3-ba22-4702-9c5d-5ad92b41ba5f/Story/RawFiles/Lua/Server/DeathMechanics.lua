@@ -89,7 +89,7 @@ RegisterProtectedOsirisListener("TimerFinished", 1, "after", function(timerName)
 	end
 end)
 
-LeaderLib.RegisterListener("Initialized", function(region)
+RegisterListener("Initialized", function(region)
 	DeathManager.ActiveTimers = 0
 	for uuid,data in pairs(PersistentVars.OnDeath) do
 		local total = 0

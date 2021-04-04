@@ -92,17 +92,17 @@ function EquipmentManager.CheckWeaponRequirementTags(uuid)
 		else
 			SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		end
-		LeaderLib.RefreshSkillBar(uuid)
+		GameHelpers.UI.RefreshSkillBar(uuid)
 	elseif Mastery.HasMasteryRequirement(character, "LLWEAPONEX_Unarmed_Mastery1") then
 		ClearTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		ClearTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-		LeaderLib.RefreshSkillBar(uuid)
+		GameHelpers.UI.RefreshSkillBar(uuid)
 	else
 		ClearTag(uuid, "LLWEAPONEX_AnyWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-		LeaderLib.RefreshSkillBar(uuid)
+		GameHelpers.UI.RefreshSkillBar(uuid)
 	end
 
 	--[[ if IsPlayer(uuid) then
@@ -350,7 +350,7 @@ end
 
 function RemoveRodSkill(char, item)
 	local skill = GetVarFixedString(item, "LLWEAPONEX_Rod_ShootSkill")
-	if not LeaderLib.StringHelpers.IsNullOrEmpty(skill) then
+	if not StringHelpers.IsNullOrEmpty(skill) then
 		local mainhand = CharacterGetEquippedItem(char, "Weapon")
 		local offhand = CharacterGetEquippedItem(char, "Shield")
 		if not WeaponHasRodSkill(mainhand, skill) and not WeaponHasRodSkill(offhand, skill) then

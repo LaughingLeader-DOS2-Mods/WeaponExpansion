@@ -79,7 +79,7 @@ if Ext.IsServer() then
 end
 
 --[[
-Mods.LeaderLib.GameHelpers.ExplodeProjectile("3f20ae14-5339-4913-98f1-24476861ebd6", {188.23374462128,-17.0,354.77855068445}, "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion", 1)
+GameHelpers.ExplodeProjectile("3f20ae14-5339-4913-98f1-24476861ebd6", {188.23374462128,-17.0,354.77855068445}, "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion", 1)
 CreateExplosionAtPosition(188.23374462128,-17.0,354.77855068445, "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion", 2)
 ]]
 

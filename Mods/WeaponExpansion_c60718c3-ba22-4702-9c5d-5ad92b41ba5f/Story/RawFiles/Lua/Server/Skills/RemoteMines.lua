@@ -68,7 +68,7 @@ RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_REMOTEMINE_DETONATE", fu
 					Mines = mines,
 					Remaining = max
 				}
-				LeaderLib.StartTimer("LLWEAPONEX_OnDetonationTimer", 50, source, target)
+				StartTimer("LLWEAPONEX_OnDetonationTimer", 50, source, target)
 			end
 		end
 	end
@@ -112,7 +112,7 @@ local function OnDetonationTimer(timerData)
 					end
 
 					if minesData.Remaining > 0 and #minesData.Mines > 0 then
-						LeaderLib.StartTimer("LLWEAPONEX_OnDetonationTimer", 500, source, target)
+						StartTimer("LLWEAPONEX_OnDetonationTimer", 500, source, target)
 					else
 						data[source] = nil
 						if not Common.TableHasAnyEntry(data) then

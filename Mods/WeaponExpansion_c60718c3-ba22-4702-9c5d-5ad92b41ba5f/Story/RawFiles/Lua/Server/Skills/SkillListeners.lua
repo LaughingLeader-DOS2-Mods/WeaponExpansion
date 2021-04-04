@@ -1,7 +1,7 @@
 RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", function(skill, char, state, data)
 	if state == SKILL_STATE.PREPARE then
 		--ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", -1.0, 0, char)
-		--Mods.LeaderLib.StartTimer("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
+		--Mods.StartTimer("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
 	elseif state == SKILL_STATE.USED then
 		if HasActiveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY") == 0 then
 			ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, char)
@@ -40,7 +40,7 @@ RegisterSkillListener({"Projectile_SkyShot", "Projectile_EnemySkyShot"}, functio
 				SetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition", x, y, z)
 			end
 		elseif state == SKILL_STATE.CAST then
-			LeaderLib.StartTimer("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
+			StartTimer("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
 		end
 	end
 end)
@@ -141,7 +141,7 @@ local function SwapSkills(nextSkill, instant, skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		if CharacterIsInCombat(char) == 1 or instant then
 			if instant ~= true then
-				LeaderLib.StartOneshotTimer("LLWEAPONEX_Pistol_SwapSkills_"..skill..char, 500, function()
+				StartOneshotTimer("LLWEAPONEX_Pistol_SwapSkills_"..skill..char, 500, function()
 					GameHelpers.Skill.Swap(char, skill, nextSkill, true)
 				end)
 			else

@@ -63,7 +63,7 @@ MasteryBonusManager.RegisterSkillListener({"Jump_TacticalRetreat", "Jump_EnemyTa
 		if data ~= nil then
 			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets", 2)
 			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius", 4.0)
-			local combatEnemies = LeaderLib.Common.ShuffleTable(data)
+			local combatEnemies = Common.ShuffleTable(data)
 			for i,v in pairs(combatEnemies) do
 				local enemy = v[1]
 				if (enemy ~= char and CharacterIsEnemy(char, enemy) == 1 and 

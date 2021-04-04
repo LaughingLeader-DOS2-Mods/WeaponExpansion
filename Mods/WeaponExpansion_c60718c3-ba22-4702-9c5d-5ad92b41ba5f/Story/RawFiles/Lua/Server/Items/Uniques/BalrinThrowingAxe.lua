@@ -25,7 +25,7 @@ RegisterServerEventCallback(Vars.SERVEREVENT.OnModUpdated, function(lastVersion,
 	end
 end)
 
-LeaderLib.RegisterListener("NamedTimerFinished", "Timers_LLWEAPONEX_CheckForAxeMiss", function(timerName, char)
+RegisterListener("NamedTimerFinished", "Timers_LLWEAPONEX_CheckForAxeMiss", function(timerName, char)
 	EquipBalrinAxe(char)
 	CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 end)
