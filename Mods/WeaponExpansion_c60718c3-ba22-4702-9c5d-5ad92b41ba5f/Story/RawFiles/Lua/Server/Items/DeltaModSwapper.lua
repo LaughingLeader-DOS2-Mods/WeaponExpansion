@@ -253,17 +253,17 @@ local function GetAllBoosts(item)
 				local replacement = deltamods[v]
 				if replacement ~= nil then
 					if replacement == "" then
-						printd("Disabled deltamod",v,item)
+						PrintDebug("Disabled deltamod",v,item)
 						swapped = true
 					elseif type(replacement) == "function" then
 						local b,replacementVal = pcall(replacement, item, v)
 						if b then
-							printd("Swapped deltamod",v,"for",replacementVal,item)
+							PrintDebug("Swapped deltamod",v,"for",replacementVal,item)
 							finalBoosts[replacementVal] = boostType
 							swapped = true
 						end
 					else
-						printd("Swapped deltamod",v,"for",replacement,item)
+						PrintDebug("Swapped deltamod",v,"for",replacement,item)
 						finalBoosts[replacement] = boostType
 						swapped = true
 					end
@@ -283,20 +283,20 @@ local function GetAllBoosts(item)
 					for tag,deltamods in pairs(DeltamodSwap) do
 						if item:HasTag(tag) then
 							local replacement = deltamods[v]
-							printd(v, replacement)
+							PrintDebug(v, replacement)
 							if replacement ~= nil then
 								if replacement == "" then
-									printd("Disabled deltamod",v,item)
+									PrintDebug("Disabled deltamod",v,item)
 									swapped = true
 								elseif type(replacement) == "function" then
 									local b,replacementVal = pcall(replacement, item, v)
 									if b then
-										printd("Swapped deltamod",v,"for",replacementVal,item)
+										PrintDebug("Swapped deltamod",v,"for",replacementVal,item)
 										finalBoosts[replacementVal] = boostType
 										swapped = true
 									end
 								else
-									printd("Swapped deltamod",v,"for",replacement,item)
+									PrintDebug("Swapped deltamod",v,"for",replacement,item)
 									finalBoosts[replacement] = boostType
 									swapped = true
 								end
@@ -388,7 +388,7 @@ function SwapDeltaMods(item)
 
 				for boost,boostType in pairs(boosts) do
 					NRD_ItemCloneAddBoost(boostType, boost)
-					printd("Adding boost", boostType, boost)
+					PrintDebug("Adding boost", boostType, boost)
 				end
 
 				local clone = NRD_ItemClone()

@@ -61,7 +61,7 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	if Vars.DebugMode and IsTagged(target, "LLDUMMY_TrainingDummy") == 1 then
 		local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Random(0,999))
 		StartOneshotTimer(tDebugName, listenDelay/2, function()
-			printd("[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer", tDebugName)
+			PrintDebug("[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer", tDebugName)
 			DeathManager.OnDeath(target)
 		end)
 	end
@@ -73,7 +73,7 @@ RegisterProtectedOsirisListener("TimerFinished", 1, "after", function(timerName)
 			for attacker,attackerData in pairs(data.Attackers) do
 				for id,tName in pairs(attackerData) do
 					if tName ~= "" and tName == timerName then
-						printd("[LLWEAPONEX:DeathMechanics:TimerFinished] OnDeath timer finished", timerName, id, uuid, attacker)
+						PrintDebug("[LLWEAPONEX:DeathMechanics:TimerFinished] OnDeath timer finished", timerName, id, uuid, attacker)
 						FireCallbacks(id, uuid, attacker, false)
 						data.Total = math.max(0, data.Total - 1)
 						data.Attackers[attacker][id] = nil
@@ -83,7 +83,7 @@ RegisterProtectedOsirisListener("TimerFinished", 1, "after", function(timerName)
 			end
 			if data.Total <= 0 then
 				PersistentVars.OnDeath[uuid] = nil
-				printd("[LLWEAPONEX:DeathMechanics:TimerFinished] Cleared OnDeath listeners for", uuid)
+				PrintDebug("[LLWEAPONEX:DeathMechanics:TimerFinished] Cleared OnDeath listeners for", uuid)
 			end
 		end
 	end
@@ -112,7 +112,7 @@ end)
 function DeathManager.OnDeath(uuid)
 	local data = PersistentVars.OnDeath[uuid]
 	if data ~= nil then
-		printd("[LLWEAPONEX:DeathMechanics:OnDeath]", uuid, "died. Firing callbacks.")
+		PrintDebug("[LLWEAPONEX:DeathMechanics:OnDeath]", uuid, "died. Firing callbacks.")
 		for attacker,attackerData in pairs(data.Attackers) do
 			for id,tName in pairs(attackerData) do
 				FireCallbacks(id, uuid, attacker, true)

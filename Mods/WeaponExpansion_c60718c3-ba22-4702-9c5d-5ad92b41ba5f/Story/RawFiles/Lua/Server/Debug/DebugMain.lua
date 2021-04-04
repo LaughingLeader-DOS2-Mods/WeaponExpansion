@@ -155,7 +155,7 @@ end
 
 local function DebugInit()
     --Ext.BroadcastMessage("LLWEAPONEX_OnClientMessage", "HookUI", nil)
-    printd("[WeaponExpansion] Running debug init code.")
+    PrintDebug("[WeaponExpansion] Running debug init code.")
     
     local host = CharacterGetHostCharacter()
 
@@ -176,7 +176,7 @@ local function DebugInit()
     --ContainerIdentifyAll(chest)
     --local tx,ty,tz = FindValidPosition(x,y,z,12.0,chest)
     --TeleportToPosition(chest, tx,ty,tz)
-    --printd("[WeaponExpansion:DebugInit] Generated treasure chest.")
+    --PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
     --TeleportToRandomPosition(chest, 8.0, "")
 
     --OpenMasteryMenu_Start(host)
@@ -260,7 +260,7 @@ if Vars.DebugMode then
     end)
     --!reward ST_LLWEAPONEX_RunebladesRare
     --!reward ST_LLWEAPONEX_TestDeltamodReplacement
-    --!printdeltamods
+    --!PrintDebugeltamods
 
     -- local generateTreasureOriginal = GenerateTreasure
     -- local generateTreasureHook = function(item, treasure, level, player)

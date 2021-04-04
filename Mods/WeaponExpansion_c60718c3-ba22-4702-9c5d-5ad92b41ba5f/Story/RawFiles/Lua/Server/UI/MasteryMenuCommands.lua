@@ -69,8 +69,8 @@ end)
 
 local statusDummy = "S_LeaderLib_Dummy_TargetHelper_A_36069245-0e2d-44b1-9044-6797bd29bb15"
 local function RequestStatusTooltip(call,datastr)
-	printd("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Data:")
-	printd(datastr)
+	PrintDebug("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Data:")
+	PrintDebug(datastr)
 	local data = MessageData:CreateFromString(datastr)
 	if data ~= nil then
 		local character = Ext.GetCharacter(data.ID)
@@ -99,8 +99,8 @@ local function RequestStatusTooltip(call,datastr)
 			data.Params.Host = host
 
 			local resultStr = data:ToString()
-			printd("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Sending data back to client:")
-			printd(resultStr)
+			PrintDebug("[WeaponExpansion:MasteryMenuCommands.lua:LLWEAPONEX_MasteryMenu_RequestStatusTooltip] Sending data back to client:")
+			PrintDebug(resultStr)
 			Ext.PostMessageToUser(character.UserID, "LLWEAPONEX_MasteryMenu_StatusHandleRetrieved", resultStr)
 		end
 	else

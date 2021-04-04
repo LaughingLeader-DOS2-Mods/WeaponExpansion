@@ -38,7 +38,7 @@ end
 
 local function OnSheetEvent(ui, call, ...)
 	local params = {...}
-	--printd("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
+	--PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSheetEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
 	if call == "hotbarBtnPressed" or call == "selectedTab" or call == "showUI" then
 		CloseMenu()
 	end
@@ -46,7 +46,7 @@ end
 
 local function OnSidebarEvent(ui, call, ...)
 	local params = {...}
-	--printd("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
+	--PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnSidebarEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
 	if call == "charSel" then
 		CloseMenu()
 	end
@@ -54,7 +54,7 @@ end
 
 local function OnHotbarEvent(ui, call, ...)
 	local params = {...}
-	--printd("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
+	--PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnHotbarEvent] Event called. call("..tostring(call)..") params("..Common.Dump(params)..")")
 	
 	if call == "hotbarBtnPressed" then
 		CloseMenu()
@@ -67,21 +67,21 @@ local function SetupListeners()
 		Ext.RegisterUICall(ui, "selectedTab", OnSheetEvent)
 		Ext.RegisterUICall(ui, "hotbarBtnPressed", OnSheetEvent)
 		Ext.RegisterUICall(ui, "showUI", OnSheetEvent)
-		printd("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (characterSheet.swf). Registered listeners.")
+		PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (characterSheet.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/characterSheet.swf")
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/playerInfo.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "charSel", OnSidebarEvent)
-		printd("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (playerInfo.swf). Registered listeners.")
+		PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (playerInfo.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/playerInfo.swf")
 	end
 	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
 	if ui ~= nil then
 		Ext.RegisterUICall(ui, "hotbarBtnPressed", OnHotbarEvent)
-		printd("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (hotBar.swf). Registered listeners.")
+		PrintDebug("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Found (hotBar.swf). Registered listeners.")
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:SetupListeners] Failed to find Public/Game/GUI/hotBar.swf")
 	end
@@ -181,7 +181,7 @@ local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
 			iconType = 0
 		end
 	end
-	printd(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
+	PrintDebug(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
 	ui:SetValue("descriptionContent", iconId, index+1)
 	ui:SetValue("descriptionContent", iconName, index+2)
 	ui:SetValue("descriptionContent", iconType, index+3)
@@ -300,7 +300,7 @@ end
 local function OnMenuEvent(ui, call, ...)
 	local params = {...}
 	if call ~= "overMastery" then
-		printd("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
+		PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
 	end
 	if call == "requestCloseUI" or call == "requestCloseMasteryMenu" then
 		CloseMenu(true)
@@ -448,7 +448,7 @@ function MasteryMenu.InitializeMasteryMenu()
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui == nil then
 		MasteryMenu.RegisteredListeners = false
-		printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Creating mastery menu ui.")
+		PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Creating mastery menu ui.")
 		ui = Ext.CreateUI("MasteryMenu", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", 12)
 		newlyCreated = true
 	end
@@ -470,7 +470,7 @@ function MasteryMenu.InitializeMasteryMenu()
 			local barPercentage = 0
 			local xp = data.Required
 			barPercentage = (xp / xpMax)
-			--printd("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+			--PrintDebug("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 			ui:Invoke("setRankNodePosition", i, barPercentage)
 			i = i + 1
 		end
@@ -550,8 +550,8 @@ local function OpenMasteryMenu(characterMasteryData)
 	if MasteryMenu.CHARACTER_HANDLE == nil then
 		MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(Ext.GetCharacter(characterMasteryData.UUID).Handle)
 	end
-	printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
-	--printd(Common.Dump(characterMasteryData))
+	PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
+	--PrintDebug(Common.Dump(characterMasteryData))
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui ~= nil then
 		MasteryMenu.Instance = ui
@@ -563,7 +563,7 @@ local function OpenMasteryMenu(characterMasteryData)
 			if hasMinimumMasteryRankData(characterMasteryData, tag, 1) then
 				table.insert(masteryKeys, tag)
 			else
-				--printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(characterMasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
+				--PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(characterMasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
 			end
 		end
 		table.sort(masteryKeys, sortMasteries)
@@ -602,7 +602,7 @@ local function OpenMasteryMenu(characterMasteryData)
 					--print("Set rank tooltip: ", i, k)
 				end
 				
-				printd("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+				PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
 				i = i + 1
 			end
 		end

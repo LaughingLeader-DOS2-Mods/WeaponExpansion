@@ -73,7 +73,7 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 			end
 		end
 	else
-		printd("CloakAndDagger_Pistol_MarkEnemy params: "..Common.Dump(skillData))
+		PrintDebug("CloakAndDagger_Pistol_MarkEnemy params: "..Common.Dump(skillData))
 	end
 end
 

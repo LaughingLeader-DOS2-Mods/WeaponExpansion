@@ -125,7 +125,7 @@ end
 --- @param handle integer
 RegisterListener("OnHit", function(target,source,damage,handle)
 	if Vars.DebugMode then
-		printd(string.format("[LLWEAPONEX:OnHit] skill(%s) target(%s) source(%s)", NRD_StatusGetString(target, handle, "SkillId"), target, source))
+		PrintDebug(string.format("[LLWEAPONEX:OnHit] skill(%s) target(%s) source(%s)", NRD_StatusGetString(target, handle, "SkillId"), target, source))
 	end
 	if not StringHelpers.IsNullOrEmpty(source) then
 		local blockedHit = PersistentVars.SkillData.ShieldCover.BlockedHit[target]

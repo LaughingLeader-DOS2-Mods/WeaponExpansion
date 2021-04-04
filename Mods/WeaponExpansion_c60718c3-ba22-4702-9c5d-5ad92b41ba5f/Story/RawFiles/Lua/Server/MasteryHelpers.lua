@@ -18,7 +18,7 @@ function TagMasteryRanks(uuid,mastery,level)
 		for i=1,level,1 do
 			local tag = mastery.."_Mastery"..tostring(i)
 			SetTag(uuid, tag)
-			--printd("[WeaponExpansion:TagMasteryRanks] Setting tag ["..tag.."] on ["..uuid.."]")
+			--PrintDebug("[WeaponExpansion:TagMasteryRanks] Setting tag ["..tag.."] on ["..uuid.."]")
 		end
 	end
 end
@@ -45,7 +45,7 @@ local function MasteryLeveledUp(uuid,mastery,last,next)
 		EquipmentManager.CheckWeaponRequirementTags(uuid)
 	end
 
-	printd(string.format("[WeaponExpansion] Mastery [%s] leveled up (%i => %i) on [%s]", mastery, last, next, uuid))
+	PrintDebug(string.format("[WeaponExpansion] Mastery [%s] leveled up (%i => %i) on [%s]", mastery, last, next, uuid))
 	local name = Ext.GetCharacter(uuid).DisplayName
 	local text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(name, masteryName, next)
 	GameHelpers.UI.CombatLog(text)
@@ -180,7 +180,7 @@ end
 --- @param mastery string
 function OnMasteryActivated(uuid,mastery)
 	uuid = StringHelpers.GetUUID(uuid)
-	printd("[WeaponExpansion] Activated mastery tag ["..mastery.."] on ["..uuid.."].")
+	PrintDebug("[WeaponExpansion] Activated mastery tag ["..mastery.."] on ["..uuid.."].")
 	local callbacks = Listeners.MasteryActivated[mastery]
 	if callbacks ~= nil then
 		for i,callback in pairs(callbacks) do
@@ -196,7 +196,7 @@ end
 --- @param mastery string
 function OnMasteryDeactivated(uuid,mastery)
 	ClearTag(uuid,mastery)
-	printd("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
+	PrintDebug("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
 	local callbacks = Listeners.MasteryDeactivated[mastery]
 	if callbacks ~= nil then
 		for i,callback in pairs(callbacks) do

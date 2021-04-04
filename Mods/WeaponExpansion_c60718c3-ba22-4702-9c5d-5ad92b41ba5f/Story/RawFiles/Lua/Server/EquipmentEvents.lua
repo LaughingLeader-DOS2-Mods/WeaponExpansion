@@ -81,12 +81,12 @@ function EquipmentManager.CheckWeaponRequirementTags(uuid)
 			if CheckScoundrelTags(uuid, mainhand) or CheckScoundrelTags(uuid, offhand) then
 				if character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
 					ClearTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-					printd("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
+					PrintDebug("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
 				end
 			else
 				if not character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
 					SetTag(uuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-					printd("SetTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
+					PrintDebug("SetTag LLWEAPONEX_CannotUseScoundrelSkills", uuid)
 				end
 			end
 		else
@@ -176,14 +176,14 @@ function OnItemEquipped(uuid,itemUUID)
 
 		if not item:HasTag("LLWEAPONEX_NoTracking") then
 			for tag,data in pairs(Masteries) do
-				--printd("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
+				--PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
 				if item:HasTag(tag) then
 					if isPlayer then
 						local equippedTag = Tags.WeaponTypes[tag]
 						if equippedTag ~= nil then
 							if Vars.DebugMode then
 								if IsTagged(uuid, equippedTag) == 0 then
-									printd("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
+									PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
 								end
 							end
 							Osi.LLWEAPONEX_Equipment_TrackItem(uuid,itemUUID,tag,equippedTag,isPlayer and 1 or 0)
@@ -191,7 +191,7 @@ function OnItemEquipped(uuid,itemUUID)
 						Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, itemUUID, tag)
 						if IsTagged(uuid, tag) == 0 then
 							SetTag(uuid, tag)
-							printd("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
+							PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
 						end
 					end
 					Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,itemUUID,tag,isPlayer and 1 or 0)

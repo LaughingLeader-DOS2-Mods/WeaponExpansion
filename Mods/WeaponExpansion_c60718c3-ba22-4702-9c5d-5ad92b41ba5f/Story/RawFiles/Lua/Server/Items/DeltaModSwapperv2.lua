@@ -15,18 +15,18 @@ local function GetAllBoosts(item)
 				local replacement = deltamods[v]
 				if replacement ~= nil then
 					if replacement == "" then
-						printd("Disabled deltamod",v,item.StatsId)
+						PrintDebug("Disabled deltamod",v,item.StatsId)
 						finalBoosts[v] = false
 						swapped = true
 					elseif type(replacement) == "function" then
 						local b,replacementVal = pcall(replacement, item, v)
 						if b then
-							printd("Swapped deltamod",v,"for",replacementVal,item.StatsId)
+							PrintDebug("Swapped deltamod",v,"for",replacementVal,item.StatsId)
 							finalBoosts[v] = replacementVal
 							swapped = true
 						end
 					else
-						printd("Swapped deltamod",v,"for",replacement,item.StatsId)
+						PrintDebug("Swapped deltamod",v,"for",replacement,item.StatsId)
 						finalBoosts[v] = replacement
 						swapped = true
 					end
@@ -46,21 +46,21 @@ local function GetAllBoosts(item)
 					for tag,deltamods in pairs(DeltamodSwap) do
 						if item:HasTag(tag) then
 							local replacement = deltamods[v]
-							printd(v, replacement)
+							PrintDebug(v, replacement)
 							if replacement ~= nil then
 								if replacement == "" then
-									printd("Disabled deltamod",v,item.StatsId)
+									PrintDebug("Disabled deltamod",v,item.StatsId)
 									finalBoosts[v] = false
 									swapped = true
 								elseif type(replacement) == "function" then
 									local b,replacementVal = pcall(replacement, item, v)
 									if b then
-										printd("Swapped deltamod",v,"for",replacementVal,item.StatsId)
+										PrintDebug("Swapped deltamod",v,"for",replacementVal,item.StatsId)
 										finalBoosts[v] = replacementVal
 										swapped = true
 									end
 								else
-									printd("Swapped deltamod",v,"for",replacement,item.StatsId)
+									PrintDebug("Swapped deltamod",v,"for",replacement,item.StatsId)
 									finalBoosts[v] = replacement
 									swapped = true
 								end
@@ -276,7 +276,7 @@ local function SwapDeltaMods(item)
 					local replaceBoost = replace.Boost
 					local existingBoostEntry = boostMap[replaceBoost]
 					if existingBoostEntry ~= nil then
-						printd("Removing boost", replaceBoost)
+						PrintDebug("Removing boost", replaceBoost)
 						if ResetBoostEntry(replaceBoost, existingBoostEntry, item.ItemType, changes) then
 							hasChanges = true
 							boostMap[replaceBoost] = nil

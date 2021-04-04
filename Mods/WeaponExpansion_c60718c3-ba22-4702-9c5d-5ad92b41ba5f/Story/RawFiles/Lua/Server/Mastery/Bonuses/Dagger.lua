@@ -9,7 +9,7 @@ local throwingKnifeBonuses = {
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param skillData SkillEventData|HitData
 local function ThrowingKnifeBonus(bonuses, skill, char, state, skillData)
-	--printd("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") skillData("..Ext.JsonStringify(skillData)..")")
+	--PrintDebug("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") skillData("..Ext.JsonStringify(skillData)..")")
 	if state ~= SKILL_STATE.PREPARE then
 		local procSet = ObjectGetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus") == 1
 		if state == SKILL_STATE.USED then
@@ -17,7 +17,7 @@ local function ThrowingKnifeBonus(bonuses, skill, char, state, skillData)
 				local roll = Ext.Random(1,100)
 				local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
 				if chance == nil or chance < 0 then chance = 25 end
-				printd("LLWEAPONEX_ThrowingKnife_ActivateBonus|",roll, "/", chance)
+				PrintDebug("LLWEAPONEX_ThrowingKnife_ActivateBonus|",roll, "/", chance)
 				if roll <= chance then
 					if skillData.ID == SkillEventData.ID then
 						if skillData.TotalTargetObjects > 0 then
@@ -65,7 +65,7 @@ local function ThrowingKnifeDelayedProc(funcParams)
 		NRD_ProjectileLaunch()
 		ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
 	else
-		printd("ThrowingKnifeDelayedProc params: "..Common.Dump(funcParams))
+		PrintDebug("ThrowingKnifeDelayedProc params: "..Common.Dump(funcParams))
 	end
 end
 

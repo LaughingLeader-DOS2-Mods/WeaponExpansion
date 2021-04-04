@@ -286,7 +286,7 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 				MoveToRegionPosition(self, region, item)
 			end
 		end
-		--printd("Unique initialized:", uuid, item.DisplayName, self.Owner)
+		--PrintDebug("Unique initialized:", uuid, item.DisplayName, self.Owner)
 	end
 end
 
@@ -383,7 +383,7 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, leve
 		end
 	elseif attribute == "Boosts" then
 		-- TODO
-		-- printd(stat.Name, attribute, stat.Boosts, "=>", entry.Value)
+		-- PrintDebug(stat.Name, attribute, stat.Boosts, "=>", entry.Value)
 		-- stat.Boosts = entry.Value
 		-- statChanged = true
 		firstLoad = false
@@ -409,7 +409,7 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, leve
 		target.MaxDamage = maxDamage
 		
 	else
-		printd(stat.Name, attribute, target[attribute], "=>", entry.Value)
+		PrintDebug(stat.Name, attribute, target[attribute], "=>", entry.Value)
 		target[attribute] = entry.Value
 		statChanged = true
 	end

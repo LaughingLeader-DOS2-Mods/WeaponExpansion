@@ -496,7 +496,7 @@ local function SetRanges(tbl)
 			end
 		end
 	end
-	--printd(Ext.JsonStringify(tbl))
+	--PrintDebug(Ext.JsonStringify(tbl))
 	return tbl
 end
 
