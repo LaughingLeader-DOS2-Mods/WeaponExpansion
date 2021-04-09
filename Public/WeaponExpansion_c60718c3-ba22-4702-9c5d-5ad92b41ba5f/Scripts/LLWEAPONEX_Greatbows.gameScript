@@ -217,6 +217,5 @@ IF "c1|!c2|c3|c4&(c5|c6)"
 	IsLessThen(_Movement, 0.01)
 	IsEqual(_Movement, 0)
 THEN
-	//ExplodeAt(_Target, Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_BonusDamage, -1, _Source)
-	CharacterApplyStatus(_Target, LLWEAPONEX_GREATBOW_FUTUREBARRAGE_BONUSDAMAGE, 0, 1, _Source)
+	CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Greatbows_FutureBarrage_ApplyBonusDamage")
 ENDIF

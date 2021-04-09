@@ -206,3 +206,84 @@ RegisterSkillListener({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectil
 		end
 	end
 end)
+
+RegisterSkillListener({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy"}, function(skill, char, state, data)
+	if state == SKILL_STATE.CAST then
+		data:ForEach(function(target, targetType, d)
+			local x,y,z = 0,0,0
+			if targetType == "table" then
+				x,y,z = table.unpack(target)
+			else
+				x,y,z = GetPosition(target)
+			end
+			local delay = math.floor(Ext.ExtraData.LLWEAPONEX_FutureBarrage_TurnDelay or 3)
+			if Vars.DebugMode then
+				delay = 1
+			end
+			Osi.LeaderLib_Turns_TrackPositionWithObject(char, x, y, z, "LLWEAPONEX_Greatbow_FutureBarrageFire", delay)
+			local handle = PlayScaledLoopEffectAtPosition("LLWEAPONEX_FX_AreaRadiusDecal_Circle_1m_Green_01", 8.0, x, y, z)-- == 4m
+			Osi.DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(char, x, y, z, handle)
+			--Osi.DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos:Delete(char, x, y, z)
+		end, data.TargetMode.All)
+	end
+end)
+
+OnTimerFinished["Timers_LLWEAPON_FutureBarrageDummyCast"] = function(timerData)
+	local caster = timerData[1]
+	local dummy = timerData[2]
+	local x,y,z = GetVarFloat3(dummy, "LLWEAPONEX_FutureBarrageTarget")
+	--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
+	CharacterUseSkillAtPosition(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", x, y, z, 0, 1)
+	CharacterCharacterSetEvent(caster, dummy, "LLWEAPONEX_Greatbow_FutureBarrage_DummySkillUsed")
+end
+
+local function SetupDummy(dummy, owner)
+	CharacterTransformFromCharacter(dummy, owner, 0, 1, 1, 0, 0, 0, 0)
+	--SetVisible(dummy, 0)
+	CharacterSetDetached(dummy, 1)
+
+	ObjectSetFlag(dummy, "LEADERLIB_IGNORE", 0)
+	SetCanJoinCombat(dummy, 0)
+	SetCanFight(dummy, 0)
+	SetTag(dummy, "LeaderLib_Dummy")
+	SetTag(dummy, "SUMMON") -- For Crime/etc to ignore the dummy
+	SetVarObject(dummy, "LeaderLib_Dummy_Owner", owner)
+	Osi.LeaderLib_ToggleScripts_EnableScript("LeaderLib_DummyCrimesEnabled", "LeaderLib")
+
+	CharacterMakeStoryNpc(dummy, 1)
+	
+	SetFaction(dummy, GetFaction(owner))
+	CharacterAddAttitudeTowardsPlayer(dummy, owner, 100)
+	SetTag(dummy, "LeaderLib_TemporaryCharacter")
+	ObjectSetFlag(dummy, "LeaderLib_IsSkillDummy", 0)
+end
+
+function FutureBarrage_FireDummySkill(caster, x, y, z)
+	x = tonumber(x)
+	y = tonumber(y)
+	z = tonumber(z)
+	local dummy = TemporaryCharacterCreateAtPosition(x, y, z, "LeaderLib_SkillDummy_94668062-11ea-4ecf-807c-4cc225cbb236", 0)
+	SetVarFloat3(dummy, "LLWEAPONEX_FutureBarrageTarget", x, y, z)
+	SetupDummy(dummy, caster)
+
+	CharacterAddSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", 0)
+	local dummyBow = GameHelpers.Item.CreateItemByStat("WPN_LLWEAPONEX_Greatbow", true, {ItemType = "Common"})
+	if dummyBow then
+		NRD_CharacterEquipItem(dummy, dummyBow, "Weapon", 0, 0, 0, 1)
+	else
+		print("Failed to make dummy Greatbow")
+	end
+	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
+	StartTimer("Timers_LLWEAPON_FutureBarrageDummyCast", 250, caster, dummy)
+	-- StartOneshotTimer(string.format("Timers_LLWEAPON_FutureBarrageDummyCast_%s", dummy), 250, function()
+	-- 	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
+	-- 	--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
+	-- end)
+end
+function FutureBarrage_ApplyDamage(caster, target, isBonus)
+	if isBonus ~= nil then
+		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_Damage", HitFlagPresets.FutureBarrage)
+	else
+		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_BonusDamage", HitFlagPresets.FutureBarrage)
+	end
+end

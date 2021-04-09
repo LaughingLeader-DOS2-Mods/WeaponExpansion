@@ -34,6 +34,13 @@ HitFlagPresets = {
         Blocked = 0,
         Dodged = 0,
         Missed = 0,
+    }),
+    FutureBarrage = HitFlagPreset:Create({
+        SimulateHit = 1,
+        HitType = "WeaponDamage",
+        HitWithWeapon = 1,
+        Hit = 1,
+        HighGround = 1,
     })
 }
 
