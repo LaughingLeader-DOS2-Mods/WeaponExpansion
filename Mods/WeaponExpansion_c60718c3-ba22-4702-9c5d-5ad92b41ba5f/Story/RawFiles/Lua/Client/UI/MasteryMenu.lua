@@ -13,7 +13,8 @@ MasteryMenu = {
 	LastSelected = 0,
 	---@type CharacterMasteryData
 	MasteryData = nil,
-	IsControllerMode = false
+	IsControllerMode = false,
+	Layer = 10,
 }
 MasteryMenu.__index = MasteryMenu
 
@@ -27,8 +28,11 @@ local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
 local Input = LeaderLib.Input
 
 local function CloseMenu(skipRequest)
+	if skipRequest == nil then
+		skipRequest = false
+	end
 	if MasteryMenu.Open and MasteryMenu.Instance ~= nil then
-		MasteryMenu.Instance:Invoke("closeMenu", skipRequest ~= nil and skipRequest or false)
+		MasteryMenu.Instance:Invoke("closeMenu", skipRequest)
 		MasteryMenu.DisplayingSkillTooltip = false
 		MasteryMenu.DisplayingStatusTooltip = false
 		MasteryMenu.SelectedMastery = nil
@@ -416,7 +420,7 @@ function MasteryMenu.InitializeToggleButton()
 	end
 	local ui = Ext.GetUI("MasteryMenuToggleButton")
 	if ui == nil then
-		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", 12)
+		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", MasteryMenu.Layer)
 		if ui ~= nil then
 			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
 				if not MasteryMenu.Open then
@@ -443,13 +447,36 @@ function MasteryMenu.InitializeToggleButton()
 	end
 end
 
+local closePanelTypes = {
+	Data.UIType.areaInteract_c,
+	Data.UIType.characterSheet,
+	Data.UIType.containerInventory,
+	Data.UIType.craftPanel_c,
+	Data.UIType.equipmentPanel_c,
+	Data.UIType.partyInventory_c,
+	Data.UIType.partyInventory,
+	Data.UIType.skills,
+	Data.UIType.statsPanel_c,
+	Data.UIType.uiCraft,
+}
+
+local function CloseOtherPanels()
+	for _,id in pairs(closePanelTypes) do
+		local ui = Ext.GetUIByType(id)
+		if ui then
+			--ui:ExternalInterfaceCall("requestCloseUI")
+			ui:ExternalInterfaceCall("hideUI")
+		end
+	end
+end
+
 function MasteryMenu.InitializeMasteryMenu()
 	local newlyCreated = false
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui == nil then
 		MasteryMenu.RegisteredListeners = false
 		PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Creating mastery menu ui.")
-		ui = Ext.CreateUI("MasteryMenu", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", 12)
+		ui = Ext.CreateUI("MasteryMenu", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer)
 		newlyCreated = true
 	end
 	if ui ~= nil and MasteryMenu.Open == false then
@@ -500,6 +527,7 @@ function MasteryMenu.InitializeMasteryMenu()
 		end
 		if newlyCreated then
 			ui:Show()
+			CloseOtherPanels()
 		end
 		MasteryMenu.Initialized = true
 	else
@@ -609,6 +637,7 @@ local function OpenMasteryMenu(characterMasteryData)
 		ui:Invoke("selectMastery", MasteryMenu.LastSelected, true)
 		ui:Invoke("openMenu")
 		MasteryMenu.Open = true
+		CloseOtherPanels()
 	else
 		Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Error opening mastery menu.")
 	end

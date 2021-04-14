@@ -34,6 +34,8 @@ package
 		public var isResizing:Boolean;
 		public var controllerEnabled:Boolean = false;
 
+		public var characterHandle:Number = 0;
+
 		public function MainTimeline()
 		{
 			super();
@@ -228,8 +230,6 @@ package
 		{
 			return false;
 		}
-
-		public var characterHandle:Number = 0;
 
 		public function setPlayerHandle() : *
 		{
