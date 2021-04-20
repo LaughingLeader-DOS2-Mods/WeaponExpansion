@@ -3,11 +3,11 @@ if MasterySystem == nil then
 end
 
 function Mastery.CanGrantXP(uuid)
-	if ObjectIsCharacter(uuid) == 0 then
-		return false
-	end
 	if IsTagged(uuid, "LLDUMMY_TrainingDummy") == 1 then
 		return true
+	end
+	if ObjectIsCharacter(uuid) == 0 then
+		return false
 	end
 	if NRD_CharacterGetInt(uuid, "Resurrected") == 0
 	and not IsPlayer(uuid)
