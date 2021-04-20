@@ -194,31 +194,40 @@ end
 
 local firstLoad = true
 
+OnTimerFinished["Timers_LLWEAPONEX_InitUniques"] = function()
+	local region = SharedData.RegionData.Current
+	UniqueManager.FindOrphanedUniques()
+	for id,unique in pairs(Uniques) do
+		unique:FindPlayerCopies()
+		unique:Initialize(region, firstLoad)
+	end
+	-- in case equipment events have changed and need to fire again
+	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
+		local player = Ext.GetCharacter(db[1])
+		if player ~= nil then
+			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
+				if not StringHelpers.IsNullOrEmpty(itemid) then
+					OnItemEquipped(player.MyGuid, itemid)
+				end
+			end
+		end
+	end
+	firstLoad = false
+end
+
 RegisterListener("Initialized", function(region)
 	UniqueManager.LoadLinkedUniques()
 	region = region or SharedData.RegionData.Current
+	if StringHelpers.IsNullOrEmpty(region) then
+		local db = Osi.DB_CurrentLevel:Get(nil)
+		if db and #db > 0 then
+			region = db[1][1]
+		end
+	end
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then
-			StartOneshotTimer("Timers_LLWEAPONEX_InitUniques", 500, function()
-				UniqueManager.FindOrphanedUniques()
-				for id,unique in pairs(Uniques) do
-					unique:FindPlayerCopies()
-					unique:Initialize(region, firstLoad)
-				end
-				-- in case equipment events have changed and need to fire again
-				for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-					local player = Ext.GetCharacter(db[1])
-					if player ~= nil then
-						for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
-							local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
-							if not StringHelpers.IsNullOrEmpty(itemid) then
-								OnItemEquipped(player.MyGuid, itemid)
-							end
-						end
-					end
-				end
-				firstLoad = false
-			end)
+			StartTimer("Timers_LLWEAPONEX_InitUniques", 500)
 		end
 		if IsCharacterCreationLevel(region) == 1 then
 			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
