@@ -20,7 +20,12 @@ local UniqueData = {
 	---@type UniqueData
 	LinkedItem = nil,
 	Tag = "",
-	Copies = nil
+	Copies = nil,
+	Events = {
+		ItemAddedToCharacter = {},
+		ItemEquipped = {},
+		ItemUnEquipped = {},
+	},
 }
 UniqueData.__index = UniqueData
 
@@ -46,9 +51,14 @@ function UniqueData:Create(uuid, progressionData, params)
 		Tag = "",
 		Copies = {},
 		LinkedItem = nil,
+		Events = {
+			ItemAddedToCharacter = {},
+			ItemEquipped = {},
+			ItemUnEquipped = {},
+		},
 	}
 	setmetatable(this, self)
-	if params ~= nil then
+	if params then
 		for prop,value in pairs(params) do
 			this[prop] = value
 		end
@@ -69,7 +79,7 @@ function UniqueData:CanMoveToOwner(owner, region)
 	--local inventoryOwner = GetInventoryOwner(self.UUID)
 	if owner ~= nil 
 	and ObjectExists(owner) == 1
-	and CharacterIsDead(owner) == 0
+	--and CharacterIsDead(owner) == 0
 	and GetRegion(owner) == region
 	then
 		return true
@@ -150,10 +160,10 @@ end
 function UniqueData:ReleaseFromOwner(unequip, uuid)
 	local uuid,owner = GetUUIDAndOwner(self, uuid)
 	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+	ItemClearOwner(uuid)
 	if unequip == true and owner ~= nil then
 		ItemLockUnEquip(uuid, 0)
 		CharacterUnequipItem(owner, uuid)
-		ItemClearOwner(uuid)
 	end
 	if uuid == self.UUID then
 		self.Owner = nil
@@ -176,10 +186,9 @@ function UniqueData:ResetRelease(uuid)
 	ObjectClearFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
 end
 
----@param self UniqueData
 ---@param region string
 ---@param item EsvItem|nil
-local function MoveToRegionPosition(self, region, item)
+function UniqueData:MoveToRegionPosition(region, item)
 	local targetPosition = self.LevelData[region]
 	if targetPosition ~= nil then
 		local x,y,z,pitch,yaw,roll = table.unpack(targetPosition)
@@ -187,8 +196,9 @@ local function MoveToRegionPosition(self, region, item)
 		TeleportTo(self.UUID, host, "", 0, 1, 0)
 		ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
 	else
+		local defaultNPCOwnerIsDead = self.DefaultOwner ~= nil and (not IsPlayer(self.DefaultOwner) and CharacterIsDead(self.DefaultOwner) == 1)
 		-- Fallback
-		if self.CanMoveToVendingMachine ~= false then
+		if self.CanMoveToVendingMachine ~= false or defaultNPCOwnerIsDead then
 			ItemToInventory(self.UUID, NPC.VendingMachine, 1, 0, 0)
 		else
 			ItemToInventory(self.UUID, NPC.UniqueHoldingChest, 1, 0, 0)
@@ -237,10 +247,13 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 		end
 	end
 	if ObjectExists(uuid) == 1 then
+		local isInUniqueChest = false
+		self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
 		local item = Ext.GetItem(uuid)
 		if self.Owner == nil then
 			local owner = TryGetOwner(item)
 			if owner == NPC.UniqueHoldingChest then
+				isInUniqueChest = true
 				owner = nil
 			end
 			if owner ~= nil then
@@ -250,22 +263,29 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 		if firstLoad == true then
 			self:ApplyProgression(self.ProgressionData, nil, item, true)
 		end
-		if not self:IsReleasedFromOwner() then
-			self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
-			if item.CurrentLevel ~= region then
-				if not self.Initialized then
-					local targetOwner = self.DefaultOwner
-					if type(self.DefaultOwner) == "table" then
-						targetOwner = self.DefaultOwner[region] or self.DefaultOwner["Any"]
-					end
-					if self:CanMoveToOwner(targetOwner, region) then
-						self:Transfer(targetOwner, self.AutoEquipOnOwner)
-					else
-						MoveToRegionPosition(self, region, item)
-					end
-					ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
+		if uuid == "S5d8ec362-618e-48e9-87c2-dbc18ea4e779" then
+			print("UniqueData:Initialize", uuid, self:IsReleasedFromOwner(uuid), self.Initialized, self.Owner)
+		end
+		if not self:IsReleasedFromOwner(uuid) then
+			--The initialized flag was set before it was moved to the default owner, so it's sitting in the unique chest.
+			if self.Initialized and self.DefaultOwner ~= nil and isInUniqueChest then
+				self.Initialized = false
+			end
+			if not self.Initialized then
+				local targetOwner = self.DefaultOwner
+				if type(self.DefaultOwner) == "table" then
+					targetOwner = self.DefaultOwner[region] or self.DefaultOwner["Any"]
+				end
+				if self:CanMoveToOwner(targetOwner, region) then
+					self:Transfer(targetOwner, self.AutoEquipOnOwner)
 				else
-					if self.Owner == NPC.VendingMachine and not self.CanMoveToVendingMachine then
+					self:MoveToRegionPosition(region, item)
+				end
+				ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
+				self.Initialized = true
+			else
+				if not self.CanMoveToVendingMachine then
+					if self.Owner == NPC.VendingMachine then
 						local linkedItem = UniqueManager.GetLinkedUnique(uuid)
 						if linkedItem ~= nil then
 							local linkedOwner = TryGetOwner(Ext.GetItem(linkedItem))
@@ -278,13 +298,13 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 							ItemToInventory(uuid, NPC.UniqueHoldingChest, 1, 0, 0)
 						end
 					end
+				--Should be sitting in the vending machine or somewhere in the region, not the unique chest
+				elseif isInUniqueChest and self.LinkedItem == nil then
+					self:MoveToRegionPosition(region, item)
 				end
-				self.Initialized = true
 			end
 		elseif self.Owner == nil then
-			if item.CurrentLevel ~= region then
-				MoveToRegionPosition(self, region, item)
-			end
+			self:MoveToRegionPosition(region, item)
 		end
 		--PrintDebug("Unique initialized:", uuid, item.DisplayName, self.Owner)
 	end
@@ -813,6 +833,53 @@ function UniqueData:ApplyProgression(progressionTable, persist, item, firstLoad)
 	if item ~= nil then
 		StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
 		self.LastProgressionLevel = item.Stats.Level
+	end
+end
+
+function UniqueData:AddEventListener(event, callback)
+	UniqueManager.EnableEvent(event)
+	local listeners = self.Events[event]
+	if not listeners then
+		self.Events[event] = {}
+		listeners = self.Events[event]
+	end
+	table.insert(listeners, callback)
+	return #listeners
+end
+
+function UniqueData:RemoveEventListener(event, callback)
+	local listeners = self.Events[event]
+	if listeners then
+		if type(callback) == "number" then
+			table.remove(listeners, callback)
+		else
+			for i,v in pairs(listeners) do
+				if v == callback then
+					table.remove(listeners, i)
+				end
+			end
+		end
+	end
+end
+function UniqueData:InvokeEventListeners(event, ...)
+	local listeners = self.Events[event]
+	if listeners then
+		InvokeListenerCallbacks(listeners, ...)
+	end
+end
+
+function UniqueData:Locate(uuid)
+	local uuid,owner = GetUUIDAndOwner(self, uuid)
+	local x,y,z = GetPosition(uuid)
+	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Unique (%s) is at position x %s y %s z %s", uuid, x, y, z)
+	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Characters nearby:")
+	for _,v in pairs(Ext.GetItem(uuid):GetNearbyCharacters(6.0)) do
+		local char = Ext.GetCharacter(v)
+		fprint(LOGLEVEL.DEFAULT, "%s (%s)", char.DisplayName, Common.Dump(char.WorldPos))
+	end
+	if owner then
+		local tx,ty,tz = GetPosition(owner)
+		fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Unique (%s) owner (%s) is at position x %s y %s z %s", owner, tx, ty, tz)
 	end
 end
 
