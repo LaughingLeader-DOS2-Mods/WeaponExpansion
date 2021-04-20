@@ -438,18 +438,21 @@ function HasEmptyHand(character, ignoreShields)
 end
 
 RegisterProtectedOsirisListener("ItemAddedToCharacter", 2, "after", function(item, char)
-	if IsPlayer(char) then
-		local unique = AllUniques[StringHelpers.GetUUID(item)]
-		if unique ~= nil and not unique:IsReleasedFromOwner() then
+	item = StringHelpers.GetUUID(item)
+	char = StringHelpers.GetUUID(char)
+	local unique = AllUniques[item]
+	if unique ~= nil then
+		if IsPlayer(char) and not unique:IsReleasedFromOwner() then
 			unique:ReleaseFromOwner()
 		end
+		unique:InvokeEventListeners("ItemAddedToCharacter", item, char)
 	end
 end)
 
 Ext.RegisterOsirisListener("CharacterItemEvent", 3, "after", function(char, item, event)
+	char = StringHelpers.GetUUID(char)
+	item = StringHelpers.GetUUID(item)
 	if event == "LeaderLib_Events_ItemLeveledUp" then
-		char = StringHelpers.GetUUID(char)
-		item = StringHelpers.GetUUID(item)
 		local itemData = Ext.GetItem(item)
 		if itemData ~= nil and itemData.Stats ~= nil and itemData.Stats.Unique == 1 then
 			local data = UniqueManager.GetDataByItem(itemData)
@@ -457,6 +460,10 @@ Ext.RegisterOsirisListener("CharacterItemEvent", 3, "after", function(char, item
 				data:OnItemLeveledUp(item)
 			end
 		end
+	end
+	local unique = AllUniques[item]
+	if unique ~= nil then
+		unique:InvokeEventListeners("CharacterItemEvent", char, item, event)
 	end
 end)
 

@@ -270,3 +270,79 @@ function UniqueManager.SaveRequirementChanges()
 		Ext.BroadcastMessage("LLWEAPONEX_SaveUniqueRequirementChanges", payload)
 	end
 end
+
+--[[
+event ItemAddedToCharacter((ITEMGUID)_Item, (CHARACTERGUID)_Character) (3,0,497,1)
+event ItemDropped((ITEMGUID)_Item) (3,0,505,1)
+event ItemEnteredTrigger((ITEMGUID)_Item, (TRIGGERGUID)_Trigger, (CHARACTERGUID)_Mover) (3,0,506,1)
+event ItemTemplateEnteredTrigger((STRING)_ItemTemplate, (ITEMGUID)_Item, (TRIGGERGUID)_Trigger, (CHARACTERGUID)_Owner, (CHARACTERGUID)_Mover) (3,0,507,1)
+event ItemLeftTrigger((ITEMGUID)_Item, (TRIGGERGUID)_Trigger, (CHARACTERGUID)_Mover) (3,0,508,1)
+event ItemTemplateLeftTrigger((STRING)_ItemTemplate, (ITEMGUID)_Item, (TRIGGERGUID)_Trigger, (CHARACTERGUID)_Owner, (CHARACTERGUID)_Mover) (3,0,509,1)
+event ItemAddedToContainer((ITEMGUID)_Item, (ITEMGUID)_Container) (3,0,510,1)
+event ItemTemplateAddedToCharacter((GUIDSTRING)_ItemTemplate, (ITEMGUID)_Item, (CHARACTERGUID)_Character) (3,0,511,1)
+event ItemTemplateAddedToContainer((STRING)_ItemTemplate, (ITEMGUID)_Item, (ITEMGUID)_Container) (3,0,512,1)
+event ItemRemovedFromCharacter((ITEMGUID)_Item, (CHARACTERGUID)_Character) (3,0,513,1)
+event ItemTemplateRemovedFromCharacter((STRING)_ItemTemplate, (ITEMGUID)_Item, (CHARACTERGUID)_Character) (3,0,514,1)
+event ItemRemovedFromContainer((ITEMGUID)_Item, (ITEMGUID)_Container) (3,0,515,1)
+event ItemTemplateRemovedFromContainer((STRING)_ItemTemplate, (ITEMGUID)_Item, (ITEMGUID)_Container) (3,0,516,1)
+event ItemEquipped((ITEMGUID)_Item, (CHARACTERGUID)_Character) (3,0,517,1)
+event ItemUnEquipped((ITEMGUID)_Item, (CHARACTERGUID)_Character) (3,0,518,1)
+
+call ItemScatterAt((ITEMGUID)_Item, (REAL)_X, (REAL)_Y, (REAL)_Z) (1,0,411,1)
+]]
+
+local itemEvents = {
+	["ItemDropped"] = {arity = 1, itemArg = 1},
+	["ItemAddedToContainer"] = {arity = 2, itemArg = 1},
+	["ItemRemovedFromContainer"] = {arity = 2, itemArg = 1},
+	--["ItemAddedToCharacter"] = {arity = 2, itemArg = 1},
+	["ItemRemovedFromCharacter"] = {arity = 2, itemArg = 1},
+	["ItemEquipped"] = {arity = 2, itemArg = 1},
+	["ItemUnEquipped"] = {arity = 2, itemArg = 1},
+	["ItemMovedFromTo"] = {arity = 4, itemArg = 1},
+	["ItemUnEquipFailed"] = {arity = 2, itemArg = 1},
+	["ItemMoved"] = {arity = 1, itemArg = 1},
+	["RuneInserted"] = {arity = 4, itemArg = 2},
+	["RuneRemoved"] = {arity = 4, itemArg = 2},
+	["CharacterUsedItem"] = {arity = 2, itemArg = 2},
+	["CharacterMovedItem"] = {arity = 2, itemArg = 2},
+	["CharacterPreMovedItem"] = {arity = 2, itemArg = 2},
+	["CharacterPickpocketSuccess"] = {arity = 4, itemArg = 3},
+	["ItemSendToHomesteadEvent"] = {arity = 2, itemArg = 2},
+	["CharacterStoleItem"] = {arity = 8, itemArg = 2},
+	--["ItemScatterAt"] = {arity = 4, itemArg = 1}
+}
+
+local function RunItemEvent(event, item, ...)
+	print(event, item, ...)
+	local unique = AllUniques[item]
+	if unique then
+		unique:InvokeEventListeners(event, ...)
+	end
+end
+
+---Registers an Osiris listener for an pre-configured event.
+---The purpose of this is so we don't have to listen to all of these events normally until a script needs to wait for a unique to be involved in some event.
+---@param event string
+function UniqueManager.EnableEvent(event)
+	local data = itemEvents[event]
+	if data and not data.enabled then
+		Ext.RegisterOsirisListener(event, data.arity, "after", function(...)
+			local args = {...}
+			for i=1,#args do
+				if type(args[i]) == "string" then
+					args[i] = StringHelpers.GetUUID(args[i])
+				end
+			end
+			local item = args[data.itemArg]
+			RunItemEvent(event, item, table.unpack(args))
+		end)
+		data.enabled = true
+	end
+end
+
+function UniqueManager.EnableAllEvents()
+	for event,data in pairs(itemEvents) do
+		UniqueManager.EnableEvent(event)
+	end
+end
