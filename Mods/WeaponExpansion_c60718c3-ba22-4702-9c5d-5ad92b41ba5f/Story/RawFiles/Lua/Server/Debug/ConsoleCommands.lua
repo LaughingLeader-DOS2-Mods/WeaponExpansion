@@ -29,10 +29,10 @@ if Vars.DebugMode then
 	Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
 		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
 		for i,v in pairs(Uniques) do
-			if v.Owner == NPC.VendingMachine then
+			if not v:IsReleasedFromOwner() or v.Owner == NPC.VendingMachine or v.Owner == NPC.UniqueHoldingChest then
 				v:ReleaseFromOwner()
 				v:Transfer(host)
-			elseif not StringHelpers.IsNullOrEmpty(v.Owner) and not IsPlayer(v.Owner) and v.Owner ~= host then
+			elseif not IsPlayer(v.Owner) and v.Owner ~= host then
 				v:Transfer(host)
 			end
 		end
