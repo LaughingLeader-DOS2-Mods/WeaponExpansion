@@ -263,9 +263,6 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 		if firstLoad == true then
 			self:ApplyProgression(self.ProgressionData, nil, item, true)
 		end
-		if uuid == "S5d8ec362-618e-48e9-87c2-dbc18ea4e779" then
-			print("UniqueData:Initialize", uuid, self:IsReleasedFromOwner(uuid), self.Initialized, self.Owner)
-		end
 		if not self:IsReleasedFromOwner(uuid) then
 			--The initialized flag was set before it was moved to the default owner, so it's sitting in the unique chest.
 			if self.Initialized and self.DefaultOwner ~= nil and isInUniqueChest then

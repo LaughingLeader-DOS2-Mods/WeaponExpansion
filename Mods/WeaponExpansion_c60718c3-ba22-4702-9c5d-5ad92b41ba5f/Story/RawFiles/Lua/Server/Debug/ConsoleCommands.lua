@@ -29,13 +29,23 @@ if Vars.DebugMode then
 	Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
 		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
 		for i,v in pairs(Uniques) do
-			if not v:IsReleasedFromOwner() or v.Owner == NPC.VendingMachine or v.Owner == NPC.UniqueHoldingChest then
-				v:ReleaseFromOwner()
-				v:Transfer(host)
-			elseif not IsPlayer(v.Owner) and v.Owner ~= host then
-				v:Transfer(host)
+			if not v.IsLinkedItem then
+				if not v:IsReleasedFromOwner() or v.Owner == NPC.VendingMachine or v.Owner == NPC.UniqueHoldingChest then
+					v:ReleaseFromOwner()
+					v:Transfer(host)
+				elseif not IsPlayer(v.Owner) and v.Owner ~= host then
+					v:Transfer(host)
+				end
 			end
 		end
+	end)
+
+	Ext.RegisterConsoleCommand("weaponex_returnalluniques", function()
+		for i,v in pairs(Uniques) do
+			v:Transfer(NPC.UniqueHoldingChest)
+		end
+		UniqueManager.FirstLoad = true
+		UniqueManager.InitializeUniques()
 	end)
 
 	local function dumpRanks(...)

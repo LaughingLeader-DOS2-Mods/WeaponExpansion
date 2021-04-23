@@ -8,6 +8,8 @@ if UniqueManager == nil then
 	UniqueManager = {}
 end
 
+UniqueManager.FirstLoad = true
+
 local function CheckForAnvilWeightChange(data, character)
 
 end
@@ -60,12 +62,12 @@ Uniques = {
 
 --Uniques.ArmCannonWeapon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8", ProgressionData.ArmCannonWeapon, {Tag="LLWEAPONEX_RunicCannonWeapon", LinkedItem=Uniques.ArmCannon, CanMoveToVendingMachine=false})
 --Uniques.ArmCannonWeapon.CanMoveToVendingMachine = false
-Uniques.MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", LinkedItem=Uniques.MagicMissileWand, CanMoveToVendingMachine=false})
+Uniques.MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", LinkedItem=Uniques.MagicMissileWand, CanMoveToVendingMachine=false, IsLinkedItem=true})
 
-Uniques.BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData.BokkenOneHanded, {Tag="LLWEAPONEX_UniqueBokken1H", LinkedItem=Uniques.Bokken, CanMoveToVendingMachine=false})
+Uniques.BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData.BokkenOneHanded, {Tag="LLWEAPONEX_UniqueBokken1H", LinkedItem=Uniques.Bokken, CanMoveToVendingMachine=false, IsLinkedItem=true})
 Uniques.Bokken.LinkedItem = Uniques.BokkenOneHanded
 
-Uniques.WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false})
+Uniques.WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false, IsLinkedItem=true})
 Uniques.WarchiefHalberd.LinkedItem = Uniques.WarchiefAxe
 
 function UniqueManager.GetDataByTag(tag)
@@ -346,3 +348,27 @@ function UniqueManager.EnableAllEvents()
 		UniqueManager.EnableEvent(event)
 	end
 end
+
+function UniqueManager.InitializeUniques()
+	local region = SharedData.RegionData.Current
+	UniqueManager.FindOrphanedUniques()
+	for id,unique in pairs(Uniques) do
+		unique:FindPlayerCopies()
+		unique:Initialize(region, UniqueManager.FirstLoad)
+	end
+	-- in case equipment events have changed and need to fire again
+	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
+		local player = Ext.GetCharacter(db[1])
+		if player ~= nil then
+			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
+				if not StringHelpers.IsNullOrEmpty(itemid) then
+					OnItemEquipped(player.MyGuid, itemid)
+				end
+			end
+		end
+	end
+	UniqueManager.FirstLoad = false
+end
+
+OnTimerFinished["Timers_LLWEAPONEX_InitUniques"] = UniqueManager.InitializeUniques
