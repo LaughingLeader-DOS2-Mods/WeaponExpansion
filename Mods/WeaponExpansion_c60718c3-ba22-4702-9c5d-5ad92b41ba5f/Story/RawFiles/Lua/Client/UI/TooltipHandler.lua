@@ -1,5 +1,5 @@
 TooltipHandler = {}
-
+local ts = LeaderLib.Classes.TranslatedString
 local function sortTagParams(a,b)
 	return a:upper() < b:upper()
 end
@@ -99,17 +99,36 @@ Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText", function(cmd, text)
 	end
 end)
 
+--local worldTooltipFormat = '<font color="#ffffff">%s</font><font size="15"><br>%s</font>'
+local worldTooltipTypeText = '%s<font size="15"><br>%s</font>'
+
 ---@param ui UIObject
 ---@param text string
-local function OnWorldTooltip(ui, text, x, y, ...)
-	local startPos,endPos = string.find(text, '<font size="15"><br>.-</font>')
-	if startPos then
-		local nextText = string.sub(text, 0, startPos-1)
-		Ext.PostMessageToServer("LLWEAPONEX_SetWorldTooltipText_Request", Ext.JsonStringify({ID = Client.ID, Text=nextText}))
+---@param x number
+---@param y number
+---@param isFromItem boolean
+---@param item EclItem
+local function OnWorldTooltip(ui, text, x, y, isFromItem, item)
+	if isFromItem then
+		local typeText = GetItemTypeText(item)
+		if not StringHelpers.IsNullOrEmpty(typeText) then
+			local nextText = ""
+			local startPos,endPos = string.find(text, '<font size="15"><br>.-</font>')
+			if startPos then
+				nextText = string.format(worldTooltipTypeText, string.sub(text, 0, startPos-1), typeText)
+			else
+				nextText = string.format(worldTooltipTypeText, text, typeText)
+			end
+			return nextText
+		end
 	end
 end
+-- local startPos,endPos = string.find(text, '<font size="15"><br>.-</font>')
+-- if startPos then
+-- 	local nextText = string.sub(text, 0, startPos-1)
+-- 	Ext.PostMessageToServer("LLWEAPONEX_SetWorldTooltipText_Request", Ext.JsonStringify({ID=Client.ID, Text=nextText}))
+-- end
 
-local ts = LeaderLib.Classes.TranslatedString
 local LLWEAPONEX_UI_RunicCannonEnergy = ts:Create("h02882207g5e7bg4deaga22eg854b68f8dd29", "<font color='#33FFAA'>Runic Energy [1]</font>")
 
 ---@param ui UIObject
@@ -141,7 +160,7 @@ local function Init()
 	Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
 	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
 
-	LeaderLib.UI.RegisterListener("OnWorldTooltip", OnWorldTooltip)
+	RegisterListener("OnWorldTooltip", OnWorldTooltip)
 	LeaderLib.UI.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
 end
 return {

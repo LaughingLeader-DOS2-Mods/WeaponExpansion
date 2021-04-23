@@ -98,6 +98,8 @@ local TwoHandedText = ts:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Ha
 
 local UniqueWeaponTypeTags = {
 	LLWEAPONEX_UniqueBokken1H = ts:Create("h5264ef62gdc22g401fg8b62g303379cd7693", "Wooden Katana"),
+	LLWEAPONEX_Blunderbuss = ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss"),
+	LLWEAPONEX_RunicCannon = ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry"),
 }
 
 UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken2H = UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken1H
@@ -105,10 +107,9 @@ UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken2H = UniqueWeaponTypeTags.LLWEAPONEX
 ---@type WeaponTypeNameEntry[]
 local WeaponTypeNames = {
 	--LLWEAPONEX_Bludgeon = {Text=ts:Create("h448753f3g7785g4681gb639ga0e9d58bfadd", "Bludgeon")},
-	LLWEAPONEX_RunicCannon = {Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry")},
+	--LLWEAPONEX_RunicCannon = {Text=ts:Create("h702bf925gf664g45a7gb3f5g34418bfa2c56", "Runic Weaponry")},
 	LLWEAPONEX_Banner = {Text=ts:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")},
 	LLWEAPONEX_BattleBook = {Text=ts:Create("he053a3abge5d8g4d14g9333ga18d6eba3df1", "Battle Book")},
-	LLWEAPONEX_Blunderbuss = {Text=ts:Create("h59b52860gd0e3g4e65g9e61gd66b862178c3", "Blunderbuss")},
 	LLWEAPONEX_DualShields = {Text=ts:Create("h00157a58g9ae0g4119gba1ag3f1e9f11db14", "Dual Shields")},
 	LLWEAPONEX_Firearm = {Text=ts:Create("h8d02e345ged4ag4d60g9be9g68a46dda623b", "Firearm")},
 	LLWEAPONEX_Greatbow = {Text=ts:Create("h52a81f92g3549g4cb4g9b18g066ba15399c0", "Greatbow")},
@@ -123,6 +124,23 @@ local WeaponTypeNames = {
 	--LLWEAPONEX_Dagger = {Text=ts:Create("h697f3261gc083g4152g84cdgbe559a5e0388", "Dagger")}
 }
 --WeaponTypeNames.LLWEAPONEX_CombatShield = WeaponTypeNames.LLWEAPONEX_DualShields
+
+local weaponTypePreferenceOrder = {
+	"LLWEAPONEX_Rapier",
+	"LLWEAPONEX_RunicCannon",
+	"LLWEAPONEX_Banner",
+	"LLWEAPONEX_BattleBook",
+	"LLWEAPONEX_DualShields",
+	"LLWEAPONEX_Greatbow",
+	"LLWEAPONEX_Katana",
+	"LLWEAPONEX_Quarterstaff",
+	"LLWEAPONEX_Polearm",
+	"LLWEAPONEX_Scythe",
+	"LLWEAPONEX_Unarmed",
+	"LLWEAPONEX_Runeblade",
+	"LLWEAPONEX_Rod",
+	"LLWEAPONEX_Firearm",
+}
 
 ---@class StatProperty
 ---@field Type string Status|Action
@@ -232,6 +250,33 @@ local EquipmentTypes = {
 	Armor = true,
 }
 
+function GetItemTypeText(item)
+	for tag,t in pairs(UniqueWeaponTypeTags) do
+		if item:HasTag(tag) then
+			if item.Stats.IsTwoHanded and not Game.Math.IsRangedWeapon(item.Stats) then
+				return TwoHandedText.Value .. " " .. t.Value
+			else
+				return t.Value
+			end
+		end
+	end
+	local typeText = ""
+	for i=1,#weaponTypePreferenceOrder do
+		local tag = weaponTypePreferenceOrder[i]
+		if item:HasTag(tag) then
+			local renameWeaponType = WeaponTypeNames[tag]
+			if renameWeaponType ~= nil then
+				if item.Stats.IsTwoHanded and renameWeaponType.TwoHandedText ~= nil and not Game.Math.IsRangedWeapon(item.Stats) then
+					typeText = StringHelpers.Append(typeText, renameWeaponType.TwoHandedText.Value, " ")
+				else
+					typeText = StringHelpers.Append(typeText, renameWeaponType.Text.Value, " ")
+				end
+			end
+		end
+	end
+	return typeText
+end
+
 ---@param item EclItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
@@ -329,24 +374,6 @@ local function OnItemTooltip(item, tooltip)
 		for tag,entry in pairs(Masteries) do
 			if item:HasTag(tag) then
 				totalMasteries = totalMasteries + 1
-				local renameWeaponType = WeaponTypeNames[tag]
-				if renameWeaponType ~= nil then
-					if not fakeDamageCreated then
-						local armorSlotType = tooltip:GetElement("ArmorSlotType")
-						if armorSlotType == nil then
-							armorSlotType = {
-								Type = "ArmorSlotType",
-								Label = ""
-							}
-						end
-						if item.Stats.IsTwoHanded and renameWeaponType.TwoHandedText ~= nil and not Game.Math.IsRangedWeapon(item.Stats) then
-							--armorSlotType.Label = TwoHandedText.Value .. " " .. renameWeaponType.TwoHandedText.Value
-							armorSlotType.Label = renameWeaponType.TwoHandedText.Value
-						else
-							armorSlotType.Label = renameWeaponType.Text.Value
-						end
-					end
-				end
 				local masteryName = GameHelpers.GetStringKeyText(tag, "")
 				if masteryName ~= "" then
 					if enabledMasteriesText ~= "" then
@@ -356,22 +383,17 @@ local function OnItemTooltip(item, tooltip)
 				end
 			end
 		end
-		for tag,t in pairs(UniqueWeaponTypeTags) do
-			if item:HasTag(tag) then
-				local armorSlotType = tooltip:GetElement("ArmorSlotType")
-				if armorSlotType == nil then
-					armorSlotType = {
-						Type = "ArmorSlotType",
-						Label = ""
-					}
-				end
-				if item.Stats.IsTwoHanded then
-					armorSlotType.Label = TwoHandedText.Value .. " " .. t.Value
-				else
-					armorSlotType.Label = t.Value
-				end
-				break
+		local itemTypeText = GetItemTypeText(item)
+		if not StringHelpers.IsNullOrEmpty(itemTypeText) then
+			local armorSlotType = tooltip:GetElement("ArmorSlotType")
+			if armorSlotType == nil then
+				armorSlotType = {
+					Type = "ArmorSlotType",
+					Label = ""
+				}
+				tooltip:AppendElement(armorSlotType)
 			end
+			armorSlotType.Label = itemTypeText
 		end
 		if enabledMasteriesText ~= "" then
 			local element = tooltip:GetElement("ItemDescription")
