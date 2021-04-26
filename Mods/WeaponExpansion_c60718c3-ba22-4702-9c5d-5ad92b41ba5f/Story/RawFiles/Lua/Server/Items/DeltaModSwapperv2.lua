@@ -98,7 +98,6 @@ local BaseStatMap = {
 	APRecovery = "APRecovery",
 	AccuracyBoost = "AccuracyBoost",
 	DodgeBoost = "DodgeBoost",
-	LifeSteal = "LifeSteal",
 	CriticalChance = "CriticalChance",
 	ChanceToHitBoost = "ChanceToHitBoost",
 	--MovementSpeedBoost = "MovementSpeedBoost",
@@ -131,6 +130,7 @@ local StatMap = {
 		CleaveAngle = "CleaveAngle",
 		CleavePercentage = "CleavePercentage",
 		AttackAPCost = "AttackAPCost",
+		LifeSteal = "LifeSteal",
 	},
 	Armor = {
 		FireResistance = "Fire",
