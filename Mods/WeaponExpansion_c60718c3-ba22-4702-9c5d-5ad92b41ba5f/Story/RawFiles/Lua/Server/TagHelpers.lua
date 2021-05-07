@@ -39,7 +39,7 @@ function TagWeapon(uuid, statType, stat)
 		end
 		tagged = true
 	else
-		if statType == nil or stat == nil then
+		if StringHelpers.IsNullOrEmpty(statType) or StringHelpers.IsNullOrEmpty(stat) then
 			---@type EsvItem
 			local item = Ext.GetItem(uuid)
 			if not TagFromStats(uuid, item.StatsId) then
@@ -58,7 +58,7 @@ function TagWeapon(uuid, statType, stat)
 			else
 				tagged = true
 			end
-		else
+		elseif not StringHelpers.IsNullOrEmpty(stat) then
 			if not TagFromStats(uuid, stat) then
 				if statType == "Weapon" then
 					local tag = Tags.WeaponTypeToTag[Ext.StatGetAttribute(stat, "WeaponType")]
