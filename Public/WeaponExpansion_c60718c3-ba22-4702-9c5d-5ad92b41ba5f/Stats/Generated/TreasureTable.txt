@@ -169,6 +169,7 @@ object category "T_ST_LLWEAPONEX_DaggersNormal",1,0,0,0,0,0,0,0
 object category "LLWEAPONEX_BattleBooks_1H",1,0,0,0,0,0,0,0
 object category "LLWEAPONEX_Firearms_2H",1,0,0,0,0,0,0,0
 object category "LLWEAPONEX_Pistols",1,0,0,0,0,0,0,0
+object category "LLWEAPONEX_HandCrossbows",1,0,0,0,0,0,0,0
 
 new treasuretable "QuestReward_LLWEAPONEX_Weapons_One"
 IgnoreLevelDiff 1
@@ -1206,9 +1207,10 @@ object category "LLWEAPONEX_Katanas_2H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_RangedNormal"
 new subtable "1,1"
-object category "T_ST_LLWEAPONEX_GreatbowsNormal",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_GreatbowsNormal",2,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Firearms_2H",2,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_Trader_OneHandedNormal"
 new subtable "1,1"
@@ -1226,9 +1228,10 @@ object category "LLWEAPONEX_Polearm_2H",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_Trader_RangedNormal"
 new subtable "1,1"
-object category "T_ST_LLWEAPONEX_GreatbowsNormal",1,1,0,0,0,0,0,0
-object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
+object category "T_ST_LLWEAPONEX_GreatbowsNormal",2,1,0,0,0,0,0,0
+object category "LLWEAPONEX_Firearms_2H",2,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_Trader_RingAmuletBeltNormal"
 new subtable "1,1"
@@ -1237,6 +1240,7 @@ object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
 new treasuretable "ST_LLWEAPONEX_RingAmuletBelt"
 new subtable "1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 
 //REGION MAIN_TABLES_MERGE
 //Adding items to Shared/Origins tables
@@ -1252,6 +1256,8 @@ new subtable "0,1;1,2"
 object category "T_ST_LLWEAPONEX_DaggersNormal",1,1,0,0,0,0,0,0
 new subtable "0,4;1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_Trader_WeaponWizard"
 CanMerge 1
@@ -1265,6 +1271,8 @@ object category "T_ST_LLWEAPONEX_GreatbowsNormal",1,1,0,0,0,0,0,0
 object category "LLWEAPONEX_Firearms_2H",1,1,0,0,0,0,0,0
 new subtable "0,2;1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+new subtable "0,2;1,1"
+object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 new subtable "0,4;1,1"
 object category "T_ST_LLWEAPONEX_QuiversNormal",1,1,0,0,0,0,0,0
 
@@ -1292,11 +1300,15 @@ new treasuretable "ST_QuestReward_Easy_Choice_Extra"
 CanMerge 1
 new subtable "0,4;1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_QuestReward_High_Choice_Extra"
 CanMerge 1
 new subtable "0,1;1,1"
 object category "LLWEAPONEX_Pistols",1,1,0,0,0,0,0,0
+new subtable "0,4;1,1"
+object category "LLWEAPONEX_HandCrossbows",1,1,0,0,0,0,0,0
 
 new treasuretable "ST_SkillbookWater"
 CanMerge 1

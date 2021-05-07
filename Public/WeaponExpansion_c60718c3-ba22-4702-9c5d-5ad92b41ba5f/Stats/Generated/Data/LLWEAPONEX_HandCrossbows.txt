@@ -37,6 +37,7 @@ new entry "ARM_LLWEAPONEX_HandCrossbow_A"
 type "Armor"
 using "_LLWEAPONEX_HandCrossbows"
 data "ItemGroup" "ARM_LLWEAPONEX_HandCrossbow_A"
+data "ObjectCategory" "LLWEAPONEX_HandCrossbows"
 data "ComboCategory" "ArmorRing,LLWEAPONEX_HandCrossbow"
 data "ItemColor" "LLWEAPONEX_HandCrossbow_A"
 
