@@ -684,23 +684,16 @@ Input.RegisterListener(function(eventName, pressed, id, inputMap, controllerEnab
 	if not MasteryMenu.Open then
 		if controllerEnabled then
 			-- Right Trigger + Left Trigger 
-			if eventName == "PartyManagement" and Input.GetKeyState("PanelSelect") == true then
+			if eventName == "PartyManagement" and Input.IsPressed("PanelSelect") then
 				TryOpenMasteryMenu()
 			end
 		else
 			-- CTRL + Shift + M
 			--Ext.Print(eventName, Input.GetKeyState("FlashCtrl"), Input.GetKeyState("SplitItemToggle"))
-			if eventName == "ToggleMap" and pressed and Input.GetKeyState("FlashCtrl") then
+			if eventName == "ToggleMap" and pressed and Input.IsPressed("FlashCtrl") then
 				TryOpenMasteryMenu()
 			end
 		end
-	elseif controllerEnabled then
-		-- if eventName == "Interact" and not pressed then -- The accept button
-			
-		-- elseif eventName == "PrevObject" and not pressed then
-			-- 	--local main = MasteryMenu.Instance:GetRoot()
-			
-		-- end
 	end
 end)
 
