@@ -37,16 +37,16 @@ local overrides = {
 	},
 }
 
-local function appendProperties(statname, property, value)
-	local existingTable = Ext.StatGetAttribute(statname, property)
+local function appendProperties(statName, property, value)
+	local existingTable = GameHelpers.Stats.GetCurrentOrInheritedProperty(statName, property)
 	if existingTable ~= nil then
 		for i,v in pairs(value) do
 			table.insert(existingTable, v)
 		end
-		Ext.StatSetAttribute(statname, property, existingTable)
+		Ext.StatSetAttribute(statName, property, existingTable)
 	else
-		--print("Ext.StatSetAttribute(",statname, property, Common.Dump(value),")")
-		Ext.StatSetAttribute(statname, property, value)
+		--print("Ext.StatSetAttribute(",statName, property, Common.Dump(value),")")
+		Ext.StatSetAttribute(statName, property, value)
 	end
 end
 
@@ -145,13 +145,13 @@ local llweaponex_extender_additions = {
 }
 
 local function apply_overrides(stats)
-    for statname,props in pairs(stats) do
+    for statName,props in pairs(stats) do
 		for property,value in pairs(props) do
 			if property == "SkillProperties" or property == "ExtraProperties" then
-				appendProperties(statname, property, value)
+				appendProperties(statName, property, value)
 			else
-				PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statname," (".. property ..") = [",value,"]")
-				Ext.StatSetAttribute(statname, property, value)
+				PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statName," (".. property ..") = [",value,"]")
+				Ext.StatSetAttribute(statName, property, value)
 			end
         end
     end
