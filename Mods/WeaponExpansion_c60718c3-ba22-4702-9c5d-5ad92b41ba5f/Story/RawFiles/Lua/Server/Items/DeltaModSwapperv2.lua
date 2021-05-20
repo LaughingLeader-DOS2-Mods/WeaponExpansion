@@ -324,8 +324,8 @@ local equipmentTypes = {
 Ext.RegisterListener("TreasureItemGenerated", function(item)
 	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
 	if item ~= nil and equipmentTypes[item.ItemType] == true then
-		LeaderLib.PrintLog("[OnTreasureItemGenerated] MyGuid(%s) StatsId(%s) ItemType(%s)", item.MyGuid, item.StatsId, item.ItemType)
-		if item.Stats == nil then
+		fprint(LOGLEVEL.TRACE, "[OnTreasureItemGenerated] MyGuid(%s) StatsId(%s) ItemType(%s)", item.MyGuid, item.StatsId, item.ItemType)
+		if GameHelpers.Item.IsObject(item) then
 			return
 		end
 		if skipRarities[item.Stats.ItemTypeReal] ~= true then

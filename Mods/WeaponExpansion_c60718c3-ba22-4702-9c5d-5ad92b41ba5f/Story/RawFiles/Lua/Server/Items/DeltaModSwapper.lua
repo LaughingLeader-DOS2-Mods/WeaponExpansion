@@ -334,7 +334,7 @@ function SwapDeltaMods(item)
 		---@type EsvItem
 		local itemObject = Ext.GetItem(item)
 
-		if itemObject.Stats == nil then
+		if GameHelpers.Item.IsObject(itemObject) then
 			ObjectSetFlag(item, "LLWEAPONEX_ProcessedDeltamods", 0)
 			return
 		end
@@ -465,7 +465,7 @@ local equipmentTypes = {
 -- Ext.RegisterListener("TreasureItemGenerated", function(item)
 -- 	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
 -- 	--LeaderLib.PrintLog("[OnTreasureItemGenerated] item(%s) stat(%s) isInInventory(%s) InventoryHandle(%s) TreasureGenerated(%s) OwnerHandle(%s) ParentInventoryHandle(%s)", item.MyGuid, item.StatsId, isInInventory, item.InventoryHandle, item.TreasureGenerated, item.OwnerHandle, item.ParentInventoryHandle)
--- 	if item == nil or item.MyGuid == nil or item.Stats == nil then
+-- 	if item == nil or item.MyGuid == nil or GameHelpers.Item.IsObject(item) then
 -- 		return
 -- 	end
 -- 	if item.Stats.Unique ~= 1 and equipmentTypes[item.ItemType] == true then
