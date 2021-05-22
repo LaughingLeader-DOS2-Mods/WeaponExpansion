@@ -15,7 +15,7 @@ function Mastery.CanGrantXP(uuid)
 	and CharacterIsPartyFollower(uuid) == 0
 	and Osi.LeaderLib_Helper_QRY_IgnoreCharacter(uuid) ~= true
 	and CharacterIsInCombat(uuid) == 1
-	and Osi.LeaderLib_Party_QRY_IsEnemyOfParty(uuid) == true
+	and GameHelpers.Character.IsEnemyOfParty(uuid)
 	then
 		return true
 	end
@@ -27,25 +27,25 @@ function MasterySystem.GrantDeathExperienceToParty(enemy)
 	local mult = Ext.ExtraData.LLWEAPONEX_Mastery_DeathExperienceMult or 1.0
 	local expGain = mult * bossMult
 	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-		local player = db[1]
-		AddMasteryExperienceForAllActive(StringHelpers.GetUUID(player), expGain)
+		AddMasteryExperienceForAllActive(StringHelpers.GetUUID(db[1]), expGain)
 	end
 end
 
 --Mods.WeaponExpansion.AddMasteryExperienceForAllActive(Mods.WeaponExpansion.Origin.Harken, 20.0)
 function MasterySystem.GrantBasicAttackExperience(player, enemy, mastery)
-	if Mastery.CanGrantXP(enemy) then
-		local expGain = Ext.ExtraData.LLWEAPONEX_Mastery_BasicAttackExperienceMult or 0.5
-		if IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1 then
-			expGain = Ext.ExtraData.LLWEAPONEX_Mastery_TrainingDummyExperienceMult or 0.1
-		end
-		-- if mastery == "LLWEAPONEX_Unarmed" and IsTagged(player, "LIZARD") == 1 then
-		-- 	expGain = expGain * 0.5
-		-- end
-		if mastery == nil then
-			AddMasteryExperienceForAllActive(player, expGain)
-		else
+	if IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1 then
+		local expGain = Ext.ExtraData.LLWEAPONEX_Mastery_TrainingDummyExperienceMult or 0.1
+		if mastery then
 			AddMasteryExperience(player, mastery, expGain)
+		else
+			AddMasteryExperienceForAllActive(player, expGain)
+		end
+	elseif Mastery.CanGrantXP(enemy) then
+		local expGain = Ext.ExtraData.LLWEAPONEX_Mastery_BasicAttackExperienceMult or 0.5
+		if mastery then
+			AddMasteryExperience(player, mastery, expGain)
+		else
+			AddMasteryExperienceForAllActive(player, expGain)
 		end
 	end
 end
