@@ -88,9 +88,7 @@ function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 			end
 
 			if Vars.DebugMode then
-				if currentExp == nil then currentExp = 0 end
-				if nextExp == nil then nextExp = 0 end
-				Ext.PrintWarning("Mastery XP:",uuid, mastery, currentExp, "=>", nextExp)
+				fprint(LOGLEVEL.WARNING, "[LLWEAPONEX] Mastery (%s) XP (%s) => (%s) [%s}", mastery, currentExp or 0, nextExp or 0, uuid)
 			end
 
 			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(uuid, mastery, nextLevel, nextExp)
@@ -104,26 +102,17 @@ end
 
 Ext.NewCall(AddMasteryExperience, "LLWEAPONEX_Ext_AddMasteryExperience", "(CHARACTERGUID)_Character, (STRING)_Mastery, (REAL)_ExperienceGain")
 
-local function ItemIsTagged(item, tag)
-	if item == nil then
-		return false
-	end
-	return IsTagged(item, tag) == 1
-end
-
 --- Adds mastery experience for all active masteries on equipped weapons.
 --- @param uuid string
 --- @param expGain number
 function AddMasteryExperienceForAllActive(uuid,expGain)
 	if ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
-		--local mainhand = CharacterGetEquippedItem(uuid, "Weapon")
-		--local offhand = CharacterGetEquippedItem(uuid, "Shield")
-		for mastery,masterData in pairs(Masteries) do
-			-- if ItemIsTagged(mainhand) or ItemIsTagged(offhand) then
-			-- 	AddMasteryExperience(uuid,mastery,expGain)
-			-- end
-			if IsTagged(uuid,mastery) == 1 then
-				AddMasteryExperience(uuid,mastery,expGain,true)
+		local character = Ext.GetCharacter(uuid)
+		local activeMasteries = Mastery.GetActiveMasteries(character)
+		local length = #activeMasteries
+		if length > 0 then
+			for i=1,length do
+				AddMasteryExperience(uuid,activeMasteries[i],expGain,true)
 			end
 		end
 	end
@@ -180,7 +169,7 @@ end
 --- @param mastery string
 function OnMasteryActivated(uuid,mastery)
 	uuid = StringHelpers.GetUUID(uuid)
-	PrintDebug("[WeaponExpansion] Activated mastery tag ["..mastery.."] on ["..uuid.."].")
+	PrintDebug("[WeaponExpansion] Activated mastery ["..mastery.."] on ["..uuid.."].")
 	local callbacks = Listeners.MasteryActivated[mastery]
 	if callbacks ~= nil then
 		for i,callback in pairs(callbacks) do

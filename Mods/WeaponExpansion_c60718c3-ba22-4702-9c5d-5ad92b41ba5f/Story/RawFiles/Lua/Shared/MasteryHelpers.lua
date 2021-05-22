@@ -102,3 +102,25 @@ function Mastery.HasMasteryRequirement(character, tag)
 	end
 	return false
 end
+
+---@param character EsvCharacter|StatCharacter
+---@return table<string,boolean>
+function Mastery.GetMasteryActiveDictionary(character)
+	local active = {}
+	for mastery,masteryData in pairs(Masteries) do
+		active[mastery] = GameHelpers.CharacterOrEquipmentHasTag(character,mastery)
+	end
+	return active
+end
+
+--- @param character EsvCharacter|StatCharacter
+---@return string[]
+function Mastery.GetActiveMasteries(character)
+	local active = {}
+	for mastery,masteryData in pairs(Masteries) do
+		if GameHelpers.CharacterOrEquipmentHasTag(character,mastery) then
+			active[#active+1] = mastery
+		end
+	end
+	return active
+end
