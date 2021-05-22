@@ -1,3 +1,10 @@
+---@class VisibilityMode
+local VisibilityMode = {
+	Default = "DEFAULT",
+	ShowIfNotZero = "SHOWIFNOTZERO",
+	ShowAll = "ShowAll",
+}
+
 MasteryMenu = {
 	CHARACTER_HANDLE = nil,
 	Open = false,
@@ -15,6 +22,8 @@ MasteryMenu = {
 	MasteryData = nil,
 	IsControllerMode = false,
 	Layer = 10,
+	---@type VisibilityMode
+	RankVisibility = VisibilityMode.Default
 }
 MasteryMenu.__index = MasteryMenu
 
@@ -568,6 +577,69 @@ local function getRankTooltip(data, i)
 	end
 end
 
+local function BuildMenuEntries(ui)
+	ui:Invoke("resetList")
+	local masteryKeys = {}
+	for tag,data in pairs(Masteries) do
+		if MasteryMenu.RankVisibility == VisibilityMode.ShowAll or hasMinimumMasteryRankData(MasteryMenu.MasteryData, tag, 1) then
+			table.insert(masteryKeys, tag)
+		else
+			--PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(MasteryMenu.MasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
+		end
+	end
+	table.sort(masteryKeys, sortMasteries)
+	
+	local i = 0
+	for _,tag in pairs(masteryKeys) do
+		local data = Masteries[tag]
+		local rank = MasteryMenu.MasteryData.Masteries[tag].Rank
+		local xp = math.ceil(MasteryMenu.MasteryData.Masteries[tag].XP)
+		local xpMax = math.ceil(Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required)
+		-- if Debug.MasteryTests then
+			-- 	MasteryMenu.MasteryData.Masteries[tag].Rank = 4
+			-- 	MasteryMenu.MasteryData.Masteries[tag].XP = xpMax
+			-- 	rank = 4
+			-- 	xp = xpMax
+		-- end
+		local canShowRank = MasteryMenu.RankVisibility == VisibilityMode.ShowAll or rank > 0
+		if not canShowRank then
+			if MasteryMenu.RankVisibility == VisibilityMode.ShowIfNotZero and xp > 0 then
+				canShowRank = true
+			elseif MasteryMenu.RankVisibility == VisibilityMode.Default then
+				-- If rank 0, show if at 40% of the way there
+				local threshold = Ext.ExtraData.LLWEAPONEX_MasteryMenu_MinXPVisibilityThreshold or 0.4
+				canShowRank = xp >= math.floor(Mastery.Variables.RankVariables[1].Required*threshold)
+			end
+		end
+		if canShowRank then
+			local barPercentage = 0.0
+			if xp > 0 and xp < xpMax then
+				barPercentage = math.max(math.floor(((xp / xpMax) * 100) + 0.5) / 100, 0.01)
+			elseif xp >= xpMax then
+				barPercentage = 1.0
+			end
+			local xpPercentage = math.floor(barPercentage * 100)
+			local rankDisplayText = GameHelpers.GetStringKeyText("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank), "")
+			local masteryColorTitle = getMasteryDescriptionTitle(data)
+			ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
+			local expRankDisplay = rankDisplayText
+			if rank >= Mastery.Variables.MaxRank then
+				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
+			end
+			ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, Common.FormatNumber(xp), Common.FormatNumber(xpMax)))
+			
+			for k=1,Mastery.Variables.MaxRank,1 do
+				ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))
+				--print("Set rank tooltip: ", i, k)
+			end
+			
+			PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
+			i = i + 1
+		end
+	end
+	ui:Invoke("selectMastery", MasteryMenu.LastSelected, true)
+end
+
 ---@param CharacterMasteryData characterMasteryData
 local function OpenMasteryMenu(characterMasteryData)
 	if not MasteryMenu.Initialized then
@@ -585,55 +657,7 @@ local function OpenMasteryMenu(characterMasteryData)
 		MasteryMenu.Instance = ui
 		ui:Invoke("setTitle", Text.MasteryMenu.Title.Value)
 		ui:Invoke("setButtonText", Text.MasteryMenu.CloseButton.Value)
-		ui:Invoke("resetList")
-		local masteryKeys = {}
-		for tag,data in pairs(Masteries) do
-			if hasMinimumMasteryRankData(characterMasteryData, tag, 1) then
-				table.insert(masteryKeys, tag)
-			else
-				--PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Character("..tostring(characterMasteryData.UUID)..") rank for mastery ("..tag..") is <= 0. Skipping displaying entry.")
-			end
-		end
-		table.sort(masteryKeys, sortMasteries)
-		
-		local i = 0
-		for _,tag in pairs(masteryKeys) do
-			local data = Masteries[tag]
-			local rank = characterMasteryData.Masteries[tag].Rank
-			local xp = math.ceil(characterMasteryData.Masteries[tag].XP)
-			local xpMax = math.ceil(Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required)
-			-- if Debug.MasteryTests then
-				-- 	characterMasteryData.Masteries[tag].Rank = 4
-				-- 	characterMasteryData.Masteries[tag].XP = xpMax
-				-- 	rank = 4
-				-- 	xp = xpMax
-			-- end
-			if rank > 0 or xp >= math.floor(Mastery.Variables.RankVariables[1].Required*0.4) then -- If rank 0, show if at 40% of the way there
-				local barPercentage = 0.0
-				if xp > 0 and xp < xpMax then
-					barPercentage = math.max(math.floor(((xp / xpMax) * 100) + 0.5) / 100, 0.01)
-				elseif xp >= xpMax then
-					barPercentage = 1.0
-				end
-				local xpPercentage = math.floor(barPercentage * 100)
-				local rankDisplayText = GameHelpers.GetStringKeyText("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank), "")
-				local masteryColorTitle = getMasteryDescriptionTitle(data)
-				ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
-				local expRankDisplay = rankDisplayText
-				if rank >= Mastery.Variables.MaxRank then
-					expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
-				end
-				ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, Common.FormatNumber(xp), Common.FormatNumber(xpMax)))
-				
-				for k=1,Mastery.Variables.MaxRank,1 do
-					ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))
-					--print("Set rank tooltip: ", i, k)
-				end
-				
-				PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] mastery("..tag..") rank("..tostring(rank)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
-				i = i + 1
-			end
-		end
+		BuildMenuEntries(ui)
 		ui:Invoke("selectMastery", MasteryMenu.LastSelected, true)
 		ui:Invoke("openMenu")
 		MasteryMenu.Open = true
