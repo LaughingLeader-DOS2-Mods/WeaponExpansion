@@ -62,7 +62,6 @@ LLWEAPONEX_Equipment_TrackItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_W
 THEN
 DB_LLWEAPONEX_Equipment_TrackedItems(_Char, _Item, _WeaponType);
 DB_LLWEAPONEX_Equipment_ActiveTags(_Char, _EquippedTag, _Item);
-SetTag(_Char, _EquippedTag);
 
 PROC
 LLWEAPONEX_Equipment_ClearItem((CHARACTERGUID)_Char, (ITEMGUID)_Item, (INTEGER)_IsPlayer)

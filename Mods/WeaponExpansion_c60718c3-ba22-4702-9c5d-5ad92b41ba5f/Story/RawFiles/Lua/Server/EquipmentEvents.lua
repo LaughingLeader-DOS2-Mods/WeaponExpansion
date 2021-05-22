@@ -159,8 +159,10 @@ function OnItemEquipped(uuid,itemUUID)
 		local stat = item.StatsId
 		local statType = item.Stats.ItemType
 
+		local itemTags = GameHelpers.GetItemTags(item, true)
+
 		-- LLWEAPONEX_Blunt was an old tag name that became LLWEAPONEX_Bludgeon
-		if item:HasTag("LLWEAPONEX_Blunt") or (not item:HasTag("LLWEAPONEX_TaggedWeaponType") and (statType == "Weapon" or statType == "Shield")) then
+		if itemTags["LLWEAPONEX_Blunt"] or (not itemTags["LLWEAPONEX_TaggedWeaponType"] and (statType == "Weapon" or statType == "Shield")) then
 			TagWeapon(itemUUID, statType, stat)
 		end
 		
@@ -174,24 +176,23 @@ function OnItemEquipped(uuid,itemUUID)
 		local template = GetTemplate(itemUUID)
 		Osi.LLWEAPONEX_OnItemTemplateEquipped(uuid,itemUUID,template)
 
-		if not item:HasTag("LLWEAPONEX_NoTracking") then
+		if not itemTags["LLWEAPONEX_NoTracking"] then
 			for tag,data in pairs(Masteries) do
 				--PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..uuid.."]")
-				if item:HasTag(tag) then
+				if GameHelpers.ItemHasTag(item, tag) then
 					if isPlayer then
 						local equippedTag = Tags.WeaponTypes[tag]
 						if equippedTag ~= nil then
-							if Vars.DebugMode then
-								if IsTagged(uuid, equippedTag) == 0 then
-									PrintDebug("[WeaponExpansion:OnItemEquipped] Setting equipped tag ["..equippedTag.."] on ["..uuid.."]")
-								end
+							if not character:HasTag(equippedTag) and not itemTags[equippedTag] then
+								SetTag(uuid, equippedTag)
+								fprint(LOGLEVEL.TRACE, "[WeaponExpansion:OnItemEquipped] Setting weapon equipped tag [%s] on [%s]", equippedTag, uuid)
 							end
 							Osi.LLWEAPONEX_Equipment_TrackItem(uuid,itemUUID,tag,equippedTag,isPlayer and 1 or 0)
 						end
 						Osi.LLWEAPONEX_WeaponMastery_TrackMastery(uuid, itemUUID, tag)
-						if IsTagged(uuid, tag) == 0 then
+						if not character:HasTag(equippedTag) and not not itemTags[tag] then
 							SetTag(uuid, tag)
-							PrintDebug("[WeaponExpansion:OnItemEquipped] Setting mastery tag ["..tag.."] on ["..uuid.."]")
+							fprint(LOGLEVEL.TRACE, "[WeaponExpansion:OnItemEquipped] Setting mastery tag [%s] on [%s]", tag, uuid)
 						end
 					end
 					Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(uuid,itemUUID,tag,isPlayer and 1 or 0)
@@ -237,7 +238,7 @@ function OnItemEquipped(uuid,itemUUID)
 			end
 		end
 		for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
-			if item:HasTag(tag) then
+			if itemTags[tag] then
 				if Vars.DebugMode then
 					Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.StatsId, character.MyGuid))
 				end
