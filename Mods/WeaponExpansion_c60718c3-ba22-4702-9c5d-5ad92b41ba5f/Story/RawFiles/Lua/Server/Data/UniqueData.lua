@@ -625,7 +625,7 @@ local BoostAttributes = {
 }
 
 local WeaponBoosts = {
-	DamageType = "integer",
+	--DamageType = "integer",
 	MinDamage = "integer",
 	MaxDamage = "integer",
 	DamageBoost = "integer",
