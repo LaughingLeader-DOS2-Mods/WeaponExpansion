@@ -484,6 +484,14 @@ local function StatOverrides_Init()
 						uniqueStats[stat][attribute] = val
 					end
 				end
+
+				if Ext.IsModLoaded(MODID.EE2Core) then
+					--EE2 AP cost adjustment
+					local ap = Ext.StatGetAttribute(stat, "AttackAPCost")
+					if ap < 4 then
+						Ext.StatSetAttribute(stat, "AttackAPCost", 4)
+					end
+				end
 			end
 		end
 	end
