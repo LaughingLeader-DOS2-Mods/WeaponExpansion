@@ -126,7 +126,27 @@ function UniqueData:GetOwner(itemUUID)
 	return nil
 end
 
-function UniqueData:GetUUID(owner)
+---Checks if a given UUID is a valid original or copy of this unique.
+---@param uuid string
+---@return boolean
+function UniqueData:IsValid(uuid)
+	if self.UUID == uuid then
+		return true
+	end
+	for id,v in pairs(self.Copies) do
+		if id == uuid then
+			return true
+		end
+	end
+	return false
+end
+
+---Tries to get UUID of a unique owned by the given owner.
+---@param owner string
+function UniqueData:GetUUIDForOwner(owner)
+	if not owner then
+		return nil
+	end
 	if self:GetOwner(self.UUID) == owner then
 		return self.UUID
 	end
@@ -135,7 +155,13 @@ function UniqueData:GetUUID(owner)
 			return uuid
 		end
 	end
-	return self.UUID
+	return nil
+end
+
+---Gets the UUID of this unique owned by the owner, or the default value.
+---@param owner string
+function UniqueData:GetUUID(owner)
+	return self:GetUUIDForOwner(owner) or self.UUID
 end
 
 local function GetUUIDAndOwner(self, uuid)
@@ -157,8 +183,11 @@ function UniqueData:IsReleasedFromOwner(uuid)
 	return false
 end
 
-function UniqueData:ReleaseFromOwner(unequip, uuid)
-	local uuid,owner = GetUUIDAndOwner(self, uuid)
+function UniqueData:ReleaseFromOwner(unequip, uuid, owner)
+	if not uuid or not owner then
+		uuid,owner = GetUUIDAndOwner(self, uuid)
+	end
+
 	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
 	ItemClearOwner(uuid)
 	if unequip == true and owner ~= nil then
@@ -336,7 +365,10 @@ end
 
 function UniqueData:Transfer(target, equip, uuid)
 	local uuid,owner = GetUUIDAndOwner(self, uuid)
-	if target == "host" then target = CharacterGetHostCharacter() end
+	if target == "host" or not (target and Vars.DebugMode) then target = CharacterGetHostCharacter() end
+	if not target then
+		return
+	end
 	if ObjectExists(uuid) == 0 then
 		Ext.PrintError("[UniqueData:Transfer] Item", uuid, "does not exist!")
 		return false

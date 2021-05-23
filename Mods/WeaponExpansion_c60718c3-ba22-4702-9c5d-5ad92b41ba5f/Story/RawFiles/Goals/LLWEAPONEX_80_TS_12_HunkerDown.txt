@@ -18,45 +18,12 @@ NRD_StatusGetInt(_Target, _Handle, "CriticalHit", 1)
 THEN
 NRD_ModCall("LeaderLib", "ReduceDamage", (STRING)_Target, (STRING)_Attacker, (STRING)_Handle, "0.50");
 
-/*
-IF
-NRD_OnActionStateEnter(_Char, "PrepareSkill")
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
-THEN
-SetStoryEvent(_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride");
-*/
-
 IF
 ObjectTurnStarted(_Char)
 AND
 HasActiveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN");
-
-/*
-IF
-CharacterStartAttackObject(_, _, (CHARACTERGUID)_Char)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
-THEN
-SetStoryEvent(_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride");
-LeaderLib_Timers_StartObjectTimer(_Char, 1500, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
-
-IF
-CharacterStatusRemoved(_Char, "UNSHEATHED", _)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_DualShields_HunkerDown_AnimationOverrideSet", 1)
-THEN
-SetStoryEvent(_Char, "LLWEAPONEX_DualShields_RemoveHunkerDownAnimationOverride");
-
-IF
-ObjectTurnEnded((CHARACTERGUID)_Char)
-AND
-HasActiveStatus(_Char, "LLWEAPONEX_DUALSHIELDS_HUNKER_DOWN", 1)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 500, "Timers_LLWEAPONEX_DualShields_HunkerDown_PlayAnimation", "LLWEAPONEX_DualShields_HunkerDown_PlayAnimation");
-*/
 EXITSECTION
 
 ENDEXITSECTION
