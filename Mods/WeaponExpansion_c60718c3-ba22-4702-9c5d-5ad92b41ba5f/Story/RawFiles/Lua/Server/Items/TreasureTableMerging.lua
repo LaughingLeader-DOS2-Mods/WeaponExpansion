@@ -1,6 +1,20 @@
+local defaultProps = {
+	["Common"] = 0,
+	["Divine"] = 0,
+	["Epic"] = 0,
+	["Frequency"] = 1,
+	["Legendary"] = 0,
+	["Rare"] = 0,
+	["Uncommon"] = 0,
+	["Unique"] = 0
+}
+
 ---@return StatTreasureCategory
 local function CreateBasicCategory(name, isTable, params)
-	local tbl = {Frequency = 1}
+	local tbl = {}
+	for key,v in pairs(defaultProps) do
+		tbl[key] = v
+	end
 
 	if isTable == true then
 		--tbl.TreasureTable = "T_"..name
@@ -66,23 +80,52 @@ local TreasureTableOverrides = {
 	},
 }
 
-Ext.RegisterListener("SessionLoaded", function()
+local function ApplyTreasureTableOverrides()
 	for statName,data in pairs(TreasureTableOverrides) do
 		local treasureTable = Ext.GetTreasureTable(statName)
 		if treasureTable ~= nil then
 			local sub = treasureTable.SubTables[1]
-			if sub ~= nil and data.Categories ~= nil then
-				for _,entry in pairs(data.Categories) do
-					table.insert(sub.Categories, entry)
-					if sub.TotalFrequency ~= nil then
-						sub.TotalFrequency = sub.TotalFrequency + entry.Frequency
+			if sub then
+				if data.Categories ~= nil then
+					local categories = {}
+					local totalFrequency = 0
+					--Make the default stuff more common than the new stuff
+					for i,v in pairs(sub.Categories) do
+						local id = v.TreasureCategory or v.TreasureTable
+						if not string.find(id, "LLWEAPONEX") then
+							if v.Frequency and v.Frequency == 1 then
+								v.Frequency = v.Frequency + 1
+								totalFrequency = totalFrequency + v.Frequency
+							end
+							table.insert(categories, v)
+						end
+					end
+					for _,entry in pairs(data.Categories) do
+						local id = entry.TreasureCategory or entry.TreasureTable
+						local inTable = false
+						for i,v in pairs(categories) do
+							local id2  = v.TreasureCategory or v.TreasureTable
+							if id2 == id then
+								inTable = true
+								break
+							end
+						end
+						if not inTable then
+							table.insert(categories, entry)
+							totalFrequency = totalFrequency + entry.Frequency
+						end
+					end
+					sub.Categories = categories
+					if sub.TotalFrequency then
+						sub.TotalFrequency = totalFrequency
 					end
 					if Vars.DebugMode then
-						Ext.Print("Added category",entry.TreasureTable or entry.TreasureCategory,"to",statName)
+						print(Ext.JsonStringify(treasureTable))
 					end
+					Ext.UpdateTreasureTable(treasureTable)
 				end
-				Ext.UpdateTreasureTable(treasureTable)
 			end
 		end
 	end
-end)
+end
+Ext.RegisterListener("SessionLoaded", ApplyTreasureTableOverrides)
