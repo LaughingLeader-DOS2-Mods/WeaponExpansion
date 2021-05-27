@@ -4,33 +4,6 @@ INITSECTION
 
 KBSECTION
 IF
-CharacterCriticalHitBy(_Target, _, _Char)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 1)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 1)
-THEN
-PlaySound(_Target, "LeaderLib_Impacts_Anvil_01");
-ApplyStatus(_Target, "LLWEAPONEX_DIZZY", 6.0, 0, _Char);
-
-IF
-CharacterStartAttackPosition(_x, _y, _z, _, _Char)
-AND
-ObjectGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 1)
-THEN
-LLWEAPONEX_Uniques_AnvilMace_OnAttackAtPosition(_Char, _x, _y, _z);
-
-IF
-TimerFinished(_TimerName)
-AND
-DB_LLWEAPONEX_AnvilMace_ImpactPosition(_Char, _TimerName, _x, _y, _z)
-THEN
-NOT DB_LLWEAPONEX_AnvilMace_ImpactPosition(_Char, _TimerName, _x, _y, _z);
-ObjectClearFlag(_Char, "LLWEAPONEX_IsBasicAttacking", 0);
-SetVarFloat3(_Char, "LLWEAPONEX_AnvilMace_AttackPosition", _x, _y, _z);
-SetStoryEvent(_Char, "LLWEAPONEX_AnvilMace_ExplodeAtPosition");
-
-IF
 CharacterStatusApplied(_Char, "UNSHEATHED", _)
 AND
 IsTagged(_Char, "DWARF", 1)

@@ -645,11 +645,6 @@ local function FireSpell(source, target)
 
 		return true
 	end
-
-	-- SetVarFixedString(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_Projectile", _Spell);
-	-- SetVarFloat3(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_AttackPosition", _x, _y, _z);
-	-- SetVarInteger(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_ShootProjectile", _Shoot);
-	-- SetStoryEvent(_Char, "LLWEAPONEX_BattleBooks_SpellScroll_ExplodeSpellAtPosition");
 	return false
 end
 
@@ -680,7 +675,7 @@ end)
 ---@param attacker string
 ---@param target string|number[]
 ---@param handle integer|DamageList
-BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,handle)
+BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,handle,damage)
 	if HasActiveStatus(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 		ListenForDeath(target, attacker, 1500)
 		if FireSpell(attacker, target) then
