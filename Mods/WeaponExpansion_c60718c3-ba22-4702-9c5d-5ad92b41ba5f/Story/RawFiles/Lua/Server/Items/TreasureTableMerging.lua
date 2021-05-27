@@ -119,9 +119,9 @@ local function ApplyTreasureTableOverrides()
 					if sub.TotalFrequency then
 						sub.TotalFrequency = totalFrequency
 					end
-					if Vars.DebugMode then
-						print(Ext.JsonStringify(treasureTable))
-					end
+					-- if Vars.DebugMode then
+					-- 	print(Ext.JsonStringify(treasureTable))
+					-- end
 					Ext.UpdateTreasureTable(treasureTable)
 				end
 			end

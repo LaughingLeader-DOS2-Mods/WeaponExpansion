@@ -28,7 +28,7 @@ end)
 ---@param attacker string
 ---@param target string|number[]
 ---@param handle integer|DamageList
-BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,handle)
+BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,handle,damage)
 	if hitObject and IsTagged(attacker, "LLWEAPONEX_Blunderbuss_Equipped") == 1 then
 		GameHelpers.ExplodeProjectile(attacker, target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode")
 	end
