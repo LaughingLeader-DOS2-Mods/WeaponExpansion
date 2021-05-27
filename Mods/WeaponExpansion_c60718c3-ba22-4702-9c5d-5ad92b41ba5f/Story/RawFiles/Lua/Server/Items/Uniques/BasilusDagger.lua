@@ -49,7 +49,7 @@ function Basilus_OnTargetActionTaken(target)
 	ObjectClearFlag(target, "LLWEAPONEX_BasilusDagger_ListenForAction", 0)
 end
 
--- BasicAttackManager.RegisterListener("OnStart", function(attacker, owner, target)
+-- BasicAttackManager.RegisterListener("OnStart", function(attacker, target)
 -- 	if ObjectGetFlag(attacker, "LLWEAPONEX_BasilusDagger_ListenForAction") == 1 then
 -- 		Basilus_OnTargetActionTaken(attacker)
 -- 	end

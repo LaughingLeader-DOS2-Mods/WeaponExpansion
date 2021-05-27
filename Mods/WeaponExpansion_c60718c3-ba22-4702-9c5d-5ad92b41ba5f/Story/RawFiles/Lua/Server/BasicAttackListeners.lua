@@ -10,15 +10,27 @@ if BasicAttackManager.Listeners == nil then
 end
 
 ---@alias BasicAttackEventID OnStart|OnHit
----@alias BasicAttackCallback fun(attacker:string, owner:string, target:string|number[])
+
+---@alias BasicAttackOnStartCallback fun(attacker:string, target:string|number[]):void
+---@alias BasicAttackOnHitTargetCallback fun(bHitObject:boolean, attacker:string, target:string|number[], damage:integer|DamageList, handle:integer|nil):void
 
 ---@param event BasicAttackEventID
----@param func BasicAttackCallback
+---@param func BasicAttackOnStartCallback|BasicAttackOnHitTargetCallback
 function BasicAttackManager.RegisterListener(event, func)
 	if BasicAttackManager.Listeners[event] == nil then
 		BasicAttackManager.Listeners[event] = {}
 	end
 	table.insert(BasicAttackManager.Listeners[event], func)
+end
+
+---@param func BasicAttackOnHitTargetCallback|BasicAttackOnHitTargetCallback
+function BasicAttackManager.RegisterOnHit(func)
+	BasicAttackManager.RegisterListener("OnHit", func)
+end
+
+---@param func BasicAttackOnStartCallback
+function BasicAttackManager.RegisterOnStart(func)
+	BasicAttackManager.RegisterListener("OnStart", func)
 end
 
 function BasicAttackManager.RemoveListener(event, func)
@@ -51,7 +63,7 @@ end
 
 local function OnBasicAttackTarget(target, owner, attacker)
 	for i,callback in pairs(BasicAttackManager.Listeners.OnStart) do
-		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(owner), StringHelpers.GetUUID(target))
+		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(target))
 		if not b then
 			Ext.PrintError(err)
 		end
@@ -61,13 +73,22 @@ Ext.RegisterOsirisListener("CharacterStartAttackObject", 3, "after", OnBasicAtta
 
 local function OnBasicAttackPosition(x, y, z, owner, attacker)
 	for i,callback in pairs(BasicAttackManager.Listeners.OnStart) do
-		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(owner), {x,y,z})
+		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), {x,y,z})
 		if not b then
 			Ext.PrintError(err)
 		end
 	end
 end
 Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAttackPosition)
+
+function BasicAttackManager.InvokeOnHit(source, target, damage, handle)
+	for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
+		local b,err = xpcall(callback, debug.traceback, true, source, target, damage, handle)
+		if not b then
+			Ext.PrintError(err)
+		end
+	end
+end
 
 ---@param attacker string
 ---@param target number[]

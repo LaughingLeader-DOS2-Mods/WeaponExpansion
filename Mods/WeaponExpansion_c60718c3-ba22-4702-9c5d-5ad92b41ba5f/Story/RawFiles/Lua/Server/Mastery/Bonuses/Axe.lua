@@ -56,11 +56,7 @@ end
 
 OnTimerFinished["LLWEAPONEX_MasteryBonus_ApplyVulnerable"] = BlinkStrike_ApplyVulnerable
 
----@param hitObject boolean
----@param attacker string
----@param target string|number[]
----@param handle integer|DamageList
-BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,handle,damage)
+BasicAttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
 	if hitObject and HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
 		RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
 		GameHelpers.ExplodeProjectile(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage")

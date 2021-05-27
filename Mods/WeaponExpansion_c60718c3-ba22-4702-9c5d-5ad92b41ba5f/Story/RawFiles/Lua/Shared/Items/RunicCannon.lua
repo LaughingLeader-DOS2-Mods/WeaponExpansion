@@ -56,13 +56,8 @@ if Ext.IsServer() then
 		Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(source, 750)
 	end
 
-	---@param hitObject boolean
-	---@param attacker string
-	---@param target string|number[]
-	---@param handle integer|DamageList
-	local function OnBasicAttack(hitObject,attacker,target,handle)
-		if hitObject and IsTagged(attacker, "LLWEAPONEX_RunicCannonEquipped") == 1 then
-			Ext.Print("Runic Cannon basic attack?")
+	local function OnBasicAttack(bHitObject,attacker,target,damage,handle)
+		if bHitObject and IsTagged(attacker, "LLWEAPONEX_RunicCannonEquipped") == 1 then
 			Osi.LLWEAPONEX_ArmCannon_OnHit(attacker, target)
 			Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(attacker, 750)
 		end
@@ -72,7 +67,7 @@ if Ext.IsServer() then
 
 	Ext.RegisterListener("SessionLoaded", function()
 		if not registeredListener then
-			BasicAttackManager.RegisterListener("OnHit", OnBasicAttack)
+			BasicAttackManager.RegisterOnHit(OnBasicAttack)
 			registeredListener = true
 		end
 	end)

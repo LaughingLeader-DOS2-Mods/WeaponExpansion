@@ -14,22 +14,15 @@ SkillManager.RegisterAnySkillListener(function(char, state, skill, skillType, el
 	end
 end)
 
----@param attacker string
----@param owner string
----@param target string|number[]
-BasicAttackManager.RegisterListener("OnStart", function(attacker,owner,target)
+BasicAttackManager.RegisterOnStart(function(attacker, target)
 	if HasActiveStatus(attacker, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS") == 1 then
 		RemoveStatus(attacker, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
 	end
 end)
 
 --Blunderbuss bonus on hit
----@param hitObject boolean
----@param attacker string
----@param target string|number[]
----@param handle integer|DamageList
-BasicAttackManager.RegisterListener("OnHit", function(hitObject,attacker,target,handle,damage)
-	if hitObject and IsTagged(attacker, "LLWEAPONEX_Blunderbuss_Equipped") == 1 then
+BasicAttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
+	if bHitObject and IsTagged(attacker, "LLWEAPONEX_Blunderbuss_Equipped") == 1 then
 		GameHelpers.ExplodeProjectile(attacker, target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode")
 	end
 end)

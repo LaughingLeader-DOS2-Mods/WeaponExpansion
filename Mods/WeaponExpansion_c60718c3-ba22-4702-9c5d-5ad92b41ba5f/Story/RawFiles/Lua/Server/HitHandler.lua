@@ -91,7 +91,7 @@ local function OnPrepareHit(target,source,damage,handle)
 			NRD_HitSetInt(handle, "Blocked", 1)
 			NRD_HitClearAllDamage(handle)
 			damage = 0
-			Osi.LeaderLib_Timers_StartObjectTimer(StringHelpers.GetUUID(target), 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
+			Osi.LeaderLib_Timers_StartObjectTimer(target, 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
 		end
 	end
 
@@ -180,12 +180,7 @@ RegisterListener("OnHit", function(target,source,damage,handle)
 						end
 					end
 				end
-				for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
-					local b,err = xpcall(callback, debug.traceback, true, StringHelpers.GetUUID(source), StringHelpers.GetUUID(target), handle, damage)
-					if not b then
-						Ext.PrintError(err)
-					end
-				end
+				BasicAttackManager.InvokeOnHit(source, target, damage, handle)
 			elseif skill ~= "" then
 				if IsTagged(source, "LLWEAPONEX_RunicCannonEquipped") == 1 
 				and not string.find(skill, "Cannon")
