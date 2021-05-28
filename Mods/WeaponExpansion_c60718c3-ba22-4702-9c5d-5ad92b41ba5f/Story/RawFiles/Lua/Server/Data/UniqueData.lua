@@ -215,6 +215,22 @@ function UniqueData:SetOwner(uuid, owner)
 	end
 end
 
+---Checks if a UUID is a valid owner of this unique.
+---@param owner UUID
+---@return boolean
+function UniqueData:IsOwner(owner)
+	if self.Owner == owner then
+		return true
+	else
+		for uuid,ownerId in pairs(self.Copies) do
+			if ownerId == owner then
+				return true
+			end
+		end
+	end
+	return false
+end
+
 function UniqueData:ResetRelease(uuid)
 	local uuid,owner = GetUUIDAndOwner(self, uuid)
 	ObjectClearFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)

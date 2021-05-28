@@ -1,5 +1,5 @@
 BasicAttackManager.RegisterOnHit(function(bHitObject, attacker, target, damage, handle)
-	if attacker ~= target and ObjectGetFlag(attacker, "LLWEAPONEX_AnvilMaceEquipped") == 1 then
+	if attacker ~= target and Uniques.AnvilMace:IsOwner(attacker) then
 		print("BasicAttackManager.OnHit", bHitObject, attacker, target, damage, handle)
 		if bHitObject then
 			--Ding/dizzy on crit
