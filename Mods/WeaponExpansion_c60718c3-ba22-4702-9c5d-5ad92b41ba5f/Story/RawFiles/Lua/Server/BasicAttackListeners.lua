@@ -71,9 +71,13 @@ local function OnBasicAttackTarget(target, owner, attacker)
 end
 Ext.RegisterOsirisListener("CharacterStartAttackObject", 3, "after", OnBasicAttackTarget)
 
+local startedAttackedPosition = {}
+
 local function OnBasicAttackPosition(x, y, z, owner, attacker)
+	attacker = StringHelpers.GetUUID(attacker)
+	startedAttackedPosition[attacker] = true
 	for i,callback in pairs(BasicAttackManager.Listeners.OnStart) do
-		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), {x,y,z})
+		local b,err = xpcall(callback, debug.traceback, attacker, {x,y,z})
 		if not b then
 			Ext.PrintError(err)
 		end
@@ -81,9 +85,9 @@ local function OnBasicAttackPosition(x, y, z, owner, attacker)
 end
 Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAttackPosition)
 
-function BasicAttackManager.InvokeOnHit(source, target, damage, handle)
+function BasicAttackManager.InvokeOnHit(isFromHit, source, target, damage, handle)
 	for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
-		local b,err = xpcall(callback, debug.traceback, true, source, target, damage, handle)
+		local b,err = xpcall(callback, debug.traceback, isFromHit, source, target, damage, handle)
 		if not b then
 			Ext.PrintError(err)
 		end
@@ -116,15 +120,10 @@ end
 --- @param position number[]
 --- @param damageList DamageList
 Ext.RegisterListener("GroundHit", function (caster, position, damageList)
-	if caster ~= nil then
-		for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
-			local b,err = xpcall(callback, debug.traceback, false, caster.MyGuid, position, damageList)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
-	elseif Vars.DebugMode then
-		Ext.PrintError("[LLWEAPONEX:GroundHit] caster is nil?", Common.Dump(position))
+	--Also fires when a projectile hits the ground (exploding projectiles too!), so we need this table entry
+	if caster and startedAttackedPosition[caster.MyGuid] then
+		startedAttackedPosition[caster.MyGuid] = nil
+		BasicAttackManager.InvokeOnHit(false, caster.MyGuid, position, damageList, nil)
 	end
 end)
 

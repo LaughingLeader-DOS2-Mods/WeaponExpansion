@@ -180,7 +180,7 @@ RegisterListener("OnHit", function(target,source,damage,handle)
 						end
 					end
 				end
-				BasicAttackManager.InvokeOnHit(source, target, damage, handle)
+				BasicAttackManager.InvokeOnHit(true, source, target, damage, handle)
 			elseif skill ~= "" then
 				if IsTagged(source, "LLWEAPONEX_RunicCannonEquipped") == 1 
 				and not string.find(skill, "Cannon")
