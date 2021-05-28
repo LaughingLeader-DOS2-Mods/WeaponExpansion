@@ -84,32 +84,6 @@ THEN
 	ExplodeAt(_Target, Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion, _Level, _Char)
 ENDIF
 
-EVENT LLWEAPONEX_AnvilMace_RushSmash_Explode
-VARS
-	CHARACTER:_Char
-	FLOAT3:_Target
-	FLOAT3:_Pos
-	FLOAT:_LevelF
-	INT:_Level
-ON
-	OnCharacterEvent(_Char, "LLWEAPONEX_AnvilMace_RushSmash_Explode")
-ACTIONS
-	Set(_Level, 1)
-IF "c1"
-	CharacterGetStat(_LevelF, _Char, Level)
-THEN
-	Cast(_Level, _LevelF)
-ENDIF
-	GetForwardDirection(_Char, _Target)
-IF "c1&!c2"
-	GetPosition(_Char, _Pos)
-	IsEqual(_Target, null)
-THEN
-	Multiply(_Target, FLOAT:2.0) // Weapon range
-	Add(_Target, _Pos)
-	ExplodeAt(_Target, Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact, _Level, _Char)
-ENDIF
-
 //END_REGION
 
 EVENT LLWEAPONEX_Rapiers_FlickerStrike_Damage
