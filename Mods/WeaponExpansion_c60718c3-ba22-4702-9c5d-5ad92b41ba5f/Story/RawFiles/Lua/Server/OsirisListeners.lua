@@ -114,7 +114,7 @@ end
 
 Ext.RegisterOsirisListener("ObjectLostTag", 2, "after", function(object, tag)
 	if tag == "LLWEAPONEX_Unarmed" then
-		EquipmentManager.CheckWeaponRequirementTags(StringHelpers.GetUUID(object))
+		EquipmentManager:CheckWeaponRequirementTags(Ext.GetCharacter(object))
 	end
 end)
 

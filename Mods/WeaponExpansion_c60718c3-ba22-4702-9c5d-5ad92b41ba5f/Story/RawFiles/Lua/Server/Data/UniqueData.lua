@@ -20,12 +20,15 @@ local UniqueData = {
 	---@type UniqueData
 	LinkedItem = nil,
 	Tag = "",
+	---@type table<string,string>
 	Copies = nil,
 	Events = {
 		ItemAddedToCharacter = {},
 		ItemEquipped = {},
 		ItemUnEquipped = {},
 	},
+	EquippedCallbacks = {},
+	UnEquippedCallbacks = {}
 }
 UniqueData.__index = UniqueData
 
@@ -56,6 +59,8 @@ function UniqueData:Create(uuid, progressionData, params)
 			ItemEquipped = {},
 			ItemUnEquipped = {},
 		},
+		EquippedCallbacks = {},
+		UnEquippedCallbacks = {}
 	}
 	setmetatable(this, self)
 	if params then
@@ -910,6 +915,30 @@ function UniqueData:Locate(uuid)
 		local tx,ty,tz = GetPosition(owner)
 		fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Unique (%s) owner (%s) is at position x %s y %s z %s", owner, tx, ty, tz)
 	end
+end
+
+---@alias UniqueDataEquippedEventCallback fun(unique:UniqueData, character:EsvCharacter, item:EsvItem):void
+
+---@param equipped boolean
+---@param callback UniqueDataEquippedEventCallback
+function UniqueData:RegisterEquippedListener(equipped, callback)
+	if equipped then
+		self.EquippedCallbacks[#self.EquippedCallbacks+1] = callback
+	else
+		self.UnEquippedCallbacks[#self.UnEquippedCallbacks+1] = callback
+	end
+end
+
+---@param character EsvCharacter
+---@param item EsvItem
+function UniqueData:OnEquipped(character, item)
+	InvokeListenerCallbacks(self.EquippedCallbacks, self, character, item)
+end
+
+---@param character EsvCharacter
+---@param item EsvItem
+function UniqueData:OnUnEquipped(character, item)
+	InvokeListenerCallbacks(self.UnEquippedCallbacks, self, character, item)
 end
 
 return UniqueData

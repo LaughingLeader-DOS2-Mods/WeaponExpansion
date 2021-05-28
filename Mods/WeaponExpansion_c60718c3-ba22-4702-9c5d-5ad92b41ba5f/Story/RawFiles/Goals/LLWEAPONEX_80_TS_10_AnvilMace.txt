@@ -12,6 +12,5 @@ ObjectGetFlag(_Char, "LLWEAPONEX_AnvilMaceEquipped", 1)
 THEN
 ApplyStatus(_Char, "LLWEAPONEX_ANVIL_UNSHEATHED_FX", 0.0);
 EXITSECTION
-SysClear("DB_LLWEAPONEX_AnvilMace_ImpactPosition", 4);
 ENDEXITSECTION
 ParentTargetEdge "LLWEAPONEX_80_ToggledScripts"

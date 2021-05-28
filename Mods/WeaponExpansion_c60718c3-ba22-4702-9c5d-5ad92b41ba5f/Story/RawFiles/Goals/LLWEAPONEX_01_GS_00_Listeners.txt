@@ -4,32 +4,6 @@ INITSECTION
 
 KBSECTION
 
-//REGION MAIN_EVENTS
-IF
-ItemUnEquipped(_Item, _Char)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
-AND
-GetTemplate(_Item, _Template)
-AND
-CharacterIsPlayer(_Char, _IsPlayer)
-THEN
-LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
-LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
-LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(_Char, _Item);
-
-IF
-ItemEquipped(_Item, _Char)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreItem(_Item)
-AND
-NOT LeaderLib_Helper_QRY_IgnoreCharacter(_Char)
-THEN
-LLWEAPONEX_Equipment_OnItemEquipped(_Char, _Item);
-//END_REGION
-
 //REGION PRESET_APPLIED
 PROC
 ProcObjectTimerFinished((CHARACTERGUID)_Char, "LeaderLib_Timers_PresetMenu_OnPresetApplied")

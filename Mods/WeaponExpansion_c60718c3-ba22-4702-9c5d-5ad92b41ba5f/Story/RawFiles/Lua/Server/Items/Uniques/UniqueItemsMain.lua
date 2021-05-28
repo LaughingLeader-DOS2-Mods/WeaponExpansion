@@ -8,6 +8,8 @@ if UniqueManager == nil then
 	UniqueManager = {}
 end
 
+---@type table<string,UniqueData>
+UniqueManager.TagToUnique = {}
 UniqueManager.FirstLoad = true
 
 local function CheckForAnvilWeightChange(data, character)
@@ -81,10 +83,14 @@ end
 
 ---@param item EsvItem
 function UniqueManager.GetDataByItem(item)
-	for i,tag in pairs(item:GetTags()) do
-		local data = UniqueManager.GetDataByTag(tag)
-		if data ~= nil then
-			return data
+	if type(item) ~= "userdata" then
+		item = Ext.GetItem(item)
+	end
+	for k,v in pairs(Uniques) do
+		if v.UUID == item.MyGuid or v.Copies[item.MyGuid] then
+			return v
+		elseif GameHelpers.ItemHasTag(item, v.Tag) then
+			return v
 		end
 	end
 	return nil
@@ -316,8 +322,7 @@ local itemEvents = {
 }
 
 local function RunItemEvent(event, item, ...)
-	print(event, item, ...)
-	local unique = AllUniques[item]
+	local unique = UniqueManager.GetDataByItem(item)
 	if unique then
 		unique:InvokeEventListeners(event, ...)
 	end
@@ -363,7 +368,7 @@ function UniqueManager.InitializeUniques()
 			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
 				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
 				if not StringHelpers.IsNullOrEmpty(itemid) then
-					OnItemEquipped(player.MyGuid, itemid)
+					EquipmentManager:OnItemEquipped(player, Ext.GetItem(itemid))
 				end
 			end
 		end

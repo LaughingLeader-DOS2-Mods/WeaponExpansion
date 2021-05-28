@@ -13,7 +13,7 @@ RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", function(l
 	for _,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
 		local uuid = StringHelpers.GetUUID(db[1])
 		local player = Ext.GetCharacter(uuid)
-		EquipmentManager.CheckWeaponRequirementTags(uuid)
+		EquipmentManager.CheckWeaponRequirementTags(player)
 		if HasActiveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
 			RemoveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
 		end

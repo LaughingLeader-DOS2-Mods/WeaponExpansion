@@ -19,24 +19,6 @@ THEN
 DB_LLWEAPONEX_Equipment_ActiveTags(_Char, "LLWEAPONEX_Unarmed", NULL_00000000-0000-0000-0000-000000000000);
 LLWEAPONEX_WeaponMastery_TrackMastery(_Char, NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Unarmed");
 SetTag(_Char, "LLWEAPONEX_Unarmed");
-
-PROC
-LLWEAPONEX_Equipment_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
-AND
-DB_LLWEAPONEX_Equipment_ActiveTags(_Char, "LLWEAPONEX_Unarmed", NULL_00000000-0000-0000-0000-000000000000)
-THEN
-NOT DB_LLWEAPONEX_Equipment_ActiveTags(_Char, "LLWEAPONEX_Unarmed", NULL_00000000-0000-0000-0000-000000000000);
-NOT DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries(_Char, NULL_00000000-0000-0000-0000-000000000000, "LLWEAPONEX_Unarmed");
-LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(_Char, "LLWEAPONEX_Unarmed");
-
-PROC
-LLWEAPONEX_Equipment_OnItemEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item)
-AND
-GetUUID(_Char, _CharUUID)
-AND
-GetUUID(_Item, _ItemUUID)
-THEN
-NRD_ModCall("WeaponExpansion", "OnItemEquipped", _CharUUID, _ItemUUID);
 //END_REGION
 
 //REGION BOOST_SWAP_TIMER
@@ -106,13 +88,6 @@ PROC
 LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
 THEN
 DB_NOOP(1);
-
-PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, (STRING)_Template)
-AND
-GetUUID(_Char, _UUID)
-THEN
-NRD_ModCall("WeaponExpansion", "OnItemTemplateUnEquipped", _UUID, (STRING)_Item, _Template);
 //END_REGION
 
 //REGION CLEANUP
