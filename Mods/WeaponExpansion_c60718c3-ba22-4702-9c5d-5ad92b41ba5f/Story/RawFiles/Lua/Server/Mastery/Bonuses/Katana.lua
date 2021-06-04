@@ -347,13 +347,22 @@ MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_Ene
 	end
 end)
 
-local function OnKatanaHit(target, source, damage, handle, masteryBonuses, tag, skill)
-	ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, tag, skill)
+---@param target EsvCharacter|EsvItem
+---@param source EsvCharacter|EsvItem
+---@param damage integer
+---@param hit HitRequest
+---@param context HitContext
+---@param status EsvStatusHit
+---@param masteryBonuses table<string,boolean>
+---@param tag string
+---@param skill StatEntrySkillData
+local function OnKatanaHit(target, source, damage, hit, context, status, masteryBonuses, tag, skill)
+	ApplyKatanaCombo(target.MyGuid, source.MyGuid, damage, context.HitId, masteryBonuses, tag, skill)
 	if damage > 0 and HasActiveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
 		RemoveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
 		local damageBonus = (Ext.ExtraData.LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus or 50) * 0.01
 		if damageBonus > 0 then
-			GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBonus)
+			GameHelpers.Damage.IncreaseDamage(target.MyGuid, source.MyGuid, context.HitId, damageBonus)
 			CharacterStatusText(source, "LLWEAPONEX_StatusText_Katana_VaultBoost")
 			if ObjectIsCharacter(target) == 1 then
 				PlayEffect(target, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")

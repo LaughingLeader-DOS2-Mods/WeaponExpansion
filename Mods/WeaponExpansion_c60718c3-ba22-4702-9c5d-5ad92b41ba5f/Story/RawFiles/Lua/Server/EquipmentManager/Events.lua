@@ -166,32 +166,44 @@ local function Ignore(character, item)
 end
 
 RegisterProtectedOsirisListener("ItemEquipped", Data.OsirisEvents.ItemEquipped, "after", function(item,character)
+	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
+		return
+	end
 	item = StringHelpers.GetUUID(item); character = StringHelpers.GetUUID(character)
 	if not Ignore(character, item) then self:OnItemEquipped(Ext.GetCharacter(character), Ext.GetItem(item)) end
 end)
 RegisterProtectedOsirisListener("ItemUnEquipped", Data.OsirisEvents.ItemUnEquipped, "after", function(item,character)
+	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
+		return
+	end
 	item = StringHelpers.GetUUID(item); character = StringHelpers.GetUUID(character)
 	if not Ignore(character, item) then self:OnItemUnEquipped(Ext.GetCharacter(character), Ext.GetItem(item)) end
 end)
 
-RegisterProtectedOsirisListener("ItemAddedToCharacter", Data.OsirisEvents.ItemAddedToCharacter, "after", function(item, char)
-	item = Ext.GetItem(item); char = Ext.GetCharacter(char)
-	if char and item then
+RegisterProtectedOsirisListener("ItemAddedToCharacter", Data.OsirisEvents.ItemAddedToCharacter, "after", function(item, character)
+	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
+		return
+	end
+	item = Ext.GetItem(item); character = Ext.GetCharacter(character)
+	if character and item then
 		if not GameHelpers.Item.IsObject(item) then
 			for k,unique in pairs(Uniques) do
 				if unique.Tag and GameHelpers.ItemHasTag(item, unique.Tag) then
-					if GameHelpers.Character.IsPlayer(char) and not unique:IsReleasedFromOwner() then
+					if GameHelpers.Character.IsPlayer(character) and not unique:IsReleasedFromOwner() then
 						unique:ReleaseFromOwner()
 					end
-					unique:InvokeEventListeners("ItemAddedToCharacter", item.MyGuid, char.MyGuid)
+					unique:InvokeEventListeners("ItemAddedToCharacter", item.MyGuid, character.MyGuid)
 				end
 			end
 		end
 	end
 end)
 
-RegisterProtectedOsirisListener("CharacterItemEvent", Data.OsirisEvents.CharacterItemEvent, "after", function(char, item, event)
-	item = Ext.GetItem(item); char = Ext.GetCharacter(char)
+RegisterProtectedOsirisListener("CharacterItemEvent", Data.OsirisEvents.CharacterItemEvent, "after", function(character, item, event)
+	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
+		return
+	end
+	item = Ext.GetItem(item); character = Ext.GetCharacter(character)
 	if not GameHelpers.Item.IsObject(item) then
 		if item.Stats.Unique == 1 or item.Stats.ItemTypeReal == "Unique" then
 			local unique = UniqueManager.GetDataByItem(item)
@@ -199,7 +211,7 @@ RegisterProtectedOsirisListener("CharacterItemEvent", Data.OsirisEvents.Characte
 				if event == "LeaderLib_Events_ItemLeveledUp" then
 					unique:OnItemLeveledUp(item)
 				else
-					unique:InvokeEventListeners("CharacterItemEvent", char, item, event)
+					unique:InvokeEventListeners("CharacterItemEvent", character, item, event)
 				end
 			end
 		end

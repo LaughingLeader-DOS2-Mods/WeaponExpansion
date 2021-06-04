@@ -6,7 +6,17 @@ HitData = LeaderLib.Classes.HitData
 ---@param skill string|nil
 ---@return table<string, boolean>
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
-	local character = Ext.GetCharacter(char)
+	---@type EsvCharacter
+	local character = nil
+	if type(char) ~= "userdata" then
+		if ObjectExists(char) == 0 or ObjectIsCharacter(char) == 0 then
+			return
+		end
+		character = Ext.GetCharacter(char)
+	else
+		character = char
+	end
+
 	local bonuses = {}
 	for tag,tbl in pairs(Mastery.Bonuses) do
 		if Mastery.HasMasteryRequirement(character, tag) then

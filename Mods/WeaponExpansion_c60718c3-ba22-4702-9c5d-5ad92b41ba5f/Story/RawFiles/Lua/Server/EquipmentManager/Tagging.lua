@@ -125,6 +125,9 @@ end
 
 ---@param character EsvCharacter
 function EquipmentManager:CheckWeaponRequirementTags(character)
+	if not character then
+		return
+	end
 	local refreshRequired = false
 	local mainhand = CharacterGetEquippedItem(character.MyGuid, "Weapon")
 	local offhand = CharacterGetEquippedItem(character.MyGuid, "Shield")

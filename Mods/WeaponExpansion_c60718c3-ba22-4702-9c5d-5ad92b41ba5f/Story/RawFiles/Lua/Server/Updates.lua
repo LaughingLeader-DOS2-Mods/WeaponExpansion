@@ -9,22 +9,19 @@ RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", function(l
 		ItemToInventory("927669c3-b885-4b88-a0c2-6825fbf11af2", "80976258-a7a5-4430-b102-ba91a604c23f")
 	end
 
-	-- Tag updating
-	for _,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-		local uuid = StringHelpers.GetUUID(db[1])
-		local player = Ext.GetCharacter(uuid)
+	for player in GameHelpers.Character.GetPlayers() do
 		EquipmentManager.CheckWeaponRequirementTags(player)
-		if HasActiveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
-			RemoveStatus(uuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
+		if HasActiveStatus(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
+			RemoveStatus(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
 		end
 
-		if IsTagged(uuid, "LLWEAPONEX_Quiver_Equipped") == 1 and last < 153026560 then
-			local quiver = Ext.GetCharacter(uuid).Stats:GetItemBySlot("Belt")
+		if IsTagged(player.MyGuid, "LLWEAPONEX_Quiver_Equipped") == 1 and last < 153026560 then
+			local quiver = CharacterGetEquippedItem(player.MyGuid, "Belt")
 			if quiver ~= nil then
-				ItemResetChargesToMax(quiver.MyGuid)
+				ItemResetChargesToMax(quiver)
 			end
-			if CharacterIsInCombat(uuid) == 0 then
-				Quiver_RemoveTempArrows(uuid)
+			if CharacterIsInCombat(player.MyGuid) == 0 then
+				Quiver_RemoveTempArrows(player.MyGuid)
 			end
 		end
 
@@ -47,7 +44,7 @@ RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", function(l
 		local callbacks = ServerEvents.OnModUpdated
 		if callbacks ~= nil then
 			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, last, next, uuid)
+				local b,err = xpcall(callback, debug.traceback, last, next, player.MyGuid)
 				if not b then
 					Ext.PrintError("[LeaderLib:CancelTimer] Error calling oneshot timer callback:\n", err)
 				end

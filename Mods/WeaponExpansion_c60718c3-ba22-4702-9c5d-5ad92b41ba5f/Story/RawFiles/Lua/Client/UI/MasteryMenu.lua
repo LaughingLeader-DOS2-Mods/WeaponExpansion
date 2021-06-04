@@ -714,7 +714,7 @@ Input.RegisterListener(function(eventName, pressed, id, inputMap, controllerEnab
 		else
 			-- CTRL + Shift + M
 			--Ext.Print(eventName, Input.GetKeyState("FlashCtrl"), Input.GetKeyState("SplitItemToggle"))
-			if eventName == "ToggleMap" and pressed and Input.IsPressed("FlashCtrl") then
+			if eventName == "ToggleMap" and pressed and Input.IsPressed("SplitItemToggle") then
 				TryOpenMasteryMenu()
 			end
 		end

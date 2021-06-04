@@ -29,6 +29,9 @@ end
 --- @param last integer
 --- @param next integer
 local function MasteryLeveledUp(uuid,mastery,last,next)
+	if ObjectExists(uuid) == 0 then
+		return
+	end
 	local masteryData = Masteries[mastery]
 	local masteryName = string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
 	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName):gsub("%[2%]", next)
@@ -135,12 +138,20 @@ local function HasRequirement(val, matchAny)
 	end
 end
 
+---@param skill string|StatEntrySkillData
 function IsWeaponSkill(skill)
-	if skill == nil or skill == "" then
-		return false
+	---@type StatEntrySkillData
+	local stat = nil
+	if type(skill) == "userdata" then
+		stat = skill
+	else
+		if skill == nil or skill == "" then
+			return false
+		end
+		stat = Ext.GetStat(skill)
 	end
-	local stat = Ext.GetStat(skill)
-	if stat ~= nil then
+
+	if stat then
 		if (stat.UseWeaponDamage == "Yes" 
 		or stat.UseWeaponProperties == "Yes")
 		or (HasRequirement(stat.Requirement) and stat["Damage Multiplier"] > 0) then
@@ -150,12 +161,20 @@ function IsWeaponSkill(skill)
 	return false
 end
 
+---@param skill string|StatEntrySkillData
 function IsMeleeWeaponSkill(skill)
-	if skill == nil or skill == "" then
-		return false
+	---@type StatEntrySkillData
+	local stat = nil
+	if type(skill) == "userdata" then
+		stat = skill
+	else
+		if skill == nil or skill == "" then
+			return false
+		end
+		stat = Ext.GetStat(skill)
 	end
-	local stat = Ext.GetStat(skill)
-	if stat ~= nil then
+
+	if stat then
 		if (stat.UseWeaponDamage == "Yes" 
 		or stat.UseWeaponProperties == "Yes")
 		or (HasRequirement(stat.Requirement, {"MeleeWeapon", "DaggerWeapon", "StaffWeapon", "ShieldWeapon"}) and stat["Damage Multiplier"] > 0) then
@@ -201,6 +220,9 @@ end
 --- @param mastery string
 --- @param minLevel integer
 function HasMasteryLevel(uuid,mastery,minLevel)
+	if type(uuid) == "userdata" then
+		uuid = uuid.MyGuid
+	end
 	local dbEntry = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, mastery, nil, nil)
 	if dbEntry ~= nil then
 		local playerEntry = dbEntry[1]

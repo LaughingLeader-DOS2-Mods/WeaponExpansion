@@ -58,7 +58,8 @@ end)
 ---@alias MasteryEventCallback fun(uuid:string, mastery:string):void
 
 ---@alias HitEventID OnHit|OnWeaponSkillHit
----@alias HitHandlerCallback fun(target:string, source:string, damage:integer, handle:integer, masteryBonuses:table<string, boolean>, tag:string, skill:string|nil):void
+---@alias HitHandlerCallback fun(target:EsvCharacter|EsvItem, source:EsvCharacter|EsvItem, totalDamage:integer, hit:HitRequest, context:HitContext, status:EsvStatusHit, masteryBonuses:table<string, boolean>, tag:string):void
+---@alias OnWeaponSkillHitCallback fun(target:EsvCharacter|EsvItem, source:EsvCharacter|EsvItem, totalDamage:integer, hit:HitRequest, context:HitContext, status:EsvStatusHit, masteryBonuses:table<string, boolean>, tag:string, skill:StatEntrySkillData):void
 
 LoadPersistentVars = {}
 BonusSkills = {}
@@ -82,7 +83,7 @@ Listeners = {
     MasteryDeactivated = {},
     ---@type table<string, HitHandlerCallback>
     OnHit = {},
-    ---@type table<string, HitHandlerCallback>
+    ---@type table<string, OnWeaponSkillHitCallback>
     OnWeaponSkillHit = {},
 }
 

@@ -213,7 +213,7 @@ package
 					shiftDown = !controllerEnabled;
 					break;
 				case "IE ToggleMap":
-					if (!controllerEnabled && ctrlDown)
+					if (!controllerEnabled && shiftDown)
 					{
 						handled = true;
 						if(active)
