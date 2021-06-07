@@ -69,6 +69,8 @@ local skillAbility = {
 	Projectile_LLWEAPONEX_Pistol_Shoot_Enemy = {"RogueLore", "LLWEAPONEX_Pistol"},
 	Projectile_LLWEAPONEX_HandCrossbow_Shoot = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
 	Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
+	Projectile_LLWEAPONEX_HandCrossbow_Assassinate = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
+	Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Enemy = {"RogueLore", "LLWEAPONEX_HandCrossbow"},
 }
 
 local function GetSkillAbility(skill, character, isFromItem, param)
