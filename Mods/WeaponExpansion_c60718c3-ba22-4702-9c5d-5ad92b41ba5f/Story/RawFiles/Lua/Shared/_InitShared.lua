@@ -93,6 +93,7 @@ Ext.Require("Shared/Damage/UnarmedDamageScaling.lua")
 Ext.Require("Shared/ExtenderHelpers.lua")
 Ext.Require("Shared/SharedDataHooks.lua")
 Ext.Require("Shared/Items/RunicCannon.lua")
+Ext.Require("Shared/CustomSkillProperties.lua")
 local initSettings = Ext.Require("Shared/Settings.lua")
 
 -- if Vars.DebugMode then
