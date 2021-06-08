@@ -452,7 +452,9 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Crossbow", masteryBoost, nil, nil, rarity)
 		--Ext.Print("Applied Hand Crossbow Bolt Stats ("..weaponBoostStat..")")
 		--Ext.Print(Common.Dump(weapon))
-		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
+		if skill["DamageType"] == "None" then
+			skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
+		end
 		--skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
 		--skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
 	end
@@ -532,7 +534,9 @@ local function GetPistolSkillDamage(baseSkill, attacker, isFromItem, stealthed, 
 		weapon = ExtenderHelpers.CreateWeaponTable(weaponBoostStat, attacker.Level, highestAttribute, "Rifle", masteryBoost, nil, nil, rarity)
 		--Ext.Print("Bullet Stats ("..weaponBoostStat..")")
 		--Ext.Print(Common.Dump(weapon))
-		skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
+		if skill["DamageType"] == "None" then
+			skill["DamageType"] = weapon.DynamicStats[1]["Damage Type"]
+		end
 		--skill["Damage Multiplier"] = weapon.DynamicStats[1]["DamageFromBase"]
 		--skill["Damage Range"] = weapon.DynamicStats[1]["Damage Range"]
 	end
@@ -783,6 +787,8 @@ end
 Skills.GetHighestAttribute = GetHighestAttribute
 Skills.GetItem = GetItem
 Skills.GetRuneBoost = GetRuneBoost
+Skills.GetHandCrossbowRuneBoost = function(stats, ...) return GetRuneBoost(stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows", ...) end
+Skills.GetPistolRuneBoost = function(stats, ...) return GetRuneBoost(stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols", ...) end
 
 Skills.DamageParam.LLWEAPONEX_PistolDamage = GetPistolSkillDamage
 Skills.DamageParam.LLWEAPONEX_HandCrossbow_ShootDamage = GetHandCrossbowSkillDamage
@@ -791,9 +797,13 @@ Skills.DamageParam.LLWEAPONEX_AimedShot_MaxDamage = GetAimedShotMaxDamage
 Skills.GetPistolWeaponStatTable = GetPistolWeaponStatTable
 
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot = GetPistolSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_Enemy = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = GetHandCrossbowSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Assassinate = GetHandCrossbowSkillDamage
+Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Assassinate_Enemy = GetHandCrossbowSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Rifle_AimedShot = GetAimedShotDamage
 Skills.Damage.Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
 Skills.Damage.Target_LLWEAPONEX_Steal = function(...) return ScaleByHighestAttributeAndAbility("RogueLore", "_Daggers", AttributeScaleTables.NoMemory, ...) end
