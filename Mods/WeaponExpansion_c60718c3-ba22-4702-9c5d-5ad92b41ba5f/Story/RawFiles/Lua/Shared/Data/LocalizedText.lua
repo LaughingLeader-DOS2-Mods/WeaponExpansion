@@ -193,6 +193,10 @@ Text = {
 		MagicArmor = ts:Create("hf1ff2734g96adg486fg800cgd9d0320b04c7", "Damage is based on your current Magic Armour."),
 		Shield = ts:Create("hc8bae163gccf2g4127g8e0dg68d172d2ecf6", "Damage is based on the Physical Armour of your shield."),
 	},
+	SkillTooltip = {
+		ApplySpecialRuneOnHit = ts:Create("h189a198agfd17g4585gb481g86202d92a965", "Applies [1] on hit"),
+		ApplySpecialRuneOnHit_Chance = ts:Create("h189a198agfd17g4585gb481g86202d92a965", "Applies [1] on hit ([2]% chance)"),
+	},
 	NewAbilitySchools = {
 		Pirate = ts:Create("hc64dff65g17ffg4b44gaf21g896521b144f2", "Piracy"),
 	},

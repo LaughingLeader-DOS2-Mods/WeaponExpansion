@@ -193,75 +193,94 @@ local function OnSkillTooltip(character, skill, tooltip)
 				end
 			end
 		end
-	elseif skill == "Projectile_LLWEAPONEX_Pistol_Shoot" then
-		local rune,weaponBoostStat = Skills.GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
-		if weaponBoostStat ~= nil then
-			---@type StatProperty[]
-			local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
-			if props ~= nil then
-				for i,v in pairs(props) do
-					if v.Type == "Status" then
-						local chance = max.min(100, math.ceil(v.StatusChance * 100))
-						local turns = v.Duration
-						local text = ""
-						local chanceText = ""
-						local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
-						if chance > 0 then
-							chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+	end
+	if not Data.ActionSkills[skill] then
+		local hasRuneProps = false
+		local stat = Ext.GetStat(skill)
+		if stat and stat.SkillProperties then
+			for i,v in pairs(stat.SkillProperties) do
+				if v.Action == "LLWEAPONEX_ApplyPistolBullet" then
+					local rune,weaponBoostStat = Skills.GetPistolRuneBoost(character.Stats)
+					if weaponBoostStat ~= nil then
+						---@type StatProperty[]
+						local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
+						if props ~= nil then
+							hasRuneProps = true
+							for i,v in pairs(props) do
+								if v.Type == "Status" then
+									local chance = max.min(100, math.ceil(v.StatusChance * 100))
+									local turns = v.Duration
+									local text = ""
+									local chanceText = ""
+									local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
+									if chance > 0 then
+										chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+									end
+									if turns > 0 then
+										turns = math.ceil(v.Duration / 6.0)
+										text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+									else
+										text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+									end
+									tooltip:AppendElement({
+										Type="ExtraProperties",
+										Label=text
+									})
+								end
+							end
 						end
-						if turns > 0 then
-							turns = math.ceil(v.Duration / 6.0)
-							text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
-						else
-							text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+					end
+				elseif v.Action == "LLWEAPONEX_ApplyHandCrossbowBolt" then
+					local rune,weaponBoostStat = Skills.GetHandCrossbowRuneBoost(character.Stats)
+					if weaponBoostStat ~= nil then
+						local weaponBoost = Ext.GetStat(weaponBoostStat)
+						---@type StatProperty[]
+						local props = weaponBoost.ExtraProperties
+						if props then
+							hasRuneProps = true
+							for i,v in pairs(props) do
+								if v.Type == "Status" then
+									local chance = max.min(100, math.ceil(v.StatusChance * 100))
+									local turns = v.Duration
+									local text = ""
+									local chanceText = ""
+									local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
+									if chance > 0 then
+										chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+									end
+									if turns > 0 then
+										turns = math.ceil(v.Duration / 6.0)
+										text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+									else
+										text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+									end
+									tooltip:AppendElement({
+										Type="ExtraProperties",
+										Label=text
+									})
+								end
+							end
 						end
-						tooltip:AppendElement({
-							Type="ExtraProperties",
-							Label=text
-						})
+						local isHeavyBolt = string.find(weaponBoost.Tags, "LLWEAPONEX_HeavyAmmo")
+						if isHeavyBolt then
+							tooltip:AppendElement({
+								Type="ExtraProperties",
+								Label=heavyBoltText.Value
+							})
+						end
 					end
 				end
 			end
 		end
-	elseif skill == "Projectile_LLWEAPONEX_HandCrossbow_Shoot" then
-		local rune,weaponBoostStat = Skills.GetRuneBoost(character.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
-		if weaponBoostStat ~= nil then
-			---@type StatProperty[]
-			local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
-			if props ~= nil then
-				for i,v in pairs(props) do
-					if v.Type == "Status" then
-						local chance = max.min(100, math.ceil(v.StatusChance * 100))
-						local turns = v.Duration
-						local text = ""
-						local chanceText = ""
-						local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
-						if chance > 0 then
-							chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
-						end
-						if turns > 0 then
-							turns = math.ceil(v.Duration / 6.0)
-							text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
-						else
-							text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
-						end
-						tooltip:AppendElement({
-							Type="ExtraProperties",
-							Label=text
-						})
-					end
+		if hasRuneProps then
+			--Remove the empty entry for LLWEAPONEX_ApplyHandCrossbowBolt/LLWEAPONEX_ApplyPistolBullet
+			for i,v in pairs(tooltip:GetElements("ExtraProperties")) do
+				if v.Label == "" then
+					tooltip:RemoveElement(v)
 				end
 			end
-		end
-		local isHeavyBolt = (weaponBoostStat ~= nil and string.find(Ext.StatGetAttribute(weaponBoostStat, "Tags"), "LLWEAPONEX_HeavyAmmo"))
-		if isHeavyBolt then
-			tooltip:AppendElement({
-				Type="ExtraProperties",
-				Label=heavyBoltText.Value
-			})
 		end
 	end
-
 	if string.find(skill, "Banner") then
 		local element = tooltip:GetElement("SkillRequiredEquipment")
 		if element ~= nil then

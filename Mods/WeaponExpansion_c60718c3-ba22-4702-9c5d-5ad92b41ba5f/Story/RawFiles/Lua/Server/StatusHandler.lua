@@ -10,10 +10,12 @@ local function CleanupForceAction(handle, target, x, y, z, timerStartFunc)
 	return false
 end
 
----@param target string
----@param source string
+---@param source EsvCharacter
+---@param target EsvGameObject|number[]
 ---@param item EsvItem
-local function ApplyRuneExtraProperties(target, source, item)
+---@param targetPosition number[]
+---@param radius number
+function ApplyRuneExtraProperties(source, target, item, targetPosition, radius)
 	local runes = GameHelpers.Stats.GetRuneBoosts(item.Stats)
 	if #runes > 0 then
 		for i,runeEntry in pairs(runes) do
@@ -22,6 +24,7 @@ local function ApplyRuneExtraProperties(target, source, item)
 					---@type StatProperty[]
 					local extraProperties = Ext.StatGetAttribute(boost, "ExtraProperties")
 					if extraProperties ~= nil then
+						GameHelpers.ApplyProperties(source, target, extraProperties)
 						for i,v in pairs(extraProperties) do
 							if v.Type == "Status" then
 								if v.StatusChance < 1.0 then
@@ -29,9 +32,9 @@ local function ApplyRuneExtraProperties(target, source, item)
 										StatusId = v.Action,
 										StatusType = Ext.StatGetAttribute(v.Action, "StatusType"),
 										ForceStatus = false,
-										StatusSourceHandle = source,
-										TargetHandle = target,
-										CanEnterChance = math.tointeger(v.StatusChance * 100)
+										StatusSourceHandle = source.Handle,
+										TargetHandle = type(target) == "userdata" and target.Handle or nil,
+										CanEnterChance = Ext.Round(v.StatusChance * 100)
 									}
 									local chance = Game.Math.StatusGetEnterChance(statusObject, true)
 									local roll = Ext.Random(0,100)
@@ -77,20 +80,8 @@ local function OnStatusApplied(target, status, source)
 	source = StringHelpers.GetUUID(source)
 	if not StringHelpers.IsNullOrEmpty(source) and ObjectIsCharacter(source) == 1 then
 		if status == "LLWEAPONEX_PISTOL_SHOOT_HIT" then
-			local items = GameHelpers.Item.FindTaggedEquipment(source, "LLWEAPONEX_Pistol")
-			if items ~= nil then
-				for slot,v in pairs(items) do
-					ApplyRuneExtraProperties(target, source, Ext.GetItem(v))
-				end
-			end
 			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_Pistol")
 		elseif status == "LLWEAPONEX_HANDCROSSBOW_HIT" then
-			local items = GameHelpers.Item.FindTaggedEquipment(source, "LLWEAPONEX_HandCrossbow")
-			if items ~= nil then
-				for slot,v in pairs(items) do
-					ApplyRuneExtraProperties(target, source, Ext.GetItem(v))
-				end
-			end
 			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_HandCrossbow")
 		end
 	end
