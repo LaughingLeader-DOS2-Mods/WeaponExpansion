@@ -340,6 +340,10 @@ function MasteryBonusManager.GetClosestCombatEnemies(char, maxDistance, sortByCl
 	end
 end
 
+BonusHelperVars = {
+	RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
+}
+
 local bonusScriptNames = {
 	"Axe.lua",
 	"Banner.lua",

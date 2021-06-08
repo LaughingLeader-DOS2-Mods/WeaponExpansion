@@ -12,10 +12,9 @@ local warChargeStatuses = {
 	"LLWEAPONEX_WARCHARGE09",
 	"LLWEAPONEX_WARCHARGE10",
 }
-local rushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
 
 ---@param hitData HitData
-MasteryBonusManager.RegisterSkillListener(rushSkills, "BANNER_WARCHARGE", function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener(BonusHelperVars.RushSkills, "BANNER_WARCHARGE", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.CAST then
 		local hasStatus = false
 		for i,status in pairs(warChargeStatuses) do

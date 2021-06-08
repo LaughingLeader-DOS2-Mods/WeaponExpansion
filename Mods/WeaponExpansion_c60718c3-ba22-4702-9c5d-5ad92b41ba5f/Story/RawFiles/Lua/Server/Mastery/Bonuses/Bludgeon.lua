@@ -1,7 +1,5 @@
-local rushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
-
 ---@param hitData HitData
-MasteryBonusManager.RegisterSkillListener(rushSkills, "RUSH_DIZZY", function(bonuses, skill, char, state, hitData)
+MasteryBonusManager.RegisterSkillListener(BonusHelperVars.RushSkills, "RUSH_DIZZY", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
 		local dizzyChance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_RushDizzyChance", 40.0)
 		if dizzyChance > 0 then
