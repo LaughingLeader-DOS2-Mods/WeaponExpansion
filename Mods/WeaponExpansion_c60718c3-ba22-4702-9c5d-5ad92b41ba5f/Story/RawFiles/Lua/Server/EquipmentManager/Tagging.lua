@@ -1,18 +1,18 @@
 local self = EquipmentManager
 
 local rangedWeaponTypes = {
-	None = false,
+	--None = false,
 	Sword = false,
 	Club = false,
 	Axe = false,
 	Staff = false,
-	Bow = true,
-	Crossbow = true,
 	Spear = false,
 	Knife = false,
+	Bow = true,
+	Crossbow = true,
+	Rifle = true,
 	Wand = true,
 	Arrow = true,
-	--Custom = false,
 }
 
 local function TagFromStats(uuid, stat)
@@ -99,9 +99,24 @@ function EquipmentManager:TagWeapon(item, statType, stat, itemTags)
 	end
 end
 
+---@param item EsvItem
+local function IsRangedWeapon(item)
+	local isRanged = rangedWeaponTypes[item.Stats.WeaponType]
+	if isRanged ~= nil then
+		return isRanged
+	end
+	--Type is None or some unknown value, so check the weapon range
+	local range = item.Stats.WeaponRange or 0
+	if range >= 1000 and not StringHelpers.IsNullOrWhitespace(item.Stats.Projectile) then
+		return true
+	end
+	return false
+end
+
+---@param item EsvItem
 local function CheckRequirementTags(character, item, otherHand)
 	SetTag(character.MyGuid, "LLWEAPONEX_AnyWeaponEquipped")
-	if rangedWeaponTypes[item.Stats.WeaponType] ~= true then
+	if not IsRangedWeapon(item) then
 		ClearTag(character.MyGuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 		if self:CheckScoundrelTags(character, item) or (otherHand and self:CheckScoundrelTags(character, otherHand)) then
 			if character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
@@ -156,7 +171,7 @@ function EquipmentManager:CheckWeaponRequirementTags(character)
 
 	if mainhand then
 		refreshRequired = CheckRequirementTags(character, mainhand, offhand)
-	else
+	elseif offhand then
 		refreshRequired = CheckRequirementTags(character, offhand)
 	end
 
