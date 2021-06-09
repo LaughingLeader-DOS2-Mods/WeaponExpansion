@@ -34,7 +34,7 @@ RegisterSkillListener({"Target_LLWEAPONEX_AnvilMace_GroundSmash", "Rush_LLWEAPON
 			local dist = GetDistanceToPosition(char, x,y,z)
 			local delay = GameHelpers.Math.ScaleToRange(dist, 0, maxRange, 350, 680)
 			print(maxRange, delay, dist)
-			StartTimer("LLWEAPONEX_RushSmashFinished", delay, char)
+			Timer.Start("LLWEAPONEX_RushSmashFinished", delay, char)
 		end
 	elseif skill == "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact" then
 		if state == SKILL_STATE.HIT and data.Success and data.Target then
@@ -45,8 +45,7 @@ RegisterSkillListener({"Target_LLWEAPONEX_AnvilMace_GroundSmash", "Rush_LLWEAPON
 	end
 end)
 
-RegisterListener("NamedTimerFinished", "LLWEAPONEX_RushSmashFinished", function(timerName, uuid)
-	local x,y,z = GetPosition(uuid)
-	local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(uuid, 2.0, x, y, z)
-	GameHelpers.ExplodeProjectile(uuid, pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact")
-end)
+Timer.RegisterListener("LLWEAPONEX_RushSmashFinished", function(_, char)
+	local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(char, 2.0)
+	GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", char, char.Stats.Level, true)
+end, true)

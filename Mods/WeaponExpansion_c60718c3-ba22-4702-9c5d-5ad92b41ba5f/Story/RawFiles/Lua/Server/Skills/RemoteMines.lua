@@ -68,16 +68,14 @@ RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_REMOTEMINE_DETONATE", fu
 					Mines = mines,
 					Remaining = max
 				}
-				StartTimer("LLWEAPONEX_OnDetonationTimer", 50, source, target)
+				Timer.Start("LLWEAPONEX_OnDetonationTimer", 50, source, target)
 			end
 		end
 	end
 end)
 
-local function OnDetonationTimer(timerData)
-	local source = timerData[1]
-	local target = timerData[2]
-	if source ~= nil and target ~= nil then
+local function OnDetonationTimer(_, source, target)
+	if source and target then
 		local data = PersistentVars.SkillData.RemoteMineDetonation[target]
 		if data ~= nil then
 			local minesData = data[source]
@@ -112,7 +110,7 @@ local function OnDetonationTimer(timerData)
 					end
 
 					if minesData.Remaining > 0 and #minesData.Mines > 0 then
-						StartTimer("LLWEAPONEX_OnDetonationTimer", 500, source, target)
+						Timer.Start("LLWEAPONEX_DetonateMines", 500, source, target)
 					else
 						data[source] = nil
 						if not Common.TableHasAnyEntry(data) then
@@ -125,7 +123,7 @@ local function OnDetonationTimer(timerData)
 	end
 end
 
-OnTimerFinished["LLWEAPONEX_OnDetonationTimer"] = OnDetonationTimer
+Timer.RegisterListener("LLWEAPONEX_DetonateMines", OnDetonationTimer)
 
 RegisterSkillListener("Projectile_LLWEAPONEX_RemoteMine_Breach", function(skill, source, state, data)
 	if state == SKILL_STATE.CAST then

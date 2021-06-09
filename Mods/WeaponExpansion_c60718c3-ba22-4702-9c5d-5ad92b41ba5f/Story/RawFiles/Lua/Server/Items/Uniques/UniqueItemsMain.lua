@@ -362,18 +362,15 @@ function UniqueManager.InitializeUniques()
 		unique:Initialize(region, UniqueManager.FirstLoad)
 	end
 	-- in case equipment events have changed and need to fire again
-	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-		local player = Ext.GetCharacter(db[1])
-		if player ~= nil then
-			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
-				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
-				if not StringHelpers.IsNullOrEmpty(itemid) then
-					EquipmentManager:OnItemEquipped(player, Ext.GetItem(itemid))
-				end
+	for player in GameHelpers.Character.GetPlayers(false) do
+		for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+			local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
+			if not StringHelpers.IsNullOrEmpty(itemid) then
+				EquipmentManager:OnItemEquipped(player, Ext.GetItem(itemid))
 			end
 		end
 	end
 	UniqueManager.FirstLoad = false
 end
 
-OnTimerFinished["Timers_LLWEAPONEX_InitUniques"] = UniqueManager.InitializeUniques
+Timer.RegisterListener("Timers_LLWEAPONEX_InitUniques", UniqueManager.InitializeUniques)

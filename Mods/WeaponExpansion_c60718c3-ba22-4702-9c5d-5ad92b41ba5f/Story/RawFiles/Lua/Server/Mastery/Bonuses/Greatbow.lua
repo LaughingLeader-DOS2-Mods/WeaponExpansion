@@ -7,12 +7,14 @@ MasteryBonusManager.RegisterSkillListener({"Projectile_Ricochet", "Projectile_En
 	if state == SKILL_STATE.HIT and data.Success then
 		SetTag(data.Target, "LLWEAPONEX_RicochetTarget")
 		GameHelpers.ExplodeProjectile(char, data.Target, "Projectile_LLWEAPONEX_MasteryBonus_Greatbow_Ricochet")
-		StartTimer("LLWEAPONEX_MasteryBonus_ClearRicochetTarget", 50, data.Target)
+		Timer.Start("LLWEAPONEX_MasteryBonus_ClearRicochetTarget", 50, data.Target)
 	end
 end)
 
-OnTimerFinished["LLWEAPONEX_MasteryBonus_ClearRicochetTarget"] = function(timerData)
-	ClearTag(timerData[1], "LLWEAPONEX_RicochetTarget")
-end
+Timer.RegisterListener("LLWEAPONEX_MasteryBonus_ClearRicochetTarget", function(_, char)
+	if char then
+		ClearTag(char, "LLWEAPONEX_RicochetTarget")
+	end
+end)
 
---StartTimer("LLWEAPONEX_MasteryBonus_ClearRicochetTarget", 50, CharacterGetHostCharacter())
+--Timer.Start("LLWEAPONEX_MasteryBonus_ClearRicochetTarget", 50, CharacterGetHostCharacter())

@@ -25,7 +25,7 @@ RegisterServerEventCallback(Vars.SERVEREVENT.OnModUpdated, function(lastVersion,
 	end
 end)
 
-RegisterListener("NamedTimerFinished", "Timers_LLWEAPONEX_CheckForAxeMiss", function(timerName, char)
+Timer.RegisterListener("Timers_LLWEAPONEX_CheckForAxeMiss", function(_, char)
 	EquipBalrinAxe(char)
 	CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 end)
@@ -50,26 +50,26 @@ local function OnBalrinAxeThrown(skill, char, state, data)
 		CharacterUnequipItem(char, axeData.Item)
 		SetOnStage(axeData.Item, 0)
 		Osi.ProcObjectTimer(char, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200)
-		StartTimer("Timers_LLWEAPONEX_CheckForAxeMiss", 1200, char)
+		Timer.Start("Timers_LLWEAPONEX_CheckForAxeMiss", 1200, char)
 	elseif state == SKILL_STATE.HIT then
-		local bCancelTimer = true
+		local bTimer.Cancel = true
 		if not data.Success or ObjectIsItem(data.Target) == 1 then
-			bCancelTimer = false
+			bTimer.Cancel = false
 			EquipBalrinAxe(char)
 			CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 		else
 			local axeData = PersistentVars.SkillData.ThrowBalrinAxe[char]
 			if axeData ~= nil then
-				bCancelTimer = false
+				bTimer.Cancel = false
 				axeData.Target = data.Target
 				DeathManager.ListenForDeath("ThrowBalrinAxe", data.Target, char, 1000)
 			end
 		end
-		if bCancelTimer then
-			CancelTimer("Timers_LLWEAPONEX_CheckForAxeMiss", char)
+		if bTimer.Cancel then
+			Timer.Cancel("Timers_LLWEAPONEX_CheckForAxeMiss", char)
 		end
 	elseif state == SKILL_STATE.PROJECTILEHIT then
-		CancelTimer("Timers_LLWEAPONEX_CheckForAxeMiss", char)
+		Timer.Cancel("Timers_LLWEAPONEX_CheckForAxeMiss", char)
 		if StringHelpers.IsNullOrEmpty(data.Target) then
 			EquipBalrinAxe(char)
 			CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")

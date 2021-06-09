@@ -15,13 +15,12 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Pistol_Mast
 			GameHelpers.Skill.Swap(char, "Shout_LLWEAPONEX_Pistol_Reload", "Projectile_LLWEAPONEX_Pistol_Shoot")
 		end
 		if CharacterIsInCombat(char) == 1 then
-			StartTimer("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
+			Timer.Start("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", 1000, char)
 		end
 	end
 end)
 
-local function CloakAndDagger_Pistol_MarkEnemy(timerData)
-	local char = timerData[1]
+local function CloakAndDagger_Pistol_MarkEnemy(_, char)
 	if char ~= nil and CharacterIsInCombat(char) == 1 then
 		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then
@@ -72,12 +71,10 @@ local function CloakAndDagger_Pistol_MarkEnemy(timerData)
 				Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, target, "MARKED", "")
 			end
 		end
-	else
-		PrintDebug("CloakAndDagger_Pistol_MarkEnemy params: "..Common.Dump(skillData))
 	end
 end
 
-OnTimerFinished["LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy"] = CloakAndDagger_Pistol_MarkEnemy
+Timer.RegisterListener("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", CloakAndDagger_Pistol_MarkEnemy)
 
 ---@param target string
 ---@param weaponBoostStat string

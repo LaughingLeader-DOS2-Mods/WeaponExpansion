@@ -46,7 +46,7 @@ RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", function(l
 			for i,callback in pairs(callbacks) do
 				local b,err = xpcall(callback, debug.traceback, last, next, player.MyGuid)
 				if not b then
-					Ext.PrintError("[LeaderLib:CancelTimer] Error calling oneshot timer callback:\n", err)
+					Ext.PrintError("[LeaderLib:Timer.Cancel] Error calling oneshot timer callback:\n", err)
 				end
 			end
 		end

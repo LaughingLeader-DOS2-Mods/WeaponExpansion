@@ -33,11 +33,11 @@ local function ThrowingKnifeBonus(bonuses, skill, char, state, skillData)
 			end
 		elseif state == SKILL_STATE.CAST then
 			if procSet then
-				StartTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", 250, char)
+				Timer.Start("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", 250, char)
 			end
 		elseif state == SKILL_STATE.HIT then
 			if procSet and skillData.ID == HitData.ID then
-				CancelTimer("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
+				Timer.Cancel("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", char)
 				local explodeSkill = throwingKnifeBonuses[Ext.Random(1,2)]
 				GameHelpers.ExplodeProjectile(char, target, explodeSkill)
 				ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
@@ -48,25 +48,13 @@ end
 
 MasteryBonusManager.RegisterSkillListener({"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"}, {"DAGGER_THROWINGKNIFE"}, ThrowingKnifeBonus)
 
-local function ThrowingKnifeDelayedProc(funcParams)
-	local char = funcParams[1]
-	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus") == 1 then
+local function ThrowingKnifeDelayedProc(_, char)
+	if char and ObjectGetFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus") == 1 then
 		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_ThrowingKnife_ExplodePosition")
 		local explodeSkill = throwingKnifeBonuses[Ext.Random(1,2)]
-		local level = CharacterGetLevel(char)
-		NRD_ProjectilePrepareLaunch()
-		NRD_ProjectileSetString("SkillId", explodeSkill)
-		NRD_ProjectileSetInt("CasterLevel", level)
-		NRD_ProjectileSetGuidString("Caster", char)
-		NRD_ProjectileSetGuidString("Source", char)
-		NRD_ProjectileSetVector3("SourcePosition", x,y,z)
-		NRD_ProjectileSetVector3("HitObjectPosition", x,y,z)
-		NRD_ProjectileSetVector3("TargetPosition", x,y,z)
-		NRD_ProjectileLaunch()
 		ObjectClearFlag(char, "LLWEAPONEX_ThrowingKnife_ActivateBonus", 0)
-	else
-		PrintDebug("ThrowingKnifeDelayedProc params: "..Common.Dump(funcParams))
+		GameHelpers.Skill.Explode({x,y,z}, explodeSkill, char)
 	end
 end
 
-OnTimerFinished["LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus"] = ThrowingKnifeDelayedProc
+Timer.RegisterListener("LLWEAPONEX_Daggers_ThrowingKnife_ProcBonus", ThrowingKnifeDelayedProc)

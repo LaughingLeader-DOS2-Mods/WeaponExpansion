@@ -96,7 +96,7 @@ RegisterSkillListener("Shout_LLWEAPONEX_Katana_VanquishersPath", function(skill,
 		end
 		if #targetData > 0 then
 			ObjectSetFlag(char, "LLWEAPONEX_Katanas_DisableCombo", 0)
-			StartTimer("LLWEAPONEX_Katana_VanquishersPath_HitNext", 250, char)
+			Timer.Start("LLWEAPONEX_Katana_VanquishersPath_HitNext", 250, char)
 		else
 			PersistentVars.SkillData.VanquishersPath[char] = nil
 			CheckActiveCombo(char, true)
@@ -114,8 +114,7 @@ local function GetRandomVanquisherTarget(casterData)
 	return Common.GetRandomTableEntry(tbl)
 end
 
-OnTimerFinished["LLWEAPONEX_Katana_VanquishersPath_HitNext"] = function(timerData)
-	local caster = StringHelpers.GetUUID(timerData[1])
+Timer.RegisterListener("LLWEAPONEX_Katana_VanquishersPath_HitNext", function(timerName, caster)
 	if not StringHelpers.IsNullOrEmpty(caster) then
 		local casterData = PersistentVars.SkillData.VanquishersPath[caster]
 		if casterData ~= nil then
@@ -131,7 +130,7 @@ OnTimerFinished["LLWEAPONEX_Katana_VanquishersPath_HitNext"] = function(timerDat
 			end
 		end
 	end
-end
+end)
 
 local function GetVanquishersPathTargetData(caster, target)
 	local casterData = PersistentVars.SkillData.VanquishersPath[caster]
@@ -187,7 +186,7 @@ RegisterSkillListener("Target_LLWEAPONEX_Katana_VanquishersPath_Hit", function(s
 	elseif state == SKILL_STATE.CAST then
 		local targetData = PersistentVars.SkillData.VanquishersPath[char]
 		if targetData ~= nil and #targetData > 0 then
-			StartTimer("LLWEAPONEX_Katana_VanquishersPath_HitNext", 2000, char)
+			Timer.Start("LLWEAPONEX_Katana_VanquishersPath_HitNext", 2000, char)
 		else
 			PersistentVars.SkillData.VanquishersPath[char] = nil
 		end

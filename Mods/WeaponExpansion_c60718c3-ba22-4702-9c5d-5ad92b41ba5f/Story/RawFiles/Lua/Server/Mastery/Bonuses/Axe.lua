@@ -29,7 +29,7 @@ end)
 
 MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"}, "AXE_VULNERABLE", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
-		StartTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, hitData.Target)
+		Timer.Start("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, hitData.Target)
 	end
 end)
 
@@ -42,10 +42,8 @@ MasteryBonusManager.RegisterSkillListener({"Target_Flurry", "Target_EnemyFlurry"
 	end
 end)
 
-local function BlinkStrike_ApplyVulnerable(timerData)
-	local char = timerData[1]
-	local target = timerData[2]
-	if char ~= nil and target ~= nil and CharacterIsDead(target) == 0 then
+local function BlinkStrike_ApplyVulnerable(_, char, target)
+	if char and target and CharacterIsDead(target) == 0 then
 		if CharacterIsInCombat(char) == 1 then
 			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
 		else
@@ -54,7 +52,7 @@ local function BlinkStrike_ApplyVulnerable(timerData)
 	end
 end
 
-OnTimerFinished["LLWEAPONEX_MasteryBonus_ApplyVulnerable"] = BlinkStrike_ApplyVulnerable
+Timer.RegisterListener("LLWEAPONEX_MasteryBonus_ApplyVulnerable", BlinkStrike_ApplyVulnerable)
 
 BasicAttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
 	if hitObject and HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then

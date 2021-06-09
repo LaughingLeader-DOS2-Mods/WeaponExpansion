@@ -207,7 +207,7 @@ RegisterListener("Initialized", function(region)
 	end
 	if region ~= nil then
 		if IsGameLevel(region) == 1 then
-			StartTimer("Timers_LLWEAPONEX_InitUniques", 500)
+			Timer.Start("Timers_LLWEAPONEX_InitUniques", 500)
 		end
 		if IsCharacterCreationLevel(region) == 1 then
 			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)

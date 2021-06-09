@@ -5,7 +5,7 @@ local function PlayFrostdyneLoopedEffect(x, y, z)
 		if Uniques.Frostdyne:IsValid(item) then
 			StopLoopEffect(handle)
 			Uniques.Frostdyne:RemoveEventListener("ItemAddedToCharacter", removeEffectHandleFunc)
-			CancelTimer("Timers_LLWEAPONEX_SlaneRewardExclamationEffect")
+			Timer.Cancel("Timers_LLWEAPONEX_SlaneRewardExclamationEffect")
 		end
 	end
 	Uniques.Frostdyne:AddEventListener("ItemAddedToCharacter", removeEffectHandleFunc)

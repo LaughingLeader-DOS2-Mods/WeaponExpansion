@@ -120,7 +120,6 @@ Ext.RegisterListener("ShootProjectile", function (projectile)
 	if string.find(skill, "Projectile_LLWEAPONEX_Pistol_Shoot") then
 		local caster = Ext.GetCharacter(projectile.CasterHandle)
 		local status = GetPistolExplosionEffect(caster)
-		print(caster.MyGuid, status)
 		ApplyStatus(caster.MyGuid, status, 0.0, 0, caster.MyGuid)
 		-- local handle = projectile.Handle
 		-- print(string.format("SourcePosition(%s) Position(%s) PrevPosition(%s)", Common.Dump(projectile.SourcePosition), Common.Dump(projectile.Position), Common.Dump(projectile.PrevPosition)))
@@ -135,16 +134,11 @@ Ext.RegisterListener("ShootProjectile", function (projectile)
 	end
 end)
 
-OnTimerFinished["LLWEAPONEX_RemovePistolEffect"] = function(timerData)
-	local char = timerData[1]
-	if char ~= nil then
+Timer.RegisterListener("LLWEAPONEX_RemovePistolEffect", function(timerName, char)
+	if char then
 		RemoveStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
-		-- if ShouldPlaySheatheAnimation(Ext.GetCharacter(char)) then
-		-- 	GameHelpers.ClearActionQueue(char)
-		-- 	PlayAnimation(char, "skill_cast_ll_pistol_01_sheathe", "")
-		-- end
 	end
-end
+end)
 
 RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char, state, data)
 	if state == SKILL_STATE.USED then
@@ -159,7 +153,7 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char
 	elseif state == SKILL_STATE.CAST then
 		local caster = Ext.GetCharacter(char)
 		local delay = GetPistolRemoveDelay(caster)
-		StartTimer("LLWEAPONEX_RemovePistolEffect", delay, char)
+		Timer.Start("LLWEAPONEX_RemovePistolEffect", delay, char)
 	end
 end)
 

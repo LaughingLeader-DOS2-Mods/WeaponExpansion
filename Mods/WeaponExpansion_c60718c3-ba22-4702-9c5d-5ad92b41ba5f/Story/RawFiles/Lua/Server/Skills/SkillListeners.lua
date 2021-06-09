@@ -1,7 +1,7 @@
 RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", function(skill, char, state, data)
 	if state == SKILL_STATE.PREPARE then
 		--ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", -1.0, 0, char)
-		--Mods.StartTimer("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
+		--Mods.Timer.Start("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
 	elseif state == SKILL_STATE.USED then
 		if HasActiveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY") == 0 then
 			ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, char)
@@ -40,18 +40,17 @@ RegisterSkillListener({"Projectile_SkyShot", "Projectile_EnemySkyShot"}, functio
 				SetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition", x, y, z)
 			end
 		elseif state == SKILL_STATE.CAST then
-			StartTimer("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
+			Timer.Start("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
 		end
 	end
 end)
 
-OnTimerFinished["Timers_LLWEAPONEX_ProcGreatbowLightningStrike"] = function(data)
-	local char = data[1]
-	if char ~= nil and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
+Timer.RegisterListener("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", function(timerName, char)
+	if char and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
 		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition")
-		GameHelpers.ExplodeProjectile(char, {x,y,z}, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
+		GameHelpers.Skill.Explode({x,y,z}, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", char)
 	end
-end
+end)
 
 -- Placeholder until we can check a character's Treasures array
 local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
@@ -228,14 +227,14 @@ RegisterSkillListener({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEA
 	end
 end)
 
-OnTimerFinished["Timers_LLWEAPON_FutureBarrageDummyCast"] = function(timerData)
-	local caster = timerData[1]
-	local dummy = timerData[2]
-	local x,y,z = GetVarFloat3(dummy, "LLWEAPONEX_FutureBarrageTarget")
-	--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
-	CharacterUseSkillAtPosition(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", x, y, z, 0, 1)
-	CharacterCharacterSetEvent(caster, dummy, "LLWEAPONEX_Greatbow_FutureBarrage_DummySkillUsed")
-end
+Timer.RegisterListener("Timers_LLWEAPON_FutureBarrageDummyCast", function(timerName, caster, dummy)
+	if caster and dummy then
+		local x,y,z = GetVarFloat3(dummy, "LLWEAPONEX_FutureBarrageTarget")
+		--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
+		CharacterUseSkillAtPosition(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", x, y, z, 0, 1)
+		CharacterCharacterSetEvent(caster, dummy, "LLWEAPONEX_Greatbow_FutureBarrage_DummySkillUsed")
+	end
+end)
 
 local function SetupDummy(dummy, owner)
 	CharacterTransformFromCharacter(dummy, owner, 0, 1, 1, 0, 0, 0, 0)
@@ -274,7 +273,7 @@ function FutureBarrage_FireDummySkill(caster, x, y, z)
 		print("Failed to make dummy Greatbow")
 	end
 	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
-	StartTimer("Timers_LLWEAPON_FutureBarrageDummyCast", 250, caster, dummy)
+	Timer.Start("Timers_LLWEAPON_FutureBarrageDummyCast", 250, caster, dummy)
 	-- StartOneshotTimer(string.format("Timers_LLWEAPON_FutureBarrageDummyCast_%s", dummy), 250, function()
 	-- 	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
 	-- 	--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
