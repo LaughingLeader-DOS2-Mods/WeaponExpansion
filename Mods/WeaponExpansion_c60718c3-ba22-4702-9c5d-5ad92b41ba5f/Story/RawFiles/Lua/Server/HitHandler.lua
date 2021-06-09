@@ -43,22 +43,26 @@ end
 --- @param source string
 --- @param damage integer
 --- @param handle integer
-local function OnPrepareHit(target,source,damage,handle)
+--- @param data HitPrepareData
+local function OnPrepareHit(target,source,damage,handle,data)
 	if not StringHelpers.IsNullOrEmpty(source) then
-		local attacker = Ext.GetCharacter(source)
-		if damage > 0 and GameHelpers.HitSucceeded(target, handle, true) then
-			if UnarmedHelpers.HasUnarmedWeaponStats(attacker.Stats) then
-				UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle)
+		if data.TotalDamageDone > 0 and data:Succeeded() then
+			if ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 and data.HitType == "Surface" then
+				data.Blocked = true
+				data:ClearAllDamage()
+				Osi.LeaderLib_Timers_StartObjectTimer(target, 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
+				return
 			end
 
-			if HasActiveStatus(source, "LLWEAPONEX_MURAMASA_CURSE") == 1 then
-				local isCrit = NRD_HitGetInt(handle, "Backstab") == 1 or NRD_HitGetInt(handle, "CriticalHit") == 1
-				if isCrit then
-					local max = Ext.ExtraData.LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease or 50
-					local damageBoost = (((100 - CharacterGetHitpointsPercentage(source))/100) * max)/100
-					GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBoost, true)
-				end
+			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 and NRD_HitGetInt(handle, "HitType") < 4 then
+				data.Blocked = true
+				data:ClearAllDamage()
+				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
+				local blockedText = Ext.GetTranslatedString("h175f5a66g78d1g41a8g9530g004e19a5db8a", "Blocked!")
+				CharacterStatusText(target, string.format("<font color='#CCFF00'>%s</font>", blockedText))
+				return
 			end
+
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
 			if coverData ~= nil and coverData.CanCounterAttack == true then
 				local blocker = coverData.Blocker
@@ -67,45 +71,36 @@ local function OnPrepareHit(target,source,damage,handle)
 				and CharacterIsEnemy(blocker, source) == 1
 				and CharacterCanSee(blocker, source) == 1
 				and NRD_HitGetInt(handle, "HitType") <= 3 then -- Everything but Surface,DoT,Reflected
-					damage = 0
-					NRD_HitClearAllDamage(handle)
-					NRD_HitSetInt(handle,"SimulateHit",0)
-					NRD_HitSetInt(handle,"Dodged",0)
-					NRD_HitSetInt(handle,"Missed",0)
-					NRD_HitSetInt(handle,"Blocked",1)
-					NRD_HitSetInt(handle,"Hit",0)
-					NRD_HitSetInt(handle,"DontCreateBloodSurface",1)
+					data:ClearAllDamage()
+					data.SimulateHit = false
+					data.Dodged = false
+					data.Missed = false
+					data.Blocked = true
+					data.Hit = false
+					data.DontCreateBloodSurface = true
 					PersistentVars.SkillData.ShieldCover.BlockedHit[target] = {
 						Blocker = blocker,
 						Attacker = source
 					}
 					coverData.CanCounterAttack = false
+					return
 				end
 			end
-		end
-	end
 
-	if damage > 0 and ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 then
-		local hitType = NRD_HitGetString(handle, "HitType")
-		if hitType == "Surface" and GameHelpers.HitSucceeded(target, handle, 1) then
-			NRD_HitSetInt(handle, "Blocked", 1)
-			NRD_HitClearAllDamage(handle)
-			damage = 0
-			Osi.LeaderLib_Timers_StartObjectTimer(target, 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
-		end
-	end
+			if ObjectIsCharacter(source) == 1 then
+				if UnarmedHelpers.HasUnarmedWeaponStats(Ext.GetCharacter(source).Stats) then
+					UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle)
+				end
+			end
 
-	if damage > 0 and HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 then
-		local hitType = NRD_HitGetInt(handle, "HitType")
-		if hitType < 4 then
-			local alreadyBlocked = NRD_HitGetInt(handle, "Blocked")
-			local dodged = NRD_HitGetInt(handle, "Dodged")
-			local missed = NRD_HitGetInt(handle, "Missed")
-			if alreadyBlocked == 0 and dodged == 0 and missed == 0 then
-				NRD_HitSetInt(handle, "Blocked", 1)
-				NRD_HitClearAllDamage(handle)
-				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
-				CharacterStatusText(target, string.format("<font color='#CCFF00'>%s</font>", Ext.GetTranslatedString("h175f5a66g78d1g41a8g9530g004e19a5db8a", "Blocked!")))
+			if HasActiveStatus(source, "LLWEAPONEX_MURAMASA_CURSE") == 1 then
+				--Muramasa bonus of increasing crit damage with missing vitality percentage
+				local isCrit = data.Backstab or data.CriticalHit
+				if isCrit then
+					local max = Ext.ExtraData.LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease or 50
+					local damageBoost = (((100 - CharacterGetHitpointsPercentage(source))/100) * max)/100
+					GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBoost, true)
+				end
 			end
 		end
 	end
