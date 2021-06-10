@@ -52,7 +52,6 @@ local function OnBalrinAxeThrown(skill, char, state, data)
 		Osi.ProcObjectTimer(char, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200)
 		Timer.Start("Timers_LLWEAPONEX_CheckForAxeMiss", 1200, char)
 	elseif state == SKILL_STATE.HIT then
-		local bTimer.Cancel = true
 		if not data.Success or ObjectIsItem(data.Target) == 1 then
 			bTimer.Cancel = false
 			EquipBalrinAxe(char)
