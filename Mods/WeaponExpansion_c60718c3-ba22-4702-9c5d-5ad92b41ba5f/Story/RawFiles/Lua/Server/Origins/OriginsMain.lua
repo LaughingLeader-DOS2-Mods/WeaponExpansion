@@ -15,7 +15,32 @@ local function SetupOriginSkills(char, skillset)
 	end
 end
 
+local function AddToParty(uuid, host)
+	--Osi.PROC_GLO_PartyMembers_Add(uuid, host)
+	CharacterRecruitCharacter(uuid,host)
+	Osi.ProcCharacterDisableAllCrimes(uuid)
+	Osi.ProcAssignCharacterToPlayer(uuid,host)
+	Osi.ProcRegisterPlayerTriggers(uuid)
+	--PROC_GLO_PartyMembers_SetInpartyDialog(uuid,_NewDialog)
+	--SetFaction(uuid,Osi.DB_GLO_PartyMembers_DefaultFaction:Get(uuid)[1][2])
+	SetFaction(uuid,"Good NPC")
+	Osi.DB_IsPlayer:Delete(uuid)
+	Osi.DB_IsPlayer(uuid)
+	--NOT DB_GLO_PartyMembers_DefaultFaction(uuid,hostFaction)
+	CharacterAttachToGroup(uuid,host)
+	CharacterSetCorpseLootable(uuid, 0)
+	--Osi.Proc_CheckPartyFull()
+	Osi.Proc_CheckFirstTimeRecruited(uuid)
+	Osi.PROC_GLO_PartyMembers_RecruiteeAvatarBond_IfDifferent(uuid,host)
+	Osi.Proc_BondedAvatarTutorial(host)
+	Osi.PROC_GLO_PartyMembers_AddHook(uuid,host)
+end
+
 function Origins_InitCharacters(region, isEditorMode)
+	print("Origins_InitCharacters", CharacterGetHostCharacter())
+	if CharacterGetHostCharacter() == nil then
+		return
+	end
 	pcall(SetupOriginSkills, Origin.Harken, "Avatar_LLWEAPONEX_Harken")
 	pcall(SetupOriginSkills, Origin.Korvash, "Avatar_LLWEAPONEX_Korvash")
 
@@ -95,11 +120,12 @@ function Origins_InitCharacters(region, isEditorMode)
 		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
 			local totalAdded = 0
 			if CharacterIsInPartyWith(host, Origin.Harken) == 0 then
-				Osi.PROC_GLO_PartyMembers_Add(Origin.Harken, host)
-				TeleportTo(Origin.Harken, host, "", 1, 0, 1)
-				CharacterAttachToGroup(Origin.Harken, host)
+				AddToParty(Origin.Harken, host)
 				totalAdded = totalAdded + 1
 			end
+			TeleportTo(Origin.Harken, host, "", 1, 0, 1)
+			CharacterAttachToGroup(Origin.Harken, host)
+			SetOnStage(Origin.Harken, 1)
 			CharacterAssignToUser(user, Origin.Harken)
 			local pdata = Ext.GetCharacter(Origin.Harken).PlayerCustomData
 			if pdata ~= nil then
@@ -109,12 +135,12 @@ function Origins_InitCharacters(region, isEditorMode)
 			end
 			
 			if CharacterIsInPartyWith(host, Origin.Korvash) == 0 then
-				Osi.PROC_GLO_PartyMembers_Add(Origin.Korvash, host)
-				CharacterAssignToUser(user, Origin.Korvash)
-				TeleportTo(Origin.Korvash, host, "", 1, 0, 1)
-				CharacterAttachToGroup(Origin.Korvash, host)
+				AddToParty(Origin.Korvash, host)
 				totalAdded = totalAdded + 1
 			end
+			TeleportTo(Origin.Korvash, host, "", 1, 0, 1)
+			CharacterAttachToGroup(Origin.Korvash, host)
+			SetOnStage(Origin.Korvash, 1)
 			CharacterAssignToUser(user, Origin.Korvash)
 			pdata = Ext.GetCharacter(Origin.Korvash).PlayerCustomData
 			if pdata ~= nil then

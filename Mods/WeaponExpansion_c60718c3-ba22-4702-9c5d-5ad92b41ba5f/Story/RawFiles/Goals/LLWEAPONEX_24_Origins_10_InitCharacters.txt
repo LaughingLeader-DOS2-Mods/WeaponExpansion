@@ -9,7 +9,23 @@ GameStarted(_Region, _IsEditorMode)
 AND
 IsGameLevel(_Region, 1)
 THEN
-NRD_ModCall("WeaponExpansion", "Origins_InitCharacters", _Region, (STRING)_IsEditorMode);
+TimerCancel("Timers_LLWEAPONEX_InitOrigins");
+TimerLaunch("Timers_LLWEAPONEX_InitOrigins", 250);
+
+IF
+TimerFinished("Timers_LLWEAPONEX_InitOrigins")
+AND
+NOT CharacterGetHostCharacter(_)
+THEN
+TimerLaunch("Timers_LLWEAPONEX_InitOrigins", 5000);
+
+IF
+TimerFinished("Timers_LLWEAPONEX_InitOrigins")
+AND
+CharacterGetHostCharacter(_)
+THEN
+TimerCancel("Timers_LLWEAPONEX_InitOrigins");
+NRD_ModCall("WeaponExpansion", "Origins_InitCharacters");
 GoalCompleted;
 
 EXITSECTION
