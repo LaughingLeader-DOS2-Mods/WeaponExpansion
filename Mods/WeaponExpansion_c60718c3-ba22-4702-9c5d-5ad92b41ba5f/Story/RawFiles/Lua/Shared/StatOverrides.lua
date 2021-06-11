@@ -222,6 +222,10 @@ local player_stats = {
 	["ElfUndeadMaleHero"] = true,
 	["LizardUndeadFemaleHero"] = true,
 	["LizardUndeadMaleHero"] = true,
+	--["Summon_Earth_Ooze_Player"] = true,
+}
+
+local originStats = {
 	["_Companions"] = true,
 	["Player_Ifan"] = true,
 	["Player_Lohse"] = true,
@@ -229,7 +233,6 @@ local player_stats = {
 	["Player_Sebille"] = true,
 	["Player_Beast"] = true,
 	["Player_Fane"] = true,
-	--["Summon_Earth_Ooze_Player"] = true,
 }
 
 local CanBackstabPropEntry = {
@@ -504,9 +507,22 @@ local function StatOverrides_Init()
 		if not b then
 			Ext.PrintError(err)
 		end
-		for stat,b in pairs(player_stats) do
-			if b and Ext.StatGetAttribute(stat, "Accuracy") == 95 then
-				Ext.StatSetAttribute(stat, "Accuracy", 100)
+		for id,b in pairs(player_stats) do
+			if b then
+				local stat = Ext.GetStat(id)
+				if stat and stat.Accuracy == 95 then
+					Ext.StatSetAttribute(id, "Accuracy", 100)
+				end
+			end
+		end
+		if Ext.IsModLoaded(MODID.Origins) then
+			for id,b in pairs(originStats) do
+				if b then
+					local stat = Ext.GetStat(id)
+					if stat and stat.Accuracy == 95 then
+						Ext.StatSetAttribute(id, "Accuracy", 100)
+					end
+				end
 			end
 		end
 	end
