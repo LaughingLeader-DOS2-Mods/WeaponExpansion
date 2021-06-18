@@ -346,31 +346,28 @@ MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_Ene
 	end
 end)
 
----@param target EsvCharacter|EsvItem
----@param source EsvCharacter|EsvItem
+---@param IsFromSkill boolean
+---@param source EsvCharacter
+---@param target EsvGameObject
 ---@param damage integer
----@param hit HitRequest
----@param context HitContext
----@param status EsvStatusHit
----@param masteryBonuses table<string,boolean>
----@param tag string
+---@param data HitData
+---@param bonuses table
 ---@param skill StatEntrySkillData
-local function OnKatanaHit(target, source, damage, hit, context, status, masteryBonuses, tag, skill)
-	ApplyKatanaCombo(target.MyGuid, source.MyGuid, damage, context.HitId, masteryBonuses, tag, skill)
-	if damage > 0 and HasActiveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
-		RemoveStatus(source, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
+local function OnKatanaHit(IsFromSkill, source, target, damage, data, bonuses, skill)
+	ApplyKatanaCombo(target.MyGuid, source.MyGuid, damage, data.Handle, bonuses, "LLWEAPONEX_Katana", skill)
+	if damage > 0 and HasActiveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
+		RemoveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
 		local damageBonus = (Ext.ExtraData.LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus or 50) * 0.01
 		if damageBonus > 0 then
-			GameHelpers.Damage.IncreaseDamage(target.MyGuid, source.MyGuid, context.HitId, damageBonus)
-			CharacterStatusText(source, "LLWEAPONEX_StatusText_Katana_VaultBoost")
-			if ObjectIsCharacter(target) == 1 then
-				PlayEffect(target, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")
+			GameHelpers.Damage.IncreaseDamage(target.MyGuid, source.MyGuid, data.Handle, damageBonus)
+			CharacterStatusText(source.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")
+			if ObjectIsCharacter(target.MyGuid) == 1 then
+				PlayEffect(target.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")
 			else
-				PlayEffect(source, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
+				PlayEffect(source.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
 			end
 		end
 	end
 end
 
-RegisterHitListener("OnHit", "LLWEAPONEX_Katana", OnKatanaHit)
-RegisterHitListener("OnWeaponSkillHit", "LLWEAPONEX_Katana", OnKatanaHit)
+BasicAttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Katana", OnKatanaHit)

@@ -57,10 +57,6 @@ end)
 ---@alias MasteryEventID MasteryActivated|MasteryDeactivated
 ---@alias MasteryEventCallback fun(uuid:string, mastery:string):void
 
----@alias HitEventID OnHit|OnWeaponSkillHit
----@alias HitHandlerCallback fun(target:EsvCharacter|EsvItem, source:EsvCharacter|EsvItem, totalDamage:integer, hit:HitRequest, context:HitContext, status:EsvStatusHit, masteryBonuses:table<string, boolean>, tag:string):void
----@alias OnWeaponSkillHitCallback fun(target:EsvCharacter|EsvItem, source:EsvCharacter|EsvItem, totalDamage:integer, hit:HitRequest, context:HitContext, status:EsvStatusHit, masteryBonuses:table<string, boolean>, tag:string, skill:StatEntrySkillData):void
-
 LoadPersistentVars = {}
 BonusSkills = {}
 Listeners = {
@@ -80,11 +76,7 @@ Listeners = {
     ---@type table<string, MasteryEventCallback>
     MasteryActivated = {},
     ---@type table<string, MasteryEventCallback>
-    MasteryDeactivated = {},
-    ---@type table<string, HitHandlerCallback>
-    OnHit = {},
-    ---@type table<string, OnWeaponSkillHitCallback>
-    OnWeaponSkillHit = {},
+    MasteryDeactivated = {}
 }
 
 EID = {
@@ -93,28 +85,6 @@ EID = {
         Tag = "Tag",
     }
 }
-
----@param event HitEventID
----@param tag string
----@param callback HitHandlerCallback
-function RegisterHitListener(event, tag, callback)
-    local eventHolder = Listeners[event]
-    if eventHolder ~= nil then
-        if type(tag) == "table" then
-            for i,v in pairs(tag) do
-                if eventHolder[v] == nil then
-                    eventHolder[v] = {}
-                end
-                table.insert(eventHolder[v], callback)
-            end
-        else
-            if eventHolder[tag] == nil then
-                eventHolder[tag] = {}
-            end
-            table.insert(eventHolder[tag], callback)
-        end
-    end
-end
 
 ---@param event MasteryEventID
 ---@param mastery string
@@ -166,6 +136,7 @@ Ext.Require("Server/OsirisListeners.lua")
 Ext.Require("Server/DeathMechanics.lua")
 Ext.Require("Server/UI/MasteryMenuCommands.lua")
 Ext.Require("Server/UI/UIHelpers.lua")
+Ext.Require("Server/RuneOnHitBonuses.lua")
 Ext.Require("Server/Skills/ElementalFirearms.lua")
 Ext.Require("Server/Skills/PrepareEffects.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")

@@ -6,13 +6,17 @@ if BasicAttackManager.Listeners == nil then
 	BasicAttackManager.Listeners = {
 		OnStart = {},
 		OnHit = {},
+		---@type table<string,BasicAttackOnHitTargetCallback>
+		OnWeaponTypeHit = {}
 	}
 end
 
 ---@alias BasicAttackEventID OnStart|OnHit
 
 ---@alias BasicAttackOnStartCallback fun(attacker:string, target:string|number[]):void
----@alias BasicAttackOnHitTargetCallback fun(bHitObject:boolean, attacker:string, target:string|number[], damage:integer|DamageList, handle:integer|nil):void
+---@alias BasicAttackOnHitTargetCallback fun(bHitObject:boolean, attacker:EsvCharacter, target:EsvGameObject|number[], damage:integer|DamageList, data:HitData):void
+---@alias BasicAttackOnWeaponTypeHitTargetCallback fun(IsFromSkill:boolean, attacker:EsvCharacter, target:EsvGameObject, damage:integer, data:HitData, bonuses:table):void
+---@alias BasicAttackOnWeaponTypeSkillHitCallback fun(IsFromSkill:boolean, attacker:EsvCharacter, target:EsvGameObject, damage:integer, data:HitData, bonuses:table, skill:StatEntrySkillData):void
 
 ---@param event BasicAttackEventID
 ---@param func BasicAttackOnStartCallback|BasicAttackOnHitTargetCallback
@@ -26,6 +30,21 @@ end
 ---@param func BasicAttackOnHitTargetCallback|BasicAttackOnHitTargetCallback
 function BasicAttackManager.RegisterOnHit(func)
 	BasicAttackManager.RegisterListener("OnHit", func)
+end
+
+---@param tag string|string[]
+---@param func BasicAttackOnWeaponTypeHitTargetCallback|BasicAttackOnWeaponTypeSkillHitCallback
+function BasicAttackManager.RegisterOnWeaponTypeHit(tag, func)
+	if type(tag) == "table" then
+		for i,v in pairs(tag) do
+			BasicAttackManager.RegisterOnWeaponTypeHit(v, func)
+		end
+	else
+		if BasicAttackManager.Listeners.OnWeaponTypeHit[tag] == nil then
+			BasicAttackManager.Listeners.OnWeaponTypeHit[tag] = {}
+		end
+		table.insert(BasicAttackManager.Listeners.OnWeaponTypeHit[tag], func)
+	end
 end
 
 ---@param func BasicAttackOnStartCallback
@@ -85,11 +104,31 @@ local function OnBasicAttackPosition(x, y, z, owner, attacker)
 end
 Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAttackPosition)
 
-function BasicAttackManager.InvokeOnHit(isFromHit, source, target, damage, handle)
+----@param isFromHit boolean
+--- @param target EsvCharacter|EsvItem
+--- @param source EsvCharacter|EsvItem
+--- @param data HitData
+function BasicAttackManager.InvokeOnHit(isFromHit, target, source, damage, data, bonuses, isFromSkill)
 	for i,callback in pairs(BasicAttackManager.Listeners.OnHit) do
-		local b,err = xpcall(callback, debug.traceback, isFromHit, source, target, damage, handle)
+		local b,err = xpcall(callback, debug.traceback, isFromHit, source, target, damage, data)
 		if not b then
 			Ext.PrintError(err)
+		end
+	end
+	if isFromHit and source ~= nil and ObjectIsCharacter(source.MyGuid) == 1 then
+		if isFromSkill == nil then
+			isFromSkill = false
+		end
+		bonuses = bonuses or MasteryBonusManager.GetMasteryBonuses(source)
+		for tag,callbacks in pairs(BasicAttackManager.Listeners.OnWeaponTypeHit) do
+			if #callbacks > 0 and GameHelpers.CharacterOrEquipmentHasTag(source, tag) then
+				for i,callback in pairs(callbacks) do
+					local status,err = xpcall(callback, debug.traceback, isFromSkill, source, target, data, bonuses, tag)
+					if not status then
+						Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
+					end
+				end
+			end
 		end
 	end
 end
@@ -123,7 +162,7 @@ Ext.RegisterListener("GroundHit", function (caster, position, damageList)
 	--Also fires when a projectile hits the ground (exploding projectiles too!), so we need this table entry
 	if caster and startedAttackedPosition[caster.MyGuid] then
 		startedAttackedPosition[caster.MyGuid] = nil
-		BasicAttackManager.InvokeOnHit(false, caster.MyGuid, position, damageList, nil)
+		BasicAttackManager.InvokeOnHit(false, caster, position, damageList)
 	end
 end)
 

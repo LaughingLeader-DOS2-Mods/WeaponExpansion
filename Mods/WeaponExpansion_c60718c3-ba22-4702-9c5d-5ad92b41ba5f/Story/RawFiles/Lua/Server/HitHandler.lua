@@ -122,87 +122,60 @@ local armCannonSkills = {
 
 --- @param target EsvCharacter|EsvItem
 --- @param source EsvCharacter|EsvItem
---- @param damage integer
---- @param hit HitRequest
---- @param context HitContext
---- @param hitStatus EsvStatusHit
---- @param skill StatEntrySkillData|nil
-RegisterListener("StatusHitEnter", function(target, source, damage, hit, context, hitStatus, skill)
+--- @param data HitData
+RegisterListener("StatusHitEnter", function(target, source, data)
 	-- if Vars.DebugMode then
 	-- 	fprint("[LLWEAPONEX:OnHit] skill(%s) target.MyGuid(%s) source.MyGuid(%s)", NRD_StatusGetString(target.MyGuid, handle, "SkillId"), target.MyGuid, source.MyGuid)
 	-- end
 	if source then
+		local sourceIsPlayer = IsPlayer(source.MyGuid)
+		local skill = data.Skill
+
 		local blockedHit = PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid]
 		if blockedHit ~= nil then
-			hitStatus.AllowInterruptAction = false
-			hitStatus.ForceInterrupt = false
-			hitStatus.Interruption = false
+			data.HitStatus.AllowInterruptAction = false
+			data.HitStatus.ForceInterrupt = false
+			data.HitStatus.Interruption = false
 			DualShields_Cover_OnCounter(target.MyGuid, blockedHit.Blocker, blockedHit.Attacker)
 			PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid] = nil
 		end
-		local hitSucceeded = GameHelpers.Hit.Succeeded(hit)
-		if skill and armCannonSkills[skill.Name] then
-			GameHelpers.Hit.SetFlag(hit, "Hit", true)
-			GameHelpers.Hit.SetFlag(hit, {"Dodged", "Missed"}, false)
+		local hitSucceeded = data.Success
+		if data.SkillData and armCannonSkills[data.SkillData.Name] then
+			data:SetHitFlag("Hit", true)
+			data:SetHitFlag({"Dodged", "Missed"}, false)
 			hitSucceeded = true
 		end
 
 		if hitSucceeded and not StringHelpers.IsNullOrEmpty(target.MyGuid) then
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target.MyGuid]
 			if coverData ~= nil then
-				DualShields_Cover_RedirectDamage(target.MyGuid, coverData.Blocker, source.MyGuid, context.HitId)
+				DualShields_Cover_RedirectDamage(target.MyGuid, coverData.Blocker, source.MyGuid, data.HitStatus.StatusHandle)
 			end
 			local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
-			local mainhand = CharacterGetEquippedItem(source.MyGuid, "Weapon")
-			local offhand = CharacterGetEquippedItem(source.MyGuid, "Shield")
-			if not skill and GameHelpers.Hit.IsFromWeapon(hitStatus) then
+			if not data.SkillData and data:IsFromWeapon() then
+				local mainhand = CharacterGetEquippedItem(source.MyGuid, "Weapon")
+				local offhand = CharacterGetEquippedItem(source.MyGuid, "Shield")
 				-- Unarmed
 				if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
-					local unarmedCallback = Listeners.OnHit["LLWEAPONEX_Unarmed"]
-					if unarmedCallback ~= nil then
-						local status,err = xpcall(unarmedCallback, debug.traceback, target.MyGuid, source.MyGuid, damage, context.HitId, bonuses, "LLWEAPONEX_Unarmed")
-						if not status then
-							Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
-						end
-					end
-					if damage > 0 and IsPlayer(source.MyGuid) then
+					if data.Damage > 0 and sourceIsPlayer then
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, "LLWEAPONEX_Unarmed")
 					end
 				else
-					if damage > 0 and IsPlayer(source.MyGuid) then
+					if data.Damage > 0 and sourceIsPlayer then
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid)
 					end
-					for tag,callbacks in pairs(Listeners.OnHit) do
-						if #callbacks > 0 and WeaponIsTagged(source.MyGuid,mainhand,tag) or WeaponIsTagged(source.MyGuid,offhand,tag) then
-							for i,callback in pairs(callbacks) do
-								local status,err = xpcall(callback, debug.traceback, target, source, damage, hit, context, hitStatus, bonuses, tag)
-								if not status then
-									Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
-								end
-							end
-						end
-					end
 				end
-				BasicAttackManager.InvokeOnHit(true, source.MyGuid, target.MyGuid, damage, context.HitId)
+				BasicAttackManager.InvokeOnHit(true, source, target, data.Damage, data, bonuses, false)
 			elseif skill then
 				if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
-				and not armCannonSkills[skill.Name]
-				and IsMeleeWeaponSkill(skill.Name)
+				and not armCannonSkills[skill]
+				and IsMeleeWeaponSkill(skill)
 				then
-					ArmCannon_OnWeaponSkillHit(source.MyGuid, target.MyGuid, skill.Name)
+					ArmCannon_OnWeaponSkillHit(source.MyGuid, target.MyGuid, skill)
 				end
-				if IsWeaponSkill(skill) then
+				if IsWeaponSkill(data.SkillData) then
 					MasterySystem.GrantWeaponSkillExperience(source.MyGuid, target.MyGuid)
-					for tag,callbacks in pairs(Listeners.OnWeaponSkillHit) do
-						if #callbacks > 0 and WeaponIsTagged(source.MyGuid,mainhand,tag) or WeaponIsTagged(source.MyGuid,offhand,tag) then
-							for i,callback in pairs(callbacks) do
-								local status,err = xpcall(callback, debug.traceback, target, source, damage, hit, context, hitStatus, bonuses, tag, skill)
-								if not status then
-									Ext.PrintError("Error calling function for 'Listeners.OnWeaponSkillHit':\n", err)
-								end
-							end
-						end
-					end
+					BasicAttackManager.InvokeOnHit(true, source, target, data.Damage, data, bonuses, true)
 				end
 			end
 		end

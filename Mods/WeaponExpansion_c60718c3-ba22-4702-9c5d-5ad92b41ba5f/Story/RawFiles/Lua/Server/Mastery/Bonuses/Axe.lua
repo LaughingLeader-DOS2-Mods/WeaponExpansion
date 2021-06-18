@@ -102,18 +102,18 @@ MasteryBonusManager.RegisterSkillListener("Target_DualWieldingAttack", "AXE_FLUR
 	end
 end)
 
-RegisterHitListener("OnHit", "LLWEAPONEX_Axe", function(target, source, damage, hit, context, status, bonuses, tag)
-	if damage > 0 then
+BasicAttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Axe", function(IsFromSkill, source, target, damage, data, bonuses, skill)
+	if damage > 0 and not IsFromSkill then
 		if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
-			local damageBonus = (Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus"] or 25) * 0.01
-			GameHelpers.IncreaseDamage(target.MyGuid, source.MyGuid, context.HitId, damageBonus)
+			local damageBonus = 1 + ((Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus"] or 25) * 0.01)
+			data:MultiplyDamage(damageBonus)
 		end
 		if bonuses.AXE_EXECUTIONER and HasActiveStatus(source, "AOO") == 1 then
 			if ObjectIsCharacter(target.MyGuid) == 1 then
-				local damageBonus = (Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_AttackOfOpportunityMaxDamageBonus"] or 50) * 0.01
+				local damageBonus = ((Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_AttackOfOpportunityMaxDamageBonus"] or 50) * 0.01)
 				local missingVitPerc = 0.0
 				missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
-				GameHelpers.IncreaseDamage(target.MyGuid, source.MyGuid, context.HitId, damageBonus * missingVitPerc)
+				data:MultiplyDamage(1+(damageBonus * missingVitPerc))
 			end
 		end
 	end
