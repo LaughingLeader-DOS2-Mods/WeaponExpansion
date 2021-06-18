@@ -296,7 +296,11 @@ LLWEAPONEX_ArmCannon_OnHit((CHARACTERGUID)_Char, (CHARACTERGUID)_Target)
 AND
 ObjectGetFlag(_Char, "LLWEAPONEX_ArmCannon_BlockEnergyGain", 0)
 AND
-CharacterIsEnemy(_Char, _Target, 1)
+CharacterIsEnemy(_Char, _Target, _A)
+AND
+IsTagged(_Target, "LLDUMMY_TrainingDummy", _B)
+AND
+IntegerMax(_A, _B, 1)
 AND
 DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped(_Char, _ArmCannon)
 AND
