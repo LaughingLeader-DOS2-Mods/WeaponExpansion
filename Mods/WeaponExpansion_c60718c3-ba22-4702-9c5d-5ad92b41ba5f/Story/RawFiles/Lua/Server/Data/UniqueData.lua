@@ -547,7 +547,7 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 		end
 	end
 	if not StringHelpers.IsNullOrEmpty(matchStat) then
-		if item.StatsId ~= matchStat then
+		if item.Stats.Name ~= matchStat then
 			return false
 		end
 	end
@@ -759,7 +759,7 @@ local function ResetUnique(item, stat, level, changes)
 	elseif itemType == "Shield" then
 		ResetBoostAttributes(ShieldBoosts, target, changes)
 	end
-	local originalValues = Temp.OriginalUniqueStats[item.StatsId]
+	local originalValues = Temp.OriginalUniqueStats[item.Stats.Name]
 	if originalValues ~= nil then
 		for attribute,value in pairs(originalValues) do
 			if attribute == "Damage Range" then
@@ -792,8 +792,9 @@ end
 ---@param item EsvItem
 local function TryApplyProgression(self, progressionTable, persist, item, level, changes, firstLoad)
 	local statChanged = false
-	if progressionTable ~= nil then
-		local stat = Ext.GetStat(item.StatsId, level)
+	local statId = item.Stats.Name
+	if progressionTable ~= nil and statId ~= "" then
+		local stat = Ext.GetStat(statId, level)
 		for i=1,level do
 			local entries = progressionTable[i]
 			if entries ~= nil then
@@ -809,7 +810,7 @@ local function TryApplyProgression(self, progressionTable, persist, item, level,
 			if persist == nil then
 				persist = false
 			end
-			Ext.SyncStat(item.StatsId, persist)
+			Ext.SyncStat(statId, persist)
 		end
 		item.Stats.ShouldSyncStats = true
 	end
@@ -828,7 +829,7 @@ local function StartApplyingProgression(self, progressionTable, persist, item, f
 	}
 	local b,result = xpcall(TryApplyProgression, debug.traceback, self, progressionTable, persist, item, level, changes, firstLoad)
 	if not b then
-		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", item.MyGuid, item.StatsId)
+		Ext.PrintError("[LLWEAPONEX] Error applying progression to unique", item.MyGuid, item.Stats.Name)
 		Ext.PrintError(result)
 	elseif result == true or firstLoad == true then
 		if changes ~= nil and Common.TableHasAnyEntry(changes) then

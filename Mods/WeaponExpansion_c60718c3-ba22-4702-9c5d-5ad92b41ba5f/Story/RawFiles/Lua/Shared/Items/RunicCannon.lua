@@ -57,7 +57,7 @@ if Ext.IsServer() then
 	end
 
 	local function OnBasicAttack(bHitObject,attacker,target,damage,handle)
-		if bHitObject and IsTagged(attacker, "LLWEAPONEX_RunicCannonEquipped") == 1 then
+		if bHitObject and GameHelpers.CharacterOrEquipmentHasTag(attacker, "LLWEAPONEX_RunicCannonEquipped") then
 			Osi.LLWEAPONEX_ArmCannon_OnHit(attacker, target)
 			Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(attacker, 750)
 		end

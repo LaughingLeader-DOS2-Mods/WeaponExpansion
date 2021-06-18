@@ -149,7 +149,7 @@ end
 ---@param itemStat string
 function ChangeItemScaling(item, attribute, itemStat)
 	if itemStat == nil then
-		itemStat = item.StatsId
+		itemStat = item.Stats.Name
 	end
 	if itemStat ~= nil then
 		---@type StatEntryWeapon

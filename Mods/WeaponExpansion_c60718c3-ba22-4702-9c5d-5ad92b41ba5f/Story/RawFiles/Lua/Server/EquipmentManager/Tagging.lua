@@ -62,17 +62,17 @@ function EquipmentManager:TagWeapon(item, statType, stat, itemTags)
 		if StringHelpers.IsNullOrEmpty(statType) or StringHelpers.IsNullOrEmpty(stat) then
 			---@type EsvItem
 			local item = Ext.GetItem(item.MyGuid)
-			if not TagFromStats(item.MyGuid, item.StatsId) then
+			if not TagFromStats(item.MyGuid, item.Stats.Name) then
 				if item.ItemType == "Weapon" then
 					local tag = Tags.WeaponTypeToTag[item.Stats.WeaponType]
 					if tag ~= nil then
 						SetTag(item.MyGuid, tag)
-						PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..item.StatsId.."] with ("..tag..").")
+						PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..item.Stats.Name.."] with ("..tag..").")
 						tagged = true
 					end
 				elseif item.ItemType == "Shield" then
 					SetTag(item.MyGuid, "LLWEAPONEX_Shield")
-					PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..item.StatsId.."] with (LLWEAPONEX_Shield).")
+					PrintDebug("[WeaponExpansion:TagWeapon] Tagged ("..item.MyGuid..")["..item.Stats.Name.."] with (LLWEAPONEX_Shield).")
 					tagged = true
 				end
 			else

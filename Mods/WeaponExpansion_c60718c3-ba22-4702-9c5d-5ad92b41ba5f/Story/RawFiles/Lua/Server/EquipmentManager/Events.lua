@@ -21,7 +21,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	if not itemTags["LLWEAPONEX_TaggedWeaponType"]
 	and (SharedData.GameMode == GAMEMODE.GAMEMASTER or isPlayer)
 	and (statType == "Weapon" or statType == "Shield") then
-		self:TagWeapon(item, statType, item.StatsId, itemTags)
+		self:TagWeapon(item, statType, item.Stats.Name, itemTags)
 	end
 
 	if isPlayer and statType == "Weapon" then
@@ -83,7 +83,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	local callbacks = Listeners.EquipmentChanged.Template[item.RootTemplate.Id]
 	if callbacks ~= nil then
 		if Vars.DebugMode then
-			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", item.RootTemplate.Id, item.StatsId, character.MyGuid))
+			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", item.RootTemplate.Id, item.Stats.Name, character.MyGuid))
 		end
 		for i,callback in pairs(callbacks) do
 			local b,err = xpcall(callback, debug.traceback, character, item, item.RootTemplate.Id, true)
@@ -95,7 +95,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 		if itemTags[tag] then
 			if Vars.DebugMode then
-				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.StatsId, character.MyGuid))
+				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.Stats.Name, character.MyGuid))
 			end
 			for i,callback in pairs(callbacks) do
 				local b,err = xpcall(callback, debug.traceback, character, item, tag, true)
@@ -115,9 +115,10 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	end
 
 	local isPlayer = GameHelpers.Character.IsPlayer(character)
+	local template = item.RootTemplate.Id
 
 	--TODO Refactor to Lua stuff
-	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(character.MyGuid, item.MyGuid, item.RootTemplate.Id)
+	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(character.MyGuid, item.MyGuid, template)
 	Osi.LLWEAPONEX_Equipment_ClearItem(character.MyGuid, item.MyGuid, isPlayer)
 	Osi.LLWEAPONEX_WeaponMastery_RemovedTrackedMasteries(character.MyGuid, item.MyGuid)
 
@@ -129,7 +130,7 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	local callbacks = Listeners.EquipmentChanged.Template[template]
 	if callbacks ~= nil then
 		if Vars.DebugMode then
-			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.StatsId, character.MyGuid))
+			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.Stats.Name, character.MyGuid))
 		end
 		for i,callback in pairs(callbacks) do
 			local b,err = xpcall(callback, debug.traceback, character, item, template, false)
@@ -141,7 +142,7 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
 		if item:HasTag(tag) then
 			if Vars.DebugMode then
-				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.StatsId, character.MyGuid))
+				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.Stats.Name, character.MyGuid))
 			end
 			for i,callback in pairs(callbacks) do
 				local b,err = xpcall(callback, debug.traceback, character, item, tag, false)

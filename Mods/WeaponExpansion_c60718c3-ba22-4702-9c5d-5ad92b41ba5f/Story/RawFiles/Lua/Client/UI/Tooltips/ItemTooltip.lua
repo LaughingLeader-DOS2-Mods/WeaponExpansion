@@ -315,7 +315,7 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
-		if item.StatsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
+		if item.Stats.Name == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
 			--Removes the Requires Dwarf / Male
 			for i,element in pairs(tooltip:GetElements("ItemRequirement")) do
 				if element.RequirementMet == true then
@@ -444,7 +444,7 @@ local function OnItemTooltip(item, tooltip)
 			if item.Stats ~= nil then
 				statTags = item.Stats.Tags
 			else
-				statTags = Ext.StatGetAttribute(item.StatsId, "Tags")
+				statTags = Ext.StatGetAttribute(item.Stats.Name, "Tags")
 			end
 		end
 

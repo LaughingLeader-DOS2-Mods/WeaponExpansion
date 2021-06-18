@@ -26,10 +26,6 @@ MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_Ene
 	end
 end)
 
--- RegisterHitListener("OnHit", "LLWEAPONEX_Unarmed", function(target,source,damage,handle,bonuses,tag)
-	
--- end)
-
 ---@param skill string
 ---@param char string
 ---@param state SkillState
