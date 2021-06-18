@@ -58,7 +58,7 @@ add equipment entry "ARM_LLWEAPONEX_DragonSlayer_Boots"
 add equipmentgroup
 add equipment entry "ARM_LLWEAPONEX_Quiver_A_Preview"
 add equipmentgroup
-add equipment entry "WPN_LLWEAPONEX_GreatbowPreview"
+add equipment entry "WPN_LLWEAPONEX_Greatbow_Preview"
 
 new equipment "Class_LLWEAPONEX_DragonSlayer_Act2"
 add equipmentgroup

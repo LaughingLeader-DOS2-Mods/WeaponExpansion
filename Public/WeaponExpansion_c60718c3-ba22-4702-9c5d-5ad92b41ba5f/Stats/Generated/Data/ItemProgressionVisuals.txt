@@ -1666,7 +1666,7 @@ add levelgroup 0,0,"All"
 add rootgroup "7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A","",""
 
-new itemgroup "WPN_LLWEAPONEX_GreatbowPreview"
+new itemgroup "WPN_LLWEAPONEX_Greatbow_Preview"
 
 add levelgroup 0,0,"All"
 add rootgroup "03555b43-d903-4e2b-84af-017dc6ddaf23","LizardsBowAShieldCEpic"
@@ -2074,6 +2074,12 @@ add levelgroup 0,0,"Divine"
 add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
 add namegroup "LLWEAPONEX_Quivers_Epic","",""
 
+new itemgroup "ARM_LLWEAPONEX_Quiver_A_Preview"
+
+add levelgroup 0,0,"All"
+add rootgroup "99742c91-9fc5-4263-aa0a-e59648d628cc",""
+add namegroup "LLWEAPONEX_Quivers_Epic","",""
+
 new itemgroup "ARM_LLWEAPONEX_Quiver_DrawArrow"
 
 add levelgroup 0,0,"Common"
@@ -2140,7 +2146,7 @@ new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Boots"
 
 add levelgroup 0,0,"All"
 add rootgroup "f91a2518-7f51-4c92-96a9-17ef41c0928f",""
-add namegroup "LLWEAPONEX_DragonSlayer_Shoes","",""
+add namegroup "LLWEAPONEX_DragonSlayer_Boots","",""
 
 new itemgroup "ARM_LLWEAPONEX_DragonSlayer_Helmet"
 
