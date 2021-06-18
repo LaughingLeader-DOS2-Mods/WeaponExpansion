@@ -17,8 +17,8 @@ AttackManager.RegisterOnStart(function(attacker, target)
 end)
 
 --Blunderbuss bonus on hit
-AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
-	if bHitObject and IsTagged(attacker, "LLWEAPONEX_Blunderbuss_Equipped") == 1 then
-		GameHelpers.ExplodeProjectile(attacker, target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode")
+AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
+	if bHitObject and GameHelpers.CharacterOrEquipmentHasTag(attacker, "LLWEAPONEX_Blunderbuss_Equipped") then
+		GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode", attacker)
 	end
 end)

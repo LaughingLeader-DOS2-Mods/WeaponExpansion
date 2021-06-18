@@ -14,9 +14,9 @@ end
 ---@alias BasicAttackEventID OnStart|OnHit
 
 ---@alias BasicAttackOnStartCallback fun(attacker:string, target:string|number[]):void
----@alias BasicAttackOnHitTargetCallback fun(bHitObject:boolean, attacker:EsvCharacter, target:EsvGameObject|number[], damage:integer|DamageList, data:HitData):void
----@alias BasicAttackOnWeaponTypeHitTargetCallback fun(IsFromSkill:boolean, attacker:EsvCharacter, target:EsvGameObject, damage:integer, data:HitData, bonuses:table):void
----@alias BasicAttackOnWeaponTypeSkillHitCallback fun(IsFromSkill:boolean, attacker:EsvCharacter, target:EsvGameObject, damage:integer, data:HitData, bonuses:table, skill:StatEntrySkillData):void
+---@alias BasicAttackOnHitTargetCallback fun(bHitObject:boolean, attacker:EsvCharacter, target:EsvCharacter|EsvItem|number[], damage:integer|DamageList, data:HitData, bonuses:table|nil):void
+---@alias BasicAttackOnWeaponTypeHitTargetCallback fun(IsFromSkill:boolean, attacker:EsvCharacter, target:EsvCharacter|EsvItem, damage:integer, data:HitData, bonuses:table):void
+---@alias BasicAttackOnWeaponTypeSkillHitCallback fun(IsFromSkill:boolean, attacker:EsvCharacter, target:EsvCharacter|EsvItem, damage:integer, data:HitData, bonuses:table, skill:StatEntrySkillData):void
 
 ---@param event BasicAttackEventID
 ---@param func BasicAttackOnStartCallback|BasicAttackOnHitTargetCallback
@@ -110,12 +110,12 @@ Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAt
 --- @param data HitData
 function AttackManager.InvokeOnHit(isFromHit, target, source, damage, data, bonuses, isFromSkill)
 	for i,callback in pairs(AttackManager.Listeners.OnHit) do
-		local b,err = xpcall(callback, debug.traceback, isFromHit, source, target, damage, data)
+		local b,err = xpcall(callback, debug.traceback, isFromHit, source, target, damage, data, bonuses)
 		if not b then
 			Ext.PrintError(err)
 		end
 	end
-	if isFromHit and source ~= nil and ObjectIsCharacter(source.MyGuid) == 1 then
+	if source ~= nil and ObjectIsCharacter(source.MyGuid) == 1 then
 		if isFromSkill == nil then
 			isFromSkill = false
 		end

@@ -655,24 +655,20 @@ DeathManager.RegisterListener("GnakSpellScroll", function(target, attacker, targ
 end)
 
 local function ListenForDeath(target, attacker, delay)
-	if type(target) == "string" then
-		if HasActiveStatus(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
-			DeathManager.ListenForDeath("GnakSpellScroll", StringHelpers.GetUUID(target), StringHelpers.GetUUID(attacker), delay)
-		end
-	end
+	DeathManager.ListenForDeath("GnakSpellScroll", GameHelpers.GetUUID(target), GameHelpers.GetUUID(attacker), delay)
 end
 
 AttackManager.RegisterOnStart(function(attacker, target)
-	if HasActiveStatus(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
+	if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 		ListenForDeath(target, attacker, 3000)
 	end
 end)
 
-AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
-	if HasActiveStatus(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
+AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
+	if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 		ListenForDeath(target, attacker, 1500)
-		if FireSpell(attacker, target) then
-			RemoveStatus(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
+		if FireSpell(attacker.MyGuid, target.MyGuid) then
+			RemoveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
 		end
 	end
 end)
