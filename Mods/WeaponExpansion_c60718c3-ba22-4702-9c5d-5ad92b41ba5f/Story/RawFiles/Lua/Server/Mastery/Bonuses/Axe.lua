@@ -54,7 +54,7 @@ end
 
 Timer.RegisterListener("LLWEAPONEX_MasteryBonus_ApplyVulnerable", BlinkStrike_ApplyVulnerable)
 
-BasicAttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
+AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
 	if hitObject and HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
 		RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
 		GameHelpers.ExplodeProjectile(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage")
@@ -102,7 +102,7 @@ MasteryBonusManager.RegisterSkillListener("Target_DualWieldingAttack", "AXE_FLUR
 	end
 end)
 
-BasicAttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Axe", function(IsFromSkill, source, target, damage, data, bonuses, skill)
+AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Axe", function(IsFromSkill, source, target, damage, data, bonuses, skill)
 	if damage > 0 and not IsFromSkill then
 		if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
 			local damageBonus = 1 + ((Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus"] or 25) * 0.01)

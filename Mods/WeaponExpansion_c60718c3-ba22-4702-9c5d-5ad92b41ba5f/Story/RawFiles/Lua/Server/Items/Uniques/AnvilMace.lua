@@ -1,6 +1,6 @@
-BasicAttackManager.RegisterOnHit(function(bHitObject, attacker, target, damage, handle)
+AttackManager.RegisterOnHit(function(bHitObject, attacker, target, damage, handle)
 	if attacker ~= target and Uniques.AnvilMace:IsOwner(attacker) then
-		print("BasicAttackManager.OnHit", bHitObject, attacker, target, damage, handle)
+		print("AttackManager.OnHit", bHitObject, attacker, target, damage, handle)
 		if bHitObject then
 			--Ding/dizzy on crit
 			if damage > 0 and NRD_StatusGetInt(target, handle, "CriticalHit") == 1 then

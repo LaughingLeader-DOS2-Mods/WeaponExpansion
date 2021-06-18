@@ -662,13 +662,13 @@ local function ListenForDeath(target, attacker, delay)
 	end
 end
 
-BasicAttackManager.RegisterOnStart(function(attacker, target)
+AttackManager.RegisterOnStart(function(attacker, target)
 	if HasActiveStatus(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 		ListenForDeath(target, attacker, 3000)
 	end
 end)
 
-BasicAttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
+AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,handle)
 	if HasActiveStatus(attacker, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 		ListenForDeath(target, attacker, 1500)
 		if FireSpell(attacker, target) then

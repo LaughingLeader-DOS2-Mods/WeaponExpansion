@@ -67,7 +67,7 @@ if Ext.IsServer() then
 
 	Ext.RegisterListener("SessionLoaded", function()
 		if not registeredListener then
-			BasicAttackManager.RegisterOnHit(OnBasicAttack)
+			AttackManager.RegisterOnHit(OnBasicAttack)
 			registeredListener = true
 		end
 	end)

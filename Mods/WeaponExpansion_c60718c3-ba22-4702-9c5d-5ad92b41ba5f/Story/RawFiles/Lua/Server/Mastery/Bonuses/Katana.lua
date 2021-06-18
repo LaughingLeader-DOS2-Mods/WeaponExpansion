@@ -370,4 +370,4 @@ local function OnKatanaHit(IsFromSkill, source, target, damage, data, bonuses, s
 	end
 end
 
-BasicAttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Katana", OnKatanaHit)
+AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Katana", OnKatanaHit)
