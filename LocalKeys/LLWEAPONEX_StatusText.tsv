@@ -31,3 +31,5 @@ LLWEAPONEX_StatusText_BasilusHauntedDamage_Backstab	<font color='#00FFCC' size='
 LLWEAPONEX_StatusText_Katana_VaultBoost	<font color='#FF337F' size='22'><p align='center'>Flanking Strike!</p></font>	hfe9263e0g33aag4459g8710gb0ff55b2427f
 LLWEAPONEX_StatusText_RunebladeRuneBlocked	<font color='#FF0000' size='22'>*This rune can only be inserted into a <font color='#40E0D0'>Runeblade</font>.*</font>	h9e47bd8agc147g4dc5g9eaeg15c5af29b4b9
 LLWEAPONEX_StatusText_BattleBook_BlessDamage	<font color='#C9AA58' size='22'>*Divine Knowledge*</font>	h97851202g90c0g492cg896bgf9491216d827
+LLWEAPONEX_StatusText_GasExpansion	<font color='#f7ba14'>Gas Expansion</font>	he772e2ccg5ef2g45b3g9665g2fa262dfcc9e
+LLWEAPONEX_StatusText_GasCreation	<font color='#65c900'>Gas Creation</font>	h704e1cebg3b19g4dadga2dbg6ba95dbe70f0

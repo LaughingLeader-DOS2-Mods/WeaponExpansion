@@ -214,19 +214,6 @@ THEN
 RemoveStatus(_Char, _Status);
 //END_REGION
 
-//REGION RANDOM_ROLL
-IF
-CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Commands_Runeblade_StartRandom")
-AND
-LeaderLib_Random_QRY(999)
-AND
-DB_LeaderLib_Random(_Ran)
-THEN
-NOT DB_LeaderLib_Random(_Ran);
-SetVarInteger(_Source, "LLWEAPONEX_Runeblade_Roll", _Ran);
-CharacterCharacterSetEvent(_Source, _Target, "LLWEAPONEX_Events_Runeblade_RandomSet");
-//END_REGION
-
 //REGION DOUBLE_HITS
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_PREVENT_DOUBLE_HITS", _)
@@ -270,53 +257,6 @@ THEN
 ObjectClearFlag(_Char, "LLWEAPONEX_SkipSoulBurnTick");
 //END_REGION
 
-//REGION THUNDERBOLT
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE", NULL_00000000-0000-0000-0000-000000000000)
-AND
-CharacterGetHostCharacter(_Host)
-AND
-CharacterGetLevel(_Host, _Level)
-AND
-GetPosition(_Char, _x, _y, _z)
-THEN
-CreateProjectileStrikeAtPosition(_x, _y, _z, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", _Level);
-
-IF
-CharacterStatusApplied(_Char, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_EXPLODE", (CHARACTERGUID)_Cause)
-AND
-CharacterIsDead(_Char, 0)
-AND
-_Cause != NULL_00000000-0000-0000-0000-000000000000
-THEN
-LeaderLib_Skills_UseSkillOnTarget(_Cause, _Char, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", 1, 1);
-
-PROC
-LeaderLib_Skills_OnDummyUsedSkillOnTarget((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", (GUIDSTRING)_Target, (STRING)_Skilltype, (STRING)_SkillElement)
-THEN
-DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target);
-
-IF
-CharacterStatusApplied(_Target, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_DUMMYHIT", (CHARACTERGUID)_Dummy)
-AND
-DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target)
-THEN
-ApplyStatus(_Target, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_DAMAGE", 0.0, 0, _Caster);
-ApplyStatus(_Target, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_PROJECTILESTRIKE_CHAINLIGHTNING", 0.0, 0, _Caster);
-
-PROC
-LeaderLib_Skills_OnDummyCastSkillOnTarget((CHARACTERGUID)_Dummy, (CHARACTERGUID)_Caster, "ProjectileStrike_LLWEAPONEX_Runeblade_Dummy_Thunderbolt", (GUIDSTRING)_Target, (STRING)_Skilltype, (STRING)_SkillElement)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Caster, 1000, "LLWEAPONEX_Timers_Runeblade_Thunderbolt_ClearDummyDB", "LLWEAPONEX_Runeblade_Thunderbolt_ClearDummyDB");
-
-IF
-StoryEvent((CHARACTERGUID)_Caster, "LLWEAPONEX_Runeblade_Thunderbolt_ClearDummyDB")
-AND
-DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target)
-THEN
-NOT DB_LLWEAPONEX_Runeblades_Temp_ThunderboltDummy(_Caster, _Dummy, _Target);
-//END_REGION
-
 //REGION DOUBLE_RUNEBLADE_SKILLS
 QRY
 LLWEAPONEX_Runeblades_QRY_CanAddDualWieldSkill((ITEMGUID)_MainhandRuneblade, (ITEMGUID)_OffhandRuneblade, (STRING)_Tag)
@@ -326,7 +266,6 @@ AND
 IsTagged(_OffhandRuneblade, _Tag, 1)
 THEN
 DB_NOOP(1);
-
 
 PROC
 LLWEAPONEX_WeaponMastery_OnMasteryDeactivated((CHARACTERGUID)_Char, "LLWEAPONEX_Runeblade")
@@ -493,35 +432,6 @@ AND
 HasActiveStatus(_Character, _Status, 1)
 THEN
 DB_NOOP(1);
-
-QRY
-LLWEAPONEX_Runeblades_QRY_CanApplyOnHit((CHARACTERGUID)_Source, (CHARACTERGUID)_Target)
-AND
-CharacterIsDead(_Source, 0)
-AND
-CharacterIsDead(_Target, 0)
-AND
-LLWEAPONEX_Runeblades_QRY_HasRuneStatus(_Source)
-THEN
-DB_NOOP(1);
-
-IF
-CharacterStatusAttempt(_Char, "LLWEAPONEX_RUNEBLADE_APPLY_STATUS", _Source)
-AND
-ObjectIsCharacter((CHARACTERGUID)_Source, 1)
-AND
-LLWEAPONEX_Runeblades_QRY_CanApplyOnHit(_Source, _Char)
-THEN
-CharacterCharacterSetEvent(_Source, _Char, "LLWEAPONEX_Runeblade_ApplyBonusOnHit");
-
-IF
-CharacterStatusAttempt(_Char, "LLWEAPONEX_ARMCANNON_HIT", _Source)
-AND
-ObjectIsCharacter((CHARACTERGUID)_Source, 1)
-AND
-LLWEAPONEX_Runeblades_QRY_CanApplyOnHit(_Source, _Char)
-THEN
-CharacterCharacterSetEvent(_Source, _Char, "LLWEAPONEX_Runeblade_ApplyBonusOnHit");
 //END_REGION
 
 //REGION ACTIVATE_STATUS_APPLIED
