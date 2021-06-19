@@ -312,8 +312,10 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS", function(bHi
 		if Ext.Random(0,999) <= chance then
 			local pos = GameHelpers.Math.GetPosition(target, false, source.WorldPos)
 			local x,y,z = table.unpack(pos)
+			local step = 2
 			if GameHelpers.Surface.HasSurface(x,z,"Poison", 3.0, true, 1) then
 				CharacterStatusText(source.MyGuid, "LLWEAPONEX_StatusText_GasExpansion")
+				step = 4
 			else
 				CharacterStatusText(source.MyGuid, "LLWEAPONEX_StatusText_GasCreation")
 			end
@@ -326,7 +328,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_GAS", function(bHi
 			surf.SurfaceType = "PoisonCloud"
 			surf.GrowTimer = 1
 			surf.GrowSpeed = 3
-			surf.Step = 4
+			surf.Step = step
 			surf.IgnoreIrreplacableSurfaces = true
 			Ext.ExecuteSurfaceAction(surf)
 			GameHelpers.Status.Apply(source, "LLWEAPONEX_RUNEBLADE_GAS_COOLDOWN", 6.0, false, source)
