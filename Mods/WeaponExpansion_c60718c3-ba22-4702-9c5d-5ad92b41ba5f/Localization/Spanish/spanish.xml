@@ -1059,6 +1059,7 @@
 	<content contentuid="h701b61a2g639eg4cf4gb76cg41c26d551d63">Enable [Key:ARM_UNIQUE_LLWEAPONEX_ArmCannon_A_DisplayName] Restrictions</content>
 	<content contentuid="h702bf925gf664g45a7gb3f5g34418bfa2c56">Runic Weaponry</content>
 	<content contentuid="h703f41c3g4ca1g463ag8550g3ef66dfd8a8d">Character is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; from a hot wind!</content>
+	<content contentuid="h704e1cebg3b19g4dadga2dbg6ba95dbe70f0">&lt;font color=&apos;#65c900&apos;&gt;Gas Creation&lt;/font&gt;</content>
 	<content contentuid="h7072fa7bgc209g40dfgb255g26cfcc34b6da">Grave Rune</content>
 	<content contentuid="h7081960fg5dc7g4f98gb8ffg6c2f900e4259">Stormrider</content>
 	<content contentuid="h708d8f00ge7a8g400egbf8bg81362384db30">&lt;icon id=&apos;Projectile_Grenade_PoisonFlask;Projectile_Grenade_Molotov;Projectile_Grenade_OilFlask;Projectile_Grenade_WaterBalloon&apos; icon=&apos;Item_GRN_PoisonFlask;Item_GRN_Molotov;Item_GRN_OilFlask;Item_GRN_WaterBalloon&apos;/&gt;Basic grenades have a 25% chance to explode again.</content>
@@ -2135,6 +2136,7 @@
 	<content contentuid="he71f1677g9ef3g44efg87d8gc2e17c463e15">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery III&lt;/font&gt;&lt;br&gt;Jump between [1] targets within [2], dealing [3].&lt;br&gt;Upon hit, there is a 25% chance to gain a Frenzy Charge.&lt;br&gt;Flicker Strike consumes Frenzy Charges to continue jumping, dealing [4] per hit.</content>
 	<content contentuid="he722bf48g92b6g4a97g8776g281d899f9b1d">Enable automatically unlocking certain Weapon Expansion recipes when requirements are met, such as shuriken recipes as Throwing Mastery rank 1.</content>
 	<content contentuid="he770b73agb777g4b00ga3a5g0cbe13b85048">Rusty Pipe</content>
+	<content contentuid="he772e2ccg5ef2g45b3g9665g2fa262dfcc9e">&lt;font color=&apos;#f7ba14&apos;&gt;Gas Expansion&lt;/font&gt;</content>
 	<content contentuid="he77b3516g2d79g494bgb20dg59fae4610eee">A big staff.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="he791882dg4ce9g48dcgb4ccg67c95e1416ba">Fury&apos;s Reward II</content>
 	<content contentuid="he805d9ecg9a32g4e43gb39fg8ed925de6298">Weapon Expansion - Crafting</content>
@@ -2228,7 +2230,7 @@
 	<content contentuid="hf1c5d51agf5a3g4250gaf82g4a8237468a32">Argh!</content>
 	<content contentuid="hf1cc24b6g3c04g4414gb2d1g7bce123ef94c">Steel Odachi</content>
 	<content contentuid="hf1e05614g2d6cg4d27g8a8bg866e9ce3d338">Activate the &lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt; to enemies hit for 1 turn.</content>
-	<content contentuid="hf1ec1489g29f3g43f4g9452gc4f4e8e0c108">Duration increased by [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_TurnBonus].&lt;/font&gt;</content>
+	<content contentuid="hf1ec1489g29f3g43f4g9452gc4f4e8e0c108">Duration increased by [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_TurnBonus].</content>
 	<content contentuid="hf2062266gf3d0g4322g8e0dgd0cd88ddd27a">A shield designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="hf208e35egd21eg41e9gbadbga737e5e106cf">Eagle Eye, Master Archer</content>
 	<content contentuid="hf20cd8bagadbdg480cga5d2ge6b2af96dfc0">Old Quarterstaff</content>
