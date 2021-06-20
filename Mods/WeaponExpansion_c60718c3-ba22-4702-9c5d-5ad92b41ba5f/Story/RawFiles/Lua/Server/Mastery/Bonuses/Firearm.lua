@@ -11,8 +11,8 @@ SkillManager.RegisterAnySkillListener(function(char, state, skill, skillType, el
 end)
 
 AttackManager.RegisterOnStart(function(attacker, target)
-	if HasActiveStatus(attacker, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS") == 1 then
-		RemoveStatus(attacker, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
+	if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS") == 1 then
+		RemoveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
 	end
 end)
 

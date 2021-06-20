@@ -81,8 +81,10 @@ local function GetBasicAttackTarget(attacker)
 end
 
 local function OnBasicAttackTarget(target, owner, attacker)
+	attacker = Ext.GetGameObject(attacker)
+	target = Ext.GetGameObject(target)
 	for i,callback in pairs(AttackManager.Listeners.OnStart) do
-		local b,err = xpcall(callback, debug.traceback, StringHelpers.GetUUID(attacker), StringHelpers.GetUUID(target))
+		local b,err = xpcall(callback, debug.traceback, attacker, target)
 		if not b then
 			Ext.PrintError(err)
 		end
@@ -93,7 +95,7 @@ Ext.RegisterOsirisListener("CharacterStartAttackObject", 3, "after", OnBasicAtta
 local startedAttackedPosition = {}
 
 local function OnBasicAttackPosition(x, y, z, owner, attacker)
-	attacker = StringHelpers.GetUUID(attacker)
+	attacker = Ext.GetCharacter(attacker)
 	startedAttackedPosition[attacker] = true
 	for i,callback in pairs(AttackManager.Listeners.OnStart) do
 		local b,err = xpcall(callback, debug.traceback, attacker, {x,y,z})

@@ -140,7 +140,7 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 			PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid] = nil
 		end
 		local hitSucceeded = data.Success
-		if data.SkillData and armCannonSkills[data.SkillData.Name] then
+		if data.SkillData and armCannonSkills[skill] then
 			data:SetHitFlag("Hit", true)
 			data:SetHitFlag({"Dodged", "Missed"}, false)
 			hitSucceeded = true
