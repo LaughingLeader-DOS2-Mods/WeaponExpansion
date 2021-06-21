@@ -606,7 +606,7 @@ local function FireSpell(source, target)
 			for totemSkill,totemData in pairs(TotemSurfaceFlags) do
 				if grid:SearchForCell(x, z, 2.0, totemData.Flags, -1.0) then
 					local totem = NRD_Summon(source, totemData.Template, x, y, z, 12.0, level, 1, 1)
-					StartOneshotTimer("Timers_LLWEAPONEX_PlayTotemEffects_"..totem, 500, function()
+					Timer.StartOneshot("Timers_LLWEAPONEX_PlayTotemEffects_"..totem, 500, function()
 						PlayEffect(totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root")
 						PlayEffect(totem, totemData.Effect, "Dummy_Root")
 					end)
@@ -618,7 +618,7 @@ local function FireSpell(source, target)
 			fireSpell = false
 			if not foundSurface then
 				local totem = NRD_Summon(source, "98be4473-a55a-495a-adac-0bda6dc69343", x, y, z, 12.0, level, 1, 1)
-				StartOneshotTimer("Timers_LLWEAPONEX_PlayTotemEffects_"..totem, 500, function()
+				Timer.StartOneshot("Timers_LLWEAPONEX_PlayTotemEffects_"..totem, 500, function()
 					PlayEffect(totem, "RS3_FX_Skills_Totem_Target_Nebula_01", "Dummy_Root")
 					PlayEffect(totem, "RS3_FX_Skills_Totem_Impact_Summon_Default_01", "Dummy_Root")
 				end)

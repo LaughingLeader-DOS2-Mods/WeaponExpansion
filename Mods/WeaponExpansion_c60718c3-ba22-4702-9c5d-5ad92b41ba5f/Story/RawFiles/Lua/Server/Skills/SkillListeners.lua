@@ -140,7 +140,7 @@ local function SwapSkills(nextSkill, instant, skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		if CharacterIsInCombat(char) == 1 or instant then
 			if instant ~= true then
-				StartOneshotTimer("LLWEAPONEX_Pistol_SwapSkills_"..skill..char, 500, function()
+				Timer.StartOneshot("LLWEAPONEX_Pistol_SwapSkills_"..skill..char, 500, function()
 					GameHelpers.Skill.Swap(char, skill, nextSkill, true)
 				end)
 			else
@@ -274,7 +274,7 @@ function FutureBarrage_FireDummySkill(caster, x, y, z)
 	end
 	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
 	Timer.Start("Timers_LLWEAPON_FutureBarrageDummyCast", 250, caster, dummy)
-	-- StartOneshotTimer(string.format("Timers_LLWEAPON_FutureBarrageDummyCast_%s", dummy), 250, function()
+	-- Timer.StartOneshot(string.format("Timers_LLWEAPON_FutureBarrageDummyCast_%s", dummy), 250, function()
 	-- 	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
 	-- 	--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
 	-- end)

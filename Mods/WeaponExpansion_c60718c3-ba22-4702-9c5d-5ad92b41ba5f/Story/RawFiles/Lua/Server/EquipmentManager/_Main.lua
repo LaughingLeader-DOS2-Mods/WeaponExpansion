@@ -204,7 +204,7 @@ RegisterProtectedOsirisListener("RuneInserted", 4, "after", function(charUUID, i
 	--LLWEAPONEX_RunebladeRune
 	if string.find(runeTemplate, "LOOT_Rune_LLWEAPONEX_Runeblade") and not item:HasTag("LLWEAPONEX_Runeblade") then
 		local timerName = string.format("LLWEAPONEX_RemoveRune_%s%s%s", Ext.MonotonicTime(), runeTemplate, itemUUID)
-		StartOneshotTimer(timerName, 100, function()
+		Timer.StartOneshot(timerName, 100, function()
 			local rune = ItemRemoveRune(charUUID, itemUUID, slot)
 			if not StringHelpers.IsNullOrEmpty(rune) then
 				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_RunebladeRuneBlocked", "<font color='#FF0000' size='22'>*This rune can only be inserted into a <font color='#40E0D0'>Runeblade</font>.*</font>")

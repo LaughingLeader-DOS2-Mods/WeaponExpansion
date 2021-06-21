@@ -1,13 +1,3 @@
-if RunebladeManager == nil then
-	RunebladeManager = {}
-end
-
-if RunebladeManager.Bonuses == nil then
-	RunebladeManager.Bonuses = {}
-end
-
-RunebladeManager.ImpactRadius = Ext.ExtraData.LLWEAPONEX_Runeblade_BonusImpactRadius or 0.5
-
 ---@param statusName string
 ---@param callback fun(IsFromSkill:boolean, attacker:EsvCharacter, target:EsvGameObject, damage:integer, data:HitData, bonuses:table, statusMap:table<string,EsvStatus>, targetStatusMap:table<string,EsvStatus>)
 function RunebladeManager.RegisterBonus(statusName, callback)

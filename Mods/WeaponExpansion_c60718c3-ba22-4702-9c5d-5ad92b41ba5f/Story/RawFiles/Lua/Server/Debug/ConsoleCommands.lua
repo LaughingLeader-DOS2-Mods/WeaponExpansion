@@ -5,7 +5,7 @@ if Vars.DebugMode then
 		if weapon ~= nil then
 			ItemAddDeltaModifier(weapon, "Boost_LLWEAPONEX_Debug_Tags")
 			CharacterUnequipItem(host, weapon)
-			StartOneshotTimer("LLWEAPONEX_Debug_DeltamodTagTest", 500, function()
+			Timer.StartOneshot("LLWEAPONEX_Debug_DeltamodTagTest", 500, function()
 				CharacterEquipItem(host, weapon)
 				print("Tagged:", IsTagged(host, "LLWEAPONEX_BOOST_TAG_TEST"))
 	

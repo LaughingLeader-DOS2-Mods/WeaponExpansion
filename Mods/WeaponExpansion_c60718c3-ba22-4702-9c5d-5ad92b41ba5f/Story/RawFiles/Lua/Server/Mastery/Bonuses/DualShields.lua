@@ -66,7 +66,7 @@ function DualShields_Cover_OnCounter(target, blocker, attacker)
 		PlayEffect(blocker, "LLWEAPONEX_FX_Skills_ShieldCover_Counter_Disappear_Overlay_01")
 		Osi.LeaderLib_Behavior_TeleportTo(blocker, x, y, z)
 		blockerTeleporting[blocker] = true
-		StartOneshotTimer("Timers_LLWEAPONEX_CoverCounter_"..blocker, 50, function()
+		Timer.StartOneshot("Timers_LLWEAPONEX_CoverCounter_"..blocker, 50, function()
 			TeleportToRandomPosition(blocker, 1.0, "")
 			CharacterStatusText(attacker, "LLWEAPONEX_StatusText_Countered")
 			GameHelpers.ClearActionQueue(blocker)

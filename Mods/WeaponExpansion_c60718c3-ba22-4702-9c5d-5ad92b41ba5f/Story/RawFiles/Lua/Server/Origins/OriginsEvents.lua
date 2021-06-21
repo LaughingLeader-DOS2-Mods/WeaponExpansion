@@ -9,7 +9,7 @@ local function PlayFrostdyneLoopedEffect(x, y, z)
 		end
 	end
 	Uniques.Frostdyne:AddEventListener("ItemAddedToCharacter", removeEffectHandleFunc)
-	StartOneshotTimer("Timers_LLWEAPONEX_SlaneRewardExclamationEffect", 5000, function()
+	Timer.StartOneshot("Timers_LLWEAPONEX_SlaneRewardExclamationEffect", 5000, function()
 		StopLoopEffect(handle)
 		Uniques.Frostdyne:RemoveEventListener("ItemAddedToCharacter", removeEffectHandleFunc)
 	end)
@@ -38,7 +38,7 @@ function FortJoyEvent(event)
 			else
 				local x,y,z = GetPosition(NPC.Slane)
 				ItemScatterAt(uuid, x, y, z)
-				StartOneshotTimer("Timers_LLWEAPONEX_SlaneRewardEffect", 500, function()
+				Timer.StartOneshot("Timers_LLWEAPONEX_SlaneRewardEffect", 500, function()
 					local x,y,z = GetPosition(uuid)
 					y = GameHelpers.Grid.GetY(x, z)
 					PlayEffectAtPosition("RS3_FX_Skills_Totem_Impact_Target_Root_Ice_01", x, y, z)

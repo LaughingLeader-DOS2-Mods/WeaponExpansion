@@ -60,7 +60,7 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	data.Attackers[attacker][id] = timerName
 	if Vars.DebugMode and IsTagged(target, "LLDUMMY_TrainingDummy") == 1 then
 		local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Random(0,999))
-		StartOneshotTimer(tDebugName, listenDelay/2, function()
+		Timer.StartOneshot(tDebugName, listenDelay/2, function()
 			PrintDebug("[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer", tDebugName)
 			DeathManager.OnDeath(target)
 		end)

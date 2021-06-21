@@ -92,7 +92,7 @@ MasteryBonusManager.RegisterSkillListener("Target_DualWieldingAttack", "AXE_FLUR
 			flurryHits[char] = flurryHits[char] + 1
 		end
 		local timerName = "LLWEAPONEX_Axe_FlurryCounter"..char
-		StartOneshotTimer(timerName, 1000, function()
+		Timer.StartOneshot(timerName, 1000, function()
 			if flurryHits[char] >= 3 then
 				CharacterAddActionPoints(char, 1)
 				CharacterStatusText(char, "LLWEAPONEX_StatusText_FlurryAxeCombo")

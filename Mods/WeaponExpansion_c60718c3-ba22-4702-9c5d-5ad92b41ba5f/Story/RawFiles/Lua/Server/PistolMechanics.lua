@@ -123,7 +123,7 @@ Ext.RegisterListener("ShootProjectile", function (projectile)
 		ApplyStatus(caster.MyGuid, status, 0.0, 0, caster.MyGuid)
 		-- local handle = projectile.Handle
 		-- print(string.format("SourcePosition(%s) Position(%s) PrevPosition(%s)", Common.Dump(projectile.SourcePosition), Common.Dump(projectile.Position), Common.Dump(projectile.PrevPosition)))
-		-- StartOneshotTimer("LLWEAPONEX_Pistol_PlayProjectileExplosion_"..tostring(projectile.NetID), 1, function()
+		-- Timer.StartOneshot("LLWEAPONEX_Pistol_PlayProjectileExplosion_"..tostring(projectile.NetID), 1, function()
 		-- 	projectile = Ext.GetGameObject(handle)
 		-- 	print(handle, projectile)
 		-- 	if projectile and projectile.Position then
@@ -144,7 +144,7 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char
 	if state == SKILL_STATE.USED then
 		local caster = Ext.GetCharacter(char)
 		if ShouldPlaySheatheAnimation(caster) then
-			StartOneshotTimer("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
+			Timer.StartOneshot("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
 				ApplyStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
 			end)
 		else

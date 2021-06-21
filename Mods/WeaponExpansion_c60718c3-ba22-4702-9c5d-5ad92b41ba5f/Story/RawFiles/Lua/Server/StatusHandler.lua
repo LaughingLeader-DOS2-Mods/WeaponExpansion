@@ -63,7 +63,7 @@ function ApplyRuneExtraProperties(source, target, item, targetPosition, radius)
 									end
 								end
 								startTimerFunction = function(delay)
-									StartOneshotTimer(timerName, delay, cleanupMoveAction)
+									Timer.StartOneshot(timerName, delay, cleanupMoveAction)
 								end
 								startTimerFunction(1000)
 							end
