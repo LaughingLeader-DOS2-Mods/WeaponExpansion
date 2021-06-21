@@ -130,7 +130,7 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 	if source then
 		local sourceIsPlayer = IsPlayer(source.MyGuid)
 		local skill = data.Skill
-
+		
 		local blockedHit = PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid]
 		if blockedHit ~= nil then
 			data.HitStatus.AllowInterruptAction = false

@@ -2,7 +2,7 @@ AttackManager.RegisterOnHit(function(bHitObject, attacker, target, damage, data)
 	if attacker ~= target and Uniques.AnvilMace:IsOwner(attacker) then
 		if bHitObject then
 			--Ding/dizzy on crit
-			if damage > 0 and data:HasFlag("CriticalHit", true) then
+			if damage > 0 and data:HasHitFlag("CriticalHit", true) then
 				PlaySound(target, "LeaderLib_Impacts_Anvil_01")
 				ApplyStatus(target, "LLWEAPONEX_DIZZY", 6.0, 0, attacker)
 			end
