@@ -9,3 +9,7 @@ LLWEAPONEX_Tooltip_ElementalBullet_Ice	<font color='#97FBFF'>Attuned to Ice</fon
 LLWEAPONEX_Tooltip_ElementalBullet_Poison	<font color='#65C900'>Attuned to Poison</font><br><font color='#65C900'>Contaminates surfaces.</font>	h416e348bgb3ddg4b02g9f8cg228d9883f50f
 LLWEAPONEX_Tooltip_ElementalBullet_Water	<font color='#4197E2'>Attuned to Water</font><br><font color='#4197E2'>Douses surfaces.</font>	hea81e505gc83fg4ac1gbed5g7b03511ff083
 LLWEAPONEX_Tooltip_CustomDualScaling	[1] and [2]	hb8f79e5bgd2c3g48d4g90e5g5de02f9129a8
+LLWEAPONEX_Tooltip_ApplySpecialRuneOnHit	Applies [1] on hit	h189a198agfd17g4585gb481g86202d92a965
+LLWEAPONEX_Tooltip_ApplySpecialRuneOnHit_Chance	Applies [1] on hit ([2]% chance)	h5e0b68b9gefa1g4cc6ga335g6b755812d14f
+LLWEAPONEX_Tooltip_ChaosRuneAbsorbSurface	Transform Surfaces into Rune Effects	h60dc40a5ge603g4d8dg9c6eg1c24acc5f4bb
+LLWEAPONEX_Tooltip_ChaosRuneAbsorbSurface_Chance	Transform Surfaces into Rune Effects ([1]% chance)	h6cd64a25gf8d0g438cg9a91gb04f030e2f88

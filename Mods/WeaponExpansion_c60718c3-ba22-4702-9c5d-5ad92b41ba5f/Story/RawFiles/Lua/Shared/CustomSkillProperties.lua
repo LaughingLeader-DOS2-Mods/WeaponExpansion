@@ -51,3 +51,31 @@ CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties = {
 	end
 }
 Ext.RegisterSkillProperty("LLWEAPONEX_ApplyRuneProperties", CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties)
+
+CustomSkillProperties.LLWEAPONEX_ChaosRuneAbsorbSurface = {
+	GetDescription = function(prop)
+		local chance = prop.Arg1
+		if chance >= 1.0 then
+			return Text.SkillTooltip.ChaosRuneAbsorbSurface.Value
+		else
+			return Text.SkillTooltip.ChaosRuneAbsorbSurface_Chance:ReplacePlaceholders(math.floor(chance * 100))
+		end
+	end,
+	ExecuteOnPosition = function(prop, attacker, position, areaRadius, isFromItem, skill, hit)
+		local chance = prop.Arg1
+		if chance >= 1.0 or Ext.Random(0,1) <= chance then
+			local duration = math.max(prop.Arg2 or 1, 1) * 6.0
+			local radius = math.max(areaRadius, math.max(skill.AreaRadius or 1, skill.ExplodeRadius or 1))
+			RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
+		end
+	end,
+	ExecuteOnTarget = function(prop, attacker, target, position, isFromItem, skill, hit)
+		local chance = prop.Arg1
+		if chance >= 1.0 or Ext.Random(0,1) <= chance then
+			local duration = math.max(prop.Arg2 or 1, 1) * 6.0
+			local radius = math.max(skill.AreaRadius or 1, skill.ExplodeRadius or 1)
+			RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
+		end
+	end
+}
+Ext.RegisterSkillProperty("LLWEAPONEX_ChaosRuneAbsorbSurface", CustomSkillProperties.LLWEAPONEX_ChaosRuneAbsorbSurface)
