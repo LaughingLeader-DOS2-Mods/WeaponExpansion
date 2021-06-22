@@ -475,8 +475,8 @@ local function GetHandCrossbowSkillDamage(baseSkill, attacker, isFromItem, steal
 	else
 		local mainDamageRange = Math.AbilityScaling.GetSkillDamageRange(attacker, skill, weapon, nil, "RogueLore")
 		--local mainDamageRange = Game.Math.GetSkillDamageRange(attacker, skill, weapon)
-		Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
-		Ext.Print("mainDamageRange test:",Ext.JsonStringify(Game.Math.GetSkillDamageRange(attacker, skill, attacker.MainWeapon)))
+		-- Ext.Print("mainDamageRange final:",Ext.JsonStringify(mainDamageRange))
+		-- Ext.Print("mainDamageRange test:",Ext.JsonStringify(Game.Math.GetSkillDamageRange(attacker, skill, attacker.MainWeapon)))
         return mainDamageRange
 	end
 end

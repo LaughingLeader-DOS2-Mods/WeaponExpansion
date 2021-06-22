@@ -243,3 +243,15 @@ Ext.RegisterListener("GameStateChanged", function(from, to)
 		--MasteryMenu.SetToggleButtonVisibility(true, true)
 	end
 end)
+
+Ext.RegisterListener("SessionLoaded", function()
+	local rollingText = Classes.TranslatedString:Create("he38e2e7bg72dbg4477g86f9ga1fedc4f6750", "Dice Rolls")
+	CombatLog.AddFilter("Rolls", rollingText.Value, Vars.DebugMode or nil, 3)
+	--CombatLog.AddTextToFilter("LLWEAPONEX", "Text roll")
+end)
+
+if Vars.DebugMode then
+	RegisterListener("BeforeLuaReset", function()
+		CombatLog.RemoveFilter("Rolls")
+	end)
+end

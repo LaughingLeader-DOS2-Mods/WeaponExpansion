@@ -51,21 +51,12 @@ end)
 ---@alias EquipmentChangedIDType Tag|Template
 ---@alias ItemListenerEvent EquipmentChanged
 
----@alias StatusEventCallback fun(target:string, status:string, source:string|nil):void
----@alias StatusEventID StatusApplied|StatusAttempt|StatusRemoved|EndTurnStatusRemoved
-
 ---@alias MasteryEventID MasteryActivated|MasteryDeactivated
 ---@alias MasteryEventCallback fun(uuid:string, mastery:string):void
 
 LoadPersistentVars = {}
 BonusSkills = {}
 Listeners = {
-    ---@type table<string, StatusEventCallback>
-    StatusApplied = {},
-    ---@type table<string, StatusEventCallback>
-    StatusAttempt = {},
-    ---@type table<string, StatusEventCallback>
-    StatusRemoved = {},
     ---@type table<string, fun(target:string, status:string, source:string):void>
     EndTurnStatusRemoved = {},
     ---@type table<string, table<string, EquipmentChangedCallback>>

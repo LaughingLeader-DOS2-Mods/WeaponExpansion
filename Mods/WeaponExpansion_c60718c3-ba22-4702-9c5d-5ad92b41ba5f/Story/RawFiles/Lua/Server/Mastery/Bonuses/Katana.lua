@@ -309,7 +309,8 @@ RegisterMasteryListener("MasteryDeactivated", "LLWEAPONEX_Katana", function(uuid
 	PersistentVars.StatusData.KatanaCombo[uuid] = nil
 end)
 
-local function ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, tag, skill)
+---@param data HitData
+local function ApplyKatanaCombo(target, source, data, masteryBonuses, tag, skill)
 	if ObjectIsCharacter(target) == 1 and CharacterIsEnemy(target, source) == 1 then
 		if masteryBonuses.KATANA_COMBO == true and ObjectGetFlag(source, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
 			local maxStatus = ComboStatuses[#ComboStatuses]
@@ -320,7 +321,7 @@ local function ApplyKatanaCombo(target, source, damage, handle, masteryBonuses, 
 					status.RequestClientSync = true
 				end
 			else
-				if NRD_StatusGetInt(target, handle, "Backstab") == 1 or NRD_StatusGetInt(target, handle, "CriticalHit") == 1 then
+				if data:HasHitFlag("Backstab", true) or data:HasHitFlag("CriticalHit", true) then
 					local comboIncrement = Ext.ExtraData["LLWEAPONEX_MasteryBonus_Katana_ComboIncrementCritical"] or 2.0
 					IncrementCombo(target, source, math.tointeger(comboIncrement))
 				else
@@ -346,28 +347,21 @@ MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_Ene
 	end
 end)
 
----@param IsFromSkill boolean
----@param source EsvCharacter
----@param target EsvGameObject
----@param damage integer
----@param data HitData
----@param bonuses table
----@param skill StatEntrySkillData
-local function OnKatanaHit(IsFromSkill, source, target, damage, data, bonuses, skill)
-	ApplyKatanaCombo(target.MyGuid, source.MyGuid, damage, data.Handle, bonuses, "LLWEAPONEX_Katana", skill)
-	if damage > 0 and HasActiveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
-		RemoveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
-		local damageBonus = (Ext.ExtraData.LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus or 50) * 0.01
-		if damageBonus > 0 then
-			GameHelpers.Damage.IncreaseDamage(target.MyGuid, source.MyGuid, data.Handle, damageBonus)
-			CharacterStatusText(source.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")
-			if ObjectIsCharacter(target.MyGuid) == 1 then
-				PlayEffect(target.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")
-			else
-				PlayEffect(source.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
+AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Katana", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+	if bHitObject then
+		ApplyKatanaCombo(target.MyGuid, source.MyGuid, data, bonuses, "LLWEAPONEX_Katana", data.SkillData)
+		if data.Damage > 0 and HasActiveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
+			RemoveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
+			local damageBonus = (Ext.ExtraData.LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus or 50) * 0.01
+			if damageBonus > 0 then
+				GameHelpers.Damage.IncreaseDamage(target.MyGuid, source.MyGuid, data.Handle, damageBonus)
+				CharacterStatusText(source.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")
+				if ObjectIsCharacter(target.MyGuid) == 1 then
+					PlayEffect(target.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")
+				else
+					PlayEffect(source.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
+				end
 			end
 		end
 	end
-end
-
-AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Katana", OnKatanaHit)
+end)

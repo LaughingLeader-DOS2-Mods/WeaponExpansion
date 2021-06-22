@@ -179,10 +179,12 @@ function MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses,
 end
 
 
+---@param target EsvCharacter
+---@param source EsvCharacter|nil
 local function OnStatusAttemptCallback(callback, matchBonuses, target, status, handle, source, skipBonusCheck)
 	if skipBonusCheck ~= true then
 		local bonuses = {}
-		if ObjectIsCharacter(source) == 1 then
+		if source and ObjectIsCharacter(source.MyGuid) == 1 then
 			local b = MasteryBonusManager.GetMasteryBonuses(source)
 			if #b > 0 then
 				for i,v in pairs(b) do
@@ -191,7 +193,7 @@ local function OnStatusAttemptCallback(callback, matchBonuses, target, status, h
 				end
 			end
 		end
-		if ObjectIsCharacter(target) == 1 then
+		if target and ObjectIsCharacter(target.MyGuid) == 1 then
 			local b = MasteryBonusManager.GetMasteryBonuses(target)
 			if #b > 0 then
 				for i,v in pairs(b) do
@@ -211,18 +213,10 @@ end
 function MasteryBonusManager.RegisterStatusAttemptListener(status, matchBonuses, callback, skipBonusCheck)
 	if type(status) == "table" then
 		for i,v in pairs(status) do
-			if Listeners.StatusAttempt[v] == nil then 
-				Listeners.StatusAttempt[v] = {}
-			end
-			table.insert(Listeners.StatusAttempt[v], function(target,v,handle,source) 
-				OnStatusAttemptCallback(callback, matchBonuses, target, v, handle, source, skipBonusCheck)
-			end)
+			MasteryBonusManager.RegisterStatusAttemptListener(v, matchBonuses, callback, skipBonusCheck)
 		end
 	else
-		if Listeners.StatusAttempt[status] == nil then 
-			Listeners.StatusAttempt[status] = {}
-		end
-		table.insert(Listeners.StatusAttempt[status], function(target,status,handle,source) 
+		RegisterStatusListener(StatusEvent.BeforeAttempt, status, function(target, status, source, handle, statusType)
 			OnStatusAttemptCallback(callback, matchBonuses, target, status, handle, source, skipBonusCheck)
 		end)
 	end

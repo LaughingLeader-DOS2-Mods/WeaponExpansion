@@ -75,9 +75,7 @@ function ApplyRuneExtraProperties(source, target, item, targetPosition, radius)
 	end
 end
 
-local function OnStatusApplied(target, status, source)
-	target = StringHelpers.GetUUID(target)
-	source = StringHelpers.GetUUID(source)
+local function GrantMasteryExperienceFromStatus(target, status, source, statusType)
 	if not StringHelpers.IsNullOrEmpty(source) and ObjectIsCharacter(source) == 1 then
 		if status == "LLWEAPONEX_PISTOL_SHOOT_HIT" then
 			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_Pistol")
@@ -85,52 +83,16 @@ local function OnStatusApplied(target, status, source)
 			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_HandCrossbow")
 		end
 	end
-	local callbacks = Listeners.StatusApplied[status]
-	if callbacks ~= nil then
-		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, target, status, source)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
-	end
 end
 
-RegisterProtectedOsirisListener("CharacterStatusApplied", 3, "after", OnStatusApplied)
-RegisterProtectedOsirisListener("ItemStatusChange", 3, "after", OnStatusApplied)
+RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_PISTOL_SHOOT_HIT", GrantMasteryExperienceFromStatus)
+RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_HANDCROSSBOW_HIT", GrantMasteryExperienceFromStatus)
 
-local function OnNRDStatusAttempt(target, status, handle, source)
-	target = StringHelpers.GetUUID(target)
-	source = StringHelpers.GetUUID(source)
-	local callbacks = Listeners.StatusAttempt[status]
-	if callbacks ~= nil then
-		for i,callback in pairs(callbacks) do
-			local s,err = xpcall(callback, debug.traceback, target, status, source, handle)
-			if not s then
-				Ext.PrintError(err)
-			end
-		end
-	end
-end
-
-RegisterProtectedOsirisListener("NRD_OnStatusAttempt", 4, "after", OnNRDStatusAttempt)
-
-local function OnStatusRemoved(target, status, nilSource)
-	target = StringHelpers.GetUUID(target)
-	local callbacks = Listeners.StatusRemoved[status]
-	if callbacks ~= nil then
-		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, target, status)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
-	end
+local function OnStatusRemoved(target, status, source, statusType)
 	StatusManager.RemoveTurnEndStatus(target, status, true)
 end
 
-RegisterProtectedOsirisListener("CharacterStatusRemoved", 3, "after", OnStatusRemoved)
-RegisterProtectedOsirisListener("ItemStatusRemoved", 3, "after", OnStatusRemoved)
+RegisterStatusListener(StatusEvent.Removed, "All", OnStatusRemoved)
 
 local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 	local callbacks = Listeners.EndTurnStatusRemoved[status]
