@@ -87,7 +87,7 @@ RegisterProtectedOsirisListener("TimerFinished", 1, "after", function(timerName)
 			end
 		end
 	end
-end)
+end, true)
 
 RegisterListener("Initialized", function(region)
 	DeathManager.ActiveTimers = 0

@@ -91,7 +91,7 @@ local function ShouldPlaySheatheAnimation(caster)
 end
 
 ---@param request EsvShootProjectileRequest
-Ext.RegisterListener("BeforeShootProjectile", function (request)
+RegisterProtectedExtenderListener("BeforeShootProjectile", function (request)
 	--print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.SkillId))
 	local skill = GetSkillEntryName(request.SkillId) or ""
 	if skill == "Projectile_LLWEAPONEX_Pistol_Shoot" then
@@ -115,7 +115,7 @@ Ext.RegisterListener("BeforeShootProjectile", function (request)
 end)
 
 ---@param projectile EsvProjectile
-Ext.RegisterListener("ShootProjectile", function (projectile)
+RegisterProtectedExtenderListener("ShootProjectile", function (projectile)
 	local skill = GetSkillEntryName(projectile.SkillId) or ""
 	if string.find(skill, "Projectile_LLWEAPONEX_Pistol_Shoot") then
 		local caster = Ext.GetCharacter(projectile.CasterHandle)

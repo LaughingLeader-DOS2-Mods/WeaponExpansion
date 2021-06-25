@@ -321,7 +321,7 @@ local equipmentTypes = {
 }
 
 ---@param item EsvItem
-Ext.RegisterListener("TreasureItemGenerated", function(item)
+RegisterProtectedExtenderListener("TreasureItemGenerated", function(item)
 	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
 	if item ~= nil and equipmentTypes[item.ItemType] == true then
 		fprint(LOGLEVEL.TRACE, "[OnTreasureItemGenerated] MyGuid(%s) StatsId(%s) ItemType(%s)", item.MyGuid, item.StatsId, item.ItemType)

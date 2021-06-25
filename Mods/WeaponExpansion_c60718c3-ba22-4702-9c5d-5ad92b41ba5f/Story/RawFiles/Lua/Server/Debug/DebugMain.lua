@@ -372,7 +372,7 @@ local function CreateFollowSurface(projectile)
 end
 
 ---@param projectile EsvProjectile
-Ext.RegisterListener("ShootProjectile", function (projectile)
+RegisterProtectedExtenderListener("ShootProjectile", function (projectile)
 	if string.find(projectile.SkillId, "Projectile_EnemyTotem") then
 		local surf = CreateFollowSurface(projectile)
 		print("Created surface action for", projectile.Handle, surf.MyHandle)
@@ -382,7 +382,7 @@ Ext.RegisterListener("ShootProjectile", function (projectile)
 end)
 
 ---@param projectile EsvProjectile
-Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
+RegisterProtectedExtenderListener("ProjectileHit", function (projectile, hitObject, position)
 	local surfHandle = surfaceActions[projectile.Handle]
 	if surfHandle ~= nil then
 		print("Canceled surface action for", projectile.Handle, surfHandle)

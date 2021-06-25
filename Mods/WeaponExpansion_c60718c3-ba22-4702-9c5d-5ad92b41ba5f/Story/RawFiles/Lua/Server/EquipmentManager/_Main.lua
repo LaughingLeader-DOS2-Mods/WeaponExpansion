@@ -79,10 +79,8 @@ RegisterProtectedOsirisListener("CanUseItem", 3, "before", function(charUUID, it
 	local char = Ext.GetCharacter(charUUID)
 
 	if item ~= nil and char ~= nil then
-		local db = Osi.DB_CurrentGameMode:Get("GameMaster")
-		local isGameMaster = db ~= nil and #db > 0
 		if ShouldBlockItem(item, char) then
-			if not isGameMaster then
+			if LeaderLib.SharedData.GameMode ~= GAMEMODE.GAMEMASTER then
 				Osi.DB_CustomUseItemResponse(charUUID, itemUUID, 0)
 			else
 				RequestProcessed(charUUID, request, 0)

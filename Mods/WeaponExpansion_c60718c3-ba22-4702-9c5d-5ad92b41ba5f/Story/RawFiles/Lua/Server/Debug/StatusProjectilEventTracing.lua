@@ -43,22 +43,22 @@ RegisterProtectedOsirisListener("CharacterStatusRemoved", 3, "before", function(
     end
 end)
 
-Ext.RegisterListener("ShootProjectile", function (projectile)
+RegisterProtectedExtenderListener("ShootProjectile", function (projectile)
     print(string.format("(%s) ShootProjectile(%s)", Ext.MonotonicTime(), projectile.SkillId))
 end)
 
-Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
+RegisterProtectedExtenderListener("ProjectileHit", function (projectile, hitObject, position)
     print(string.format("(%s) ProjectileHit(%s)", Ext.MonotonicTime(), projectile.SkillId))
 end)
 
 --- @type EsvShootProjectileRequest request
-Ext.RegisterListener("BeforeShootProjectile", function (request)
+RegisterProtectedExtenderListener("BeforeShootProjectile", function (request)
     print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.SkillId))
 end)
 
 --- @param caster EsvGameObject
 --- @param position number[]
 --- @param damageList DamageList
-Ext.RegisterListener("GroundHit", function (caster, position, damageList)
+RegisterProtectedExtenderListener("GroundHit", function (caster, position, damageList)
     print(string.format("(%s) GroundHit(%s)", Ext.MonotonicTime(), caster.MyGuid))
 end)

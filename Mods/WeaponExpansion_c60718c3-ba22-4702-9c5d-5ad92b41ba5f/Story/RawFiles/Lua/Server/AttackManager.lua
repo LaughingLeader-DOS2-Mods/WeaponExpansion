@@ -158,7 +158,7 @@ end
 --- @param caster EsvGameObject
 --- @param position number[]
 --- @param damageList DamageList
-Ext.RegisterListener("GroundHit", function (caster, position, damageList)
+RegisterProtectedExtenderListener("GroundHit", function(caster, position, damageList)
 	--Also fires when a projectile hits the ground (exploding projectiles too!), so we need this table entry
 	if caster and startedAttackedPosition[caster.MyGuid] then
 		startedAttackedPosition[caster.MyGuid] = nil
@@ -169,17 +169,13 @@ end)
 ---@param projectile EsvProjectile
 ---@param hitObject EsvGameObject
 ---@param position number[]
-Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
-	-- if projectile.SkillId ~= "" then
-	-- 	local skill = LeaderLib.GetSkillEntryName(projectile.SkillId)
-	-- end
-	--if projectile.RootTemplate == "LLWEAPONEX_Projectile_Wand_MagicMissile_211d6c42-b848-49cd-af76-170c3e2fbd73" then
+RegisterProtectedExtenderListener("ProjectileHit", function(projectile, hitObject, position)
 	if projectile.RootTemplate ~= nil 
 		and projectile.RootTemplate.TrailFX == "LLWEAPONEX_FX_Projectiles_Wand_MagicMissile_01" 
 		and projectile.SourceHandle ~= nil 
 		and projectile.RootTemplate.PathShift == 0.5
 	then
-		local attacker = Ext.GetCharacter(projectile.SourceHandle)
+		local attacker = Ext.GetGameObject(projectile.SourceHandle)
 		if attacker ~= nil and attacker:HasTag("LLWEAPONEX_MagicMissileWand_Equipped") then
 			MagicMissileWeapon_RollForBonusMissiles(attacker.MyGuid, position, hitObject)
 		end

@@ -266,7 +266,7 @@ function FutureBarrage_FireDummySkill(caster, x, y, z)
 	SetupDummy(dummy, caster)
 
 	CharacterAddSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", 0)
-	local dummyBow = GameHelpers.Item.CreateItemByStat("WPN_LLWEAPONEX_Greatbow", true, {ItemType = "Common"})
+	local dummyBow = GameHelpers.Item.CreateItemByStat("WPN_LLWEAPONEX_Greatbow", {ItemType = "Common"})
 	if dummyBow then
 		NRD_CharacterEquipItem(dummy, dummyBow, "Weapon", 0, 0, 0, 1)
 	else

@@ -105,7 +105,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_BLOOD_PLUS", funct
 		local amount = GetVarInteger(source.MyGuid, "LLWEAPONEX_BloodPlusAttacks") or 0
 		amount = amount + 1
 		if amount >= 2 then
-			local item = GameHelpers.Item.CreateItemByStat("GRN_LLWEAPONEX_Throwing_BloodBall", true)
+			local item = GameHelpers.Item.CreateItemByStat("GRN_LLWEAPONEX_Throwing_BloodBall")
 			if item then
 				ItemToInventory(item, source.MyGuid, 1, 1, 0)
 			end
