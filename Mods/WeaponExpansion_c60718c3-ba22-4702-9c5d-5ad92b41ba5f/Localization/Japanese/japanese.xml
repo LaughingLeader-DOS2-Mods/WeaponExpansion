@@ -222,6 +222,7 @@
 	<content contentuid="h18837538gae24g456bg91a1ged49be909078">Throw a poisen-tipped shuriken at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Poisoned&lt;/font&gt; for 2 turns.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF69B4&apos;&gt;Shurikens do 50% more damage while Sneaking or Invisible.&lt;/font&gt;</content>
 	<content contentuid="h189386bag49ebg4d15ga457g3e1fe7b053ab">Soldier&apos;s Rifle</content>
 	<content contentuid="h18949f78ga9ffg4525ga9cfg46d3eb68b15c">Open Mastery Menu</content>
+	<content contentuid="h189a198agfd17g4585gb481g86202d92a965">Applies [1] on hit</content>
 	<content contentuid="h18db5b3bg6b75g4ed1gab9ag309251d7d492">Immolation</content>
 	<content contentuid="h18ee08fdg04f0g4ea3ga684g0614a456d44c">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery II&lt;/font&gt;</content>
 	<content contentuid="h18f048d7g2230g4037g88b6g9191c6c0be0c">Lucky for you, I&apos;ll make this quick.</content>
@@ -886,6 +887,7 @@
 	<content contentuid="h5d9eca79g2820g4058gba1bgee5b291c2515">Attack with your fists, dealing [1].[2]</content>
 	<content contentuid="h5de7cd4agefe0g4ab3g8d0agdd9fdb52f2c5">Gravity Falls</content>
 	<content contentuid="h5e026ef6g4922g4ea9ga9dbgb44ceb73eb53">&lt;font color=&apos;#CCAAFF&apos;&gt;Attribute Token Shard&lt;/font&gt;</content>
+	<content contentuid="h5e0b68b9gefa1g4cc6ga335g6b755812d14f">Applies [1] on hit ([2]% chance)</content>
 	<content contentuid="h5e19e84fg2e1eg470bg8a66gaa6117bb834e">You are a former mercenary with an insatiable lust for battle. The call for adventure leads you to the doorstep of the Divine Order, and the many secrets they keep so tightly guarded.</content>
 	<content contentuid="h5e2df2a5gda8dg4baeg9155gc3c50082beb4">&lt;icon id=&apos;Rush_LLWEAPONEX_Katana_Iaido;LLWEAPONEX_KATANA_COMBO9&apos; icon=&apos;LLWEAPONEX_Skills_Katana_Iaido;LLWEAPONEX_Status_KatanaCombo09&apos; type=&apos;1;2&apos;/&gt;Basic attacks and weapon skills now apply [Key:LLWEAPONEX_KATANA_COMBO1_DisplayName], a stacking status that is removed when your turn ends. Katana mastery skills consume this status for bonus damage. Backstabs or critical hits apply two stacks.&lt;icon id=&apos;MultiStrike_Vault&apos; icon=&apos;Skill_Rogue_Vault&apos;/&gt;After teleporting, your next attack deals +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% more damage.</content>
 	<content contentuid="h5e37e2c9g1d9fg4dc6g9d11g36ef081c0e27">Throwing Dagger</content>
@@ -912,6 +914,7 @@
 	<content contentuid="h609008a2g3cb7g4670g93b7g7714013ddf12">A special pet rock. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
 	<content contentuid="h60d52c22g5db0g49a1g8b66g39b5c8b100b2">A bag of prototype &lt;font color=&apos;#C0C0C0&apos;&gt;Silver&lt;/font&gt; bullets.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;&lt;font color=&apos;#12FDDF&apos;&gt;Monsters such as Werebeasts, Demons, and the Undead are rumored to be suspectible to silver.&lt;/font&gt;</content>
 	<content contentuid="h60dabe53g4502g476ega6f5gc1a79fea2c5a">An inert Runeblade imbued with no specific element. Can crafted to give the blade magic once more.</content>
+	<content contentuid="h60dc40a5ge603g4d8dg9c6eg1c24acc5f4bb">Transform Surfaces into Rune Effects</content>
 	<content contentuid="h6116f55dgfe19g4fb2g8dc4g3e6042c3bbc3">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery I&lt;/font&gt;</content>
 	<content contentuid="h612c0e22ga361g49f4g832ag8c6ef843f0e3">Honed Glaive</content>
 	<content contentuid="h612dc892gf5b9g4ef6g93f5gc65ee9714c24">A scholar&apos;s dearest weapon. Beat them down with &lt;i&gt;KNOWLEDGE!&lt;/i&gt;</content>
@@ -1026,6 +1029,7 @@
 	<content contentuid="h6c42488dgcde8g4a2cg86bag9d5a1e952816">Beginner</content>
 	<content contentuid="h6c893108gee88g48f4gbdd5g3c6ee6dabb65">&lt;font color=&apos;#FF3311&apos;&gt;You&apos;re Already Dead&lt;/font&gt;</content>
 	<content contentuid="h6cbe84fdg65c4g4db5g8e0agd079218226a6">Odinblade</content>
+	<content contentuid="h6cd64a25gf8d0g438cg9a91gb04f030e2f88">Transform Surfaces into Rune Effects ([1]% chance)</content>
 	<content contentuid="h6cdbe92agba8eg4100gbe89g89585aa10ec9">Explosive Shuriken</content>
 	<content contentuid="h6cdf1efeg4dbbg4861ga254g8a3c81d4c9c4">Rod Of Nature</content>
 	<content contentuid="h6ce89a8cgce48g408ag8321g7e1813896f4a">Nightfall</content>
@@ -1100,7 +1104,7 @@
 	<content contentuid="h74a7b7ebga92fg4d10g92adgf7b5abd9da6a">Magical Rod Of The Lizard</content>
 	<content contentuid="h74afc321g29edg4679g8598g922e4a9abc33">&lt;font color=&apos;#FF5A00&apos;&gt;Heretic&apos;s Almanac&lt;/font&gt; (Activated)</content>
 	<content contentuid="h74b5ad8fga523g41b7g9487ga9267d843e0b">Trusty Rifle</content>
-	<content contentuid="h74c569f8g2eadg4d48g9437g13375158a532">Knocked Down (Magic)</content>
+	<content contentuid="h74c569f8g2eadg4d48g9437g13375158a532">Slammed</content>
 	<content contentuid="h74dcf0dag97edg4529g87d2gf67fc14fdf2d">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery V&lt;/font&gt;</content>
 	<content contentuid="h74f4ac59gf13ag470bga79cg83fa8dfabd0a">Throw a staff at a target for [1] and apply &lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Staff Infection&lt;/font&gt; lowers all Elemental Resistances &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF00FF&apos;&gt;When hit by a staff, it explodes with a random element.&lt;/font&gt;</content>
 	<content contentuid="h75169d2cg498dg4241gbc66g600953a95398">Rally the party at the target location.&lt;br&gt;&lt;font color=&apos;#00FFDD&apos;&gt;Party members are granted a one-time use skill that teleports them to the raised banner.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#99FFFF&apos;&gt;The banner inspires faith in the Divine, granting a +[1] boost to attributes, a +[2]% boost to dodge, and a +[3]% boost to damage.&lt;/font&gt;</content>
@@ -1114,7 +1118,7 @@
 	<content contentuid="h75df2ce7g7a9eg4c6fg9403g08e3d0d26053">Earth Weakness</content>
 	<content contentuid="h75e03bdcg485cg4ebeg96d5gf265dc94d79a">Ancient Elven Quickdraw Quiver</content>
 	<content contentuid="h75e94f4ag130ag4913gb958gbbd5c1aa1323">*You study the column of buttons.*</content>
-	<content contentuid="h761e3312ge964g4670g97bbg8cf4605ecff6">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Enemies hit have a 20% chance to be &lt;font color=&apos;#c80030&apos;&gt;Slammed&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#FFD700&apos;&gt;Slammed is a magic-based knockdown.&lt;/font&gt;</content>
+	<content contentuid="h761e3312ge964g4670g97bbg8cf4605ecff6">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Enemies hit have a 20% chance to be &lt;font color=&apos;#c80030&apos;&gt;[Key:LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName]&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#FFD700&apos;&gt;[Key:LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName] is a magic-based knockdown.&lt;/font&gt;</content>
 	<content contentuid="h762d985ag314cg41a5g90a1gb1bd523d14a5">&lt;font color=&apos;#9a38ff&apos;&gt;Dizzying Smash&lt;/font&gt;</content>
 	<content contentuid="h76350dd6g3e8dg4b63g92c2ga375f18c1359">Novice</content>
 	<content contentuid="h764a0686ga38cg43fdga3e6g2867c50395e1">Dragonslayer Pants</content>
