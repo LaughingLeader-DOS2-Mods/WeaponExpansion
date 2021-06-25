@@ -280,6 +280,7 @@ end
 ---@param item EclItem
 ---@param tooltip TooltipData
 local function OnItemTooltip(item, tooltip)
+	if not item then return end
 	---@type EclCharacter
 	local character = Client:GetCharacter()
 	local flags = tooltip:GetElements("Flags")
@@ -291,8 +292,11 @@ local function OnItemTooltip(item, tooltip)
 		end
 	end
 
-	if item ~= nil then
-		if not item:HasTag("LeaderLib_AutoLevel") and item:HasTag("LLWEAPONEX_AutoLevel") and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false) then
+	if not GameHelpers.Item.IsObject(item) then
+		if not item:HasTag("LeaderLib_AutoLevel") 
+		and item:HasTag("LLWEAPONEX_AutoLevel") 
+		and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
+		then
 			local element = tooltip:GetElement("ItemDescription")
 			if element ~= nil and not string.find(string.lower(element.Label), "automatically level") then
 				if not StringHelpers.IsNullOrEmpty(element.Label) then
@@ -303,19 +307,9 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
-		if string.find(item.StatsId, "SCROLL") or item:HasTag("SCROLL") and item.Stats.UseAPCost > 0 then
-			if Mastery.HasMasteryRequirement(character, "LLWEAPONEX_BattleBook_Mastery2") then
-				if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
-					local paramText = Mastery.Bonuses.LLWEAPONEX_BattleBook_Mastery2.BATTLEBOOK_SCROLLS.Param.Value
-					tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(paramText, character)})
-				else
-					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
-					tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(text, character)})
-				end
-			end
-		end
+		local statsId = item.Stats and item.Stats.Name or nil
 
-		if item.Stats.Name == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
+		if statsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
 			--Removes the Requires Dwarf / Male
 			for i,element in pairs(tooltip:GetElements("ItemRequirement")) do
 				if element.RequirementMet == true then
@@ -438,18 +432,8 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
-		local statTags = ""
-
-		if EquipmentTypes[item.ItemType] then
-			if item.Stats ~= nil then
-				statTags = item.Stats.Tags
-			else
-				statTags = Ext.StatGetAttribute(item.Stats.Name, "Tags")
-			end
-		end
-
 		for tag,b in pairs(ExtraPropsTags) do
-			if item:HasTag(tag) or statTags:find(tag) then
+			if GameHelpers.ItemHasTag(item, tag) then
 				local text = GameHelpers.GetStringKeyText(tag, "")
 				if text ~= "" then
 					local element = {
@@ -457,6 +441,20 @@ local function OnItemTooltip(item, tooltip)
 						Label = text
 					}
 					tooltip:AppendElement(element)
+				end
+			end
+		end
+	else
+		local statsId = not StringHelpers.IsNullOrWhitespace(item.StatsId) and item.StatsId or nil
+		if statsId and (string.find(statsId, "SCROLL") or item:HasTag("SCROLL")) then
+			local apCost = Ext.StatGetAttribute(statsId, "UseAPCost")
+			if apCost > 0 and Mastery.HasMasteryRequirement(character, "LLWEAPONEX_BattleBook_Mastery2") then
+				if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
+					local paramText = Mastery.Bonuses.LLWEAPONEX_BattleBook_Mastery2.BATTLEBOOK_SCROLLS.Param.Value
+					tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(paramText, character)})
+				else
+					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
+					tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(text, character)})
 				end
 			end
 		end
