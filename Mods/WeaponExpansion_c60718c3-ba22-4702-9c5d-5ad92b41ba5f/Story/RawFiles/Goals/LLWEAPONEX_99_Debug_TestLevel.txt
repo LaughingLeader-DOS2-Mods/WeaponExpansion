@@ -237,10 +237,10 @@ DB_LeaderLib_Combat_ActiveObject(_CombatID, _Char)
 AND
 CharacterIsPlayer((CHARACTERGUID)_Char, 0)
 THEN
-CharacterAddSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", 0);
+//CharacterAddSkill(_Char, "Target_LLWEAPONEX_Debug_SingleHandedAttack", 0);
 ClearVarObject(_Char, "Combat_AI_CastSkill.TargetPos1");
 SetVarObject(_Char, "Combat_AI_CastSkill.TargetCharacter1", _Char);
-SetVarFixedString(_Char, "Combat_AI_CastSkill.Skill", "Target_LLWEAPONEX_Debug_SingleHandedAttack");
+//SetVarFixedString(_Char, "Combat_AI_CastSkill.Skill", "Target_LLWEAPONEX_Debug_SingleHandedAttack");
 //SetStoryEvent(_Char, "LLWEAPONEX_Debug_OverrideSkill");
 
 /*
