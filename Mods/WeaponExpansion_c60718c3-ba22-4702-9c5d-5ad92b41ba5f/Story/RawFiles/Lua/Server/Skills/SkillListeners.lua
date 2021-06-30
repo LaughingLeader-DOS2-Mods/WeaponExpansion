@@ -148,6 +148,7 @@ local function SwapSkills(nextSkill, instant, skill, char, state, data)
 			end
 		else
 			NRD_SkillSetCooldown(char, skill, 0.0)
+			GameHelpers.UI.RefreshSkillBarSkillCooldown(char, skill)
 		end
 	end
 end

@@ -89,7 +89,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 
 			if ObjectIsCharacter(source) == 1 then
 				if UnarmedHelpers.HasUnarmedWeaponStats(Ext.GetCharacter(source).Stats) then
-					UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle)
+					UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle,data)
 				end
 			end
 

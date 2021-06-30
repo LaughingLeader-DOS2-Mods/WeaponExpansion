@@ -651,6 +651,7 @@ end
 DeathManager.RegisterListener("GnakSpellScroll", function(target, attacker, targetDied)
 	if targetDied and CharacterHasSkill(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic") == 1 then
         NRD_SkillSetCooldown(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic", 0.0)
+		GameHelpers.UI.RefreshSkillBarSkillCooldown(attacker, "Shout_LLWEAPONEX_SpellScroll_PrepareMagic")
     end
 end)
 

@@ -45,12 +45,17 @@ if Ext.IsServer() then
 
 	local lizardHits = {}
 
-	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, damage, handle)
+	--- @param target string
+	--- @param source string
+	--- @param damage integer
+	--- @param handle integer
+	--- @param data HitPrepareData
+	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, damage, handle, data)
 		if IsUnarmedHit(handle) then
 			-- Just why?
 			local character = Ext.GetCharacter(attacker)
 			local isLizard = character:HasTag("LIZARD")
-			local isCombinedHit = isLizard and NRD_HitGetInt(handle, "ProcWindWalker") == 0
+			local isCombinedHit = isLizard and not data.ProcWindWalker
 			local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats, true)
 
 			if isCombinedHit then
@@ -69,15 +74,13 @@ if Ext.IsServer() then
 				local offhandDamage = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, true)
 				damageList:Merge(offhandDamage)
 			end
-			NRD_HitClearAllDamage(handle)
-			--NRD_HitStatusClearAllDamage(target, handle)
+			data:ClearAllDamage()
 			local damages = damageList:ToTable()
-			local totalDamage = 0
 			for i,damage in pairs(damages) do
-				NRD_HitAddDamage(handle, damage.DamageType, damage.Amount)
-				totalDamage = totalDamage + damage.Amount
+				data.DamageList[damage.DamageType] = damage.Amount
 			end
-			Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", totalDamage, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
+			data:Recalculate()
+			Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
 			if lizardHits[attacker] == 2 then
 				lizardHits[attacker] = nil
 			end
