@@ -30,9 +30,9 @@ local defaultPersistentVars = {
     UniqueRequirements = {}
 }
 ---@type WeaponExpansionVars
-PersistentVars = Common.CopyTable(defaultPersistentVars, true)
+PersistentVars = Common.CloneTable(defaultPersistentVars, true)
 
-RegisterListener("Initialized", function(region)
+RegisterListener("PersistentVarsLoaded", function()
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
     if PersistentVars.StatusData.RemoveOnTurnEnd ~= nil then
         for uuid,data in pairs(PersistentVars.StatusData.RemoveOnTurnEnd) do
@@ -41,11 +41,12 @@ RegisterListener("Initialized", function(region)
     end
 end)
 
-RegisterListener("LuaReset", function()
-    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
-    InvokeListenerCallbacks(LoadPersistentVars)
-    UpdateDarkFireballSkill(Origin.Korvash)
-end)
+if Vars.DebugMode then
+    RegisterListener("LuaReset", function()
+        UpdateDarkFireballSkill(Origin.Korvash)
+    end)
+end
+
 
 ---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
 ---@alias EquipmentChangedIDType Tag|Template
@@ -54,7 +55,6 @@ end)
 ---@alias MasteryEventID MasteryActivated|MasteryDeactivated
 ---@alias MasteryEventCallback fun(uuid:string, mastery:string):void
 
-LoadPersistentVars = {}
 BonusSkills = {}
 Listeners = {
     ---@type table<string, fun(target:string, status:string, source:string):void>
@@ -187,8 +187,6 @@ local function SessionSetup()
         Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
-
-    InvokeListenerCallbacks(LoadPersistentVars)
 
     local b,err = xpcall(function()
         --local uniqueDataStr = Ext.LoadFile("WeaponExpansion_UniqueBaseStats.json")

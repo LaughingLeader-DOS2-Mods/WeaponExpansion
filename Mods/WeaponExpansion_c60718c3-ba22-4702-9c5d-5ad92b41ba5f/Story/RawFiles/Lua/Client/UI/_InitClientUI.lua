@@ -245,12 +245,11 @@ Ext.RegisterListener("GameStateChanged", function(from, to)
 end)
 
 Ext.RegisterListener("SessionLoaded", function()
-	local rollingText = Classes.TranslatedString:Create("he38e2e7bg72dbg4477g86f9ga1fedc4f6750", "Dice Rolls")
-	CombatLog.AddFilter("Rolls", rollingText.Value, Vars.DebugMode or nil, 3)
-	--CombatLog.AddTextToFilter("LLWEAPONEX", "Text roll")
+	local rollingText = Ext.GetTranslatedString("he38e2e7bg72dbg4477g86f9ga1fedc4f6750", "Dice Rolls")
+	CombatLog.AddFilter("Rolls", rollingText, Vars.DebugMode or nil, 3)
 end)
 
-if Vars.DebugMode then
+if Ext.IsDeveloperMode() then
 	RegisterListener("BeforeLuaReset", function()
 		CombatLog.RemoveFilter("Rolls")
 	end)
