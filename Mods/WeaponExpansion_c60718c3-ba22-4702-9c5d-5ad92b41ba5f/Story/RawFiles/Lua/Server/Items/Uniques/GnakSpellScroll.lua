@@ -665,11 +665,11 @@ AttackManager.RegisterOnStart(function(attacker, target)
 	end
 end)
 
-AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
-	if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
-		ListenForDeath(target, attacker, 1500)
-		if FireSpell(attacker.MyGuid, target.MyGuid) then
-			RemoveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
+AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_GnakSpellScrollEquipped", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+	if not isFromSkill and HasActiveStatus(source.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
+		ListenForDeath(target, source, 1500)
+		if FireSpell(source.MyGuid, target.MyGuid) then
+			RemoveStatus(source.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
 		end
 	end
 end)

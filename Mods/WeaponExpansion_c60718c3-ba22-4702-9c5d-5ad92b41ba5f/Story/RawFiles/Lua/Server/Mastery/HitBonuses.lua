@@ -6,7 +6,7 @@ local function OnWandHit(target,source,damage,handle)
 
 end
 
-AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_BattleBook", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_BattleBook", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 	if not isFromSkill then
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionChance", 25.0)
 		if chance > 0 then

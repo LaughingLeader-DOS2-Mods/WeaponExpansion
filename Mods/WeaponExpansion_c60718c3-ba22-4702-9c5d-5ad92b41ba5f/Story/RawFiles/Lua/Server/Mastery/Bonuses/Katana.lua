@@ -347,7 +347,7 @@ MasteryBonusManager.RegisterSkillListener({"MultiStrike_Vault", "MultiStrike_Ene
 	end
 end)
 
-AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Katana", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Katana", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 	if bHitObject then
 		ApplyKatanaCombo(target.MyGuid, source.MyGuid, data, bonuses, "LLWEAPONEX_Katana", data.SkillData)
 		if data.Damage > 0 and HasActiveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then

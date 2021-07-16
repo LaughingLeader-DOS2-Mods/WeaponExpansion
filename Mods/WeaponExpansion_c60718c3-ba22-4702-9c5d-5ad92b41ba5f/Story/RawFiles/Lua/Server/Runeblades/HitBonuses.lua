@@ -7,7 +7,7 @@ function RunebladeManager.RegisterBonus(statusName, callback)
 	table.insert(RunebladeManager.Bonuses[statusName], callback)
 end
 
-AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Runeblade", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Runeblade", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 	if not isFromSkill then
 		local statusMap = {}
 		for i,v in pairs(source:GetStatusObjects()) do

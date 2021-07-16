@@ -21,10 +21,8 @@ Timer.RegisterListener("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", function
 	end
 end)
 
-AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
-	if GameHelpers.CharacterOrEquipmentHasTag(attacker, "LLWEAPONEX_Omnibolt_Equipped") then
-		if BonusRoll(GameHelpers.GetExtraData("LLWEAPONEX_Omnibolt_LightningChance", 201, true)) then
-			ExplodeSkill(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", attacker)
-		end
+AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Omnibolt_Equipped", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+	if not isFromSkill and BonusRoll(GameHelpers.GetExtraData("LLWEAPONEX_Omnibolt_LightningChance", 201, true)) then
+		ExplodeSkill(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", source)
 	end
 end)

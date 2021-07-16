@@ -102,7 +102,7 @@ MasteryBonusManager.RegisterSkillListener("Target_DualWieldingAttack", "AXE_FLUR
 	end
 end)
 
-AttackManager.RegisterOnWeaponTypeHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 	if bHitObject and not isFromSkill and data.Damage > 0 then
 		if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
 			local damageBonus = 1 + ((Ext.ExtraData["LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus"] or 25) * 0.01)

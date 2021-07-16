@@ -56,10 +56,11 @@ if Ext.IsServer() then
 		Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(source, 750)
 	end
 
-	local function OnBasicAttack(bHitObject,attacker,target,damage,data)
-		if bHitObject and GameHelpers.CharacterOrEquipmentHasTag(attacker, "LLWEAPONEX_RunicCannonEquipped") then
-			Osi.LLWEAPONEX_ArmCannon_OnHit(attacker.MyGuid, target.MyGuid)
-			Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(attacker.MyGuid, 750)
+	---@param data HitData
+	local function OnRunicCannonAttack(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+		if bHitObject and (not isFromSkill or (isFromSkill and not string.find(data.Skill, "LLWEAPONEX_ArmCannon"))) then
+			Osi.LLWEAPONEX_ArmCannon_OnHit(source.MyGuid, target.MyGuid)
+			Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(source.MyGuid, 750)
 		end
 	end
 
@@ -67,7 +68,7 @@ if Ext.IsServer() then
 
 	Ext.RegisterListener("SessionLoaded", function()
 		if not registeredListener then
-			AttackManager.RegisterOnHit(OnBasicAttack)
+			AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_RunicCannonEquipped", OnRunicCannonAttack)
 			registeredListener = true
 		end
 	end)

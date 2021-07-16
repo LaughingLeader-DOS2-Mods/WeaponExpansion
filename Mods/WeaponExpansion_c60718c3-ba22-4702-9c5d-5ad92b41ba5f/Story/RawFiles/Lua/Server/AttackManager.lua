@@ -7,7 +7,7 @@ if AttackManager.Listeners == nil then
 		OnStart = {},
 		OnHit = {},
 		---@type table<string,BasicAttackOnHitTargetCallback>
-		OnWeaponTypeHit = {}
+		OnWeaponTagHit = {}
 	}
 end
 
@@ -15,7 +15,7 @@ end
 
 ---@alias BasicAttackOnStartCallback fun(attacker:string, target:string|number[]):void
 ---@alias BasicAttackOnHitTargetCallback fun(bHitObject:boolean, attacker:EsvCharacter, target:EsvCharacter|EsvItem|number[], damage:integer|DamageList, data:HitData, bonuses:table|nil):void
----@alias BasicAttackOnWeaponTypeHitCallback fun(tag:string, source:EsvCharacter, target:EsvCharacter|EsvItem|number[], data:HitData, bonuses:table, bHitObject:boolean, isFromSkill:boolean):void
+---@alias BasicAttackOnWeaponTagHitCallback fun(tag:string, source:EsvCharacter, target:EsvCharacter|EsvItem|number[], data:HitData, bonuses:table, bHitObject:boolean, isFromSkill:boolean):void
 
 ---@param event BasicAttackEventID
 ---@param func BasicAttackOnStartCallback|BasicAttackOnHitTargetCallback
@@ -32,17 +32,17 @@ function AttackManager.RegisterOnHit(func)
 end
 
 ---@param tag string|string[]
----@param func BasicAttackOnWeaponTypeHitCallback
-function AttackManager.RegisterOnWeaponTypeHit(tag, func)
+---@param func BasicAttackOnWeaponTagHitCallback
+function AttackManager.RegisterOnWeaponTagHit(tag, func)
 	if type(tag) == "table" then
 		for i,v in pairs(tag) do
-			AttackManager.RegisterOnWeaponTypeHit(v, func)
+			AttackManager.RegisterOnWeaponTagHit(v, func)
 		end
 	else
-		if AttackManager.Listeners.OnWeaponTypeHit[tag] == nil then
-			AttackManager.Listeners.OnWeaponTypeHit[tag] = {}
+		if AttackManager.Listeners.OnWeaponTagHit[tag] == nil then
+			AttackManager.Listeners.OnWeaponTagHit[tag] = {}
 		end
-		table.insert(AttackManager.Listeners.OnWeaponTypeHit[tag], func)
+		table.insert(AttackManager.Listeners.OnWeaponTagHit[tag], func)
 	end
 end
 
@@ -110,22 +110,21 @@ Ext.RegisterOsirisListener("CharacterStartAttackPosition", 5, "after", OnBasicAt
 --- @param source EsvCharacter|EsvItem
 --- @param data HitData
 function AttackManager.InvokeOnHit(isFromHit, source, target, damage, data, bonuses, isFromSkill)
-	print("AttackManager.InvokeOnHit", isFromHit, target, source.DisplayName, source.MyGuid, damage, data, bonuses, isFromSkill)
-	InvokeListenerCallbacks(AttackManager.Listeners.OnHit, isFromHit, source, target, damage, data, bonuses)
+	if not isFromSkill then
+		InvokeListenerCallbacks(AttackManager.Listeners.OnHit, isFromHit, source, target, damage, data, bonuses)
+	end
 	if source ~= nil and ObjectIsCharacter(source.MyGuid) == 1 then
 		if isFromSkill == nil then
 			isFromSkill = false
 		end
 		bonuses = bonuses or MasteryBonusManager.GetMasteryBonuses(source)
-		for tag,callbacks in pairs(AttackManager.Listeners.OnWeaponTypeHit) do
-			if #callbacks > 0 then
-				local hasTag = GameHelpers.CharacterOrEquipmentHasTag(source, tag)
-				if hasTag then
-					for i,callback in pairs(callbacks) do
-						local status,err = xpcall(callback, debug.traceback, tag, source, target, data, bonuses, isFromHit, isFromSkill)
-						if not status then
-							Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
-						end
+		for tag,callbacks in pairs(AttackManager.Listeners.OnWeaponTagHit) do
+			if #callbacks > 0 and GameHelpers.CharacterOrEquipmentHasTag(source, tag) then
+				for i=1,#callbacks do
+					local callback = callbacks[i]
+					local status,err = xpcall(callback, debug.traceback, tag, source, target, data, bonuses, isFromHit, isFromSkill)
+					if not status then
+						Ext.PrintError("Error calling function for 'Listeners.OnHit':\n", err)
 					end
 				end
 			end
