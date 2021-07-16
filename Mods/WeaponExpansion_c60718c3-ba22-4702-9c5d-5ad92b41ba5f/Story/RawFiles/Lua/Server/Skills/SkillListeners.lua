@@ -27,31 +27,6 @@ RegisterSkillListener({"Projectile_LLWEAPONEX_Greatbow_PiercingShot", "Projectil
 	end
 end)
 
-RegisterSkillListener({"Projectile_SkyShot", "Projectile_EnemySkyShot"}, function(skill, char, state, data)
-	if IsTagged(char, "LLWEAPONEX_Omnibolt_Equipped") == 1 then
-		if state == SKILL_STATE.HIT and data.Success and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 0 then
-			GameHelpers.ExplodeProjectile(char, data.Target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike")
-		elseif state == SKILL_STATE.USED then
-			if data.TotalTargetObjects > 0 then
-				ObjectClearFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
-			elseif data.TotalTargetPositions > 0 then
-				ObjectSetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus", 0)
-				local x,y,z = table.unpack(data.TargetPositions[1])
-				SetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition", x, y, z)
-			end
-		elseif state == SKILL_STATE.CAST then
-			Timer.Start("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, char)
-		end
-	end
-end)
-
-Timer.RegisterListener("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", function(timerName, char)
-	if char and ObjectGetFlag(char, "LLWEAPONEX_Omnibolt_SkyShotWorldBonus") == 1 then
-		local x,y,z = GetVarFloat3(char, "LLWEAPONEX_Omnibolt_SkyShotWorldPosition")
-		GameHelpers.Skill.Explode({x,y,z}, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", char)
-	end
-end)
-
 -- Placeholder until we can check a character's Treasures array
 local STEAL_DEFAULT_TREASURE = "ST_LLWEAPONEX_RandomEnemyTreasure"
 

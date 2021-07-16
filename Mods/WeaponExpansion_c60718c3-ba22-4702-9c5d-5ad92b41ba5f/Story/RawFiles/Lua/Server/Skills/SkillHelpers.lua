@@ -18,3 +18,25 @@ function RestoreSkillSlot(char, previousSkill, replacementSkill)
 		end
 	end
 end
+
+---Just a shortcut for exploding a skill with "Enemy Only" set to true, so only enemies or allies with friendly fire are hit.
+---@param target string|number[]|EsvCharacter|EsvItem
+---@param skillId string
+---@param source string|EsvCharacter|EsvItem
+---@param playCastEffects boolean|nil
+---@param playTargetEffects boolean|nil
+---@param extraParams table|nil
+function ExplodeSkill(target, skill, source, extraParams, playCastEffects, playTargetEffects)
+	GameHelpers.Skill.Explode(target, skill, source, nil, true, playCastEffects, playTargetEffects, extraParams)
+end
+
+---@param chance integer
+---@param onlyOnce boolean|nil If true, don't roll a second time to try and succeed.
+function BonusRoll(chance, onlyOnce)
+	if Ext.Random(1,999) <= chance then
+		return true
+	elseif not onlyOnce and Ext.Random(1,999) <= chance then
+		return true
+	end
+	return false
+end

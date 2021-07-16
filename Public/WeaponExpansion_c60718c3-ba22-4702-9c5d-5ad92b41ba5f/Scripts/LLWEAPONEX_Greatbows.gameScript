@@ -177,28 +177,6 @@ THEN
 	SetVar(_Character, "LLWEAPONEX_Greatbow_AttackFXHandle", INT64:null)
 ENDIF
 
-EVENT LLWEAPONEX_Greatbows_LightningStrike
-VARS
-	CHARACTER:_Character
-	FLOAT:_LevelF
-	INT:_Level
-	FLOAT3:_Position
-ON
-	OnCharacterEvent(_Character, "LLWEAPONEX_Greatbow_ExplodeLightningStrikeAtPosition")
-ACTIONS
-IF "c1"
-	CharacterGetStat(_LevelF, _Character, Level)
-THEN
-	Cast(_Level, _LevelF)
-ENDIF
-IF "c1&!c2"
-	GetVar(_Position, _Character, "LLWEAPONEX_Greatbow_LightningStrikePosition")
-	IsEqual(_Position, null)
-THEN
-	ExplodeAt(_Position, Projectile_LLWEAPONEX_Greatbow_LightningStrike, _Level, _Character)
-	SetVar(_Character, "LLWEAPONEX_Greatbow_LightningStrikePosition", FLOAT3:null)
-ENDIF
-
 EVENT LLWEAPONEX_Greatbows_BarrageBonusDamage
 VARS
 	CHARACTER:_Source

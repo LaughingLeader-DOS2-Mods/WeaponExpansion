@@ -279,33 +279,6 @@ THEN
 DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay);
 //END_REGION
 
-//REGION OMNIBOLT
-//Basic attack position summon lightning
-PROC
-LLWEAPONEX_Greatbows_OnAttackAtPosition((CHARACTERGUID)_Char, "WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_Bow_2H_A_7efec0e0-1c2e-4f0d-9ec5-e3a1f40c97b8", (REAL)_x, (REAL)_y, (REAL)_z)
-AND
-LeaderLib_Roll_QRY(299)
-AND
-GetDistanceToPosition(_Char, _x, _y, _z, _Dist)
-AND
-RealProduct(_Dist, 85.0, _DelayR)
-AND
-Integer(_DelayR, _DelayInt)
-AND
-LLWEAPONEX_Greatbows_QRY_GetAttackDelay(_Char, "Lightning")
-AND
-DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay)
-AND
-IntegerSum(_DelayInt, _AttackDelay, _Delay)
-AND
-IntegerMax(_Delay, 1300, _DelayClamped)
-THEN
-NOT DB_LLWEAPONEX_Greatbows_Temp_AttackDelay(_Char, _AttackDelay);
-//LeaderLog_LogInt("DEBUG", "[LLWEAPONEX_10_Greatbows:OnAttackAtPosition] Shooting lightning bolt at position after [", _DelayClamped, "] ms.");
-SetVarFloat3(_Char, "LLWEAPONEX_Greatbow_LightningStrikePosition", _x, _y, _z);
-LeaderLib_Timers_StartObjectTimer(_Char, _DelayClamped, "LLWEAPONEX_Timers_Greatbow_Greatbow_ExplodeLightningStrikeAtPosition", "LLWEAPONEX_Greatbow_ExplodeLightningStrikeAtPosition");
-//END_REGION
-
 //REGION CUSHION_FORCE
 IF
 CharacterStatusApplied(_Target, "LLWEAPONEX_GREATBOW_CUSHION_FORCE", (CHARACTERGUID)_Source)
