@@ -31,11 +31,11 @@ function ExplodeSkill(target, skill, source, extraParams, playCastEffects, playT
 end
 
 ---@param chance integer
----@param onlyOnce boolean|nil If true, don't roll a second time to try and succeed.
+---@param onlyOnce boolean|nil If true, don't roll a second time if the first failed.
 function BonusRoll(chance, onlyOnce)
 	if Ext.Random(1,999) <= chance then
 		return true
-	elseif not onlyOnce and Ext.Random(1,999) <= chance then
+	elseif not onlyOnce and (Ext.Random(1,0) == 1 and Ext.Random(1,999) <= chance) then
 		return true
 	end
 	return false
