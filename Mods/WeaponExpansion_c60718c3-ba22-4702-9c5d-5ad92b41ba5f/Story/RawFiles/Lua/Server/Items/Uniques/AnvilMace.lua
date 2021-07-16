@@ -8,7 +8,7 @@ AttackManager.RegisterOnHit(function(bHitObject, attacker, target, damage, data)
 			end
 		else
 			--Shockwave when attacking the ground
-			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", attacker)
+			ExplodeSkill(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", attacker)
 			PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01",table.unpack(target))
 		end
 	end
@@ -45,5 +45,5 @@ end)
 
 Timer.RegisterListener("LLWEAPONEX_RushSmashFinished", function(_, char)
 	local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(char, 2.0)
-	GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", char, char.Stats.Level, true)
+	ExplodeSkill(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", char)
 end, true)
