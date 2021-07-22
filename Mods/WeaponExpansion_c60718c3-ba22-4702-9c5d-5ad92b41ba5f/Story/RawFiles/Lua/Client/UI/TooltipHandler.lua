@@ -90,10 +90,14 @@ Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText", function(cmd, text)
 		if main ~= nil then
 			if main.tf ~= nil then
 				main.tf.shortDesc = text
-				main.tf.setText(text,0)
-			else
+				if main.tf.setText ~= nil then
+					main.tf.setText(text,0)
+				end
+			elseif main.defaultTooltip ~= nil then
 				main.defaultTooltip.shortDesc = text
-				main.defaultTooltip.setText(text,0)
+				if main.defaultTooltip.setText ~= nil then
+					main.defaultTooltip.setText(text,0)
+				end
 			end
 		end
 	end
