@@ -1,6 +1,3 @@
----@type MessageData
-local MessageData = LeaderLib.Classes["MessageData"]
-
 Ext.RegisterNetListener("LLWEAPONEX_SetWorldTooltipText_Request", function(cmd, datastr)
 	local data = Ext.JsonParse(datastr)
 	if data ~= nil and data.ID ~= nil then

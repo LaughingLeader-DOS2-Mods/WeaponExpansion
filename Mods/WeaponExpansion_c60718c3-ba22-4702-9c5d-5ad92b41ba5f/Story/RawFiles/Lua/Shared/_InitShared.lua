@@ -1,6 +1,8 @@
 Main = {}
 Debug = {
-	MasteryTests = false
+	MasteryTests = false,
+	AddOriginsToParty = false,
+	CreateOriginPresetEquipment = false
 }
 Math = { AbilityScaling = {}}
 Text = {}

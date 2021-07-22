@@ -57,13 +57,16 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Harken, "Opportunist")
 		CharacterAddTalent(Origin.Harken, "Dwarf_Sturdy")
 		CharacterAddTalent(Origin.Harken, "Dwarf_Sneaking")
-		LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-		if Vars.DebugMode then
-			Timer.StartOneshot("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
-				Uniques.AnvilMace:Transfer(Origin.Harken, true)
-				Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
-			end)
+
+		if Debug.CreateOriginPresetEquipment then
+			LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+			--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+			if Vars.DebugMode then
+				Timer.StartOneshot("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
+					Uniques.AnvilMace:Transfer(Origin.Harken, true)
+					Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
+				end)
+			end
 		end
 
 		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_FixSkillBar", 0)
@@ -81,17 +84,20 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Korvash, "Executioner")
 		CharacterAddTalent(Origin.Korvash, "Lizard_Resistance")
 		CharacterAddTalent(Origin.Korvash, "Lizard_Persuasion")
-		LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-		--CharacterAddSkill(Origin.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
-		--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-		--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-		--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
-		if Vars.DebugMode then
-			Timer.StartOneshot("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
-				Uniques.DeathEdge:Transfer(Origin.Korvash, true)
-				Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
-			end)
+
+		if Debug.CreateOriginPresetEquipment then
+			LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+			--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+			--CharacterAddSkill(Origin.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
+			--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+			--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+			--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
+			if Vars.DebugMode then
+				Timer.StartOneshot("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
+					Uniques.DeathEdge:Transfer(Origin.Korvash, true)
+					Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
+				end)
+			end
 		end
 
 		--Mods.WeaponExpansion.Uniques.DeathEdge:Transfer(Mods.WeaponExpansion.Origin.Korvash, true)
@@ -114,7 +120,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		end
 	end
 
-	if Vars.DebugMode then
+	if Vars.DebugMode and Debug.AddOriginsToParty then
 		local host = CharacterGetHostCharacter()
 		local user = CharacterGetReservedUserID(host)
 		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
