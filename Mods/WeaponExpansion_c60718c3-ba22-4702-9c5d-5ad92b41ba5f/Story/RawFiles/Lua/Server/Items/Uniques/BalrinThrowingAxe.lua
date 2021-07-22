@@ -52,21 +52,18 @@ local function OnBalrinAxeThrown(skill, char, state, data)
 		Osi.ProcObjectTimer(char, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200)
 		Timer.Start("Timers_LLWEAPONEX_CheckForAxeMiss", 1200, char)
 	elseif state == SKILL_STATE.HIT then
+		GainThrowingMasteryXP(char, data.Target)
 		if not data.Success or ObjectIsItem(data.Target) == 1 then
-			bTimer.Cancel = false
 			EquipBalrinAxe(char)
 			CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 		else
 			local axeData = PersistentVars.SkillData.ThrowBalrinAxe[char]
 			if axeData ~= nil then
-				bTimer.Cancel = false
 				axeData.Target = data.Target
 				DeathManager.ListenForDeath("ThrowBalrinAxe", data.Target, char, 1000)
 			end
 		end
-		if bTimer.Cancel then
-			Timer.Cancel("Timers_LLWEAPONEX_CheckForAxeMiss", char)
-		end
+		Timer.Cancel("Timers_LLWEAPONEX_CheckForAxeMiss", char)
 	elseif state == SKILL_STATE.PROJECTILEHIT then
 		Timer.Cancel("Timers_LLWEAPONEX_CheckForAxeMiss", char)
 		if StringHelpers.IsNullOrEmpty(data.Target) then
