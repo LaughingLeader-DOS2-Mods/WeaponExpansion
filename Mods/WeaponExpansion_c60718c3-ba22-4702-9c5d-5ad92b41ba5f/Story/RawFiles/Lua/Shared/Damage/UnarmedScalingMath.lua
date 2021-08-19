@@ -193,3 +193,34 @@ function UnarmedHelpers.CalculateWeaponDamage(attacker, weapon, noRandomization,
 
     return damageList,baseMin,baseMax,totalMin,totalMax
 end
+
+
+
+---@alias LLWEAPONEXDamageRange table<DAMAGE_TYPE, LLWEAPONEXDamageRangeEntry>
+
+---@class LLWEAPONEXDamageRangeEntry
+---@field Min integer
+---@field Max integer
+
+
+--- @param weapon StatItem
+--- @return LLWEAPONEXDamageRange
+function UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
+    local damages = ComputeBaseWeaponDamage(weapon)
+
+    for damageType, damage in pairs(damages) do
+        damage.Min = Ext.Round(damage.Min)
+        damage.Max = Ext.Round(damage.Max)
+    end
+
+    return damages
+end
+
+--- @param character StatCharacter
+--- @param weapon StatItem
+--- @param attribute string The scaling attribute.
+--- @param isDualWielding boolean|nil
+--- @return LLWEAPONEXDamageRange
+function UnarmedHelpers.CalculateWeaponDamageRange(character, weapon, attribute, isDualWielding)
+    return CalculateWeaponScaledDamageRanges(character, weapon, isDualWielding, attribute)
+end

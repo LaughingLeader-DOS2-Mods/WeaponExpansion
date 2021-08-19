@@ -356,7 +356,9 @@ local function OnItemTooltip(item, tooltip)
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
 			elseif GameHelpers.ItemHasTag(item, "LLWEAPONEX_Unarmed") and item.ItemType ~= "Weapon" then
-				local damageRange,highestAttribute = UnarmedHelpers.GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
+				--local damageRange,highestAttribute = UnarmedHelpers.GetUnarmedWeaponDamageRange(character.Stats, item)
+				local weapon,highestAttribute = UnarmedHelpers.CreateUnarmedWeaponTable(character.Stats, item.Stats)
+				local damageRange = UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
 				--local highestAttribute = "Finesse"
 				--local bonusWeapon = ExtenderHelpers.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
 				--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)

@@ -201,6 +201,10 @@ Ext.RegisterListener("SessionLoaded", function()
     EnableFeature("ReplaceTooltipPlaceholders")
     EnableFeature("FixFarOutManSkillRangeTooltip")
 	EnableFeature("FormatTagElementTooltips")
+
+	if Mods.Thanos then
+		UnarmedHelpers.RegisterUnarmedStat("ARM_UNIQUE_DB_Thanos_InfinityGauntlet", "WPN_UNIQUE_DB_Thanos_InfinityGauntlet")
+	end
 end)
 
 Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")

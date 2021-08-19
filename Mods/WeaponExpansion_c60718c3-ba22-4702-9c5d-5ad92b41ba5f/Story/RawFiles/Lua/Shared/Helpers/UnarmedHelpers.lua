@@ -45,12 +45,14 @@ local function GetEquippedUnarmedArmor(character)
 end
 
 ---@param character StatCharacter
+---@param skipItemCheck boolean|nil
+---@param statItem StatItem
 ---@return StatItem,number,integer,string,boolean
-function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck)
+function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck, statItem)
 	local hasUnarmedWeapon = false
 	local weaponStat = "NoWeapon"
 	local level = character.Level
-	if skipItemCheck ~= true then
+	if skipItemCheck ~= true and statItem == nil then
 		for item in pairs(GetEquippedUnarmedArmor(character.Character)) do
 			local unarmedWeaponStat = UnarmedWeaponStats[item.StatsId]
 			if unarmedWeaponStat ~= nil then
@@ -59,6 +61,14 @@ function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck)
 				level = item.Level
 				break
 			end
+		end
+	end
+	if statItem ~= nil then
+		local unarmedWeaponStat = UnarmedWeaponStats[statItem.Name]
+		if unarmedWeaponStat ~= nil then
+			weaponStat = unarmedWeaponStat
+			hasUnarmedWeapon = true
+			level = statItem.Level
 		end
 	end
 	local highestAttribute = Skills.GetHighestAttribute(character, unarmedAttributes)
@@ -78,26 +88,32 @@ function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck)
 end
 
 ---@param character StatCharacter
----@return table<string,number[]>,number,integer,string
-function UnarmedHelpers.GetDamageRange(character)
-	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character)
-	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
-	if character.Character:HasTag("LIZARD") then
-		local offHandDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
-		local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
-		for damageType, range in pairs(offHandDamageRange) do
-			local min = math.ceil(range.Min * dualWieldPenalty)
-			local max = math.ceil(range.Max * dualWieldPenalty)
-			local range = damageRange[damageType]
-			if damageRange[damageType] ~= nil then
-				range.Min = range.Min + min
-				range.Max = range.Max + max
-			else
-				damageRange[damageType] = {Min = min, Max = max}
-			end
+---@param statItem StatItem
+---@return StatItem Weapon table
+---@return integer Highest attribute
+function UnarmedHelpers.CreateUnarmedWeaponTable(character, statItem)
+	local hasUnarmedWeapon = false
+	local weaponStat = "NoWeapon"
+	local level = character.Level
+	if statItem ~= nil then
+		local unarmedWeaponStat = UnarmedWeaponStats[statItem.Name]
+		if unarmedWeaponStat ~= nil then
+			weaponStat = unarmedWeaponStat
+			hasUnarmedWeapon = true
+			level = statItem.Level
 		end
 	end
-	return damageRange,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
+	local highestAttribute = Skills.GetHighestAttribute(character, unarmedAttributes)
+	local unarmedMasteryRank = 0
+	for i=1,Mastery.Variables.MaxRank,1 do
+		local tag = "LLWEAPONEX_Unarmed_Mastery" .. i
+		if character.Character:HasTag(tag) then
+			unarmedMasteryRank = i
+		end
+	end
+	local unarmedMasteryBoost = UnarmedHelpers.GetMasteryBoost(unarmedMasteryRank)
+	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, level, highestAttribute, "Club", unarmedMasteryBoost)
+	return weapon,highestAttribute
 end
 
 ---@param character EclCharacter
@@ -116,28 +132,39 @@ function UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
 end
 
 ---@param character StatCharacter
----@param item StatItem
+---@param skipDualWielding boolean|nil Skip calculating dual-wielding damage (Lizards) if true.
 ---@return table<string,number[]>,string
-function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item)
+function UnarmedHelpers.GetBaseUnarmedDamageRange(character, skipDualWielding)
 	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, true)
-	if GameHelpers.ItemHasTag(item, unarmedTags) then
-		local unarmedWeaponStatName = UnarmedWeaponStats[item.Name]
-		if unarmedWeaponStatName ~= nil then
-			local unarmedWeapon = ExtenderHelpers.CreateWeaponTable(unarmedWeaponStatName, item.Level, highestAttribute, "None", unarmedMasteryBoost)
-			if unarmedWeapon ~= nil then
-				for i,stat in pairs(unarmedWeapon.DynamicStats) do
-					if i > 1 then
-						table.insert(noWeapon.DynamicStats, stat)
-					elseif i == 1 then
-						noWeapon.DynamicStats[1] = stat
-					end
-				end
+	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, noWeapon)
+	if skipDualWielding ~= true and character.Character:HasTag("LIZARD") then
+		local offHandDamageRange = Common.CopyTable(damageRange, true)
+		local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
+		for damageType, range in pairs(offHandDamageRange) do
+			local min = math.ceil(range.Min * dualWieldPenalty)
+			local max = math.ceil(range.Max * dualWieldPenalty)
+			local range = damageRange[damageType]
+			if damageRange[damageType] ~= nil then
+				range.Min = range.Min + min
+				range.Max = range.Max + max
+			else
+				damageRange[damageType] = {Min = min, Max = max}
 			end
 		end
 	end
-	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, noWeapon)
-	if character.Character:HasTag("LIZARD") then
-		local offHandDamageRange = Common.CopyTable(damageRange, true)
+	return damageRange,highestAttribute
+end
+
+
+---@param character StatCharacter
+---@param item EclItem|EsvItem|StatItem
+---@param skipDualWielding boolean|nil Skip calculating dual-wielding damage (Lizards) if true.
+---@return table<string,number[]>,string
+function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item, skipDualWielding)
+	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, true, item)
+	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
+	if skipDualWielding ~= true and character.Character:HasTag("LIZARD") then
+		local offHandDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
 		local dualWieldPenalty = Ext.ExtraData.DualWieldingDamagePenalty
 		for damageType, range in pairs(offHandDamageRange) do
 			local min = math.ceil(range.Min * dualWieldPenalty)
