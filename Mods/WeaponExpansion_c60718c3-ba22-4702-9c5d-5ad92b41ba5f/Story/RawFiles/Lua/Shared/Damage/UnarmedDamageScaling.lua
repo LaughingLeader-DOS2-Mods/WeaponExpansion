@@ -1,4 +1,6 @@
-if Ext.IsServer() then
+local isClient = Ext.IsClient()
+
+if not isClient then
 	local UnarmedHitMatchProperties = {
 		DamageType = 0,
 		DamagedMagicArmor = 0,
@@ -50,8 +52,9 @@ if Ext.IsServer() then
 	--- @param damage integer
 	--- @param handle integer
 	--- @param data HitPrepareData
-	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, damage, handle, data)
-		if IsUnarmedHit(handle) then
+	--- @param force boolean
+	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, damage, handle, data, force)
+		if force == true or IsUnarmedHit(handle) then
 			-- Just why?
 			local character = Ext.GetCharacter(attacker)
 			local isLizard = character:HasTag("LIZARD")

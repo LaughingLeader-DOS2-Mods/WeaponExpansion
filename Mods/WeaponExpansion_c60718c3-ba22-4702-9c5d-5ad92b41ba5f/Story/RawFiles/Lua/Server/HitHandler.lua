@@ -54,7 +54,9 @@ local function OnPrepareHit(target,source,damage,handle,data)
 				return
 			end
 
-			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 and NRD_HitGetInt(handle, "HitType") < 4 then
+			local hitType = NRD_HitGetInt(handle, "HitType")
+
+			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 and hitType < 4 then
 				data.Blocked = true
 				data:ClearAllDamage()
 				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
@@ -70,7 +72,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 				and CharacterIsDead(blocker) == 0
 				and CharacterIsEnemy(blocker, source) == 1
 				and CharacterCanSee(blocker, source) == 1
-				and NRD_HitGetInt(handle, "HitType") <= 3 then -- Everything but Surface,DoT,Reflected
+				and hitType <= 3 then -- Everything but Surface,DoT,Reflected
 					data:ClearAllDamage()
 					data.SimulateHit = false
 					data.Dodged = false
@@ -87,10 +89,10 @@ local function OnPrepareHit(target,source,damage,handle,data)
 				end
 			end
 
-			if ObjectIsCharacter(source) == 1 then
-				if UnarmedHelpers.HasUnarmedWeaponStats(Ext.GetCharacter(source).Stats) then
-					UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle,data)
-				end
+			if ObjectIsCharacter(source) == 1 
+			and data:IsFromWeapon(false, false) 
+			and UnarmedHelpers.HasUnarmedWeaponStats(Ext.GetCharacter(source).Stats) then
+				UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle,data,true)
 			end
 
 			if HasActiveStatus(source, "LLWEAPONEX_MURAMASA_CURSE") == 1 then
@@ -155,13 +157,11 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 			if not data.SkillData and data:IsFromWeapon() then
 				local mainhand = CharacterGetEquippedItem(source.MyGuid, "Weapon")
 				local offhand = CharacterGetEquippedItem(source.MyGuid, "Shield")
-				-- Unarmed
-				if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
-					if data.Damage > 0 and sourceIsPlayer then
+				if data.Damage > 0 and sourceIsPlayer then
+					-- Unarmed
+					if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, "LLWEAPONEX_Unarmed")
-					end
-				else
-					if data.Damage > 0 and sourceIsPlayer then
+					else
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid)
 					end
 				end
