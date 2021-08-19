@@ -8,12 +8,12 @@ local ExtraPropsTags = {
 	LLWEAPONEX_UniqueThrowingAxeA = true
 }
 
----@type tooltip TooltipData
----@type item EsvCharacter
----@type weaponTypeName string
----@type scaleText string
----@type damageRange table<string,number[]>
----@type attackCost integer
+---@param tooltip TooltipData
+---@param item EsvCharacter
+---@param weaponTypeName string
+---@param scaleText string
+---@param damageRange table<string,number[]>
+---@param attackCost integer
 local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText, damageRange, attackCost, weaponRange, equippedLabel)
 	local armorSlotType = tooltip:GetElement("ArmorSlotType")
 	if armorSlotType ~= nil then
@@ -37,6 +37,14 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 			-- tooltip:AppendElement(element)
 		end
 	end
+
+	--Just in case
+	tooltip:RemoveElements("APCostBoost")
+	tooltip:RemoveElements("ItemRequirement")
+	tooltip:RemoveElements("WeaponDamage")
+	tooltip:RemoveElements("ItemAttackAPCost")
+	tooltip:RemoveElements("WeaponCritMultiplier")
+	tooltip:RemoveElements("WeaponRange")
 	
 	local element = {
 		Type = "ItemAttackAPCost",
@@ -45,12 +53,14 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 		RequirementMet = true,
 		Warning = "",
 	}
+	
 	tooltip:AppendElement(element)
 	element = {
 		Type = "APCostBoost",
 		Value = attackCost,
 		Label = Text.Game.ActionPoints.Value,
 	}
+
 	tooltip:AppendElement(element)
 	element = {
 		Type = "ItemRequirement",
@@ -252,7 +262,7 @@ local EquipmentTypes = {
 
 function GetItemTypeText(item)
 	for tag,t in pairs(UniqueWeaponTypeTags) do
-		if item:HasTag(tag) then
+		if GameHelpers.ItemHasTag(item, tag) then
 			if item.Stats.IsTwoHanded and not Game.Math.IsRangedWeapon(item.Stats) then
 				return TwoHandedText.Value .. " " .. t.Value
 			else
@@ -263,7 +273,7 @@ function GetItemTypeText(item)
 	local typeText = ""
 	for i=1,#weaponTypePreferenceOrder do
 		local tag = weaponTypePreferenceOrder[i]
-		if item:HasTag(tag) then
+		if GameHelpers.ItemHasTag(item, tag) then
 			local renameWeaponType = WeaponTypeNames[tag]
 			if renameWeaponType ~= nil then
 				if item.Stats.IsTwoHanded and renameWeaponType.TwoHandedText ~= nil and not Game.Math.IsRangedWeapon(item.Stats) then
@@ -346,7 +356,7 @@ local function OnItemTooltip(item, tooltip)
 				fakeDamageCreated = true
 			end
 		end
-		if not fakeDamageCreated and item:HasTag("LLWEAPONEX_Unarmed") then
+		if not fakeDamageCreated and GameHelpers.ItemHasTag(item, "LLWEAPONEX_Unarmed") and item.ItemType ~= "Weapon" then
 			local damageRange,highestAttribute = UnarmedHelpers.GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
 			--local highestAttribute = "Finesse"
 			--local bonusWeapon = ExtenderHelpers.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
@@ -366,7 +376,7 @@ local function OnItemTooltip(item, tooltip)
 		local enabledMasteriesText = ""
 		local totalMasteries = 0
 		for tag,entry in pairs(Masteries) do
-			if item:HasTag(tag) then
+			if GameHelpers.ItemHasTag(item, tag) then
 				totalMasteries = totalMasteries + 1
 				local masteryName = GameHelpers.GetStringKeyText(tag, "")
 				if masteryName ~= "" then
@@ -406,13 +416,13 @@ local function OnItemTooltip(item, tooltip)
 		end
 
 		if character ~= nil then
-			if item:HasTag("LLWEAPONEX_Rune_HandCrossbow_DamageType") then
+			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_Rune_HandCrossbow_DamageType") then
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbowBolt")
 			end
-			if item:HasTag("LLWEAPONEX_Rune_Pistol_DamageType") then
+			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_Rune_Pistol_DamageType") then
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
 			end
-			if item:HasTag("LLWEAPONEX_RunicCannon") then
+			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_RunicCannon") then
 				if item.ItemType == "Weapon" then
 					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_ARMCANNON_HIT_DisplayName", "Builds Energy on Hit")
 					if text ~= "" then
