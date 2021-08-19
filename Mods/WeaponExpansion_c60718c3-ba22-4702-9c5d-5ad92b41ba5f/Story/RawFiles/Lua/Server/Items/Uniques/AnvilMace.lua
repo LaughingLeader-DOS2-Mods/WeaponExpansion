@@ -13,7 +13,6 @@ AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_UniqueAnvilMace", function(tag,
 end)
 
 RegisterSkillListener({"Target_LLWEAPONEX_AnvilMace_GroundSmash", "Rush_LLWEAPONEX_AnvilMace_GroundSmash", "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact"}, function(skill, char, state, data)
-	print(skill, char, state, (data and data.Print) and data:Print() or "")
 	if skill == "Target_LLWEAPONEX_AnvilMace_GroundSmash" then
 		if state == SKILL_STATE.CAST then
 			local target = data:GetSkillTargetPosition()
@@ -29,7 +28,6 @@ RegisterSkillListener({"Target_LLWEAPONEX_AnvilMace_GroundSmash", "Rush_LLWEAPON
 			local x,y,z = table.unpack(data.TargetPositions[1])
 			local dist = GetDistanceToPosition(char, x,y,z)
 			local delay = GameHelpers.Math.ScaleToRange(dist, 0, maxRange, 350, 680)
-			print(maxRange, delay, dist)
 			Timer.Start("LLWEAPONEX_RushSmashFinished", delay, char)
 		end
 	elseif skill == "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact" then
