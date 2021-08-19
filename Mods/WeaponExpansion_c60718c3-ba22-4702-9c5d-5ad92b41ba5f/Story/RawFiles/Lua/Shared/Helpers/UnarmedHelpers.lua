@@ -1,4 +1,6 @@
-UnarmedHelpers = {}
+if UnarmedHelpers == nil then
+	UnarmedHelpers = {}
+end
 
 local unarmedAttributes = {
 	"Strength",
@@ -20,30 +22,42 @@ function UnarmedHelpers.GetMasteryBoost(unarmedMastery)
 end
 
 local unarmedWeaponSlots = {
-	"Gloves",
-	"Boots"
+	Gloves = true,
+	Boots = true
 }
+
+local unarmedTags = {"LLWEAPONEX_Unarmed", "LLWEAPONEX_UnarmedWeaponEquipped"}
+
+---@param character EsvCharacter|EclCharacter
+---@return EsvItem|EclItem
+local function GetEquippedUnarmedArmor(character)
+	local foundItems = {}
+	local items = character:GetInventoryItems()
+	for i=1,math.min(#items, 14) do
+		if items[i] then
+			local item = Ext.GetItem(items[i])
+			if item and unarmedWeaponSlots[Data.EquipmentSlotNames[item.Slot]] == true and GameHelpers.ItemHasTag(item, unarmedTags) then
+				foundItems[#foundItems+1] = item
+			end
+		end
+	end
+	return foundItems
+end
 
 ---@param character StatCharacter
 ---@return StatItem,number,integer,string,boolean
 function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck)
-	local hasUnarmedWeapon
+	local hasUnarmedWeapon = false
 	local weaponStat = "NoWeapon"
 	local level = character.Level
-	if skipItemCheck ~= true and character.Character:HasTag("LLWEAPONEX_UnarmedWeaponEquipped") then
-		for i,slot in pairs(unarmedWeaponSlots) do
-			---@type StatItem
-			local item = character:GetItemBySlot(slot)
-			if item ~= nil then
-				if string.find(item.Tags, "LLWEAPONEX_UnarmedWeaponEquipped") then
-					local unarmedWeaponStat = UnarmedWeaponStats[item.Name]
-					if unarmedWeaponStat ~= nil then
-						weaponStat = unarmedWeaponStat
-						hasUnarmedWeapon = true
-						level = item.Level
-						break
-					end
-				end
+	if skipItemCheck ~= true then
+		for item in pairs(GetEquippedUnarmedArmor(character.Character)) do
+			local unarmedWeaponStat = UnarmedWeaponStats[item.StatsId]
+			if unarmedWeaponStat ~= nil then
+				weaponStat = unarmedWeaponStat
+				hasUnarmedWeapon = true
+				level = item.Level
+				break
 			end
 		end
 	end
@@ -106,7 +120,7 @@ end
 ---@return table<string,number[]>,string
 function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item)
 	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, true)
-	if item.Tags ~= nil and string.find(item.Tags, "LLWEAPONEX_UnarmedWeaponEquipped") then
+	if GameHelpers.ItemHasTag(item, "LLWEAPONEX_UnarmedWeaponEquipped") then
 		local unarmedWeaponStatName = UnarmedWeaponStats[item.Name]
 		if unarmedWeaponStatName ~= nil then
 			local unarmedWeapon = ExtenderHelpers.CreateWeaponTable(unarmedWeaponStatName, item.Level, highestAttribute, "None", unarmedMasteryBoost)
@@ -144,6 +158,26 @@ local function statMatchOrNil(stat, name)
 	return stat == nil or (stat ~= nil and stat.Name == name)
 end
 
+---@param stat StatEntryWeapon
+local function isUnarmedWeaponStat(stat)
+	if stat == nil then
+		return true
+	else
+		if not StringHelpers.IsNullOrWhitespace(stat.Tags) and 
+		Common.TableHasValue(StringHelpers.Split(stat.Tags, ";"), "LLWEAPONEX_Unarmed") then
+			return true
+		end
+		for _,v in pairs(stat.DynamicStats) do
+			if not StringHelpers.IsNullOrWhitespace(v.ObjectInstanceName) then
+				local tags = Ext.StatGetAttribute(v.ObjectInstanceName, "Tags")
+				if not StringHelpers.IsNullOrWhitespace(tags) and Common.TableHasValue(StringHelpers.Split(tags, ";"), "LLWEAPONEX_Unarmed") then
+					return true
+				end
+			end
+		end
+	end
+end
+
 ---@param character StatCharacter
 function UnarmedHelpers.HasUnarmedWeaponStats(character, allowShields)
 	if type(character) == "string" then
@@ -158,7 +192,13 @@ function UnarmedHelpers.HasUnarmedWeaponStats(character, allowShields)
 		end
 	end
 	if character ~= nil then
-		return statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield"))
+		local hasValidOffhand = (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield") or character.OffHandWeapon == nil
+		local isUnarmedStats = statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or hasValidOffhand)
+		if isUnarmedStats then
+			return true
+		elseif isUnarmedWeaponStat(character.MainWeapon) and (isUnarmedWeaponStat(character.OffHandWeapon) or hasValidOffhand) then
+			return true
+		end
 	end
 	return false
 end
