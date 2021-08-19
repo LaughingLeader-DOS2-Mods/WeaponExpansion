@@ -120,7 +120,7 @@ end
 ---@return table<string,number[]>,string
 function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item)
 	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, true)
-	if GameHelpers.ItemHasTag(item, "LLWEAPONEX_UnarmedWeaponEquipped") then
+	if GameHelpers.ItemHasTag(item, unarmedTags) then
 		local unarmedWeaponStatName = UnarmedWeaponStats[item.Name]
 		if unarmedWeaponStatName ~= nil then
 			local unarmedWeapon = ExtenderHelpers.CreateWeaponTable(unarmedWeaponStatName, item.Level, highestAttribute, "None", unarmedMasteryBoost)

@@ -129,7 +129,7 @@ local WeaponTypeNames = {
 	LLWEAPONEX_Rapier = {Text=ts:Create("h84b2d805gff5ag44a5g9f81g416aaf5abf18", "Rapier")},
 	LLWEAPONEX_Runeblade = {Text=ts:Create("hb66213fdg1a98g4127ga55fg429f9cde9c6a", "Runeblade")},
 	LLWEAPONEX_Scythe = {Text=ts:Create("h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa", "Scythe")},
-	LLWEAPONEX_Unarmed = LLWEAPONEX_Unarmed,
+	LLWEAPONEX_Unarmed = {Text=LLWEAPONEX_Unarmed},
 	LLWEAPONEX_Rod = {Text=ts:Create("heb1c0428g158fg46d6gafa3g6d6143534f37", "One-Handed Scepter")},
 	--LLWEAPONEX_Dagger = {Text=ts:Create("h697f3261gc083g4152g84cdgbe559a5e0388", "Dagger")}
 }
@@ -340,37 +340,38 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
-		local fakeDamageCreated = false
+		local renamedArmorSlotType = false
+
 		if character ~= nil then
-			if item:HasTag("LLWEAPONEX_Pistol") then
+			if GameHelpers.ItemHasTag("LLWEAPONEX_Pistol") then
 				local damageRange = Skills.DamageFunctions.PistolDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
-				fakeDamageCreated = true
-			elseif item:HasTag("LLWEAPONEX_HandCrossbow") then
+				renamedArmorSlotType = true
+			elseif GameHelpers.ItemHasTag("LLWEAPONEX_HandCrossbow") then
 				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
-				fakeDamageCreated = true
+				renamedArmorSlotType = true
+			elseif GameHelpers.ItemHasTag(item, "LLWEAPONEX_Unarmed") and item.ItemType ~= "Weapon" then
+				local damageRange,highestAttribute = UnarmedHelpers.GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
+				--local highestAttribute = "Finesse"
+				--local bonusWeapon = ExtenderHelpers.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
+				--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
+				local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
+				local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
+				local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LocalizedText.AttributeNames[highestAttribute].Value)
+				local slotInfoText = string.format(" (%s)", LocalizedText.Slots[item.Stats.Slot].Value)
+				local equipped = tooltip:GetElement("Equipped")
+				if equipped and not StringHelpers.IsNullOrWhitespace(equipped.Slot) then
+					slotInfoText = string.format(" (%s)", equipped.Slot)
+				end
+				local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
+				CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
+				renamedArmorSlotType = true
 			end
-		end
-		if not fakeDamageCreated and GameHelpers.ItemHasTag(item, "LLWEAPONEX_Unarmed") and item.ItemType ~= "Weapon" then
-			local damageRange,highestAttribute = UnarmedHelpers.GetUnarmedWeaponDamageRange(character.Stats, item.Stats)
-			--local highestAttribute = "Finesse"
-			--local bonusWeapon = ExtenderHelpers.CreateWeaponTable("WPN_LLWEAPONEX_Rapier_1H_A", character.Stats.Level, highestAttribute)
-			--local damageRange = CalculateWeaponDamageRangeTest(character.Stats, bonusWeapon)
-			local apCost = Ext.StatGetAttribute("NoWeapon", "AttackAPCost")
-			local weaponRange = string.format("%sm", Ext.StatGetAttribute("NoWeapon", "WeaponRange") / 100)
-			local scalesWithText = Text.WeaponScaling.General.Value:gsub("%[1%]", LocalizedText.AttributeNames[highestAttribute].Value)
-			local slotInfoText = ""
-			local equipped = tooltip:GetElement("Equipped")
-			if equipped == nil then
-				slotInfoText = string.format(" (%s)", LocalizedText.Slots[item.Stats.Slot].Value)
-			end
-			local typeText = LLWEAPONEX_UnarmedWeapon.Value:gsub("%[1%]", slotInfoText)
-			CreateFakeWeaponTooltip(tooltip, item, typeText, scalesWithText, damageRange, apCost, weaponRange)
 		end
 
 		local enabledMasteriesText = ""
@@ -387,17 +388,19 @@ local function OnItemTooltip(item, tooltip)
 				end
 			end
 		end
-		local itemTypeText = GetItemTypeText(item)
-		if not StringHelpers.IsNullOrEmpty(itemTypeText) then
-			local armorSlotType = tooltip:GetElement("ArmorSlotType")
-			if armorSlotType == nil then
-				armorSlotType = {
-					Type = "ArmorSlotType",
-					Label = ""
-				}
-				tooltip:AppendElement(armorSlotType)
+		if not renamedArmorSlotType then
+			local itemTypeText = GetItemTypeText(item)
+			if not StringHelpers.IsNullOrEmpty(itemTypeText) then
+				local armorSlotType = tooltip:GetElement("ArmorSlotType")
+				if armorSlotType == nil then
+					armorSlotType = {
+						Type = "ArmorSlotType",
+						Label = ""
+					}
+					tooltip:AppendElement(armorSlotType)
+				end
+				armorSlotType.Label = itemTypeText
 			end
-			armorSlotType.Label = itemTypeText
 		end
 		if enabledMasteriesText ~= "" then
 			local element = tooltip:GetElement("ItemDescription")
