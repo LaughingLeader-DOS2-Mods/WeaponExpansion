@@ -64,7 +64,7 @@ CustomSkillProperties.LLWEAPONEX_ChaosRuneAbsorbSurface = {
 	ExecuteOnPosition = function(prop, attacker, position, areaRadius, isFromItem, skill, hit)
 		local chance = prop.Arg1
 		if chance >= 1.0 or Ext.Random(0,1) <= chance then
-			local duration = math.max(prop.Arg2 or 1, 1) * 6.0
+			local duration = math.max(prop.Arg2 or 6, 6)
 			local radius = math.max(areaRadius, math.max(skill.AreaRadius or 1, skill.ExplodeRadius or 1))
 			RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
 		end
@@ -72,7 +72,7 @@ CustomSkillProperties.LLWEAPONEX_ChaosRuneAbsorbSurface = {
 	ExecuteOnTarget = function(prop, attacker, target, position, isFromItem, skill, hit)
 		local chance = prop.Arg1
 		if chance >= 1.0 or Ext.Random(0,1) <= chance then
-			local duration = math.max(prop.Arg2 or 1, 1) * 6.0
+			local duration = math.max(prop.Arg2 or 6, 6)
 			local radius = math.max(skill.AreaRadius or 1, skill.ExplodeRadius or 1)
 			RunebladeManager.AbsorbSurface(attacker, position, radius, duration)
 		end
