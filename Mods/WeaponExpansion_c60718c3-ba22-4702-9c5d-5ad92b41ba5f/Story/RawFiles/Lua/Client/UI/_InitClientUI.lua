@@ -254,3 +254,24 @@ if Ext.IsDeveloperMode() then
 		CombatLog.RemoveFilter("Rolls")
 	end)
 end
+
+---@param player EclCharacter
+---@param origin string
+---@param race string
+---@param array FlashArray
+RegisterListener("SetCharacterCreationOriginSkills", function(player, origin, race, array)
+	if origin == "LLWEAPONEX_Korvash" then
+		---@type StatSkillSet
+		local skillSet = Ext.GetSkillSet("Avatar_LLWEAPONEX_Korvash")
+		if skillSet ~= nil then
+			for i,skill in pairs(skillSet.Skills) do
+				array[i+1] = skill
+			end
+		else
+			array[1] = "Projectile_LLWEAPONEX_DarkFireball"
+		end
+		if race == "Lizard" then
+			array[0] = "Cone_LLWEAPONEX_DarkFlamebreath"
+		end
+	end
+end)

@@ -37,7 +37,6 @@ local function AddToParty(uuid, host)
 end
 
 function Origins_InitCharacters(region, isEditorMode)
-	print("Origins_InitCharacters", CharacterGetHostCharacter())
 	if CharacterGetHostCharacter() == nil then
 		return
 	end
@@ -58,7 +57,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Harken, "Dwarf_Sturdy")
 		CharacterAddTalent(Origin.Harken, "Dwarf_Sneaking")
 
-		if Debug.CreateOriginPresetEquipment then
+		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
 			LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 			--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 			if Vars.DebugMode then
@@ -85,7 +84,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Korvash, "Lizard_Resistance")
 		CharacterAddTalent(Origin.Korvash, "Lizard_Persuasion")
 
-		if Debug.CreateOriginPresetEquipment then
+		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
 			LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
 			--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
 			--CharacterAddSkill(Origin.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
@@ -120,7 +119,7 @@ function Origins_InitCharacters(region, isEditorMode)
 		end
 	end
 
-	if Vars.DebugMode and Debug.AddOriginsToParty then
+	if Vars.DebugMode and (Debug.AddOriginsToParty or Vars.LeaderDebugMode) then
 		local host = CharacterGetHostCharacter()
 		local user = CharacterGetReservedUserID(host)
 		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
