@@ -33,16 +33,7 @@ MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStri
 	end
 end)
 
----@param skillData SkillData
-MasteryBonusManager.RegisterSkillListener({"Target_Flurry", "Target_EnemyFlurry"}, "AXE_CLEAVE", function(bonuses, skill, char, state, skillData)
-	if state == SKILL_STATE.HIT then
-		SetTag(skillData.Target, "LLWEAPONEX_FlurryTarget")
-		-- Uses ShootLocalCone in behavioe
-		SetStoryEvent(char, "LLWEAPONEX_Flurry_Axe_CreateCleaveCone")
-	end
-end)
-
-local function BlinkStrike_ApplyVulnerable(_, char, target)
+Timer.RegisterListener("LLWEAPONEX_MasteryBonus_ApplyVulnerable", function(timerName, char, target)
 	if char and target and CharacterIsDead(target) == 0 then
 		if CharacterIsInCombat(char) == 1 then
 			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
@@ -50,9 +41,21 @@ local function BlinkStrike_ApplyVulnerable(_, char, target)
 			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
 		end
 	end
-end
+end)
 
-Timer.RegisterListener("LLWEAPONEX_MasteryBonus_ApplyVulnerable", BlinkStrike_ApplyVulnerable)
+---@param skillData SkillData
+MasteryBonusManager.RegisterSkillListener({"Target_Flurry", "Target_EnemyFlurry"}, "AXE_CLEAVE", function(bonuses, skill, char, state, skillData)
+	if state == SKILL_STATE.HIT then
+		SetTag(skillData.Target, "LLWEAPONEX_FlurryTarget")
+		-- Uses ShootLocalCone in behavior
+		SetStoryEvent(char, "LLWEAPONEX_Flurry_Axe_CreateCleaveCone")
+		Timer.Start("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", 250, skillData.Target)
+	end
+end)
+
+Timer.RegisterListener("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", function(timerName, target)
+	ClearTag(target, "LLWEAPONEX_FlurryTarget")
+end)
 
 AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
 	if bHitObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
