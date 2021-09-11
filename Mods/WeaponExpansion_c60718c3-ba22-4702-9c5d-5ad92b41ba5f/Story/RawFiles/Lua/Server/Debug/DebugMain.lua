@@ -164,9 +164,7 @@ local function DebugInit()
         ItemTemplateAddTo(template, host, 1, 0)
     end
 
-    local userID = CharacterGetReservedUserID(host)
-    local username = GetUserName(userID)
-    if string.find(username, "LaughingLeader") then
+    if Vars.LeaderDebugMode then
         GlobalSetFlag("LLWEAPONEX_Debug_LeaderModeEngaged")
     end
 

@@ -122,43 +122,41 @@ function Origins_InitCharacters(region, isEditorMode)
 	if Vars.DebugMode and (Debug.AddOriginsToParty or Vars.LeaderDebugMode) then
 		local host = CharacterGetHostCharacter()
 		local user = CharacterGetReservedUserID(host)
-		if string.find(GetUserName(CharacterGetReservedUserID(host)), "LaughingLeader") then
-			local totalAdded = 0
-			if CharacterIsInPartyWith(host, Origin.Harken) == 0 then
-				AddToParty(Origin.Harken, host)
-				totalAdded = totalAdded + 1
-			end
-			TeleportTo(Origin.Harken, host, "", 1, 0, 1)
-			CharacterAttachToGroup(Origin.Harken, host)
-			SetOnStage(Origin.Harken, 1)
-			CharacterAssignToUser(user, Origin.Harken)
-			local pdata = Ext.GetCharacter(Origin.Harken).PlayerCustomData
-			if pdata ~= nil then
-				pdata.OriginName = "LLWEAPONEX_Harken"
-				pdata.Race = "Dwarf"
-				pdata.IsMale = true
-			end
-			
-			if CharacterIsInPartyWith(host, Origin.Korvash) == 0 then
-				AddToParty(Origin.Korvash, host)
-				totalAdded = totalAdded + 1
-			end
-			TeleportTo(Origin.Korvash, host, "", 1, 0, 1)
-			CharacterAttachToGroup(Origin.Korvash, host)
-			SetOnStage(Origin.Korvash, 1)
-			CharacterAssignToUser(user, Origin.Korvash)
-			pdata = Ext.GetCharacter(Origin.Korvash).PlayerCustomData
-			if pdata ~= nil then
-				pdata.OriginName = "LLWEAPONEX_Korvash"
-				pdata.Race = "Lizard"
-				pdata.IsMale = true
-			end
-			local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
-			if frozenCount ~= nil and #frozenCount > 0 then
-				local count = frozenCount[1][2]
-				Osi.DB_GlobalCounter:Delete("FTJ_PlayersWokenUp", count)
-				Osi.DB_GlobalCounter("FTJ_PlayersWokenUp", count + totalAdded)
-			end
+		local totalAdded = 0
+		if CharacterIsInPartyWith(host, Origin.Harken) == 0 then
+			AddToParty(Origin.Harken, host)
+			totalAdded = totalAdded + 1
+		end
+		TeleportTo(Origin.Harken, host, "", 1, 0, 1)
+		CharacterAttachToGroup(Origin.Harken, host)
+		SetOnStage(Origin.Harken, 1)
+		CharacterAssignToUser(user, Origin.Harken)
+		local pdata = Ext.GetCharacter(Origin.Harken).PlayerCustomData
+		if pdata ~= nil then
+			pdata.OriginName = "LLWEAPONEX_Harken"
+			pdata.Race = "Dwarf"
+			pdata.IsMale = true
+		end
+		
+		if CharacterIsInPartyWith(host, Origin.Korvash) == 0 then
+			AddToParty(Origin.Korvash, host)
+			totalAdded = totalAdded + 1
+		end
+		TeleportTo(Origin.Korvash, host, "", 1, 0, 1)
+		CharacterAttachToGroup(Origin.Korvash, host)
+		SetOnStage(Origin.Korvash, 1)
+		CharacterAssignToUser(user, Origin.Korvash)
+		pdata = Ext.GetCharacter(Origin.Korvash).PlayerCustomData
+		if pdata ~= nil then
+			pdata.OriginName = "LLWEAPONEX_Korvash"
+			pdata.Race = "Lizard"
+			pdata.IsMale = true
+		end
+		local frozenCount = Osi.DB_GlobalCounter:Get("FTJ_PlayersWokenUp", nil)
+		if frozenCount ~= nil and #frozenCount > 0 then
+			local count = frozenCount[1][2]
+			Osi.DB_GlobalCounter:Delete("FTJ_PlayersWokenUp", count)
+			Osi.DB_GlobalCounter("FTJ_PlayersWokenUp", count + totalAdded)
 		end
 	end
 end
