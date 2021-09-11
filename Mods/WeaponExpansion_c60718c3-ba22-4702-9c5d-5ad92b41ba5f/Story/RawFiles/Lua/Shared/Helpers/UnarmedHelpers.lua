@@ -2,6 +2,8 @@ if UnarmedHelpers == nil then
 	UnarmedHelpers = {}
 end
 
+local isClient = Ext.IsClient()
+
 local unarmedAttributes = {
 	"Strength",
 	"Finesse",
@@ -36,8 +38,16 @@ local function GetEquippedUnarmedArmor(character)
 	for i=1,math.min(#items, 14) do
 		if items[i] then
 			local item = Ext.GetItem(items[i])
-			if item and unarmedWeaponSlots[Data.EquipmentSlotNames[item.Slot]] == true and GameHelpers.ItemHasTag(item, unarmedTags) then
-				foundItems[#foundItems+1] = item
+			if item and GameHelpers.ItemHasTag(item, unarmedTags) then
+				if isClient then
+					if not GameHelpers.Item.IsObject(item) and unarmedWeaponSlots[item.Stats.ItemSlot] == true  then
+						foundItems[#foundItems+1] = item
+					end
+				else
+					if unarmedWeaponSlots[Data.EquipmentSlotNames[item.Slot]] == true then
+						foundItems[#foundItems+1] = item
+					end
+				end
 			end
 		end
 	end
