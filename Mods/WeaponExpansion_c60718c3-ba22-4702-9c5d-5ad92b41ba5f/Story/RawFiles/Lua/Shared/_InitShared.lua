@@ -72,7 +72,7 @@ MODID.Origins = "1301db3d-1f54-4e98-9be5-5094030916e4"
 ---@type ModSettings
 Settings = {}
 
-Mods.LeaderLib.ImportUnsafe(Mods.WeaponExpansion)
+Mods.LeaderLib.Import(Mods.WeaponExpansion)
 
 Ext.Require("Shared/MasteryHelpers.lua")
 Ext.Require("Shared/MasteryRegistration.lua")
