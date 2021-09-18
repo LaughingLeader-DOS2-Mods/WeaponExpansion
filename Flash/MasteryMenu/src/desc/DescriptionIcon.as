@@ -4,12 +4,13 @@ package desc
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
 	import flash.geom.Point;
+	import iggy.IggyIcon;
 
 	public dynamic class DescriptionIcon extends MovieClip
 	{
 		public var id:String;
 		public var icon:String;
-		public var icon_mc:IconDisplay;
+		public var icon_mc:MovieClip;
 		public var iconType:int = 0
 		public var hasTooltip:Boolean = false;
 
@@ -19,6 +20,29 @@ package desc
 		{
 			super();
 			addFrameScript(0,this.frame1);
+		}
+
+		//Deprecated
+		public function createIcon_symbol(w:int=64,h:int=64) : *
+		{
+			if (this.iconType >= 2)
+			{
+				w = 40;
+				h = 40;
+				if (this.iconType == 2)
+				{
+					statusbg_mc = new StatusBackground();
+					this.addChild(statusbg_mc);
+				}
+			}
+			icon_mc = new IconDisplay(icon,w,h);
+			addChild(icon_mc);
+
+			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
+			this.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
+
+			this.icon_mc.width = w;
+			this.icon_mc.height = h;
 		}
 
 		public function createIcon(w:int=64,h:int=64) : *
@@ -33,7 +57,8 @@ package desc
 					this.addChild(statusbg_mc);
 				}
 			}
-			icon_mc = new IconDisplay(icon,w,h);
+			icon_mc = new IggyIcon(w,h);
+			icon_mc.name = this.icon;
 			addChild(icon_mc);
 
 			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);

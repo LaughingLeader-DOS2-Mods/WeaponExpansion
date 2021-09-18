@@ -57,7 +57,6 @@ package
 		public function setIcon(sourceData:BitmapData, index:int, sourceWidth:int=64, sourceHeight:int=64, sheetColumns:int=32) : *
 		{
 			//var copyData:BitmapData = IconAtlases.resizeBitmapData(sourceData, 32, 32)
-			trace(sourceData, iconData)
 			iconData.copyPixels(sourceData, 
 				new Rectangle((index % sheetColumns) * iconWidth, Math.floor(index / sheetColumns) * iconHeight, iconWidth, iconHeight),
 				new Point(0,0)

@@ -203,6 +203,8 @@ end
 
 local iconPattern = "(<icon.-/>)"
 --<icon id='Target_LLWEAPONEX_BasicAttack' icon='Action_AttackGround'/>
+
+---@param ui UIObject
 local function parseDescription(ui, index, descriptionText)
 	local icons = {}
 	local separatedText = splitDescriptionByPattern(descriptionText,iconPattern)
@@ -230,13 +232,18 @@ local function parseDescription(ui, index, descriptionText)
 			}
 		end
 	end
-	--print(Common.Dump(result))
+
+	local iconIntId = 0
+
 	for i,v in pairs(result) do
 		if v.Icon ~= "" then
 			local _,_,iconName = v.Icon:find("id='(.-)'")
 			local _,_,icon = v.Icon:find("icon='(.-)'")
 			local _,_,iconType = v.Icon:find("type='(.-)'")
-			index = pushDescriptionEntry(ui, index, v.Text, iconName, icon, iconType)
+			local iggyIconName = string.format("masteryMenu_%i", iconIntId)
+			iconIntId = iconIntId + 1
+			ui:SetCustomIcon(iggyIconName, icon, 64, 64)
+			index = pushDescriptionEntry(ui, index, v.Text, iconName, "iggy_" .. iggyIconName, iconType)
 		else
 			index = pushDescriptionEntry(ui, index, v.Text, "", "", nil)
 		end

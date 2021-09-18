@@ -40,7 +40,6 @@ package
 		{
 			super();
 			Registry.Init();
-			IconAtlases.Init();
 			addFrameScript(0,this.frame1);
 		}
 		

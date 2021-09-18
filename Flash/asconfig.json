@@ -1,9 +1,0 @@
-{
-	"config": "flex",
-	"compilerOptions": {
-		"source-path": [
-			"MasteryMenu"
-		]
-	},
-	"mainClass": "MainTimeline"
-}
