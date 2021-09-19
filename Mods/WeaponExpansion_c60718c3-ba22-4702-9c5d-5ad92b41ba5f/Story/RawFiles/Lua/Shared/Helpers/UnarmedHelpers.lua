@@ -34,18 +34,36 @@ local unarmedTags = {"LLWEAPONEX_Unarmed", "LLWEAPONEX_UnarmedWeaponEquipped"}
 ---@return EsvItem|EclItem
 local function GetEquippedUnarmedArmor(character)
 	local foundItems = {}
-	local items = character:GetInventoryItems()
-	for i=1,math.min(#items, 14) do
-		if items[i] then
-			local item = Ext.GetItem(items[i])
+	if isClient then
+		for slot,b in pairs(unarmedWeaponSlots) do
+			local item = character:GetItemBySlot(slot)
 			if item and GameHelpers.ItemHasTag(item, unarmedTags) then
-				if isClient then
-					if not GameHelpers.Item.IsObject(item) and unarmedWeaponSlots[item.Stats.ItemSlot] == true  then
-						foundItems[#foundItems+1] = item
-					end
-				else
-					if unarmedWeaponSlots[Data.EquipmentSlotNames[item.Slot]] == true then
-						foundItems[#foundItems+1] = item
+				foundItems[#foundItems+1] = item
+			end
+		end
+	else
+		if not Ext.OsirisIsCallable() then
+			for slot,b in pairs(unarmedWeaponSlots) do
+				local statItem = character.Stats:GetItemBySlot(slot)
+				if statItem and GameHelpers.StatItemHasTag(statItem, unarmedTags) then
+					foundItems[#foundItems+1] = statItem
+				end
+			end
+		else
+			local items = character:GetInventoryItems()
+			for i=1,math.min(#items, 14) do
+				if items[i] then
+					local item = Ext.GetItem(items[i])
+					if item and not GameHelpers.Item.IsObject(item) and GameHelpers.ItemHasTag(item, unarmedTags) then
+						if isClient then
+							if unarmedWeaponSlots[item.Stats.ItemSlot] == true  then
+								foundItems[#foundItems+1] = item
+							end
+						else
+							if unarmedWeaponSlots[Data.EquipmentSlotNames[item.Slot]] == true then
+								foundItems[#foundItems+1] = item
+							end
+						end
 					end
 				end
 			end
@@ -64,7 +82,12 @@ function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck, statItem)
 	local level = character.Level
 	if skipItemCheck ~= true and statItem == nil then
 		for item in pairs(GetEquippedUnarmedArmor(character.Character)) do
-			local unarmedWeaponStat = UnarmedWeaponStats[item.StatsId]
+			local unarmedWeaponStat = nil
+			if GameHelpers.Ext.ObjectIsItem(item) then
+				unarmedWeaponStat = UnarmedWeaponStats[item.StatsId]
+			elseif GameHelpers.Ext.ObjectIsStatItem(item) then
+				unarmedWeaponStat = UnarmedWeaponStats[item.Name]
+			end
 			if unarmedWeaponStat ~= nil then
 				weaponStat = unarmedWeaponStat
 				hasUnarmedWeapon = true
