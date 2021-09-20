@@ -148,6 +148,7 @@ end
 
 ---Tries to get UUID of a unique owned by the given owner.
 ---@param owner string
+---@return UUID
 function UniqueData:GetUUIDForOwner(owner)
 	if not owner then
 		return nil
@@ -165,6 +166,7 @@ end
 
 ---Gets the UUID of this unique owned by the owner, or the default value.
 ---@param owner string
+---@return UUID
 function UniqueData:GetUUID(owner)
 	return self:GetUUIDForOwner(owner) or self.UUID
 end
@@ -261,13 +263,15 @@ function UniqueData:OnItemLeveledUp(uuid)
 end
 
 function UniqueData:AddCopy(uuid, owner)
+	assert(not StringHelpers.IsNullOrWhitespace(uuid), "[UniqueData:AddCopy] uuid must be a valid item UUID.")
+	AllUniques[uuid] = self
 	if owner == nil then
 		uuid,owner = GetUUIDAndOwner(self, uuid)
 	end
 	if self.Copies[uuid] ~= owner then
 		self.Copies[uuid] = owner
 		PersistentVars.ExtraUniques[uuid] = self.Tag
-		Ext.PrintWarning(string.format("[LLWEAPONEX:UniqueData:AddCopy] Found a copy of a unique. Tag(%s) Copy(%s) Owner(%s)", self.Tag, uuid, owner))
+		Ext.PrintWarning(string.format("[LLWEAPONEX:UniqueData:AddCopy] Added a copy of a unique. Tag(%s) Copy(%s) Owner(%s)", self.Tag, uuid, owner))
 	end
 end
 

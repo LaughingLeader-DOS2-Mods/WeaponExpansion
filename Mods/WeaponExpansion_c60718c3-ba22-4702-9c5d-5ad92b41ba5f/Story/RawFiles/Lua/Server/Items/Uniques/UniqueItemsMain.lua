@@ -72,6 +72,8 @@ Uniques.Bokken.LinkedItem = Uniques.BokkenOneHanded
 Uniques.WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false, IsLinkedItem=true})
 Uniques.WarchiefHalberd.LinkedItem = Uniques.WarchiefAxe
 
+---@param tag string
+---@return UniqueData
 function UniqueManager.GetDataByTag(tag)
 	for k,v in pairs(Uniques) do
 		if v.Tag == tag then
@@ -81,16 +83,30 @@ function UniqueManager.GetDataByTag(tag)
 	return nil
 end
 
----@param item EsvItem
+---@param item EsvItem|string
+---@return UniqueData
 function UniqueManager.GetDataByItem(item)
-	if type(item) ~= "userdata" then
-		item = Ext.GetItem(item)
+	local t = type(item)
+	if t == "string" then
+		local tryItem = Ext.GetItem(item)
+		if tryItem then
+			item = tryItem
+			t = "userdata"
+		else
+			for k,v in pairs(Uniques) do
+				if v.UUID == item or v.Copies[item] then
+					return v
+				end
+			end
+		end
 	end
-	for k,v in pairs(Uniques) do
-		if v.UUID == item.MyGuid or v.Copies[item.MyGuid] then
-			return v
-		elseif GameHelpers.ItemHasTag(item, v.Tag) then
-			return v
+	if t == "userdata" then
+		for k,v in pairs(Uniques) do
+			if v.UUID == item.MyGuid or v.Copies[item.MyGuid] then
+				return v
+			elseif GameHelpers.ItemHasTag(item, v.Tag) then
+				return v
+			end
 		end
 	end
 	return nil
@@ -374,3 +390,17 @@ function UniqueManager.InitializeUniques()
 end
 
 Timer.RegisterListener("Timers_LLWEAPONEX_InitUniques", UniqueManager.InitializeUniques)
+
+---@param originalItem EsvItem|string
+---@param newItem EsvItem|string
+function UniqueManager.UpdateUniqueUUID(originalItem, newItem, replaceMainUUID)
+	local uniqueData = UniqueManager.GetDataByItem(originalItem)
+	local uuid = GameHelpers.GetUUID(newItem)
+	if uniqueData and uuid then
+		uniqueData:AddCopy(uuid)
+		AllUniques[uuid] = uniqueData
+		if replaceMainUUID then
+			uniqueData.UUID = uuid
+		end
+	end
+end

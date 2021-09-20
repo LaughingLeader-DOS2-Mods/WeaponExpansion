@@ -25,6 +25,18 @@ local attributeTokenTemplates = {
 	["dfb3db93-2562-46d2-9cd1-5ea5b57b72b9"] = "Wits",
 }
 
+if Vars.DebugMode then
+	Ext.RegisterConsoleCommand("llweaponex_tokens", function(cmd)
+		local host = CharacterGetHostCharacter()
+		for k,template in pairs(attributeToTokenTemplate) do
+			local count = CharacterGetItemTemplateCount(host, template) or 0
+			if count < 5 then
+				ItemTemplateAddTo(template, host, 5 - count, 0)
+			end
+		end
+	end)
+end
+
 local attributes = {
 	Strength = true,
 	Finesse = true,
@@ -185,26 +197,23 @@ function ChangeItemScaling(item, attribute, itemStat)
 		item.Stats.ShouldSyncStats = true
 		Ext.Print("[WeaponExpansion:ChangeItemScaling] Changed requirements:"..string.format("%s\n%s", stat.Name, Ext.JsonStringify(stat.Requirements)))
 		Ext.SyncStat(itemStat, false)
-		EquipmentManager.SyncItemStatChanges(item, {Stats={Requirements=requirements}})
 		PersistentVars.UniqueRequirements[stat.Name] = requirements
 		UniqueManager.SaveRequirementChanges()
-		--EquipmentManager.SyncItemStatChanges(item, {Requirements=requirements})
-		
-		-- local inventory = GetInventoryOwner(item)
-		-- local slot = nil
-		-- if ObjectIsCharacter(inventory) == 1 then
-		-- 	slot = GameHelpers.Item.GetEquippedSlot(inventory,item)
-		-- end
-		-- NRD_ItemCloneBegin(item)
-		-- local clone = NRD_ItemClone()
-		-- local amount = ItemGetAmount(clone)
-		-- ItemRemove(item)
-		-- if inventory ~= nil then
-		-- 	if slot ~= nil then
-		-- 		GameHelpers.Item.EquipInSlot(inventory, clone, slot)
-		-- 	else
-		-- 		ItemToInventory(clone, inventory, amount, 0, 0)
-		-- 	end
-		-- end
+		--EquipmentManager.SyncItemStatChanges(item, {Stats={Requirements=requirements}})
+
+		local inventory = GetInventoryOwner(item.MyGuid)
+		local slot = ObjectIsCharacter(inventory) == 1 and GameHelpers.Item.GetEquippedSlot(inventory,item.MyGuid) or nil
+		local clone = GameHelpers.Item.Clone(item)
+		if clone then
+			if inventory ~= nil then
+				if slot ~= nil then
+					GameHelpers.Item.EquipInSlot(inventory, clone.MyGuid, slot)
+				else
+					ItemToInventory(clone.MyGuid, inventory, 1, 0, 0)
+				end
+			end
+			UniqueManager.UpdateUniqueUUID(item, clone, true)
+			ItemRemove(item.MyGuid)
+		end
 	end
 end
