@@ -62,8 +62,8 @@ function Origins_InitCharacters(region, isEditorMode)
 			--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 			if Vars.DebugMode then
 				Timer.StartOneshot("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
-					Uniques.AnvilMace:Transfer(Origin.Harken, true)
-					Uniques.HarkenPowerGloves:Transfer(Origin.Harken, true)
+					Uniques.AnvilMace:Transfer(Origin.Harken, Uniques.AnvilMace.DefaultUUID, true)
+					Uniques.HarkenPowerGloves:Transfer(Origin.Harken, Uniques.HarkenPowerGloves.DefaultUUID, true)
 				end)
 			end
 		end
@@ -93,14 +93,12 @@ function Origins_InitCharacters(region, isEditorMode)
 			--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
 			if Vars.DebugMode then
 				Timer.StartOneshot("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
-					Uniques.DeathEdge:Transfer(Origin.Korvash, true)
-					Uniques.DemonGauntlet:Transfer(Origin.Korvash, true)
+					Uniques.DeathEdge:Transfer(Origin.Korvash, Uniques.DeathEdge.DefaultUUID, true)
+					Uniques.DemonGauntlet:Transfer(Origin.Korvash, Uniques.DemonGauntlet.DefaultUUID, true)
 				end)
 			end
 		end
 
-		--Mods.WeaponExpansion.Uniques.DeathEdge:Transfer(Mods.WeaponExpansion.Origin.Korvash, true)
-		--Mods.WeaponExpansion.Uniques.DemonGauntlet:Transfer(Mods.WeaponExpansion.Origin.Korvash, true)
 		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_FixSkillBar", 0)
 		ObjectSetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete", 0)
 	end

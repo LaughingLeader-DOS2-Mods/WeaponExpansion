@@ -19,20 +19,20 @@ function FortJoyEvent(event)
 	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:FortJoyEvent]", event)
 	if event == "AlexanderDefeated" then
 		--Ext.Print(string.format("[FJ_AlexanderDefeated] Owner(%s) Alex(%s) Pos(%s)", Uniques.DivineBanner.Owner, NPC.BishopAlexander, Common.Dump(Ext.GetCharacter(NPC.BishopAlexander).WorldPos)))
-		local uuid = Uniques.DivineBanner:GetUUIDForOwner(NPC.BishopAlexander)
+		local uuid = Uniques.DivineBanner:GetUUID(NPC.BishopAlexander)
 		if uuid then
 			local x,y,z = GetPosition(NPC.BishopAlexander)
 			if x == nil then
 				x,y,z = GetPosition(NPC.Dallis)
 			end
-			Uniques.DivineBanner:ReleaseFromOwner(true, uuid, NPC.BishopAlexander)
+			Uniques.DivineBanner:ReleaseFromOwner(uuid, true)
 			ItemScatterAt(uuid, x, y, z)
 			PlayEffectAtPosition("RS3_FX_Skills_Divine_Barrage_Impact_01", x, y, z)
 		end
 	elseif event == "SlaneReward" then
-		local uuid = Uniques.Frostdyne:GetUUIDForOwner(NPC.Slane)
+		local uuid = Uniques.Frostdyne:GetUUID(NPC.Slane)
 		if uuid then
-			Uniques.Frostdyne:ReleaseFromOwner(false, uuid, NPC.Slane)
+			Uniques.Frostdyne:ReleaseFromOwner(uuid, false)
 			if CharacterIsDead(NPC.Slane) == 0 then
 				ItemToInventory(uuid, NPC.Slane, 1, 0, 1)
 			else

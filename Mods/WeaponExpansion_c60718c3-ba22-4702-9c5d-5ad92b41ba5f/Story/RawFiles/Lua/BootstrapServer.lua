@@ -26,7 +26,9 @@ local defaultPersistentVars = {
     MasteryMechanics = {},
     Timers = {},
     OnDeath = {},
-    ExtraUniques = {},
+    ---All UUIDs for specific uniques (UUID -> Tag).
+    ---@type table<UUID,string>
+    Uniques = {},
     UniqueRequirements = {}
 }
 ---@type WeaponExpansionVars

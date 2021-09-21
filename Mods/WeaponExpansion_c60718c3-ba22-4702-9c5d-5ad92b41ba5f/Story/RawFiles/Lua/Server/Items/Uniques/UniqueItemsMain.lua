@@ -270,9 +270,9 @@ function UniqueManager.LevelUpUnique(character, item)
 end
 
 function UniqueManager.FindOrphanedUniques()
-	for uuid,tag in pairs(PersistentVars.ExtraUniques) do
+	for uuid,tag in pairs(PersistentVars.Uniques) do
         if ObjectExists(uuid) == 0 then
-            PersistentVars.ExtraUniques[uuid] = nil
+            PersistentVars.Uniques[uuid] = nil
         else
             local data = UniqueManager.GetDataByTag(tag)
 			if data ~= nil then
@@ -280,7 +280,7 @@ function UniqueManager.FindOrphanedUniques()
 					local owner = data:GetOwner(uuid)
 					data.Copies[uuid] = owner
 				else
-					PersistentVars.ExtraUniques[uuid] = nil
+					PersistentVars.Uniques[uuid] = nil
 				end
             end
         end

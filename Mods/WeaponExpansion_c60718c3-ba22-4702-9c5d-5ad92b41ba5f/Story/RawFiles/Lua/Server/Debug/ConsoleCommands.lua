@@ -30,10 +30,11 @@ if Vars.DebugMode then
 		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
 		for i,v in pairs(Uniques) do
 			if not v.IsLinkedItem then
-				if not v:IsReleasedFromOwner() or v.Owner == NPC.VendingMachine or v.Owner == NPC.UniqueHoldingChest then
+				local owner = v.Owner
+				if not v:IsReleasedFromOwner() or owner == NPC.VendingMachine or owner == NPC.UniqueHoldingChest then
 					v:ReleaseFromOwner()
 					v:Transfer(host)
-				elseif not IsPlayer(v.Owner) and v.Owner ~= host then
+				elseif not GameHelpers.Character.IsPlayer(owner) and owner ~= host then
 					v:Transfer(host)
 				end
 			end

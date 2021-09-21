@@ -30,8 +30,9 @@ if Vars.DebugMode then
 		local host = CharacterGetHostCharacter()
 		for k,template in pairs(attributeToTokenTemplate) do
 			local count = CharacterGetItemTemplateCount(host, template) or 0
+			print("llweaponex_tokens", template, count)
 			if count < 5 then
-				ItemTemplateAddTo(template, host, 5 - count, 0)
+				ItemTemplateAddTo(template, host, 5 - count, 1)
 			end
 		end
 	end)
@@ -142,7 +143,7 @@ function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
 				local itemuuid,stat = table.unpack(v)
 				local item = Ext.GetItem(itemuuid)
 				Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate] "..string.format("Changing unique item scaling for (%s)[%s] to (%s)", itemuuid, stat, attribute))
-				ChangeItemScaling(item, attribute, stat)
+				ChangeItemScaling(item, attribute, stat, char)
 			end
 		end
 		craftingActions[char] = nil
@@ -159,7 +160,8 @@ end
 ---@param item EsvItem
 ---@param attribute string
 ---@param itemStat string
-function ChangeItemScaling(item, attribute, itemStat)
+---@param craftingCharacter string
+function ChangeItemScaling(item, attribute, itemStat, craftingCharacter)
 	if itemStat == nil then
 		itemStat = item.Stats.Name
 	end
@@ -201,7 +203,7 @@ function ChangeItemScaling(item, attribute, itemStat)
 		UniqueManager.SaveRequirementChanges()
 		--EquipmentManager.SyncItemStatChanges(item, {Stats={Requirements=requirements}})
 
-		local inventory = GetInventoryOwner(item.MyGuid)
+		local inventory = craftingCharacter or GetInventoryOwner(item.MyGuid)
 		local slot = ObjectIsCharacter(inventory) == 1 and GameHelpers.Item.GetEquippedSlot(inventory,item.MyGuid) or nil
 		local clone = GameHelpers.Item.Clone(item)
 		if clone then
@@ -211,6 +213,8 @@ function ChangeItemScaling(item, attribute, itemStat)
 				else
 					ItemToInventory(clone.MyGuid, inventory, 1, 0, 0)
 				end
+			else
+				ItemToInventory(clone.MyGuid, CharacterGetHostCharacter(), 1, 0, 0)
 			end
 			UniqueManager.UpdateUniqueUUID(item, clone, true)
 			ItemRemove(item.MyGuid)

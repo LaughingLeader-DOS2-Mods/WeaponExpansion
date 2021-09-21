@@ -132,7 +132,7 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
 	uuid = StringHelpers.GetUUID(uuid)
 	local character = Ext.GetCharacter(uuid)
 	if IsPlayer(uuid) then
-		local loneWolfBanner = Uniques.LoneWolfBanner:GetUUIDForOwner(uuid)
+		local loneWolfBanner = Uniques.LoneWolfBanner:GetUUID(uuid)
 		if loneWolfBanner then
 			local level = CharacterGetLevel(uuid)
 			if level > 1 then
