@@ -885,30 +885,10 @@ end
 ---@param firstLoad boolean|nil
 function UniqueData:ApplyProgression(progressionTable, persist, item, firstLoad)
 	progressionTable = progressionTable or self.ProgressionData
-	if item == nil then
-		item = Ext.GetItem(self.UUID)
-		if item == nil then
-			local copies = self.Copies
-			if Common.TableHasAnyEntry(copies) then
-				for uuid,owner in pairs(copies) do
-					local copyItem = Ext.GetItem(uuid)
-					if copyItem ~= nil then
-						item = copyItem
-						break
-					end
-				end
-			end
-		end
-		if item == nil then
-			Ext.PrintError("[WeaponExpansion] Failed to get item object for", self.UUID, self.Tag)
-		end
-	end
-	if item ~= nil then
-		item = GameHelpers.GetItem(item)
-		assert(item ~= nil and GameHelpers.Ext.ObjectIsItem(item), string.format("[WeaponExpansion:UniqueData:StartApplyingProgression] item (%s) is not valid for unique (%s).", item, self.Tag))
-		StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
-		self.LastProgressionLevel = item.Stats.Level
-	end
+	item = GameHelpers.GetItem(item) or Ext.GetItem(self.UUID)
+	assert(item ~= nil, string.format("[WeaponExpansion:UniqueData:StartApplyingProgression] item (%s) is not valid for unique (%s).", item, self.Tag))
+	StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
+	self.LastProgressionLevel = item.Stats.Level
 end
 
 function UniqueData:AddEventListener(event, callback)
