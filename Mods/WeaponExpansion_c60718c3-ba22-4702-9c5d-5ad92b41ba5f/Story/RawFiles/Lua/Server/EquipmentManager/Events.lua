@@ -63,13 +63,12 @@ function EquipmentManager:OnItemEquipped(character, item)
 		if itemTags[unique.Tag] then
 			unique:OnEquipped(character, item)
 			if unique.UUID ~= item.MyGuid then
-				unique:AddCopy(item.MyGuid, character.MyGuid)
+				unique:AddCopy(item.MyGuid)
 				unique:ApplyProgression(nil, nil, item, true)
 			end
 			if not unique:IsReleasedFromOwner(item.MyGuid) then
-				unique:ReleaseFromOwner(false, item.MyGuid)
+				unique:ReleaseFromOwner(item.MyGuid)
 			end
-			unique:SetOwner(item.MyGuid, character.MyGuid)
 		end
 	end
 
@@ -185,12 +184,13 @@ RegisterProtectedOsirisListener("ItemAddedToCharacter", Data.OsirisEvents.ItemAd
 	if ObjectExists(character) == 0 or ObjectExists(item) == 0 then
 		return
 	end
-	item = Ext.GetItem(item); character = Ext.GetCharacter(character)
+	item = Ext.GetItem(item)
+	character = Ext.GetCharacter(character)
 	if character and item then
 		if not GameHelpers.Item.IsObject(item) then
 			for k,unique in pairs(Uniques) do
 				if unique.Tag and GameHelpers.ItemHasTag(item, unique.Tag) then
-					if GameHelpers.Character.IsPlayer(character) and not unique:IsReleasedFromOwner() then
+					if GameHelpers.Character.IsPlayer(character) and not unique:IsReleasedFromOwner(item.MyGuid) then
 						unique:ReleaseFromOwner()
 					end
 					unique:InvokeEventListeners("ItemAddedToCharacter", item.MyGuid, character.MyGuid)

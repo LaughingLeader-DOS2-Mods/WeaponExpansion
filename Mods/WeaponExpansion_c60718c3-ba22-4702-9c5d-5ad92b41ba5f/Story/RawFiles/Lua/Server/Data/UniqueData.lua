@@ -280,8 +280,8 @@ function UniqueData:MoveToRegionPosition(region, item)
 	end
 end
 
-function UniqueData:OnItemLeveledUp()
-	self:ApplyProgression(self.ProgressionData)
+function UniqueData:OnItemLeveledUp(item)
+	self:ApplyProgression(self.ProgressionData, nil, item, false)
 end
 
 ---@param uuid string
