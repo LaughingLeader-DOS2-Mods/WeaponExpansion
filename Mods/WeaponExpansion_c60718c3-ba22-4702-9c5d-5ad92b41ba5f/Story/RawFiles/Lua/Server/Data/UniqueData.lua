@@ -117,7 +117,7 @@ function UniqueData:Create(uuid, progressionData, params)
 		EquippedCallbacks = {},
 		UnEquippedCallbacks = {}
 	}
-	setmetatable(this, self)
+	ConfigureMetadata(this)
 	if params then
 		for prop,value in pairs(params) do
 			this[prop] = value
@@ -286,7 +286,7 @@ end
 
 ---@param uuid string
 function UniqueData:AddCopy(uuid)
-	assert(not StringHelpers.IsNullOrWhitespace(uuid), "[WeaponExpansion:UniqueData:AddCopy] uuid must be a valid item UUID.")
+	assert(not StringHelpers.IsNullOrWhitespace(uuid), string.format("[WeaponExpansion:UniqueData:AddCopy] uuid must be a valid item UUID value(%s).", uuid))
 	local setIsInitialized = ObjectGetFlag(self.DefaultUUID, "LLWEAPONEX_UniqueData_Initialized") ~= 0
 	local setIsReleased = ObjectGetFlag(self.DefaultUUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner") ~= 0
 	AllUniques[uuid] = self
@@ -303,7 +303,7 @@ function UniqueData:FindPlayerCopies()
 	if not StringHelpers.IsNullOrEmpty(self.Tag) then
 		for player in GameHelpers.Character.GetPlayers() do
 			local items = GameHelpers.Item.FindTaggedItems(player, self.Tag, false)
-			for item in pairs(items) do
+			for _,item in pairs(items) do
 				if item ~= self.DefaultUUID then
 					self:AddCopy(item)
 				end
@@ -837,6 +837,8 @@ end
 
 ---@param item EsvItem
 local function StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
+	item = GameHelpers.GetItem(item)
+	assert(item ~= nil and GameHelpers.Ext.ObjectIsItem(item), "[WeaponExpansion:UniqueData:StartApplyingProgression] item is not valid.")
 	-- TODO - Testing. Making sure bonuses don't overlap if they're set to append when you save/load/change level/level up etc.
 	-- Maybe they all need to be replacements to avoid that potential issue, in which case the stats need to be reviewed to make sure the progression
 	-- enries aren't nerfing things.
@@ -902,6 +904,8 @@ function UniqueData:ApplyProgression(progressionTable, persist, item, firstLoad)
 		end
 	end
 	if item ~= nil then
+		item = GameHelpers.GetItem(item)
+		assert(item ~= nil and GameHelpers.Ext.ObjectIsItem(item), string.format("[WeaponExpansion:UniqueData:StartApplyingProgression] item (%s) is not valid for unique (%s).", item, self.Tag))
 		StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
 		self.LastProgressionLevel = item.Stats.Level
 	end

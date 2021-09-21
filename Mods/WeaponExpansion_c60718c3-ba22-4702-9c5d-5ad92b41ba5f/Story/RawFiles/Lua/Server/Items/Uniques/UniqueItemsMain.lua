@@ -117,8 +117,8 @@ end
 AllUniques = {}
 
 for id,v in pairs(Uniques) do
-	if not StringHelpers.IsNullOrEmpty(v.UUID) then
-		AllUniques[v.UUID] = v
+	if not StringHelpers.IsNullOrEmpty(v.DefaultUUID) then
+		AllUniques[v.DefaultUUID] = v
 	end
 end
 
@@ -138,6 +138,8 @@ local LinkedUniques = {}
 ---@param item2 string
 ---@param skipSave boolean|nil
 function UniqueManager.LinkItems(item1, item2, skipSave)
+	assert(not StringHelpers.IsNullOrWhitespace(item1), "Item UUID 1 is nil")
+	assert(not StringHelpers.IsNullOrWhitespace(item2), "Item UUID 2 is nil")
 	LinkedUniques[item1] = item2
 	LinkedUniques[item2] = item1
 	if skipSave ~= true then
@@ -145,11 +147,10 @@ function UniqueManager.LinkItems(item1, item2, skipSave)
 	end
 end
 
-UniqueManager.LinkItems(Uniques.MagicMissileWand.UUID, Uniques.MagicMissileRod.UUID, true)
-UniqueManager.LinkItems(Uniques.WarchiefAxe.UUID, Uniques.WarchiefHalberd.UUID, true)
-UniqueManager.LinkItems(Uniques.Bokken.UUID, Uniques.BokkenOneHanded.UUID, true)
-
 function UniqueManager.LoadLinkedUniques()
+	UniqueManager.LinkItems(Uniques.MagicMissileWand.DefaultUUID, Uniques.MagicMissileRod.DefaultUUID, true)
+	UniqueManager.LinkItems(Uniques.WarchiefAxe.DefaultUUID, Uniques.WarchiefHalberd.DefaultUUID, true)
+	UniqueManager.LinkItems(Uniques.Bokken.DefaultUUID, Uniques.BokkenOneHanded.DefaultUUID, true)
 	if PersistentVars.LinkedUniques ~= nil then
 		for uuid,uuid2 in pairs(PersistentVars.LinkedUniques) do
 			if ObjectExists(uuid) == 1 and ObjectExists(uuid2) == 1 then
