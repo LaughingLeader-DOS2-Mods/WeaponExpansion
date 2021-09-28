@@ -69,6 +69,14 @@ object category "I_GRN_LLWEAPONEX_Throwing_Shuriken",6,0,0,0,0,0,0,0
 object category "I_GRN_LLWEAPONEX_Throwing_Shuriken_Poison",2,0,0,0,0,0,0,0
 object category "I_GRN_LLWEAPONEX_Throwing_Spear",1,0,0,0,0,0,0,0
 
+new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsSpecial"
+new subtable "1,1"
+object category "LLWEAPONEX_ThrowingWeapons_Special",1,0,0,0,0,0,0,0
+
+new treasuretable "ST_LLWEAPONEX_ThrowingWeaponsMisc"
+new subtable "1,1"
+object category "LLWEAPONEX_ThrowingWeapons_MiscWeapons",1,0,0,0,0,0,0,0
+
 new treasuretable "ST_LLWEAPONEX_BuyableThrowingWeapons"
 new subtable "4,1"
 object category "I_GRN_LLWEAPONEX_Throwing_Axe1H",1,0,0,0,0,0,0,0
