@@ -184,6 +184,9 @@ end
 --- @param isFromItem boolean
 --- @param param string
 function SkillGetDescriptionParam(skill, character, isFromItem, param)
+	if param == "Damage" and skill.UseWeaponDamage == "Yes" and GameHelpers.CharacterOrEquipmentHasTag(character.Character, "LLWEAPONEX_PacifistsWrath_Equipped") then
+		return GameHelpers.GetDamageText("Physical", 1)
+	end
 	if Skills.DamageParam[param] ~= nil then
 		local param_func = Skills.DamageParam[param]
 		if param_func ~= nil then

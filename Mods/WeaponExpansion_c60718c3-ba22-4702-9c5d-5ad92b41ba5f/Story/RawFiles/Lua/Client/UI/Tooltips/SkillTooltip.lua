@@ -290,6 +290,21 @@ local function OnSkillTooltip(character, skill, tooltip)
 			end
 		end
 	end
+
+	if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then
+		if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
+			local main = character:GetItemBySlot("Weapon")
+			local offhand = character:GetItemBySlot("Shield")
+			if main and GameHelpers.ItemHasTag(main, "LLWEAPONEX_PacifistsWrath_Equipped") then
+				main.Stats.DynamicStats[1].MinDamage = 1
+				main.Stats.DynamicStats[1].MaxDamage = 1
+			end
+			if offhand and GameHelpers.ItemHasTag(offhand, "LLWEAPONEX_PacifistsWrath_Equipped") then
+				offhand.Stats.DynamicStats[1].MinDamage = 1
+				offhand.Stats.DynamicStats[1].MaxDamage = 1
+			end
+		end
+	end
 end
 
 return OnSkillTooltip

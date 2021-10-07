@@ -474,6 +474,14 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 	end
+
+	if GameHelpers.ItemHasTag(item, "LLWEAPONEX_PacifistsWrath_Equipped") then
+		local element = tooltip:GetElement("WeaponDamage")
+		if element then
+			element.MinDamage = 1
+			element.MaxDamage = 1
+		end
+	end
 end
 
 return OnItemTooltip

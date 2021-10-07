@@ -7,6 +7,11 @@
 --- @param level integer
 --- @param noRandomization boolean
 local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+	if skill.UseWeaponDamage == "Yes" and GameHelpers.CharacterOrEquipmentHasTag(attacker.Character, "LLWEAPONEX_PacifistsWrath_Equipped") then
+		local damageList = Ext.NewDamageList()
+		damageList:Add("Physical", 1)
+		return damageList,"Physical"
+	end
 	local skill_func = Skills.Damage[skill.Name]
 	if skill_func ~= nil then
 		local b,damageList,deathType = xpcall(skill_func, debug.traceback, skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
