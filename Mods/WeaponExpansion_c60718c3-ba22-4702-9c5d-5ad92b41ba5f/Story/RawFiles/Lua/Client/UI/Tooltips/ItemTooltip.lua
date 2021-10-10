@@ -5,7 +5,8 @@ local ExtraPropsTags = {
 	LLWEAPONEX_ThiefGloves_Equipped = true,
 	LLWEAPONEX_Blunderbuss_Equipped = true,
 	LLWEAPONEX_MagicMissileWand_Equipped = true,
-	LLWEAPONEX_UniqueThrowingAxeA = true
+	LLWEAPONEX_UniqueThrowingAxeA = true,
+	LLWEAPONEX_PacifistsWrath_Equipped = true,
 }
 
 ---@param tooltip TooltipData

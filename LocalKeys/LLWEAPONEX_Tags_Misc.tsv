@@ -15,6 +15,9 @@ LLWEAPONEX_Pistol_CanReload	Shoot on Cooldown	ha98389e6g8056g4845ga3d8g016b45a2c
 LLWEAPONEX_Rapier_SuckerCombo1Enabled	Dirty Fighting I	hba48fc68g201fg454bga114gae251e299f95
 LLWEAPONEX_Blunderbuss	Blunderbuss	h59b52860gd0e3g4e65g9e61gd66b862178c3
 LLWEAPONEX_ThiefGloves_Equipped	Increases Steal Skill Chance	h685b9c37g43d5g4a7cg8dacg9f5d4d104fcb
+LLWEAPONEX_Blunderbuss_Equipped	Attacks Explode in a 1m Radius	h68cb792dgceffg4eb4gb1fag638d175859cb
+LLWEAPONEX_MagicMissileWand_Equipped	45%/30%/10% Chance for Bonus Missiles	h34401e0bg371fg449cg9e43g39208b508644
+LLWEAPONEX_PacifistsWrath_Equipped	Deals Non-Lethal Damage	hc8fd4ac5g9988g430cg9df3g07e556270b15
 LLWEAPONEX_HARKEN	Harken	h9fee2cfeg963cg43f0ga4fcgdfb79b48f7e0
 LLWEAPONEX_KORVASH	Kor'vash	h7c860e8dgcd03g4877g8406gab762dc6b76e
 LLWEAPONEX_HandCrossbowBolt	Hand Crossbow Rune	h2405a422gfa67g495agb1b5gdde42d586c80
@@ -22,8 +25,6 @@ LLWEAPONEX_PistolBullet	Pistol Rune	he8fa4715ge27ag4b47gb308g4c28e319a9e7
 LLWEAPONEX_EnemyDiedInCombat	Defeating an Enemy in Combat	hc7f8dca2gb752g4627g9351ge185459bc219
 LLWEAPONEX_Pistol_Adrenaline_Active	Pistol Damage Boost Activated	hbefa3efagfeb1g4073g83feg213f15681c0f
 LLWEAPONEX_RunicCannon	Runic Weaponry	h702bf925gf664g45a7gb3f5g34418bfa2c56
-LLWEAPONEX_Blunderbuss_Equipped	Attacks Explode in a 1m Radius	h68cb792dgceffg4eb4gb1fag638d175859cb
-LLWEAPONEX_MagicMissileWand_Equipped	45%/30%/10% Chance for Bonus Missiles	h34401e0bg371fg449cg9e43g39208b508644
 LLWEAPONEX_UniqueBasilusDagger	<font color='#00FFCC'>Haunted</font>	h16aeb04cg8a64g47fdg8ee3g32f2a2c70e5c
 LLWEAPONEX_UniqueBasilusDagger_Description	<font color='#C7A758'>The first enemy hit will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] when taking an action (once per turn), with a [ExtraData:LLWEAPONEX_BasilusDagger_BackstabChance]% chance to be backstabbed.</font>	hb7879842g19c1g4470ga1f7gcc91d53c40c8
 LLWEAPONEX_UniqueThrowingAxeA	Throwable	hb5f309e8gc63fg4bf4g9ff1g25431ae07a8f
