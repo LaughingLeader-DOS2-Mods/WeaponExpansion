@@ -39,7 +39,7 @@ Uniques = {
 	BeholderSword = UniqueData:Create("ddf11ed0-126f-4bec-8360-455ddf9cef12", ProgressionData.BeholderSword, {Tag="LLWEAPONEX_UniqueBeholderGreatsword"}),
 	Bible = UniqueData:Create("bcc43f30-b009-4b42-a4de-1c85a25b522a", ProgressionData.Bible, {Tag="LLWEAPONEX_UniqueBible"}),
 	Blunderbuss = UniqueData:Create("cd6c2b7d-ee74-401b-9866-409c45ae9413", ProgressionData.Blunderbuss, {Tag="LLWEAPONEX_UniqueBlunderbuss"}),
-	Bokken = UniqueData:Create("6d75d449-e021-4b4d-ad2d-c0873127c3b3", ProgressionData.Bokken, {Tag="LLWEAPONEX_UniqueBokken2H"}),
+	PacifistsWrath = UniqueData:Create("6d75d449-e021-4b4d-ad2d-c0873127c3b3", ProgressionData.PacifistsWrath, {Tag="LLWEAPONEX_UniqueBokken2H"}),
 	ChaosEdge = UniqueData:Create("61bbcd14-82a2-4efc-9a66-ac4b8a1310cf", ProgressionData.ChaosEdge, {Tag="LLWEAPONEX_UniqueRunebladeChaosGreatsword"}),
 	BasilusDagger = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03", ProgressionData.BasilusDagger, {Tag="LLWEAPONEX_UniqueBasilusDagger"}),
 	DeathEdge = UniqueData:Create("ea775987-18a6-4947-bb7c-3eea55a6f875", ProgressionData.DeathEdge, {Tag="LLWEAPONEX_UniqueDeathEdge"}),
@@ -66,8 +66,8 @@ Uniques = {
 --Uniques.ArmCannonWeapon.CanMoveToVendingMachine = false
 Uniques.MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", LinkedItem=Uniques.MagicMissileWand, CanMoveToVendingMachine=false, IsLinkedItem=true})
 
-Uniques.BokkenOneHanded = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData.BokkenOneHanded, {Tag="LLWEAPONEX_UniqueBokken1H", LinkedItem=Uniques.Bokken, CanMoveToVendingMachine=false, IsLinkedItem=true})
-Uniques.Bokken.LinkedItem = Uniques.BokkenOneHanded
+Uniques.PacifistsWrath1H = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData.PacifistsWrath1H, {Tag="LLWEAPONEX_UniqueBokken1H", LinkedItem=Uniques.PacifistsWrath, CanMoveToVendingMachine=false, IsLinkedItem=true})
+Uniques.PacifistsWrath.LinkedItem = Uniques.PacifistsWrath1H
 
 Uniques.WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false, IsLinkedItem=true})
 Uniques.WarchiefHalberd.LinkedItem = Uniques.WarchiefAxe
@@ -117,6 +117,7 @@ end
 AllUniques = {}
 
 for id,v in pairs(Uniques) do
+	v.ID = id
 	if not StringHelpers.IsNullOrEmpty(v.DefaultUUID) then
 		AllUniques[v.DefaultUUID] = v
 	end
@@ -150,7 +151,7 @@ end
 function UniqueManager.LoadLinkedUniques()
 	UniqueManager.LinkItems(Uniques.MagicMissileWand.DefaultUUID, Uniques.MagicMissileRod.DefaultUUID, true)
 	UniqueManager.LinkItems(Uniques.WarchiefAxe.DefaultUUID, Uniques.WarchiefHalberd.DefaultUUID, true)
-	UniqueManager.LinkItems(Uniques.Bokken.DefaultUUID, Uniques.BokkenOneHanded.DefaultUUID, true)
+	UniqueManager.LinkItems(Uniques.PacifistsWrath.DefaultUUID, Uniques.PacifistsWrath1H.DefaultUUID, true)
 	if PersistentVars.LinkedUniques ~= nil then
 		for uuid,uuid2 in pairs(PersistentVars.LinkedUniques) do
 			if ObjectExists(uuid) == 1 and ObjectExists(uuid2) == 1 then
@@ -373,6 +374,7 @@ end
 
 function UniqueManager.InitializeUniques()
 	local region = SharedData.RegionData.Current
+	InitOriginsUniques(region)
 	UniqueManager.FindOrphanedUniques()
 	for id,unique in pairs(Uniques) do
 		unique:FindPlayerCopies()

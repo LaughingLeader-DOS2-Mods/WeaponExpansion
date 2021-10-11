@@ -1,4 +1,5 @@
 ---@class UniqueData
+---@field ID string A name for this unique.
 ---@field UUID string The current UUID for the unique.
 ---@field DefaultUUID string The default UUID for the unique (the initial global item).
 ---@field Owner string
@@ -96,6 +97,7 @@ end
 function UniqueData:Create(uuid, progressionData, params)
     local this =
     {
+		ID = "",
 		DefaultUUID = uuid or "",
 		LevelData = {},
 		DefaultOwner = StringHelpers.NULL_UUID,
@@ -168,7 +170,7 @@ end
 
 ---Gets the UUID of this unique owned by the owner, or the default value.
 ---@param owner string
----@param returnDefault boolean|nil
+---@param returnDefault boolean|nil If true, the regular UUID value is returned instead of nil.
 ---@return UUID
 function UniqueData:GetUUID(owner, returnDefault)
 	if self.Owner == owner then
@@ -317,63 +319,10 @@ function UniqueData:Initialize(region, firstLoad, uuid)
 		uuid = self.UUID
 	end
 	if ObjectExists(uuid) == 1 then
-		local isInUniqueChest = false
 		self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
-		local item = Ext.GetItem(uuid)
-		if self.Owner == nil then
-			local owner = TryGetOwner(item)
-			if owner == NPC.UniqueHoldingChest then
-				isInUniqueChest = true
-				owner = nil
-			end
-			if owner ~= nil then
-				self.Owner = owner
-			end
-		end
 		if firstLoad == true then
-			self:ApplyProgression(self.ProgressionData, nil, item, true)
+			self:ApplyProgression(self.ProgressionData, nil, Ext.GetItem(uuid), true)
 		end
-		if not self:IsReleasedFromOwner(uuid) then
-			--The initialized flag was set before it was moved to the default owner, so it's sitting in the unique chest.
-			if self.Initialized and self.DefaultOwner ~= nil and isInUniqueChest then
-				self.Initialized = false
-			end
-			if not self.Initialized then
-				local targetOwner = self.DefaultOwner
-				if type(self.DefaultOwner) == "table" then
-					targetOwner = self.DefaultOwner[region] or self.DefaultOwner["Any"]
-				end
-				if self:CanMoveToOwner(targetOwner, region) then
-					self:Transfer(targetOwner, self.AutoEquipOnOwner)
-				else
-					self:MoveToRegionPosition(region, item)
-				end
-				ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
-				self.Initialized = true
-			else
-				if not self.CanMoveToVendingMachine then
-					if self.Owner == NPC.VendingMachine then
-						local linkedItem = UniqueManager.GetLinkedUnique(uuid)
-						if linkedItem ~= nil then
-							local linkedOwner = TryGetOwner(Ext.GetItem(linkedItem))
-							if linkedOwner == NPC.UniqueHoldingChest then
-								-- Skip moving out of the vending machine
-							else
-								ItemToInventory(uuid, NPC.UniqueHoldingChest, 1, 0, 0)
-							end
-						else
-							ItemToInventory(uuid, NPC.UniqueHoldingChest, 1, 0, 0)
-						end
-					end
-				--Should be sitting in the vending machine or somewhere in the region, not the unique chest
-				elseif isInUniqueChest and self.LinkedItem == nil then
-					self:MoveToRegionPosition(region, item)
-				end
-			end
-		elseif self.Owner == nil then
-			self:MoveToRegionPosition(region, item)
-		end
-		--PrintDebug("Unique initialized:", uuid, item.DisplayName, self.Owner)
 	end
 end
 
@@ -390,17 +339,17 @@ end
 ---@param uuid UUID|nil
 function UniqueData:Equip(target, uuid)
 	uuid = uuid or self.UUID
-	assert(not StringHelpers.IsNullOrWhitespace(uuid) and ObjectExists(uuid) == 1, "[WeaponExpansion:UniqueData:Equip] uuid must be a valid item UUID.")
-	assert(not StringHelpers.IsNullOrWhitespace(target) and ObjectExists(target) == 1, "[WeaponExpansion:UniqueData:Equip] target must be a valid UUID.")
-	local item = Ext.GetItem(uuid)
-	local locked = item.UnEquipLocked
-	ItemLockUnEquip(uuid, 0)
-	CharacterEquipItem(target, uuid)
-	if self.OnEquipped ~= nil then
-		pcall(self.OnEquipped, self, target)
-	end
-	if locked then
-		ItemLockUnEquip(uuid, 1)
+	if ObjectExists(uuid) == 1 then
+		local item = Ext.GetItem(uuid)
+		local locked = item.UnEquipLocked
+		if GameHelpers.Character.EquipItem(target, item) then
+			if self.OnEquipped ~= nil then
+				pcall(self.OnEquipped, self, target)
+			end
+			if locked then
+				ItemLockUnEquip(item.MyGuid, 1)
+			end
+		end
 	end
 end
 
@@ -963,6 +912,21 @@ end
 ---@param item EsvItem
 function UniqueData:OnUnEquipped(character, item)
 	InvokeListenerCallbacks(self.UnEquippedCallbacks, self, character, item)
+end
+
+function UniqueData:PrintPosition()
+	local item = Ext.GetItem(self:GetUUID(nil,true))
+	if item then
+		if item.WorldPos then
+			fprint(LOGLEVEL.WARNING, "[Unique:%s]\n%s", self.ID, Lib.serpent.block({
+				[SharedData.RegionData.Current] = {
+					IsDefault = true,
+					Position = item.WorldPos,
+					Rotation = {GetRotation(item.MyGuid)}
+				}
+			}))
+		end
+	end
 end
 
 return UniqueData

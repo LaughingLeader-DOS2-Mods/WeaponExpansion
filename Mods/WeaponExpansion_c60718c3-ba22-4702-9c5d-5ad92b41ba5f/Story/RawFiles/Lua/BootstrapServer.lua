@@ -146,6 +146,7 @@ Ext.Require("Server/Origins/OriginsMain.lua")
 Ext.Require("Server/Origins/OriginsEvents.lua")
 Ext.Require("Server/Items/ItemHandler.lua")
 Ext.Require("Server/Items/Uniques/UniqueItemsMain.lua")
+Ext.Require("Server/Origins/OriginsUniqueItems.lua")
 Ext.Require("Server/Items/Quivers.lua")
 Ext.Require("Server/Items/CraftingMechanics.lua")
 if Ext.IsDeveloperMode() then

@@ -126,8 +126,8 @@ local bonuses = {
 		[13] = runeslot2,
 		[15] = runeslot3,
 	},
-	Bokken = {},
-	--BokkenOneHanded = {},
+	PacifistsWrath = {},
+	PacifistsWrath1H = {},
 	ChaosEdge = {
 		[2] = ue:Create("TwoHanded", 1),
 		[3] = ue:Create("Luck", 1),

@@ -1,0 +1,120 @@
+local ORIGINS_UNIQUES = {
+	AnvilMace = {UUID = "f3c71d85-1cc3-431f-b236-ad838bf2e418", Target=Origin.Harken, Equip=true},
+	ArmCannon = {UUID = "a1ce4c1c-a535-4184-a1df-268eb4035fe8"},
+	AssassinHandCrossbow = {UUID = "70c59769-2838-4137-9421-4e251fecdc89"},
+	BalrinAxe = {UUID = "e4dc654c-db51-4b55-a342-83a864cfeff9"},
+	BasilusDagger = {UUID = "5b5c20e1-cef4-40a2-b367-a984c38c1f03", Target={
+		FJ_FortJoy_Main = {
+			IsDefault = true,
+			Position = {
+				53.51690673828125,
+				15.027082443237305,
+				686.8984375
+			},
+			Rotation = {
+				3.2785706520080566,
+				-9.613316535949707,
+				-2.7614781856536865
+			}
+		}
+	}},
+	BeholderSword = {UUID = "ddf11ed0-126f-4bec-8360-455ddf9cef12"},
+	Bible = {UUID = "bcc43f30-b009-4b42-a4de-1c85a25b522a"},
+	Blunderbuss = {UUID = "cd6c2b7d-ee74-401b-9866-409c45ae9413", Target={
+		FJ_FortJoy_Main = {
+			IsDefault = true,
+			Position = {
+					213.24302673339844,
+					-13.507736206054688,
+					591.645751953125
+			},
+			Rotation = {
+					-3.8110156059265137,
+					5.9931626319885254,
+					21.183271408081055
+			}
+		}
+	}},
+	PacifistsWrath = {UUID = "6d75d449-e021-4b4d-ad2d-c0873127c3b3"},
+	--PacifistsWrath1H = {UUID = "a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"},
+	ChaosEdge = {UUID = "61bbcd14-82a2-4efc-9a66-ac4b8a1310cf"},
+	DeathEdge = {UUID = "ea775987-18a6-4947-bb7c-3eea55a6f875"},
+	DemoBackpack = {UUID = "253e14da-cdb9-4cda-b9d4-352d8ed784c5"},
+	DemonGauntlet = {UUID = "0ac0d813-f58c-4399-99a8-1626a419bc53"},
+	DivineBanner = {UUID = "3113b901-340a-4f24-a38b-473e61d23371", Target=NPC.BishopAlexander, Equip=true},
+	FireRunebladeKatana = {UUID = "6f735ef9-524c-4514-b37f-c48a20b313c5"},
+	Frostdyne = {UUID = "S5d8ec362-618e-48e9-87c2-dbc18ea4e779", Target=NPC.Slane},
+	HarkenPowerGloves = {UUID = "1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", Target=Origin.Harken, Equip=true},
+	Harvest = {UUID = "d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1"},
+	LoneWolfBanner = {UUID = "aa63e570-695a-461b-bb35-60cf7c915570"},
+	--MagicMissileRod = {UUID = "292b4b04-4ba1-4fa3-96df-19eab320c50f"},
+	MagicMissileWand = {UUID = "f8958c1e-1c9d-4fa9-b03f-b883c65f95c3"},
+	MonkBlindfold = {UUID = "4258f164-b548-471f-990d-ae641960a842"},
+	Muramasa = {UUID = "52c0b4a4-3906-4229-93a9-b83aea9e657c"},
+	OgreScroll = {UUID = "cc4d26df-c8c4-458e-b88f-610387741533"},
+	Omnibolt = {UUID = "dec81eed-fcab-48cc-bd67-0431abe4260c"},
+	PowerPole = {UUID = "da0ac3e5-8a9e-417c-b516-dc8cd9245d0e"},
+	WarchiefAxe = {UUID = "056c2c38-b7be-4e06-be41-99b79ffe83c2"},
+	--WarchiefHalberd = {UUID = "6c52f44e-1c27-4409-9bfe-f89ee5af4a0d"},
+	Wraithblade = {UUID = "c68b5afa-2574-471d-85ac-0738ee0a6393"},
+}
+
+local REGIONS = {
+	TUT_Tutorial = 0,
+	FJ_FortJoy_Main = 1,
+	LV_HoE_Main = 2,
+	RC_Main = 3,
+	CoS_Main = 4,
+	ARX_Main = 5,
+	ARX_Endgame = 6
+}
+
+local function InitializeUnique(id,data,region)
+	local t = type(data.Target)
+	if t == "string" then
+		if ObjectExists(data.Target) == 1 and GetRegion(data.Target) == region then
+			ItemToInventory(data.UUID, data.Target, 1, 0, 1)
+			ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+			if data.Equip and ObjectIsCharacter(data.Target) == 1 and ItemIsEquipable(data.UUID) == 1 then
+				GameHelpers.Character.EquipItem(data.Target, data.UUID)
+			end
+		end
+	elseif t == "table" then
+		local targetData = data.Target[region]
+		if targetData then
+			local x,y,z = table.unpack(targetData.Position)
+			local p,y,r = table.unpack(targetData.Rotation or {0,0,0})
+			ItemToTransform(data.UUID, x, y, z, p, y, r, 1, StringHelpers.NULL_UUID)
+			ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+		else
+			local defaultRegion = nil
+			for k,v in pairs(data.Target) do
+				if v.IsDefault then
+					defaultRegion = k
+					break
+				end
+			end
+			local regionVal = REGIONS[defaultRegion] or -1
+			local currentVal = REGIONS[region] or 999
+			-- Region is in a past act
+			if regionVal < currentVal then
+				ItemToInventory(data.UUID, NPC.VendingMachine, 1, 0, 1)
+				ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+			end
+		end
+	end
+end
+
+function InitOriginsUniques(region)
+	if not REGIONS[region] then
+		return
+	end
+	for id,data in pairs(ORIGINS_UNIQUES) do
+		if ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 then
+			local b,err = xpcall(InitializeUnique, debug.traceback, id, data, region)
+			if not b then
+				Ext.PrintError(err)
+			end
+		end
+	end
+end
