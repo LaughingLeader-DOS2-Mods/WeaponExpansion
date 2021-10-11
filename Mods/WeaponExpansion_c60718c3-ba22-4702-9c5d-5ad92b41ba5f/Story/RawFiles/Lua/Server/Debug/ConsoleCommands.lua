@@ -28,14 +28,11 @@ if Vars.DebugMode then
 	--TeleportTo(CharacterGetHostCharacter(), Mods.WeaponExpansion.NPC.VendingMachine)
 	Ext.RegisterConsoleCommand("weaponex_movealluniques", function()
 		local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
-		for i,v in pairs(Uniques) do
+		for k,v in pairs(Uniques) do
 			if not v.IsLinkedItem then
-				local owner = v.Owner
-				if not v:IsReleasedFromOwner() or owner == NPC.VendingMachine or owner == NPC.UniqueHoldingChest then
-					v:ReleaseFromOwner()
-					v:Transfer(host)
-				elseif not GameHelpers.Character.IsPlayer(owner) and owner ~= host then
-					v:Transfer(host)
+				local b,err = xpcall(v.Transfer, debug.traceback, v, host)
+				if not b then
+					fprint(LOGLEVEL.ERROR, "Error transferring Unique [%s]:\n%s", k, err)
 				end
 			end
 		end
