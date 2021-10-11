@@ -372,29 +372,27 @@ end
 
 local buttonSpacingX = 16
 
-function MasteryMenu.RepositionToggleButton(ui, width, height, skillbarVisible)
-	local main = ui:GetRoot()
+function MasteryMenu.RepositionToggleButton(dialogOpen)
+	local main = MasteryMenu.ToggleButtonInstance:GetRoot()
 	if main then
 		local menu_btn = main.menu_btn
-		local hotBar = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
-		--local dialog = Ext.GetBuiltinUI("Public/Game/GUI/dialog.swf")
-		if hotBar ~= nil then
-			local hotbarMain = hotBar:GetRoot()
-			local chatButton = hotbarMain.hotbar_mc.chatBtn_mc
-			--print("hotBar:", hotbarMain.y, hotbarMain.hotbar_mc.y, chatButton.y)
-			
-			menu_btn.x = hotbarMain.hotbar_mc.x + chatButton.x + chatButton.width + buttonSpacingX
-			
-			if skillbarVisible ~= false then
-				menu_btn.y = main.toggleButtonDefaultY
-				--menu_btn.y = (hotbarMain.height - hotbarMain.hotbar_mc.height) - 5
-				--menu_btn.y = (main.designResHeight or 1080) - (hotbarMain.hotbar_mc.basebarFrame_mc.height/2)
-			else
-				menu_btn.y = main.designResHeight or 1080
+		if dialogOpen == nil then
+			dialogOpen = false
+			local dialog = Ext.GetUIByType(Data.UIType.dialog)
+			if dialog then
+				dialog = dialog:GetRoot()
+				if dialog and dialog.dialog_mc.visible then
+					dialogOpen = true
+				end
 			end
-			--print("button:", menu_btn.x, menu_btn.y, dialogShown, hotbarMain.height, hotbarMain.hotbar_mc.height)
+		end
+
+		if dialogOpen then
+			menu_btn.x = 96
+			menu_btn.y = main.stage.stageHeight
 		else
-			menu_btn.y = main.designResHeight or 1080
+			menu_btn.x = main.defaultButtonPosition.x
+			menu_btn.y = main.defaultButtonPosition.y
 		end
 	end
 end
@@ -409,7 +407,7 @@ function MasteryMenu.SetToggleButtonVisibility(isVisible, tween)
 				MasteryMenu.ToggleButtonInstance:Hide()
 			end
 		else
-			MasteryMenu.RepositionToggleButton(MasteryMenu.ToggleButtonInstance)
+			MasteryMenu.RepositionToggleButton()
 			if tween == true then
 				MasteryMenu.ToggleButtonInstance:Show()
 				MasteryMenu.ToggleButtonInstance:Invoke("fade", 0.0, 1.0, 1.2)
@@ -446,7 +444,7 @@ function MasteryMenu.InitializeToggleButton()
 				end
 			end)
 			Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call,...)
-				MasteryMenu.RepositionToggleButton(ui, ...)
+				MasteryMenu.RepositionToggleButton()
 			end)
 		else
 			Ext.PrintError("[WeaponExpansion] Error creating MasteryMenuToggleButton.swf.")
@@ -726,6 +724,25 @@ Input.RegisterListener(function(eventName, pressed, id, inputMap, controllerEnab
 			end
 		end
 	end
+end)
+
+Ext.RegisterUITypeInvokeListener(Data.UIType.dialog, "hideWin", function()
+	MasteryMenu.RepositionToggleButton(false)
+end)
+Ext.RegisterUITypeInvokeListener(Data.UIType.dialog, "hideDialog", function()
+	MasteryMenu.RepositionToggleButton(false)
+end)
+Ext.RegisterUITypeInvokeListener(Data.UIType.dialog, "showWin", function()
+	MasteryMenu.RepositionToggleButton(true)
+end)
+Ext.RegisterUITypeInvokeListener(Data.UIType.dialog, "showDialog", function()
+	MasteryMenu.RepositionToggleButton(true)
+end)
+Ext.RegisterUITypeInvokeListener(Data.UIType.hotBar, "showSkillBar", function(ui,method,visible)
+	MasteryMenu.RepositionToggleButton(visible == false)
+end)
+Ext.RegisterUITypeInvokeListener(Data.UIType.bottomBar_c, "showSkillBar", function(ui,method,visible)
+	MasteryMenu.RepositionToggleButton(visible == false)
 end)
 
 return {

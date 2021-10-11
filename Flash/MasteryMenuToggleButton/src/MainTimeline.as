@@ -5,23 +5,24 @@ package
 	import flash.external.ExternalInterface;
 	import fl.motion.easing.Quartic;
 	import LS_Classes.larTween;
+	import flash.geom.Point;
 	
 	public dynamic class MainTimeline extends MovieClip
 	{
 		public var menu_btn:MovieClip;
 		
-		public var layout:String;
-		public var alignment:String;
-		public const anchorId:String = "masteryMenuToggleButton";
-		public const anchorPos:String = "center";
-		public const anchorTPos:String = "center";
-		public const anchorTarget:String = "screen";
-
-		public const designResWidth = 1920;
-		public const designResHeight = 1080;
-		public var resWidth:Number = 1920;
-		public var resHeight:Number = 1080;
+		public var events:Array;
+		public var alignment:String = "none";
+		public var layout:String = "fillVFit";
+		public var anchorId:String = "masteryMenuToggleButton";
+		public var anchorPos:String = "topleft";
+		public var anchorTPos:String = "topleft";
+		public var anchorTarget:String = "screen";
 		public var uiScaling:Number;
+		public const designResolution:Point = new Point(1920,1080);
+		public var defaultButtonPosition:Point = new Point(175,1015.45);
+		public var screenWidth:Number = 0;
+		public var screenHeight:Number = 0;
 
 		public function MainTimeline()
 		{
@@ -35,14 +36,26 @@ package
 			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
 		}
 
+		public function onEventResize() : *
+		{
+			ExternalInterface.call("setPosition",this.anchorPos,this.anchorTarget,this.anchorPos);
+		}
+
 		public function onEventResolution(w:Number, h:Number) : *
 		{
-			w = w / this.uiScaling;
-			h = h / this.uiScaling;
-			var resRatio:uint = Math.floor(w / h * (this.designResWidth / this.uiScaling));
-			resWidth = w;
-			resHeight = h;
-			ExternalInterface.call("repositionMasteryMenuToggleButton", w, h);
+			// w = w / this.uiScaling;
+			// h = h / this.uiScaling;
+			// var resRatio:uint = Math.floor(w / h * (this.designResWidth / this.uiScaling));
+			// resWidth = w;
+			// resHeight = h;
+			if(this.screenWidth != w || this.screenHeight != h)
+			{
+				ExternalInterface.call("setPosition",this.anchorPos,this.anchorTarget,this.anchorPos);
+				this.screenWidth = w;
+				this.screenHeight = h;
+				this.uiScaling = h / this.designResolution.y;
+				ExternalInterface.call("repositionMasteryMenuToggleButton", w, h);
+			}
 		}
 		
 		public function setToggleButtonTooltip(text:String) : *
@@ -92,10 +105,14 @@ package
 			fadeTween = new larTween(this.menu_btn,"alpha",Quartic.easeIn,startAlpha,endAlpha,speed);
 		}
 		
-		internal function frame1() : *
+		public function frame1() : void
 		{
-			this.layout = "fixed";
-			this.alignment = "none";
+			this.anchorId = "masteryMenuToggleButton";
+			this.anchorPos = "topleft";
+			this.anchorTPos = "topleft";
+			this.anchorTarget = "screen";
+			this.layout = "fillVFit";
+			this.uiScaling = 1;
 		}
 	}
 }
