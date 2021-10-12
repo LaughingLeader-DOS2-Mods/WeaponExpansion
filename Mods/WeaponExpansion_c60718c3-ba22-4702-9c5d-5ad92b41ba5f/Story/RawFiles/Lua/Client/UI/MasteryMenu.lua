@@ -204,6 +204,22 @@ end
 local iconPattern = "(<icon.-/>)"
 --<icon id='Target_LLWEAPONEX_BasicAttack' icon='Action_AttackGround'/>
 
+local iconIntId = 0
+
+---@param ui UIObject
+local function RegisterIcon(ui, call, name, icon, iconType)
+	local iconSize = iconType == 2 and 40 or 64
+	print(call,name,icon,iconType)
+	ui:ClearCustomIcon(name)
+	ui:SetCustomIcon(name, icon, iconSize, iconSize)
+end
+
+local function ClearIcons(ui, call, count)
+	for i=0,count do
+		MasteryMenu.Instance:ClearCustomIcon(string.format("masteryMenu_%i", i))
+	end
+end
+
 ---@param ui UIObject
 local function parseDescription(ui, index, descriptionText)
 	local icons = {}
@@ -233,17 +249,13 @@ local function parseDescription(ui, index, descriptionText)
 		end
 	end
 
-	local iconIntId = 0
-
 	for i,v in pairs(result) do
+		print(Lib.serpent.block(v.Icon))
 		if v.Icon ~= "" then
 			local _,_,iconName = v.Icon:find("id='(.-)'")
-			local _,_,icon = v.Icon:find("icon='(.-)'")
+			local _,_,icons = v.Icon:find("icon='(.-)'")
 			local _,_,iconType = v.Icon:find("type='(.-)'")
-			local iggyIconName = string.format("masteryMenu_%i", iconIntId)
-			iconIntId = iconIntId + 1
-			ui:SetCustomIcon(iggyIconName, icon, 64, 64)
-			index = pushDescriptionEntry(ui, index, v.Text, iconName, "iggy_" .. iggyIconName, iconType)
+			index = pushDescriptionEntry(ui, index, v.Text, iconName, icons, iconType)
 		else
 			index = pushDescriptionEntry(ui, index, v.Text, "", "", nil)
 		end
@@ -262,7 +274,7 @@ local function GetAdditionalMasteryRankText(mastery, rank)
 	return nil
 end
 
-local function buildMasteryDescription(ui, mastery)
+local function buildMasteryDescription(ui, this, mastery)
 	local data = Masteries[mastery]
 	local rank = MasteryMenu.MasteryData.Masteries[mastery].Rank
 	local index = 0
@@ -314,10 +326,11 @@ local function buildMasteryDescription(ui, mastery)
 		end
 		i = i + 1
 	end
-	ui:Invoke("buildDescription")
+	this.buildDescription()
 end
 
 local function OnMenuEvent(ui, call, ...)
+	local this = ui:GetRoot()
 	local params = {...}
 	if call ~= "overMastery" then
 		PrintDebug("[WeaponExpansion:MasteryMenu.lua:OnMenuEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
@@ -327,9 +340,9 @@ local function OnMenuEvent(ui, call, ...)
 	elseif call == "onMasterySelected" then
 		MasteryMenu.LastSelected = params[1]
 		MasteryMenu.SelectedMastery = params[2]
-		buildMasteryDescription(ui, MasteryMenu.SelectedMastery)
+		buildMasteryDescription(ui, this, MasteryMenu.SelectedMastery)
 	elseif call == "selectedMastery" then
-		ui:Invoke("selectMastery", params[1])
+		this.selectMastery(params[1])
 	elseif call == "mastery_showIconTooltip" then
 		if params[1] == 1 then
 			MasteryMenu.DisplayingSkillTooltip = true
@@ -398,7 +411,6 @@ function MasteryMenu.RepositionToggleButton(dialogOpen)
 end
 
 function MasteryMenu.SetToggleButtonVisibility(isVisible, tween)
-	print("MasteryMenu.SetToggleButtonVisibility", isVisible, tween)
 	if MasteryMenu.ToggleButtonInstance ~= nil then
 		if not isVisible then
 			if tween == true then
@@ -495,10 +507,11 @@ function MasteryMenu.InitializeMasteryMenu()
 	end
 	if ui ~= nil and MasteryMenu.Open == false then
 		MasteryMenu.Instance = ui
-		ui:GetRoot().controllerEnabled = LeaderLib.Vars.ControllerEnabled
-		ui:Invoke("setEmptyListText", Text.MasteryMenu.NoMasteriesTitle.Value, Text.MasteryMenu.NoMasteriesDescription.Value)
-		ui:Invoke("setTooltipText", Text.MasteryMenu.MasteredTooltip.Value)
-		ui:Invoke("setMaxRank", Mastery.Variables.MaxRank)
+		local this = MasteryMenu.Instance:GetRoot()
+		this.controllerEnabled = LeaderLib.Vars.ControllerEnabled
+		this.setEmptyListText(Text.MasteryMenu.NoMasteriesTitle.Value, Text.MasteryMenu.NoMasteriesDescription.Value)
+		this.setTooltipText(Text.MasteryMenu.MasteredTooltip.Value)
+		this.setMaxRank(Mastery.Variables.MaxRank)
 		
 		local xpMax = Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required
 		if xpMax <= 0 then
@@ -511,11 +524,11 @@ function MasteryMenu.InitializeMasteryMenu()
 			local barPercentage = 0
 			local xp = data.Required
 			barPercentage = (xp / xpMax)
-			--PrintDebug("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] rank("..tostring(i)..") xp("..tostring(xp)..") xpMax("..tostring(xpMax)..") barPercentage("..tostring(barPercentage)..")")
-			ui:Invoke("setRankNodePosition", i, barPercentage)
+			this.setRankNodePosition(i, barPercentage)
 			i = i + 1
 		end
 		if not MasteryMenu.RegisteredListeners then
+			ui:SetCustomIcon("masteryMenu_unknown", "LeaderLib_Placeholder", 64, 64)
 			Ext.RegisterUICall(ui, "requestCloseUI", OnMenuEvent)
 			Ext.RegisterUICall(ui, "requestCloseMasteryMenu", OnMenuEvent)
 			Ext.RegisterUICall(ui, "buttonPressed", OnMenuEvent)
@@ -524,6 +537,8 @@ function MasteryMenu.InitializeMasteryMenu()
 			Ext.RegisterUICall(ui, "onMasterySelected", OnMenuEvent)
 			Ext.RegisterUICall(ui, "mastery_showIconTooltip", OnMenuEvent)
 			Ext.RegisterUICall(ui, "mastery_hideTooltip", OnMenuEvent)
+			Ext.RegisterUICall(ui, "registerIcon", RegisterIcon)
+			Ext.RegisterUICall(ui, "clearIcons", ClearIcons)
 			
 			if Vars.DebugMode then
 				Ext.RegisterUICall(ui, "showSkillTooltip", OnMenuEvent)
@@ -583,7 +598,9 @@ local function getRankTooltip(data, i)
 end
 
 local function BuildMenuEntries(ui)
-	ui:Invoke("resetList")
+	local this = ui:GetRoot()
+	this.resetList()
+	iconIntId = 0
 	local masteryKeys = {}
 	for tag,data in pairs(Masteries) do
 		if MasteryMenu.RankVisibility == VisibilityMode.ShowAll or hasMinimumMasteryRankData(MasteryMenu.MasteryData, tag, 1) then
@@ -626,15 +643,15 @@ local function BuildMenuEntries(ui)
 			local xpPercentage = math.floor(barPercentage * 100)
 			local rankDisplayText = GameHelpers.GetStringKeyText("LLWEAPONEX_UI_MasteryMenu" .. "_Rank"..tostring(rank), "")
 			local masteryColorTitle = getMasteryDescriptionTitle(data)
-			ui:Invoke("addMastery", i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
+			this.addMastery(i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
 			local expRankDisplay = rankDisplayText
 			if rank >= Mastery.Variables.MaxRank then
 				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayText)
 			end
-			ui:Invoke("setExperienceBarTooltip", i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, Common.FormatNumber(xp), Common.FormatNumber(xpMax)))
+			this.setExperienceBarTooltip(i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, Common.FormatNumber(xp), Common.FormatNumber(xpMax)))
 			
 			for k=1,Mastery.Variables.MaxRank,1 do
-				ui:Invoke("setRankTooltipText", i, k, getRankTooltip(data, k))
+				this.setRankTooltipText(i, k, getRankTooltip(data, k))
 				--print("Set rank tooltip: ", i, k)
 			end
 			
@@ -642,7 +659,7 @@ local function BuildMenuEntries(ui)
 			i = i + 1
 		end
 	end
-	ui:Invoke("selectMastery", MasteryMenu.LastSelected, true)
+	this.selectMastery(MasteryMenu.LastSelected, true)
 end
 
 ---@param CharacterMasteryData characterMasteryData
@@ -660,11 +677,12 @@ local function OpenMasteryMenu(characterMasteryData)
 	local ui = Ext.GetUI("MasteryMenu")
 	if ui ~= nil then
 		MasteryMenu.Instance = ui
-		ui:Invoke("setTitle", Text.MasteryMenu.Title.Value)
-		ui:Invoke("setButtonText", Text.MasteryMenu.CloseButton.Value)
+		local this = MasteryMenu.Instance:GetRoot()
+		this.setTitle(Text.MasteryMenu.Title.Value)
+		this.setButtonText(Text.MasteryMenu.CloseButton.Value)
 		BuildMenuEntries(ui)
-		ui:Invoke("selectMastery", MasteryMenu.LastSelected, true)
-		ui:Invoke("openMenu")
+		this.selectMastery(MasteryMenu.LastSelected, true)
+		this.openMenu()
 		MasteryMenu.Open = true
 		CloseOtherPanels()
 	else

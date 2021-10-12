@@ -3,9 +3,12 @@ package desc
 	import flash.display.MovieClip;
 	import LS_Classes.scrollList;
 	import LS_Classes.horizontalList;
+	import flash.external.ExternalInterface;
 	
 	public dynamic class DescriptionList extends scrollList
 	{
+		public var icon_index:int = 0;
+		
 		public function DescriptionList()
 		{
 			super();
@@ -15,6 +18,12 @@ package desc
 		internal function frame1() : *
 		{
 			stop();
+		}
+
+		public function clearIcons() : void
+		{
+			ExternalInterface.call("clearIcons", icon_index);
+			this.icon_index = 0;
 		}
 
 		public function addText(text:String, reposition:Boolean = true) : *
@@ -29,9 +38,24 @@ package desc
 		{
 			var entryContent:DescriptionIcon = new DescriptionIcon();
 			entryContent.id = id;
-			entryContent.icon = icon;
 			entryContent.iconType = iconType;
-			entryContent.createIcon();
+			switch(icon)
+			{
+				case "LLWEAPONEX_UI_PassiveBonus":
+					entryContent.icon = "LLWEAPONEX_UI_PassiveBonus";
+					entryContent.createIcon_symbol();
+					break;
+				case "":
+					entryContent.icon = "iggy_masteryMenu_unknown";
+					entryContent.createIcon();
+					break;
+				default:
+					var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
+					ExternalInterface.call("registerIcon", iconIggyName, icon, iconType);
+					entryContent.icon = "iggy_" + iconIggyName;
+					entryContent.createIcon();
+					this.icon_index = this.icon_index + 1;
+			}
 			addElement(entryContent, reposition, false);
 		}
 
@@ -98,9 +122,24 @@ package desc
 				//trace(iconId, iconName, iconType)
 				var entryContent:DescriptionIcon = new DescriptionIcon();
 				entryContent.id = iconId;
-				entryContent.icon = iconName;
+				switch(iconName)
+				{
+					case "LLWEAPONEX_UI_PassiveBonus":
+						entryContent.icon = "LLWEAPONEX_UI_PassiveBonus";
+						entryContent.createIcon_symbol();
+						break;
+					case "":
+						entryContent.icon = "iggy_masteryMenu_unknown";
+						entryContent.createIcon();
+						break;
+					default:
+						var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
+						ExternalInterface.call("registerIcon", iconIggyName, iconName, iconType);
+						entryContent.icon = "iggy_" + iconIggyName;
+						entryContent.createIcon();
+						this.icon_index = this.icon_index + 1;
+				}
 				entryContent.iconType = iconType;
-				entryContent.createIcon();
 				entryList.addElement(entryContent, false, false);
 				i++;
 			}

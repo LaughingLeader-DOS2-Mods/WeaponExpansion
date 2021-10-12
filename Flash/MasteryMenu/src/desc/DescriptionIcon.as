@@ -5,6 +5,7 @@ package desc
 	import flash.external.ExternalInterface;
 	import flash.geom.Point;
 	import iggy.IggyIcon;
+	import iggy.IggyStatusIcon;
 
 	public dynamic class DescriptionIcon extends MovieClip
 	{
@@ -31,8 +32,8 @@ package desc
 				h = 40;
 				if (this.iconType == 2)
 				{
-					statusbg_mc = new StatusBackground();
-					this.addChild(statusbg_mc);
+					this.statusbg_mc = new StatusBackground();
+					this.addChild(this.statusbg_mc);
 				}
 			}
 			icon_mc = new IconDisplay(icon,w,h);
@@ -47,33 +48,34 @@ package desc
 
 		public function createIcon(w:int=64,h:int=64) : *
 		{
+			if (this.iconType == 2)
+			{
+				this.statusbg_mc = new StatusBackground();
+				this.addChild(this.statusbg_mc);
+			}
+			
 			if (this.iconType >= 2)
 			{
-				w = 40;
-				h = 40;
-				if (this.iconType == 2)
-				{
-					statusbg_mc = new StatusBackground();
-					this.addChild(statusbg_mc);
-				}
+				icon_mc = new IggyStatusIcon();
 			}
-			icon_mc = new IggyIcon(w,h);
+			else
+			{
+				icon_mc = new IggyIcon();
+			}
+
 			icon_mc.name = this.icon;
-			addChild(icon_mc);
+			this.addChild(icon_mc);
 
 			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			this.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
-
-			this.icon_mc.width = w;
-			this.icon_mc.height = h;
 		}
 
 		public function setAltBackground() : *
 		{
-			statusbg_mc = new StatusBackgroundAlt();
-			statusbg_mc.width = 51;
-			statusbg_mc.height = 51;
-			this.addChild(statusbg_mc);
+			this.statusbg_mc = new StatusBackgroundAlt();
+			this.statusbg_mc.width = 51;
+			this.statusbg_mc.height = 51;
+			this.addChild(this.statusbg_mc);
 			icon_mc.x = 5.5;
 			icon_mc.y = 5.5;
 		}

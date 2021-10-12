@@ -230,6 +230,7 @@ package masteryMenu
 			this.name_txt.htmlText = this.emptyListTitle;
 			this.descriptionList.clearElements();
 			this.descriptionList.addText(emptyListDescription);
+			this.descriptionList.clearIcons();
 			this.resetTextScrollbar();
 			this.masteryCount = 0;
 			noMasteries_mc.visible = true;
