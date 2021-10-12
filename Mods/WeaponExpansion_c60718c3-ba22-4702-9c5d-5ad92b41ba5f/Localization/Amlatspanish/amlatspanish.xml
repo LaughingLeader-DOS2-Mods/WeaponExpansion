@@ -582,7 +582,7 @@
 	<content contentuid="h3be6d074g49a8g46f4gb9c2gb667b45e4a9e">Runic Cannon</content>
 	<content contentuid="h3be90898g6b32g40f4g88c8gf3942133d944">Ashwood Branch</content>
 	<content contentuid="h3c0e91d5g36efg4a8cg93d6gc45f6bf374c7">Spellsponge</content>
-	<content contentuid="h3c1cc3f6g61b3g45dfg9b9eg473e08e8b698">Steal</content>
+	<content contentuid="h3c1cc3f6g61b3g45dfg9b9eg473e08e8b698">Mug</content>
 	<content contentuid="h3c24295cg7c91g42dega708g63b3f524e4ab">A sharp greatbow arrow shimmering beneath a toxic green mist; best not to inhale as you release this venomous cloud.</content>
 	<content contentuid="h3c29ef66g8d40g452cgb5f0g346b54e6b03e">Barricade of the Ancient Empire</content>
 	<content contentuid="h3c339bd7g4097g407ag89d1g293eb36f7e49">Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost4]% extra base damage in total, making it comparable to the damage of a two-handed weapon.</content>
@@ -897,6 +897,7 @@
 	<content contentuid="h5e99c588ga880g43b5ga2f3g0d4cbc6fce5c">Soul Burn IV</content>
 	<content contentuid="h5eb0dcafg0ee8g4b0agb4b8gfc5df2e3e5b5">Pilgrim&apos;s Spiked Quarterstaff</content>
 	<content contentuid="h5eb9e127gdbfbg446egbaf0gb25418ef5ab9">Soul Rune</content>
+	<content contentuid="h5ec14825g0cb9g4271g84b6ge7d4a2209127">Pickpocket Endlessly</content>
 	<content contentuid="h5f55d911g3801g416fgb2e7gef193b46b0cf">Exquisite Dwarven Greatbow</content>
 	<content contentuid="h5f87d28fge5ddg4f71g8f4bgbade472afe64">A... Crossbow?&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h5f93ea7dg4d11g4cc6g870cg47c3d7373fb6">Tempered Runeblade of Earth</content>
@@ -1089,6 +1090,7 @@
 	<content contentuid="h72bb594dge9f1g4d3eg9044g970fc1243a54">&lt;font color=&apos;#FF0000&apos; size=&apos;22&apos;&gt;Displacement Failed&lt;/font&gt;</content>
 	<content contentuid="h72c0eff2g75e3g43f6gbd70g395c6d2d1e95">*[GRENADES] Click on the button labeled &apos;Grenades&apos;.*</content>
 	<content contentuid="h72c5056dg86a0g48b4g939fgd5cf4e9780ed">Poisonwall, Seeker&apos;s Bane</content>
+	<content contentuid="h73168328g1dd5g4bacg9866g74699e618e7b">A hardy pair of gloves designed for forcefully taking treasure.</content>
 	<content contentuid="h731eea3ag881dg4855g9057g342f2eebd0c4">Lava Rune</content>
 	<content contentuid="h7388db69ga1b3g40f9g904eg753cc7f52cfe">Wooden Quarterstaff</content>
 	<content contentuid="h73b9bec2ge039g4045g88d6g39e3f4ea1d92">Character will be Dizzy upon standing up.</content>
@@ -1536,7 +1538,7 @@
 	<content contentuid="ha1ba59b3g291dg4197ga676g5451dcd6d0ad">Character has temporary damage resistance.</content>
 	<content contentuid="ha1c630ffg42dbg4289g8d34g68de690fdde0">&lt;font color=&apos;#C7A758&apos;&gt;Kevin the Pet Rock&lt;/font&gt; (&lt;font color=&apos;#FF2244&apos;&gt;Nails&lt;/font&gt;)</content>
 	<content contentuid="ha1c8ab36g5d86g4c20ga8d6g9f784cbb50f4">Equalizer</content>
-	<content contentuid="ha1f212b4g9b29g46d2g8afegee51d7a60131">Thief&apos;s Gloves</content>
+	<content contentuid="ha1f212b4g9b29g46d2g8afegee51d7a60131">Sea Raider&apos;s Gloves</content>
 	<content contentuid="ha1f92690g2af6g4515g9ad4gecd66178217e">Dragon Slayer</content>
 	<content contentuid="ha1fd7564g9a41g46c2g9840g876571c13de0">Ancient Dwarven Shields</content>
 	<content contentuid="ha20be5e6g580eg4b73gada6g997237924305">Highwayman&apos;s Quiver</content>
@@ -1726,7 +1728,7 @@
 	<content contentuid="hb69d0ce2g0c1dg4bdfg9d1fg6e77f212b510">Avalanche Rune</content>
 	<content contentuid="hb6b41943g9b7cg46a1gbff2g296ee08ac1a9">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are coated in a deadly toxin, dealing poison damage.</content>
 	<content contentuid="hb6ca4a83ga533g4331ga92cgd041f43b7675">Bonus Damage to Immobile Targets</content>
-	<content contentuid="hb6eef25cg3995g4611gabdfgd65916b4bf94">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_CloakAndDagger&apos; icon=&apos;Skill_Rogue_CloakAndDagger&apos;/&gt;Automatically reload your pistol when jumping.&lt;br&gt;When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius]m.&lt;br&gt;If this marks a target, your pistol will deal one guaranteed critical hit until your turn ends.</content>
+	<content contentuid="hb6eef25cg3995g4611gabdfgd65916b4bf94">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos; icon=&apos;LLWEAPONEX_Skills_ShootPistol&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_CloakAndDagger&apos; icon=&apos;Skill_Rogue_CloakAndDagger&apos;/&gt;[Key:LLWEAPONEX_MB_Pistol_CloakAndDagger]</content>
 	<content contentuid="hb6f630efgd273g468bg9875g32bffb7fb120">Reload your &lt;font color=&apos;#C7A758&apos;&gt;Pistol&lt;/font&gt;, instantly refreshing the &lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt; skill.</content>
 	<content contentuid="hb701a487g48dbg435fga69dg831fb8da30ca">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb723ab59ga442g4711g99d7g191f9c802164">Gas Rune</content>
