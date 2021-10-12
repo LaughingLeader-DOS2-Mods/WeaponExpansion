@@ -37,7 +37,7 @@ RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, da
 		if canStealFrom then
 			local attacker = Ext.GetCharacter(char)
 			local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
-			if attacker:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
+			if attacker:HasTag("LLWEAPONEX_PirateGloves_Equipped") then
 				local glovesBonusChance = Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0
 				chance = math.tointeger(chance + glovesBonusChance)
 			end

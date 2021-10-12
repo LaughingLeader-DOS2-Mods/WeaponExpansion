@@ -1,7 +1,0 @@
-Ext.Require("Server/Items/Uniques/AnvilMace.lua")
-Ext.Require("Server/Items/Uniques/BalrinThrowingAxe.lua")
-Ext.Require("Server/Items/Uniques/BasilusDagger.lua")
-Ext.Require("Server/Items/Uniques/GnakSpellScroll.lua")
-Ext.Require("Server/Items/Uniques/Omnibolt.lua")
-Ext.Require("Server/Items/Uniques/SoulHarvest.lua")
-Ext.Require("Server/Items/Uniques/PacifistsWrath.lua")

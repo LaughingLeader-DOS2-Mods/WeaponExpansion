@@ -23,9 +23,9 @@ local heavyBoltText = ts:Create("hb931f729g9df1g461bg887fgb7eae7662e12", "Heavy 
 local AppendedText = {
 	---@param character EsvCharacter
 	Target_LLWEAPONEX_Steal = function(character)
-		if character:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
+		if character:HasTag("LLWEAPONEX_PirateGloves_Equipped") then
 			local chance = math.floor(Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0)
-			local gloveName = GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_ThiefGloves_A_DisplayName", "Thief's Gloves")
+			local gloveName = GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_PirateGloves_A_DisplayName", "Thief's Gloves")
 			if gloveName ~= "" then
 				return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName),true
 			end

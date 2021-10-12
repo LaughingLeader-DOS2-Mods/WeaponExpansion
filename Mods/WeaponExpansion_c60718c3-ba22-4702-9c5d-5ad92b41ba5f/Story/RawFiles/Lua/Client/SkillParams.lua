@@ -130,7 +130,7 @@ Skills.Params["LLWEAPONEX_UnarmedBasicAttackDamage"] = GetUnarmedBasicAttackDama
 --- @param param string
 local function GetStealChance(skill, character, isFromItem, param)
 	local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
-	if character.Character:HasTag("LLWEAPONEX_ThiefGloves_Equipped") then
+	if character.Character:HasTag("LLWEAPONEX_PirateGloves_Equipped") then
 		local glovesBonusChance = Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0
 		chance = chance + glovesBonusChance
 	end

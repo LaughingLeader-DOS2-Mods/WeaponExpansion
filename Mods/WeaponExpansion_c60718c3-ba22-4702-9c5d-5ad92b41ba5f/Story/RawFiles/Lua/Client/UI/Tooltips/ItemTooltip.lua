@@ -2,7 +2,8 @@
 local ts = LeaderLib.Classes.TranslatedString
 
 local ExtraPropsTags = {
-	LLWEAPONEX_ThiefGloves_Equipped = true,
+	LLWEAPONEX_PirateGloves_Equipped = true,
+	LLWEAPONEX_InfinitePickpocket = true,
 	LLWEAPONEX_Blunderbuss_Equipped = true,
 	LLWEAPONEX_MagicMissileWand_Equipped = true,
 	LLWEAPONEX_UniqueThrowingAxeA = true,

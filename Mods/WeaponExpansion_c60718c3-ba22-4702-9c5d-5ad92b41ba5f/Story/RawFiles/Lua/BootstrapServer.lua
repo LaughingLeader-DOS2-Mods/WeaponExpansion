@@ -157,7 +157,7 @@ end
 Ext.Require("Server/Items/LootBonuses.lua")
 Ext.Require("Server/Items/TreasureTableMerging.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
-Ext.Require("Server/Items/Uniques/_Init.lua")
+Ext.Require("Shared/Uniques/_Init.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
 Ext.Require("Server/Updates.lua")
 if Ext.IsDeveloperMode() then

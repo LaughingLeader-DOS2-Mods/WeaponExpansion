@@ -1,5 +1,4 @@
-if Ext.IsServer() then
-
+if not Vars.IsClient then
 	function ArmCannon_OnEnergyChanged(character, item, last, next)
 		if Vars.DebugMode then
 			Ext.Print(string.format("[LLWEAPONEX:ArmCannon_OnEnergyChanged] character(%s) item(%s) last(%s) next(%s)", character, item, last, next))
@@ -72,14 +71,7 @@ if Ext.IsServer() then
 			registeredListener = true
 		end
 	end)
-end
-
---[[
-GameHelpers.ExplodeProjectile("3f20ae14-5339-4913-98f1-24476861ebd6", {188.23374462128,-17.0,354.77855068445}, "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion", 1)
-CreateExplosionAtPosition(188.23374462128,-17.0,354.77855068445, "Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion", 2)
-]]
-
-if Ext.IsClient() then
+else
 	Ext.RegisterNetListener("LLWEAPONEX_SyncArmCannonData", function(cmd, payload)
 		local data = Common.JsonParse(payload)
 		if data ~= nil then
