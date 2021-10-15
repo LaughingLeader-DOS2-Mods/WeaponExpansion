@@ -269,7 +269,7 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_THUNDERBOLT", func
 		if success then
 			--GameHelpers.Skill.Explode(target, "ProjectileStrike_LLWEAPONEX_Runeblade_Thunderbolt", source)
 			--GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Runeblade_ChainLightning", source)
-			GameHelpers.Skill.CreateProjectileStrike(target, "ProjectileStrike_LLWEAPONEX_Runeblade_Thunderbolt", source, nil, true, true, true)
+			GameHelpers.Skill.CreateProjectileStrike(target, "ProjectileStrike_LLWEAPONEX_Runeblade_Thunderbolt", source, {EnemiesOnly = true, PlayCastEffects = true, PlayTargetEffects = true})
 			GameHelpers.Status.Apply(source, "LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN", 6.0, false, source)
 			statusMap.LLWEAPONEX_RUNEBLADE_THUNDERBOLT_COOLDOWN = true
 		end

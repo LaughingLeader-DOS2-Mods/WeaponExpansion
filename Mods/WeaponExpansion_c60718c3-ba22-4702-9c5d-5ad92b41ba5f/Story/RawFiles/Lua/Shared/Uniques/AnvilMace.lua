@@ -8,7 +8,7 @@ if not Vars.IsClient then
 			end
 		elseif not isFromSkill then
 			--Shockwave when attacking the ground
-			ExplodeSkill(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", source)
+			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", source, {EnemiesOnly = true})
 			PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", table.unpack(target))
 		end
 	end)
@@ -42,6 +42,6 @@ if not Vars.IsClient then
 	
 	Timer.RegisterListener("LLWEAPONEX_RushSmashFinished", function(_, char)
 		local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(char, 2.0)
-		ExplodeSkill(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", char)
+		GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact", char, {EnemiesOnly = true})
 	end, true)
 end

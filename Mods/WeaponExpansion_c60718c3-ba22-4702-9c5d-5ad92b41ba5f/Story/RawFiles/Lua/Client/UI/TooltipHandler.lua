@@ -6,7 +6,7 @@ end
 
 ---@param skill SkillEventData
 ---@param character StatCharacter
----@return table<string, number[]>
+---@return string
 RegisterListener("GetTooltipSkillDamage", function(skill, character)
 	local paramText = SkillGetDescriptionParam(skill, character, false, "Damage")
 	if paramText ~= nil then
@@ -16,6 +16,7 @@ end)
 
 ---@param skill SkillEventData
 ---@param character StatCharacter
+---@param param string
 ---@return string
 RegisterListener("GetTooltipSkillParam", function(skill, character, param)
 	local paramText = SkillGetDescriptionParam(skill, character, false, param)
