@@ -905,6 +905,9 @@ add name "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_Spellbook_A_DisplayName",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A"
 add name "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A_DisplayName",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_1H_AnatomyBook_A"
+add name "WPN_UNIQUE_LLWEAPONEX_BattleBook_1H_AnatomyBook_A_DisplayName",""
+
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Blunderbuss_2H_A_DisplayName",""
 

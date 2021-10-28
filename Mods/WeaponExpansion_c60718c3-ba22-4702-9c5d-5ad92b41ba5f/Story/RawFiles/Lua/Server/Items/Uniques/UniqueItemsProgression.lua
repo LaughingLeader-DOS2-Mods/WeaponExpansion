@@ -59,6 +59,14 @@ end
 
 ---@class AllUniqueProgressionData
 local bonuses = {
+	AnatomyBook = {
+		[2] = ue:Create("WaterSpecialist", 1),
+		[6] = ue:Create("WitsBoost", "2", GetReqAttributeParams),
+		[7] = runeslot1,
+		[8] = ue:Create("WaterSpecialist", 2),
+		[12] = ue:Create("DamageFromBase", 10),
+		[15] = runeslot2,
+	},
 	AnvilMace = {
 		[2] = ue:Create("WarriorLore", 1),
 		[6] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),

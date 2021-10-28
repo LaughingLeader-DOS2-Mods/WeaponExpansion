@@ -1732,6 +1732,12 @@ add levelgroup 0,0,"All"
 add rootgroup "f393c9d6-d90c-483f-be94-b47e9419395d",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_2H_SpellScroll_A","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_1H_AnatomyBook_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "065efca7-6dbb-4222-9821-f6a285ea5c06",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_BattleBook_1H_AnatomyBook_A","",""
+
 new itemgroup "WPN_LLWEAPONEX_Firearm_2H_Rifle_A"
 
 add levelgroup 0,0,"Common"

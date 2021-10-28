@@ -32,6 +32,7 @@ local ProgressionData = Ext.Require("Server/Items/Uniques/UniqueItemsProgression
 
 ---@type table<string, UniqueData>
 Uniques = {
+	AnatomyBook = UniqueData:Create("d4955fc9-41c8-4458-89c4-7ff199cdb6d2", ProgressionData.AnatomyBook, {Tag="LLWEAPONEX_UniqueAnatomyBook"}),
 	AnvilMace = UniqueData:Create("f3c71d85-1cc3-431f-b236-ad838bf2e418", ProgressionData.AnvilMace, {Tag="LLWEAPONEX_UniqueAnvilMace", DefaultOwner=Origin.Harken, AutoEquipOnOwner=true}),
 	ArmCannon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8", ProgressionData.ArmCannon, {Tag="LLWEAPONEX_RunicCannonGloves"}),
 	AssassinHandCrossbow = UniqueData:Create("70c59769-2838-4137-9421-4e251fecdc89", ProgressionData.AssassinHandCrossbow, {Tag="LLWEAPONEX_UniqueHandCrossbow"}),
