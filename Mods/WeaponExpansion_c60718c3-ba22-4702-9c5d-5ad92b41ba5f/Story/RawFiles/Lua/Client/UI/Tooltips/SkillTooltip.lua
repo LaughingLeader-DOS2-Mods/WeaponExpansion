@@ -15,22 +15,11 @@ local AbilitySchool = {
 	Shout_LLWEAPONEX_OpenMenu = Text.Game.WeaponExpansion,
 }
 
-local thiefGloveChanceBonusText = ts:Create("h1fce3bfeg41a6g41adgbc5bg03d39281b469", "<font color='#11D87A'>+[1]% chance from [2]</font>")
 local darkFireballEmptyLevelText = ts:Create("h83e65b1fg30c2g4e9ega9bag005eb17c5d75", "<font color='#FF2200'>[1]/[2] Death Charges</font>")
 local darkFireballLevelText = ts:Create("h67e6fbecg1cafg4202ga78ag45db47880450", "<font color='#AA00FF'>[1]/[2] Death Charges</font>")
 local heavyBoltText = ts:Create("hb931f729g9df1g461bg887fgb7eae7662e12", "Heavy Bolt (+AP Cost)")
 
 local AppendedText = {
-	---@param character EsvCharacter
-	Target_LLWEAPONEX_Steal = function(character)
-		if character:HasTag("LLWEAPONEX_PirateGloves_Equipped") then
-			local chance = math.floor(Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0)
-			local gloveName = GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_PirateGloves_A_DisplayName", "Thief's Gloves")
-			if gloveName ~= "" then
-				return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName),true
-			end
-		end
-	end,
 	---@param character EsvCharacter
 	Projectile_LLWEAPONEX_DarkFireball = function(character)
 		if PersistentVars ~= nil and PersistentVars.SkillData ~= nil and PersistentVars.SkillData.DarkFireballCount ~= nil then
@@ -123,36 +112,51 @@ local function OnSkillTooltip(character, skill, tooltip)
 	end
 
 	if AppendedText[skill] ~= nil then
-		local text,appendToSkillProperties = AppendedText[skill](character)
-		if text ~= nil then
-			if appendToSkillProperties == true then
-				local element = tooltip:GetElement("SkillProperties") or {Type="SkillProperties", Properties={}, Resistances={}}
-				if element ~= nil then
-					table.insert(element.Properties, {
-						Label = text
-					})
-				end
-			else
-				local element = tooltip:GetElement("SkillDescription")
-				if element ~= nil then
-					element.Label = string.format("%s<br>%s", element.Label, text)
+		local b,text,appendToSkillProperties = xpcall(AppendedText[skill], debug.traceback, character, skill)
+		if b then
+			if text ~= nil then
+				if appendToSkillProperties == true then
+					local element = tooltip:GetElement("SkillProperties") or {Type="SkillProperties", Properties={}, Resistances={}}
+					if element ~= nil then
+						table.insert(element.Properties, {
+							Label = text
+						})
+					end
+				else
+					local element = tooltip:GetElement("SkillDescription")
+					if element ~= nil then
+						element.Label = string.format("%s<br>%s", element.Label, text)
+					end
 				end
 			end
-			
-			-- if descriptionElement ~= nil then
-			-- 	if description == nil then 
-			-- 		description = ""
-			-- 	else
-			-- 		description = description.."<br>"
-			-- 	end
-			-- 	description = description..text
-			-- 	descriptionElement.Label = description
-			-- else
-			-- 	descriptionElement = {
-			-- 		Label = text
-			-- 	}
-			-- 	tooltip:AppendElement(descriptionElement)
-			-- end
+		else
+			Ext.PrintError(text)
+		end
+	end
+
+	for tag,callback in pairs(Tags.SkillBonusText) do
+		if GameHelpers.CharacterOrEquipmentHasTag(character, tag) then
+			local b,text,appendToSkillProperties = xpcall(callback, debug.traceback, character, skill, tag, tooltip)
+			if b then
+				if text ~= nil then
+					text = GameHelpers.Tooltip.ReplacePlaceholders(text, character)
+					if appendToSkillProperties == true then
+						local element = tooltip:GetElement("SkillProperties") or {Type="SkillProperties", Properties={}, Resistances={}}
+						if element ~= nil then
+							table.insert(element.Properties, {
+								Label = text
+							})
+						end
+					else
+						local element = tooltip:GetElement("SkillDescription")
+						if element ~= nil then
+							element.Label = string.format("%s<br>%s", element.Label, text)
+						end
+					end
+				end
+			else
+				Ext.PrintError(text)
+			end
 		end
 	end
 
@@ -291,20 +295,20 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then
-		if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
-			local main = character:GetItemBySlot("Weapon")
-			local offhand = character:GetItemBySlot("Shield")
-			if main and GameHelpers.ItemHasTag(main, "LLWEAPONEX_PacifistsWrath_Equipped") then
-				main.Stats.DynamicStats[1].MinDamage = 1
-				main.Stats.DynamicStats[1].MaxDamage = 1
-			end
-			if offhand and GameHelpers.ItemHasTag(offhand, "LLWEAPONEX_PacifistsWrath_Equipped") then
-				offhand.Stats.DynamicStats[1].MinDamage = 1
-				offhand.Stats.DynamicStats[1].MaxDamage = 1
-			end
-		end
-	end
+	-- if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then
+	-- 	if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
+	-- 		local main = character:GetItemBySlot("Weapon")
+	-- 		local offhand = character:GetItemBySlot("Shield")
+	-- 		if main and GameHelpers.ItemHasTag(main, "LLWEAPONEX_PacifistsWrath_Equipped") then
+	-- 			main.Stats.DynamicStats[1].MinDamage = 1
+	-- 			main.Stats.DynamicStats[1].MaxDamage = 1
+	-- 		end
+	-- 		if offhand and GameHelpers.ItemHasTag(offhand, "LLWEAPONEX_PacifistsWrath_Equipped") then
+	-- 			offhand.Stats.DynamicStats[1].MinDamage = 1
+	-- 			offhand.Stats.DynamicStats[1].MaxDamage = 1
+	-- 		end
+	-- 	end
+	-- end
 end
 
 return OnSkillTooltip

@@ -41,8 +41,16 @@ AttributeScaleTables = {
 	Default = {"Strength", "Finesse", "Intelligence"},
 }
 
---- @type table<string,string>
-Tags = {}
+Tags = {
+	TemplateToTag = {},
+	WeaponTypeToTag = {},
+	RangedWeaponTags = {},
+	StatWordToTag = {},
+	WeaponTypes = {},
+	---Client-side
+	---@type table<string, fun(character:EsvCharacter, skill:string, tag:string, tooltip:TooltipData):string,boolean>
+	SkillBonusText = {},
+}
 
 Origin = {
 	-- S_Player_LLWEAPONEX_Harken_e446752a-13cc-4a88-a32e-5df244c90d8b

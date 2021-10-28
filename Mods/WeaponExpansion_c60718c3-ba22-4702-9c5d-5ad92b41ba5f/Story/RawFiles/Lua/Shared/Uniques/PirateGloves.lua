@@ -66,6 +66,21 @@ else
 			}))
 		end
 	end)
+
+	Ext.RegisterUITypeInvokeListener(Data.UIType.containerInventory, "updateItems", function(ui, event)
+		--TODO Make items unclickable/unmovable if this is additional pickpocketing with the gloves
+	end)
+
+	local thiefGloveChanceBonusText = Classes.TranslatedString:Create("h1fce3bfeg41a6g41adgbc5bg03d39281b469", "<font color='#11D87A'>+[1]% chance from [2]</font>")
+	Tags.SkillBonusText["LLWEAPONEX_PirateGloves_Equipped"] = function(character, skill, tag, tooltip)
+		if skill == "Target_LLWEAPONEX_Steal" then
+			local chance = math.floor(Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0)
+			local gloveName = GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_PirateGloves_A_DisplayName", "Thief's Gloves")
+			if gloveName ~= "" then
+				return thiefGloveChanceBonusText:ReplacePlaceholders(chance, gloveName),true
+			end
+		end
+	end
 end
 -- Ext.RegisterOsirisListener("RequestPickpocket", 2, "after", function(player, target)
 -- 	if GameHelpers.CharacterOrEquipmentHasTag(player, "LLWEAPONEX_PirateGloves_Equipped") then
