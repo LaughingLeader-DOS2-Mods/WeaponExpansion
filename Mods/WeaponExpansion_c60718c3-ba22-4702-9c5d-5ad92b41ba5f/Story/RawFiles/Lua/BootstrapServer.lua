@@ -32,7 +32,7 @@ local defaultPersistentVars = {
     UniqueRequirements = {}
 }
 ---@type WeaponExpansionVars
-PersistentVars = Common.CloneTable(defaultPersistentVars, true)
+PersistentVars = TableHelpers.Clone(defaultPersistentVars, true)
 
 RegisterListener("PersistentVarsLoaded", function()
     Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)

@@ -26,17 +26,6 @@ if not Vars.IsClient then
 	end)
 
 	RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_UniqueHarvestScythe", function(char, item, tag, equipped)
-		printf("EquipmentChanged(%s, %s, %s, %s)", char, item, tag, equipped)
-		-- if equipped then
-		-- 	RegisterStatusListener(StatusEvent.Attempt, "LLWEAPONEX_SOULHARVEST_REAP", OnReapingAttempt)
-		-- else
-		-- 	if registeredListeners > 0 then
-		-- 		registeredListeners = registeredListeners - 1
-		-- 		if registeredListeners <= 0 then
-		-- 			registeredListeners = 0
-		-- 			RemoveStatusListener("StatusAttempt", "", nil, true)
-		-- 		end
-		-- 	end
-		-- end
+		--printf("EquipmentChanged(%s, %s, %s, %s)", char, item, tag, equipped)
 	end)
 end

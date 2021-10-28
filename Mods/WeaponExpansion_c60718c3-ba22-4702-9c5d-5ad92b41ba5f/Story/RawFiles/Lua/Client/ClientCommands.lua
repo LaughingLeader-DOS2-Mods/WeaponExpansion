@@ -199,3 +199,12 @@ Ext.RegisterListener("SessionLoaded", function()
 		Ext.RegisterUITypeCall(reward_c, "acceptClicked", onRewardScreenClosed)
 	end
 end)
+
+Ext.RegisterNetListener("LLWEAPONEX_PacifistWrath_UpdateDamage", function(cmd, netid)
+	netid = tonumber(netid)
+	local item = Ext.GetItem(netid)
+	if item then
+		item.Stats.DynamicStats[1].MinDamage = 1
+		item.Stats.DynamicStats[1].MaxDamage = 1
+	end
+end)
