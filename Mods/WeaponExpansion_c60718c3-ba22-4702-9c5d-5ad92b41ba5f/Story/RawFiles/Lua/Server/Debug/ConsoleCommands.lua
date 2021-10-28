@@ -59,7 +59,7 @@ if Vars.DebugMode then
 			local _,_,rankName = string.find(text, ">(.+)<")
 			output = output .. string.format("AddRank(\"%s\", %s, \"%s\", \"%s\")\n", masteryID, level, color, rankName)
 		end
-		print(output)
+		fprint(LOGLEVEL.TRACE, output)
 	end
 	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks)
 

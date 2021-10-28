@@ -1,6 +1,5 @@
 if not Vars.IsClient then
 	Ext.RegisterNetListener("LLWEAPONEX_ForcePickpocket", function(cmd, payload)
-		print(payload)
 		local data = Common.JsonParse(payload)
 		local player = Ext.GetCharacter(data.Player)
 		local target = Ext.GetCharacter(data.Target)
@@ -14,7 +13,6 @@ else
 
 	Ext.RegisterUITypeInvokeListener(Data.UIType.contextMenu.Alt, "updateButtons", function(ui, event)
 		local cursor = Ext.GetPickingState()
-		print(Lib.serpent.block(cursor))
 		if cursor and cursor.HoverCharacter then
 			pickpocketTarget = Ext.GetCharacter(cursor.HoverCharacter)
 		end

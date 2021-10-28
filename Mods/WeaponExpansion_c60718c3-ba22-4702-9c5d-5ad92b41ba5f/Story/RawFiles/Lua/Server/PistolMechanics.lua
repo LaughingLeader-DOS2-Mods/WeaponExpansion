@@ -110,7 +110,6 @@ RegisterProtectedExtenderListener("BeforeShootProjectile", function (request)
 			targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(caster, dist, targetPos[1], targetPos[2], targetPos[3])
 			request.EndPosition = targetPos
 		end
-		print(target, Common.Dump(request.EndPosition))
 	end
 end)
 

@@ -9,7 +9,6 @@ if Ext.IsServer() then
 			end
 		end
 		local payload = Ext.JsonStringify(darkFireBallData)
-		print(payload)
 		Ext.PostMessageToUser(id, "LLWEAPONEX_SyncData", payload)
 	end
 
