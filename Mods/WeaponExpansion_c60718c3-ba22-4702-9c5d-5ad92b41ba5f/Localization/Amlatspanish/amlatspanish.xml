@@ -642,6 +642,7 @@
 	<content contentuid="h4262ee77g4c47g4730ga3d9gc1ebd98c28d7">Poison Gas Charge</content>
 	<content contentuid="h42f0c651g539fg4421gac51gd348b702763d">Common Greatbow</content>
 	<content contentuid="h43214f8cge37cg4950g9388gaaddd43d5590">&lt;font color=&apos;#FF23CB&apos;&gt;Chaos Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
+	<content contentuid="h433902bega66bg46e4ga29eg7bd095c23074">Lionheart Anatomy</content>
 	<content contentuid="h4343971egf586g483bgba2ag7aebcba49c5e">Inert Runeblade</content>
 	<content contentuid="h4367cc22g9d4fg4c99ga1dfgc210f7915de3">Throw a chair weapon at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
 	<content contentuid="h439e053bgd9c6g4dd4gbca4ge54f85d29d22">Expert Bannerkeeper</content>
