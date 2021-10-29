@@ -90,15 +90,14 @@ local function ConfigureMetadata(tbl)
 	})
 end
 
----@param uuid string
 ---@param progressionData table<string, table<int, UniqueProgressionEntry>>
 ---@param params table<string,any>
 ---@return UniqueData
-function UniqueData:Create(uuid, progressionData, params)
+function UniqueData:Create(progressionData, params)
     local this =
     {
 		ID = "",
-		DefaultUUID = uuid or "",
+		DefaultUUID = "",
 		LevelData = {},
 		DefaultOwner = StringHelpers.NULL_UUID,
 		AutoEquipOnOwner = false,

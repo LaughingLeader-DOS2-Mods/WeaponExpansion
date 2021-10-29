@@ -209,7 +209,6 @@ local iconIntId = 0
 ---@param ui UIObject
 local function RegisterIcon(ui, call, name, icon, iconType)
 	local iconSize = iconType == 2 and 40 or 64
-	print(call,name,icon,iconType)
 	ui:ClearCustomIcon(name)
 	ui:SetCustomIcon(name, icon, iconSize, iconSize)
 end
@@ -250,7 +249,6 @@ local function parseDescription(ui, index, descriptionText)
 	end
 
 	for i,v in pairs(result) do
-		print(Lib.serpent.block(v.Icon))
 		if v.Icon ~= "" then
 			local _,_,iconName = v.Icon:find("id='(.-)'")
 			local _,_,icons = v.Icon:find("icon='(.-)'")
@@ -400,11 +398,15 @@ function MasteryMenu.RepositionToggleButton(dialogOpen)
 			end
 		end
 
+		--local ui = not Vars.ControllerEnabled and Ext.GetUIByType(Data.UIType.hotBar) or Ext.GetUIByType(Data.UIType.bottomBar_c)
+
+		--menu_btn.x = math.ceil(main.screenWidth * 0.05)
+		menu_btn.x = 468 - menu_btn.width
 		if dialogOpen then
-			menu_btn.x = 96
+			--menu_btn.x = 96
 			menu_btn.y = main.stage.stageHeight
 		else
-			menu_btn.x = main.defaultButtonPosition.x
+			--menu_btn.x = main.defaultButtonPosition.x
 			menu_btn.y = main.defaultButtonPosition.y
 		end
 	end
@@ -469,6 +471,7 @@ function MasteryMenu.InitializeToggleButton()
 			displayButton = false
 		end
 		MasteryMenu.SetToggleButtonVisibility(displayButton, false)
+		MasteryMenu.RepositionToggleButton()
 		ui:Invoke("setToggleButtonTooltip", Text.MasteryMenu.MenuToggleTooltip.Value)
 	end
 end

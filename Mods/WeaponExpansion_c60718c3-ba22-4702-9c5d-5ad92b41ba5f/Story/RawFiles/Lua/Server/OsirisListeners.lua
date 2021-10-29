@@ -197,7 +197,6 @@ end
 -- end)
 
 RegisterListener("Initialized", function(region)
-	UniqueManager.LoadLinkedUniques()
 	region = region or SharedData.RegionData.Current
 	if StringHelpers.IsNullOrEmpty(region) then
 		local db = Osi.DB_CurrentLevel:Get(nil)
