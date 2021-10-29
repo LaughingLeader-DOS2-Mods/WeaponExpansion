@@ -977,6 +977,9 @@ add name "WPN_UNIQUE_LLWEAPONEX_Staff_Banner_Dwarves_A_DisplayName",""
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A_DisplayName",""
 
+new namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_SwordofVictory_A"
+add name "WPN_UNIQUE_LLWEAPONEX_Sword_1H_SwordofVictory_A_DisplayName",""
+
 new namegroup "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A"
 add name "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_DisplayName",""
 

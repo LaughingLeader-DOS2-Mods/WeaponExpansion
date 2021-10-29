@@ -2030,6 +2030,12 @@ add levelgroup 0,0,"All"
 add rootgroup "1cc2baa1-cd58-40a3-8b53-89ef2e081616",""
 add namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_2H_Beholder_A","",""
 
+new itemgroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_SwordofVictory_A"
+
+add levelgroup 0,0,"All"
+add rootgroup "66b84063-d0d1-4df7-84c0-c1f5e4bab0fa",""
+add namegroup "WPN_UNIQUE_LLWEAPONEX_Sword_1H_SwordofVictory_A","",""
+
 new itemgroup "WPN_UNIQUE_LLWEAPONEX_Wraithblade_2H_A"
 
 add levelgroup 0,0,"All"

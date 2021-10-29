@@ -1,9 +1,11 @@
 local ORIGINS_UNIQUES = {
+	AnatomyBook = {UUID = "d4955fc9-41c8-4458-89c4-7ff199cdb6d2"},
 	AnvilMace = {UUID = "f3c71d85-1cc3-431f-b236-ad838bf2e418", Target=Origin.Harken, Equip=true},
 	ArmCannon = {UUID = "a1ce4c1c-a535-4184-a1df-268eb4035fe8"},
 	AssassinHandCrossbow = {UUID = "70c59769-2838-4137-9421-4e251fecdc89"},
 	BalrinAxe = {UUID = "e4dc654c-db51-4b55-a342-83a864cfeff9"},
 	BasilusDagger = {UUID = "5b5c20e1-cef4-40a2-b367-a984c38c1f03", Target={
+		--Next to the player's God
 		FJ_FortJoy_Main = {
 			IsDefault = true,
 			Position = {
@@ -19,7 +21,15 @@ local ORIGINS_UNIQUES = {
 		}
 	}},
 	BeholderSword = {UUID = "ddf11ed0-126f-4bec-8360-455ddf9cef12"},
-	Bible = {UUID = "bcc43f30-b009-4b42-a4de-1c85a25b522a"},
+	Bible = {UUID = "bcc43f30-b009-4b42-a4de-1c85a25b522a", Target={
+		FJ_FortJoy_Main = {
+			IsDefault = true,
+			--Brother Bire, dwarf on tower
+			UUID = "a449c179-1c96-4180-91d6-cb5d6c4cb9a7",
+			--Equip = true,
+			CanTrade = true
+		}
+	}},
 	Blunderbuss = {UUID = "cd6c2b7d-ee74-401b-9866-409c45ae9413", Target={
 		FJ_FortJoy_Main = {
 			IsDefault = true,
@@ -36,7 +46,7 @@ local ORIGINS_UNIQUES = {
 		}
 	}},
 	PacifistsWrath = {UUID = "6d75d449-e021-4b4d-ad2d-c0873127c3b3"},
-	--PacifistsWrath1H = {UUID = "a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42"},
+	PacifistsWrath1H = {UUID = "a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", IsLinked=true},
 	ChaosEdge = {UUID = "61bbcd14-82a2-4efc-9a66-ac4b8a1310cf"},
 	DeathEdge = {UUID = "ea775987-18a6-4947-bb7c-3eea55a6f875"},
 	DemoBackpack = {UUID = "253e14da-cdb9-4cda-b9d4-352d8ed784c5"},
@@ -47,16 +57,31 @@ local ORIGINS_UNIQUES = {
 	HarkenPowerGloves = {UUID = "1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", Target=Origin.Harken, Equip=true},
 	Harvest = {UUID = "d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1"},
 	LoneWolfBanner = {UUID = "aa63e570-695a-461b-bb35-60cf7c915570"},
-	--MagicMissileRod = {UUID = "292b4b04-4ba1-4fa3-96df-19eab320c50f"},
+	MagicMissileRod = {UUID = "292b4b04-4ba1-4fa3-96df-19eab320c50f", IsLinked=true},
 	MagicMissileWand = {UUID = "f8958c1e-1c9d-4fa9-b03f-b883c65f95c3"},
-	MonkBlindfold = {UUID = "4258f164-b548-471f-990d-ae641960a842"},
+	MonkBlindfold = {UUID = "4258f164-b548-471f-990d-ae641960a842", Target = {
+		FJ_FortJoy_Main = {
+			IsDefault = true,
+			--Verdas, decomposing elf in dungeon
+			UUID = "8d839534-a039-4b5c-bfa6-6b88da149eb2",
+			Equip = false,
+		}
+	}},
 	Muramasa = {UUID = "52c0b4a4-3906-4229-93a9-b83aea9e657c"},
 	OgreScroll = {UUID = "cc4d26df-c8c4-458e-b88f-610387741533"},
 	Omnibolt = {UUID = "dec81eed-fcab-48cc-bd67-0431abe4260c"},
 	PowerPole = {UUID = "da0ac3e5-8a9e-417c-b516-dc8cd9245d0e"},
 	WarchiefAxe = {UUID = "056c2c38-b7be-4e06-be41-99b79ffe83c2"},
-	--WarchiefHalberd = {UUID = "6c52f44e-1c27-4409-9bfe-f89ee5af4a0d"},
+	WarchiefHalberd = {UUID = "6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", IsLinked=true},
 	Wraithblade = {UUID = "c68b5afa-2574-471d-85ac-0738ee0a6393"},
+	Victory = {UUID = "b4f84f81-c889-4aeb-b443-cbe2199387fe", Target = {
+		FJ_FortJoy_Main = {
+			IsDefault = true,
+			--Paladin Cork
+			UUID = "c01e16ca-ce9a-48c8-ac36-90ef7de12404",
+			Equip = true,
+		}
+	}},
 }
 
 local REGIONS = {
@@ -69,29 +94,69 @@ local REGIONS = {
 	ARX_Endgame = 6
 }
 
+local defaultRotation = {0,0,0}
+local listenForDeath = {}
+
+local function GetUniqueDefaultOwner(id, data, region)
+	local t = type(data.Target)
+	if t == "string" then
+		if ObjectExists(data.Target) == 1 and GetRegion(data.Target) == region then
+			return data.Target
+		end
+	elseif t == "table" then
+		local targetData = data.Target[region]
+		if targetData then
+			if targetData.UUID and ObjectExists(targetData.UUID) == 1 then
+				return targetData.UUID
+			end
+		end
+	end
+	return nil
+end
+
 local function InitializeUnique(id,data,region)
 	local t = type(data.Target)
 	if t == "string" then
 		if ObjectExists(data.Target) == 1 and GetRegion(data.Target) == region then
 			ItemToInventory(data.UUID, data.Target, 1, 0, 1)
 			ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
-			if data.Equip and ObjectIsCharacter(data.Target) == 1 and ItemIsEquipable(data.UUID) == 1 then
+			listenForDeath[data.Target] = data.UUID
+			if data.Equip 
+			and ObjectIsCharacter(data.Target) == 1 
+			and ItemIsEquipable(data.UUID) == 1 
+			and CharacterIsDead(data.Target) == 0 then
 				GameHelpers.Character.EquipItem(data.Target, data.UUID)
+				Ext.GetCharacter(data.Target).RootTemplate.IsEquipmentLootable = true
 			end
 		end
 	elseif t == "table" then
 		local targetData = data.Target[region]
 		if targetData then
-			local x,y,z = table.unpack(targetData.Position)
-			local p,y,r = table.unpack(targetData.Rotation or {0,0,0})
-			ItemToTransform(data.UUID, x, y, z, p, y, r, 1, StringHelpers.NULL_UUID)
-			ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+			if targetData.Position then
+				local x,y,z = table.unpack(targetData.Position)
+				local p,y,r = table.unpack(targetData.Rotation or defaultRotation)
+				ItemToTransform(data.UUID, x, y, z, p, y, r, 1, StringHelpers.NULL_UUID)
+				ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+			elseif targetData.UUID and ObjectExists(targetData.UUID) == 1 then
+				listenForDeath[targetData.UUID] = data.UUID
+				ItemToInventory(data.UUID, targetData.UUID, 1, 0, 1)
+				ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+				if targetData.Equip 
+				and ObjectIsCharacter(targetData.UUID) == 1 
+				and ItemIsEquipable(data.UUID) == 1
+				and CharacterIsDead(targetData.UUID) == 0 then
+					GameHelpers.Character.EquipItem(targetData.UUID, data.UUID)
+					Ext.GetCharacter(targetData.UUID).RootTemplate.IsEquipmentLootable = true
+				end
+			end
 		else
 			local defaultRegion = nil
-			for k,v in pairs(data.Target) do
-				if v.IsDefault then
-					defaultRegion = k
-					break
+			if data.Target then
+				for k,v in pairs(data.Target) do
+					if v.IsDefault then
+						defaultRegion = k
+						break
+					end
 				end
 			end
 			local regionVal = REGIONS[defaultRegion] or -1
@@ -110,11 +175,60 @@ function InitOriginsUniques(region)
 		return
 	end
 	for id,data in pairs(ORIGINS_UNIQUES) do
-		if ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 then
-			local b,err = xpcall(InitializeUnique, debug.traceback, id, data, region)
-			if not b then
-				Ext.PrintError(err)
+		if not data.IsLinked and ObjectExists(data.UUID) == 1 then
+			local uniqueData = Uniques[id]
+			if uniqueData then
+				uniqueData.DefaultUUID = data.UUID
+			end
+			if not data.IsLinked then
+				if (ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 or Vars.DebugMode) then
+					local b,err = xpcall(InitializeUnique, debug.traceback, id, data, region)
+					if not b then
+						Ext.PrintError(err)
+					end
+				else
+					local owner = GetUniqueDefaultOwner(id,data,region)
+					if owner then
+						if CharacterIsDead(owner) == 0 then
+							listenForDeath[owner] = data.UUID
+						elseif GameHelpers.Item.ItemIsEquipped(owner, data.UUID) then
+							ItemToInventory(data.UUID, owner, 1, 0, 1)
+						end
+					end
+				end
 			end
 		end
 	end
 end
+
+Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(character)
+	local uuid = GameHelpers.GetUUID(character)
+	if listenForDeath[uuid] then
+		if GameHelpers.Item.ItemIsEquipped(uuid, listenForDeath[uuid]) then
+			ItemToInventory(listenForDeath[uuid], uuid, 1, 0, 1)
+		end
+		listenForDeath[uuid] = nil
+	end
+end)
+
+--Un-initializing uniques so they can be moved in the next region
+Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
+	if not REGIONS[region] then
+		return
+	end
+	for id,data in pairs(ORIGINS_UNIQUES) do
+		if not data.IsLinked and ObjectExists(data.UUID) == 1 then
+			if (ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 1) then
+				local item = Ext.GetItem(data.UUID)
+				local owner = GameHelpers.Item.GetOwner(item)
+				if not owner then
+					ObjectClearFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+					ItemToInventory(data.UUID, NPC.UniqueHoldingChest, 1, 0, 1)
+				elseif ObjectIsGlobal(owner.MyGuid) == 0 then
+					ObjectClearFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
+					ItemToInventory(data.UUID, NPC.UniqueHoldingChest, 1, 0, 1)
+				end
+			end
+		end
+	end
+end)

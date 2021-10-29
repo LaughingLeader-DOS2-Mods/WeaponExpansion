@@ -66,6 +66,9 @@ Thanks to all the artists listed below!
 ### [CC Attribution-ShareAlike ](https://creativecommons.org/licenses/by-sa/3.0/us/) 
     - Old Glaive by patguilbo
       - https://sketchfab.com/3d-models/old-glaive-0d9de1c00d6c4a3fa1a50e87492102c9
+### Public Domain (CC0)
+    - The Sword Of Victory by Arms Museum
+      - https://sketchfab.com/3d-models/the-sword-of-victory-f39dc69dbbfe49c68045bec2c16e03ba
 ## Sounds
   - Musket.wav by fennelliott, CC0 License
     - https://freesound.org/people/fennelliott/sounds/347647/

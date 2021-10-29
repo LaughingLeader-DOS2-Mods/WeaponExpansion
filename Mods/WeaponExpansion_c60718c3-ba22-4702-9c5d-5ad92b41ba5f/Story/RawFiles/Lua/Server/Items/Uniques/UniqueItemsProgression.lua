@@ -299,6 +299,15 @@ local bonuses = {
 		[12] = ue:Create("WitsBoost", "2"),
 		[15] = runeslot2,
 	},
+	Victory = {
+		[2] = ue:Create("StrengthBoost", "1", GetReqAttributeParams),
+		[4] = ue:Create("CriticalChance", 10),
+		[7] = runeslot1,
+		[8] = ue:Create("DamageFromBase", 10),
+		[10] = ue:Create("StrengthBoost", "2", GetReqAttributeParams),
+		[12] = ue:Create("WitsBoost", "2"),
+		[15] = runeslot2,
+	},
 }
 
 return bonuses

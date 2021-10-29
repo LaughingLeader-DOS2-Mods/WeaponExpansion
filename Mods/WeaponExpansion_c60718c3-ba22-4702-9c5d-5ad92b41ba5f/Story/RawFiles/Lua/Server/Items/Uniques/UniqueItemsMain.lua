@@ -32,45 +32,42 @@ local ProgressionData = Ext.Require("Server/Items/Uniques/UniqueItemsProgression
 
 ---@type table<string, UniqueData>
 Uniques = {
-	AnatomyBook = UniqueData:Create("d4955fc9-41c8-4458-89c4-7ff199cdb6d2", ProgressionData.AnatomyBook, {Tag="LLWEAPONEX_UniqueAnatomyBook"}),
-	AnvilMace = UniqueData:Create("f3c71d85-1cc3-431f-b236-ad838bf2e418", ProgressionData.AnvilMace, {Tag="LLWEAPONEX_UniqueAnvilMace", DefaultOwner=Origin.Harken, AutoEquipOnOwner=true}),
-	ArmCannon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8", ProgressionData.ArmCannon, {Tag="LLWEAPONEX_RunicCannonGloves"}),
-	AssassinHandCrossbow = UniqueData:Create("70c59769-2838-4137-9421-4e251fecdc89", ProgressionData.AssassinHandCrossbow, {Tag="LLWEAPONEX_UniqueHandCrossbow"}),
-	BalrinAxe = UniqueData:Create("e4dc654c-db51-4b55-a342-83a864cfeff9", ProgressionData.BalrinAxe, {Tag="LLWEAPONEX_UniqueThrowingAxeA"}),
-	BeholderSword = UniqueData:Create("ddf11ed0-126f-4bec-8360-455ddf9cef12", ProgressionData.BeholderSword, {Tag="LLWEAPONEX_UniqueBeholderGreatsword"}),
-	Bible = UniqueData:Create("bcc43f30-b009-4b42-a4de-1c85a25b522a", ProgressionData.Bible, {Tag="LLWEAPONEX_UniqueBible"}),
-	Blunderbuss = UniqueData:Create("cd6c2b7d-ee74-401b-9866-409c45ae9413", ProgressionData.Blunderbuss, {Tag="LLWEAPONEX_UniqueBlunderbuss"}),
-	PacifistsWrath = UniqueData:Create("6d75d449-e021-4b4d-ad2d-c0873127c3b3", ProgressionData.PacifistsWrath, {Tag="LLWEAPONEX_UniqueBokken2H"}),
-	ChaosEdge = UniqueData:Create("61bbcd14-82a2-4efc-9a66-ac4b8a1310cf", ProgressionData.ChaosEdge, {Tag="LLWEAPONEX_UniqueRunebladeChaosGreatsword"}),
-	BasilusDagger = UniqueData:Create("5b5c20e1-cef4-40a2-b367-a984c38c1f03", ProgressionData.BasilusDagger, {Tag="LLWEAPONEX_UniqueBasilusDagger"}),
-	DeathEdge = UniqueData:Create("ea775987-18a6-4947-bb7c-3eea55a6f875", ProgressionData.DeathEdge, {Tag="LLWEAPONEX_UniqueDeathEdge"}),
-	DemoBackpack = UniqueData:Create("253e14da-cdb9-4cda-b9d4-352d8ed784c5", ProgressionData.DemoBackpack, {Tag="LLWEAPONEX_DemolitionBackpack"}),
-	DemonGauntlet = UniqueData:Create("0ac0d813-f58c-4399-99a8-1626a419bc53", ProgressionData.DemonGauntlet, {Tag="LLWEAPONEX_DemonGauntlet"}),
-	DivineBanner = UniqueData:Create("3113b901-340a-4f24-a38b-473e61d23371", ProgressionData.DivineBanner, {DefaultOwner=NPC.BishopAlexander, AutoEquipOnOwner=true, Tag="LLWEAPONEX_UniqueDivineBanner"}),
-	FireRunebladeKatana = UniqueData:Create("6f735ef9-524c-4514-b37f-c48a20b313c5", ProgressionData.FireRunebladeKatana, {Tag="LLWEAPONEX_UniqueRunebladeFireKatana"}),
-	Frostdyne = UniqueData:Create("S5d8ec362-618e-48e9-87c2-dbc18ea4e779", ProgressionData.Frostdyne, {DefaultOwner=NPC.Slane, AutoEquipOnOwner=false, Tag="LLWEAPONEX_UniqueRunebladeRapier"}),
-	HarkenPowerGloves = UniqueData:Create("1d71ffda-51a4-4404-ae08-e4d2d4f13b9f", ProgressionData.HarkenPowerGloves, {DefaultOwner=Origin.Harken, AutoEquipOnOwner=true, OnEquipped=CheckForAnvilWeightChange, Tag="LLWEAPONEX_UniquePowerGauntlets"}),
-	--HarkenTattoos = UniqueData:Create("40039552-3aae-4beb-8cca-981809f82988", ProgressionData.HarkenTattoos, {DefaultOwner = Origin.Harken, AutoEquipOnOwner=true, OnEquipped=OnTattoosEquipped}),
-	Harvest = UniqueData:Create("d1cb1583-ffb1-43f3-b9af-e1673e7ea4e1", ProgressionData.Harvest, {Tag="LLWEAPONEX_UniqueHarvestScythe"}),
-	LoneWolfBanner = UniqueData:Create("aa63e570-695a-461b-bb35-60cf7c915570", ProgressionData.LoneWolfBanner, {Tag="LLWEAPONEX_UniqueLoneWolfBanner"}),
-	MagicMissileWand = UniqueData:Create("f8958c1e-1c9d-4fa9-b03f-b883c65f95c3", ProgressionData.MagicMissileWand, {Tag="LLWEAPONEX_UniqueMagicMissileWand"}),
-	MonkBlindfold = UniqueData:Create("4258f164-b548-471f-990d-ae641960a842", ProgressionData.MonkBlindfold, {Tag="LLWEAPONEX_UniqueBlindfold"}),
-	Muramasa = UniqueData:Create("52c0b4a4-3906-4229-93a9-b83aea9e657c", ProgressionData.Muramasa, {Tag="LLWEAPONEX_UniqueMuramasaKatana"}),
-	OgreScroll = UniqueData:Create("cc4d26df-c8c4-458e-b88f-610387741533", ProgressionData.OgreScroll, {Tag="LLWEAPONEX_UniqueOgreScroll"}),
-	Omnibolt = UniqueData:Create("dec81eed-fcab-48cc-bd67-0431abe4260c", ProgressionData.Omnibolt, {Tag="LLWEAPONEX_UniqueOmniboltGreatbow"}),
-	PowerPole = UniqueData:Create("da0ac3e5-8a9e-417c-b516-dc8cd9245d0e", ProgressionData.PowerPole, {Tag="LLWEAPONEX_UniquePowerPole"}),
-	WarchiefHalberd = UniqueData:Create("6c52f44e-1c27-4409-9bfe-f89ee5af4a0d", ProgressionData.WarchiefHalberd, {Tag="LLWEAPONEX_UniqueWarchiefHalberdSpear"}),
-	Wraithblade = UniqueData:Create("c68b5afa-2574-471d-85ac-0738ee0a6393", ProgressionData.Wraithblade, {Tag="LLWEAPONEX_UniqueWraithblade"}),
+	AnatomyBook = UniqueData:Create(ProgressionData.AnatomyBook, {Tag="LLWEAPONEX_UniqueAnatomyBook"}),
+	AnvilMace = UniqueData:Create(ProgressionData.AnvilMace, {Tag="LLWEAPONEX_UniqueAnvilMace"}),
+	ArmCannon = UniqueData:Create(ProgressionData.ArmCannon, {Tag="LLWEAPONEX_RunicCannonGloves"}),
+	AssassinHandCrossbow = UniqueData:Create(ProgressionData.AssassinHandCrossbow, {Tag="LLWEAPONEX_UniqueHandCrossbow"}),
+	BalrinAxe = UniqueData:Create(ProgressionData.BalrinAxe, {Tag="LLWEAPONEX_UniqueThrowingAxeA"}),
+	BeholderSword = UniqueData:Create(ProgressionData.BeholderSword, {Tag="LLWEAPONEX_UniqueBeholderGreatsword"}),
+	Bible = UniqueData:Create(ProgressionData.Bible, {Tag="LLWEAPONEX_UniqueBible"}),
+	Blunderbuss = UniqueData:Create(ProgressionData.Blunderbuss, {Tag="LLWEAPONEX_UniqueBlunderbuss"}),
+	PacifistsWrath = UniqueData:Create(ProgressionData.PacifistsWrath, {Tag="LLWEAPONEX_UniqueBokken2H"}),
+	ChaosEdge = UniqueData:Create(ProgressionData.ChaosEdge, {Tag="LLWEAPONEX_UniqueRunebladeChaosGreatsword"}),
+	BasilusDagger = UniqueData:Create(ProgressionData.BasilusDagger, {Tag="LLWEAPONEX_UniqueBasilusDagger"}),
+	DeathEdge = UniqueData:Create(ProgressionData.DeathEdge, {Tag="LLWEAPONEX_UniqueDeathEdge"}),
+	DemoBackpack = UniqueData:Create(ProgressionData.DemoBackpack, {Tag="LLWEAPONEX_DemolitionBackpack"}),
+	DemonGauntlet = UniqueData:Create(ProgressionData.DemonGauntlet, {Tag="LLWEAPONEX_DemonGauntlet"}),
+	DivineBanner = UniqueData:Create(ProgressionData.DivineBanner, {Tag="LLWEAPONEX_UniqueDivineBanner"}),
+	FireRunebladeKatana = UniqueData:Create(ProgressionData.FireRunebladeKatana, {Tag="LLWEAPONEX_UniqueRunebladeFireKatana"}),
+	Frostdyne = UniqueData:Create(ProgressionData.Frostdyne, {Tag="LLWEAPONEX_UniqueRunebladeRapier"}),
+	HarkenPowerGloves = UniqueData:Create(ProgressionData.HarkenPowerGloves, {OnEquipped=CheckForAnvilWeightChange, Tag="LLWEAPONEX_UniquePowerGauntlets"}),
+	HarkenTattoos = UniqueData:Create(ProgressionData.HarkenTattoos, {Tag="LLWEAPONEX_UniqueStrengthTattoos", OnEquipped=OnTattoosEquipped}),
+	Harvest = UniqueData:Create(ProgressionData.Harvest, {Tag="LLWEAPONEX_UniqueHarvestScythe"}),
+	LoneWolfBanner = UniqueData:Create(ProgressionData.LoneWolfBanner, {Tag="LLWEAPONEX_UniqueLoneWolfBanner"}),
+	MagicMissileWand = UniqueData:Create(ProgressionData.MagicMissileWand, {Tag="LLWEAPONEX_UniqueMagicMissileWand"}),
+	MonkBlindfold = UniqueData:Create(ProgressionData.MonkBlindfold, {Tag="LLWEAPONEX_UniqueBlindfold"}),
+	Muramasa = UniqueData:Create(ProgressionData.Muramasa, {Tag="LLWEAPONEX_UniqueMuramasaKatana"}),
+	OgreScroll = UniqueData:Create(ProgressionData.OgreScroll, {Tag="LLWEAPONEX_UniqueOgreScroll"}),
+	Omnibolt = UniqueData:Create(ProgressionData.Omnibolt, {Tag="LLWEAPONEX_UniqueOmniboltGreatbow"}),
+	PowerPole = UniqueData:Create(ProgressionData.PowerPole, {Tag="LLWEAPONEX_UniquePowerPole"}),
+	WarchiefHalberd = UniqueData:Create(ProgressionData.WarchiefHalberd, {Tag="LLWEAPONEX_UniqueWarchiefHalberdSpear"}),
+	Wraithblade = UniqueData:Create(ProgressionData.Wraithblade, {Tag="LLWEAPONEX_UniqueWraithblade"}),
+	Victory = UniqueData:Create(ProgressionData.Victory, {Tag="LLWEAPONEX_UniqueSwordofVictory"}),
 }
 
---Uniques.ArmCannonWeapon = UniqueData:Create("a1ce4c1c-a535-4184-a1df-268eb4035fe8", ProgressionData.ArmCannonWeapon, {Tag="LLWEAPONEX_RunicCannonWeapon", LinkedItem=Uniques.ArmCannon, CanMoveToVendingMachine=false})
---Uniques.ArmCannonWeapon.CanMoveToVendingMachine = false
-Uniques.MagicMissileRod = UniqueData:Create("292b4b04-4ba1-4fa3-96df-19eab320c50f", ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", LinkedItem=Uniques.MagicMissileWand, CanMoveToVendingMachine=false, IsLinkedItem=true})
-
-Uniques.PacifistsWrath1H = UniqueData:Create("a5e7e46f-b83a-47a7-8bd6-f16f16fe5f42", ProgressionData.PacifistsWrath1H, {Tag="LLWEAPONEX_UniqueBokken1H", LinkedItem=Uniques.PacifistsWrath, CanMoveToVendingMachine=false, IsLinkedItem=true})
+Uniques.MagicMissileRod = UniqueData:Create(ProgressionData.MagicMissileRod, {Tag="LLWEAPONEX_UniqueMagicMissileRod", LinkedItem=Uniques.MagicMissileWand, CanMoveToVendingMachine=false, IsLinkedItem=true})
+Uniques.PacifistsWrath1H = UniqueData:Create(ProgressionData.PacifistsWrath1H, {Tag="LLWEAPONEX_UniqueBokken1H", LinkedItem=Uniques.PacifistsWrath, CanMoveToVendingMachine=false, IsLinkedItem=true})
 Uniques.PacifistsWrath.LinkedItem = Uniques.PacifistsWrath1H
-
-Uniques.WarchiefAxe = UniqueData:Create("056c2c38-b7be-4e06-be41-99b79ffe83c2", ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false, IsLinkedItem=true})
+Uniques.WarchiefAxe = UniqueData:Create(ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false, IsLinkedItem=true})
 Uniques.WarchiefHalberd.LinkedItem = Uniques.WarchiefAxe
 
 ---@param tag string
@@ -140,12 +137,17 @@ local LinkedUniques = {}
 ---@param item2 string
 ---@param skipSave boolean|nil
 function UniqueManager.LinkItems(item1, item2, skipSave)
-	assert(not StringHelpers.IsNullOrWhitespace(item1), "Item UUID 1 is nil")
-	assert(not StringHelpers.IsNullOrWhitespace(item2), "Item UUID 2 is nil")
-	LinkedUniques[item1] = item2
-	LinkedUniques[item2] = item1
-	if skipSave ~= true then
-		PersistentVars.LinkedUniques = LinkedUniques
+	local b,err = xpcall(function()
+		assert(not StringHelpers.IsNullOrWhitespace(item1), "Item UUID 1 is nil")
+		assert(not StringHelpers.IsNullOrWhitespace(item2), "Item UUID 2 is nil")
+		LinkedUniques[item1] = item2
+		LinkedUniques[item2] = item1
+		if skipSave ~= true then
+			PersistentVars.LinkedUniques = LinkedUniques
+		end
+	end, debug.traceback)
+	if not b then
+		Ext.PrintError(err)
 	end
 end
 
@@ -376,6 +378,7 @@ end
 function UniqueManager.InitializeUniques()
 	local region = SharedData.RegionData.Current
 	InitOriginsUniques(region)
+	UniqueManager.LoadLinkedUniques()
 	UniqueManager.FindOrphanedUniques()
 	for id,unique in pairs(Uniques) do
 		unique:FindPlayerCopies()
