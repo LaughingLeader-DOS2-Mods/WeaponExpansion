@@ -361,6 +361,7 @@
 	<content contentuid="h255918b4gac16g4dedgae98gc30117b6758b">Inert Runeblade, Family Heirloom</content>
 	<content contentuid="h256557fbg1d49g45d9g8690gb86b39d2a135">shadow damage</content>
 	<content contentuid="h256eb14fg3bf7g4428g9b7dg410ff53221a8">Headcracker</content>
+	<content contentuid="h2591654bg9c7cg4e07g9ba1g5f377f069f0b">All unobtained Weapon Expansion uniques will be moved to the Strange Machine, instead of being in specific places or on specific characters. &lt;font color=&apos;#FF0000&apos;&gt;This cannot be undone.&lt;/font&gt;</content>
 	<content contentuid="h25965ce8g9e12g4518gbecag7d24ba09c699">&lt;font color=&apos;#FFCC22&apos;&gt;Reload Pistol&lt;/font&gt;</content>
 	<content contentuid="h25afab32g53ccg4cf6g80cfg6c768304a925">Novice</content>
 	<content contentuid="h25b104a6g160bg466egb60fg91f44323c005">Adventurers who sail the high seas in search of treasure and opportunity. Equipped with a flintlock pistol, pirates tend to fire explosive lead when their enemies least expect it</content>
@@ -499,6 +500,7 @@
 	<content contentuid="h317c0b40g39a6g451bgb923gb03fc052d1f1">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in a sticky tar, dealing earth damage.</content>
 	<content contentuid="h3192a94bg96f7g421dgbed2g9da98d308c05">A weight throwing axe.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h31bc6a06ga3fbg455fg9572g7f6298cd93cb">Fired like a prayer, this blessed water greatbow arrow might be just the divine intervention you need in a hot situation.</content>
+	<content contentuid="h31bf0222gf4f0g4477g8ee8g1cbd097afce3">After an enemy falls in battle, inspire allies in a [1] radius to fight for complete victory, increasing their primary attributes, resistances, and granting a damage bonus.</content>
 	<content contentuid="h31cede19g57a8g48deg87d7gaa9dc607185c">&lt;font color=&apos;#EA74B6&apos;&gt;Token of Constitution&lt;/font&gt;</content>
 	<content contentuid="h31d83c23gc0fag412fg9f48gebc89f3e9d11">Muramasa, The Cursed Blade</content>
 	<content contentuid="h31e58acegf828g451bgbe86g5fea547456bc">Shuriken</content>
@@ -676,6 +678,7 @@
 	<content contentuid="h47d73bfcg16eag4504g83c0ge7b9c0048f13">*Ask to see the trader&apos;s goods.*</content>
 	<content contentuid="h4806c4d0gb9d3g4b2cg853fg79253e92c615">Water Rune</content>
 	<content contentuid="h480c4699g224bg4bccg9b43g3a6b0ea2bb38">Sniper&apos;s Rifle</content>
+	<content contentuid="h4865a4a5ga3adg4634g950eg806a9ee574ba">Move All Uniques</content>
 	<content contentuid="h4893e298g0c9fg4593gad0dgb1a795c0d767">Deal [1], destroying &lt;font color=&apos;#A8A8A8&apos;&gt;Physical Armour&lt;/font&gt;.</content>
 	<content contentuid="h48d438bdg5d2bg4976gaef5g4b6f5425cdae">A magical blade imbued with the power of lightning. The runes can be invoked to bathe the blade in dangerous electrical energy.</content>
 	<content contentuid="h48db07bag5564g4e40g9de9gac7ffef1ffa6">Sniper&apos;s Vow</content>
@@ -761,6 +764,7 @@
 	<content contentuid="h51274ed6gfb4dg4728g9f6fg8a8a69f49bfd">Weapon Mastery (Journeyman)</content>
 	<content contentuid="h51346687ga5e7g43feg9047g1406918d0719">&lt;font color=&apos;#D040D0&apos;&gt;Flask of Chaotic Weakness&lt;/font&gt;</content>
 	<content contentuid="h513c781bgc3e9g41ccga1a2g287a01b86471">Release an orb of dark fire, dealing [1], applying &lt;font color=&apos;#73f6ff&apos;&gt;Soul Burn&lt;/font&gt;, and creating a &lt;font color=&apos;#9A00FF&apos;&gt;cursed fire surface and cloud&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Damage/Range/Explosion Radius increases with every enemy that dies in combat ([ExtraData:LLWEAPONEX_DarkFireball_MaxKillCount] Max).&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF3333&apos;&gt;Casting this spell resets the bonuses accumulated.&lt;/font&gt;</content>
+	<content contentuid="h51414f0bgbadcg47ffgbe31ga4518859c47d">Inspired to fight for total victory, combat and defensive stats are increased.</content>
 	<content contentuid="h514f7a04gd4bdg4d18g9afeg2ec6234555ad">Dwarven Greatbow</content>
 	<content contentuid="h516be507g1b44g4701g8d0bg7a8562c700bd">Blessed Water Arrow</content>
 	<content contentuid="h517bfe9fg7243g42b8ga592g0d774197a744">A small rune that when fitted inside a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, allows the wielder to absorb elements in their surroundings and activate them their blade for a limited time.</content>
@@ -1757,6 +1761,7 @@
 	<content contentuid="hb9a6f17dg44d9g4ae4g9863g27fa7ab26b4e">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Enemies hit have a 20% chance to be struck by a &lt;font color=&apos;#7d71d9&apos;&gt;Thunderbolt&lt;/font&gt;, dealing &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; and chaining &lt;font color=&apos;#7d71d9&apos;&gt;Lightning&lt;/font&gt; to enemies within 8m.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 80%.&lt;/font&gt;&lt;font color=&apos;#f7ba14&apos; size=&apos;20&apos;&gt;Enemies can only be struck once per turn.&lt;/font&gt;</content>
 	<content contentuid="hb9d29345g4860g4a16gbf15g777e1e8998b8">&lt;font color=&apos;#80FFC3&apos;&gt;Bag of Special Tokens&lt;/font&gt;</content>
 	<content contentuid="hb9e220ceg072fg4b21gb00cg86ecef3a25f8">Character&apos;s has been marked by the &lt;font color=&apos;#c5a65a&apos;&gt;Warchief&apos;s Halberd&lt;/font&gt;.</content>
+	<content contentuid="hb9ec4d91g1861g4260g851fg073ad2e05aba">Sword of Victory</content>
 	<content contentuid="hba0e76cag73d3g4d3fgb7d6gc67962e1730c">Ring of the Weaponmaster</content>
 	<content contentuid="hba147a7bg1a91g4abega77dgc2204e66d8bd">Character has fumbled their basic attack!</content>
 	<content contentuid="hba48fc68g201fg454bga114gae251e299f95">Dirty Fighting I</content>
@@ -2039,6 +2044,7 @@
 	<content contentuid="hda9ea32dgec63g426bga69dg36206a8c97a2">Selene &amp; Helios, Defenders of the Divine</content>
 	<content contentuid="hdaa03834g44a4g40bcg845bgc99c48bca88c">Balrin&apos;s Throwing Axe</content>
 	<content contentuid="hdada42edge014g4a62gae6ag0b0115511488">Blademaster&apos;s Strike 9</content>
+	<content contentuid="hdadaded2g966dg4232g8b20g17a94b050727">Increases Healing By [ExtraData:LLWEAPONEX_AnatomyBook_HealBonusMultiplier]%</content>
 	<content contentuid="hdb03ef0ag0eacg4798g9649g9c0445d1279a">A large, long blade forged in a nation far to the east. Requires considerable strength to wield.</content>
 	<content contentuid="hdb292c4fg2cf6g432dga031gb762b7f18bc0">Staff Infection</content>
 	<content contentuid="hdb2abe6bg8c51g4a22gbffbgc466de533612">Magic Warfare 101: Crippling Magistrike</content>
@@ -2051,6 +2057,7 @@
 	<content contentuid="hdbf56425g1671g46f4gabb3g47e839b22530">Spider Queen&apos;s Caress</content>
 	<content contentuid="hdc0ec55fg1f46g489fgb119gada3abb16532">Magical Wooden Rod</content>
 	<content contentuid="hdc676435gde33g47e9gbb3agbca51542f431">Snowed</content>
+	<content contentuid="hdc7d6a51g2192g4fbbga2f5g974f1fe71b98">Victory Cry</content>
 	<content contentuid="hdc8a4479g65a0g4626g926eg20f6e5e44446">Two-handed Bokuto</content>
 	<content contentuid="hdc98ec8dg571eg4a24g8963g8d99760058fb">Expert Shieldsman</content>
 	<content contentuid="hdcab69c9gc26ag4c53gb624gbba1c5f13ee2">Allies within [ExtraData:LeadershipRange]m affected by &lt;font color=&apos;#11FF44&apos;&gt;[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]&lt;/font&gt; have a [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance]% chance to gain &lt;font color=&apos;#11FF88&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]&lt;/font&gt; on their turn. If &lt;font color=&apos;#11FF44&apos;&gt;[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]&lt;/font&gt; is from you, this chance is increased to [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2]%.</content>
@@ -2150,6 +2157,7 @@
 	<content contentuid="he80ce441g9499g4744gbd3ag5d55d702bf33">Dragon has been grounded by a Greatbow. Taking [1] per turn.</content>
 	<content contentuid="he8315b61g1853g4f22g857cg992df0e2d56e">Balrin&apos;s Throwing Axe (Fire)</content>
 	<content contentuid="he86b7062g94beg485egb9dag0cf3c6b1d2ff">Battleworn Glaive</content>
+	<content contentuid="he895769cg678eg4149g8c02g171e89162bae">A beautifully intricate sword gifted to a village for its heroic actions in The Great War. When striking evil, the blade is said to engulf in flame.</content>
 	<content contentuid="he8a552ecg47b7g4686gaeaagbd7b2705c331">&lt;font color=&apos;#ff780b&apos;&gt;Deadly Dud&lt;/font&gt;</content>
 	<content contentuid="he8adec30gee5fg453agb282g984b856e140a">Scepter of Magic Missile</content>
 	<content contentuid="he8bd3008g02a2g4d68g86d2g212a3d3c2d1f">Honed Halberd</content>
@@ -2244,6 +2252,7 @@
 	<content contentuid="hf232e463gc619g46fdg9eb9gbf0a13bdcb5a">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery I&lt;/font&gt;</content>
 	<content contentuid="hf247dd3dg7c2dg48a9g96fege61d446298ca">Aspect of Air</content>
 	<content contentuid="hf2933c08ga9e6g4553g97c5g73dde936ba58">Explode Poison</content>
+	<content contentuid="hf2a33413g706fg4a9dg9849gea34a1daf82b">A thick book detailing the complex anatomical structure of various species, including the four common races, and beasts beyond. Studying this book affords a specialist&apos;s knowledge on how better to apply healing techniques.</content>
 	<content contentuid="hf2a5c017g2c47g42f8g9181ga6a2ba29012e">Novice</content>
 	<content contentuid="hf2ab4a31gdcdbg4f4dg8415g7c8957af4d5c">a Greatbow</content>
 	<content contentuid="hf2f2b489gdd14g4d90g9515g62d2e5458345">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery I&lt;/font&gt;</content>
@@ -2348,6 +2357,7 @@
 	<content contentuid="hfc83703fg0120g40e9gb08ag1185eb332c94">Agni Ignus</content>
 	<content contentuid="hfc86af03g5ae6g4acdg8146g7e5415774ce1">Blinder</content>
 	<content contentuid="hfcae10c7ge0a1g41fcg8255g361fffc3b0cf">After a stressful career as a mercenary, cleaning up the aftermath of your crazy comrades, you find yourself captured by the Divine Order, charged with being a Sourcerer. If only they knew.</content>
+	<content contentuid="hfcbeef9cg9b8cg457fg9cdcg53567fe8198a">Victory Cry</content>
 	<content contentuid="hfcd7afbagcf8bg49cdg90ffg27193e3bf9ca">*[MAGE ARMOR] Click on the button labeled &apos;Mage Armor&apos;.*</content>
 	<content contentuid="hfce2d440g3c47g4b02g8d8ag7193391dd1dd">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt; + &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;If an attacked target is &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, a heatburst burns enemies within [1]m.&lt;br&gt;If a heatburst target is already &lt;font color=&apos;#fe6e27&apos;&gt;Burning&lt;/font&gt;, the heatburst continues.&lt;br&gt;Adds &lt;font color=&apos;#fe6e27&apos;&gt;Fire Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="hfced8b62g3d44g41e8g832fgb585046c2b55">&lt;font color=&apos;#79C1FF&apos;&gt;Cryogenic Bullets&lt;/font&gt;</content>
@@ -2369,6 +2379,7 @@
 	<content contentuid="hfef86678g922bg4f8cga1c2gd58bb5f3f9cd">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery II&lt;/font&gt;</content>
 	<content contentuid="hff1a0098g0d08g4386gb48ag5d2649cb5025">Demonic Protection</content>
 	<content contentuid="hff1e38f6g8441g4fe4ga450g8d536e1b5db7">Ice Bullets</content>
+	<content contentuid="hff4e4e01ge7e6g490dg9284gc0dd127e87ef">Victory Cry</content>
 	<content contentuid="hff72913fgdc8cg4e21g908eg5e5b3e7b1acf">Peacekeeper</content>
 	<content contentuid="hff86de07g52e5g491cga553g90bb501e6f52">&lt;font color=&apos;#FFD900&apos;&gt;Changes [1] damage to [2].&lt;/font&gt;</content>
 	<content contentuid="hfffc1796gc71bg44bag8e7bgc568f8d6cd3a">Demon&apos;s Blade</content>
