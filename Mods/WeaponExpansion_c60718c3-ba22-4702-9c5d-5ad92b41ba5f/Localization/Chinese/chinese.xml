@@ -288,6 +288,7 @@
 	<content contentuid="h1de3fa06g9f91g4efdg82f4gac1f3c75d6a7">Mighty Greatbow </content>
 	<content contentuid="h1e5c8bd9ge124g4d2ag833fgc8b47edc5e47">Action Manual</content>
 	<content contentuid="h1e7673d0g6739g4be5gb84agf1d3fc43b003">Revenant</content>
+	<content contentuid="h1e8a0ec7g5b81g4ff5ga3d9g4d0c8502f425">Summon a [Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem] on Kill</content>
 	<content contentuid="h1e98bcebg2e42g4699gba2bg6f647d428699">Unarmed</content>
 	<content contentuid="h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa">Scythe</content>
 	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, reducing max &lt;font color=&apos;#AE9F95&apos;&gt;[Handle:h1feadc00g239ag430bgac99g7b5f3605a1c1:Physical Armour]&lt;/font&gt;/&lt;font color=&apos;#4197E2&apos;&gt;[Handle:h50eb8e33g82edg412eg9886gec19ca591254:Magic Armour]&lt;/font&gt; by &lt;font color=&apos;#AE9F95&apos;&gt;[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%&lt;/font&gt;/&lt;font color=&apos;#4197E2&apos;&gt;[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt;&lt;/font&gt; for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).&lt;/font&gt;</content>
@@ -500,7 +501,7 @@
 	<content contentuid="h317c0b40g39a6g451bgb923gb03fc052d1f1">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are covered in a sticky tar, dealing earth damage.</content>
 	<content contentuid="h3192a94bg96f7g421dgbed2g9da98d308c05">A weight throwing axe.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h31bc6a06ga3fbg455fg9572g7f6298cd93cb">Fired like a prayer, this blessed water greatbow arrow might be just the divine intervention you need in a hot situation.</content>
-	<content contentuid="h31bf0222gf4f0g4477g8ee8g1cbd097afce3">After an enemy falls in battle, inspire allies in a [1] radius to fight for complete victory, increasing their primary attributes, resistances, and granting a damage bonus.</content>
+	<content contentuid="h31bf0222gf4f0g4477g8ee8g1cbd097afce3">After an enemy falls in battle, inspire allies in a [1] radius, cleansing [Key:FEAR_DisplayName], increasing their primary attributes, resistances, and granting a damage bonus.&lt;br&gt;</content>
 	<content contentuid="h31cede19g57a8g48deg87d7gaa9dc607185c">&lt;font color=&apos;#EA74B6&apos;&gt;Token of Constitution&lt;/font&gt;</content>
 	<content contentuid="h31d83c23gc0fag412fg9f48gebc89f3e9d11">Muramasa, The Cursed Blade</content>
 	<content contentuid="h31e58acegf828g451bgbe86g5fea547456bc">Shuriken</content>
@@ -1557,6 +1558,7 @@
 	<content contentuid="ha294a1bfg2496g4badg9830gc88546c7e7c8">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery IV&lt;/font&gt;</content>
 	<content contentuid="ha2bb0653g0733g468cgb260g9956cd1337c7">Axe Stalker</content>
 	<content contentuid="ha2e642b4ga7a9g4e8dg9602gc99caba74917">[LLWEAPONEX_VendingMachine_OrderOption3_048eaa1b-d937-48bb-ac2c-5759cd64540f]</content>
+	<content contentuid="ha2fbf8c5g3500g42d4ga21bg5e4524eae598">&lt;font color=&apos;#CC33FF&apos;&gt;[Key:WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName] twists the recently slain [1], summoning a &lt;font color=&apos;#FFFFFF&apos;&gt;[Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem]&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="ha334211eg8502g4530ga132g3e96b8ded816">a Shield</content>
 	<content contentuid="ha33beed7ga922g4a63gbba6gddab9629cdee">&lt;font color=&apos;#24ff24&apos;&gt;Flourish (+1 AP)&lt;/font&gt;</content>
 	<content contentuid="ha39a9ad8gcbb4g44abgbb36gd7d435a1e029">&lt;font color=&apos;#ED9D07&apos;&gt;Bada Boom&lt;/font&gt;</content>
@@ -2158,7 +2160,7 @@
 	<content contentuid="he80ce441g9499g4744gbd3ag5d55d702bf33">Dragon has been grounded by a Greatbow. Taking [1] per turn.</content>
 	<content contentuid="he8315b61g1853g4f22g857cg992df0e2d56e">Balrin&apos;s Throwing Axe (Fire)</content>
 	<content contentuid="he86b7062g94beg485egb9dag0cf3c6b1d2ff">Battleworn Glaive</content>
-	<content contentuid="he895769cg678eg4149g8c02g171e89162bae">A beautifully intricate sword gifted to a village for its heroic actions in The Great War. When striking evil, the blade is said to engulf in flame.</content>
+	<content contentuid="he895769cg678eg4149g8c02g171e89162bae">A beautifully-intricate sword gifted to a village for its heroic actions in The Great War. Despite being long enough for a two-handed class weapon, the blade is remarkably light, allowing fluid movement with one hand. When striking evil, the blade is said to engulf in flame, the words etched upon it granting power beyond the norm.</content>
 	<content contentuid="he8a552ecg47b7g4686gaeaagbd7b2705c331">&lt;font color=&apos;#ff780b&apos;&gt;Deadly Dud&lt;/font&gt;</content>
 	<content contentuid="he8adec30gee5fg453agb282g984b856e140a">Scepter of Magic Missile</content>
 	<content contentuid="he8bd3008g02a2g4d68g86d2g212a3d3c2d1f">Honed Halberd</content>
@@ -2253,7 +2255,7 @@
 	<content contentuid="hf232e463gc619g46fdg9eb9gbf0a13bdcb5a">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery I&lt;/font&gt;</content>
 	<content contentuid="hf247dd3dg7c2dg48a9g96fege61d446298ca">Aspect of Air</content>
 	<content contentuid="hf2933c08ga9e6g4553g97c5g73dde936ba58">Explode Poison</content>
-	<content contentuid="hf2a33413g706fg4a9dg9849gea34a1daf82b">A thick book detailing the complex anatomical structure of various species, including the four common races, and beasts beyond. Studying this book affords a specialist&apos;s knowledge on how better to apply healing techniques.</content>
+	<content contentuid="hf2a33413g706fg4a9dg9849gea34a1daf82b">A book by a private group known as &quot;Lionheart Medical&quot;, detailing the complex anatomical structure of various species, including the four common races, and beasts beyond. Studying this book affords a specialist&apos;s knowledge on how better to apply healing techniques.</content>
 	<content contentuid="hf2a5c017g2c47g42f8g9181ga6a2ba29012e">Novice</content>
 	<content contentuid="hf2ab4a31gdcdbg4f4dg8415g7c8957af4d5c">a Greatbow</content>
 	<content contentuid="hf2f2b489gdd14g4d90g9515g62d2e5458345">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery I&lt;/font&gt;</content>

@@ -1,14 +1,6 @@
 ---@type TranslatedString
 local ts = LeaderLib.Classes.TranslatedString
 
-local ExtraPropsTags = {
-	LLWEAPONEX_PirateGloves_Equipped = true,
-	LLWEAPONEX_InfinitePickpocket = true,
-	LLWEAPONEX_Blunderbuss_Equipped = true,
-	LLWEAPONEX_MagicMissileWand_Equipped = true,
-	LLWEAPONEX_UniqueThrowingAxeA = true,
-	LLWEAPONEX_PacifistsWrath_Equipped = true,
-}
 
 ---@param tooltip TooltipData
 ---@param item EsvCharacter
@@ -449,13 +441,27 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
-		for tag,b in pairs(ExtraPropsTags) do
+		for tag,v in pairs(Tags.ExtraProperties) do
 			if GameHelpers.ItemHasTag(item, tag) then
-				local text = GameHelpers.GetStringKeyText(tag, "")
-				if text ~= "" then
+				local text = ""
+				local t = type(v)
+				if v == "string" then
+					text = GameHelpers.GetStringKeyText(v, "")
+				elseif v == "function" then
+					local results = {xpcall(v, debug.traceback, tag, item, tooltip)}
+					if results[1] == false then
+						Ext.PrintError(results[2])
+					else
+						text = results[2]
+					end
+				else
+					text = GameHelpers.GetStringKeyText(tag, "")
+				end
+				
+				if not StringHelpers.IsNullOrWhitespace(text) then
 					local element = {
 						Type = "ExtraProperties",
-						Label = text
+						Label = GameHelpers.Tooltip.ReplacePlaceholders(text, character)
 					}
 					tooltip:AppendElement(element)
 				end

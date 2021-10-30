@@ -133,6 +133,8 @@ Timer.RegisterListener("LLWEAPONEX_Katana_VanquishersPath_HitNext", function(tim
 end)
 
 local function GetVanquishersPathTargetData(caster, target)
+	caster = GameHelpers.GetUUID(caster)
+	target = GameHelpers.GetUUID(target)
 	local casterData = PersistentVars.SkillData.VanquishersPath[caster]
 	local targetData = nil
 	local index = -1

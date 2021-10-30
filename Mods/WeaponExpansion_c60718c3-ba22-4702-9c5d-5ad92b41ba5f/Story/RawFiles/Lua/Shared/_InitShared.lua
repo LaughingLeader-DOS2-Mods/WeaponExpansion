@@ -50,6 +50,16 @@ Tags = {
 	---Client-side
 	---@type table<string, fun(character:EsvCharacter, skill:string, tag:string, tooltip:TooltipData):string,boolean>
 	SkillBonusText = {},
+	ExtraProperties = {
+		LLWEAPONEX_PirateGloves_Equipped = true,
+		LLWEAPONEX_InfinitePickpocket = true,
+		LLWEAPONEX_Blunderbuss_Equipped = true,
+		LLWEAPONEX_MagicMissileWand_Equipped = true,
+		LLWEAPONEX_UniqueThrowingAxeA = true,
+		LLWEAPONEX_PacifistsWrath_Equipped = true,
+		LLWEAPONEX_AnatomyBook_Equipped = true,
+		LLWEAPONEX_DeathEdge_Equipped = true,
+	}
 }
 
 Origin = {

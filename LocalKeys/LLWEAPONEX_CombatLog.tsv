@@ -4,3 +4,4 @@ LLWEAPONEX_CombatLog_StealFailed	<font color='#FF0000'>[1] failed to steal anyth
 LLWEAPONEX_CombatLog_StealLimitReached	<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>	h62e44d39gae88g4785g9004g79e396516ee4
 LLWEAPONEX_CombatLog_MasteryRankUp	<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>	he0cceb33g75ddg44a5g94b4geda5fd12c886
 LLWEAPONEX_CombatLog_BasilusDaggerHauntedDamage	<font color='#CC00FF'>[1] was haunted by the Blade of Basilus!</font>	h1ba91504g8197g442dg8726g1b49470e8cdd
+LLWEAPONEX_CombatLog_DeathEdgeBonus	<font color='#CC33FF'>[Key:WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName] twists the recently slain [1], summoning a <font color='#FFFFFF'>[Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem]</font>.</font>	ha2fbf8c5g3500g42d4ga21bg5e4524eae598

@@ -34,7 +34,14 @@ local function FireCallbacks(id, target, attacker, success)
 	end
 end
 
+---@param id string
+---@param target UUID|EsvCharacter|EsvItem
+---@param attacker UUID|EsvCharacter|EsvItem
+---@param listenDelay integer
 function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
+	target = GameHelpers.GetUUID(target)
+	attacker = GameHelpers.GetUUID(attacker)
+
 	if PersistentVars.OnDeath[target] == nil then
 		PersistentVars.OnDeath[target] = {
 			Total = 0,

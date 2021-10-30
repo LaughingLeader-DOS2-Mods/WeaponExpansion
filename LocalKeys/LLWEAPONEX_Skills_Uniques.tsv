@@ -29,4 +29,4 @@ Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand_DisplayName	<font color='#C7A758
 Shout_LLWEAPONEX_Prepare_BalrinsAxe_Description	Prepare to throw <font color='#C7A758'>Balrin's Throwing Axe</font>, gaining a different skill depending on which hand wields the axe.	hf5df2e9ega35cg4510gb732gbbc326664a95
 Shout_LLWEAPONEX_Prepare_BalrinsAxe_DisplayName	<font color='#C7A758'>Prepare Balrin's Throwing Axe</font>	h51a0c668gafc2g4fbcga910g4e8739fd3e17
 Shout_LLWEAPONEX_VictoryCry_DisplayName	Victory Cry	hff4e4e01ge7e6g490dg9284gc0dd127e87ef
-Shout_LLWEAPONEX_VictoryCry_Description	After an enemy falls in battle, inspire allies in a [1] radius to fight for complete victory, increasing their primary attributes, resistances, and granting a damage bonus.	h31bf0222gf4f0g4477g8ee8g1cbd097afce3
+Shout_LLWEAPONEX_VictoryCry_Description	After an enemy falls in battle, inspire allies in a [1] radius, cleansing [Key:FEAR_DisplayName], increasing their primary attributes, resistances, and granting a damage bonus.<br>	h31bf0222gf4f0g4477g8ee8g1cbd097afce3

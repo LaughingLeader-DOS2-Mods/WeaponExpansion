@@ -22,6 +22,7 @@ LLWEAPONEX_MagicMissileWand_Equipped	45%/30%/10% Chance for Bonus Missiles	h3440
 LLWEAPONEX_PacifistsWrath_Equipped	Deals Non-Lethal Damage	hc8fd4ac5g9988g430cg9df3g07e556270b15
 LLWEAPONEX_AnatomyBook_Equipped	Increases Healing By [ExtraData:LLWEAPONEX_AnatomyBook_HealBonusMultiplier]%	hdadaded2g966dg4232g8b20g17a94b050727
 LLWEAPONEX_AnatomyBook_SkillBonus	<font color='#C7A758'>[Key:WPN_UNIQUE_LLWEAPONEX_BattleBook_1H_AnatomyBook_A_DisplayName]</font><br><font color='#97FBFF'>Vitality healing increased by [ExtraData:LLWEAPONEX_AnatomyBook_HealBonusMultiplier]%.</font>	hdadaded2g966dg4232g8b20g17a94b050727
+LLWEAPONEX_DeathEdge_Equipped	Summon a [Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem] on Kill	h1e8a0ec7g5b81g4ff5ga3d9g4d0c8502f425
 LLWEAPONEX_HARKEN	Harken	h9fee2cfeg963cg43f0ga4fcgdfb79b48f7e0
 LLWEAPONEX_KORVASH	Kor'vash	h7c860e8dgcd03g4877g8406gab762dc6b76e
 LLWEAPONEX_HandCrossbowBolt	Hand Crossbow Rune	h2405a422gfa67g495agb1b5gdde42d586c80

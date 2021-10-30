@@ -9,9 +9,10 @@ if not Vars.IsClient then
 		if heal.HealAmount > 0
 		and affectHealTypes[heal.HealType] 
 		and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_AnatomyBook_Equipped") then
-			local healMult = Ext.ExtraData.LLWEAPONEX_AnatomyBook_HealBonusMultiplier or 1.5
+			local healMult = GameHelpers.GetExtraData("LLWEAPONEX_AnatomyBook_HealBonusMultiplier", 50, false)
 			if healMult > 0 then
-				heal.HealAmount = math.ceil(heal.HealAmount * healMult)
+				healMult = healMult / 100
+				heal.HealAmount = math.ceil(heal.HealAmount + (heal.HealAmount * healMult))
 			end
 		end
 	end)
