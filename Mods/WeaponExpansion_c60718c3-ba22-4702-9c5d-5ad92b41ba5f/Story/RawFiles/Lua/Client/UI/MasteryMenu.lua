@@ -398,17 +398,36 @@ function MasteryMenu.RepositionToggleButton(dialogOpen)
 			end
 		end
 
-		--local ui = not Vars.ControllerEnabled and Ext.GetUIByType(Data.UIType.hotBar) or Ext.GetUIByType(Data.UIType.bottomBar_c)
+		--fprint(LOGLEVEL.TRACE, "sizeHelper.width(%s) sizeHelper.height(%s) screenWidth(%s) screenHeight(%s)", main.sizeHelper.width, main.sizeHelper.height, main.screenWidth, main.screenHeight)
 
-		--menu_btn.x = math.ceil(main.screenWidth * 0.05)
-		menu_btn.x = 468 - menu_btn.width
+		--MasteryMenu.ToggleButtonInstance:Resize(main.screenWidth, main.screenHeight)
+
+		local scaleDiff = (main.screenWidth / main.designResolution.x)
+
+		local hotbar = not Vars.ControllerEnabled and Ext.GetUIByType(Data.UIType.hotBar) or Ext.GetUIByType(Data.UIType.bottomBar_c)
+		if hotbar then
+			local hotbarMain = hotbar:GetRoot()
+			--MasteryMenu.ToggleButtonInstance:Resize(hotbarMain.stage.stageWidth, hotbarMain.stage.stageHeight)
+
+			if hotbarMain.hotbar_mc.scrollRect ~= nil then
+				local hotbarSizeDiff = hotbarMain.hotbar_mc.scrollRect.width / hotbarMain.stage.stageWidth
+				local button_x = main.defaultButtonPosition.x * hotbarSizeDiff
+				menu_btn.x = button_x
+			else
+				menu_btn.x = main.defaultButtonPosition.x * (hotbarMain.hotbar_mc.width / hotbarMain.stage.stageWidth)
+			end
+		else
+			menu_btn.x = main.defaultButtonPosition.x
+		end
+
 		if dialogOpen then
 			--menu_btn.x = 96
 			menu_btn.y = main.stage.stageHeight
 		else
-			--menu_btn.x = main.defaultButtonPosition.x
 			menu_btn.y = main.defaultButtonPosition.y
 		end
+
+		--fprint(LOGLEVEL.TRACE, "menu_btn.x(%s) menu_btn.y(%s) scaleDiff(%s)", menu_btn.x, menu_btn.y, scaleDiff)
 	end
 end
 
@@ -457,7 +476,7 @@ function MasteryMenu.InitializeToggleButton()
 					CloseMenu()
 				end
 			end)
-			Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call,...)
+			Ext.RegisterUICall(ui, "repositionMasteryMenuToggleButton", function(ui,call, w, h)
 				MasteryMenu.RepositionToggleButton()
 			end)
 		else

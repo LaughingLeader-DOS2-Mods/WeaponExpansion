@@ -18,11 +18,13 @@ package
 		public var anchorPos:String = "topleft";
 		public var anchorTPos:String = "topleft";
 		public var anchorTarget:String = "screen";
-		public var uiScaling:Number;
+		public var uiScaling:Number = 1.0;
+		public var scaleChange:Number = 0.0;
 		public const designResolution:Point = new Point(1920,1080);
-		public var defaultButtonPosition:Point = new Point(175,1015.45);
+		public var defaultButtonPosition:Point = new Point(147,930);
 		public var screenWidth:Number = 0;
 		public var screenHeight:Number = 0;
+		public var sizeHelper:MovieClip;
 
 		public function MainTimeline()
 		{
@@ -41,6 +43,18 @@ package
 			ExternalInterface.call("setPosition",this.anchorPos,this.anchorTarget,this.anchorPos);
 		}
 
+		public function setShared(b:Boolean) : *
+		{
+			if(!b)
+			{
+				ExternalInterface.call("setAnchor","bottom","splitscreen","bottom");
+			}
+			else
+			{
+				ExternalInterface.call("setAnchor","bottom","screen","bottom");
+			}
+		}
+
 		public function onEventResolution(w:Number, h:Number) : *
 		{
 			// w = w / this.uiScaling;
@@ -50,10 +64,17 @@ package
 			// resHeight = h;
 			if(this.screenWidth != w || this.screenHeight != h)
 			{
-				ExternalInterface.call("setPosition",this.anchorPos,this.anchorTarget,this.anchorPos);
 				this.screenWidth = w;
 				this.screenHeight = h;
-				this.uiScaling = h / this.designResolution.y;
+
+				//this.sizeHelper.scaleX = (this.designResolution.x / w);
+				//this.sizeHelper.scaleY = (this.designResolution.y / h);
+				this.sizeHelper.x = 0;
+				this.sizeHelper.u = 0;
+				this.sizeHelper.width = w;
+				this.sizeHelper.height = h;
+				ExternalInterface.call("setPosition",this.anchorPos,this.anchorTarget,this.anchorPos);
+				this.scaleChange = h / this.designResolution.y;
 				ExternalInterface.call("repositionMasteryMenuToggleButton", w, h);
 			}
 		}
@@ -108,11 +129,24 @@ package
 		public function frame1() : void
 		{
 			this.anchorId = "masteryMenuToggleButton";
-			this.anchorPos = "topleft";
-			this.anchorTPos = "topleft";
-			this.anchorTarget = "screen";
+			this.anchorPos = "bottom";
+			this.anchorTPos = "bottom";
+			this.anchorTarget = "splitscreen";
+			//fixed, fitVertical, fitHorizontal, fit, fill, fillVFit
 			this.layout = "fillVFit";
 			this.uiScaling = 1;
+
+			//this.sizeHelper.visible = false;
+			this.sizeHelper.mouseEnabled = false;
+			this.sizeHelper.mouseChildren = false;
+			this.sizeHelper.buttonMode = false;
+			//this.sizeHelper.enabled = false;
+			this.sizeHelper.doubleClickEnabled = false;
+			this.sizeHelper.tabEnabled = false;
+			this.sizeHelper.tabChildren = false;
+
+			this.defaultButtonPosition.y = this.menu_btn.y;
+			this.defaultButtonPosition.x = this.menu_btn.x;
 		}
 	}
 }
