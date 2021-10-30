@@ -1858,6 +1858,7 @@
 	<content contentuid="hc4bf9383ga9b2g48fcgb253gcc7546987b56">Throwing</content>
 	<content contentuid="hc4cbb3efg9cd3g4193g861bg8f086795ea16">Automatically Equips the Dragon Bone Claws Weapon</content>
 	<content contentuid="hc4d7bbdcg90fdg4d2fgb72bg3bdf239f2aec">Stone Rod</content>
+	<content contentuid="hc4f1afa6g2ea1g4741ga7a5g0b3b48300f13">&lt;font color=&apos;#11D77A&apos;&gt;Enhanced Leadership&lt;/font&gt;</content>
 	<content contentuid="hc50ca329gfc06g4b22g9073gd65fa5fd2a88">Tuned Rifle</content>
 	<content contentuid="hc53e89f9g9652g4b37gbcf8g6418b3364f61">Shock Resistance (&lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;)</content>
 	<content contentuid="hc549277egfaafg4977g9564g0f7878c56e51">Lucian&apos;s Chaos</content>
@@ -2160,7 +2161,7 @@
 	<content contentuid="he80ce441g9499g4744gbd3ag5d55d702bf33">Dragon has been grounded by a Greatbow. Taking [1] per turn.</content>
 	<content contentuid="he8315b61g1853g4f22g857cg992df0e2d56e">Balrin&apos;s Throwing Axe (Fire)</content>
 	<content contentuid="he86b7062g94beg485egb9dag0cf3c6b1d2ff">Battleworn Glaive</content>
-	<content contentuid="he895769cg678eg4149g8c02g171e89162bae">A beautifully-intricate sword gifted to a village for its heroic actions in The Great War. Despite being long enough for a two-handed class weapon, the blade is remarkably light, allowing fluid movement with one hand. When striking evil, the blade is said to engulf in flame, the words etched upon it granting power beyond the norm.</content>
+	<content contentuid="he895769cg678eg4149g8c02g171e89162bae">A beautifully-intricate sword gifted to a village for its heroic actions in The Great War. Despite being long enough for a two-handed class weapon, the blade is remarkably light, allowing fluid movement with one hand.</content>
 	<content contentuid="he8a552ecg47b7g4686gaeaagbd7b2705c331">&lt;font color=&apos;#ff780b&apos;&gt;Deadly Dud&lt;/font&gt;</content>
 	<content contentuid="he8adec30gee5fg453agb282g984b856e140a">Scepter of Magic Missile</content>
 	<content contentuid="he8bd3008g02a2g4d68g86d2g212a3d3c2d1f">Honed Halberd</content>
@@ -2323,6 +2324,7 @@
 	<content contentuid="hf815f581gf0a7g4d7bg85bdgbfd1ee921cbd">Spiked Quarterstaff</content>
 	<content contentuid="hf84790b2g028dg44e4g96e3g099eff0b4599">&lt;font color=&apos;#d040d0&apos;&gt;Charming Great Arrow&lt;/font&gt;</content>
 	<content contentuid="hf8b4f069g9305g4d2dg9949g69d67c069777">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are specially designed to penetrate armor.</content>
+	<content contentuid="hf9099919gab20g4e3bgbfb7gf51986b49573">&lt;font color=&apos;#C7A758&apos;&gt;Leadership now redirects [ExtraData:LLWEAPONEX_SwordofVictory_DamageRedirectionAmount]% of damage taken by allies to you.&lt;/font&gt;</content>
 	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Set [1] for [4] turn(s) [2][3]</content>
 	<content contentuid="hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb">Builds Energy on Hit</content>
 	<content contentuid="hf90e918egb64fg4601g9e94g26341d6599da">Create Attribute Token</content>
