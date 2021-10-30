@@ -19,14 +19,12 @@ local Finishers = {
 local function ClearBlademasterComboTag(uuid)
 	if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 1 then
 		ClearTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
-		GameHelpers.UI.RefreshSkillBar(uuid)
 	end
 end
 
 local function SetBlademasterComboTag(uuid)
 	if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 0 then
 		SetTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
-		GameHelpers.UI.RefreshSkillBar(uuid)
 	end
 end
 
@@ -289,7 +287,6 @@ RegisterStatusListener(StatusEvent.Applied, ComboStatuses, function(target, stat
 	PersistentVars.StatusData.KatanaCombo[source][target] = true
 	if IsTagged(source, "LLWEAPONEX_Blademaster_Target_Available") == 0 then
 		SetTag(source, "LLWEAPONEX_Blademaster_Target_Available")
-		GameHelpers.UI.RefreshSkillBar(source)
 	end
 	if ObjectIsCharacter(target) == 1 then
 		local statusObj = Ext.GetCharacter(target):GetStatus(status)

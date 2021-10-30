@@ -59,6 +59,7 @@ Tags = {
 		LLWEAPONEX_PacifistsWrath_Equipped = true,
 		LLWEAPONEX_AnatomyBook_Equipped = true,
 		LLWEAPONEX_DeathEdge_Equipped = true,
+		--LLWEAPONEX_SwordofVictory_Equipped = true,
 	}
 }
 
@@ -213,14 +214,19 @@ Ext.RegisterListener("SessionLoaded", function()
 	EnableFeature("FixChaosDamageDisplay")
 	EnableFeature("FixCorrosiveMagicDamageDisplay")
 	EnableFeature("FixRifleWeaponRequirement")
+	EnableFeature("FixSkillTagRequirements")
+	EnableFeature("FormatTagElementTooltips")
 	EnableFeature("StatusParamSkillDamage")
 	EnableFeature("TooltipGrammarHelper")
-    EnableFeature("ReplaceTooltipPlaceholders")
     EnableFeature("FixFarOutManSkillRangeTooltip")
-	EnableFeature("FormatTagElementTooltips")
+    EnableFeature("ReplaceTooltipPlaceholders")
 
 	if Mods.Thanos then
 		UnarmedHelpers.RegisterUnarmedStat("ARM_UNIQUE_DB_Thanos_InfinityGauntlet", "WPN_UNIQUE_DB_Thanos_InfinityGauntlet")
+	end
+
+	if Vars.IsClient then
+		Mods.LeaderLib.TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_SwordofVictory_Equipped")
 	end
 end)
 

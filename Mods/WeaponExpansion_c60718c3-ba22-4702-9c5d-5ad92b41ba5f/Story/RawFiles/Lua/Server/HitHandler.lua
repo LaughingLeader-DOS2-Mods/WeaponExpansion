@@ -148,7 +148,8 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 			hitSucceeded = true
 		end
 
-		if hitSucceeded and not StringHelpers.IsNullOrEmpty(target.MyGuid) then
+		if hitSucceeded and target then
+			SwordofVictory_OnHit(target, source, data)
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target.MyGuid]
 			if coverData ~= nil then
 				DualShields_Cover_RedirectDamage(target.MyGuid, coverData.Blocker, source.MyGuid, data.HitStatus.StatusHandle)
