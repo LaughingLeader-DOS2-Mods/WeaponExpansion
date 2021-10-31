@@ -165,7 +165,6 @@ local function CaptureRewardScreenItems(ui, method)
 				local item = Ext.GetItem(Ext.DoubleToHandle(handle))
 				if item ~= nil then
 					if Vars.DebugMode then
-						print("Found quest reward item", item.NetID, handle)
 						PrintLog("MyGuid(%s) StatsId(%s) ItemType(%s) NetID(%s) WorldPos(%s)", item.MyGuid, item.StatsId, item.ItemType, item.NetID, Common.Dump(item.WorldPos))
 					end
 					rewardScreenItems[item.NetID] = item

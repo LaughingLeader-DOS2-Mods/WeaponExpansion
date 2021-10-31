@@ -217,7 +217,11 @@ function ChangeItemScaling(item, attribute, itemStat, craftingCharacter)
 				ItemToInventory(clone.MyGuid, CharacterGetHostCharacter(), 1, 0, 0)
 			end
 			UniqueManager.UpdateUniqueUUID(item, clone, true)
-			ItemRemove(item.MyGuid)
+			if item.Global then
+				ItemToInventory(item.MyGuid, NPC.UniqueHoldingChest, 1, 0, 1)
+				ObjectSetFlag(item.MyGuid, "LLWEAPONEX_UniqueData_Initialized", 0)
+				ObjectSetFlag(item.MyGuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+			end
 		end
 	end
 end
