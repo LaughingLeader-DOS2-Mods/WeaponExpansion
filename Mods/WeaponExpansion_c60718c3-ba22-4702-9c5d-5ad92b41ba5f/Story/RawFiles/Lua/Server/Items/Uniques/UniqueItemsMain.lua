@@ -35,7 +35,7 @@ Uniques = {
 	AnatomyBook = UniqueData:Create(ProgressionData.AnatomyBook, {Tag="LLWEAPONEX_UniqueAnatomyBook"}),
 	AnvilMace = UniqueData:Create(ProgressionData.AnvilMace, {Tag="LLWEAPONEX_UniqueAnvilMace"}),
 	ArmCannon = UniqueData:Create(ProgressionData.ArmCannon, {Tag="LLWEAPONEX_RunicCannonGloves"}),
-	AssassinHandCrossbow = UniqueData:Create(ProgressionData.AssassinHandCrossbow, {Tag="LLWEAPONEX_UniqueHandCrossbow"}),
+	AssassinHandCrossbow = UniqueData:Create(ProgressionData.AssassinHandCrossbow, {Tag="LLWEAPONEX_AssassinHandCrossbow_Equipped"}),
 	BalrinAxe = UniqueData:Create(ProgressionData.BalrinAxe, {Tag="LLWEAPONEX_UniqueThrowingAxeA"}),
 	BeholderSword = UniqueData:Create(ProgressionData.BeholderSword, {Tag="LLWEAPONEX_UniqueBeholderGreatsword"}),
 	Bible = UniqueData:Create(ProgressionData.Bible, {Tag="LLWEAPONEX_UniqueBible"}),
