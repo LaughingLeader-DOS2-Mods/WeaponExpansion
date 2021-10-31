@@ -5,6 +5,37 @@ local VisibilityMode = {
 	ShowAll = "ShowAll",
 }
 
+local uiFlags = {
+	OF_Load = 0x1,
+	OF_Loaded = 0x2,
+	OF_RequestDelete = 0x4,
+	OF_Visible = 0x8,
+	OF_Activated = 0x10,
+	OF_PlayerInput1 = 0x20,
+	OF_PlayerInput2 = 0x40,
+	OF_PlayerInput3 = 0x80,
+	OF_PlayerInput4 = 0x100,
+	OF_PlayerModal1 = 0x200,
+	OF_PlayerModal2 = 0x400,
+	OF_PlayerModal3 = 0x800,
+	OF_PlayerModal4 = 0x1000,
+	OF_KeepInScreen = 0x8000,
+	OF_KeepCustomInScreen = 0x10000,
+	OF_DeleteOnChildDestroy = 0x20000,
+	OF_PauseRequest = 0x40000,
+	OF_SortOnAdd = 0x80000,
+	OF_FullScreen = 0x400000,
+	OF_PlayerTextInput1 = 0x800000,
+	OF_PlayerTextInput2 = 0x1000000,
+	OF_PlayerTextInput3 = 0x2000000,
+	OF_PlayerTextInput4 = 0x4000000,
+	OF_DontHideOnDelete = 0x10000000,
+	OF_PrecacheUIData = 0x20000000,
+	OF_PreventCameraMove = 0x40000000,
+}
+
+local defaultUIFlags = uiFlags.OF_Load | uiFlags.OF_PlayerInput1 | uiFlags.OF_PlayerInput2 | uiFlags.OF_PlayerInput3 | uiFlags.OF_PlayerInput4 | uiFlags.OF_DeleteOnChildDestroy
+
 MasteryMenu = {
 	CHARACTER_HANDLE = nil,
 	Open = false,
@@ -402,7 +433,11 @@ function MasteryMenu.RepositionToggleButton(dialogOpen)
 
 		--MasteryMenu.ToggleButtonInstance:Resize(main.screenWidth, main.screenHeight)
 
-		local scaleDiff = (main.screenWidth / main.designResolution.x)
+		local scaleDiff = (main.stage.stageWidth / main.designResolution.x)
+		local padding = 0
+		if main.stage.stageWidth > 1920 then
+			padding = 128 * scaleDiff
+		end
 
 		local hotbar = not Vars.ControllerEnabled and Ext.GetUIByType(Data.UIType.hotBar) or Ext.GetUIByType(Data.UIType.bottomBar_c)
 		if hotbar then
@@ -412,12 +447,12 @@ function MasteryMenu.RepositionToggleButton(dialogOpen)
 			if hotbarMain.hotbar_mc.scrollRect ~= nil then
 				local hotbarSizeDiff = hotbarMain.hotbar_mc.scrollRect.width / hotbarMain.stage.stageWidth
 				local button_x = main.defaultButtonPosition.x * hotbarSizeDiff
-				menu_btn.x = button_x
+				menu_btn.x = button_x + padding
 			else
-				menu_btn.x = main.defaultButtonPosition.x * (hotbarMain.hotbar_mc.width / hotbarMain.stage.stageWidth)
+				menu_btn.x = main.defaultButtonPosition.x * scaleDiff + padding
 			end
 		else
-			menu_btn.x = main.defaultButtonPosition.x
+			menu_btn.x = main.defaultButtonPosition.x * scaleDiff + padding
 		end
 
 		if dialogOpen then
@@ -427,7 +462,8 @@ function MasteryMenu.RepositionToggleButton(dialogOpen)
 			menu_btn.y = main.defaultButtonPosition.y
 		end
 
-		--fprint(LOGLEVEL.TRACE, "menu_btn.x(%s) menu_btn.y(%s) scaleDiff(%s)", menu_btn.x, menu_btn.y, scaleDiff)
+		fprint(LOGLEVEL.TRACE, "menu_btn.x(%s) menu_btn.y(%s) scaleDiff(%s)", menu_btn.x, menu_btn.y, scaleDiff)
+		print(main.stage.width, main.stage.stageWidth)
 	end
 end
 
@@ -467,7 +503,7 @@ function MasteryMenu.InitializeToggleButton()
 	end
 	local ui = Ext.GetUI("MasteryMenuToggleButton")
 	if ui == nil then
-		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", MasteryMenu.Layer)
+		ui = Ext.CreateUI("MasteryMenuToggleButton", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", MasteryMenu.Layer, defaultUIFlags)
 		if ui ~= nil then
 			Ext.RegisterUICall(ui, "toggleMasteryMenu", function(ui,call,...)
 				if not MasteryMenu.Open then
@@ -524,7 +560,7 @@ function MasteryMenu.InitializeMasteryMenu()
 	if ui == nil then
 		MasteryMenu.RegisteredListeners = false
 		PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Creating mastery menu ui.")
-		ui = Ext.CreateUI("MasteryMenu", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer)
+		ui = Ext.CreateUI("MasteryMenu", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer, defaultUIFlags)
 		newlyCreated = true
 	end
 	if ui ~= nil and MasteryMenu.Open == false then
