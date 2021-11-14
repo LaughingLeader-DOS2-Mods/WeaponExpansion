@@ -14,11 +14,15 @@ return function()
 		"LLWEAPONEX_ArmCannonRestrictionsDisabled",
 		"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
 		"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
-		"LLWEAPONEX_ThrowObjectLimitDisabled",
+		"LLWEAPONEX_ThrowObjectLimitDisabled"
 	})
 	settings.Global:AddLocalizedFlag("LLWEAPONEX_AutoUnlockRecipesDisabled", "User", false, nil, nil, false)
 	--settings.Global:AddLocalizedVariable("ButtonOffsetX", "LLWEAPONEX_Variables_ButtonOffsetX", 0, -100, 100, 0.1)
 	--settings.Global:AddLocalizedVariable("ButtonOffsetY", "LLWEAPONEX_Variables_ButtonOffsetY", 0, -100, 100, 0.1)
+
+	settings.Global:AddButton("LLWEAPONEX_MoveAllUniquesToVendingMachine", function(entry, uuid, character)
+		Ext.PostMessageToServer("LLWEAPONEX_Settings_MoveAllUniquesToVendingMachine", "")
+	end, "LLWEAPONEX_DefaultAllUniquesToVendingMachine", "LLWEAPONEX_DefaultAllUniquesToVendingMachine_Description", true, true, false)
 	
 	---@param self SettingsData
 	---@param name string

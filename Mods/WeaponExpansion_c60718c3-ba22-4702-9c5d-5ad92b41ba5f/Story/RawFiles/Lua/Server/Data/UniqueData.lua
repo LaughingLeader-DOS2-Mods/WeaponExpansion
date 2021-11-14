@@ -228,6 +228,7 @@ end
 function UniqueData:ReleaseFromOwner(uuid, unequip)
 	assert(not StringHelpers.IsNullOrWhitespace(uuid), "[WeaponExpansion:UniqueData:ReleaseFromOwner] uuid must be a valid item UUID.")
 	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
+	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
 	if unequip then
 		local owner = GameHelpers.Item.GetOwner(uuid)
 		if unequip == true and type(owner) == "string" and GameHelpers.Item.ItemIsEquipped(owner, uuid) then

@@ -187,14 +187,14 @@ RegisterProtectedOsirisListener("ItemAddedToCharacter", Data.OsirisEvents.ItemAd
 	local item = Ext.GetItem(item)
 	local character = Ext.GetCharacter(character)
 	if character and item then
-		if not GameHelpers.Item.IsObject(item) and item.Stats.Unique == 1 then
-			for k,unique in pairs(Uniques) do
-				if unique.Tag and GameHelpers.ItemHasTag(item, unique.Tag) then
-					if GameHelpers.Character.IsPlayer(character) and not unique:IsReleasedFromOwner(item.MyGuid) then
-						unique:ReleaseFromOwner(item.MyGuid)
-					end
-					unique:InvokeEventListeners("ItemAddedToCharacter", item.MyGuid, character.MyGuid)
+		if not GameHelpers.Item.IsObject(item) and (item.Stats.Unique == 1 or item.Stats.ItemTypeReal == "Unique") then
+			local unique = UniqueManager.GetDataByItem(item)
+			if unique then
+				if GameHelpers.Character.IsPlayer(character) and not unique:IsReleasedFromOwner(item.MyGuid) then
+					unique:ReleaseFromOwner(item.MyGuid)
+					ItemSetOwner(item.MyGuid, character.MyGuid)
 				end
+				unique:InvokeEventListeners("ItemAddedToCharacter", item.MyGuid, character.MyGuid)
 			end
 		end
 	end

@@ -92,7 +92,7 @@ function UniqueManager.GetDataByItem(item)
 			t = "userdata"
 		else
 			for k,v in pairs(Uniques) do
-				if v.UUID == item or v.Copies[item] then
+				if v.UUID == item or v.Copies[item] or GameHelpers.ItemHasTag(item, v.Tag) then
 					return v
 				end
 			end

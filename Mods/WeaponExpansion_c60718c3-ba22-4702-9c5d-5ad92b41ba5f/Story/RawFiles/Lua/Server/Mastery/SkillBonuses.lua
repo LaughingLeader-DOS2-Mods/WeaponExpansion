@@ -91,7 +91,7 @@ local function OnSkillCallback(callback, matchBonuses, skill, char, ...)
 	end
 end
 
----@alias WeaponExpansionMasterySkillListenerCallback fun(bonuses:string[], skill:string, char:string, state:SKILL_STATE, data:SkillEventData|HitData)
+---@alias WeaponExpansionMasterySkillListenerCallback fun(bonuses:string[], skill:string, char:string, state:SKILL_STATE, data:SkillEventData|HitData):void
 
 ---@param skill string|string[]
 ---@param matchBonuses string|string[]
