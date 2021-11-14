@@ -33,10 +33,10 @@ Crossbow	4	Placeholder	Placeholder	❌	❌
 Dagger	1	Throwing Knife	The knife thrown has a 25% chance to be coated in poison or explosive oil, dealing bonus damage on hit.	√	❌
 Dagger	2	Backlash	Backlashing to a target you previously hit with Throwing Knife will partially refund the AP cost and refresh the cooldown of Throwing Knife.	√	❌
 Dagger	2	Sawtooth Knife	If the target is already Bleeding, Rupture the wound for bonus damage.	√	❌
-Dagger	3	Fan of Knives	Throwing Knife's bonuses apply to each knife thrown (bonus damage, Backlash marking).	√	❌
+Dagger	3	Fan of Knives	Throwing Knife's bonuses apply to each knife thrown (bonus damage, backlash marking).	√	❌
 Dagger	3	Corrupted Blade	Your blade(s) deal bonus shadow damage for 2 turns.	❌	❌
-Dagger	4	Daggers Drawn	If the target is killed, the source cost and partial AP is refunded.	❌	❌
-Dagger	4	Cloak and Dagger	When leaping, automatically throw knives at nearby enemies.	❌	❌
+Dagger	4	Mortal Blow	If the target is killed, the source cost and partial AP is refunded.	√	❌
+Dagger	4	Terrifying Cruelty	Targets killed explode for bonus damage. Targets killed by the explosion also explode.	√	❌
 Dual Shields	1	Battering Ram / Bull Rush / etc	You are immune to surface damage while using rush skills. 	√	❌
 Dual Shields	2	Placeholder	Placeholder	❌	❌
 Dual Shields	3	Placeholder	Placeholder	❌	❌
@@ -99,10 +99,9 @@ Throwing	2	Placeholder	Placeholder	❌	❌
 Throwing	3	Placeholder	Placeholder	❌	❌
 Throwing	4	Placeholder	Placeholder	❌	❌
 Unarmed	1	Way of the Fist	Melee weapon requirement skills can now be used while unarmed.	√	❌
-Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 total).	√	❌
-Unarmed	2	Unarmed Scaling 2	+40% base damage with unarmed attacks (20 base -> 60 total)	√	❌
-Unarmed	3	Unarmed Scaling 3	+65% base damage with unarmed attacks (20 base -> 85 total)	√	❌
-Unarmed	4	Unarmed Scaling 4	+80% base damage with unarmed attacks (20 base -> 100 total)	√	❌
+Unarmed	2	Placeholder	Placeholder	❌	❌
+Unarmed	3	Placeholder	Placeholder	❌	❌
+Unarmed	4	Placeholder	Placeholder	❌	❌
 Wand	1	Flesh Sacrifice	Allies standing on blood surfaces gain a 5% damage bonus.	√	❌
 Wand	1	Basic Attack	Basic attacks now lower the target's resistance to your wand's element by -25% for 1 turn.	√	❌
 Wand	2	Placeholder	Placeholder	❌	❌

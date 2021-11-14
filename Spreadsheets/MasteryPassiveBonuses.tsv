@@ -92,11 +92,10 @@ Throwing	1	Placeholder	Desc	❌	❌
 Throwing	2	Placeholder	Desc	❌	❌
 Throwing	3	Placeholder	Desc	❌	❌
 Throwing	4	Placeholder	Desc	❌	❌
-Unarmed	1	Placeholder	Desc	√	❌
-Unarmed	1	Placeholder	Desc	√	❌
-Unarmed	2	Placeholder	Desc	√	❌
-Unarmed	3	Placeholder	Desc	√	❌
-Unarmed	4	Placeholder	Desc	√	❌
+Unarmed	1	Unarmed Scaling 1	+30% base damage with unarmed attacks (20 -> 50 total).	√	❌
+Unarmed	2	Unarmed Scaling 2	+40% base damage with unarmed attacks (20 base -> 60 total)	√	❌
+Unarmed	3	Unarmed Scaling 3	+65% base damage with unarmed attacks (20 base -> 85 total)	√	❌
+Unarmed	4	Unarmed Scaling 4	+80% base damage with unarmed attacks (20 base -> 100 total)	√	❌
 Wand	1	Placeholder	Desc	√	❌
 Wand	1	Placeholder	Desc	√	❌
 Wand	2	Placeholder	Desc	❌	❌

@@ -186,3 +186,8 @@ data "BringIntoCombat" "No"
 data "HealStat" "Vitality"
 data "HealType" "Percentage"
 data "HealValue" "20"
+
+new entry "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET"
+type "StatusData"
+data "StatusType" "CONSUME"
+using "_LEADERLIB_HIDDEN_CONSUME_BASE"
