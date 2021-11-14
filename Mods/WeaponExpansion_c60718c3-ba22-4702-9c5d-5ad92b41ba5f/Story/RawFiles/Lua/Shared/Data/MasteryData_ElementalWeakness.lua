@@ -79,7 +79,7 @@ local function GetElementalWeakness(character, tagName, rankHeader, param)
 end
 
 local ELEMENTAL_WEAKNESS = {
-	Param = LeaderLib.Classes.TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).</font>"),
+	Param = LeaderLib.Classes.TranslatedString:Create("h0ee72b7cg5a84g4efcgb8e2g8a02113196e6","<font color='#9BF0FF'>Targets hit become weak to your weapon's element, gaining [Special] for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).</font>"),
 	GetParam = GetElementalWeakness,
 }
 

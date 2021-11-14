@@ -27,7 +27,7 @@ LLWEAPONEX_Axe_Mastery1 = {
 	},
 	AXE_EXECUTIONER = {
 		Skills = BASIC_ATTACK,
-		Param = ts:Create("h32749b80g4544g449egb4e5g1e4bd9ce04c3","Axes deal [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName]."),
+		Param = ts:Create("h32749b80g4544g449egb4e5g1e4bd9ce04c3","Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName]."),
 	},
 },
 LLWEAPONEX_Axe_Mastery2 = {
@@ -37,7 +37,7 @@ LLWEAPONEX_Axe_Mastery2 = {
 	},
 	AXE_SAVAGE = {
 		Skills = BASIC_ATTACK,
-		Param = ts:Create("h29991fbcg6968g4feeg9a60gcc8c04fdbd73","Attack of Opportunities deal [ExtraData:LLWEAPONEX_MasteryBonus_Hit_Axe_AttackOfOpportunityMaxDamageBonus]% more damage, in proportion to the target's missing vitality."),
+		Param = ts:Create("h29991fbcg6968g4feeg9a60gcc8c04fdbd73","Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AoOMaxDamageBonus]% more damage, in proportion to the target's missing vitality."),
 	}
 },
 LLWEAPONEX_Axe_Mastery3 = {
@@ -63,7 +63,7 @@ LLWEAPONEX_Banner_Mastery1 = {
 	},
 	BANNER_WARCHARGE = {
 		Skills = RUSH_SKILLS,
-		Param = ts:Create("h3c34bca6gc080g4de4gae5eg4909ad60ecc8","If under the effects of <font color='#FFCE58'>War Charge</font>, deal [ExtraData:LLWEAPONEX_MasteryBonus_WarChargeDamageBoost]% more damage and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing."),
+		Param = ts:Create("h3c34bca6gc080g4de4gae5eg4909ad60ecc8","If under the effects of <font color='#FFCE58'>War Charge</font>, deal [ExtraData:LLWEAPONEX_MB_Banner_WarCharge_DamageBoost]% more damage and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing."),
 	}
 },
 LLWEAPONEX_Banner_Mastery2 = {
@@ -89,7 +89,7 @@ LLWEAPONEX_Banner_Mastery3 = {
 	BANNER_LEADERSHIP = {
 		StatusParam = {
 			Statuses = {"LEADERSHIP"},
-			Param = ts:Create("hdcab69c9gc26ag4c53gb624gbba1c5f13ee2", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>Leadership</font> have a [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>Inspiration</font> on their turn. If <font color='#11FF44'>Leadership</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2]%."),
+			Param = ts:Create("hdcab69c9gc26ag4c53gb624gbba1c5f13ee2", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>Leadership</font> have a [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>Inspiration</font> on their turn. If <font color='#11FF44'>Leadership</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance2]%."),
 			Active = {Value = "LLWEAPONEX_Banner_Mastery3", Type = "Tag", Source=true}
 		}
 	}
@@ -109,14 +109,14 @@ LLWEAPONEX_Banner_Mastery5 = {},
 LLWEAPONEX_BattleBook_Mastery1 = {
 	BOOK_CONCUSSION = {
 		Skills = BASIC_ATTACK,
-		Param = ts:Create("h36b6a824g20a5g42acga0efg69102b1f801f", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionTurns] turn(s).</font>"),
+		Param = ts:Create("h36b6a824g20a5g42acga0efg69102b1f801f", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).</font>"),
 	},
 	BATTLEBOOK_FIRST_AID = {
 		Skills = {"Target_FirstAid", "Target_FirstAidEnemy"},
 		Param = ts:Create("h91f2c123gbcadg4a72g8c23g98250fe3706c", "<font color='#99AACC'>Medical book knowledge restores an additional <font color='#97FBFF'>[Stats:LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID:HealValue]% [Handle:h67a4c781g589ag4872g8c46g870e336074bd:Vitality]</font>.</font>"),
 		StatusParam = {
 			Statuses = {"RESTED"},
-			Param = ts:Create("hf1ec1489g29f3g43f4g9452gc4f4e8e0c108", "Duration increased by [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_TurnBonus].</font>"),
+			Param = ts:Create("hf1ec1489g29f3g43f4g9452gc4f4e8e0c108", "Duration increased by [ExtraData:LLWEAPONEX_MB_BattleBook_Rested_TurnBonus].</font>"),
 			Active = {Value = "LLWEAPONEX_BattleBook_FirstAid_Active", Type = "Tag", Source = false}
 		}
 	},
@@ -127,7 +127,7 @@ LLWEAPONEX_BattleBook_Mastery2 = {
 		Param = ts:Create("hb253b8ddgba7dg4f42g9426gc62332e8ebca", "<font color='#99AACC'>Deep knowledge of sacred texts allows [Key:Target_Bless_DisplayName] to deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage] to enemy Undead.</font>"),
 	},
 	BATTLEBOOK_SCROLLS = {
-		Param = ts:Create("had396c8dgfa88g44b5g983fg250eecb5d5f4", "<font color='#99AACC'>Gain [ExtraData:LLWEAPONEX_MasteryBonus_BattleBook_ScrollUseAPBonus] AP on use. Can only happen once per turn.</font>"),
+		Param = ts:Create("had396c8dgfa88g44b5g983fg250eecb5d5f4", "<font color='#99AACC'>Gain [ExtraData:LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus] AP on use. Can only happen once per turn.</font>"),
 	}
 },
 LLWEAPONEX_BattleBook_Mastery3 = {},
@@ -136,13 +136,13 @@ LLWEAPONEX_BattleBook_Mastery5 = {},
 LLWEAPONEX_Bludgeon_Mastery1 = {
 	RUSH_DIZZY = {
 		Skills = RUSH_SKILLS,
-		Param = ts:Create("h9831ecc7g21feg403cg9bd6ga0bab3f7eb9c", "Become a thundering force of will when rushing, <font color='#FFCE58'>knocking enemies aside</font> with a <font color='#F19824'>[ExtraData:LLWEAPONEX_MasteryBonus_RushDizzyChance]% chance to apply Dizzy for [ExtraData:LLWEAPONEX_MasteryBonus_RushDizzyTurns] turn(s)</font>.")
+		Param = ts:Create("h9831ecc7g21feg403cg9bd6ga0bab3f7eb9c", "Become a thundering force of will when rushing, <font color='#FFCE58'>knocking enemies aside</font> with a <font color='#F19824'>[ExtraData:LLWEAPONEX_MB_Bludgeon_Rush_DizzyChance]% chance to apply Dizzy for [ExtraData:LLWEAPONEX_MB_Bludgeon_Rush_DizzyTurns] turn(s)</font>.")
 	}
 },
 LLWEAPONEX_Bludgeon_Mastery2 = {
 	BLUDGEON_SUNDER = {
 		Skills = {"Target_CripplingBlow","Target_EnemyCripplingBlow"},
-		Param = ts:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, reducing max <font color='#AE9F95'>[Handle:h1feadc00g239ag430bgac99g7b5f3605a1c1:Physical Armour]</font>/<font color='#4197E2'>[Handle:h50eb8e33g82edg412eg9886gec19ca591254:Magic Armour]</font> by <font color='#AE9F95'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font>/<font color='#4197E2'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font></font> for [ExtraData:LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns] turn(s).</font>"),
+		Param = ts:Create("h1eb09384g6bfeg4cdaga83fgc408d86cfee4","<font color='#F19824'>Sunder the armor of hit targets, reducing max <font color='#AE9F95'>[Handle:h1feadc00g239ag430bgac99g7b5f3605a1c1:Physical Armour]</font>/<font color='#4197E2'>[Handle:h50eb8e33g82edg412eg9886gec19ca591254:Magic Armour]</font> by <font color='#AE9F95'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font>/<font color='#4197E2'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font></font> for [ExtraData:LLWEAPONEX_MB_Bludgeon_SunderTurns] turn(s).</font>"),
 		NamePrefix = "<font color='#F19824'>Sundering</font>"
 	}
 },
@@ -182,7 +182,7 @@ LLWEAPONEX_Crossbow_Mastery5 = {},
 LLWEAPONEX_Dagger_Mastery1 = {
 	DAGGER_THROWINGKNIFE = {
 		Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
-		Param = ts:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MasteryBonus_Dagger_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.</font>"),
+		Param = ts:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.</font>"),
 	}
 },
 LLWEAPONEX_Dagger_Mastery2 = {},
@@ -217,11 +217,11 @@ LLWEAPONEX_Greatbow_Mastery5 = {},
 LLWEAPONEX_HandCrossbow_Mastery1 = {
 	HANDCROSSBOW_JUMP_MARKING = {
 		Skills = {"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"},
-		Param = ts:Create("h6939fc3dgf4b0g45abg9362g5a9d5c04654c","Automatically apply [Key:MARKED_DisplayName] to [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets] target(s) max in a [ExtraData:LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius]m radius when jumping away.")
+		Param = ts:Create("h6939fc3dgf4b0g45abg9362g5a9d5c04654c","Automatically apply [Key:MARKED_DisplayName] to [ExtraData:LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MaxTargets] target(s) max in a [ExtraData:LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MarkingRadius]m radius when jumping away.")
 	},
 	WHIRLWIND_BOLTS = {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
-		Param = ts:Create("h665d9b1age332g4988gb57cgd1357c4c9af2","<font color='#F19824'>While spinning, shoot [ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets]-[ExtraData:LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets] enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget:ExplodeRadius]m radius, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].</font>"),
+		Param = ts:Create("h665d9b1age332g4988gb57cgd1357c4c9af2","<font color='#F19824'>While spinning, shoot [ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_MinTargets]-[ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_MaxTargets] enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_FindTarget:ExplodeRadius]m radius, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].</font>"),
 	}
 },
 LLWEAPONEX_HandCrossbow_Mastery2 = {},
@@ -232,7 +232,7 @@ LLWEAPONEX_Katana_Mastery1 = {
 	--KATANA_COMBO = {},
 	KATANA_VAULT = {
 		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
-		Param = ts:Create("h78ab607fgbbb0g46adgb3f9g271749a251bf","<font color='#F19966'>After teleporting, your next basic attack or weapon skill will deal +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% additional damage.</font>"),
+		Param = ts:Create("h78ab607fgbbb0g46adgb3f9g271749a251bf","<font color='#F19966'>After teleporting, your next basic attack or weapon skill will deal +[ExtraData:LLWEAPONEX_MB_Katana_Backlash_DamageBonus]% additional damage.</font>"),
 	},
 },
 LLWEAPONEX_Katana_Mastery2 = {},
@@ -242,16 +242,16 @@ LLWEAPONEX_Katana_Mastery5 = {},
 LLWEAPONEX_Pistol_Mastery1 = {
 	PISTOL_ADRENALINE = {
 		Skills = {"Shout_Adrenaline", "Shout_EnemyAdrenaline"},
-		Param = ts:Create("h1bd0f691g9646g4b28g932fg3ebd8377ca0e","Gain hyper-focus, increasing the <font color='#33FF00'>damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%</font>."),
+		Param = ts:Create("h1bd0f691g9646g4b28g932fg3ebd8377ca0e","Gain hyper-focus, increasing the <font color='#33FF00'>damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]%</font>."),
 		StatusParam = {
 			Statuses = {"ADRENALINE"},
-			Param = ts:Create("hb6293431g0ad9g45bbg9334gb81365e8f2ca","<font color='#33FF00'>Your next pistol shot will deal [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]% more damage.</font>"),
+			Param = ts:Create("hb6293431g0ad9g45bbg9334gb81365e8f2ca","<font color='#33FF00'>Your next pistol shot will deal [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]% more damage.</font>"),
 			Active = {Value = "LLWEAPONEX_Pistol_Adrenaline_Active", Type = "Tag"}
 		}
 	},
 	PISTOL_CLOAKEDJUMP = {
 		Skills = {"Jump_CloakAndDagger", "Jump_EnemyCloakAndDagger"},
-		Param = ts:Create("h62876a23g9b5cg4463g99dfg41e1192b02ab","Automatically reload your pistol when jumping.<br>When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius]m ([ExtraData:LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets] target(s) max).<br>Shooting targets [Key:MARKED_DisplayName] this way, with your pistol, guarantees one critical hit until you end your turn.")
+		Param = ts:Create("h62876a23g9b5cg4463g99dfg41e1192b02ab","Automatically reload your pistol when jumping.<br>When landing, apply [Key:MARKED_DisplayName] to the closest enemy within [ExtraData:LLWEAPONEX_MB_Pistol_CloakAndDagger_MarkingRadius]m ([ExtraData:LLWEAPONEX_MB_Pistol_CloakAndDagger_MaxTargets] target(s) max).<br>Shooting targets [Key:MARKED_DisplayName] this way, with your pistol, guarantees one critical hit until you end your turn.")
 	}
 },
 LLWEAPONEX_Pistol_Mastery2 = {},
@@ -271,7 +271,7 @@ LLWEAPONEX_Quarterstaff_Mastery5 = {},
 LLWEAPONEX_Rapier_Mastery1 = {
 	SUCKER_PUNCH_COMBO = {
 		Skills = {"Target_SingleHandedAttack", "Target_LLWEAPONEX_SinglehandedAttack"},
-		Param = ts:Create("hd40f14d5g4946g4462gac7bga35fda61ed27","Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.<br><font color='#99FF22' size='22'>[ExtraData:LLWEAPONEX_MasteryBonus_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.</font>")
+		Param = ts:Create("hd40f14d5g4946g4462gac7bga35fda61ed27","Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.<br><font color='#99FF22' size='22'>[ExtraData:LLWEAPONEX_MB_Unarmed_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.</font>")
 	}
 },
 LLWEAPONEX_Rapier_Mastery2 = {},
@@ -296,7 +296,7 @@ LLWEAPONEX_Scythe_Mastery5 = {},
 LLWEAPONEX_Shield_Mastery1 = {
 	GUARANTEED_BLOCK = {
 		Skills = {"Shout_RecoverArmour"},
-		Param = ts:Create("h6a284017g342dg4809gab69g6e77bddaf8c2","Damage from the next direct hit taken is reduced by <font color='#33FF00'>[ExtraData:LLWEAPONEX_MasteryBonus_RecoverArmour_DamageReduction]%</font>."),
+		Param = ts:Create("h6a284017g342dg4809gab69g6e77bddaf8c2","Damage from the next direct hit taken is reduced by <font color='#33FF00'>[ExtraData:LLWEAPONEX_MB_Shield_RecoverArmour_DamageReduction]%</font>."),
 	}
 },
 LLWEAPONEX_Shield_Mastery2 = {},
@@ -327,7 +327,7 @@ LLWEAPONEX_ThrowingAbility_Mastery5 = {},
 LLWEAPONEX_Unarmed_Mastery1 = {
 	PETRIFYING_SLAM = {
 		Skills = {"Target_PetrifyingTouch", "Target_EnemyPetrifyingTouch"},
-		Param = ts:Create("h01468f79gd9b2g4479ga596g8a68e07c39e7","<font color='#FFCE58'>Slam the target with your palm, knocking them back [ExtraData:LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance]m and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage].</font>")
+		Param = ts:Create("h01468f79gd9b2g4479ga596g8a68e07c39e7","<font color='#FFCE58'>Slam the target with your palm, knocking them back [ExtraData:LLWEAPONEX_MB_Unarmed_PetrifyingTouch_KnockbackDistance]m and dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage].</font>")
 	}
 },
 LLWEAPONEX_Unarmed_Mastery2 = {},

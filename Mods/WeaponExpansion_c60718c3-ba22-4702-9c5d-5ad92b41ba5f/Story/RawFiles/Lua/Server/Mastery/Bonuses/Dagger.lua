@@ -11,7 +11,7 @@ local throwingKnifeBonuses = {
 local function ThrowingKnifeBonus(bonuses, skill, char, state, data)
 	--PrintDebug("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") data("..Ext.JsonStringify(data)..")")
 	if state == SKILL_STATE.HIT and data.Success then
-		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Dagger_ThrowingKnife_Chance", 25)
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
 		if chance > 0 then
 			if Ext.Random(1,100) < chance then
 				GameHelpers.Skill.Explode(data.Target, Common.GetRandomTableEntry(throwingKnifeBonuses), char)
@@ -19,7 +19,7 @@ local function ThrowingKnifeBonus(bonuses, skill, char, state, data)
 		end
 	--Targeted a position instead of an object
 	elseif state == SKILL_STATE.PROJECTILEHIT and StringHelpers.IsNullOrEmpty(data.Target) and data.Position then
-		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Dagger_ThrowingKnife_Chance", 25)
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
 		if chance > 0 then
 			if Ext.Random(1,100) < chance then
 				GameHelpers.Skill.Explode(data.Position, Common.GetRandomTableEntry(throwingKnifeBonuses), char)
@@ -49,8 +49,14 @@ local function BacklashBonus(bonuses, skill, char, state, data)
 			GameHelpers.Skill.SetCooldown(char, sourceSkill, 0.0)
 			local apCost = Ext.StatGetAttribute(sourceSkill, "ActionPoints")
 			if apCost > 1 then
-				local apBonus = math.max(1, math.floor(apCost/2))
-				CharacterAddActionPoints(char, apBonus)
+				local refundMult = math.min(100, math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Backlash_APRefundPercentage", 50)))
+				if refundMult > 0 then
+					if refundMult > 1 then
+						refundMult = refundMult * 0.01
+					end
+					local apBonus = math.max(1, math.floor(apCost * refundMult))
+					CharacterAddActionPoints(char, apBonus)
+				end
 			end
 		end
 	end
@@ -98,8 +104,9 @@ end
 
 DeathManager.RegisterListener("FatalityRefundBonus", function(target, attacker, success)
 	if success then
+		local cd = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Fatality_CooldownOverride", 6.0)
 		local sourceSkill = CharacterHasSkill(attacker, "Target_EnemyFatality") == 1 and "Target_EnemyFatality" or "Target_Fatality"
-		GameHelpers.Skill.SetCooldown(attacker, sourceSkill, 6.0)
+		GameHelpers.Skill.SetCooldown(attacker, sourceSkill, cd)
 		local skill = Ext.GetStat("Target_Fatality")
 		if skill["Magic Cost"] > 0 then
 			CharacterAddSourcePoints(attacker, 1)

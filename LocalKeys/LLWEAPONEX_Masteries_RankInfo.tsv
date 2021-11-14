@@ -7,7 +7,7 @@ LLWEAPONEX_Banner_Rank1_Description	<icon id='Rush_BatteringRam;Rush_BullRush'/>
 LLWEAPONEX_Banner_Rank2_Description	<icon id='Target_Harmony'/>[Key:Target_Harmony_DisplayName] causes allies affected to attack the nearest enemy with a basic attack.<icon id='Shout_GuardianAngel'/>Slain allies who were affected by [Key:GUARDIAN_ANGEL_DisplayName] are resurrected when your turn ends. 	h69abab56gc6aag4f2ag8cdegfab6e3651afd
 LLWEAPONEX_Banner_Rank3_Description	<icon id='Shout_Whirlwind;Dome_LLWEAPONEX_Banner_Rally_DivineOrder;Dome_LLWEAPONEX_Banner_Rally_Dwarves'/>If near an active banner, enemies hit by [Key:Shout_Whirlwind_DisplayName] are pulled towards the banner.<icon id='LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS' type='2'/>Allies affected by [Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership] now have a chance to gain [Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName] when nearby.  	h1a4fa3b9g93d9g4f09g98fbg18f92aec103c
 LLWEAPONEX_Banner_Rank4_Description	<icon id='Dome_LLWEAPONEX_Banner_Rally_DivineOrder;Dome_LLWEAPONEX_Banner_Rally_Dwarves'/>Placed banners now grant additional defensive benefits, including Flanking Immunity. 	h4dfa67cbg536dg4521gab3cg3bd5b2e8cb1d
-LLWEAPONEX_BattleBook_Rank1_Description	<icon id='Target_LLWEAPONEX_BasicAttack;LLWEAPONEX_CONCUSSION' type='1;2'/>Basic attacks have a [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MasteryBonus_Hit_BattleBook_ConcussionTurns] turn(s).	h8a7b2799g1053g4721g8aa2g1a56ea4e98cd
+LLWEAPONEX_BattleBook_Rank1_Description	<icon id='Target_LLWEAPONEX_BasicAttack;LLWEAPONEX_CONCUSSION' type='1;2'/>Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).	h8a7b2799g1053g4721g8aa2g1a56ea4e98cd
 LLWEAPONEX_BattleBook_Rank2_Description	Placeholder	h66336b79g124cg4aefg8aa6g559de9dfdbec
 LLWEAPONEX_BattleBook_Rank3_Description	Placeholder	h6687ccd5g40edg4a38g9cd7g6aec77a5e03d
 LLWEAPONEX_BattleBook_Rank4_Description	Placeholder	hc45bd0bdg41f6g414dg9736ga2fe46ae85f0
@@ -15,7 +15,7 @@ LLWEAPONEX_Bludgeon_Rank1_Description	<icon id='Rush_BatteringRam'/>[Key:Rush_Ba
 LLWEAPONEX_Bludgeon_Rank2_Description	<icon id='Target_CripplingBlow'/>[Key:Target_CripplingBlow_DisplayName] applies Sundered, reducing max Physical and Magic Armor by 25%.	h6a51f8bbg89aeg4b36g90b4g67b9e206522e
 LLWEAPONEX_Bludgeon_Rank3_Description	<icon id='Cone_GroundSmash'/>[Key:Cone_GroundSmash_DisplayName] creates a localized quake at the point of initial impact, dealing bonus damage in a 3m radius.	h3b90f6e5gfc36g4085gb291g03b83af766de
 LLWEAPONEX_Bludgeon_Rank4_Description	Placeholder	h906bb56cgb977g42begb165g1d561f697f23
-LLWEAPONEX_Bow_Rank1_Description	<icon id='Projectile_PinDown'/>[Key:Projectile_PinDown_DisplayName] shoots [ExtraData:LLWEAPONEX_MasteryBonus_Bow_PinDownBonusShots] arrow(s), hitting a random nearby enemy for half damage.	h5086140cg5c20g4fa9ga057g58a67546624f
+LLWEAPONEX_Bow_Rank1_Description	<icon id='Projectile_PinDown'/>[Key:Projectile_PinDown_DisplayName] shoots [ExtraData:LLWEAPONEX_MB_Bow_PinDown_BonusShots] arrow(s), hitting a random nearby enemy for half damage.	h5086140cg5c20g4fa9ga057g58a67546624f
 LLWEAPONEX_Bow_Rank2_Description	<icon id='Projectile_Snipe'/>[Key:Projectile_Snipe_DisplayName] does deals a guaranteed unmissable critical hit to [Key:MARKED_DisplayName] targets.	hd8ae40efgb0d3g4c4cg9286gd9094608b38e
 LLWEAPONEX_Bow_Rank3_Description	Placeholder	h3b5e7680g111fg4264g80dagb42a2defb8dd
 LLWEAPONEX_Bow_Rank4_Description	Placeholder	he8d30dc3gb997g4948g9585g3a00ec62c29d
@@ -26,7 +26,7 @@ LLWEAPONEX_Crossbow_Rank4_Description	Placeholder	hd84c693dg3a28g43fdgba93gbff3f
 LLWEAPONEX_Dagger_Rank1_Description	<icon id='Projectile_ThrowingKnife'/>[Key:Projectile_ThrowingKnife_DisplayName] is enhanced with a chance to do bonus damage.	hac7da9cbgdb9dg4140g85f2g572856006cb9
 LLWEAPONEX_Dagger_Rank2_Description	<icon id='MultiStrike_Vault'/>Using [Key:MultiStrike_Vault_DisplayName] on a target hit by [Key:Projectile_ThrowingKnife_DisplayName] grants bonus AP and refreshs the cooldown of [Key:Projectile_ThrowingKnife_DisplayName].<icon id='Target_SerratedEdge'/>Deal bonus damage if the target is [Key:BLEEDING_DisplayName].	hc7692bc5g5283g4105g8223gea6c5ccf10de
 LLWEAPONEX_Dagger_Rank3_Description	<icon id='Projectile_FanOfKnives'/>The bonuses for [Key:Projectile_ThrowingKnife_DisplayName] and [Key:MultiStrike_Vault_DisplayName] apply to all projectiles thrown by [Key:Projectile_FanOfKnives_DisplayName].	hd81ff9c9g05fcg4af2g8fdfg61733d102fbb
-LLWEAPONEX_Dagger_Rank4_Description	<icon id='Target_Fatality'/>[Target_Fatality_DisplayName] now deals piercing damage, refunds source and partial AP costs on kill, and has a [ExtraData:LLWEAPONEX_MasteryBonus_Dagger_FatalityCooldown] turn cooldown.<icon id='Target_TerrifyingCruelty'/>The corpses of targets killed explode for bonus damage, which can cause additional explosions on kill.	h507d0772g89ceg4e31g9569g2fe2c0baee5c
+LLWEAPONEX_Dagger_Rank4_Description	<icon id='Target_Fatality'/>[Target_Fatality_DisplayName] now deals piercing damage, refunds source and partial AP costs on kill, and has a [ExtraData:LLWEAPONEX_MB_Dagger_Fatality_CooldownOverride] turn cooldown.<icon id='Target_TerrifyingCruelty'/>The corpses of targets killed explode for bonus damage, which can cause additional explosions on kill.	h507d0772g89ceg4e31g9569g2fe2c0baee5c
 LLWEAPONEX_DualShields_Rank1_Description	<icon id='Rush_BatteringRam;Rush_BullRush'/>You are immune to surface damage while using rush skills.	h785579b9ga78eg439aga55cg8ae1919479e6
 LLWEAPONEX_DualShields_Rank2_Description	Placeholder	h0f116f0egb218g461bg8c88g206730e4e093
 LLWEAPONEX_DualShields_Rank3_Description	Placeholder	h64c07c73g5ef6g40b9g9466g80a5f1df005a
@@ -43,11 +43,11 @@ LLWEAPONEX_HandCrossbow_Rank1_Description	<icon id='Projectile_LLWEAPONEX_HandCr
 LLWEAPONEX_HandCrossbow_Rank2_Description	<icon id='Projectile_LLWEAPONEX_HandCrossbow_Shoot'/>Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% extra base damage in total.<icon id='Jump_TacticalRetreat'/>In combat, [Key:Jump_TacticalRetreat_DisplayName] applies [Key:MARKED_DisplayName] to nearby enemies when jumping away.	hf90feb29g1849g425dgae29ga5377df30f4b
 LLWEAPONEX_HandCrossbow_Rank3_Description	<icon id='Projectile_LLWEAPONEX_HandCrossbow_Shoot'/>Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost3]% extra base damage in total.	h43a29acfgcc05g45beg9826g10ddaa1ac4f9
 LLWEAPONEX_HandCrossbow_Rank4_Description	<icon id='Projectile_LLWEAPONEX_HandCrossbow_Shoot'/>Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost4]% extra base damage in total.	h5a1bc6cag0662g4041gbb15g9ee793a96690
-LLWEAPONEX_Katana_Rank1_Description	<icon id='Rush_LLWEAPONEX_Katana_Iaido;LLWEAPONEX_KATANA_COMBO9' type='1;2'/>Basic attacks and weapon skills now apply [Key:LLWEAPONEX_KATANA_COMBO1_DisplayName], a stacking status that is removed when your turn ends. Katana mastery skills consume this status for bonus damage. Backstabs or critical hits apply two stacks.<icon id='MultiStrike_Vault'/>After teleporting, your next attack deals +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% more damage.	h5e2df2a5gda8dg4baeg9155gc3c50082beb4
+LLWEAPONEX_Katana_Rank1_Description	<icon id='Rush_LLWEAPONEX_Katana_Iaido;LLWEAPONEX_KATANA_COMBO9' type='1;2'/>Basic attacks and weapon skills now apply [Key:LLWEAPONEX_KATANA_COMBO1_DisplayName], a stacking status that is removed when your turn ends. Katana mastery skills consume this status for bonus damage. Backstabs or critical hits apply two stacks.<icon id='MultiStrike_Vault'/>After teleporting, your next attack deals +[ExtraData:LLWEAPONEX_MB_Katana_Backlash_DamageBonus]% more damage.	h5e2df2a5gda8dg4baeg9155gc3c50082beb4
 LLWEAPONEX_Katana_Rank2_Description	Placeholder	h46cb2853g6646g4ad0g9841g56059054b847
 LLWEAPONEX_Katana_Rank3_Description	Placeholder	hdc1c9304g98bdg4758g8e1cge3b24e1296bc
 LLWEAPONEX_Katana_Rank4_Description	Placeholder	h1a9da6d7gc44cg410dgb6f5g61e1f31c0c6a
-LLWEAPONEX_Pistol_Rank1_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.<icon id='Shout_Adrenaline'/>Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%.	h8d3ec53cg6caag483eg8e9ag838a02ecb512
+LLWEAPONEX_Pistol_Rank1_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.<icon id='Shout_Adrenaline'/>Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]%.	h8d3ec53cg6caag483eg8e9ag838a02ecb512
 LLWEAPONEX_Pistol_Rank2_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.<icon id='Jump_CloakAndDagger'/>[Key:LLWEAPONEX_MB_Pistol_CloakAndDagger]	hb6eef25cg3995g4611gabdfgd65916b4bf94
 LLWEAPONEX_Pistol_Rank3_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.	ha58bb241gb3cfg4ac0g845ag0ae0342bb50d
 LLWEAPONEX_Pistol_Rank4_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.	h6e62632bgd952g474ag824aga7513eaab0c6
@@ -59,7 +59,7 @@ LLWEAPONEX_Quarterstaff_Rank1_Description	<icon id='Rush_BatteringRam;Rush_BullR
 LLWEAPONEX_Quarterstaff_Rank2_Description	Placeholder	hd92ffe43ge2c9g4ee0gaf45gec4afdbfba43
 LLWEAPONEX_Quarterstaff_Rank3_Description	Placeholder	hf76b8c45g31bag47feg86a3gd6f198d370d7
 LLWEAPONEX_Quarterstaff_Rank4_Description	Placeholder	hdc20b83fgd388g48a8gbb2dgae361319e74b
-LLWEAPONEX_Rapier_Rank1_Description	<icon id='Target_SingleHandedAttack'/>Gain a follow-up combo skill after punching a target.<br>[ExtraData:LLWEAPONEX_MasteryBonus_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Sucker Punch's Knockdown by 1 turn.	h0e44e82dg9385g417bg9887gad0eba289d6d
+LLWEAPONEX_Rapier_Rank1_Description	<icon id='Target_SingleHandedAttack'/>Gain a follow-up combo skill after punching a target.<br>[ExtraData:LLWEAPONEX_MB_Unarmed_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Sucker Punch's Knockdown by 1 turn.	h0e44e82dg9385g417bg9887gad0eba289d6d
 LLWEAPONEX_Rapier_Rank2_Description	Placeholder	h22c80519g59cbg4c2dga5b0g293f1c4b9ccd
 LLWEAPONEX_Rapier_Rank3_Description	Placeholder	hd956f4d8gc577g465eg915fgd6c46d6b81bc
 LLWEAPONEX_Rapier_Rank4_Description	Placeholder	hc5324a7fg73c8g4d3fgb8e4g99b7a2c7d5c0
@@ -71,11 +71,11 @@ LLWEAPONEX_Scythe_Rank1_Description	<icon id='Shout_Whirlwind'/>[Key:Shout_Whirl
 LLWEAPONEX_Scythe_Rank2_Description	Placeholder	hd902e1c8g070cg4634gbdc2g833c70c73252
 LLWEAPONEX_Scythe_Rank3_Description	Placeholder	h26b70126g1494g45d5ga656g94c06179bc7c
 LLWEAPONEX_Scythe_Rank4_Description	Placeholder	hba057115g213fg422bga57dg2d19a697e0c9
-LLWEAPONEX_Shield_Rank1_Description	<icon id='Shout_RecoverArmour'>[ExtraData:LLWEAPONEX_MasteryBonus_RecoverArmour_DamageReduction]%</font>	hd150d9fcgbe64g4a79g92b9gd0db942b049e
+LLWEAPONEX_Shield_Rank1_Description	<icon id='Shout_RecoverArmour'>[ExtraData:LLWEAPONEX_MB_Shield_RecoverArmour_DamageReduction]%</font>	hd150d9fcgbe64g4a79g92b9gd0db942b049e
 LLWEAPONEX_Shield_Rank2_Description	Placeholder	h9ca56b50g3321g426egb881g493317886f26
 LLWEAPONEX_Shield_Rank3_Description	Placeholder	he4d3a095gcbaeg4a1fg8423g527b7592a28d
 LLWEAPONEX_Shield_Rank4_Description	Placeholder	h127abf05gacc8g408bg8691g920502799e46
-LLWEAPONEX_Staff_Rank1_Description	<icon id='Shout_Whirlwind'/>Targets hit by [Key:Shout_Whirlwind_DisplayName] have their resistance to your staff's element reduced by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).	h9e9877b3gc449g4cc3g88f5g3fba9c70e97d
+LLWEAPONEX_Staff_Rank1_Description	<icon id='Shout_Whirlwind'/>Targets hit by [Key:Shout_Whirlwind_DisplayName] have their resistance to your staff's element reduced by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).	h9e9877b3gc449g4cc3g88f5g3fba9c70e97d
 LLWEAPONEX_Staff_Rank2_Description	Placeholder	h4ed3af41ga151g4d30gb710gfb689330d954
 LLWEAPONEX_Staff_Rank3_Description	Placeholder	he25ddaccg579fg4d68g9c2eg461b951ce16c
 LLWEAPONEX_Staff_Rank4_Description	Placeholder	h0eb05ce2g741fg493eg9d45gbece19375c80
@@ -91,7 +91,7 @@ LLWEAPONEX_Unarmed_Rank1_Description	<icon id='Target_LLWEAPONEX_UnarmedBasicAtt
 LLWEAPONEX_Unarmed_Rank2_Description	Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost2]% extra base damage in total.	h645fc064g4d7ag47d6ga524g51a58d2980f0
 LLWEAPONEX_Unarmed_Rank3_Description	Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost3]% extra base damage in total.	hf722e5cag8e8eg4c9cga439gbbd32257fa64
 LLWEAPONEX_Unarmed_Rank4_Description	Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost4]% extra base damage in total, making it comparable to the damage of a two-handed weapon.	h3c339bd7g4097g407ag89d1g293eb36f7e49
-LLWEAPONEX_Wand_Rank1_Description	<icon id='Target_LLWEAPONEX_BasicAttack's element by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for [ExtraData:LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns] turn(s).<icon id='Shout_FleshSacrifice'/>Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus.	h86e68aebgdd6eg436fg98c8gc34e0a5d0516
+LLWEAPONEX_Wand_Rank1_Description	<icon id='Target_LLWEAPONEX_BasicAttack's element by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).<icon id='Shout_FleshSacrifice'/>Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus.	h86e68aebgdd6eg436fg98c8gc34e0a5d0516
 LLWEAPONEX_Wand_Rank2_Description	Placeholder	h9aa31d18gb298g404fg9e83g5ceec653df78
 LLWEAPONEX_Wand_Rank3_Description	Placeholder	h4119756fg0201g4509ga1b8ge32890d9aaec
 LLWEAPONEX_Wand_Rank4_Description	Placeholder	hccc0cf85g85e2g41c7g986cgdfb87eff2025

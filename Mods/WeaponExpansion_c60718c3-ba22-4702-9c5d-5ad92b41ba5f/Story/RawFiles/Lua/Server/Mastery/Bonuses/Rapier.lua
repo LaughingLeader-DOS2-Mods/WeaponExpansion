@@ -9,7 +9,7 @@ MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Rapier_Mast
 	elseif state == SKILL_STATE.HIT and skillData.Success then
 		local target = skillData.Target
 		if HasActiveStatus(target, "KNOCKED_DOWN") == 1 then
-			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Unarmed_PetrifyingTouch_KnockbackDistance", 4.0)
 			if Ext.Random(0,100) <= chance then
 				local handle = NRD_StatusGetHandle(target, "KNOCKED_DOWN")
 				if handle ~= nil then

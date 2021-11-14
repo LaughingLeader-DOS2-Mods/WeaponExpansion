@@ -54,7 +54,7 @@ end
 MasteryBonusManager.RegisterSkillListener(Mastery.Bonuses.LLWEAPONEX_Bow_Mastery1.BOW_DOUBLE_SHOT.Skills, "BOW_DOUBLE_SHOT", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		-- Support for a mod making Pin Down shoot multiple arrows through the use of iterating tables.
-		local maxBonusShots = Ext.ExtraData.LLWEAPONEX_MasteryBonus_Bow_PinDownBonusShots or 1
+		local maxBonusShots = Ext.ExtraData.LLWEAPONEX_MB_Bow_PinDown_BonusShots or 1
 		if maxBonusShots > 0 then
 			local bonusShots = 0
 			local character = Ext.GetCharacter(char)

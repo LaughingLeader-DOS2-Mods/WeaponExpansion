@@ -35,7 +35,7 @@ MasteryBonusManager.RegisterSkillListener(BonusHelperVars.RushSkills, "BANNER_WA
 			end
 		end
 		if hasStatus then
-			local bonusPercent = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_WarChargeDamageBoost", 25.0) *0.01
+			local bonusPercent = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_WarCharge_DamageBoost", 25.0) *0.01
 			if bonusPercent > 0 then
 				GameHelpers.IncreaseDamage(hitData.Target, char, hitData.Handle, bonusPercent)
 			end
@@ -119,7 +119,7 @@ Ext.RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
 			local source = Ext.GetCharacter(status.StatusSourceHandle)
 			if source ~= nil then
 				if MasteryBonusManager.HasMasteryBonuses(source, "BANNER_LEADERSHIP") then
-					bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance2"] or 25.0)
+					bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MB_Banner_LeadershipInspirationChance2"] or 25.0)
 					bonusSource = source.MyGuid
 				end
 			end
@@ -130,7 +130,7 @@ Ext.RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
 					local v = GetUUID(entry[1])
 					if v ~= char and CharacterIsInPartyWith(v, char) == 1 then
 						if MasteryBonusManager.HasMasteryBonuses(source, "BANNER_LEADERSHIP") then
-							bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MasteryBonus_Banner_LeadershipInspirationChance"] or 25.0)
+							bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MB_Banner_LeadershipInspirationChance"] or 25.0)
 							bonusSource = v
 						end
 					end

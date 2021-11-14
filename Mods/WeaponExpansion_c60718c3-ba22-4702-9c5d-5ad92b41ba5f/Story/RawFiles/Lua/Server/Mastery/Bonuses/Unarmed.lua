@@ -4,7 +4,7 @@ MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_Ene
 		PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_L_HandFX")
 	elseif state == SKILL_STATE.HIT and skillData.Success then
 		GameHelpers.ExplodeProjectile(char, skillData.Target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage")
-		local forceDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_PetrifyingTouch_KnockbackDistance", 4.0)
+		local forceDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Unarmed_PetrifyingTouch_KnockbackDistance", 4.0)
 		if forceDistance > 0 then
 			local character = Ext.GetCharacter(char)
 			local x,y,z = GetPosition(skillData.Target)

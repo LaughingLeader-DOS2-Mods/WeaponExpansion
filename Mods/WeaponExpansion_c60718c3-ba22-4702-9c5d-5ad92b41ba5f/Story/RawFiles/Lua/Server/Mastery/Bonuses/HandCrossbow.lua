@@ -40,8 +40,8 @@ MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlw
 	if state == SKILL_STATE.USED then
 		local uuid = GetUUID(char)
 		if whirlwindHandCrossbowTargets[uuid] == nil then
-			local minTargets = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MinTargets", 1)
-			local maxTargets = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_MaxTargets", 3)
+			local minTargets = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_Whirlwind_MinTargets", 1)
+			local maxTargets = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_Whirlwind_MaxTargets", 3)
 			local totalTargets = Ext.Random(minTargets, maxTargets)
 			whirlwindHandCrossbowTargets[uuid] = { Remaining = totalTargets, All = {} }
 		end
@@ -61,8 +61,8 @@ MasteryBonusManager.RegisterSkillListener({"Jump_TacticalRetreat", "Jump_EnemyTa
 	if state == SKILL_STATE.CAST and CharacterIsInCombat(char) == 1 then
 		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then
-			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MaxMarkedTargets", 2)
-			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_TacticalRetreat_MarkingRadius", 4.0)
+			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MaxTargets", 2)
+			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_HandCrossbow_TacticalRetreat_MarkingRadius", 4.0)
 			local combatEnemies = Common.ShuffleTable(data)
 			for i,v in pairs(combatEnemies) do
 				local enemy = v[1]

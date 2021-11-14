@@ -24,8 +24,8 @@ local function CloakAndDagger_Pistol_MarkEnemy(_, char)
 	if char ~= nil and CharacterIsInCombat(char) == 1 then
 		local data = Osi.DB_CombatCharacters:Get(nil, CombatGetIDForCharacter(char))
 		if data ~= nil then
-			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MaxMarkedTargets", 1)
-			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_CloakAndDagger_MarkingRadius", 6.0)
+			local totalEnemies = GameHelpers.GetExtraData("LLWEAPONEX_MB_Pistol_CloakAndDagger_MaxTargets", 1)
+			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Pistol_CloakAndDagger_MarkingRadius", 6.0)
 			local combatEnemies = Common.ShuffleTable(data)
 			local lastDist = 999
 			local targets = {}
@@ -115,7 +115,7 @@ local function PistolShootBonuses(skill, char, state, skillData)
 			end
 			if IsTagged(char, "LLWEAPONEX_Pistol_Adrenaline_Active") == 1 then
 				ClearTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")
-				local damageBoost = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost", 50.0) * 0.01
+				local damageBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost", 50.0) * 0.01
 				if damageBoost > 0 then
 					GameHelpers.IncreaseDamage(target, char, handle, damageBoost)
 					CharacterStatusText(char, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
