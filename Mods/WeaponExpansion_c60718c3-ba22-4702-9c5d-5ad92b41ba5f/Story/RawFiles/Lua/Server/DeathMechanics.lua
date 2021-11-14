@@ -42,6 +42,16 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	target = GameHelpers.GetUUID(target)
 	attacker = GameHelpers.GetUUID(attacker)
 
+	if ObjectIsCharacter(target) == 0 then
+		return
+	end
+
+	if CharacterIsDead(target) == 1 then
+		--Skip waiting
+		FireCallbacks(id, target, attacker, true)
+		return
+	end
+
 	if PersistentVars.OnDeath[target] == nil then
 		PersistentVars.OnDeath[target] = {
 			Total = 0,
