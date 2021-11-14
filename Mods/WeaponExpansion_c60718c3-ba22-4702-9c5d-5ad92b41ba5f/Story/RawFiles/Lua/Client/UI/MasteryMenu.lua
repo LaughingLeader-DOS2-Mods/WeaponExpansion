@@ -210,8 +210,8 @@ local function splitDescriptionByPattern(str, pattern, includeMatch)
 	return list
 end
 
-local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
-	ui:SetValue("descriptionContent", text, index)
+local function pushDescriptionEntry(this, index, text, iconId, iconName, iconType)
+	this.descriptionContent[index] = text
 	if iconId == nil then
 		iconId = ""
 	end
@@ -226,9 +226,9 @@ local function pushDescriptionEntry(ui, index, text, iconId, iconName, iconType)
 		end
 	end
 	PrintDebug(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
-	ui:SetValue("descriptionContent", iconId, index+1)
-	ui:SetValue("descriptionContent", iconName, index+2)
-	ui:SetValue("descriptionContent", iconType, index+3)
+	this.descriptionContent[index+1] = iconId
+	this.descriptionContent[index+2] = iconName
+	this.descriptionContent[index+3] = iconType
 	return index + 4
 end
 
@@ -251,7 +251,7 @@ local function ClearIcons(ui, call, count)
 end
 
 ---@param ui UIObject
-local function parseDescription(ui, index, descriptionText)
+local function parseDescription(this, index, descriptionText)
 	local icons = {}
 	local separatedText = splitDescriptionByPattern(descriptionText,iconPattern)
 	for v in string.gmatch(descriptionText, iconPattern) do
@@ -284,9 +284,9 @@ local function parseDescription(ui, index, descriptionText)
 			local _,_,iconName = v.Icon:find("id='(.-)'")
 			local _,_,icons = v.Icon:find("icon='(.-)'")
 			local _,_,iconType = v.Icon:find("type='(.-)'")
-			index = pushDescriptionEntry(ui, index, v.Text, iconName, icons, iconType)
+			index = pushDescriptionEntry(this, index, v.Text, iconName, icons, iconType)
 		else
-			index = pushDescriptionEntry(ui, index, v.Text, "", "", nil)
+			index = pushDescriptionEntry(this, index, v.Text, "", "", nil)
 		end
 	end
 	return index
@@ -346,11 +346,11 @@ local function buildMasteryDescription(ui, this, mastery)
 				end
 			end
 			--string.format("<font size='18'>%s</font>", description:gsub("%%", "%%%%")) -- Escaping percentages
-			index = pushDescriptionEntry(ui, index, rankHeader)
+			index = pushDescriptionEntry(this, index, rankHeader)
 			if hasDescription then
-				index = parseDescription(ui, index, description)
+				index = parseDescription(this, index, description)
 			else
-				index = pushDescriptionEntry(ui, index, description) -- Escaping percentages)
+				index = pushDescriptionEntry(this, index, description) -- Escaping percentages)
 			end
 		end
 		i = i + 1
@@ -462,8 +462,7 @@ function MasteryMenu.RepositionToggleButton(dialogOpen)
 			menu_btn.y = main.defaultButtonPosition.y
 		end
 
-		fprint(LOGLEVEL.TRACE, "menu_btn.x(%s) menu_btn.y(%s) scaleDiff(%s)", menu_btn.x, menu_btn.y, scaleDiff)
-		print(main.stage.width, main.stage.stageWidth)
+		--fprint(LOGLEVEL.TRACE, "menu_btn.x(%s) menu_btn.y(%s) scaleDiff(%s)", menu_btn.x, menu_btn.y, scaleDiff)
 	end
 end
 
