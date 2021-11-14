@@ -225,6 +225,28 @@ local function pushDescriptionEntry(this, index, text, iconId, iconName, iconTyp
 			iconType = 0
 		end
 	end
+	if iconName == "" and iconId ~= "" then
+		if string.find(iconId, ";") then
+			local foundIcons = {}
+			for i,v in pairs(StringHelpers.Split(iconId, ";")) do
+				local stat = Ext.GetStat(v)
+				if stat and stat.Icon then
+					foundIcons[#foundIcons+1] = stat.Icon
+				else
+					foundIcons[#foundIcons+1] = "LeaderLib_Placeholder"
+				end
+			end
+			iconId = StringHelpers.Join(";", foundIcons)
+		else
+			local stat = Ext.GetStat(iconId)
+			if stat and stat.Icon then
+				iconName = stat.Icon
+			end
+		end
+	end
+	if StringHelpers.IsNullOrWhitespace(iconName) then
+		iconName = "LeaderLib_Placeholder"
+	end
 	PrintDebug(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
 	this.descriptionContent[index+1] = iconId
 	this.descriptionContent[index+2] = iconName
