@@ -25,7 +25,6 @@ end
 
 ---@type table<string, HitFlagPreset>
 HitFlagPresets = {
-    ---@type HitFlagPreset
     GuaranteedWeaponHit = HitFlagPreset:Create({
         SimulateHit = 1,
         HitType = "WeaponDamage",
@@ -41,7 +40,7 @@ HitFlagPresets = {
         HitWithWeapon = 1,
         Hit = 1,
         HighGround = 1,
-    })
+    }),
 }
 
 ---@type StatusEventValues

@@ -225,23 +225,27 @@ local function pushDescriptionEntry(this, index, text, iconId, iconName, iconTyp
 			iconType = 0
 		end
 	end
-	if iconName == "" and iconId ~= "" then
-		if string.find(iconId, ";") then
-			local foundIcons = {}
-			for i,v in pairs(StringHelpers.Split(iconId, ";")) do
-				local stat = Ext.GetStat(v)
+	if iconName == "" and iconId ~= "" and iconType ~= 3 then
+		if iconType ~= 3 then
+			if string.find(iconId, ";") then
+				local foundIcons = {}
+				for i,v in pairs(StringHelpers.Split(iconId, ";")) do
+					local stat = Ext.GetStat(v)
+					if stat and stat.Icon then
+						foundIcons[#foundIcons+1] = stat.Icon
+					else
+						foundIcons[#foundIcons+1] = "LeaderLib_Placeholder"
+					end
+				end
+				iconId = StringHelpers.Join(";", foundIcons)
+			else
+				local stat = Ext.GetStat(iconId)
 				if stat and stat.Icon then
-					foundIcons[#foundIcons+1] = stat.Icon
-				else
-					foundIcons[#foundIcons+1] = "LeaderLib_Placeholder"
+					iconName = stat.Icon
 				end
 			end
-			iconId = StringHelpers.Join(";", foundIcons)
 		else
-			local stat = Ext.GetStat(iconId)
-			if stat and stat.Icon then
-				iconName = stat.Icon
-			end
+			iconName = "LLWEAPONEX_UI_PassiveBonus"
 		end
 	end
 	if StringHelpers.IsNullOrWhitespace(iconName) then
