@@ -11,7 +11,7 @@ local throwingKnifeBonuses = {
 local function ThrowingKnifeBonus(bonuses, skill, char, state, data)
 	--PrintDebug("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") data("..Ext.JsonStringify(data)..")")
 	if state == SKILL_STATE.HIT and data.Success then
-		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Dagger_ThrowingKnife_Chance", 25)
 		if chance > 0 then
 			if Ext.Random(1,100) < chance then
 				GameHelpers.Skill.Explode(data.Target, Common.GetRandomTableEntry(throwingKnifeBonuses), char)
@@ -19,7 +19,7 @@ local function ThrowingKnifeBonus(bonuses, skill, char, state, data)
 		end
 	--Targeted a position instead of an object
 	elseif state == SKILL_STATE.PROJECTILEHIT and StringHelpers.IsNullOrEmpty(data.Target) and data.Position then
-		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance", 25)
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MasteryBonus_Dagger_ThrowingKnife_Chance", 25)
 		if chance > 0 then
 			if Ext.Random(1,100) < chance then
 				GameHelpers.Skill.Explode(data.Position, Common.GetRandomTableEntry(throwingKnifeBonuses), char)
@@ -46,11 +46,11 @@ local function BacklashBonus(bonuses, skill, char, state, data)
 		if statusObject and sourceObject.MyGuid == char then
 			RemoveStatus(data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
 			local sourceSkill = CharacterHasSkill(char, "Projectile_EnemyThrowingKnife") == 1 and "Projectile_EnemyThrowingKnife" or "Projectile_ThrowingKnife"
+			GameHelpers.Skill.SetCooldown(char, sourceSkill, 0.0)
 			local apCost = Ext.StatGetAttribute(sourceSkill, "ActionPoints")
 			if apCost > 1 then
-				local apBonus = Ext.Round(apCost/2)
+				local apBonus = math.max(1, math.floor(apCost/2))
 				CharacterAddActionPoints(char, apBonus)
-				NRD_SkillSetCooldown(char, sourceSkill, 0)
 			end
 		end
 	end
@@ -89,15 +89,18 @@ MasteryBonusManager.RegisterSkillListener({"Target_SerratedEdge", "Target_EnemyS
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param data SkillEventData|HitData
-local function MortalBlowRefundBonus(bonuses, skill, char, state, data)
+local function FatalityRefundBonus(bonuses, skill, char, state, data)
 	if state == SKILL_STATE.HIT then
-		DeathManager.ListenForDeath("MortalBlowRefundBonus", data.Target, char, 1000)
+		data:ConvertAllDamageTo("Piercing")
+		DeathManager.ListenForDeath("FatalityRefundBonus", data.Target, char, 1000)
 	end
 end
 
-DeathManager.RegisterListener("MortalBlowRefundBonus", function(target, attacker, success)
+DeathManager.RegisterListener("FatalityRefundBonus", function(target, attacker, success)
 	if success then
-		local skill = Ext.GetStat("Target_TerrifyingCruelty")
+		local sourceSkill = CharacterHasSkill(attacker, "Target_EnemyFatality") == 1 and "Target_EnemyFatality" or "Target_Fatality"
+		GameHelpers.Skill.SetCooldown(attacker, sourceSkill, 6.0)
+		local skill = Ext.GetStat("Target_Fatality")
 		if skill["Magic Cost"] > 0 then
 			CharacterAddSourcePoints(attacker, 1)
 		end
@@ -107,7 +110,7 @@ DeathManager.RegisterListener("MortalBlowRefundBonus", function(target, attacker
 	end
 end)
 
-MasteryBonusManager.RegisterSkillListener({"Target_Fatality", "Target_EnemyFatality"}, "DAGGER_MORTALBLOW_REFUND", MortalBlowRefundBonus)
+MasteryBonusManager.RegisterSkillListener({"Target_Fatality", "Target_EnemyFatality"}, "DAGGER_FATALITY", FatalityRefundBonus)
 
 --TODO Mastery Menu / Tooltip bonus text
 DeathManager.RegisterListener("TerrifyingCrueltyBonus", function(target, attacker, success)

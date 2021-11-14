@@ -24,9 +24,9 @@ LLWEAPONEX_Crossbow_Rank2_Description	Placeholder	h08268978g4bbbg4e5eg8c7egdfece
 LLWEAPONEX_Crossbow_Rank3_Description	Placeholder	h99499e81g88e3g4f83gb184g46e02a8b77a8
 LLWEAPONEX_Crossbow_Rank4_Description	Placeholder	hd84c693dg3a28g43fdgba93gbff3f830a53c
 LLWEAPONEX_Dagger_Rank1_Description	<icon id='Projectile_ThrowingKnife'/>[Key:Projectile_ThrowingKnife_DisplayName] is enhanced with a chance to do bonus damage.	hac7da9cbgdb9dg4140g85f2g572856006cb9
-LLWEAPONEX_Dagger_Rank2_Description	<icon id='MultiStrike_Vault'/>	hc7692bc5g5283g4105g8223gea6c5ccf10de
-LLWEAPONEX_Dagger_Rank3_Description	<icon id='Projectile_ThrowingKnife'/>	hd81ff9c9g05fcg4af2g8fdfg61733d102fbb
-LLWEAPONEX_Dagger_Rank4_Description	<icon id='Projectile_ThrowingKnife'/>	h507d0772g89ceg4e31g9569g2fe2c0baee5c
+LLWEAPONEX_Dagger_Rank2_Description	<icon id='MultiStrike_Vault'/>Using [Key:MultiStrike_Vault_DisplayName] on a target hit by [Key:Projectile_ThrowingKnife_DisplayName] grants bonus AP and refreshs the cooldown of [Key:Projectile_ThrowingKnife_DisplayName].<icon id='Target_SerratedEdge'/>Deal bonus damage if the target is [Key:BLEEDING_DisplayName].	hc7692bc5g5283g4105g8223gea6c5ccf10de
+LLWEAPONEX_Dagger_Rank3_Description	<icon id='Projectile_FanOfKnives'/>The bonuses for [Key:Projectile_ThrowingKnife_DisplayName] and [Key:MultiStrike_Vault_DisplayName] apply to all projectiles thrown by [Key:Projectile_FanOfKnives_DisplayName].	hd81ff9c9g05fcg4af2g8fdfg61733d102fbb
+LLWEAPONEX_Dagger_Rank4_Description	<icon id='Target_Fatality'/>[Target_Fatality_DisplayName] now deals piercing damage, refunds source and partial AP costs on kill, and has a [ExtraData:LLWEAPONEX_MasteryBonus_Dagger_FatalityCooldown] turn cooldown.<icon id='Target_TerrifyingCruelty'/>The corpses of targets killed explode for bonus damage, which can cause additional explosions on kill.	h507d0772g89ceg4e31g9569g2fe2c0baee5c
 LLWEAPONEX_DualShields_Rank1_Description	<icon id='Rush_BatteringRam;Rush_BullRush'/>You are immune to surface damage while using rush skills.	h785579b9ga78eg439aga55cg8ae1919479e6
 LLWEAPONEX_DualShields_Rank2_Description	Placeholder	h0f116f0egb218g461bg8c88g206730e4e093
 LLWEAPONEX_DualShields_Rank3_Description	Placeholder	h64c07c73g5ef6g40b9g9466g80a5f1df005a
@@ -43,6 +43,10 @@ LLWEAPONEX_HandCrossbow_Rank1_Description	<icon id='Projectile_LLWEAPONEX_HandCr
 LLWEAPONEX_HandCrossbow_Rank2_Description	<icon id='Projectile_LLWEAPONEX_HandCrossbow_Shoot'/>Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% extra base damage in total.<icon id='Jump_TacticalRetreat'/>In combat, [Key:Jump_TacticalRetreat_DisplayName] applies [Key:MARKED_DisplayName] to nearby enemies when jumping away.	hf90feb29g1849g425dgae29ga5377df30f4b
 LLWEAPONEX_HandCrossbow_Rank3_Description	<icon id='Projectile_LLWEAPONEX_HandCrossbow_Shoot'/>Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost3]% extra base damage in total.	h43a29acfgcc05g45beg9826g10ddaa1ac4f9
 LLWEAPONEX_HandCrossbow_Rank4_Description	<icon id='Projectile_LLWEAPONEX_HandCrossbow_Shoot'/>Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost4]% extra base damage in total.	h5a1bc6cag0662g4041gbb15g9ee793a96690
+LLWEAPONEX_Katana_Rank1_Description	<icon id='Rush_LLWEAPONEX_Katana_Iaido;LLWEAPONEX_KATANA_COMBO9' type='1;2'/>Basic attacks and weapon skills now apply [Key:LLWEAPONEX_KATANA_COMBO1_DisplayName], a stacking status that is removed when your turn ends. Katana mastery skills consume this status for bonus damage. Backstabs or critical hits apply two stacks.<icon id='MultiStrike_Vault'/>After teleporting, your next attack deals +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% more damage.	h5e2df2a5gda8dg4baeg9155gc3c50082beb4
+LLWEAPONEX_Katana_Rank2_Description	Placeholder	h46cb2853g6646g4ad0g9841g56059054b847
+LLWEAPONEX_Katana_Rank3_Description	Placeholder	hdc1c9304g98bdg4758g8e1cge3b24e1296bc
+LLWEAPONEX_Katana_Rank4_Description	Placeholder	h1a9da6d7gc44cg410dgb6f5g61e1f31c0c6a
 LLWEAPONEX_Pistol_Rank1_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.<icon id='Shout_Adrenaline'/>Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MasteryBonus_Adrenaline_PistolDamageBoost]%.	h8d3ec53cg6caag483eg8e9ag838a02ecb512
 LLWEAPONEX_Pistol_Rank2_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.<icon id='Jump_CloakAndDagger'/>[Key:LLWEAPONEX_MB_Pistol_CloakAndDagger]	hb6eef25cg3995g4611gabdfgd65916b4bf94
 LLWEAPONEX_Pistol_Rank3_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.	ha58bb241gb3cfg4ac0g845ag0ae0342bb50d
@@ -91,7 +95,3 @@ LLWEAPONEX_Wand_Rank1_Description	<icon id='Target_LLWEAPONEX_BasicAttack's elem
 LLWEAPONEX_Wand_Rank2_Description	Placeholder	h9aa31d18gb298g404fg9e83g5ceec653df78
 LLWEAPONEX_Wand_Rank3_Description	Placeholder	h4119756fg0201g4509ga1b8ge32890d9aaec
 LLWEAPONEX_Wand_Rank4_Description	Placeholder	hccc0cf85g85e2g41c7g986cgdfb87eff2025
-LLWEAPONEX_Katana_Rank1_Description	<icon id='Rush_LLWEAPONEX_Katana_Iaido;LLWEAPONEX_KATANA_COMBO9' type='1;2'/>Basic attacks and weapon skills now apply [Key:LLWEAPONEX_KATANA_COMBO1_DisplayName], a stacking status that is removed when your turn ends. Katana mastery skills consume this status for bonus damage. Backstabs or critical hits apply two stacks.<icon id='MultiStrike_Vault'/>After teleporting, your next attack deals +[ExtraData:LLWEAPONEX_MasteryBonus_Katana_VaultDamageBonus]% more damage.	h5e2df2a5gda8dg4baeg9155gc3c50082beb4
-LLWEAPONEX_Katana_Rank2_Description	Placeholder	h46cb2853g6646g4ad0g9841g56059054b847
-LLWEAPONEX_Katana_Rank3_Description	Placeholder	hdc1c9304g98bdg4758g8e1cge3b24e1296bc
-LLWEAPONEX_Katana_Rank4_Description	Placeholder	h1a9da6d7gc44cg410dgb6f5g61e1f31c0c6a

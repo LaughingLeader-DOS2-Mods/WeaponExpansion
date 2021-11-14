@@ -1,4 +1,5 @@
-key "LLWEAPONEX_MasteryBonus_ThrowingKnife_Chance","25.0"
+key "LLWEAPONEX_MasteryBonus_Dagger_ThrowingKnife_Chance","25.0"
+key "LLWEAPONEX_MasteryBonus_Dagger_FatalityCooldown","6"
 key "LLWEAPONEX_MasteryBonus_CripplingBlow_SunderTurns","2"
 key "LLWEAPONEX_MasteryBonus_ElementalWeaknessTurns","1"
 key "LLWEAPONEX_MasteryBonus_WarChargeDamageBoost","25.0"
