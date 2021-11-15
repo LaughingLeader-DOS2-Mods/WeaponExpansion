@@ -159,6 +159,43 @@ local function OnTooltipPositioned(ui, tooltip_mc, isControllerMode, lastItem, .
 	end
 end
 
+---@type table<string,LeaderLibGetTextPlaceholder>
+local SpecialParamFunctions = {
+	---@param character StatCharacter
+	LLWEAPONEX_MB_BacklashAPBonus = function(param, character)
+		local apCost = Ext.StatGetAttribute("MultiStrike_Vault", "ActionPoints")
+		if apCost > 1 then
+			local refundMult = math.min(100, math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Backlash_APRefundPercentage", 50)))
+			if refundMult > 0 then
+				if refundMult > 1 then
+					refundMult = refundMult * 0.01
+				end
+				local apBonus = math.max(1, math.floor(apCost * refundMult))
+				return tostring(apBonus)
+			end
+		end
+		return "0"
+	end
+}
+
+
+---@param param string
+---@param character StatCharacter
+---@vararg string
+---@return string
+RegisterListener("GetTextPlaceholder", function(param, character)
+	local callback = SpecialParamFunctions[param]
+	if callback then
+		local b,result = xpcall(callback, debug.traceback, param, character)
+		if b then
+			return result
+		else
+			Ext.PrintError(result)
+		end
+	end
+end)
+
+
 local function Init()
 	Game.Tooltip.RegisterListener("Stat", nil, OnStatTooltip)
 	Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)

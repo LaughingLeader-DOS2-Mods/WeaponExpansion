@@ -31,7 +31,6 @@ end
 MasteryBonusManager.RegisterSkillListener({"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"}, "DAGGER_THROWINGKNIFE", ThrowingKnifeBonus)
 MasteryBonusManager.RegisterSkillListener({"Projectile_FanOfKnives", "Projectile_EnemyFanOfKnives"}, "DAGGER_THROWINGKNIFE2", ThrowingKnifeBonus)
 
---TODO Mastery Menu / Tooltip bonus text
 ---@param skill string
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
@@ -74,7 +73,6 @@ local RupturedFlags = {
 	Missed = 0,
 }
 
---TODO Mastery Menu / Tooltip bonus text
 ---@param skill string
 ---@param char string
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
@@ -88,7 +86,7 @@ local function SerratedRuptureBonus(bonuses, skill, char, state, data)
 	end
 end
 
-MasteryBonusManager.RegisterSkillListener({"Target_SerratedEdge", "Target_EnemySerratedEdge"}, "DAGGER_RUPTURE", SerratedRuptureBonus)
+MasteryBonusManager.RegisterSkillListener({"Target_SerratedEdge", "Target_EnemySerratedEdge"}, "DAGGER_SERRATED_RUPTURE", SerratedRuptureBonus)
 
 --TODO Mastery Menu / Tooltip bonus text
 ---@param skill string

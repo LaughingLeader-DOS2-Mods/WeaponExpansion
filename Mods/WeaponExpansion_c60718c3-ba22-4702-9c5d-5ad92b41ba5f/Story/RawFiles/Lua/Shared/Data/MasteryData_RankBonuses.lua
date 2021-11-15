@@ -185,7 +185,16 @@ LLWEAPONEX_Dagger_Mastery1 = {
 		Param = ts:Create("hea8e7051gfc68g4d9dgaba8g7c871bbd4056","<font color='#F19824'>The knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.</font>"),
 	}
 },
-LLWEAPONEX_Dagger_Mastery2 = {},
+LLWEAPONEX_Dagger_Mastery2 = {
+	DAGGER_BACKLASH = {
+		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
+		Param = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_BacklashBonus", "<font color='#F19824'>Attacking a target hit by [Key:Projectile_ThrowingKnife_DisplayName] grants [Special:LLWEAPONEX_MB_BacklashAPBonus] AP and refreshs the cooldown of [Key:Projectile_ThrowingKnife_DisplayName]</font>"),
+	},
+	DAGGER_SERRATED_RUPTURE = {
+		Skills = {"Target_SerratedEdge", "Target_EnemySerratedEdge"},
+		Param = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus", "<font color='#F19824'>Deal an additional [SkillDamage:Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].</font>"),
+	}
+},
 LLWEAPONEX_Dagger_Mastery3 = {},
 LLWEAPONEX_Dagger_Mastery4 = {},
 LLWEAPONEX_Dagger_Mastery5 = {},
