@@ -1,32 +1,26 @@
-MasteryBonusManager = {}
+local isClient = Ext.IsClient()
 
-HitData = LeaderLib.Classes.HitData
+MasteryBonusManager = {}
 
 ---@param char string
 ---@param skill string|nil
 ---@return table<string, boolean>
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
-	---@type EsvCharacter
-	local character = nil
-	if type(char) ~= "userdata" then
-		if ObjectExists(char) == 0 or ObjectIsCharacter(char) == 0 then
-			return
-		end
-		character = Ext.GetCharacter(char)
-	else
-		character = char
-	end
+	---@type EsvCharacter|EclCharacter
+	local character = GameHelpers.GetCharacter(char)
 
 	local bonuses = {}
-	for tag,tbl in pairs(Mastery.Bonuses) do
-		if Mastery.HasMasteryRequirement(character, tag) then
-			for bonusName,v in pairs(tbl) do
-				if skill == nil then
-					bonuses[bonusName] = true
-				elseif v.Skills ~= nil then
-					for _,bonusReqSkill in pairs(v.Skills) do
-						if bonusReqSkill == skill then
-							bonuses[bonusName] = true
+	if character then
+		for tag,tbl in pairs(Mastery.Bonuses) do
+			if Mastery.HasMasteryRequirement(character, tag) then
+				for bonusName,v in pairs(tbl) do
+					if skill == nil then
+						bonuses[bonusName] = true
+					elseif v.Skills ~= nil then
+						for _,bonusReqSkill in pairs(v.Skills) do
+							if bonusReqSkill == skill then
+								bonuses[bonusName] = true
+							end
 						end
 					end
 				end
@@ -40,23 +34,23 @@ end
 ---@param bonus string|table<string,boolean>
 ---@return boolean
 function MasteryBonusManager.HasMasteryBonuses(uuid, bonus)
-	local character = uuid
-	local t = type(uuid)
-	if t == "string" or t == "number" then
-		character = Ext.GetCharacter(uuid)
-	end
-	for tag,tbl in pairs(Mastery.Bonuses) do
-		if Mastery.HasMasteryRequirement(character, tag) then
-			for bonusName,_ in pairs(tbl) do
-				if type(bonus) == "table" then
-					for i,v in pairs(bonus) do
-						if v == bonusName then
+	---@type EsvCharacter|EclCharacter
+	local character = GameHelpers.GetCharacter(uuid)
+
+	if character then
+		for tag,tbl in pairs(Mastery.Bonuses) do
+			if Mastery.HasMasteryRequirement(character, tag) then
+				for bonusName,_ in pairs(tbl) do
+					if type(bonus) == "table" then
+						for i,v in pairs(bonus) do
+							if v == bonusName then
+								return true
+							end
+						end
+					else
+						if bonusName == bonus then
 							return true
 						end
-					end
-				else
-					if bonusName == bonus then
-						return true
 					end
 				end
 			end
@@ -93,6 +87,13 @@ end
 
 ---@alias WeaponExpansionMasterySkillListenerCallback fun(bonuses:string[], skill:string, char:string, state:SKILL_STATE, data:SkillEventData|HitData):void
 
+local function OnSkillTypeCallback(callback, matchBonuses, uuid, ...)
+	local bonuses = MasteryBonusManager.GetMasteryBonuses(uuid, nil)
+	if HasMatchedBonuses(bonuses, matchBonuses) then
+		callback(bonuses, uuid, ...)
+	end
+end
+
 ---@param skill string|string[]
 ---@param matchBonuses string|string[]
 ---@param callback WeaponExpansionMasterySkillListenerCallback
@@ -117,6 +118,9 @@ local function OnSkillTypeCallback(callback, matchBonuses, uuid, ...)
 	end
 end
 
+---@param skillType string|string[]
+---@param matchBonuses string|string[]
+---@param callback WeaponExpansionMasterySkillListenerCallback
 function MasteryBonusManager.RegisterSkillTypeListener(skillType, matchBonuses, callback)
 	if type(skillType) == "table" then
 		for i,v in pairs(skillType) do
@@ -334,6 +338,26 @@ function MasteryBonusManager.GetClosestCombatEnemies(char, maxDistance, sortByCl
 	end
 end
 
+---@param mastery string
+---@param rank integer
+---@param bonuses MasteryRankBonus|MasteryRankBonus[]
+function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
+	local masteryRankID = string.format("%s_Mastery%s", mastery, rank)
+	if not Mastery.Bonuses[masteryRankID] then
+		Mastery.Bonuses[masteryRankID] = {}
+	end
+	local t = type(bonuses)
+	if t == "table" then
+		if bonuses.Type == "MasteryRankBonus" then
+			table.insert(Mastery.Bonuses[masteryRankID], bonuses)
+		else
+			for k,v in pairs(bonuses) do
+				table.insert(Mastery.Bonuses[masteryRankID], v)
+			end
+		end
+	end
+end
+
 BonusHelperVars = {
 	RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
 }
@@ -366,5 +390,5 @@ local bonusScriptNames = {
 }
 
 for i,v in pairs(bonusScriptNames) do
-	Ext.Require("Server/Mastery/Bonuses/"..v)
+	Ext.Require("Shared/Mastery/Bonuses/"..v)
 end

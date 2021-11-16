@@ -129,7 +129,7 @@ end
 ---@return boolean
 function BonusIDEntry:HasTag(character)
 	for tag,_ in pairs(self.Tags) do
-		if character:HasTag(tag) then
+		if GameHelpers.CharacterOrEquipmentHasTag(character, tag) then
 			return true
 		end
 	end

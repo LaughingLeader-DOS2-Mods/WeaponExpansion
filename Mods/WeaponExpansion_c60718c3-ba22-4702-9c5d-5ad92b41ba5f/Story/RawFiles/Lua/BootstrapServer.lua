@@ -1,4 +1,4 @@
-Ext.Require("Shared/_InitShared.lua")
+Ext.Require("BootstrapShared.lua")
 
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
@@ -127,7 +127,6 @@ Ext.Require("Server/AttackManager.lua")
 Ext.Require("Server/TimerListeners.lua")
 Ext.Require("Server/EquipmentManager/_Main.lua")
 Ext.Require("Server/OsirisListeners.lua")
-Ext.Require("Server/DeathMechanics.lua")
 Ext.Require("Server/UI/MasteryMenuCommands.lua")
 Ext.Require("Server/UI/UIHelpers.lua")
 Ext.Require("Server/Runeblades/__Init.lua")
@@ -139,7 +138,6 @@ Ext.Require("Server/Skills/RemoteMines.lua")
 Ext.Require("Server/MasteryExperience.lua")
 Ext.Require("Server/MasteryHelpers.lua")
 Ext.Require("Server/PistolMechanics.lua")
-Ext.Require("Server/Mastery/SkillBonuses.lua")
 Ext.Require("Server/Mastery/HitBonuses.lua")
 Ext.Require("Server/Mastery/StatusBonuses.lua")
 Ext.Require("Server/Origins/OriginsMain.lua")
