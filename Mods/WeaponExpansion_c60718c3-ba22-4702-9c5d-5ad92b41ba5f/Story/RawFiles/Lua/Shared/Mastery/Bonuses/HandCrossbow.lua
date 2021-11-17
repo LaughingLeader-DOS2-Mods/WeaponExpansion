@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 4, {
+	
+})
+
 local whirlwindHandCrossbowTargets = {}
 
 function OnWhirlwindHandCrossbowTargetFound(uuid, target)

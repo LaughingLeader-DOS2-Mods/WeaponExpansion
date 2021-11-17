@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Katana, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Katana, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Katana, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Katana, 4, {
+	
+})
+
 local ComboStatuses = {
 	"LLWEAPONEX_KATANA_COMBO1",
 	"LLWEAPONEX_KATANA_COMBO2",

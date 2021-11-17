@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
+	
+})
+
 ---@param hitData HitData
 MasteryBonusManager.RegisterSkillListener(BonusHelperVars.RushSkills, "RUSH_DIZZY", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then

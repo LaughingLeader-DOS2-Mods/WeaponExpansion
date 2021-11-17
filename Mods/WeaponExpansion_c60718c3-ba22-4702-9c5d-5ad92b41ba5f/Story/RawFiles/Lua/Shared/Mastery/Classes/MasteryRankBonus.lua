@@ -61,11 +61,22 @@ function MasteryRankBonus:RegisterSkillTypeListener(skillType, callback)
 end
 
 ---@param event StatusEventID
----@param callback WeaponExpansionMasteryStatusListenerCallback
+---@param callback MasteryBonusStatusCallback
+---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
 ---@return MasteryRankBonus
-function MasteryRankBonus:RegisterStatusListener(event, callback)
+function MasteryRankBonus:RegisterStatusListener(event, callback, specificStatuses)
 	if not isClient then
-		MasteryBonusManager.RegisterStatusListener(self.Statuses, self.ID, callback)
+		MasteryBonusManager.RegisterStatusListener(specificStatuses or self.Statuses, self.ID, callback)
+	end
+	return self
+end
+
+---@param callback MasteryBonusStatusBeforeAttemptCallback
+---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
+---@return MasteryRankBonus
+function MasteryRankBonus:RegisterStatusBeforeAttemptListener(callback, specificStatuses)
+	if not isClient then
+		MasteryBonusManager.RegisterStatusAttemptListener(specificStatuses or self.Statuses, self.ID, callback)
 	end
 	return self
 end

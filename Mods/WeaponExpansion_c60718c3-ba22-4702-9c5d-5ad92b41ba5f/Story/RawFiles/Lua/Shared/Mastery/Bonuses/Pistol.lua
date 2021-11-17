@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Pistol, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Pistol, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Pistol, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Pistol, 4, {
+	
+})
+
 MasteryBonusManager.RegisterSkillListener({"Shout_Adrenaline", "Shout_EnemyAdrenaline"}, "PISTOL_ADRENALINE", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.CAST then
 		SetTag(char, "LLWEAPONEX_Pistol_Adrenaline_Active")

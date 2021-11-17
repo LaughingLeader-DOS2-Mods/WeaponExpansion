@@ -10,6 +10,7 @@ local MasteryData = MasteryDataClasses.MasteryData
 MasteryID = {
 	Axe = "LLWEAPONEX_Axe",
 	Banner = "LLWEAPONEX_Banner",
+	BattleBook = "LLWEAPONEX_BattleBook",
 	Bludgeon = "LLWEAPONEX_Bludgeon",
 	Bow = "LLWEAPONEX_Bow",
 	Crossbow = "LLWEAPONEX_Crossbow",
@@ -28,7 +29,7 @@ MasteryID = {
 	Shield = "LLWEAPONEX_Shield",
 	Staff = "LLWEAPONEX_Staff",
 	Sword = "LLWEAPONEX_Sword",
-	ThrowingAbility = "LLWEAPONEX_ThrowingAbility",
+	Throwing = "LLWEAPONEX_ThrowingAbility",
 	Unarmed = "LLWEAPONEX_Unarmed",
 	Wand = "LLWEAPONEX_Wand",
 }

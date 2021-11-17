@@ -1,3 +1,21 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Greatbow, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Greatbow, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Greatbow, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Greatbow, 4, {
+	
+})
 
 ---@param skill string
 ---@param char string

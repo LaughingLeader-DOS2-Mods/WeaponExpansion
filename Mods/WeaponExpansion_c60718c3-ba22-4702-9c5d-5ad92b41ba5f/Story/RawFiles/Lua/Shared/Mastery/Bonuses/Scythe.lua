@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Scythe, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Scythe, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Scythe, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Scythe, 4, {
+	
+})
+
 MasteryBonusManager.RegisterSkillListener({"Shout_Whirlwind", "Shout_EnemyWhirlwind"}, "SCYTHE_RUPTURE", function(bonuses, skill, char, state, hitData)
 	if state == SKILL_STATE.HIT and hitData.Success then
 		local bleedingTurns = GetStatusTurns(hitData.Target, "BLEEDING")

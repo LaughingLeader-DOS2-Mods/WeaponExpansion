@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Throwing, 4, {
+	
+})
+
 function GainThrowingMasteryXP(uuid, target)
 	if IsPlayer(uuid) then
 		MasterySystem.GrantWeaponSkillExperience(uuid, target, "LLWEAPONEX_ThrowingAbility")

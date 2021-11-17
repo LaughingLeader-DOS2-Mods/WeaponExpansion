@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Firearm, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Firearm, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Firearm, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Firearm, 4, {
+	
+})
+
 MasteryBonusManager.RegisterSkillListener({"Jump_TacticalRetreat", "Jump_EnemyTacticalRetreat"}, "FIREARM_TACTICAL_RETREAT", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS", -1.0, 0, char)

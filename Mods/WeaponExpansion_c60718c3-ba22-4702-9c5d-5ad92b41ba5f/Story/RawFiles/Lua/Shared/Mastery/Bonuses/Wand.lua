@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 4, {
+	
+})
+
 MasteryBonusManager.RegisterSkillListener({"Shout_FleshSacrifice", "Shout_EnemyFleshSacrifice"}, "BLOOD_EMPOWER", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		---@return string[]

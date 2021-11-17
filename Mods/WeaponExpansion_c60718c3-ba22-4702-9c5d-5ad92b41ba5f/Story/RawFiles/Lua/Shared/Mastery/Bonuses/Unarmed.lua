@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 4, {
+	
+})
+
 MasteryBonusManager.RegisterSkillListener({"Target_PetrifyingTouch", "Target_EnemyPetrifyingTouch"}, "PETRIFYING_SLAM", function(bonuses, skill, char, state, skillData)
 	if state == SKILL_STATE.CAST then
 		PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_R_HandFX")

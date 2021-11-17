@@ -1,3 +1,21 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
+	
+})
 
 ---@type SkillEventDataForEachCallback
 local function OnPinDownTarget(v, targetType, char, skill, forwardVector, radius)

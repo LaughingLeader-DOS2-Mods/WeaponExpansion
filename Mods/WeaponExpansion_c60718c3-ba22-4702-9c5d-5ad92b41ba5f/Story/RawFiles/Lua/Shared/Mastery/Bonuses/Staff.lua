@@ -1,3 +1,21 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 4, {
+	
+})
 
 local elementalWeakness = {
 	Air = "LLWEAPONEX_WEAKNESS_AIR",

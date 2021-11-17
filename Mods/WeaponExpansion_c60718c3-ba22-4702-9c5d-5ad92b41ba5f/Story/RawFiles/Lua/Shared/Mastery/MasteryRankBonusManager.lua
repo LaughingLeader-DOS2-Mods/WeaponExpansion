@@ -33,15 +33,15 @@ end
 ---@param uuid string
 ---@param bonus string|table<string,boolean>
 ---@return boolean
-function MasteryBonusManager.HasMasteryBonuses(uuid, bonus)
+function MasteryBonusManager.HasMasteryBonus(uuid, bonus)
 	---@type EsvCharacter|EclCharacter
 	local character = GameHelpers.GetCharacter(uuid)
-
 	if character then
+		local t = type(bonus)
 		for tag,tbl in pairs(Mastery.Bonuses) do
 			if Mastery.HasMasteryRequirement(character, tag) then
 				for bonusName,_ in pairs(tbl) do
-					if type(bonus) == "table" then
+					if t == "table" then
 						for i,v in pairs(bonus) do
 							if v == bonusName then
 								return true
@@ -135,7 +135,7 @@ function MasteryBonusManager.RegisterSkillTypeListener(skillType, matchBonuses, 
 	end
 end
 
-local function OnStatusCallback(callback, matchBonuses, target, status, source)
+local function OnStatusCallback(callback, matchBonuses, target, status, source, statusType)
 	local bonuses = {}
 	if ObjectIsCharacter(source) == 1 then
 		local b = MasteryBonusManager.GetMasteryBonuses(source)
@@ -156,27 +156,25 @@ local function OnStatusCallback(callback, matchBonuses, target, status, source)
 		end
 	end
 	if HasMatchedBonuses(bonuses, matchBonuses) then
-		callback(target, status, source, bonuses)
+		callback(bonuses, target, status, source, statusType)
 	end
 end
 
----@alias WeaponExpansionMasteryStatusListenerCallback fun(target:string, status:string, source:string, bonuses:table<string,table<string,boolean>>)
+---@alias MasteryBonusStatusCallback fun(bonuses:table<string,table<UUID,boolean>>, target:string, status:string, source:string, statusType:string)
+---@alias MasteryBonusStatusBeforeAttemptCallback fun(bonuses:table<string,table<UUID,boolean>>, target:EsvCharacter|EsvItem, status:EsvStatus, source:EsvCharacter|EsvItem|nil, handle:integer, statusType:string):boolean
 
 ---@param event string
 ---@param status string|string[]
 ---@param matchBonuses string|string[]
----@param callback WeaponExpansionMasteryStatusListenerCallback
+---@param callback MasteryBonusStatusCallback
 function MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses, callback)
 	if type(status) == "table" then
 		for i,v in pairs(status) do
-			local wrapperCallback = function(target,v,source) 
-				OnStatusCallback(callback, matchBonuses, target, v, source)
-			end
-			RegisterStatusListener(event, v, wrapperCallback)
+			MasteryBonusManager.RegisterStatusListener(event, v, matchBonuses, callback)
 		end
 	else
-		local wrapperCallback = function(target,status,source)
-			OnStatusCallback(callback, matchBonuses, target, status, source)
+		local wrapperCallback = function(target, status, source, statusType)
+			OnStatusCallback(callback, matchBonuses, target, status, source, statusType)
 		end
 		RegisterStatusListener(event, status, wrapperCallback)
 	end
@@ -185,7 +183,7 @@ end
 
 ---@param target EsvCharacter
 ---@param source EsvCharacter|nil
-local function OnStatusAttemptCallback(callback, matchBonuses, target, status, handle, source, skipBonusCheck)
+local function OnStatusAttemptCallback(callback, matchBonuses, target, status, source, handle, statusType, skipBonusCheck)
 	if skipBonusCheck ~= true then
 		local bonuses = {}
 		if source and ObjectIsCharacter(source.MyGuid) == 1 then
@@ -207,13 +205,35 @@ local function OnStatusAttemptCallback(callback, matchBonuses, target, status, h
 			end
 		end
 		if HasMatchedBonuses(bonuses, matchBonuses) then
-			callback(target, status, handle, source, bonuses)
+			local b,result = xpcall(callback, debug.traceback, bonuses, target, status, source, handle, statusType)
+			if b then
+				if result == false then
+					NRD_StatusPreventApply(target, handle, 1)
+				elseif result == true then
+					NRD_StatusPreventApply(target, handle, 0)
+				end
+			else
+				Ext.PrintError(result)
+			end
 		end
 	else
-		callback(target, status, handle, source)
+		local b,result = xpcall(callback, debug.traceback, nil, target, status, source, handle, statusType)
+		if b then
+			if result == false then
+				NRD_StatusPreventApply(target, handle, 1)
+			elseif result == true then
+				NRD_StatusPreventApply(target, handle, 0)
+			end
+		else
+			Ext.PrintError(result)
+		end
 	end
 end
 
+---@param status string|string[]
+---@param matchBonuses string|string[]
+---@param callback MasteryBonusStatusBeforeAttemptCallback
+---@param skipBonusCheck boolean
 function MasteryBonusManager.RegisterStatusAttemptListener(status, matchBonuses, callback, skipBonusCheck)
 	if type(status) == "table" then
 		for i,v in pairs(status) do
@@ -221,7 +241,7 @@ function MasteryBonusManager.RegisterStatusAttemptListener(status, matchBonuses,
 		end
 	else
 		RegisterStatusListener(StatusEvent.BeforeAttempt, status, function(target, status, source, handle, statusType)
-			OnStatusAttemptCallback(callback, matchBonuses, target, status, handle, source, skipBonusCheck)
+			OnStatusAttemptCallback(callback, matchBonuses, target, status, source, handle, statusType, skipBonusCheck)
 		end)
 	end
 end

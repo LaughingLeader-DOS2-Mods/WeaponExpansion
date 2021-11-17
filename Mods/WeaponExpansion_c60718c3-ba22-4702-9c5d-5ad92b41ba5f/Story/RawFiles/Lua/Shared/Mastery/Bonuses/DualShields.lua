@@ -1,3 +1,21 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 4, {
+	
+})
 
 ---@param bonuses table<string,bool>
 ---@param char string

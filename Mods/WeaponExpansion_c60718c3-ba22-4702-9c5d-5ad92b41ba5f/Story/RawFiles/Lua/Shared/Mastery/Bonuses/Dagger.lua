@@ -1,9 +1,3 @@
-
-local throwingKnifeBonuses = {
-	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison",
-	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
-}
-
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryRankBonus
 
@@ -11,6 +5,12 @@ local throwingKnifeBonus = rb:Create("DAGGER_THROWINGKNIFE", {
 	Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
 	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife")
 })
+
+
+local throwingKnifeBonuses = {
+	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison",
+	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
+}
 
 ---@param skill string
 ---@param char string

@@ -1,123 +1,173 @@
-MasteryBonusManager.RegisterSkillListener({"Target_CripplingBlow", "Target_EnemyCripplingBlow"}, "AXE_BONUSDAMAGE", function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Success then
-		if GameHelpers.Status.IsDisabled(hitData.Target) then
-			GameHelpers.ExplodeProjectile(char, hitData.Target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage")
-		end
-	end
-end)
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
 
-local whirlwindSkills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3"}
-
-MasteryBonusManager.RegisterSkillListener(whirlwindSkills, "AXE_SPINNING", function(bonuses, skill, char, state, skillData)
-	if state == SKILL_STATE.CAST then
-		if skill == "Shout_Whirlwind" or "Shout_EnemyWhirlwind" then
-			GameHelpers.ClearActionQueue(char)
-			CharacterUseSkill(char, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", char, 0, 1, 1)
-		elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
-			if Ext.Random(0,100) <= 50 then
-				GameHelpers.ClearActionQueue(char)
-				CharacterUseSkill(char, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", char, 0, 1, 1)
-			end
-		elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
-			if Ext.Random(0,100) <= 25 then
-				GameHelpers.ClearActionQueue(char)
-				CharacterUseSkill(char, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", char, 0, 1, 1)
+MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
+	rb:Create("AXE_BONUSDAMAGE", {
+		Skills = {"Target_CripplingBlow", "Target_EnemyCripplingBlow"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_CripplingBlow"),
+		NamePrefix = "<font color='#DD4444'>Executioner's</font>"
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success then
+			if GameHelpers.Status.IsDisabled(data.Target) then
+				GameHelpers.Skill.Explode(data.Target, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", char)
 			end
 		end
-	end
-end)
+	end),
 
-MasteryBonusManager.RegisterSkillListener({"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"}, "AXE_VULNERABLE", function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Success then
-		Timer.Start("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, hitData.Target)
-	end
-end)
+	rb:Create("AXE_EXECUTIONER", {
+		Skills = "ActionAttackGround",
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Executioner", "Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].")
+	})
+})
 
-Timer.RegisterListener("LLWEAPONEX_MasteryBonus_ApplyVulnerable", function(timerName, char, target)
-	if char and target and CharacterIsDead(target) == 0 then
-		if CharacterIsInCombat(char) == 1 then
-			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
-		else
-			ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
+MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
+	rb:Create("AXE_VULNERABLE", {
+		Skills = {"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_BlitzAttack")
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success then
+			Timer.Start("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, data.Target)
 		end
-	end
-end)
+	end),
 
----@param skillData SkillData
-MasteryBonusManager.RegisterSkillListener({"Target_Flurry", "Target_EnemyFlurry"}, "AXE_CLEAVE", function(bonuses, skill, char, state, skillData)
-	if state == SKILL_STATE.HIT then
-		SetTag(skillData.Target, "LLWEAPONEX_FlurryTarget")
-		-- Uses ShootLocalCone in behavior
-		SetStoryEvent(char, "LLWEAPONEX_Flurry_Axe_CreateCleaveCone")
-		Timer.Start("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", 250, skillData.Target)
-	end
-end)
-
-Timer.RegisterListener("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", function(timerName, target)
-	ClearTag(target, "LLWEAPONEX_FlurryTarget")
-end)
-
-AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
-	if bHitObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
-		RemoveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
-		GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", HitFlagPresets.GuaranteedWeaponHit)
-	end
-end)
-
----@param hitData HitData
-MasteryBonusManager.RegisterSkillListener("Target_HeavyAttack", "AXE_ALLIN", function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Success then
-		local totalPiercingDamage = 0
-		for i,damageType in Data.DamageTypes:Get() do
-			local damage = nil
-			damage = NRD_HitStatusGetDamage(hitData.Target, hitData.Handle, damageType)
-			if damage ~= nil and damage > 0 then
-				totalPiercingDamage = totalPiercingDamage + (damage / 2)
-				local reduced_damage = (damage/2) * -1
-				NRD_HitStatusAddDamage(hitData.Target, hitData.Handle, damageType, reduced_damage)
-			end
-		end
-		if totalPiercingDamage > 0 then
-			NRD_HitStatusAddDamage(hitData.Target, hitData.Handle, "Piercing", totalPiercingDamage)
-		end
-	end
-end)
+	rb:Create("AXE_SAVAGE", {
+		Skills = "ActionAttackGround",
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Savage", "Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AoOMaxDamageBonus]% more damage, in proportion to the target's missing vitality.")
+	})
+})
 
 local flurryHits = {}
 
----@param hitData HitData
-MasteryBonusManager.RegisterSkillListener("Target_DualWieldingAttack", "AXE_FLURRY", function(bonuses, skill, char, state, hitData)
-	if state == SKILL_STATE.HIT and hitData.Target ~= nil then
-		if flurryHits[char] == nil then
-			flurryHits[char] = 0
-		end
-		if hitData.Success then
-			flurryHits[char] = flurryHits[char] + 1
-		end
-		local timerName = string.format("LLWEAPONEX_Axe_FlurryCounter%s", char)
-		Timer.StartOneshot(timerName, 1000, function()
-			if flurryHits[char] >= 3 then
-				CharacterAddActionPoints(char, 1)
-				CharacterStatusText(char, "LLWEAPONEX_StatusText_FlurryAxeCombo")
+MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
+	rb:Create("AXE_SPINNING", {
+		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Whirlwind"),
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.CAST then
+			if skill == "Shout_Whirlwind" or "Shout_EnemyWhirlwind" then
+				GameHelpers.ClearActionQueue(char)
+				CharacterUseSkill(char, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", char, 0, 1, 1)
+			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
+				if Ext.Random(0,100) <= 50 then
+					GameHelpers.ClearActionQueue(char)
+					CharacterUseSkill(char, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", char, 0, 1, 1)
+				end
+			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
+				if Ext.Random(0,100) <= 25 then
+					GameHelpers.ClearActionQueue(char)
+					CharacterUseSkill(char, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", char, 0, 1, 1)
+				end
 			end
-			flurryHits[char] = nil
-		end)
-	end
-end)
+		end
+	end),
 
-AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-	if bHitObject and not isFromSkill and data.Damage > 0 then
-		if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
-			local damageBonus = 1 + ((Ext.ExtraData["LLWEAPONEX_MB_Axe_ProneDamageBonus"] or 25) * 0.01)
-			data:MultiplyDamage(damageBonus)
-		end
-		if bonuses.AXE_EXECUTIONER and HasActiveStatus(source, "AOO") == 1 then
-			if ObjectIsCharacter(target.MyGuid) == 1 then
-				local damageBonus = ((Ext.ExtraData["LLWEAPONEX_MB_Axe_AoOMaxDamageBonus"] or 50) * 0.01)
-				local missingVitPerc = 0.0
-				missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
-				data:MultiplyDamage(1+(damageBonus * missingVitPerc))
+	rb:Create("AXE_ALLIN", {
+		Skills = "Target_HeavyAttack",
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_AllIn"),
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success then
+			local damageMultiplier = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_AllInPiercingDamagePercentage", 50)
+			if damageMultiplier > 0 then
+				if damageMultiplier > 1 then
+					damageMultiplier = damageMultiplier * 0.01
+				end
+
+				local totalPiercingDamage = 0
+				for i,damageType in Data.DamageTypes:Get() do
+					local damage = nil
+					damage = NRD_HitStatusGetDamage(data.Target, data.Handle, damageType)
+					if damage ~= nil and damage > 0 then
+						local damageAmount = Ext.Round(damage * damageMultiplier)
+						if damageAmount > 0 then
+							totalPiercingDamage = totalPiercingDamage + damageAmount
+							NRD_HitStatusAddDamage(data.Target, data.Handle, damageType, damageAmount * -1)
+						end
+					end
+				end
+				if totalPiercingDamage > 0 then
+					data:AddDamage("Piercing", totalPiercingDamage)
+				end
 			end
 		end
-	end
-end)
+	end),
+
+	rb:Create("AXE_FLURRY", {
+		Skills = "Target_DualWieldingAttack",
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_FlurryCleave"),
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success ~= nil then
+			if flurryHits[char] == nil then
+				flurryHits[char] = 0
+			end
+			if data.Success then
+				flurryHits[char] = flurryHits[char] + 1
+			end
+			local timerName = string.format("LLWEAPONEX_Axe_FlurryCounter%s", char)
+			Timer.StartOneshot(timerName, 1000, function()
+				if flurryHits[char] >= 3 then
+					CharacterAddActionPoints(char, 1)
+					CharacterStatusText(char, "LLWEAPONEX_StatusText_FlurryAxeCombo")
+				end
+				flurryHits[char] = nil
+			end)
+		end
+	end),
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
+	rb:Create("AXE_CLEAVE", {
+		Skills = {"Target_Flurry", "Target_EnemyFlurry"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_FlurryCleave")
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success then
+			SetTag(data.Target, "LLWEAPONEX_FlurryTarget")
+			-- Uses ShootLocalCone in behavior
+			SetStoryEvent(char, "LLWEAPONEX_Flurry_Axe_CreateCleaveCone")
+			Timer.Start("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", 250, data.Target)
+		end
+	end),
+
+	rb:Create("AXE_SCOUNDREL", {
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Scoundrel","Axes can now be used with [Handle:hed591025g5c39g48ccga899gc9b1569716c1:Scoundrel] skills."),
+	})
+})
+
+if not Vars.IsClient then
+	Timer.RegisterListener("LLWEAPONEX_MasteryBonus_ApplyVulnerable", function(timerName, char, target)
+		if char and target and CharacterIsDead(target) == 0 then
+			if CharacterIsInCombat(char) == 1 then
+				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, 0, char)
+			else
+				ApplyStatus(target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", 6.0, 0, char)
+			end
+		end
+	end)
+	
+	Timer.RegisterListener("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", function(timerName, target)
+		ClearTag(target, "LLWEAPONEX_FlurryTarget")
+	end)
+	
+	AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
+		if bHitObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
+			RemoveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
+			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", HitFlagPresets.GuaranteedWeaponHit)
+		end
+	end)
+
+	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+		if bHitObject and not isFromSkill and data.Damage > 0 then
+			if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
+				local damageBonus = 1 + ((Ext.ExtraData["LLWEAPONEX_MB_Axe_ProneDamageBonus"] or 25) * 0.01)
+				data:MultiplyDamage(damageBonus)
+			end
+			if bonuses.AXE_EXECUTIONER and HasActiveStatus(source, "AOO") == 1 then
+				if ObjectIsCharacter(target.MyGuid) == 1 then
+					local damageBonus = ((Ext.ExtraData["LLWEAPONEX_MB_Axe_AoOMaxDamageBonus"] or 50) * 0.01)
+					local missingVitPerc = 0.0
+					missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
+					data:MultiplyDamage(1+(damageBonus * missingVitPerc))
+				end
+			end
+		end
+	end)
+end

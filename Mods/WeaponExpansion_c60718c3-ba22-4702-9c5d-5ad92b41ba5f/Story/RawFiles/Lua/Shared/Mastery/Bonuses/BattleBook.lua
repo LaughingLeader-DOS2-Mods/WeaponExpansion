@@ -1,3 +1,22 @@
+local ts = Classes.TranslatedString
+local rb = MasteryDataClasses.MasteryRankBonus
+
+MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
+	
+})
+
+MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 4, {
+	
+})
+
 MasteryBonusManager.RegisterStatusListener(StatusEvent.Applied, "RESTED", "BATTLEBOOK_FIRST_AID", function(target, status, source, bonuses)
 	if bonuses.BATTLEBOOK_RESTED[source] == true then
 		local turnBonus = Ext.ExtraData.LLWEAPONEX_MB_BattleBook_Rested_TurnBonus or 1
@@ -37,7 +56,7 @@ end)
 
 RegisterProtectedOsirisListener("CharacterUsedItem", 2, "after", function(uuid, item)
 	local character = Ext.GetCharacter(uuid)
-	if MasteryBonusManager.HasMasteryBonuses(character, "BATTLEBOOK_SCROLLS") and not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
+	if MasteryBonusManager.HasMasteryBonus(character, "BATTLEBOOK_SCROLLS") and not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
 		local apBonus = Ext.ExtraData.LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus or 1
 		if apBonus ~= 0 then
 			TurnEndRemoveTags["LLWEAPONEX_BattleBook_ScrollBonusAP"] = true
