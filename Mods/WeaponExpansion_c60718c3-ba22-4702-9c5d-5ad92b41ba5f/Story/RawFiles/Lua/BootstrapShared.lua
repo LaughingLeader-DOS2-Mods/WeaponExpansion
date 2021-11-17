@@ -8,7 +8,10 @@ Math = { AbilityScaling = {}}
 Text = {}
 Mastery = {
 	Params = {},
-	Variables = {},
+	Variables = {
+		---Specific tables or variables used in bonus logic scripts. This is so mods can add or modify them.
+		Bonuses = {}
+	},
 	PermanentMasteries = {
 		LLWEAPONEX_ThrowingAbility = true
 	},

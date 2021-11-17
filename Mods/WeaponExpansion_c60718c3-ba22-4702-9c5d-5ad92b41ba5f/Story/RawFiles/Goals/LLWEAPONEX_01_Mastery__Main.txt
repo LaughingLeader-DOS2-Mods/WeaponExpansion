@@ -237,11 +237,6 @@ _InfoStatus != ""
 THEN
 RemoveStatus(_Player, _InfoStatus);
 //END_REGION
-
-IF
-StoryEvent(_Char, "LLWEAPONEX_ApplyHasted")
-THEN
-ApplyStatus(_Char, "HASTED", 6.0, 0, _Char);
 EXITSECTION
 
 ENDEXITSECTION
