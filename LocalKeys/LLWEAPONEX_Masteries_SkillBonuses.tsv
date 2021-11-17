@@ -6,6 +6,8 @@ LLWEAPONEX_MB_Axe_FlurryCleave	Each hit cleaves up to [Stats:Cone_LLWEAPONEX_Mas
 LLWEAPONEX_MB_Axe_Savage	Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AoOMaxDamageBonus]% more damage, in proportion to the target's missing vitality.	h29991fbcg6968g4feeg9a60gcc8c04fdbd73
 LLWEAPONEX_MB_Axe_Stalker	Axes can now be used with [Handle:hed591025g5c39g48ccga899gc9b1569716c1:Scoundrel] skills.	h4f01d52ag5c84g42d8gae3dgaf3f477bcc18
 LLWEAPONEX_MB_Axe_Whirlwind	Spin an additional 1-3 times, dealing reduced damage each spin.	h0f83aa9ag475bg4ddfgb546gbb83d237b44e
+LLWEAPONEX_MB_Axe_AllIn	[ExtraData:LLWEAPONEX_MB_Axe_AllInPiercingDamagePercentage]% of the damage dealt is now [Handle:hd05581a1g83a7g4d95gb59fgfa5ef68f5c90:piercing damage].	h8b21aebcga7aeg436fg8354g7c11bc7e6d79
+LLWEAPONEX_MB_Axe_Scoundrel	Axes can now be used with [Handle:hed591025g5c39g48ccga899gc9b1569716c1:Scoundrel] skills.	he084a3c3g481eg4984g9726g02d0239f752d
 LLWEAPONEX_MB_Banner_BannerAuraProtection	<font color='#33FF33'>When near a placed banner, allies cannot be flanked, and turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]% until their turn occurs.</font>	h57237b97gfe3bg437aga094g1d91268f9fc5
 LLWEAPONEX_MB_Banner_BannerAuraStatusProtection	<font color='#C9AA58'>Immune to Flanking</font><br><font color='#33FF33'>Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.</font>	hb5b69849g6862g4db5gaa63gd4dd69e56a9d
 LLWEAPONEX_MB_Banner_Encourage	<font color='#FFCE58'>Fear, Madness, and Sleep are cleansed from encouraged allies.</font>	h4190e997g6776g46a5gbff1g711a310c6d38
