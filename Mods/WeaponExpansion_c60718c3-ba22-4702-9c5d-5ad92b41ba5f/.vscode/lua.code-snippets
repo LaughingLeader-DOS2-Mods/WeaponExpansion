@@ -1,0 +1,46 @@
+{
+	"MasteryRankBonus": {
+		"prefix": "rankbonus",
+		"body": [
+			"rb:Create(\"$1\", {",
+			"\tSkills = {},",
+			"\tTooltip = ts:CreateFromKey(\"LLWEAPONEX_MB_\", \"\")",
+			"}):RegisterSkillListener(function(bonuses, skill, char, state, data)",
+			"\tif state == SKILL_STATE.HIT and data.Success then",
+			"\t\t",
+			"\tend",
+			"end),",
+		],
+		"description": "Template for a new rank bonus with a skill listener."
+	},
+	"MasteryRankBonusTable": {
+		"prefix": "bonustable",
+		"body": [
+			"MasteryBonusManager.AddRankBonuses(MasteryID.$1, $2, {",
+			"\t",
+			"})",
+		],
+		"description": "Template for registering a table of rank bonuses."
+	},
+	"MasteryRankBonusAllRanks": {
+		"prefix": "bonustableall",
+		"body": [
+			"MasteryBonusManager.AddRankBonuses(MasteryID.$1, 1, {",
+			"\t",
+			"})",
+			"",
+			"MasteryBonusManager.AddRankBonuses(MasteryID.$1, 2, {",
+			"\t",
+			"})",
+			"",
+			"MasteryBonusManager.AddRankBonuses(MasteryID.$1, 3, {",
+			"\t",
+			"})",
+			"",
+			"MasteryBonusManager.AddRankBonuses(MasteryID.$1, 4, {",
+			"\t",
+			"})",
+		],
+		"description": "Template for registering a table of rank bonuses."
+	}
+}
