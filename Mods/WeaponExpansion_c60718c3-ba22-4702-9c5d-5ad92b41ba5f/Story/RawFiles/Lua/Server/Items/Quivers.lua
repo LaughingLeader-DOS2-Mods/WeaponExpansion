@@ -51,7 +51,7 @@ RegisterSkillListener("Shout_LLWEAPONEX_Quiver_DrawArrow", function(skill, char,
 	end
 end)
 
-RegisterStatusListener(StatusEvent.Removed, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", function(char, status)
+RegisterStatusListener("Removed", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", function(char, status)
 	local character = Ext.GetCharacter(char)
 	if character ~= nil and not character.Dead then
 		local shouldRecharge = false

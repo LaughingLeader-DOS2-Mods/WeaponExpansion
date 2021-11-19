@@ -1,5 +1,5 @@
 if not Vars.IsClient then
-	RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_BASILUS_HIT", function(target, status, source)
+	RegisterStatusListener("Applied", "LLWEAPONEX_BASILUS_HIT", function(target, status, source)
 		local min = math.ceil(Ext.ExtraData.LLWEAPONEX_BasilusDagger_MinTurns or 2)
 		local max = math.ceil(Ext.ExtraData.LLWEAPONEX_BasilusDagger_MaxTurns or 3)
 		local duration = Ext.Random(min,max) * 6.0

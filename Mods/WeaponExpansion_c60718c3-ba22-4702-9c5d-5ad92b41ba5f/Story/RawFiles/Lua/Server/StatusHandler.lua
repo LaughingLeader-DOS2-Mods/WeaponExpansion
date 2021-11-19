@@ -85,14 +85,14 @@ local function GrantMasteryExperienceFromStatus(target, status, source, statusTy
 	end
 end
 
-RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_PISTOL_SHOOT_HIT", GrantMasteryExperienceFromStatus)
-RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_HANDCROSSBOW_HIT", GrantMasteryExperienceFromStatus)
+RegisterStatusListener("Applied", "LLWEAPONEX_PISTOL_SHOOT_HIT", GrantMasteryExperienceFromStatus)
+RegisterStatusListener("Applied", "LLWEAPONEX_HANDCROSSBOW_HIT", GrantMasteryExperienceFromStatus)
 
 local function OnStatusRemoved(target, status, source, statusType)
 	StatusManager.RemoveTurnEndStatus(target, status, true)
 end
 
-RegisterStatusListener(StatusEvent.Removed, "All", OnStatusRemoved)
+RegisterStatusListener("Removed", "All", OnStatusRemoved)
 
 local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 	local callbacks = Listeners.EndTurnStatusRemoved[status]

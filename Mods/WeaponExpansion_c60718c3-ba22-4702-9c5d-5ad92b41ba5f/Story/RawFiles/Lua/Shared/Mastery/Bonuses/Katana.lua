@@ -264,7 +264,7 @@ local FinisherDamageData = {
 	LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY = ApplyVanquisherDamage,
 }
 
-RegisterStatusListener(StatusEvent.Applied, {
+RegisterStatusListener("Applied", {
 	"LLWEAPONEX_KATANA_FINISHER_APPLY", 
 	"LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY", 
 	--"LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY"
@@ -299,7 +299,7 @@ function(target, status, source)
 end)
 
 -- Remove combat statuses when the attacker's turn ends, instead of the target.
-RegisterStatusListener(StatusEvent.Applied, ComboStatuses, function(target, status, source)
+RegisterStatusListener("Applied", ComboStatuses, function(target, status, source)
 	if PersistentVars.StatusData.KatanaCombo[source] == nil then
 		PersistentVars.StatusData.KatanaCombo[source] = {}
 	end
@@ -315,7 +315,7 @@ RegisterStatusListener(StatusEvent.Applied, ComboStatuses, function(target, stat
 	end
 end)
 
-RegisterStatusListener(StatusEvent.Removed, ComboStatuses, function(target, status, ...)
+RegisterStatusListener("Removed", ComboStatuses, function(target, status, ...)
 	if not HasComboStatus(target) then
 		CheckActiveCombo(target)
 	end
@@ -351,7 +351,7 @@ local function ApplyKatanaCombo(target, source, data, masteryBonuses, tag, skill
 	end
 end
 
--- RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_HELMSPLITTER", function(target, status, source)
+-- RegisterStatusListener("Applied", "LLWEAPONEX_HELMSPLITTER", function(target, status, source)
 -- 	if not Ext.IsModLoaded(MODID.DivinityUnleashed) and not Ext.IsModLoaded(MODID.ArmorMitigation) then
 -- 		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_PhysicalArmor")
 -- 		--GameHelpers.ExplodeProjectile(source, target, "Projectile_LLWEAPONEX_Status_HelmSplitter_MagicArmor")

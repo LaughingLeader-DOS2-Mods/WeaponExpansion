@@ -19,7 +19,7 @@ local function RunBreachKnockback(source, item)
 	end
 end
 
-RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_REMOTEMINE_DETONATE", function(target, status, source)
+RegisterStatusListener("Applied", "LLWEAPONEX_REMOTEMINE_DETONATE", function(target, status, source)
 	target = StringHelpers.GetUUID(target)
 	source = StringHelpers.GetUUID(source)
 	if target == source or CharacterIsAlly(target, source) == 1 then
@@ -132,7 +132,7 @@ RegisterSkillListener("Projectile_LLWEAPONEX_RemoteMine_Breach", function(skill,
 	end
 end)
 
-RegisterStatusListener(StatusEvent.Applied, "LLWEAPONEX_REMOTEMINE_BREACHED", function(target, status, source)
+RegisterStatusListener("Applied", "LLWEAPONEX_REMOTEMINE_BREACHED", function(target, status, source)
 	local target = StringHelpers.GetUUID(target)
 	local source = StringHelpers.GetUUID(source)
 	if ObjectIsItem(target) == 1 and ItemIsDestroyed(target) == 0 then

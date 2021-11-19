@@ -21,7 +21,7 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterStatusListener(StatusEvent.Attempt, "LLWEAPONEX_SOULHARVEST_REAP", function(target, status, source, handle)
+	RegisterStatusListener("Attempt", "LLWEAPONEX_SOULHARVEST_REAP", function(target, status, source, handle)
 		DeathManager.ListenForDeath("SoulHarvestReaping", target, source, 1000)
 	end)
 
