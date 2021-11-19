@@ -50,7 +50,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 			if ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 and data.HitType == "Surface" then
 				data.Blocked = true
 				data:ClearAllDamage()
-				Osi.LeaderLib_Timers_StartObjectTimer(target, 750, "Timers_LLWEAPONEX_ResetDualShieldsRushProtection", "LLWEAPONEX_ResetDualShieldsRushProtection")
+				Timer.StartObjectTimer("LLWEAPONEX_ResetDualShieldsRushProtection", target, 750)
 				return
 			end
 

@@ -620,13 +620,6 @@ SetVarObject(_CombatShield, "LLWEAPONEX_ParentDualShield", _Shield);
 NRD_CharacterEquipItem(_Char, _Shield, "Shield", 0, 0, 1, 1);
 NRD_CharacterEquipItem(_Char, _CombatShield, "Weapon", 0, 0, 1, 1);
 //END_REGION
-
-//REGION RUSH_PROTECTION
-IF
-StoryEvent(_Char, "LLWEAPONEX_ResetDualShieldsRushProtection")
-THEN
-ObjectClearFlag(_Char, "LLWEAPONEX_MasteryBonus_RushProtection", 0);
-//END_REGION
 EXITSECTION
 
 ENDEXITSECTION
