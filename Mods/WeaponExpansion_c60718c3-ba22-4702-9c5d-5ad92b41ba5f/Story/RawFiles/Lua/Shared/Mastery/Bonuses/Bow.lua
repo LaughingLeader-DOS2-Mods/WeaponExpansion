@@ -8,11 +8,7 @@ local function OnPinDownTarget(v, targetType, char, skill, forwardVector, radius
 	if targetType == "string" then
 		local targets = nil
 		
-		if ObjectIsCharacter(v) == 1 then
-			targets = MasteryBonusManager.GetClosestEnemiesToObject(char, Ext.GetCharacter(v), radius, true, 3, v)
-		elseif ObjectIsItem(v) == 1 then
-			targets = MasteryBonusManager.GetClosestEnemiesToObject(char, Ext.GetItem(v), radius, true, 3, v)
-		end
+		targets = MasteryBonusManager.GetClosestEnemiesToObject(char, v, radius, true, 3, v)
 		
 		if targets ~= nil and #targets > 0 then
 			target = Common.GetRandomTableEntry(targets)

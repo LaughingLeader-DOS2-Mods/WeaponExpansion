@@ -23,7 +23,9 @@ local defaultPersistentVars = {
         RemoveOnTurnEnd = {},
         KatanaCombo = {},
     },
-    MasteryMechanics = {},
+    MasteryMechanics = {
+        
+    },
     Timers = {},
     OnDeath = {},
     ---All UUIDs for specific uniques (UUID -> Tag).

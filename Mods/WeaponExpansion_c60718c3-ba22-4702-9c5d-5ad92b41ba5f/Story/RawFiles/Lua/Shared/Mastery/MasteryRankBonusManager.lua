@@ -256,14 +256,18 @@ function MasteryBonusManager.RegisterStatusAttemptListener(status, matchBonuses,
 	end
 end
 
+---@class MasteryBonusManagerClosestEnemyData
+---@field UUID string
+---@field Dist number
+
 ---Get a table of enemies in combat, determined by distance to a source.
----@param char string
----@param target EsvCharacter|EsvItem
+---@param char UUID
+---@param target UUID|EsvCharacter|EsvItem|number[]
 ---@param radius number
 ---@param sortByClosest boolean
 ---@param limit integer
----@param ignoreTarget string
----@return string[]
+---@param ignoreTarget UUID
+---@return MasteryBonusManagerClosestEnemyData[]
 function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sortByClosest, limit, ignoreTarget)
 	if target == nil then
 		return {}
@@ -273,14 +277,22 @@ function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sor
 	end
 	local lastDist = 999
 	local targets = {}
-	for _,enemy in pairs(target:GetNearbyCharacters(radius)) do
+
+	local t = type(target)
+	if t == "userdata" and target.WorldPos then
+		target = target.WorldPos
+	elseif t == "string" then
+		target = {GetPosition(target)}
+	end
+	for _,enemy in pairs(Ext.GetAllCharacters()) do
+		local dist = GameHelpers.Math.GetDistance(GameHelpers.GetCharacter(enemy).WorldPos, target)
 		if enemy ~= char 
 		and enemy ~= ignoreTarget
+		and dist <= radius
 		and (CharacterIsEnemy(char, enemy) == 1 or IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1)
 		and CharacterIsDead(enemy) == 0
 		and not GameHelpers.Status.IsSneakingOrInvisible(char)
 		then
-			local dist = GetDistanceTo(char,enemy)
 			if limit == 1 then
 				if dist < lastDist then
 					targets[1] = enemy
@@ -313,12 +325,12 @@ function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sor
 end
 
 ---Get a table of enemies in combat, determined by distance to a source.
----@param char string
+---@param char UUID
 ---@param maxDistance number
 ---@param sortByClosest boolean
 ---@param limit integer
----@param ignoreTarget string
----@return string[]
+---@param ignoreTarget UUID
+---@return MasteryBonusManagerClosestEnemyData[]
 function MasteryBonusManager.GetClosestCombatEnemies(char, maxDistance, sortByClosest, limit, ignoreTarget)
 	if maxDistance == nil then
 		maxDistance = 30
