@@ -4,7 +4,7 @@
 		"body": [
 			"rb:Create(\"$1\", {",
 			"\tSkills = {},",
-			"\tTooltip = ts:CreateFromKey(\"LLWEAPONEX_MB_\", \"\")",
+			"\tTooltip = ts:CreateFromKey(\"LLWEAPONEX_MB_\", \"\"),",
 			"}):RegisterSkillListener(function(bonuses, skill, char, state, data)",
 			"\tif state == SKILL_STATE.HIT and data.Success then",
 			"\t\t",
