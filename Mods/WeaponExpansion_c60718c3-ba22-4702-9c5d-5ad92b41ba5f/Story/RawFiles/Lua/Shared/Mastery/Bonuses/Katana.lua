@@ -340,10 +340,10 @@ local function ApplyKatanaCombo(target, source, data, masteryBonuses, tag, skill
 				end
 			else
 				if data:HasHitFlag("Backstab", true) or data:HasHitFlag("CriticalHit", true) then
-					local comboIncrement = Ext.ExtraData["LLWEAPONEX_MB_Katana_ComboIncrementCritical"] or 2.0
+					local comboIncrement = GameHelpers.GetExtraData("LLWEAPONEX_MB_Katana_ComboIncrementCritical", 2.0)
 					IncrementCombo(target, source, math.tointeger(comboIncrement))
 				else
-					local comboIncrement = Ext.ExtraData["LLWEAPONEX_MB_Katana_ComboIncrementDefault"] or 1.0
+					local comboIncrement = GameHelpers.GetExtraData("LLWEAPONEX_MB_Katana_ComboIncrementDefault", 1.0)
 					IncrementCombo(target, source, math.tointeger(comboIncrement))
 				end
 			end
@@ -370,7 +370,7 @@ AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Katana", function(tag, source, 
 		ApplyKatanaCombo(target.MyGuid, source.MyGuid, data, bonuses, "LLWEAPONEX_Katana", data.SkillData)
 		if data.Damage > 0 and HasActiveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
 			RemoveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
-			local damageBonus = (Ext.ExtraData.LLWEAPONEX_MB_Katana_Backlash_DamageBonus or 50) * 0.01
+			local damageBonus = (GameHelpers.GetExtraData("LLWEAPONEX_MB_Katana_Backlash_DamageBonus", 50) * 0.01)
 			if damageBonus > 0 then
 				GameHelpers.Damage.IncreaseDamage(target.MyGuid, source.MyGuid, data.Handle, damageBonus)
 				CharacterStatusText(source.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")

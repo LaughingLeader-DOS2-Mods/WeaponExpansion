@@ -66,7 +66,7 @@ local function OnStatusTooltip(character, status, tooltip)
 		-- if item ~= nil then
 		-- 	local charges = PersistentVars.SkillData.RunicCannonCharges[item.NetID] or 0
 		-- end
-		local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
+		local max = GameHelpers.GetExtraData("LLWEAPONEX_RunicCannon_MaxEnergy", 3)
 		local text = Text.ItemTooltip.RunicCannonEnergy:ReplacePlaceholders(max, max)
 		local element = {
 			Type = "StatusImmunity",
@@ -74,7 +74,7 @@ local function OnStatusTooltip(character, status, tooltip)
 		}
 		tooltip:AppendElement(element)
 	elseif status.StatusId == "LLWEAPONEX_MURAMASA_CURSE" then
-		local max = Ext.ExtraData.LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease or 50
+		local max = GameHelpers.GetExtraData("LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease", 50)
 		local hpPercentage = character.Stats.CurrentVitality / character.Stats.MaxVitality
 		local damageBoost = Ext.Round(((100 - hpPercentage)/100) * max)
 		local text = string.format("+%s%% %s", damageBoost, Text.Game.CriticalDamage.Value)
@@ -83,7 +83,7 @@ local function OnStatusTooltip(character, status, tooltip)
 			Label=text
 		})
 	elseif status.StatusId == "LLWEAPONEX_UNRELENTING_RAGE" then
-		local maxResBonus = Ext.ExtraData["LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus"] or 20
+		local maxResBonus = GameHelpers.GetExtraData("LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus", 20)
 		local currentRes = character.Stats.PhysicalResistance
 		local bonus = 0
 		if currentRes < maxResBonus then

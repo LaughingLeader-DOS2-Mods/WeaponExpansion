@@ -111,7 +111,7 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 		if isLizard then
 			local element = {
 				Type = "StatsPercentageMalus",
-				Label = dualWieldingPenaltyText:ReplacePlaceholders(string.format("-%s", math.tointeger(Ext.ExtraData.DualWieldingDamagePenalty * 100)))
+				Label = dualWieldingPenaltyText:ReplacePlaceholders(string.format("-%s", GameHelpers.GetExtraData("DualWieldingDamagePenalty", 0.5) * 100))
 			}
 			tooltip:AppendElementAfter(element, "StatsPercentageBoost")
 			local damageBoost = character.Stats.DualWielding * Ext.ExtraData.CombatAbilityDamageBonus

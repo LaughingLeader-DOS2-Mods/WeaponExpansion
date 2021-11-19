@@ -89,7 +89,7 @@ function RollForBonusSkill(item,stat,itemType,rarity)
 		if itemType == "Weapon" then
 			local requirements = WeapontypeRequirements[Ext.StatGetAttribute(stat, "WeaponType")]
 			if requirements ~= nil then
-				local chance = Ext.ExtraData["LLWEAPONEX_Loot_BonusSkillChance_Weapon"] or 20
+				local chance = GameHelpers.GetExtraData("LLWEAPONEX_Loot_BonusSkillChance_Weapon", 20)
 				if rarityVal > LeaderLib.Data.RarityEnum.Epic then
 					chance = chance + ((rarityVal - LeaderLib.Data.RarityEnum.Epic) * 10)
 				end
@@ -112,7 +112,7 @@ function RollForBonusSkill(item,stat,itemType,rarity)
 				end
 			end
 		elseif itemType == "Shield" then
-			local chance = Ext.ExtraData["LLWEAPONEX_Loot_BonusSkillChance_Shield"] or 30
+			local chance = GameHelpers.GetExtraData("LLWEAPONEX_Loot_BonusSkillChance_Shield", 30)
 			if GameHelpers.Roll(chance) then
 				local ranSkill = Common.GetRandomTableEntry(ItemBonusSkills.ShieldWeapon)
 				if ranSkill ~= nil and not string.find(skills, nextSkill) then

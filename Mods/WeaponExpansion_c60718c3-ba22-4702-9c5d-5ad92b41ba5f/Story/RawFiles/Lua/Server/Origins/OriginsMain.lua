@@ -328,9 +328,9 @@ end)
 function UpdateDarkFireballSkill(char)
 	local killCount = PersistentVars.SkillData.DarkFireballCount[char] or 0
 	if killCount >= 1 then
-		local rangeBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_RangePerCount"] or 1.0
-		local radiusBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount"] or 0.4
-		--local damageBonusMult = Ext.ExtraData["LLWEAPONEX_DarkFireball_DamageMultPerCount"] or 15
+		local rangeBonusMult = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_RangePerCount", 1.0)
+		local radiusBonusMult = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_ExplosionRadiusPerCount", 0.4)
+		--local damageBonusMult = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_DamageMultPerCount", 15)
 	
 		local nextRange = math.min(16, math.floor(6 + (rangeBonusMult * killCount)))
 		local nextRadius = math.min(8, math.floor(1 + (radiusBonusMult * killCount)))

@@ -428,7 +428,7 @@ local function OnItemTooltip(item, tooltip)
 						tooltip:AppendElement({Type="ExtraProperties", Label = text})
 					end
 				end
-				local max = Ext.ExtraData.LLWEAPONEX_RunicCannon_MaxEnergy or 3
+				local max = GameHelpers.GetExtraData("LLWEAPONEX_RunicCannon_MaxEnergy", 3)
 				local charges = PersistentVars.SkillData.RunicCannonCharges[item.NetID] or 0
 				local text = Text.ItemTooltip.RunicCannonEnergy:ReplacePlaceholders(charges, max)
 				local element = {

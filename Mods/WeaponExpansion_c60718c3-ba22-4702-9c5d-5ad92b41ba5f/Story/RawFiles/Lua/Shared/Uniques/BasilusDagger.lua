@@ -1,7 +1,7 @@
 if not Vars.IsClient then
 	RegisterStatusListener("Applied", "LLWEAPONEX_BASILUS_HIT", function(target, status, source)
-		local min = math.ceil(Ext.ExtraData.LLWEAPONEX_BasilusDagger_MinTurns or 2)
-		local max = math.ceil(Ext.ExtraData.LLWEAPONEX_BasilusDagger_MaxTurns or 3)
+		local min = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_BasilusDagger_MinTurns", 2))
+		local max = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_BasilusDagger_MaxTurns", 3))
 		local duration = Ext.Random(min,max) * 6.0
 		if HasActiveStatus(target, "LLWEAPONEX_BASILUS_HAUNTED") == 0 then
 			ObjectSetFlag(target, "LLWEAPONEX_BasilusDagger_ListenForAction", 0)
@@ -26,7 +26,7 @@ if not Vars.IsClient then
 				local source = Ext.GetCharacter(statusObj.StatusSourceHandle)
 				if source ~= nil then
 					local backstab = 0
-					local chance = math.ceil(Ext.ExtraData.LLWEAPONEX_BasilusDagger_BackstabChance or 40)
+					local chance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_BasilusDagger_BackstabChance", 40))
 					if chance >= 100 then
 						backstab = 1
 					elseif chance > 0 then

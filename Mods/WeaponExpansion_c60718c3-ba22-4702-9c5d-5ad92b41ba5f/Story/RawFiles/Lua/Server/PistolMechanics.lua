@@ -103,7 +103,7 @@ RegisterProtectedExtenderListener("BeforeShootProjectile", function (request)
 		else
 			local targetPos = request.EndPosition
 			targetPos[2] = targetPos[2] + 2.0
-			local maxDistance = Ext.ExtraData.LLWEAPONEX_Pistol_MaxBonusDistance or 12.0
+			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_MaxBonusDistance", 12.0)
 			local currentDist = GameHelpers.Math.GetDistance(caster.WorldPos, targetPos)
 			local dist = maxDistance - currentDist
 			request.IgnoreObjects = false

@@ -747,7 +747,7 @@ local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed,
 		if not SkillPropsIsTable(skill) then
 			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)
 		end
-		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFireball_DamageBonusPerCount"] or 20.0
+		local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_DamageBonusPerCount", 20.0)
 		local damageMult = (countMult+1) * damageBonus
 		skill["Damage Multiplier"] = skill["Damage Multiplier"] + damageMult
 	end
@@ -770,7 +770,7 @@ end
 local function GetDarkFlamebreathDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	local missingHealthMult = math.floor((1 - (attacker.CurrentVitality / attacker.MaxVitality)) * 100.0) + 1
 	if missingHealthMult > 0 then
-		local damageBonus = Ext.ExtraData["LLWEAPONEX_DarkFlamebreath_DamageBonusPerPercent"] or 1.3
+		local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_DarkFlamebreath_DamageBonusPerPercent", 1.3)
 		local skill = baseSkill
 		if not SkillPropsIsTable(skill) then
 			skill = ExtenderHelpers.CreateSkillTable(baseSkill.Name)

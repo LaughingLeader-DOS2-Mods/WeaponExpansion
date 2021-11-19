@@ -99,7 +99,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 				--Muramasa bonus of increasing crit damage with missing vitality percentage
 				local isCrit = data.Backstab or data.CriticalHit
 				if isCrit then
-					local max = Ext.ExtraData.LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease or 50
+					local max = GameHelpers.GetExtraData("LLWEAPONEX_Muramasa_MaxCriticalDamageIncrease", 50)
 					local damageBoost = (((100 - CharacterGetHitpointsPercentage(source))/100) * max)/100
 					GameHelpers.Damage.IncreaseDamage(target, source, handle, damageBoost, true)
 				end

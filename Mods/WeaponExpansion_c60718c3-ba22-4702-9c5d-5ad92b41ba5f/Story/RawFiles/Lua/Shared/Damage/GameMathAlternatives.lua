@@ -260,7 +260,7 @@ end
 --     local totalMax = 0
 
 --     local damages, damageBoost = Game.Math.ComputeBaseWeaponDamage(weapon)
---     local penalty = applyDualWieldingPenalty == true and Ext.ExtraData.DualWieldingDamagePenalty or 1
+--     local penalty = applyDualWieldingPenalty == true and GameHelpers.GetExtraData("DualWieldingDamagePenalty", 1)
 
 --     --CalculateWeaponDamageWithDamageBoost
 --     local boost = 1.0 + damageBoost * 0.01

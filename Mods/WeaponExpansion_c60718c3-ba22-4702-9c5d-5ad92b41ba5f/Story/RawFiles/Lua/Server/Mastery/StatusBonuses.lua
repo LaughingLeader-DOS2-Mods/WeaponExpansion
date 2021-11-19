@@ -5,7 +5,7 @@
 local function GetHitResistanceBonus(character, damageType, resistancePenetration, currentResistance)
 	if damageType == "Physical" then
 		-- Unrelenting Rage grants up to a max of 20% Physical Resistance, but anything over that isn't added to.
-		local maxResBonus = Ext.ExtraData["LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus"] or 20
+		local maxResBonus = GameHelpers.GetExtraData("LLWEAPONEX_UnrelentingRage_MaxPhysicalResistanceBonus", 20)
 		if currentResistance < maxResBonus and character.Character:GetStatus("LLWEAPONEX_UNRELENTING_RAGE") then
 			return maxResBonus - currentResistance
 		end

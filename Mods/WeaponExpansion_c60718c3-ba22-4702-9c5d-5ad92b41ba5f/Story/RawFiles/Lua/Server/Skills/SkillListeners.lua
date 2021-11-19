@@ -36,15 +36,15 @@ RegisterSkillListener("Target_LLWEAPONEX_Steal", function(skill, char, state, da
 		local canStealFrom = IsTagged(data.Target, "LLDUMMY_TrainingDummy") == 0 or Vars.DebugMode == true
 		if canStealFrom then
 			local attacker = Ext.GetCharacter(char)
-			local chance = Ext.ExtraData["LLWEAPONEX_Steal_BaseChance"] or 50.0
+			local chance = GameHelpers.GetExtraData("LLWEAPONEX_Steal_BaseChance", 50.0)
 			if attacker:HasTag("LLWEAPONEX_PirateGloves_Equipped") then
-				local glovesBonusChance = Ext.ExtraData["LLWEAPONEX_Steal_GlovesBonusChance"] or 30.0
+				local glovesBonusChance = GameHelpers.GetExtraData("LLWEAPONEX_Steal_GlovesBonusChance", 30.0)
 				chance = math.tointeger(chance + glovesBonusChance)
 			end
 			
 			local stolenSuccess = GetVarInteger(data.Target, "LLWEAPONEX_Steal_TotalStolen") or 0
 			if stolenSuccess > 0 then
-				local stealReduction = Ext.ExtraData["LLWEAPONEX_Steal_SuccessChanceReduction"] or 30.0
+				local stealReduction = GameHelpers.GetExtraData("LLWEAPONEX_Steal_SuccessChanceReduction", 30.0)
 				chance = math.tointeger(math.max(chance - (stolenSuccess * stealReduction), 0))
 			end
 
@@ -162,7 +162,7 @@ RegisterSkillListener({"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_L
 		if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
 			local character = Ext.GetCharacter(char)
 			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
-				local bonus = Ext.ExtraData.LLWEAPONEX_HandCrossbow_SilverBonusDamage or 1.5
+				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbow_SilverBonusDamage", 1.5)
 				GameHelpers.Damage.IncreaseDamage(data.Target, char, data.Handle, bonus, false)
 			end
 		end
@@ -175,7 +175,7 @@ RegisterSkillListener({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectil
 		if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
 			local character = Ext.GetCharacter(char)
 			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
-				local bonus = Ext.ExtraData.LLWEAPONEX_Pistol_SilverBonusDamage or 1.5
+				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_SilverBonusDamage", 1.5)
 				GameHelpers.Damage.IncreaseDamage(data.Target, char, data.Handle, bonus, false)
 			end
 		end
@@ -191,7 +191,7 @@ RegisterSkillListener({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEA
 			else
 				x,y,z = GetPosition(target)
 			end
-			local delay = math.floor(Ext.ExtraData.LLWEAPONEX_FutureBarrage_TurnDelay or 3)
+			local delay = math.floor(GameHelpers.GetExtraData("LLWEAPONEX_FutureBarrage_TurnDelay", 3))
 			if Vars.DebugMode then
 				delay = 1
 			end

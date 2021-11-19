@@ -24,7 +24,7 @@ local AppendedText = {
 	Projectile_LLWEAPONEX_DarkFireball = function(character)
 		if PersistentVars ~= nil and PersistentVars.SkillData ~= nil and PersistentVars.SkillData.DarkFireballCount ~= nil then
 			local count = PersistentVars.SkillData.DarkFireballCount[character.NetID] or 0
-			local max = Ext.ExtraData["LLWEAPONEX_DarkFireball_MaxKillCount"] or 10
+			local max = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_MaxKillCount", 10)
 			if count > 0 then
 				return darkFireballLevelText:ReplacePlaceholders(count, max)
 			else

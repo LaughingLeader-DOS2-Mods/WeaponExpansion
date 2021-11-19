@@ -33,7 +33,7 @@ end)
 local function IncreaseKillCount(char, fromTargetDying)
 	if CharacterHasSkill(char, "Projectile_LLWEAPONEX_DarkFireball") == 1 then
 		local character = Ext.GetCharacter(char)
-		local maxCount = Ext.ExtraData["LLWEAPONEX_DarkFireball_MaxKillCount"] or 10
+		local maxCount = GameHelpers.GetExtraData("LLWEAPONEX_DarkFireball_MaxKillCount", 10)
 		local current = PersistentVars.SkillData.DarkFireballCount[character.MyGuid] or 0
 		if current < maxCount then
 			PersistentVars.SkillData.DarkFireballCount[character.MyGuid] = current + 1

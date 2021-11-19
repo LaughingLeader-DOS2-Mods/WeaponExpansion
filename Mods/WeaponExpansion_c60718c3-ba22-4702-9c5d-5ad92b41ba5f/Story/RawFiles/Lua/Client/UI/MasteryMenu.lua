@@ -712,7 +712,7 @@ local function BuildMenuEntries(ui)
 				canShowRank = true
 			elseif MasteryMenu.RankVisibility == VisibilityMode.Default then
 				-- If rank 0, show if at 40% of the way there
-				local threshold = Ext.ExtraData.LLWEAPONEX_MasteryMenu_MinRankZeroXPVisibilityThreshold or 0.4
+				local threshold = GameHelpers.GetExtraData("LLWEAPONEX_MasteryMenu_MinRankZeroXPVisibilityThreshold", 0.4)
 				canShowRank = xp >= math.floor(Mastery.Variables.RankVariables[1].Required*threshold)
 			end
 		end
