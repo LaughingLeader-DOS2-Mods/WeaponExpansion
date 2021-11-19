@@ -17,7 +17,16 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 	rb:Create("AXE_EXECUTIONER", {
 		Skills = "ActionAttackGround",
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Executioner", "Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].")
-	})
+	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+		if bHitObject and not isFromSkill and data.Damage > 0 then
+			if HasActiveStatus(source, "AOO") == 1 and ObjectIsCharacter(target.MyGuid) == 1 then
+				local damageBonus = ((Ext.ExtraData["LLWEAPONEX_MB_Axe_AoOMaxDamageBonus"] or 50) * 0.01)
+				local missingVitPerc = 0.0
+				missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
+				data:MultiplyDamage(1+(damageBonus * missingVitPerc))
+			end
+		end
+	end)
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
@@ -28,12 +37,26 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		if state == SKILL_STATE.HIT and data.Success then
 			Timer.Start("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, data.Target)
 		end
-	end),
+	end):RegisterOnHit(function(bHitObject,attacker,target,damage,data)
+		if bHitObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
+			RemoveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
+			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", HitFlagPresets.GuaranteedWeaponHit)
+		end
+	end, true),
 
 	rb:Create("AXE_SAVAGE", {
 		Skills = "ActionAttackGround",
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Savage", "Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AoOMaxDamageBonus]% more damage, in proportion to the target's missing vitality.")
-	})
+	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+		if bHitObject and not isFromSkill and data.Damage > 0 then
+			if NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
+				local damageMult = Ext.ExtraData["LLWEAPONEX_MB_Axe_ProneDamageBonus"] or 25
+				if damageMult > 0 then
+					data:MultiplyDamage(1 + (damageMult * 0.01))
+				end
+			end
+		end
+	end)
 })
 
 local flurryHits = {}
@@ -145,29 +168,5 @@ if not Vars.IsClient then
 	
 	Timer.RegisterListener("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", function(timerName, target)
 		ClearTag(target, "LLWEAPONEX_FlurryTarget")
-	end)
-	
-	AttackManager.RegisterOnHit(function(bHitObject,attacker,target,damage,data)
-		if bHitObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
-			RemoveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
-			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", HitFlagPresets.GuaranteedWeaponHit)
-		end
-	end)
-
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject and not isFromSkill and data.Damage > 0 then
-			if bonuses.AXE_SAVAGE and NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
-				local damageBonus = 1 + ((Ext.ExtraData["LLWEAPONEX_MB_Axe_ProneDamageBonus"] or 25) * 0.01)
-				data:MultiplyDamage(damageBonus)
-			end
-			if bonuses.AXE_EXECUTIONER and HasActiveStatus(source, "AOO") == 1 then
-				if ObjectIsCharacter(target.MyGuid) == 1 then
-					local damageBonus = ((Ext.ExtraData["LLWEAPONEX_MB_Axe_AoOMaxDamageBonus"] or 50) * 0.01)
-					local missingVitPerc = 0.0
-					missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
-					data:MultiplyDamage(1+(damageBonus * missingVitPerc))
-				end
-			end
-		end
 	end)
 end

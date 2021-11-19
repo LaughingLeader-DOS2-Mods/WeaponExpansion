@@ -64,7 +64,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Encourage", "<font color='#FFCE58'>Fear, Madness, and Sleep are cleansed from encouraged allies.</font>"),
 		Statuses = "ENCOURAGED",
 		DisableStatusTooltip = true
-	}):RegisterStatusListener(StatusEvent.Applied, function(bonuses, target, status, source, statusType)
+	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
 		if bonuses.BANNER_INSPIRE[source] == true then
 			local cleansed = {}
 			for status,color in pairs(inspireCleanseStatuses) do
@@ -95,7 +95,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_RallyingCry", "<font color='#88FF33'>Affected allies will basic attack the nearest enemy within range.</font>"),
 		Statuses = "HARMONY",
 		DisableStatusTooltip = true
-	}):RegisterStatusListener(StatusEvent.Applied, function(bonuses, target, status, source, statusType)
+	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
 		if (ObjectIsCharacter(target) == 1 
 		and not GameHelpers.Status.IsDisabled(target, true)
 		and NRD_ObjectHasStatusType(target, "DISARMED") == 0
@@ -125,20 +125,16 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		Skills = {"Shout_GuardianAngel", "Shout_EnemyGuardianAngel"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_GuardianAngelSkill", "<font color='#00FFFF'>If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.</font>"),
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_GuardianAngelStatus", "<font color='#00FFFF'>If killed, character will be resurrected by the Guardian when their turn starts.</font>"),
-		Statuses = "GUARDIAN_ANGEL",
-	}):RegisterStatusListener(StatusEvent.Applied, function(bonuses, target, status, source, statusType)
+		Statuses = {"GUARDIAN_ANGEL"},
+	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
 		if bonuses.BANNER_GUARDIAN_ANGEL[source] == true then
 			ObjectSetFlag(target, "LLWEAPONEX_Banner_GuardianAngel_Active", 0)
 		end
-	end):RegisterStatusListener(StatusEvent.Removed, function(bonuses, target, status, source, statusType)
+	end):RegisterStatusListener("Removed", function(bonuses, target, status, source, statusType)
 		ObjectClearFlag(target, "LLWEAPONEX_Banner_GuardianAngel_Active", 0)
-	end),
-})
-
-if not Vars.IsClient then
-	RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(char)
+	end):RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
 		if ObjectGetFlag(char, "LLWEAPONEX_Banner_GuardianAngel_Active") == 1 then
-			ObjectClearFlag(target, "LLWEAPONEX_Banner_GuardianAngel_Active", 0)
+			ObjectClearFlag(char, "LLWEAPONEX_Banner_GuardianAngel_Active", 0)
 			local character = GameHelpers.GetCharacter(char)
 			if character then
 				local status = character:GetStatus("GUARDIAN_ANGEL")
@@ -154,10 +150,28 @@ if not Vars.IsClient then
 					end
 				end
 			end
-
 		end
 	end)
+})
 
+if not Vars.IsClient then
+	RegisterListener("TurnDelayed", function(uuid)
+		local statusSource = nil
+		local target = GameHelpers.GetCharacter(uuid)
+		if target then
+			local auraStatus = target:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or target:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")
+			if auraStatus then
+				statusSource = auraStatus.StatusSourceHandle
+			end
+			if statusSource then
+				statusSource = GameHelpers.GetCharacter(statusSource)
+				if statusSource and MasteryBonusManager.HasMasteryBonus(statusSource.MyGuid, "BANNER_PROTECTION") then
+					ApplyStatus(uuid, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION", 6.0, 0, uuid)
+				end
+			end
+		end
+	end)
+	
 	local function CheckLeadershipBonus(char)
 		if HasActiveStatus(char, "LEADERSHIP") == 1 and GameHelpers.Character.IsPlayer(char) then
 			local character = GameHelpers.GetCharacter(char)
@@ -261,7 +275,16 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 	---@see CheckLeadershipBonus
 	rb:Create("BANNER_LEADERSHIP", {
 		Statuses = "LEADERSHIP",
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> have a [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]</font> on their turn. If <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance2]%.")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> have a [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]</font> on their turn. If <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance2]%."),
+		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
+			if tooltipType == "status" then
+				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
+				if source and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery3") then
+					return true
+				end
+			end
+			return false
+		end,
 	})
 })
 
@@ -271,7 +294,16 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_BannerAuraProtection", "<font color='#33FF33'>When near a placed banner, allies cannot be flanked, and turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]% until the turn occurs.</font>"),
 		Statuses = {"LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS", "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS"},
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_BannerAuraStatusProtection","<font color='#C9AA58'>Immune to Flanking</font><br><font color='#33FF33'>Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.</font>"),
-		StatusTooltipRequirement = {Value = "LLWEAPONEX_Banner_Mastery4", Type = "Tag", Source=true}
+		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
+			if tooltipType == "status" then
+				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
+				if source and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery4") then
+					return true
+				end
+				return false
+			end
+			return true
+		end,
 	}):RegisterStatusBeforeAttemptListener(function(bonuses, target, status, source, handle, statusType)
 		local statusSource = nil
 		local auraStatus = target:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or target:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")
@@ -287,22 +319,3 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		end
 	end, "FLANKING"),
 })
-
-if not Vars.IsClient then
-	RegisterListener("TurnDelayed", function(uuid)
-		local statusSource = nil
-		local target = GameHelpers.GetCharacter(uuid)
-		if target then
-			local auraStatus = target:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or target:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")
-			if auraStatus then
-				statusSource = auraStatus.StatusSourceHandle
-			end
-			if statusSource then
-				statusSource = GameHelpers.GetCharacter(statusSource)
-				if statusSource and MasteryBonusManager.HasMasteryBonus(statusSource.MyGuid, "BANNER_PROTECTION") then
-					ApplyStatus(uuid, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION", 6.0, 0, uuid)
-				end
-			end
-		end
-	end)
-end
