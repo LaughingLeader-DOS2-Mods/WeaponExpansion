@@ -2,26 +2,38 @@
 ---@param status EclStatus
 ---@param tooltip TooltipData
 local function OnStatusTooltip(character, status, tooltip)
+	---@type MasteryRankBonus
 	local data = Mastery.Params.StatusData[status.StatusId]
 	if data ~= nil then
 		local bonusIsActive = true
+		--deprecated
 		if data.Active ~= nil then
 			if data.Active.Type == "Tag" then
 				if data.Active.Source == true then
 					if status.StatusSourceHandle ~= nil then
 						local source = Ext.GetCharacter(status.StatusSourceHandle)
 						if source ~= nil then
-							bonusIsActive = source:HasTag(data.Active.Value)
+							bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(source, data.Active.Value)
 						end
 					end
-					bonusIsActive = character:HasTag(data.Active.Value)
+					bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
 				else
-					bonusIsActive = character:HasTag(data.Active.Value)
+					bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
+				end
+			end
+		end
+		if data.Type == "MasteryRankBonus" then
+			if data.GetIsTooltipActive then
+				local b,result = xpcall(data.GetIsTooltipActive, debug.traceback, data, status, character, "status", status)
+				if b then
+					bonusIsActive = result ~= nil and result or false
+				else
+					Ext.PrintError(result)
 				end
 			end
 		end
 		if bonusIsActive then
-			local descriptionText = TooltipHandler.GetDescriptionText(character, data)
+			local descriptionText = TooltipHandler.GetDescriptionText(character, data, status, true)
 			if descriptionText ~= "" then
 				local existingDescription = tooltip:GetElement("StatusDescription")
 				if existingDescription ~= nil then

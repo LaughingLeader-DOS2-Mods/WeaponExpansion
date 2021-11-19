@@ -1,6 +1,9 @@
 local isClient = Ext.IsClient()
 
 MasteryBonusManager = {}
+if Mastery.Bonuses == nil then
+	Mastery.Bonuses = {}
+end
 
 ---@param char string
 ---@param skill string|nil
@@ -98,6 +101,7 @@ end
 ---@param matchBonuses string|string[]
 ---@param callback WeaponExpansionMasterySkillListenerCallback
 function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback)
+	if Vars.IsClient then return end
 	if type(skill) == "table" then
 		for i,v in pairs(skill) do
 			RegisterSkillListener(v, function(inskill, char, ...)
@@ -168,6 +172,7 @@ end
 ---@param matchBonuses string|string[]
 ---@param callback MasteryBonusStatusCallback
 function MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses, callback)
+	if Vars.IsClient then return end
 	if type(status) == "table" then
 		for i,v in pairs(status) do
 			MasteryBonusManager.RegisterStatusListener(event, v, matchBonuses, callback)
@@ -235,12 +240,13 @@ end
 ---@param callback MasteryBonusStatusBeforeAttemptCallback
 ---@param skipBonusCheck boolean
 function MasteryBonusManager.RegisterStatusAttemptListener(status, matchBonuses, callback, skipBonusCheck)
+	if Vars.IsClient then return end
 	if type(status) == "table" then
 		for i,v in pairs(status) do
 			MasteryBonusManager.RegisterStatusAttemptListener(v, matchBonuses, callback, skipBonusCheck)
 		end
 	else
-		RegisterStatusListener(StatusEvent.BeforeAttempt, status, function(target, status, source, handle, statusType)
+		RegisterStatusListener("BeforeAttempt", status, function(target, status, source, handle, statusType)
 			OnStatusAttemptCallback(callback, matchBonuses, target, status, source, handle, statusType, skipBonusCheck)
 		end)
 	end
@@ -411,4 +417,39 @@ local bonusScriptNames = {
 
 for i,v in pairs(bonusScriptNames) do
 	Ext.Require("Shared/Mastery/Bonuses/"..v)
+end
+
+function Mastery.InitBonusIdentifiers()
+	local BonusIDEntry = MasteryDataClasses.BonusIDEntry
+
+	for tag,tbl in pairs(Mastery.Bonuses) do
+		for bonusName,bonuses in pairs(tbl) do
+			for i,bonusEntry in pairs(bonuses) do
+				if Mastery.BonusID[bonusName] == nil then
+					Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
+				end
+				Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
+				if bonusEntry.Skills ~= nil then
+					for i,v in pairs(bonusEntry.Skills) do
+						if Mastery.Params.SkillData[v] == nil then
+							Mastery.Params.SkillData[v] = {
+								Tags = {}
+							}
+						end
+						Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
+					end
+				end
+				if bonusEntry.Statuses ~= nil and bonusEntry.DisableStatusTooltip ~= true then
+					for i,v in pairs(bonusEntry.Statuses) do
+						if Mastery.Params.StatusData[v] == nil then
+							Mastery.Params.StatusData[v] = {
+								Tags = {}
+							}
+						end
+						Mastery.Params.StatusData[v].Tags[tag] = bonusEntry
+					end
+				end
+			end
+		end
+	end
 end

@@ -26,7 +26,7 @@ function AttackManager.RegisterListener(event, func)
 	table.insert(AttackManager.Listeners[event], func)
 end
 
----@param func BasicAttackOnHitTargetCallback|BasicAttackOnHitTargetCallback
+---@param func BasicAttackOnHitTargetCallback
 function AttackManager.RegisterOnHit(func)
 	AttackManager.RegisterListener("OnHit", func)
 end

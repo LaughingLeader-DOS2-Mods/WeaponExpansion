@@ -1,5 +1,3 @@
-Ext.Require("Shared/Mastery/Classes/MasteryData.lua")
-Ext.Require("Shared/Mastery/Classes/MasteryRankBonus.lua")
 Ext.Require("Shared/Mastery/Data/Masteries.lua")
 Ext.Require("Shared/Mastery/Data/ElementalWeakness.lua")
 Ext.Require("Shared/Mastery/MasteryRankBonusManager.lua")

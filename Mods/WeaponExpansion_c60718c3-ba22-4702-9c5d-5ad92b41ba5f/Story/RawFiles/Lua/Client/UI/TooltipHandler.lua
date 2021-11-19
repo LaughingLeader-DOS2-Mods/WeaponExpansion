@@ -27,7 +27,9 @@ end)
 
 ---@param character EsvCharacter
 ---@param data table
-function TooltipHandler.GetDescriptionText(character, data)
+---@param skillOrStatus string
+---@param isStatus boolean
+function TooltipHandler.GetDescriptionText(character, data, skillOrStatus, isStatus)
 	local descriptionText = ""
 	local namePrefix = ""
 	if data.Tags ~= nil then
@@ -38,6 +40,7 @@ function TooltipHandler.GetDescriptionText(character, data)
 		local count = #tagKeys
 		table.sort(tagKeys, sortTagParams)
 		for i,tagName in pairs(tagKeys) do
+			---@type MasteryRankBonus
 			local tagData = data.Tags[tagName]
 			if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Mastery.HasMasteryRequirement(character, tagName) or Vars.DebugMode then
 				if tagData.NamePrefix ~= nil then
@@ -48,26 +51,39 @@ function TooltipHandler.GetDescriptionText(character, data)
 				end
 				local paramText = ""
 				--local tagLocalizedName = Text.MasteryRankTagText[tagName]
-				local tagLocalizedName = Ext.GetTranslatedStringFromKey(tagName)
+				local tagLocalizedName = GameHelpers.GetStringKeyText(tagName)
 				if tagLocalizedName == nil then 
 					tagLocalizedName = ""
 				else
 					tagLocalizedName = tagLocalizedName .. "<br>"
 				end
-				if tagData.Param ~= nil then
-					if tagLocalizedName ~= "" then
-						paramText = tagLocalizedName..tagData.Param.Value
-					else
-						paramText = tagData.Param.Value
+				if tagData.Type == "MasteryRankBonus" then
+					local text = tagData:GetTooltipText(skillOrStatus, character, isStatus)
+					if text ~= nil then
+						local t = type(text)
+						if t == "string" then
+							paramText = tagLocalizedName..text
+						elseif t == "table" and text.Type == "TranslatedString" then
+							paramText = tagLocalizedName..text.Value
+						end
 					end
-				end
-				paramText = GameHelpers.Tooltip.ReplacePlaceholders(paramText)
-				if tagData.GetParam ~= nil then
-					local status,result = xpcall(tagData.GetParam, debug.traceback, character.Stats, tagName, tagLocalizedName, paramText)
-					if status and result ~= nil then
-						paramText = result
-					elseif not status then
-						Ext.PrintError("Error calling GetParam function for "..tagName..":\n", result)
+					paramText = GameHelpers.Tooltip.ReplacePlaceholders(paramText)
+				else
+					if tagData.Param ~= nil then
+						if tagLocalizedName ~= "" then
+							paramText = tagLocalizedName..tagData.Param.Value
+						else
+							paramText = tagData.Param.Value
+						end
+					end
+					paramText = GameHelpers.Tooltip.ReplacePlaceholders(paramText)
+					if tagData.GetParam ~= nil then
+						local status,result = xpcall(tagData.GetParam, debug.traceback, character.Stats, tagName, tagLocalizedName, paramText)
+						if status and result ~= nil then
+							paramText = result
+						elseif not status then
+							Ext.PrintError("Error calling GetParam function for "..tagName..":\n", result)
+						end
 					end
 				end
 				if descriptionText ~= "" then descriptionText = descriptionText .. "<br>" end

@@ -77,13 +77,13 @@ function CharacterMasteryData:Create(uuid,masteries)
 		Masteries = {}
 	}
 	CreateDefaultData(this)
-	setmetatable(this, self)
 	if masteries ~= nil then
 		for mastery,data in pairs(masteries) do
 			this.Masteries[mastery].Rank = data.Rank
 			this.Masteries[mastery].XP = data.XP
 		end
 	end
+	setmetatable(this, self)
     return this
 end
 
@@ -106,7 +106,6 @@ end
 
 MasteryDataClasses.CharacterMasteryData = CharacterMasteryData
 
----@class CharacterMasteryData
 local BonusIDEntry = {
 	ID = "",
 	---@type table<string,table>

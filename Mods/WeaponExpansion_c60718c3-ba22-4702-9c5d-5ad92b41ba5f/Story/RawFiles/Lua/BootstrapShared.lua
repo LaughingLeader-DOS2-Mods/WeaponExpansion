@@ -7,6 +7,9 @@ Debug = {
 Math = { AbilityScaling = {}}
 Text = {}
 Mastery = {
+	---@type table<string, table<string, MasteryRankBonus[]>>
+	Bonuses = {},
+	BonusID = {},
 	Params = {},
 	Variables = {
 		---Specific tables or variables used in bonus logic scripts. This is so mods can add or modify them.
@@ -96,6 +99,8 @@ Settings = {}
 
 Mods.LeaderLib.Import(Mods.WeaponExpansion)
 
+Ext.Require("Shared/Mastery/Classes/MasteryData.lua")
+Ext.Require("Shared/Mastery/Classes/MasteryRankBonus.lua")
 Ext.Require("Shared/Data/LocalizedText.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/Data/UnarmedWeaponStats.lua")

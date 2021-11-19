@@ -61,9 +61,10 @@ local function OnSkillTooltip(character, skill, tooltip)
 		description = descriptionElement.Label
 	end
 
+	---@type MasteryRankBonus
 	local data = Mastery.Params.SkillData[skill]
 	if data ~= nil then
-		local descriptionText = TooltipHandler.GetDescriptionText(character, data)
+		local descriptionText = TooltipHandler.GetDescriptionText(character, data, skill, false)
 		if not StringHelpers.IsNullOrEmpty(descriptionText) then
 			if descriptionElement ~= nil then
 				if description == nil then 
