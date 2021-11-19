@@ -21,16 +21,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		Skills = {"Target_FirstAid", "Target_FirstAidEnemy"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_FirstAid", "<font color='#99AACC'>Medical book knowledge restores an additional <font color='#97FBFF'>[Stats:LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID:HealValue]% [Handle:h67a4c781g589ag4872g8c46g870e336074bd:Vitality]</font>.</font>"),
 		Statuses = {"RESTED"},
-		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
-			if id == "RESTED" then
-				return GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_BattleBook_FirstAid_Active")
-			end
-			return true
-		end,
+		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_BattleBook_FirstAid_Active", false),
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Rested", "Duration increased by [ExtraData:LLWEAPONEX_MB_BattleBook_Rested_TurnBonus]")
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.CAST then
-			local turnBonus = Ext.ExtraData.LLWEAPONEX_MB_BattleBook_Rested_TurnBonus or 1
+			local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 			data:ForEach(function(v, targetType, skillEventData)
 				if turnBonus > 0 then
 					SetTag(v, "LLWEAPONEX_BattleBook_FirstAid_Active")

@@ -28,7 +28,7 @@ Mastery.Variables.Bonuses.BannerInspireCleanseStatuses = inspireCleanseStatuses
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 	rb:Create("BANNER_WARCHARGE", {
-		Skills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"},
+		Skills = MasteryBonusManager.Vars.RushSkills,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Rush", "If under the effects of <font color='#FFCE58'>War Charge</font>, deal <font color='#33FF00'>[ExtraData:LLWEAPONEX_MB_Banner_WarCharge_DamageBoost]% more damage on hit</font> and gain <font color='#7D71D9'>[Key:HASTED_DisplayName]</font> after rushing.")
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.CAST then
@@ -185,7 +185,7 @@ if not Vars.IsClient then
 					local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
 					if source ~= nil then
 						if MasteryBonusManager.HasMasteryBonus(source, "BANNER_LEADERSHIP") then
-							bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MB_Banner_LeadershipInspirationChance2"] or 25)
+							bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 25))
 							bonusSource = source.MyGuid
 						end
 					end
@@ -200,7 +200,7 @@ if not Vars.IsClient then
 							and ally.Stats.Leadership > 0
 							and GameHelpers.Math.GetDistance(ally.WorldPos, character.WorldPos) <= leadershipDistance
 							then
-								bonusChance = math.ceil(Ext.ExtraData["LLWEAPONEX_MB_Banner_LeadershipInspirationChance"] or 25)
+								bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25))
 								bonusSource = ally.MyGuid
 							end
 						end
@@ -276,15 +276,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 	rb:Create("BANNER_LEADERSHIP", {
 		Statuses = "LEADERSHIP",
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> have a [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]</font> on their turn. If <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance2]%."),
-		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
-			if tooltipType == "status" then
-				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
-				if source and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery3") then
-					return true
-				end
-			end
-			return false
-		end,
+		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Banner_Mastery3", true)
 	})
 })
 
@@ -294,16 +286,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_BannerAuraProtection", "<font color='#33FF33'>When near a placed banner, allies cannot be flanked, and turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]% until the turn occurs.</font>"),
 		Statuses = {"LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS", "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS"},
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_BannerAuraStatusProtection","<font color='#C9AA58'>Immune to Flanking</font><br><font color='#33FF33'>Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.</font>"),
-		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
-			if tooltipType == "status" then
-				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
-				if source and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery4") then
-					return true
-				end
-				return false
-			end
-			return true
-		end,
+		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Banner_Mastery4", true)
 	}):RegisterStatusBeforeAttemptListener(function(bonuses, target, status, source, handle, statusType)
 		local statusSource = nil
 		local auraStatus = target:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or target:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")

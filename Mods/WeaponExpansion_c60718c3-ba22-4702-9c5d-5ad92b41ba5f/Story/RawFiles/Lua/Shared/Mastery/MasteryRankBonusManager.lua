@@ -1,6 +1,10 @@
 local isClient = Ext.IsClient()
 
-MasteryBonusManager = {}
+MasteryBonusManager = {
+	Vars = {
+		RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
+	},
+}
 if Mastery.Bonuses == nil then
 	Mastery.Bonuses = {}
 end
@@ -383,10 +387,6 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 		end
 	end
 end
-
-BonusHelperVars = {
-	RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
-}
 
 local bonusScriptNames = {
 	"Axe.lua",

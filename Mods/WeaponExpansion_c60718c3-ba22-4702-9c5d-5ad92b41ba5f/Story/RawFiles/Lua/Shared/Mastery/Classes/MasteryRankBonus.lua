@@ -1,5 +1,7 @@
 local isClient = Ext.IsClient()
 
+---@alias MasteryRankBonusGetIsTooltipActiveCallback fun(self:MasteryRankBonus, skillOrStatus:string, character:EclCharacter, idType:string, data:EsvStatus|StatEntrySkillData):boolean
+
 ---@class MasteryRankBonus
 ---@field ID string
 ---@field Skills string[]|string Optional skills associated.
@@ -8,7 +10,7 @@ local isClient = Ext.IsClient()
 ---@field StatusTooltip TranslatedString If set, statuses will use this for tooltips, instead of Tooltip.
 ---@field DisableStatusTooltip boolean
 ---@field NamePrefix TranslatedString|string
----@field GetIsTooltipActive fun(self:MasteryRankBonus, skillOrStatus:string, character:EclCharacter, idType:string, data:EsvStatus|StatEntrySkillData):boolean Custom callback to determine if a bonus is "active" when a tooltip occurs.
+---@field GetIsTooltipActive MasteryRankBonusGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
 ---@field OnGetTooltip fun(self:MasteryRankBonus, skillOrStatus:string, character:EclCharacter, isStatus:boolean):string|TranslatedString Custom callback to determine tooltip text dynamically.
 local MasteryRankBonus = {
 	Type = "MasteryRankBonus"
@@ -38,6 +40,30 @@ function MasteryRankBonus:Create(id, params)
 		end
 	})
 	return this
+end
+
+---Returns a default function for callback that checks for a tag specified, either on the status target or source.
+---@return MasteryRankBonusGetIsTooltipActiveCallback
+function MasteryRankBonus.DefaultStatusTagCheck(tag, checkSource)
+	if checkSource then
+		return function(bonus, id, character, tooltipType, status)
+			if tooltipType == "status" then
+				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
+				if source and GameHelpers.CharacterOrEquipmentHasTag(source, tag) then
+					return true
+				end
+				return false
+			end
+			return true
+		end
+	else
+		return function(bonus, id, character, tooltipType, status)
+			if tooltipType == "status" then
+				return GameHelpers.CharacterOrEquipmentHasTag(character, tag)
+			end
+			return true
+		end
+	end
 end
 
 ---@param callback WeaponExpansionMasterySkillListenerCallback
