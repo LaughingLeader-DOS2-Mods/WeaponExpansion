@@ -2,7 +2,7 @@ local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryRankBonus
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
-	rb:Create("RUSH_DIZZY", {
+	rb:Create("BLUDGEON_RUSH_DIZZY", {
 		Skills = MasteryBonusManager.Vars.RushSkills,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_Rush", "Become a thundering force of will when rushing, <font color='#FFCE58'>knocking enemies aside</font> with a <font color='#F19824'>[ExtraData:LLWEAPONEX_MB_Bludgeon_Rush_DizzyChance]% chance to apply Dizzy for [ExtraData:LLWEAPONEX_MB_Bludgeon_Rush_DizzyTurns] turn(s)</font>."),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)

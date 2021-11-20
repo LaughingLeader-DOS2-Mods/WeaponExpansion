@@ -69,3 +69,21 @@ RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(ene
 		MasterySystem.GrantDeathExperienceToParty(enemy)
 	end
 end)
+
+local UnarmedSkills = {
+	"Target_SingleHandedAttack",
+	"Target_LLWEAPONEX_SinglehandedAttack",
+	"Target_PetrifyingTouch",
+}
+
+RegisterSkillListener(UnarmedSkills, function(skill, char, state, data)
+	if state == SKILL_STATE.HIT and data.Success and GameHelpers.Character.IsPlayer(char) then
+		MasterySystem.GrantWeaponSkillExperience(char, data.Target, "LLWEAPONEX_Unarmed")
+	end
+end)
+
+function GainThrowingMasteryXP(uuid, target)
+	if GameHelpers.Character.IsPlayer(uuid) then
+		MasterySystem.GrantWeaponSkillExperience(uuid, target, "LLWEAPONEX_ThrowingAbility")
+	end
+end

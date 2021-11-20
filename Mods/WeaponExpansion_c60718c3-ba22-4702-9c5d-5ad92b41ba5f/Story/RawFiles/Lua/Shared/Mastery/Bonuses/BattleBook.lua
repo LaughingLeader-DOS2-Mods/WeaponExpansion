@@ -2,7 +2,7 @@ local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryRankBonus
 
 MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
-	rb:Create("BOOK_CONCUSSION", {
+	rb:Create("BATTLEBOOK_CONCUSSION", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BasicAttackConcussion", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).</font>")
 	}):RegisterOnWeaponTagHit("LLWEAPONEX_BattleBook", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)

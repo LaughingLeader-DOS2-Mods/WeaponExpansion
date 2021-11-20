@@ -2,7 +2,7 @@ local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryRankBonus
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Rapier, 1, {
-	rb:Create("SUCKER_PUNCH_COMBO", {
+	rb:Create("RAPIER_SUCKER_PUNCH_COMBO", {
 		Skills = {"Target_SingleHandedAttack", "Target_LLWEAPONEX_SinglehandedAttack"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Rapier_SuckerPunch", "Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.<br><font color='#99FF22' size='22'>[ExtraData:LLWEAPONEX_MB_Unarmed_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.</font>"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)

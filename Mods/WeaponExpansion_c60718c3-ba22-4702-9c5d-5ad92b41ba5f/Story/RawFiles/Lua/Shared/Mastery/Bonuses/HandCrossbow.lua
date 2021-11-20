@@ -17,7 +17,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 1, {
 			end
 		end
 	end),
-	rb:Create("WHIRLWIND_BOLTS", {
+	rb:Create("HANDCROSSBOW_WHIRLWIND_BOLTS", {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_HandCrossbow_Whirlwind", "<font color='#F19824'>While spinning, shoot [ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_MinTargets]-[ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_MaxTargets] enemies in a [ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_Radius]m radius, dealing [Skill:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].</font>"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
