@@ -24,7 +24,8 @@ local defaultPersistentVars = {
         KatanaCombo = {},
     },
     MasteryMechanics = {
-        
+        ---@type table<UUID,integer>
+        AxeFlurryHits = {}
     },
     Timers = {},
     OnDeath = {},

@@ -38,7 +38,7 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 end
 
 ---@param uuid string
----@param bonus string|table<string,boolean>
+---@param bonus string|string[]
 ---@return boolean
 function MasteryBonusManager.HasMasteryBonus(uuid, bonus)
 	---@type EsvCharacter|EclCharacter
@@ -54,10 +54,8 @@ function MasteryBonusManager.HasMasteryBonus(uuid, bonus)
 								return true
 							end
 						end
-					else
-						if bonusName == bonus then
-							return true
-						end
+					elseif bonusName == bonus then
+						return true
 					end
 				end
 			end
@@ -432,33 +430,35 @@ for i,v in pairs(bonusScriptNames) do
 end
 
 function Mastery.InitBonusIdentifiers()
-	local BonusIDEntry = MasteryDataClasses.BonusIDEntry
+	if Vars.IsClient then
+		local BonusIDEntry = MasteryDataClasses.BonusIDEntry
 
-	for tag,tbl in pairs(Mastery.Bonuses) do
-		for bonusName,bonuses in pairs(tbl) do
-			for i,bonusEntry in pairs(bonuses) do
-				if Mastery.BonusID[bonusName] == nil then
-					Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
-				end
-				Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
-				if bonusEntry.Skills ~= nil then
-					for i,v in pairs(bonusEntry.Skills) do
-						if Mastery.Params.SkillData[v] == nil then
-							Mastery.Params.SkillData[v] = {
-								Tags = {}
-							}
-						end
-						Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
+		for tag,tbl in pairs(Mastery.Bonuses) do
+			for bonusName,bonuses in pairs(tbl) do
+				for i,bonusEntry in pairs(bonuses) do
+					if Mastery.BonusID[bonusName] == nil then
+						Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
 					end
-				end
-				if bonusEntry.Statuses ~= nil and bonusEntry.DisableStatusTooltip ~= true then
-					for i,v in pairs(bonusEntry.Statuses) do
-						if Mastery.Params.StatusData[v] == nil then
-							Mastery.Params.StatusData[v] = {
-								Tags = {}
-							}
+					Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
+					if bonusEntry.Skills ~= nil then
+						for i,v in pairs(bonusEntry.Skills) do
+							if Mastery.Params.SkillData[v] == nil then
+								Mastery.Params.SkillData[v] = {
+									Tags = {}
+								}
+							end
+							Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
 						end
-						Mastery.Params.StatusData[v].Tags[tag] = bonusEntry
+					end
+					if bonusEntry.Statuses ~= nil and bonusEntry.DisableStatusTooltip ~= true then
+						for i,v in pairs(bonusEntry.Statuses) do
+							if Mastery.Params.StatusData[v] == nil then
+								Mastery.Params.StatusData[v] = {
+									Tags = {}
+								}
+							end
+							Mastery.Params.StatusData[v].Tags[tag] = bonusEntry
+						end
 					end
 				end
 			end

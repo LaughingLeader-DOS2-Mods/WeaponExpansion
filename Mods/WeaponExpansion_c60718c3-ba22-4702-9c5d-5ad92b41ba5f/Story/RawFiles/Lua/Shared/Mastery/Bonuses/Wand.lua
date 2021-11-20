@@ -3,7 +3,7 @@ local rb = MasteryDataClasses.MasteryRankBonus
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 	rb:Create("WAND_ELEMENTAL_WEAKNESS", {
-		Skills = {"Target_LLWEAPONEX_BasicAttack"},
+		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Wand_ElementalWeakness", "<font color='#9BF0FF'>Targets hit by basic attacks become weak to your wand's element, gaining [Special:LLWEAPONEX_WeaponElementalWeakness] for [ExtraData:LLWEAPONEX_MB_Wand_ElementalWeaknessTurns] turn(s).</font>"),
 	}):RegisterOnWeaponTagHit("LLWEAPONEX_Wand", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 		if not isFromSkill then

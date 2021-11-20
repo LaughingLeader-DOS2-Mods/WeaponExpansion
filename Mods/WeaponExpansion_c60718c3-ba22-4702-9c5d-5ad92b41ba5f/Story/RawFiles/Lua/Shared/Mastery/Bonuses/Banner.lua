@@ -62,7 +62,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 	rb:Create("BANNER_INSPIRE", {
 		Skills = {"Shout_InspireStart", "Shout_EnemyInspire"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Encourage", "<font color='#FFCE58'>Fear, Madness, and Sleep are cleansed from encouraged allies.</font>"),
-		Statuses = "ENCOURAGED",
+		Statuses = {"ENCOURAGED"},
 		DisableStatusTooltip = true
 	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
 		if bonuses.BANNER_INSPIRE[source] == true then
@@ -93,7 +93,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 	rb:Create("BANNER_RALLYINGCRY", {
 		Skills = {"Target_Harmony", "Target_EnemyHarmony"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_RallyingCry", "<font color='#88FF33'>Affected allies will basic attack the nearest enemy within range.</font>"),
-		Statuses = "HARMONY",
+		Statuses = {"HARMONY"},
 		DisableStatusTooltip = true
 	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
 		if (ObjectIsCharacter(target) == 1 
@@ -141,7 +141,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 				if status and status.StatusSourceHandle then
 					local sourceCharacter = GameHelpers.GetCharacter(status.StatusSourceHandle)
 					if sourceCharacter then
-						if Mastery.HasMasteryRequirement(sourceCharacter, Mastery.BonusID.BANNER_GUARDIAN_ANGEL.Tags) then
+						if MasteryBonusManager.HasMasteryBonus(sourceCharacter, "BANNER_GUARDIAN_ANGEL") then
 							if PersistentVars.MasteryMechanics.GuardianAngelResurrect == nil then
 								PersistentVars.MasteryMechanics.GuardianAngelResurrect = {}
 							end
@@ -274,7 +274,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 
 	---@see CheckLeadershipBonus
 	rb:Create("BANNER_LEADERSHIP", {
-		Statuses = "LEADERSHIP",
+		Statuses = {"LEADERSHIP"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> have a [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]</font> on their turn. If <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance2]%."),
 		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Banner_Mastery3", true)
 	})

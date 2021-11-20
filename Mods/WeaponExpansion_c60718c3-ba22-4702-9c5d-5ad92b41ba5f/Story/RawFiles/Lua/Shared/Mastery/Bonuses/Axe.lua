@@ -15,7 +15,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 	end),
 
 	rb:Create("AXE_EXECUTIONER", {
-		Skills = "ActionAttackGround",
+		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Executioner", "Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].")
 	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 		if bHitObject and not isFromSkill and data.Damage > 0 then
@@ -45,7 +45,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 	end, true),
 
 	rb:Create("AXE_SAVAGE", {
-		Skills = "ActionAttackGround",
+		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Savage", "Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AoOMaxDamageBonus]% more damage, in proportion to the target's missing vitality.")
 	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 		if bHitObject and not isFromSkill and data.Damage > 0 then
@@ -58,8 +58,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		end
 	end)
 })
-
-local flurryHits = {}
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 	rb:Create("AXE_SPINNING", {
@@ -84,8 +82,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		end
 	end),
 
-	rb:Create("AXE_ALLIN", {
-		Skills = "Target_HeavyAttack",
+	rb:Create("AXE_2H_ALLIN", {
+		Skills = {"Target_HeavyAttack"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_AllIn"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.HIT and data.Success then
@@ -114,28 +112,31 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		end
 	end),
 
-	rb:Create("AXE_FLURRY", {
-		Skills = "Target_DualWieldingAttack",
+	rb:Create("AXE_DW_FLURRY", {
+		Skills = {"Target_DualWieldingAttack"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_FlurryCleave"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.HIT and data.Success ~= nil then
-			if flurryHits[char] == nil then
-				flurryHits[char] = 0
+			if PersistentVars.MasteryMechanics.AxeFlurryHits[char] == nil then
+				PersistentVars.MasteryMechanics.AxeFlurryHits[char] = 0
 			end
 			if data.Success then
-				flurryHits[char] = flurryHits[char] + 1
+				PersistentVars.MasteryMechanics.AxeFlurryHits[char] = PersistentVars.MasteryMechanics.AxeFlurryHits[char] + 1
 			end
-			local timerName = string.format("LLWEAPONEX_Axe_FlurryCounter%s", char)
-			Timer.StartOneshot(timerName, 1000, function()
-				if flurryHits[char] >= 3 then
-					CharacterAddActionPoints(char, 1)
-					CharacterStatusText(char, "LLWEAPONEX_StatusText_FlurryAxeCombo")
-				end
-				flurryHits[char] = nil
-			end)
+			Timer.StartObjectTimer("LLWEAPONEX_Axe_CheckFlurryCounter", char, 1000)
 		end
 	end),
 })
+
+if Vars.IsClient then
+	Timer.RegisterListener("LLWEAPONEX_Axe_CheckFlurryCounter", function(timerName, char)
+		if PersistentVars.MasteryMechanics.AxeFlurryHits[char] >= 3 then
+			CharacterAddActionPoints(char, 1)
+			CharacterStatusText(char, "LLWEAPONEX_StatusText_FlurryAxeCombo")
+		end
+		PersistentVars.MasteryMechanics.AxeFlurryHits[char] = nil
+	end)
+end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 	rb:Create("AXE_CLEAVE", {

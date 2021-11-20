@@ -4,7 +4,7 @@ local rb = MasteryDataClasses.MasteryRankBonus
 MasteryBonusManager.AddRankBonuses(MasteryID.Scythe, 1, {
 	rb:Create("SCYTHE_RUPTURE", {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Scythe_Whirlwind", "<font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>Bleeding</font> targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of <font color='#FF0000'>Bleeding</font> remaining."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Scythe_Whirlwind", "<font color='#DC143C'>Rupture</font> the wounds of <font color='#FF0000'>[Key:BLEEDING_DisplayName]</font> targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of <font color='#FF0000'>[Key:BLEEDING_DisplayName]</font> remaining."),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.HIT and data.Success then
 			local bleedingTurns = GetStatusTurns(data.Target, "BLEEDING")
