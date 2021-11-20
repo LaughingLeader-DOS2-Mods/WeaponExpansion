@@ -36,8 +36,8 @@ package desc
 					this.addChild(this.statusbg_mc);
 				}
 			}
-			icon_mc = new IconDisplay(icon,w,h);
-			addChild(icon_mc);
+			this.icon_mc = new IconDisplay(icon,w,h);
+			addChild(this.icon_mc);
 
 			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			this.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
@@ -56,14 +56,14 @@ package desc
 			
 			if (this.iconType >= 2)
 			{
-				icon_mc = new IggyStatusIcon();
+				this.icon_mc = new IggyStatusIcon();
 			}
 			else
 			{
-				icon_mc = new IggyIcon();
+				this.icon_mc = new IggyIcon();
 			}
 
-			icon_mc.name = this.icon;
+			this.icon_mc.name = this.icon;
 			this.addChild(icon_mc);
 
 			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);

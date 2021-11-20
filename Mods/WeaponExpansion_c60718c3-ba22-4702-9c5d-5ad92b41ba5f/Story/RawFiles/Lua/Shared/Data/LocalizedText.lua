@@ -3,7 +3,6 @@ local ts = LeaderLib.Classes["TranslatedString"]
 
 ---@type table<string, table<string,TranslatedString>>
 Text = {
-	RupteredWound = ts:Create("h325012b0g74d1g4e9bg859bg8b986e80561b", "<font color='#FF1155' size='16'>Ruptered Wound [1]</font>"),
 	RuneNames = {
 		--LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal = ts:Create("h21d85e8eg3e61g4f9agb1a2g3a5ca2722144", "Mini-Bolts"),
 		LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Air = ts:Create("h052d8fd9g8c05g4c60gb6c2gf05f40109276", "<font color='#7478DC'>Electrified Mini-Bolts</font>"),
@@ -227,5 +226,9 @@ Text = {
 		StealLimitReached = ts:Create("h62e44d39gae88g4785g9004g79e396516ee4","<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>"),
 		MasteryRankUp = ts:Create("he0cceb33g75ddg44a5g94b4geda5fd12c886", "<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>"),
 		DeathEdgeBonus = ts:Create("ha2fbf8c5g3500g42d4ga21bg5e4524eae598", "<font color='#CC33FF'>[Key:WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName] twists the recently slain [1], summoning a <font color='#FFFFFF'>[Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem]</font>.</font>"),
+	},
+	StatusText = {
+		StatusExtended = ts:Create("h8224bb41g2261g4a50ga1feg7dc0f7394eb7", "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"),
+		RupteredWound = ts:Create("h325012b0g74d1g4e9bg859bg8b986e80561b", "<font color='#FF1155' size='16'>Ruptered Wound [1]</font>"),
 	}
 }

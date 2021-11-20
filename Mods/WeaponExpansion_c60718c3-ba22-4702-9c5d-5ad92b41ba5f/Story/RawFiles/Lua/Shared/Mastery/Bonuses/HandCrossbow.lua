@@ -34,7 +34,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 1, {
 					delay = delay + 100
 				end
 			end
-
 		end
 	end),
 })
