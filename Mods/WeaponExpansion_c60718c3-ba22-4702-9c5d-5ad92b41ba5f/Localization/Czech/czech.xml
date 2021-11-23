@@ -526,6 +526,7 @@
 	<content contentuid="h32a910e6gfc6cg431egbb26g9b4c67639010">Quarterstaff (Metal)</content>
 	<content contentuid="h32b2d731g95e4g4b68ga7f1ge6e5069a4a12">Death Rune</content>
 	<content contentuid="h32cc6a8cg93a9g4482g9ccfg5e332d7eb683">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery IV&lt;/font&gt;</content>
+	<content contentuid="h331019f2g1f07g4414ga9b4gd5b6e0525beb">&lt;font color=&apos;#188EDE&apos;&gt;Empowered by [1]&apos;s [Key:LLWEAPONEX_Banner]&lt;/font&gt;</content>
 	<content contentuid="h3322d0efg7420g408cg9053g57c1a5c6f914">&lt;font color=&apos;#2EFFE9&apos;&gt;Staff Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h336d150fg8c63g4707g9231g3c2cb5ad7764">A handmade quiver, designed for quickly drawing arrows. Once owned by an archer named &apos;Trusy Nick&apos;, who was said to always carry a variety of arrows.&lt;br&gt;&lt;font color=&apos;#81ab00&apos;&gt;Quickdraw quivers recharge automatically outside of combat.&lt;/font&gt;</content>
 	<content contentuid="h338d9f08g2302g41f0g802bg5a937dda1cee">Mercy</content>
@@ -898,7 +899,7 @@
 	<content contentuid="h5c65b248g0e76g41a5gb068gb4c884703c5b">Blademaster&apos;s Strike 7</content>
 	<content contentuid="h5c82bb74g471bg4d45g8aa0gd45071f22f65">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are electrified, dealing Air damage.</content>
 	<content contentuid="h5c90b0f6g92beg408fg97bbg77de5ee58c77">A banner of the Lone Wolves, the infamous mercenary company. Inspire allies through a fierce pack mentality.</content>
-	<content contentuid="h5ca24bfeg14f5g437fg92fag4708f87547de">&lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt; the wounds of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of &lt;font color=&apos;#FF0000&apos;&gt;Bleeding&lt;/font&gt; remaining.</content>
+	<content contentuid="h5ca24bfeg14f5g437fg92fag4708f87547de">&lt;font color=&apos;#DC143C&apos;&gt;Rupture&lt;/font&gt; the wounds of &lt;font color=&apos;#FF0000&apos;&gt;[Key:BLEEDING_DisplayName]&lt;/font&gt; targets, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_WhirlwindRuptureBleeding] for each turn of &lt;font color=&apos;#FF0000&apos;&gt;[Key:BLEEDING_DisplayName]&lt;/font&gt; remaining.</content>
 	<content contentuid="h5cacb163gcfd1g49bcgb391g25dd92b84fce">Kagutsuchi</content>
 	<content contentuid="h5cb2bd14ge6e9g4414gb251g68882368b0bf">Lunaris &amp; Solaris</content>
 	<content contentuid="h5cbe9e55gccafg4c3agbd26g8b31754a54eb">A scholar&apos;s dearest weapon. Beat them down with &lt;i&gt;KNOWLEDGE!&lt;/i&gt;</content>
@@ -1105,6 +1106,7 @@
 	<content contentuid="h712c10d3g29d4g4ebfg9c86g84be5ab70519">Novice</content>
 	<content contentuid="h7159eb88g564dg4c20g8785g5f2ec85f70d7">Walking Stick</content>
 	<content contentuid="h717f9025g66d1g4eb6gac52gc3e03398b4b9">[Exit]</content>
+	<content contentuid="h7180faf3gd3c4g4a14g8d0dg980d6d8c91f1">Pinned</content>
 	<content contentuid="h71a161d1g223ag4febg9a4ag0d21239f9cc9">Journeyman Slayer</content>
 	<content contentuid="h71aeb8ebgc32eg4f41g8151g248a32af656e">Internal Damage</content>
 	<content contentuid="h71b09f9fg285fg4532gab16g1c7640864141">Damage is based on your level and scales with [1].</content>
@@ -1314,6 +1316,7 @@
 	<content contentuid="h86c1d16cgc918g4625g9df8g19a8061fa282">&lt;font color=&apos;#FFE7AA&apos;&gt;Bludgeon Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h86e68aebgdd6eg436fg98c8gc34e0a5d0516">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack&apos;s element by [Stats:Stats_LLWEAPONEX_Weakness_Water:WaterResistance]% for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).&lt;icon id=&apos;Shout_FleshSacrifice&apos;/&gt;Allies standing on blood surfaces gain a [Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus.</content>
 	<content contentuid="h86fdba0bgd3afg43e9gbd3fgcb70e445bff3">Forest&apos;s Wall, Seeker&apos;s Spurn</content>
+	<content contentuid="h8707c330gb581g4563gafaeg925f48105938">&lt;font color=&apos;#77FF33&apos;&gt;If you haven&apos;t moved, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage.&lt;/font&gt;</content>
 	<content contentuid="h872b22a6ga3b3g409ag8921g26eb2af4a0c5">Blademaster&apos;s Strike Target</content>
 	<content contentuid="h87871f97gb8c0g4df4g8920g157e54180e46">Inspiration</content>
 	<content contentuid="h878ac150g627eg4f82ga7cegbe7f49f2f606">Expert Thrower</content>
@@ -1898,6 +1901,7 @@
 	<content contentuid="hc4bf9383ga9b2g48fcgb253gcc7546987b56">Throwing</content>
 	<content contentuid="hc4cbb3efg9cd3g4193g861bg8f086795ea16">Automatically Equips the Dragon Bone Claws Weapon</content>
 	<content contentuid="hc4d7bbdcg90fdg4d2fgb72bg3bdf239f2aec">Stone Rod</content>
+	<content contentuid="hc4e49ef1g6522g4009g9362g4eeae4d7c1a1">&lt;font color=&apos;#77FF33&apos;&gt;If a target is in front of impassable terrain (like a wall), pin them for 1 turn and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].&lt;/font&gt;</content>
 	<content contentuid="hc4f1afa6g2ea1g4741ga7a5g0b3b48300f13">&lt;font color=&apos;#11D77A&apos;&gt;Enhanced Leadership&lt;/font&gt;</content>
 	<content contentuid="hc50ca329gfc06g4b22g9073gd65fa5fd2a88">Tuned Rifle</content>
 	<content contentuid="hc5324a7fg73c8g4d3fgb8e4g99b7a2c7d5c0">Placeholder</content>
@@ -2035,7 +2039,7 @@
 	<content contentuid="hd3a7be83g1896g41bcg926dg409ccde7e89f">&lt;font color=&apos;#c51fe8&apos; size=&apos;18&apos;&gt;Healing Blocked&lt;/font&gt;</content>
 	<content contentuid="hd3b59f07g0a4ag4768g84b2gcfa58b88bf43">Throw Flask</content>
 	<content contentuid="hd3b6672fg6ce7g4597gae76gbc73eb4701bb">Character&apos;s firearm is attuned to water.</content>
-	<content contentuid="hd40f14d5g4946g4462gac7bga35fda61ed27">Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.&lt;br&gt;&lt;font color=&apos;#99FF22&apos; size=&apos;22&apos;&gt;[ExtraData:LLWEAPONEX_MB_Unarmed_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.&lt;/font&gt;</content>
+	<content contentuid="hd40f14d5g4946g4462gac7bga35fda61ed27">&lt;font color=&apos;#99FF22&apos;&gt;Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.&lt;br&gt;[ExtraData:LLWEAPONEX_MB_Unarmed_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.&lt;/font&gt;</content>
 	<content contentuid="hd42c9807gb777g430fgb232g5214f14eaae5">An small crossbow with a wrist strap and easy-to-reach trigger. Fits comfortably on your arm.</content>
 	<content contentuid="hd44849e6gc25dg4882g9c4ege5860b6c6466">Old Greatbow</content>
 	<content contentuid="hd4558384gf656g4e7bg96bfg4d2639fd45e6">Beginner</content>
@@ -2119,7 +2123,7 @@
 	<content contentuid="hdc7d6a51g2192g4fbbga2f5g974f1fe71b98">Victory Cry</content>
 	<content contentuid="hdc8a4479g65a0g4626g926eg20f6e5e44446">Two-handed Bokuto</content>
 	<content contentuid="hdc98ec8dg571eg4a24g8963g8d99760058fb">Expert Shieldsman</content>
-	<content contentuid="hdcab69c9gc26ag4c53gb624gbba1c5f13ee2">Allies within [ExtraData:LeadershipRange]m affected by &lt;font color=&apos;#11FF44&apos;&gt;[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]&lt;/font&gt; have a [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain &lt;font color=&apos;#11FF88&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]&lt;/font&gt; on their turn. If &lt;font color=&apos;#11FF44&apos;&gt;[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]&lt;/font&gt; is from you, this chance is increased to [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance2]%.</content>
+	<content contentuid="hdcab69c9gc26ag4c53gb624gbba1c5f13ee2">&lt;font color=&apos;#00FFFF&apos;&gt;[Special:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain &lt;font color=&apos;#11FF88&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]&lt;/font&gt; on turn start if within [ExtraData:LeadershipRange]m range of a [Key:LLWEAPONEX_Banner] wielder.&lt;/font&gt;</content>
 	<content contentuid="hdcacc003g3fa3g4e51g934cg7fc60b3ba861">*[WARRIOR WEAPONS] Click on the button labeled &apos;Warrior Weapons&apos;.*</content>
 	<content contentuid="hdcbe8f3eg3960g49b2g8f63ged3336519e25">*[ANY WEAPON] Click on the button labeled &apos;Any Weapon&apos;.*</content>
 	<content contentuid="hdcc36d4cgfbf4g42b3gbe66g6d2da570dc70">*A strange crystal-like object quietly hovers before you. Etched upon its surface are symbols of war.*</content>
@@ -2165,6 +2169,7 @@
 	<content contentuid="he1253aecg8871g4e7dgb1f8gd19d7dabb9e9">Elemental Bullets</content>
 	<content contentuid="he14a313dg2a94g4084g9d10g3cc18ca4974b">Rank 5</content>
 	<content contentuid="he191cfc5g46d4g4344ga01cgccb438cefd04">&lt;font color=&apos;#C7A758&apos;&gt;Attuned to Earth&lt;/font&gt;</content>
+	<content contentuid="he19c8dfag44b8g4041ga558gcc204eeb528f">&lt;font color=&apos;#77FF33&apos;&gt;If the target is affected by [Key:KNOCKED_DOWN_DisplayName], deal a critical hit.&lt;/font&gt;</content>
 	<content contentuid="he1a20b3cgc1a4g4f7agb17dga9d90e173418">Exquisite Quickdraw Quiver</content>
 	<content contentuid="he1da052dg04f2g4e6bgaa34gf4c0171d6d91">Blackbeard&apos;s Reign</content>
 	<content contentuid="he1e58190g1732g427cga8a9g7ba9ec1c3049">A greatbow enhanced with modern technological advances. Still requires great strength to wield.</content>
@@ -2216,6 +2221,7 @@
 	<content contentuid="he770b73agb777g4b00ga3a5g0cbe13b85048">Rusty Pipe</content>
 	<content contentuid="he772e2ccg5ef2g45b3g9665g2fa262dfcc9e">&lt;font color=&apos;#f7ba14&apos;&gt;Gas Expansion&lt;/font&gt;</content>
 	<content contentuid="he77b3516g2d79g494bgb20dg59fae4610eee">A big staff.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
+	<content contentuid="he78ff686g90ccg48caga9c6gc54e5cace8a7">Pinned</content>
 	<content contentuid="he791882dg4ce9g48dcgb4ccg67c95e1416ba">Fury&apos;s Reward II</content>
 	<content contentuid="he805d9ecg9a32g4e43gb39fg8ed925de6298">Weapon Expansion - Crafting</content>
 	<content contentuid="he80ce441g9499g4744gbd3ag5d55d702bf33">Dragon has been grounded by a Greatbow. Taking [1] per turn.</content>
