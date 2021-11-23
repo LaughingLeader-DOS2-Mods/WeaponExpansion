@@ -78,9 +78,9 @@ local function GetElementalWeakness(character)
 end
 
 if Vars.IsClient then
-	RegisterListener("GetTextPlaceholder", "LLWEAPONEX_WeaponElementalWeakness", function(param, statCharacter)
-		local text = GetElementalWeakness(statCharacter)
-	end)
+	TooltipHandler.SpecialParamFunctions.LLWEAPONEX_WeaponElementalWeakness = function(param, statCharacter)
+		return GetElementalWeakness(statCharacter)
+	end
 end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 1, {
