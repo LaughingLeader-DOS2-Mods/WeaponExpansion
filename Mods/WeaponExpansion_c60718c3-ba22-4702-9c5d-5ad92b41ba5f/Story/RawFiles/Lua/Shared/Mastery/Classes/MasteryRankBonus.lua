@@ -21,6 +21,12 @@ local MasteryRankBonus = {
 setmetatable(MasteryRankBonus, {
 	__call = function(tbl, ...)
 		return MasteryRankBonus:Create(...)
+	end,
+	__tostring = function(tbl)
+		return string.format("%s%s%s", 
+		tbl.ID, 
+		tbl.Skills and "|Skills(" .. StringHelpers.Join(";",tbl.Skills) .. ")" or "",
+		tbl.Statuses and "|Statuses(" .. StringHelpers.Join(";",tbl.Statuses) .. ")" or "")
 	end
 })
 
@@ -55,9 +61,9 @@ end
 function MasteryRankBonus.DefaultStatusTagCheck(tag, checkSource)
 	if checkSource then
 		return function(bonus, id, character, tooltipType, status)
-			if tooltipType == "status" then
+			if tooltipType == "status" and status then
 				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
-				if source and GameHelpers.CharacterOrEquipmentHasTag(source, tag) then
+				if source and GameHelpers.CharacterOrEquipmentHasTag(source, tag) or Vars.LeaderDebugMode then
 					return true
 				end
 				return false
@@ -67,7 +73,7 @@ function MasteryRankBonus.DefaultStatusTagCheck(tag, checkSource)
 	else
 		return function(bonus, id, character, tooltipType, status)
 			if tooltipType == "status" then
-				return GameHelpers.CharacterOrEquipmentHasTag(character, tag)
+				return GameHelpers.CharacterOrEquipmentHasTag(character, tag) or Vars.LeaderDebugMode
 			end
 			return true
 		end
@@ -99,7 +105,7 @@ end
 ---@return MasteryRankBonus
 function MasteryRankBonus:RegisterStatusListener(event, callback, specificStatuses)
 	if not isClient then
-		MasteryBonusManager.RegisterStatusListener(specificStatuses or self.Statuses, self.ID, callback)
+		MasteryBonusManager.RegisterStatusListener(event, specificStatuses or self.Statuses, self.ID, callback)
 	end
 	return self
 end
@@ -217,10 +223,11 @@ function MasteryRankBonus:RegisterTurnEndedListener(id, callback, skipBonusCheck
 	return self
 end
 
+---@param self MasteryRankBonus
 ---@param character EclCharacter
 ---@param skillOrStatus string
----@return TranslatedString
-function MasteryRankBonus:GetTooltipText(character, skillOrStatus, isStatus, ...)
+---@return TranslatedString|string
+local function TryGetTooltipText(self, character, skillOrStatus, isStatus, ...)
 	if self.GetIsTooltipActive then
 		local b,result = xpcall(self.GetIsTooltipActive, debug.traceback, self, skillOrStatus, character, isStatus and "status" or "skill", ...)
 		if b then
@@ -231,25 +238,38 @@ function MasteryRankBonus:GetTooltipText(character, skillOrStatus, isStatus, ...
 			Ext.PrintError(result)
 		end
 	end
-	if not isStatus or self.DisableStatusTooltip ~= true then
-		if self.OnGetTooltip then
-			local b,result = xpcall(self.OnGetTooltip, debug.traceback, self, skillOrStatus, character, isStatus)
-			if b then
-				if result ~= false then
-					return result
-				end
-			else
-				Ext.PrintError(result)
-			end
-		end
-		if isStatus then
-			if self.AllStatuses or Common.TableHasEntry(self.Statuses, skillOrStatus) then
-				return self.StatusTooltip or self.Tooltip
+	if self.OnGetTooltip then
+		local b,result = xpcall(self.OnGetTooltip, debug.traceback, self, skillOrStatus, character, isStatus, ...)
+		if b then
+			if result then
+				return result
 			end
 		else
-			if self.AllSkills or Common.TableHasEntry(self.Skills, skillOrStatus) then
-				return self.Tooltip
-			end
+			Ext.PrintError(result)
+		end
+	end
+	if isStatus then
+		if not self.DisableStatusTooltip and (self.AllStatuses or Common.TableHasEntry(self.Statuses, skillOrStatus)) then
+			return self.StatusTooltip or self.Tooltip
+		end
+	else
+		if self.AllSkills or Common.TableHasEntry(self.Skills, skillOrStatus) then
+			return self.Tooltip
+		end
+	end
+end
+
+---@param character EclCharacter
+---@param skillOrStatus string
+---@return TranslatedString
+function MasteryRankBonus:GetTooltipText(character, skillOrStatus, isStatus, ...)
+	local text = TryGetTooltipText(self, character, skillOrStatus, isStatus, ...)
+	if text then
+		local t = type(text)
+		if t == "string" then
+			return text
+		elseif t == "table" and text.Type == "TranslatedString" then
+			return text.Value
 		end
 	end
 end

@@ -20,7 +20,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 1, {
 			--Block status from surface
 			return false
 		end
-	end),
+	end, "All"),
 })
 
 if not Vars.IsClient then

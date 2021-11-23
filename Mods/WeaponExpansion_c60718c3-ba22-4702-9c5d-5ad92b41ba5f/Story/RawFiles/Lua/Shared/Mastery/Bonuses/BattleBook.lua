@@ -5,7 +5,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 	rb:Create("BATTLEBOOK_CONCUSSION", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BasicAttackConcussion", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).</font>")
-	}):RegisterOnWeaponTagHit("LLWEAPONEX_BattleBook", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+	}):RegisterOnWeaponTagHit(MasteryID.BattleBook, function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
 		if not isFromSkill then
 			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionChance", 25.0)
 			local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionTurns", 1)
@@ -33,14 +33,14 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 				ApplyStatus(v, "LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID", 0.0, 0, char)
 			end)
 		end
-	end):RegisterStatusListener("Applied", "RESTED", "BATTLEBOOK_FIRST_AID", function(target, status, source, bonuses)
+	end):RegisterStatusListener("Applied", function(target, status, source, bonuses)
 		if bonuses.BATTLEBOOK_RESTED[source] == true then
 			local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 			if turnBonus > 0 then
 				GameHelpers.Status.ExtendTurns(target, status, turnBonus, true, false)
 			end
 		end
-	end):RegisterStatusListener("Removed", "RESTED", function(target, status)
+	end):RegisterStatusListener("Removed", function(target, status)
 		ClearTag(target, "LLWEAPONEX_BattleBook_FirstAid_Active")
 	end),
 })

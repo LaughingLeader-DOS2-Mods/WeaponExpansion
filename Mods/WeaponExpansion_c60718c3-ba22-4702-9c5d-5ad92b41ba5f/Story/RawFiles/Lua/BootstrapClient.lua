@@ -7,7 +7,3 @@ Ext.Require("Client/UI/_InitClientUI.lua")
 Ext.Require("Client/UI/TooltipHelpers.lua")
 Ext.Require("Shared/Uniques/_Init.lua")
 Ext.Require("Shared/Mastery/_Init.lua")
-
-Ext.RegisterListener("SessionLoaded", function()
-	Mastery.InitBonusIdentifiers()
-end)

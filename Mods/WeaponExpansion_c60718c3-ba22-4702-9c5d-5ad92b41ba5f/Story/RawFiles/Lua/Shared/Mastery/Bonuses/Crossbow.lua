@@ -39,14 +39,16 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_StillStance", "<font color='#77FF33'>If you haven't moved, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage.</font>"),
 		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
 			if tooltipType == "skill" then
-				if id == "ActionAttackGround" then
-					return true
-				elseif LeaderLib.Data.ActionSkills[id] then
-					return false
-				end
-				local skill = Ext.GetStat(id)
-				if skill and skill.UseWeaponDamage == "Yes" and (skill.Requirement == "RangedWeapon" or skill.Requirement == "None") then
-					return true
+				if GameHelpers.CharacterOrEquipmentHasTag(character.MyGuid, "LLWEAPONEX_Crossbow_Equipped") then
+					if id == "ActionAttackGround" then
+						return true
+					elseif LeaderLib.Data.ActionSkills[id] then
+						return false
+					end
+					local skill = Ext.GetStat(id)
+					if skill and skill.UseWeaponDamage == "Yes" and (skill.Requirement == "RangedWeapon" or skill.Requirement == "None") then
+						return GetStillStanceBonus(character.MyGuid) > 0
+					end
 				end
 			end
 			return false

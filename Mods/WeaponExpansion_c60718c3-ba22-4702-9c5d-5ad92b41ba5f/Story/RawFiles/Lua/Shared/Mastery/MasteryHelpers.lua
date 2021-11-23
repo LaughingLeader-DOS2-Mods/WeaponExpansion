@@ -99,7 +99,7 @@ end
 --- @param tag string
 --- @return boolean
 function Mastery.HasMasteryRequirement(character, tag)
-	if Debug.MasteryTests then
+	if Debug.MasteryTests or Vars.LeaderDebugMode then
 		return true
 	end
 	if type(character) == "string" then
