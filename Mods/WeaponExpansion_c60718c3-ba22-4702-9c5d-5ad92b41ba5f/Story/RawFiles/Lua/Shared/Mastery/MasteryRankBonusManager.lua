@@ -37,24 +37,18 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	return bonuses
 end
 
----@param uuid string
+---@param character UUID|NETID|EsvCharacter|EclCharacter|StatCharacter
 ---@param bonus string|string[]
 ---@return boolean
-function MasteryBonusManager.HasMasteryBonus(uuid, bonus)
+function MasteryBonusManager.HasMasteryBonus(character, bonus)
 	---@type EsvCharacter|EclCharacter
-	local character = GameHelpers.GetCharacter(uuid)
+	local character = GameHelpers.GetCharacter(character)
 	if character then
 		local t = type(bonus)
 		for tag,tbl in pairs(Mastery.Bonuses) do
 			if Mastery.HasMasteryRequirement(character, tag) then
-				for bonusName,_ in pairs(tbl) do
-					if t == "table" then
-						for i,v in pairs(bonus) do
-							if v == bonusName then
-								return true
-							end
-						end
-					elseif bonusName == bonus then
+				for _,bonusData in pairs(tbl) do
+					if bonusData.ID == bonus then
 						return true
 					end
 				end

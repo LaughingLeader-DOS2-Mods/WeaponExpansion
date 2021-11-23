@@ -7,7 +7,7 @@ Debug = {
 Math = { AbilityScaling = {}}
 Text = {}
 Mastery = {
-	---@type table<string, table<string, MasteryRankBonus[]>>
+	---@type table<string, MasteryRankBonus[]>
 	Bonuses = {},
 	BonusID = {},
 	Params = {},
