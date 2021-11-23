@@ -51,7 +51,8 @@ Text = {
 	Mastery = ts:Create("hd84bd8c4gb25fg46bagbbf9ga3d43b8bfacc","Mastery"),
 	MasteryLeveledUp = ts:Create("hd88b4801g3ec4g4b1eg8272ge2f6dce46f0c", "<font color='#F7BA14'>[1] increased to rank <font color='#00FF00'>[2]</font></font>"),
 	MasteryBonusParams = {
-		ElementalWeakness_NoElement = ts:Create("hc0afc564g5c15g47e1g9cf1g5ac28f02033a", "<font color='#FF3333'>Disabled - Your current weapon(s) deal no elemental damage.<br><font size='18' color='#666666'>Targets hit become weak to your weapon's element for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).</font></font>")
+		ElementalWeakness_NoElement = ts:Create("hc0afc564g5c15g47e1g9cf1g5ac28f02033a", "<font color='#FF3333'>Disabled - Your current weapon(s) deal no elemental damage.<br><font size='18' color='#666666'>Targets hit become weak to your weapon's element for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).</font></font>"),
+		BannerLeadershipSource = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership_SourceText", "<font color='#188EDE'>Empowered by [1]'s [Key:LLWEAPONEX_Banner]</font>")
 	},
 	MasteryRankTagText = {
 		LLWEAPONEX_Axe_Mastery1 = ts:Create("hf755889ag3ea8g4e6eg9d7dga1a3d24f5dfc","<font color='#F5785A'>Axe Mastery I</font>"),

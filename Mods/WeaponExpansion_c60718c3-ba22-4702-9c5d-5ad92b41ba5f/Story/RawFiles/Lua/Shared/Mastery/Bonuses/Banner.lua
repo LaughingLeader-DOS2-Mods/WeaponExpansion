@@ -185,7 +185,7 @@ if not Vars.IsClient then
 					local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
 					if source ~= nil then
 						if MasteryBonusManager.HasMasteryBonus(source, "BANNER_LEADERSHIP") then
-							bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 25))
+							bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 50))
 							bonusSource = source.MyGuid
 						end
 					end
@@ -275,10 +275,48 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 	---@see CheckLeadershipBonus
 	rb:Create("BANNER_LEADERSHIP", {
 		Statuses = {"LEADERSHIP"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership", "Allies within [ExtraData:LeadershipRange]m affected by <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> have a [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]</font> on their turn. If <font color='#11FF44'>[Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership]</font> is from you, this chance is increased to [ExtraData:LLWEAPONEX_MB_Banner_LeadershipInspirationChance2]%."),
-		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Banner_Mastery3", true)
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership", "<font color='#00FFFF'>[Special:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]</font> on turn start if within [ExtraData:LeadershipRange]m range of a [Key:LLWEAPONEX_Banner] wielder.</font>"),
+		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Banner_Mastery3", true),
+		OnGetTooltip = function(bonus, skillOrStatus, character, isStatus, status)
+			--Appending "Empowered by x's Banner" if Leadership is from a Banner user
+			if status then
+				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
+				if source and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery3") or Vars.LeaderDebugMode then
+					return string.format("%s<br>%s", bonus.Tooltip.Value, Text.MasteryBonusParams.BannerLeadershipSource:ReplacePlaceholders(source.DisplayName))
+				end
+			end
+		end
 	})
 })
+
+if Vars.IsClient then
+	TooltipHandler.SpecialParamFunctions.LLWEAPONEX_MB_Banner_LeadershipInspirationChance = function(param, statCharacter)
+		local baseBonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25))
+		if statCharacter.Character then
+			local status = statCharacter.Character:GetStatus("LEADERSHIP")
+			if status then
+				local bonusChance = 0
+				local bonusSource = nil
+	
+				--Check the source of Leadership first
+				local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
+				if source ~= nil then
+					if MasteryBonusManager.HasMasteryBonus(source, "BANNER_LEADERSHIP") then
+						bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 50))
+						bonusSource = source.MyGuid
+					end
+				end
+	
+				if bonusChance == 0 then
+					bonusChance = baseBonusChance
+				end
+	
+				return tostring(bonusChance)
+			end
+		end
+		return tostring(baseBonusChance)
+	end
+end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 	rb:Create("BANNER_PROTECTION", {
