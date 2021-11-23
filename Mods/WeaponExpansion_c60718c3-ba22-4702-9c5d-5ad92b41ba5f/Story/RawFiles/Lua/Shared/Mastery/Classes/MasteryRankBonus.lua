@@ -8,6 +8,8 @@ local isClient = Ext.IsClient()
 ---@field Statuses string[]|string Optional statuses associated.
 ---@field Tooltip TranslatedString
 ---@field StatusTooltip TranslatedString If set, statuses will use this for tooltips, instead of Tooltip.
+---@field AllStatuses boolean
+---@field AllSkills boolean
 ---@field DisableStatusTooltip boolean
 ---@field NamePrefix TranslatedString|string
 ---@field GetIsTooltipActive MasteryRankBonusGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
@@ -33,6 +35,12 @@ function MasteryRankBonus:Create(id, params)
 		for k,v in pairs(params) do
 			this[k] = v
 		end
+	end
+	if this.Skills and Common.TableHasEntry(this.Skills, "All") then
+		this.AllSkills = true
+	end
+	if this.Statuses and Common.TableHasEntry(this.Statuses, "All") then
+		this.AllStatuses = true
 	end
 	setmetatable(this, {
 		__index = function(tbl,k)
@@ -186,11 +194,20 @@ function MasteryRankBonus:RegisterOsirisListener(event, arity, state, callback, 
 	return self
 end
 
----@param skillOrStatus string
 ---@param character EclCharacter
----@param isStatus boolean
+---@param skillOrStatus string
 ---@return TranslatedString
-function MasteryRankBonus:GetTooltipText(skillOrStatus, character, isStatus)
+function MasteryRankBonus:GetTooltipText(character, skillOrStatus, isStatus, ...)
+	if self.GetIsTooltipActive then
+		local b,result = xpcall(self.GetIsTooltipActive, debug.traceback, self, skillOrStatus, character, isStatus and "status" or "skill", ...)
+		if b then
+			if result == false then
+				return nil
+			end
+		else
+			Ext.PrintError(result)
+		end
+	end
 	if not isStatus or self.DisableStatusTooltip ~= true then
 		if self.OnGetTooltip then
 			local b,result = xpcall(self.OnGetTooltip, debug.traceback, self, skillOrStatus, character, isStatus)
@@ -202,10 +219,14 @@ function MasteryRankBonus:GetTooltipText(skillOrStatus, character, isStatus)
 				Ext.PrintError(result)
 			end
 		end
-		if isStatus and self.StatusTooltip then
-			return self.StatusTooltip
+		if isStatus then
+			if self.AllStatuses or Common.TableHasEntry(self.Statuses, skillOrStatus) then
+				return self.StatusTooltip or self.Tooltip
+			end
 		else
-			return self.Tooltip
+			if self.AllSkills or Common.TableHasEntry(self.Skills, skillOrStatus) then
+				return self.Tooltip
+			end
 		end
 	end
 end

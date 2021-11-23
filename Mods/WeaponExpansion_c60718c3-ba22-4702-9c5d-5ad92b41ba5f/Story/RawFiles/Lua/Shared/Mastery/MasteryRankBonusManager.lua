@@ -398,6 +398,62 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 	end
 end
 
+---@param character EsvCharacter|EclCharacter
+---@param skillOrStatus string
+---@param isStatus boolean
+function MasteryBonusManager.GetBonusText(character, skillOrStatus, isStatus, ...)
+	local textEntries = {}
+	local params = {...}
+	for tag,tbl in pairs(Mastery.Bonuses) do
+		if Mastery.HasMasteryRequirement(character, tag) then
+			for bonusName,entries in pairs(tbl) do
+				if type(entries) == "table" then
+					for i,data in pairs(entries) do
+						if type(data) == "table" then
+							if data.Type == "MasteryRankBonus" then
+								local bonusText = data:GetTooltipText(character, skillOrStatus, ...)
+								if not StringHelpers.IsNullOrWhitespace(bonusText) then
+									textEntries[#textEntries+1] = bonusText
+								end
+							else
+								--Old style
+								local bonusIsActive = true
+								if data.Active ~= nil then
+									if data.Active.Type == "Tag" then
+										if data.Active.Source == true and type(params[1]) == "userdata" then
+											local status = params[1]
+											if status.StatusSourceHandle ~= nil then
+												local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
+												if source then
+													bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(source, data.Active.Value)
+												end
+											end
+											bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
+										else
+											bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
+										end
+									end
+								end
+								if bonusIsActive then
+									local descriptionText = TooltipHandler.GetDescriptionText(character, data, params[1], true)
+									if not StringHelpers.IsNullOrWhitespace(descriptionText) then
+										textEntries[#textEntries+1] = descriptionText
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	if #textEntries > 0 then
+		return StringHelpers.Join("<br>", textEntries)
+	else
+		return nil
+	end
+end
+
 local bonusScriptNames = {
 	"Axe.lua",
 	"Banner.lua",
@@ -429,39 +485,11 @@ for i,v in pairs(bonusScriptNames) do
 	Ext.Require("Shared/Mastery/Bonuses/"..v)
 end
 
-function Mastery.InitBonusIdentifiers()
-	if Vars.IsClient then
-		local BonusIDEntry = MasteryDataClasses.BonusIDEntry
+--deprecated tables
+Mastery.BonusID = {}
+Mastery.Params.SkillData = {}
+Mastery.Params.StatusData = {}
 
-		for tag,tbl in pairs(Mastery.Bonuses) do
-			for bonusName,bonuses in pairs(tbl) do
-				for i,bonusEntry in pairs(bonuses) do
-					if Mastery.BonusID[bonusName] == nil then
-						Mastery.BonusID[bonusName] = BonusIDEntry:Create(bonusName)
-					end
-					Mastery.BonusID[bonusName].Tags[tag] = bonusEntry
-					if bonusEntry.Skills ~= nil then
-						for i,v in pairs(bonusEntry.Skills) do
-							if Mastery.Params.SkillData[v] == nil then
-								Mastery.Params.SkillData[v] = {
-									Tags = {}
-								}
-							end
-							Mastery.Params.SkillData[v].Tags[tag] = bonusEntry
-						end
-					end
-					if bonusEntry.Statuses ~= nil and bonusEntry.DisableStatusTooltip ~= true then
-						for i,v in pairs(bonusEntry.Statuses) do
-							if Mastery.Params.StatusData[v] == nil then
-								Mastery.Params.StatusData[v] = {
-									Tags = {}
-								}
-							end
-							Mastery.Params.StatusData[v].Tags[tag] = bonusEntry
-						end
-					end
-				end
-			end
-		end
-	end
+function Mastery.InitBonusIdentifiers()
+	
 end

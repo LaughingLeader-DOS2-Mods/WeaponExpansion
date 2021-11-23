@@ -197,6 +197,7 @@ Text = {
 		ApplySpecialRuneOnHit_Chance = ts:Create("h5e0b68b9gefa1g4cc6ga335g6b755812d14f", "Applies [1] on hit ([2]% chance)"),
 		ChaosRuneAbsorbSurface = ts:Create("h60dc40a5ge603g4d8dg9c6eg1c24acc5f4bb", "Transform Surfaces into Rune Effects"),
 		ChaosRuneAbsorbSurface_Chance = ts:Create("h6cd64a25gf8d0g438cg9a91gb04f030e2f88", "Transform Surfaces into Rune Effects ([1]% chance)"),
+		RemoteMineNoRestrictionDescription = ts:CreateFromKey("Target_LLWEAPONEX_RemoteMine_Detonate_NoRestriction_Description", "Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.</font>")
 	},
 	NewAbilitySchools = {
 		Pirate = ts:Create("hc64dff65g17ffg4b44gaf21g896521b144f2", "Piracy"),

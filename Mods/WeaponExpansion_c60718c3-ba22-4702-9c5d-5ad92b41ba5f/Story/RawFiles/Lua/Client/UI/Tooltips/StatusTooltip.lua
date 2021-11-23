@@ -2,58 +2,6 @@
 ---@param status EclStatus
 ---@param tooltip TooltipData
 local function OnStatusTooltip(character, status, tooltip)
-	---@type MasteryRankBonus
-	local data = Mastery.Params.StatusData[status.StatusId]
-	if data ~= nil then
-		local bonusIsActive = true
-		--deprecated
-		if data.Active ~= nil then
-			if data.Active.Type == "Tag" then
-				if data.Active.Source == true then
-					if status.StatusSourceHandle ~= nil then
-						local source = Ext.GetCharacter(status.StatusSourceHandle)
-						if source ~= nil then
-							bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(source, data.Active.Value)
-						end
-					end
-					bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
-				else
-					bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
-				end
-			end
-		end
-		if data.Type == "MasteryRankBonus" then
-			if data.GetIsTooltipActive then
-				local b,result = xpcall(data.GetIsTooltipActive, debug.traceback, data, status, character, "status", status)
-				if b then
-					bonusIsActive = result ~= nil and result or false
-				else
-					Ext.PrintError(result)
-				end
-			end
-		end
-		if bonusIsActive then
-			local descriptionText = TooltipHandler.GetDescriptionText(character, data, status, true)
-			if descriptionText ~= "" then
-				local existingDescription = tooltip:GetElement("StatusDescription")
-				if existingDescription ~= nil then
-					local description = existingDescription.Label
-					if description == nil then 
-						description = "" 
-					else
-						description = description.."<br>"
-					end
-					description = description..descriptionText
-					existingDescription.Label = description
-				else
-					local description = {
-						Label = descriptionText
-					}
-					tooltip:AppendElement(description)
-				end
-			end
-		end
-	end
 	if status.StatusId == "LLWEAPONEX_ARMCANNON_CHARGED" then
 		-- local item = nil
 		-- for i,v in pairs(character:GetInventoryItems()) do
@@ -94,6 +42,14 @@ local function OnStatusTooltip(character, status, tooltip)
 			Type="StatusBonus",
 			Label=text
 		})
+	end
+	local bonusText = MasteryBonusManager.GetBonusText(character, status.StatusId, true, status)
+	if bonusText then
+		local description = tooltip:GetElement("StatusDescription") or tooltip:AppendElement({Type="StatusDescription", Label = ""})
+		if not StringHelpers.IsNullOrWhitespace(description.Label) then
+			description.Label = description.Label .. "<br>"
+		end
+		description.Label = description.Label .. bonusText
 	end
 end
 

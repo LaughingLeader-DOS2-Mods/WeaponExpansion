@@ -67,7 +67,6 @@ function TooltipHandler.GetDescriptionText(character, data, skillOrStatus, isSta
 							paramText = tagLocalizedName..text.Value
 						end
 					end
-					paramText = GameHelpers.Tooltip.ReplacePlaceholders(paramText)
 				else
 					if tagData.Param ~= nil then
 						if tagLocalizedName ~= "" then
@@ -76,7 +75,6 @@ function TooltipHandler.GetDescriptionText(character, data, skillOrStatus, isSta
 							paramText = tagData.Param.Value
 						end
 					end
-					paramText = GameHelpers.Tooltip.ReplacePlaceholders(paramText)
 					if tagData.GetParam ~= nil then
 						local status,result = xpcall(tagData.GetParam, debug.traceback, character.Stats, tagName, tagLocalizedName, paramText)
 						if status and result ~= nil then
@@ -86,6 +84,7 @@ function TooltipHandler.GetDescriptionText(character, data, skillOrStatus, isSta
 						end
 					end
 				end
+				paramText = GameHelpers.Tooltip.ReplacePlaceholders(paramText)
 				if descriptionText ~= "" then descriptionText = descriptionText .. "<br>" end
 				descriptionText = descriptionText .. paramText
 			end
@@ -175,10 +174,10 @@ local function OnTooltipPositioned(ui, tooltip_mc, isControllerMode, lastItem, .
 	end
 end
 
----@type table<string,LeaderLibGetTextPlaceholder>
-local SpecialParamFunctions = {
+---@type table<string,LeaderLibGetTextPlaceholderCallback>
+TooltipHandler.SpecialParamFunctions = {
 	---@param character StatCharacter
-	LLWEAPONEX_MB_BacklashAPBonus = function(param, character)
+	LLWEAPONEX_MB_BacklashAPBonus = function(param, statCharacter)
 		local apCost = Ext.StatGetAttribute("MultiStrike_Vault", "ActionPoints")
 		if apCost > 1 then
 			local refundMult = math.min(100, math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Backlash_APRefundPercentage", 50)))
@@ -194,15 +193,14 @@ local SpecialParamFunctions = {
 	end
 }
 
-
 ---@param param string
----@param character StatCharacter
+---@param statCharacter StatCharacter
 ---@vararg string
 ---@return string
-RegisterListener("GetTextPlaceholder", function(param, character)
-	local callback = SpecialParamFunctions[param]
+RegisterListener("GetTextPlaceholder", function(param, statCharacter)
+	local callback = TooltipHandler.SpecialParamFunctions[param]
 	if callback then
-		local b,result = xpcall(callback, debug.traceback, param, character)
+		local b,result = xpcall(callback, debug.traceback, param, statCharacter)
 		if b then
 			return result
 		else

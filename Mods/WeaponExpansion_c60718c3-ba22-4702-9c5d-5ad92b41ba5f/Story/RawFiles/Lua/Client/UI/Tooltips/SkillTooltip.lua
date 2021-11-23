@@ -55,40 +55,15 @@ end
 ---@param tooltip TooltipData
 local function OnSkillTooltip(character, skill, tooltip)
 	--print(skill, Ext.JsonStringify(tooltip.Data))
-	local descriptionElement = tooltip:GetElement("SkillDescription")
-	local description = ""
-	if descriptionElement ~= nil then
-		description = descriptionElement.Label
-	end
-
-	---@type MasteryRankBonus
-	local data = Mastery.Params.SkillData[skill]
-	if data ~= nil then
-		local descriptionText = TooltipHandler.GetDescriptionText(character, data, skill, false)
-		if not StringHelpers.IsNullOrEmpty(descriptionText) then
-			if descriptionElement ~= nil then
-				if description == nil then 
-					description = ""
-				else
-					description = description.."<br>"
-				end
-				description = description..descriptionText
-				descriptionElement.Label = description
-			else
-				descriptionElement = {
-					Label = descriptionText
-				}
-				description = descriptionText
-				tooltip:AppendElement(descriptionElement)
-			end
+	local descriptionElement = tooltip:GetElement("SkillDescription") or {Type="SkillDescription", Label = ""}
+	if skill == "Target_LLWEAPONEX_RemoteMine_Detonate" then
+		if Settings.Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
+			descriptionElement.Label = Text.SkillTooltip.RemoteMineNoRestrictionDescription:ReplacePlaceholders(Ext.StatGetAttribute("Target_LLWEAPONEX_RemoteMine_Detonate", "TargetRadius"))
 		end
 	end
 
-	if character:HasTag("LLWEAPONEX_Firearm_Equipped") then
-		if not StringHelpers.IsNullOrEmpty(description) then
-			description = description:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
-			descriptionElement.Label = description
-		end
+	if character:HasTag("LLWEAPONEX_Firearm_Equipped") and not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
+		descriptionElement.Label = descriptionElement.Label:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
 	end
 
 	local getAltScalingText = AlternativeScaling[skill]
@@ -124,9 +99,10 @@ local function OnSkillTooltip(character, skill, tooltip)
 						})
 					end
 				else
-					local element = tooltip:GetElement("SkillDescription")
-					if element ~= nil then
-						element.Label = string.format("%s<br>%s", element.Label, text)
+					if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
+						descriptionElement.Label = string.format("%s<br>%s", descriptionElement.Label, text)
+					else
+						descriptionElement.Label = text
 					end
 				end
 			end
@@ -149,9 +125,10 @@ local function OnSkillTooltip(character, skill, tooltip)
 							})
 						end
 					else
-						local element = tooltip:GetElement("SkillDescription")
-						if element ~= nil then
-							element.Label = string.format("%s<br>%s", element.Label, text)
+						if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
+							descriptionElement.Label = string.format("%s<br>%s", descriptionElement.Label, text)
+						else
+							descriptionElement.Label = text
 						end
 					end
 				end
@@ -187,18 +164,6 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	if skill == "Target_LLWEAPONEX_RemoteMine_Detonate" then
-		if Settings.Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
-			local element = tooltip:GetElement("SkillDescription")
-			if element ~= nil then
-				local desc,_ = GameHelpers.GetStringKeyText("Target_LLWEAPONEX_RemoteMine_Detonate_NoRestriction_Description", "Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.</font>")
-				if desc ~= nil then
-					desc:gsub("%[1%]", Ext.StatGetAttribute("Target_LLWEAPONEX_RemoteMine_Detonate", "TargetRadius"))
-					element.Label = desc
-				end
-			end
-		end
-	end
 	if not Data.ActionSkills[skill] then
 		local hasRuneProps = false
 		local stat = Ext.GetStat(skill)
@@ -296,6 +261,13 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
+	local bonusText = MasteryBonusManager.GetBonusText(character, skill, false)
+	if bonusText then
+		if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
+			descriptionElement.Label = descriptionElement.Label .. "<br>"
+		end
+		descriptionElement.Label = descriptionElement.Label .. bonusText
+	end
 	-- if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then
 	-- 	if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
 	-- 		local main = character:GetItemBySlot("Weapon")
