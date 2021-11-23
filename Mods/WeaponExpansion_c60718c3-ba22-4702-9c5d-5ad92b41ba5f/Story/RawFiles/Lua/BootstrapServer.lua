@@ -25,7 +25,11 @@ local defaultPersistentVars = {
     },
     MasteryMechanics = {
         ---@type table<UUID,integer>
-        AxeFlurryHits = {}
+        AxeFlurryHits = {},
+        ---@type table<UUID,integer>
+        CrossbowRicochetHits = {},
+        ---@type table<UUID,number[]>
+        StillStanceLastPosition = {}
     },
     Timers = {},
     OnDeath = {},

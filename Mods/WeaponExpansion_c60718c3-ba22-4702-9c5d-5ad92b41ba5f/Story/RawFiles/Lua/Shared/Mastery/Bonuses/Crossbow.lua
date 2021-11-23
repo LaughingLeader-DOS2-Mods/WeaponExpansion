@@ -2,16 +2,83 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryRankBonus
 
+local function GetStillStanceBonus(character)
+	local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Crossbow_SkillStanceRankBonus", 5.0)
+	if damageBonus > 0 then
+		local rank = Mastery.GetMasteryRank(character, MasteryID.Crossbow)
+		if rank > 0 then
+			return math.ceil(damageBonus * rank)
+		end
+	end
+	return 0
+end
+
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
-	-- rb:Create("CROSSBOW_MULTISHOT", {
-	-- 	Skills = {"Projectile_Multishot", "Projectile_EnemyMultishot"},
-	-- 	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_", ""),
-	-- }):RegisterSkillListener(function(bonuses, skill, char, state, data)
-	-- 	if state == SKILL_STATE.HIT and data.Success then
-			
-	-- 	end
-	-- end),
+	rb:Create("CROSSBOW_RICOCHET", {
+		Skills = {"Projectile_Ricochet", "Projectile_EnemyRicochet"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_Ricochet", "<font color='#77FF33'>If each forked projectile hits, [Key:Projectile_Ricochet_DisplayName] is refreshed (once per turn).</font>"),
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success and ObjectGetFlag(char, "LLWEAPONEX_Crossbow_RicochetRefreshed") == 0 then
+			local maxHits = Ext.StatGetAttribute(skill, "ForkLevels") + 1
+			if not PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] then
+				PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] = 0
+			end
+			PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] = PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] + 1
+			if PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] > maxHits then
+				PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] = nil
+				GameHelpers.Skill.Refresh(char, skill)
+				ObjectSetFlag(char, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
+			end
+			TurnCounter.ListenForTurnEnding(char, "LLWEAPONEX_Crossbow_RicochetRefreshed")
+		end
+	end):RegisterTurnEndedListener("LLWEAPONEX_Crossbow_RicochetRefreshed", function(char, id)
+		ObjectClearFlag(char, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
+	end, true),
+	rb:Create("CROSSBOW_STILL_STANCE", {
+		AllSkills = true,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_StillStance", "<font color='#77FF33'>If you haven't moved, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage.</font>"),
+		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
+			if tooltipType == "skill" then
+				if id == "ActionAttackGround" then
+					return true
+				elseif LeaderLib.Data.ActionSkills[id] then
+					return false
+				end
+				local skill = Ext.GetStat(id)
+				if skill and skill.UseWeaponDamage == "Yes" and (skill.Requirement == "RangedWeapon" or skill.Requirement == "None") then
+					return true
+				end
+			end
+			return false
+		end
+	}):RegisterOnWeaponTagHit(MasteryID.Crossbow, function(tag, source, target, data, bonuses, isFromHit, isFromSkill)
+		if data.Success then
+			local lastPos = PersistentVars.MasteryMechanics.StillStanceLastPosition[source.MyGuid]
+			if lastPos and GameHelpers.Math.GetDistance(source.WorldPos, lastPos) <= 0.01 then
+				local damageBonus = GetStillStanceBonus(source)
+				if damageBonus > 0 then
+					damageBonus = 1 + (damageBonus * 0.01)
+					data:MultiplyDamage(damageBonus)
+				end
+			end
+		end
+	end):RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
+		local character = GameHelpers.GetCharacter(char)
+		if character then
+			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = TableHelpers.Clone(character.WorldPos)
+		end
+	end)
 })
+
+if Vars.IsClient then
+	TooltipHandler.SpecialParamFunctions.LLWEAPONEX_Crossbow_SkillStanceDamageBonus = function(param, statCharacter)
+		local damageBonus = GetStillStanceBonus(statCharacter.MyGuid)
+		if damageBonus > 0 then
+			return tostring(damageBonus)
+		end
+		return "0"
+	end
+end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 	rb:Create("CROSSBOW_SKYCRIT", {

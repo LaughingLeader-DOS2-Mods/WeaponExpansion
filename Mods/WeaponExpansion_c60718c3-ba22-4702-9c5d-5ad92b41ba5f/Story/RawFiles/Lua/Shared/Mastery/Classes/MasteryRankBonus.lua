@@ -194,6 +194,29 @@ function MasteryRankBonus:RegisterOsirisListener(event, arity, state, callback, 
 	return self
 end
 
+---@param id string
+---@param callback fun(uuid:UUID, id:string):void
+---@param skipBonusCheck boolean
+---@return MasteryRankBonus
+function MasteryRankBonus:RegisterTurnEndedListener(id, callback, skipBonusCheck)
+	if not isClient then
+		if skipBonusCheck then
+			RegisterListener("OnTurnEnded", id, callback)
+		else
+			local wrapper = function(character, turnId)
+				if MasteryBonusManager.HasMasteryBonus(character, self.ID) then
+					local b,err = xpcall(callback, debug.traceback, character, turnId)
+					if not b then
+						Ext.PrintError(err)
+					end
+				end
+			end
+			RegisterListener("OnTurnEnded", id, wrapper)
+		end
+	end
+	return self
+end
+
 ---@param character EclCharacter
 ---@param skillOrStatus string
 ---@return TranslatedString

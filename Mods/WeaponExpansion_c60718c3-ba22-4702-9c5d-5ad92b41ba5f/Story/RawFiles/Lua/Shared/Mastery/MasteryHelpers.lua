@@ -3,10 +3,8 @@
 ---@param mastery string
 ---@return integer
 local function GetHighestMasteryRank(character, mastery)
-	if type(character) == "string" then
-		character = Ext.GetCharacter(character)
-	end
-	if character ~= nil then
+	character = GameHelpers.GetCharacter(character)
+	if character then
 		for i=Mastery.Variables.MaxRank,1,-1 do
 			local tag = string.format("%s_Mastery%i", mastery, i)
 			if character:HasTag(tag) then
@@ -18,6 +16,22 @@ local function GetHighestMasteryRank(character, mastery)
 end
 
 Mastery.GetHighestMasteryRank = GetHighestMasteryRank
+
+---@param character EsvCharacter|string
+---@param mastery string
+---@return integer
+function Mastery.GetMasteryRank(character, mastery)
+	character = GameHelpers.GetCharacter(character)
+	if character then
+		for i=Mastery.Variables.MaxRank,1,-1 do
+			local tag = string.format("%s_Mastery%i", mastery, i)
+			if GameHelpers.CharacterOrEquipmentHasTag(character, tag) then
+				return i
+			end
+		end
+	end
+	return 0
+end
 
 ---@param uuid string
 ---@param mastery string
