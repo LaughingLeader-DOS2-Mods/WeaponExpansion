@@ -99,9 +99,7 @@ local function GetElementalWeakness(character)
 				resistanceText = resistanceText .. "<br>"
 			end
 		end
-		return resistanceText
-	else
-		return Text.MasteryBonusParams.ElementalWeakness_NoElement.Value
+		return GameHelpers.Tooltip.ReplacePlaceholders(resistanceText, character)
 	end
 end
 
@@ -122,6 +120,7 @@ Mastery.Variables.Bonuses.HasElementalWeaknessWeapon = function(character)
 			return true
 		end
 	end
+	return false
 end
 
 if Vars.IsClient then

@@ -1388,7 +1388,7 @@
 	<content contentuid="h8dd76759gaf6dg40c9g8cd9g61faaae3b1ce">&lt;font color=&apos;#03FFAA&apos;&gt;Runic Absorption&lt;/font&gt;</content>
 	<content contentuid="h8de596eag6485g46ffg9076g9e766e6bd41d">Soul Burn</content>
 	<content contentuid="h8e29b77egd1bcg490fgb347g9838851afaa6">Book of Impartation</content>
-	<content contentuid="h8e770ac0gc6b4g4fa7gbe06gc010adeb6938">Leap forward and slam the almighty &lt;font color=&apos;#c5a65a&apos;&gt;Anvilmar&lt;/font&gt; into the ground, cracking the earth for [1] in a [2] radius, and knocking targets up.&lt;br&gt;&lt;font color=&apos;#BB5533&apos;&gt;Targets landing take [3] to [4] damage upon landing, depending on the launch height.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF00CC&apos;&gt;The impact radius begins where from your anvil hits the ground, which is 2m infront of your landing position.&lt;/font&gt;</content>
+	<content contentuid="h8e770ac0gc6b4g4fa7gbe06gc010adeb6938">Leap forward and slam the almighty &lt;font color=&apos;#c5a65a&apos;&gt;Anvilmar&lt;/font&gt; into the ground, cracking the earth for [1] in a [2] radius, and knocking targets up.&lt;br&gt;&lt;font color=&apos;#BB5533&apos;&gt;Targets landing take [3] to [4] damage, depending on the launch height.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FF00CC&apos;&gt;The impact radius begins where from your anvil hits the ground, which is 2m infront of your landing position.&lt;/font&gt;</content>
 	<content contentuid="h8e8ad7bdge201g4e47gb783g4aab39451266">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8e8b24efga7feg4e6bgac39g6752b927ddf8">Placeholder</content>
 	<content contentuid="h8ea5f0f3ga212g4a36g8edcg55ba5daf97a9">Blademaster&apos;s Strike 2</content>
@@ -1860,7 +1860,6 @@
 	<content contentuid="hc0a1757bg633bg4517ga1a4g3ba6c8dfd8c7">Searing Rune</content>
 	<content contentuid="hc0ad4b30gc94ag446fg9b6ag16b29e2d5401">Raijin</content>
 	<content contentuid="hc0afa9e9g03deg48e9ga9b3gda55ed03ef4e">Flaying Foil</content>
-	<content contentuid="hc0afc564g5c15g47e1g9cf1g5ac28f02033a">&lt;font color=&apos;#FF3333&apos;&gt;Disabled - Your current weapon(s) deal no elemental damage.&lt;br&gt;&lt;font size=&apos;18&apos; color=&apos;#666666&apos;&gt;Targets hit become weak to your weapon&apos;s element for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).&lt;/font&gt;&lt;/font&gt;</content>
 	<content contentuid="hc0ccbb1cgca5dg457cg9dc0gedc74a1982cb">Polished Flintlock Pistol</content>
 	<content contentuid="hc0d6f6bdgdbfdg41a5gb876gcf0ce7a585b1">Blackfinger</content>
 	<content contentuid="hc0d71f4ag6d05g460eg953fgde2e5bc20ca9">&lt;i&gt;As is written on &lt;font color=&apos;#c5a65a&apos;&gt;Gnak&apos;s Spell Scroll&lt;/font&gt;:&lt;/i&gt;&lt;br&gt;&lt;font color=&apos;#ff9933&apos;&gt;&amp;quot;Me no spell&lt;br&gt;hit bad with biggem&lt;br&gt;biggo boom!&amp;quot;&lt;/font&gt;&lt;br&gt;&lt;i&gt;Repeating the words activates the magic within the scroll. Smashing something with the scroll will then explode a random, basic spell.&lt;/i&gt;&lt;br&gt;Possible spells include most starting spells, both hostile and beneficial (Fortity vs. Contamination), with a smaller chance at an adept or greater spell.</content>
@@ -2123,7 +2122,7 @@
 	<content contentuid="hdc7d6a51g2192g4fbbga2f5g974f1fe71b98">Victory Cry</content>
 	<content contentuid="hdc8a4479g65a0g4626g926eg20f6e5e44446">Two-handed Bokuto</content>
 	<content contentuid="hdc98ec8dg571eg4a24g8963g8d99760058fb">Expert Shieldsman</content>
-	<content contentuid="hdcab69c9gc26ag4c53gb624gbba1c5f13ee2">&lt;font color=&apos;#00FFFF&apos;&gt;[Special:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain &lt;font color=&apos;#11FF88&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]&lt;/font&gt; on turn start if within [ExtraData:LeadershipRange]m range of a [Key:LLWEAPONEX_Banner] wielder.&lt;/font&gt;</content>
+	<content contentuid="hdcab69c9gc26ag4c53gb624gbba1c5f13ee2">&lt;font color=&apos;#00FFFF&apos;&gt;[Special:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain &lt;font color=&apos;#11FF88&apos;&gt;[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]&lt;/font&gt; on turn start if within [ExtraData:LeadershipRange]m of a [Key:LLWEAPONEX_Banner] wielder.&lt;/font&gt;</content>
 	<content contentuid="hdcacc003g3fa3g4e51g934cg7fc60b3ba861">*[WARRIOR WEAPONS] Click on the button labeled &apos;Warrior Weapons&apos;.*</content>
 	<content contentuid="hdcbe8f3eg3960g49b2g8f63ged3336519e25">*[ANY WEAPON] Click on the button labeled &apos;Any Weapon&apos;.*</content>
 	<content contentuid="hdcc36d4cgfbf4g42b3gbe66g6d2da570dc70">*A strange crystal-like object quietly hovers before you. Etched upon its surface are symbols of war.*</content>
