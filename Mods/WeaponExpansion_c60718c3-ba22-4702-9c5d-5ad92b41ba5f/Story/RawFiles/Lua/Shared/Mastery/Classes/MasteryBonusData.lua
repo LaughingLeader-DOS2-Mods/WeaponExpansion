@@ -1,26 +1,28 @@
 local isClient = Ext.IsClient()
 
----@alias MasteryRankBonusGetIsTooltipActiveCallback fun(self:MasteryRankBonus, skillOrStatus:string, character:EclCharacter, idType:string, data:EsvStatus|StatEntrySkillData):boolean
+---@alias MasteryBonusDataGetIsTooltipActiveCallback fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, idType:string, data:EsvStatus|StatEntrySkillData):boolean
 
----@class MasteryRankBonus
+---@class MasteryBonusData
 ---@field ID string
----@field Skills string[]|string Optional skills associated.
----@field Statuses string[]|string Optional statuses associated.
+---@field Skills string[] Optional skills associated.
+---@field Statuses string[] Optional statuses associated.
 ---@field Tooltip TranslatedString
 ---@field StatusTooltip TranslatedString If set, statuses will use this for tooltips, instead of Tooltip.
 ---@field AllStatuses boolean
 ---@field AllSkills boolean
 ---@field DisableStatusTooltip boolean
 ---@field NamePrefix TranslatedString|string
----@field GetIsTooltipActive MasteryRankBonusGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
----@field OnGetTooltip fun(self:MasteryRankBonus, skillOrStatus:string, character:EclCharacter, isStatus:boolean):string|TranslatedString Custom callback to determine tooltip text dynamically.
-local MasteryRankBonus = {
-	Type = "MasteryRankBonus"
+---@field GetIsTooltipActive MasteryBonusDataGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
+---@field OnGetTooltip fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, isStatus:boolean):string|TranslatedString Custom callback to determine tooltip text dynamically.
+local MasteryBonusData = {
+	Type = "MasteryBonusData",
+	AllStatuses = false,
+	AllSkills = false,
 }
 
-setmetatable(MasteryRankBonus, {
+setmetatable(MasteryBonusData, {
 	__call = function(tbl, ...)
-		return MasteryRankBonus:Create(...)
+		return MasteryBonusData:Create(...)
 	end,
 	__tostring = function(tbl)
 		return string.format("%s%s%s", 
@@ -31,9 +33,9 @@ setmetatable(MasteryRankBonus, {
 })
 
 ---@param id string
----@param params MasteryRankBonus
----@return MasteryRankBonus
-function MasteryRankBonus:Create(id, params)
+---@param params MasteryBonusData
+---@return MasteryBonusData
+function MasteryBonusData:Create(id, params)
 	local this = {
 		ID = id or ""
 	}
@@ -50,15 +52,15 @@ function MasteryRankBonus:Create(id, params)
 	end
 	setmetatable(this, {
 		__index = function(tbl,k)
-			return MasteryRankBonus[k]
+			return MasteryBonusData[k]
 		end
 	})
 	return this
 end
 
 ---Returns a default function for callback that checks for a tag specified, either on the status target or source.
----@return MasteryRankBonusGetIsTooltipActiveCallback
-function MasteryRankBonus.DefaultStatusTagCheck(tag, checkSource)
+---@return MasteryBonusDataGetIsTooltipActiveCallback
+function MasteryBonusData.DefaultStatusTagCheck(tag, checkSource)
 	if checkSource then
 		return function(bonus, id, character, tooltipType, status)
 			if tooltipType == "status" and status then
@@ -81,8 +83,8 @@ function MasteryRankBonus.DefaultStatusTagCheck(tag, checkSource)
 end
 
 ---@param callback WeaponExpansionMasterySkillListenerCallback
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterSkillListener(callback)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterSkillListener(callback)
 	if not isClient then
 		MasteryBonusManager.RegisterSkillListener(self.Skills, self.ID, callback)
 	end
@@ -91,8 +93,8 @@ end
 
 ---@param skillType string
 ---@param callback WeaponExpansionMasterySkillListenerCallback
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterSkillTypeListener(skillType, callback)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterSkillTypeListener(skillType, callback)
 	if not isClient then
 		MasteryBonusManager.RegisterSkillTypeListener(skillType, self.ID, callback)
 	end
@@ -102,8 +104,8 @@ end
 ---@param event StatusEventID
 ---@param callback MasteryBonusStatusCallback
 ---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterStatusListener(event, callback, specificStatuses)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterStatusListener(event, callback, specificStatuses)
 	if not isClient then
 		MasteryBonusManager.RegisterStatusListener(event, specificStatuses or self.Statuses, self.ID, callback)
 	end
@@ -112,8 +114,8 @@ end
 
 ---@param callback MasteryBonusStatusBeforeAttemptCallback
 ---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterStatusBeforeAttemptListener(callback, specificStatuses)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback, specificStatuses)
 	if not isClient then
 		MasteryBonusManager.RegisterStatusAttemptListener(specificStatuses or self.Statuses, self.ID, callback)
 	end
@@ -122,8 +124,8 @@ end
 
 ---@param callback BasicAttackOnHitTargetCallback
 ---@param skipBonusCheck boolean
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterOnHit(callback, skipBonusCheck)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterOnHit(callback, skipBonusCheck)
 	if not isClient then
 		if skipBonusCheck then
 			AttackManager.RegisterOnHit(callback)
@@ -145,8 +147,8 @@ end
 ---@param tag string|string[]
 ---@param callback BasicAttackOnWeaponTagHitCallback
 ---@param skipBonusCheck boolean
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterOnWeaponTagHit(tag, callback, skipBonusCheck)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterOnWeaponTagHit(tag, callback, skipBonusCheck)
 	if not isClient then
 		if skipBonusCheck then
 			AttackManager.RegisterOnWeaponTagHit(tag, callback)
@@ -170,8 +172,8 @@ end
 ---@param state string
 ---@param callback function
 ---@param skipBonusCheck boolean
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterOsirisListener(event, arity, state, callback, skipBonusCheck)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, skipBonusCheck)
 	if not isClient then
 		if skipBonusCheck then
 			RegisterProtectedOsirisListener(event, arity, state, callback)
@@ -203,8 +205,8 @@ end
 ---@param id string
 ---@param callback fun(uuid:UUID, id:string):void
 ---@param skipBonusCheck boolean
----@return MasteryRankBonus
-function MasteryRankBonus:RegisterTurnEndedListener(id, callback, skipBonusCheck)
+---@return MasteryBonusData
+function MasteryBonusData:RegisterTurnEndedListener(id, callback, skipBonusCheck)
 	if not isClient then
 		if skipBonusCheck then
 			RegisterListener("OnTurnEnded", id, callback)
@@ -223,23 +225,14 @@ function MasteryRankBonus:RegisterTurnEndedListener(id, callback, skipBonusCheck
 	return self
 end
 
----@param self MasteryRankBonus
+---@param this MasteryBonusData
 ---@param character EclCharacter
 ---@param skillOrStatus string
+---@param isStatus boolean
 ---@return TranslatedString|string
-local function TryGetTooltipText(self, character, skillOrStatus, isStatus, ...)
-	if self.GetIsTooltipActive then
-		local b,result = xpcall(self.GetIsTooltipActive, debug.traceback, self, skillOrStatus, character, isStatus and "status" or "skill", ...)
-		if b then
-			if result == false then
-				return nil
-			end
-		else
-			Ext.PrintError(result)
-		end
-	end
-	if self.OnGetTooltip then
-		local b,result = xpcall(self.OnGetTooltip, debug.traceback, self, skillOrStatus, character, isStatus, ...)
+local function FinallyGetTooltipText(this, character, skillOrStatus, isStatus, ...)
+	if this.OnGetTooltip then
+		local b,result = xpcall(this.OnGetTooltip, debug.traceback, this, skillOrStatus, character, isStatus, ...)
 		if b then
 			if result then
 				return result
@@ -249,12 +242,35 @@ local function TryGetTooltipText(self, character, skillOrStatus, isStatus, ...)
 		end
 	end
 	if isStatus then
-		if not self.DisableStatusTooltip and (self.AllStatuses or Common.TableHasEntry(self.Statuses, skillOrStatus)) then
-			return self.StatusTooltip or self.Tooltip
+		return this.StatusTooltip or this.Tooltip
+	else
+		return this.Tooltip
+	end
+end
+
+---@param this MasteryBonusData
+---@param character EclCharacter
+---@param skillOrStatus string
+---@return TranslatedString|string
+local function TryGetTooltipText(this, character, skillOrStatus, isStatus, ...)
+	if this.GetIsTooltipActive then
+		local b,result = xpcall(this.GetIsTooltipActive, debug.traceback, this, skillOrStatus, character, isStatus and "status" or "skill", ...)
+		if b then
+			if result == false then
+				return nil
+			end
+		else
+			Ext.PrintError(result)
+		end
+	end
+
+	if isStatus then
+		if not this.DisableStatusTooltip and (this.AllStatuses or Common.TableHasEntry(this.Statuses, skillOrStatus)) then
+			return FinallyGetTooltipText(this, character, skillOrStatus, isStatus, ...)
 		end
 	else
-		if self.AllSkills or Common.TableHasEntry(self.Skills, skillOrStatus) then
-			return self.Tooltip
+		if this.AllSkills or Common.TableHasEntry(this.Skills, skillOrStatus) then
+			return FinallyGetTooltipText(this, character, skillOrStatus, isStatus, ...)
 		end
 	end
 end
@@ -262,7 +278,7 @@ end
 ---@param character EclCharacter
 ---@param skillOrStatus string
 ---@return TranslatedString
-function MasteryRankBonus:GetTooltipText(character, skillOrStatus, isStatus, ...)
+function MasteryBonusData:GetTooltipText(character, skillOrStatus, isStatus, ...)
 	local text = TryGetTooltipText(self, character, skillOrStatus, isStatus, ...)
 	if text then
 		local t = type(text)
@@ -272,6 +288,7 @@ function MasteryRankBonus:GetTooltipText(character, skillOrStatus, isStatus, ...
 			return text.Value
 		end
 	end
+	return nil
 end
 
-MasteryDataClasses.MasteryRankBonus = MasteryRankBonus
+MasteryDataClasses.MasteryBonusData = MasteryBonusData
