@@ -1,5 +1,5 @@
 local ts = Classes.TranslatedString
-local rb = MasteryDataClasses.MasteryRankBonus
+local rb = MasteryDataClasses.MasteryBonusData
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Rapier, 1, {
 	rb:Create("RAPIER_SUCKER_PUNCH_COMBO", {

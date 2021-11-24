@@ -1,5 +1,5 @@
 local ts = Classes.TranslatedString
-local rb = MasteryDataClasses.MasteryRankBonus
+local rb = MasteryDataClasses.MasteryBonusData
 
 local warChargeStatuses = {
 	"LLWEAPONEX_WARCHARGE_DAMAGEBOOST",

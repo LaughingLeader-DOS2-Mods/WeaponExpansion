@@ -1,5 +1,5 @@
 local ts = Classes.TranslatedString
-local rb = MasteryDataClasses.MasteryRankBonus
+local rb = MasteryDataClasses.MasteryBonusData
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Scythe, 1, {
 	rb:Create("SCYTHE_RUPTURE", {

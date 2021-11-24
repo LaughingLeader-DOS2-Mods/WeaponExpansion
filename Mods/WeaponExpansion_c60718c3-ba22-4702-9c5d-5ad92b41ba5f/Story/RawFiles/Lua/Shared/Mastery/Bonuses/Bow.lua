@@ -1,5 +1,5 @@
 local ts = Classes.TranslatedString
-local rb = MasteryDataClasses.MasteryRankBonus
+local rb = MasteryDataClasses.MasteryBonusData
 
 ---@type SkillEventDataForEachCallback
 local function OnPinDownTarget(v, targetType, char, skill, forwardVector, radius)

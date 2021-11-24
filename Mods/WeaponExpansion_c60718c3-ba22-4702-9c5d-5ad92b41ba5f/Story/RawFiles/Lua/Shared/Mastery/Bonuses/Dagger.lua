@@ -1,5 +1,5 @@
 local ts = Classes.TranslatedString
-local rb = MasteryDataClasses.MasteryRankBonus
+local rb = MasteryDataClasses.MasteryBonusData
 
 local throwingKnifeBonus = rb:Create("DAGGER_THROWINGKNIFE", {
 	Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},

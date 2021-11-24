@@ -1,5 +1,5 @@
 local ts = Classes.TranslatedString
-local rb = MasteryDataClasses.MasteryRankBonus
+local rb = MasteryDataClasses.MasteryBonusData
 
 Mastery.Variables.Bonuses.ElementalWeaknessStatuses = {
 	Air = "LLWEAPONEX_WEAKNESS_AIR",
