@@ -268,6 +268,22 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 		descriptionElement.Label = descriptionElement.Label .. bonusText
 	end
+
+	if Mastery.HasMinimumMasteryLevel(character, MasteryID.Crossbow, 1) 
+	and GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Crossbow_Equipped") 
+	and Mastery.Variables.Bonuses.IsStillStanceSkill(skill) then
+		local sp = tooltip:GetElement("SkillProperties")
+		if sp then
+			local bonus = Mastery.Variables.Bonuses.GetStillStanceBonus(character)
+			if bonus > 0 then
+				local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
+				table.insert(sp.Properties, {
+					Label = Text.SkillTooltip.StillStance:ReplacePlaceholders(string.format("+%s", bonus), rankName),
+                    Warning = ""
+				})
+			end
+		end
+	end
 	-- if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then
 	-- 	if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
 	-- 		local main = character:GetItemBySlot("Weapon")
