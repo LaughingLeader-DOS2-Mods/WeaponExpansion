@@ -456,6 +456,7 @@
 	<content contentuid="h2c7d2267gcd8fg4a99g88f3g55fbab743bc0">Throw a scythe at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt;.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Impaled&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per weapon stuck inside the enemy.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Enemies below 5% max health will be &lt;font color=&apos;#FF00FF&apos;&gt;Reaped&lt;/font&gt;, resulting in instant-death.&lt;/font&gt;</content>
 	<content contentuid="h2cb50244g8d38g4a87g8924gc01a4a02f19a">Weapon Expansion</content>
 	<content contentuid="h2cd9bce1gba34g4a4fgae35g13868c6adb5c">Tanto</content>
+	<content contentuid="h2cf2b9c6g0dadg47c3g9c5eg8897afd24cd7">Movement is restricted by a piercing crossbow bolt.</content>
 	<content contentuid="h2d0bd945g3345g446ag8845gc78010e0018c">A set of dark dual shields. Their vicious design reflect the Black Ring well.</content>
 	<content contentuid="h2d0e8796g1d66g4541g8ce3ged8f936c4129">*Tell the mercenary to stop following you.*</content>
 	<content contentuid="h2d15369bg951bg438cga94fg7ccb48f7a9b1">Lava Rune</content>
@@ -1947,6 +1948,7 @@
 	<content contentuid="hc997c244gb0b1g4968gafe7ge225cc311a0f">Novice</content>
 	<content contentuid="hc99902e9g50eag4b0cgbeb0gc945046ad8b3">&lt;font color=&apos;#D9D9D9&apos; size=&apos;18&apos;&gt;Dual Shields Mastery II&lt;/font&gt;&lt;br&gt;Encase the target in a hardened shell, removing them from combat for 1 turn.&lt;br&gt;Allies gain +2 AP upon being freed.</content>
 	<content contentuid="hc99f135fg8284g44a6g8073g29367864839d">&lt;font color=&apos;#7478DC&apos;&gt;Air Rune&lt;/font&gt; &lt;font color=&apos;#40E0D0&apos;&gt;(Runeblade)&lt;/font&gt;</content>
+	<content contentuid="hc9af7f1bg6561g4ab7gbefbg17b6d3143acc">&lt;font color=&apos;#77FF33&apos;&gt;If each forked projectile hits, [Key:Projectile_Ricochet_DisplayName] is refreshed (once per turn).&lt;/font&gt;</content>
 	<content contentuid="hc9c2031bg7fa5g4cadga8a6ga65e6e84dd7f">Giant&apos;s Strength</content>
 	<content contentuid="hc9f3dfe5g5721g470agb642gf8ce0fef1d21">Knockdown Arrow</content>
 	<content contentuid="hc9fc642egcf61g411ag8eddgbdb6aed67512">Placeholder</content>

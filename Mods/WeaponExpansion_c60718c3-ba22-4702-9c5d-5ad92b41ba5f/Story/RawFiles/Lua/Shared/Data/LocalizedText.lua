@@ -197,7 +197,8 @@ Text = {
 		ApplySpecialRuneOnHit_Chance = ts:Create("h5e0b68b9gefa1g4cc6ga335g6b755812d14f", "Applies [1] on hit ([2]% chance)"),
 		ChaosRuneAbsorbSurface = ts:Create("h60dc40a5ge603g4d8dg9c6eg1c24acc5f4bb", "Transform Surfaces into Rune Effects"),
 		ChaosRuneAbsorbSurface_Chance = ts:Create("h6cd64a25gf8d0g438cg9a91gb04f030e2f88", "Transform Surfaces into Rune Effects ([1]% chance)"),
-		RemoteMineNoRestrictionDescription = ts:CreateFromKey("Target_LLWEAPONEX_RemoteMine_Detonate_NoRestriction_Description", "Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.</font>")
+		RemoteMineNoRestrictionDescription = ts:CreateFromKey("Target_LLWEAPONEX_RemoteMine_Detonate_NoRestriction_Description", "Detonate remote charges in a [1] radius.<br><font color='#188EDE'>Can target mines in the world, or an object holding mines.</font>"),
+		StillStance = ts:Create("h443a2ac9g8018g43b2gb0b4g1fcb29ad71aa", "[1]% Damage (Still Stance - [2])")
 	},
 	NewAbilitySchools = {
 		Pirate = ts:Create("hc64dff65g17ffg4b44gaf21g896521b144f2", "Piracy"),
@@ -227,6 +228,7 @@ Text = {
 		StealLimitReached = ts:Create("h62e44d39gae88g4785g9004g79e396516ee4","<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>"),
 		MasteryRankUp = ts:Create("he0cceb33g75ddg44a5g94b4geda5fd12c886", "<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>"),
 		DeathEdgeBonus = ts:Create("ha2fbf8c5g3500g42d4ga21bg5e4524eae598", "<font color='#CC33FF'>[Key:WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName] twists the recently slain [1], summoning a <font color='#FFFFFF'>[Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem]</font>.</font>"),
+		StillStanceEnabled = ts:Create("h0f4c3d9fgf39fg49b8gbf42g3fcb4e3543c5", "<font color='#99FF22'>[1] is in a Still Stance ([2]).</font>"),
 	},
 	StatusText = {
 		StatusExtended = ts:Create("h8224bb41g2261g4a50ga1feg7dc0f7394eb7", "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"),

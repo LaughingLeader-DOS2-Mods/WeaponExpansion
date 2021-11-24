@@ -57,4 +57,4 @@ LLWEAPONEX_MB_Wand_FleshSacrifice	<font color='#CC33FF'>Allies standing on <font
 LLWEAPONEX_MB_Crossbow_SkyShotCrit	<font color='#77FF33'>If the target is affected by [Key:KNOCKED_DOWN_DisplayName], deal a critical hit.</font>	he19c8dfag44b8g4041ga558gcc204eeb528f
 LLWEAPONEX_MB_Crossbow_MarksmansFang	<font color='#77FF33'>If a target is in front of impassable terrain (like a wall), pin them for 1 turn and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].</font>	hc4e49ef1g6522g4009g9362g4eeae4d7c1a1
 LLWEAPONEX_MB_Crossbow_StillStance	<font color='#77FF33'>If you haven't moved, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage.</font>	h8707c330gb581g4563gafaeg925f48105938
-LLWEAPONEX_MB_Crossbow_Ricochet	<font color='#77FF33'>If each forked projectile hits, [Key:Projectile_Ricochet_DisplayName] is refreshed (once per turn).</font>	h8707c330gb581g4563gafaeg925f48105938
+LLWEAPONEX_MB_Crossbow_Ricochet	<font color='#77FF33'>If each forked projectile hits, [Key:Projectile_Ricochet_DisplayName] is refreshed (once per turn).</font>	hc9af7f1bg6561g4ab7gbefbg17b6d3143acc
