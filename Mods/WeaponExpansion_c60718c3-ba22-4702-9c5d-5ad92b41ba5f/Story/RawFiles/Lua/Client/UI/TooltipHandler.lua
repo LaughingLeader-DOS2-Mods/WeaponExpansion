@@ -40,7 +40,7 @@ function TooltipHandler.GetDescriptionText(character, data, skillOrStatus, isSta
 		local count = #tagKeys
 		table.sort(tagKeys, sortTagParams)
 		for i,tagName in pairs(tagKeys) do
-			---@type MasteryRankBonus
+			---@type MasteryBonusData
 			local tagData = data.Tags[tagName]
 			if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Mastery.HasMasteryRequirement(character, tagName) or Vars.DebugMode then
 				if tagData.NamePrefix ~= nil then
@@ -57,7 +57,7 @@ function TooltipHandler.GetDescriptionText(character, data, skillOrStatus, isSta
 				else
 					tagLocalizedName = tagLocalizedName .. "<br>"
 				end
-				if tagData.Type == "MasteryRankBonus" then
+				if tagData.Type == "MasteryBonusData" then
 					local text = tagData:GetTooltipText(skillOrStatus, character, isStatus)
 					if text ~= nil then
 						local t = type(text)

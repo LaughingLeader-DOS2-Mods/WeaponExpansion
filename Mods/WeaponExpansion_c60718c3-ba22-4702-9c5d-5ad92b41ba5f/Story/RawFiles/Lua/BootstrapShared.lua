@@ -7,7 +7,7 @@ Debug = {
 Math = { AbilityScaling = {}}
 Text = {}
 Mastery = {
-	---@type table<string, MasteryRankBonus[]>
+	---@type table<string, MasteryBonusData[]>
 	Bonuses = {},
 	BonusID = {},
 	Params = {},
@@ -99,8 +99,7 @@ Settings = {}
 
 Mods.LeaderLib.Import(Mods.WeaponExpansion)
 
-Ext.Require("Shared/Mastery/Classes/MasteryData.lua")
-Ext.Require("Shared/Mastery/Classes/MasteryRankBonus.lua")
+Ext.Require("Shared/Mastery/Classes/_Init.lua")
 Ext.Require("Shared/Data/LocalizedText.lua")
 Ext.Require("Shared/Data/WeaponTypesTags.lua")
 Ext.Require("Shared/Data/UnarmedWeaponStats.lua")
