@@ -10,7 +10,7 @@ if Mastery.Bonuses == nil then
 end
 
 ---@param char string
----@param skill string|nil
+---@param skill string|nil Optional skilto filter with.
 ---@return table<string, boolean>
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	---@type EsvCharacter|EclCharacter
@@ -20,15 +20,11 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	if character then
 		for tag,tbl in pairs(Mastery.Bonuses) do
 			if Mastery.HasMasteryRequirement(character, tag) then
-				for bonusName,v in pairs(tbl) do
+				for _,v in pairs(tbl) do
 					if skill == nil then
-						bonuses[bonusName] = true
-					elseif v.Skills ~= nil then
-						for _,bonusReqSkill in pairs(v.Skills) do
-							if bonusReqSkill == skill then
-								bonuses[bonusName] = true
-							end
-						end
+						bonuses[v.ID] = true
+					elseif v.Skills ~= nil and Common.TableHasEntry(v.Skills, skill) then
+						bonuses[v.ID] = true
 					end
 				end
 			end
@@ -374,15 +370,21 @@ end
 
 ---@param mastery string
 ---@param rank integer
----@param bonuses MasteryRankBonus|MasteryRankBonus[]
+---@param bonuses MasteryBonusData|MasteryBonusData[]
 function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 	local masteryRankID = string.format("%s_Mastery%s", mastery, rank)
 	if not Mastery.Bonuses[masteryRankID] then
 		Mastery.Bonuses[masteryRankID] = {}
 	end
+	---@type MasteryData
+	local masteryData = Masteries[mastery]
+	if masteryData and not masteryData.RankBonuses[rank] then
+		masteryData.RankBonuses[rank] = MasteryDataClasses.MasteryRankData:Create(rank, masteryRankID)
+		masteryData.RankBonuses[rank].Bonuses = Mastery.Bonuses[masteryRankID]
+	end
 	local t = type(bonuses)
 	if t == "table" then
-		if bonuses.Type == "MasteryRankBonus" then
+		if bonuses.Type == "MasteryBonusData" then
 			table.insert(Mastery.Bonuses[masteryRankID], bonuses)
 		else
 			for k,v in pairs(bonuses) do
@@ -392,9 +394,9 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 	end
 end
 
----@param data MasteryRankBonus
+---@param data MasteryBonusData
 local function EvaluateEntryForBonusText(data, character, skillOrStatus, isStatus, status, ...)
-	if data.Type == "MasteryRankBonus" then
+	if data.Type == "MasteryBonusData" then
 		local bonusText = data:GetTooltipText(character, skillOrStatus, isStatus, status, ...)
 		if not StringHelpers.IsNullOrWhitespace(bonusText) then
 			return bonusText
@@ -429,7 +431,7 @@ end
 
 local OrderedMasteries = {}
 
----@return fun():string,MasteryRankBonus[]
+---@return fun():string,MasteryBonusData[]
 function MasteryBonusManager.GetOrderedMasteryRanks()
 	local rankOrder = {}
 	for _,mastery in pairs(OrderedMasteries) do

@@ -1,30 +1,32 @@
-local TranslatedString = LeaderLib.Classes["TranslatedString"]
-
-MasteryDataClasses = {}
+---@class MasteryRankNameData
+---@field Name TranslatedString
+---@field Color string
 
 ---@class MasteryData
-local MasteryData = {
-	ID = "",
-	---@type TranslatedString
-	Name = {},
-	Color = "#FFFFFF",
-	---@type table<integer,TranslatedString>
-	Ranks = {}
-}
-MasteryData.__index = MasteryData
+---@field ID string
+---@field Name TranslatedString
+---@field Color string
+---@field Ranks table<integer,MasteryRankNameData>
+---@field RankBonuses table<integer,MasteryRankData>
+local MasteryData = {}
 
 ---@param id string
----@param name string
+---@param name TranslatedString
+---@param color string
+---@param ranks string
 ---@return MasteryData
-function MasteryData:Create(id,name,color,ranks)
+function MasteryData:Create(id,name,color,ranks,bonuses)
     local this =
     {
-		ID = id,
-		Name = name,
-		Color = color,
-		Ranks = ranks
+		ID = id or "",
+		Name = name or "",
+		Color = color or "#FFFFFF",
+		Ranks = ranks or {},
+		RankBonuses = bonuses or {}
 	}
-	setmetatable(this, self)
+	setmetatable(this, {
+		__index = MasteryData	
+	})
     return this
 end
 
@@ -105,34 +107,3 @@ function CharacterMasteryData:LoadFromString(data)
 end
 
 MasteryDataClasses.CharacterMasteryData = CharacterMasteryData
-
-local BonusIDEntry = {
-	ID = "",
-	---@type table<string,table>
-	Tags = {},
-}
-BonusIDEntry.__index = BonusIDEntry
-
----@param id string
----@return BonusIDEntry
-function BonusIDEntry:Create(id)
-	local this = {
-		ID = id,
-		Tags = {}
-	}
-	setmetatable(this, self)
-    return this
-end
-
----@param character EsvCharacter
----@return boolean
-function BonusIDEntry:HasTag(character)
-	for tag,_ in pairs(self.Tags) do
-		if GameHelpers.CharacterOrEquipmentHasTag(character, tag) then
-			return true
-		end
-	end
-	return false
-end
-
-MasteryDataClasses.BonusIDEntry = BonusIDEntry

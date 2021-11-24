@@ -34,6 +34,7 @@ MasteryID = {
 	Wand = "LLWEAPONEX_Wand",
 }
 
+---@type table<string,MasteryData>
 Masteries = {
 ["LLWEAPONEX_Axe"] = MasteryData:Create("LLWEAPONEX_Axe", ts:Create("h99253a1dgaaf7g49bbga37fgf2c25b70073f", "Axe"), "#F5785A", {
 	[0] = {Name = ts:Create("hf503b6cag1d99g488bga8efgf5ead043493d", "Beginner"), Color="#FDFFEA"},
