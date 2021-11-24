@@ -83,8 +83,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 				if damageBonus > 0 then
 					damageBonus = 1 + (damageBonus * 0.01)
 					data:MultiplyDamage(damageBonus)
-					local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
-					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.StillStanceEnabled:ReplacePlaceholders(source.DisplayName, rankName))
 				end
 			end
 		end
@@ -146,7 +144,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 				end
 			end
 
-			for i=1,2.5,0.5 do
+			for i=0.5,1.5,0.5 do
 				local x = (directionalVector[1] * i) + startPos[1]
 				local z = (directionalVector[3] * i) + startPos[3]
 				if not GameHelpers.Grid.IsValidPosition(x, z, grid) then

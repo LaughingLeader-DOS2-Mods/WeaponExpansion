@@ -310,6 +310,6 @@ data "UseWeaponProperties" "No"
 
 new entry "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage"
 type "SkillData"
-data "SkillType" "Target"
+data "SkillType" "Projectile"
 using "Projectile_PiercingShot"
-data "Damage Multiplier" "25"
+data "Damage Multiplier" "80"
