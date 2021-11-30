@@ -61,6 +61,9 @@ CharacterMasteryData = {
 	UUID = "",
 	---@type table<string,CharacterMasteryDataEntry>
 	Masteries = {},
+	---Character Handle as a double. Used for tooltips.
+	---@type number
+	Handle = nil
 }
 CharacterMasteryData.__index = CharacterMasteryData
 
@@ -93,7 +96,7 @@ end
 ---@return CharacterMasteryData
 function CharacterMasteryData:LoadFromString(data)
 	if data ~= nil then
-		local tbl = Ext.JsonParse(data)
+		local tbl = Common.JsonParse(data)
 		if tbl.UUID ~= nil then
 			self.UUID = tbl.UUID
 		end

@@ -823,7 +823,7 @@ package LS_Classes
 			return this.content_array.length;
 		}
 		
-		public function next() : *
+		public function next(byAmount:int = 1) : *
 		{
 			var val1:Number = NaN;
 			if(this.visibleLength > 1)
@@ -835,16 +835,16 @@ package LS_Classes
 				}
 				if(!this.m_CurrentSelection || this.m_CurrentSelection.INTSelectNext == null || !this.m_CurrentSelection.INTSelectNext())
 				{
-					this.select(val1 + 1,false,true);
+					this.select(val1 + byAmount,false,true);
 				}
 			}
 		}
 		
-		public function previous() : *
+		public function previous(byAmount:int = 1) : *
 		{
 			if(this.visibleLength > 1 && (!this.m_CurrentSelection || this.m_CurrentSelection.INTSelectPrevious == null || !this.m_CurrentSelection.INTSelectPrevious()))
 			{
-				this.select(this.currentSelection - 1,false,false);
+				this.select(this.currentSelection - byAmount,false,false);
 			}
 		}
 		
