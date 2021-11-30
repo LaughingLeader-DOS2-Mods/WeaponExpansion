@@ -137,7 +137,7 @@ package LS_Classes
 		
 		private var m_frameHit_mc:MovieClip;
 		
-		public function scrollbar(param1:String = "down_id", param2:String = "up_id", param3:String = "handle_id", param4:String = "scrollBg_id", param5:String = "", param6:String = "")
+		public function scrollbar(param1:String = "LS_Symbols.down_id", param2:String = "LS_Symbols.up_id", param3:String = "LS_Symbols.handle_id", param4:String = "LS_Symbols.scrollBg_id", param5:String = "", param6:String = "")
 		{
 			var _loc13_:Class = null;
 			var _loc14_:Class = null;

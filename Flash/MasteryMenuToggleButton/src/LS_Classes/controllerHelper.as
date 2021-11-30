@@ -81,112 +81,112 @@ package LS_Classes
 				case BTN_B:
 					if(param2)
 					{
-						_loc3_ = "iconBigCircle";
+						_loc3_ = "LS_Symbols.iconBigCircle";
 					}
 					else
 					{
-						_loc3_ = "iconCircle";
+						_loc3_ = "LS_Symbols.iconCircle";
 					}
 					break;
 				case BTN_A:
 					if(param2)
 					{
-						_loc3_ = "iconBigCross";
+						_loc3_ = "LS_Symbols.iconBigCross";
 					}
 					else
 					{
-						_loc3_ = "iconCross";
+						_loc3_ = "LS_Symbols.iconCross";
 					}
 					break;
 				case BTN_X:
-					_loc3_ = "iconSquare";
+					_loc3_ = "LS_Symbols.iconSquare";
 					break;
 				case BTN_Y:
-					_loc3_ = "iconTriangle";
+					_loc3_ = "LS_Symbols.iconTriangle";
 					break;
 				case BTN_LT:
-					_loc3_ = "iconLT";
+					_loc3_ = "LS_Symbols.iconLT";
 					break;
 				case BTN_RT:
-					_loc3_ = "iconRT";
+					_loc3_ = "LS_Symbols.iconRT";
 					break;
 				case BTN_StickLeft:
-					_loc3_ = "iconStickLeft";
+					_loc3_ = "LS_Symbols.iconStickLeft";
 					break;
 				case BTN_StickRight:
-					_loc3_ = "iconStickRight";
+					_loc3_ = "LS_Symbols.iconStickRight";
 					break;
 				case BTN_StickLeft_up:
-					_loc3_ = "iconStickLeft_up";
+					_loc3_ = "LS_Symbols.iconStickLeft_up";
 					break;
 				case BTN_StickLeft_down:
-					_loc3_ = "iconStickLeft_down";
+					_loc3_ = "LS_Symbols.iconStickLeft_down";
 					break;
 				case BTN_StickLeft_left:
-					_loc3_ = "iconStickLeft_left";
+					_loc3_ = "LS_Symbols.iconStickLeft_left";
 					break;
 				case BTN_StickLeft_right:
-					_loc3_ = "iconStickLeft_right";
+					_loc3_ = "LS_Symbols.iconStickLeft_right";
 					break;
 				case BTN_StickLeft_horiz:
-					_loc3_ = "iconStickLeft_horiz";
+					_loc3_ = "LS_Symbols.iconStickLeft_horiz";
 					break;
 				case BTN_StickLeft_vert:
-					_loc3_ = "iconStickLeft_vert";
+					_loc3_ = "LS_Symbols.iconStickLeft_vert";
 					break;
 				case BTN_StickRight_up:
-					_loc3_ = "iconStickRight_up";
+					_loc3_ = "LS_Symbols.iconStickRight_up";
 					break;
 				case BTN_StickRight_down:
-					_loc3_ = "iconStickRight_down";
+					_loc3_ = "LS_Symbols.iconStickRight_down";
 					break;
 				case BTN_StickRight_left:
-					_loc3_ = "iconStickRight_left";
+					_loc3_ = "LS_Symbols.iconStickRight_left";
 					break;
 				case BTN_StickRight_right:
-					_loc3_ = "iconStickRight_right";
+					_loc3_ = "LS_Symbols.iconStickRight_right";
 					break;
 				case BTN_StickRight_horiz:
-					_loc3_ = "iconStickRight_horiz";
+					_loc3_ = "LS_Symbols.iconStickRight_horiz";
 					break;
 				case BTN_StickRight_vert:
-					_loc3_ = "iconStickRight_vert";
+					_loc3_ = "LS_Symbols.iconStickRight_vert";
 					break;
 				case BTN_DPad_up:
-					_loc3_ = "iconDpad_up";
+					_loc3_ = "LS_Symbols.iconDpad_up";
 					break;
 				case BTN_DPad_down:
-					_loc3_ = "iconDpad_down";
+					_loc3_ = "LS_Symbols.iconDpad_down";
 					break;
 				case BTN_DPad_left:
-					_loc3_ = "iconDpad_left";
+					_loc3_ = "LS_Symbols.iconDpad_left";
 					break;
 				case BTN_DPad_right:
-					_loc3_ = "iconDpad_right";
+					_loc3_ = "LS_Symbols.iconDpad_right";
 					break;
 				case BTN_DPad_horiz:
-					_loc3_ = "iconDpad_horiz";
+					_loc3_ = "LS_Symbols.iconDpad_horiz";
 					break;
 				case BTN_DPad_vert:
-					_loc3_ = "iconDpad_vert";
+					_loc3_ = "LS_Symbols.iconDpad_vert";
 					break;
 				case BTN_Back:
-					_loc3_ = "iconBack";
+					_loc3_ = "LS_Symbols.iconBack";
 					break;
 				case BTN_Start:
-					_loc3_ = "iconStart";
+					_loc3_ = "LS_Symbols.iconStart";
 					break;
 				case BTN_StickLeft_press:
-					_loc3_ = "iconStickLeft_press";
+					_loc3_ = "LS_Symbols.iconStickLeft_press";
 					break;
 				case BTN_StickRight_press:
-					_loc3_ = "iconStickRight_press";
+					_loc3_ = "LS_Symbols.iconStickRight_press";
 					break;
 				case BTN_LB:
-					_loc3_ = "iconLB";
+					_loc3_ = "LS_Symbols.iconLB";
 					break;
 				case BTN_RB:
-					_loc3_ = "iconRB";
+					_loc3_ = "LS_Symbols.iconRB";
 			}
 			return _loc3_;
 		}
@@ -197,10 +197,10 @@ package LS_Classes
 			switch(param1)
 			{
 				case BTN_LT:
-					_loc3_ = "iconLTHL";
+					_loc3_ = "LS_Symbols.iconLTHL";
 					break;
 				case BTN_RT:
-					_loc3_ = "iconRTHL";
+					_loc3_ = "LS_Symbols.iconRTHL";
 			}
 			return _loc3_;
 		}

@@ -11,7 +11,6 @@ package LS_Classes
 	import flash.text.TextFieldType;
 	import flash.text.TextFormat;
 	import flash.text.TextLineMetrics;
-	import flash.utils.getDefinitionByName;
 	
 	public class textHelpers
 	{
@@ -167,8 +166,8 @@ package LS_Classes
 			var val27:TextFormat = null;
 			var val28:uint = 0;
 			var val29:Number = NaN;
-			var val5:Class = getDefinitionByName(param3) as Class;
-			var val6:Class = getDefinitionByName(param4) as Class;
+			var val5:Class = Registry.getClass(param3);
+			var val6:Class = Registry.getClass(param4);
 			var val7:Font = new val5();
 			var val8:Font = new val6();
 			var val9:TextFormat = param1.getTextFormat();

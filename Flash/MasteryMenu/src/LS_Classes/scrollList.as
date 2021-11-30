@@ -4,7 +4,6 @@ package LS_Classes
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
-	import flash.utils.getDefinitionByName;
 	
 	public class scrollList extends listDisplay
 	{
@@ -23,7 +22,7 @@ package LS_Classes
 		private var m_bgTile1_mc:MovieClip = null;
 		private var m_bgTile2_mc:MovieClip = null;
 		
-		public function scrollList(param1:String = "down_id", param2:String = "up_id", param3:String = "handle_id", param4:String = "scrollBg_id", param5:String = "", param6:String = "")
+		public function scrollList(param1:String = "LS_Symbols.down_id", param2:String = "LS_Symbols.up_id", param3:String = "LS_Symbols.handle_id", param4:String = "LS_Symbols.scrollBg_id", param5:String = "", param6:String = "")
 		{
 			this.m_scrollbar_mc = new scrollbar(param1,param2,param3,param4,param5,param6);
 			super();
@@ -97,7 +96,7 @@ package LS_Classes
 		
 		public function set setTileableBG(param1:String) : *
 		{
-			var val2:Class = getDefinitionByName(param1) as Class;
+			var val2:Class = Registry.getClass(param1);
 			this.m_bgTile1_mc = new val2();
 			this.m_bgTile2_mc = new val2();
 			this.m_bgTile1_mc.id = 1;

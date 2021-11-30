@@ -5,7 +5,6 @@ package LS_Classes
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
-	import flash.utils.getDefinitionByName;
 	
 	public dynamic class controllerBtnElement extends MovieClip
 	{
@@ -42,7 +41,7 @@ package LS_Classes
 			addChild(this.icon_mc);
 			this.text_txt = new TextField();
 			addChild(this.text_txt);
-			var val1:Class = getDefinitionByName("$Title") as Class;
+			var val1:Class = Registry.getClass("$Title");
 			var val2:Font = new val1();
 			var val3:TextFormat = this.text_txt.getTextFormat();
 			val3.font = val2.fontName;

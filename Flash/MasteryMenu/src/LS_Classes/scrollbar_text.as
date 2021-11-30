@@ -8,7 +8,6 @@ package LS_Classes
 	import flash.external.ExternalInterface;
 	import flash.text.TextField;
 	import flash.utils.Timer;
-	import flash.utils.getDefinitionByName;
 	
 	public class scrollbar_text extends MovieClip
 	{
@@ -88,16 +87,16 @@ package LS_Classes
 		
 		private var m_scrollTween:larTween;
 		
-		public function scrollbar_text(param1:String = "down_id", param2:String = "up_id", param3:String = "handle_id", param4:String = "scrollBg_id", param5:String = "", param6:String = "")
+		public function scrollbar_text(param1:String = "LS_Symbols.down_id", param2:String = "LS_Symbols.up_id", param3:String = "LS_Symbols.handle_id", param4:String = "LS_Symbols.scrollBg_id", param5:String = "", param6:String = "")
 		{
 			var val12:Class = null;
 			var val13:Class = null;
 			this.m_scrollFunc = Sine.easeOut;
 			super();
-			var val7:Class = getDefinitionByName(param1) as Class;
-			var val8:Class = getDefinitionByName(param2) as Class;
-			var val9:Class = getDefinitionByName(param3) as Class;
-			var val10:Class = getDefinitionByName(param4) as Class;
+			var val7:Class = Registry.getClass(param1);
+			var val8:Class = Registry.getClass(param2);
+			var val9:Class = Registry.getClass(param3);
+			var val10:Class = Registry.getClass(param4);
 			this.m_down_mc = new val7();
 			this.m_up_mc = new val8();
 			this.m_handle_mc = new val9();
@@ -138,7 +137,7 @@ package LS_Classes
 			this.m_bg_mc.addEventListener("mouseDown",this.bgDown);
 			if(param5 != "")
 			{
-				val12 = getDefinitionByName(param5) as Class;
+				val12 = Registry.getClass(param5);
 				this.m_FFdown_mc = new val12();
 				addChild(this.m_FFdown_mc);
 				this.m_FFdown_mc.addEventListener("mouseUp",this.onUp);
@@ -150,7 +149,7 @@ package LS_Classes
 			}
 			if(param6 != "")
 			{
-				val13 = getDefinitionByName(param6) as Class;
+				val13 = Registry.getClass(param6);
 				this.m_FFup_mc = new val13();
 				addChild(this.m_FFup_mc);
 				this.m_FFup_mc.addEventListener("mouseUp",this.onUp);

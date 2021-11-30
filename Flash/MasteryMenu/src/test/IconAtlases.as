@@ -4,7 +4,6 @@ package test
 	import flash.display.BitmapData;
 	import flash.display.IBitmapDrawable;
 	import flash.geom.Matrix;
-	import flash.utils.getDefinitionByName;
 	import icons.*;
 
 	public class IconAtlases

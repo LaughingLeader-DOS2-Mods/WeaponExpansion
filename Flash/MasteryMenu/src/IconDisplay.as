@@ -7,7 +7,6 @@ package
 	import flash.geom.Rectangle;
 	import flash.geom.Point;
 	import icons.*;
-	import flash.utils.getDefinitionByName;
 	import flash.external.ExternalInterface;
 
 	public dynamic class IconDisplay extends MovieClip
@@ -25,7 +24,7 @@ package
 
 			try
 			{
-				var iconImageClass:Class = getDefinitionByName("icons."+iconClass) as Class;
+				var iconImageClass:Class = Registry.getClass("icons."+iconClass);
 				if (iconImageClass != null)
 				{
 					iconData = new iconImageClass();

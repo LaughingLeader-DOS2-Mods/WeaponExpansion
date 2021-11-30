@@ -11,7 +11,6 @@ package LS_Classes
    import flash.external.ExternalInterface;
    import flash.geom.Rectangle;
    import flash.utils.Timer;
-   import flash.utils.getDefinitionByName;
    
    public class scrollbar extends MovieClip
    {
@@ -76,17 +75,17 @@ package LS_Classes
       private var m_movementTimeline:larTween;
       private var m_frameHit_mc:MovieClip;
       
-      public function scrollbar(downClassName:String = "down_id", upClassName:String = "up_id", handleClassName:String = "handle_id", bgClassName:String = "scrollBg_id", ffDownClassName:String = "", ffUpClassName:String = "")
+      public function scrollbar(downClassName:String = "LS_Symbols.down_id", upClassName:String = "LS_Symbols.up_id", handleClassName:String = "LS_Symbols.handle_id", bgClassName:String = "LS_Symbols.scrollBg_id", ffDownClassName:String = "", ffUpClassName:String = "")
       {
          var ffDownClass:Class = null;
          var ffUpClass:Class = null;
          this.m_scrollWheelTimer = new Timer(100);
          super();
          this.m_tweenY = 0;
-         var downClass:Class = downClassName == "" ? MovieClip: getDefinitionByName(downClassName) as Class;
-         var upClass:Class = upClassName == "" ? MovieClip: getDefinitionByName(upClassName) as Class;
-         var handleClass:Class = getDefinitionByName(handleClassName) as Class;
-         var bgClass:Class = getDefinitionByName(bgClassName) as Class;
+         var downClass:Class = downClassName == "" ? MovieClip: Registry.getClass(downClassName);
+         var upClass:Class = upClassName == "" ? MovieClip: Registry.getClass(upClassName);
+         var handleClass:Class = Registry.getClass(handleClassName);
+         var bgClass:Class = Registry.getClass(bgClassName);
          this.m_down_mc = new downClass();
          this.m_up_mc = new upClass();
          this.m_handle_mc = new handleClass();
@@ -125,7 +124,7 @@ package LS_Classes
          this.m_frameHit_mc.width = widthVal;
          if(ffDownClassName != "")
          {
-            ffDownClass = getDefinitionByName(ffDownClassName) as Class;
+            ffDownClass = Registry.getClass(ffDownClassName);
             this.m_FFdown_mc = new ffDownClass();
             addChild(this.m_FFdown_mc);
             this.m_FFdown_mc.addEventListener("mouseUp",this.onUp);
@@ -137,7 +136,7 @@ package LS_Classes
          }
          if(ffUpClassName != "")
          {
-            ffUpClass = getDefinitionByName(ffUpClassName) as Class;
+            ffUpClass = Registry.getClass(ffUpClassName);
             this.m_FFup_mc = new ffUpClass();
             addChild(this.m_FFup_mc);
             this.m_FFup_mc.addEventListener("mouseUp",this.onUp);
