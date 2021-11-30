@@ -332,6 +332,10 @@ end
 local function buildMasteryDescription(ui, this, mastery)
 	local data = Masteries[mastery]
 	local rank = MasteryMenu.MasteryData.Masteries[mastery].Rank
+	if Vars.LeaderDebugMode then
+		rank = Mastery.Variables.MaxRank
+	end
+	
 	local index = 0
 	for i=1,Mastery.Variables.MaxRank,1 do
 		local rankText = "_Rank"..tostring(i)
@@ -659,13 +663,16 @@ local function InitMasteryMenu()
 end
 
 local function hasMinimumMasteryRankData(t,tag,min)
-	if Debug.MasteryTests then
+	if Debug.MasteryTests or Vars.LeaderDebugMode then
 		return true
 	end
-if t == nil then return false end
-return pcall(function()
-	return t.Masteries[tag].Rank >= min
-end)
+	if t == nil then
+		return false
+	end
+	local b,result = pcall(function()
+		return t.Masteries[tag].Rank >= min
+	end)
+	return result == true
 end
 
 local function getRankTooltip(data, i)
@@ -706,6 +713,12 @@ local function BuildMenuEntries(ui)
 			-- 	rank = 4
 			-- 	xp = xpMax
 		-- end
+		if Vars.LeaderDebugMode then
+			rank = Mastery.Variables.MaxRank
+		end
+		if rank >= Mastery.Variables.MaxRank then
+			xp = xpMax
+		end
 		local canShowRank = MasteryMenu.RankVisibility == VisibilityMode.ShowAll or rank > 0
 		if not canShowRank then
 			if MasteryMenu.RankVisibility == VisibilityMode.ShowIfNotZero and xp > 0 then
