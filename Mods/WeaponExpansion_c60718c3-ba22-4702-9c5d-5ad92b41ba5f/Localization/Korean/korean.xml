@@ -159,6 +159,7 @@
 	<content contentuid="h0ee72b7cg5a84g4efcgb8e2g8a02113196e6">&lt;font color=&apos;#9BF0FF&apos;&gt;Targets hit become weak to your staff&apos;s element, gaining [Special:LLWEAPONEX_WeaponElementalWeakness] for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h0f0aca8cg237bg4696gb195gbd43e7378fd4">Activate the &lt;font color=&apos;#4197e2&apos;&gt;Ice Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Applies &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; to enemies hit for 1 turn. Enemies already &lt;font color=&apos;#4197e2&apos;&gt;Chilled&lt;/font&gt; have a 20% chance to become &lt;font color=&apos;#73f6ff&apos;&gt;Frozen&lt;/font&gt;.</content>
 	<content contentuid="h0f116f0egb218g461bg8c88g206730e4e093">Placeholder</content>
+	<content contentuid="h0f4c3d9fgf39fg49b8gbf42g3fcb4e3543c5">&lt;font color=&apos;#99FF22&apos;&gt;[1] is in a Still Stance ([2]).&lt;/font&gt;</content>
 	<content contentuid="h0f6a5e9ag0dd9g4b14g90e2gd200af46dd99">Immolation Bonus II</content>
 	<content contentuid="h0f72bec6g0ff4g4af9gaa76ga90f7ec31aab">Throwable</content>
 	<content contentuid="h0f83aa9ag475bg4ddfgb546gbb83d237b44e">Spin an additional 1-3 times, dealing reduced damage each spin.</content>
@@ -693,7 +694,7 @@
 	<content contentuid="h478d282egda0ag4900g9771gdead5d66b1b7">Character&apos;s next action is reduced by [1] AP.</content>
 	<content contentuid="h4795ea48g3ffbg49e2ga99fgc51b65b7bac4">Journeyman Axefighter</content>
 	<content contentuid="h479e97b9g6dc3g428egb6e4g4fdbeb1592b4">Weapon Expansion - Quest Items</content>
-	<content contentuid="h47ab96e6gdce0g4fd6g9b20gedc0b7f491ec">&lt;icon id=&apos;Target_CripplingBlow&apos;/&gt;Targets hit by [Key:Target_CripplingBlow_DisplayName] gain a -20% damage debuff until their turn ends. You deal 10% more damage against them until your turn ends.</content>
+	<content contentuid="h47ab96e6gdce0g4fd6g9b20gedc0b7f491ec">&lt;icon id=&apos;Target_CripplingBlow&apos;/&gt;Targets hit by [Key:Target_CripplingBlow_DisplayName] gain a damage debuff until their turn ends. You deal more damage against them until your turn ends.</content>
 	<content contentuid="h47c00b1cg79b5g4ee7gbe3fg25c58809a3ef">No Masteries Learned</content>
 	<content contentuid="h47d73bfcg16eag4504g83c0ge7b9c0048f13">*Ask to see the trader&apos;s goods.*</content>
 	<content contentuid="h4806c4d0gb9d3g4b2cg853fg79253e92c615">Water Rune</content>
@@ -767,6 +768,7 @@
 	<content contentuid="h4f3c9483g3718g45f9gacfaga827e3a4972c">A sickle designed for throwing.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Looks useless as a weapon.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Throw it at an enemy instead!&lt;/font&gt;</content>
 	<content contentuid="h4f4ae650gdac1g4f73g8b0bg00726f3e3c3b">&lt;font color=&apos;#FD8826&apos;&gt;Firearm Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h4f4e3dcdg3c78g4b3ag9193g7bd2436282ea">Tanto</content>
+	<content contentuid="h4fb6ad43g3d52g43ccgb12eg93d2b25b6100">Balance Shift</content>
 	<content contentuid="h5006a424g3d59g4356-baa7g26110b276aab">Runic Knight</content>
 	<content contentuid="h501a08ddg508bg4542g9008geddce73365d8">Runic Blade - Apply rune effects on attack</content>
 	<content contentuid="h5022b186gbe5eg47a3gb925g414b46a98a08">Cushion Force</content>
@@ -797,7 +799,7 @@
 	<content contentuid="h51c53ccdg8baag4866gb2dbgb3b649049c2d">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="h51f8a88dgd660g4f5agbcffge1d80e2494a1">Shield Prison Bonus</content>
 	<content contentuid="h51fd13d2gcfeag418ag83ecg3e32ec98126b">Character has increased armor from a combat shield.</content>
-	<content contentuid="h52408aa9gab17g47c9g91b2g9c130cb33443">&lt;font color=&apos;#FF6624&apos;&gt;Targets hit deal &lt;font color=&apos;#FF0000&apos;&gt;[1]% less damage&lt;/font&gt; until their turn ends, while you deal &lt;font color=&apos;#33FF00&apos;&gt;[2]% more damage to them&lt;/font&gt; until your turn ends.&lt;/font&gt;</content>
+	<content contentuid="h52408aa9gab17g47c9g91b2g9c130cb33443">&lt;font color=&apos;#FF6624&apos;&gt;Targets hit deal &lt;font color=&apos;#FF0000&apos;&gt;[Stats:Stats_LLWEAPONEX_MB_Sword_BalanceShift:DamageBoost]% less damage&lt;/font&gt; until their turn ends, while you deal &lt;font color=&apos;#33FF00&apos;&gt;[ExtraData:LLWEAPONEX_MB_Sword_BalanceShiftDamageBoost]% more damage to them&lt;/font&gt; until your turn ends.&lt;/font&gt;</content>
 	<content contentuid="h5262f340g9ae1g4659gbff9ge7ffa48745f0">Displacement Charge</content>
 	<content contentuid="h5264ef62gdc22g401fg8b62g303379cd7693">Wooden Katana</content>
 	<content contentuid="h5266cde0g6ce8g45e1gbab6g2ca4b3fbb101">Activate &lt;font color=&apos;#fe6e27&apos;&gt;Fire Rune&lt;/font&gt;</content>
@@ -852,6 +854,7 @@
 	<content contentuid="h57f6c5dcg34d5g4144g8e78g0bd2d0d164f6">&lt;font color=&apos;#AA895B&apos;&gt;Flask of Earth Weakness&lt;/font&gt;</content>
 	<content contentuid="h57fe3569g0a44g4321g98b5g9aec8d3d24a9">Air Rune</content>
 	<content contentuid="h580f2857g0a22g417cg80begc399154191cc">Restrict the total number of remote changes that can detonate at once. If disabled, you can blow up everything in an inventory at once (not recommended for balance).</content>
+	<content contentuid="h58305f11g0acfg4980g84b7gf76bb053fab5">Balance Shift</content>
 	<content contentuid="h583510a1gf1feg4755g9a22g0a897d282baf">&lt;font color=&apos;#72EE34&apos;&gt;Bow Mastery I&lt;/font&gt;</content>
 	<content contentuid="h58a35a15gc595g4dcdga354ga8348f3add50">Eviscerating Estoc</content>
 	<content contentuid="h58ada9c4g3932g43f3g9f2dg4972e1dfad4b">Electric Bullets</content>
@@ -1169,7 +1172,7 @@
 	<content contentuid="h76bcf828gaeb5g4329ga650ge7b2bebd87c1">Character is immune to being directly Shocked by a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.</content>
 	<content contentuid="h76c6f571gf887g40d9g884ag081f3ac052dc">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery II&lt;/font&gt;</content>
 	<content contentuid="h76e869b4gae45g47c6g8529gf55e8b414d5e">Weapon Expansion - Armor</content>
-	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike;LLWEAPONEX_MASTERYBONUS_VULNERABLE&apos; type=&apos;1;2&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] to targets hit. [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Savage_DisplayName;LLWEAPONEX_MB_Axe_Savage&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Savage]</content>
+	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike;LLWEAPONEX_MASTERYBONUS_VULNERABLE&apos; type=&apos;1;2&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] to targets hit. [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.&lt;icon type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Savage]</content>
 	<content contentuid="h778419bdg900eg4b6egb376g652371ca7538">A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers</content>
 	<content contentuid="h7784b453g91ceg4c49g80cfg2d67bd2869fb">&lt;font color=&apos;#999999&apos;&gt;Oiled Mini-Bolts&lt;/font&gt;</content>
 	<content contentuid="h77cc8da4g0275g49fdgab2ag7b8383f38d48">Chaos Edge</content>
@@ -1735,7 +1738,7 @@
 	<content contentuid="hb22c57efg4b49g4c61g8ebfg2534587f2c03">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb2347eefgdc6ag4ab1g82a4g21139b4a7917">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery V&lt;/font&gt;</content>
 	<content contentuid="hb253b8ddgba7dg4f42g9426gc62332e8ebca">&lt;font color=&apos;#99AACC&apos;&gt;Deep knowledge of sacred texts allows [Key:Target_Bless_DisplayName] to deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage] to enemy Undead.&lt;/font&gt;</content>
-	<content contentuid="hb275dc8eg9d9dg4ba9g8c76g3f9e4f447388">&lt;icon id=&apos;Target_Flurry&apos;/&gt;Each hit with [Key:Target_Flurry_DisplayName] cleaves in a small cone.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Stalker_DisplayName,LLWEAPONEX_MB_Axe_Stalker&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Stalker]</content>
+	<content contentuid="hb275dc8eg9d9dg4ba9g8c76g3f9e4f447388">&lt;icon id=&apos;Target_Flurry&apos;/&gt;Each hit with [Key:Target_Flurry_DisplayName] cleaves in a small cone.&lt;icon type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Stalker]</content>
 	<content contentuid="hb2773ad0g3c62g4ba3gbc63gb215e6b9e0f7">Soulcursed Ebon Skewer</content>
 	<content contentuid="hb28cf019g6f7dg4a3fg9f19gf8721bd23f46">An old blindfold, said to once belong to a monk in a distance land.&lt;br&gt;By choosing to cloak the perceived world in darkness, the monk found her inner strength grow.</content>
 	<content contentuid="hb29bcef2g2085g45acg9401g697bd7fc43a5">Poison Weakness</content>
@@ -2417,6 +2420,7 @@
 	<content contentuid="hfabfbc56g0c4dg4987g9bf9gd96a83e9a2f7">An explosive mine modified for remote detonation.&lt;br.Handle with care!</content>
 	<content contentuid="hfad1780dgc1e6g4633ga0b5g774e05c537c4">Tattoos of Godly Strength</content>
 	<content contentuid="hfb07e83dg1d37g4d1ega2d7g869c8fdeab17">Throw Poison Gas Charge</content>
+	<content contentuid="hfb2810f7g920cg4e86g8cd2g8b8421c06e97">A crippling blow from a sword has reduced damage done.</content>
 	<content contentuid="hfb2ca138gad5fg44a2gbfccge0367ad3140d">Character is deflecting projectiles.</content>
 	<content contentuid="hfb6a8f97g3ff7g4546gb956gfebacf97fef3">*[CLOTH ARMOR] Click on the button labeled &apos;Cloth Armor&apos;.*</content>
 	<content contentuid="hfb808cdcg1b90g4842g96f4ga9cdcc32a526">Tough Metal Pipe</content>
