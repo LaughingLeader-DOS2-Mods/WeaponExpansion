@@ -1,4 +1,4 @@
-package
+package LS_Symbols
 {
 	import LS_Classes.controllerContainer;
 	

@@ -12,6 +12,7 @@ package masteryMenu
 	import flash.utils.Timer;
 	import flash.geom.Point;
 	import desc.DescriptionList;
+	import LS_Symbols.buttonHintBar;
 	
 	public dynamic class masteryMenu_Main extends MovieClip
 	{
@@ -59,7 +60,7 @@ package masteryMenu
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function masteryListInit() : *
+		public function masteryListInit() : void
 		{
 			this.masteryList = new scrollList();
 			this.masteryList.setFrame(this.scrollPaneW,this.scrollPaneH);
@@ -110,7 +111,7 @@ package masteryMenu
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
 		}
 		
-		public function onLoaded(e:Event) : *
+		public function onLoaded(e:Event) : void
 		{
 			ExternalInterface.call("masteryMenuLoaded");
 		}
@@ -125,7 +126,7 @@ package masteryMenu
 			this.descriptionList.mouseWheelEnabled = false;
 		}
 		
-		public function resetTextScrollbar() : *
+		public function resetTextScrollbar() : void
 		{
 			this.descriptionList.m_scrollbar_mc.scrollTo(0,false);
 			this.descriptionList.resetScroll();
@@ -133,7 +134,7 @@ package masteryMenu
 			this.descriptionList.checkScrollBar();
 		}
 		
-		public function startScrollText(up:Boolean, increment:Number) : *
+		public function startScrollText(up:Boolean, increment:Number) : void
 		{
 			if(up)
 			{
@@ -145,17 +146,17 @@ package masteryMenu
 			}
 		}
 		
-		public function stopScrollText() : *
+		public function stopScrollText() : void
 		{
 			this.descriptionList.m_scrollbar_mc.stopAutoScroll();
 		}
 		
-		public function setTitle(param1:String) : *
+		public function setTitle(str:String) : void
 		{
-			this.title_txt.htmlText = param1.toUpperCase();
+			this.title_txt.htmlText = str.toUpperCase();
 		}
 		
-		public function setEmptyListText(title:String, description:String) : *
+		public function setEmptyListText(title:String, description:String) : void
 		{
 			emptyListTitle = title;
 			emptyListDescription = description;
@@ -167,14 +168,14 @@ package masteryMenu
 			}
 		}
 		
-		public function setButtonText(param1:String) : *
+		public function setButtonText(str:String) : void
 		{
-			this.accept_mc.text_txt.htmlText = param1;
+			this.accept_mc.text_txt.htmlText = str;
 			this.accept_mc.setButtonType(2);
 			this.accept_mc.setButtonEvent("requestCloseUI");
 		}
 
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : *
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
 		{
 			noMasteries_mc.visible = false;
 
@@ -197,7 +198,7 @@ package masteryMenu
 			this.masteryList.selectByListID(0);
 		}
 
-		public function setExperienceBarTooltip(listId:Number, text:String) : *
+		public function setExperienceBarTooltip(listId:Number, text:String) : void
 		{
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
 			if(masteryMC != null)
@@ -206,7 +207,7 @@ package masteryMenu
 			}
 		}
 
-		public function setRankTooltipText(listId:Number, rank:int, text:String) : *
+		public function setRankTooltipText(listId:Number, rank:int, text:String) : void
 		{
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
 			if(masteryMC != null)
@@ -215,7 +216,7 @@ package masteryMenu
 			}
 		}
 
-		public function positionRankNodes(listId:Number, currentRank:int) : *
+		public function positionRankNodes(listId:Number, currentRank:int) : void
 		{
 			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
 			if(masteryMC != null)
@@ -224,7 +225,7 @@ package masteryMenu
 			}
 		}
 		
-		public function resetList() : *
+		public function resetList() : void
 		{
 			this.masteryList.clearElements();
 			this.name_txt.htmlText = this.emptyListTitle;
@@ -237,15 +238,15 @@ package masteryMenu
 			//textHelpers.setFormattedText(this.name_txt, this.emptyListTitle);
 		}
 
-		public function showControllerHints(param1:Boolean) : *
+		public function showControllerHints(visible:Boolean) : void
 		{
-			this.m_isController = param1;
+			this.m_isController = visible;
 			this.buttonHintBar_mc.centerButtons = true;
-			this.buttonHintBar_mc.visible = param1;
-			this.accept_mc.visible = !param1;
-			this.close_btn.visible = !param1;
-			this.btn_bg.setController(param1);
-			this.masteryList.m_allowKeepIntoView = param1;
+			this.buttonHintBar_mc.visible = visible;
+			this.accept_mc.visible = !visible;
+			this.close_btn.visible = !visible;
+			this.btn_bg.setController(visible);
+			this.masteryList.m_allowKeepIntoView = visible;
 		}
 		
 		public function adjustMainScroll() : void
@@ -266,36 +267,36 @@ package masteryMenu
 			}
 		}
 		
-		public function previous(byAmount:int = 1) : *
+		public function previous(byAmount:int = 1) : void
 		{
 			this.masteryList.previous(byAmount);
 			updateSelection();
 		}
 		
-		public function next(byAmount:int = 1) : *
+		public function next(byAmount:int = 1) : void
 		{
 			this.masteryList.next(byAmount);
 			updateSelection();
 		}
 
-		public function top() : *
+		public function top() : void
 		{
 			this.masteryList.selectFirstVisible();
 			updateSelection();
 		}
 
-		public function bottom() : *
+		public function bottom() : void
 		{
 			this.masteryList.selectLastElement();
 			updateSelection();
 		}
 		
-		public function onSelectionChanged() : *
+		public function onSelectionChanged() : void
 		{
 			//var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
 		}
 		
-		public function select(id:Number, instant:Boolean = false) : *
+		public function select(id:Number, instant:Boolean = false) : void
 		{
 			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
 			var nextMC:MasteryEntry = this.masteryList.getElement(id) as MasteryEntry;
@@ -313,7 +314,7 @@ package masteryMenu
 			}
 		}
 
-		public function selectEntry(nextMC:MasteryEntry, instant:Boolean = false) : *
+		public function selectEntry(nextMC:MasteryEntry, instant:Boolean = false) : void
 		{
 			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
 			if(currentMC != nextMC)
@@ -342,7 +343,7 @@ package masteryMenu
 		public var mousePosX:Number;
 		public var mousePosY:Number;
 
-		public function windowUp(param1:MouseEvent) : *
+		public function windowUp(e:MouseEvent) : void
 		{
 			if(this.isDragging)
 			{
@@ -350,7 +351,7 @@ package masteryMenu
 			}
 		}
 
-		public function dragInit(e:MouseEvent) : *
+		public function dragInit(e:MouseEvent) : void
 		{
 			ExternalInterface.call("UIAssert","[WeaponExpansion] dragInit");
 			this.windowDragStarted = false;
@@ -360,7 +361,7 @@ package masteryMenu
 			stage.addEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
 		}
 
-		public function dragMoveWindow(e:MouseEvent) : *
+		public function dragMoveWindow(e:MouseEvent) : void
 		{
 			ExternalInterface.call("UIAssert","[WeaponExpansion] dragMoveWindow");
 			if(this.dragStartMP.x + this.startDragDiff > stage.mouseX || this.dragStartMP.y + this.startDragDiff > stage.mouseY || this.dragStartMP.x - this.startDragDiff < stage.mouseX || this.dragStartMP.y - this.startDragDiff < stage.mouseY)
@@ -372,7 +373,7 @@ package masteryMenu
 			}
 		}
 
-		public function stopDragWindow(e:MouseEvent) : *
+		public function stopDragWindow(e:MouseEvent) : void
 		{
 			ExternalInterface.call("UIAssert","[WeaponExpansion] stopDragWindow");
 			if(this.windowDragStarted)
@@ -387,7 +388,7 @@ package masteryMenu
 			this.windowDragStarted = false;
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
 			this.masteryCount = 0;
 			this.m_isController = false;

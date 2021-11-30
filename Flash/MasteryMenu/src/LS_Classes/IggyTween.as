@@ -1,4 +1,4 @@
-package
+package LS_Classes
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -8,42 +8,23 @@ package
 	
 	public class IggyTween extends EventDispatcher
 	{
-		
 		private static var _tweenObjects:Dictionary = new Dictionary(true);
-		 
-		
 		public var begin:Number;
-		
 		public var duration:Number;
-		
 		public var finish:Number;
-		
 		public var func:Function;
-		
 		public var isPlaying:Boolean;
-		
 		public var looping:Boolean;
-		
 		public var position:Number;
-		
 		public var useSeconds:Boolean;
-		
 		public var motionFinishCallback:Function = null;
-		
-		private var _time;
-		
-		private var _beginTime;
-		
-		private var _cachedDelta;
-		
+		private var _time:Number;
+		private var _beginTime:Number;
+		private var _cachedDelta:Number;
 		private var _sprite:Sprite;
-		
 		private var _manageCollisions:Boolean;
-		
 		private var _useWeakRef:Boolean;
-		
 		private var _obj:Object;
-		
 		private var _prop:String;
 		
 		public function IggyTween(param1:Object, param2:String, param3:Function, param4:Number, param5:Number, param6:Number, param7:Boolean = false, param8:Boolean = false, param9:Boolean = false)
@@ -159,17 +140,17 @@ package
 		
 		public function set time(param1:Number) : *
 		{
-			var _loc2_:* = undefined;
+			var val2:* = undefined;
 			if(param1 <= this.duration)
 			{
 				if(param1 < 0)
 				{
 					param1 = 0;
 				}
-				_loc2_ = this.func(param1,this.begin,this._cachedDelta,this.duration);
+				val2 = this.func(param1,this.begin,this._cachedDelta,this.duration);
 				this._time = param1;
-				this.position = _loc2_;
-				this._obj[this._prop] = _loc2_;
+				this.position = val2;
+				this._obj[this._prop] = val2;
 			}
 			else if(this.looping)
 			{

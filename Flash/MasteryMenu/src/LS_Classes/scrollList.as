@@ -8,34 +8,19 @@ package LS_Classes
 	
 	public class scrollList extends listDisplay
 	{
-		 
-		
 		public var m_scrollbar_mc:scrollbar;
-		
 		public var m_bottomAligned:Boolean = false;
-		
 		public var m_allowAutoScroll:Boolean = true;
-		
 		private var m_SBSpacing:Number = 10;
-		
 		private var m_mouseWheelWhenOverEnabled:Boolean = false;
-		
 		private var m_mouseWheelEnabled:Boolean = false;
-		
 		private var m_ScrollHeight:Number = 0;
-		
 		public var m_allowKeepIntoView:Boolean = true;
-		
 		public var m_TextGlowOffset:Number = 3;
-		
 		private var m_dragAutoScroll:Boolean = false;
-		
 		public var m_dragAutoScrollDistance:Number = 100;
-		
 		public var m_dragAutoScrollMod:Number = 0.2;
-		
 		private var m_bgTile1_mc:MovieClip = null;
-		
 		private var m_bgTile2_mc:MovieClip = null;
 		
 		public function scrollList(param1:String = "down_id", param2:String = "up_id", param3:String = "handle_id", param4:String = "scrollBg_id", param5:String = "", param6:String = "")
@@ -263,13 +248,12 @@ package LS_Classes
 			{
 				return super.selectByOffset(param1);
 			}
-			param1 = param1 + TOP_SPACING;
-			param1 = param1 + this.m_scrollbar_mc.scrolledY;
+			param1 += TOP_SPACING;
+			param1 += this.m_scrollbar_mc.scrolledY;
 			val4 = 0;
 			while(val4 < content_array.length)
 			{
-				val5 = content_array[val4];
-				if(val5 && val5.visible)
+				if((val5 = content_array[val4]) && val5.visible)
 				{
 					val6 = getElementHeight(val5);
 					if(val5.y <= param1 && val5.y + val6 > param1)
@@ -366,7 +350,7 @@ package LS_Classes
 				content_array[val2].x = SIDE_SPACING;
 				if(content_array[val2].visible)
 				{
-					val1 = val1 + (getElementHeight(content_array[val2]) + EL_SPACING);
+					val1 += getElementHeight(content_array[val2]) + EL_SPACING;
 				}
 				val2++;
 			}

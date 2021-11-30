@@ -11,60 +11,32 @@ package LS_Classes
 	
 	public class listDisplay extends MovieClip
 	{
-		 
-		
 		public var content_array:Array;
-		
 		public var scrollHit_mc:MovieClip;
-		
 		public var container_mc:MovieClip;
-		
 		public var containerBG_mc:MovieClip;
-		
 		public var containerContent_mc:MovieClip;
-		
 		public var EL_SPACING:Number = 4;
-		
 		public var m_topSpacing:Number = 0;
-		
 		public var m_sideSpacing:Number = 0;
-		
 		public var m_cyclic:Boolean = false;
-		
 		public var m_customElementWidth:Number = -1;
-		
 		public var m_customElementHeight:Number = -1;
-		
 		public var m_forceDepthReorder:Boolean = false;
-		
 		public var m_CurrentSelection:MovieClip = null;
-		
 		public var idInc:uint = 0;
-		
 		protected var m_hasScrollRect:Boolean = false;
-		
 		public var OnSelectionChanged:Function = null;
-		
 		public var m_AlphaTweenFunc:Function;
-		
 		public var m_PositionTweenFunc:Function;
-		
 		protected var m_tweeningMcs:uint = 0;
-		
 		private var m_visibleLength:Number = -1;
-		
 		protected var m_NeedsSorting:Boolean = false;
-		
 		protected var m_SortOnFieldName:Object = null;
-		
 		protected var m_SortOnOptions:Object = null;
-		
 		protected var m_positionInvisibleElements:Boolean = false;
-		
 		protected var m_height:Number = -1;
-		
 		protected var m_width:Number = -1;
-		
 		public var m_myInterlinie:Number = 0;
 		
 		public function listDisplay()
@@ -300,7 +272,7 @@ package LS_Classes
 			var val5:MovieClip = null;
 			var val6:Number = NaN;
 			var val3:Boolean = false;
-			param1 = param1 + this.TOP_SPACING;
+			param1 += this.TOP_SPACING;
 			var val4:uint = 0;
 			while(val4 < this.content_array.length)
 			{
@@ -403,14 +375,14 @@ package LS_Classes
 					{
 						this.content_array[val2].INTUpd4PosEl();
 					}
-					val1 = val1 + (this.getElementHeight(this.content_array[val2]) + this.EL_SPACING);
+					val1 += this.getElementHeight(this.content_array[val2]) + this.EL_SPACING;
 					if(this.m_sideSpacing != 0)
 					{
 						this.content_array[val2].x = this.SIDE_SPACING;
 					}
 					if(this.content_array[val2].visible)
 					{
-						this.m_visibleLength++;
+						++this.m_visibleLength;
 					}
 				}
 				val2++;
@@ -459,7 +431,7 @@ package LS_Classes
 			{
 				if(val3 && val3.visible)
 				{
-					val1 = val1 + (this.getElementHeight(val3) + val2);
+					val1 += this.getElementHeight(val3) + val2;
 					val2 = this.EL_SPACING;
 				}
 			}
@@ -494,9 +466,8 @@ package LS_Classes
 			var val5:uint = 0;
 			while(val5 < this.content_array.length)
 			{
-				this.m_tweeningMcs++;
-				val6 = this.content_array[val5];
-				val6.tweening = true;
+				++this.m_tweeningMcs;
+				(val6 = this.content_array[val5]).tweening = true;
 				val6.tweenToY = val3;
 				this.stopElementMCPosTweens(val6);
 				val6.list_tweenY = new larTween(val6,"y",this.m_PositionTweenFunc,NaN,val3,param1,this.removeTweenState,val6.list_id);
@@ -504,7 +475,7 @@ package LS_Classes
 				{
 					val6.list_tweenX = new larTween(val6,"x",this.m_PositionTweenFunc,NaN,this.m_sideSpacing,param1);
 				}
-				val3 = val3 + (this.getElementHeight(val6) + this.EL_SPACING);
+				val3 += this.getElementHeight(val6) + this.EL_SPACING;
 				val5++;
 			}
 		}
@@ -512,7 +483,7 @@ package LS_Classes
 		protected function removeTweenState(param1:uint) : *
 		{
 			var val2:MovieClip = this.getElementByNumber("list_id",param1);
-			this.m_tweeningMcs--;
+			--this.m_tweeningMcs;
 			if(this.m_tweeningMcs == 0)
 			{
 				dispatchEvent(new Event("listMoveStop"));
@@ -560,24 +531,24 @@ package LS_Classes
 			}
 		}
 		
-		public function addElement(param1:DisplayObject, param2:Boolean = true, param3:Boolean = true) : *
+		public function addElement(obj:DisplayObject, reposition:Boolean = true, isSelectable:Boolean = true) : *
 		{
-			var val4:MovieClip = param1 as MovieClip;
-			this.containerContent_mc.addChild(param1);
-			val4.list_pos = this.content_array.length;
-			this.content_array.push(val4);
-			param1.addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
-			val4.list_id = this.idInc++;
-			if(val4.deselectElement)
+			var mc:MovieClip = obj as MovieClip;
+			this.containerContent_mc.addChild(obj);
+			mc.list_pos = this.content_array.length;
+			this.content_array.push(mc);
+			obj.addEventListener(Event.REMOVED_FROM_STAGE,this.onRemovedFromStage);
+			mc.list_id = this.idInc++;
+			if(mc.deselectElement)
 			{
-				val4.deselectElement();
+				mc.deselectElement();
 			}
-			val4.selectable = param3;
-			val4.m_filteredObject = false;
+			mc.selectable = isSelectable;
+			mc.m_filteredObject = false;
 			this.m_NeedsSorting = true;
 			this.reOrderDepths();
-			val4.ownerList = this;
-			if(param2)
+			mc.ownerList = this;
+			if(reposition)
 			{
 				this.positionElements();
 			}
@@ -585,14 +556,14 @@ package LS_Classes
 		
 		public function addElementOnPosition(param1:DisplayObject, param2:uint, param3:Boolean = true, param4:Boolean = true) : *
 		{
-			var val5:MovieClip = param1 as MovieClip;
-			if(val5.deselectElement)
+			var val5:MovieClip;
+			if((val5 = param1 as MovieClip).deselectElement)
 			{
 				val5.deselectElement();
 			}
 			this.containerContent_mc.addChild(param1);
 			val5.list_id = this.idInc;
-			this.idInc++;
+			++this.idInc;
 			val5.selectable = param4;
 			this.content_array.splice(param2,0,val5);
 			this.m_NeedsSorting = true;
@@ -732,7 +703,7 @@ package LS_Classes
 			var val7:MovieClip = null;
 			if(param1 >= 0 && param1 < this.content_array.length)
 			{
-				val5 = this.content_array[param1];
+				val5 = this.content_array[param1]
 				if(val5)
 				{
 					this.stopElementMCTweens(val5);
@@ -796,17 +767,17 @@ package LS_Classes
 		
 		public function clearElements() : *
 		{
-			var val2:MovieClip = null;
-			var val1:uint = 0;
-			while(val1 < this.content_array.length)
+			var mc:MovieClip = null;
+			var i:uint = 0;
+			while(i < this.content_array.length)
 			{
-				if(this.content_array[val1])
+				if(this.content_array[i])
 				{
-					val2 = this.content_array[val1];
-					this.stopElementMCTweens(val2);
-					this.containerContent_mc.removeChild(this.content_array[val1]);
+					mc = this.content_array[i];
+					this.stopElementMCTweens(mc);
+					this.containerContent_mc.removeChild(this.content_array[i]);
 				}
-				val1++;
+				i++;
 			}
 			this.content_array = new Array();
 			this.idInc = 0;
@@ -852,7 +823,7 @@ package LS_Classes
 			return this.content_array.length;
 		}
 		
-		public function next(byAmount:int=1) : *
+		public function next() : *
 		{
 			var val1:Number = NaN;
 			if(this.visibleLength > 1)
@@ -864,16 +835,16 @@ package LS_Classes
 				}
 				if(!this.m_CurrentSelection || this.m_CurrentSelection.INTSelectNext == null || !this.m_CurrentSelection.INTSelectNext())
 				{
-					this.select(val1 + byAmount,false,true);
+					this.select(val1 + 1,false,true);
 				}
 			}
 		}
 		
-		public function previous(byAmount:int=1) : *
+		public function previous() : *
 		{
 			if(this.visibleLength > 1 && (!this.m_CurrentSelection || this.m_CurrentSelection.INTSelectPrevious == null || !this.m_CurrentSelection.INTSelectPrevious()))
 			{
-				this.select(this.currentSelection - byAmount,false,false);
+				this.select(this.currentSelection - 1,false,false);
 			}
 		}
 		
@@ -1288,6 +1259,26 @@ package LS_Classes
 			{
 				this.m_CurrentSelection.onClick();
 			}
+		}
+		
+		// LeaderLib Addition
+		public function isOverlappingPosition(targetX:Number, targetY:Number, shapeTest:Boolean=true) : *
+		{
+			if(this.content_array && this.content_array.length > 1)
+			{
+				var index:uint = 0;
+				var obj:MovieClip = null;
+				while(index < this.content_array.length)
+				{
+					obj = this.content_array[index];
+					if(obj != null && obj.hitTestPoint(targetX, targetY, shapeTest))
+					{
+						return true;
+					}
+					index++;
+				}
+			}
+			return false;
 		}
 	}
 }

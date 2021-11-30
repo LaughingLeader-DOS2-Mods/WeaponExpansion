@@ -24,7 +24,7 @@ package desc
 		}
 
 		//Deprecated
-		public function createIcon_symbol(w:int=64,h:int=64) : *
+		public function createIcon_symbol(w:int=64,h:int=64) : void
 		{
 			if (this.iconType >= 2)
 			{
@@ -46,7 +46,7 @@ package desc
 			this.icon_mc.height = h;
 		}
 
-		public function createIcon(w:int=64,h:int=64) : *
+		public function createIcon(w:int=64,h:int=64) : void
 		{
 			if (this.iconType == 2)
 			{
@@ -70,7 +70,7 @@ package desc
 			this.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
 		}
 
-		public function setAltBackground() : *
+		public function setAltBackground() : void
 		{
 			this.statusbg_mc = new StatusBackgroundAlt();
 			this.statusbg_mc.width = 51;
@@ -80,7 +80,7 @@ package desc
 			icon_mc.y = 5.5;
 		}
 
-		public function onOver(e:MouseEvent) : *
+		public function onOver(e:MouseEvent) : void
 		{
 			if (!this.hasTooltip)
 			{
@@ -90,7 +90,7 @@ package desc
 			}
 		}
 
-		public function onOut(e:MouseEvent) : *
+		public function onOut(e:MouseEvent) : void
 		{
 			if (this.hasTooltip)
 			{
@@ -100,7 +100,7 @@ package desc
 			}
 		}
 
-		internal function frame1() : *
+		internal function frame1() : void
 		{
 			stop();
 		}

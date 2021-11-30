@@ -1,4 +1,4 @@
-package
+package LS_Symbols
 {
 	import flash.display.MovieClip;
 	import flash.text.TextField;

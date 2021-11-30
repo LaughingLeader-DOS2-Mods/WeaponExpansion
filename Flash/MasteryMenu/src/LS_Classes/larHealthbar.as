@@ -7,9 +7,7 @@ package LS_Classes
 	
 	public class larHealthbar extends MovieClip
 	{
-		public var bg_mc:MovieClip;
-		
-		public var lightBG_mc:MovieClip;
+		 
 		
 		public var hBar_mc:MovieClip;
 		
@@ -38,9 +36,9 @@ package LS_Classes
 			this.hBar_mc.scaleX = this.hBar2_mc.scaleX = 0;
 		}
 		
-		public function set onComplete(callback:Function) : *
+		public function set onComplete(param1:Function) : *
 		{
-			this.m_FinishCallback = callback;
+			this.m_FinishCallback = param1;
 		}
 		
 		public function get onComplete() : Function
@@ -48,21 +46,17 @@ package LS_Classes
 			return this.m_FinishCallback;
 		}
 		
-		public function setBar(barPercentage:Number, animate:Boolean) : Boolean
+		public function setBar(param1:Number, param2:Boolean) : Boolean
 		{
-			var needsAnimating:Boolean = false;
+			var val3:Boolean = false;
 			this.stopHPTweens();
-			if(barPercentage > 1)
+			if(param1 > 1)
 			{
-				barPercentage = 1;
+				param1 = 1;
 			}
-			else if(barPercentage < 0)
+			if(param2)
 			{
-				barPercentage = 0;
-			}
-			if(animate)
-			{
-				this.percTemp = barPercentage;
+				this.percTemp = param1;
 				if(this.percHB < this.percTemp)
 				{
 					this.hBar2_mc.scaleX = this.percTemp;
@@ -77,15 +71,15 @@ package LS_Classes
 			}
 			else
 			{
-				this.hBar_mc.scaleX = barPercentage;
-				this.hBar2_mc.scaleX = barPercentage;
+				this.hBar_mc.scaleX = param1;
+				this.hBar2_mc.scaleX = param1;
 			}
-			if(this.percHB != barPercentage)
+			if(this.percHB != param1)
 			{
-				needsAnimating = true;
+				val3 = true;
 			}
-			this.percHB = barPercentage;
-			return needsAnimating;
+			this.percHB = param1;
+			return val3;
 		}
 		
 		public function stopHPTweens() : *
@@ -97,18 +91,18 @@ package LS_Classes
 			}
 		}
 		
-		public function setBarColour(setColor:uint) : *
+		public function setBarColour(param1:uint) : *
 		{
-			var colorTransform:ColorTransform = this.hBar_mc.transform.colorTransform;
-			colorTransform.color = setColor;
-			this.hBar_mc.transform.colorTransform = colorTransform;
-			var nextBarColor:Color = new Color();
-			nextBarColor.color = setColor;
-			nextBarColor = this.changeColour(nextBarColor,200);
-			this.m_BarColour = setColor;
-			var bar2ColorTransform:ColorTransform = this.hBar2_mc.transform.colorTransform;
-			bar2ColorTransform.color = nextBarColor.color;
-			this.hBar2_mc.transform.colorTransform = bar2ColorTransform;
+			var val2:ColorTransform = this.hBar_mc.transform.colorTransform;
+			val2.color = param1;
+			this.hBar_mc.transform.colorTransform = val2;
+			var val3:Color = new Color();
+			val3.color = param1;
+			val3 = this.changeColour(val3,200);
+			this.m_BarColour = param1;
+			var val4:ColorTransform = this.hBar2_mc.transform.colorTransform;
+			val4.color = val3.color;
+			this.hBar2_mc.transform.colorTransform = val4;
 		}
 		
 		public function get barColour() : Number
@@ -116,24 +110,24 @@ package LS_Classes
 			return this.m_BarColour;
 		}
 		
-		private function changeColour(color:Color, colorOffset:Number) : Color
+		private function changeColour(param1:Color, param2:Number) : Color
 		{
-			color.blueOffset = color.blueOffset + colorOffset;
-			color.redOffset = color.redOffset + colorOffset;
-			color.greenOffset = color.greenOffset + colorOffset;
-			if(color.blueOffset > 255)
+			param1.blueOffset = param1.blueOffset + param2;
+			param1.redOffset = param1.redOffset + param2;
+			param1.greenOffset = param1.greenOffset + param2;
+			if(param1.blueOffset > 255)
 			{
-				color.blueOffset = 255;
+				param1.blueOffset = 255;
 			}
-			if(color.greenOffset > 255)
+			if(param1.greenOffset > 255)
 			{
-				color.greenOffset = 255;
+				param1.greenOffset = 255;
 			}
-			if(color.redOffset > 255)
+			if(param1.redOffset > 255)
 			{
-				color.redOffset = 255;
+				param1.redOffset = 255;
 			}
-			return color;
+			return param1;
 		}
 	}
 }

@@ -43,7 +43,7 @@ package
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function onEventInit() : *
+		public function onEventInit() : void
 		{
 			ExternalInterface.call("registerAnchorId",this.anchorId);
 			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
@@ -51,12 +51,12 @@ package
 			this.masteryMenuMC.visible = false;
 		}
 
-		public function onEventResolution(width:Number, height:Number) : *
+		public function onEventResolution(width:Number, height:Number) : void
 		{
 
 		}
 
-		public function openMenu() : *
+		public function openMenu() : void
 		{
 			if (!this.masteryMenuMC.visible)
 			{
@@ -70,7 +70,7 @@ package
 			}
 		}
 
-		public function closeMenu(skipRequest:Boolean = false) : *
+		public function closeMenu(skipRequest:Boolean = false) : void
 		{
 			if (this.masteryMenuMC.visible)
 			{
@@ -89,7 +89,7 @@ package
 			}
 		}
 
-		public function toggleMenu() : *
+		public function toggleMenu() : void
 		{
 			if (this.masteryMenuMC.visible)
 			{
@@ -104,7 +104,7 @@ package
 		public var ctrlDown:Boolean = false;
 		public var shiftDown:Boolean = false;
 		
-		public function onEventUp(eventIndex:Number) : *
+		public function onEventUp(eventIndex:Number) : Boolean
 		{
 			var eventName:String = this.events[eventIndex];
 			var handled:Boolean = false;
@@ -148,7 +148,7 @@ package
 			return handled;
 		}
 		
-		public function onEventDown(eventIndex:Number) : *
+		public function onEventDown(eventIndex:Number) : Boolean
 		{
 			var handled:Boolean = false;
 			//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
@@ -225,63 +225,63 @@ package
 			return handled;
 		}
 
-		public function onEventTerminate(eventIndex:Number) : *
+		public function onEventTerminate(eventIndex:Number) : Boolean
 		{
 			return false;
 		}
 
-		public function setPlayerHandle() : *
+		public function setPlayerHandle() : void
 		{
 			Registry.CharacterHandle = characterHandle;
 			trace("Set Registry.CharacterHandle to", Registry.CharacterHandle, characterHandle)
 		}
 		
-		public function setMaxRank(maxRank:int) : *
+		public function setMaxRank(maxRank:int) : void
 		{
 			Registry.MaxRank = maxRank;
 		}
 		
-		public function setTitle(title:String) : *
+		public function setTitle(title:String) : void
 		{
 			this.masteryMenuMC.setTitle(title);
 		}
 		
-		public function setEmptyListText(title:String, description:String) : *
+		public function setEmptyListText(title:String, description:String) : void
 		{
 			this.masteryMenuMC.setEmptyListText(title, description);
 		}
 
-		public function setTooltipText(masteredText:String) : *
+		public function setTooltipText(masteredText:String) : void
 		{
 			Registry.MasteredText = masteredText;
 		}
 		
-		public function setButtonText(text:String) : *
+		public function setButtonText(text:String) : void
 		{
 			this.masteryMenuMC.setButtonText(text);
 		}
 		
-		public function showControllerHints(enabled:Boolean) : *
+		public function showControllerHints(enabled:Boolean) : void
 		{
 			this.masteryMenuMC.showControllerHints(enabled);
 		}
 		
-		public function addBtnHint(id:Number, iconId:Number, hintText:String) : *
+		public function addBtnHint(id:Number, iconId:Number, hintText:String) : void
 		{
 			this.masteryMenuMC.buttonHintBar_mc.addBtnHint(id,hintText,iconId);
 		}
 
-		public function resetList() : *
+		public function resetList() : void
 		{
 			this.masteryMenuMC.resetList();
 		}
 		
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : *
+		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
 		{
 			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,currentRank,barPercentage,isMastered);
 		}
 
-		public function buildDescription() : *
+		public function buildDescription() : void
 		{
 			var length:int = descriptionContent.length;
 			if (length > 0)
@@ -326,27 +326,27 @@ package
 			}
 		}
 
-		public function setRankNodePosition(rank:uint, barPercentage:Number) : *
+		public function setRankNodePosition(rank:uint, barPercentage:Number) : void
 		{
 			Registry.RankNodePositions[rank] = barPercentage
 		}
 
-		public function setExperienceBarTooltip(listId:Number, text:String) : *
+		public function setExperienceBarTooltip(listId:Number, text:String) : void
 		{
 			this.masteryMenuMC.setExperienceBarTooltip(listId, text);
 		}
 
-		public function setRankTooltipText(listId:Number, rank:int, text:String) : *
+		public function setRankTooltipText(listId:Number, rank:int, text:String) : void
 		{
 			this.masteryMenuMC.setRankTooltipText(listId, rank, text);
 		}
 		
-		public function selectMastery(id:Number, instant:Boolean = false) : *
+		public function selectMastery(id:Number, instant:Boolean = false) : void
 		{
 			this.masteryMenuMC.select(id,instant);
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
 			this.layout = "fixed";
 			this.alignment = "none";
