@@ -79,7 +79,7 @@ LLWEAPONEX_Staff_Rank1_Description	<icon id='Shout_Whirlwind'/>Targets hit by [K
 LLWEAPONEX_Staff_Rank2_Description	Placeholder	h4ed3af41ga151g4d30gb710gfb689330d954
 LLWEAPONEX_Staff_Rank3_Description	Placeholder	he25ddaccg579fg4d68g9c2eg461b951ce16c
 LLWEAPONEX_Staff_Rank4_Description	Placeholder	h0eb05ce2g741fg493eg9d45gbece19375c80
-LLWEAPONEX_Sword_Rank1_Description	<icon id='Target_CripplingBlow'/>Targets hit by [Key:Target_CripplingBlow_DisplayName] gain a -20% damage debuff until their turn ends. You deal 10% more damage against them until your turn ends.	h47ab96e6gdce0g4fd6g9b20gedc0b7f491ec
+LLWEAPONEX_Sword_Rank1_Description	<icon id='Target_CripplingBlow'/>Targets hit by [Key:Target_CripplingBlow_DisplayName] gain a damage debuff until their turn ends. You deal more damage against them until your turn ends.	h47ab96e6gdce0g4fd6g9b20gedc0b7f491ec
 LLWEAPONEX_Sword_Rank2_Description	Placeholder	hf89d0459g5f60g478bgb7c9g6691261a87fb
 LLWEAPONEX_Sword_Rank3_Description	Placeholder	h9223c105g347bg49b6g8dc5g07d38d8dbff9
 LLWEAPONEX_Sword_Rank4_Description	Placeholder	h4af955b5gb68ag48f4g8871ga62f335cfef4

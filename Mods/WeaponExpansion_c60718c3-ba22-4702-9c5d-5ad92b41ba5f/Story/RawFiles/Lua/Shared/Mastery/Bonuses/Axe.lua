@@ -21,9 +21,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 		if bHitObject and not isFromSkill and data.Damage > 0 then
 			if HasActiveStatus(source, "AOO") == 1 and ObjectIsCharacter(target.MyGuid) == 1 then
 				local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_AoOMaxDamageBonus", 50) * 0.01
-				local missingVitPerc = 0.0
-				missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
-				data:MultiplyDamage(1+(damageBonus * missingVitPerc))
+				if damageBonus > 0 then
+					local missingVitPerc = 0.0
+					missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
+					data:MultiplyDamage(1+(damageBonus * missingVitPerc))
+				end
 			end
 		end
 	end)
