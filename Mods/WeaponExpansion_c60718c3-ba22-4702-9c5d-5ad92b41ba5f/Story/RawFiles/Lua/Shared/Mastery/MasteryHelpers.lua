@@ -76,7 +76,7 @@ local function TryCheckMasteryRequirement(character, tag)
 				return true
 			else
 				if Ext.IsClient() then
-					return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
+					return (MasteryMenu.Variables.CurrentTooltip == "Skill" and MasteryMenu.Variables.SelectedMastery.Current == mastery) or GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
 				else
 					return GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
 				end

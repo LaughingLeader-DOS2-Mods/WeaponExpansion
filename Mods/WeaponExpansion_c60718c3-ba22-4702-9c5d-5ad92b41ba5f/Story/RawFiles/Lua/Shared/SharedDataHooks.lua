@@ -28,9 +28,9 @@ if Ext.IsClient() then
 	-- Checks for SharedData.RegionData need to happen here since this is after that data has been synced
 	RegisterListener("ClientDataSynced", function(modData, sharedData)
 		if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Client.Character.IsInCharacterCreation then
-			MasteryMenu.SetToggleButtonVisibility(false, false)
+			MasteryMenu.ToggleButton:SetVisible(false, false)
 		elseif SharedData.RegionData.LevelType == LEVELTYPE.GAME then
-			MasteryMenu.SetToggleButtonVisibility(true, false)
+			MasteryMenu.ToggleButton:SetVisible(true, false)
 		end
 	end)
 end

@@ -5,8 +5,6 @@ local VisibilityMode = {
 	ShowAll = "ShowAll",
 }
 
-local defaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data.UIFlags.OF_PlayerInput3 | Data.UIFlags.OF_PlayerInput4
-
 ---@class MasteryMenu
 ---@field Instance UIObject
 ---@field Root FlashMainTimeline
@@ -31,12 +29,21 @@ MasteryMenu = {
 		}
 	}
 }
+
+local function GetInstance()
+	local instance = Ext.GetUI(MasteryMenu.ID)
+	if not instance then
+		instance = MasteryMenu:Initialize()
+	end
+	return instance
+end
+
 setmetatable(MasteryMenu, {
 	__index = function(_,k)
 		if k == "Instance" then
-			return Ext.GetUI(MasteryMenu.ID)
+			return GetInstance()
 		elseif k == "Root" then
-			local ui = Ext.GetUI(MasteryMenu.ID)
+			local ui = GetInstance()
 			if ui then
 				return ui:GetRoot()
 			end
@@ -48,10 +55,47 @@ function MasteryMenu:SetMastery(mastery)
 	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
 	self.Variables.SelectedMastery.Current = mastery
 	self:BuildDescription(mastery)
+	local this = self.Root
+	if this then
+		this.selectMastery(mastery, true)
+	end
+end
+
+function MasteryMenu:BuildMasteryMenu(this)
+	this = this or self.Root
+	if this then
+		this.resetList()
+		this.setTitle(Text.MasteryMenu.Title.Value)
+		this.setButtonText(Text.MasteryMenu.CloseButton.Value)
+		this.controllerEnabled = Vars.ControllerEnabled
+		this.setEmptyListText(Text.MasteryMenu.NoMasteriesTitle.Value, Text.MasteryMenu.NoMasteriesDescription.Value)
+		this.setTooltipText(Text.MasteryMenu.MasteredTooltip.Value)
+		
+		this.setMaxRank(Mastery.Variables.MaxRank)
+		local xpMax = Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required
+		if xpMax <= 0 then
+			Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] Max mastery XP is (",xpMax,")! Is something configured wrong?")
+			xpMax = 12000
+		end
+		for i=1,Mastery.Variables.MaxRank do
+			local data = Mastery.Variables.RankVariables[i]
+			local barPercentage = 0
+			local xp = data.Required
+			barPercentage = (xp / xpMax)
+			this.setRankNodePosition(i, barPercentage)
+		end
+
+		if self.Variables.SelectedMastery.Current then
+			self:SetMastery(self.Variables.SelectedMastery.Current)
+		end
+	end
 end
 
 ---@param skipRequest boolean
 function MasteryMenu:Close(skipRequest)
+	if not self.Visible then
+		return true
+	end
 	if skipRequest == nil then
 		skipRequest = false
 	end
@@ -105,7 +149,6 @@ function MasteryMenu:Open(skipRequest)
 			local this = self.Root
 			if this then
 				self:BuildMasteryMenu(this)
-				this.selectMastery(self.Variables.SelectedMastery.Last or "", true)
 				this.openMenu()
 				self.Visible = true
 				self:CloseOtherPanels()
@@ -228,38 +271,14 @@ function MasteryMenu:RegisterListeners(instance)
 	end
 end
 
+local defaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data.UIFlags.OF_PlayerInput3 | Data.UIFlags.OF_PlayerInput4
+
 ---@private
 function MasteryMenu:Initialize()
-	local instance = self.Instance
-	if not instance then
-		instance = Ext.CreateUI(MasteryMenu.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer, defaultUIFlags)
-	end
-end
-
-function MasteryMenu:BuildMasteryMenu(this)
-	this = this or self.Root
-	if this then
-		this.resetList()
-		this.setTitle(Text.MasteryMenu.Title.Value)
-		this.setButtonText(Text.MasteryMenu.CloseButton.Value)
-		this.controllerEnabled = Vars.ControllerEnabled
-		this.setEmptyListText(Text.MasteryMenu.NoMasteriesTitle.Value, Text.MasteryMenu.NoMasteriesDescription.Value)
-		this.setTooltipText(Text.MasteryMenu.MasteredTooltip.Value)
-		
-		this.setMaxRank(Mastery.Variables.MaxRank)
-		local xpMax = Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required
-		if xpMax <= 0 then
-			Ext.PrintError("[WeaponExpansion:MasteryMenu.lua:MasteryMenu.InitializeMasteryMenu] Max mastery XP is (",xpMax,")! Is something configured wrong?")
-			xpMax = 12000
-		end
-		for i=1,Mastery.Variables.MaxRank do
-			local data = Mastery.Variables.RankVariables[i]
-			local barPercentage = 0
-			local xp = data.Required
-			barPercentage = (xp / xpMax)
-			this.setRankNodePosition(i, barPercentage)
-		end
-	end
+	local instance = Ext.CreateUI(MasteryMenu.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer, defaultUIFlags)
+	instance:Invoke("closeMenu", true)
+	self:RegisterListeners(instance)
+	return instance
 end
 
 local function HideMasteryMenu()
@@ -271,3 +290,35 @@ Ext.RegisterUITypeCall(Data.UIType.characterSheet, "hotbarBtnPressed", HideMaste
 Ext.RegisterUITypeCall(Data.UIType.characterSheet, "showUI", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.playerInfo, "charSel", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.hotBar, "hotbarBtnPressed", HideMasteryMenu)
+
+RegisterListener("BeforeLuaReset", function()
+	MasteryMenu:Close(true)
+	local instance = MasteryMenu.Instance
+	if instance then
+		instance:Destroy()
+	end
+end)
+
+---@type InputEventCallback
+Input.RegisterListener(function(eventName, pressed, id, inputMap, controllerEnabled)
+	if not MasteryMenu.Visible then
+		if controllerEnabled then
+			-- Right Trigger + Left Trigger 
+			if eventName == "PartyManagement" and Input.IsPressed("PanelSelect") then
+				MasteryMenu:Open()
+			end
+		else
+			-- CTRL + Shift + M
+			--Ext.Print(eventName, Input.GetKeyState("FlashCtrl"), Input.GetKeyState("SplitItemToggle"))
+			if eventName == "ToggleMap" and pressed and Input.IsPressed("SplitItemToggle") then
+				MasteryMenu:Open()
+			end
+		end
+	end
+end)
+
+-- RegisterListener("ClientCharacterChanged", function(uuid, userId, profile, netId, isHost)
+-- 	if MasteryMenu.Visible then
+-- 		MasteryMenu:BuildMasteryMenu()
+-- 	end
+-- end)

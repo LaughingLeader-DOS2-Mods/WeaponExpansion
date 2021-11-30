@@ -176,14 +176,11 @@ local function DebugInit()
     --TeleportToPosition(chest, tx,ty,tz)
     --PrintDebug("[WeaponExpansion:DebugInit] Generated treasure chest.")
     --TeleportToRandomPosition(chest, 8.0, "")
-
-    --OpenMasteryMenu_Start(host)
 end
 
-local function OpenMasteryMenu(...)
-    OpenMasteryMenu_Start(CharacterGetHostCharacter())
-end
-Ext.RegisterConsoleCommand("OpenMasteryMenu", OpenMasteryMenu)
+Ext.RegisterConsoleCommand("weaponex_masterymenu", function()
+    OpenMasteryMenu(GameHelpers.GetCharacter(CharacterGetHostCharacter()))
+end)
 
 Ext.RegisterConsoleCommand("weaponex_removemastery", function(call, mastery)
     local host = CharacterGetHostCharacter()

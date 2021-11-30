@@ -24,8 +24,6 @@ Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profi
 	if character ~= nil then
 		if Vars.isInCharacterCreation then
 			Ext.PostMessageToUser(id, "LLWEAPONEX_OnCharacterCreationStarted", "")
-		else
-			Ext.PostMessageToUser(id, "LLWEAPONEX_InitializeMasteryMenu", "")
 		end
 	end
 end)
@@ -260,9 +258,9 @@ end)
 --- @param skillElement string
 local function OnSkillCast(char, skill, skillType, skillElement)
 	char = StringHelpers.GetUUID(char)
-	if IsPlayer(char) then
+	if GameHelpers.Character.IsPlayer(char) then
 		if skill == "Shout_LLWEAPONEX_OpenMenu" then
-			OpenMasteryMenu_Start(char)
+			OpenMasteryMenu(GameHelpers.GetCharacter(char))
 		end
 	end
 	if Skills.BulletTemplates[skill] and IsTagged(char, "LLWEAPONEX_Firearm_Equipped") == 1 then

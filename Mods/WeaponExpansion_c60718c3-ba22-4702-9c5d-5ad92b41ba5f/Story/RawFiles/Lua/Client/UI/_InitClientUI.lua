@@ -2,43 +2,13 @@
 local MessageData = LeaderLib.Classes["MessageData"]
 
 Ext.Require("Client/UI/ClientUIData.lua")
-local masteryMenu = Ext.Require("Client/UI/MasteryMenu.lua")
+Ext.Require("Client/UI/MasteryMenu/_Init.lua")
 local tooltipHandler = Ext.Require("Client/UI/TooltipHandler.lua")
-
-local uiOverrides = {
-	--["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/LLWEAPONEX_ToolTip.swf",
-	--["Public/Game/GUI/mouseIcon.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/mouseIcon.swf",
-	--["Public/Game/GUI/tooltipHelper_kb.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltipHelper_kb.swf",
-	--["Public/Game/GUI/tooltip.swf"] = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/tooltip.swf",
-}
 
 local function LLWEAPONEX_Client_ModuleSetup()
 	for filepath,overridepath in pairs(uiOverrides) do
 		Ext.AddPathOverride(filepath, overridepath)
 		Ext.Print("[LLWEAPONEX:Client:UI.lua] Enabled UI override ("..filepath..") => ("..overridepath..").")
-	end
-end
-
---Ext.RegisterListener("ModuleLoadStarted", LLWEAPONEX_Client_ModuleSetup)
---Ext.RegisterListener("ModuleLoading", LLWEAPONEX_Client_ModuleSetup)
---Ext.RegisterListener("ModuleResume", LLWEAPONEX_Client_ModuleSetup)
---Ext.RegisterListener("SessionLoading", LLWEAPONEX_Client_ModuleSetup)
---Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_ModuleSetup)
-
-local function OnMouseIconEvent(ui, call, ...)
-	local params = Common.FlattenTable({...})
-	Ext.Print("[LLWEAPONEX:Client:UI.lua:OnMouseIconEvent] Event called. call("..tostring(call)..") params("..tostring(Common.Dump(params))..")")
-end
-
-local events = {
-	"onSetTexture",
-	"onSetCrossVisible",
-	"onSetVisible",
-}
-
-local function SetupUIListeners(ui)
-	for i,event in pairs(events) do
-		Ext.RegisterUICall(ui, event, OnMouseIconEvent)
 	end
 end
 
@@ -106,13 +76,14 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(call, uuid)
-	MasteryMenu.SetToggleButtonVisibility(false, false)
+	MasteryMenu:Close(true)
+	MasteryMenu.ToggleButton:SetVisible(false, false)
 	if uuid == Origin.Korvash then
 		Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", uuid)
 	end
 end)
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(call, uuid)
-	MasteryMenu.SetToggleButtonVisibility(true, Ext.GetGameState() ~= "Running")
+	MasteryMenu.ToggleButton:SetVisible(true, Ext.GetGameState() ~= "Running")
 end)
 
 ---@param ui UIObject
@@ -138,55 +109,11 @@ local function OnCCEvent(ui, call, param1, param2)
 	end
 end
 
-local debug = nil
-if Vars.DebugMode then
-	debug = Ext.Require("Client/UI/Debug.lua")
-end
+Ext.RegisterUITypeInvokeListener(Data.UIType.characterSheet, "updateArraySystem", OnCharacterSheetUpdating)
+Ext.RegisterUITypeInvokeListener(Data.UIType.hotBar, "showSkillBar", OnShowSkillBar)
 
 local function LLWEAPONEX_Client_SessionLoaded()
-	local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterSheet.swf")
-	if ui ~= nil then
-		--Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
-		--Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
-		
-		--Ext.RegisterUIInvokeListener(ui, "addSecondaryStat", OnCharacterSheetUpdating)
-		Ext.RegisterUIInvokeListener(ui, "updateArraySystem", OnCharacterSheetUpdating)
-		--Ext.RegisterUICall(ui, "selectCharacter", OnCharacterSelected)
-	end
-	ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
-	if ui ~= nil then
-		Ext.RegisterUIInvokeListener(ui, "showSkillBar", OnShowSkillBar)
-	end
-	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/hotBar.swf")
-	-- if ui ~= nil then
-	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
-	-- 	Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
-	-- end
-	-- ui = Ext.GetBuiltinUI("Public/Game/GUI/skills.swf")
-	-- if ui ~= nil then
-	-- 	Ext.RegisterUICall(ui, "showSkillTooltip", GetCharacterHandle)
-	-- 	Ext.RegisterUICall(ui, "showStatTooltip", GetCharacterHandle)
-	-- end
-	--Ext.RegisterUINameInvokeListener("creationDone", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setBackButtonVisible", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setPanel", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("mainMenu", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setGM", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("enableStoryPlayback", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("onEventInit", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setText", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setDetails", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setTextField", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setClassEditTabLabel", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("setFreeClassPoints", OnCCEvent)
-	--Ext.RegisterUINameInvokeListener("updatePortraits", OnCCEvent)
-	masteryMenu.Init()
-	--tooltipOverrides.Init()
 	tooltipHandler.Init()
-	if Vars.DebugMode then
-		debug.Client_UIDebugTest()
-		--debug.MouseTest()
-	end
 end
 
 Ext.RegisterListener("SessionLoaded", LLWEAPONEX_Client_SessionLoaded)
@@ -274,8 +201,6 @@ Ext.RegisterListener("SessionLoaded", function()
 	end
 end)
 
-if Ext.IsDeveloperMode() then
-	RegisterListener("BeforeLuaReset", function()
-		CombatLog.RemoveFilter("Rolls")
-	end)
-end
+RegisterListener("BeforeLuaReset", function()
+	CombatLog.RemoveFilter("Rolls")
+end)

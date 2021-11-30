@@ -4,66 +4,52 @@ local MessageData = LeaderLib.Classes["MessageData"]
 local CharacterMasteryData = MasteryDataClasses.CharacterMasteryData
 local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry
 
-function OpenMasteryMenu_Start(uuid, id)
+---@param character EsvCharacter
+function OpenMasteryMenu(character)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
-	local masteries = {}
-
-	for i,db in pairs(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(uuid, nil, nil, nil)) do
+	local data = {
+		UUID = character.MyGuid,
+		Masteries = {}
+	}
+	for i,db in pairs(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(character.MyGuid, nil, nil, nil)) do
 		local char,mastery,rank,xp = table.unpack(db)
-		masteries[mastery] = CharacterMasteryDataEntry:Create(xp,rank)
+		data.Masteries[mastery] = {
+			Rank = rank,
+			XP = xp
+		}
 	end
-	--print(Common.Dump(masteries))
-
-	---@type CharacterMasteryData
-	local data = CharacterMasteryData:Create(uuid, masteries)
-	if id ~= nil then
-		Ext.PostMessageToUser(id, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
-	else
-		Ext.PostMessageToClient(uuid, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
-	end
+	Ext.PostMessageToClient(character.MyGuid, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
 end
 
-local function RequestOpenMasteryMenu(call, payload)
-	if payload ~= nil then
-		local netid = tonumber(payload)
-		local id = -1
-		local uuid = ""
-		local profile = ""
-		if netid ~= nil then
-			local character = Ext.GetCharacter(netid)
-			if character ~= nil then
-				uuid = character.MyGuid
-				id = CharacterGetReservedUserID(uuid)
-				profile = GetUserProfileID(id)
-			end
-			if not StringHelpers.IsNullOrEmpty(uuid) then
-				if CharacterIsSummon(uuid) == 1 then
-					if CharacterIsControlled(uuid) == 1 then
-						ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-					else
-						CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
-					end
-				elseif CharacterIsPartyFollower(uuid) == 1 then
-					if CharacterIsControlled(uuid) == 1 then
-						ShowNotification(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-					else
-						CharacterStatusText(uuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
-					end
-				elseif IsPlayer(uuid) then
-					OpenMasteryMenu_Start(uuid, id)
-				end
-				return true
+---@param payload string
+local function RequestOpenMasteryMenu(payload)
+	local netid = tonumber(payload)
+	local character = GameHelpers.GetCharacter(netid)
+	fassert(character ~= nil, "Failed to get character from netid %s", netid)
+	if GameHelpers.Character.IsSummonOrPartyFollower(character) then
+		if character.PartyFollower then
+			if character.CharacterControl then
+				ShowNotification(character.MyGuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
 			else
-				Ext.PrintError("[WeaponExpansion] Failed to find character for user. NetID(%s) ID(%s) Profile(%s) UUID(%s)", payload, id, profile, uuid)
+				CharacterStatusText(character.MyGuid, "LLWEAPONEX_Notifications_NoMasteriesForFollowers")
+			end
+		else
+			if character.CharacterControl then
+				ShowNotification(character.MyGuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
+			else
+				CharacterStatusText(character.MyGuid, "LLWEAPONEX_Notifications_NoMasteriesForSummons")
 			end
 		end
+		return true
 	end
-	return false
+	OpenMasteryMenu(character)
+	return true
 end
 
 Ext.RegisterNetListener("LLWEAPONEX_RequestOpenMasteryMenu", function(cmd, payload)
-	if not RequestOpenMasteryMenu(cmd, payload) then
-		Ext.BroadcastMessage("LLWEAPONEX_TryGetClientID_RequestOpen", "", nil)
+	local b,err = xpcall(RequestOpenMasteryMenu, debug.traceback, payload)
+	if not b or err == false then
+		ferror("Failed to open mastery menu with payload data:\n%s\n%s", payload, err)
 	end
 end)
 

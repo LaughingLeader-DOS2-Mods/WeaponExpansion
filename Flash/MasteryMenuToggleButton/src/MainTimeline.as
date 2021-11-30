@@ -116,6 +116,16 @@ package
 
 		private var fadeTween:larTween;
 
+		private function onFadeIn():void
+		{
+			ExternalInterface.call("masteryMenuToggleButtonFadeinComplete");
+		}
+
+		private function onFadeOut():void
+		{
+			ExternalInterface.call("masteryMenuToggleButtonFadeOutComplete");
+		}
+
 		public function fade(startAlpha:Number, endAlpha:Number, speed:Number) : *
 		{
 			if(fadeTween)
@@ -124,6 +134,13 @@ package
 			}
 			this.menu_btn.alpha = startAlpha;
 			fadeTween = new larTween(this.menu_btn,"alpha",Quartic.easeIn,startAlpha,endAlpha,speed);
+			if(endAlpha >= 1.0) {
+				fadeTween.onComplete = onFadeIn;
+			}
+			else if (endAlpha <= 0)
+			{
+				fadeTween.onComplete = onFadeOut;
+			}
 		}
 		
 		public function frame1() : void
