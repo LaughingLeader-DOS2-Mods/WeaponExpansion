@@ -204,8 +204,22 @@ local function InitializeUnique(id,data,region)
 	end
 end
 
+--When the campaign isn't Origins
+function InitGlobalUniques()
+	for id,data in pairs(ORIGINS_UNIQUES) do
+		if ObjectExists(data.UUID) == 1 then
+			local uniqueData = Uniques[id]
+			if uniqueData then
+				uniqueData.DefaultUUID = data.UUID
+			end
+		end
+	end
+end
+
 function InitOriginsUniques(region)
 	if not REGIONS[region] then
+		--Initialize DefaultUUID
+		InitGlobalUniques()
 		return
 	end
 	for id,data in pairs(ORIGINS_UNIQUES) do

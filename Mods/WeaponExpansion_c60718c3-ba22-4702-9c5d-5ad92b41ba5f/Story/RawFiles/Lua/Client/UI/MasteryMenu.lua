@@ -777,7 +777,6 @@ local function OpenMasteryMenu(characterMasteryData)
 end
 
 local function NetMessage_OpenMasteryMenu(cmd,payload)
-	print(cmd,payload)
 	requestingToOpenMenu = false
 	---@type CharacterMasteryData
 	local characterMasteryData = CharacterMasteryData:Create()

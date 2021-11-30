@@ -138,8 +138,7 @@ local LinkedUniques = {}
 ---@param skipSave boolean|nil
 function UniqueManager.LinkItems(item1, item2, skipSave)
 	local b,err = xpcall(function()
-		assert(not StringHelpers.IsNullOrWhitespace(item1), "Item UUID 1 is nil")
-		assert(not StringHelpers.IsNullOrWhitespace(item2), "Item UUID 2 is nil")
+		fassert(not StringHelpers.IsNullOrWhitespace(item1) and not StringHelpers.IsNullOrWhitespace(item2), "UUID 1 (%s) or 2 (%s) is nil", item1, item2)
 		LinkedUniques[item1] = item2
 		LinkedUniques[item2] = item1
 		if skipSave ~= true then
