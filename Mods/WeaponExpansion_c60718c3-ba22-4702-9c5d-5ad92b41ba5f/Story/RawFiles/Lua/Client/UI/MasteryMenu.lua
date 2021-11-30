@@ -232,7 +232,9 @@ local function pushDescriptionEntry(this, index, text, iconId, iconName, iconTyp
 		end
 	end
 	if iconType == MasteryMenu.IconType.Passive then
-		iconName = "LLWEAPONEX_UI_PassiveBonus"
+		if iconName == "" then
+			iconName = "LLWEAPONEX_UI_PassiveBonus"
+		end
 	elseif iconName == "" and iconId ~= "" then
 		if string.find(iconId, ";") then
 			local foundIcons = {}
@@ -270,7 +272,10 @@ local iconIntId = 0
 
 ---@param ui UIObject
 local function RegisterIcon(ui, call, name, icon, iconType)
-	local iconSize = iconType == 2 and 40 or 64
+	local iconSize = 64
+	if iconType >= 2 then
+		iconSize = 40
+	end
 	ui:ClearCustomIcon(name)
 	ui:SetCustomIcon(name, icon, iconSize, iconSize)
 end
