@@ -753,7 +753,10 @@ local function OpenMasteryMenu(characterMasteryData)
 		MasteryMenu.MasteryData = characterMasteryData
 	end
 	if MasteryMenu.CHARACTER_HANDLE == nil then
-		MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(Ext.GetCharacter(characterMasteryData.UUID).Handle)
+		local character = GameHelpers.GetCharacter(characterMasteryData.UUID)
+		if character then
+			MasteryMenu.CHARACTER_HANDLE = Ext.HandleToDouble(character.Handle)
+		end
 	end
 	PrintDebug("[WeaponExpansion:MasteryMenu.lua:OpenMasteryMenu] Opening mastery menu for ("..characterMasteryData.UUID..")")
 	--PrintDebug(Common.Dump(characterMasteryData))
@@ -773,11 +776,12 @@ local function OpenMasteryMenu(characterMasteryData)
 	end
 end
 
-local function NetMessage_OpenMasteryMenu(call,data)
+local function NetMessage_OpenMasteryMenu(cmd,payload)
+	print(cmd,payload)
 	requestingToOpenMenu = false
 	---@type CharacterMasteryData
 	local characterMasteryData = CharacterMasteryData:Create()
-	characterMasteryData:LoadFromString(data)
+	characterMasteryData:LoadFromString(payload)
 	MasteryMenu.MasteryData = characterMasteryData
 	OpenMasteryMenu(characterMasteryData)
 end

@@ -238,20 +238,20 @@ local function isUnarmedWeaponStat(stat)
 	end
 end
 
----@param character StatCharacter
-function UnarmedHelpers.HasUnarmedWeaponStats(character, allowShields)
-	if type(character) == "string" then
-		character = Ext.GetCharacter(character).Stats
-	elseif type(character) == "userdata" then
-		local objType = getmetatable(character)
-		if objType == "ecl::Character" then
-			character = character.Stats
-		elseif objType ~= "CDivinityStats_Character" then
-			Ext.PrintError("[WeaponExpansion:UnarmedHelpers.HasUnarmedWeaponStats] The character param should be a string, EsvCharacter, or StatCharacter. Type is:", character, objType)
-			character = nil
+---@param char StatCharacter
+function UnarmedHelpers.HasUnarmedWeaponStats(char, allowShields)
+	local character = nil
+	if GameHelpers.Ext.ObjectIsStatCharacter(char) then
+		character = char
+	elseif GameHelpers.Ext.ObjectIsCharacter(char) then
+		character = char.Stats
+	else
+		local cObj = GameHelpers.GetCharacter(char)
+		if cObj then
+			character = cObj.Stats
 		end
 	end
-	if character ~= nil then
+	if character then
 		local hasValidOffhand = (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield") or character.OffHandWeapon == nil
 		local isUnarmedStats = statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or hasValidOffhand)
 		if isUnarmedStats then

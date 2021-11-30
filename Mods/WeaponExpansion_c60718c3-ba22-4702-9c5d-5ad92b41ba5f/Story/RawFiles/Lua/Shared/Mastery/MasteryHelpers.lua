@@ -70,15 +70,15 @@ Mastery.HasMinimumMasteryLevel = HasMinimumMasteryLevel
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
 	if type(tag) == "string" then
-		if character ~= nil and character:HasTag(tag) == true then
+		if character ~= nil and GameHelpers.CharacterOrEquipmentHasTag(character, tag) == true then
 			local a,b,mastery = string.find(tag,"(.+)_Mastery")
 			if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 				return true
 			else
 				if Ext.IsClient() then
-					return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or character:HasTag(mastery)
+					return (MasteryMenu.DisplayingSkillTooltip == true and MasteryMenu.SelectedMastery == mastery) or GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
 				else
-					return character:HasTag(mastery)
+					return GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
 				end
 			end
 		end

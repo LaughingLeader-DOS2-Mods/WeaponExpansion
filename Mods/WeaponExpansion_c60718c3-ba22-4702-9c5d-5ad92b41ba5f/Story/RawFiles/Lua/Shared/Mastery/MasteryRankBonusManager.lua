@@ -183,7 +183,7 @@ end
 local function OnStatusAttemptCallback(callback, matchBonuses, target, status, source, handle, statusType, skipBonusCheck)
 	if skipBonusCheck ~= true then
 		local bonuses = {}
-		if source and ObjectIsCharacter(source.MyGuid) == 1 then
+		if source and GameHelpers.Ext.ObjectIsCharacter(source) then
 			local b = MasteryBonusManager.GetMasteryBonuses(source)
 			if #b > 0 then
 				for i,v in pairs(b) do
@@ -192,7 +192,7 @@ local function OnStatusAttemptCallback(callback, matchBonuses, target, status, s
 				end
 			end
 		end
-		if target and ObjectIsCharacter(target.MyGuid) == 1 then
+		if target and GameHelpers.Ext.ObjectIsCharacter(target) then
 			local b = MasteryBonusManager.GetMasteryBonuses(target)
 			if #b > 0 then
 				for i,v in pairs(b) do

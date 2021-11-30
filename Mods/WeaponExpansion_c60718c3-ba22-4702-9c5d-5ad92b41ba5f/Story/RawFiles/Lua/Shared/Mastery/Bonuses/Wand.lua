@@ -7,7 +7,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Wand_ElementalWeakness", "<font color='#9BF0FF'>Targets hit by basic attacks become weak to your wand's element, gaining [Special:LLWEAPONEX_WeaponElementalWeakness] for [ExtraData:LLWEAPONEX_MB_Wand_ElementalWeaknessTurns] turn(s).</font>"),
 		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
 			if tooltipType == "skill" then
-				if GameHelpers.CharacterOrEquipmentHasTag(character.MyGuid, "LLWEAPONEX_Wand_Equipped") then
+				if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Wand_Equipped") then
 					if id == "ActionAttackGround" then
 						return Mastery.Variables.Bonuses.HasElementalWeaknessWeapon(character)
 					end
