@@ -54,7 +54,13 @@ MasteryMenu = {
 	IsControllerMode = false,
 	Layer = 10,
 	---@type VisibilityMode
-	RankVisibility = VisibilityMode.Default
+	RankVisibility = VisibilityMode.Default,
+	IconType = {
+		None = "0",
+		Skill = "1",
+		Status = "2",
+		Passive = "3",
+	}
 }
 MasteryMenu.__index = MasteryMenu
 
@@ -220,38 +226,37 @@ local function pushDescriptionEntry(this, index, text, iconId, iconName, iconTyp
 	end
 	if iconType == nil then
 		if iconId ~= "" then
-			iconType = 1
+			iconType = MasteryMenu.IconType.Skill
 		else
-			iconType = 0
+			iconType = MasteryMenu.IconType.None
 		end
 	end
-	if iconName == "" and iconId ~= "" and iconType ~= 3 then
-		if iconType ~= 3 then
-			if string.find(iconId, ";") then
-				local foundIcons = {}
-				for i,v in pairs(StringHelpers.Split(iconId, ";")) do
-					local stat = Ext.GetStat(v)
-					if stat and stat.Icon then
-						foundIcons[#foundIcons+1] = stat.Icon
-					else
-						foundIcons[#foundIcons+1] = "LeaderLib_Placeholder"
-					end
-				end
-				iconId = StringHelpers.Join(";", foundIcons)
-			else
-				local stat = Ext.GetStat(iconId)
+	if iconType == MasteryMenu.IconType.Passive then
+		iconName = "LLWEAPONEX_UI_PassiveBonus"
+	elseif iconName == "" and iconId ~= "" then
+		if string.find(iconId, ";") then
+			local foundIcons = {}
+			for i,v in pairs(StringHelpers.Split(iconId, ";")) do
+				local stat = Ext.GetStat(v)
 				if stat and stat.Icon then
-					iconName = stat.Icon
+					foundIcons[#foundIcons+1] = stat.Icon
+				else
+					foundIcons[#foundIcons+1] = "LeaderLib_Placeholder"
 				end
 			end
+			iconName = StringHelpers.Join(";", foundIcons)
 		else
-			iconName = "LLWEAPONEX_UI_PassiveBonus"
+			local stat = Ext.GetStat(iconId)
+			if stat and stat.Icon then
+				iconName = stat.Icon
+			end
 		end
 	end
+
 	if StringHelpers.IsNullOrWhitespace(iconName) then
 		iconName = "LeaderLib_Placeholder"
 	end
-	PrintDebug(string.format("pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType))
+	fprint(LOGLEVEL.TRACE, "pushDescriptionEntry iconId(%s) iconName(%s) iconType(%s)", iconId, iconName, iconType)
 	this.descriptionContent[index+1] = iconId
 	this.descriptionContent[index+2] = iconName
 	this.descriptionContent[index+3] = iconType
@@ -335,7 +340,7 @@ local function buildMasteryDescription(ui, this, mastery)
 	if Vars.LeaderDebugMode then
 		rank = Mastery.Variables.MaxRank
 	end
-	
+
 	local index = 0
 	for i=1,Mastery.Variables.MaxRank,1 do
 		local rankText = "_Rank"..tostring(i)
@@ -380,7 +385,7 @@ local function buildMasteryDescription(ui, this, mastery)
 			if hasDescription then
 				index = parseDescription(this, index, description)
 			else
-				index = pushDescriptionEntry(this, index, description) -- Escaping percentages)
+				index = pushDescriptionEntry(this, index, description)
 			end
 		end
 		i = i + 1

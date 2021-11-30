@@ -1172,7 +1172,7 @@
 	<content contentuid="h76bcf828gaeb5g4329ga650ge7b2bebd87c1">Character is immune to being directly Shocked by a &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.</content>
 	<content contentuid="h76c6f571gf887g40d9g884ag081f3ac052dc">&lt;font color=&apos;#FF44FF&apos;&gt;Unarmed Mastery II&lt;/font&gt;</content>
 	<content contentuid="h76e869b4gae45g47c6g8529gf55e8b414d5e">Weapon Expansion - Armor</content>
-	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike;LLWEAPONEX_MASTERYBONUS_VULNERABLE&apos; type=&apos;1;2&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] to targets hit. [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.&lt;icon type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Savage]</content>
+	<content contentuid="h7755a064g6e0eg4434g9e34g857ca4e829b3">&lt;icon id=&apos;MultiStrike_BlinkStrike;LLWEAPONEX_MASTERYBONUS_VULNERABLE&apos; type=&apos;1;2&apos;/&gt;[Key:MultiStrike_BlinkStrike_DisplayName] applies [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] to targets hit. [Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName] lasts until the end of your turn, and deals a one-time amount of bonus damage on hit.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Savage_DisplayName,LLWEAPONEX_MB_Axe_Savage&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Savage]</content>
 	<content contentuid="h778419bdg900eg4b6egb376g652371ca7538">A warrior who wields the deadly halberd, a combination of spear and axe, taking advantage of the reach and versatility it offers</content>
 	<content contentuid="h7784b453g91ceg4c49g80cfg2d67bd2869fb">&lt;font color=&apos;#999999&apos;&gt;Oiled Mini-Bolts&lt;/font&gt;</content>
 	<content contentuid="h77cc8da4g0275g49fdgab2ag7b8383f38d48">Chaos Edge</content>
@@ -1738,7 +1738,7 @@
 	<content contentuid="hb22c57efg4b49g4c61g8ebfg2534587f2c03">&lt;font color=&apos;#22AADD&apos;&gt;Battle Book Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb2347eefgdc6ag4ab1g82a4g21139b4a7917">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery V&lt;/font&gt;</content>
 	<content contentuid="hb253b8ddgba7dg4f42g9426gc62332e8ebca">&lt;font color=&apos;#99AACC&apos;&gt;Deep knowledge of sacred texts allows [Key:Target_Bless_DisplayName] to deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage] to enemy Undead.&lt;/font&gt;</content>
-	<content contentuid="hb275dc8eg9d9dg4ba9g8c76g3f9e4f447388">&lt;icon id=&apos;Target_Flurry&apos;/&gt;Each hit with [Key:Target_Flurry_DisplayName] cleaves in a small cone.&lt;icon type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Stalker]</content>
+	<content contentuid="hb275dc8eg9d9dg4ba9g8c76g3f9e4f447388">&lt;icon id=&apos;Target_Flurry&apos;/&gt;Each hit with [Key:Target_Flurry_DisplayName] cleaves in a small cone.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Axe_Stalker_DisplayName,LLWEAPONEX_MB_Axe_Stalker&apos; type=&apos;3&apos;/&gt;[Key:LLWEAPONEX_MB_Axe_Stalker]</content>
 	<content contentuid="hb2773ad0g3c62g4ba3gbc63gb215e6b9e0f7">Soulcursed Ebon Skewer</content>
 	<content contentuid="hb28cf019g6f7dg4a3fg9f19gf8721bd23f46">An old blindfold, said to once belong to a monk in a distance land.&lt;br&gt;By choosing to cloak the perceived world in darkness, the monk found her inner strength grow.</content>
 	<content contentuid="hb29bcef2g2085g45acg9401g697bd7fc43a5">Poison Weakness</content>
