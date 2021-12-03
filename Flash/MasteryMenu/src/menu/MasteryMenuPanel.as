@@ -67,7 +67,7 @@ package menu
 			this.addFrameScript(0,this.frame1);
 		}
 		
-		public function masteryListInit() : void
+		public function initLists() : void
 		{
 			this.masteryList = new scrollList();
 			this.masteryList.setFrame(this.scrollPaneW,this.scrollPaneH);
@@ -390,7 +390,7 @@ package menu
 		{
 			if(!this._initialized)
 			{
-				this.masteryListInit();
+				this.initLists();
 				this._initialized = true;
 			}
 			this.masteryCount = 0;

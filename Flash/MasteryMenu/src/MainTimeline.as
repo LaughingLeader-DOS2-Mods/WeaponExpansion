@@ -27,8 +27,6 @@ package
 
 		private var lastFocus:InteractiveObject;
 
-		public var descriptionContent:Array;
-
 		public const designResolution:Point = new Point(1920,1080);
 		public var uiScaling:Number;
 		public var isResizing:Boolean;
@@ -40,7 +38,7 @@ package
 		{
 			super();
 			Registry.Init();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 		}
 		
 		public function onEventInit() : void
@@ -63,9 +61,9 @@ package
 				ExternalInterface.call("focus");
 				ExternalInterface.call("inputfocus");
 				this.masteryMenuMC.visible = true;
-				stage.focus = lastFocus;
+				this.stage.focus = this.lastFocus;
 
-				active = true;
+				this.active = true;
 			}
 		}
 
@@ -211,10 +209,10 @@ package
 					shiftDown = !controllerEnabled;
 					break;
 				case "IE ToggleMap":
-					if (!controllerEnabled && shiftDown)
+					if (!this.controllerEnabled && shiftDown)
 					{
 						handled = true;
-						if(active)
+						if(this.active)
 						{
 							ExternalInterface.call("requestCloseMasteryMenu");
 						}
@@ -286,51 +284,6 @@ package
 			this.masteryMenuMC.addMastery(mastery,title,descriptionTitle,currentRank,barPercentage,isMastered);
 		}
 
-		public function buildDescription() : void
-		{
-			var length:int = descriptionContent.length;
-			if (length > 0)
-			{
-				this.masteryMenuMC.descriptionList.clearElements();
-				var i:uint = 0;
-				while (i < length)
-				{
-					var text:String = descriptionContent[i];
-					var iconId:String = descriptionContent[i+1];
-					var iconName:String = descriptionContent[i+2];
-
-					if (text != "")
-					{
-						this.masteryMenuMC.descriptionList.addText(text, false);
-					}
-					if (iconId != "")
-					{
-						if (iconName == null)
-						{
-							iconName = "";
-						}
-						if (iconId.indexOf(";") > -1)
-						{
-							var iconTypes:String = descriptionContent[i+3];
-							this.masteryMenuMC.descriptionList.addIconGroup(iconId, iconName, iconTypes, false, ";");
-						}
-						else
-						{
-							var iconType:int = descriptionContent[i+3];
-							this.masteryMenuMC.descriptionList.addIcon(iconId, iconName, iconType, false);
-						}
-					}
-					i = i + 4;
-				}
-				this.masteryMenuMC.descriptionList.positionElements();
-				this.descriptionContent = new Array();
-			}
-			else
-			{
-				this.masteryMenuMC.resetList();
-			}
-		}
-
 		public function setRankNodePosition(rank:uint, barPercentage:Number) : void
 		{
 			Registry.RankNodePositions[rank] = barPercentage
@@ -356,7 +309,6 @@ package
 			this.layout = "fixed";
 			this.alignment = "none";
 			this.events = new Array("IE UICancel","IE UIUp","IE UIDown","IE UIDialogTextUp","IE UIDialogTextDown", "IE ToggleInGameMenu", "IE PartyManagement", "IE PanelSelect", "IE UILeft", "IE UIRight", "IE PrevObject", "IE NextObject", "IE UITooltipUp", "IE UITooltipDown", "IE ToggleMap", "IE FlashCtrl", "IE SplitItemToggle");
-			this.descriptionContent = new Array();
 			Registry.RankNodePositions[0] = 0.0;
 			Registry.RankNodePositions[4] = 1.0;
 			//var icon = new iconDisplay(32,32);
