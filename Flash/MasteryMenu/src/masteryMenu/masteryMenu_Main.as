@@ -300,7 +300,7 @@ package masteryMenu
 		{
 			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
 			var nextMC:MasteryEntry = this.masteryList.getElement(id) as MasteryEntry;
-			if(currentMC != nextMC)
+			if(currentMC != null && currentMC != nextMC)
 			{
 				currentMC.deselectElement();
 			}
@@ -317,7 +317,7 @@ package masteryMenu
 		public function selectEntry(nextMC:MasteryEntry, instant:Boolean = false) : void
 		{
 			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			if(currentMC != nextMC)
+			if(currentMC != null && currentMC != nextMC)
 			{
 				currentMC.deselectElement();
 			}
