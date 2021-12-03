@@ -73,13 +73,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 			end
 			return false
 		end ]]
-	}):RegisterOnWeaponTagHit(MasteryID.Crossbow, function(tag, source, target, data, bonuses, isFromHit, isFromSkill)
+	}):RegisterOnWeaponTagHit(MasteryID.Crossbow, function(tag, attacker, target, data, targetIsObject, skill, self)
 		if data.Success then
-			local lastPos = PersistentVars.MasteryMechanics.StillStanceLastPosition[source.MyGuid]
-			if (lastPos and GameHelpers.Math.GetDistance(source.WorldPos, lastPos) <= 0.01)
-			or (Vars.LeaderDebugMode and CharacterIsInCombat(source.MyGuid) == 0)
+			local lastPos = PersistentVars.MasteryMechanics.StillStanceLastPosition[attacker.MyGuid]
+			if (lastPos and GameHelpers.Math.GetDistance(attacker.WorldPos, lastPos) <= 0.01)
+			or (Vars.LeaderDebugMode and CharacterIsInCombat(attacker.MyGuid) == 0)
 			then
-				local damageBonus = GetStillStanceBonus(source)
+				local damageBonus = GetStillStanceBonus(attacker)
 				if damageBonus > 0 then
 					damageBonus = 1 + (damageBonus * 0.01)
 					data:MultiplyDamage(damageBonus)

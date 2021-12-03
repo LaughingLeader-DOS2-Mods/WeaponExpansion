@@ -9,13 +9,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Sword, 1, {
 		if state == SKILL_STATE.HIT and data.Success then
 			GameHelpers.Status.Apply(data.Target, "LLWEAPONEX_MB_SWORD_BALANCE_SHIFT", -2.0, false, char)
 		end
-	end):RegisterOnWeaponTagHit(MasteryID.Sword, function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject and data.Damage > 0 then
+	end):RegisterOnWeaponTagHit(MasteryID.Sword, function(tag, attacker, target, data, targetIsObject, skill, self)
+		if targetIsObject and data.Damage > 0 then
 			if HasActiveStatus(target.MyGuid, "LLWEAPONEX_MB_SWORD_BALANCE_SHIFT") == 1 then
 				local status = target:GetStatus("LLWEAPONEX_MB_SWORD_BALANCE_SHIFT")
 				if status.StatusSourceHandle then
 					local statusSource = GameHelpers.TryGetObject(status.StatusSourceHandle)
-					if statusSource and statusSource.MyGuid == source.MyGuid then
+					if statusSource and statusSource.MyGuid == attacker.MyGuid then
 						local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Sword_BalanceShiftDamageBoost", 10) * 0.01
 						if damageBonus > 0 then
 							data:MultiplyDamage(1+damageBonus)

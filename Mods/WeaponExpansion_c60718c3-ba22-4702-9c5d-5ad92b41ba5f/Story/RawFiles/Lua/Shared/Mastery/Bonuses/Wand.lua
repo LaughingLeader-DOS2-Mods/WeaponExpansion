@@ -15,18 +15,18 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 			end
 			return false
 		end
-	}):RegisterOnWeaponTagHit("LLWEAPONEX_Wand", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if not isFromSkill then
+	}):RegisterOnWeaponTagHit("LLWEAPONEX_Wand", function(tag, attacker, target, data, targetIsObject, skill, self)
+		if not skill then
 			local duration = GameHelpers.GetExtraData("LLWEAPONEX_MB_Wand_ElementalWeaknessTurns", 1) * 6.0
 			if duration > 0 then
-				for slot,v in pairs(GameHelpers.Item.FindTaggedEquipment(source, "LLWEAPONEX_Wand")) do
+				for slot,v in pairs(GameHelpers.Item.FindTaggedEquipment(attacker, "LLWEAPONEX_Wand")) do
 					local weapon = Ext.GetItem(v)
 					if weapon and weapon.ItemType == "Weapon" then
 						for i, stat in pairs(weapon.Stats.DynamicStats) do
 							if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
 								local status = Mastery.Variables.Bonuses.ElementalWeaknessStatuses[stat.DamageType]
 								if status then
-									GameHelpers.Status.Apply(target, status, duration, false, source, 1.1)
+									GameHelpers.Status.Apply(target, status, duration, false, attacker, 1.1)
 								end
 							end
 						end

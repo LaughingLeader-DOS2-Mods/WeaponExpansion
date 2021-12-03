@@ -5,13 +5,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 	rb:Create("BATTLEBOOK_CONCUSSION", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BasicAttackConcussion", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).</font>")
-	}):RegisterOnWeaponTagHit(MasteryID.BattleBook, function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if not isFromSkill then
+	}):RegisterOnWeaponTagHit(MasteryID.BattleBook, function(tag, attacker, target, data, targetIsObject, skill, self)
+		if not skill then
 			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionChance", 25.0)
 			local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionTurns", 1)
 			if chance > 0 and turns > 0 then
 				if chance >= 100 or Ext.Random(0,100) <= chance then
-					GameHelpers.Status.Apply(target, "LLWEAPONEX_CONCUSSION", turns*6.0, 0, source, 1.0, false)
+					GameHelpers.Status.Apply(target, "LLWEAPONEX_CONCUSSION", turns*6.0, 0, attacker, 1.0, false)
 					PlaySound(target.MyGuid, "LLWEAPONEX_FFT_Dictionary_Book_Hit")
 				end
 			end

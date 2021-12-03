@@ -17,9 +17,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 	rb:Create("AXE_EXECUTIONER", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Executioner", "Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].")
-	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject and not isFromSkill and data.Damage > 0 then
-			if HasActiveStatus(source, "AOO") == 1 and ObjectIsCharacter(target.MyGuid) == 1 then
+	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
+		if targetIsObject and not skill and data.Damage > 0 then
+			if HasActiveStatus(attacker.MyGuid, "AOO") == 1 and GameHelpers.Ext.ObjectIsCharacter(target) then
 				local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_AoOMaxDamageBonus", 50) * 0.01
 				if damageBonus > 0 then
 					local missingVitPerc = 0.0
@@ -39,8 +39,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		if state == SKILL_STATE.HIT and data.Success then
 			Timer.Start("LLWEAPONEX_MasteryBonus_ApplyVulnerable", 50, char, data.Target)
 		end
-	end):RegisterOnHit(function(bHitObject,attacker,target,damage,data)
-		if bHitObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
+	end):RegisterOnHit(function(attacker, target, data, targetIsObject, skill, self)
+		if targetIsObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
 			RemoveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
 			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", HitFlagPresets.GuaranteedWeaponHit)
 		end
@@ -49,8 +49,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 	rb:Create("AXE_SAVAGE", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Savage", "Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AoOMaxDamageBonus]% more damage, in proportion to the target's missing vitality.")
-	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject and not isFromSkill and data.Damage > 0 then
+	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
+		if targetIsObject and not skill and data.Damage > 0 then
 			if NRD_ObjectHasStatusType(target.MyGuid, "KNOCKED_DOWN") == 1 then
 				local damageMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_ProneDamageBonus", 25)
 				if damageMult > 0 then
