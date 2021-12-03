@@ -154,7 +154,16 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 	end),
 
 	rb:Create("AXE_SCOUNDREL", {
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Scoundrel","Axes can now be used with [Handle:hed591025g5c39g48ccga899gc9b1569716c1:Scoundrel] skills."),
+		AllSkills = true,
+		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
+			if tooltipType == "skill" then
+				if Ext.StatGetAttribute(id, "Requirement") == "DaggerWeapon" then
+					return true
+				end
+			end
+			return false
+		end,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Stalker","Axes can now be used with skills that require a [Handle:hd6d18316gbc8bg400bga46eg18cd9f4185ee:Dagger]."),
 	})
 })
 
