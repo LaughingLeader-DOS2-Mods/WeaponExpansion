@@ -197,27 +197,27 @@ package LS_Classes
 			}
 		}
 		
-		override public function selectMC(param1:MovieClip, param2:Boolean = false) : *
+		override public function selectMC(mc:MovieClip, force:Boolean = false) : *
 		{
-			var val4:MovieClip = null;
-			var val5:Number = NaN;
-			var val3:Boolean = true;
-			if(param1 && m_CurrentSelection && param1.list_pos < m_CurrentSelection.list_pos)
+			var firstVisible:MovieClip = null;
+			var height:Number = NaN;
+			var valid:Boolean = true;
+			if(mc && m_CurrentSelection && mc.list_pos < m_CurrentSelection.list_pos)
 			{
-				val3 = false;
+				valid = false;
 			}
-			super.selectMC(param1,param2);
+			super.selectMC(mc,force);
 			if(this.m_scrollbar_mc.visible && this.m_allowKeepIntoView)
 			{
-				val4 = getFirstVisible();
-				if(m_CurrentSelection == val4)
+				firstVisible = getFirstVisible();
+				if(m_CurrentSelection == firstVisible)
 				{
 					this.m_scrollbar_mc.scrollTo(0,this.m_scrollbar_mc.m_animateScrolling);
 				}
-				else
+				else if(m_CurrentSelection != null)
 				{
-					val5 = getElementHeight(m_CurrentSelection);
-					this.m_scrollbar_mc.scrollIntoView(m_CurrentSelection.y,val5);
+					height = getElementHeight(m_CurrentSelection);
+					this.m_scrollbar_mc.scrollIntoView(m_CurrentSelection.y,height);
 				}
 			}
 		}
@@ -237,34 +237,34 @@ package LS_Classes
 			}
 		}
 		
-		override public function selectByOffset(param1:Number, param2:Boolean = false) : Boolean
+		override public function selectByOffset(offset:Number, force:Boolean = false) : Boolean
 		{
-			var val4:* = undefined;
-			var val5:MovieClip = null;
-			var val6:Number = NaN;
-			var val3:Boolean = false;
-			if(param2)
+			var index:int = 0;
+			var mc:MovieClip = null;
+			var height:Number = NaN;
+			var success:Boolean = false;
+			if(force)
 			{
-				return super.selectByOffset(param1);
+				return super.selectByOffset(offset);
 			}
-			param1 += TOP_SPACING;
-			param1 += this.m_scrollbar_mc.scrolledY;
-			val4 = 0;
-			while(val4 < content_array.length)
+			offset += TOP_SPACING;
+			offset += this.m_scrollbar_mc.scrolledY;
+			while(index < content_array.length)
 			{
-				if((val5 = content_array[val4]) && val5.visible)
+				mc = content_array[index];
+				if(mc != null && mc.visible)
 				{
-					val6 = getElementHeight(val5);
-					if(val5.y <= param1 && val5.y + val6 > param1)
+					height = getElementHeight(mc);
+					if(mc.y <= offset && mc.y + height > offset)
 					{
-						val3 = true;
-						this.selectMC(val5);
+						success = true;
+						this.selectMC(mc);
 						break;
 					}
 				}
-				val4++;
+				index++;
 			}
-			return val3;
+			return success;
 		}
 		
 		public function get mouseWheelEnabled() : Boolean
@@ -304,30 +304,30 @@ package LS_Classes
 		
 		override public function setFrameWidth(param1:Number) : *
 		{
-			width = param1;
+			this.width = param1;
 			this.calculateScrollRect();
 		}
 		
-		override public function setFrame(param1:Number, param2:Number) : *
+		override public function setFrame(w:Number, h:Number) : *
 		{
-			width = param1;
-			height = param2;
+			this.width = w;
+			this.height = h;
 			this.calculateScrollRect();
 		}
 		
-		public function setFrameHeight(param1:Number) : *
+		public function setFrameHeight(height:Number) : *
 		{
-			height = param1;
+			this.height = height;
 			this.calculateScrollRect();
 		}
 		
 		private function calculateScrollRect() : *
 		{
-			containerContent_mc.scrollRect = new Rectangle(0,0,width,height);
+			this.containerContent_mc.scrollRect = new Rectangle(0,0,width,height);
 			this.m_scrollbar_mc.x = this.m_SBSpacing + width;
 			this.m_scrollbar_mc.addContent(containerContent_mc);
 			this.checkScrollBar();
-			updateScrollHit();
+			this.updateScrollHit();
 		}
 		
 		override public function positionElements() : *

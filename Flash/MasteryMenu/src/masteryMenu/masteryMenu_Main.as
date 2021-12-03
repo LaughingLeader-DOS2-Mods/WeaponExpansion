@@ -48,11 +48,18 @@ package masteryMenu
 		
 		//public var descriptionList:scrollbar_text;
 		public var descriptionList:DescriptionList;
-		
-		public var time:Timer;
 
 		public var emptyListTitle:String = "";
 		public var emptyListDescription:String = "";
+
+		private var _initialized:Boolean = false;
+
+		public var isDragging:Boolean = false;
+		public var windowDragStarted:Boolean = false;
+		public var dragStartMP:Point;
+		public const startDragDiff:uint = 20;
+		public var mousePosX:Number;
+		public var mousePosY:Number;
 		
 		public function masteryMenu_Main()
 		{
@@ -85,7 +92,7 @@ package masteryMenu
 			//this.descriptionList.x = masteryDesc_mc.x;
 			//this.descriptionList.y = masteryDesc_mc.y;
 			this.descriptionList.setFrame(masteryDesc_mc.width,masteryDesc_mc.height);
-			//this.descriptionList.setFrame(462,648);
+			this.descriptionList.setFrame(440,670);
 			//this.descriptionList.SB_SPACING = 10;
 			this.descriptionList.TOP_SPACING = 36;
 			this.descriptionList.SIDE_SPACING = 4;
@@ -109,11 +116,6 @@ package masteryMenu
 			this.descriptionList.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
 			this.buttonHintBar_mc.centerButtons = true;
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
-		}
-		
-		public function onLoaded(e:Event) : void
-		{
-			ExternalInterface.call("masteryMenuLoaded");
 		}
 		
 		public function onDescriptionMouseIn(e:MouseEvent) : void
@@ -158,10 +160,10 @@ package masteryMenu
 		
 		public function setEmptyListText(title:String, description:String) : void
 		{
-			emptyListTitle = title;
-			emptyListDescription = description;
+			this.emptyListTitle = title;
+			this.emptyListDescription = description;
 
-			if (this.masteryCount <= 0)
+			if (this.masteryCount <= 0 && this.descriptionList.length == 0)
 			{
 				this.name_txt.htmlText = this.emptyListTitle;
 				this.descriptionList.addText(emptyListDescription);
@@ -175,21 +177,19 @@ package masteryMenu
 			this.accept_mc.setButtonEvent("requestCloseUI");
 		}
 
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
+		public function addMastery(mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
 		{
 			noMasteries_mc.visible = false;
 
-			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			var masteryMC:MovieClip = this.masteryList.getElementByString("id", mastery);
 			if(masteryMC == null)
 			{
 				masteryMC = new MasteryEntry();
-				masteryMC.name = "mastery" + listId;
-				masteryMC.id = listId;
+				masteryMC.id = mastery;
 				this.masteryList.addElement(masteryMC);
 				this.masteryList.checkScrollBar();
 				this.masteryCount = this.masteryCount + 1;
 			}
-			masteryMC.setId(listId,mastery);
 			masteryMC.setTitle(title, descriptionTitle);
 			masteryMC.alpha = 1;
 			masteryMC.createRankNodes(currentRank, Registry.MaxRank);
@@ -198,27 +198,27 @@ package masteryMenu
 			this.masteryList.selectByListID(0);
 		}
 
-		public function setExperienceBarTooltip(listId:Number, text:String) : void
+		public function setExperienceBarTooltip(mastery:String, text:String) : void
 		{
-			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			var masteryMC:MovieClip = this.masteryList.getElementByString("id", mastery);
 			if(masteryMC != null)
 			{
 				masteryMC.setExperienceBarTooltip(text);
 			}
 		}
 
-		public function setRankTooltipText(listId:Number, rank:int, text:String) : void
+		public function setRankTooltipText(mastery:String, rank:int, text:String) : void
 		{
-			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			var masteryMC:MovieClip = this.masteryList.getElementByString("id", mastery);
 			if(masteryMC != null)
 			{
 				masteryMC.setRankTooltipText(rank, text);
 			}
 		}
 
-		public function positionRankNodes(listId:Number, currentRank:int) : void
+		public function positionRankNodes(mastery:String, currentRank:int) : void
 		{
-			var masteryMC:MovieClip = this.masteryList.getElementByNumber("id",listId);
+			var masteryMC:MovieClip = this.masteryList.getElementByString("id", mastery);
 			if(masteryMC != null)
 			{
 				masteryMC.positionRankNodes(currentRank);
@@ -263,32 +263,37 @@ package masteryMenu
 			if (currentMC != null)
 			{
 				this.name_txt.htmlText = currentMC.masteryDescriptionTitle;
-				ExternalInterface.call("onMasterySelected", currentMC.m_Id, currentMC.masteryId);
+				ExternalInterface.call("onMasterySelected", currentMC.id);
 			}
 		}
 		
 		public function previous(byAmount:int = 1) : void
 		{
 			this.masteryList.previous(byAmount);
-			updateSelection();
+			this.updateSelection();
 		}
 		
 		public function next(byAmount:int = 1) : void
 		{
 			this.masteryList.next(byAmount);
-			updateSelection();
+			this.updateSelection();
 		}
 
 		public function top() : void
 		{
 			this.masteryList.selectFirstVisible();
-			updateSelection();
+			this.updateSelection();
 		}
 
 		public function bottom() : void
 		{
 			this.masteryList.selectLastElement();
-			updateSelection();
+			this.updateSelection();
+		}
+
+		public function selectNone() : void
+		{
+			this.masteryList.clearSelection();
 		}
 		
 		public function onSelectionChanged() : void
@@ -296,21 +301,21 @@ package masteryMenu
 			//var entry:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
 		}
 		
-		public function select(id:Number, instant:Boolean = false) : void
+		public function selectMastery(mastery:String, instant:Boolean = false) : void
 		{
 			var currentMC:MasteryEntry = this.masteryList.getCurrentMovieClip() as MasteryEntry;
-			var nextMC:MasteryEntry = this.masteryList.getElement(id) as MasteryEntry;
+			var nextMC:MasteryEntry = this.masteryList.getElementByString("id", mastery) as MasteryEntry;
 			if(currentMC != null && currentMC != nextMC)
 			{
 				currentMC.deselectElement();
 			}
 			this.masteryList.m_scrollbar_mc.m_animateScrolling = !instant;
-			this.masteryList.selectMC(nextMC);
-			this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 			if (nextMC != null)
 			{
+				this.masteryList.selectMC(nextMC);
+				this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				ExternalInterface.call("onMasterySelected", nextMC.m_Id, nextMC.masteryId);
+				ExternalInterface.call("onMasterySelected", nextMC.id);
 			}
 		}
 
@@ -327,7 +332,7 @@ package masteryMenu
 			if (nextMC != null)
 			{
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				ExternalInterface.call("onMasterySelected", nextMC.m_Id, nextMC.masteryId);
+				ExternalInterface.call("onMasterySelected", nextMC.id);
 			}
 		}
 		
@@ -335,13 +340,6 @@ package masteryMenu
 		{
 			return this.masteryList.currentSelection;
 		}
-
-		public var isDragging:Boolean = false;
-		public var windowDragStarted:Boolean = false;
-		public var dragStartMP:Point;
-		public const startDragDiff:uint = 20;
-		public var mousePosX:Number;
-		public var mousePosY:Number;
 
 		public function windowUp(e:MouseEvent) : void
 		{
@@ -388,13 +386,15 @@ package masteryMenu
 			this.windowDragStarted = false;
 		}
 		
-		internal function frame1() : void
+		private function frame1() : void
 		{
+			if(!this._initialized)
+			{
+				this.masteryListInit();
+				this._initialized = true;
+			}
 			this.masteryCount = 0;
 			this.m_isController = false;
-			this.time = new Timer(1,1);
-			this.time.addEventListener(TimerEvent.TIMER_COMPLETE,this.onLoaded);
-			this.time.start();
 			Registry.Main = this;
 
 			this.windowDragBG.addEventListener(MouseEvent.MOUSE_DOWN,this.dragInit);

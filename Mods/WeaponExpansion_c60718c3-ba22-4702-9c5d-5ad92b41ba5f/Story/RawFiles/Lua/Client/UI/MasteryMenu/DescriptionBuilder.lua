@@ -1,14 +1,105 @@
 local iconElementPattern = "(<icon.-/>)"
 
-local function ParseDescription(this, text)
-	local iconElements = StringHelpers.Split(text, iconElementPattern)
-	if #iconElements > 0 then
-		for _,str in ipairs(iconElements) do
-			local _,_,iconId = string.find(str, "id='(.-)'")
-			local _,_,iconName = string.find(str, "icon='(.-)'")
-			local _,_,iconType = string.find(str, "type='(.-)'")
+local function SplitDescriptionByPattern(str, pattern, includeMatch)
+	local list = {};
+	local pos = 1
+	local lastMatch = ""
+	if string.find("", pattern, 1) then
+		return list
+	end
+	while 1 do
+		local first,last,a,b = string.find(str, pattern, pos)
+		if first then
+			local s = string.sub(str, pos, first-1);
+			if s ~= "" then
+				if includeMatch == true then
+					if lastMatch ~= "" then
+						s = lastMatch..s
+						lastMatch = ""
+					elseif a ~= nil then
+						s = a..s
+					end
+				end
+				table.insert(list, s)
+			elseif a ~= nil then
+				lastMatch = a
+			end
+			pos = last+1
+		else
+			local s = string.sub(str, pos);
+			if s ~= "" then
+				if includeMatch == true then
+					if lastMatch ~= "" then
+						s = lastMatch..s
+						lastMatch = ""
+					elseif a ~= nil then
+						s = a..s
+					end
+				end
+				table.insert(list, s)
+			elseif a ~= nil then
+				lastMatch = a
+			end
+			break
+		end
+		lastMatch = a
+	end
+	return list
+end
+
+local function GetStringValue(str, pattern)
+	local _,_,value = string.find(str, pattern)
+	if value == nil then
+		value = ""
+	end
+	return value
+end
+
+local function ParseDescription(this, text, character)
+	local icons = {}
+	local separatedText = SplitDescriptionByPattern(text,iconElementPattern)
+	for v in string.gmatch(text, iconElementPattern) do
+		icons[#icons+1] = v
+	end
+	local result = {}
+	for i,v in pairs(separatedText) do
+		local icon = icons[i]
+		if icon == nil then 
+			icon = "" 
+		else
+			icons[i] = nil
+		end
+		result[#result+1] = {
+			Text = GameHelpers.Tooltip.ReplacePlaceholders(v),
+			Icon = icon
+		}
+	end
+	for _,v in pairs(icons) do
+		result[#result+1] = {
+			Text = "",
+			Icon = v
+		}
+	end
+
+	for i,v in pairs(result) do
+		if v.Icon ~= "" then
+			local iconId = GetStringValue(v.Icon, "id='(.-)'")
+			local iconName = GetStringValue(v.Icon, "icon='(.-)'")
+			local iconType = GetStringValue(v.Icon, "type='(.-)'")
 			if not StringHelpers.IsNullOrWhitespace(iconId) then
 				if string.find(iconId, ";") then
+					if StringHelpers.IsNullOrWhitespace(iconName) and iconType ~= "3" then
+						local iconNames = {}
+						for _,v in pairs(StringHelpers.Split(iconId, ";")) do
+							local icon = Ext.StatGetAttribute(v, "Icon")
+							if not StringHelpers.IsNullOrWhitespace(icon) then
+								iconNames[#iconNames+1] = icon
+							else
+								iconNames[#iconNames+1] = "LeaderLib_Placeholder"
+							end
+						end
+						iconName = StringHelpers.Join(";", iconNames)
+					end
 					this.masteryMenuMC.descriptionList.addIconGroup(iconId, iconName, iconType, false, ";")
 				else
 					if not StringHelpers.IsNullOrWhitespace(iconType) then
@@ -16,17 +107,24 @@ local function ParseDescription(this, text)
 						if iconType == nil then
 							iconType = 1
 						end
+					else
+						iconType = 1
 					end
-					iconName = iconName or ""
+					if StringHelpers.IsNullOrWhitespace(iconName) then
+						if iconType ~= 3 then
+							iconName = Ext.StatGetAttribute(iconId, "Icon") or ""
+						else
+							iconName = "LLWEAPONEX_UI_PassiveBonus"
+						end
+					end
+					print(iconId, iconName, iconType)
 					this.masteryMenuMC.descriptionList.addIcon(iconId, iconName, iconType, false)
 				end
-			else
-				this.masteryMenuMC.descriptionList.addText(str, false)
 			end
 		end
-	else
-		this.masteryMenuMC.descriptionList.addText(text, false)
+		this.masteryMenuMC.descriptionList.addText(v.Text, false)
 	end
+	this.masteryMenuMC.descriptionList.positionElements()
 end
 
 local function GetAdditionalMasteryRankText(mastery, rank)
@@ -40,9 +138,7 @@ local function GetAdditionalMasteryRankText(mastery, rank)
 	return nil
 end
 
-function MasteryMenu:BuildDescription(mastery)
-	local this = self.Root
-
+function MasteryMenu:BuildDescription(this, mastery, character)
 	this.masteryMenuMC.descriptionList.clearElements()
 
 	local characterMasteryData = self.Variables.MasteryData
@@ -100,8 +196,9 @@ function MasteryMenu:BuildDescription(mastery)
 				end
 			end
 
-			ParseDescription(this, rankDescription)
+			ParseDescription(this, rankDescription, character)
 		else
+			rankDescription = GameHelpers.Tooltip.ReplacePlaceholders(rankDescription, character)
 			this.masteryMenuMC.descriptionList.addText(rankDescription, false)
 		end
 	end

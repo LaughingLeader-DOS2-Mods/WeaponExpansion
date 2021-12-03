@@ -292,14 +292,14 @@ package LS_Classes
 			return val3;
 		}
 		
-		public function getElementByString(param1:String, param2:String) : MovieClip
+		public function getElementByString(propertyName:String, value:String) : MovieClip
 		{
 			var val4:MovieClip = null;
 			var val3:uint = 0;
 			while(val3 < this.content_array.length)
 			{
 				val4 = this.content_array[val3];
-				if(val4 && val4[param1] == param2)
+				if(val4 && val4[propertyName] == value)
 				{
 					val4.list_pos = val3;
 					return val4;
@@ -408,18 +408,30 @@ package LS_Classes
 			return val2;
 		}
 		
-		public function getElementHeight(param1:MovieClip) : Number
+		public function getElementHeight(mc:MovieClip) : Number
 		{
-			var val2:Number = param1.height;
-			if(param1.heightOverride != undefined && !isNaN(param1.heightOverride))
+			var objHeight:Number = 0;
+			try
 			{
-				val2 = param1.heightOverride;
+				objHeight = mc.height;
+				if(mc.heightOverride != undefined && !isNaN(mc.heightOverride))
+				{
+					objHeight = mc.heightOverride;
+				}
+				else if(this.m_customElementHeight != -1)
+				{
+					objHeight = this.m_customElementHeight;
+				}
 			}
-			else if(this.m_customElementHeight != -1)
+			catch(ex:Error)
 			{
-				val2 = this.m_customElementHeight;
+				trace(ex);
 			}
-			return val2;
+			if(isNaN(objHeight))
+			{
+				objHeight = 0;
+			}
+			return objHeight;
 		}
 		
 		public function getContentHeight() : Number
@@ -866,15 +878,15 @@ package LS_Classes
 			return null;
 		}
 		
-		public function selectByListID(param1:Number) : *
+		public function selectByListID(index:Number) : *
 		{
-			var val2:MovieClip = this.getElementByListID(param1);
-			this.selectMC(val2);
+			var mc:MovieClip = this.getElementByListID(index);
+			this.selectMC(mc);
 		}
 		
-		public function selectMC(param1:MovieClip, param2:Boolean = false) : *
+		public function selectMC(mc:MovieClip, force:Boolean = false) : *
 		{
-			if(this.m_CurrentSelection != param1 || param2)
+			if(this.m_CurrentSelection != mc || force)
 			{
 				if(this.m_CurrentSelection)
 				{
@@ -887,17 +899,17 @@ package LS_Classes
 						this.m_CurrentSelection.INTDeselect();
 					}
 				}
-				if(param1)
+				if(mc)
 				{
-					this.m_CurrentSelection = param1;
+					this.m_CurrentSelection = mc;
 					dispatchEvent(new Event(Event.CHANGE));
 					if(this.OnSelectionChanged != null)
 					{
 						this.OnSelectionChanged();
 					}
-					if(param1.selectElement)
+					if(mc.selectElement)
 					{
-						param1.selectElement();
+						mc.selectElement();
 					}
 				}
 				else

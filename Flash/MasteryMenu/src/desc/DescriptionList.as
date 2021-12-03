@@ -31,7 +31,7 @@ package desc
 			var entryContent:DescriptionText = new DescriptionText();
 			entryContent.setText(text);
 			entryContent.width = this.width - (this.SIDE_SPACING * 2);
-			addElement(entryContent, reposition, false);
+			this.addElement(entryContent, reposition, false);
 		}
 
 		public function addIcon(id:String, icon:String = "", iconType:int = 1, reposition:Boolean = true) : *
@@ -111,7 +111,7 @@ package desc
 				{
 					iconName = "";
 				}
-				if (iconType < 0)
+				if (iconType <= 0)
 				{
 					iconType = 1;
 				}

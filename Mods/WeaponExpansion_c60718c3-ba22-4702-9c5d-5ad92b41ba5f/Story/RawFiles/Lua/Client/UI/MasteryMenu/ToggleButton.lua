@@ -115,7 +115,7 @@ end
 function ToggleButton:RegisterListeners(instance)
 	instance = instance or self.Instance
 	if instance then
-		Ext.RegisterUICall(instance, "toggleMasteryMenu", function(ui,call,...)
+		Ext.RegisterUICall(instance, "toggleMasteryMenu", function(ui,call)
 			if not MasteryMenu.Visible then
 				MasteryMenu:Open()
 			else

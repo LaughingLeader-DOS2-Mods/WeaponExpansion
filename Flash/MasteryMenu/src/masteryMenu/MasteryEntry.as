@@ -11,8 +11,7 @@ package masteryMenu
 		public var masteryFrame:MovieClip;
 		public var icon_mc:MovieClip;
 		
-		public var m_Id:Number;
-		public var masteryId:String;
+		public var id:String;
 		public var masteryTitle:String;
 		public var masteryDescriptionTitle:String;
 
@@ -24,12 +23,6 @@ package masteryMenu
 		{
 			super();
 			addFrameScript(0,this.frame1);
-		}
-		
-		public function setId(id:Number, mastery:String) : *
-		{
-			this.m_Id = id;
-			this.masteryId = mastery;
 		}
 		
 		public function setTitle(title:String, descriptionTitle:String = "") : *
@@ -146,14 +139,13 @@ package masteryMenu
 		public function onOver(e:MouseEvent) : *
 		{
 			masteryFrame.onOver(e);
-			ExternalInterface.call("overMastery", this.m_Id, this.masteryId);
+			ExternalInterface.call("overMastery", this.id);
 		}
 
 		public function onDown(e:MouseEvent) : *
 		{
 			masteryFrame.onDown(e);
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
-			//ExternalInterface.call("selectedMastery", this.m_Id, this.masteryId);
 			Registry.Main.selectEntry(this, false);
 		}
 		

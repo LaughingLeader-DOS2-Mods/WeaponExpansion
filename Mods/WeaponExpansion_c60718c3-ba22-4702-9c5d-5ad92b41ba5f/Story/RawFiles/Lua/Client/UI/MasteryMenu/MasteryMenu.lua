@@ -56,11 +56,11 @@ setmetatable(MasteryMenu, {
 function MasteryMenu:SetMastery(mastery)
 	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
 	self.Variables.SelectedMastery.Current = mastery
+	local character = GameHelpers.GetCharacter(self.Variables.MasteryData.UUID)
 	if not StringHelpers.IsNullOrWhitespace(mastery) then
-		self:BuildDescription(mastery)
 		local this = self.Root
 		if this then
-			this.selectMastery(mastery, true)
+			self:BuildDescription(this, mastery, character)
 		end
 	end
 end
@@ -143,7 +143,7 @@ function MasteryMenu:BuildMasteryEntries(this)
 			local xpPercentage = math.floor(barPercentage * 100)
 			local rankDisplayName = GameHelpers.GetStringKeyText(string.format("LLWEAPONEX_UI_MasteryMenu_Rank%i", i))
 			local masteryColorTitle = GetMasteryDescriptionTitle(data)
-			this.addMastery(i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
+			this.addMastery(tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
 			local expRankDisplay = rankDisplayName
 			if rank >= Mastery.Variables.MaxRank then
 				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayName)
@@ -186,7 +186,15 @@ function MasteryMenu:BuildMasteryMenu(this)
 		self:BuildMasteryEntries(this)
 
 		if not StringHelpers.IsNullOrWhitespace(self.Variables.SelectedMastery.Current) then
-			self:SetMastery(self.Variables.SelectedMastery.Current)
+			this.selectMastery(self.Variables.SelectedMastery.Current, true)
+		elseif not StringHelpers.IsNullOrWhitespace(self.Variables.SelectedMastery.Last) then
+			this.selectMastery(self.Variables.SelectedMastery.Last, true)
+		else
+			if not Vars.ControllerEnabled then
+				this.masteryMenuMC.selectNone()
+			else
+				this.masteryMenuMC.top()
+			end
 		end
 	end
 end
@@ -207,6 +215,7 @@ function MasteryMenu:Close(skipRequest)
 		self.Variables.SelectedMastery.Current = ""
 		self.Variables.MasteryData = nil
 		self.Visible = false
+		self.Instance:Hide()
 	end
 end
 
@@ -239,14 +248,16 @@ function MasteryMenu:CloseOtherPanels()
 end
 
 function MasteryMenu:Open(skipRequest)
-	if not self.Visible then
-		if skipRequest ~= true and not self.Variables.MasteryData then
-			local character = Client:GetCharacter()
-			if character then
-				Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(character.NetID))
-			end
-		else
-			local this = self.Root
+	if skipRequest ~= true or not self.Variables.MasteryData then
+		local character = Client:GetCharacter()
+		if character then
+			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(character.NetID))
+		end
+	else
+		local instance = self.Instance
+		if instance then
+			instance:Show()
+			local this = instance:GetRoot()
 			if this then
 				self:BuildMasteryMenu(this)
 				this.openMenu()
@@ -278,10 +289,7 @@ function MasteryMenu:OnMenuEvent(ui, call, ...)
 	local params = {...}
 	if call == "requestCloseUI" or call == "requestCloseMasteryMenu" then
 		self:Close(true)
-	elseif call == "onMasterySelected" then
-		local index = params[1]; local mastery = params[2]
-		self:SetMastery(mastery)
-	elseif call == "selectedMastery" then
+	elseif call == "onMasterySelected" or call == "selectedMastery" then
 		self:SetMastery(params[1])
 	elseif call == "mastery_showIconTooltip" then
 		local iconType = params[1]
@@ -376,10 +384,23 @@ local defaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data
 ---@private
 function MasteryMenu:Initialize()
 	local instance = Ext.CreateUI(MasteryMenu.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer, defaultUIFlags)
-	instance:Invoke("closeMenu", true)
+	--instance:Invoke("closeMenu", true)
 	self:RegisterListeners(instance)
+	--instance:Hide()
 	return instance
 end
+
+Ext.RegisterListener("GameStateChanged", function(last, next)
+	if next == "Running" and last ~= "Paused" then
+		if not Ext.GetUI(MasteryMenu.ID) then
+			MasteryMenu:Initialize()
+			local instance = MasteryMenu.Instance
+			if instance then
+				instance:Hide()
+			end
+		end
+	end
+end)
 
 local function HideMasteryMenu()
 	MasteryMenu:Close()

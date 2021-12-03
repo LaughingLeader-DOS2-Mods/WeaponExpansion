@@ -47,7 +47,6 @@ package
 		{
 			ExternalInterface.call("registerAnchorId",this.anchorId);
 			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
-			this.masteryMenuMC.masteryListInit();
 			this.masteryMenuMC.visible = false;
 		}
 
@@ -276,9 +275,9 @@ package
 			this.masteryMenuMC.resetList();
 		}
 		
-		public function addMastery(listId:Number, mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
+		public function addMastery(mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
 		{
-			this.masteryMenuMC.addMastery(listId,mastery,title,descriptionTitle,currentRank,barPercentage,isMastered);
+			this.masteryMenuMC.addMastery(mastery,title,descriptionTitle,currentRank,barPercentage,isMastered);
 		}
 
 		public function buildDescription() : void
@@ -331,19 +330,19 @@ package
 			Registry.RankNodePositions[rank] = barPercentage
 		}
 
-		public function setExperienceBarTooltip(listId:Number, text:String) : void
+		public function setExperienceBarTooltip(mastery:String, text:String) : void
 		{
-			this.masteryMenuMC.setExperienceBarTooltip(listId, text);
+			this.masteryMenuMC.setExperienceBarTooltip(mastery, text);
 		}
 
-		public function setRankTooltipText(listId:Number, rank:int, text:String) : void
+		public function setRankTooltipText(mastery:String, rank:int, text:String) : void
 		{
-			this.masteryMenuMC.setRankTooltipText(listId, rank, text);
+			this.masteryMenuMC.setRankTooltipText(mastery, rank, text);
 		}
 		
-		public function selectMastery(id:Number, instant:Boolean = false) : void
+		public function selectMastery(id:String, instant:Boolean = false) : void
 		{
-			this.masteryMenuMC.select(id,instant);
+			this.masteryMenuMC.selectMastery(id,instant);
 		}
 		
 		internal function frame1() : void
