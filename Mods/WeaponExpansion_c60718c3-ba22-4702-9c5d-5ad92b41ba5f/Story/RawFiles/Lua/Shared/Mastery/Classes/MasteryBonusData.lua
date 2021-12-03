@@ -124,21 +124,22 @@ end
 
 ---@param callback BasicAttackOnHitTargetCallback
 ---@param skipBonusCheck boolean
+---@param priority integer
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterOnHit(callback, skipBonusCheck)
+function MasteryBonusData:RegisterOnHit(callback, skipBonusCheck, priority)
 	if not isClient then
 		if skipBonusCheck then
-			AttackManager.RegisterOnHit(callback)
+			AttackManager.OnHit.Register(callback, priority)
 		else
-			local wrapper = function(source, target, data, bonuses, bHitObject, isFromSkill)
-				if MasteryBonusManager.HasMasteryBonus(source, self.ID) then
-					local b,err = xpcall(callback, debug.traceback, source, target, data, bonuses, bHitObject, isFromSkill)
+			local wrapper = function(attacker, target, data, targetIsObject, skill)
+				if MasteryBonusManager.HasMasteryBonus(attacker, self.ID) then
+					local b,err = xpcall(callback, debug.traceback, attacker, target, data, targetIsObject, skill, self)
 					if not b then
 						Ext.PrintError(err)
 					end
 				end
 			end
-			AttackManager.RegisterOnHit(wrapper)
+			AttackManager.OnHit.Register(wrapper, priority)
 		end
 	end
 	return self
@@ -148,20 +149,43 @@ end
 ---@param callback BasicAttackOnWeaponTagHitCallback
 ---@param skipBonusCheck boolean
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterOnWeaponTagHit(tag, callback, skipBonusCheck)
+function MasteryBonusData:RegisterOnWeaponTagHit(tag, callback, skipBonusCheck, priority)
 	if not isClient then
 		if skipBonusCheck then
-			AttackManager.RegisterOnWeaponTagHit(tag, callback)
+			AttackManager.OnWeaponTagHit.Register(tag, callback, priority)
 		else
-			local wrapper = function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-				if MasteryBonusManager.HasMasteryBonus(source, self.ID) then
-					local b,err = xpcall(callback, debug.traceback, tag, source, target, data, bonuses, bHitObject, isFromSkill)
+			local wrapper = function(tag, attacker, target, data, targetIsObject, skill)
+				if MasteryBonusManager.HasMasteryBonus(attacker, self.ID) then
+					local b,err = xpcall(callback, debug.traceback, tag, attacker, target, data, targetIsObject, skill, self)
 					if not b then
 						Ext.PrintError(err)
 					end
 				end
 			end
-			AttackManager.RegisterOnWeaponTagHit(tag, wrapper)
+			AttackManager.OnWeaponTagHit.Register(tag, wrapper, priority)
+		end
+	end
+	return self
+end
+
+---@param weaponType string|string[]
+---@param callback BasicAttackOnWeaponTypeHitCallback
+---@param skipBonusCheck boolean
+---@return MasteryBonusData
+function MasteryBonusData:RegisterOnWeaponTypeHit(weaponType, callback, skipBonusCheck, priority)
+	if not isClient then
+		if skipBonusCheck then
+			AttackManager.OnWeaponTypeHit.Register(weaponType, callback, priority)
+		else
+			local wrapper = function(weaponType, attacker, target, data, targetIsObject, skill)
+				if MasteryBonusManager.HasMasteryBonus(attacker, self.ID) then
+					local b,err = xpcall(callback, debug.traceback, weaponType, attacker, target, data, targetIsObject, skill, self)
+					if not b then
+						Ext.PrintError(err)
+					end
+				end
+			end
+			AttackManager.OnWeaponTypeHit.Register(weaponType, wrapper, priority)
 		end
 	end
 	return self

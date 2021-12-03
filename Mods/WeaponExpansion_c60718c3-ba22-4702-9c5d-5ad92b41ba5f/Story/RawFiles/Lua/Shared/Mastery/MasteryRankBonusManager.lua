@@ -394,6 +394,26 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 	end
 end
 
+---@param mastery string
+---@param rank integer
+---@param id string Optional ID to look for.
+---@return MasteryBonusData|MasteryBonusData[]
+function MasteryBonusManager.GetRankBonus(mastery, rank, id)
+	---@type MasteryData
+	local masteryData = Masteries[mastery]
+	if masteryData and masteryData.RankBonuses[rank] then
+		if id then
+			for _,v in pairs(masteryData.RankBonuses[rank].Bonuses) do
+				if v.ID == id then
+					return v
+				end
+			end
+		else
+			return masteryData.RankBonuses[rank].Bonuses
+		end
+	end
+end
+
 ---@param data MasteryBonusData
 local function EvaluateEntryForBonusText(data, character, skillOrStatus, isStatus, status, ...)
 	if data.Type == "MasteryBonusData" then
