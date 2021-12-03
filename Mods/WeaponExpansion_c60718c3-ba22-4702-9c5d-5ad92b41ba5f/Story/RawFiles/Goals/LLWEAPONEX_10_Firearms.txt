@@ -81,43 +81,6 @@ THEN
 ObjectSetFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 0);
 //END_REGION
 
-//REGION AIMED_SHOT_BONUSES
-/*
-IF
-CharacterUsedSkillOnTarget(_Char, _Target, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
-AND
-HasActiveStatus(_Target, "MARKED", 1)
-THEN
-ApplyStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 12.0, 1, _Char);
-
-IF
-CharacterUsedSkill(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
-THEN
-ApplyStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, _Char);
-
-IF
-CharacterUsedSkill(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
-THEN
-ApplyStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, _Char);
-
-IF
-SkillCast(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot", _, _)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 1500, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses");
-
-IF
-SkillCast(_Char, "Projectile_LLWEAPONEX_Rifle_AimedShot_Enemy", _, _)
-THEN
-LeaderLib_Timers_StartObjectTimer(_Char, 1500, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses");
-*/
-
-IF
-StoryEvent((CHARACTERGUID)_Char, "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL");
-RemoveStatus(_Char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY");
-//END_REGION
-
 //REGION BLUNDERBUSS_SCATTERSHOT
 IF
 CharacterStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_HIT", _Source)

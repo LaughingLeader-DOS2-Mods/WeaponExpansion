@@ -12,11 +12,17 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", function(skill, c
 			end
 		end)
 	elseif state == SKILL_STATE.CAST then
-		Osi.LeaderLib_Timers_StartObjectTimer(char, 1500, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses", "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
+		Timer.StartObjectTimer("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", char, 1500)
 	elseif state == SKILL_STATE.HIT then
-		Osi.LeaderLib_Timers_CancelObjectObjectTimer(char, "Timers_LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
-		SetStoryEvent(char, "LLWEAPONEX_Rifle_AimedShot_ClearBonuses")
+		Timer.Cancel("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", char)
+		RemoveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL")
+		RemoveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY")
 	end
+end)
+
+Timer.RegisterListener("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", function(timerName, uuid)
+	RemoveStatus(uuid, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL")
+	RemoveStatus(uuid, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY")
 end)
 
 RegisterSkillListener({"Projectile_LLWEAPONEX_Greatbow_PiercingShot", "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Enemy"}, function(skill, char, state, data)
