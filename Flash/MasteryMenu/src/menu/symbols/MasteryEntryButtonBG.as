@@ -1,4 +1,4 @@
-package masteryMenu
+package menu.symbols
 {
 	import flash.display.MovieClip;
 	
@@ -7,12 +7,12 @@ package masteryMenu
 		public function MasteryEntryButtonBG()
 		{
 			super();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 		}
 		
-		public function setController(param1:Boolean) : *
+		public function setController(enabled:Boolean) : void
 		{
-			if(param1)
+			if(enabled)
 			{
 				gotoAndStop(1);
 			}
@@ -22,9 +22,9 @@ package masteryMenu
 			}
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
-			stop();
+			this.stop();
 		}
 	}
 }

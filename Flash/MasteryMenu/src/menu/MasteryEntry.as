@@ -1,4 +1,4 @@
-package masteryMenu
+package menu
 {
 	import flash.display.MovieClip;
 	import LS_Classes.textHelpers;
@@ -22,10 +22,10 @@ package masteryMenu
 		public function MasteryEntry()
 		{
 			super();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 		}
 		
-		public function setTitle(title:String, descriptionTitle:String = "") : *
+		public function setTitle(title:String, descriptionTitle:String = "") : void
 		{
 			this.masteryTitle = title;
 			if (descriptionTitle == "")
@@ -39,7 +39,7 @@ package masteryMenu
 			this.positioningText();
 		}
 		
-		public function positioningText() : *
+		public function positioningText() : void
 		{
 			this.masteryFrame.title_txt.height = this.masteryFrame.title_txt.textHeight;
 			this.masteryFrame.title_txt.y = 33.15;
@@ -50,115 +50,115 @@ package masteryMenu
 			this.masteryFrame.bottom_decor.y = this.masteryFrame.title_txt.y + this.masteryFrame.title_txt.height + this.DECOR_MARGIN * 2;
 		}
 
-		public function setBar(barPercentage:Number, animate:Boolean) : *
+		public function setBar(barPercentage:Number, animate:Boolean) : void
 		{
 			this.xpBar.setBar(barPercentage, animate);
 		}
 
-		public function setBarColor(color:uint) : *
+		public function setBarColor(color:uint) : void
 		{
 			this.xpBar.setBarColour(color);
 		}
 
-		public function xpBar_onOut(e:MouseEvent) : *
+		public function xpBar_onOut(e:MouseEvent) : void
 		{
 			ExternalInterface.call("hideTooltip");
-			xpBar.hasTooltip = false;
+			this.xpBar.hasTooltip = false;
 		}
 		
-		public function xpBar_onOver(e:MouseEvent) : *
+		public function xpBar_onOver(e:MouseEvent) : void
 		{
-			tooltipHelper.ShowTooltipForMC(xpBar,root,"right");
+			tooltipHelper.ShowTooltipForMC(this.xpBar,this.root,"right");
 		}
 
-		public function setExperienceBarTooltip(text:String) : *
+		public function setExperienceBarTooltip(text:String) : void
 		{
-			xpBar.tooltip = text;
-			xpBar.addEventListener(MouseEvent.ROLL_OVER,this.xpBar_onOver);
-			xpBar.addEventListener(MouseEvent.ROLL_OUT,this.xpBar_onOut);
+			this.xpBar.tooltip = text;
+			this.xpBar.addEventListener(MouseEvent.ROLL_OVER,this.xpBar_onOver);
+			this.xpBar.addEventListener(MouseEvent.ROLL_OUT,this.xpBar_onOut);
 		}
 
-		public function masteryStar_onOut(e:MouseEvent) : *
+		public function masteryStar_onOut(e:MouseEvent) : void
 		{
 			ExternalInterface.call("hideTooltip");
-			icon_mc.hasTooltip = false;
+			this.icon_mc.hasTooltip = false;
 		}
 		
-		public function masteryStar_onOver(e:MouseEvent) : *
+		public function masteryStar_onOver(e:MouseEvent) : void
 		{
 			tooltipHelper.ShowTooltipForMC(icon_mc,root,"right");
 		}
 
-		public function setIsMastered(isMastered:Boolean=false) : *
+		public function setIsMastered(isMastered:Boolean=false) : void
 		{
-			icon_mc.visible = isMastered;
+			this.icon_mc.visible = isMastered;
 
 			if (isMastered)
 			{
-				icon_mc.gotoAndPlay(1);
-				icon_mc.addEventListener(MouseEvent.ROLL_OVER,this.masteryStar_onOver);
-				icon_mc.addEventListener(MouseEvent.ROLL_OUT,this.masteryStar_onOut);
+				this.icon_mc.gotoAndPlay(1);
+				this.icon_mc.addEventListener(MouseEvent.ROLL_OVER,this.masteryStar_onOver);
+				this.icon_mc.addEventListener(MouseEvent.ROLL_OUT,this.masteryStar_onOut);
 			}
 			else
 			{
-				icon_mc.removeEventListener(MouseEvent.ROLL_OVER,this.masteryStar_onOver);
-				icon_mc.removeEventListener(MouseEvent.ROLL_OUT,this.masteryStar_onOut);
+				this.icon_mc.removeEventListener(MouseEvent.ROLL_OVER,this.masteryStar_onOver);
+				this.icon_mc.removeEventListener(MouseEvent.ROLL_OUT,this.masteryStar_onOut);
 			}
 		}
 
-		public function setRankTooltipText(rank:int, text:String) : *
+		public function setRankTooltipText(rank:int, text:String) : void
 		{
 			this.xpBar.setRankTooltipText(rank, text);
 		}
 
-		public function createRankNodes(currentRank:int, maxRank:int) : *
+		public function createRankNodes(currentRank:int, maxRank:int) : void
 		{
 			this.xpBar.createRankNodes(currentRank, maxRank);
 		}
 
-		public function positionRankNodes(currentRank:int) : *
+		public function positionRankNodes(currentRank:int) : void
 		{
 			this.xpBar.positionRankNodes(currentRank);
 		}
 		
-		public function selectElement() : *
+		public function selectElement() : void
 		{
 			this.masteryFrame.select();
 		}
 		
-		public function deselectElement() : *
+		public function deselectElement() : void
 		{
 			this.masteryFrame.deselect();
 		}
 
-		public function onOut(e:MouseEvent) : *
+		public function onOut(e:MouseEvent) : void
 		{
-			masteryFrame.onOut(e);
+			this.masteryFrame.onOut(e);
 		}
 		
-		public function onOver(e:MouseEvent) : *
+		public function onOver(e:MouseEvent) : void
 		{
-			masteryFrame.onOver(e);
+			this.masteryFrame.onOver(e);
 			ExternalInterface.call("overMastery", this.id);
 		}
 
-		public function onDown(e:MouseEvent) : *
+		public function onDown(e:MouseEvent) : void
 		{
-			masteryFrame.onDown(e);
+			this.masteryFrame.onDown(e);
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
 			Registry.Main.selectEntry(this, false);
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
-			stop();
+			this.stop();
 			//this.xpBar.mouseChildren = false;
 			//this.xpBar.mouseEnabled = false;
-			icon_mc.tooltip = Registry.MasteredText;
+			this.icon_mc.tooltip = Registry.MasteredText;
 
-			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
-			addEventListener(MouseEvent.ROLL_OVER,this.onOver);
-			addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
+			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
+			this.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
+			this.addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
 		}
 	}
 }

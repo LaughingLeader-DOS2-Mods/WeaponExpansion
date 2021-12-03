@@ -1,4 +1,4 @@
-package masteryMenu
+package menu.symbols
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
@@ -13,10 +13,10 @@ package masteryMenu
 		public function MasteryBarRankNode()
 		{
 			super();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 		}
 		
-		public function onOut(param1:MouseEvent) : *
+		public function onOut(param1:MouseEvent) : void
 		{
 			if(!this.isUnlocked)
 			{
@@ -30,7 +30,7 @@ package masteryMenu
 			this.hasTooltip = false;
 		}
 		
-		public function onOver(param1:MouseEvent) : *
+		public function onOver(param1:MouseEvent) : void
 		{
 			if(!this.isUnlocked)
 			{
@@ -44,12 +44,12 @@ package masteryMenu
 			tooltipHelper.ShowTooltipForMC(this,root,"right");
 		}
 
-		public function setTooltip(text:String) : *
+		public function setTooltip(text:String) : void
 		{
 			this.tooltip = text;
 		}
 
-		public function setUnlocked(unlocked:Boolean) : *
+		public function setUnlocked(unlocked:Boolean) : void
 		{
 			this.isUnlocked = unlocked;
 			if (unlocked)
@@ -62,7 +62,7 @@ package masteryMenu
 			}
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
 			this.stop();
 			this.addEventListener(MouseEvent.ROLL_OUT,this.onOut);

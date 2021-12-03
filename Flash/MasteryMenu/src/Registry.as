@@ -1,6 +1,6 @@
 package
 {
-	import masteryMenu.masteryMenu_Main;
+	import menu.MasteryMenuPanel;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.Dictionary;
 
@@ -11,7 +11,7 @@ package
 		public static var RankNodePositions:Array;
 		public static var CharacterHandle:Number;
 
-		public static var Main:masteryMenu_Main;
+		public static var Main:MasteryMenuPanel;
 
 		//public static var SkillPattern:RegExp;
 

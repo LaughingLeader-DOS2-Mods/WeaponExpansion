@@ -1,4 +1,4 @@
-package masteryMenu
+package menu.symbols
 {
 	import flash.display.MovieClip;
 

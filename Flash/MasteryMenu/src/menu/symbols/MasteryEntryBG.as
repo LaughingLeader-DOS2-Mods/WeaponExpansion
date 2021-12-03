@@ -1,20 +1,18 @@
-package masteryMenu
+package menu.symbols
 {
 	import flash.display.MovieClip;
 	
 	public dynamic class MasteryEntryBG extends MovieClip
 	{
-		 
-		
 		public function MasteryEntryBG()
 		{
 			super();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
-			stop();
+			this.stop();
 		}
 	}
 }

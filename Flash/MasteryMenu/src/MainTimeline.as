@@ -6,11 +6,11 @@ package
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
-	import masteryMenu.*;
+	import menu.MasteryMenuPanel;
 	
 	public dynamic class MainTimeline extends MovieClip
 	{
-		public var masteryMenuMC:masteryMenu_Main;
+		public var masteryMenuMC:MasteryMenuPanel;
 
 		public var layout:String;
 		
@@ -229,10 +229,16 @@ package
 			return false;
 		}
 
-		public function setPlayerHandle() : void
+		public function setPlayerHandle(handle:* = null) : void
 		{
-			Registry.CharacterHandle = characterHandle;
-			trace("Set Registry.CharacterHandle to", Registry.CharacterHandle, characterHandle)
+			if(!isNaN(handle))
+			{
+				Registry.CharacterHandle = Number(handle);
+			}
+			else
+			{
+				Registry.CharacterHandle = characterHandle;
+			}
 		}
 		
 		public function setMaxRank(maxRank:int) : void
@@ -317,7 +323,7 @@ package
 					i = i + 4;
 				}
 				this.masteryMenuMC.descriptionList.positionElements();
-				descriptionContent = new Array();
+				this.descriptionContent = new Array();
 			}
 			else
 			{

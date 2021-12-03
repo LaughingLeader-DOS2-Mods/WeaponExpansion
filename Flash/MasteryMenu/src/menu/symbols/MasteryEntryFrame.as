@@ -1,4 +1,4 @@
-package masteryMenu
+package menu.symbols
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
@@ -8,26 +8,20 @@ package masteryMenu
 	public dynamic class MasteryEntryFrame extends MovieClip
 	{
 		public var bottom_decor:MovieClip;
-		
 		public var bg_mc:MovieClip;
-		
 		public var title_txt:TextField;
-		
 		public var top_decor:MovieClip;
-		
 		public var masteryEntry:MovieClip;
-		
 		public var buttonType:Number;
-
 		public var selected:Boolean = false;
 		
 		public function MasteryEntryFrame()
 		{
 			super();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 		}
 		
-		public function onOut(e:MouseEvent) : *
+		public function onOut(e:MouseEvent) : void
 		{
 			if(!selected)
 			{
@@ -35,7 +29,7 @@ package masteryMenu
 			}
 		}
 		
-		public function onOver(e:MouseEvent) : *
+		public function onOver(e:MouseEvent) : void
 		{
 			if(!selected)
 			{
@@ -43,26 +37,26 @@ package masteryMenu
 			}
 		}
 
-		public function onDown(e:MouseEvent) : *
+		public function onDown(e:MouseEvent) : void
 		{
 			this.select();
 		}
 
-		public function select(): *
+		public function select(): void
 		{
 			this.selected = true;
 			this.bg_mc.gotoAndStop(3);
 		}
 
-		public function deselect(): *
+		public function deselect(): void
 		{
 			this.selected = false;
 			this.bg_mc.gotoAndStop(1);
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
-			stop();
+			this.stop();
 			this.masteryEntry = MovieClip(this.parent);
 			this.buttonType = 1;
 		}

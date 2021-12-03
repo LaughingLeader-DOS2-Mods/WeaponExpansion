@@ -1,10 +1,13 @@
-package masteryMenu
+package menu
 {
 	import LS_Classes.larHealthbar;
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
 	import LS_Classes.tooltipHelper;
+	import menu.symbols.MasteryBarRankNode;
+	import menu.symbols.MasteryBarRankNodeEnd;
+	import menu.symbols.MasteryBarNodeCrystal;
 
 	public dynamic class MasteryBar extends larHealthbar
 	{
@@ -21,18 +24,18 @@ package masteryMenu
 		public function MasteryBar()
 		{
 			super();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 
 			//nodes = new <MovieClip>[node_rank1,node_rank2,node_rank3,node_rank4,];
-			nodes = new Array();
+			this.nodes = new Array();
 		}
 
-		internal function frame1() : *
+		internal function frame1() : void
 		{
-			stop();
+			this.stop();
 		}
 
-		public function setRankTooltipText(rank:int, text:String) : *
+		public function setRankTooltipText(rank:int, text:String) : void
 		{
 			var node:MovieClip = this.nodes[rank-1];
 			if (node != null)
@@ -41,17 +44,16 @@ package masteryMenu
 			}
 		}
 
-		public function createRankNodes(currentRank:int, maxRank:int) : *
+		public function createRankNodes(currentRank:int, maxRank:int) : void
 		{
 			var maxWidth:Number = this.barBG_mc.width;
 			var startX:Number = this.barBG_mc.x;
 
 			var i:int = 0;
 			var max:int = nodes.length - 1;
+			var node:MasteryBarRankNode = null;
 			while (i < maxRank)
 			{
-				var node:MasteryBarRankNode = null;
-
 				if (i < maxRank-1)
 				{
 					node = new MasteryBarRankNode();
@@ -89,21 +91,23 @@ package masteryMenu
 			}
 		}
 
-		public function positionRankNodes(targetRank:int) : *
+		public function positionRankNodes(targetRank:int) : void
 		{
 			var maxWidth:Number = this.barBG_mc.width;
 			var startX:Number = this.barBG_mc.x;
 
 			var i:int = 0;
 			var max:int = nodes.length - 1;
+			var node:MovieClip = null;
+			var nodeBarPercentage:Number = 0;
 			while (i < nodes.length)
 			{
-				var node:MovieClip = this.nodes[i];
+				node = this.nodes[i];
 				if (node != null)
 				{
 					if (i < max)
 					{
-						var nodeBarPercentage:Number = Registry.RankNodePositions[i+1];
+						nodeBarPercentage = Registry.RankNodePositions[i+1];
 						node.x = (startX + (maxWidth * nodeBarPercentage));
 					}
 					else

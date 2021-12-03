@@ -1,4 +1,4 @@
-package masteryMenu
+package menu
 {
 	import LS_Classes.scrollList;
 	import LS_Classes.scrollbar_text;
@@ -14,7 +14,7 @@ package masteryMenu
 	import desc.DescriptionList;
 	import LS_Symbols.buttonHintBar;
 	
-	public dynamic class masteryMenu_Main extends MovieClip
+	public dynamic class MasteryMenuPanel extends MovieClip
 	{
 		public var accept_mc:MovieClip;
 		public var btn_bg:MovieClip;
@@ -61,10 +61,10 @@ package masteryMenu
 		public var mousePosX:Number;
 		public var mousePosY:Number;
 		
-		public function masteryMenu_Main()
+		public function MasteryMenuPanel()
 		{
 			super();
-			addFrameScript(0,this.frame1);
+			this.addFrameScript(0,this.frame1);
 		}
 		
 		public function masteryListInit() : void
@@ -87,11 +87,11 @@ package masteryMenu
 			this.masteryHandle.addChild(this.masteryList);
 
 			this.descriptionList = new DescriptionList();
-			masteryDesc_mc.addChild(descriptionList);
+			this.masteryDesc_mc.addChild(this.descriptionList);
 			this.descriptionList.scrollbarSpacing = 0;
 			//this.descriptionList.x = masteryDesc_mc.x;
 			//this.descriptionList.y = masteryDesc_mc.y;
-			this.descriptionList.setFrame(masteryDesc_mc.width,masteryDesc_mc.height);
+			this.descriptionList.setFrame(this.masteryDesc_mc.width,this.masteryDesc_mc.height);
 			this.descriptionList.setFrame(440,670);
 			//this.descriptionList.SB_SPACING = 10;
 			this.descriptionList.TOP_SPACING = 36;
@@ -179,7 +179,7 @@ package masteryMenu
 
 		public function addMastery(mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
 		{
-			noMasteries_mc.visible = false;
+			this.noMasteries_mc.visible = false;
 
 			var masteryMC:MovieClip = this.masteryList.getElementByString("id", mastery);
 			if(masteryMC == null)
@@ -234,7 +234,7 @@ package masteryMenu
 			this.descriptionList.clearIcons();
 			this.resetTextScrollbar();
 			this.masteryCount = 0;
-			noMasteries_mc.visible = true;
+			this.noMasteries_mc.visible = true;
 			//textHelpers.setFormattedText(this.name_txt, this.emptyListTitle);
 		}
 
@@ -353,10 +353,10 @@ package masteryMenu
 		{
 			ExternalInterface.call("UIAssert","[WeaponExpansion] dragInit");
 			this.windowDragStarted = false;
-			stage.addEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
+			this.stage.addEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
 			this.dragStartMP.y = stage.mouseY;
 			this.dragStartMP.x = stage.mouseX;
-			stage.addEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
+			this.stage.addEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
 		}
 
 		public function dragMoveWindow(e:MouseEvent) : void
@@ -382,7 +382,7 @@ package masteryMenu
 			{
 				stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
 			}
-			stage.removeEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
+			this.stage.removeEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
 			this.windowDragStarted = false;
 		}
 		

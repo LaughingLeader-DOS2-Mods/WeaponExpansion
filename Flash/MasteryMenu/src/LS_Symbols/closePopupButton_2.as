@@ -1,4 +1,4 @@
-package masteryMenu
+package LS_Symbols
 {
 	import flash.display.MovieClip;
 	import flash.events.MouseEvent;
@@ -6,10 +6,7 @@ package masteryMenu
 	
 	public dynamic class closePopupButton_2 extends MovieClip
 	{
-		 
-		
 		public var bg_mc:MovieClip;
-		
 		public var base:MovieClip;
 		
 		public function closePopupButton_2()
@@ -18,19 +15,19 @@ package masteryMenu
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function onOut(param1:MouseEvent) : *
+		public function onOut(e:MouseEvent) : void
 		{
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(1);
 		}
 		
-		public function onOver(param1:MouseEvent) : *
+		public function onOver(e:MouseEvent) : void
 		{
 			this.bg_mc.gotoAndStop(2);
 			ExternalInterface.call("PlaySound","UI_Generic_Over");
 		}
 		
-		public function onUp(param1:MouseEvent) : *
+		public function onUp(e:MouseEvent) : void
 		{
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(2);
@@ -39,13 +36,13 @@ package masteryMenu
 			ExternalInterface.call("requestCloseUI");
 		}
 		
-		public function onDown(param1:MouseEvent) : *
+		public function onDown(e:MouseEvent) : void
 		{
 			addEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(3);
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
 			addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			addEventListener(MouseEvent.ROLL_OVER,this.onOver);
