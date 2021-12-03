@@ -166,7 +166,6 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid)
 					end
 				end
-				AttackManager.InvokeOnHit(true, source, target, data.Damage, data, bonuses, false)
 			elseif skill then
 				if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
 				and not armCannonSkills[skill]
@@ -176,7 +175,6 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 				end
 				if IsWeaponSkill(data.SkillData) then
 					MasterySystem.GrantWeaponSkillExperience(source.MyGuid, target.MyGuid)
-					AttackManager.InvokeOnHit(true, source, target, data.Damage, data, bonuses, true)
 				end
 			end
 		end

@@ -1,14 +1,14 @@
 if not Vars.IsClient then
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_UniqueAnvilMace", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject then
+	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_UniqueAnvilMace", function(tag, attacker, target, data, targetIsObject, skill)
+		if targetIsObject then
 			--Ding/dizzy on crit
 			if data.Damage > 0 and data:HasHitFlag("CriticalHit", true) then
 				PlaySound(target.MyGuid, "LeaderLib_Impacts_Anvil_01")
-				GameHelpers.Status.Apply(target, "LLWEAPONEX_DIZZY", 6.0, false, source)
+				GameHelpers.Status.Apply(target, "LLWEAPONEX_DIZZY", 6.0, false, attacker)
 			end
-		elseif not isFromSkill then
+		elseif not skill then
 			--Shockwave when attacking the ground
-			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", source, {EnemiesOnly = true})
+			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", attacker, {EnemiesOnly = true})
 			PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", table.unpack(target))
 		end
 	end)

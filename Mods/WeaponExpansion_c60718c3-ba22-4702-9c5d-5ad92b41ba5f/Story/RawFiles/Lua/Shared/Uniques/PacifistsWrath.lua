@@ -1,6 +1,6 @@
 if not Vars.IsClient then
 	--1 Damage Max
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_PacifistsWrath_Equipped", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
+	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_PacifistsWrath_Equipped", function(tag, attacker, target, data, targetIsObject, skill)
 		if data.Damage > 1 then
 			data:ClearAllDamage()
 			--No killing if at 1 hp

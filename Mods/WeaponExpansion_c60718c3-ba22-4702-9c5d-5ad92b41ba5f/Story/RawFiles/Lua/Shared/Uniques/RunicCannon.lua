@@ -56,10 +56,10 @@ if not Vars.IsClient then
 	end
 
 	---@param data HitData
-	local function OnRunicCannonAttack(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject and (not isFromSkill or (isFromSkill and not string.find(data.Skill, "LLWEAPONEX_ArmCannon"))) then
-			Osi.LLWEAPONEX_ArmCannon_OnHit(source.MyGuid, target.MyGuid)
-			Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(source.MyGuid, 750)
+	local function OnRunicCannonAttack(tag, attacker, target, data, targetIsObject, skill)
+		if targetIsObject and (not skill or (skill and not string.find(skill.Name, "LLWEAPONEX_ArmCannon"))) then
+			Osi.LLWEAPONEX_ArmCannon_OnHit(attacker.MyGuid, target.MyGuid)
+			Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(attacker.MyGuid, 750)
 		end
 	end
 
@@ -67,7 +67,7 @@ if not Vars.IsClient then
 
 	Ext.RegisterListener("SessionLoaded", function()
 		if not registeredListener then
-			AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_RunicCannonEquipped", OnRunicCannonAttack)
+			AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_RunicCannonEquipped", OnRunicCannonAttack)
 			registeredListener = true
 		end
 	end)

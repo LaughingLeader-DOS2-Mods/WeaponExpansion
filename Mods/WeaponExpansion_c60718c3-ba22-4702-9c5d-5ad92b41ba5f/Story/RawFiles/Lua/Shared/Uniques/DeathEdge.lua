@@ -23,9 +23,9 @@ if not Vars.IsClient then
 		end
 	end)
 
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_DeathEdge_Equipped", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject then
-			DeathManager.ListenForDeath("DeathEdgeBonus", target, source, 1000)
+	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_DeathEdge_Equipped", function(tag, attacker, target, data, targetIsObject, skill)
+		if targetIsObject then
+			DeathManager.ListenForDeath("DeathEdgeBonus", target, attacker, 1000)
 		end
 	end)
 end

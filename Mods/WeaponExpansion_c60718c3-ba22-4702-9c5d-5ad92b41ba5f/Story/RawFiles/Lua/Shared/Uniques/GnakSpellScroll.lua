@@ -660,17 +660,17 @@ if not Vars.IsClient then
 		DeathManager.ListenForDeath("GnakSpellScroll", GameHelpers.GetUUID(target), GameHelpers.GetUUID(attacker), delay)
 	end
 
-	AttackManager.RegisterOnStart(function(attacker, target)
+	AttackManager.OnStart.Register(function(attacker, target)
 		if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 			ListenForDeath(target, attacker, 3000)
 		end
 	end)
 
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_GnakSpellScrollEquipped", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if not isFromSkill and HasActiveStatus(source.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
-			ListenForDeath(target, source, 1500)
-			if FireSpell(source.MyGuid, target.MyGuid) then
-				RemoveStatus(source.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
+	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_GnakSpellScrollEquipped", function(tag, attacker, target, data, targetIsObject, skill)
+		if not skill and HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
+			ListenForDeath(target, attacker, 1500)
+			if FireSpell(attacker.MyGuid, target.MyGuid) then
+				RemoveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
 			end
 		end
 	end)

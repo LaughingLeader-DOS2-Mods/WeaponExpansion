@@ -31,15 +31,15 @@ if not Vars.IsClient then
 		end
 	end)
 	
-	AttackManager.RegisterOnStart(function(attacker, target)
+	AttackManager.OnStart.Register(function(attacker, target)
 		if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS") == 1 then
 			RemoveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
 		end
 	end)
 	
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Blunderbuss_Equipped", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if not isFromSkill then
-			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode", source)
+	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Blunderbuss_Equipped", function(tag, attacker, target, data, targetIsObject, skill)
+		if not skill then
+			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode", attacker)
 		end
 	end)
 end

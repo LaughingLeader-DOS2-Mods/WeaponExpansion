@@ -49,10 +49,4 @@ if not Vars.IsClient then
 		end
 		ObjectClearFlag(target, "LLWEAPONEX_BasilusDagger_ListenForAction", 0)
 	end
-
-	-- AttackManager.RegisterListener("OnStart", function(attacker, target)
-	-- 	if ObjectGetFlag(attacker, "LLWEAPONEX_BasilusDagger_ListenForAction") == 1 then
-	-- 		Basilus_OnTargetActionTaken(attacker)
-	-- 	end
-	-- end)
 end

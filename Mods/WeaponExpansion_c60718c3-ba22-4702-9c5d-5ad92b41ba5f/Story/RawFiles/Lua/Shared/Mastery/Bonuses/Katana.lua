@@ -338,9 +338,9 @@ if not Vars.IsClient then
 	end)
 
 	---@param data HitData
-	local function ApplyKatanaCombo(target, source, data, masteryBonuses, tag, skill)
+	local function ApplyKatanaCombo(target, source, data, tag, skill)
 		if ObjectIsCharacter(target) == 1 and CharacterIsEnemy(target, source) == 1 then
-			if masteryBonuses.KATANA_COMBO == true and ObjectGetFlag(source, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
+			if MasteryBonusManager.HasMasteryBonus(source, "KATANA_COMBO") and ObjectGetFlag(source, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
 				local maxStatus = ComboStatuses[#ComboStatuses]
 				if HasActiveStatus(target, maxStatus) == 1 then
 					local status = Ext.GetCharacter(target):GetStatus(maxStatus)
@@ -368,19 +368,19 @@ if not Vars.IsClient then
 	--     end
 	-- end)
 
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Katana", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if bHitObject then
-			ApplyKatanaCombo(target.MyGuid, source.MyGuid, data, bonuses, "LLWEAPONEX_Katana", data.SkillData)
-			if data.Damage > 0 and HasActiveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
-				RemoveStatus(source.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
+	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Katana", function(tag, attacker, target, data, targetIsObject, skill)
+		if targetIsObject then
+			ApplyKatanaCombo(target.MyGuid, attacker.MyGuid, data, "LLWEAPONEX_Katana", data.SkillData)
+			if data.Damage > 0 and HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
+				RemoveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
 				local damageBonus = (GameHelpers.GetExtraData("LLWEAPONEX_MB_Katana_Backlash_DamageBonus", 50) * 0.01)
 				if damageBonus > 0 then
-					GameHelpers.Damage.IncreaseDamage(target.MyGuid, source.MyGuid, data.Handle, damageBonus)
-					CharacterStatusText(source.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")
+					GameHelpers.Damage.IncreaseDamage(target.MyGuid, attacker.MyGuid, data.Handle, damageBonus)
+					CharacterStatusText(attacker.MyGuid, "LLWEAPONEX_StatusText_Katana_VaultBoost")
 					if ObjectIsCharacter(target.MyGuid) == 1 then
 						PlayEffect(target.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_BodyFX")
 					else
-						PlayEffect(source.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
+						PlayEffect(attacker.MyGuid, "RS3_FX_Skills_Voodoo_Impact_Attack_Precision_01", "Dummy_FX_01")
 					end
 				end
 			end

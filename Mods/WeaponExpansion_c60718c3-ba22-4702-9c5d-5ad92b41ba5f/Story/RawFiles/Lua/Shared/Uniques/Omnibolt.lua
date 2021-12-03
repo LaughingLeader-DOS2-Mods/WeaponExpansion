@@ -22,9 +22,9 @@ if not Vars.IsClient then
 		end
 	end)
 
-	AttackManager.RegisterOnWeaponTagHit("LLWEAPONEX_Omnibolt_Equipped", function(tag, source, target, data, bonuses, bHitObject, isFromSkill)
-		if not isFromSkill and BonusRoll(GameHelpers.GetExtraData("LLWEAPONEX_Omnibolt_LightningChance", 201, true)) then
-			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", source, {EnemiesOnly = true})
+	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Omnibolt_Equipped", function(tag, attacker, target, data, targetIsObject, skill)
+		if not skill and BonusRoll(GameHelpers.GetExtraData("LLWEAPONEX_Omnibolt_LightningChance", 201, true)) then
+			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", attacker, {EnemiesOnly = true})
 		end
 	end)
 end
