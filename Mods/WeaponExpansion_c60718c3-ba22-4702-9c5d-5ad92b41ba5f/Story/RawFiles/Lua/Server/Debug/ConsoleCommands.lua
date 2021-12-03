@@ -63,10 +63,6 @@ if Vars.DebugMode then
 	end
 	Ext.RegisterConsoleCommand("dumpRanks", dumpRanks)
 
-	RegisterListener("BeforeLuaReset", function()
-		Ext.BroadcastMessage("LLWEAPONEX_Debug_DestroyUI", "", nil)
-	end)
-
 	--Ext.GetStat(Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).StatsId).Requirements = {[1]={Requirement="Finesse", Not=false, Param=0}}
 	--Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify({NetID=Ext.GetItem(CharacterGetEquippedWeapon(CharacterGetHostCharacter())).NetID, Stats={Requirements={[1]={Requirement="Finesse", Not=false, Param=0}}}}), nil)
 	Ext.RegisterConsoleCommand("llweaponex_changereq", function(cmd)
@@ -75,8 +71,44 @@ if Vars.DebugMode then
 		stat.Requirements = {[1]={Requirement="Memory", Not=false, Param=0}}
 		EquipmentManager.SyncItemStatChanges(item, {Requirements=stat.Requirements})
 	end)
-end
 
-Ext.RegisterConsoleCommand("llweaponex_tovendor", function(cmd)
-	TeleportTo(CharacterGetHostCharacter(), NPC.VendingMachine)
-end)
+	Ext.RegisterConsoleCommand("llweaponex_tovendor", function(cmd)
+		TeleportTo(CharacterGetHostCharacter(), NPC.VendingMachine)
+	end)
+
+	Ext.RegisterConsoleCommand("llweaponex_testmastery", function(cmd, masteryId, subcmd)
+		local mastery = Masteries[masteryId]
+		if not mastery then
+			masteryId = string.lower(masteryId)
+			for k,v in pairs(Masteries) do
+				if string.find(string.lower(k), masteryId) or string.find(string.lower(v.Name.Value), masteryId) then
+					mastery = v
+					break
+				end
+			end
+		end
+		if mastery then
+			local host = CharacterGetHostCharacter()
+			if subcmd == "addskills" then
+				for rank,rankData in pairs(mastery.RankBonuses) do
+					for _,bonus in pairs(rankData.Bonuses) do
+						if bonus.Skills then
+							local enemySkill = nil
+							local hasSkill = false
+							for _,skill in pairs(bonus.Skills) do
+								if string.find(skill, "Enemy") then
+									enemySkill = skill
+								elseif CharacterHasSkill(host, skill) == 1 then
+									hasSkill = true
+								end
+							end
+							if not hasSkill and enemySkill then
+								CharacterAddSkill(host, enemySkill, 0)
+							end
+						end
+					end
+				end
+			end
+		end
+	end)
+end

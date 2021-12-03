@@ -9,7 +9,8 @@ function OpenMasteryMenu(character)
 	--DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience(_Player, _Mastery, _Rank, _Experience)
 	local data = {
 		UUID = character.MyGuid,
-		Masteries = {}
+		Masteries = {},
+		NetID = character.NetID
 	}
 	for i,db in pairs(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(character.MyGuid, nil, nil, nil)) do
 		local char,mastery,rank,xp = table.unpack(db)
