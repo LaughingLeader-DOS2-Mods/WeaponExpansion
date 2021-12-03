@@ -3,7 +3,8 @@
 ---@field Root FlashMainTimeline
 local ToggleButton = {
 	ID = "WeaponExpansionMasteryMenuToggleButton",
-	Visible = false
+	Visible = false,
+	Layer = 8
 }
 
 local function GetInstance()
@@ -138,7 +139,7 @@ local defaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data
 
 ---@private
 function ToggleButton:Initialize()
-	local instance = Ext.CreateUI(ToggleButton.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", MasteryMenu.Layer, defaultUIFlags)
+	local instance = Ext.CreateUI(ToggleButton.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf", self.Layer, defaultUIFlags)
 	if instance then
 		self:RegisterListeners(instance)
 
@@ -155,7 +156,9 @@ end
 
 Ext.RegisterListener("GameStateChanged", function(last, next)
 	if next == "Running" and last ~= "Paused" then
-		ToggleButton:Initialize()
+		if not Ext.GetUI(ToggleButton.ID) then
+			ToggleButton:Initialize()
+		end
 	end
 end)
 

@@ -45,8 +45,12 @@ function MasteryMenu:BuildDescription(mastery)
 
 	this.masteryMenuMC.descriptionList.clearElements()
 
+	local characterMasteryData = self.Variables.MasteryData
+
+	fassert(characterMasteryData ~= nil and characterMasteryData.Masteries[mastery] ~= nil, "Character MasteryData is nil for mastery %s!\n%s", mastery)
+
 	local data = Masteries[mastery]
-	local rank = self.Variables.MasteryData.Masteries[mastery].Rank
+	local rank = characterMasteryData.Masteries[mastery].Rank
 	if Vars.LeaderDebugMode then
 		rank = Mastery.Variables.MaxRank
 	end

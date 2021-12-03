@@ -18,7 +18,8 @@ MasteryMenu = {
 		},
 		CurrentTooltip = nil,
 		---@type CharacterMasteryData
-		MasteryData = nil
+		MasteryData = nil,
+		RankVisibility = VisibilityMode.Default
 	},
 	Params = {
 		IconType = {
@@ -27,7 +28,8 @@ MasteryMenu = {
 			Status = 2,
 			Passive = 3,
 		}
-	}
+	},
+	Layer = 9
 }
 
 local function GetInstance()
@@ -54,10 +56,106 @@ setmetatable(MasteryMenu, {
 function MasteryMenu:SetMastery(mastery)
 	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
 	self.Variables.SelectedMastery.Current = mastery
-	self:BuildDescription(mastery)
-	local this = self.Root
-	if this then
-		this.selectMastery(mastery, true)
+	if not StringHelpers.IsNullOrWhitespace(mastery) then
+		self:BuildDescription(mastery)
+		local this = self.Root
+		if this then
+			this.selectMastery(mastery, true)
+		end
+	end
+end
+
+local function HasMinimumMasteryRankData(tbl,tag,min)
+	if Debug.MasteryTests or Vars.LeaderDebugMode then
+		return true
+	end
+	if tbl == nil then
+		return false
+	end
+	local b,result = pcall(function()
+		return tbl.Masteries[tag].Rank >= min
+	end)
+	return result == true
+end
+
+local function SortMasteries(a,b)
+	return a:upper() < b:upper()
+end
+
+---@param masteryData MasteryData
+local function GetMasteryDescriptionTitle(masteryData)
+	return string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
+end
+
+local function GetRankTooltip(data, i)
+	local rankNameData = data.Ranks[i]
+	local rankName = nil
+	local xpMax = math.ceil(Mastery.Variables.RankVariables[i].Required)
+	if rankNameData ~= nil then
+		return string.format("<font color='%s'>%s</font><br>%s xp", rankNameData.Color, rankNameData.Name.Value, Common.FormatNumber(xpMax))
+	else
+		return GameHelpers.GetStringKeyText(string.format("LLWEAPONEX_UI_MasteryMenu_Rank%i", i))
+	end
+	return ""
+end
+
+---@private
+function MasteryMenu:BuildMasteryEntries(this)
+	local characterMasteryData = MasteryMenu.Variables.MasteryData
+	local rankVisibility = MasteryMenu.Variables.RankVisibility
+	local masteryKeys = {}
+	for tag,data in pairs(Masteries) do
+		if MasteryMenu.Variables.RankVisibility == VisibilityMode.ShowAll or HasMinimumMasteryRankData(characterMasteryData, tag, 1) then
+			masteryKeys[#masteryKeys+1] = tag
+		end
+	end
+	table.sort(masteryKeys, SortMasteries)
+
+	local i = 0
+	for _,tag in pairs(masteryKeys) do
+		local data = Masteries[tag]
+		local rank = characterMasteryData.Masteries[tag].Rank
+		local xp = math.ceil(characterMasteryData.Masteries[tag].XP)
+		local xpMax = math.ceil(Mastery.Variables.RankVariables[Mastery.Variables.MaxRank].Required)
+		if Vars.LeaderDebugMode then
+			rank = Mastery.Variables.MaxRank
+		end
+		if rank >= Mastery.Variables.MaxRank then
+			xp = xpMax
+		end
+		local canShowRank = rankVisibility == VisibilityMode.ShowAll or rank > 0
+		if not canShowRank then
+			if rankVisibility == VisibilityMode.ShowIfNotZero and xp > 0 then
+				canShowRank = true
+			elseif rankVisibility == VisibilityMode.Default then
+				-- If rank 0, show if at 40% of the way there
+				local threshold = GameHelpers.GetExtraData("LLWEAPONEX_MasteryMenu_MinRankZeroXPVisibilityThreshold", 0.4)
+				canShowRank = xp >= math.floor(Mastery.Variables.RankVariables[1].Required*threshold)
+			end
+		end
+		if canShowRank then
+			local barPercentage = 0.0
+			if xp > 0 and xp < xpMax then
+				barPercentage = math.max(math.floor(((xp / xpMax) * 100) + 0.5) / 100, 0.01)
+			elseif xp >= xpMax then
+				barPercentage = 1.0
+			end
+			local xpPercentage = math.floor(barPercentage * 100)
+			local rankDisplayName = GameHelpers.GetStringKeyText(string.format("LLWEAPONEX_UI_MasteryMenu_Rank%i", i))
+			local masteryColorTitle = GetMasteryDescriptionTitle(data)
+			this.addMastery(i, tag, data.Name.Value, masteryColorTitle, rank, barPercentage, rank >= Mastery.Variables.MaxRank)
+			local expRankDisplay = rankDisplayName
+			if rank >= Mastery.Variables.MaxRank then
+				expRankDisplay = string.format("%s (%s)", Text.MasteryMenu.MasteredTooltip.Value, rankDisplayName)
+			end
+			this.setExperienceBarTooltip(i, string.format("%s<br>%s<br><font color='#02FF67'>%i%%</font><br><font color='#C9AA58'>%s/%s xp</font>", masteryColorTitle, expRankDisplay, xpPercentage, Common.FormatNumber(xp), Common.FormatNumber(xpMax)))
+			
+			for k=1,Mastery.Variables.MaxRank,1 do
+				this.setRankTooltipText(i, k, GetRankTooltip(data, k))
+				--print("Set rank tooltip: ", i, k)
+			end
+			i = i + 1
+		end
 	end
 end
 
@@ -85,7 +183,9 @@ function MasteryMenu:BuildMasteryMenu(this)
 			this.setRankNodePosition(i, barPercentage)
 		end
 
-		if self.Variables.SelectedMastery.Current then
+		self:BuildMasteryEntries(this)
+
+		if not StringHelpers.IsNullOrWhitespace(self.Variables.SelectedMastery.Current) then
 			self:SetMastery(self.Variables.SelectedMastery.Current)
 		end
 	end
