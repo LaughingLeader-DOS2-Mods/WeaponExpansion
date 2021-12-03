@@ -197,7 +197,7 @@ package LS_Classes
          }
          else
          {
-            ExternalInterface.call("UIAssert","LS_Classes.scrollbar addContent done for a movieclip without scrollRect");
+            Registry.call("UIAssert","LS_Classes.scrollbar addContent done for a movieclip without scrollRect");
          }
       }
       
@@ -240,7 +240,7 @@ package LS_Classes
             }
             else
             {
-               ExternalInterface.call("UIAssert","mouseWheelEnabled in scrollbar class is missing not working, missing stage");
+               Registry.call("UIAssert","mouseWheelEnabled in scrollbar class is missing not working, missing stage");
             }
          }
       }
@@ -771,7 +771,7 @@ package LS_Classes
       {
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Click);
+            Registry.call("PlaySound",this.SND_Click);
             this.m_handle_mc.gotoAndStop(3);
             this.m_last_Y = mouseY - this.m_handle_mc.y;
             stage.addEventListener("mouseUp",this.handleReleased);
@@ -784,7 +784,7 @@ package LS_Classes
          var val2:Number = NaN;
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Release);
+            Registry.call("PlaySound",this.SND_Release);
             this.m_handle_mc.gotoAndStop(1);
             stage.removeEventListener("mouseUp",this.handleReleased);
             stage.removeEventListener("mouseMove",this.handleMove);
@@ -829,7 +829,7 @@ package LS_Classes
       {
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Click);
+            Registry.call("PlaySound",this.SND_Click);
             this.m_up_mc.gotoAndStop(3);
             this.startAutoScroll(false);
          }
@@ -839,7 +839,7 @@ package LS_Classes
       {
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Click);
+            Registry.call("PlaySound",this.SND_Click);
             this.m_down_mc.gotoAndStop(3);
             this.startAutoScroll(true);
          }
@@ -859,7 +859,7 @@ package LS_Classes
       {
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Click);
+            Registry.call("PlaySound",this.SND_Click);
             this.scrollTo(this.getContDiff(),this.m_animateScrolling);
             this.m_FFdown_mc.gotoAndStop(3);
          }
@@ -869,7 +869,7 @@ package LS_Classes
       {
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Click);
+            Registry.call("PlaySound",this.SND_Click);
             this.scrollTo(0,this.m_animateScrolling);
             this.m_FFup_mc.gotoAndStop(3);
          }
@@ -880,7 +880,7 @@ package LS_Classes
          var mc:MovieClip = e.currentTarget as MovieClip;
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Over);
+            Registry.call("PlaySound",this.SND_Over);
             mc.gotoAndStop(2);
          }
       }
@@ -903,7 +903,7 @@ package LS_Classes
       {
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Release);
+            Registry.call("PlaySound",this.SND_Release);
             e.currentTarget.gotoAndStop(1);
          }
          this.stopAutoScroll();
@@ -975,7 +975,7 @@ package LS_Classes
       {
          if(!this.m_disabled)
          {
-            ExternalInterface.call("PlaySound",this.SND_Click);
+            Registry.call("PlaySound",this.SND_Click);
             this.scrollToPercent((this.mouseY - (this.m_up_mc.y + this.m_up_mc.height)) / this.m_scrollerDiff,this.m_animateScrolling);
          }
       }

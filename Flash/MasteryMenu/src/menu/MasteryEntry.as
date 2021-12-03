@@ -62,7 +62,7 @@ package menu
 
 		public function xpBar_onOut(e:MouseEvent) : void
 		{
-			ExternalInterface.call("hideTooltip");
+			Registry.call("hideTooltip");
 			this.xpBar.hasTooltip = false;
 		}
 		
@@ -80,7 +80,7 @@ package menu
 
 		public function masteryStar_onOut(e:MouseEvent) : void
 		{
-			ExternalInterface.call("hideTooltip");
+			Registry.call("hideTooltip");
 			this.icon_mc.hasTooltip = false;
 		}
 		
@@ -139,13 +139,13 @@ package menu
 		public function onOver(e:MouseEvent) : void
 		{
 			this.masteryFrame.onOver(e);
-			ExternalInterface.call("overMastery", this.id);
+			Registry.call("overMastery", this.id);
 		}
 
 		public function onDown(e:MouseEvent) : void
 		{
 			this.masteryFrame.onDown(e);
-			ExternalInterface.call("PlaySound","UI_Generic_Click");
+			Registry.call("PlaySound","UI_Generic_Click");
 			Registry.Main.selectEntry(this, false);
 		}
 		

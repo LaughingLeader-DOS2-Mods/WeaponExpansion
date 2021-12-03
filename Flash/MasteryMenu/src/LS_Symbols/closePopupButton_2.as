@@ -24,16 +24,16 @@ package LS_Symbols
 		public function onOver(e:MouseEvent) : void
 		{
 			this.bg_mc.gotoAndStop(2);
-			ExternalInterface.call("PlaySound","UI_Generic_Over");
+			Registry.call("PlaySound","UI_Generic_Over");
 		}
 		
 		public function onUp(e:MouseEvent) : void
 		{
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(2);
-			ExternalInterface.call("PlaySound","UI_Generic_Click");
-			//ExternalInterface.call("buttonPressed",2,0);
-			ExternalInterface.call("requestCloseUI");
+			Registry.call("PlaySound","UI_Generic_Click");
+			//Registry.call("buttonPressed",2,0);
+			Registry.call("requestCloseUI");
 		}
 		
 		public function onDown(e:MouseEvent) : void

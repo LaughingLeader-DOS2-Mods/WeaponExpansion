@@ -3,6 +3,7 @@ package
 	import menu.MasteryMenuPanel;
 	import flash.utils.getDefinitionByName;
 	import flash.utils.Dictionary;
+	import flash.external.ExternalInterface;
 
 	public class Registry
 	{
@@ -13,15 +14,29 @@ package
 
 		public static var Main:MasteryMenuPanel;
 
+		private static var _canCallExternally:Boolean = true;
+
 		//public static var SkillPattern:RegExp;
 
 		public static function Init() : *
 		{
 			RankNodePositions = new Array();
+			if(!ExternalInterface.available)
+			{
+				_canCallExternally = false;
+			}
 			//SkillPattern = new RegExp("<skill id='.*?' icon='(.*?)'\/>", "gi");
 		}
 
 		private static var ClassMap:Dictionary = new Dictionary();
+
+		public static function call(name:String, ...params:Array) : void
+		{
+			if(_canCallExternally)
+			{
+				ExternalInterface.call(name, params);
+			}
+		}
 
 		public static function getClass(path:String) : Class
 		{

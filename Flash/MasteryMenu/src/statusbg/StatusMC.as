@@ -53,7 +53,7 @@ package statusbg
 		
 		public function onOut(param1:MouseEvent) : *
 		{
-			ExternalInterface.call("hideTooltip");
+			Registry.call("hideTooltip");
 			this.base.curTooltip = -1;
 			this.base.hasTooltip = false;
 		}

@@ -31,7 +31,7 @@ package LS_Classes
                {
                   _loc12_ = _loc12_.parent as MovieClip;
                }
-               ExternalInterface.call("UIAssert","using tween on displayObject that is not attached to the stage :" + _loc11_.name + " parent:" + (_loc11_.parent as MovieClip).name);
+               Registry.call("UIAssert","using tween on displayObject that is not attached to the stage :" + _loc11_.name + " parent:" + (_loc11_.parent as MovieClip).name);
                _loc10_ = false;
             }
          }

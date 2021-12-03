@@ -22,7 +22,7 @@ package desc
 
 		public function clearIcons() : void
 		{
-			ExternalInterface.call("clearIcons", icon_index);
+			Registry.call("clearIcons", icon_index);
 			this.icon_index = 0;
 		}
 
@@ -51,7 +51,7 @@ package desc
 					break;
 				default:
 					var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
-					ExternalInterface.call("registerIcon", iconIggyName, icon, iconType);
+					Registry.call("registerIcon", iconIggyName, icon, iconType);
 					entryContent.icon = "iggy_" + iconIggyName;
 					entryContent.createIcon();
 					this.icon_index = this.icon_index + 1;
@@ -134,7 +134,7 @@ package desc
 						break;
 					default:
 						var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
-						ExternalInterface.call("registerIcon", iconIggyName, iconName, iconType);
+						Registry.call("registerIcon", iconIggyName, iconName, iconType);
 						entryContent.icon = "iggy_" + iconIggyName;
 						entryContent.createIcon();
 						this.icon_index = this.icon_index + 1;

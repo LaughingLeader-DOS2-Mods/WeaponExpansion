@@ -85,7 +85,7 @@ package desc
 			if (!this.hasTooltip)
 			{
 				var pos:Point = this.localToGlobal(new Point(0,0));
-				ExternalInterface.call("mastery_showIconTooltip",iconType,id,pos.x,pos.y,width,height);
+				Registry.call("mastery_showIconTooltip",iconType,id,pos.x,pos.y,width,height);
 				this.hasTooltip = true;
 			}
 		}
@@ -94,8 +94,8 @@ package desc
 		{
 			if (this.hasTooltip)
 			{
-				ExternalInterface.call("hideTooltip");
-				ExternalInterface.call("mastery_hideIconTooltip",iconType);
+				Registry.call("hideTooltip");
+				Registry.call("mastery_hideIconTooltip",iconType);
 				this.hasTooltip = false;
 			}
 		}

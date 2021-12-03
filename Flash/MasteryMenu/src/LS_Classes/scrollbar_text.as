@@ -434,7 +434,7 @@ package LS_Classes
 		{
 			if(!this.m_disabled)
 			{
-				ExternalInterface.call("PlaySound",this.SND_Press);
+				Registry.call("PlaySound",this.SND_Press);
 				this.m_handle_mc.gotoAndStop(2);
 				this.m_last_Y = mouseY - this.m_handle_mc.y;
 				stage.addEventListener("mouseUp",this.handleReleased);
@@ -479,7 +479,7 @@ package LS_Classes
 		{
 			if(!this.m_disabled)
 			{
-				ExternalInterface.call("PlaySound",this.SND_Press);
+				Registry.call("PlaySound",this.SND_Press);
 				this.m_up_mc.gotoAndStop(3);
 				this.scrollUp();
 				this.startAutoScroll(true);
@@ -490,7 +490,7 @@ package LS_Classes
 		{
 			if(!this.m_disabled)
 			{
-				ExternalInterface.call("PlaySound",this.SND_Press);
+				Registry.call("PlaySound",this.SND_Press);
 				this.scrollDown();
 				this.m_down_mc.gotoAndStop(3);
 				this.startAutoScroll(false);
@@ -511,7 +511,7 @@ package LS_Classes
 		{
 			if(!this.m_disabled)
 			{
-				ExternalInterface.call("PlaySound",this.SND_Release);
+				Registry.call("PlaySound",this.SND_Release);
 				param1.currentTarget.gotoAndStop(1);
 				this.stopAutoScroll();
 			}

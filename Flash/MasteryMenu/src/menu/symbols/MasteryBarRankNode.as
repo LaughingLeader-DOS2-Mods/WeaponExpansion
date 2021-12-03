@@ -26,7 +26,7 @@ package menu.symbols
 			{
 				crystal_mc.gotoAndStop(3);
 			}
-			ExternalInterface.call("hideTooltip");
+			Registry.call("hideTooltip");
 			this.hasTooltip = false;
 		}
 		
@@ -40,7 +40,7 @@ package menu.symbols
 			{
 				crystal_mc.gotoAndStop(4);
 			}
-			//ExternalInterface.call("PlaySound","UI_Generic_Over");
+			//Registry.call("PlaySound","UI_Generic_Over");
 			tooltipHelper.ShowTooltipForMC(this,root,"right");
 		}
 

@@ -562,7 +562,7 @@ package LS_Classes
 				param1.removeEventListener(FocusEvent.FOCUS_OUT,onFocusOutModalInputField);
 				if(param1.selectionBeginIndex != -1)
 				{
-					ExternalInterface.call("inputFocusLost");
+					Registry.call("inputFocusLost");
 				}
 			}
 		}
@@ -577,7 +577,7 @@ package LS_Classes
 				{
 					val2.removeEventListener(FocusEvent.FOCUS_IN,onFocusInModalInputField);
 					val2.addEventListener(FocusEvent.FOCUS_OUT,onFocusOutModalInputField);
-					ExternalInterface.call("inputFocus");
+					Registry.call("inputFocus");
 				}
 			}
 		}
@@ -592,7 +592,7 @@ package LS_Classes
 				{
 					val2.addEventListener(FocusEvent.FOCUS_IN,onFocusInModalInputField);
 					val2.removeEventListener(FocusEvent.FOCUS_OUT,onFocusOutModalInputField);
-					ExternalInterface.call("inputFocusLost");
+					Registry.call("inputFocusLost");
 				}
 			}
 		}

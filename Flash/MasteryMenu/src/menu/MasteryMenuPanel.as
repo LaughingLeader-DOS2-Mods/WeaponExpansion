@@ -115,7 +115,6 @@ package menu
 			this.descriptionList.addEventListener(MouseEvent.MOUSE_OVER,this.onDescriptionMouseIn);
 			this.descriptionList.addEventListener(MouseEvent.MOUSE_OUT,this.onDescriptionMouseOut);
 			this.buttonHintBar_mc.centerButtons = true;
-			ExternalInterface.call("PlaySound","UI_Generic_Click");
 		}
 		
 		public function onDescriptionMouseIn(e:MouseEvent) : void
@@ -263,7 +262,7 @@ package menu
 			if (currentMC != null)
 			{
 				this.name_txt.htmlText = currentMC.masteryDescriptionTitle;
-				ExternalInterface.call("onMasterySelected", currentMC.id);
+				Registry.call("onMasterySelected", currentMC.id);
 			}
 		}
 		
@@ -315,7 +314,7 @@ package menu
 				this.masteryList.selectMC(nextMC);
 				this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				ExternalInterface.call("onMasterySelected", nextMC.id);
+				Registry.call("onMasterySelected", nextMC.id);
 			}
 		}
 
@@ -332,7 +331,7 @@ package menu
 			if (nextMC != null)
 			{
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				ExternalInterface.call("onMasterySelected", nextMC.id);
+				Registry.call("onMasterySelected", nextMC.id);
 			}
 		}
 		
@@ -345,13 +344,13 @@ package menu
 		{
 			if(this.isDragging)
 			{
-				ExternalInterface.call("cancelDragging");
+				Registry.call("cancelDragging");
 			}
 		}
 
 		public function dragInit(e:MouseEvent) : void
 		{
-			ExternalInterface.call("UIAssert","[WeaponExpansion] dragInit");
+			Registry.call("UIAssert","[WeaponExpansion] dragInit");
 			this.windowDragStarted = false;
 			this.stage.addEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
 			this.dragStartMP.y = stage.mouseY;
@@ -361,11 +360,11 @@ package menu
 
 		public function dragMoveWindow(e:MouseEvent) : void
 		{
-			ExternalInterface.call("UIAssert","[WeaponExpansion] dragMoveWindow");
+			Registry.call("UIAssert","[WeaponExpansion] dragMoveWindow");
 			if(this.dragStartMP.x + this.startDragDiff > stage.mouseX || this.dragStartMP.y + this.startDragDiff > stage.mouseY || this.dragStartMP.x - this.startDragDiff < stage.mouseX || this.dragStartMP.y - this.startDragDiff < stage.mouseY)
 			{
-				ExternalInterface.call("hideTooltip");
-				ExternalInterface.call("startMoveWindow");
+				Registry.call("hideTooltip");
+				Registry.call("startMoveWindow");
 				stage.removeEventListener(MouseEvent.MOUSE_MOVE,this.dragMoveWindow);
 				this.windowDragStarted = true;
 			}
@@ -373,10 +372,10 @@ package menu
 
 		public function stopDragWindow(e:MouseEvent) : void
 		{
-			ExternalInterface.call("UIAssert","[WeaponExpansion] stopDragWindow");
+			Registry.call("UIAssert","[WeaponExpansion] stopDragWindow");
 			if(this.windowDragStarted)
 			{
-				ExternalInterface.call("cancelMoveWindow");
+				Registry.call("cancelMoveWindow");
 			}
 			else
 			{

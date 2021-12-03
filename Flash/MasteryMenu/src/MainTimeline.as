@@ -43,8 +43,8 @@ package
 		
 		public function onEventInit() : void
 		{
-			ExternalInterface.call("registerAnchorId",this.anchorId);
-			ExternalInterface.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
+			Registry.call("registerAnchorId",this.anchorId);
+			Registry.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
 			this.masteryMenuMC.visible = false;
 		}
 
@@ -57,9 +57,9 @@ package
 		{
 			if (!this.masteryMenuMC.visible)
 			{
-				ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Open");
-				ExternalInterface.call("focus");
-				ExternalInterface.call("inputfocus");
+				Registry.call("PlaySound","UI_Game_PauseMenu_Open");
+				Registry.call("focus");
+				Registry.call("inputfocus");
 				this.masteryMenuMC.visible = true;
 				this.stage.focus = this.lastFocus;
 
@@ -71,13 +71,13 @@ package
 		{
 			if (this.masteryMenuMC.visible)
 			{
-				ExternalInterface.call("PlaySound","UI_Game_PauseMenu_Close");
-				//ExternalInterface.call("PlaySound","UI_Game_Inventory_Close");
+				Registry.call("PlaySound","UI_Game_PauseMenu_Close");
+				//Registry.call("PlaySound","UI_Game_Inventory_Close");
 				if(!skipRequest) {
-					ExternalInterface.call("requestCloseUI");
+					Registry.call("requestCloseUI");
 				}
-				ExternalInterface.call("inputFocusLost");
-				ExternalInterface.call("focusLost");
+				Registry.call("inputFocusLost");
+				Registry.call("focusLost");
 				this.masteryMenuMC.visible = false;
 				lastFocus = stage.focus;
 				stage.focus = null;
@@ -90,12 +90,13 @@ package
 		{
 			if (this.masteryMenuMC.visible)
 			{
-				closeMenu();
+				this.closeMenu();
 			}
 			else
 			{
-				openMenu();
+				this.openMenu();
 			}
+			Registry.call("PlaySound","UI_Generic_Click");
 		}
 
 		public var ctrlDown:Boolean = false;
@@ -107,7 +108,7 @@ package
 			var handled:Boolean = false;
 			if (active)
 			{
-				//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
+				//Registry.call("UIAssert","[WeaponExpansion] onEventUp ", this.events[eventIndex], eventIndex, param2, param3);
 				switch(eventName)
 				{
 					case "IE UIAccept":
@@ -148,7 +149,7 @@ package
 		public function onEventDown(eventIndex:Number) : Boolean
 		{
 			var handled:Boolean = false;
-			//ExternalInterface.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
+			//Registry.call("UIAssert","[WeaponExpansion] onEventDown ", this.events[eventIndex], eventIndex, param2, param3);
 			var eventName:String = this.events[eventIndex];
 			if (active)
 			{
@@ -214,7 +215,7 @@ package
 						handled = true;
 						if(this.active)
 						{
-							ExternalInterface.call("requestCloseMasteryMenu");
+							Registry.call("requestCloseMasteryMenu");
 						}
 					}
 					break;

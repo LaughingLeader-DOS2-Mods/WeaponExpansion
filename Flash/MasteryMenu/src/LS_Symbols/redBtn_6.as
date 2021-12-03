@@ -50,7 +50,7 @@ package LS_Symbols
 		public function onOver(param1:MouseEvent) : void
 		{
 			this.bg_mc.gotoAndStop(2);
-			ExternalInterface.call("PlaySound","UI_Generic_Over");
+			Registry.call("PlaySound","UI_Generic_Over");
 		}
 		
 		public function onUp(param1:MouseEvent) : void
@@ -58,13 +58,13 @@ package LS_Symbols
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(2);
 			this.text_txt.y = this.textY;
-			ExternalInterface.call("PlaySound","UI_Generic_Click");
+			Registry.call("PlaySound","UI_Generic_Click");
 			if(this.buttonType == 0)
 			{
 				this.buttonState = !this.buttonState;
 				this.text_txt.htmlText = !!this.buttonState?this.enableTxt:this.disableTxt;
 			}
-			ExternalInterface.call(this.buttonCallback,this.buttonType,this.buttonState);
+			Registry.call(this.buttonCallback,this.buttonType,this.buttonState);
 		}
 		
 		public function onDown(param1:MouseEvent) : void
