@@ -60,13 +60,13 @@ package menu
 			this.xpBar.setBarColour(color);
 		}
 
-		public function xpBar_onOut(e:MouseEvent) : void
+		public function xpBar_onOut(e:MouseEvent) : *
 		{
 			Registry.call("hideTooltip");
 			this.xpBar.hasTooltip = false;
 		}
 		
-		public function xpBar_onOver(e:MouseEvent) : void
+		public function xpBar_onOver(e:MouseEvent) : *
 		{
 			tooltipHelper.ShowTooltipForMC(this.xpBar,this.root,"right");
 		}
@@ -78,13 +78,13 @@ package menu
 			this.xpBar.addEventListener(MouseEvent.ROLL_OUT,this.xpBar_onOut);
 		}
 
-		public function masteryStar_onOut(e:MouseEvent) : void
+		public function masteryStar_onOut(e:MouseEvent) : *
 		{
 			Registry.call("hideTooltip");
 			this.icon_mc.hasTooltip = false;
 		}
 		
-		public function masteryStar_onOver(e:MouseEvent) : void
+		public function masteryStar_onOver(e:MouseEvent) : *
 		{
 			tooltipHelper.ShowTooltipForMC(icon_mc,root,"right");
 		}
@@ -131,18 +131,18 @@ package menu
 			this.masteryFrame.deselect();
 		}
 
-		public function onOut(e:MouseEvent) : void
+		public function onOut(e:MouseEvent) : *
 		{
 			this.masteryFrame.onOut(e);
 		}
 		
-		public function onOver(e:MouseEvent) : void
+		public function onOver(e:MouseEvent) : *
 		{
 			this.masteryFrame.onOver(e);
 			Registry.call("overMastery", this.id);
 		}
 
-		public function onDown(e:MouseEvent) : void
+		public function onDown(e:MouseEvent) : *
 		{
 			this.masteryFrame.onDown(e);
 			Registry.call("PlaySound","UI_Generic_Click");

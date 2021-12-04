@@ -15,19 +15,19 @@ package LS_Symbols
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function onOut(e:MouseEvent) : void
+		public function onOut(e:MouseEvent) : *
 		{
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(1);
 		}
 		
-		public function onOver(e:MouseEvent) : void
+		public function onOver(e:MouseEvent) : *
 		{
 			this.bg_mc.gotoAndStop(2);
 			Registry.call("PlaySound","UI_Generic_Over");
 		}
 		
-		public function onUp(e:MouseEvent) : void
+		public function onUp(e:MouseEvent) : *
 		{
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(2);
@@ -36,7 +36,7 @@ package LS_Symbols
 			Registry.call("requestCloseUI");
 		}
 		
-		public function onDown(e:MouseEvent) : void
+		public function onDown(e:MouseEvent) : *
 		{
 			addEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(3);

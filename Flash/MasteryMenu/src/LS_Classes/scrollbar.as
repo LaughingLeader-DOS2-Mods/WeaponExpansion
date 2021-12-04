@@ -733,7 +733,7 @@ package LS_Classes
          return this.scrollTo(this.m_scrollAnimToY + param1,param2,param3);
       }
       
-      protected function handleMouseWheel(e:MouseEvent) : void
+      protected function handleMouseWheel(e:MouseEvent) : *
       {
          if(!this.m_disabled)
          {
@@ -757,7 +757,7 @@ package LS_Classes
          }
       }
       
-      private function onScrollWheelTimer(e:TimerEvent) : void
+      private function onScrollWheelTimer(e:TimerEvent) : *
       {
          this.m_scrollWheelStepSize = this.m_scrollWheelStepSize - this.m_scrollWheelPrevious * this.m_scrollWheelAcceleration;
          if(this.m_scrollWheelStepSize == 0)

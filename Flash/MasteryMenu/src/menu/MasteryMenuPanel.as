@@ -117,12 +117,12 @@ package menu
 			this.buttonHintBar_mc.centerButtons = true;
 		}
 		
-		public function onDescriptionMouseIn(e:MouseEvent) : void
+		public function onDescriptionMouseIn(e:MouseEvent) : *
 		{
 			this.descriptionList.mouseWheelEnabled = true;
 		}
 		
-		public function onDescriptionMouseOut(e:MouseEvent) : void
+		public function onDescriptionMouseOut(e:MouseEvent) : *
 		{
 			this.descriptionList.mouseWheelEnabled = false;
 		}
@@ -340,7 +340,7 @@ package menu
 			return this.masteryList.currentSelection;
 		}
 
-		public function windowUp(e:MouseEvent) : void
+		public function windowUp(e:MouseEvent) : *
 		{
 			if(this.isDragging)
 			{
@@ -348,7 +348,7 @@ package menu
 			}
 		}
 
-		public function dragInit(e:MouseEvent) : void
+		public function dragInit(e:MouseEvent) : *
 		{
 			Registry.call("UIAssert","[WeaponExpansion] dragInit");
 			this.windowDragStarted = false;
@@ -358,7 +358,7 @@ package menu
 			this.stage.addEventListener(MouseEvent.MOUSE_UP,this.stopDragWindow);
 		}
 
-		public function dragMoveWindow(e:MouseEvent) : void
+		public function dragMoveWindow(e:MouseEvent) : *
 		{
 			Registry.call("UIAssert","[WeaponExpansion] dragMoveWindow");
 			if(this.dragStartMP.x + this.startDragDiff > stage.mouseX || this.dragStartMP.y + this.startDragDiff > stage.mouseY || this.dragStartMP.x - this.startDragDiff < stage.mouseX || this.dragStartMP.y - this.startDragDiff < stage.mouseY)
@@ -370,7 +370,7 @@ package menu
 			}
 		}
 
-		public function stopDragWindow(e:MouseEvent) : void
+		public function stopDragWindow(e:MouseEvent) : *
 		{
 			Registry.call("UIAssert","[WeaponExpansion] stopDragWindow");
 			if(this.windowDragStarted)

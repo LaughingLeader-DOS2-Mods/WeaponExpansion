@@ -21,7 +21,7 @@ package menu.symbols
 			this.addFrameScript(0,this.frame1);
 		}
 		
-		public function onOut(e:MouseEvent) : void
+		public function onOut(e:MouseEvent) : *
 		{
 			if(!selected)
 			{
@@ -29,7 +29,7 @@ package menu.symbols
 			}
 		}
 		
-		public function onOver(e:MouseEvent) : void
+		public function onOver(e:MouseEvent) : *
 		{
 			if(!selected)
 			{
@@ -37,7 +37,7 @@ package menu.symbols
 			}
 		}
 
-		public function onDown(e:MouseEvent) : void
+		public function onDown(e:MouseEvent) : *
 		{
 			this.select();
 		}

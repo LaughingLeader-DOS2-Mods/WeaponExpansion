@@ -80,7 +80,7 @@ package desc
 			icon_mc.y = 5.5;
 		}
 
-		public function onOver(e:MouseEvent) : void
+		public function onOver(e:MouseEvent) : *
 		{
 			if (!this.hasTooltip)
 			{
@@ -90,7 +90,7 @@ package desc
 			}
 		}
 
-		public function onOut(e:MouseEvent) : void
+		public function onOut(e:MouseEvent) : *
 		{
 			if (this.hasTooltip)
 			{
