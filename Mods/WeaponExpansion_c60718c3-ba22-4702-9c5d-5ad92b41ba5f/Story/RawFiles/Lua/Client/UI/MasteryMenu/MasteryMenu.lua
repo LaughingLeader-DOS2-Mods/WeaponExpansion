@@ -248,12 +248,7 @@ function MasteryMenu:CloseOtherPanels()
 end
 
 function MasteryMenu:Open(skipRequest)
-	if skipRequest ~= true or not self.Variables.MasteryData then
-		local character = Client:GetCharacter()
-		if character then
-			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(character.NetID))
-		end
-	else
+	if skipRequest then
 		local instance = self.Instance
 		if instance then
 			instance:Show()
@@ -264,6 +259,11 @@ function MasteryMenu:Open(skipRequest)
 				self.Visible = true
 				self:CloseOtherPanels()
 			end
+		end
+	else
+		local character = Client:GetCharacter()
+		if character then
+			Ext.PostMessageToServer("LLWEAPONEX_RequestOpenMasteryMenu", tostring(character.NetID))
 		end
 	end
 end
@@ -405,6 +405,11 @@ end)
 local function HideMasteryMenu()
 	MasteryMenu:Close()
 end
+
+--[[
+Mods.WeaponExpansion.MasteryMenu:Open(true)
+Ext.CreateUI("test", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", 8)
+]]
 
 Ext.RegisterUITypeCall(Data.UIType.characterSheet, "selectedTab", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.characterSheet, "hotbarBtnPressed", HideMasteryMenu)
