@@ -6,6 +6,16 @@ Debug = {
 }
 Math = { AbilityScaling = {}}
 Text = {}
+
+local defaultExperienceAmounts = {
+	[0] = {Amount = 45, Required = 0},
+	[1] = {Amount = 30, Required = 1000},
+	[2] = {Amount = 20, Required = 3000},
+	[3] = {Amount = 12, Required = 6000},
+	[4] = {Amount = 0, Required = 12000},
+	--[5] = {Amount = 0, Required = 36000},
+}
+
 Mastery = {
 	---@type table<string, MasteryBonusData[]>
 	Bonuses = {},
@@ -13,7 +23,16 @@ Mastery = {
 	Params = {},
 	Variables = {
 		---Specific tables or variables used in bonus logic scripts. This is so mods can add or modify them.
-		Bonuses = {}
+		Bonuses = {},
+		RankVariables = {
+			--Updated from ExtraData values
+			[0] = {Amount = 45, Required = 0},
+			[1] = {Amount = 30, Required = 1000},
+			[2] = {Amount = 20, Required = 3000},
+			[3] = {Amount = 12, Required = 6000},
+			[4] = {Amount = 0, Required = 12000},
+		},
+		MaxRank = 4
 	},
 	PermanentMasteries = {
 		LLWEAPONEX_ThrowingAbility = true
@@ -123,15 +142,6 @@ local initSettings = Ext.Require("Shared/Settings.lua")
 -- 	Ext.Require("Shared/Debug/GameMathTracing.lua")
 -- end
 
-local defaultExperienceAmounts = {
-	[0] = {Amount = 45, Required = 0},
-	[1] = {Amount = 30, Required = 1000},
-	[2] = {Amount = 20, Required = 3000},
-	[3] = {Amount = 12, Required = 6000},
-	[4] = {Amount = 0, Required = 12000},
-	--[5] = {Amount = 0, Required = 36000},
-}
-
 RegisterLeaveActionPrefix("LLWEAPONEX")
 
 local function SetupFemaleKorvash()
@@ -205,6 +215,10 @@ local function LoadExperienceVariables()
 			end
 		end
 	end
+end
+
+if Vars.DebugMode then
+	Ext.RegisterListener("StatsLoaded", LoadExperienceVariables)
 end
 
 Ext.RegisterListener("SessionLoaded", function()
