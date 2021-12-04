@@ -30,12 +30,13 @@ package
 
 		private static var ClassMap:Dictionary = new Dictionary();
 
-		public static function call(name:String, ...params:Array) : void
+		public static function call(name:String, ...args) : *
 		{
 			if(_canCallExternally)
 			{
-				ExternalInterface.call(name, params);
+				return ExternalInterface.call.apply(name, args);
 			}
+			return false;
 		}
 
 		public static function getClass(path:String) : Class
