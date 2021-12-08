@@ -94,7 +94,7 @@
 	<content contentuid="h080c68b2g315eg490dgbf34g85d2af74ad68">Blindfolded</content>
 	<content contentuid="h08140fd2gad6cg4738gabb1gcc450033c183">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery III&lt;/font&gt;</content>
 	<content contentuid="h081df726g94ceg4114ga790gcb00b79bfccb">Wicked Shields of Chaos</content>
-	<content contentuid="h08268978g4bbbg4e5eg8c7egdfece8f19502">Placeholder</content>
+	<content contentuid="h08268978g4bbbg4e5eg8c7egdfece8f19502">&lt;icon id=&apos;Projectile_SkyShot&apos;/&gt;[Key:Projectile_SkyShot_DisplayName] deals a guaranteed critical hit to targets that are affected by [Key:KNOCKED_DOWN_DisplayName:Knocked Down].&lt;icon id=&apos;Projectile_PiercingShot&apos;/&gt;Pin targets to impassable terrain, such as walls, and deal bonus damage.</content>
 	<content contentuid="h085bc0degcf38g488fgbc0eg1046951a0d39">Weapon Expansion - Puzzle Items</content>
 	<content contentuid="h088a4dfdgbb73g431ag93f6gaa4feb096845">Mighty Dragonslayer Mail</content>
 	<content contentuid="h08e99608gb836g4c96g8b87gb28d670ae62a">Demon Hunter&apos;s Oath</content>
@@ -206,6 +206,7 @@
 	<content contentuid="h163157d1g1dd4g4cb9ga879g3a3a7c1a6f3a">Shrapnel Charge</content>
 	<content contentuid="h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59">Character&apos;s quiver is recharging.</content>
 	<content contentuid="h16376b0fg0f4bg47daga654gaeac6b97ee3f">Take a focused shot on a target, dealing &lt;font color=&apos;#00FFAA&apos;&gt;[1]&lt;/font&gt; to &lt;font color=&apos;#00FFAA&apos;&gt;[2]&lt;/font&gt;, depending on distance to the target.&lt;br&gt;&lt;font color=&apos;#33FF11&apos;&gt;If the target is &lt;font color=&apos;#DD3300&apos;&gt;Marked&lt;/font&gt;, deal a critical hit.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#FFBB22&apos;&gt;Aimed Shot provides an immense accuracy boost to ensure it always hits.&lt;/font&gt;</content>
+	<content contentuid="h167722d6g51c3g429bg8564gcd5310357cb0">Still Stance</content>
 	<content contentuid="h1683f225g0155g4015gab2bgf7563a8f4510">Character has lowered resistances to &lt;font color=&apos;#9A00FF&apos;&gt;every element&lt;/font&gt;.</content>
 	<content contentuid="h168f52b6g342ag42e0g99d0g47d94b7363c8">shadow</content>
 	<content contentuid="h16a53792g6604g4a6ag9f3agcfa5e63ac21d">Night&apos;s Edge</content>
@@ -507,7 +508,7 @@
 	<content contentuid="h31211dd3gf8eeg4d5bgb7ffg36e10368f488">&lt;font color=&apos;#00EE29&apos;&gt;Change Stance&lt;/font&gt;</content>
 	<content contentuid="h31246356gaf34g40e6g97bdg4809255e71f0">Test Status</content>
 	<content contentuid="h31268fcagadacg4670ga80bge8322f1d79b5">Vulnerable</content>
-	<content contentuid="h313c4c7eg0562g4952gbbf9gd1c810163574">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos;/&gt;If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.&lt;icon id=&apos;Shout_InspireStart&apos;/&gt;Fear, Madness, and Sleep are cleansed from encouraged allies.</content>
+	<content contentuid="h313c4c7eg0562g4952gbbf9gd1c810163574">&lt;icon id=&apos;Rush_BatteringRam;Rush_BullRush&apos;/&gt;If under the effects of War Charge, deal [ExtraData:LLWEAPONEX_MB_Banner_WarCharge_DamageBoost]% more damage and gain [Key:HASTED_DisplayName:Hasted] after using a rush skill.&lt;icon id=&apos;Shout_InspireStart&apos;/&gt;[Key:FEAR_DisplayName:Fear], [Key:MADNESS_DisplayName:Madness], and [Key:SLEEP_DisplayName:Sleep] are cleansed from encouraged allies.</content>
 	<content contentuid="h314ea21fg9e36g4d19gba1fgb5b55eb69808">Fire a massive wave of energy in a line, dealing [1] to targets and inflicting a random elemental status ailment.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;After the beam expires, the remaining energy explodes in a [2] radius around you, dealing [3] and applying any active rune effects.&lt;/font&gt;&lt;br&gt;Depletes the energy in the &lt;font color=&apos;#c5a65a&apos;&gt;Runic Cannon&lt;/font&gt;.</content>
 	<content contentuid="h31557319gc435g4ec5ga57ag3c80024b6b71">Chaotic Power</content>
 	<content contentuid="h3162baf9g0fc0g4a9cg99a0g64b5cefe3e76">Dusty Book</content>
@@ -750,7 +751,7 @@
 	<content contentuid="h4da10f0ag01b5g4bdagb58cg468020b05690">Ancient Dual Shields</content>
 	<content contentuid="h4daee89cg04bfg4646g839cga7add594aa6e">Soul Rune</content>
 	<content contentuid="h4db85b3dga320g44d4g8cb6g05a4dc44ce41">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery IV&lt;/font&gt;</content>
-	<content contentuid="h4dfa67cbg536dg4521gab3cg3bd5b2e8cb1d">&lt;icon id=&apos;Dome_LLWEAPONEX_Banner_Rally_DivineOrder;Dome_LLWEAPONEX_Banner_Rally_Dwarves&apos;/&gt;Placed banners now grant additional defensive benefits, including Flanking Immunity. </content>
+	<content contentuid="h4dfa67cbg536dg4521gab3cg3bd5b2e8cb1d">&lt;icon id=&apos;Dome_LLWEAPONEX_Banner_Rally_DivineOrder;Dome_LLWEAPONEX_Banner_Rally_Dwarves&apos;/&gt;Placed banners now grant additional defensive benefits, including immunity to [Handle:hd052e4cfg1a83g4ee5g886cgbf15dc656a0b:Flanked]. </content>
 	<content contentuid="h4e4de558g5137g4881ga8b3gff5625278817">A gauntlet once worn by a notorious demon. Seems to occasionally twitch.</content>
 	<content contentuid="h4e828850gecfbg4349g914dg2af390edffe5">Revenant</content>
 	<content contentuid="h4e990fe9g1ffcg46ecga18fg891f812ef7c0">Throw the flask at the target position, dousing objects hit in a nasty liquid that lowers &lt;font color=&apos;#D040D0&apos;&gt;All Resistances&lt;/font&gt; by &lt;font color=&apos;#DD0000&apos;&gt;[1]%&lt;/font&gt; for 2 turns.</content>
@@ -759,7 +760,6 @@
 	<content contentuid="h4ed3af41ga151g4d30gb710gfb689330d954">Placeholder</content>
 	<content contentuid="h4ed991d3gb2a2g4fe5g8a5fgf5783ab94ab4">&lt;font color=&apos;#5A9646&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;Pistol Damage Boost&lt;/p&gt;&lt;/font&gt;</content>
 	<content contentuid="h4ef1e65bg14f6g4d4ag95ebg604f692cddb3">Fateslayer</content>
-	<content contentuid="h4f01d52ag5c84g42d8gae3dgaf3f477bcc18">Axes can now be used with [Handle:hed591025g5c39g48ccga899gc9b1569716c1:Scoundrel] skills.</content>
 	<content contentuid="h4f0e6adcg34d8g4c8fgbfecg6fe6a80c7e9d">Character has been impaled by a thrown weapon!</content>
 	<content contentuid="h4f1b9001g7b29g4ac7g928dg0149cdeff75e">&lt;font color=&apos;#FFA900&apos; size=&apos;22&apos;&gt;Bolts Auto-Inserted into Hand Crossbow&lt;/font&gt;</content>
 	<content contentuid="h4f2a2a76g3662g417cgb58cg27ddf3bedeea">Retrieve Goods</content>
@@ -998,7 +998,7 @@
 	<content contentuid="h65f7167dge192g474cg95cfg86e0ad03b19c">Worn Runeblade of Poison</content>
 	<content contentuid="h65fdf547g44e0g4339ga5a7ge7f7b218cfca">Throwing Staff?</content>
 	<content contentuid="h661cff27geb36g4644gb34fg9553b9a51fe5">Piercing Weakness</content>
-	<content contentuid="h66336b79g124cg4aefg8aa6g559de9dfdbec">Placeholder</content>
+	<content contentuid="h66336b79g124cg4aefg8aa6g559de9dfdbec">&lt;icon id=&apos;Target_Bless&apos;/&gt;[Key:Target_Bless_DisplayName] now deals damage to the [Handle:hffa022a2g03b0g46f7g8ee6gcb8e5811a4d3:Undead].&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_BattleBook_Scroll_DisplayName,LLWEAPONEX_MB_BattleBook_Scrolls&apos; icon=&apos;Item_SCROLL_Resurrection&apos; type=&apos;3&apos;/&gt;Once per turn, using a scroll grants [ExtraData:LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus] [Handle:h4ef9c467g3c7bg4614g96d0g801b09fcc05c:Action Points].</content>
 	<content contentuid="h66384e98g2365g4eccg8a28g3ccdbc0a6442">Good. My blade was getting hungry.</content>
 	<content contentuid="h66440b41g98bbg46e9gb7acg23a663b36d75">An occluding greatbow arrow was made from a recipe stolen from the chronicles of the Kallavi, an elusive troupe of burglars.</content>
 	<content contentuid="h665d9b1age332g4988gb57cgd1357c4c9af2">&lt;font color=&apos;#F19824&apos;&gt;While spinning, shoot [ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_MinTargets]-[ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_MaxTargets] enemies in a [ExtraData:LLWEAPONEX_MB_HandCrossbow_Whirlwind_Radius]m radius, dealing [Skill:Projectile_LLWEAPONEX_MasteryBonus_Whirlwind_HandCrossbow_Shoot:LLWEAPONEX_HandCrossbow_ShootDamage].&lt;/font&gt;</content>
@@ -1037,7 +1037,7 @@
 	<content contentuid="h697deb03gee38g499cgae6fg38fe655fa676">Sparkstorm</content>
 	<content contentuid="h697f3261gc083g4152g84cdgbe559a5e0388">Dagger</content>
 	<content contentuid="h698f1a51gdcf5g491bg8c6fgff6d8863c00b">Exceptional Dual Shields</content>
-	<content contentuid="h69abab56gc6aag4f2ag8cdegfab6e3651afd">&lt;icon id=&apos;Target_Harmony&apos;/&gt;[Key:Target_Harmony_DisplayName] causes allies affected to attack the nearest enemy with a basic attack.&lt;icon id=&apos;Shout_GuardianAngel&apos;/&gt;Slain allies who were affected by [Key:GUARDIAN_ANGEL_DisplayName] are resurrected when your turn ends. </content>
+	<content contentuid="h69abab56gc6aag4f2ag8cdegfab6e3651afd">&lt;icon id=&apos;Target_Harmony&apos;/&gt;[Key:Target_Harmony_DisplayName] causes allies affected to attack the nearest enemy with a [Handle:hbdac34fdg43b6g4439g9947g6676e9c03294:Basic Attack].&lt;icon id=&apos;Shout_GuardianAngel&apos;/&gt;Slain allies who were affected by [Key:GUARDIAN_ANGEL_DisplayName] are [Handle:h4b361b82g36fag4ac3g9bbcg0d353c110adc:Resurrected] when your turn ends. </content>
 	<content contentuid="h69c827cag62f8g4080g802agc8b830a3ef7f">Earthen Dwarven Shields</content>
 	<content contentuid="h6a044bb9g0e3dg4cc6gbc56g23274880bc0f">&lt;font color=&apos;#ED9D07&apos;&gt;Spell Triggered! [1]&lt;/font&gt;</content>
 	<content contentuid="h6a1e045eg3d51g47adg8642gfa2764ed01f6">[LLWEAPONEX_VendingMachine_OrderOption6_d70c702c-a0c1-49a7-8772-1479725e2a39]</content>
@@ -1046,9 +1046,10 @@
 	<content contentuid="h6a30ea9cgec6bg4fb7g847cg6f52783ee045">Ancient Two-handed Bokuto</content>
 	<content contentuid="h6a3d6841g00e8g4d72g8172g071fccfac077">Dragonslayer&apos;s Greatbow</content>
 	<content contentuid="h6a51f8bbg89aeg4b36g90b4g67b9e206522e">&lt;icon id=&apos;Target_CripplingBlow&apos;/&gt;[Key:Target_CripplingBlow_DisplayName] applies Sundered, reducing max Physical and Magic Armor by 25%.</content>
+	<content contentuid="h6a6759eeg5cd0g45b4ga815gdd7bf46d8b1a">Scrollkeeper</content>
 	<content contentuid="h6a8b7584g375bg4aa1g85fdg9178f76d434d">&lt;font color=&apos;#40E0D0&apos;&gt;Throwing Ability Mastery II&lt;/font&gt;</content>
 	<content contentuid="h6a8c5394gdba9g45ffg934eg7914a2427553">A magical blade imbued with the power of water. The runes can be invoked to bathe the blade in a dousing layer of water.</content>
-	<content contentuid="h6ab0e2beg916eg4559g9981ga731585aa356">&lt;icon id=&apos;Projectile_SkyShot&apos;/&gt;[Key:Projectile_SkyShot_DisplayName] deals a guaranteed critical hit to targets that are Knocked Down.</content>
+	<content contentuid="h6ab0e2beg916eg4559g9981ga731585aa356">&lt;icon id=&apos;Projectile_Ricochet&apos;/&gt;[Key:Projectile_Ricochet_DisplayName] is refreshed if each fork strikes a target, once per turn.&lt;icon id=&apos;LLWEAPONEX_MasteryBonus_Crossbow_StillStance_DisplayName,LLWEAPONEX_MB_Crossbow_StillStance&apos; type=&apos;3&apos;/&gt;Deal more damage when attacking without moving.</content>
 	<content contentuid="h6aba0319g7f05g456ag9228g6e2b281ee95b">&lt;font color=&apos;#fcd203&apos;&gt;Stunning Great Arrow&lt;/font&gt;</content>
 	<content contentuid="h6ac77698g7cf7g4d8aga548gd1bf823df736">Strongman&apos;s Greatbow</content>
 	<content contentuid="h6ad69540ga85dg41e4ga6abg080720b0761b">&lt;font color=&apos;#00CCAA&apos;&gt;Recharges slowly over time.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00CCAA&apos;&gt;Killing an enemy with a remote charge grants a charge and additional bonuses.&lt;/font&gt;</content>
@@ -1350,7 +1351,7 @@
 	<content contentuid="h8a6cbb9ag679fg453ega509g5dd16d2ed7ef">Activate the &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; within your &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;, adding [1] to melee attacks.&lt;br&gt;Enemies hit have a 10% chance to become &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 50%.&lt;/font&gt;</content>
 	<content contentuid="h8a70e80eg8cefg4d27g9005g6c47f0e9ea1e">Giant Door Greatshields</content>
 	<content contentuid="h8a758ee7gd8b8g4d68ga391g649b923f57f8">&lt;font color=&apos;#00FF7F&apos; size=&apos;18&apos;&gt;Greatbow Mastery I&lt;/font&gt;&lt;br&gt;Fire a cushioned arrow that knocks the target 4m-12m away, depending on how close you are. &lt;br&gt;Targets hit deal [1] to enemy characters and [2] to items as they fly through the air.&lt;br&gt;&lt;font color=&apos;#FF9600&apos;&gt;If the initial target hit is an enemy, they take [3](3m) to [4](12m) from the distance launched, and [5](4m) to [6](20m) from the height fallen.&lt;/font&gt;</content>
-	<content contentuid="h8a7b2799g1053g4721g8aa2g1a56ea4e98cd">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack;LLWEAPONEX_CONCUSSION&apos; type=&apos;1;2&apos;/&gt;Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).</content>
+	<content contentuid="h8a7b2799g1053g4721g8aa2g1a56ea4e98cd">&lt;icon id=&apos;Target_LLWEAPONEX_BasicAttack;LLWEAPONEX_CONCUSSION&apos; type=&apos;1;2&apos;/&gt;Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to apply [Key:LLWEAPONEX_CONCUSSION_DisplayName:Concussion] for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).&lt;icon id=&apos;Target_FirstAid&apos;/&gt;[Key:Target_FirstAid_DisplayName:First Aid] restores additional [Handle:h67a4c781g589ag4872g8c46g870e336074bd:Vitality], and [Key:RESTED_DisplayName] has an increased duration of [ExtraData:LLWEAPONEX_MB_BattleBook_Rested_TurnBonus] turn(s). </content>
 	<content contentuid="h8ab40654g30ebg4b64g9125g81fb0f810d28">Worn Runeblade of Fire</content>
 	<content contentuid="h8ad78b3bg54fbg4467g9cddgbcef7f45c78c">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt; + &lt;font color=&apos;#65c900&apos;&gt;Poison Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;If an attacked target is &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt;, the poison spreads to nearby enemies within [1]m.&lt;br&gt;If the enemies the poison spreads to are already &lt;font color=&apos;#00aa00&apos;&gt;Poisoned&lt;/font&gt;, the contamination continues.&lt;br&gt;Adds &lt;font color=&apos;#4197e2&apos;&gt;Water Damage&lt;/font&gt; and &lt;font color=&apos;#8B0000&apos;&gt;Poison Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="h8ae1e87bg6b1cg4ec1g8a20gd506b45bb394">Dwarvenguard, Wolfbane</content>
@@ -2164,7 +2165,7 @@
 	<content contentuid="he06eefc3g4b22g42b2ga54agd5f19035f599">Balrin&apos;s Throwing Axe (Oil)</content>
 	<content contentuid="he071dae7gc53fg45c1ga708g45c4e456b766">Character has lowered resistance to &lt;font color=&apos;#7D71D9&apos;&gt;air damage&lt;/font&gt;.</content>
 	<content contentuid="he0792923g3b6ag4605g8b14g5bfba66847a8">Rod Of The Lizard</content>
-	<content contentuid="he084a3c3g481eg4984g9726g02d0239f752d">Axes can now be used with [Handle:hed591025g5c39g48ccga899gc9b1569716c1:Scoundrel] skills.</content>
+	<content contentuid="he084a3c3g481eg4984g9726g02d0239f752d">Axes can now be used with skills that require a [Handle:hd6d18316gbc8bg400bga46eg18cd9f4185ee:Dagger].</content>
 	<content contentuid="he0a3a1bfge498g4c0cg8814g67773243d59c">&lt;font color=&apos;#40b606&apos;&gt;Corrosive Great Arrow&lt;/font&gt;</content>
 	<content contentuid="he0cceb33g75ddg44a5g94b4geda5fd12c886">&lt;font color=&apos;#EBC808&apos;&gt;[1] unlocked [2] Mastery Rank [3].&lt;/font&gt;</content>
 	<content contentuid="he0dca1f1g445fg40ecg9a7ag3b09c7cf1429">Shrapnel Charge</content>
