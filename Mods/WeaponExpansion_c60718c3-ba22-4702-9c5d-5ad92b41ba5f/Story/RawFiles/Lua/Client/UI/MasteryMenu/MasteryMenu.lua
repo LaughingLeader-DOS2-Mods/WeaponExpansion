@@ -8,6 +8,7 @@ local VisibilityMode = {
 ---@class MasteryMenu
 ---@field Instance UIObject
 ---@field Root FlashMainTimeline
+---@field Exists boolean
 MasteryMenu = {
 	ID = "WeaponExpansionMasteryMenu",
 	Visible = false,
@@ -49,6 +50,8 @@ setmetatable(MasteryMenu, {
 			if ui then
 				return ui:GetRoot()
 			end
+		elseif k == "Exists" then
+			return Ext.GetUI(MasteryMenu.ID) ~= nil
 		end
 	end
 })
@@ -383,18 +386,18 @@ local defaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data
 
 ---@private
 function MasteryMenu:Initialize()
-	local instance = Ext.CreateUI(MasteryMenu.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer, defaultUIFlags)
-	--instance:Invoke("closeMenu", true)
-	self:RegisterListeners(instance)
-	--instance:Hide()
+	local instance = Ext.GetUI(MasteryMenu.ID)
+	if not instance then
+		instance = Ext.CreateUI(MasteryMenu.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer, defaultUIFlags)
+		self:RegisterListeners(instance)
+	end
 	return instance
 end
 
 Ext.RegisterListener("GameStateChanged", function(last, next)
-	if next == "Running" and last ~= "Paused" then
-		if not Ext.GetUI(MasteryMenu.ID) then
-			MasteryMenu:Initialize()
-			local instance = MasteryMenu.Instance
+	if next == "Running" then
+		if not MasteryMenu.Exists then
+			local instance = MasteryMenu:Initialize()
 			if instance then
 				instance:Hide()
 			end
