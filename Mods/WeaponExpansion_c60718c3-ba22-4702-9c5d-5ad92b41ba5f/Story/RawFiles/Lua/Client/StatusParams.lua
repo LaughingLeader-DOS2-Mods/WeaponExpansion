@@ -88,7 +88,7 @@ local statusAttributes = {
 	"Charges",
 	"MaxCharges",
 	"DefendTargetPosition",
-	"TargetConditions",
+	--"TargetConditions", -- Not readable
 	"Toggle",
 	"LeaveAction",
 	"DieAction",
@@ -142,8 +142,8 @@ function GetStatusTooltipText(character, statusName)
 	local status = PrepareStatusProperties(statusName)
 	if status ~= nil then
 		---@type string
-		local name,_ = Ext.GetTranslatedStringFromKey(status.DisplayName)
-		local description,_ = Ext.GetTranslatedStringFromKey(status.Description)
+		local name = GameHelpers.GetStringKeyText(status.DisplayName)
+		local description = GameHelpers.GetStringKeyText(status.Description)
 		if status.DescriptionParams ~= nil and status.DescriptionParams ~= "" then
 			local descParams = StringHelpers.Split(status.DescriptionParams, ";")
 			for paramText in string.gmatch(description, "%[%d+%]") do

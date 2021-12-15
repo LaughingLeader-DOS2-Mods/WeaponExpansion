@@ -14,7 +14,7 @@ local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
 	if rune ~= nil then
 		--local runeNameText = Text.RuneNames[rune.BoostName]
-		local runeNameText = Ext.GetTranslatedStringFromKey(rune.BoostName)
+		local runeNameText = GameHelpers.GetStringKeyText(rune.BoostName)
 		if runeNameText ~= nil then
 			return boltAmmoTypeText.Value:gsub("%[1%]", runeNameText)
 		else
@@ -45,7 +45,7 @@ local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 	if rune ~= nil then
 		--local runeNameText = Text.RuneNames[rune.BoostName]
-		local runeNameText = Ext.GetTranslatedStringFromKey(rune.BoostName)
+		local runeNameText = GameHelpers.GetStringKeyText(rune.BoostName)
 		if runeNameText ~= nil then
 			return bulletAmmoTypeText.Value:gsub("%[1%]", runeNameText)
 		else

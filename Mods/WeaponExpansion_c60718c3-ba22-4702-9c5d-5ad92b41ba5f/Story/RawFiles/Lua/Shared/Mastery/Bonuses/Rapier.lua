@@ -21,7 +21,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Rapier, 1, {
 						local nextTurns = math.floor(duration / 6)
 						status.CurrentLifeTime = duration
 						status.RequestClientSync = true
-						local statusName = Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute("KNOCKED_DOWN", "DisplayName"), "Knocked Down")
+						local statusName = GameHelpers.GetStringKeyText(Ext.StatGetAttribute("KNOCKED_DOWN", "DisplayName"), "Knocked Down")
 						local text = Text.StatusText.StatusExtended:ReplacePlaceholders(statusName, lastTurns, nextTurns)
 						if ObjectIsCharacter(target) == 1 then
 							CharacterStatusText(target, text)

@@ -27,7 +27,7 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 			if boost < 0 then
 				valueSymbol = ""
 			end
-			local rankText = Ext.GetTranslatedStringFromKey(string.format("LLWEAPONEX_Unarmed_Mastery%i", unarmedMasteryRank))
+			local rankText = GameHelpers.GetStringKeyText(string.format("LLWEAPONEX_Unarmed_Mastery%i", unarmedMasteryRank))
 			local element = {
 				Type = "StatsPercentageBoost",
 				Label = string.format("%s (%s)", fromText:ReplacePlaceholders(rankText, valueSymbol, math.tointeger(boost)), baseDamageText.Value)

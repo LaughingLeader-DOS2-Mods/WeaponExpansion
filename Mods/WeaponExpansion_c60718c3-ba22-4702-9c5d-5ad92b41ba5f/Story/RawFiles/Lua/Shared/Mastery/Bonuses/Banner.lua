@@ -70,13 +70,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 			for status,color in pairs(inspireCleanseStatuses) do
 				if HasActiveStatus(target, status) == 1 then
 					RemoveStatus(target, status)
-					cleansed[#cleansed+1] = string.format("<font color='%s'>%s</font>", color, Ext.GetTranslatedStringFromKey(Ext.StatGetAttribute(status, "DisplayName")))
+					cleansed[#cleansed+1] = string.format("<font color='%s'>%s</font>", color, GameHelpers.GetStringKeyText(Ext.StatGetAttribute(status, "DisplayName")))
 				end
 			end
 			if #cleansed > 0 then
 				--PlayBeamEffect(source, target, "RS3_FX_GP_Status_Retaliation_Beam_01", "Dummy_R_HandFX", "Dummy_BodyFX")
 				ApplyStatus(target, "LLWEAPONEX_ENCOURAGED_CLEANSE_BEAM_FX", 0.0, 1, source)
-				local text = Ext.GetTranslatedStringFromKey("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", Common.StringJoin("/", cleansed))
+				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", Common.StringJoin("/", cleansed))
 				CharacterStatusText(target,text)
 			end
 		end

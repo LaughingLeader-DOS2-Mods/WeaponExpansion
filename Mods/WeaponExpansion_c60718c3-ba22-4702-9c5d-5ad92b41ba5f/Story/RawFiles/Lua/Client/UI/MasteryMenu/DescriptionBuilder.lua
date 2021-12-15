@@ -117,7 +117,6 @@ local function ParseDescription(this, text, character)
 							iconName = "LLWEAPONEX_UI_PassiveBonus"
 						end
 					end
-					print(iconId, iconName, iconType)
 					this.masteryMenuMC.descriptionList.addIcon(iconId, iconName, iconType, false)
 				end
 			end
