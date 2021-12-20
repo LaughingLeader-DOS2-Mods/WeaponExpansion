@@ -16,7 +16,7 @@ Ext.Require("Shared/Uniques/Classes/UniqueData/UniqueData.lua")
 local UniqueData = UniqueManager.Classes.UniqueData
 
 ---@type AllUniqueProgressionData
-local ProgressionData = Ext.Require("Shared/Uniques/Classes/UniqueItemsProgression.lua")
+local ProgressionData = Ext.Require("Shared/Uniques/Progression.lua")
 
 
 local function CheckForAnvilWeightChange(data, character)
@@ -418,4 +418,25 @@ function UniqueManager.UpdateUniqueUUID(originalItem, newItem, replaceMainUUID)
 			uniqueData.UUID = uuid
 		end
 	end
+end
+
+local UniqueScripts = {
+	"AnatomyBook",
+	"AnvilMace",
+	"BalrinThrowingAxe",
+	"BasilusDagger",
+	"DeathEdge",
+	"GnakSpellScroll",
+	"MagicMissileWand",
+	"Muramasa",
+	"Omnibolt",
+	"PacifistsWrath",
+	"PirateGloves",
+	"RunicCannon",
+	"SoulHarvest",
+	"Victory",
+}
+
+for _,v in pairs(UniqueScripts) do
+	Ext.Require(string.format("Shared/Uniques/Logic/%s.lua", v))
 end

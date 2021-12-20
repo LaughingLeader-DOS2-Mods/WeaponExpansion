@@ -160,7 +160,7 @@ end
 Ext.Require("Server/Items/LootBonuses.lua")
 Ext.Require("Server/Items/TreasureTableMerging.lua")
 local itemBonusSkills = Ext.Require("Server/Items/ItemBonusSkills.lua")
-Ext.Require("Shared/System/UniqueManager.lua")
+Ext.Require("Shared/Uniques/UniqueManager.lua")
 Ext.Require("Server/Origins/OriginsUniqueItems.lua")
 Ext.Require("Shared/Mastery/_Init.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")

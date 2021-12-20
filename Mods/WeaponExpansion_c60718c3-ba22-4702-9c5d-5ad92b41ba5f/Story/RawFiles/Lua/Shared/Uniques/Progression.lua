@@ -1,4 +1,4 @@
-local classes = Ext.Require("Server/Data/UniqueProgression.lua")
+local classes = Ext.Require("Shared/Uniques/Classes/UniqueProgression.lua")
 
 ---@type UniqueProgressionEntry
 local ue = classes.UniqueProgressionEntry

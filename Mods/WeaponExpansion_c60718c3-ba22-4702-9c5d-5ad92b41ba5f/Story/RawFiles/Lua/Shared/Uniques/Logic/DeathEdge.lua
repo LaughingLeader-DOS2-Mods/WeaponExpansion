@@ -1,7 +1,7 @@
 if not Vars.IsClient then
 	local BONE_TOTEM = "4cd5defc-5d36-4d76-b606-b6ca69a13617"
-
-	DeathManager.RegisterListener("DeathEdgeBonus", function(target, source, success)
+	
+	Uniques.DeathEdge:RegisterDeathManagerListener("DeathEdgeBonus", function(target, source, success)
 		if success then
 			local target = GameHelpers.GetCharacter(target)
 			local source = GameHelpers.GetCharacter(source)
@@ -23,7 +23,7 @@ if not Vars.IsClient then
 		end
 	end)
 
-	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_DeathEdge_Equipped", function(tag, attacker, target, data, targetIsObject, skill)
+	Uniques.DeathEdge:RegisterOnWeaponTagHit(function(tag, attacker, target, data, targetIsObject, skill)
 		if targetIsObject then
 			DeathManager.ListenForDeath("DeathEdgeBonus", target, attacker, 1000)
 		end

@@ -32,8 +32,7 @@ local UniqueData = {
 		ItemEquipped = {},
 		ItemUnEquipped = {},
 	},
-	EquippedCallbacks = {},
-	UnEquippedCallbacks = {}
+	EquippedCallbacks = {}
 }
 
 ---@param data UniqueData
@@ -121,8 +120,7 @@ function UniqueData:Create(progressionData, params)
 			ItemEquipped = {},
 			ItemUnEquipped = {},
 		},
-		EquippedCallbacks = {},
-		UnEquippedCallbacks = {}
+		EquippedCallbacks = {}
 	}
 	ConfigureMetadata(this)
 	if params then
@@ -341,6 +339,20 @@ end
 function UniqueData:RegisterTimerListener(name, callback, fetchGameObjects)
 	if not isClient then
 		Timer.RegisterListener(name, callback, fetchGameObjects)
+	end
+end
+
+---Lazy way of registering a DeathManager listener if we're on the server side.
+---@param id string The ID for the death event, specified in ListenForDeath.
+---@param callback fun(target:string, attacker:string, success:boolean):void
+function UniqueData:RegisterDeathManagerListener(id, callback)
+	if not isClient then
+		DeathManager.RegisterListener(id, function(...)
+			local b,err = xpcall(callback, debug.traceback, ..., self)
+			if not b then
+				Ext.PrintError(err)
+			end
+		end)
 	end
 end
 

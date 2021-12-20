@@ -622,26 +622,21 @@ function UniqueData:InvokeEventListeners(event, ...)
 	end
 end
 
----@alias UniqueDataEquippedEventCallback fun(unique:UniqueData, character:EsvCharacter, item:EsvItem):void
+---@alias UniqueDataEquippedEventCallback fun(unique:UniqueData, character:EsvCharacter, item:EsvItem, equipped:boolean):void
 
----@param equipped boolean
 ---@param callback UniqueDataEquippedEventCallback
-function UniqueData:RegisterEquippedListener(equipped, callback)
-	if equipped then
-		self.EquippedCallbacks[#self.EquippedCallbacks+1] = callback
-	else
-		self.UnEquippedCallbacks[#self.UnEquippedCallbacks+1] = callback
-	end
+function UniqueData:RegisterEquippedListener(callback)
+	self.EquippedCallbacks[#self.EquippedCallbacks+1] = callback
 end
 
 ---@param character EsvCharacter
 ---@param item EsvItem
 function UniqueData:OnEquipped(character, item)
-	InvokeListenerCallbacks(self.EquippedCallbacks, self, character, item)
+	InvokeListenerCallbacks(self.EquippedCallbacks, self, character, item, true)
 end
 
 ---@param character EsvCharacter
 ---@param item EsvItem
 function UniqueData:OnUnEquipped(character, item)
-	InvokeListenerCallbacks(self.UnEquippedCallbacks, self, character, item)
+	InvokeListenerCallbacks(self.EquippedCallbacks, self, character, item, false)
 end
