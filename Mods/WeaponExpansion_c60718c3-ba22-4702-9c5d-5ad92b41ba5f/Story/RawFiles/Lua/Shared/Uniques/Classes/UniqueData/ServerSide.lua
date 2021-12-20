@@ -1,210 +1,5 @@
----@class UniqueData
----@field ID string A name for this unique.
----@field UUID string The current UUID for the unique.
----@field DefaultUUID string The default UUID for the unique (the initial global item).
----@field Owner string
----@field Copies table<string,string> Item UUID to owner object UUID for copies of this unique.
-local UniqueData = {
-	Type = "UniqueData",
-	LevelData = {},
-	Owner = nil,
-	---@type string|table<string,string>
-	DefaultOwner = nil,
-	CurrentLevel = nil,
-	AutoEquipOnOwner = false,
-	Initialized = false,
-	---@type function
-	OnEquipped = nil,
-	---@type function
-	OnOwnerDeath = nil,
-	---@type function
-	OnGotOwner = nil,
-	LastProgressionLevel = 0,
-	ProgressionData = nil,
-	CanMoveToVendingMachine = true,
-	---@type UniqueData
-	LinkedItem = nil,
-	Tag = "",
-	Events = {
-		ItemAddedToCharacter = {},
-		ItemEquipped = {},
-		ItemUnEquipped = {},
-	},
-	EquippedCallbacks = {},
-	UnEquippedCallbacks = {}
-}
-
----@param data UniqueData
----@param k string
-local function UniqueDataGetter(data, k)
-	if k == "UUID" then
-		if data.DefaultUUID and GameHelpers.ObjectExists(data.DefaultUUID) then
-			return data.DefaultUUID
-		end
-		for uuid,tag in pairs(PersistentVars.Uniques) do
-			if tag == data.Tag and GameHelpers.ObjectExists(uuid) then
-				return uuid
-			end
-		end
-		return StringHelpers.NULL_UUID
-	elseif k == "Owner" then
-		if data.DefaultOwner and GameHelpers.ObjectExists(data.DefaultOwner) then
-			return data.DefaultOwner
-		end
-		for uuid,tag in pairs(PersistentVars.Uniques) do
-			if tag == data.Tag and GameHelpers.ObjectExists(uuid) then
-				local owner = GameHelpers.Item.GetOwner(uuid, true)
-				if GameHelpers.ObjectExists(owner) then
-					return owner
-				end
-			end
-		end
-		return StringHelpers.NULL_UUID
-	elseif k == "Copies" then
-		local copies = {}
-		for uuid,tag in pairs(PersistentVars.Uniques) do
-			if tag == data.Tag and GameHelpers.ObjectExists(uuid) then
-				copies[uuid] = GameHelpers.Item.GetOwner(uuid, true)
-			end
-		end
-		return copies
-	end
-	return UniqueData[k]
-end
-
----@param data UniqueData
----@param k string
----@param value any
-local function UniqueDataSetter(data, k, value)
-	if k == "UUID" then
-		fprint(LOGLEVEL.WARNING, "[WeaponExpansion:UniqueData:__newindex] UUID is being set manually for unique (%s) DefaultUUID(%s) => (%s)", data.Tag, data.DefaultUUID, value)
-		rawset(data, "DefaultUUID", value)
-	end
-	rawset(data, k, value)
-end
-
-local function ConfigureMetadata(tbl)
-	setmetatable(tbl, {
-		__index = UniqueDataGetter,
-		__newindex = UniqueDataSetter,
-	})
-end
-
----@param progressionData table<string, table<int, UniqueProgressionEntry>>
----@param params table<string,any>
----@return UniqueData
-function UniqueData:Create(progressionData, params)
-    local this =
-    {
-		ID = "",
-		DefaultUUID = "",
-		LevelData = {},
-		DefaultOwner = StringHelpers.NULL_UUID,
-		AutoEquipOnOwner = false,
-		Initialized = false,
-		OnEquipped = nil,
-		OnGotOwner = nil,
-		OnOwnerDeath = nil,
-		LastProgressionLevel = 0,
-		ProgressionData = progressionData,
-		CanMoveToVendingMachine = true,
-		Tag = "",
-		LinkedItem = nil,
-		Events = {
-			ItemAddedToCharacter = {},
-			ItemEquipped = {},
-			ItemUnEquipped = {},
-		},
-		EquippedCallbacks = {},
-		UnEquippedCallbacks = {}
-	}
-	ConfigureMetadata(this)
-	if params then
-		for prop,value in pairs(params) do
-			this[prop] = value
-		end
-	end
-	if this.DefaultOwner ~= nil or this.Owner ~= nil then
-		this.CanMoveToVendingMachine = false
-	elseif this.CanMoveToVendingMachine then
-		-- Vending Machine
-		this.DefaultOwner = NPC.VendingMachine
-	end
-    return this
-end
-
-function UniqueData:CanMoveToOwner(owner, region)
-	if StringHelpers.IsNullOrEmpty(owner) then
-		return false
-	end
-	--local inventoryOwner = GetInventoryOwner(self.UUID)
-	if owner ~= nil 
-	and ObjectExists(owner) == 1
-	--and CharacterIsDead(owner) == 0
-	and GetRegion(owner) == region
-	then
-		return true
-	end
-	return false
-end
-
----Returns true if the UUID is a valid UUID for this unique, or if the item has the associated tag.
----@param uuid UUID
----@return boolean
-function UniqueData:IsValid(uuid)
-	if self.UUID == uuid then
-		return true
-	end
-	local copies = self.Copies
-	for copyUUID,copyOwner in pairs(copies) do
-		if copyUUID == uuid then
-			return true
-		end
-	end
-	if GameHelpers.ItemHasTag(uuid, self.Tag) then
-		return true
-	end
-	return false
-end
-
----Gets the UUID of this unique owned by the owner, or the default value.
----@param owner string
----@param returnDefault boolean|nil If true, the regular UUID value is returned instead of nil.
----@return UUID
-function UniqueData:GetUUID(owner, returnDefault)
-	if self.Owner == owner then
-		return self.UUID
-	end
-	local copies = self.Copies
-	for uuid,copyOwner in pairs(copies) do
-		if copyOwner == owner then
-			return uuid
-		end
-	end
-	if returnDefault then
-		return self.UUID
-	end
-	return nil
-end
-
----Gets the owner of the unique UUID.
----@param uuid UUID
----@param returnDefault boolean|nil
----@return UUID
-function UniqueData:GetOwner(uuid, returnDefault)
-	if self.UUID == uuid then
-		return self.Owner
-	end
-	local copies = self.Copies
-	local copyOwner = copies[uuid]
-	if copyOwner then
-		return copyOwner
-	end
-	if returnDefault then
-		return self.Owner
-	end
-	return nil
-end
+---@type UniqueData
+local UniqueData = UniqueManager.Classes.UniqueData
 
 ---@param uuid UUID
 ---@return boolean
@@ -239,22 +34,6 @@ function UniqueData:ReleaseFromOwner(uuid, unequip)
 	ItemClearOwner(uuid)
 end
 
----Checks if a UUID is a valid owner of this unique.
----@param owner UUID
----@return boolean
-function UniqueData:IsOwner(owner)
-	if self.Owner == owner then
-		return true
-	else
-		for uuid,ownerId in pairs(self.Copies) do
-			if ownerId == owner then
-				return true
-			end
-		end
-	end
-	return false
-end
-
 function UniqueData:ResetRelease(uuid)
 	uuid = uuid or self:GetUUID(nil,true)
 	if uuid then
@@ -282,6 +61,18 @@ function UniqueData:MoveToRegionPosition(region, item)
 	end
 end
 
+function UniqueData:Initialize(region, firstLoad, uuid)
+	if uuid == nil then
+		uuid = self.UUID
+	end
+	if GameHelpers.ObjectExists(uuid) then
+		self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
+		if firstLoad == true then
+			self:ApplyProgression(self.ProgressionData, nil, Ext.GetItem(uuid), true)
+		end
+	end
+end
+
 function UniqueData:OnItemLeveledUp(item)
 	self:ApplyProgression(self.ProgressionData, nil, item, false)
 end
@@ -301,45 +92,11 @@ function UniqueData:AddCopy(uuid)
 	end
 end
 
-function UniqueData:FindPlayerCopies()
-	if not StringHelpers.IsNullOrEmpty(self.Tag) then
-		for player in GameHelpers.Character.GetPlayers() do
-			local items = GameHelpers.Item.FindTaggedItems(player, self.Tag, false)
-			for _,item in pairs(items) do
-				if item ~= self.DefaultUUID then
-					self:AddCopy(item)
-				end
-			end
-		end
-	end
-end
-
-function UniqueData:Initialize(region, firstLoad, uuid)
-	if uuid == nil then
-		uuid = self.UUID
-	end
-	if ObjectExists(uuid) == 1 then
-		self.Initialized = ObjectGetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized") == 1
-		if firstLoad == true then
-			self:ApplyProgression(self.ProgressionData, nil, Ext.GetItem(uuid), true)
-		end
-	end
-end
-
-function UniqueData:AddPosition(region,x,y,z,rx,ry,rz)
-	self.LevelData[region] = {
-		x,y,z,
-		0.0174533 * rx,
-		0.0174533 * ry,
-		0.0174533 * rz
-	}
-end
-
 ---@param target UUID
 ---@param uuid UUID|nil
 function UniqueData:Equip(target, uuid)
 	uuid = uuid or self.UUID
-	if ObjectExists(uuid) == 1 then
+	if GameHelpers.ObjectExists(uuid) then
 		local item = Ext.GetItem(uuid)
 		local locked = item.UnEquipLocked
 		if GameHelpers.Character.EquipItem(target, item) then
@@ -358,16 +115,9 @@ end
 ---@param equip boolean|nil
 function UniqueData:Transfer(target, uuid, equip)
 	uuid = uuid or self.UUID
-	assert(not StringHelpers.IsNullOrWhitespace(uuid) and ObjectExists(uuid) == 1, "[WeaponExpansion:UniqueData:Equip] uuid must be a valid item UUID.")
+	assert(not StringHelpers.IsNullOrWhitespace(uuid) and GameHelpers.ObjectExists(uuid), "[WeaponExpansion:UniqueData:Equip] uuid must be a valid item UUID.")
 	if target == "host" or not (target and Vars.DebugMode) then target = CharacterGetHostCharacter() end
-	assert(not StringHelpers.IsNullOrWhitespace(target) and ObjectExists(target) == 1, "[WeaponExpansion:UniqueData:Equip] target must be a valid object UUID.")
-	if ObjectExists(uuid) == 0 then
-		Ext.PrintError("[UniqueData:Transfer] Item", uuid, "does not exist!")
-		return false
-	elseif ObjectExists(target) == 0 then
-		Ext.PrintError("[UniqueData:Transfer] Target", target, "does not exist!")
-		return false
-	end
+	assert(not StringHelpers.IsNullOrWhitespace(target) and GameHelpers.ObjectExists(target), "[WeaponExpansion:UniqueData:Equip] target must be a valid object UUID.")
 	self.Owner = target
 
 	if GetInventoryOwner(uuid) ~= target then
@@ -834,7 +584,7 @@ end
 ---@param firstLoad boolean|nil
 function UniqueData:ApplyProgression(progressionTable, persist, item, firstLoad)
 	progressionTable = progressionTable or self.ProgressionData
-	item = GameHelpers.GetItem(item) or Ext.GetItem(self.UUID)
+	item = GameHelpers.GetItem(item or self:GetUUID(nil,true))
 	assert(item ~= nil, string.format("[WeaponExpansion:UniqueData:StartApplyingProgression] item (%s) is not valid for unique (%s).", item, self.Tag))
 	StartApplyingProgression(self, progressionTable, persist, item, firstLoad)
 	self.LastProgressionLevel = item.Stats.Level
@@ -872,24 +622,6 @@ function UniqueData:InvokeEventListeners(event, ...)
 	end
 end
 
----@param uuid UUID|nil
-function UniqueData:Locate(uuid)
-	uuid = uuid or self.UUID
-	assert(not StringHelpers.IsNullOrWhitespace(uuid) and ObjectExists(uuid) == 1, "[WeaponExpansion:UniqueData:Locate] uuid must be a valid item UUID.")
-	local x,y,z = GetPosition(uuid)
-	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Unique (%s) is at position x %s y %s z %s", uuid, x, y, z)
-	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Characters nearby:")
-	for _,v in pairs(Ext.GetItem(uuid):GetNearbyCharacters(6.0)) do
-		local char = Ext.GetCharacter(v)
-		fprint(LOGLEVEL.DEFAULT, "%s (%s)", char.DisplayName, Common.Dump(char.WorldPos))
-	end
-	local owner = self:GetOwner(uuid)
-	if owner then
-		local tx,ty,tz = GetPosition(owner)
-		fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Unique (%s) owner (%s) is at position x %s y %s z %s", owner, tx, ty, tz)
-	end
-end
-
 ---@alias UniqueDataEquippedEventCallback fun(unique:UniqueData, character:EsvCharacter, item:EsvItem):void
 
 ---@param equipped boolean
@@ -913,20 +645,3 @@ end
 function UniqueData:OnUnEquipped(character, item)
 	InvokeListenerCallbacks(self.UnEquippedCallbacks, self, character, item)
 end
-
-function UniqueData:PrintPosition()
-	local item = Ext.GetItem(self:GetUUID(nil,true))
-	if item then
-		if item.WorldPos then
-			fprint(LOGLEVEL.WARNING, "[Unique:%s]\n%s", self.ID, Lib.serpent.block({
-				[SharedData.RegionData.Current] = {
-					IsDefault = true,
-					Position = item.WorldPos,
-					Rotation = {GetRotation(item.MyGuid)}
-				}
-			}))
-		end
-	end
-end
-
-return UniqueData

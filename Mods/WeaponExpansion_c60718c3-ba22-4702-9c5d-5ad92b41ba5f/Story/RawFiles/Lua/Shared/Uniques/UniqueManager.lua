@@ -1,16 +1,23 @@
 --S_LLWEAPONEX_VendingMachine_A_680d2702-721c-412d-b083-4f5e816b945a
 local VENDING_MACHINE = "680d2702-721c-412d-b083-4f5e816b945a"
 
+UniqueManager = {
+	Classes = {},
+	---@type table<string,UniqueData>
+	TagToUnique = {},
+	FirstLoad = true,
+}
+
+local isClient = Ext.IsClient()
+
+Ext.Require("Shared/Uniques/Classes/UniqueData/UniqueData.lua")
+
 ---@type UniqueData
-local UniqueData = Ext.Require("Server/Data/UniqueData.lua")
+local UniqueData = UniqueManager.Classes.UniqueData
 
-if UniqueManager == nil then
-	UniqueManager = {}
-end
+---@type AllUniqueProgressionData
+local ProgressionData = Ext.Require("Shared/Uniques/Classes/UniqueItemsProgression.lua")
 
----@type table<string,UniqueData>
-UniqueManager.TagToUnique = {}
-UniqueManager.FirstLoad = true
 
 local function CheckForAnvilWeightChange(data, character)
 
@@ -26,9 +33,6 @@ local function ScatterOnDeath(data, owner)
 	local x,y,z = GetPosition(owner)
 	ItemScatterAt(data.UUID, x, y, z)
 end
-
----@type AllUniqueProgressionData
-local ProgressionData = Ext.Require("Server/Items/Uniques/UniqueItemsProgression.lua")
 
 ---@type table<string, UniqueData>
 Uniques = {
@@ -69,6 +73,10 @@ Uniques.PacifistsWrath1H = UniqueData:Create(ProgressionData.PacifistsWrath1H, {
 Uniques.PacifistsWrath.LinkedItem = Uniques.PacifistsWrath1H
 Uniques.WarchiefAxe = UniqueData:Create(ProgressionData.WarchiefAxe, {Tag="LLWEAPONEX_UniqueWarchiefHalberdAxe", LinkedItem=Uniques.WarchiefHalberd, CanMoveToVendingMachine=false, IsLinkedItem=true})
 Uniques.WarchiefHalberd.LinkedItem = Uniques.WarchiefAxe
+
+for id,v in pairs(Uniques) do
+	v.ID = id
+end
 
 ---@param tag string
 ---@return UniqueData
@@ -114,23 +122,6 @@ end
 ---@type table<string,UniqueData>
 AllUniques = {}
 
-for id,v in pairs(Uniques) do
-	v.ID = id
-	if not StringHelpers.IsNullOrEmpty(v.DefaultUUID) then
-		AllUniques[v.DefaultUUID] = v
-	end
-end
-
-Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
-	local unique = Uniques[id]
-	if unique ~= nil then
-		local host = CharacterGetHostCharacter()
-		unique:Transfer(host)
-	else
-		Ext.PrintError("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
-	end
-end)
-
 local LinkedUniques = {}
 
 ---@param item1 string
@@ -172,71 +163,6 @@ function UniqueManager.GetLinkedUnique(uuid)
 end
 
 -- CharacterSetVisualElement(Mods.WeaponExpansion.Origin.Harken, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
-
-function SwapUnique(char, id)
-	local uuid = nil
-	local uniqueData = Uniques[id]
-	if uniqueData ~= nil then
-		uuid = uniqueData:GetUUID(char)
-	end
-	if uuid == nil then
-		return false
-	end
-	local equipped = nil
-	local next = nil
-	local link = LinkedUniques[uuid]
-	if link ~= nil then
-		if GameHelpers.Item.ItemIsEquipped(char, uuid) then
-			next = link
-			equipped = uuid
-		else
-			next = uuid
-			equipped = link
-		end
-	end
-	if equipped ~= nil and next ~= nil and ObjectExists(equipped) == 1 and ObjectExists(next) == 1 then
-		local stat = NRD_ItemGetStatsId(next)
-		local statType = NRD_StatGetType(stat)
-		local isTwoHanded = false
-		local locked = Ext.GetItem(equipped).UnEquipLocked
-		if statType == "Weapon" then
-			isTwoHanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
-		end
-		local slot = GameHelpers.Item.GetEquippedSlot(char,equipped) or GameHelpers.Item.GetEquippedSlot(char,next) or "Weapon"
-
-		ItemLockUnEquip(equipped, 0)
-		ItemLockUnEquip(next, 0)
-		--CharacterUnequipItem(char, equipped)
-
-		if not isTwoHanded then
-			local currentEquipped = StringHelpers.GetUUID(CharacterGetEquippedItem(char, slot))
-			if not StringHelpers.IsNullOrEmpty(currentEquipped) and currentEquipped ~= equipped then
-				ItemLockUnEquip(currentEquipped, 0)
-				CharacterUnequipItem(char, currentEquipped)
-			end
-			NRD_CharacterEquipItem(char, next, slot, 0, 0, 1, 1)
-		else
-			local mainhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Weapon"))
-			local offhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Shield"))
-			if not StringHelpers.IsNullOrEmpty(mainhand) and mainhand ~= equipped then
-				ItemLockUnEquip(mainhand, 0)
-				CharacterUnequipItem(char, mainhand)
-			end
-			if not StringHelpers.IsNullOrEmpty(offhand) and offhand ~= equipped then
-				ItemLockUnEquip(offhand, 0)
-				CharacterUnequipItem(char, offhand)
-			end
-			NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
-		end
-
-		if locked then
-			ItemLockUnEquip(next, 1)
-		end
-
-		--S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f
-		Osi.LeaderLib_Timers_StartObjectObjectTimer(equipped, "80976258-a7a5-4430-b102-ba91a604c23f", 50, "Timers_LLWEAPONEX_MoveUniqueToUniqueHolder", "LeaderLib_Commands_ItemToInventory")
-	end
-end
 
 function UniqueManager.OnDeath(char)
 	if not IsPlayer(char) then
@@ -374,28 +300,111 @@ function UniqueManager.EnableAllEvents()
 	end
 end
 
-function UniqueManager.InitializeUniques()
-	local region = SharedData.RegionData.Current
-	InitOriginsUniques(region)
-	UniqueManager.LoadLinkedUniques()
-	UniqueManager.FindOrphanedUniques()
-	for id,unique in pairs(Uniques) do
-		unique:FindPlayerCopies()
-		unique:Initialize(region, UniqueManager.FirstLoad)
+if not isClient then
+	Ext.RegisterConsoleCommand("llweaponex_teleportunique", function(command, id)
+		local unique = Uniques[id]
+		if unique ~= nil then
+			local host = CharacterGetHostCharacter()
+			unique:Transfer(host)
+		else
+			Ext.PrintError("[llweaponex_teleportunique]",id,"is not a valid unique item ID!")
+		end
+	end)
+
+	function SwapUnique(char, id)
+		local uuid = nil
+		local uniqueData = Uniques[id]
+		if uniqueData ~= nil then
+			uuid = uniqueData:GetUUID(char)
+		end
+		if uuid == nil then
+			return false
+		end
+		local equipped = nil
+		local next = nil
+		local link = LinkedUniques[uuid]
+		if link ~= nil then
+			if GameHelpers.Item.ItemIsEquipped(char, uuid) then
+				next = link
+				equipped = uuid
+			else
+				next = uuid
+				equipped = link
+			end
+		end
+		if equipped ~= nil and next ~= nil and ObjectExists(equipped) == 1 and ObjectExists(next) == 1 then
+			local stat = NRD_ItemGetStatsId(next)
+			local statType = NRD_StatGetType(stat)
+			local isTwoHanded = false
+			local locked = Ext.GetItem(equipped).UnEquipLocked
+			if statType == "Weapon" then
+				isTwoHanded = Ext.StatGetAttribute(stat, "IsTwoHanded") == "Yes"
+			end
+			local slot = GameHelpers.Item.GetEquippedSlot(char,equipped) or GameHelpers.Item.GetEquippedSlot(char,next) or "Weapon"
+	
+			ItemLockUnEquip(equipped, 0)
+			ItemLockUnEquip(next, 0)
+			--CharacterUnequipItem(char, equipped)
+	
+			if not isTwoHanded then
+				local currentEquipped = StringHelpers.GetUUID(CharacterGetEquippedItem(char, slot))
+				if not StringHelpers.IsNullOrEmpty(currentEquipped) and currentEquipped ~= equipped then
+					ItemLockUnEquip(currentEquipped, 0)
+					CharacterUnequipItem(char, currentEquipped)
+				end
+				NRD_CharacterEquipItem(char, next, slot, 0, 0, 1, 1)
+			else
+				local mainhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Weapon"))
+				local offhand = StringHelpers.GetUUID(CharacterGetEquippedItem(char, "Shield"))
+				if not StringHelpers.IsNullOrEmpty(mainhand) and mainhand ~= equipped then
+					ItemLockUnEquip(mainhand, 0)
+					CharacterUnequipItem(char, mainhand)
+				end
+				if not StringHelpers.IsNullOrEmpty(offhand) and offhand ~= equipped then
+					ItemLockUnEquip(offhand, 0)
+					CharacterUnequipItem(char, offhand)
+				end
+				NRD_CharacterEquipItem(char, next, "Weapon", 0, 0, 1, 1)
+			end
+	
+			if locked then
+				ItemLockUnEquip(next, 1)
+			end
+	
+			--S_LLWEAPONEX_Chest_ItemHolder_A_80976258-a7a5-4430-b102-ba91a604c23f
+			Osi.LeaderLib_Timers_StartObjectObjectTimer(equipped, "80976258-a7a5-4430-b102-ba91a604c23f", 50, "Timers_LLWEAPONEX_MoveUniqueToUniqueHolder", "LeaderLib_Commands_ItemToInventory")
+		end
 	end
-	-- in case equipment events have changed and need to fire again
-	for player in GameHelpers.Character.GetPlayers(false) do
-		for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
-			local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
-			if not StringHelpers.IsNullOrEmpty(itemid) then
-				EquipmentManager:OnItemEquipped(player, Ext.GetItem(itemid))
+
+	function UniqueManager.InitializeUniques()
+		local region = SharedData.RegionData.Current
+		InitOriginsUniques(region)
+		UniqueManager.LoadLinkedUniques()
+		UniqueManager.FindOrphanedUniques()
+		for id,unique in pairs(Uniques) do
+			unique:FindPlayerCopies()
+			unique:Initialize(region, UniqueManager.FirstLoad)
+		end
+		-- in case equipment events have changed and need to fire again
+		for player in GameHelpers.Character.GetPlayers(false) do
+			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
+				if not StringHelpers.IsNullOrEmpty(itemid) then
+					EquipmentManager:OnItemEquipped(player, Ext.GetItem(itemid))
+				end
+			end
+		end
+		UniqueManager.FirstLoad = false
+
+		for id,v in pairs(Uniques) do
+			if not StringHelpers.IsNullOrEmpty(v.DefaultUUID) then
+				AllUniques[v.DefaultUUID] = v
 			end
 		end
 	end
-	UniqueManager.FirstLoad = false
+	
+	Timer.RegisterListener("Timers_LLWEAPONEX_InitUniques", UniqueManager.InitializeUniques)
 end
-
-Timer.RegisterListener("Timers_LLWEAPONEX_InitUniques", UniqueManager.InitializeUniques)
 
 ---@param originalItem EsvItem|string
 ---@param newItem EsvItem|string
