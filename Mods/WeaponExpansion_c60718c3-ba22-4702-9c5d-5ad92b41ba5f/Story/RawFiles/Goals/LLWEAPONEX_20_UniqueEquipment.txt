@@ -117,34 +117,6 @@ LLWEAPONEX_Uniques_FrostDyne_AddSkills(_Char, 14);
 */
 //END_REGION
 
-//REGION MURAMASA
-PROC
-LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
-THEN
-LLWEAPONEX_Uniques_OnMuramasaEquipped(_Char);
-LeaderLib_ToggleScripts_EnableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
-
-PROC
-LLWEAPONEX_Uniques_OnMuramasaEquipped((CHARACTERGUID)_Char)
-AND
-CharacterGetHitpointsPercentage(_Char, _HP)
-AND
-_HP <= 50
-THEN
-ApplyStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, 0, _Char);
-
-PROC
-LLWEAPONEX_OnItemTemplateUnEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "WPN_UNIQUE_LLWEAPONEX_Katana_2H_Muramasa_4be8ec78-17ed-4f61-b3d8-96c260d1c80a")
-THEN
-LLWEAPONEX_Uniques_OnMuramasaUnequipped(_Char);
-LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipped", "WeaponExpansion");
-
-PROC
-LLWEAPONEX_Uniques_OnMuramasaUnequipped((CHARACTERGUID)_Char)
-THEN
-RemoveStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
-//END_REGION
-
 //REGION DEMON_GAUNTLET
 PROC
 LLWEAPONEX_OnItemTemplateEquipped((CHARACTERGUID)_Char, (ITEMGUID)_Item, "EQ_UNIQUE_LLWEAPONEX_DemonGauntlet_Arms_A_f5d0a9b3-b83c-4b78-8bc6-a097a26ddf53")
