@@ -141,8 +141,6 @@ LeaderLib_ToggleScripts_DisableScriptForObject(_Char, "LLWEAPONEX_MuramasaEquipp
 
 PROC
 LLWEAPONEX_Uniques_OnMuramasaUnequipped((CHARACTERGUID)_Char)
-AND
-LeaderLib_Helper_QRY_HasStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
 THEN
 RemoveStatus(_Char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX");
 //END_REGION
