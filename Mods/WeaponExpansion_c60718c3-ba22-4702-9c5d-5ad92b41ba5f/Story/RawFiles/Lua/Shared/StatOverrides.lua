@@ -20,7 +20,6 @@ local overrides = {
 	Target_DemonicStare = {
 		Description = "LLWEAPONEX_Target_DemonicStare_Description",
 	},
-	-- Potions
 	-- Weapons
 	NoWeapon = {
 		ExtraProperties = {{
@@ -37,7 +36,7 @@ local overrides = {
 	},
 }
 
-local function appendProperties(statName, property, value)
+local function AppendProperties(statName, property, value)
 	local existingTable = GameHelpers.Stats.GetCurrentOrInheritedProperty(statName, property)
 	if existingTable ~= nil then
 		for i,v in pairs(value) do
@@ -124,31 +123,24 @@ local function CreateFirearmDerivativeSkills()
 		--local castEffect = Ext.StatGetAttribute(skill, "CastEffect")
 		--castEffect = castEffect .. "{WeaponType}[Rifle]"
 		--Ext.StatSetAttribute(skill, "CastEffect", castEffect)
-		--appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
+		--AppendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
 	end
 end
 
-local anim_overrides = {
+local AnimOverrides = {
 	Target_SingleHandedAttack = {
 		CastAnimation = "skill_cast_ll_suckerpunch_01_cast",
 		CastSelfAnimation = "skill_cast_ll_suckerpunch_01_cast",
 		CastTextEvent = "cast",
 	},
 }
-anim_overrides.Target_LLWEAPONEX_SinglehandedAttack = anim_overrides.Target_SingleHandedAttack
+AnimOverrides.Target_LLWEAPONEX_SinglehandedAttack = AnimOverrides.Target_SingleHandedAttack
 
----These are stats that gain new features if the extender is active.
-local llweaponex_extender_additions = {
-	-- ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A = {
-	-- 	Skills = "Shout_LLWEAPONEX_PowerGauntlets_ToggleGiantStrength"
-	-- }
-}
-
-local function apply_overrides(stats)
+local function ApplyOverrides(stats)
     for statName,props in pairs(stats) do
 		for property,value in pairs(props) do
 			if property == "SkillProperties" or property == "ExtraProperties" then
-				appendProperties(statName, property, value)
+				AppendProperties(statName, property, value)
 			else
 				PrintDebug("[LLWEAPONEX_StatOverrides.lua] Overriding stat: ",statName," (".. property ..") = [",value,"]")
 				Ext.StatSetAttribute(statName, property, value)
@@ -387,8 +379,7 @@ end
 local function StatOverrides_Init()
 	Ext.Print("[LLWEAPONEX_StatOverrides.lua] Applying stat overrides. Server:", Ext.IsServer())
 
-	apply_overrides(overrides)
-	apply_overrides(llweaponex_extender_additions)
+	ApplyOverrides(overrides)
 
 	CreateFirearmDerivativeSkills()
 
@@ -442,7 +433,7 @@ local function StatOverrides_Init()
 						Ext.StatSetAttribute(skill, "Template", templateString)
 						--print("[WeaponExpansion] Added rifle template support to skill ", skill)
 					end
-					--appendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
+					--AppendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
 					--print("[WeaponExpansion] Added rifle bullet explosion effect support to skill ", skill)
 			end
 		end
@@ -528,7 +519,7 @@ local function StatOverrides_Init()
 	end
 
 	if Ext.IsModLoaded("326b8784-edd7-4950-86d8-fcae9f5c457c") then
-		apply_overrides(anim_overrides)
+		ApplyOverrides(AnimOverrides)
 	else
 		Ext.Print("[LLWEAPONEX_StatOverrides.lua] [*WARNING*] AnimationsPlus is missing! Skipping animation stat overrides.")
 	end

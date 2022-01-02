@@ -476,18 +476,20 @@ local function OnItemTooltip(item, tooltip)
 					local bonus = MasteryBonusManager.GetRankBonus(MasteryID.BattleBook, 2, "BATTLEBOOK_SCROLLS")
 					if bonus then
 						local text = GameHelpers.Tooltip.ReplacePlaceholders(bonus:GetTooltipText(character), character)
-						local rankName = GameHelpers.GetStringKeyText("LLWEAPONEX_BattleBook_Mastery2", "")
-						if not StringHelpers.IsNullOrWhitespace(rankName) then
-							text = rankName .. "<br>" .. text
+						if text then
+							local rankName = GameHelpers.GetStringKeyText("LLWEAPONEX_BattleBook_Mastery2", "")
+							if not StringHelpers.IsNullOrWhitespace(rankName) then
+								text = rankName .. "<br>" .. text
+							end
+							local element = tooltip:GetElement("SkillDescription", {
+								Type = "SkillDescription",
+								Label = ""
+							})
+							if not StringHelpers.IsNullOrWhitespace(element.Label) then
+								element.Label = element.Label .. "<br>"
+							end
+							element.Label = element.Label .. text
 						end
-						local element = tooltip:GetElement("SkillDescription", {
-							Type = "SkillDescription",
-							Label = ""
-						})
-						if not StringHelpers.IsNullOrWhitespace(element.Label) then
-							element.Label = element.Label .. "<br>"
-						end
-						element.Label = element.Label .. text
 					end
 				else
 					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
