@@ -62,10 +62,6 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	if character:HasTag("LLWEAPONEX_Firearm_Equipped") and not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
-		descriptionElement.Label = descriptionElement.Label:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
-	end
-
 	local getAltScalingText = AlternativeScaling[skill]
 	if getAltScalingText ~= nil then
 		local element = tooltip:GetElement("SkillProperties")
@@ -283,6 +279,10 @@ local function OnSkillTooltip(character, skill, tooltip)
 				})
 			end
 		end
+	end
+
+	if character:HasTag("LLWEAPONEX_Firearm_Equipped") and not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
+		descriptionElement.Label = descriptionElement.Label:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
 	end
 	-- if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then
 	-- 	if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
