@@ -410,8 +410,7 @@ local function StatOverrides_Init()
 		if gameMaster == "Yes" and not IsEnemySkill(skill) and Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
 			if requirement == "MeleeWeapon" then
 				SwapRequirementWithTag(skill, "None", "LLWEAPONEX_NoMeleeWeaponEquipped", true)
-			end
-			if requirement == "DaggerWeapon" and ability == "Rogue" then
+			elseif requirement == "DaggerWeapon" and ability == "Rogue" then
 				SwapRequirementWithTag(skill, "MeleeWeapon", "LLWEAPONEX_CannotUseScoundrelSkills", true)
 			end
 		end

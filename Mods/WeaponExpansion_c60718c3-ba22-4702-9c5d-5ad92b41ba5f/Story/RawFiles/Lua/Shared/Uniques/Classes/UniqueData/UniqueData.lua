@@ -302,7 +302,7 @@ function UniqueData:RegisterHealListener(callback, checkTarget)
 	if not isClient then
 		RegisterHealListener(function(target, source, heal, originalAmount, handle, skill, healingSourceStatus)
 			local runCallback = false
-			if not checkTarget then
+			if not checkTarget and source ~= nil then
 				runCallback = GameHelpers.CharacterOrEquipmentHasTag(source, self.Tag)
 			else
 				runCallback = GameHelpers.CharacterOrEquipmentHasTag(target, self.Tag)
