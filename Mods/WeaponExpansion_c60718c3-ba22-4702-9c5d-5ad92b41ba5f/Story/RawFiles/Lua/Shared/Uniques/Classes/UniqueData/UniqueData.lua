@@ -287,8 +287,8 @@ end
 ---@param priority integer Optional priority to assign to this callback.
 function UniqueData:RegisterOnWeaponTagHit(callback, priority)
 	if not isClient then
-		AttackManager.OnWeaponTagHit.Register(self.Tag, function(...)
-			local b,err = xpcall(callback, debug.traceback, ..., self)
+		AttackManager.OnWeaponTagHit.Register(self.Tag, function(tag, attacker, target, data, targetIsObject, skill)
+			local b,err = xpcall(callback, debug.traceback, tag, attacker, target, data, targetIsObject, skill, self)
 			if not b then
 				Ext.PrintError(err)
 			end
@@ -347,8 +347,8 @@ end
 ---@param callback fun(target:string, attacker:string, success:boolean):void
 function UniqueData:RegisterDeathManagerListener(id, callback)
 	if not isClient then
-		DeathManager.RegisterListener(id, function(...)
-			local b,err = xpcall(callback, debug.traceback, ..., self)
+		DeathManager.RegisterListener(id, function(target, attacker, success)
+			local b,err = xpcall(callback, debug.traceback, target, attacker, success, self)
 			if not b then
 				Ext.PrintError(err)
 			end

@@ -6,9 +6,13 @@ Uniques.AnvilMace:RegisterOnWeaponTagHit(function(tag, attacker, target, data, t
 			GameHelpers.Status.Apply(target, "LLWEAPONEX_DIZZY", 6.0, false, attacker)
 		end
 	elseif not skill then
-		--Shockwave when attacking the ground
-		GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", attacker, {EnemiesOnly = true})
-		PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", table.unpack(target))
+		if target then
+			--Shockwave when attacking the ground
+			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_AnvilMace_GroundImpact", attacker, {EnemiesOnly = true})
+			PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", table.unpack(target))
+		else
+			Ext.PrintError("target is nil?", tag, attacker, target, data, targetIsObject, skill)
+		end
 	end
 end)
 
@@ -26,10 +30,13 @@ function(skill, char, state, data)
 	elseif skill == "Rush_LLWEAPONEX_AnvilMace_GroundSmash" then
 		if state == SKILL_STATE.CAST then
 			local maxRange = Ext.StatGetAttribute(skill, "TargetRadius")
-			local x,y,z = table.unpack(data.TargetPositions[1])
-			local dist = GetDistanceToPosition(char, x,y,z)
-			local delay = GameHelpers.Math.ScaleToRange(dist, 0, maxRange, 350, 680)
-			Timer.Start("LLWEAPONEX_RushSmashFinished", delay, char)
+			local target = data:GetSkillTargetPosition()
+			if target then
+				local x,y,z = table.unpack(target)
+				local dist = GetDistanceToPosition(char, x,y,z)
+				local delay = GameHelpers.Math.ScaleToRange(dist, 0, maxRange, 350, 680)
+				Timer.Start("LLWEAPONEX_RushSmashFinished", delay, char)
+			end
 		end
 	elseif skill == "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact" then
 		if state == SKILL_STATE.HIT and data.Success and data.Target then
