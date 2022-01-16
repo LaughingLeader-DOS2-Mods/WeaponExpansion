@@ -1,5 +1,5 @@
-TooltipHandler = {}
-local ts = LeaderLib.Classes.TranslatedString
+TooltipParams = {}
+local ts = Classes.TranslatedString
 local function sortTagParams(a,b)
 	return a:upper() < b:upper()
 end
@@ -29,7 +29,7 @@ end)
 ---@param data table
 ---@param skillOrStatus string
 ---@param isStatus boolean
-function TooltipHandler.GetDescriptionText(character, data, skillOrStatus, isStatus)
+function TooltipParams.GetDescriptionText(character, data, skillOrStatus, isStatus)
 	local descriptionText = ""
 	local namePrefix = ""
 	if data.Tags ~= nil then
@@ -175,8 +175,8 @@ local function OnTooltipPositioned(ui, tooltip_mc, isControllerMode, lastItem, .
 end
 
 ---@type table<string,LeaderLibGetTextPlaceholderCallback>
-TooltipHandler.SpecialParamFunctions = {
-	---@param character StatCharacter
+TooltipParams.SpecialParamFunctions = {
+	---@param statCharacter StatCharacter
 	LLWEAPONEX_MB_BacklashAPBonus = function(param, statCharacter)
 		local apCost = Ext.StatGetAttribute("MultiStrike_Vault", "ActionPoints")
 		if apCost > 1 then
@@ -198,7 +198,7 @@ TooltipHandler.SpecialParamFunctions = {
 ---@vararg string
 ---@return string
 RegisterListener("GetTextPlaceholder", function(param, statCharacter)
-	local callback = TooltipHandler.SpecialParamFunctions[param]
+	local callback = TooltipParams.SpecialParamFunctions[param]
 	if callback then
 		local b,result = xpcall(callback, debug.traceback, param, statCharacter)
 		if b then
@@ -208,7 +208,6 @@ RegisterListener("GetTextPlaceholder", function(param, statCharacter)
 		end
 	end
 end)
-
 
 local function Init()
 	Game.Tooltip.RegisterListener("Stat", nil, OnStatTooltip)

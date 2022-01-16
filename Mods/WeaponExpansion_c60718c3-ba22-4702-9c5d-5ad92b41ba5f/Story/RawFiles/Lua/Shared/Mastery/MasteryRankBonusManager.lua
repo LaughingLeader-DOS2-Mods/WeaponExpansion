@@ -490,7 +490,7 @@ local function EvaluateEntryForBonusText(data, character, skillOrStatus, isStatu
 			end
 		end
 		if bonusIsActive then
-			local descriptionText = TooltipHandler.GetDescriptionText(character, data, status, true)
+			local descriptionText = TooltipParams.GetDescriptionText(character, data, status, true)
 			if not StringHelpers.IsNullOrWhitespace(descriptionText) then
 				return descriptionText
 			end

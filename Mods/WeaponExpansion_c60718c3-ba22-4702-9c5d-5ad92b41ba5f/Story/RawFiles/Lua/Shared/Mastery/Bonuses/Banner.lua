@@ -290,7 +290,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 })
 
 if Vars.IsClient then
-	TooltipHandler.SpecialParamFunctions.LLWEAPONEX_MB_Banner_LeadershipInspirationChance = function(param, statCharacter)
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_MB_Banner_LeadershipInspirationChance = function(param, statCharacter)
 		local baseBonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25))
 		if statCharacter.Character then
 			local status = statCharacter.Character:GetStatus("LEADERSHIP")

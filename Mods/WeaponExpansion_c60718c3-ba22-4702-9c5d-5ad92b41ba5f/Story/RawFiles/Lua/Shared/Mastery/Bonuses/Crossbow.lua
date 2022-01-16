@@ -97,7 +97,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 })
 
 if Vars.IsClient then
-	TooltipHandler.SpecialParamFunctions.LLWEAPONEX_Crossbow_SkillStanceDamageBonus = function(param, statCharacter)
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_Crossbow_SkillStanceDamageBonus = function(param, statCharacter)
 		local damageBonus = GetStillStanceBonus(statCharacter.MyGuid)
 		if damageBonus > 0 then
 			return tostring(damageBonus)

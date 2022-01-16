@@ -124,7 +124,7 @@ Mastery.Variables.Bonuses.HasElementalWeaknessWeapon = function(character)
 end
 
 if Vars.IsClient then
-	TooltipHandler.SpecialParamFunctions.LLWEAPONEX_WeaponElementalWeakness = function(param, statCharacter)
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_WeaponElementalWeakness = function(param, statCharacter)
 		return GetElementalWeakness(statCharacter)
 	end
 end
