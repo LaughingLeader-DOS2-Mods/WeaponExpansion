@@ -20,9 +20,9 @@ return function()
 	--settings.Global:AddLocalizedVariable("ButtonOffsetX", "LLWEAPONEX_Variables_ButtonOffsetX", 0, -100, 100, 0.1)
 	--settings.Global:AddLocalizedVariable("ButtonOffsetY", "LLWEAPONEX_Variables_ButtonOffsetY", 0, -100, 100, 0.1)
 
-	settings.Global:AddButton("LLWEAPONEX_MoveAllUniquesToVendingMachine", function(entry, uuid, character)
+	settings.Global:AddLocalizedButton("LLWEAPONEX_MoveAllUniquesToVendingMachine", "LLWEAPONEX_MoveAllUniquesToVendingMachine", function(entry, uuid, character)
 		Ext.PostMessageToServer("LLWEAPONEX_Settings_MoveAllUniquesToVendingMachine", "")
-	end, "LLWEAPONEX_DefaultAllUniquesToVendingMachine", "LLWEAPONEX_DefaultAllUniquesToVendingMachine_Description", true, true, false)
+	end, true, true, nil, false)
 	
 	---@param self SettingsData
 	---@param name string
