@@ -429,8 +429,8 @@ RegisterListener("BeforeLuaReset", function()
 end)
 
 ---@type InputEventCallback
-Input.RegisterListener(function(eventName, pressed, id, inputMap, controllerEnabled)
-	if not MasteryMenu.Visible then
+Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pressed, id, inputMap, controllerEnabled)
+	if not MasteryMenu.Visible and Ext.GetGameState() == "Running" then
 		if controllerEnabled then
 			-- Right Trigger + Left Trigger 
 			if eventName == "PartyManagement" and Input.IsPressed("PanelSelect") then
