@@ -1,6 +1,6 @@
 ---@param last integer
 ---@param next integer
-RegisterModListener("Loaded", "c60718c3-ba22-4702-9c5d-5ad92b41ba5f", function(last, next)
+RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	print("[LLWEAPONEX:Loaded]", last, "=>", next)
 	if last < 152764417 then
 		ItemLockUnEquip("40039552-3aae-4beb-8cca-981809f82988", 0)

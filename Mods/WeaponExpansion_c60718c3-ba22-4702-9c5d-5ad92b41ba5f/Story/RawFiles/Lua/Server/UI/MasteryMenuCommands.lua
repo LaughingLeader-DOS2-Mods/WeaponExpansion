@@ -19,7 +19,7 @@ function OpenMasteryMenu(character)
 			XP = xp
 		}
 	end
-	GameHelpers.Net.TryPostToUser(character, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
+	GameHelpers.Net.PostToUser(character, "LLWEAPONEX_OpenMasteryMenu", Ext.JsonStringify(data))
 end
 
 ---@param payload string

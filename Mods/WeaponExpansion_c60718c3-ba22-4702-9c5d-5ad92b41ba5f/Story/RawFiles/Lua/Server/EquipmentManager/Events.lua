@@ -139,7 +139,7 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 		end
 	end
 	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
-		if item:HasTag(tag) then
+		if GameHelpers.ItemHasTag(item, tag) then
 			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.Stats.Name, character.MyGuid))
 			end
