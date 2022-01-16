@@ -5,9 +5,55 @@ MasteryBonusManager = {
 		RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
 	},
 }
-if Mastery.Bonuses == nil then
-	Mastery.Bonuses = {}
-end
+
+local _registeredBonuses = {}
+
+local masteryRankBonusPattern = "(.-)_Mastery(%d+)"
+
+---@deprecated
+Mastery.Bonuses = {}
+setmetatable(Mastery.Bonuses, {
+	__index = _registeredBonuses,
+	__newindex = function (tbl, k, v)
+		Ext.PrintError("Please don't add to WeaponExpansion.Mastery.Bonuses directly. Use Mastery.Register.NewRankBonus or MasteryBonusManager.AddRankBonuses", k)
+		local s,e,masteryId,rank = string.find(k, masteryRankBonusPattern)
+		if masteryId and rank then
+			rank = tonumber(rank)
+			if rank then
+				if v.Type ~= "MasteryBonusData" then
+					local bonuses = {}
+					for id,v in pairs(v) do
+						local bonus = MasteryDataClasses.MasteryBonusData:Create(id, {
+							Skills = v.Skills or {},
+							Tooltip = v.Param
+						})
+						table.insert(bonuses, bonus)
+					end
+					MasteryBonusManager.AddRankBonuses(masteryId, rank, bonuses)
+					fprint(LOGLEVEL.WARNING, "[WeaponExpansion] Registered bonuses using an unsupported registration method for mastery (%s) and rank (%s).", masteryId, rank)
+					if Vars.DebugMode then
+						Ext.Dump(bonuses)
+					end
+				else
+					MasteryBonusManager.AddRankBonuses(masteryId, rank, v)
+				end
+			end
+		end
+	end,
+	__pairs = function()
+		return function() end, {}, nil
+	end,
+	__ipairs = function ()
+		return function() end, {}, 0
+	end
+})
+--Deprecation help
+MasteryDataClasses.BonusIDEntry = {
+	Create = function ()
+		Ext.PrintError("WeaponExpansion.MasteryDataClasses.BonusIDEntry is deprecated.")
+		return {}
+	end
+}
 
 ---@param char string
 ---@param skill string|nil Optional skilto filter with.
@@ -18,13 +64,17 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 
 	local bonuses = {}
 	if character then
-		for tag,tbl in pairs(Mastery.Bonuses) do
+		for tag,tbl in pairs(_registeredBonuses) do
 			if Mastery.HasMasteryRequirement(character, tag) then
 				for _,v in pairs(tbl) do
-					if skill == nil then
-						bonuses[v.ID] = true
-					elseif v.Skills ~= nil and Common.TableHasEntry(v.Skills, skill) then
-						bonuses[v.ID] = true
+					if v.ID then
+						if skill == nil then
+							bonuses[v.ID] = true
+						elseif v.Skills ~= nil and Common.TableHasEntry(v.Skills, skill) then
+							bonuses[v.ID] = true
+						end
+					else
+						fprint(LOGLEVEL.ERROR, "[LLWEAPONEX] Bonus is lacking an ID parameter:\n%s", Common.JsonStringify(v))
 					end
 				end
 			end
@@ -41,7 +91,7 @@ function MasteryBonusManager.HasMasteryBonus(character, bonus)
 	local character = GameHelpers.GetCharacter(character)
 	if character then
 		local t = type(bonus)
-		for tag,tbl in pairs(Mastery.Bonuses) do
+		for tag,tbl in pairs(_registeredBonuses) do
 			if Mastery.HasMasteryRequirement(character, tag) then
 				for _,bonusData in pairs(tbl) do
 					if bonusData.ID == bonus then
@@ -373,22 +423,22 @@ end
 ---@param bonuses MasteryBonusData|MasteryBonusData[]
 function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 	local masteryRankID = string.format("%s_Mastery%s", mastery, rank)
-	if not Mastery.Bonuses[masteryRankID] then
-		Mastery.Bonuses[masteryRankID] = {}
+	if not _registeredBonuses[masteryRankID] then
+		_registeredBonuses[masteryRankID] = {}
 	end
 	---@type MasteryData
 	local masteryData = Masteries[mastery]
 	if masteryData and not masteryData.RankBonuses[rank] then
 		masteryData.RankBonuses[rank] = MasteryDataClasses.MasteryRankData:Create(rank, masteryRankID)
-		masteryData.RankBonuses[rank].Bonuses = Mastery.Bonuses[masteryRankID]
+		masteryData.RankBonuses[rank].Bonuses = _registeredBonuses[masteryRankID]
 	end
 	local t = type(bonuses)
 	if t == "table" then
 		if bonuses.Type == "MasteryBonusData" then
-			table.insert(Mastery.Bonuses[masteryRankID], bonuses)
+			table.insert(_registeredBonuses[masteryRankID], bonuses)
 		else
 			for k,v in pairs(bonuses) do
-				table.insert(Mastery.Bonuses[masteryRankID], v)
+				table.insert(_registeredBonuses[masteryRankID], v)
 			end
 		end
 	end
@@ -457,7 +507,7 @@ function MasteryBonusManager.GetOrderedMasteryRanks()
 	for _,mastery in pairs(OrderedMasteries) do
 		for i=1,Mastery.Variables.MaxRank do
 			local masteryRankID = string.format("%s_Mastery%s", mastery, i)
-			if Mastery.Bonuses[masteryRankID] and #Mastery.Bonuses[masteryRankID] > 0 then
+			if _registeredBonuses[masteryRankID] and #_registeredBonuses[masteryRankID] > 0 then
 				rankOrder[#rankOrder+1] = masteryRankID
 			end
 		end
@@ -467,7 +517,7 @@ function MasteryBonusManager.GetOrderedMasteryRanks()
 	return function ()
 		i = i + 1
 		if i <= count then
-			return rankOrder[i],Mastery.Bonuses[rankOrder[i]]
+			return rankOrder[i],_registeredBonuses[rankOrder[i]]
 		end
 	end
 end

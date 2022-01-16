@@ -18,13 +18,9 @@ end
 ---@param mastery string
 ---@param rank integer
 ---@param id string
----@param bonus MasteryBonusData
+---@param bonus MasteryBonusData|MasteryBonusData[]
 function Mastery.Register.NewRankBonus(mastery, rank, id, bonus)
-	local tag = string.format("%s_Mastery%s", mastery, rank)
-	if Mastery.Bonuses[tag] == nil then
-		Mastery.Bonuses[tag] = {}
-	end
-	Mastery.Bonuses[tag][id] = bonus
+	MasteryBonusManager.AddRankBonuses(mastery, rank, bonus)
 end
 
 ---@param mastery string
