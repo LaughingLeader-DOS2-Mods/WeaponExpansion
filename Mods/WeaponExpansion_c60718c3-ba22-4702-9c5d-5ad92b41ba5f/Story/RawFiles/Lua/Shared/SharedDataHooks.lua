@@ -26,11 +26,11 @@ if Ext.IsClient() then
 		PersistentVars.SkillData.DarkFireballCount = vtable.DarkFireballCount
 	end)
 	-- Checks for SharedData.RegionData need to happen here since this is after that data has been synced
-	RegisterListener("ClientDataSynced", function(modData, sharedData)
-		if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Client.Character.IsInCharacterCreation then
-			MasteryMenu.ToggleButton:SetVisible(false, false)
-		elseif SharedData.RegionData.LevelType == LEVELTYPE.GAME then
-			MasteryMenu.ToggleButton:SetVisible(true, false)
-		end
-	end)
+	-- RegisterListener("ClientDataSynced", function(modData, sharedData)
+	-- 	if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Client.Character.IsInCharacterCreation then
+	-- 		MasteryMenu.ToggleButton:SetVisible(false, false)
+	-- 	elseif SharedData.RegionData.LevelType == LEVELTYPE.GAME then
+	-- 		MasteryMenu.ToggleButton:SetVisible(true, false)
+	-- 	end
+	-- end)
 end
