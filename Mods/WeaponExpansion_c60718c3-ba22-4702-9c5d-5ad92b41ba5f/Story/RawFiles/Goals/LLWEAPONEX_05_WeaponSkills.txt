@@ -269,7 +269,7 @@ DB_LLWEAPONEX_Skills_Temp_RallyBanner(_Char, _Banner)
 THEN
 NOT DB_LLWEAPONEX_Skills_Temp_RallyPartyMember(_Char, _PartyMember);
 CharacterRemoveSkill(_PartyMember, "Shout_LLWEAPONEX_Banner_Rally_Teleport");
-TeleportTo(_PartyMember, _Banner, "", 0, 0);
+TeleportTo(_PartyMember, _Banner, "", 0, 0, 0);
 CharacterCharacterSetEvent(_Char, _PartyMember, "LLWEAPONEX_Rally_PartyMemberTeleported");
 
 PROC

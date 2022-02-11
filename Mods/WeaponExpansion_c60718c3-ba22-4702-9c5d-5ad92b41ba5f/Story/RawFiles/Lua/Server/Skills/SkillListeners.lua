@@ -147,18 +147,11 @@ RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills
 RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		local radius = math.max(1.0, Ext.StatGetAttribute("Projectile_LLWEAPONEX_DarkFireball", "ExplodeRadius") - 1.0)
-		if data.TotalTargetObjects > 0 then
-			for i,v in pairs(data.TargetObjects) do
-				local x,y,z = GetPosition(v)
-				--SurfaceSmokeCloudCursed
-				Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCursed", radius, 1)
-				Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCloudCursed", radius, 1)
-			end
-		elseif data.TotalTargetPositions > 0 then
-			local x,y,z = table.unpack(data.TargetPositions[1])
+		data:ForEach(function (target, targetType, skillData)
+			local x,y,z = GameHelpers.Math.GetPosition(target, true)
 			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCursed", radius, 1)
 			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCloudCursed", radius, 1)
-		end
+		end, data.TargetMode.All)
 	end
 end)
 
@@ -191,12 +184,7 @@ end)
 RegisterSkillListener({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy"}, function(skill, char, state, data)
 	if state == SKILL_STATE.CAST then
 		data:ForEach(function(target, targetType, d)
-			local x,y,z = 0,0,0
-			if targetType == "table" then
-				x,y,z = table.unpack(target)
-			else
-				x,y,z = GetPosition(target)
-			end
+			local x,y,z = GameHelpers.Math.GetPosition(target, true)
 			local delay = math.floor(GameHelpers.GetExtraData("LLWEAPONEX_FutureBarrage_TurnDelay", 3))
 			if Vars.DebugMode then
 				delay = 1

@@ -4,7 +4,6 @@ end
 
 CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties = {
 	GetDescription = function(prop)
-		return ""
 		-- local chance = prop.Arg1 or 1
 		-- if chance >= 1 then
 		-- 	return Text.SkillTooltip.ApplySpecialRuneOnHit:ReplacePlaceholders(effectText, "")

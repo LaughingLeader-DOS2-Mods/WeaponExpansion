@@ -36,7 +36,7 @@ function RunebladeManager.AbsorbSurface(caster, position, radius, duration)
 		end
 	end
 	for status,b in pairs(applyStatuses) do
-		ApplyStatus(caster, status, duration, 0, caster)
+		GameHelpers.Status.Apply(caster, status, duration, 0, caster)
 	end
 	if absorbedSurface then
 		PlayEffect(caster.MyGuid, "LLWEAPONEX_FX_Rune_Chaos_01", "Dummy_OverheadFX")

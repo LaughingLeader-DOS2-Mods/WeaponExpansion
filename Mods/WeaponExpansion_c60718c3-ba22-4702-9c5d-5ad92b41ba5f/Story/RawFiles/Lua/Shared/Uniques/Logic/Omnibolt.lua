@@ -4,13 +4,13 @@ if not Vars.IsClient then
 			if state == SKILL_STATE.HIT and data.Success then
 				GameHelpers.Skill.Explode(data.Target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", char)
 			elseif state == SKILL_STATE.CAST then
-				if data.TotalTargetPositions > 0 and data.TotalTargetObjects == 0 then
-					local x,y,z = table.unpack(data.TargetPositions[1])
+				data:ForEach(function (target, targetType, skillData)
+					local x,y,z = GameHelpers.Math.GetPosition(target, true)
 					Timer.Start("Timers_LLWEAPONEX_ProcGreatbowLightningStrike", 750, {
 						Pos={x,y,z},
 						Source=char
 					})
-				end
+				end, data.TargetMode.All)
 			end
 		end
 	end)

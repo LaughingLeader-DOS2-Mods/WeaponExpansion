@@ -462,7 +462,7 @@ local function StatOverrides_Init()
 		if Ext.StatGetAttribute(stat, "Unique") == 1 then
 			local combocategory = Ext.StatGetAttribute(stat, "ComboCategory")
 			if not HasComboCategory(combocategory, "UniqueWeapon") then
-				if combocategory ~= nil and combocategory ~= "" then
+				if combocategory ~= nil then
 					combocategory[#combocategory+1] = "UniqueWeapon"
 					Ext.StatSetAttribute(stat, "ComboCategory", combocategory)
 				else
