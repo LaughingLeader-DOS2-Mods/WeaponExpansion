@@ -77,14 +77,13 @@ end
 
 Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(call, uuid)
 	MasteryMenu:Close(true)
-	MasteryMenu.ToggleButton:SetVisible(false, false)
 	if uuid == Origin.Korvash then
 		Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", uuid)
 	end
 end)
-Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(call, uuid)
-	MasteryMenu.ToggleButton:SetVisible(true, Ext.GetGameState() ~= "Running")
-end)
+-- Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationFinished", function(call, uuid)
+	
+-- end)
 
 ---@param ui UIObject
 ---@param call string

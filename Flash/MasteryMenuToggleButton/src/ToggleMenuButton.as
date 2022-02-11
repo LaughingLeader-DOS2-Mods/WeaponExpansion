@@ -5,10 +5,14 @@ package
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
 	
-	public dynamic class ToggleMenuButton extends MovieClip
+	public class ToggleMenuButton extends MovieClip
 	{	
-		public var button_mc:MovieClip;
+		public var graphic_mc:MovieClip;
 		public var bg_mc:MovieClip;
+
+		public var tooltip:String;
+		public var hasTooltip:Boolean = false;
+		public var tooltipYOffset:Number = 0;
 	
 		public function ToggleMenuButton()
 		{
@@ -16,46 +20,45 @@ package
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function onOut(param1:MouseEvent) : *
+		public function onOut(e:MouseEvent) : void
 		{
 			ExternalInterface.call("hideTooltip");
-			this.button_mc.hasTooltip = false;
-			this.button_mc.removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
-			this.button_mc.gotoAndStop(1);
+			this.hasTooltip = false;
+			this.graphic_mc.removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
+			this.graphic_mc.gotoAndStop(1);
 		}
 		
-		public function onOver(param1:MouseEvent) : *
+		public function onOver(e:MouseEvent) : void
 		{
-			this.button_mc.gotoAndStop(2);
+			this.graphic_mc.gotoAndStop(2);
 			ExternalInterface.call("PlaySound","UI_Generic_Over");
-			tooltipHelper.ShowTooltipForMC(this.button_mc,root,"right");
+			tooltipHelper.ShowTooltipForMC(this,root,"right");
 		}
 		
-		public function onDown(param1:MouseEvent) : *
+		public function onDown(e:MouseEvent) : void
 		{
-			this.button_mc.addEventListener(MouseEvent.MOUSE_UP,this.onUp);
-			this.button_mc.gotoAndStop(3);
+			this.graphic_mc.addEventListener(MouseEvent.MOUSE_UP,this.onUp);
+			this.graphic_mc.gotoAndStop(3);
 		}
 		
-		public function onUp(param1:MouseEvent) : *
+		public function onUp(e:MouseEvent) : void
 		{
-			this.button_mc.removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
+			this.graphic_mc.removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			ExternalInterface.call("PlaySound","UI_Generic_Click");
-			ExternalInterface.call("toggleMasteryMenu");
-			this.button_mc.gotoAndStop(2);
+			ExternalInterface.call("LLWEAPONEX_MasteryMenu_ToggleMasteryMenu");
+			this.graphic_mc.gotoAndStop(2);
 		}
 
-		public function setTooltip(text:String) : *
+		public function setTooltip(text:String) : void
 		{
-			this.button_mc.tooltip = text;
-			//this.button_mc.tooltipYOffset = -10.0;
+			this.tooltip = text;
 		}
 		
-		internal function frame1() : *
+		internal function frame1() : void
 		{
-			this.button_mc.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
-			this.button_mc.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
-			this.button_mc.addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
+			this.graphic_mc.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
+			this.graphic_mc.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
+			this.graphic_mc.addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
 		}
 	}
 }

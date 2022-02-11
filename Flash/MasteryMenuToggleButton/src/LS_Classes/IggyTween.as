@@ -1,4 +1,4 @@
-package
+package LS_Classes
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
