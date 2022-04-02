@@ -40,7 +40,7 @@ Text = {
 	MasteryMenu = {
 		Title = ts:Create("h2ead0b87gb4b0g410ag8334ge82de5c8fea0","Weapon Masteries"),
 		CloseButton = ts:Create("h688b0700g55a2g46cdgb02cg6269d72d7dad","Close"),
-		MenuToggleTooltip = ts:Create("h7875b402g4783g4122gb2bdg35dcde66f221","Toggle Mastery Menu"),
+		MenuToggleTooltip = ts:Create("h7875b402g4783g4122gb2bdg35dcde66f221","Toggle Mastery Menu<br><font color='#F7BA14'>Weapon Expansion</font>"),
 		NoMasteriesTitle = ts:Create("h47c00b1cg79b5g4ee7gbe3fg25c58809a3ef","No Masteries Learned"),
 		NoMasteriesDescription = ts:Create("h826d023bg5b10g4d79g874agb0f918554f34","Use weapons in battle to automatically gain mastery experience."),
 		RankDescriptionTemplate = ts:Create("ha931c2f8ge74fg4e46ga1b8g142846b61b46", "[1]<br>[2]"),
