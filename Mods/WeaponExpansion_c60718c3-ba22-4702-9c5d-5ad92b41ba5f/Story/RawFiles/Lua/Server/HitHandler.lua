@@ -89,10 +89,17 @@ local function OnPrepareHit(target,source,damage,handle,data)
 				end
 			end
 
-			if ObjectIsCharacter(source) == 1 
-			and data:IsFromWeapon(false, false) 
-			and UnarmedHelpers.HasUnarmedWeaponStats(Ext.GetCharacter(source).Stats) then
-				UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle,data,true)
+			if not SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[source] then
+				if ObjectIsCharacter(source) == 1
+				and data:IsFromWeapon(false, false)
+				then
+					local sourceCharacter = GameHelpers.GetCharacter(source)
+					if sourceCharacter and UnarmedHelpers.HasUnarmedWeaponStats(sourceCharacter.Stats) then
+						UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle,data,true)
+					end
+				end
+			else
+				SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[source] = nil
 			end
 
 			if HasActiveStatus(source, "LLWEAPONEX_MURAMASA_CURSE") == 1 then

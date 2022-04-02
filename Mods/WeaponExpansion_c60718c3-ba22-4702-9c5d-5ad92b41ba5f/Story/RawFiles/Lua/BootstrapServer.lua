@@ -85,6 +85,12 @@ EID = {
     }
 }
 
+SkillConfiguration = {
+    TempData = {
+        RecalculatedUnarmedSkillDamage = {}
+    }
+}
+
 ---@param event MasteryEventID
 ---@param mastery string
 ---@param callback MasteryEventCallback

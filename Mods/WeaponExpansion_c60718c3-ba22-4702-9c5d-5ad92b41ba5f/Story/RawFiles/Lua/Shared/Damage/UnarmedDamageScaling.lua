@@ -70,12 +70,25 @@ if not isClient then
 				lizardHits[attacker] = lizardHits[attacker] + 1
 			end
 
+			--FIX to try and preserve the previous damage type
+			local previousDamageType = data.DamageType
+			local lastAmount = 0
+			for dType,amount in pairs(data.DamageList) do
+				if amount > lastAmount and dType ~= previousDamageType then
+					previousDamageType = dType
+					lastAmount = amount
+				end
+			end
+
 			local isSecondHit = lizardHits[attacker] == 2
 			local damageList = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, isSecondHit)
 
 			if isCombinedHit then
 				local offhandDamage = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, true)
 				damageList:Merge(offhandDamage)
+			end
+			if not StringHelpers.IsNullOrEmpty(previousDamageType) then
+				damageList:ConvertDamageType(previousDamageType)
 			end
 			data:ClearAllDamage()
 			local damages = damageList:ToTable()

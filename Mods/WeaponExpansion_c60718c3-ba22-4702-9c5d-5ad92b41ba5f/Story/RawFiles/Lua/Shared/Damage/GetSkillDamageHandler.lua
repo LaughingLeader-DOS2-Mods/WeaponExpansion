@@ -1,3 +1,5 @@
+local isClient = Ext.IsClient()
+
 --- @param skill StatEntrySkillData
 --- @param attacker StatCharacter
 --- @param isFromItem boolean
@@ -26,9 +28,21 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 	else
 		-- Unarmed weapon damage scaling
 		if skill.UseWeaponDamage == "Yes" and UnarmedHelpers.HasUnarmedWeaponStats(attacker) then
-			--attacker:HasTag("LLWEAPONEX_MeleeWeaponEquipped") and 
 			local weapon = UnarmedHelpers.GetUnarmedWeapon(attacker)
-			return Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon)
+			local damageList,deathType = Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon)
+			if not isClient then
+				local hasDamage = false
+				for i,v in pairs(damageList:ToTable()) do
+					if v.Amount > 0 then
+						hasDamage = true
+						break
+					end
+				end
+				if hasDamage then
+					SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[attacker.MyGuid] = skill.Name
+				end
+			end
+			return damageList,deathType
 		end
 	end
 end

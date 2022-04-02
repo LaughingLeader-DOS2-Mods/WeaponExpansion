@@ -109,6 +109,7 @@ local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPo
         end
     end
 
+
     return damageList, deathType
 end
 
