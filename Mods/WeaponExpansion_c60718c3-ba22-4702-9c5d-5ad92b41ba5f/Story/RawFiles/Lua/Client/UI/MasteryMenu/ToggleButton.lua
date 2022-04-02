@@ -26,11 +26,14 @@ local function IsHotbarVisible()
 	return false
 end
 
+local function IsToggleButtonVisible()
+	return Ext.GetGameState() == "Running" and IsHotbarVisible()
+end
+
 local function SetPositionToHotbar(self)
 	local this = self.Root
 	if this then
 		local dialogOpen = false
-		local menu_btn = this.menu_btn
 		if dialogOpen == nil then
 			dialogOpen = false
 			local dialog = Ext.GetUIByType(Data.UIType.dialog)
@@ -74,15 +77,11 @@ local function SetPositionToHotbar(self)
 			-- end
 		end
 
-		menu_btn.x = x
 		if dialogOpen then
-			--menu_btn.x = 96
-			menu_btn.y = this.FlashMovieSize[2]
-		else
-			menu_btn.y = y
+			y = self.Instance.FlashMovieSize[2]
 		end
-
-		--fprint(LOGLEVEL.TRACE, "menu_btn.x(%s) menu_btn.y(%s) scaleDiff(%s)", menu_btn.x, menu_btn.y, scaleDiff)
+		this.setToggleButtonPosition(x, y)
+		this.setToggleButtonTooltip(Text.MasteryMenu.MenuToggleTooltip.Value)
 	end
 end
 
@@ -90,7 +89,6 @@ local ToggleButton = Classes.UIObjectExtended:Create({
 	ID = "WeaponExpansionMasteryMenuToggleButton",
 	Layer = 6,
 	SwfPath = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenuToggleButton.swf",
-	Tween = false,
 	OnVisibilityChanged = function (self, last, b)
 		local this = self.Root
 		if b then
@@ -107,11 +105,15 @@ local ToggleButton = Classes.UIObjectExtended:Create({
 			end
 		end
 	end,
-	ShouldBeVisible = IsHotbarVisible,
+	ShouldBeVisible = IsToggleButtonVisible,
 	OnInitialized = function (self, instance)
-		instance:GetRoot().setToggleButtonTooltip(Text.MasteryMenu.MenuToggleTooltip.Value)
+		local this = self.Root
+		if this then
+			this.setToggleButtonTooltip(Text.MasteryMenu.MenuToggleTooltip.Value)
+		end
 	end,
-	SetPosition = SetPositionToHotbar
+	SetPosition = SetPositionToHotbar,
+	Tween = false,
 })
 
 Ext.RegisterUINameCall("LLWEAPONEX_MasteryMenu_ToggleMasteryMenu", function (ui, call)
