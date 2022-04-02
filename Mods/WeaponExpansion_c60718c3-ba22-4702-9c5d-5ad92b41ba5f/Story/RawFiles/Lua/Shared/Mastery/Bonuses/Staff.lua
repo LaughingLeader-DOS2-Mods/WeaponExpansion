@@ -51,7 +51,7 @@ local function GetElementalWeakness(character)
 	local resistanceReductions = {}
 	local resistanceCount = 0
 	if character.MainWeapon ~= nil then
-		for _,status in pairs(GetElementForWeapon(character.MainWeapon)) do
+		for status,b in pairs(GetElementForWeapon(character.MainWeapon)) do
 			local potion = Ext.StatGetAttribute(status, "StatsId")
 			if not StringHelpers.IsNullOrWhitespace(potion) then
 				for i,resistanceStat in pairs(checkResistanceStats) do
