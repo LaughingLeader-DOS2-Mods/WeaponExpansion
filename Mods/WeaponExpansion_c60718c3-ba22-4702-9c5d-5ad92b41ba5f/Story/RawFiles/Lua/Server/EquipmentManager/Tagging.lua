@@ -175,7 +175,7 @@ function EquipmentManager:CheckWeaponRequirementTags(character)
 		refreshRequired = CheckRequirementTags(character, offhand)
 	end
 
-	if refreshRequired then
+	if refreshRequired and CharacterIsControlled(character.MyGuid) == 1 then
 		GameHelpers.UI.RefreshSkillBar(character.MyGuid)
 	end
 
