@@ -42,9 +42,8 @@ package LS_Classes
 				_loc8_ = param1.contextParam;
 			}
 			var _loc9_:Point = getGlobalPositionOfMC(param1,param2);
+			MainTimeline.Instance.hasTooltip = true;
 			ExternalInterface.call("showItemTooltip",param1.itemHandle,_loc9_.x + _loc6_,_loc9_.y + _loc7_,_loc4_,_loc5_,_loc8_,param3);
-			var _loc10_:MovieClip = param2 as MovieClip;
-			_loc10_.hasTooltip = true;
 		}
 		
 		public static function ShowTooltipForMC(targetMC:MovieClip, displayObj:DisplayObject, tooltipPos:String = "right", allowDelay:Boolean = true) : void
@@ -78,9 +77,8 @@ package LS_Classes
 					yOffset = targetMC.tooltipYOffset;
 				}
 				globalPos = getGlobalPositionOfMC(targetMC,displayObj);
+				MainTimeline.Instance.hasTooltip = true;
 				ExternalInterface.call("showTooltip", targetMC.tooltip, globalPos.x + xOffset, globalPos.y + yOffset, width, height, tooltipPos, allowDelay);
-				displayMC = displayObj as MovieClip;
-				displayMC.hasTooltip = true;
 			}
 		}
 		
@@ -115,9 +113,8 @@ package LS_Classes
 					yOffset = statusMC.tooltipYOffset;
 				}
 				targetTooltipPos = getGlobalPositionOfMC(statusMC,obj);
+				MainTimeline.Instance.hasTooltip = true;
 				ExternalInterface.call("showStatusTooltip", statusMC.owner, statusMC.id, targetTooltipPos.x + xOffset,targetTooltipPos.y + yOffset, tooltipWidth, tooltipHeight,tooltipPos);
-				displayObjMC = obj as MovieClip;
-				displayObjMC.hasTooltip = true;
 			}
 		}
 		
