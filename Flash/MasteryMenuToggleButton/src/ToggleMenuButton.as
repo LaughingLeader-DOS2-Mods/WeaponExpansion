@@ -5,14 +5,13 @@ package
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
 	
-	public class ToggleMenuButton extends MovieClip
+	public dynamic class ToggleMenuButton extends MovieClip
 	{	
 		public var graphic_mc:MovieClip;
 		public var bg_mc:MovieClip;
 
 		public var tooltip:String;
-		public var hasTooltip:Boolean = false;
-		public var tooltipYOffset:Number = 0;
+		public var tooltipYOffset:Number = -2;
 	
 		public function ToggleMenuButton()
 		{
@@ -22,8 +21,8 @@ package
 		
 		public function onOut(e:MouseEvent) : void
 		{
+			MainTimeline.Instance.hasTooltip = false;
 			ExternalInterface.call("hideTooltip");
-			this.hasTooltip = false;
 			this.graphic_mc.removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.graphic_mc.gotoAndStop(1);
 		}
@@ -32,7 +31,7 @@ package
 		{
 			this.graphic_mc.gotoAndStop(2);
 			ExternalInterface.call("PlaySound","UI_Generic_Over");
-			tooltipHelper.ShowTooltipForMC(this,root,"right");
+			tooltipHelper.ShowTooltipForMC(this, MainTimeline.Instance,"top");
 		}
 		
 		public function onDown(e:MouseEvent) : void
@@ -59,6 +58,8 @@ package
 			this.graphic_mc.addEventListener(MouseEvent.ROLL_OUT,this.onOut);
 			this.graphic_mc.addEventListener(MouseEvent.ROLL_OVER,this.onOver);
 			this.graphic_mc.addEventListener(MouseEvent.MOUSE_DOWN,this.onDown);
+
+			this.tooltipYOffset = this.tooltipYOffset - this.bg_mc.height;
 		}
 	}
 }

@@ -8,6 +8,8 @@ package
 	
 	public class MainTimeline extends MovieClip
 	{
+		private static var instance:MainTimeline;
+		public static function get Instance():MainTimeline { return instance; }
 		public var menu_btn:MovieClip;
 		
 		public var events:Array;
@@ -16,9 +18,14 @@ package
 
 		public var defaultButtonPosition:Point = new Point(104, 938);
 
+		public var hasTooltip:Boolean = false;
+		public var curTooltip:*;
+
 		public function MainTimeline()
 		{
 			super();
+
+			instance = this;
 		}
 		
 		public function onEventInit() : void
@@ -26,8 +33,8 @@ package
 			ExternalInterface.call("registerAnchorId", "WeaponExpansionMasteryMenuToggleButton");
 			ExternalInterface.call("setAnchor","bottom","screen","bottom");
 
-			this.defaultButtonPosition.y = this.menu_btn.y;
 			this.defaultButtonPosition.x = this.menu_btn.x;
+			this.defaultButtonPosition.y = this.menu_btn.y;
 		}
 
 		public function onEventResolution() : void
@@ -35,17 +42,17 @@ package
 			ExternalInterface.call("LeaderLib_OnEventResolution", "WeaponExpansionMasteryMenuToggleButton");
 		}
 
-		public function setShared(b:Boolean) : void
-		{
-			if(!b)
-			{
-				ExternalInterface.call("setAnchor","bottom","splitscreen","bottom");
-			}
-			else
-			{
-				ExternalInterface.call("setAnchor","bottom","screen","bottom");
-			}
-		}
+		// public function setShared(b:Boolean) : void
+		// {
+		// 	if(!b)
+		// 	{
+		// 		ExternalInterface.call("setAnchor","bottom","splitscreen","bottom");
+		// 	}
+		// 	else
+		// 	{
+		// 		ExternalInterface.call("setAnchor","bottom","screen","bottom");
+		// 	}
+		// }
 		
 		public function setToggleButtonTooltip(text:String) : void
 		{
@@ -55,25 +62,6 @@ package
 		public function setToggleButtonVisibility(setVisible:Boolean) : void
 		{
 			this.menu_btn.visible = setVisible;
-		}
-
-		public var toggleButtonDefaultX:Number = 175;
-		public var toggleButtonDefaultY:Number = 1015.45;
-		public var toggleButtonDialogX:Number = 86;
-		public var toggleButtonDialogY:Number = 0;
-
-		public function setDialogOpened(isOpened:Boolean) : void
-		{
-			if (isOpened)
-			{
-				this.menu_btn.x = toggleButtonDialogX;
-				this.menu_btn.y = toggleButtonDialogY;
-			}
-			else
-			{
-				this.menu_btn.x = toggleButtonDefaultX;
-				this.menu_btn.y = toggleButtonDefaultY;
-			}
 		}
 
 		public function setToggleButtonPosition(buttonX:Number, buttonY:Number) : void
