@@ -93,10 +93,21 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 	end)
 })
 
-MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 3, rb:Create("DAGGER_THROWINGKNIFE2", {
-	Skills = {"Projectile_FanOfKnives", "Projectile_EnemyFanOfKnives"},
-	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife2")
-}):RegisterSkillListener(ThrowingKnifeBonusLogic))
+MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 3,{
+	rb:Create("DAGGER_THROWINGKNIFE2", {
+		Skills = {"Projectile_FanOfKnives", "Projectile_EnemyFanOfKnives"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife2")
+	}):RegisterSkillListener(ThrowingKnifeBonusLogic),
+
+	rb:Create("DAGGER_CORRUPTED_BLADE", {
+		Skills = {"Target_CorruptedBlade", "Target_EnemyCorruptedBlade"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_CorruptedBlade")
+	}):RegisterSkillListener(function (bonuses, char, skill, state, data)
+		if state == SKILL_STATE.HIT and data.Success then
+			DeathManager.ListenForDeath("CorruptedBladeDiseaseSpread", data.Target, char, -1)
+		end
+	end),
+})
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 4, {
 	rb:Create("DAGGER_FATALITY", {
@@ -122,6 +133,23 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 4, {
 })
 
 if not Vars.IsClient then
+	DeathManager.RegisterListener("CorruptedBladeDiseaseSpread", function(target, attacker, success)
+		if success then
+			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_CorruptedBlade_SpreadRadius", 12.0)
+			local pos = GameHelpers.Math.GetPosition(target, GameHelpers.Math.GetPosition(attacker))
+			local props = GameHelpers.Stats.GetSkillProperties("Target_CorruptedBlade")
+			if #props == 0 then
+				--If Corrupted Blade applies no statuses, apply Diseased.
+				GameHelpers.Status.Apply(pos, "DISEASED", 12.0, true, attacker, radius, false, 
+				function (t, source, status)
+					return CharacterIsEnemy(t, attacker) == 1
+				end)
+			else
+				Ext.ExecuteSkillPropertiesOnPosition("Target_CorruptedBlade", attacker, pos, radius, "Target", false)
+			end
+		end
+	end)
+
 	DeathManager.RegisterListener("FatalityRefundBonus", function(target, attacker, success)
 		if success then
 			local cd = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Fatality_CooldownOverride", 6.0)
@@ -147,4 +175,6 @@ if not Vars.IsClient then
 			Ext.ApplyStatus(explode)
 		end
 	end)
+else
+
 end

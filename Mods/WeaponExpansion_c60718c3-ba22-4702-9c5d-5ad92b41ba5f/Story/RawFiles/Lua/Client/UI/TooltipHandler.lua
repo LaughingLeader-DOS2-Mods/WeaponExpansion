@@ -190,6 +190,22 @@ TooltipParams.SpecialParamFunctions = {
 			end
 		end
 		return "0"
+	end,
+	LLWEAPONEX_MB_Dagger_CorruptedStatuses = function (param, statCharacter)
+		local statuses = {}
+		for _,prop in pairs(GameHelpers.Stats.GetSkillProperties("Target_CorruptedBlade")) do
+			if prop.Type == "Status" then
+				local displayName = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(prop.Action, "DisplayName"), "")
+				if not StringHelpers.IsNullOrWhitespace(displayName) then
+					statuses[#statuses+1] = displayName
+				end
+			end
+		end
+		if #statuses > 0 then
+			table.sort(statuses)
+			return StringHelpers.Join(", ", statuses, true)
+		end
+		return GameHelpers.GetStringKeyText(Ext.StatGetAttribute("DISEASED", "DisplayName"), "Diseased")
 	end
 }
 
