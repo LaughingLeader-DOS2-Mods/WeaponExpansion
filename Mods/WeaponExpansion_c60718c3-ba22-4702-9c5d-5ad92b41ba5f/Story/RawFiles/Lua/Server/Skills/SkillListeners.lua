@@ -1,28 +1,30 @@
+SkillConfiguration.AimedShot = {
+	BonusStatuses = {"LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY"},
+	CriticalRequrementStatuses = {"MARKED"},
+}
+
 RegisterSkillListener("Projectile_LLWEAPONEX_Rifle_AimedShot", function(skill, char, state, data)
-	if state == SKILL_STATE.PREPARE then
-		--ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", -1.0, 0, char)
-		--Mods.Timer.Start("Timers_LLWEAPONEX_AimedShot_RemoveAccuracyBonus", 1000, char)
-	elseif state == SKILL_STATE.USED then
-		if HasActiveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY") == 0 then
-			ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 12.0, 1, char)
-		end
+	if state == SKILL_STATE.USED then
+		GameHelpers.Status.Apply(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY", 6.0, false, char)
+		local shouldCriticalHit = false
 		data:ForEach(function(target)
-			if HasActiveStatus(target, "MARKED") == 1 and HasActiveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL") == 0 then
-				ApplyStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 12.0, 1, char)
+			if GameHelpers.Status.IsActive(target, SkillConfiguration.AimedShot.CriticalRequrementStatuses) then
+				shouldCriticalHit = true
 			end
-		end)
+		end, data.TargetMode.Objects)
+		if shouldCriticalHit then
+			GameHelpers.Status.Apply(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL", 6.0, true, char)
+		end
 	elseif state == SKILL_STATE.CAST then
 		Timer.StartObjectTimer("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", char, 1500)
 	elseif state == SKILL_STATE.HIT then
 		Timer.Cancel("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", char)
-		RemoveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL")
-		RemoveStatus(char, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY")
+		GameHelpers.Status.Remove(char, SkillConfiguration.AimedShot.BonusStatuses)
 	end
 end)
 
 Timer.RegisterListener("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", function(timerName, uuid)
-	RemoveStatus(uuid, "LLWEAPONEX_FIREARM_AIMEDSHOT_CRITICAL")
-	RemoveStatus(uuid, "LLWEAPONEX_FIREARM_AIMEDSHOT_ACCURACY")
+	GameHelpers.Status.Remove(uuid, SkillConfiguration.AimedShot.BonusStatuses)
 end)
 
 RegisterSkillListener({"Projectile_LLWEAPONEX_Greatbow_PiercingShot", "Projectile_LLWEAPONEX_Greatbow_PiercingShot_Enemy"}, function(skill, char, state, data)
@@ -175,7 +177,7 @@ RegisterSkillListener({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectil
 			local character = Ext.GetCharacter(char)
 			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
 				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_SilverBonusDamage", 1.5)
-				GameHelpers.Damage.IncreaseDamage(data.Target, char, data.Handle, bonus, false)
+				data:MultiplyDamage(bonus)
 			end
 		end
 	end
