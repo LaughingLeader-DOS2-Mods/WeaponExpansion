@@ -277,7 +277,7 @@ Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
 				if not owner then
 					ObjectClearFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 					ItemToInventory(data.UUID, NPC.UniqueHoldingChest, 1, 0, 1)
-				elseif ObjectIsGlobal(owner.MyGuid) == 0 then
+				elseif ObjectIsGlobal(owner) == 0 then
 					ObjectClearFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized", 0)
 					ItemToInventory(data.UUID, NPC.UniqueHoldingChest, 1, 0, 1)
 				end
