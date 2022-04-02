@@ -21,6 +21,14 @@
                             <attribute id="Alignment" value="LLWEAPONEX_Neutral_NoConflict" type="22" />
                             <attribute id="Name" value="LLWEAPONEX_WeaponMaster" type="22" />
                         </node>
+                        <node id="Entity">
+                            <attribute id="Alignment" value="Hero" type="22" />
+                            <attribute id="Name" value="Hero LLWEAPONEX_Harken" type="22" />
+                        </node>
+                        <node id="Entity">
+                            <attribute id="Alignment" value="Hero" type="22" />
+                            <attribute id="Name" value="Hero LLWEAPONEX_Korvash" type="22" />
+                        </node>
                     </children>
                 </node>
                 <node id="Relations">
