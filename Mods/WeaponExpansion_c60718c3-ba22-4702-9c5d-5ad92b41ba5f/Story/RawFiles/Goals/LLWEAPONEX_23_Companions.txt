@@ -55,13 +55,6 @@ GetUUID(_Char, _UUID)
 THEN
 NRD_ModCall("WeaponExpansion", "Harken_SetTattoosActive", _UUID);
 
-PROC
-ProcOriginReturnToRecruitmentPos((CHARACTERGUID)_Origin)
-AND
-NOT DB_OriginRecruitmentLocation_Region(_,_Origin,_,_)
-THEN
-SetStoryEvent(_Origin,"Origin_RestoreDialog");
-
 //REGION UPDATES
 // PROC
 // LeaderLib_Mods_OnVersionChanged(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, (INTEGER)_LastVersion, (INTEGER)_NextVersion)
