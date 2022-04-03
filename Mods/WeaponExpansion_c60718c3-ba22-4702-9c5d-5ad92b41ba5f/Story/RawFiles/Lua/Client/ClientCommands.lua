@@ -207,3 +207,12 @@ Ext.RegisterNetListener("LLWEAPONEX_PacifistWrath_UpdateDamage", function(cmd, n
 		item.Stats.DynamicStats[1].MaxDamage = 1
 	end
 end)
+
+RegisterListener("DebugCommand", "uiext", function (cmd, isClient, data)
+	if isClient then
+		data.WeaponExpansion = {
+			ToggleButton = MasteryMenu.ToggleButton.Instance,
+			MasteryMenu = MasteryMenu.Instance,
+		}
+	end
+end)
