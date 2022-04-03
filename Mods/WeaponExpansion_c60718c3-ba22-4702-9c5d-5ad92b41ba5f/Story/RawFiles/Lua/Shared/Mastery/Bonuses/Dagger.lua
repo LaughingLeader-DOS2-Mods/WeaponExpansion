@@ -1,5 +1,6 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
+local isClient = Ext.IsClient()
 
 local throwingKnifeBonus = rb:Create("DAGGER_THROWINGKNIFE", {
 	Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
@@ -104,7 +105,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 3,{
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_CorruptedBlade")
 	}):RegisterSkillListener(function (bonuses, char, skill, state, data)
 		if state == SKILL_STATE.HIT and data.Success then
-			DeathManager.ListenForDeath("CorruptedBladeDiseaseSpread", data.Target, char, -1)
+			local listenDelay = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_CorruptedBlade_DeathListenDuration", -1)
+			DeathManager.ListenForDeath("CorruptedBladeDiseaseSpread", data.Target, char, listenDelay)
 		end
 	end),
 })
@@ -132,20 +134,28 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 4, {
 	end)
 })
 
-if not Vars.IsClient then
+if not isClient then
+	local function TargetIsEnemy(t, source, status)
+		return CharacterIsEnemy(t, source) == 1
+	end
+
 	DeathManager.RegisterListener("CorruptedBladeDiseaseSpread", function(target, attacker, success)
 		if success then
 			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_CorruptedBlade_SpreadRadius", 12.0)
 			local pos = GameHelpers.Math.GetPosition(target, GameHelpers.Math.GetPosition(attacker))
 			local props = GameHelpers.Stats.GetSkillProperties("Target_CorruptedBlade")
-			if #props == 0 then
+			if not props or #props == 0 then
 				--If Corrupted Blade applies no statuses, apply Diseased.
 				GameHelpers.Status.Apply(pos, "DISEASED", 12.0, true, attacker, radius, false, 
-				function (t, source, status)
-					return CharacterIsEnemy(t, attacker) == 1
-				end)
+				TargetIsEnemy)
 			else
-				Ext.ExecuteSkillPropertiesOnPosition("Target_CorruptedBlade", attacker, pos, radius, "Target", false)
+				--Ext.ExecuteSkillPropertiesOnPosition("Target_CorruptedBlade", attacker, pos, radius, "Target", false)
+				for _,prop in pairs(GameHelpers.Stats.GetSkillProperties("Target_CorruptedBlade")) do
+					if prop.Type == "Status" and prop.Duration ~= 0 then
+						GameHelpers.Status.Apply(pos, prop.Action, prop.Duration, false, attacker, radius, false, 
+						TargetIsEnemy)
+					end
+				end
 			end
 		end
 	end)
