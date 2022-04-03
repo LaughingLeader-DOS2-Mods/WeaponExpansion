@@ -1,7 +1,6 @@
-DeathManager = {}
-
-DeathManager.Listeners = {}
-DeathManager.ActiveTimers = 0
+DeathManager = {
+	Listeners = {}
+}
 
 ---@param id string The ID for the death event, specified in ListenForDeath.
 ---@param callback fun(target:string, attacker:string, success:boolean):void
@@ -55,94 +54,71 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 		}
 	end
 	local data = PersistentVars.OnDeath[target]
-	local timerName = ""
 	if listenDelay > 0 then
-		timerName = string.format("Timers_LLWEAPONEX_ClearOnDeath_%s%s%s", id, target, attacker)
-		TimerCancel(timerName)
-		TimerLaunch(timerName, listenDelay)
+		Timer.StartUniqueTimer("LLWEAPONEX_DeathManager_ClearListener", string.format("%s%s", target, attacker), listenDelay,
+		{ID=id, Target=target, Attacker=attacker})
 	end
 	if data.Attackers[attacker] == nil then
 		data.Attackers[attacker] = {}
 	end
 	if data.Attackers[attacker][id] == nil or data.Total == 0 then
 		data.Total = data.Total + 1
-		if listenDelay > 0 then
-			DeathManager.ActiveTimers = DeathManager.ActiveTimers + 1
-		end
 	end
-	data.Attackers[attacker][id] = timerName
+	data.Attackers[attacker][id] = true
 	if Vars.DebugMode and IsTagged(target, "LLDUMMY_TrainingDummy") == 1 then
 		if listenDelay > 0 then
 			local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Random(0,999))
 			Timer.StartOneshot(tDebugName, listenDelay/2, function()
-				PrintDebug("[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer", tDebugName)
+				fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer %s", tDebugName)
 				DeathManager.OnDeath(target)
 			end)
 		else
-			PrintDebug("[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer", tDebugName)
+			fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing.")
 			DeathManager.OnDeath(target)
 		end
 	end
 end
 
+Timer.RegisterListener("LLWEAPONEX_DeathManager_ClearListener", function (timerName, data)
+	FireCallbacks(data.ID, data.Target, data.Attacker, false)
+	PersistentVars.OnDeath[data.Target] = nil
+end)
+
 function DeathManager.OnDeath(uuid)
 	local data = PersistentVars.OnDeath[uuid]
 	if data ~= nil then
-		PrintDebug("[LLWEAPONEX:DeathMechanics:OnDeath]", uuid, "died. Firing callbacks.")
+		fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] %s died. Firing callbacks.", uuid)
 		for attacker,attackerData in pairs(data.Attackers) do
-			for id,tName in pairs(attackerData) do
+			for id,b in pairs(attackerData) do
 				FireCallbacks(id, uuid, attacker, true)
-				if tName ~= "" then
-					TimerCancel(tName)
-				end
 			end
 		end
 		PersistentVars.OnDeath[uuid] = nil
 	end
 end
 
-RegisterProtectedOsirisListener("TimerFinished", 1, "after", function(timerName)
-	if DeathManager.ActiveTimers > 0 then
-		for uuid,data in pairs(PersistentVars.OnDeath) do
-			for attacker,attackerData in pairs(data.Attackers) do
-				for id,tName in pairs(attackerData) do
-					if tName ~= "" and tName == timerName then
-						PrintDebug("[LLWEAPONEX:DeathMechanics:TimerFinished] OnDeath timer finished", timerName, id, uuid, attacker)
-						FireCallbacks(id, uuid, attacker, false)
-						data.Total = math.max(0, data.Total - 1)
-						data.Attackers[attacker][id] = nil
-						break
-					end
-				end
-			end
-			if data.Total <= 0 then
-				PersistentVars.OnDeath[uuid] = nil
-				PrintDebug("[LLWEAPONEX:DeathMechanics:TimerFinished] Cleared OnDeath listeners for", uuid)
-			end
-		end
-	end
-end, true)
-
 RegisterProtectedOsirisListener("CharacterDying", 1, "after", function(char)
 	DeathManager.OnDeath(StringHelpers.GetUUID(char))
 end)
 
 RegisterListener("Initialized", function(region)
-	DeathManager.ActiveTimers = 0
 	for uuid,data in pairs(PersistentVars.OnDeath) do
-		local total = 0
-		for attacker,attackerData in pairs(data.Attackers) do
-			for id,timerName in pairs(attackerData) do
-				total = total + 1
-				if timerName ~= "" then
-					data.Attackers[attacker][id] = nil
-					total = math.max(0, total - 1)
+		if ObjectExists(uuid) == 0 then
+			PersistentVars.OnDeath[uuid] = nil
+		else
+			local total = 0
+			for attacker,attackerData in pairs(data.Attackers) do
+				if ObjectExists(attacker) == 0 then
+					data.Attackers[attacker] = nil
+				else
+					total = total + 1
 				end
 			end
-		end
-		data.Total = total
-		if total == 0 then
-			PersistentVars.OnDeath[uuid] = nil
+			if total == 0 then
+				PersistentVars.OnDeath[uuid] = nil
+			else
+				data.Total = total
+			end
 		end
 	end
 end)
