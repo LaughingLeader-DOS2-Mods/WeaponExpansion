@@ -29,7 +29,9 @@ local defaultPersistentVars = {
         ---@type table<UUID,integer>
         CrossbowRicochetHits = {},
         ---@type table<UUID,number[]>
-        StillStanceLastPosition = {}
+        StillStanceLastPosition = {},
+        ---@type table<UUID,integer[]>
+        SneakingTurnsInCombat = {}
     },
     Timers = {},
     OnDeath = {},

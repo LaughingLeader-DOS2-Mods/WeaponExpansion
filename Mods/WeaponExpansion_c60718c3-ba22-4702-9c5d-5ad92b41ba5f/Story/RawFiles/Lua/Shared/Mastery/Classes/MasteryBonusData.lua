@@ -26,7 +26,7 @@ setmetatable(MasteryBonusData, {
 	end,
 	__tostring = function(tbl)
 		return string.format("%s%s%s", 
-		tbl.ID, 
+		tbl.ID,
 		tbl.Skills and "|Skills(" .. StringHelpers.Join(";",tbl.Skills) .. ")" or "",
 		tbl.Statuses and "|Statuses(" .. StringHelpers.Join(";",tbl.Statuses) .. ")" or "")
 	end
@@ -108,6 +108,17 @@ end
 function MasteryBonusData:RegisterStatusListener(event, callback, specificStatuses)
 	if not isClient then
 		MasteryBonusManager.RegisterStatusListener(event, specificStatuses or self.Statuses, self.ID, callback)
+	end
+	return self
+end
+
+---@param event StatusEventID
+---@param callback MasteryBonusStatusCallback
+---@param statusType string|string[]
+---@return MasteryBonusData
+function MasteryBonusData:RegisterStatusTypeListener(event, callback, statusType)
+	if not isClient then
+		MasteryBonusManager.RegisterStatusTypeListener(event, statusType, self.ID, callback)
 	end
 	return self
 end
@@ -244,6 +255,51 @@ function MasteryBonusData:RegisterTurnEndedListener(id, callback, skipBonusCheck
 				end
 			end
 			RegisterListener("OnTurnEnded", id, wrapper)
+		end
+	end
+	return self
+end
+
+---@param callback fun(uuid:UUID):void
+---@param skipBonusCheck boolean
+---@return MasteryBonusData
+function MasteryBonusData:RegisterTurnDelayedListener(callback, skipBonusCheck)
+	if not isClient then
+		if skipBonusCheck then
+			RegisterListener("TurnDelayed", callback)
+		else
+			local wrapper = function(character)
+				if MasteryBonusManager.HasMasteryBonus(character, self.ID) then
+					local b,err = xpcall(callback, debug.traceback, character)
+					if not b then
+						Ext.PrintError(err)
+					end
+				end
+			end
+			RegisterListener("TurnDelayed", wrapper)
+		end
+	end
+	return self
+end
+
+---@param id string
+---@param callback TurnCounterCallback
+---@param skipBonusCheck boolean
+---@return MasteryBonusData
+function MasteryBonusData:RegisterTurnCounterListener(id, callback, skipBonusCheck)
+	if not isClient then
+		if skipBonusCheck then
+			RegisterListener("OnNamedTurnCounter", id, callback)
+		else
+			local wrapper = function(counterId, turnCount, lastTurn, finished, data)
+				if data.Target and MasteryBonusManager.HasMasteryBonus(data.Target, self.ID) then
+					local b,err = xpcall(callback, debug.traceback, counterId, turnCount, lastTurn, finished, data)
+					if not b then
+						Ext.PrintError(err)
+					end
+				end
+			end
+			RegisterListener("OnNamedTurnCounter", id, wrapper)
 		end
 	end
 	return self

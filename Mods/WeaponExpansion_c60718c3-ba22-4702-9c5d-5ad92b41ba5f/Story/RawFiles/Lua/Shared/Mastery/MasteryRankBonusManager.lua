@@ -227,6 +227,23 @@ function MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses,
 	end
 end
 
+---@param event string
+---@param statusType string|string[]
+---@param matchBonuses string|string[]
+---@param callback MasteryBonusStatusCallback
+function MasteryBonusManager.RegisterStatusTypeListener(event, statusType, matchBonuses, callback)
+	if Vars.IsClient then return end
+	if type(statusType) == "table" then
+		for i,v in pairs(statusType) do
+			MasteryBonusManager.RegisterStatusTypeListener(event, v, matchBonuses, callback)
+		end
+	else
+		local wrapperCallback = function(target, status, source, statusType)
+			OnStatusCallback(callback, matchBonuses, target, status, source, statusType)
+		end
+		RegisterStatusTypeListener(event, statusType, wrapperCallback)
+	end
+end
 
 ---@param target EsvCharacter
 ---@param source EsvCharacter|nil
