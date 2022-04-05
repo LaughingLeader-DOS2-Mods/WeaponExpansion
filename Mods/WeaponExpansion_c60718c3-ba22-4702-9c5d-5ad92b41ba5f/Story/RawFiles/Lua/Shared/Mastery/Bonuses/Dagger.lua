@@ -37,7 +37,7 @@ end
 
 ThrowingKnifeBonus:RegisterSkillListener(ThrowingKnifeBonusLogic)
 
-local SneakingPassiveBonus = rb:Create("DAGGER_PASSIVE_SNEAKBONUS", {
+local SneakingPassiveBonus = rb:Create("DAGGER_SNEAKINGBONUS", {
 	Skills = {"ActionSkillSneak"},
 	Statuses = {"SNEAKING", "INVISIBLE"},
 	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SneakingBonus", "<font color='#F19824'>For every turn spent [Key:INVISIBLE_DisplayName] or [Handle:h6bf7caf0g7756g443bg926dg1ee5975ee133:Sneaking] [Handle:h2c990ecagc680g4c68g88ccgb5358faa4e33:in combat], gain an increasing damage boost for one attack.</font>"),
@@ -50,22 +50,17 @@ if not isClient then
 		local target = GameHelpers.GetCharacter(target)
 		if target then
 			turns = turns or PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target.MyGuid] or 0
-			local bonusStatus = target:GetStatus("LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS")
-			local applyBonusStatus = false
-			if not bonusStatus then
-				bonusStatus = Ext.PrepareStatus(target.Handle, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS", -1)
-				applyBonusStatus = true
-			end
-			local maxBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_MaxMultiplier", 20.0)
-			local nextBoost = math.min(maxBoost, 1 + math.ceil(turns * 6.6))
-			if turns > 0 and bonusStatus.StatsMultiplier ~= nextBoost then
-				CharacterStatusText(target.MyGuid, string.format("Assassin's Patience Increased (%i)", turns))
-			end
-			bonusStatus.StatsMultiplier = nextBoost
-			if applyBonusStatus then
+			if turns > 0 then
+				local bonusStatus = Ext.PrepareStatus(target.Handle, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS", -1)
+				bonusStatus.ForceStatus = true
+				local maxBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_MaxMultiplier", 10.0)
+				local turnBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_TurnBoost", 5.0)
+				local nextBoost = math.max(1.0, math.min(maxBoost, math.ceil((turns - 1) * turnBoost)))
+				if bonusStatus.StatsMultiplier ~= nextBoost then
+					CharacterStatusText(target.MyGuid, string.format("Assassin's Patience Increased (%i)", turns))
+				end
+				bonusStatus.StatsMultiplier = nextBoost
 				Ext.ApplyStatus(bonusStatus)
-			else
-				bonusStatus.RequestClientSync = true
 			end
 		end
 	end
@@ -75,7 +70,7 @@ if not isClient then
 		local target = GameHelpers.GetCharacter(target)
 		if GameHelpers.Character.IsInCombat(target) or _SneakBonusEnabledOutsideOfCombat then
 			if PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] == nil then
-				TurnCounter.CreateTurnCounter("LLWEAPONEX_Dagger_SneakBonus", 0, 0,
+				TurnCounter.CreateTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", 0, 0,
 				TurnCounter.Mode.Increment, CombatGetIDForCharacter(target.MyGuid), {
 					Target = target.MyGuid,
 					Infinite = true,
@@ -101,21 +96,21 @@ if not isClient then
 			PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] = turnCount
 			IncreaseSneakingDamageBoost(target, turnCount)
 			if turnCount >= 3 then
-				TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakBonus", target.MyGuid)
+				TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", target.MyGuid)
 			end
 		else
 			Timer.StartObjectTimer("LLWEAPONEX_ClearDaggerSneakingBonus", target, 250)
 		end
 	end
 
-	SneakingPassiveBonus:RegisterTurnCounterListener("LLWEAPONEX_Dagger_SneakBonus", OnTurnEndedWhileSneaking)
-	--sneakingPassiveBonus:RegisterTurnEndedListener("LLWEAPONEX_Dagger_SneakBonus", OnTurnEndedWhileSneaking)
+	SneakingPassiveBonus:RegisterTurnCounterListener("LLWEAPONEX_Dagger_SneakingBonus", OnTurnEndedWhileSneaking)
+	--sneakingPassiveBonus:RegisterTurnEndedListener("LLWEAPONEX_Dagger_SneakingBonus", OnTurnEndedWhileSneaking)
 	--sneakingPassiveBonus:RegisterTurnDelayedListener(OnTurnEndedWhileSneaking)
 
 	Timer.RegisterListener("LLWEAPONEX_ClearDaggerSneakingBonus", function (timerName, target)
 		GameHelpers.Status.Remove(target, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS")
 		PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] = nil
-		TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakBonus", target)
+		TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", target)
 	end)
 end
 
