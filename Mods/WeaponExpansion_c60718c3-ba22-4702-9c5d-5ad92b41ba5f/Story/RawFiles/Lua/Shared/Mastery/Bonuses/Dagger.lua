@@ -2,13 +2,12 @@ local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 local isClient = Ext.IsClient()
 
-local throwingKnifeBonus = rb:Create("DAGGER_THROWINGKNIFE", {
+local ThrowingKnifeBonus = rb:Create("DAGGER_THROWINGKNIFE", {
 	Skills = {"Projectile_ThrowingKnife", "Projectile_EnemyThrowingKnife"},
 	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife")
 })
 
-
-local throwingKnifeBonusSkills = {
+Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills = {
 	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison",
 	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
 }
@@ -18,12 +17,11 @@ local throwingKnifeBonusSkills = {
 ---@param state SKILL_STATE PREPARE|USED|CAST|HIT
 ---@param data SkillEventData|HitData|ProjectileHitData
 local function ThrowingKnifeBonusLogic(bonuses, skill, char, state, data)
-	--PrintDebug("[MasteryBonuses:ThrowingKnife] char(",char,") state(",state,") data("..Ext.JsonStringify(data)..")")
 	if state == SKILL_STATE.HIT and data.Success then
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
 		if chance > 0 then
 			if Ext.Random(1,100) < chance then
-				GameHelpers.Skill.Explode(data.Target, Common.GetRandomTableEntry(throwingKnifeBonusSkills), char)
+				GameHelpers.Skill.Explode(data.Target, Common.GetRandomTableEntry(Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills), char)
 			end
 		end
 	--Targeted a position instead of an object
@@ -31,34 +29,39 @@ local function ThrowingKnifeBonusLogic(bonuses, skill, char, state, data)
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
 		if chance > 0 then
 			if Ext.Random(1,100) < chance then
-				GameHelpers.Skill.Explode(data.Position, Common.GetRandomTableEntry(throwingKnifeBonusSkills), char)
+				GameHelpers.Skill.Explode(data.Position, Common.GetRandomTableEntry(Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills), char)
 			end
 		end
 	end
 end
 
-throwingKnifeBonus:RegisterSkillListener(ThrowingKnifeBonusLogic)
+ThrowingKnifeBonus:RegisterSkillListener(ThrowingKnifeBonusLogic)
 
-local sneakingPassiveBonus = rb:Create("DAGGER_PASSIVE_SNEAKBONUS", {
+local SneakingPassiveBonus = rb:Create("DAGGER_PASSIVE_SNEAKBONUS", {
 	Skills = {"ActionSkillSneak"},
 	Statuses = {"SNEAKING", "INVISIBLE"},
 	Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SneakingBonus", "<font color='#F19824'>For every turn spent [Key:INVISIBLE_DisplayName] or [Handle:h6bf7caf0g7756g443bg926dg1ee5975ee133:Sneaking] [Handle:h2c990ecagc680g4c68g88ccgb5358faa4e33:in combat], gain an increasing damage boost for one attack.</font>"),
 })
 
 if not isClient then
-	local function IncreaseSneakingDamageBoost(target)
-		target = GameHelpers.GetCharacter(target)
+	local _SneakBonusEnabledOutsideOfCombat = Ext.IsDeveloperMode()
+
+	local function IncreaseSneakingDamageBoost(target, turns)
+		local target = GameHelpers.GetCharacter(target)
 		if target then
+			turns = turns or PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target.MyGuid] or 0
 			local bonusStatus = target:GetStatus("LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS")
 			local applyBonusStatus = false
 			if not bonusStatus then
-				bonusStatus = Ext.PrepareStatus(target, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS", -1)
+				bonusStatus = Ext.PrepareStatus(target.Handle, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS", -1)
 				applyBonusStatus = true
 			end
 			local maxBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_MaxMultiplier", 20.0)
-			local turns = PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] or 0
-			bonusStatus.StatsMultiplier = math.min(maxBoost, 1 + math.ceil(turns * 6.6))
-			PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] = turns
+			local nextBoost = math.min(maxBoost, 1 + math.ceil(turns * 6.6))
+			if turns > 0 and bonusStatus.StatsMultiplier ~= nextBoost then
+				CharacterStatusText(target.MyGuid, string.format("Assassin's Patience Increased (%i)", turns))
+			end
+			bonusStatus.StatsMultiplier = nextBoost
 			if applyBonusStatus then
 				Ext.ApplyStatus(bonusStatus)
 			else
@@ -70,13 +73,13 @@ if not isClient then
 	local function OnSneakingOrInvisible(bonuses, target, status, source, statusType)
 		Timer.Cancel("LLWEAPONEX_ClearDaggerSneakingBonus", target)
 		local target = GameHelpers.GetCharacter(target)
-		if GameHelpers.Character.IsInCombat(target) then
+		if GameHelpers.Character.IsInCombat(target) or _SneakBonusEnabledOutsideOfCombat then
 			if PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] == nil then
 				TurnCounter.CreateTurnCounter("LLWEAPONEX_Dagger_SneakBonus", 0, 0,
 				TurnCounter.Mode.Increment, CombatGetIDForCharacter(target.MyGuid), {
 					Target = target.MyGuid,
 					Infinite = true,
-					CombatOnly = true
+					CombatOnly = not _SneakBonusEnabledOutsideOfCombat
 				})
 			end
 			IncreaseSneakingDamageBoost(target)
@@ -87,22 +90,25 @@ if not isClient then
 		Timer.StartObjectTimer("LLWEAPONEX_ClearDaggerSneakingBonus", target, 500)
 	end
 	
-	sneakingPassiveBonus:RegisterStatusListener("Applied", OnSneakingOrInvisible, "SNEAKING")
-	sneakingPassiveBonus:RegisterStatusTypeListener("Applied", OnSneakingOrInvisible, "INVISIBLE")
-	sneakingPassiveBonus:RegisterStatusListener("Removed", OnSneakingOrInvisibleLost, "SNEAKING")
-	sneakingPassiveBonus:RegisterStatusTypeListener("Removed", OnSneakingOrInvisibleLost, "INVISIBLE")
+	SneakingPassiveBonus:RegisterStatusListener("Applied", OnSneakingOrInvisible, "SNEAKING", "Target")
+	SneakingPassiveBonus:RegisterStatusTypeListener("Applied", OnSneakingOrInvisible, "INVISIBLE", "Target")
+	SneakingPassiveBonus:RegisterStatusListener("Removed", OnSneakingOrInvisibleLost, "SNEAKING", "Target")
+	SneakingPassiveBonus:RegisterStatusTypeListener("Removed", OnSneakingOrInvisibleLost, "INVISIBLE", "Target")
 
 	local function OnTurnEndedWhileSneaking(counterId, turnCount, lastTurn, finished, data)
 		local target = data.Target
 		if GameHelpers.Character.IsSneakingOrInvisible(target) then
 			PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] = turnCount
-			IncreaseSneakingDamageBoost(target)
+			IncreaseSneakingDamageBoost(target, turnCount)
+			if turnCount >= 3 then
+				TurnCounter.ClearTurnCounter("LLWEAPONEX_Dagger_SneakBonus", target.MyGuid)
+			end
 		else
 			Timer.StartObjectTimer("LLWEAPONEX_ClearDaggerSneakingBonus", target, 250)
 		end
 	end
 
-	sneakingPassiveBonus:RegisterTurnCounterListener("LLWEAPONEX_Dagger_SneakBonus", OnTurnEndedWhileSneaking)
+	SneakingPassiveBonus:RegisterTurnCounterListener("LLWEAPONEX_Dagger_SneakBonus", OnTurnEndedWhileSneaking)
 	--sneakingPassiveBonus:RegisterTurnEndedListener("LLWEAPONEX_Dagger_SneakBonus", OnTurnEndedWhileSneaking)
 	--sneakingPassiveBonus:RegisterTurnDelayedListener(OnTurnEndedWhileSneaking)
 
@@ -114,8 +120,8 @@ if not isClient then
 end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 1, {
-	throwingKnifeBonus,
-	sneakingPassiveBonus
+	ThrowingKnifeBonus,
+	SneakingPassiveBonus
 })
 
 local RupturedFlags = {

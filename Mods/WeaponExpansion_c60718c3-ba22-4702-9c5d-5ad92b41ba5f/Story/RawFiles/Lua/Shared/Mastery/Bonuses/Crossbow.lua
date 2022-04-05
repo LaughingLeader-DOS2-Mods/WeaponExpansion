@@ -21,7 +21,7 @@ Mastery.Variables.Bonuses.GetStillStanceBonus = GetStillStanceBonus
 local function IsStillStanceSkill(skill)
 	if skill == "ActionAttackGround" then
 		return true
-	elseif LeaderLib.Data.ActionSkills[skill] then
+	elseif Data.ActionSkills[skill] then
 		return false
 	end
 	local skill = Ext.GetStat(skill)
