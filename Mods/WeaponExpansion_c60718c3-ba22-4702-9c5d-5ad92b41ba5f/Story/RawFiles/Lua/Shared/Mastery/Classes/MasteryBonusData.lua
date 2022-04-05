@@ -83,20 +83,24 @@ function MasteryBonusData.DefaultStatusTagCheck(tag, checkSource)
 end
 
 ---@param callback WeaponExpansionMasterySkillListenerCallback
+---@param checkBonusOn MasteryBonusCheckTarget
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterSkillListener(callback)
+function MasteryBonusData:RegisterSkillListener(callback,
+	checkBonusOn)
 	if not isClient then
-		MasteryBonusManager.RegisterSkillListener(self.Skills, self.ID, callback)
+		MasteryBonusManager.RegisterSkillListener(self.Skills, self.ID, callback, checkBonusOn)
 	end
 	return self
 end
 
 ---@param skillType string
 ---@param callback WeaponExpansionMasterySkillListenerCallback
+---@param checkBonusOn MasteryBonusCheckTarget
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterSkillTypeListener(skillType, callback)
+function MasteryBonusData:RegisterSkillTypeListener(skillType, callback,
+	checkBonusOn)
 	if not isClient then
-		MasteryBonusManager.RegisterSkillTypeListener(skillType, self.ID, callback)
+		MasteryBonusManager.RegisterSkillTypeListener(skillType, self.ID, callback, checkBonusOn)
 	end
 	return self
 end
@@ -104,10 +108,12 @@ end
 ---@param event StatusEventID
 ---@param callback MasteryBonusStatusCallback
 ---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
+---@param checkBonusOn MasteryBonusCheckTarget
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterStatusListener(event, callback, specificStatuses)
+function MasteryBonusData:RegisterStatusListener(event, callback, 
+	specificStatuses, checkBonusOn)
 	if not isClient then
-		MasteryBonusManager.RegisterStatusListener(event, specificStatuses or self.Statuses, self.ID, callback)
+		MasteryBonusManager.RegisterStatusListener(event, specificStatuses or self.Statuses, self.ID, callback, checkBonusOn)
 	end
 	return self
 end
@@ -115,29 +121,36 @@ end
 ---@param event StatusEventID
 ---@param callback MasteryBonusStatusCallback
 ---@param statusType string|string[]
+---@param checkBonusOn MasteryBonusCheckTarget
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterStatusTypeListener(event, callback, statusType)
+function MasteryBonusData:RegisterStatusTypeListener(event, callback,
+	statusType, checkBonusOn)
 	if not isClient then
-		MasteryBonusManager.RegisterStatusTypeListener(event, statusType, self.ID, callback)
+		MasteryBonusManager.RegisterStatusTypeListener(event, statusType, self.ID, callback, checkBonusOn)
 	end
 	return self
 end
 
 ---@param callback MasteryBonusStatusBeforeAttemptCallback
 ---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
+---@param skipBonusCheck boolean
+---@param checkBonusOn MasteryBonusCheckTarget
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback, specificStatuses)
+function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback,
+	specificStatuses, skipBonusCheck, checkBonusOn)
 	if not isClient then
-		MasteryBonusManager.RegisterStatusAttemptListener(specificStatuses or self.Statuses, self.ID, callback)
+		MasteryBonusManager.RegisterStatusAttemptListener(specificStatuses or self.Statuses, self.ID,
+		callback, skipBonusCheck, checkBonusOn)
 	end
 	return self
 end
 
----@param callback BasicAttackOnHitTargetCallback
+---@param callback BasicAttackOnHitCallback
 ---@param skipBonusCheck boolean
 ---@param priority integer
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterOnHit(callback, skipBonusCheck, priority)
+function MasteryBonusData:RegisterOnHit(callback,
+	skipBonusCheck, priority)
 	if not isClient then
 		if skipBonusCheck then
 			AttackManager.OnHit.Register(callback, priority)
