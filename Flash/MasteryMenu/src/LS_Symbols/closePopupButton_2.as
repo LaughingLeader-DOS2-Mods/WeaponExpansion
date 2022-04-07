@@ -32,8 +32,7 @@ package LS_Symbols
 			removeEventListener(MouseEvent.MOUSE_UP,this.onUp);
 			this.bg_mc.gotoAndStop(2);
 			Registry.call("PlaySound","UI_Generic_Click");
-			//Registry.call("buttonPressed",2,0);
-			Registry.call("requestCloseUI");
+			Registry.call("LLWEAPONEX_MasteryMenu_RequestCloseUI");
 		}
 		
 		public function onDown(e:MouseEvent) : *

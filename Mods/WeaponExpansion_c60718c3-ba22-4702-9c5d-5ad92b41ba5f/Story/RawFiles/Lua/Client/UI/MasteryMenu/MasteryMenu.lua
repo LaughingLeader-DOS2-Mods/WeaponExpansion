@@ -5,56 +5,52 @@ local VisibilityMode = {
 	ShowAll = "ShowAll",
 }
 
----@class MasteryMenu
----@field Instance UIObject
----@field Root FlashMainTimeline
----@field Exists boolean
-MasteryMenu = {
-	ID = "WeaponExpansionMasteryMenu",
-	Visible = false,
-	Variables = {
-		SelectedMastery = {
-			Last = "",
-			Current = ""
-		},
-		CurrentTooltip = nil,
-		---@type CharacterMasteryData
-		MasteryData = nil,
-		RankVisibility = VisibilityMode.Default
-	},
-	Params = {
-		IconType = {
-			None = 0,
-			Skill = 1,
-			Status = 2,
-			Passive = 3,
-		}
-	},
-	Layer = 9
-}
-
-local function GetInstance()
-	local instance = Ext.GetUI(MasteryMenu.ID)
-	if not instance then
-		instance = MasteryMenu:Initialize()
-	end
-	return instance
-end
-
-setmetatable(MasteryMenu, {
-	__index = function(_,k)
-		if k == "Instance" then
-			return GetInstance()
-		elseif k == "Root" then
-			local ui = GetInstance()
-			if ui then
-				return ui:GetRoot()
-			end
-		elseif k == "Exists" then
-			return Ext.GetUI(MasteryMenu.ID) ~= nil
+local function ShouldMasteryMenuBeVisible()
+	if Ext.GetGameState() == "Running" then
+		local cc = Ext.GetUIByType(not Vars.ControllerEnabled and Data.UIType.characterCreation or Data.UIType.characterCreation_c)
+		if not cc then
+			return MasteryMenu.IsOpen == true
 		end
 	end
+	return false
+end
+
+MasteryMenu = Classes.UIObjectExtended:Create({
+	ID = "WeaponExpansionMasteryMenu",
+	Layer = 11,
+	SwfPath = "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf",
+	ShouldBeVisible = ShouldMasteryMenuBeVisible,
+	DefaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data.UIFlags.OF_PlayerInput3 | Data.UIFlags.OF_PlayerInput4,
+	ResolutionInitialized = true,
+	--OnVisibilityChanged = function (self, last, b) end,
+	OnInitialized = function (self, instance)
+		local this = instance:GetRoot()
+		if this then
+			self:BuildMasteryMenu(this)
+		end
+	end,
+	--SetPosition = SetPositionToHotbar,
 })
+
+MasteryMenu.IsOpen = false
+MasteryMenu.Variables = {
+	SelectedMastery = {
+		Last = "",
+		Current = ""
+	},
+	CurrentTooltip = nil,
+	---@type CharacterMasteryData
+	MasteryData = nil,
+	RankVisibility = VisibilityMode.Default
+}
+MasteryMenu.Params = {
+	IconType = {
+		None = 0,
+		Skill = 1,
+		Status = 2,
+		Passive = 3,
+	}
+}
 
 function MasteryMenu:SetMastery(mastery)
 	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
@@ -204,22 +200,25 @@ end
 
 ---@param skipRequest boolean
 function MasteryMenu:Close(skipRequest)
-	if not self.Visible then
+	if not self.IsOpen and not skipRequest then
 		return true
 	end
 	if skipRequest == nil then
 		skipRequest = false
 	end
+	self.Variables.CurrentTooltip = nil
+	self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
+	self.Variables.SelectedMastery.Current = ""
+	self.Variables.MasteryData = nil
 	local this = self.Root
 	if this then
-		this.closeMenu(skipRequest)
-		self.Variables.CurrentTooltip = nil
-		self.Variables.SelectedMastery.Last = self.Variables.SelectedMastery.Current
-		self.Variables.SelectedMastery.Current = ""
-		self.Variables.MasteryData = nil
-		self.Visible = false
-		self.Instance:Hide()
+		this.CloseMenu(skipRequest)
 	end
+	self.IsOpen = false
+end
+
+function MasteryMenu:ForceClose()
+	self:Close(true)
 end
 
 local closePanelTypes = {
@@ -252,16 +251,12 @@ end
 
 function MasteryMenu:Open(skipRequest)
 	if skipRequest then
-		local instance = self.Instance
-		if instance then
-			instance:Show()
-			local this = instance:GetRoot()
-			if this then
-				self:BuildMasteryMenu(this)
-				this.openMenu()
-				self.Visible = true
-				self:CloseOtherPanels()
-			end
+		self.IsOpen = true
+		local this = self.Root
+		if this then
+			self:BuildMasteryMenu(this)
+			this.OpenMenu()
+			self:CloseOtherPanels()
 		end
 	else
 		local character = Client:GetCharacter()
@@ -285,49 +280,46 @@ Ext.RegisterNetListener("LLWEAPONEX_OpenMasteryMenu", function(cmd, payload)
 	end
 end)
 
----@private
-function MasteryMenu:OnMenuEvent(ui, call, ...)
+function MasteryMenu:PrepareTooltip(iconType, id, x, y, width, height)
 	local characterMasteryData = self.Variables.MasteryData
-	local this = ui:GetRoot()
-	local params = {...}
-	if call == "requestCloseUI" or call == "requestCloseMasteryMenu" then
-		self:Close(true)
-	elseif call == "onMasterySelected" or call == "selectedMastery" then
-		self:SetMastery(params[1])
-	elseif call == "mastery_showIconTooltip" then
-		local iconType = params[1]
-		if iconType == self.Params.IconType.Skill then
-			ui:ExternalInterfaceCall("showSkillTooltip", characterMasteryData.Handle, params[2], params[3], params[4], params[5], params[6])
-			self.CurrentTooltip = "Skill"
-		elseif iconType == self.Params.IconType.Status then
-			ui:ExternalInterfaceCall("showTooltip", GetStatusTooltipText(characterMasteryData.UUID, params[2]), params[3], params[4], params[5], params[6], "right", false)
-			self.CurrentTooltip = "Status"
-		elseif iconType == self.Params.IconType.Passive then
-			local specialVals = StringHelpers.Split(params[2], ",")
-			if specialVals ~= nil and #specialVals >= 2 then
-				local name,_ = GameHelpers.GetStringKeyText(specialVals[1])
-				local description,_ = GameHelpers.GetStringKeyText(specialVals[2])
-				if name ~= nil then
-					local passiveDesc,_ = GameHelpers.GetStringKeyText("LLWEAPONEX_MasteryBonus_Passive_Description")
-					name = GameHelpers.Tooltip.ReplacePlaceholders(name)
-					if description ~= nil then
-						description = GameHelpers.Tooltip.ReplacePlaceholders(description).."<br>"..passiveDesc
-					else
-						description = passiveDesc
-					end
-					local text = string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name, description)
-					ui:ExternalInterfaceCall("showTooltip", text, params[3], params[4], params[5], params[6], "right", false)
-					self.CurrentTooltip = "Generic"
+	local ui = self.Instance
+	if iconType == self.Params.IconType.Skill then
+		ui:ExternalInterfaceCall("showSkillTooltip", characterMasteryData.Handle, id, x, y, width, height)
+		self.CurrentTooltip = "Skill"
+	elseif iconType == self.Params.IconType.Status then
+		ui:ExternalInterfaceCall("showTooltip", GetStatusTooltipText(characterMasteryData.UUID, id), x, y, width, height, "right", false)
+		self.CurrentTooltip = "Status"
+	elseif iconType == self.Params.IconType.Passive then
+		local specialVals = StringHelpers.Split(id, ",")
+		if specialVals ~= nil and #specialVals >= 2 then
+			local name,_ = GameHelpers.GetStringKeyText(specialVals[1])
+			local description,_ = GameHelpers.GetStringKeyText(specialVals[2])
+			if name ~= nil then
+				local passiveDesc,_ = GameHelpers.GetStringKeyText("LLWEAPONEX_MasteryBonus_Passive_Description")
+				name = GameHelpers.Tooltip.ReplacePlaceholders(name)
+				if description ~= nil then
+					description = GameHelpers.Tooltip.ReplacePlaceholders(description).."<br>"..passiveDesc
+				else
+					description = passiveDesc
 				end
+				local text = string.format("<p align='center'><font size='24'>%s</font></p><img src='Icon_Line' width='350%%'><br>%s", name, description)
+				ui:ExternalInterfaceCall("showTooltip", text, x, y, width, height, "right", false)
+				self.CurrentTooltip = "Generic"
 			end
 		end
-	elseif call == "mastery_hideIconTooltip" then
-		self.CurrentTooltip = nil
 	end
 end
 
----@param ui UIObject
-function MasteryMenu:RegisterIcon(ui, call, name, icon, iconType)
+function MasteryMenu:ClearTooltip(iconType)
+	self.CurrentTooltip = nil
+end
+
+function MasteryMenu:OnButtonPressed(buttonType, buttonState)
+
+end
+
+function MasteryMenu:RegisterIcon(name, icon, iconType)
+	local ui = self.Instance
 	local iconSize = 64
 	if iconType >= 2 then
 		iconSize = 40
@@ -337,82 +329,31 @@ function MasteryMenu:RegisterIcon(ui, call, name, icon, iconType)
 end
 
 ---@private
-function MasteryMenu:ClearIcons(ui, call, count)
-	local instance = self.Instance
+function MasteryMenu:ClearIcons(count)
+	local ui = self.Instance
 	for i=0,count do
-		instance:ClearCustomIcon(string.format("masteryMenu_%i", i))
+		ui:ClearCustomIcon(string.format("masteryMenu_%i", i))
 	end
 end
 
----@private
-function MasteryMenu:RegisterUICall(name, callback, instance)
-	instance = instance or self.Instance
-	Ext.RegisterUICall(instance, name, function(...)
-		callback(self, ...)
-	end)
+local function RegisterNameCall(name, callback)
+	Ext.RegisterUINameCall(name, function (ui, event, ...)
+		local b,err = xpcall(callback, debug.traceback, MasteryMenu, ...)
+	end, "Before")
 end
 
----@private
-function MasteryMenu:RegisterListeners(instance)
-	instance = instance or self.Instance
-	if instance then
-		instance:SetCustomIcon("masteryMenu_unknown", "LeaderLib_Placeholder", 64, 64)
-		self:RegisterUICall("requestCloseUI", self.OnMenuEvent, instance)
-		self:RegisterUICall("requestCloseMasteryMenu", self.OnMenuEvent, instance)
-		self:RegisterUICall("buttonPressed", self.OnMenuEvent, instance)
-		self:RegisterUICall("overMastery", self.OnMenuEvent, instance)
-		self:RegisterUICall("selectedMastery", self.OnMenuEvent, instance)
-		self:RegisterUICall("onMasterySelected", self.OnMenuEvent, instance)
-		self:RegisterUICall("mastery_showIconTooltip", self.OnMenuEvent, instance)
-		self:RegisterUICall("mastery_hideTooltip", self.OnMenuEvent, instance)
-		self:RegisterUICall("registerIcon", self.RegisterIcon, instance)
-		self:RegisterUICall("clearIcons", self.ClearIcons, instance)
-		
-		-- if Vars.DebugMode then
-		-- 	Ext.RegisterUICall(instance, "showSkillTooltip", OnMenuEvent)
-		-- 	Ext.RegisterUICall(instance, "showStatusTooltip", OnMenuEvent)
-		-- 	--Ext.RegisterUICall(instance, "UIAssert", OnMenuEvent)
-		-- 	Ext.RegisterUICall(instance, "hideTooltip", OnMenuEvent)
-		-- 	Ext.RegisterUICall(instance, "showTooltip", OnMenuEvent)
-		-- 	Ext.RegisterUICall(instance, "focusLost", OnMenuEvent)
-		-- 	Ext.RegisterUICall(instance, "inputFocusLost", OnMenuEvent)
-		-- 	Ext.RegisterUICall(instance, "focus", OnMenuEvent)
-		-- 	Ext.RegisterUICall(instance, "inputFocus", OnMenuEvent)
-		-- end
-	end
-end
-
-local defaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data.UIFlags.OF_PlayerInput3 | Data.UIFlags.OF_PlayerInput4
-
----@private
-function MasteryMenu:Initialize()
-	local instance = Ext.GetUI(MasteryMenu.ID)
-	if not instance then
-		instance = Ext.CreateUI(MasteryMenu.ID, "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", MasteryMenu.Layer, defaultUIFlags)
-		self:RegisterListeners(instance)
-	end
-	return instance
-end
-
-Ext.RegisterListener("GameStateChanged", function(last, next)
-	if next == "Running" then
-		if not MasteryMenu.Exists then
-			local instance = MasteryMenu:Initialize()
-			if instance then
-				instance:Hide()
-			end
-		end
-	end
-end)
+RegisterNameCall("LLWEAPONEX_MasteryMenu_RequestCloseUI", MasteryMenu.ForceClose)
+--RegisterNameCall("LLWEAPONEX_MasteryMenu_MasteryHovered", MasteryMenu.OnMasteryHover)
+RegisterNameCall("LLWEAPONEX_MasteryMenu_MasterySelected", MasteryMenu.SetMastery)
+RegisterNameCall("LLWEAPONEX_MasteryMenu_ShowIconTooltip", MasteryMenu.PrepareTooltip)
+RegisterNameCall("LLWEAPONEX_MasteryMenu_HideIconTooltip", MasteryMenu.ClearTooltip)
+RegisterNameCall("LLWEAPONEX_MasteryMenu_RegisterIcon", MasteryMenu.RegisterIcon)
+RegisterNameCall("LLWEAPONEX_MasteryMenu_ClearIcons", MasteryMenu.ClearIcons)
+RegisterNameCall("LLWEAPONEX_MasteryMenu_ButtonPressed", MasteryMenu.OnButtonPressed)
 
 local function HideMasteryMenu()
-	MasteryMenu:Close()
+	MasteryMenu:ForceClose()
 end
-
---[[
-Mods.WeaponExpansion.MasteryMenu:Open(true)
-Ext.CreateUI("test", "Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/GUI/MasteryMenu.swf", 8)
-]]
 
 Ext.RegisterUITypeCall(Data.UIType.characterSheet, "selectedTab", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.characterSheet, "hotbarBtnPressed", HideMasteryMenu)
@@ -420,17 +361,9 @@ Ext.RegisterUITypeCall(Data.UIType.characterSheet, "showUI", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.playerInfo, "charSel", HideMasteryMenu)
 Ext.RegisterUITypeCall(Data.UIType.hotBar, "hotbarBtnPressed", HideMasteryMenu)
 
-RegisterListener("BeforeLuaReset", function()
-	MasteryMenu:Close(true)
-	local instance = MasteryMenu.Instance
-	if instance then
-		instance:Destroy()
-	end
-end)
-
 ---@type InputEventCallback
 Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pressed, id, inputMap, controllerEnabled)
-	if not MasteryMenu.Visible and Ext.GetGameState() == "Running" then
+	if not MasteryMenu.IsOpen and Ext.GetGameState() == "Running" then
 		if controllerEnabled then
 			-- Right Trigger + Left Trigger 
 			if eventName == "PartyManagement" and Input.IsPressed("PanelSelect") then
@@ -445,9 +378,3 @@ Input.RegisterListener({"PartyManagement", "ToggleMap"}, function(eventName, pre
 		end
 	end
 end)
-
--- RegisterListener("ClientCharacterChanged", function(uuid, userId, profile, netId, isHost)
--- 	if MasteryMenu.Visible then
--- 		MasteryMenu:BuildMasteryMenu()
--- 	end
--- end)

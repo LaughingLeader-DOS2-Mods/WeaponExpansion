@@ -85,7 +85,7 @@ package desc
 			if (!this.hasTooltip)
 			{
 				var pos:Point = this.localToGlobal(new Point(0,0));
-				Registry.call("mastery_showIconTooltip",iconType,id,pos.x,pos.y,width,height);
+				Registry.call("LLWEAPONEX_MasteryMenu_ShowIconTooltip",iconType,id,pos.x,pos.y,width,height);
 				this.hasTooltip = true;
 			}
 		}
@@ -95,7 +95,7 @@ package desc
 			if (this.hasTooltip)
 			{
 				Registry.call("hideTooltip");
-				Registry.call("mastery_hideIconTooltip",iconType);
+				Registry.call("LLWEAPONEX_MasteryMenu_HideIconTooltip", iconType);
 				this.hasTooltip = false;
 			}
 		}

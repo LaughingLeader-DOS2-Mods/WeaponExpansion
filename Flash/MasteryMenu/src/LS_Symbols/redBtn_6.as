@@ -11,11 +11,11 @@ package LS_Symbols
 		public var text_txt:TextField;
 		public var base:MovieClip;
 		public var buttonType:Number;
-		public var buttonCallback:String = "buttonPressed";
+		public var buttonCallback:String = "LLWEAPONEX_MasteryMenu_ButtonPressed";
 		public var buttonState:Boolean;
 		public var disableTxt:String;
 		public var enableTxt:String;
-		public var textY:Number;
+		public var textY:Number = 12;
 		
 		public function redBtn_6()
 		{
@@ -23,9 +23,9 @@ package LS_Symbols
 			addFrameScript(0,this.frame1);
 		}
 		
-		public function setButtonType(param1:Number) : void
+		public function setButtonType(bType:Number) : void
 		{
-			this.buttonType = param1;
+			this.buttonType = bType;
 			this.text_txt.y = this.textY;
 		}
 

@@ -139,7 +139,7 @@ package menu
 		public function onOver(e:MouseEvent) : *
 		{
 			this.masteryFrame.onOver(e);
-			Registry.call("overMastery", this.id);
+			Registry.call("LLWEAPONEX_MasteryMenu_MasteryHovered", this.id);
 		}
 
 		public function onDown(e:MouseEvent) : *

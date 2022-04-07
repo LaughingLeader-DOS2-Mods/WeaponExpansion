@@ -13,10 +13,11 @@ package menu
 	import flash.geom.Point;
 	import desc.DescriptionList;
 	import LS_Symbols.buttonHintBar;
+	import LS_Symbols.redBtn_6;
 	
 	public dynamic class MasteryMenuPanel extends MovieClip
 	{
-		public var accept_mc:MovieClip;
+		public var accept_mc:redBtn_6;
 		public var btn_bg:MovieClip;
 		public var windowDragBG:MovieClip;
 		
@@ -172,8 +173,6 @@ package menu
 		public function setButtonText(str:String) : void
 		{
 			this.accept_mc.text_txt.htmlText = str;
-			this.accept_mc.setButtonType(2);
-			this.accept_mc.setButtonEvent("requestCloseUI");
 		}
 
 		public function addMastery(mastery:String, title:String, descriptionTitle:String, currentRank:uint, barPercentage:Number=0, isMastered:Boolean=false) : void
@@ -262,7 +261,7 @@ package menu
 			if (currentMC != null)
 			{
 				this.name_txt.htmlText = currentMC.masteryDescriptionTitle;
-				Registry.call("onMasterySelected", currentMC.id);
+				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", currentMC.id);
 			}
 		}
 		
@@ -314,7 +313,7 @@ package menu
 				this.masteryList.selectMC(nextMC);
 				this.masteryList.m_scrollbar_mc.m_animateScrolling = true;
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				Registry.call("onMasterySelected", nextMC.id);
+				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", nextMC.id);
 			}
 		}
 
@@ -331,7 +330,7 @@ package menu
 			if (nextMC != null)
 			{
 				this.name_txt.htmlText = nextMC.masteryDescriptionTitle;
-				Registry.call("onMasterySelected", nextMC.id);
+				Registry.call("LLWEAPONEX_MasteryMenu_MasterySelected", nextMC.id);
 			}
 		}
 		
@@ -391,6 +390,10 @@ package menu
 			{
 				this.initLists();
 				this._initialized = true;
+
+				this.accept_mc.text_txt.htmlText = "Close";
+				this.accept_mc.setButtonType(2);
+				this.accept_mc.setButtonEvent("LLWEAPONEX_MasteryMenu_RequestCloseUI");
 			}
 			this.masteryCount = 0;
 			this.m_isController = false;

@@ -8,7 +8,7 @@ package
 	import flash.geom.Rectangle;
 	import menu.MasteryMenuPanel;
 	
-	public dynamic class MainTimeline extends MovieClip
+	public class MainTimeline extends MovieClip
 	{
 		public var masteryMenuMC:MasteryMenuPanel;
 
@@ -45,40 +45,36 @@ package
 		{
 			Registry.call("registerAnchorId",this.anchorId);
 			Registry.call("setAnchor",this.anchorPos,this.anchorTarget,this.anchorTPos);
-			this.masteryMenuMC.visible = false;
 		}
 
 		public function onEventResolution(width:Number, height:Number) : void
 		{
-
+			Registry.call("LeaderLib_OnEventResolution", "WeaponExpansionMasteryMenu");
 		}
 
-		public function openMenu() : void
+		public function OpenMenu() : void
 		{
-			if (!this.masteryMenuMC.visible)
+			if (!this.active)
 			{
 				Registry.call("PlaySound","UI_Game_PauseMenu_Open");
 				Registry.call("focus");
 				Registry.call("inputfocus");
-				this.masteryMenuMC.visible = true;
 				this.stage.focus = this.lastFocus;
-
 				this.active = true;
 			}
 		}
 
-		public function closeMenu(skipRequest:Boolean = false) : void
+		public function CloseMenu(skipRequest:Boolean = false) : void
 		{
-			if (this.masteryMenuMC.visible)
+			if (this.active)
 			{
 				Registry.call("PlaySound","UI_Game_PauseMenu_Close");
 				//Registry.call("PlaySound","UI_Game_Inventory_Close");
 				if(!skipRequest) {
-					Registry.call("requestCloseUI");
+					Registry.call("LLWEAPONEX_MasteryMenu_RequestCloseUI");
 				}
 				Registry.call("inputFocusLost");
 				Registry.call("focusLost");
-				this.masteryMenuMC.visible = false;
 				lastFocus = stage.focus;
 				stage.focus = null;
 
@@ -88,13 +84,13 @@ package
 
 		public function toggleMenu() : void
 		{
-			if (this.masteryMenuMC.visible)
+			if (this.active)
 			{
-				this.closeMenu();
+				this.CloseMenu();
 			}
 			else
 			{
-				this.openMenu();
+				this.OpenMenu();
 			}
 			Registry.call("PlaySound","UI_Generic_Click");
 		}
@@ -116,7 +112,7 @@ package
 					case "IE UICancel":
 					case "IE ToggleInGameMenu":
 						handled = true;
-						closeMenu();
+						this.CloseMenu();
 						break;
 					case "IE UIUp":
 					case "IE UIDown":
@@ -215,7 +211,7 @@ package
 						handled = true;
 						if(this.active)
 						{
-							Registry.call("requestCloseMasteryMenu");
+							Registry.call("LLWEAPONEX_MasteryMenu_RequestCloseUI");
 						}
 					}
 					break;

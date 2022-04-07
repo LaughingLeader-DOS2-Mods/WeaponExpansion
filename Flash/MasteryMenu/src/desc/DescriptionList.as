@@ -22,7 +22,7 @@ package desc
 
 		public function clearIcons() : void
 		{
-			Registry.call("clearIcons", icon_index);
+			Registry.call("LLWEAPONEX_MasteryMenu_ClearIcons", icon_index);
 			this.icon_index = 0;
 		}
 
@@ -51,7 +51,7 @@ package desc
 					break;
 				default:
 					var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
-					Registry.call("registerIcon", iconIggyName, icon, iconType);
+					Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, icon, iconType);
 					entryContent.icon = "iggy_" + iconIggyName;
 					entryContent.createIcon();
 					this.icon_index = this.icon_index + 1;
@@ -71,8 +71,9 @@ package desc
 			}
 			catch(e)
 			{
-				return "";
+				Registry.call("UIAssert","[MasteryMenu:TryGetIconName] Error occurred when trying to get an icon name from array.");
 			}
+			return "";
 		}
 
 		private function TryGetIconType(arr:Array, i:int) : int
@@ -87,8 +88,9 @@ package desc
 			}
 			catch(e)
 			{
-				return 1;
+				Registry.call("UIAssert","[MasteryMenu:TryGetIconType] Error occurred when trying to get an icon type from array.");
 			}
+			return 1;
 		}
 
 		public function addIconGroup(ids:String, icons:String, types:String, reposition:Boolean = true, delimiter:String = ";") : *
@@ -134,7 +136,7 @@ package desc
 						break;
 					default:
 						var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
-						Registry.call("registerIcon", iconIggyName, iconName, iconType);
+						Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, iconName, iconType);
 						entryContent.icon = "iggy_" + iconIggyName;
 						entryContent.createIcon();
 						this.icon_index = this.icon_index + 1;

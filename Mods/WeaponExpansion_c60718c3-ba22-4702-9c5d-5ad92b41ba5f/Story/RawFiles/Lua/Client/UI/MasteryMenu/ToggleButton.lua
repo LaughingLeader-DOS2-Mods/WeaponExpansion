@@ -117,7 +117,7 @@ local ToggleButton = Classes.UIObjectExtended:Create({
 })
 
 Ext.RegisterUINameCall("LLWEAPONEX_MasteryMenu_ToggleMasteryMenu", function (ui, call)
-	if not MasteryMenu.Visible then
+	if not MasteryMenu.IsOpen then
 		MasteryMenu:Open()
 	else
 		MasteryMenu:Close()
