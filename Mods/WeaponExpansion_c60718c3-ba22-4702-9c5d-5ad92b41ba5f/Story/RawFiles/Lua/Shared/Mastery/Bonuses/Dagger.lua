@@ -44,7 +44,8 @@ local SneakingPassiveBonus = rb:Create("DAGGER_SNEAKINGBONUS", {
 })
 
 if not isClient then
-	local _SneakBonusEnabledOutsideOfCombat = Ext.IsDeveloperMode()
+	--For testing
+	Mastery.Variables.Bonuses.DaggerSneakBonusEnabledOutsideOfCombat = Ext.IsDeveloperMode()
 
 	local function IncreaseSneakingDamageBoost(target, turns)
 		local target = GameHelpers.GetCharacter(target)
@@ -68,13 +69,13 @@ if not isClient then
 	local function OnSneakingOrInvisible(bonuses, target, status, source, statusType)
 		Timer.Cancel("LLWEAPONEX_ClearDaggerSneakingBonus", target)
 		local target = GameHelpers.GetCharacter(target)
-		if GameHelpers.Character.IsInCombat(target) or _SneakBonusEnabledOutsideOfCombat then
+		if GameHelpers.Character.IsInCombat(target) or Mastery.Variables.Bonuses.DaggerSneakBonusEnabledOutsideOfCombat then
 			if PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target] == nil then
 				TurnCounter.CreateTurnCounter("LLWEAPONEX_Dagger_SneakingBonus", 0, 0,
 				TurnCounter.Mode.Increment, CombatGetIDForCharacter(target.MyGuid), {
 					Target = target.MyGuid,
 					Infinite = true,
-					CombatOnly = not _SneakBonusEnabledOutsideOfCombat
+					CombatOnly = not Mastery.Variables.Bonuses.DaggerSneakBonusEnabledOutsideOfCombat
 				})
 			end
 			IncreaseSneakingDamageBoost(target)
