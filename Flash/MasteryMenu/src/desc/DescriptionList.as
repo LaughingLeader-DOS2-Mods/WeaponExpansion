@@ -131,11 +131,15 @@ package desc
 						entryContent.createIcon_symbol();
 						break;
 					case "":
-						entryContent.icon = "iggy_masteryMenu_unknown";
+						if (iconType >= 2) {
+							entryContent.icon = "iggy_LLWEAPONEX_MasteryMenu_UnknownSmall";
+						} else {
+							entryContent.icon = "iggy_LLWEAPONEX_MasteryMenu_Unknown";
+						}
 						entryContent.createIcon();
 						break;
 					default:
-						var iconIggyName:String = "masteryMenu_" + String(this.icon_index);
+						var iconIggyName:String = "LLWEAPONEX_MasteryMenu_" + String(this.icon_index);
 						Registry.call("LLWEAPONEX_MasteryMenu_RegisterIcon", iconIggyName, iconName, iconType);
 						entryContent.icon = "iggy_" + iconIggyName;
 						entryContent.createIcon();

@@ -23,7 +23,10 @@ MasteryMenu = Classes.UIObjectExtended:Create({
 	DefaultUIFlags = Data.DefaultUIFlags | Data.UIFlags.OF_PlayerInput2 | Data.UIFlags.OF_PlayerInput3 | Data.UIFlags.OF_PlayerInput4,
 	ResolutionInitialized = true,
 	--OnVisibilityChanged = function (self, last, b) end,
+	---@param instance UIObject
 	OnInitialized = function (self, instance)
+		instance:SetCustomIcon("LLWEAPONEX_MasteryMenu_Unknown", "LeaderLib_Placeholder", 64, 64)
+		instance:SetCustomIcon("LLWEAPONEX_MasteryMenu_UnknownSmall", "unknown", 40, 40)
 		local this = instance:GetRoot()
 		if this then
 			self:BuildMasteryMenu(this)
@@ -318,12 +321,15 @@ function MasteryMenu:OnButtonPressed(buttonType, buttonState)
 
 end
 
+local _registeredIcons = {}
+
 function MasteryMenu:RegisterIcon(name, icon, iconType)
 	local ui = self.Instance
 	local iconSize = 64
 	if iconType >= 2 then
 		iconSize = 40
 	end
+	_registeredIcons[#_registeredIcons+1] = name
 	ui:ClearCustomIcon(name)
 	ui:SetCustomIcon(name, icon, iconSize, iconSize)
 end
@@ -331,8 +337,18 @@ end
 ---@private
 function MasteryMenu:ClearIcons(count)
 	local ui = self.Instance
-	for i=0,count do
-		ui:ClearCustomIcon(string.format("masteryMenu_%i", i))
+	if ui then
+		local totalRegistered = #_registeredIcons
+		if totalRegistered > 0 then
+			for i=1,totalRegistered do
+				ui:ClearCustomIcon(_registeredIcons[i])
+			end
+			_registeredIcons = {}
+		elseif count >= 0 then
+			for i=0,count-1 do
+				ui:ClearCustomIcon(string.format("LLWEAPONEX_MasteryMenu_%i", i))
+			end
+		end
 	end
 end
 
