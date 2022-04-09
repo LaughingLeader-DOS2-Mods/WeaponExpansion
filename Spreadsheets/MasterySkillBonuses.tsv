@@ -99,8 +99,9 @@ Throwing	1	Grenade	Basic grenades have a 25% chance to explode again.	❌	❌
 Throwing	2	Placeholder	Placeholder	❌	❌
 Throwing	3	Placeholder	Placeholder	❌	❌
 Throwing	4	Placeholder	Placeholder	❌	❌
-Unarmed	1	Way of the Fist	Melee weapon requirement skills can now be used while unarmed.	√	❌
-Unarmed	2	Placeholder	Placeholder	❌	❌
+Unarmed	1	Petrifying Slam (Dwarf Racial)	Knock the target back and deal additional damage.	√	√
+Unarmed	2	Whirlwind	Pull targets hit closer to you.	√	❌
+Unarmed	2	Blitz Attack	Lower the cooldown of a random Warfare skill for each target hit.	√	❌
 Unarmed	3	Placeholder	Placeholder	❌	❌
 Unarmed	4	Placeholder	Placeholder	❌	❌
 Wand	1	Flesh Sacrifice	Allies standing on blood surfaces gain a 5% damage bonus.	√	❌

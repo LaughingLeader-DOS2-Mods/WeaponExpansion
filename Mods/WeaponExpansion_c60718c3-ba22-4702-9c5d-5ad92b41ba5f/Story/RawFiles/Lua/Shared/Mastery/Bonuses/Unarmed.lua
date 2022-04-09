@@ -1,5 +1,6 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
+local isClient = Ext.IsClient()
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 1, {
 	rb:Create("UNARMED_PETRIFYING_SLAM", {
@@ -24,8 +25,65 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 1, {
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 2, {
-	
+	rb:Create("UNARMED_WHIRLWIND", {
+		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Unarmed_Whirlwind", "<font color='#FFCE58'>Targets hit are pulled in closer to you.</font>"),
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success then
+			local radius = Ext.StatGetAttribute(skill, "AreaRadius")
+			if radius >= 2 then
+				--Reduce the distance slightly so they don't land on top of you
+				radius = radius - 1
+			end
+			if radius > 0 then
+				GameHelpers.ForceMoveObject(char, data.Target, -radius, skill)
+			end
+		end
+	end),
+	rb:Create("UNARMED_BLINKSTRIKE", {
+		Skills = {"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Unarmed_BlinkStrike", "<font color='#FFCE58'>Lower the cooldown of a random [Handle:h8e4bebcbg21c7g43dag8b05gd3b13c1be651:Warfare]] skill for each target hit.</font>"),
+	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
+		if state == SKILL_STATE.HIT and data.Success then
+			if PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] == nil then
+				PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] = 0
+			end
+			PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] = PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] + 1
+			Timer.StartObjectTimer("LLWEAPONEX_Unarmed_BlinkStrikeBonus", char, 1000)
+		end
+	end),
 })
+
+if not isClient then
+	local loweredCooldownText = ts:CreateFromKey("LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus", "<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2]</font>")
+	Timer.RegisterListener("LLWEAPONEX_Unarmed_BlinkStrikeBonus", function (timerName, char)
+		local targetsHit = PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] or 0
+		if targetsHit > 0 then
+			local character = GameHelpers.GetCharacter(char)
+			if character then
+				local skills = {}
+				for i,v in pairs(character:GetSkills()) do
+					local skill = character:GetSkillInfo(v)
+					if skill.ActiveCooldown > 0 then
+						local ability = Ext.StatGetAttribute(v, "Ability")
+						if ability == "Warrior" then
+							skills[#skills+1] = v
+						end
+					end
+				end
+				if #skills > 0 then
+					local skill = Common.GetRandomTableEntry(skills)
+					local nextCooldown = math.max(0, character:GetSkillInfo(skill).ActiveCooldown - targetsHit)
+					GameHelpers.Skill.SetCooldown(char, skill, nextCooldown)
+					local displayNameKey = Ext.StatGetAttribute(skill, "DisplayName")
+					local name = GameHelpers.GetStringKeyText(displayNameKey)
+					CharacterStatusText(char, loweredCooldownText:ReplacePlaceholders(name, targetsHit))
+				end
+			end
+		end
+		PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] = nil
+	end)
+end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 3, {
 	

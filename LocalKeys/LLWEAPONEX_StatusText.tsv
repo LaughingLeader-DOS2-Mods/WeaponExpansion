@@ -33,3 +33,4 @@ LLWEAPONEX_StatusText_RunebladeRuneBlocked	<font color='#FF0000' size='22'>*This
 LLWEAPONEX_StatusText_BattleBook_BlessDamage	<font color='#C9AA58' size='22'>*Divine Knowledge*</font>	h97851202g90c0g492cg896bgf9491216d827
 LLWEAPONEX_StatusText_GasExpansion	<font color='#f7ba14'>Gas Expansion</font>	he772e2ccg5ef2g45b3g9665g2fa262dfcc9e
 LLWEAPONEX_StatusText_GasCreation	<font color='#65c900'>Gas Creation</font>	h704e1cebg3b19g4dadga2dbg6ba95dbe70f0
+LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus	<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2]</font>	hb08c211ag470fg4dc8gbd91ge51263a6be10
