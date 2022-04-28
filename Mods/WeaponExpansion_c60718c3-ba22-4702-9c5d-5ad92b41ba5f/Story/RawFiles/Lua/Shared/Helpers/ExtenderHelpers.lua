@@ -442,13 +442,13 @@ local RarityValue = {
 ---@param stat string
 ---@param level integer
 ---@param attribute string
----@param weaponType string
----@param damageFromBaseBoost integer
----@param isBoostStat boolean
----@param baseWeaponDamage number
+---@param weaponType string|nil
+---@param damageFromBaseBoost integer|nil
+---@param isBoostStat boolean|nil
+---@param baseWeaponDamage number|nil
 ---@param rarity string|nil
 ---@return StatItem
-function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage,rarity)
+function ExtenderHelpers.CreateWeaponTable(stat,level,attribute, weaponType,damageFromBaseBoost,isBoostStat,baseWeaponDamage,rarity)
 	local weapon = {}
 	weapon.ItemType = "Weapon"
 	weapon.Name = stat
@@ -515,7 +515,7 @@ function ExtenderHelpers.CreateWeaponTable(stat,level,attribute,weaponType,damag
 			local boosts = StringHelpers.Split(boostsString, ";")
 			for i,boostStat in pairs(boosts) do
 				if boostStat ~= nil and boostStat ~= "" then
-					local boostWeaponStat = CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage, rarity)
+					local boostWeaponStat = ExtenderHelpers.CreateWeaponTable(boostStat, level, attribute, weaponType, nil, true, damage, rarity)
 					if boostWeaponStat ~= nil then
 						table.insert(weapon.DynamicStats, boostWeaponStat.DynamicStats[1])
 					end
