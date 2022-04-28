@@ -1,8 +1,8 @@
 local isClient = Ext.IsClient()
 
----@alias MasteryBonusDataGetIsTooltipActiveCallback fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, idType:string, data:EsvStatus|StatEntrySkillData):boolean
+---@alias MasteryBonusDataGetIsTooltipActiveCallback fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, data:EsvStatus|StatEntrySkillData):boolean
 
----@class MasteryBonusData
+---@class MasteryBonusDataParams
 ---@field ID string
 ---@field Skills string[] Optional skills associated.
 ---@field Statuses string[] Optional statuses associated.
@@ -13,11 +13,15 @@ local isClient = Ext.IsClient()
 ---@field DisableStatusTooltip boolean
 ---@field NamePrefix TranslatedString|string
 ---@field GetIsTooltipActive MasteryBonusDataGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
----@field OnGetTooltip fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, isStatus:boolean):string|TranslatedString Custom callback to determine tooltip text dynamically.
+---@field OnGetTooltip fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID):string|TranslatedString Custom callback to determine tooltip text dynamically.
+
+---@alias MasteryBonusDataTooltipID string|'"skill"'|'"status"'|'"item"'
+
+---@class MasteryBonusData:MasteryBonusDataParams
 local MasteryBonusData = {
 	Type = "MasteryBonusData",
 	AllStatuses = false,
-	AllSkills = false,
+	AllSkills = false
 }
 
 setmetatable(MasteryBonusData, {
@@ -33,7 +37,7 @@ setmetatable(MasteryBonusData, {
 })
 
 ---@param id string
----@param params MasteryBonusData
+---@param params MasteryBonusDataParams|nil
 ---@return MasteryBonusData
 function MasteryBonusData:Create(id, params)
 	local this = {
@@ -83,7 +87,7 @@ function MasteryBonusData.DefaultStatusTagCheck(tag, checkSource)
 end
 
 ---@param callback WeaponExpansionMasterySkillListenerCallback
----@param checkBonusOn MasteryBonusCheckTarget
+---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterSkillListener(callback,
 	checkBonusOn)
@@ -95,7 +99,7 @@ end
 
 ---@param skillType string
 ---@param callback WeaponExpansionMasterySkillListenerCallback
----@param checkBonusOn MasteryBonusCheckTarget
+---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterSkillTypeListener(skillType, callback,
 	checkBonusOn)
@@ -108,7 +112,7 @@ end
 ---@param event StatusEventID
 ---@param callback MasteryBonusStatusCallback
 ---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
----@param checkBonusOn MasteryBonusCheckTarget
+---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterStatusListener(event, callback, 
 	specificStatuses, checkBonusOn)
@@ -121,7 +125,7 @@ end
 ---@param event StatusEventID
 ---@param callback MasteryBonusStatusCallback
 ---@param statusType string|string[]
----@param checkBonusOn MasteryBonusCheckTarget
+---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterStatusTypeListener(event, callback,
 	statusType, checkBonusOn)
@@ -133,8 +137,8 @@ end
 
 ---@param callback MasteryBonusStatusBeforeAttemptCallback
 ---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
----@param skipBonusCheck boolean
----@param checkBonusOn MasteryBonusCheckTarget
+---@param skipBonusCheck boolean|nil
+---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback,
 	specificStatuses, skipBonusCheck, checkBonusOn)
@@ -146,8 +150,8 @@ function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback,
 end
 
 ---@param callback BasicAttackOnHitCallback
----@param skipBonusCheck boolean
----@param priority integer
+---@param skipBonusCheck boolean|nil
+---@param priority integer|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterOnHit(callback,
 	skipBonusCheck, priority)
@@ -171,7 +175,7 @@ end
 
 ---@param tag string|string[]
 ---@param callback BasicAttackOnWeaponTagHitCallback
----@param skipBonusCheck boolean
+---@param skipBonusCheck boolean|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterOnWeaponTagHit(tag, callback, skipBonusCheck, priority)
 	if not isClient then
@@ -194,7 +198,7 @@ end
 
 ---@param weaponType string|string[]
 ---@param callback BasicAttackOnWeaponTypeHitCallback
----@param skipBonusCheck boolean
+---@param skipBonusCheck boolean|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterOnWeaponTypeHit(weaponType, callback, skipBonusCheck, priority)
 	if not isClient then
@@ -219,7 +223,7 @@ end
 ---@param arity integer
 ---@param state string
 ---@param callback function
----@param skipBonusCheck boolean
+---@param skipBonusCheck boolean|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, skipBonusCheck)
 	if not isClient then
@@ -321,11 +325,11 @@ end
 ---@param this MasteryBonusData
 ---@param character EclCharacter
 ---@param skillOrStatus string
----@param isStatus boolean
+---@param tooltipType MasteryBonusDataTooltipID|nil
 ---@return TranslatedString|string
-local function FinallyGetTooltipText(this, character, skillOrStatus, isStatus, ...)
+local function FinallyGetTooltipText(this, character, skillOrStatus, tooltipType, ...)
 	if this.OnGetTooltip then
-		local b,result = xpcall(this.OnGetTooltip, debug.traceback, this, skillOrStatus, character, isStatus, ...)
+		local b,result = xpcall(this.OnGetTooltip, debug.traceback, this, skillOrStatus, character, tooltipType, ...)
 		if b then
 			if result then
 				return result
@@ -334,7 +338,7 @@ local function FinallyGetTooltipText(this, character, skillOrStatus, isStatus, .
 			Ext.PrintError(result)
 		end
 	end
-	if isStatus then
+	if tooltipType == "status" then
 		return this.StatusTooltip or this.Tooltip
 	else
 		return this.Tooltip
@@ -344,10 +348,11 @@ end
 ---@param this MasteryBonusData
 ---@param character EclCharacter
 ---@param skillOrStatus string
+---@param tooltipType MasteryBonusDataTooltipID|nil
 ---@return TranslatedString|string
-local function TryGetTooltipText(this, character, skillOrStatus, isStatus, ...)
+local function TryGetTooltipText(this, character, skillOrStatus, tooltipType, ...)
 	if this.GetIsTooltipActive then
-		local b,result = xpcall(this.GetIsTooltipActive, debug.traceback, this, skillOrStatus, character, isStatus and "status" or "skill", ...)
+		local b,result = xpcall(this.GetIsTooltipActive, debug.traceback, this, skillOrStatus, character, tooltipType, ...)
 		if b then
 			if result == false then
 				return nil
@@ -357,22 +362,23 @@ local function TryGetTooltipText(this, character, skillOrStatus, isStatus, ...)
 		end
 	end
 
-	if isStatus then
+	if tooltipType == "status" then
 		if not this.DisableStatusTooltip and (this.AllStatuses or Common.TableHasEntry(this.Statuses, skillOrStatus)) then
-			return FinallyGetTooltipText(this, character, skillOrStatus, isStatus, ...)
+			return FinallyGetTooltipText(this, character, skillOrStatus, tooltipType, ...)
 		end
-	else
+	elseif tooltipType == "skill" or tooltipType == "item" then -- Items can have skill tooltip elements
 		if this.AllSkills or Common.TableHasEntry(this.Skills, skillOrStatus) then
-			return FinallyGetTooltipText(this, character, skillOrStatus, isStatus, ...)
+			return FinallyGetTooltipText(this, character, skillOrStatus, tooltipType, ...)
 		end
 	end
 end
 
 ---@param character EclCharacter
----@param skillOrStatus string
+---@param skillOrStatus string|nil
+---@param tooltipType MasteryBonusDataTooltipID|nil
 ---@return TranslatedString
-function MasteryBonusData:GetTooltipText(character, skillOrStatus, isStatus, ...)
-	local text = TryGetTooltipText(self, character, skillOrStatus, isStatus, ...)
+function MasteryBonusData:GetTooltipText(character, skillOrStatus, tooltipType, ...)
+	local text = TryGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
 	if text then
 		local t = type(text)
 		if t == "string" then

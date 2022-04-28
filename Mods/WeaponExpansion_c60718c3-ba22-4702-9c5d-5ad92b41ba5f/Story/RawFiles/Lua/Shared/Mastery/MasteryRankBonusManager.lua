@@ -489,32 +489,34 @@ function MasteryBonusManager.GetRankBonus(mastery, rank, id)
 end
 
 ---@param data MasteryBonusData
-local function EvaluateEntryForBonusText(data, character, skillOrStatus, isStatus, status, ...)
+---@param character EsvCharacter|EclCharacter
+---@param skillOrStatus string
+---@param tooltipType MasteryBonusDataTooltipID
+---@param status EclStatus|nil
+local function EvaluateEntryForBonusText(data, character, skillOrStatus, tooltipType, status, ...)
 	if data.Type == "MasteryBonusData" then
-		local bonusText = data:GetTooltipText(character, skillOrStatus, isStatus, status, ...)
+		local bonusText = data:GetTooltipText(character, skillOrStatus, tooltipType, status, ...)
 		if not StringHelpers.IsNullOrWhitespace(bonusText) then
 			return bonusText
 		end
 	else
 		--Old style
 		local bonusIsActive = true
-		if data.Active ~= nil then
-			if data.Active.Type == "Tag" then
-				if data.Active.Source == true and type(status) == "userdata" then
-					if status.StatusSourceHandle ~= nil then
-						local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
-						if source then
-							bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(source, data.Active.Value)
-						end
+		if data.Active ~= nil and data.Active.Type == "Tag" then
+			if data.Active.Source == true and type(status) == "userdata" then
+				if status.StatusSourceHandle ~= nil then
+					local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
+					if source then
+						bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(source, data.Active.Value)
 					end
-					bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
-				else
-					bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
 				end
+				bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
+			else
+				bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
 			end
 		end
 		if bonusIsActive then
-			local descriptionText = TooltipParams.GetDescriptionText(character, data, status, true)
+			local descriptionText = TooltipParams.GetDescriptionText(character, data, status, "status")
 			if not StringHelpers.IsNullOrWhitespace(descriptionText) then
 				return descriptionText
 			end
@@ -548,13 +550,14 @@ end
 
 ---@param character EsvCharacter|EclCharacter
 ---@param skillOrStatus string
-function MasteryBonusManager.GetBonusText(character, skillOrStatus, ...)
+---@param tooltipType MasteryBonusDataTooltipID
+function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, ...)
 	local textEntries = {}
 	for rankTag,tbl in MasteryBonusManager.GetOrderedMasteryRanks() do
 		if Mastery.HasMasteryRequirement(character, rankTag) then
 			local addedRankName = false
 			for _,v in pairs(tbl) do
-				local text = EvaluateEntryForBonusText(v, character, skillOrStatus, ...)
+				local text = EvaluateEntryForBonusText(v, character, skillOrStatus, tooltipType, ...)
 				if text then
 					if not addedRankName then
 						local rankName = GameHelpers.GetStringKeyText(rankTag, "")

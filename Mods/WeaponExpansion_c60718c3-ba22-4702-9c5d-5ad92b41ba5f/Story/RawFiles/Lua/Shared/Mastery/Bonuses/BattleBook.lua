@@ -61,14 +61,25 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		end
 	end),
 	rb:Create("BATTLEBOOK_SCROLLS", {
-		Skills = {},
+		AllSkills = true,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Scrolls", "<font color='#99AACC'>Gain [ExtraData:LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus] AP on use. Can only happen once per turn.</font>"),
+		---@param self MasteryBonusData
+		---@param skillOrStatus string
+		---@param character EclCharacter
+		---@param tooltipType MasteryBonusDataTooltipID
+		---@param data EsvStatus|StatEntrySkillData
+		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, data)
+			--Kind of a hack where the ItemTooltip code will send this function the value "scroll" to tell it to display the bonus text
+			if skillOrStatus ~= "scroll" or not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
+				return false
+			end
+		end,
 	}):RegisterOsirisListener("CharacterUsedItem", 2, "after", function(characterid, itemid)
 		local character = GameHelpers.GetCharacter(characterid)
 		local item = Ext.GetItem(itemid)
 		if character and item 
-		and not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") 
-		and GameHelpers.ItemHasTag(item, "SCROLLS") 
+		and not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP")
+		and GameHelpers.ItemHasTag(item, "SCROLLS")
 		or (GameHelpers.Item.IsObject(item) and string.find(item.StatsId, "SCROLL_")) then
 			local apBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus", 1)
 			if apBonus ~= 0 then

@@ -28,8 +28,8 @@ end)
 ---@param character EsvCharacter
 ---@param data table
 ---@param skillOrStatus string
----@param isStatus boolean
-function TooltipParams.GetDescriptionText(character, data, skillOrStatus, isStatus)
+---@param tooltipType MasteryBonusDataTooltipID
+function TooltipParams.GetDescriptionText(character, data, skillOrStatus, tooltipType)
 	local descriptionText = ""
 	local namePrefix = ""
 	if data.Tags ~= nil then
@@ -37,7 +37,6 @@ function TooltipParams.GetDescriptionText(character, data, skillOrStatus, isStat
 		for tagName,tagData in pairs(data.Tags) do
 			table.insert(tagKeys, tagName)
 		end
-		local count = #tagKeys
 		table.sort(tagKeys, sortTagParams)
 		for i,tagName in pairs(tagKeys) do
 			---@type MasteryBonusData
@@ -58,7 +57,7 @@ function TooltipParams.GetDescriptionText(character, data, skillOrStatus, isStat
 					tagLocalizedName = tagLocalizedName .. "<br>"
 				end
 				if tagData.Type == "MasteryBonusData" then
-					local text = tagData:GetTooltipText(skillOrStatus, character, isStatus)
+					local text = tagData:GetTooltipText(skillOrStatus, character, tooltipType)
 					if text ~= nil then
 						local t = type(text)
 						if t == "string" then
