@@ -22,6 +22,7 @@ secStat_array Mapping:
 
 local damageStatID = 6
 
+---@deprecated Moved to a Damage stat listener in StatTooltips.lua
 ---@param ui UIObject
 function SetCharacterSheetDamageText(ui, uuid)
 	local character = Ext.GetCharacter(uuid)
@@ -29,13 +30,18 @@ function SetCharacterSheetDamageText(ui, uuid)
 		local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
 		local i = 0
 		ui:SetValue("secStat_array", 1, i+1)
-		ui:SetValue("secStat_array", Ext.GetTranslatedString("h9531fd22g6366g4e93g9b08g11763cac0d86", "Damage"), i+2)
-		ui:SetValue("secStat_array", string.format("%i-%i", totalMin, totalMax), i+3)
+		ui:SetValue("secStat_array", LocalizedText.CharacterSheet.Damage.Value, i+2)
+		if totalMin ~= totalMax then
+			ui:SetValue("secStat_array", string.format("%i-%i", totalMin, totalMax), i+3)
+		else
+			ui:SetValue("secStat_array", string.format("%i", totalMax), i+3)
+		end
 		ui:SetValue("secStat_array", damageStatID, i+4)
 		ui:Invoke("updateArraySystem")
 	end
 end
 
+---@deprecated 
 ---@param ui UIObject
 local function OnCharacterSheetUpdating(ui, call, ...)
 	local params = {...}
