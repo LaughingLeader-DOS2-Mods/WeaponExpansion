@@ -540,7 +540,7 @@ THEN
 ENDIF
 	RETURN(_RemoveList, _Result, _Turns)
 
-EVENT LLWEAPONEX_SoulHarvester_DamageBonus
+EVENT LLWEAPONEX_UnrelentingRage_DamageBonus
 VARS
 	CHARACTER:_Target
 	LIST<STATUS>:_RemoveList
