@@ -1,5 +1,5 @@
 ---@type TranslatedString
-local ts = LeaderLib.Classes.TranslatedString
+local ts = Classes.TranslatedString
 ---@type MasteryData
 local MasteryData = MasteryDataClasses.MasteryData
 

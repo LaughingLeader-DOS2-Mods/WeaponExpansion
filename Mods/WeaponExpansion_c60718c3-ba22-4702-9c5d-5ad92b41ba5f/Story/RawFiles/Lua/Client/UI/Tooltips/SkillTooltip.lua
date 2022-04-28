@@ -1,15 +1,15 @@
 ---@type TranslatedString
-local ts = LeaderLib.Classes.TranslatedString
+local ts = Classes.TranslatedString
 
 ---@type table<string,fun(character:EsvCharacter):string>
 local AlternativeScaling = {
 	---@param character EsvCharacter
 	Target_LLWEAPONEX_Steal = function(character)
 		return Text.SkillScaling.AttributeAndAbility:ReplacePlaceholders(LocalizedText.AbilityNames.RogueLore.Value, LocalizedText.AttributeNames[Skills.GetHighestAttribute(character.Stats, AttributeScaleTables.NoMemory)].Value)
-	end	
+	end
 }
 
----@type table<string, ts>
+---@type table<string, TranslatedString>
 local AbilitySchool = {
 	Target_LLWEAPONEX_Steal = Text.NewAbilitySchools.Pirate,
 	Shout_LLWEAPONEX_OpenMenu = Text.Game.WeaponExpansion,
@@ -107,8 +107,10 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
+	local characterTags = GameHelpers.GetAllTags(character, true, true)
+
 	for tag,callback in pairs(Tags.SkillBonusText) do
-		if GameHelpers.CharacterOrEquipmentHasTag(character, tag) then
+		if characterTags[tag] then
 			local b,text,appendToSkillProperties = xpcall(callback, debug.traceback, character, skill, tag, tooltip)
 			if b then
 				if text ~= nil then
@@ -257,7 +259,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	local bonusText = MasteryBonusManager.GetBonusText(character, skill, false)
+	local bonusText = MasteryBonusManager.GetBonusText(character, skill, "skill")
 	if bonusText then
 		if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
 			descriptionElement.Label = descriptionElement.Label .. "<br>"
@@ -265,8 +267,8 @@ local function OnSkillTooltip(character, skill, tooltip)
 		descriptionElement.Label = descriptionElement.Label .. bonusText
 	end
 
-	if Mastery.HasMinimumMasteryLevel(character, MasteryID.Crossbow, 1) 
-	and GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Crossbow_Equipped") 
+	if Mastery.HasMinimumMasteryLevel(character, MasteryID.Crossbow, 1)
+	and characterTags["LLWEAPONEX_Crossbow_Equipped"]
 	and Mastery.Variables.Bonuses.IsStillStanceSkill(skill) then
 		local sp = tooltip:GetElement("SkillProperties")
 		if sp then
@@ -281,7 +283,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	if character:HasTag("LLWEAPONEX_Firearm_Equipped") and not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
+	if characterTags["LLWEAPONEX_Firearm_Equipped"] and not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
 		descriptionElement.Label = descriptionElement.Label:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
 	end
 	-- if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then

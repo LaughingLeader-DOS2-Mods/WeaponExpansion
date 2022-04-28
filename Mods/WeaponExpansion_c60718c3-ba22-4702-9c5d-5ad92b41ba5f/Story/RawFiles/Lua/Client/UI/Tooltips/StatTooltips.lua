@@ -1,5 +1,5 @@
 ---@type TranslatedString
-local ts = LeaderLib.Classes.TranslatedString
+local ts = Classes.TranslatedString
 
 local totalDamageText = ts:Create("h1035c3e5gc73dg4cc4ga914ga03a8a31e820", "Total damage: [1]-[2]")
 --local weaponDamageText = Ext.GetTranslatedString("hfa8c138bg7c52g4b7fgaccdgbe39e6a3324c", "<br>From Weapon: [1]-[2]")
@@ -20,7 +20,7 @@ local fromOffhandText = ts:Create("hfe5601bdg2912g4beag895eg6c28772311fb", "From
 local function OnDamageStatTooltip(character, stat, tooltip)
 	if UnarmedHelpers.HasUnarmedWeaponStats(character.Stats) then
 		local weapon,boost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats)
-		local isLizard = character:HasTag("LIZARD")
+		local isLizard = UnarmedHelpers.IsLizard(character)
 
 		if boost > 0 then
 			local valueSymbol = "+"
@@ -35,8 +35,8 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 			tooltip:AppendElementAfter(element, "StatsGearBoostNormal")
 		end
 
-		if hasUnarmedWeapon or not isLizard then
-			local damageList,baseMin,baseMax,totalMin,totalMax = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, false, false)
+		if not isLizard then
+			local _,baseMin,baseMax,totalMin,totalMax = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, false, false)
 
 			local totalDamageFinalText = totalDamageText:ReplacePlaceholders(totalMin, totalMax)
 			local weaponDamageFinalText = not hasUnarmedWeapon and fromFistsText:ReplacePlaceholders(baseMin, baseMax) or fromUnarmedWeaponText:ReplacePlaceholders(baseMin, baseMax)
@@ -86,7 +86,7 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 				end
 			end
 			if not addedAttBoost then
-				element = {
+				local element = {
 					Type = "StatsPercentageBoost",
 					Label = fromText:ReplacePlaceholders(attributeText, valueSymbol, attPercentage)
 				}

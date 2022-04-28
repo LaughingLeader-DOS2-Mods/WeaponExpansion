@@ -43,7 +43,7 @@ local function OnStatusTooltip(character, status, tooltip)
 			Label=text
 		})
 	end
-	local bonusText = MasteryBonusManager.GetBonusText(character, status.StatusId, true, status)
+	local bonusText = MasteryBonusManager.GetBonusText(character, status.StatusId, "status", status)
 	if bonusText then
 		local description = tooltip:GetElement("StatusDescription") or tooltip:AppendElement({Type="StatusDescription", Label = ""})
 		if not StringHelpers.IsNullOrWhitespace(description.Label) then

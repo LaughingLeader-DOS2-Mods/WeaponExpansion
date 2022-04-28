@@ -1,6 +1,9 @@
 ---@type TranslatedString
-local ts = LeaderLib.Classes.TranslatedString
+local ts = Classes.TranslatedString
 
+if ItemTooltipParams == nil then
+	ItemTooltipParams = {}
+end
 
 ---@param tooltip TooltipData
 ---@param item EsvCharacter
@@ -97,8 +100,8 @@ local TwoHandedText = ts:Create("h3fb5cd5ag9ec8g4746g8f9cg03100b26bd3a", "Two-Ha
 
 ---@class WeaponTypeNameEntry
 ---@field Tag string
----@field Text ts
----@field TwoHandedText ts|nil
+---@field Text TranslatedString
+---@field TwoHandedText TranslatedString|nil
 
 local UniqueWeaponTypeTags = {
 	LLWEAPONEX_UniqueBokken1H = ts:Create("h5264ef62gdc22g401fg8b62g303379cd7693", "Wooden Katana"),
@@ -107,6 +110,8 @@ local UniqueWeaponTypeTags = {
 }
 
 UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken2H = UniqueWeaponTypeTags.LLWEAPONEX_UniqueBokken1H
+
+ItemTooltipParams.UniqueWeaponTypeTags = UniqueWeaponTypeTags
 
 ---@type WeaponTypeNameEntry[]
 local WeaponTypeNames = {
@@ -129,6 +134,8 @@ local WeaponTypeNames = {
 }
 --WeaponTypeNames.LLWEAPONEX_CombatShield = WeaponTypeNames.LLWEAPONEX_DualShields
 
+ItemTooltipParams.WeaponTypeNames = WeaponTypeNames
+
 local weaponTypePreferenceOrder = {
 	"LLWEAPONEX_Rapier",
 	"LLWEAPONEX_RunicCannon",
@@ -146,6 +153,8 @@ local weaponTypePreferenceOrder = {
 	"LLWEAPONEX_Firearm",
 }
 
+ItemTooltipParams.WeaponTypePreferenceOrder = weaponTypePreferenceOrder
+
 ---@class StatProperty
 ---@field Type string Status|Action
 ---@field Action string LLWEAPONEX_UNARMED_NOWEAPON_HIT etc
@@ -161,10 +170,8 @@ local weaponTypePreferenceOrder = {
 ---@param tooltip TooltipData
 ---@param character EclCharacter
 ---@param weaponTypeTag string
----@param weaponTypeTag string
 ---@param slotTag string
----@param weaponDamageFunction function
-local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotTag, weaponDamageFunction)
+local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotTag)
 	tooltip:RemoveElements("EmptyRuneSlot")
 	tooltip:RemoveElements("RuneSlot")
 	tooltip:RemoveElements("RuneEffect")
@@ -247,12 +254,6 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 		end
 	end
 end
-
-local EquipmentTypes = {
-	Shield = true,
-	Weapon = true,
-	Armor = true,
-}
 
 function GetItemTypeText(item)
 	for tag,t in pairs(UniqueWeaponTypeTags) do
@@ -337,13 +338,13 @@ local function OnItemTooltip(item, tooltip)
 		local renamedArmorSlotType = false
 
 		if character ~= nil then
-			if GameHelpers.ItemHasTag("LLWEAPONEX_Pistol") then
+			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_Pistol") then
 				local damageRange = Skills.DamageFunctions.PistolDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
-			elseif GameHelpers.ItemHasTag("LLWEAPONEX_HandCrossbow") then
+			elseif GameHelpers.ItemHasTag(item, "LLWEAPONEX_HandCrossbow") then
 				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
@@ -475,7 +476,8 @@ local function OnItemTooltip(item, tooltip)
 				if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
 					local bonus = MasteryBonusManager.GetRankBonus(MasteryID.BattleBook, 2, "BATTLEBOOK_SCROLLS")
 					if bonus then
-						local text = GameHelpers.Tooltip.ReplacePlaceholders(bonus:GetTooltipText(character), character)
+						--Kind of a hack. "scroll" isn't a skill, but the bonus GetIsTooltipActive function will look for it, and is set to display for AllSkills.
+						local text = GameHelpers.Tooltip.ReplacePlaceholders(bonus:GetTooltipText(character, "scroll", "item"), character)
 						if text then
 							local rankName = GameHelpers.GetStringKeyText("LLWEAPONEX_BattleBook_Mastery2", "")
 							if not StringHelpers.IsNullOrWhitespace(rankName) then

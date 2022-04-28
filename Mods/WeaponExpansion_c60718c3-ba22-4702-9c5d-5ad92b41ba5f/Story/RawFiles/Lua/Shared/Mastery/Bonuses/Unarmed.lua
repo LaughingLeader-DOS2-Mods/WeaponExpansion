@@ -42,7 +42,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 2, {
 	end),
 	rb:Create("UNARMED_BLINKSTRIKE", {
 		Skills = {"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Unarmed_BlinkStrike", "<font color='#FFCE58'>Lower the cooldown of a random [Handle:h8e4bebcbg21c7g43dag8b05gd3b13c1be651:Warfare]] skill for each target hit.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Unarmed_BlinkStrike", "<font color='#FFCE58'>Lower the cooldown of a random [Handle:h8e4bebcbg21c7g43dag8b05gd3b13c1be651:Warfare] skill for each target hit.</font>"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.HIT and data.Success then
 			if PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] == nil then
