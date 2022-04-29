@@ -233,15 +233,14 @@ function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item, skipDualWie
 	return damageRange,highestAttribute
 end
 
-local function statMatchOrNil(stat, name)
-	return stat == nil or (stat ~= nil and stat.Name == name)
-end
-
 ---@param stat StatEntryWeapon
-local function isUnarmedWeaponStat(stat)
-	if stat == nil or stat.Name == "NoWeapon" then
+function UnarmedHelpers.IsUnarmedWeaponStat(stat)
+	if stat == nil then
 		return true
 	else
+		if stat.Name == "NoWeapon" or UnarmedWeaponStats[stat.Name] then
+			return true
+		end
 		if not StringHelpers.IsNullOrWhitespace(stat.Tags) and 
 		Common.TableHasValue(StringHelpers.Split(stat.Tags, ";"), "LLWEAPONEX_Unarmed") then
 			return true
@@ -261,6 +260,7 @@ local function isUnarmedWeaponStat(stat)
 end
 
 ---@param char StatCharacter
+---@param allowShields boolean|nil
 function UnarmedHelpers.HasUnarmedWeaponStats(char, allowShields)
 	local character = nil
 	if GameHelpers.Ext.ObjectIsStatCharacter(char) then
@@ -275,10 +275,8 @@ function UnarmedHelpers.HasUnarmedWeaponStats(char, allowShields)
 	end
 	if character then
 		local hasValidOffhand = (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield") or character.OffHandWeapon == nil
-		local isUnarmedStats = statMatchOrNil(character.MainWeapon, "NoWeapon") and (statMatchOrNil(character.OffHandWeapon, "NoWeapon") or hasValidOffhand)
-		if isUnarmedStats then
-			return true
-		elseif isUnarmedWeaponStat(character.MainWeapon) and (isUnarmedWeaponStat(character.OffHandWeapon) or hasValidOffhand) then
+		if UnarmedHelpers.IsUnarmedWeaponStat(character.MainWeapon)
+		and (UnarmedHelpers.IsUnarmedWeaponStat(character.OffHandWeapon) or hasValidOffhand) then
 			return true
 		end
 	end
@@ -296,12 +294,6 @@ function UnarmedHelpers.IsUnarmedWeapon(uuid)
 		end
 	end
 	return false
-end
-
----@param mainhand string
----@param offhand string
-function UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand)
-	return UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand)
 end
 
 ---@param character EsvCharacter|EclCharacter
