@@ -231,7 +231,8 @@ local function Init()
 	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
 
 	RegisterListener("OnWorldTooltip", OnWorldTooltip)
-	LeaderLib.UI.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
+	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
+	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_SwordofVictory_Equipped")
 end
 return {
 	Init = Init
