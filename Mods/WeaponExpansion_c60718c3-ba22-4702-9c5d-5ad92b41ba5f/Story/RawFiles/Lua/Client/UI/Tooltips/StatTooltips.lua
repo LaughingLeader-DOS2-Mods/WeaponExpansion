@@ -37,9 +37,8 @@ local function OnDamageStatTooltip(character, stat, tooltip)
 
 		if not isLizard then
 			local _,baseMin,baseMax,totalMin,totalMax = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, false, false)
-
 			local totalDamageFinalText = totalDamageText:ReplacePlaceholders(totalMin, totalMax)
-			local weaponDamageFinalText = not hasUnarmedWeapon and fromFistsText:ReplacePlaceholders(baseMin, baseMax) or fromUnarmedWeaponText:ReplacePlaceholders(baseMin, baseMax)
+			local weaponDamageFinalText = hasUnarmedWeapon ~= true and fromFistsText:ReplacePlaceholders(baseMin, baseMax) or fromUnarmedWeaponText:ReplacePlaceholders(baseMin, baseMax)
 			-- From Fists
 			local element = tooltip:GetElement("StatsGearBoostNormal")
 			element.Label = weaponDamageFinalText

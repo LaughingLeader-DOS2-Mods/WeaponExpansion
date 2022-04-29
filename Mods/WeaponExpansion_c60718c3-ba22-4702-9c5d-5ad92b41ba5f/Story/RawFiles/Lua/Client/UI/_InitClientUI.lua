@@ -41,7 +41,6 @@ function SetCharacterSheetDamageText(ui, uuid)
 	end
 end
 
----@deprecated 
 ---@param ui UIObject
 local function OnCharacterSheetUpdating(ui, call, ...)
 	local params = {...}
@@ -77,8 +76,6 @@ Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(call, 
 		Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", uuid)
 	end
 end)
-
-Ext.RegisterUITypeInvokeListener(Data.UIType.characterSheet, "updateArraySystem", OnCharacterSheetUpdating)
 
 Ext.RegisterNetListener("LLWEAPONEX_DisplayOverheadDamage", function(cmd, payload)
 	local data = Common.JsonParse(payload)
@@ -121,6 +118,15 @@ Ext.RegisterListener("SessionLoaded", function()
 				return skills
 			end
 		end)
+
+		---@param entry SheetManager.StatsUIEntry
+		---@param player EclCharacter
+		Mods.CharacterExpansionLib.SheetManager:RegisterEntryUpdatingListener("Damage", function (entry, player)
+			local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(player)
+			entry.Value = string.format("%i-%i", totalMin, totalMax)
+		end)
+	else
+		Ext.RegisterUITypeInvokeListener(Data.UIType.characterSheet, "updateArraySystem", OnCharacterSheetUpdating)
 	end
 end)
 

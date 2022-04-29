@@ -203,7 +203,7 @@ function EquipmentManager:CheckForUnarmed(character, isPlayer, newlyEquipped)
 		GameHelpers.Skill.Swap(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack", "Target_SingleHandedAttack", true, false)
 	else
 		local hasSkill = CharacterHasSkill(character.MyGuid, "Target_LLWEAPONEX_SinglehandedAttack") == 1
-		if UnarmedHelpers.IsUnarmed(character) then
+		if UnarmedHelpers.HasEmptyHands(character) then
 			if not hasSkill then
 				GameHelpers.Skill.Swap(character.MyGuid, "Target_SingleHandedAttack", "Target_LLWEAPONEX_SinglehandedAttack", true, false)
 			end

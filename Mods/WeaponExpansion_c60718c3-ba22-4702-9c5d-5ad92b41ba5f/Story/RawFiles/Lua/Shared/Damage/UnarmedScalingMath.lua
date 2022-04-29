@@ -45,7 +45,8 @@ local function ComputeBaseWeaponDamage(weapon)
         if stat.StatsType == "Weapon" then
             damageBoost = damageBoost + stat.DamageBoost
 
-            if stat.DamageType ~= "None" then
+            --Changed to allow "Pure" damage
+            if stat.DamageFromBase > 0 then
                 local dmgType = stat.DamageType
                 local dmgFromBase = stat.DamageFromBase * 0.01
                 local minDamage = stat.MinDamage
@@ -113,7 +114,7 @@ local function CalculateWeaponScaledDamageRanges(character, weapon, isDualWieldi
 		baseMax = baseMax + damage.Max
     end
 
-    local boost = character.DamageBoost 
+    local boost = character.DamageBoost
         + ComputeWeaponCombatAbilityBoost(character, weapon, isDualWielding)
         + ComputeWeaponRequirementScaledDamage(character, weapon, attribute)
     boost = boost / 100.0
@@ -142,16 +143,19 @@ local function CalculateWeaponScaledDamage(character, weapon, damageList, noRand
 	local totalMin,totalMax = 0,0
 
 	for damageType, damage in pairs(damages) do
-		totalMin = totalMin + damage.Min
-        local randRange = math.max(1, damage.Max - damage.Min)
-        local finalAmount
+        totalMin = totalMin + damage.Min
+        local randRange = 1
+        if damage.Max - damage.Min + 1 >= 1 then
+            randRange = damage.Max - damage.Min + 1
+        end
+        local finalAmount = 0
 		
         if noRandomization then
             finalAmount = damage.Min + math.floor(randRange / 2)
         else
             finalAmount = damage.Min + Ext.Random(0, randRange)
         end
-		
+
 		totalMax = totalMax + finalAmount
         damageList:Add(damageType, finalAmount)
 	end

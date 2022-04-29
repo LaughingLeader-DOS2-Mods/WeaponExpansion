@@ -51,35 +51,34 @@ end
 ---@return EsvItem|EclItem
 local function GetEquippedUnarmedArmor(character)
 	local foundItems = {}
-	if isClient then
+	-- if isClient then
+	-- 	for slot,b in pairs(_SLOTS) do
+	-- 		local item = character:GetItemBySlot(slot)
+	-- 		if item and GameHelpers.ItemHasTag(item, _UNARMEDTAGS) then
+	-- 			foundItems[#foundItems+1] = item
+	-- 		end
+	-- 	end
+	-- end
+	if not isClient and not Ext.OsirisIsCallable() then
 		for slot,b in pairs(_SLOTS) do
-			local item = character:GetItemBySlot(slot)
-			if item and GameHelpers.ItemHasTag(item, _UNARMEDTAGS) then
-				foundItems[#foundItems+1] = item
+			local statItem = character.Stats:GetItemBySlot(slot)
+			if statItem and GameHelpers.StatItemHasTag(statItem, _UNARMEDTAGS) then
+				foundItems[#foundItems+1] = statItem
 			end
 		end
 	else
-		if not Ext.OsirisIsCallable() then
-			for slot,b in pairs(_SLOTS) do
-				local statItem = character.Stats:GetItemBySlot(slot)
-				if statItem and GameHelpers.StatItemHasTag(statItem, _UNARMEDTAGS) then
-					foundItems[#foundItems+1] = statItem
-				end
-			end
-		else
-			local items = character:GetInventoryItems()
-			for i=1,math.min(#items, 14) do
-				if items[i] then
-					local item = Ext.GetItem(items[i])
-					if item and not GameHelpers.Item.IsObject(item) and GameHelpers.ItemHasTag(item, _UNARMEDTAGS) then
-						if isClient then
-							if _SLOTS[item.Stats.ItemSlot] == true  then
-								foundItems[#foundItems+1] = item
-							end
-						else
-							if _SLOTS[Data.EquipmentSlotNames[item.Slot]] == true then
-								foundItems[#foundItems+1] = item
-							end
+		local items = character:GetInventoryItems()
+		for i=1,math.min(#items, 14) do
+			if items[i] then
+				local item = Ext.GetItem(items[i])
+				if item and not GameHelpers.Item.IsObject(item) and GameHelpers.ItemHasTag(item, _UNARMEDTAGS) then
+					if isClient then
+						if _SLOTS[item.Stats.ItemSlot] == true  then
+							foundItems[#foundItems+1] = item
+						end
+					else
+						if _SLOTS[Data.EquipmentSlotNames[item.Slot]] == true then
+							foundItems[#foundItems+1] = item
 						end
 					end
 				end
@@ -93,31 +92,33 @@ end
 ---@return integer
 function UnarmedHelpers.GetUnarmedMasteryRank(character)
 	local unarmedMasteryRank = 0
-	local characterTags = GameHelpers.GetAllTags(character.Character, true, true)
-	for i=1,Mastery.Variables.MaxRank,1 do
-		local tag = "LLWEAPONEX_Unarmed_Mastery" .. i
-		if characterTags[tag] then
-			unarmedMasteryRank = i
+	character = GameHelpers.GetCharacter(character)
+	if character then
+		local characterTags = GameHelpers.GetAllTags(character, true, true)
+		for i=1,Mastery.Variables.MaxRank,1 do
+			local tag = "LLWEAPONEX_Unarmed_Mastery" .. i
+			if characterTags[tag] then
+				unarmedMasteryRank = i
+			end
 		end
 	end
 	return unarmedMasteryRank
 end
 
 ---@param character StatCharacter
----@param skipItemCheck boolean|nil
----@param statItem StatItem|nil
+---@param statItem StatItem|boolean|nil If set, this stat will be used instead of NoWeapon. Set to false to skip trying to find an equipped unarmed item.
 ---@return StatItem,number,integer,string,boolean
-function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck, statItem)
+function UnarmedHelpers.GetUnarmedWeapon(character, statItem)
 	local hasUnarmedWeapon = false
 	local weaponStat = "NoWeapon"
 	local level = character.Level
-	if skipItemCheck ~= true and statItem == nil then
-		for item in pairs(GetEquippedUnarmedArmor(character.Character)) do
+	if statItem == nil then
+		for _,item in pairs(GetEquippedUnarmedArmor(character.Character)) do
 			local unarmedWeaponStat = nil
 			if GameHelpers.Ext.ObjectIsItem(item) then
-				unarmedWeaponStat = UnarmedWeaponStats[item.StatsId]
+				unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(item.StatsId)
 			elseif GameHelpers.Ext.ObjectIsStatItem(item) then
-				unarmedWeaponStat = UnarmedWeaponStats[item.Name]
+				unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(item.Name)
 			end
 			if unarmedWeaponStat ~= nil then
 				weaponStat = unarmedWeaponStat
@@ -127,8 +128,8 @@ function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck, statItem)
 			end
 		end
 	end
-	if statItem ~= nil then
-		local unarmedWeaponStat = UnarmedWeaponStats[statItem.Name]
+	if not hasUnarmedWeapon and statItem then
+		local unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(statItem.Name)
 		if unarmedWeaponStat ~= nil then
 			weaponStat = unarmedWeaponStat
 			hasUnarmedWeapon = true
@@ -139,7 +140,7 @@ function UnarmedHelpers.GetUnarmedWeapon(character, skipItemCheck, statItem)
 	local unarmedMasteryRank = UnarmedHelpers.GetUnarmedMasteryRank(character.Character)
 	local unarmedMasteryBoost = UnarmedHelpers.GetMasteryBoost(unarmedMasteryRank)
 	---@type StatItem
-	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, level, highestAttribute, "Club", unarmedMasteryBoost)
+	local weapon = GameHelpers.Ext.CreateWeaponTable(weaponStat, level, highestAttribute, "Club", unarmedMasteryBoost)
 	--print("Unarmed weapon:", Common.Dump(weapon), getmetatable(character.Character))
 	--print(getmetatable(character), type(getmetatable(character)))
 	return weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon
@@ -150,29 +151,29 @@ end
 ---@return StatItem Weapon table
 ---@return integer Highest attribute
 function UnarmedHelpers.CreateUnarmedWeaponTable(character, statItem)
-	local hasUnarmedWeapon = false
 	local weaponStat = "NoWeapon"
 	local level = character.Level
 	if statItem ~= nil then
-		local unarmedWeaponStat = UnarmedWeaponStats[statItem.Name]
+		local unarmedWeaponStat = UnarmedHelpers.GetAssociatedStats(statItem.Name)
 		if unarmedWeaponStat ~= nil then
 			weaponStat = unarmedWeaponStat
-			hasUnarmedWeapon = true
 			level = statItem.Level
 		end
 	end
 	local highestAttribute = Skills.GetHighestAttribute(character, unarmedAttributes)
 	local unarmedMasteryRank = UnarmedHelpers.GetUnarmedMasteryRank(character.Character)
 	local unarmedMasteryBoost = UnarmedHelpers.GetMasteryBoost(unarmedMasteryRank)
-	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, level, highestAttribute, "Club", unarmedMasteryBoost)
+	local weapon = GameHelpers.Ext.CreateWeaponTable(weaponStat, level, highestAttribute, "Club", unarmedMasteryBoost, false)
 	return weapon,highestAttribute
 end
 
 ---@param character EclCharacter
 function UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
 	local isLizard = UnarmedHelpers.IsLizard(character)
-	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats, true)
+
+	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats)
 	local damageList,baseMin,baseMax,totalMin,totalMax = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, isLizard, false)
+
 	if isLizard then
 		local damageList2,baseMin2,baseMax2,totalMin2,totalMax2 = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, true, highestAttribute, isLizard, true)
 		baseMin = baseMin + baseMin2
@@ -187,7 +188,7 @@ end
 ---@param skipDualWielding boolean|nil Skip calculating dual-wielding damage (Lizards) if true.
 ---@return table<string,number[]>,string
 function UnarmedHelpers.GetBaseUnarmedDamageRange(character, skipDualWielding)
-	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, true)
+	local noWeapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, false)
 	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, noWeapon)
 	if skipDualWielding ~= true and UnarmedHelpers.IsLizard(character.Character) then
 		local offHandDamageRange = Common.CopyTable(damageRange, true)
@@ -213,7 +214,7 @@ end
 ---@param skipDualWielding boolean|nil Skip calculating dual-wielding damage (Lizards) if true.
 ---@return table<string,number[]>,string
 function UnarmedHelpers.GetUnarmedWeaponDamageRange(character, item, skipDualWielding)
-	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, true, item)
+	local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character, item)
 	local damageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
 	if skipDualWielding ~= true and UnarmedHelpers.IsLizard(character.Character) then
 		local offHandDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
@@ -238,11 +239,10 @@ function UnarmedHelpers.IsUnarmedWeaponStat(stat)
 	if stat == nil then
 		return true
 	else
-		if stat.Name == "NoWeapon" or UnarmedWeaponStats[stat.Name] then
+		if stat.Name == "NoWeapon" or UnarmedHelpers.GetAssociatedStats(stat.Name) then
 			return true
 		end
-		if not StringHelpers.IsNullOrWhitespace(stat.Tags) and 
-		Common.TableHasValue(StringHelpers.Split(stat.Tags, ";"), "LLWEAPONEX_Unarmed") then
+		if not StringHelpers.IsNullOrWhitespace(stat.Tags) and string.find(stat.Tags, "LLWEAPONEX_UnarmedWeaponEquipped") then
 			return true
 		end
 		for _,v in pairs(stat.DynamicStats) do
@@ -297,6 +297,6 @@ function UnarmedHelpers.IsUnarmedWeapon(uuid)
 end
 
 ---@param character EsvCharacter|EclCharacter
-function UnarmedHelpers.IsUnarmed(character)
+function UnarmedHelpers.HasEmptyHands(character)
 	return character.Stats:GetItemBySlot("Weapon") == nil and character.Stats:GetItemBySlot("Shield") == nil
 end

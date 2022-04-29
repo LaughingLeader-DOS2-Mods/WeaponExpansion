@@ -68,7 +68,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
 			if coverData ~= nil and coverData.CanCounterAttack == true then
 				local blocker = coverData.Blocker
-				if blocker ~= nil 
+				if blocker ~= nil
 				and CharacterIsDead(blocker) == 0
 				and CharacterIsEnemy(blocker, source) == 1
 				and CharacterCanSee(blocker, source) == 1
@@ -161,6 +161,13 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 					-- Unarmed
 					if UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand) then
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, "LLWEAPONEX_Unarmed")
+						local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(source.Stats)
+						if weapon then
+							local executeSkill = UnarmedData.ExecuteSkillProperties[weapon.Name]
+							if executeSkill then
+								Ext.ExecuteSkillPropertiesOnTarget(executeSkill, source.MyGuid, target.MyGuid, target.WorldPos, "Target", false)
+							end
+						end
 					else
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid)
 					end

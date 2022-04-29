@@ -297,9 +297,10 @@ local function OnItemTooltip(item, tooltip)
 		end
 	end
 
+	local _TAGS = GameHelpers.GetItemTags(item, true, false)
+
 	if not GameHelpers.Item.IsObject(item) then
-		if not item:HasTag("LeaderLib_AutoLevel") 
-		and item:HasTag("LLWEAPONEX_AutoLevel") 
+		if not _TAGS.LeaderLib_AutoLevel and _TAGS.LLWEAPONEX_AutoLevel
 		and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
 		then
 			local element = tooltip:GetElement("ItemDescription")
@@ -321,7 +322,7 @@ local function OnItemTooltip(item, tooltip)
 					tooltip:RemoveElement(element)
 				end
 			end
-		elseif item:HasTag("LLWEAPONEX_UniqueStrengthTattoos") then
+		elseif _TAGS.LLWEAPONEX_UniqueStrengthTattoos then
 			if character ~= nil then
 				if character:GetStatus("UNSHEATHED") then
 					local name = GameHelpers.GetStringKeyText("ARM_UNIQUE_LLWEAPONEX_Tattoos_Magic_Upperbody_A_DisplayName", "<font color='#FF4400'>Tattoos of Godly Strength (Unleashed)</font>")
@@ -338,20 +339,19 @@ local function OnItemTooltip(item, tooltip)
 		local renamedArmorSlotType = false
 
 		if character ~= nil then
-			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_Pistol") then
+			if _TAGS.LLWEAPONEX_Pistol then
 				local damageRange = Skills.DamageFunctions.PistolDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_Pistol_Shoot", "TargetRadius"))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_Pistol.Value, Text.WeaponScaling.Pistol.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
-			elseif GameHelpers.ItemHasTag(item, "LLWEAPONEX_HandCrossbow") then
+			elseif _TAGS.LLWEAPONEX_HandCrossbow then
 				local damageRange = Skills.DamageFunctions.HandCrossbowDamage(character, true, true, item.Stats)
 				local apCost = Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "ActionPoints")
 				local weaponRange = string.format("%sm", Ext.StatGetAttribute("Projectile_LLWEAPONEX_HandCrossbow_Shoot", "TargetRadius"))
 				CreateFakeWeaponTooltip(tooltip, item, LLWEAPONEX_HandCrossbow.Value, Text.WeaponScaling.HandCrossbow.Value, damageRange, apCost, weaponRange)
 				renamedArmorSlotType = true
-			elseif GameHelpers.ItemHasTag(item, "LLWEAPONEX_Unarmed") and item.ItemType ~= "Weapon" then
-				--local damageRange,highestAttribute = UnarmedHelpers.GetUnarmedWeaponDamageRange(character.Stats, item)
+			elseif item.ItemType ~= "Weapon" and _TAGS.LLWEAPONEX_UnarmedWeaponEquipped then
 				local weapon,highestAttribute = UnarmedHelpers.CreateUnarmedWeaponTable(character.Stats, item.Stats)
 				local damageRange = UnarmedHelpers.CalculateBaseWeaponDamageRange(weapon)
 				--local highestAttribute = "Finesse"
@@ -374,7 +374,7 @@ local function OnItemTooltip(item, tooltip)
 		local enabledMasteriesText = ""
 		local totalMasteries = 0
 		for tag,entry in pairs(Masteries) do
-			if GameHelpers.ItemHasTag(item, tag) then
+			if _TAGS[tag] then
 				totalMasteries = totalMasteries + 1
 				local masteryName = GameHelpers.GetStringKeyText(tag, "")
 				if masteryName ~= "" then
@@ -416,13 +416,13 @@ local function OnItemTooltip(item, tooltip)
 		end
 
 		if character ~= nil then
-			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_Rune_HandCrossbow_DamageType") then
+			if _TAGS.LLWEAPONEX_Rune_HandCrossbow_DamageType then
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbowBolt")
 			end
-			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_Rune_Pistol_DamageType") then
+			if _TAGS.LLWEAPONEX_Rune_Pistol_DamageType then
 				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
 			end
-			if GameHelpers.ItemHasTag(item, "LLWEAPONEX_RunicCannon") then
+			if _TAGS.LLWEAPONEX_RunicCannon then
 				if item.ItemType == "Weapon" then
 					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_ARMCANNON_HIT_DisplayName", "Builds Energy on Hit")
 					if text ~= "" then
@@ -437,13 +437,13 @@ local function OnItemTooltip(item, tooltip)
 					Label = text
 				}
 				tooltip:AppendElement(element)
-			elseif item:HasTag("LLWEAPONEX_DemolitionBackpack") then
+			elseif _TAGS.LLWEAPONEX_DemolitionBackpack then
 
 			end
 		end
 
 		for tag,v in pairs(Tags.ExtraProperties) do
-			if GameHelpers.ItemHasTag(item, tag) then
+			if _TAGS[tag] then
 				local text = ""
 				local t = type(v)
 				if v == "string" then
@@ -468,9 +468,9 @@ local function OnItemTooltip(item, tooltip)
 				end
 			end
 		end
-	else
+	elseif character ~= nil then
 		local statsId = not StringHelpers.IsNullOrWhitespace(item.StatsId) and item.StatsId or nil
-		if statsId and (string.find(statsId, "SCROLL") or item:HasTag("SCROLL")) then
+		if statsId and (string.find(statsId, "SCROLL") or _TAGS.SCROLL) then
 			local apCost = Ext.StatGetAttribute(statsId, "UseAPCost")
 			if apCost > 0 and Mastery.HasMasteryRequirement(character, "LLWEAPONEX_BattleBook_Mastery2") then
 				if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
@@ -501,7 +501,7 @@ local function OnItemTooltip(item, tooltip)
 		end
 	end
 
-	if GameHelpers.ItemHasTag(item, "LLWEAPONEX_PacifistsWrath_Equipped") then
+	if _TAGS.LLWEAPONEX_PacifistsWrath_Equipped then
 		local element = tooltip:GetElement("WeaponDamage")
 		if element then
 			element.MinDamage = 1

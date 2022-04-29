@@ -55,11 +55,10 @@ if not isClient then
 	--- @param force boolean
 	function UnarmedHelpers.ScaleUnarmedHitDamage(attacker, target, damage, handle, data, force)
 		if force == true or IsUnarmedHit(handle) then
-			-- Just why?
 			local character = Ext.GetCharacter(attacker)
 			local isLizard = character:HasTag("LIZARD")
 			local isCombinedHit = isLizard and not data.ProcWindWalker
-			local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats, true)
+			local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(character.Stats)
 
 			if isCombinedHit then
 				lizardHits[attacker] = nil
@@ -71,14 +70,14 @@ if not isClient then
 			end
 
 			--FIX to try and preserve the previous damage type
-			local previousDamageType = data.DamageType
-			local lastAmount = 0
-			for dType,amount in pairs(data.DamageList) do
-				if amount > lastAmount and dType ~= previousDamageType then
-					previousDamageType = dType
-					lastAmount = amount
-				end
-			end
+			-- local previousDamageType = data.DamageType
+			-- local lastAmount = 0
+			-- for dType,amount in pairs(data.DamageList) do
+			-- 	if amount > lastAmount and dType ~= previousDamageType then
+			-- 		previousDamageType = dType
+			-- 		lastAmount = amount
+			-- 	end
+			-- end
 
 			local isSecondHit = lizardHits[attacker] == 2
 			local damageList = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, isSecondHit)
@@ -87,16 +86,16 @@ if not isClient then
 				local offhandDamage = UnarmedHelpers.CalculateWeaponDamage(character.Stats, weapon, false, highestAttribute, isLizard, true)
 				damageList:Merge(offhandDamage)
 			end
-			if not StringHelpers.IsNullOrEmpty(previousDamageType) then
-				damageList:ConvertDamageType(previousDamageType)
-			end
+			-- if not StringHelpers.IsNullOrEmpty(previousDamageType) then
+			-- 	damageList:ConvertDamageType(previousDamageType)
+			-- end
 			data:ClearAllDamage()
 			local damages = damageList:ToTable()
 			for i,damage in pairs(damages) do
 				data.DamageList[damage.DamageType] = damage.Amount
 			end
 			data:Recalculate()
-			Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
+			Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage Weapon(%s) (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", weapon and weapon.Name or "nil", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
 			if lizardHits[attacker] == 2 then
 				lizardHits[attacker] = nil
 			end
