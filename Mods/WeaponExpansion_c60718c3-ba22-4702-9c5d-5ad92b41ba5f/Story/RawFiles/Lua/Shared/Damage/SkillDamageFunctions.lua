@@ -730,7 +730,7 @@ local function ScaleByHighestAttributeAndAbility(ability, weaponStat, validAttri
 	end
 end
 
---- @param skill StatEntrySkillData
+--- @param baseSkill StatEntrySkillData
 --- @param attacker StatCharacter
 --- @param isFromItem boolean
 --- @param stealthed boolean
@@ -758,7 +758,7 @@ local function GetDarkFireballDamage(baseSkill, attacker, isFromItem, stealthed,
 	end
 end
 
---- @param skill StatEntrySkillData
+--- @param baseSkill StatEntrySkillData
 --- @param attacker StatCharacter
 --- @param isFromItem boolean
 --- @param stealthed boolean
