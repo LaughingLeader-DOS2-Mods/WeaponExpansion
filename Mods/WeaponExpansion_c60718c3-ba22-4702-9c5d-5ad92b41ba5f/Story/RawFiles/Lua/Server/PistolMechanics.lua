@@ -95,9 +95,9 @@ RegisterProtectedExtenderListener("BeforeShootProjectile", function (request)
 	--print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.SkillId))
 	local skill = GetSkillEntryName(request.SkillId) or ""
 	if skill == "Projectile_LLWEAPONEX_Pistol_Shoot" then
-		local caster = Ext.GetCharacter(request.Caster)
+		local caster = GameHelpers.TryGetObject(request.Caster)
 		request.SkillId = GetPistolProjectileSkill(caster).."-1"
-		local target = Ext.GetGameObject(request.Target)
+		local target = GameHelpers.TryGetObject(request.Target)
 		if target ~= nil then
 			
 		else
@@ -117,13 +117,13 @@ end)
 RegisterProtectedExtenderListener("ShootProjectile", function (projectile)
 	local skill = GetSkillEntryName(projectile.SkillId) or ""
 	if string.find(skill, "Projectile_LLWEAPONEX_Pistol_Shoot") then
-		local caster = Ext.GetCharacter(projectile.CasterHandle)
+		local caster = GameHelpers.TryGetObject(projectile.CasterHandle)
 		local status = GetPistolExplosionEffect(caster)
 		ApplyStatus(caster.MyGuid, status, 0.0, 0, caster.MyGuid)
 		-- local handle = projectile.Handle
 		-- print(string.format("SourcePosition(%s) Position(%s) PrevPosition(%s)", Common.Dump(projectile.SourcePosition), Common.Dump(projectile.Position), Common.Dump(projectile.PrevPosition)))
 		-- Timer.StartOneshot("LLWEAPONEX_Pistol_PlayProjectileExplosion_"..tostring(projectile.NetID), 1, function()
-		-- 	projectile = Ext.GetGameObject(handle)
+		-- 	projectile = GameHelpers.TryGetObject(handle)
 		-- 	print(handle, projectile)
 		-- 	if projectile and projectile.Position then
 		-- 		local x,y,z = table.unpack(projectile.Position)
@@ -141,7 +141,7 @@ end)
 
 RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char, state, data)
 	if state == SKILL_STATE.USED then
-		local caster = Ext.GetCharacter(char)
+		local caster = GameHelpers.TryGetObject(char)
 		if ShouldPlaySheatheAnimation(caster) then
 			Timer.StartOneshot("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
 				ApplyStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
@@ -150,7 +150,7 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char
 			ApplyStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
 		end
 	elseif state == SKILL_STATE.CAST then
-		local caster = Ext.GetCharacter(char)
+		local caster = GameHelpers.TryGetObject(char)
 		local delay = GetPistolRemoveDelay(caster)
 		Timer.Start("LLWEAPONEX_RemovePistolEffect", delay, char)
 	end
@@ -169,7 +169,7 @@ local function ShootPistolAtPosition(source,x,y,z)
 	local level = CharacterGetLevel(source)
 	local skill = GetPistolProjectileSkill(source)
 
-	local character = Ext.GetCharacter(source)
+	local character = GameHelpers.TryGetObject(source)
 	local pos = character.Stats.Position
 	local rot = character.Stats.Rotation
 	--Ext.Print("Rotation:",Ext.JsonStringify(rot))
