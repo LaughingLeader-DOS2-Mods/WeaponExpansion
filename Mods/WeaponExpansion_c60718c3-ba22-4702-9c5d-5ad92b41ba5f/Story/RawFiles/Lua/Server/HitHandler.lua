@@ -116,14 +116,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 end
 RegisterListener("OnPrepareHit", OnPrepareHit)
 
-local function WeaponIsTagged(char, weapon, tag)
-	if (weapon ~= nil and IsTagged(weapon, tag) == 1) then
-		return true
-	end
-	return false
-end
-
-local armCannonSkills = {
+SkillConfiguration.ArmCannonSkills = {
 	Zone_LLWEAPONEX_ArmCannon_Disperse = true,
 	Projectile_LLWEAPONEX_ArmCannon_Shoot = true,
 	Projectile_LLWEAPONEX_ArmCannon_Disperse_Explosion = true,
@@ -149,7 +142,7 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 			PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid] = nil
 		end
 		local hitSucceeded = data.Success
-		if data.SkillData and armCannonSkills[skill] then
+		if data.SkillData and SkillConfiguration.ArmCannonSkills[skill] then
 			data:SetHitFlag("Hit", true)
 			data:SetHitFlag({"Dodged", "Missed"}, false)
 			hitSucceeded = true
@@ -161,13 +154,12 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 			if coverData ~= nil then
 				DualShields_Cover_RedirectDamage(target.MyGuid, coverData.Blocker, source.MyGuid, data.HitStatus.StatusHandle)
 			end
-			local bonuses = MasteryBonusManager.GetMasteryBonuses(source)
 			if not data.SkillData and data:IsFromWeapon() then
 				local mainhand = CharacterGetEquippedItem(source.MyGuid, "Weapon")
 				local offhand = CharacterGetEquippedItem(source.MyGuid, "Shield")
 				if data.Damage > 0 and sourceIsPlayer then
 					-- Unarmed
-					if UnarmedHelpers.WeaponsAreUnarmed(mainhand, offhand) then
+					if UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand) then
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, "LLWEAPONEX_Unarmed")
 					else
 						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid)
@@ -175,7 +167,7 @@ RegisterListener("StatusHitEnter", function(target, source, data)
 				end
 			elseif skill then
 				if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
-				and not armCannonSkills[skill]
+				and not SkillConfiguration.ArmCannonSkills[skill]
 				and IsMeleeWeaponSkill(skill)
 				then
 					ArmCannon_OnWeaponSkillHit(source.MyGuid, target.MyGuid, skill)
