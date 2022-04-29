@@ -9,8 +9,8 @@ local isClient = Ext.IsClient()
 --- @param level integer
 --- @param noRandomization boolean
 local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
-	if skill.UseWeaponDamage == "Yes" 
-	and GameHelpers.Ext.ObjectIsStatCharacter(attacker) 
+	if skill.UseWeaponDamage == "Yes"
+	and GameHelpers.Ext.ObjectIsStatCharacter(attacker)
 	and attacker.Character:HasTag("LLWEAPONEX_PacifistsWrath_Equipped") then
 		local damageList = Ext.NewDamageList()
 		damageList:Add("Physical", 1)

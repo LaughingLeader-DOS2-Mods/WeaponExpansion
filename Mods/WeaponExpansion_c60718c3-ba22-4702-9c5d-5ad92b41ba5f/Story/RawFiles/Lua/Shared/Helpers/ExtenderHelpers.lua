@@ -553,7 +553,7 @@ local skillAttributes = {
 }
 
 ---@param skillName string
----@param useWeaponDamage boolean
+---@param useWeaponDamage boolean|nil
 ---@return StatEntrySkillData
 function ExtenderHelpers.CreateSkillTable(skillName, useWeaponDamage)
 	if skillName ~= nil and skillName ~= "" then
