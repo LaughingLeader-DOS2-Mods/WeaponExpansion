@@ -88,6 +88,33 @@ end
 RegisterStatusListener("Applied", "LLWEAPONEX_PISTOL_SHOOT_HIT", GrantMasteryExperienceFromStatus)
 RegisterStatusListener("Applied", "LLWEAPONEX_HANDCROSSBOW_HIT", GrantMasteryExperienceFromStatus)
 
+StatusManager.Register.Applied("LLWEAPONEX_POWERGAUNTLETS_HIT", function (target, status, source, statusType)
+	if GameHelpers.Ext.ObjectIsCharacter(target) and GameHelpers.Ext.ObjectIsCharacter(source) then
+		if target.Stats.CurrentArmor > 0 and target.Stats.MaxArmor > 0 then
+			-- local unarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(source.Stats)
+			-- if unarmedWeapon then
+			-- 	local skillId = "Projectile_LLWEAPONEX_PowerGauntlets_ArmorDamageBonus"
+			-- 	--SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[source.MyGuid] = skillId
+			-- 	GameHelpers.Damage.ApplySkillDamageNew(source, target, skillId, {MainWeapon=unarmedWeapon, HitParams = HitFlagPresets.EventlessMagicHit})
+			-- 	local x,y,z = table.unpack(target.WorldPos)
+			-- 	--y = y + target.RootTemplate.AIBoundsHeight / 2
+			-- 	PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ThrowObject_Impact_Light_Root_01", x, y, z)
+			-- end
+			local perc = GameHelpers.GetExtraData("LLWEAPONEX_PowerGauntlets_ArmorDamagePercentage", 20)
+			if perc > 0 then
+				local damage = Ext.Round(target.Stats.MaxArmor * (perc / 100))
+				if damage > 0 then
+					target.Stats.CurrentArmor = math.max(0, target.Stats.CurrentArmor - damage)
+					CharacterStatusText(target.MyGuid, string.format("Armor Break! %s", GameHelpers.GetDamageText("Corrosive", damage, true)))
+					local x,y,z = table.unpack(target.WorldPos)
+					--y = y + target.RootTemplate.AIBoundsHeight / 2
+					PlayEffectAtPosition("LLWEAPONEX_FX_Skills_ThrowObject_Impact_Light_Root_01", x, y, z)
+				end
+			end
+		end
+	end
+end)
+
 local function OnStatusRemoved(target, status, source, statusType)
 	StatusManager.RemoveTurnEndStatus(target, status, true)
 end

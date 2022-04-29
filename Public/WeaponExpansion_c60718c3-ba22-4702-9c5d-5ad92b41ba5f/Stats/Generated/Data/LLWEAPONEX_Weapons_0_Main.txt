@@ -233,10 +233,6 @@ data "Requirements" "Constitution 0"
 data "Skills" ""
 data "ExtraProperties" ""
 
-new entry "_LLWEAPONEX_Unarmed"
-type "Weapon"
-using "NoWeapon"
-
 new entry "_LLWEAPONEX_Greatbows"
 type "Weapon"
 using "_Bows"

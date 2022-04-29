@@ -26,20 +26,28 @@ end
 ---@type table<string, HitFlagPreset>
 HitFlagPresets = {
     GuaranteedWeaponHit = HitFlagPreset:Create({
-        SimulateHit = 1,
+        SimulateHit = true,
         HitType = "WeaponDamage",
-        HitWithWeapon = 1,
-        Hit = 1,
-        Blocked = 0,
-        Dodged = 0,
-        Missed = 0,
+        HitWithWeapon = true,
+        Hit = true,
+        Blocked = false,
+        Dodged = false,
+        Missed = false,
     }),
     FutureBarrage = HitFlagPreset:Create({
-        SimulateHit = 1,
+        SimulateHit = true,
         HitType = "WeaponDamage",
-        HitWithWeapon = 1,
-        Hit = 1,
-        HighGround = 1,
+        HitWithWeapon = true,
+        Hit = true,
+        HighGround = true,
+    }),
+    EventlessMagicHit = HitFlagPreset:Create({
+        SimulateHit = false,
+        NoHitRoll = true,
+        HitType = "DoT",
+        HitWithWeapon = false,
+        NoEvents = true,
+        DontCreateBloodSurface = true,
     }),
 }
 
