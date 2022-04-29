@@ -2,7 +2,8 @@
 ---ArmorStat => WeaponStat
 ---@type table<string,string>
 UnarmedWeaponStats = {
-	ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A = "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A"
+	ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A = "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A",
+	ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A = "WPN_UNIQUE_LLWEAPONEX_PowerGauntlets_A",
 }
 
 if UnarmedHelpers == nil then
