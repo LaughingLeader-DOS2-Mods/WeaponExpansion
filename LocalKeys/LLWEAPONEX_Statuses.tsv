@@ -13,11 +13,17 @@ LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_Description	Character's next attack 
 LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY_DisplayName	Bada Bing	hbe7e4dd2g827ag43a3g8c13g184fd0a01f69
 LLWEAPONEX_BEER_CHAMPION_Description	Character never gets sleepy while drinking alcohol.	h7baf56beg6176g4aa3ga091ge282f1da2c52
 LLWEAPONEX_BEER_CHAMPION_DisplayName	Champion of Beer	hdb60b6b5gd43cg4510g88f5g54966bad0b2e
+LLWEAPONEX_BLOOD_EMPOWERED_Description	Character is empowered through an ally's Flesh Sacrifice.	h3fb6e3f1g6fdcg4cfdg9761g6b8048ee5943
+LLWEAPONEX_BLOOD_EMPOWERED_DisplayName	Empowered by Blood	h66bfffc1ga29cg4658g9b1cgad4e60f5b097
+LLWEAPONEX_CHAIN_LIGHTNING_WEAK_Description	Bonus damage with a [1]% chance<br>to fork [2] time(s).	h25bbf6e6g536dg4dd0gb01egf760da3d4f84
+LLWEAPONEX_CHAIN_LIGHTNING_WEAK_DisplayName	Surging Shock	h056235e1ge01eg4caagb551g39f2eea4c3d8
 LLWEAPONEX_CHAOS_POWER_Description	Character wields the power of Chaos. When hit, a random elemental surface is spawned.	hef1d7637g0c58g43a6gad84gf42a91fd0312
 LLWEAPONEX_CHAOS_POWER_DisplayName	Chaotic Power	hd90b1d2cg51b0g4cf3g9349g438c8aca171a
 LLWEAPONEX_CONCUSSION_Description	Character has a serious concussion.<br>Small chance on each basic attack to <font color='#FF8C00'>Fumble</font>, interrupting the attack.	h61d85a55gfadfg417dgb2d0gfc2c1f9a470d
 LLWEAPONEX_CONCUSSION_DisplayName	Concussion	h43cc06a4g9bcdg44b6g88ffgfc91981571dc
 LLWEAPONEX_COPYLASTSKILL_DisplayName	Copy Last Skill	hf7d36abdgcfecg4dc7g87d9gc83429c277a0
+LLWEAPONEX_CURSED_Description	Character is inflicted with a curse, and will spread the curse in a [1] radius when dead.	h8b5ec746gb51eg4838gbec4g8562c30aa6e0
+LLWEAPONEX_CURSED_DisplayName	Malediction	h8d50df62gd613g465fga926g1f5d5e04b0a7
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_Description	Character has been marked for death, and cannot be marked again.	h9c360dcfg50ebg4961ga029gd4a0215c0d4b
 LLWEAPONEX_DEATH_SENTENCE_BLOCKED_DisplayName	Marked for Death	h78e76f79gc970g43c1gbe25g309a84e022e1
 LLWEAPONEX_DEATH_SENTENCE_Description	Character has been marked for death.<br>If killed, the character will return as a friendly <font color='#73f6ff'>Revenant<font> for 2 turns.	h7e890068gbcdfg4aabg899bgbdf88a47e724
@@ -46,8 +52,10 @@ LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_Description	Character is being knocked down!	hc
 LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK_DisplayName	Slammed	h74c569f8g2eadg4d48g9437g13375158a532
 LLWEAPONEX_MENDING_Description	Character's body is self-repairing.<br>Heals [1] Vitality per turn.	h5ad5c605gf678g4489g89bcga95083784978
 LLWEAPONEX_MENDING_DisplayName	Mending	hecd7ffc3g0d63g4ccfg941dgd3d002eecd5a
-LLWEAPONEX_POWERGAUNTLETS_ACTIVE_Description	Through the power of the <font color='#c5a65a'>Power Gauntlets</font>, this character can wield two-handed melee weapons with one hand.	h3f55cf81gc40eg4539gae43g5ae634267e64
+LLWEAPONEX_POWERGAUNTLETS_ACTIVE_Description	Through the power of the <font color='#c5a65a'>[Key:ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A_DisplayName:Power Gauntlets]</font>, this character can wield two-handed melee weapons with one hand.	h3f55cf81gc40eg4539gae43g5ae634267e64
 LLWEAPONEX_POWERGAUNTLETS_ACTIVE_DisplayName	Giant's Strength	hc9c2031bg7fa5g4cadga8a6ga65e6e84dd7f
+LLWEAPONEX_POWERGAUNTLETS_ARMORBREAK_Description	A crushing blow from the <font color='#c5a65a'>[Key:ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A_DisplayName:Power Gauntlets]</font> has lowered [Handle:h856999degd5aag435eg895fg50546f5a87f6:Maximum Physical Armour].	h15f43030g2b58g4c93gb07eg23d0046096a3
+LLWEAPONEX_POWERGAUNTLETS_ARMORBREAK_DisplayName	Armor Break	h5985734ag608fg4994g85ccg1b97450eec3f
 LLWEAPONEX_QUIVER_DRAW_RECHARGE_Description	Character's quiver is recharging.	h1633ea65g4df7g4a8bgaef2ga2f2ab74ba59
 LLWEAPONEX_QUIVER_DRAW_RECHARGE_DisplayName	Recharging (Quiver)	h338fd30cg6831g4f12g9bccg7c73be01a085
 LLWEAPONEX_RANDOM_AILMENT_DisplayName	Random Elemental Ailment	h290e3badg73d8g4c02g9e4fg6956ab910bf9
@@ -65,6 +73,9 @@ LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls
 LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName	Soul Harvest	h002f643bg19afg4a78g8822g37c0614b0921
 LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.	h74945633ga7bag49daga570gdba5b298d003
 LLWEAPONEX_TARRED_DisplayName	Tarred	h2e562602g1cbbg4ba0gac36gcc780f8809e2
+LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description	Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength, and are currently activated. 	h64ef8f8eg48d8g468dga4ebg2a6357d7e30a
+LLWEAPONEX_TATTOOS_STRENGTH_Description	Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength.<br><font color='#CC3344'>If [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] goes shirtless, the tattoos will activate in combat and grant bonuses.</font> 	h64ef8f8eg48d8g468dga4ebg2a6357d7e30a
+LLWEAPONEX_TATTOOS_STRENGTH_DisplayName	Tattoos of Godly Strength	he5114ae4g830cg43dfg8bc5gf440538c6696
 LLWEAPONEX_TRIPPING_Description	Character is unsteady, and has a chance to fall when moving.	h46549881g092ag4c08ga301g9e043ee34d80
 LLWEAPONEX_TRIPPING_DisplayName	Tripping	h55c9b359gad6fg45f5gb8edg2a98774cd5f5
 LLWEAPONEX_UNDEAD_BONUS_DAMAGE_Description	Undead character is taking bonus damage!	h183de597ga842g42c5gac3bgd61680d21c0b
@@ -73,6 +84,8 @@ LLWEAPONEX_UNRELENTING_RAGE_BONUS_Description	Character is empowered from slayin
 LLWEAPONEX_UNRELENTING_RAGE_BONUS_DisplayName	Fury's Reward	h6f9c6b3fgfbddg4682gbdebgf5c3f04903d6
 LLWEAPONEX_UNRELENTING_RAGE_Description	Character is unleashing an unrelenting fury.<br><font color='#65C900'>Critical Damage +50%</font>	h4c2dc36bg924eg4a71gb211gc8d70743fdc9
 LLWEAPONEX_UNRELENTING_RAGE_DisplayName	Raging	h82443abeg98f3g4977gba22ga9a785091dbe
+LLWEAPONEX_VICTORYCRY_Description	Inspired to fight for total victory, combat and defensive stats are increased.	h51414f0bgbadcg47ffgbe31ga4518859c47d
+LLWEAPONEX_VICTORYCRY_DisplayName	Victory Cry	hfcbeef9cg9b8cg457fg9cdcg53567fe8198a
 LLWEAPONEX_WARCHARGE_APPLY_DisplayName	War Charge	ha0bc2e7ag52eeg4e97g87c8g406b40f75514
 LLWEAPONEX_WARCHARGE_BONUS_Description	Character is charging at their enemies. Get'em!	hed432810g1e5bg4cccgb869g0ed453f6f6ed
 LLWEAPONEX_WARCHARGE_BONUS_DisplayName	Charging (War Charge)	h31f9ea18g7adbg4b23g93a1g7be268564b95
@@ -106,17 +119,6 @@ LLWEAPONEX_WEAKNESS_WATER_Description	Character has lowered resistance to <font 
 LLWEAPONEX_WEAKNESS_WATER_DisplayName	Water Weakness	h7b2b18c8g3e44g4c5bg84e2g36b6727b36d0
 LLWEAPONEX_WRAITHBLADE_MARK_Description	Character has been marked by the <font color='#c5a65a'>Wraithblade</font>, and cannot turn invisible.	h9438faeagb29fg4451g8ee7g17e4bf3e31e2
 LLWEAPONEX_WRAITHBLADE_MARK_DisplayName	Mark of the Wraith	hd53002a9g6a71g4350gbe19g9a90ce4d9e19
-LLWEAPONEX_CHAIN_LIGHTNING_WEAK_DisplayName	Surging Shock	h056235e1ge01eg4caagb551g39f2eea4c3d8
-LLWEAPONEX_CHAIN_LIGHTNING_WEAK_Description	Bonus damage with a [1]% chance<br>to fork [2] time(s).	h25bbf6e6g536dg4dd0gb01egf760da3d4f84
-LLWEAPONEX_CURSED_DisplayName	Malediction	h8d50df62gd613g465fga926g1f5d5e04b0a7
-LLWEAPONEX_CURSED_Description	Character is inflicted with a curse, and will spread the curse in a [1] radius when dead.	h8b5ec746gb51eg4838gbec4g8562c30aa6e0
-LLWEAPONEX_BLOOD_EMPOWERED_DisplayName	Empowered by Blood	h66bfffc1ga29cg4658g9b1cgad4e60f5b097
-LLWEAPONEX_BLOOD_EMPOWERED_Description	Character is empowered through an ally's Flesh Sacrifice.	h3fb6e3f1g6fdcg4cfdg9761g6b8048ee5943
-LLWEAPONEX_TATTOOS_STRENGTH_DisplayName	Tattoos of Godly Strength	he5114ae4g830cg43dfg8bc5gf440538c6696
-LLWEAPONEX_TATTOOS_STRENGTH_Description	Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength.<br><font color='#CC3344'>If [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] goes shirtless, the tattoos will activate in combat and grant bonuses.</font> 	h64ef8f8eg48d8g468dga4ebg2a6357d7e30a
-LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description	Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength, and are currently activated. 	h64ef8f8eg48d8g468dga4ebg2a6357d7e30a
 Stats_LLWEAPONEX_Tattoos_Strength	Tattoos of Godly Strength	hbaade02ag92c3g458ega2e5gf8323343d4f4
 Stats_LLWEAPONEX_Tattoos_Strength_Active	Tattoos of Godly Strength (Active)	h5fa6dbc7g445bg4cdbgbf71gb41f4d009861
-LLWEAPONEX_VICTORYCRY_DisplayName	Victory Cry	hfcbeef9cg9b8cg457fg9cdcg53567fe8198a
-LLWEAPONEX_VICTORYCRY_Description	Inspired to fight for total victory, combat and defensive stats are increased.	h51414f0bgbadcg47ffgbe31ga4518859c47d
 Stats_LLWEAPONEX_VictoryCry	Victory Cry	hdc7d6a51g2192g4fbbga2f5g974f1fe71b98
