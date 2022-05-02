@@ -209,7 +209,8 @@ if not Vars.IsClient then
 				local comboCount = targetData.Count or 0
 				if comboCount >= #ComboStatuses then
 					NRD_HitClearAllDamage(data.Handle)
-					GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit_Max", HitFlagPresets.GuaranteedWeaponHit:Append({CriticalHit=1}))
+					GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit_Max",
+					{HitParams=HitFlagPresets.GuaranteedWeaponHit:Append({CriticalHit=1})})
 				end
 			end
 		elseif state == SKILL_STATE.CAST then
@@ -223,12 +224,12 @@ if not Vars.IsClient then
 	end)
 
 	local function ApplyDefaultFinisherDamage(i, target, source)
-		GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_VanquisherDamage", HitFlagPresets.GuaranteedWeaponHit, nil, nil, true)
+		GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_VanquisherDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 	end
 
 	local function ApplyIaidoDamage(i, target, source)
 		if i % 2 == 0 then
-			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_IaidoDamage", HitFlagPresets.GuaranteedWeaponHit, nil, nil, true)
+			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_IaidoDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 		else
 			ApplyStatus(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
 		end
@@ -236,7 +237,7 @@ if not Vars.IsClient then
 
 	local function ApplyVanquisherDamage(i, target, source)
 		if i % 2 == 0 then
-			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_VanquisherDamage", HitFlagPresets.GuaranteedWeaponHit, nil, nil, true)
+			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_VanquisherDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 		else
 			ApplyStatus(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
 		end

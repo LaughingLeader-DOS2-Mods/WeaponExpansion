@@ -56,7 +56,7 @@ if not Vars.IsClient then
 					end
 				end
 		
-				GameHelpers.Damage.ApplySkillDamage(Ext.GetCharacter(char), data.Target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", HitFlagPresets.GuaranteedWeaponHit, mainWeapon, offhandWeapon, true)
+				GameHelpers.Damage.ApplySkillDamage(Ext.GetCharacter(char), data.Target, "Projectile_LLWEAPONEX_ThrowWeapon_ApplyDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true, MainWeapon=mainWeapon, OffhandWeapon=offhandWeapon})
 			else
 				PersistentVars.SkillData.ThrowWeapon[char] = nil
 			end

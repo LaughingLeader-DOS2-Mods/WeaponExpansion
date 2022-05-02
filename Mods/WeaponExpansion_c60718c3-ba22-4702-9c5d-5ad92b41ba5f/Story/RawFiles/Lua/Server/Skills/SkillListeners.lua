@@ -253,8 +253,8 @@ function FutureBarrage_FireDummySkill(caster, x, y, z)
 end
 function FutureBarrage_ApplyDamage(caster, target, isBonus)
 	if isBonus ~= nil then
-		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_Damage", HitFlagPresets.FutureBarrage)
+		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_Damage", {HitParams = HitFlagPresets.FutureBarrage})
 	else
-		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_BonusDamage", HitFlagPresets.FutureBarrage)
+		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_BonusDamage", {HitParams = HitFlagPresets.FutureBarrage})
 	end
 end

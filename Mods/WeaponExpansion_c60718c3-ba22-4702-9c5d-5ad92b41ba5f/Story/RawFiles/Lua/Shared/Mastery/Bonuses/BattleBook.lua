@@ -53,7 +53,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		if state == SKILL_STATE.CAST then
 			data:ForEach(function(v, targetType, skillEventData)
 				if CharacterIsEnemy(v, char) == 1 and GameHelpers.Character.IsUndead(v) then
-					GameHelpers.Damage.ApplySkillDamage(char, v, "Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage", HitFlagPresets.GuaranteedWeaponHit)
+					GameHelpers.Damage.ApplySkillDamage(char, v, "Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 					CharacterStatusText(v, "LLWEAPONEX_StatusText_BattleBook_BlessDamage")
 					RemoveStatus(v, "BLESSED")
 				end

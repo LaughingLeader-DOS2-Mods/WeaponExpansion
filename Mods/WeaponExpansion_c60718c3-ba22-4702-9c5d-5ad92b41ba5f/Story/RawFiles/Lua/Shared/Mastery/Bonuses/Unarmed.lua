@@ -12,7 +12,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 1, {
 			PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_L_HandFX")
 		elseif state == SKILL_STATE.HIT and data.Success then
 			GameHelpers.Skill.Explode(data.Target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage", char)
-			--GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage")
 			local forceDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Unarmed_PetrifyingTouch_KnockbackDistance", 4.0)
 			if forceDistance > 0 then
 				local x,y,z = GetPosition(data.Target)

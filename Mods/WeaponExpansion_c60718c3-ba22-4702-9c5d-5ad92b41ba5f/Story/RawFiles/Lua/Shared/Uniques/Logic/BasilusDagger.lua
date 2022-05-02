@@ -43,7 +43,9 @@ if not Vars.IsClient then
 					else
 						CharacterStatusText(target, "LLWEAPONEX_StatusText_BasilusHauntedDamage_Normal")
 					end
-					GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", HitFlagPresets.GuaranteedWeaponHit:Append({Backstab=backstab}), nil, nil, false, Skills.Damage.Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage)
+					GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage", {
+						HitParams=HitFlagPresets.GuaranteedWeaponHit:Append({Backstab = backstab}),
+						GetDamageFunction=Skills.Damage.Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage})
 				end
 			end
 		end

@@ -42,7 +42,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 	end):RegisterOnHit(function(attacker, target, data, targetIsObject, skill, self)
 		if targetIsObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
 			RemoveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
-			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", HitFlagPresets.GuaranteedWeaponHit)
+			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 		end
 	end, true),
 

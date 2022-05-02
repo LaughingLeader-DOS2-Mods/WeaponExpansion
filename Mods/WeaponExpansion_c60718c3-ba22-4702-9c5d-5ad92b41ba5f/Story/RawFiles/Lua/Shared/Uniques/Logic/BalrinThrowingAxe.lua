@@ -123,11 +123,13 @@ if not Vars.IsClient then
 			if ObjectIsCharacter(target) == 1 then
 				local targetCharacter = Ext.GetCharacter(target)
 				local backStab = Game.Math.CanBackstab(character.Stats, targetCharacter.Stats)
-				GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", HitFlagPresets.GuaranteedWeaponHit:Append({
-					Backstab = backStab and 1 or 0
-				}), nil, nil, nil, Skills.Damage.Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage)
+				GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", {
+					HitParams=HitFlagPresets.GuaranteedWeaponHit:Append({Backstab = backStab}),
+					GetDamageFunction=Skills.Damage.Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage})
 			else
-				GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", HitFlagPresets.GuaranteedWeaponHit, nil, nil, nil, Skills.Damage.Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage)
+				GameHelpers.Damage.ApplySkillDamage(character, target, "Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage", {
+					HitParams=HitFlagPresets.GuaranteedWeaponHit,
+					GetDamageFunction=Skills.Damage.Projectile_LLWEAPONEX_Status_BalrinDebuff_Damage})
 			end
 		end
 	end)

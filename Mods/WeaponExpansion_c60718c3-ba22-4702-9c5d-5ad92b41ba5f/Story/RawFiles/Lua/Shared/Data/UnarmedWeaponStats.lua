@@ -51,4 +51,3 @@ function UnarmedHelpers.GetAssociatedStats(statId)
 end
 
 UnarmedHelpers.RegisterUnarmedStat("ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A", "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A")
-UnarmedHelpers.RegisterUnarmedStat("ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A", "WPN_UNIQUE_LLWEAPONEX_PowerGauntlets_A", "Projectile_LLWEAPONEX_PowerGauntlets_ApplyBonus")

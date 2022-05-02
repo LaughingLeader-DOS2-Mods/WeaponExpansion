@@ -1,6 +1,4 @@
 if not Vars.IsClient then
-	local registeredListeners = 0
-
 	---Tiered statuses that apply when enemies with the LLWEAPONEX_SOULHARVEST_REAP status die.
 	---@type string[]
 	Skills.Data.SoulHarvestDamageTiers  = {

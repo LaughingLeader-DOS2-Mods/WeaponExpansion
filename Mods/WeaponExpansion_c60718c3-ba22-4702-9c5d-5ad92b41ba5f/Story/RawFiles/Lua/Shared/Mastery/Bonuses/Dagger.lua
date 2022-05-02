@@ -53,15 +53,17 @@ if not isClient then
 			turns = turns or PersistentVars.MasteryMechanics.SneakingTurnsInCombat[target.MyGuid] or 0
 			if turns > 0 then
 				local bonusStatus = Ext.PrepareStatus(target.Handle, "LLWEAPONEX_MASTERYBONUS_DAGGER_SNEAKINGBONUS", -1)
-				bonusStatus.ForceStatus = true
-				local maxBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_MaxMultiplier", 10.0)
-				local turnBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_TurnBoost", 5.0)
-				local nextBoost = math.max(1.0, math.min(maxBoost, math.ceil((turns - 1) * turnBoost)))
-				if bonusStatus.StatsMultiplier ~= nextBoost then
-					CharacterStatusText(target.MyGuid, string.format("Assassin's Patience Increased (%i)", turns))
+				if bonusStatus then
+					bonusStatus.ForceStatus = true
+					local maxBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_MaxMultiplier", 10.0)
+					local turnBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_SneakingBonus_TurnBoost", 5.0)
+					local nextBoost = math.max(1.0, math.min(maxBoost, math.ceil((turns - 1) * turnBoost)))
+					if bonusStatus.StatsMultiplier ~= nextBoost then
+						CharacterStatusText(target.MyGuid, string.format("Assassin's Patience Increased (%i)", turns))
+					end
+					bonusStatus.StatsMultiplier = nextBoost
+					Ext.ApplyStatus(bonusStatus)
 				end
-				bonusStatus.StatsMultiplier = nextBoost
-				Ext.ApplyStatus(bonusStatus)
 			end
 		end
 	end
@@ -120,16 +122,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 1, {
 	SneakingPassiveBonus
 })
 
-local RupturedFlags = {
-	SimulateHit = 1,
-	HitType = "Melee",
-	HitWithWeapon = 1,
-	Hit = 1,
-	Blocked = 0,
-	Dodged = 0,
-	Missed = 0,
-}
-
 MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 	rb:Create("DAGGER_BACKLASH", {
 		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
@@ -165,7 +157,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus")
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.HIT and HasActiveStatus(data.Target, "BLEEDING") == 1 then
-			GameHelpers.Damage.ApplySkillDamage(char, "Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage", skill, RupturedFlags)
+			GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 			if ObjectIsCharacter(data.Target) == 1 then
 				CharacterStatusText(data.Target, GameHelpers.GetStringKeyText("LLWEAPONEX_RUPTURE_DisplayName", "Ruptured"))
 			end
