@@ -432,6 +432,7 @@ local UniqueScripts = {
 	"Omnibolt",
 	"PacifistsWrath",
 	"PirateGloves",
+	"PowerGauntlets",
 	"RunicCannon",
 	"SoulHarvest",
 	"Victory",

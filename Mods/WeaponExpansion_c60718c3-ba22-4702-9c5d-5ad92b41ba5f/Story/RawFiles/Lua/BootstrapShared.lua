@@ -84,6 +84,7 @@ Tags = {
 		LLWEAPONEX_PacifistsWrath_Equipped = true,
 		LLWEAPONEX_AnatomyBook_Equipped = true,
 		LLWEAPONEX_DeathEdge_Equipped = true,
+		LLWEAPONEX_PowerGauntlets_Equipped = true,
 		--LLWEAPONEX_SwordofVictory_Equipped = true,
 	}
 }
@@ -112,6 +113,20 @@ MODID.DivinityUnleashed = "e844229e-b744-4294-9102-a7362a926f71"
 MODID.EE2Core = "63bb9b65-2964-4c10-be5b-55a63ec02fa0"
 MODID.ArmorMitigation = "edf1898c-d375-47e7-919a-11d5d44d1cca"
 MODID.Origins = "1301db3d-1f54-4e98-9be5-5094030916e4"
+
+MODID.ArmorDisablingMods = {
+	MODID.DivinityUnleashed,
+	MODID.ArmorMitigation,
+}
+
+function ArmorSystemIsDisabled()
+	for _,v in pairs(MODID.ArmorDisablingMods) do
+		if Ext.IsModLoaded(v) then
+			return true
+		end
+	end
+	return false
+end
 
 ---@type ModSettings
 Settings = {}
