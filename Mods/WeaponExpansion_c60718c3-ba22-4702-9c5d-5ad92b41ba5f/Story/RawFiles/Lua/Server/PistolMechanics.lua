@@ -1,3 +1,54 @@
+SkillConfiguration.Pistols = {
+	AllShootSkills = {
+		"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
+		"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
+		"Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
+		"Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
+	},
+	RaceToSkill = {
+		DWARF = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
+		HUMAN = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
+		ELF = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
+		LIZARD = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
+	},
+	PistolEffects = {
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+		-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
+		DWARF = {
+			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
+			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+		},
+		ELF = {
+			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+		},
+		HUMAN = {
+			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
+			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
+		},
+		LIZARD = {
+			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
+		},
+	},
+	EffectRemoveDelay = {
+		DWARF = 600,
+		HUMAN = 400,
+		ELF = 250,
+		LIZARD = 800,
+	},
+	PlaySheathe = {
+		DWARF = true,
+		ELF = true
+	}
+}
+
 local raceTags = {
 	"DWARF",
 	"ELF",
@@ -5,63 +56,30 @@ local raceTags = {
 	"LIZARD",
 }
 
-local function GetRaceTag(source)
-	for i,tag in pairs(raceTags) do
-		if IsTagged(source, tag) == 1 then
+---@param character EsvCharacter
+local function GetRaceTag(character)
+	for _,tag in pairs(raceTags) do
+		if character:HasTag(tag) then
 			return tag
 		end
 	end
-	return nil
+	return "HUMAN"
 end
 
 local function GetPistolProjectileSkill(char)
-	local skill = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
-	if char:HasTag("DWARF") then
-		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
-	elseif char:HasTag("ELF") then
-		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"
-	elseif char:HasTag("HUMAN") then
-		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
-	elseif char:HasTag("LIZARD") then
-		skill = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"
+	for tag,skill in pairs(SkillConfiguration.Pistols.RaceToSkill) do
+		if char:HasTag(tag) then
+			return skill
+		end
 	end
-	return skill
+	return "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
 end
 
-local PistolEffects = {
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-	-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-	DWARF = {
-		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
-		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
-	},
-	ELF = {
-		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
-		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
-	},
-	HUMAN = {
-		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
-		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
-	},
-	LIZARD = {
-		[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
-		[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
-	},
-}
-
+---@param char EsvCharacter
 local function GetPistolExplosionEffect(char)
-	local race = GetRaceTag(char.MyGuid) or "HUMAN"
-	local isFemale = 0
-	if char:HasTag("FEMALE") then
-		isFemale = 1
-	end
-	local raceData = PistolEffects[race]
+	local race = GetRaceTag(char)
+	local isFemale = GameHelpers.Character.IsFemale(char) and 1 or 0
+	local raceData = SkillConfiguration.Pistols.PistolEffects[race]
 	if raceData then
 		local effect = raceData[isFemale]
 		return effect
@@ -69,73 +87,53 @@ local function GetPistolExplosionEffect(char)
 	return "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT"
 end
 
+---@param char EsvCharacter
 local function GetPistolRemoveDelay(char)
-	if char:HasTag("DWARF") then
-		return 600
-	elseif char:HasTag("ELF") then
-		return 250
-	elseif char:HasTag("HUMAN") then
-		return 400
-	elseif char:HasTag("LIZARD") then
-		return 800
-	else
-		return 150
+	local race = GetRaceTag(char)
+	local delay = SkillConfiguration.Pistols.EffectRemoveDelay[race]
+	if delay then
+		return delay
 	end
+	return 150
 end
 
-local function ShouldPlaySheatheAnimation(caster)
-	if caster:HasTag("DWARF") or caster:HasTag("ELF") then
-		return true
-	end
-	return false
+---@param char EsvCharacter
+local function ShouldPlaySheatheAnimation(char)
+	local race = GetRaceTag(char)
+	return SkillConfiguration.Pistols.PlaySheathe[race] == true
 end
 
----@param request EsvShootProjectileRequest
-RegisterProtectedExtenderListener("BeforeShootProjectile", function (request)
-	--print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.SkillId))
-	local skill = GetSkillEntryName(request.SkillId) or ""
-	if skill == "Projectile_LLWEAPONEX_Pistol_Shoot" then
-		local caster = GameHelpers.TryGetObject(request.Caster)
-		request.SkillId = GetPistolProjectileSkill(caster).."-1"
-		local target = GameHelpers.TryGetObject(request.Target)
-		if target ~= nil then
-			
-		else
-			local targetPos = request.EndPosition
-			targetPos[2] = targetPos[2] + 2.0
-			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_MaxBonusDistance", 12.0)
-			local currentDist = GameHelpers.Math.GetDistance(caster.WorldPos, targetPos)
-			local dist = maxDistance - currentDist
-			request.IgnoreObjects = false
-			targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(caster, dist, targetPos[1], targetPos[2], targetPos[3])
-			request.EndPosition = targetPos
+--Prioritized last, in case other mods add to this table
+Ext.Events.SessionLoaded:Subscribe(function ()
+	RegisterSkillListener(SkillConfiguration.Pistols.AllShootSkills, function (caster, skill, state, data)
+		if state == SKILL_STATE.BEFORESHOOT then
+			---@type EsvShootProjectileRequest
+			local request = data
+			local target = GameHelpers.TryGetObject(request.Target)
+			if target == nil then
+				local caster = GameHelpers.GetCharacter(caster)
+				local targetPos = request.EndPosition
+				targetPos[2] = targetPos[2] + 2.0
+				local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_MaxBonusDistance", 12.0)
+				local currentDist = GameHelpers.Math.GetDistance(caster.WorldPos, targetPos)
+				local dist = maxDistance - currentDist
+				request.IgnoreObjects = false
+				targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(caster, dist, targetPos[1], targetPos[2], targetPos[3])
+				request.EndPosition = targetPos
+			end
+		elseif state == SKILL_STATE.SHOOTPROJECTILE then
+			local caster = GameHelpers.GetCharacter(caster)
+			local status = GetPistolExplosionEffect(caster)
+			if status then
+				GameHelpers.Status.Apply(caster, status, 0.0, 0, caster)
+			end
 		end
-	end
-end)
-
----@param projectile EsvProjectile
-RegisterProtectedExtenderListener("ShootProjectile", function (projectile)
-	local skill = GetSkillEntryName(projectile.SkillId) or ""
-	if string.find(skill, "Projectile_LLWEAPONEX_Pistol_Shoot") then
-		local caster = GameHelpers.TryGetObject(projectile.CasterHandle)
-		local status = GetPistolExplosionEffect(caster)
-		ApplyStatus(caster.MyGuid, status, 0.0, 0, caster.MyGuid)
-		-- local handle = projectile.Handle
-		-- print(string.format("SourcePosition(%s) Position(%s) PrevPosition(%s)", Common.Dump(projectile.SourcePosition), Common.Dump(projectile.Position), Common.Dump(projectile.PrevPosition)))
-		-- Timer.StartOneshot("LLWEAPONEX_Pistol_PlayProjectileExplosion_"..tostring(projectile.NetID), 1, function()
-		-- 	projectile = GameHelpers.TryGetObject(handle)
-		-- 	print(handle, projectile)
-		-- 	if projectile and projectile.Position then
-		-- 		local x,y,z = table.unpack(projectile.Position)
-		-- 		PlayEffectAtPosition("LLWEAPONEX_FX_Pistol_A_Shoot_01", x, y, z)
-		-- 	end
-		-- end)
-	end
-end)
+	end)
+end, {Priority=999})
 
 Timer.RegisterListener("LLWEAPONEX_RemovePistolEffect", function(timerName, char)
 	if char then
-		RemoveStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
+		GameHelpers.Status.Remove(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
 	end
 end)
 
@@ -144,24 +142,29 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char
 		local caster = GameHelpers.TryGetObject(char)
 		if ShouldPlaySheatheAnimation(caster) then
 			Timer.StartOneshot("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
-				ApplyStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
+				GameHelpers.Status.Apply(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
 			end)
 		else
-			ApplyStatus(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
+			GameHelpers.Status.Apply(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
 		end
 	elseif state == SKILL_STATE.CAST then
-		local caster = GameHelpers.TryGetObject(char)
-		local delay = GetPistolRemoveDelay(caster)
+		local delay = GetPistolRemoveDelay(GameHelpers.TryGetObject(char))
 		Timer.Start("LLWEAPONEX_RemovePistolEffect", delay, char)
 	end
 end)
 
 local function ShootPistolAtObject(source,target)
+	source = GameHelpers.GetCharacter(source)
+	target = GameHelpers.TryGetObject(target)
+
 	local skill = GetPistolProjectileSkill(source)
-	-- For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by scripts
+	-- For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by script
 	-- Allies also cannot be hit by script-spawned 0 ExplodeRadius projectiles, so we have to force the hit there too.
-	local forceHit = (ObjectIsCharacter(target) == 1 and CharacterIsEnemy(source,target) == 0) or GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN")
-	GameHelpers.ShootProjectile(source, target, skill, forceHit)
+	local forceHit = GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN")
+	if not forceHit and GameHelpers.Ext.ObjectIsCharacter(target) and not GameHelpers.Character.IsEnemy(source, target) then
+		forceHit = true
+	end
+	GameHelpers.Skill.ShootProjectileAt(target, skill, source, {SetHitObject = forceHit})
 end
 Ext.NewCall(ShootPistolAtObject, "LLWEAPONEX_ShootPistolAtObject", "(CHARACTERGUID)_Source, (GUIDSTRING)_Target")
 
@@ -169,7 +172,7 @@ local function ShootPistolAtPosition(source,x,y,z)
 	local level = CharacterGetLevel(source)
 	local skill = GetPistolProjectileSkill(source)
 
-	local character = GameHelpers.TryGetObject(source)
+	local character = GameHelpers.GetCharacter(source)
 	local pos = character.Stats.Position
 	local rot = character.Stats.Rotation
 	--Ext.Print("Rotation:",Ext.JsonStringify(rot))
