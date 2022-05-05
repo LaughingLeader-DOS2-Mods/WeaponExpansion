@@ -1,10 +1,10 @@
 UnarmedData = {
-	ArmorToWeapon = {
-		ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A = "WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A",
-		ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A = "WPN_UNIQUE_LLWEAPONEX_PowerGauntlets_A",
-	},
-	WeaponToArmor = {},
-	ExecuteSkillProperties = {}
+	---Armor StatId to Weapon StatId
+	---@type table<string,string>
+	ArmorToWeapon = {},
+	---Weapon StatId to Armor StatId
+	---@type table<string,string>
+	WeaponToArmor = {}
 }
 
 ---Unarmed weapons are armor items that modify the damage of NoWeapon on hit
@@ -25,15 +25,13 @@ if UnarmedHelpers == nil then
 	UnarmedHelpers = {}
 end
 
+---Register a weapon stat to use for unarmed damage when an armor stat is equipped.
 ---@param armorStat string The armor stat to associate with a weapon stat, such as ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A.
 ---@param weaponStat string The weapon stat to use for damage calculation, such as WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A.
 ---@param skillPropertiesStat string|nil The skill to execute properties from when hitting something with the weapon stat.
-function UnarmedHelpers.RegisterUnarmedStat(armorStat, weaponStat, skillPropertiesStat)
+function UnarmedHelpers.RegisterUnarmedStat(armorStat, weaponStat)
 	UnarmedData.ArmorToWeapon[armorStat] = weaponStat
 	UnarmedData.WeaponToArmor[weaponStat] = armorStat
-	if skillPropertiesStat then
-		UnarmedData.ExecuteSkillProperties[weaponStat] = skillPropertiesStat
-	end
 end
 
 ---@param statId string An armor stat or weapon stat.
@@ -42,11 +40,11 @@ end
 function UnarmedHelpers.GetAssociatedStats(statId)
 	local weaponStat = UnarmedData.ArmorToWeapon[statId]
 	if weaponStat then
-		return weaponStat,UnarmedData.ExecuteSkillProperties[weaponStat]
+		return weaponStat
 	end
 	local armorStat = UnarmedData.WeaponToArmor[statId]
 	if armorStat then
-		return weaponStat,UnarmedData.ExecuteSkillProperties[statId]
+		return armorStat
 	end
 end
 

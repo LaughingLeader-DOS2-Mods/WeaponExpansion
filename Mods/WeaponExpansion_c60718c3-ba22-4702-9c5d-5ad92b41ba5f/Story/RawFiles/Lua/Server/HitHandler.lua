@@ -1,70 +1,30 @@
----@type MessageData
-local MessageData = LeaderLib.Classes["MessageData"]
-
-local armorDamageTypes = {
-	Magic = "CurrentMagicArmor",
-	Corrosive = "CurrentArmor"
-}
-
----Reduces magic/corrosive damage by armor before it gets converted to vitality damage in BeforeCharacterApplyDamage
-local function ConvertArmorDamage(target,handle)
-	if ObjectIsCharacter(target) == 1 then
-		for damageType,stat in pairs(armorDamageTypes) do
-			local damage = NRD_HitGetDamage(handle, damageType)
-			if damage > 0 then
-				local armor = NRD_CharacterGetStatInt(target, stat)
-				if armor > 0 then
-					local nextArmor = armor - damage
-					local nextDamage = damage
-					if nextArmor < 0 then
-						nextDamage = -1 * nextArmor
-						NRD_HitClearDamage(handle, damageType)
-						NRD_HitAddDamage(handle, damageType, nextDamage)
-						nextArmor = 0
-					else
-						nextDamage = 0
-						NRD_HitClearDamage(handle, damageType)
-						local damageText = GameHelpers.GetDamageText(damageType, damage)
-						local messageData = MessageData:CreateFromTable("LLWEAPONEX_DamageText", {
-							Handle = Ext.GetCharacter(target).NetID,
-							Text = damageText
-						})
-						Ext.BroadcastMessage("LLWEAPONEX_DisplayOverheadDamage", messageData:ToString(), nil)
-						--CharacterStatusText(target, GameHelpers.GetDamageText(damageType, damage))
-					end
-					NRD_CharacterSetStatInt(target, stat, nextArmor)
-				end
-			end
-		end
-	end
-end
-
 --- @param target string
 --- @param source string
 --- @param damage integer
 --- @param handle integer
 --- @param data HitPrepareData
 local function OnPrepareHit(target,source,damage,handle,data)
-	if not StringHelpers.IsNullOrEmpty(source) then
-		if data.TotalDamageDone > 0 and data:Succeeded() then
-			if ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 and data.HitType == "Surface" then
-				data.Blocked = true
-				data:ClearAllDamage()
-				Timer.StartObjectTimer("LLWEAPONEX_ResetDualShieldsRushProtection", target, 750)
-				return
-			end
+	if data.TotalDamageDone > 0 and data:Succeeded() then
+		if ObjectGetFlag(target, "LLWEAPONEX_MasteryBonus_RushProtection") == 1 and data.HitType == "Surface" then
+			data.Blocked = true
+			data:ClearAllDamage()
+			Timer.StartObjectTimer("LLWEAPONEX_ResetDualShieldsRushProtection", target, 750)
+			return
+		end
 
-			local hitType = NRD_HitGetInt(handle, "HitType")
+		local hitType = NRD_HitGetInt(handle, "HitType")
 
-			if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 and hitType < 4 then
-				data.Blocked = true
-				data:ClearAllDamage()
-				RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
+		if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 and hitType < 4 then
+			data.Blocked = true
+			data:ClearAllDamage()
+			RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
+			if ObjectIsCharacter(target) == 1 then
 				local blockedText = Ext.GetTranslatedString("h175f5a66g78d1g41a8g9530g004e19a5db8a", "Blocked!")
 				CharacterStatusText(target, string.format("<font color='#CCFF00'>%s</font>", blockedText))
-				return
 			end
-
+			return
+		end
+		if not StringHelpers.IsNullOrEmpty(source) and ObjectIsCharacter(source) == 1 then
 			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
 			if coverData ~= nil and coverData.CanCounterAttack == true then
 				local blocker = coverData.Blocker
@@ -90,9 +50,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 			end
 
 			if not SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[source] then
-				if ObjectIsCharacter(source) == 1
-				and data:IsFromWeapon(false, false)
-				then
+				if data:IsFromWeapon(false, false) then
 					local sourceCharacter = GameHelpers.GetCharacter(source)
 					if sourceCharacter and UnarmedHelpers.HasUnarmedWeaponStats(sourceCharacter.Stats) then
 						UnarmedHelpers.ScaleUnarmedHitDamage(source,target,damage,handle,data,true)
@@ -114,7 +72,6 @@ local function OnPrepareHit(target,source,damage,handle,data)
 		end
 	end
 end
-RegisterListener("OnPrepareHit", OnPrepareHit)
 
 SkillConfiguration.ArmCannonSkills = {
 	Zone_LLWEAPONEX_ArmCannon_Disperse = true,
@@ -125,64 +82,64 @@ SkillConfiguration.ArmCannonSkills = {
 --- @param target EsvCharacter|EsvItem
 --- @param source EsvCharacter|EsvItem
 --- @param data HitData
-RegisterListener("StatusHitEnter", function(target, source, data)
-	-- if Vars.DebugMode then
+local function OnStatusHitEnter(target, source, data)
+-- if Vars.DebugMode then
 	-- 	fprint("[LLWEAPONEX:OnHit] skill(%s) target.MyGuid(%s) source.MyGuid(%s)", NRD_StatusGetString(target.MyGuid, handle, "SkillId"), target.MyGuid, source.MyGuid)
 	-- end
-	if source then
-		local sourceIsPlayer = IsPlayer(source.MyGuid)
-		local skill = data.Skill
-		
-		local blockedHit = PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid]
-		if blockedHit ~= nil then
-			data.HitStatus.AllowInterruptAction = false
-			data.HitStatus.ForceInterrupt = false
-			data.HitStatus.Interruption = false
-			DualShields_Cover_OnCounter(target.MyGuid, blockedHit.Blocker, blockedHit.Attacker)
-			PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid] = nil
-		end
-		local hitSucceeded = data.Success
-		if data.SkillData and SkillConfiguration.ArmCannonSkills[skill] then
-			data:SetHitFlag("Hit", true)
-			data:SetHitFlag({"Dodged", "Missed"}, false)
-			hitSucceeded = true
-		end
+	local skill = data.Skill
+	
+	local blockedHit = PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid]
+	if blockedHit ~= nil then
+		data.HitStatus.AllowInterruptAction = false
+		data.HitStatus.ForceInterrupt = false
+		data.HitStatus.Interruption = false
+		DualShields_Cover_OnCounter(target.MyGuid, blockedHit.Blocker, blockedHit.Attacker)
+		PersistentVars.SkillData.ShieldCover.BlockedHit[target.MyGuid] = nil
+	end
+	local hitSucceeded = data.Success
+	if data.SkillData and SkillConfiguration.ArmCannonSkills[skill] then
+		data:SetHitFlag("Hit", true)
+		data:SetHitFlag({"Dodged", "Missed"}, false)
+		hitSucceeded = true
+	end
 
-		if hitSucceeded and target then
-			SwordofVictory_OnHit(target, source, data)
-			local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target.MyGuid]
-			if coverData ~= nil then
-				DualShields_Cover_RedirectDamage(target.MyGuid, coverData.Blocker, source.MyGuid, data.HitStatus.StatusHandle)
+	if hitSucceeded and target and GameHelpers.Ext.ObjectIsCharacter(source) then
+		SwordofVictory_OnHit(target, source, data)
+		local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target.MyGuid]
+		if coverData ~= nil then
+			DualShields_Cover_RedirectDamage(target.MyGuid, coverData.Blocker, source.MyGuid, data.HitStatus.StatusHandle)
+		end
+		if not data.SkillData and data:IsFromWeapon() then
+			--local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(source)
+			--local isUnarmed = UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand)
+			if UnarmedHelpers.HasUnarmedWeaponStats(source.Stats) then
+				local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(source.Stats)
+				if weapon and weapon.ExtraProperties then
+					Ext.Server.ExecuteExtraPropertiesOnTarget(weapon.Name, source.Stats, target, target.WorldPos, "Target", false, nil)
+				end
 			end
-			if not data.SkillData and data:IsFromWeapon() then
-				local mainhand = CharacterGetEquippedItem(source.MyGuid, "Weapon")
-				local offhand = CharacterGetEquippedItem(source.MyGuid, "Shield")
-				if data.Damage > 0 and sourceIsPlayer then
-					-- Unarmed
-					if UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand) then
-						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, "LLWEAPONEX_Unarmed")
-						local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(source.Stats)
-						if weapon then
-							local executeSkill = UnarmedData.ExecuteSkillProperties[weapon.Name]
-							if executeSkill then
-								Ext.ExecuteSkillPropertiesOnTarget(executeSkill, source.MyGuid, target.MyGuid, target.WorldPos, "Target", false)
-							end
-						end
-					else
-						MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid)
-					end
-				end
-			elseif skill then
-				if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
-				and not SkillConfiguration.ArmCannonSkills[skill]
-				and IsMeleeWeaponSkill(skill)
-				then
-					ArmCannon_OnWeaponSkillHit(source.MyGuid, target.MyGuid, skill)
-				end
-				if IsWeaponSkill(data.SkillData) then
-					MasterySystem.GrantWeaponSkillExperience(source.MyGuid, target.MyGuid)
-				end
+			if data.Damage > 0 and GameHelpers.Character.IsPlayer(source) then
+				MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, isUnarmed and "LLWEAPONEX_Unarmed" or nil)
+			end
+		elseif skill then
+			if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
+			and not SkillConfiguration.ArmCannonSkills[skill]
+			and IsMeleeWeaponSkill(skill)
+			then
+				ArmCannon_OnWeaponSkillHit(source.MyGuid, target.MyGuid, skill)
+			end
+			if IsWeaponSkill(data.SkillData) then
+				MasterySystem.GrantWeaponSkillExperience(source.MyGuid, target.MyGuid)
 			end
 		end
+	end
+end
+
+RegisterListener("OnPrepareHit", OnPrepareHit)
+RegisterListener("StatusHitEnter", OnStatusHitEnter)
+
+AttackManager.OnHit.Register(function (attacker, target, data, targetIsObject, skill)
+	if not targetIsObject then
+		
 	end
 end)
