@@ -259,8 +259,10 @@ function UnarmedHelpers.IsUnarmedWeaponStat(stat)
 	end
 end
 
+---Returns true of the character's active weapon stats are unarmed, whether that's NoWeapon,
+---or weapon stats associated with equipped unarmed armor that's active when hands are empty.
 ---@param char StatCharacter
----@param allowShields boolean|nil
+---@param allowShields boolean|nil Allow offhand shields. Defaults to whatever LLWEAPONEX_AllowUnarmedShields is set to in global settings.
 function UnarmedHelpers.HasUnarmedWeaponStats(char, allowShields)
 	local character = nil
 	if GameHelpers.Ext.ObjectIsStatCharacter(char) then
@@ -274,6 +276,9 @@ function UnarmedHelpers.HasUnarmedWeaponStats(char, allowShields)
 		end
 	end
 	if character then
+		if allowShields == nil then
+			allowShields = GetSettings().Global:FlagEquals("LLWEAPONEX_AllowUnarmedShields", true)
+		end
 		local hasValidOffhand = (allowShields == true and character.OffHandWeapon ~= nil and character.OffHandWeapon.Slot == "Shield") or character.OffHandWeapon == nil
 		if UnarmedHelpers.IsUnarmedWeaponStat(character.MainWeapon)
 		and (UnarmedHelpers.IsUnarmedWeaponStat(character.OffHandWeapon) or hasValidOffhand) then

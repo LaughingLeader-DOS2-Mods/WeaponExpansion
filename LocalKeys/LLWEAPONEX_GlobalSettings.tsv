@@ -11,6 +11,8 @@ LLWEAPONEX_ThrowObjectLimitDisabled	Enable [Key:Target_LLWEAPONEX_ThrowObject_Di
 LLWEAPONEX_ThrowObjectLimitDisabled_Description	Enable the weight limit on [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] (Recommended). If enabled, you can only throw heavy characters if you have 40 Strength or Rank 4 Throwing Mastery.	hfc4163a2g4e16g4de9gb991g4e92e7d6b438
 LLWEAPONEX_UniqueAutoLevelingDisabled	Auto-Level Weapon Expansion Uniques	h28e6f038g408eg4421g91a6g4f86c40c4c39
 LLWEAPONEX_UniqueAutoLevelingDisabled_Description	If enabled, Weapon Expansion uniques will automatically level up to your level when equipped. If disabled, you will need to use another mod to level them up.	he464eb6bg3fe9g4a19gbc32g09a4cc2f1b7f
+LLWEAPONEX_AllowUnarmedShields	Allow Shields When Unarmed	hb66a3335g5aebg430cga687g3e72c206896f
+LLWEAPONEX_AllowUnarmedShields_Description	If enabled, characters can still gain unarmed mastery experience and scaling damage when using a shield in the offhand, as long as their primary slot is empty.	hfff96657g68d2g4540ga889g032c15d16b27
 LLWEAPONEX_SettingsMenu_Section_General	General	h6145e729g4cb0g4018gafe9gd89175b8943d
 LLWEAPONEX_SettingsMenu_Section_Uniques	<font color='#C7A758'>Unique Items</font>	h903efedcge7b3g485ag87bfgc121d0ecad7f
 LLWEAPONEX_MoveAllUniquesToVendingMachine	Move All Uniques	h4865a4a5ga3adg4634g950eg806a9ee574ba
