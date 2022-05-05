@@ -48,7 +48,7 @@ RegisterStatusListener("Applied", "LLWEAPONEX_REMOTEMINE_DETONATE", function(tar
 	end
 	if items ~= nil and #items > 0 then
 		local max = GameHelpers.GetExtraData("LLWEAPONEX_RemoteCharge_MaxInventoryDetonation", 5)
-		if Settings.Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
+		if GetSettings().Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
 			max = 99
 		end
 		if max > 0 then

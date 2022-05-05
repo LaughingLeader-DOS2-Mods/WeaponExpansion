@@ -301,7 +301,7 @@ local function OnItemTooltip(item, tooltip)
 
 	if not GameHelpers.Item.IsObject(item) then
 		if not _TAGS.LeaderLib_AutoLevel and _TAGS.LLWEAPONEX_AutoLevel
-		and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
+		and GetSettings().Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
 		then
 			local element = tooltip:GetElement("ItemDescription")
 			if element ~= nil and not string.find(string.lower(element.Label), "automatically level") then

@@ -57,7 +57,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 	--print(skill, Ext.JsonStringify(tooltip.Data))
 	local descriptionElement = tooltip:GetElement("SkillDescription") or {Type="SkillDescription", Label = ""}
 	if skill == "Target_LLWEAPONEX_RemoteMine_Detonate" then
-		if Settings.Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
+		if GetSettings().Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
 			descriptionElement.Label = Text.SkillTooltip.RemoteMineNoRestrictionDescription:ReplacePlaceholders(Ext.StatGetAttribute("Target_LLWEAPONEX_RemoteMine_Detonate", "TargetRadius"))
 		end
 	end

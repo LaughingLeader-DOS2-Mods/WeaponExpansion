@@ -151,7 +151,6 @@ Ext.Require("Shared/StatOverrides.lua")
 Ext.Require("Shared/SkillAPListener.lua")
 Ext.Require("Shared/SharedDataHooks.lua")
 Ext.Require("Shared/CustomSkillProperties.lua")
-local initSettings = Ext.Require("Shared/Settings.lua")
 
 -- if Vars.DebugMode then
 -- 	Ext.Require("Shared/Debug/GameMathTracing.lua")
@@ -236,9 +235,12 @@ if Vars.DebugMode then
 	Ext.RegisterListener("StatsLoaded", LoadExperienceVariables)
 end
 
-Ext.RegisterListener("SessionLoaded", function()
-	Settings = initSettings()
+---@return ModSettings
+function GetSettings()
+	return SettingsManager.GetMod(ModuleUUID, true, true)
+end
 
+Ext.RegisterListener("SessionLoaded", function()
 	LoadExperienceVariables()
 	EnableFeature("ApplyBonusWeaponStatuses")
 	EnableFeature("FixChaosDamageDisplay")

@@ -1,0 +1,50 @@
+{
+	"TitleColor": "#FFCC00",
+	"Data": {
+		"Flags": [
+			{
+				"Type": "Global",
+				"Entries": [
+					"LLWEAPONEX_UniqueAutoLevelingDisabled",
+					"LLWEAPONEX_ArmCannonRestrictionsDisabled",
+					"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
+					"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
+					"LLWEAPONEX_ThrowObjectLimitDisabled",
+					"LLWEAPONEX_AllowUnarmedShields"
+				]
+			},
+			{
+				"Type": "User",
+				"Entries": [
+					"LLWEAPONEX_AutoUnlockRecipesDisabled"
+				]
+			}
+		],
+		"Buttons": [
+			{
+				"ID" : "LLWEAPONEX_MoveAllUniquesToVendingMachine",
+				"Callback": "LLWEAPONEX_Settings_MoveAllUniquesToVendingMachine",
+				"HostOnly": true
+			}
+		]
+	},
+	"MenuOrder": [{
+			"Name": "LLWEAPONEX_SettingsMenu_Section_General",
+			"Entries": [
+				"LLWEAPONEX_AutoUnlockRecipesDisabled",
+				"LLWEAPONEX_ThrowObjectLimitDisabled",
+				"LLWEAPONEX_AllowUnarmedShields"
+			]
+		},
+		{
+			"Name": "LLWEAPONEX_SettingsMenu_Section_Uniques",
+			"Entries": [
+				"LLWEAPONEX_UniqueAutoLevelingDisabled",
+				"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
+				"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
+				"LLWEAPONEX_ArmCannonRestrictionsDisabled",
+				"LLWEAPONEX_MoveAllUniquesToVendingMachine"
+			]
+		}
+	]
+}

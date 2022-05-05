@@ -182,7 +182,7 @@ function UniqueManager.OnDeath(char)
 end
 
 local function CanAutoLevelUnique(item)
-	return (item:HasTag("LeaderLib_AutoLevel") or item:HasTag("LLWEAPONEX_AutoLevel")) and Settings.Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
+	return (item:HasTag("LeaderLib_AutoLevel") or item:HasTag("LLWEAPONEX_AutoLevel")) and GetSettings().Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
 end
 
 ---@param character EsvCharacter
