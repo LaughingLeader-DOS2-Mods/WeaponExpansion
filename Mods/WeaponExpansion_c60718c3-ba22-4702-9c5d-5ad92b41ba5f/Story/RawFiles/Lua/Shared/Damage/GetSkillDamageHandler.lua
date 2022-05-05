@@ -9,8 +9,9 @@ local isClient = Ext.IsClient()
 --- @param level integer
 --- @param noRandomization boolean
 local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization)
+	local attackerIsCharacter = GameHelpers.Ext.ObjectIsStatCharacter(attacker)
 	if skill.UseWeaponDamage == "Yes"
-	and GameHelpers.Ext.ObjectIsStatCharacter(attacker)
+	and attackerIsCharacter
 	and attacker.Character:HasTag("LLWEAPONEX_PacifistsWrath_Equipped") then
 		local damageList = Ext.NewDamageList()
 		damageList:Add("Physical", 1)
@@ -25,7 +26,7 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 			Ext.PrintError("Error getting damage for skill ",skill.Name)
 			Ext.PrintError(damageList)
 		end
-	else
+	elseif attackerIsCharacter then
 		-- Unarmed weapon damage scaling
 		if skill.UseWeaponDamage == "Yes" and UnarmedHelpers.HasUnarmedWeaponStats(attacker) then
 			local weapon = UnarmedHelpers.GetUnarmedWeapon(attacker)
@@ -47,4 +48,6 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 	end
 end
 
-Ext.RegisterListener("GetSkillDamage", OnGetSkillDamage)
+Ext.Events.GetSkillDamage:Subscribe(function(e)
+	OnGetSkillDamage(e.Skill, e.Attacker, e.IsFromItem, e.Stealthed, e.AttackerPosition, e.TargetPosition, e.Level, e.NoRandomization)
+end)
