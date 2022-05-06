@@ -6,7 +6,7 @@ LLWEAPONEX_AutoUnlockRecipesDisabled_Description	Enable automatically unlocking 
 LLWEAPONEX_RemoteChargeDetonationCountDisabled	Enable Remote Charge Detonation Limit	h145c7401gf7bbg45cag9233g74278a112220
 LLWEAPONEX_RemoteChargeDetonationCountDisabled_Description	Restrict the total number of remote changes that can detonate at once. If disabled, you can blow up everything in an inventory at once (not recommended for balance).	h580f2857g0a22g417cg80begc399154191cc
 LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled	Make the [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] Automatically Recharge	he3183667gd912g4492g833fgadb200ea2dd7
-LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled_Description	If enabled, [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] will automatically recharge over time. If disabled, charges are restored by enemies dying in battle.
+LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled_Description	If enabled, [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] will automatically recharge over time. If disabled, charges are restored by enemies dying in battle.	h7ec29161g3669g4f4dga980gce7b51e1e7d3
 LLWEAPONEX_ThrowObjectLimitDisabled	Enable [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] Limit	h8b499dd6g523fg40e2ga746g4adf2a1f63fb
 LLWEAPONEX_ThrowObjectLimitDisabled_Description	Enable the weight limit on [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] (Recommended). If enabled, you can only throw heavy characters if you have 40 Strength or Rank 4 Throwing Mastery.	hfc4163a2g4e16g4de9gb991g4e92e7d6b438
 LLWEAPONEX_UniqueAutoLevelingDisabled	Auto-Level Weapon Expansion Uniques	h28e6f038g408eg4421g91a6g4f86c40c4c39

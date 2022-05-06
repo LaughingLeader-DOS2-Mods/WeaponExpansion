@@ -1256,6 +1256,7 @@
 	<content contentuid="h7e890068gbcdfg4aabg899bgbdf88a47e724">Character has been marked for death.&lt;br&gt;If killed, the character will return as a friendly &lt;font color=&apos;#73f6ff&apos;&gt;Revenant&lt;font&gt; for 2 turns.</content>
 	<content contentuid="h7ea00032g103eg4ea1gbf1cg2b4da69e7621">Fumbled!</content>
 	<content contentuid="h7ebefc17g8de3g451bg8ca5gcd0a58d1f986">Peasant&apos;s Equalizer</content>
+	<content contentuid="h7ec29161g3669g4f4dga980gce7b51e1e7d3">If enabled, [Key:ARM_UNIQUE_LLWEAPONEX_Backpack_Demolition_A_DisplayName] will automatically recharge over time. If disabled, charges are restored by enemies dying in battle.</content>
 	<content contentuid="h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad">&lt;br&gt;&lt;img src=&apos;Icon_Line&apos; width=&apos;350%&apos;&gt;&lt;br&gt;&lt;font color=&apos;#00FFAA&apos; size=&apos;16&apos;&gt;Ammo Type: [1]&lt;/font&gt;</content>
 	<content contentuid="h7ef35923g2e83g410bgb1ecg1aa1acc31bba">Finely Crafted Elven Shields</content>
 	<content contentuid="h7f0ed2c6g0912g4e04g9212g0d8d8e9633d6">Character&apos;s max armor is temporarily decreased.</content>
@@ -1786,6 +1787,7 @@
 	<content contentuid="hb6293431g0ad9g45bbg9334gb81365e8f2ca">&lt;font color=&apos;#33FF00&apos;&gt;Your next pistol shot will deal [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]% more damage.&lt;/font&gt;</content>
 	<content contentuid="hb62e44dfg79b4g4a88gac70gb89724dadf12">Banner Lord</content>
 	<content contentuid="hb66213fdg1a98g4127ga55fg429f9cde9c6a">Runeblade</content>
+	<content contentuid="hb66a3335g5aebg430cga687g3e72c206896f">Allow Shields When Unarmed</content>
 	<content contentuid="hb681f9e5g7ac3g4da0g88f9ge30d4c14b563">Explosive Charge</content>
 	<content contentuid="hb69d0ce2g0c1dg4bdfg9d1fg6e77f212b510">Avalanche Rune</content>
 	<content contentuid="hb6b41943g9b7cg46a1gbff2g296ee08ac1a9">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are coated in a deadly toxin, dealing poison damage.</content>
@@ -2477,5 +2479,6 @@
 	<content contentuid="hff4e4e01ge7e6g490dg9284gc0dd127e87ef">Victory Cry</content>
 	<content contentuid="hff72913fgdc8cg4e21g908eg5e5b3e7b1acf">Peacekeeper</content>
 	<content contentuid="hff86de07g52e5g491cga553g90bb501e6f52">&lt;font color=&apos;#FFD900&apos;&gt;Changes [1] damage to [2].&lt;/font&gt;</content>
+	<content contentuid="hfff96657g68d2g4540ga889g032c15d16b27">If enabled, characters can still gain unarmed mastery experience and scaling damage when using a shield in the offhand, as long as their primary slot is empty.</content>
 	<content contentuid="hfffc1796gc71bg44bag8e7bgc568f8d6cd3a">Demon&apos;s Blade</content>
 </contentList>
