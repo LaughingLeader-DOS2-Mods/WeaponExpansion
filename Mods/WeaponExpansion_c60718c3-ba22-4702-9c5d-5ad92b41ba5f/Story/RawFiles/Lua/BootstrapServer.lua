@@ -174,9 +174,9 @@ Ext.Require("Server/Origins/OriginsUniqueItems.lua")
 Ext.Require("Shared/Mastery/_Init.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
 Ext.Require("Server/Updates.lua")
-if Ext.IsDeveloperMode() then
-    Ext.Require("Server/Debug/DebugMain.lua")
-end
+-- if Ext.IsDeveloperMode() then
+--     Ext.Require("Server/Debug/DebugMain.lua")
+-- end
 ---@param target EsvCharacter
 ---@param attacker StatCharacter|StatItem
 ---@param hit HitRequest
