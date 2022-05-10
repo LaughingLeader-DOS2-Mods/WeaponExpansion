@@ -412,19 +412,11 @@ function Harken_SetTattoosActive(uuid)
 	end
 	if needsSync then
 		Ext.SyncStat("Stats_LLWEAPONEX_Tattoos_Strength", true)
-		if HasActiveStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH") == 1 then
-			RemoveStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH")
-		else
-			ApplyStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH", -1.0, 0, uuid)
-		end
-		-- local character = Ext.GetCharacter(uuid)
-		-- if character ~= nil then
-		-- 	local status = character:GetStatus("LLWEAPONEX_TATTOOS_STRENGTH")
-		-- 	if status ~= nil then
-		-- 		status.RequestClientSync = true
-		-- 	else
-		-- 		ApplyStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH", -1.0, 0, uuid)
-		-- 	end
-		-- end
+		StatusManager.RemovePermanentStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH")
+		StatusManager.ApplyPermanentStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH")
 	end
 end
+
+RegisterListener("Initialized", function ()
+	StatusManager.ApplyPermanentStatus(Origin.Harken, "LLWEAPONEX_TATTOOS_STRENGTH")
+end)

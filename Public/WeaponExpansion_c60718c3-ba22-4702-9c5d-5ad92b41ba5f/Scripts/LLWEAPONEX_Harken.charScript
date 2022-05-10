@@ -2,74 +2,13 @@ INIT
 	CHARACTER:__Me
 EVENTS
 
-EVENT LLWEAPONEX_Harken_Init
+EVENT LLWEAPONEX_Harken_TattoosUpdate
 ON
 	OnInit()
-ACTIONS
-IF "!c1"
-	CharacterHasStatus(__Me, LLWEAPONEX_TATTOOS_STRENGTH)
-THEN
-	CharacterApplyStatus(__Me, LLWEAPONEX_TATTOOS_STRENGTH, -1, 0, __Me)
-ENDIF
-	StartTimer("LLWEAPONEX_Harken_CombatTimer_CheckBonuses", 2.0, 0)
-
-EVENT LLWEAPONEX_Harken_CheckChestArmor
-VARS
-	ITEM:_Item
-	INT:_HasChestArmor
-ON
-	OnFunction("LLWEAPONEX_Harken_CheckChestArmor")
-ACTIONS
-	// Handled in Lua
-	CharacterEvent(__Me, "LLWEAPONEX_Harken_SetTattoosActive")
-
-EVENT LLWEAPONEX_Harken_ItemEquipped
-ON
 	OnItemEquipped(__Me, _)
 	OnItemUnequipped(__Me, _)
-ACTIONS
-	CallFunction("LLWEAPONEX_Harken_CheckChestArmor")
-
-EVENT LLWEAPONEX_Harken_TattoosApplied
-ON
 	OnCharacterStatusApplied(__Me, LLWEAPONEX_TATTOOS_STRENGTH)
-ACTIONS
-	CallFunction("LLWEAPONEX_Harken_CheckChestArmor")
-
-EVENT LLWEAPONEX_Harken_TattoosRemoved
-ON
-	OnCharacterStatusRemoved(__Me, LLWEAPONEX_TATTOOS_STRENGTH)
-	OnCharacterStatusRemoved(__Me, RESURRECT)
-ACTIONS
-IF "!c1"
-	CharacterIsDead(__Me, 1)
-THEN
-	StartTimer("LLWEAPONEX_Harken_StatusReapplyDelay",0.5,-1)
-ELSE
-	StartTimer("LLWEAPONEX_Harken_StatusReapplyDelay",30.0,-1)
-ENDIF
-	
-EVENT LLWEAPONEX_Harken_FrameDelayForReapply
-ON
-	OnTimer("LLWEAPONEX_Harken_StatusReapplyDelay")
-ACTIONS
-IF "c1"
-	CharacterHasStatus(__Me, LLWEAPONEX_TATTOOS_STRENGTH)
-THEN
-	StopTimer("StatusReapplyDelay")
-ELSE
-	CharacterApplyStatus(__Me,LLWEAPONEX_TATTOOS_STRENGTH,-1,0,__Me)
-ENDIF
-
-EVENT LLWEAPONEX_Harken_EnteredCombat
-ON
 	OnEnteredCombat(__Me, _)
 	OnLeftCombat(__Me, _)
 ACTIONS
-	StartTimer("LLWEAPONEX_Harken_CombatTimer_CheckBonuses", 1.0, 0)
-
-EVENT LLWEAPONEX_Harken_CombatTimer
-ON
-	OnTimer("LLWEAPONEX_Harken_CombatTimer_CheckBonuses")
-ACTIONS
-	CallFunction("LLWEAPONEX_Harken_CheckChestArmor")
+	CharacterEvent(__Me, "LLWEAPONEX_Harken_SetTattoosActive")
