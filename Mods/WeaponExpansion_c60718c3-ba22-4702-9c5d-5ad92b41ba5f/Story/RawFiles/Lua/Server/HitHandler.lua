@@ -110,16 +110,18 @@ local function OnStatusHitEnter(target, source, data)
 			DualShields_Cover_RedirectDamage(target.MyGuid, coverData.Blocker, source.MyGuid, data.HitStatus.StatusHandle)
 		end
 		if not data.SkillData and data:IsFromWeapon() then
+			local canGrantMasteryXP = data.Damage > 0 and GameHelpers.Character.IsPlayer(source)
 			--local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(source)
-			--local isUnarmed = UnarmedHelpers.IsUnarmedWeapon(mainhand) and UnarmedHelpers.IsUnarmedWeapon(offhand)
 			if UnarmedHelpers.HasUnarmedWeaponStats(source.Stats) then
 				local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(source.Stats)
 				if weapon and weapon.ExtraProperties then
-					Ext.Server.ExecuteExtraPropertiesOnTarget(weapon.Name, source.Stats, target, target.WorldPos, "Target", false, nil)
+					Ext.PropertyList.ExecuteExtraPropertiesOnTarget(weapon.Name, "ExtraProperties", source, target, target.WorldPos, "Target", false, nil)
 				end
-			end
-			if data.Damage > 0 and GameHelpers.Character.IsPlayer(source) then
-				MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, isUnarmed and "LLWEAPONEX_Unarmed" or nil)
+				if canGrantMasteryXP then
+					MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, "LLWEAPONEX_Unarmed")
+				end
+			elseif canGrantMasteryXP then
+				MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid)
 			end
 		elseif skill then
 			if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
