@@ -407,7 +407,8 @@ local function StatOverrides_Init()
 		--print(gameMaster, requirement, ability)
 	
 		-- UseWeaponDamage is needed so weapons still get unsheathed when not unarmed.
-		if gameMaster == "Yes" and not IsEnemySkill(skill) and Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
+		--gameMaster == "Yes" and not IsEnemySkill(skill)
+		if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
 			if requirement == "MeleeWeapon" then
 				SwapRequirementWithTag(skill, "None", "LLWEAPONEX_NoMeleeWeaponEquipped", true)
 			elseif requirement == "DaggerWeapon" and ability == "Rogue" then
