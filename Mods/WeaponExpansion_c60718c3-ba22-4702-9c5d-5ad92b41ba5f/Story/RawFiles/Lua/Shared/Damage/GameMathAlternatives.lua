@@ -1,3 +1,57 @@
+-- from CDivinityStats_Character::Game.Math.CalculateWeaponDamageInner
+--- @param character StatCharacter
+--- @param weapon StatItem
+--- @param damageList DamageList
+--- @param noRandomization boolean
+local function CalculateWeaponScaledDamage(character, weapon, damageList, noRandomization)
+    local damages = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
+
+    for damageType, damage in pairs(damages) do
+        --FIX for low damage range inaccuracy - Missing a +1
+        local randRange = 1
+        if damage.Max - damage.Min + 1 >= 1 then
+            randRange = damage.Max - damage.Min + 1
+        end
+        local finalAmount = 0
+
+        if noRandomization then
+            finalAmount = damage.Min + math.floor(randRange / 2)
+        else
+            finalAmount = damage.Min + Ext.Random(0, randRange)
+        end
+
+        damageList:Add(damageType, finalAmount)
+    end
+end
+
+--- @param attacker StatCharacter
+--- @param weapon StatItem
+--- @param noRandomization boolean
+local function CalculateWeaponDamage(attacker, weapon, noRandomization)
+    local damageList = Ext.NewDamageList()
+
+    CalculateWeaponScaledDamage(attacker, weapon, damageList, noRandomization)
+
+    local offHand = attacker.OffHandWeapon
+    if offHand ~= nil and weapon.InstanceId ~= offHand.InstanceId and false then -- Temporarily off
+        local bonusWeapons = {}
+        for i, bonusWeapon in pairs(bonusWeapons) do
+            -- FIXME Create item from bonus weapon stat and apply attack as item???
+            error("BonusWeapons not implemented")
+            local bonusWeaponStats = Game.Math.CreateBonusWeapon(bonusWeapon)
+            CalculateWeaponScaledDamage(attacker, bonusWeaponStats, damageList, noRandomization)
+        end
+    end
+
+    Game.Math.ApplyDamageBoosts(attacker, damageList)
+
+    if offHand ~= nil and weapon.InstanceId == offHand.InstanceId then
+        damageList:Multiply(Ext.ExtraData.DualWieldingDamagePenalty)
+    end
+
+    return damageList
+end
+
 --- @param skill StatEntrySkillData
 --- @param attacker StatCharacter
 --- @param isFromItem boolean
@@ -40,7 +94,7 @@ local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPo
 		if offHand == nil then offHand = attacker.OffHandWeapon end
 
         if weapon ~= nil then
-            local mainDmgs = Game.Math.CalculateWeaponDamage(attacker, weapon, noRandomization)
+            local mainDmgs = CalculateWeaponDamage(attacker, weapon, noRandomization)
             mainDmgs:Multiply(damageMultipliers)
             if damageType ~= nil then
                 mainDmgs:ConvertDamageType(damageType)
@@ -49,7 +103,7 @@ local function GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPo
         end
 
         if offHand ~= nil and (weapon ~= nil and Game.Math.IsRangedWeapon(weapon) == Game.Math.IsRangedWeapon(offHand)) or (weapon == nil and Game.Math.IsRangedWeapon(offHand)) then
-            local offHandDmgs = Game.Math.CalculateWeaponDamage(attacker, offHand, noRandomization)
+            local offHandDmgs = CalculateWeaponDamage(attacker, offHand, noRandomization)
             offHandDmgs:Multiply(damageMultipliers)
             if damageType ~= nil then
                 offHandDmgs:ConvertDamageType(damageType)
@@ -249,7 +303,7 @@ function Math.GetTotalBaseAndCalculatedWeaponDamage(character, weapon, applyDual
     local totalMin = 0
     local totalMax = 0
 
-    local mainDamageRange = CalculateWeaponScaledDamageRanges(character, mainWeapon)
+    local mainDamageRange = Game.Math.CalculateWeaponScaledDamageRanges(character, weapon)
 
     return math.floor(baseMin),math.floor(baseMax),math.floor(totalMin),math.floor(totalMax)
 end
@@ -279,7 +333,7 @@ end
 --         totalMax = totalMax + damage.Max
 --     end
 
---     --CalculateWeaponScaledDamageRanges
+--     --Game.Math.CalculateWeaponScaledDamageRanges
 --     -- local boost = character.DamageBoost 
 --     --     + Game.Math.ComputeWeaponCombatAbilityBoost(character, weapon)
 --     --     + Game.Math.ComputeWeaponRequirementScaledDamage(character, weapon)

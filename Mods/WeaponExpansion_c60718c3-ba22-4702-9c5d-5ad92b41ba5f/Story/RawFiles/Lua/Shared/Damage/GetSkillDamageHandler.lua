@@ -29,8 +29,7 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 	elseif attackerIsCharacter then
 		-- Unarmed weapon damage scaling
 		if skill.UseWeaponDamage == "Yes" and UnarmedHelpers.HasUnarmedWeaponStats(attacker) then
-			local weapon = UnarmedHelpers.GetUnarmedWeapon(attacker)
-			local damageList,deathType = Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon)
+			local damageList,deathType = Skills.DamageFunctions.UnarmedSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isClient)
 			if not isClient then
 				local hasDamage = false
 				for i,v in pairs(damageList:ToTable()) do
@@ -49,5 +48,12 @@ local function OnGetSkillDamage(skill, attacker, isFromItem, stealthed, attacker
 end
 
 Ext.Events.GetSkillDamage:Subscribe(function(e)
-	OnGetSkillDamage(e.Skill, e.Attacker, e.IsFromItem, e.Stealthed, e.AttackerPosition, e.TargetPosition, e.Level, e.NoRandomization)
+	local damageList,deathType = OnGetSkillDamage(e.Skill, e.Attacker, e.IsFromItem, e.Stealthed, e.AttackerPosition, e.TargetPosition, e.Level, e.NoRandomization)
+	if not isClient and damageList then
+		e.DamageList:CopyFrom(damageList)
+		if deathType then
+			e.DeathType = deathType
+		end
+		e:StopPropagation()
+	end
 end)

@@ -144,6 +144,7 @@ local function CalculateWeaponScaledDamage(character, weapon, damageList, noRand
 
 	for damageType, damage in pairs(damages) do
         totalMin = totalMin + damage.Min
+        --FIX for low damage range inaccuracy - Missing a +1
         local randRange = 1
         if damage.Max - damage.Min + 1 >= 1 then
             randRange = damage.Max - damage.Min + 1

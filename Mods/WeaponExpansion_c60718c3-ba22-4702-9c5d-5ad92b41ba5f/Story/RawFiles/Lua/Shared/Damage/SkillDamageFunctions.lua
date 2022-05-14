@@ -869,3 +869,23 @@ Skills.DamageFunctions.PistolDamage = GetPistolDamage
 Skills.DamageFunctions.HandCrossbowDamage = GetHandCrossbowDamage
 Skills.DamageFunctions.PistolSkillDamage = GetPistolSkillDamage
 Skills.DamageFunctions.HandCrossbowSkillDamage = GetHandCrossbowSkillDamage
+
+--- @param baseSkill StatEntrySkillData
+--- @param attacker StatCharacter
+--- @param isFromItem boolean
+--- @param stealthed boolean
+--- @param attackerPos number[]
+--- @param targetPos number[]
+--- @param level integer
+--- @param noRandomization boolean
+--- @param isTooltip boolean
+Skills.DamageFunctions.UnarmedSkillDamage = function(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
+	local weapon = UnarmedHelpers.GetUnarmedWeapon(attacker)
+	if isTooltip ~= true then
+		local damageList,deathType = Math.GetSkillDamage(baseSkill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon)
+		return damageList,deathType
+	else
+		local damageRange = Math.GetSkillDamageRange(attacker, baseSkill, weapon)
+		return damageRange
+	end
+end

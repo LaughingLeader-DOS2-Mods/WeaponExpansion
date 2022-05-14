@@ -194,7 +194,7 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 		end
 	elseif param == "Damage" then
 		if skill.UseWeaponDamage == "Yes" and UnarmedHelpers.HasUnarmedWeaponStats(character) then
-			return GetUnarmedBasicAttackDamage(skill, character, isFromItem, param)
+			return GetDamageParamResult(Skills.DamageFunctions.UnarmedSkillDamage, skill, character, isFromItem)
 		else
 			local param_func = Skills.Damage[skill.Name]
 			if param_func ~= nil then
