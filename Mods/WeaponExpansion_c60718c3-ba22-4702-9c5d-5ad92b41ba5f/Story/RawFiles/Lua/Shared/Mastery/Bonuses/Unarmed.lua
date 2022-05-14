@@ -11,7 +11,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 1, {
 			PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_R_HandFX")
 			PlayEffect(char, "RS3_FX_Char_Creatures_Condor_Cast_Warrior_01", "Dummy_L_HandFX")
 		elseif state == SKILL_STATE.HIT and data.Success then
-			GameHelpers.Skill.Explode(data.Target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage", char)
+			GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, GetDamageFunction = Skills.DamageFunctions.UnarmedSkillDamage})
+			--GameHelpers.Skill.Explode(data.Target, "Projectile_LLWEAPONEX_MasteryBonus_PetrifyingTouchBonusDamage", char)
 			local forceDistance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Unarmed_PetrifyingTouch_KnockbackDistance", 4.0)
 			if forceDistance > 0 then
 				local x,y,z = GetPosition(data.Target)
@@ -54,7 +55,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 2, {
 })
 
 if not isClient then
-	local loweredCooldownText = ts:CreateFromKey("LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus", "<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2]</font>")
+	local loweredCooldownText = ts:CreateFromKey("LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus", "<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2] Turn(s)</font>")
 	Timer.RegisterListener("LLWEAPONEX_Unarmed_BlinkStrikeBonus", function (timerName, char)
 		local targetsHit = PersistentVars.MasteryMechanics.BlinkStrikeTargetsHit[char] or 0
 		if targetsHit > 0 then
@@ -72,7 +73,8 @@ if not isClient then
 				end
 				if #skills > 0 then
 					local skill = Common.GetRandomTableEntry(skills)
-					local nextCooldown = math.max(0, character:GetSkillInfo(skill).ActiveCooldown - targetsHit)
+					local cdReduction = (targetsHit * 6.0)
+					local nextCooldown = math.max(0, character:GetSkillInfo(skill).ActiveCooldown - cdReduction)
 					GameHelpers.Skill.SetCooldown(char, skill, nextCooldown)
 					local displayNameKey = Ext.StatGetAttribute(skill, "DisplayName")
 					local name = GameHelpers.GetStringKeyText(displayNameKey)
