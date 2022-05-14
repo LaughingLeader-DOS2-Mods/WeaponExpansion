@@ -189,7 +189,7 @@ end
 
 local function GetStatusListenerMasteryBonuses(target, source, checkBonusOn)
 	local bonuses = {}
-	if (checkBonusOn == "Source" or checkBonusOn == "Any") and GameHelpers.Ext.ObjectIsCharacter(source) then
+	if (checkBonusOn == "Source" or checkBonusOn == "Any") and source ~= StringHelpers.NULL_UUID and GameHelpers.Ext.ObjectIsCharacter(source) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, nil, checkBonusOn)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}
@@ -197,7 +197,10 @@ local function GetStatusListenerMasteryBonuses(target, source, checkBonusOn)
 			bonuses[bonus][target] = true
 		end
 	end
-	if (checkBonusOn == "Target" or checkBonusOn == "Any" or StringHelpers.IsNullOrEmpty(source)) and GameHelpers.Ext.ObjectIsCharacter(target) then
+	if target ~= StringHelpers.NULL_UUID
+	and (checkBonusOn == "Target" or checkBonusOn == "Any" or StringHelpers.IsNullOrEmpty(source))
+	and GameHelpers.Ext.ObjectIsCharacter(target)
+	then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(target, nil, checkBonusOn)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}
