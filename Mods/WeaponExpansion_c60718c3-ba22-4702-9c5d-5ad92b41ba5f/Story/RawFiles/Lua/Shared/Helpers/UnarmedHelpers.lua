@@ -303,5 +303,16 @@ end
 
 ---@param character EsvCharacter|EclCharacter
 function UnarmedHelpers.HasEmptyHands(character)
-	return character.Stats:GetItemBySlot("Weapon") == nil and character.Stats:GetItemBySlot("Shield") == nil
+	if character.Stats:GetItemBySlot("Weapon") == nil then
+		local shield = character.Stats:GetItemBySlot("Shield")
+		if shield == nil then
+			return true
+		else
+			local allowShields = GetSettings().Global:FlagEquals("LLWEAPONEX_AllowUnarmedShields", true)
+			if (allowShields == true and shield.Slot == "Shield") then
+				return true
+			end
+		end
+	end
+	return false
 end
