@@ -142,119 +142,107 @@ RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(...) SwapSk
 RegisterSkillListener("Shout_LLWEAPONEX_Pistol_Reload", function(...) SwapSkills("Projectile_LLWEAPONEX_Pistol_Shoot", true, ...) end)
 --RegisterSkillListener("Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy", function(...) SwapHandCrossbowSkills(false, ...) end)
 
----@param skill string
----@param char string
----@param state SkillState
----@param data SkillEventData
-RegisterSkillListener("Projectile_LLWEAPONEX_DarkFireball", function(skill, char, state, data)
-	if state == SKILL_STATE.CAST then
-		local radius = math.max(1.0, Ext.StatGetAttribute("Projectile_LLWEAPONEX_DarkFireball", "ExplodeRadius") - 1.0)
+SkillManager.Register.Cast("Projectile_LLWEAPONEX_DarkFireball",
+function(skill, char, state, data)
+	local radius = math.max(1.0, Ext.StatGetAttribute("Projectile_LLWEAPONEX_DarkFireball", "ExplodeRadius") - 1.0)
+	if radius > 0 then
 		data:ForEach(function (target, targetType, skillData)
-			local x,y,z = GameHelpers.Math.GetPosition(target, true)
-			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCursed", radius, 1)
-			Osi.LeaderLib_Helper_CreateSurfaceWithOwnerAtPosition(char, x, y, z, "SurfaceFireCloudCursed", radius, 1)
+			local pos = GameHelpers.Math.GetPosition(target)
+			GameHelpers.Surface.CreateSurface(pos, "FireCursed", radius, 6.0, char.Handle, false)
+			GameHelpers.Surface.CreateSurface(pos, "FireCloudCursed", radius, 6.0, char.Handle, false)
 		end, data.TargetMode.All)
 	end
 end)
 
-RegisterSkillListener({"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"}, function(skill, char, state, data)
-	if state == SKILL_STATE.HIT then
-		-- Silver bolts / Bullets do bonus damage to undead/voidwoken
-		if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
-			local character = Ext.GetCharacter(char)
-			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
-				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbow_SilverBonusDamage", 1.5)
-				GameHelpers.Damage.IncreaseDamage(data.Target, char, data.Handle, bonus, false)
+SkillManager.Register.Hit({"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"},
+function(skill, char, state, data)
+	-- Silver bolts / Bullets do bonus damage to undead/voidwoken
+	if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
+		if Skills.HasTaggedRuneBoost(char.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
+			local bonus = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbow_SilverBonusDamage", 1.5)
+			if bonus > 0 then
+				data:MultiplyDamage(bonus, true)
 			end
 		end
 	end
 end)
 
-RegisterSkillListener({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"}, function(skill, char, state, data)
-	if state == SKILL_STATE.HIT then
-		-- Silver bullets do bonus damage to undead/voidwoken
-		if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
-			local character = Ext.GetCharacter(char)
-			if Skills.HasTaggedRuneBoost(character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
-				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_SilverBonusDamage", 1.5)
-				data:MultiplyDamage(bonus)
+SkillManager.Register.Hit({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"},
+function(skill, char, state, data, dataType)
+	-- Silver bullets do bonus damage to undead/voidwoken
+	if data.Success and TagHelpers.IsUndeadOrVoidwoken(data.Target) then
+		if Skills.HasTaggedRuneBoost(char.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
+			local bonus = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_SilverBonusDamage", 1.5)
+			if bonus > 0 then
+				data:MultiplyDamage(bonus, true)
 			end
 		end
 	end
 end)
 
-RegisterSkillListener({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy"}, function(skill, char, state, data)
-	if state == SKILL_STATE.CAST then
-		data:ForEach(function(target, targetType, d)
-			local x,y,z = GameHelpers.Math.GetPosition(target, true)
-			local delay = math.floor(GameHelpers.GetExtraData("LLWEAPONEX_FutureBarrage_TurnDelay", 3))
-			if Vars.DebugMode then
-				delay = 1
+SkillManager.Register.Cast({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy"},
+function(skill, char, state, data, dataType)
+	local combat = CombatGetIDForCharacter(char.MyGuid)
+	data:ForEach(function(target, targetType, d)
+		local pos = GameHelpers.Math.GetPosition(target)
+		local delay = math.floor(GameHelpers.GetExtraData("LLWEAPONEX_FutureBarrage_TurnDelay", 3))
+		if Vars.DebugMode then
+			delay = 1
+		end
+		if delay > 0 then
+			if PersistentVars.SkillData.FutureBarrage[char.MyGuid] == nil then
+				PersistentVars.SkillData.FutureBarrage[char.MyGuid] = {}
 			end
-			Osi.LeaderLib_Turns_TrackPositionWithObject(char, x, y, z, "LLWEAPONEX_Greatbow_FutureBarrageFire", delay)
-			local handle = PlayScaledLoopEffectAtPosition("LLWEAPONEX_FX_AreaRadiusDecal_Circle_1m_Green_01", 8.0, x, y, z)-- == 4m
-			Osi.DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_LoopFX(char, x, y, z, handle)
-			--Osi.DB_LLWEAPONEX_Greatbows_Temp_FutureBarrage_NextEffectPos:Delete(char, x, y, z)
-		end, data.TargetMode.All)
+			table.insert(PersistentVars.SkillData.FutureBarrage[char.MyGuid], pos)
+			TurnCounter.CountDown("LLWEAPONEX_Greatbow_FutureBarrageFire", delay, combat or nil, {Position = pos})
+		end
+		EffectManager.PlayEffectAt("LLWEAPONEX_FX_AreaRadiusDecal_Circle_1m_Green_01", pos, {Scale=8.0})
+	end, data.TargetMode.All)
+end)
+
+--Make hits against disabled/immobile enemies critical hits
+SkillManager.Register.Hit("ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows",
+function(skill, char, state, data, dataType)
+	if data.Success and GameHelpers.Ext.ObjectIsCharacter(data.TargetObject) and not data:HasHitFlag("CriticalHit", true) then
+		if GameHelpers.Status.IsDisabled(data.TargetObject)
+		or data.TargetObject.Stats.Movement <= 0
+		or GameHelpers.Status.IsActive(data.TargetObject, "WEB") then
+			data:SetHitFlag("CriticalHit", true)
+			local mult = Game.Math.GetCriticalHitMultiplier(char.Stats.MainWeapon, char.Stats, 0.0)
+			data:MultiplyDamage(mult)
+		end
 	end
 end)
 
-Timer.RegisterListener("Timers_LLWEAPON_FutureBarrageDummyCast", function(timerName, caster, dummy)
-	if caster and dummy then
-		local x,y,z = GetVarFloat3(dummy, "LLWEAPONEX_FutureBarrageTarget")
-		--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
-		CharacterUseSkillAtPosition(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", x, y, z, 0, 1)
-		CharacterCharacterSetEvent(caster, dummy, "LLWEAPONEX_Greatbow_FutureBarrage_DummySkillUsed")
+TurnCounter.RegisterListener("LLWEAPONEX_Greatbow_FutureBarrageFire", function (id, turns, lastTurns, finished, data)
+	if finished then
+		EffectManager.PlayEffectAt("LLWEAPONEX_FX_Skills_Greatbow_FutureBarrage_Decal_AttackImminent_01", data.Position)
+		Timer.Start("LLWEAPONEX_FutureBarrage_FireSkill", 250, data.Position)
+	else
+		if turns == 1 then
+			EffectManager.PlayEffectAt("LLWEAPONEX_FX_AreaRadiusDecal_Circle_1m_01", data.Position, {
+				Scale = 8.0
+			})
+		end
 	end
 end)
 
-local function SetupDummy(dummy, owner)
-	CharacterTransformFromCharacter(dummy, owner, 0, 1, 1, 0, 0, 0, 0)
-	--SetVisible(dummy, 0)
-	CharacterSetDetached(dummy, 1)
-
-	ObjectSetFlag(dummy, "LEADERLIB_IGNORE", 0)
-	SetCanJoinCombat(dummy, 0)
-	SetCanFight(dummy, 0)
-	SetTag(dummy, "LeaderLib_Dummy")
-	SetTag(dummy, "SUMMON") -- For Crime/etc to ignore the dummy
-	SetVarObject(dummy, "LeaderLib_Dummy_Owner", owner)
-	Osi.LeaderLib_ToggleScripts_EnableScript("LeaderLib_DummyCrimesEnabled", "LeaderLib")
-
-	CharacterMakeStoryNpc(dummy, 1)
-	
-	SetFaction(dummy, GetFaction(owner))
-	CharacterAddAttitudeTowardsPlayer(dummy, owner, 100)
-	SetTag(dummy, "LeaderLib_TemporaryCharacter")
-	ObjectSetFlag(dummy, "LeaderLib_IsSkillDummy", 0)
-end
-
-function FutureBarrage_FireDummySkill(caster, x, y, z)
-	x = tonumber(x)
-	y = tonumber(y)
-	z = tonumber(z)
-	local dummy = TemporaryCharacterCreateAtPosition(x, y, z, "LeaderLib_SkillDummy_94668062-11ea-4ecf-807c-4cc225cbb236", 0)
-	SetVarFloat3(dummy, "LLWEAPONEX_FutureBarrageTarget", x, y, z)
-	SetupDummy(dummy, caster)
-
-	CharacterAddSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", 0)
-	local dummyBow = GameHelpers.Item.CreateItemByStat("WPN_LLWEAPONEX_Greatbow", {ItemType = "Common"})
-	if dummyBow then
-		NRD_CharacterEquipItem(dummy, dummyBow, "Weapon", 0, 0, 0, 1)
-	else
-		print("Failed to make dummy Greatbow")
+Timer.RegisterListener("LLWEAPONEX_FutureBarrage_FireSkill", function (timerName, targetPosition)
+	for uuid,positions in pairs(PersistentVars.SkillData.FutureBarrage) do
+		for i,pos in pairs(positions) do
+			if targetPosition[1] == pos[1]
+			and targetPosition[2] == pos[2]
+			and targetPosition[3] == pos[3]
+			then
+				GameHelpers.Skill.CreateProjectileStrike(targetPosition, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows", uuid, {
+					PlayCastEffects=true,
+					PlayTargetEffects=true
+				})
+				table.remove(positions, i)
+			end
+		end
+		if #positions == 0 then
+			PersistentVars.SkillData.FutureBarrage[uuid] = nil
+		end
 	end
-	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
-	Timer.Start("Timers_LLWEAPON_FutureBarrageDummyCast", 250, caster, dummy)
-	-- Timer.StartOneshot(string.format("Timers_LLWEAPON_FutureBarrageDummyCast_%s", dummy), 250, function()
-	-- 	Osi.LeaderLib_Behavior_TeleportTo(dummy, caster)
-	-- 	--CharacterUseSkill(dummy, "ProjectileStrike_Greatbow_FutureBarrage_RainOfArrows_DummySkill", dummy, 0, 1, 1)
-	-- end)
-end
-function FutureBarrage_ApplyDamage(caster, target, isBonus)
-	if isBonus ~= nil then
-		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_Damage", {HitParams = HitFlagPresets.FutureBarrage})
-	else
-		GameHelpers.Damage.ApplySkillDamage(caster, target, "Projectile_LLWEAPONEX_Status_Greatbow_FutureBarrage_BonusDamage", {HitParams = HitFlagPresets.FutureBarrage})
-	end
-end
+end)
