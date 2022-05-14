@@ -176,24 +176,3 @@ THEN
 	StopLoopEffect(_FXHandle, 1)
 	SetVar(_Character, "LLWEAPONEX_Greatbow_AttackFXHandle", INT64:null)
 ENDIF
-
-EVENT LLWEAPONEX_Greatbows_BarrageBonusDamage
-VARS
-	CHARACTER:_Source
-	CHARACTER:_Target
-	FLOAT:_Movement
-	STRING:_Str
-	FIXEDSTRING:_StrF
-ON
-	OnCharacterCharacterEvent(_Target, _Source, "LLWEAPONEX_Greatbows_FutureBarrage_CheckMovement")
-ACTIONS
-IF "c1|!c2|c3|c4&(c5|c6)"
-	IsTagged(_Target, "LeaderLib_IsDisabled")
-	CharacterCanMove(_Target)
-	CharacterHasStatus(_Target, WEB)
-	CharacterGetStat(_Movement, _Target, Movement)
-	IsLessThen(_Movement, 0.01)
-	IsEqual(_Movement, 0)
-THEN
-	CharacterCharacterEvent(_Source, _Target, "LLWEAPONEX_Greatbows_FutureBarrage_ApplyBonusDamage")
-ENDIF

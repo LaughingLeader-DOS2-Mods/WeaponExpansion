@@ -34,4 +34,4 @@ LLWEAPONEX_StatusText_Pistol_MarkedCrit	<font color='#FF337F' size='22'><p align
 LLWEAPONEX_StatusText_RunebladeRuneBlocked	<font color='#FF0000' size='22'>*This rune can only be inserted into a <font color='#40E0D0'>Runeblade</font>.*</font>	h9e47bd8agc147g4dc5g9eaeg15c5af29b4b9
 LLWEAPONEX_StatusText_StatusExtended	<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>	h8224bb41g2261g4a50ga1feg7dc0f7394eb7
 LLWEAPONEX_StatusText_ThrowObjectFailed	<font color='#FF1155' size='22'>Too Heavy!</font>	h6fc82247g8e16g4085g9bfag539c8a0eaca5
-LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus	<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2]</font>	hb08c211ag470fg4dc8gbd91ge51263a6be10
+LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus	<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2] Turn(s)</font>	hb08c211ag470fg4dc8gbd91ge51263a6be10

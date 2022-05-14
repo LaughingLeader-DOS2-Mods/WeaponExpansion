@@ -34,13 +34,6 @@ HitFlagPresets = {
         Dodged = false,
         Missed = false,
     }),
-    FutureBarrage = HitFlagPreset:Create({
-        SimulateHit = true,
-        HitType = "WeaponDamage",
-        HitWithWeapon = true,
-        Hit = true,
-        HighGround = true,
-    }),
     EventlessMagicHit = HitFlagPreset:Create({
         SimulateHit = false,
         NoHitRoll = true,

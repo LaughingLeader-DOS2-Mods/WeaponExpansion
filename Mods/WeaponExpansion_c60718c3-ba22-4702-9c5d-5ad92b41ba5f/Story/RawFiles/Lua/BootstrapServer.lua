@@ -17,7 +17,9 @@ local defaultPersistentVars = {
         ---@field Mines string[]
         ---@field Remaining integer
         ---@type table<string, table<string, RemoteMineDetonationData>>
-        RemoteMineDetonation = {}
+        RemoteMineDetonation = {},
+        ---@type table<UUID,number[]>
+        FutureBarrage = {}
     },
     StatusData = {
         RemoveOnTurnEnd = {},
