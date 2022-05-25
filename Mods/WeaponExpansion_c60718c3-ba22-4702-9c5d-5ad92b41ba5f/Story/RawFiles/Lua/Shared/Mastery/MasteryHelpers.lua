@@ -105,8 +105,11 @@ end
 --- @param tag string
 --- @return boolean
 function Mastery.HasMasteryRequirement(character, tag)
-	if string.find(tag, "LLWEAPONEX_Unarmed") then
-		return UnarmedHelpers.HasEmptyHands(character)
+	if Debug.MasteryTests then
+		return true
+	end
+	if string.find(tag, "LLWEAPONEX_Unarmed") and not UnarmedHelpers.HasEmptyHands(character) then
+		return false
 	end
 	-- if Debug.MasteryTests or Vars.LeaderDebugMode then
 	-- 	return true
