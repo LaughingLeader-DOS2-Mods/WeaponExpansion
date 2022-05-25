@@ -57,6 +57,8 @@ local function CreateStatusProps(status,chance,turns)
 	return prop
 end
 
+local _NotBoost = {IsBoost = false}
+
 ---@class AllUniqueProgressionData
 local bonuses = {
 	AnatomyBook = {
@@ -157,7 +159,7 @@ local bonuses = {
 	},
 	DeathEdge = {
 		[2] = ue:Create("TwoHanded", 1),
-		[4] = ue:Create("Skills", "Target_HeavyAttack;Target_CripplingBlow"),
+		[4] = ue:Create("Skills", "Target_CripplingBlow"),
 		[7] = runeslot1,
 		[8] = ue:Create("DamageFromBase", 10),
 		[10] = ue:Create("Necromancy", 2),
@@ -175,7 +177,7 @@ local bonuses = {
 		[15] = runeslot2,
 	},
 	FireRunebladeKatana = {
-		[2] = ue:Create("Skills", "Shout_LLWEAPONEX_ActivateRuneblade_Fire;Projectile_LLWEAPONEX_BackstabbingFlamingDaggers"),
+		[2] = ue:Create("Skills", "Projectile_LLWEAPONEX_BackstabbingFlamingDaggers"),
 		[4] = ue:Create("DamageFromBase", 10),
 		[6] = ue:Create("FireSpecialist", 1),
 		[8] = runeslot1,
@@ -186,9 +188,9 @@ local bonuses = {
 		[16] = ue:Create("CriticalDamage", 10),
 	},
 	Frostdyne = {
-		[3] = ue:Create("Skills", "Shout_LLWEAPONEX_ActivateRuneblade_Ice;Shout_GlobalCooling", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"}),
+		[3] = ue:Create("Skills", "Shout_GlobalCooling", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H"}),
 		[5] = ut:Create("6a811339-a28f-44a6-980b-0289cc45cffa", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2", {MatchTemplate="d82bc239-4782-484c-88ab-e1fa571c9f6a"}),
-		[9] = ue:Create("Skills", "Shout_LLWEAPONEX_ActivateRuneblade_Ice;Shout_GlobalCooling;Cone_Shatter", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"}),
+		[9] = ue:Create("Skills", "Shout_GlobalCooling;Cone_Shatter", {MatchStat="WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_2"}),
 		[12] = ut:Create("c715d004-5d66-4301-8360-2c6c2e25f678", "WPN_UNIQUE_LLWEAPONEX_Rapier_Runeblade_Water_1H_3"),
 	},
 	HarkenPowerGloves = {},
@@ -199,7 +201,7 @@ local bonuses = {
 		[5] = ue:Create("CriticalChance", 20),
 		[7] = runeslot1,
 		[10] = ue:Create("Initiative", 9),
-		[11] = ue:Create("Skills", "Target_HeavyAttack;Cone_LLWEAPONEX_SoulHarvest_Reap;Target_BlackShroud"),
+		[11] = ue:Create("Skills", "Target_BlackShroud"),
 		[12] = runeslot2,
 	},
 	LoneWolfBanner = {
@@ -233,7 +235,7 @@ local bonuses = {
 	MonkBlindfold = {},
 	Muramasa = {
 		[2] = {ue:Create("StrengthBoost", "1", GetReqAttributeParams), ue:Create("LifeSteal", 10)},
-		[4] = ue:Create("Skills","Target_LLWEAPONEX_HelmSplitter;Target_SerratedEdge"),
+		[4] = ue:Create("Skills","Target_SerratedEdge"),
 		[6] = ue:Create("WitsBoost", "1"),
 		[7] = runeslot1,
 		[8] = ue:Create("WarriorLore", 1),
