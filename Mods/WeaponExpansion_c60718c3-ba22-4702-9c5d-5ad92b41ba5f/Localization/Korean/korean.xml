@@ -117,7 +117,7 @@
 	<content contentuid="h0a973462g2b3dg4dbdgbffbg49ec01d86b23">An extremely sharp, star-shaped plate of metal.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Looks perfect for throwng!&lt;/font&gt;</content>
 	<content contentuid="h0a9aaeaeg3721g4b0egbea6g929880faa219">Pacifist&apos;s Wrath</content>
 	<content contentuid="h0ab8d13bg763eg48f2gb501g886ee85d35e3">Character is taking [1] from their &lt;font color=&apos;#4197e2&apos;&gt;Wet&lt;/font&gt; status being evaporated!</content>
-	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;Allies standing on &lt;font color=&apos;#F13324&apos;&gt;blood surfaces&lt;/font&gt; or in &lt;font color=&apos;#F13324&apos;&gt;blood clouds&lt;/font&gt; gain a &lt;font color=&apos;#33FF00&apos;&gt;[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus&lt;/font&gt;.&lt;/font&gt;</content>
+	<content contentuid="h0ad1536cg0e74g46dag8e1egc15967242d14">&lt;font color=&apos;#CC33FF&apos;&gt;Allies standing on &lt;font color=&apos;#F13324&apos;&gt;blood surfaces&lt;/font&gt; or in &lt;font color=&apos;#F13324&apos;&gt;blood clouds&lt;/font&gt; gain a &lt;font color=&apos;#33FF00&apos;&gt;[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus&lt;/font&gt;, while enemies take [Special:LLWEAPONEX_MasteryBonus_FleshSacrifice_Damage].&lt;/font&gt;</content>
 	<content contentuid="h0ada3a43g2943g4b09g900agd1a2b2587c3d">Sage of Staves</content>
 	<content contentuid="h0b0d24f1g43a3g4c02g9d6cg0ba2a1b2f1dc">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery II&lt;/font&gt;&lt;br&gt;A follow up blow to Sucker Punch that deals [1].&lt;br&gt;If the target is Knocked Down, Dizzy is applied for 2 turns when they stand up.&lt;br&gt;&lt;font color=&apos;#FCD203&apos; size=&apos;20&apos;&gt;Single-use skill.&lt;/font&gt;</content>
 	<content contentuid="h0b157d20g8525g44e5g9cf2g9bb41a4820ce">Demonic Surge</content>
@@ -426,6 +426,7 @@
 	<content contentuid="h28a95dabg50a7g424eg9562gb44e8ad5c570">Throw Explosive Shuriken</content>
 	<content contentuid="h28e6f038g408eg4421g91a6g4f86c40c4c39">Auto-Level Weapon Expansion Uniques</content>
 	<content contentuid="h290e3badg73d8g4c02g9e4fg6956ab910bf9">Random Elemental Ailment</content>
+	<content contentuid="h29196da2ge801g4300g89c5g58113253dc1f">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery: [1] Surface Spell Boost!&lt;/font&gt;</content>
 	<content contentuid="h29308e7agb660g470ag9d0fgf89e2e79913f">An ancient blade forged from runic metal, and tempered with the fire of a legendary elemental.</content>
 	<content contentuid="h29403bd1g8d3dg491ag80e5g20effb3cf32c">Leadslinger</content>
 	<content contentuid="h2942375bgc766g4b2egbb03g24f69ba81400">Earthbender</content>
@@ -721,7 +722,7 @@
 	<content contentuid="h4a156a46g0af4g4886ga736gdbd690a309bd">Expert Staff Monk</content>
 	<content contentuid="h4a2ecb35g0887g430eg8398g1538d85d6ff5">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery V&lt;/font&gt;</content>
 	<content contentuid="h4a34bf73gdea3g49d8g98cag9d0ae3ae6b07">&lt;font color=&apos;#FF2D2D&apos;&gt;Katana Mastery II&lt;/font&gt;&lt;br&gt;Instantly teleport to enemies marked with &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt;, dealing [SkillDamage:Target_LLWEAPONEX_Katana_VanquishersPath_Hit] on hit, to [SkillDamage:Target_LLWEAPONEX_Katana_VanquishersPath_Hit_Max] at max stacks.&lt;br&gt;&lt;font color=&apos;#F35C8E&apos;&gt;If an enemy dies, &lt;font color=&apos;#C9AA58&apos;&gt;Blademaster&apos;s Strike&lt;/font&gt; is spread to enemies within 6m.&lt;/font&gt;</content>
-	<content contentuid="h4aa17b50g92e4g4783g9afcgcfdceca32bb2">&lt;font color=&apos;#00FF7F&apos; size=&apos;18&apos;&gt;Greatbow Mastery II&lt;/font&gt;&lt;br&gt;Designate a target position. After 3 turns in combat, a bombardment of [1] great arrows strike that position, each dealing [2].&lt;br&gt;&lt;font color=&apos;#FF4400&apos;&gt;Immobilized targets take an additional [3] per hit.&lt;/font&gt;</content>
+	<content contentuid="h4aa17b50g92e4g4783g9afcgcfdceca32bb2">&lt;font color=&apos;#00FF7F&apos; size=&apos;18&apos;&gt;Greatbow Mastery II&lt;/font&gt;&lt;br&gt;Designate a target position. After 3 turns in combat, a bombardment of [1] great arrows strike that position, each dealing [2].&lt;br&gt;&lt;font color=&apos;#FF4400&apos;&gt;Deals critical hits against immobilized targets.&lt;/font&gt;</content>
 	<content contentuid="h4abed71agf2bdg489dgae88g06f2333e7666">Mountain&apos;s Oath</content>
 	<content contentuid="h4aeacdefg00bcg4dbcg87f1g2f109381fe5c">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery IV&lt;/font&gt;</content>
 	<content contentuid="h4aebc2e4g2ae1g4c5eg9c3agd1c7d026ac0b">Token of Strength</content>
@@ -1735,7 +1736,7 @@
 	<content contentuid="hb00e3efdg2d8ag4997g9504g31ff9682c582">&lt;font color=&apos;#40E0D0&apos;&gt;Runic Reverb&lt;/font&gt;</content>
 	<content contentuid="hb0407051gc342g4572g826ag2df2eb0806fc">Divine Peacekeeper</content>
 	<content contentuid="hb0456530gd760g4cc3g8e64g807c8a9bde06">Ancestral Two-handed Bokuto</content>
-	<content contentuid="hb08c211ag470fg4dc8gbd91ge51263a6be10">&lt;font color=&apos;#FFCE58&apos;&gt;Unarmed Mastery: Lowered Cooldown of [1] by [2]&lt;/font&gt;</content>
+	<content contentuid="hb08c211ag470fg4dc8gbd91ge51263a6be10">&lt;font color=&apos;#FFCE58&apos;&gt;Unarmed Mastery: Lowered Cooldown of [1] by [2] Turn(s)&lt;/font&gt;</content>
 	<content contentuid="hb09d7b54g908cg4bf8g92cbg1c9f5d91f9a0">Throw Target</content>
 	<content contentuid="hb0a53301g24edg44d6g85c7gc1cc1c9553ab">Master Fencer</content>
 	<content contentuid="hb0b9e788g3e4cg4b82g9ad8g0f58a679f61e">Wanderer&apos;s Katana</content>

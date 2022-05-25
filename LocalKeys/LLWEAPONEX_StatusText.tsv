@@ -35,3 +35,4 @@ LLWEAPONEX_StatusText_RunebladeRuneBlocked	<font color='#FF0000' size='22'>*This
 LLWEAPONEX_StatusText_StatusExtended	<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>	h8224bb41g2261g4a50ga1feg7dc0f7394eb7
 LLWEAPONEX_StatusText_ThrowObjectFailed	<font color='#FF1155' size='22'>Too Heavy!</font>	h6fc82247g8e16g4085g9bfag539c8a0eaca5
 LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus	<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2] Turn(s)</font>	hb08c211ag470fg4dc8gbd91ge51263a6be10
+LLWEAPONEX_StatusText_Wand_SurfaceBonus	<font color='#B658FF'>Wand Mastery: [1] Surface Spell Boost!</font>	h85b41f2agfa27g4679g96bbg1e2769167312
