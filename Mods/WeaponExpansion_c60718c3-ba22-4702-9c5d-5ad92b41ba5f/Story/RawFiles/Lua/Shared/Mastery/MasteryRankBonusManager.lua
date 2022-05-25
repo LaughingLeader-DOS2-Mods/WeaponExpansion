@@ -557,7 +557,7 @@ end
 function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, ...)
 	local textEntries = {}
 	for rankTag,tbl in MasteryBonusManager.GetOrderedMasteryRanks() do
-		if Mastery.HasMasteryRequirement(character, rankTag) then
+		if Debug.MasteryTests or Mastery.HasMasteryRequirement(character, rankTag) then
 			local addedRankName = false
 			for _,v in pairs(tbl) do
 				local text = EvaluateEntryForBonusText(v, character, skillOrStatus, tooltipType, ...)

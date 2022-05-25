@@ -37,7 +37,7 @@ setmetatable(MasteryBonusData, {
 })
 
 ---@param id string
----@param params MasteryBonusDataParams|nil
+---@param params MasteryBonusDataParams
 ---@return MasteryBonusData
 function MasteryBonusData:Create(id, params)
 	local this = {
