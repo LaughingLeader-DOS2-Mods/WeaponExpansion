@@ -17,7 +17,24 @@ local isClient = Ext.IsClient()
 
 ---@alias MasteryBonusDataTooltipID string|'"skill"'|'"status"'|'"item"'
 
+---@alias WeaponExpansionSkillManagerAllStateCallback fun(self:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:string[])
+---@alias WeaponExpansionSkillManagerSkillEventCallback fun(self:MasteryBonusData, e:OnSkillStateSkillEventEventArgs, bonuses:string[])
+---@alias WeaponExpansionSkillManagerHitCallback fun(self:MasteryBonusData, e:OnSkillStateHitEventArgs, bonuses:string[])
+---@alias WeaponExpansionSkillManagerProjectileHitCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileHitEventArgs, bonuses:string[])
+---@alias WeaponExpansionSkillManagerProjectileShootCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileShootEventArgs, bonuses:string[])
+
+---@class MasteryBonusDataRegistrationFunctions
+---@field SkillUsed fun(callback:WeaponExpansionSkillManagerSkillEventCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field SkillCast fun(callback:WeaponExpansionSkillManagerSkillEventCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field SkillHit fun(callback:WeaponExpansionSkillManagerHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field SkillProjectileHit fun(callback:WeaponExpansionSkillManagerProjectileHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field SkillProjectileShoot fun(callback:WeaponExpansionSkillManagerProjectileShootCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field Test fun(operation:MasteryTestingTaskCallback):MasteryBonusData
+
+local _INTERNALREG = {}
+
 ---@class MasteryBonusData:MasteryBonusDataParams
+---@field Register MasteryBonusDataRegistrationFunctions
 local MasteryBonusData = {
 	Type = "MasteryBonusData",
 	AllStatuses = false,
@@ -43,6 +60,14 @@ function MasteryBonusData:Create(id, params)
 	local this = {
 		ID = id or ""
 	}
+	local _private = {
+		Register = {}
+	}
+	for k,v in pairs(_INTERNALREG) do
+		_private.Register[k] = function(...)
+			return v(this, ...)
+		end
+	end
 	if type(params) == "table" then
 		for k,v in pairs(params) do
 			this[k] = v
@@ -55,7 +80,10 @@ function MasteryBonusData:Create(id, params)
 		this.AllStatuses = true
 	end
 	setmetatable(this, {
-		__index = function(tbl,k)
+		__index = function(_,k)
+			if _private[k] ~= nil then
+				return _private[k]
+			end
 			return MasteryBonusData[k]
 		end
 	})
@@ -86,11 +114,80 @@ function MasteryBonusData.DefaultStatusTagCheck(tag, checkSource)
 	end
 end
 
+---@param self MasteryBonusData
+---@param callback WeaponExpansionSkillManagerSkillEventCallback
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@return MasteryBonusData
+function _INTERNALREG.SkillUsed(self, callback, checkBonusOn)
+	if not isClient then
+		local wrapper = function (...) callback(self, ...) end
+		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.USED, self.Skills, self.ID, wrapper, checkBonusOn)
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback WeaponExpansionSkillManagerSkillEventCallback
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@return MasteryBonusData
+function _INTERNALREG.SkillCast(self, callback, checkBonusOn)
+	if not isClient then
+		local wrapper = function (...) callback(self, ...) end
+		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.CAST, self.Skills, self.ID, wrapper, checkBonusOn)
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback WeaponExpansionSkillManagerHitCallback
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@return MasteryBonusData
+function _INTERNALREG.SkillHit(self, callback, checkBonusOn)
+	if not isClient then
+		local wrapper = function (...) callback(self, ...) end
+		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.HIT, self.Skills, self.ID, wrapper, checkBonusOn)
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback WeaponExpansionSkillManagerProjectileHitCallback
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@return MasteryBonusData
+function _INTERNALREG.SkillProjectileHit(self, callback, checkBonusOn)
+	if not isClient then
+		local wrapper = function (...) callback(self, ...) end
+		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.PROJECTILEHIT, self.Skills, self.ID, wrapper, checkBonusOn)
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback WeaponExpansionSkillManagerProjectileShootCallback
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@return MasteryBonusData
+function _INTERNALREG.SkillProjectileShoot(self, callback, checkBonusOn)
+	if not isClient then
+		local wrapper = function (...) callback(self, ...) end
+		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.SHOOTPROJECTILE, self.Skills, self.ID, wrapper, checkBonusOn)
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param operation MasteryTestingTaskCallback
+---@return MasteryBonusData
+function _INTERNALREG.Test(self, operation)
+	if not isClient and Vars.DebugMode then
+		MasteryTesting.RegisterTest(self.ID, operation, {Params={self}})
+	end
+	return self
+end
+
 ---@param callback WeaponExpansionMasterySkillListenerCallback
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterSkillListener(callback,
-	checkBonusOn)
+function MasteryBonusData:RegisterSkillListener(callback, checkBonusOn)
 	if not isClient then
 		MasteryBonusManager.RegisterSkillListener(self.Skills, self.ID, callback, checkBonusOn)
 	end
@@ -261,7 +358,7 @@ end
 function MasteryBonusData:RegisterTurnEndedListener(id, callback, skipBonusCheck)
 	if not isClient then
 		if skipBonusCheck then
-			RegisterListener("OnTurnEnded", id, callback)
+			Events.OnTurnEnded:Subscribe(callback, {MatchArgs={ID = id}})
 		else
 			local wrapper = function(character, turnId)
 				if MasteryBonusManager.HasMasteryBonus(character, self.ID) then
@@ -271,7 +368,7 @@ function MasteryBonusData:RegisterTurnEndedListener(id, callback, skipBonusCheck
 					end
 				end
 			end
-			RegisterListener("OnTurnEnded", id, wrapper)
+			Events.OnTurnEnded:Subscribe(wrapper, {MatchArgs={ID = id}})
 		end
 	end
 	return self
@@ -306,7 +403,7 @@ end
 function MasteryBonusData:RegisterTurnCounterListener(id, callback, skipBonusCheck)
 	if not isClient then
 		if skipBonusCheck then
-			RegisterListener("OnNamedTurnCounter", id, callback)
+			TurnCounter.Subscribe(id, callback)
 		else
 			local wrapper = function(counterId, turnCount, lastTurn, finished, data)
 				if data.Target and MasteryBonusManager.HasMasteryBonus(data.Target, self.ID) then
@@ -316,7 +413,7 @@ function MasteryBonusData:RegisterTurnCounterListener(id, callback, skipBonusChe
 					end
 				end
 			end
-			RegisterListener("OnNamedTurnCounter", id, wrapper)
+			TurnCounter.Subscribe(id, wrapper)
 		end
 	end
 	return self

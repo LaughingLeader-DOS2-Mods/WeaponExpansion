@@ -60,7 +60,7 @@ data "Template" "6770f065-df9b-4a0b-a6cb-bfa5e5c28c0e"
 data "DeathType" "DoT"
 data "SkillProperties" "CreateSurface,1,,DamageType"
 data "Description" "Projectile_LLWEAPONEX_ShootRod_Chaos_Description"
-data "DescriptionRef" "Launch a magical missile from your rod that deals <font color='#b823cb'>[1] Chaos Damage</font>, and creates a random surface."
+data "DescriptionRef" "Launch a magical missile from your rod that deals [1], and creates a random surface."
 
 new entry "Projectile_LLWEAPONEX_ShootRod_Earth"
 type "SkillData"
