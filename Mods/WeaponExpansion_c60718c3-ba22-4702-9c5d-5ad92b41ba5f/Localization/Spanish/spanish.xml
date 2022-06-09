@@ -306,7 +306,7 @@
 	<content contentuid="h1e8a0ec7g5b81g4ff5ga3d9g4d0c8502f425">Summon a [Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem] on Kill</content>
 	<content contentuid="h1e98bcebg2e42g4699gba2bg6f647d428699">Unarmed</content>
 	<content contentuid="h1e98bd0bg867dg4a57gb2d4g6d820b4e7dfa">Scythe</content>
-	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder the armor of hit targets, reducing max &lt;font color=&apos;#AE9F95&apos;&gt;[Handle:h1feadc00g239ag430bgac99g7b5f3605a1c1:Physical Armour]&lt;/font&gt;/&lt;font color=&apos;#4197E2&apos;&gt;[Handle:h50eb8e33g82edg412eg9886gec19ca591254:Magic Armour]&lt;/font&gt; by &lt;font color=&apos;#AE9F95&apos;&gt;[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%&lt;/font&gt;/&lt;font color=&apos;#4197E2&apos;&gt;[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt;&lt;/font&gt; for [ExtraData:LLWEAPONEX_MB_Bludgeon_SunderTurns] turn(s).&lt;/font&gt;</content>
+	<content contentuid="h1eb09384g6bfeg4cdaga83fgc408d86cfee4">&lt;font color=&apos;#F19824&apos;&gt;Sunder targets hit, reducing &lt;font color=&apos;#AE9F95&apos;&gt;[Handle:h856999degd5aag435eg895fg50546f5a87f6:Maximum Physical Armour] by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%&lt;/font&gt; and &lt;font color=&apos;#4197E2&apos;&gt;[Handle:h92acd36agc072g4ec8g9ca2g32fe6f89f375:Maximum Magic Armour] by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%&lt;/font&gt; for [ExtraData:LLWEAPONEX_MB_Bludgeon_SunderTurns] turn(s).&lt;/font&gt;</content>
 	<content contentuid="h1ec134feg2358g4666g91c3gb0808e20fd0a">[ORDER] *Hit the button labeled &apos;Place Order&apos;.*</content>
 	<content contentuid="h1ef273e7gacadg471dg85c1g1d00cd163b02">&lt;font color=&apos;#FFCE58&apos;&gt;Targets hit are pulled in closer to you.&lt;/font&gt;</content>
 	<content contentuid="h1f0d97c7gf46dg470bg9b0cg5fbd600337ff">&lt;font color=&apos;#c5a65a&apos;&gt;Kevin the Pet Rock&lt;/font&gt; is tired, and must recharge his energy before he can be thrown again.</content>
@@ -1731,6 +1731,7 @@
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
 	<content contentuid="hafacd835g8b2dg4f62gb52eg18fa77bd7adc">Tar Rune</content>
+	<content contentuid="hafcf6a20gf736g419bgb5dbge6861984f020">&lt;font color=&apos;#F5785A&apos;&gt;Axe Mastery 1:&lt;/font&gt; [1] dealt bonus damage to [2] ([3] &apos;disabled&apos; bonus damage).</content>
 	<content contentuid="hb00ba3dcg9562g4743gb3bfg34592dc34624">Dual Wooden Shields</content>
 	<content contentuid="hb00d1f3eg953fg415fg830cg3bc920835b46">Gaining mastery is a simple affair. Simply use your weapon type of choice in battle, whether that&apos;s through attacking, weapon skills, or victory over your enemies.</content>
 	<content contentuid="hb00e3efdg2d8ag4997g9504g31ff9682c582">&lt;font color=&apos;#40E0D0&apos;&gt;Runic Reverb&lt;/font&gt;</content>
