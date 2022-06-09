@@ -1,6 +1,8 @@
 ---@type TranslatedString
 local ts = Classes.TranslatedString
 
+local _EXTVERSION = Ext.Version()
+
 if ItemTooltipParams == nil then
 	ItemTooltipParams = {}
 end
@@ -71,7 +73,7 @@ local function CreateFakeWeaponTooltip(tooltip, item, weaponTypeName, scaleText,
 			Label = LocalizedText.DamageTypeNames[damageType].Text.Value,
 			MinDamage = data.Min or data[1],
 			MaxDamage = data.Max or data[2],
-			DamageType = LeaderLib.Data.DamageTypeEnums[damageType],
+			DamageType = Data.DamageTypeEnums[damageType],
 		}
 		tooltip:AppendElement(element)
 	end

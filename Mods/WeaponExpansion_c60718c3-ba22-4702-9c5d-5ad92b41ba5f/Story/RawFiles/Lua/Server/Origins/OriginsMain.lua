@@ -58,8 +58,8 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Harken, "Dwarf_Sneaking")
 
 		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
-			LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
-			--Mods.LeaderLib.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+			Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
+			--Mods.Data.Presets.Preview.Knight:ApplyToCharacter(Mods.WeaponExpansion.Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
 			if Vars.DebugMode then
 				Timer.StartOneshot("Timers_LLWEAPONEX_Harken_EquipUniques", 500, function()
 					Uniques.AnvilMace:Transfer(Origin.Harken, Uniques.AnvilMace.DefaultUUID, true)
@@ -85,11 +85,11 @@ function Origins_InitCharacters(region, isEditorMode)
 		CharacterAddTalent(Origin.Korvash, "Lizard_Persuasion")
 
 		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
-			LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
-			--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+			Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
+			--Mods.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Mods.WeaponExpansion.Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
 			--CharacterAddSkill(Origin.Korvash, "Projectile_LLWEAPONEX_DarkFireball", 0)
-			--Mods.LeaderLib.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
-			--Mods.LeaderLib.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+			--Mods.Data.Presets.Preview.Inquisitor:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
+			--Mods.Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter("3f20ae14-5339-4913-98f1-24476861ebd6", "Uncommon", {"Weapon", "Helmet"})
 			--NRD_SkillBarSetSkill(Mods.WeaponExpansion.Origin.Korvash, 0, "Projectile_LLWEAPONEX_DarkFireball")
 			if Vars.DebugMode then
 				Timer.StartOneshot("Timers_LLWEAPONEX_Korvash_EquipUniques", 500, function()
@@ -413,9 +413,15 @@ function Harken_SetTattoosActive(uuid)
 	if needsSync then
 		Ext.SyncStat("Stats_LLWEAPONEX_Tattoos_Strength", true)
 		StatusManager.RemovePermanentStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH")
-		StatusManager.ApplyPermanentStatus(uuid, "LLWEAPONEX_TATTOOS_STRENGTH")
+		Timer.StartObjectTimer("LLWEAPONEX_Harken_ApplyTattooStatus", uuid, 250)
 	end
 end
+
+Timer.Subscribe("LLWEAPONEX_Harken_ApplyTattooStatus", function (e)
+	if e.Data.UUID then
+		StatusManager.ApplyPermanentStatus(e.Data.UUID, "LLWEAPONEX_TATTOOS_STRENGTH")
+	end
+end)
 
 RegisterListener("Initialized", function ()
 	StatusManager.ApplyPermanentStatus(Origin.Harken, "LLWEAPONEX_TATTOOS_STRENGTH")

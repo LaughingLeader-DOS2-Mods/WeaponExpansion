@@ -111,7 +111,7 @@ Ext.NewCall(AddMasteryExperience, "LLWEAPONEX_Ext_AddMasteryExperience", "(CHARA
 function AddMasteryExperienceForAllActive(uuid,expGain)
 	if ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		local character = GameHelpers.GetCharacter(uuid)
-		local activeMasteries = Mastery.GetActiveMasteries(character)
+		local activeMasteries = Mastery.GetActiveMasteries(character, false)
 		local length = #activeMasteries
 		if length > 0 then
 			for i=1,length do

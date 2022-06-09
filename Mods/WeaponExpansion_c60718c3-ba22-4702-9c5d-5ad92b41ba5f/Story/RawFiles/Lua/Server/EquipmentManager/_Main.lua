@@ -80,7 +80,7 @@ RegisterProtectedOsirisListener("CanUseItem", 3, "before", function(charUUID, it
 
 	if item ~= nil and char ~= nil then
 		if ShouldBlockItem(item, char) then
-			if LeaderLib.SharedData.GameMode ~= GAMEMODE.GAMEMASTER then
+			if SharedData.GameMode ~= GAMEMODE.GAMEMASTER then
 				Osi.DB_CustomUseItemResponse(charUUID, itemUUID, 0)
 			else
 				RequestProcessed(charUUID, request, 0)
@@ -133,7 +133,8 @@ function EquipmentManager.ItemIsNearPlayers(item)
 end
 
 ---@param item EsvItem
----@param stats table
+---@param changes table
+---@param dynamicIndex integer
 function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 	if changes.Boosts ~= nil and changes.Boosts["Damage Type"] ~= nil then
 		changes.Boosts["DamageType"] = changes.Boosts["Damage Type"]

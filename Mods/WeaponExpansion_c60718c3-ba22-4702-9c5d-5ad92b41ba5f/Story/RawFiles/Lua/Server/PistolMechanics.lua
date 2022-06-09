@@ -131,25 +131,24 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 	end)
 end, {Priority=999})
 
-Timer.RegisterListener("LLWEAPONEX_RemovePistolEffect", function(timerName, char)
-	if char then
-		GameHelpers.Status.Remove(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
+Timer.Subscribe("LLWEAPONEX_RemovePistolEffect", function(e)
+	if e.Data.Object then
+		GameHelpers.Status.Remove(e.Data.Object, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
 	end
 end)
 
-RegisterSkillListener("Projectile_LLWEAPONEX_Pistol_Shoot", function(skill, char, state, data)
-	if state == SKILL_STATE.USED then
-		local caster = GameHelpers.TryGetObject(char)
-		if ShouldPlaySheatheAnimation(caster) then
+SkillManager.Register.All("Projectile_LLWEAPONEX_Pistol_Shoot", function(e)
+	if e.State == SKILL_STATE.USED then
+		if ShouldPlaySheatheAnimation(e.Character) then
 			Timer.StartOneshot("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
-				GameHelpers.Status.Apply(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
+				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
 			end)
 		else
-			GameHelpers.Status.Apply(char, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, 1, char)
+			GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
 		end
-	elseif state == SKILL_STATE.CAST then
-		local delay = GetPistolRemoveDelay(GameHelpers.TryGetObject(char))
-		Timer.Start("LLWEAPONEX_RemovePistolEffect", delay, char)
+	elseif e.State == SKILL_STATE.CAST then
+		local delay = GetPistolRemoveDelay(e.Character)
+		Timer.StartObjectTimer("LLWEAPONEX_RemovePistolEffect", e.Character, delay)
 	end
 end)
 

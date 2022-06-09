@@ -66,14 +66,14 @@ local function LoadBonusSkills()
 		local requirement = Ext.StatGetAttribute(skill, "Requirement")
 		if not StringHelpers.IsNullOrEmpty(requirement) and requirement ~= "None" then 
 			local tier = Ext.StatGetAttribute(skill, "Tier")
-			if LeaderLib.PersistentVars["OriginalSkillTiers"] ~= nil then
-				local originalTier = LeaderLib.PersistentVars["OriginalSkillTiers"][skill]
+			if Mods.LeaderLib.PersistentVars["OriginalSkillTiers"] ~= nil then
+				local originalTier = Mods.LeaderLib.PersistentVars["OriginalSkillTiers"][skill]
 				if originalTier ~= nil then
 					tier = originalTier
 				end
 			end
 			if CanAddBonusSkill(skill) then
-				table.push(ItemBonusSkills[requirement], {Skill = skill, Tier = tier})
+				table.insert(ItemBonusSkills[requirement], {Skill = skill, Tier = tier})
 			end
 		end
 	end
@@ -82,16 +82,16 @@ end
 
 function RollForBonusSkill(item,stat,itemType,rarity)
 	-- Legendary BoostType deltamods only start showing up at Epic rarity and above.
-	local rarityVal = LeaderLib.Data.RarityEnum[rarity]
-	if rarityVal >= LeaderLib.Data.RarityEnum.Epic then
+	local rarityVal = Data.RarityEnum[rarity]
+	if rarityVal >= Data.RarityEnum.Epic then
 		local skills = NRD_ItemGetPermanentBoostString(item, "Skills") or ""
 		local nextSkill = nil
 		if itemType == "Weapon" then
 			local requirements = WeapontypeRequirements[Ext.StatGetAttribute(stat, "WeaponType")]
 			if requirements ~= nil then
 				local chance = GameHelpers.GetExtraData("LLWEAPONEX_Loot_BonusSkillChance_Weapon", 20)
-				if rarityVal > LeaderLib.Data.RarityEnum.Epic then
-					chance = chance + ((rarityVal - LeaderLib.Data.RarityEnum.Epic) * 10)
+				if rarityVal > Data.RarityEnum.Epic then
+					chance = chance + ((rarityVal - Data.RarityEnum.Epic) * 10)
 				end
 				if GameHelpers.Roll(chance) then
 					local skillsTable = nil

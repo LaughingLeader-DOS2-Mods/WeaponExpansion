@@ -31,22 +31,21 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Pistol, 1, {
 })
 
 if not Vars.IsClient then
-	Timer.RegisterListener("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", function(timerName, char)
-		if char ~= nil and CharacterIsInCombat(char) == 1 then
+	Timer.Subscribe("LLWEAPONEX_MasteryBonus_CloakAndDagger_Pistol_MarkEnemy", function(e)
+		if e.Data.UUID ~= nil and CharacterIsInCombat(e.Data.UUID) == 1 then
 			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Pistol_CloakAndDagger_MarkingRadius", 6)
 			local maxTargets = GameHelpers.GetExtraData("LLWEAPONEX_MB_Pistol_CloakAndDagger_MaxTargets", 1)
 			if radius > 0 and maxTargets > 0 then
 				---@type MasteryBonusManagerClosestEnemyData[]
-				local enemies = Common.ShuffleTable(MasteryBonusManager.GetClosestEnemiesToObject(char, char, radius, true, maxTargets))
-				local delay = 250
+				local enemies = Common.ShuffleTable(MasteryBonusManager.GetClosestEnemiesToObject(e.Data.UUID, e.Data.UUID, radius, true, maxTargets))
 				for i,v in pairs(enemies) do
 					if CharacterIsDead(v.UUID) == 0 
 					and not GameHelpers.Status.IsSneakingOrInvisible(v.UUID) 
 					and HasActiveStatus(v.UUID, "MARKED") == 0
 					then
-						ApplyStatus(v.UUID, "MARKED", 6.0, 0, char)
+						ApplyStatus(v.UUID, "MARKED", 6.0, 0, e.Data.UUID)
 						SetTag(v.UUID, "LLWEAPONEX_Pistol_MarkedForCrit")
-						Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(char, v.UUID, "MARKED", "")
+						Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(e.Data.UUID, v.UUID, "MARKED", "")
 					end
 				end
 			end
@@ -68,7 +67,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Pistol, 4, {
 
 if not Vars.IsClient then
 	---@param target string
-	---@param weaponBoostStat string
 	---@param source EsvCharacter
 	function Pistol_ApplyRuneProperties(target, source)
 		local rune,weaponBoostStat = Skills.GetRuneBoost(source.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")

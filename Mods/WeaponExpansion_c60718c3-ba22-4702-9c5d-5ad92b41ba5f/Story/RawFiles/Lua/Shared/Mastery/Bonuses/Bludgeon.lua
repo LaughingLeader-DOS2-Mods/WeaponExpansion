@@ -23,7 +23,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 	rb:Create("BLUDGEON_SUNDER", {
 		Skills = {"Target_CripplingBlow","Target_EnemyCripplingBlow"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_CripplingBlow", "<font color='#F19824'>Sunder the armor of hit targets, reducing max <font color='#AE9F95'>[Handle:h1feadc00g239ag430bgac99g7b5f3605a1c1:Physical Armour]</font>/<font color='#4197E2'>[Handle:h50eb8e33g82edg412eg9886gec19ca591254:Magic Armour]</font> by <font color='#AE9F95'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font>/<font color='#4197E2'>[Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font></font> for [ExtraData:LLWEAPONEX_MB_Bludgeon_SunderTurns] turn(s).</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_CripplingBlow", "<font color='#F19824'>Sunder targets hit, reducing <font color='#AE9F95'>[Handle:h856999degd5aag435eg895fg50546f5a87f6:Maximum Physical Armour] by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:ArmorBoost]%</font> and <font color='#4197E2'>[Handle:h92acd36agc072g4ec8g9ca2g32fe6f89f375:Maximum Magic Armour] by [Stats:Stats_LLWEAPONEX_MasteryBonus_Sunder:MagicArmorBoost]%</font> for [ExtraData:LLWEAPONEX_MB_Bludgeon_SunderTurns] turn(s).</font>"),
 		NamePrefix = "<font color='#F19824'>Sundering</font>"
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.HIT and data.Success then

@@ -1,5 +1,5 @@
 ---@type MessageData
-local MessageData = LeaderLib.Classes["MessageData"]
+local MessageData = Classes["MessageData"]
 
 local debug_templates = {
     "WPN_LLWEAPONEX_Shield_DualShields_Dwarves_A_91fd35cb-93dd-4489-9cf5-2dcc9b0ac168",

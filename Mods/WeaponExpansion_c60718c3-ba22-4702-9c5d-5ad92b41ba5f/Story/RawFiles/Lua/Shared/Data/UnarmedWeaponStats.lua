@@ -28,7 +28,6 @@ end
 ---Register a weapon stat to use for unarmed damage when an armor stat is equipped.
 ---@param armorStat string The armor stat to associate with a weapon stat, such as ARM_UNIQUE_LLWEAPONEX_DragonBoneClaws_A.
 ---@param weaponStat string The weapon stat to use for damage calculation, such as WPN_UNIQUE_LLWEAPONEX_DragonBoneClaws_A.
----@param skillPropertiesStat string|nil The skill to execute properties from when hitting something with the weapon stat.
 function UnarmedHelpers.RegisterUnarmedStat(armorStat, weaponStat)
 	UnarmedData.ArmorToWeapon[armorStat] = weaponStat
 	UnarmedData.WeaponToArmor[weaponStat] = armorStat

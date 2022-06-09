@@ -1,5 +1,5 @@
 ---@type MessageData
-local MessageData = LeaderLib.Classes["MessageData"]
+local MessageData = Classes["MessageData"]
 
 local CharacterMasteryData = MasteryDataClasses.CharacterMasteryData
 local CharacterMasteryDataEntry = MasteryDataClasses.CharacterMasteryDataEntry

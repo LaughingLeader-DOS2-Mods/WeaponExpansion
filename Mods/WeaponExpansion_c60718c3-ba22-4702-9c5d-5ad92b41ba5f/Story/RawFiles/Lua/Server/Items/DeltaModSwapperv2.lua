@@ -230,7 +230,7 @@ local function SwapDeltaMods(item)
 		for i=2,#item.Stats.DynamicStats do
 			local boost = item.Stats.DynamicStats[i]
 			if not StringHelpers.IsNullOrEmpty(boost.ObjectInstanceName) then
-				LeaderLib.PrintLog("[SwapDeltaMods] [%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
+				PrintLog("[SwapDeltaMods] [%s] BoostName(%s) ObjectInstanceName(%s)", i, boost.BoostName, boost.ObjectInstanceName)
 				boostMap[boost.ObjectInstanceName] = boost
 			end
 		end
@@ -296,7 +296,7 @@ local function SwapDeltaMods(item)
 				generatedBoostNames[#generatedBoostNames+1] = name
 			end
 			if Vars.DebugMode then
-				LeaderLib.PrintLog("[SwapDeltaMods] Setting item MyGuid(%s) StatsId(%s) generated boosts to:\n%s", item.MyGuid, item.StatsId, Ext.JsonStringify(generatedBoostNames))
+				PrintLog("[SwapDeltaMods] Setting item MyGuid(%s) StatsId(%s) generated boosts to:\n%s", item.MyGuid, item.StatsId, Ext.JsonStringify(generatedBoostNames))
 			end
 			--item:SetGeneratedBoosts(generatedBoostNames)
 		end

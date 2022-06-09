@@ -1,7 +1,7 @@
 ---@type PresetData
-local p = LeaderLib.Classes.PresetData
+local p = Classes.PresetData
 
-local AddPreset = LeaderLib.Data.AddPreset
+local AddPreset = Data.AddPreset
 
 AddPreset("Preview", "LLWEAPONEX_Assassin", p:Create("LLWEAPONEX_Assassin", "Class_LLWEAPONEX_Assassin_Preview", "Class_LLWEAPONEX_Assassin", "", true, "Class_LLWEAPONEX_Assassin_Preview"))
 AddPreset("Preview", "LLWEAPONEX_Reaper", p:Create("LLWEAPONEX_Reaper", "Class_LLWEAPONEX_Reaper_Preview", "Class_LLWEAPONEX_Reaper", "", true, "Class_LLWEAPONEX_Reaper_Preview"))

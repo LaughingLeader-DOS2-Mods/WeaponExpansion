@@ -1,5 +1,5 @@
-if StatusManager == nil then
-	StatusManager = {}
+if StatusTurnHandler == nil then
+	StatusTurnHandler = {}
 end
 
 local function CleanupForceAction(handle, target, x, y, z, timerStartFunc)
@@ -76,7 +76,7 @@ function ApplyRuneExtraProperties(source, target, item, targetPosition, radius)
 end
 
 local function GrantMasteryExperienceFromStatus(target, status, source, statusType)
-	if not StringHelpers.IsNullOrEmpty(source) and ObjectIsCharacter(source) == 1 then
+	if not StringHelpers.IsNullOrEmpty(source) and ObjectIsCharacter(source) == 1 and MasterySystem.CanGainExperience(source) then
 		if status == "LLWEAPONEX_PISTOL_SHOOT_HIT" then
 			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_Pistol")
 		elseif status == "LLWEAPONEX_HANDCROSSBOW_HIT" then
@@ -89,7 +89,7 @@ RegisterStatusListener("Applied", "LLWEAPONEX_PISTOL_SHOOT_HIT", GrantMasteryExp
 RegisterStatusListener("Applied", "LLWEAPONEX_HANDCROSSBOW_HIT", GrantMasteryExperienceFromStatus)
 
 local function OnStatusRemoved(target, status, source, statusType)
-	StatusManager.RemoveTurnEndStatus(target, status, true)
+	StatusTurnHandler.RemoveTurnEndStatus(target, status, true)
 end
 
 RegisterStatusListener("Removed", "All", OnStatusRemoved)
@@ -106,7 +106,7 @@ local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 	end
 end
 
-function StatusManager.RemoveTurnEndStatusesFromSource(fromSource, matchStatuses, targetUUID, wasRemoved)
+function StatusTurnHandler.RemoveTurnEndStatusesFromSource(fromSource, matchStatuses, targetUUID, wasRemoved)
 	if targetUUID ~= nil then
 		local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[targetUUID]
 		if turnEndData ~= nil then
@@ -139,13 +139,13 @@ function StatusManager.RemoveTurnEndStatusesFromSource(fromSource, matchStatuses
 	end
 end
 
-function StatusManager.SaveTurnEndStatus(uuid, status, source)
+function StatusTurnHandler.SaveTurnEndStatus(uuid, status, source)
 	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid] or {}
 	turnEndData[status] = source or ""
 	PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = turnEndData
 end
 
-function StatusManager.RemoveAllTurnEndStatuses(uuid)
+function StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
 	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
 	if turnEndData ~= nil then
 		for status,source in pairs(turnEndData) do
@@ -158,7 +158,7 @@ function StatusManager.RemoveAllTurnEndStatuses(uuid)
 	end
 end
 
-function StatusManager.RemoveTurnEndStatus(uuid, status, wasRemoved)
+function StatusTurnHandler.RemoveTurnEndStatus(uuid, status, wasRemoved)
 	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
 	if turnEndData ~= nil then
 		if type(status) == "table" then
@@ -184,7 +184,7 @@ function StatusManager.RemoveTurnEndStatus(uuid, status, wasRemoved)
 	end
 end
 
-function StatusManager.RemoveAllInactiveStatuses(uuid)
+function StatusTurnHandler.RemoveAllInactiveStatuses(uuid)
 	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
 	if turnEndData ~= nil then
 		for status,source in pairs(turnEndData) do

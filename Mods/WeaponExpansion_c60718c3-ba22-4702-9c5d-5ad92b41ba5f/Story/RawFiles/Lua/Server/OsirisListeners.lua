@@ -235,13 +235,13 @@ end
 
 local function OnLeftCombat(uuid, id)
 	ReloadAmmoSkills(uuid)
-	StatusManager.RemoveAllTurnEndStatuses(uuid)
+	StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
 	RemoveTagsOnTurnEnd(uuid)
 end
 
 Ext.RegisterOsirisListener("ObjectTurnEnded", 1, "after", function(uuid)
 	uuid = StringHelpers.GetUUID(uuid)
-	StatusManager.RemoveAllTurnEndStatuses(uuid)
+	StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
 	RemoveTagsOnTurnEnd(uuid)
 end)
 

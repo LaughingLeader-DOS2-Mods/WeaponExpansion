@@ -34,8 +34,8 @@ end
 ---@param attacker UUID|EsvCharacter|EsvItem
 ---@param listenDelay integer
 function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
-	target = GameHelpers.GetUUID(target)
-	attacker = GameHelpers.GetUUID(attacker)
+	local target = GameHelpers.GetUUID(target)
+	local attacker = GameHelpers.GetUUID(attacker)
 
 	if ObjectIsCharacter(target) == 0 then
 		return
@@ -79,9 +79,11 @@ function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
 	end
 end
 
-Timer.RegisterListener("LLWEAPONEX_DeathManager_ClearListener", function (timerName, data)
-	FireCallbacks(data.ID, data.Target, data.Attacker, false)
-	PersistentVars.OnDeath[data.Target] = nil
+Timer.Subscribe("LLWEAPONEX_DeathManager_ClearListener", function (e)
+	if e.Data.Target then
+		FireCallbacks(e.Data.ID, e.Data.Target, e.Data.Attacker, false)
+		PersistentVars.OnDeath[e.Data.Target] = nil
+	end
 end)
 
 function DeathManager.OnDeath(uuid)

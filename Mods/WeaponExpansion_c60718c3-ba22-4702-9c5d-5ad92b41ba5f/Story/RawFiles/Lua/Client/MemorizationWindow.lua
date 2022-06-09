@@ -1,5 +1,5 @@
 ---@type TranslatedString
-local ts = LeaderLib.Classes["TranslatedString"]
+local ts = Classes["TranslatedString"]
 
 local function PrintArray(name, arr)
 	if arr ~= nil and #arr > 0 then
@@ -104,10 +104,10 @@ local function OnUpdateSkills(ui, method, bFilter)
 	end
 end
 
-Ext.RegisterListener("SessionLoaded", function()
-	local ui = Ext.GetUIByType(LeaderLib.Data.UIType.skills)
-	if ui ~= nil then
-		--Ext.RegisterUIInvokeListener(ui, "updateSkills", OnUpdateSkills)
-		--Ext.RegisterUIInvokeListener(ui, "updateMemory", OnUpdateMemory, "before")
-	end
-end)
+-- Ext.RegisterListener("SessionLoaded", function()
+-- 	local ui = Ext.GetUIByType(Data.UIType.skills)
+-- 	if ui ~= nil then
+-- 		--Ext.RegisterUIInvokeListener(ui, "updateSkills", OnUpdateSkills)
+-- 		--Ext.RegisterUIInvokeListener(ui, "updateMemory", OnUpdateMemory, "before")
+-- 	end
+-- end)

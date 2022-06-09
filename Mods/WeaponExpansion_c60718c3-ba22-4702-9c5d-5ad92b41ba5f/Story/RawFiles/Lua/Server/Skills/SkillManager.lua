@@ -17,7 +17,7 @@ function SkillManager.RegisterTypeListener(skilltype, func)
 end
 
 function SkillManager.RegisterElementListener(element, func)
-	skilltype = string.lower(element)
+	element = string.lower(element)
 	if SkillListeners.Element[element] == nil then
 		SkillListeners.Element[element] = {}
 	end

@@ -190,7 +190,7 @@ Ext.RegisterListener("SessionLoaded", function()
 		syncUpdateScreenItems = {}
 	end
 
-	if not LeaderLib.Vars.ControllerEnabled then
+	if not Vars.ControllerEnabled then
 		Ext.RegisterUITypeInvokeListener(reward, "updateItems", CaptureRewardScreenItems)
 		Ext.RegisterUITypeCall(reward, "acceptClicked", onRewardScreenClosed)
 	else

@@ -1,5 +1,5 @@
 
-local TranslatedString = LeaderLib.Classes["TranslatedString"]
+local ts = Classes.TranslatedString
 
 local RuneTags = {
 	DamageType = {
@@ -8,7 +8,7 @@ local RuneTags = {
 	}
 }
 
-local boltAmmoTypeText = TranslatedString:Create("hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e", "Ammo Type: [1]")
+local boltAmmoTypeText = ts:Create("hfc6af8f2gdd0ag40a0g8d9egc63f5cad0a3e", "Ammo Type: [1]")
 
 local function GetHandCrossbowBoltEffects(skill, character, isFromItem, param)
 	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
@@ -39,7 +39,7 @@ local PistolRuneBoosts = {
 	["_Boost_LLWEAPONEX_Pistol_Bullets_Silver"] = {Apply="", Transform=""},
 }
 
-local bulletAmmoTypeText = TranslatedString:Create("h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad", "Ammo Type: [1]")
+local bulletAmmoTypeText = ts:Create("h7eee4e3dg9eb0g4a6fg825egc0981d7c0cad", "Ammo Type: [1]")
 
 local function GetPistolBulletEffects(skill, character, isFromItem, param)
 	local rune,weaponBoostStat = Skills.GetRuneBoost(character, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
@@ -85,7 +85,7 @@ local function GetSkillAbility(skill, character, isFromItem, param)
 		elseif t == "table" then
 			local allBonuses = {}
 			for i,v in pairs(ability) do
-				if LeaderLib.Data.AbilityEnum[v] ~= nil then
+				if Data.AbilityEnum[v] ~= nil then
 					table.insert(allBonuses, GameHelpers.GetAbilityName(v))
 				elseif Masteries[v] ~= nil then
 					table.insert(allBonuses, string.format("%s %s", Masteries[v].Name.Value, Text.Mastery.Value))

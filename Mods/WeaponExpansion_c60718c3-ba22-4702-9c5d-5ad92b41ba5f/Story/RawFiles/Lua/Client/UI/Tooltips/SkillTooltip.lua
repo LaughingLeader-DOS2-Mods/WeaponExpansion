@@ -176,7 +176,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 							hasRuneProps = true
 							for i,v in pairs(props) do
 								if v.Type == "Status" then
-									local chance = max.min(100, math.ceil(v.StatusChance * 100))
+									local chance = math.min(100, math.ceil(v.StatusChance * 100))
 									local turns = v.Duration
 									local text = ""
 									local chanceText = ""
@@ -208,7 +208,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 							hasRuneProps = true
 							for i,v in pairs(props) do
 								if v.Type == "Status" then
-									local chance = max.min(100, math.ceil(v.StatusChance * 100))
+									local chance = math.min(100, math.ceil(v.StatusChance * 100))
 									local turns = v.Duration
 									local text = ""
 									local chanceText = ""

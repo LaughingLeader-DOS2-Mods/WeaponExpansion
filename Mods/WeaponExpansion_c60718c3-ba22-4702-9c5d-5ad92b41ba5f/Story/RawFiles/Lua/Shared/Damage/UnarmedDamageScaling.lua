@@ -47,8 +47,8 @@ if not isClient then
 
 	local lizardHits = {}
 
+	--- @param attacker string
 	--- @param target string
-	--- @param source string
 	--- @param damage integer
 	--- @param handle integer
 	--- @param data HitPrepareData
@@ -95,7 +95,9 @@ if not isClient then
 				data.DamageList[damage.DamageType] = damage.Amount
 			end
 			data:Recalculate()
-			Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage Weapon(%s) (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", weapon and weapon.Name or "nil", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
+			if Vars.DebugMode then
+				Ext.PrintWarning(string.format("[LLWEAPONEX] Unarmed Damage Weapon(%s) (%s) Boost(%s) IsCombined(%s) IsSecondHit(%s) Attacker(%s) Target(%s)", weapon and weapon.Name or "nil", data.TotalDamageDone, unarmedMasteryBoost, isCombinedHit, isSecondHit, attacker, target))
+			end
 			if lizardHits[attacker] == 2 then
 				lizardHits[attacker] = nil
 			end

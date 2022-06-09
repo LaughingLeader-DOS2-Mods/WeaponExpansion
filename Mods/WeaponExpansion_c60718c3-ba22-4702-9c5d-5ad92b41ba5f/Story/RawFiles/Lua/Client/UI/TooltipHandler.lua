@@ -121,24 +121,19 @@ end)
 --local worldTooltipFormat = '<font color="#ffffff">%s</font><font size="15"><br>%s</font>'
 local worldTooltipTypeText = '%s<font size="15"><br>%s</font>'
 
----@param ui UIObject
----@param text string
----@param x number
----@param y number
----@param isFromItem boolean
----@param item EclItem
-local function OnWorldTooltip(ui, text, x, y, isFromItem, item)
-	if isFromItem then
-		local typeText = GetItemTypeText(item)
+---@param e OnWorldTooltipEventArgs
+local function OnWorldTooltip(e)
+	if e.Item and e.IsFromItem then
+		local typeText = GetItemTypeText(e.Item)
 		if not StringHelpers.IsNullOrEmpty(typeText) then
 			local nextText = ""
-			local startPos,endPos = string.find(text, '<font size="15"><br>.-</font>')
+			local startPos,endPos = string.find(e.Text, '<font size="15"><br>.-</font>')
 			if startPos then
-				nextText = string.format(worldTooltipTypeText, string.sub(text, 0, startPos-1), typeText)
+				nextText = string.format(worldTooltipTypeText, string.sub(e.Text, 0, startPos-1), typeText)
 			else
-				nextText = string.format(worldTooltipTypeText, text, typeText)
+				nextText = string.format(worldTooltipTypeText, e.Text, typeText)
 			end
-			return nextText
+			e.Text = nextText
 		end
 	end
 end
@@ -240,7 +235,7 @@ local function Init()
 	Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
 	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
 
-	RegisterListener("OnWorldTooltip", OnWorldTooltip)
+	Events.OnWorldTooltip:Subscribe(OnWorldTooltip, {Priority=999})
 	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
 	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_SwordofVictory_Equipped")
 end

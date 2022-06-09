@@ -339,7 +339,7 @@ function SwapDeltaMods(item)
 			return
 		end
 
-		local stat,itemType,rarity,level = nil
+		local stat,itemType,rarity,level = nil,nil,nil,nil
 		stat = itemObject.StatsId
 		---@type StatItem
 		local itemStatObject = itemObject.Stats
@@ -368,10 +368,10 @@ function SwapDeltaMods(item)
 				local template = GetTemplate(item)
 				NRD_ItemConstructBegin(template)
 				--NRD_ItemCloneBegin(item)
-				if item.ItemType == "Weapon" then
+				if itemObject.ItemType == "Weapon" then
 					local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
 					if damageTypeString == nil then damageTypeString = "Physical" end
-					local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+					local damageTypeEnum = Data.DamageTypeEnums[damageTypeString]
 					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
 				end
 
@@ -429,7 +429,7 @@ function SwapDeltaMods(item)
 					NRD_ItemCloneBegin(item)
 					local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
 					if damageTypeString == nil then damageTypeString = "Physical" end
-					local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+					local damageTypeEnum = Data.DamageTypeEnums[damageTypeString]
 					NRD_ItemCloneSetInt("DamageTypeOverwrite", damageTypeEnum)
 					local clone = NRD_ItemClone()
 					ItemRemove(item)
@@ -464,7 +464,7 @@ local equipmentTypes = {
 ---@param item EsvItem
 -- Ext.RegisterListener("TreasureItemGenerated", function(item)
 -- 	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
--- 	--LeaderLib.PrintLog("[OnTreasureItemGenerated] item(%s) stat(%s) isInInventory(%s) InventoryHandle(%s) TreasureGenerated(%s) OwnerHandle(%s) ParentInventoryHandle(%s)", item.MyGuid, item.StatsId, isInInventory, item.InventoryHandle, item.TreasureGenerated, item.OwnerHandle, item.ParentInventoryHandle)
+-- 	--PrintLog("[OnTreasureItemGenerated] item(%s) stat(%s) isInInventory(%s) InventoryHandle(%s) TreasureGenerated(%s) OwnerHandle(%s) ParentInventoryHandle(%s)", item.MyGuid, item.StatsId, isInInventory, item.InventoryHandle, item.TreasureGenerated, item.OwnerHandle, item.ParentInventoryHandle)
 -- 	if item == nil or item.MyGuid == nil or GameHelpers.Item.IsObject(item) then
 -- 		return
 -- 	end
@@ -481,7 +481,7 @@ local equipmentTypes = {
 -- 	character = StringHelpers.GetUUID(character)
 -- 	if tempQuestRewardItems[item] == true then
 -- 		tempQuestRewardItems[item] = nil
--- 		LeaderLib.PrintLog("[WeaponExpansion:ItemAddedToCharacter] Checking quest reward item's deltamods. item(%s) character(%s)", item, character)
+-- 		PrintLog("[WeaponExpansion:ItemAddedToCharacter] Checking quest reward item's deltamods. item(%s) character(%s)", item, character)
 -- 		SwapDeltaMods(item)
 -- 	end
 -- end)

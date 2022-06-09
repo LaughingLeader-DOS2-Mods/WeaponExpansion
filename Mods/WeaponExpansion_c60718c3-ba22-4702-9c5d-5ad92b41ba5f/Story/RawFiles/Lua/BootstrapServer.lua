@@ -45,14 +45,13 @@ local defaultPersistentVars = {
     Uniques = {},
     UniqueRequirements = {}
 }
----@type WeaponExpansionVars
-PersistentVars = TableHelpers.Clone(defaultPersistentVars, true)
 
-RegisterListener("PersistentVarsLoaded", function()
-    Common.InitializeTableFromSource(PersistentVars, defaultPersistentVars)
+---@type WeaponExpansionVars
+PersistentVars = GameHelpers.PersistentVars.Initialize(Mods.WeaponExpansion, defaultPersistentVars, function ()
+    PersistentVars = GameHelpers.PersistentVars.Update(defaultPersistentVars, PersistentVars)
     if PersistentVars.StatusData.RemoveOnTurnEnd ~= nil then
         for uuid,data in pairs(PersistentVars.StatusData.RemoveOnTurnEnd) do
-            StatusManager.RemoveAllInactiveStatuses(uuid)
+            StatusTurnHandler.RemoveAllInactiveStatuses(uuid)
         end
     end
 end)
@@ -64,10 +63,10 @@ if Vars.DebugMode then
 end
 
 ---@alias EquipmentChangedCallback fun(char:EsvCharacter, item:EsvItem, template:string, equipped:boolean):void
----@alias EquipmentChangedIDType Tag|Template
----@alias ItemListenerEvent EquipmentChanged
+---@alias EquipmentChangedIDType string|"Tag"|"Template"
+---@alias ItemListenerEvent string|"EquipmentChanged"
 
----@alias MasteryEventID MasteryActivated|MasteryDeactivated
+---@alias MasteryEventID string|"MasteryActivated"|"MasteryDeactivated"
 ---@alias MasteryEventCallback fun(uuid:string, mastery:string):void
 
 BonusSkills = {}

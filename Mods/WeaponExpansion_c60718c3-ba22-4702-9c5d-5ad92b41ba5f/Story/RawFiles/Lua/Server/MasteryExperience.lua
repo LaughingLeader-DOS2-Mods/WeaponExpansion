@@ -2,7 +2,13 @@ if MasterySystem == nil then
 	MasterySystem = {}
 end
 
-function Mastery.CanGrantXP(uuid)
+---@param uuid CharacterParam
+---@return boolean
+function MasterySystem.CanGrantXP(uuid)
+	uuid = GameHelpers.GetUUID(uuid)
+	if not uuid then
+		return false
+	end
 	if IsTagged(uuid, "LLDUMMY_TrainingDummy") == 1 then
 		return true
 	end
@@ -26,9 +32,20 @@ function MasterySystem.GrantDeathExperienceToParty(enemy)
 	local bossMult = IsBoss(enemy) == 1 and 2.0 or 1.0
 	local mult = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_DeathExperienceMult", 1.0)
 	local expGain = mult * bossMult
-	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-		AddMasteryExperienceForAllActive(StringHelpers.GetUUID(db[1]), expGain)
+	for player in GameHelpers.Character.GetPlayers() do
+		if MasterySystem.CanGainExperience(player) then
+			AddMasteryExperienceForAllActive(player, expGain)
+		end
 	end
+end
+
+---@param character CharacterParam
+---@return boolean
+function MasterySystem.CanGainExperience(character)
+	if character then
+		return (GameHelpers.Character.IsPlayer(character) and GameHelpers.DB.HasUUID("DB_IsPlayer", character))
+	end
+	return false
 end
 
 --Mods.WeaponExpansion.AddMasteryExperienceForAllActive(Mods.WeaponExpansion.Origin.Harken, 20.0)
@@ -40,7 +57,7 @@ function MasterySystem.GrantBasicAttackExperience(player, enemy, mastery)
 		else
 			AddMasteryExperienceForAllActive(player, expGain)
 		end
-	elseif Mastery.CanGrantXP(enemy) then
+	elseif MasterySystem.CanGrantXP(enemy) then
 		local expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_BasicAttackExperienceMult", 0.5)
 		if mastery then
 			AddMasteryExperience(player, mastery, expGain)
@@ -51,7 +68,7 @@ function MasterySystem.GrantBasicAttackExperience(player, enemy, mastery)
 end
 
 function MasterySystem.GrantWeaponSkillExperience(player, enemy, mastery)
-	if Mastery.CanGrantXP(enemy) then
+	if MasterySystem.CanGrantXP(enemy) then
 		local expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_WeaponSkillExperienceMult", 0.5)
 		if IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1 then
 			expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_TrainingDummyExperienceMult", 0.1)
@@ -65,7 +82,7 @@ function MasterySystem.GrantWeaponSkillExperience(player, enemy, mastery)
 end
 
 RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(enemy)
-	if Mastery.CanGrantXP(enemy) then
+	if MasterySystem.CanGrantXP(enemy) then
 		MasterySystem.GrantDeathExperienceToParty(enemy)
 	end
 end)
@@ -76,14 +93,14 @@ local UnarmedSkills = {
 	"Target_PetrifyingTouch",
 }
 
-RegisterSkillListener(UnarmedSkills, function(skill, char, state, data)
-	if state == SKILL_STATE.HIT and data.Success and GameHelpers.Character.IsPlayer(char) then
-		MasterySystem.GrantWeaponSkillExperience(char, data.Target, "LLWEAPONEX_Unarmed")
+SkillManager.Register.Hit(UnarmedSkills, function(e)
+	if e.Data.Success and MasterySystem.CanGainExperience(e.Character) then
+		MasterySystem.GrantWeaponSkillExperience(e.Character, e.Data.Target, "LLWEAPONEX_Unarmed")
 	end
 end)
 
 function GainThrowingMasteryXP(uuid, target)
-	if GameHelpers.Character.IsPlayer(uuid) then
+	if MasterySystem.CanGainExperience(uuid) then
 		MasterySystem.GrantWeaponSkillExperience(uuid, target, "LLWEAPONEX_ThrowingAbility")
 	end
 end
