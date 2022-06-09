@@ -1,7 +1,7 @@
 local isClient = Ext.IsClient()
 
 ---@alias MasteryBonusCheckTarget string|'"Any"'|'"Target"'|'"Source"'
----@alias WeaponExpansionMasterySkillListenerCallback fun(bonuses:string[], skill:string, char:string, state:SKILL_STATE, data:SkillEventData|HitData):void
+---@alias WeaponExpansionMasterySkillListenerCallback fun(bonuses:string[], e:OnSkillStateAllEventArgs):void
 ---@alias MasteryBonusStatusCallback fun(bonuses:table<string,table<UUID,boolean>>, target:string, status:string, source:string, statusType:string)
 ---@alias MasteryBonusStatusBeforeAttemptCallback fun(bonuses:table<string,table<UUID,boolean>>, target:EsvCharacter|EsvItem, status:EsvStatus, source:EsvCharacter|EsvItem|nil, handle:integer, statusType:string):boolean
 
@@ -106,7 +106,7 @@ function MasteryBonusManager.HasMasteryBonus(character, bonus)
 end
 
 local function HasMatchedBonuses(bonuses, matchBonuses)
-	if matchBonuses == nil or matchBonuses == "" then
+	if Debug.MasteryTests or matchBonuses == nil or matchBonuses == "" then
 		return true
 	end
 	if type(matchBonuses) == "string" then
@@ -142,8 +142,7 @@ end
 ---@param matchBonuses string|string[]
 ---@param callback WeaponExpansionMasterySkillListenerCallback
 ---@param checkBonusOn MasteryBonusCheckTarget
-function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses,
-	callback, checkBonusOn)
+function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback, checkBonusOn)
 	if isClient then return end
 	checkBonusOn = checkBonusOn or "Source"
 	if type(skill) == "table" then
@@ -157,6 +156,27 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses,
 			OnSkillCallback(callback, matchBonuses, inskill, char, checkBonusOn, ...)
 		end)
 	end
+end
+
+---@param state SKILL_STATE
+---@param skill string|string[]
+---@param matchBonuses string|string[]
+---@param callback WeaponExpansionMasterySkillListenerCallback
+---@param checkBonusOn MasteryBonusCheckTarget
+---@param priority integer|nil
+---@param once boolean|nil
+function MasteryBonusManager.RegisterNewSkillListener(state, skill, matchBonuses, callback, checkBonusOn, priority, once)
+	if isClient then return end
+	checkBonusOn = checkBonusOn or "Source"
+
+	---@param e OnSkillStateAllEventArgs
+	local wrapperCallback = function(e)
+		local bonuses = MasteryBonusManager.GetMasteryBonuses(e.Character, e.Skill, checkBonusOn)
+		if HasMatchedBonuses(bonuses, matchBonuses) then
+			callback(e, bonuses)
+		end
+	end
+	SkillManager.Register.All(skill, wrapperCallback, state, priority, once)
 end
 
 local function OnSkillTypeCallback(callback, matchBonuses, uuid, checkBonusOn, ...)

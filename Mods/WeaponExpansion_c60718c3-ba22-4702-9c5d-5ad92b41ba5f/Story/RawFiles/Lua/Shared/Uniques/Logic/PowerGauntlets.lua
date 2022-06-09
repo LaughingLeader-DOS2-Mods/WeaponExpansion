@@ -1,4 +1,4 @@
-UnarmedHelpers.RegisterUnarmedStat("ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A", "WPN_UNIQUE_LLWEAPONEX_PowerGauntlets_A", "Projectile_LLWEAPONEX_PowerGauntlets_ApplyBonus")
+UnarmedHelpers.RegisterUnarmedStat("ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A", "WPN_UNIQUE_LLWEAPONEX_PowerGauntlets_A")
 
 if not Vars.IsClient then
 	local function DealUnarmedArmorDamage(target, source)

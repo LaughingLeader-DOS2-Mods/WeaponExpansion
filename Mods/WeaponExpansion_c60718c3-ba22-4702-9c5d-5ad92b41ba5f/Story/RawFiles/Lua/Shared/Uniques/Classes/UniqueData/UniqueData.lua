@@ -1,6 +1,8 @@
 local isClient = Ext.IsClient()
 
----@class UniqueData
+---@alias UniqueData UniqueDataBase|UniqueDataServerSide
+
+---@class UniqueDataBase
 ---@field ID string A name for this unique.
 ---@field UUID string The current UUID for the unique.
 ---@field DefaultUUID string The default UUID for the unique (the initial global item).
@@ -95,7 +97,7 @@ local function ConfigureMetadata(tbl)
 	})
 end
 
----@param progressionData table<string, table<int, UniqueProgressionEntry>>
+---@param progressionData table<string, UniqueProgressionEntry[]>
 ---@param params table<string,any>
 ---@return UniqueData
 function UniqueData:Create(progressionData, params)
@@ -226,19 +228,6 @@ function UniqueData:IsOwner(owner)
 	return false
 end
 
-function UniqueData:FindPlayerCopies()
-	if not StringHelpers.IsNullOrEmpty(self.Tag) then
-		for player in GameHelpers.Character.GetPlayers() do
-			local items = GameHelpers.Item.FindTaggedItems(player, self.Tag, false)
-			for _,item in pairs(items) do
-				if item ~= self.DefaultUUID then
-					self:AddCopy(item)
-				end
-			end
-		end
-	end
-end
-
 function UniqueData:AddPosition(region,x,y,z,rx,ry,rz)
 	self.LevelData[region] = {
 		x,y,z,
@@ -333,12 +322,11 @@ function UniqueData:RegisterSkillListener(skill, callback)
 end
 
 ---Lazy way of registering a timer listener if we're on the server side.
----@param name string|string[]|TimerCallback Timer name or the callback if a ganeric listener.
----@param callback TimerCallback
----@param fetchGameObjects boolean If true, any UUIDs passed into the timer callback are transformed into EsvCharacter/EsvItem.
-function UniqueData:RegisterTimerListener(name, callback, fetchGameObjects)
+---@param name string|string[]|fun(e:TimerFinishedEventArgs) Timer name or the callback if a ganeric listener.
+---@param callback fun(e:TimerFinishedEventArgs)
+function UniqueData:RegisterTimerListener(name, callback)
 	if not isClient then
-		Timer.RegisterListener(name, callback, fetchGameObjects)
+		Timer.Subscribe(name, callback)
 	end
 end
 

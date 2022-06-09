@@ -387,7 +387,7 @@ if not isClient then
 		end
 		-- in case equipment events have changed and need to fire again
 		for player in GameHelpers.Character.GetPlayers(false) do
-			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+			for _,slotid in Data.VisibleEquipmentSlots:Get() do
 				local itemid = CharacterGetEquippedItem(player.MyGuid, slotid)
 				if not StringHelpers.IsNullOrEmpty(itemid) then
 					EquipmentManager:OnItemEquipped(player, Ext.GetItem(itemid))

@@ -22,7 +22,7 @@ local Qualifiers = {
 
 ---@param attribute string
 ---@param value integer|string|any
----@param append boolean
+---@param params table|nil
 ---@return UniqueProgressionEntry
 function UniqueProgressionEntry:Create(attribute, value, params)
     local this =

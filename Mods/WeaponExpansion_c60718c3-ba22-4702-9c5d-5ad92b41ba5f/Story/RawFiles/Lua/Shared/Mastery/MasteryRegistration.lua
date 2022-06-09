@@ -61,7 +61,7 @@ if Ext.IsServer() then
 	---@param event string
 	---@param status string|string[]
 	---@param matchBonuses string|string[]
-	---@param callback WeaponExpansionMasteryStatusListenerCallback
+	---@param callback MasteryBonusStatusCallback
 	function Mastery.Register.StatusListener(event, status, matchBonuses, callback)
 		MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses, callback)
 	end

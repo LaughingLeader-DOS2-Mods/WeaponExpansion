@@ -45,7 +45,7 @@ Ext.RegisterListener("GetSkillAPCost", function (skill, character, grid, positio
 
 			local apMod = 0
 			for i,status in pairs(character.Character:GetStatuses()) do
-				if LeaderLib.Data.EngineStatus[status] ~= true then
+				if Data.EngineStatus[status] ~= true then
 					local potion = Ext.StatGetAttribute(status, "StatsId") or ""
 					if potion ~= "" then
 						local apCostBoost = Ext.StatGetAttribute(potion, "APCostBoost")

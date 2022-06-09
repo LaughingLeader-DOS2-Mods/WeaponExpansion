@@ -33,12 +33,25 @@ function Mastery.GetMasteryRank(character, mastery)
 	return 0
 end
 
+local function DebugMasteryActive(character)
+	if Debug.MasteryTests then
+		return true
+	end
+	character = GameHelpers.GetCharacter(character)
+	if not character then
+		return false
+	end
+	if character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
+		return true
+	end
+end
+
 ---@param character UUID|EsvCharacter|EclCharacter
 ---@param mastery string
 ---@param minLevel integer
 ---@return boolean
-local function HasMinimumMasteryLevel(character,mastery,minLevel)
-	if Vars.LeaderDebugMode then
+function Mastery.HasMinimumMasteryLevel(character,mastery,minLevel)
+	if DebugMasteryActive(character) then
 		return true
 	end
 	if Ext.IsServer() then
@@ -62,8 +75,6 @@ local function HasMinimumMasteryLevel(character,mastery,minLevel)
 	end
 	return false
 end
-
-Mastery.HasMinimumMasteryLevel = HasMinimumMasteryLevel
 
 --- @param character EsvCharacter|StatCharacter
 --- @param tag string
@@ -108,17 +119,15 @@ function Mastery.HasMasteryRequirement(character, tag)
 	if Debug.MasteryTests then
 		return true
 	end
-	if string.find(tag, "LLWEAPONEX_Unarmed") and not UnarmedHelpers.HasEmptyHands(character) then
+	character = GameHelpers.GetCharacter(character)
+	if not character then
 		return false
 	end
-	-- if Debug.MasteryTests or Vars.LeaderDebugMode then
-	-- 	return true
-	-- end
-	if type(character) == "string" then
-		character = Ext.GetCharacter(character)
-		if character == nil then
-			return false
-		end
+	if character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
+		return true
+	end
+	if string.find(tag, "LLWEAPONEX_Unarmed") and not UnarmedHelpers.HasEmptyHands(character) then
+		return false
 	end
 	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
 	if not status then
@@ -130,22 +139,30 @@ function Mastery.HasMasteryRequirement(character, tag)
 end
 
 ---@param character EsvCharacter|StatCharacter
+---@param allowDebug boolean|nil
 ---@return table<string,boolean>
-function Mastery.GetMasteryActiveDictionary(character)
+function Mastery.GetMasteryActiveDictionary(character, allowDebug)
 	local active = {}
-	for mastery,masteryData in pairs(Masteries) do
-		active[mastery] = GameHelpers.CharacterOrEquipmentHasTag(character,mastery)
+	character = GameHelpers.GetCharacter(character)
+	if character then
+		for mastery,masteryData in pairs(Masteries) do
+			active[mastery] = (allowDebug and DebugMasteryActive(character)) or GameHelpers.CharacterOrEquipmentHasTag(character,mastery)
+		end
 	end
 	return active
 end
 
---- @param character EsvCharacter|StatCharacter
+---@param character EsvCharacter|StatCharacter
+---@param allowDebug boolean|nil
 ---@return string[]
-function Mastery.GetActiveMasteries(character)
+function Mastery.GetActiveMasteries(character, allowDebug)
 	local active = {}
-	for mastery,masteryData in pairs(Masteries) do
-		if GameHelpers.CharacterOrEquipmentHasTag(character,mastery) then
-			active[#active+1] = mastery
+	character = GameHelpers.GetCharacter(character)
+	if character then
+		for mastery,masteryData in pairs(Masteries) do
+			if (allowDebug and DebugMasteryActive(character)) or GameHelpers.CharacterOrEquipmentHasTag(character,mastery) then
+				active[#active+1] = mastery
+			end
 		end
 	end
 	return active

@@ -478,7 +478,7 @@ if not Vars.IsClient then
 			local entry = tbl[i]
 			if entry.Frequency > 0 then
 				totalFrequency = totalFrequency + entry.Frequency
-			end	
+			end
 		end
 		if totalFrequency > 0 then
 			for i=1,#tbl do
@@ -501,7 +501,9 @@ if not Vars.IsClient then
 		return tbl
 	end
 
-	---@return UpgradeEntry[]
+	---@class GnakDropEntry:{ID:string, Frequency:integer, StartRange:integer, EndRange:integer}
+
+	---@return GnakDropEntry[]
 	local function BuildDropList()
 		if PersistentVars.SkillData.GnakSpells == nil or Common.TableLength(PersistentVars.SkillData.GnakSpells, true) == 0 then
 			InitializeSpellEffects()
@@ -524,6 +526,9 @@ if not Vars.IsClient then
 		return spells
 	end
 
+	---@param spells GnakDropEntry[]
+	---@param roll integer
+	---@return string skill
 	local function GetRandomSpell(spells, roll)
 		for i,v in pairs(spells) do
 			--print(string.format("[%s] Start(%s)/End(%s)/(%s)", self.ID, self.StartRange, self.EndRange, roll))
