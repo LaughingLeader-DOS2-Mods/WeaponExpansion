@@ -1,4 +1,4 @@
----@type UniqueData
+---@class UniqueDataServerSide:UniqueDataBase
 local UniqueData = UniqueManager.Classes.UniqueData
 
 ---@param uuid UUID
@@ -92,6 +92,19 @@ function UniqueData:AddCopy(uuid)
 	end
 end
 
+function UniqueData:FindPlayerCopies()
+	if not StringHelpers.IsNullOrEmpty(self.Tag) then
+		for player in GameHelpers.Character.GetPlayers() do
+			local items = GameHelpers.Item.FindTaggedItems(player, self.Tag, false)
+			for _,item in pairs(items) do
+				if item ~= self.DefaultUUID then
+					self:AddCopy(item)
+				end
+			end
+		end
+	end
+end
+
 ---@param target UUID
 ---@param uuid UUID|nil
 function UniqueData:Equip(target, uuid)
@@ -149,7 +162,7 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, leve
 	local attribute = entry:GetBoostAttribute(stat)
 	if attribute == "ExtraProperties" then
 		local props = target.ExtraProperties or {}
-		if not string.find(Common.Dump(props), entry.Value.Action) then
+		if not string.find(Common.Dump(props), entry.Value) then
 			table.insert(props, entry.Value)
 			statChanged = true
 		end
@@ -189,8 +202,8 @@ local function ApplyProgressionEntry(entry, stat, item, changes, firstLoad, leve
 		maxDamage = Ext.Round(baseDamage + (range/2))
 		changes.Boosts["MinDamage"] = (changes.Boosts["MinDamage"] or 0) + math.abs(minDamage - baseMinDamage)
 		changes.Boosts["MaxDamage"] = (changes.Boosts["MaxDamage"] or 0) + math.abs(maxDamage - baseMaxDamage)
-		if LeaderLib.Vars.DebugMode then
-			LeaderLib.PrintLog("[%s] Damage Range (%s) MinDamage(%s => %s) MaxDamage(%s => %s)", stat.Name, entry.Value, baseMinDamage, minDamage, baseMinDamage+minDamage, baseMaxDamage, maxDamage, baseMaxDamage)
+		if Vars.DebugMode then
+			PrintLog("[%s] Damage Range (%s) MinDamage(%s => %s) MaxDamage(%s => %s)", stat.Name, entry.Value, baseMinDamage, minDamage, baseMinDamage+minDamage, baseMaxDamage, maxDamage, baseMaxDamage)
 		end
 		target.MinDamage = minDamage
 		target.MaxDamage = maxDamage
@@ -223,7 +236,7 @@ local function CloneItem(self, item, template, stat, level)
 		-- fixes this issue.
 		local damageTypeString = Ext.StatGetAttribute(stat, "Damage Type")
 		if damageTypeString == nil then damageTypeString = "Physical" end
-		local damageTypeEnum = LeaderLib.Data.DamageTypeEnums[damageTypeString]
+		local damageTypeEnum = Data.DamageTypeEnums[damageTypeString]
 		props.DamageTypeOverwrite = damageTypeEnum
 	end
 
@@ -273,7 +286,7 @@ local function TransformItem(self, item, template, stat, level, matchStat, match
 	if not StringHelpers.IsNullOrEmpty(owner) ~= nil and ObjectIsCharacter(owner) then
 		local character = Ext.GetCharacter(owner)
 		if character ~= nil then
-			for _,slotid in LeaderLib.Data.VisibleEquipmentSlots:Get() do
+			for _,slotid in Data.VisibleEquipmentSlots:Get() do
 				if StringHelpers.GetUUID(CharacterGetEquippedItem(character.MyGuid, slotid)) == item.MyGuid then
 					slot = slotid
 					break
