@@ -1,11 +1,11 @@
 Mastery	Rank	Skill/Status/Name	Bonus	Implemented	Tested
-Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√	❌
-Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	√	❌
-Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by Warfare.	√	❌
+Axe	1	Crippling Blow	If the target is disabled, deal additional piercing damage.	√	√
+Axe	2	Blitz Attack	Each target hit becomes Vulnerable. If hit again, Vulnerable is removed and bonus damage is dealt.	√	√
+Axe	3	All In	All In deals 50% of its damage as piercing damage, increased by Warfare.	√	√
 Axe	3	Flurry	If all 3 hits connect, regain 1 AP.	√	❌
-Axe	3	Whirlwind	Keeping spinning up to 2-3 times, dealing reduced damage each spin.	√	❌
+Axe	3	Whirlwind	Keeping spinning up to 2-3 times, dealing reduced damage each spin.	√	√
 Axe	4	Onslaught	Each hit cleaves up to 4m away, dealing reduced damage.	√	❌
-Banner	1	Encourage	Fear, Madness, and Sleep are cleansed from encouraged allies.	√	❌
+Banner	1	Encourage	Fear, Madness, and Sleep are cleansed from encouraged allies.	√	√
 Banner	1	Battering Ram/Bull Rush	If under the effects of War Charge, deal 25% more damage and gain Hasted after using a rush skill.	√	❌
 Banner	2	Rallying Cry	Physical Armor is restored as well.	√	❌
 Banner	2	Guardian Angel	If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.	√	❌

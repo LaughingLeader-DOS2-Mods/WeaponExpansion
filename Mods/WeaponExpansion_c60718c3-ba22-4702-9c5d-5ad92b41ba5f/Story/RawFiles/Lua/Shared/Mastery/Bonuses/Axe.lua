@@ -143,26 +143,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 	rb:Create("AXE_SPINNING", {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Whirlwind"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Whirlwind", "Spin an additional 1-3 times, dealing reduced damage each spin."),
 	}).Register.SkillCast(function(self, e, bonuses)
-		local uuid = e.Character.MyGuid
-		if e.Skill == "Shout_Whirlwind" or "Shout_EnemyWhirlwind" then
-			GameHelpers.ClearActionQueue(uuid)
-			CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", uuid, 0, 1, 1)
-			SignalTestComplete("AXE_SPINNING_1")
-		elseif e.Skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
-			if Ext.Random(0,100) <= 50 or Debug.MasteryTests then
-				GameHelpers.ClearActionQueue(uuid)
-				CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", uuid, 0, 1, 1)
-				SignalTestComplete("AXE_SPINNING_2")
-			end
-		elseif e.Skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
-			if Ext.Random(0,100) <= 25 or Debug.MasteryTests then
-				GameHelpers.ClearActionQueue(uuid)
-				CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", uuid, 0, 1, 1)
-				SignalTestComplete("AXE_SPINNING_3")
-			end
-		end
+		Timer.StartObjectTimer("LLWEAPONEX_Axe_Whirlwind_TryNextSpin", e.Character, 500, {Skill = e.Skill})
 	end).Register.Test(function(test, self)
 		--Spin-to-win via Whirlwind
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _axeTestEquipmentSet)
@@ -249,6 +232,31 @@ if not Vars.IsClient then
 				SignalTestComplete("AXE_DW_FLURRY")
 			end
 			PersistentVars.MasteryMechanics.AxeFlurryHits[e.Data.UUID] = nil
+		end
+	end)
+
+	Timer.Subscribe("LLWEAPONEX_Axe_Whirlwind_TryNextSpin", function(e)
+		if e.Data.UUID and e.Data.Skill then
+			local skill = e.Data.Skill
+			local uuid = e.Data.UUID
+			print(skill)
+			if skill == "Shout_Whirlwind" or skill == "Shout_EnemyWhirlwind" then
+				GameHelpers.ClearActionQueue(uuid)
+				CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", uuid, 0, 1, 1)
+				SignalTestComplete("AXE_SPINNING_1")
+			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
+				if Ext.Random(0,100) <= 50 or Debug.MasteryTests then
+					GameHelpers.ClearActionQueue(uuid)
+					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", uuid, 0, 1, 1)
+					SignalTestComplete("AXE_SPINNING_2")
+				end
+			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
+				if Ext.Random(0,100) <= 25 or Debug.MasteryTests then
+					GameHelpers.ClearActionQueue(uuid)
+					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", uuid, 0, 1, 1)
+					SignalTestComplete("AXE_SPINNING_3")
+				end
+			end
 		end
 	end)
 end

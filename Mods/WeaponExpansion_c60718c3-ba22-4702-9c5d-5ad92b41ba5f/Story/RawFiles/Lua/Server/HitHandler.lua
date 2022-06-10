@@ -112,9 +112,9 @@ local function OnStatusHitEnter(target, source, data)
 		local canGrantMasteryXP = data.Damage > 0 and MasterySystem.CanGainExperience(source)
 		if not data.SkillData and data:IsFromWeapon() then
 			local xpMastery = nil
-			if canGrantMasteryXP then
-				Ext.PrintError("canGrantMasteryXP", source.DisplayName, source.MyGuid, Lib.serpent.block(Osi.DB_IsPlayer:Get(nil)))
-			end
+			-- if canGrantMasteryXP then
+			-- 	Ext.PrintError("canGrantMasteryXP", source.DisplayName, source.MyGuid, Lib.serpent.block(Osi.DB_IsPlayer:Get(nil)))
+			-- end
 			--local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(source)
 			if UnarmedHelpers.HasUnarmedWeaponStats(source.Stats) then
 				local weapon,unarmedMasteryBoost,unarmedMasteryRank,highestAttribute,hasUnarmedWeapon = UnarmedHelpers.GetUnarmedWeapon(source.Stats)

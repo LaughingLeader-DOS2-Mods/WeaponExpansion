@@ -202,8 +202,14 @@ local function SessionSetup()
 
     -- Enemy Upgrade Overhaul
     if Ext.IsModLoaded("046aafd8-ba66-4b37-adfb-519c1a5d04d7") then
-        Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
-        Mods["EnemyUpgradeOverhaul"].IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
+        Mods.EnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
+        Mods.EnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
+    end
+
+    -- Super Enemy Upgrade Overhaul
+    if Ext.IsModLoaded("e21fcd37-daec-490d-baec-f6f3e83f1ac9") then
+        Mods.SuperEnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"] = true
+        Mods.SuperEnemyUpgradeOverhaul.IgnoredSkills["Projectile_LLWEAPONEX_Pistol_Shoot_Enemy"] = true
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
 
