@@ -1091,3 +1091,17 @@ add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_CraftedRapier_1H_A"
 add equipmentgroup
 add equipment entry "LOOT_LLWEAPONEX_SmugglersBag"
+
+new equipment "Class_LLWEAPONEX_BannerCommander_Preview"
+add equipmentgroup
+add equipment entry "ARM_Knight_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Knight_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Knight_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Knight_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Knight_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_Banner_2H_Preview_A"

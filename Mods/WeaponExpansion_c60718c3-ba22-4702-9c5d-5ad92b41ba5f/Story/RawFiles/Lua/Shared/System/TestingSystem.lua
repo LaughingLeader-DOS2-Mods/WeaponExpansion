@@ -141,22 +141,11 @@ if not _ISCLIENT then
 		return Ext.GetCharacter(character)
 	end
 
-	---@param test LuaTest
-	---@param pos number[]|nil
-	---@param equipmentSet string|nil
-	---@param targetTemplate string|nil
-	---@return UUID,UUID
-	function MasteryTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate)
-		local host = Ext.GetCharacter(CharacterGetHostCharacter())
-		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
-		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
-		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
-
-		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
+	local function SetupCharacter(character, transformTarget, equipmentSet)
 		if equipmentSet then
-			CharacterTransformAppearanceToWithEquipmentSet(character, host.MyGuid, equipmentSet, false)
+			CharacterTransformAppearanceToWithEquipmentSet(character, transformTarget, equipmentSet, false)
 		else
-			CharacterTransformAppearanceTo(character, host.MyGuid, 1, 1)
+			CharacterTransformAppearanceTo(character, transformTarget, 1, 1)
 		end
 		SetStoryEvent(character, "ClearPeaceReturn")
 		CharacterSetReactionPriority(character, "StateManager", 0)
@@ -165,6 +154,22 @@ if not _ISCLIENT then
 		CharacterSetReactionPriority(character, "CowerIfNeutralSeeCombat", 0)
 		SetTag(character, "LeaderLib_TemporaryCharacter")
 		SetTag(character, "LLWEAPONEX_MasteryTestCharacter")
+	end
+
+	---@param test LuaTest
+	---@param pos number[]|nil
+	---@param equipmentSet string|nil
+	---@param targetTemplate string|nil
+	---@return UUID character
+	---@return UUID dummy
+	function MasteryTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
+		local host = Ext.GetCharacter(CharacterGetHostCharacter())
+		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
+		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
+		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
+
+		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
+		SetupCharacter(character, host.MyGuid, equipmentSet)
 
 		local dummy = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
 
@@ -172,7 +177,9 @@ if not _ISCLIENT then
 		SetTag(dummy, "LeaderLib_TemporaryCharacter")
 		SetVarObject(dummy, "LLDUMMY_Owner", character)
 		Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
-		CharacterSetTemporaryHostileRelation(dummy, character)
+		if setEnemy then
+			CharacterSetTemporaryHostileRelation(dummy, character)
+		end
 
 		local cleanup = function ()
 			if ObjectExists(character) == 1 then
@@ -184,5 +191,50 @@ if not _ISCLIENT then
 		end
 		Timer.StartOneshot("", 30000, cleanup)
 		return character,dummy,cleanup
+	end
+
+	---@param test LuaTest
+	---@param pos number[]|nil
+	---@param equipmentSet string|nil
+	---@param targetTemplate string|nil
+	---@return UUID character1
+	---@return UUID character2
+	---@return UUID dummy
+	function MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
+		local host = Ext.GetCharacter(CharacterGetHostCharacter())
+		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
+		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)}
+		local pos3 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
+		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
+		local character2 = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
+
+		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
+		SetupCharacter(character, host.MyGuid, equipmentSet)
+		SetupCharacter(character2, host.MyGuid, equipmentSet)
+
+		local dummy = TemporaryCharacterCreateAtPosition(pos3[1], pos3[2], pos3[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
+
+		PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
+		SetTag(dummy, "LeaderLib_TemporaryCharacter")
+		SetVarObject(dummy, "LLDUMMY_Owner", character)
+		Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
+		if setEnemy then
+			CharacterSetTemporaryHostileRelation(dummy, character)
+			CharacterSetTemporaryHostileRelation(dummy, character2)
+		end
+
+		local cleanup = function ()
+			if ObjectExists(character) == 1 then
+				RemoveTemporaryCharacter(character)
+			end
+			if ObjectExists(character2) == 1 then
+				RemoveTemporaryCharacter(character2)
+			end
+			if ObjectExists(dummy) == 1 then
+				SetStoryEvent(dummy, "LLDUMMY_TrainingDummy_DieNow")
+			end
+		end
+		Timer.StartOneshot("", 30000, cleanup)
+		return character,character2,dummy,cleanup
 	end
 end
