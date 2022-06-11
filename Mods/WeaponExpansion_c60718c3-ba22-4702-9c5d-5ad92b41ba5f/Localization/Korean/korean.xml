@@ -432,7 +432,7 @@
 	<content contentuid="h2942375bgc766g4b2egbb03g24f69ba81400">Earthbender</content>
 	<content contentuid="h296b969bg6d81g4aeaga55cg094e33f69e18">Frostdyne (Empowered)</content>
 	<content contentuid="h2977cfa1gc8b4g4fb6g8ee8gda55193c19f0">The product of Dwarven technology and mysticism, this cannon fits snugly on your arm.&lt;br&gt;Powered by runes, the Runic Cannon is capable of harnessing magic at level once thought to be impossible without Source.</content>
-	<content contentuid="h29991fbcg6968g4feeg9a60gcc8c04fdbd73">Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AoOMaxDamageBonus]% more damage, in proportion to the target&apos;s missing vitality.</content>
+	<content contentuid="h29991fbcg6968g4feeg9a60gcc8c04fdbd73">Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AttackOfOpportunityMaxDamageBonus]% more damage, in proportion to the target&apos;s missing vitality.</content>
 	<content contentuid="h29b88cbdgcf34g4e8bg92fag54c3db611627">Activate &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;</content>
 	<content contentuid="h29d30edeg0e92g453ag95begcea9915f2e6d">Activate &lt;font color=&apos;#4197e2&apos;&gt;Water Rune&lt;/font&gt;</content>
 	<content contentuid="h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd">Mainhand Auto-Equip</content>
@@ -467,6 +467,7 @@
 	<content contentuid="h2d0bd945g3345g446ag8845gc78010e0018c">A set of dark dual shields. Their vicious design reflect the Black Ring well.</content>
 	<content contentuid="h2d0e8796g1d66g4541g8ce3ged8f936c4129">*Tell the mercenary to stop following you.*</content>
 	<content contentuid="h2d15369bg951bg438cga94fg7ccb48f7a9b1">Lava Rune</content>
+	<content contentuid="h2d402e69g2f8bg48ddg8992gcb318ea714c4">&lt;font color=&apos;#9988FF&apos;&gt;Pure Lightning&lt;/font&gt;</content>
 	<content contentuid="h2d40dd25gb718g4809ga2e9gb83912e9cbfd">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release a freezing gas, dealing water damage on hit.</content>
 	<content contentuid="h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6">Reap the battlefield, dealing [1] to enemies in an arc.&lt;br&gt;&lt;font color=&apos;#CD39C0&apos;&gt;Slaying enemies grants &lt;font color=&apos;#80FFC3&apos;&gt;[Key:LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName]&lt;/font&gt; (a stacking damage bonus), and restores &lt;font color=&apos;#80FFC3&apos;&gt;source points&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="h2d9d60e3gf171g47ffgbf7fg126af4dd7ef6">Expert Slayer</content>
@@ -554,6 +555,7 @@
 	<content contentuid="h34cca20cg817dg4132ga584gf9c6fcce8790">&lt;font color=&apos;#00AA00&apos;&gt;Flask of Poison Weakness&lt;/font&gt;</content>
 	<content contentuid="h34f6772egc119g46b0g894age91618dddca1">Fire Bullets</content>
 	<content contentuid="h35037378g9f64g488dga457g5a32144339dd">Quarterstaff (Wood)</content>
+	<content contentuid="h3542d9a7ga873g4903gaae3g8f5315c9a9b7">&lt;font color=&apos;#C7A758&apos;&gt;[ExtraData:LLWEAPONEX_Omnibolt_LightningChance]% chance to summon a lightning strike when basic attacking an object or position.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#81AB00&apos;&gt;[Key:Projectile_SkyShot_DisplayName:Sky Shot]&lt;/font&gt; &lt;font color=&apos;#C7A758&apos;&gt;is enhanced with a bonus lightning strike.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#33AA22&apos;&gt;All lightning strikes have a high ground bonus.&lt;font&gt;</content>
 	<content contentuid="h35865821g7403g4bb4g99bdga8a26e72f85f">Kevin (Normal)</content>
 	<content contentuid="h35ad18c6g01dbg47e0g9be9g7ec0412ca64e">Blademaster&apos;s Strike 5</content>
 	<content contentuid="h35ea756dg3af6g4640gb5f2g9861efa3d5b5">Shield Cover</content>
@@ -1367,7 +1369,7 @@
 	<content contentuid="h8ae1e87bg6b1cg4ec1g8a20gd506b45bb394">Dwarvenguard, Wolfbane</content>
 	<content contentuid="h8b0389dbge818g421egb679g3b1c28fd7a5e">Worn Quarterstaff</content>
 	<content contentuid="h8b079720gd454g4ecdgaa70g18cf5b9aea5d">Character has been hit by a Blademaster&apos;s strike 5 times.&lt;br&gt;&lt;font color=&apos;#D66565&apos;&gt;Removed when the attacker&apos;s turn ends.&lt;/font&gt;</content>
-	<content contentuid="h8b21aebcga7aeg436fg8354g7c11bc7e6d79">[ExtraData:LLWEAPONEX_MB_Axe_AllInPiercingDamagePercentage]% of the damage dealt is now [Handle:hd05581a1g83a7g4d95gb59fgfa5ef68f5c90:piercing damage].</content>
+	<content contentuid="h8b21aebcga7aeg436fg8354g7c11bc7e6d79">[ExtraData:LLWEAPONEX_MB_Axe_AllInPiercingDamagePercentage]% of the damage dealt is converted to &lt;font color=&apos;#CD1F1F&apos;&gt;[Handle:hd05581a1g83a7g4d95gb59fgfa5ef68f5c90:piercing damage]&lt;/font&gt;.</content>
 	<content contentuid="h8b499dd6g523fg40e2ga746g4adf2a1f63fb">Enable [Key:Target_LLWEAPONEX_ThrowObject_DisplayName] Limit</content>
 	<content contentuid="h8b5cc97egfa7dg473agbf3fg7da2103c6362">&lt;font color=&apos;#00FF7F&apos;&gt;Banner Mastery V&lt;/font&gt;</content>
 	<content contentuid="h8b5ec746gb51eg4838gbec4g8562c30aa6e0">Character is inflicted with a curse, and will spread the curse in a [1] radius when dead.</content>
@@ -2012,7 +2014,7 @@
 	<content contentuid="hcf6a97abge09ag4075g9ecbg7595d841b33f">If the target is &lt;font color=&apos;#FF3300&apos;&gt;Marked&lt;/font&gt;, deal a &lt;font color=&apos;#33FF33&apos;&gt;guaranteed critical hit&lt;/font&gt; and bypass dodging/blocking. The mark is cleansed after hit.</content>
 	<content contentuid="hcf701d65ge51bg4bdfgb9c2g511761fe1740">Ricard&apos;s Piercing Storm</content>
 	<content contentuid="hcf7f692dgd488g4bf1ga3e7gf9b107bfe3e3">Power Pole</content>
-	<content contentuid="hcf834af0g8e9bg4a0bgbb92g06492e1386d5">Launch a magical missile from your rod that deals &lt;font color=&apos;#b823cb&apos;&gt;[1] Chaos Damage&lt;/font&gt;, and creates a random surface.</content>
+	<content contentuid="hcf834af0g8e9bg4a0bgbb92g06492e1386d5">Launch a magical missile from your rod that deals [1], and creates a random surface.</content>
 	<content contentuid="hcf8ab49dga402g46a3g80d6gfece2661cb1f">Pagemaster</content>
 	<content contentuid="hcfa7c974g9156g49cbga4c3ge40e05bf5b5e">Frostdyne (Unleashed)</content>
 	<content contentuid="hcfa8b001gecd2g4b84g8835g989b790a15f0">Undying Chaos, Lord&apos;s Spire</content>
