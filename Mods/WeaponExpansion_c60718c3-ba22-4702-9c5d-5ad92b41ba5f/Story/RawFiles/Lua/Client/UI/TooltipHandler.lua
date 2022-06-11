@@ -238,6 +238,7 @@ local function Init()
 	Events.OnWorldTooltip:Subscribe(OnWorldTooltip, {Priority=999})
 	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
 	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_SwordofVictory_Equipped")
+	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_Omnibolt_Equipped")
 end
 return {
 	Init = Init

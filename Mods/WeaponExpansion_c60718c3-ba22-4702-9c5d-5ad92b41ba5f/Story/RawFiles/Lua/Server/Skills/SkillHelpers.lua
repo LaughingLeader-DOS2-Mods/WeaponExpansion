@@ -19,12 +19,20 @@ function RestoreSkillSlot(char, previousSkill, replacementSkill)
 	end
 end
 
+---Roll two times.
 ---@param chance integer
 ---@param onlyOnce boolean|nil If true, don't roll a second time if the first failed.
-function BonusRoll(chance, onlyOnce)
+---@param minValue integer|nil Defaults to 1
+---@param maxValue integer|nil Defaults to 999.
+function BonusRoll(chance, onlyOnce, minValue, maxValue)
+	if chance == 0 then
+		return false
+	end
+	minValue = minValue or 1
+	maxValue = maxValue or 999
 	if Ext.Random(1,999) <= chance then
 		return true
-	elseif not onlyOnce and (Ext.Random(1,0) == 1 and Ext.Random(1,999) <= chance) then
+	elseif not onlyOnce and (Ext.Random(0,1) == 1 and Ext.Random(1,999) <= chance) then
 		return true
 	end
 	return false
