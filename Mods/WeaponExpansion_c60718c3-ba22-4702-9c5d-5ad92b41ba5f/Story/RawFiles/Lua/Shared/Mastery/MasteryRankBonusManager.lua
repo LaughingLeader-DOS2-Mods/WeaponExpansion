@@ -252,7 +252,7 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget
 ---@param priority integer|nil
 ---@param once boolean|nil
-function MasteryBonusManager.RegisterOnHealListener(state, skill, matchBonuses, callback, checkBonusOn, priority, once)
+function MasteryBonusManager.RegisterOnHealListener(matchBonuses, callback, checkBonusOn, priority, once)
 	if isClient then return end
 	checkBonusOn = checkBonusOn or "Source"
 

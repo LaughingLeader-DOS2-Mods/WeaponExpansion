@@ -180,11 +180,12 @@ end
 ---@param self MasteryBonusData
 ---@param callback WeaponExpansionOnHealCallback
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
 ---@return MasteryBonusData
-function _INTERNALREG.OnHeal(self, callback, checkBonusOn)
+function _INTERNALREG.OnHeal(self, callback, checkBonusOn, priority)
 	if not isClient then
 		local wrapper = function (...) callback(self, ...) end
-		MasteryBonusManager.RegisterOnHealListener(self.ID, wrapper, checkBonusOn)
+		MasteryBonusManager.RegisterOnHealListener(self.ID, wrapper, checkBonusOn, priority)
 	end
 	return self
 end
