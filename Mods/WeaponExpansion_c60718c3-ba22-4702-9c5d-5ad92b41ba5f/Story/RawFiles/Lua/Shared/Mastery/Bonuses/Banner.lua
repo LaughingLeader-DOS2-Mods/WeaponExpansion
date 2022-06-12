@@ -93,6 +93,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 			if #cleansed > 0 then
 				--PlayBeamEffect(source, target, "RS3_FX_GP_Status_Retaliation_Beam_01", "Dummy_R_HandFX", "Dummy_BodyFX")
 				GameHelpers.Status.Apply(target, "LLWEAPONEX_ENCOURAGED_CLEANSE_BEAM_FX", 0, true, source)
+				--EffectManager.PlayEffect("RS3_FX_GP_Status_Retaliation_Beam_01", target, {BeamTarget=target, BeamTargetBone = "Dummy_HeadFX", Bone="Dummy_FX_01"})
 				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", Common.StringJoin("/", cleansed))
 				CharacterStatusText(target, text)
 				SignalTestComplete("BANNER_INSPIRE")
@@ -230,12 +231,15 @@ local function CheckLeadershipBonus(char)
 			if status then
 				local bonusChance = 0
 				local bonusSource = nil
+
+				local baseChance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25, true)
+				local masteryChance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 50, true)
 	
 				--Check the source of Leadership first
 				local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
 				if source ~= nil then
 					if MasteryBonusManager.HasMasteryBonus(source, "BANNER_LEADERSHIP") then
-						bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 50))
+						bonusChance = masteryChance
 						bonusSource = source.MyGuid
 					end
 				end
@@ -246,11 +250,11 @@ local function CheckLeadershipBonus(char)
 					local leadershipDistance = GameHelpers.GetExtraData("LeadershipRange", 8)
 					local combatid = CombatGetIDForCharacter(char)
 					for ally in GameHelpers.Combat.GetCharacters(combatid, "Ally") do
-						if MasteryBonusManager.HasMasteryBonus(ally.MyGuid, "BANNER_LEADERSHIP") 
+						if MasteryBonusManager.HasMasteryBonus(ally.MyGuid, "BANNER_LEADERSHIP")
 						and ally.Stats.Leadership > 0
 						and GameHelpers.Math.GetDistance(ally.WorldPos, character.WorldPos) <= leadershipDistance
 						then
-							bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25))
+							bonusChance = baseChance
 							bonusSource = ally.MyGuid
 						end
 					end
@@ -298,7 +302,7 @@ if not Vars.IsClient then
 			if statusSource then
 				statusSource = GameHelpers.GetCharacter(statusSource)
 				if statusSource and MasteryBonusManager.HasMasteryBonus(statusSource.MyGuid, "BANNER_PROTECTION") then
-					ApplyStatus(uuid, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION", 6.0, 0, uuid)
+					GameHelpers.Status.Apply(uuid, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION", 6.0, 0, uuid)
 				end
 			end
 		end
@@ -365,9 +369,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		Statuses = {"LEADERSHIP"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Leadership", "<font color='#00FFFF'>[Special:LLWEAPONEX_MB_Banner_LeadershipInspirationChance]% chance to gain <font color='#11FF88'>[Key:LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS_DisplayName]</font> on turn start if within [ExtraData:LeadershipRange]m range of a [Key:LLWEAPONEX_Banner] wielder.</font>"),
 		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Banner_Mastery3", true),
-		OnGetTooltip = function(bonus, skillOrStatus, character, isStatus, status)
+		OnGetTooltip = function(bonus, skillOrStatus, character, tooltipType, status)
 			--Appending "Empowered by x's Banner" if Leadership is from a Banner user
-			if status then
+			if tooltipType == "status" and status then
 				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
 				if source and GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_Banner_Mastery3") or Vars.LeaderDebugMode then
 					return string.format("%s<br>%s", bonus.Tooltip.Value, Text.MasteryBonusParams.BannerLeadershipSource:ReplacePlaceholders(source.DisplayName))
@@ -389,7 +393,108 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		test:WaitForSignal(self.ID, 30000)
 		test:AssertGotSignal(self.ID)
 		return true
-	end)
+	end),
+
+	rb:Create("BANNER_COOPERATION", {
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Cooperation", "<font color='#00FFFF'>When healed, nearby allies within a [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius]m radius are also healed for [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage]% of the amount.</font>"),
+		--self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID):string|TranslatedString
+		---@param self MasteryBonusData
+		---@param id string
+		---@param character EclCharacter
+		---@param tooltipType MasteryBonusDataTooltipID
+		---@param extraParam EclItem|EclStatus
+		---@param tags table<string,boolean>|nil
+		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags)
+			if tooltipType == "status" then
+				local statusType = GameHelpers.Status.GetStatusType(id)
+				if statusType == "HEALING" or statusType == "HEAL" then
+					return true
+				end
+			elseif tooltipType == "skill" then
+				local properties = GameHelpers.Stats.GetSkillProperties(id)
+				if properties then
+					for _,v in pairs(properties) do
+						if v.Type == "Status" and v.Action then
+							local statusType = GameHelpers.Status.GetStatusType(id)
+							if statusType == "HEALING" or statusType == "HEAL" then
+								return true
+							end
+						end
+					end
+				end
+			elseif tooltipType == "item" and extraParam then
+				if extraParam.RootTemplate and extraParam.RootTemplate.OnUsePeaceActions then
+					for _,v in pairs(extraParam.RootTemplate.OnUsePeaceActions) do
+						if v.Type == "UseSkill" then
+							local properties = GameHelpers.Stats.GetSkillProperties(v.SkillID)
+							if properties then
+								for _,v2 in pairs(properties) do
+									if v2.Type == "Status" and v2.Action then
+										local statusType = GameHelpers.Status.GetStatusType(id)
+										if statusType == "HEALING" or statusType == "HEAL" then
+											return true
+										end
+									end
+								end
+							end
+						elseif v.Type == "Consume" then
+							local statId = v.StatsId
+							if StringHelpers.IsNullOrWhitespace(v.StatsId) then
+								statId = id
+							end
+							if GameHelpers.Stats.Exists(statId, "Potion") then
+								local potion = Ext.GetStat(v.StatsId)
+								if potion.Vitality > 0 then
+									return true
+								end
+							end
+						end
+					end
+				end
+			end
+			return false
+		end
+	}).Register.OnHeal(function(self, e, bonuses)
+		if e.Heal.StatusId ~= "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL" then
+			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius", 6.0)
+			local percentage = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage", 50.0)
+			if radius > 0 and percentage > 0 then
+				local mult = percentage * 0.01
+				local healAmount = math.ceil(e.OriginalAmount * mult)
+				Ext.GetStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL").HealValue = healAmount
+				Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", false)
+
+				local affectedTargets = 0
+				for _,v in pairs(e.Target:GetNearbyCharacters(radius)) do
+					if e.Target.MyGuid ~= v and CharacterIsAlly(v, e.Target.MyGuid) == 1 then
+						affectedTargets = affectedTargets + 1
+
+						---@type EsvStatusHeal
+						local status = Ext.PrepareStatus(v, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", 0.0)
+						status.HealAmount = healAmount
+						--status.HealEffect = "HealSharing" --What's this for?
+						status.StatusSourceHandle = e.Target.Handle
+						Ext.ApplyStatus(status)
+					end
+				end
+				if affectedTargets > 0 then
+					SignalTestComplete(self.ID)
+				end
+			end
+		end
+	end, "Target").Register.Test(function(test, self)
+		--Gain bonus from Leadership
+		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		SetFaction(dummy, "Good NPC")
+		test:Wait(1000)
+		CharacterUseSkill(char, "Target_FirstAidEnemy", char, 1, 1, 1)
+		test:WaitForSignal(self.ID, 30000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end),
 })
 
 if Vars.IsClient then

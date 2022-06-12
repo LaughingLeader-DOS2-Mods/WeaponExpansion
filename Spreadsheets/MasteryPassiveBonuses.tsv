@@ -2,9 +2,10 @@ Mastery	Rank	Skill/Status/Name	Bonus	Implemented	Tested
 Axe	1	Executioner	Axes now deal 25% more damage to Knocked Down targets.	√	√
 Axe	2	Savage	Attack of opportunities gain 50% bonus damage proportional to the target's missing vitality.	√	√
 Axe	4	Stalker	Axes can now be used with Scoundrel skills.	√	√
-Banner	3	Inspiring Leadership	If affected by Leadership, allies have a 30%(50%) chance to become Inspired on their turn.	√	√
+Banner	2	Cooperation	Heals received also heal nearby allies in 6m for 50% of the amount.	√	❌
+Banner	3	Inspiring Leadership	If affected by Leadership, allies have a 30% chance (50% chance if from the Banner user) to become Inspired on their turn.	√	√
 Banner	4	Banner Protection	When near a placed banner, you cannot be flanked. Delaying your turn grants you 50% damage reduction. 	√	√
-Battle Book	1	Placeholder	Desc	√	❌
+Battle Book	1	Placeholder	Desc	❌	❌
 Battle Book	1	Placeholder	Desc	❌	❌
 Battle Book	2	Placeholder	Desc	❌	❌
 Battle Book	2	Placeholder	Desc	❌	❌
@@ -12,7 +13,7 @@ Battle Book	3	Placeholder	Desc	❌	❌
 Battle Book	3	Placeholder	Desc	❌	❌
 Battle Book	4	Placeholder	Desc	❌	❌
 Bludgeon	1	Placeholder	Desc	❌	❌
-Bludgeon	2	Placeholder	Desc	√	❌
+Bludgeon	2	Placeholder	Desc	❌	❌
 Bludgeon	3	Placeholder	Desc	❌	❌
 Bludgeon	4	Placeholder	Desc	❌	❌
 Bow	1	Placeholder	Desc	❌	❌

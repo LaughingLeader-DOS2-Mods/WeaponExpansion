@@ -16,12 +16,14 @@ local isClient = Ext.IsClient()
 ---@field OnGetTooltip fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID):string|TranslatedString Custom callback to determine tooltip text dynamically.
 
 ---@alias MasteryBonusDataTooltipID string|'"skill"'|'"status"'|'"item"'
+---@alias MasteryBonusCallbackBonuses MasteryActiveBonusesTable|MasteryActiveBonuses
 
----@alias WeaponExpansionSkillManagerAllStateCallback fun(self:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:string[])
----@alias WeaponExpansionSkillManagerSkillEventCallback fun(self:MasteryBonusData, e:OnSkillStateSkillEventEventArgs, bonuses:string[])
----@alias WeaponExpansionSkillManagerHitCallback fun(self:MasteryBonusData, e:OnSkillStateHitEventArgs, bonuses:string[])
----@alias WeaponExpansionSkillManagerProjectileHitCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileHitEventArgs, bonuses:string[])
----@alias WeaponExpansionSkillManagerProjectileShootCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileShootEventArgs, bonuses:string[])
+---@alias WeaponExpansionSkillManagerAllStateCallback fun(self:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@alias WeaponExpansionSkillManagerSkillEventCallback fun(self:MasteryBonusData, e:OnSkillStateSkillEventEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@alias WeaponExpansionSkillManagerHitCallback fun(self:MasteryBonusData, e:OnSkillStateHitEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@alias WeaponExpansionSkillManagerProjectileHitCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileHitEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@alias WeaponExpansionSkillManagerProjectileShootCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileShootEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@alias WeaponExpansionOnHealCallback fun(self:MasteryBonusData, e:OnHealEventArgs, bonuses:MasteryBonusCallbackBonuses)
 
 ---@class MasteryBonusDataRegistrationFunctions
 ---@field SkillUsed fun(callback:WeaponExpansionSkillManagerSkillEventCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
@@ -29,6 +31,7 @@ local isClient = Ext.IsClient()
 ---@field SkillHit fun(callback:WeaponExpansionSkillManagerHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillProjectileHit fun(callback:WeaponExpansionSkillManagerProjectileHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillProjectileShoot fun(callback:WeaponExpansionSkillManagerProjectileShootCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field OnHeal fun(callback:WeaponExpansionOnHealCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field Test fun(operation:MasteryTestingTaskCallback):MasteryBonusData
 
 local _INTERNALREG = {}
@@ -170,6 +173,18 @@ function _INTERNALREG.SkillProjectileShoot(self, callback, checkBonusOn)
 	if not isClient then
 		local wrapper = function (...) callback(self, ...) end
 		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.SHOOTPROJECTILE, self.Skills, self.ID, wrapper, checkBonusOn)
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback WeaponExpansionOnHealCallback
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@return MasteryBonusData
+function _INTERNALREG.OnHeal(self, callback, checkBonusOn)
+	if not isClient then
+		local wrapper = function (...) callback(self, ...) end
+		MasteryBonusManager.RegisterOnHealListener(self.ID, wrapper, checkBonusOn)
 	end
 	return self
 end

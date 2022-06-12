@@ -301,16 +301,17 @@ local function OnItemTooltip(item, tooltip)
 
 	local _TAGS = GameHelpers.GetItemTags(item, true, false)
 
+	local descriptionElement = tooltip:GetElement("ItemDescription") or {Type="ItemDescription", Label = ""}
+
 	if not GameHelpers.Item.IsObject(item) then
 		if not _TAGS.LeaderLib_AutoLevel and _TAGS.LLWEAPONEX_AutoLevel
 		and GetSettings().Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
 		then
-			local element = tooltip:GetElement("ItemDescription")
-			if element ~= nil and not string.find(string.lower(element.Label), "automatically level") then
-				if not StringHelpers.IsNullOrEmpty(element.Label) then
-					element.Label = element.Label .. "<br>" .. Text.ItemDescription.AutoLeveling.Value
+			if not string.find(string.lower(descriptionElement.Label), "automatically level") then
+				if not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
+					descriptionElement.Label = descriptionElement.Label .. "<br>" .. Text.ItemDescription.AutoLeveling.Value
 				else
-					element.Label = Text.ItemDescription.AutoLeveling.Value
+					descriptionElement.Label = Text.ItemDescription.AutoLeveling.Value
 				end
 			end
 		end
@@ -402,18 +403,13 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 		if enabledMasteriesText ~= "" then
-			local element = tooltip:GetElement("ItemDescription")
-			if element == nil then
-				element = {Type="ItemDescription", Label=""}
-				tooltip:AppendElement(element)
-			end
-			if element.Label ~= "" then
-				element.Label = element.Label .. "<br>"
+			if descriptionElement.Label ~= "" then
+				descriptionElement.Label = descriptionElement.Label .. "<br>"
 			end
 			if totalMasteries > 1 then
-				element.Label = element.Label .. Text.ItemDescription.EnabledMasteries:ReplacePlaceholders(enabledMasteriesText)
+				descriptionElement.Label = descriptionElement.Label .. Text.ItemDescription.EnabledMasteries:ReplacePlaceholders(enabledMasteriesText)
 			else
-				element.Label = element.Label .. Text.ItemDescription.EnabledMastery:ReplacePlaceholders(enabledMasteriesText)
+				descriptionElement.Label = descriptionElement.Label .. Text.ItemDescription.EnabledMastery:ReplacePlaceholders(enabledMasteriesText)
 			end
 		end
 
@@ -472,32 +468,41 @@ local function OnItemTooltip(item, tooltip)
 		end
 	elseif character ~= nil then
 		local statsId = not StringHelpers.IsNullOrWhitespace(item.StatsId) and item.StatsId or nil
-		if statsId and (string.find(statsId, "SCROLL") or _TAGS.SCROLL) then
-			local apCost = Ext.StatGetAttribute(statsId, "UseAPCost")
-			if apCost > 0 and Mastery.HasMasteryRequirement(character, "LLWEAPONEX_BattleBook_Mastery2") then
-				if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
-					local bonus = MasteryBonusManager.GetRankBonus(MasteryID.BattleBook, 2, "BATTLEBOOK_SCROLLS")
-					if bonus then
-						--Kind of a hack. "scroll" isn't a skill, but the bonus GetIsTooltipActive function will look for it, and is set to display for AllSkills.
-						local text = GameHelpers.Tooltip.ReplacePlaceholders(bonus:GetTooltipText(character, "scroll", "item"), character)
-						if text then
-							local rankName = GameHelpers.GetStringKeyText("LLWEAPONEX_BattleBook_Mastery2", "")
-							if not StringHelpers.IsNullOrWhitespace(rankName) then
-								text = rankName .. "<br>" .. text
+		if statsId then
+			local bonusText = MasteryBonusManager.GetBonusText(character, item.StatsId, "item", item, _TAGS)
+			if bonusText then
+				if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
+					descriptionElement.Label = descriptionElement.Label .. "<br>"
+				end
+				descriptionElement.Label = descriptionElement.Label .. bonusText
+			end
+			if (string.find(statsId, "SCROLL") or _TAGS.SCROLL) then
+				local apCost = Ext.StatGetAttribute(statsId, "UseAPCost")
+				if apCost > 0 and Mastery.HasMasteryRequirement(character, "LLWEAPONEX_BattleBook_Mastery2") then
+					if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
+						local bonus = MasteryBonusManager.GetRankBonus(MasteryID.BattleBook, 2, "BATTLEBOOK_SCROLLS")
+						if bonus then
+							--Kind of a hack. "scroll" isn't a skill, but the bonus GetIsTooltipActive function will look for it, and is set to display for AllSkills.
+							local text = GameHelpers.Tooltip.ReplacePlaceholders(bonus:GetTooltipText(character, "scroll", "item", item), character)
+							if text then
+								local rankName = GameHelpers.GetStringKeyText("LLWEAPONEX_BattleBook_Mastery2", "")
+								if not StringHelpers.IsNullOrWhitespace(rankName) then
+									text = rankName .. "<br>" .. text
+								end
+								local element = tooltip:GetElement("SkillDescription", {
+									Type = "SkillDescription",
+									Label = ""
+								})
+								if not StringHelpers.IsNullOrWhitespace(element.Label) then
+									element.Label = element.Label .. "<br>"
+								end
+								element.Label = element.Label .. text
 							end
-							local element = tooltip:GetElement("SkillDescription", {
-								Type = "SkillDescription",
-								Label = ""
-							})
-							if not StringHelpers.IsNullOrWhitespace(element.Label) then
-								element.Label = element.Label .. "<br>"
-							end
-							element.Label = element.Label .. text
 						end
+					else
+						local text = GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
+						tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(text, character)})
 					end
-				else
-					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
-					tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(text, character)})
 				end
 			end
 		end
