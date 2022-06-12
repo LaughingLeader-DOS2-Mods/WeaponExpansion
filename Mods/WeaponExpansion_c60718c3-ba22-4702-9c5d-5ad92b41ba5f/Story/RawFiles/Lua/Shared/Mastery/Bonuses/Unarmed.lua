@@ -28,15 +28,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Unarmed, 2, {
 	rb:Create("UNARMED_WHIRLWIND", {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Unarmed_Whirlwind", "<font color='#FFCE58'>Targets hit are pulled in closer to you.</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success then
-			local radius = Ext.StatGetAttribute(skill, "AreaRadius")
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success and UnarmedHelpers.HasUnarmedWeaponStats(e.Character.Stats) then
+			local radius = e.Data.SkillData.AreaRadius
 			if radius >= 2 then
 				--Reduce the distance slightly so they don't land on top of you
 				radius = radius - 1
 			end
 			if radius > 0 then
-				GameHelpers.ForceMoveObject(char, data.Target, -radius, skill)
+				GameHelpers.ForceMoveObject(e.Character, e.Data.Target, -radius, e.Skill)
 			end
 		end
 	end),

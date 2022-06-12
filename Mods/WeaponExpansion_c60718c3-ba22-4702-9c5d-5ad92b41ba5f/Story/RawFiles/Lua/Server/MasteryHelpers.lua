@@ -13,12 +13,34 @@ end
 
 Ext.NewQuery(HasMinimumMasteryLevel, "LLWEAPONEX_Ext_QRY_HasMinimumMasteryLevel", "[in](CHARACTERGUID)_Character, [in](STRING)_Mastery, [in](INTEGER)_MinLevel, [out](INTEGER)_Level")
 
+---@param uuid CharacterParam
+---@param mastery string
+---@param level integer
 function TagMasteryRanks(uuid,mastery,level)
+	uuid = GameHelpers.GetUUID(uuid)
 	if level > 0 then
-		for i=1,level,1 do
-			local tag = mastery.."_Mastery"..tostring(i)
+		for i=1,level do
+			local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
 			SetTag(uuid, tag)
-			--PrintDebug("[WeaponExpansion:TagMasteryRanks] Setting tag ["..tag.."] on ["..uuid.."]")
+		end
+	end
+end
+
+---@param uuid CharacterParam
+---@param mastery string
+function ClearAllMasteryRankTags(uuid,mastery)
+	local maxRank = Mastery.Variables.MaxRank
+	if mastery then
+		for i=0,maxRank do
+			local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
+			ClearTag(uuid, tag)
+		end
+	else
+		for mastery,_ in pairs(Masteries) do
+			for i=0,maxRank do
+				local tag = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, i)
+				ClearTag(uuid, tag)
+			end
 		end
 	end
 end
@@ -27,30 +49,26 @@ end
 --- @param uuid string
 --- @param mastery string
 --- @param last integer
---- @param next integer
-local function MasteryLeveledUp(uuid,mastery,last,next)
+--- @param nextLevel integer
+local function MasteryLeveledUp(uuid,mastery,last,nextLevel)
 	if ObjectExists(uuid) == 0 then
 		return
 	end
 	local masteryData = Masteries[mastery]
 	local masteryName = string.format("<font color='%s'>%s %s</font>", masteryData.Color, masteryData.Name.Value, Text.Mastery.Value)
-	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName):gsub("%[2%]", next)
+	local text = string.gsub(Text.MasteryLeveledUp.Value, "%[1%]", masteryName):gsub("%[2%]", nextLevel)
 	CharacterStatusText(uuid, text)
-	-- if CharacterIsPlayer(uuid) == 1 and CharacterIsControlled(uuid) == 1 then
-	-- 	ShowNotification(uuid, text)
-	-- else
-	-- 	CharacterStatusText(uuid, text)
-	-- end
-	TagMasteryRanks(uuid,mastery,next)
+
+	TagMasteryRanks(uuid,mastery,nextLevel)
 
 	-- Set the special rank 1+ unarmed tags.
-	if mastery == "LLWEAPONEX_Unarmed" and next == 1 then
+	if mastery == "LLWEAPONEX_Unarmed" and nextLevel == 1 then
 		EquipmentManager:CheckWeaponRequirementTags(Ext.GetCharacter(uuid))
 	end
 
-	PrintDebug(string.format("[WeaponExpansion] Mastery [%s] leveled up (%i => %i) on [%s]", mastery, last, next, uuid))
+	PrintDebug(string.format("[WeaponExpansion] Mastery [%s] leveled up (%i => %i) on [%s]", mastery, last, nextLevel, uuid))
 	local name = Ext.GetCharacter(uuid).DisplayName
-	local text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(name, masteryName, next)
+	local text = Text.CombatLog.MasteryRankUp:ReplacePlaceholders(name, masteryName, nextLevel)
 	GameHelpers.UI.CombatLog(text)
 end
 

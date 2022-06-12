@@ -277,20 +277,6 @@ function TwoHandedToOnehanded(char, item)
     CharacterEquipItem(char, cloned)
 end
 
-function IsPlayer(uuid)
-    if StringHelpers.IsNullOrEmpty(uuid) then
-        return false
-    end
-	return CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1
-end
-
-function IsPlayerQRY(uuid)
-    if CharacterIsPlayer(uuid) == 1 or CharacterGameMaster(uuid) == 1 then
-        return 1
-    end
-    return 0
-end
-
 Events.RegionChanged:Subscribe(function (e)
     if e.State == REGIONSTATE.GAME then
         Vars.GAME_STARTED = true

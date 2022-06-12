@@ -81,11 +81,13 @@ end
 --- @return boolean
 local function TryCheckMasteryRequirement(character, tag)
 	if type(tag) == "string" then
+		--Check if character is tagged with a rank tag, like LLWEAPONEX_Unarmed_Mastery2
 		if character ~= nil and GameHelpers.CharacterOrEquipmentHasTag(character, tag) == true then
-			local a,b,mastery = string.find(tag,"(.+)_Mastery")
+			local _,_,mastery = string.find(tag,"(.+)_Mastery")
 			if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
 				return true
 			else
+				--Check if character is tagged with a mastery tag, like LLWEAPONEX_Unarmed, which is set when the mastery is active
 				if Ext.IsClient() then
 					return (MasteryMenu.Variables.CurrentTooltip == "Skill" and MasteryMenu.Variables.SelectedMastery.Current == mastery) or GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
 				else
@@ -116,18 +118,18 @@ end
 --- @param tag string
 --- @return boolean
 function Mastery.HasMasteryRequirement(character, tag)
-	if Debug.MasteryTests then
-		return true
-	end
+	-- if Debug.MasteryTests then
+	-- 	return true
+	-- end
 	character = GameHelpers.GetCharacter(character)
 	if not character then
 		return false
 	end
-	if character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
-		return true
-	end
 	if string.find(tag, "LLWEAPONEX_Unarmed") and not UnarmedHelpers.HasEmptyHands(character) then
 		return false
+	end
+	if character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
+		return true
 	end
 	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
 	if not status then

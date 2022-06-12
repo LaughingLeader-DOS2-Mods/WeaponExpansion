@@ -8,7 +8,9 @@ local isClient = Ext.IsClient()
 MasteryBonusManager = {
 	Vars = {
 		RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
-	}
+	},
+	---The string format for mastery rank tags, set on a character.
+	MasteryRankTagFormatString = "%s_Mastery%i"
 }
 
 local _registeredBonuses = {}
@@ -467,7 +469,7 @@ end
 ---@param rank integer
 ---@param bonuses MasteryBonusData|MasteryBonusData[]
 function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
-	local masteryRankID = string.format("%s_Mastery%s", mastery, rank)
+	local masteryRankID = string.format(MasteryBonusManager.MasteryRankTagFormatString, mastery, rank)
 	if not _registeredBonuses[masteryRankID] then
 		_registeredBonuses[masteryRankID] = {}
 	end
