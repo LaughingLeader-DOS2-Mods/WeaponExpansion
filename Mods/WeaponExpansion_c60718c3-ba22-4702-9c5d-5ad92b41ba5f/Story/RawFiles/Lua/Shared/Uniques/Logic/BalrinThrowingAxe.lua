@@ -120,7 +120,7 @@ if not Vars.IsClient then
 	StatusManager.Register.Applied("LLWEAPONEX_BALRINAXE_RECOVER_START", function(balrinUser, status, target)
 		if RecoverBalrinAxe(balrinUser) then
 			RemoveStatus(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
-			ApplyStatus(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, balrinUser) -- No Aura
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, balrinUser) -- No Aura
 			local character = Ext.GetCharacter(balrinUser)
 			if ObjectIsCharacter(target) == 1 then
 				local targetCharacter = Ext.GetCharacter(target)

@@ -7,7 +7,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Rapier, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Rapier_SuckerPunch", "Gain a follow-up combo skill ([Key:Target_LLWEAPONEX_Rapier_SuckerCombo1_DisplayName]) after punching a target.<br><font color='#99FF22' size='22'>[ExtraData:LLWEAPONEX_MB_Unarmed_SuckerPunch_KnockdownTurnExtensionChance]% chance to increase Knockdown by 1 turn.</font>"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.CAST then
-			ApplyStatus(char, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1", 12.0, 0, char)
+			GameHelpers.Status.Apply(char, "LLWEAPONEX_RAPIER_MASTERY_SUCKERCOMBO1", 12.0, 0, char)
 		elseif state == SKILL_STATE.HIT and data.Success then
 			local target = data.Target
 			if HasActiveStatus(target, "KNOCKED_DOWN") == 1 then

@@ -49,7 +49,7 @@ local function PlaySkillEffect(char, state, funcParams, tagData)
 				if effectStatus ~= nil and HasActiveStatus(char, effectStatus) == 0 then
 					if state == SKILL_STATE.PREPARE then
 						if HasActiveStatus(char, effectStatus) == 0 then
-							ApplyStatus(char, effectStatus, -1.0, 1, char)
+							GameHelpers.Status.Apply(char, effectStatus, -1.0, 1, char)
 						end
 					else
 						if HasActiveStatus(char, effectStatus) == 1 then

@@ -264,7 +264,7 @@ local function OnSkillCast(char, skill, skillType, skillElement)
 		end
 	end
 	if Skills.BulletTemplates[skill] and IsTagged(char, "LLWEAPONEX_Firearm_Equipped") == 1 then
-		ApplyStatus(char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, 0, char)
+		GameHelpers.Status.Apply(char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", 0.0, 0, char)
 	end
 	-- if ObjectGetFlag(char, "LLWEAPONEX_BasilusDagger_ListenForAction") == 1 then
 	-- 	Basilus_OnTargetActionTaken(char)

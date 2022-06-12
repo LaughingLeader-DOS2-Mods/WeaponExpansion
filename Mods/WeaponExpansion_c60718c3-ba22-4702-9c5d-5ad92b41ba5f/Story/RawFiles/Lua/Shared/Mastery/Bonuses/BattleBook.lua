@@ -30,7 +30,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 				if turnBonus > 0 then
 					SetTag(v, "LLWEAPONEX_BattleBook_FirstAid_Active")
 				end
-				ApplyStatus(v, "LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID", 0.0, 0, char)
+				GameHelpers.Status.Apply(v, "LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID", 0.0, 0, char)
 			end)
 		end
 	end):RegisterStatusListener("Applied", function(target, status, source, bonuses)

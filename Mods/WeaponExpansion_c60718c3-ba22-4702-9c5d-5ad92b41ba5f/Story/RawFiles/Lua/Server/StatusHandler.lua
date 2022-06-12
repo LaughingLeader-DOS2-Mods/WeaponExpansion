@@ -39,10 +39,10 @@ function ApplyRuneExtraProperties(source, target, item, targetPosition, radius)
 									local chance = Game.Math.StatusGetEnterChance(statusObject, true)
 									local roll = Ext.Random(0,100)
 									if roll <= chance then
-										ApplyStatus(target, v.Action, v.Duration, 0, source)
+										GameHelpers.Status.Apply(target, v.Action, v.Duration, 0, source)
 									end
 								else
-									ApplyStatus(target, v.Action, v.Duration, 0, source)
+									GameHelpers.Status.Apply(target, v.Action, v.Duration, 0, source)
 								end
 							elseif v.Type == "SurfaceTransform" then
 								local x,y,z = GetPosition(target)

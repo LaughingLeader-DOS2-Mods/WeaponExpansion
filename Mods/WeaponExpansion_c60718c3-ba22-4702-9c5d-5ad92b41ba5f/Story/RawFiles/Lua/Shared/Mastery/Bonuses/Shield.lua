@@ -8,7 +8,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Shield, 1, {
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.CAST then
 			PlayEffect(char, "RS3_FX_GP_Impacts_Arena_PillarLight_01_Silver", "")
-			ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK", -1.0, 0, char)
+			GameHelpers.Status.Apply(char, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK", -1.0, 0, char)
 		end
 	end),
 })

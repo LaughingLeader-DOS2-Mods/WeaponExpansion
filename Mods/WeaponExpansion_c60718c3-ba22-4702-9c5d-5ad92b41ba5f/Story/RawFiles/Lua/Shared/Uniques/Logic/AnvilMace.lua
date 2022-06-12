@@ -41,7 +41,7 @@ function(skill, char, state, data)
 	elseif skill == "Projectile_LLWEAPONEX_AnvilMace_RushSmash_GroundImpact" then
 		if state == SKILL_STATE.HIT and data.Success and data.Target then
 			if char ~= data.Target and HasActiveStatus(data.Target, "LLWEAPONEX_ANVILMACE_KNOCKUP") == 0 then
-				ApplyStatus(data.Target, "LLWEAPONEX_ANVILMACE_KNOCKUP", 0.0, 0, char)
+				GameHelpers.Status.Apply(data.Target, "LLWEAPONEX_ANVILMACE_KNOCKUP", 0.0, 0, char)
 			end
 		end
 	end

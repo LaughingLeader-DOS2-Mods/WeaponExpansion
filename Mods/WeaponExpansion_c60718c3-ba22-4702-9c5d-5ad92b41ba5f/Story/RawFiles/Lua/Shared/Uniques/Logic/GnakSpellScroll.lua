@@ -597,7 +597,7 @@ if not Vars.IsClient then
 
 			if data.Material ~= nil then
 				PlayEffect(source, "LLWEAPONEX_FX_Status_SpellScroll_ElementShifted_01", "Dummy_FX_02")
-				ApplyStatus(source, data.Material, -1.0, 1, source)
+				GameHelpers.Status.Apply(source, data.Material, -1.0, 1, source)
 			end
 
 			if spell == "Projectile_LLWEAPONEX_BattleBooks_SpellScroll_DimensionalBolt" then

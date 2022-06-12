@@ -12,7 +12,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 1, {
 			local combatEnemies = Common.ShuffleTable(MasteryBonusManager.GetClosestEnemiesToObject(char, char, maxDistance, true, totalEnemies))
 			for i,v in pairs(combatEnemies) do
 				if not GameHelpers.Status.IsSneakingOrInvisible(char) then
-					ApplyStatus(v, "MARKED", 6.0, 0, char)
+					GameHelpers.Status.Apply(v, "MARKED", 6.0, 0, char)
 				end
 			end
 		end

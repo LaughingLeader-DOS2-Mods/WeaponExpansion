@@ -17,7 +17,7 @@ local function Quiver_StartRecharge(character, quiver, addCharge)
 	if shouldRecharge then
 		local status = character:GetStatus("LLWEAPONEX_QUIVER_DRAW_RECHARGE")
 		if status == nil then
-			ApplyStatus(character.MyGuid, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", 3.0, 0, character.MyGuid)
+			GameHelpers.Status.Apply(character.MyGuid, "LLWEAPONEX_QUIVER_DRAW_RECHARGE", 3.0, 0, character.MyGuid)
 		else
 			status.CurrentLifeTime = status.LifeTime
 			status.RequestClientSync = true

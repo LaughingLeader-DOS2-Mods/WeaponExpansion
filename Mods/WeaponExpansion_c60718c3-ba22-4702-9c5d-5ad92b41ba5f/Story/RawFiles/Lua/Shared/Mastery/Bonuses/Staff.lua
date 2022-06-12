@@ -150,7 +150,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 1, {
 							if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
 								local status = Mastery.Variables.Bonuses.ElementalWeaknessStatuses[stat.DamageType]
 								if status then
-									ApplyStatus(data.Target, status, duration, 0, char)
+									GameHelpers.Status.Apply(data.Target, status, duration, 0, char)
 								end
 							end
 						end

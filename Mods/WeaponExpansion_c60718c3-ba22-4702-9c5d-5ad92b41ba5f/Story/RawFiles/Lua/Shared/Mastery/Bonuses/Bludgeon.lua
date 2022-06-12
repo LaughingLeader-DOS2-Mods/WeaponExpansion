@@ -13,7 +13,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 				if Ext.Random(0,100) <= dizzyChance then
 					local forceDist = Ext.Random(2,4)
 					GameHelpers.ForceMoveObject(char, data.Target, forceDist, skill)
-					ApplyStatus(data.Target, "LLWEAPONEX_DIZZY", dizzyDuration, 0, char)
+					GameHelpers.Status.Apply(data.Target, "LLWEAPONEX_DIZZY", dizzyDuration, 0, char)
 				end
 			end
 		end
@@ -35,7 +35,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 					status.RequestClientSync = true
 				end
 			else
-				ApplyStatus(data.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
+				GameHelpers.Status.Apply(data.Target, "LLWEAPONEX_MASTERYBONUS_SUNDER", duration, 0, char)
 			end
 		end
 	end),

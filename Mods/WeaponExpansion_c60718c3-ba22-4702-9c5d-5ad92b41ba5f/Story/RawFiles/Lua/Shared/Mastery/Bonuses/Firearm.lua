@@ -7,7 +7,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Firearm, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Firearm_TacticalRetreat", "<font color='#00FF99'>After jumping, your next action's AP cost is reduced by [Stats:Stats_LLWEAPONEX_MasteryBonus_Firearm_Tactics:APCostBoost].</font>"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.CAST then
-			ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS", -1.0, 0, char)
+			GameHelpers.Status.Apply(char, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS", -1.0, 0, char)
 		end
 	end),
 })

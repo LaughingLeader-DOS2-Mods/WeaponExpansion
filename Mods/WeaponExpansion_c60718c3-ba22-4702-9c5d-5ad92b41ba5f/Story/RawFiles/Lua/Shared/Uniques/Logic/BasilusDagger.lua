@@ -5,7 +5,7 @@ if not Vars.IsClient then
 		local duration = Ext.Random(min,max) * 6.0
 		if HasActiveStatus(target, "LLWEAPONEX_BASILUS_HAUNTED") == 0 then
 			ObjectSetFlag(target, "LLWEAPONEX_BasilusDagger_ListenForAction", 0)
-			ApplyStatus(target, "LLWEAPONEX_BASILUS_HAUNTED", duration, 0, source)
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_BASILUS_HAUNTED", duration, 0, source)
 		else
 			local handle = NRD_StatusGetHandle(target, "LLWEAPONEX_BASILUS_HAUNTED")
 			local statusObj = Ext.GetStatus(target, handle)

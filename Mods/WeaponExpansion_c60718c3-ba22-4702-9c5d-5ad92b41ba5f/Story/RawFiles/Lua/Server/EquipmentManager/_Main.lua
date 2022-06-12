@@ -114,18 +114,16 @@ local bulletTemplates = {
 
 ---@param item EsvItem
 function EquipmentManager.ItemIsNearPlayers(item)
-	local target = item.MyGuid
+	local target = item
 	local parentInventory = GetInventoryOwner(item.MyGuid)
 	if not StringHelpers.IsNullOrEmpty(parentInventory) then
-		if IsPlayer(parentInventory) then
+		if GameHelpers.Character.IsPlayer(parentInventory) then
 			return true
 		end
-		target = parentInventory
+		target = Ext.GetGameObject(parentInventory)
 	end
-	for i,db in pairs(Osi.DB_IsPlayer:Get(nil)) do
-		local uuid = db[1]
-		local dist = GetDistanceTo(uuid, target)
-		if dist ~= nil and dist <= 30 then
+	for player in GameHelpers.Character.GetPlayers() do
+		if GameHelpers.Math.GetDistance(player.WorldPos, target.WorldPos) <= 30 then
 			return true
 		end
 	end

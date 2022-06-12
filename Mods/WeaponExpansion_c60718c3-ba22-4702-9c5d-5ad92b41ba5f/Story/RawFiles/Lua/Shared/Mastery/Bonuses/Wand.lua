@@ -45,7 +45,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 			for _,partyMember in pairs(GameHelpers.GetParty(char, true, true, true, false)) do
 				local x,y,z = GetPosition(partyMember)
 				if GameHelpers.Surface.HasSurface(x,z "Blood", 1.5, true, nil, grid) then
-					ApplyStatus(partyMember, "LLWEAPONEX_BLOOD_EMPOWERED", 6.0, 0, char)
+					GameHelpers.Status.Apply(partyMember, "LLWEAPONEX_BLOOD_EMPOWERED", 6.0, 0, char)
 				end
 			end
 		end

@@ -7,7 +7,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Katana, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Katana_VaultBonus", "<font color='#F19966'>After teleporting, your next basic attack or weapon skill will deal +[ExtraData:LLWEAPONEX_MB_Katana_Backlash_DamageBonus]% additional damage.</font>"),
 	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
 		if state == SKILL_STATE.HIT and data.Success then
-			ApplyStatus(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", 6.0, 0, char)
+			GameHelpers.Status.Apply(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", 6.0, 0, char)
 			StatusTurnHandler.SaveTurnEndStatus(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", char)
 		end
 	end),	
@@ -188,7 +188,7 @@ if not Vars.IsClient then
 					if enemy ~= nil then
 						for i,v in pairs(enemy:GetNearbyCharacters(6.0)) do
 							if CharacterIsDead(v) == 0 and (CharacterIsEnemy(v, attacker) == 1 or IsTagged(v, "LeaderLib_FriendlyFireEnabled") == 1) then
-								ApplyStatus(v, applyComboStatus, 6.0, 0, attacker)
+								GameHelpers.Status.Apply(v, applyComboStatus, 6.0, 0, attacker)
 								hasTarget = true
 							end
 						end
@@ -231,7 +231,7 @@ if not Vars.IsClient then
 		if i % 2 == 0 then
 			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_IaidoDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 		else
-			ApplyStatus(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
 		end
 	end
 
@@ -239,7 +239,7 @@ if not Vars.IsClient then
 		if i % 2 == 0 then
 			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_VanquisherDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 		else
-			ApplyStatus(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
 		end
 	end
 
@@ -255,7 +255,7 @@ if not Vars.IsClient then
 		local nextStatus = ComboStatuses[comboNum]
 		if nextStatus ~= nil then
 			if HasActiveStatus(target, nextStatus) == 0 then
-				ApplyStatus(target, nextStatus, 6.0, 0, source)
+				GameHelpers.Status.Apply(target, nextStatus, 6.0, 0, source)
 			end
 			if ObjectIsCharacter(target) == 1 then
 				local status = Ext.GetCharacter(target):GetStatus(nextStatus)

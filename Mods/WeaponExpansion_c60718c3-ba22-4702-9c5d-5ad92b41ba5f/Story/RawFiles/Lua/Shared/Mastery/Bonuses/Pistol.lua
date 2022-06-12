@@ -43,7 +43,7 @@ if not Vars.IsClient then
 					and not GameHelpers.Status.IsSneakingOrInvisible(v.UUID) 
 					and HasActiveStatus(v.UUID, "MARKED") == 0
 					then
-						ApplyStatus(v.UUID, "MARKED", 6.0, 0, e.Data.UUID)
+						GameHelpers.Status.Apply(v.UUID, "MARKED", 6.0, 0, e.Data.UUID)
 						SetTag(v.UUID, "LLWEAPONEX_Pistol_MarkedForCrit")
 						Osi.LLWEAPONEX_Statuses_ListenForTurnEnding(e.Data.UUID, v.UUID, "MARKED", "")
 					end

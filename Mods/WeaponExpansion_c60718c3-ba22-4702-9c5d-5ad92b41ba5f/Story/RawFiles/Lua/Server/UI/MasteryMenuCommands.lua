@@ -65,7 +65,7 @@ local function RequestStatusTooltip(call,datastr)
 		if status ~= nil then
 			local handle = NRD_StatusGetHandle(statusDummy, status)
 			if handle == nil then
-				ApplyStatus(statusDummy, status, -1.0, 1, statusDummy)
+				GameHelpers.Status.Apply(statusDummy, status, -1.0, 1, statusDummy)
 				handle = NRD_StatusGetHandle(statusDummy, status)
 			end
 			---@type EsvStatus
