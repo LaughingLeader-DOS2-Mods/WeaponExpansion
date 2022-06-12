@@ -469,12 +469,18 @@ local function OnItemTooltip(item, tooltip)
 	elseif character ~= nil then
 		local statsId = not StringHelpers.IsNullOrWhitespace(item.StatsId) and item.StatsId or nil
 		if statsId then
-			local bonusText = MasteryBonusManager.GetBonusText(character, item.StatsId, "item", item, _TAGS)
+			local bonusText = MasteryBonusManager.GetBonusText(character, item.StatsId, "item", item, _TAGS, tooltip.ItemHasSkill == true)
 			if bonusText then
-				if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
-					descriptionElement.Label = descriptionElement.Label .. "<br>"
+				local topDesc = descriptionElement
+				if GameHelpers.Item.IsObject(item) then
+					topDesc = tooltip:GetElement("SkillDescription", {Type="SkillDescription", Label=""})
+					--Use a SkillDescription so the text is higher up, instead of being below the item description.
+					--Equipment doesn't seem to display SkillDescription unfortunately.
 				end
-				descriptionElement.Label = descriptionElement.Label .. bonusText
+				if not StringHelpers.IsNullOrWhitespace(topDesc.Label) then
+					topDesc.Label = topDesc.Label .. "<br>"
+				end
+				topDesc.Label = topDesc.Label .. bonusText
 			end
 			if (string.find(statsId, "SCROLL") or _TAGS.SCROLL) then
 				local apCost = Ext.StatGetAttribute(statsId, "UseAPCost")

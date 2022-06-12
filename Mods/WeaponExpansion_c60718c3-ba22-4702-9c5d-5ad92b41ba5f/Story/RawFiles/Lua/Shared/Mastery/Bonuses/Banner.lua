@@ -97,6 +97,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", Common.StringJoin("/", cleansed))
 				CharacterStatusText(target, text)
 				SignalTestComplete("BANNER_INSPIRE")
+				local stat = Ext.GetStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX"); stat.BeamEffect = ""; stat.ApplyEffect = "RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX"; Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", false)
+				local stat = Ext.GetStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX"); stat.BeamEffect = "RS3_FX_Skills_Water_ChainHeal_Beam_01:Dummy_FX_01:Dummy_BodyFX"; stat.ApplyEffect = ""; Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", false)
 			end
 		end
 	end).Register.Test(function(test, self)
@@ -395,7 +397,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 	end),
 
 	rb:Create("BANNER_COOPERATION", {
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Cooperation", "<font color='#00FFFF'>When healed, nearby allies within a [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius]m radius are also healed for [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage]% of the amount.</font>"),
+		AllSkills = true,
+		AllStatuses = true,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Cooperation", "<font color='#00FFFF'>When you are healed, nearby allies within a [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius]m radius are also healed for [ExtraData:LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage]% of the amount.</font>"),
 		--self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID):string|TranslatedString
 		---@param self MasteryBonusData
 		---@param id string
@@ -403,33 +407,33 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		---@param tooltipType MasteryBonusDataTooltipID
 		---@param extraParam EclItem|EclStatus
 		---@param tags table<string,boolean>|nil
-		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags)
+		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags, itemHasSkill)
 			if tooltipType == "status" then
 				local statusType = GameHelpers.Status.GetStatusType(id)
 				if statusType == "HEALING" or statusType == "HEAL" then
 					return true
 				end
-			elseif tooltipType == "skill" then
+			elseif tooltipType == "skill" and not Data.ActionSkills[id] then
 				local properties = GameHelpers.Stats.GetSkillProperties(id)
 				if properties then
 					for _,v in pairs(properties) do
-						if v.Type == "Status" and v.Action then
-							local statusType = GameHelpers.Status.GetStatusType(id)
+						if v.Type == "Status" then
+							local statusType = GameHelpers.Status.GetStatusType(v.Action)
 							if statusType == "HEALING" or statusType == "HEAL" then
 								return true
 							end
 						end
 					end
 				end
-			elseif tooltipType == "item" and extraParam then
+			elseif tooltipType == "item" and extraParam and itemHasSkill ~= true then -- Tags is "ItemHasSkill"
 				if extraParam.RootTemplate and extraParam.RootTemplate.OnUsePeaceActions then
 					for _,v in pairs(extraParam.RootTemplate.OnUsePeaceActions) do
 						if v.Type == "UseSkill" then
 							local properties = GameHelpers.Stats.GetSkillProperties(v.SkillID)
 							if properties then
 								for _,v2 in pairs(properties) do
-									if v2.Type == "Status" and v2.Action then
-										local statusType = GameHelpers.Status.GetStatusType(id)
+									if v2.Type == "Status" then
+										local statusType = GameHelpers.Status.GetStatusType(v2.Action)
 										if statusType == "HEALING" or statusType == "HEAL" then
 											return true
 										end
@@ -441,8 +445,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 							if StringHelpers.IsNullOrWhitespace(v.StatsId) then
 								statId = id
 							end
-							if GameHelpers.Stats.Exists(statId, "Potion") then
-								local potion = Ext.GetStat(v.StatsId)
+							if not StringHelpers.IsNullOrEmpty(statId) and GameHelpers.Stats.Exists(statId, "Potion") then
+								local potion = Ext.GetStat(statId)
 								if potion.Vitality > 0 then
 									return true
 								end
@@ -474,6 +478,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 						--status.HealEffect = "HealSharing" --What's this for?
 						status.StatusSourceHandle = e.Target.Handle
 						Ext.ApplyStatus(status)
+						GameHelpers.Status.Apply(v, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, true, e.Target)
+						---Mods.LeaderLib.GameHelpers.Status.Apply(Mods.WeaponExpansion.Origin.Harken, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, false, me.MyGuid)
+						--EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", e.Target, {BeamTarget=v, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
+						--Mods.LeaderLib.EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", me.NetID, {Target=Mods.LeaderLib.GameHelpers.GetNetID(Mods.WeaponExpansion.Origin.Harken)})
+						--Mods.LeaderLib.EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", me.MyGuid, {BeamTarget=Mods.WeaponExpansion.Origin.Harken, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
 					end
 				end
 				if affectedTargets > 0 then
@@ -488,10 +497,21 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
 		SetFaction(dummy, "Good NPC")
+		Ext.GetCharacter(char).Stats.CurrentVitality = 1
+		Ext.GetCharacter(dummy).Stats.CurrentVitality = 1
+		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
 		CharacterUseSkill(char, "Target_FirstAidEnemy", char, 1, 1, 1)
 		test:WaitForSignal(self.ID, 30000)
 		test:AssertGotSignal(self.ID)
+		local x,y,z = GetPosition(char)
+		--Healing Potion
+		local item = CreateItemTemplateAtPosition("68b40462-247a-44fd-87d0-c2eea2f49ed1", x, y, z)
+		test:Wait(500)
+		CharacterUseItem(char, item, "")
+		test:WaitForSignal(self.ID, 30000)
+		test:AssertGotSignal(self.ID)
+		test:Wait(2000)
 		return true
 	end),
 })

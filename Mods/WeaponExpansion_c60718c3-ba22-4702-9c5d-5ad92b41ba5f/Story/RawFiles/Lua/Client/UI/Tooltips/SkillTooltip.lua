@@ -259,7 +259,7 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	local bonusText = MasteryBonusManager.GetBonusText(character, skill, "skill")
+	local bonusText = MasteryBonusManager.GetBonusText(character, skill, "skill", tooltip.IsFromItem == true)
 	if bonusText then
 		if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
 			descriptionElement.Label = descriptionElement.Label .. "<br>"
