@@ -240,7 +240,7 @@ end
 function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback,
 	specificStatuses, skipBonusCheck, checkBonusOn)
 	if not isClient then
-		MasteryBonusManager.RegisterStatusAttemptListener(specificStatuses or self.Statuses, self.ID,
+		MasteryBonusManager.RegisterStatusBeforeAttemptListener(specificStatuses or self.Statuses, self.ID,
 		callback, skipBonusCheck, checkBonusOn)
 	end
 	return self

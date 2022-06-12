@@ -178,7 +178,8 @@ if not _ISCLIENT then
 		SetVarObject(dummy, "LLDUMMY_Owner", character)
 		Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
 		if setEnemy then
-			CharacterSetTemporaryHostileRelation(dummy, character)
+			--CharacterSetTemporaryHostileRelation(dummy, character)
+			SetFaction(dummy, "Evil NPC")
 		end
 
 		local cleanup = function ()
@@ -219,8 +220,9 @@ if not _ISCLIENT then
 		SetVarObject(dummy, "LLDUMMY_Owner", character)
 		Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
 		if setEnemy then
-			CharacterSetTemporaryHostileRelation(dummy, character)
-			CharacterSetTemporaryHostileRelation(dummy, character2)
+			-- CharacterSetTemporaryHostileRelation(dummy, character)
+			-- CharacterSetTemporaryHostileRelation(dummy, character2)
+			SetFaction(dummy, "Evil NPC")
 		end
 
 		local cleanup = function ()
@@ -234,7 +236,7 @@ if not _ISCLIENT then
 				SetStoryEvent(dummy, "LLDUMMY_TrainingDummy_DieNow")
 			end
 		end
-		Timer.StartOneshot("", 30000, cleanup)
+		Timer.StartOneshot("", 60000, cleanup)
 		return character,character2,dummy,cleanup
 	end
 end

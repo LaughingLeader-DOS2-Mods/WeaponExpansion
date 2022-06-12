@@ -104,7 +104,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
-		test:Wait(250)
+		test:Wait(1000)
 		GameHelpers.Status.Apply(dummy, "SLEEPING", -1.0, true, dummy)
 		SetFaction(dummy, "Good NPC")
 		test:Wait(1000)
@@ -130,6 +130,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		Statuses = {"HARMONY"},
 		DisableStatusTooltip = true
 	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
+		Ext.Dump(bonuses.BANNER_RALLYINGCRY)
 		if (ObjectIsCharacter(target) == 1
 		and not GameHelpers.Status.IsDisabled(target, true)
 		and NRD_ObjectHasStatusType(target, "DISARMED") == 0
@@ -143,7 +144,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 			local targets = {}
 
 			for i,v in pairs(Ext.GetCharacter(target):GetNearbyCharacters(range)) do
-				if CharacterIsEnemy(target, v) == 1 then
+				if v ~= target and v ~= source and CharacterIsEnemy(target, v) == 1 then
 					table.insert(targets, v)
 				end
 			end
@@ -156,7 +157,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		end
 	end).Register.Test(function(test, self)
 		--Target of Harmony automatically basic attacks a nearby enemy
-		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
+		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char1, dummy, "", 0, 1, 1)
@@ -164,8 +165,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		TeleportTo(char2, dummy, "", 0, 1, 1)
 		test:Wait(1000)
 		CharacterUseSkill(char1, "Target_EnemyHarmony", char2, 1, 1, 1)
-		test:WaitForSignal(self.ID, 30000)
+		test:WaitForSignal(self.ID, 10000)
 		test:AssertGotSignal(self.ID)
+		test:Wait(5000)
 		return true
 	end),
 
@@ -175,32 +177,27 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_GuardianAngelStatus", "<font color='#00FFFF'>If killed, character will be resurrected by the Guardian when their turn starts.</font>"),
 		Statuses = {"GUARDIAN_ANGEL"},
 	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
-		if bonuses.BANNER_GUARDIAN_ANGEL[source] == true then
-			ObjectSetFlag(target, "LLWEAPONEX_Banner_GuardianAngel_Active", 0)
+		if PersistentVars.MasteryMechanics.GuardianAngelResurrect == nil then
+			PersistentVars.MasteryMechanics.GuardianAngelResurrect = {}
+		end
+		--Skip providing this bonus if the source is already protected by the target, to prevent immortality
+		if bonuses.BANNER_GUARDIAN_ANGEL[source] == true
+		and PersistentVars.MasteryMechanics.GuardianAngelResurrect[source] ~= target
+		and source ~= target then
+			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = source
 		end
 	end):RegisterStatusListener("Removed", function(bonuses, target, status, source, statusType)
-		ObjectClearFlag(target, "LLWEAPONEX_Banner_GuardianAngel_Active", 0)
+		if not GameHelpers.Status.IsActive(target, "DYING") then
+			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = nil
+		end
 	end):RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
-		if ObjectGetFlag(char, "LLWEAPONEX_Banner_GuardianAngel_Active") == 1 then
-			ObjectClearFlag(char, "LLWEAPONEX_Banner_GuardianAngel_Active", 0)
-			local character = GameHelpers.GetCharacter(char)
-			if character then
-				local status = character:GetStatus("GUARDIAN_ANGEL")
-				if status and status.StatusSourceHandle then
-					local sourceCharacter = GameHelpers.GetCharacter(status.StatusSourceHandle)
-					if sourceCharacter then
-						if MasteryBonusManager.HasMasteryBonus(sourceCharacter, "BANNER_GUARDIAN_ANGEL") then
-							if GameHelpers.Character.IsInCombat(character) then
-								if PersistentVars.MasteryMechanics.GuardianAngelResurrect == nil then
-									PersistentVars.MasteryMechanics.GuardianAngelResurrect = {}
-								end
-								PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] = sourceCharacter.MyGuid
-							else
-								--Resurrect after a delay instead, since we're not in combat
-								Timer.StartObjectTimer("LLWEAPONEX_Banner_GuardianAngelResurrect", character, 3000)
-							end
-						end
-					end
+		char = GameHelpers.GetUUID(char)
+		if PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] then
+			local sourceCharacter = GameHelpers.GetCharacter(PersistentVars.MasteryMechanics.GuardianAngelResurrect[char])
+			if sourceCharacter then
+				if not GameHelpers.Character.IsInCombat(sourceCharacter) then
+					--Resurrect after a delay instead, since we're not in combat
+					Timer.StartObjectTimer("LLWEAPONEX_Banner_GuardianAngelResurrect", sourceCharacter, Debug.MasteryTests and 500 or 3000)
 				end
 			end
 		end
@@ -214,7 +211,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		TeleportTo(char2, dummy, "", 0, 1, 1)
 		test:Wait(1000)
 		CharacterUseSkill(char1, "Shout_EnemyGuardianAngel", char2, 1, 1, 1)
-		test:Wait(2000)
+		test:Wait(5000)
 		CharacterDie(char2, 0, "Physical", char2)
 		test:WaitForSignal(self.ID, 30000)
 		test:AssertGotSignal(self.ID)
@@ -271,7 +268,7 @@ end
 if not Vars.IsClient then
 	Timer.Subscribe("LLWEAPONEX_Banner_GuardianAngelResurrect", function (e)
 		if e.Data.UUID then
-			if PersistentVars.MasteryMechanics.GuardianAngelResurrect ~= nil and #PersistentVars.MasteryMechanics.GuardianAngelResurrect > 0 then
+			if PersistentVars.MasteryMechanics.GuardianAngelResurrect ~= nil then
 				local signaled = false
 				for deadChar,v in pairs(PersistentVars.MasteryMechanics.GuardianAngelResurrect) do
 					if v == e.Data.UUID then
@@ -438,14 +435,22 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 			statusSource = auraStatus.StatusSourceHandle
 		end
 		if statusSource then
-			statusSource = GameHelpers.GetCharacter(statusSource)
-			if statusSource and bonuses.BANNER_PROTECTION[statusSource.MyGuid] then
-				--Block Flanking
-				SignalTestComplete("BANNER_PROTECTION")
-				return false
+			local statusSource = GameHelpers.GetCharacter(statusSource)
+			if statusSource then
+				local hasBonus = false
+				if statusSource.MyGuid ~= target.MyGuid then
+					hasBonus = MasteryBonusManager.GetMasteryBonuses(statusSource).BANNER_PROTECTION == true
+				else
+					hasBonus = bonuses.BANNER_PROTECTION[target.MyGuid] == true
+				end
+				if hasBonus then
+					--Block FLANKED
+					SignalTestComplete("BANNER_PROTECTION")
+					return false
+				end
 			end
 		end
-	end, "FLANKING").Register.Test(function(test, self)
+	end, "FLANKED", false, "Target").Register.Test(function(test, self)
 		--Block flanking
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -454,8 +459,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		test:Wait(1000)
 		CharacterUseSkill(char, "Dome_LLWEAPONEX_Banner_Rally_DivineOrder", char, 1, 1, 1)
 		test:Wait(4000)
-		Timer.StartOneshot("", 500, function ()
-			GameHelpers.Status.Apply(char, "FLANKING", 6.0, true, dummy)
+		Timer.StartOneshot("", 250, function ()
+			GameHelpers.Status.Apply(char, "FLANKED", 6.0, true, dummy)
 		end)
 		test:WaitForSignal(self.ID, 30000)
 		test:AssertGotSignal(self.ID)

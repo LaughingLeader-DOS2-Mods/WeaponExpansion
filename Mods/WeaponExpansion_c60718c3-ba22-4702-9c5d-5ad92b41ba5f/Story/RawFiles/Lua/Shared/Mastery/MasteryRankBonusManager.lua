@@ -58,10 +58,9 @@ MasteryDataClasses.BonusIDEntry = {
 }
 
 ---@param char string
----@param skill ?string Optional skilto filter with.
----@param checkBonusOn ?MasteryBonusCheckTarget
+---@param skill string|nil Optional skill to filter with.
 ---@return table<string, boolean>
-function MasteryBonusManager.GetMasteryBonuses(char, skill, checkBonusOn)
+function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	---@type EsvCharacter|EclCharacter
 	local character = GameHelpers.GetCharacter(char)
 	local bonuses = {}
@@ -209,23 +208,27 @@ end
 
 local function GetStatusListenerMasteryBonuses(target, source, checkBonusOn)
 	local bonuses = {}
-	if (checkBonusOn == "Source" or checkBonusOn == "Any") and source ~= StringHelpers.NULL_UUID and GameHelpers.Ext.ObjectIsCharacter(source) then
-		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, nil, checkBonusOn)) do
+	local source = GameHelpers.TryGetObject(source)
+	local target = GameHelpers.TryGetObject(target)
+	local targetGUID = GameHelpers.GetUUID(target, true)
+	local sourceGUID = GameHelpers.GetUUID(source, true)
+	if (checkBonusOn == "Source" or checkBonusOn == "Any") and sourceGUID ~= StringHelpers.NULL_UUID and GameHelpers.Ext.ObjectIsCharacter(source) then
+		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, nil)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}
 			end
-			bonuses[bonus][target] = true
+			bonuses[bonus][sourceGUID] = true
 		end
 	end
-	if target ~= StringHelpers.NULL_UUID
-	and (checkBonusOn == "Target" or checkBonusOn == "Any" or StringHelpers.IsNullOrEmpty(source))
+	if targetGUID ~= StringHelpers.NULL_UUID
+	and (checkBonusOn == "Target" or checkBonusOn == "Any" or StringHelpers.IsNullOrEmpty(sourceGUID))
 	and GameHelpers.Ext.ObjectIsCharacter(target)
 	then
-		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(target, nil, checkBonusOn)) do
+		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(target, nil)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}
 			end
-			bonuses[bonus][source] = true
+			bonuses[bonus][targetGUID] = true
 		end
 	end
 	return bonuses
@@ -291,32 +294,27 @@ end
 ---@param target EsvCharacter
 ---@param source ?EsvCharacter
 ---@param checkBonusOn MasteryBonusCheckTarget
-local function OnStatusAttemptCallback(callback, matchBonuses, target, status, source, handle, statusType, skipBonusCheck, checkBonusOn)
-	if skipBonusCheck ~= true then
-		checkBonusOn = checkBonusOn or "Any"
-		local bonuses = GetStatusListenerMasteryBonuses(target, source, checkBonusOn)
-		if HasMatchedBonuses(bonuses, matchBonuses) then
-			local b,result = xpcall(callback, debug.traceback, bonuses, target, status, source, handle, statusType)
-			if b then
-				if result == false then
-					NRD_StatusPreventApply(target, handle, 1)
-				elseif result == true then
-					NRD_StatusPreventApply(target, handle, 0)
+local function OnStatusAttemptCallback(callback, matchBonuses, target, status, source, statusType, skipBonusCheck, checkBonusOn)
+	local targetGUID = GameHelpers.GetUUID(target)
+	if targetGUID then
+		if skipBonusCheck ~= true then
+			checkBonusOn = checkBonusOn or "Any"
+			local bonuses = GetStatusListenerMasteryBonuses(target, source, checkBonusOn)
+			if HasMatchedBonuses(bonuses, matchBonuses) then
+				local b,result = xpcall(callback, debug.traceback, bonuses, target, status, source, handle, statusType)
+				if b then
+					return result
+				else
+					Ext.PrintError(result)
 				end
+			end
+		else
+			local b,result = xpcall(callback, debug.traceback, nil, target, status, source, handle, statusType)
+			if b then
+				return result
 			else
 				Ext.PrintError(result)
 			end
-		end
-	else
-		local b,result = xpcall(callback, debug.traceback, nil, target, status, source, handle, statusType)
-		if b then
-			if result == false then
-				NRD_StatusPreventApply(target, handle, 1)
-			elseif result == true then
-				NRD_StatusPreventApply(target, handle, 0)
-			end
-		else
-			Ext.PrintError(result)
 		end
 	end
 end
@@ -326,17 +324,17 @@ end
 ---@param callback MasteryBonusStatusBeforeAttemptCallback
 ---@param skipBonusCheck boolean
 ---@param checkBonusOn MasteryBonusCheckTarget
-function MasteryBonusManager.RegisterStatusAttemptListener(status, matchBonuses, callback,
+function MasteryBonusManager.RegisterStatusBeforeAttemptListener(status, matchBonuses, callback,
 	skipBonusCheck, checkBonusOn)
 	if isClient then return end
 	checkBonusOn = checkBonusOn or "Source"
 	if type(status) == "table" then
 		for i,v in pairs(status) do
-			MasteryBonusManager.RegisterStatusAttemptListener(v, matchBonuses, callback, skipBonusCheck, checkBonusOn)
+			MasteryBonusManager.RegisterStatusBeforeAttemptListener(v, matchBonuses, callback, skipBonusCheck, checkBonusOn)
 		end
 	else
-		RegisterStatusListener("BeforeAttempt", status, function(target, status, source, handle, statusType)
-			OnStatusAttemptCallback(callback, matchBonuses, target, status, source, handle, statusType, skipBonusCheck, checkBonusOn)
+		StatusManager.Register.BeforeAttempt(status, function(target, status, source, statusType, statusEvent)
+			OnStatusAttemptCallback(callback, matchBonuses, target, status, source, statusType, skipBonusCheck, checkBonusOn)
 		end)
 	end
 end
