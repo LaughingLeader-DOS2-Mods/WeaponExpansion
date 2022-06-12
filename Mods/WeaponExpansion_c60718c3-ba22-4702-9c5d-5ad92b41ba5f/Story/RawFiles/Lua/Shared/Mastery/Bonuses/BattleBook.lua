@@ -33,14 +33,14 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 				GameHelpers.Status.Apply(v, "LLWEAPONEX_MASTERYBONUS_BATTLEBOOK_FIRST_AID", 0.0, 0, char)
 			end)
 		end
-	end):RegisterStatusListener("Applied", function(target, status, source, bonuses)
-		if bonuses.BATTLEBOOK_RESTED[source] == true then
+	end):RegisterStatusListener("Applied", function(bonuses, target, status, source)
+		if bonuses.HasBonus("BATTLEBOOK_RESTED", source) then
 			local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 			if turnBonus > 0 then
 				GameHelpers.Status.ExtendTurns(target, status, turnBonus, true, false)
 			end
 		end
-	end):RegisterStatusListener("Removed", function(target, status)
+	end):RegisterStatusListener("Removed", function(bonuses, target, status)
 		ClearTag(target, "LLWEAPONEX_BattleBook_FirstAid_Active")
 	end),
 })

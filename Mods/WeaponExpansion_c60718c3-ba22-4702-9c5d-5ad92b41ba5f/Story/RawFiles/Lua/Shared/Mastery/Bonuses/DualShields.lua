@@ -5,12 +5,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 1, {
 	rb:Create("DUALSHIELDS_RUSHPROTECTION", {
 		Skills = MasteryBonusManager.Vars.RushSkills,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_DualShields_RushProtection", "<font color='#FFAA33'>You are immune to surface damage and harmful statuses while moving.</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.USED then
-			ObjectSetFlag(char, "LLWEAPONEX_MasteryBonus_RushProtection", 0)
-		elseif state == SKILL_STATE.CAST then
-			Timer.StartObjectTimer("LLWEAPONEX_ResetDualShieldsRushProtection", char, 1500)
-		end
+	}).Register.SkillUsed(function(self, e, bonuses)
+		ObjectSetFlag(e.Character.MyGuid, "LLWEAPONEX_MasteryBonus_RushProtection", 0)
+	end).Register.SkillCast(function(self, e, bonuses)
+		Timer.StartObjectTimer("LLWEAPONEX_ResetDualShieldsRushProtection", e.Character, 1500)
 	end):RegisterStatusBeforeAttemptListener(function(bonuses, target, status, source, statusType)
 		if bonuses.HasBonus("DUALSHIELDS_RUSHPROTECTION", target.MyGuid) and GameHelpers.Status.IsHarmful(status.StatusId) then
 			--Aggregate blocked statuses, just in case it's spammy

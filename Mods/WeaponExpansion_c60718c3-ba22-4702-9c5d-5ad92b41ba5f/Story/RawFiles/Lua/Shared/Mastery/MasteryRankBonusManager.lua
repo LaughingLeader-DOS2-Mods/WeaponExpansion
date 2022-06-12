@@ -175,7 +175,7 @@ end
 ---@deprecated
 ---@param skill string|string[]
 ---@param matchBonuses string|string[]
----@param callback fun(skill:string, char:string, state:SKILL_STATE, data:any, dataType:string, bonuses:MasteryBonusCallbackBonuses)
+---@param callback fun(bonuses:MasteryBonusCallbackBonuses, skill:string, char:string, state:SKILL_STATE, data:any, dataType:string)
 ---@param checkBonusOn MasteryBonusCheckTarget
 function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback, checkBonusOn)
 	if isClient then return end
@@ -204,7 +204,7 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 			end
 			local bonuses = GatherMasteryBonuses(checkBonusOn, e.Character, target, e.Skill)
 			if HasMatchedBonuses(bonuses, matchBonuses) then
-				callback(e.Skill, e.Character, e.State, e.Data, e.DataType, bonuses)
+				callback(bonuses, e.Skill, e.Character, e.State, e.Data, e.DataType)
 			end
 		end)
 	end

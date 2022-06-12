@@ -82,7 +82,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		Statuses = {"ENCOURAGED"},
 		DisableStatusTooltip = true
 	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
-		if bonuses.BANNER_INSPIRE[source] == true then
+		if bonuses.HasBonus("BANNER_INSPIRE", source) then
 			local cleansed = {}
 			for status,color in pairs(inspireCleanseStatuses) do
 				if GameHelpers.Status.IsActive(target, status) then
@@ -131,11 +131,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		Statuses = {"HARMONY"},
 		DisableStatusTooltip = true
 	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
-		Ext.Dump(bonuses.BANNER_RALLYINGCRY)
 		if (ObjectIsCharacter(target) == 1
 		and not GameHelpers.Status.IsDisabled(target, true)
 		and NRD_ObjectHasStatusType(target, "DISARMED") == 0
-		and bonuses.BANNER_RALLYINGCRY[source] == true) then
+		and bonuses.HasBonus("BANNER_RALLYINGCRY", source)) then
 			local range = 1.0
 			local weapon = CharacterGetEquippedWeapon(target)
 			if weapon ~= nil then
@@ -182,7 +181,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 			PersistentVars.MasteryMechanics.GuardianAngelResurrect = {}
 		end
 		--Skip providing this bonus if the source is already protected by the target, to prevent immortality
-		if bonuses.BANNER_GUARDIAN_ANGEL[source] == true
+		if bonuses.HasBonus("BANNER_GUARDIAN_ANGEL", source)
 		and PersistentVars.MasteryMechanics.GuardianAngelResurrect[source] ~= target
 		and source ~= target then
 			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = source
@@ -546,7 +545,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 				if statusSource.MyGuid ~= target.MyGuid then
 					hasBonus = MasteryBonusManager.GetMasteryBonuses(statusSource).BANNER_PROTECTION == true
 				else
-					hasBonus = bonuses.BANNER_PROTECTION[target.MyGuid] == true
+					hasBonus = bonuses.HasBonus("BANNER_PROTECTION", target.MyGuid)
 				end
 				if hasBonus then
 					--Block FLANKED
