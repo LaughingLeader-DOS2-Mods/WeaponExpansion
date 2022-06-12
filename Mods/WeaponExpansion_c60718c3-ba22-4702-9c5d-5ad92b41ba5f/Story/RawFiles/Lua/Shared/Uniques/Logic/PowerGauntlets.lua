@@ -6,7 +6,7 @@ if not Vars.IsClient then
 		if unarmedWeapon then
 			local skillId = "Projectile_LLWEAPONEX_PowerGauntlets_ArmorDamageBonus"
 			--SkillConfiguration.TempData.RecalculatedUnarmedSkillDamage[source.MyGuid] = skillId
-			GameHelpers.Damage.ApplySkillDamageNew(source, target, skillId, {MainWeapon=unarmedWeapon, HitParams = HitFlagPresets.EventlessMagicHit})
+			GameHelpers.Damage.ApplySkillDamage(source, target, skillId, {MainWeapon=unarmedWeapon, HitParams = HitFlagPresets.EventlessMagicHit})
 			EffectManager.PlayEffectAt("LLWEAPONEX_FX_Skills_ThrowObject_Impact_Light_Root_01", target.WorldPos)
 		end
 	end
