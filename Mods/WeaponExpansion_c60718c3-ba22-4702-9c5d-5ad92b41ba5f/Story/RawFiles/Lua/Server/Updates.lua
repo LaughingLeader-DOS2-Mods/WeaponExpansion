@@ -12,7 +12,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 	for player in GameHelpers.Character.GetPlayers() do
 		EquipmentManager.CheckWeaponRequirementTags(player)
 		if HasActiveStatus(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then
-			RemoveStatus(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
+			GameHelpers.Status.Remove(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF")
 		end
 
 		if IsTagged(player.MyGuid, "LLWEAPONEX_Quiver_Equipped") == 1 and last < 153026560 then

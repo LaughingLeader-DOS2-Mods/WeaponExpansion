@@ -463,7 +463,7 @@ if not Vars.IsClient then
 	function OnSpellScrollUnequipped(char, item)
 		for skill,data in pairs(SpellData) do
 			if data.Material ~= nil then
-				RemoveStatus(char, data.Material)
+				GameHelpers.Status.Remove(char, data.Material)
 			end
 		end
 	end
@@ -675,7 +675,7 @@ if not Vars.IsClient then
 		if not skill and HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 			ListenForDeath(target, attacker, 1500)
 			if FireSpell(attacker.MyGuid, target.MyGuid) then
-				RemoveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
+				GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
 			end
 		end
 	end)

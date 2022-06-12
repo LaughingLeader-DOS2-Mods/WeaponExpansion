@@ -311,7 +311,7 @@ if not Vars.IsClient then
 	Ext.RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
 		local char = StringHelpers.GetUUID(char)
 		if HasActiveStatus(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION") == 1 then
-			RemoveStatus(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION")
+			GameHelpers.Status.Remove(char, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION")
 		end
 		Timer.StartObjectTimer("LLWEAPONEX_Banner_GuardianAngelResurrect", char, 250)
 		CheckLeadershipBonus(char)

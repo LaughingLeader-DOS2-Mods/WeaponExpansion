@@ -10,7 +10,7 @@ if not Vars.IsClient then
 			if deleteData ~= false then
 				PersistentVars.SkillData.ThrowBalrinAxe[char] = nil
 			end
-			RemoveStatus(char, "LLWEAPONEX_BALRINAXE_DISARMED_INFO")
+			GameHelpers.Status.Remove(char, "LLWEAPONEX_BALRINAXE_DISARMED_INFO")
 		end
 	end
 
@@ -119,7 +119,7 @@ if not Vars.IsClient then
 
 	StatusManager.Register.Applied("LLWEAPONEX_BALRINAXE_RECOVER_START", function(balrinUser, status, target)
 		if RecoverBalrinAxe(balrinUser) then
-			RemoveStatus(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
+			GameHelpers.Status.Remove(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A")
 			GameHelpers.Status.Apply(target, "LLWEAPONEX_BALRINAXE_DEBUFF", 6.0, 1, balrinUser) -- No Aura
 			local character = Ext.GetCharacter(balrinUser)
 			if ObjectIsCharacter(target) == 1 then

@@ -66,7 +66,7 @@ RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_Quiver", function(ch
 	if equipped then
 		Quiver_StartRecharge(char, item)
 	else
-		RemoveStatus(char.MyGuid, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
+		GameHelpers.Status.Remove(char.MyGuid, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
 		Quiver_RemoveTempArrows(char.MyGuid)
 	end
 end)

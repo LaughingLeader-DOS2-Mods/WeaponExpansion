@@ -100,7 +100,7 @@ if not Vars.IsClient then
 	end
 
 	function DualShields_Cover_OnRemoved(target)
-		--RemoveStatus(target, "LLWEAPONEX_COVERING")
+		--GameHelpers.Status.Remove(target, "LLWEAPONEX_COVERING")
 		local coverData = PersistentVars.SkillData.ShieldCover.Blocking[target]
 		if coverData ~= nil and coverData.Blocker ~= nil then
 			local isBlocking = false
@@ -111,7 +111,7 @@ if not Vars.IsClient then
 				end
 			end
 			if not isBlocking then 
-				RemoveStatus(coverData.Blocker, "LLWEAPONEX_COVERING")
+				GameHelpers.Status.Remove(coverData.Blocker, "LLWEAPONEX_COVERING")
 			end
 		end
 		PersistentVars.SkillData.ShieldCover.Blocking[target] = nil

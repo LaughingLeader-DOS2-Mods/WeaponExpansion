@@ -114,7 +114,7 @@ function StatusTurnHandler.RemoveTurnEndStatusesFromSource(fromSource, matchStat
 				if source == fromSource then
 					if matchStatuses == nil or (matchStatuses ~= nil and type(matchStatuses) == "table" and matchStatuses[status] == true) then
 						if wasRemoved == true or HasActiveStatus(targetUUID, status) == 1 then
-							RemoveStatus(targetUUID, status)
+							GameHelpers.Status.Remove(targetUUID, status)
 							InvokeEndTurnStatusRemovedCallbacks(targetUUID, status, source)
 						end
 						turnEndData[status] = nil
@@ -128,7 +128,7 @@ function StatusTurnHandler.RemoveTurnEndStatusesFromSource(fromSource, matchStat
 				if source == fromSource then
 					if matchStatuses == nil or (matchStatuses ~= nil and type(matchStatuses) == "table" and matchStatuses[status] == true) then
 						if HasActiveStatus(target, status) == 1 then
-							RemoveStatus(target, status)
+							GameHelpers.Status.Remove(target, status)
 							InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 						end
 						turnEndData[status] = nil
@@ -150,7 +150,7 @@ function StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
 	if turnEndData ~= nil then
 		for status,source in pairs(turnEndData) do
 			if HasActiveStatus(uuid, status) == 1 then
-				RemoveStatus(uuid, status)
+				GameHelpers.Status.Remove(uuid, status)
 			end
 			InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
 		end
@@ -165,7 +165,7 @@ function StatusTurnHandler.RemoveTurnEndStatus(uuid, status, wasRemoved)
 			for i,v in pairs(status) do
 				local source = turnEndData[v] or ""
 				if HasActiveStatus(uuid, v) == 1 then
-					RemoveStatus(uuid, v)
+					GameHelpers.Status.Remove(uuid, v)
 					InvokeEndTurnStatusRemovedCallbacks(uuid, v, source)
 				end
 				turnEndData[v] = nil
@@ -173,7 +173,7 @@ function StatusTurnHandler.RemoveTurnEndStatus(uuid, status, wasRemoved)
 		else
 			local source = turnEndData[status] or ""
 			if wasRemoved == true or HasActiveStatus(uuid, status) == 1 then
-				RemoveStatus(uuid, status)
+				GameHelpers.Status.Remove(uuid, status)
 				InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
 			end
 			turnEndData[status] = nil

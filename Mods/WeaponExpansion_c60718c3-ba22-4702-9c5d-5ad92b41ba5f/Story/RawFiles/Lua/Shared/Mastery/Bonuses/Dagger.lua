@@ -134,7 +134,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 			local statusObject = target:GetStatus("LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
 			local sourceObject = statusObject and GameHelpers.TryGetObject(statusObject.StatusSourceHandle) or nil
 			if statusObject and sourceObject.MyGuid == char then
-				RemoveStatus(data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
+				GameHelpers.Status.Remove(data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
 				local sourceSkill = CharacterHasSkill(char, "Projectile_EnemyThrowingKnife") == 1 and "Projectile_EnemyThrowingKnife" or "Projectile_ThrowingKnife"
 				GameHelpers.Skill.SetCooldown(char, sourceSkill, 0.0)
 				local apCost = Ext.StatGetAttribute(sourceSkill, "ActionPoints")

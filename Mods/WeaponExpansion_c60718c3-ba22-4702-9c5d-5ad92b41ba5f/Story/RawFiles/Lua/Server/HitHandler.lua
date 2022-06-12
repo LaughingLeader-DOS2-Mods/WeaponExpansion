@@ -17,7 +17,7 @@ local function OnPrepareHit(target,source,damage,handle,data)
 		if HasActiveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK") == 1 and hitType < 4 then
 			data.Blocked = true
 			data:ClearAllDamage()
-			RemoveStatus(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
+			GameHelpers.Status.Remove(target, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK")
 			if ObjectIsCharacter(target) == 1 then
 				local blockedText = Ext.GetTranslatedString("h175f5a66g78d1g41a8g9530g004e19a5db8a", "Blocked!")
 				CharacterStatusText(target, string.format("<font color='#CCFF00'>%s</font>", blockedText))

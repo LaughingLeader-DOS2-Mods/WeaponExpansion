@@ -55,7 +55,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 				if CharacterIsEnemy(v, char) == 1 and GameHelpers.Character.IsUndead(v) then
 					GameHelpers.Damage.ApplySkillDamage(char, v, "Projectile_LLWEAPONEX_MasteryBonus_BattleBook_BlessUndeadDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 					CharacterStatusText(v, "LLWEAPONEX_StatusText_BattleBook_BlessDamage")
-					RemoveStatus(v, "BLESSED")
+					GameHelpers.Status.Remove(v, "BLESSED")
 				end
 			end, data.TargetMode.Objects)
 		end

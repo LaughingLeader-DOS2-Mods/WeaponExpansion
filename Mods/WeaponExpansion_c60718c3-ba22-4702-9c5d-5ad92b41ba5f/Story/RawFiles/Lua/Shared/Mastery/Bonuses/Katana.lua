@@ -63,7 +63,7 @@ if not Vars.IsClient then
 		end
 		for i,v in pairs(ComboStatuses) do
 			if HasActiveStatus(uuid, v) == 1 then
-				RemoveStatus(uuid, v)
+				GameHelpers.Status.Remove(uuid, v)
 				return true
 			end
 		end
@@ -373,7 +373,7 @@ if not Vars.IsClient then
 		if targetIsObject then
 			ApplyKatanaCombo(target.MyGuid, attacker.MyGuid, data, "LLWEAPONEX_Katana", data.SkillData)
 			if data.Damage > 0 and HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
-				RemoveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
+				GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
 				local damageBonus = (GameHelpers.GetExtraData("LLWEAPONEX_MB_Katana_Backlash_DamageBonus", 50) * 0.01)
 				if damageBonus > 0 then
 					GameHelpers.Damage.IncreaseDamage(target.MyGuid, attacker.MyGuid, data.Handle, damageBonus)

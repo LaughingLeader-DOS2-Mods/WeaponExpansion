@@ -4,7 +4,7 @@ Uniques.Muramasa:RegisterEquippedListener(function(unique, character, item, equi
 			GameHelpers.Status.Apply(character, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, false, character)
 		end
 	else
-		RemoveStatus(character.MyGuid, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
+		GameHelpers.Status.Remove(character.MyGuid, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
 	end
 end)
 
@@ -15,7 +15,7 @@ if not Vars.IsClient then
 			if percentage <= 50 and not hasWeaponEffect then
 				GameHelpers.Status.Apply(char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX", -1.0, false, char)
 			elseif percentage > 50 and hasWeaponEffect then
-				RemoveStatus(char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
+				GameHelpers.Status.Remove(char, "LLWEAPONEX_MURAMASA_CURSE_WEAPONFX")
 			end
 		end
 	end, false)

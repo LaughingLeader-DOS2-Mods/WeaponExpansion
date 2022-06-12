@@ -53,7 +53,7 @@ local function PlaySkillEffect(char, state, funcParams, tagData)
 						end
 					else
 						if HasActiveStatus(char, effectStatus) == 1 then
-							RemoveStatus(char, effectStatus, -1.0, 1, char)
+							GameHelpers.Status.Remove(char, effectStatus, -1.0, 1, char)
 						end
 					end
 					return

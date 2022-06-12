@@ -27,13 +27,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Firearm, 4, {
 if not Vars.IsClient then
 	SkillManager.RegisterAnySkillListener(function(char, state, skill, skillType, element)
 		if state == SKILL_STATE.CAST and HasActiveStatus(char, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS") == 1 then
-			RemoveStatus(char, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
+			GameHelpers.Status.Remove(char, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
 		end
 	end)
 	
 	AttackManager.OnStart.Register(function(attacker, target)
 		if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS") == 1 then
-			RemoveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
+			GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_FIREARM_TACTICS")
 		end
 	end)
 	

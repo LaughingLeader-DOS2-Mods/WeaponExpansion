@@ -93,7 +93,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 				data:SetHitFlag("CriticalHit", true)
 				data:MultiplyDamage(1 + critMultiplier)
 			end
-			RemoveStatus(data.Target, "MARKED")
+			GameHelpers.Status.Remove(data.Target, "MARKED")
 		end
 	end),
 })
