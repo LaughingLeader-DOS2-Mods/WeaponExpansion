@@ -466,4 +466,39 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		test:AssertGotSignal(self.ID)
 		return true
 	end),
+	rb:Create("BANNER_OVERPOWER", {
+		Skills = {"Target_Overpower", "Target_EnemyOverpower"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_OverpowerAllyBoost", "<font color='#33FF33'>Damage is increased by [ExtraData:LLWEAPONEX_MB_Banner_Overpower_DamageBoostPerAlly]% per ally within [ExtraData:LLWEAPONEX_MB_Banner_Overpower_AllyRadius]m.</font>"),
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
+			local damagePerAlly = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Overpower_DamageBoostPerAlly", 25)
+			local allyRadius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Overpower_AllyRadius", 3)
+			if damagePerAlly > 0 and allyRadius > 0 then
+				local totalAllies = 0
+				for _,v in pairs(e.Character:GetNearbyCharacters(allyRadius)) do
+					if v ~= e.Character.MyGuid and CharacterIsAlly(v, e.Character.MyGuid) == 1 then
+						totalAllies = totalAllies + 1
+					end
+				end
+				if totalAllies > 0 then
+					local boost = 1 + ((totalAllies * damagePerAlly) * 0.01)
+					e.Data:MultiplyDamage(boost)
+					SignalTestComplete(self.ID)
+				end
+			end
+		end
+	end).Register.Test(function(test, self)
+		--Boost Overpower damage by having an ally nearby
+		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char1, dummy, "", 0, 1, 1)
+		test:Wait(250)
+		TeleportTo(char2, char1, "", 0, 1, 1)
+		test:Wait(1000)
+		CharacterUseSkill(char1, "Target_EnemyOverpower", dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		test:Wait(5000)
+	end),
 })
