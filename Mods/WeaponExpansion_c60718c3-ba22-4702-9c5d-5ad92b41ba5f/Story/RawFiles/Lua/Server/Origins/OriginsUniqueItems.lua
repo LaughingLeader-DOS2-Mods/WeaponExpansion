@@ -231,7 +231,7 @@ function InitOriginsUniques(region)
 			if not data.IsLinkItem then
 				if (ObjectGetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized") == 0 or Vars.DebugMode) then
 					local owner = GameHelpers.Item.GetOwner(data.UUID)
-					if owner and ObjectIsCharacter(owner) == 1 and IsPlayer(owner) then
+					if owner and ObjectIsCharacter(owner) == 1 and GameHelpers.Character.IsPlayer(owner) then
 						ObjectSetFlag(data.UUID, "LLWEAPONEX_UniqueData_Initialized")
 					else
 						local b,err = xpcall(InitializeUnique, debug.traceback, id, data, region)

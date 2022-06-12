@@ -222,7 +222,7 @@ local function UpdatedUnarmedTagsFromWeapon(character, item)
 	else
 		SetTag(character.MyGuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
 	end
-	if IsPlayer(character.MyGuid) then
+	if GameHelpers.Character.IsPlayer(character) then
 		if item.Stats.AnimType ~= "Unarmed" or not UnarmedHelpers.HasUnarmedWeaponStats(character.MyGuid) then
 			Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(character.MyGuid, "LLWEAPONEX_Unarmed")
 		end

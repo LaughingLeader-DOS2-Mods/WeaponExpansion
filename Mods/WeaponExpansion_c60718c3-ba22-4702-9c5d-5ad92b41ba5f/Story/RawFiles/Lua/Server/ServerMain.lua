@@ -291,26 +291,30 @@ function IsPlayerQRY(uuid)
     return 0
 end
 
-Ext.NewQuery(IsPlayerQRY, "LLWEAPONEX_Ext_QRY_IsPlayer", "[in](CHARACTERGUID)_Character, [out](INTEGER)_IsPlayer")
-
-function OnGameStarted(region, editorMode, postReset)
-    if region == nil then
-        region = GetRegion(CharacterGetHostCharacter())
+Events.RegionChanged:Subscribe(function (e)
+    if e.State == REGIONSTATE.GAME then
+        Vars.GAME_STARTED = true
+        for player in GameHelpers.Character.GetPlayers() do
+            EquipmentManager:CheckWeaponRequirementTags(player)
+        end
+        UpdateDarkFireballSkill(Origin.Korvash)
     end
-    Vars.GAME_STARTED = true
-    if IsGameLevel(region) == 1 or editorMode == "1" then
-        local playersDB = Osi.DB_IsPlayer:Get(nil)
-        if playersDB ~= nil then
-            for i,entry in pairs(playersDB) do
-                EquipmentManager:CheckWeaponRequirementTags(Ext.GetCharacter(entry[1]))
+end)
+
+local function ResetMasteryRankTags()
+    for player in GameHelpers.Character.GetPlayers() do
+        ClearAllMasteryRankTags(player.MyGuid)
+        local masteryData = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(player.MyGuid, nil, nil, nil)
+        if masteryData then
+            for _,db in pairs(masteryData) do
+                --_Player, _Mastery, _Level, _Experience
+                local _,mastery,level,exp = table.unpack(db)
+                TagMasteryRanks(player.MyGuid, mastery, level)
             end
         end
     end
-
-    if postReset ~= nil then
-        Ext.BroadcastMessage("LLWEAPONEX_LuaWasReset", "", nil)
-    end
-
-    UpdateDarkFireballSkill(Origin.Korvash)
-    GameHelpers.Data.SyncSharedData(nil,nil,true)
 end
+
+Ext.RegisterConsoleCommand("weaponex_refreshtags", function ()
+    ResetMasteryRankTags()
+end)

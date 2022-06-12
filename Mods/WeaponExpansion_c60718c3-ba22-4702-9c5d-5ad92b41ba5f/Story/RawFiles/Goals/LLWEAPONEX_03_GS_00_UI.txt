@@ -3,22 +3,6 @@ SubGoalCombiner SGC_AND
 INITSECTION
 KBSECTION
 
-//REGION CLIENT_ID
-IF
-GameStarted(_Region, _IsEditorMode)
-THEN
-NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode);
-
-IF
-TimerFinished("Timers_LeaderLib_Debug_LuaReset")
-AND
-DB_CurrentLevel(_Region)
-AND
-GlobalGetFlag("LeaderLib_IsEditorMode", _IsEditorMode)
-THEN
-NRD_ModCall("WeaponExpansion", "OnGameStarted", _Region, (STRING)_IsEditorMode, "1");
-//END_REGION
-
 //REGION RESPEC
 PROC
 PROC_HandleMagicMirrorResult((CHARACTERGUID)_Player, 1) // Added

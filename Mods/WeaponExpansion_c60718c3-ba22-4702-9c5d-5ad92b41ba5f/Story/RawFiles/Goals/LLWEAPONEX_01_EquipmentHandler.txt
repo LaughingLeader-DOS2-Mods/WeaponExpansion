@@ -101,9 +101,13 @@ LLWEAPONEX_OnItemTemplateUnEquipped(_Char, _Item, _Template);
 PROC
 LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 1, (INTEGER)_ItemExists)
 AND
-LLWEAPONEX_Ext_QRY_IsPlayer(_Char, _IsPlayer)
+CharacterIsPlayer(_Char, _A)
+AND
+CharacterGameMaster(_Char, _B)
+AND
+IntegerMax(_A, _B, 1)
 THEN
-LLWEAPONEX_Equipment_ClearItem(_Char, _Item, _IsPlayer);
+LLWEAPONEX_Equipment_ClearItem(_Char, _Item, 1);
 
 PROC
 LLWEAPONEX_Equipment_Internal_CleanupEntry((CHARACTERGUID)_Char, (ITEMGUID)_Item, 0, (INTEGER)_ItemExists)

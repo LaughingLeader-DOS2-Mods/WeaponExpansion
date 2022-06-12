@@ -73,7 +73,7 @@ function OnCharacterDied(uuid, force)
 		if id ~= nil then
 			for i,entry in pairs(Osi.DB_CombatCharacters:Get(nil, id)) do
 				local v = StringHelpers.GetUUID(entry[1])
-				if IsPlayer(v) and CharacterIsEnemy(uuid, v) == 1 then
+				if not GameHelpers.Character.IsPlayer(v) and not GameHelpers.Character.IsEnemy(uuid, v) then
 					SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
 					IncreaseKillCount(v, uuid)
 				end
@@ -81,7 +81,7 @@ function OnCharacterDied(uuid, force)
 		else
 			local x,y,z = GetPosition(uuid)
 			for i,v in pairs(Ext.GetCharactersAroundPosition(x, y, z, 20.0)) do
-				if IsPlayer(v) and CharacterIsEnemy(uuid, v) == 1 then
+				if not GameHelpers.Character.IsPlayer(v) and GameHelpers.Character.IsEnemy(uuid, v) then
 					SetTag(v, "LLWEAPONEX_EnemyDiedInCombat")
 					IncreaseKillCount(v, uuid)
 				end
@@ -129,7 +129,7 @@ local LoneWolfBannerLifeStealScale = {
 Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
 	uuid = StringHelpers.GetUUID(uuid)
 	local character = Ext.GetCharacter(uuid)
-	if IsPlayer(uuid) then
+	if character and GameHelpers.Character.IsPlayer(character) then
 		local loneWolfBanner = Uniques.LoneWolfBanner:GetUUID(uuid)
 		if loneWolfBanner then
 			local level = CharacterGetLevel(uuid)

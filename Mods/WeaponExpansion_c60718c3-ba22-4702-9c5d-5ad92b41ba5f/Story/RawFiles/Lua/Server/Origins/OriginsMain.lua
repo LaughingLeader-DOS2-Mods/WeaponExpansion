@@ -104,14 +104,14 @@ function Origins_InitCharacters(region, isEditorMode)
 	end
 
 	if not Vars.DebugMode then
-		if not IsPlayer(Origin.Harken) and not IsPlayer(Uniques.AnvilMace.Owner) then
+		if not GameHelpers.Character.IsPlayer(Origin.Harken) and not GameHelpers.Character.IsPlayer(Uniques.AnvilMace.Owner) then
 			Uniques.AnvilMace:Transfer(NPC.VendingMachine)
 		end
-		if not IsPlayer(Origin.Korvash) then
-			if not IsPlayer(Uniques.DeathEdge.Owner) then
+		if not GameHelpers.Character.IsPlayer(Origin.Korvash) then
+			if not GameHelpers.Character.IsPlayer(Uniques.DeathEdge.Owner) then
 				Uniques.DeathEdge:Transfer(NPC.VendingMachine)
 			end
-			if not IsPlayer(Uniques.DemonGauntlet.Owner) then
+			if not GameHelpers.Character.IsPlayer(Uniques.DemonGauntlet.Owner) then
 				Uniques.DemonGauntlet:Transfer(NPC.VendingMachine)
 			end
 		end

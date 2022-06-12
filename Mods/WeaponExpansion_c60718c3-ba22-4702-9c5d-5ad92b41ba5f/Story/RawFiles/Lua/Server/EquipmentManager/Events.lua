@@ -46,6 +46,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 					end
 					Osi.LLWEAPONEX_WeaponMastery_TrackMastery(character.MyGuid, item.MyGuid, tag)
 					if not character:HasTag(equippedTag) and not itemTags[tag] then
+						--Set "Mastery Active" tag, like LLWEAPONEX_Axe
 						SetTag(character.MyGuid, tag)
 						fprint(LOGLEVEL.TRACE, "[WeaponExpansion:OnItemEquipped] Setting mastery tag [%s] on [%s]", tag, character.MyGuid)
 					end

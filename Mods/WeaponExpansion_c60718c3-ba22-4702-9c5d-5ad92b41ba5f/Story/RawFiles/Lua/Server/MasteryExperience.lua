@@ -16,7 +16,7 @@ function MasterySystem.CanGrantXP(uuid)
 		return false
 	end
 	if NRD_CharacterGetInt(uuid, "Resurrected") == 0
-	and not IsPlayer(uuid)
+	and not GameHelpers.Character.IsPlayer(uuid)
 	and CharacterIsSummon(uuid) == 0
 	and CharacterIsPartyFollower(uuid) == 0
 	and Osi.LeaderLib_Helper_QRY_IgnoreCharacter(uuid) ~= true

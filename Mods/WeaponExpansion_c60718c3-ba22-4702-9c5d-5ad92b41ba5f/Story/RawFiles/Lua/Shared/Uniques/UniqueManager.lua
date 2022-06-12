@@ -165,7 +165,8 @@ end
 -- CharacterSetVisualElement(Mods.WeaponExpansion.Origin.Harken, 3, "LLWEAPONEX_Dwarves_Male_Body_Naked_A_UpperBody_Tattoos_Magic_A")
 
 function UniqueManager.OnDeath(char)
-	if not IsPlayer(char) then
+	if not GameHelpers.Character.IsPlayer(char) then
+		local char = GameHelpers.GetUUID(char)
 		for key,unique in pairs(Uniques) do
 			if unique.Owner == char then
 				if unique.OnOwnerDeath == nil then
