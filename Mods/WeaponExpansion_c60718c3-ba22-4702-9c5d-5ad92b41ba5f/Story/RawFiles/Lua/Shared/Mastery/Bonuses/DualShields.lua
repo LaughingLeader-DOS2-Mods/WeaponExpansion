@@ -148,11 +148,8 @@ if not Vars.IsClient then
 				EffectManager.PlayEffect("LLWEAPONEX_FX_Status_IronMaidenHit_01", e.Data.Target)
 				GameHelpers.Status.Remove(e.Data.Target, "LLWEAPONEX_IRONMAIDEN_SHIELDPRISON_FX")
 			end
-			local target = Ext.GetCharacter(e.Data.Target)
-			if target then
-				local surface = target.Stats.TALENT_Zombie and "Poison" or "Blood"
-				GameHelpers.Surface.CreateSurface(target.WorldPos, surface, 1.0, 6.0, Ext.GetCharacter(e.Character).Handle, true)
-			end
+			local surface = e.Data.TargetObject.Stats.TALENT_Zombie and "Poison" or "Blood"
+			GameHelpers.Surface.CreateSurface(e.Data.TargetObject.WorldPos, surface, 1.0, 6.0, e.Character.Handle, true)
 		end
 	end)
 end
