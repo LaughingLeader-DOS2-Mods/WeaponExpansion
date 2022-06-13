@@ -37,6 +37,9 @@ local defaultPersistentVars = {
         SneakingTurnsInCombat = {},
         ---@type table<UUID,integer[]>
         BlinkStrikeTargetsHit = {},
+        ---Challenger and the target.
+        ---@type table<UUID,UUID>
+        BattlebookChallenge = {},
     },
     Timers = {},
     OnDeath = {},

@@ -192,7 +192,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		if not GameHelpers.Status.IsActive(target, "DYING") then
 			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = nil
 		end
-	end):RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
+	end, nil, "None"):RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
 		char = GameHelpers.GetUUID(char)
 		if PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] then
 			local sourceCharacter = GameHelpers.GetCharacter(PersistentVars.MasteryMechanics.GuardianAngelResurrect[char])
@@ -480,6 +480,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 						Ext.ApplyStatus(status)
 						GameHelpers.Status.Apply(v, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, true, e.Target)
 						---Mods.LeaderLib.GameHelpers.Status.Apply(Mods.WeaponExpansion.Origin.Harken, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, false, me.MyGuid)
+						--EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", e.Target, {Target=GameHelpers.GetNetID(v)})
 						--EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", e.Target, {BeamTarget=v, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
 						--Mods.LeaderLib.EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", me.NetID, {Target=Mods.LeaderLib.GameHelpers.GetNetID(Mods.WeaponExpansion.Origin.Harken)})
 						--Mods.LeaderLib.EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", me.MyGuid, {BeamTarget=Mods.WeaponExpansion.Origin.Harken, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})

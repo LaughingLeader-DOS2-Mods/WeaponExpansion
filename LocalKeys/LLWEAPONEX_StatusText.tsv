@@ -18,6 +18,7 @@ LLWEAPONEX_StatusText_BalrinAxeTimedOut	<font color='#E4CE93'>*Your axe finds it
 LLWEAPONEX_StatusText_BasilusHauntedDamage_Backstab	<font color='#00FFCC' size='22'>Haunted Backstab Critical!</font>	he24285d8geb08g4177g8454g78c27e41dab2
 LLWEAPONEX_StatusText_BasilusHauntedDamage_Normal	<font color='#00FFCC' size='22'>Haunted!</font>	h011e1b92g4ce2g4e99g890eg6be8a6a58a28
 LLWEAPONEX_StatusText_BattleBook_BlessDamage	<font color='#C9AA58' size='22'>*Divine Knowledge*</font>	h97851202g90c0g492cg896bgf9491216d827
+LLWEAPONEX_StatusText_BattleBook_CurseDamage	<font color='#C9AA58' size='22'>*Occult Knowledge*</font>	hbc88eccdg4403g4bcag8cbdg24d1f79ab1f3
 LLWEAPONEX_StatusText_BlockedHealing	<font color='#c51fe8' size='18'>Healing Blocked</font>	hd3a7be83g1896g41bcg926dg409ccde7e89f
 LLWEAPONEX_StatusText_Countered	<font color='#FF1155' size='22'>Countered</font>	h154d0117g69e6g43fcg9356g02e1593341a5
 LLWEAPONEX_StatusText_Encourage_Cleansed	<font color='#E4CE22' size='22'><p align='center'>Banner Inspiration!</font><br>Cleansed [1]</p>	h63d42801g007eg4ae6g8609g856b214fb5d1

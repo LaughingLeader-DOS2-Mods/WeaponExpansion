@@ -10,7 +10,8 @@
 					"LLWEAPONEX_RemoteChargeDetonationCountDisabled",
 					"LLWEAPONEX_DemolitionBackpackAutoRechargeEnabled",
 					"LLWEAPONEX_ThrowObjectLimitDisabled",
-					"LLWEAPONEX_AllowUnarmedShields"
+					"LLWEAPONEX_AllowUnarmedShields",
+					"LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward"
 				]
 			},
 			{
@@ -33,7 +34,8 @@
 			"Entries": [
 				"LLWEAPONEX_AutoUnlockRecipesDisabled",
 				"LLWEAPONEX_ThrowObjectLimitDisabled",
-				"LLWEAPONEX_AllowUnarmedShields"
+				"LLWEAPONEX_AllowUnarmedShields",
+				"LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward"
 			]
 		},
 		{

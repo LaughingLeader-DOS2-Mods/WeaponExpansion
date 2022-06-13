@@ -1,2 +1,3 @@
 Key	Content	Handle
 LLWEAPONEX_MasteryBonus_AdrenalineStatus_PistolDamageBoost	<font color='#33FF00'>Your next pistol shot will deal [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]% more damage.</font>	hb6293431g0ad9g45bbg9334gb81365e8f2ca
+LLWEAPONEX_MB_BattleBook_Challenge_Status	<font color='#33FF88'>Defeating this target grants the challenger a random skillbook from the target's skills.</font>	h0fa3dc9dgd093g47e3g9864g856ebb7224e6

@@ -1,6 +1,6 @@
 local isClient = Ext.IsClient()
 
----@alias MasteryBonusCheckTarget string|'"Any"'|'"Target"'|'"Source"'
+---@alias MasteryBonusCheckTarget string|"Any"|"Target"|"Source"|"None"
 ---@alias WeaponExpansionMasterySkillListenerCallback fun(MasteryBonusCallbackBonuses, e:OnSkillStateAllEventArgs):void
 ---@alias MasteryBonusStatusCallback fun(bonuses:MasteryBonusCallbackBonuses, target:string, status:string, source:string, statusType:string)
 ---@alias MasteryBonusStatusBeforeAttemptCallback fun(bonuses:MasteryBonusCallbackBonuses, target:EsvCharacter|EsvItem, status:EsvStatus, source:EsvCharacter|EsvItem|nil, statusType:string):boolean
@@ -102,7 +102,7 @@ local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 	local target = GameHelpers.TryGetObject(target)
 	local targetGUID = GameHelpers.GetUUID(target, true)
 	local sourceGUID = GameHelpers.GetUUID(source, true)
-	if (checkBonusOn == "Source" or checkBonusOn == "Any") and sourceGUID ~= StringHelpers.NULL_UUID and GameHelpers.Ext.ObjectIsCharacter(source) then
+	if (checkBonusOn ~= "Target") and sourceGUID ~= StringHelpers.NULL_UUID and GameHelpers.Ext.ObjectIsCharacter(source) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, extraParam)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}
@@ -111,7 +111,7 @@ local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 		end
 	end
 	if targetGUID ~= StringHelpers.NULL_UUID
-	and (checkBonusOn == "Target" or checkBonusOn == "Any" or StringHelpers.IsNullOrEmpty(sourceGUID))
+	and (checkBonusOn ~= "Source" or StringHelpers.IsNullOrEmpty(sourceGUID))
 	and GameHelpers.Ext.ObjectIsCharacter(target)
 	then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(target, extraParam)) do
@@ -203,7 +203,7 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 				end
 			end
 			local bonuses = GatherMasteryBonuses(checkBonusOn, e.Character, target, e.Skill)
-			if HasMatchedBonuses(bonuses, matchBonuses) then
+			if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 				callback(bonuses, e.Skill, e.Character, e.State, e.Data, e.DataType)
 			end
 		end)
@@ -240,7 +240,7 @@ function MasteryBonusManager.RegisterNewSkillListener(state, skill, matchBonuses
 			end
 		end
 		local bonuses = GatherMasteryBonuses(checkBonusOn, e.Character, target, e.Skill)
-		if HasMatchedBonuses(bonuses, matchBonuses) then
+		if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 			callback(e, bonuses)
 		end
 	end
@@ -259,7 +259,7 @@ function MasteryBonusManager.RegisterOnHealListener(matchBonuses, callback, chec
 	---@param e OnHealEventArgs
 	local wrapperCallback = function(e)
 		local bonuses = GatherMasteryBonuses(checkBonusOn, e.Source, e.Target, e.Skill)
-		if HasMatchedBonuses(bonuses, matchBonuses) then
+		if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 			callback(e, bonuses)
 		end
 	end
@@ -269,7 +269,7 @@ end
 local function OnSkillTypeCallback(callback, matchBonuses, uuid, checkBonusOn, ...)
 	checkBonusOn = checkBonusOn or "Source"
 	local bonuses = GatherMasteryBonuses(checkBonusOn, uuid, nil)
-	if HasMatchedBonuses(bonuses, matchBonuses) then
+	if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 		callback(bonuses, uuid, ...)
 	end
 end
@@ -304,7 +304,7 @@ end
 local function OnStatusCallback(callback, matchBonuses, target, status, source, statusType, checkBonusOn)
 	checkBonusOn = checkBonusOn or "Any"
 	local bonuses = GatherMasteryBonuses(checkBonusOn, source, target)
-	if HasMatchedBonuses(bonuses, matchBonuses) then
+	if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 		callback(bonuses, target, status, source, statusType)
 	end
 end
@@ -360,7 +360,7 @@ local function OnBeforeStatusAttemptCallback(callback, matchBonuses, target, sta
 		if skipBonusCheck ~= true then
 			checkBonusOn = checkBonusOn or "Any"
 			local bonuses = GatherMasteryBonuses(checkBonusOn, source, target)
-			if HasMatchedBonuses(bonuses, matchBonuses) then
+			if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 				local b,result = xpcall(callback, debug.traceback, bonuses, target, status, source, statusType)
 				if b then
 					return result
@@ -369,7 +369,7 @@ local function OnBeforeStatusAttemptCallback(callback, matchBonuses, target, sta
 				end
 			end
 		else
-			local b,result = xpcall(callback, debug.traceback, nil, target, status, source, statusType)
+			local b,result = xpcall(callback, debug.traceback, {HasBonus=function() return false end}, target, status, source, statusType)
 			if b then
 				return result
 			else

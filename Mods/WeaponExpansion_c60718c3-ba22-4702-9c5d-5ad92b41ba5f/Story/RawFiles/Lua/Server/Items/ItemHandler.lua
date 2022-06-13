@@ -84,7 +84,7 @@ function OnSmugglersBagOpened(char, item)
 end
 
 --Mods.WeaponExpansion.GenerateTradeTreasure("680d2702-721c-412d-b083-4f5e816b945a", "ST_LLWEAPONEX_VendingMachine_OrderWeapon")
-
+--GenerateItems(me.MyGuid, "680d2702-721c-412d-b083-4f5e816b945a")
 function GenerateTradeTreasure(uuid, treasure)
 	local object = GameHelpers.TryGetObject(uuid)
 	if ObjectIsCharacter(uuid) == 1 then

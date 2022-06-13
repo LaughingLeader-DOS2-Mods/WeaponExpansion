@@ -227,8 +227,7 @@ end
 ---@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterStatusListener(event, callback, 
-	specificStatuses, checkBonusOn)
+function MasteryBonusData:RegisterStatusListener(event, callback, specificStatuses, checkBonusOn)
 	if not isClient then
 		MasteryBonusManager.RegisterStatusListener(event, specificStatuses or self.Statuses, self.ID, callback, checkBonusOn)
 	end
@@ -240,8 +239,7 @@ end
 ---@param statusType string|string[]
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterStatusTypeListener(event, callback,
-	statusType, checkBonusOn)
+function MasteryBonusData:RegisterStatusTypeListener(event, callback, statusType, checkBonusOn)
 	if not isClient then
 		MasteryBonusManager.RegisterStatusTypeListener(event, statusType, self.ID, callback, checkBonusOn)
 	end
@@ -253,8 +251,7 @@ end
 ---@param skipBonusCheck boolean|nil
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback,
-	specificStatuses, skipBonusCheck, checkBonusOn)
+function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback, specificStatuses, skipBonusCheck, checkBonusOn)
 	if not isClient then
 		MasteryBonusManager.RegisterStatusBeforeAttemptListener(specificStatuses or self.Statuses, self.ID,
 		callback, skipBonusCheck, checkBonusOn)
@@ -266,8 +263,7 @@ end
 ---@param skipBonusCheck boolean|nil
 ---@param priority integer|nil
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterOnHit(callback,
-	skipBonusCheck, priority)
+function MasteryBonusData:RegisterOnHit(callback, skipBonusCheck, priority)
 	if not isClient then
 		if skipBonusCheck then
 			AttackManager.OnHit.Register(callback, priority)
@@ -287,7 +283,7 @@ function MasteryBonusData:RegisterOnHit(callback,
 end
 
 ---@param tag string|string[]
----@param callback BasicAttackOnWeaponTagHitCallback
+---@param callback fun(tag:string, attacker:EsvCharacter, target:EsvCharacter|EsvItem|number[], data:HitData, targetIsObject:boolean, skill:StatEntrySkillData, self:MasteryBonusData)
 ---@param skipBonusCheck boolean|nil
 ---@return MasteryBonusData
 function MasteryBonusData:RegisterOnWeaponTagHit(tag, callback, skipBonusCheck, priority)

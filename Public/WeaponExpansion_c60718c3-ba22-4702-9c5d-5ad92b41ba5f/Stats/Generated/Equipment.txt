@@ -1105,3 +1105,17 @@ add equipmentgroup
 add equipment entry "ARM_Knight_Boots"
 add equipmentgroup
 add equipment entry "WPN_LLWEAPONEX_Banner_2H_Preview_A"
+
+new equipment "Class_LLWEAPONEX_BattleScholar_Preview"
+add equipmentgroup
+add equipment entry "ARM_Wizard_Helmet"
+add equipmentgroup
+add equipment entry "ARM_Wizard_UpperBody"
+add equipmentgroup
+add equipment entry "ARM_Wizard_LowerBody"
+add equipmentgroup
+add equipment entry "ARM_Wizard_Gloves"
+add equipmentgroup
+add equipment entry "ARM_Wizard_Boots"
+add equipmentgroup
+add equipment entry "WPN_LLWEAPONEX_BattleBook_B"
