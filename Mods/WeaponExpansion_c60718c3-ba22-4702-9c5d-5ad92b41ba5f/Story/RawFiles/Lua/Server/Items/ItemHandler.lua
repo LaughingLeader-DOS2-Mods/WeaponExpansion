@@ -83,23 +83,37 @@ function OnSmugglersBagOpened(char, item)
 	ItemDestroy(item)
 end
 
+--Mods.WeaponExpansion.GenerateTradeTreasure("680d2702-721c-412d-b083-4f5e816b945a", "ST_LLWEAPONEX_VendingMachine_OrderWeapon")
+
 function GenerateTradeTreasure(uuid, treasure)
+	local object = GameHelpers.TryGetObject(uuid)
 	if ObjectIsCharacter(uuid) == 1 then
 		local x,y,z = GetPosition(uuid)
-		local backpack = CreateItemTemplateAtPosition("LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
-		GenerateTreasure(backpack, treasure, CharacterGetLevel(uuid), uuid)
-		for i,v in pairs(Ext.GetItem(backpack):GetInventoryItems()) do
-			local tItem = Ext.GetItem(v)
-			if tItem ~= nil then
-				tItem.UnsoldGenerated = true -- Trade treasure flag
-				ItemToInventory(v, uuid, tItem.Amount, 0, 0)
+		--LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830
+		local backpackGUID = CreateItemTemplateAtPosition("98fa7688-0810-4113-ba94-9a8c8463f830", x, y, z)
+		Timer.StartOneshot("", 50, function ()
+			fprint(LOGLEVEL.TRACE, "[WeaponExpansion:GenerateTradeTreasure] Generating treasure table (%s) for (%s)", treasure, object.DisplayName, uuid)
+			local backpack = Ext.GetItem(backpackGUID)
+			if backpack then
+				GenerateTreasure(backpackGUID, treasure, object.Stats.Level, uuid)
+				ContainerIdentifyAll(backpackGUID)
+				for i,v in pairs(backpack:GetInventoryItems()) do
+					local tItem = Ext.GetItem(v)
+					if tItem ~= nil then
+						tItem.UnsoldGenerated = true -- Trade treasure flag
+						ItemToInventory(v, uuid, tItem.Amount, 0, 0)
+					else
+						ItemToInventory(v, uuid, 1, 0, 0)
+					end
+					ItemSetOwner(v, uuid)
+					ItemSetOriginalOwner(v, uuid)
+				end
+				ItemRemove(backpackGUID)
 			else
-				ItemToInventory(v, uuid, 1, 0, 0)
+				Ext.PrintError("[WeaponExpansion:GenerateTradeTreasure] Failed to create backpack from root template 'LOOT_LeaderLib_BackPack_Invisible_98fa7688-0810-4113-ba94-9a8c8463f830'")
+				CharacterGiveReward(uuid, treasure, 1)
 			end
-			ItemSetOwner(v, uuid)
-			ItemSetOriginalOwner(v, uuid)
-		end
-		ItemRemove(backpack)
+		end)
 	elseif ObjectIsItem(uuid) == 1 then
 		GenerateTreasure(uuid, treasure, Ext.GetItem(uuid).Stats.Level or 1, uuid)
 	end
