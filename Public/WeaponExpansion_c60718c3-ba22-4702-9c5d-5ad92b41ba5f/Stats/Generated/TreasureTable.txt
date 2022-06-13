@@ -255,12 +255,12 @@ new subtable "0,1;3,3"
 object category "LLWEAPONEX_Flask_Empty",1,0,0,0,0,0,0,0
 
 new treasuretable "ST_LLWEAPONEX_VendingMachine"
-new subtable "2,1;1,2;3,1"
+new subtable "16,1"
 StartLevel "1"
 EndLevel "8"
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,1,0,0,0,0,0,0
 object category "T_ST_LLWEAPONEX_VendingMachine_WeaponsNormal",1,0,1,0,0,0,0,0
-new subtable "2,1;1,2;3,1"
+new subtable "16,1"
 StartLevel "9"
 EndLevel "30"
 object category "T_ST_LLWEAPONEX_VendingMachine_RareWeapons",1,0,0,0,0,0,0,0
@@ -272,13 +272,13 @@ new subtable "1,1"
 object category "T_ST_LLWEAPONEX_BuyableThrowingWeapons",1,0,0,0,0,0,0,0
 new subtable "2,2"
 object category "T_ST_LLWEAPONEX_Runes",1,0,0,0,0,0,0,0
-new subtable "0,3;1,2"
+new subtable "0,2;1,2"
 object category "T_ST_LLWEAPONEX_Accessories",1,1,0,0,0,0,0,0
-new subtable "0,4;1,1"
+new subtable "0,2;1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_RareAccessories",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_Skillbooks",1,0,0,0,0,0,0,0
-new subtable "0,2;1,1"
+new subtable "0,1;1,1"
 object category "LLWEAPONEX_HandCrossbow_Bolts",1,0,0,0,0,0,0,0
 new subtable "1,1"
 object category "T_ST_LLWEAPONEX_VendingMachine_CraftingItems",1,0,0,0,0,0,0,0
