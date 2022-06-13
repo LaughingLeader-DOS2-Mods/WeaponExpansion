@@ -73,7 +73,69 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		test:AssertEquals(IsTagged(dummy, "LLWEAPONEX_BattleBook_FirstAid_Active") == 1, true, "LLWEAPONEX_BattleBook_FirstAid_Active tag not set on target.")
 		return true
 	end),
+
+	rb:Create("BATTLEBOOK_LOOT", {
+		AllSkills = true,
+		GetIsTooltipActive = function(bonus, id, character, tooltipType, item)
+			if tooltipType == "item" then
+				if Ext.StatGetAttribute(id, "Requirement") == "DaggerWeapon" then
+					return true
+				end
+			end
+			return false
+		end,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BookHunter","<font color='#99AACC'>Chance to find a skillbook when opening a repository of books for the first time.</font>")
+	}).Register.Test(function(test, self)
+		--Cast any skill with DaggerWeapon Requirement
+		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(character, dummy, "", 0, 1, 1)
+		test:Wait(250)
+		CharacterLookAt(dummy, character, 1)
+		test:Wait(500)
+		
+		Events.OnSkillState:Subscribe(function (e)
+			SignalTestComplete(self.ID)
+		end, {Once = true, MatchArgs={Skill = "Projectile_ThrowingKnife", State = SKILL_STATE.USED }})
+		CharacterUseSkill(character, "Projectile_ThrowingKnife", dummy, 1, 1, 0)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end)
 })
+
+if not Vars.IsClient then
+	Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords = {
+		Cont_Bookcase = true,
+	}
+
+	local function IsBookcase(template)
+		---@type ItemTemplate
+		local root = Ext.Template.GetTemplate(template)
+		if root then
+			for _,v in pairs(root.Treasures) do
+				if Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords[v] == true then
+					return true
+				end
+			end
+		end
+		return false
+	end
+
+	Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "before", function (character, template, item)
+		if IsTagged(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 0 
+		and ItemIsContainer(item) == 1 
+		and MasteryBonusManager.HasMasteryBonus(character, "BATTLEBOOK_LOOT")
+		and IsBookcase(template) then
+			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_BookcaseLootChance", 10)
+			if chance > 0 and GameHelpers.Math.Roll(chance) then
+				GenerateTreasure(item, "ST_Skillbook", CharacterGetLevel(character), character)
+			end
+			SetTag(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase")
+		end
+	end)
+end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 	rb:Create("BATTLEBOOK_BLESS", {

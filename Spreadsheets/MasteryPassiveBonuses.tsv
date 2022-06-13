@@ -5,8 +5,7 @@ Axe	4	Stalker	Axes can now be used with Scoundrel skills.	√	√
 Banner	2	Cooperation	Heals received also heal nearby allies in 6m for 50% of the amount.	√	❌
 Banner	3	Inspiring Leadership	If affected by Leadership, allies have a 30% chance (50% chance if from the Banner user) to become Inspired on their turn.	√	√
 Banner	4	Banner Protection	When near a placed banner, you cannot be flanked. Delaying your turn grants you 50% damage reduction. 	√	√
-Battle Book	1	Placeholder	Desc	❌	❌
-Battle Book	1	Placeholder	Desc	❌	❌
+Battle Book	1	Book Hunter	When opening a bookcase or stack of books, there is a small chance to find a skillbook.	√	❌
 Battle Book	2	Placeholder	Desc	❌	❌
 Battle Book	2	Placeholder	Desc	❌	❌
 Battle Book	3	Placeholder	Desc	❌	❌
