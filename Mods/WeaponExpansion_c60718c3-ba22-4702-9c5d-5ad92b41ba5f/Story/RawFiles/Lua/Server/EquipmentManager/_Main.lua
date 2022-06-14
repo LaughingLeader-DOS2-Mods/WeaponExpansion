@@ -123,7 +123,8 @@ function EquipmentManager.ItemIsNearPlayers(item)
 		target = Ext.GetGameObject(parentInventory)
 	end
 	for player in GameHelpers.Character.GetPlayers() do
-		if GameHelpers.Math.GetDistance(player.WorldPos, target.WorldPos) <= 30 then
+		local dist = GameHelpers.Math.GetDistance(player.WorldPos, target.WorldPos)
+		if dist <= 30 then
 			return true
 		end
 	end
@@ -153,7 +154,8 @@ function EquipmentManager.SyncItemStatChanges(item, changes, dynamicIndex)
 			NetID = item.NetID,
 			Slot = slot,
 			Owner = owner,
-			Changes = changes
+			Changes = changes,
+			ID = item.StatsId
 		}
 		if EquipmentManager.ItemIsNearPlayers(item) then
 			Ext.BroadcastMessage("LLWEAPONEX_SetItemStats", Ext.JsonStringify(data), nil)

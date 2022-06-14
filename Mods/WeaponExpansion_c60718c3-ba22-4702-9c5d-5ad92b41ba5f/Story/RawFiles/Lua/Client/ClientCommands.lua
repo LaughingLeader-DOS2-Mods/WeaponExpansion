@@ -71,16 +71,18 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 		local item = nil
 		---@type StatItem
 		local stats = nil
-		if data.NetID ~= nil then
-			item = Ext.GetItem(data.NetID)
+		if data.UUID ~= nil then
+			item = GameHelpers.GetItem(data.UUID)
 		end
-		if item == nil and data.MyGuid ~= nil then
-			item = Ext.GetItem(data.MyGuid)
+		if item == nil and data.NetID ~= nil then
+			item = GameHelpers.GetItem(data.NetID)
 		end
-		if item == nil and data.Owner ~= nil and data.Slot ~= nil then
-			local character = Ext.GetCharacter(data.Owner)
-			if character ~= nil then
-				stats = character.Stats:GetItemBySlot(data.Slot)
+		if item == nil and data.Owner ~= nil then
+			local owner = GameHelpers.TryGetObject(data.Owner)
+			if owner ~= nil then
+				if data.Slot ~= nil then
+					stats = owner.Stats:GetItemBySlot(data.Slot)
+				end
 			end
 		end
 		if item ~= nil and stats == nil then
@@ -88,10 +90,6 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 		end
 
 		if stats ~= nil then
-			if Ext.Version() < 53 then
-				Ext.EnableExperimentalPropertyWrites()
-			end
-
 			if data.Changes ~= nil then
 				local changes = data.Changes
 				if changes.Boosts ~= nil and stats.DynamicStats[2] ~= nil then
@@ -109,7 +107,8 @@ Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)
 				Ext.Print(string.format("[LLWEAPONEX_SetItemStats] Synced Item [%s]", stats.Name))
 			end
 		elseif Vars.DebugMode then
-			Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s) UUID(%s) Slot(%s) Owner(%s)", data.NetID, data.UUID, data.Slot, data.Owner))
+			--Ext.PrintError(string.format("[LLWEAPONEX_SetItemStats] Failed to get item. NetID(%s) UUID(%s) Slot(%s) Owner(%s)", data.NetID, data.UUID, data.Slot, data.Owner))
+			fprint(LOGLEVEL.ERROR, "[LLWEAPONEX_SetItemStats] Failed to get item. ID(%s) UUID(%s) NetID(%s)", data.ID, data.UUID, data.NetID)
 		end
 	end
 end)
