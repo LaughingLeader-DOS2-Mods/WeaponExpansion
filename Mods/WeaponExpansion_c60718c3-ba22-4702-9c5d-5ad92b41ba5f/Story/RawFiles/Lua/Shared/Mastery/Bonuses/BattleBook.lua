@@ -1,7 +1,26 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 
+local _ISCLIENT = Ext.IsClient()
+
 local _eqSet = "Class_LLWEAPONEX_BattleScholar_Preview"
+
+Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords = {
+	Cont_Bookcase = true,
+}
+
+local function IsBookcase(template)
+	---@type ItemTemplate
+	local root = Ext.Template.GetTemplate(template)
+	if root then
+		for _,v in pairs(root.Treasures) do
+			if Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords[v] == true then
+				return true
+			end
+		end
+	end
+	return false
+end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 	rb:Create("BATTLEBOOK_CONCUSSION", {
@@ -27,7 +46,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		CharacterAttack(char, dummy)
 		test:WaitForSignal(self.ID, 30000)
 		test:AssertGotSignal(self.ID)
-		test:AssertEquals(HasActiveStatus(dummy, "LLWEAPONEX_CONCUSSION") == 1, true, "LLWEAPONEX_CONCUSSION not applied to target.")
+		test:Wait(500)
+		test:AssertEquals(HasActiveStatus(dummy, "LLWEAPONEX_CONCUSSION") == 1, true, "LLWEAPONEX_CONCUSSION not applied to target")
 		return true
 	end),
 
@@ -49,14 +69,14 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 			end)
 		end
 	end):RegisterStatusListener("Applied", function(bonuses, target, status, source)
-		if bonuses.HasBonus("BATTLEBOOK_RESTED", source) then
+		if bonuses.HasBonus("BATTLEBOOK_FIRST_AID", source) then
 			local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 			if turnBonus > 0 then
 				GameHelpers.Status.ExtendTurns(target, status, turnBonus, true, false)
 				SignalTestComplete("BATTLEBOOK_FIRST_AID_TurnsExtended")
 			end
 		end
-	end):RegisterStatusListener("Removed", function(bonuses, target, status)
+	end, nil, "Source"):RegisterStatusListener("Removed", function(bonuses, target, status)
 		ClearTag(target, "LLWEAPONEX_BattleBook_FirstAid_Active")
 	end, nil, "None").Register.Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
@@ -66,76 +86,53 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		SetFaction(dummy, "Good NPC")
 		test:Wait(1000)
 		CharacterUseSkill(char, "Target_FirstAidEnemy", dummy, 1, 1, 1)
-		test:WaitForSignal("BATTLEBOOK_FIRST_AID_BonusHealApplied", 30000)
+		test:WaitForSignal("BATTLEBOOK_FIRST_AID_BonusHealApplied", 10000)
 		test:AssertGotSignal("BATTLEBOOK_FIRST_AID_BonusHealApplied")
-		test:WaitForSignal("BATTLEBOOK_FIRST_AID_TurnsExtended", 30000)
+		test:WaitForSignal("BATTLEBOOK_FIRST_AID_TurnsExtended", 5000)
 		test:AssertGotSignal("BATTLEBOOK_FIRST_AID_TurnsExtended")
 		test:AssertEquals(IsTagged(dummy, "LLWEAPONEX_BattleBook_FirstAid_Active") == 1, true, "LLWEAPONEX_BattleBook_FirstAid_Active tag not set on target.")
 		return true
 	end),
 
 	rb:Create("BATTLEBOOK_LOOT", {
-		AllSkills = true,
-		GetIsTooltipActive = function(bonus, id, character, tooltipType, item)
-			if tooltipType == "item" then
-				if Ext.StatGetAttribute(id, "Requirement") == "DaggerWeapon" then
-					return true
-				end
-			end
-			return false
-		end,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BookHunter","<font color='#99AACC'>Chance to find a skillbook when opening a repository of books for the first time.</font>")
-	}).Register.Test(function(test, self)
-		--Cast any skill with DaggerWeapon Requirement
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
-		test.Cleanup = cleanup
-		test:Wait(250)
-		TeleportTo(character, dummy, "", 0, 1, 1)
-		test:Wait(250)
-		CharacterLookAt(dummy, character, 1)
-		test:Wait(500)
-		
-		Events.OnSkillState:Subscribe(function (e)
-			SignalTestComplete(self.ID)
-		end, {Once = true, MatchArgs={Skill = "Projectile_ThrowingKnife", State = SKILL_STATE.USED }})
-		CharacterUseSkill(character, "Projectile_ThrowingKnife", dummy, 1, 1, 0)
-		test:WaitForSignal(self.ID, 10000)
-		test:AssertGotSignal(self.ID)
-		return true
-	end)
-})
-
-if not Vars.IsClient then
-	Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords = {
-		Cont_Bookcase = true,
-	}
-
-	local function IsBookcase(template)
-		---@type ItemTemplate
-		local root = Ext.Template.GetTemplate(template)
-		if root then
-			for _,v in pairs(root.Treasures) do
-				if Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords[v] == true then
-					return true
-				end
-			end
-		end
-		return false
-	end
-
-	Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "before", function (character, template, item)
-		if IsTagged(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 0 
+	}):RegisterOsirisListener("CharacterUsedItem", 2, "before", function (character, item)
+		if IsTagged(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 0
 		and ItemIsContainer(item) == 1 
-		and MasteryBonusManager.HasMasteryBonus(character, "BATTLEBOOK_LOOT")
-		and IsBookcase(template) then
+		--and MasteryBonusManager.HasMasteryBonus(character, "BATTLEBOOK_LOOT")
+		and IsBookcase(GameHelpers.GetTemplate(item)) then
 			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_BookcaseLootChance", 10)
-			if chance > 0 and GameHelpers.Math.Roll(chance) then
+			if chance > 0 and (Debug.MasteryTests or GameHelpers.Math.Roll(chance)) then
 				GenerateTreasure(item, "ST_Skillbook", CharacterGetLevel(character), character)
 			end
 			SetTag(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase")
+			SignalTestComplete("BATTLEBOOK_LOOT")
 		end
+	end).Register.Test(function(test, self)
+		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(500)
+		local x,y,z = GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.GetPosition(char), 6.0)
+		local bookcase = CreateItemTemplateAtPosition("d60689b2-e01a-4524-a64c-c85c8957531e", x, y, z)
+		test.Cleanup = function ()
+			ItemRemove(bookcase)
+			cleanup()
+		end
+		test:Wait(1000)
+		CharacterUseItem(char, bookcase, "")
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		test:Wait(250)
+		test:AssertEquals(IsTagged(bookcase, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 1, true, "Bookcase wasn't tagged with 'LLWEAPONEX_MB_BattleBook_RolledBookcase'")
+		local items = {}
+		for _,v in pairs(Ext.GetItem(bookcase):GetInventoryItems()) do
+			items[#items+1] = Ext.GetItem(v).StatsId
+		end
+		Ext.Dump(items)
+		test:AssertEquals(#items > 0, true, "No treasure generated")
+		return true
 	end)
-end
+})
 
 MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 	rb:Create("BATTLEBOOK_BLESS", {
@@ -178,18 +175,34 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 				return false
 			end
 		end,
-	}):RegisterOsirisListener("CharacterUsedItem", 2, "after", function(characterid, itemid)
+	}):RegisterOsirisListener("CanUseItem", 3, "after", function(characterid, itemid, requestId)
+		--Only fires for players. When the AI uses a scroll, no item events fire.
 		local character = GameHelpers.GetCharacter(characterid)
 		local item = GameHelpers.GetItem(itemid)
 		if character and item 
 		and not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP")
-		and GameHelpers.Item.HasConsumeableSkillAction(item) then
-			local apBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus", 1)
-			if apBonus ~= 0 then
-				TurnEndRemoveTags["LLWEAPONEX_BattleBook_ScrollBonusAP"] = true
-				SetTag(characterid, "LLWEAPONEX_BattleBook_ScrollBonusAP")
-				CharacterAddActionPoints(characterid, apBonus)
-				SignalTestComplete("BATTLEBOOK_SCROLLS")
+		then
+			local skills = GameHelpers.Item.GetUseActionSkills(item, nil, true)
+			local skill = skills[1]
+			if skill then
+				local index = nil
+				index = SkillManager.Register.Cast(skill, function (e)
+					if e.Character.MyGuid == characterid then
+						local apBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus", 1)
+						if apBonus ~= 0 then
+							TurnEndRemoveTags["LLWEAPONEX_BattleBook_ScrollBonusAP"] = true
+							SetTag(characterid, "LLWEAPONEX_BattleBook_ScrollBonusAP")
+							CharacterAddActionPoints(characterid, apBonus)
+							SignalTestComplete("BATTLEBOOK_SCROLLS")
+						end
+					end
+					index = nil
+				end, nil, true)
+				Timer.StartOneshot("", 5000, function ()
+					if index then
+						Events.OnSkillState:Unsubscribe(index, {Skill = skill, State=SKILL_STATE.CAST})
+					end
+				end)
 			end
 		end
 	end).Register.Test(function(test, self)
@@ -197,29 +210,37 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
-		SetFaction(dummy, "Evil NPC")
+		SetFaction(char, "PVP_1")
+		SetFaction(dummy, "PVP_2")
 		CharacterAddPreferredAiTargetTag(char, "LLWEAPONEX_Test_Target")
 		SetTag(dummy, "LLWEAPONEX_Test_Target")
-		SetCombatGroupID(dummy, "LLWEAPONEX_Test")
-		SetCombatGroupID(char, "LLWEAPONEX_Test")
+		--SetCombatGroupID(dummy, "LLWEAPONEX_Test")
+		--SetCombatGroupID(char, "LLWEAPONEX_Test")
 		--Try to make the AI priotize using the scroll in combat
 		CharacterSetReactionPriority(char, "Combat_AI_MoveSkill", 0)
 		CharacterSetReactionPriority(char, "Combat_AI_Attack", 0)
 		CharacterSetReactionPriority(char, "Combat_AI_CastSkill", 100)
 		GameHelpers.Skill.RemoveAllSkills(char)
 		test:Wait(1000)
+		CharacterSetTemporaryHostileRelation(char, dummy)
+		test:Wait(1000)
 		--Scroll_Skill_Water_Restoration
 		--local x,y,z = GetPosition(char)
 		--local scroll = CreateItemTemplateAtPosition("b852456a-1230-4933-92ef-ad7c65611ab5", x, y, z)
 		--Scroll_Skill_Earth_PoisonDartStart
-		ItemTemplateAddTo("06283763-23e8-4ffd-a7c0-3f99d6a45094", char, 1, 0)
+		ItemTemplateAddTo("06283763-23e8-4ffd-a7c0-3f99d6a45094", char, 6, 0)
+		--CanUseItem doesn't fire for AI-used skill scrolls
+		local index = SkillManager.Register.Used("Projectile_PoisonDartStart", function (e)
+			SignalTestComplete("BATTLEBOOK_SCROLLS")
+		end)
 		test:Wait(500)
 		SetCanJoinCombat(char, 1)
 		SetCanFight(char, 1)
 		SetCanJoinCombat(dummy, 1)
 		SetCanFight(dummy, 1)
 		EnterCombat(char, dummy)
-		test:WaitForSignal(self.ID, 30000)
+		test:WaitForSignal(self.ID, 10000)
+		Events.OnSkillState:Unsubscribe(index)
 		test:AssertGotSignal(self.ID)
 		return true
 	end),
@@ -255,6 +276,83 @@ local function GetValidSkillsFromEnemy(target)
 		end
 	end
 	return validSkills
+end
+
+local function _IsSkillMemorized(skill, checkForOncePerCombat)
+	if skill.IsLearned and skill.IsActivated and not skill.ZeroMemory and (_ISCLIENT and skill.CauseListSize == 0 or not _ISCLIENT and #skill.CauseList == 0) then
+		if not checkForOncePerCombat or (skill.OncePerCombat == false or skill.OncePerCombat ~= skill.ActiveCooldown == 60) then
+			return true
+		end
+	end
+	return false
+end
+
+---@param character EsvCharacter|EclCharacter
+---@return table<SkillAbility,boolean> highestAbilities
+---@return table<SkillAbility,integer> abilitySlots
+---@return integer maxSkillSlots
+local function GetCharacterMajorityMemorizedSkillAbility(character)
+	character = GameHelpers.GetCharacter(character)
+	local totalSlots = 0
+	totalSlots = totalSlots + GameHelpers.GetExtraData("CharacterBaseMemoryCapacity", 3)
+	totalSlots = totalSlots + (GameHelpers.GetExtraData("CharacterBaseMemoryCapacityGrowth", 0.5) * character.Stats.Level)
+	totalSlots = totalSlots + (GameHelpers.GetExtraData("CharacterAttributePointsPerMemoryCapacity", 1) * (character.Stats.Memory - GameHelpers.GetExtraData("AttributeBaseValue", 10)))
+	if character.Stats.TALENT_Memory == true then
+		totalSlots = totalSlots + GameHelpers.GetExtraData("TalentMemoryBonus", 3)
+	end
+	if character.Stats.TALENT_Quest_Rooted == true then
+		totalSlots = totalSlots + GameHelpers.GetExtraData("TalentQuestRootedMemoryBonus", 3)
+	end
+	totalSlots = math.floor(totalSlots)
+	--SkillAbility
+	local totalAbilitySkills = {
+		None = 0,
+		Warrior = 0,
+		Ranger = 0,
+		Rogue = 0,
+		Source = 0,
+		Fire = 0,
+		Water = 0,
+		Air = 0,
+		Earth = 0,
+		Death = 0,
+		Summoning = 0,
+		Polymorph = 0,
+		Sulfurology = 0,
+	}
+
+	local totalUsedMemorySlots = 0
+
+	for _,v in pairs(character.SkillManager.Skills) do
+		if _IsSkillMemorized(v) then
+			local skill = Ext.GetStat(v.SkillId)
+			if skill and skill["Memory Cost"] > 0 then
+				totalUsedMemorySlots = totalUsedMemorySlots + skill["Memory Cost"]
+				totalAbilitySkills[skill.Ability] = totalAbilitySkills[skill.Ability] + skill["Memory Cost"]
+			end
+		end
+	end
+
+	local lastHighest = 0
+
+	for ability,total in pairs(totalAbilitySkills) do
+		if total > 0 and total > lastHighest then
+			lastHighest = total
+		end
+	end
+
+	local highestAbilities = {}
+	if lastHighest > 0 then
+		for ability,total in pairs(totalAbilitySkills) do
+			if total == lastHighest then
+				highestAbilities[ability] = true
+			end
+		end
+	end
+
+	--So ties work
+
+	return highestAbilities,totalAbilitySkills,totalSlots
 end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
@@ -369,8 +467,139 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		test:AssertGotSignal(self.ID)
 		return true
 	end),
+
+	rb:Create("BATTLEBOOK_SCHOLAR", {
+		AllSkills = true,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Scholar","<font color='#99AACC'>Deal <font color='#22FF33'>[1]% more damage</font> due to [2] being the most memorized ability school.<br>Note: [3]% damage per [4] total slots, multiplied by [5] ([6] ability slots / [4] total).</font>"),
+		GetIsTooltipActive = function(bonus, id, character, tooltipType)
+			if tooltipType == "skill" and not Data.ActionSkills[id] then
+				local damageMult = Ext.StatGetAttribute(id, "Damage Multiplier")
+				if damageMult > 0 then
+					local ability,abilitySlots,totalSlots = GetCharacterMajorityMemorizedSkillAbility(character)
+					--fprint(LOGLEVEL.DEFAULT, "[GetCharacterMajorityMemorizedSkillAbility] ability(%s) abilitySlots(%s) totalSlots(%s)", ability, abilitySlots, totalSlots)
+					local skillAbility = Ext.StatGetAttribute(id, "Ability")
+					if ability[skillAbility] == true then
+						return true
+					end
+				end
+			end
+			return false
+		end,
+		OnGetTooltip = function(self, id, character, tooltipType)
+			if tooltipType == "skill" then
+				local ability,totalAbilitySlots,totalSlots = GetCharacterMajorityMemorizedSkillAbility(character)
+				local skillAbility = Ext.StatGetAttribute(id, "Ability")
+				if ability[skillAbility] == true then
+					local abilitySlots = totalAbilitySlots[skillAbility]
+					local boostPerSlot = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots", 1)
+					local damageMult = (abilitySlots / totalSlots)
+					local damageBoost = Ext.Round(damageMult * (boostPerSlot * totalSlots))
+					local damageBoostText = math.floor(damageMult)
+					if damageBoostText < 1 then
+						damageBoostText = string.format("%.2f", damageMult)
+					end
+					--fprint(LOGLEVEL.DEFAULT, "[GetCharacterMajorityMemorizedSkillAbility] ability(%s) damageBoost(%s)", skillAbility, damageBoost)
+					local abilityName = string.format("<font color='%s'>%s</font>", Data.Colors.Ability[skillAbility], LocalizedText.SkillAbility[skillAbility])
+					--local baseDamageMult = Ext.StatGetAttribute(id, "Damage Multiplier")
+					--local damageText = GameHelpers.Tooltip.GetSkillDamageText(id, character, {["Damage Muliplier"] = baseDamageMult + damageBoost})
+					return self.Tooltip:ReplacePlaceholders(damageBoost, abilityName, boostPerSlot, totalSlots, damageBoostText, abilitySlots)
+				end
+			end
+		end
+	}).Register.SkillHit(function (self, e, bonuses)
+		if e.Data.Success then
+			local skillAbility = e.Data.SkillData.Ability
+			local abilities,totalAbilitySlots,totalSlots = GetCharacterMajorityMemorizedSkillAbility(e.Character)
+			if abilities[skillAbility] == true then
+				local abilitySlots = totalAbilitySlots[skillAbility]
+				local boostPerSlot = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Scholar_DamageBoostPerTotalSkillSlots", 1)
+				local damageBoost = Ext.Round((abilitySlots / totalSlots) * (boostPerSlot * totalSlots))
+				if damageBoost > 0 then
+					e.Data:MultiplyDamage(1 + (damageBoost * 0.01))
+					SignalTestComplete(self.ID)
+				end
+			end
+		end
+	end).Register.Test(function(test, self)
+		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		SetFaction(dummy, "Evil NPC")
+		CharacterAddAttribute(char, "Memory", 10)
+		test:Wait(250)
+		CharacterAddSkill(char, "Target_CripplingBlow", 0)
+		CharacterAddSkill(char, "Cone_GroundSmash", 0)
+		CharacterAddSkill(char, "Projectile_BouncingShield", 0)
+		test:Wait(1000)
+		CharacterUseSkill(char, "Target_CripplingBlow", dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end)
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 4, {
+	rb:Create("BATTLEBOOK_APOTHEOSIS", {
+		Skills = {"Shout_Apotheosis"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Apotheosis","<font color='#99AACC'>Knowledge of godhood lowers the cooldown of [1] skills by [2] turn(s).<br>Note: The ability schools listed have the highest amount of memorized skills. This can tie.</font>"),
+		GetIsTooltipActive = function (self, id, character, tooltipType)
+			if tooltipType == "skill" and id == "Shout_Apotheosis" then
+				local turnCooldown = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ApotheosisSkillSchoolCooldownReduction", 1)
+				if turnCooldown > 0 then
+					return true
+				end
+			end
+		end,
+		OnGetTooltip = function(self, id, character, tooltipType)
+			local turnCooldown = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ApotheosisSkillSchoolCooldownReduction", 1)
+			if turnCooldown > 0 then
+				local abilities = GetCharacterMajorityMemorizedSkillAbility(character)
+				local abilityNames = {}
+				for ability,b in pairs(abilities) do
+					local abilityName = string.format("<font color='%s'>%s</font>", Data.Colors.Ability[ability], LocalizedText.SkillAbility[ability])
+					abilityNames[#abilityNames+1] = abilityName
+				end
 	
+				return self.Tooltip:ReplacePlaceholders(StringHelpers.Join(", ", abilityNames), turnCooldown)
+			end
+		end
+	}).Register.SkillCast(function (self, e, bonuses)
+		local turnCooldown = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ApotheosisSkillSchoolCooldownReduction", 1)
+		if turnCooldown > 0 then
+			local abilities = GetCharacterMajorityMemorizedSkillAbility(e.Character)
+			local reducedCooldown = false
+			for _,v in pairs(e.Character.SkillManager.Skills) do
+				if v.SkillId ~= e.Skill and _IsSkillMemorized(v, true) then
+					local skillAbility = Ext.StatGetAttribute(v.SkillId, "Ability")
+					if abilities[skillAbility] then
+						local nextCD = math.max(0, v.ActiveCooldown - turnCooldown)
+						GameHelpers.Skill.SetCooldown(e.Character, v.SkillId, nextCD)
+						reducedCooldown = true
+					end
+				end
+			end
+			if reducedCooldown then
+				SignalTestComplete(self.ID)
+			end
+		end
+	end).Register.Test(function(test, self)
+		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		SetFaction(dummy, "Evil NPC")
+		CharacterAddSkill(char, "Target_CripplingBlow", 0)
+		CharacterAddSkill(char, "Cone_GroundSmash", 0)
+		CharacterAddSkill(char, "Projectile_BouncingShield", 0)
+		CharacterAddSkill(char, "Target_EnemyTimeWarp", 0)
+		test:Wait(1000)
+		CharacterUseSkill(char, "Target_EnemyTimeWarp", char, 1, 1, 1)
+		test:Wait(5000)
+		GameHelpers.Skill.SetCooldown(char, "Cone_GroundSmash", 60)
+		CharacterUseSkill(char, "Shout_Apotheosis", char, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end)
 })

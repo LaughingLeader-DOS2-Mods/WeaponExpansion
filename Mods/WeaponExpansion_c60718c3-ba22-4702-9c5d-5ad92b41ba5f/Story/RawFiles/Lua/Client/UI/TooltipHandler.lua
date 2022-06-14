@@ -204,7 +204,7 @@ TooltipParams.SpecialParamFunctions = {
 	LLWEAPONEX_MasteryBonus_FleshSacrifice_Damage = function(param, statCharacter)
 		local potion = Ext.GetStat("Stats_Flesh_Sacrifice")
 		if potion then
-			if potion.Constitution < 0 then
+			if tonumber(potion.Constitution) < 0 then
 				--TODO Get actual negative Con from penalty precise qualifier, then translate that into actual vitality
 				return "??? piercing damage"
 			end

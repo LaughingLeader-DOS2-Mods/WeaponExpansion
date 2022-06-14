@@ -53,11 +53,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 })
 
 local _skillToTooltip = {
-	ProjectileStrike_HailStrike = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Water", ""),
-	Projectile_FlamingDaggers = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Fire", ""),
-	Projectile_LightningBolt = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Air", ""),
-	Projectile_PoisonDartStart = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Poison", ""),
-	Projectile_PyroclasticRock = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Earth", "")
+	ProjectileStrike_HailStrike = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Water", "[Placeholder]"),
+	Projectile_FlamingDaggers = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Fire", "[Placeholder]"),
+	Projectile_LightningBolt = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Air", "[Placeholder]"),
+	Projectile_PoisonDartStart = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Poison", "[Placeholder]"),
+	Projectile_PyroclasticRock = ts:CreateFromKey("LLWEAPONEX_MB_Wand_SurfaceBoost_Earth", "[Placeholder]")
 }
 
 _skillToTooltip.ProjectileStrike_EnemyHailStrike = _skillToTooltip.ProjectileStrike_HailStrike
@@ -218,7 +218,11 @@ if not Ext.IsClient() then
 
 	surfaceBonus:RegisterSkillListener(
 	---@param data ProjectileHitData
-	function(bonuses, skill, char, state, data)
+	function(bonuses, skill, character, state, data)
+		local char = GameHelpers.GetUUID(character)
+		if not char then
+			return
+		end
 		if _JustRanWandSurfaceBonus[char] ~= true then
 			if state == SKILL_STATE.BEFORESHOOT then
 				local pos = data.EndPosition

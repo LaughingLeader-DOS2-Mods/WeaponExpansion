@@ -45,7 +45,7 @@ else
 			for i=0,#arr-1 do
 				local element = arr[i]
 				if element then
-					fprint(LOGLEVEL.WARNING, "[%s] = id(%s) actionID(%s) text(%s)", i, element.id, element.actionID, element.text)
+					--fprint(LOGLEVEL.WARNING, "[%s] = id(%s) actionID(%s) text(%s)", i, element.id, element.actionID, element.text)
 					if element.id == PICKPOCKET_ID and element.actionID == PICKPOCKET_ACTION_ID then
 						--element.actionID = FORCE_PICKPOCKET_ID
 						element.id = FORCE_PICKPOCKET_ID

@@ -99,10 +99,10 @@ end
 local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 	local bonuses = {}
 	local source = GameHelpers.TryGetObject(source)
+	local sourceGUID = source and source.MyGuid or nil
 	local target = GameHelpers.TryGetObject(target)
-	local targetGUID = GameHelpers.GetUUID(target, true)
-	local sourceGUID = GameHelpers.GetUUID(source, true)
-	if (checkBonusOn ~= "Target") and sourceGUID ~= StringHelpers.NULL_UUID and GameHelpers.Ext.ObjectIsCharacter(source) then
+	local targetGUID = target and target.MyGuid or nil
+	if (checkBonusOn ~= "Target") and sourceGUID and GameHelpers.Ext.ObjectIsCharacter(source) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, extraParam)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}
@@ -110,10 +110,8 @@ local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 			bonuses[bonus][sourceGUID] = true
 		end
 	end
-	if targetGUID ~= StringHelpers.NULL_UUID
-	and (checkBonusOn ~= "Source" or StringHelpers.IsNullOrEmpty(sourceGUID))
-	and GameHelpers.Ext.ObjectIsCharacter(target)
-	then
+	if targetGUID and (checkBonusOn ~= "Source" or StringHelpers.IsNullOrEmpty(sourceGUID))
+	and GameHelpers.Ext.ObjectIsCharacter(target) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(target, extraParam)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}
@@ -121,13 +119,13 @@ local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 			bonuses[bonus][targetGUID] = true
 		end
 	end
-	bonuses.HasBonus = function(id, target)
-		if not target then
+	bonuses.HasBonus = function(id, t)
+		if not t then
 			return bonuses[id] ~= nil
 		else
 			local targets = bonuses[id]
 			if targets then
-				return target[GameHelpers.GetUUID(target)] == true
+				return targets[GameHelpers.GetUUID(t)] == true
 			end
 		end
 		return false
@@ -187,10 +185,16 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 	else
 		SkillManager.Register.All(skill, function(e)
 			local target = nil
-			if e.State == SKILL_STATE.HIT or e.State == SKILL_STATE.PROJECTILEHIT or e.State == SKILL_STATE.BEFORESHOOT then
-				target = e.Data.Target
+			if e.State == SKILL_STATE.HIT then
+				if not StringHelpers.IsNullOrEmpty(e.Data.Target) then
+					target = e.Data.Target
+				end
+			elseif e.State == SKILL_STATE.PROJECTILEHIT or e.State == SKILL_STATE.BEFORESHOOT then
+				if e.Data.Target then
+					target = Ext.GetGameObject(e.Data.Target) or nil
+				end
 			elseif e.State == SKILL_STATE.SHOOTPROJECTILE then
-				if e.Data.TargetObjectHandle then
+				if e.Data.TargetObjectHandle and e.Data.TargetObjectHandle ~= Ext.Entity.NullHandle() then
 					local obj = Ext.GetGameObject(e.Data.TargetObjectHandle)
 					if obj then
 						target = obj

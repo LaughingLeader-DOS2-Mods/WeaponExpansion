@@ -13,7 +13,7 @@ local isClient = Ext.IsClient()
 ---@field DisableStatusTooltip boolean
 ---@field NamePrefix TranslatedString|string
 ---@field GetIsTooltipActive MasteryBonusDataGetIsTooltipActiveCallback Custom callback to determine if a bonus is "active" when a tooltip occurs.
----@field OnGetTooltip fun(self:MasteryBonusData, skillOrStatus:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID):string|TranslatedString Custom callback to determine tooltip text dynamically.
+---@field OnGetTooltip fun(self:MasteryBonusData, id:string, character:EclCharacter, tooltipType:MasteryBonusDataTooltipID, extraParam:EclStatus|EclItem|any):string|TranslatedString Custom callback to determine tooltip text dynamically.
 
 ---@alias MasteryBonusDataTooltipID string|'"skill"'|'"status"'|'"item"'
 ---@alias MasteryBonusCallbackBonuses MasteryActiveBonusesTable|MasteryActiveBonuses
@@ -148,7 +148,11 @@ end
 function _INTERNALREG.SkillHit(self, callback, checkBonusOn)
 	if not isClient then
 		local wrapper = function (...) callback(self, ...) end
-		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.HIT, self.Skills, self.ID, wrapper, checkBonusOn)
+		if self.AllSkills then
+			MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.HIT, "All", self.ID, wrapper, checkBonusOn)
+		else
+			MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.HIT, self.Skills, self.ID, wrapper, checkBonusOn)
+		end
 	end
 	return self
 end

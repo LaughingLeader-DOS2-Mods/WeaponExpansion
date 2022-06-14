@@ -11,13 +11,13 @@ Banner	2	Rallying Cry	Affected allies will basic attack the nearest enemy within
 Banner	2	Guardian Angel	If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.	√	√
 Banner	3	Whirlwind	If near an active banner, enemies hit are drawn in closer to to the banner.	√	√
 Banner	4	Overpower	Damage is increased by 25% per ally within 3m.	√	❌
-Battle Book	1	Basic Attack	Basic attacks and weapon skills have a 25% chance to give the target a Concussion, lowering Wits with a small chance to Fumble basic attacks.	√	❌
-Battle Book	1	First Aid	Rested's duration is increased by 1 turn, and First Aid heals an additional 20% health.	√	❌
+Battle Book	1	Basic Attack	Basic attacks and weapon skills have a 25% chance to give the target a Concussion, lowering Wits with a small chance to Fumble basic attacks.	√	√
+Battle Book	1	First Aid	Rested's duration is increased by 1 turn, and First Aid heals an additional 20% health.	√	√
 Battle Book	2	Bless	Your deep knowledge of sacred texts allow you to use Bless to deal damage to Undead.	√	❌
 Battle Book	2	Scroll	When using any scroll, gain 1 AP. Can only happen once per combat.	√	❌
 Battle Book	3	Challenge	You additionally challenge your target's book smarts. Upon winning, gain a random spellbook transcribed from the opponent's known skills.	√	❌
 Battle Book	3	Curse	Cursing a target deals shadow damage to non-Undead, non-Voidwoken targets.	√	❌
-Battle Book	4	Placeholder	Placeholder	❌	❌
+Battle Book	4	Apotheosis	Reduce active cooldowns of the most memorized ability school(s) by 1 turn. For instance, if a majority of skills memorized are Necromancy skills, any Necromancy skill on cooldown would be lowered by 1 turn.	√	√
 Bludgeon	1	Battering Ram/Bull Rush	25% to apply Dizzy for 1 turn.	√	❌
 Bludgeon	2	Crippling Blow	Apply Sundered, reducing max physical/magic armor by 25%.	√	❌
 Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts the ground, dealing damage to enemies in a 3m radius.	√	❌
