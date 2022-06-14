@@ -168,41 +168,35 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		---@param skillOrStatus string
 		---@param character EclCharacter
 		---@param tooltipType MasteryBonusDataTooltipID
-		---@param data EsvStatus|StatEntrySkillData
-		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, data)
-			--Kind of a hack where the ItemTooltip code will send this function the value "scroll" to tell it to display the bonus text
-			if skillOrStatus ~= "scroll" or not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
-				return false
+		GetIsTooltipActive = function (self, skillOrStatus, character, tooltipType, item)
+			if tooltipType == "item" then
+				local statsId = GameHelpers.Item.GetItemStat(item)
+				if statsId and Ext.StatGetAttribute(statsId, "UseAPCost") > 0 then
+					if StringHelpers.Contains({statsId, item.RootTemplate.Name}, "scroll", true) or GameHelpers.Stats.HasParent(statsId, "_Scrolls") then
+						return true
+					end
+				end
 			end
+			return false
 		end,
-	}):RegisterOsirisListener("CanUseItem", 3, "after", function(characterid, itemid, requestId)
-		--Only fires for players. When the AI uses a scroll, no item events fire.
-		local character = GameHelpers.GetCharacter(characterid)
-		local item = GameHelpers.GetItem(itemid)
-		if character and item 
-		and not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP")
-		then
-			local skills = GameHelpers.Item.GetUseActionSkills(item, nil, true)
-			local skill = skills[1]
-			if skill then
-				local index = nil
-				index = SkillManager.Register.Cast(skill, function (e)
-					if e.Character.MyGuid == characterid then
-						local apBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus", 1)
-						if apBonus ~= 0 then
-							TurnEndRemoveTags["LLWEAPONEX_BattleBook_ScrollBonusAP"] = true
-							SetTag(characterid, "LLWEAPONEX_BattleBook_ScrollBonusAP")
-							CharacterAddActionPoints(characterid, apBonus)
-							SignalTestComplete("BATTLEBOOK_SCROLLS")
-						end
-					end
-					index = nil
-				end, nil, true)
-				Timer.StartOneshot("", 5000, function ()
-					if index then
-						Events.OnSkillState:Unsubscribe(index, {Skill = skill, State=SKILL_STATE.CAST})
-					end
-				end)
+		OnGetTooltip = function(self, id, character, tooltipType)
+			if character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
+				return GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
+			else
+				return self.Tooltip
+			end
+		end
+	}).Register.SkillCast(function (self, e, bonuses)
+		if not e.Character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") and e.SourceItem then
+			local statsId = GameHelpers.Item.GetItemStat(e.SourceItem)
+			local apBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus", 1)
+			print(statsId, apBonus)
+			if apBonus ~= 0 and StringHelpers.Contains({statsId, e.SourceItem.RootTemplate.Name}, "scroll", true) or GameHelpers.Stats.HasParent(statsId, "_Scrolls") then
+				CharacterAddActionPoints(e.Character.MyGuid, apBonus)
+				if GameHelpers.Character.IsInCombat(e.Character) then
+					SetTag(e.Character.MyGuid, "LLWEAPONEX_BattleBook_ScrollBonusAP")
+				end
+				SignalTestComplete("BATTLEBOOK_SCROLLS")
 			end
 		end
 	end).Register.Test(function(test, self)
@@ -214,8 +208,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		SetFaction(dummy, "PVP_2")
 		CharacterAddPreferredAiTargetTag(char, "LLWEAPONEX_Test_Target")
 		SetTag(dummy, "LLWEAPONEX_Test_Target")
-		--SetCombatGroupID(dummy, "LLWEAPONEX_Test")
-		--SetCombatGroupID(char, "LLWEAPONEX_Test")
 		--Try to make the AI priotize using the scroll in combat
 		CharacterSetReactionPriority(char, "Combat_AI_MoveSkill", 0)
 		CharacterSetReactionPriority(char, "Combat_AI_Attack", 0)
@@ -224,15 +216,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		test:Wait(1000)
 		CharacterSetTemporaryHostileRelation(char, dummy)
 		test:Wait(1000)
-		--Scroll_Skill_Water_Restoration
-		--local x,y,z = GetPosition(char)
-		--local scroll = CreateItemTemplateAtPosition("b852456a-1230-4933-92ef-ad7c65611ab5", x, y, z)
-		--Scroll_Skill_Earth_PoisonDartStart
 		ItemTemplateAddTo("06283763-23e8-4ffd-a7c0-3f99d6a45094", char, 6, 0)
-		--CanUseItem doesn't fire for AI-used skill scrolls
-		local index = SkillManager.Register.Used("Projectile_PoisonDartStart", function (e)
-			SignalTestComplete("BATTLEBOOK_SCROLLS")
-		end)
 		test:Wait(500)
 		SetCanJoinCombat(char, 1)
 		SetCanFight(char, 1)
@@ -240,7 +224,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		SetCanFight(dummy, 1)
 		EnterCombat(char, dummy)
 		test:WaitForSignal(self.ID, 10000)
-		Events.OnSkillState:Unsubscribe(index)
 		test:AssertGotSignal(self.ID)
 		return true
 	end),
@@ -438,6 +421,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		CharacterUseSkill(char1, "Target_EnemyChallenge", char2, 1, 1, 1)
 		test:WaitForSignal("BATTLEBOOK_CHALLENGE_Active", 30000)
 		test:AssertGotSignal("BATTLEBOOK_CHALLENGE_Active")
+		test:Wait(1000)
 		CharacterDieImmediate(char2, 0, "Physical", char1)
 		test:WaitForSignal("BATTLEBOOK_CHALLENGE_Reward", 30000)
 		test:AssertGotSignal("BATTLEBOOK_CHALLENGE_Reward")

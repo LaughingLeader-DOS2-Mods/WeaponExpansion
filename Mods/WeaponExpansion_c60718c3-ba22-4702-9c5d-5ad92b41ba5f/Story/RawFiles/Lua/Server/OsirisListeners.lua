@@ -223,6 +223,7 @@ end)
 
 TurnEndRemoveTags = {
 	LLWEAPONEX_EnemyDiedInCombat = true,
+	LLWEAPONEX_BattleBook_ScrollBonusAP = true,
 }
 
 local function RemoveTagsOnTurnEnd(uuid)

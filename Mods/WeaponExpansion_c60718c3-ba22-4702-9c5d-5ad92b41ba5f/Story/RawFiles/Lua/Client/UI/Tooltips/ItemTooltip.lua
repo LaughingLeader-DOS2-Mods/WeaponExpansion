@@ -482,35 +482,6 @@ local function OnItemTooltip(item, tooltip)
 				end
 				topDesc.Label = topDesc.Label .. bonusText
 			end
-			if (string.find(statsId, "SCROLL") or _TAGS.SCROLL) then
-				local apCost = Ext.StatGetAttribute(statsId, "UseAPCost")
-				if apCost > 0 and Mastery.HasMasteryRequirement(character, "LLWEAPONEX_BattleBook_Mastery2") then
-					if not character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") then
-						local bonus = MasteryBonusManager.GetRankBonus(MasteryID.BattleBook, 2, "BATTLEBOOK_SCROLLS")
-						if bonus then
-							--Kind of a hack. "scroll" isn't a skill, but the bonus GetIsTooltipActive function will look for it, and is set to display for AllSkills.
-							local text = GameHelpers.Tooltip.ReplacePlaceholders(bonus:GetTooltipText(character, "scroll", "item", item), character)
-							if text then
-								local rankName = GameHelpers.GetStringKeyText("LLWEAPONEX_BattleBook_Mastery2", "")
-								if not StringHelpers.IsNullOrWhitespace(rankName) then
-									text = rankName .. "<br>" .. text
-								end
-								local element = tooltip:GetElement("SkillDescription", {
-									Type = "SkillDescription",
-									Label = ""
-								})
-								if not StringHelpers.IsNullOrWhitespace(element.Label) then
-									element.Label = element.Label .. "<br>"
-								end
-								element.Label = element.Label .. text
-							end
-						end
-					else
-						local text = GameHelpers.GetStringKeyText("LLWEAPONEX_MB_BattleBook_Scrolls_Disabled", "<font color='#FF2222'>Bonus AP already gained this turn.</font>")
-						tooltip:AppendElement({Type="ExtraProperties", Label = GameHelpers.Tooltip.ReplacePlaceholders(text, character)})
-					end
-				end
-			end
 		end
 	end
 
