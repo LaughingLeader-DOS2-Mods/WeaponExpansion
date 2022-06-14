@@ -170,6 +170,38 @@ local function HasMatchedBonuses(bonuses, matchBonuses)
 	return false
 end
 
+---@param e EsvLuaProjectileHitEventParams
+Ext.Events.ProjectileHit:Subscribe(function (e)
+	if Ext.Utils.IsValidHandle(e.Projectile.Target) then
+		local target = Ext.GetGameObject(e.Projectile.Target)
+	end
+end)
+
+---@param state SKILL_STATE
+---@param data any
+---@return EsvCharacter|EsvItem|nil
+local function _GetSkillTarget(state, data)
+	if state == SKILL_STATE.HIT then
+		if not StringHelpers.IsNullOrEmpty(data.Target) then
+			return data.TargetObject
+		end
+	elseif state == SKILL_STATE.PROJECTILEHIT or state == SKILL_STATE.BEFORESHOOT then
+		if Ext.Utils.IsValidHandle(data.Target) then
+			return Ext.GetGameObject(data.Target)
+		end
+	elseif state == SKILL_STATE.SHOOTPROJECTILE then
+		if Ext.Utils.IsValidHandle(data.TargetObjectHandle) then
+			return Ext.GetGameObject(data.TargetObjectHandle)
+		end
+	elseif state == SKILL_STATE.USED or state == SKILL_STATE.CAST then
+		--TODO Check all targets?
+		if data.TargetObjects[1] then
+			return Ext.GetGameObject(data.TargetObjects[1])
+		end
+	end
+	return nil
+end
+
 ---@deprecated
 ---@param skill string|string[]
 ---@param matchBonuses string|string[]
@@ -184,28 +216,7 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 		end
 	else
 		SkillManager.Register.All(skill, function(e)
-			local target = nil
-			if e.State == SKILL_STATE.HIT then
-				if not StringHelpers.IsNullOrEmpty(e.Data.Target) then
-					target = e.Data.Target
-				end
-			elseif e.State == SKILL_STATE.PROJECTILEHIT or e.State == SKILL_STATE.BEFORESHOOT then
-				if Ext.Utils.IsValidHandle(e.Data.Target) then
-					target = Ext.GetGameObject(e.Data.Target) or nil
-				end
-			elseif e.State == SKILL_STATE.SHOOTPROJECTILE then
-				if Ext.Utils.IsValidHandle(e.Data.TargetObjectHandle) then
-					local obj = Ext.GetGameObject(e.Data.TargetObjectHandle)
-					if obj then
-						target = obj
-					end
-				end
-			elseif e.State == SKILL_STATE.USED or e.State == SKILL_STATE.CAST then
-				--TODO Check all targets?
-				if e.Data.TargetObjects[1] then
-					target = e.Data.TargetObjects[1]
-				end
-			end
+			local target = _GetSkillTarget(e.State, e.Data)
 			local bonuses = GatherMasteryBonuses(checkBonusOn, e.Character, target, e.Skill)
 			if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 				callback(bonuses, e.Skill, e.Character, e.State, e.Data, e.DataType)
@@ -227,25 +238,32 @@ function MasteryBonusManager.RegisterNewSkillListener(state, skill, matchBonuses
 
 	---@param e OnSkillStateAllEventArgs
 	local wrapperCallback = function(e)
-		local target = nil
-		if state == SKILL_STATE.HIT or state == SKILL_STATE.PROJECTILEHIT or state == SKILL_STATE.BEFORESHOOT then
-			target = e.Data.Target
-		elseif state == SKILL_STATE.SHOOTPROJECTILE then
-			if e.Data.TargetObjectHandle then
-				local obj = Ext.GetGameObject(e.Data.TargetObjectHandle)
-				if obj then
-					target = obj
-				end
-			end
-		elseif state == SKILL_STATE.USED or state == SKILL_STATE.CAST then
-			--TODO Check all targets?
-			if e.Data.TargetObjects[1] then
-				target = e.Data.TargetObjects[1]
-			end
-		end
+		local target = _GetSkillTarget(e.State, e.Data)
 		local bonuses = GatherMasteryBonuses(checkBonusOn, e.Character, target, e.Skill)
 		if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
 			callback(e, bonuses)
+		end
+	end
+	SkillManager.Register.All(skill, wrapperCallback, state, priority, once)
+end
+
+---@param state SKILL_STATE
+---@param skill string|string[]
+---@param bonus MasteryBonusData
+---@param callback fun(bonus:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:MasteryActiveBonusesTable|MasteryActiveBonuses)
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
+---@param once boolean|nil
+function MasteryBonusManager.RegisterBonusSkillListener(state, skill, bonus, callback, checkBonusOn, priority, once)
+	if isClient then return end
+	checkBonusOn = checkBonusOn or "Source"
+
+	---@param e OnSkillStateAllEventArgs
+	local wrapperCallback = function(e)
+		local target = _GetSkillTarget(e.State, e.Data)
+		local bonuses = GatherMasteryBonuses(checkBonusOn, e.Character, target, e.Skill)
+		if checkBonusOn == "None" or HasMatchedBonuses(bonuses, bonus.ID) then
+			callback(bonus, e, bonuses)
 		end
 	end
 	SkillManager.Register.All(skill, wrapperCallback, state, priority, once)

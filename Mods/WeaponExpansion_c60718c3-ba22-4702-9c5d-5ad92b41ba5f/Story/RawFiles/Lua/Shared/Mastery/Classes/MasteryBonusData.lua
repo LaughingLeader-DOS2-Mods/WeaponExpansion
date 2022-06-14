@@ -21,6 +21,7 @@ local isClient = Ext.IsClient()
 ---@alias WeaponExpansionSkillManagerAllStateCallback fun(self:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:MasteryBonusCallbackBonuses)
 ---@alias WeaponExpansionSkillManagerSkillEventCallback fun(self:MasteryBonusData, e:OnSkillStateSkillEventEventArgs, bonuses:MasteryBonusCallbackBonuses)
 ---@alias WeaponExpansionSkillManagerSkillPreparedCallback fun(self:MasteryBonusData, e:OnSkillStatePrepareEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@alias WeaponExpansionSkillManagerSkillCancelCallback fun(self:MasteryBonusData, e:OnSkillStateCancelEventArgs, bonuses:MasteryBonusCallbackBonuses)
 ---@alias WeaponExpansionSkillManagerHitCallback fun(self:MasteryBonusData, e:OnSkillStateHitEventArgs, bonuses:MasteryBonusCallbackBonuses)
 ---@alias WeaponExpansionSkillManagerProjectileHitCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileHitEventArgs, bonuses:MasteryBonusCallbackBonuses)
 ---@alias WeaponExpansionSkillManagerProjectileShootCallback fun(self:MasteryBonusData, e:OnSkillStateProjectileShootEventArgs, bonuses:MasteryBonusCallbackBonuses)
@@ -29,6 +30,8 @@ local isClient = Ext.IsClient()
 ---@class MasteryBonusDataRegistrationFunctions
 ---@field SkillUsed fun(callback:WeaponExpansionSkillManagerSkillEventCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillCast fun(callback:WeaponExpansionSkillManagerSkillEventCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field SkillPrepare fun(callback:WeaponExpansionSkillManagerSkillPreparedCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field SkillCancel fun(callback:WeaponExpansionSkillManagerSkillCancelCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillHit fun(callback:WeaponExpansionSkillManagerHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillProjectileHit fun(callback:WeaponExpansionSkillManagerProjectileHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillProjectileShoot fun(callback:WeaponExpansionSkillManagerProjectileShootCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
@@ -124,9 +127,20 @@ end
 ---@return MasteryBonusData
 function _INTERNALREG.SkillPrepared(self, callback, checkBonusOn)
 	if not isClient then
-		local wrapper = function (...) callback(self, ...) end
 		local skills = self.AllSkills and "All" or self.Skills
-		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.PREPARE, skills, self.ID, wrapper, checkBonusOn)
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.PREPARE, skills, self, callback, checkBonusOn)
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback WeaponExpansionSkillManagerSkillCancelCallback
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@return MasteryBonusData
+function _INTERNALREG.SkillCancel(self, callback, checkBonusOn)
+	if not isClient then
+		local skills = self.AllSkills and "All" or self.Skills
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.CANCEL, skills, self, callback, checkBonusOn)
 	end
 	return self
 end
@@ -137,9 +151,8 @@ end
 ---@return MasteryBonusData
 function _INTERNALREG.SkillUsed(self, callback, checkBonusOn)
 	if not isClient then
-		local wrapper = function (...) callback(self, ...) end
 		local skills = self.AllSkills and "All" or self.Skills
-		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.USED, skills, self.ID, wrapper, checkBonusOn)
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.USED, skills, self, callback, checkBonusOn)
 	end
 	return self
 end
@@ -150,9 +163,8 @@ end
 ---@return MasteryBonusData
 function _INTERNALREG.SkillCast(self, callback, checkBonusOn)
 	if not isClient then
-		local wrapper = function (...) callback(self, ...) end
 		local skills = self.AllSkills and "All" or self.Skills
-		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.CAST, skills, self.ID, wrapper, checkBonusOn)
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.CAST, skills, self, callback, checkBonusOn)
 	end
 	return self
 end
@@ -163,9 +175,8 @@ end
 ---@return MasteryBonusData
 function _INTERNALREG.SkillHit(self, callback, checkBonusOn)
 	if not isClient then
-		local wrapper = function (...) callback(self, ...) end
 		local skills = self.AllSkills and "All" or self.Skills
-		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.HIT, skills, self.ID, wrapper, checkBonusOn)
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.HIT, skills, self, callback, checkBonusOn)
 	end
 	return self
 end
@@ -176,9 +187,8 @@ end
 ---@return MasteryBonusData
 function _INTERNALREG.SkillProjectileHit(self, callback, checkBonusOn)
 	if not isClient then
-		local wrapper = function (...) callback(self, ...) end
 		local skills = self.AllSkills and "All" or self.Skills
-		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.PROJECTILEHIT, skills, self.ID, wrapper, checkBonusOn)
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.PROJECTILEHIT, skills, self, callback, checkBonusOn)
 	end
 	return self
 end
@@ -189,9 +199,8 @@ end
 ---@return MasteryBonusData
 function _INTERNALREG.SkillProjectileShoot(self, callback, checkBonusOn)
 	if not isClient then
-		local wrapper = function (...) callback(self, ...) end
 		local skills = self.AllSkills and "All" or self.Skills
-		MasteryBonusManager.RegisterNewSkillListener(SKILL_STATE.SHOOTPROJECTILE, skills, self.ID, wrapper, checkBonusOn)
+		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.SHOOTPROJECTILE, skills, self, callback, checkBonusOn)
 	end
 	return self
 end
