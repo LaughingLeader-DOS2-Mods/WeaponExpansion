@@ -190,11 +190,11 @@ function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback
 					target = e.Data.Target
 				end
 			elseif e.State == SKILL_STATE.PROJECTILEHIT or e.State == SKILL_STATE.BEFORESHOOT then
-				if e.Data.Target then
+				if Ext.Utils.IsValidHandle(e.Data.Target) then
 					target = Ext.GetGameObject(e.Data.Target) or nil
 				end
 			elseif e.State == SKILL_STATE.SHOOTPROJECTILE then
-				if e.Data.TargetObjectHandle and e.Data.TargetObjectHandle ~= Ext.Entity.NullHandle() then
+				if Ext.Utils.IsValidHandle(e.Data.TargetObjectHandle) then
 					local obj = Ext.GetGameObject(e.Data.TargetObjectHandle)
 					if obj then
 						target = obj
