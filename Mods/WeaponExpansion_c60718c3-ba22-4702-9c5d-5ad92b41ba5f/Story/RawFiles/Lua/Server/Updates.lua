@@ -9,6 +9,25 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		ItemToInventory("927669c3-b885-4b88-a0c2-6825fbf11af2", "80976258-a7a5-4430-b102-ba91a604c23f")
 	end
 
+	local oldDB = Osi.DB_LLWEAPONEX_BattleBooks_ReadBooks:Get(nil,nil)
+	if oldDB then
+		--Moved to PersistentVars
+		for _,db in pairs(Osi.DB_LLWEAPONEX_BattleBooks_ReadBooks:Get(nil,nil)) do
+			local playerGUID,template = table.unpack(db)
+			if playerGUID and template then
+				playerGUID = StringHelpers.GetUUID(playerGUID)
+				template = StringHelpers.GetUUID(template)
+				if GameHelpers.Character.IsPlayer(playerGUID) then
+					if not PersistentVars.ReadBooks[playerGUID] then
+						PersistentVars.ReadBooks[playerGUID] = {}
+					end
+					PersistentVars.ReadBooks[playerGUID][template] = true
+				end
+			end
+		end
+		Osi.DB_LLWEAPONEX_BattleBooks_ReadBooks:Delete(nil,nil)
+	end
+
 	for player in GameHelpers.Character.GetPlayers() do
 		EquipmentManager.CheckWeaponRequirementTags(player)
 		if HasActiveStatus(player.MyGuid, "LLWEAPONEX_UNARMED_LIZARD_DEBUFF") == 1 then

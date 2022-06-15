@@ -46,7 +46,10 @@ local defaultPersistentVars = {
     ---All UUIDs for specific uniques (UUID -> Tag).
     ---@type table<UUID,string>
     Uniques = {},
-    UniqueRequirements = {}
+    UniqueRequirements = {},
+    ---Character UUID to Template -> Bool
+    ---@type table<UUID,table<string, boolean>>
+    ReadBooks = {}
 }
 
 ---@type WeaponExpansionVars

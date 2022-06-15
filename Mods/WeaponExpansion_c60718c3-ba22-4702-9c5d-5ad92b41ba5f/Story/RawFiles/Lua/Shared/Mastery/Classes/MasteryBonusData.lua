@@ -372,7 +372,7 @@ function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, 
 				local params = {...}
 				local hasMasteryBonus = false
 				for i,v in pairs(params) do
-					if type(v) == "string" and string.find(v, "-", 1, true) then
+					if type(v) == "string" and string.find(v, "-", 1, true) and ObjectIsCharacter(v) == 1 then
 						if MasteryBonusManager.HasMasteryBonus(v, self.ID) then
 							hasMasteryBonus = true
 							break

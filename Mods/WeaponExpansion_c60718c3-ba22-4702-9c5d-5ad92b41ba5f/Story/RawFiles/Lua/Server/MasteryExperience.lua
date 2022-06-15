@@ -87,6 +87,21 @@ RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(ene
 	end
 end)
 
+Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "after", function(charGUID, template, item)
+	--Gain Battle Book experience from reading books
+	if GameHelpers.Character.IsPlayer(charGUID) and IsTagged(item, "BOOK") == 1 then
+		charGUID = StringHelpers.GetUUID(charGUID)
+		template = StringHelpers.GetUUID(template)
+		if not PersistentVars.ReadBooks[charGUID] then
+			PersistentVars.ReadBooks[charGUID] = {}
+		end
+		if not PersistentVars.ReadBooks[charGUID][template] then
+			PersistentVars.ReadBooks[charGUID][template] = true
+			AddMasteryExperience(charGUID, "LLWEAPONEX_BattleBook", 0.25, true)
+		end
+	end
+end)
+
 local UnarmedSkills = {
 	"Target_SingleHandedAttack",
 	"Target_LLWEAPONEX_SinglehandedAttack",

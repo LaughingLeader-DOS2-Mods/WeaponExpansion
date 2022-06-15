@@ -170,13 +170,6 @@ local function HasMatchedBonuses(bonuses, matchBonuses)
 	return false
 end
 
----@param e EsvLuaProjectileHitEventParams
-Ext.Events.ProjectileHit:Subscribe(function (e)
-	if Ext.Utils.IsValidHandle(e.Projectile.Target) then
-		local target = Ext.GetGameObject(e.Projectile.Target)
-	end
-end)
-
 ---@param state SKILL_STATE
 ---@param data any
 ---@return EsvCharacter|EsvItem|nil
