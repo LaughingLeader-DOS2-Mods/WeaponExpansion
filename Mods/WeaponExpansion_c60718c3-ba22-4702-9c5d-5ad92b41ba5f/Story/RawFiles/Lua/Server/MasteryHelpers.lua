@@ -216,6 +216,7 @@ function OnMasteryActivated(uuid,mastery)
 			end
 		end
 	end
+	MasterySystem.TagMasteryRanks(uuid, mastery)
 end
 
 --- @param uuid string
@@ -255,4 +256,24 @@ end
 
 function HasMasteryRequirement_QRY(call, uuid, tag)
 	return Mastery.HasMasteryRequirement(Ext.GetCharacter(uuid), tag)
+end
+
+---@param character CharacterParam
+---@param mastery string|nil
+---@param clearTags boolean|nil
+function MasterySystem.TagMasteryRanks(character, mastery, clearTags)
+    character = GameHelpers.GetCharacter(character)
+    if character then
+        if clearTags then
+			ClearAllMasteryRankTags(character.MyGuid)
+		end
+        local masteryData = Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(character.MyGuid, mastery, nil, nil)
+        if masteryData then
+            for _,db in pairs(masteryData) do
+                --_Player, _Mastery, _Level, _Experience
+                local _,mastery,level,exp = table.unpack(db)
+                TagMasteryRanks(character.MyGuid, mastery, level)
+            end
+        end
+    end
 end
