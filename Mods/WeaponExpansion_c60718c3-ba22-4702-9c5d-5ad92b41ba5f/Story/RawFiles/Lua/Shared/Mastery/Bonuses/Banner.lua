@@ -196,7 +196,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 			if sourceCharacter then
 				if not GameHelpers.Character.IsInCombat(sourceCharacter) then
 					--Resurrect after a delay instead, since we're not in combat
-					Timer.StartObjectTimer("LLWEAPONEX_Banner_GuardianAngelResurrect", sourceCharacter, Debug.MasteryTests and 500 or 3000)
+					Timer.StartObjectTimer("LLWEAPONEX_Banner_GuardianAngelResurrect", sourceCharacter, sourceCharacter:HasTag("LLWEAPONEX_MasteryTestCharacter") and 500 or 3000)
 				end
 			end
 		end
@@ -258,8 +258,8 @@ local function CheckLeadershipBonus(char)
 					end
 				end
 	
-				if bonusChance > 0 and (bonusChance >= 100 or Debug.MasteryTests or Ext.Random(1,100) <= bonusChance) then
-					GameHelpers.Status.Apply(char, "LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS", 6.0, false, bonusSource)
+				if bonusChance > 0 and (bonusChance >= 100 or character:HasTag("LLWEAPONEX_MasteryTestCharacter") or GameHelpers.Math.Roll(bonusChance)) then
+					GameHelpers.Status.Apply(character, "LLWEAPONEX_MASTERYBONUS_BANNER_LEADERSHIPBONUS", 6, false, bonusSource)
 					SignalTestComplete("BANNER_LEADERSHIP")
 				end
 			end

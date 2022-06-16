@@ -154,7 +154,7 @@ function MasteryBonusManager.HasMasteryBonus(character, bonus)
 end
 
 local function HasMatchedBonuses(bonuses, matchBonuses)
-	if Debug.MasteryTests or matchBonuses == nil or matchBonuses == "" then
+	if matchBonuses == nil or matchBonuses == "" then
 		return true
 	end
 	local t = type(matchBonuses)
@@ -650,7 +650,7 @@ end
 function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, ...)
 	local textEntries = {}
 	for rankTag,tbl in MasteryBonusManager.GetOrderedMasteryRanks() do
-		if Debug.MasteryTests or Mastery.HasMasteryRequirement(character, rankTag) then
+		if Mastery.HasMasteryRequirement(character, rankTag) then
 			local addedRankName = false
 			for _,v in pairs(tbl) do
 				local text = EvaluateEntryForBonusText(v, character, skillOrStatus, tooltipType, ...)

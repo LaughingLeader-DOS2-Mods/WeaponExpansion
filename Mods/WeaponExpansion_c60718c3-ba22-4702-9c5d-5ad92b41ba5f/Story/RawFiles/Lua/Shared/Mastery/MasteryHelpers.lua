@@ -34,9 +34,6 @@ function Mastery.GetMasteryRank(character, mastery)
 end
 
 local function DebugMasteryActive(character)
-	if Debug.MasteryTests then
-		return true
-	end
 	character = GameHelpers.GetCharacter(character)
 	if not character then
 		return false
@@ -118,9 +115,6 @@ end
 --- @param tag string
 --- @return boolean
 function Mastery.HasMasteryRequirement(character, tag)
-	-- if Debug.MasteryTests then
-	-- 	return true
-	-- end
 	character = GameHelpers.GetCharacter(character)
 	if not character then
 		return false
