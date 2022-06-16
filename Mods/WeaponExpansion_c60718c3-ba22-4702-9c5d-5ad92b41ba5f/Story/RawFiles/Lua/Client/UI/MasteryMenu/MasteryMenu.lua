@@ -68,9 +68,6 @@ function MasteryMenu:SetMastery(mastery)
 end
 
 local function HasMinimumMasteryRankData(tbl,tag,min)
-	if Debug.MasteryTests or Vars.LeaderDebugMode then
-		return true
-	end
 	if tbl == nil then
 		return false
 	end

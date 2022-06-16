@@ -189,9 +189,9 @@ Ext.RegisterConsoleCommand("weaponex_removemastery", function(call, mastery)
     Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(host, mastery)
 end)
 
-if Vars.DebugMode then
+if Ext.IsDeveloperMode() then
     Ext.RegisterConsoleCommand("weaponex_masterall", function(call)
-        local host = GetUUID(CharacterGetHostCharacter())
+        local host = StringHelpers.GetUUID(CharacterGetHostCharacter())
         for mastery,masterData in pairs(Masteries) do
             --local rank = Ext.Random(1,4)
             local rank = 4--Ext.Random(1,4)
@@ -214,7 +214,7 @@ if Vars.DebugMode then
             Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(host,mastery,rank,xp)
             TagMasteryRanks(host, mastery, rank)
         end
-        print(Ext.JsonStringify(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(host, nil, nil, nil)))
+        Ext.Dump(Osi.DB_LLWEAPONEX_WeaponMastery_PlayerData_Experience:Get(host,nil,nil,nil))
     end)
 
     local function Debug_TradeTest(command, effect, bone, target)

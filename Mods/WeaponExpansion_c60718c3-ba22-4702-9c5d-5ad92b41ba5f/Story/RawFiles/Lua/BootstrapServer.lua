@@ -145,6 +145,10 @@ function RegisterItemListener(event, idType, id, callback)
     end
 end
 
+if MasterySystem == nil then
+	MasterySystem = {}
+end
+
 Ext.Require("Server/Data/PresetEntries.lua")
 Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")
@@ -185,9 +189,9 @@ Ext.Require("Server/Origins/OriginsUniqueItems.lua")
 Ext.Require("Shared/Mastery/_Init.lua")
 Ext.Require("Server/Debug/ConsoleCommands.lua")
 Ext.Require("Server/Updates.lua")
--- if Ext.IsDeveloperMode() then
---     Ext.Require("Server/Debug/DebugMain.lua")
--- end
+if Ext.IsDeveloperMode() then
+    Ext.Require("Server/Debug/DebugMain.lua")
+end
 ---@param target EsvCharacter
 ---@param attacker StatCharacter|StatItem
 ---@param hit HitRequest
