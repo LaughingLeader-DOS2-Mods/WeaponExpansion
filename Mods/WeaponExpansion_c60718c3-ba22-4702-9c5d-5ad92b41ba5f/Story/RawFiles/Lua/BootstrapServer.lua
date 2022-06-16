@@ -40,6 +40,9 @@ local defaultPersistentVars = {
         ---Challenger and the target.
         ---@type table<UUID,UUID>
         BattlebookChallenge = {},
+        ---Protected character to the source (Guardian Angel Banner wielder)
+        ---@type table<UUID,UUID>
+        GuardianAngelResurrect = {}
     },
     Timers = {},
     OnDeath = {},

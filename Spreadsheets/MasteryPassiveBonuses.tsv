@@ -6,7 +6,7 @@ Banner	2	Cooperation	Heals received also heal nearby allies in 6m for 50% of the
 Banner	3	Inspiring Leadership	If affected by Leadership, allies have a 30% chance (50% chance if from the Banner user) to become Inspired on their turn.	√	√
 Banner	4	Banner Protection	When near a placed banner, you cannot be flanked. Delaying your turn grants you 50% damage reduction. 	√	√
 Battle Book	1	Book Hunter	When opening a bookcase or stack of books, there is a small chance to find a skillbook.	√	❌
-Battle Book	2	Placeholder	Desc	❌	❌
+Battle Book	2	Scroll	When using any scroll, gain 1 AP. Can only happen once per turn.	√	√
 Battle Book	3	Scholar	Gain a percentage of damage for skills of the most memorized ability school (i.e. if most skills you have memorized are fire skills, fire skills deal bonus damage). Scales with total skill slots, and the highest ability school can be tied to spread the damage bonuses, albeit at a reduced cap.	√	❌
 Battle Book	4	Placeholder	Desc	❌	❌
 Bludgeon	1	Placeholder	Desc	❌	❌

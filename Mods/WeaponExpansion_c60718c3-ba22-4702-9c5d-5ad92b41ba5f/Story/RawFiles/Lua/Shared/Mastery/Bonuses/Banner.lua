@@ -179,9 +179,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_GuardianAngelStatus", "<font color='#00FFFF'>If killed, character will be resurrected by the Guardian when their turn starts.</font>"),
 		Statuses = {"GUARDIAN_ANGEL"},
 	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
-		if PersistentVars.MasteryMechanics.GuardianAngelResurrect == nil then
-			PersistentVars.MasteryMechanics.GuardianAngelResurrect = {}
-		end
 		--Skip providing this bonus if the source is already protected by the target, to prevent immortality
 		if bonuses.HasBonus("BANNER_GUARDIAN_ANGEL", source)
 		and PersistentVars.MasteryMechanics.GuardianAngelResurrect[source] ~= target
@@ -193,7 +190,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = nil
 		end
 	end, nil, "None"):RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
-		char = GameHelpers.GetUUID(char)
+		char = StringHelpers.GetUUID(char)
 		if PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] then
 			local sourceCharacter = GameHelpers.GetCharacter(PersistentVars.MasteryMechanics.GuardianAngelResurrect[char])
 			if sourceCharacter then
@@ -203,7 +200,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 				end
 			end
 		end
-	end).Register.Test(function(test, self)
+	end, true).Register.Test(function(test, self)
 		--Ally under GUARDIAN_ANGEL gets resurrected if they die
 		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup

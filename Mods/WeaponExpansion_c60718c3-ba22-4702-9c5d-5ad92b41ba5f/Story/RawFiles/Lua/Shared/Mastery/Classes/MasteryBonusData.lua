@@ -357,13 +357,17 @@ function MasteryBonusData:RegisterOnWeaponTypeHit(weaponType, callback, skipBonu
 	return self
 end
 
+---Allows conditionalizing when the listener can run, for specific osiris listeners.
+---@alias MasteryBonusOsirisListenerCustomBonusCheck fun(...:string|number):boolean
+
 ---@param event string
 ---@param arity integer
 ---@param state string
 ---@param callback function
 ---@param skipBonusCheck boolean|nil
+---@param canRunCallback MasteryBonusOsirisListenerCustomBonusCheck|nil
 ---@return MasteryBonusData
-function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, skipBonusCheck)
+function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, skipBonusCheck, canRunCallback)
 	if not isClient then
 		if skipBonusCheck then
 			RegisterProtectedOsirisListener(event, arity, state, callback)
@@ -371,11 +375,15 @@ function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, 
 			local wrapper = function(...)
 				local params = {...}
 				local hasMasteryBonus = false
-				for i,v in pairs(params) do
-					if type(v) == "string" and string.find(v, "-", 1, true) and ObjectIsCharacter(v) == 1 then
-						if MasteryBonusManager.HasMasteryBonus(v, self.ID) then
-							hasMasteryBonus = true
-							break
+				if canRunCallback then
+					hasMasteryBonus = canRunCallback(...) == true
+				else
+					for i,v in pairs(params) do
+						if type(v) == "string" and string.find(v, "-", 1, true) and ObjectIsCharacter(v) == 1 then
+							if MasteryBonusManager.HasMasteryBonus(v, self.ID) then
+								hasMasteryBonus = true
+								break
+							end
 						end
 					end
 				end

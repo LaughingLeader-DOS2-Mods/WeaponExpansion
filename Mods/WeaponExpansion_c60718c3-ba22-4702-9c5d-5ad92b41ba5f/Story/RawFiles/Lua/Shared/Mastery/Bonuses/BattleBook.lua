@@ -126,13 +126,43 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		test:AssertEquals(IsTagged(bookcase, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 1, true, "Bookcase wasn't tagged with 'LLWEAPONEX_MB_BattleBook_RolledBookcase'")
 		local items = {}
 		for _,v in pairs(Ext.GetItem(bookcase):GetInventoryItems()) do
-			items[#items+1] = Ext.GetItem(v).StatsId
+			items[#items+1] = GameHelpers.Item.GetItemStat(v)
 		end
 		Ext.Dump(items)
 		test:AssertEquals(#items > 0, true, "No treasure generated")
 		return true
 	end)
 })
+
+if not _ISCLIENT then
+	-- Timer.Subscribe("LLWEAPONEX_BattleBook_PlayBattleStompSound", function (e)
+	-- 	if e.Data.UUID then
+	-- 		PlaySound(e.Data.UUID, "Skill_Earth_DustBlast_Impact")
+	-- 		--The ground smash sound stops any instance of it that was already playing
+	-- 		--PlaySound(e.Data.UUID, "Skill_Warrior_GroundSmash_Impact_01")
+	-- 		--PlaySoundResource(me.MyGuid, "e13d567a-542d-4a25-9138-8863cf96b6dc")
+	-- 		--local x,y,z = table.unpack(e.Data.Object.WorldPos)
+	-- 		--PlayScaledEffectAtPosition("RS3_FX_Skills_Earth_Attack_Power_01_Cast_Root_01", 0.01, x, y, z)
+	-- 		--PlaySoundResource(e.Data.UUID, "e13d567a-542d-4a25-9138-8863cf96b6dc")
+	-- 		GameHelpers.Audio.PlaySound(e.Data.Object, "Skill_Warrior_GroundSmash_Impact_01")
+	-- 		--GameHelpers.Audio.PlaySoundForAllPlayers("Skill_Warrior_GroundSmash_Impact_01")
+	-- 		--CharacterUseSkill("e446752a-13cc-4a88-a32e-5df244c90d8b", "Cone_EnemyGroundSmash", "7585e5eb-d607-45cd-be61-1e92a902e4cc", 1, 1, 1);Mods.LeaderLib.Timer.StartOneshot("", 900, function() CharacterUseSkill("bb932b13-8ebf-4ab4-aac0-83e6924e4295", "Cone_EnemyGroundSmash", "7585e5eb-d607-45cd-be61-1e92a902e4cc", 1, 1, 1) end)
+	-- 	end
+	-- end)
+	Timer.Subscribe("LLWEAPONEX_BattleBook_BattleStompBonus", function (e)
+		if e.Data.UUID and e.Data.Target and e.Data.Source then
+			local caster = e.Data.UUID
+			local tx,ty,tz = table.unpack(e.Data.Target)
+			local sx,sy,sz = table.unpack(e.Data.Source)
+			local rot = e.Data.Rotation or 0
+			PlaySound(e.Data.UUID, "Skill_Earth_DustBlast_Impact")
+			PlayEffectAtPositionAndRotation("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", sx, sy, sz, rot)
+			--Timer._Internal.ClearObjectData("LLWEAPONEX_BattleBook_BattleStompBonus", e.Data.UUID)
+			GameHelpers.Skill.ShootZoneAt(e.Data.Skill or "Cone_LLWEAPONEX_MasteryBonus_BattleBook_GroundSmashBonus", caster, {tx,ty,tz}, {Position = {sx,sy,sz}, SurfaceType="Sentinel"})
+			SignalTestComplete("BATTLEBOOK_TECTONICSHIFT")
+		end
+	end)
+end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 	rb:Create("BATTLEBOOK_BLESS", {
@@ -156,6 +186,37 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		SetTag(dummy, "UNDEAD")
 		test:Wait(1000)
 		CharacterUseSkill(char, "Target_EnemyBless", dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 30000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end),
+
+	rb:Create("BATTLEBOOK_TECTONICSHIFT", {
+		Skills = {"Cone_GroundSmash", "Cone_EnemyGroundSmash"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BattleStomp", "<font color='#99AACC'>Knowledge of tectonic shifts allow you to create a secondary wave of force from the target, back to you, for double damage.</font>"),
+	}).Register.SkillUsed(function(self, e, bonuses)
+		local range = (Ext.StatGetAttribute(e.Skill, "Range") or 10) + 2
+		local target = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, range)
+
+		local _,rot,_ = GetRotation(e.Character.MyGuid)
+		--Rot + 180 works for some reason, since we're using PlayEffectAtPositionAndRotation
+		Timer.StartObjectTimer("LLWEAPONEX_BattleBook_BattleStompBonus", e.Character, 2000, {
+			Source = target,
+			Target = TableHelpers.Clone(e.Character.WorldPos),
+			Skill = e.Skill,
+			Rotation = rot + 180
+		})
+	end).Register.SkillHit(function(self, e, bonuses)
+		--Since it hit something, start the bonus quicker
+		Timer.RestartObjectTimer("LLWEAPONEX_BattleBook_BattleStompBonus", e.Character, 500)
+	end).Register.Test(function(test, self)
+		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		SetFaction(dummy, "Evil NPC")
+		test:Wait(1000)
+		CharacterUseSkill(char, "Cone_EnemyGroundSmash", dummy, 1, 1, 1)
 		test:WaitForSignal(self.ID, 30000)
 		test:AssertGotSignal(self.ID)
 		return true
@@ -190,7 +251,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		if not e.Character:HasTag("LLWEAPONEX_BattleBook_ScrollBonusAP") and e.SourceItem then
 			local statsId = GameHelpers.Item.GetItemStat(e.SourceItem)
 			local apBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ScrollUseAPBonus", 1)
-			print(statsId, apBonus)
 			if apBonus ~= 0 and StringHelpers.Contains({statsId, e.SourceItem.RootTemplate.Name}, "scroll", true) or GameHelpers.Stats.HasParent(statsId, "_Scrolls") then
 				CharacterAddActionPoints(e.Character.MyGuid, apBonus)
 				if GameHelpers.Character.IsInCombat(e.Character) then
@@ -245,8 +305,10 @@ local function GetSkillWithMemorizationRequirements(id)
 	return nil
 end
 
+---@param target EsvCharacter
 local function GetValidSkillsFromEnemy(target)
 	local allowAnySkill = SettingsManager.GetMod(ModuleUUID, false, true).Global:FlagEquals("LLWEAPONEX_AllowAnySkillForBattleBookChallengeReward", true)
+	--GameHelpers.IO.SaveJsonFile("Dumps/GetValidSkillsFromEnemy.json", Ext.DumpExport(target))
 	local skills = target:GetSkills()
 	if allowAnySkill then
 		return skills
@@ -347,7 +409,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Challenge_Status", "<font color='#33FF88'>Defeating this target grants the challenger a random skillbook from the target's skills.</font>")
 	}).Register.SkillCast(function(self, e, bonuses)
 		e.Data:ForEach(function(v, targetType, skillEventData)
-			if not IsTagged(v, "LLWEAPONEX_BattleBook_ChallengeBookGranted") then
+			if IsTagged(v, "LLWEAPONEX_BattleBook_ChallengeBookGranted") == 0 then
 				SetTag(v, "LLWEAPONEX_BattleBook_ChallengeActive")
 				PersistentVars.MasteryMechanics.BattlebookChallenge[e.Character.MyGuid] = v
 				SignalTestComplete("BATTLEBOOK_CHALLENGE_Active")
@@ -369,7 +431,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 				local skillbookName = ""
 				local addedSkillbook = false
 
-				local skills = GetValidSkillsFromEnemy(challenger)
+				local skills = GetValidSkillsFromEnemy(target)
 				if #skills > 0 then
 					skills = Common.ShuffleTable(skills)
 					for _,v in pairs(skills) do
@@ -382,10 +444,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 								skillbookName = root.Name
 							end
 						else
-							--Ext.IO.SaveFile("Dumps/ECLRootTemplate_SKILLBOOK_Water_VampiricHungerAura.json", Ext.DumpExport(Ext.Template.GetTemplate("2398983b-d9f3-40ca-9269-9a4fb0860931")))
 							local rootTemplate = GameHelpers.Stats.GetSkillbookForSkill(v)
 							if rootTemplate then
-								ItemTemplateAddTo(rootTemplate, target, 1, 1)
+								ItemTemplateAddTo(rootTemplate, challengerGUID, 1, 1)
 								addedSkillbook = true
 								local root = Ext.Template.GetTemplate(rootTemplate)
 								if root then
@@ -401,11 +462,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 				end
 				if addedSkillbook then
 					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook_ChallengeWon:ReplacePlaceholders(challengerName, targetName, skillbookName))
+					SignalTestComplete("BATTLEBOOK_CHALLENGE_Reward")
 				else
-					CharacterGiveReward(target, "OnlyGold", 1)
+					CharacterGiveReward(challengerGUID, "OnlyGold", 1)
 					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook_ChallengeWon_NoSkills:ReplacePlaceholders(challengerName, targetName))
 				end
-				SignalTestComplete("BATTLEBOOK_CHALLENGE_Reward")
 			end
 			PersistentVars.MasteryMechanics.BattlebookChallenge[challengerGUID] = nil
 		end
@@ -416,15 +477,27 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		TeleportTo(char1, dummy, "", 0, 1, 1)
 		test:Wait(250)
 		TeleportTo(char2, dummy, "", 0, 1, 1)
+		SetFaction(char1, "PVP_1")
+		SetFaction(char2, "PVP_2")
 		CharacterSetTemporaryHostileRelation(char1, char2)
 		test:Wait(1000)
+		CharacterAddSkill(char2, "Target_Apportation", 0)
+		CharacterAddSkill(char2, "Dome_CircleOfProtection", 0)
 		CharacterUseSkill(char1, "Target_EnemyChallenge", char2, 1, 1, 1)
-		test:WaitForSignal("BATTLEBOOK_CHALLENGE_Active", 30000)
+		test:WaitForSignal("BATTLEBOOK_CHALLENGE_Active", 10000)
 		test:AssertGotSignal("BATTLEBOOK_CHALLENGE_Active")
-		test:Wait(1000)
+		test:Wait(500)
 		CharacterDieImmediate(char2, 0, "Physical", char1)
-		test:WaitForSignal("BATTLEBOOK_CHALLENGE_Reward", 30000)
+		test:WaitForSignal("BATTLEBOOK_CHALLENGE_Reward", 10000)
 		test:AssertGotSignal("BATTLEBOOK_CHALLENGE_Reward")
+		test:Wait(500)
+		for _,v in pairs(Ext.GetCharacter(char1):GetInventoryItems()) do
+			local item = Ext.GetItem(v)
+			if not Data.EquipmentSlotNames[item.Slot] then
+				fprint(LOGLEVEL.WARNING, "[BATTLEBOOK_CHALLENGE] Reward(%s)", GameHelpers.GetDisplayName(item))
+			end
+		end
+		test:Wait(500)
 		return true
 	end),
 
