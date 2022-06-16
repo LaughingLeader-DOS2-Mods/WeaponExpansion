@@ -245,13 +245,13 @@ if not Vars.IsClient then
 				CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", uuid, 0, 1, 1)
 				SignalTestComplete("AXE_SPINNING_1")
 			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
-				if Ext.Random(0,100) <= 50 or Debug.MasteryTests then
+				if GameHelpers.Math.Roll(50) or e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
 					GameHelpers.ClearActionQueue(uuid)
 					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", uuid, 0, 1, 1)
 					SignalTestComplete("AXE_SPINNING_2")
 				end
 			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
-				if Ext.Random(0,100) <= 25 or Debug.MasteryTests then
+				if GameHelpers.Math.Roll(25) or e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
 					GameHelpers.ClearActionQueue(uuid)
 					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", uuid, 0, 1, 1)
 					SignalTestComplete("AXE_SPINNING_3")

@@ -30,7 +30,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		if not skill then
 			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionChance", 25.0)
 			local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionTurns", 1)
-			if chance > 0 and turns > 0 and (Debug.MasteryTests or GameHelpers.Math.Roll(chance)) then
+			if chance > 0 and turns > 0 and (attacker:HasTag("LLWEAPONEX_MasteryTestCharacter") or GameHelpers.Math.Roll(chance)) then
 				GameHelpers.Status.Apply(target, "LLWEAPONEX_CONCUSSION", turns, false, attacker)
 				PlaySound(target.MyGuid, "LLWEAPONEX_FFT_Dictionary_Book_Hit")
 				SignalTestComplete(self.ID)
@@ -102,7 +102,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 		--and MasteryBonusManager.HasMasteryBonus(character, "BATTLEBOOK_LOOT")
 		and IsBookcase(GameHelpers.GetTemplate(item)) then
 			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_BookcaseLootChance", 10)
-			if chance > 0 and (Debug.MasteryTests or GameHelpers.Math.Roll(chance)) then
+			if chance > 0 and (character:HasTag("LLWEAPONEX_MasteryTestCharacter") or GameHelpers.Math.Roll(chance)) then
 				GenerateTreasure(item, "ST_Skillbook", CharacterGetLevel(character), character)
 			end
 			SetTag(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase")
@@ -135,20 +135,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 })
 
 if not _ISCLIENT then
-	-- Timer.Subscribe("LLWEAPONEX_BattleBook_PlayBattleStompSound", function (e)
-	-- 	if e.Data.UUID then
-	-- 		PlaySound(e.Data.UUID, "Skill_Earth_DustBlast_Impact")
-	-- 		--The ground smash sound stops any instance of it that was already playing
-	-- 		--PlaySound(e.Data.UUID, "Skill_Warrior_GroundSmash_Impact_01")
-	-- 		--PlaySoundResource(me.MyGuid, "e13d567a-542d-4a25-9138-8863cf96b6dc")
-	-- 		--local x,y,z = table.unpack(e.Data.Object.WorldPos)
-	-- 		--PlayScaledEffectAtPosition("RS3_FX_Skills_Earth_Attack_Power_01_Cast_Root_01", 0.01, x, y, z)
-	-- 		--PlaySoundResource(e.Data.UUID, "e13d567a-542d-4a25-9138-8863cf96b6dc")
-	-- 		GameHelpers.Audio.PlaySound(e.Data.Object, "Skill_Warrior_GroundSmash_Impact_01")
-	-- 		--GameHelpers.Audio.PlaySoundForAllPlayers("Skill_Warrior_GroundSmash_Impact_01")
-	-- 		--CharacterUseSkill("e446752a-13cc-4a88-a32e-5df244c90d8b", "Cone_EnemyGroundSmash", "7585e5eb-d607-45cd-be61-1e92a902e4cc", 1, 1, 1);Mods.LeaderLib.Timer.StartOneshot("", 900, function() CharacterUseSkill("bb932b13-8ebf-4ab4-aac0-83e6924e4295", "Cone_EnemyGroundSmash", "7585e5eb-d607-45cd-be61-1e92a902e4cc", 1, 1, 1) end)
-	-- 	end
-	-- end)
+	--Allows mods to change this
+
+	---The skill used when creating a secondary ground smash, for the `BATTLEBOOK_TECTONICSHIFT` bonus.
+	Mastery.Variables.Bonuses.BattleBookGroundSmashBonusSkill = "Cone_LLWEAPONEX_MasteryBonus_BattleBook_GroundSmashBonus"
+
 	Timer.Subscribe("LLWEAPONEX_BattleBook_BattleStompBonus", function (e)
 		if e.Data.UUID and e.Data.Target and e.Data.Source then
 			local caster = e.Data.UUID
@@ -158,7 +149,7 @@ if not _ISCLIENT then
 			PlaySound(e.Data.UUID, "Skill_Earth_DustBlast_Impact")
 			PlayEffectAtPositionAndRotation("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", sx, sy, sz, rot)
 			--Timer._Internal.ClearObjectData("LLWEAPONEX_BattleBook_BattleStompBonus", e.Data.UUID)
-			GameHelpers.Skill.ShootZoneAt(e.Data.Skill or "Cone_LLWEAPONEX_MasteryBonus_BattleBook_GroundSmashBonus", caster, {tx,ty,tz}, {Position = {sx,sy,sz}, SurfaceType="Sentinel"})
+			GameHelpers.Skill.ShootZoneAt(Mastery.Variables.Bonuses.BattleBookGroundSmashBonusSkill, caster, {tx,ty,tz}, {Position = {sx,sy,sz}, SurfaceType="Sentinel"})
 			SignalTestComplete("BATTLEBOOK_TECTONICSHIFT")
 		end
 	end)
@@ -195,7 +186,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		Skills = {"Cone_GroundSmash", "Cone_EnemyGroundSmash"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BattleStomp", "<font color='#99AACC'>Knowledge of tectonic shifts allow you to create a secondary wave of force from the target, back to you, for double damage.</font>"),
 	}).Register.SkillUsed(function(self, e, bonuses)
-		local range = (Ext.StatGetAttribute(e.Skill, "Range") or 10) + 2
+		local range = (Ext.StatGetAttribute(e.Skill, "Range") or 10) + 1
 		local target = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, range)
 
 		local _,rot,_ = GetRotation(e.Character.MyGuid)
