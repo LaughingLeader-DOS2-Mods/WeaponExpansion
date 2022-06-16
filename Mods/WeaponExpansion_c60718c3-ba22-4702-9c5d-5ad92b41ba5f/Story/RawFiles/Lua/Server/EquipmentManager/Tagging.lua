@@ -115,21 +115,26 @@ end
 
 ---@param item EsvItem
 local function CheckRequirementTags(character, item, otherHand)
-	SetTag(character.MyGuid, "LLWEAPONEX_AnyWeaponEquipped")
-	if not IsRangedWeapon(item) then
-		ClearTag(character.MyGuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
-		if self:CheckScoundrelTags(character, item) or (otherHand and self:CheckScoundrelTags(character, otherHand)) then
-			if character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
-				ClearTag(character.MyGuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-				PrintDebug("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", character.MyGuid)
-				return true
+	if item.Stats.ItemType ~= "Shield" then
+		SetTag(character.MyGuid, "LLWEAPONEX_AnyWeaponEquipped")
+		if not IsRangedWeapon(item) then
+			ClearTag(character.MyGuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
+			if self:CheckScoundrelTags(character, item) or (otherHand and self:CheckScoundrelTags(character, otherHand)) then
+				if character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
+					ClearTag(character.MyGuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+					PrintDebug("ClearTag LLWEAPONEX_CannotUseScoundrelSkills", character.MyGuid)
+					return true
+				end
+			else
+				if not character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
+					SetTag(character.MyGuid, "LLWEAPONEX_CannotUseScoundrelSkills")
+					PrintDebug("SetTag LLWEAPONEX_CannotUseScoundrelSkills", character.MyGuid)
+					return true
+				end
 			end
 		else
-			if not character:HasTag("LLWEAPONEX_CannotUseScoundrelSkills") then
-				SetTag(character.MyGuid, "LLWEAPONEX_CannotUseScoundrelSkills")
-				PrintDebug("SetTag LLWEAPONEX_CannotUseScoundrelSkills", character.MyGuid)
-				return true
-			end
+			SetTag(character.MyGuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
+			return true
 		end
 	else
 		SetTag(character.MyGuid, "LLWEAPONEX_NoMeleeWeaponEquipped")
