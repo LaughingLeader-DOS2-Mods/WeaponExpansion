@@ -15,6 +15,9 @@ function MasterySystem.CanGrantXP(uuid)
 	if ObjectIsCharacter(uuid) == 0 then
 		return false
 	end
+	if ObjectIsOnStage(uuid) == 0 then
+		return false
+	end
 	if NRD_CharacterGetInt(uuid, "Resurrected") == 0
 	and not GameHelpers.Character.IsPlayer(uuid)
 	and CharacterIsSummon(uuid) == 0
