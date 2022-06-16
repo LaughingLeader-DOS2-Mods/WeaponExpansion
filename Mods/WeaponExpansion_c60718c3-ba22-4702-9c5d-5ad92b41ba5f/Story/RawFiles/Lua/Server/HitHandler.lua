@@ -142,9 +142,3 @@ end
 
 RegisterListener("OnPrepareHit", OnPrepareHit)
 RegisterListener("StatusHitEnter", OnStatusHitEnter)
-
-AttackManager.OnHit.Register(function (attacker, target, data, targetIsObject, skill)
-	if not targetIsObject then
-		
-	end
-end)

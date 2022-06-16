@@ -672,13 +672,13 @@ if not Vars.IsClient then
 	end)
 
 	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_GnakSpellScrollEquipped", function(tag, attacker, target, data, targetIsObject, skill)
-		if not skill and HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
+		if HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY") == 1 then
 			ListenForDeath(target, attacker, 1500)
 			if FireSpell(attacker.MyGuid, target.MyGuid) then
 				GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_BATTLEBOOK_SPELLSCROLL_HIT_READY")
 			end
 		end
-	end)
+	end, false)
 
 	Ext.RegisterConsoleCommand("printgnak", function(cmd)
 		local SpellEntries = {}

@@ -387,5 +387,4 @@ if not Vars.IsClient then
 			end
 		end
 	end)
-
 end

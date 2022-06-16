@@ -38,8 +38,6 @@ if not Vars.IsClient then
 	end)
 	
 	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Blunderbuss_Equipped", function(tag, attacker, target, data, targetIsObject, skill)
-		if not skill then
-			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode", attacker)
-		end
-	end)
+		GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode", attacker)
+	end, false)
 end

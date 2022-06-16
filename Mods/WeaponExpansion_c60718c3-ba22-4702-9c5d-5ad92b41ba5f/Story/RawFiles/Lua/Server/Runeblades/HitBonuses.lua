@@ -8,25 +8,23 @@ function RunebladeManager.RegisterBonus(statusName, callback)
 end
 
 AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Runeblade", function(tag, attacker, target, data, targetIsObject, skill)
-	if not skill then
-		local statusMap = {}
-		for i,v in pairs(attacker:GetStatusObjects()) do
-			statusMap[v.StatusId] = v
+	local statusMap = {}
+	for i,v in pairs(attacker:GetStatusObjects()) do
+		statusMap[v.StatusId] = v
+	end
+	local targetStatusMap = {}
+	if targetIsObject then
+		for i,v in pairs(target:GetStatusObjects()) do
+			targetStatusMap[v.StatusId] = v
 		end
-		local targetStatusMap = {}
-		if targetIsObject then
-			for i,v in pairs(target:GetStatusObjects()) do
-				targetStatusMap[v.StatusId] = v
-			end
-			GameHelpers.Status.Apply(target, "LLWEAPONEX_PREVENT_DOUBLE_HITS", 6.0, false, attacker)
-		end
-		for k,v in pairs(RunebladeManager.Bonuses) do
-			if statusMap[k] then
-				InvokeListenerCallbacks(v, k, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
-			end
+		GameHelpers.Status.Apply(target, "LLWEAPONEX_PREVENT_DOUBLE_HITS", 6.0, false, attacker)
+	end
+	for k,v in pairs(RunebladeManager.Bonuses) do
+		if statusMap[k] then
+			InvokeListenerCallbacks(v, k, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 		end
 	end
-end)
+end, false)
 
 local function CanApplyStatus(target, attacker)
 	if GameHelpers.Character.IsEnemy(target, attacker) or IsTagged(target, "LeaderLib_FriendlyFireEnabled") == 1 then

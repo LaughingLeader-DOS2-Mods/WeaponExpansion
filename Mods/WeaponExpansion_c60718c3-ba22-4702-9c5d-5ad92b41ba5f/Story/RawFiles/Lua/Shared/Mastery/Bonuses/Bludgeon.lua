@@ -45,24 +45,24 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 3, {
 	rb:Create("BLUDGEON_GROUNDQUAKE", {
 		Skills = {"Cone_GroundSmash","Cone_EnemyGroundSmash"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_GroundSmashQuake", "A <font color='#F19824'>localized quake</font> is created where your weapon contacts the ground, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake:ExplodeRadius]m radius.</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.CAST then
-			local weaponRange = 1.5
-			local weapons = GameHelpers.Item.FindTaggedEquipment(char, "LLWEAPONEX_Bludgeon")
-			if #weapons > 0 then
-				for i,v in pairs(weapons) do
-					local range = Ext.GetItem(v).Stats.WeaponRange / 100
-					if range > weaponRange then
-						weaponRange = range + 0.25
-					end
+	}).Register.SkillCast(function(self, e, bonuses)
+		local weaponRange = 1.5
+		local weapons = GameHelpers.Item.FindTaggedEquipment(e.Character, "LLWEAPONEX_Bludgeon")
+		if #weapons > 0 then
+			for i,v in pairs(weapons) do
+				local range = Ext.GetItem(v).Stats.WeaponRange / 100
+				if range > weaponRange then
+					weaponRange = range + 0.25
 				end
 			end
-			local pos = GameHelpers.Math.GetForwardPosition(char, weaponRange)
-			GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake", char, {EnemiesOnly = true})
-			-- TODO: Swap to a different effect
-			local x,y,z = table.unpack(pos)
-			PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", x,y,z)
 		end
+		local pos = GameHelpers.Math.GetForwardPosition(e.Character, weaponRange)
+		GameHelpers.Skill.Explode(pos, "Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_Quake", e.Character, {EnemiesOnly = true})
+		-- TODO: Swap to a different effect
+		--local x,y,z = table.unpack(pos)
+		--PlayEffectAtPosition("LLWEAPONEX_FX_AnvilMace_Impact_01", x,y,z)
+		--PlaySound(e.Character.MyGuid, "Skill_Earth_ReactiveArmor_Impact")
+		EffectManager.PlayEffectAt("RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_02", pos, {Scale = 0.5})
 	end),
 })
 

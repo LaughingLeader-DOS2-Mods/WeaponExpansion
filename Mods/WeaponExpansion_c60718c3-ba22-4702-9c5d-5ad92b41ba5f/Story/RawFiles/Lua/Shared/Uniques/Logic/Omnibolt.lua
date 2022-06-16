@@ -32,15 +32,13 @@ if not Vars.IsClient then
 	end)
 
 	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Omnibolt_Equipped", function(tag, attacker, target, data, targetIsObject, skill)
-		if not skill then
-			local chance = GameHelpers.GetExtraData("LLWEAPONEX_Omnibolt_LightningChance", 70, true)
-			if chance >= 100 then
-				GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", attacker, {EnemiesOnly = true})
-			elseif chance > 0 and GameHelpers.Math.Roll(chance) then
-				GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", attacker, {EnemiesOnly = true})
-			end
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_Omnibolt_LightningChance", 70, true)
+		if chance >= 100 then
+			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", attacker, {EnemiesOnly = true})
+		elseif chance > 0 and GameHelpers.Math.Roll(chance) then
+			GameHelpers.Skill.Explode(target, "Projectile_LLWEAPONEX_Greatbow_LightningStrike", attacker, {EnemiesOnly = true})
 		end
-	end)
+	end, false)
 else
 	--Tags.ExtraProperties.LLWEAPONEX_Omnibolt_Equipped = true
 	local bonusText = Classes.TranslatedString:CreateFromKey("LLWEAPONEX_Omnibolt_Equipped_SkillBonus", "<font color='#C7A758'>[Key:WPN_UNIQUE_LLWEAPONEX_Greatbow_Lightning_A_DisplayName:Omnibolt, Heaven's Wrath]</font><br><font color='#33FF22'>Summon a lightning strike, dealing an additional [SkillDamage:Projectile_LLWEAPONEX_Greatbow_LightningStrike].<font>", {AutoReplacePlaceholders = false})

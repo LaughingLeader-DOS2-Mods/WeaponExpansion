@@ -338,7 +338,7 @@ local function GetAbilityBasedWeaponDamage(character, isTooltip, noRandomization
 	end
 end
 
----@param character EsvCharacter
+---@param character StatCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
 ---@return StatItem
@@ -353,16 +353,16 @@ local function GetPistolWeaponStatTable(character, isTooltip, noRandomization)
 	end
 	local rune,weaponBoostStat,rarity = GetRuneBoost(character.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
 	if weaponBoostStat == nil then 
-		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal" 
+		weaponBoostStat = "_Boost_LLWEAPONEX_Pistol_Bullets_Normal"
 	end
 	if noRandomization == nil then 
 		noRandomization = false 
 	end
 	local highestAttribute = GetHighestAttribute(character)
-	return ExtenderHelpers.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, "Rifle", masteryBoost, nil, nil, rarity)
+	return GameHelpers.Ext.CreateWeaponTable(weaponBoostStat, character.Level, highestAttribute, "Rifle", masteryBoost, nil, nil, rarity)
 end
 
----@param character EsvCharacter
+---@param character StatCharacter
 ---@param isTooltip boolean
 ---@param noRandomization boolean
 ---@param item StatItem
