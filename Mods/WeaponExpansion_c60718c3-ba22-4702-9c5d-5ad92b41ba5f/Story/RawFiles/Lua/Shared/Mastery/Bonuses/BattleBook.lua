@@ -142,6 +142,7 @@ if not _ISCLIENT then
 
 	Timer.Subscribe("LLWEAPONEX_BattleBook_BattleStompBonus", function (e)
 		if e.Data.UUID and e.Data.Target and e.Data.Source then
+			--local rot = me.Stats.Rotation; local fx = Ext.Effect.CreateEffect("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", Ext.Entity.NullHandle(), ""); fx.Rotation = rot; fx.Position = me.WorldPos;
 			local caster = e.Data.UUID
 			local tx,ty,tz = table.unpack(e.Data.Target)
 			local sx,sy,sz = table.unpack(e.Data.Source)
@@ -189,13 +190,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		local range = (Ext.StatGetAttribute(e.Skill, "Range") or 10) + 1
 		local target = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, range)
 
-		local _,rot,_ = GetRotation(e.Character.MyGuid)
-		--Rot + 180 works for some reason, since we're using PlayEffectAtPositionAndRotation
+		local _,angle,_ = GetRotation(e.Character.MyGuid)
+		--angle + 180 works to flip the effect around for some reason, since we're using PlayEffectAtPositionAndRotation
 		Timer.StartObjectTimer("LLWEAPONEX_BattleBook_BattleStompBonus", e.Character, 2000, {
 			Source = target,
 			Target = TableHelpers.Clone(e.Character.WorldPos),
 			Skill = e.Skill,
-			Rotation = rot + 180
+			Rotation = angle + 180
 		})
 	end).Register.SkillHit(function(self, e, bonuses)
 		--Since it hit something, start the bonus quicker

@@ -192,6 +192,7 @@ Ext.Require("Server/Updates.lua")
 if Ext.IsDeveloperMode() then
     Ext.Require("Server/Debug/DebugMain.lua")
 end
+
 ---@param target EsvCharacter
 ---@param attacker StatCharacter|StatItem
 ---@param hit HitRequest
@@ -199,12 +200,20 @@ end
 ---@param impactDirection number[]
 ---@param context any
 local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection, context)
-	if hit.DamageType == "Magic" then
-        hit.DamageList:ConvertDamageType("Water")
-    elseif hit.DamageType == "Corrosive" then
-        hit.DamageList:ConvertDamageType("Earth")
+    if not target:HasTag("LLWEAPONEX_DisableArmorDamageConversion") then
+        if hit.DamageType == "Magic" then
+            hit.DamageList:ConvertDamageType("Water")
+        elseif hit.DamageType == "Corrosive" then
+            hit.DamageList:ConvertDamageType("Earth")
+        end
     end
 end
+
+Timer.Subscribe("LLWEAPONEX_ClearDisableArmorDamageConversion", function (e)
+    if e.Data.UUID then
+        ClearTag(e.Data.UUID, "LLWEAPONEX_DisableArmorDamageConversion")
+    end
+end)
 
 local function SessionSetup()
     -- Divinity Unleashed or Armor Mitigation

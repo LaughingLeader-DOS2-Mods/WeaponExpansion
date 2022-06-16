@@ -32,7 +32,7 @@ local isClient = Ext.IsClient()
 ---@field SkillCast fun(callback:WeaponExpansionSkillManagerSkillEventCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillPrepare fun(callback:WeaponExpansionSkillManagerSkillPreparedCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillCancel fun(callback:WeaponExpansionSkillManagerSkillCancelCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
----@field SkillHit fun(callback:WeaponExpansionSkillManagerHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
+---@field SkillHit fun(callback:WeaponExpansionSkillManagerHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusData
 ---@field SkillProjectileHit fun(callback:WeaponExpansionSkillManagerProjectileHitCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field SkillProjectileShoot fun(callback:WeaponExpansionSkillManagerProjectileShootCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
 ---@field OnHeal fun(callback:WeaponExpansionOnHealCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusData
@@ -172,10 +172,14 @@ end
 ---@param self MasteryBonusData
 ---@param callback WeaponExpansionSkillManagerHitCallback
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillHit(self, callback, checkBonusOn)
+function _INTERNALREG.SkillHit(self, callback, checkBonusOn, specificSkills)
 	if not isClient then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills
+		if not skills then
+			skills = self.AllSkills and "All" or self.Skills
+		end
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.HIT, skills, self, callback, checkBonusOn)
 	end
 	return self

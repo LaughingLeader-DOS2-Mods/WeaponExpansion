@@ -76,11 +76,12 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 			if Mastery.HasMasteryRequirement(character, tag) then
 				for _,v in pairs(tbl) do
 					if v.ID then
-						if skill == nil or GameHelpers.Skill.IsAction(skill) then
-							bonuses[v.ID] = true
-						elseif v.Skills ~= nil and Common.TableHasEntry(v.Skills, skill) then
-							bonuses[v.ID] = true
-						end
+						bonuses[v.ID] = true
+						-- if skill == nil or not GameHelpers.Skill.IsAction(skill) then
+						-- 	bonuses[v.ID] = true
+						-- elseif v.Skills ~= nil and Common.TableHasEntry(v.Skills, skill) then
+						-- 	bonuses[v.ID] = true
+						-- end
 					else
 						fprint(LOGLEVEL.ERROR, "[LLWEAPONEX] Bonus is lacking an ID parameter:\n%s", Common.JsonStringify(v))
 					end
@@ -102,7 +103,7 @@ local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 	local sourceGUID = source and source.MyGuid or nil
 	local target = GameHelpers.TryGetObject(target)
 	local targetGUID = target and target.MyGuid or nil
-	if (checkBonusOn ~= "Target") and sourceGUID and GameHelpers.Ext.ObjectIsCharacter(source) then
+	if sourceGUID and checkBonusOn ~= "Target" and GameHelpers.Ext.ObjectIsCharacter(source) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, extraParam)) do
 			if bonuses[bonus] == nil then
 				bonuses[bonus] = {}

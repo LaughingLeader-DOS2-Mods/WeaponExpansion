@@ -167,11 +167,13 @@ if not _ISCLIENT then
 		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
 		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
 		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
-
+		NRD_CharacterSetPermanentBoostInt(character, "Accuracy", 200)
+		
 		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
 		SetupCharacter(character, host.MyGuid, equipmentSet)
-
+		
 		local dummy = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
+		NRD_CharacterSetPermanentBoostInt(dummy, "Dodge", -100)
 
 		PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
 		SetTag(dummy, "LeaderLib_TemporaryCharacter")
