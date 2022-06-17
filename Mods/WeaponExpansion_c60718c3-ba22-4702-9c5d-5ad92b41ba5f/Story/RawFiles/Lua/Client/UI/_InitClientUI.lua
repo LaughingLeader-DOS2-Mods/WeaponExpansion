@@ -119,7 +119,7 @@ Ext.RegisterListener("SessionLoaded", function()
 			end
 		end)
 
-		---@param entry SheetManager.StatsUIEntry
+		---@param entry {ID:string, Value:string, GeneratedID:integer}
 		---@param player EclCharacter
 		Mods.CharacterExpansionLib.SheetManager:RegisterEntryUpdatingListener("Damage", function (entry, player)
 			local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(player)

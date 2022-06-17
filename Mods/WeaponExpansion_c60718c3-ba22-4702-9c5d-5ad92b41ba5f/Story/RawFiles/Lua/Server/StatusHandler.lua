@@ -25,59 +25,18 @@ end
 ---@param item EsvItem
 ---@param targetPosition number[]
 ---@param radius number
-function ApplyRuneExtraProperties(source, target, item, targetPosition, radius)
+---@param skill string|nil
+function ApplyRuneExtraProperties(source, target, item, targetPosition, radius, skill)
+	local targetIsObject = type(target) == "userdata"
 	local runes = GameHelpers.Stats.GetRuneBoosts(item.Stats)
 	if #runes > 0 then
-		for i,runeEntry in pairs(runes) do
-			for attribute,boost in pairs(runeEntry.Boosts) do
-				if boost ~= nil and boost ~= "" then
-					---@type StatProperty[]
-					local extraProperties = Ext.StatGetAttribute(boost, "ExtraProperties")
-					if extraProperties ~= nil then
-						GameHelpers.ApplyProperties(source, target, extraProperties)
-						for i,v in pairs(extraProperties) do
-							if v.Type == "Status" then
-								if v.StatusChance < 1.0 then
-									local statusObject = {
-										StatusId = v.Action,
-										StatusType = Ext.StatGetAttribute(v.Action, "StatusType"),
-										ForceStatus = false,
-										StatusSourceHandle = source.Handle,
-										TargetHandle = type(target) == "userdata" and target.Handle or nil,
-										CanEnterChance = Ext.Round(v.StatusChance * 100)
-									}
-									local chance = Game.Math.StatusGetEnterChance(statusObject, true)
-									local roll = Ext.Random(0,100)
-									if roll <= chance then
-										GameHelpers.Status.Apply(target, v.Action, v.Duration, 0, source)
-									end
-								else
-									GameHelpers.Status.Apply(target, v.Action, v.Duration, 0, source)
-								end
-							elseif v.Type == "SurfaceTransform" then
-								local x,y,z = GetPosition(target)
-								TransformSurfaceAtPosition(x, y, z, v.Action, "Ground", 1.0, 6.0, source)
-							elseif v.Type == "Force" then
-								local dist = GetDistanceTo(target, source)
-								local pos = GameHelpers.Math.GetForwardPosition(source, dist + v.Distance)
-								local x,y,z = table.unpack(pos)
-								local handle = NRD_CreateGameObjectMove(target, x, y, z, "", source)
-								local timerName = "Timers_LLWEAPONEX_RuneForceAction_"..source..target
-								local startTimerFunction
-								local cleanupMoveAction = function()
-									if not CleanupForceAction(handle, target, x, y, z) then
-										startTimerFunction(250)
-									else
-										local x,y,z = GetPosition(target)
-										TeleportToRandomPosition(target, 1.0, "") -- Keep on the grid
-									end
-								end
-								startTimerFunction = function(delay)
-									Timer.StartOneshot(timerName, delay, cleanupMoveAction)
-								end
-								startTimerFunction(1000)
-							end
-						end
+		for _,runeEntry in pairs(runes) do
+			for _,boost in pairs(runeEntry.Boosts) do
+				if not StringHelpers.IsNullOrEmpty(boost) then
+					if targetIsObject then
+						Ext.PropertyList.ExecuteExtraPropertiesOnTarget(boost, "ExtraProperties", source, target, targetPosition, "Target", false, skill)
+					else
+						Ext.PropertyList.ExecuteExtraPropertiesOnPosition(boost, "ExtraProperties", source, targetPosition, radius, "AoE", false, skill)
 					end
 				end
 			end

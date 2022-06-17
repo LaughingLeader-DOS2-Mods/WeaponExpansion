@@ -116,6 +116,7 @@ local function OnDetonationTimer(source, target)
 	end
 end
 
+---@param e {Data:{UUID:string, Source:string}}
 Timer.Subscribe("LLWEAPONEX_DetonateMines", function (e)
 	if e.Data.UUID and e.Data.Source then
 		OnDetonationTimer(e.Data.Source, e.Data.UUID)

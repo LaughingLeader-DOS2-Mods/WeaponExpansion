@@ -7,9 +7,6 @@ DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Dwarves_1H_A_bc034
 DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Elves_1H_B_1268f5f0-e484-42ea-8c13-0014e6aeaaad", "LLWEAPONEX_FX_EQ_CombatShield_Elves_A");
 DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Humans_1H_A_3a404dab-4862-4490-aa0f-bc27d06fdc6c", "LLWEAPONEX_FX_EQ_CombatShield_Common_B");
 DB_LLWEAPONEX_CC_TemplateEffects("WPN_LLWEAPONEX_CombatShield_Lizards_1H_C_067f48be-857d-43a8-bd0a-add59f025843", "LLWEAPONEX_FX_EQ_CombatShield_Lizards_D");
-
-DB_LLWEAPONEX_CC_OriginPreset("LLWEAPONEX_Korvash");
-DB_LLWEAPONEX_CC_OriginPreset("LLWEAPONEX_Harken");
 KBSECTION
 
 IF

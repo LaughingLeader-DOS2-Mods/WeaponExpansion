@@ -56,7 +56,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	end
 
 	if isPlayer and statType == "Weapon" then
-		self:CheckWeaponRequirementTags(character, item)
+		self:CheckWeaponRequirementTags(character)
 		self:CheckForUnarmed(character, isPlayer, item)
 	end
 

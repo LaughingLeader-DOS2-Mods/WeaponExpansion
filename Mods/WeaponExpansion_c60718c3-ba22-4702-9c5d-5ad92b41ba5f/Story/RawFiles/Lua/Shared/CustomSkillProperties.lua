@@ -26,7 +26,7 @@ CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties = {
 				end
 			end
 			for i=1,#items do
-				ApplyRuneExtraProperties(attacker, position, items[i], position, areaRadius)
+				ApplyRuneExtraProperties(attacker, position, items[i], position, areaRadius, skill.Name)
 			end
 		end
 	end,
@@ -44,7 +44,7 @@ CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties = {
 				end
 			end
 			for i=1,#items do
-				ApplyRuneExtraProperties(attacker, target, items[i], position, math.max(skill.AreaRadius or 1, skill.ExplodeRadius or 1))
+				ApplyRuneExtraProperties(attacker, target, items[i], position, math.max(skill.AreaRadius or 1, skill.ExplodeRadius or 1), skill.Name)
 			end
 		end
 	end
