@@ -27,52 +27,47 @@ local function Quiver_StartRecharge(character, quiver, addCharge)
 	end
 end
 
-RegisterSkillListener("Shout_LLWEAPONEX_Quiver_DrawArrow", function(skill, char, state, data)
-	if state == SKILL_STATE.CAST then
-		local character = Ext.GetCharacter(char)
-		local addedArrow = false
-		local weapon = CharacterGetEquippedItem(char, "Weapon")
-		if not StringHelpers.IsNullOrEmpty(weapon) then
-			weapon = Ext.GetItem(weapon)
-			if weapon:HasTag("LLWEAPONEX_Greatbow") then
-				CharacterGiveReward(char, "ST_LLWEAPONEX_Quiver_GreatbowArrows", 1)
-				addedArrow = true
-			elseif weapon.Stats.WeaponType == "Bow" then
-				CharacterGiveReward(char, "ST_LLWEAPONEX_Quiver_Arrows", 1)
-				addedArrow = true
-			end
+SkillManager.Register.Cast("Shout_LLWEAPONEX_Quiver_DrawArrow", function(e)
+	local addedArrow = false
+	local weapon = GameHelpers.Character.GetEquippedWeapons(e.Character)
+	if weapon then
+		if weapon:HasTag("LLWEAPONEX_Greatbow") then
+			CharacterGiveReward(e.Character.MyGuid, "ST_LLWEAPONEX_Quiver_GreatbowArrows", 1)
+			addedArrow = true
+		elseif weapon.Stats.WeaponType == "Bow" or weapon.Stats.WeaponType == "Crossbow" then
+			CharacterGiveReward(e.Character.MyGuid, "ST_LLWEAPONEX_Quiver_Arrows", 1)
+			addedArrow = true
 		end
-		if addedArrow then
-			local quiver = CharacterGetEquippedItem(character.MyGuid, "Belt")
-			if not StringHelpers.IsNullOrEmpty(quiver) and IsTagged(quiver, "LLWEAPONEX_Quiver") == 1 then
-				Quiver_StartRecharge(character, Ext.GetItem(quiver))
-			end
+	end
+	if addedArrow then
+		local quiver = GameHelpers.Item.GetItemInSlot(e.Character, "Belt")
+		if quiver and GameHelpers.ItemHasTag(quiver, "LLWEAPONEX_Quiver") then
+			Quiver_StartRecharge(e.Character, quiver)
 		end
 	end
 end)
 
-RegisterStatusListener("Removed", "LLWEAPONEX_QUIVER_DRAW_RECHARGE", function(char, status)
-	local character = Ext.GetCharacter(char)
-	if character ~= nil and not character.Dead then
-		local shouldRecharge = false
-		local quiver = CharacterGetEquippedItem(character.MyGuid, "Belt")
-		if not StringHelpers.IsNullOrEmpty(quiver) and IsTagged(quiver, "LLWEAPONEX_Quiver") == 1 then
-			Quiver_StartRecharge(character, Ext.GetItem(quiver), 1)
+StatusManager.Register.Removed("LLWEAPONEX_QUIVER_DRAW_RECHARGE", function(target, status, source, statusType, statusEvent)
+	if GameHelpers.Ext.ObjectIsCharacter(target) and not GameHelpers.Character.IsDeadOrDying(target) then
+		local quiver = GameHelpers.Item.GetItemInSlot(target, "Belt")
+		if quiver and GameHelpers.ItemHasTag(quiver, "LLWEAPONEX_Quiver") then
+			Quiver_StartRecharge(target, quiver, 1)
 		end
 	end
 end)
 
-RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_Quiver", function(char, item, tag, equipped)
-	if equipped then
-		Quiver_StartRecharge(char, item)
+EquipmentManager:RegisterEquipmentChangedListener(function(e)
+	if e.Equipped then
+		Quiver_StartRecharge(e.Character, e.Item)
 	else
-		GameHelpers.Status.Remove(char.MyGuid, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
-		Quiver_RemoveTempArrows(char.MyGuid)
+		GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
+		Quiver_RemoveTempArrows(e.Character)
 	end
-end)
+end, {Tag = "LLWEAPONEX_Quiver"})
 
+---@param char CharacterParam
 function Quiver_RemoveTempArrows(char)
-	local character = Ext.GetCharacter(char)
+	local character = GameHelpers.GetCharacter(char)
 	if character ~= nil then
 		for i,v in pairs(character:GetInventoryItems()) do
 			if IsTagged(v, "LLWEAPONEX_Quiver_TemporaryArrow") == 1 then

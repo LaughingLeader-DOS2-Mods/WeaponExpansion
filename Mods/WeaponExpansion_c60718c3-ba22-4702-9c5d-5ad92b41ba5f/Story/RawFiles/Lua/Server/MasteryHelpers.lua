@@ -207,14 +207,13 @@ end
 function OnMasteryActivated(uuid,mastery)
 	uuid = StringHelpers.GetUUID(uuid)
 	PrintDebug("[WeaponExpansion] Activated mastery ["..mastery.."] on ["..uuid.."].")
-	local callbacks = Listeners.MasteryActivated[mastery]
-	if callbacks ~= nil then
-		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, uuid, mastery)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
+	local character = GameHelpers.GetCharacter(uuid)
+	if character then
+		Mastery.Events.MasteryChanged:Invoke({
+			ID = mastery,
+			Character = character,
+			Enabled = true
+		})
 	end
 	MasterySystem.TagMasteryRanks(uuid, mastery)
 end
@@ -224,14 +223,13 @@ end
 function OnMasteryDeactivated(uuid,mastery)
 	ClearTag(uuid,mastery)
 	PrintDebug("[WeaponExpansion] Cleared mastery tag ["..mastery.."] on ["..uuid.."].")
-	local callbacks = Listeners.MasteryDeactivated[mastery]
-	if callbacks ~= nil then
-		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, uuid, mastery)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
+	local character = GameHelpers.GetCharacter(uuid)
+	if character then
+		Mastery.Events.MasteryChanged:Invoke({
+			ID = mastery,
+			Character = character,
+			Enabled = false
+		})
 	end
 end
 

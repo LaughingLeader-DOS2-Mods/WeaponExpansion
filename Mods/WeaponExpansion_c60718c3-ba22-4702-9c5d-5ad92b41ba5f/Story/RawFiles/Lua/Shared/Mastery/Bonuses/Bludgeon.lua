@@ -180,6 +180,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 3, {
 })
 
 if not Vars.IsClient then
+	---@param e {Data:{UUID:string, Target:string|nil}}
 	Timer.Subscribe("LLWEAPONEX_MB_Bludgeon_BonusHit", function (e)
 		if e.Data.UUID and e.Data.Target then
 			if not GameHelpers.Character.IsDeadOrDying(e.Data.Target) and not GameHelpers.Character.IsDeadOrDying(e.Data.UUID) then

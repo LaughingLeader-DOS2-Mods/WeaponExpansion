@@ -144,19 +144,19 @@ if not Vars.IsClient then
 		return Common.GetRandomTableEntry(tbl)
 	end
 
-	Timer.RegisterListener("LLWEAPONEX_Katana_VanquishersPath_HitNext", function(timerName, caster)
-		if not StringHelpers.IsNullOrEmpty(caster) then
-			local casterData = PersistentVars.SkillData.VanquishersPath[caster]
+	Timer.Subscribe("LLWEAPONEX_Katana_VanquishersPath_HitNext", function(e)
+		if e.Data.UUID then
+			local casterData = PersistentVars.SkillData.VanquishersPath[e.Data.UUID]
 			if casterData ~= nil then
 				local targetData = GetRandomVanquisherTarget(casterData)
 				if targetData ~= nil then
 					targetData.Valid = false
-					GameHelpers.ClearActionQueue(caster)
-					Osi.LeaderLib_Behavior_TeleportTo(caster, targetData.UUID)
-					DeathManager.ListenForDeath("VanquishersPath", targetData.UUID, caster, 1500)
-					CharacterUseSkill(caster, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", targetData.UUID, 1, 1, 1)
+					GameHelpers.ClearActionQueue(e.Data.UUID)
+					Osi.LeaderLib_Behavior_TeleportTo(e.Data.UUID, targetData.UUID)
+					DeathManager.ListenForDeath("VanquishersPath", targetData.UUID, e.Data.UUID, 1500)
+					CharacterUseSkill(e.Data.UUID, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit", targetData.UUID, 1, 1, 1)
 				else
-					PersistentVars.SkillData.VanquishersPath[caster] = nil
+					PersistentVars.SkillData.VanquishersPath[e.Data.UUID] = nil
 				end
 			end
 		end
@@ -368,11 +368,14 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterMasteryListener("MasteryDeactivated", "LLWEAPONEX_Katana", function(uuid, mastery)
-		ClearBlademasterComboTag(uuid)
-		PersistentVars.SkillData.VanquishersPath[uuid] = nil
-		PersistentVars.StatusData.KatanaCombo[uuid] = nil
-	end)
+	Mastery.Events.MasteryChanged:Subscribe(function (e)
+		if not e.Enabled then
+			local uuid = e.Character.MyGuid
+			ClearBlademasterComboTag(uuid)
+			PersistentVars.SkillData.VanquishersPath[uuid] = nil
+			PersistentVars.StatusData.KatanaCombo[uuid] = nil
+		end
+	end, {MatchArgs={ID="LLWEAPONEX_Katana"}})
 
 	---@param target EsvCharacter|EsvItem
 	---@param source EsvCharacter

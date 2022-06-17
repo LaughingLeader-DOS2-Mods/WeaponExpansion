@@ -19,11 +19,11 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterStatusListener("Attempt", "LLWEAPONEX_SOULHARVEST_REAP", function(target, status, source, handle)
+	StatusManager.Register.BeforeAttempt("LLWEAPONEX_SOULHARVEST_REAP", function(target, status, source)
 		DeathManager.ListenForDeath("SoulHarvestReaping", target, source, 1000)
 	end)
 
-	RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_UniqueHarvestScythe", function(char, item, tag, equipped)
-		--printf("EquipmentChanged(%s, %s, %s, %s)", char, item, tag, equipped)
-	end)
+	-- EquipmentManager:RegisterEquipmentChangedListener(function(e)
+		
+	-- end, {Tag = "LLWEAPONEX_UniqueHarvestScythe"})
 end

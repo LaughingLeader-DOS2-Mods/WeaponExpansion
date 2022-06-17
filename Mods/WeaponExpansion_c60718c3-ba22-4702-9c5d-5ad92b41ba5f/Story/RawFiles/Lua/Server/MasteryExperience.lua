@@ -46,7 +46,8 @@ end
 ---@return boolean
 function MasterySystem.CanGainExperience(character)
 	if character then
-		return (GameHelpers.Character.IsPlayer(character) and GameHelpers.DB.HasUUID("DB_IsPlayer", character))
+		local uuid = GameHelpers.GetUUID(character)
+		return (GameHelpers.Character.IsPlayer(uuid) and GameHelpers.DB.HasUUID("DB_IsPlayer", uuid))
 	end
 	return false
 end
@@ -70,8 +71,12 @@ function MasterySystem.GrantBasicAttackExperience(player, enemy, mastery)
 	end
 end
 
+---@param player CharacterParam
+---@param enemy CharacterParam
+---@param mastery string|nil
 function MasterySystem.GrantWeaponSkillExperience(player, enemy, mastery)
 	if MasterySystem.CanGrantXP(enemy) then
+		player = GameHelpers.GetUUID(player)
 		local expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_WeaponSkillExperienceMult", 0.5)
 		if IsTagged(enemy, "LLDUMMY_TrainingDummy") == 1 then
 			expGain = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_TrainingDummyExperienceMult", 0.1)
@@ -117,8 +122,10 @@ SkillManager.Register.Hit(UnarmedSkills, function(e)
 	end
 end)
 
-function GainThrowingMasteryXP(uuid, target)
-	if MasterySystem.CanGainExperience(uuid) then
-		MasterySystem.GrantWeaponSkillExperience(uuid, target, "LLWEAPONEX_ThrowingAbility")
+---@param char CharacterParam
+---@param target CharacterParam|nil
+function GainThrowingMasteryXP(char, target)
+	if MasterySystem.CanGainExperience(char) then
+		MasterySystem.GrantWeaponSkillExperience(char, target, "LLWEAPONEX_ThrowingAbility")
 	end
 end

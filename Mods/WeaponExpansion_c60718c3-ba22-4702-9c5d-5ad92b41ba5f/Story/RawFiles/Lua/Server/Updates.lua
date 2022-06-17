@@ -60,14 +60,14 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 			end
 		end
 
-		local callbacks = ServerEvents.OnModUpdated
-		if callbacks ~= nil then
-			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, last, next, player.MyGuid)
-				if not b then
-					Ext.PrintError("[LeaderLib:Timer.Cancel] Error calling oneshot timer callback:\n", err)
-				end
-			end
+		-- Deprecated skill
+		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
+			CharacterRemoveSkill(player.MyGuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
+		end
+		-- Fix for Balrin's Axe disappearing due to unforseen consequences
+		-- May need some additional checks
+		if not GameHelpers.IsInCombat(player) then
+			SkillConfiguration.BalrinAxe.Calls.EquipBalrinAxe(player)
 		end
 	end
 end)

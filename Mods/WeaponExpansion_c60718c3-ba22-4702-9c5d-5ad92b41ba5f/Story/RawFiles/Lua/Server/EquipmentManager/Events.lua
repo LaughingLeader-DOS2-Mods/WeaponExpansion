@@ -1,5 +1,36 @@
 local self = EquipmentManager
 
+---@class EquipmentChangedEventArgs
+---@field Character EsvCharacter
+---@field Item EsvItem
+---@field Equipped boolean
+---@field Template string
+
+---@type SubscribableEvent<EquipmentChangedEventArgs>
+EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("EquipmentChanged")
+
+local _tagListeners = {}
+local _templateListeners = {}
+
+---@param callback fun(e:EquipmentChangedEventArgs|SubscribableEventArgs)
+---@param opts {Tag:string, Template:string}
+function EquipmentManager:RegisterEquipmentChangedListener(callback, opts)
+	opts = opts or {}
+	if opts.Tag then
+		if _tagListeners[opts.Tag] == nil then
+			_tagListeners[opts.Tag] = {}
+		end
+		table.insert(_tagListeners[opts.Tag], callback)
+	end
+	if opts.Template then
+		opts.Template = StringHelpers.GetUUID(opts.Template)
+		if _templateListeners[opts.Template] == nil then
+			_templateListeners[opts.Template] = {}
+		end
+		table.insert(_templateListeners[opts.Template], callback)
+	end
+end
+
 ---@param character EsvCharacter
 ---@param item EsvItem
 function EquipmentManager:OnItemEquipped(character, item)

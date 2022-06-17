@@ -51,7 +51,7 @@ function UniqueData:MoveToRegionPosition(region, item)
 		TeleportTo(self.UUID, host, "", 0, 1, 0)
 		ItemToTransform(self.UUID, x,y,z,pitch,yaw,roll,1,nil)
 	else
-		local defaultNPCOwnerIsDead = self.DefaultOwner ~= nil and (not IsPlayer(self.DefaultOwner) and CharacterIsDead(self.DefaultOwner) == 1)
+		local defaultNPCOwnerIsDead = self.DefaultOwner ~= nil and (not GameHelpers.Character.IsPlayer(self.DefaultOwner) and GameHelpers.Character.IsDeadOrDying(self.DefaultOwner))
 		-- Fallback
 		if self.CanMoveToVendingMachine ~= false or defaultNPCOwnerIsDead then
 			ItemToInventory(self.UUID, NPC.VendingMachine, 1, 0, 0)

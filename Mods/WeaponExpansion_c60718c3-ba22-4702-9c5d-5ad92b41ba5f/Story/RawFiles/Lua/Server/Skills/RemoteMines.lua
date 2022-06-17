@@ -18,33 +18,27 @@ local function RunBreachKnockback(source, item)
 	end
 end
 
-RegisterStatusListener("Applied", "LLWEAPONEX_REMOTEMINE_DETONATE", function(target, status, source)
-	target = StringHelpers.GetUUID(target)
-	source = StringHelpers.GetUUID(source)
+StatusManager.Register.Applied("LLWEAPONEX_REMOTEMINE_DETONATE", function(targetObject, status, sourceObject)
+	local target = targetObject and targetObject.MyGuid
+	local source = sourceObject and sourceObject.MyGuid
 	if target == source or CharacterIsAlly(target, source) == 1 then
 		-- Prevent the caster from detonating their own inventory, or an ally's
 		return false
 	end
-	if IsTagged(target, "LLWEAPONEX_RemoteMine") == 1 then
+	if targetObject:HasTag("LLWEAPONEX_RemoteMine") and GameHelpers.Ext.ObjectIsItem(targetObject) then
 		local skill = GetVarFixedString(target, "LLWEAPONEX_Mine_Skill")
 		if StringHelpers.IsNullOrEmpty(CharacterGetEquippedWeapon(source)) then
 			skill = GetVarFixedString(target, "LLWEAPONEX_Mine_Skill_NoWeapon")
 		end
-		SetVarInteger(target, "LLWEAPONEX_ItemAmount", Ext.GetItem(target).Amount)
+		SetVarInteger(target, "LLWEAPONEX_ItemAmount", targetObject.Amount)
 		if skill == "Projectile_LLWEAPONEX_RemoteMine_Breach" then
-			RunBreachKnockback(Ext.GetCharacter(source), Ext.GetItem(target))
+			RunBreachKnockback(sourceObject, targetObject)
 		end
-		local x,y,z = GetPosition(target)
-		GameHelpers.ExplodeProjectile(source, {x,y,z}, skill)
+		GameHelpers.Skill.Explode(targetObject.WorldPos, skill, sourceObject)
 		CharacterItemSetEvent(source, target, "LLWEAPONEX_RemoteMine_DetonationDone")
 		return true
 	end
-	local items = nil
-	if ObjectIsCharacter(target) == 1 then
-		items = Ext.GetCharacter(target):GetInventoryItems()
-	elseif ObjectIsItem(target) == 1 then
-		items = Ext.GetItem(target):GetInventoryItems()
-	end
+	local items = targetObject:GetInventoryItems()
 	if items ~= nil and #items > 0 then
 		local max = GameHelpers.GetExtraData("LLWEAPONEX_RemoteCharge_MaxInventoryDetonation", 5)
 		if GetSettings().Global:FlagEquals("LLWEAPONEX_RemoteChargeDetonationCountDisabled", true) then
@@ -67,54 +61,54 @@ RegisterStatusListener("Applied", "LLWEAPONEX_REMOTEMINE_DETONATE", function(tar
 					Mines = mines,
 					Remaining = max
 				}
-				Timer.Start("LLWEAPONEX_OnDetonationTimer", 50, source, target)
+				Timer.StartObjectTimer("LLWEAPONEX_DetonateMines", source, 50, {Target=target})
 			end
 		end
 	end
 end)
 
-local function OnDetonationTimer(_, source, target)
-	if source and target then
-		local data = PersistentVars.SkillData.RemoteMineDetonation[target]
-		if data ~= nil then
-			local minesData = data[source]
-			if minesData ~= nil then
-				if minesData.Remaining > 0 then
-					local detonated = false
-					local attempts = 0
-					while not detonated and attempts < 99 and #minesData.Mines > 0 do
-						local rnd = Ext.Random(1,#minesData.Mines)
-						local mineUUID = minesData.Mines[rnd]
-						if mineUUID ~= nil then
-							local item = Ext.GetItem(mineUUID)
-							if item and item.Amount > 0 then
-								local skill = GetVarFixedString(mineUUID, "LLWEAPONEX_Mine_Skill")
-								if StringHelpers.IsNullOrEmpty(CharacterGetEquippedWeapon(source)) then
-									skill = GetVarFixedString(mineUUID, "LLWEAPONEX_Mine_Skill_NoWeapon")
-								end
-								local x,y,z = GetPosition(target)
-								minesData.Remaining = minesData.Remaining - 1
-								GameHelpers.ExplodeProjectile(source, {x,y,z}, skill)
-								detonated = true
-								item.Amount = item.Amount - 1
-								SetVarInteger(target, "LLWEAPONEX_ItemAmount", item.Amount)
-								if item.Amount <= 0 then
-									ItemDestroy(item.MyGuid)
-								end
-							else
-								minesData.Mines[rnd] = nil
+---@param source UUID
+---@param target UUID
+local function OnDetonationTimer(source, target)
+	local data = PersistentVars.SkillData.RemoteMineDetonation[target]
+	if data ~= nil then
+		local minesData = data[source]
+		if minesData ~= nil then
+			if minesData.Remaining > 0 then
+				local detonated = false
+				local attempts = 0
+				while not detonated and attempts < 99 and #minesData.Mines > 0 do
+					local rnd = Ext.Random(1,#minesData.Mines)
+					local mineUUID = minesData.Mines[rnd]
+					if mineUUID ~= nil then
+						local item = Ext.GetItem(mineUUID)
+						if item and item.Amount > 0 then
+							local skill = GetVarFixedString(mineUUID, "LLWEAPONEX_Mine_Skill")
+							if StringHelpers.IsNullOrEmpty(CharacterGetEquippedWeapon(source)) then
+								skill = GetVarFixedString(mineUUID, "LLWEAPONEX_Mine_Skill_NoWeapon")
 							end
+							local x,y,z = GetPosition(target)
+							minesData.Remaining = minesData.Remaining - 1
+							GameHelpers.ExplodeProjectile(source, {x,y,z}, skill)
+							detonated = true
+							item.Amount = item.Amount - 1
+							SetVarInteger(target, "LLWEAPONEX_ItemAmount", item.Amount)
+							if item.Amount <= 0 then
+								ItemDestroy(item.MyGuid)
+							end
+						else
+							minesData.Mines[rnd] = nil
 						end
-						attempts = attempts + 1
 					end
+					attempts = attempts + 1
+				end
 
-					if minesData.Remaining > 0 and #minesData.Mines > 0 then
-						Timer.Start("LLWEAPONEX_DetonateMines", 500, source, target)
-					else
-						data[source] = nil
-						if not Common.TableHasAnyEntry(data) then
-							PersistentVars.SkillData.RemoteMineDetonation[target] = nil
-						end
+				if minesData.Remaining > 0 and #minesData.Mines > 0 then
+					Timer.Start("LLWEAPONEX_DetonateMines", 500, source, target)
+				else
+					data[source] = nil
+					if not Common.TableHasAnyEntry(data) then
+						PersistentVars.SkillData.RemoteMineDetonation[target] = nil
 					end
 				end
 			end
@@ -122,32 +116,29 @@ local function OnDetonationTimer(_, source, target)
 	end
 end
 
-Timer.RegisterListener("LLWEAPONEX_DetonateMines", OnDetonationTimer)
-
-RegisterSkillListener("Projectile_LLWEAPONEX_RemoteMine_Breach", function(skill, source, state, data)
-	if state == SKILL_STATE.CAST then
-		local radius = Ext.StatGetAttribute(skill, "ExplodeRadius")
-		
+Timer.Subscribe("LLWEAPONEX_DetonateMines", function (e)
+	if e.Data.UUID and e.Data.Source then
+		OnDetonationTimer(e.Data.Source, e.Data.UUID)
 	end
 end)
 
-RegisterStatusListener("Applied", "LLWEAPONEX_REMOTEMINE_BREACHED", function(target, status, source)
-	local target = StringHelpers.GetUUID(target)
-	local source = StringHelpers.GetUUID(source)
-	if ObjectIsItem(target) == 1 and ItemIsDestroyed(target) == 0 then
-		local item = Ext.GetItem(target)
-		if item.CanBeMoved then
-			GameHelpers.ForceMoveObject(Ext.GetCharacter(source), item, 2)
-		elseif item.CanUse and item.LockLevel <= 10 and item.LockLevel > 0 then
-			ItemUnLock(item.MyGuid)
-			ItemOpen(item.MyGuid)
-			DisplayText(item.MyGuid, "Breached!")
+-- SkillManager.Register.Cast("Projectile_LLWEAPONEX_RemoteMine_Breach", function(e)
+-- 	local radius = Ext.StatGetAttribute(e.Skill, "ExplodeRadius")
+-- end)
+
+StatusManager.Register.Applied("LLWEAPONEX_REMOTEMINE_BREACHED", function(target, status, source)
+	if not GameHelpers.ObjectIsDead(target) then
+		if GameHelpers.Ext.ObjectIsItem(target) then
+			if target.CanBeMoved then
+				GameHelpers.ForceMoveObject(source, target, 2)
+			elseif target.CanUse and target.LockLevel <= 10 and target.LockLevel > 0 then
+				ItemUnLock(target.MyGuid)
+				ItemOpen(target.MyGuid)
+				--GameHelpers.GetStringKeyText("LLWEAPONEX_Breached", "<font color='#FF9900' size='24'>Breached</font>")
+				DisplayText(target.MyGuid, "LLWEAPONEX_Breached")
+			end
+		else
+			GameHelpers.ForceMoveObject(source, target, 2)
 		end
-	elseif ObjectIsCharacter(target) == 1 then
-		-- if source == target then
-		-- 	GameHelpers.ForceMoveObject(Ext.GetCharacter(source), Ext.GetCharacter(target), 2)
-		-- else
-		-- 	GameHelpers.ForceMoveObject(Ext.GetCharacter(source), Ext.GetCharacter(target), 2)
-		-- end
 	end
 end)

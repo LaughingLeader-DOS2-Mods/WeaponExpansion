@@ -1,30 +1,24 @@
 if not Vars.IsClient then
-	local function EquipBalrinAxe(char, refreshSkill, deleteData)
-		local axeData = PersistentVars.SkillData.ThrowBalrinAxe[char]
-		if axeData ~= nil then
-			SetOnStage(axeData.Item, 1)
-			NRD_CharacterEquipItem(char, axeData.Item, axeData.Slot, 0, 0, 1, 1)
-			if refreshSkill == true then
-				GameHelpers.Skill.SetCooldown(char, axeData.Skill, 0.0)
+	---@param char CharacterParam
+	---@param refreshSkill boolean|nil
+	---@param skipDelete boolean|nil
+	local function EquipBalrinAxe(char, refreshSkill, skipDelete)
+		local uuid = GameHelpers.GetUUID(char)
+		if uuid then
+			local axeData = PersistentVars.SkillData.ThrowBalrinAxe[uuid]
+			if axeData ~= nil then
+				SetOnStage(axeData.Item, 1)
+				NRD_CharacterEquipItem(uuid, axeData.Item, axeData.Slot, 0, 0, 1, 1)
+				if refreshSkill == true then
+					GameHelpers.Skill.SetCooldown(char, axeData.Skill, 0.0)
+				end
+				if skipDelete ~= true then
+					PersistentVars.SkillData.ThrowBalrinAxe[uuid] = nil
+				end
+				GameHelpers.Status.Remove(char, "LLWEAPONEX_BALRINAXE_DISARMED_INFO")
 			end
-			if deleteData ~= false then
-				PersistentVars.SkillData.ThrowBalrinAxe[char] = nil
-			end
-			GameHelpers.Status.Remove(char, "LLWEAPONEX_BALRINAXE_DISARMED_INFO")
 		end
 	end
-
-	RegisterServerEventCallback(Vars.SERVEREVENT.OnModUpdated, function(lastVersion, nextVersion, player)
-		-- Deprecated skill
-		if CharacterHasSkill(player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
-			CharacterRemoveSkill(player, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
-		end
-		-- Fix for Balrin's Axe disappearing due to unforseen consequences
-		-- May need some additional checks
-		if not GameHelpers.IsInCombat(player) then
-			EquipBalrinAxe(player)
-		end
-	end)
 
 	Timer.Subscribe("LLWEAPONEX_CheckForAxeMiss", function (e)
 		if e.Data.UUID then
@@ -37,44 +31,45 @@ if not Vars.IsClient then
 	---@param char string
 	---@param state SKILL_STATE
 	---@param data SkillEventData|HitData
-	local function OnBalrinAxeThrown(skill, char, state, data)
-		if state == SKILL_STATE.USED then
-			local slot,item = GameHelpers.Item.GetEquippedTaggedItemSlot(char, "LLWEAPONEX_UniqueThrowingAxeA")
-			if slot ~= nil then
-				PersistentVars.SkillData.ThrowBalrinAxe[char] = {
-					Item = item,
+	SkillManager.Register.All({"Projectile_LLWEAPONEX_Throw_UniqueAxe_A", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand"},
+	function(e)
+		if e.State == SKILL_STATE.USED then
+			local slot,item = GameHelpers.Item.GetEquippedTaggedItemSlot(e.Character, "LLWEAPONEX_UniqueThrowingAxeA")
+			if slot and item then
+				PersistentVars.SkillData.ThrowBalrinAxe[e.Character] = {
+					Item = item.MyGuid,
 					Slot = slot,
-					Skill = skill,
+					Skill = e.Skill,
 					Target = "",
 				}
 			end
-		elseif state == SKILL_STATE.CAST then
-			local axeData = PersistentVars.SkillData.ThrowBalrinAxe[char]
-			CharacterUnequipItem(char, axeData.Item)
+		elseif e.State == SKILL_STATE.CAST then
+			local axeData = PersistentVars.SkillData.ThrowBalrinAxe[e.Character]
+			CharacterUnequipItem(e.Character.MyGuid, axeData.Item)
 			SetOnStage(axeData.Item, 0)
-			Osi.ProcObjectTimer(char, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200)
-			Timer.Start("LLWEAPONEX_CheckForAxeMiss", 1200, char)
-		elseif state == SKILL_STATE.HIT then
-			GainThrowingMasteryXP(char, data.Target)
-			if not data.Success or ObjectIsItem(data.Target) == 1 then
-				EquipBalrinAxe(char)
-				CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
+			Osi.ProcObjectTimer(e.Character, "LLWEAPONEX_Timers_Throwing_BalrinAxeThrowMissed", 1200)
+			Timer.StartObjectTimer("LLWEAPONEX_CheckForAxeMiss", e.Character, 1200)
+		elseif e.State == SKILL_STATE.HIT then
+			GainThrowingMasteryXP(e.Character, e.Data.Target)
+			if not e.Data.Success or GameHelpers.Ext.ObjectIsItem(e.Data.Target) then
+				EquipBalrinAxe(e.Character)
+				CharacterStatusText(e.Character, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 			else
-				local axeData = PersistentVars.SkillData.ThrowBalrinAxe[char]
+				local axeData = PersistentVars.SkillData.ThrowBalrinAxe[e.Character]
 				if axeData ~= nil then
-					axeData.Target = data.Target
-					DeathManager.ListenForDeath("ThrowBalrinAxe", data.Target, char, 1000)
+					axeData.Target = e.Data.Target
+					DeathManager.ListenForDeath("ThrowBalrinAxe", e.Data.Target, e.Character, 1000)
 				end
 			end
-			Timer.Cancel("LLWEAPONEX_CheckForAxeMiss", char)
-		elseif state == SKILL_STATE.PROJECTILEHIT then
-			Timer.Cancel("LLWEAPONEX_CheckForAxeMiss", char)
-			if StringHelpers.IsNullOrEmpty(data.Target) then
-				EquipBalrinAxe(char)
-				CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
+			Timer.Cancel("LLWEAPONEX_CheckForAxeMiss", e.Character)
+		elseif e.State == SKILL_STATE.PROJECTILEHIT then
+			Timer.Cancel("LLWEAPONEX_CheckForAxeMiss", e.Character)
+			if StringHelpers.IsNullOrEmpty(e.Data.Target) then
+				EquipBalrinAxe(e.Character)
+				CharacterStatusText(e.Character, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 			end
 		end
-	end
+	end)
 
 	DeathManager.RegisterListener("ThrowBalrinAxe", function(target, attacker, targetDied)
 		if targetDied or HasActiveStatus(target, "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A") == 0 then
@@ -82,35 +77,35 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterSkillListener("Projectile_LLWEAPONEX_Throw_UniqueAxe_A", OnBalrinAxeThrown)
-	RegisterSkillListener("Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", OnBalrinAxeThrown)
-
-	RegisterItemListener("EquipmentChanged", "Tag", "LLWEAPONEX_UniqueThrowingAxeA", function(char, item, tag, equipped)
-		if equipped then
-			local slot = GameHelpers.Item.GetEquippedSlot(char.MyGuid, item.MyGuid)
+	EquipmentManager:RegisterEquipmentChangedListener(function(e)
+		if e.Equipped then
+			local slot = GameHelpers.Item.GetEquippedSlot(e.Character, e.Item)
 			if slot == "Weapon" then
-				GameHelpers.Skill.Swap(char.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", true, false)
+				GameHelpers.Skill.Swap(e.Character.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", true, false)
 			else
-				GameHelpers.Skill.Swap(char.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", true, false)
+				GameHelpers.Skill.Swap(e.Character.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A", "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand", true, false)
 			end
 		else
-			if CharacterHasSkill(char.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A") then
-				CharacterRemoveSkill(char.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A")
+			if CharacterHasSkill(e.Character.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A") then
+				CharacterRemoveSkill(e.Character.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A")
 			end
-			if CharacterHasSkill(char.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand") then
-				CharacterRemoveSkill(char.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand")
+			if CharacterHasSkill(e.Character.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand") then
+				CharacterRemoveSkill(e.Character.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand")
 			end
 		end
-	end)
+	end, {Tag = "LLWEAPONEX_UniqueThrowingAxeA"})
 
+	---@param char CharacterParam
+	---@param timedOut boolean|nil
 	local function RecoverBalrinAxe(char, timedOut)
-		local data = PersistentVars.SkillData.ThrowBalrinAxe[char]
+		local uuid = GameHelpers.GetUUID(char)
+		local data = PersistentVars.SkillData.ThrowBalrinAxe[uuid]
 		if data ~= nil then
 			EquipBalrinAxe(char, true)
 			if timedOut == true then
-				CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
+				CharacterStatusText(uuid, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 			else
-				CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeRetrieved")
+				CharacterStatusText(uuid, "LLWEAPONEX_StatusText_BalrinAxeRetrieved")
 			end
 			return true
 		end
@@ -136,9 +131,9 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterStatusListener("Removed", "LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A", function(target, status)
+	StatusManager.Register.Removed("LLWEAPONEX_WEAPON_THROW_UNIQUE_AXE1H_A", function(target, status, source)
 		for char,data in pairs(PersistentVars.SkillData.ThrowBalrinAxe) do
-			if data.Target == target then
+			if data.Target == target.MyGuid then
 				EquipBalrinAxe(char, true)
 				CharacterStatusText(char, "LLWEAPONEX_StatusText_BalrinAxeTimedOut")
 				break
@@ -146,7 +141,14 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterStatusListener("Removed", "LLWEAPONEX_BALRINAXE_DISARMED_INFO", function(target, status)
+	StatusManager.Register.Removed("LLWEAPONEX_BALRINAXE_DISARMED_INFO", function(target, status)
 		RecoverBalrinAxe(target, true)
 	end)
+
+	SkillConfiguration.BalrinAxe = {
+		Calls = {
+			EquipBalrinAxe = EquipBalrinAxe,
+			RecoverBalrinAxe = RecoverBalrinAxe,
+		}
+	}
 end

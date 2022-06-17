@@ -11,6 +11,7 @@ local defaultPersistentVars = {
             BlockedHit = {},
         },
         ThrowWeapon = {},
+        ---@type table<UUID, {Item:UUID, Slot:string, Skill:string, Target:UUID|nil}>
         ThrowBalrinAxe = {},
         VanquishersPath = {},
         ---@class RemoteMineDetonationData:table
@@ -75,75 +76,13 @@ end
 ---@alias EquipmentChangedIDType string|"Tag"|"Template"
 ---@alias ItemListenerEvent string|"EquipmentChanged"
 
----@alias MasteryEventID string|"MasteryActivated"|"MasteryDeactivated"
----@alias MasteryEventCallback fun(uuid:string, mastery:string):void
-
 BonusSkills = {}
-Listeners = {
-    ---@type table<string, fun(target:string, status:string, source:string):void>
-    EndTurnStatusRemoved = {},
-    ---@type table<string, table<string, EquipmentChangedCallback>>
-    EquipmentChanged = {
-        Template = {},
-        Tag = {}
-    },
-    ---@type table<string, MasteryEventCallback>
-    MasteryActivated = {},
-    ---@type table<string, MasteryEventCallback>
-    MasteryDeactivated = {}
-}
-
-EID = {
-    EquipmentChanged = {
-        Template = "Template",
-        Tag = "Tag",
-    }
-}
 
 SkillConfiguration = {
     TempData = {
         RecalculatedUnarmedSkillDamage = {}
     }
 }
-
----@param event MasteryEventID
----@param mastery string
----@param callback MasteryEventCallback
-function RegisterMasteryListener(event, mastery, callback)
-    local eventHolder = Listeners[event]
-    if eventHolder ~= nil then
-        if type(mastery) == "table" then
-            for i,v in pairs(mastery) do
-                if eventHolder[v] == nil then
-                    eventHolder[v] = {}
-                end
-                table.insert(eventHolder[v], callback)
-            end
-        else
-            if eventHolder[mastery] == nil then
-                eventHolder[mastery] = {}
-            end
-            table.insert(eventHolder[mastery], callback)
-        end
-    end
-end
-
----@param event ItemListenerEvent
----@param idType EquipmentChangedIDType
----@param id string The template, tag, etc.
----@param callback EquipmentChangedCallback
-function RegisterItemListener(event, idType, id, callback)
-    local callbackHolder = Listeners[event]
-    if callbackHolder ~= nil then
-        if callbackHolder[idType] == nil then
-            callbackHolder[idType] = {}
-        end
-        if callbackHolder[idType][id] == nil then
-            callbackHolder[idType][id] = {}
-        end
-        table.insert(callbackHolder[idType][id], callback)
-    end
-end
 
 if MasterySystem == nil then
 	MasterySystem = {}

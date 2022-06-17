@@ -2,6 +2,16 @@ if StatusTurnHandler == nil then
 	StatusTurnHandler = {}
 end
 
+local _listeners = {
+    ---@type table<string, fun(target:string, status:string, source:string):void>
+    EndTurnStatusRemoved = {},
+    ---@type table<string, table<string, EquipmentChangedCallback>>
+    EquipmentChanged = {
+        Template = {},
+        Tag = {}
+    }
+}
+
 local function CleanupForceAction(handle, target, x, y, z, timerStartFunc)
 	if GetDistanceToPosition(target, x,y,z) < 1 then
 		NRD_GameActionDestroy(handle)
@@ -95,7 +105,7 @@ end
 RegisterStatusListener("Removed", "All", OnStatusRemoved)
 
 local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
-	local callbacks = Listeners.EndTurnStatusRemoved[status]
+	local callbacks = _listeners.EndTurnStatusRemoved[status]
 	if callbacks ~= nil then
 		for i,callback in pairs(callbacks) do
 			local s,err = xpcall(callback, debug.traceback, target, status, source)
