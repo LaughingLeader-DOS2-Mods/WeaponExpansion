@@ -45,89 +45,92 @@ if not Vars.IsClient then
 		Vanquisher = "LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY",
 	}
 
+	---@param uuid UUID
 	local function ClearBlademasterComboTag(uuid)
 		if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 1 then
 			ClearTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
 		end
 	end
 
+	---@param uuid UUID
 	local function SetBlademasterComboTag(uuid)
 		if IsTagged(uuid, "LLWEAPONEX_Blademaster_Target_Available") == 0 then
 			SetTag(uuid, "LLWEAPONEX_Blademaster_Target_Available")
 		end
 	end
 
-	local function ClearBlademasterComboStatuses(uuid)
-		if CharacterIsDead(uuid) == 1 then
+	---@param char EsvCharacter
+	local function ClearBlademasterComboStatuses(char)
+		if GameHelpers.Character.IsDeadOrDying(char) then
 			return false
 		end
 		for i,v in pairs(ComboStatuses) do
-			if HasActiveStatus(uuid, v) == 1 then
-				GameHelpers.Status.Remove(uuid, v)
+			if GameHelpers.Status.IsActive(char, v) then
+				GameHelpers.Status.Remove(char, v)
 				return true
 			end
 		end
 		return false
 	end
 
+	---@param char EsvCharacter
 	---@return boolean,integer
-	local function HasComboStatus(uuid)
-		if CharacterIsDead(uuid) == 1 then
+	local function HasComboStatus(char)
+		if GameHelpers.Character.IsDeadOrDying(char) then
 			return false,0
 		end
 		for i,v in pairs(ComboStatuses) do
-			if HasActiveStatus(uuid, v) == 1 then
+			if GameHelpers.Status.IsActive(char, v) then
 				return true,i
 			end
 		end
 		return false,0
 	end
 
+	---@param target EsvCharacter
+	---@param isSource boolean|nil
 	local function CheckActiveCombo(target, isSource)
 		if isSource == true then
-			local data = PersistentVars.StatusData.KatanaCombo[target]
+			local data = PersistentVars.StatusData.KatanaCombo[target.MyGuid]
 			if data ~= nil then
 				if not Common.TableHasAnyEntry(data) then
-					ClearBlademasterComboTag(target)
-					PersistentVars.StatusData.KatanaCombo[target] = nil
+					ClearBlademasterComboTag(target.MyGuid)
+					PersistentVars.StatusData.KatanaCombo[target.MyGuid] = nil
 				end
 			else
-				ClearBlademasterComboTag(target)
+				ClearBlademasterComboTag(target.MyGuid)
 			end
 		else
 			for source,data in pairs(PersistentVars.StatusData.KatanaCombo) do
-				if data[target] == true then
-					data[target] = nil
+				if data[target.MyGuid] == true then
+					data[target.MyGuid] = nil
 				end
 				if not Common.TableHasAnyEntry(data) then
-					ClearBlademasterComboTag(source)
+					ClearBlademasterComboTag(source.MyGuid)
 					PersistentVars.StatusData.KatanaCombo[source] = nil
 				end
 			end
 		end
 	end
 
-	RegisterSkillListener("Shout_LLWEAPONEX_Katana_VanquishersPath", function(skill, char, state, data)
-		if state == SKILL_STATE.CAST then
-			local radius = Ext.StatGetAttribute("Shout_LLWEAPONEX_Katana_VanquishersPath", "AreaRadius")
-			local caster = Ext.GetCharacter(char)
-			PersistentVars.SkillData.VanquishersPath[char] = {}
-			local targetData = PersistentVars.SkillData.VanquishersPath[char]
-			for i,v in pairs(caster:GetNearbyCharacters(radius)) do
-				--local character = Ext.GetCharacter(v)
-				local b,count = HasComboStatus(v)
-				if b then
-					table.insert(targetData, {UUID=v,Count=count,Valid=true})
-					ClearBlademasterComboStatuses(v)
-				end
+	SkillManager.Register.Cast("Shout_LLWEAPONEX_Katana_VanquishersPath", function(e)
+		local radius = Ext.StatGetAttribute("Shout_LLWEAPONEX_Katana_VanquishersPath", "AreaRadius")
+		PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid] = {}
+		local targetData = PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid]
+		for target in GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=radius, Relation={Enemy=true}}) do
+			--local character = Ext.GetCharacter(v)
+			local b,count = HasComboStatus(target.MyGuid)
+			if b then
+				table.insert(targetData, {UUID=target.MyGuid,Count=count,Valid=true})
+				ClearBlademasterComboStatuses(target.MyGuid)
 			end
-			if #targetData > 0 then
-				ObjectSetFlag(char, "LLWEAPONEX_Katanas_DisableCombo", 0)
-				Timer.Start("LLWEAPONEX_Katana_VanquishersPath_HitNext", 250, char)
-			else
-				PersistentVars.SkillData.VanquishersPath[char] = nil
-				CheckActiveCombo(char, true)
-			end
+		end
+		if #targetData > 0 then
+			ObjectSetFlag(e.Character.MyGuid, "LLWEAPONEX_Katanas_DisableCombo", 0)
+			Timer.StartObjectTimer("LLWEAPONEX_Katana_VanquishersPath_HitNext", e.Character, 250)
+		else
+			PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid] = nil
+			CheckActiveCombo(e.Character, true)
 		end
 	end)
 
@@ -186,11 +189,10 @@ if not Vars.IsClient then
 					local applyComboStatus = ComboStatuses[math.min(#ComboStatuses, targetData.Count)]
 					local enemy = Ext.GetCharacter(target)
 					if enemy ~= nil then
-						for i,v in pairs(enemy:GetNearbyCharacters(6.0)) do
-							if CharacterIsDead(v) == 0 and (CharacterIsEnemy(v, attacker) == 1 or IsTagged(v, "LeaderLib_FriendlyFireEnabled") == 1) then
-								GameHelpers.Status.Apply(v, applyComboStatus, 6.0, 0, attacker)
-								hasTarget = true
-							end
+						local enemyPos = enemy.WorldPos
+						for target in GameHelpers.Grid.GetNearbyObjects(attacker, {Radius=6, Position=enemyPos, Relation={Enemy=true}}) do
+							GameHelpers.Status.Apply(target, applyComboStatus, 6.0, false, attacker)
+							hasTarget = true
 						end
 					end
 				end
@@ -199,66 +201,101 @@ if not Vars.IsClient then
 				end
 			end
 			table.remove(PersistentVars.SkillData.VanquishersPath[attacker], index)
+			if #PersistentVars.SkillData.VanquishersPath[attacker] == 0 then
+				PersistentVars.SkillData.VanquishersPath[attacker] = nil
+			end
 		end
 	end)
 
-	RegisterSkillListener("Target_LLWEAPONEX_Katana_VanquishersPath_Hit", function(skill, char, state, data)
-		if state == SKILL_STATE.HIT then
-			local targetData,index = GetVanquishersPathTargetData(char, data.Target)
-			if targetData ~= nil then
-				local comboCount = targetData.Count or 0
-				if comboCount >= #ComboStatuses then
-					NRD_HitClearAllDamage(data.Handle)
-					GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Target_LLWEAPONEX_Katana_VanquishersPath_Hit_Max",
-					{HitParams=HitFlagPresets.GuaranteedWeaponHit:Append({CriticalHit=1})})
+	SkillManager.Register.Hit("Target_LLWEAPONEX_Katana_VanquishersPath_Hit", function(e)
+		local targetData,index = GetVanquishersPathTargetData(e.Character, e.Data.Target)
+		if targetData ~= nil then
+			local comboCount = targetData.Count or 0
+			if comboCount >= #ComboStatuses then
+				e.Data:ClearAllDamage()
+
+				--Recalculate damage to max amount
+
+				local damageList = Game.Math.GetSkillDamage(e.Data.SkillData, e.Character.Stats, false, false, e.Character.WorldPos, e.Data.TargetObject.WorldPos, e.Character.Stats.Level, true)
+
+				e.Data.DamageList:Merge(damageList)
+
+				local alwaysBackstab = false
+
+				if e.Data.SkillData.SkillProperties then
+					for _,v in pairs(e.Data.SkillData.SkillProperties) do
+						if v.Action == "AlwaysBackstab" then
+							alwaysBackstab = true
+						end
+					end
 				end
-			end
-		elseif state == SKILL_STATE.CAST then
-			local targetData = PersistentVars.SkillData.VanquishersPath[char]
-			if targetData ~= nil and #targetData > 0 then
-				Timer.Start("LLWEAPONEX_Katana_VanquishersPath_HitNext", 2000, char)
-			else
-				PersistentVars.SkillData.VanquishersPath[char] = nil
+			
+				if GameHelpers.Ext.ObjectIsCharacter(e.Data.TargetObject) then
+					HitOverrides._ComputeCharacterHitFunction(e.Data.TargetObject.Stats, e.Character.Stats, e.Character.Stats.MainWeapon, damageList, e.Data.HitContext.HitType, false, false, e.Data.HitRequest, alwaysBackstab, "EvenGround", "Critical")
+				end
+
+				e.Data:ApplyDamageList(true)
 			end
 		end
 	end)
 
+	SkillManager.Register.Cast("Target_LLWEAPONEX_Katana_VanquishersPath_Hit", function(e)
+		local targetData = PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid]
+		if targetData ~= nil and #targetData > 0 then
+			Timer.StartObjectTimer("LLWEAPONEX_Katana_VanquishersPath_HitNext", e.Character, 2000)
+		else
+			PersistentVars.SkillData.VanquishersPath[e.Character.MyGuid] = nil
+		end
+	end)
+
+	---@param i integer
+	---@param target EsvCharacter
+	---@param source EsvCharacter
 	local function ApplyDefaultFinisherDamage(i, target, source)
 		GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_VanquisherDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 	end
 
+	---@param i integer
+	---@param target EsvCharacter
+	---@param source EsvCharacter
 	local function ApplyIaidoDamage(i, target, source)
 		if i % 2 == 0 then
 			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_IaidoDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 		else
-			GameHelpers.Status.Apply(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_RUPTURE", 0.0, true, source)
 		end
 	end
 
+	---@param i integer
+	---@param target EsvCharacter
+	---@param source EsvCharacter
 	local function ApplyVanquisherDamage(i, target, source)
 		if i % 2 == 0 then
 			GameHelpers.Damage.ApplySkillDamage(source, target, "Projectile_LLWEAPONEX_Status_Katana_Finisher_VanquisherDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit, ApplySkillProperties=true})
 		else
-			GameHelpers.Status.Apply(target, "LLWEAPONEX_RUPTURE", 0.0, 1, source.MyGuid)
+			GameHelpers.Status.Apply(target, "LLWEAPONEX_RUPTURE", 0, true, source)
 		end
 	end
 
+	---@param target EsvCharacter|EsvItem
+	---@param source EsvCharacter
+	---@param comboMod integer|nil
 	local function IncrementCombo(target, source, comboMod)
 		comboMod = comboMod or 1
 		local comboNum = comboMod
 		for i,v in pairs(ComboStatuses) do
-			if HasActiveStatus(target, v) == 1 then
+			if GameHelpers.Status.IsActive(target, v) then
 				comboNum = math.min(#ComboStatuses, i + comboMod)
 				break
 			end
 		end
 		local nextStatus = ComboStatuses[comboNum]
 		if nextStatus ~= nil then
-			if HasActiveStatus(target, nextStatus) == 0 then
-				GameHelpers.Status.Apply(target, nextStatus, 6.0, 0, source)
+			if not GameHelpers.Status.IsActive(target, nextStatus) then
+				GameHelpers.Status.Apply(target, nextStatus, 6.0, false, source)
 			end
-			if ObjectIsCharacter(target) == 1 then
-				local status = Ext.GetCharacter(target):GetStatus(nextStatus)
+			if GameHelpers.Ext.ObjectIsCharacter(target) then
+				local status = target:GetStatus(nextStatus)
 				if status ~= nil then
 					status.CurrentLifeTime = 6.0
 					status.KeepAlive = true
@@ -275,36 +312,35 @@ if not Vars.IsClient then
 		LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY = ApplyVanquisherDamage,
 	}
 
-	RegisterStatusListener("Applied", {
+	StatusManager.Register.Applied({
 		"LLWEAPONEX_KATANA_FINISHER_APPLY", 
 		"LLWEAPONEX_KATANA_FINISHER_IAIDO_APPLY", 
 		--"LLWEAPONEX_KATANA_FINISHER_VANQUISHER_APPLY"
-	}, 
-	function(target, status, source)
-		if not StringHelpers.IsNullOrEmpty(source) then
-			local sourceChar = Ext.GetCharacter(source)
+	},
+	function(target, status, source, statusType, statusEvent)
+		if source then
 			local hasCombo,total = HasComboStatus(target)
 			if total > 0 then
-				ObjectSetFlag(source, "LLWEAPONEX_Katanas_DisableCombo", 0)
-				local damageCallback = FinisherDamageData[status]
+				ObjectSetFlag(source.MyGuid, "LLWEAPONEX_Katanas_DisableCombo", 0)
+				local damageCallback = FinisherDamageData[status.StatusId]
 				if damageCallback == nil then 
-					damageCallback = FinisherDamageData.LLWEAPONEX_KATANA_FINISHER_APPLY 
+					damageCallback = FinisherDamageData.LLWEAPONEX_KATANA_FINISHER_APPLY
 				end
 				local deadComboAmount = 0
 				for i=total,0,-1 do
-					if CharacterGetHitpointsPercentage(target) <= 0 then
+					if GameHelpers.Character.IsDeadOrDying(target) then
 						deadComboAmount = i
 						break
 					else
 						ClearBlademasterComboStatuses(target)
 					end
-					local b,result = xpcall(damageCallback, debug.traceback, i, target, sourceChar)
+					local b,result = xpcall(damageCallback, debug.traceback, i, target, source)
 					if not b then
 						Ext.PrintError(result)
 					end
 				end
 				local hasTarget = false
-				ObjectClearFlag(source, "LLWEAPONEX_Katanas_DisableCombo", 0)
+				ObjectClearFlag(source.MyGuid, "LLWEAPONEX_Katanas_DisableCombo", 0)
 			end
 		end
 	end)
@@ -326,7 +362,7 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterStatusListener("Removed", ComboStatuses, function(target, status, ...)
+	StatusManager.Register.Removed(ComboStatuses, function(target, status, ...)
 		if not HasComboStatus(target) then
 			CheckActiveCombo(target)
 		end
@@ -338,13 +374,17 @@ if not Vars.IsClient then
 		PersistentVars.StatusData.KatanaCombo[uuid] = nil
 	end)
 
+	---@param target EsvCharacter|EsvItem
+	---@param source EsvCharacter
 	---@param data HitData
+	---@param tag string
+	---@param skill string
 	local function ApplyKatanaCombo(target, source, data, tag, skill)
-		if ObjectIsCharacter(target) == 1 and CharacterIsEnemy(target, source) == 1 then
-			if MasteryBonusManager.HasMasteryBonus(source, "KATANA_COMBO") and ObjectGetFlag(source, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
+		if GameHelpers.Ext.ObjectIsCharacter(target) and GameHelpers.Character.CanAttackTarget(target, source, false) then
+			if MasteryBonusManager.HasMasteryBonus(source, "KATANA_COMBO") and ObjectGetFlag(source.MyGuid, "LLWEAPONEX_Katana_ComboDisabled") == 0 then
 				local maxStatus = ComboStatuses[#ComboStatuses]
-				if HasActiveStatus(target, maxStatus) == 1 then
-					local status = Ext.GetCharacter(target):GetStatus(maxStatus)
+				if GameHelpers.Status.IsActive(target, maxStatus) then
+					local status = target:GetStatus(maxStatus)
 					if status ~= nil then
 						status.CurrentLifeTime = status.LifeTime
 						status.RequestClientSync = true
@@ -371,8 +411,8 @@ if not Vars.IsClient then
 
 	AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_Katana", function(tag, attacker, target, data, targetIsObject, skill)
 		if targetIsObject then
-			ApplyKatanaCombo(target.MyGuid, attacker.MyGuid, data, "LLWEAPONEX_Katana", data.SkillData)
-			if data.Damage > 0 and HasActiveStatus(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") == 1 then
+			ApplyKatanaCombo(target, attacker, data, "LLWEAPONEX_Katana", data.SkillData)
+			if data.Damage > 0 and GameHelpers.Status.IsActive(attacker, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS") then
 				GameHelpers.Status.Remove(attacker.MyGuid, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
 				local damageBonus = (GameHelpers.GetExtraData("LLWEAPONEX_MB_Katana_Backlash_DamageBonus", 50) * 0.01)
 				if damageBonus > 0 then
