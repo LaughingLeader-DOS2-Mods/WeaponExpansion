@@ -6,8 +6,7 @@ end
 ---@param item EsvItem
 local function RunBreachKnockback(source, item)
 	local radius = Ext.StatGetAttribute("Projectile_LLWEAPONEX_RemoteMine_Breach", "ExplodeRadius")
-	for i,v in pairs(item:GetNearbyCharacters(radius)) do
-		local target = Ext.GetCharacter(v)
+	for target in GameHelpers.Grid.GetNearbyObjects(source, {Radius=radius, Position=item.WorldPos}) do
 		local startPos = target.WorldPos
 		local dir = GameHelpers.Math.GetDirectionVector(item.WorldPos, target.WorldPos)
 		dir[1] = dir[1] * -1

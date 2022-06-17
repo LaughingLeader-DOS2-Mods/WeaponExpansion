@@ -132,28 +132,24 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_RallyingCry", "<font color='#88FF33'>Affected allies will basic attack the nearest enemy within range.</font>"),
 		Statuses = {"HARMONY"},
 		DisableStatusTooltip = true
-	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
-		if (ObjectIsCharacter(target) == 1
-		and not GameHelpers.Status.IsDisabled(target, true)
-		and NRD_ObjectHasStatusType(target, "DISARMED") == 0
+	}):RegisterStatusListener("Applied", function(bonuses, ally, status, source, statusType)
+		if (ObjectIsCharacter(ally) == 1
+		and not GameHelpers.Status.IsDisabled(ally, true)
+		and NRD_ObjectHasStatusType(ally, "DISARMED") == 0
 		and bonuses.HasBonus("BANNER_RALLYINGCRY", source)) then
 			local range = 1.0
-			local weapon = CharacterGetEquippedWeapon(target)
+			local weapon = GameHelpers.Character.GetEquippedWeapons(ally)
 			if weapon ~= nil then
-				range = Ext.GetItem(weapon).Stats.WeaponRange / 100
+				range = weapon.Stats.WeaponRange / 100
 			end
 
-			local targets = {}
-
-			for i,v in pairs(Ext.GetCharacter(target):GetNearbyCharacters(range)) do
-				if v ~= target and v ~= source and CharacterIsEnemy(target, v) == 1 then
-					table.insert(targets, v)
-				end
-			end
+			---@type EsvCharacter[]
+			local targets = GameHelpers.Grid.GetNearbyObjects(ally, {AsTable=true, Radius=range, Relation={Enemy=true}, Type="Character"})
 
 			if #targets > 0 then
+				---@type EsvCharacter
 				local attackTarget = Common.GetRandomTableEntry(targets)
-				CharacterAttack(target, attackTarget)
+				CharacterAttack(ally, attackTarget.MyGuid)
 				SignalTestComplete("BANNER_RALLYINGCRY")
 			end
 		end
@@ -316,6 +312,13 @@ if not Vars.IsClient then
 	end)
 end
 
+--Beam test
+---Mods.LeaderLib.GameHelpers.Status.Apply(Mods.WeaponExpansion.Origin.Harken, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, false, me.MyGuid)
+--EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", e.Target, {Target=GameHelpers.GetNetID(v)})
+--EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", e.Target, {BeamTarget=v, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
+--Mods.LeaderLib.EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", me.NetID, {Target=Mods.LeaderLib.GameHelpers.GetNetID(Mods.WeaponExpansion.Origin.Harken)})
+--Mods.LeaderLib.EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", me.MyGuid, {BeamTarget=Mods.WeaponExpansion.Origin.Harken, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
+
 MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 	rb:Create("BANNER_WHIRLWIND", {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
@@ -465,23 +468,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 				Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", false)
 
 				local affectedTargets = 0
-				for _,v in pairs(e.Target:GetNearbyCharacters(radius)) do
-					if e.Target.MyGuid ~= v and CharacterIsAlly(v, e.Target.MyGuid) == 1 then
-						affectedTargets = affectedTargets + 1
+				for ally in GameHelpers.Grid.GetNearbyObjects(e.Target, {Radius=radius, Relation={Ally=true}}) do
+					affectedTargets = affectedTargets + 1
 
-						---@type EsvStatusHeal
-						local status = Ext.PrepareStatus(v, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", 0.0)
-						status.HealAmount = healAmount
-						--status.HealEffect = "HealSharing" --What's this for?
-						status.StatusSourceHandle = e.Target.Handle
-						Ext.ApplyStatus(status)
-						GameHelpers.Status.Apply(v, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, true, e.Target)
-						---Mods.LeaderLib.GameHelpers.Status.Apply(Mods.WeaponExpansion.Origin.Harken, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, false, me.MyGuid)
-						--EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", e.Target, {Target=GameHelpers.GetNetID(v)})
-						--EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", e.Target, {BeamTarget=v, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
-						--Mods.LeaderLib.EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", me.NetID, {Target=Mods.LeaderLib.GameHelpers.GetNetID(Mods.WeaponExpansion.Origin.Harken)})
-						--Mods.LeaderLib.EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", me.MyGuid, {BeamTarget=Mods.WeaponExpansion.Origin.Harken, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
-					end
+					---@type EsvStatusHeal
+					local status = Ext.PrepareStatus(ally.MyGuid, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL", 0.0)
+					status.HealAmount = healAmount
+					status.StatusSourceHandle = e.Target.Handle
+					Ext.ApplyStatus(status)
+					GameHelpers.Status.Apply(ally.MyGuid, "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", 0, true, e.Target)
 				end
 				if affectedTargets > 0 then
 					SignalTestComplete(self.ID)
@@ -596,12 +591,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 			local damagePerAlly = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Overpower_DamageBoostPerAlly", 25)
 			local allyRadius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Overpower_AllyRadius", 3)
 			if damagePerAlly > 0 and allyRadius > 0 then
-				local totalAllies = 0
-				for _,v in pairs(e.Character:GetNearbyCharacters(allyRadius)) do
-					if v ~= e.Character.MyGuid and CharacterIsAlly(v, e.Character.MyGuid) == 1 then
-						totalAllies = totalAllies + 1
-					end
-				end
+				local totalAllies = #GameHelpers.Grid.GetNearbyObjects(e.Character, {AsTable=true, Radius=allyRadius, Relation={Ally=true}})
 				if totalAllies > 0 then
 					local boost = 1 + ((totalAllies * damagePerAlly) * 0.01)
 					e.Data:MultiplyDamage(boost)
@@ -621,6 +611,5 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		CharacterUseSkill(char1, "Target_EnemyOverpower", dummy, 1, 1, 1)
 		test:WaitForSignal(self.ID, 10000)
 		test:AssertGotSignal(self.ID)
-		test:Wait(5000)
 	end),
 })
