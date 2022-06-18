@@ -156,44 +156,59 @@ if not _ISCLIENT then
 		SetTag(character, "LLWEAPONEX_MasteryTestCharacter")
 	end
 
+	MasteryTesting.SetupCharacter = SetupCharacter
+
 	---@param test LuaTest
 	---@param pos number[]|nil
 	---@param equipmentSet string|nil
 	---@param targetTemplate string|nil
+	---@param setEnemy boolean|nil
+	---@param totalDummies integer|nil
 	---@return UUID character
 	---@return UUID dummy
-	function MasteryTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
+	function MasteryTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
 		local host = Ext.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
-		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
 		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
 		NRD_CharacterSetPermanentBoostInt(character, "Accuracy", 200)
 		
 		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
 		SetupCharacter(character, host.MyGuid, equipmentSet)
-		
-		local dummy = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
-		NRD_CharacterSetPermanentBoostInt(dummy, "Dodge", -100)
 
-		PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
-		SetTag(dummy, "LeaderLib_TemporaryCharacter")
-		SetVarObject(dummy, "LLDUMMY_Owner", character)
-		Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
-		if setEnemy then
-			--CharacterSetTemporaryHostileRelation(dummy, character)
-			SetFaction(dummy, "Evil NPC")
+		totalDummies = totalDummies or 1
+		totalDummies = math.max(1, totalDummies)
+
+		local dummies = {}
+		for i=1,totalDummies do
+			local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
+
+			local dummy = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
+			NRD_CharacterSetPermanentBoostInt(dummy, "Dodge", -100)
+	
+			PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
+			SetTag(dummy, "LeaderLib_TemporaryCharacter")
+			SetVarObject(dummy, "LLDUMMY_Owner", character)
+			Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
+			if setEnemy then
+				--CharacterSetTemporaryHostileRelation(dummy, character)
+				SetFaction(dummy, "Evil NPC")
+			end
+			TeleportToRandomPosition(dummy, 1.0, "")
+			dummies[#dummies+1] = dummy
 		end
 
 		local cleanup = function ()
 			if ObjectExists(character) == 1 then
 				RemoveTemporaryCharacter(character)
 			end
-			if ObjectExists(dummy) == 1 then
-				SetStoryEvent(dummy, "LLDUMMY_TrainingDummy_DieNow")
+			for _,v in pairs(dummies) do
+				if ObjectExists(v) == 1 then
+					SetStoryEvent(v, "LLDUMMY_TrainingDummy_DieNow")
+				end
 			end
 		end
 		Timer.StartOneshot("", 30000, cleanup)
-		return character,dummy,cleanup
+		return character,dummies[1],cleanup,dummies
 	end
 
 	---@param test LuaTest

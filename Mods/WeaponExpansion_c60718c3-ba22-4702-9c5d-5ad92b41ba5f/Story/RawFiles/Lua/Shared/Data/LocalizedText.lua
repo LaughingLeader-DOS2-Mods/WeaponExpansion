@@ -232,6 +232,8 @@ Text = {
 		Axe_DisabledBonus = ts:CreateFromKey("LLWEAPONEX_CombatLog_Axe_DisabledBonus", "<font color='#F5785A'>Axe Mastery 1:</font> [1] dealt bonus damage to [2] ([3] 'disabled' bonus damage)."),
 		BattleBook_ChallengeWon = ts:CreateFromKey("LLWEAPONEX_CombatLog_BattleBook_ChallengeWon", "<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted the skillbook '[3]'."),
 		BattleBook_ChallengeWon_NoSkills = ts:CreateFromKey("LLWEAPONEX_CombatLog_BattleBook_ChallengeWonNoSkills", "<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted gold as a reward (target has no skills)."),
+		Bludgeon_ShellCracking_StatusRemoved = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusRemoved", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] removed <font color='[4]'>[2]</font> from [3], triggering a <font color='#7F00FF'>magical explosion</font>."),
+		Bludgeon_ShellCracking_StatusTurnsReduced = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusTurnsReduced", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] attacked [2], reducing the duration of <font color='[5]'>[3]</font> by <font color='#FF3333'>[4]</font>."),
 	},
 	StatusText = {
 		StatusExtended = ts:Create("h8224bb41g2261g4a50ga1feg7dc0f7394eb7", "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"),

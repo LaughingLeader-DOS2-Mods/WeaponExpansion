@@ -80,10 +80,10 @@ function MasteryBonusData:Create(id, params)
 			this[k] = v
 		end
 	end
-	if this.Skills and Common.TableHasEntry(this.Skills, "All") then
+	if type(this.Skills) == "table" and Common.TableHasEntry(this.Skills, "All") then
 		this.AllSkills = true
 	end
-	if this.Statuses and Common.TableHasEntry(this.Statuses, "All") then
+	if type(this.Statuses) == "table" and Common.TableHasEntry(this.Statuses, "All") then
 		this.AllStatuses = true
 	end
 	setmetatable(this, {

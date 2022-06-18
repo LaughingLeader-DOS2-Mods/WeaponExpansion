@@ -12,7 +12,8 @@ local isClient = Ext.IsClient()
 
 MasteryBonusManager = {
 	Vars = {
-		RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"}
+		RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"},
+		BasicAttack = "ActionAttackGround"
 	},
 	---The string format for mastery rank tags, set on a character.
 	MasteryRankTagFormatString = "%s_Mastery%i"

@@ -8,10 +8,8 @@ Banner	4	Banner Protection	When near a placed banner, you cannot be flanked. Del
 Battle Book	1	Book Hunter	When opening a bookcase or stack of books, there is a small chance to find a skillbook.	√	√
 Battle Book	2	Scroll	When using any scroll, gain 1 AP. Can only happen once per turn.	√	√
 Battle Book	3	Scholar	Gain a percentage of damage for skills of the most memorized ability school (i.e. if most skills you have memorized are fire skills, fire skills deal bonus damage). Scales with total skill slots, and the highest ability school can be tied to spread the damage bonuses, albeit at a reduced cap.	√	√
-Bludgeon	2	Armor Breaker	When attacking a target with physical armor or magic armor, deal additional damage to that armor, depending on the damage type.	√	√
-Bludgeon	2	Placeholder	Desc	❌	❌
-Bludgeon	3	Placeholder	Desc	❌	❌
-Bludgeon	4	Placeholder	Desc	❌	❌
+Bludgeon	2	Armor Breaker	When basic attacking, deal additional damage directly to armor values. If an armor-altering mod like Divinity Unleashed is present, deal bonus damage instead.	√	√
+Bludgeon	4	Shatter	Hitting a Petrified or Frozen target with a basic attack or weapon skill deals a critical hit, and shatters the shell, ending the status. If the target is an ally, damage is reduced.	√	❌
 Bow	1	Placeholder	Desc	❌	❌
 Bow	2	Placeholder	Desc	❌	❌
 Bow	3	Placeholder	Desc	❌	❌

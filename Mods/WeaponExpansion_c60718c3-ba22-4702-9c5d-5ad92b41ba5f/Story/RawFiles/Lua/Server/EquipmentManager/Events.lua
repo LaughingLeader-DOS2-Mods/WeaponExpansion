@@ -6,6 +6,8 @@ local self = EquipmentManager
 ---@field Equipped boolean
 ---@field Template string
 
+EquipmentManager.Events = {}
+
 ---@type SubscribableEvent<EquipmentChangedEventArgs>
 EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("EquipmentChanged")
 
@@ -38,16 +40,18 @@ function EquipmentManager:OnItemEquipped(character, item)
 		return
 	end
 
+	
 	local db = Osi.DB_LLWEAPONEX_Equipment_ActiveTags:Get(character.MyGuid, "LLWEAPONEX_Unarmed", "NULL_00000000-0000-0000-0000-000000000000")
 	if db and #db > 0 then
 		Osi.DB_LLWEAPONEX_Equipment_ActiveTags:Delete(character.MyGuid, "LLWEAPONEX_Unarmed", "NULL_00000000-0000-0000-0000-000000000000")
 		Osi.DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries:Delete(character.MyGuid, "NULL_00000000-0000-0000-0000-000000000000", "LLWEAPONEX_Unarmed")
 		Osi.LLWEAPONEX_WeaponMastery_Internal_CheckRemovedMasteries(character.MyGuid, "LLWEAPONEX_Unarmed")
 	end
-
+	
 	local isPlayer = GameHelpers.Character.IsPlayer(character)
 	local itemTags = GameHelpers.GetItemTags(item, true, false)
 	local statType = item.ItemType
+	local template = GameHelpers.GetTemplate(item)
 
 	if not itemTags["LLWEAPONEX_TaggedWeaponType"]
 	and (SharedData.GameMode == GAMEMODE.GAMEMASTER or isPlayer)
@@ -89,7 +93,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 
 	self:CheckWeaponAnimation(character, item, itemTags)
 
-	Osi.LLWEAPONEX_OnItemTemplateEquipped(character.MyGuid, item.MyGuid, item.RootTemplate.Id)
+	Osi.LLWEAPONEX_OnItemTemplateEquipped(character.MyGuid, item.MyGuid, template)
 
 	for k,unique in pairs(Uniques) do
 		if itemTags[unique.Tag] then
@@ -111,19 +115,20 @@ function EquipmentManager:OnItemEquipped(character, item)
 		EquipmentManager.CheckFirearmProjectile(character, item)
 	end
 
-	local callbacks = Listeners.EquipmentChanged.Template[item.RootTemplate.Id]
+	local callbacks = _templateListeners[template]
 	if callbacks ~= nil then
 		if Vars.DebugMode then
-			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", item.RootTemplate.Id, item.Stats.Name, character.MyGuid))
+			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", template, item.Stats.Name, character.MyGuid))
 		end
 		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, character, item, item.RootTemplate.Id, true)
+			local b,err = xpcall(callback, debug.traceback, character, item, template, true)
 			if not b then
 				Ext.PrintError(err)
 			end
 		end
 	end
-	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
+
+	for tag,callbacks in pairs(_tagListeners) do
 		if itemTags[tag] then
 			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.Stats.Name, character.MyGuid))
@@ -146,7 +151,8 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	end
 
 	local isPlayer = GameHelpers.Character.IsPlayer(character)
-	local template = item.RootTemplate.Id
+	local template = GameHelpers.GetTemplate(item)
+	local itemTags = GameHelpers.GetItemTags(item, true, false)
 
 	--TODO Refactor to Lua stuff
 	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(character.MyGuid, item.MyGuid, template)
@@ -158,7 +164,7 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	end
 	self:CheckForUnarmed(character, isPlayer)
 
-	local callbacks = Listeners.EquipmentChanged.Template[template]
+	local callbacks = _templateListeners[template]
 	if callbacks ~= nil then
 		if Vars.DebugMode then
 			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.Stats.Name, character.MyGuid))
@@ -170,8 +176,8 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 			end
 		end
 	end
-	for tag,callbacks in pairs(Listeners.EquipmentChanged.Tag) do
-		if GameHelpers.ItemHasTag(item, tag) then
+	for tag,callbacks in pairs(_tagListeners) do
+		if itemTags[tag] then
 			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.Stats.Name, character.MyGuid))
 			end

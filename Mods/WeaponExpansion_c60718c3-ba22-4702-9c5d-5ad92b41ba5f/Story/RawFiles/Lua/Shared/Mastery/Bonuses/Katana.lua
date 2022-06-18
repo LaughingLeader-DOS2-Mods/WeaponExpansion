@@ -368,14 +368,16 @@ if not Vars.IsClient then
 		end
 	end)
 
-	Mastery.Events.MasteryChanged:Subscribe(function (e)
-		if not e.Enabled then
-			local uuid = e.Character.MyGuid
-			ClearBlademasterComboTag(uuid)
-			PersistentVars.SkillData.VanquishersPath[uuid] = nil
-			PersistentVars.StatusData.KatanaCombo[uuid] = nil
-		end
-	end, {MatchArgs={ID="LLWEAPONEX_Katana"}})
+	if not Vars.IsClient then
+		Mastery.Events.MasteryChanged:Subscribe(function (e)
+			if not e.Enabled then
+				local uuid = e.Character.MyGuid
+				ClearBlademasterComboTag(uuid)
+				PersistentVars.SkillData.VanquishersPath[uuid] = nil
+				PersistentVars.StatusData.KatanaCombo[uuid] = nil
+			end
+		end, {MatchArgs={ID="LLWEAPONEX_Katana"}})
+	end
 
 	---@param target EsvCharacter|EsvItem
 	---@param source EsvCharacter

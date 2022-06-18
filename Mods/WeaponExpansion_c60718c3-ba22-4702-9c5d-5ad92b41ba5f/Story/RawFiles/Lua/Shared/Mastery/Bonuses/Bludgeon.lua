@@ -3,6 +3,12 @@ local rb = MasteryDataClasses.MasteryBonusData
 
 local _eqSet = "Class_Cleric_Humans"
 
+local _ignoreFormatColors = {
+	White = true,
+	DarkGray = true,
+	Black = true,
+}
+
 MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 	rb:Create("BLUDGEON_RUSH_DIZZY", {
 		Skills = MasteryBonusManager.Vars.RushSkills,
@@ -33,6 +39,79 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 		test:AssertGotSignal(self.ID)
 		test:Wait(500)
 		test:AssertEquals(HasActiveStatus(dummy, "LLWEAPONEX_DIZZY") == 1, true, "LLWEAPONEX_DIZZY not applied to target")
+		return true
+	end),
+
+	rb:Create("BLUDGEON_SHELLCRACKING", {
+		Skills = {"Target_HeavyAttack","Target_DualWieldingAttack"},
+		Statuses = {"FORTIFIED", "MAGIC_SHELL"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_ShellCracking", "<font color='#F19824'>Hitting a target with [FORTIFIED_DisplayName] or [MAGIC_SHELL_DisplayName] reduces the remaining duration by [ExtraData:LLWEAPONEX_MB_Bludgeon_FortifyShellTurnReduction:1] turn(s).<br>If the status is reduced to 0, the magical energy explodes, dealing an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage:ExplodeRadius]m radius.</font>"),
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
+			local turnReduction = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_FortifyShellTurnReduction", 1)
+			if turnReduction > 0 then
+				local durationReduction = turnReduction * 6.0
+				local affectedStatus = false
+				local createdExplosion = false
+				local sourceName = GameHelpers.GetDisplayName(e.Character)
+				local targetName = GameHelpers.GetDisplayName(e.Data.TargetObject)
+				local effectPos = {GameHelpers.Math.GetPosition(e.Data.Target, true)}
+				effectPos[2] = effectPos[2] + 1
+				for _,id in pairs(self.Statuses) do
+					local status = e.Data.TargetObject:GetStatus(id)
+					if status and status.CurrentLifeTime > 0 then -- Ignore permanent statuses
+						local statusColor = Ext.StatGetAttribute(id, "FormatColor")
+						if StringHelpers.IsNullOrWhitespace(statusColor) or _ignoreFormatColors[statusColor] then
+							statusColor = "Green"
+						end
+						local nextDuration = status.CurrentLifeTime - durationReduction
+						if nextDuration <= 0 then
+							GameHelpers.Status.Remove(e.Data.TargetObject, id)
+							GameHelpers.Skill.Explode(e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage", e.Character, {EnemiesOnly = true})
+							local combatLogText = Text.CombatLog.Bludgeon_ShellCracking_StatusRemoved:ReplacePlaceholders(sourceName, GameHelpers.Stats.GetDisplayName(id), targetName, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
+							CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
+
+							createdExplosion = true
+
+							EffectManager.PlayEffectAt("RS3_FX_GP_Combat_Hit_MagicalArmor_01", effectPos, {Rotation={1,0,0,0,10,10,0,0,0}, Scale=1.5})
+						else
+							status.CurrentLifeTime = nextDuration
+							status.RequestClientSync = true
+
+							local combatLogText = Text.CombatLog.Bludgeon_ShellCracking_StatusTurnsReduced:ReplacePlaceholders(sourceName, targetName, GameHelpers.Stats.GetDisplayName(id), turnReduction, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
+							CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
+						end
+						affectedStatus = true
+					end
+				end
+				if affectedStatus then
+					if createdExplosion then
+						PlaySound(e.Data.Target, "Skill_Poly_StripResistance_Impact")
+					end
+					--PlaySound(e.Data.Target, "Skill_Item_RecoverArmour_Impact")
+					SignalTestComplete(self.ID)
+				end
+			end
+		end
+	end).Register.Test(function(test, self)
+		local char,dummy,cleanup,dummies = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true, 2)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		CharacterSetFightMode(char, 1, 1)
+		GameHelpers.Status.Apply(dummy, "FORTIFIED", 6.0, true, dummy)
+		GameHelpers.Status.Apply(dummy, "MAGIC_SHELL", 12.0, true, dummy)
+		test:Wait(1000)
+		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		test:Wait(1000)
+		local turnReduction = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_FortifyShellTurnReduction", 1)
+		if turnReduction > 0 then
+			test:AssertEquals(HasActiveStatus(dummy, "FORTIFIED") == 0, true, "FORTIFIED not removed")
+			test:AssertEquals(GetStatusTurns(dummy, "MAGIC_SHELL") <= 1, true, "MAGIC_SHELL duration not reduced")
+		end
+		test:Wait(1000)
 		return true
 	end),
 })
@@ -83,7 +162,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 		return true
 	end),
 	rb:Create("BLUDGEON_ARMORBREAKER", {
-		Skills = {"ActionAttackGround"},
+		Skills = MasteryBonusManager.Vars.BasicAttack,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_ArmorBreaker", "<font color='#F19824'>Deal [ExtraData:LLWEAPONEX_MB_Bludgeon_BonusArmorDamage:25]% additional damage to <font color='#A8A8A8'>[Handle:hb677b3f7g5cf6g49c3g84fag2f773ef50dd6:Physical Armour]</font> and <font color='#188EDE'>[Handle:hd82fb3dag025bg4caag856egceaf8ecad162:Magic Armour]</font> with basic attacks.</font>"),
 		OnGetTooltip = function (self, skillOrStatus, character, tooltipType, status)
 			if ArmorSystemIsDisabled() then
@@ -196,6 +275,14 @@ if not Vars.IsClient then
 	end)
 end
 
+if Vars.IsClient then
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_BludgeonShatterMultiplier = function(param, statCharacter)
+		--1 + (mult * 0.01), so it always is making the hit deal more damage
+		local critMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterDamageMultiplier", 200)
+		return string.format("%i", Ext.Round(critMult + 100))
+	end
+end
+
 MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 	rb:Create("BLUDGEON_FLURRY", {
 		Skills = {"Target_Flurry","Target_EnemyFlurry"},
@@ -225,6 +312,57 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 		test:WaitForSignal("BLUDGEON_FLURRY_FinalSkill", 20000)
 		test:AssertGotSignal("BLUDGEON_FLURRY_FinalSkill")
 		test:Wait(1000)
+		return true
+	end),
+
+	rb:Create("BLUDGEON_SHATTER", {
+		Skills = MasteryBonusManager.Vars.BasicAttack,
+		Statuses = {"PETRIFIED", "FROZEN"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_Shatter", "<font color='#F19824'>Basic attacking a target with [PETRIFIED_DisplayName] or [FROZEN_DisplayName] will shatter the coating, dealing a massive critical hit ([LLWEAPONEX_BludgeonShatterMultiplier]% damage) and cleansing the status.</font><br><font color='#33FF33'>Allies take reduced damage.</font>"),
+	}):RegisterOnWeaponTagHit("LLWEAPONEX_Bludgeon", function(tag, attacker, target, data, targetIsObject, skill, self)
+		if targetIsObject and not skill and data.Damage > 0 and GameHelpers.Status.IsActive(target, self.Statuses) then
+			if GameHelpers.Character.IsAllyOfParty(target) then
+				local damageReduction = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterAllyDamageReduction", 25)
+				if damageReduction > 0 then
+					--Reduce damage
+					data:MultiplyDamage((damageReduction * 0.01), true)
+				end
+			else
+				local critMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterDamageMultiplier", 200)
+				if critMult > 0 then
+					if data:HasHitFlag("CriticalHit", true) then
+						local weaponCritMult = Game.Math.GetCriticalHitMultiplier(attacker.Stats.MainWeapon, attacker.Stats, 1.0)
+						critMult = critMult - (weaponCritMult * 100)
+					end
+					data:SetHitFlag("CriticalHit", true)
+					--local critMult = Game.Math.GetCriticalHitMultiplier(attacker.Stats.MainWeapon, attacker.Stats, 1.0)
+					data:MultiplyDamage(1 + (critMult * 0.01), true)
+				end
+			end
+			GameHelpers.Status.Remove(target, self.Statuses)
+			SignalTestComplete(self.ID)
+		end
+	end).Register.Test(function(test, self)
+		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		SetTag(CharacterGetEquippedWeapon(char1), "LLWEAPONEX_Bludgeon")
+		TeleportTo(char1, dummy, "", 0, 1, 1)
+		test:Wait(250)
+		SetFaction(char1, "Good NPC")
+		SetFaction(char2, "Good NPC")
+		CharacterSetFightMode(char1, 1, 1)
+		TeleportTo(char2, char1, "", 0, 1, 1)
+		GameHelpers.Status.Apply(dummy, "FROZEN", -1.0, true, char1)
+		GameHelpers.Status.Apply(char2, "PETRIFIED", -1.0, true, dummy)
+		test:Wait(1000)
+		CharacterAttack(char1, dummy)
+		test:WaitForSignal(self.ID, 5000)
+		test:AssertGotSignal(self.ID)
+		test:Wait(2000)
+		CharacterAttack(char1, char2)
+		test:WaitForSignal(self.ID, 5000)
+		test:AssertGotSignal(self.ID)
 		return true
 	end),
 })

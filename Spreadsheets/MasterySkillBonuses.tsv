@@ -19,6 +19,7 @@ Battle Book	3	Challenge	You additionally challenge your target's book smarts. Up
 Battle Book	3	Curse	Cursing a target deals shadow damage to non-Undead, non-Voidwoken targets.	√	√
 Battle Book	4	Apotheosis	Reduce active cooldowns of the most memorized ability school(s) by 1 turn. For instance, if a majority of skills memorized are Necromancy skills, any Necromancy skill on cooldown would be lowered by 1 turn.	√	√
 Bludgeon	1	Battering Ram/Bull Rush	40% to apply Dizzy for 1 turn. Targets hit get knocked aside 2-4m.	√	√
+Bludgeon	1	All In, Flurry	Hitting a target with Fortified or Magic Shell reduces the status by 1 turn, and deals explosive damage if it reduces it to 0.	√	√
 Bludgeon	2	Crippling Blow	Apply Sundered, reducing max physical/magic armor by 25%.	√	√
 Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts the ground, dealing damage to enemies in a 3m radius.	√	√
 Bludgeon	4	Onslaught	After using Onslaught, leap up into the air and slam down your weapons, dealing bonus damage for each successful hit.	√	√
