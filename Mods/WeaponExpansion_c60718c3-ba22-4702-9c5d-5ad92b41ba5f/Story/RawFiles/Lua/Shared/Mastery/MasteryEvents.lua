@@ -10,3 +10,10 @@ end
 ---@type SubscribableEvent<MasteryChangedEventArgs>
 Mastery.Events.MasteryChanged = Classes.SubscribableEvent:Create("MasteryChanged")
 
+if not Ext.IsClient() then
+	Ext.RegisterOsirisListener("CharacterDied", 1, "after", function(character)
+		local uuid = GameHelpers.GetUUID(character)
+		--Delete various vars here
+		PersistentVars.MasteryMechanics.BludgeonShattering[uuid] = nil
+	end)
+end

@@ -1,5 +1,7 @@
 ---@type TranslatedString
-local ts = Classes["TranslatedString"]
+local ts = Classes.TranslatedString
+
+local _autoReplace = {AutoReplacePlaceholders = true}
 
 ---@type table<string, table<string,TranslatedString>>
 Text = {
@@ -234,10 +236,17 @@ Text = {
 		BattleBook_ChallengeWon_NoSkills = ts:CreateFromKey("LLWEAPONEX_CombatLog_BattleBook_ChallengeWonNoSkills", "<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted gold as a reward (target has no skills)."),
 		Bludgeon_ShellCracking_StatusRemoved = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusRemoved", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] removed <font color='[4]'>[2]</font> from [3], triggering a <font color='#7F00FF'>magical explosion</font>."),
 		Bludgeon_ShellCracking_StatusTurnsReduced = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusTurnsReduced", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] attacked [2], reducing the duration of <font color='[5]'>[3]</font> by <font color='#FF3333'>[4]</font>."),
+		Bludgeon_Shattered = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_Shattered", "<font color='#F19824'>Bludgeon Mastery 4:</font> [1] attacked [2] and shattered [3], dealing a <font color='#FF3333'>Massive [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit] ([6]%)</font> ([4] -> [5])."),
+		Bludgeon_Shattered_Ally = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShatteredAlly", "<font color='#F19824'>Bludgeon Mastery 4:</font> [1] attacked [2] and shattered [3], \"safely\" shattering their affliction."),
 	},
 	StatusText = {
 		StatusExtended = ts:Create("h8224bb41g2261g4a50ga1feg7dc0f7394eb7", "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"),
 		RupteredWound = ts:Create("h325012b0g74d1g4e9bg859bg8b986e80561b", "<font color='#FF1155' size='16'>Ruptered Wound [1]</font>"),
-		ArmorBreak = ts:CreateFromKey("LLWEAPONEX_StatusText_ArmorBreak", "<font color='#88A25B'>Armor Break!</font> [1]")
+		ArmorBreak = ts:CreateFromKey("LLWEAPONEX_StatusText_ArmorBreak", "<font color='#88A25B'>Armor Break!</font> [1]"),
+		BludgeonShatteredStatus = ts:CreateFromKey("LLWEAPONEX_StatusText_BludgeonShatteredStatus", "<font color='#F19824'>Shattered [1]!</font>"),
 	}
 }
+
+for k,v in pairs(Text.CombatLog) do
+	v.AutoReplacePlaceholders = true
+end

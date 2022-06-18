@@ -13,7 +13,7 @@ local isClient = Ext.IsClient()
 MasteryBonusManager = {
 	Vars = {
 		RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"},
-		BasicAttack = "ActionAttackGround"
+		BasicAttack = {"ActionAttackGround"}
 	},
 	---The string format for mastery rank tags, set on a character.
 	MasteryRankTagFormatString = "%s_Mastery%i"
@@ -78,11 +78,6 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 				for _,v in pairs(tbl) do
 					if v.ID then
 						bonuses[v.ID] = true
-						-- if skill == nil or not GameHelpers.Skill.IsAction(skill) then
-						-- 	bonuses[v.ID] = true
-						-- elseif v.Skills ~= nil and Common.TableHasEntry(v.Skills, skill) then
-						-- 	bonuses[v.ID] = true
-						-- end
 					else
 						fprint(LOGLEVEL.ERROR, "[LLWEAPONEX] Bonus is lacking an ID parameter:\n%s", Common.JsonStringify(v))
 					end
@@ -651,8 +646,10 @@ end
 ---@param tooltipType MasteryBonusDataTooltipID
 function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType, ...)
 	local textEntries = {}
+	--Allow clients to view mastery bonuses for statuses affecting other objects
+	local client = Client:GetCharacter()
 	for rankTag,tbl in MasteryBonusManager.GetOrderedMasteryRanks() do
-		if Mastery.HasMasteryRequirement(character, rankTag) then
+		if Mastery.HasMasteryRequirement(character, rankTag) or Mastery.HasMasteryRequirement(client, rankTag) then
 			local addedRankName = false
 			for _,v in pairs(tbl) do
 				local text = EvaluateEntryForBonusText(v, character, skillOrStatus, tooltipType, ...)

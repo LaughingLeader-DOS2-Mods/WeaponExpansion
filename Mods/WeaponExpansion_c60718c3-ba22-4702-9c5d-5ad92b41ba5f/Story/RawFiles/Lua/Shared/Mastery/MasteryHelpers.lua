@@ -43,6 +43,12 @@ local function DebugMasteryActive(character)
 	end
 end
 
+---@param character EsvCharacter|EclCharacter
+---@param mastery string
+function Mastery.IsActive(character, mastery)
+	return GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
+end
+
 ---@param character UUID|EsvCharacter|EclCharacter
 ---@param mastery string
 ---@param minLevel integer

@@ -78,6 +78,10 @@ end
 --- @param expGain number
 --- @param skipFlagCheck boolean
 function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
+	local uuid = GameHelpers.GetUUID(uuid)
+	if not uuid then
+		return false
+	end
 	if skipFlagCheck == true or ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		expGain = expGain or 0.25
 		local currentLevel = 0
@@ -127,13 +131,13 @@ Ext.NewCall(AddMasteryExperience, "LLWEAPONEX_Ext_AddMasteryExperience", "(CHARA
 --- @param uuid string
 --- @param expGain number
 function AddMasteryExperienceForAllActive(uuid,expGain)
-	if ObjectGetFlag(uuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
-		local character = GameHelpers.GetCharacter(uuid)
+	local character = GameHelpers.GetCharacter(uuid)
+	if character and ObjectGetFlag(character.MyGuid, "LLWEAPONEX_DisableWeaponMasteryExperience") == 0 then
 		local activeMasteries = Mastery.GetActiveMasteries(character, false)
 		local length = #activeMasteries
 		if length > 0 then
 			for i=1,length do
-				AddMasteryExperience(uuid,activeMasteries[i],expGain,true)
+				AddMasteryExperience(character.MyGuid,activeMasteries[i],expGain,true)
 			end
 		end
 	end

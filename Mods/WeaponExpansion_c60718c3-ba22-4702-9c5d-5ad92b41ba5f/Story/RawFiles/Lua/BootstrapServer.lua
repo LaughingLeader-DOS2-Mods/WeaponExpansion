@@ -30,6 +30,9 @@ local defaultPersistentVars = {
     MasteryMechanics = {
         ---@type table<UUID,integer>
         AxeFlurryHits = {},
+        ---A table of active statuses to remove.
+        ---@type table<UUID,table<string,boolean>>
+        BludgeonShattering = {},
         ---@type table<UUID,integer>
         CrossbowRicochetHits = {},
         ---@type table<UUID,number[]>
@@ -43,7 +46,7 @@ local defaultPersistentVars = {
         BattlebookChallenge = {},
         ---Protected character to the source (Guardian Angel Banner wielder)
         ---@type table<UUID,UUID>
-        GuardianAngelResurrect = {}
+        GuardianAngelResurrect = {},
     },
     Timers = {},
     OnDeath = {},

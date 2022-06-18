@@ -169,10 +169,12 @@ if not _ISCLIENT then
 	function MasteryTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
 		local host = Ext.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
-		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
+		--LLWEAPONEX_Debug_MasteryDummy_2ac80a2a-8326-4131-a03c-53906927f935
+		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
 		NRD_CharacterSetPermanentBoostInt(character, "Accuracy", 200)
 		
 		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
+		CharacterSetCustomName(character, "Mastery User1")
 		SetupCharacter(character, host.MyGuid, equipmentSet)
 
 		totalDummies = totalDummies or 1
@@ -223,12 +225,15 @@ if not _ISCLIENT then
 		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
 		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)}
 		local pos3 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
-		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
-		local character2 = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3", 0)
+		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
+		local character2 = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
 
 		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
+		CharacterSetCustomName(character, "Mastery User1")
+		CharacterSetCustomName(character2, "Mastery User2")
 		SetupCharacter(character, host.MyGuid, equipmentSet)
 		SetupCharacter(character2, host.MyGuid, equipmentSet)
+
 
 		local dummy = TemporaryCharacterCreateAtPosition(pos3[1], pos3[2], pos3[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
 

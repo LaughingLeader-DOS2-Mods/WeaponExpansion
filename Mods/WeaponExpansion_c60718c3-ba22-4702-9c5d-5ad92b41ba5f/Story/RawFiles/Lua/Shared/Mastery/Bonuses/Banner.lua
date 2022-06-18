@@ -319,6 +319,11 @@ end
 --Mods.LeaderLib.EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", me.NetID, {Target=Mods.LeaderLib.GameHelpers.GetNetID(Mods.WeaponExpansion.Origin.Harken)})
 --Mods.LeaderLib.EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", me.MyGuid, {BeamTarget=Mods.WeaponExpansion.Origin.Harken, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
 
+Mastery.Variables.Bonuses.BannerIgnoredHealingStatuses = {
+	POST_MAGIC_CONTROL = true,
+	POST_PHYS_CONTROL = true,
+}
+
 MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 	rb:Create("BANNER_WHIRLWIND", {
 		Skills = {"Shout_Whirlwind", "Shout_EnemyWhirlwind"},
@@ -458,7 +463,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 			return false
 		end
 	}).Register.OnHeal(function(self, e, bonuses)
-		if e.Heal.StatusId ~= "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL" then
+		if e.Heal.StatusId ~= "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL"
+		and (e.Heal.HealType == "All" or e.Heal.HealType == "Vitality")
+		and not Mastery.Variables.Bonuses.BannerIgnoredHealingStatuses[e.Heal.StatusId] then
 			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius", 6.0)
 			local percentage = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage", 50.0)
 			if radius > 0 and percentage > 0 then

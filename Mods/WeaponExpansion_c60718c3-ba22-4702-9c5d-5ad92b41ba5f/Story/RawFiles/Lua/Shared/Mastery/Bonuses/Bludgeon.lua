@@ -45,7 +45,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 	rb:Create("BLUDGEON_SHELLCRACKING", {
 		Skills = {"Target_HeavyAttack","Target_DualWieldingAttack"},
 		Statuses = {"FORTIFIED", "MAGIC_SHELL"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_ShellCracking", "<font color='#F19824'>Hitting a target with [FORTIFIED_DisplayName] or [MAGIC_SHELL_DisplayName] reduces the remaining duration by [ExtraData:LLWEAPONEX_MB_Bludgeon_FortifyShellTurnReduction:1] turn(s).<br>If the status is reduced to 0, the magical energy explodes, dealing an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage:ExplodeRadius]m radius.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_ShellCracking", "<font color='#F19824'>Hitting a target with <font color='#C7A758'>[Key:FORTIFIED_DisplayName]</font> or <font color='#4197E2'>[Key:MAGIC_SHELL_DisplayName]</font> reduces the remaining duration by <font color='#33FF33'>[ExtraData:LLWEAPONEX_MB_Bludgeon_FortifyShellTurnReduction:1] turn(s)</font>.<br>If the status is reduced to <font color='#FF3333'>0</font>, the magical energy explodes, dealing an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage] to enemies in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage:ExplodeRadius]m radius.</font>"),
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
 			local turnReduction = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_FortifyShellTurnReduction", 1)
@@ -73,6 +73,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 
 							createdExplosion = true
 
+							--The physical armor effect is an overlay instead of a "magic forcefield thing"
 							EffectManager.PlayEffectAt("RS3_FX_GP_Combat_Hit_MagicalArmor_01", effectPos, {Rotation={1,0,0,0,10,10,0,0,0}, Scale=1.5})
 						else
 							status.CurrentLifeTime = nextDuration
@@ -87,8 +88,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 				if affectedStatus then
 					if createdExplosion then
 						PlaySound(e.Data.Target, "Skill_Poly_StripResistance_Impact")
+						--PlaySound(e.Data.Target, "Skill_Item_RecoverArmour_Impact")
 					end
-					--PlaySound(e.Data.Target, "Skill_Item_RecoverArmour_Impact")
 					SignalTestComplete(self.ID)
 				end
 			end
@@ -172,7 +173,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 			end
 		end
 	}):RegisterOnWeaponTagHit("LLWEAPONEX_Bludgeon", function(tag, attacker, target, data, targetIsObject, skill, self)
-		if targetIsObject and not skill and data.Damage > 0 and GameHelpers.Ext.ObjectIsCharacter(target) then
+		if targetIsObject and not skill and data.Damage > 0
+		and GameHelpers.Character.CanAttackTarget(target, attacker, false) then
 			local armorDamageMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_BonusArmorDamage", 25)
 			if armorDamageMult > 0 then
 				local armor = target.Stats.CurrentArmor or 0
@@ -277,10 +279,28 @@ end
 
 if Vars.IsClient then
 	TooltipParams.SpecialParamFunctions.LLWEAPONEX_BludgeonShatterMultiplier = function(param, statCharacter)
+		local weaponCritMult = Ext.Round(Game.Math.GetCriticalHitMultiplier(statCharacter.MainWeapon, statCharacter, 0.0) * 100)
 		--1 + (mult * 0.01), so it always is making the hit deal more damage
-		local critMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterDamageMultiplier", 200)
-		return string.format("%i", Ext.Round(critMult + 100))
+		local critMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterBonusDamageMultiplier", 100)
+		return string.format("%i", Ext.Round(weaponCritMult + critMult))
 	end
+else
+	AttackManager.OnStart.Register(function(attacker, target, targetIsObject)
+		if targetIsObject and Mastery.IsActive(attacker, MasteryID.Bludgeon)
+		and MasteryBonusManager.HasMasteryBonus(attacker, "BLUDGEON_SHATTER") then
+			local rb = MasteryBonusManager.GetRankBonus(MasteryID.Bludgeon, 4, "BLUDGEON_SHATTER")
+			if rb and rb.Statuses then
+				for _,v in pairs(rb.Statuses) do
+					if target:GetStatus(v) then
+						if not PersistentVars.MasteryMechanics.BludgeonShattering[target.MyGuid] then
+							PersistentVars.MasteryMechanics.BludgeonShattering[target.MyGuid] = {}
+						end
+						PersistentVars.MasteryMechanics.BludgeonShattering[target.MyGuid][v] = true
+					end
+				end
+			end
+		end
+	end)
 end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
@@ -318,28 +338,79 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 	rb:Create("BLUDGEON_SHATTER", {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
 		Statuses = {"PETRIFIED", "FROZEN"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_Shatter", "<font color='#F19824'>Basic attacking a target with [PETRIFIED_DisplayName] or [FROZEN_DisplayName] will shatter the coating, dealing a massive critical hit ([LLWEAPONEX_BludgeonShatterMultiplier]% damage) and cleansing the status.</font><br><font color='#33FF33'>Allies take reduced damage.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bludgeon_Shatter", "<font color='#F19824'>Basic attacking a target with <font color='#7F3D00'>[Key:PETRIFIED_DisplayName]</font> or <font color='#4197E2'>[Key:FROZEN_DisplayName]</font> will shatter the outer shell, dealing a <font color='#FF3333'>Massive [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit]</font> (<font color='#DDCC33'>[Special:LLWEAPONEX_BludgeonShatterMultiplier]% [Handle:h99aa087ag4d93g4bf4gb191g9fc166800711:Critical Damage]</font>) and cleansing the affliction.</font><br><font color='#33FF33'>Allies only take [ExtraData:LLWEAPONEX_MB_Bludgeon_ShatterAllyDamageReduction:25]% of the original damage.</font>"),
 	}):RegisterOnWeaponTagHit("LLWEAPONEX_Bludgeon", function(tag, attacker, target, data, targetIsObject, skill, self)
-		if targetIsObject and not skill and data.Damage > 0 and GameHelpers.Status.IsActive(target, self.Statuses) then
-			if GameHelpers.Character.IsAllyOfParty(target) then
+		if targetIsObject and not skill and data.Damage > 0 and PersistentVars.MasteryMechanics.BludgeonShattering[target.MyGuid] then
+			local isCharacter = GameHelpers.Ext.ObjectIsCharacter(target)
+			local statusesRemoved = {}
+			local activeStatuses = PersistentVars.MasteryMechanics.BludgeonShattering[target.MyGuid]
+			for v,b in pairs(activeStatuses) do
+				--GameHelpers.IO.SaveFile("Dumps/" .. v .. ".json", Ext.DumpExport(data.TargetObject:GetStatus(v)))
+				local statusColor = Ext.StatGetAttribute(v, "FormatColor")
+				if StringHelpers.IsNullOrWhitespace(statusColor) or _ignoreFormatColors[statusColor] then
+					statusColor = "Green"
+				end
+				statusesRemoved[#statusesRemoved+1] = {Name=GameHelpers.Stats.GetDisplayName(v, "StatusData"), ID=v}
+				GameHelpers.Status.Remove(target, v)
+			end
+			table.sort(statusesRemoved, function(a,b) return a.Name < b.Name end)
+			local statusNamesText = {}
+			for i,v in pairs(statusesRemoved) do
+				local statusColor = Ext.StatGetAttribute(v.ID, "FormatColor")
+				if StringHelpers.IsNullOrWhitespace(statusColor) or _ignoreFormatColors[statusColor] then
+					statusColor = "Green"
+				end
+				statusNamesText[i] = string.format("<font color='%s'>%s</font>", Data.Colors.FormatStringColor[statusColor] or "#33FF33", v.Name)
+			end
+			local statusesText = StringHelpers.Join("/", statusNamesText)
+			local sourceName = GameHelpers.GetDisplayName(attacker)
+			local targetName = GameHelpers.GetDisplayName(target)
+			
+			if isCharacter and GameHelpers.Character.IsAllyOfParty(target) then
 				local damageReduction = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterAllyDamageReduction", 25)
 				if damageReduction > 0 then
 					--Reduce damage
 					data:MultiplyDamage((damageReduction * 0.01), true)
 				end
+				local combatLogText = Text.CombatLog.Bludgeon_Shattered_Ally:ReplacePlaceholders(sourceName, targetName, statusesText)
+				CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
+				--PlaySound(target.MyGuid, "Skill_Poly_MedusaHead_Impact")
+				PlaySound(target.MyGuid, "Skill_Poly_BullRush_Impact")
+				local x,y,z = table.unpack(target.WorldPos)
+				y = y + 1
+				local _,angle,_ = GetRotation(target.MyGuid)
+				PlayEffectAtPositionAndRotation("RS3_FX_Skills_Warrior_Impact_Weapon_02", x, y, z, angle)
 			else
-				local critMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterDamageMultiplier", 200)
+				local critMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bludgeon_ShatterBonusDamageMultiplier", 100)
 				if critMult > 0 then
-					if data:HasHitFlag("CriticalHit", true) then
-						local weaponCritMult = Game.Math.GetCriticalHitMultiplier(attacker.Stats.MainWeapon, attacker.Stats, 1.0)
-						critMult = critMult - (weaponCritMult * 100)
+					critMult = (critMult * 0.01)
+					local totalDamage = data.Damage
+					if data:HasHitFlag("CriticalHit", false) then
+						local weaponCritMult = Game.Math.GetCriticalHitMultiplier(attacker.Stats.MainWeapon, attacker.Stats, 0.0)
+						critMult = critMult + weaponCritMult
+					else
+						critMult = critMult + 1
 					end
 					data:SetHitFlag("CriticalHit", true)
-					--local critMult = Game.Math.GetCriticalHitMultiplier(attacker.Stats.MainWeapon, attacker.Stats, 1.0)
-					data:MultiplyDamage(1 + (critMult * 0.01), true)
+					data:MultiplyDamage(critMult, true)
+					local combatLogText = Text.CombatLog.Bludgeon_Shattered:ReplacePlaceholders(sourceName, targetName, statusesText, totalDamage, data.Damage, Ext.Round(critMult * 100))
+					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
+					PlaySound(target.MyGuid, "Skill_Rogue_MortalBlow_Impact")
+					--PlaySound(target.MyGuid, "Skill_Warrior_Onslaught_Impact")
+					local x,y,z = table.unpack(target.WorldPos)
+					y = y + 1
+					local _,angle,_ = GetRotation(target.MyGuid)
+					--RS3_FX_Skills_Void_Power_Attack_Impact_01
+					PlayEffectAtPositionAndRotation("RS3_FX_Skills_Warrior_Impact_Weapon_01", x, y, z, angle)
 				end
 			end
-			GameHelpers.Status.Remove(target, self.Statuses)
+			local text = Text.StatusText.BludgeonShatteredStatus:ReplacePlaceholders(statusesText)
+			if isCharacter then
+				CharacterStatusText(target.MyGuid, text)
+			else
+				DisplayText(target.MyGuid, text)
+			end
+			PersistentVars.MasteryMechanics.BludgeonShattering[target.MyGuid] = nil
 			SignalTestComplete(self.ID)
 		end
 	end).Register.Test(function(test, self)
@@ -354,15 +425,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 		CharacterSetFightMode(char1, 1, 1)
 		TeleportTo(char2, char1, "", 0, 1, 1)
 		GameHelpers.Status.Apply(dummy, "FROZEN", -1.0, true, char1)
-		GameHelpers.Status.Apply(char2, "PETRIFIED", -1.0, true, dummy)
 		test:Wait(1000)
 		CharacterAttack(char1, dummy)
 		test:WaitForSignal(self.ID, 5000)
 		test:AssertGotSignal(self.ID)
 		test:Wait(2000)
+		GameHelpers.Status.Apply(char2, "PETRIFIED", -1.0, true, dummy)
+		test:Wait(250)
 		CharacterAttack(char1, char2)
 		test:WaitForSignal(self.ID, 5000)
 		test:AssertGotSignal(self.ID)
+		test:Wait(2000)
 		return true
 	end),
 })
