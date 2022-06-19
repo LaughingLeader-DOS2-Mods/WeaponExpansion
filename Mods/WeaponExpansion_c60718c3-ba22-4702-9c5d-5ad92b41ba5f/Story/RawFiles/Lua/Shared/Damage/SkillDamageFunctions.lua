@@ -710,7 +710,7 @@ local function ScaleByHighestAttributeAndAbility(ability, weaponStat, validAttri
 	local highestAttribute = GetHighestAttribute(attacker, validAttributes)
 	local weapon = ExtenderHelpers.CreateWeaponTable(weaponStat, attacker.Level, highestAttribute, "None")
 
-    local damageMultiplier = skill["Damage Multiplier"] * 0.01
+    --local damageMultiplier = skill["Damage Multiplier"] * 0.01
     local damageMultipliers = Game.Math.GetDamageMultipliers(skill, stealthed, attackerPos, targetPos)
 	local skillDamageType = skill["DamageType"]
 

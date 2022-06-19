@@ -142,37 +142,10 @@ Skills.Params["LLWEAPONEX_StealChance"] = GetStealChance
 local defaultPos = {[1] = 0.0, [2] = 0.0, [3] = 0.0,}
 
 local function GetDamageParamResult(param_func, skill, character, isFromItem)
-	local status,damageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
-	if status then
-		if damageRange ~= nil then
-			if type(damageRange) == "table" then
-				local damageTexts = {}
-				local totalDamageTypes = 0
-				for damageType,damage in pairs(damageRange) do
-					local min = damage.Min or damage[1]
-					local max = damage.Max or damage[2]
-					if min == nil then min = 0 end
-					if max == nil then max = 0 end
-		
-					if min > 0 and max > 0 then
-						if max == min then
-							table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i", max)))
-						else
-							table.insert(damageTexts, GameHelpers.GetDamageText(damageType, string.format("%i-%i", min, max)))
-						end
-					end
-					totalDamageTypes = totalDamageTypes + 1
-				end
-				if totalDamageTypes > 0 then
-					if totalDamageTypes > 1 then
-						return Common.StringJoin(", ", damageTexts)
-					else
-						return damageTexts[1]
-					end
-				end
-			else
-				return damageRange
-			end
+	local b,damageRange = xpcall(param_func, debug.traceback, skill, character, isFromItem, false, defaultPos, defaultPos, -1, 0, true)
+	if b then
+		if damageRange then
+			return GameHelpers.Tooltip.FormatDamageRange(damageRange)
 		end
 	else
 		Ext.PrintError("Error getting param for skill ("..skill.Name.."):\n",damageRange)
@@ -216,4 +189,20 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 	end
 end
 
-Ext.RegisterListener("SkillGetDescriptionParam", SkillGetDescriptionParam)
+---@param e {Character:StatCharacter, Description:string, IsFromItem:boolean, Params:string[], Skill:StatEntrySkillData}
+Ext.Events.SkillGetDescriptionParam:Subscribe(function (e)
+	local b,result = xpcall(SkillGetDescriptionParam, debug.traceback, e.Skill, e.Character, e.IsFromItem, e.Params and table.unpack(e.Params) or "")
+	if not b then
+		Ext.PrintError(result)
+	elseif not StringHelpers.IsNullOrEmpty(result) then
+		e.Description = result
+	end
+end)
+
+---@param e {Character:StatCharacter, Description:string, IsFromItem:boolean, Params:string[], Skill:StatEntrySkillData}
+Ext.Events.SkillGetDescriptionParam:Subscribe(function (e)
+    if e.Skill.Name == "Projectile_EnemyFireball" and e.Params[1] == "Damage" then
+		e.Description = GameHelpers.Tooltip.FormatDamageRange({Water = {Min = 1, Max=2000}})
+		e:StopPropagation()
+	end
+end)
