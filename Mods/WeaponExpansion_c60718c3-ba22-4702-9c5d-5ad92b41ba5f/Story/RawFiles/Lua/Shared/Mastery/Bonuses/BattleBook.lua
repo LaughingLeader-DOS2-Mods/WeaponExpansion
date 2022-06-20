@@ -68,7 +68,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 				SignalTestComplete("BATTLEBOOK_FIRST_AID_BonusHealApplied")
 			end)
 		end
-	end):RegisterStatusListener("Applied", function(bonuses, target, status, source)
+	end).__self:RegisterStatusListener("Applied", function(bonuses, target, status, source)
 		if bonuses.HasBonus("BATTLEBOOK_FIRST_AID", source) then
 			local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 			if turnBonus > 0 then
@@ -149,6 +149,7 @@ if not _ISCLIENT then
 			local rot = e.Data.Rotation or 0
 			PlaySound(e.Data.UUID, "Skill_Earth_DustBlast_Impact")
 			PlayEffectAtPositionAndRotation("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", sx, sy, sz, rot)
+			--EffectManager.PlayEffectAt("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", me.WorldPos, {Rotation=me.Stats.Rotation})
 			--Timer._Internal.ClearObjectData("LLWEAPONEX_BattleBook_BattleStompBonus", e.Data.UUID)
 			GameHelpers.Skill.ShootZoneAt(Mastery.Variables.Bonuses.BattleBookGroundSmashBonusSkill, caster, {tx,ty,tz}, {Position = {sx,sy,sz}, SurfaceType="Sentinel"})
 			SignalTestComplete("BATTLEBOOK_TECTONICSHIFT")
@@ -169,7 +170,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 				SignalTestComplete(self.ID)
 			end
 		end, e.Data.TargetMode.Objects)
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -198,10 +199,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 			Skill = e.Skill,
 			Rotation = angle + 180
 		})
-	end).Register.SkillHit(function(self, e, bonuses)
+	end).SkillHit(function(self, e, bonuses)
 		--Since it hit something, start the bonus quicker
 		Timer.RestartObjectTimer("LLWEAPONEX_BattleBook_BattleStompBonus", e.Character, 500)
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -251,7 +252,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 				SignalTestComplete("BATTLEBOOK_SCROLLS")
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -407,7 +408,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 				SignalTestComplete("BATTLEBOOK_CHALLENGE_Active")
 			end
 		end, e.Data.TargetMode.Objects)
-	end):RegisterStatusListener("Removed", function(bonuses, targetGUID, status, source, statusType)
+	end).__self:RegisterStatusListener("Removed", function(bonuses, targetGUID, status, source, statusType)
 		if IsTagged(targetGUID, "LLWEAPONEX_BattleBook_ChallengeActive") then
 			ClearTag(targetGUID, "LLWEAPONEX_BattleBook_ChallengeActive")
 		end
@@ -504,7 +505,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 				SignalTestComplete(self.ID)
 			end
 		end, e.Data.TargetMode.Objects)
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -569,7 +570,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 				end
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -632,7 +633,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 4, {
 				SignalTestComplete(self.ID)
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)

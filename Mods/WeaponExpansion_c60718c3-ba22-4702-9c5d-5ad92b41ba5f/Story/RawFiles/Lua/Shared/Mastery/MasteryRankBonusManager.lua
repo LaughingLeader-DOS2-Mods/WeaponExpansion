@@ -1,4 +1,5 @@
-local isClient = Ext.IsClient()
+local _ISCLIENT = Ext.IsClient()
+local _type = type
 
 ---@alias MasteryBonusCheckTarget string|"Any"|"Target"|"Source"|"None"
 ---@alias WeaponExpansionMasterySkillListenerCallback fun(MasteryBonusCallbackBonuses, e:OnSkillStateAllEventArgs):void
@@ -18,6 +19,10 @@ MasteryBonusManager = {
 	---The string format for mastery rank tags, set on a character.
 	MasteryRankTagFormatString = "%s_Mastery%i"
 }
+
+---@class MasteryBonusManagerInternals
+local _INTERNAL = {}
+MasteryBonusManager._INTERNAL = _INTERNAL
 
 local _registeredBonuses = {}
 
@@ -65,6 +70,8 @@ MasteryDataClasses.BonusIDEntry = {
 	end
 }
 
+local _EmptyBonuses = {HasBonus=function() return false end}
+
 ---@param char string
 ---@param skill string|nil Optional skill to filter with.
 ---@return table<string, boolean>
@@ -79,7 +86,8 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 					if v.ID then
 						bonuses[v.ID] = true
 					else
-						fprint(LOGLEVEL.ERROR, "[LLWEAPONEX] Bonus is lacking an ID parameter:\n%s", Common.JsonStringify(v))
+						fprint(LOGLEVEL.ERROR, "[LLWEAPONEX] Bonus is lacking an ID parameter:\n%s", Ext.DumpExport(v))
+						error("", 2)
 					end
 				end
 			end
@@ -130,6 +138,8 @@ local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 	return bonuses
 end
 
+_INTERNAL.GatherMasteryBonuses = GatherMasteryBonuses
+
 ---@param character UUID|NETID|EsvCharacter|EclCharacter|StatCharacter
 ---@param bonus string|string[]
 ---@return boolean
@@ -150,11 +160,13 @@ function MasteryBonusManager.HasMasteryBonus(character, bonus)
 	return false
 end
 
+---@param bonuses table
+---@param matchBonuses string|string[]
 local function HasMatchedBonuses(bonuses, matchBonuses)
 	if matchBonuses == nil or matchBonuses == "" then
 		return true
 	end
-	local t = type(matchBonuses)
+	local t = _type(matchBonuses)
 	if t == "string" then
 		return bonuses[matchBonuses] ~= nil
 	elseif t == "table" then
@@ -166,6 +178,8 @@ local function HasMatchedBonuses(bonuses, matchBonuses)
 	end
 	return false
 end
+
+_INTERNAL.HasMatchedBonuses = HasMatchedBonuses
 
 ---@param state SKILL_STATE
 ---@param data any
@@ -198,9 +212,9 @@ end
 ---@param callback fun(bonuses:MasteryBonusCallbackBonuses, skill:string, char:string, state:SKILL_STATE, data:any, dataType:string)
 ---@param checkBonusOn MasteryBonusCheckTarget
 function MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback, checkBonusOn)
-	if isClient then return end
+	if _ISCLIENT then return end
 	checkBonusOn = checkBonusOn or "Source"
-	if type(skill) == "table" then
+	if _type(skill) == "table" then
 		for i,v in pairs(skill) do
 			MasteryBonusManager.RegisterSkillListener(v, matchBonuses, callback, checkBonusOn)
 		end
@@ -223,7 +237,7 @@ end
 ---@param priority integer|nil
 ---@param once boolean|nil
 function MasteryBonusManager.RegisterNewSkillListener(state, skill, matchBonuses, callback, checkBonusOn, priority, once)
-	if isClient then return end
+	if _ISCLIENT then return end
 	checkBonusOn = checkBonusOn or "Source"
 
 	---@param e OnSkillStateAllEventArgs
@@ -245,7 +259,7 @@ end
 ---@param priority integer|nil
 ---@param once boolean|nil
 function MasteryBonusManager.RegisterBonusSkillListener(state, skill, bonus, callback, checkBonusOn, priority, once)
-	if isClient then return end
+	if _ISCLIENT then return end
 	checkBonusOn = checkBonusOn or "Source"
 
 	---@param e OnSkillStateAllEventArgs
@@ -265,7 +279,7 @@ end
 ---@param priority integer|nil
 ---@param once boolean|nil
 function MasteryBonusManager.RegisterOnHealListener(matchBonuses, callback, checkBonusOn, priority, once)
-	if isClient then return end
+	if _ISCLIENT then return end
 	checkBonusOn = checkBonusOn or "Source"
 
 	---@param e OnHealEventArgs
@@ -293,7 +307,7 @@ end
 function MasteryBonusManager.RegisterSkillTypeListener(skillType, matchBonuses,
 	callback, checkBonusOn)
 	checkBonusOn = checkBonusOn or "Source"
-	if type(skillType) == "table" then
+	if _type(skillType) == "table" then
 		for i,v in pairs(skillType) do
 			SkillManager.RegisterTypeListener(v, function(uuid, ...)
 				OnSkillTypeCallback(callback, matchBonuses, uuid, checkBonusOn, ...)
@@ -328,9 +342,9 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget
 function MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses, 
 	callback, checkBonusOn)
-	if isClient then return end
+	if _ISCLIENT then return end
 	checkBonusOn = checkBonusOn or "Any"
-	if type(status) == "table" then
+	if _type(status) == "table" then
 		for i,v in pairs(status) do
 			MasteryBonusManager.RegisterStatusListener(event, v, matchBonuses, callback, checkBonusOn)
 		end
@@ -349,9 +363,9 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget
 function MasteryBonusManager.RegisterStatusTypeListener(event, statusType, matchBonuses, 
 	callback, checkBonusOn)
-	if isClient then return end
+	if _ISCLIENT then return end
 	checkBonusOn = checkBonusOn or "Any"
-	if type(statusType) == "table" then
+	if _type(statusType) == "table" then
 		for i,v in pairs(statusType) do
 			MasteryBonusManager.RegisterStatusTypeListener(event, v, matchBonuses, callback)
 		end
@@ -381,7 +395,7 @@ local function OnBeforeStatusAttemptCallback(callback, matchBonuses, target, sta
 				end
 			end
 		else
-			local b,result = xpcall(callback, debug.traceback, {HasBonus=function() return false end}, target, status, source, statusType)
+			local b,result = xpcall(callback, debug.traceback, _EmptyBonuses, target, status, source, statusType)
 			if b then
 				return result
 			else
@@ -398,9 +412,9 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget
 function MasteryBonusManager.RegisterStatusBeforeAttemptListener(status, matchBonuses, callback,
 	skipBonusCheck, checkBonusOn)
-	if isClient then return end
+	if _ISCLIENT then return end
 	checkBonusOn = checkBonusOn or "Source"
-	if type(status) == "table" then
+	if _type(status) == "table" then
 		for i,v in pairs(status) do
 			MasteryBonusManager.RegisterStatusBeforeAttemptListener(v, matchBonuses, callback, skipBonusCheck, checkBonusOn)
 		end
@@ -416,6 +430,7 @@ end
 ---@field Dist number
 
 ---Get a table of enemies in combat, determined by distance to a source.
+---@deprecated
 ---@param char UUID
 ---@param target UUID|EsvCharacter|EsvItem|number[]
 ---@param radius number
@@ -433,7 +448,7 @@ function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sor
 	local lastDist = 999
 	local targets = {}
 
-	local t = type(target)
+	local t = _type(target)
 	if t == "userdata" and target.WorldPos then
 		target = target.WorldPos
 	elseif t == "string" then
@@ -480,6 +495,7 @@ function MasteryBonusManager.GetClosestEnemiesToObject(char, target, radius, sor
 end
 
 ---Get a table of enemies in combat, determined by distance to a source.
+---@deprecated
 ---@param char UUID
 ---@param maxDistance number
 ---@param sortByClosest boolean
@@ -535,6 +551,15 @@ function MasteryBonusManager.GetClosestCombatEnemies(char, maxDistance, sortByCl
 	end
 end
 
+local function _GetBonus(tbl)
+	if tbl.Type == "MasteryBonusData" then
+		return tbl
+	elseif tbl.__self then -- Register table chaining support
+		return tbl.__self
+	end
+	return nil
+end
+
 ---@param mastery string
 ---@param rank integer
 ---@param bonuses MasteryBonusData|MasteryBonusData[]
@@ -549,13 +574,18 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 		masteryData.RankBonuses[rank] = MasteryDataClasses.MasteryRankData:Create(rank, masteryRankID)
 		masteryData.RankBonuses[rank].Bonuses = _registeredBonuses[masteryRankID]
 	end
-	local t = type(bonuses)
+	local t = _type(bonuses)
 	if t == "table" then
-		if bonuses.Type == "MasteryBonusData" then
-			table.insert(_registeredBonuses[masteryRankID], bonuses)
+		local bonus = _GetBonus(bonuses)
+		if bonus then
+			_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
 		else
-			for k,v in pairs(bonuses) do
-				table.insert(_registeredBonuses[masteryRankID], v)
+			local len = #bonuses
+			for i=1,len do
+				local bonus = _GetBonus(bonuses[i])
+				if bonus then
+					_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
+				end
 			end
 		end
 	end
@@ -596,7 +626,7 @@ local function EvaluateEntryForBonusText(data, character, skillOrStatus, tooltip
 		--Old style
 		local bonusIsActive = true
 		if data.Active ~= nil and data.Active.Type == "Tag" then
-			if data.Active.Source == true and type(status) == "userdata" then
+			if data.Active.Source == true and _type(status) == "userdata" then
 				if status.StatusSourceHandle ~= nil then
 					local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
 					if source then

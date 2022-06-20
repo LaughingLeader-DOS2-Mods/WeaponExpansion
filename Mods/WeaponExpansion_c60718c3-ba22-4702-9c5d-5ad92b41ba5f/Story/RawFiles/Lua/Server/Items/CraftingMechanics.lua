@@ -205,7 +205,7 @@ function ChangeItemScaling(item, attribute, itemStat, craftingCharacter)
 
 		local inventory = craftingCharacter or GetInventoryOwner(item.MyGuid)
 		local slot = ObjectIsCharacter(inventory) == 1 and GameHelpers.Item.GetEquippedSlot(inventory,item.MyGuid) or nil
-		local clone = GameHelpers.Item.Clone(item)
+		local clone = GameHelpers.Item.Clone(item, nil, {CopyTags = true})
 		if clone then
 			if inventory ~= nil then
 				if slot ~= nil then

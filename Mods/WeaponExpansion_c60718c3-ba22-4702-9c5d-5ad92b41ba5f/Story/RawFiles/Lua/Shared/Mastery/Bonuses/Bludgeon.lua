@@ -24,7 +24,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 				SignalTestComplete(self.ID)
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -94,7 +94,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 				end
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup,dummies = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true, 2)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -148,7 +148,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 			end
 			SignalTestComplete(self.ID)
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -246,7 +246,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 3, {
 		--PlaySound(e.Character.MyGuid, "Skill_Earth_ReactiveArmor_Impact")
 		EffectManager.PlayEffectAt("RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_02", pos, {Scale = 0.5})
 		SignalTestComplete(self.ID)
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -313,13 +313,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 			Timer.StartObjectTimer("LLWEAPONEX_MB_Bludgeon_BonusHit", e.Character, 1250, {Target=e.Data.Target})
 			SignalTestComplete("BLUDGEON_FLURRY_InitialSkill")
 		end
-	end).Register.SkillHit(function(self, e, bonuses)
+	end).SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
 			PlaySound(e.Character.MyGuid, "Skill_Earth_DustBlast_Impact")
 			EffectManager.PlayEffectAt("RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_02", e.Data.TargetObject.WorldPos, {Scale = 0.8})
 			SignalTestComplete("BLUDGEON_FLURRY_FinalSkill")
 		end
-	end, "None", "Target_LLWEAPONEX_MasteryBonus_Bludgeon_FlurryBonus").Register.Test(function(test, self)
+	end, "None", "Target_LLWEAPONEX_MasteryBonus_Bludgeon_FlurryBonus").Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)

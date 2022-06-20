@@ -5,12 +5,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Katana, 1, {
 	rb:Create("KATANA_VAULT", {
 		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Katana_VaultBonus", "<font color='#F19966'>After teleporting, your next basic attack or weapon skill will deal +[ExtraData:LLWEAPONEX_MB_Katana_Backlash_DamageBonus]% additional damage.</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success then
-			GameHelpers.Status.Apply(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", 6.0, 0, char)
-			StatusTurnHandler.SaveTurnEndStatus(char, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", char)
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
+			GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS", 6.0, false, e.Character)
+			StatusTurnHandler.SaveTurnEndStatus(e.Character, "LLWEAPONEX_MASTERYBONUS_KATANA_VAULTBONUS")
 		end
-	end),	
+	end),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Katana, 2, {

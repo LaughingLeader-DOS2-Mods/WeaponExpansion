@@ -390,3 +390,10 @@ RegisterProtectedExtenderListener("ProjectileHit", function (projectile, hitObje
     end
     
 end)
+
+--[[
+local p = _C(); local fx = Ext.Effect.CreateEffect("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", Ext.Entity.NullHandle(), "");fx.Position = p.WorldPos;local angle = Ext.Math.ExtractEulerAngles(p.Stats.Rotation); angle[2] = angle[2] + 180; angle = Ext.Math.BuildFromEulerAngles(angle);fx.Rotation = angle;fx.ForgetEffect = true;fx.Loop = false
+
+Ext.Math.ExtractEulerAngles({table.unpack(me.Stats.Rotation),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0})
+
+]]

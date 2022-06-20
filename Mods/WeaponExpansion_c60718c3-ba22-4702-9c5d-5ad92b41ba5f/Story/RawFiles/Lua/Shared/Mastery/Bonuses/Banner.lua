@@ -43,7 +43,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		if hasStatus then
 			Timer.StartObjectTimer("LLWEAPONEX_WarCharge_ApplyHasted", e.Character, 1000)
 		end
-	end).Register.SkillHit(function(self, e, bonuses)
+	end).SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
 			local hasStatus = false
 			for i,status in pairs(warChargeStatuses) do
@@ -60,7 +60,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 				SignalTestComplete(self.ID)
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		--Bonus damage while rushing if a War Charge status active
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -355,7 +355,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 				end
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		--Pull targets towards a banner
 		local char1,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -490,7 +490,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 				end
 			end
 		end
-	end, "Target").Register.Test(function(test, self)
+	end, "Target").Test(function(test, self)
 		--Gain bonus from Leadership
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
 		test.Cleanup = cleanup
@@ -518,19 +518,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 
 if Vars.IsClient then
 	TooltipParams.SpecialParamFunctions.LLWEAPONEX_MB_Banner_LeadershipInspirationChance = function(param, statCharacter)
-		local baseBonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25))
+		local baseBonusChance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance", 25, true)
 		if statCharacter.Character then
 			local status = statCharacter.Character:GetStatus("LEADERSHIP")
 			if status then
 				local bonusChance = 0
-				local bonusSource = nil
 	
 				--Check the source of Leadership first
 				local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
 				if source ~= nil then
 					if MasteryBonusManager.HasMasteryBonus(source, "BANNER_LEADERSHIP") then
-						bonusChance = math.ceil(GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 50))
-						bonusSource = source.MyGuid
+						bonusChance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_LeadershipInspirationChance2", 50, true)
 					end
 				end
 	
@@ -538,10 +536,10 @@ if Vars.IsClient then
 					bonusChance = baseBonusChance
 				end
 	
-				return tostring(bonusChance)
+				return string.format("%i", bonusChance)
 			end
 		end
-		return tostring(baseBonusChance)
+		return string.format("%i", baseBonusChance)
 	end
 end
 
@@ -606,7 +604,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 				end
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		--Boost Overpower damage by having an ally nearby
 		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup

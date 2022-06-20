@@ -14,16 +14,14 @@ local defaultPersistentVars = {
         ---@type table<UUID, {Item:UUID, Slot:string, Skill:string, Target:UUID|nil}>
         ThrowBalrinAxe = {},
         VanquishersPath = {},
-        ---@class RemoteMineDetonationData:table
-        ---@field Mines string[]
-        ---@field Remaining integer
-        ---@type table<string, table<string, RemoteMineDetonationData>>
+        ---@type table<string, table<string, {Mines:string[], Remaining:integer}>>
         RemoteMineDetonation = {},
         ---@type table<UUID,number[]>
         FutureBarrage = {},
         WandSurfaceBonuses = {},
     },
     StatusData = {
+        ---@type table<UUID,table<string,{Target:UUID, Source:UUID, Status:string}>>
         RemoveOnTurnEnd = {},
         KatanaCombo = {},
     },
@@ -47,6 +45,8 @@ local defaultPersistentVars = {
         ---Protected character to the source (Guardian Angel Banner wielder)
         ---@type table<UUID,UUID>
         GuardianAngelResurrect = {},
+        ---@type table<UUID,{Remaining:integer, Total:integer}>
+        BowExplosiveRainArrowCount = {},
     },
     Timers = {},
     OnDeath = {},

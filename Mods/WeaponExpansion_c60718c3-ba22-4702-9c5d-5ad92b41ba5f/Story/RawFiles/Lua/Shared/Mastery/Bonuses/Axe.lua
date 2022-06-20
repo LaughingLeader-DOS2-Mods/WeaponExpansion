@@ -16,7 +16,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 			CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, text)
 			SignalTestComplete(self.ID)
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -34,7 +34,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 	rb:Create("AXE_EXECUTIONER", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Executioner", "Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].")
-	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
+	}).Register.OnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
 		if targetIsObject and not skill and data.Damage > 0 then
 			if GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN") then
 				local damageMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_ProneDamageBonus", 25)
@@ -44,7 +44,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 				SignalTestComplete(self.ID)
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3")
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -73,13 +73,22 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		if e.Data.Success then
 			Timer.StartObjectTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", e.Data.Target, 50, {Source=e.Character.MyGuid})
 		end
-	end):RegisterOnHit(function(attacker, target, data, targetIsObject, skill, self)
+	end).OnHit(function(attacker, target, data, targetIsObject, skill, self)
 		if targetIsObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
 			GameHelpers.Status.Remove(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
 			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 			SignalTestComplete("AXE_VULNERABLE_2")
 		end
-	end, true).Register.Test(function(test, self)
+	end, true).TimerFinished("LLWEAPONEX_MasteryBonus_ApplyVulnerable", function (self, e, bonuses)
+		if e.Data.UUID and e.Data.Source and not GameHelpers.ObjectIsDead(e.Data.UUID) then
+			if not GameHelpers.Character.IsInCombat(e.Data.Source) then
+				GameHelpers.Status.Apply(e.Data.Object, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, false, e.Data.Source)
+			else
+				GameHelpers.Status.Apply(e.Data.Object, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -2, false, e.Data.Source)
+			end
+			SignalTestComplete("AXE_VULNERABLE_1")
+		end
+	end).Test(function(test, self)
 		--Hit with blinkstrike, then do a basic attack
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -103,7 +112,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 	rb:Create("AXE_SAVAGE", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Savage", "Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AttackOfOpportunityMaxDamageBonus]% more damage, in proportion to the target's missing vitality.")
-	}):RegisterOnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
+	}).Register.OnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
 		if targetIsObject and not skill and data.Damage > 0 then
 			if GameHelpers.Status.IsActive(attacker, "AOO") and GameHelpers.Ext.ObjectIsCharacter(target) then
 				local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_AttackOfOpportunityMaxDamageBonus", 50) * 0.01
@@ -117,7 +126,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 			end
 			SignalTestComplete(self.ID)
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		--Missing vitality bonus damage with an Attack of Opportunity
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -146,7 +155,29 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Whirlwind", "Spin an additional 1-3 times, dealing reduced damage each spin."),
 	}).Register.SkillCast(function(self, e, bonuses)
 		Timer.StartObjectTimer("LLWEAPONEX_Axe_Whirlwind_TryNextSpin", e.Character, 500, {Skill = e.Skill})
-	end).Register.Test(function(test, self)
+	end).TimerFinished("LLWEAPONEX_Axe_Whirlwind_TryNextSpin", function (self, e, bonuses)
+		if e.Data.UUID and e.Data.Skill then
+			local skill = e.Data.Skill
+			local uuid = e.Data.UUID
+			if skill == "Shout_Whirlwind" or skill == "Shout_EnemyWhirlwind" then
+				GameHelpers.ClearActionQueue(uuid)
+				CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", uuid, 0, 1, 1)
+				SignalTestComplete("AXE_SPINNING_1")
+			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
+				if GameHelpers.Math.Roll(50) or e.Data.Object:HasTag("LLWEAPONEX_MasteryTestCharacter") then
+					GameHelpers.ClearActionQueue(uuid)
+					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", uuid, 0, 1, 1)
+					SignalTestComplete("AXE_SPINNING_2")
+				end
+			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
+				if GameHelpers.Math.Roll(25) or e.Data.Object:HasTag("LLWEAPONEX_MasteryTestCharacter") then
+					GameHelpers.ClearActionQueue(uuid)
+					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", uuid, 0, 1, 1)
+					SignalTestComplete("AXE_SPINNING_3")
+				end
+			end
+		end
+	end).Test(function(test, self)
 		--Spin-to-win via Whirlwind
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -176,7 +207,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 			end
 			SignalTestComplete(self.ID)
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		--Piercing damage conversion for All In
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -203,7 +234,19 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		end
 		Timer.Cancel("LLWEAPONEX_Axe_CheckFlurryCounter", e.Character.MyGuid)
 		Timer.StartObjectTimer("LLWEAPONEX_Axe_CheckFlurryCounter", e.Character.MyGuid, 1000)
-	end).Register.Test(function(test, self)
+	end).TimerFinished("LLWEAPONEX_Axe_CheckFlurryCounter", function (self, e, bonuses)
+		if e.Data.UUID then
+			if PersistentVars.MasteryMechanics.AxeFlurryHits[e.Data.UUID] >= 3 then
+				local ap = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_FlurryBonusAP", 1)
+				if ap > 0 then
+					CharacterAddActionPoints(e.Data.UUID, ap)
+					CharacterStatusText(e.Data.UUID, "LLWEAPONEX_StatusText_FlurryAxeCombo")
+				end
+				SignalTestComplete("AXE_DW_FLURRY")
+			end
+			PersistentVars.MasteryMechanics.AxeFlurryHits[e.Data.UUID] = nil
+		end
+	end).Test(function(test, self)
 		--Bonus AP from hitting 3 times with the dual-wielding skill
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -220,47 +263,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 	end),
 })
 
-if not Vars.IsClient then
-	Timer.Subscribe("LLWEAPONEX_Axe_CheckFlurryCounter", function(e)
-		if e.Data.UUID then
-			if PersistentVars.MasteryMechanics.AxeFlurryHits[e.Data.UUID] >= 3 then
-				local ap = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_FlurryBonusAP", 1)
-				if ap > 0 then
-					CharacterAddActionPoints(e.Data.UUID, ap)
-					CharacterStatusText(e.Data.UUID, "LLWEAPONEX_StatusText_FlurryAxeCombo")
-				end
-				SignalTestComplete("AXE_DW_FLURRY")
-			end
-			PersistentVars.MasteryMechanics.AxeFlurryHits[e.Data.UUID] = nil
-		end
-	end)
-
-	Timer.Subscribe("LLWEAPONEX_Axe_Whirlwind_TryNextSpin", function(e)
-		if e.Data.UUID and e.Data.Skill then
-			local skill = e.Data.Skill
-			local uuid = e.Data.UUID
-			print(skill)
-			if skill == "Shout_Whirlwind" or skill == "Shout_EnemyWhirlwind" then
-				GameHelpers.ClearActionQueue(uuid)
-				CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2", uuid, 0, 1, 1)
-				SignalTestComplete("AXE_SPINNING_1")
-			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin2" then
-				if GameHelpers.Math.Roll(50) or e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
-					GameHelpers.ClearActionQueue(uuid)
-					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3", uuid, 0, 1, 1)
-					SignalTestComplete("AXE_SPINNING_2")
-				end
-			elseif skill == "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin3" then
-				if GameHelpers.Math.Roll(25) or e.Character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
-					GameHelpers.ClearActionQueue(uuid)
-					CharacterUseSkill(uuid, "Shout_LLWEAPONEX_MasteryBonus_Axe_Whirlwind_Spin4", uuid, 0, 1, 1)
-					SignalTestComplete("AXE_SPINNING_3")
-				end
-			end
-		end
-	end)
-end
-
 MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 	rb:Create("AXE_CLEAVE", {
 		Skills = {"Target_Flurry", "Target_EnemyFlurry"},
@@ -272,7 +274,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 			GameHelpers.Skill.ShootZoneFromSource("Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave", e.Character)
 			SignalTestComplete(self.ID)
 		end
-	end).Register.Test(function(test, self)
+	end).TimerFinished("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", function (self, e, bonuses)
+		if e.Data.UUID then
+			ClearTag(e.Data.UUID, "LLWEAPONEX_FlurryTarget")
+			SignalTestComplete("AXE_CLEAVE")
+		end
+	end).Test(function(test, self)
 		--Cleaving flurry
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
@@ -318,23 +325,3 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 		return true
 	end)
 })
-
-if not Vars.IsClient then
-	Timer.Subscribe("LLWEAPONEX_MasteryBonus_ApplyVulnerable", function(e)
-		if e.Data.UUID and e.Data.Source and not GameHelpers.ObjectIsDead(e.Data.UUID) then
-			if not GameHelpers.Character.IsInCombat(e.Data.Source) then
-				GameHelpers.Status.Apply(e.Data.Object, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -1.0, false, e.Data.Source)
-			else
-				GameHelpers.Status.Apply(e.Data.Object, "LLWEAPONEX_MASTERYBONUS_VULNERABLE", -2, false, e.Data.Source)
-			end
-			SignalTestComplete("AXE_VULNERABLE_1")
-		end
-	end)
-	
-	Timer.Subscribe("LLWEAPONEX_MasteryBonus_RemoveFlurryTargetTag", function(e)
-		if e.Data.UUID then
-			ClearTag(e.Data.UUID, "LLWEAPONEX_FlurryTarget")
-			SignalTestComplete("AXE_CLEAVE")
-		end
-	end)
-end

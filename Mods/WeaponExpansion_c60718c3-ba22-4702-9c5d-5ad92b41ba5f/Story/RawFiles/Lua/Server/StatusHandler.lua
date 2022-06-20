@@ -5,11 +5,6 @@ end
 local _listeners = {
     ---@type table<string, fun(target:string, status:string, source:string):void>
     EndTurnStatusRemoved = {},
-    ---@type table<string, table<string, EquipmentChangedCallback>>
-    EquipmentChanged = {
-        Template = {},
-        Tag = {}
-    }
 }
 
 local function CleanupForceAction(handle, target, x, y, z, timerStartFunc)
@@ -57,11 +52,9 @@ end
 RegisterStatusListener("Applied", "LLWEAPONEX_PISTOL_SHOOT_HIT", GrantMasteryExperienceFromStatus)
 RegisterStatusListener("Applied", "LLWEAPONEX_HANDCROSSBOW_HIT", GrantMasteryExperienceFromStatus)
 
-local function OnStatusRemoved(target, status, source, statusType)
+StatusManager.Register.Removed("All", function (target, status, source, statusType, statusEvent)
 	StatusTurnHandler.RemoveTurnEndStatus(target, status, true)
-end
-
-RegisterStatusListener("Removed", "All", OnStatusRemoved)
+end)
 
 local function InvokeEndTurnStatusRemovedCallbacks(target, status, source)
 	local callbacks = _listeners.EndTurnStatusRemoved[status]
@@ -108,62 +101,72 @@ function StatusTurnHandler.RemoveTurnEndStatusesFromSource(fromSource, matchStat
 	end
 end
 
-function StatusTurnHandler.SaveTurnEndStatus(uuid, status, source)
-	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid] or {}
-	turnEndData[status] = source or ""
-	PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = turnEndData
+---@param activeTurnCharacter CharacterParam
+---@param status string
+---@param source CharacterParam|nil
+---@param target CharacterParam|nil If set, the status will be removed from the target instead of the activeTurnCharacter.
+function StatusTurnHandler.SaveTurnEndStatus(activeTurnCharacter, status, source, target)
+	local activeGUID = GameHelpers.GetUUID(activeTurnCharacter)
+	local sourceGUID = GameHelpers.GetUUID(source)
+	local targetGUID = GameHelpers.GetUUID(target)
+	if PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID] == nil then
+		PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID] = {}
+	end
+	PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID][status] = {
+		Source = sourceGUID or activeGUID,
+		Target = targetGUID or activeGUID
+	}
 end
 
-function StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
-	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
+---@param activeTurnCharacter CharacterParam
+function StatusTurnHandler.RemoveAllTurnEndStatuses(activeTurnCharacter)
+	local activeGUID = GameHelpers.GetUUID(activeTurnCharacter)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID]
 	if turnEndData ~= nil then
-		for status,source in pairs(turnEndData) do
-			if HasActiveStatus(uuid, status) == 1 then
-				GameHelpers.Status.Remove(uuid, status)
+		for status,data in pairs(turnEndData) do
+			if GameHelpers.ObjectExists(data.Target) then
+				GameHelpers.Status.Remove(data.Target, status)
 			end
-			InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
+			InvokeEndTurnStatusRemovedCallbacks(activeGUID, status, data.Source, data.Target)
 		end
-		PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
+		PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID] = nil
 	end
 end
 
-function StatusTurnHandler.RemoveTurnEndStatus(uuid, status, wasRemoved)
-	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
+---@param activeTurnCharacter CharacterParam
+---@param status string
+---@param wasRemoved boolean
+function StatusTurnHandler.RemoveTurnEndStatus(activeTurnCharacter, status, wasRemoved)
+	local activeGUID = GameHelpers.GetUUID(activeTurnCharacter)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID]
 	if turnEndData ~= nil then
-		if type(status) == "table" then
-			for i,v in pairs(status) do
-				local source = turnEndData[v] or ""
-				if HasActiveStatus(uuid, v) == 1 then
-					GameHelpers.Status.Remove(uuid, v)
-					InvokeEndTurnStatusRemovedCallbacks(uuid, v, source)
-				end
-				turnEndData[v] = nil
+		local data = turnEndData[status]
+		if data then
+			if GameHelpers.ObjectExists(data.Target) then
+				GameHelpers.Status.Remove(data.Target, status)
 			end
-		else
-			local source = turnEndData[status] or ""
-			if wasRemoved == true or HasActiveStatus(uuid, status) == 1 then
-				GameHelpers.Status.Remove(uuid, status)
-				InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
+			InvokeEndTurnStatusRemovedCallbacks(activeGUID, status, data.Source, data.Target)
+			PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID][status] = nil
+			if not Common.TableHasAnyEntry(turnEndData) then
+				PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID] = nil
 			end
-			turnEndData[status] = nil
-		end
-		if not Common.TableHasAnyEntry(turnEndData) then
-			PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
 		end
 	end
 end
 
-function StatusTurnHandler.RemoveAllInactiveStatuses(uuid)
-	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[uuid]
+---@param activeTurnCharacter CharacterParam
+function StatusTurnHandler.RemoveAllInactiveStatuses(activeTurnCharacter)
+	local activeGUID = GameHelpers.GetUUID(activeTurnCharacter)
+	local turnEndData = PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID]
 	if turnEndData ~= nil then
-		for status,source in pairs(turnEndData) do
-			if HasActiveStatus(uuid, status) == 0 then
-				InvokeEndTurnStatusRemovedCallbacks(uuid, status, source)
-				turnEndData[status] = nil
+		for status,data in pairs(turnEndData) do
+			if not GameHelpers.ObjectExists(data.Target) or not GameHelpers.Status.IsActive(data.Target, status) then
+				InvokeEndTurnStatusRemovedCallbacks(activeGUID, status, data.Source, data.Target)
+				PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID][status] = nil
 			end
 		end
 		if not Common.TableHasAnyEntry(turnEndData) then
-			PersistentVars.StatusData.RemoveOnTurnEnd[uuid] = nil
+			PersistentVars.StatusData.RemoveOnTurnEnd[activeGUID] = nil
 		end
 	end
 end
