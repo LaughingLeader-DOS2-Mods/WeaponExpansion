@@ -241,7 +241,10 @@ end
 function UniqueData:Locate(uuid)
 	uuid = uuid or self.UUID
 	local item = GameHelpers.GetItem(uuid)
-	assert(item ~= nil, "[WeaponExpansion:UniqueData:Locate] uuid must be a valid item UUID.")
+	if item == nil then
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:UniqueData:Locate] uuid (%s) must be a valid item UUID.", uuid)
+		return false
+	end
 	local x,y,z = table.unpack(item.WorldPos)
 	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Unique (%s) is at position x %s y %s z %s", uuid, x, y, z)
 	fprint(LOGLEVEL.DEFAULT, "[WeaponExpansion:UniqueData:Locate] Characters nearby:")

@@ -6,6 +6,8 @@ UniqueManager = {
 	---@type table<string,UniqueData>
 	TagToUnique = {},
 	FirstLoad = true,
+	--TODO
+	SyncItemChanges = false,
 }
 
 local isClient = Ext.IsClient()
@@ -402,9 +404,15 @@ if not isClient then
 				AllUniques[v.DefaultUUID] = v
 			end
 		end
+
+		if SharedData.GameMode == GAMEMODE.CAMPAIGN and SharedData.RegionData.LevelType == LEVELTYPE.GAME then
+			Origins_InitCharacters(region, false)
+		end
 	end
 	
-	Timer.RegisterListener("Timers_LLWEAPONEX_InitUniques", UniqueManager.InitializeUniques)
+	Timer.Subscribe("Timers_LLWEAPONEX_InitUniques", function (e)
+		UniqueManager.InitializeUniques()
+	end)
 end
 
 ---@param originalItem EsvItem|string

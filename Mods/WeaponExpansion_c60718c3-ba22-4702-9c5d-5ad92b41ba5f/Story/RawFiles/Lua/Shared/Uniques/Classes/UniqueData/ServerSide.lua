@@ -21,7 +21,10 @@ end
 ---@param uuid UUID
 ---@param unequip boolean|nil Whether to unequip the item from its current owner.
 function UniqueData:ReleaseFromOwner(uuid, unequip)
-	assert(not StringHelpers.IsNullOrWhitespace(uuid), "[WeaponExpansion:UniqueData:ReleaseFromOwner] uuid must be a valid item UUID.")
+	if StringHelpers.IsNullOrWhitespace(uuid) then
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:UniqueData:ReleaseFromOwner] uuid (%s) must be a valid item UUID.", uuid)
+		return false
+	end
 	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
 	ObjectSetFlag(uuid, "LLWEAPONEX_UniqueData_Initialized", 0)
 	if unequip then
@@ -79,7 +82,10 @@ end
 
 ---@param uuid string
 function UniqueData:AddCopy(uuid)
-	assert(not StringHelpers.IsNullOrWhitespace(uuid), string.format("[WeaponExpansion:UniqueData:AddCopy] uuid must be a valid item UUID value(%s).", uuid))
+	if StringHelpers.IsNullOrWhitespace(uuid) then
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:UniqueData:AddCopy] uuid (%s) must be a valid item UUID.", uuid)
+		return false
+	end
 	local setIsInitialized = ObjectGetFlag(self.DefaultUUID, "LLWEAPONEX_UniqueData_Initialized") ~= 0
 	local setIsReleased = ObjectGetFlag(self.DefaultUUID, "LLWEAPONEX_UniqueData_ReleaseFromOwner") ~= 0
 	AllUniques[uuid] = self
@@ -128,7 +134,10 @@ end
 ---@param equip boolean|nil
 function UniqueData:Transfer(target, uuid, equip)
 	uuid = uuid or self.UUID
-	assert(not StringHelpers.IsNullOrWhitespace(uuid) and GameHelpers.ObjectExists(uuid), "[WeaponExpansion:UniqueData:Equip] uuid must be a valid item UUID.")
+	if StringHelpers.IsNullOrWhitespace(uuid) or not GameHelpers.ObjectExists(uuid) then
+		fprint(LOGLEVEL.ERROR, "[WeaponExpansion:UniqueData:Transfer] uuid (%s) must be a valid item UUID.", uuid)
+		return false
+	end
 	if target == "host" or not (target and Vars.DebugMode) then target = CharacterGetHostCharacter() end
 	assert(not StringHelpers.IsNullOrWhitespace(target) and GameHelpers.ObjectExists(target), "[WeaponExpansion:UniqueData:Equip] target must be a valid object UUID.")
 	self.Owner = target
@@ -575,14 +584,17 @@ local function StartApplyingProgression(self, progressionTable, persist, item, f
 				changes.Boosts["MaxDamage"] = max
 				changes.Stats["Damage Range"] = nil
 			end
-			EquipmentManager.SyncItemStatChanges(item, changes)
-			local copies = self.Copies
-			if copies then
-				for uuid,owner in pairs(copies) do
-					if uuid ~= item.MyGuid then
-						local copyItem = Ext.GetItem(uuid)
-						if copyItem ~= nil then
-							EquipmentManager.SyncItemStatChanges(copyItem, changes)
+			--FIX Item syncing when the items aren't near a player
+			if Ext.GetGameState() == "Running" and UniqueManager.SyncItemChanges then
+				EquipmentManager.SyncItemStatChanges(item, changes)
+				local copies = self.Copies
+				if copies then
+					for uuid,owner in pairs(copies) do
+						if uuid ~= item.MyGuid then
+							local copyItem = GameHelpers.GetItem(uuid)
+							if copyItem ~= nil then
+								EquipmentManager.SyncItemStatChanges(copyItem, changes)
+							end
 						end
 					end
 				end
