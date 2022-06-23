@@ -36,18 +36,21 @@ local function AddToParty(uuid, host)
 	Osi.PROC_GLO_PartyMembers_AddHook(uuid,host)
 end
 
-function Origins_InitCharacters(region, isEditorMode)
-	if CharacterGetHostCharacter() == nil then
+Events.RegionChanged:Subscribe(function (e)
+	if e.State == REGIONSTATE.GAME and e.LevelType == LEVELTYPE.GAME then
+		Origins_InitCharacters(e.Region)
+	end
+end)
+
+function Origins_InitCharacters(region)
+	if StringHelpers.IsNullOrEmpty(CharacterGetHostCharacter()) then
 		return
 	end
-	pcall(SetupOriginSkills, Origin.Harken, "Avatar_LLWEAPONEX_Harken")
-	pcall(SetupOriginSkills, Origin.Korvash, "Avatar_LLWEAPONEX_Korvash")
-
-	CharacterRemoveSkill(Origin.Korvash, "Cone_Flamebreath")
-	CharacterAddSkill(Origin.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 
 	--IsCharacterCreationLevel(region) == 0
 	if CharacterIsPlayer(Origin.Harken) == 0 and ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		pcall(SetupOriginSkills, Origin.Harken, "Avatar_LLWEAPONEX_Harken")
+
 		--CharacterApplyPreset(Origin.Harken, "LLWEAPONEX_Harken")
 		CharacterAddAbility(Origin.Harken, "WarriorLore", 1)
 		CharacterAddAbility(Origin.Harken, "TwoHanded", 1)
@@ -74,6 +77,10 @@ function Origins_InitCharacters(region, isEditorMode)
 	end
 	
 	if CharacterIsPlayer(Origin.Korvash) == 0 and ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
+		pcall(SetupOriginSkills, Origin.Korvash, "Avatar_LLWEAPONEX_Korvash")
+	
+		CharacterRemoveSkill(Origin.Korvash, "Cone_Flamebreath")
+		CharacterAddSkill(Origin.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 		--CharacterApplyPreset(Origin.Korvash, "LLWEAPONEX_Korvash")
 		CharacterAddAbility(Origin.Korvash, "WarriorLore", 1)
 		CharacterAddAbility(Origin.Korvash, "Necromancy", 1)

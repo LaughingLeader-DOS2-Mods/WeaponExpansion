@@ -404,10 +404,6 @@ if not isClient then
 				AllUniques[v.DefaultUUID] = v
 			end
 		end
-
-		if SharedData.GameMode == GAMEMODE.CAMPAIGN and SharedData.RegionData.LevelType == LEVELTYPE.GAME then
-			Origins_InitCharacters(region, false)
-		end
 	end
 	
 	Timer.Subscribe("Timers_LLWEAPONEX_InitUniques", function (e)
