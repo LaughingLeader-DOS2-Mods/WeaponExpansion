@@ -125,7 +125,9 @@ Ext.RegisterUINameCall("LLWEAPONEX_MasteryMenu_ToggleMasteryMenu", function (ui,
 end)
 
 Ext.RegisterUINameCall("LLWEAPONEX_MasteryMenu_ToggleButton_FadeinComplete", function (ui, call)
-	ToggleButton:SetVisible(true)
+	if IsToggleButtonVisible() then
+		ToggleButton:SetVisible(true)
+	end
 end)
 
 Ext.RegisterUINameCall("LLWEAPONEX_MasteryMenu_ToggleButton_FadeOutComplete", function (ui, call)
