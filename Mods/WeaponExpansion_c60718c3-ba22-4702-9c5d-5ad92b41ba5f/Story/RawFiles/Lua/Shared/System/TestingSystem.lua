@@ -13,7 +13,7 @@ function MasteryTesting.RegisterTest(bonusId, operation, params)
 	if _Tests[bonusId] == nil then
 		_Tests[bonusId] = {}
 	end
-	Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
+	--Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
 	local test = nil
 	if type(operation) == "table" then
 		test = Classes.LuaTest.Create(bonusId, operation, params)
@@ -83,18 +83,34 @@ Events.LuaReset:Subscribe(function (e)
 	end
 end)
 
-Ext.RegisterConsoleCommand("test", function (cmd, id, subid)
-	if id == "bonus" then
+if not _ISCLIENT then
+	Testing.RegisterConsoleCommandTest("bonus", function (id, subid)
 		local test = _Tests[subid]
 		if test then
 			SetMasteryTests("", "true")
-			fprint(LOGLEVEL.DEFAULT, "[test] Running test (%s)", subid)
-			Testing.RunTests(test, subid)
+			return test
 		else
-			fprint(LOGLEVEL.WARNING, "[test] No test for ID (%s)", subid)
+			fprint(LOGLEVEL.WARNING, "[test] No test for bonus ID (%s)", subid)
 		end
-	elseif id == "mastery" then
+	end, function (id, subid)
+		local bonuses = {}
+		for bid,v in pairs(_Tests) do
+			bonuses[#bonuses+1] = " " .. bid
+		end
+		if #bonuses > 0 then
+			table.sort(bonuses)
+			return "\n" .. StringHelpers.Join("\n", bonuses)
+		else
+			return "No registered tests."
+		end
+	end)
+
+	Testing.RegisterConsoleCommandTest("mastery", function (id, subid)
 		local mastery = Masteries[subid]
+		if not mastery then
+			subid = "LLWEAPONEX_" .. subid
+			mastery = Masteries[subid]
+		end
 		if mastery then
 			local tests = {}
 			for _,v in pairs(mastery.RankBonuses) do
@@ -112,20 +128,37 @@ Ext.RegisterConsoleCommand("test", function (cmd, id, subid)
 			end
 			if #tests > 0 then
 				SetMasteryTests("", "true")
-				fprint(LOGLEVEL.DEFAULT, "[test] Running tests for mastery (%s)", subid)
-				Testing.RunTests(tests, subid)
+				return tests
 			else
 				fprint(LOGLEVEL.WARNING, "[test] No registered tests for mastery (%s)", subid)
 			end
 		else
 			fprint(LOGLEVEL.ERROR, "[test] No mastery with ID (%s)", subid)
 		end
-	else
-		fprint(LOGLEVEL.WARNING, "[test] No tests for type (%s)", id)
-	end
-end)
+	end, function (id, subid)
+		local masteryTests = {}
+		for mid,mastery in pairs(Masteries) do
+			local bonuses = {}
+			for _,v in pairs(mastery.RankBonuses) do
+				for _,v2 in ipairs(v.Bonuses) do
+					if _Tests[v2.ID] then
+						bonuses[#bonuses+1] = "    " .. v2.ID
+					end
+				end
+			end
+			if #bonuses > 0 then
+				--masteryTests[#masteryTests+1] = string.format("%s\n%s", mid, StringHelpers.Join("\n", bonuses))
+				masteryTests[#masteryTests+1] = " " .. mid
+			end
+		end
+		if #masteryTests > 0 then
+			table.sort(masteryTests)
+			return "\n" .. StringHelpers.Join("\n", masteryTests)
+		else
+			return "No registered tests."
+		end
+	end)
 
-if not _ISCLIENT then
 	---@param pos number[]|nil
 	---@param equipmentSet string|nil
 	---@return EsvCharacter
