@@ -4,7 +4,8 @@ local self = EquipmentManager
 ---@field Character EsvCharacter
 ---@field Item EsvItem
 ---@field Equipped boolean
----@field Template string
+---@field Template string|nil
+---@field Tag string|nil
 
 EquipmentManager.Events = {}
 
@@ -39,7 +40,6 @@ function EquipmentManager:OnItemEquipped(character, item)
 	if not character or not item or GameHelpers.Item.IsObject(item) then
 		return
 	end
-
 	
 	local db = Osi.DB_LLWEAPONEX_Equipment_ActiveTags:Get(character.MyGuid, "LLWEAPONEX_Unarmed", "NULL_00000000-0000-0000-0000-000000000000")
 	if db and #db > 0 then
@@ -120,8 +120,14 @@ function EquipmentManager:OnItemEquipped(character, item)
 		if Vars.DebugMode then
 			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", template, item.Stats.Name, character.MyGuid))
 		end
+		local data = {
+			Character = character,
+			Item = item,
+			Template = template,
+			Equipped = true
+		}
 		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, character, item, template, true)
+			local b,err = xpcall(callback, debug.traceback, data)
 			if not b then
 				Ext.PrintError(err)
 			end
@@ -133,8 +139,14 @@ function EquipmentManager:OnItemEquipped(character, item)
 			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.Stats.Name, character.MyGuid))
 			end
+			local data = {
+				Character = character,
+				Item = item,
+				Tag = tag,
+				Equipped = true
+			}
 			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, character, item, tag, true)
+				local b,err = xpcall(callback, debug.traceback, data)
 				if not b then
 					Ext.PrintError(err)
 				end
@@ -169,8 +181,14 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 		if Vars.DebugMode then
 			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.Stats.Name, character.MyGuid))
 		end
+		local data = {
+			Character = character,
+			Item = item,
+			Template = template,
+			Equipped = false
+		}
 		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, character, item, template, false)
+			local b,err = xpcall(callback, debug.traceback, data)
 			if not b then
 				Ext.PrintError(err)
 			end
@@ -181,8 +199,14 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.Stats.Name, character.MyGuid))
 			end
+			local data = {
+				Character = character,
+				Item = item,
+				Tag = tag,
+				Equipped = false
+			}
 			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, character, item, tag, false)
+				local b,err = xpcall(callback, debug.traceback, data)
 				if not b then
 					Ext.PrintError(err)
 				end
