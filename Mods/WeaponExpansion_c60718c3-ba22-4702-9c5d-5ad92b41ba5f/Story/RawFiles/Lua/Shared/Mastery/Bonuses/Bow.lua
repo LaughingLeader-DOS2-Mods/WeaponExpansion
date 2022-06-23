@@ -116,7 +116,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 	rb:Create("BOW_EXPLOSIVE_RAIN", {
 		Skills = {"ProjectileStrike_RainOfArrows", "ProjectileStrike_EnemyRainOfArrows"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_ExplosiveRain", "<font color='#72EE34'>[Special:LLWEAPONEX_MB_Bow_ExplosiveRainHitRange] random arrow(s) have a [ExtraData:LLWEAPONEX_MB_Bow_ExplosiveRain_ExplodeChance]% chance to explode, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage] in a [Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage:ExplodeRadius]m radius.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_ExplosiveRain", "<font color='#FFCC33'>[Special:LLWEAPONEX_MB_Bow_ExplosiveRainHitRange]</font><font color='#72EE34'> random arrow(s) have a <font color='#FFCC33'>[ExtraData:LLWEAPONEX_MB_Bow_ExplosiveRain_ExplodeChance]% chance</font> to explode with shrapnel, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage] in a [Stats:Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage:ExplodeRadius]m radius, with a small chance to apply [Key:BLEEDING_DisplayName].</font>"),
 	}).Register.SpecialTooltipParam("LLWEAPONEX_MB_Bow_ExplosiveRainHitRange", function (param, character)
 		local min = math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MinArrows", 1, true))
 		local max = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MaxArrows", 5, true)
@@ -134,8 +134,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 			return string.format("%i-%i", min, max)
 		end
 		return string.format("%i", min)
-	end).SkillCast(function(self, e, bonuses)
-		local strikeCount = Ext.StatGetAttribute("ProjectileStrike_RainOfArrows", "StrikeCount")
+	end).SkillUsed(function(self, e, bonuses)
+		local strikeCount = Ext.StatGetAttribute(e.Skill, "StrikeCount")
 		local max = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MaxArrows", 5, true)
 		if strikeCount > 0 and max > 0 then
 			local min = math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MinArrows", 1, true))
@@ -145,27 +145,34 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 			else
 				PersistentVars.MasteryMechanics.BowExplosiveRainArrowCount[e.Character.MyGuid] = {Total = strikeCount, Remaining = max}
 			end
-			Timer.StartObjectTimer("LLWEAPONEX_MB_Bow_ExplosiveRain_ClearData", e.Character, 3000)
+			Timer.StartObjectTimer("LLWEAPONEX_MB_Bow_ExplosiveRain_ClearData", e.Character, 10000)
 		end
 	end).SkillProjectileHit(function(self, e, bonuses)
 		local data = PersistentVars.MasteryMechanics.BowExplosiveRainArrowCount[e.Character.MyGuid]
 		if data then
 			if data.Remaining > 0 then
-				if data.Total > data.Remaining then
-					local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_ExplodeChance", 20, true)
-					if GameHelpers.Math.Roll(chance, 2) then
-						GameHelpers.Skill.Explode(e.Data.Position, "Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage", e.Character, {CanDeflect=false,EnemiesOnly=true})
-						data.Remaining = data.Remaining - 1
-					end
-				else
+				local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_ExplodeChance", 20, true)
+				if GameHelpers.Math.Roll(chance) then
 					GameHelpers.Skill.Explode(e.Data.Position, "Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage", e.Character, {CanDeflect=false,EnemiesOnly=true})
+					local pos = {table.unpack(e.Data.Position)}
+					pos[2] = pos[2] - 0.5
+					EffectManager.PlayEffectAt("LLWEAPONEX_FX_Projectiles_RemoteMine_Shrapnel_Impact_01", pos, {Scale=0.7})
+					data.Remaining = data.Remaining - 1
 				end
 			end
 			if data.Remaining <= 0 then
 				PersistentVars.MasteryMechanics.BowExplosiveRainArrowCount[e.Character.MyGuid] = nil
+				SignalTestComplete(self.ID)
 			else
 				data.Total = data.Total - 1
 				Timer.RestartObjectTimer("LLWEAPONEX_MB_Bow_ExplosiveRain_ClearData", e.Character, 1000)
+				if data.Total == 0 then
+					if data.Remaining > 0 and Vars.DebugMode then
+						fprint(LOGLEVEL.WARNING, "[LLWEAPONEX_MB_Bow_ExplosiveRain] (%s) arrow(s) unexploded!", data.Remaining)
+					end
+					SignalTestComplete(self.ID)
+					PersistentVars.MasteryMechanics.BowExplosiveRainArrowCount[e.Character.MyGuid] = nil
+				end
 			end
 		end
 	end).TimerFinished("LLWEAPONEX_MB_Bow_ExplosiveRain_ClearData", function (self, e, bonuses)
@@ -176,12 +183,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
-		TeleportTo(char, dummy, "", 0, 1, 1)
+		local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10)
+		--TeleportTo(char, dummy, "", 0, 1, 1)
+		TeleportToPosition(char, pos[1], pos[2], pos[3], "", 0, 1)
 		CharacterSetFightMode(char, 1, 1)
 		test:Wait(1000)
-		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		--CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
+		local x,y,z = GetPosition(dummy)
+		CharacterUseSkillAtPosition(char, self.Skills[1], x, y, z, 1, 1)
 		test:WaitForSignal(self.ID, 10000)
 		test:AssertGotSignal(self.ID)
+		test:Wait(3000)
 		return true
 	end),
 })

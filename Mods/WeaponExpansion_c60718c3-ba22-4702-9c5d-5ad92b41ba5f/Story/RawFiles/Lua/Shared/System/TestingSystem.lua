@@ -187,6 +187,7 @@ if not _ISCLIENT then
 		CharacterSetReactionPriority(character, "CowerIfNeutralSeeCombat", 0)
 		SetTag(character, "LeaderLib_TemporaryCharacter")
 		SetTag(character, "LLWEAPONEX_MasteryTestCharacter")
+		SetFaction(character, "Good NPC")
 	end
 
 	MasteryTesting.SetupCharacter = SetupCharacter
