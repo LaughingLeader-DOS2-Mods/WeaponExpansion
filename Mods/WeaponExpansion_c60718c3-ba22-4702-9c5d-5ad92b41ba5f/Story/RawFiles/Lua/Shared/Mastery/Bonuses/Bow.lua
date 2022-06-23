@@ -113,8 +113,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 	end),
 })
 
-if Vars.IsClient then
-	TooltipParams.SpecialParamFunctions.LLWEAPONEX_MB_Bow_ExplosiveRainHitRange = function (param, character)
+MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
+	rb:Create("BOW_EXPLOSIVE_RAIN", {
+		Skills = {"ProjectileStrike_RainOfArrows", "ProjectileStrike_EnemyRainOfArrows"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_ExplosiveRain", "<font color='#72EE34'>[Special:LLWEAPONEX_MB_Bow_ExplosiveRainHitRange] random arrow(s) have a [ExtraData:LLWEAPONEX_MB_Bow_ExplosiveRain_ExplodeChance]% chance to explode, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage] in a [Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage:ExplodeRadius]m radius.</font>"),
+	}).Register.SpecialTooltipParam("LLWEAPONEX_MB_Bow_ExplosiveRainHitRange", function (param, character)
 		local min = math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MinArrows", 1, true))
 		local max = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MaxArrows", 5, true)
 		if max <= 0 then
@@ -131,14 +134,7 @@ if Vars.IsClient then
 			return string.format("%i-%i", min, max)
 		end
 		return string.format("%i", min)
-	end
-end
-
-MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
-	rb:Create("BOW_EXPLOSIVE_RAIN", {
-		Skills = {"ProjectileStrike_RainOfArrows", "ProjectileStrike_EnemyRainOfArrows"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_ExplosiveRain", "<font color='#72EE34'>[Special:LLWEAPONEX_MB_Bow_ExplosiveRainHitRange] random arrow(s) have a [ExtraData:LLWEAPONEX_MB_Bow_ExplosiveRain_ExplodeChance]% chance to explode, dealing [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage] in a [Projectile_LLWEAPONEX_MasteryBonus_Bow_ExplosiveRainDamage:ExplodeRadius]m radius.</font>"),
-	}).Register.SkillCast(function(self, e, bonuses)
+	end).SkillCast(function(self, e, bonuses)
 		local strikeCount = Ext.StatGetAttribute("ProjectileStrike_RainOfArrows", "StrikeCount")
 		local max = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_ExplosiveRain_MaxArrows", 5, true)
 		if strikeCount > 0 and max > 0 then

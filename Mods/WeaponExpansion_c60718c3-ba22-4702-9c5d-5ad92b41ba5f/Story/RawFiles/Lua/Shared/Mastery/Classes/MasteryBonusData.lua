@@ -43,6 +43,7 @@ local _type = type
 ---@field OnWeaponTypeHit fun(weaponType:string|string[], callback:BasicAttackOnWeaponTypeHitCallback, skipBonusCheck:boolean|nil):MasteryBonusDataRegistrationFunctions
 ---@field OnHeal fun(callback:WeaponExpansionOnHealCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
 ---@field TimerFinished fun(id:string|string[], callback:MasteryBonusOnTimerCallback, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field SpecialTooltipParam fun(id:string, callback:LeaderLibGetTextPlaceholderCallback):MasteryBonusDataRegistrationFunctions
 ---@field Test fun(operation:MasteryTestingTaskCallback):MasteryBonusDataRegistrationFunctions
 
 local _INTERNALREG = {}
@@ -318,6 +319,17 @@ function _INTERNALREG.OnWeaponTypeHit(self, weaponType, callback, skipBonusCheck
 			end
 			AttackManager.OnWeaponTypeHit.Register(weaponType, wrapper, priority)
 		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param id string
+---@param callback LeaderLibGetTextPlaceholderCallback
+---@return MasteryBonusData
+function _INTERNALREG.SpecialTooltipParam(self, id, callback)
+	if _ISCLIENT then
+		TooltipParams.SpecialParamFunctions[id] = callback
 	end
 	return self
 end
