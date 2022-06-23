@@ -28,10 +28,16 @@ function ApplyRuneExtraProperties(source, target, item, targetPosition, radius, 
 		for _,runeEntry in pairs(runes) do
 			for _,boost in pairs(runeEntry.Boosts) do
 				if not StringHelpers.IsNullOrEmpty(boost) then
-					if targetIsObject then
-						Ext.PropertyList.ExecuteExtraPropertiesOnTarget(boost, "ExtraProperties", source, target, targetPosition, "Target", false, skill)
-					else
-						Ext.PropertyList.ExecuteExtraPropertiesOnPosition(boost, "ExtraProperties", source, targetPosition, radius, "AoE", false, skill)
+					local properties = GameHelpers.Stats.GetExtraProperties(boost)
+					if properties and #properties > 0 then
+						if targetIsObject then
+							Ext.PropertyList.ExecuteExtraPropertiesOnTarget(boost, "ExtraProperties", source, target, targetPosition, "Target", false, skill)
+						else
+							Ext.PropertyList.ExecuteExtraPropertiesOnPosition(boost, "ExtraProperties", source, targetPosition, radius, "AoE", false, skill)
+						end
+						if skill then
+							Ext.PropertyList.ExecuteExtraPropertiesOnTarget(boost, "ExtraProperties", source, source, source.WorldPos, "Self", false, skill)
+						end
 					end
 				end
 			end
