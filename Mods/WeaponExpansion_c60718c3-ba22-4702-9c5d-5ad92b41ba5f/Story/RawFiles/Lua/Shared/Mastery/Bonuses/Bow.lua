@@ -111,6 +111,74 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 		test:AssertGotSignal(self.ID)
 		return true
 	end),
+	rb:Create("BOW_FOCUSED_ATTACKING", {
+		Skills = MasteryBonusManager.Vars.BasicAttack,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_FocusedAttacking", "<font color='#72EE34'>Non-critical basic attacks on the same target have a cumulative chance to critical hit, until a critical hit is achieved, you leave comat, or a different target is attacked.</font><br><font color='#33FF99'>This bonus also works with [Key:LLWEAPONEX_Greatbow:Greatbow] type weapons.</font>"),
+	}).Register.OnWeaponTypeHit("Bow", function(self, e, bonuses)
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttackCriticalChance", 5, true)
+		if chance > 0
+		and not e.SkillData -- Basic attacks only
+		--enable skipWeaponCheck in HasMasteryBonus, so this bonus works as long as it's been unlocked, and the weapon type is a Bow, stats-wise
+		and MasteryBonusManager.HasMasteryBonus(e.Attacker, self.ID, true) then
+			local GUID = e.Attacker.MyGuid
+			if e.Data:HasHitFlag("CriticalHit", true) or not e.TargetIsObject then
+				PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[GUID] = nil
+			else
+				local attackData = PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[GUID]
+				if attackData then
+					if attackData.Target ~= e.Target.MyGuid then
+						attackData.Hits = 1
+						attackData.Target = e.Target.MyGuid
+					else
+						attackData.Hits = attackData.Hits + 1
+					end
+				else
+					attackData = {Hits = 1, Target = e.Target.MyGuid}
+					PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[GUID] = attackData
+				end
+				local totalHits = attackData.Hits
+				if totalHits > 1 then
+					local bonusRolls = totalHits - 1
+					if GameHelpers.Math.Roll(chance, bonusRolls) then
+						local attackerName = GameHelpers.Character.GetDisplayName(e.Attacker)
+						local targetName = GameHelpers.Character.GetDisplayName(e.Target)
+						local combatLogText = Text.CombatLog.Bow.FocusedBasicAttackSuccess:ReplacePlaceholders(attackerName, targetName, totalHits)
+
+						CombatLog.AddCombatText(combatLogText)
+
+						local weaponCritMult = Game.Math.GetCriticalHitMultiplier(e.Attacker.Stats.MainWeapon, e.Attacker.Stats, 0.0)
+						if weaponCritMult < 1 then
+							weaponCritMult = weaponCritMult + 1
+						end
+						e.Data:SetHitFlag("CriticalHit", true)
+						e.Data:MultiplyDamage(weaponCritMult)
+						SignalTestComplete(self.ID)
+					end
+				end
+			end
+		end
+	end, true).Test(function(test, self)
+		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		TeleportTo(char, dummy, "", 0, 1, 1)
+		CharacterSetFightMode(char, 1, 1)
+		test:Wait(1000)
+		local keepAttacking = true
+		local tries = 0
+		while keepAttacking and tries <= 30 do
+			tries = tries + 1
+			CharacterAttack(char, dummy)
+			test:WaitForSignal(self.ID, 1000)
+			if test.SignalSuccess == self.ID then
+				keepAttacking = false
+				test.SuccessMessage = string.format("[%s] Took (%s) attacks to finally critical hit (%s%% chance).", self.ID, tries, GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttackCriticalChance", 5))
+				Ext.PrintWarning(test.SuccessMessage)
+			end
+		end
+		assert(tries <= 30, "Ran out of basic attack attempts (tries > 30)")
+		return true
+	end),
 })
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {

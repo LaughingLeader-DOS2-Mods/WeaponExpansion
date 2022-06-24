@@ -25,7 +25,7 @@ Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts 
 Bludgeon	4	Onslaught	After using Onslaught, leap up into the air and slam down your weapons, dealing bonus damage for each successful hit.	√	√
 Bow	1	Pin Down	Shoot two arrows instead of one, hitting a random nearby enemy for half damage.	√	❌
 Bow	2	Assassinate	If the target is Marked, this skill deals a critical hit.	√	❌
-Bow	3	Placeholder	Placeholder	❌	❌
+Bow	3	Rain of Arrows	20% chance for 1-5 arrows to explode for bonus piercing damage, with a chance to apply Bleeding. 	√	√
 Bow	4	Placeholder	Placeholder	❌	❌
 Crossbow	1	Ricochet	If each fork hits, Ricochet is refreshed.	√	❌
 Crossbow	2	Sky Shot	If the target is Knocked Down, this skill deals a critical hit.	√	❌

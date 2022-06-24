@@ -11,7 +11,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success and (GameHelpers.Status.IsDisabled(e.Data.TargetObject) or e.Data.TargetObject:HasTag("LLDUMMY_TrainingDummy")) then
 			GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage", HitFlagPresets.GuaranteedWeaponHit)
-			local text = Text.CombatLog.Axe_DisabledBonus:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(e.Character),
+			local text = Text.CombatLog.Axe.DisabledBonus:ReplacePlaceholders(GameHelpers.Character.GetDisplayName(e.Character),
 			GameHelpers.Character.GetDisplayName(e.Data.TargetObject), GameHelpers.GetStringKeyText(e.Data.SkillData.DisplayName))
 			CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, text)
 			SignalTestComplete(self.ID)

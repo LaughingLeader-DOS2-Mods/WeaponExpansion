@@ -3,7 +3,6 @@ local ts = Classes.TranslatedString
 
 local _autoReplace = {AutoReplacePlaceholders = true}
 
----@type table<string, table<string,TranslatedString>>
 Text = {
 	RuneNames = {
 		--LOOT_Rune_LLWEAPONEX_HandCrossbow_Bolts_Normal = ts:Create("h21d85e8eg3e61g4f9agb1a2g3a5ca2722144", "Mini-Bolts"),
@@ -225,19 +224,28 @@ Text = {
 		Banner = ts:Create("hbe8ca1e2g4683g4a93g8e20g984992e30d22", "Banner")
 	},
 	CombatLog = {
+		Axe = {
+			DisabledBonus = ts:CreateFromKey("LLWEAPONEX_CombatLog_Axe_DisabledBonus", "<font color='#F5785A'>Axe Mastery 1:</font> [1] dealt bonus damage to [2] ([3] 'disabled' bonus damage)."),
+		},
+		BattleBook = {
+			ChallengeWon = ts:CreateFromKey("LLWEAPONEX_CombatLog_BattleBook_ChallengeWon", "<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted the skillbook '[3]'."),
+			ChallengeWon_NoSkills = ts:CreateFromKey("LLWEAPONEX_CombatLog_BattleBook_ChallengeWonNoSkills", "<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted gold as a reward (target has no skills)."),
+		},
+		Bludgeon = {
+			ShellCracking_StatusRemoved = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusRemoved", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] removed <font color='[4]'>[2]</font> from [3], triggering a <font color='#7F00FF'>magical explosion</font>."),
+			ShellCracking_StatusTurnsReduced = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusTurnsReduced", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] attacked [2], reducing the duration of <font color='[5]'>[3]</font> by <font color='#FF3333'>[4]</font>."),
+			Shattered = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_Shattered", "<font color='#F19824'>Bludgeon Mastery 4:</font> [1] attacked [2] and shattered [3], dealing a <font color='#FF3333'>Massive [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit] ([6]%)</font> ([4] -> [5])."),
+			Shattered_Ally = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShatteredAlly", "<font color='#F19824'>Bludgeon Mastery 4:</font> [1] attacked [2] and shattered [3], \"safely\" shattering their affliction."),
+		},
+		Bow = {
+			FocusedBasicAttackSuccess = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bow_FocusedBasicAttackSuccess", "<font color='#72EE34'>Bow Mastery 2:</font> [1] hit [2] [3] times in a row, and finally got a [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit]."),
+		},
 		StealSuccess = ts:Create("h9f7d431dg1f6dg494dg89b8g4cb4b98994d4","<font color='#00FF00'>[1] stole </font><font color='#00FFAA'>[2]</font><font color='#00FF00'> from [3]!</font>"),
 		StealFailed = ts:Create("hade2f718gb41dg427cg81c8gff64a36ad95f","<font color='#FF0000'>[1] failed to steal anything from [2].</font>"),
 		StealLimitReached = ts:Create("h62e44d39gae88g4785g9004g79e396516ee4","<font color='#FF0000'>[1] attempted to steal from [2], but they have nothing left.</font>"),
 		MasteryRankUp = ts:Create("he0cceb33g75ddg44a5g94b4geda5fd12c886", "<font color='#EBC808'>[1] unlocked [2] Mastery Rank [3].</font>"),
 		DeathEdgeBonus = ts:Create("ha2fbf8c5g3500g42d4ga21bg5e4524eae598", "<font color='#CC33FF'>[Key:WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName] twists the recently slain [1], summoning a <font color='#FFFFFF'>[Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem]</font>.</font>"),
 		StillStanceEnabled = ts:Create("h0f4c3d9fgf39fg49b8gbf42g3fcb4e3543c5", "<font color='#99FF22'>[1] is in a Still Stance ([2]).</font>"),
-		Axe_DisabledBonus = ts:CreateFromKey("LLWEAPONEX_CombatLog_Axe_DisabledBonus", "<font color='#F5785A'>Axe Mastery 1:</font> [1] dealt bonus damage to [2] ([3] 'disabled' bonus damage)."),
-		BattleBook_ChallengeWon = ts:CreateFromKey("LLWEAPONEX_CombatLog_BattleBook_ChallengeWon", "<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted the skillbook '[3]'."),
-		BattleBook_ChallengeWon_NoSkills = ts:CreateFromKey("LLWEAPONEX_CombatLog_BattleBook_ChallengeWonNoSkills", "<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted gold as a reward (target has no skills)."),
-		Bludgeon_ShellCracking_StatusRemoved = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusRemoved", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] removed <font color='[4]'>[2]</font> from [3], triggering a <font color='#7F00FF'>magical explosion</font>."),
-		Bludgeon_ShellCracking_StatusTurnsReduced = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShellCracking_StatusTurnsReduced", "<font color='#F19824'>Bludgeon Mastery 1:</font> [1] attacked [2], reducing the duration of <font color='[5]'>[3]</font> by <font color='#FF3333'>[4]</font>."),
-		Bludgeon_Shattered = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_Shattered", "<font color='#F19824'>Bludgeon Mastery 4:</font> [1] attacked [2] and shattered [3], dealing a <font color='#FF3333'>Massive [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit] ([6]%)</font> ([4] -> [5])."),
-		Bludgeon_Shattered_Ally = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShatteredAlly", "<font color='#F19824'>Bludgeon Mastery 4:</font> [1] attacked [2] and shattered [3], \"safely\" shattering their affliction."),
 	},
 	StatusText = {
 		StatusExtended = ts:Create("h8224bb41g2261g4a50ga1feg7dc0f7394eb7", "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"),

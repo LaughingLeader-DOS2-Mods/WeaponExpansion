@@ -68,7 +68,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 						if nextDuration <= 0 then
 							GameHelpers.Status.Remove(e.Data.TargetObject, id)
 							GameHelpers.Skill.Explode(e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Bludgeon_ShellCrackingBonusDamage", e.Character, {EnemiesOnly = true})
-							local combatLogText = Text.CombatLog.Bludgeon_ShellCracking_StatusRemoved:ReplacePlaceholders(sourceName, GameHelpers.Stats.GetDisplayName(id), targetName, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
+							local combatLogText = Text.CombatLog.Bludgeon.ShellCracking_StatusRemoved:ReplacePlaceholders(sourceName, GameHelpers.Stats.GetDisplayName(id), targetName, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
 							CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
 
 							createdExplosion = true
@@ -79,7 +79,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 							status.CurrentLifeTime = nextDuration
 							status.RequestClientSync = true
 
-							local combatLogText = Text.CombatLog.Bludgeon_ShellCracking_StatusTurnsReduced:ReplacePlaceholders(sourceName, targetName, GameHelpers.Stats.GetDisplayName(id), turnReduction, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
+							local combatLogText = Text.CombatLog.Bludgeon.ShellCracking_StatusTurnsReduced:ReplacePlaceholders(sourceName, targetName, GameHelpers.Stats.GetDisplayName(id), turnReduction, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
 							CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
 						end
 						affectedStatus = true
@@ -372,7 +372,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 					--Reduce damage
 					data:MultiplyDamage((damageReduction * 0.01), true)
 				end
-				local combatLogText = Text.CombatLog.Bludgeon_Shattered_Ally:ReplacePlaceholders(sourceName, targetName, statusesText)
+				local combatLogText = Text.CombatLog.Bludgeon.Shattered_Ally:ReplacePlaceholders(sourceName, targetName, statusesText)
 				CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
 				--PlaySound(target.MyGuid, "Skill_Poly_MedusaHead_Impact")
 				PlaySound(target.MyGuid, "Skill_Poly_BullRush_Impact")
@@ -393,7 +393,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 					end
 					data:SetHitFlag("CriticalHit", true)
 					data:MultiplyDamage(critMult, true)
-					local combatLogText = Text.CombatLog.Bludgeon_Shattered:ReplacePlaceholders(sourceName, targetName, statusesText, totalDamage, data.Damage, Ext.Round(critMult * 100))
+					local combatLogText = Text.CombatLog.Bludgeon.Shattered:ReplacePlaceholders(sourceName, targetName, statusesText, totalDamage, data.Damage, Ext.Round(critMult * 100))
 					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
 					PlaySound(target.MyGuid, "Skill_Rogue_MortalBlow_Impact")
 					--PlaySound(target.MyGuid, "Skill_Warrior_Onslaught_Impact")

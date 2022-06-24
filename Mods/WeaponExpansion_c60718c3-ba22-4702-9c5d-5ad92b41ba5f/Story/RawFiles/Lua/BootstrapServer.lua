@@ -47,6 +47,8 @@ local defaultPersistentVars = {
         GuardianAngelResurrect = {},
         ---@type table<UUID,{Remaining:integer, Total:integer}>
         BowExplosiveRainArrowCount = {},
+        ---@type table<UUID,{Hits:integer, Target:UUID}>
+        BowCumulativeCriticalChance = {},
     },
     Timers = {},
     OnDeath = {},

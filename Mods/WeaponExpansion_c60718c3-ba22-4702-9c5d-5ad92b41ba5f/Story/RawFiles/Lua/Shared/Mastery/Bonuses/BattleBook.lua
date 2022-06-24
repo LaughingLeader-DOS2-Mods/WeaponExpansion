@@ -454,11 +454,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 					end
 				end
 				if addedSkillbook then
-					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook_ChallengeWon:ReplacePlaceholders(challengerName, targetName, skillbookName))
+					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook.ChallengeWon:ReplacePlaceholders(challengerName, targetName, skillbookName))
 					SignalTestComplete("BATTLEBOOK_CHALLENGE_Reward")
 				else
 					CharacterGiveReward(challengerGUID, "OnlyGold", 1)
-					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook_ChallengeWon_NoSkills:ReplacePlaceholders(challengerName, targetName))
+					CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, Text.CombatLog.BattleBook.ChallengeWon_NoSkills:ReplacePlaceholders(challengerName, targetName))
 				end
 			end
 			PersistentVars.MasteryMechanics.BattlebookChallenge[challengerGUID] = nil

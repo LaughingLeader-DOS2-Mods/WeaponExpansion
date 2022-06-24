@@ -234,21 +234,26 @@ local function RemoveTagsOnTurnEnd(uuid)
 	end
 end
 
+---@param uuid UUID
+---@param id integer
 local function OnLeftCombat(uuid, id)
 	ReloadAmmoSkills(uuid)
 	StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
 	RemoveTagsOnTurnEnd(uuid)
+	PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[uuid] = nil
 end
 
-Ext.RegisterOsirisListener("ObjectTurnEnded", 1, "after", function(uuid)
-	uuid = StringHelpers.GetUUID(uuid)
-	StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
-	RemoveTagsOnTurnEnd(uuid)
+Ext.RegisterOsirisListener("ObjectTurnEnded", 1, "after", function(obj)
+	if ObjectExists(obj) == 1 and ObjectIsCharacter(obj) == 1 then
+		obj = StringHelpers.GetUUID(obj)
+		StatusTurnHandler.RemoveAllTurnEndStatuses(obj)
+		RemoveTagsOnTurnEnd(obj)
+	end
 end)
 
 RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(obj,id)
-	obj = StringHelpers.GetUUID(obj)
-	if ObjectIsCharacter(obj) == 1 then
+	if ObjectExists(obj) == 1 and ObjectIsCharacter(obj) == 1 then
+		obj = StringHelpers.GetUUID(obj)
 		OnLeftCombat(obj, id)
 	end
 end)
