@@ -1,3 +1,4 @@
+local _ISCLIENT = Ext.IsClient()
 
 ---@param character EsvCharacter|string
 ---@param mastery string
@@ -79,22 +80,25 @@ function Mastery.HasMinimumMasteryLevel(character,mastery,minLevel)
 	return false
 end
 
---- @param character EsvCharacter|StatCharacter
---- @param tag string
---- @return boolean
-local function TryCheckMasteryRequirement(character, tag)
+---@param character EsvCharacter|StatCharacter
+---@param tag string
+---@param skipWeaponCheck boolean|nil
+---@return boolean
+local function TryCheckMasteryRequirement(character, tag, skipWeaponCheck)
 	if type(tag) == "string" then
+		local _tags = GameHelpers.GetAllTags(character, true, true)
 		--Check if character is tagged with a rank tag, like LLWEAPONEX_Unarmed_Mastery2
-		if character ~= nil and GameHelpers.CharacterOrEquipmentHasTag(character, tag) == true then
+		if character ~= nil and _tags[tag] then
 			local _,_,mastery = string.find(tag,"(.+)_Mastery")
-			if mastery ~= nil and Mastery.PermanentMasteries[mastery] == true then
-				return true
-			else
-				--Check if character is tagged with a mastery tag, like LLWEAPONEX_Unarmed, which is set when the mastery is active
-				if Ext.IsClient() then
-					return (MasteryMenu.Variables.CurrentTooltip == "Skill" and MasteryMenu.Variables.SelectedMastery.Current == mastery) or GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
-				else
-					return GameHelpers.CharacterOrEquipmentHasTag(character, mastery)
+			--Check if character is tagged with a mastery tag, like LLWEAPONEX_Unarmed, which is set when the mastery is active
+			--If skipWeaponCheck is true, skip looking for the "mastery is active" tag.
+			if mastery then
+				if _tags[mastery] or (Mastery.PermanentMasteries[mastery] == true or skipWeaponCheck) then
+					return true
+				elseif _ISCLIENT then
+					--Skip checking for the "mastery is active" tag on the client,
+					--if we're looking at a skill for an unlocked bonus, or we're in the mastery menu
+					return (MasteryMenu.Variables.CurrentTooltip == "Skill" and MasteryMenu.Variables.SelectedMastery.Current == mastery)
 				end
 			end
 		end
@@ -117,10 +121,11 @@ local function TryCheckMasteryRequirement(character, tag)
 	return false
 end
 
---- @param character EsvCharacter|StatCharacter
---- @param tag string
---- @return boolean
-function Mastery.HasMasteryRequirement(character, tag)
+---@param character EsvCharacter|StatCharacter
+---@param tag string
+---@param skipWeaponCheck boolean|nil
+---@return boolean
+function Mastery.HasMasteryRequirement(character, tag, skipWeaponCheck)
 	character = GameHelpers.GetCharacter(character)
 	if not character then
 		return false
@@ -131,7 +136,7 @@ function Mastery.HasMasteryRequirement(character, tag)
 	if character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
 		return true
 	end
-	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag)
+	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag, skipWeaponCheck)
 	if not status then
 		Ext.PrintError("Error checking mastery requirements:\n", result)
 	else

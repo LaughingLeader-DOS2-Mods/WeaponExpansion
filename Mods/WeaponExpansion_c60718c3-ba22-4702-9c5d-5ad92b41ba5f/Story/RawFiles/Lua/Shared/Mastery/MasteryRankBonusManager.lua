@@ -142,13 +142,14 @@ _INTERNAL.GatherMasteryBonuses = GatherMasteryBonuses
 
 ---@param character UUID|NETID|EsvCharacter|EclCharacter|StatCharacter
 ---@param bonus string|string[]
+---@param skipWeaponCheck boolean|nil
 ---@return boolean
-function MasteryBonusManager.HasMasteryBonus(character, bonus)
+function MasteryBonusManager.HasMasteryBonus(character, bonus, skipWeaponCheck)
 	---@type EsvCharacter|EclCharacter
 	local character = GameHelpers.GetCharacter(character)
 	if character then
 		for tag,tbl in pairs(_registeredBonuses) do
-			if Mastery.HasMasteryRequirement(character, tag) then
+			if Mastery.HasMasteryRequirement(character, tag, skipWeaponCheck) then
 				for _,bonusData in pairs(tbl) do
 					if bonusData.ID == bonus then
 						return true
