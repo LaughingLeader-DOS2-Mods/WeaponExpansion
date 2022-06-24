@@ -430,6 +430,7 @@ local UniqueScripts = {
 	"AnvilMace",
 	"BalrinThrowingAxe",
 	"BasilusDagger",
+	"Blunderbuss",
 	"DeathEdge",
 	"GnakSpellScroll",
 	"MagicMissileWand",

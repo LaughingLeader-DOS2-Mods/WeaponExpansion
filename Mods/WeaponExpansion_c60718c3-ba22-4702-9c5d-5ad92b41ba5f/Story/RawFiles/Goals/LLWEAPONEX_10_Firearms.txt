@@ -81,39 +81,6 @@ THEN
 ObjectSetFlag(_Char, "LLWEAPONEX_Firearms_RifleEquipped", 0);
 //END_REGION
 
-//REGION BLUNDERBUSS_SCATTERSHOT
-IF
-CharacterStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_HIT", _Source)
-THEN
-LeaderLib_Variables_DB_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_ScattershotHits", 1, 3, 0, _Source);
-LeaderLib_Timers_StartObjectObjectTimer((GUIDSTRING)_Target, _Source, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearScattershotHits", "LLWEAPONEX_Blunderbuss_ClearScattershotHits");
-
-IF
-ItemStatusAttempt(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_HIT", _Source)
-THEN
-LeaderLib_Variables_DB_ModifyVariableInt(_Target, "LLWEAPONEX_Blunderbuss_ScattershotHits", 1, 3, 0, _Source);
-LeaderLib_Timers_StartObjectObjectTimer((GUIDSTRING)_Target, _Source, 250, "Timers_LLWEAPONEX_Blunderbuss_ClearScattershotHits", "LLWEAPONEX_Blunderbuss_ClearScattershotHits");
-
-PROC
-LeaderLib_Timers_ObjectObjectTimerFinished(_Target, _Source, "LLWEAPONEX_Blunderbuss_ClearScattershotHits")
-THEN
-LeaderLib_Variables_DB_ClearVariableInt(_Target, "LLWEAPONEX_Blunderbuss_ScattershotHits", _Source);
-
-PROC
-LeaderLib_Variables_OnVariableIntChanged((GUIDSTRING)_Target, "LLWEAPONEX_Blunderbuss_ScattershotHits", (INTEGER)_LastValue, 3, (GUIDSTRING)_Source)
-THEN
-LeaderLib_Variables_DB_ClearVariableInt(_Target, "LLWEAPONEX_Blunderbuss_ScattershotHits", _Source);
-LeaderLib_Force_Apply(_Source, _Target, 4, "LLWEAPONEX_Scattershot_Landed");
-
-PROC
-LeaderLib_Force_OnLanded((GUIDSTRING)_Target, (GUIDSTRING)_Source, "LLWEAPONEX_Scattershot_Landed")
-AND
-GetPosition(_Target, _x, _y, _z)
-THEN
-PlayEffectAtPosition("LLWEAPONEX_FX_Skills_Scattershot_Impact_BonusDamage_01", _x, _y, _z);
-ApplyStatus(_Target, "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_BONUS", 0.0, 1, _Source);
-//END_REGION
-
 //REGION BULLET_IMPACT_SOUNDS
 IF
 CharacterStatusApplied(_Char, "LLWEAPONEX_FIREARM_SHOOT_EXPLOSION_FX", _)

@@ -28,17 +28,6 @@ data "DisplayName" "LLWEAPONEX_BLUNDERBUSS_EQUIPPED_DisplayName"
 data "DisplayNameRef" "Attacks Explode in a 1m Radius"
 data "StackId" "Stack_LLWEAPONEX_Blunderbuss_Equipped"
 
-new entry "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_HIT"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
-
-new entry "LLWEAPONEX_BLUNDERBUSS_SCATTERSHOT_BONUS"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
-data "LeaveAction" "Projectile_LLWEAPONEX_Blunderbuss_Scattershot_BonusDamage"
-
 new entry "_LLWEAPONEX_BULLETS_BASE"
 type "StatusData"
 data "StatusType" "CONSUME"
