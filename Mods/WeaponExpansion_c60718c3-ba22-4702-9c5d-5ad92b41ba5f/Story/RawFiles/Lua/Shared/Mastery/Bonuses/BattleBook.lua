@@ -96,7 +96,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 
 	rb:Create("BATTLEBOOK_LOOT", {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BookHunter","<font color='#99AACC'>Chance to find a skillbook when opening a repository of books for the first time.</font>")
-	}):RegisterOsirisListener("CharacterUsedItem", 2, "before", function (character, item)
+	}).Register.Osiris("CharacterUsedItem", 2, "before", function (character, item)
 		if IsTagged(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase") == 0
 		and ItemIsContainer(item) == 1 
 		--and MasteryBonusManager.HasMasteryBonus(character, "BATTLEBOOK_LOOT")
@@ -108,7 +108,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 			SetTag(item, "LLWEAPONEX_MB_BattleBook_RolledBookcase")
 			SignalTestComplete("BATTLEBOOK_LOOT")
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(500)

@@ -185,7 +185,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		if not GameHelpers.Status.IsActive(target, "DYING") then
 			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = nil
 		end
-	end, nil, "None"):RegisterOsirisListener("CharacterPrecogDying", 1, "after", function(char)
+	end, nil, "None").Register.Osiris("CharacterPrecogDying", 1, "after", function(char)
 		char = StringHelpers.GetUUID(char)
 		if PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] then
 			local sourceCharacter = GameHelpers.GetCharacter(PersistentVars.MasteryMechanics.GuardianAngelResurrect[char])
@@ -196,7 +196,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 				end
 			end
 		end
-	end, true).Register.Test(function(test, self)
+	end, true).Test(function(test, self)
 		--Ally under GUARDIAN_ANGEL gets resurrected if they die
 		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
