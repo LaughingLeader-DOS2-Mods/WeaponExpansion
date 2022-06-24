@@ -37,22 +37,23 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	rb:Create("CROSSBOW_RICOCHET", {
 		Skills = {"Projectile_Ricochet", "Projectile_EnemyRicochet"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_Ricochet", "<font color='#77FF33'>If each forked projectile hits, [Key:Projectile_Ricochet_DisplayName] is refreshed (once per turn).</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success and ObjectGetFlag(char, "LLWEAPONEX_Crossbow_RicochetRefreshed") == 0 then
-			local maxHits = Ext.StatGetAttribute(skill, "ForkLevels") + 1
-			if not PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] then
-				PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] = 0
+	}).Register.SkillHit(function(self, e, bonuses)
+		local GUID = e.Character.MyGuid
+		if e.Data.Success and ObjectGetFlag(GUID, "LLWEAPONEX_Crossbow_RicochetRefreshed") == 0 then
+			local maxHits = Ext.StatGetAttribute(e.Skill, "ForkLevels") + 1
+			local ricoHits = PersistentVars.MasteryMechanics.CrossbowRicochetHits[GUID] or 0
+			ricoHits = ricoHits + 1
+			if ricoHits > maxHits then
+				PersistentVars.MasteryMechanics.CrossbowRicochetHits[GUID] = nil
+				GameHelpers.Skill.Refresh(e.Character, e.Skill)
+				ObjectSetFlag(GUID, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
+			else
+				PersistentVars.MasteryMechanics.CrossbowRicochetHits[GUID] = ricoHits
 			end
-			PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] = PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] + 1
-			if PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] > maxHits then
-				PersistentVars.MasteryMechanics.CrossbowRicochetHits[char] = nil
-				GameHelpers.Skill.Refresh(char, skill)
-				ObjectSetFlag(char, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
-			end
-			TurnCounter.ListenForTurnEnding(char, "LLWEAPONEX_Crossbow_RicochetRefreshed")
+			TurnCounter.ListenForTurnEnding(e.Character, "LLWEAPONEX_Crossbow_RicochetRefreshed")
 		end
-	end):RegisterTurnEndedListener("LLWEAPONEX_Crossbow_RicochetRefreshed", function(char, id)
-		ObjectClearFlag(char, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
+	end).TurnEnded("LLWEAPONEX_Crossbow_RicochetRefreshed", function(self, e, bonuses)
+		ObjectClearFlag(e.Object.MyGuid, "LLWEAPONEX_Crossbow_RicochetRefreshed", 0)
 	end, true),
 	rb:Create("CROSSBOW_STILL_STANCE", {
 		AllSkills = true,
@@ -73,20 +74,20 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 			end
 			return false
 		end ]]
-	}):RegisterOnWeaponTagHit(MasteryID.Crossbow, function(tag, attacker, target, data, targetIsObject, skill, self)
-		if data.Success then
-			local lastPos = PersistentVars.MasteryMechanics.StillStanceLastPosition[attacker.MyGuid]
-			if (lastPos and GameHelpers.Math.GetDistance(attacker.WorldPos, lastPos) <= 0.01)
-			or (Vars.LeaderDebugMode and CharacterIsInCombat(attacker.MyGuid) == 0)
+	}).Register.WeaponTagHit(MasteryID.Crossbow, function(self, e, bonuses)
+		if e.Data.Success then
+			local lastPos = PersistentVars.MasteryMechanics.StillStanceLastPosition[e.Attacker.MyGuid]
+			if (lastPos and GameHelpers.Math.GetDistance(e.Attacker.WorldPos, lastPos) <= 0.01)
+			or (Vars.LeaderDebugMode and CharacterIsInCombat(e.Attacker.MyGuid) == 0)
 			then
-				local damageBonus = GetStillStanceBonus(attacker)
+				local damageBonus = GetStillStanceBonus(e.Attacker)
 				if damageBonus > 0 then
 					damageBonus = 1 + (damageBonus * 0.01)
-					data:MultiplyDamage(damageBonus)
+					e.Data:MultiplyDamage(damageBonus)
 				end
 			end
 		end
-	end):RegisterOsirisListener("ObjectTurnStarted", 1, "after", function(char)
+	end).Osiris("ObjectTurnStarted", 1, "after", function(char)
 		local character = GameHelpers.GetCharacter(char)
 		if character then
 			PersistentVars.MasteryMechanics.StillStanceLastPosition[character.MyGuid] = TableHelpers.Clone(character.WorldPos)
@@ -110,13 +111,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 	rb:Create("CROSSBOW_SKYCRIT", {
 		Skills = {"Projectile_SkyShot", "Projectile_EnemySkyShot"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_SkyShotCrit", "<font color='#77FF33'>If the target is affected by [Key:KNOCKED_DOWN_DisplayName], deal a critical hit.</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success then
-			if GameHelpers.Status.HasStatusType(data.Target, "KNOCKED_DOWN") and not data:HasHitFlag("CriticalHit", true) then
-				local attackerStats = GameHelpers.GetCharacter(char).Stats
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
+			if GameHelpers.Status.HasStatusType(e.Data.Target, "KNOCKED_DOWN") and not e.Data:HasHitFlag("CriticalHit", true) then
+				local attackerStats = e.Character.Stats
 				local critMultiplier = Game.Math.GetCriticalHitMultiplier(attackerStats.MainWeapon or attackerStats.OffHandWeapon)
-				data:SetHitFlag("CriticalHit", true)
-				data:MultiplyDamage(1 + critMultiplier)
+				e.Data:SetHitFlag("CriticalHit", true)
+				e.Data:MultiplyDamage(1 + critMultiplier)
 			end
 		end
 	end),
@@ -124,16 +125,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 	rb:Create("CROSSBOW_PINFANG", {
 		Skills = {"Projectile_PiercingShot", "Projectile_EnemyPiercingShot"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_MarksmansFang", "<font color='#77FF33'>If a target is in front of impassable terrain (like a wall), pin them for 1 turn and deal [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage].</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success and ObjectIsCharacter(data.Target) == 1 then
-			local attacker = Ext.GetCharacter(char)
-			local startPos = data.TargetObject.WorldPos
-			local directionalVector = GameHelpers.Math.GetDirectionalVectorBetweenObjects(data.TargetObject, attacker, false)
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success and ObjectIsCharacter(e.Data.Target) == 1 then
+			local startPos = e.Data.TargetObject.WorldPos
+			local directionalVector = GameHelpers.Math.GetDirectionalVectorBetweenObjects(e.Data.TargetObject, e.Character, false)
 			local grid = Ext.GetAiGrid()
 
 			local isNextToWall = false
 
-			local y = attacker.WorldPos[2]
+			local y = e.Character.WorldPos[2]
 
 			---@type EsvItem[]
 			local objects = {}
@@ -164,8 +164,8 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 			end
 
 			if isNextToWall then
-				GameHelpers.Damage.ApplySkillDamage(attacker, data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
-				GameHelpers.Status.Apply(data.TargetObject, "LLWEAPONEX_MB_CROSSOW_PINNED", 6.0, 0, attacker)
+				GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
+				GameHelpers.Status.Apply(e.Data.TargetObject, "LLWEAPONEX_MB_CROSSOW_PINNED", 6.0, 0, e.Character)
 			end
 		end
 	end),

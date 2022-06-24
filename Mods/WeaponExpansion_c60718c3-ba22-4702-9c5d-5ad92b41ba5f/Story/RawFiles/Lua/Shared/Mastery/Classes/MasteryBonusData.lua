@@ -31,12 +31,15 @@ local _type = type
 ---@field SkillHit fun(callback:MasteryBonusEventWrapper<OnSkillStateHitEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
 ---@field SkillProjectileHit fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileHitEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
 ---@field SkillProjectileShoot fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileShootEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field OnWeaponHit fun(callback:MasteryBonusEventWrapper<OnWeaponHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil, priority:integer|nil):MasteryBonusDataRegistrationFunctions
----@field OnWeaponTagHit fun(tag:string|string[], callback:MasteryBonusEventWrapper<OnWeaponTagHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field OnWeaponTypeHit fun(weaponType:string|string[], callback:MasteryBonusEventWrapper<OnWeaponTypeHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field OnHeal fun(callback:MasteryBonusEventWrapper<OnHealEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field BasicAttackStart fun(callback:MasteryBonusEventWrapper<OnBasicAttackStartEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil, priority:integer|nil):MasteryBonusDataRegistrationFunctions
+---@field WeaponHit fun(callback:MasteryBonusEventWrapper<OnWeaponHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil, priority:integer|nil):MasteryBonusDataRegistrationFunctions
+---@field WeaponTagHit fun(tag:string|string[], callback:MasteryBonusEventWrapper<OnWeaponTagHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field WeaponTypeHit fun(weaponType:string|string[], callback:MasteryBonusEventWrapper<OnWeaponTypeHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field Healed fun(callback:MasteryBonusEventWrapper<OnHealEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
 ---@field TimerFinished fun(id:string|string[], callback:MasteryBonusEventWrapper<TimerFinishedEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field TurnEnded fun(id:string|string[], callback:MasteryBonusEventWrapper<OnTurnEndedEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
 ---@field SpecialTooltipParam fun(id:string, callback:LeaderLibGetTextPlaceholderCallback):MasteryBonusDataRegistrationFunctions
+---@field Osiris fun(event:string, arity:integer, state:string, callback:function, skipBonusCheck:boolean|nil, canRunCallback:MasteryBonusOsirisListenerCustomBonusCheck|nil):MasteryBonusDataRegistrationFunctions
 ---@field Test fun(operation:MasteryTestingTaskCallback):MasteryBonusDataRegistrationFunctions
 
 local _INTERNALREG = {}
@@ -230,7 +233,7 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param priority integer|nil
 ---@return MasteryBonusData
-function _INTERNALREG.OnHeal(self, callback, checkBonusOn, priority)
+function _INTERNALREG.Heal(self, callback, checkBonusOn, priority)
 	if not _ISCLIENT then
 		local wrapper = function (...) callback(self, ...) end
 		MasteryBonusManager.RegisterOnHealListener(self.ID, wrapper, checkBonusOn, priority)
@@ -259,31 +262,57 @@ function _INTERNALREG.TimerFinished(self, id, callback, checkBonusOn)
 	return self
 end
 
+---@param self MasteryBonusData
+---@param callback fun(self:MasteryBonusData, e:OnBasicAttackStartEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@param skipBonusCheck boolean|nil
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
+---@return MasteryBonusData
+function _INTERNALREG.BasicAttackStart(self, callback, skipBonusCheck, checkBonusOn, priority)
+	if not _ISCLIENT then
+		checkBonusOn = checkBonusOn or "Source"
+		local bonuses = {HasBonus = function() end}
+		if skipBonusCheck then
+			Events.OnBasicAttackStart:Subscribe(function (e)
+				callback(self, e, bonuses)
+			end, {Priority=priority})
+		else
+			---@param e OnBasicAttackStartEventArgs
+			local wrapper = function(e)
+				bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Attacker, e.TargetIsObject and e.Target or nil)
+				if checkBonusOn == "None" or MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
+					callback(self, e, bonuses)
+				end
+			end
+			Events.OnBasicAttackStart:Subscribe(wrapper, {Priority=priority})
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
 ---@param callback fun(self:MasteryBonusData, e:OnWeaponHitEventArgs, bonuses:MasteryBonusCallbackBonuses)
 ---@param skipBonusCheck boolean|nil
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param priority integer|nil
 ---@return MasteryBonusData
-function _INTERNALREG.OnWeaponHit(self, callback, skipBonusCheck, checkBonusOn, priority)
+function _INTERNALREG.WeaponHit(self, callback, skipBonusCheck, checkBonusOn, priority)
 	if not _ISCLIENT then
+		checkBonusOn = checkBonusOn or "Source"
+		local bonuses = {HasBonus = function() end}
 		if skipBonusCheck then
-			Events.OnWeaponHit:Subscribe(callback, {Priority=priority})
+			Events.OnWeaponHit:Subscribe(function (e)
+				callback(self, e, bonuses)
+			end, {Priority=priority})
 		else
-			local bonuses = {HasBonus = function() end}
-			if skipBonusCheck then
-				Events.OnWeaponHit:Subscribe(function (e)
+			---@param e OnWeaponHitEventArgs
+			local wrapper = function(e)
+				bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Attacker, e.TargetIsObject and e.Target or nil)
+				if checkBonusOn == "None" or MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
 					callback(self, e, bonuses)
-				end, {Priority=priority})
-			else
-				---@param e OnWeaponHitEventArgs
-				local wrapper = function(e)
-					bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Attacker, e.TargetIsObject and e.Target or nil)
-					if checkBonusOn == "None" or MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
-						callback(self, e, bonuses)
-					end
 				end
-				Events.OnWeaponHit:Subscribe(wrapper, {Priority=priority})
 			end
+			Events.OnWeaponHit:Subscribe(wrapper, {Priority=priority})
 		end
 	end
 	return self
@@ -296,12 +325,13 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param priority integer|nil
 ---@return MasteryBonusData
-function _INTERNALREG.OnWeaponTagHit(self, tag, callback, skipBonusCheck, checkBonusOn, priority)
+function _INTERNALREG.WeaponTagHit(self, tag, callback, skipBonusCheck, checkBonusOn, priority)
 	if not _ISCLIENT then
+		checkBonusOn = checkBonusOn or "Source"
 		local t = _type(tag)
 		if t == "table" then
 			for _,tag in pairs(tag) do
-				_INTERNALREG.OnWeaponTagHit(self, tag, callback, skipBonusCheck, checkBonusOn, priority)
+				_INTERNALREG.WeaponTagHit(self, tag, callback, skipBonusCheck, checkBonusOn, priority)
 			end
 		else
 			AttackManager.EnabledTags[tag] = true
@@ -332,12 +362,13 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param priority integer|nil
 ---@return MasteryBonusData
-function _INTERNALREG.OnWeaponTypeHit(self, weaponType, callback, skipBonusCheck, checkBonusOn, priority)
+function _INTERNALREG.WeaponTypeHit(self, weaponType, callback, skipBonusCheck, checkBonusOn, priority)
 	if not _ISCLIENT then
+		checkBonusOn = checkBonusOn or "Source"
 		local t = _type(weaponType)
 		if t == "table" then
 			for _,weaponType in pairs(weaponType) do
-				_INTERNALREG.OnWeaponTypeHit(self, weaponType, callback, skipBonusCheck, checkBonusOn, priority)
+				_INTERNALREG.WeaponTypeHit(self, weaponType, callback, skipBonusCheck, checkBonusOn, priority)
 			end
 		else
 			local bonuses = {HasBonus = function() end}
@@ -367,6 +398,83 @@ end
 function _INTERNALREG.SpecialTooltipParam(self, id, callback)
 	if _ISCLIENT then
 		TooltipParams.SpecialParamFunctions[id] = callback
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param event string
+---@param arity integer
+---@param state string
+---@param callback function
+---@param skipBonusCheck boolean|nil
+---@param canRunCallback MasteryBonusOsirisListenerCustomBonusCheck|nil
+---@return MasteryBonusData
+function _INTERNALREG.Osiris(self, event, arity, state, callback, skipBonusCheck, canRunCallback)
+	if not _ISCLIENT then
+		if skipBonusCheck then
+			RegisterProtectedOsirisListener(event, arity, state, callback)
+		else
+			local wrapper = function(...)
+				local params = {...}
+				local hasMasteryBonus = false
+				if canRunCallback then
+					hasMasteryBonus = canRunCallback(...) == true
+				else
+					for i,v in pairs(params) do
+						if _type(v) == "string" and string.find(v, "-", 1, true) and ObjectIsCharacter(v) == 1 then
+							if MasteryBonusManager.HasMasteryBonus(v, self.ID) then
+								hasMasteryBonus = true
+								break
+							end
+						end
+					end
+				end
+				if hasMasteryBonus then
+					local b,err = xpcall(callback, debug.traceback, ...)
+					if not b then
+						Ext.PrintError(err)
+					end
+				end
+			end
+			RegisterProtectedOsirisListener(event, arity, state, wrapper)
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param id string|string[]
+---@param callback fun(self:MasteryBonusData, e:OnTurnEndedEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@param skipBonusCheck boolean|nil
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
+---@return MasteryBonusData
+function _INTERNALREG.TurnEnded(self, id, callback, skipBonusCheck, checkBonusOn, priority)
+	if not _ISCLIENT then
+		checkBonusOn = checkBonusOn or "Source"
+		local t = _type(id)
+		if t == "table" then
+			for _,tag in pairs(id) do
+				_INTERNALREG.TurnEnded(self, tag, callback, skipBonusCheck, checkBonusOn, priority)
+			end
+		else
+			local bonuses = {HasBonus = function() end}
+			if skipBonusCheck then
+				Events.OnTurnEnded:Subscribe(function (e)
+					callback(self, e, bonuses)
+				end, {MatchArgs={ID=id}, Priority=priority})
+			else
+				---@param e OnTurnEndedEventArgs
+				local wrapper = function(e)
+					bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Object)
+					if checkBonusOn == "None" or MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
+						callback(self, e, bonuses)
+					end
+				end
+				Events.OnTurnEnded:Subscribe(wrapper, {MatchArgs={ID=id}, Priority=priority})
+			end
+		end
 	end
 	return self
 end
@@ -468,29 +576,6 @@ function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, 
 				end
 			end
 			RegisterProtectedOsirisListener(event, arity, state, wrapper)
-		end
-	end
-	return self
-end
-
----@param id string
----@param callback fun(uuid:UUID, id:string):void
----@param skipBonusCheck boolean
----@return MasteryBonusData
-function MasteryBonusData:RegisterTurnEndedListener(id, callback, skipBonusCheck)
-	if not _ISCLIENT then
-		if skipBonusCheck then
-			Events.OnTurnEnded:Subscribe(callback, {MatchArgs={ID = id}})
-		else
-			local wrapper = function(character, turnId)
-				if MasteryBonusManager.HasMasteryBonus(character, self.ID) then
-					local b,err = xpcall(callback, debug.traceback, character, turnId)
-					if not b then
-						Ext.PrintError(err)
-					end
-				end
-			end
-			Events.OnTurnEnded:Subscribe(wrapper, {MatchArgs={ID = id}})
 		end
 	end
 	return self

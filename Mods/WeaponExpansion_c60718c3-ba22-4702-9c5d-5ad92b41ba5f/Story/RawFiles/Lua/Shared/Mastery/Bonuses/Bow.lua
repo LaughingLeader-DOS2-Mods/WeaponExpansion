@@ -114,7 +114,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 	rb:Create("BOW_FOCUSED_ATTACKING", {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_FocusedAttacking", "<font color='#72EE34'>Non-critical basic attacks on the same target have a cumulative chance to critical hit, until a critical hit is achieved, you leave comat, or a different target is attacked.</font><br><font color='#33FF99'>This bonus also works with [Key:LLWEAPONEX_Greatbow:Greatbow] type weapons.</font>"),
-	}).Register.OnWeaponTypeHit("Bow", function(self, e, bonuses)
+	}).Register.WeaponTypeHit("Bow", function(self, e, bonuses)
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttackCriticalChance", 5, true)
 		if chance > 0
 		and not e.SkillData -- Basic attacks only

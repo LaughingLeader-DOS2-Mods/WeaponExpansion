@@ -19,6 +19,8 @@ local defaultPersistentVars = {
         ---@type table<UUID,number[]>
         FutureBarrage = {},
         WandSurfaceBonuses = {},
+        ---@type table<UUID,integer>
+        ScattershotHits = {}
     },
     StatusData = {
         ---@type table<UUID,table<string,{Target:UUID, Source:UUID, Status:string}>>

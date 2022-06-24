@@ -26,17 +26,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 	rb:Create("BATTLEBOOK_CONCUSSION", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_BasicAttackConcussion", "<font color='#99AACC'>Basic attacks have a [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionChance]% chance to give the target a Concussion for [ExtraData:LLWEAPONEX_MB_BattleBook_ConcussionTurns] turn(s).</font>")
-	}):RegisterOnWeaponTagHit(MasteryID.BattleBook, function(tag, attacker, target, data, targetIsObject, skill, self)
-		if not skill then
+	}).Register.WeaponTagHit(MasteryID.BattleBook, function(self, e, bonuses)
+		if not e.SkillData and e.TargetIsObject then
 			local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionChance", 25.0)
 			local turns = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_ConcussionTurns", 1)
-			if chance > 0 and turns > 0 and (attacker:HasTag("LLWEAPONEX_MasteryTestCharacter") or GameHelpers.Math.Roll(chance)) then
-				GameHelpers.Status.Apply(target, "LLWEAPONEX_CONCUSSION", turns, false, attacker)
-				PlaySound(target.MyGuid, "LLWEAPONEX_FFT_Dictionary_Book_Hit")
+			if chance > 0 and turns > 0 and (e.Attacker:HasTag("LLWEAPONEX_MasteryTestCharacter") or GameHelpers.Math.Roll(chance)) then
+				GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_CONCUSSION", turns, false, e.Attacker)
+				PlaySound(e.Target.MyGuid, "LLWEAPONEX_FFT_Dictionary_Book_Hit")
 				SignalTestComplete(self.ID)
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)

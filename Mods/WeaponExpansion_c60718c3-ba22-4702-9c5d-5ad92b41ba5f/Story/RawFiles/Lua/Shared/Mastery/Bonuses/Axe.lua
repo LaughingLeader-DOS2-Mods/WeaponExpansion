@@ -34,12 +34,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 	rb:Create("AXE_EXECUTIONER", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Executioner", "Axes deal [ExtraData:LLWEAPONEX_MB_Axe_ProneDamageBonus]% more damage to targets that are [Key:KNOCKED_DOWN_DisplayName].")
-	}).Register.OnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
-		if targetIsObject and not skill and data.Damage > 0 then
-			if GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN") then
+	}).Register.WeaponTagHit("LLWEAPONEX_Axe", function(self, e, bonuses)
+		if e.TargetIsObject and not e.SkillData and e.Data.Damage > 0 then
+			if GameHelpers.Status.HasStatusType(e.Target, "KNOCKED_DOWN") then
 				local damageMult = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_ProneDamageBonus", 25)
 				if damageMult > 0 then
-					data:MultiplyDamage(1 + (damageMult * 0.01))
+					e.Data:MultiplyDamage(1 + (damageMult * 0.01))
 				end
 				SignalTestComplete(self.ID)
 			end
@@ -73,10 +73,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		if e.Data.Success then
 			Timer.StartObjectTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", e.Data.Target, 50, {Source=e.Character.MyGuid})
 		end
-	end).OnHit(function(attacker, target, data, targetIsObject, skill, self)
-		if targetIsObject and HasActiveStatus(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") == 1 then
-			GameHelpers.Status.Remove(target.MyGuid, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
-			GameHelpers.Damage.ApplySkillDamage(attacker, target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
+	end).WeaponHit(function(self, e, bonuses)
+		if e.TargetIsObject and GameHelpers.Status.IsActive(e.Target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE") then
+			GameHelpers.Status.Remove(e.Target, "LLWEAPONEX_MASTERYBONUS_VULNERABLE")
+			GameHelpers.Damage.ApplySkillDamage(e.Attacker, e.Target, "Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
 			SignalTestComplete("AXE_VULNERABLE_2")
 		end
 	end, true).TimerFinished("LLWEAPONEX_MasteryBonus_ApplyVulnerable", function (self, e, bonuses)
@@ -112,16 +112,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 	rb:Create("AXE_SAVAGE", {
 		Skills = {"ActionAttackGround"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Savage", "Attack of Opportunities deal [ExtraData:LLWEAPONEX_MB_Axe_AttackOfOpportunityMaxDamageBonus]% more damage, in proportion to the target's missing vitality.")
-	}).Register.OnWeaponTagHit("LLWEAPONEX_Axe", function(tag, attacker, target, data, targetIsObject, skill, self)
-		if targetIsObject and not skill and data.Damage > 0 then
-			if GameHelpers.Status.IsActive(attacker, "AOO") and GameHelpers.Ext.ObjectIsCharacter(target) then
+	}).Register.WeaponTagHit("LLWEAPONEX_Axe", function(self, e, bonuses)
+		if e.TargetIsObject and not e.SkillData and e.Data.Damage > 0 then
+			if GameHelpers.Status.IsActive(e.Attacker, "AOO") and GameHelpers.Ext.ObjectIsCharacter(e.Target) then
 				local damageBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_Axe_AttackOfOpportunityMaxDamageBonus", 50) * 0.01
 				if damageBonus > 0 then
 					local missingVitPerc = 0.0
-					missingVitPerc = math.max(0.01, math.min(1, 1 - (target.Stats.CurrentVitality / target.Stats.MaxVitality) + 0.01))
+					missingVitPerc = math.max(0.01, math.min(1, 1 - (e.Target.Stats.CurrentVitality / e.Target.Stats.MaxVitality) + 0.01))
 					local damageMult = 1+(damageBonus * missingVitPerc)
-					print("damageMult", damageMult)
-					data:MultiplyDamage(damageMult)
+					e.Data:MultiplyDamage(damageMult)
 				end
 			end
 			SignalTestComplete(self.ID)
