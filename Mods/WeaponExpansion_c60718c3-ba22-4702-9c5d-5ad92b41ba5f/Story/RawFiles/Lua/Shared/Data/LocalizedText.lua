@@ -248,6 +248,9 @@ Text = {
 		StillStanceEnabled = ts:Create("h0f4c3d9fgf39fg49b8gbf42g3fcb4e3543c5", "<font color='#99FF22'>[1] is in a Still Stance ([2]).</font>"),
 	},
 	StatusText = {
+		Unarmed = {
+			BlinkStrikeBonus = ts:CreateFromKey("LLWEAPONEX_StatusText_Unarmed_BlinkStrikeBonus", "<font color='#FFCE58'>Unarmed Mastery: Lowered Cooldown of [1] by [2] Turn(s)</font>")
+		},
 		StatusExtended = ts:Create("h8224bb41g2261g4a50ga1feg7dc0f7394eb7", "<font color='#99FF22' size='22'><p align='center'>[1] Extended!</p></font><p align='center'>[2] -> [3]</p>"),
 		RupteredWound = ts:Create("h325012b0g74d1g4e9bg859bg8b986e80561b", "<font color='#FF1155' size='16'>Ruptered Wound [1]</font>"),
 		ArmorBreak = ts:CreateFromKey("LLWEAPONEX_StatusText_ArmorBreak", "<font color='#88A25B'>Armor Break!</font> [1]"),

@@ -233,7 +233,7 @@ end
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param priority integer|nil
 ---@return MasteryBonusData
-function _INTERNALREG.Heal(self, callback, checkBonusOn, priority)
+function _INTERNALREG.Healed(self, callback, checkBonusOn, priority)
 	if not _ISCLIENT then
 		local wrapper = function (...) callback(self, ...) end
 		MasteryBonusManager.RegisterOnHealListener(self.ID, wrapper, checkBonusOn, priority)

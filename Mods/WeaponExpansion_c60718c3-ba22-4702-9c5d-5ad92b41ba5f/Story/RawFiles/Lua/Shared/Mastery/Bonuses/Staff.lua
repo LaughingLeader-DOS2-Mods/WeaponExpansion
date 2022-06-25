@@ -139,18 +139,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 1, {
 			end
 			return false
 		end
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success then
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
 			local duration = GameHelpers.GetExtraData("LLWEAPONEX_MB_Staff_ElementalWeaknessTurns", 1) * 6.0
 			if duration > 0 then
-				for slot,v in pairs(GameHelpers.Item.FindTaggedEquipment(char, "LLWEAPONEX_Staff")) do
-					local weapon = Ext.GetItem(v)
+				for slot,weapon in pairs(GameHelpers.Item.FindTaggedEquipment(e.Character, "LLWEAPONEX_Staff")) do
 					if weapon and weapon.ItemType == "Weapon" then
 						for i, stat in pairs(weapon.Stats.DynamicStats) do
 							if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
 								local status = Mastery.Variables.Bonuses.ElementalWeaknessStatuses[stat.DamageType]
 								if status then
-									GameHelpers.Status.Apply(data.Target, status, duration, 0, char)
+									GameHelpers.Status.Apply(e.Data.Target, status, duration, 0, e.Character)
 								end
 							end
 						end

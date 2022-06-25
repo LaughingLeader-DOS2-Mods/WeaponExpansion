@@ -5,11 +5,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Shield, 1, {
 	rb:Create("SHIELD_GUARANTEED_BLOCK", {
 		Skills = {"Shout_RecoverArmour"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Shield_RecoverArmourBonus", "Damage from the next direct hit taken is reduced by <font color='#33FF00'>[ExtraData:LLWEAPONEX_MB_Shield_RecoverArmour_DamageReduction]%</font>."),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.CAST then
-			PlayEffect(char, "RS3_FX_GP_Impacts_Arena_PillarLight_01_Silver", "")
-			GameHelpers.Status.Apply(char, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK", -1.0, 0, char)
-		end
+	}).Register.SkillCast(function(self, e, bonuses)
+		EffectManager.PlayEffectAt("RS3_FX_GP_Impacts_Arena_PillarLight_01_Silver", e.Character.WorldPos)
+		GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK", -1.0, 0, e.Character)
 	end),
 })
 

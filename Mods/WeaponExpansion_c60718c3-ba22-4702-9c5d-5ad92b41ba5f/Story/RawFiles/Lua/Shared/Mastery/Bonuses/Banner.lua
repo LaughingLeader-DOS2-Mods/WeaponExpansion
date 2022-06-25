@@ -462,7 +462,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 			end
 			return false
 		end
-	}).Register.OnHeal(function(self, e, bonuses)
+	}).Register.Healed(function(self, e, bonuses)
 		if e.Heal.StatusId ~= "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL"
 		and (e.Heal.HealType == "All" or e.Heal.HealType == "Vitality")
 		and not Mastery.Variables.Bonuses.BannerIgnoredHealingStatuses[e.Heal.StatusId] then

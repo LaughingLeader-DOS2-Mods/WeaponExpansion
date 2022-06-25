@@ -15,18 +15,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 			end
 			return false
 		end
-	}):RegisterOnWeaponTagHit("LLWEAPONEX_Wand", function(tag, attacker, target, data, targetIsObject, skill, self)
-		if not skill then
+	}).Register.WeaponTagHit("LLWEAPONEX_Wand", function(self, e, bonuses)
+		if not e.Skill then
 			local duration = GameHelpers.GetExtraData("LLWEAPONEX_MB_Wand_ElementalWeaknessTurns", 1) * 6.0
 			if duration > 0 then
-				for slot,v in pairs(GameHelpers.Item.FindTaggedEquipment(attacker, "LLWEAPONEX_Wand")) do
-					local weapon = Ext.GetItem(v)
+				for slot,weapon in pairs(GameHelpers.Item.FindTaggedEquipment(e.Attacker, "LLWEAPONEX_Wand")) do
 					if weapon and weapon.ItemType == "Weapon" then
 						for i, stat in pairs(weapon.Stats.DynamicStats) do
 							if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
 								local status = Mastery.Variables.Bonuses.ElementalWeaknessStatuses[stat.DamageType]
 								if status then
-									GameHelpers.Status.Apply(target, status, duration, false, attacker, 1.1)
+									GameHelpers.Status.Apply(e.Target, status, duration, false, e.Attacker, 1.1)
 								end
 							end
 						end
@@ -39,14 +38,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 	rb:Create("WAND_BLOOD_EMPOWER", {
 		Skills = {"Shout_FleshSacrifice", "Shout_EnemyFleshSacrifice"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Wand_FleshSacrifice", "<font color='#CC33FF'>Allies standing on <font color='#F13324'>blood surfaces</font> or in <font color='#F13324'>blood clouds</font> gain a <font color='#33FF00'>[Stats:Stats_LLWEAPONEX_BloodEmpowered:DamageBoost]% damage bonus</font>, while enemies take [Special:LLWEAPONEX_MasteryBonus_FleshSacrifice_Damage].</font>"),
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.CAST then
-			local grid = Ext.GetAiGrid()
-			for _,partyMember in pairs(GameHelpers.GetParty(char, true, true, true, false)) do
-				local x,y,z = GetPosition(partyMember)
-				if GameHelpers.Surface.HasSurface(x,z "Blood", 1.5, true, nil, grid) then
-					GameHelpers.Status.Apply(partyMember, "LLWEAPONEX_BLOOD_EMPOWERED", 6.0, 0, char)
-				end
+	}).Register.SkillCast(function(self, e, bonuses)
+		local grid = Ext.GetAiGrid()
+		for _,partyMember in pairs(GameHelpers.GetParty(e.Character, true, true, true, false)) do
+			local x,y,z = GetPosition(partyMember)
+			if GameHelpers.Surface.HasSurface(x,z "Blood", 1.5, true, nil, grid) then
+				GameHelpers.Status.Apply(partyMember, "LLWEAPONEX_BLOOD_EMPOWERED", 6.0, 0, e.Character)
 			end
 		end
 	end),
@@ -216,52 +213,50 @@ if not Ext.IsClient() then
 		_JustRanWandSurfaceBonus[e.Data.UUID] = nil
 	end)
 
-	surfaceBonus:RegisterSkillListener(
-	---@param data ProjectileHitData
-	function(bonuses, skill, character, state, data)
-		local char = GameHelpers.GetUUID(character)
-		if not char then
-			return
-		end
-		if _JustRanWandSurfaceBonus[char] ~= true then
-			if state == SKILL_STATE.BEFORESHOOT then
-				local pos = data.EndPosition
-				local surfaces = _skillToSurfaces[skill]
-				local surfaceCallback = _specialSkillSurfaceCallback[skill]
-				if surfaceCallback and surfaces then
-					local hasSurface = GameHelpers.Surface.HasSurface(pos[1], pos[3], surfaces, 3.0, false)
-					if hasSurface then
-						if PersistentVars.SkillData.WandSurfaceBonuses[char] == nil then
-							PersistentVars.SkillData.WandSurfaceBonuses[char] = {}
-						end
-						PersistentVars.SkillData.WandSurfaceBonuses[char][skill] = true
-						local stat = Ext.GetStat(skill)
+	surfaceBonus.Register.SkillProjectileShoot(function(self, e, data)
+		local GUID = e.Character.MyGuid
+		if _JustRanWandSurfaceBonus[GUID] ~= true then
+			local pos = data.EndPosition
+			local surfaces = _skillToSurfaces[e.Skill]
+			local surfaceCallback = _specialSkillSurfaceCallback[e.Skill]
+			if surfaceCallback and surfaces then
+				local hasSurface = GameHelpers.Surface.HasSurface(pos[1], pos[3], surfaces, 3.0, false)
+				if hasSurface then
+					if PersistentVars.SkillData.WandSurfaceBonuses[GUID] == nil then
+						PersistentVars.SkillData.WandSurfaceBonuses[GUID] = {}
+					end
+					PersistentVars.SkillData.WandSurfaceBonuses[GUID][e.Skill] = true
+					local stat = Ext.GetStat(e.Skill)
+					if stat then
 						local targetAmount = stat.AmountOfTargets or 0
 						if targetAmount > 1 then
-							_JustRanWandSurfaceBonus[char] = true
-							Timer.StartObjectTimer("LLWEAPONEX_ClearJustRanWandSurfaceBonus", char, math.max(stat.ProjectileDelay+1 * 10, 500))
-						end
-					end
-				end
-			elseif state == SKILL_STATE.PROJECTILEHIT then
-				local matchedBonuses = PersistentVars.SkillData.WandSurfaceBonuses[char]
-				if matchedBonuses and matchedBonuses[skill] then
-					matchedBonuses[skill] = nil
-					if not Common.TableHasAnyEntry(matchedBonuses) then
-						PersistentVars.SkillData.WandSurfaceBonuses[char] = nil
-					end
-					local surfaceCallback = _specialSkillSurfaceCallback[skill]
-					if surfaceCallback then
-						local source = GameHelpers.GetCharacter(char)
-						local b,err = xpcall(surfaceCallback, debug.traceback, source, data.Position, skill, data, bonuses)
-						if not b then
-							Ext.PrintError(err)
+							_JustRanWandSurfaceBonus[GUID] = true
+							local delay = math.max(stat.ProjectileDelay+1 * 10, 500)
+							Timer.StartObjectTimer("LLWEAPONEX_ClearJustRanWandSurfaceBonus", e.Character, delay)
 						end
 					end
 				end
 			end
 		end
-	end)
+	end).SkillProjectileHit(function (self, e, bonuses)
+		local GUID = e.Character.MyGuid
+		local matchedBonuses = PersistentVars.SkillData.WandSurfaceBonuses[GUID]
+		if matchedBonuses and matchedBonuses[e.Skill] then
+			matchedBonuses[e.Skill] = nil
+			if not Common.TableHasAnyEntry(matchedBonuses) then
+				PersistentVars.SkillData.WandSurfaceBonuses[GUID] = nil
+			end
+			local surfaceCallback = _specialSkillSurfaceCallback[e.Skill]
+			if surfaceCallback then
+				local b,err = xpcall(surfaceCallback, debug.traceback, e.Character, e.Data.Position, e.Skill, e.Data, bonuses)
+				if not b then
+					Ext.PrintError(err)
+				end
+			end
+		end
+	end).TimerFinished("LLWEAPONEX_ClearJustRanWandSurfaceBonus", function (self, e, bonuses)
+		_JustRanWandSurfaceBonus[e.Data.UUID] = nil
+	end, "None")
 end
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 2, {

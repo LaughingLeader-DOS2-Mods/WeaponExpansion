@@ -12,30 +12,32 @@ Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills = {
 	"Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive",
 }
 
----@param skill string
----@param char string
----@param state SKILL_STATE PREPARE|USED|CAST|HIT
----@param data SkillEventData|HitData|ProjectileHitData
-local function ThrowingKnifeBonusLogic(bonuses, skill, char, state, data)
-	if state == SKILL_STATE.HIT and data.Success then
+---@param self MasteryBonusData
+---@param e OnSkillStateHitEventArgs
+---@param bonuses MasteryBonusCallbackBonuses
+local function ThrowingKnifeBonus_Hit(self, e, bonuses)
+	if e.Data.Success then
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
-		if chance > 0 then
-			if Ext.Random(1,100) < chance then
-				GameHelpers.Skill.Explode(data.Target, Common.GetRandomTableEntry(Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills), char)
-			end
-		end
-	--Targeted a position instead of an object
-	elseif state == SKILL_STATE.PROJECTILEHIT and StringHelpers.IsNullOrEmpty(data.Target) and data.Position then
-		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
-		if chance > 0 then
-			if Ext.Random(1,100) < chance then
-				GameHelpers.Skill.Explode(data.Position, Common.GetRandomTableEntry(Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills), char)
-			end
+		if GameHelpers.Math.Roll(chance) then
+			GameHelpers.Skill.Explode(e.Data.Target, Common.GetRandomTableEntry(Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills), e.Character)
 		end
 	end
 end
 
-ThrowingKnifeBonus:RegisterSkillListener(ThrowingKnifeBonusLogic)
+---@param self MasteryBonusData
+---@param e OnSkillStateProjectileHitEventArgs
+---@param bonuses MasteryBonusCallbackBonuses
+local function ThrowingKnifeBonus_ProjectileHit(self, e, bonuses)
+	--Targeted a position instead of an object
+	if StringHelpers.IsNullOrEmpty(e.Data.Target) and e.Data.Position then
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance", 25)
+		if chance > 0 and GameHelpers.Math.Roll(chance) then
+			GameHelpers.Skill.Explode(e.Data.Position, Common.GetRandomTableEntry(Mastery.Variables.Bonuses.ThrowingKnifeBonusDamageSkills), e.Character)
+		end
+	end
+end
+
+ThrowingKnifeBonus.Register.SkillHit(ThrowingKnifeBonus_Hit).SkillProjectileHit(ThrowingKnifeBonus_ProjectileHit)
 
 local SneakingPassiveBonus = rb:Create("DAGGER_SNEAKINGBONUS", {
 	Skills = {"ActionSkillSneak"},
@@ -126,17 +128,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 	rb:Create("DAGGER_BACKLASH", {
 		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_BacklashBonus")
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and HasActiveStatus(data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET") == 1 then
-			local target = GameHelpers.TryGetObject(data.Target)
-			if not target then return end
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success and GameHelpers.Status.IsActive(e.Data.TargetObject, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET") then
 			---@type EsvStatusConsume
-			local statusObject = target:GetStatus("LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
+			local statusObject = e.Data.TargetObject:GetStatus("LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
 			local sourceObject = statusObject and GameHelpers.TryGetObject(statusObject.StatusSourceHandle) or nil
-			if statusObject and sourceObject.MyGuid == char then
-				GameHelpers.Status.Remove(data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
-				local sourceSkill = CharacterHasSkill(char, "Projectile_EnemyThrowingKnife") == 1 and "Projectile_EnemyThrowingKnife" or "Projectile_ThrowingKnife"
-				GameHelpers.Skill.SetCooldown(char, sourceSkill, 0.0)
+			if statusObject and sourceObject and sourceObject.MyGuid == e.Character.MyGuid then
+				GameHelpers.Status.Remove(e.Data.Target, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET")
+				local sourceSkill = CharacterHasSkill(e.Character, "Projectile_EnemyThrowingKnife") == 1 and "Projectile_EnemyThrowingKnife" or "Projectile_ThrowingKnife"
+				GameHelpers.Skill.SetCooldown(e.Character, sourceSkill, 0.0)
 				local apCost = Ext.StatGetAttribute(sourceSkill, "ActionPoints")
 				if apCost > 1 then
 					local refundMult = math.min(100, math.max(0, GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_Backlash_APRefundPercentage", 50)))
@@ -145,7 +145,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 							refundMult = refundMult * 0.01
 						end
 						local apBonus = math.max(1, math.floor(apCost * refundMult))
-						CharacterAddActionPoints(char, apBonus)
+						CharacterAddActionPoints(e.Character, apBonus)
 					end
 				end
 			end
@@ -155,11 +155,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 	rb:Create("DAGGER_SERRATED_RUPTURE", {
 		Skills = {"Target_SerratedEdge", "Target_EnemySerratedEdge"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus")
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and HasActiveStatus(data.Target, "BLEEDING") == 1 then
-			GameHelpers.Damage.ApplySkillDamage(char, data.Target, "Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
-			if ObjectIsCharacter(data.Target) == 1 then
-				CharacterStatusText(data.Target, GameHelpers.GetStringKeyText("LLWEAPONEX_RUPTURE_DisplayName", "Ruptured"))
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success and HasActiveStatus(e.Data.Target, "BLEEDING") == 1 then
+			GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.Target, "Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
+			if ObjectIsCharacter(e.Data.Target) == 1 then
+				CharacterStatusText(e.Data.Target, GameHelpers.GetStringKeyText("LLWEAPONEX_RUPTURE_DisplayName", "Ruptured"))
 			end
 		end
 	end)
@@ -169,15 +169,15 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 3,{
 	rb:Create("DAGGER_THROWINGKNIFE2", {
 		Skills = {"Projectile_FanOfKnives", "Projectile_EnemyFanOfKnives"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife2")
-	}):RegisterSkillListener(ThrowingKnifeBonusLogic),
+	}).Register.SkillHit(ThrowingKnifeBonus_Hit).SkillProjectileHit(ThrowingKnifeBonus_ProjectileHit),
 
 	rb:Create("DAGGER_CORRUPTED_BLADE", {
 		Skills = {"Target_CorruptedBlade", "Target_EnemyCorruptedBlade"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_CorruptedBlade")
-	}):RegisterSkillListener(function (bonuses, char, skill, state, data)
-		if state == SKILL_STATE.HIT and data.Success then
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
 			local listenDelay = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_CorruptedBlade_DeathListenDuration", -1)
-			DeathManager.ListenForDeath("CorruptedBladeDiseaseSpread", data.Target, char, listenDelay)
+			DeathManager.ListenForDeath("CorruptedBladeDiseaseSpread", e.Data.Target, e.Character, listenDelay)
 		end
 	end),
 })
@@ -186,10 +186,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 4, {
 	rb:Create("DAGGER_FATALITY", {
 		Skills = {"Target_Fatality", "Target_EnemyFatality"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_FatalityBonus")
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success then
-			data:ConvertAllDamageTo("Piercing")
-			DeathManager.ListenForDeath("FatalityRefundBonus", data.Target, char, 1000)
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
+			e.Data:ConvertAllDamageTo("Piercing")
+			DeathManager.ListenForDeath("FatalityRefundBonus", e.Data.Target, e.Character, 1000)
 		end
 	end),
 
@@ -198,9 +198,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 4, {
 		Skills = {"Target_TerrifyingCruelty", "Target_EnemyTerrifyingCruelty", "Target_EnemyTerrifyingCruelty_Gheist", 
 		"Projectile_LLWEAPONEX_DaggerMastery_CrueltyCorpseExplosion"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_CrueltyBonus")
-	}):RegisterSkillListener(function(bonuses, skill, char, state, data)
-		if state == SKILL_STATE.HIT and data.Success then
-			DeathManager.ListenForDeath("TerrifyingCrueltyBonus", data.Target, char, 500)
+	}).Register.SkillHit(function(self, e, bonuses)
+		if e.Data.Success then
+			DeathManager.ListenForDeath("TerrifyingCrueltyBonus", e.Data.Target, e.Character, 500)
 		end
 	end)
 })
