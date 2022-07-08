@@ -5,6 +5,7 @@ local _type = type
 
 ---@class MasteryBonusDataParams
 ---@field ID string
+---@field Mastery string
 ---@field Skills string[] Optional skills associated.
 ---@field Statuses string[] Optional statuses associated.
 ---@field Tooltip TranslatedString

@@ -36,7 +36,7 @@ end
 MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 1, {
 	rb:Create("BOW_DOUBLE_SHOT", {
 		Skills = {"Projectile_PinDown", "Projectile_EnemyPinDown"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_PinDown", "Shoot <font color='#00FFAA'>[ExtraData:LLWEAPONEX_MB_Bow_PinDown_BonusShots]</font> additional arrow(s) at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].<br><font color='#F19824'>If no enemies are nearby, the bonus arrow(s) will fire at the original target.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_PinDown", "<font color='#72EE34'>Shoot <font color='#00FFAA'>[ExtraData:LLWEAPONEX_MB_Bow_PinDown_BonusShots]</font> additional arrow(s) at a nearby enemy for [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_PinDown_BonusShot].</font><br><font color='#F19824'>If no enemies are nearby, the bonus arrow(s) will fire at the original target.</font>"),
 	}).Register.SkillCast(function(self, e, bonuses)
 			-- Support for a mod making Pin Down shoot multiple arrows through the use of iterating tables.
 			local maxBonusShots = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_PinDown_BonusShots", 1)
@@ -80,7 +80,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 1, {
 MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 	rb:Create("BOW_ASSASSINATE_MARKED", {
 		Skills = {"Projectile_Snipe", "Projectile_EnemySnipe"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_AssassinateMarked", "If the target is <font color='#FF3300'>Marked</font>, deal a <font color='#33FF33'>guaranteed critical hit</font> and bypass dodging/blocking. The mark is cleansed after hit."),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_AssassinateMarked", "<font color='#72EE34'>If the target is <font color='#FF3300'>[Key:MARKED_DisplayName]</font>, deal a <font color='#FF33FF'>guaranteed critical hit</font> and bypass dodging/blocking.</font><br><font color='#F19824'>[Key:MARKED_DisplayName] is cleansed on hit.</font>"),
 		Statuses = {"MARKED"},
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_AssassinateMarkedStatus", "<font color='#33FF00'>Character is vulnerable to a critical hit from [Key:Projectile_Snipe_DisplayName].</font>"),
 		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Bow_Mastery2", true)

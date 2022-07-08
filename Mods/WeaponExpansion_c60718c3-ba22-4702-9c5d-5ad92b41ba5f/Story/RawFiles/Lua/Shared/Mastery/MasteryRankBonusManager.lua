@@ -621,12 +621,14 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 	if t == "table" then
 		local bonus = _GetBonus(bonuses)
 		if bonus then
+			bonus.Mastery = mastery
 			_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
 		else
 			local len = #bonuses
 			for i=1,len do
 				local bonus = _GetBonus(bonuses[i])
 				if bonus then
+					bonus.Mastery = mastery
 					_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
 				end
 			end
@@ -654,6 +656,13 @@ function MasteryBonusManager.GetRankBonus(mastery, rank, id)
 	end
 end
 
+local function GetMasteryColor(mastery)
+	local masteryData = Masteries[mastery]
+	if masteryData then
+		return masteryData.Color
+	end
+end
+
 ---@param data MasteryBonusData
 ---@param character EsvCharacter|EclCharacter
 ---@param skillOrStatus string
@@ -664,6 +673,12 @@ local function EvaluateEntryForBonusText(data, character, skillOrStatus, tooltip
 		local bonusText = data:GetTooltipText(character, skillOrStatus, tooltipType, status, ...)
 		if not StringHelpers.IsNullOrWhitespace(bonusText) then
 			return bonusText
+			--[[ local color = GetMasteryColor(data.Mastery)
+			if color then
+				return string.format("<font color='%s'>%s</font>", color, bonusText)
+			else
+				return bonusText
+			end ]]
 		end
 	else
 		local _TAGS = GameHelpers.GetAllTags(character, true, true)
@@ -722,9 +737,10 @@ function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType,
 	local textEntries = {}
 	--Allow clients to view mastery bonuses for statuses affecting other objects
 	local client = Client:GetCharacter()
+	---@type table<string,boolean>
 	local _TAGS = GameHelpers.GetAllTags(character, true, true)
 	if client.MyGuid ~= character.MyGuid then
-		for tag,b in pairs(GameHelpers.GetAllTags(character, true, true)) do
+		for tag,b in pairs(GameHelpers.GetAllTags(client, true, true)) do
 			_TAGS[tag] = true
 		end
 	end
