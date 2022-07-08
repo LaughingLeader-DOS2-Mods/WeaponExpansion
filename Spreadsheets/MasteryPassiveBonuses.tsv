@@ -11,8 +11,7 @@ Battle Book	3	Scholar	Gain a percentage of damage for skills of the most memoriz
 Bludgeon	2	Armor Breaker	When basic attacking, deal additional damage directly to armor values. If an armor-altering mod like Divinity Unleashed is present, deal bonus damage instead.	√	√
 Bludgeon	4	Shatter	Hitting a Petrified or Frozen target with a basic attack or weapon skill deals a critical hit, and shatters the shell, ending the status. If the target is an ally, damage is reduced.	√	√
 Bow	2	Focused Attacking	Basic attacking the same target has a cumulative chance to deal a critical hit. The bonus is lost upon critical hitting, leaving combat, or attacking a different target. This bonus applies to Greatbows as well.	√	❌
-Bow	3	Placeholder	Desc	❌	❌
-Bow	4	Placeholder	Desc	❌	❌
+Bow	4	Piercing Projectiles	Non-piercing projectile bow skills will pierce the first target hit.	√	❌
 Crossbow	1	Still Stance	When attacking without moving, damage is increased, proportional to Crossbow Mastery rank.	❌	❌
 Crossbow	2	Placeholder	Desc	❌	❌
 Crossbow	3	Placeholder	Desc	❌	❌

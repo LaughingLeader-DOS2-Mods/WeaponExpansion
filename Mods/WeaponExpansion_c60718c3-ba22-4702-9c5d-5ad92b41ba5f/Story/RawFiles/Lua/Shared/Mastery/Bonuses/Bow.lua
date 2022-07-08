@@ -1,6 +1,8 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 
+local _ISCLIENT = Ext.IsClient()
+
 local _eqSet = "Class_Ranger_Humans"
 
 ---@param v UUID|number[]
@@ -93,6 +95,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 				e.Data:SetHitFlag("Blocked", false)
 				e.Data:SetHitFlag("Dodged", false)
 				e.Data:SetHitFlag("Missed", false)
+				local critMultReduction = GameHelpers.GetExtraData("LLWEAPONEX_PostHitCriticalMultiplierReduction", 0.1)
+				if critMultReduction > 0 then
+					weaponCritMult = weaponCritMult - critMultReduction
+				end
 				e.Data:MultiplyDamage(weaponCritMult)
 			end
 			GameHelpers.Status.Remove(e.Data.Target, self.Statuses)
@@ -266,6 +272,208 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 	end),
 })
 
+local OnAttackStarting = nil
+
+if not _ISCLIENT then
+	---@param self MasteryBonusData
+	---@param e OnBasicAttackStartEventArgs|OnSkillStateSkillEventEventArgs
+	---@param bonuses MasteryActiveBonuses
+	---@param attacker EsvCharacter
+	---@param target EsvCharacter
+	OnAttackStarting = function(self, e, bonuses, attacker, target)
+		local attackerGUID = attacker.MyGuid
+		local targetGUID = target.MyGuid
+
+		local combatid = GameHelpers.Combat.GetID(targetGUID)
+		local characters = {}
+		if combatid then
+			for _,ally in GameHelpers.Combat.GetCharacters(combatid, "Ally", target) do
+				local allyGUID = ally.MyGuid
+				if allyGUID ~= attackerGUID and allyGUID ~= targetGUID then
+					characters[#characters+1] = ally
+				end
+			end
+		else
+			for _,v in target:GetNearbyCharacters(32.0) do
+				if v ~= targetGUID and v ~= attackerGUID
+				and CharacterIsAlly(v, targetGUID) == 1
+				then
+					characters[#characters+1] = GameHelpers.GetCharacter(v)
+				end
+			end
+		end
+		for _,ally in pairs(characters) do
+			local allyGUID = ally.MyGuid
+			if GameHelpers.Status.IsActive(ally, self.Statuses)
+			and MasteryBonusManager.HasMasteryBonus(ally, self.ID)
+			and GameHelpers.Character.IsWithinWeaponRange(ally, attacker) then
+				local attacks = PersistentVars.MasteryMechanics.BowFarsightAttacks[allyGUID] or 0
+				if attacks > 0 then
+					CharacterAttack(allyGUID, attackerGUID)
+					if attacks > 1 then
+						PersistentVars.MasteryMechanics.BowFarsightAttacks[allyGUID] = attacks - 1
+						SignalTestComplete("BOW_FARSIGHT_AttacksRemainingReduced")
+					else
+						PersistentVars.MasteryMechanics.BowFarsightAttacks[allyGUID] = nil
+						SignalTestComplete("BOW_FARSIGHT_AttacksRemainingDepleted")
+					end
+				end
+			end
+		end
+	end
+end
+
 MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
-	
+	rb:Create("BOW_PIERCING_PROJECTILE", {
+		AllSkills = true,
+		---@param self MasteryBonusData
+		---@param id string
+		---@param character EclCharacter
+		---@param tooltipType MasteryBonusDataTooltipID
+		---@param extraParam EclItem|EclStatus
+		---@param tags table<string,boolean>|nil
+		GetIsTooltipActive = function(self, id, character, tooltipType, extraParam, tags, itemHasSkill)
+			if tooltipType == "skill" and MasteryBonusManager.Vars.BowProjectilePiercingSkills[id] then
+				return true
+			end
+			return false
+		end,
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_PiercingProjectiles", "<font color='#72EE34'>Non-piercing projectile bow skills will pierce the first target hit.</font>"),
+	}).Register.SkillUsed(function (self, e, bonuses)
+		--This is to ensure the skill is being cast, so we don't make explosions pierce
+		if PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill] == nil then
+			PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill] = {}
+		end
+		PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill][e.Character.MyGuid] = true
+	end).SkillProjectileHit(function (self, e, bonuses)
+		local pbdata = PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill]
+		if pbdata and pbdata[e.Character.MyGuid] == true then
+			pbdata[e.Character.MyGuid] = nil
+			if not Common.TableHasAnyEntry(pbdata) then
+				PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill] = nil
+			end
+
+			local x,y,z = table.unpack(e.Data.Position)
+			local dist = Ext.Round(Ext.GetStat(e.Skill).TargetRadius / 2)
+			local dir = GameHelpers.Math.GetDirectionVector(e.Character, e.Data.Position)
+			local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, x, y, z, dir)
+			pos[2] = y
+
+			GameHelpers.Skill.ShootProjectileAt(pos, e.Skill, e.Character, {EnemiesOnly=true})
+			SignalTestComplete(self.ID)
+		end
+	end).Test(function(test, self)
+		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10.0))
+		TeleportToPosition(char, x,y,z, "", 0, 1)
+		CharacterSetFightMode(char, 1, 1)
+		test:Wait(1000)
+		CharacterUseSkill(char, "Projectile_EnemyBallisticShot", dummy, 1, 1, 1)
+		test:WaitForSignal(self.ID, 10000)
+		test:AssertGotSignal(self.ID)
+		return true
+	end),
+
+	rb:Create("BOW_FARSIGHT", {
+		Skills = {"Target_Farsight", "Target_EnemyFarsight"},
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_Farsight", "<font color='#72EE34'>While [KEY:FARSIGHT_DisplayName] is active, pre-emptively basic attack the first enemy that attempts to harm an ally, [ExtraData:LLWEAPONEX_MB_Bow_Farsight_AttacksPerTurn:2] time(s) until your turn ends again.</font>"),
+		Statuses = {"FARSIGHT"},
+	}).Register.SkillCast(function (self, e, bonuses)
+		e.Data:ForEach(function (target, targetType, self)
+			if target == e.Character.MyGuid then
+				TurnCounter.CountUp("LLWEAPONEX_MB_Bow_Farsight", 3, e.Character, {
+					CombatOnly = true, Infinite = true, ClearOnDeath = true,
+					Target = e.Character.MyGuid})
+				SignalTestComplete("BOW_FARSIGHT_FarsightCasted")
+			end
+		end, e.Data.TargetMode.Objects)
+	end).TurnCounter("LLWEAPONEX_MB_Bow_Farsight", function(self, e, bonuses)
+		if e.Finished then
+			PersistentVars.MasteryMechanics.BowFarsightAttacks[e.Data.Target] = nil
+		elseif e.Data.Turns > 0 and e.Data.Target then
+			local target = GameHelpers.GetCharacter(e.Data.Target)
+			if target then
+				if GameHelpers.Status.IsActive(target, self.Statuses) then
+					local attacks = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_Farsight_AttacksPerTurn", 2, true)
+					if attacks > 0 then
+						PersistentVars.MasteryMechanics.BowFarsightAttacks[target.MyGuid] = attacks
+						SignalTestComplete("BOW_FARSIGHT_AttacksRemainingSet")
+					else
+						TurnCounter.ClearTurnCounter("LLWEAPONEX_MB_Bow_Farsight", target)
+						SignalTestComplete("BOW_FARSIGHT_AttacksEqualZero")
+					end
+				else
+					TurnCounter.ClearTurnCounter("LLWEAPONEX_MB_Bow_Farsight", target)
+					SignalTestComplete("BOW_FARSIGHT_FarsightRemoved")
+				end
+			end
+		end
+	end).BasicAttackStart(function(self, e, bonuses)
+		if not TurnCounter.IsActive("LLWEAPONEX_MB_Bow_Farsight") then
+			return
+		end
+		if e.TargetIsObject and CharacterIsAlly(e.Attacker.MyGuid, e.Target.MyGuid) == 0 then
+			OnAttackStarting(self, e, bonuses, e.Attacker, e.Target)
+		end
+	end, true, "None").SkillUsed(function (self, e, bonuses)
+		if not TurnCounter.IsActive("LLWEAPONEX_MB_Bow_Farsight") or string.find(e.Skill, "Quest") then
+			return
+		end
+		local skillDamageMult = Ext.GetStat(e.Skill)["Damage Multiplier"] or 0
+		if skillDamageMult <= 0 then
+			return
+		end
+		if e.Data.TotalTargetObjects > 0 and not MasteryBonusManager.HasMasteryBonus(e.Character, self.ID) then
+			local attackerGUID = e.Character.MyGuid
+			e.Data:ForEach(function (target, _, _)
+				if CharacterIsAlly(attackerGUID, target) == 0 then
+					OnAttackStarting(self, e, bonuses, e.Character, GameHelpers.GetCharacter(target))
+				end
+			end, e.Data.TargetMode.Objects)
+		end
+	end, "None", "All").Test(function(test, self)
+		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
+		test.Cleanup = cleanup
+		test:Wait(250)
+		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10.0))
+		local sword = CreateItemTemplateAtPosition("16600f2c-3817-42e7-be9d-5804f8ac77c8", x, y, z)
+		TeleportToPosition(char1, x,y,z, "", 0, 1)
+		test:Wait(250)
+		CharacterEquipItem(char2, sword)
+		CharacterAddSkill(char2, "Target_EnemyCripplingBlow", 0)
+		CharacterAddSkill(char2, "Shout_EnemyWhirlwind", 0)
+		TeleportTo(char2, dummy, "", 0, 1, 1)
+		test:Wait(1000)
+		GameHelpers.Status.Apply(char2, "WEB", -1, true, char2)
+		SetFaction(char1, "PVP_1")
+		SetFaction(dummy, "PVP_1")
+		SetFaction(char2, "PVP_2")
+		CharacterAddPreferredAiTargetTag(char2, "LLWEAPONEX_Test_Target")
+		SetTag(dummy, "LLWEAPONEX_Test_Target")
+		test:Wait(1000)
+		SetCanJoinCombat(char1, 1)
+		SetCanFight(char1, 1)
+		SetCanJoinCombat(char2, 1)
+		SetCanFight(char2, 1)
+		SetCanJoinCombat(dummy, 1)
+		SetCanFight(dummy, 1)
+		EnterCombat(char1, char2)
+		EnterCombat(dummy, char2)
+		test:Wait(250)
+		CharacterConsume(char2, "QUEST_Tea_Cup_Brand_A")
+		JumpToTurn(char1)
+		CharacterUseSkill(char1, self.Skills[2], char1, 1, 1, 1)
+		test:WaitForSignal("BOW_FARSIGHT_FarsightCasted", 10000)
+		test:AssertGotSignal("BOW_FARSIGHT_FarsightCasted")
+		EndTurn(char1)
+		test:Wait(250)
+		JumpToTurn(char2)
+		test:WaitForSignal("BOW_FARSIGHT_AttacksRemainingReduced", 3000)
+		test:AssertGotSignal("BOW_FARSIGHT_AttacksRemainingReduced")
+		test:WaitForSignal("BOW_FARSIGHT_AttacksRemainingDepleted", 30000)
+		test:AssertGotSignal("BOW_FARSIGHT_AttacksRemainingDepleted")
+		return true
+	end),
 })
