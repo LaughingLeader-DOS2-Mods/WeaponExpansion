@@ -124,7 +124,7 @@ local function OnStatusHitEnter(target, source, data)
 				xpMastery = "LLWEAPONEX_Unarmed"
 			end
 			if canGrantMasteryXP then
-				MasterySystem.GrantBasicAttackExperience(source.MyGuid, target.MyGuid, xpMastery)
+				MasterySystem.GrantBasicAttackExperience(source, target, xpMastery)
 			end
 		elseif skill then
 			if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
@@ -134,7 +134,7 @@ local function OnStatusHitEnter(target, source, data)
 				ArmCannon_OnWeaponSkillHit(source.MyGuid, target.MyGuid, skill)
 			end
 			if canGrantMasteryXP and IsWeaponSkill(data.SkillData) then
-				MasterySystem.GrantWeaponSkillExperience(source.MyGuid, target.MyGuid)
+				MasterySystem.GrantWeaponSkillExperience(source, target)
 			end
 		end
 	end

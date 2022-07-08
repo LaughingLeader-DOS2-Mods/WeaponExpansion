@@ -45,20 +45,11 @@ function ApplyRuneExtraProperties(source, target, item, targetPosition, radius, 
 	end
 end
 
-local function GrantMasteryExperienceFromStatus(target, status, source, statusType)
-	if not StringHelpers.IsNullOrEmpty(source) and ObjectIsCharacter(source) == 1 and MasterySystem.CanGainExperience(source) then
-		if status == "LLWEAPONEX_PISTOL_SHOOT_HIT" then
-			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_Pistol")
-		elseif status == "LLWEAPONEX_HANDCROSSBOW_HIT" then
-			MasterySystem.GrantWeaponSkillExperience(source, target, "LLWEAPONEX_HandCrossbow")
-		end
-	end
-end
+Ext.RegisterOsirisListener("CharacterStatusRemoved", 3, "after", function (target, status)
+	StatusTurnHandler.RemoveTurnEndStatus(target, status, true)
+end)
 
-RegisterStatusListener("Applied", "LLWEAPONEX_PISTOL_SHOOT_HIT", GrantMasteryExperienceFromStatus)
-RegisterStatusListener("Applied", "LLWEAPONEX_HANDCROSSBOW_HIT", GrantMasteryExperienceFromStatus)
-
-StatusManager.Register.Removed("All", function (target, status, source, statusType, statusEvent)
+Ext.RegisterOsirisListener("ItemStatusRemoved", 3, "after", function (target, status)
 	StatusTurnHandler.RemoveTurnEndStatus(target, status, true)
 end)
 
