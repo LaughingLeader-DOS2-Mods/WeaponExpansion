@@ -11,7 +11,7 @@ else
 	local FORCE_PICKPOCKET_ID = 777
 	local pickpocketTarget = nil
 
-	Ext.RegisterUITypeInvokeListener(Data.UIType.contextMenu[2], "updateButtons", function(ui, event)
+	Ext.RegisterUITypeInvokeListener(Data.UIType.contextMenu.Object, "updateButtons", function(ui, event)
 		local cursor = Ext.GetPickingState()
 		if cursor and cursor.HoverCharacter then
 			pickpocketTarget = Ext.GetCharacter(cursor.HoverCharacter)
@@ -38,7 +38,7 @@ else
 		end
 		Ext.Print(event,Lib.serpent.block(buttons)) ]]
 	end)
-	Ext.RegisterUITypeCall(Data.UIType.contextMenu[2], "setMcSize", function(ui, event)
+	Ext.RegisterUITypeCall(Data.UIType.contextMenu.Object, "setMcSize", function(ui, event)
 		if Vars.DebugMode or GameHelpers.CharacterOrEquipmentHasTag(Client:GetCharacter(), "LLWEAPONEX_InfinitePickpocket") then
 			local this = ui:GetRoot()
 			local arr = this.windowsMenu_mc.list.content_array
@@ -56,7 +56,7 @@ else
 			end
 		end
 	end)
-	Ext.RegisterUITypeCall(Data.UIType.contextMenu[2], "buttonPressed", function(ui, event, id, actionID, handle)
+	Ext.RegisterUITypeCall(Data.UIType.contextMenu.Object, "buttonPressed", function(ui, event, id, actionID, handle)
 		if id == FORCE_PICKPOCKET_ID then
 			Ext.PostMessageToServer("LLWEAPONEX_ForcePickpocket", Ext.JsonStringify({
 				Player = Client:GetCharacter().NetID,
