@@ -29,10 +29,14 @@ end)
 ---@param data table
 ---@param skillOrStatus string
 ---@param tooltipType MasteryBonusDataTooltipID
-function TooltipParams.GetDescriptionText(character, data, skillOrStatus, tooltipType)
+---@param tags table<string,boolean>|nil
+function TooltipParams.GetDescriptionText(character, data, skillOrStatus, tooltipType, tags)
 	local descriptionText = ""
 	local namePrefix = ""
 	if data.Tags ~= nil then
+		local _TAGS = tags or GameHelpers.GetAllTags(character, true, true)
+		local alwaysEnabled = SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Vars.DebugMode
+
 		local tagKeys = {}
 		for tagName,tagData in pairs(data.Tags) do
 			table.insert(tagKeys, tagName)
@@ -41,7 +45,9 @@ function TooltipParams.GetDescriptionText(character, data, skillOrStatus, toolti
 		for i,tagName in pairs(tagKeys) do
 			---@type MasteryBonusData
 			local tagData = data.Tags[tagName]
-			if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION or Mastery.HasMasteryRequirement(character, tagName) or Vars.DebugMode then
+			if alwaysEnabled
+			or Mastery.HasMasteryRequirement(character, tagName, false, _TAGS)
+			then
 				if tagData.NamePrefix ~= nil then
 					if namePrefix ~= "" then
 						namePrefix = namePrefix .. " "

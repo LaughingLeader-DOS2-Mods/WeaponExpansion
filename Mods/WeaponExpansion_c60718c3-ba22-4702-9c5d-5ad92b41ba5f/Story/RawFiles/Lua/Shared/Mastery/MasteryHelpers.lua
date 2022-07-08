@@ -80,20 +80,21 @@ function Mastery.HasMinimumMasteryLevel(character,mastery,minLevel)
 	return false
 end
 
----@param character EsvCharacter|StatCharacter
+---@param character EsvCharacter|EclCharacter
 ---@param tag string
 ---@param skipWeaponCheck boolean|nil
+---@param tags table<string,boolean>|nil Optional cached table of all tags on the character / their equipment.
 ---@return boolean
-local function TryCheckMasteryRequirement(character, tag, skipWeaponCheck)
+local function TryCheckMasteryRequirement(character, tag, skipWeaponCheck, tags)
+	local _TAGS = tags or GameHelpers.GetAllTags(character, true, true)
 	if type(tag) == "string" then
-		local _tags = GameHelpers.GetAllTags(character, true, true)
 		--Check if character is tagged with a rank tag, like LLWEAPONEX_Unarmed_Mastery2
-		if character ~= nil and _tags[tag] then
+		if character ~= nil and _TAGS[tag] then
 			local _,_,mastery = string.find(tag,"(.+)_Mastery")
 			--Check if character is tagged with a mastery tag, like LLWEAPONEX_Unarmed, which is set when the mastery is active
 			--If skipWeaponCheck is true, skip looking for the "mastery is active" tag.
 			if mastery then
-				if _tags[mastery] or (Mastery.PermanentMasteries[mastery] == true or skipWeaponCheck) then
+				if _TAGS[mastery] or (Mastery.PermanentMasteries[mastery] == true or skipWeaponCheck) then
 					return true
 				elseif _ISCLIENT then
 					--Skip checking for the "mastery is active" tag on the client,
@@ -105,12 +106,12 @@ local function TryCheckMasteryRequirement(character, tag, skipWeaponCheck)
 	elseif type(tag) == "table" then
 		for k,v in pairs(tag) do
 			if type(k) == "string" then
-				local hasReq = TryCheckMasteryRequirement(character, k)
+				local hasReq = TryCheckMasteryRequirement(character, k, skipWeaponCheck, _TAGS)
 				if hasReq then
 					return true
 				end
 			else
-				local hasReq = TryCheckMasteryRequirement(character, v)
+				local hasReq = TryCheckMasteryRequirement(character, v, skipWeaponCheck, _TAGS)
 				if hasReq then
 					return true
 				end
@@ -121,22 +122,24 @@ local function TryCheckMasteryRequirement(character, tag, skipWeaponCheck)
 	return false
 end
 
----@param character EsvCharacter|StatCharacter
+---@param char EsvCharacter|EclCharacter
 ---@param tag string
 ---@param skipWeaponCheck boolean|nil
+---@param tags table<string,boolean>|nil Optional cached table of all tags on the character / their equipment.
 ---@return boolean
-function Mastery.HasMasteryRequirement(character, tag, skipWeaponCheck)
-	character = GameHelpers.GetCharacter(character)
+function Mastery.HasMasteryRequirement(char, tag, skipWeaponCheck, tags)
+	local character = GameHelpers.GetCharacter(char)
 	if not character then
 		return false
 	end
 	if string.find(tag, "LLWEAPONEX_Unarmed") and not UnarmedHelpers.HasEmptyHands(character) then
 		return false
 	end
-	if character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
+	if (tags and tags.LLWEAPONEX_MasteryTestCharacter) or character:HasTag("LLWEAPONEX_MasteryTestCharacter") then
 		return true
 	end
-	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag, skipWeaponCheck)
+	local _TAGS = tags or GameHelpers.GetAllTags(character, true, true)
+	local status,result = xpcall(TryCheckMasteryRequirement, debug.traceback, character, tag, skipWeaponCheck, _TAGS)
 	if not status then
 		Ext.PrintError("Error checking mastery requirements:\n", result)
 	else
