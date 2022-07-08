@@ -67,7 +67,12 @@ if not Vars.IsClient then
 
 	Ext.RegisterListener("SessionLoaded", function()
 		if not registeredListener then
-			AttackManager.OnWeaponTagHit.Register("LLWEAPONEX_RunicCannonEquipped", OnRunicCannonAttack)
+			Events.OnWeaponTagHit:Subscribe(function (e)
+				if e.TargetIsObject and (not e.SkillData or (e.SkillData and not string.find(e.Skill, "LLWEAPONEX_ArmCannon"))) then
+					Osi.LLWEAPONEX_ArmCannon_OnHit(e.Attacker.MyGuid, e.Target.MyGuid)
+					Osi.LLWEAPONEX_ArmCannon_BlockNextEnergyGain(e.Attacker.MyGuid, 750)
+				end
+			end, {MatchArgs={Tag="LLWEAPONEX_RunicCannonEquipped"}})
 			registeredListener = true
 		end
 	end)
