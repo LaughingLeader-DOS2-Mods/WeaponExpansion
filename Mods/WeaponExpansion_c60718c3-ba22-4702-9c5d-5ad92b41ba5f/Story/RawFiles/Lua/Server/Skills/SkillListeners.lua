@@ -17,7 +17,7 @@ SkillManager.Register.All("Projectile_LLWEAPONEX_Rifle_AimedShot", function(e)
 		end
 	elseif e.State == SKILL_STATE.CAST then
 		Timer.StartObjectTimer("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", e.Character, 1500)
-	elseif e.State == SKILL_STATE.HIT then
+	elseif e.State == SKILL_STATE.HIT or e.State == SKILL_STATE.UNMEMORIZED then
 		Timer.Cancel("LLWEAPONEX_Rifle_AimedShot_ClearBonuses", e.Character)
 		GameHelpers.Status.Remove(e.Character, SkillConfiguration.AimedShot.BonusStatuses)
 	end
