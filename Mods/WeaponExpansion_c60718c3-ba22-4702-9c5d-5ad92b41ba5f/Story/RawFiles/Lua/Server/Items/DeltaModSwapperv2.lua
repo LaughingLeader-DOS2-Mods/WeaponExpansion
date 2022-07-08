@@ -226,7 +226,6 @@ local function SwapDeltaMods(item)
 
 	local boosts = GetAllBoosts(item)
 	if boosts ~= nil then
-		print(Ext.JsonStringify(boosts))
 		for i=2,#item.Stats.DynamicStats do
 			local boost = item.Stats.DynamicStats[i]
 			if not StringHelpers.IsNullOrEmpty(boost.ObjectInstanceName) then
@@ -234,14 +233,11 @@ local function SwapDeltaMods(item)
 				boostMap[boost.ObjectInstanceName] = boost
 			end
 		end
-		print(Common.Dump(boostMap))
 		for replaceDeltaModName,newDeltaModName in pairs(boosts) do
 			local replaceBoosts = Ext.GetDeltaMod(replaceDeltaModName, item.ItemType).Boosts
 			if newDeltaModName ~= false then
 				local newBoosts = Ext.GetDeltaMod(newDeltaModName, item.ItemType).Boosts
 				local newBoost = newBoosts[1].Boost
-	
-				print(Ext.JsonStringify(replaceBoosts), newBoost)
 	
 				for i,replace in pairs(replaceBoosts) do
 					local replaceBoost = replace.Boost
@@ -262,7 +258,6 @@ local function SwapDeltaMods(item)
 									end
 									changes[replaceBoost][boostAttribute] = nextValue
 									hasChanges = true
-									print(boostAttribute, current, "=>", nextValue)
 									existingBoostEntry[boostAttribute] = nextValue
 								end
 							end

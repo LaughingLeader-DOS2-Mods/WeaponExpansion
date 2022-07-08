@@ -204,7 +204,6 @@ RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_AVALANCHE", functi
 end)
 
 RunebladeManager.RegisterBonus("LLWEAPONEX_ACTIVATE_RUNEBLADE_EARTH", function(statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
-	print("RunebladeManager", statusId, attacker, target, data, targetIsObject, statusMap, targetStatusMap)
 	local chance = GameHelpers.GetExtraData("LLWEAPONEX_Runeblade_Earth_Chance", 201, true)
 	if RollForProc(attacker, chance) then
 		GameHelpers.Status.Apply(target, "SLOWED", 6.0, false, attacker, RunebladeManager.ImpactRadius, true, CanApplyStatus)

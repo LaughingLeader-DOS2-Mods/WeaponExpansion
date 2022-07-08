@@ -110,7 +110,6 @@ local craftingActions = {}
 function OnCraftingProcessed(char, ...)
 	--local requestID = tonumber(requestIDStr)
 	local itemArgs = {...}
-	Ext.Print("[WeaponExpansion:OnCraftingProcessed]",char, table.unpack(itemArgs))
 	local items = {}
 	for i,v in pairs(itemArgs) do
 		if not StringHelpers.IsNullOrEmpty(v) then
@@ -122,7 +121,6 @@ function OnCraftingProcessed(char, ...)
 		end
 	end
 	craftingActions[char] = items
-	Ext.Print("[WeaponExpansion:OnCraftingProcessed]"..string.format("%s", Ext.JsonStringify(craftingActions)))
 end
 
 ---@param char string
@@ -142,7 +140,6 @@ function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
 			for i,v in pairs(uniques) do
 				local itemuuid,stat = table.unpack(v)
 				local item = Ext.GetItem(itemuuid)
-				Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate] "..string.format("Changing unique item scaling for (%s)[%s] to (%s)", itemuuid, stat, attribute))
 				ChangeItemScaling(item, attribute, stat, char)
 			end
 		end
@@ -197,7 +194,6 @@ function ChangeItemScaling(item, attribute, itemStat, craftingCharacter)
 		end
 		stat.Requirements = requirements
 		item.Stats.ShouldSyncStats = true
-		Ext.Print("[WeaponExpansion:ChangeItemScaling] Changed requirements:"..string.format("%s\n%s", stat.Name, Ext.JsonStringify(stat.Requirements)))
 		Ext.SyncStat(itemStat, false)
 		PersistentVars.UniqueRequirements[stat.Name] = requirements
 		UniqueManager.SaveRequirementChanges()
