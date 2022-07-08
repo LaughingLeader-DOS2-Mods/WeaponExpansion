@@ -1,6 +1,8 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 
+local _unsubRushProtection = {}
+
 MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 1, {
 	rb:Create("DUALSHIELDS_RUSHPROTECTION", {
 		Skills = MasteryBonusManager.Vars.RushSkills,
@@ -8,23 +10,35 @@ MasteryBonusManager.AddRankBonuses(MasteryID.DualShields, 1, {
 	}).Register.SkillUsed(function(self, e, bonuses)
 		ObjectSetFlag(e.Character.MyGuid, "LLWEAPONEX_MasteryBonus_RushProtection", 0)
 	end).SkillCast(function(self, e, bonuses)
+		--This listener won't persist between saves, but that's a fair trade-off for not listening for every status
+		local index = Events.OnStatus:Subscribe(function (e)
+			if ObjectGetFlag(e.TargetGUID, "LLWEAPONEX_MasteryBonus_RushProtection") == 1
+			and e.SourceGUID ~= e.TargetGUID
+			and GameHelpers.Status.IsHarmful(e.StatusId) then
+				--Aggregate blocked statuses, just in case it's spammy
+				Timer.StartObjectTimer("LLWEAPONEX_DualShields_PlayRushProtectionSound", e.TargetGUID, 250)
+				e.PreventApply = true
+			end
+		end, {MatchArgs={StatusEvent="BeforeAttempt", StatusId="All", TargetGUID = e.Character.MyGuid}})
+		_unsubRushProtection[e.Character.MyGuid] = index
 		Timer.StartObjectTimer("LLWEAPONEX_ResetDualShieldsRushProtection", e.Character, 1500)
-	end).__self:RegisterStatusBeforeAttemptListener(function(bonuses, target, status, source, statusType)
-		if bonuses.HasBonus("DUALSHIELDS_RUSHPROTECTION", target.MyGuid) and GameHelpers.Status.IsHarmful(status.StatusId) then
-			--Aggregate blocked statuses, just in case it's spammy
-			Timer.StartOneshot("", 250, function()
-				PlaySound(target.MyGuid, "Skill_Warrior_BouncingShield_Impact")
-			end)
-			--Block status from surface
-			return false
-		end
-	end, "All"),
+	end),
 })
 
 if not Vars.IsClient then
 	Timer.Subscribe("LLWEAPONEX_ResetDualShieldsRushProtection", function(e)
 		if e.Data.UUID then
+			local index = _unsubRushProtection[e.Data.UUID]
+			if index then
+				Events.OnStatus:Unsubscribe(index)
+			end
 			ObjectClearFlag(e.Data.UUID, "LLWEAPONEX_MasteryBonus_RushProtection", 0)
+		end
+	end)
+
+	Timer.Subscribe("LLWEAPONEX_DualShields_PlayRushProtectionSound", function(e)
+		if e.Data.UUID then
+			PlaySound(e.Data.UUID, "Skill_Warrior_BouncingShield_Impact")
 		end
 	end)
 end

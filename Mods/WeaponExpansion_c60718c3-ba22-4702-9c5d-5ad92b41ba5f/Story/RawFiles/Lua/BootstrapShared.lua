@@ -22,8 +22,6 @@ Mastery = {
 	BonusID = {},
 	Params = {},
 	Variables = {
-		---Specific tables or variables used in bonus logic scripts. This is so mods can add or modify them.
-		Bonuses = {},
 		RankVariables = {
 			--Updated from ExtraData values
 			[0] = {Amount = 45, Required = 0},
@@ -215,11 +213,11 @@ local function LoadExperienceVariables()
 	Mastery.Variables.MaxRank = math.floor(maxRank)
 	Mastery.Variables.RankVariables = RankVariables
 
-	for i,skill in pairs(Ext.GetStatEntries("SkillData")) do
-		---@type StatRequirement[]
-		local requirements = Ext.StatGetAttribute(skill, "Requirements")
-		if requirements ~= nil then
-			for i,v in pairs(requirements) do
+	local farSightStatuses = {}
+
+	for skill in GameHelpers.Stats.GetSkills(true) do
+		if skill.Requirements ~= nil then
+			for i,v in pairs(skill.Requirements) do
 				if v.Param == "LLWEAPONEX_NoMeleeWeaponEquipped" then
 					Skills.WarfareMeleeSkills[skill] = true
 					break
@@ -229,11 +227,29 @@ local function LoadExperienceVariables()
 				end
 			end
 		end
+		if skill.SkillType == "Projectile" then
+			if skill.Requirement == "RangedWeapon" and (skill.ForGameMaster == "Yes"
+			--Allow enemy versions of skills / derivatives
+			or MasteryBonusManager.Vars.BowProjectilePiercingSkills[skill.Using])
+			and skill.ChanceToPierce <= 0
+			then
+				MasteryBonusManager.Vars.BowProjectilePiercingSkills[skill.Name] = true
+			end
+		end
+		if skill.Name == "Target_Farsight" then
+			for _,v in pairs(skill.SkillProperties) do
+				if v.Type == "Status" and v.StatusChance > 0 then
+					table.insert(farSightStatuses, v.Action)
+				end
+			end
+		end
 	end
-end
 
-if Vars.DebugMode then
-	Ext.RegisterListener("StatsLoaded", LoadExperienceVariables)
+	farSightStatuses = TableHelpers.MakeUnique(farSightStatuses, true)
+	local bonus = MasteryBonusManager.GetRankBonus("LLWEAPONEX_Bow", 4, "BOW_FARSIGHT")
+	if bonus then
+		bonus.Statuses = farSightStatuses
+	end
 end
 
 ---@return ModSettings

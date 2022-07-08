@@ -16,7 +16,7 @@ local function GetStillStanceBonus(character)
 	return 0
 end
 
-Mastery.Variables.Bonuses.GetStillStanceBonus = GetStillStanceBonus
+MasteryBonusManager.Vars.GetStillStanceBonus = GetStillStanceBonus
 
 local function IsStillStanceSkill(skill)
 	if skill == "ActionAttackGround" then
@@ -31,7 +31,7 @@ local function IsStillStanceSkill(skill)
 	return false
 end
 
-Mastery.Variables.Bonuses.IsStillStanceSkill = IsStillStanceSkill
+MasteryBonusManager.Vars.IsStillStanceSkill = IsStillStanceSkill
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	rb:Create("CROSSBOW_RICOCHET", {

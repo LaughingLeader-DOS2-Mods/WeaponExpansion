@@ -23,21 +23,27 @@ local _type = type
 
 ---@class MasteryBonusDataRegistrationFunctions
 ---@field __self MasteryBonusData
----@field AnySkillState fun(callback:MasteryBonusEventWrapper<OnSkillStateAllEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field SkillUsed fun(callback:MasteryBonusEventWrapper<OnSkillStateSkillEventEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field SkillCast fun(callback:MasteryBonusEventWrapper<OnSkillStateSkillEventEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field SkillPrepare fun(callback:MasteryBonusEventWrapper<OnSkillStatePrepareEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field SkillCancel fun(callback:MasteryBonusEventWrapper<OnSkillStateCancelEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field AnySkillState fun(callback:MasteryBonusEventWrapper<OnSkillStateAllEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
+---@field SkillUsed fun(callback:MasteryBonusEventWrapper<OnSkillStateSkillEventEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
+---@field SkillCast fun(callback:MasteryBonusEventWrapper<OnSkillStateSkillEventEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
+---@field SkillPrepare fun(callback:MasteryBonusEventWrapper<OnSkillStatePrepareEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
+---@field SkillCancel fun(callback:MasteryBonusEventWrapper<OnSkillStateCancelEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
 ---@field SkillHit fun(callback:MasteryBonusEventWrapper<OnSkillStateHitEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
----@field SkillProjectileHit fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileHitEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field SkillProjectileShoot fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileShootEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field SkillProjectileHit fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileHitEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
+---@field SkillProjectileShoot fun(callback:MasteryBonusEventWrapper<OnSkillStateProjectileShootEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificSkills:string|string[]|nil):MasteryBonusDataRegistrationFunctions
+---@field StatusBeforeAttempt fun(callback:MasteryBonusEventWrapper<OnStatusBeforeAttemptEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificStatuses:string|string[]|nil, isStatusType:boolean|nil):MasteryBonusDataRegistrationFunctions
+---@field StatusAttempt fun(callback:MasteryBonusEventWrapper<OnStatusAttemptEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificStatuses:string|string[]|nil, isStatusType:boolean|nil):MasteryBonusDataRegistrationFunctions
+---@field StatusApplied fun(callback:MasteryBonusEventWrapper<OnStatusAppliedEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificStatuses:string|string[]|nil, isStatusType:boolean|nil):MasteryBonusDataRegistrationFunctions
+---@field StatusRemoved fun(callback:MasteryBonusEventWrapper<OnStatusRemovedEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil, specificStatuses:string|string[]|nil, isStatusType:boolean|nil):MasteryBonusDataRegistrationFunctions
 ---@field BasicAttackStart fun(callback:MasteryBonusEventWrapper<OnBasicAttackStartEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil, priority:integer|nil):MasteryBonusDataRegistrationFunctions
 ---@field WeaponHit fun(callback:MasteryBonusEventWrapper<OnWeaponHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil, priority:integer|nil):MasteryBonusDataRegistrationFunctions
 ---@field WeaponTagHit fun(tag:string|string[], callback:MasteryBonusEventWrapper<OnWeaponTagHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
 ---@field WeaponTypeHit fun(weaponType:string|string[], callback:MasteryBonusEventWrapper<OnWeaponTypeHitEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
 ---@field Healed fun(callback:MasteryBonusEventWrapper<OnHealEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
 ---@field TimerFinished fun(id:string|string[], callback:MasteryBonusEventWrapper<TimerFinishedEventArgs>, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
----@field TurnEnded fun(id:string|string[], callback:MasteryBonusEventWrapper<OnTurnEndedEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field TurnEnded fun(id:string|string[]|nil, callback:MasteryBonusEventWrapper<OnTurnEndedEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field TurnCounter fun(id:string|string[], callback:MasteryBonusEventWrapper<OnTurnCounterEventArgs>, skipBonusCheck:boolean|nil, checkBonusOn:MasteryBonusCheckTarget|nil):MasteryBonusDataRegistrationFunctions
+---@field TurnDelayed fun(callback:MasteryBonusEventWrapper<TurnDelayedEventArgs>, skipBonusCheck:boolean|nil, priority:integer|nil):MasteryBonusDataRegistrationFunctions
 ---@field SpecialTooltipParam fun(id:string, callback:LeaderLibGetTextPlaceholderCallback):MasteryBonusDataRegistrationFunctions
 ---@field Osiris fun(event:string, arity:integer, state:string, callback:function, skipBonusCheck:boolean|nil, canRunCallback:MasteryBonusOsirisListenerCustomBonusCheck|nil):MasteryBonusDataRegistrationFunctions
 ---@field Test fun(operation:MasteryTestingTaskCallback):MasteryBonusDataRegistrationFunctions
@@ -131,10 +137,11 @@ end
 ---@param self MasteryBonusData
 ---@param callback function
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.AnySkillState(self, callback, checkBonusOn)
+function _INTERNALREG.AnySkillState(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(nil, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -143,10 +150,11 @@ end
 ---@param self MasteryBonusData
 ---@param callback function
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillPrepared(self, callback, checkBonusOn)
+function _INTERNALREG.SkillPrepared(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.PREPARE, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -155,10 +163,11 @@ end
 ---@param self MasteryBonusData
 ---@param callback function
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillCancel(self, callback, checkBonusOn)
+function _INTERNALREG.SkillCancel(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.CANCEL, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -167,10 +176,11 @@ end
 ---@param self MasteryBonusData
 ---@param callback function
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillUsed(self, callback, checkBonusOn)
+function _INTERNALREG.SkillUsed(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.USED, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -180,9 +190,9 @@ end
 ---@param callback function
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillCast(self, callback, checkBonusOn)
+function _INTERNALREG.SkillCast(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.CAST, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -195,10 +205,7 @@ end
 ---@return MasteryBonusData
 function _INTERNALREG.SkillHit(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = specificSkills
-		if not skills then
-			skills = self.AllSkills and "All" or self.Skills
-		end
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.HIT, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -207,10 +214,11 @@ end
 ---@param self MasteryBonusData
 ---@param callback function
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillProjectileHit(self, callback, checkBonusOn)
+function _INTERNALREG.SkillProjectileHit(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.PROJECTILEHIT, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -219,10 +227,11 @@ end
 ---@param self MasteryBonusData
 ---@param callback function
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificSkills string|string[]|nil
 ---@return MasteryBonusData
-function _INTERNALREG.SkillProjectileShoot(self, callback, checkBonusOn)
+function _INTERNALREG.SkillProjectileShoot(self, callback, checkBonusOn, specificSkills)
 	if not _ISCLIENT then
-		local skills = self.AllSkills and "All" or self.Skills
+		local skills = specificSkills or (self.AllSkills and "All") or self.Skills
 		MasteryBonusManager.RegisterBonusSkillListener(SKILL_STATE.SHOOTPROJECTILE, skills, self, callback, checkBonusOn)
 	end
 	return self
@@ -444,7 +453,7 @@ function _INTERNALREG.Osiris(self, event, arity, state, callback, skipBonusCheck
 end
 
 ---@param self MasteryBonusData
----@param id string|string[]
+---@param id string|string[]|nil Optional ID, otherwise this will be called for every turn that ends.
 ---@param callback fun(self:MasteryBonusData, e:OnTurnEndedEventArgs, bonuses:MasteryBonusCallbackBonuses)
 ---@param skipBonusCheck boolean|nil
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
@@ -459,6 +468,10 @@ function _INTERNALREG.TurnEnded(self, id, callback, skipBonusCheck, checkBonusOn
 				_INTERNALREG.TurnEnded(self, tag, callback, skipBonusCheck, checkBonusOn, priority)
 			end
 		else
+			local matchArgs = nil
+			if not StringHelpers.IsNullOrEmpty(id) then
+				matchArgs = {ID=id}
+			end
 			local bonuses = {HasBonus = function() end}
 			if skipBonusCheck then
 				Events.OnTurnEnded:Subscribe(function (e)
@@ -472,8 +485,147 @@ function _INTERNALREG.TurnEnded(self, id, callback, skipBonusCheck, checkBonusOn
 						callback(self, e, bonuses)
 					end
 				end
-				Events.OnTurnEnded:Subscribe(wrapper, {MatchArgs={ID=id}, Priority=priority})
+				Events.OnTurnEnded:Subscribe(wrapper, {matchArgs, Priority=priority})
 			end
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param id string|string[] Turn Counter ID
+---@param callback fun(self:MasteryBonusData, e:OnTurnCounterEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@param skipBonusCheck boolean|nil
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
+---@return MasteryBonusData
+function _INTERNALREG.TurnCounter(self, id, callback, skipBonusCheck, checkBonusOn, priority)
+	if not _ISCLIENT then
+		checkBonusOn = checkBonusOn or "Source"
+		local t = _type(id)
+		if t == "table" then
+			for _,tag in pairs(id) do
+				_INTERNALREG.TurnCounter(self, tag, callback, skipBonusCheck, checkBonusOn, priority)
+			end
+		else
+			local bonuses = {HasBonus = function() end}
+			if skipBonusCheck then
+				TurnCounter.Subscribe(id, function (e)
+					callback(self, e, bonuses)
+				end)
+			else
+				---@param e OnTurnEndedEventArgs
+				local wrapper = function(e)
+					bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Object)
+					if checkBonusOn == "None" or MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
+						callback(self, e, bonuses)
+					end
+				end
+				TurnCounter.Subscribe(id, wrapper)
+			end
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback fun(self:MasteryBonusData, e:TurnDelayedEventArgs, bonuses:MasteryBonusCallbackBonuses)
+---@param skipBonusCheck boolean|nil
+---@param priority integer|nil
+---@return MasteryBonusData
+function _INTERNALREG.TurnDelayed(self, callback, skipBonusCheck, priority)
+	if not _ISCLIENT then
+		local eventOpts = nil
+		if priority then
+			eventOpts = {Priority=priority}
+		end
+		local bonuses = {HasBonus = function() end}
+		if skipBonusCheck then
+			Events.TurnDelayed:Subscribe(function (e)
+				callback(self, e, bonuses)
+			end, eventOpts)
+		else
+			---@param e TurnDelayedEventArgs
+			local wrapper = function(e)
+				bonuses = MasteryBonusManager._INTERNAL.GatherMasteryBonuses(self.ID, e.Character)
+				if MasteryBonusManager._INTERNAL.HasMatchedBonuses(bonuses, self.ID) then
+					callback(self, e, bonuses)
+				end
+			end
+			Events.TurnDelayed(wrapper, eventOpts)
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback function
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificStatuses string|string[]|nil
+---@param isStatusType boolean|nil
+---@return MasteryBonusData
+function _INTERNALREG.StatusBeforeAttempt(self, callback, checkBonusOn, specificStatuses, isStatusType)
+	if not _ISCLIENT then
+		local statuses = specificStatuses or (self.AllStatuses and "All") or self.Statuses
+		if not isStatusType then
+			MasteryBonusManager.RegisterBonusStatusListener("BeforeAttempt", statuses, self, callback, checkBonusOn)
+		else
+			MasteryBonusManager.RegisterBonusStatusTypeListener("BeforeAttempt", statuses, self, callback, checkBonusOn)
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback function
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificStatuses string|string[]|nil
+---@param isStatusType boolean|nil
+---@return MasteryBonusData
+function _INTERNALREG.StatusAttempt(self, callback, checkBonusOn, specificStatuses, isStatusType)
+	if not _ISCLIENT then
+		local statuses = specificStatuses or (self.AllStatuses and "All") or self.Statuses
+		if not isStatusType then
+			MasteryBonusManager.RegisterBonusStatusListener("Attempt", statuses, self, callback, checkBonusOn)
+		else
+			MasteryBonusManager.RegisterBonusStatusTypeListener("Attempt", statuses, self, callback, checkBonusOn)
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback function
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificStatuses string|string[]|nil
+---@param isStatusType boolean|nil
+---@return MasteryBonusData
+function _INTERNALREG.StatusApplied(self, callback, checkBonusOn, specificStatuses, isStatusType)
+	if not _ISCLIENT then
+		local statuses = specificStatuses or (self.AllStatuses and "All") or self.Statuses
+		if not isStatusType then
+			MasteryBonusManager.RegisterBonusStatusListener("Applied", statuses, self, callback, checkBonusOn)
+		else
+			MasteryBonusManager.RegisterBonusStatusTypeListener("Applied", statuses, self, callback, checkBonusOn)
+		end
+	end
+	return self
+end
+
+---@param self MasteryBonusData
+---@param callback function
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param specificStatuses string|string[]|nil
+---@param isStatusType boolean|nil
+---@return MasteryBonusData
+function _INTERNALREG.StatusRemoved(self, callback, checkBonusOn, specificStatuses, isStatusType)
+	if not _ISCLIENT then
+		checkBonusOn = checkBonusOn or "Target"
+		local statuses = specificStatuses or (self.AllStatuses and "All") or self.Statuses
+		if not isStatusType then
+			MasteryBonusManager.RegisterBonusStatusListener("Removed", statuses, self, callback, checkBonusOn)
+		else
+			MasteryBonusManager.RegisterBonusStatusTypeListener("Removed", statuses, self, callback, checkBonusOn)
 		end
 	end
 	return self
@@ -485,55 +637,6 @@ end
 function _INTERNALREG.Test(self, operation)
 	if not _ISCLIENT and Vars.DebugMode then
 		MasteryTesting.RegisterTest(self.ID, operation, {Params={self}})
-	end
-	return self
-end
-
----@param skillType string
----@param callback WeaponExpansionMasterySkillListenerCallback
----@param checkBonusOn MasteryBonusCheckTarget|nil
----@return MasteryBonusData
-function MasteryBonusData:RegisterSkillTypeListener(skillType, callback,
-	checkBonusOn)
-	if not _ISCLIENT then
-		MasteryBonusManager.RegisterSkillTypeListener(skillType, self.ID, callback, checkBonusOn)
-	end
-	return self
-end
-
----@param event StatusEventID
----@param callback MasteryBonusStatusCallback
----@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
----@param checkBonusOn MasteryBonusCheckTarget|nil
----@return MasteryBonusData
-function MasteryBonusData:RegisterStatusListener(event, callback, specificStatuses, checkBonusOn)
-	if not _ISCLIENT then
-		MasteryBonusManager.RegisterStatusListener(event, specificStatuses or self.Statuses, self.ID, callback, checkBonusOn)
-	end
-	return self
-end
-
----@param event StatusEventID
----@param callback MasteryBonusStatusCallback
----@param statusType string|string[]
----@param checkBonusOn MasteryBonusCheckTarget|nil
----@return MasteryBonusData
-function MasteryBonusData:RegisterStatusTypeListener(event, callback, statusType, checkBonusOn)
-	if not _ISCLIENT then
-		MasteryBonusManager.RegisterStatusTypeListener(event, statusType, self.ID, callback, checkBonusOn)
-	end
-	return self
-end
-
----@param callback MasteryBonusStatusBeforeAttemptCallback
----@param specificStatuses string|string[] If set, these statuses will be used instead of the Statuses table. Use this to show text in a specific set of statuses, but listen for a different status.
----@param skipBonusCheck boolean|nil
----@param checkBonusOn MasteryBonusCheckTarget|nil
----@return MasteryBonusData
-function MasteryBonusData:RegisterStatusBeforeAttemptListener(callback, specificStatuses, skipBonusCheck, checkBonusOn)
-	if not _ISCLIENT then
-		MasteryBonusManager.RegisterStatusBeforeAttemptListener(specificStatuses or self.Statuses, self.ID,
-		callback, skipBonusCheck, checkBonusOn)
 	end
 	return self
 end
@@ -576,51 +679,6 @@ function MasteryBonusData:RegisterOsirisListener(event, arity, state, callback, 
 				end
 			end
 			RegisterProtectedOsirisListener(event, arity, state, wrapper)
-		end
-	end
-	return self
-end
-
----@param callback fun(uuid:UUID):void
----@param skipBonusCheck boolean
----@return MasteryBonusData
-function MasteryBonusData:RegisterTurnDelayedListener(callback, skipBonusCheck)
-	if not _ISCLIENT then
-		if skipBonusCheck then
-			RegisterListener("TurnDelayed", callback)
-		else
-			local wrapper = function(character)
-				if MasteryBonusManager.HasMasteryBonus(character, self.ID) then
-					local b,err = xpcall(callback, debug.traceback, character)
-					if not b then
-						Ext.PrintError(err)
-					end
-				end
-			end
-			RegisterListener("TurnDelayed", wrapper)
-		end
-	end
-	return self
-end
-
----@param id string
----@param callback TurnCounterCallback
----@param skipBonusCheck boolean
----@return MasteryBonusData
-function MasteryBonusData:RegisterTurnCounterListener(id, callback, skipBonusCheck)
-	if not _ISCLIENT then
-		if skipBonusCheck then
-			TurnCounter.Subscribe(id, callback)
-		else
-			local wrapper = function(counterId, turnCount, lastTurn, finished, data)
-				if data.Target and MasteryBonusManager.HasMasteryBonus(data.Target, self.ID) then
-					local b,err = xpcall(callback, debug.traceback, counterId, turnCount, lastTurn, finished, data)
-					if not b then
-						Ext.PrintError(err)
-					end
-				end
-			end
-			TurnCounter.Subscribe(id, wrapper)
 		end
 	end
 	return self
@@ -680,7 +738,7 @@ end
 ---@param character EclCharacter
 ---@param skillOrStatus string|nil
 ---@param tooltipType MasteryBonusDataTooltipID|nil
----@return TranslatedString
+---@return string|nil
 function MasteryBonusData:GetTooltipText(character, skillOrStatus, tooltipType, ...)
 	local text = TryGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
 	if text then

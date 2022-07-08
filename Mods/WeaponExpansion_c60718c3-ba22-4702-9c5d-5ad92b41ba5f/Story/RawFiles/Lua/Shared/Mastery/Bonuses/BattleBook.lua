@@ -5,7 +5,7 @@ local _ISCLIENT = Ext.IsClient()
 
 local _eqSet = "Class_LLWEAPONEX_BattleScholar_Preview"
 
-Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords = {
+MasteryBonusManager.Vars.BattleBookBookcaseRootTemplateWords = {
 	Cont_Bookcase = true,
 }
 
@@ -14,7 +14,7 @@ local function IsBookcase(template)
 	local root = Ext.Template.GetTemplate(template)
 	if root then
 		for _,v in pairs(root.Treasures) do
-			if Mastery.Variables.Bonuses.BattleBookBookcaseRootTemplateWords[v] == true then
+			if MasteryBonusManager.Vars.BattleBookBookcaseRootTemplateWords[v] == true then
 				return true
 			end
 		end
@@ -68,17 +68,17 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 				SignalTestComplete("BATTLEBOOK_FIRST_AID_BonusHealApplied")
 			end)
 		end
-	end).__self:RegisterStatusListener("Applied", function(bonuses, target, status, source)
-		if bonuses.HasBonus("BATTLEBOOK_FIRST_AID", source) then
+	end).StatusApplied(function(self, e, bonuses)
+		if bonuses.HasBonus("BATTLEBOOK_FIRST_AID", e.Source) then
 			local turnBonus = GameHelpers.GetExtraData("LLWEAPONEX_MB_BattleBook_Rested_TurnBonus", 1)
 			if turnBonus > 0 then
-				GameHelpers.Status.ExtendTurns(target, status, turnBonus, true, false)
+				GameHelpers.Status.ExtendTurns(e.Target, e.Status, turnBonus, true, false)
 				SignalTestComplete("BATTLEBOOK_FIRST_AID_TurnsExtended")
 			end
 		end
-	end, nil, "Source"):RegisterStatusListener("Removed", function(bonuses, target, status)
-		ClearTag(target, "LLWEAPONEX_BattleBook_FirstAid_Active")
-	end, nil, "None").Register.Test(function(test, self)
+	end, "Source").StatusRemoved(function(self, e, bonuses)
+		ClearTag(e.TargetGUID, "LLWEAPONEX_BattleBook_FirstAid_Active")
+	end, "None").Test(function(test, self)
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
@@ -138,7 +138,7 @@ if not _ISCLIENT then
 	--Allows mods to change this
 
 	---The skill used when creating a secondary ground smash, for the `BATTLEBOOK_TECTONICSHIFT` bonus.
-	Mastery.Variables.Bonuses.BattleBookGroundSmashBonusSkill = "Cone_LLWEAPONEX_MasteryBonus_BattleBook_GroundSmashBonus"
+	MasteryBonusManager.Vars.BattleBookGroundSmashBonusSkill = "Cone_LLWEAPONEX_MasteryBonus_BattleBook_GroundSmashBonus"
 
 	Timer.Subscribe("LLWEAPONEX_BattleBook_BattleStompBonus", function (e)
 		if e.Data.UUID and e.Data.Target and e.Data.Source then
@@ -151,7 +151,7 @@ if not _ISCLIENT then
 			PlayEffectAtPositionAndRotation("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", sx, sy, sz, rot)
 			--EffectManager.PlayEffectAt("RS3_FX_Skills_Warrior_GroundSmash_Cast_01", me.WorldPos, {Rotation=me.Stats.Rotation})
 			--Timer._Internal.ClearObjectData("LLWEAPONEX_BattleBook_BattleStompBonus", e.Data.UUID)
-			GameHelpers.Skill.ShootZoneAt(Mastery.Variables.Bonuses.BattleBookGroundSmashBonusSkill, caster, {tx,ty,tz}, {Position = {sx,sy,sz}, SurfaceType="Sentinel"})
+			GameHelpers.Skill.ShootZoneAt(MasteryBonusManager.Vars.BattleBookGroundSmashBonusSkill, caster, {tx,ty,tz}, {Position = {sx,sy,sz}, SurfaceType="Sentinel"})
 			SignalTestComplete("BATTLEBOOK_TECTONICSHIFT")
 		end
 	end)
@@ -408,11 +408,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 				SignalTestComplete("BATTLEBOOK_CHALLENGE_Active")
 			end
 		end, e.Data.TargetMode.Objects)
-	end).__self:RegisterStatusListener("Removed", function(bonuses, targetGUID, status, source, statusType)
-		if IsTagged(targetGUID, "LLWEAPONEX_BattleBook_ChallengeActive") then
-			ClearTag(targetGUID, "LLWEAPONEX_BattleBook_ChallengeActive")
+	end).StatusRemoved(function(self, e, bonuses)
+		if e.Target:HasTag("LLWEAPONEX_BattleBook_ChallengeActive") then
+			ClearTag(e.TargetGUID, "LLWEAPONEX_BattleBook_ChallengeActive")
 		end
-	end, nil, "None"):RegisterStatusListener("Applied", function(bonuses, challengerGUID, status, source, statusType)
+	end, "None").StatusApplied(function(self, e, bonuses)
+		local challengerGUID = e.TargetGUID
 		local targetGUID = PersistentVars.MasteryMechanics.BattlebookChallenge[challengerGUID]
 		if targetGUID then
 			SetTag(targetGUID, "LLWEAPONEX_BattleBook_ChallengeBookGranted")
@@ -463,7 +464,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 			end
 			PersistentVars.MasteryMechanics.BattlebookChallenge[challengerGUID] = nil
 		end
-	end, "CHALLENGE_WIN", "Target").Register.Test(function(test, self)
+	end, "Target", "CHALLENGE_WIN").Test(function(test, self)
 		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)

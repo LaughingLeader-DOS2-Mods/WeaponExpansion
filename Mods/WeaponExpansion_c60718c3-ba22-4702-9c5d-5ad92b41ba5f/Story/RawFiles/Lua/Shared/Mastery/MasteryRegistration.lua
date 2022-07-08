@@ -42,27 +42,3 @@ function Mastery.Register.NewRankText(mastery, rank, stringKey, defaultEnabled)
 	end
 	Mastery.AdditionalRankText[mastery][rank][stringKey] = defaultEnabled
 end
-
-if Ext.IsServer() then
-	---@param skill string|string[]
-	---@param matchBonuses string|string[]
-	---@param callback WeaponExpansionMasterySkillListenerCallback
-	function Mastery.Register.SkillListener(skill, matchBonuses, callback)
-		MasteryBonusManager.RegisterSkillListener(skill, matchBonuses, callback)
-	end
-
-	---@param skillType string|string[]
-	---@param matchBonuses string|string[]
-	---@param callback WeaponExpansionMasterySkillListenerCallback
-	function Mastery.Register.SkillTypeListener(skillType, matchBonuses, callback)
-		MasteryBonusManager.RegisterSkillTypeListener(skillType, matchBonuses, callback)
-	end
-
-	---@param event string
-	---@param status string|string[]
-	---@param matchBonuses string|string[]
-	---@param callback MasteryBonusStatusCallback
-	function Mastery.Register.StatusListener(event, status, matchBonuses, callback)
-		MasteryBonusManager.RegisterStatusListener(event, status, matchBonuses, callback)
-	end
-end

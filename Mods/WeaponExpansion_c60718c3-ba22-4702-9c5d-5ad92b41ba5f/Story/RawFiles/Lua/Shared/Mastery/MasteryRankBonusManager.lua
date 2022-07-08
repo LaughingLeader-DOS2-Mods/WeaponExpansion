@@ -12,9 +12,15 @@ local _type = type
 ---@field HasBonus fun(id:string, target:CharacterParam|nil):boolean
 
 MasteryBonusManager = {
+	---Specific tables or variables used in bonus logic scripts. Made global so mods can access/change them.
 	Vars = {
 		RushSkills = {"Rush_BatteringRam", "Rush_BullRush", "Rush_EnemyBatteringRam", "Rush_EnemyBullRush"},
-		BasicAttack = {"ActionAttackGround"}
+		BasicAttack = {"ActionAttackGround"},
+		---Skills to enable piercing projectiles for at Bow rank 4. Should be RangedWeapon projectile skills that don't already pierce or fork.
+		---@type table<string,boolean>
+		BowProjectilePiercingSkills = {},
+		---Used for the Bow Rank 4 bonus BOW_FARSIGHT, in case a mod changed the status.
+		FarsightAppliedStatuses = {"FARSIGHT"}
 	},
 	---The string format for mastery rank tags, set on a character.
 	MasteryRankTagFormatString = "%s_Mastery%i"
@@ -27,6 +33,12 @@ MasteryBonusManager._INTERNAL = _INTERNAL
 local _registeredBonuses = {}
 
 local masteryRankBonusPattern = "(.-)_Mastery(%d+)"
+
+local _EMPTYBONUSES = {HasBonus = function() end}
+setmetatable(_EMPTYBONUSES, {
+	__index = function () return false end,
+	__newindex = function () return nil end
+})
 
 ---@deprecated
 Mastery.Bonuses = {}
@@ -70,8 +82,6 @@ MasteryDataClasses.BonusIDEntry = {
 	end
 }
 
-local _EmptyBonuses = {HasBonus=function() return false end}
-
 ---@param char string
 ---@param skill string|nil Optional skill to filter with.
 ---@return table<string, boolean>
@@ -80,8 +90,9 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	local character = GameHelpers.GetCharacter(char)
 	local bonuses = {}
 	if character then
+		local _TAGS = GameHelpers.GetAllTags(character, true, true)
 		for tag,tbl in pairs(_registeredBonuses) do
-			if Mastery.HasMasteryRequirement(character, tag) then
+			if Mastery.HasMasteryRequirement(character, tag, false, _TAGS) then
 				for _,v in pairs(tbl) do
 					if v.ID then
 						bonuses[v.ID] = true
@@ -148,8 +159,9 @@ function MasteryBonusManager.HasMasteryBonus(character, bonus, skipWeaponCheck)
 	---@type EsvCharacter|EclCharacter
 	local character = GameHelpers.GetCharacter(character)
 	if character then
+		local _TAGS = GameHelpers.GetAllTags(character, true, true)
 		for tag,tbl in pairs(_registeredBonuses) do
-			if Mastery.HasMasteryRequirement(character, tag, skipWeaponCheck) then
+			if Mastery.HasMasteryRequirement(character, tag, skipWeaponCheck, _TAGS) then
 				for _,bonusData in pairs(tbl) do
 					if bonusData.ID == bonus then
 						return true
@@ -293,31 +305,61 @@ function MasteryBonusManager.RegisterOnHealListener(matchBonuses, callback, chec
 	Events.OnHeal:Subscribe(wrapperCallback)
 end
 
-local function OnSkillTypeCallback(callback, matchBonuses, uuid, checkBonusOn, ...)
-	checkBonusOn = checkBonusOn or "Source"
-	local bonuses = GatherMasteryBonuses(checkBonusOn, uuid, nil)
-	if checkBonusOn == "None" or HasMatchedBonuses(bonuses, matchBonuses) then
-		callback(bonuses, uuid, ...)
+---@param statusEvent StatusEventID
+---@param status string|string[]
+---@param bonus MasteryBonusData
+---@param callback fun(bonus:MasteryBonusData, e:EmptyEventArgs, bonuses:MasteryActiveBonusesTable|MasteryActiveBonuses)
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
+---@param once boolean|nil
+function MasteryBonusManager.RegisterBonusStatusListener(statusEvent, status, bonus, callback, checkBonusOn, priority, once)
+	if _ISCLIENT then return end
+	checkBonusOn = checkBonusOn or "Any"
+
+	if checkBonusOn ~= "None" then
+		---@param e OnStatusEventArgs
+		local wrapperCallback = function(e)
+			local bonuses = GatherMasteryBonuses(checkBonusOn, e.Source, e.Target)
+			if HasMatchedBonuses(bonuses, bonus.ID) then
+				callback(bonus, e, bonuses)
+			end
+		end
+		StatusManager.Subscribe.All(status, wrapperCallback, priority, statusEvent)
+	else
+		---@param e OnStatusEventArgs
+		local wrapperCallback = function(e)
+			callback(bonus, e, _EMPTYBONUSES)
+		end
+		StatusManager.Subscribe.All(status, wrapperCallback, priority, statusEvent)
 	end
 end
 
----@param skillType string|string[]
----@param matchBonuses string|string[]
----@param callback WeaponExpansionMasterySkillListenerCallback
----@param checkBonusOn MasteryBonusCheckTarget
-function MasteryBonusManager.RegisterSkillTypeListener(skillType, matchBonuses,
-	callback, checkBonusOn)
-	checkBonusOn = checkBonusOn or "Source"
-	if _type(skillType) == "table" then
-		for i,v in pairs(skillType) do
-			SkillManager.RegisterTypeListener(v, function(uuid, ...)
-				OnSkillTypeCallback(callback, matchBonuses, uuid, checkBonusOn, ...)
-			end)
-		end
+---@param statusEvent StatusEventID
+---@param statusType string|string[]
+---@param bonus MasteryBonusData
+---@param callback fun(bonus:MasteryBonusData, e:EmptyEventArgs, bonuses:MasteryActiveBonusesTable|MasteryActiveBonuses)
+---@param checkBonusOn MasteryBonusCheckTarget|nil
+---@param priority integer|nil
+---@param once boolean|nil
+function MasteryBonusManager.RegisterBonusStatusTypeListener(statusEvent, statusType, bonus, callback, checkBonusOn, priority, once)
+	if _ISCLIENT then return end
+	checkBonusOn = checkBonusOn or "Any"
+
+	if checkBonusOn ~= "None" then
+		---@param e OnStatusEventArgs
+		local wrapperCallback = function(e)
+			local bonuses = GatherMasteryBonuses(checkBonusOn, e.Source, e.Target)
+			if HasMatchedBonuses(bonuses, bonus.ID) then
+				callback(bonus, e, bonuses)
+			end
+		end	
+		StatusManager.Subscribe.All(statusType, wrapperCallback, priority, statusEvent)
 	else
-		SkillManager.RegisterTypeListener(skillType, function(uuid, ...)
-			OnSkillTypeCallback(callback, matchBonuses, uuid, checkBonusOn, ...)
-		end)
+		---@param e OnStatusEventArgs
+		local wrapperCallback = function(e)
+			callback(bonus, e, _EMPTYBONUSES)
+		end
+		StatusManager.Subscribe.All(statusType, wrapperCallback, priority, statusEvent)
 	end
 end
 
@@ -396,7 +438,7 @@ local function OnBeforeStatusAttemptCallback(callback, matchBonuses, target, sta
 				end
 			end
 		else
-			local b,result = xpcall(callback, debug.traceback, _EmptyBonuses, target, status, source, statusType)
+			local b,result = xpcall(callback, debug.traceback, _EMPTYBONUSES, target, status, source, statusType)
 			if b then
 				return result
 			else
@@ -624,19 +666,20 @@ local function EvaluateEntryForBonusText(data, character, skillOrStatus, tooltip
 			return bonusText
 		end
 	else
+		local _TAGS = GameHelpers.GetAllTags(character, true, true)
 		--Old style
 		local bonusIsActive = true
 		if data.Active ~= nil and data.Active.Type == "Tag" then
 			if data.Active.Source == true and _type(status) == "userdata" then
-				if status.StatusSourceHandle ~= nil then
+				if GameHelpers.IsValidHandle(status.StatusSourceHandle) then
 					local source = GameHelpers.GetCharacter(status.StatusSourceHandle)
 					if source then
 						bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(source, data.Active.Value)
 					end
 				end
-				bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
-			else
-				bonusIsActive = GameHelpers.CharacterOrEquipmentHasTag(character, data.Active.Value)
+			end
+			if not bonusIsActive then
+				bonusIsActive = _TAGS[data.Active.Value] == true
 			end
 		end
 		if bonusIsActive then
@@ -679,8 +722,14 @@ function MasteryBonusManager.GetBonusText(character, skillOrStatus, tooltipType,
 	local textEntries = {}
 	--Allow clients to view mastery bonuses for statuses affecting other objects
 	local client = Client:GetCharacter()
+	local _TAGS = GameHelpers.GetAllTags(character, true, true)
+	if client.MyGuid ~= character.MyGuid then
+		for tag,b in pairs(GameHelpers.GetAllTags(character, true, true)) do
+			_TAGS[tag] = true
+		end
+	end
 	for rankTag,tbl in MasteryBonusManager.GetOrderedMasteryRanks() do
-		if Mastery.HasMasteryRequirement(character, rankTag) or Mastery.HasMasteryRequirement(client, rankTag) then
+		if Mastery.HasMasteryRequirement(character, rankTag, false, _TAGS) or Mastery.HasMasteryRequirement(client, rankTag, false, _TAGS) then
 			local addedRankName = false
 			for _,v in pairs(tbl) do
 				local text = EvaluateEntryForBonusText(v, character, skillOrStatus, tooltipType, ...)

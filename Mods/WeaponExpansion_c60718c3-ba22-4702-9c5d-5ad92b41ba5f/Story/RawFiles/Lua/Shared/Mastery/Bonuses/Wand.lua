@@ -9,7 +9,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 			if tooltipType == "skill" then
 				if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Wand_Equipped") then
 					if id == "ActionAttackGround" then
-						return Mastery.Variables.Bonuses.HasElementalWeaknessWeapon(character)
+						return MasteryBonusManager.Vars.HasElementalWeaknessWeapon(character)
 					end
 				end
 			end
@@ -23,7 +23,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Wand, 1, {
 					if weapon and weapon.ItemType == "Weapon" then
 						for i, stat in pairs(weapon.Stats.DynamicStats) do
 							if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
-								local status = Mastery.Variables.Bonuses.ElementalWeaknessStatuses[stat.DamageType]
+								local status = MasteryBonusManager.Vars.ElementalWeaknessStatuses[stat.DamageType]
 								if status then
 									GameHelpers.Status.Apply(e.Target, status, duration, false, e.Attacker, 1.1)
 								end
@@ -155,7 +155,7 @@ if not Ext.IsClient() then
 	_skillToSurfaces.Projectile_EnemyPoisonDartStart = _skillToSurfaces.Projectile_PoisonDartStart
 	_skillToSurfaces.Projectile_EnemyPyroclasticRock = _skillToSurfaces.Projectile_PyroclasticRock
 	
-	Mastery.Variables.Bonuses.WandSkillToSurfaces = _skillToSurfaces
+	MasteryBonusManager.Vars.WandSkillToSurfaces = _skillToSurfaces
 
 	local surfaceBoostText = ts:CreateFromKey("LLWEAPONEX_StatusText_Wand_FireSurfaceBonus", "<font color='#B658FF'>Wand Mastery: [1] Surface Spell Boost!</font>")
 	
@@ -205,7 +205,7 @@ if not Ext.IsClient() then
 	_specialSkillSurfaceCallback.Projectile_EnemyLightningBolt = _specialSkillSurfaceCallback.Projectile_LightningBolt
 	_specialSkillSurfaceCallback.Projectile_EnemyPoisonDartStart = _specialSkillSurfaceCallback.Projectile_PoisonDartStart
 	_specialSkillSurfaceCallback.Projectile_EnemyPyroclasticRock = _specialSkillSurfaceCallback.Projectile_PyroclasticRock
-	Mastery.Variables.Bonuses.WandSkillToSurfaceCallback = _specialSkillSurfaceCallback
+	MasteryBonusManager.Vars.WandSkillToSurfaceCallback = _specialSkillSurfaceCallback
 
 	local _JustRanWandSurfaceBonus = {}
 

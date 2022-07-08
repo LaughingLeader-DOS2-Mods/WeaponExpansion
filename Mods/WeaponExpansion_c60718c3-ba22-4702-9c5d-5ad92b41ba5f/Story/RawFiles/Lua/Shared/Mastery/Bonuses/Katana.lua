@@ -363,8 +363,8 @@ if not Vars.IsClient then
 	end)
 
 	StatusManager.Register.Removed(ComboStatuses, function(target, status, ...)
-		if not HasComboStatus(target) then
-			CheckActiveCombo(target)
+		if target and not HasComboStatus(target.MyGuid) then
+			CheckActiveCombo(target.MyGuid)
 		end
 	end)
 

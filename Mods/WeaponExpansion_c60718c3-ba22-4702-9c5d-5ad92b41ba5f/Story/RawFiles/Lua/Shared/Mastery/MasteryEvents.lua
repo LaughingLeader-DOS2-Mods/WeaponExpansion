@@ -7,7 +7,7 @@ end
 ---@field Character EsvCharacter
 ---@field Enabled boolean
 
----@type SubscribableEvent<MasteryChangedEventArgs>
+---@type LeaderLibSubscribableEvent<MasteryChangedEventArgs>
 Mastery.Events.MasteryChanged = Classes.SubscribableEvent:Create("MasteryChanged")
 
 if not Ext.IsClient() then

@@ -37,9 +37,9 @@ local defaultPersistentVars = {
         CrossbowRicochetHits = {},
         ---@type table<UUID,number[]>
         StillStanceLastPosition = {},
-        ---@type table<UUID,integer[]>
+        ---@type table<UUID,integer>
         SneakingTurnsInCombat = {},
-        ---@type table<UUID,integer[]>
+        ---@type table<UUID,integer>
         BlinkStrikeTargetsHit = {},
         ---Challenger and the target.
         ---@type table<UUID,UUID>
@@ -51,6 +51,11 @@ local defaultPersistentVars = {
         BowExplosiveRainArrowCount = {},
         ---@type table<UUID,{Hits:integer, Target:UUID}>
         BowCumulativeCriticalChance = {},
+        ---Skill ID, GUID to boolean
+        ---@type table<string,table<UUID,boolean>>
+        BowCastingPiercingSkill = {},
+        ---@type table<UUID,integer>
+        BowFarsightAttacks = {},
     },
     Timers = {},
     OnDeath = {},
@@ -109,7 +114,6 @@ Ext.Require("Server/Runeblades/__Init.lua")
 Ext.Require("Server/System/DeathManager.lua")
 Ext.Require("Server/Skills/ElementalFirearms.lua")
 Ext.Require("Server/Skills/PrepareEffects.lua")
-Ext.Require("Server/Skills/SkillManager.lua")
 Ext.Require("Server/Skills/SkillListeners.lua")
 Ext.Require("Server/Skills/RemoteMines.lua")
 Ext.Require("Server/MasteryExperience.lua")

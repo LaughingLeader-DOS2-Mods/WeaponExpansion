@@ -18,7 +18,7 @@ local warChargeStatuses = {
 	"LLWEAPONEX_WARCHARGE10",
 }
 
-Mastery.Variables.Bonuses.WarChargeStatuses = warChargeStatuses
+MasteryBonusManager.Vars.WarChargeStatuses = warChargeStatuses
 
 local inspireCleanseStatuses = {
 	FEAR = "#7F00FF",
@@ -26,7 +26,7 @@ local inspireCleanseStatuses = {
 	SLEEPING = "#7D71D9",
 }
 
-Mastery.Variables.Bonuses.BannerInspireCleanseStatuses = inspireCleanseStatuses
+MasteryBonusManager.Vars.BannerInspireCleanseStatuses = inspireCleanseStatuses
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 	rb:Create("BANNER_WARCHARGE", {
@@ -81,27 +81,27 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_Encourage", "<font color='#FFCE58'>Fear, Madness, and Sleep are cleansed from encouraged allies.</font>"),
 		Statuses = {"ENCOURAGED"},
 		DisableStatusTooltip = true
-	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
-		if bonuses.HasBonus("BANNER_INSPIRE", source) then
+	}).Register.StatusApplied(function(self, e, bonuses)
+		if bonuses.HasBonus("BANNER_INSPIRE", e.Source) then
 			local cleansed = {}
 			for status,color in pairs(inspireCleanseStatuses) do
-				if GameHelpers.Status.IsActive(target, status) then
-					GameHelpers.Status.Remove(target, status)
+				if GameHelpers.Status.IsActive(e.Target, status) then
+					GameHelpers.Status.Remove(e.Target, status)
 					cleansed[#cleansed+1] = string.format("<font color='%s'>%s</font>", color, GameHelpers.GetStringKeyText(Ext.StatGetAttribute(status, "DisplayName")))
 				end
 			end
 			if #cleansed > 0 then
 				--PlayBeamEffect(source, target, "RS3_FX_GP_Status_Retaliation_Beam_01", "Dummy_R_HandFX", "Dummy_BodyFX")
-				GameHelpers.Status.Apply(target, "LLWEAPONEX_ENCOURAGED_CLEANSE_BEAM_FX", 0, true, source)
+				GameHelpers.Status.Apply(e.Target, "LLWEAPONEX_ENCOURAGED_CLEANSE_BEAM_FX", 0, true, e.Source)
 				--EffectManager.PlayEffect("RS3_FX_GP_Status_Retaliation_Beam_01", target, {BeamTarget=target, BeamTargetBone = "Dummy_HeadFX", Bone="Dummy_FX_01"})
 				local text = GameHelpers.GetStringKeyText("LLWEAPONEX_StatusText_Encourage_Cleansed"):gsub("%[1%]", Common.StringJoin("/", cleansed))
-				CharacterStatusText(target, text)
+				CharacterStatusText(e.TargetGUID, text)
 				SignalTestComplete("BANNER_INSPIRE")
 				local stat = Ext.GetStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX"); stat.BeamEffect = ""; stat.ApplyEffect = "RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX"; Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", false)
 				local stat = Ext.GetStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX"); stat.BeamEffect = "RS3_FX_Skills_Water_ChainHeal_Beam_01:Dummy_FX_01:Dummy_BodyFX"; stat.ApplyEffect = ""; Ext.SyncStat("LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_BEAM_FX", false)
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		--Inspire cleanses certain negative statuses
 		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
 		test.Cleanup = cleanup
@@ -132,28 +132,28 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_RallyingCry", "<font color='#88FF33'>Affected allies will basic attack the nearest enemy within range.</font>"),
 		Statuses = {"HARMONY"},
 		DisableStatusTooltip = true
-	}):RegisterStatusListener("Applied", function(bonuses, ally, status, source, statusType)
-		if (ObjectIsCharacter(ally) == 1
-		and not GameHelpers.Status.IsDisabled(ally, true)
-		and NRD_ObjectHasStatusType(ally, "DISARMED") == 0
-		and bonuses.HasBonus("BANNER_RALLYINGCRY", source)) then
+	}).Register.StatusApplied(function(self, e, bonuses)
+		if (ObjectIsCharacter(e.TargetGUID) == 1
+		and not GameHelpers.Status.IsDisabled(e.Target, true)
+		and not GameHelpers.Status.HasStatusType(e.Target, "DISARMED")
+		and bonuses.HasBonus("BANNER_RALLYINGCRY", e.Source)) then
 			local range = 1.0
-			local weapon = GameHelpers.Character.GetEquippedWeapons(ally)
+			local weapon = GameHelpers.Character.GetEquippedWeapons(e.Target)
 			if weapon ~= nil then
 				range = weapon.Stats.WeaponRange / 100
 			end
 
 			---@type EsvCharacter[]
-			local targets = GameHelpers.Grid.GetNearbyObjects(ally, {AsTable=true, Radius=range, Relation={Enemy=true}, Type="Character"})
+			local targets = GameHelpers.Grid.GetNearbyObjects(e.Target, {AsTable=true, Radius=range, Relation={Enemy=true}, Type="Character"})
 
 			if #targets > 0 then
 				---@type EsvCharacter
 				local attackTarget = Common.GetRandomTableEntry(targets)
-				CharacterAttack(ally, attackTarget.MyGuid)
+				CharacterAttack(e.TargetGUID, attackTarget.MyGuid)
 				SignalTestComplete("BANNER_RALLYINGCRY")
 			end
 		end
-	end).Register.Test(function(test, self)
+	end).Test(function(test, self)
 		--Target of Harmony automatically basic attacks a nearby enemy
 		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
@@ -174,18 +174,18 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_GuardianAngelSkill", "<font color='#00FFFF'>If an ally protected by Guardian Angel dies, automatically resurrect them at the start of your turn.</font>"),
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_GuardianAngelStatus", "<font color='#00FFFF'>If killed, character will be resurrected by the Guardian when their turn starts.</font>"),
 		Statuses = {"GUARDIAN_ANGEL"},
-	}):RegisterStatusListener("Applied", function(bonuses, target, status, source, statusType)
+	}).Register.StatusApplied(function(self, e, bonuses)
 		--Skip providing this bonus if the source is already protected by the target, to prevent immortality
-		if bonuses.HasBonus("BANNER_GUARDIAN_ANGEL", source)
-		and PersistentVars.MasteryMechanics.GuardianAngelResurrect[source] ~= target
-		and source ~= target then
-			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = source
+		if bonuses.HasBonus("BANNER_GUARDIAN_ANGEL", e.Source)
+		and PersistentVars.MasteryMechanics.GuardianAngelResurrect[e.SourceGUID] ~= e.TargetGUID
+		and e.SourceGUID ~= e.TargetGUID then
+			PersistentVars.MasteryMechanics.GuardianAngelResurrect[e.TargetGUID] = e.SourceGUID
 		end
-	end):RegisterStatusListener("Removed", function(bonuses, target, status, source, statusType)
-		if not GameHelpers.Status.IsActive(target, "DYING") then
-			PersistentVars.MasteryMechanics.GuardianAngelResurrect[target] = nil
+	end).StatusRemoved(function(self, e, bonuses)
+		if not GameHelpers.Status.IsActive(e.Target, "DYING") then
+			PersistentVars.MasteryMechanics.GuardianAngelResurrect[e.TargetGUID] = nil
 		end
-	end, nil, "None").Register.Osiris("CharacterPrecogDying", 1, "after", function(char)
+	end, nil, "None").Osiris("CharacterPrecogDying", 1, "after", function(char)
 		char = StringHelpers.GetUUID(char)
 		if PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] then
 			local sourceCharacter = GameHelpers.GetCharacter(PersistentVars.MasteryMechanics.GuardianAngelResurrect[char])
@@ -319,7 +319,7 @@ end
 --Mods.LeaderLib.EffectManager.PlayClientEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01,Beam:Dummy_FX_01,Dummy_BodyFX", me.NetID, {Target=Mods.LeaderLib.GameHelpers.GetNetID(Mods.WeaponExpansion.Origin.Harken)})
 --Mods.LeaderLib.EffectManager.PlayEffect("RS3_FX_Skills_Water_ChainHeal_Beam_01", me.MyGuid, {BeamTarget=Mods.WeaponExpansion.Origin.Harken, BeamTargetBone="Dummy_BodyFX", Bone="Dummy_FX_01"})
 
-Mastery.Variables.Bonuses.BannerIgnoredHealingStatuses = {
+MasteryBonusManager.Vars.BannerIgnoredHealingStatuses = {
 	POST_MAGIC_CONTROL = true,
 	POST_PHYS_CONTROL = true,
 }
@@ -465,7 +465,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 	}).Register.Healed(function(self, e, bonuses)
 		if e.Heal.StatusId ~= "LLWEAPONEX_MASTERYBONUS_BANNER_COOPERATION_HEAL"
 		and (e.Heal.HealType == "All" or e.Heal.HealType == "Vitality")
-		and not Mastery.Variables.Bonuses.BannerIgnoredHealingStatuses[e.Heal.StatusId] then
+		and not MasteryBonusManager.Vars.BannerIgnoredHealingStatuses[e.Heal.StatusId] then
 			local radius = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingShareRadius", 6.0)
 			local percentage = GameHelpers.GetExtraData("LLWEAPONEX_MB_Banner_Cooperation_HealingSharePercentage", 50.0)
 			if radius > 0 and percentage > 0 then
@@ -550,9 +550,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		Statuses = {"LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS", "LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS"},
 		StatusTooltip = ts:CreateFromKey("LLWEAPONEX_MB_Banner_BannerAuraStatusProtection","<font color='#C9AA58'>Immune to Flanking</font><br><font color='#33FF33'>Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.</font>"),
 		GetIsTooltipActive = rb.DefaultStatusTagCheck("LLWEAPONEX_Banner_Mastery4", true)
-	}):RegisterStatusBeforeAttemptListener(function(bonuses, target, status, source, handle, statusType)
+	}).Register.StatusBeforeAttempt(function(self, e, bonuses)
 		local statusSource = nil
-		local auraStatus = target:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or target:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")
+		local auraStatus = e.Target:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or e.Target:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")
 		if auraStatus then
 			statusSource = auraStatus.StatusSourceHandle
 		end
@@ -560,10 +560,10 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 			local statusSource = GameHelpers.GetCharacter(statusSource)
 			if statusSource then
 				local hasBonus = false
-				if statusSource.MyGuid ~= target.MyGuid then
+				if statusSource.MyGuid ~= e.TargetGUID then
 					hasBonus = MasteryBonusManager.GetMasteryBonuses(statusSource).BANNER_PROTECTION == true
 				else
-					hasBonus = bonuses.HasBonus("BANNER_PROTECTION", target.MyGuid)
+					hasBonus = bonuses.HasBonus("BANNER_PROTECTION", e.Target)
 				end
 				if hasBonus then
 					--Block FLANKED
@@ -572,7 +572,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 				end
 			end
 		end
-	end, "FLANKED", false, "Target").Register.Test(function(test, self)
+	end, "Target", "FLANKED").Test(function(test, self)
 		--Block flanking
 		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup

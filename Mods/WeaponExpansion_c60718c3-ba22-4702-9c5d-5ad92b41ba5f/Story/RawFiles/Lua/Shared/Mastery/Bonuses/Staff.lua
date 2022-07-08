@@ -1,7 +1,7 @@
 local ts = Classes.TranslatedString
 local rb = MasteryDataClasses.MasteryBonusData
 
-Mastery.Variables.Bonuses.ElementalWeaknessStatuses = {
+MasteryBonusManager.Vars.ElementalWeaknessStatuses = {
 	Air = "LLWEAPONEX_WEAKNESS_AIR",
 	Chaos = "LLWEAPONEX_WEAKNESS_CHAOS",
 	Earth = "LLWEAPONEX_WEAKNESS_EARTH",
@@ -33,7 +33,7 @@ local function GetElementForWeapon(weapon)
 		local stats = weapon.DynamicStats
 		for i,stat in pairs(stats) do
 			if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
-				local status = Mastery.Variables.Bonuses.ElementalWeaknessStatuses[stat.DamageType]
+				local status = MasteryBonusManager.Vars.ElementalWeaknessStatuses[stat.DamageType]
 				if status then
 					resistanceStatuses[status] = true
 				end
@@ -103,10 +103,10 @@ local function GetElementalWeakness(character)
 	end
 end
 
-Mastery.Variables.Bonuses.GetElementalWeakness = GetElementalWeakness
+MasteryBonusManager.Vars.GetElementalWeakness = GetElementalWeakness
 
 ---@param character StatCharacter
-Mastery.Variables.Bonuses.HasElementalWeaknessWeapon = function(character)
+MasteryBonusManager.Vars.HasElementalWeaknessWeapon = function(character)
 	if GameHelpers.Ext.ObjectIsCharacter(character) then
 		character = character.Stats
 	end
@@ -135,7 +135,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 1, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Staff_ElementalWeakness", "<font color='#9BF0FF'>Targets hit become weak to your staff's element, gaining [Special:LLWEAPONEX_WeaponElementalWeakness] for [ExtraData:LLWEAPONEX_MB_Staff_ElementalWeaknessTurns] turn(s).</font>"),
 		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
 			if tooltipType == "skill" then
-				return Mastery.Variables.Bonuses.HasElementalWeaknessWeapon(character)
+				return MasteryBonusManager.Vars.HasElementalWeaknessWeapon(character)
 			end
 			return false
 		end
@@ -147,7 +147,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Staff, 1, {
 					if weapon and weapon.ItemType == "Weapon" then
 						for i, stat in pairs(weapon.Stats.DynamicStats) do
 							if stat.StatsType == "Weapon" and stat.DamageType ~= "None" then
-								local status = Mastery.Variables.Bonuses.ElementalWeaknessStatuses[stat.DamageType]
+								local status = MasteryBonusManager.Vars.ElementalWeaknessStatuses[stat.DamageType]
 								if status then
 									GameHelpers.Status.Apply(e.Data.Target, status, duration, 0, e.Character)
 								end
