@@ -224,7 +224,7 @@ end
 local closePanelTypes = {
 	[false] = {
 		Data.UIType.characterSheet,
-		Data.UIType.containerInventory,
+		Data.UIType.containerInventory.Default,
 		Data.UIType.partyInventory,
 		Data.UIType.skills,
 		Data.UIType.uiCraft,
@@ -232,6 +232,7 @@ local closePanelTypes = {
 	[true] = {
 		Data.UIType.areaInteract_c,
 		Data.UIType.craftPanel_c,
+		Data.UIType.containerInventory.Default,
 		Data.UIType.equipmentPanel_c,
 		Data.UIType.partyInventory_c,
 		Data.UIType.statsPanel_c,

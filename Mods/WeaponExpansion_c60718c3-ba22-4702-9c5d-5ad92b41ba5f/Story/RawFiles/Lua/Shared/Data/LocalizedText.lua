@@ -238,7 +238,7 @@ Text = {
 			Shattered_Ally = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bludgeon_ShatteredAlly", "<font color='#F19824'>Bludgeon Mastery 4:</font> [1] attacked [2] and shattered [3], \"safely\" shattering their affliction."),
 		},
 		Bow = {
-			FocusedBasicAttackSuccess = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bow_FocusedBasicAttackSuccess", "<font color='#72EE34'>Bow Mastery 2:</font> [1] hit [2] [3] times in a row, and finally got a [Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit]."),
+			FocusedBasicAttackSuccess = ts:CreateFromKey("LLWEAPONEX_CombatLog_Bow_FocusedBasicAttackSuccess", "<font color='#72EE34'>Bow Mastery 2:</font> [1] attacked [2] [3] times in a row, and finally got a <font color='#FF3333'>[Handle:h0a6c96bcg5d64g4226gb2eegc14f09676f65:Critical Hit]</font>.", _autoReplace),
 		},
 		StealSuccess = ts:Create("h9f7d431dg1f6dg494dg89b8g4cb4b98994d4","<font color='#00FF00'>[1] stole </font><font color='#00FFAA'>[2]</font><font color='#00FF00'> from [3]!</font>"),
 		StealFailed = ts:Create("hade2f718gb41dg427cg81c8gff64a36ad95f","<font color='#FF0000'>[1] failed to steal anything from [2].</font>"),

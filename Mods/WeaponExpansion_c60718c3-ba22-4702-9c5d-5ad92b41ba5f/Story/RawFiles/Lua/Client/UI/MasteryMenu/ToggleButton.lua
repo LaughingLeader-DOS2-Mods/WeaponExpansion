@@ -38,10 +38,11 @@ local function SetPositionToHotbar(self)
 			dialogOpen = false
 			local dialog = Ext.GetUIByType(Data.UIType.dialog)
 			if dialog and Common.TableHasValue(dialog.Flags, "OF_Visible") then
-				local this = dialog:GetRoot()
-				if this and this.dialog_mc.visible then
-					dialogOpen = true
-				end
+				dialogOpen = true
+				-- local this = dialog:GetRoot()
+				-- if this and this.dialog_mc.visible then
+				-- 	dialogOpen = true
+				-- end
 			end
 		end
 

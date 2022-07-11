@@ -20,10 +20,10 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 						playerGUID = StringHelpers.GetUUID(playerGUID)
 						template = StringHelpers.GetUUID(template)
 						if GameHelpers.Character.IsPlayer(playerGUID) then
-							if not PersistentVars.ReadBooks[playerGUID] then
-								PersistentVars.ReadBooks[playerGUID] = {}
+							if not PersistentVars.BattleBookExperienceGranted[playerGUID] then
+								PersistentVars.BattleBookExperienceGranted[playerGUID] = {}
 							end
-							PersistentVars.ReadBooks[playerGUID][template] = true
+							PersistentVars.BattleBookExperienceGranted[playerGUID][template] = true
 						end
 					end
 				end

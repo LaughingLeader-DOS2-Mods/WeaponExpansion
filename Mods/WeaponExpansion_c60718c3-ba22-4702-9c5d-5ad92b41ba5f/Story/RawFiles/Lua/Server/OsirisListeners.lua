@@ -67,6 +67,7 @@ local function SkipDeathXP(uuid, region)
 end
 
 function OnCharacterDied(uuid, force)
+	PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[uuid] = nil
 	if force == true or not SkipDeathXP(uuid, GetRegion(uuid)) then
 		local id = CombatGetIDForCharacter(uuid)
 		--print("OnCharacterDied", uuid, id)

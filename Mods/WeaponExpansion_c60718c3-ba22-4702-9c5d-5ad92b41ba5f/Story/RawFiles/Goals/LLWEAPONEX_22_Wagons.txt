@@ -104,4 +104,4 @@ LLWEAPONEX_AnimationSetOverride_Clear(_Char);
 EXITSECTION
 
 ENDEXITSECTION
-ParentTargetEdge "LLWEAPONEX_00_PostCC"
+ParentTargetEdge "LLWEAPONEX_99_Debug"
