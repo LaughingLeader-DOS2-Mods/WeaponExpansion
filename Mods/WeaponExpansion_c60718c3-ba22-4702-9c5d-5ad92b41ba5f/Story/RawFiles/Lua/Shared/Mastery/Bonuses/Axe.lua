@@ -4,7 +4,7 @@ local rb = MasteryDataClasses.MasteryBonusData
 local _eqSet = "Class_Battlemage_Start"
 
 MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
-	rb:Create("AXE_BONUSDAMAGE", {
+	rb:Create("AXE_CRIPPLINGBONUSDAMAGE", {
 		Skills = {"Target_CripplingBlow", "Target_EnemyCripplingBlow"},
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_CripplingBlow", "<font color='#F19824'>If the target is disabled, deal an additional [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_CripplingBlowPiercingDamage].</font>"),
 		NamePrefix = "<font color='#DD4444'>Executioner's</font>"
@@ -68,7 +68,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 	rb:Create("AXE_VULNERABLE", {
 		Skills = {"MultiStrike_BlinkStrike", "MultiStrike_EnemyBlinkStrike"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_BlitzAttack")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_BlitzAttack", "Each target hit becomes <font color='#F13324'>[Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName]</font>. If hit again, <font color='#F13324'>[Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName]</font> is removed and the target takes [SkillDamage:Projectile_LLWEAPONEX_MasteryBonus_VulnerableDamage].<br><font color='#F1CC00'><font color='#F13324'>[Key:LLWEAPONEX_MASTERYBONUS_VULNERABLE_DisplayName]</font> is removed when your turn ends.</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
 			Timer.StartObjectTimer("LLWEAPONEX_MasteryBonus_ApplyVulnerable", e.Data.Target, 50, {Source=e.Character.MyGuid})
@@ -223,7 +223,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 
 	rb:Create("AXE_DW_FLURRY", {
 		Skills = {"Target_DualWieldingAttack"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_FlurryCleave"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_FlurryCleave", "Each hit cleaves up to [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Range]m away in a [Stats:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave:Angle] degree cone, dealing [SkillDamage:Cone_LLWEAPONEX_MasteryBonus_Axe_FlurryCleave]."),
 	}).Register.SkillHit(function(self, e, bonuses)
 		if PersistentVars.MasteryMechanics.AxeFlurryHits[e.Character.MyGuid] == nil then
 			PersistentVars.MasteryMechanics.AxeFlurryHits[e.Character.MyGuid] = 0

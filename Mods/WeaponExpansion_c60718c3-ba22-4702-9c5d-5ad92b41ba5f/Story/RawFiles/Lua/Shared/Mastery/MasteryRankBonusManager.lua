@@ -45,7 +45,11 @@ if not _ISCLIENT then
 	})
 end
 
+---Rank Tag to Bonuses
+---@type table<string, MasteryBonusData[]>
 local _registeredBonuses = {}
+---@type table<string, MasteryBonusData>
+local _BONUS_ID_MAP = {}
 
 local masteryRankBonusPattern = "(.-)_Mastery(%d+)"
 
@@ -644,6 +648,7 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 		local bonus = _GetBonus(bonuses)
 		if bonus then
 			bonus.Mastery = mastery
+			_BONUS_ID_MAP[bonus.ID] = bonus
 			_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
 		else
 			local len = #bonuses
@@ -651,6 +656,7 @@ function MasteryBonusManager.AddRankBonuses(mastery, rank, bonuses)
 				local bonus = _GetBonus(bonuses[i])
 				if bonus then
 					bonus.Mastery = mastery
+					_BONUS_ID_MAP[bonus.ID] = bonus
 					_registeredBonuses[masteryRankID][#_registeredBonuses[masteryRankID]+1] = bonus
 				end
 			end
@@ -676,6 +682,12 @@ function MasteryBonusManager.GetRankBonus(mastery, rank, id)
 			return masteryData.RankBonuses[rank].Bonuses
 		end
 	end
+end
+
+---@param id string
+---@return MasteryBonusData
+function MasteryBonusManager.GetBonusByID(id)
+	return _BONUS_ID_MAP[id]
 end
 
 local function GetMasteryColor(mastery)
@@ -984,8 +996,46 @@ else
 							for i=1,#orderedBonuses do
 								local id = orderedBonuses[i]
 								local displayName = GameHelpers.GetStringKeyText(id, id)
-								if MasteryBonusManager.IsBonusDisabled(character, id) then
+								local isDisabled = MasteryBonusManager.IsBonusDisabled(character, id)
+								if isDisabled then
 									displayName = string.format("<font color='#FF3333'>%s</font>", displayName)
+								end
+								local icon = nil
+								local bonus = MasteryBonusManager.GetBonusByID(id)
+								if bonus then
+									if bonus.Skills and bonus.Skills[1] then
+										local skill = bonus.Skills[1]
+										if not Data.ActionSkills[skill] then
+											local icon_check = Ext.StatGetAttribute(skill, "Icon")
+											if not StringHelpers.IsNullOrWhitespace(icon_check) then
+												icon = icon_check
+											end
+										else
+											if skill == "ActionAttackGround" then
+												icon = "Action_AttackGround"
+											else
+												--TODO Replace with LLWEAPONEX_UI_PassiveBonus
+												if isDisabled then
+													icon = "Reputation Manager"
+												else
+													icon = "Reputation Manager_a"
+												end
+											end
+										end
+									elseif bonus.AllSkills then
+										icon = "Talent_AllSkilledUp"
+									end
+									if not icon and bonus.Statuses then
+										for _,v in pairs(bonus.Statuses) do
+											if GameHelpers.Stats.Exists(v, "StatusData") then
+												local icon_check = Ext.StatGetAttribute(v, "Icon")
+												if not StringHelpers.IsNullOrWhitespace(icon_check) then
+													icon = icon_check
+													break
+												end
+											end
+										end
+									end
 								end
 								ToggleBonusesCM.Children[#ToggleBonusesCM.Children+1] = Classes.ContextMenuAction:Create({
 									ID = string.format("LLWEAPONEX_ToggleBonus_%s", id),
@@ -993,6 +1043,7 @@ else
 									ActionID = id,
 									Callback = toggleBonus,
 									Handle = id,
+									Icon = icon
 								})
 							end
 							return true
@@ -1005,3 +1056,21 @@ else
 
 	UI.ContextMenu.Register.Action(ToggleBonusesCM)
 end
+
+Ext.RegisterConsoleCommand("weaponex_dumpbonuses", function (cmd, ...)
+	local ids = {}
+	for tag,tbl in pairs(_registeredBonuses) do
+		for _,v in pairs(tbl) do
+			ids[#ids+1] = v.ID
+		end
+	end
+	table.sort(ids)
+	local text = "Key\tContent\tHandle\n"
+	for i=1,#ids do
+		local v = ids[i]
+		local name,handle = Ext.GetTranslatedString(v, v)
+		text = text .. string.format("%s\t%s\t%s\n", v, name, handle or "")
+	end
+	Ext.Print("Saved bonus names to 'Dumps/WeaponExpansion_Bonuses.tsv'")
+	GameHelpers.IO.SaveFile("Dumps/WeaponExpansion_Bonuses.tsv", text)
+end)

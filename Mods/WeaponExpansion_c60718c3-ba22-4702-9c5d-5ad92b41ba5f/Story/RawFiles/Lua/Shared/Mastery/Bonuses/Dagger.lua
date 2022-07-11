@@ -127,7 +127,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 1, {
 MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 	rb:Create("DAGGER_BACKLASH", {
 		Skills = {"MultiStrike_Vault", "MultiStrike_EnemyVault"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_BacklashBonus")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_BacklashBonus", "<font color='#F19824'>Attacking a target hit by [Key:Projectile_ThrowingKnife_DisplayName] grants [Special:LLWEAPONEX_MB_BacklashAPBonus] AP and refreshs the cooldown of [Key:Projectile_ThrowingKnife_DisplayName]</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success and GameHelpers.Status.IsActive(e.Data.TargetObject, "LLWEAPONEX_MASTERYBONUS_THROWINGKNIFE_TARGET") then
 			---@type EsvStatusConsume
@@ -154,7 +154,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 
 	rb:Create("DAGGER_SERRATED_RUPTURE", {
 		Skills = {"Target_SerratedEdge", "Target_EnemySerratedEdge"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_SerratedEdgeBonus", "<font color='#F19824'>Deal an additional [SkillDamage:Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage] to targets with [BLEEDING_DisplayName].</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success and HasActiveStatus(e.Data.Target, "BLEEDING") == 1 then
 			GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.Target, "Target_LLWEAPONEX_DaggerMastery_RuptureBonusDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
@@ -168,12 +168,12 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 2, {
 MasteryBonusManager.AddRankBonuses(MasteryID.Dagger, 3,{
 	rb:Create("DAGGER_THROWINGKNIFE2", {
 		Skills = {"Projectile_FanOfKnives", "Projectile_EnemyFanOfKnives"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife2")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_ThrowingKnife2", "<font color='#F19824'>Each knife thrown has a <font color='#CC33FF'>[ExtraData:LLWEAPONEX_MB_Dagger_ThrowingKnife_Chance]%</font> to be <font color='#00FFAA'>coated in poison or explosive oil</font>, dealing [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Explosive] or [SkillDamage:Projectile_LLWEAPONEX_DaggerMastery_ThrowingKnife_Poison] on hit.</font>")
 	}).Register.SkillHit(ThrowingKnifeBonus_Hit).SkillProjectileHit(ThrowingKnifeBonus_ProjectileHit),
 
 	rb:Create("DAGGER_CORRUPTED_BLADE", {
 		Skills = {"Target_CorruptedBlade", "Target_EnemyCorruptedBlade"},
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_CorruptedBlade")
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Dagger_CorruptedBlade", "<font color='#F19824'>When the target dies at any point, spread [Special:LLWEAPONEX_MB_Dagger_CorruptedStatuses] to a nearby enemy within [ExtraData:LLWEAPONEX_MB_Dagger_CorruptedBlade_SpreadRadius]m.</font>")
 	}).Register.SkillHit(function(self, e, bonuses)
 		if e.Data.Success then
 			local listenDelay = GameHelpers.GetExtraData("LLWEAPONEX_MB_Dagger_CorruptedBlade_DeathListenDuration", -1)
