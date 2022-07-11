@@ -6,6 +6,7 @@ local _type = type
 ---@class MasteryBonusDataParams
 ---@field ID string
 ---@field Mastery string
+---@field IsPassive boolean
 ---@field Skills string[] Optional skills associated.
 ---@field Statuses string[] Optional statuses associated.
 ---@field Tooltip TranslatedString
@@ -76,7 +77,8 @@ setmetatable(MasteryBonusData, {
 ---@return MasteryBonusData
 function MasteryBonusData:Create(id, params)
 	local this = {
-		ID = id or ""
+		ID = id or "",
+		IsPassive = false
 	}
 	local _private = {
 		Register = {
@@ -101,7 +103,8 @@ function MasteryBonusData:Create(id, params)
 		this.AllStatuses = true
 	end
 	setmetatable(this, {
-		__index = function(_,k)
+		---@param tbl MasteryBonusData
+		__index = function(tbl,k)
 			if _private[k] ~= nil then
 				return _private[k]
 			end
@@ -109,6 +112,28 @@ function MasteryBonusData:Create(id, params)
 		end
 	})
 	return this
+end
+
+
+---@param bonusID string
+---@param character CharacterParam|nil
+local function IsMasteryBonusEnabled(bonusID, character)
+	local characterId = GameHelpers.GetObjectID(character)
+	if _ISCLIENT and not characterId then
+		characterId = GameHelpers.GetNetID(Client:GetCharacter())
+	end
+	if characterId then
+		local data = MasteryBonusManager._INTERNAL.CharacterDisabledBonuses[characterId]
+		if data then
+			return data[bonusID] ~= true
+		end
+	end
+	return true
+end
+
+---@param character CharacterParam|nil
+function MasteryBonusData:IsEnabled(character)
+	return IsMasteryBonusEnabled(self.ID, character)
 end
 
 ---Returns a default function for callback that checks for a tag specified, either on the status target or source.
@@ -385,7 +410,7 @@ function _INTERNALREG.WeaponTypeHit(self, weaponType, callback, skipBonusCheck, 
 			if skipBonusCheck then
 				Events.OnWeaponTypeHit:Subscribe(function (e)
 					callback(self, e, bonuses)
-				end, {MatchArgs={Type=weaponType}, Priority=priority})
+				end, {MatchArgs={WeaponType=weaponType}, Priority=priority})
 			else
 				---@param e OnWeaponTypeHitEventArgs
 				local wrapper = function(e)
@@ -394,7 +419,7 @@ function _INTERNALREG.WeaponTypeHit(self, weaponType, callback, skipBonusCheck, 
 						callback(self, e, bonuses)
 					end
 				end
-				Events.OnWeaponTypeHit:Subscribe(wrapper, {MatchArgs={Type=weaponType}, Priority=priority})
+				Events.OnWeaponTypeHit:Subscribe(wrapper, {MatchArgs={WeaponType=weaponType}, Priority=priority})
 			end
 		end
 	end
@@ -744,11 +769,14 @@ function MasteryBonusData:GetTooltipText(character, skillOrStatus, tooltipType, 
 	local text = TryGetTooltipText(self, character, skillOrStatus, tooltipType, ...)
 	if text then
 		local t = _type(text)
-		if t == "string" then
-			return text
-		elseif t == "table" and text.Type == "TranslatedString" then
-			return text.Value
+		if t == "table" and text.Type == "TranslatedString" then
+			---@cast text -TranslatedString
+			text = text.Value
 		end
+		if not self:IsEnabled(character) then
+			text = string.format("<font color='#DD3333'>[Disabled]</font><br><font color='#606060'>%s</font>", StringHelpers.StripFont(text))
+		end
+		return text
 	end
 	return nil
 end

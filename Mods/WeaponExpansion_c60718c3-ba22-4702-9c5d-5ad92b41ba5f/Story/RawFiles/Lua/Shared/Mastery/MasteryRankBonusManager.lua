@@ -27,8 +27,23 @@ MasteryBonusManager = {
 }
 
 ---@class MasteryBonusManagerInternals
-local _INTERNAL = {}
+local _INTERNAL = {
+	---@type table<UUID|NETID, table<string, boolean>>
+	CharacterDisabledBonuses = {}
+}
 MasteryBonusManager._INTERNAL = _INTERNAL
+
+if not _ISCLIENT then
+	setmetatable(_INTERNAL.CharacterDisabledBonuses, {
+		__index = function (_,k)
+			return PersistentVars.DisabledBonuses[k]
+		end,
+		__newindex = function (_,k,v)
+			Ext.Print(_ISCLIENT and "CLIENT" or "SERVER", "__newindex", k, v)
+			PersistentVars.DisabledBonuses[k] = v
+		end
+	})
+end
 
 local _registeredBonuses = {}
 
@@ -82,13 +97,14 @@ MasteryDataClasses.BonusIDEntry = {
 	end
 }
 
----@param char string
+---@param char CharacterParam
 ---@param skill string|nil Optional skill to filter with.
 ---@return table<string, boolean>
 function MasteryBonusManager.GetMasteryBonuses(char, skill)
 	---@type EsvCharacter|EclCharacter
 	local character = GameHelpers.GetCharacter(char)
 	local bonuses = {}
+	local hasBonus = false
 	if character then
 		local _TAGS = GameHelpers.GetAllTags(character, true, true)
 		for tag,tbl in pairs(_registeredBonuses) do
@@ -96,6 +112,7 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 				for _,v in pairs(tbl) do
 					if v.ID then
 						bonuses[v.ID] = true
+						hasBonus = true
 					else
 						fprint(LOGLEVEL.ERROR, "[LLWEAPONEX] Bonus is lacking an ID parameter:\n%s", Ext.DumpExport(v))
 						error("", 2)
@@ -104,15 +121,16 @@ function MasteryBonusManager.GetMasteryBonuses(char, skill)
 			end
 		end
 	end
-	return bonuses
+	return bonuses,hasBonus
 end
 
 ---@param checkBonusOn MasteryBonusCheckTarget|nil
 ---@param source CharacterParam
 ---@param target CharacterParam
 ---@param extraParam string|nil Skill ID
+---@param skipDisabledCheck boolean|nil If true, skip checking if the bonus is disabled. Otherwise, disabled bonuses won't be included.
 ---@return MasteryActiveBonusesTable|MasteryActiveBonuses
-local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
+local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam, skipDisabledCheck)
 	local bonuses = {}
 	local source = GameHelpers.TryGetObject(source)
 	local sourceGUID = source and source.MyGuid or nil
@@ -120,19 +138,23 @@ local function GatherMasteryBonuses(checkBonusOn, source, target, extraParam)
 	local targetGUID = target and target.MyGuid or nil
 	if sourceGUID and checkBonusOn ~= "Target" and GameHelpers.Ext.ObjectIsCharacter(source) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(source, extraParam)) do
-			if bonuses[bonus] == nil then
-				bonuses[bonus] = {}
+			if skipDisabledCheck or not MasteryBonusManager.IsBonusDisabled(sourceGUID, bonus) then
+				if bonuses[bonus] == nil then
+					bonuses[bonus] = {}
+				end
+				bonuses[bonus][sourceGUID] = true
 			end
-			bonuses[bonus][sourceGUID] = true
 		end
 	end
 	if targetGUID and (checkBonusOn ~= "Source" or StringHelpers.IsNullOrEmpty(sourceGUID))
 	and GameHelpers.Ext.ObjectIsCharacter(target) then
 		for bonus,_ in pairs(MasteryBonusManager.GetMasteryBonuses(target, extraParam)) do
-			if bonuses[bonus] == nil then
-				bonuses[bonus] = {}
+			if skipDisabledCheck or not MasteryBonusManager.IsBonusDisabled(targetGUID, bonus) then
+				if bonuses[bonus] == nil then
+					bonuses[bonus] = {}
+				end
+				bonuses[bonus][targetGUID] = true
 			end
-			bonuses[bonus][targetGUID] = true
 		end
 	end
 	bonuses.HasBonus = function(id, t)
@@ -264,7 +286,7 @@ function MasteryBonusManager.RegisterNewSkillListener(state, skill, matchBonuses
 	SkillManager.Register.All(skill, wrapperCallback, state, priority, once)
 end
 
----@param state SKILL_STATE
+---@param state SKILL_STATE|string
 ---@param skill string|string[]
 ---@param bonus MasteryBonusData
 ---@param callback fun(bonus:MasteryBonusData, e:OnSkillStateAllEventArgs, bonuses:MasteryActiveBonusesTable|MasteryActiveBonuses)
@@ -814,3 +836,172 @@ function Mastery.InitializeHelperTables()
 end
 
 Ext.RegisterListener("SessionLoaded", Mastery.InitializeHelperTables)
+
+---@param character CharacterParam
+---@param bonusID string
+---@return boolean
+function MasteryBonusManager.IsBonusDisabled(character, bonusID)
+	character = GameHelpers.GetCharacter(character)
+	local characterId = GameHelpers.GetObjectID(character)
+	local targetTable = _INTERNAL.CharacterDisabledBonuses[characterId]
+	if targetTable then
+		return targetTable[bonusID] == true
+	end
+	return false
+end
+
+---@param character CharacterParam
+---@param bonusID string
+---@param disabled boolean
+---@return boolean
+function MasteryBonusManager.SetBonusDisabled(character, bonusID, disabled)
+	local b = disabled
+	if disabled == nil then
+		b = true
+	end
+	character = GameHelpers.GetCharacter(character)
+	local characterId = GameHelpers.GetObjectID(character)
+	local targetTable = _INTERNAL.CharacterDisabledBonuses[characterId]
+	if not targetTable and b then
+		_INTERNAL.CharacterDisabledBonuses[characterId] = {}
+		targetTable = _INTERNAL.CharacterDisabledBonuses[characterId]
+	end
+	if targetTable then
+		if disabled == nil then
+			b = not targetTable[bonusID] == true
+		end
+		Ext.PrintError("MasteryBonusManager.SetBonusDisabled", bonusID, b, _ISCLIENT and "CLIENT" or "SERVER")
+		if b then
+			targetTable[bonusID] = true
+			return true
+		else
+			targetTable[bonusID] = nil
+			if not Common.TableHasAnyEntry(targetTable) then
+				_INTERNAL.CharacterDisabledBonuses[characterId] = nil
+			end
+		end
+	end
+	return false
+end
+
+if not _ISCLIENT then
+	Events.SyncData:Subscribe(function (e)
+		local data = PersistentVars.DisabledBonuses[e.UUID]
+		if data then
+			GameHelpers.Net.PostToUser(e.UserID, "LLWEAPONEX_MasteryBonusManager_SyncCharacterDisabledBonuses", {NetID=GameHelpers.GetNetID(e.UUID), Data=data})
+		end
+	end)
+
+	Ext.RegisterNetListener("LLWEAPONEX_MasteryBonusManager_DisableBonus", function (cmd, payload)
+		local data = Common.JsonParse(payload)
+		if data and data.NetID then
+			local character = GameHelpers.GetCharacter(data.NetID)
+			MasteryBonusManager.SetBonusDisabled(character, data.Bonus, data.Disabled == true)
+			Ext.Dump(PersistentVars.DisabledBonuses)
+		end
+	end)
+
+	Ext.RegisterNetListener("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", function (cmd, payload)
+		---@type {NetID:integer, Bonuses:table<string,boolean>}
+		local data = Common.JsonParse(payload)
+		if data and data.NetID then
+			local character = GameHelpers.GetCharacter(data.NetID)
+			for id,b in pairs(data.Bonuses) do
+				MasteryBonusManager.SetBonusDisabled(character, id, b)
+			end
+		end
+	end)
+else
+	Ext.RegisterNetListener("LLWEAPONEX_MasteryBonusManager_SyncCharacterDisabledBonuses", function (cmd, payload)
+		local data = Common.JsonParse(payload)
+		if data and data.NetID then
+			_INTERNAL.CharacterDisabledBonuses[data.NetID] = data.Data
+		end
+	end)
+
+	---@type ContextMenuAction
+	local ToggleBonusesCM = nil
+
+	ToggleBonusesCM = Classes.ContextMenuAction:Create({
+		ID = "LLWEAPONEX_ToggleMasteryBonuses",
+		DisplayName = "Toggle Mastery Bonuses",
+		Children = {},
+		ShouldOpen = function (contextMenu, x, y)
+			local cursor = Ext.GetPickingState()
+			if cursor and GameHelpers.IsValidHandle(cursor.HoverCharacter) then
+				local character = GameHelpers.GetCharacter(cursor.HoverCharacter)
+				if character then
+					if character.NetID == Client.Character.NetID then
+						local bonuses,hasBonus = MasteryBonusManager.GetMasteryBonuses(character)
+						if hasBonus then
+							local orderedBonuses = {}
+							for id,b in pairs(bonuses) do
+								orderedBonuses[#orderedBonuses+1] = id
+							end
+							table.sort(orderedBonuses)
+							local netid = character.NetID
+							local toggleBonus = function (self, ui, id, actionID, handle, entry)
+								local character = GameHelpers.GetCharacter(netid)
+								local disabled = MasteryBonusManager.SetBonusDisabled(character, handle)
+								Ext.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableBonus", Common.JsonStringify({NetID=netid, Bonus=handle, Disabled=disabled}))
+							end
+							ToggleBonusesCM.Children = {
+								Classes.ContextMenuAction:Create({
+									ID = "LLWEAPONEX_ToggleBonus_EnableAll",
+									DisplayName = "Enable All",
+									ActionID = "LLWEAPONEX_ToggleBonus_EnableAll",
+									Callback = function ()
+										local character = GameHelpers.GetCharacter(netid)
+										local updateData = {
+											NetID = netid,
+											Bonuses = {}
+										}
+										for _,id in pairs(orderedBonuses) do
+											updateData.Bonuses[id] = false
+											MasteryBonusManager.SetBonusDisabled(character, id, false)
+										end
+										Ext.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", Common.JsonStringify(updateData))
+									end,
+								}),
+								Classes.ContextMenuAction:Create({
+									ID = "LLWEAPONEX_ToggleBonus_DisableAll",
+									DisplayName = "Disable All",
+									ActionID = "LLWEAPONEX_ToggleBonus_DisableAll",
+									Callback = function ()
+										local character = GameHelpers.GetCharacter(netid)
+										local updateData = {
+											NetID = netid,
+											Bonuses = {}
+										}
+										for _,id in pairs(orderedBonuses) do
+											updateData.Bonuses[id] = true
+											MasteryBonusManager.SetBonusDisabled(character, id, true)
+										end
+										Ext.PostMessageToServer("LLWEAPONEX_MasteryBonusManager_DisableMultipleBonuses", Common.JsonStringify(updateData))
+									end,
+								})
+							}
+							for i=1,#orderedBonuses do
+								local id = orderedBonuses[i]
+								local displayName = GameHelpers.GetStringKeyText(id, id)
+								if MasteryBonusManager.IsBonusDisabled(character, id) then
+									displayName = string.format("<font color='#FF3333'>%s</font>", displayName)
+								end
+								ToggleBonusesCM.Children[#ToggleBonusesCM.Children+1] = Classes.ContextMenuAction:Create({
+									ID = string.format("LLWEAPONEX_ToggleBonus_%s", id),
+									DisplayName = displayName,
+									ActionID = id,
+									Callback = toggleBonus,
+									Handle = id,
+								})
+							end
+							return true
+						end
+					end
+				end
+			end
+		end
+	})
+
+	UI.ContextMenu.Register.Action(ToggleBonusesCM)
+end
