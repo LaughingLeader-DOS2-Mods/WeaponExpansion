@@ -58,6 +58,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 	rb:Create("CROSSBOW_STILL_STANCE", {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Crossbow_StillStance", "<font color='#77FF33'>If you haven't moved, deal [Special:LLWEAPONEX_Crossbow_SkillStanceDamageBonus]% more damage with basic attacks or weapon skills.</font>"),
+		IsPassive = true,
 		GetIsTooltipActive = function(bonus, id, character, tooltipType, status)
 			if tooltipType == "skill" then
 				if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Crossbow_Equipped") then
