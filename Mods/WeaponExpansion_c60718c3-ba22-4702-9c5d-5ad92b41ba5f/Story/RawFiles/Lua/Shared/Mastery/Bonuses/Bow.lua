@@ -382,12 +382,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 			castPos[2] = y + 1
 
 			--Make the piercing projectile prioritize hitting an enemy within a small radius of the end position
-			local nearby = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=2.5, Position=pos, Relation={Enemy=true}, AsTable=true, Type="Character", Sort="Distance"})
+			local nearbyEnemies = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=2.5, Position=pos, Relation={Enemy=true}, AsTable=true, Type="Character", Sort="Distance"})
 
-			---@cast nearby EsvCharacter[]
-			if nearby[1] then
-				---@type EsvCharacter
-				local obj = nearby[1] 
+			---@cast nearbyEnemies EsvCharacter[]
+			if nearbyEnemies[1] then
+				local obj = nearbyEnemies[1] 
 				pos = GameHelpers.Math.GetPosition(obj)
 				pos[2] = pos[2] + (obj.RootTemplate.AIBoundsHeight * 0.6)
 			end
