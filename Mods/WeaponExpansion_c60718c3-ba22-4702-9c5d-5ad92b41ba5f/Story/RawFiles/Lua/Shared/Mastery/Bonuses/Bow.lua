@@ -354,37 +354,40 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 		end,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_PiercingProjectiles", "<font color='#72EE34'>Non-piercing projectile bow skills will pierce the first target hit.</font>"),
 		IsPassive = true,
-	}).Register.SkillUsed(function (self, e, bonuses)
+	}).Register.SkillCast(function (self, e, bonuses)
 		if MasteryBonusManager.Vars.BowProjectilePiercingSkills[e.Skill] then
 			--This is to ensure the skill is being cast, so we don't make explosions pierce
 			if PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] == nil then
 				PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = {}
 			end
-			PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = true
+			PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = {table.unpack(e.Character.WorldPos)}
 		end
 	end).SkillProjectileHit(function (self, e, bonuses)
 		local pbdata = PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill]
-		if pbdata and pbdata[e.Character.MyGuid] == true then
+		if pbdata and pbdata[e.Character.MyGuid] then
+			--local originalPos = {table.unpack(pbdata[e.Character.MyGuid])}
 			pbdata[e.Character.MyGuid] = nil
 			if not Common.TableHasAnyEntry(pbdata) then
 				PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = nil
 			end
 
+			local originalPos = e.Data.Projectile.SourcePosition
+			local skillData = Ext.GetStat(e.Skill)
 			local x,y,z = table.unpack(e.Data.Position)
-			local dist = Ext.Round(Ext.GetStat(e.Skill).TargetRadius / 2)
-			local dir = GameHelpers.Math.GetDirectionVector(e.Character, e.Data.Position)
+			local dist = math.max(1, math.ceil(skillData.TargetRadius / 2))
+			local dir = GameHelpers.Math.GetDirectionVector(originalPos, e.Data.Position)
 			local castPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, 1.2, x, y, z, dir)
 			local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, x, y, z, dir)
 			pos[2] = y
 			castPos[2] = y + 1
 
-			--Make the piercing projectile guarantee a hit for an enemy within a small radius
-			local nearby = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=2.5, Position=pos, Relation={Enemy=true}, AsTable=true, Type="Character"})
+			--Make the piercing projectile prioritize hitting an enemy within a small radius of the end position
+			local nearby = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=2.5, Position=pos, Relation={Enemy=true}, AsTable=true, Type="Character", Sort="Distance"})
 
 			---@cast nearby EsvCharacter[]
 			if nearby[1] then
 				---@type EsvCharacter
-				local obj = Common.GetRandomTableEntry(nearby)
+				local obj = nearby[1] 
 				pos = GameHelpers.Math.GetPosition(obj)
 				pos[2] = pos[2] + (obj.RootTemplate.AIBoundsHeight * 0.6)
 			end

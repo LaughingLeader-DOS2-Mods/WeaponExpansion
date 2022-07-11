@@ -52,7 +52,7 @@ local defaultPersistentVars = {
         ---@type table<UUID,{Hits:integer, Target:UUID}>
         BowCumulativeCriticalChance = {},
         ---Skill ID, GUID to boolean
-        ---@type table<string,table<UUID,boolean>>
+        ---@type table<string,table<UUID,number[]>>
         BowCastingPiercingSkill = {},
         ---@type table<UUID,integer>
         BowFarsightAttacks = {},
