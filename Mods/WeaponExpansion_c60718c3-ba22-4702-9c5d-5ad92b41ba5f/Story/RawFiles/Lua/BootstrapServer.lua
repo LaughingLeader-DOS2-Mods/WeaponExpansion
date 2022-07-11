@@ -63,9 +63,12 @@ local defaultPersistentVars = {
     ---@type table<UUID,string>
     Uniques = {},
     UniqueRequirements = {},
-    ---Character UUID to Template -> Bool
+    ---Character UUID to Book ID -> Bool
     ---@type table<UUID,table<string, boolean>>
-    ReadBooks = {}
+    BattleBookExperienceGranted = {},
+    ---Character UUID to BonusID -> Bool
+    ---@type table<UUID,table<string, boolean>>
+    DisabledBonuses = {},
 }
 
 ---@type WeaponExpansionVars

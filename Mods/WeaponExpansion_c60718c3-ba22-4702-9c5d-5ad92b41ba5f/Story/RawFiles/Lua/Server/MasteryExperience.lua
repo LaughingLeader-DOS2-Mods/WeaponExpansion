@@ -105,18 +105,20 @@ Ext.NewCall(AddMasteryExperienceForAllActive, "LLWEAPONEX_Ext_AddMasteryExperien
 ---@param character CharacterParam
 ---@return boolean
 function MasterySystem.CanGrantXP(character)
-	character = GameHelpers.TryGetObject(character)
+	local character = GameHelpers.TryGetObject(character)
 	if not character or not GameHelpers.Ext.ObjectIsCharacter(character) then
 		return false
 	end
+	---@cast character -EsvItem, -EclItem, -EclCharacter
+
 	if character:HasTag("LLDUMMY_TrainingDummy") then
 		return true
 	end
-	if character.OffStage then
-		return false
-	end
+
 	if not character.Resurrected
-	and not character.Summon and not character.PartyFollower
+	and not character.OffStage
+	and not character.Summon
+	and not character.PartyFollower
 	and not GameHelpers.Character.IsPlayer(character)
 	and GameHelpers.Character.IsEnemyOfParty(character)
 	--and GameHelpers.Character.IsInCombat(character)
@@ -203,18 +205,18 @@ RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(ene
 	end
 end)
 
-Ext.RegisterOsirisListener("CharacterUsedItemTemplate", 3, "after", function(charGUID, template, item)
-	--Gain Battle Book experience from reading books
-	if GameHelpers.Character.IsPlayer(charGUID) and IsTagged(item, "BOOK") == 1 then
-		charGUID = StringHelpers.GetUUID(charGUID)
-		template = StringHelpers.GetUUID(template)
-		if not PersistentVars.ReadBooks[charGUID] then
-			PersistentVars.ReadBooks[charGUID] = {}
-		end
-		if not PersistentVars.ReadBooks[charGUID][template] then
-			PersistentVars.ReadBooks[charGUID][template] = true
-			AddMasteryExperience(charGUID, "LLWEAPONEX_BattleBook", 0.25, true)
-		end
+Events.OnBookRead:Subscribe(function (e)
+	if not PersistentVars.BattleBookExperienceGranted[e.Character.MyGuid] then
+		PersistentVars.BattleBookExperienceGranted[e.Character.MyGuid] = {}
+	end
+	local bookData = PersistentVars.BattleBookExperienceGranted[e.Character.MyGuid]
+	if bookData[e.Template] and not bookData[e.ID] then
+		bookData[e.Template] = nil
+	end
+	if not bookData[e.ID] then
+		bookData[e.ID] = true
+		--Gain Battle Book experience from reading books
+		AddMasteryExperience(e.Character, "LLWEAPONEX_BattleBook", 0.25, true)
 	end
 end)
 
