@@ -228,10 +228,8 @@ local function LoadExperienceVariables()
 			end
 		end
 		if skill.SkillType == "Projectile" then
-			if skill.Requirement == "RangedWeapon" and (skill.ForGameMaster == "Yes"
-			--Allow enemy versions of skills / derivatives
-			or MasteryBonusManager.Vars.BowProjectilePiercingSkills[skill.Using])
-			and skill.ChanceToPierce <= 0
+			if skill.Requirement == "RangedWeapon" and skill.ChanceToPierce <= 0
+			and (skill.ForGameMaster == "Yes" or MasteryBonusManager.Vars.BowProjectilePiercingSkills[skill.Using]) --Allow enemy versions of skills / derivatives
 			then
 				MasteryBonusManager.Vars.BowProjectilePiercingSkills[skill.Name] = true
 			end

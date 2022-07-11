@@ -355,11 +355,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_PiercingProjectiles", "<font color='#72EE34'>Non-piercing projectile bow skills will pierce the first target hit.</font>"),
 		IsPassive = true,
 	}).Register.SkillUsed(function (self, e, bonuses)
-		--This is to ensure the skill is being cast, so we don't make explosions pierce
-		if PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] == nil then
-			PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = {}
+		if MasteryBonusManager.Vars.BowProjectilePiercingSkills[e.Skill] then
+			--This is to ensure the skill is being cast, so we don't make explosions pierce
+			if PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] == nil then
+				PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = {}
+			end
+			PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = true
 		end
-		PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = true
 	end).SkillProjectileHit(function (self, e, bonuses)
 		local pbdata = PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill]
 		if pbdata and pbdata[e.Character.MyGuid] == true then
@@ -386,9 +388,6 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 				pos = GameHelpers.Math.GetPosition(obj)
 				pos[2] = pos[2] + (obj.RootTemplate.AIBoundsHeight * 0.6)
 			end
-
-			-- EffectManager.PlayEffectAt("RS3_FX_Skills_Fire_Impact_01", pos)
-			-- EffectManager.PlayEffectAt("RS3_FX_Skills_Fire_Haste_Impact_Root_01", castPos)
 
 			GameHelpers.Skill.ShootProjectileAt(pos, e.Skill, e.Character, {
 				EnemiesOnly=true,
