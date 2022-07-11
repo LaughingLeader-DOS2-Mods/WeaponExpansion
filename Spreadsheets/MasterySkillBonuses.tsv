@@ -23,10 +23,10 @@ Bludgeon	1	All In, Flurry	Hitting a target with Fortified or Magic Shell reduces
 Bludgeon	2	Crippling Blow	Apply Sundered, reducing max physical/magic armor by 25%.	√	√
 Bludgeon	3	Battle Stomp	A localized quake is created where your weapon contacts the ground, dealing damage to enemies in a 3m radius.	√	√
 Bludgeon	4	Onslaught	After using Onslaught, leap up into the air and slam down your weapons, dealing bonus damage for each successful hit.	√	√
-Bow	1	Pin Down	Shoot two arrows instead of one, hitting a random nearby enemy for half damage.	√	❌
-Bow	2	Assassinate	If the target is Marked, this skill deals a critical hit.	√	❌
+Bow	1	Pin Down	Shoot two arrows instead of one, hitting a random nearby enemy for half damage.	√	√
+Bow	2	Assassinate	If the target is Marked, this skill deals a critical hit.	√	√
 Bow	3	Rain of Arrows	20% chance for 1-5 arrows to explode for bonus piercing damage, with a chance to apply Bleeding. 	√	√
-Bow	4	Farsight	While Farsight is active, pre-emptively attack the first enemy that attempts to attack an ally, once per turn.	√	❌
+Bow	4	Farsight	While Farsight is active, pre-emptively attack the first enemy that attempts to attack an ally, once per turn.	√	√
 Crossbow	1	Ricochet	If each fork hits, Ricochet is refreshed.	√	❌
 Crossbow	2	Sky Shot	If the target is Knocked Down, this skill deals a critical hit.	√	❌
 Crossbow	2	Marksman's Fang	Pin hit targets that are infront of impassable terrain (like a wall) for 1 turn, and deal bonus damage.	√	❌

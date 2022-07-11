@@ -15,7 +15,8 @@ local function OnPinDownTarget(v, targetType, char, skill, forwardVector, radius
 	--print("OnPinDownTarget", v, targetType, char, skill, forwardVector, radius)
 	local target = nil
 	local pos = GameHelpers.Math.GetPosition(v)
-	local targets = GameHelpers.Grid.GetNearbyObjects(char, {Position=pos, Radius=radius, Relation={Enemy=true}})
+	local targets = GameHelpers.Grid.GetNearbyObjects(char, {Position=pos, Radius=radius, Relation={Enemy=true}, AsTable=true})
+	---@cast targets EsvCharacter[]
 	if targets ~= nil and #targets > 0 then
 		target = Common.GetRandomTableEntry(targets)
 	end
@@ -73,6 +74,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 1, {
 		CharacterUseSkill(char, self.Skills[1], dummy, 1, 1, 1)
 		test:WaitForSignal(self.ID, 10000)
 		test:AssertGotSignal(self.ID)
+		test:Wait(1000)
 		return true
 	end),
 })
@@ -119,9 +121,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 	end),
 	rb:Create("BOW_FOCUSED_ATTACKING", {
 		Skills = MasteryBonusManager.Vars.BasicAttack,
-		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_FocusedAttacking", "<font color='#72EE34'>Non-critical basic attacks on the same target have a cumulative chance to critical hit, until a critical hit is achieved, you leave comat, or a different target is attacked.</font><br><font color='#33FF99'>This bonus also works with [Key:LLWEAPONEX_Greatbow:Greatbow] type weapons.</font>"),
+		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_FocusedAttacking", "<font color='#72EE34'>Non-critical basic attacks on the same target have a cumulative chance to critical hit ([ExtraData:LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChance:5]% + [ExtraData:LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChanceBonusPerHit:1.5]% per hit), until a critical hit is achieved, you leave combat, or a different target is attacked.</font><br><font color='#33FF99'>This bonus also works with [Key:LLWEAPONEX_Greatbow:Greatbow] type weapons.</font>"),
+		IsPassive = true,
 	}).Register.WeaponTypeHit("Bow", function(self, e, bonuses)
-		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttackCriticalChance", 5, true)
+		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChance", 5, true)
+		local bonusPerHit = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChanceBonusPerHit", 1.5, false)
 		if chance > 0
 		and not e.SkillData -- Basic attacks only
 		--enable skipWeaponCheck in HasMasteryBonus, so this bonus works as long as it's been unlocked, and the weapon type is a Bow, stats-wise
@@ -144,8 +148,11 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 				end
 				local totalHits = attackData.Hits
 				if totalHits > 1 then
-					local bonusRolls = totalHits - 1
-					if GameHelpers.Math.Roll(chance, bonusRolls) then
+					if bonusPerHit > 0 then
+						chance = math.floor(chance + ((totalHits - 1) * bonusPerHit))
+					end
+					--local bonusRolls = totalHits - 1
+					if GameHelpers.Math.Roll(chance) then
 						local attackerName = GameHelpers.Character.GetDisplayName(e.Attacker)
 						local targetName = GameHelpers.Character.GetDisplayName(e.Target)
 						local combatLogText = Text.CombatLog.Bow.FocusedBasicAttackSuccess:ReplacePlaceholders(attackerName, targetName, totalHits)
@@ -156,6 +163,9 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 						if weaponCritMult < 1 then
 							weaponCritMult = weaponCritMult + 1
 						end
+
+						PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[GUID] = nil
+
 						e.Data:SetHitFlag("CriticalHit", true)
 						e.Data:MultiplyDamage(weaponCritMult)
 						SignalTestComplete(self.ID)
@@ -169,6 +179,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
 		CharacterSetFightMode(char, 1, 1)
+		SetTag(CharacterGetEquippedWeapon(char), "LLWEAPONEX_Bow")
 		test:Wait(1000)
 		local keepAttacking = true
 		local tries = 0
@@ -179,10 +190,13 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 			if test.SignalSuccess == self.ID then
 				keepAttacking = false
 				test.SuccessMessage = string.format("[%s] Took (%s) attacks to finally critical hit (%s%% chance).", self.ID, tries, GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttackCriticalChance", 5))
-				Ext.PrintWarning(test.SuccessMessage)
+				Ext.Print(test.SuccessMessage)
+			else
+				local data = PersistentVars.MasteryMechanics.BowCumulativeCriticalChance[char]
+				test:AssertNotEquals(data, nil, "Test character has no PersistentVars.MasteryMechanics.BowCumulativeCriticalChance data.")
 			end
 		end
-		assert(tries <= 30, "Ran out of basic attack attempts (tries > 30)")
+		test:AssertNotEquals(tries > 30, true, "Ran out of basic attack attempts (tries > 30)")
 		return true
 	end),
 })
@@ -339,27 +353,50 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 			return false
 		end,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Bow_PiercingProjectiles", "<font color='#72EE34'>Non-piercing projectile bow skills will pierce the first target hit.</font>"),
+		IsPassive = true,
 	}).Register.SkillUsed(function (self, e, bonuses)
 		--This is to ensure the skill is being cast, so we don't make explosions pierce
-		if PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill] == nil then
-			PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill] = {}
+		if PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] == nil then
+			PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = {}
 		end
-		PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill][e.Character.MyGuid] = true
+		PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill][e.Character.MyGuid] = true
 	end).SkillProjectileHit(function (self, e, bonuses)
-		local pbdata = PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill]
+		local pbdata = PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill]
 		if pbdata and pbdata[e.Character.MyGuid] == true then
 			pbdata[e.Character.MyGuid] = nil
 			if not Common.TableHasAnyEntry(pbdata) then
-				PersistentVars.MasteryMechanics.PiercingBowSkill[e.Skill] = nil
+				PersistentVars.MasteryMechanics.BowCastingPiercingSkill[e.Skill] = nil
 			end
 
 			local x,y,z = table.unpack(e.Data.Position)
 			local dist = Ext.Round(Ext.GetStat(e.Skill).TargetRadius / 2)
 			local dir = GameHelpers.Math.GetDirectionVector(e.Character, e.Data.Position)
+			local castPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, 1.2, x, y, z, dir)
 			local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, x, y, z, dir)
 			pos[2] = y
+			castPos[2] = y + 1
 
-			GameHelpers.Skill.ShootProjectileAt(pos, e.Skill, e.Character, {EnemiesOnly=true})
+			--Make the piercing projectile guarantee a hit for an enemy within a small radius
+			local nearby = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius=2.5, Position=pos, Relation={Enemy=true}, AsTable=true, Type="Character"})
+
+			---@cast nearby EsvCharacter[]
+			if nearby[1] then
+				---@type EsvCharacter
+				local obj = Common.GetRandomTableEntry(nearby)
+				pos = GameHelpers.Math.GetPosition(obj)
+				pos[2] = pos[2] + (obj.RootTemplate.AIBoundsHeight * 0.6)
+			end
+
+			-- EffectManager.PlayEffectAt("RS3_FX_Skills_Fire_Impact_01", pos)
+			-- EffectManager.PlayEffectAt("RS3_FX_Skills_Fire_Haste_Impact_Root_01", castPos)
+
+			GameHelpers.Skill.ShootProjectileAt(pos, e.Skill, e.Character, {
+				EnemiesOnly=true,
+				Caster=e.Character,
+				Target="nil",
+				Source="nil",
+				SourcePosition=castPos,
+			})
 			SignalTestComplete(self.ID)
 		end
 	end).Test(function(test, self)
