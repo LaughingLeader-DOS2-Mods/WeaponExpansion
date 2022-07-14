@@ -1,7 +1,25 @@
 if not CustomSkillProperties then
+	---@type table<string, CustomSkillProperty>
 	CustomSkillProperties = {}
 end
 
+local function _NO_DESC() end
+
+---@param id string
+--- @param getDesc fun(property:StatsPropertyExtender):string|nil
+--- @param onPos fun(property:StatsPropertyExtender, attacker: EsvCharacter|EsvItem, position: vec3, areaRadius: number, isFromItem: boolean, skill: StatEntrySkillData|nil, hit: StatsHitDamageInfo|nil)
+--- @param onTarget fun(property:StatsPropertyExtender, attacker: EsvCharacter|EsvItem, target: EsvCharacter|EsvItem, position: vec3, isFromItem: boolean, skill: StatEntrySkillData|nil, hit: StatsHitDamageInfo|nil)
+local function CreateSkillProperty(id, getDesc, onPos, onTarget)
+	local prop = {
+		GetDescription = getDesc or _NO_DESC,
+		ExecuteOnPosition = onPos or _NO_DESC,
+		ExecuteOnTarget = onTarget or _NO_DESC,
+	}
+	CustomSkillProperties[id] = prop
+	Ext.RegisterSkillProperty(id, prop)
+end
+
+---@type CustomSkillProperty
 CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties = {
 	GetDescription = function(prop)
 		-- local chance = prop.Arg1 or 1
@@ -50,6 +68,65 @@ CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties = {
 	end
 }
 Ext.RegisterSkillProperty("LLWEAPONEX_ApplyRuneProperties", CustomSkillProperties.LLWEAPONEX_ApplyRuneProperties)
+
+
+CreateSkillProperty("LLWEAPONEX_ApplyBulletProperties", nil, function (property, attacker, position, areaRadius, isFromItem, skill, hit)
+	local chance = property.Arg1
+	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+		local radius = math.max(1, math.max(skill.AreaRadius or 0, skill.ExplodeRadius or 0))
+		local rune,weaponBoostStat = Skills.GetRuneBoost(attacker.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
+		if weaponBoostStat ~= nil then
+			---@type StatProperty[]
+			local props = GameHelpers.Stats.GetExtraProperties(weaponBoostStat)
+			if props ~= nil and #props > 0 then
+				Ext.PropertyList.ExecuteExtraPropertiesOnPosition(weaponBoostStat, "ExtraProperties", attacker, position, radius, "AoE", false, skill.Name)
+				Ext.PropertyList.ExecuteExtraPropertiesOnPosition(weaponBoostStat, "ExtraProperties", attacker, attacker, attacker.WorldPos, "Self", false, skill.Name)
+			end
+		end
+	end
+end, function (property, attacker, target, position, isFromItem, skill, hit)
+	local chance = property.Arg1
+	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+		local rune,weaponBoostStat = Skills.GetRuneBoost(attacker.Stats, "_LLWEAPONEX_Pistol_Bullets", "_LLWEAPONEX_Pistols")
+		if weaponBoostStat ~= nil then
+			---@type StatProperty[]
+			local props = GameHelpers.Stats.GetExtraProperties(weaponBoostStat)
+			if props ~= nil and #props > 0 then
+				Ext.PropertyList.ExecuteExtraPropertiesOnTarget(weaponBoostStat, "ExtraProperties", attacker, target, target.WorldPos, "Target", false, skill.Name)
+				Ext.PropertyList.ExecuteExtraPropertiesOnTarget(weaponBoostStat, "ExtraProperties", attacker, attacker, attacker.WorldPos, "Self", false, skill.Name)
+			end
+		end
+	end
+end)
+
+CreateSkillProperty("LLWEAPONEX_ApplyBoltProperties", nil, function (property, attacker, position, areaRadius, isFromItem, skill, hit)
+	local chance = property.Arg1
+	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+		local radius = math.max(1, math.max(skill.AreaRadius or 0, skill.ExplodeRadius or 0))
+		local rune,weaponBoostStat = Skills.GetRuneBoost(attacker.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
+		if weaponBoostStat ~= nil then
+			---@type StatProperty[]
+			local props = GameHelpers.Stats.GetExtraProperties(weaponBoostStat)
+			if props ~= nil and #props > 0 then
+				Ext.PropertyList.ExecuteExtraPropertiesOnPosition(weaponBoostStat, "ExtraProperties", attacker, position, radius, "AoE", false, skill.Name)
+				Ext.PropertyList.ExecuteExtraPropertiesOnPosition(weaponBoostStat, "ExtraProperties", attacker, attacker, attacker.WorldPos, "Self", false, skill.Name)
+			end
+		end
+	end
+end, function (property, attacker, target, position, isFromItem, skill, hit)
+	local chance = property.Arg1
+	if chance >= 1.0 or Ext.Utils.Random(0,1) <= chance then
+		local rune,weaponBoostStat = Skills.GetRuneBoost(attacker.Stats, "_LLWEAPONEX_HandCrossbow_Bolts", "_LLWEAPONEX_HandCrossbows")
+		if weaponBoostStat ~= nil then
+			---@type StatProperty[]
+			local props = GameHelpers.Stats.GetExtraProperties(weaponBoostStat)
+			if props ~= nil and #props > 0 then
+				Ext.PropertyList.ExecuteExtraPropertiesOnTarget(weaponBoostStat, "ExtraProperties", attacker, target, target.WorldPos, "Target", false, skill.Name)
+				Ext.PropertyList.ExecuteExtraPropertiesOnTarget(weaponBoostStat, "ExtraProperties", attacker, attacker, attacker.WorldPos, "Self", false, skill.Name)
+			end
+		end
+	end
+end)
 
 CustomSkillProperties.LLWEAPONEX_ChaosRuneAbsorbSurface = {
 	GetDescription = function(prop)

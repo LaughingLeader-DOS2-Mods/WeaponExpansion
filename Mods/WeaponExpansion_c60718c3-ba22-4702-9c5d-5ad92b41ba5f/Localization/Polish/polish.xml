@@ -1138,7 +1138,7 @@
 	<content contentuid="h6dfbe19fgd3b9g4a18gb689gfc0156c415e9">&lt;font color=&apos;#E4CE93&apos;&gt;*Your axe finds its way back to you.*</content>
 	<content contentuid="h6e194dd5g2ad5g4d96g965agcc05dac9c23f">Runic Cannon Energy</content>
 	<content contentuid="h6e3a04cbgb9a1g4f1dga2b3g71f181ec93d3">Weapon Expansion - Unique Weapons</content>
-	<content contentuid="h6e62632bgd952g474ag824aga7513eaab0c6">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.</content>
+	<content contentuid="h6e62632bgd952g474ag824aga7513eaab0c6">&lt;icon id=&apos;Projectile_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.</content>
 	<content contentuid="h6e7f93aeg6389g49ffgbd17g56c38a61568b">Assassin&apos;s Retirement</content>
 	<content contentuid="h6e84de08g3e9bg43aega2acg098aa0085c8d">Charming Arrow</content>
 	<content contentuid="h6e8bf4fdgd720g43adg878ag75aff041a469">Magical Arm-Mounted Crossbow</content>
@@ -1339,6 +1339,7 @@
 	<content contentuid="h81bf6306g22b9g48e1g896fg6dd883b1c09c">Reinforced Wooden Shields</content>
 	<content contentuid="h8224bb41g2261g4a50ga1feg7dc0f7394eb7">&lt;font color=&apos;#99FF22&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;[1] Extended!&lt;/p&gt;&lt;/font&gt;&lt;p align=&apos;center&apos;&gt;[2] -&gt; [3]&lt;/p&gt;</content>
 	<content contentuid="h82443abeg98f3g4977gba22ga9a785091dbe">Raging</content>
+	<content contentuid="h8245454age5adg4b1ega69dg5a40db6f1126">Shoot your equipped pistol at a target, dealing [1].[Special:LLWEAPONEX_PistolRuneEffects]</content>
 	<content contentuid="h8251f6degbeb5g4172gaf37g843f01d2c099">&lt;font color=&apos;#FD8826&apos;&gt;Quarterstaff Mastery III&lt;/font&gt;</content>
 	<content contentuid="h825a0ab6g2d8ag49d6ga502g430378863966">Journeyman Thief</content>
 	<content contentuid="h826d023bg5b10g4d79g874agb0f918554f34">Use weapons in battle to automatically gain mastery experience.</content>
@@ -1445,7 +1446,7 @@
 	<content contentuid="h8d11d8efg0bb8g4130g9393geb30841eaea5">Quarterstaff</content>
 	<content contentuid="h8d34a193g1102g4101g90a7g4345cb51d976">Aspect of Summoning</content>
 	<content contentuid="h8d38f076g3192g48fdg9d93g41f9acc3a9a1">a Runeblade</content>
-	<content contentuid="h8d3ec53cg6caag483eg8e9ag838a02ecb512">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.&lt;icon id=&apos;Shout_Adrenaline&apos;/&gt;Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]%.</content>
+	<content contentuid="h8d3ec53cg6caag483eg8e9ag838a02ecb512">&lt;icon id=&apos;Projectile_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.&lt;icon id=&apos;Shout_Adrenaline&apos;/&gt;Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]%.</content>
 	<content contentuid="h8d50df62gd613g465fga926g1f5d5e04b0a7">Malediction</content>
 	<content contentuid="h8d63157dg4167g465eg9b3fgd194422e8421">A wooden sword typically used for training.</content>
 	<content contentuid="h8d8bfc1cg51abg43ebgb2ccg15926654b3fd">[KATANA] Disable the &quot;Finisher&quot; status from automatically applying on hit.</content>
@@ -1693,7 +1694,7 @@
 	<content contentuid="ha50f04a6gf86eg418fg8e2fge7a9a5f10d62">Knife &amp; Vault</content>
 	<content contentuid="ha5799518gef22g4d3bga215g67ee45a4a922">Contaminated</content>
 	<content contentuid="ha57eabe4gc0b8g4fccg9ca7g0f748d97117a">Trusty Old Greatbow</content>
-	<content contentuid="ha58bb241gb3cfg4ac0g845ag0ae0342bb50d">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.</content>
+	<content contentuid="ha58bb241gb3cfg4ac0g845ag0ae0342bb50d">&lt;icon id=&apos;Projectile_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.</content>
 	<content contentuid="ha5e68b94gef5ag4f30gaa13gcd30063f5a58">Revolution</content>
 	<content contentuid="ha5e7da5cg6dcdg45cegbe67g378a44986204">A special pet rock. This little guy always has your back.&lt;br&gt;&lt;font color=&apos;#00FF00&apos;&gt;Can be continually thrown until Kevin gets tired.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#00FFFF&apos;&gt;Kevin will recharge 1 energy per turn.&lt;/font&gt;</content>
 	<content contentuid="ha61a9beeg3dcbg426eg86dfg93adbbe40b56">Worn Glaive</content>
@@ -1794,7 +1795,6 @@
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
 	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with the &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
-	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].[Special:LLWEAPONEX_PistolRuneEffects]</content>
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
 	<content contentuid="haf9a091fgead0g4151g95feg436e7da3f882">Elemental Empower</content>
@@ -1848,6 +1848,7 @@
 	<content contentuid="hb5394fdbg81e3g4b92g8ccbgfc1d9314b422">Draw a random, temporary arrow from your quiver.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Arrows retrieved this way disappear after combat ends.&lt;/font&gt;</content>
 	<content contentuid="hb540449eg1562g4f42g9d0cg615b0c0679ce">Malice &amp; Destruction</content>
 	<content contentuid="hb545218bgc1f1g4b7cg93c4gaa8a48e04f58">[1] reached &lt;font color=&apos;#F7BA14&apos;&gt;[2]&lt;/font&gt; rank &lt;font color=&apos;#00FF00&apos;&gt;[3]&lt;/font&gt;</content>
+	<content contentuid="hb588f7d2gbbc0g4eafg902bg775046b62405">&lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt;</content>
 	<content contentuid="hb5964089gfd37g4008ga7d7g6737e5648e16">Ancient Bokuto</content>
 	<content contentuid="hb5b69849g6862g4db5gaa63gd4dd69e56a9d">&lt;font color=&apos;#C9AA58&apos;&gt;Immune to Flanking&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#33FF33&apos;&gt;Turn delaying reduces damage taken by [Stats:Stats_LLWEAPONEX_Banner_TurnDelayProtection:FireResistance]%.&lt;/font&gt;</content>
 	<content contentuid="hb5cce093g12e6g4316ga31cga6b31812f70c">Cryoblade</content>
@@ -1864,7 +1865,7 @@
 	<content contentuid="hb69d0ce2g0c1dg4bdfg9d1fg6e77f212b510">Avalanche Rune</content>
 	<content contentuid="hb6b41943g9b7cg46a1gbff2g296ee08ac1a9">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets are coated in a deadly toxin, dealing poison damage.</content>
 	<content contentuid="hb6ca4a83ga533g4331ga92cgd041f43b7675">Bonus Damage to Immobile Targets</content>
-	<content contentuid="hb6eef25cg3995g4611gabdfgd65916b4bf94">&lt;icon id=&apos;Target_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_CloakAndDagger&apos;/&gt;[Key:LLWEAPONEX_MB_Pistol_CloakAndDagger]</content>
+	<content contentuid="hb6eef25cg3995g4611gabdfgd65916b4bf94">&lt;icon id=&apos;Projectile_LLWEAPONEX_Pistol_Shoot&apos;/&gt;Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_CloakAndDagger&apos;/&gt;[Key:LLWEAPONEX_MB_Pistol_CloakAndDagger]</content>
 	<content contentuid="hb6f630efgd273g468bg9875g32bffb7fb120">Reload your &lt;font color=&apos;#C7A758&apos;&gt;Pistol&lt;/font&gt;, instantly refreshing the &lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt; skill.</content>
 	<content contentuid="hb701a487g48dbg435fga69dg831fb8da30ca">&lt;font color=&apos;#B658FF&apos;&gt;Wand Mastery I&lt;/font&gt;</content>
 	<content contentuid="hb723ab59ga442g4711g99d7g191f9c802164">Gas Rune</content>
@@ -1872,6 +1873,7 @@
 	<content contentuid="hb7457779g1eecg4c54g8090gd57198c3b57e">&lt;font color=&apos;#D9D9D9&apos;&gt;Dual Shields Mastery II&lt;/font&gt;</content>
 	<content contentuid="hb7836906g4d15g44cfgad67g7412721e8915">Tempered Runeblade of Poison</content>
 	<content contentuid="hb7879842g19c1g4470ga1f7gcc91d53c40c8">&lt;font color=&apos;#C7A758&apos;&gt;The first enemy hit will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] when taking an action (once per turn), with a [ExtraData:LLWEAPONEX_BasilusDagger_BackstabChance]% chance to be backstabbed.&lt;/font&gt;</content>
+	<content contentuid="hb78e8c23gc2e8g4354g8302g96645501b0f9">Shoot your equipped pistol in a straight line, dealing [1].&lt;font color=&apos;#FF9922&apos;&gt;The bullet will travel well beyond your limited targeting range.&lt;/font&gt;[Special:LLWEAPONEX_PistolRuneEffects]</content>
 	<content contentuid="hb7a3dc0cg8422g4a1cg83f5gefbaab6d835f">Throwing Sword?</content>
 	<content contentuid="hb7aab313g204ag4e87g9013gb0a170ce0442">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#8B0000&apos;&gt;Blood Rune&lt;/font&gt; + &lt;font color=&apos;#7f3d00&apos;&gt;Earth Rune&lt;/font&gt;&lt;/font&gt;&lt;br&gt;Deals additional damage when attacking Undead, with a 10% chance to &lt;font color=&apos;#b823cb&apos;&gt;Entangle&lt;/font&gt; enemies hit for 1 turn.&lt;br&gt;Entangle&apos;s chance is increased to 50% when attacking the Undead.&lt;br&gt;Adds &lt;font color=&apos;#8B0000&apos;&gt;Piercing Damage&lt;/font&gt; and &lt;font color=&apos;#7d71d9&apos;&gt;Earth Damage&lt;/font&gt; to weapon attacks and skills.</content>
 	<content contentuid="hb7cc4c4dg4abcg4814g932cg0c2b233d479f">Cursing Arrow</content>
@@ -2007,7 +2009,6 @@
 	<content contentuid="hc57ffc92gbbbag4f6eg9f17gee8b992ba15a">Throwing Bow?</content>
 	<content contentuid="hc585475cge8fdg48c0g8dc0gea94afe8f24e">Bokuto</content>
 	<content contentuid="hc5a3ad75ga63fg4fdcgb6bdg7d796b0c9f57">Beginner</content>
-	<content contentuid="hc5b0dad7g7c99g4afbga957g927f7db6c3de">&lt;font color=&apos;#CCFF22&apos;&gt;Shoot Pistol&lt;/font&gt;</content>
 	<content contentuid="hc60b1ac7g0c9fg4b31ga3efg58b9af61705b">Blademaster&apos;s Strike 3</content>
 	<content contentuid="hc6198b34gfc48g4fd8gab35gb29a4c957eb3">Water Burn</content>
 	<content contentuid="hc6342d3bgfc64g4ac9gb5e7ge1b812759439">Balrin&apos;s Throwing Axe (Normal)</content>
@@ -2562,6 +2563,7 @@
 	<content contentuid="hfe5ab83agc07fg46bcg912bg37af64f7d1c7">Blademaster&apos;s Strike 6</content>
 	<content contentuid="hfe7c8572g7718g4806gbaa3gd7928c34732e">Greatbow</content>
 	<content contentuid="hfe9263e0g33aag4459g8710gb0ff55b2427f">&lt;font color=&apos;#FF337F&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;Flanking Strike!&lt;/p&gt;&lt;/font&gt;</content>
+	<content contentuid="hfe99e1bbg58b4g4592gb899g3b10e1fd9c38">Straight Shot</content>
 	<content contentuid="hfef86678g922bg4f8cga1c2gd58bb5f3f9cd">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery II&lt;/font&gt;</content>
 	<content contentuid="hff1a0098g0d08g4386gb48ag5d2649cb5025">Demonic Protection</content>
 	<content contentuid="hff1e38f6g8441g4fe4ga450g8d536e1b5db7">Ice Bullets</content>

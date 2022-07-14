@@ -798,8 +798,6 @@ Skills.GetPistolWeaponStatTable = GetPistolWeaponStatTable
 
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_Enemy = GetPistolSkillDamage
-Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = GetPistolSkillDamage
-Skills.Damage.Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = GetPistolSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Shoot = GetHandCrossbowSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = GetHandCrossbowSkillDamage
 Skills.Damage.Projectile_LLWEAPONEX_HandCrossbow_Assassinate = GetHandCrossbowSkillDamage

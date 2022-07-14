@@ -120,14 +120,39 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 	end)
 
 	SkillManager.Register.Hit(SkillConfiguration.Pistols.AllShootSkills, function(e)
-		-- Silver bullets do bonus damage to undead/voidwoken
+		--PISTOL_CLOAKEDJUMP
+		if e.Data.TargetObject and e.Data.TargetObject:HasTag("LLWEAPONEX_Pistol_MarkedForCrit") then
+			if not e.Data:HasHitFlag("CriticalHit", true) then
+				local attackerStats = e.Character.Stats
+				local critMult = (attackerStats.RogueLore * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
+				e.Data:SetHitFlag("CriticalHit", true)
+				e.Data:MultiplyDamage(1 + critMult)
+			end
+			e.Data:SetHitFlag("Hit", true)
+			e.Data:SetHitFlag("Dodged", false)
+			e.Data:SetHitFlag("Missed", false)
+			e.Data:SetHitFlag("Blocked", false)
+			ClearTag(e.Data.Target, "LLWEAPONEX_Pistol_MarkedForCrit")
+			CharacterStatusText(e.Data.Target, "LLWEAPONEX_StatusText_Pistol_MarkedCrit")
+		end
 		if e.Data.Success then
+			-- Silver bullets do bonus damage to undead/voidwoken
 			if TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
 				if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
 					local bonus = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_SilverBonusDamage", 1.5)
 					if bonus > 0 then
 						e.Data:MultiplyDamage(bonus, true)
 					end
+				end
+			end
+
+			--PISTOL_ADRENALINE
+			if e.Character:HasTag("LLWEAPONEX_Pistol_Adrenaline_Active") then
+				ClearTag(e.Character.MyGuid, "LLWEAPONEX_Pistol_Adrenaline_Active")
+				local damageBoost = GameHelpers.GetExtraData("LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost", 50.0) * 0.01
+				if damageBoost > 0 then
+					e.Data:MultiplyDamage(1 + damageBoost)
+					CharacterStatusText(e.Character.MyGuid, "LLWEAPONEX_StatusText_Pistol_AdrenalineBoost")
 				end
 			end
 		end

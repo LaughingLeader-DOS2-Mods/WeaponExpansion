@@ -47,10 +47,10 @@ LLWEAPONEX_Katana_Rank1_Description	<icon id='Rush_LLWEAPONEX_Katana_Iaido;LLWEA
 LLWEAPONEX_Katana_Rank2_Description	Placeholder	h46cb2853g6646g4ad0g9841g56059054b847
 LLWEAPONEX_Katana_Rank3_Description	Placeholder	hdc1c9304g98bdg4758g8e1cge3b24e1296bc
 LLWEAPONEX_Katana_Rank4_Description	Placeholder	h1a9da6d7gc44cg410dgb6f5g61e1f31c0c6a
-LLWEAPONEX_Pistol_Rank1_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.<icon id='Shout_Adrenaline'/>Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]%.	h8d3ec53cg6caag483eg8e9ag838a02ecb512
-LLWEAPONEX_Pistol_Rank2_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.<icon id='Jump_CloakAndDagger'/>[Key:LLWEAPONEX_MB_Pistol_CloakAndDagger]	hb6eef25cg3995g4611gabdfgd65916b4bf94
-LLWEAPONEX_Pistol_Rank3_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.	ha58bb241gb3cfg4ac0g845ag0ae0342bb50d
-LLWEAPONEX_Pistol_Rank4_Description	<icon id='Target_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.	h6e62632bgd952g474ag824aga7513eaab0c6
+LLWEAPONEX_Pistol_Rank1_Description	<icon id='Projectile_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost1]% extra base damage in total.<icon id='Shout_Adrenaline'/>Gain hyper-focus, increasing the damage of the next shot of your pistol by [ExtraData:LLWEAPONEX_MB_Pistol_Adrenaline_DamageBoost]%.	h8d3ec53cg6caag483eg8e9ag838a02ecb512
+LLWEAPONEX_Pistol_Rank2_Description	<icon id='Projectile_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost2]% extra base damage in total.<icon id='Jump_CloakAndDagger'/>[Key:LLWEAPONEX_MB_Pistol_CloakAndDagger]	hb6eef25cg3995g4611gabdfgd65916b4bf94
+LLWEAPONEX_Pistol_Rank3_Description	<icon id='Projectile_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost3]% extra base damage in total.	ha58bb241gb3cfg4ac0g845ag0ae0342bb50d
+LLWEAPONEX_Pistol_Rank4_Description	<icon id='Projectile_LLWEAPONEX_Pistol_Shoot'/>Pistol attacks deal [ExtraData:LLWEAPONEX_PistolMasteryBoost4]% extra base damage in total.	h6e62632bgd952g474ag824aga7513eaab0c6
 LLWEAPONEX_Polearm_Rank1_Description	<icon id='Target_CripplingBlow'/>[Key:Target_CripplingBlow_DisplayName] deals 25% splash damage around the target in a 3m radius.	h9b987ae9g9745g4b0cg89f7g1af3e9eedef3
 LLWEAPONEX_Polearm_Rank2_Description	Placeholder	he503fbfegbe7dg4234gac19gd2638d7a8cf4
 LLWEAPONEX_Polearm_Rank3_Description	Placeholder	h0225e23cgd63cg46c9gbcd3gd36b65b1a0c7

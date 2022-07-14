@@ -1,3 +1,10 @@
+local removeSkills = {
+	Target_LLWEAPONEX_Pistol_Shoot = true,
+	Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand = true,
+	Projectile_LLWEAPONEX_Pistol_Shoot_RightHand = true,
+	Shout_LLWEAPONEX_Prepare_BalrinsAxe = true,
+}
+
 ---@param last integer
 ---@param next integer
 RegisterModListener("Loaded", ModuleUUID, function(last, next)
@@ -65,9 +72,12 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		end
 
 		-- Deprecated skill
-		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe") == 1 then
-			CharacterRemoveSkill(player.MyGuid, "Shout_LLWEAPONEX_Prepare_BalrinsAxe")
+		for id,b in pairs(removeSkills) do
+			if player.SkillManager.Skills[id] then
+				CharacterRemoveSkill(player.MyGuid, id)
+			end
 		end
+
 		-- Fix for Balrin's Axe disappearing due to unforseen consequences
 		-- May need some additional checks
 		if not GameHelpers.IsInCombat(player) then
