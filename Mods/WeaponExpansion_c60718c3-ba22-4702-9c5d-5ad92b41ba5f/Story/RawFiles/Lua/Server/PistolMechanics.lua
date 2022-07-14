@@ -129,7 +129,7 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 
 	SkillManager.Register.Used(SkillConfiguration.Pistols.AllShootSkills, function(e)
 		if ShouldPlaySheatheAnimation(e.Character) then
-			Timer.StartOneshot("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
+			Timer.StartOneshot("", 350, function()
 				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
 			end)
 		else
@@ -139,7 +139,11 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 	
 	SkillManager.Register.Cast(SkillConfiguration.Pistols.AllShootSkills, function(e)
 		local delay = GetPistolRemoveDelay(e.Character)
-		Timer.StartObjectTimer("LLWEAPONEX_RemovePistolEffect", e.Character, delay)
+		if delay and delay > 0 then
+			Timer.StartObjectTimer("LLWEAPONEX_RemovePistolEffect", e.Character, delay)
+		else
+			GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
+		end
 	end)
 
 end, {Priority=999})

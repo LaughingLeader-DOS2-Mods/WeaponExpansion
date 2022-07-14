@@ -296,7 +296,6 @@ local function OnSkillTooltip(character, skill, tooltip)
 
 	if SkillConfiguration.DisplayScalingStatSkills[skill] then
 		local text = Skills.Params["LLWEAPONEX_ScalingStat"](skill, character.Stats)
-		print(skill, text)
 		if not StringHelpers.IsNullOrEmpty(text) then
 			local props = tooltip:GetElement("SkillProperties", {Properties={}, Resistances={}})
 			local properties = {}
