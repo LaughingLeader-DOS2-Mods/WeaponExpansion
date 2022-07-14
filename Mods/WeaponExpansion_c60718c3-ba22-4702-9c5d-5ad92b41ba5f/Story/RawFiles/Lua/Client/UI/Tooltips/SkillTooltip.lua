@@ -300,7 +300,6 @@ local function OnSkillTooltip(character, skill, tooltip)
 			local props = tooltip:GetElement("SkillProperties", {Properties={}, Resistances={}})
 			local properties = {}
 			for i,v in pairs(props.Properties) do
-				print(i, v.Label, v.Warning)
 				if not StringHelpers.IsNullOrWhitespace(v.Label) then
 					properties[#properties+1] = v
 				end

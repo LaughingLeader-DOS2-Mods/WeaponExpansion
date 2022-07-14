@@ -86,19 +86,25 @@ end
 
 --Prioritized last, in case other mods add to this table
 Ext.Events.SessionLoaded:Subscribe(function ()
-	SkillManager.Register.BeforeProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
-		local target = GameHelpers.TryGetObject(e.Data.Target)
-		if target == nil then
-			local targetPos = e.Data.EndPosition
-			targetPos[2] = targetPos[2] + 2.0
-			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_MaxBonusDistance", 12.0)
-			local currentDist = GameHelpers.Math.GetDistance(e.Character.WorldPos, targetPos)
-			local dist = maxDistance - currentDist
-			e.Data.IgnoreObjects = false
-			targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, targetPos[1], targetPos[2], targetPos[3])
-			e.Data.EndPosition = targetPos
-		end
-	end)
+	-- SkillManager.Register.BeforeProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
+	-- 	--local target = GameHelpers.TryGetObject(e.Data.Target)
+	-- 	if not GameHelpers.IsValidHandle(e.Data.Target) then
+	-- 		local skillRange = Ext.Stats.GetAttribute(e.Skill, "TargetRadius")
+	-- 		local targetPos = e.Data.EndPosition
+	-- 		targetPos[2] = targetPos[2] + 2.0
+	-- 		local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_MaxBonusDistance", 12.0)
+	-- 		local currentDist = GameHelpers.Math.GetDistance(e.Character.WorldPos, targetPos)
+	-- 		--If targeting the ground near the edge of the skill range, extend the end target position
+	-- 		if currentDist < skillRange - 1.0 then
+	-- 			local dist = maxDistance - skillRange
+	-- 			if dist > 0 then
+	-- 				e.Data.IgnoreObjects = false
+	-- 				targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, targetPos[1], targetPos[2], targetPos[3])
+	-- 				e.Data.EndPosition = targetPos
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end)
 
 	SkillManager.Register.ProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
 		local raceTag = GetRaceTag(e.Character)

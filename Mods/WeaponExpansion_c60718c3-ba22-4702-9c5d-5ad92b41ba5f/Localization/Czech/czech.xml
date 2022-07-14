@@ -1794,7 +1794,7 @@
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
 	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with the &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
-	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[Special:LLWEAPONEX_PistolRuneEffects]</content>
+	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].[Special:LLWEAPONEX_PistolRuneEffects]</content>
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
 	<content contentuid="haf9a091fgead0g4151g95feg436e7da3f882">Elemental Empower</content>
