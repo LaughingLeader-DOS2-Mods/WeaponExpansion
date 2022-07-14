@@ -160,19 +160,6 @@ function(e)
 	end
 end)
 
-SkillManager.Register.Hit({"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand"},
-function(e)
-	-- Silver bullets do bonus damage to undead/voidwoken
-	if e.Data.Success and TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
-		if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
-			local bonus = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_SilverBonusDamage", 1.5)
-			if bonus > 0 then
-				e.Data:MultiplyDamage(bonus, true)
-			end
-		end
-	end
-end)
-
 SkillManager.Register.Cast({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy"},
 function(e)
 	local combat = CombatGetIDForCharacter(e.Character.MyGuid)

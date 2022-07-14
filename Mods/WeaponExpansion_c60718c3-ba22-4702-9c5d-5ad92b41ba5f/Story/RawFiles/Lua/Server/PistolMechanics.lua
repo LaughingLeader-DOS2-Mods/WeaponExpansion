@@ -1,25 +1,15 @@
 SkillConfiguration.Pistols = {
 	AllShootSkills = {
-		"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
-		"Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
-		"Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
-		"Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
+		"Projectile_LLWEAPONEX_Pistol_Shoot",
+		"Projectile_LLWEAPONEX_Pistol_Shoot_Enemy",
 	},
-	RaceToSkill = {
-		DWARF = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
-		HUMAN = "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand",
-		ELF = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
-		LIZARD = "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand",
+	RaceToProjectileBone = {
+		DWARF = "Dummy_L_HandFX",
+		HUMAN = "Dummy_L_HandFX",
+		ELF = "Dummy_R_HandFX",
+		LIZARD = "Dummy_R_HandFX",
 	},
 	PistolEffects = {
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("DWARF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 600, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("ELF", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 250, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("HUMAN", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand", 400, "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT");
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 0, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
-		-- DB_LLWEAPONEX_Pistols_HandProjectiles("LIZARD", 1, "Projectile_LLWEAPONEX_Pistol_Shoot_RightHand", 800, "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT");
 		DWARF = {
 			[0] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_LEFT",
 			[1] = "LLWEAPONEX_FX_PISTOL_EXPLOSION_RIGHT",
@@ -66,15 +56,6 @@ local function GetRaceTag(character)
 	return "HUMAN"
 end
 
-local function GetPistolProjectileSkill(char)
-	for tag,skill in pairs(SkillConfiguration.Pistols.RaceToSkill) do
-		if char:HasTag(tag) then
-			return skill
-		end
-	end
-	return "Projectile_LLWEAPONEX_Pistol_Shoot_LeftHand"
-end
-
 ---@param char EsvCharacter
 local function GetPistolExplosionEffect(char)
 	local race = GetRaceTag(char)
@@ -105,40 +86,48 @@ end
 
 --Prioritized last, in case other mods add to this table
 Ext.Events.SessionLoaded:Subscribe(function ()
-	RegisterSkillListener(SkillConfiguration.Pistols.AllShootSkills, function (caster, skill, state, data)
-		if state == SKILL_STATE.BEFORESHOOT then
-			---@type EsvShootProjectileRequest
-			local request = data
-			local target = GameHelpers.TryGetObject(request.Target)
-			if target == nil then
-				local caster = GameHelpers.GetCharacter(caster)
-				local targetPos = request.EndPosition
-				targetPos[2] = targetPos[2] + 2.0
-				local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_MaxBonusDistance", 12.0)
-				local currentDist = GameHelpers.Math.GetDistance(caster.WorldPos, targetPos)
-				local dist = maxDistance - currentDist
-				request.IgnoreObjects = false
-				targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(caster, dist, targetPos[1], targetPos[2], targetPos[3])
-				request.EndPosition = targetPos
-			end
-		elseif state == SKILL_STATE.SHOOTPROJECTILE then
-			local caster = GameHelpers.GetCharacter(caster)
-			local status = GetPistolExplosionEffect(caster)
-			if status then
-				GameHelpers.Status.Apply(caster, status, 0.0, 0, caster)
+	SkillManager.Register.BeforeProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
+		local target = GameHelpers.TryGetObject(e.Data.Target)
+		if target == nil then
+			local targetPos = e.Data.EndPosition
+			targetPos[2] = targetPos[2] + 2.0
+			local maxDistance = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_MaxBonusDistance", 12.0)
+			local currentDist = GameHelpers.Math.GetDistance(e.Character.WorldPos, targetPos)
+			local dist = maxDistance - currentDist
+			e.Data.IgnoreObjects = false
+			targetPos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, dist, targetPos[1], targetPos[2], targetPos[3])
+			e.Data.EndPosition = targetPos
+		end
+	end)
+
+	SkillManager.Register.ProjectileShoot(SkillConfiguration.Pistols.AllShootSkills, function (e)
+		local raceTag = GetRaceTag(e.Character)
+		local bone = SkillConfiguration.Pistols.RaceToProjectileBone[raceTag]
+		if bone then
+			e.Data.RootTemplate.CastBone = bone
+		end
+
+		local status = GetPistolExplosionEffect(e.Character)
+		if status then
+			GameHelpers.Status.Apply(e.Character, status, 0.0, false, e.Character)
+		end
+	end)
+
+	SkillManager.Register.Hit(SkillConfiguration.Pistols.AllShootSkills, function(e)
+		-- Silver bullets do bonus damage to undead/voidwoken
+		if e.Data.Success then
+			if TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
+				if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_Pistols") then
+					local bonus = GameHelpers.GetExtraData("LLWEAPONEX_Pistol_SilverBonusDamage", 1.5)
+					if bonus > 0 then
+						e.Data:MultiplyDamage(bonus, true)
+					end
+				end
 			end
 		end
 	end)
-end, {Priority=999})
 
-Timer.Subscribe("LLWEAPONEX_RemovePistolEffect", function(e)
-	if e.Data.Object then
-		GameHelpers.Status.Remove(e.Data.Object, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
-	end
-end)
-
-SkillManager.Register.All("Projectile_LLWEAPONEX_Pistol_Shoot", function(e)
-	if e.State == SKILL_STATE.USED then
+	SkillManager.Register.Used(SkillConfiguration.Pistols.AllShootSkills, function(e)
 		if ShouldPlaySheatheAnimation(e.Character) then
 			Timer.StartOneshot("Timers_LLWEAPONEX_EquipPistolFX", 350, function()
 				GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
@@ -146,69 +135,17 @@ SkillManager.Register.All("Projectile_LLWEAPONEX_Pistol_Shoot", function(e)
 		else
 			GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_FX_PISTOL_A_SHOOTING", 12.0, true, e.Character)
 		end
-	elseif e.State == SKILL_STATE.CAST then
+	end)
+	
+	SkillManager.Register.Cast(SkillConfiguration.Pistols.AllShootSkills, function(e)
 		local delay = GetPistolRemoveDelay(e.Character)
 		Timer.StartObjectTimer("LLWEAPONEX_RemovePistolEffect", e.Character, delay)
+	end)
+
+end, {Priority=999})
+
+Timer.Subscribe("LLWEAPONEX_RemovePistolEffect", function(e)
+	if e.Data.Object then
+		GameHelpers.Status.Remove(e.Data.Object, "LLWEAPONEX_FX_PISTOL_A_SHOOTING")
 	end
 end)
-
-local function ShootPistolAtObject(source,target)
-	source = GameHelpers.GetCharacter(source)
-	target = GameHelpers.TryGetObject(target)
-
-	local skill = GetPistolProjectileSkill(source)
-	-- For some reason, KNOCKED_DOWN types makes the target un-hittable by projectiles shot by script
-	-- Allies also cannot be hit by script-spawned 0 ExplodeRadius projectiles, so we have to force the hit there too.
-	local forceHit = GameHelpers.Status.HasStatusType(target, "KNOCKED_DOWN")
-	if not forceHit and GameHelpers.Ext.ObjectIsCharacter(target) and not GameHelpers.Character.IsEnemy(source, target) then
-		forceHit = true
-	end
-	GameHelpers.Skill.ShootProjectileAt(target, skill, source, {SetHitObject = forceHit})
-end
-Ext.NewCall(ShootPistolAtObject, "LLWEAPONEX_ShootPistolAtObject", "(CHARACTERGUID)_Source, (GUIDSTRING)_Target")
-
-local function ShootPistolAtPosition(source,x,y,z)
-	local level = CharacterGetLevel(source)
-	local skill = GetPistolProjectileSkill(source)
-
-	local character = GameHelpers.GetCharacter(source)
-	local pos = character.Stats.Position
-	local rot = character.Stats.Rotation
-	--Ext.Print("Rotation:",Ext.JsonStringify(rot))
-	--Ext.Print("attacker.Position:",Ext.JsonStringify(pos))
-
-	NRD_ProjectilePrepareLaunch()
-	NRD_ProjectileSetString("SkillId", skill)
-	NRD_ProjectileSetInt("CasterLevel", level)
-	NRD_ProjectileSetGuidString("Caster", source)
-	NRD_ProjectileSetVector3("SourcePosition", pos[1],pos[2] + 2.0, pos[3])
-	NRD_ProjectileSetGuidString("Source", source)
-
-	local distanceMult = 15.0
-	local heightDiff = math.abs(math.abs(pos[2]) - math.abs(y))
-	if heightDiff >= 2.0 then
-		distanceMult = 1.0
-	else
-		local forwardVector = {
-			-rot[7] * distanceMult,
-			0,---rot[8] * distanceMult, -- Rot Y is never used since objects can't look "up"
-			-rot[9] * distanceMult,
-		}
-		--Ext.Print("forwardVector:",Ext.JsonStringify(forwardVector))
-	
-		x = pos[1] + forwardVector[1]
-		--y = pos[2] + forwardVector[2]
-		z = pos[3] + forwardVector[3]
-	end
-	y = GameHelpers.Grid.GetY(x,z)
-	--Ext.Print("heightDiff:",heightDiff)
-	--Ext.Print("targetPos:",Ext.JsonStringify({x,y,z}))
-
-	NRD_ProjectileSetVector3("HitObjectPosition", x,y,z)
-	NRD_ProjectileSetVector3("TargetPosition", x,y,z)
-
-	--PlayEffectAtPosition("RS3_FX_Skills_Void_SwapGround_Impact_Root_01",x,y,z)
-
-	NRD_ProjectileLaunch()
-end
-Ext.NewCall(ShootPistolAtPosition, "LLWEAPONEX_ShootPistolAtPosition", "(CHARACTERGUID)_Source, (REAL)_x, (REAL)_y, (REAL)_z")
