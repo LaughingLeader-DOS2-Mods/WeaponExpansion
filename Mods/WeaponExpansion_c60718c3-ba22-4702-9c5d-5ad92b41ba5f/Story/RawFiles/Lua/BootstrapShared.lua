@@ -7,6 +7,8 @@ Debug = {
 Math = { AbilityScaling = {}}
 Text = {}
 
+if SkillConfiguration == nil then SkillConfiguration = {} end
+
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, Required = 0},
 	[1] = {Amount = 30, Required = 1000},

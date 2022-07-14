@@ -1794,7 +1794,7 @@
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
 	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with the &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
-	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[2][3]</content>
+	<content contentuid="haf932263g4ea4g4454gb6ebg9555a5a4fcf5">Shoot your equipped pistol at a target, dealing [1].&lt;br&gt;&lt;font color=&apos;#FF9922&apos;&gt;Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.&lt;/font&gt;&lt;br&gt;&lt;font color=&apos;#77BB22&apos;&gt;When firing from a different elevation than your target, the bullet will travel at an angle.&lt;/font&gt;[Special:LLWEAPONEX_PistolRuneEffects]</content>
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
 	<content contentuid="haf9a091fgead0g4151g95feg436e7da3f882">Elemental Empower</content>
@@ -1987,7 +1987,7 @@
 	<content contentuid="hc3f850f7g42c0g4d41gb9b3g4cf024706cb3">Congealed Blood Ball</content>
 	<content contentuid="hc40e13abge322g44d1g9fc4gf13b7ea652d2">Throw the breach charge at a target position.&lt;br&gt;&lt;font color=&apos;#ff5a11&apos;&gt;Detonating this charge breaks locks up to level 10 in a [1] radius, and knocking back objects within [2].&lt;/font&gt;</content>
 	<content contentuid="hc432ad71g4a44g47c4gb514gecbc5236ee4c">Hunkering Down</content>
-	<content contentuid="hc4557351g0123g43adga970gafe2a3715d1b">Shoot your &lt;font color=&apos;#C7A758&apos;&gt;Hand Crossbow&lt;/font&gt; at a target, dealing [1].[2][3]</content>
+	<content contentuid="hc4557351g0123g43adga970gafe2a3715d1b">Shoot your &lt;font color=&apos;#C7A758&apos;&gt;Hand Crossbow&lt;/font&gt; at a target, dealing [1].[Special:LLWEAPONEX_HandCrossbowRuneEffects]</content>
 	<content contentuid="hc45bd0bdg41f6g414dg9736ga2fe46ae85f0">Placeholder</content>
 	<content contentuid="hc493236cg95bcg4990g8209gd972ba1b6b3d">&lt;font color=&apos;#FF337F&apos;&gt;Pistol Mastery IV&lt;/font&gt;</content>
 	<content contentuid="hc4aab8cfg47b2g410aga4c7gde8618aa77fd">&lt;font color=&apos;#FF33FF&apos;&gt;Hand Crossbow Mastery V&lt;/font&gt;</content>

@@ -1,5 +1,5 @@
 Key	Content	Handle
 Shout_LLWEAPONEX_Pistol_Reload_Description	Reload your <font color='#C7A758'>Pistol</font>, instantly refreshing the <font color='#CCFF22'>Shoot Pistol</font> skill.	hb6f630efgd273g468bg9875g32bffb7fb120
 Shout_LLWEAPONEX_Pistol_Reload_DisplayName	<font color='#FFCC22'>Reload Pistol</font>	h25965ce8g9e12g4518gbecag7d24ba09c699
-Target_LLWEAPONEX_Pistol_Shoot_Description	Shoot your equipped pistol at a target, dealing [1].<br><font color='#FF9922'>Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.</font><br><font color='#77BB22'>When firing from a different elevation than your target, the bullet will travel at an angle.</font>[2][3]	haf932263g4ea4g4454gb6ebg9555a5a4fcf5
+Target_LLWEAPONEX_Pistol_Shoot_Description	Shoot your equipped pistol at a target, dealing [1].<br><font color='#FF9922'>Bullets fired from a pistol travel in a straight line, well beyond your limited targeting range.</font><br><font color='#77BB22'>When firing from a different elevation than your target, the bullet will travel at an angle.</font>[Special:LLWEAPONEX_PistolRuneEffects]	haf932263g4ea4g4454gb6ebg9555a5a4fcf5
 Target_LLWEAPONEX_Pistol_Shoot_DisplayName	<font color='#CCFF22'>Shoot Pistol</font>	hc5b0dad7g7c99g4afbga957g927f7db6c3de

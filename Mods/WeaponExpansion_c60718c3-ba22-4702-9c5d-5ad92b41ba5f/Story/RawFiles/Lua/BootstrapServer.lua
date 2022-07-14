@@ -93,11 +93,8 @@ end
 
 BonusSkills = {}
 
-SkillConfiguration = {
-    TempData = {
-        RecalculatedUnarmedSkillDamage = {}
-    }
-}
+if SkillConfiguration == nil then SkillConfiguration = {} end
+SkillConfiguration.TempData = {RecalculatedUnarmedSkillDamage = {}}
 
 if MasterySystem == nil then
 	MasterySystem = {}

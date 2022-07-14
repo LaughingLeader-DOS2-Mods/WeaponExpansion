@@ -50,6 +50,13 @@ local function ReplaceScalingText(checkText, character, element, func)
 	return false
 end
 
+SkillConfiguration.DisplayScalingStatSkills = {
+	Projectile_LLWEAPONEX_Pistol_Shoot = true,
+	Projectile_LLWEAPONEX_Pistol_Shoot_Enemy = true,
+	Projectile_LLWEAPONEX_HandCrossbow_Shoot = true,
+	Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy = true,
+}
+
 ---@param character EclCharacter
 ---@param skill string
 ---@param tooltip TooltipData
@@ -286,20 +293,26 @@ local function OnSkillTooltip(character, skill, tooltip)
 	if characterTags["LLWEAPONEX_Firearm_Equipped"] and not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
 		descriptionElement.Label = descriptionElement.Label:gsub("arrow", "bullet"):gsub("Arrow", "Bullet")
 	end
-	-- if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_PacifistsWrath_Equipped") then
-	-- 	if Ext.StatGetAttribute(skill, "UseWeaponDamage") == "Yes" then
-	-- 		local main = character:GetItemBySlot("Weapon")
-	-- 		local offhand = character:GetItemBySlot("Shield")
-	-- 		if main and GameHelpers.ItemHasTag(main, "LLWEAPONEX_PacifistsWrath_Equipped") then
-	-- 			main.Stats.DynamicStats[1].MinDamage = 1
-	-- 			main.Stats.DynamicStats[1].MaxDamage = 1
-	-- 		end
-	-- 		if offhand and GameHelpers.ItemHasTag(offhand, "LLWEAPONEX_PacifistsWrath_Equipped") then
-	-- 			offhand.Stats.DynamicStats[1].MinDamage = 1
-	-- 			offhand.Stats.DynamicStats[1].MaxDamage = 1
-	-- 		end
-	-- 	end
-	-- end
+
+	if SkillConfiguration.DisplayScalingStatSkills[skill] then
+		local text = Skills.Params["LLWEAPONEX_ScalingStat"](skill, character.Stats)
+		print(skill, text)
+		if not StringHelpers.IsNullOrEmpty(text) then
+			local props = tooltip:GetElement("SkillProperties", {Properties={}, Resistances={}})
+			local properties = {}
+			for i,v in pairs(props.Properties) do
+				print(i, v.Label, v.Warning)
+				if not StringHelpers.IsNullOrWhitespace(v.Label) then
+					properties[#properties+1] = v
+				end
+			end
+			properties[#properties+1] = {
+				Label = text,
+				Warning = ""
+			}
+			props.Properties = properties
+		end
+	end
 end
 
 return OnSkillTooltip

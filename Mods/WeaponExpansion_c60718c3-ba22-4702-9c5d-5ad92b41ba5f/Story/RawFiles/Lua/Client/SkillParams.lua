@@ -74,13 +74,21 @@ local skillAbility = {
 }
 
 local function GetSkillAbility(skill, character, isFromItem, param)
-	local ability = skillAbility[skill.Name]
+	local skillId = skill
+	if type(skill) ~= "string" then
+		skillId = skill.Name
+	end
+	local ability = skillAbility[skillId]
 	if ability ~= nil then
 		local t = type(ability)
 		if t == "string" then
 			local text = Text.DefaultSkillScaling.LevelBased:ReplacePlaceholders(GameHelpers.GetAbilityName(ability))
 			if text ~= nil then
-				return "<br><font color='#078FC8'>"..text.."</font>"
+				if param then
+					return string.format("<br><font color='#078FC8'>%s</font>", text)
+				else
+					return text
+				end
 			end
 		elseif t == "table" then
 			local allBonuses = {}
@@ -93,7 +101,11 @@ local function GetSkillAbility(skill, character, isFromItem, param)
 			end
 			local text = Text.DefaultSkillScaling.LevelBased:ReplacePlaceholders(StringHelpers.Join(", ", allBonuses))
 			if text ~= nil then
-				return "<br><font color='#078FC8'>"..text.."</font>"
+				if param then
+					return string.format("<br><font color='#078FC8'>%s</font>", text)
+				else
+					return text
+				end
 			end
 		end
 	end
@@ -184,6 +196,7 @@ function SkillGetDescriptionParam(skill, character, isFromItem, param)
 				end
 			else
 				Ext.PrintError("Error getting param ("..param..") for skill:\n",txt)
+				return ""
 			end
 		end
 	end
@@ -199,10 +212,6 @@ Ext.Events.SkillGetDescriptionParam:Subscribe(function (e)
 	end
 end)
 
----@param e {Character:StatCharacter, Description:string, IsFromItem:boolean, Params:string[], Skill:StatEntrySkillData}
-Ext.Events.SkillGetDescriptionParam:Subscribe(function (e)
-    if e.Skill.Name == "Projectile_EnemyFireball" and e.Params[1] == "Damage" then
-		e.Description = GameHelpers.Tooltip.FormatDamageRange({Water = {Min = 1, Max=2000}})
-		e:StopPropagation()
-	end
-end)
+Events.GetTextPlaceholder:Subscribe(function (e)
+	return GetPistolBulletEffects(nil, e.Character, false, e.ID)
+end, {ID="LLWEAPONEX_PistolRuneEffects"})
