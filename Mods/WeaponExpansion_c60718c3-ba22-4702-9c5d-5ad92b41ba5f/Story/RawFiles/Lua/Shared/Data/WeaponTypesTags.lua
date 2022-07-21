@@ -1,7 +1,7 @@
 TableHelpers.AddOrUpdate(Tags.TemplateToTag, {
 	--WPN_Ataraxians_Scythe_2H_A
 	["3b45c978-5a42-40b5-a7aa-183852616910"] = "LLWEAPONEX_Scythe",
-	--WPN_Tool_Scythe_2H_A_
+	--WPN_Tool_Scythe_2H_A
 	["44525b09-a2b1-4b45-8d52-e893d04390dd"] = "LLWEAPONEX_Scythe",
 })
 
@@ -28,10 +28,15 @@ TableHelpers.AddOrUpdate(Tags.RangedWeaponTags, {
 })
 
 TableHelpers.AddOrUpdate(Tags.StatWordToTag, {
-	["Scythe"] = "LLWEAPONEX_Scythe"
+	Banner = "LLWEAPONEX_Banner",
+	BattleBook = "LLWEAPONEX_BattleBook",
+	Katana = "LLWEAPONEX_Katana",
+	Pistol = "LLWEAPONEX_Pistol",
+	Runeblade = "LLWEAPONEX_Runeblade",
+	Scythe = "LLWEAPONEX_Scythe",
 })
 
-function AddWeaponTypeTag(tag)
+local function AddWeaponTypeTag(tag)
 	Tags.WeaponTypes[tag] = tag.."_Equipped"
 end
 

@@ -42,7 +42,7 @@ function EquipmentManager:TagWeapon(item, statType, stat, itemTags)
 		end
 	end
 
-	local template = StringHelpers.GetUUID(GetTemplate(item.MyGuid))
+	local template = GameHelpers.GetTemplate(item.MyGuid)
 	local templateTag = Tags.TemplateToTag[template]
 	if Vars.DebugMode then
 		fprint(LOGLEVEL.WARNING, "[WeaponEx:TagWeapon] (%s) Type(%s) Stat(%s) Template(%s) TemplateTag(%s)", item.MyGuid, statType, stat, template, templateTag or "")
@@ -97,6 +97,7 @@ function EquipmentManager:TagWeapon(item, statType, stat, itemTags)
 			end
 		end
 	end
+	return tagged
 end
 
 ---@param item EsvItem
