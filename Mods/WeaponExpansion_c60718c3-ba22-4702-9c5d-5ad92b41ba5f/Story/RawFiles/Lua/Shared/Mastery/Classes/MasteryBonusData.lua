@@ -143,7 +143,9 @@ function MasteryBonusData.DefaultStatusTagCheck(tag, checkSource)
 		return function(bonus, id, character, tooltipType, status)
 			if tooltipType == "status" and status then
 				local source = GameHelpers.TryGetObject(status.StatusSourceHandle)
-				if source and GameHelpers.CharacterOrEquipmentHasTag(source, tag) or Vars.LeaderDebugMode then
+				---@cast source EclCharacter
+				if source and GameHelpers.Ext.ObjectIsCharacter(source)
+				and GameHelpers.CharacterOrEquipmentHasTag(source, tag) then
 					return true
 				end
 				return false
@@ -153,7 +155,7 @@ function MasteryBonusData.DefaultStatusTagCheck(tag, checkSource)
 	else
 		return function(bonus, id, character, tooltipType, status)
 			if tooltipType == "status" then
-				return GameHelpers.CharacterOrEquipmentHasTag(character, tag) or Vars.LeaderDebugMode
+				return GameHelpers.CharacterOrEquipmentHasTag(character, tag)
 			end
 			return true
 		end
