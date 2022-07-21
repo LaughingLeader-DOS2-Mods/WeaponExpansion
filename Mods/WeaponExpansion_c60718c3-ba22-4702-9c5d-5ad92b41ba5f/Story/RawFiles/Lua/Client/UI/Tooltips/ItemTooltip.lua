@@ -181,7 +181,7 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	local damageType = Ext.StatGetAttribute(boost, "Damage Type")
 	local weaponTypeName = GameHelpers.GetStringKeyText(weaponTypeTag, "")
 	if weaponTypeName ~= "" then
-		local text = Text.ItemTooltip.SpecialRuneDamageTypeText:ReplacePlaceholders(weaponTypeName, GameHelpers.GetDamageText(damageType))
+		local text = GameHelpers.Tooltip.ReplacePlaceholders(Text.ItemTooltip.SpecialRuneDamageTypeText:ReplacePlaceholders(weaponTypeName, GameHelpers.GetDamageText(damageType), character))
 		local element = {
 			Type = "SkillDescription",
 			Label = text
@@ -214,16 +214,18 @@ local function ReplaceRuneTooltip(item, tooltip, character, weaponTypeTag, slotT
 	end
 
 	---@type StatProperty[]
-	local extraProperties = Ext.StatGetAttribute(boost, "ExtraProperties")
-	if extraProperties ~= nil then
+	local extraProperties = GameHelpers.Stats.GetExtraProperties(boost, "ExtraProperties")
+	if extraProperties ~= nil and #extraProperties > 0 then
 		for i,v in pairs(extraProperties) do
-			if v.Type == "Status" then
-				local title = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName"), "StatusName")
-				local description = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "Description"), "")
+			if v.Type == "Status" and not Data.EngineStatus[v.Action] and GameHelpers.Stats.Exists(v.Action) then
+				local stat = Ext.Stats.Get(v.Action)
+				---@cast stat StatEntryStatusData
+				local title = GameHelpers.GetStringKeyText(stat.DisplayName, stat.DisplayNameRef)
+				local description = GameHelpers.GetStringKeyText(stat.Description, stat.DescriptionRef)
 				if v.StatusChance < 1.0 then
 					title = string.format("%s %s", title, Text.ItemTooltip.ChanceText:ReplacePlaceholders(math.ceil(v.StatusChance * 100)))
 				end
-				if description ~= nil and description ~= "" then
+				if not StringHelpers.IsNullOrWhitespace(description) then
 					local descParams = Ext.StatGetAttribute(v.Action, "DescriptionParams")
 					if descParams ~= nil and descParams ~= "" then
 						local paramValues = {}
@@ -300,24 +302,25 @@ local function OnItemTooltip(item, tooltip)
 	end
 
 	local _TAGS = GameHelpers.GetItemTags(item, true, false)
+	---@cast _TAGS table<string,boolean>
 
 	local descriptionElement = tooltip:GetElement("ItemDescription") or {Type="ItemDescription", Label = ""}
 
-	if not GameHelpers.Item.IsObject(item) then
-		if not _TAGS.LeaderLib_AutoLevel and _TAGS.LLWEAPONEX_AutoLevel
-		and GetSettings().Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
-		then
-			if not string.find(string.lower(descriptionElement.Label), "automatically level") then
-				if not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
-					descriptionElement.Label = descriptionElement.Label .. "<br>" .. Text.ItemDescription.AutoLeveling.Value
-				else
-					descriptionElement.Label = Text.ItemDescription.AutoLeveling.Value
-				end
+	local statsId = item.Stats and item.Stats.Name or item.StatsId
+
+	if not _TAGS.LeaderLib_AutoLevel and _TAGS.LLWEAPONEX_AutoLevel
+	and GetSettings().Global:FlagEquals("LLWEAPONEX_UniqueAutoLevelingDisabled", false)
+	then
+		if not string.find(string.lower(descriptionElement.Label), "automatically level") then
+			if not StringHelpers.IsNullOrEmpty(descriptionElement.Label) then
+				descriptionElement.Label = descriptionElement.Label .. "<br>" .. Text.ItemDescription.AutoLeveling.Value
+			else
+				descriptionElement.Label = Text.ItemDescription.AutoLeveling.Value
 			end
 		end
+	end
 
-		local statsId = item.Stats and item.Stats.Name or nil
-
+	if not GameHelpers.Item.IsObject(item) then
 		if statsId == "ARM_UNIQUE_LLWEAPONEX_PowerGauntlets_A" then
 			--Removes the Requires Dwarf / Male
 			for i,element in pairs(tooltip:GetElements("ItemRequirement")) do
@@ -414,12 +417,6 @@ local function OnItemTooltip(item, tooltip)
 		end
 
 		if character ~= nil then
-			if _TAGS.LLWEAPONEX_Rune_HandCrossbow_DamageType then
-				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbowBolt")
-			end
-			if _TAGS.LLWEAPONEX_Rune_Pistol_DamageType then
-				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
-			end
 			if _TAGS.LLWEAPONEX_RunicCannon then
 				if item.ItemType == "Weapon" then
 					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_ARMCANNON_HIT_DisplayName", "Builds Energy on Hit")
@@ -467,8 +464,7 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 	elseif character ~= nil then
-		local statsId = not StringHelpers.IsNullOrWhitespace(item.StatsId) and item.StatsId or nil
-		if statsId then
+		if not Data.ItemRarity[statsId] then
 			local bonusText = MasteryBonusManager.GetBonusText(character, item.StatsId, "item", item, _TAGS, tooltip.ItemHasSkill == true)
 			if bonusText then
 				local topDesc = descriptionElement
@@ -481,6 +477,12 @@ local function OnItemTooltip(item, tooltip)
 					topDesc.Label = topDesc.Label .. "<br>"
 				end
 				topDesc.Label = topDesc.Label .. bonusText
+			end
+
+			if _TAGS.LLWEAPONEX_Rune_HandCrossbow_DamageType then
+				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_HandCrossbow", "LLWEAPONEX_HandCrossbowBolt")
+			elseif _TAGS.LLWEAPONEX_Rune_Pistol_DamageType then
+				ReplaceRuneTooltip(item, tooltip, character, "LLWEAPONEX_Pistol", "LLWEAPONEX_PistolBullet")
 			end
 		end
 	end
