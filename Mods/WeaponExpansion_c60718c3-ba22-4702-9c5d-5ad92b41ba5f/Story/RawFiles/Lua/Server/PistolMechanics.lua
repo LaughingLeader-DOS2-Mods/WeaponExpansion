@@ -123,8 +123,9 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 		--PISTOL_CLOAKEDJUMP
 		if e.Data.TargetObject and e.Data.TargetObject:HasTag("LLWEAPONEX_Pistol_MarkedForCrit") then
 			if not e.Data:HasHitFlag("CriticalHit", true) then
+				local critPerPoint = GameHelpers.GetExtraData("SkillAbilityCritMultiplierPerPoint", 5)
 				local attackerStats = e.Character.Stats
-				local critMult = (attackerStats.RogueLore * Ext.ExtraData.SkillAbilityCritMultiplierPerPoint) * 0.01
+				local critMult = (attackerStats.RogueLore * critPerPoint) * 0.01
 				e.Data:SetHitFlag("CriticalHit", true)
 				e.Data:MultiplyDamage(1 + critMult)
 			end

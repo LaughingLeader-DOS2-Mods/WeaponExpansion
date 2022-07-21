@@ -127,6 +127,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 		local chance = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChance", 5, true)
 		local bonusPerHit = GameHelpers.GetExtraData("LLWEAPONEX_MB_Bow_FocusedBasicAttack_CriticalChanceBonusPerHit", 1.5, false)
 		if chance > 0
+		and e.TargetIsObject
 		and not e.SkillData -- Basic attacks only
 		--enable skipWeaponCheck in HasMasteryBonus, so this bonus works as long as it's been unlocked, and the weapon type is a Bow, stats-wise
 		and MasteryBonusManager.HasMasteryBonus(e.Attacker, self.ID, true) then

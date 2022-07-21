@@ -5,7 +5,7 @@ end
 
 local function _NO_DESC() end
 
----@param id string
+--- @param id string
 --- @param getDesc fun(property:StatsPropertyExtender):string|nil
 --- @param onPos fun(property:StatsPropertyExtender, attacker: EsvCharacter|EsvItem, position: vec3, areaRadius: number, isFromItem: boolean, skill: StatEntrySkillData|nil, hit: StatsHitDamageInfo|nil)
 --- @param onTarget fun(property:StatsPropertyExtender, attacker: EsvCharacter|EsvItem, target: EsvCharacter|EsvItem, position: vec3, isFromItem: boolean, skill: StatEntrySkillData|nil, hit: StatsHitDamageInfo|nil)
