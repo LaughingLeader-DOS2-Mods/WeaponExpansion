@@ -101,6 +101,7 @@ end
 local OnItemTooltip = Ext.Require("Client/UI/Tooltips/ItemTooltip.lua")
 local OnSkillTooltip = Ext.Require("Client/UI/Tooltips/SkillTooltip.lua")
 local OnStatusTooltip = Ext.Require("Client/UI/Tooltips/StatusTooltip.lua")
+local OnRuneTooltip = Ext.Require("Client/UI/Tooltips/RuneTooltip.lua")
 
 local OnStatTooltip = Ext.Require("Client/UI/Tooltips/StatTooltips.lua")
 
@@ -174,7 +175,7 @@ local function OnTooltipPositioned(ui, tooltip_mc, isControllerMode, lastItem, .
 	end
 end
 
----@type table<string,LeaderLibGetTextPlaceholderCallback>
+---@type table<string, LeaderLibGetTextPlaceholderCallback>
 TooltipParams.SpecialParamFunctions = {
 	---@param statCharacter StatCharacter
 	LLWEAPONEX_MB_BacklashAPBonus = function(param, statCharacter)
@@ -236,10 +237,11 @@ RegisterListener("GetTextPlaceholder", function(param, statCharacter)
 end)
 
 local function Init()
-	Game.Tooltip.RegisterListener("Stat", nil, OnStatTooltip)
-	Game.Tooltip.RegisterListener("Skill", nil, OnSkillTooltip)
-	Game.Tooltip.RegisterListener("Status", nil, OnStatusTooltip)
-	Game.Tooltip.RegisterListener("Item", nil, OnItemTooltip)
+	Game.Tooltip.Register.Stat(OnStatTooltip)
+	Game.Tooltip.Register.Skill(OnSkillTooltip)
+	Game.Tooltip.Register.Status(OnStatusTooltip)
+	Game.Tooltip.Register.Item(OnItemTooltip)
+	Game.Tooltip.Register.Rune(OnRuneTooltip)
 
 	Events.OnWorldTooltip:Subscribe(OnWorldTooltip, {Priority=999})
 	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
