@@ -255,6 +255,8 @@ Text = {
 		RupteredWound = ts:Create("h325012b0g74d1g4e9bg859bg8b986e80561b", "<font color='#FF1155' size='16'>Ruptered Wound [1]</font>"),
 		ArmorBreak = ts:CreateFromKey("LLWEAPONEX_StatusText_ArmorBreak", "<font color='#88A25B'>Armor Break!</font> [1]"),
 		BludgeonShatteredStatus = ts:CreateFromKey("LLWEAPONEX_StatusText_BludgeonShatteredStatus", "<font color='#F19824'>Shattered [1]!</font>"),
+		WeaponAttributeChanged = ts:CreateFromKey("LLWEAPONEX_StatusText_WeaponAttributeChanged", "<font color='#33FF66'><font color='[3]'>[1]</font> is now empowered by</font> <font color='[4]'>[2]</font>"),
+		WeaponAttributeReset = ts:CreateFromKey("LLWEAPONEX_StatusText_WeaponAttributeReset", "<font color='#00FFC9'><font color='[3]'>[1]</font> is now empowered by <font color='[4]'>[2]</font>, as it originally was</font>"),
 	}
 }
 
