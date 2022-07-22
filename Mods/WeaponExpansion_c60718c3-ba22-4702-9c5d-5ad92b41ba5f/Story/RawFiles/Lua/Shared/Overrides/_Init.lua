@@ -1,3 +1,7 @@
+local type = type
+
+local _ISCLIENT = Ext.IsClient()
+
 ---@alias LLWEAPONEX_StatOverrides_GetConditionalAttributeValue<T> fun(statId:string, attributeId:string, value:T):T
 ---@alias LLWEAPONEX_StatOverrides_Attributes table<string, string|number|LLWEAPONEX_StatOverrides_GetConditionalAttributeValue<any>>
 
@@ -6,22 +10,6 @@ local BaseStats = Ext.Require("Shared/Overrides/BaseStats.lua")
 
 ---@type table<GUID, table<string, LLWEAPONEX_StatOverrides_Attributes>>
 local ModStats = Ext.Require("Shared/Overrides/ModStats.lua")
-
-local type = type
-
-
-local function AppendProperties(statName, property, value)
-	local existingTable = GameHelpers.Stats.GetCurrentOrInheritedProperty(statName, property)
-	if existingTable ~= nil then
-		for i,v in pairs(value) do
-			table.insert(existingTable, v)
-		end
-		Ext.StatSetAttribute(statName, property, existingTable)
-	else
-		--print("Ext.StatSetAttribute(",statName, property, Common.Dump(value),")")
-		Ext.StatSetAttribute(statName, property, value)
-	end
-end
 
 local gunExplosionEffectStatusProperties = {{
 	Type = "Status",
@@ -84,44 +72,26 @@ local bulletTemplates = {
 
 Skills.BulletTemplates = bulletTemplates
 
-local function CreateFirearmDerivativeSkills()
-	for skill,bulletTemplate in pairs(bulletTemplates) do
-		local defaultTemplate = skill.Template
-		local templateString = buildTemplateString("WeaponType", {
-			None = defaultTemplate,
-			Bow = defaultTemplate,
-			Crossbow = defaultTemplate,
-			Rifle = bulletTemplate
-		})
-		skill.Template = templateString
-		--local castEffect = skill.CastEffect
-		--castEffect = castEffect .. "{WeaponType}[Rifle]"
-		--skill.CastEffect = castEffect
-		--AppendProperties(skill, "SkillProperties", gunExplosionEffectStatusProperties)
-	end
-end
-
-local function HasComboCategory(categoryTable, category)
-    if categoryTable == nil then return false end
-    for i,v in pairs(categoryTable) do
-        if v == category then return true end
-    end
-    return false
-end
-
 ---@param stat StatEntrySkillData
----@param param string
+---@param param string|integer
 ---@param inverse boolean
 ---@param requirementType string
 local function AddRequirement(stat, param, inverse, requirementType)
 	-- ["Param"] = LLWEAPONEX_Katana_Equipped, ["Not"] = false, ["Requirement"] = Tag
 	local requirements = stat.Requirements
 	if requirements ~= nil then
+		for i=1,#requirements do
+			local req = requirements[i]
+			if req.Param == param and req.Requirement == requirementType and req.Not == inverse then
+				return false
+			end
+		end
 		requirements[#requirements+1] = {Param = param, Not = inverse, Requirement = requirementType}
 		stat.Requirements = requirements
 	else
 		stat.Requirements = {{Param = param, Not = inverse, Requirement = requirementType}}
 	end
+	return true
 end
 
 ---@param skill StatEntrySkillData
@@ -129,8 +99,15 @@ end
 ---@param tag string
 ---@param inverse boolean
 local function SwapRequirementWithTag(skill, requirement, tag, inverse)
-	skill.Requirement = requirement
-	AddRequirement(skill, tag, inverse or false, "Tag")
+	local changed = false
+	if skill.Requirement ~= requirement then
+		skill.Requirement = requirement
+		changed = true
+	end
+	if AddRequirement(skill, tag, inverse or false, "Tag") then
+		changed = true
+	end
+	return changed
 end
 
 local CanBackstabPropEntry = {
@@ -140,9 +117,13 @@ local CanBackstabPropEntry = {
 }
 
 local function AddCanBackstab(props)
-	if not string.find(Ext.JsonStringify(props), "CanBackstab") then
-		table.insert(props, CanBackstabPropEntry)
+	for _,v in pairs(props) do
+		if v.Type == "Custom" and v.Action == "CanBackstab" then
+			return false
+		end
 	end
+	props[#props+1] = CanBackstabPropEntry
+	return props
 end
 
 local IgnoreModPrefixes = {
@@ -150,6 +131,7 @@ local IgnoreModPrefixes = {
 	_MUSK_ = true
 }
 
+---@param skill string
 local function IgnoreRangerSkill(skill)
 	for k,b in pairs(IgnoreModPrefixes) do
 		if string.find(skill, k) then
@@ -157,22 +139,6 @@ local function IgnoreRangerSkill(skill)
 		end
 	end
 	return false
-end
-
----@param id string
----@param attribute string
----@param value string|number|LLWEAPONEX_StatOverrides_GetConditionalAttributeValue<any>
-local function ApplyOverride(id, attribute, value)
-	local stat = Ext.GetStat(id)
-	local t = type(value)
-	if t == "function" then
-		local v = value(id, attribute, stat[attribute])
-		if v ~= nil then
-			stat[attribute] = v
-		end
-	else
-		stat[attribute] = value
-	end
 end
 
 function LoadUniqueRequirementChanges()
@@ -194,54 +160,134 @@ function LoadUniqueRequirementChanges()
 	end
 end
 
-local function Run()
-	CreateFirearmDerivativeSkills()
+---@param current string[]
+---@vararg string
+---@return boolean changed
+---@return string[]|nil	categories
+local function AppendComboCategory(current, ...)
+	local categories = {}
+	for i=1,#current do
+		categories[current[i]] = true
+	end
+	local changed = false
+	local args = {...}
+	for i=1,#args do
+		local v = args[i]
+		if not categories[v] then
+			categories[v] = true
+			changed = true
+		end
+	end
+	if not changed then
+		return false
+	end
+	local result = {}
+	for v,_ in pairs(categories) do
+		result[#result+1] = v
+	end
+	table.sort(result)
+	return true,result
+end
 
-	--We're appending the CanBackstab property here instead of overriding the stat, in case a mod changed it
-	local props = Ext.StatGetAttribute("Projectile_LLWEAPONEX_BackstabbingFlamingDaggers", "SkillProperties") or {}
-	AddCanBackstab(props)
+---@param id string
+---@param attribute string
+---@param value string|number|LLWEAPONEX_StatOverrides_GetConditionalAttributeValue<any>
+local function ApplyOverride(id, attribute, value)
+	local stat = Ext.Stats.Get(id)
+	local t = type(value)
+	local finalValue = value
+	if t == "function" then
+		local v = value(id, attribute, stat[attribute])
+		if v ~= nil then
+			finalValue = v
+		end
+	end
+	if stat[attribute] ~= finalValue then
+		stat[attribute] = finalValue
+		return true
+	end
+	return false
+end
 
+local function Run(doSync)
 	local _EE2 = Ext.IsModLoaded(MODID.EE2Core)
 
-	for skill in GameHelpers.Stats.GetStats("SkillData", true) do
-		---@cast skill StatEntrySkillData
-		--local gameMaster = skill.ForGameMaster
-		local requirement = skill.Requirement
-		local ability = skill.Ability
-	
-		-- UseWeaponDamage is needed so weapons still get unsheathed when not unarmed.
-		--gameMaster == "Yes" and not IsEnemySkill(skill)
-		if skill.UseWeaponDamage == "Yes" then
-			if requirement == "MeleeWeapon" then
-				SwapRequirementWithTag(skill, "None", "LLWEAPONEX_NoMeleeWeaponEquipped", true)
-			elseif requirement == "DaggerWeapon" and ability == "Rogue" then
-				SwapRequirementWithTag(skill, "MeleeWeapon", "LLWEAPONEX_CannotUseScoundrelSkills", true)
-			end
-		end
+	---@type table<string,boolean>
+	local _syncStats = {}
 
-		if bulletTemplates[skill] == nil
-		and skill.SkillType == "Projectile"
-		and ability == "Ranger"
-		and requirement == "RangedWeapon"
-		and not IgnoreRangerSkill(skill)
-		then
-			local defaultTemplate = skill.Template
-			if not string.find(defaultTemplate, "{") then
+	--We're appending the CanBackstab property here instead of overriding the stat, in case a mod changed it
+	local bfd = Ext.Stats.Get("Projectile_LLWEAPONEX_BackstabbingFlamingDaggers")
+	if bfd then
+		local props = AddCanBackstab(bfd.SkillProperties or {})
+		if props then
+			bfd.SkillProperties = props
+			_syncStats[bfd.Name] = true
+		end
+	end
+
+	--for _,id in pairs(Ext.Stats.GetStats("SkillData")) do local s = Ext.Stats.Get(id); id.Template = id.Template .. id.Template end
+
+	for _,id in pairs(Ext.Stats.GetStats("SkillData")) do
+		local stat = Ext.Stats.Get(id)
+		---@cast stat StatEntrySkillData
+		--local gameMaster = skill.ForGameMaster
+		local requirement = stat.Requirement
+		local ability = stat.Ability
+
+		if bulletTemplates[id] then
+			local defaultTemplate = stat.Template
+			if not string.find(defaultTemplate, "{", 1, true) then
 				local templateString = buildTemplateString("WeaponType", {
 					None = defaultTemplate,
 					Bow = defaultTemplate,
 					Crossbow = defaultTemplate,
-					Rifle = defaultBulletTemplate
+					Rifle = bulletTemplates[id]
 				})
-				skill.Template = templateString
-				--print("[WeaponExpansion] Added rifle template support to skill ", skill)
+				if stat.Template ~= templateString then
+					stat.Template = templateString
+					_syncStats[id] = true
+				end
+			end
+		else
+			if stat.SkillType == "Projectile"
+			and ability == "Ranger"
+			and requirement == "RangedWeapon"
+			and not IgnoreRangerSkill(stat.Name)
+			then
+				local defaultTemplate = stat.Template
+				if not string.find(defaultTemplate, "{", 1, true) then
+					local templateString = buildTemplateString("WeaponType", {
+						None = defaultTemplate,
+						Bow = defaultTemplate,
+						Crossbow = defaultTemplate,
+						Rifle = defaultBulletTemplate
+					})
+					if defaultTemplate ~= templateString then
+						stat.Template = templateString
+						_syncStats[stat.Name] = true
+					end
+				end
+			end
+		end
+	
+		-- UseWeaponDamage is needed so weapons still get unsheathed when not unarmed.
+		--gameMaster == "Yes" and not IsEnemySkill(skill)
+		if stat.UseWeaponDamage == "Yes" then
+			if requirement == "MeleeWeapon" then
+				if SwapRequirementWithTag(stat, "None", "LLWEAPONEX_NoMeleeWeaponEquipped", true) then
+					_syncStats[stat.Name] = true
+				end
+			elseif requirement == "DaggerWeapon" and ability == "Rogue" then
+				if SwapRequirementWithTag(stat, "MeleeWeapon", "LLWEAPONEX_CannotUseScoundrelSkills", true) then
+					_syncStats[stat.Name] = true
+				end
 			end
 		end
 
 		if _EE2 then
 			--EE2 AP cost adjustment
-			if string.find(skill, "LLWEAPONEX") then
-				local ap = skill.ActionPoints
+			if string.find(id, "LLWEAPONEX") then
+				local ap = stat.ActionPoints
 				local originalAP = ap
 				if ap == 1 then
 					ap = 2
@@ -251,52 +297,89 @@ local function Run()
 					ap = 6
 				end
 				if ap ~= originalAP then
-					skill.ActionPoints = ap
+					stat.ActionPoints = ap
+					_syncStats[stat.Name] = true
 				end
 			end
 		end
 	end
 
 	-- Add a combo category to unique weapons.
-	for stat in GameHelpers.Stats.GetStats("Weapon", true) do
+	for _,id in pairs(Ext.Stats.GetStats("Weapon")) do
+		local stat = Ext.Stats.Get(id)
 		---@cast stat StatEntryWeapon
 		if stat.Unique == 1 then
-			local combocategory = stat.ComboCategory
-			if not HasComboCategory(combocategory, "UniqueWeapon") then
-				if combocategory ~= nil then
-					combocategory[#combocategory+1] = "UniqueWeapon"
-					stat.ComboCategory = combocategory
-				else
-					stat.ComboCategory = {"UniqueWeapon"}
-				end
+			local b,newCategories = AppendComboCategory(stat.ComboCategory, "UniqueWeapon", "Weapon")
+			if b then
+				---@cast newCategories string[]
+				stat.ComboCategory = newCategories
+				_syncStats[stat.Name] = true
 			end
-			if _EE2 and string.find(stat, "LLWEAPONEX_") then
+			if _EE2 and string.find(id, "LLWEAPONEX_") then
 				--EE2 AP cost adjustment
 				local ap = stat.AttackAPCost
 				if ap < 4 then
 					stat.AttackAPCost = 4
+					_syncStats[stat.Name] = true
 				end
+			end
+		else
+			local b,newCategories = AppendComboCategory(stat.ComboCategory, "Weapon")
+			if b then
+				---@cast newCategories string[]
+				stat.ComboCategory = newCategories
+				_syncStats[stat.Name] = true
 			end
 		end
 	end
 
-	LoadUniqueRequirementChanges()
+	--LoadUniqueRequirementChanges()
 
 	for statId,attributes in pairs(BaseStats) do
+		local changed = false
 		for id,v in pairs(attributes) do
-			ApplyOverride(statId, id, v)
+			if ApplyOverride(statId, id, v) then
+				changed = true
+			end
+		end
+		if changed then
+			_syncStats[statId] = true
 		end
 	end
+
 	for modGUID,stats in pairs(ModStats) do
 		if Ext.Mod.IsModLoaded(modGUID) then
 			for statId,attributes in pairs(stats) do
+				local changed = false
 				for id,v in pairs(attributes) do
-					ApplyOverride(statId, id, v)
+					if ApplyOverride(statId, id, v) then
+						changed = true
+					end
+				end
+				if changed then
+					_syncStats[statId] = true
 				end
 			end
 		end
 	end
+
+	if doSync then
+		for id,b in pairs(_syncStats) do
+			Ext.Stats.Sync(id, false)
+		end
+	end
+
+	Ext.Print("[WeaponExpansion] Applied stat overrides.")
 end
+
 Ext.Events.StatsLoaded:Subscribe(function (e)
 	Run()
 end, {Priority=1})
+
+if not _ISCLIENT then
+	Events.LuaReset:Subscribe(function (e)
+		if Vars.LeaderDebugMode then
+			Run(true)
+		end
+	end)
+end

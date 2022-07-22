@@ -15,7 +15,7 @@ local function _Add(modGUID, statType)
 		local t = type(statID)
 		if t == "table" then
 			for i=1,#statID do
-				addAttributesFunc(modGUID, statID[1], attributes)
+				addAttributesFunc(statID[i], attributes)
 			end
 		elseif t == "string" then
 			_MOD_OVERRIDES[modGUID][statID] = attributes
