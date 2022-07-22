@@ -38,186 +38,63 @@ if Vars.DebugMode then
 	end)
 end
 
-local attributes = {
-	Strength = true,
-	Finesse = true,
-	Intelligence = true,
-	Constitution = true,
-	Memory = true,
-	Wits = true,
-}
-
-local function getTemplateUUID(str)
-	local startIndex,endIndex = string.find(str, "[^_]+$")
-	if startIndex ~= nil and endIndex ~= nil then
-		return string.sub(str, startIndex, endIndex)
-	end
-	return str
-end
-
-local function getAttributeTokenAttribute(entries)
-	for i,entry in pairs(entries) do
-		local template,item = table.unpack(entry)
-		local attribute = attributeTokenTemplates[template]
-		if attribute ~= nil then
-			return attribute,item
-		end
-	end
-	return nil
-end
-
-local function getUniqueItems(entries)
-	local uniques = {}
-	for i,entry in pairs(entries) do
-		local template,item = table.unpack(entry)
-		if ObjectExists(item) == 1 then
-			local stat = NRD_ItemGetStatsId(item)
-			if stat ~= nil and Ext.StatGetAttribute(stat, "Unique") == 1 then
-				uniques[#uniques+1] = {item, stat}
-			end
-		end
-	end
-	return uniques
-end
-
-local function craftingTemplateMatch(entries, template, minCount)
-	local count = 0
-	for i,v in pairs(entries) do
-		if template == "NULL_00000000-0000-0000-0000-000000000000" and v == template then
-			count = count + 1
-		elseif not StringHelpers.IsNullOrEmpty(v) and string.find(v, template) then
-			count = count + 1
-		end
-	end
-	return count >= minCount
-end
-
----@param char string
----@param a string
----@param b string
----@param c string
----@param d string
----@param e string
----@param requestIDStr string
-function CanCombineItem(char, a, b, c, d, e, requestIDStr)
-	--local requestID = tonumber(requestIDStr)
-	Ext.Print("[WeaponExpansion:CanCombineItem]",char, a, b, c, d, e, requestIDStr)
-end
-
-local craftingActions = {}
-
----@param char string
-function OnCraftingProcessed(char, ...)
-	--local requestID = tonumber(requestIDStr)
-	local itemArgs = {...}
-	local items = {}
-	for i,v in pairs(itemArgs) do
-		if not StringHelpers.IsNullOrEmpty(v) then
-			local template = getTemplateUUID(GetTemplate(v))
-			items[#items+1] = {
-				template,
-				v
-			}
-		end
-	end
-	craftingActions[char] = items
-end
-
----@param char string
----@param a string|nil	Combined template
----@param b string|nil	Combined template
----@param c string|nil	Combined template
----@param d string|nil	Combined template
----@param e string|nil	Combined template
----@param newItem string
-function ItemTemplateCombinedWithItemTemplate(char, a, b, c, d, e, newItem)
-	--Ext.Print("[WeaponExpansion:ItemTemplateCombinedWithItemTemplate]",char, a, b, c, d, e, newItem)
-	local craftingEntry = craftingActions[char]
-	if craftingEntry ~= nil then
-		local attribute,tokenItem = getAttributeTokenAttribute(craftingEntry)
-		if attribute ~= nil then
-			local uniques = getUniqueItems(craftingEntry)
-			for i,v in pairs(uniques) do
-				local itemuuid,stat = table.unpack(v)
-				local item = Ext.GetItem(itemuuid)
-				ChangeItemScaling(item, attribute, stat, char)
-			end
-		end
-		craftingActions[char] = nil
-	end
-
-	local templates = {a,b,c,d,e}
-	-- LOOT_LLWEAPONEX_Token_Shard_dcd92e16-80a6-43bc-89c5-8e147d95606c
-	-- 3 shards = a new attribute token of choice
-	if craftingTemplateMatch(templates, "dcd92e16%-80a6%-43bc%-89c5%-8e147d95606c", 3) and craftingTemplateMatch(templates, "NULL_00000000-0000-0000-0000-000000000000", 2) then
-		CharacterGiveQuestReward(char, "LLWEAPONEX_Rewards_AttributeToken", "QuestReward")
-	end
-end
-
 ---@param item EsvItem
 ---@param attribute string
----@param itemStat string
----@param craftingCharacter string
-function ChangeItemScaling(item, attribute, itemStat, craftingCharacter)
-	if itemStat == nil then
-		itemStat = item.Stats.Name
+local function ChangeItemScaling(item, attribute)
+	for _,req in pairs(item.Stats.Requirements) do
+		if Data.AttributeEnum[req.Requirement] then
+			req.Requirement = attribute
+		end
 	end
-	if itemStat ~= nil then
-		---@type StatEntryWeapon
-		local stat = Ext.GetStat(itemStat)
-		local requirements = stat.Requirements
-		if requirements ~= nil then
-			local addedRequirement = false
-			if #stat.Requirements > 0 then
-				for i,req in pairs(requirements) do
-					if attributes[req.Requirement] == true then
-						req.Requirement = attribute
-						addedRequirement = true
+	PersistentVars.AttributeRequirementChanges[item.MyGuid] = attribute
+	GameHelpers.Net.Broadcast("LLWEAPONEX_ChangeAttributeRequirement", {Item=item.NetID, Attribute=attribute})
+end
+
+--[[ Ext.Osiris.RegisterListener("ItemTemplateCombinedWithItemTemplate", 7, "after", function (...)
+	local GUIDs = {}
+	local args = {...}
+	local len = #args
+	for i=1,len do
+		local v = args[i]
+		if v ~= StringHelpers.NULL_UUID then
+			if i == 6 then
+				GUIDs[i] = GameHelpers.GetCharacter(v)
+			elseif i == 7 then
+				GUIDs[i] = GameHelpers.GetItem(v)
+			else
+				GUIDs[i] = StringHelpers.GetUUID(v)
+			end
+		else
+			--Will be nil
+			--GUIDs[i] = v
+		end
+	end
+	OnItemTemplateCombinedWithItemTemplate(table.unpack(GUIDs, 1, len))
+end) ]]
+
+Ext.Events.AfterCraftingExecuteCombination:Subscribe(function (e)
+	fprint(LOGLEVEL.TRACE, "[AfterCraftingExecuteCombination] Succeeded(%s) CombinationId(%s) e.CraftingStation(%s) Quantity(%s)\nItems:\n%s", e.Succeeded, e.CombinationId, e.CraftingStation, e.Quantity, Lib.serpent.block(e.Items))
+	if e.Succeeded then
+		if e.CombinationId == "LLWEAPONEX_Token_ChangeScalingAttribute" then
+			local targetWeapon = nil
+			local attribute = nil
+			for _,v in pairs(e.Items) do
+				if v.Stats and v.Stats.ItemType == "Weapon" then
+					targetWeapon = v
+				else
+					local template = attributeTokenStats[v.StatsId] or GameHelpers.GetTemplate(v)
+					local att = attributeTokenTemplates[template]
+					if att then
+						attribute = att
 					end
 				end
 			end
-			if not addedRequirement then
-				table.insert(requirements, {
-					Requirement = attribute,
-					Param = 0,
-					Not = false
-				})
+			if targetWeapon and attribute then
+				ChangeItemScaling(targetWeapon, attribute)
 			end
-		else
-			requirements = {
-				{
-					Requirement = attribute,
-					Param = 0,
-					Not = false
-				}
-			}
-		end
-		stat.Requirements = requirements
-		item.Stats.ShouldSyncStats = true
-		Ext.SyncStat(itemStat, false)
-		PersistentVars.UniqueRequirements[stat.Name] = requirements
-		UniqueManager.SaveRequirementChanges()
-		--EquipmentManager.SyncItemStatChanges(item, {Stats={Requirements=requirements}})
-
-		local inventory = craftingCharacter or GetInventoryOwner(item.MyGuid)
-		local slot = ObjectIsCharacter(inventory) == 1 and GameHelpers.Item.GetEquippedSlot(inventory,item.MyGuid) or nil
-		local clone = GameHelpers.Item.Clone(item, nil, {CopyTags = true})
-		if clone then
-			if inventory ~= nil then
-				if slot ~= nil then
-					GameHelpers.Item.EquipInSlot(inventory, clone.MyGuid, slot)
-				else
-					ItemToInventory(clone.MyGuid, inventory, 1, 0, 0)
-				end
-			else
-				ItemToInventory(clone.MyGuid, CharacterGetHostCharacter(), 1, 0, 0)
-			end
-			UniqueManager.UpdateUniqueUUID(item, clone, true)
-			if item.Global then
-				ItemToInventory(item.MyGuid, NPC.UniqueHoldingChest, 1, 0, 1)
-				ObjectSetFlag(item.MyGuid, "LLWEAPONEX_UniqueData_Initialized", 0)
-				ObjectSetFlag(item.MyGuid, "LLWEAPONEX_UniqueData_ReleaseFromOwner", 0)
-			end
+		elseif e.CombinationId == "LLWEAPONEX_Token_CreateAttributeToken" then
+			-- 3 shards = a new attribute token of choice
+			CharacterGiveQuestReward(e.Character.MyGuid, "LLWEAPONEX_Rewards_AttributeToken", "QuestReward")
 		end
 	end
-end
+end)

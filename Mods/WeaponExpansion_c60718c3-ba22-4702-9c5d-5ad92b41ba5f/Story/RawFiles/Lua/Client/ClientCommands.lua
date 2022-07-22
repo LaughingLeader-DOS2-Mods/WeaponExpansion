@@ -60,8 +60,18 @@ local function SetItemStats(target, tbl)
 	end
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_SaveUniqueRequirementChanges", function(cmd, payload)
-	Ext.SaveFile("WeaponExpansion_UniqueRequirementChanges.json", payload)
+Ext.RegisterNetListener("LLWEAPONEX_ChangeAttributeRequirement", function(cmd, payload)
+	local data = Common.JsonParse(payload, true)
+	if data and data.Item and data.Attribute then
+		local item = GameHelpers.GetItem(data.Item)
+		if item then
+			for _,req in pairs(item.Stats.Requirements) do
+				if Data.AttributeEnum[req.Requirement] then
+					req.Requirement = data.Attribute
+				end
+			end
+		end
+	end
 end)
 
 Ext.RegisterNetListener("LLWEAPONEX_SetItemStats", function(cmd, payload)

@@ -195,31 +195,38 @@ end
 -- 	end
 -- end)
 
-RegisterListener("Initialized", function(region)
-	region = region or SharedData.RegionData.Current
-	if StringHelpers.IsNullOrEmpty(region) then
-		local db = Osi.DB_CurrentLevel:Get(nil)
-		if db and #db > 0 then
-			region = db[1][1]
-		end
-	end
-	if region ~= nil then
+Events.Initialized:Subscribe(function(e)
+	local region = e.Region
+	if not StringHelpers.IsNullOrEmpty(region) then
 		if IsGameLevel(region) == 1 then
-			Timer.Start("Timers_LLWEAPONEX_InitUniques", 500)
+			Timer.Start("LLWEAPONEX_InitUniques", 500)
 		end
 		if IsCharacterCreationLevel(region) == 1 then
 			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
 		end
 	end
-    if PersistentVars.UniqueRequirements ~= nil then
-        for statName,requirements in pairs(PersistentVars.UniqueRequirements) do
-            local stat = Ext.GetStat(statName)
-            if stat ~= nil then
-                stat.Requirements = requirements
-                Ext.SyncStat(statName, false)
-            end
-        end
-    end
+	if PersistentVars.AttributeRequirementChanges then
+		local existingChanges = {}
+		for itemGUID,attribute in pairs(PersistentVars.AttributeRequirementChanges) do
+			if ObjectExists(itemGUID) == 1 then
+				existingChanges[itemGUID] = attribute
+				local item = GameHelpers.GetItem(itemGUID)
+				if item then
+					local doSync = false
+					for _,req in pairs(item.Stats.Requirements) do
+						if req.Requirement ~= attribute and Data.AttributeEnum[req.Requirement] then
+							req.Requirement = attribute
+							doSync = true
+						end
+					end
+					if doSync then
+						GameHelpers.Net.Broadcast("LLWEAPONEX_ChangeAttributeRequirement", {Item=item.NetID, Attribute=attribute})
+					end
+				end
+			end
+		end
+		PersistentVars.AttributeRequirementChanges = existingChanges
+	end
 end)
 
 TurnEndRemoveTags = {

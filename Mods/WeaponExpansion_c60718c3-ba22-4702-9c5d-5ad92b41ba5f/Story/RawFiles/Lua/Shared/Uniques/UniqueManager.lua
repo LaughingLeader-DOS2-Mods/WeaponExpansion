@@ -220,14 +220,6 @@ function UniqueManager.FindOrphanedUniques()
 	end
 end
 
-function UniqueManager.SaveRequirementChanges()
-	if PersistentVars.UniqueRequirements ~= nil then
-		local payload = Ext.JsonStringify(PersistentVars.UniqueRequirements)
-		--Ext.SaveFile("WeaponExpansion_UniqueRequirementChanges.json", payload)
-		Ext.BroadcastMessage("LLWEAPONEX_SaveUniqueRequirementChanges", payload)
-	end
-end
-
 --[[
 event ItemAddedToCharacter((ITEMGUID)_Item, (CHARACTERGUID)_Character) (3,0,497,1)
 event ItemDropped((ITEMGUID)_Item) (3,0,505,1)
@@ -406,7 +398,7 @@ if not isClient then
 		end
 	end
 	
-	Timer.Subscribe("Timers_LLWEAPONEX_InitUniques", function (e)
+	Timer.Subscribe("LLWEAPONEX_InitUniques", function (e)
 		UniqueManager.InitializeUniques()
 	end)
 end

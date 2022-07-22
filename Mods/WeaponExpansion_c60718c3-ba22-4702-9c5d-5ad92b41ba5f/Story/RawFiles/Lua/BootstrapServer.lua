@@ -62,7 +62,9 @@ local defaultPersistentVars = {
     ---All UUIDs for specific uniques (UUID -> Tag).
     ---@type table<UUID,string>
     Uniques = {},
-    UniqueRequirements = {},
+    ---Item GUID to Attribute
+    ---@type table<GUID,string>
+    AttributeRequirementChanges = {},
     ---Character UUID to Book ID -> Bool
     ---@type table<UUID,table<string, boolean>>
     BattleBookExperienceGranted = {},
