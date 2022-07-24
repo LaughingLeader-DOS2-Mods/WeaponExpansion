@@ -78,8 +78,3 @@ data "DamageTorches" "No"
 data "PermanentOnTorch" "No"
 data "SpawnBlood" "No"
 data "LeaveAction" "Projectile_LLWEAPONEX_Greatbow_LightningStrike"
-
-new entry "LLWEAPONEX_GREATBOW_FUTUREBARRAGE_DUMMYHIT"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
