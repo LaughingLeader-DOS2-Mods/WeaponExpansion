@@ -220,14 +220,10 @@ TooltipParams.SpecialParamFunctions = {
 	end
 }
 
----@param param string
----@param statCharacter StatCharacter
----@vararg string
----@return string
-RegisterListener("GetTextPlaceholder", function(param, statCharacter)
-	local callback = TooltipParams.SpecialParamFunctions[param]
+Events.GetTextPlaceholder:Subscribe(function(e)
+	local callback = TooltipParams.SpecialParamFunctions[e.ID]
 	if callback then
-		local b,result = xpcall(callback, debug.traceback, param, statCharacter)
+		local b,result = xpcall(callback, debug.traceback, e.ID, e.Character)
 		if b then
 			return result
 		else

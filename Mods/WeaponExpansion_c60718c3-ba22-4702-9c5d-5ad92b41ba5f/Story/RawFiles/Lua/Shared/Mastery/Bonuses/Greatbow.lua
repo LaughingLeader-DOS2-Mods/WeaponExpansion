@@ -126,16 +126,56 @@ if not Vars.IsClient then
 			fprint(LOGLEVEL.TRACE, "[WeaponExpansion:CushionForce] FallDistance(%s) PushDistance(%s)", heightDiff, e.Distance)
 			EffectManager.PlayEffectAt("RS3_FX_Skills_Totem_Lash_Impact_Root_01", landPos)
 			EffectManager.PlayEffect("RS3_FX_GP_Combat_CameraShake_A", e.Target)
-			if GameHelpers.Character.CanAttackTarget(e.Target, e.Source) then
+			if GameHelpers.Character.CanAttackTarget(e.Target, e.Source, true) then
 				local maxDist = GameHelpers.GetExtraData("LLWEAPONEX_CushionForce_MaxPushDistance", 12)
-				local distDamageMult = ((math.min(maxDist, e.Distance) / maxDist) - 0.1) * 100
-				GameHelpers.Damage.ApplySkillDamage(e.Source, e.Target, "Projectile_LLWEAPONEX_Status_CushionForce_DistDamage", {SkillDataParamModifiers={["Damage Multiplier"] = distDamageMult}})
+				local baseDamageMult = Ext.Stats.Get("Projectile_LLWEAPONEX_CushionForce_DistDamage")["Damage Multiplier"]
+				local distDamageMult = baseDamageMult + (((math.min(maxDist, e.Distance) / maxDist) * 100) - 10)
+				GameHelpers.Damage.ApplySkillDamage(e.Source, e.Target, "Projectile_LLWEAPONEX_CushionForce_DistDamage", {SkillDataParamModifiers={["Damage Multiplier"] = distDamageMult}})
 				
 				if heightDiff > 1 then
-					local fallDamageMult = ((math.min(maxDist, e.Distance) / maxDist) + 0.25) * 100
-					GameHelpers.Damage.ApplySkillDamage(e.Source, e.Target, "Projectile_LLWEAPONEX_Status_CushionForce_FallDamage", {SkillDataParamModifiers={["Damage Multiplier"] = fallDamageMult}})
+					local baseDamageMult = Ext.Stats.Get("Projectile_LLWEAPONEX_CushionForce_FallDamage")["Damage Multiplier"]
+					local fallDamageMult = baseDamageMult + ((math.min(maxDist, heightDiff) / maxDist) * 100)
+					GameHelpers.Damage.ApplySkillDamage(e.Source, e.Target, "Projectile_LLWEAPONEX_CushionForce_FallDamage", {SkillDataParamModifiers={["Damage Multiplier"] = fallDamageMult}})
 				end
 			end
 		end
 	end, {MatchArgs={ID="CushionForce"}})
+
+	--Damage from flying bodies
+	--LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_CHECK is an aura status applied by LLWEAPONEX_GREATBOW_CUSHION_FORCE
+	StatusManager.Subscribe.Applied("LLWEAPONEX_GREATBOW_CUSHION_DAMAGE_CHECK", function (e)
+		if e.Source then
+			local cushionForceStatus = e.Source:GetStatus("LLWEAPONEX_GREATBOW_CUSHION_FORCE")
+			if cushionForceStatus then
+				local originalSource = GameHelpers.TryGetObject(cushionForceStatus.StatusSourceHandle)
+				if originalSource then
+					if GameHelpers.Character.CanAttackTarget(e.Target, originalSource, true) then
+						if not GameHelpers.Ext.ObjectIsItem(e.Target) then
+							GameHelpers.Damage.ApplySkillDamage(originalSource, e.Target, "Projectile_LLWEAPONEX_Status_Greatbow_CushionDamage")
+							if not GameHelpers.Status.HasStatusType(e.Target, "KNOCKED_DOWN") then
+								SetStoryEvent(e.TargetGUID, "GEN_FallAndGetUp")
+							end
+						else
+							GameHelpers.Damage.ApplySkillDamage(originalSource, e.Target, "Projectile_LLWEAPONEX_Status_Greatbow_ItemDamage")
+						end
+					end
+				end
+			end
+		end
+	end)
+else
+
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_CushionForce_DistanceDamage = function (param, statCharacter)
+		local baseDamageMult = Ext.Stats.Get("Projectile_LLWEAPONEX_CushionForce_DistDamage")["Damage Multiplier"]
+		local minDamage = GameHelpers.Damage.GetSkillDamage("Projectile_LLWEAPONEX_CushionForce_DistDamage", statCharacter)
+		local maxDamage = GameHelpers.Damage.GetSkillDamage("Projectile_LLWEAPONEX_CushionForce_DistDamage", statCharacter, {["Damage Multiplier"] = baseDamageMult + 90})
+		return string.format("%s - %s", GameHelpers.Tooltip.FormatDamageList(minDamage), GameHelpers.Tooltip.FormatDamageList(maxDamage))
+	end
+
+	TooltipParams.SpecialParamFunctions.LLWEAPONEX_CushionForce_FallDamage = function (param, statCharacter)
+		local baseDamageMult = Ext.Stats.Get("Projectile_LLWEAPONEX_CushionForce_FallDamage")["Damage Multiplier"]
+		local minDamage = GameHelpers.Damage.GetSkillDamage("Projectile_LLWEAPONEX_CushionForce_FallDamage", statCharacter)
+		local maxDamage = GameHelpers.Damage.GetSkillDamage("Projectile_LLWEAPONEX_CushionForce_FallDamage", statCharacter, {["Damage Multiplier"] = baseDamageMult + 100})
+		return string.format("%s - %s", GameHelpers.Tooltip.FormatDamageList(minDamage), GameHelpers.Tooltip.FormatDamageList(maxDamage))
+	end
 end
