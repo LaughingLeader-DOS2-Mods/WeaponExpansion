@@ -376,10 +376,10 @@ Ext.Events.StatsLoaded:Subscribe(function (e)
 	Run()
 end, {Priority=1})
 
-if not _ISCLIENT then
-	Events.LuaReset:Subscribe(function (e)
-		if Vars.LeaderDebugMode then
-			Run(true)
-		end
-	end)
-end
+-- if not _ISCLIENT then
+-- 	Events.LuaReset:Subscribe(function (e)
+-- 		if Vars.LeaderDebugMode then
+-- 			Run(true)
+-- 		end
+-- 	end)
+-- end

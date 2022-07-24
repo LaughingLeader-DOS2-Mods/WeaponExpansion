@@ -397,3 +397,39 @@ local p = _C(); local fx = Ext.Effect.CreateEffect("RS3_FX_Skills_Warrior_Ground
 Ext.Math.ExtractEulerAngles({table.unpack(me.Stats.Rotation),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0})
 
 ]]
+
+-- local _ISCLIENT = Ext.IsClient()
+-- if not _ISCLIENT then
+--     local _rotationActive = false
+--     local _targetItem = 66709
+--     local _targetRotation = {}
+--     --local _targetItem = "46a44365-29c5-4864-a1b3-957bfe81152e"
+    
+--     Ext.RegisterConsoleCommand("debug_rotation", function()
+--         _rotationActive = not _rotationActive
+
+--         local item = Ext.GetItem(_targetItem)
+--         if item then
+--             _targetRotation = GameHelpers.Math.RotationMatrixToEuler(item.Rotation)
+--             _targetRotation[1] = _targetRotation[1] + 45
+--             _targetRotation = GameHelpers.Math.EulerToRotationMatrix(_targetRotation)
+            
+--         end
+--     end)
+
+--     ---@param e GameTime
+--     Ext.Events.Tick:Subscribe(function (e)
+--         if _rotationActive then
+--             local item = Ext.GetItem(_targetItem)
+--             if item then
+                
+--             end
+--         end
+--     end)
+-- else
+--     Ext.RegisterNetListener("MyMod_Debug_SetRotation", function (cmd, payload)
+--         local data = Ext.JsonParse(payload)
+--         local item = Ext.GetItem(data.NetID)
+--         item.Rotation = data.Rotation
+--     end)
+-- end

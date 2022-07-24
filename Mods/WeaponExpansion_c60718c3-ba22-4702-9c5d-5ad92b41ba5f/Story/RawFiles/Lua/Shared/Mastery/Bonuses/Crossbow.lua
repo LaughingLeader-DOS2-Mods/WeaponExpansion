@@ -163,7 +163,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 2, {
 
 			if isNextToWall then
 				GameHelpers.Damage.ApplySkillDamage(e.Character, e.Data.TargetObject, "Projectile_LLWEAPONEX_MasteryBonus_Crossbow_PiercingShotPinDamage", {HitParams=HitFlagPresets.GuaranteedWeaponHit})
-				GameHelpers.Status.Apply(e.Data.TargetObject, "LLWEAPONEX_MB_CROSSOW_PINNED", 6.0, 0, e.Character)
+				GameHelpers.Status.Apply(e.Data.TargetObject, "LLWEAPONEX_MB_CROSSOW_PINNED", 6.0, false, e.Character)
 			end
 		end
 	end),
