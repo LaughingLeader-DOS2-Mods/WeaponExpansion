@@ -11,66 +11,69 @@ local defaultPersistentVars = {
             BlockedHit = {},
         },
         ThrowWeapon = {},
-        ---@type table<UUID, {Item:UUID, Slot:string, Skill:string, Target:UUID|nil}>
+        ---@type table<GUID, {Item:GUID, Slot:string, Skill:string, Target:GUID|nil}>
         ThrowBalrinAxe = {},
         VanquishersPath = {},
         ---@type table<string, table<string, {Mines:string[], Remaining:integer}>>
         RemoteMineDetonation = {},
-        ---@type table<UUID,number[]>
+        ---@type table<GUID,number[]>
         FutureBarrage = {},
         WandSurfaceBonuses = {},
-        ---@type table<UUID,integer>
+        ---@type table<GUID,integer>
         ScattershotHits = {}
     },
     StatusData = {
-        ---@type table<UUID,table<string,{Target:UUID, Source:UUID, Status:string}>>
+        ---@type table<GUID,table<string,{Target:GUID, Source:GUID, Status:string}>>
         RemoveOnTurnEnd = {},
         KatanaCombo = {},
     },
     MasteryMechanics = {
-        ---@type table<UUID,integer>
+        ---@type table<GUID,integer>
         AxeFlurryHits = {},
         ---A table of active statuses to remove.
-        ---@type table<UUID,table<string,boolean>>
+        ---@type table<GUID,table<string,boolean>>
         BludgeonShattering = {},
-        ---@type table<UUID,integer>
+        ---@type table<GUID,integer>
         CrossbowRicochetHits = {},
-        ---@type table<UUID,number[]>
+        ---@type table<GUID,number[]>
         StillStanceLastPosition = {},
-        ---@type table<UUID,integer>
+        ---@type table<GUID,integer>
         SneakingTurnsInCombat = {},
-        ---@type table<UUID,integer>
+        ---@type table<GUID,integer>
         BlinkStrikeTargetsHit = {},
         ---Challenger and the target.
-        ---@type table<UUID,UUID>
+        ---@type table<GUID,GUID>
         BattlebookChallenge = {},
         ---Protected character to the source (Guardian Angel Banner wielder)
-        ---@type table<UUID,UUID>
+        ---@type table<GUID,GUID>
         GuardianAngelResurrect = {},
-        ---@type table<UUID,{Remaining:integer, Total:integer}>
+        ---@type table<GUID,{Remaining:integer, Total:integer}>
         BowExplosiveRainArrowCount = {},
-        ---@type table<UUID,{Hits:integer, Target:UUID}>
+        ---@type table<GUID,{Hits:integer, Target:GUID}>
         BowCumulativeCriticalChance = {},
         ---Skill ID, GUID to boolean
-        ---@type table<string,table<UUID,number[]>>
+        ---@type table<string,table<GUID,number[]>>
         BowCastingPiercingSkill = {},
-        ---@type table<UUID,integer>
+        ---@type table<GUID,integer>
         BowFarsightAttacks = {},
     },
     Timers = {},
     OnDeath = {},
-    ---All UUIDs for specific uniques (UUID -> Tag).
-    ---@type table<UUID,string>
+    ---All GUIDs for specific uniques (GUID -> Tag).
+    ---@type table<GUID,string>
     Uniques = {},
     ---Item GUID to Attribute
     ---@type table<GUID,string>
     AttributeRequirementChanges = {},
-    ---Character UUID to Book ID -> Bool
-    ---@type table<UUID,table<string, boolean>>
+    ---Character GUID to Book ID -> Bool
+    ---@type table<GUID,table<string, boolean>>
     BattleBookExperienceGranted = {},
-    ---Character UUID to BonusID -> Bool
-    ---@type table<UUID,table<string, boolean>>
+    ---Character GUID to BonusID -> Bool
+    ---@type table<GUID,table<string, boolean>>
     DisabledBonuses = {},
+    ---Character GUID to Mastery ID -> Bool
+    ---@type table<GUID,table<string, boolean>>
+    ActiveMasteries = {},
 }
 
 ---@type WeaponExpansionVars

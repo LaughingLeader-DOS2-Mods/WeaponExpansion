@@ -6,6 +6,7 @@ end
 ---@field ID string The mastery ID
 ---@field Character EsvCharacter
 ---@field Enabled boolean
+---@field IsPlayer boolean
 
 ---@type LeaderLibSubscribableEvent<MasteryChangedEventArgs>
 Mastery.Events.MasteryChanged = Classes.SubscribableEvent:Create("MasteryChanged")

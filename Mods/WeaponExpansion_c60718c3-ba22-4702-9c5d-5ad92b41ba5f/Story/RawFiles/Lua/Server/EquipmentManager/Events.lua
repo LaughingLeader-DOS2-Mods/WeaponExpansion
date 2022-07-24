@@ -49,14 +49,20 @@ function EquipmentManager:OnItemEquipped(character, item)
 	end
 	
 	local isPlayer = GameHelpers.Character.IsPlayer(character)
-	local itemTags = GameHelpers.GetItemTags(item, true, false)
-	local statType = item.ItemType
+
+	local _CHARACTER_TAGS = GameHelpers.GetAllTags(character, true, false)
+	local _ITEM_TAGS = GameHelpers.GetItemTags(item, true, false)
+
+	---@cast _CHARACTER_TAGS table<string,boolean>
+	---@cast _ITEM_TAGS table<string,boolean>
+
+	local statType = item.Stats.ItemType
 	local template = GameHelpers.GetTemplate(item)
 
-	if not itemTags["LLWEAPONEX_TaggedWeaponType"]
+	if not _ITEM_TAGS.LLWEAPONEX_TaggedWeaponType
 	and (SharedData.GameMode == GAMEMODE.GAMEMASTER or isPlayer)
 	and (statType == "Weapon" or statType == "Shield") then
-		self:TagWeapon(item, statType, item.Stats.Name, itemTags)
+		self:TagWeapon(item, statType, item.Stats.Name, _ITEM_TAGS)
 	end
 
 	if isPlayer and statType == "Weapon" then
@@ -64,39 +70,40 @@ function EquipmentManager:OnItemEquipped(character, item)
 		self:CheckForUnarmed(character, isPlayer, item)
 	end
 
-	if not itemTags["LLWEAPONEX_NoTracking"] then
-		for tag,data in pairs(Masteries) do
+	local activatedMasteries = {}
+
+	if not _ITEM_TAGS.LLWEAPONEX_NoTracking then
+		for tag,_ in pairs(Masteries) do
 			--PrintDebug("[WeaponExpansion] Checking item for tag ["..tag.."] on ["..character.MyGuid.."]")
-			if itemTags[tag] then
+			if _ITEM_TAGS[tag] then
 				local equippedTag = Tags.WeaponTypes[tag]
-				if equippedTag then
-					if not character:HasTag(equippedTag) and not itemTags[equippedTag] then
-						SetTag(character.MyGuid, equippedTag)
-						fprint(LOGLEVEL.TRACE, "[WeaponExpansion:OnItemEquipped] Setting weapon equipped tag [%s] on [%s]", equippedTag, character.MyGuid)
-					end
+				if equippedTag and not _CHARACTER_TAGS[equippedTag] and not _ITEM_TAGS[equippedTag] then
+					SetTag(character.MyGuid, equippedTag)
+					fprint(LOGLEVEL.TRACE, "[WeaponExpansion:OnItemEquipped] Setting weapon equipped tag [%s] on [%s]", equippedTag, character.MyGuid)
 				end
-				if isPlayer then
-					if equippedTag then
-						Osi.LLWEAPONEX_Equipment_TrackItem(character.MyGuid, item.MyGuid, tag, equippedTag, isPlayer)
-					end
-					Osi.LLWEAPONEX_WeaponMastery_TrackMastery(character.MyGuid, item.MyGuid, tag)
-					if not character:HasTag(equippedTag) and not itemTags[tag] then
-						--Set "Mastery Active" tag, like LLWEAPONEX_Axe
-						SetTag(character.MyGuid, tag)
-						fprint(LOGLEVEL.TRACE, "[WeaponExpansion:OnItemEquipped] Setting mastery tag [%s] on [%s]", tag, character.MyGuid)
-					end
+				activatedMasteries[tag] = true
+				if not _CHARACTER_TAGS[tag] then
+					SetTag(character.MyGuid, tag)
 				end
-				Osi.LLWEAPONEX_Equipment_OnTaggedItemEquipped(character.MyGuid, item.MyGuid, tag, isPlayer)
 			end
 		end
 	end
 
-	self:CheckWeaponAnimation(character, item, itemTags)
+	self:CheckWeaponAnimation(character, item, _ITEM_TAGS)
+
+	for tag,b in pairs(activatedMasteries) do
+		Mastery.Events.MasteryChanged:Invoke({
+			Character = character,
+			Enabled = true,
+			ID = tag,
+			IsPlayer = isPlayer
+		})
+	end
 
 	Osi.LLWEAPONEX_OnItemTemplateEquipped(character.MyGuid, item.MyGuid, template)
 
 	for k,unique in pairs(Uniques) do
-		if itemTags[unique.Tag] then
+		if _ITEM_TAGS[unique.Tag] then
 			unique:OnEquipped(character, item)
 			if unique.UUID ~= item.MyGuid then
 				unique:AddCopy(item.MyGuid)
@@ -135,7 +142,7 @@ function EquipmentManager:OnItemEquipped(character, item)
 	end
 
 	for tag,callbacks in pairs(_tagListeners) do
-		if itemTags[tag] then
+		if _ITEM_TAGS[tag] then
 			if Vars.DebugMode then
 				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.Stats.Name, character.MyGuid))
 			end
