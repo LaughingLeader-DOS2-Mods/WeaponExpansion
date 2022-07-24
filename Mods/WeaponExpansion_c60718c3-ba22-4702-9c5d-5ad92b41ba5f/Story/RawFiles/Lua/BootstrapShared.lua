@@ -113,6 +113,7 @@ MODID.DivinityUnleashed = "e844229e-b744-4294-9102-a7362a926f71"
 MODID.EE2Core = "63bb9b65-2964-4c10-be5b-55a63ec02fa0"
 MODID.ArmorMitigation = "edf1898c-d375-47e7-919a-11d5d44d1cca"
 MODID.Origins = "1301db3d-1f54-4e98-9be5-5094030916e4"
+MODID.Mimicry = "d9cac48f-1294-68f8-dd4d-b5ea38eaf2d6"
 
 MODID.ArmorDisablingMods = {
 	MODID.DivinityUnleashed,
