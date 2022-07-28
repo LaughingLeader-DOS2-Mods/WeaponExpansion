@@ -96,6 +96,13 @@ Origin = {
 	Korvash = "3f20ae14-5339-4913-98f1-24476861ebd6",
 }
 
+OriginColors = {
+	Korvash = {
+		LadyC = 0xff1B1B1B,
+		Default = 0xff303032
+	}
+}
+
 NPC = {
 	VendingMachine = "680d2702-721c-412d-b083-4f5e816b945a",
 	BishopAlexander = "03e6345f-1bd3-403c-80e2-a443a74f6349",
