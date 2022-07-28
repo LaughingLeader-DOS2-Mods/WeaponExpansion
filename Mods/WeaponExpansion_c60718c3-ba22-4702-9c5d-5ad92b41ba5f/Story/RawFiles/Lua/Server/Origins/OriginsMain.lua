@@ -252,25 +252,25 @@ local anvilSwapPresets = {
 	Barbarian = true,
 }
 
-function CC_CheckKorvashColor(uuid)
-	if Ext.GetGameState() == "Running" then
-		local id = GameHelpers.GetUserID(uuid)
-		if id ~= nil then
-			local character = Ext.GetCharacter(uuid)
-			if character ~= nil and character.PlayerCustomData ~= nil then
-				local color = character.PlayerCustomData.SkinColor
-				if color == 4294902015 then-- Pink?
-					--NRD_PlayerSetCustomDataInt(uuid, "SkinColor", 4281936940)
-					character.PlayerCustomData.SkinColor = 4281936940
-					Ext.PostMessageToUser(id, "LLWEAPONEX_FixLizardSkin", uuid)
-				end
+function CC_CheckKorvashColor(characterId)
+	local character = GameHelpers.GetCharacter(characterId)
+	print(character, characterId)
+	if character then
+		local id = GameHelpers.GetUserID(character)
+		if id ~= nil and character.PlayerCustomData ~= nil then
+			local nextColor = OriginColors.Korvash.Default
+			if Ext.IsModLoaded("db07c22c-8935-3848-2366-7827b70c6030") then
+				nextColor = OriginColors.Korvash.LadyC
+			end
+			if character.PlayerCustomData.SkinColor ~= nextColor then
+				GameHelpers.Net.PostToUser(id, "LLWEAPONEX_FixLizardSkin", "")
 			end
 		end
 	end
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_CC_CheckKorvashColor", function(cmd, uuid)
-	CC_CheckKorvashColor(uuid)
+Ext.RegisterNetListener("LLWEAPONEX_CC_CheckKorvashColor", function(cmd, characterId)
+	CC_CheckKorvashColor(tonumber(characterId))
 end)
 
 local hiddenStoryButtons = {}

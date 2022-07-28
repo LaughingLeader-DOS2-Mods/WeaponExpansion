@@ -12,18 +12,11 @@ RegisterListener("ClientCharacterChanged", function(uuid, userID, profile, netID
 	end
 end)
 
-Ext.RegisterNetListener("LLWEAPONEX_FixLizardSkin", function(call, uuid)
-	local ui = Ext.GetBuiltinUI("Public/Game/GUI/characterCreation.swf")
-	if ui ~= nil then
-		--ExternalInterface.call("setGender",param1.isMale);
-		--ExternalInterface.call("selectOption",(parent as MovieClip).contentID,this.optionsList[this.currentIdx].optionID,true);
-		-- LadyC's More Colors
-		if Ext.IsModLoaded("db07c22c-8935-3848-2366-7827b70c6030") then
-			--ui:ExternalInterfaceCall("setGender", true)
-			ui:ExternalInterfaceCall("selectOption", 3, 103, false)
-		else
-			ui:ExternalInterfaceCall("selectOption", 3, 13, false)
-		end
+Ext.RegisterNetListener("LLWEAPONEX_FixLizardSkin", function()
+	if Ext.IsModLoaded("db07c22c-8935-3848-2366-7827b70c6030") then
+		GameHelpers.CC.SetColor("Skin", OriginColors.Korvash.LadyC, "Value")
+	else
+		GameHelpers.CC.SetColor("Skin", OriginColors.Korvash.Default, "Value")
 	end
 end)
 

@@ -70,10 +70,23 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 	end
 end
 
-Ext.RegisterNetListener("LLWEAPONEX_OnCharacterCreationStarted", function(call, uuid)
-	MasteryMenu:Close(true)
-	if uuid == Origin.Korvash then
-		Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", uuid)
+Events.RegionChanged:Subscribe(function (e)
+	if e.LevelType == LEVELTYPE.CHARACTER_CREATION then
+		MasteryMenu:Close(true)
+		if e.State == REGIONSTATE.GAME then
+			local player = Client:GetCharacter()
+			if player and player.PlayerCustomData and player.PlayerCustomData.OriginName == "LLWEAPONEX_Korvash" then
+				Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", tostring(player.NetID))
+			end
+		end
+	end
+end)
+
+Events.ClientCharacterChanged:Subscribe(function (e)
+	if SharedData.RegionData.LevelType == LEVELTYPE.CHARACTER_CREATION then
+		if e.Character.PlayerCustomData and e.Character.PlayerCustomData.OriginName == "LLWEAPONEX_Korvash" then
+			Ext.PostMessageToServer("LLWEAPONEX_CC_CheckKorvashColor", tostring(e.Character.NetID))
+		end
 	end
 end)
 
@@ -119,12 +132,15 @@ Ext.RegisterListener("SessionLoaded", function()
 			end
 		end)
 
-		---@param entry {ID:string, Value:string, GeneratedID:integer}
-		---@param player EclCharacter
-		Mods.CharacterExpansionLib.SheetManager:RegisterEntryUpdatingListener("Damage", function (entry, player)
-			local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(player)
-			entry.Value = string.format("%i-%i", totalMin, totalMax)
-		end)
+		Mods.CharacterExpansionLib.SheetManager.Events.OnEntryUpdating:Subscribe(function (e)
+			if UnarmedHelpers.HasUnarmedWeaponStats(e.Character.Stats) then
+				local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(e.Character)
+				if totalMin and totalMax then
+					local value = string.format("%i - %i", totalMin, totalMax)
+					e.Stat.Value = value
+				end
+			end
+		end, {MatchArgs={ID="Damage"}})
 	else
 		Ext.RegisterUITypeInvokeListener(Data.UIType.characterSheet, "updateArraySystem", OnCharacterSheetUpdating)
 	end
