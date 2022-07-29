@@ -1,5 +1,5 @@
 Key	Content	Handle
-Cone_LLWEAPONEX_SoulHarvest_Reap_Description	Reap the battlefield, dealing [1] to enemies in an arc.<br><font color='#CD39C0'>Slaying enemies grants <font color='#80FFC3'>[Key:LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName]</font> (a stacking damage bonus), and restores <font color='#80FFC3'>source points</font>.</font>	h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6
+Cone_LLWEAPONEX_SoulHarvest_Reap_Description	Reap the battlefield, dealing [1] to enemies in an arc.<br><font color='#CD39C0'>Slaying enemies grants <font color='#80FFC3'>[Key:LLWEAPONEX_SOULHARVEST_BONUS_DisplayName]</font> (a stacking damage bonus), and restores <font color='#80FFC3'>source points</font>.</font>	h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6
 Cone_LLWEAPONEX_SoulHarvest_Reap_DisplayName	<font color='#80FFC3'>Soul Reaping</font>	hf33cdaccgc14bg4cdegaa50g800a6c761add
 Projectile_LLWEAPONEX_ArmCannon_Shoot_Description	Fire a concentrated mass of energy at a target, dealing [1] in a [2] radius.<br><font color='#00EECC'>Applies any active rune effects on hit.</font>	ha942de52g11edg49e8gae4fgfc0015bdf289
 Projectile_LLWEAPONEX_ArmCannon_Shoot_DisplayName	<font color='#03fcdb'>Fire Runic Energy</font>	heef6c1ddg33f9g42b5g8525g1aa889215a3d

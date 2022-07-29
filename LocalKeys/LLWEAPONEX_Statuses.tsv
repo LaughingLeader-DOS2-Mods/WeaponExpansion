@@ -69,8 +69,8 @@ LLWEAPONEX_SOUL_BURN_3_DisplayName	Soul Burn III	hdde1468dg68b2g49e4g8636g441356
 LLWEAPONEX_SOUL_BURN_4_DisplayName	Soul Burn IV	h5e99c588ga880g43b5ga2f3g0d4cbc6fce5c
 LLWEAPONEX_SOUL_BURN_5_DisplayName	Soul Burn V	h764bc299gdbdeg44d3g96a3g291e65d47063
 LLWEAPONEX_SOUL_BURN_Description	Character's soul is being burned, dealing [1] per turn.	h958f6821gac5fg4a93g89f7gdfc5ad7be764
-LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_Description	Character has reaped souls with the <font color='#c5a65a'>Soul Harvest</font>, gaining a permanent damage bonus.	haf77ac67g58f1g461dgb239g5af43ebc6a6d
-LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName	Soul Harvest	h002f643bg19afg4a78g8822g37c0614b0921
+LLWEAPONEX_SOULHARVEST_BONUS_Description	Character has reaped souls with the <font color='#c5a65a'>Soul Harvest</font>, gaining a permanent damage bonus.	haf77ac67g58f1g461dgb239g5af43ebc6a6d
+LLWEAPONEX_SOULHARVEST_BONUS_DisplayName	Soul Harvest	h002f643bg19afg4a78g8822g37c0614b0921
 LLWEAPONEX_TARRED_Description	Character is covered in tar. While Tarred, <font color='#fe6e27'>Burning</font> can be applied through armor.	h74945633ga7bag49daga570gdba5b298d003
 LLWEAPONEX_TARRED_DisplayName	Tarred	h2e562602g1cbbg4ba0gac36gcc780f8809e2
 LLWEAPONEX_TATTOOS_STRENGTH_ACTIVE_Description	Magic-imbued tattoos grant [Key:LLWEAPONEX_Preset_Origin_Harken_DisplayName] tremendous strength, and are currently activated. 	h64ef8f8eg48d8g468dga4ebg2a6357d7e30a
