@@ -49,19 +49,28 @@ function Origins_InitCharacters(region)
 
 	local isInitialized = true
 
+	local harken = GameHelpers.GetCharacter(Origin.Harken)
+	if harken and (not harken.Stats.TALENT_Dwarf_Sturdy or not harken.Stats.TALENT_Dwarf_Sneaking) then
+		NRD_PlayerSetBaseTalent(Origin.Harken, "Dwarf_Sturdy", 1)
+		NRD_PlayerSetBaseTalent(Origin.Harken, "Dwarf_Sneaking", 1)
+		CharacterAddCivilAbilityPoint(Origin.Harken, 0)
+	end
+
 	--IsCharacterCreationLevel(region) == 0
 	if CharacterIsPlayer(Origin.Harken) == 0 and ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 0 then
-		isInitialized = false
+		if isInitialized then
+			isInitialized = ObjectGetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete") == 1
+		end
 		pcall(SetupOriginSkills, Origin.Harken, "Avatar_LLWEAPONEX_Harken")
 
 		--CharacterApplyPreset(Origin.Harken, "LLWEAPONEX_Harken")
-		CharacterAddAbility(Origin.Harken, "WarriorLore", 1)
-		CharacterAddAbility(Origin.Harken, "TwoHanded", 1)
-		CharacterAddAbility(Origin.Harken, "Barter", 1)
-		CharacterAddAttribute(Origin.Harken, "Strength", 3)
-		CharacterAddTalent(Origin.Harken, "Opportunist")
-		CharacterAddTalent(Origin.Harken, "Dwarf_Sturdy")
-		CharacterAddTalent(Origin.Harken, "Dwarf_Sneaking")
+		NRD_PlayerSetBaseAttribute(Origin.Harken, "Strength", 3)
+		NRD_PlayerSetBaseAbility(Origin.Harken, "WarriorLore", 1)
+		NRD_PlayerSetBaseAbility(Origin.Harken, "TwoHanded", 1)
+		NRD_PlayerSetBaseAbility(Origin.Harken, "Barter", 1)
+		NRD_PlayerSetBaseTalent(Origin.Harken, "Opportunist", 1)
+
+		CharacterAddCivilAbilityPoint(Origin.Harken, 0)
 
 		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
 			Data.Presets.Preview.Knight:ApplyToCharacter(Origin.Harken, "Uncommon", {"Weapon", "Helmet", "Breast", "Gloves"})
@@ -78,22 +87,30 @@ function Origins_InitCharacters(region)
 		ObjectSetFlag(Origin.Harken, "LLWEAPONEX_Origins_SetupComplete", 0)
 		--CharacterAddSkill(Origin.Harken, "Shout_LLWEAPONEX_UnrelentingRage", 0)
 	end
+
+	local korvash = GameHelpers.GetCharacter(Origin.Korvash)
+	if korvash and (not korvash.Stats.TALENT_Lizard_Resistance or not korvash.Stats.TALENT_Lizard_Persuasion) then
+		NRD_PlayerSetBaseTalent(Origin.Korvash, "Lizard_Resistance", 1)
+		NRD_PlayerSetBaseTalent(Origin.Korvash, "Lizard_Persuasion", 1)
+		CharacterAddCivilAbilityPoint(Origin.Korvash, 0)
+	end
 	
 	if CharacterIsPlayer(Origin.Korvash) == 0 and ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 0 then
-		isInitialized = false
+		if isInitialized then
+			isInitialized = ObjectGetFlag(Origin.Korvash, "LLWEAPONEX_Origins_SetupComplete") == 1
+		end
 		pcall(SetupOriginSkills, Origin.Korvash, "Avatar_LLWEAPONEX_Korvash")
 	
 		CharacterRemoveSkill(Origin.Korvash, "Cone_Flamebreath")
 		CharacterAddSkill(Origin.Korvash, "Cone_LLWEAPONEX_DarkFlamebreath", 0)
 		--CharacterApplyPreset(Origin.Korvash, "LLWEAPONEX_Korvash")
-		CharacterAddAbility(Origin.Korvash, "WarriorLore", 1)
-		CharacterAddAbility(Origin.Korvash, "Necromancy", 1)
-		CharacterAddAbility(Origin.Korvash, "Telekinesis", 1)
-		CharacterAddAttribute(Origin.Korvash, "Strength", 2)
-		CharacterAddAttribute(Origin.Korvash, "Wits", 1)
-		CharacterAddTalent(Origin.Korvash, "Executioner")
-		CharacterAddTalent(Origin.Korvash, "Lizard_Resistance")
-		CharacterAddTalent(Origin.Korvash, "Lizard_Persuasion")
+		NRD_PlayerSetBaseAbility(Origin.Korvash, "WarriorLore", 1)
+		NRD_PlayerSetBaseAbility(Origin.Korvash, "Necromancy", 1)
+		NRD_PlayerSetBaseAbility(Origin.Korvash, "Telekinesis", 1)
+		NRD_PlayerSetBaseAttribute(Origin.Korvash, "Strength", 2)
+		NRD_PlayerSetBaseAttribute(Origin.Korvash, "Wits", 1)
+		NRD_PlayerSetBaseTalent(Origin.Korvash, "Executioner", 1)
+		CharacterAddCivilAbilityPoint(Origin.Korvash, 0)
 
 		if Debug.CreateOriginPresetEquipment or Vars.LeaderDebugMode then
 			Data.Presets.Preview.LLWEAPONEX_Reaper:ApplyToCharacter(Origin.Korvash, "Uncommon", {"Weapon", "Helmet", "Gloves"})
