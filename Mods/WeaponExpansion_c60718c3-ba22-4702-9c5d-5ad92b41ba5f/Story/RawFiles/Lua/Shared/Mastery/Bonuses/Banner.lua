@@ -285,18 +285,17 @@ if not Vars.IsClient then
 		end
 	end)
 
-	RegisterListener("TurnDelayed", function(uuid)
+	Events.TurnDelayed:Subscribe(function (e)
 		local statusSource = nil
-		local target = GameHelpers.GetCharacter(uuid)
-		if target then
-			local auraStatus = target:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or target:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")
+		if e.Character then
+			local auraStatus = e.Character:GetStatus("LLWEAPONEX_BANNER_RALLY_DIVINEORDER_AURABONUS") or e.Character:GetStatus("LLWEAPONEX_BANNER_RALLY_DWARVES_AURABONUS")
 			if auraStatus then
 				statusSource = auraStatus.StatusSourceHandle
 			end
 			if statusSource then
 				statusSource = GameHelpers.GetCharacter(statusSource)
 				if statusSource and MasteryBonusManager.HasMasteryBonus(statusSource.MyGuid, "BANNER_PROTECTION") then
-					GameHelpers.Status.Apply(uuid, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION", 6.0, 0, uuid)
+					GameHelpers.Status.Apply(e.Character, "LLWEAPONEX_BANNER_TURNDELAYPROTECTION", 6.0, false, e.Character)
 				end
 			end
 		end
