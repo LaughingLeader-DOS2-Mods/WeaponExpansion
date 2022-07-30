@@ -29,52 +29,59 @@ local function FireCallbacks(id, target, attacker, success)
 	end
 end
 
+function DeathManager.RemoveAllDataForTarget(target)
+	local targetGUID = GameHelpers.GetUUID(target)
+	if targetGUID then
+		PersistentVars.OnDeath[targetGUID] = nil
+	end
+end
+
 ---@param id string
----@param target UUID|EsvCharacter|EsvItem
----@param attacker UUID|EsvCharacter|EsvItem
+---@param target CharacterParam
+---@param attacker CharacterParam
 ---@param listenDelay integer
 function DeathManager.ListenForDeath(id, target, attacker, listenDelay)
-	local target = GameHelpers.GetUUID(target)
-	local attacker = GameHelpers.GetUUID(attacker)
+	local targetGUID = GameHelpers.GetUUID(target)
+	local attackerGUID = GameHelpers.GetUUID(attacker)
 
-	if ObjectIsCharacter(target) == 0 then
+	if ObjectIsCharacter(targetGUID) == 0 then
 		return
 	end
 
-	if CharacterIsDead(target) == 1 then
+	if CharacterIsDead(targetGUID) == 1 then
 		--Skip waiting
-		FireCallbacks(id, target, attacker, true)
+		FireCallbacks(id, targetGUID, attackerGUID, true)
 		return
 	end
 
-	if PersistentVars.OnDeath[target] == nil then
-		PersistentVars.OnDeath[target] = {
+	if PersistentVars.OnDeath[targetGUID] == nil then
+		PersistentVars.OnDeath[targetGUID] = {
 			Total = 0,
 			Attackers = {}
 		}
 	end
-	local data = PersistentVars.OnDeath[target]
+	local data = PersistentVars.OnDeath[targetGUID]
 	if listenDelay > 0 then
-		Timer.StartUniqueTimer("LLWEAPONEX_DeathManager_ClearListener", string.format("%s%s", target, attacker), listenDelay,
-		{ID=id, Target=target, Attacker=attacker})
+		Timer.StartUniqueTimer("LLWEAPONEX_DeathManager_ClearListener", string.format("%s%s", targetGUID, attackerGUID), listenDelay,
+		{ID=id, Target=targetGUID, Attacker=attackerGUID})
 	end
-	if data.Attackers[attacker] == nil then
-		data.Attackers[attacker] = {}
+	if data.Attackers[attackerGUID] == nil then
+		data.Attackers[attackerGUID] = {}
 	end
-	if data.Attackers[attacker][id] == nil or data.Total == 0 then
+	if data.Attackers[attackerGUID][id] == nil or data.Total == 0 then
 		data.Total = data.Total + 1
 	end
-	data.Attackers[attacker][id] = true
-	if Vars.DebugMode and IsTagged(target, "LLDUMMY_TrainingDummy") == 1 then
+	data.Attackers[attackerGUID][id] = true
+	if Vars.DebugMode and IsTagged(targetGUID, "LLDUMMY_TrainingDummy") == 1 then
 		if listenDelay > 0 then
 			local tDebugName = string.format("Timers_LLWEAPONEX_Debug_FakeDeathEvent_%s_%s", id, Ext.Random(0,999))
 			Timer.StartOneshot(tDebugName, listenDelay/2, function()
 				fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing for timer %s", tDebugName)
-				DeathManager.OnDeath(target)
+				DeathManager.OnDeath(targetGUID)
 			end)
 		else
 			fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] Target Dummy death simulation firing.")
-			DeathManager.OnDeath(target)
+			DeathManager.OnDeath(targetGUID)
 		end
 	end
 end
@@ -89,7 +96,7 @@ end)
 function DeathManager.OnDeath(uuid)
 	local data = PersistentVars.OnDeath[uuid]
 	if data ~= nil then
-		fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] %s died. Firing callbacks.", uuid)
+		--fprint(LOGLEVEL.TRACE, "[LLWEAPONEX:DeathMechanics:OnDeath] %s died. Firing callbacks.", uuid)
 		for attacker,attackerData in pairs(data.Attackers) do
 			for id,b in pairs(attackerData) do
 				FireCallbacks(id, uuid, attacker, true)
