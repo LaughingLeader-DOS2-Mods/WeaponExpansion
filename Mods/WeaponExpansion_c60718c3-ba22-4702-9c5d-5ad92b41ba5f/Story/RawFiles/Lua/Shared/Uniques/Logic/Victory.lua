@@ -8,7 +8,7 @@ UniqueVars.VictoryEvilTags = {
 	"LLDUMMY_TrainingDummy",
 }
 
-Tags.ExtraProperties.LLWEAPONEX_SwordofVictory_Equipped = Classes.TranslatedString:CreateFromKey("LLWEAPONEX_SwordofVictory_EvilSlayer", "Deal +[ExtraData:LLWEAPONEX_SwordofVictory_EvilSlayerDamageMultiplier]% Basic Attack Damage When Slaying Evil")
+Tags.ExtraProperties.LLWEAPONEX_SwordofVictory_Equipped = Classes.TranslatedString:CreateFromKey("LLWEAPONEX_SwordofVictory_EvilSlayer", "Deal +[ExtraData:LLWEAPONEX_SwordofVictory_EvilSlayerDamageMultiplier]% Weapon Damage When Slaying Evil")
 
 ---@param target EsvCharacter|EclCharacter
 local function _IsEvil(target)
@@ -21,6 +21,8 @@ local function _IsEvil(target)
 end
 
 if not Vars.IsClient then
+	local _justPlayedSound = {}
+
 	--Leadership now redirects [ExtraData:LLWEAPONEX_SwordofVictory_DamageRedirectionAmount]% of damage taken by allies to you.
 
 	--- @param target EsvCharacter|EsvItem
@@ -63,6 +65,23 @@ if not Vars.IsClient then
 			if mult > 0 then
 				data:MultiplyDamage(1 + Ext.Round(mult * 0.01))
 				SignalTestComplete("LLWEAPONEX_Victory_EvilSlayerDamageBonus")
+				EffectManager.PlayEffect("RS3_FX_GP_Status_Firebrand_Subject_Weapon_01", attacker)
+				--local pos = {table.unpack(target.WorldPos)}
+				--pos[2] = pos[2] + (target.AI.AIBoundsHeight * 0.5)
+				--EffectManager.PlayEffectAt("RS3_FX_GP_Status_Firebrand_Subject_Hand_01", pos)
+				EffectManager.PlayEffectAt("RS3_FX_GP_Status_Firebrand_Subject_Hand_01", data.HitStatus.ImpactPosition)
+				local targetGUID = target.MyGuid
+				if not _justPlayedSound[targetGUID] then
+					PlaySound(targetGUID, "Skill_Summon_IncarnateRangedAttack_Cast_Fire")
+					--PlaySound(targetGUID, "GP_Combat_DeathType_Fire")
+					--PlaySound(target.MyGuid, "Skill_Fire_FireInfusion_Impact")
+					_justPlayedSound[targetGUID] = true
+				end
+				local timerName = string.format("LLWEAPONEX_VictoryBonusDamageSoundBuffer_%s", targetGUID)
+				Timer.Cancel(timerName)
+				Timer.StartOneshot(timerName, 500, function (e)
+					_justPlayedSound[targetGUID] = nil
+				end)
 			end
 		end
 	end
