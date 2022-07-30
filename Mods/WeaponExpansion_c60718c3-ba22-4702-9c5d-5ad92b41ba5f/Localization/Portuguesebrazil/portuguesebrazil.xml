@@ -1,7 +1,6 @@
 <contentList>
 	<content contentuid="h00157a58g9ae0g4119gba1ag3f1e9f11db14">Dual Shields</content>
 	<content contentuid="h00277f28g293fg49a2gbc19g4e1a54a92f0f">Weapon Expansion - Skillbooks</content>
-	<content contentuid="h002f643bg19afg4a78g8822g37c0614b0921">Soul Harvest</content>
 	<content contentuid="h0036c310g95a5g42e7gb715g06c09e6a4079">Character has activated the &lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; within their &lt;font color=&apos;#40E0D0&apos;&gt;Runeblade&lt;/font&gt;.&lt;br&gt;Enemies hit have a 10% chance to become &lt;font color=&apos;#7d71d9&apos;&gt;Shocked&lt;/font&gt; for 1 turn.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 50%.&lt;/font&gt;</content>
 	<content contentuid="h003d6b87g216ag47cega199gf4f3c2d28998">a Scoundrel Weapon</content>
 	<content contentuid="h0042fce4g99a9g487egb7d2g3d594b9b4d17">Master Monk of Staves</content>
@@ -491,7 +490,7 @@
 	<content contentuid="h2d15369bg951bg438cga94fg7ccb48f7a9b1">Lava Rune</content>
 	<content contentuid="h2d402e69g2f8bg48ddg8992gcb318ea714c4">&lt;font color=&apos;#9988FF&apos;&gt;Heavenly Strike&lt;/font&gt;</content>
 	<content contentuid="h2d40dd25gb718g4809ga2e9gb83912e9cbfd">A bag of prototype bullets, coated in a special substance.&lt;br&gt;Magically, the bag seems to never run out of ammo.&lt;br&gt;These bullets release a freezing gas, dealing water damage on hit.</content>
-	<content contentuid="h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6">Reap the battlefield, dealing [1] to enemies in an arc.&lt;br&gt;&lt;font color=&apos;#CD39C0&apos;&gt;Slaying enemies grants &lt;font color=&apos;#80FFC3&apos;&gt;[Key:LLWEAPONEX_SOULHARVEST_DAMAGE_BONUS_APPLY_DisplayName]&lt;/font&gt; (a stacking damage bonus), and restores &lt;font color=&apos;#80FFC3&apos;&gt;source points&lt;/font&gt;.&lt;/font&gt;</content>
+	<content contentuid="h2d8ac924gda32g41c1ga3c9g18e20e1d9bd6">Reap the battlefield, dealing [1] to enemies in an arc.&lt;br&gt;&lt;font color=&apos;#CD39C0&apos;&gt;Slaying enemies grants &lt;font color=&apos;#80FFC3&apos;&gt;[Key:LLWEAPONEX_SOULHARVEST_BONUS_DisplayName]&lt;/font&gt; (a stacking damage bonus), and restores &lt;font color=&apos;#80FFC3&apos;&gt;source points&lt;/font&gt;.&lt;/font&gt;</content>
 	<content contentuid="h2d9d60e3gf171g47ffgbf7fg126af4dd7ef6">Expert Slayer</content>
 	<content contentuid="h2dcf53bbgced5g46eagbabdg54b3d617317a">Dusty Book</content>
 	<content contentuid="h2de49223g49a5g4bc5g9224g05413bb0a013">Disable Remote Charge Detonation Limit - *WARNING* - Disable at your own risk!</content>
@@ -702,6 +701,7 @@
 	<content contentuid="h433902bega66bg46e4ga29eg7bd095c23074">Lionheart Anatomy</content>
 	<content contentuid="h4343971egf586g483bgba2ag7aebcba49c5e">Inert Runeblade</content>
 	<content contentuid="h4367cc22g9d4fg4c99ga1dfgc210f7915de3">Throw a chair weapon at a target for [1]. Applies &lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; and &lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt;, with a chance to knock the enemy down.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Dazed&lt;/font&gt; lowers Accuracy by &lt;font color=&apos;#FF0000&apos;&gt;[2]%&lt;/font&gt; per stack.&lt;br&gt;&lt;font color=&apos;#FF0000&apos;&gt;Blunt Trauma&lt;/font&gt; lowers Movement Speed by &lt;font color=&apos;#FF0000&apos;&gt;[3]&lt;/font&gt;, Dodge by &lt;font color=&apos;#FF0000&apos;&gt;[4]&lt;/font&gt;, and does [5] per turn.</content>
+	<content contentuid="h43744e1agf3deg4131g81bag933b0eb83ef9">Soul Harvest</content>
 	<content contentuid="h439e053bgd9c6g4dd4gbca4ge54f85d29d22">Expert Bannerkeeper</content>
 	<content contentuid="h43a29acfgcc05g45beg9826g10ddaa1ac4f9">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost3]% extra base damage in total.</content>
 	<content contentuid="h43cc06a4g9bcdg44b6g88ffgfc91981571dc">Concussion</content>
@@ -1491,7 +1491,6 @@
 	<content contentuid="h9102ff74ge535g4526gaffdgde551dab819e">Deals Equivalent Shadow Damage to Vitality</content>
 	<content contentuid="h910a4841g7540g4d45g8dc5g7e90f17fe706">Beginner</content>
 	<content contentuid="h91194fbag42ffg44efgbc10gd3b7b4073b0e">Lightningbreaker</content>
-	<content contentuid="h911f6633g79c2g41cdg8c45g076a0bbab99b">Soul Harvest</content>
 	<content contentuid="h9125efcdg0e97g4884g95a2g9bfc844868f3">Monk (Strength)</content>
 	<content contentuid="h918544b9g1788g49a0g8fa3g54bfb92f7e50">Cloak &amp; Reload</content>
 	<content contentuid="h9190f415gd78ag4ec3g91fbgdf7a0ce6ea4a">Neck Relief</content>
@@ -1723,6 +1722,7 @@
 	<content contentuid="ha91230cdga6ceg41c2g8429gb9e57408f101">Water or Ice Rune</content>
 	<content contentuid="ha9259747g75d2g452ag8688g3ce77b6cad95">Journeyman Bannerman</content>
 	<content contentuid="ha931c2f8ge74fg4e46ga1b8g142846b61b46">[1]&lt;br&gt;[2]</content>
+	<content contentuid="ha939fa7eg61ddg4dddga714g635b923651e9">Character has reaped souls with the &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.&lt;br&gt;&lt;font color=&apos;#FF3344&apos;&gt;This bonus is lost on death.&lt;/font&gt;</content>
 	<content contentuid="ha941a44dg4c0dg44a0gb5a4gfec18574f8d2">Character has been hit by a thrown wand!</content>
 	<content contentuid="ha942de52g11edg49e8gae4fgfc0015bdf289">Fire a concentrated mass of energy at a target, dealing [1] in a [2] radius.&lt;br&gt;&lt;font color=&apos;#00EECC&apos;&gt;Applies any active rune effects on hit.&lt;/font&gt;</content>
 	<content contentuid="ha94aeeacg8c7bg4de8g955bga4a93106690c">Two-handed Bokuto</content>
@@ -1794,7 +1794,6 @@
 	<content contentuid="haf0de280g47e7g41e3g9401g03e636e870d3">Venom Rune</content>
 	<content contentuid="haf1b80d3g97d1g477ag9547g1fd7878f3e35">Armor Break</content>
 	<content contentuid="haf74627fg8e14g477bgb7a6g1aaae60b6bdc">Chaos Bolt</content>
-	<content contentuid="haf77ac67g58f1g461dgb239g5af43ebc6a6d">Character has reaped souls with the &lt;font color=&apos;#c5a65a&apos;&gt;Soul Harvest&lt;/font&gt;, gaining a permanent damage bonus.</content>
 	<content contentuid="haf8ef486g9b5eg46b0g95efg2c5795550240">Base Damage</content>
 	<content contentuid="haf958192gc25bg4733gbc1eg87dadc2008e1">a Axe</content>
 	<content contentuid="haf995e87gce58g4368gaceegfc73bc209fc7">Strange Machine</content>
@@ -2438,6 +2437,7 @@
 	<content contentuid="hf2f2b489gdd14g4d90g9515g62d2e5458345">&lt;font color=&apos;#81E500&apos;&gt;Crossbow Mastery I&lt;/font&gt;</content>
 	<content contentuid="hf2f3f5dfg801eg4b17ga5d6g59c975b1c065">*[ANY ARMOR] Click on the button labeled &apos;Any Armor&apos;.*</content>
 	<content contentuid="hf3088c78gafa6g4b23ga6b2g65d07edc7440">&lt;font color=&apos;#FEFFB3&apos;&gt;Rally of the Divine&lt;/font&gt;</content>
+	<content contentuid="hf30ed2f5g63f3g499dg88ebgb9d833f4439c">[1] died and lost their [2] bonus.</content>
 	<content contentuid="hf33113e4g2e7bg42ecga6b8g8fe816db8004">&lt;font color=&apos;#AE9F95&apos;&gt;Shield Mastery I&lt;/font&gt;</content>
 	<content contentuid="hf33cdaccgc14bg4cdegaa50g800a6c761add">&lt;font color=&apos;#80FFC3&apos;&gt;Soul Reaping&lt;/font&gt;</content>
 	<content contentuid="hf3437e3fge87dg4a87g92acgde369c86cdb5">Covered (Shell)</content>
@@ -2563,6 +2563,7 @@
 	<content contentuid="hfe292736g1003g4d08gab35ge3250879be98">&lt;font color=&apos;#FF001F&apos;&gt;Followers Can&apos;t Gain Mastery Experience&lt;/font&gt;</content>
 	<content contentuid="hfe5ab83agc07fg46bcg912bg37af64f7d1c7">Blademaster&apos;s Strike 6</content>
 	<content contentuid="hfe7c8572g7718g4806gbaa3gd7928c34732e">Greatbow</content>
+	<content contentuid="hfe7ffd6dg4206g44a9gbe5ag4b6fa7f9bbfd">&lt;font color=&apos;#B823CB&apos;&gt;Soul Bounty Lost&lt;/font&gt;</content>
 	<content contentuid="hfe9263e0g33aag4459g8710gb0ff55b2427f">&lt;font color=&apos;#FF337F&apos; size=&apos;22&apos;&gt;&lt;p align=&apos;center&apos;&gt;Flanking Strike!&lt;/p&gt;&lt;/font&gt;</content>
 	<content contentuid="hfe99e1bbg58b4g4592gb899g3b10e1fd9c38">Straight Shot</content>
 	<content contentuid="hfef86678g922bg4f8cga1c2gd58bb5f3f9cd">&lt;font color=&apos;#F8FF2D&apos;&gt;Rapier Mastery II&lt;/font&gt;</content>
