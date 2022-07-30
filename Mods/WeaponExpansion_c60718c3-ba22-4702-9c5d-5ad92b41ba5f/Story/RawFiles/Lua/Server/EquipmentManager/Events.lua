@@ -105,12 +105,14 @@ function EquipmentManager:OnItemEquipped(character, item)
 	for k,unique in pairs(Uniques) do
 		if _ITEM_TAGS[unique.Tag] then
 			unique:OnEquipped(character, item)
-			if unique.UUID ~= item.MyGuid then
-				unique:AddCopy(item.MyGuid)
-				unique:ApplyProgression(nil, nil, item, true)
-			end
-			if not unique:IsReleasedFromOwner(item.MyGuid) then
-				unique:ReleaseFromOwner(item.MyGuid)
+			if not item:HasTag("LLWEAPONEX_Testing") then
+				if unique.UUID ~= item.MyGuid then
+					unique:AddCopy(item.MyGuid)
+					unique:ApplyProgression(nil, nil, item, true)
+				end
+				if not unique:IsReleasedFromOwner(item.MyGuid) then
+					unique:ReleaseFromOwner(item.MyGuid)
+				end
 			end
 		end
 	end
