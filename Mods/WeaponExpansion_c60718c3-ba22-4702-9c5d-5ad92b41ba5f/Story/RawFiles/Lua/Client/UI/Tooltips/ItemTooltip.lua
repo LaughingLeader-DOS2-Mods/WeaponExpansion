@@ -1,8 +1,6 @@
 ---@type TranslatedString
 local ts = Classes.TranslatedString
 
-local _EXTVERSION = Ext.Version()
-
 if ItemTooltipParams == nil then
 	ItemTooltipParams = {}
 end
@@ -441,15 +439,17 @@ local function OnItemTooltip(item, tooltip)
 			if _TAGS[tag] then
 				local text = ""
 				local t = type(v)
-				if v == "string" then
-					text = GameHelpers.GetStringKeyText(v, "")
-				elseif v == "function" then
+				if t == "table" and v.Type == "TranslatedString" then
+					text = v.Value
+				elseif t == "function" then
 					local results = {xpcall(v, debug.traceback, tag, item, tooltip)}
 					if results[1] == false then
 						Ext.PrintError(results[2])
 					else
 						text = results[2]
 					end
+				elseif t == "string" then
+					text = GameHelpers.GetStringKeyText(v, "")
 				else
 					text = GameHelpers.GetStringKeyText(tag, "")
 				end
