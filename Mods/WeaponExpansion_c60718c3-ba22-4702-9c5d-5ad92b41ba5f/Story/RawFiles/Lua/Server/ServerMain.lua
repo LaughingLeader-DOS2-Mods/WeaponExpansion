@@ -259,8 +259,7 @@ function TwoHandedToOnehanded(char, item)
 end
 
 Events.RegionChanged:Subscribe(function (e)
-    if e.State == REGIONSTATE.GAME then
-        Vars.GAME_STARTED = true
+    if e.State == REGIONSTATE.GAME and e.LevelType == LEVELTYPE.GAME then
         for player in GameHelpers.Character.GetPlayers() do
             EquipmentManager:CheckWeaponRequirementTags(player)
         end

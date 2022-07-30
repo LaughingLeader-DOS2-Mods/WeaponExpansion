@@ -2,28 +2,13 @@ local function IgnoreCharacter(uuid)
 	return Osi.LeaderLib_Helper_QRY_IgnoreCharacter(uuid) == true or CharacterIsSummon(uuid) == 1 or CharacterIsPartyFollower(uuid) == 1
 end
 
-local currentLevel = ""
-Ext.RegisterOsirisListener("GameStarted", 2, "after", function(region, editorMode)
-	currentLevel = region
-	Vars.isInCharacterCreation = IsCharacterCreationLevel(region) == 1
-	if Vars.isInCharacterCreation then
-		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
-	end
-end)
-
-Ext.RegisterOsirisListener("RegionEnded", 1, "after", function(region)
-	if IsCharacterCreationLevel(region) == 1 then
-		Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationFinished", "", nil)
-		Vars.isInCharacterCreation = false
-		GameHelpers.SetScale(Origin.Korvash, 1.1, true)
-	end
-end)
-
-Ext.RegisterOsirisListener("UserConnected", 3, "after", function(id, name, profileId)
-	local character = GetCurrentCharacter(id)
-	if character ~= nil then
-		if Vars.isInCharacterCreation then
-			Ext.PostMessageToUser(id, "LLWEAPONEX_OnCharacterCreationStarted", "")
+Events.RegionChanged:Subscribe(function (e)
+	if e.LevelType == LEVELTYPE.CHARACTER_CREATION then
+		if e.State == REGIONSTATE.GAME then
+			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationStarted", "", nil)
+		elseif e.State == REGIONSTATE.ENDED then
+			Ext.BroadcastMessage("LLWEAPONEX_OnCharacterCreationFinished", "", nil)
+			GameHelpers.SetScale(Origin.Korvash, 1.1, true)
 		end
 	end
 end)
