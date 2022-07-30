@@ -65,7 +65,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 1, {
 				end
 			end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -107,7 +107,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 			SignalTestComplete(self.ID)
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -175,7 +175,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 2, {
 			end
 		end
 	end, true).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -269,7 +269,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 3, {
 			PersistentVars.MasteryMechanics.BowExplosiveRainArrowCount[e.Data.UUID] = nil
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10)
@@ -402,7 +402,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 			SignalTestComplete(self.ID)
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10.0))
@@ -473,7 +473,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bow, 4, {
 			end, e.Data.TargetMode.Objects)
 		end
 	end, "None", "All").Test(function(test, self)
-		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
+		local char1,char2,dummy,cleanup = WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		local x,y,z = table.unpack(GameHelpers.Math.ExtendPositionWithForwardDirection(dummy, 10.0))

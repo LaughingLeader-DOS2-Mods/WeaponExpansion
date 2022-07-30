@@ -17,7 +17,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 			SignalTestComplete(self.ID)
 		end
 	end).Test(function(test, self)
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -45,7 +45,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 1, {
 			end
 		end
 	end).Test(function(test, self)
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3")
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, "13ee7ec6-70c3-4f2c-9145-9a5e85feb7d3")
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -90,7 +90,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		end
 	end).Test(function(test, self)
 		--Hit with blinkstrike, then do a basic attack
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -127,7 +127,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 2, {
 		end
 	end).Test(function(test, self)
 		--Missing vitality bonus damage with an Attack of Opportunity
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -178,7 +178,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		end
 	end).Test(function(test, self)
 		--Spin-to-win via Whirlwind
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -208,7 +208,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		end
 	end).Test(function(test, self)
 		--Piercing damage conversion for All In
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -247,7 +247,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 3, {
 		end
 	end).Test(function(test, self)
 		--Bonus AP from hitting 3 times with the dual-wielding skill
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -280,7 +280,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 		end
 	end).Test(function(test, self)
 		--Cleaving flurry
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -307,7 +307,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Axe, 4, {
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_Axe_Stalker","Axes can now be used with skills that require a [Handle:hd6d18316gbc8bg400bga46eg18cd9f4185ee:Dagger].")
 	}).Register.Test(function(test, self)
 		--Cast any skill with DaggerWeapon Requirement
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)

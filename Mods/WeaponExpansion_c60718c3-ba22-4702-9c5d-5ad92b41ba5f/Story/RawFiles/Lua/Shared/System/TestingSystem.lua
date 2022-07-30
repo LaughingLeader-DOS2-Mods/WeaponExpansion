@@ -1,17 +1,22 @@
 local _ISCLIENT = Ext.IsClient()
 
----@type table<string,LuaTest>
-local _Tests = {}
-MasteryTesting = {}
+local _tests = {
+	---@type table<string, LuaTest>
+	Bonuses = {},
+	---@type table<string, LuaTest>
+	Uniques = {},
+}
+WeaponExTesting = {}
 
----@alias MasteryTestingTaskCallback fun(test:LuaTest, bonus:MasteryBonusData)
+---@alias _LLWEAPONEX_BonusTestTaskCallback fun(test:LuaTest, bonus:MasteryBonusData)
+---@alias _LLWEAPONEX_RegularTestTaskCallback fun(test:LuaTest)
 
 ---@param bonusId string
----@param operation MasteryTestingTaskCallback|MasteryTestingTaskCallback[]
+---@param operation _LLWEAPONEX_BonusTestTaskCallback|_LLWEAPONEX_BonusTestTaskCallback[]
 ---@param params LuaTestParams
-function MasteryTesting.RegisterTest(bonusId, operation, params)
-	if _Tests[bonusId] == nil then
-		_Tests[bonusId] = {}
+function WeaponExTesting.RegisterBonusTest(bonusId, operation, params)
+	if _tests.Bonuses[bonusId] == nil then
+		_tests.Bonuses[bonusId] = {}
 	end
 	--Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
 	local test = nil
@@ -20,7 +25,24 @@ function MasteryTesting.RegisterTest(bonusId, operation, params)
 	else
 		test = Classes.LuaTest.Create(bonusId, {operation}, params)
 	end
-	table.insert(_Tests[bonusId], test)
+	table.insert(_tests.Bonuses[bonusId], test)
+end
+
+---@param id string
+---@param operation _LLWEAPONEX_RegularTestTaskCallback|_LLWEAPONEX_RegularTestTaskCallback[]
+---@param params LuaTestParams|nil
+function WeaponExTesting.RegisterUniqueTest(id, operation, params)
+	if _tests.Uniques[id] == nil then
+		_tests.Uniques[id] = {}
+	end
+	--Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
+	local test = nil
+	if type(operation) == "table" then
+		test = Classes.LuaTest.Create(id, operation, params)
+	else
+		test = Classes.LuaTest.Create(id, {operation}, params)
+	end
+	table.insert(_tests.Uniques[id], test)
 end
 
 function SignalTestComplete(id)
@@ -85,7 +107,7 @@ end)
 
 if not _ISCLIENT then
 	Testing.RegisterConsoleCommandTest("bonus", function (id, subid)
-		local test = _Tests[subid]
+		local test = _tests.Bonuses[subid]
 		if test then
 			SetMasteryTests("", "true")
 			return test
@@ -94,7 +116,7 @@ if not _ISCLIENT then
 		end
 	end, function (id, subid)
 		local bonuses = {}
-		for bid,v in pairs(_Tests) do
+		for bid,v in pairs(_tests.Bonuses) do
 			bonuses[#bonuses+1] = " " .. bid
 		end
 		if #bonuses > 0 then
@@ -115,11 +137,11 @@ if not _ISCLIENT then
 			local tests = {}
 			for _,v in pairs(mastery.RankBonuses) do
 				for _,v2 in ipairs(v.Bonuses) do
-					if _Tests[v2.ID] then
-						if _Tests[v2.ID].Type == "LuaTest" then
-							tests[#tests+1] = _Tests[v2.ID]
+					if _tests.Bonuses[v2.ID] then
+						if _tests.Bonuses[v2.ID].Type == "LuaTest" then
+							tests[#tests+1] = _tests.Bonuses[v2.ID]
 						else
-							for _,v3 in ipairs(_Tests[v2.ID]) do
+							for _,v3 in ipairs(_tests.Bonuses[v2.ID]) do
 								tests[#tests+1] = v3
 							end
 						end
@@ -141,7 +163,7 @@ if not _ISCLIENT then
 			local bonuses = {}
 			for _,v in pairs(mastery.RankBonuses) do
 				for _,v2 in ipairs(v.Bonuses) do
-					if _Tests[v2.ID] then
+					if _tests.Bonuses[v2.ID] then
 						bonuses[#bonuses+1] = "    " .. v2.ID
 					end
 				end
@@ -159,10 +181,38 @@ if not _ISCLIENT then
 		end
 	end)
 
+	Testing.RegisterConsoleCommandTest("unique", function (id, subid)
+		if subid == "all" then
+			local tests = {}
+			for uid,test in pairs(_tests.Uniques) do
+				tests[#tests+1] = test
+			end
+			return tests
+		else
+			local test = _tests.Uniques[subid]
+			if test then
+				return test
+			else
+				fprint(LOGLEVEL.WARNING, "[test] No test for unique ID (%s)", subid)
+			end
+		end
+	end, function (id, subid)
+		local valid_ids = {}
+		for uid,v in pairs(_tests.Uniques) do
+			valid_ids[#valid_ids+1] = " " .. uid
+		end
+		if #valid_ids > 0 then
+			table.sort(valid_ids)
+			return "\n" .. StringHelpers.Join("\n", valid_ids)
+		else
+			return "No registered unique tests."
+		end
+	end)
+
 	---@param pos number[]|nil
 	---@param equipmentSet string|nil
 	---@return EsvCharacter
-	function MasteryTesting.CreateTemporaryCharacter(pos, equipmentSet)
+	function WeaponExTesting.CreateTemporaryCharacter(pos, equipmentSet)
 		local host = Ext.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or GameHelpers.Math.ExtendPositionWithForwardDirection(host, 10)
 		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], host.RootTemplate.Id, 0)
@@ -190,7 +240,7 @@ if not _ISCLIENT then
 		SetFaction(character, "Good NPC")
 	end
 
-	MasteryTesting.SetupCharacter = SetupCharacter
+	WeaponExTesting.SetupCharacter = SetupCharacter
 
 	---@param test LuaTest
 	---@param pos number[]|nil
@@ -200,7 +250,7 @@ if not _ISCLIENT then
 	---@param totalDummies integer|nil
 	---@return UUID character
 	---@return UUID dummy
-	function MasteryTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
+	function WeaponExTesting.CreateTemporaryCharacterAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy, totalDummies)
 		local host = Ext.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
 		--LLWEAPONEX_Debug_MasteryDummy_2ac80a2a-8326-4131-a03c-53906927f935
@@ -254,7 +304,7 @@ if not _ISCLIENT then
 	---@return UUID character1
 	---@return UUID character2
 	---@return UUID dummy
-	function MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
+	function WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, pos, equipmentSet, targetTemplate, setEnemy)
 		local host = Ext.GetCharacter(CharacterGetHostCharacter())
 		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
 		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)}

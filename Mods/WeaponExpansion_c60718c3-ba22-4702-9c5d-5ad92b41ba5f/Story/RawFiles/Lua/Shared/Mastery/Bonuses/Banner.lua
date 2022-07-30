@@ -62,7 +62,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		end
 	end).Test(function(test, self)
 		--Bonus damage while rushing if a War Charge status active
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -103,7 +103,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 1, {
 		end
 	end).Test(function(test, self)
 		--Inspire cleanses certain negative statuses
-		local character,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
+		local character,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(character, dummy, "", 0, 1, 1)
@@ -155,7 +155,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		end
 	end).Test(function(test, self)
 		--Target of Harmony automatically basic attacks a nearby enemy
-		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
+		local char1,char2,dummy,cleanup = WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char1, dummy, "", 0, 1, 1)
@@ -198,7 +198,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		end
 	end, true).Test(function(test, self)
 		--Ally under GUARDIAN_ANGEL gets resurrected if they die
-		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
+		local char1,char2,dummy,cleanup = WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char1, dummy, "", 0, 1, 1)
@@ -357,7 +357,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		end
 	end).Test(function(test, self)
 		--Pull targets towards a banner
-		local char1,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char1,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char1, dummy, "", 0, 1, 1)
@@ -386,7 +386,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		end
 	}).Register.Test(function(test, self)
 		--Gain bonus from Leadership
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -492,7 +492,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 		end
 	end, "Target").Test(function(test, self)
 		--Gain bonus from Leadership
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, false)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -574,7 +574,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		end
 	end, "Target", "FLANKED").Test(function(test, self)
 		--Block flanking
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -606,7 +606,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 4, {
 		end
 	end).Test(function(test, self)
 		--Boost Overpower damage by having an ally nearby
-		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
+		local char1,char2,dummy,cleanup = WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char1, dummy, "", 0, 1, 1)

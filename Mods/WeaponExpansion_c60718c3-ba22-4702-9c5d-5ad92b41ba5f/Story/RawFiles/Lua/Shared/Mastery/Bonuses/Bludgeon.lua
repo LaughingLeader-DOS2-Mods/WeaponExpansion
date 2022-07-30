@@ -25,7 +25,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 			end
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -95,7 +95,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 			end
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup,dummies = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true, 2)
+		local char,dummy,cleanup,dummies = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true, 2)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -149,7 +149,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 			SignalTestComplete(self.ID)
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -210,7 +210,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 2, {
 			end
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		SetTag(CharacterGetEquippedWeapon(char), "LLWEAPONEX_Bludgeon")
@@ -248,7 +248,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 3, {
 		EffectManager.PlayEffectAt("RS3_FX_Skills_Earth_Cast_Shout_Earthquake_Root_02", pos, {Scale = 0.5})
 		SignalTestComplete(self.ID)
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -295,7 +295,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 			SignalTestComplete("BLUDGEON_FLURRY_FinalSkill")
 		end
 	end, "None", "Target_LLWEAPONEX_MasteryBonus_Bludgeon_FlurryBonus").Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -409,7 +409,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 4, {
 			SignalTestComplete(self.ID)
 		end
 	end).Test(function(test, self)
-		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
+		local char1,char2,dummy,cleanup = WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		SetTag(CharacterGetEquippedWeapon(char1), "LLWEAPONEX_Bludgeon")

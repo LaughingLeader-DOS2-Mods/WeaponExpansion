@@ -37,7 +37,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 			end
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet, nil, true)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -79,7 +79,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 	end, "Source").StatusRemoved(function(self, e, bonuses)
 		ClearTag(e.TargetGUID, "LLWEAPONEX_BattleBook_FirstAid_Active")
 	end, "None").Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -109,7 +109,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 1, {
 			SignalTestComplete("BATTLEBOOK_LOOT")
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(500)
 		local x,y,z = GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.GetPosition(char), 6.0)
@@ -171,7 +171,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 			end
 		end, e.Data.TargetMode.Objects)
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -203,7 +203,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 		--Since it hit something, start the bonus quicker
 		Timer.RestartObjectTimer("LLWEAPONEX_BattleBook_BattleStompBonus", e.Character, 500)
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -253,7 +253,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 2, {
 			end
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -465,7 +465,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 			PersistentVars.MasteryMechanics.BattlebookChallenge[challengerGUID] = nil
 		end
 	end, "Target", "CHALLENGE_WIN").Test(function(test, self)
-		local char1,char2,dummy,cleanup = MasteryTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
+		local char1,char2,dummy,cleanup = WeaponExTesting.CreateTwoTemporaryCharactersAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char1, dummy, "", 0, 1, 1)
@@ -507,7 +507,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 			end
 		end, e.Data.TargetMode.Objects)
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -572,7 +572,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 			end
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
@@ -635,7 +635,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 4, {
 			end
 		end
 	end).Test(function(test, self)
-		local char,dummy,cleanup = MasteryTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
+		local char,dummy,cleanup = WeaponExTesting.CreateTemporaryCharacterAndDummy(test, nil, _eqSet)
 		test.Cleanup = cleanup
 		test:Wait(250)
 		TeleportTo(char, dummy, "", 0, 1, 1)
