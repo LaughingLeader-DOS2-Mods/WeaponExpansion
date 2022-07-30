@@ -247,6 +247,7 @@ Text = {
 		DeathEdgeBonus = ts:Create("ha2fbf8c5g3500g42d4ga21bg5e4524eae598", "<font color='#CC33FF'>[Key:WPN_UNIQUE_LLWEAPONEX_Scythe_2H_DeathEdge_A_DisplayName] twists the recently slain [1], summoning a <font color='#FFFFFF'>[Handle:h6c54e8d7ga720g4c4egbb14gdd9be6d1e198:Bone Totem]</font>.</font>"),
 		StillStanceEnabled = ts:Create("h0f4c3d9fgf39fg49b8gbf42g3fcb4e3543c5", "<font color='#99FF22'>[1] is in a Still Stance ([2]).</font>"),
 		SoulBountyLost = ts:CreateFromKey("LLWEAPONEX_CombatLog_SoulBountyLost", "[1] died and lost their [2] bonus."),
+		VictoryDamageRedirected = ts:CreateFromKey("LLWEAPONEX_CombatLog_VictoryDamageRedirected", "[<font color='#C7A758'>[Key:WPN_UNIQUE_LLWEAPONEX_Sword_1H_SwordofVictory_A_DisplayName]</font>] [1] was redirected from [2] to [3], thanks to superior [Handle:hbcbab273g6573g4b68g810cgae231a342df0:Leadership] (Reduced Damage: [4])"),
 	},
 	StatusText = {
 		Unarmed = {

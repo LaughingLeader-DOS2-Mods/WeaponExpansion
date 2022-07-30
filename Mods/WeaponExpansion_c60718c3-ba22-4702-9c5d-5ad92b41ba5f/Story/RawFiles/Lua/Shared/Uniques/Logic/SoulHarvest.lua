@@ -63,6 +63,7 @@ if not Vars.IsClient then
 		end
 		local weapon = GameHelpers.Item.CreateItemByStat("_WPN_UNIQUE_LLWEAPONEX_Scythe_2H_SoulHarvest_A_Npc_Harvester")
 		test:Wait(250)
+		SetTag(weapon, "LLWEAPONEX_Testing")
 		NRD_CharacterEquipItem(char, weapon, "Weapon", 0, 0, 1, 1)
 		TeleportTo(char, target, "", 0, 1, 1)
 		CharacterSetFightMode(char, 1, 1)

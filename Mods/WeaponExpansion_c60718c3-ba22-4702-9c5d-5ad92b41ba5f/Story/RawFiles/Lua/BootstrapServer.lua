@@ -149,8 +149,8 @@ if Ext.IsDeveloperMode() then
 end
 
 ---@param target EsvCharacter
----@param attacker StatCharacter|StatItem
----@param hit HitRequest
+---@param attacker StatCharacter|CDivinityStatsItem
+---@param hit StatsHitDamageInfo
 ---@param causeType string
 ---@param impactDirection number[]
 ---@param context any

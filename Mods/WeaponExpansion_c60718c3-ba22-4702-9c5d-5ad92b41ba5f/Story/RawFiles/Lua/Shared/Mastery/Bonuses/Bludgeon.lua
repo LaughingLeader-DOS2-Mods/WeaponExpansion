@@ -80,7 +80,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Bludgeon, 1, {
 							status.RequestClientSync = true
 
 							local combatLogText = Text.CombatLog.Bludgeon.ShellCracking_StatusTurnsReduced:ReplacePlaceholders(sourceName, targetName, GameHelpers.Stats.GetDisplayName(id), turnReduction, Data.Colors.FormatStringColor[statusColor] or "#33FF33")
-							CombatLog.AddTextToAllPlayers(CombatLog.Filters.Combat, combatLogText)
+							CombatLog.AddCombatText(combatLogText)
 						end
 						affectedStatus = true
 					end

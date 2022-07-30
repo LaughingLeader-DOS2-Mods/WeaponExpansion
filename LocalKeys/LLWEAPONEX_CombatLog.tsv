@@ -10,3 +10,4 @@ LLWEAPONEX_CombatLog_Axe_DisabledBonus	<font color='#F5785A'>Axe Mastery 1:</fon
 LLWEAPONEX_CombatLog_BattleBook_ChallengeWon	<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted the skillbook '[3]'.	h8f1bba5agfa63g4076gbf1egb46421a6b07d
 LLWEAPONEX_CombatLog_BattleBook_ChallengeWonNoSkills	<font color='#F5785A'>Battle Book Mastery 3:</font> [1] challenged [2] and won, and was granted gold as a reward (target has no skills).	h395a71ddg6b03g49ccg9974g98ecb3529cac
 LLWEAPONEX_CombatLog_SoulBountyLost	[1] died and lost their [2] bonus.	heb1513e4g79dfg4125g970eg845e351d3843
+LLWEAPONEX_CombatLog_VictoryDamageRedirected	[1] died and lost their [2] bonus.	heb1513e4g79dfg4125g970eg845e351d3843

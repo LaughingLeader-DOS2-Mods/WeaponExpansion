@@ -33,6 +33,7 @@ LLWEAPONEX_PowerGauntlets_ArmorReduction	Lower [2] by [1]% on Unarmed Hit	hf751f
 LLWEAPONEX_PowerGauntlets_Equipped	[Special:LLWEAPONEX_PowerGauntletsBonus]	h01386ae6g4dd2g4c53gbd4dgebff9d83b90e
 LLWEAPONEX_Rapier_SuckerCombo1Enabled	Dirty Fighting I	hba48fc68g201fg454bga114gae251e299f95
 LLWEAPONEX_RunicCannon	Runic Weaponry	h702bf925gf664g45a7gb3f5g34418bfa2c56
+LLWEAPONEX_SwordofVictory_EvilSlayer	Deal +[ExtraData:LLWEAPONEX_SwordofVictory_EvilSlayerDamageMultiplier]% Weapon Damage When Slaying Evil	hc4f1afa6g2ea1g4741ga7a5g0b3b48300f13
 LLWEAPONEX_SwordofVictory_Equipped	<font color='#11D77A'>Enhanced Leadership</font>	hc4f1afa6g2ea1g4741ga7a5g0b3b48300f13
 LLWEAPONEX_SwordofVictory_Equipped_Description	<font color='#C7A758'>Leadership now redirects [ExtraData:LLWEAPONEX_SwordofVictory_DamageRedirectionAmount]% of damage taken by allies to you.</font>	hf9099919gab20g4e3bgbfb7gf51986b49573
 LLWEAPONEX_Omnibolt_Equipped	<font color='#9988FF'>Heavenly Strike</font>	h7dfcace2g98b1g48d1gbcbeg6da7ec9d8375

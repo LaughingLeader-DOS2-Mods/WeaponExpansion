@@ -8,6 +8,7 @@ Math = { AbilityScaling = {}}
 Text = {}
 
 if SkillConfiguration == nil then SkillConfiguration = {} end
+if UniqueVars == nil then UniqueVars = {} end
 
 local defaultExperienceAmounts = {
 	[0] = {Amount = 45, Required = 0},
@@ -44,12 +45,6 @@ Temp = {
 	StatusSource = {},
 	OriginalUniqueStats = {}
 }
-Vars = {
-	GAME_STARTED = false,
-	SEND_USER_ID = false,
-	isInCharacterCreation = false,
-	DebugMode = Ext.IsDeveloperMode() == true
-}
 
 Skills = {
 	Params = {},
@@ -85,7 +80,6 @@ Tags = {
 		LLWEAPONEX_AnatomyBook_Equipped = true,
 		LLWEAPONEX_DeathEdge_Equipped = true,
 		LLWEAPONEX_PowerGauntlets_Equipped = true,
-		--LLWEAPONEX_SwordofVictory_Equipped = true,
 	}
 }
 
