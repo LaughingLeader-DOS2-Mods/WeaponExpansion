@@ -408,9 +408,9 @@ local function OnItemTooltip(item, tooltip)
 				descriptionElement.Label = descriptionElement.Label .. "<br>"
 			end
 			if totalMasteries > 1 then
-				descriptionElement.Label = descriptionElement.Label .. Text.ItemDescription.EnabledMasteries:ReplacePlaceholders(enabledMasteriesText)
+				descriptionElement.Label = descriptionElement.Label .. Text.ItemDescription.EnablesMasteries:ReplacePlaceholders(enabledMasteriesText)
 			else
-				descriptionElement.Label = descriptionElement.Label .. Text.ItemDescription.EnabledMastery:ReplacePlaceholders(enabledMasteriesText)
+				descriptionElement.Label = descriptionElement.Label .. Text.ItemDescription.EnablesMastery:ReplacePlaceholders(enabledMasteriesText)
 			end
 		end
 

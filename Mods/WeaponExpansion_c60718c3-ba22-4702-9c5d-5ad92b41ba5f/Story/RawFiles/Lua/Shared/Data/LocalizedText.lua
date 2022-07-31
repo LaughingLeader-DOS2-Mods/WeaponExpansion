@@ -34,8 +34,8 @@ Text = {
 		RunicCannonEnergy = ts:Create("h02882207g5e7bg4deaga22eg854b68f8dd29", "<font color='#33FFAA'>Runic Energy [1]</font>"),
 	},
 	ItemDescription = {
-		EnabledMastery = ts:Create("h3716cca7ga9fcg4c76g8c61gaabdbbd47017", "<font color='#FFAA00'>Enabled Mastery: [1]</font>"),
-		EnabledMasteries = ts:Create("h5b484a05g654bg43bdgb455gbab5e178ca58", "<font color='#FFAA00'>Enabled Masteries: [1]</font>"),
+		EnablesMastery = ts:Create("h3716cca7ga9fcg4c76g8c61gaabdbbd47017", "<font color='#FFAA00'>Enables Mastery: [1]</font>"),
+		EnablesMasteries = ts:Create("h5b484a05g654bg43bdgb455gbab5e178ca58", "<font color='#FFAA00'>Enables Masteries: [1]</font>"),
 		AutoLeveling = ts:Create("hd5277dddg7b7dg4f95g9216g0e1515f5a461", "<font color='#80FFC3' size='18'>Automatically levels up when equipped, gaining bonuses at various levels.</font>")
 	},
 	MasteryMenu = {
