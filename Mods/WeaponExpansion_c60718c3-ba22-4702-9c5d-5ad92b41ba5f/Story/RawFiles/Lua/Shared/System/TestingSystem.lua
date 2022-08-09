@@ -237,6 +237,7 @@ if not _ISCLIENT then
 		CharacterSetReactionPriority(character, "CowerIfNeutralSeeCombat", 0)
 		SetTag(character, "LeaderLib_TemporaryCharacter")
 		SetTag(character, "LLWEAPONEX_MasteryTestCharacter")
+		SetTag(character, "NO_ARMOR_REGEN")
 		SetFaction(character, "Good NPC")
 	end
 
@@ -271,8 +272,9 @@ if not _ISCLIENT then
 			local dummy = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
 			NRD_CharacterSetPermanentBoostInt(dummy, "Dodge", -100)
 	
-			PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
+			PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01", "")
 			SetTag(dummy, "LeaderLib_TemporaryCharacter")
+			SetTag(dummy, "NO_ARMOR_REGEN")
 			SetVarObject(dummy, "LLDUMMY_Owner", character)
 			Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
 			if setEnemy then
@@ -323,6 +325,7 @@ if not _ISCLIENT then
 
 		PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
 		SetTag(dummy, "LeaderLib_TemporaryCharacter")
+		SetTag(dummy, "NO_ARMOR_REGEN")
 		SetVarObject(dummy, "LLDUMMY_Owner", character)
 		Osi.LLDUMMY_LevelUpTrainingDummy(dummy)
 		if setEnemy then
