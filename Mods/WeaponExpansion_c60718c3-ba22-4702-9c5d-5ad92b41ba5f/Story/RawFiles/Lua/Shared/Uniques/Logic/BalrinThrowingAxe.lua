@@ -77,7 +77,7 @@ if not Vars.IsClient then
 		end
 	end)
 
-	EquipmentManager:RegisterEquipmentChangedListener(function(e)
+	EquipmentManager.Events.EquipmentChanged:Subscribe(function(e)
 		if e.Equipped then
 			local slot = GameHelpers.Item.GetEquippedSlot(e.Character, e.Item)
 			if slot == "Weapon" then
@@ -93,7 +93,7 @@ if not Vars.IsClient then
 				CharacterRemoveSkill(e.Character.MyGuid, "Projectile_LLWEAPONEX_Throw_UniqueAxe_A_Offhand")
 			end
 		end
-	end, {Tag = "LLWEAPONEX_UniqueThrowingAxeA"})
+	end, {MatchArgs={Tag = "LLWEAPONEX_UniqueThrowingAxeA"}})
 
 	---@param char CharacterParam
 	---@param timedOut boolean|nil
