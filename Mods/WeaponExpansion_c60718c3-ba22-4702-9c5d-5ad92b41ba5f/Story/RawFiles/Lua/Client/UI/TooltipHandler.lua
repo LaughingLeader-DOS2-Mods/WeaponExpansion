@@ -239,6 +239,8 @@ local function Init()
 	Game.Tooltip.Register.Item(OnItemTooltip)
 	Game.Tooltip.Register.Rune(OnRuneTooltip)
 
+	--TODO Modify the tooltip array when a tooltip for an unequipped Dual Shields Shield is shown (and there's no shield to compare), to display the combat shield stored inside
+
 	Events.OnWorldTooltip:Subscribe(OnWorldTooltip, {Priority=999})
 	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_UniqueBasilusDagger")
 	TooltipHandler.RegisterItemTooltipTag("LLWEAPONEX_SwordofVictory_Equipped")

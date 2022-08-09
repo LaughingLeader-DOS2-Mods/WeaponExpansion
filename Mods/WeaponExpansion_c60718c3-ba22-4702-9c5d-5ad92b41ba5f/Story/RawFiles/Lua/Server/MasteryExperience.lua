@@ -30,12 +30,13 @@ local function MasteryLeveledUp(uuid,mastery,last,nextLevel)
 end
 
 --- Adds mastery experience a specific masteries.
---- @param uuid CharacterParam
+--- @param player CharacterParam
 --- @param mastery string
 --- @param expGain number
 --- @param skipFlagCheck boolean
-function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
-	local uuid = GameHelpers.GetUUID(uuid)
+function AddMasteryExperience(player,mastery,expGain,skipFlagCheck)
+	player = GameHelpers.GetCharacter(player)
+	local uuid = GameHelpers.GetUUID(player)
 	if not uuid then
 		return false
 	end
@@ -70,7 +71,7 @@ function AddMasteryExperience(uuid,mastery,expGain,skipFlagCheck)
 			end
 
 			if Vars.DebugMode then
-				fprint(LOGLEVEL.WARNING, "[LLWEAPONEX] Mastery (%s) XP (%s) => (%s) [%s}", mastery, currentExp or 0, nextExp or 0, uuid)
+				fprint(LOGLEVEL.WARNING, "[LLWEAPONEX] Mastery (%s) XP (%s) => (%s) [%s}", mastery, currentExp or 0, nextExp or 0, GameHelpers.GetDisplayName(player))
 			end
 
 			Osi.LLWEAPONEX_WeaponMastery_Internal_StoreExperience(uuid, mastery, nextLevel, nextExp)
