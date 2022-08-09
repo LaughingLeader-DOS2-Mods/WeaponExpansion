@@ -136,4 +136,45 @@ if not Vars.IsClient then
 		test:Wait(2000)
 		return true
 	end)
+
+	EquipmentManager.Events.UnsheathedChanged:Subscribe(function (e)
+		if GameHelpers.Character.IsPlayer(e.Character) then
+			if e.Unsheathed then
+				local evilObjects = {}
+				for _,v in pairs(e.Character:GetNearbyCharacters(12.0)) do
+					if v ~= e.Character.MyGuid then
+						local obj = GameHelpers.TryGetObject(v)
+						if obj and _IsEvil(obj) or obj.PlayerCustomData and obj.PlayerCustomData.OriginName == "Fane" then
+							evilObjects[#evilObjects+1] = obj.NetID
+							CharacterStatusText(obj.MyGuid, "Evil")
+							--EffectManager.PlayClientEffect("RS3_FX_UI_Exclamation_Mark_01:Dummy_OverheadFX", obj, nil, e.Character)
+							--Mods.LeaderLib.EffectManager.PlayClientEffect("RS3_FX_UI_Exclamation_Mark_01:Dummy_OverheadFX", me.MyGuid)
+						end
+					end
+				end
+				if #evilObjects > 0 then
+					--GameHelpers.Net.PostToUser(e.Character, "LLWEAPONEX_Victory_PlayClientEffects", {Targets=evilObjects})
+				end
+			else
+				GameHelpers.Net.PostToUser(e.Character, "LLWEAPONEX_Victory_StopClientEffects")
+			end
+		end
+	end, {MatchArgs={Tag="LLWEAPONEX_SwordofVictory_Equipped"}})
+else
+	local _effects = {}
+	Ext.RegisterNetListener("LLWEAPONEX_Victory_PlayClientEffects", function (channel, payload, user)
+		local data = Common.JsonParse(payload)
+		if data and data.Targets then
+			for _,netid in pairs(data.Targets) do
+				local obj = GameHelpers.TryGetObject(netid)
+				if obj then
+					VisualManager.CreateClientEffect("RS3_FX_UI_Exclamation_Mark_01", obj, {})
+				end
+			end
+		end
+	end)
+
+	Ext.RegisterNetListener("LLWEAPONEX_Victory_StopClientEffects", function (channel, payload, user)
+		
+	end)
 end
