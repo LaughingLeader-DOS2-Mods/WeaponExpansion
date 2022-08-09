@@ -811,7 +811,7 @@ Skills.Damage.Cone_LLWEAPONEX_DarkFlamebreath = GetDarkFlamebreathDamage
 local function GetRunicCannonSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, isTooltip)
 	-- We're making the offhand weapon a rifle here so the functions ignore it for damage calculations.
 	---@type StatItem
-	local weapon = attacker.MainWeapon
+	local weapon = GameHelpers.Ext.CreateWeaponTable("WPN_UNIQUE_LLWEAPONEX_ArmCannon_A", attacker.Level)
 	if isTooltip ~= true then
 		return Game.Math.GetSkillDamage(skill, attacker, isFromItem, stealthed, attackerPos, targetPos, level, noRandomization, weapon, {WeaponType="Rifle"})
 	else
