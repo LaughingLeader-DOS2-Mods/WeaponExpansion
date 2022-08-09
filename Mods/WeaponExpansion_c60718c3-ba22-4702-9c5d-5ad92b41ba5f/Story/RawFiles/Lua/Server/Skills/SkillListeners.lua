@@ -147,18 +147,29 @@ function(e)
 	end
 end)
 
-SkillManager.Register.Hit({"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"},
-function(e)
-	-- Silver bolts / Bullets do bonus damage to undead/voidwoken
-	if e.Data.Success and TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
-		if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
-			local bonus = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbow_SilverBonusDamage", 1.5)
-			if bonus > 0 then
-				e.Data:MultiplyDamage(bonus, true)
+SkillConfiguration.HandCrossbows = {
+	AllShootSkills = {"Projectile_LLWEAPONEX_HandCrossbow_Shoot", "Projectile_LLWEAPONEX_HandCrossbow_Shoot_Enemy"}
+}
+
+Ext.Events.SessionLoaded:Subscribe(function()
+	SkillManager.Register.Hit(SkillConfiguration.HandCrossbows.AllShootSkills, function(e)
+		-- Silver bolts / Bullets do bonus damage to undead/voidwoken
+		if e.Data.Success and TagHelpers.IsUndeadOrVoidwoken(e.Data.Target) then
+			if Skills.HasTaggedRuneBoost(e.Character.Stats, "LLWEAPONEX_SilverAmmo", "_LLWEAPONEX_HandCrossbows") then
+				local bonus = GameHelpers.GetExtraData("LLWEAPONEX_HandCrossbow_SilverBonusDamage", 1.5)
+				if bonus > 0 then
+					e.Data:MultiplyDamage(bonus, true)
+				end
 			end
 		end
-	end
-end)
+	end)
+
+	SkillManager.Register.MemorizationChanged(SkillConfiguration.HandCrossbows.AllShootSkills, function (e)
+		if e.Data == false then
+			CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_HandCrossbow_Reload")
+		end
+	end)
+end, {Priority=0})
 
 SkillManager.Register.Cast({"Target_LLWEAPONEX_Greatbow_FutureBarrage", "Target_LLWEAPONEX_Greatbow_FutureBarrage_Enemy"},
 function(e)

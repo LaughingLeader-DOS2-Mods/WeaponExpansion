@@ -137,48 +137,15 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
 	end
 end)
 
-function OnRest(target, source)
-	ReloadAmmoSkills(target)
-	if IsTagged(target, "LLWEAPONEX_Quiver_Equipped") then
-		local quiver = Ext.GetCharacter(target).Stats:GetItemBySlot("Belt")
-		if quiver ~= nil then
+StatusManager.Subscribe.Applied("STORY_PartyRest", function (e)
+	ReloadAmmoSkills(e.Target)
+	if e.Target:HasTag("LLWEAPONEX_Quiver_Equipped") then
+		local quiver = GameHelpers.Item.GetItemInSlot(e.Target, "Belt")
+		if quiver then
 			ItemResetChargesToMax(quiver.MyGuid)
 		end
 	end
-end
-
--- Why is this happening?
--- RegisterProtectedOsirisListener("SkillAdded", 3, "after", function(char, skill, learned)
--- 	if IsTagged(char, "TOTEM") == 1 and skill == "Target_SingleHandedAttack" then
--- 		CharacterRemoveSkill(char, skill)
--- 	end
--- end)
-
---- @param request EsvShootProjectileRequest
--- Ext.RegisterListener("BeforeShootProjectile", function (request)
---     print(string.format("(%s) BeforeShootProjectile(%s)", Ext.MonotonicTime(), request.Target))
--- end)
-
--- ---@param projectile EsvProjectile
--- Ext.RegisterListener("ShootProjectile", function(projectile)
--- 	print(string.format("(%s) ShootProjectile(%s)", Ext.MonotonicTime(), projectile.RootTemplate))
--- end)
-
--- ---@param projectile EsvProjectile
--- ---@param hitObject EsvGameObject
--- ---@param position number[]
--- Ext.RegisterListener("ProjectileHit", function (projectile, hitObject, position)
--- 	local char = Ext.GetCharacter(projectile.SourceHandle)
--- 	local item = Ext.GetItem(CharacterGetEquippedWeapon(char.MyGuid))
--- 	print(string.format("ProjectileHit(%s) RootTemplate(%s) Weapon.Stats.Projectile(%s)", Ext.MonotonicTime(), projectile.RootTemplate.Name, item.Stats.Projectile))
--- 	if item:HasTag("LLWEAPONEX_Firearm") then
--- 		for i,v in pairs(item.Stats.DynamicStats) do
--- 			if not StringHelpers.IsNullOrEmpty(v.BoostName) and not StringHelpers.IsNullOrEmpty(v.Projectile) and v.Projectile ~= item.Stats.Projectile then
--- 				print(i, v.BoostName, v.Projectile)
--- 			end
--- 		end
--- 	end
--- end)
+end)
 
 Events.Initialized:Subscribe(function(e)
 	local region = e.Region
@@ -212,6 +179,14 @@ Events.Initialized:Subscribe(function(e)
 		end
 		PersistentVars.AttributeRequirementChanges = existingChanges
 	end
+	for player in GameHelpers.Character.GetPlayers() do
+		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_HandCrossbow_Reload") == 1 and not GameHelpers.Character.HasSkill(player, SkillConfiguration.HandCrossbows.AllShootSkills) then
+			CharacterRemoveSkill(player.MyGuid, "Shout_LLWEAPONEX_HandCrossbow_Reload")
+		end
+		if CharacterHasSkill(player.MyGuid, "Shout_LLWEAPONEX_Pistol_Reload") == 1 and not GameHelpers.Character.HasSkill(player, SkillConfiguration.Pistols.AllShootSkills) then
+			CharacterRemoveSkill(player.MyGuid, "Shout_LLWEAPONEX_Pistol_Reload")
+		end
+	end
 end)
 
 TurnEndRemoveTags = {
@@ -229,7 +204,7 @@ end
 
 ---@param uuid UUID
 ---@param id integer
-local function OnLeftCombat(uuid, id)
+local function OnLeftCombat(uuid)
 	ReloadAmmoSkills(uuid)
 	StatusTurnHandler.RemoveAllTurnEndStatuses(uuid)
 	RemoveTagsOnTurnEnd(uuid)
@@ -247,9 +222,19 @@ end)
 RegisterProtectedOsirisListener("ObjectLeftCombat", 2, "after", function(obj,id)
 	if ObjectExists(obj) == 1 and ObjectIsCharacter(obj) == 1 then
 		obj = StringHelpers.GetUUID(obj)
-		OnLeftCombat(obj, id)
+		OnLeftCombat(obj)
 	end
 end)
+
+--[[ StatusManager.Subscribe.Removed("COMBAT", function (e)
+	OnLeftCombat(e.TargetGUID)
+end)
+
+RegisterProtectedOsirisListener("CombatEnded", 2, "before", function(id)
+	for character in GameHelpers.Combat.GetCharacters(id) do
+		OnLeftCombat(character.MyGuid)
+	end
+end) ]]
 
 --- @param char string
 --- @param skill string

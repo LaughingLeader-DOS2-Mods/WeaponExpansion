@@ -178,6 +178,11 @@ Ext.Events.SessionLoaded:Subscribe(function ()
 		end
 	end)
 
+	SkillManager.Register.MemorizationChanged(SkillConfiguration.Pistols.AllShootSkills, function (e)
+		if e.Data == false then
+			CharacterRemoveSkill(e.CharacterGUID, "Shout_LLWEAPONEX_Pistol_Reload")
+		end
+	end)
 end, {Priority=999})
 
 Timer.Subscribe("LLWEAPONEX_RemovePistolEffect", function(e)
