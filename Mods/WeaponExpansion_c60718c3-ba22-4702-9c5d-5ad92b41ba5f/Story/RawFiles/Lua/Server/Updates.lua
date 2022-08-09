@@ -84,7 +84,15 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 			SkillConfiguration.BalrinAxe.Calls.EquipBalrinAxe(player)
 		end
 
-		--Database migration
+		--Old Combat Shield deltamods
+		Osi.DB_LeaderLib_Deltamods_Groups:Delete("WeaponExpansion.CombatShields", nil)
+		Osi.DB_LeaderLib_Deltamods_MaxGuaranteedDeltamods:Delete("WeaponExpansion.CombatShields", nil)
+		Osi.DB_LeaderLib_Deltamods_WithChance:Delete("WeaponExpansion.CombatShields", nil, nil, nil, nil, nil)
+
+		--Deprecated databases
+		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Statuses_TormentDebuff", 4)
+		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_DualShields_CombatShieldGenerator", 3)
+		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_DualShields_Templates", 2)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Equipment_TrackedItems", 2)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Equipment_ActiveTags", 3)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_WeaponMastery_Temp_ActiveMasteries", 3)

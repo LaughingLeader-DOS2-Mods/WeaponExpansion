@@ -63,7 +63,6 @@ LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_20_ListenForTurn
 LeaderLib_ToggleScripts_Register_ObjectScript("LLWEAPONEX_80_TS_20_ListenForStatusRemoval", "LLWEAPONEX_ListenForStatusRemoval", 0, 1);
 
 LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_60_UniqueManager", "LLWEAPONEX_UniqueManagerActive");
-LeaderLib_ToggleScripts_Register_Script("LLWEAPONEX_80_TS_69_BlockHealing", "LLWEAPONEX_BlockHealingActive", 1);
 
 //END_REGION
 
