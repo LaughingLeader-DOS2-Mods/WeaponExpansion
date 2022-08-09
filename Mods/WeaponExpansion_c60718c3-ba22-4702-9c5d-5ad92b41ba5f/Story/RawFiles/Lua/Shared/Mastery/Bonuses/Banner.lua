@@ -185,7 +185,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 2, {
 		if not GameHelpers.Status.IsActive(e.Target, "DYING") then
 			PersistentVars.MasteryMechanics.GuardianAngelResurrect[e.TargetGUID] = nil
 		end
-	end, nil, "None").Osiris("CharacterPrecogDying", 1, "after", function(char)
+	end, "None").Osiris("CharacterPrecogDying", 1, "after", function(char)
 		char = StringHelpers.GetUUID(char)
 		if PersistentVars.MasteryMechanics.GuardianAngelResurrect[char] then
 			local sourceCharacter = GameHelpers.GetCharacter(PersistentVars.MasteryMechanics.GuardianAngelResurrect[char])
