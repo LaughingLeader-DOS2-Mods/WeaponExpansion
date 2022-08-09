@@ -5,7 +5,7 @@ if not isClient then
 		DamageType = 0,
 		DamagedMagicArmor = 0,
 		Equipment = 0,
-		DeathType = 0,
+		--DeathType = 0,
 		Bleeding = 0,
 		DamagedPhysicalArmor = 0,
 		PropagatedFromOwner = 0,
