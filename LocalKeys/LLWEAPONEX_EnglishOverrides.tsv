@@ -12,9 +12,9 @@ LLWEAPONEX_Override_MagicDamage1	[1] Magic Damage	h7656635fg959dg4396ga8bfgfc35e
 LLWEAPONEX_Override_MagicDamage2	Magic	hd01e5f46g36d4g48f5g8550gabdc4bef1f04
 LLWEAPONEX_Override_MagicDamage3	magic damage	hdb4307b4g1a6fg4c05g9602g6a4a6e7a29d9
 LLWEAPONEX_Override_ExplodeTooltip	Applies additional effects on hit	h899607bagd698g474bg9ae1g92742a70cf36
-LLWEAPONEX_Override_StatusApplySet	[1][2][3]	h233bf83cg2204g4f14gb46agad27f95deb43
-LLWEAPONEX_Override_StatusApplyTurnsSet	Set [1] for [4] turn(s) [2][3]	hf90daa3cgba5cg471cgbebcgedb58a337a9f
-LLWEAPONEX_Override_StatusApplyChance	([1]% Chance)	h54e0b91cg48a7g4d5agaedcgbde756a109ea
+LLWEAPONEX_Override_StatusApplySet	Apply [1] [2][3]	h233bf83cg2204g4f14gb46agad27f95deb43
+LLWEAPONEX_Override_StatusApplyTurnsSet	Apply [1] for [4] turn(s) [2][3]	hf90daa3cgba5cg471cgbebcgedb58a337a9f
+LLWEAPONEX_Override_StatusApplyChance	 ([1]% Chance)	h54e0b91cg48a7g4d5agaedcgbde756a109ea
 LLWEAPONEX_Override_FumbleText		ha0eca831g2e16g463fgb80fg09f33092c2ee
 LLWEAPONEX_Override_EmptySlot	Empty Slot	h192a08b3gd474g4dacg85bagc0ce5e0e27e4
 LLWEAPONEX_Override_Charges1	Charges Depleted	hd5f94f7eg6557g45cdg835ege011e66a3a3a

@@ -376,7 +376,7 @@
 	<content contentuid="h232179b9g3a1fg4732ga4c3g1cd20f5dc912">Runeblade (Air)</content>
 	<content contentuid="h232ef1e6g8305g44b4gbf73gcf0a7c801c0d">Medical Knowledge</content>
 	<content contentuid="h2338d7a1ged4eg44f1gbce1g30afe9499057">Throw a weapon at a target for [1].</content>
-	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43">[1][2][3]</content>
+	<content contentuid="h233bf83cg2204g4f14gb46agad27f95deb43">Apply [1] [2][3]</content>
 	<content contentuid="h236c1e4egbcb0g49bcg8718gff6f334e91dc">Blinking Warfare</content>
 	<content contentuid="h23b392d6g5b99g492bg9acfg485eb02b05a7">Crafted Glaive</content>
 	<content contentuid="h23b919e1gefb5g4b87g9429gaa5146a9ae0b">Character&apos;s wound has ruptured! Taking [1] initially and per turn.</content>
@@ -862,7 +862,7 @@
 	<content contentuid="h54625e05g5c12g4374gb6d0gf802a75c491d">Air Rune</content>
 	<content contentuid="h547a7cafgcdc8g45c2gab55g6a6b63446c7c">Weighty Book</content>
 	<content contentuid="h54ceee42g7f18g4ac2g9d88gb807f7b3f74d">A razor-sharp, concealable blade of foreign design.</content>
-	<content contentuid="h54e0b91cg48a7g4d5agaedcgbde756a109ea">([1]% Chance)</content>
+	<content contentuid="h54e0b91cg48a7g4d5agaedcgbde756a109ea"> ([1]% Chance)</content>
 	<content contentuid="h54e348b1ge4dag4227g8628g287c29e5cef5">Exquisite Shields of Chaos</content>
 	<content contentuid="h54e7afe8geee9g4aeeg97f5g5ab8421d0329">Bow</content>
 	<content contentuid="h550cf924gacd9g476cgb40egaa4f9ce34c97">Gain Detonation Skill and Enhanced Demolition</content>
@@ -1898,7 +1898,7 @@
 	<content contentuid="hb9a6f17dg44d9g4ae4g9863g27fa7ab26b4e">&lt;font size=&apos;18&apos;&gt;&lt;font color=&apos;#7d71d9&apos;&gt;Air Rune&lt;/font&gt; x 2&lt;/font&gt;&lt;br&gt;Enemies hit have a 20% chance to be struck by a &lt;font color=&apos;#7d71d9&apos;&gt;Thunderbolt&lt;/font&gt;, dealing &lt;font color=&apos;#7d71d9&apos;&gt;Air Damage&lt;/font&gt; and chaining &lt;font color=&apos;#7d71d9&apos;&gt;Lightning&lt;/font&gt; to enemies within 8m.&lt;br&gt;&lt;font color=&apos;#4197e2&apos;&gt;Wet increases this chance to 80%.&lt;/font&gt;&lt;font color=&apos;#f7ba14&apos; size=&apos;20&apos;&gt;Enemies can only be struck once per turn.&lt;/font&gt;</content>
 	<content contentuid="hb9d29345g4860g4a16gbf15g777e1e8998b8">&lt;font color=&apos;#80FFC3&apos;&gt;Bag of Special Tokens&lt;/font&gt;</content>
 	<content contentuid="hb9e220ceg072fg4b21gb00cg86ecef3a25f8">Character&apos;s has been marked by the &lt;font color=&apos;#c5a65a&apos;&gt;Warchief&apos;s Halberd&lt;/font&gt;.</content>
-	<content contentuid="hb9ec4d91g1861g4260g851fg073ad2e05aba">Sword of Victory</content>
+	<content contentuid="hb9ec4d91g1861g4260g851fg073ad2e05aba">Victory</content>
 	<content contentuid="hba057115g213fg422bga57dg2d19a697e0c9">Placeholder</content>
 	<content contentuid="hba0e76cag73d3g4d3fgb7d6gc67962e1730c">Ring of the Weaponmaster</content>
 	<content contentuid="hba147a7bg1a91g4abega77dgc2204e66d8bd">Character has fumbled their basic attack!</content>
@@ -2318,6 +2318,7 @@
 	<content contentuid="he625016eg2212g4f39g814fg1845dee2edb9">Widowmaker</content>
 	<content contentuid="he650b461g8912g4079gbe94gee4567a513da">Assassin&apos;s Patience</content>
 	<content contentuid="he67e894ag310bg4016g8434gad6327dcde15">Dizzy</content>
+	<content contentuid="he6e1f1bcg70f3g4902g8b42g2971e929b137">[1] died and lost their [2] bonus.</content>
 	<content contentuid="he6efb1d6gbcbbg4a02ga8e0gb54604aa71a8">&lt;font color=&apos;#b823cb&apos;&gt;Imitation, Guide to Mimicry&lt;/font&gt; (Activated)</content>
 	<content contentuid="he6fbf4e4g6053g4d6fgb1e7g25cf597a1f4d">Dual Shields</content>
 	<content contentuid="he71f1677g9ef3g44efg87d8gc2e17c463e15">&lt;font color=&apos;#F7BA14&apos; size=&apos;18&apos;&gt;Rapier Mastery III&lt;/font&gt;&lt;br&gt;Jump between [1] targets within [2], dealing [3].&lt;br&gt;Upon hit, there is a 25% chance to gain a Frenzy Charge.&lt;br&gt;Flicker Strike consumes Frenzy Charges to continue jumping, dealing [4] per hit.</content>
@@ -2487,6 +2488,7 @@
 	<content contentuid="hf6b81ebbgdd10g46bega557ge2c2019e7a8b">Blade of the Seven-finger Man</content>
 	<content contentuid="hf6f109a5g4d4bg48b4gac52ga06e399831b5">Artisan&apos;s Halberd</content>
 	<content contentuid="hf70024b2g0ca8g4515gbfb9g52c5d6061288">A lead-weight greatbow arrow that&apos;s almost too heavy to fire. Almost.</content>
+	<content contentuid="hf715147ag90a4g46ebg86dfg07c9e739910f">Deal +[ExtraData:LLWEAPONEX_SwordofVictory_EvilSlayerDamageMultiplier]% Weapon Damage When Slaying Evil</content>
 	<content contentuid="hf722e5cag8e8eg4c9cga439gbbd32257fa64">&lt;icon id=&apos;Target_LLWEAPONEX_UnarmedBasicAttack&apos;/&gt;Unarmed attacks gain [ExtraData:LLWEAPONEX_UnarmedMasteryBoost3]% extra base damage in total.</content>
 	<content contentuid="hf73e31b4g8d84g4119ga155g3e4e61e2b110">Dusty Manual</content>
 	<content contentuid="hf74e65e3gab5bg4af8gbf1bgc9ab5e89d4ac">Explosive Rain</content>
@@ -2506,7 +2508,7 @@
 	<content contentuid="hf89d0459g5f60g478bgb7c9g6691261a87fb">Placeholder</content>
 	<content contentuid="hf8b4f069g9305g4d2dg9949g69d67c069777">A set of small bolts, specially-designed for an arm-mounted crossbow.&lt;br&gt;These bolts are specially designed to penetrate armor.</content>
 	<content contentuid="hf9099919gab20g4e3bgbfb7gf51986b49573">&lt;font color=&apos;#C7A758&apos;&gt;Leadership now redirects [ExtraData:LLWEAPONEX_SwordofVictory_DamageRedirectionAmount]% of damage taken by allies to you.&lt;/font&gt;</content>
-	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Set [1] for [4] turn(s) [2][3]</content>
+	<content contentuid="hf90daa3cgba5cg471cgbebcgedb58a337a9f">Apply [1] for [4] turn(s) [2][3]</content>
 	<content contentuid="hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb">Builds Energy on Hit</content>
 	<content contentuid="hf90e918egb64fg4601g9e94g26341d6599da">Create Attribute Token</content>
 	<content contentuid="hf90feb29g1849g425dgae29ga5377df30f4b">&lt;icon id=&apos;Projectile_LLWEAPONEX_HandCrossbow_Shoot&apos;/&gt;Hand Crossbow attacks deal [ExtraData:LLWEAPONEX_HandCrossbowMasteryBoost2]% extra base damage in total.&lt;icon id=&apos;Jump_TacticalRetreat&apos;/&gt;In combat, [Key:Jump_TacticalRetreat_DisplayName] applies [Key:MARKED_DisplayName] to nearby enemies when jumping away.</content>
