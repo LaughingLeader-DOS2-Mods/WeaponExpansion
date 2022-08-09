@@ -138,6 +138,10 @@ local function OnStatusHitEnter(target, source, data)
 			end
 		end
 	end
+	
+	if target:GetStatus("LLWEAPONEX_WARCHARGE_DAMAGEBOOST") then
+		GameHelpers.Status.Remove(target, "LLWEAPONEX_WARCHARGE_DAMAGEBOOST")
+	end
 end
 
 RegisterListener("OnPrepareHit", OnPrepareHit)
