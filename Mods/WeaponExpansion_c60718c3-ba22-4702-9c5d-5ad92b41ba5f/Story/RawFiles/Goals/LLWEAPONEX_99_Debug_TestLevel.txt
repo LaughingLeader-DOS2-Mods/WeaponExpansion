@@ -1668,34 +1668,6 @@ THEN
 NOT DB_LeaderLog_Temp_CombinedString(_LogDetails);
 LeaderLog_Log("DEBUG_EVENTS", "[LLWEAPONEX:Debug:SkillCast] ", _LogDetails);
 
-//REGION DEBUG_FIND_COMBAT_SHIELD
-IF
-StoryEvent(_, "LeaderLib_Initialized")
-AND
-DB_IsPlayer(_Player)
-AND
-GetUUID(_Player, _ID)
-AND
-StringConcatenate("LLWEAPONEX_Debug_DualShieldsIteratorDone_", _ID, _GlobalFlag)
-THEN
-DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag);
-InventoryLaunchTagIterator(_Player, "LLWEAPONEX_DualShields", "", "LLWEAPONEX_Iterators_FoundDualShield", _GlobalFlag);
-
-IF
-StoryEvent((ITEMGUID)_Shield, "LLWEAPONEX_Iterators_FoundDualShield")
-AND
-DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag)
-THEN
-LLWEAPONEX_DualShields_FindCombatShield(_Player, _Shield, 0);
-
-IF
-GlobalFlagSet(_GlobalFlag)
-AND
-DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag)
-THEN
-NOT DB_LLWEAPONEX_Debug_Temp_FixingCombatShields(_Player, _GlobalFlag);
-//END_REGION
-
 //END_REGION
 
 //REGION SURFACES

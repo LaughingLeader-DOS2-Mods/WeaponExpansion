@@ -314,17 +314,24 @@ local equipmentTypes = {
 	Weapon = true,
 	Shield = true
 }
-
----@param item EsvItem
-RegisterProtectedExtenderListener("TreasureItemGenerated", function(item)
-	--local isInInventory = not StringHelpers.IsNullOrEmpty(GetInventoryOwner(item.MyGuid))
-	if item ~= nil and equipmentTypes[item.ItemType] == true then
-		fprint(LOGLEVEL.TRACE, "[OnTreasureItemGenerated] MyGuid(%s) StatsId(%s) ItemType(%s)", item.MyGuid, item.StatsId, item.ItemType)
-		if GameHelpers.Item.IsObject(item) then
-			return
+Events.TreasureItemGenerated:Subscribe(function (e)
+	if e.Item then
+		-- 3 = Potion, 0-2 are Weapon/Armor/Shield
+		if e.Item.Stats and equipmentTypes[e.Item.Stats.ItemType] then
+			if skipRarities[e.Item.Stats.ItemTypeReal] ~= true then
+				SwapDeltaMods(e.Item)
+			end
 		end
-		if skipRarities[item.Stats.ItemTypeReal] ~= true then
-			SwapDeltaMods(item)
+
+		local _TAGS = GameHelpers.GetItemTags(e.Item, true, false)
+		if _TAGS.LLWEAPONEX_DualShields and not _TAGS.LLWEAPONEX_CombatShield then
+			local itemGUID = e.Item.MyGuid
+			Timer.StartOneshot("", 250, function (e)
+				local item = GameHelpers.GetItem(itemGUID)
+				if item then
+					ItemProcessor.DualShields.GetCombatShield(item, false)
+				end
+			end)
 		end
 	end
 end)

@@ -82,16 +82,16 @@ end
 
 function RollForBonusSkill(item,stat,itemType,rarity)
 	-- Legendary BoostType deltamods only start showing up at Epic rarity and above.
-	local rarityVal = Data.RarityEnum[rarity]
-	if rarityVal >= Data.RarityEnum.Epic then
+	local rarityVal = Data.ItemRarity[rarity]
+	if rarityVal >= Data.ItemRarity.Epic then
 		local skills = NRD_ItemGetPermanentBoostString(item, "Skills") or ""
 		local nextSkill = nil
 		if itemType == "Weapon" then
 			local requirements = WeapontypeRequirements[Ext.StatGetAttribute(stat, "WeaponType")]
 			if requirements ~= nil then
 				local chance = GameHelpers.GetExtraData("LLWEAPONEX_Loot_BonusSkillChance_Weapon", 20)
-				if rarityVal > Data.RarityEnum.Epic then
-					chance = chance + ((rarityVal - Data.RarityEnum.Epic) * 10)
+				if rarityVal > Data.ItemRarity.Epic then
+					chance = chance + ((rarityVal - Data.ItemRarity.Epic) * 10)
 				end
 				if GameHelpers.Roll(chance) then
 					local skillsTable = nil

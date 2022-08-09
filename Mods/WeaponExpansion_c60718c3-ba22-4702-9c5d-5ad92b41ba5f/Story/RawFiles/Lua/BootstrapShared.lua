@@ -167,13 +167,15 @@ local function SetupFemaleKorvash()
 	GameHelpers.VoiceMetaData.Register.ScholarFemale(Origin.Korvash)
 end
 
-Ext.RegisterListener("ModuleLoading", function()
-	local femaleKorvash = false--Ext.ExtraData.LLWEAPONEX_Origins_FemaleKorvashEnabled == 1
-	if femaleKorvash then
-		SetupFemaleKorvash()
-	else
-		GameHelpers.VoiceMetaData.Register.ScholarMale(Origin.Korvash)
-	end
+--Ext.Stats.AddVoiceMetaData(_C().MyGuid, "h8b9b59e1ge00eg4d0bgb328gb18a298a9381", "Localization/English/Soundbanks/v7b6c1f26fe4e40bda5d0e6ff58cef4fe_h8b9b59e1ge00eg4d0bgb328gb18a298a9381.wem", 5.044792)
+
+Ext.Events.SessionLoaded:Subscribe(function (e)
+	-- local femaleKorvash = false--Ext.ExtraData.LLWEAPONEX_Origins_FemaleKorvashEnabled == 1
+	-- if femaleKorvash then
+	-- 	SetupFemaleKorvash()
+	-- end
+	GameHelpers.VoiceMetaData.Register.ScholarMale(Origin.Korvash)
+	--Ext.Stats.AddVoiceMetaData("3f20ae14-5339-4913-98f1-24476861ebd6", "h8b9b59e1ge00eg4d0bgb328gb18a298a9381", "Localization/English/Soundbanks/v7b6c1f26fe4e40bda5d0e6ff58cef4fe_h8b9b59e1ge00eg4d0bgb328gb18a298a9381.wem", 5.044792)
 	--Harken
 	GameHelpers.VoiceMetaData.Register.WarriorMale(Origin.Harken)
 end)

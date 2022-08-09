@@ -105,11 +105,14 @@ if MasterySystem == nil then
 	MasterySystem = {}
 end
 
+ItemProcessor = {}
+
 Ext.Require("Server/Data/PresetEntries.lua")
 Ext.Require("Server/ServerMain.lua")
 Ext.Require("Server/Skills/SkillHelpers.lua")
 Ext.Require("Server/HitHandler.lua")
 Ext.Require("Server/StatusHandler.lua")
+Ext.Require("Server/StatusMechanics.lua")
 Ext.Require("Server/TimerListeners.lua")
 Ext.Require("Server/EquipmentManager/_Main.lua")
 Ext.Require("Server/OsirisListeners.lua")
@@ -129,6 +132,7 @@ Ext.Require("Server/Mastery/StatusBonuses.lua")
 Ext.Require("Server/Origins/OriginsMain.lua")
 Ext.Require("Server/Origins/OriginsEvents.lua")
 Ext.Require("Server/Items/ItemHandler.lua")
+Ext.Require("Server/Items/DualShieldsGeneration.lua")
 Ext.Require("Server/Items/Quivers.lua")
 Ext.Require("Server/Items/CraftingMechanics.lua")
 if Ext.IsDeveloperMode() then

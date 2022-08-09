@@ -28,8 +28,8 @@ LeaderLib_ToggleScripts_EnableScript("LeaderLib_LuaSkillListeners_Enabled", "Wea
 LLWEAPONEX_LeaderLib_InitHelperSettings();
 LLWEAPONEX_LeaderLib_InitLeaveActionWorkaround();
 LLWEAPONEX_LeaderLib_InitTraderSettings();
-LLWEAPONEX_LeaderLib_InitDeltamods();
 LLWEAPONEX_LeaderLib_AddBlockedSkills();
+LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_CombatShield");
 
 //LeaderLib_Lua_EnableFeature(c60718c3-ba22-4702-9c5d-5ad92b41ba5f, "ApplyBonusWeaponStatuses");
 
@@ -93,51 +93,6 @@ LLWEAPONEX_LeaderLib_InitTraderSettings()
 THEN
 LeaderLib_Trader_Register_Position("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 12.0, 0.0, 8.0);
 LeaderLib_Trader_Register_StartingGold("LeaderLib.LeaderTrader", "TestLevel_LL_WeaponExpansion", 9999);
-//END_REGION
-
-//REGION DELTAMODS
-PROC
-LLWEAPONEX_LeaderLib_InitDeltamods()
-THEN
-//Random Deltamods
-LeaderLib_Deltamods_Register_Group("WeaponExpansion.CombatShields", 0);
-//LeaderLib_Deltamods_Register_Template("WeaponExpansion.CombatShields", "WPN_LLWEAPONEX_CombatShield_Blackring_A_ec353f1e-c1ca-46d1-83ef-e9f4fea14475", 0);
-//LeaderLib_Deltamods_Register_Template("WeaponExpansion.CombatShields", "WPN_LLWEAPONEX_CombatShield_Lizards_C_067f48be-857d-43a8-bd0a-add59f025843", 0);
-
-//Group, Rarity, Deltamod, Chance/999, MinLevel, MaxLevel
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_LLWEAPONEX_Primary_Constitution_CombatShield", 600, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_LLWEAPONEX_Primary_Constitution_CombatShield_Medium", 600, 10);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LLWEAPONEX_Primary_Constitution_CombatShield_Large", 600, 16);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Normal", "Boost_Weapon_LLWEAPONEX_Ability_OneHanded_CombatShield", 100, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Normal", "Boost_Weapon_LLWEAPONEX_Ability_Perserverance_CombatShield", 100, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Normal", "Boost_Weapon_LLWEAPONEX_Ability_PainReflection_CombatShield", 100, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Normal", "Boost_Weapon_LLWEAPONEX_Ability_WarriorLore_CombatShield", 100, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_LLWEAPONEX_Skill_CripplingBlow_CombatShield", 450, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "NonLegendary", "Boost_Weapon_LLWEAPONEX_Skill_GuardianAngel_CombatShield", 450, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LLWEAPONEX_Skill_DeflectiveBarrier_CombatShield", 100, 10);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LLWEAPONEX_Skill_ThickOfTheFight_CombatShield", 550, 1);
-
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_LLWEAPONEX_Status_Set_Crippled_CombatShield_Rare", 100, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_LLWEAPONEX_Status_Set_Crippled_CombatShield_Rare", 299, 1);
-LeaderLib_Deltamods_Add_Chance("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LLWEAPONEX_Status_Set_Crippled_CombatShield_Rare", 499, 1);
-
-LeaderLib_Deltamods_Register_MaxGuaranteedForGroup("WeaponExpansion.CombatShields", 2);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_Secondary_Vitality", 1);
-//LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_LifeSteal", 1); // LifeSteal doesn't show up currently
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_LLWEAPONEX_Damage_ArmourPiercing_Small_CombatShield", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "NonEpic", "Boost_Weapon_Ability_Telekinesis_Wand", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Secondary_Vitality_Normal", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Secondary_CriticalChance", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Ability_Necromancy_Wand", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Exceptional", "Boost_Weapon_Damage_ArmourPiercing", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_Secondary_CriticalModifier", 1);
-//LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_LifeSteal_Large", 1);
-LeaderLib_Deltamods_Add_List("WeaponExpansion.CombatShields", "Legendary", "Boost_Weapon_Damage_ArmourPiercing_Medium", 1);
-
-LeaderLib_Helper_Blacklist_TagFromCopying("LaughingLeader_WeaponExpansion", "LLWEAPONEX_CombatShield");
-
-//LeaderLib_Growth_Items_Register_Template("WeaponExpansion", "WeaponExpansion.Misc.MagicMissileScepter", "WPN_UNIQUE_LLWEAPONEX_Wand_1H_MagicMissile_A_67ef34e7-5f50-4ef9-9e40-8c7c04884812");
-//LeaderLib_Growth_Items_Clear_ByEntriesID("WeaponExpansion.Misc.MagicMissileScepter");
 //END_REGION
 
 //REGION BLOCKED_SKILLS
@@ -210,7 +165,6 @@ LeaderLib_Growth_Items_Clear_Template("WeaponExpansion.Scythe.DeathEdge");
 LeaderLib_Growth_Items_Clear_Template("WeaponExpansion.Rapier.Runeblade.Water");
 LeaderLib_Growth_Items_Clear_Template("WeaponExpansion.Rapier.Runeblade.Water2");
 LeaderLib_Growth_Items_Clear_Template("WeaponExpansion.Rapier.Runeblade.Water3");
-LLWEAPONEX_LeaderLib_InitDeltamods();
 //END_REGION
 
 /*

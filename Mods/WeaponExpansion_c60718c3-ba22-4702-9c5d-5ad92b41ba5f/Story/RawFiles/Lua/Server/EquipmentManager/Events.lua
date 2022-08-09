@@ -1,4 +1,15 @@
 local self = EquipmentManager
+EquipmentManager.Events = {}
+
+local _listenerTags = {
+	EquipmentChanged = {},
+	UnsheathedChanged = {},
+}
+
+local _listenerTemplates = {
+	EquipmentChanged = {},
+	UnsheathedChanged = {},
+}
 
 ---@class EquipmentChangedEventArgs
 ---@field Character EsvCharacter
@@ -6,33 +17,42 @@ local self = EquipmentManager
 ---@field Equipped boolean
 ---@field Template string|nil
 ---@field Tag string|nil
+---@field AllTags table<string,boolean>
 
-EquipmentManager.Events = {}
-
----@type SubscribableEvent<EquipmentChangedEventArgs>
-EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("EquipmentChanged")
-
-local _tagListeners = {}
-local _templateListeners = {}
-
----@param callback fun(e:EquipmentChangedEventArgs|SubscribableEventArgs)
----@param opts {Tag:string, Template:string}
-function EquipmentManager:RegisterEquipmentChangedListener(callback, opts)
-	opts = opts or {}
-	if opts.Tag then
-		if _tagListeners[opts.Tag] == nil then
-			_tagListeners[opts.Tag] = {}
+---@type LeaderLibSubscribableEvent<EquipmentChangedEventArgs>
+EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("WeaponExpansion.EquipmentChanged", {
+	OnSubscribe = function (callback, opts, matchArgs, matchArgsType)
+		if matchArgsType == "table" then
+			if matchArgs.Tag then
+				_listenerTags.EquipmentChanged[matchArgs.Tag] = true
+			end
+			if matchArgs.Template then
+				_listenerTemplates.EquipmentChanged[matchArgs.Template] = true
+			end
 		end
-		table.insert(_tagListeners[opts.Tag], callback)
-	end
-	if opts.Template then
-		opts.Template = StringHelpers.GetUUID(opts.Template)
-		if _templateListeners[opts.Template] == nil then
-			_templateListeners[opts.Template] = {}
+	end,
+})
+
+---@class UnsheathedChangedEventArgs
+---@field Character EsvCharacter
+---@field Item EsvItem
+---@field Unsheathed boolean
+---@field Template string|nil
+---@field Tag string|nil
+---@field AllTags table<string,boolean>
+---@type LeaderLibSubscribableEvent<UnsheathedChangedEventArgs>
+EquipmentManager.Events.UnsheathedChanged = Classes.SubscribableEvent:Create("WeaponExpansion.UnsheathedChanged", {
+	OnSubscribe = function (callback, opts, matchArgs, matchArgsType)
+		if matchArgsType == "table" then
+			if matchArgs.Tag then
+				_listenerTags.UnsheathedChanged[matchArgs.Tag] = true
+			end
+			if matchArgs.Template then
+				_listenerTemplates.UnsheathedChanged[matchArgs.Template] = true
+			end
 		end
-		table.insert(_templateListeners[opts.Template], callback)
-	end
-end
+	end,
+})
 
 ---@param character EsvCharacter
 ---@param item EsvItem
@@ -52,7 +72,6 @@ function EquipmentManager:OnItemEquipped(character, item)
 
 	local _CHARACTER_TAGS = GameHelpers.GetAllTags(character, true, false)
 	local _ITEM_TAGS = GameHelpers.GetItemTags(item, true, false)
-
 	---@cast _CHARACTER_TAGS table<string,boolean>
 	---@cast _ITEM_TAGS table<string,boolean>
 
@@ -124,41 +143,60 @@ function EquipmentManager:OnItemEquipped(character, item)
 		EquipmentManager.CheckFirearmProjectile(character, item)
 	end
 
-	local callbacks = _templateListeners[template]
-	if callbacks ~= nil then
-		if Vars.DebugMode then
-			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(true)", template, item.Stats.Name, character.MyGuid))
-		end
-		local data = {
-			Character = character,
-			Item = item,
-			Template = template,
-			Equipped = true
-		}
-		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, data)
-			if not b then
-				Ext.PrintError(err)
-			end
+	local invokedTemplate = false
+
+	for tag,_ in pairs(_listenerTags.EquipmentChanged) do
+		if _ITEM_TAGS[tag] then
+			EquipmentManager.Events.EquipmentChanged:Invoke({
+				Character = character,
+				Item = item,
+				AllTags = _ITEM_TAGS,
+				Template = template,
+				Tag = tag,
+				Equipped = true
+			})
+			invokedTemplate = true
 		end
 	end
 
-	for tag,callbacks in pairs(_tagListeners) do
-		if _ITEM_TAGS[tag] then
-			if Vars.DebugMode then
-				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(true)", tag, item.Stats.Name, character.MyGuid))
-			end
-			local data = {
+	if not invokedTemplate then
+		if _listenerTemplates.EquipmentChanged[template] then
+			EquipmentManager.Events.EquipmentChanged:Invoke({
 				Character = character,
 				Item = item,
-				Tag = tag,
+				AllTags = _ITEM_TAGS,
+				Template = template,
 				Equipped = true
-			}
-			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, data)
-				if not b then
-					Ext.PrintError(err)
-				end
+			})
+		end
+	end
+
+	if character.FightMode or character:GetStatus("UNSHEATHED") then
+		invokedTemplate = false
+	
+		for tag,_ in pairs(_listenerTags.UnsheathedChanged) do
+			if _ITEM_TAGS[tag] then
+				EquipmentManager.Events.UnsheathedChanged:Invoke({
+					Character = character,
+					Item = item,
+					AllTags = _ITEM_TAGS,
+					Template = template,
+					Tag = tag,
+					Unsheathed = true
+				})
+				invokedTemplate = true
+			end
+		end
+
+		if not invokedTemplate then
+			if _listenerTemplates.UnsheathedChanged[template] then
+				EquipmentManager.Events.UnsheathedChanged:Invoke({
+					Character = character,
+					Item = item,
+					AllTags = _ITEM_TAGS,
+					Template = template,
+					Unsheathed = true
+				})
 			end
 		end
 	end
@@ -173,7 +211,7 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 
 	local isPlayer = GameHelpers.Character.IsPlayer(character)
 	local template = GameHelpers.GetTemplate(item)
-	local itemTags = GameHelpers.GetItemTags(item, true, false)
+	local _ITEM_TAGS = GameHelpers.GetItemTags(item, true, false)
 
 	--TODO Refactor to Lua stuff
 	Osi.LLWEAPONEX_OnItemTemplateUnEquipped(character.MyGuid, item.MyGuid, template)
@@ -185,47 +223,136 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 	end
 	self:CheckForUnarmed(character, isPlayer)
 
-	local callbacks = _templateListeners[template]
-	if callbacks ~= nil then
-		if Vars.DebugMode then
-			Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Template] Template(%s) Stat(%s) Character(%s) Equipped(false)", template, item.Stats.Name, character.MyGuid))
-		end
-		local data = {
-			Character = character,
-			Item = item,
-			Template = template,
-			Equipped = false
-		}
-		for i,callback in pairs(callbacks) do
-			local b,err = xpcall(callback, debug.traceback, data)
-			if not b then
-				Ext.PrintError(err)
-			end
-		end
-	end
-	for tag,callbacks in pairs(_tagListeners) do
-		if itemTags[tag] then
-			if Vars.DebugMode then
-				Ext.Print(string.format("[WeaponExpansion:EquipmentChanged.Tag] Tag(%s) Stat(%s) Character(%s) Equipped(false)", tag, item.Stats.Name, character.MyGuid))
-			end
-			local data = {
+	local invokedTemplate = false
+
+	for tag,_ in pairs(_listenerTags.EquipmentChanged) do
+		if _ITEM_TAGS[tag] then
+			EquipmentManager.Events.EquipmentChanged:Invoke({
 				Character = character,
 				Item = item,
+				AllTags = _ITEM_TAGS,
+				Template = template,
 				Tag = tag,
 				Equipped = false
-			}
-			for i,callback in pairs(callbacks) do
-				local b,err = xpcall(callback, debug.traceback, data)
-				if not b then
-					Ext.PrintError(err)
-				end
+			})
+			invokedTemplate = true
+		end
+	end
+
+	if not invokedTemplate then
+		if _listenerTemplates.EquipmentChanged[template] then
+			EquipmentManager.Events.EquipmentChanged:Invoke({
+				Character = character,
+				Item = item,
+				AllTags = _ITEM_TAGS,
+				Template = template,
+				Equipped = false
+			})
+		end
+	end
+
+	if character.FightMode or character:GetStatus("UNSHEATHED") then
+		invokedTemplate = false
+		Timer.Cancel("LLWEAPONEX_FireUnsheathedRemoved", character)
+	
+		for tag,_ in pairs(_listenerTags.UnsheathedChanged) do
+			if _ITEM_TAGS[tag] then
+				EquipmentManager.Events.UnsheathedChanged:Invoke({
+					Character = character,
+					Item = item,
+					AllTags = _ITEM_TAGS,
+					Template = template,
+					Tag = tag,
+					Unsheathed = false
+				})
+				invokedTemplate = true
+			end
+		end
+
+		if not invokedTemplate then
+			if _listenerTemplates.UnsheathedChanged[template] then
+				EquipmentManager.Events.UnsheathedChanged:Invoke({
+					Character = character,
+					Item = item,
+					AllTags = _ITEM_TAGS,
+					Template = template,
+					Unsheathed = false
+				})
 			end
 		end
 	end
 end
 
+local function _InvokeUnsheathed(enabled, weapon, character)
+	local invokedTemplate = false
+	local _ITEM_TAGS = GameHelpers.GetItemTags(weapon, true)
+	local template = GameHelpers.GetTemplate(weapon)
+
+	for tag,_ in pairs(_listenerTags.UnsheathedChanged) do
+		if _ITEM_TAGS[tag] then
+			EquipmentManager.Events.UnsheathedChanged:Invoke({
+				Character = character,
+				Item = weapon,
+				AllTags = _ITEM_TAGS,
+				Template = template,
+				Tag = tag,
+				Unsheathed = enabled
+			})
+			invokedTemplate = true
+		end
+	end
+
+	if not invokedTemplate then
+		if _listenerTemplates.UnsheathedChanged[template] then
+			EquipmentManager.Events.UnsheathedChanged:Invoke({
+				Character = character,
+				Item = weapon,
+				AllTags = _ITEM_TAGS,
+				Template = template,
+				Unsheathed = false
+			})
+		end
+	end
+end
+
+StatusManager.Subscribe.Applied("UNSHEATHED", function (e)
+	if GameHelpers.Ext.ObjectIsCharacter(e.Target) then
+		Timer.Cancel("LLWEAPONEX_FireUnsheathedRemoved", e.Target)
+		local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(e.Target)
+		if mainhand then
+			_InvokeUnsheathed(true, mainhand, e.Target)
+		end
+		if offhand then
+			_InvokeUnsheathed(true, offhand, e.Target)
+		end
+	end
+end)
+
+StatusManager.Subscribe.Removed("UNSHEATHED", function (e)
+	if GameHelpers.Ext.ObjectIsCharacter(e.Target) then
+		Timer.Cancel("LLWEAPONEX_FireUnsheathedRemoved", e.Target)
+		Timer.StartObjectTimer("LLWEAPONEX_FireUnsheathedRemoved", e.Target, 250)
+	end
+end)
+
+Timer.Subscribe("LLWEAPONEX_FireUnsheathedRemoved", function (e)
+	if ObjectExists(e.Data.UUID) and e.Data.Object then
+		local character = e.Data.Object
+		---@cast character EsvCharacter
+		if character.FightMode or character:GetStatus("UNSHEATHED") then
+			local mainhand,offhand = GameHelpers.Character.GetEquippedWeapons(character)
+			if mainhand then
+				_InvokeUnsheathed(true, mainhand, character)
+			end
+			if offhand then
+				_InvokeUnsheathed(true, offhand, character)
+			end
+		end
+	end
+end)
+
 local function Ignore(character, item)
-	if character == NPC.VendingMachine 
+	if character == NPC.VendingMachine
 	or ObjectExists(character) == 0
 	or ObjectExists(item) == 0
 	or Osi.LeaderLib_Helper_QRY_IgnoreCharacter(character)

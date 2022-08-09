@@ -56,14 +56,14 @@ StatusManager.Register.Removed("LLWEAPONEX_QUIVER_DRAW_RECHARGE", function(targe
 	end
 end)
 
-EquipmentManager:RegisterEquipmentChangedListener(function(e)
+EquipmentManager.Events.EquipmentChanged:Subscribe(function(e)
 	if e.Equipped then
 		Quiver_StartRecharge(e.Character, e.Item)
 	else
 		GameHelpers.Status.Remove(e.Character, "LLWEAPONEX_QUIVER_DRAW_RECHARGE")
 		Quiver_RemoveTempArrows(e.Character)
 	end
-end, {Tag = "LLWEAPONEX_Quiver"})
+end, {MatchArgs={Tag = "LLWEAPONEX_Quiver"}})
 
 ---@param char CharacterParam
 function Quiver_RemoveTempArrows(char)
