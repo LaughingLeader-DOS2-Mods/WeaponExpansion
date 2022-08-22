@@ -152,33 +152,35 @@ if Ext.IsDeveloperMode() then
     Ext.Require("Server/Debug/DebugMain.lua")
 end
 
----@param target EsvCharacter
----@param attacker StatCharacter|CDivinityStatsItem
----@param hit StatsHitDamageInfo
----@param causeType string
----@param impactDirection number[]
----@param context any
-local function BeforeCharacterApplyDamage(target, attacker, hit, causeType, impactDirection, context)
-    if not target:HasTag("LLWEAPONEX_DisableArmorDamageConversion") then
-        if hit.DamageType == "Magic" then
-            hit.DamageList:ConvertDamageType("Water")
-        elseif hit.DamageType == "Corrosive" then
-            hit.DamageList:ConvertDamageType("Earth")
-        end
-    end
-end
-
 Timer.Subscribe("LLWEAPONEX_ClearDisableArmorDamageConversion", function (e)
-    if e.Data.UUID then
+    if ObjectExists(e.Data.UUID) == 1 then
         ClearTag(e.Data.UUID, "LLWEAPONEX_DisableArmorDamageConversion")
     end
 end)
 
-local function SessionSetup()
-    -- Divinity Unleashed or Armor Mitigation
-    if not Ext.IsModLoaded(MODID.DivinityUnleashed) and not Ext.IsModLoaded(MODID.ArmorMitigation) then
+---@param e EsvLuaBeforeCharacterApplyDamageEventParams
+local function BeforeCharacterApplyDamage(e)
+    if not e.Target:HasTag("LLWEAPONEX_DisableArmorDamageConversion") then
+        local magicDamage = e.Hit.DamageList:GetByType("Magic")
+        if magicDamage > 0 then
+            e.Hit.DamageList:Clear("Magic")
+            e.Hit.DamageList:Add("Water", magicDamage)
+        end
+        local corrosiveDamage = e.Hit.DamageList:GetByType("Corrosive")
+        if corrosiveDamage > 0 then
+            e.Hit.DamageList:Clear("Corrosive")
+            e.Hit.DamageList:Add("Earth", corrosiveDamage)
+        end
+    end
+end
+
+--Make Magic/Corrosive damage get reduced like regular damage
+Ext.AddPathOverride("Mods/Kalavinkas_Combat_Enhanced_e844229e-b744-4294-9102-a7362a926f71/Story/RawFiles/Goals/KCE_CoreRules_Story.txt", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/KCE_CoreRules_Story.txt")
+
+Ext.Events.SessionLoaded:Subscribe(function(e)
+    if not Ext.IsModLoaded(MODID.ArmorMitigation) then
         Ext.Print("[WeaponExpansion:BootstrapServer.lua] Enabled Magic/Corrosive damage type conversions.")
-        Ext.RegisterListener("BeforeCharacterApplyDamage", BeforeCharacterApplyDamage)
+        Ext.Events.BeforeCharacterApplyDamage:Subscribe(BeforeCharacterApplyDamage)
     end
 
     -- Enemy Upgrade Overhaul
@@ -194,21 +196,5 @@ local function SessionSetup()
     end
     Ext.Print("[WeaponExpansion:BootstrapServer.lua] Session is loading.")
 
-    local b,err = xpcall(function()
-        --local uniqueDataStr = Ext.LoadFile("WeaponExpansion_UniqueBaseStats.json")
-        local uniqueDataStr = Ext.LoadFile("Public/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Stats/Custom/WeaponExpansion_UniqueBaseStats.json", "data")
-        if uniqueDataStr ~= nil then
-            Temp.OriginalUniqueStats = Ext.JsonParse(uniqueDataStr) or {}
-        end
-	end, debug.traceback)
-	if not b then
-		Ext.PrintError(err)
-	end
-
     itemBonusSkills.Init()
-end
-Ext.RegisterListener("SessionLoaded", SessionSetup)
-
-Ext.Print("[WeaponExpansion:BootstrapServer.lua] Finished running.")
-
-Ext.AddPathOverride("Mods/Kalavinkas_Combat_Enhanced_e844229e-b744-4294-9102-a7362a926f71/Story/RawFiles/Goals/KCE_CoreRules_Story.txt", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/KCE_CoreRules_Story.txt")
+end)

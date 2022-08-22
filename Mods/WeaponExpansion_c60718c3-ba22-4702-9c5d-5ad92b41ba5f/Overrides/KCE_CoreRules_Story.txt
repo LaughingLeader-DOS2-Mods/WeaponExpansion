@@ -19,6 +19,7 @@ THEN
 DB_KCE_ArmourCheck("Magic","MaxMagicArmor");
 DB_KCE_ArmourCheck("Corrosive","MaxArmor");
 
+
 // ---------------------------------
 // NEW ARMOUR SYSTEM 06/2020
 // ---------------------------------
@@ -176,8 +177,152 @@ AND
 _Amount > 0
 AND
 NRD_CharacterGetStatInt(_Char,_Armour,_Arm)
+// Begin ops here to get max amount by which damage should be reduced
 AND
-IntegerSubtract(_Amount,_Arm,_NewDmg1)
+Real(_Amount,_RAmount)
+AND
+RealProduct(_RAmount,62.5,_Multi)	//62.5%
+AND
+RealDivide(_Multi,100.0,_MaxReducer)
+AND
+Integer(_MaxReducer,_Reduce)
+AND
+IntegertoString(_Reduce,_RedStr)
+AND
+GetVarInteger(_Char,"KCE_SuccessiveHits",_Hits)
+AND
+IntegerSum(_Hits,1,_MinHits)
+AND
+IntegerDivide(_Reduce,_MinHits,_Sub)
+AND
+IntegerSubtract(_Amount,_Sub,_MaxReduced)
+AND
+IntegerSubtract(_Amount,_Arm,_ArmourReduced)
+AND
+IntegerMax(_ArmourReduced,_MaxReduced,_Add)
+AND
+IntegertoString(_Add,_AddStr)
+AND
+IntegertoString(_Amount,_AmStr)
+AND
+IntegertoString(_MinHits,_MinhitsStr)
+AND
+StringConcatenate("Successive hits: ",_MinhitsStr,_MinStr)
+AND
+StringConcatenate("Original amount: ",_AmStr,_Str1)
+AND
+StringConcatenate(_Str1,". Reduced amount: ",_Str2)
+AND
+StringConcatenate(_Str2,_AddStr,_Res)
+THEN
+//CharacterStatusText(_Char,_MinStr);
+//CharacterStatusText(_Char,_Res);
+NRD_HitClearDamage(_Handle,_Damage);
+NRD_HitAddDamage(_Handle,_Damage,_Add);
+KCE_ProcessPers(_Char,_Handle);
+
+
+// ---------------------------------
+// PERSEVERANCE DAMAGE REDUCTION 12/01/2022
+// ---------------------------------
+
+PROC
+KCE_ProcessPers((CHARACTERGUID)_Char,(INTEGER64)_Handle)
+AND
+CharacterGetAbility(_Char,"Perseverance",_Val)
+AND
+_Val > 0
+AND
+DB_KCE_DamageTypes(_Type)
+AND
+_Type != "Shadow"
+AND
+_Type != "Piercing"
+AND
+NRD_HitGetDamage(_Handle, _Type, _Damage)
+AND
+_Damage > 0
+AND
+CharacterGetHitpointsPercentage(_Char,_Perct)
+AND
+Real(_Damage,_RealDamage)
+AND
+RealSubtract(100.0,_Perct,_Factor)
+AND
+Integer(_Factor,_IntF)
+AND
+Real(_Val,_Pers)
+AND
+RealProduct(_Pers,_Factor,_Multi)
+AND
+RealProduct(_Multi,0.04,_ReductionPerct)
+AND
+RealDivide(_RealDamage,100.0,_Real1)
+AND
+RealProduct(_Real1,_ReductionPerct,_ReductionReal)
+AND
+RealSubtract(_RealDamage,_ReductionReal,_Result)
+AND
+Integer(_Result,_Add)
+AND
+IntegertoString(_Add,_StrFinal)
+AND
+IntegertoString(_Damage,_StrDam)
+AND
+StringConcatenate("Original damage: ",_StrDam,_Str1)
+AND
+StringConcatenate(_Str1,". Reduced by ",_Str2)
+AND
+Integer(_ReductionPerct,_ReductPerInt)
+AND
+IntegertoString(_ReductPerInt,_Str3)
+AND
+StringConcatenate(_Str2,_Str3,_Str4)
+AND
+StringConcatenate(_Str4," to ",_Str5)
+AND
+StringConcatenate(_Str5,_StrFinal,_StrRes)
+THEN
+//CharacterStatusText(_Char,"yeah");
+//CharacterStatusText(_Char,_StrRes);
+NRD_HitClearDamage(_Handle,_Type);
+NRD_HitAddDamage(_Handle,_Type,_Add);
+
+
+
+/*
+// Old code
+IF
+NRD_OnPrepareHit((CHARACTERGUID)_Char,_,_,_Handle)
+AND
+GlobalGetFlag("KCE_LegacyArmour",0)
+AND
+DB_KCE_ArmourCheck(_Damage,_Armour)
+AND
+NOT DB_KCE_TempBlacklistDamage(_Char,_Damage)
+AND
+NRD_HitGetInt(_Handle,"HitType",_Val)
+AND
+_Val < 4
+AND
+NRD_HitGetDamage(_Handle,_Damage,_Amount)
+AND
+_Amount > 0
+AND
+NRD_CharacterGetStatInt(_Char,_Armour,_Arm)
+// Begin ops here to get max amount by which damage should be reduced
+AND
+Real(_Amount,_RAmount)
+AND
+RealProduct(_RAmount,62.5,_Multi)
+AND
+RealDivide(_Multi,100.0,_Reducer)
+AND
+Integer(_Reducer,_Reduce)
+AND
+IntegerMin(_Reduce,_Arm,_MinReduc)	// Cap out reduction at max reduce value (done by minimum, yeah it's confusing)
+AND
+IntegerSubtract(_Amount,_MinReduc,_NewDmg1)
 AND
 GetVarInteger(_Char,"KCE_SuccessiveHits",_Hits)
 AND
@@ -187,11 +332,14 @@ IntegerProduct(_Hits2,2,_Divider)
 AND
 IntegerDivide(_Amount,_Divider,_Subtract)
 AND
-IntegerMin(_Subtract,_Arm,_Max)
+IntegerMin(_Subtract,_MinReduc,_Max)
 AND
 IntegerSubtract(0,_Max,_Add)
 THEN
 NRD_HitAddDamage(_Handle,_Damage,_Add);
+
+
+*/
 
 
 
@@ -464,6 +612,7 @@ THEN
     NRD_StatusSetInt(_Target,_Handle,"Dodged",0);
     NRD_StatusSetInt(_Target,_Handle,"Missed",1);
 	ObjectClearFlag(_Target,"KCE_GetHitNot");
+
 
 
 EXITSECTION

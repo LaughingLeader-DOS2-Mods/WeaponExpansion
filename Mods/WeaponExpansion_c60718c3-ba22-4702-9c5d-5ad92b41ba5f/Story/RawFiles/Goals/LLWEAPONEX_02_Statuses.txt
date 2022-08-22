@@ -125,8 +125,6 @@ PROC
 LLWEAPONEX_Statuses_CreateRevenantSummon((CHARACTERGUID)_Target, (CHARACTERGUID)_Source, (STRING)_NameSuffix, (STRING)_Status, (REAL)_Duration, (INTEGER)_CopyEquipment)
 THEN
 DB_LLWEAPONEX_Statuses_Temp_SetupRevenantSummon(_Target, _Source, _NameSuffix, _Status, _Duration, _CopyEquipment);
-ApplyStatus(_Target, "LLWEAPONEX_SUMMON_REVENANT_EXPLODE", 0.0, 1, _Target);
-
 IF
 CharacterStatusApplied(_Revenant, "SUMMONING", (CHARACTERGUID)_Target)
 AND
