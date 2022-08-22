@@ -36,39 +36,6 @@ StatusManager.Subscribe.Applied("LLWEAPONEX_RANDOM_SURFACE_SMALL", function (e)
 	end
 end)
 
-SkillConfiguration.TormentDebuff = {
-	LastRollEnd = -1,
-	---@type table<string, {Min:number, Max:number, Duration:number}>
-	Statuses = {},
-}
-
-local function AddTormentDebuff(statusId, chance, duration)
-	local min = SkillConfiguration.TormentDebuff.LastRollEnd+1
-	local max = min + chance * 100
-	SkillConfiguration.TormentDebuff.Statuses[statusId] = {Duration = duration or 0, Min=min, Max=max}
-end
-
-AddTormentDebuff("LLWEAPONEX_CORPSE_EXPLOSION_EXPLODE", 2)
-AddTormentDebuff("CURSED", 5, 6)
-AddTormentDebuff("ENTANGLED", 5, 6)
-AddTormentDebuff("DISEASED", 5, 6)
-AddTormentDebuff("SLOWED", 5, 6)
-AddTormentDebuff("WEAK", 5, 6)
-AddTormentDebuff("LLWEAPONEX_RUPTURE", 10, 0)
-AddTormentDebuff("LLWEAPONEX_SOUL_BURN_PROC", 10, 0)
-AddTormentDebuff("LLWEAPONEX_MAGIC_KNOCKDOWN_CHECK", 10, 6)
-AddTormentDebuff("LLWEAPONEX_MAGIC_CRIPPLED_CHECK", 15, 6)
-AddTormentDebuff("LLWEAPONEX_MAGIC_BLEEDING_CHECK", 28, 6)
-
-StatusManager.Subscribe.Applied("LLWEAPONEX_TORMENT", function (e)
-	local roll = Ext.Utils.Random(0, SkillConfiguration.TormentDebuff.LastRollEnd)
-	for statusId,data in pairs(SkillConfiguration.TormentDebuff.Statuses) do
-		if roll >= data.Min and roll <= data.Max then
-			GameHelpers.Status.Apply(e.Target, statusId, data.Duration, e.Source)
-		end
-	end
-end)
-
 Events.OnBasicAttackStart:Subscribe(function (e)
 	local concussion = e.Attacker:GetStatus("LLWEAPONEX_CONCUSSION")
 	if concussion then
