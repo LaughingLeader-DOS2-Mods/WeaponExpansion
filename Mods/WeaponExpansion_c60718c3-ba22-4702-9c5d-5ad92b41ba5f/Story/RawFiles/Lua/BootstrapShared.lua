@@ -180,7 +180,7 @@ Ext.Events.SessionLoaded:Subscribe(function (e)
 	GameHelpers.VoiceMetaData.Register.WarriorMale(Origin.Harken)
 end)
 
-local function LoadExperienceVariables()	
+local function LoadExperienceVariables()
 	local RankVariables = {}
 	local maxRank = GameHelpers.GetExtraData("LLWEAPONEX_Mastery_MaxRank", 4, true)
 	local lastRankExpGain = 45
@@ -225,10 +225,10 @@ local function LoadExperienceVariables()
 		if skill.Requirements ~= nil then
 			for i,v in pairs(skill.Requirements) do
 				if v.Param == "LLWEAPONEX_NoMeleeWeaponEquipped" then
-					Skills.WarfareMeleeSkills[skill] = true
+					Skills.WarfareMeleeSkills[skill.Name] = true
 					break
 				elseif v.Param == "LLWEAPONEX_CannotUseScoundrelSkills" then
-					Skills.ScoundrelMeleeSkills[skill] = true
+					Skills.ScoundrelMeleeSkills[skill.Name] = true
 					break
 				end
 			end
@@ -261,7 +261,7 @@ function GetSettings()
 	return SettingsManager.GetMod(ModuleUUID, true, true)
 end
 
-Ext.RegisterListener("SessionLoaded", function()
+Ext.Events.SessionLoaded:Subscribe(function(e)
 	LoadExperienceVariables()
 	EnableFeature("ApplyBonusWeaponStatuses")
 	EnableFeature("FixChaosDamageDisplay")
@@ -273,6 +273,7 @@ Ext.RegisterListener("SessionLoaded", function()
 	EnableFeature("TooltipGrammarHelper")
     EnableFeature("FixFarOutManSkillRangeTooltip")
     EnableFeature("ReplaceTooltipPlaceholders")
+    EnableFeature("FixTooltipEmptySkillProperties")
 end)
 
 Ext.AddPathOverride("Mods/Helaene_Class_Marauder_53ed8826-71d6-452a-b9e5-faef35da8628/CharacterCreation/ClassPresets/Class_Marauder.lsx", "Mods/WeaponExpansion_c60718c3-ba22-4702-9c5d-5ad92b41ba5f/Overrides/LLWEAPONEX_Helaene_Marauder.lsx")
