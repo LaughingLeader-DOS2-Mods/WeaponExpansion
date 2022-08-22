@@ -83,11 +83,19 @@ RegisterProtectedOsirisListener("CharacterPrecogDying", 1, "after", function(cha
 end)
 
 local function ReloadAmmoSkills(uuid)
+	uuid = GameHelpers.GetUUID(uuid)
 	if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_HandCrossbow_Reload") == 1 then
 		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_HandCrossbow_Reload", "Projectile_LLWEAPONEX_HandCrossbow_Shoot", true, true)
+		EffectManager.PlayEffect("LLWEAPONEX_FX_HandCrossbow_Reload_01", uuid, {Bone="LowerArm_L_Twist_Bone"})
 	end
 	if CharacterHasSkill(uuid, "Shout_LLWEAPONEX_Pistol_Reload") == 1 then
+		local race = GameHelpers.Character.GetBaseRace(uuid)
+		local bone = SkillConfiguration.Pistols.RaceToProjectileBone[race]
+		if not bone then
+			bone = ""
+		end
 		GameHelpers.Skill.Swap(uuid, "Shout_LLWEAPONEX_Pistol_Reload", "Projectile_LLWEAPONEX_Pistol_Shoot", true, true)
+		EffectManager.PlayEffect("LLWEAPONEX_FX_HandCrossbow_Reload_01", uuid, {Bone=bone})
 	end
 end
 
@@ -137,12 +145,16 @@ Ext.RegisterOsirisListener("CharacterLeveledUp", 1, "after", function(uuid)
 	end
 end)
 
-StatusManager.Subscribe.Applied("STORY_PartyRest", function (e)
-	ReloadAmmoSkills(e.Target)
-	if e.Target:HasTag("LLWEAPONEX_Quiver_Equipped") then
-		local quiver = GameHelpers.Item.GetItemInSlot(e.Target, "Belt")
-		if quiver then
-			ItemResetChargesToMax(quiver.MyGuid)
+StatusManager.Subscribe.Applied("CONSUME", function (e)
+	local status = e.Status
+	---@cast status EsvStatusConsume
+	if status.StatsId == "STORY_PartyRest" then
+		ReloadAmmoSkills(e.Target)
+		if e.Target:HasTag("LLWEAPONEX_Quiver_Equipped") then
+			local quiver = GameHelpers.Item.GetItemInSlot(e.Target, "Belt")
+			if quiver then
+				ItemResetChargesToMax(quiver.MyGuid)
+			end
 		end
 	end
 end)
