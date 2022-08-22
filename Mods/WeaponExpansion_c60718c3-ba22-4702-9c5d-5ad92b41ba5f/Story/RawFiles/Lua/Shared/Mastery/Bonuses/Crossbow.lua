@@ -21,7 +21,7 @@ MasteryBonusManager.Vars.GetStillStanceBonus = GetStillStanceBonus
 local function IsStillStanceSkill(skill)
 	if skill == "ActionAttackGround" then
 		return true
-	elseif Data.ActionSkills[skill] then
+	elseif GameHelpers.Skill.IsAction(skill) then
 		return false
 	end
 	local skill = Ext.GetStat(skill)
@@ -64,7 +64,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Crossbow, 1, {
 				if GameHelpers.CharacterOrEquipmentHasTag(character, "LLWEAPONEX_Crossbow_Equipped") then
 					if id == "ActionAttackGround" then
 						return GetStillStanceBonus(character) > 0
-					elseif Data.ActionSkills[id] then
+					elseif GameHelpers.Skill.IsAction(id) then
 						return false
 					end
 					local skill = Ext.GetStat(id)

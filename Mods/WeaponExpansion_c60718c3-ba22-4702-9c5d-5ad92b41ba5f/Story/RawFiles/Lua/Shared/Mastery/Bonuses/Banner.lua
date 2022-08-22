@@ -417,7 +417,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.Banner, 3, {
 				if statusType == "HEALING" or statusType == "HEAL" then
 					return true
 				end
-			elseif tooltipType == "skill" and not Data.ActionSkills[id] then
+			elseif tooltipType == "skill" and not GameHelpers.Skill.IsAction(id) then
 				local properties = GameHelpers.Stats.GetSkillProperties(id)
 				if properties then
 					for _,v in pairs(properties) do

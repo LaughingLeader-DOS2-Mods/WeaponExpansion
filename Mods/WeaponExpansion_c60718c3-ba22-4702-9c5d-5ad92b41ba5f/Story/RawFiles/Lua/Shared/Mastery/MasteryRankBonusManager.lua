@@ -939,7 +939,7 @@ else
 		DisplayName = "Toggle Mastery Bonuses",
 		Children = {},
 		ShouldOpen = function (contextMenu, x, y)
-			local cursor = Ext.GetPickingState()
+			local cursor = Ext.UI.GetPickingState()
 			if cursor and GameHelpers.IsValidHandle(cursor.HoverCharacter) then
 				local character = GameHelpers.GetCharacter(cursor.HoverCharacter)
 				if character then
@@ -1005,7 +1005,7 @@ else
 								if bonus then
 									if bonus.Skills and bonus.Skills[1] then
 										local skill = bonus.Skills[1]
-										if not Data.ActionSkills[skill] then
+										if not GameHelpers.Skill.IsAction(skill) then
 											local icon_check = Ext.StatGetAttribute(skill, "Icon")
 											if not StringHelpers.IsNullOrWhitespace(icon_check) then
 												icon = icon_check

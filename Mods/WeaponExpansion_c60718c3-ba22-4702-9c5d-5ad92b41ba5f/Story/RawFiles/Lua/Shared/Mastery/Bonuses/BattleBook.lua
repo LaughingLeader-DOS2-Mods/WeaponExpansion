@@ -523,7 +523,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.BattleBook, 3, {
 		AllSkills = true,
 		Tooltip = ts:CreateFromKey("LLWEAPONEX_MB_BattleBook_Scholar","<font color='#99AACC'>Deal <font color='#22FF33'>[1]% more damage</font> due to [2] being the most memorized ability school.<br>Note: [3]% damage per [4] total slots, multiplied by [5] ([6] ability slots / [4] total).</font>"),
 		GetIsTooltipActive = function(bonus, id, character, tooltipType)
-			if tooltipType == "skill" and not Data.ActionSkills[id] then
+			if tooltipType == "skill" and not GameHelpers.Skill.IsAction(id) then
 				local damageMult = Ext.StatGetAttribute(id, "Damage Multiplier")
 				if damageMult > 0 then
 					local ability,abilitySlots,totalSlots = GetCharacterMajorityMemorizedSkillAbility(character)
