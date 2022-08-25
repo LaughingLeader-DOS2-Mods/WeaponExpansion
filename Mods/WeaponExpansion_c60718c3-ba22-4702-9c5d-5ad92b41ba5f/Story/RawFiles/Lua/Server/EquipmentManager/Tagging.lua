@@ -45,7 +45,7 @@ function EquipmentManager:TagWeapon(item, statType, stat, itemTags)
 	local template = GameHelpers.GetTemplate(item.MyGuid)
 	local templateTag = Tags.TemplateToTag[template]
 	if Vars.DebugMode then
-		fprint(LOGLEVEL.WARNING, "[WeaponEx:TagWeapon] (%s) Type(%s) Stat(%s) Template(%s) TemplateTag(%s)", item.MyGuid, statType, stat, template, templateTag or "")
+		fprint(LOGLEVEL.WARNING, "[WeaponExpansion:TagWeapon] (%s) Type(%s) Stat(%s) Template(%s) TemplateTag(%s)", item.MyGuid, statType, stat, template, templateTag or "")
 	end
 	if templateTag ~= nil then
 		if type(templateTag) == "table" then

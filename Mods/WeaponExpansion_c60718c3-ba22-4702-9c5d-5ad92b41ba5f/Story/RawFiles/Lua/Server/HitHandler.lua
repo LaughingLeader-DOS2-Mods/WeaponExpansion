@@ -127,12 +127,6 @@ local function OnStatusHitEnter(target, source, data)
 				MasterySystem.GrantBasicAttackExperience(source, target, xpMastery)
 			end
 		elseif skill then
-			if GameHelpers.CharacterOrEquipmentHasTag(source, "LLWEAPONEX_RunicCannonEquipped")
-			and not SkillConfiguration.ArmCannonSkills[skill]
-			and IsMeleeWeaponSkill(skill)
-			then
-				ArmCannon_OnWeaponSkillHit(source.MyGuid, target.MyGuid, skill)
-			end
 			if canGrantMasteryXP and IsWeaponSkill(data.SkillData) then
 				MasterySystem.GrantWeaponSkillExperience(source, target)
 			end

@@ -1,18 +1,3 @@
-new entry "LLWEAPONEX_ARMCANNON_EQUIPPED"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
-data "DisplayName" "LLWEAPONEX_ARMCANNON_EQUIPPED_DisplayName"
-data "DisplayNameRef" "Automatically Equips the Arm Cannon Weapon"
-data "Icon" ""
-
-new entry "LLWEAPONEX_ARMCANNON_HIT"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
-data "DisplayName" "LLWEAPONEX_ARMCANNON_HIT_DisplayName"
-data "DisplayNameRef" "Builds Energy on Hit"
-
 new entry "LLWEAPONEX_ARMCANNON_CHARGED"
 type "StatusData"
 data "StatusType" "CONSUME"

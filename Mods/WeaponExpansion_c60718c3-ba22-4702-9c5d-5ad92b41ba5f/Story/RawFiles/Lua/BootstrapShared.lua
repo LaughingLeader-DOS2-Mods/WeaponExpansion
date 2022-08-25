@@ -80,6 +80,12 @@ Tags = {
 		LLWEAPONEX_AnatomyBook_Equipped = true,
 		LLWEAPONEX_DeathEdge_Equipped = true,
 		LLWEAPONEX_PowerGauntlets_Equipped = true,
+		LLWEAPONEX_RunicCannon_Equipped = function (tag, item, tooltip)
+			local max = GameHelpers.GetExtraData("LLWEAPONEX_RunicCannon_MaxEnergy", 3, true)
+			local energy = ClientVars.RunicCannonEnergy[item.NetID] or 0
+			return Text.ItemTooltip.RunicCannonEnergy:ReplacePlaceholders(energy, max)
+		end,
+		LLWEAPONEX_RunicCannonWeapon_Equipped = true,
 	}
 }
 

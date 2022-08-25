@@ -43,3 +43,5 @@ LLWEAPONEX_UniqueBasilusDagger	<font color='#00FFCC'>Haunted</font>	h16aeb04cg8a
 LLWEAPONEX_UniqueBasilusDagger_Description	<font color='#C7A758'>The first enemy hit will be haunted for [ExtraData:LLWEAPONEX_BasilusDagger_MinTurns]-[ExtraData:LLWEAPONEX_BasilusDagger_MaxTurns] turns, taking [SkillDamage:Projectile_LLWEAPONEX_BasilusDagger_HauntedDamage] when taking an action (once per turn), with a [ExtraData:LLWEAPONEX_BasilusDagger_BackstabChance]% chance to be backstabbed.</font>	hb7879842g19c1g4470ga1f7gcc91d53c40c8
 LLWEAPONEX_UniqueThrowingAxeA	Throwable	hb5f309e8gc63fg4bf4g9ff1g25431ae07a8f
 LLWEAPONEX_WoodenKatanaWeaponType	Wooden Katana	h5264ef62gdc22g401fg8b62g303379cd7693
+LLWEAPONEX_RunicCannon_Equipped	Builds Energy on Hit	hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb
+LLWEAPONEX_RunicCannonWeapon_Equipped	Mainhand Auto-Equip	h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd

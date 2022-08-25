@@ -414,27 +414,6 @@ local function OnItemTooltip(item, tooltip)
 			end
 		end
 
-		if character ~= nil then
-			if _TAGS.LLWEAPONEX_RunicCannon then
-				if item.ItemType == "Weapon" then
-					local text = GameHelpers.GetStringKeyText("LLWEAPONEX_ARMCANNON_HIT_DisplayName", "Builds Energy on Hit")
-					if text ~= "" then
-						tooltip:AppendElement({Type="ExtraProperties", Label = text})
-					end
-				end
-				local max = GameHelpers.GetExtraData("LLWEAPONEX_RunicCannon_MaxEnergy", 3)
-				local charges = PersistentVars.SkillData.RunicCannonCharges[item.NetID] or 0
-				local text = Text.ItemTooltip.RunicCannonEnergy:ReplacePlaceholders(charges, max)
-				local element = {
-					Type = "ExtraProperties",
-					Label = text
-				}
-				tooltip:AppendElement(element)
-			elseif _TAGS.LLWEAPONEX_DemolitionBackpack then
-
-			end
-		end
-
 		for tag,v in pairs(Tags.ExtraProperties) do
 			if _TAGS[tag] then
 				local text = ""

@@ -1,7 +1,5 @@
 Key	Content	Handle
 LLWEAPONEX_ANVILMACE_HIT_DisplayName	Earthsplitter - Attack the ground for 80% damage in a 2m radius	h504347e6gbf4eg4996g8090g3556c3a10e35
-LLWEAPONEX_ARMCANNON_EQUIPPED_DisplayName	Mainhand Auto-Equip	h29e7d7d3g2a62g4de6g94c1gdf28fd3f43fd
-LLWEAPONEX_ARMCANNON_HIT_DisplayName	Builds Energy on Hit	hf90dd2e9g9948g4bb2ga0cbg5c202ba670cb
 LLWEAPONEX_AUTOLEVEL_INFO_DisplayName	Perpetual Growth - This item automatically levels up	h4f30febcg9b2fg421agb509g6c8d812ce9c6
 LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_Description	Character deals bonus damage with grenades, and has a chance to sabotage enemies with explosions.	h9420616fg4e36g420ega98eg7039d658c12f
 LLWEAPONEX_BACKPACK_DEMOLITION_EQUIPPED_DisplayName	Gain Detonation Skill and Enhanced Demolition	h550cf924gacd9g476cgb40egaa4f9ce34c97

@@ -4,7 +4,9 @@ Ext.Require("BootstrapShared.lua")
 local defaultPersistentVars = {
     SkillData = {
         DarkFireballCount = {},
-        RunicCannonCharges = {},
+        ---Item GUID to amount
+        ---@type table<GUID, integer>
+        RunicCannonEnergy = {},
         GnakSpells = {},
         ShieldCover = {
             Blocking = {},
@@ -19,7 +21,7 @@ local defaultPersistentVars = {
         ---@type table<GUID,number[]>
         FutureBarrage = {},
         WandSurfaceBonuses = {},
-        ---@type table<GUID,integer>
+        ---@type table<GUID,{Hits:integer, Source:GUID}>
         ScattershotHits = {}
     },
     StatusData = {

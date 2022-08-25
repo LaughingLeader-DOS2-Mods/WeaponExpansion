@@ -1,3 +1,8 @@
+ClientVars = {
+	---@type table<NETID, integer>
+	RunicCannonEnergy = {},
+}
+
 Ext.Require("BootstrapShared.lua")
 Ext.Require("Client/SkillParams.lua")
 Ext.Require("Client/StatusParams.lua")

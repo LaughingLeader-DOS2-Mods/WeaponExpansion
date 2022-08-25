@@ -40,7 +40,7 @@ end
 Uniques = {
 	AnatomyBook = UniqueData:Create(ProgressionData.AnatomyBook, {Tag="LLWEAPONEX_UniqueAnatomyBook"}),
 	AnvilMace = UniqueData:Create(ProgressionData.AnvilMace, {Tag="LLWEAPONEX_UniqueAnvilMace"}),
-	ArmCannon = UniqueData:Create(ProgressionData.ArmCannon, {Tag="LLWEAPONEX_RunicCannonGloves"}),
+	ArmCannon = UniqueData:Create(ProgressionData.ArmCannon, {Tag="LLWEAPONEX_RunicCannon_Equipped"}),
 	AssassinHandCrossbow = UniqueData:Create(ProgressionData.AssassinHandCrossbow, {Tag="LLWEAPONEX_AssassinHandCrossbow_Equipped"}),
 	BalrinAxe = UniqueData:Create(ProgressionData.BalrinAxe, {Tag="LLWEAPONEX_UniqueThrowingAxeA"}),
 	BeholderSword = UniqueData:Create(ProgressionData.BeholderSword, {Tag="LLWEAPONEX_UniqueBeholderGreatsword"}),
@@ -275,7 +275,7 @@ end
 function UniqueManager.EnableEvent(event)
 	local data = itemEvents[event]
 	if data and not data.enabled then
-		Ext.RegisterOsirisListener(event, data.arity, "after", function(...)
+		Ext.Osiris.RegisterListener(event, data.arity, "after", function(...)
 			local args = {...}
 			for i=1,#args do
 				if type(args[i]) == "string" then

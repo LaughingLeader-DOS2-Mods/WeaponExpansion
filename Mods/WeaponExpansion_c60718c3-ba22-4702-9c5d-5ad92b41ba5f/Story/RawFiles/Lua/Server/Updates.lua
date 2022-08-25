@@ -84,6 +84,8 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 			SkillConfiguration.BalrinAxe.Calls.EquipBalrinAxe(player)
 		end
 
+		Osi.LeaderLib_Statuses_Clear_PermanentStatus("WeaponExpansion", "LLWEAPONEX_ARMCANNON_CHARGED")
+
 		--Old Combat Shield deltamods
 		Osi.DB_LeaderLib_Deltamods_Groups:Delete("WeaponExpansion.CombatShields", nil)
 		Osi.DB_LeaderLib_Deltamods_MaxGuaranteedDeltamods:Delete("WeaponExpansion.CombatShields", nil)
@@ -105,6 +107,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Greatbows_CushionForce_Temp_ForceResolved", 2)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Greatbows_Temp_CushionForce_Landing", 8)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Greatbows_Temp_Equipped", 3)
+		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped", 2)
 
 		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_01_WM_Greatbow")
 		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_01_WM_Rapier")
