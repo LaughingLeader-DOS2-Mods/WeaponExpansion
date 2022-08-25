@@ -45,6 +45,7 @@ if not Vars.IsClient then
 				local pos = {table.unpack(attacker.WorldPos)}
 				pos[2] = pos[2] + attacker.AI.AIBoundsHeight * 0.5
 				EffectManager.PlayEffectAt("RS3_FX_GP_Impacts_Ghost_01", pos, {Rotation=attacker.Rotation})
+				SignalTestComplete("LLWEAPONEX_BladeOfBasilus_DamageApplied")
 			end
 		end
 	end
@@ -83,6 +84,52 @@ if not Vars.IsClient then
 			_RegisterOsirisListeners()
 		end
 	end, {Priority=0})
+
+	WeaponExTesting.RegisterUniqueTest("basilus", function (test)
+		local characters,dummy,cleanup = Testing.Utils.CreateTestCharacters({EquipmentSet="Class_Rogue_Act2", TotalCharacters=2, TotalDummies=1})
+		local char1 = characters[1]
+		local char2 = characters[2]
+		---@cast dummy string
+		test.Cleanup = function (...)
+			PersistentVars.StatusData.BasilusHauntedTarget[char2] = nil
+			cleanup(...)
+		end
+		test:Wait(250)
+		local weapon = GameHelpers.Item.CreateItemByStat("WPN_UNIQUE_LLWEAPONEX_Dagger_Basilus_A")
+		test:Wait(250)
+		SetTag(weapon, "LLWEAPONEX_Testing")
+		NRD_CharacterEquipItem(char1, weapon, "Weapon", 0, 0, 1, 1)
+		TeleportTo(char1, dummy, "", 0, 1, 1)
+		test:Wait(250)
+		TeleportTo(char2, dummy, "", 0, 1, 1)
+		SetFaction(char1, "PVP_1")
+		SetFaction(dummy, "PVP_1")
+		SetFaction(char2, "PVP_2")
+		test:Wait(250)
+		CharacterSetTemporaryHostileRelation(char1, char2)
+		CharacterSetTemporaryHostileRelation(dummy, char2)
+		test:Wait(250)
+		test:AssertEquals(GameHelpers.CharacterOrEquipmentHasTag(char1, "LLWEAPONEX_BasilusDagger_Equipped"), true, "Missing 'LLWEAPONEX_BasilusDagger_Equipped' tag on char1")
+		test:AssertEquals(GameHelpers.Character.CanAttackTarget(char1, char2, false), true, "char2 is not an enemy of char1")
+		test:Wait(250)
+		CharacterAttack(char1, char2)
+		test:Wait(500)
+		test:AssertEquals(GameHelpers.Status.IsActive(char2, "LLWEAPONEX_BASILUS_HAUNTED"), true, "'LLWEAPONEX_BASILUS_HAUNTED' not applied to basic attack target.")
+		GameHelpers.Status.ExtendTurns(char2, "LLWEAPONEX_BASILUS_HAUNTED", 10, true, false) -- Extend turns for testing
+		test:Wait(6500) -- Wait for tick
+		test:AssertEquals(PersistentVars.StatusData.BasilusHauntedTarget[char2], 1, "PersistentVars.StatusData.BasilusHauntedTarget[char2] does not equal 1.")
+		CharacterAttack(char2, dummy)
+		test:WaitForSignal("LLWEAPONEX_BladeOfBasilus_DamageApplied", 5000)
+		test:AssertGotSignal("LLWEAPONEX_BladeOfBasilus_DamageApplied")
+		test:Wait(6500) -- Wait for tick
+		test:AssertEquals(PersistentVars.StatusData.BasilusHauntedTarget[char2], 1, "PersistentVars.StatusData.BasilusHauntedTarget[char2] does not equal 1.")
+		CharacterUseSkill(char2, "Shout_InspireStart", char2, 1, 1, 1)
+		test:WaitForSignal("LLWEAPONEX_BladeOfBasilus_DamageApplied", 5000)
+		test:AssertGotSignal("LLWEAPONEX_BladeOfBasilus_DamageApplied")
+		CharacterDieImmediate(char2, 0, "DoT", char2)
+		test:AssertEquals(PersistentVars.StatusData.BasilusHauntedTarget[char2] == nil, true, "PersistentVars.StatusData.BasilusHauntedTarget[char2] was not cleared.")
+		return true
+	end)
 end
 
 --[[

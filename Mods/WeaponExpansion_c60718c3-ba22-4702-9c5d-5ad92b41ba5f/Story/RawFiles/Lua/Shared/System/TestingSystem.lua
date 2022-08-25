@@ -269,7 +269,7 @@ if not _ISCLIENT then
 		for i=1,totalDummies do
 			local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
 
-			local dummy = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
+			local dummy = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0))
 			NRD_CharacterSetPermanentBoostInt(dummy, "Dodge", -100)
 	
 			PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01", "")
@@ -311,8 +311,8 @@ if not _ISCLIENT then
 		local pos = pos or {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 6.0)}
 		local pos2 = {GameHelpers.Grid.GetValidPositionInRadius(GameHelpers.Math.ExtendPositionWithForwardDirection(host, 6), 7.0)}
 		local pos3 = {GameHelpers.Grid.GetValidPositionInRadius(pos, 6.0)}
-		local character = TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
-		local character2 = TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0)
+		local character = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos[1], pos[2], pos[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
+		local character2 = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos2[1], pos2[2], pos2[3], "2ac80a2a-8326-4131-a03c-53906927f935", 0))
 
 		--CharacterTransformFromCharacter(character, host.MyGuid, 0, 1, 1, 1, 1, 1, 1)
 		CharacterSetCustomName(character, "Mastery User1")
@@ -321,7 +321,7 @@ if not _ISCLIENT then
 		SetupCharacter(character2, host.MyGuid, equipmentSet)
 
 
-		local dummy = TemporaryCharacterCreateAtPosition(pos3[1], pos3[2], pos3[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0)
+		local dummy = StringHelpers.GetUUID(TemporaryCharacterCreateAtPosition(pos3[1], pos3[2], pos3[3], targetTemplate or "985acfab-b221-4221-8263-fa00797e8883", 0))
 
 		PlayEffect(dummy, "RS3_FX_GP_ScriptedEvent_Teleport_GenericSmoke_01")
 		SetTag(dummy, "LeaderLib_TemporaryCharacter")
