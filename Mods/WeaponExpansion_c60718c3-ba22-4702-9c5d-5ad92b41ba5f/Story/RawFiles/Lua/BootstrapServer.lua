@@ -3,6 +3,9 @@ Ext.Require("BootstrapShared.lua")
 ---@class WeaponExpansionVars
 local defaultPersistentVars = {
     SkillData = {
+        --Owner GUID Item GUIDs
+        ---@type table<GUID, GUID[]>
+        BlunderbussDuds = {},
         DarkFireballCount = {},
         ---Item GUID to amount
         ---@type table<GUID, integer>

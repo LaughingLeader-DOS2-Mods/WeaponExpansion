@@ -37,4 +37,68 @@ if not Vars.IsClient then
 	Events.OnWeaponTagHit:Subscribe(function (e)
 		GameHelpers.Skill.Explode(e.Target, "Projectile_LLWEAPONEX_Blunderbuss_Shot_Explode", e.Attacker, {EnemiesOnly=true})
 	end, {MatchArgs={Tag="LLWEAPONEX_Blunderbuss_Equipped"}})
+
+	SkillManager.Register.Cast("Zone_LLWEAPONEX_Blunderbuss_Cannonball", function (e)
+		local distMult = e.Data.SkillData.Range + 0.5
+		local pos = GameHelpers.Math.ExtendPositionWithForwardDirection(e.Character, distMult)
+		Timer.StartObjectTimer("LLWEAPONEX_Cannonball_Explode", e.Character, 500, {Target=pos})
+	end)
+
+	Timer.Subscribe("LLWEAPONEX_Cannonball_Explode", function (e)
+		if e.Data.UUID and e.Data.Target then
+			GameHelpers.Skill.Explode(e.Data.Target, "Projectile_LLWEAPONEX_Blunderbuss_Cannonball_Explode", e.Data.Object)
+		end
+	end)
+
+	Events.ObjectEvent:Subscribe(function (e)
+		if not PersistentVars.SkillData.BlunderbussDuds[e.ObjectGUID1] then
+			PersistentVars.SkillData.BlunderbussDuds[e.ObjectGUID1] = {}
+		end
+		table.insert(PersistentVars.SkillData.BlunderbussDuds[e.ObjectGUID1], e.ObjectGUID2)
+		if Osi.LeaderLib_Combat_QRY_IsActiveTurn(e.ObjectGUID1) then
+			SetTag(e.ObjectGUID1, "LLWEAPONEX_Dud_SkipNextTurnEnd")
+		end
+	end, {MatchArgs={EventType="CharacterItemEvent", Event="LLWEAPONEX_DelayedExplosive_Initialized"}})
+
+	Events.ObjectEvent:Subscribe(function (e)
+		local duds = PersistentVars.SkillData.BlunderbussDuds[e.ObjectGUID1]
+		if duds then
+			local nextDuds = {}
+			local len = 0
+			for _,v in pairs(duds) do
+				if ObjectExists(v) == 1 and v ~= e.ObjectGUID2 then
+					len = len + 1
+					nextDuds[len] = v
+				end
+			end
+			if len > 0 then
+				PersistentVars.SkillData.BlunderbussDuds[e.ObjectGUID1] = nextDuds
+			else
+				PersistentVars.SkillData.BlunderbussDuds[e.ObjectGUID1] = nil
+			end
+		end
+	end, {MatchArgs={EventType="CharacterItemEvent", Event="LLWEAPONEX_DelayedExplosive_Finished"}})
+
+	Events.OnTurnEnded:Subscribe(function (e)
+		if e.Object:HasTag("LLWEAPONEX_Dud_SkipNextTurnEnd") then
+			ClearTag(e.ObjectGUID, "LLWEAPONEX_Dud_SkipNextTurnEnd")
+		else
+			local duds = PersistentVars.SkillData.BlunderbussDuds[e.ObjectGUID]
+			if duds then
+				for _,dud in pairs(duds) do
+					SetStoryEvent(dud, "LLWEAPONEX_DelayedExplosive_Tick")
+				end
+			end
+		end
+	end)
+
+	StatusManager.Subscribe.Removed("COMBAT", function (e)
+		local duds = PersistentVars.SkillData.BlunderbussDuds[e.TargetGUID]
+		if duds and not GameHelpers.Character.IsInCombat(e.Target) then
+			for _,dud in pairs(duds) do
+				SetStoryEvent(dud, "LLWEAPONEX_DelayedExplosive_Explode")
+			end
+			PersistentVars.SkillData.BlunderbussDuds[e.TargetGUID] = nil
+		end
+	end)
 end

@@ -64,10 +64,9 @@ ACTIONS
 IF "!c1"
 	IsEqual(%LLWEAPONEX_Exploded,1)
 THEN
-	//DisplayCombatInfoText(__Me, "Too soon!", 3.0)
+	CharacterItemEvent(%LLWEAPONEX_Caster, __Me, "LLWEAPONEX_DelayedExplosive_Finished")
 	ExplodeAt(__Me, %LLWEAPONEX_Skill_Destroyed, -1, %LLWEAPONEX_Caster)
 	Set(%LLWEAPONEX_Exploded,1)
-	ItemEvent(__Me, "LLWEAPONEX_DelayedExplosive_Finished")
 ENDIF
 IF "!c1"
 	IsEqual(%LLWEAPONEX_Effect_Handle, null)
@@ -111,7 +110,7 @@ ACTIONS
 IF "!c1"
 	IsEqual(%LLWEAPONEX_Exploded,1)
 THEN
-	ItemEvent(__Me, "LLWEAPONEX_DelayedExplosive_Finished")
+	CharacterItemEvent(%LLWEAPONEX_Caster, __Me, "LLWEAPONEX_DelayedExplosive_Finished")
 	Set(%LLWEAPONEX_Exploded,1)
 	ExplodeAt(__Me, %LLWEAPONEX_Skill_Full, -1, %LLWEAPONEX_Caster)
 	ItemDestroy(__Me)
