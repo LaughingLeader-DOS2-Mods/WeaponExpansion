@@ -21,9 +21,9 @@ function WeaponExTesting.RegisterBonusTest(bonusId, operation, params)
 	--Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
 	local test = nil
 	if type(operation) == "table" then
-		test = Classes.LuaTest.Create(bonusId, operation, params)
+		test = Classes.LuaTest:Create(bonusId, operation, params)
 	else
-		test = Classes.LuaTest.Create(bonusId, {operation}, params)
+		test = Classes.LuaTest:Create(bonusId, {operation}, params)
 	end
 	table.insert(_tests.Bonuses[bonusId], test)
 end
@@ -38,9 +38,9 @@ function WeaponExTesting.RegisterUniqueTest(id, operation, params)
 	--Ext.PrintError("MasteryTesting.RegisterTest", bonusId, operation)
 	local test = nil
 	if type(operation) == "table" then
-		test = Classes.LuaTest.Create(id, operation, params)
+		test = Classes.LuaTest:Create(id, operation, params)
 	else
-		test = Classes.LuaTest.Create(id, {operation}, params)
+		test = Classes.LuaTest:Create(id, {operation}, params)
 	end
 	table.insert(_tests.Uniques[id], test)
 end
