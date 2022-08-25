@@ -30,11 +30,8 @@ local UniqueData = {
 	LinkedItem = nil,
 	Tag = "",
 	Events = {
-		ItemAddedToCharacter = {},
-		ItemEquipped = {},
-		ItemUnEquipped = {},
-	},
-	EquippedCallbacks = {}
+		ItemAddedToCharacter = {}
+	}
 }
 
 ---@param data UniqueData

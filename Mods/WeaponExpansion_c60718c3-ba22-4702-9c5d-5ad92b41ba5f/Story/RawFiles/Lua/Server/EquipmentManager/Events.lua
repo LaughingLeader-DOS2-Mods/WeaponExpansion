@@ -14,6 +14,8 @@ local _listenerTemplates = {
 ---@class EquipmentChangedEventArgs
 ---@field Character EsvCharacter
 ---@field Item EsvItem
+---@field CharacterGUID GUID
+---@field ItemGUID GUID
 ---@field Equipped boolean
 ---@field Template string|nil
 ---@field Tag string|nil
@@ -36,6 +38,8 @@ EquipmentManager.Events.EquipmentChanged = Classes.SubscribableEvent:Create("Wea
 ---@class UnsheathedChangedEventArgs
 ---@field Character EsvCharacter
 ---@field Item EsvItem
+---@field CharacterGUID GUID
+---@field ItemGUID GUID
 ---@field Unsheathed boolean
 ---@field Template string|nil
 ---@field Tag string|nil
@@ -120,11 +124,10 @@ function EquipmentManager:OnItemEquipped(character, item)
 	end
 
 	Osi.LLWEAPONEX_OnItemTemplateEquipped(character.MyGuid, item.MyGuid, template)
-
-	for k,unique in pairs(Uniques) do
-		if _ITEM_TAGS[unique.Tag] then
-			unique:OnEquipped(character, item)
-			if not item:HasTag("LLWEAPONEX_Testing") then
+	
+	if not _ITEM_TAGS.LLWEAPONEX_Testing then
+		for k,unique in pairs(Uniques) do
+			if _ITEM_TAGS[unique.Tag] then
 				if unique.UUID ~= item.MyGuid then
 					unique:AddCopy(item.MyGuid)
 					unique:ApplyProgression(nil, nil, item, true)
@@ -153,7 +156,9 @@ function EquipmentManager:OnItemEquipped(character, item)
 				AllTags = _ITEM_TAGS,
 				Template = template,
 				Tag = tag,
-				Equipped = true
+				Equipped = true,
+				CharacterGUID = character.MyGuid,
+				ItemGUID = item.MyGuid
 			})
 			invokedTemplate = true
 		end
@@ -166,7 +171,9 @@ function EquipmentManager:OnItemEquipped(character, item)
 				Item = item,
 				AllTags = _ITEM_TAGS,
 				Template = template,
-				Equipped = true
+				Equipped = true,
+				CharacterGUID = character.MyGuid,
+				ItemGUID = item.MyGuid
 			})
 		end
 	end
@@ -182,7 +189,9 @@ function EquipmentManager:OnItemEquipped(character, item)
 					AllTags = _ITEM_TAGS,
 					Template = template,
 					Tag = tag,
-					Unsheathed = true
+					Unsheathed = true,
+					CharacterGUID = character.MyGuid,
+					ItemGUID = item.MyGuid
 				})
 				invokedTemplate = true
 			end
@@ -195,7 +204,9 @@ function EquipmentManager:OnItemEquipped(character, item)
 					Item = item,
 					AllTags = _ITEM_TAGS,
 					Template = template,
-					Unsheathed = true
+					Unsheathed = true,
+					CharacterGUID = character.MyGuid,
+					ItemGUID = item.MyGuid
 				})
 			end
 		end
@@ -233,7 +244,9 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 				AllTags = _ITEM_TAGS,
 				Template = template,
 				Tag = tag,
-				Equipped = false
+				Equipped = false,
+				CharacterGUID = character.MyGuid,
+				ItemGUID = item.MyGuid
 			})
 			invokedTemplate = true
 		end
@@ -246,7 +259,9 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 				Item = item,
 				AllTags = _ITEM_TAGS,
 				Template = template,
-				Equipped = false
+				Equipped = false,
+				CharacterGUID = character.MyGuid,
+				ItemGUID = item.MyGuid
 			})
 		end
 	end
@@ -263,7 +278,9 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 					AllTags = _ITEM_TAGS,
 					Template = template,
 					Tag = tag,
-					Unsheathed = false
+					Unsheathed = false,
+					CharacterGUID = character.MyGuid,
+					ItemGUID = item.MyGuid
 				})
 				invokedTemplate = true
 			end
@@ -276,7 +293,9 @@ function EquipmentManager:OnItemUnEquipped(character, item)
 					Item = item,
 					AllTags = _ITEM_TAGS,
 					Template = template,
-					Unsheathed = false
+					Unsheathed = false,
+					CharacterGUID = character.MyGuid,
+					ItemGUID = item.MyGuid
 				})
 			end
 		end

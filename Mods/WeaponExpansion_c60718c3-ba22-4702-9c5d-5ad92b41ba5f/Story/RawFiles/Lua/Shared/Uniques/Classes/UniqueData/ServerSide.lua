@@ -647,21 +647,13 @@ function UniqueData:InvokeEventListeners(event, ...)
 	end
 end
 
----@alias UniqueDataEquippedEventCallback fun(unique:UniqueData, character:EsvCharacter, item:EsvItem, equipped:boolean):void
+---@class WeaponExpansionUniqueDataEquippedEventArgs:EquipmentChangedEventArgs
+---@field Unique UniqueData
 
----@param callback UniqueDataEquippedEventCallback
+---@param callback fun(e:WeaponExpansionUniqueDataEquippedEventArgs|LeaderLibSubscribableEventArgs)
 function UniqueData:RegisterEquippedListener(callback)
-	self.EquippedCallbacks[#self.EquippedCallbacks+1] = callback
-end
-
----@param character EsvCharacter
----@param item EsvItem
-function UniqueData:OnEquipped(character, item)
-	InvokeListenerCallbacks(self.EquippedCallbacks, self, character, item, true)
-end
-
----@param character EsvCharacter
----@param item EsvItem
-function UniqueData:OnUnEquipped(character, item)
-	InvokeListenerCallbacks(self.EquippedCallbacks, self, character, item, false)
+	EquipmentManager.Events.EquipmentChanged:Subscribe(function (e)
+		e.Unique = self
+		callback(e)
+	end, {MatchArgs={Tag=self.Tag}})
 end
