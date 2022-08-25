@@ -110,6 +110,7 @@ RegisterModListener("Loaded", ModuleUUID, function(last, next)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Uniques_Temp_ArmCannonEquipped", 2)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Blunderbuss_Temp_Duds_SkipTurn", 1)
 		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_Blunderbuss_Temp_Duds", 3)
+		Osi.LeaderLib_ClearDatabase("DB_LLWEAPONEX_HandCrossbow_ShootingSkills", 1)
 
 		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_01_WM_Greatbow")
 		Osi.LeaderLib_ToggleScripts_Clear_ByGoal("LLWEAPONEX_80_TS_01_WM_Rapier")

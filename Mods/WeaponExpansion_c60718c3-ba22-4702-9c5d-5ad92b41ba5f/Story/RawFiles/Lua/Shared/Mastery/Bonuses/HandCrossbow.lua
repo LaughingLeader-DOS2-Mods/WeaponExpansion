@@ -27,7 +27,7 @@ MasteryBonusManager.AddRankBonuses(MasteryID.HandCrossbow, 1, {
 		local targets = Ext.Random(minTargets, maxTargets)
 		if radius > 0 and targets > 0 then
 			---@type EsvCharacter[]
-			local enemies = Common.ShuffleTable(GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius = radius, Relation={Enemy=true}, Type="Character", AsTable=true}))
+			local enemies = GameHelpers.Grid.GetNearbyObjects(e.Character, {Radius = radius, Relation={Enemy=true}, Type="Character", AsTable=true, Sort="Random"})
 			local delay = 250
 			for _,v in pairs(enemies) do
 				Timer.StartObjectTimer("LLWEAPONEX_HandCrossbow_Whirlwind_Shoot", v, delay, e.Character, {Target=v.MyGuid})

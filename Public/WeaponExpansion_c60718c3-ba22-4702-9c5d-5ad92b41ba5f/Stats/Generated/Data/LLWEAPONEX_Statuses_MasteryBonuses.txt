@@ -68,11 +68,6 @@ data "ForGameMaster" "No"
 data "InitiateCombat" "No"
 data "BeamEffect" "RS3_FX_GP_Status_Retaliation_Beam_01:Dummy_FX_01:Dummy_HeadFX"
 
-new entry "LLWEAPONEX_MASTERYBONUS_HANDCROSSBOW_WHIRLWIND_TARGET"
-type "StatusData"
-data "StatusType" "CONSUME"
-using "_LEADERLIB_HIDDEN_CONSUME_BASE"
-
 new entry "LLWEAPONEX_MASTERYBONUS_SHIELD_BLOCK"
 type "StatusData"
 data "StatusType" "CONSUME"
