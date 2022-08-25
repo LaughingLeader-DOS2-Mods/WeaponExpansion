@@ -35,9 +35,9 @@ local AppendedText = {
 }
 
 ---@param checkText string
----@param character EsvCharacter
+---@param character EclCharacter
 ---@param element table
----@param func fun(character:EsvCharacter):string
+---@param func fun(character:EclCharacter):string
 local function ReplaceScalingText(checkText, character, element, func)
 	local _,_,replaceText = string.find(element.Label, checkText)
 	if replaceText ~= nil then
@@ -69,14 +69,16 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	local getAltScalingText = AlternativeScaling[skill]
-	if getAltScalingText ~= nil then
-		local element = tooltip:GetElement("SkillProperties")
-		if element ~= nil then
-			for i,prop in pairs(element.Properties) do
+	local skillPropsElement = tooltip:GetElement("SkillProperties", {Properties={}, Resistances={}})
+
+	if character then
+		local getAltScalingText = AlternativeScaling[skill]
+		if getAltScalingText ~= nil then
+			for i,prop in pairs(skillPropsElement.Properties) do
 				for key,text in pairs(Text.DefaultSkillScaling) do
 					local checkText = text.Value:gsub("%[1%]", "(%%w+)")
-					if ReplaceScalingText(checkText, character, prop, getAltScalingText) then
+					local b,r = pcall(ReplaceScalingText, checkText, character, prop, getAltScalingText)
+					if b and r then
 						break
 					end
 				end
@@ -95,12 +97,9 @@ local function OnSkillTooltip(character, skill, tooltip)
 		if b then
 			if text ~= nil then
 				if appendToSkillProperties == true then
-					local element = tooltip:GetElement("SkillProperties") or {Type="SkillProperties", Properties={}, Resistances={}}
-					if element ~= nil then
-						table.insert(element.Properties, {
-							Label = text
-						})
-					end
+					table.insert(skillPropsElement.Properties, {
+						Label = text
+					})
 				else
 					if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
 						descriptionElement.Label = string.format("%s<br>%s", descriptionElement.Label, text)
@@ -123,12 +122,9 @@ local function OnSkillTooltip(character, skill, tooltip)
 				if text ~= nil then
 					text = GameHelpers.Tooltip.ReplacePlaceholders(text, character)
 					if appendToSkillProperties == true then
-						local element = tooltip:GetElement("SkillProperties") or {Type="SkillProperties", Properties={}, Resistances={}}
-						if element ~= nil then
-							table.insert(element.Properties, {
-								Label = text
-							})
-						end
+						table.insert(skillPropsElement.Properties, {
+							Label = text
+						})
 					else
 						if not StringHelpers.IsNullOrWhitespace(descriptionElement.Label) then
 							descriptionElement.Label = string.format("%s<br>%s", descriptionElement.Label, text)
@@ -169,38 +165,41 @@ local function OnSkillTooltip(character, skill, tooltip)
 		end
 	end
 
-	if not Data.ActionSkills[skill] then
+	if not GameHelpers.Skill.IsAction(skill) then
+		local propElements = {}
 		local hasRuneProps = false
-		local stat = Ext.GetStat(skill)
+		local stat = Ext.Stats.Get(skill, nil, false)
 		if stat and stat.SkillProperties then
 			for i,v in pairs(stat.SkillProperties) do
 				if v.Action == "LLWEAPONEX_ApplyBulletProperties" then
 					local rune,weaponBoostStat = Skills.GetPistolRuneBoost(character.Stats)
 					if weaponBoostStat ~= nil then
 						---@type StatProperty[]
-						local props = Ext.StatGetAttribute(weaponBoostStat, "ExtraProperties")
+						local props = Ext.Stats.Get(weaponBoostStat).ExtraProperties
 						if props ~= nil then
 							hasRuneProps = true
 							for i,v in pairs(props) do
 								if v.Type == "Status" then
-									local chance = math.min(100, math.ceil(v.StatusChance * 100))
-									local turns = v.Duration
-									local text = ""
-									local chanceText = ""
-									local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
-									if chance > 0 then
-										chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+									local name = GameHelpers.Stats.GetDisplayName(v.Action, "StatusData")
+									if not StringHelpers.IsNullOrWhitespace(name) then
+										local chance = math.min(100, math.ceil(v.StatusChance * 100))
+										local turns = v.Duration
+										local text = ""
+										local chanceText = ""
+										if chance > 0 then
+											chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+										end
+										if turns > 0 then
+											turns = math.ceil(v.Duration / 6.0)
+											text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+										else
+											text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+										end
+										table.insert(propElements, {
+											Warning="",
+											Label=text
+										})
 									end
-									if turns > 0 then
-										turns = math.ceil(v.Duration / 6.0)
-										text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
-									else
-										text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
-									end
-									tooltip:AppendElement({
-										Type="ExtraProperties",
-										Label=text
-									})
 								end
 							end
 						end
@@ -215,44 +214,44 @@ local function OnSkillTooltip(character, skill, tooltip)
 							hasRuneProps = true
 							for i,v in pairs(props) do
 								if v.Type == "Status" then
-									local chance = math.min(100, math.ceil(v.StatusChance * 100))
-									local turns = v.Duration
-									local text = ""
-									local chanceText = ""
-									local name = GameHelpers.GetStringKeyText(Ext.StatGetAttribute(v.Action, "DisplayName") or "", v.Action)
-									if chance > 0 then
-										chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+									local name = GameHelpers.Stats.GetDisplayName(v.Action, "StatusData")
+									if not StringHelpers.IsNullOrWhitespace(name) then
+										local chance = math.min(100, math.ceil(v.StatusChance * 100))
+										local turns = v.Duration
+										local text = ""
+										local chanceText = ""
+										if chance > 0 then
+											chanceText = LocalizedText.Tooltip.ChanceToSucceed:ReplacePlaceholders(chance)
+										end
+										if turns > 0 then
+											turns = math.ceil(v.Duration / 6.0)
+											text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
+										else
+											text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
+										end
+										table.insert(propElements, {
+											Warning="",
+											Label=text
+										})
 									end
-									if turns > 0 then
-										turns = math.ceil(v.Duration / 6.0)
-										text = LocalizedText.Tooltip.ExtraPropertiesWithTurns:ReplacePlaceholders(name, "", chanceText, turns)
-									else
-										text = LocalizedText.Tooltip.ExtraPropertiesPermanent:ReplacePlaceholders(name, "", chanceText)
-									end
-									tooltip:AppendElement({
-										Type="ExtraProperties",
-										Label=text
-									})
 								end
 							end
 						end
 						local isHeavyBolt = string.find(weaponBoost.Tags, "LLWEAPONEX_HeavyAmmo")
 						if isHeavyBolt then
-							tooltip:AppendElement({
-								Type="ExtraProperties",
-								Label=heavyBoltText.Value
+							table.insert(propElements, {
+								Label=heavyBoltText.Value,
+								Warning=""
 							})
+							hasRuneProps = true
 						end
 					end
 				end
 			end
 		end
 		if hasRuneProps then
-			--Remove the empty entry for LLWEAPONEX_ApplyHandCrossbowBolt/LLWEAPONEX_ApplyPistolBullet
-			for i,v in pairs(tooltip:GetElements("ExtraProperties")) do
-				if v.Label == "" then
-					tooltip:RemoveElement(v)
-				end
+			for i,v in pairs(propElements) do
+				skillPropsElement.Properties[#skillPropsElement.Properties+1] = v
 			end
 		end
 	end
@@ -277,16 +276,13 @@ local function OnSkillTooltip(character, skill, tooltip)
 	if Mastery.HasMinimumMasteryLevel(character, MasteryID.Crossbow, 1)
 	and characterTags["LLWEAPONEX_Crossbow_Equipped"]
 	and Mastery.Variables.Bonuses.IsStillStanceSkill(skill) then
-		local sp = tooltip:GetElement("SkillProperties")
-		if sp then
-			local bonus = Mastery.Variables.Bonuses.GetStillStanceBonus(character)
-			if bonus > 0 then
-				local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
-				table.insert(sp.Properties, {
-					Label = Text.SkillTooltip.StillStance:ReplacePlaceholders(string.format("+%s", bonus), rankName),
-                    Warning = ""
-				})
-			end
+		local bonus = Mastery.Variables.Bonuses.GetStillStanceBonus(character)
+		if bonus > 0 then
+			local rankName = StringHelpers.StripFont(GameHelpers.GetStringKeyText(Masteries.LLWEAPONEX_Crossbow.RankBonuses[1].Tag, "Crossbow I"))
+			table.insert(skillPropsElement.Properties, {
+				Label = Text.SkillTooltip.StillStance:ReplacePlaceholders(string.format("+%s", bonus), rankName),
+				Warning = ""
+			})
 		end
 	end
 
@@ -295,20 +291,9 @@ local function OnSkillTooltip(character, skill, tooltip)
 	end
 
 	if SkillConfiguration.DisplayScalingStatSkills[skill] then
-		local text = Skills.Params["LLWEAPONEX_ScalingStat"](skill, character.Stats)
+		local text = Skills.Params.LLWEAPONEX_ScalingStat(skill, character.Stats)
 		if not StringHelpers.IsNullOrEmpty(text) then
-			local props = tooltip:GetElement("SkillProperties", {Properties={}, Resistances={}})
-			local properties = {}
-			for i,v in pairs(props.Properties) do
-				if not StringHelpers.IsNullOrWhitespace(v.Label) then
-					properties[#properties+1] = v
-				end
-			end
-			properties[#properties+1] = {
-				Label = text,
-				Warning = ""
-			}
-			props.Properties = properties
+			skillPropsElement.Properties[#skillPropsElement.Properties+1] = {Label = text, Warning = ""}
 		end
 	end
 end
