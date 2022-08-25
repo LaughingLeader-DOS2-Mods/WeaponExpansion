@@ -22,34 +22,16 @@ secStat_array Mapping:
 
 local damageStatID = 6
 
----@deprecated Moved to a Damage stat listener in StatTooltips.lua
----@param ui UIObject
-function SetCharacterSheetDamageText(ui, uuid)
-	local character = Ext.GetCharacter(uuid)
-	if character ~= nil and UnarmedHelpers.HasUnarmedWeaponStats(character.Stats) then
-		local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
-		local i = 0
-		ui:SetValue("secStat_array", 1, i+1)
-		ui:SetValue("secStat_array", LocalizedText.CharacterSheet.Damage.Value, i+2)
-		if totalMin ~= totalMax then
-			ui:SetValue("secStat_array", string.format("%i-%i", totalMin, totalMax), i+3)
-		else
-			ui:SetValue("secStat_array", string.format("%i", totalMax), i+3)
-		end
-		ui:SetValue("secStat_array", damageStatID, i+4)
-		ui:Invoke("updateArraySystem")
-	end
-end
-
 ---@param ui UIObject
 local function OnCharacterSheetUpdating(ui, call, ...)
-	local params = {...}
-	--PrintDebug("[WeaponExpansion:UI/Init.lua:OnCharacterSheetUpdating] ",call," running params(", Common.Dump(params))
-
 	local main = ui:GetRoot()
+	if not main then
+		return
+	end
 	local array = main.secStat_array
 
-	if array ~= nil and #array > 0 then
+	local character = Client:GetCharacter()
+	if character and UnarmedHelpers.HasUnarmedWeaponStats(character.Stats) and array ~= nil and #array > 0 then
 		for i=0,#array,7 do
 			local statType = array[i+1]
 			if statType ~= nil then
@@ -58,11 +40,8 @@ local function OnCharacterSheetUpdating(ui, call, ...)
 				local tooltipId = array[i+4]
 				--print(statType, label, value, tooltipId)
 				if tooltipId == damageStatID then
-					local character = Client:GetCharacter()
-					if character ~= nil and UnarmedHelpers.HasUnarmedWeaponStats(character.Stats) then
-						local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
-						array[i+3] = string.format("%i-%i", totalMin, totalMax)
-					end
+					local baseMin,baseMax,totalMin,totalMax,boost = UnarmedHelpers.GetUnarmedBaseAndTotalDamage(character)
+					array[i+3] = string.format("%i-%i", totalMin, totalMax)
 					break
 				end
 			end
@@ -90,22 +69,9 @@ Events.ClientCharacterChanged:Subscribe(function (e)
 	end
 end)
 
-Ext.RegisterNetListener("LLWEAPONEX_DisplayOverheadDamage", function(cmd, payload)
-	local data = Common.JsonParse(payload)
-	if data ~= nil then
-		--print(Common.Dump(data.Params))
-		---@type UIObject
-		local ui = Ext.GetBuiltinUI("Public/Game/GUI/overhead.swf")
-		if ui ~= nil then
-			local handle = Ext.HandleToDouble(data.Params.Handle)
-			ui:Invoke("addOverheadDamage", handle, data.Params.Text)
-		end
-	end
-end)
-
-Ext.RegisterListener("SessionLoaded", function()
+Ext.Events.SessionLoaded:Subscribe(function()
 	tooltipHandler.Init()
-	local rollingText = Ext.GetTranslatedString("he38e2e7bg72dbg4477g86f9ga1fedc4f6750", "Dice Rolls")
+	local rollingText = GameHelpers.GetTranslatedString("he38e2e7bg72dbg4477g86f9ga1fedc4f6750", "Dice Rolls")
 	CombatLog.AddFilter("Rolls", rollingText, Vars.DebugMode or nil, 3)
 	if Mods.CharacterExpansionLib then
 		---@param player EclCharacter
@@ -114,9 +80,8 @@ Ext.RegisterListener("SessionLoaded", function()
 		---@param skills string[]
 		Mods.CharacterExpansionLib.Listeners.SetCharacterCreationOriginSkills.Register(function(player, origin, race, skills)
 			if origin == "LLWEAPONEX_Korvash" then
-				---@type StatSkillSet
-				local skillSet = Ext.GetSkillSet("Avatar_LLWEAPONEX_Korvash")
-				if skillSet ~= nil then
+				local skillSet = Ext.Stats.SkillSet.GetLegacy("Avatar_LLWEAPONEX_Korvash")
+				if skillSet then
 					local i = 2
 					for _,skill in pairs(skillSet.Skills) do
 						skills[i] = skill
@@ -144,8 +109,9 @@ Ext.RegisterListener("SessionLoaded", function()
 	else
 		Ext.RegisterUITypeInvokeListener(Data.UIType.characterSheet, "updateArraySystem", OnCharacterSheetUpdating)
 	end
-end)
+	-- Lower priority so mastery stuff hopefully is appended last, but we want LeaderLib to still go after this
+end, {Priority=50})
 
-RegisterListener("BeforeLuaReset", function()
+Events.BeforeLuaReset:Subscribe(function (e)
 	CombatLog.RemoveFilter("Rolls")
 end)

@@ -104,7 +104,7 @@ local function OnUpdateSkills(ui, method, bFilter)
 	end
 end
 
--- Ext.RegisterListener("SessionLoaded", function()
+-- Ext.Events.SessionLoaded:Subscribe(function()
 -- 	local ui = Ext.GetUIByType(Data.UIType.skills)
 -- 	if ui ~= nil then
 -- 		--Ext.RegisterUIInvokeListener(ui, "updateSkills", OnUpdateSkills)

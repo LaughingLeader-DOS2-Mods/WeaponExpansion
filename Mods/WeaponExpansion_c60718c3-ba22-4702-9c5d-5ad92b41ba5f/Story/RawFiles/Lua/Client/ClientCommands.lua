@@ -190,7 +190,7 @@ local function CaptureRewardScreenItems(ui, method)
 	end
 end
 
-Ext.RegisterListener("SessionLoaded", function()
+Ext.Events.SessionLoaded:Subscribe(function()
 	local reward = 136
 	local reward_c = 137
 

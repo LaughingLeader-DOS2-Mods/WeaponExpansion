@@ -65,7 +65,7 @@ if not Vars.IsClient then
 
 	local registeredListener = false
 
-	Ext.RegisterListener("SessionLoaded", function()
+	Ext.Events.SessionLoaded:Subscribe(function()
 		if not registeredListener then
 			Events.OnWeaponTagHit:Subscribe(function (e)
 				if e.TargetIsObject and (not e.SkillData or (e.SkillData and not string.find(e.Skill, "LLWEAPONEX_ArmCannon"))) then
